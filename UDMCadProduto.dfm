@@ -6112,6 +6112,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object frxReport1: TfrxReport
+    Tag = 1
     Version = '5.6.8'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -6119,11 +6120,12 @@ object dmCadProduto: TdmCadProduto
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42975.625256284700000000
-    ReportOptions.LastChange = 42975.729618946760000000
+    ReportOptions.CreateDate = 42052.436473541700000000
+    ReportOptions.LastChange = 43451.422894317100000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
+    OnReportPrint = 'frxReportOnReportPrint'
     Left = 900
     Top = 552
   end
@@ -6157,6 +6159,7 @@ object dmCadProduto: TdmCadProduto
     OverwritePrompt = False
     DataOnly = False
     ShowExportDialog = True
+    FromMail = 'russimar@terra.com.br'
     SmtpPort = 25
     UseIniFile = True
     TimeOut = 60

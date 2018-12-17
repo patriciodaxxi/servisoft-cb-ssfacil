@@ -3839,6 +3839,8 @@ begin
   cdsPedido_ItensQTD_SOBRA_OC.AsFloat          := 0;
   cdsPedido_ItensENCERADO.AsString             := 'N';
   cdsPedido_ItensDIFERENCA_ICMS.AsString       := 'N';
+  if cdsParametrosUSA_LOTE.AsString  = 'S' then
+    cdsPedido_ItensGERAR_LOTE.AsString         := 'S';
 end;
 
 procedure TDMCadPedido.dspPedidoUpdateError(Sender: TObject; DataSet: TCustomClientDataSet;

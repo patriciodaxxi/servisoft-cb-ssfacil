@@ -145,6 +145,7 @@ type
     procedure dbedtVlrDescExit(Sender: TObject);
     procedure dbedtVlrProdEnter(Sender: TObject);
     procedure dbedtVlrProdExit(Sender: TObject);
+    procedure DBEdit1Exit(Sender: TObject);
   private
     { Private declarations }
     ffrmCadProduto: TfrmCadProduto;
@@ -660,7 +661,9 @@ begin
     if (fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger > 0) and (fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger = fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger) then
     else
     begin
-      fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString    := fDMCadPedido.cdsProdutoNOME.AsString;
+      if trim(fDMCadPedido.qParametros_PedPERMITE_ALT_NOMEPROD.AsString) <> 'S' then
+        if (trim(fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString) = '')  then
+          fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString;
       if (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') and (fDMCadPedido.cdsPedido_Item_Tipo.RecordCount > 0) then
         fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString + ' ' + fDMCadPedido.cdsPedido_Item_TipoCOMPLEMENTO_NOME.AsString;
     end;
@@ -1595,6 +1598,12 @@ begin
         Result := False;
     end;
   end;
+end;
+
+procedure TfrmCadOrcamento_Itens.DBEdit1Exit(Sender: TObject);
+begin
+  if trim(fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString) = '' then
+    fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := RxDBLookupCombo5.Text;
 end;
 
 end.

@@ -1,8 +1,8 @@
 object DMCadPedido: TDMCadPedido
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 65500
-  Top = 22
+  Left = 65531
+  Top = 8
   Height = 706
   Width = 1386
   object sdsPedido: TSQLDataSet
@@ -10414,7 +10414,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43448.647710324080000000
+    ReportOptions.LastChange = 43451.607236909720000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint

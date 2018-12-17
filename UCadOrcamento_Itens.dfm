@@ -444,6 +444,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
         DataField = 'NOMEPRODUTO'
         DataSource = DMCadPedido.dsPedido_Itens
         TabOrder = 0
+        OnExit = DBEdit1Exit
       end
     end
   end
