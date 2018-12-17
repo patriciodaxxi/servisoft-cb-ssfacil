@@ -1,0 +1,236 @@
+object frmAlteraDt_NFCe: TfrmAlteraDt_NFCe
+  Left = 375
+  Top = 220
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'frmAlteraDt_NFCe'
+  ClientHeight = 244
+  ClientWidth = 358
+  Color = 11796403
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object gbxVendedor: TRzGroupBox
+    Left = 25
+    Top = 15
+    Width = 322
+    Height = 66
+    BorderColor = clNavy
+    BorderInner = fsButtonUp
+    BorderOuter = fsBump
+    Caption = ' Data do Cupom (NFCe) '
+    Color = 11796403
+    Ctl3D = True
+    FlatColor = clNavy
+    FlatColorAdjustment = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentCtl3D = False
+    ParentFont = False
+    TabOrder = 0
+    VisualStyle = vsGradient
+    object Label1: TLabel
+      Left = 24
+      Top = 24
+      Width = 68
+      Height = 13
+      Caption = 'Data Emiss'#227'o:'
+    end
+    object Label2: TLabel
+      Left = 24
+      Top = 42
+      Width = 68
+      Height = 13
+      Caption = 'Hora Emiss'#227'o:'
+    end
+    object DBEdit1: TDBEdit
+      Left = 94
+      Top = 17
+      Width = 121
+      Height = 19
+      TabStop = False
+      Color = clBtnFace
+      Ctl3D = False
+      DataField = 'DTEMISSAO'
+      DataSource = dmCupomFiscal.dsCupomFiscal
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object DBEdit2: TDBEdit
+      Left = 94
+      Top = 35
+      Width = 121
+      Height = 19
+      TabStop = False
+      Color = clBtnFace
+      Ctl3D = False
+      DataField = 'HREMISSAO'
+      DataSource = dmCupomFiscal.dsCupomFiscal
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 1
+    end
+  end
+  object btnAtualizar: TNxButton
+    Left = 25
+    Top = 88
+    Width = 177
+    Height = 34
+    Caption = 'Atualizar Data Para'
+    Down = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -12
+    Font.Name = 'Verdana'
+    Font.Style = []
+    Glyph.Data = {
+      D6050000424DD605000000000000360000002800000014000000180000000100
+      180000000000A005000000000000000000000000000000000000FFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE1E1E1FDFDFDFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFF8F8F8010101808080FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFE7E7E7383838000000000000989898FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE2E2E24C4C4C
+      000000000000000000000000959595FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5E5E557575700000000000000
+      0000000000000000000000878787FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFF0F0F05B5B5B0000000000000000000000000000
+      00000000000000000000888888FCFCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFF595959000000000000000000000000000000000000000000
+      0000000000000B0B0B8D8D8DFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF4E4E4E00000000000000000000000000000000000000000000000000000000
+      00000000000C0C0C979797FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF303030000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000007B7B7BF6F6F6FFFFFFFFFFFFFFFFFFBFBFBFDDDDDDF5F5F56D
+      6D6D0000000000000000000000000000000000000000000202026E6E6EFFFFFF
+      F7F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC5C5C50000000000000000
+      000000000000000000000000000000000000000909098282827C7C7C00000000
+      0000000000B9B9B9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8A8A8A000000000000
+      0000000000000000000000000000000A0A0A7272728E8E8EC5C5C5FFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFD88888800000000000000000000000000
+      00000000000000000000000A0A0A7272729B9B9B585858949494141414E5E5E5
+      000000FFFFFFFFFFFFFFFFFFFFFFFF8383830000000000000000000000000000
+      000000000000000A0A0A7272728D8D8DB2B2B2FFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFF4F4F4686868000000000000000000000000000000000000
+      0000000A0A0A7272729696967575759F9F9FEDEDEDFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFF4F4F46A6A6A0000000000000000000000000000000000000000000A
+      0A0A7272728F8F8FA0A0A0E1E1E1F9F9F9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      F4F4F46A6A6A0000000000000000000000000000000000000000000A0A0A7272
+      72949494878787B9B9B9F3F3F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4F4F46A
+      6A6A0000000000000000000000000000000000000000000A0A0A737373919191
+      979797D3D3D3F6F6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F2F25F5F5F0000
+      00000000000000000000000000000000000000000000626262949494888888BD
+      BDBDF2F2F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F8F8A5A5A56B6B6B8C8C8C
+      939393929292929292929292909090979797C4C4C49191919C9C9CDCDCDCF8F8
+      F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFCCECECE62626240404048
+      48484646464848484646464949493939392D2D2D7E7E7EA8A8A8F0F0F0FFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF1F1F1B7B7B7C7C7C7BDBDBDDDDD
+      DDB2B2B2DDDDDDBDBDBDCCCCCCD3D3D3F6F6F6F0F0F0FEFEFEFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF545454D2D2D2000000FFFFFF
+      000000D7D7D74343439696965C5C5C7B7B7BE8E8E8FFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+    GlyphSpacing = 9
+    Layout = blGlyphRight
+    ParentFont = False
+    TabOrder = 1
+    OnClick = btnAtualizarClick
+  end
+  object RzGroupBox1: TRzGroupBox
+    Left = 25
+    Top = 127
+    Width = 322
+    Height = 66
+    BorderColor = clNavy
+    BorderInner = fsButtonUp
+    BorderOuter = fsBump
+    Caption = ' Data Atual '
+    Color = 11796403
+    Ctl3D = True
+    FlatColor = clNavy
+    FlatColorAdjustment = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clNavy
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentCtl3D = False
+    ParentFont = False
+    TabOrder = 2
+    VisualStyle = vsGradient
+    object Label3: TLabel
+      Left = 66
+      Top = 24
+      Width = 26
+      Height = 13
+      Caption = 'Data:'
+    end
+    object Label4: TLabel
+      Left = 66
+      Top = 42
+      Width = 26
+      Height = 13
+      Caption = 'Hora:'
+    end
+    object NxDatePicker1: TNxDatePicker
+      Left = 96
+      Top = 16
+      Width = 91
+      Height = 21
+      TabStop = False
+      TabOrder = 0
+      Text = '17/09/2018'
+      ReadOnly = True
+      HideFocus = False
+      Date = 43360.000000000000000000
+      NoneCaption = 'None'
+      TodayCaption = 'Today'
+    end
+    object NxTimePicker1: TNxTimePicker
+      Left = 96
+      Top = 37
+      Width = 91
+      Height = 21
+      TabStop = False
+      TabOrder = 1
+      Text = '14:30:00'
+      ReadOnly = True
+      HideFocus = False
+      Time = 0.604166666666666600
+      HoursString = 'H'
+      MinutesString = 'M'
+      UseStandardMinute = True
+    end
+  end
+  object btnNaoAtualizar: TNxButton
+    Left = 25
+    Top = 200
+    Width = 177
+    Height = 34
+    Caption = 'N'#227'o Atualizar'
+    Down = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -12
+    Font.Name = 'Verdana'
+    Font.Style = []
+    GlyphSpacing = 9
+    Layout = blGlyphRight
+    ParentFont = False
+    TabOrder = 3
+    OnClick = btnNaoAtualizarClick
+  end
+end

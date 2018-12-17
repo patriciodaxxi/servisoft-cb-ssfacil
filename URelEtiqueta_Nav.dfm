@@ -1,0 +1,107 @@
+object fRelEtiqueta_Nav: TfRelEtiqueta_Nav
+  Left = 237
+  Top = 129
+  Width = 985
+  Height = 551
+  Caption = 'fRelEtiqueta_Nav'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object RLReport1: TRLReport
+    Left = 200
+    Top = 32
+    Width = 420
+    Height = 38
+    DataSource = DMCadPedido.dsmEtiqueta_Nav
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    Margins.LeftMargin = 2.000000000000000000
+    Margins.TopMargin = 0.500000000000000000
+    Margins.RightMargin = 2.000000000000000000
+    Margins.BottomMargin = 0.000000000000000000
+    PageSetup.PaperSize = fpCustom
+    PageSetup.PaperWidth = 111.000000000000000000
+    PageSetup.PaperHeight = 10.000000000000000000
+    ShowProgress = False
+    BeforePrint = RLReport1BeforePrint
+    object RLSubDetail1: TRLSubDetail
+      Left = 8
+      Top = 2
+      Width = 404
+      Height = 124
+      DataSource = DMCadPedido.dsmEtiqueta_Nav
+      object RLDetailGrid1: TRLDetailGrid
+        Left = 0
+        Top = 0
+        Width = 404
+        Height = 33
+        ColCount = 2
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        object RLDBText1: TRLDBText
+          Left = 5
+          Top = 2
+          Width = 104
+          Height = 14
+          AutoSize = False
+          DataField = 'Nome_Empresa'
+          DataSource = DMCadPedido.dsmEtiqueta_Nav
+        end
+        object RLDBText2: TRLDBText
+          Left = 119
+          Top = 2
+          Width = 78
+          Height = 14
+          AutoSize = False
+          DataField = 'Fone'
+          DataSource = DMCadPedido.dsmEtiqueta_Nav
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object RLDBText3: TRLDBText
+          Left = 6
+          Top = 17
+          Width = 128
+          Height = 14
+          AutoSize = False
+          DataField = 'Nome_Etiqueta'
+          DataSource = DMCadPedido.dsmEtiqueta_Nav
+        end
+        object RLDBText4: TRLDBText
+          Left = 137
+          Top = 17
+          Width = 60
+          Height = 14
+          Alignment = taCenter
+          AutoSize = False
+          DataField = 'Tamanho'
+          DataSource = DMCadPedido.dsmEtiqueta_Nav
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+      end
+    end
+  end
+end
