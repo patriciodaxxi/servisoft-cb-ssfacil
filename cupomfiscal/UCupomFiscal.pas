@@ -908,7 +908,9 @@ begin
       fDmCupomFiscal.cdsCupom_ItensTAMANHO.AsString := RxDBLookupCombo1.Value
     else
       fDmCupomFiscal.cdsCupom_ItensTAMANHO.AsString := '';
-    fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat := CurrencyEdit2.Value;
+    fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat      := CurrencyEdit2.Value;
+    fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsFloat := CurrencyEdit2.Value;
+    fDmCupomFiscal.vSomaOriginal := fDmCupomFiscal.vSomaOriginal + (CurrencyEdit2.Value * fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat);
 
     if CurrencyEdit6.Value > 0 then
     begin
@@ -1005,9 +1007,9 @@ begin
       else
         fDmCupomFiscal.cdsCupom_ItensPERC_IPI.AsFloat    := fDmCupomFiscal.vPerc_IPI;
 
-      prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
+      prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsFloat,
                                            fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat,fDmCupomFiscal.cdsCupom_ItensPERC_DESCONTO.AsFloat,
-                                           fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,0,'S',0);
+                                           fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat,'S',0);
     end;
 
     if (fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'CFI') then

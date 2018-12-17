@@ -765,6 +765,9 @@ object dmCupomFiscal: TdmCupomFiscal
     object sdsCupom_ItensVLR_ACRESCIMO: TFloatField
       FieldName = 'VLR_ACRESCIMO'
     end
+    object sdsCupom_ItensVLR_UNIT_ORIGINAL: TFloatField
+      FieldName = 'VLR_UNIT_ORIGINAL'
+    end
   end
   object cdsCupom_Itens: TClientDataSet
     Aggregates = <>
@@ -976,6 +979,9 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupom_ItensVLR_ACRESCIMO: TFloatField
       FieldName = 'VLR_ACRESCIMO'
+    end
+    object cdsCupom_ItensVLR_UNIT_ORIGINAL: TFloatField
+      FieldName = 'VLR_UNIT_ORIGINAL'
     end
   end
   object dsCupom_Itens: TDataSource
@@ -4981,21 +4987,21 @@ object dmCupomFiscal: TdmCupomFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 699
-    Top = 432
+    Left = 611
+    Top = 472
   end
   object dspTab_NCM: TDataSetProvider
     DataSet = sdsTab_NCM
-    Left = 731
-    Top = 432
+    Left = 643
+    Top = 472
   end
   object cdsTab_NCM: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_NCM'
-    Left = 771
-    Top = 432
+    Left = 683
+    Top = 472
     object cdsTab_NCMID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5055,8 +5061,8 @@ object dmCupomFiscal: TdmCupomFiscal
   end
   object dsTab_NCM: TDataSource
     DataSet = cdsTab_NCM
-    Left = 811
-    Top = 432
+    Left = 723
+    Top = 472
   end
   object qUltimo_NFCe: TSQLQuery
     MaxBlobSize = -1
@@ -5783,20 +5789,20 @@ object dmCupomFiscal: TdmCupomFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 707
-    Top = 528
+    Left = 619
+    Top = 568
   end
   object dspProduto_Consumo_Tam: TDataSetProvider
     DataSet = sdsProduto_Consumo_Tam
-    Left = 739
-    Top = 528
+    Left = 651
+    Top = 568
   end
   object cdsProduto_Consumo_Tam: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto_Consumo_Tam'
-    Left = 779
-    Top = 528
+    Left = 691
+    Top = 568
     object cdsProduto_Consumo_TamQTD_CONSUMO: TFloatField
       FieldName = 'QTD_CONSUMO'
     end
@@ -5875,8 +5881,8 @@ object dmCupomFiscal: TdmCupomFiscal
     ReportOptions.LastChange = 42811.391278831020000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
-    Left = 696
-    Top = 480
+    Left = 608
+    Top = 520
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxCupom'
@@ -5949,36 +5955,36 @@ object dmCupomFiscal: TdmCupomFiscal
       'NOME_VENDEDOR=NOME_VENDEDOR')
     DataSource = dsCupomFiscal
     BCDToCurrency = False
-    Left = 728
-    Top = 480
+    Left = 640
+    Top = 520
   end
   object frxDBDataset2: TfrxDBDataset
     UserName = 'frxCupomItens'
     CloseDataSource = False
     DataSource = dsCupom_Itens
     BCDToCurrency = False
-    Left = 760
-    Top = 480
+    Left = 672
+    Top = 520
   end
   object frxDBDataset3: TfrxDBDataset
     UserName = 'frxCupomParcelas'
     CloseDataSource = False
     DataSource = dsCupom_Parc
     BCDToCurrency = False
-    Left = 792
-    Top = 480
+    Left = 704
+    Top = 520
   end
   object frxDBDataset4: TfrxDBDataset
     UserName = 'frxFilial'
     CloseDataSource = False
     DataSource = dsFilial
     BCDToCurrency = False
-    Left = 824
-    Top = 480
+    Left = 736
+    Top = 520
   end
   object frxBarCodeObject1: TfrxBarCodeObject
-    Left = 856
-    Top = 480
+    Left = 768
+    Top = 520
   end
   object qCupomPed: TSQLQuery
     MaxBlobSize = -1

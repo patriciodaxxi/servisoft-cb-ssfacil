@@ -92,6 +92,7 @@ type
     lbl2: TLabel;
     Shape3: TShape;
     Label2: TLabel;
+    NxButton1: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -490,7 +491,7 @@ begin
     vFilial_Nome := fDMCadFechamento.cdsFilialNOME_INTERNO.AsString;
   lblNome_Filial.Caption := vFilial_Nome;
 end;
-
+                                                                  
 function TfrmCadFechamento.fnc_Verifica_Registro: Boolean;
 begin
   Result := False;
