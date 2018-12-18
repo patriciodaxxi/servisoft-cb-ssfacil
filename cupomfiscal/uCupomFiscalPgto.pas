@@ -545,7 +545,7 @@ begin
 
   //******************
   if fDmCupomFiscal.cdsCupom_Parc.IsEmpty then
-    prc_ControleParcelas(0,0,0);
+    btnGerarParcelasClick(Sender);
   //***********************
 
   if (fDmCupomFiscal.cdsCupomFiscalTIPO_PGTO.AsString = 'P') then
