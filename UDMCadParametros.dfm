@@ -5966,6 +5966,11 @@ object DMCadParametros: TDMCadParametros
       FixedChar = True
       Size = 1
     end
+    object sdsParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField
+      FieldName = 'MOSTRAR_FICHA_TEXTIL'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsParametros_Prod: TClientDataSet
     Aggregates = <>
@@ -6158,6 +6163,11 @@ object DMCadParametros: TDMCadParametros
     end
     object cdsParametros_ProdUSA_CONSTRUCAO: TStringField
       FieldName = 'USA_CONSTRUCAO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField
+      FieldName = 'MOSTRAR_FICHA_TEXTIL'
       FixedChar = True
       Size = 1
     end

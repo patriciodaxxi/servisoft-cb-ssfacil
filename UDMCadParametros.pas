@@ -1510,6 +1510,8 @@ type
     cdsParametros_NFeCALCULAR_DIFAL: TStringField;
     sdsParametros_GeralPERMITE_CNPJ_DUPLICADO_TRANSP: TStringField;
     cdsParametros_GeralPERMITE_CNPJ_DUPLICADO_TRANSP: TStringField;
+    sdsParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField;
+    cdsParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspParametrosUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
