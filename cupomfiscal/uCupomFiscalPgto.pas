@@ -545,7 +545,7 @@ begin
 
   //******************
   if fDmCupomFiscal.cdsCupom_Parc.IsEmpty then
-    btnGerarParcelasClick(Sender);
+    btnParcelasClick(Sender);
   //***********************
 
   if (fDmCupomFiscal.cdsCupomFiscalTIPO_PGTO.AsString = 'P') then
@@ -1398,7 +1398,7 @@ begin
     fDmCupomFiscal.cdsCupom_Parc.Edit;
     fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency := fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency + vTot;
     fDmCupomFiscal.cdsCupom_Parc.Post;
-  end
+  end;
 end;
 
 end.
