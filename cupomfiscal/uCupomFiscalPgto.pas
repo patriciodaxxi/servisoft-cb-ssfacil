@@ -139,6 +139,7 @@ type
     procedure prc_AtualizaPrecos(vVlrProdutos, vVlrTotal: Currency);
     procedure prc_ControleParcelas(vVlrParcelado, vVlrTxJuros: Real; vQtdParc: Word);
     function fnc_CalulaJuros(vVlrEntrada,vVlrFinanciado,vPercJuros: Real; vParcelas: Word): Real;
+    procedure prcCorrigirParc(vTotal: Currency);
 
   public
     { Public declarations }
@@ -192,7 +193,7 @@ begin
     else
     begin
       vVlrParcelas := StrToFloat(FormatFloat('0.00',vVlrParcelado / vQtdParc));
-      vVlrRestante := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency - fDmCupomFiscal.vVlrEntrada));
+      vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrParcelado));
     end;
   end;
   fDmCupomFiscal.vSomaParcelas := vVlrRestante;
@@ -796,9 +797,10 @@ begin
   vVlrProdutos := fDmCupomFiscal.vSomaOriginal;
   fDmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := 0;
 
-
   prc_AtualizaPrecos(vVlrProdutos,vVlrTotal);
+
   fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency;
+  prcCorrigirParc(fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency);
 
   RzPageControl1.ActivePageIndex := 1;
 end;
@@ -1369,6 +1371,34 @@ begin
   Result := StrToFloat(FormatFloat('0.00',vVlrFinanciado /((1 - power((1 + vPercJuros / 100),
                       (-1 * vParcelas)))/(vPercJuros / 100)) * vParcelas));
   Result := Result + vVlrEntrada;
+end;
+
+procedure TfCupomFiscalPgto.prcCorrigirParc(vTotal: Currency);
+var
+  vTot: Currency;
+begin
+  vTot := 0;
+  fDmCupomFiscal.cdsCupom_Parc.First;
+  while not fDmCupomFiscal.cdsCupom_Parc.Eof do
+  begin
+    vTot := vTot + fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency;
+    fDmCupomFiscal.cdsCupom_Parc.Next;
+  end;
+  if StrToFloat(FormatFloat('0.00',vTot)) > StrToFloat(FormatFloat('0.00',vTotal)) then
+  begin
+    vTot := vTot - vTotal;
+    fDmCupomFiscal.cdsCupom_Parc.Edit;
+    fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency := fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency - vTot;
+    fDmCupomFiscal.cdsCupom_Parc.Post;
+  end
+  else
+  if StrToFloat(FormatFloat('0.00',vTot)) < StrToFloat(FormatFloat('0.00',vTotal)) then
+  begin
+    vTot := vTotal - vTot;
+    fDmCupomFiscal.cdsCupom_Parc.Edit;
+    fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency := fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency + vTot;
+    fDmCupomFiscal.cdsCupom_Parc.Post;
+  end
 end;
 
 end.

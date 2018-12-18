@@ -1557,8 +1557,7 @@ type
     function fnc_IncrementaCartao(vTerminal: Integer): Integer;
     procedure prcGravaTransacao;
 
-    procedure prc_Busca_IBPT;
-
+    procedure prc_Busca_IBPT;   
   end;
 
   //Funções Balança Urano
