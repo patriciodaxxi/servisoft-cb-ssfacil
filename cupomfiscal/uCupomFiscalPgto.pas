@@ -182,7 +182,11 @@ var
 begin
   fDmCupomFiscal.vSomaParcelas := 0;
   if fDmCupomFiscal.cdsCupomFiscalTIPO_PGTO.AsString = 'V' then
-    Gravar_CupomFiscalParc(fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime,fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat)
+  begin
+    Gravar_CupomFiscalParc(fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime,fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat);
+    vVlrParcelas := StrToFloat(FormatFloat('0.00',vVlrParcelado));
+    vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrParcelado));
+  end
   else
   begin
     if vTxJuros > 0 then
