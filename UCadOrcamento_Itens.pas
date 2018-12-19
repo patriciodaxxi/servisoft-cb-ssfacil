@@ -97,6 +97,7 @@ type
     Panel4: TPanel;
     DBEdit1: TDBEdit;
     DBCheckBox3: TDBCheckBox;
+    Label19: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);

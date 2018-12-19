@@ -6235,6 +6235,15 @@ object DMCadPedido: TDMCadPedido
         Name = 'Foto'
         DataType = ftString
         Size = 250
+      end
+      item
+        Name = 'Motivo_Nao_Aprov'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'Data_Nao_Aprov'
+        DataType = ftDate
       end>
     IndexDefs = <
       item
@@ -6251,7 +6260,7 @@ object DMCadPedido: TDMCadPedido
     Left = 816
     Top = 236
     Data = {
-      D40100009619E0BD010000001800000014000000000003000000D4010C49445F
+      100200009619E0BD01000000180000001600000000000300000010020C49445F
       4F7263616D656E746F0400010000000000044974656D04000100000000000A49
       445F50726F6475746F04000100000000000C4E6F6D655F50726F6475746F0100
       490000000100055749445448020002003C000351746408000400000000000C56
@@ -6265,7 +6274,9 @@ object DMCadPedido: TDMCadPedido
       020002001E000C566C725F446573636F6E746F08000400000000000D50657263
       5F446573636F6E746F08000400000000000D506572635F436F6D697373616F08
       0004000000000004466F746F010049000000010005574944544802000200FA00
-      01000D44454641554C545F4F524445520200820000000000}
+      104D6F7469766F5F4E616F5F4170726F76010049000000010005574944544802
+      00020064000E446174615F4E616F5F4170726F76040006000000000001000D44
+      454641554C545F4F524445520200820000000000}
     object mOrcamento_ItensID_Orcamento: TIntegerField
       FieldName = 'ID_Orcamento'
     end
@@ -6332,6 +6343,13 @@ object DMCadPedido: TDMCadPedido
     object mOrcamento_ItensFoto: TStringField
       FieldName = 'Foto'
       Size = 250
+    end
+    object mOrcamento_ItensMotivo_Nao_Aprov: TStringField
+      FieldName = 'Motivo_Nao_Aprov'
+      Size = 100
+    end
+    object mOrcamento_ItensData_Nao_Aprov: TDateField
+      FieldName = 'Data_Nao_Aprov'
     end
   end
   object dsmOrcamento_Itens: TDataSource
