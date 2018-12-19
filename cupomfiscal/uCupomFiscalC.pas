@@ -1814,9 +1814,9 @@ begin
           fDmCupomFiscal.cdsCupom_ItensPERC_ICMS.AsFloat     := fDmCupomFiscal.vPerc_ICMS;
           fDmCupomFiscal.cdsCupom_ItensPERC_IPI.AsFloat      := fDmCupomFiscal.vPerc_IPI;
 
-          prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
+          prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsFloat,
                                              fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat,fDmCupomFiscal.cdsCupom_ItensPERC_DESCONTO.AsFloat,
-                                             fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,0,'S',0);
+                                             fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat,'S',0);
           fDmCupomFiscal.cdsCupom_Itens.Post;
           fDmCupomFiscal.cdsCupom_Itens.Next;
         end;

@@ -1869,6 +1869,7 @@ type
     cdsProdutoVALIDADE: TSmallintField;
     sdsProdutoID_CSTICMS: TIntegerField;
     cdsProdutoID_CSTICMS: TIntegerField;
+    qParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

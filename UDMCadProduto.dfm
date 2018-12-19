@@ -6725,6 +6725,11 @@ object dmCadProduto: TdmCadProduto
       FixedChar = True
       Size = 1
     end
+    object qParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField
+      FieldName = 'MOSTRAR_FICHA_TEXTIL'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsProduto_Cad_Ant: TSQLDataSet
     NoMetadata = True

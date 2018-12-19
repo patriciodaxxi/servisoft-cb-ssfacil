@@ -1189,15 +1189,16 @@ object frmCadFechamento: TfrmCadFechamento
         Left = 0
         Top = 0
         Width = 992
-        Height = 35
+        Height = 30
         Align = alTop
         Color = 8404992
         TabOrder = 0
         object btnAlterar: TNxButton
-          Left = 4
-          Top = 3
+          Left = 1
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 28
+          Align = alLeft
           Caption = 'Alterar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -1266,10 +1267,11 @@ object frmCadFechamento: TfrmCadFechamento
           OnClick = btnAlterarClick
         end
         object btnConfirmar: TNxButton
-          Left = 157
-          Top = 3
+          Left = 154
+          Top = 1
           Width = 151
-          Height = 30
+          Height = 28
+          Align = alLeft
           Caption = 'Confirmar'
           Enabled = False
           Font.Charset = DEFAULT_CHARSET
@@ -1339,10 +1341,11 @@ object frmCadFechamento: TfrmCadFechamento
           OnClick = btnConfirmarClick
         end
         object btnCancelar: TNxButton
-          Left = 308
-          Top = 3
+          Left = 305
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 28
+          Align = alLeft
           Caption = 'Cancelar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -1411,10 +1414,11 @@ object frmCadFechamento: TfrmCadFechamento
           OnClick = btnCancelarClick
         end
         object btnGerar: TNxButton
-          Left = 461
-          Top = 3
+          Left = 610
+          Top = 1
           Width = 152
-          Height = 30
+          Height = 28
+          Align = alLeft
           Caption = 'Gerar'
           Enabled = False
           Font.Charset = DEFAULT_CHARSET
@@ -1483,12 +1487,29 @@ object frmCadFechamento: TfrmCadFechamento
           Transparent = True
           OnClick = btnGerarClick
         end
+        object NxButton1: TNxButton
+          Left = 458
+          Top = 1
+          Width = 152
+          Height = 28
+          Align = alLeft
+          Caption = 'Ajuste'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          GlyphSpacing = 5
+          ParentFont = False
+          TabOrder = 4
+          Transparent = True
+        end
       end
       object SMDBGrid5: TSMDBGrid
         Left = 400
-        Top = 96
+        Top = 91
         Width = 592
-        Height = 225
+        Height = 230
         Align = alClient
         Ctl3D = False
         DataSource = DMCadFechamento.dsFechamento_Itens
@@ -1575,14 +1596,15 @@ object frmCadFechamento: TfrmCadFechamento
             Title.Alignment = taCenter
             Title.Caption = 'Diferen'#231'a Conferido'
             Title.Color = 16761220
+            Width = 64
             Visible = True
           end>
       end
       object SMDBGrid4: TSMDBGrid
         Left = 200
-        Top = 96
+        Top = 91
         Width = 200
-        Height = 225
+        Height = 230
         Align = alLeft
         Ctl3D = False
         DataSource = DMCadFechamento.dsFechamento_San
@@ -1635,9 +1657,9 @@ object frmCadFechamento: TfrmCadFechamento
       end
       object SMDBGrid2: TSMDBGrid
         Left = 0
-        Top = 96
+        Top = 91
         Width = 200
-        Height = 225
+        Height = 230
         Align = alLeft
         Ctl3D = False
         DataSource = DMCadFechamento.dsFechamento_Sup
@@ -1986,7 +2008,7 @@ object frmCadFechamento: TfrmCadFechamento
       end
       object pnlItem: TPanel
         Left = 0
-        Top = 63
+        Top = 58
         Width = 992
         Height = 33
         Align = alTop
@@ -2038,7 +2060,7 @@ object frmCadFechamento: TfrmCadFechamento
       end
       object pnlNota: TPanel
         Left = 0
-        Top = 35
+        Top = 30
         Width = 992
         Height = 28
         Align = alTop
@@ -2167,7 +2189,7 @@ object frmCadFechamento: TfrmCadFechamento
         object DBText10: TDBText
           Left = 394
           Top = 7
-          Width = 76
+          Width = 62
           Height = 16
           AutoSize = True
           Color = clWhite

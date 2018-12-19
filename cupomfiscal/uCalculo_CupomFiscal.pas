@@ -79,7 +79,8 @@ begin
 
   fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat := StrToFloat(FormatFloat('0.00',Desc_Rateio));
 //  fDMCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat      := StrToFloat(FormatFloat('0.00',VlrAcrescimo));
-  fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat          := StrToFloat(FormatFloat('0.00',vVlrTotalItem - vVlrDescontoItem - fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
+  fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat          := StrToFloat(FormatFloat('0.00',vVlrTotalItem - vVlrDescontoItem -
+                                                                        fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
   fDMCupomFiscal.cdsCupom_ItensVLR_IPI.AsFloat            := fnc_Calcular_IPI(fDMCupomFiscal,fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,vVlrDescontoItem +
                                                              Desc_Rateio, fDMCupomFiscal.cdsCupom_ItensPERC_IPI.AsFloat);
   fDMCupomFiscal.cdsCupom_ItensVLR_PIS.AsFloat    := 0;
@@ -265,9 +266,10 @@ begin
     fDmCupomFiscal.cdsCupom_ItensPERC_ICMS.AsFloat     := fDmCupomFiscal.vPerc_ICMS;
     fDmCupomFiscal.cdsCupom_ItensPERC_IPI.AsFloat      := fDmCupomFiscal.vPerc_IPI;
 
-    prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
+    prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsFloat,
                                          fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat,fDmCupomFiscal.cdsCupom_ItensPERC_DESCONTO.AsFloat,
-                                         fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,0,'S',StrToFloat(FormatFloat('0.00',vAux)));
+                                         fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat,
+                                         'S',StrToFloat(FormatFloat('0.00',vAux)));
     fDMCupomFiscal.cdsCupom_Itens.Post;
     fDMCupomFiscal.cdsCupom_Itens.Next;
   end;

@@ -1733,7 +1733,9 @@ begin
   DBEdit98.Visible   := (fDMCadProduto.qParametros_GeralUSA_TIPO_MATERIAL.AsString = 'S');
   Label172.Visible := (fDMCadProduto.qParametros_ProdMOSTRAR_TAM_CALC.AsString = 'S');
   DBEdit99.Visible := (fDMCadProduto.qParametros_ProdMOSTRAR_TAM_CALC.AsString = 'S');
-  TS_Desenho_Passamento.TabVisible := (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
+  //Cleomar 18/12/18
+  //TS_Desenho_Passamento.TabVisible := (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
+  TS_Desenho_Passamento.TabVisible := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
   if not(pnl_Eng_Processo.Visible) and not(SMDBGrid16.Visible) then
     pnl_Eng_Consumo.Align := alClient
   else
@@ -2184,10 +2186,15 @@ begin
       TS_Ativo.TabVisible        := ((fDMCadProduto.qParametrosUSA_SPED.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaSPED_TIPO_ITEM.AsString = '08')) ;
       RZPageControl3.ActivePage  := TS_Fiscal;
       TS_Balanca.TabVisible      := (fDMCadProduto.cdsProdutoUSA_NA_BALANCA.AsString = 'S');
-      TS_Maquina.TabVisible      := (fDMCadProduto.qParametros_ProdUSA_MAQUINA.AsString = 'S');
-      TS_Ficha_Textil.TabVisible := (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
-      TS_Ficha_Tear.TabVisible        := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaTIPO_PRODUCAO.AsString = 'E'));
-      TS_Ficha_Trancadeira.TabVisible := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaTIPO_PRODUCAO.AsString = 'T'));
+      //Cleomar 18/12/2018
+      //TS_Maquina.TabVisible      := (fDMCadProduto.qParametros_ProdUSA_MAQUINA.AsString = 'S');
+      //TS_Ficha_Textil.TabVisible := (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
+      //TS_Ficha_Tear.TabVisible        := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaTIPO_PRODUCAO.AsString = 'E'));
+      //TS_Ficha_Trancadeira.TabVisible := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaTIPO_PRODUCAO.AsString = 'T'));
+      TS_Maquina.TabVisible           := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
+      TS_Ficha_Textil.TabVisible      := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
+      TS_Ficha_Tear.TabVisible        := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
+      TS_Ficha_Trancadeira.TabVisible := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
       if TS_Ficha_Trancadeira.TabVisible then
         RzPageControl6.ActivePage := TS_Ficha_Trancadeira
       else

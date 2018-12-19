@@ -170,6 +170,9 @@ begin
   fDmCupomFiscal.cdsCupomFiscalVLR_IPI.AsCurrency               := StrToCurr(FormatCurr('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_IPI.AsFloat - fDmCupomFiscal.cdsCupom_ItensVLR_IPI.AsFloat));
   fDmCupomFiscal.cdsCupomFiscalVLR_PIS.AsCurrency               := StrToCurr(FormatCurr('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_PIS.AsFloat - fDmCupomFiscal.cdsCupom_ItensVLR_PIS.AsFloat));
   fDmCupomFiscal.cdsCupomFiscalVLR_COFINS.AsCurrency            := StrToCurr(FormatCurr('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_COFINS.AsFloat - fDmCupomFiscal.cdsCupom_ItensVLR_COFINS.AsFloat));
+  fDmCupomFiscal.vSomaOriginal := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.vSomaOriginal -
+                                                                fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
+                                                                fDmCupomFiscal.cdsCupom_ItensQTD.AsInteger));
   //fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency          := StrToCurr(FormatCurr('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat - fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat));
 end;
 

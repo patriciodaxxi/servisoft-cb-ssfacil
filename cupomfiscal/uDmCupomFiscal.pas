@@ -1464,6 +1464,8 @@ type
     cdsProdutoID_CSTICMS: TIntegerField;
     sdsCupom_ItensVLR_ACRESCIMO: TFloatField;
     cdsCupom_ItensVLR_ACRESCIMO: TFloatField;
+    sdsCupom_ItensVLR_UNIT_ORIGINAL: TFloatField;
+    cdsCupom_ItensVLR_UNIT_ORIGINAL: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);
@@ -1484,7 +1486,7 @@ type
     ctPedido, ctDuplicata: String;
     vPgtoEditado: Boolean;
     vSacolaSelecionada: Boolean;
-    vVlrEntrada, vSomaParcelas: Currency;
+    vVlrEntrada, vSomaParcelas, vSomaOriginal: Currency;
 
     //27/07/2016
     vID_Fechamento: Integer;
@@ -1504,7 +1506,7 @@ type
     vPerc_Pis, vPerc_Cofins: Real;
     vVlr_Pis, vVlr_Cofins: Real;
     vID_CSTICMS, vID_CSTIPI: Integer;
-    vID_NCM : Integer;
+    vID_NCM: Integer;
     vPerc_ICMS, vPerc_IPI, vPerc_TribICMS: Real;
     vMotivoCancelamento: String;
     vDescricao_Operacao: String;
@@ -1555,8 +1557,7 @@ type
     function fnc_IncrementaCartao(vTerminal: Integer): Integer;
     procedure prcGravaTransacao;
 
-    procedure prc_Busca_IBPT;
-
+    procedure prc_Busca_IBPT;   
   end;
 
   //Funções Balança Urano
@@ -3231,6 +3232,7 @@ begin
   cdsCupomFiscalESTOQUE_OK.AsString    := 'N';
   cdsCupomFiscalFINANCEIRO_OK.AsString := 'N';
   cdsCupomFiscalDTORIGINAL.AsDateTime  := Date;
+  vSomaOriginal := 0;
 end;
 
 procedure TdmCupomFiscal.cdsParametrosBeforePost(DataSet: TDataSet);
