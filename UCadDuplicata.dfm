@@ -4143,6 +4143,10 @@ object frmCadDuplicata: TfrmCadDuplicata
         OnClick = Gradecompleta1Click
       end
     end
+    object Carn1: TMenuItem
+      Caption = 'Carn'#234
+      OnClick = Carn1Click
+    end
   end
   object PopupMenu2: TPopupMenu
     Left = 681

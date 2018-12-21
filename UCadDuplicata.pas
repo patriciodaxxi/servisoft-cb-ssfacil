@@ -239,6 +239,7 @@ type
     CheckBox1: TCheckBox;
     RecibodePagamento1: TMenuItem;
     SaldoClienteFornecedor1: TMenuItem;
+    Carn1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -321,6 +322,7 @@ type
     procedure btnCobrancaClick(Sender: TObject);
     procedure RecibodePagamento1Click(Sender: TObject);
     procedure SaldoClienteFornecedor1Click(Sender: TObject);
+    procedure Carn1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -2830,6 +2832,26 @@ begin
   fDMCadDuplicata.frxReport1.ShowReport;
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := vIndice;
   SMDBGrid1.EnableScroll;
+end;
+
+procedure TfrmCadDuplicata.Carn1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  if fDMCadDuplicata.cdsDuplicata_Consulta.IsEmpty then
+    Exit
+  else
+  begin
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\CarneDupl.fr3';
+    if FileExists(vArq) then
+      fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
+    else
+    begin
+      ShowMessage('Relatório não localizado! ' + vArq);
+      Exit;
+    end;
+    fDMCadDuplicata.frxReport1.ShowReport;
+  end;
 end;
 
 end.
