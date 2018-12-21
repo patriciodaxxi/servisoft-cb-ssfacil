@@ -235,7 +235,7 @@ uses
   UConsPedido_Nota in 'UConsPedido_Nota.pas' {frmConsPedido_Nota},
   UCadOC_Itens_Cli in 'UCadOC_Itens_Cli.pas' {frmCadOC_Itens_Cli},
   URelPedido_Res2 in 'URelPedido_Res2.pas' {fRelPedido_Res2},
-  UCadOrcamento_Aprov in 'UCadOrcamento_Aprov.pas' {frmCadOrcamento_Aprov},
+  UCadOrcamento_NaoAprovado in 'UCadOrcamento_NaoAprovado.pas' {frmCadOrcamento_NaoAprovado},
   UDMCadAtividade_Cid in 'UDMCadAtividade_Cid.pas' {DMCadAtividade_Cid: TDataModule},
   UCadAtividade_Cid in 'UCadAtividade_Cid.pas' {frmCadAtividade_Cid},
   URelRemessa in 'URelRemessa.pas' {fRelRemessa},
@@ -767,7 +767,8 @@ uses
   UCadProduto_Consumo_Proc in 'UCadProduto_Consumo_Proc.pas' {frmCadProduto_Consumo_Proc},
   uRecebeXML_Duplicatas in 'nfevisualizador\uRecebeXML_Duplicatas.pas' {frmRecebeXML_Duplicatas},
   UConsEstoque_Atual in 'UConsEstoque_Atual.pas' {frmConsEstoque_Atual},
-  UBaixaNFDevolvida in 'UBaixaNFDevolvida.pas' {frmBaixaNFDevolvida};
+  UBaixaNFDevolvida in 'UBaixaNFDevolvida.pas' {frmBaixaNFDevolvida},
+  UCadOrcamento_Aprov in 'UCadOrcamento_Aprov.pas' {frmCadOrcamento_Aprov};
 
 {$R *.res}
 
@@ -777,6 +778,7 @@ begin
     Application.Title := 'SSFacil';
 
     Application.CreateForm(TfrmAbertura, frmAbertura);
+  Application.CreateForm(TfrmCadOrcamento_Aprov, frmCadOrcamento_Aprov);
   frmAbertura.Show;
     frmAbertura.Refresh;
 

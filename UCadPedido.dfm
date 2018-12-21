@@ -1,6 +1,6 @@
 object frmCadPedido: TfrmCadPedido
-  Left = 180
-  Top = 10
+  Left = 71
+  Top = 9
   Width = 1105
   Height = 710
   Caption = 'Pedido de Venda'

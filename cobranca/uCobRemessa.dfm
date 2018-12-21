@@ -1,6 +1,6 @@
 object fCobRemessa: TfCobRemessa
-  Left = 148
-  Top = 79
+  Left = 327
+  Top = 43
   BorderStyle = bsSingle
   Caption = 'fCobRemessa'
   ClientHeight = 493
@@ -18,11 +18,39 @@ object fCobRemessa: TfCobRemessa
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object NxLabel11: TNxLabel
+    Left = 14
+    Top = 116
+    Width = 98
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Data Emiss'#227'o Inicial:'
+    HorizontalPosition = hpLeft
+    InnerHorizontal = True
+    InnerVertical = False
+    InnerMargins.Horizontal = 0
+    InnerMargins.Vertical = 2
+    VerticalPosition = vpTop
+  end
+  object NxLabel12: TNxLabel
+    Left = 218
+    Top = 116
+    Width = 25
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Final:'
+    HorizontalPosition = hpLeft
+    InnerHorizontal = True
+    InnerVertical = False
+    InnerMargins.Horizontal = 0
+    InnerMargins.Vertical = 2
+    VerticalPosition = vpTop
+  end
   object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 1086
-    Height = 131
+    Height = 152
     Align = alTop
     Color = clSilver
     TabOrder = 0
@@ -210,6 +238,34 @@ object fCobRemessa: TfCobRemessa
       Height = 13
       Caption = 'T'#237'tulo com Nota pendente de Envio'
     end
+    object NxLabel13: TNxLabel
+      Left = 25
+      Top = 116
+      Width = 87
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Data Venc. Inicial:'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object NxLabel14: TNxLabel
+      Left = 222
+      Top = 116
+      Width = 25
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Final:'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
     object NxDatePicker1: TNxDatePicker
       Left = 113
       Top = 88
@@ -303,7 +359,7 @@ object fCobRemessa: TfCobRemessa
     end
     object ckReenviar: TCheckBox
       Left = 248
-      Top = 109
+      Top = 132
       Width = 233
       Height = 17
       Caption = 'Reenviar t'#237'tulos com n'#250'mero de remessa'
@@ -383,7 +439,7 @@ object fCobRemessa: TfCobRemessa
     end
     object ckVencidos: TCheckBox
       Left = 113
-      Top = 110
+      Top = 133
       Width = 96
       Height = 17
       Caption = 'Exibir vencidos'
@@ -411,9 +467,9 @@ object fCobRemessa: TfCobRemessa
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
-    Top = 158
+    Top = 179
     Width = 1086
-    Height = 316
+    Height = 295
     Align = alClient
     Ctl3D = False
     DataSource = DMCob_Eletronica.dsDuplicata
@@ -588,7 +644,7 @@ object fCobRemessa: TfCobRemessa
   end
   object Panel2: TPanel
     Left = 0
-    Top = 131
+    Top = 152
     Width = 1086
     Height = 27
     Align = alTop
@@ -752,6 +808,28 @@ object fCobRemessa: TfCobRemessa
         Text = 'Empresa'
         Width = 50
       end>
+  end
+  object nxVencimentoInicial: TNxDatePicker
+    Left = 113
+    Top = 108
+    Width = 89
+    Height = 21
+    TabOrder = 5
+    HideFocus = False
+    Date = 43451.000000000000000000
+    NoneCaption = 'None'
+    TodayCaption = 'Today'
+  end
+  object nxVencimentoFinal: TNxDatePicker
+    Left = 249
+    Top = 108
+    Width = 89
+    Height = 21
+    TabOrder = 4
+    HideFocus = False
+    Date = 43451.000000000000000000
+    NoneCaption = 'None'
+    TodayCaption = 'Today'
   end
   object ACBrBoleto1: TACBrBoleto
     Banco.Numero = 1

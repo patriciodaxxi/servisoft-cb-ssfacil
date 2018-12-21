@@ -67,6 +67,12 @@ type
     NxButton1: TNxButton;
     ckVencidos: TCheckBox;
     Memo1: TMemo;
+    NxLabel11: TNxLabel;
+    nxVencimentoInicial: TNxDatePicker;
+    NxLabel12: TNxLabel;
+    nxVencimentoFinal: TNxDatePicker;
+    NxLabel13: TNxLabel;
+    NxLabel14: TNxLabel;
     procedure btnGerar_RemessaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnLocalizarClick(Sender: TObject);

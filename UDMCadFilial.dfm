@@ -2442,6 +2442,7 @@ object DMCadFilial: TDMCadFilial
   end
   object cdsFilial_Contabil: TClientDataSet
     Aggregates = <>
+    DataSetField = cdsFilialsdsFilial_Contabil
     IndexFieldNames = 'ID'
     Params = <>
     Left = 192

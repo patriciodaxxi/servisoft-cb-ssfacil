@@ -1,6 +1,6 @@
 object frmCadOrcamento: TfrmCadOrcamento
-  Left = 203
-  Top = 10
+  Left = 163
+  Top = 14
   Width = 1016
   Height = 708
   Caption = 'Or'#231'amento de Venda'
@@ -25,7 +25,7 @@ object frmCadOrcamento: TfrmCadOrcamento
     Top = 0
     Width = 1000
     Height = 669
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOrcamento: TfrmCadOrcamento
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -281,8 +281,8 @@ object frmCadOrcamento: TfrmCadOrcamento
         Align = alBottom
         BorderStyle = sbsSunken
         Caption = 
-          'Duplo clique para consultar            F9 = Aprovar/Reprovar Or'#231 +
-          'amento'
+          'Duplo clique para consultar            F3-Consulta Reprovado    ' +
+          '       F9 = Aprovar/Reprovar Or'#231'amento'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clMaroon
         Font.Height = -11
@@ -740,7 +740,6 @@ object frmCadOrcamento: TfrmCadOrcamento
             FieldName = 'NOME_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Vendedor'
-            Width = 64
             Visible = True
           end
           item
@@ -1811,7 +1810,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         Top = 192
         Width = 996
         Height = 401
-        ActivePage = TS_Valores
+        ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -1819,7 +1818,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 3
+        TabIndex = 0
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -1882,7 +1881,6 @@ object frmCadOrcamento: TfrmCadOrcamento
               item
                 Expanded = False
                 FieldName = 'REFERENCIA'
-                Width = 64
                 Visible = True
               end
               item
@@ -1977,7 +1975,6 @@ object frmCadOrcamento: TfrmCadOrcamento
                 FieldName = 'GRAVACAO_COM_ERRO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Com Notifica'#231#227'o'
-                Width = 64
                 Visible = True
               end>
           end
@@ -3185,7 +3182,6 @@ object frmCadOrcamento: TfrmCadOrcamento
               item
                 Expanded = False
                 FieldName = 'VLR_TOTAL'
-                Width = 64
                 Visible = True
               end>
           end

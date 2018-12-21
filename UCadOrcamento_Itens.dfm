@@ -400,10 +400,11 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
         Width = 171
         Height = 21
         DropDownCount = 15
+        DropDownWidth = 550
         DataField = 'ID_PRODUTO'
         DataSource = DMCadPedido.dsPedido_Itens
         LookupField = 'ID'
-        LookupDisplay = 'REFERENCIA'
+        LookupDisplay = 'REFERENCIA;NOME'
         LookupSource = DMCadPedido.dsProduto
         TabOrder = 0
         OnChange = RxDBLookupCombo4Change
@@ -435,10 +436,18 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
       BevelOuter = bvNone
       Color = clMoneyGreen
       TabOrder = 1
+      object Label19: TLabel
+        Left = 105
+        Top = 8
+        Width = 31
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Nome:'
+      end
       object DBEdit1: TDBEdit
-        Left = 310
+        Left = 139
         Top = 0
-        Width = 363
+        Width = 534
         Height = 21
         CharCase = ecUpperCase
         DataField = 'NOMEPRODUTO'

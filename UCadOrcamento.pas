@@ -3,10 +3,10 @@ unit UCadOrcamento;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, DB, SqlExpr, 
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, DB, SqlExpr,
   DBGrids, ExtCtrls, StdCtrls, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, UCadOrcamento_Itens, UEscolhe_Filial,
   UCBase, Menus, NxEdit, NxCollection, UDMRel, UCadOrcamento_Aprov, Variants, Mask, RzTabs, RzPanel, UCadPedido_Desconto, ComObj,
-  UCadPedido_Ace, uCadObs_Aux, UCadPedido_ItensRed;
+  UCadPedido_Ace, uCadObs_Aux, UCadPedido_ItensRed, UCadOrcamento_NaoAprovado;
 
 type
   TfrmCadOrcamento = class(TForm)
@@ -275,6 +275,7 @@ type
     fDMCadPedido: TDMCadPedido;
     fLista : TStringList;
     ffrmCadOrcamento_Itens: TfrmCadOrcamento_Itens;
+    ffrmCadOrcamento_NaoAprovado : TfrmCadOrcamento_NaoAprovado;
     ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov;
     ffrmCadPedido_Desconto: TfrmCadPedido_Desconto;
@@ -1071,6 +1072,18 @@ begin
       fDMCadPedido.cdsPedido_Consulta.Locate('ID',vID,[loCaseInsensitive]);
     end;
   end;
+  if (Key = Vk_F3) and (fDMCadPedido.cdsPedido_Consulta.Active) and (fDMCadPedido.cdsPedido_ConsultaID.AsInteger > 0) then
+  begin
+    if fnc_Posicionar_Orcamento then
+    begin
+      vID := fDMCadPedido.cdsPedido_ConsultaID.AsInteger;
+      ffrmCadOrcamento_NaoAprovado              := TfrmCadOrcamento_NaoAprovado.Create(self);
+      ffrmCadOrcamento_NaoAprovado.fDMCadPedido := fDMCadPedido;
+      ffrmCadOrcamento_NaoAprovado.ShowModal;
+      FreeAndNil(ffrmCadOrcamento_NaoAprovado);
+    end;
+  end;
+
 end;
 
 function TfrmCadOrcamento.fnc_Posicionar_Orcamento: Boolean;

@@ -521,6 +521,8 @@ begin
   fDMCadFilial.cdsFilial_Email.Open;
   fDMCadFilial.cdsFilial_Download.Close;
   fDMCadFilial.cdsFilial_Download.Open;
+  fDMCadFilial.cdsFilial_Contabil.Close;
+  fDMCadFilial.cdsFilial_Contabil.Open;
 
   TS_CBarra.TabVisible := ((fDMCadFilial.qParametrosUSA_COD_BARRAS.AsString = 'S') and (fDMCadFilial.qParametrosUSA_COD_BARRAS_PROPRIO.AsString = 'S'));
 

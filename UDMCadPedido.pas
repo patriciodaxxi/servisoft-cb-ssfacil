@@ -3374,6 +3374,8 @@ type
     cdsTab_NCMID_CST_ICMS: TIntegerField;
     cdsTab_CSTICMSPERC_DIFERIMENTO: TFloatField;
     cdsProdutoID_CSTICMS: TIntegerField;
+    mOrcamento_ItensMotivo_Nao_Aprov: TStringField;
+    mOrcamento_ItensData_Nao_Aprov: TDateField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
