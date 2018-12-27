@@ -231,7 +231,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand3: TRLBand
         Left = 0
-        Top = 440
+        Top = 437
         Width = 278
         Height = 32
         BandType = btSummary
@@ -271,7 +271,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand4: TRLBand
         Left = 0
-        Top = 501
+        Top = 498
         Width = 278
         Height = 153
         BandType = btSummary
@@ -318,7 +318,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand5: TRLBand
         Left = 0
-        Top = 472
+        Top = 469
         Width = 278
         Height = 14
         BandType = btSummary
@@ -403,7 +403,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand8: TRLBand
         Left = 0
-        Top = 374
+        Top = 371
         Width = 278
         Height = 66
         BandType = btSummary
@@ -676,7 +676,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
         Left = 0
         Top = 261
         Width = 278
-        Height = 113
+        Height = 110
         Borders.Sides = sdCustom
         Borders.DrawLeft = False
         Borders.DrawTop = False
@@ -821,7 +821,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           Left = 0
           Top = 29
           Width = 278
-          Height = 77
+          Height = 78
           BandType = btSummary
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -1090,7 +1090,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand9: TRLBand
         Left = 0
-        Top = 486
+        Top = 483
         Width = 278
         Height = 15
         BandType = btSummary
@@ -1112,7 +1112,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand14: TRLBand
         Left = 0
-        Top = 654
+        Top = 651
         Width = 278
         Height = 29
         BandType = btSummary

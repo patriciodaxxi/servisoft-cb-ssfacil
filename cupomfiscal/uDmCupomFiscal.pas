@@ -1514,6 +1514,7 @@ type
     
     vIdCombinacao: Integer;
     vTamanho, vCombinacao: String;
+    vDataEntrada: TDateTime;
     //***
 
     procedure prcInserir(vId, vClienteId: Integer);

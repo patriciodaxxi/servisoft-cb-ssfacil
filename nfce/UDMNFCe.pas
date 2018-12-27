@@ -639,6 +639,7 @@ type
     mItensNFeVlr_Unitario_Trib: TFloatField;
     mItensNFeQtd_Trib: TFloatField;
     mItensNFeUnidade_Trib: TStringField;
+    cdsCupomFiscalQTD_ITENS: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);

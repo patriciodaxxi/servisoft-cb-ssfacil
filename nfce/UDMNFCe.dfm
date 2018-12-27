@@ -2093,11 +2093,12 @@ object DMNFCe: TDMNFCe
       '.INSCR_EST INSCR_EST_FIL, FIL.NOME NOME_FILIAL,'#13#10'FIL.NOME_INTERN' +
       'O NOME_INTERNO_FIL, TC.nome NOME_FORMAPAGAMENTO,'#13#10'VEND.nome NOME' +
       '_VENDEDOR,'#13#10#13#10'(FIL.ENDERECO || '#39', '#39'||  FIL.NUM_END || '#39' '#39'|| COAL' +
-      'ESCE(FIL.COMPLEMENTO_END,'#39#39')) ENDERECO_FIL2'#13#10#13#10'FROM CUPOMFISCAL ' +
-      'CF'#13#10'INNER JOIN PESSOA CLI'#13#10'ON CF.ID_CLIENTE = CLI.CODIGO'#13#10'INNER ' +
-      'JOIN FILIAL FIL'#13#10'ON CF.filial = FIL.id'#13#10'LEFT JOIN tipocobranca T' +
-      'C'#13#10'ON CF.id_tipocobranca = TC.id'#13#10'LEFT JOIN PESSOA VEND'#13#10'ON CF.i' +
-      'd_vendedor = VEND.codigo'#13#10#13#10'WHERE CF.ID = :ID'#13#10
+      'ESCE(FIL.COMPLEMENTO_END,'#39#39')) ENDERECO_FIL2,'#13#10'(SELECT COUNT(1) Q' +
+      'TD_ITENS FROM CUPOMFISCAL_ITENS WHERE ID = :ID)'#13#10#13#10'FROM CUPOMFIS' +
+      'CAL CF'#13#10'INNER JOIN PESSOA CLI'#13#10'ON CF.ID_CLIENTE = CLI.CODIGO'#13#10'IN' +
+      'NER JOIN FILIAL FIL'#13#10'ON CF.filial = FIL.id'#13#10'LEFT JOIN tipocobran' +
+      'ca TC'#13#10'ON CF.id_tipocobranca = TC.id'#13#10'LEFT JOIN PESSOA VEND'#13#10'ON ' +
+      'CF.id_vendedor = VEND.codigo'#13#10#13#10'WHERE CF.ID = :ID'#13#10
     DataSource = dsCupomFiscal
     MaxBlobSize = -1
     Params = <
@@ -2106,6 +2107,11 @@ object DMNFCe: TDMNFCe
         Name = 'ID'
         ParamType = ptInput
         Size = 4
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 128
@@ -2452,6 +2458,9 @@ object DMNFCe: TDMNFCe
     end
     object cdsCupomFiscalID_TRANSPORTADORA: TIntegerField
       FieldName = 'ID_TRANSPORTADORA'
+    end
+    object cdsCupomFiscalQTD_ITENS: TIntegerField
+      FieldName = 'QTD_ITENS'
     end
   end
   object dsCupomFiscal: TDataSource

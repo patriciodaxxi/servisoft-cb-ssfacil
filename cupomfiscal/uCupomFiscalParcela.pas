@@ -75,6 +75,8 @@ begin
   fDmCupomFiscal.cdsCupom_Parc.Post;
   if fDmCupomFiscal.cdsCupom_ParcPARCELA.AsInteger = 0 then
     fDmCupomFiscal.vVlrEntrada := fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency;
+  if (fDmCupomFiscal.cdsCupom_ParcPARCELA.AsInteger = 0) then
+    fDmCupomFiscal.vDataEntrada := DBDateEdit1.Date;
   Close;
 end;
 

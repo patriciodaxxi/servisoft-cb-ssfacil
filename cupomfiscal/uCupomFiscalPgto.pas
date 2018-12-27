@@ -228,6 +228,8 @@ begin
     else
     begin
       vDataAux := fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime;
+      if fDmCupomFiscal.vDataEntrada > 1 then
+        vDataAux := fDmCupomFiscal.vDataEntrada;
       {if fDmCupomFiscal.cdsCondPgtoENTRADA.AsString = 'S' then
       begin
         vVlrParcelas := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat / (fDmCupomFiscal.cdsCondPgtoQTD_PARCELA.AsFloat + 1)));
@@ -775,7 +777,8 @@ begin
   while not fDmCupomFiscal.cdsCupom_Parc.IsEmpty do
     fDmCupomFiscal.cdsCupom_Parc.Delete;
 
-  fDmCupomFiscal.vVlrEntrada := 0;
+  fDmCupomFiscal.vVlrEntrada  := 0;
+  fDmCupomFiscal.vDataEntrada := fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime;
   vQtdParcelas := fDmCupomFiscal.cdsCondPgtoQTD_PARCELA.AsInteger;
   if fDmCupomFiscal.cdsCondPgtoENTRADA.AsString = 'S' then
   begin
