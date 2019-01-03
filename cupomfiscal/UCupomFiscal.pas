@@ -1534,7 +1534,7 @@ begin
     fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.AsInteger := fDmCupomFiscal.vClienteID;
 
     FinalizaParcial('ORC');
-    fDmCupomFiscal.vClienteID := 0;
+    fDmCupomFiscal.vClienteID := fDmCupomFiscal.cdsParametrosID_CLIENTE_CONSUMIDOR.AsInteger;
   end;
 end;
 
@@ -1558,7 +1558,7 @@ begin
     fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.AsInteger := fDmCupomFiscal.vClienteID;
 
     FinalizaParcial('PED');
-    fDmCupomFiscal.vClienteID := 0;
+    fDmCupomFiscal.vClienteID := fDmCupomFiscal.cdsParametrosID_CLIENTE_CONSUMIDOR.AsInteger;
   end;
 end;
 
