@@ -275,10 +275,10 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
     Top = 83
     Width = 926
     Height = 418
-    ActivePage = TS_Verificar
+    ActivePage = TS_Balanco
     ActivePageDefault = TS_Balanco
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 2
     FixedDimension = 19
     object TS_Balanco: TRzTabSheet
