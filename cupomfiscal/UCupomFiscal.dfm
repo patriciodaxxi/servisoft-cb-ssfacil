@@ -1028,7 +1028,7 @@ object fCupomFiscal: TfCupomFiscal
         Top = 5
         Width = 320
         Height = 240
-        Anchors = [akLeft, akTop, akRight]
+        Anchors = [akLeft, akTop, akRight, akBottom]
         Center = True
         Picture.Data = {
           0A544A504547496D616765F1340000FFD8FFE000104A46494600010101006000

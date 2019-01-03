@@ -796,6 +796,20 @@ begin
     fCupomFiscalParcela.ShowModal;
   end;
 
+//////////////////////////////////////////////
+  fDMCupomFiscal.cdsCupomFiscalVLR_COFINS.AsFloat   := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_ICMS.AsFloat     := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_IPI.AsFloat      := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_PIS.AsFloat      := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsFloat := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat    := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO.AsFloat  := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_ESTADUAL.AsFloat  := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_FEDERAL.AsFloat   := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_MUNICIPAL.AsFloat := 0;
+//////////////////////////////////////////////
+
   vVlrParcelado := fDmCupomFiscal.vSomaOriginal - fDmCupomFiscal.vVlrEntrada;
 
   prc_ControleParcelas(vVlrParcelado,vPercJuros,vQtdParcelas);
