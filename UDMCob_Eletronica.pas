@@ -904,7 +904,7 @@ type
     vID_Duplicata: Integer;
     vData2Via: TDateTime;
     btnDesabilita: Integer;
-    procedure prc_Duplicata(ID_Nota, ID_Duplicata, NumNota, Filial, ID_Nota_Servico: Integer; Serie: string; NossoNumero: string; ID_Duplicata_Ant: Integer; Parcela: Integer);
+    procedure prc_Duplicata(ID_Nota, ID_Duplicata, NumNota, Filial, ID_Nota_Servico: Integer; Serie, NumDuplicata: string; NossoNumero: string; ID_Duplicata_Ant: Integer; Parcela: Integer);
     procedure prc_Protesto_Devol(ID_Instrucao: Integer);
     procedure prc_Mensagem_Cobranca;
     procedure prc_Verificar_Carteira;
@@ -944,7 +944,7 @@ uses
 
 { TDMCob_Eletronica }
 
-procedure TDMCob_Eletronica.prc_Duplicata(ID_Nota, ID_Duplicata, NumNota, Filial, ID_Nota_Servico: Integer; Serie: string; NossoNumero: string; ID_Duplicata_Ant: Integer; Parcela: Integer);
+procedure TDMCob_Eletronica.prc_Duplicata(ID_Nota, ID_Duplicata, NumNota, Filial, ID_Nota_Servico: Integer; Serie, NumDuplicata: string; NossoNumero: string; ID_Duplicata_Ant: Integer; Parcela: Integer);
 begin
   cdsDuplicata.Close;
   sdsDuplicata.CommandText := ctDuplicata + ' WHERE DUP.TIPO_ES = ''E''';
@@ -968,6 +968,8 @@ begin
     sdsDuplicata.CommandText := sdsDuplicata.CommandText + ' AND DUP.ID = ' + IntToStr(ID_Duplicata)
   else
   begin
+    if trim(NumDuplicata) <> '' then
+      sdsDuplicata.CommandText := sdsDuplicata.CommandText + ' AND (DUP.NUMDUPLICATA = ' + QuotedStr(NumDuplicata) + ')';
     if NumNota > 0 then
       sdsDuplicata.CommandText := sdsDuplicata.CommandText + ' AND (NF.NUMNOTA = ' + IntToStr(NumNota) + ' OR NS.NUMNOTA = ' + IntToStr(NumNota) + ')';
     if Filial > 0 then

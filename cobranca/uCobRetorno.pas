@@ -155,7 +155,7 @@ begin
       if fDMCob_Eletronica.mRetornoAtualizar.AsString = 'S' then
       begin
         try
-          fDMCob_Eletronica.prc_Duplicata(0, fDMCob_Eletronica.mRetornoID_Duplicata.AsInteger, 0, fDMCob_Eletronica.mRetornoFilial.AsInteger, 0, '', '', 0, 0);
+          fDMCob_Eletronica.prc_Duplicata(0, fDMCob_Eletronica.mRetornoID_Duplicata.AsInteger, 0, fDMCob_Eletronica.mRetornoFilial.AsInteger, 0, '','', '', 0, 0);
           if not fDMCob_Eletronica.cdsDuplicata.IsEmpty then
           begin
             if fDMCob_Eletronica.mRetornoTipo_Ret.AsString = 'PRO' then
@@ -350,8 +350,10 @@ begin
       i2 := pos('/', vTexto);
       if i2 > 0 then
       begin
-        fDmCob_Eletronica.mRetornoNumNota.AsString := Monta_Numero(copy(vTexto, 1, i2 - 1), 0);
-        fDmCob_Eletronica.mRetornoParcela.AsString := Monta_Numero(copy(vTexto, i2 + 1, Length(vTexto) - i2 + 1), 0);
+        //fDmCob_Eletronica.mRetornoNumNota.AsString := Monta_Numero(copy(vTexto, 1, i2 - 1), 0);
+        //fDmCob_Eletronica.mRetornoParcela.AsString := Monta_Numero(copy(vTexto, i2 + 1, Length(vTexto) - i2 + 1), 0);
+        fDmCob_Eletronica.mRetornoNumNota.AsString := copy(vTexto, 1, i2 - 1);
+        fDmCob_Eletronica.mRetornoParcela.AsString := copy(vTexto, i2 + 1, Length(vTexto) - i2 + 1);
       end
       else
         fDmCob_Eletronica.mRetornoNumNota.AsString := NumeroDocumento;
@@ -409,7 +411,7 @@ begin
       //Incluido esse IF do checkbox 17/10/2016
       if CheckBox1.Checked then
       begin
-        fDmCob_Eletronica.prc_Duplicata(0, 0, 0, fDmCob_Eletronica.cdsFilialID.AsInteger, 0, '', fDmCob_Eletronica.mRetornoNossoNumero.AsString, 0, 0);
+        fDmCob_Eletronica.prc_Duplicata(0, 0, 0, fDmCob_Eletronica.cdsFilialID.AsInteger, 0, '','', fDmCob_Eletronica.mRetornoNossoNumero.AsString, 0, 0);
         if not fDmCob_Eletronica.cdsDuplicata.IsEmpty then
         begin
           fDmCob_Eletronica.mRetornoNomeCliente.AsString := fDmCob_Eletronica.cdsDuplicataNOME_CLIENTE.AsString;
@@ -421,7 +423,7 @@ begin
       begin
         if fDmCob_Eletronica.mRetornoID_Duplicata.AsInteger > 0 then
         begin
-          fDmCob_Eletronica.prc_Duplicata(0, fDmCob_Eletronica.mRetornoID_Duplicata.AsInteger, 0, 0, 0, '', '', 0, 0);
+          fDmCob_Eletronica.prc_Duplicata(0, fDmCob_Eletronica.mRetornoID_Duplicata.AsInteger, 0, 0, 0, '','', '', 0, 0);
           if not fDmCob_Eletronica.cdsDuplicata.IsEmpty then
           begin
             fDmCob_Eletronica.mRetornoNomeCliente.AsString := fDmCob_Eletronica.cdsDuplicataNOME_CLIENTE.AsString;
@@ -432,7 +434,7 @@ begin
         else //Busca a duplicata anterior
         if fDmCob_Eletronica.mRetornoID_Duplicata_Ant.AsInteger > 0 then
         begin
-          fDmCob_Eletronica.prc_Duplicata(0, fDmCob_Eletronica.mRetornoID_Duplicata.AsInteger, 0, 0, 0, '', '', fDmCob_Eletronica.mRetornoID_Duplicata_Ant.AsInteger, 0);
+          fDmCob_Eletronica.prc_Duplicata(0, fDmCob_Eletronica.mRetornoID_Duplicata.AsInteger, 0, 0, 0, '','', '', fDmCob_Eletronica.mRetornoID_Duplicata_Ant.AsInteger, 0);
           if not fDmCob_Eletronica.cdsDuplicata.IsEmpty then
           begin
             fDmCob_Eletronica.mRetornoNomeCliente.AsString := fDmCob_Eletronica.cdsDuplicataNOME_CLIENTE.AsString;
@@ -445,11 +447,14 @@ begin
         else
         begin
           //Preparado para o Sicredi  17/04/2016
-          vTexto := Monta_Numero(fDmCob_Eletronica.mRetornoNumNota.AsString, 0);
-          vTexto2 := Monta_Numero(fDmCob_Eletronica.mRetornoParcela.AsString, 0);
+          //Alterado 03/01/2019
+          //vTexto := Monta_Numero(fDmCob_Eletronica.mRetornoNumNota.AsString, 0);
+          //vTexto2 := Monta_Numero(fDmCob_Eletronica.mRetornoParcela.AsString, 0);
+          vTexto  := fDmCob_Eletronica.mRetornoNumNota.AsString;
+          vTexto2 := fDmCob_Eletronica.mRetornoParcela.AsString;
           if (fDmCob_Eletronica.cdsContasCOD_BANCO.AsString = '748') and (trim(vTexto) <> '') and (trim(vTexto2) <> '') then
           begin
-            fDmCob_Eletronica.prc_Duplicata(0, 0, StrToInt(vTexto), fDmCob_Eletronica.cdsFilialID.AsInteger, 0, '', '', 0, StrToInt(vTexto2));
+            fDmCob_Eletronica.prc_Duplicata(0, 0, 0, fDmCob_Eletronica.cdsFilialID.AsInteger, 0, '',vTexto,'', 0, StrToInt(vTexto2));
             if not fDmCob_Eletronica.cdsDuplicata.IsEmpty then
             begin
               fDmCob_Eletronica.mRetornoNomeCliente.AsString := fDmCob_Eletronica.cdsDuplicataNOME_CLIENTE.AsString;
@@ -809,7 +814,7 @@ begin
         fDmCob_Eletronica.mRetorno.Edit;
         fDmCob_Eletronica.mRetornoID_Duplicata.AsInteger := fDmCob_Eletronica.vID_Duplicata;
         fDmCob_Eletronica.mRetornoBuscou_Titulos.AsString := 'S';
-        fDmCob_Eletronica.prc_Duplicata(0, fDmCob_Eletronica.mRetornoID_Duplicata.AsInteger, 0, 0, 0, '', '', 0, 0);
+        fDmCob_Eletronica.prc_Duplicata(0, fDmCob_Eletronica.mRetornoID_Duplicata.AsInteger, 0, 0, 0, '','', '', 0, 0);
         fDmCob_Eletronica.mRetornoNomeCliente.AsString := fDmCob_Eletronica.cdsDuplicataNOME_CLIENTE.AsString;
         fDmCob_Eletronica.mRetornoCodCliente.AsInteger := fDmCob_Eletronica.cdsDuplicataID_PESSOA.AsInteger;
         fDmCob_Eletronica.mRetornoDtVenc.AsString := fDmCob_Eletronica.cdsDuplicataDTVENCIMENTO.AsString;
