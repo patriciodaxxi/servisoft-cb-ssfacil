@@ -33,7 +33,7 @@ object fCupomFiscal: TfCupomFiscal
       Width = 894
       Height = 477
       Align = alClient
-      Color = clSilver
+      Color = 12633514
       Ctl3D = False
       DataSource = dmCupomFiscal.dsCupom_Itens
       Font.Charset = DEFAULT_CHARSET
@@ -181,7 +181,7 @@ object fCupomFiscal: TfCupomFiscal
       Width = 894
       Height = 110
       Align = alBottom
-      Color = clSilver
+      Color = 12633514
       Ctl3D = False
       DataSource = dmCupomFiscal.dsCupom_Parc
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -256,7 +256,7 @@ object fCupomFiscal: TfCupomFiscal
       Height = 54
       Align = alBottom
       Anchors = [akLeft, akBottom]
-      Color = 7950848
+      Color = 3683329
       Constraints.MaxHeight = 126
       Constraints.MinWidth = 400
       Enabled = False
@@ -268,7 +268,7 @@ object fCupomFiscal: TfCupomFiscal
         Height = 25
         Alignment = taRightJustify
         Caption = 'Valor Total do Cupom:'
-        Color = 7950848
+        Color = 3683329
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -21
@@ -284,7 +284,7 @@ object fCupomFiscal: TfCupomFiscal
         Height = 18
         Alignment = taRightJustify
         Caption = 'Desconto:'
-        Color = 7950848
+        Color = 3683329
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -16
@@ -299,12 +299,12 @@ object fCupomFiscal: TfCupomFiscal
         Top = 6
         Width = 236
         Height = 46
-        Color = clSilver
+        Color = 12633514
         Ctl3D = False
         DataField = 'VLR_TOTAL'
         DataSource = dmCupomFiscal.dsCupomFiscal
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = 5585152
+        Font.Color = 3683329
         Font.Height = -33
         Font.Name = 'Verdana'
         Font.Style = []
@@ -317,12 +317,12 @@ object fCupomFiscal: TfCupomFiscal
         Top = 20
         Width = 117
         Height = 29
-        Color = clSilver
+        Color = 12633514
         Ctl3D = False
         DataField = 'VLR_DESCONTO'
         DataSource = dmCupomFiscal.dsCupomFiscal
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = 5585152
+        Font.Color = 3683329
         Font.Height = -19
         Font.Name = 'Verdana'
         Font.Style = []
@@ -339,7 +339,7 @@ object fCupomFiscal: TfCupomFiscal
       Height = 53
       Align = alBottom
       Anchors = [akLeft, akBottom]
-      Color = 7950848
+      Color = 7300393
       Constraints.MaxHeight = 126
       Constraints.MinWidth = 400
       TabOrder = 3
@@ -454,7 +454,7 @@ object fCupomFiscal: TfCupomFiscal
       Width = 388
       Height = 300
       Align = alTop
-      Color = 5585152
+      Color = 3683329
       Constraints.MaxHeight = 300
       Constraints.MaxWidth = 400
       Constraints.MinHeight = 225
@@ -500,11 +500,11 @@ object fCupomFiscal: TfCupomFiscal
         Height = 35
         TabStop = False
         AutoSize = False
-        Color = clSilver
+        Color = 12633514
         Ctl3D = False
         DisplayFormat = '0.00'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = 5585152
+        Font.Color = 3683329
         Font.Height = -24
         Font.Name = 'Verdana'
         Font.Style = []
@@ -520,7 +520,7 @@ object fCupomFiscal: TfCupomFiscal
         Height = 144
         Align = alTop
         BevelOuter = bvNone
-        Color = 5585152
+        Color = 3683329
         TabOrder = 0
         OnExit = Panel8Exit
         object Label1: TLabel
@@ -717,7 +717,7 @@ object fCupomFiscal: TfCupomFiscal
         Width = 386
         Height = 56
         Align = alTop
-        Color = 7950848
+        Color = 7300393
         TabOrder = 2
         object Label9: TLabel
           Left = 9
@@ -843,7 +843,7 @@ object fCupomFiscal: TfCupomFiscal
         Width = 386
         Height = 28
         Align = alTop
-        Color = 7950848
+        Color = 7300393
         TabOrder = 1
         Visible = False
         object Label6: TLabel
@@ -966,7 +966,7 @@ object fCupomFiscal: TfCupomFiscal
       Height = 54
       Align = alBottom
       Anchors = [akLeft, akBottom]
-      Color = 7950848
+      Color = 7300393
       Constraints.MaxHeight = 54
       Constraints.MaxWidth = 400
       Constraints.MinHeight = 54

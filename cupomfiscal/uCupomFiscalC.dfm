@@ -74,7 +74,7 @@ object fCupomFiscalC: TfCupomFiscalC
         Title.Font.Height = -11
         Title.Font.Name = 'Verdana'
         Title.Font.Style = [fsBold]
-        Width = 108
+        Width = 76
         Visible = True
       end
       item
@@ -110,6 +110,7 @@ object fCupomFiscalC: TfCupomFiscalC
         Title.Font.Height = -11
         Title.Font.Name = 'Verdana'
         Title.Font.Style = [fsBold]
+        Width = 76
         Visible = True
       end
       item
@@ -178,7 +179,7 @@ object fCupomFiscalC: TfCupomFiscalC
         FieldName = 'NOME_TIPOCOBRANCA'
         Title.Alignment = taCenter
         Title.Caption = 'Forma Pagamento'
-        Width = 100
+        Width = 150
         Visible = True
       end
       item
@@ -186,7 +187,7 @@ object fCupomFiscalC: TfCupomFiscalC
         FieldName = 'DTORIGINAL'
         Title.Alignment = taCenter
         Title.Caption = 'Data Original'
-        Width = 87
+        Width = 76
         Visible = True
       end
       item
@@ -228,7 +229,7 @@ object fCupomFiscalC: TfCupomFiscalC
     Width = 1288
     Height = 30
     Align = alTop
-    Color = 7950848
+    Color = 7300393
     TabOrder = 0
     object btnInserir: TNxButton
       Left = 1
@@ -541,7 +542,7 @@ object fCupomFiscalC: TfCupomFiscalC
     Width = 1288
     Height = 106
     Align = alTop
-    Color = 5585152
+    Color = 3683329
     TabOrder = 1
     Visible = False
     object Label1: TLabel
@@ -972,7 +973,7 @@ object fCupomFiscalC: TfCupomFiscalC
     Width = 1288
     Height = 31
     Align = alTop
-    Color = 7950848
+    Color = 7300393
     TabOrder = 4
     object btnCancelar_Nota2: TNxButton
       Left = 154
@@ -1322,7 +1323,7 @@ object fCupomFiscalC: TfCupomFiscalC
     Width = 1288
     Height = 68
     Align = alBottom
-    Color = 5585152
+    Color = 7300393
     TabOrder = 6
     object Label16: TLabel
       Left = 26

@@ -109,7 +109,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           Width = 808
           Height = 200
           Align = alBottom
-          Color = clBlack
+          Color = 3683329
           TabOrder = 3
           object Label8: TLabel
             Left = 94
@@ -161,7 +161,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Hint = 'Consulta de clientes'
             Caption = 'F2'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -178,7 +178,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Hint = 'Consulta cr'#233'dito do cliente'
             Caption = 'F6'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -285,7 +285,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Hint = 'Informa'#231#245'es do cliente'
             Caption = 'F4'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -316,7 +316,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DataField = 'CPF'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -334,7 +334,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DataField = 'CLIENTE_NOME'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -351,7 +351,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DecimalPlaces = 0
             DisplayFormat = '0'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -370,7 +370,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DataField = 'ID_VENDEDOR'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -394,7 +394,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DataField = 'ID_CONDPGTO'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'MS Sans Serif'
             Font.Style = []
@@ -416,7 +416,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DataField = 'CLIENTE_OBS'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -432,7 +432,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DataField = 'QTD_PESSOA'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'MS Sans Serif'
             Font.Style = []
@@ -447,7 +447,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           Width = 808
           Height = 86
           Align = alTop
-          Color = clBlack
+          Color = 3683329
           TabOrder = 0
           OnExit = Panel4Exit
           object Label2: TLabel
@@ -516,7 +516,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DataField = 'ID_TIPOCOBRANCA'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'MS Sans Serif'
             Font.Style = []
@@ -547,7 +547,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DecimalPlaces = 0
             DisplayFormat = '0'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -564,7 +564,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Style = csDropDownList
             DropDownCount = 2
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'MS Sans Serif'
             Font.Style = []
@@ -587,7 +587,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             AutoSize = False
             DisplayFormat = '0.00'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
+            Font.Color = 3683329
             Font.Height = -19
             Font.Name = 'Verdana'
             Font.Style = []
@@ -612,7 +612,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Alignment = taRightJustify
             Caption = 'Desconto:'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlue
+            Font.Color = 7300393
             Font.Height = -27
             Font.Name = 'Verdana'
             Font.Style = []
@@ -625,11 +625,13 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Height = 32
             Alignment = taRightJustify
             Caption = 'Valor Produtos:'
+            Color = clBtnFace
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clNavy
+            Font.Color = 3683329
             Font.Height = -27
             Font.Name = 'Verdana'
             Font.Style = []
+            ParentColor = False
             ParentFont = False
           end
           object Label16: TLabel
@@ -640,7 +642,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Alignment = taRightJustify
             Caption = 'R$:'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlue
+            Font.Color = 7300393
             Font.Height = -27
             Font.Name = 'Verdana'
             Font.Style = []
@@ -654,7 +656,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DataField = 'VLR_DESCONTO'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlue
+            Font.Color = 7300393
             Font.Height = -27
             Font.Name = 'Verdana'
             Font.Style = []
@@ -670,12 +672,12 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Width = 381
             Height = 40
             TabStop = False
-            Color = 8454143
+            Color = 12633514
             Ctl3D = True
             DataField = 'VLR_PRODUTOS'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clNavy
+            Font.Color = 3683329
             Font.Height = -27
             Font.Name = 'Verdana'
             Font.Style = []
@@ -693,7 +695,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DecimalPlaces = 1
             DisplayFormat = '0.0%'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlue
+            Font.Color = 7300393
             Font.Height = -27
             Font.Name = 'Verdana'
             Font.Style = []
@@ -719,11 +721,13 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Height = 48
             Alignment = taRightJustify
             Caption = 'Total:'
+            Color = clBtnFace
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clNavy
+            Font.Color = 3683329
             Font.Height = -40
             Font.Name = 'Verdana'
             Font.Style = []
+            ParentColor = False
             ParentFont = False
           end
           object Label4: TLabel
@@ -734,7 +738,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Alignment = taRightJustify
             Caption = 'Valor Recebido:'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlue
+            Font.Color = 7300393
             Font.Height = -40
             Font.Name = 'Verdana'
             Font.Style = []
@@ -747,11 +751,13 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Height = 48
             Alignment = taRightJustify
             Caption = 'Troco:'
+            Color = clBtnFace
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clNavy
+            Font.Color = 3683329
             Font.Height = -40
             Font.Name = 'Verdana'
             Font.Style = []
+            ParentColor = False
             ParentFont = False
           end
           object DBEdit7: TDBEdit
@@ -760,11 +766,11 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Width = 381
             Height = 56
             TabStop = False
-            Color = 8454143
+            Color = 12633514
             DataField = 'VLR_TOTAL'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clNavy
+            Font.Color = 3683329
             Font.Height = -40
             Font.Name = 'Verdana'
             Font.Style = []
@@ -780,12 +786,13 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             DataField = 'VLR_RECEBIDO'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlue
+            Font.Color = 7300393
             Font.Height = -40
             Font.Name = 'Verdana'
             Font.Style = []
             ParentFont = False
             TabOrder = 1
+            OnClick = DBEdit1Enter
             OnEnter = DBEdit1Enter
             OnExit = DBEdit1Exit
             OnKeyDown = DBEdit1KeyDown
@@ -796,12 +803,12 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Width = 381
             Height = 56
             TabStop = False
-            Color = 8454143
+            Color = 12633514
             Ctl3D = True
             DataField = 'VLR_TROCO'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clNavy
+            Font.Color = 3683329
             Font.Height = -40
             Font.Name = 'Verdana'
             Font.Style = []
@@ -931,6 +938,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         Width = 810
         Height = 467
         Align = alClient
+        Color = 12633514
         DataSource = dmCupomFiscal.dsCupom_Parc
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
