@@ -1157,6 +1157,7 @@ begin
     vFilial := fDmCupomFiscal.cdsCupomFiscalFILIAL.AsInteger;
     fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime := Date;
     fDmCupomFiscal.cdsCupomFiscalHREMISSAO.AsDateTime := Now;
+    fDmCupomFiscal.prc_Abrir_CondPgto;
   end;
   fCupomFiscal.ShowModal;
   FreeAndNil(fCupomFiscal);

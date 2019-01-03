@@ -1169,8 +1169,15 @@ begin
                if fDmCupomFiscal.cdsTipoCobrancaIMPRIME_CARNE.AsString = 'S' then
                  vVias := vVias - 1;
                fDmCupomFiscal.cdsTipoCobranca.Close;
-               for i := 1 to vVias do
-                 fDmCupomFiscal.ChamaNaoFiscal(fDmCupomFiscal.cdsCupomFiscalID.AsInteger,'modCanvas');
+               if (fDmCupomFiscal.cdsCupomParametrosEXIBIR_DIALOGO_IMPRESSORA.AsString = 'S') then
+               begin
+                  if (MessageDLg('Deseja imprimir o cupom?',mtConfirmation,[mbyes,mbNo],0) = mrYes) then
+                    for i := 1 to vVias do
+                      fDmCupomFiscal.ChamaNaoFiscal(fDmCupomFiscal.cdsCupomFiscalID.AsInteger,'modCanvas');
+               end
+               else
+                 for i := 1 to vVias do
+                   fDmCupomFiscal.ChamaNaoFiscal(fDmCupomFiscal.cdsCupomFiscalID.AsInteger,'modCanvas')
              end;
            end
            else
