@@ -1,6 +1,6 @@
 object frmCadDuplicata: TfrmCadDuplicata
-  Left = 344
-  Top = 49
+  Left = 85
+  Top = 0
   Width = 1062
   Height = 657
   Caption = 'Duplicatas (A Receber/A Pagar)'
@@ -23,9 +23,9 @@ object frmCadDuplicata: TfrmCadDuplicata
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1046
-    Height = 599
-    ActivePage = TS_Cadastro
+    Width = 1054
+    Height = 607
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -33,7 +33,7 @@ object frmCadDuplicata: TfrmCadDuplicata
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -42,8 +42,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 207
-        Width = 1042
-        Height = 336
+        Width = 1050
+        Height = 344
         Align = alClient
         Ctl3D = False
         DataSource = DMCadDuplicata.dsDuplicata_Consulta
@@ -412,7 +412,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1042
+        Width = 1050
         Height = 30
         Align = alTop
         Color = 8404992
@@ -742,7 +742,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1042
+        Width = 1050
         Height = 147
         Align = alTop
         Color = clSilver
@@ -1336,8 +1336,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       end
       object pnlTotal: TPanel
         Left = 0
-        Top = 543
-        Width = 1042
+        Top = 551
+        Width = 1050
         Height = 33
         Align = alBottom
         Color = clSilver
@@ -1490,7 +1490,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel5: TPanel
         Left = 0
         Top = 177
-        Width = 1042
+        Width = 1050
         Height = 30
         Align = alTop
         Color = 16770764
@@ -1758,7 +1758,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1042
+        Width = 1050
         Height = 30
         Align = alTop
         Color = 8404992
@@ -2005,7 +2005,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 1042
+        Width = 1050
         Height = 396
         Align = alTop
         Enabled = False
@@ -2045,7 +2045,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 1040
+          Width = 1048
           Height = 27
           Align = alTop
           Color = clSilver
@@ -2154,7 +2154,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object Panel6: TPanel
           Left = 1
           Top = 55
-          Width = 1040
+          Width = 1048
           Height = 340
           Align = alBottom
           BevelOuter = bvNone
@@ -3898,8 +3898,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       object RzGroupBox2: TRzGroupBox
         Left = 0
         Top = 426
-        Width = 1042
-        Height = 150
+        Width = 1050
+        Height = 158
         Align = alClient
         BorderColor = clNavy
         BorderInner = fsButtonUp
@@ -3920,8 +3920,8 @@ object frmCadDuplicata: TfrmCadDuplicata
         object SMDBGrid2: TSMDBGrid
           Left = 5
           Top = 18
-          Width = 1032
-          Height = 127
+          Width = 1040
+          Height = 135
           Align = alClient
           Ctl3D = False
           DataSource = DMCadDuplicata.dsDuplicata_Hist
@@ -4085,8 +4085,8 @@ object frmCadDuplicata: TfrmCadDuplicata
   end
   object stat1: TStatusBar
     Left = 0
-    Top = 599
-    Width = 1046
+    Top = 607
+    Width = 1054
     Height = 19
     Panels = <
       item

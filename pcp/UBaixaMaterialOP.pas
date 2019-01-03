@@ -106,9 +106,11 @@ var
   ID: TTransactionDesc;
   sds: TSQLDataSet;
   vID_Estoque, vID_Estoque_Res : Integer;
+  vGravou : Boolean;
 begin
   fDMEstoque     := TDMEstoque.Create(Self);
   fDMEstoque_Res := TDMEstoque_Res.Create(Self);
+  vGravou        := False;
 
   sds := TSQLDataSet.Create(nil);
   ID.TransactionID  := 5;
@@ -125,9 +127,12 @@ begin
     fDMBaixaMaterial.cdsLoteMat.First;
     while not fDMBaixaMaterial.cdsLoteMat.Eof do
     begin
-      if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (StrToFloat(FormatFloat('0.00000',fDMBaixaMaterial.cdsLoteMatQTD_CONSUMO.AsFloat)) > 0) then
+      if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (StrToFloat(FormatFloat('0.00000',fDMBaixaMaterial.cdsLoteMatQTD_CONSUMO.AsFloat)) > 0)
+        and (StrToFloat(FormatFloat('0.00000',fDMBaixaMaterial.cdsLoteMatSaldo.AsFloat)) > 0) then
       begin
         prc_Gravar_Lote_Mat_Est;
+
+        vGravou := True;
 
         fDMBaixaMaterial.cdsLoteMat.Edit;
         fDMBaixaMaterial.cdsLoteMatQTD_EST_BAIXADO.AsFloat := StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatQTD_EST_BAIXADO.AsFloat + fDMBaixaMaterial.cdsLoteMatQTD_CONSUMO.AsFloat));
@@ -169,7 +174,8 @@ begin
       fDMBaixaMaterial.cdsLoteMat.Next;
     end;
 
-    fDMBaixaMaterial.cdsLoteMatEst.ApplyUpdates(0);
+    if vGravou then
+      fDMBaixaMaterial.cdsLoteMatEst.ApplyUpdates(0);
 
     dmDatabase.scoDados.Commit(ID);
   except
