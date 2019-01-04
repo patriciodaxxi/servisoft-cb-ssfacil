@@ -63,6 +63,12 @@ object DMCadDocEstoque: TDMCadDocEstoque
     object sdsDocEstoqueNUM_REQUISICAO: TIntegerField
       FieldName = 'NUM_REQUISICAO'
     end
+    object sdsDocEstoqueID_FUNCIONARIO_ENTR: TIntegerField
+      FieldName = 'ID_FUNCIONARIO_ENTR'
+    end
+    object sdsDocEstoqueNUM_LOTE: TIntegerField
+      FieldName = 'NUM_LOTE'
+    end
   end
   object dspDocEstoque: TDataSetProvider
     DataSet = sdsDocEstoque
@@ -135,6 +141,12 @@ object DMCadDocEstoque: TDMCadDocEstoque
     end
     object cdsDocEstoqueNUM_REQUISICAO: TIntegerField
       FieldName = 'NUM_REQUISICAO'
+    end
+    object cdsDocEstoqueID_FUNCIONARIO_ENTR: TIntegerField
+      FieldName = 'ID_FUNCIONARIO_ENTR'
+    end
+    object cdsDocEstoqueNUM_LOTE: TIntegerField
+      FieldName = 'NUM_LOTE'
     end
   end
   object dsDocEstoque: TDataSource
@@ -372,10 +384,11 @@ object DMCadDocEstoque: TDMCadDocEstoque
       'eco Endereco_Filial, FIL.cnpj_cpf CNPJ_CPF_Filial, FIL.nome NOME' +
       '_Filial, FIL.num_end Num_End_Filial, FIL.bairro Bairro_Filial,'#13#10 +
       'FIL.cidade Cidade_Filial, FIL.uf UF_Filial, FIL.cep Cep_Filial, ' +
-      'FN.NOME NOME_FUNCIONARIO'#13#10'FROM DOCESTOQUE DC'#13#10'INNER JOIN FILIAL ' +
-      'FIL'#13#10'ON DC.FILIAL = FIL.ID'#13#10'LEFT JOIN PESSOA PES'#13#10'ON DC.ID_PESSO' +
-      'A = PES.CODIGO'#13#10'LEFT JOIN FUNCIONARIO FN'#13#10'ON DC.ID_FUNCIONARIO =' +
-      ' FN.CODIGO'#13#10#13#10#13#10
+      'FN.NOME NOME_FUNCIONARIO, fentr.nome NOME_FUNCIONARIO_ENTR'#13#10'FROM' +
+      ' DOCESTOQUE DC'#13#10'INNER JOIN FILIAL FIL'#13#10'ON DC.FILIAL = FIL.ID'#13#10'LE' +
+      'FT JOIN PESSOA PES'#13#10'ON DC.ID_PESSOA = PES.CODIGO'#13#10'LEFT JOIN FUNC' +
+      'IONARIO FN'#13#10'ON DC.ID_FUNCIONARIO = FN.CODIGO'#13#10'left join funciona' +
+      'rio fentr'#13#10'on dc.id_funcionario = fentr.codigo'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -500,6 +513,16 @@ object DMCadDocEstoque: TDMCadDocEstoque
     end
     object cdsDocEstoque_ConsultaNUM_REQUISICAO: TIntegerField
       FieldName = 'NUM_REQUISICAO'
+    end
+    object cdsDocEstoque_ConsultaID_FUNCIONARIO_ENTR: TIntegerField
+      FieldName = 'ID_FUNCIONARIO_ENTR'
+    end
+    object cdsDocEstoque_ConsultaNUM_LOTE: TIntegerField
+      FieldName = 'NUM_LOTE'
+    end
+    object cdsDocEstoque_ConsultaNOME_FUNCIONARIO_ENTR: TStringField
+      FieldName = 'NOME_FUNCIONARIO_ENTR'
+      Size = 50
     end
   end
   object dsDocEstoque_Consulta: TDataSource
@@ -1912,8 +1935,11 @@ object DMCadDocEstoque: TDMCadDocEstoque
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT P.USA_LOCALIZACAO_LOTE, CONTROLA_DOC_CLIFORN'
-      'FROM PARAMETROS_EST P')
+      
+        'SELECT P.USA_LOCALIZACAO_LOTE, CONTROLA_DOC_CLIFORN, P.REQ_ENTRE' +
+        'GUE_POR, P.REQ_NUM_LOTE'
+      'FROM PARAMETROS_EST P'
+      '')
     SQLConnection = dmDatabase.scoDados
     Left = 832
     Top = 80
@@ -1924,6 +1950,16 @@ object DMCadDocEstoque: TDMCadDocEstoque
     end
     object qParametros_EstCONTROLA_DOC_CLIFORN: TStringField
       FieldName = 'CONTROLA_DOC_CLIFORN'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_EstREQ_ENTREGUE_POR: TStringField
+      FieldName = 'REQ_ENTREGUE_POR'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_EstREQ_NUM_LOTE: TStringField
+      FieldName = 'REQ_NUM_LOTE'
       FixedChar = True
       Size = 1
     end

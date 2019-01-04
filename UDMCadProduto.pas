@@ -2577,7 +2577,10 @@ begin
   cdsProduto_ConsumoIMP_ROTULO.AsString   := 'N';
   cdsProduto_ConsumoIMP_TALAO.AsString    := 'N';
   cdsProduto_ConsumoTINGIMENTO.AsString   := 'N';
-  cdsProduto_ConsumoESPECIFICO.AsString   := 'S';
+  if cdsProduto_Comb.RecordCount > 0 then
+    cdsProduto_ConsumoESPECIFICO.AsString := 'S'
+  else
+    cdsProduto_ConsumoESPECIFICO.AsString := 'N';
 end;
 
 procedure TdmCadProduto.cdsProdutoBeforePost(DataSet: TDataSet);

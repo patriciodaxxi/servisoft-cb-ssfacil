@@ -1512,6 +1512,12 @@ type
     cdsParametros_GeralPERMITE_CNPJ_DUPLICADO_TRANSP: TStringField;
     sdsParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField;
     cdsParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField;
+    sdsParametros_EstUSAR_FILIAL_GERAR_RES: TStringField;
+    sdsParametros_EstREQ_ENTREGUE_POR: TStringField;
+    sdsParametros_EstREQ_NUM_LOTE: TStringField;
+    cdsParametros_EstUSAR_FILIAL_GERAR_RES: TStringField;
+    cdsParametros_EstREQ_ENTREGUE_POR: TStringField;
+    cdsParametros_EstREQ_NUM_LOTE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspParametrosUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

@@ -4647,6 +4647,21 @@ object DMCadParametros: TDMCadParametros
       FixedChar = True
       Size = 1
     end
+    object sdsParametros_EstUSAR_FILIAL_GERAR_RES: TStringField
+      FieldName = 'USAR_FILIAL_GERAR_RES'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsParametros_EstREQ_ENTREGUE_POR: TStringField
+      FieldName = 'REQ_ENTREGUE_POR'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsParametros_EstREQ_NUM_LOTE: TStringField
+      FieldName = 'REQ_NUM_LOTE'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsParametros_Est: TClientDataSet
     Aggregates = <>
@@ -4730,6 +4745,21 @@ object DMCadParametros: TDMCadParametros
     end
     object cdsParametros_EstVERIFICA_ESTOQUE_ENT_PEDIDO: TStringField
       FieldName = 'VERIFICA_ESTOQUE_ENT_PEDIDO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsParametros_EstUSAR_FILIAL_GERAR_RES: TStringField
+      FieldName = 'USAR_FILIAL_GERAR_RES'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsParametros_EstREQ_ENTREGUE_POR: TStringField
+      FieldName = 'REQ_ENTREGUE_POR'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsParametros_EstREQ_NUM_LOTE: TStringField
+      FieldName = 'REQ_NUM_LOTE'
       FixedChar = True
       Size = 1
     end

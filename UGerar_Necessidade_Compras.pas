@@ -1099,7 +1099,12 @@ begin
     sds.SQLConnection := dmDatabase.scoDados;
     sds.NoMetadata := True;
     sds.GetMetadata := False;
-    sds.CommandText := 'UPDATE LOTE_MAT SET ID_FORNECEDOR = ' + fDMCadNecessidade_Compras.mMaterialID_Fornecedor.AsString + ' WHERE NUM_ORDEM = ' + IntToStr(CurrencyEdit2.AsInteger) + '   AND ID_MATERIAL = ' + fDMCadNecessidade_Compras.mMaterialID_Material.AsString + '   AND ID_COR = ' + fDMCadNecessidade_Compras.mMaterialID_Cor.AsString + '   AND TAMANHO = ' + QuotedStr(fDMCadNecessidade_Compras.mMaterialTamanho.AsString) + '   AND CARIMBOAUX = ' + QuotedStr(fDMCadNecessidade_Compras.mMaterialCarimbo_Aux.AsString);
+    sds.CommandText := 'UPDATE LOTE_MAT SET ID_FORNECEDOR = ' + fDMCadNecessidade_Compras.mMaterialID_Fornecedor.AsString
+                     + ' WHERE NUM_ORDEM = ' + IntToStr(CurrencyEdit2.AsInteger)
+                     + '   AND ID_MATERIAL = ' + fDMCadNecessidade_Compras.mMaterialID_Material.AsString
+                     + '   AND ID_COR = ' + fDMCadNecessidade_Compras.mMaterialID_Cor.AsString
+                   //  + '   AND TAMANHO = ' + QuotedStr(fDMCadNecessidade_Compras.mMaterialTamanho.AsString)
+                     + '   AND CARIMBOAUX = ' + QuotedStr(fDMCadNecessidade_Compras.mMaterialCarimbo_Aux.AsString);
     sds.ExecSQL();
 
   finally

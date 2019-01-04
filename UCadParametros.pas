@@ -1018,6 +1018,8 @@ type
     RxDBComboBox116: TRxDBComboBox;
     DBCheckBox300: TDBCheckBox;
     DBCheckBox301: TDBCheckBox;
+    DBCheckBox302: TDBCheckBox;
+    DBCheckBox303: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);

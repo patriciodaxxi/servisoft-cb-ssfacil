@@ -61,6 +61,10 @@ type
     RxDBLookupCombo10: TRxDBLookupCombo;
     Label1: TLabel;
     DBEdit1: TDBEdit;
+    Label4: TLabel;
+    RxDBLookupCombo2: TRxDBLookupCombo;
+    Label7: TLabel;
+    DBEdit2: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -153,6 +157,12 @@ var
   vID_Estoque: Integer;
   ID: TTransactionDesc;
 begin
+  if (fDMCadDocEstoque.qParametros_EstREQ_NUM_LOTE.AsString = 'S') and (fDMCadDocEstoque.cdsDocEstoqueNUM_LOTE.AsInteger <= 0) then
+  begin
+    MessageDlg('*** Nº do Lote é obrigatório!', mtError, [mbOk], 0);
+    exit;
+  end;
+
   prc_Calcular_Total;
   if fDMCadDocEstoque.cdsDocEstoqueNUM_REQUISICAO.AsInteger <= 0 then
     fDMCadDocEstoque.cdsDocEstoqueNUM_REQUISICAO.AsInteger := (fnc_Max_Codigo('DOCESTOQUE','NUM_REQUISICAO') + 1);
@@ -287,6 +297,15 @@ begin
   end;
   pnlLocalEstoque.Visible := (fDMCadDocEstoque.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
   prc_Abrir_Pessoa('S');
+  Label4.Visible           := (fDMCadDocEstoque.qParametros_EstREQ_ENTREGUE_POR.AsString = 'S');
+  RxDBLookupCombo2.Visible := (fDMCadDocEstoque.qParametros_EstREQ_ENTREGUE_POR.AsString = 'S');
+  Label7.Visible           := (fDMCadDocEstoque.qParametros_EstREQ_NUM_LOTE.AsString = 'S');
+  DBEdit2.Visible          := (fDMCadDocEstoque.qParametros_EstREQ_NUM_LOTE.AsString = 'S');
+  
+  
+
+
+
 end;
 
 procedure TfrmCadRequisicao.prc_Consultar(ID: Integer);

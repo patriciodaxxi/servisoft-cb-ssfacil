@@ -22,9 +22,9 @@ object frmCadRequisicao: TfrmCadRequisicao
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 929
-    Height = 565
-    ActivePage = TS_Consulta
+    Width = 937
+    Height = 572
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadRequisicao: TfrmCadRequisicao
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -40,9 +40,9 @@ object frmCadRequisicao: TfrmCadRequisicao
       Caption = 'Consulta'
       object SMDBGrid1: TSMDBGrid
         Left = 0
-        Top = 82
-        Width = 925
-        Height = 443
+        Top = 105
+        Width = 933
+        Height = 427
         Align = alClient
         Ctl3D = False
         DataSource = DMCadDocEstoque.dsDocEstoque_Consulta
@@ -112,8 +112,8 @@ object frmCadRequisicao: TfrmCadRequisicao
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 925
-        Height = 50
+        Width = 933
+        Height = 73
         Align = alTop
         Color = clSilver
         TabOrder = 0
@@ -241,8 +241,8 @@ object frmCadRequisicao: TfrmCadRequisicao
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 525
-        Width = 925
+        Top = 532
+        Width = 933
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -258,7 +258,7 @@ object frmCadRequisicao: TfrmCadRequisicao
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 925
+        Width = 933
         Height = 32
         Align = alTop
         Color = clSilver
@@ -562,7 +562,7 @@ object frmCadRequisicao: TfrmCadRequisicao
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 925
+        Width = 933
         Height = 34
         Align = alTop
         Color = 8404992
@@ -788,15 +788,15 @@ object frmCadRequisicao: TfrmCadRequisicao
       object pnlCadastro: TPanel
         Left = 0
         Top = 34
-        Width = 925
-        Height = 185
+        Width = 933
+        Height = 196
         Align = alTop
         Enabled = False
         TabOrder = 0
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 923
+          Width = 931
           Height = 31
           Align = alTop
           Color = clSilver
@@ -810,12 +810,12 @@ object frmCadRequisicao: TfrmCadRequisicao
             Caption = 'Filial:'
           end
           object Label17: TLabel
-            Left = 734
+            Left = 772
             Top = 14
-            Width = 61
+            Width = 23
             Height = 13
             Alignment = taRightJustify
-            Caption = 'N'#186' Req. (ID):'
+            Caption = ' (ID):'
           end
           object lblNome_Filial: TLabel
             Left = 312
@@ -841,19 +841,20 @@ object frmCadRequisicao: TfrmCadRequisicao
             Color = clSilver
             DataField = 'ID'
             DataSource = DMCadDocEstoque.dsDocEstoque
+            ReadOnly = True
             TabOrder = 0
           end
         end
         object pnlCliente: TPanel
           Left = 1
           Top = 32
-          Width = 923
-          Height = 152
+          Width = 931
+          Height = 163
           Align = alClient
           TabOrder = 1
           object Label18: TLabel
             Left = 77
-            Top = 40
+            Top = 36
             Width = 26
             Height = 13
             Alignment = taRightJustify
@@ -869,7 +870,7 @@ object frmCadRequisicao: TfrmCadRequisicao
           end
           object Label2: TLabel
             Left = 82
-            Top = 80
+            Top = 96
             Width = 22
             Height = 13
             Alignment = taRightJustify
@@ -877,15 +878,15 @@ object frmCadRequisicao: TfrmCadRequisicao
           end
           object Label3: TLabel
             Left = 42
-            Top = 61
+            Top = 55
             Width = 62
             Height = 13
             Alignment = taRightJustify
             Caption = 'Requisitante:'
           end
           object SpeedButton2: TSpeedButton
-            Left = 594
-            Top = 54
+            Left = 425
+            Top = 45
             Width = 23
             Height = 22
             Hint = 'Atualiza tabela de Funcion'#225'rios'
@@ -934,16 +935,32 @@ object frmCadRequisicao: TfrmCadRequisicao
             OnClick = SpeedButton2Click
           end
           object Label1: TLabel
-            Left = 22
-            Top = 17
-            Width = 81
+            Left = 32
+            Top = 13
+            Width = 71
             Height = 13
             Alignment = taRightJustify
-            Caption = 'Num Requisi'#231#227'o:'
+            Caption = 'N'#186' Requisi'#231#227'o:'
+          end
+          object Label4: TLabel
+            Left = 39
+            Top = 76
+            Width = 65
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Entregue Por:'
+          end
+          object Label7: TLabel
+            Left = 312
+            Top = 34
+            Width = 39
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'N'#186' Lote:'
           end
           object DBDateEdit1: TDBDateEdit
             Left = 105
-            Top = 31
+            Top = 27
             Width = 117
             Height = 21
             DataField = 'DTMOVIMENTO'
@@ -963,22 +980,22 @@ object frmCadRequisicao: TfrmCadRequisicao
             DataSource = DMCadDocEstoque.dsDocEstoque
             MaxLength = 18
             ReadOnly = True
-            TabOrder = 3
+            TabOrder = 5
           end
           object DBMemo1: TDBMemo
             Left = 105
-            Top = 76
+            Top = 90
             Width = 513
             Height = 69
             DataField = 'OBS'
             DataSource = DMCadDocEstoque.dsDocEstoque
             ScrollBars = ssVertical
-            TabOrder = 2
+            TabOrder = 4
           end
           object RxDBLookupCombo3: TRxDBLookupCombo
             Left = 105
-            Top = 54
-            Width = 488
+            Top = 48
+            Width = 320
             Height = 21
             DropDownCount = 8
             DataField = 'ID_FUNCIONARIO'
@@ -986,11 +1003,11 @@ object frmCadRequisicao: TfrmCadRequisicao
             LookupField = 'CODIGO'
             LookupDisplay = 'NOME'
             LookupSource = DMCadDocEstoque.dsFuncionario
-            TabOrder = 1
+            TabOrder = 2
           end
           object DBEdit1: TDBEdit
             Left = 105
-            Top = 9
+            Top = 5
             Width = 150
             Height = 21
             TabStop = False
@@ -999,15 +1016,40 @@ object frmCadRequisicao: TfrmCadRequisicao
             DataField = 'NUM_REQUISICAO'
             DataSource = DMCadDocEstoque.dsDocEstoque
             MaxLength = 18
-            TabOrder = 4
+            TabOrder = 6
+          end
+          object RxDBLookupCombo2: TRxDBLookupCombo
+            Left = 105
+            Top = 69
+            Width = 320
+            Height = 21
+            DropDownCount = 8
+            DataField = 'ID_FUNCIONARIO_ENTR'
+            DataSource = DMCadDocEstoque.dsDocEstoque
+            LookupField = 'CODIGO'
+            LookupDisplay = 'NOME'
+            LookupSource = DMCadDocEstoque.dsFuncionario
+            TabOrder = 3
+          end
+          object DBEdit2: TDBEdit
+            Left = 353
+            Top = 26
+            Width = 72
+            Height = 21
+            TabStop = False
+            CharCase = ecUpperCase
+            DataField = 'NUM_REQUISICAO'
+            DataSource = DMCadDocEstoque.dsDocEstoque
+            MaxLength = 18
+            TabOrder = 1
           end
         end
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 219
-        Width = 925
-        Height = 323
+        Top = 230
+        Width = 933
+        Height = 319
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -1024,8 +1066,8 @@ object frmCadRequisicao: TfrmCadRequisicao
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 59
-            Width = 921
-            Height = 241
+            Width = 929
+            Height = 237
             Align = alClient
             DataSource = DMCadDocEstoque.dsDocEstoque_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1066,13 +1108,17 @@ object frmCadRequisicao: TfrmCadRequisicao
               item
                 Expanded = False
                 FieldName = 'REFERENCIA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Refer'#234'ncia'
                 Width = 89
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'NOME_PRODUTO'
-                Width = 345
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Produto'
+                Width = 303
                 Visible = True
               end
               item
@@ -1150,7 +1196,7 @@ object frmCadRequisicao: TfrmCadRequisicao
           object pnlItem: TPanel
             Left = 0
             Top = 26
-            Width = 921
+            Width = 929
             Height = 33
             Align = alTop
             Color = clSilver
@@ -1380,7 +1426,7 @@ object frmCadRequisicao: TfrmCadRequisicao
           object pnlLocalEstoque: TPanel
             Left = 0
             Top = 0
-            Width = 921
+            Width = 929
             Height = 26
             Align = alTop
             Enabled = False

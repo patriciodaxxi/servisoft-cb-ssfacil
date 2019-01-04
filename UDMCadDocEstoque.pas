@@ -400,6 +400,15 @@ type
     frxEtiqEstoque: TfrxDBDataset;
     cdsEtiqEstoqueFANTASIA: TStringField;
     cdsEtiqEstoqueCODBARRA: TStringField;
+    sdsDocEstoqueID_FUNCIONARIO_ENTR: TIntegerField;
+    sdsDocEstoqueNUM_LOTE: TIntegerField;
+    cdsDocEstoqueID_FUNCIONARIO_ENTR: TIntegerField;
+    cdsDocEstoqueNUM_LOTE: TIntegerField;
+    qParametros_EstREQ_ENTREGUE_POR: TStringField;
+    qParametros_EstREQ_NUM_LOTE: TStringField;
+    cdsDocEstoque_ConsultaID_FUNCIONARIO_ENTR: TIntegerField;
+    cdsDocEstoque_ConsultaNUM_LOTE: TIntegerField;
+    cdsDocEstoque_ConsultaNOME_FUNCIONARIO_ENTR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspDocEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
