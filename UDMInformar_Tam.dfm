@@ -1,7 +1,7 @@
 object DMInformar_Tam: TDMInformar_Tam
   OldCreateOrder = False
-  Left = 421
-  Top = 126
+  Left = 1787
+  Top = 130
   Height = 434
   Width = 883
   object mTamanho: TClientDataSet

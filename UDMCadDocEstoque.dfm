@@ -1,8 +1,8 @@
 object DMCadDocEstoque: TDMCadDocEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 163
-  Top = 21
+  Left = 1529
+  Top = 25
   Height = 649
   Width = 1001
   object sdsDocEstoque: TSQLDataSet
@@ -2073,5 +2073,33 @@ object DMCadDocEstoque: TDMCadDocEstoque
     BCDToCurrency = False
     Left = 168
     Top = 336
+  end
+  object sdsMatLote: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT L.num_lote, PC.ID, PC.id_cor_combinacao, PMAT.id_material' +
+      ', PMAT.id_cor ID_COR_MAT, PMAT.id_posicao,'#13#10'COMB.NOME NOME_COR_M' +
+      'AT, PS.NOME NOME_POSICAO, MAT.NOME NOME_MATERIAL, PMAT.qtd_consu' +
+      'mo,'#13#10'L.qtd QTD_PROD, L.qtd_pendente QTD_PROD_PEND, L.qtd_produzi' +
+      'do QTD_PROD_PRODUZIDO,'#13#10'(SELECT SUM(DCI.QTD) FROM docestoque DC'#13 +
+      #10'  INNER JOIN docestoque_itens DCI ON DC.ID = DCI.ID'#13#10'  WHERE DC' +
+      '.NUM_LOTE = L.NUM_LOTE) QTD_MAT_USADO'#13#10'FROM LOTE L'#13#10'INNER JOIN P' +
+      'RODUTO_COMB PC'#13#10'ON L.ID_PRODUTO = PC.ID'#13#10'AND L.id_combinacao = P' +
+      'C.id_cor_combinacao'#13#10'INNER JOIN PRODUTO_COMB_MAT PMAT'#13#10'ON PC.ID ' +
+      '= PMAT.ID'#13#10'AND PC.item = PMAT.item'#13#10'INNER JOIN PRODUTO MAT'#13#10'ON P' +
+      'MAT.ID_MATERIAL = MAT.ID'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON PMAT.ID_' +
+      'COR = COMB.ID'#13#10'LEFT JOIN POSICAO PS'#13#10'ON PMAT.ID_POSICAO = PS.ID'#13 +
+      #10'WHERE L.NUM_LOTE = :NUM_LOTE'#13#10#13#10#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'NUM_LOTE'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 168
+    Top = 512
   end
 end

@@ -1,6 +1,6 @@
 object frmCadRequisicao: TfrmCadRequisicao
-  Left = 205
-  Top = 70
+  Left = 1571
+  Top = 74
   Width = 945
   Height = 603
   Caption = 'Requisi'#231#227'o de Produto/Material'
@@ -1036,7 +1036,6 @@ object frmCadRequisicao: TfrmCadRequisicao
             Top = 26
             Width = 72
             Height = 21
-            TabStop = False
             CharCase = ecUpperCase
             DataField = 'NUM_REQUISICAO'
             DataSource = DMCadDocEstoque.dsDocEstoque
