@@ -6,7 +6,7 @@ object fCupomFiscalParcela: TfCupomFiscalParcela
   Caption = 'fCupomFiscalParcela'
   ClientHeight = 215
   ClientWidth = 571
-  Color = 5585152
+  Color = 3683329
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -94,7 +94,7 @@ object fCupomFiscalParcela: TfCupomFiscalParcela
     Width = 571
     Height = 41
     Align = alBottom
-    Color = 7950848
+    Color = 7300393
     TabOrder = 4
     object btFinalizar: TNxButton
       Left = 98
