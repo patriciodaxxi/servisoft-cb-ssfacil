@@ -717,7 +717,6 @@ object fCupomFiscal: TfCupomFiscal
         Width = 386
         Height = 56
         Align = alTop
-        Color = 7300393
         TabOrder = 2
         object Label9: TLabel
           Left = 9
@@ -727,7 +726,7 @@ object fCupomFiscal: TfCupomFiscal
           Alignment = taRightJustify
           Caption = 'Desconto:'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
+          Font.Color = 3683329
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
@@ -741,7 +740,7 @@ object fCupomFiscal: TfCupomFiscal
           Alignment = taRightJustify
           Caption = '%'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
+          Font.Color = 3683329
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
@@ -755,7 +754,7 @@ object fCupomFiscal: TfCupomFiscal
           Alignment = taRightJustify
           Caption = 'R$'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
+          Font.Color = 3683329
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
@@ -769,7 +768,7 @@ object fCupomFiscal: TfCupomFiscal
           Alignment = taRightJustify
           Caption = 'Valor'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
+          Font.Color = 3683329
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
@@ -966,7 +965,7 @@ object fCupomFiscal: TfCupomFiscal
       Height = 54
       Align = alBottom
       Anchors = [akLeft, akBottom]
-      Color = 7300393
+      Color = 3683329
       Constraints.MaxHeight = 54
       Constraints.MaxWidth = 400
       Constraints.MinHeight = 54
