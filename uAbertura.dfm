@@ -1,6 +1,6 @@
 object frmAbertura: TfrmAbertura
-  Left = 402
-  Top = 0
+  Left = 1768
+  Top = 4
   BorderIcons = []
   BorderStyle = bsNone
   ClientHeight = 438

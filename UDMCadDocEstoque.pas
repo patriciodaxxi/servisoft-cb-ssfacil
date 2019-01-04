@@ -409,6 +409,7 @@ type
     cdsDocEstoque_ConsultaID_FUNCIONARIO_ENTR: TIntegerField;
     cdsDocEstoque_ConsultaNUM_LOTE: TIntegerField;
     cdsDocEstoque_ConsultaNOME_FUNCIONARIO_ENTR: TStringField;
+    sdsMatLote: TSQLDataSet;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspDocEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
