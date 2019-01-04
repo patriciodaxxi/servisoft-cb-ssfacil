@@ -24,7 +24,7 @@ object frmCadRequisicao: TfrmCadRequisicao
     Top = 0
     Width = 937
     Height = 572
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadRequisicao: TfrmCadRequisicao
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -40,9 +40,9 @@ object frmCadRequisicao: TfrmCadRequisicao
       Caption = 'Consulta'
       object SMDBGrid1: TSMDBGrid
         Left = 0
-        Top = 105
+        Top = 84
         Width = 933
-        Height = 427
+        Height = 448
         Align = alClient
         Ctl3D = False
         DataSource = DMCadDocEstoque.dsDocEstoque_Consulta
@@ -113,7 +113,7 @@ object frmCadRequisicao: TfrmCadRequisicao
         Left = 0
         Top = 32
         Width = 933
-        Height = 73
+        Height = 52
         Align = alTop
         Color = clSilver
         TabOrder = 0
