@@ -33,6 +33,17 @@ type
     cdsConfig_EmailSMTP_SENHA: TStringField;
     cdsConfig_EmailSOLICITAR_CONFIRMACAO: TStringField;
     cdsConfig_EmailBASE: TSmallintField;
+    SQLConsulta: TSQLQuery;
+    sdsFilial: TSQLDataSet;
+    dspFilial: TDataSetProvider;
+    cdsFilial: TClientDataSet;
+    dsFilial: TDataSource;
+    sdsFilialID: TIntegerField;
+    sdsFilialNOME: TStringField;
+    sdsFilialCNPJ_CPF: TStringField;
+    cdsFilialID: TIntegerField;
+    cdsFilialNOME: TStringField;
+    cdsFilialCNPJ_CPF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspConfig_EmailUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

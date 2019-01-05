@@ -127,4 +127,65 @@ object DMCadConfig_Email: TDMCadConfig_Email
     Left = 264
     Top = 32
   end
+  object SQLConsulta: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 56
+    Top = 152
+  end
+  object sdsFilial: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM FILIAL'#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 56
+    Top = 96
+    object sdsFilialID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object sdsFilialNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object sdsFilialCNPJ_CPF: TStringField
+      FieldName = 'CNPJ_CPF'
+      Size = 18
+    end
+  end
+  object dspFilial: TDataSetProvider
+    DataSet = sdsFilial
+    OnUpdateError = dspConfig_EmailUpdateError
+    Left = 128
+    Top = 96
+  end
+  object cdsFilial: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspFilial'
+    OnNewRecord = cdsConfig_EmailNewRecord
+    Left = 192
+    Top = 96
+    object cdsFilialID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsFilialNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsFilialCNPJ_CPF: TStringField
+      FieldName = 'CNPJ_CPF'
+      Size = 18
+    end
+  end
+  object dsFilial: TDataSource
+    DataSet = cdsFilial
+    Left = 264
+    Top = 96
+  end
 end
