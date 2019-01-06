@@ -52,7 +52,7 @@ object fMenu1: TfMenu1
       Height = 30
       Caption = 'M'#243'dulo Varejo SSF'#225'cil'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = 7300393
       Font.Height = -27
       Font.Name = 'Courier New'
       Font.Style = []
@@ -61,14 +61,14 @@ object fMenu1: TfMenu1
     object Label3: TLabel
       Left = 8
       Top = 8
-      Width = 572
-      Height = 89
+      Width = 607
+      Height = 93
       Caption = 'SSCupomFiscal'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = 3683329
       Font.Height = -80
       Font.Name = 'Arial'
-      Font.Style = []
+      Font.Style = [fsBold]
       ParentFont = False
     end
     object Panel1: TPanel

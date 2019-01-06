@@ -3,8 +3,9 @@ unit UCadConfig_Email;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadConfig_Email, Mask, 
-  UCBase, StdCtrls, RxDBComb, DBCtrls, ExtCtrls, DBGrids, RzTabs, DB, NxCollection, RzButton, Menus;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadConfig_Email, Mask,
+  UCBase, StdCtrls, RxDBComb, DBCtrls, ExtCtrls, DBGrids, RzTabs, DB, NxCollection, RzButton, Menus, uNFeComandos,
+  RxLookup;
 
 type
   TfrmCadConfig_Email = class(TForm)
@@ -31,7 +32,7 @@ type
     Label4: TLabel;
     EdNomeRemetente: TDBEdit;
     edEmailRemetente: TDBEdit;
-    GroupBox6: TGroupBox;
+    GroupBox3: TGroupBox;
     Label5: TLabel;
     Label7: TLabel;
     Label9: TLabel;
@@ -57,6 +58,12 @@ type
     miYahooBR: TMenuItem;
     miUOL: TMenuItem;
     miBOL: TMenuItem;
+    gpbTesteEmail: TGroupBox;
+    Label2: TLabel;
+    edtFilial: TLabel;
+    btnEnviaEmailTeste: TBitBtn;
+    ComboFilial: TRxDBLookupCombo;
+    edtEmailDestinatario: TEdit;
     btnConfigurar: TRzMenuButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
@@ -73,6 +80,10 @@ type
     procedure btnPesquisarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure doConfigurarPadrao(Sender: TObject);
+    procedure btnEnviaEmailTesteClick(Sender: TObject);
+    procedure prc_Configurar_Email;
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMCadConfig_Email: TDMCadConfig_Email;
@@ -90,7 +101,7 @@ var
 
 implementation
 
-uses DmdDatabase, rsDBUtils;
+uses DmdDatabase, rsDBUtils, uUtilPadrao;
 
 {$R *.dfm}
 
@@ -151,6 +162,7 @@ procedure TfrmCadConfig_Email.FormShow(Sender: TObject);
 begin
   fDMCadConfig_Email := TDMCadConfig_Email.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMCadConfig_Email);
+  fDMCadConfig_Email.cdsFilial.Open;
 end;
 
 procedure TfrmCadConfig_Email.prc_Consultar;
@@ -302,6 +314,67 @@ begin
         fDMCadConfig_Email.cdsConfig_EmailSMTP_REQUER_SSL.AsString := '1';
       end;
   end;
+end;
+
+procedure TfrmCadConfig_Email.btnEnviaEmailTesteClick(Sender: TObject);
+var
+  vLocalServidorNFe,
+  vSenhaEmail,
+  vEmailAux,
+  vCNPJ_Filial,
+  vDadosCorpoEmail,
+  vEmailPrincipal : string;
+  lista_Anexo: TStringList;
+begin
+  if edtEmailDestinatario.Text = '' then
+  begin
+    ShowMessage('Informe o destinatário');
+    edtEmailDestinatario.SetFocus;
+    Exit;
+  end;
+  if ComboFilial.KeyValue <= 0 then
+  begin
+    ShowMessage('Informe a filial');
+    ComboFilial.SetFocus;
+    Exit;
+  end;
+  vCNPJ_Filial := Monta_Texto(fDMCadConfig_Email.cdsFilialCNPJ_CPF.AsString,14);
+  vEmailPrincipal := edtEmailDestinatario.Text;
+  vEmailAux := '';
+  vDadosCorpoEmail := 'Teste de configuração de email do sistema SSFacil';
+  prc_Configurar_Email;
+  vLocalServidorNFe := fDMCadConfig_Email.SQLConsulta.fieldbyname('LOCALSERVIDORNFE').AsString;
+  vSenhaEmail := Descriptografar(fDMCadConfig_Email.cdsConfig_EmailBASE.AsInteger
+                                 , 'ssfacil'
+                                 , fDMCadConfig_Email.cdsConfig_EmailSMTP_SENHA.AsString );
+  lista_Anexo := TStringList.Create;
+  try
+    EnviarEmail2(vLocalServidorNFe,vCNPJ_Filial,fDMCadConfig_Email.cdsConfig_EmailREMETENTE_EMAIL.AsString,
+                 fDMCadConfig_Email.cdsConfig_EmailREMETENTE_NOME.AsString,fDMCadConfig_Email.cdsConfig_EmailSMTP_CLIENTE.AsString,
+                 fDMCadConfig_Email.cdsConfig_EmailSMTP_PORTA.AsString,fDMCadConfig_Email.cdsConfig_EmailSMTP_REQUER_SSL.AsString,
+                 fDMCadConfig_Email.cdsConfig_EmailSMTP_USUARIO.AsString,vSenhaEmail,fDMCadConfig_Email.cdsConfig_EmailSOLICITAR_CONFIRMACAO.AsString,
+                 vEmailPrincipal,vEmailAux,
+                 'Email Teste: ' + fDMCadConfig_Email.cdsConfig_EmailREMETENTE_NOME.AsString,
+                 vDadosCorpoEmail,lista_Anexo);
+  finally
+    FreeAndNil(lista_Anexo);
+  end;
+end;
+
+procedure TfrmCadConfig_Email.prc_Configurar_Email;
+begin
+  fDMCadConfig_Email.SQLConsulta.SQL.Clear;
+  fDMCadConfig_Email.SQLConsulta.SQL.Add('select LOCALSERVIDORNFE from parametros');
+  fDMCadConfig_Email.SQLConsulta.Open;
+end;
+
+procedure TfrmCadConfig_Email.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Shift = [ssCtrl]) and (Key = 87) then //CTRL W
+  begin
+    gpbTesteEmail.Visible := not gpbTesteEmail.Visible;
+  end
 end;
 
 end.

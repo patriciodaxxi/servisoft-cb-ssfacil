@@ -1,7 +1,7 @@
 object frmCadConfig_Email: TfrmCadConfig_Email
-  Left = 288
-  Top = 119
-  Width = 825
+  Left = 216
+  Top = 65
+  Width = 901
   Height = 541
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Cadastro de Emails'
@@ -17,15 +17,16 @@ object frmCadConfig_Email: TfrmCadConfig_Email
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 817
-    Height = 510
-    ActivePage = TS_Consulta
+    Width = 885
+    Height = 502
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +34,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -41,8 +42,8 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 813
-        Height = 403
+        Width = 881
+        Height = 395
         Align = alClient
         Ctl3D = False
         DataSource = DMCadConfig_Email.dsConfig_Email
@@ -153,7 +154,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 813
+        Width = 881
         Height = 32
         Align = alTop
         Color = clSilver
@@ -381,8 +382,8 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 470
-        Width = 813
+        Top = 462
+        Width = 881
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -398,7 +399,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 813
+        Width = 881
         Height = 35
         Align = alTop
         Color = clSilver
@@ -499,7 +500,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 813
+        Width = 881
         Height = 35
         Align = alTop
         Color = 8404992
@@ -725,16 +726,17 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 813
-        Height = 452
+        Width = 881
+        Height = 444
         Align = alClient
         Enabled = False
         TabOrder = 0
         object GroupBox1: TGroupBox
-          Left = 8
-          Top = 85
-          Width = 713
+          Left = 1
+          Top = 56
+          Width = 879
           Height = 73
+          Align = alTop
           Caption = ' Identifica'#231#227'o do Remetente do e-mail:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -810,11 +812,12 @@ object frmCadConfig_Email: TfrmCadConfig_Email
             TabOrder = 1
           end
         end
-        object GroupBox6: TGroupBox
-          Left = 8
-          Top = 170
-          Width = 713
+        object GroupBox3: TGroupBox
+          Left = 1
+          Top = 129
+          Width = 879
           Height = 73
+          Align = alTop
           Caption = ' SMTP'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -974,12 +977,23 @@ object frmCadConfig_Email: TfrmCadConfig_Email
             ValueChecked = '1'
             ValueUnchecked = '0'
           end
+          object btnConfigurar: TRzMenuButton
+            Left = 711
+            Top = 37
+            Width = 113
+            Height = 28
+            Align = alCustom
+            Caption = 'Config. Padr'#227'o'
+            TabOrder = 5
+            DropDownMenu = pmConfigurar
+          end
         end
         object GroupBox7: TGroupBox
-          Left = 8
-          Top = 257
-          Width = 713
+          Left = 1
+          Top = 202
+          Width = 879
           Height = 36
+          Align = alTop
           Caption = 'Op'#231#245'es da Mensagem '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1008,10 +1022,11 @@ object frmCadConfig_Email: TfrmCadConfig_Email
           end
         end
         object GroupBox2: TGroupBox
-          Left = 8
-          Top = 21
-          Width = 713
+          Left = 1
+          Top = 1
+          Width = 879
           Height = 55
+          Align = alTop
           Caption = 'Identifica'#231#227'o da Configura'#231#227'o'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1090,12 +1105,139 @@ object frmCadConfig_Email: TfrmCadConfig_Email
             TabOrder = 1
           end
         end
-        object btnConfigurar: TRzMenuButton
-          Left = 611
-          Top = 296
-          Caption = 'Config. Padr'#227'o'
+        object gpbTesteEmail: TGroupBox
+          Left = 1
+          Top = 238
+          Width = 879
+          Height = 73
+          Align = alTop
+          Caption = 'Teste Email'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 4
-          DropDownMenu = pmConfigurar
+          Visible = False
+          object Label2: TLabel
+            Left = 6
+            Top = 22
+            Width = 59
+            Height = 13
+            Caption = 'Destinat'#225'rio:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
+          object edtFilial: TLabel
+            Left = 42
+            Top = 49
+            Width = 23
+            Height = 13
+            Caption = 'Filial:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
+          object btnEnviaEmailTeste: TBitBtn
+            Left = 393
+            Top = 37
+            Width = 110
+            Height = 28
+            Caption = 'Email Teste'
+            TabOrder = 0
+            OnClick = btnEnviaEmailTesteClick
+            Glyph.Data = {
+              C6070000424DC60700000000000036000000280000001D000000160000000100
+              1800000000009007000000000000000000000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFE0FFFED0FDFFD8FFFFC8FFFFCCF5F6D0FCFCD8FFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3
+              FFFFC8FFFFCDFFFF9EC7C797ADAD758183728F8EC8FFFFCBFEFEFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD0FFFFC9FFFFBFF7F7B0DCDC6F8B87
+              717C7C838A8BA9B2B3828B8CAACFD1C3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFC9FFFFCEFFFFBCEFEF90C2BF6F808380868A979FA29CA8ACAAB5B9BAC7
+              CBBFC7CA868F92BEFFFEC6FEFEFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCDFFFFC1FFFFC1F1F298B9
+              B767737685888E9DA4A9A8B8BBA1ACB1ABB7BBC2CFD3C5D1D5CEDDE0AAB4B997
+              B6B9C8FFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFC9FFFFAFE2E19DBFC27A868A868A8F9DA7ABADB9BDB7
+              C4C7B9C8CBA9B2B8C6D2D6C8D9DCCBDBDECBE0E3D8E5E89AA7ABC2F8F8C3FFFF
+              FFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7FFFFAF
+              EFEEA4C3C36A797A888F909EA8ACADB8BCB5C0C4BECACEC4D0D4AAB5B9CCD8DC
+              CFD9DECDDFE2D2E2E5D2E3E6DAEBEEC8D5D899B2B5C5FFFFFFFFFFFFFFFFFFFF
+              FF00FFFFFFFFFFFFFFFFFFFFFFFFC1FEFDB7EBEC84A4A57881877A858AA3ADB0
+              B0BBBEB7C3C7BDC9CDC4CFD3CBD7DBBCC8CCC7D6DACDDEE1D1E2E5D3E4E7D5E7
+              EAD7E8EBD9EBEEE4F5F8A8B2B4AADEDDC2FFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+              D4FFFFB4EEEB7D9496808E918A9095A2ABB0B1BCC0B6C3C7BCC8CCC2CED2C7D3
+              D7CEDADEB3BFC3C1CCD0CFE0E3D3E4E7D4E5E8D8E9ECD8E9ECDBECEFDDEDF0E0
+              F1F4D9E8E99DB6B8C9FFFFFFFFFFFFFFFF00BEFAFBA7D4D47082817072789DA4
+              A8AAB5B9B3C0C4BEC8CEC0CFD2C1D2D5C5D8DAC8D5D9CDD9DDC9D5D9BFCBCFCA
+              D6DACFDEE1D3E4E7D4E5E8D8E9ECD9EAEDDCEDF0DCEEF0DDEDF1EBFAFEBCC5C9
+              B0D4D4C1FFFFFFFFFF0097B5B77580829AA1A0AAB6B9B5C2C6BBC7CCC0CCCFC3
+              CFD4CBD9DDCADBDECDDEE2B9C4C89CA8AA9CA8ADD0DDE1D4E1E5C9D9DCCADCDF
+              CBDDE0D1E2E5D4E5E8D5E6E9D9EAEDDCEDF0E2F0F4E7F8FA9AABADB7F2F3C3FF
+              FE00D2F1F3BDCBD0B0BDC0B4C6C8BDCFD2C4D5D8C2D3D5C2D4D7D1DFE1CAD6DA
+              A9B6BACBD7D7C3CFD0566263151E22585F64969EA3BFC9CDCBD5D9C0D1D7CDDD
+              E0D8EAEDD7E8EBD9EAEDDEEFF2E9FBFECCDADDADD0D1C3FFFF00BCFFFFC7FEFF
+              CCD2D4CADCDFCCDDE0D0E1E4D1E2E5D3E4E7D4E3E6BFCBD0B7C4C8E6F6FBE7F8
+              FDFFFFFFFFFFFFFFFFFFE6F7FA6C7677656C6EC2CACDA1ACB16C797BABBABDC4
+              D4D7B0C1C4BBCBCFE9F5F8A8B0B7B3E1E200BDFEFFC3FFFFCDE1E3CFDDE1D1E2
+              E5D4E5E8D4E5E8D6E7EACFE1E4B5C6C8E2F5F8E1F2F5DFF1F4DDEFF3DDF1F4DC
+              F0F3E2F4F7F9FFFFFAFFFFF0FFFFE2F3F4D0D8D8E1EEEFE7F5F9B9C2C4B9C4C5
+              E5F1F3C3DCE0B6E4E700FFFFFFFFFFFFCDF5F3DAE6E9D7E8EBD8E9ECDAEBEED6
+              E7EAB8CACDCCDDDFE6F8FBE0F1F4E2F3F6E3F4F7E2F2F5E2F3F6E2F2F5E0F2F5
+              E1F2F6E4F4F7E8F7F8EBFAFCE5F6FAE4F9FCD6EFF1D2FFFFB9FBFBFFFFFFFFFF
+              FF00FFFFFFFFFFFFFFFFFFDCEBEFDBECEEDAEBEEDBECEFC4D5D9BCCCCDEBFBFC
+              E2F4F7E2F2F5E2F2F5E1F2F5E1F2F6E4F5F8E5F5F8E7F5F8E7F3F7E6F4F4DEF5
+              F3CEF1F0C1F6F7B8F8F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+              FFFFFFD9F5F6DFECF1DEEEF2DBEBEEBECFD2E2F3F5E3F4F8E3F5F8E3F4F6E3F4
+              F7E4F4F8E6F4F7E8F2F5E5F0F3DDF2F5D0F1F4C4FDFDBBFBF9FFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFDFED
+              F5E0EEF4C3D4D7D4E5E8E9FBFEE4F5F8E7F5F9E9F5F7E6F6F8DBEDF0D9F4F7C6
+              F6F5BFFCFDB9FCFCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFDCF3F7D7E6E9D1E3E2F0
+              FCFDEBF2F5E9F7FAD9F0F2D6F7F9C6F9F7B9F9F7B9FDFCFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FF00FFFFFFFFFFFFFFFFFFFFFFFFD3FBFADAE6E8E7F4F6D4F2F2CEF8F8C0FAF9
+              BCFEFDBBFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFC8F5F6C6FCFEB9FCFCBBFFFEC2FCFECEFDFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFF4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFF00}
+          end
+          object ComboFilial: TRxDBLookupCombo
+            Left = 70
+            Top = 44
+            Width = 312
+            Height = 21
+            DropDownCount = 8
+            DropDownWidth = 500
+            LookupField = 'ID'
+            LookupDisplay = 'NOME'
+            LookupSource = DMCadConfig_Email.dsFilial
+            TabOrder = 1
+          end
+          object edtEmailDestinatario: TEdit
+            Left = 72
+            Top = 16
+            Width = 306
+            Height = 21
+            TabOrder = 2
+          end
         end
       end
     end
@@ -1104,12 +1246,12 @@ object frmCadConfig_Email: TfrmCadConfig_Email
     GroupName = 'Configura'#231#227'o de Email'
     UserControl = fMenu.UserControl1
     NotAllowed = naInvisible
-    Left = 625
-    Top = 391
+    Left = 609
+    Top = 23
   end
   object pmConfigurar: TPopupMenu
     Left = 728
-    Top = 352
+    Top = 312
     object miGmail: TMenuItem
       Caption = 'Gmail'
       OnClick = doConfigurarPadrao
