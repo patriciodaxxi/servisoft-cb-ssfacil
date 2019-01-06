@@ -4,7 +4,7 @@ object frmInformar_Tam: TfrmInformar_Tam
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Informar a quantidade por tamanho'
-  ClientHeight = 185
+  ClientHeight = 230
   ClientWidth = 912
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,9 +20,9 @@ object frmInformar_Tam: TfrmInformar_Tam
   TextHeight = 13
   object VDBGrid1: TVDBGrid
     Left = 0
-    Top = 41
+    Top = 75
     Width = 912
-    Height = 103
+    Height = 114
     Align = alClient
     Color = clSilver
     Ctl3D = True
@@ -87,7 +87,7 @@ object frmInformar_Tam: TfrmInformar_Tam
   end
   object NxPanel1: TNxPanel
     Left = 0
-    Top = 144
+    Top = 189
     Width = 912
     Height = 41
     AdaptiveColors = False
@@ -100,7 +100,7 @@ object frmInformar_Tam: TfrmInformar_Tam
     TabOrder = 2
     object btnCancelar: TNxButton
       Left = 444
-      Top = 4
+      Top = 6
       Width = 153
       Height = 30
       Caption = 'Cancelar'
@@ -172,7 +172,7 @@ object frmInformar_Tam: TfrmInformar_Tam
     end
     object btnConfirmar: TNxButton
       Left = 292
-      Top = 4
+      Top = 6
       Width = 153
       Height = 30
       Caption = 'Confirmar'
@@ -245,7 +245,7 @@ object frmInformar_Tam: TfrmInformar_Tam
   end
   object Panel1: TPanel
     Left = 0
-    Top = 0
+    Top = 34
     Width = 912
     Height = 41
     Align = alTop
@@ -344,6 +344,49 @@ object frmInformar_Tam: TfrmInformar_Tam
       TabOrder = 1
       Transparent = True
       OnClick = btnGerarClick
+    end
+  end
+  object NxPanel2: TNxPanel
+    Left = 0
+    Top = 0
+    Width = 912
+    Height = 34
+    Align = alTop
+    BackgroundStyle = pbVertGradient
+    UseDockManager = False
+    ParentBackground = False
+    TabOrder = 3
+    object NxLabel1: TNxLabel
+      Left = 8
+      Top = 16
+      Width = 140
+      Height = 13
+      Caption = 'Qtd. de Pares Por Tal'#227'o:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object CurrencyEdit2: TCurrencyEdit
+      Left = 150
+      Top = 8
+      Width = 121
+      Height = 21
+      AutoSize = False
+      Ctl3D = False
+      DecimalPlaces = 0
+      DisplayFormat = '0'
+      ParentCtl3D = False
+      TabOrder = 0
     end
   end
 end

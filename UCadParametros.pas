@@ -1020,6 +1020,10 @@ type
     DBCheckBox301: TDBCheckBox;
     DBCheckBox302: TDBCheckBox;
     DBCheckBox303: TDBCheckBox;
+    TabSheet3: TRzTabSheet;
+    DBGrid1: TDBGrid;
+    DBNavigator1: TDBNavigator;
+    BitBtn3: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -1089,6 +1093,7 @@ type
     procedure DBCheckBox137Click(Sender: TObject);
     procedure DBCheckBox270Click(Sender: TObject);
     procedure DBCheckBox294Exit(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadParametros: TDMCadParametros;
@@ -1956,6 +1961,11 @@ begin
   RxDBComboBox106.Visible := not(DBCheckBox294.Checked);
   if (fDMCadParametros.cdsParametros.State in [dsEdit,dsInsert]) and (DBCheckBox294.Checked) then
     fDMCadParametros.cdsParametrosMOSTRAR_LINHA_PROD.AsString := 'N';
+end;
+
+procedure TfrmCadParametros.BitBtn3Click(Sender: TObject);
+begin
+  fDMCadParametros.cdsParametros.ApplyUpdates(0);
 end;
 
 end.

@@ -268,6 +268,7 @@ type
     procedure prc_Sel_Unidade(Venda: Boolean = False);
     procedure prc_Calcular_VlrItens;
     procedure prc_Opcao_TipoOS;
+    procedure prc_Gravar_mItens2;
 
     function prc_Senha_Desconto: Boolean;
     function fnc_Busca_Preco_Orig: Real;
@@ -1060,18 +1061,14 @@ begin
   else
     vEditar := False;
 
-  //Controle do estoque  11/05/2015
   if ((fDMCadPedido.cdsParametrosCONTROLAR_ESTOQUE_SAIDA.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensGERAR_ESTOQUE.AsString = 'S')) or (fDMCadPedido.qParametros_EstVERIFICA_ESTOQUE_ENT_PEDIDO.AsString = 'S') then
   begin
     if (fDMCadPedido.cdsProdutoUSA_GRADE.AsString <> 'S')
        or ((vEditar) and (StrToFloat(FormatFloat('0.0000',vQtd_Prod_Ant)) <> StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat))))  then
     begin
-      //11/09/2015
       vQtdAux := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat));
       if (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') and (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD_LANCAR_ESTOQUE.AsFloat)) > 0) then
         vQtdAux := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD_LANCAR_ESTOQUE.AsFloat * fDMCadPedido.cdsPedido_ItensQTD.AsFloat));
-      //if not fnc_Estoque_OK(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger, 11/09/2015
-      //                      fDMCadPedido.cdsPedido_ItensTAMANHO.AsString,fDMCadPedido.cdsPedido_ItensQTD.AsFloat) then
       if not fnc_Estoque_OK(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,
                             fDMCadPedido.cdsPedido_ItensTAMANHO.AsString,vQtdAux) then
         exit;
@@ -1088,7 +1085,6 @@ begin
           if not fnc_Estoque_OK(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,
                                 fDMInformar_Tam.mTamanhoTamanho.AsString,fDMInformar_Tam.mTamanhoQtd.AsFloat) then
           begin
-            //fDMInformar_Tam.mTamanho.Delete
             fDMInformar_Tam.mTamanho.Last;
             vFlagErro := True;
           end
@@ -1104,7 +1100,6 @@ begin
         exit;
     end;
   end;
-  //**************  11/05/2015
 
   vFlagErro := False;
   try
@@ -1148,7 +1143,6 @@ begin
                                              fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat,fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat,
                                              fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat);
 
-    //05/01/2017   estava abaixo do calculo
     fDMCadPedido.cdsPedido_ItensGRAVACAO_COM_ERRO.AsString := '';
     if   (((fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger <= 0) or (fDMCadPedido.cdsPedido_ItensID_CFOP.IsNull)) and (fDMCadPedido.cdsTab_NCMGERAR_ST.AsString = 'S'))
       or (fDMCadPedido.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
@@ -1157,7 +1151,6 @@ begin
         exit;
     end;
 
-    //Tamanho aqui  30/08/2017
     if fDMCadPedido.qParametros_ProdUSA_TAM_INDIVIDUAL.AsString = 'S' then
       fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString + ' TAM. ' + fDMCadPedido.cdsPedido_ItensTAMANHO.AsString
     else
@@ -1203,7 +1196,7 @@ begin
   except
     on E: exception do
     begin
-      vFlagErro := True;  
+      vFlagErro := True;
       raise Exception.Create('Erro ao gravar, ' + E.Message);
     end;
   end;
@@ -1624,157 +1617,185 @@ procedure TfrmCadPedido_Itens.prc_Gravar_Tam;
 var
   x: Integer;
   vItemAux: Integer;
+  vCont : Integer;
+  vQtdAux : Integer;
+  vQtdTalao : Integer;
 begin
-  fDMInformar_Tam.mItens.First;
-  fDMInformar_Tam.mItens_Mat.First;
-  fDMInformar_Tam.mTamanho.First;
-  while not fDMInformar_Tam.mTamanho.Eof do
+  // 05/01/2019 Lotus
+  {if (fDMCadPedido.qParametros_PedINF_QTD_TALAO.AsString = 'S') and (fDMInformar_Tam.vQtd_Por_Talao > 0) then
   begin
-    if (fDMInformar_Tam.mTamanhoTamanho.AsString <> fDMInformar_Tam.vTamanho_Ini) and (StrToFloat(FormatFloat('0.00000',fDMInformar_Tam.mTamanhoQtd.AsFloat)) > 0) then
+    vQtdAux := fDMCadPedido.cdsPedido_ItensQTD.AsInteger div fDMInformar_Tam.vQtd_Por_Talao;
+    if fDMCadPedido.cdsPedido_ItensQTD.AsInteger mod fDMInformar_Tam.vQtd_Por_Talao > 0 then
+      vQtdAux := vQtdAux + 1;
+    x := 0;
+    while x < vQtdAux do
     begin
-      fDMCadPedido.prc_Inserir_Itens;
-      for x := 0 to (fDMInformar_Tam.mItens.FieldCount - 1) do
+      x := x + 1;
+      if x = 1 then
       begin
-        try
-          if (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Item') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_PIS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_COFINS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_Cofins') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Perc_Pis') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Perc_Cofins') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_Pis') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_Cofins') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Tipo_Pis') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Tipo_Cofins') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Origem_Prod') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Nome_Produto') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_MovEstoque') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Gerar_Duplicata') and
-             //(fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Gerar_Estoque') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Numero_OC') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Numero_OC') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Numero_OS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Item_Pedido') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Somar_Transf_Icms') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Somar_VlrTotalProduto') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_OutrasDespesas') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_Seguro') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_IcmsFrete') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSOUTRASDESPESAS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_IMPORTACAO') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ADUANEIRA') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_OPERACAO_NOTA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'FINALIDADE') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'IMP_OC_NOTA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Num_Pedido') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_DUPLICATA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_IMPORTACAO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_REDUCAO_ICMSSUBST') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Nome_Produto_Original') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CONTA_ORCAMENTO_ID') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CENTRO_CUSTO_ID') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTDRESTANTE') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTDDEVOLVIDA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CODCOFINS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CODPIS') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTD_ADEVOLVER') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTD_PACOTE') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_PEDIDO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TABCSTICMS') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'MAOOBRA') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COD_PRODUTO_FORN') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COD_BARRA') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_NTE') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_NTE') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTD_NOTAATUAL') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_DEVOL') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'TIPO_NOTA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'TIPO_REG') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_MVA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_TRIBUTOS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_MOVIMENTO') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TRIBUTO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'POSSUI_VALE') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'NUM_FCI') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_USADO_FCI') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_OBS_LEI_NCM') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_VALE') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_VALE') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'NUM_VALE') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMSSUBST_INTERNO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSSUBST_INTERNO') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMSSUBST_PROPRIO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSSUBST_PROPRIO') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMSSUBST_PROPRIO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSDESONERADO') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COD_MOTIVO_DESONERADO')  and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COD_DESONERACAO') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSOPERACAO')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_PEDIDO_FUT')  and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_PEDIDO_FUT')        and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_OS') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_OS')                and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_OS_MAT') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'NUM_OSERVICO')           and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VERSAO_TRIBUTO') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'IBPT_CHAVE')             and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'FONTE_TRIBUTO')          and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TRIBUTO_ESTADUAL') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TRIBUTO_MUNICIPAL') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_TRIBUTOS_ESTADUAL') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_TRIBUTOS_MUNICIPAL') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_TRIBUTOS_FEDERAL') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TRIBUTO_FEDERAL')   and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_TaxaCiscomex') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'DIFERENCA_ICMS')         and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CALCULAR_ST') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COMPLEMENTO_PROD')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Num_Lote_Controle') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_EnqIPI')              and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Perc_ICMS_Inter') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_Outros')             and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_PIS_COFINS_SUFRAMA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'IBPT_CHAVE')             and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_IPI_SUFRAMA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMS_SUFRAMA')      and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMS_FCP_DEST') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMS_FCP_DEST')     and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'OBSMATERIAL') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'TIPO_ESCALA')            and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMS_FCP') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_FCP_ST')            and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_FCP_ST') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_FCP_ST')            then
-            fDMCadPedido.cdsPedido_Itens.FieldByName(fDMInformar_Tam.mItens.Fields[x].FieldName).AsVariant := fDMInformar_Tam.mItens.Fields[x].Value;
-        except
-        end;
-      end;
-      fDMCadPedido.cdsPedido_ItensITEM_CLIENTE.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-      fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString   := fDMInformar_Tam.mItensNome_Produto_Original.AsString + ' TAM. ' + fDMInformar_Tam.mTamanhoTamanho.AsString;
-      fDMCadPedido.cdsPedido_ItensTAMANHO.AsString       := fDMInformar_Tam.mTamanhoTamanho.AsString;
-      fDMCadPedido.cdsPedido_ItensQTD.AsFloat            := fDMInformar_Tam.mTamanhoQtd.AsFloat;
-      fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat   := fDMInformar_Tam.mTamanhoQtd.AsFloat;
-      fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat   := 0;
-                                                                     
-      uCalculo_Pedido.prc_Calculo_GeralItem(fDMCadPedido,fDMCadPedido.cdsPedido_ItensQTD.AsFloat,fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat,
-                                             fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat,fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat,
-                                             fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat);
-
-      fDMCadPedido.cdsPedido_Itens.Post;
-
-      if fDMCadPedido.cdsParametrosINFORMA_MAT_PEDIDO.AsString = 'S' then
+        fDMInformar_Tam.mItens.Edit;
+        fDMInformar_Tam.mItensQtd.AsInteger := fDMCadPedido.cdsPedido_ItensQTD.AsInteger div vQtdAux;
+        if fDMCadPedido.cdsPedido_ItensQTD.AsInteger mod vQtdAux > 0 then
+          fDMInformar_Tam.mItensQtd.AsInteger := fDMInformar_Tam.mItensQtd.AsInteger + 1;
+        fDMInformar_Tam.mItens.Post;
+      end
+      else
       begin
-        vItemAux := 0;
-        fDMInformar_Tam.mItens_Mat.First;
-        while not fDMInformar_Tam.mItens_Mat.Eof do
-        begin
-          vItemAux := vItemAux + 1;
-          fDMCadPedido.cdsPedido_Material.Insert;
-          fDMCadPedido.cdsPedido_MaterialID.AsInteger          := fDMCadPedido.cdsPedido_ItensID.AsInteger;
-          fDMCadPedido.cdsPedido_MaterialITEM.AsInteger        := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-          fDMCadPedido.cdsPedido_MaterialITEM_MAT.AsInteger    := vItemAux;
-          fDMCadPedido.cdsPedido_MaterialID_PRODUTO.AsInteger  := fDMInformar_Tam.mItens_MatID_PRODUTO.AsInteger;
-          fDMCadPedido.cdsPedido_MaterialQTD_CONSUMO.AsFloat   := StrToFloat(FormatFloat('0.00000',fDMInformar_Tam.mItens_MatQTD_CONSUMO.AsFloat));
-          fDMCadPedido.cdsPedido_MaterialVLR_UNITARIO.AsFloat  := StrToFloat(FormatFloat('0.0000',fDMInformar_Tam.mItens_MatVLR_UNITARIO.AsFloat));
-          fDMCadPedido.cdsPedido_MaterialVLR_TOTAL.AsFloat     := StrToFloat(FormatFloat('0.00',fDMInformar_Tam.mItens_MatVLR_TOTAL.AsFloat));
-          fDMCadPedido.cdsPedido_MaterialUNIDADE.AsString      := fDMInformar_Tam.mItens_MatUNIDADE.AsString;
-          fDMCadPedido.cdsPedido_MaterialNOME_PRODUTO.AsString := fDMInformar_Tam.mItens_MatNOME_PRODUTO.AsString;
-          fDMCadPedido.cdsPedido_Material.Post;
-          fDMInformar_Tam.mItens_Mat.Next;
-        end;
+        prc_Gravar_mItens2;
       end;
     end;
-    fDMInformar_Tam.mTamanho.Next;
+  end;}
+  //*****************
+
+  vCont := 0;
+  fDMInformar_Tam.mItens.First;
+  while not fDMInformar_Tam.mItens.Eof do
+  begin
+    vCont := vCont + 1;
+    fDMInformar_Tam.mItens_Mat.First;
+    fDMInformar_Tam.mTamanho.First;
+    while not fDMInformar_Tam.mTamanho.Eof do
+    begin
+      if (fDMInformar_Tam.mTamanhoTamanho.AsString <> fDMInformar_Tam.vTamanho_Ini) and (StrToFloat(FormatFloat('0.00000',fDMInformar_Tam.mTamanhoQtd.AsFloat)) > 0) then
+      begin
+        fDMCadPedido.prc_Inserir_Itens;
+        for x := 0 to (fDMInformar_Tam.mItens.FieldCount - 1) do
+        begin
+          try
+            if (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Item') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_PIS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_COFINS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_Cofins') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Perc_Pis') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Perc_Cofins') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_Pis') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_Cofins') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Tipo_Pis') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Tipo_Cofins') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Origem_Prod') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Nome_Produto') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_MovEstoque') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Gerar_Duplicata') and
+               //(fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Gerar_Estoque') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Numero_OC') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Numero_OC') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Numero_OS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Item_Pedido') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Somar_Transf_Icms') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Somar_VlrTotalProduto') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_OutrasDespesas') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_Seguro') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_IcmsFrete') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSOUTRASDESPESAS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_IMPORTACAO') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ADUANEIRA') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_OPERACAO_NOTA') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'FINALIDADE') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'IMP_OC_NOTA') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Num_Pedido') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_DUPLICATA') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_IMPORTACAO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_REDUCAO_ICMSSUBST') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Nome_Produto_Original') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CONTA_ORCAMENTO_ID') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CENTRO_CUSTO_ID') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTDRESTANTE') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTDDEVOLVIDA') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CODCOFINS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CODPIS') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTD_ADEVOLVER') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTD_PACOTE') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_PEDIDO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TABCSTICMS') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'MAOOBRA') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COD_PRODUTO_FORN') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COD_BARRA') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_NTE') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_NTE') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTD_NOTAATUAL') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_DEVOL') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'TIPO_NOTA') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'TIPO_REG') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_MVA') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_TRIBUTOS') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_MOVIMENTO') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TRIBUTO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'POSSUI_VALE') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'NUM_FCI') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_USADO_FCI') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_OBS_LEI_NCM') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_VALE') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_VALE') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'NUM_VALE') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMSSUBST_INTERNO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSSUBST_INTERNO') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMSSUBST_PROPRIO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSSUBST_PROPRIO') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMSSUBST_PROPRIO') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSDESONERADO') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COD_MOTIVO_DESONERADO')  and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COD_DESONERACAO') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSOPERACAO')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_PEDIDO_FUT')  and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_PEDIDO_FUT')        and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_OS') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_OS')                and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ITEM_OS_MAT') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'NUM_OSERVICO')           and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VERSAO_TRIBUTO') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'IBPT_CHAVE')             and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'FONTE_TRIBUTO')          and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TRIBUTO_ESTADUAL') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TRIBUTO_MUNICIPAL') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_TRIBUTOS_ESTADUAL') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_TRIBUTOS_MUNICIPAL') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_TRIBUTOS_FEDERAL') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_TRIBUTO_FEDERAL')   and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_TaxaCiscomex') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'DIFERENCA_ICMS')         and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CALCULAR_ST') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COMPLEMENTO_PROD')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Num_Lote_Controle') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_EnqIPI')              and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Perc_ICMS_Inter') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_Outros')             and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_PIS_COFINS_SUFRAMA') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'IBPT_CHAVE')             and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_IPI_SUFRAMA') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMS_SUFRAMA')      and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMS_FCP_DEST') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMS_FCP_DEST')     and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'OBSMATERIAL') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'TIPO_ESCALA')            and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMS_FCP') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_FCP_ST')            and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_FCP_ST') and
+               (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_FCP_ST')            then
+              fDMCadPedido.cdsPedido_Itens.FieldByName(fDMInformar_Tam.mItens.Fields[x].FieldName).AsVariant := fDMInformar_Tam.mItens.Fields[x].Value;
+          except
+          end;
+        end;
+        fDMCadPedido.cdsPedido_ItensITEM_CLIENTE.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+        fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString   := fDMInformar_Tam.mItensNome_Produto_Original.AsString + ' TAM. ' + fDMInformar_Tam.mTamanhoTamanho.AsString;
+        fDMCadPedido.cdsPedido_ItensTAMANHO.AsString       := fDMInformar_Tam.mTamanhoTamanho.AsString;
+        fDMCadPedido.cdsPedido_ItensQTD.AsFloat            := fDMInformar_Tam.mTamanhoQtd.AsFloat;
+        fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat   := fDMInformar_Tam.mTamanhoQtd.AsFloat;
+        fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat   := 0;
+                                                                     
+        uCalculo_Pedido.prc_Calculo_GeralItem(fDMCadPedido,fDMCadPedido.cdsPedido_ItensQTD.AsFloat,fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat,
+                                               fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat,fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat,
+                                               fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat);
+
+        fDMCadPedido.cdsPedido_Itens.Post;
+
+        if fDMCadPedido.cdsParametrosINFORMA_MAT_PEDIDO.AsString = 'S' then
+        begin
+          vItemAux := 0;
+          fDMInformar_Tam.mItens_Mat.First;
+          while not fDMInformar_Tam.mItens_Mat.Eof do
+          begin
+            vItemAux := vItemAux + 1;
+            fDMCadPedido.cdsPedido_Material.Insert;
+            fDMCadPedido.cdsPedido_MaterialID.AsInteger          := fDMCadPedido.cdsPedido_ItensID.AsInteger;
+            fDMCadPedido.cdsPedido_MaterialITEM.AsInteger        := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+            fDMCadPedido.cdsPedido_MaterialITEM_MAT.AsInteger    := vItemAux;
+            fDMCadPedido.cdsPedido_MaterialID_PRODUTO.AsInteger  := fDMInformar_Tam.mItens_MatID_PRODUTO.AsInteger;
+            fDMCadPedido.cdsPedido_MaterialQTD_CONSUMO.AsFloat   := StrToFloat(FormatFloat('0.00000',fDMInformar_Tam.mItens_MatQTD_CONSUMO.AsFloat));
+            fDMCadPedido.cdsPedido_MaterialVLR_UNITARIO.AsFloat  := StrToFloat(FormatFloat('0.0000',fDMInformar_Tam.mItens_MatVLR_UNITARIO.AsFloat));
+            fDMCadPedido.cdsPedido_MaterialVLR_TOTAL.AsFloat     := StrToFloat(FormatFloat('0.00',fDMInformar_Tam.mItens_MatVLR_TOTAL.AsFloat));
+            fDMCadPedido.cdsPedido_MaterialUNIDADE.AsString      := fDMInformar_Tam.mItens_MatUNIDADE.AsString;
+            fDMCadPedido.cdsPedido_MaterialNOME_PRODUTO.AsString := fDMInformar_Tam.mItens_MatNOME_PRODUTO.AsString;
+            fDMCadPedido.cdsPedido_Material.Post;
+            fDMInformar_Tam.mItens_Mat.Next;
+          end;
+        end;
+      end;
+      fDMInformar_Tam.mTamanho.Next;
+    end;
+
+    fDMInformar_Tam.mItens.Next;
   end;
 end;
 
 procedure TfrmCadPedido_Itens.prc_Gravar_mItens;
 var
   x: Integer;
+  vQtdAux : Integer;
+  vContTalao : Integer;
 begin
   fDMInformar_Tam.mItens.EmptyDataSet;
   fDMInformar_Tam.mPedido_Cli.EmptyDataSet;
   fDMInformar_Tam.mItens_Mat.EmptyDataSet;
+  fDMInformar_Tam.mTamAux.EmptyDataSet;
 
-  fDMInformar_Tam.mItens.Insert;
-  for x := 0 to (fDMCadPedido.cdsPedido_Itens.FieldCount - 1) do
+  {if (fDMCadPedido.qParametros_PedINF_QTD_TALAO.AsString = 'S') and (fDMInformar_Tam.vQtd_Por_Talao > 0) then
   begin
-    if (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'sdsPedido_Cli') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'sdsPedido_Tam') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'sdsPedido_Material') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'sdsPedido_Item_Tipo') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TIPO_ACESSORIO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'COMPRIMENTO_VOLUME') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'QTD_LANCAR_ESTOQUE') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'DTEXPEDICAO') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'DTFATURA') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'PERC_ICMS_FCP') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'PERC_ICMS_UF_DEST') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'PERC_ICMS_PARTILHA') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_ICMS_FCP') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_ICMS_UF_DEST') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_ICMS_UF_REMET') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'PERC_ICMS_INTER') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'GRAVOU_TAB_TAMANHO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_DESCONTO_CALC') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'QTD_CONFERIDO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'DTCONFERENCIA') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'HRCONFERENCIA') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'USUARIO_CONF') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'QTD_SOBRA_OC') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_ICMSFRETE') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TIPO_SERVICO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'ID_SERVICO_INT') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'NOME_SERVICO_INT') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'ID_OS_SERV') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'NUM_OS_SERV') and  (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'ID_SERVICO') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'NUM_NOTA_ENT') and  (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'SERIE_NOTA_ENT') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'QTD_CAIXA') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'clVlr_Total_Custo') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'clVlr_Diferenca') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'COD_COR_CLIENTE') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'NOME_COR_CLIENTE') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TAMANHO_CLIENTE') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'FOTO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_MATERIAL') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TEMPO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'DTBAIXA') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TEMPO_REAL') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_UNITARIO_REAL') and
-       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'FATOR_CALCULO_REAL') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'BASE_IPI') then
-      fDMInformar_Tam.mItens.FieldByName(fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName).AsVariant := fDMCadPedido.cdsPedido_Itens.Fields[x].Value;
-  end;
-  fDMInformar_Tam.mItensItem_original.AsInteger        := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-  fDMInformar_Tam.mItensNome_Produto_Original.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString;
-  fDMInformar_Tam.mItens.Post;
+    vContTalao := 0;
+    vContTalao := fDMCadPedido.cdsPedido_ItensQTD.AsInteger div fDMInformar_Tam.vQtd_Por_Talao;
+    if fDMCadPedido.cdsPedido_ItensQTD.AsInteger mod fDMInformar_Tam.vQtd_Por_Talao > 0 then
+      vContTalao := vContTalao + 1;
+
+
+    fDMInformar_Tam.mTamanho.First;
+    while not fDMInformar_Tam.mTamanho.Eof do
+    begin
+
+      fDMInformar_Tam.mTamanho.Next;
+    end;
+
+
+
+  end;} 
+
+  prc_Gravar_mItens2;
 
   fDMCadPedido.cdsPedido_Material.First;
   while not fDMCadPedido.cdsPedido_Material.Eof do
@@ -2572,6 +2593,43 @@ begin
       end;
     end;
   end;
+end;
+
+procedure TfrmCadPedido_Itens.prc_Gravar_mItens2;
+var
+  x : Integer;
+begin
+  fDMInformar_Tam.mItens.Insert;
+  for x := 0 to (fDMCadPedido.cdsPedido_Itens.FieldCount - 1) do
+  begin
+    if (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'sdsPedido_Cli') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'sdsPedido_Tam') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'sdsPedido_Material') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'sdsPedido_Item_Tipo') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TIPO_ACESSORIO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'COMPRIMENTO_VOLUME') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'QTD_LANCAR_ESTOQUE') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'DTEXPEDICAO') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'DTFATURA') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'PERC_ICMS_FCP') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'PERC_ICMS_UF_DEST') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'PERC_ICMS_PARTILHA') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_ICMS_FCP') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_ICMS_UF_DEST') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_ICMS_UF_REMET') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'PERC_ICMS_INTER') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'GRAVOU_TAB_TAMANHO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_DESCONTO_CALC') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'QTD_CONFERIDO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'DTCONFERENCIA') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'HRCONFERENCIA') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'USUARIO_CONF') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'QTD_SOBRA_OC') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_ICMSFRETE') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TIPO_SERVICO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'ID_SERVICO_INT') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'NOME_SERVICO_INT') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'ID_OS_SERV') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'NUM_OS_SERV') and  (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'ID_SERVICO') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'NUM_NOTA_ENT') and  (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'SERIE_NOTA_ENT') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'QTD_CAIXA') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'clVlr_Total_Custo') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'clVlr_Diferenca') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'COD_COR_CLIENTE') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'NOME_COR_CLIENTE') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TAMANHO_CLIENTE') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'FOTO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_MATERIAL') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TEMPO') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'DTBAIXA') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'TEMPO_REAL') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'VLR_UNITARIO_REAL') and
+       (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'FATOR_CALCULO_REAL') and (fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName <> 'BASE_IPI') then
+      fDMInformar_Tam.mItens.FieldByName(fDMCadPedido.cdsPedido_Itens.Fields[x].FieldName).AsVariant := fDMCadPedido.cdsPedido_Itens.Fields[x].Value;
+  end;
+  fDMInformar_Tam.mItensItem_original.AsInteger        := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+  fDMInformar_Tam.mItensNome_Produto_Original.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString;
+  fDMInformar_Tam.mItens.Post;
 end;
 
 end.

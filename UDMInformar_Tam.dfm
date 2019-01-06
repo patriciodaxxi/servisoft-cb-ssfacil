@@ -1,7 +1,7 @@
 object DMInformar_Tam: TDMInformar_Tam
   OldCreateOrder = False
-  Left = 1787
-  Top = 130
+  Left = 421
+  Top = 126
   Height = 434
   Width = 883
   object mTamanho: TClientDataSet
@@ -20,6 +20,14 @@ object DMInformar_Tam: TDMInformar_Tam
       item
         Name = 'Gravar'
         DataType = ftBoolean
+      end
+      item
+        Name = 'Qtd_Por_Talao'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Item_Tam'
+        DataType = ftInteger
       end>
     IndexDefs = <>
     IndexFieldNames = 'Tamanho'
@@ -29,9 +37,10 @@ object DMInformar_Tam: TDMInformar_Tam
     Left = 112
     Top = 40
     Data = {
-      510000009619E0BD01000000180000000300000000000300000051000754616D
+      780000009619E0BD01000000180000000500000000000300000078000754616D
       616E686F0100490000000100055749445448020002000A000351746408000400
-      000000000647726176617202000300000000000000}
+      000000000647726176617202000300000000000D5174645F506F725F54616C61
+      6F0400010000000000084974656D5F54616D04000100000000000000}
     object mTamanhoTamanho: TStringField
       FieldName = 'Tamanho'
       Size = 10
@@ -41,6 +50,12 @@ object DMInformar_Tam: TDMInformar_Tam
     end
     object mTamanhoGravar: TBooleanField
       FieldName = 'Gravar'
+    end
+    object mTamanhoQtd_Por_Talao: TIntegerField
+      FieldName = 'Qtd_Por_Talao'
+    end
+    object mTamanhoItem_Tam: TIntegerField
+      FieldName = 'Item_Tam'
     end
   end
   object dsmTamanho: TDataSource
@@ -977,6 +992,10 @@ object DMInformar_Tam: TDMInformar_Tam
       item
         Name = 'BASE_IPI'
         DataType = ftFloat
+      end
+      item
+        Name = 'Item_Tam'
+        DataType = ftInteger
       end>
     IndexDefs = <>
     Params = <>
@@ -985,7 +1004,7 @@ object DMInformar_Tam: TDMInformar_Tam
     Left = 88
     Top = 200
     Data = {
-      0F1400009619E0BD0100000018000000CB0000000000030000000F140A49445F
+      201400009619E0BD0100000018000000CC00000000000300000020140A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
       010005574944544802000200140007556E696461646501004900000001000557
       494454480200020006000351746408000400000000000749445F43464F500400
@@ -1145,7 +1164,8 @@ object DMInformar_Tam: TDMInformar_Tam
       4F504941444F0100490000000100055749445448020002000100084361697869
       6E68610100490000000100055749445448020002001E000D564C525F4950495F
       4445564F4C08000400000000000A504552435F4445564F4C0800040000000000
-      08424153455F49504908000400000000000000}
+      08424153455F4950490800040000000000084974656D5F54616D040001000000
+      00000000}
     object mItensID_Produto: TIntegerField
       FieldName = 'ID_Produto'
     end
@@ -1817,6 +1837,9 @@ object DMInformar_Tam: TDMInformar_Tam
     object mItensBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object mItensItem_Tam: TIntegerField
+      FieldName = 'Item_Tam'
+    end
   end
   object mPedido_Cli: TClientDataSet
     Active = True
@@ -2473,6 +2496,25 @@ object DMInformar_Tam: TDMInformar_Tam
     end
     object qProdutoID_GRADE: TIntegerField
       FieldName = 'ID_GRADE'
+    end
+  end
+  object mTamAux: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 296
+    Top = 40
+    object mTamAuxTamanho: TStringField
+      FieldName = 'Tamanho'
+      Size = 10
+    end
+    object mTamAuxQtd: TFloatField
+      FieldName = 'Qtd'
+    end
+    object mTamAuxGravar: TBooleanField
+      FieldName = 'Gravar'
+    end
+    object mTamAuxItem_Tam: TIntegerField
+      FieldName = 'Item_Tam'
     end
   end
 end

@@ -3376,6 +3376,7 @@ type
     cdsProdutoID_CSTICMS: TIntegerField;
     mOrcamento_ItensMotivo_Nao_Aprov: TStringField;
     mOrcamento_ItensData_Nao_Aprov: TDateField;
+    qParametros_PedINF_QTD_TALAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

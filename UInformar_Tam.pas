@@ -17,6 +17,9 @@ type
     CurrencyEdit1: TCurrencyEdit;
     Label2: TLabel;
     btnGerar: TNxButton;
+    NxPanel2: TNxPanel;
+    NxLabel1: TNxLabel;
+    CurrencyEdit2: TCurrencyEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -52,10 +55,11 @@ end;
 
 procedure TfrmInformar_Tam.btnConfirmarClick(Sender: TObject);
 begin                                                 
-  fDMInformar_Tam.vTamanho_Ini := '';
-  fDMInformar_Tam.vQtd_Ini     := 0;
-  fDMInformar_Tam.vGravar      := 'S';
-  fDMInformar_Tam.vQtd_Grade   := 0;
+  fDMInformar_Tam.vTamanho_Ini   := '';
+  fDMInformar_Tam.vQtd_Ini       := 0;
+  fDMInformar_Tam.vGravar        := 'S';
+  fDMInformar_Tam.vQtd_Grade     := 0;
+  fDMInformar_Tam.vQtd_Por_Talao := CurrencyEdit2.AsInteger;
   fDMInformar_Tam.mTamanho.First;
   while not fDMInformar_Tam.mTamanho.Eof do
   begin
@@ -106,6 +110,9 @@ begin
     prc_Abrir_qQtdGrade_Itens;
     Label2.Caption := 'Dividir a quantidade por ' + IntToStr(fDMInformar_Tam.cdsQtdGradeQTD.AsInteger);
   end;
+
+  //05/01/2019
+  fDMInformar_Tam.vQtd_Por_Talao := 0;
 end;
 
 procedure TfrmInformar_Tam.prc_Abrir_qQtdGrade_Itens;

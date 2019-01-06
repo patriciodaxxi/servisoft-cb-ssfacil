@@ -1,6 +1,6 @@
 object frmCadRequisicao_Itens: TfrmCadRequisicao_Itens
-  Left = 1593
-  Top = 224
+  Left = 227
+  Top = 220
   Width = 751
   Height = 284
   Caption = 'Cadastro dos Itens do Ajuste do Estoque'
@@ -214,8 +214,8 @@ object frmCadRequisicao_Itens: TfrmCadRequisicao_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 219
-    Width = 743
+    Top = 212
+    Width = 735
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -254,7 +254,7 @@ object frmCadRequisicao_Itens: TfrmCadRequisicao_Itens
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 743
+    Width = 735
     Height = 42
     Align = alTop
     BevelOuter = bvNone
@@ -471,7 +471,7 @@ object frmCadRequisicao_Itens: TfrmCadRequisicao_Itens
   object pnlCor: TPanel
     Left = 0
     Top = 42
-    Width = 743
+    Width = 735
     Height = 23
     Align = alTop
     BevelOuter = bvNone

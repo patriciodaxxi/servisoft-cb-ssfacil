@@ -302,6 +302,14 @@ type
     mItensPERC_DEVOL: TFloatField;
     mItensBASE_IPI: TFloatField;
     mItensDocLOCALIZACAO: TStringField;
+    mTamanhoQtd_Por_Talao: TIntegerField;
+    mItensItem_Tam: TIntegerField;
+    mTamanhoItem_Tam: TIntegerField;
+    mTamAux: TClientDataSet;
+    mTamAuxTamanho: TStringField;
+    mTamAuxQtd: TFloatField;
+    mTamAuxGravar: TBooleanField;
+    mTamAuxItem_Tam: TIntegerField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private
@@ -313,6 +321,7 @@ type
     vTamanho_Ini : String;
     vQtd_Ini     : Real;
     vID_Grade_Inf : Integer;
+    vQtd_Por_Talao : Integer; //05/01/2019
 
     procedure prc_Le_Produto_Tam(ID : Integer);
     procedure prc_Gravar_mTamanho(Tamanho : String ; Qtd : Real);

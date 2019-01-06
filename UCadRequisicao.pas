@@ -65,6 +65,7 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     Label7: TLabel;
     DBEdit2: TDBEdit;
+    Label8: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -83,6 +84,8 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
 
@@ -116,7 +119,8 @@ var
 
 implementation
 
-uses DateUtils, rsDBUtils, uUtilPadrao, URelRequisicao, DmdDatabase;
+uses DateUtils, rsDBUtils, uUtilPadrao, URelRequisicao, DmdDatabase,
+  UConsMatLote;
 
 {$R *.dfm}
 
@@ -550,6 +554,19 @@ procedure TfrmCadRequisicao.SpeedButton2Click(Sender: TObject);
 begin
   fDMCadDocEstoque.cdsFuncionario.Close;
   fDMCadDocEstoque.cdsFuncionario.Open;
+end;
+
+procedure TfrmCadRequisicao.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F5) then
+  begin
+    frmConsMatLote := TfrmConsMatLote.Create(Self);
+    if fDMCadDocEstoque.cdsDocEstoque.State in [dsEdit,dsInsert] then
+      frmConsMatLote.CurrencyEdit2.AsInteger := fDMCadDocEstoque.cdsDocEstoqueNUM_LOTE.AsInteger;
+    frmConsMatLote.ShowModal;
+    FreeAndNil(frmConsMatLote);
+  end;
 end;
 
 end.

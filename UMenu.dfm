@@ -1,6 +1,6 @@
 object fMenu: TfMenu
-  Left = 1718
-  Top = 9
+  Left = 352
+  Top = 5
   Width = 837
   Height = 682
   Caption = 'Menu'
@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 631
+    Height = 623
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68

@@ -1,6 +1,6 @@
 object frmCadRequisicao: TfrmCadRequisicao
-  Left = 1571
-  Top = 74
+  Left = 205
+  Top = 70
   Width = 945
   Height = 603
   Caption = 'Requisi'#231#227'o de Produto/Material'
@@ -16,6 +16,7 @@ object frmCadRequisicao: TfrmCadRequisicao
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -246,7 +247,9 @@ object frmCadRequisicao: TfrmCadRequisicao
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
-        Caption = 'Duplo clique para consultar'
+        Caption = 
+          'Duplo clique para consultar            F5=Cons. Materiais Por Lo' +
+          'te'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clMaroon
         Font.Height = -11
@@ -958,6 +961,19 @@ object frmCadRequisicao: TfrmCadRequisicao
             Alignment = taRightJustify
             Caption = 'N'#186' Lote:'
           end
+          object Label8: TLabel
+            Left = 426
+            Top = 29
+            Width = 200
+            Height = 13
+            Caption = 'F5 para consultar Materiais do Lote'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clMaroon
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
           object DBDateEdit1: TDBDateEdit
             Left = 105
             Top = 27
@@ -1037,7 +1053,7 @@ object frmCadRequisicao: TfrmCadRequisicao
             Width = 72
             Height = 21
             CharCase = ecUpperCase
-            DataField = 'NUM_REQUISICAO'
+            DataField = 'NUM_LOTE'
             DataSource = DMCadDocEstoque.dsDocEstoque
             MaxLength = 18
             TabOrder = 1

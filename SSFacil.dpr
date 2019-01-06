@@ -768,7 +768,8 @@ uses
   uRecebeXML_Duplicatas in 'nfevisualizador\uRecebeXML_Duplicatas.pas' {frmRecebeXML_Duplicatas},
   UConsEstoque_Atual in 'UConsEstoque_Atual.pas' {frmConsEstoque_Atual},
   UBaixaNFDevolvida in 'UBaixaNFDevolvida.pas' {frmBaixaNFDevolvida},
-  UCadOrcamento_Aprov in 'UCadOrcamento_Aprov.pas' {frmCadOrcamento_Aprov};
+  UCadOrcamento_Aprov in 'UCadOrcamento_Aprov.pas' {frmCadOrcamento_Aprov},
+  UConsMatLote in 'UConsMatLote.pas' {frmConsMatLote};
 
 {$R *.res}
 

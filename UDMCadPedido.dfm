@@ -14788,6 +14788,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedINF_QTD_TALAO: TStringField
+      FieldName = 'INF_QTD_TALAO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 

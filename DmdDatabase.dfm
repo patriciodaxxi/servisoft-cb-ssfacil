@@ -1,8 +1,8 @@
 object dmDatabase: TdmDatabase
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 1752
-  Top = 184
+  Left = 386
+  Top = 180
   Height = 478
   Width = 515
   object scoDados: TSQLConnection
@@ -28,7 +28,6 @@ object dmDatabase: TdmDatabase
       'Interbase TransIsolation=ReadCommited'
       'Trim Char=False')
     VendorLib = 'gds32.dll'
-    Connected = True
     Left = 32
     Top = 16
   end
