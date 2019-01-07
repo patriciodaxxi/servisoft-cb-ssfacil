@@ -835,7 +835,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label5: TLabel
           Left = 96
-          Top = 260
+          Top = 292
           Width = 179
           Height = 13
           Caption = '(N'#227'o marcar faturamento para perdas)'
@@ -848,7 +848,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label7: TLabel
           Left = 440
-          Top = 284
+          Top = 316
           Width = 179
           Height = 52
           Caption = 
@@ -868,6 +868,28 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Height = 13
           Alignment = taRightJustify
           Caption = 'Percentual Juros:'
+          Visible = False
+        end
+        object Label11: TLabel
+          Left = 166
+          Top = 230
+          Width = 141
+          Height = 13
+          Caption = 'Para c'#225'lculo de parcelamento'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clGreen
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label12: TLabel
+          Left = 64
+          Top = 254
+          Width = 27
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Taxa:'
           Visible = False
         end
         object DBEdit7: TDBEdit
@@ -891,7 +913,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           DataField = 'ID'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
           ReadOnly = True
-          TabOrder = 27
+          TabOrder = 29
         end
         object DBEdit1: TDBEdit
           Left = 512
@@ -1010,37 +1032,37 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object DBCheckBox10: TDBCheckBox
           Left = 96
-          Top = 282
+          Top = 314
           Width = 201
           Height = 17
           Caption = 'Soma Faturamento Bruto'
           DataField = 'FATURAMENTO_BRUTO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 19
+          TabOrder = 21
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object DBCheckBox11: TDBCheckBox
           Left = 96
-          Top = 306
+          Top = 338
           Width = 201
           Height = 17
           Caption = 'Exige cliente (Para Cr'#233'di'#225'rio)'
           DataField = 'EXIGE_CLIENTE'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 21
+          TabOrder = 23
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object DBCheckBox12: TDBCheckBox
           Left = 96
-          Top = 330
+          Top = 362
           Width = 201
           Height = 17
           Caption = 'Abre Gaveta'
           DataField = 'ABRE_GAVETA'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 22
+          TabOrder = 24
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -1066,13 +1088,13 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object DBCheckBox9: TDBCheckBox
           Left = 96
-          Top = 354
+          Top = 386
           Width = 201
           Height = 17
           Caption = 'Imprime Carn'#234' - Cr'#233'dito da Loja'
           DataField = 'IMPRIME_CARNE'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 23
+          TabOrder = 25
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -1091,25 +1113,25 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object DBCheckBox14: TDBCheckBox
           Left = 96
-          Top = 378
+          Top = 410
           Width = 201
           Height = 17
           Caption = 'Pre'#231'o '#224' Vista'
           DataField = 'PRECO_AVISTA'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 24
+          TabOrder = 26
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object DBCheckBox15: TDBCheckBox
           Left = 96
-          Top = 402
+          Top = 434
           Width = 201
           Height = 17
           Caption = 'Enviar no Aplicativo'
           DataField = 'ENVIAR_APLICATIVO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 25
+          TabOrder = 27
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -1219,25 +1241,25 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object DBCheckBox21: TDBCheckBox
           Left = 288
-          Top = 282
+          Top = 314
           Width = 147
           Height = 17
           Caption = 'Soma Faturamento L'#237'quido'
           DataField = 'FATURAMENTO_LIQUIDO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 20
+          TabOrder = 22
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object DBCheckBox22: TDBCheckBox
           Left = 96
-          Top = 426
+          Top = 458
           Width = 201
           Height = 17
           Caption = 'Fechamento autom'#225'tico de caixa'
           DataField = 'FECHAMENTO_AUTOMATICO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 26
+          TabOrder = 28
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -1251,6 +1273,36 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           DataSource = DMCadTipoCobranca.dsTipoCobranca
           TabOrder = 18
           Visible = False
+        end
+        object DBEdit3: TDBEdit
+          Left = 96
+          Top = 246
+          Width = 65
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'TAXA'
+          DataSource = DMCadTipoCobranca.dsTipoCobranca
+          TabOrder = 19
+          Visible = False
+        end
+        object RxDBComboBox3: TRxDBComboBox
+          Left = 163
+          Top = 246
+          Width = 177
+          Height = 21
+          Style = csDropDownList
+          DataField = 'TAXA_TIPO'
+          DataSource = DMCadTipoCobranca.dsTipoCobranca
+          DropDownCount = 2
+          EnableValues = True
+          ItemHeight = 13
+          Items.Strings = (
+            'PORCENTAGEM'
+            'VALOR (R$)')
+          TabOrder = 20
+          Values.Strings = (
+            'P'
+            'V')
         end
       end
     end

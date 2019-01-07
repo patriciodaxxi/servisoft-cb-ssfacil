@@ -69,6 +69,10 @@ type
     DBCheckBox22: TDBCheckBox;
     Label10: TLabel;
     DBEdit2: TDBEdit;
+    Label11: TLabel;
+    Label12: TLabel;
+    DBEdit3: TDBEdit;
+    RxDBComboBox3: TRxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

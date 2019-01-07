@@ -69,6 +69,10 @@ type
     cdsTipoCobrancaFECHAMENTO_AUTOMATICO: TStringField;
     sdsTipoCobrancaPERC_JUROS: TFloatField;
     cdsTipoCobrancaPERC_JUROS: TFloatField;
+    sdsTipoCobrancaTAXA: TFloatField;
+    sdsTipoCobrancaTAXA_TIPO: TStringField;
+    cdsTipoCobrancaTAXA: TFloatField;
+    cdsTipoCobrancaTAXA_TIPO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspTipoCobrancaUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

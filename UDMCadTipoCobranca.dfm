@@ -147,6 +147,14 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     object sdsTipoCobrancaPERC_JUROS: TFloatField
       FieldName = 'PERC_JUROS'
     end
+    object sdsTipoCobrancaTAXA: TFloatField
+      FieldName = 'TAXA'
+    end
+    object sdsTipoCobrancaTAXA_TIPO: TStringField
+      FieldName = 'TAXA_TIPO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
@@ -303,6 +311,14 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     end
     object cdsTipoCobrancaPERC_JUROS: TFloatField
       FieldName = 'PERC_JUROS'
+    end
+    object cdsTipoCobrancaTAXA: TFloatField
+      FieldName = 'TAXA'
+    end
+    object cdsTipoCobrancaTAXA_TIPO: TStringField
+      FieldName = 'TAXA_TIPO'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsTipoCobranca: TDataSource
