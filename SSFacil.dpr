@@ -779,7 +779,6 @@ begin
     Application.Title := 'SSFacil';
 
     Application.CreateForm(TfrmAbertura, frmAbertura);
-  Application.CreateForm(TfrmCadOrcamento_Aprov, frmCadOrcamento_Aprov);
   frmAbertura.Show;
     frmAbertura.Refresh;
 
