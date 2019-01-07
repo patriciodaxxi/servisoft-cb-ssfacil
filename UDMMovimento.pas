@@ -285,13 +285,14 @@ begin
       cdsMovimentoID_SERVICO.AsInteger := ID_ProdServ
     else
     begin
+    if Tipo_Mov <> 'DEN' then
       if ID_ProdServ > 0 then
         cdsMovimentoID_PRODUTO.AsInteger := ID_ProdServ;
     end;
     if (Tipo_Reg = 'NTS') or (Tipo_Reg = 'NTE') or (Tipo_Reg = 'RNF') then
       cdsMovimentoID_NOTAFISCAL.AsInteger := ID_Nota
     else
-    if (Tipo_Reg = 'NSE') then
+    if (Tipo_Reg = 'NSE') or (Tipo_Mov = 'DEN') then
       cdsMovimentoID_NOTASERVICO.AsInteger := ID_Nota
     else
     if (Tipo_Reg = 'CFI') then
@@ -323,7 +324,7 @@ begin
     if ((Tipo_Mov = 'NOT') and (Tipo_ES = 'S')) or (Tipo_Mov = 'RNF') then
       cdsMovimentoTP_SAIDA.AsString := 'S'
     else
-    if (Tipo_Mov = 'NOT') and (Tipo_ES = 'E') then
+    if ((Tipo_Mov = 'NOT') and (Tipo_ES = 'E')) or (Tipo_Reg = 'DEN') then
       cdsMovimentoTP_ENTRADA.AsString := 'E'
     else
     if (Tipo_Mov = 'NSE') then

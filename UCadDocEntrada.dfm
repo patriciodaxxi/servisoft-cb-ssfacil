@@ -23,7 +23,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
     Top = 0
     Width = 993
     Height = 665
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -31,7 +31,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -99,6 +99,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             FieldName = 'NUMNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Documento'
+            Width = 64
             Visible = True
           end
           item
@@ -152,6 +153,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             FieldName = 'ID_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
+            Width = 64
             Visible = True
           end>
       end
@@ -1150,7 +1152,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             Height = 21
             Style = csDropDownList
             Ctl3D = False
-            DataField = 'TIPO_PRAZO'
+            DataField = 'TIPO_DOC'
             DataSource = DMCadNotaServico.dsNotaServico
             DropDownCount = 15
             EnableValues = True
@@ -1161,9 +1163,8 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             ParentCtl3D = False
             TabOrder = 0
             Values.Strings = (
-              'P'
-              'V'
-              'N')
+              'NSE'
+              'CTE')
           end
         end
         object Panel7: TPanel
@@ -1321,7 +1322,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               ParentFont = False
             end
             object Label13: TLabel
-              Left = 300
+              Left = 452
               Top = 67
               Width = 43
               Height = 13
@@ -1335,7 +1336,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               ParentFont = False
             end
             object Label14: TLabel
-              Left = 271
+              Left = 423
               Top = 85
               Width = 72
               Height = 13
@@ -1349,8 +1350,8 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               ParentFont = False
             end
             object Label15: TLabel
-              Left = 297
-              Top = 103
+              Left = 254
+              Top = 84
               Width = 46
               Height = 13
               Alignment = taRightJustify
@@ -1363,8 +1364,8 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               ParentFont = False
             end
             object Label19: TLabel
-              Left = 311
-              Top = 121
+              Left = 463
+              Top = 103
               Width = 32
               Height = 13
               Alignment = taRightJustify
@@ -1377,7 +1378,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               ParentFont = False
             end
             object Label23: TLabel
-              Left = 484
+              Left = 636
               Top = 67
               Width = 35
               Height = 13
@@ -1391,7 +1392,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               ParentFont = False
             end
             object Label24: TLabel
-              Left = 469
+              Left = 621
               Top = 85
               Width = 50
               Height = 13
@@ -1405,7 +1406,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               ParentFont = False
             end
             object Label25: TLabel
-              Left = 472
+              Left = 624
               Top = 103
               Width = 47
               Height = 13
@@ -1419,12 +1420,26 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               ParentFont = False
             end
             object Label26: TLabel
-              Left = 472
+              Left = 624
               Top = 121
               Width = 47
               Height = 13
               Alignment = taRightJustify
               Caption = 'Vlr. ICMS:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+            end
+            object Label20: TLabel
+              Left = 245
+              Top = 66
+              Width = 55
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Base INSS:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlue
               Font.Height = -11
@@ -1566,7 +1581,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               TabOrder = 6
             end
             object DBEdit13: TDBEdit
-              Left = 344
+              Left = 496
               Top = 61
               Width = 100
               Height = 19
@@ -1580,10 +1595,10 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
-              TabOrder = 7
+              TabOrder = 9
             end
             object DBEdit14: TDBEdit
-              Left = 344
+              Left = 496
               Top = 79
               Width = 100
               Height = 19
@@ -1597,11 +1612,11 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
-              TabOrder = 8
+              TabOrder = 10
             end
             object DBEdit15: TDBEdit
-              Left = 344
-              Top = 97
+              Left = 301
+              Top = 78
               Width = 100
               Height = 19
               Ctl3D = False
@@ -1614,11 +1629,11 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
-              TabOrder = 9
+              TabOrder = 8
             end
             object DBEdit18: TDBEdit
-              Left = 344
-              Top = 115
+              Left = 496
+              Top = 97
               Width = 100
               Height = 19
               Ctl3D = False
@@ -1631,10 +1646,10 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
-              TabOrder = 10
+              TabOrder = 11
             end
             object DBEdit23: TDBEdit
-              Left = 520
+              Left = 672
               Top = 61
               Width = 100
               Height = 19
@@ -1649,10 +1664,10 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
-              TabOrder = 11
+              TabOrder = 12
             end
             object DBEdit24: TDBEdit
-              Left = 520
+              Left = 672
               Top = 79
               Width = 100
               Height = 19
@@ -1667,10 +1682,10 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
-              TabOrder = 12
+              TabOrder = 13
             end
             object DBEdit25: TDBEdit
-              Left = 520
+              Left = 672
               Top = 97
               Width = 100
               Height = 19
@@ -1684,10 +1699,10 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
-              TabOrder = 13
+              TabOrder = 14
             end
             object DBEdit26: TDBEdit
-              Left = 520
+              Left = 672
               Top = 115
               Width = 100
               Height = 19
@@ -1701,7 +1716,24 @@ object frmCadDocEntrada: TfrmCadDocEntrada
               Font.Style = []
               ParentCtl3D = False
               ParentFont = False
-              TabOrder = 14
+              TabOrder = 15
+            end
+            object DBEdit2: TDBEdit
+              Left = 301
+              Top = 60
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'BASE_INSS'
+              DataSource = DMCadNotaServico.dsNotaServico_Itens
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentCtl3D = False
+              ParentFont = False
+              TabOrder = 7
             end
           end
           object RzGroupBox1: TRzGroupBox
@@ -2050,6 +2082,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
                   FieldName = 'lkNome_Conta'
                   Title.Alignment = taCenter
                   Title.Caption = 'Nome Conta'
+                  Width = 64
                   Visible = True
                 end
                 item
