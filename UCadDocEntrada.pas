@@ -113,6 +113,8 @@ type
     btnGerarParcelas: TNxButton;
     btnExcluirParcelas: TNxButton;
     dbVlr_Entrada: TDBEdit;
+    Label20: TLabel;
+    DBEdit2: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -568,6 +570,10 @@ begin
 
   vIDAux := fDMCadNotaServico.cdsNotaServicoID.AsInteger;
   fDMCadNotaServico.cdsNotaServicoSTATUS_RPS.AsString  := '1';
+
+  if not(fDMCadNotaServico.cdsNotaServico_Itens.State in [dsEdit,dsInsert]) then
+    fDMCadNotaServico.cdsNotaServico_Itens.Edit;
+  fDMCadNotaServico.cdsNotaServico_ItensBASE_CALCULO.AsFloat := fDMCadNotaServico.cdsNotaServico_ItensVLR_TOTAL.AsFloat;
 
   fDMCadNotaServico.prc_Gravar;
 
