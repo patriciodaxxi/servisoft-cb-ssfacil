@@ -1940,6 +1940,7 @@ begin
       begin
         if ckMsg.Checked then
           ShowMessage('Parte 107 - Posiciona o Tipo de Cobrança');
+        fDmCupomFiscal.cdsTipoCobranca.IndexFieldNames := 'ID';
         fDmCupomFiscal.cdsTipoCobranca.Open;
         fDmCupomFiscal.cdsTipoCobranca.FindKey([fDmCupomFiscal.cdsCupomFiscalID_TIPOCOBRANCA.AsInteger]);
         if ckMsg.Checked then

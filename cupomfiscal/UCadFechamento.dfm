@@ -2206,7 +2206,7 @@ object frmCadFechamento: TfrmCadFechamento
       end
       object btnConsDetalhamento: TNxButton
         Left = 741
-        Top = 64
+        Top = 58
         Width = 172
         Height = 30
         Caption = 'Cons.Detalhamento'

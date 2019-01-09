@@ -469,6 +469,7 @@ procedure TfrmCadFechamento.btnConfirmarClick(Sender: TObject);
 begin
   if not(fDMCadFechamento.cdsFechamento.State in [dsEdit,dsInsert]) then
     fDMCadFechamento.cdsFechamento.Edit;
+
   fDMCadFechamento.prc_Recalcular_Inf;
   prc_Gravar_Registro;
   vInserir := '';

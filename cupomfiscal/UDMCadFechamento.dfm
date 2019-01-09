@@ -108,7 +108,6 @@ object DMCadFechamento: TDMCadFechamento
     Top = 32
   end
   object cdsFechamento: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -827,7 +826,6 @@ object DMCadFechamento: TDMCadFechamento
     end
   end
   object cdsFechamento_Sup: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFechamentosdsFechamento_Sup
     IndexFieldNames = 'ID;ITEM'
@@ -1083,7 +1081,6 @@ object DMCadFechamento: TDMCadFechamento
     end
   end
   object cdsFechamento_San: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFechamentosdsFechamento_San
     IndexFieldNames = 'ID;ITEM'
@@ -1166,7 +1163,6 @@ object DMCadFechamento: TDMCadFechamento
     end
   end
   object cdsFechamento_Ret: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFechamentosdsFechamento_Ret
     IndexFieldNames = 'ID;ITEM'
