@@ -25,7 +25,7 @@ object frmCadFechamento: TfrmCadFechamento
     Top = 0
     Width = 996
     Height = 661
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadFechamento: TfrmCadFechamento
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1596,7 +1596,6 @@ object frmCadFechamento: TfrmCadFechamento
             Title.Alignment = taCenter
             Title.Caption = 'Diferen'#231'a Conferido'
             Title.Color = 16761220
-            Width = 64
             Visible = True
           end>
       end
@@ -2004,6 +2003,37 @@ object frmCadFechamento: TfrmCadFechamento
           DataField = 'OBS_CONFERENCIA'
           DataSource = DMCadFechamento.dsFechamento
           TabOrder = 7
+        end
+        object RxDBComboBox1: TRxDBComboBox
+          Left = 546
+          Top = 32
+          Width = 433
+          Height = 40
+          Style = csDropDownList
+          DataField = 'TIPO_FECHAMENTO'
+          DataSource = DMCadFechamento.dsFechamento
+          EnableValues = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -27
+          Font.Name = 'Arial'
+          Font.Style = []
+          ItemHeight = 32
+          Items.Strings = (
+            'Com Erro'
+            'N'#227'o Encerrado'
+            'Aguarda conferencia'
+            'Fechado sem conferencia'
+            'Fechado corretamente')
+          ParentFont = False
+          TabOrder = 8
+          Values.Strings = (
+            'E'
+            'N'
+            'A'
+            'F'
+            'S')
+          Visible = False
         end
       end
       object pnlItem: TPanel

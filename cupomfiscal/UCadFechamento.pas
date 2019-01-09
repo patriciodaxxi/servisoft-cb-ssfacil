@@ -93,6 +93,7 @@ type
     Shape3: TShape;
     Label2: TLabel;
     NxButton1: TNxButton;
+    RxDBComboBox1: TRxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -444,7 +445,10 @@ begin
     if not InputQuery('Informe a senha','Senha:',vSenhaAux) then
       Exit;
     if trim(vSenhaAux) = 'abc12' then
-      vInfSenhaAdmin := True
+    begin
+      vInfSenhaAdmin := True;
+      RxDBLookupCombo1.Visible := True;
+    end
     else
     if trim(vSenhaAux) <> 'abc1' then
       Exit;
