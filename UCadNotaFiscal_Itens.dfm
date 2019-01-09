@@ -480,7 +480,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     Top = 172
     Width = 792
     Height = 403
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     ActivePageDefault = TabSheet1
     Align = alClient
     BackgroundColor = clGray
@@ -490,7 +490,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     ParentBackgroundColor = False
     ParentColor = False
     TabColors.Shadow = clGray
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     TextColors.DisabledShadow = 8421440
     TextColors.Selected = clBlue
@@ -1516,6 +1516,14 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Alignment = taRightJustify
         Caption = 'C'#243'd.Enq IPI:'
       end
+      object Label65: TLabel
+        Left = 569
+        Top = 259
+        Width = 62
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr.IPI Devol:'
+      end
       object RxDBLookupCombo7: TRxDBLookupCombo
         Left = 72
         Top = 15
@@ -1986,6 +1994,15 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
           ParentCtl3D = False
           TabOrder = 0
         end
+      end
+      object DBEdit36: TDBEdit
+        Left = 634
+        Top = 251
+        Width = 94
+        Height = 21
+        DataField = 'VLR_IPI_DEVOL'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        TabOrder = 26
       end
     end
     object TabSheet3: TRzTabSheet

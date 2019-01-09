@@ -190,6 +190,8 @@ type
     RzGroupBox3: TRzGroupBox;
     Label60: TLabel;
     DBEdit40: TDBEdit;
+    Label65: TLabel;
+    DBEdit36: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);

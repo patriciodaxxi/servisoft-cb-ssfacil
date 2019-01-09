@@ -1199,7 +1199,8 @@ begin
   else
     DetXML.Imposto.IPI.CEnq := '999';
   //******
-  if ((fDMNFe.mItensNFeVlrIpi.AsFloat > 0) and (fDMNFe.mItensNFeAliqIpi.AsFloat > 0)) or
+  if ((fDMNFe.mItensNFeVlrIpi.AsFloat > 0) and (fDMNFe.mItensNFeAliqIpi.AsFloat > 0) and
+     (StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrIPI_Devol.AsFloat)) <= 0)) or
      (fDMNFe.mItensNFeCodCSTIPI.AsString = '99') or (fDMNFe.mItensNFeCodCSTIPI.AsString = '49') or
      (fDMNFe.mItensNFeCodCSTIPI.AsString = '50') or (fDMNFe.mItensNFeCodCSTIPI.AsString = '00') then
   begin
