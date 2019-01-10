@@ -3377,6 +3377,7 @@ type
     mOrcamento_ItensMotivo_Nao_Aprov: TStringField;
     mOrcamento_ItensData_Nao_Aprov: TDateField;
     qParametros_PedINF_QTD_TALAO: TStringField;
+    cdsClienteIPI_PAGO_FILIAL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
