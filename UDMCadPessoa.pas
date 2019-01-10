@@ -1184,6 +1184,8 @@ type
     qParametros_Ped: TSQLQuery;
     qParametros_PedUSA_CAIXINHA: TStringField;
     qParametros_GeralPERMITE_CNPJ_DUPLICADO_TRANSP: TStringField;
+    sdsPessoaIPI_PAGO_FILIAL: TStringField;
+    cdsPessoaIPI_PAGO_FILIAL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

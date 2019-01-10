@@ -3641,7 +3641,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'SUMIDOR, PES.TIPO_CONTRIBUINTE, INSC_SUFRAMA, INSC_MUNICIPAL, PE' +
       'S.CARIMBO, PES.PERC_DESC_SUFRAMA, PES.ORGAO_PUBLICO, PES.IMP_COD' +
       '_PRODUTO_CLI,'#13#10'IMP_COR_CLIENTE, PES.MDIA1, PES.MDIA2, PES.insc_s' +
-      'uframa'#13#10'FROM PESSOA PES'#13#10#13#10
+      'uframa, IPI_PAGO_FILIAL'#13#10'FROM PESSOA PES'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3911,6 +3911,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsClienteMDIA2: TIntegerField
       FieldName = 'MDIA2'
+    end
+    object cdsClienteIPI_PAGO_FILIAL: TStringField
+      FieldName = 'IPI_PAGO_FILIAL'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsCliente: TDataSource
