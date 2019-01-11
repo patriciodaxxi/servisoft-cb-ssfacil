@@ -543,6 +543,7 @@ type
     DBCheckBox30: TDBCheckBox;
     Label194: TLabel;
     DBEdit108: TDBEdit;
+    DBCheckBox31: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);

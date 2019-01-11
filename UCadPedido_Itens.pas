@@ -247,6 +247,9 @@ type
     vID_Servico_Ant: Integer;
     vUnidade_Ant: String;
 
+    vVlrTotal_Ant : Real;
+    vPerc_IPI_Ant : Real;
+
     procedure prc_Buscar_Imposto(Auxiliar, Nome: String);
     procedure prc_Calcular_VlrMat;
 
@@ -269,6 +272,7 @@ type
     procedure prc_Calcular_VlrItens;
     procedure prc_Opcao_TipoOS;
     procedure prc_Gravar_mItens2;
+    procedure prc_Calcula_IPI_Pago_Empresa;
 
     function prc_Senha_Desconto: Boolean;
     function fnc_Busca_Preco_Orig: Real;
@@ -338,6 +342,9 @@ begin
 
   vCodProdutoAnt := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
   vID_CFOPAnt    := fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger;
+
+  vVlrTotal_Ant := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat));
+  vPerc_IPI_Ant := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat));
 
   Label13.Visible     := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'I');
   DBDateEdit1.Visible := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'I');
@@ -1150,6 +1157,18 @@ begin
       if not fnc_Verifica_SubstTributaria then
         exit;
     end;
+
+    //10/01/2019
+    if fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger <> fDMCadPedido.cdsClienteCODIGO.AsInteger then
+      fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,[loCaseInsensitive]);
+    if (fDMCadPedido.cdsClienteIPI_PAGO_FILIAL.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat)) > 0) then
+    begin
+      if ((StrToFloat(FormatFloat('0.00',vVlrTotal_Ant)) <> StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat))) or
+         (StrToFloat(FormatFloat('0.00',vPerc_IPI_Ant)) <> StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat))) or
+         (vCodProdutoAnt <> fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger) or (vState = 'I')) then
+        prc_Calcula_IPI_Pago_Empresa;
+    end;
+    //******************
 
     if fDMCadPedido.qParametros_ProdUSA_TAM_INDIVIDUAL.AsString = 'S' then
       fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString + ' TAM. ' + fDMCadPedido.cdsPedido_ItensTAMANHO.AsString
@@ -2570,7 +2589,7 @@ begin
   Result := 0;
   begin
   //27/06/2018
-  //if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger > 0) and (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString <> 'S') then
+  //if (fDMCadPedido.cdsPedido_ItensID_NCM.AsInteger > 0) and (fDMCadPedido.cdsFilialSIMPLES.AsString <> 'S') then
   if (fDMCadPedido.cdsPedido_ItensID_NCM.AsInteger > 0) then
     if fDMCadPedido.cdsClienteCODIGO.AsInteger <> fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger then
       fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,[loCaseInsensitive]);
@@ -2630,6 +2649,19 @@ begin
   fDMInformar_Tam.mItensItem_original.AsInteger        := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
   fDMInformar_Tam.mItensNome_Produto_Original.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString;
   fDMInformar_Tam.mItens.Post;
+end;
+
+procedure TfrmCadPedido_Itens.prc_Calcula_IPI_Pago_Empresa;
+var
+  vVlrAux : Real;
+  vIPIAux : Real;
+begin
+  vVlrAux := fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat * fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat;
+  vIPIAux := fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat +
+            StrToFloat(FormatFloat('0.00',(fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat * fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat) / 100));
+  vVlrAux := StrToFloat(FormatFloat('0.0000',vVlrAux / vIPIAux));
+  fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000',vVlrAux));
+  prc_Calcular_VlrItens;
 end;
 
 end.

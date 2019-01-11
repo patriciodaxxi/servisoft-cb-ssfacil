@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 623
+    Height = 631
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -770,7 +770,7 @@ object fMenu: TfMenu
         OnClick = ConsultaNotasEntradaSada1Click
       end
       object ConsultaProdutosSemVendasPedidosnoPerodo1: TMenuItem
-        Caption = 'Consulta Produtos Sem Vendas(Pedidos) no Per'#237'odo'
+        Caption = 'Consulta Produtos/Clientes Sem Vendas(Pedidos) no Per'#237'odo'
         OnClick = ConsultaProdutosSemVendasPedidosnoPerodo1Click
       end
       object ConsultaPedidoProcesso1: TMenuItem
@@ -4089,6 +4089,12 @@ object fMenu: TfMenu
         CompName = 'ImprimirMinuta1'
         Caption = 'Imprimir Minuta'
         GroupName = 'Nota Fiscal'
+      end
+      item
+        FormName = 'frmConsProduto_Sem_Ped'
+        CompName = 'btnInativar'
+        Caption = 'Inativar os Clientes Selecionados'
+        GroupName = 'Consulta Produto / Clientes Sem Vendas'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

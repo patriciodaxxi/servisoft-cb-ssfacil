@@ -1,6 +1,6 @@
 object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
-  Left = 143
-  Top = 60
+  Left = 199
+  Top = 51
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
   Caption = 'Consulta de Produtos sem Vendas (Pedidos) no per'#237'odo'
@@ -23,7 +23,7 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
     Left = 0
     Top = 0
     Width = 898
-    Height = 35
+    Height = 61
     Align = alTop
     Color = clSilver
     TabOrder = 0
@@ -34,6 +34,14 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
       Height = 13
       Alignment = taRightJustify
       Caption = 'Data In'#237'cio sem Venda:'
+    end
+    object Label2: TLabel
+      Left = 27
+      Top = 40
+      Width = 107
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Data Final sem Venda:'
     end
     object DateEdit1: TDateEdit
       Left = 135
@@ -47,8 +55,8 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
       TabOrder = 0
     end
     object btnConsultar: TNxButton
-      Left = 233
-      Top = 4
+      Left = 236
+      Top = 24
       Width = 182
       Height = 30
       Caption = 'Efeturar Pesquisa'
@@ -114,13 +122,13 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 2
       Transparent = True
       OnClick = btnConsultarClick
     end
     object btnImprimir: TNxButton
-      Left = 414
-      Top = 4
+      Left = 417
+      Top = 24
       Width = 182
       Height = 30
       Caption = 'Imprimir'
@@ -186,95 +194,35 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 3
       Transparent = True
       OnClick = btnImprimirClick
     end
-  end
-  object SMDBGrid1: TSMDBGrid
-    Left = 0
-    Top = 76
-    Width = 898
-    Height = 535
-    Align = alClient
-    Ctl3D = False
-    DataSource = DMConsPedido.dsProduto_Sem_Venda
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    ParentCtl3D = False
-    ReadOnly = True
-    TabOrder = 1
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    OnTitleClick = SMDBGrid1TitleClick
-    Flat = True
-    BandsFont.Charset = DEFAULT_CHARSET
-    BandsFont.Color = clWindowText
-    BandsFont.Height = -11
-    BandsFont.Name = 'MS Sans Serif'
-    BandsFont.Style = []
-    Groupings = <>
-    GridStyle.Style = gsCustom
-    GridStyle.OddColor = clWindow
-    GridStyle.EvenColor = clWindow
-    TitleHeight.PixelCount = 24
-    FooterColor = clBtnFace
-    ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
-    RegistryKey = 'Software\Scalabium'
-    RegistrySection = 'SMDBGrid'
-    WidthOfIndicator = 11
-    DefaultRowHeight = 17
-    ScrollBars = ssHorizontal
-    RowCount = 2
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'ID_PRODUTO'
-        Title.Alignment = taCenter
-        Title.Caption = 'ID Produto'
-        Width = 72
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'REFERENCIA'
-        Title.Alignment = taCenter
-        Title.Caption = 'Refer'#234'ncia'
-        Width = 149
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOME'
-        Title.Alignment = taCenter
-        Title.Caption = 'Nome Produto'
-        Width = 458
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DTEMISSAO'
-        Title.Alignment = taCenter
-        Title.Caption = 'Dt. Ult'#237'mo Pedido'
-        Width = 98
-        Visible = True
-      end>
+    object DateEdit2: TDateEdit
+      Left = 135
+      Top = 32
+      Width = 100
+      Height = 21
+      Ctl3D = True
+      NumGlyphs = 2
+      ParentCtl3D = False
+      StartOfWeek = Sun
+      TabOrder = 1
+    end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 35
+    Top = 61
     Width = 898
     Height = 41
     Align = alTop
-    TabOrder = 2
+    TabOrder = 1
     Visible = False
     object Label1: TLabel
       Left = 256
       Top = 8
-      Width = 321
-      Height = 24
+      Width = 330
+      Height = 25
       Caption = '.... Aguarde, Gerando Consulta ....'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlue
@@ -283,5 +231,212 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
       Font.Style = [fsBold]
       ParentFont = False
     end
+  end
+  object RzPageControl1: TRzPageControl
+    Left = 0
+    Top = 102
+    Width = 898
+    Height = 509
+    ActivePage = TS_Clientes
+    Align = alClient
+    TabIndex = 1
+    TabOrder = 2
+    FixedDimension = 19
+    object TS_Produto: TRzTabSheet
+      Caption = 'Produtos'
+      object SMDBGrid1: TSMDBGrid
+        Left = 0
+        Top = 0
+        Width = 894
+        Height = 486
+        Align = alClient
+        Ctl3D = False
+        DataSource = DMConsPedido.dsProduto_Sem_Venda
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        ParentCtl3D = False
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        OnTitleClick = SMDBGrid1TitleClick
+        Flat = True
+        BandsFont.Charset = DEFAULT_CHARSET
+        BandsFont.Color = clWindowText
+        BandsFont.Height = -11
+        BandsFont.Name = 'MS Sans Serif'
+        BandsFont.Style = []
+        Groupings = <>
+        GridStyle.Style = gsCustom
+        GridStyle.OddColor = clWindow
+        GridStyle.EvenColor = clWindow
+        TitleHeight.PixelCount = 24
+        FooterColor = clBtnFace
+        ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+        RegistryKey = 'Software\Scalabium'
+        RegistrySection = 'SMDBGrid'
+        WidthOfIndicator = 11
+        DefaultRowHeight = 17
+        ScrollBars = ssHorizontal
+        RowCount = 2
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'ID_PRODUTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID Produto'
+            Width = 72
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'REFERENCIA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Refer'#234'ncia'
+            Width = 149
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nome Produto'
+            Width = 458
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DTEMISSAO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Dt. Ult'#237'mo Pedido'
+            Width = 98
+            Visible = True
+          end>
+      end
+    end
+    object TS_Clientes: TRzTabSheet
+      Caption = 'Clientes'
+      object SMDBGrid2: TSMDBGrid
+        Left = 0
+        Top = 41
+        Width = 894
+        Height = 445
+        Align = alClient
+        Ctl3D = False
+        DataSource = DMConsPedido.dsCliente_Sem_Venda
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+        ParentCtl3D = False
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        OnTitleClick = SMDBGrid2TitleClick
+        Flat = True
+        BandsFont.Charset = DEFAULT_CHARSET
+        BandsFont.Color = clWindowText
+        BandsFont.Height = -11
+        BandsFont.Name = 'MS Sans Serif'
+        BandsFont.Style = []
+        Groupings = <>
+        GridStyle.Style = gsCustom
+        GridStyle.OddColor = clWindow
+        GridStyle.EvenColor = clWindow
+        TitleHeight.PixelCount = 24
+        FooterColor = clBtnFace
+        ExOptions = [eoCheckBoxSelect, eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+        RegistryKey = 'Software\Scalabium'
+        RegistrySection = 'SMDBGrid'
+        WidthOfIndicator = 27
+        DefaultRowHeight = 17
+        ScrollBars = ssHorizontal
+        ColCount = 7
+        RowCount = 2
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'CODIGO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'digo'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME'
+            Title.Caption = 'Nome'
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'CNPJ_CPF'
+            Title.Alignment = taCenter
+            Title.Caption = 'CNPJ / CPF'
+            Width = 137
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'DTEMISSAO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Dt. Emiss'#227'o'
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'UF'
+            Title.Alignment = taCenter
+            Width = 32
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CIDADE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Cidade'
+            Width = 294
+            Visible = True
+          end>
+      end
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 894
+        Height = 41
+        Align = alTop
+        Color = clSilver
+        TabOrder = 1
+        object btnInativar: TNxButton
+          Left = 112
+          Top = 8
+          Width = 215
+          Height = 30
+          Caption = 'Inativar os Clientes Selecionados'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlue
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+          OnClick = btnInativarClick
+        end
+      end
+    end
+  end
+  object UCControls1: TUCControls
+    GroupName = 'Consulta Produto / Clientes Sem Vendas'
+    UserControl = fMenu.UserControl1
+    NotAllowed = naDisabled
+    Left = 730
+    Top = 262
   end
 end

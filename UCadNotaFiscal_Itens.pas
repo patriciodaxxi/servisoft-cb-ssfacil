@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, UDMCadNotaFiscal, StdCtrls,
   Buttons, RxLookup, DBCtrls, DB, Mask, RxDBComb, UCadProduto, UCadUnidade, UCadCFOP, RzTabs, Grids, DBGrids, uCadNCM,
   SMDBGrid, UCadNotaFiscal_Itens_Imp, UDMInformar_Tam, NxCollection, UInformar_Tam, strUtils, RzPanel, USenha, SqlExpr,
-  UCadNotaFiscal_Itens_Drawback;
+  UCadNotaFiscal_Itens_Drawback, Menus, RzButton;
 
 type
   TfrmCadNotaFiscal_Itens = class(TForm)
@@ -289,6 +289,9 @@ type
     vIDCombAnt: Integer;
     vPerc_BRedICMS_NCM: Real;
 
+    vVlrTotal_Ant : Real;
+    vPerc_IPI_Ant : Real;
+
     procedure prc_Buscar_Imposto(Auxiliar, Nome: String);
     procedure prc_Calcular_VlrItens;
 
@@ -318,6 +321,7 @@ type
 
     procedure prc_Estoque(ID_Produto: Integer);
     procedure prc_Le_NCM_Geral;
+    procedure prc_Calcula_IPI_Pago_Empresa;
 
     function fnc_Verifica_Simples: Boolean;
     function fnc_Verifica_SubstTributaria: Boolean;
@@ -418,6 +422,9 @@ begin
   vID_OperacaoAnt := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger;
   vFinalidadeAnt  := fDMCadNotaFiscal.cdsNotaFiscal_ItensFINALIDADE.AsString;
   vIDCombAnt      := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger;
+
+  vVlrTotal_Ant   := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat));
+  vPerc_IPI_Ant   := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat));
 
 //  pnlCFOP.Visible := (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger <= 0) or
 //                     (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger <= 0) or (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensFINALIDADE.AsString) = '');
@@ -1140,6 +1147,8 @@ var
   vQtdAux: Real;
   vGravar_Tab_Tam: String;
   vAux: String;
+  vVlrAux : Real;
+  vIPIAux : Real;
 begin
   vGravacao_Ok := False;
   if fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString = '0' then
@@ -1155,7 +1164,21 @@ begin
   begin
     if MessageDlg('Cliente com suspensão de IPI, deseja confirmar este item com lançamento de IPI?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
       exit;
-  end;     
+  end;
+
+  //10/01/2019  Ajuste do IPI MB
+  if fDMCadNotaFiscal.cdsClienteCODIGO.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger then
+    fDMCadNotaFiscal.cdsCliente.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,[loCaseInsensitive]);
+  if (fDMCadNotaFiscal.cdsClienteIPI_PAGO_FILIAL.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat)) > 0) then
+  begin
+    if ((StrToFloat(FormatFloat('0.00',vVlrTotal_Ant)) <> StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat))) or
+       (StrToFloat(FormatFloat('0.00',vPerc_IPI_Ant)) <> StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat))) or
+       (vID_Produto_Ant <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger) or (fDMCadNotaFiscal.vState_Item = 'I')) and
+       (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger <= 0) then
+      prc_Calcula_IPI_Pago_Empresa;
+  end;
+  //******************
+
   if fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'N' then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
 
@@ -3065,9 +3088,9 @@ begin
 end;
 
 function TfrmCadNotaFiscal_Itens.fnc_Busca_Preco_Orig: Real;
-var
-  vPrecoAux: Real;
-  sds: TSQLDataSet;
+//var
+//  vPrecoAux: Real;
+//  sds: TSQLDataSet;
 begin
   Result := StrToFloat(FormatFloat('0.000000',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat));
   {vPrecoAux := 0;
@@ -3160,6 +3183,19 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsInteger := fDMCadNotaFiscal.cdsTab_NCMID_OBS_LEI.AsInteger
   else
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.Clear;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.prc_Calcula_IPI_Pago_Empresa;
+var
+  vVlrAux : Real;
+  vIPIAux : Real;
+begin
+  vVlrAux := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat;
+  vIPIAux := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat +
+            StrToFloat(FormatFloat('0.00',(fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat) / 100));
+  vVlrAux := StrToFloat(FormatFloat('0.0000',vVlrAux / vIPIAux));
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000',vVlrAux));
+  prc_Calcular_VlrItens;
 end;
 
 end.
