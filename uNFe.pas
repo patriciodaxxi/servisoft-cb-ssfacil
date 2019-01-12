@@ -4368,6 +4368,11 @@ begin
       fDMNFe.mItensNFeTipoCofins.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensTIPO_COFINS.AsString;
       fDMNFe.mItensNFeCodPis.AsString     := fDMCadNotaFiscal.cdsTab_PisCODIGO.AsString;
       fDMNFe.mItensNFeTipoPis.AsString    := fDMCadNotaFiscal.cdsNotaFiscal_ItensTIPO_PIS.AsString;
+
+      //12/01/2019
+      if (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '7') and (trim(fDMCadNotaFiscal.cdsProdutoNOME_MODELO.AsString) <> '') then
+        vTextoDetNFe := vTextoDetNFe + TirarAcento(fDMCadNotaFiscal.cdsProdutoNOME_MODELO.AsString) + ' ';
+      //****************
       if Trim(fDMCadNotaFiscal.cdsProdutoCOMPLEMENTO.AsString) <> '' then
         vTextoDetNFe := TirarAcento(fDMCadNotaFiscal.cdsProdutoCOMPLEMENTO.AsString) + ' ';
 

@@ -3487,7 +3487,7 @@ type
     procedure prc_Abrir_Acessorios(Tipo: String);
     procedure Abrir_cdsDuplicata(ID: Integer);
     procedure prc_Gravar_mCarimbo(Carimbo,Referencia,Combinacao: String);
-    procedure prc_Filtrar_Produto_Cliente(Somente_Filial: Boolean = False);
+    //procedure prc_Filtrar_Produto_Cliente(Somente_Filial: Boolean = False);
     procedure prc_Abrir_Servico;
 
     procedure prc_Gravar_Email_Pessoa(CODIGO: Integer; Email: String);
@@ -4503,43 +4503,6 @@ end;
 procedure TDMCadPedido.cdsPedido_Item_TipoNewRecord(DataSet: TDataSet);
 begin
   cdsPedido_Item_TipoVLR_DOBRA.AsFloat := 0;
-end;
-
-procedure TDMCadPedido.prc_Filtrar_Produto_Cliente(Somente_Filial: Boolean = False);
-var
-  i: Integer;
-  vTexto1: WideString;
-  vComando : String;
-begin
-  if qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S' then
-  begin
-    if cdsClienteCODIGO.AsInteger <> cdsPedidoID_CLIENTE.AsInteger then
-      cdsCliente.Locate('CODIGO',cdsPedidoID_CLIENTE.AsInteger,([Locaseinsensitive]));
-    if cdsClienteID_TAB_PRECO.AsInteger <= 0 then
-      exit;
-  end;
-  vTexto1 := UpperCase(ctProduto);
-  cdsProduto.Close;
-  sdsProduto.CommandText := vTexto1;
-  if qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S' then
-  begin
-    vComando := ' LEFT JOIN tab_preco_itens I ON P.ID = I.ID_PRODUTO '
-              + ' WHERE I.ID = ' + IntToStr(cdsClienteID_TAB_PRECO.AsInteger);
-    sdsProduto.CommandText := sdsProduto.CommandText + vComando;
-  end
-  else
-  begin
-    if Posex('WHERE',vTexto1) <= 0 then
-      vTexto1 := ' WHERE 0 = 0 '
-    else
-      vTexto1 := ' ';
-    sdsProduto.CommandText := sdsProduto.CommandText + vTexto1;
-    if (cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') and not(Somente_Filial) then
-      sdsProduto.CommandText := sdsProduto.CommandText + ' AND ID_CLIENTE = ' + cdsPedidoID_CLIENTE.AsString;
-    if qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S' then
-      sdsProduto.CommandText := sdsProduto.CommandText + ' AND FILIAL = ' + cdsPedidoFILIAL.AsString;
-  end;
-  cdsProduto.Open;
 end;
 
 procedure TDMCadPedido.cdsPedido_Item_QtdNewRecord(DataSet: TDataSet);

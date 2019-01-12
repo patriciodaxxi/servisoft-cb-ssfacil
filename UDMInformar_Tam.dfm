@@ -2499,10 +2499,16 @@ object DMInformar_Tam: TDMInformar_Tam
     end
   end
   object mTamAux: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     Left = 296
     Top = 40
+    Data = {
+      620000009619E0BD01000000180000000400000000000300000062000754616D
+      616E686F0100490000000100055749445448020002000A000351746408000400
+      00000000064772617661720200030000000000084974656D5F54616D04000100
+      000000000000}
     object mTamAuxTamanho: TStringField
       FieldName = 'Tamanho'
       Size = 10

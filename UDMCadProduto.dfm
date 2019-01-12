@@ -467,6 +467,10 @@ object dmCadProduto: TdmCadProduto
     object sdsProdutoID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
     end
+    object sdsProdutoNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -988,6 +992,10 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsProdutoID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
+    end
+    object cdsProdutoNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
     end
   end
   object dsProduto: TDataSource
@@ -1620,8 +1628,8 @@ object dmCadProduto: TdmCadProduto
     GetMetadata = False
     CommandText = 
       'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_T' +
-      'OTAL'#13#10'FROM PRODUTO'#13#10'WHERE ((TIPO_REG = '#39'M'#39') OR (TIPO_REG = '#39'S'#39'))' +
-      #13#10'      AND  INATIVO = '#39'N'#39#13#10
+      'OTAL, USA_COR'#13#10'FROM PRODUTO'#13#10'WHERE ((TIPO_REG = '#39'M'#39') OR (TIPO_RE' +
+      'G = '#39'S'#39'))'#13#10'      AND  INATIVO = '#39'N'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1660,6 +1668,11 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsMaterialPRECO_CUSTO_TOTAL: TFloatField
       FieldName = 'PRECO_CUSTO_TOTAL'
+    end
+    object cdsMaterialUSA_COR: TStringField
+      FieldName = 'USA_COR'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsMaterial: TDataSource
@@ -4828,6 +4841,12 @@ object dmCadProduto: TdmCadProduto
       Size = 40
       Calculated = True
     end
+    object cdsProduto_Comb_MatclUsa_Cor: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clUsa_Cor'
+      Size = 1
+      Calculated = True
+    end
   end
   object dsProduto_Comb_Mat: TDataSource
     DataSet = cdsProduto_Comb_Mat
@@ -7651,6 +7670,11 @@ object dmCadProduto: TdmCadProduto
     end
     object qParametros_LoteLOTE_PROCESSO: TStringField
       FieldName = 'LOTE_PROCESSO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_LoteLOTE_CALCADO_NOVO: TStringField
+      FieldName = 'LOTE_CALCADO_NOVO'
       FixedChar = True
       Size = 1
     end

@@ -3,7 +3,7 @@ unit uCalculo_Pedido;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, SqlExpr, DmdDatabase, Messages, Controls, Graphics, UDMCadPedido, Variants, DB;
+  Classes, SysUtils, Dialogs, SqlExpr, DmdDatabase, Messages, Controls, Graphics, UDMCadPedido, Variants, DB, StrUtils;
                                                       
   procedure prc_Monta_Itens_Imp(fDMCadPedido: TDMCadPedido; Rotulo: Boolean = False);
   procedure prc_Calcular_Desconto_Novo(fDMCadPedido: TDMCadPedido; Repetir: Boolean);
@@ -35,6 +35,8 @@ uses
   function fnc_Calcula_Ace_Roldana(fDMCadPedido: TDMCadPedido): Real;
 
   procedure prc_Inf_Lucratividade(fDMCadPedido: TDMCadPedido);
+
+  procedure prc_Filtrar_Produto_Cliente(fDMCadPedido: TDMCadPedido ; Somente_Filial: Boolean = False);
 
   //procedure prc_Abrir_qNCM_UF(fDMCadPedido: TDMCadPedido; ID_NCM: Integer; UF, Importado_Nacional: String);
   //procedure prc_Abrir_qProduto_UF(fDMCadPedido: TDMCadPedido; ID_NCM: Integer; UF: String);
@@ -2094,6 +2096,67 @@ begin
 
   fDMCadPedido.cdsPedido_ItensBASE_ICMSSUBST.AsFloat := vBaseAux;
   fDMCadPedido.cdsPedido_ItensVLR_ICMSSUBST.AsFloat  := vVlr_Dif;
+end;
+
+procedure prc_Filtrar_Produto_Cliente(fDMCadPedido: TDMCadPedido ; Somente_Filial: Boolean = False);
+var
+  i: Integer;
+  vTexto1: WideString;
+  vComando : String;
+begin
+  if fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S' then
+  begin
+    if fDMCadPedido.cdsClienteCODIGO.AsInteger <> fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger then
+      fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,([Locaseinsensitive]));
+    if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger <= 0 then
+      exit;
+  end;
+  vTexto1 := UpperCase(fDMCadPedido.ctProduto);
+  fDMCadPedido.cdsProduto.Close;
+  fDMCadPedido.sdsProduto.CommandText := vTexto1;
+  if fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S' then
+  begin
+    vComando := ' LEFT JOIN tab_preco_itens I ON P.ID = I.ID_PRODUTO '
+              + ' WHERE I.ID = ' + IntToStr(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger);
+    fDMCadPedido.sdsProduto.CommandText := fDMCadPedido.sdsProduto.CommandText + vComando;
+  end
+  else
+  begin
+    if Posex('WHERE',vTexto1) <= 0 then
+      vTexto1 := ' WHERE 0 = 0 '
+    else
+      vTexto1 := ' ';
+
+    vTexto1 := vTexto1 + ' AND INATIVO = ' + QuotedStr('N');
+    if vTipo_Pedido = 'P' then
+    begin
+      if fDMCadPedido.cdsParametrosMOSTRAR_MATERIAL_PED.AsString = 'B' then
+        vTexto1 := vTexto1 + ' AND ((TIPO_REG = ' + QuotedStr('P') + ') OR (TIPO_REG = ' + QuotedStr('S') + '))'
+      else
+      if fDMCadPedido.cdsParametrosMOSTRAR_MATERIAL_PED.AsString <> 'S' then
+        vTexto1 := vTexto1 + ' AND TIPO_REG = ' + QuotedStr('P');
+    end
+    else
+    if vTipo_Pedido = 'C' then
+    begin
+      if fDMCadPedido.cdsParametrosNOTA_ENTRADA_MOSTRAR_PROD.AsString = 'P' then
+        vTexto1 := vTexto1 + ' AND TIPO_REG = ' + QuotedStr('P')
+      else
+      if fDMCadPedido.cdsParametrosNOTA_ENTRADA_MOSTRAR_PROD.AsString = 'M' then
+        vTexto1 := vTexto1 + ' AND TIPO_REG = ' + QuotedStr('M')
+    end;
+
+    fDMCadPedido.sdsProduto.CommandText := fDMCadPedido.sdsProduto.CommandText + vTexto1;
+    if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') and not(Somente_Filial) then
+      fDMCadPedido.sdsProduto.CommandText := fDMCadPedido.sdsProduto.CommandText + ' AND ID_CLIENTE = ' + fDMCadPedido.cdsPedidoID_CLIENTE.AsString;
+    //Foi acrescentado o tipo = G para mostrar também os produtos que não possuirem clientes informados    11/01/2019
+    if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') and not(Somente_Filial) then
+      fDMCadPedido.sdsProduto.CommandText := fDMCadPedido.sdsProduto.CommandText + ' AND ((ID_CLIENTE = ' + fDMCadPedido.cdsPedidoID_CLIENTE.AsString + ') OR (ID_CLIENTE IS NULL)) ';
+    //***********************
+    if fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S' then
+      fDMCadPedido.sdsProduto.CommandText := fDMCadPedido.sdsProduto.CommandText + ' AND FILIAL = ' + fDMCadPedido.cdsPedidoFILIAL.AsString;
+  end;
+  fDMCadPedido.cdsProduto.Open;
 end;
 
 end.

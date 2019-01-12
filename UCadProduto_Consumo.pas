@@ -41,6 +41,8 @@ type
     lblID: TLabel;
     dbedtID: TDBEdit;
     DBCheckBox2: TDBCheckBox;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -315,6 +317,10 @@ end;
 procedure TfrmCadProduto_Consumo.SpeedButton1Click(Sender: TObject);
 begin
   ffrmCadMaterial := TfrmCadMaterial.Create(self);
+  if fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger > 0 then
+    ffrmCadMaterial.vID_Produto_Local := fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger
+  else
+    ffrmCadMaterial.vID_Produto_Local := 0;
   ffrmCadMaterial.ShowModal;
   FreeAndNil(ffrmCadMaterial);
 
@@ -359,7 +365,11 @@ end;
 procedure TfrmCadProduto_Consumo.RxDBLookupCombo4Exit(Sender: TObject);
 begin
   if RxDBLookupCombo4.Text <> '' then
+  begin
+    if fDMCadProduto.cdsPosicaoID.AsInteger <> RxDBLookupCombo4.KeyValue then
+      fDMCadProduto.cdsPosicao.Locate('ID',RxDBLookupCombo4.KeyValue,([Locaseinsensitive]));
     fDMCadProduto.cdsProduto_ConsumoIMP_TALAO.AsString := fDMCadProduto.cdsPosicaoIMP_TALAO.AsString;
+  end;
 end;
 
 procedure TfrmCadProduto_Consumo.dbedtIDEnter(Sender: TObject);
