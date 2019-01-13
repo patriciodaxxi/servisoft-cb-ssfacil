@@ -766,6 +766,8 @@ type
     Label245: TLabel;
     Label246: TLabel;
     DBEdit159: TDBEdit;
+    Label247: TLabel;
+    Edit12: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -965,6 +967,8 @@ type
     procedure SpeedButton16Click(Sender: TObject);
     procedure SpeedButton18Click(Sender: TObject);
     procedure SpeedButton17Click(Sender: TObject);
+    procedure Edit12KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1572,7 +1576,10 @@ begin
         SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametros_PedPEDIDO_LOJA.AsString = 'S')
     else
     if (SMDBGrid1.Columns[i].FieldName = 'TAM_CALC') then
-        SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametros_ProdMOSTRAR_TAM_CALC.AsString = 'S');
+        SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametros_ProdMOSTRAR_TAM_CALC.AsString = 'S')
+    else
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_MODELO') then
+        SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S')
   end;
   DBMemo2.Visible     := (fDMCadProduto.qParametros_ProdMOSTRAR_OBS_CONSULTA.AsString = 'S');
   Label37.Visible     := ((fDMCadProduto.qParametrosUSA_COD_BARRAS.AsString = 'S') and (fDMCadProduto.qParametrosUSA_COD_BARRAS_PROPRIO.AsString <> 'S'));
@@ -1768,6 +1775,8 @@ begin
     Label110.Caption := 'Construção/Linha:';
   Label246.Visible  := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
   DBEdit159.Visible := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  Label247.Visible  := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  Edit12.Visible    := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
@@ -1811,6 +1820,10 @@ begin
     if (RxDbFilial.Text <> '') and (fDMCadProduto.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
       fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText
                                       + ' AND PRO.FILIAL = ' + IntToStr(RxDbFilial.KeyValue);
+
+    if trim(Edit12.Text) <> '' then
+      fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText
+                                      + ' AND PRO.NOME_MODELO LIKE ' + QuotedStr('%'+Edit12.Text+'%');
 
     case ComboBox2.ItemIndex of
       0: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND TIPO_REG = ' + QuotedStr('P');
@@ -5711,6 +5724,13 @@ begin
 
   if trim(vOBS) <> '' then
     MessageDlg('*** Combinações sem a COR no Material!' + #13 + vOBS , mtInformation, [mbOk], 0);
+end;
+
+procedure TfrmCadProduto.Edit12KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_Return) and (trim(Edit12.Text) <> '') then
+    btnConsultarClick(Sender);
 end;
 
 end.

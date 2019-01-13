@@ -369,6 +369,13 @@ begin
     if fDMCadProduto.cdsPosicao.Locate('ID',RxDBLookupCombo4.KeyValue,([Locaseinsensitive])) then
       if fDMCadProduto.cdsPosicaoIMP_TALAO.AsString = 'S' then
         fDMCadProduto.cdsProduto_Comb_MatIMP_TALAO.AsString  := fDMCadProduto.cdsPosicaoIMP_TALAO.AsString;
+    if (RxDBLookupCombo4.KeyValue <> vID_PosicaoAnt) then
+    begin
+      if (fDMCadProduto.cdsPosicaoID_SETOR.AsInteger > 0) then
+        fDMCadProduto.cdsProduto_Comb_MatID_SETOR.AsInteger := fDMCadProduto.cdsPosicaoID_SETOR.AsInteger
+      else
+        fDMCadProduto.cdsProduto_Comb_MatID_SETOR.Clear;
+    end;
   end;
 end;
 

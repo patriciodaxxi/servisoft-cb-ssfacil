@@ -416,6 +416,7 @@ object frmCadProduto_Consumo: TfrmCadProduto_Consumo
       LookupDisplay = 'NOME'
       LookupSource = dmCadProduto.dsPosicao
       TabOrder = 6
+      OnEnter = RxDBLookupCombo4Enter
       OnExit = RxDBLookupCombo4Exit
     end
     object RxDBComboBox1: TRxDBComboBox
@@ -472,6 +473,7 @@ object frmCadProduto_Consumo: TfrmCadProduto_Consumo
         'Sim'
         'N'#227'o')
       TabOrder = 11
+      TabStop = False
       Values.Strings = (
         'S'
         'N')
@@ -521,6 +523,7 @@ object frmCadProduto_Consumo: TfrmCadProduto_Consumo
       Top = 64
       Width = 183
       Height = 17
+      TabStop = False
       Caption = 'Espec'#237'fico para um Cliente'
       DataField = 'ESPECIFICO'
       DataSource = dmCadProduto.dsProduto_Consumo

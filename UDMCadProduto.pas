@@ -1875,6 +1875,8 @@ type
     qParametros_LoteLOTE_CALCADO_NOVO: TStringField;
     cdsMaterialUSA_COR: TStringField;
     cdsProduto_Comb_MatclUsa_Cor: TStringField;
+    cdsProduto_ConsultaNOME_MODELO: TStringField;
+    cdsPosicaoID_SETOR: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

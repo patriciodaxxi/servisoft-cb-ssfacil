@@ -64,6 +64,7 @@ type
     procedure dbedtIDExit(Sender: TObject);
     procedure RxDBLookupCombo1Exit(Sender: TObject);
     procedure RxDBLookupCombo2Exit(Sender: TObject);
+    procedure RxDBLookupCombo4Enter(Sender: TObject);
   private
     { Private declarations }
     ffrmCadUnidade: TfrmCadUnidade;
@@ -73,6 +74,7 @@ type
     vID_Setor_Loc : Integer;
     vID_Material_Loc : Integer;
     vItem_Loc : Integer;
+    vID_PosicaoAnt : Integer;
 
     function  fnc_Erro: Boolean;
     procedure prc_Monta_Tamanho;
@@ -369,6 +371,13 @@ begin
     if fDMCadProduto.cdsPosicaoID.AsInteger <> RxDBLookupCombo4.KeyValue then
       fDMCadProduto.cdsPosicao.Locate('ID',RxDBLookupCombo4.KeyValue,([Locaseinsensitive]));
     fDMCadProduto.cdsProduto_ConsumoIMP_TALAO.AsString := fDMCadProduto.cdsPosicaoIMP_TALAO.AsString;
+    if (RxDBLookupCombo4.KeyValue <> vID_PosicaoAnt) then
+    begin
+      if (fDMCadProduto.cdsPosicaoID_SETOR.AsInteger > 0) then
+        fDMCadProduto.cdsProduto_ConsumoID_SETOR.AsInteger := fDMCadProduto.cdsPosicaoID_SETOR.AsInteger
+      else
+        fDMCadProduto.cdsProduto_ConsumoID_SETOR.Clear;
+    end;
   end;
 end;
 
@@ -445,6 +454,11 @@ begin
     end;
   end;
 
+end;
+
+procedure TfrmCadProduto_Consumo.RxDBLookupCombo4Enter(Sender: TObject);
+begin
+  vID_PosicaoAnt := fDMCadProduto.cdsProduto_ConsumoID_POSICAO.AsInteger;
 end;
 
 end.

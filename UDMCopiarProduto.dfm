@@ -204,6 +204,70 @@ object DMCopiarProduto: TDMCopiarProduto
     object sdsProdutoID_SITTRIB_CF: TIntegerField
       FieldName = 'ID_SITTRIB_CF'
     end
+    object sdsProdutoTRANSFER: TStringField
+      FieldName = 'TRANSFER'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsProdutoPERC_COMISSAO: TFloatField
+      FieldName = 'PERC_COMISSAO'
+    end
+    object sdsProdutoGERAR_FCI: TStringField
+      FieldName = 'GERAR_FCI'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsProdutoMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+    end
+    object sdsProdutoTIPO_MAT: TStringField
+      FieldName = 'TIPO_MAT'
+      Size = 1
+    end
+    object sdsProdutoID_PROCESSO_GRUPO: TIntegerField
+      FieldName = 'ID_PROCESSO_GRUPO'
+    end
+    object sdsProdutoTIPO_PRODUCAO: TStringField
+      FieldName = 'TIPO_PRODUCAO'
+      Size = 1
+    end
+    object sdsProdutoID_MATERIAL_CRU: TIntegerField
+      FieldName = 'ID_MATERIAL_CRU'
+    end
+    object sdsProdutoID_FORMA: TIntegerField
+      FieldName = 'ID_FORMA'
+    end
+    object sdsProdutoLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object sdsProdutoALTURA: TFloatField
+      FieldName = 'ALTURA'
+    end
+    object sdsProdutoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
+    object sdsProdutoMULTIPLICADOR: TFloatField
+      FieldName = 'MULTIPLICADOR'
+    end
+    object sdsProdutoFATOR_CALCULO: TFloatField
+      FieldName = 'FATOR_CALCULO'
+    end
+    object sdsProdutoGERAR_WEB: TStringField
+      FieldName = 'GERAR_WEB'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsProdutoUNIDADE2: TStringField
+      FieldName = 'UNIDADE2'
+      Size = 6
+    end
+    object sdsProdutoID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
+    end
+    object sdsProdutoNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -212,7 +276,6 @@ object DMCopiarProduto: TDMCopiarProduto
     Top = 24
   end
   object cdsProduto: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -434,6 +497,70 @@ object DMCopiarProduto: TDMCopiarProduto
     object cdsProdutoID_SITTRIB_CF: TIntegerField
       FieldName = 'ID_SITTRIB_CF'
     end
+    object cdsProdutoTRANSFER: TStringField
+      FieldName = 'TRANSFER'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProdutoPERC_COMISSAO: TFloatField
+      FieldName = 'PERC_COMISSAO'
+    end
+    object cdsProdutoGERAR_FCI: TStringField
+      FieldName = 'GERAR_FCI'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProdutoMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+    end
+    object cdsProdutoTIPO_MAT: TStringField
+      FieldName = 'TIPO_MAT'
+      Size = 1
+    end
+    object cdsProdutoID_PROCESSO_GRUPO: TIntegerField
+      FieldName = 'ID_PROCESSO_GRUPO'
+    end
+    object cdsProdutoTIPO_PRODUCAO: TStringField
+      FieldName = 'TIPO_PRODUCAO'
+      Size = 1
+    end
+    object cdsProdutoID_MATERIAL_CRU: TIntegerField
+      FieldName = 'ID_MATERIAL_CRU'
+    end
+    object cdsProdutoID_FORMA: TIntegerField
+      FieldName = 'ID_FORMA'
+    end
+    object cdsProdutoLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object cdsProdutoALTURA: TFloatField
+      FieldName = 'ALTURA'
+    end
+    object cdsProdutoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
+    object cdsProdutoMULTIPLICADOR: TFloatField
+      FieldName = 'MULTIPLICADOR'
+    end
+    object cdsProdutoFATOR_CALCULO: TFloatField
+      FieldName = 'FATOR_CALCULO'
+    end
+    object cdsProdutoGERAR_WEB: TStringField
+      FieldName = 'GERAR_WEB'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProdutoUNIDADE2: TStringField
+      FieldName = 'UNIDADE2'
+      Size = 6
+    end
+    object cdsProdutoID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
+    end
+    object cdsProdutoNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
+    end
   end
   object dsProduto: TDataSource
     DataSet = cdsProduto
@@ -531,7 +658,6 @@ object DMCopiarProduto: TDMCopiarProduto
     end
   end
   object cdsProduto_Consumo: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Consumo
     IndexFieldNames = 'ID;ITEM'
@@ -655,7 +781,6 @@ object DMCopiarProduto: TDMCopiarProduto
     end
   end
   object cdsProduto_Tam: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Tam
     IndexFieldNames = 'ID;TAMANHO'
@@ -725,7 +850,6 @@ object DMCopiarProduto: TDMCopiarProduto
     end
   end
   object cdsProduto_Consumo_Tam: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProduto_ConsumosdsProduto_Consumo_Tam
     IndexFieldNames = 'ID;ITEM;TAMANHO'
