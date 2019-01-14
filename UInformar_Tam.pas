@@ -139,6 +139,7 @@ begin
     begin
       fDMInformar_Tam.mTamanho.Edit;
       fDMInformar_Tam.mTamanhoQtd.AsInteger := vQtdDiv * fDMInformar_Tam.qQtdGrade_ItensQTD.AsInteger;
+      fDMInformar_Tam.mTamanhoItem_Tam.AsInteger := fDMInformar_Tam.qQtdGrade_ItensID.AsInteger;
       fDMInformar_Tam.mTamanho.Post;
     end;
     fDMInformar_Tam.qQtdGrade_Itens.Next;

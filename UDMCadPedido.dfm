@@ -3532,9 +3532,11 @@ object DMCadPedido: TDMCadPedido
       DisplayFormat = '0.000##'
     end
     object cdsPedido_ItenssdsPedido_Cli: TDataSetField
+      Tag = 1
       FieldName = 'sdsPedido_Cli'
     end
     object cdsPedido_ItenssdsPedido_Material: TDataSetField
+      Tag = 1
       FieldName = 'sdsPedido_Material'
     end
     object cdsPedido_ItensGERAR_LOTE: TStringField
@@ -3549,13 +3551,13 @@ object DMCadPedido: TDMCadPedido
     object cdsPedido_ItensDTPRODUCAO: TDateField
       FieldName = 'DTPRODUCAO'
     end
-    object cdsPedido_ItensID_NCM: TIntegerField
-      FieldName = 'ID_NCM'
-    end
     object cdsPedido_ItensNCM: TStringField
       FieldName = 'NCM'
       ProviderFlags = []
       Size = 10
+    end
+    object cdsPedido_ItensID_NCM: TIntegerField
+      FieldName = 'ID_NCM'
     end
     object cdsPedido_ItensNUM_TALAO: TStringField
       FieldName = 'NUM_TALAO'
@@ -3567,6 +3569,7 @@ object DMCadPedido: TDMCadPedido
       Size = 1
     end
     object cdsPedido_ItenssdsPedido_Item_Tipo: TDataSetField
+      Tag = 1
       FieldName = 'sdsPedido_Item_Tipo'
     end
     object cdsPedido_ItensEND_FOTO: TStringField
@@ -3619,44 +3622,56 @@ object DMCadPedido: TDMCadPedido
       Size = 60
     end
     object cdsPedido_ItensTIPO_ACESSORIO: TStringField
+      Tag = 1
       FieldName = 'TIPO_ACESSORIO'
       FixedChar = True
       Size = 1
     end
     object cdsPedido_ItensCOMPRIMENTO_VOLUME: TFloatField
+      Tag = 1
       FieldName = 'COMPRIMENTO_VOLUME'
     end
     object cdsPedido_ItensQTD_LANCAR_ESTOQUE: TFloatField
+      Tag = 1
       FieldName = 'QTD_LANCAR_ESTOQUE'
     end
     object cdsPedido_ItensPERC_COMISSAO: TFloatField
       FieldName = 'PERC_COMISSAO'
     end
     object cdsPedido_ItensDTEXPEDICAO: TDateField
+      Tag = 1
       FieldName = 'DTEXPEDICAO'
     end
     object cdsPedido_ItensDTFATURA: TDateField
+      Tag = 1
       FieldName = 'DTFATURA'
     end
     object cdsPedido_ItensPERC_ICMS_FCP: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMS_FCP'
     end
     object cdsPedido_ItensPERC_ICMS_UF_DEST: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMS_UF_DEST'
     end
     object cdsPedido_ItensPERC_ICMS_PARTILHA: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMS_PARTILHA'
     end
     object cdsPedido_ItensVLR_ICMS_FCP: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMS_FCP'
     end
     object cdsPedido_ItensVLR_ICMS_UF_DEST: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMS_UF_DEST'
     end
     object cdsPedido_ItensVLR_ICMS_UF_REMET: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMS_UF_REMET'
     end
     object cdsPedido_ItensPERC_ICMS_INTER: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMS_INTER'
     end
     object cdsPedido_ItensVLR_DUPLICATA: TFloatField
@@ -3668,34 +3683,43 @@ object DMCadPedido: TDMCadPedido
       Size = 1
     end
     object cdsPedido_ItensVLR_DESCONTO_CALC: TFloatField
+      Tag = 1
       FieldName = 'VLR_DESCONTO_CALC'
       ProviderFlags = []
     end
     object cdsPedido_ItensDTCONFERENCIA: TDateField
+      Tag = 1
       FieldName = 'DTCONFERENCIA'
     end
     object cdsPedido_ItensHRCONFERENCIA: TTimeField
+      Tag = 1
       FieldName = 'HRCONFERENCIA'
     end
     object cdsPedido_ItensUSUARIO_CONF: TStringField
+      Tag = 1
       FieldName = 'USUARIO_CONF'
       Size = 15
     end
     object cdsPedido_ItensVLR_ICMSFRETE: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMSFRETE'
     end
     object cdsPedido_ItensQTD_SOBRA_OC: TFloatField
+      Tag = 1
       FieldName = 'QTD_SOBRA_OC'
     end
     object cdsPedido_ItensTIPO_SERVICO: TStringField
+      Tag = 1
       FieldName = 'TIPO_SERVICO'
       FixedChar = True
       Size = 1
     end
     object cdsPedido_ItensID_SERVICO_INT: TIntegerField
+      Tag = 1
       FieldName = 'ID_SERVICO_INT'
     end
     object cdsPedido_ItensNOME_SERVICO_INT: TStringField
+      Tag = 1
       FieldName = 'NOME_SERVICO_INT'
       Size = 150
     end
@@ -3710,18 +3734,23 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'PERC_MARGEM2'
     end
     object cdsPedido_ItensID_OS_SERV: TIntegerField
+      Tag = 1
       FieldName = 'ID_OS_SERV'
     end
     object cdsPedido_ItensNUM_OS_SERV: TIntegerField
+      Tag = 1
       FieldName = 'NUM_OS_SERV'
     end
     object cdsPedido_ItensID_SERVICO: TIntegerField
+      Tag = 1
       FieldName = 'ID_SERVICO'
     end
     object cdsPedido_ItensNUM_NOTA_ENT: TIntegerField
+      Tag = 1
       FieldName = 'NUM_NOTA_ENT'
     end
     object cdsPedido_ItensSERIE_NOTA_ENT: TStringField
+      Tag = 1
       FieldName = 'SERIE_NOTA_ENT'
       Size = 3
     end
@@ -3742,55 +3771,68 @@ object DMCadPedido: TDMCadPedido
       Size = 30
     end
     object cdsPedido_ItensQTD_CAIXA: TIntegerField
+      Tag = 1
       FieldName = 'QTD_CAIXA'
     end
     object cdsPedido_ItensNUM_LOTE_CONTROLE: TStringField
       FieldName = 'NUM_LOTE_CONTROLE'
     end
     object cdsPedido_ItensclVlr_Total_Custo: TFloatField
+      Tag = 1
       FieldKind = fkCalculated
       FieldName = 'clVlr_Total_Custo'
       DisplayFormat = '0.00'
       Calculated = True
     end
     object cdsPedido_ItensclVlr_Diferenca: TFloatField
+      Tag = 1
       FieldKind = fkCalculated
       FieldName = 'clVlr_Diferenca'
       DisplayFormat = '0.00'
       Calculated = True
     end
     object cdsPedido_ItensCOD_COR_CLIENTE: TStringField
+      Tag = 1
       FieldName = 'COD_COR_CLIENTE'
       Size = 10
     end
     object cdsPedido_ItensNOME_COR_CLIENTE: TStringField
+      Tag = 1
       FieldName = 'NOME_COR_CLIENTE'
       Size = 100
     end
     object cdsPedido_ItensTAMANHO_CLIENTE: TStringField
+      Tag = 1
       FieldName = 'TAMANHO_CLIENTE'
       Size = 10
     end
     object cdsPedido_ItensFOTO: TStringField
+      Tag = 1
       FieldName = 'FOTO'
       Size = 250
     end
     object cdsPedido_ItensVLR_MATERIAL: TFloatField
+      Tag = 1
       FieldName = 'VLR_MATERIAL'
     end
     object cdsPedido_ItensTEMPO: TFloatField
+      Tag = 1
       FieldName = 'TEMPO'
     end
     object cdsPedido_ItensDTBAIXA: TDateField
+      Tag = 1
       FieldName = 'DTBAIXA'
     end
     object cdsPedido_ItensTEMPO_REAL: TFloatField
+      Tag = 1
       FieldName = 'TEMPO_REAL'
     end
     object cdsPedido_ItensVLR_UNITARIO_REAL: TFloatField
+      Tag = 1
       FieldName = 'VLR_UNITARIO_REAL'
     end
     object cdsPedido_ItensFATOR_CALCULO_REAL: TFloatField
+      Tag = 1
       FieldName = 'FATOR_CALCULO_REAL'
     end
     object cdsPedido_ItensTIPO_OS: TStringField
@@ -3807,6 +3849,7 @@ object DMCadPedido: TDMCadPedido
       Size = 30
     end
     object cdsPedido_ItensBASE_IPI: TFloatField
+      Tag = 1
       FieldName = 'BASE_IPI'
       DisplayFormat = '0.00'
     end

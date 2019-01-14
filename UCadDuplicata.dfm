@@ -1,6 +1,6 @@
 object frmCadDuplicata: TfrmCadDuplicata
-  Left = 85
-  Top = 0
+  Left = 171
+  Top = 21
   Width = 1062
   Height = 657
   Caption = 'Duplicatas (A Receber/A Pagar)'
@@ -23,8 +23,8 @@ object frmCadDuplicata: TfrmCadDuplicata
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1054
-    Height = 607
+    Width = 1046
+    Height = 599
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -41,9 +41,9 @@ object frmCadDuplicata: TfrmCadDuplicata
       Caption = 'Consulta'
       object SMDBGrid1: TSMDBGrid
         Left = 0
-        Top = 207
-        Width = 1050
-        Height = 344
+        Top = 218
+        Width = 1042
+        Height = 325
         Align = alClient
         Ctl3D = False
         DataSource = DMCadDuplicata.dsDuplicata_Consulta
@@ -412,7 +412,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1050
+        Width = 1042
         Height = 30
         Align = alTop
         Color = 8404992
@@ -742,8 +742,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1050
-        Height = 147
+        Width = 1042
+        Height = 158
         Align = alTop
         Color = clSilver
         TabOrder = 0
@@ -772,7 +772,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object Label18: TLabel
           Left = 228
-          Top = 51
+          Top = 53
           Width = 86
           Height = 13
           Alignment = taRightJustify
@@ -780,14 +780,14 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object Label26: TLabel
           Left = 416
-          Top = 51
+          Top = 53
           Width = 25
           Height = 13
           Caption = 'Final:'
         end
         object Label27: TLabel
           Left = 239
-          Top = 72
+          Top = 74
           Width = 75
           Height = 13
           Alignment = taRightJustify
@@ -795,75 +795,75 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object Label28: TLabel
           Left = 416
-          Top = 72
+          Top = 74
           Width = 25
           Height = 13
           Caption = 'Final:'
         end
         object Shape1: TShape
-          Left = 829
+          Left = 845
           Top = 5
           Width = 23
           Height = 14
           Brush.Color = clGreen
         end
         object Label33: TLabel
-          Left = 858
+          Left = 874
           Top = 5
           Width = 37
           Height = 13
           Caption = 'Quitado'
         end
         object Label34: TLabel
-          Left = 858
+          Left = 874
           Top = 18
           Width = 42
           Height = 13
           Caption = 'Atrasado'
         end
         object Shape2: TShape
-          Left = 829
+          Left = 845
           Top = 18
           Width = 23
           Height = 14
           Brush.Color = clRed
         end
         object Shape3: TShape
-          Left = 829
+          Left = 845
           Top = 31
           Width = 23
           Height = 14
         end
         object Label35: TLabel
-          Left = 858
+          Left = 874
           Top = 31
           Width = 46
           Height = 13
           Caption = 'Pendente'
         end
         object Shape4: TShape
-          Left = 829
+          Left = 845
           Top = 44
           Width = 23
           Height = 14
           Brush.Color = clSilver
         end
         object Label47: TLabel
-          Left = 858
+          Left = 874
           Top = 44
           Width = 26
           Height = 13
           Caption = 'ICMS'
         end
         object Shape5: TShape
-          Left = 829
+          Left = 845
           Top = 57
           Width = 23
           Height = 14
           Brush.Color = 8454143
         end
         object Label49: TLabel
-          Left = 858
+          Left = 874
           Top = 57
           Width = 95
           Height = 13
@@ -871,7 +871,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object Label50: TLabel
           Left = 280
-          Top = 92
+          Top = 96
           Width = 34
           Height = 13
           Alignment = taRightJustify
@@ -879,28 +879,28 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object Label51: TLabel
           Left = 242
-          Top = 112
+          Top = 116
           Width = 73
           Height = 13
           Alignment = taRightJustify
           Caption = 'Tipo Cobran'#231'a:'
         end
         object Shape6: TShape
-          Left = 829
+          Left = 845
           Top = 70
           Width = 23
           Height = 14
           Brush.Color = 16777147
         end
         object Label56: TLabel
-          Left = 858
+          Left = 874
           Top = 70
           Width = 54
           Height = 13
           Caption = 'Em Cart'#243'rio'
         end
         object Label57: TLabel
-          Left = 551
+          Left = 572
           Top = 51
           Width = 35
           Height = 13
@@ -908,28 +908,28 @@ object frmCadDuplicata: TfrmCadDuplicata
           Caption = 'Op'#231#227'o:'
         end
         object Shape7: TShape
-          Left = 829
+          Left = 845
           Top = 83
           Width = 23
           Height = 14
           Brush.Color = 11053311
         end
         object Label58: TLabel
-          Left = 858
+          Left = 874
           Top = 83
           Width = 57
           Height = 13
           Caption = 'Em Protesto'
         end
         object Shape8: TShape
-          Left = 829
+          Left = 845
           Top = 96
           Width = 23
           Height = 14
           Brush.Color = clBlue
         end
         object Label16: TLabel
-          Left = 858
+          Left = 874
           Top = 96
           Width = 112
           Height = 13
@@ -937,13 +937,13 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object Label48: TLabel
           Left = 242
-          Top = 133
+          Top = 137
           Width = 73
           Height = 13
           Caption = 'Representante:'
         end
         object Label61: TLabel
-          Left = 559
+          Left = 580
           Top = 71
           Width = 27
           Height = 13
@@ -951,7 +951,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Caption = 'NGR:'
         end
         object Label63: TLabel
-          Left = 537
+          Left = 558
           Top = 90
           Width = 49
           Height = 13
@@ -959,18 +959,26 @@ object frmCadDuplicata: TfrmCadDuplicata
           Caption = 'Aprovado:'
         end
         object Shape9: TShape
-          Left = 829
+          Left = 845
           Top = 109
           Width = 23
           Height = 14
           Brush.Color = 5483007
         end
         object Label64: TLabel
-          Left = 858
+          Left = 874
           Top = 109
           Width = 68
           Height = 13
           Caption = 'N'#227'o aprovado'
+        end
+        object Label65: TLabel
+          Left = 533
+          Top = 108
+          Width = 73
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Nosso N'#250'mero:'
         end
         object edtNumDuplicata: TEdit
           Left = 317
@@ -986,7 +994,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object RxDBLookupCombo1: TRxDBLookupCombo
           Left = 450
           Top = 2
-          Width = 266
+          Width = 284
           Height = 22
           DropDownCount = 8
           Ctl3D = False
@@ -999,7 +1007,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object RxDBLookupCombo2: TRxDBLookupCombo
           Left = 317
           Top = 23
-          Width = 399
+          Width = 417
           Height = 21
           DropDownCount = 15
           Ctl3D = False
@@ -1016,7 +1024,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Left = 123
           Top = 1
           Width = 91
-          Height = 145
+          Height = 156
           Align = alLeft
           Caption = 'Situa'#231#227'o'
           Ctl3D = True
@@ -1031,7 +1039,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object RxDBLookupCombo7: TRxDBLookupCombo
           Left = 317
-          Top = 84
+          Top = 88
           Width = 215
           Height = 21
           DropDownCount = 15
@@ -1044,7 +1052,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object RxDBLookupCombo8: TRxDBLookupCombo
           Left = 317
-          Top = 104
+          Top = 108
           Width = 215
           Height = 21
           DropDownCount = 15
@@ -1056,8 +1064,8 @@ object frmCadDuplicata: TfrmCadDuplicata
           TabOrder = 8
         end
         object btnConsultar: TNxButton
-          Left = 536
-          Top = 116
+          Left = 559
+          Top = 120
           Width = 175
           Height = 30
           Caption = 'Efetuar Pesquisa'
@@ -1129,7 +1137,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object NxDatePicker1: TNxDatePicker
           Left = 317
-          Top = 43
+          Top = 45
           Width = 89
           Height = 21
           TabOrder = 3
@@ -1141,7 +1149,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object NxDatePicker2: TNxDatePicker
           Left = 444
-          Top = 43
+          Top = 45
           Width = 89
           Height = 21
           TabOrder = 4
@@ -1153,7 +1161,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object NxDatePicker3: TNxDatePicker
           Left = 317
-          Top = 64
+          Top = 66
           Width = 89
           Height = 21
           TabOrder = 5
@@ -1165,7 +1173,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object NxDatePicker4: TNxDatePicker
           Left = 444
-          Top = 64
+          Top = 66
           Width = 89
           Height = 21
           TabOrder = 6
@@ -1179,7 +1187,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Left = 1
           Top = 1
           Width = 122
-          Height = 145
+          Height = 156
           Align = alLeft
           BevelOuter = bvSpace
           Caption = 'Panel3'
@@ -1189,7 +1197,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             Left = 1
             Top = 1
             Width = 120
-            Height = 110
+            Height = 121
             Align = alClient
             Caption = ' Tipo '
             Ctl3D = True
@@ -1204,7 +1212,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           end
           object RzCheckList1: TRzCheckList
             Left = 1
-            Top = 111
+            Top = 122
             Width = 120
             Height = 33
             Items.Strings = (
@@ -1238,7 +1246,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           end
         end
         object NxComboBox2: TNxComboBox
-          Left = 587
+          Left = 605
           Top = 44
           Width = 129
           Height = 21
@@ -1257,7 +1265,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             'Perdido')
         end
         object btnLerItau: TBitBtn
-          Left = 928
+          Left = 944
           Top = 16
           Width = 89
           Height = 25
@@ -1268,7 +1276,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object RxDBLookupCombo10: TRxDBLookupCombo
           Left = 317
-          Top = 124
+          Top = 128
           Width = 215
           Height = 22
           DropDownCount = 8
@@ -1280,7 +1288,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           TabOrder = 9
         end
         object ckImpNossoNumero: TCheckBox
-          Left = 717
+          Left = 738
           Top = 125
           Width = 140
           Height = 17
@@ -1289,7 +1297,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Visible = False
         end
         object cbxNGR: TNxComboBox
-          Left = 587
+          Left = 605
           Top = 64
           Width = 129
           Height = 21
@@ -1308,7 +1316,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             '')
         end
         object cbxAprovado: TNxComboBox
-          Left = 587
+          Left = 605
           Top = 83
           Width = 129
           Height = 21
@@ -1326,18 +1334,36 @@ object frmCadDuplicata: TfrmCadDuplicata
             'N'#227'o Aprovados')
         end
         object CheckBox1: TCheckBox
-          Left = 718
+          Left = 739
           Top = 104
           Width = 97
           Height = 17
           Caption = 'Cancelados'
           TabOrder = 18
         end
+        object ComboNossoNumero: TNxComboBox
+          Left = 605
+          Top = 101
+          Width = 129
+          Height = 21
+          Cursor = crArrow
+          TabOrder = 19
+          Text = 'Todos'
+          ReadOnly = True
+          HideFocus = False
+          Style = dsDropDownList
+          AutoCompleteDelay = 0
+          ItemIndex = 0
+          Items.Strings = (
+            'Todos'
+            'Sim'
+            'N'#227'o')
+        end
       end
       object pnlTotal: TPanel
         Left = 0
-        Top = 551
-        Width = 1050
+        Top = 543
+        Width = 1042
         Height = 33
         Align = alBottom
         Color = clSilver
@@ -1489,8 +1515,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       end
       object Panel5: TPanel
         Left = 0
-        Top = 177
-        Width = 1050
+        Top = 188
+        Width = 1042
         Height = 30
         Align = alTop
         Color = 16770764
@@ -1758,7 +1784,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1050
+        Width = 1042
         Height = 30
         Align = alTop
         Color = 8404992
@@ -2005,7 +2031,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 1050
+        Width = 1042
         Height = 396
         Align = alTop
         Enabled = False
@@ -2045,7 +2071,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 1048
+          Width = 1040
           Height = 27
           Align = alTop
           Color = clSilver
@@ -2154,7 +2180,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object Panel6: TPanel
           Left = 1
           Top = 55
-          Width = 1048
+          Width = 1040
           Height = 340
           Align = alBottom
           BevelOuter = bvNone
@@ -3898,8 +3924,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       object RzGroupBox2: TRzGroupBox
         Left = 0
         Top = 426
-        Width = 1050
-        Height = 158
+        Width = 1042
+        Height = 150
         Align = alClient
         BorderColor = clNavy
         BorderInner = fsButtonUp
@@ -3920,8 +3946,8 @@ object frmCadDuplicata: TfrmCadDuplicata
         object SMDBGrid2: TSMDBGrid
           Left = 5
           Top = 18
-          Width = 1040
-          Height = 135
+          Width = 1032
+          Height = 127
           Align = alClient
           Ctl3D = False
           DataSource = DMCadDuplicata.dsDuplicata_Hist
@@ -4085,8 +4111,8 @@ object frmCadDuplicata: TfrmCadDuplicata
   end
   object stat1: TStatusBar
     Left = 0
-    Top = 607
-    Width = 1054
+    Top = 599
+    Width = 1046
     Height = 19
     Panels = <
       item
@@ -4167,7 +4193,7 @@ object frmCadDuplicata: TfrmCadDuplicata
     end
   end
   object PopupMenu2: TPopupMenu
-    Left = 681
+    Left = 721
     Top = 216
     object MenuItem4: TMenuItem
       Caption = 'Gerar Cobran'#231'a'

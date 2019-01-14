@@ -10,6 +10,9 @@ uses
   UCadDuplicata_Total, ComObj, UCadDuplicata_LeItau, SqlExpr, ComCtrls;
 
 type
+  TEnumMostraNossoNumero = (tpTodos,tpSim, tpNao);
+
+type
   TfrmCadDuplicata = class(TForm)
     RzPageControl1: TRzPageControl;
     TS_Consulta: TRzTabSheet;
@@ -240,6 +243,8 @@ type
     RecibodePagamento1: TMenuItem;
     SaldoClienteFornecedor1: TMenuItem;
     Carn1: TMenuItem;
+    Label65: TLabel;
+    ComboNossoNumero: TNxComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -769,6 +774,13 @@ begin
         2: fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND ((DUP.APROVADO <> ' + QuotedStr('S') + ') OR (DUP.APROVADO IS NULL))';
       end;
     end;
+    case TEnumMostraNossoNumero(ComboNossoNumero.ItemIndex) of
+      tpTodos : ;
+      tpSim  : fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND (COALESCE(DUP.NOSSONUMERO,'''') <> '''''  + ')';
+      tpNao  : fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND (COALESCE(DUP.NOSSONUMERO,'''') = '''''  + ')';
+    else ;
+    end;
+
   end;
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO';
   fDMCadDuplicata.cdsDuplicata_Consulta.Open;

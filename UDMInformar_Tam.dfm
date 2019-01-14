@@ -1,7 +1,7 @@
 object DMInformar_Tam: TDMInformar_Tam
   OldCreateOrder = False
-  Left = 421
-  Top = 126
+  Left = 219
+  Top = 113
   Height = 434
   Width = 883
   object mTamanho: TClientDataSet
@@ -34,8 +34,8 @@ object DMInformar_Tam: TDMInformar_Tam
     Params = <>
     StoreDefs = True
     OnNewRecord = mTamanhoNewRecord
-    Left = 112
-    Top = 40
+    Left = 88
+    Top = 48
     Data = {
       780000009619E0BD01000000180000000500000000000300000078000754616D
       616E686F0100490000000100055749445448020002000A000351746408000400
@@ -1168,6 +1168,7 @@ object DMInformar_Tam: TDMInformar_Tam
       00000000}
     object mItensID_Produto: TIntegerField
       FieldName = 'ID_Produto'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
     object mItensReferencia: TStringField
       FieldName = 'Referencia'
@@ -1189,9 +1190,11 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'ID_CSTIPI'
     end
     object mItensID_PIS: TIntegerField
+      Tag = 1
       FieldName = 'ID_PIS'
     end
     object mItensID_Cofins: TIntegerField
+      Tag = 1
       FieldName = 'ID_Cofins'
     end
     object mItensPerc_ICMS: TFloatField
@@ -1222,26 +1225,33 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'Vlr_IPI'
     end
     object mItensPerc_Pis: TFloatField
+      Tag = 1
       FieldName = 'Perc_Pis'
     end
     object mItensPerc_Cofins: TFloatField
+      Tag = 1
       FieldName = 'Perc_Cofins'
     end
     object mItensVlr_Pis: TFloatField
+      Tag = 1
       FieldName = 'Vlr_Pis'
     end
     object mItensVlr_Cofins: TFloatField
+      Tag = 1
       FieldName = 'Vlr_Cofins'
     end
     object mItensTipo_Pis: TStringField
+      Tag = 1
       FieldName = 'Tipo_Pis'
       Size = 1
     end
     object mItensTipo_Cofins: TStringField
+      Tag = 1
       FieldName = 'Tipo_Cofins'
       Size = 1
     end
     object mItensOrigem_Prod: TStringField
+      Tag = 1
       FieldName = 'Origem_Prod'
       Size = 1
     end
@@ -1256,34 +1266,42 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 1
     end
     object mItensNome_Produto: TStringField
+      Tag = 1
       FieldName = 'Nome_Produto'
       Size = 100
     end
     object mItensID_MovEstoque: TIntegerField
+      Tag = 1
       FieldName = 'ID_MovEstoque'
     end
     object mItensGerar_Duplicata: TStringField
+      Tag = 1
       FieldName = 'Gerar_Duplicata'
       Size = 1
     end
     object mItensGerar_Estoque: TStringField
+      Tag = 1
       FieldName = 'Gerar_Estoque'
       Size = 1
     end
     object mItensNumero_OC: TStringField
+      Tag = 1
       FieldName = 'Numero_OC'
     end
     object mItensNumero_OS: TStringField
+      Tag = 1
       FieldName = 'Numero_OS'
       Size = 30
     end
     object mItensItem_Pedido: TIntegerField
+      Tag = 1
       FieldName = 'Item_Pedido'
     end
     object mItensPerc_Comissao: TFloatField
       FieldName = 'Perc_Comissao'
     end
     object mItensSomar_Transf_Icms: TStringField
+      Tag = 1
       FieldName = 'Somar_Transf_Icms'
       Size = 1
     end
@@ -1292,6 +1310,7 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 250
     end
     object mItensSomar_VlrTotalProduto: TStringField
+      Tag = 1
       FieldName = 'Somar_VlrTotalProduto'
       Size = 1
     end
@@ -1299,15 +1318,19 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'Vlr_Frete'
     end
     object mItensVlr_OutrasDespesas: TFloatField
+      Tag = 1
       FieldName = 'Vlr_OutrasDespesas'
     end
     object mItensVlr_Seguro: TFloatField
+      Tag = 1
       FieldName = 'Vlr_Seguro'
     end
     object mItensVlr_IcmsFrete: TFloatField
+      Tag = 1
       FieldName = 'Vlr_IcmsFrete'
     end
     object mItensVLR_ICMSOUTRASDESPESAS: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMSOUTRASDESPESAS'
     end
     object mItensBASE_ICMSSUBST: TFloatField
@@ -1317,18 +1340,22 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'VLR_ICMSSUBST'
     end
     object mItensVLR_IMPORTACAO: TFloatField
+      Tag = 1
       FieldName = 'VLR_IMPORTACAO'
     end
     object mItensVLR_ADUANEIRA: TFloatField
+      Tag = 1
       FieldName = 'VLR_ADUANEIRA'
     end
     object mItensVLR_DESCONTORATEIO: TFloatField
       FieldName = 'VLR_DESCONTORATEIO'
     end
     object mItensID_OPERACAO_NOTA: TIntegerField
+      Tag = 1
       FieldName = 'ID_OPERACAO_NOTA'
     end
     object mItensFINALIDADE: TStringField
+      Tag = 1
       FieldName = 'FINALIDADE'
       Size = 1
     end
@@ -1339,19 +1366,24 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'PERC_TRIBICMS'
     end
     object mItensIMP_OC_NOTA: TStringField
+      Tag = 1
       FieldName = 'IMP_OC_NOTA'
       Size = 1
     end
     object mItensNum_Pedido: TIntegerField
+      Tag = 1
       FieldName = 'Num_Pedido'
     end
     object mItensVLR_DUPLICATA: TFloatField
+      Tag = 1
       FieldName = 'VLR_DUPLICATA'
     end
     object mItensPERC_IMPORTACAO: TFloatField
+      Tag = 1
       FieldName = 'PERC_IMPORTACAO'
     end
     object mItensPERC_REDUCAO_ICMSSUBST: TFloatField
+      Tag = 1
       FieldName = 'PERC_REDUCAO_ICMSSUBST'
     end
     object mItensObs: TMemoField
@@ -1372,6 +1404,7 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'DT_ENVIO_ATELIER'
     end
     object mItensNomeProduto: TStringField
+      Tag = 1
       FieldName = 'NomeProduto'
       Size = 60
     end
@@ -1465,9 +1498,11 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'QTD_PRODUZIDA'
     end
     object mItensID: TIntegerField
+      Tag = 1
       FieldName = 'ID'
     end
     object mItensItem: TIntegerField
+      Tag = 1
       FieldName = 'Item'
     end
     object mItensTAMANHO: TStringField
@@ -1490,19 +1525,24 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 5
     end
     object mItensNome_Produto_Original: TStringField
+      Tag = 1
       FieldName = 'Nome_Produto_Original'
       Size = 100
     end
     object mItensCONTA_ORCAMENTO_ID: TIntegerField
+      Tag = 1
       FieldName = 'CONTA_ORCAMENTO_ID'
     end
     object mItensCENTRO_CUSTO_ID: TIntegerField
+      Tag = 1
       FieldName = 'CENTRO_CUSTO_ID'
     end
     object mItensQTDRESTANTE: TFloatField
+      Tag = 1
       FieldName = 'QTDRESTANTE'
     end
     object mItensQTDDEVOLVIDA: TFloatField
+      Tag = 1
       FieldName = 'QTDDEVOLVIDA'
     end
     object mItensNCM: TStringField
@@ -1510,67 +1550,86 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 10
     end
     object mItensCODCOFINS: TStringField
+      Tag = 1
       FieldName = 'CODCOFINS'
       Size = 2
     end
     object mItensCODPIS: TStringField
+      Tag = 1
       FieldName = 'CODPIS'
       Size = 2
     end
     object mItensQTD_ADEVOLVER: TFloatField
+      Tag = 1
       FieldName = 'QTD_ADEVOLVER'
     end
     object mItensQTD_PACOTE: TFloatField
+      Tag = 1
       FieldName = 'QTD_PACOTE'
     end
     object mItensID_PEDIDO: TIntegerField
+      Tag = 1
       FieldName = 'ID_PEDIDO'
     end
     object mItensPERC_TABCSTICMS: TFloatField
+      Tag = 1
       FieldName = 'PERC_TABCSTICMS'
     end
     object mItensMAOOBRA: TStringField
+      Tag = 1
       FieldName = 'MAOOBRA'
       Size = 1
     end
     object mItensCOD_PRODUTO_FORN: TStringField
+      Tag = 1
       FieldName = 'COD_PRODUTO_FORN'
     end
     object mItensCOD_BARRA: TStringField
+      Tag = 1
       FieldName = 'COD_BARRA'
       Size = 14
     end
     object mItensID_NTE: TIntegerField
+      Tag = 1
       FieldName = 'ID_NTE'
     end
     object mItensITEM_NTE: TIntegerField
+      Tag = 1
       FieldName = 'ITEM_NTE'
     end
     object mItensQTD_NOTAATUAL: TFloatField
+      Tag = 1
       FieldName = 'QTD_NOTAATUAL'
     end
     object mItensTIPO_NOTA: TStringField
+      Tag = 1
       FieldName = 'TIPO_NOTA'
       Size = 1
     end
     object mItensITEM_DEVOL: TStringField
+      Tag = 1
       FieldName = 'ITEM_DEVOL'
       Size = 1
     end
     object mItensTIPO_REG: TStringField
+      Tag = 1
       FieldName = 'TIPO_REG'
       Size = 3
     end
     object mItensPERC_MVA: TFloatField
+      Tag = 1
       FieldName = 'PERC_MVA'
     end
     object mItensVLR_TRIBUTOS: TFloatField
+      Tag = 1
       FieldName = 'VLR_TRIBUTOS'
     end
     object mItensID_MOVIMENTO: TIntegerField
+      Tag = 1
       FieldName = 'ID_MOVIMENTO'
     end
     object mItensPERC_TRIBUTO: TFloatField
+      Tag = 1
       FieldName = 'PERC_TRIBUTO'
     end
     object mItensGERAR_LOTE: TStringField
@@ -1578,6 +1637,7 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 1
     end
     object mItensPOSSUI_VALE: TStringField
+      Tag = 1
       FieldName = 'POSSUI_VALE'
       Size = 1
     end
@@ -1600,40 +1660,51 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'Item_Cliente'
     end
     object mItensNUM_FCI: TStringField
+      Tag = 1
       FieldName = 'NUM_FCI'
       Size = 40
     end
     object mItensPERC_USADO_FCI: TFloatField
+      Tag = 1
       FieldName = 'PERC_USADO_FCI'
     end
     object mItensQTD_PECA: TIntegerField
       FieldName = 'QTD_PECA'
     end
     object mItensID_OBS_LEI_NCM: TIntegerField
+      Tag = 1
       FieldName = 'ID_OBS_LEI_NCM'
     end
     object mItensID_VALE: TIntegerField
+      Tag = 1
       FieldName = 'ID_VALE'
     end
     object mItensITEM_VALE: TIntegerField
+      Tag = 1
       FieldName = 'ITEM_VALE'
     end
     object mItensNUM_VALE: TIntegerField
+      Tag = 1
       FieldName = 'NUM_VALE'
     end
     object mItensPERC_ICMSSUBST_INTERNO: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMSSUBST_INTERNO'
     end
     object mItensVLR_ICMSSUBST_INTERNO: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMSSUBST_INTERNO'
     end
     object mItensPERC_ICMSSUBST_PROPRIO: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMSSUBST_PROPRIO'
     end
     object mItensVLR_ICMSSUBST_PROPRIO: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMSSUBST_PROPRIO'
     end
     object mItensBASE_ICMSSUBST_PROPRIO: TFloatField
+      Tag = 1
       FieldName = 'BASE_ICMSSUBST_PROPRIO'
     end
     object mItensGRAVACAO_COM_ERRO: TStringField
@@ -1641,59 +1712,76 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 3
     end
     object mItensVLR_ICMSDESONERADO: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMSDESONERADO'
     end
     object mItensCOD_DESONERACAO: TIntegerField
+      Tag = 1
       FieldName = 'COD_DESONERACAO'
     end
     object mItensVLR_ICMSOPERACAO: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMSOPERACAO'
     end
     object mItensQTD_FUT: TFloatField
       FieldName = 'QTD_FUT'
     end
     object mItensID_PEDIDO_FUT: TIntegerField
+      Tag = 1
       FieldName = 'ID_PEDIDO_FUT'
     end
     object mItensITEM_PEDIDO_FUT: TIntegerField
+      Tag = 1
       FieldName = 'ITEM_PEDIDO_FUT'
     end
     object mItensID_OS: TIntegerField
+      Tag = 1
       FieldName = 'ID_OS'
     end
     object mItensITEM_OS: TIntegerField
+      Tag = 1
       FieldName = 'ITEM_OS'
     end
     object mItensITEM_OS_MAT: TIntegerField
+      Tag = 1
       FieldName = 'ITEM_OS_MAT'
     end
     object mItensNUM_OSERVICO: TIntegerField
+      Tag = 1
       FieldName = 'NUM_OSERVICO'
     end
     object mItensVERSAO_TRIBUTO: TStringField
+      Tag = 1
       FieldName = 'VERSAO_TRIBUTO'
       Size = 15
     end
     object mItensFONTE_TRIBUTO: TStringField
+      Tag = 1
       FieldName = 'FONTE_TRIBUTO'
       Size = 30
     end
     object mItensPERC_TRIBUTO_ESTADUAL: TFloatField
+      Tag = 1
       FieldName = 'PERC_TRIBUTO_ESTADUAL'
     end
     object mItensPERC_TRIBUTO_MUNICIPAL: TFloatField
+      Tag = 1
       FieldName = 'PERC_TRIBUTO_MUNICIPAL'
     end
     object mItensVLR_TRIBUTOS_ESTADUAL: TFloatField
+      Tag = 1
       FieldName = 'VLR_TRIBUTOS_ESTADUAL'
     end
     object mItensVLR_TRIBUTOS_MUNICIPAL: TFloatField
+      Tag = 1
       FieldName = 'VLR_TRIBUTOS_MUNICIPAL'
     end
     object mItensVLR_TRIBUTOS_FEDERAL: TFloatField
+      Tag = 1
       FieldName = 'VLR_TRIBUTOS_FEDERAL'
     end
     object mItensPERC_TRIBUTO_FEDERAL: TFloatField
+      Tag = 1
       FieldName = 'PERC_TRIBUTO_FEDERAL'
     end
     object mItensItem_original: TIntegerField
@@ -1706,6 +1794,7 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'VLR_ICMSDIFERIDO'
     end
     object mItensVlr_TaxaCiscomex: TFloatField
+      Tag = 1
       FieldName = 'Vlr_TaxaCiscomex'
     end
     object mItensNOME_COR_COMBINACAO: TStringField
@@ -1713,33 +1802,42 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 60
     end
     object mItensCALCULAR_ST: TStringField
+      Tag = 1
       FieldName = 'CALCULAR_ST'
       Size = 1
     end
     object mItensCOMPLEMENTO_PROD: TStringField
+      Tag = 1
       FieldName = 'COMPLEMENTO_PROD'
       Size = 80
     end
     object mItensDIFERENCA_ICMS: TStringField
+      Tag = 1
       FieldName = 'DIFERENCA_ICMS'
       Size = 1
     end
     object mItensNum_Lote_Controle: TStringField
+      Tag = 1
       FieldName = 'Num_Lote_Controle'
     end
     object mItensID_EnqIPI: TIntegerField
+      Tag = 1
       FieldName = 'ID_EnqIPI'
     end
     object mItensPerc_ICMS_Inter: TFloatField
+      Tag = 1
       FieldName = 'Perc_ICMS_Inter'
     end
     object mItensVlr_Outros: TFloatField
+      Tag = 1
       FieldName = 'Vlr_Outros'
     end
     object mItensPERC_PIS_COFINS_SUFRAMA: TFloatField
+      Tag = 1
       FieldName = 'PERC_PIS_COFINS_SUFRAMA'
     end
     object mItensIBPT_CHAVE: TStringField
+      Tag = 1
       DisplayWidth = 20
       FieldName = 'IBPT_CHAVE'
     end
@@ -1760,12 +1858,15 @@ object DMInformar_Tam: TDMInformar_Tam
       FieldName = 'QTD_SOBRA_OC'
     end
     object mItensQTD_TRIB: TFloatField
+      Tag = 1
       FieldName = 'QTD_TRIB'
     end
     object mItensVLR_UNITARIO_TRIB: TFloatField
+      Tag = 1
       FieldName = 'VLR_UNITARIO_TRIB'
     end
     object mItensUNIDADE_TRIB: TStringField
+      Tag = 1
       FieldName = 'UNIDADE_TRIB'
       Size = 6
     end
@@ -1785,29 +1886,37 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 30
     end
     object mItensOBSMATERIAL: TStringField
+      Tag = 1
       FieldName = 'OBSMATERIAL'
       Size = 100
     end
     object mItensTIPO_ESCALA: TStringField
+      Tag = 1
       FieldName = 'TIPO_ESCALA'
       Size = 1
     end
     object mItensBASE_ICMS_FCP: TFloatField
+      Tag = 1
       FieldName = 'BASE_ICMS_FCP'
     end
     object mItensBASE_FCP_ST: TFloatField
+      Tag = 1
       FieldName = 'BASE_FCP_ST'
     end
     object mItensVLR_FCP_ST: TFloatField
+      Tag = 1
       FieldName = 'VLR_FCP_ST'
     end
     object mItensPERC_FCP_ST: TFloatField
+      Tag = 1
       FieldName = 'PERC_FCP_ST'
     end
     object mItensVLR_ICMS_FCP_DEST: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMS_FCP_DEST'
     end
     object mItensBASE_ICMS_FCP_DEST: TFloatField
+      Tag = 1
       FieldName = 'BASE_ICMS_FCP_DEST'
     end
     object mItensTIPO_OS: TStringField
@@ -1815,12 +1924,15 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 2
     end
     object mItensPERC_ICMS_SUFRAMA: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMS_SUFRAMA'
     end
     object mItensPERC_IPI_SUFRAMA: TFloatField
+      Tag = 1
       FieldName = 'PERC_IPI_SUFRAMA'
     end
     object mItensREC_COPIADO: TStringField
+      Tag = 1
       FieldName = 'REC_COPIADO'
       Size = 1
     end
@@ -1829,15 +1941,18 @@ object DMInformar_Tam: TDMInformar_Tam
       Size = 30
     end
     object mItensVLR_IPI_DEVOL: TFloatField
+      Tag = 1
       FieldName = 'VLR_IPI_DEVOL'
     end
     object mItensPERC_DEVOL: TFloatField
+      Tag = 1
       FieldName = 'PERC_DEVOL'
     end
     object mItensBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
     object mItensItem_Tam: TIntegerField
+      Tag = 1
       FieldName = 'Item_Tam'
     end
   end
@@ -2499,10 +2614,16 @@ object DMInformar_Tam: TDMInformar_Tam
     end
   end
   object mTamAux: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     Left = 296
     Top = 40
+    Data = {
+      620000009619E0BD01000000180000000400000000000300000062000754616D
+      616E686F0100490000000100055749445448020002000A000351746408000400
+      00000000064772617661720200030000000000084974656D5F54616D04000100
+      000000000000}
     object mTamAuxTamanho: TStringField
       FieldName = 'Tamanho'
       Size = 10
