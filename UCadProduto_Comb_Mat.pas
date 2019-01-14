@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, UDMCadProduto, StdCtrls,
-  Buttons, RxLookup, DBCtrls, DB, Mask, RxDBComb, ToolEdit, RXDBCtrl, UCadUnidade, UCadMaterial, Grids, DBVGrids,
+  Buttons, RxLookup, DBCtrls, DB, Mask, RxDBComb, ToolEdit, RXDBCtrl, UCadMaterial,
   RzPanel;
 
 type
@@ -59,11 +59,13 @@ type
     procedure dbedtIDExit(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
+    procedure RxDBLookupCombo4Exit(Sender: TObject);
+    procedure RxDBLookupCombo4Enter(Sender: TObject);
   private
     { Private declarations }
-    ffrmCadUnidade: TfrmCadUnidade;
     ffrmCadMaterial: TfrmCadMaterial;
     vID_MaterialAnt : Integer;
+    vID_PosicaoAnt : Integer;
 
     function  fnc_Erro: Boolean;
     procedure prc_Abrir_Material_Cor;
@@ -122,7 +124,7 @@ begin
   RxDBLookupCombo5.Visible := (fDMCadProduto.qParametrosUSA_SETOR_CONSUMO.AsString = 'S');
   SpeedButton5.Visible     := (fDMCadProduto.qParametrosUSA_SETOR_CONSUMO.AsString = 'S');
   SpeedButton6.Visible     := (fDMCadProduto.qParametrosUSA_SETOR_CONSUMO.AsString = 'S');
-  DBCheckBox1.Visible      := (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
+  DBCheckBox2.Visible      := (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
 end;
 
 procedure TfrmCadProduto_Comb_Mat.BitBtn1Click(Sender: TObject);
@@ -244,6 +246,7 @@ end;
 procedure TfrmCadProduto_Comb_Mat.Panel1Exit(Sender: TObject);
 begin
   prc_Abrir_Material_Cor;
+  prc_Move_Dados;
 end;
 
 procedure TfrmCadProduto_Comb_Mat.prc_Abrir_Material_Cor;
@@ -314,7 +317,7 @@ end;
 
 procedure TfrmCadProduto_Comb_Mat.Panel1Enter(Sender: TObject);
 begin
- vID_MaterialAnt := fDMCadProduto.cdsProduto_Comb_MatID_MATERIAL.AsInteger;
+  vID_MaterialAnt := fDMCadProduto.cdsProduto_Comb_MatID_MATERIAL.AsInteger;
 end;
 
 procedure TfrmCadProduto_Comb_Mat.DBEdit2Exit(Sender: TObject);
@@ -355,6 +358,30 @@ procedure TfrmCadProduto_Comb_Mat.SpeedButton6Click(Sender: TObject);
 begin
   fDMCadProduto.cdsSetor.Close;
   fDMCadProduto.cdsSetor.Open;
+end;
+
+procedure TfrmCadProduto_Comb_Mat.RxDBLookupCombo4Exit(Sender: TObject);
+begin
+  if trim(RxDBLookupCombo4.Text) = '' then
+    exit;
+  if vID_PosicaoAnt <> RxDBLookupCombo4.KeyValue then
+  begin
+    if fDMCadProduto.cdsPosicao.Locate('ID',RxDBLookupCombo4.KeyValue,([Locaseinsensitive])) then
+      if fDMCadProduto.cdsPosicaoIMP_TALAO.AsString = 'S' then
+        fDMCadProduto.cdsProduto_Comb_MatIMP_TALAO.AsString  := fDMCadProduto.cdsPosicaoIMP_TALAO.AsString;
+    if (RxDBLookupCombo4.KeyValue <> vID_PosicaoAnt) then
+    begin
+      if (fDMCadProduto.cdsPosicaoID_SETOR.AsInteger > 0) then
+        fDMCadProduto.cdsProduto_Comb_MatID_SETOR.AsInteger := fDMCadProduto.cdsPosicaoID_SETOR.AsInteger
+      else
+        fDMCadProduto.cdsProduto_Comb_MatID_SETOR.Clear;
+    end;
+  end;
+end;
+
+procedure TfrmCadProduto_Comb_Mat.RxDBLookupCombo4Enter(Sender: TObject);
+begin
+  vID_PosicaoAnt := fDMCadProduto.cdsProduto_Comb_MatID_POSICAO.AsInteger;
 end;
 
 end.

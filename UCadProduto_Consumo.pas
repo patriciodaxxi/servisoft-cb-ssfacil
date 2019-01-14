@@ -41,6 +41,8 @@ type
     lblID: TLabel;
     dbedtID: TDBEdit;
     DBCheckBox2: TDBCheckBox;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -62,6 +64,7 @@ type
     procedure dbedtIDExit(Sender: TObject);
     procedure RxDBLookupCombo1Exit(Sender: TObject);
     procedure RxDBLookupCombo2Exit(Sender: TObject);
+    procedure RxDBLookupCombo4Enter(Sender: TObject);
   private
     { Private declarations }
     ffrmCadUnidade: TfrmCadUnidade;
@@ -71,6 +74,7 @@ type
     vID_Setor_Loc : Integer;
     vID_Material_Loc : Integer;
     vItem_Loc : Integer;
+    vID_PosicaoAnt : Integer;
 
     function  fnc_Erro: Boolean;
     procedure prc_Monta_Tamanho;
@@ -315,6 +319,10 @@ end;
 procedure TfrmCadProduto_Consumo.SpeedButton1Click(Sender: TObject);
 begin
   ffrmCadMaterial := TfrmCadMaterial.Create(self);
+  if fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger > 0 then
+    ffrmCadMaterial.vID_Produto_Local := fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger
+  else
+    ffrmCadMaterial.vID_Produto_Local := 0;
   ffrmCadMaterial.ShowModal;
   FreeAndNil(ffrmCadMaterial);
 
@@ -359,7 +367,18 @@ end;
 procedure TfrmCadProduto_Consumo.RxDBLookupCombo4Exit(Sender: TObject);
 begin
   if RxDBLookupCombo4.Text <> '' then
+  begin
+    if fDMCadProduto.cdsPosicaoID.AsInteger <> RxDBLookupCombo4.KeyValue then
+      fDMCadProduto.cdsPosicao.Locate('ID',RxDBLookupCombo4.KeyValue,([Locaseinsensitive]));
     fDMCadProduto.cdsProduto_ConsumoIMP_TALAO.AsString := fDMCadProduto.cdsPosicaoIMP_TALAO.AsString;
+    if (RxDBLookupCombo4.KeyValue <> vID_PosicaoAnt) then
+    begin
+      if (fDMCadProduto.cdsPosicaoID_SETOR.AsInteger > 0) then
+        fDMCadProduto.cdsProduto_ConsumoID_SETOR.AsInteger := fDMCadProduto.cdsPosicaoID_SETOR.AsInteger
+      else
+        fDMCadProduto.cdsProduto_ConsumoID_SETOR.Clear;
+    end;
+  end;
 end;
 
 procedure TfrmCadProduto_Consumo.dbedtIDEnter(Sender: TObject);
@@ -435,6 +454,11 @@ begin
     end;
   end;
 
+end;
+
+procedure TfrmCadProduto_Consumo.RxDBLookupCombo4Enter(Sender: TObject);
+begin
+  vID_PosicaoAnt := fDMCadProduto.cdsProduto_ConsumoID_POSICAO.AsInteger;
 end;
 
 end.

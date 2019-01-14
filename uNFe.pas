@@ -3828,7 +3828,8 @@ begin
   //26/10/218
   if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI_DEVOL.AsFloat)) > 0 then
   begin
-    Grava_DadosAdicionaisNFe('(Vlr. IPI Devolvido: R$ ' + FormatFloat('###,###,##0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI_DEVOL.AsFloat) + ')',0);
+    Grava_DadosAdicionaisNFe('(Vlr. IPI Devolvido: R$ ' + FormatFloat('###,###,##0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI_DEVOL.AsFloat)
+                            + '  Base.IPI: ' + FormatFloat('###,###,##0.00',fDMCadNotaFiscal.cdsNotaFiscalBASE_IPI.AsFloat) +  ')',0);
   end;
 end;
 
@@ -4278,7 +4279,11 @@ begin
 
       fDMNFe.mItensNFeAliqIcms.AsFloat           := fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat;
       fDMNFe.mItensNFePerc_ICMS_Inter.AsFloat    := fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_INTER.AsFloat;
-      fDMNFe.mItensNFeAliqIpi.AsFloat            := fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat;
+      //09/01/2019
+      if (fDMCadNotaFiscal.cdsNotaFiscalNFEFINALIDADE.AsString = '4') and (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_IPI_DEVOL.AsFloat)) > 0) then
+        fDMNFe.mItensNFeAliqIpi.AsFloat := StrToFloat(FormatFloat('0.00',0))
+      else
+        fDMNFe.mItensNFeAliqIpi.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat;
       fDMNFe.mItensNFePercPis.AsFloat            := fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat;
       fDMNFe.mItensNFeAliqPis.AsFloat            := fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat;
       fDMNFe.mItensNFePercCofins.AsFloat         := fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat;
@@ -4363,6 +4368,11 @@ begin
       fDMNFe.mItensNFeTipoCofins.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensTIPO_COFINS.AsString;
       fDMNFe.mItensNFeCodPis.AsString     := fDMCadNotaFiscal.cdsTab_PisCODIGO.AsString;
       fDMNFe.mItensNFeTipoPis.AsString    := fDMCadNotaFiscal.cdsNotaFiscal_ItensTIPO_PIS.AsString;
+
+      //12/01/2019
+      if (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '7') and (trim(fDMCadNotaFiscal.cdsProdutoNOME_MODELO.AsString) <> '') then
+        vTextoDetNFe := vTextoDetNFe + TirarAcento(fDMCadNotaFiscal.cdsProdutoNOME_MODELO.AsString) + ' ';
+      //****************
       if Trim(fDMCadNotaFiscal.cdsProdutoCOMPLEMENTO.AsString) <> '' then
         vTextoDetNFe := TirarAcento(fDMCadNotaFiscal.cdsProdutoCOMPLEMENTO.AsString) + ' ';
 

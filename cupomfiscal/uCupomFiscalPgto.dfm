@@ -662,6 +662,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Style = []
             ParentFont = False
             TabOrder = 2
+            OnClick = DBEdit4Click
             OnEnter = DBEdit4Enter
             OnExit = DBEdit4Exit
             OnKeyDown = DBEdit4KeyDown
@@ -701,6 +702,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Style = []
             ParentFont = False
             TabOrder = 1
+            OnClick = CurrencyEdit1Click
             OnEnter = CurrencyEdit1Enter
             OnExit = CurrencyEdit1Exit
             OnKeyDown = CurrencyEdit1KeyDown

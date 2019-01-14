@@ -21,9 +21,9 @@ object frmCadPessoa: TfrmCadPessoa
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1007
-    Height = 622
-    ActivePage = TS_Consulta
+    Width = 1015
+    Height = 630
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -35,7 +35,7 @@ object frmCadPessoa: TfrmCadPessoa
     Font.Style = []
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -50,7 +50,7 @@ object frmCadPessoa: TfrmCadPessoa
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1003
+        Width = 1011
         Height = 93
         Align = alTop
         Color = clSilver
@@ -411,7 +411,7 @@ object frmCadPessoa: TfrmCadPessoa
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1003
+        Width = 1011
         Height = 30
         Align = alTop
         Color = clSilver
@@ -722,8 +722,8 @@ object frmCadPessoa: TfrmCadPessoa
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 582
-        Width = 1003
+        Top = 590
+        Width = 1011
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -744,8 +744,8 @@ object frmCadPessoa: TfrmCadPessoa
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 123
-        Width = 1003
-        Height = 459
+        Width = 1011
+        Height = 467
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPessoa.dsPessoa_Consulta
@@ -1089,7 +1089,7 @@ object frmCadPessoa: TfrmCadPessoa
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1003
+        Width = 1011
         Height = 30
         Align = alTop
         Color = 8404992
@@ -1318,9 +1318,9 @@ object frmCadPessoa: TfrmCadPessoa
       object RZPageControlDados: TRzPageControl
         Left = 0
         Top = 30
-        Width = 1003
-        Height = 569
-        ActivePage = TS_Pessoa_Dados
+        Width = 1011
+        Height = 577
+        ActivePage = TS_Pessoa_Financeiro
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1328,7 +1328,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19
@@ -1343,8 +1343,8 @@ object frmCadPessoa: TfrmCadPessoa
           ParentFont = False
           object SMDBGrid2: TSMDBGrid
             Left = 0
-            Top = 412
-            Width = 999
+            Top = 420
+            Width = 1007
             Height = 134
             Align = alBottom
             Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1426,8 +1426,8 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Panel8: TPanel
             Left = 0
-            Top = 391
-            Width = 999
+            Top = 399
+            Width = 1007
             Height = 21
             Align = alBottom
             Caption = 'CONTATOS'
@@ -1443,8 +1443,8 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel9: TPanel
             Left = 0
             Top = 0
-            Width = 999
-            Height = 391
+            Width = 1007
+            Height = 399
             Align = alClient
             TabOrder = 0
             object Label1: TLabel
@@ -2635,7 +2635,7 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlPessoaFisica: TPanel
             Left = 0
             Top = 0
-            Width = 999
+            Width = 1007
             Height = 244
             Align = alTop
             Enabled = False
@@ -2643,7 +2643,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox4: TRzGroupBox
               Left = 1
               Top = 36
-              Width = 997
+              Width = 1005
               Height = 139
               Align = alTop
               BorderWidth = 1
@@ -3060,7 +3060,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel10: TPanel
               Left = 1
               Top = 1
-              Width = 997
+              Width = 1005
               Height = 26
               Align = alTop
               TabOrder = 1
@@ -3104,7 +3104,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel11: TPanel
               Left = 1
               Top = 238
-              Width = 997
+              Width = 1005
               Height = 8
               Align = alTop
               BevelOuter = bvNone
@@ -3113,7 +3113,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel12: TPanel
               Left = 1
               Top = 27
-              Width = 997
+              Width = 1005
               Height = 9
               Align = alTop
               BevelOuter = bvNone
@@ -3122,7 +3122,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox7: TRzGroupBox
               Left = 1
               Top = 175
-              Width = 997
+              Width = 1005
               Height = 63
               Align = alTop
               Caption = ' Outras informa'#231#245'es '
@@ -3221,8 +3221,8 @@ object frmCadPessoa: TfrmCadPessoa
           object RzPageControl2: TRzPageControl
             Left = 0
             Top = 244
-            Width = 999
-            Height = 302
+            Width = 1007
+            Height = 310
             ActivePage = TS_Dados_Profissionais
             ActivePageDefault = TS_Dados_Profissionais
             Align = alClient
@@ -3241,8 +3241,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Profissionais: TPanel
                 Left = 0
                 Top = 0
-                Width = 997
-                Height = 281
+                Width = 1005
+                Height = 289
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -3593,8 +3593,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlConjuge: TPanel
                 Left = 0
                 Top = 0
-                Width = 997
-                Height = 281
+                Width = 1005
+                Height = 289
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -3959,8 +3959,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Conta: TPanel
                 Left = 0
                 Top = 0
-                Width = 997
-                Height = 281
+                Width = 1005
+                Height = 289
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -4088,8 +4088,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid3: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 997
-                Height = 281
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Dep
@@ -4164,8 +4164,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid4: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 997
-                Height = 281
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefP
@@ -4254,8 +4254,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid5: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 997
-                Height = 281
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefC
@@ -4324,8 +4324,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid6: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 997
-                Height = 281
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Aut
@@ -4396,7 +4396,7 @@ object frmCadPessoa: TfrmCadPessoa
           object GroupBox2: TGroupBox
             Left = 0
             Top = 243
-            Width = 999
+            Width = 1007
             Height = 140
             Align = alTop
             Caption = ' Dados Cobran'#231'a '
@@ -4735,7 +4735,7 @@ object frmCadPessoa: TfrmCadPessoa
           object GroupBox3: TGroupBox
             Left = 0
             Top = 75
-            Width = 999
+            Width = 1007
             Height = 168
             Align = alTop
             Caption = ' Dados Entrega '
@@ -5153,7 +5153,7 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 999
+            Width = 1007
             Height = 75
             Align = alTop
             TabOrder = 0
@@ -6536,14 +6536,32 @@ object frmCadPessoa: TfrmCadPessoa
             DataSource = DMCadPessoa.dsPessoa
             TabOrder = 37
           end
+          object DBCheckBox31: TDBCheckBox
+            Left = 696
+            Top = 34
+            Width = 153
+            Height = 17
+            Caption = 'IPI Pago Pela Empresa'
+            DataField = 'IPI_PAGO_FILIAL'
+            DataSource = DMCadPessoa.dsPessoa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 38
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
+          end
         end
         object TS_RegrasFiscais: TRzTabSheet
           Caption = 'Regras (Fiscais)'
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 999
-            Height = 546
+            Width = 1007
+            Height = 554
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -6551,7 +6569,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel6: TPanel
               Left = 1
               Top = 394
-              Width = 997
+              Width = 1005
               Height = 16
               Align = alTop
               Color = clGray
@@ -6560,7 +6578,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox1: TRzDBCheckBox
               Left = 1
               Top = 290
-              Width = 997
+              Width = 1005
               Height = 17
               DataField = 'IPI_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -6580,7 +6598,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxIPI: TRzGroupBox
               Left = 1
               Top = 307
-              Width = 997
+              Width = 1005
               Height = 87
               Align = alTop
               BorderColor = clBlue
@@ -6595,7 +6613,7 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 4
               Visible = False
               DesignSize = (
-                997
+                1005
                 87)
               object Label71: TLabel
                 Left = 16
@@ -6710,7 +6728,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel7: TPanel
               Left = 1
               Top = 274
-              Width = 997
+              Width = 1005
               Height = 16
               Align = alTop
               Color = clGray
@@ -6719,7 +6737,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxSuframa: TRzGroupBox
               Left = 1
               Top = 137
-              Width = 997
+              Width = 1005
               Height = 137
               Align = alTop
               BorderColor = clBlue
@@ -6733,7 +6751,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 3
               DesignSize = (
-                997
+                1005
                 137)
               object Label91: TLabel
                 Left = 3
@@ -6955,7 +6973,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox2: TRzDBCheckBox
               Left = 1
               Top = 410
-              Width = 997
+              Width = 1005
               Height = 17
               DataField = 'PIS_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -6975,7 +6993,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel5: TPanel
               Left = 1
               Top = 427
-              Width = 997
+              Width = 1005
               Height = 93
               Align = alTop
               BevelOuter = bvNone
@@ -6983,7 +7001,7 @@ object frmCadPessoa: TfrmCadPessoa
               object gbxPIS: TRzGroupBox
                 Left = 0
                 Top = 0
-                Width = 997
+                Width = 1005
                 Height = 93
                 Align = alClient
                 BorderColor = clBlue
@@ -6998,7 +7016,7 @@ object frmCadPessoa: TfrmCadPessoa
                 TabOrder = 0
                 Visible = False
                 DesignSize = (
-                  997
+                  1005
                   93)
                 object Label75: TLabel
                   Left = 16
@@ -7103,7 +7121,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxDadosAdic: TRzGroupBox
               Left = 1
               Top = 53
-              Width = 997
+              Width = 1005
               Height = 52
               Align = alTop
               BorderColor = clBlue
@@ -7117,7 +7135,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 1
               DesignSize = (
-                997
+                1005
                 52)
               object Label99: TLabel
                 Left = 16
@@ -7143,7 +7161,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox1: TRzGroupBox
               Left = 1
               Top = 105
-              Width = 997
+              Width = 1005
               Height = 32
               Align = alTop
               BorderColor = clBlue
@@ -7197,7 +7215,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox5: TRzGroupBox
               Left = 1
               Top = 1
-              Width = 997
+              Width = 1005
               Height = 52
               Align = alTop
               BorderColor = clBlue
@@ -7317,8 +7335,8 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlServico: TPanel
             Left = 0
             Top = 0
-            Width = 999
-            Height = 546
+            Width = 1007
+            Height = 554
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -7722,8 +7740,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid7: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 999
-            Height = 546
+            Width = 1007
+            Height = 554
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_Ativ
@@ -7797,8 +7815,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid8: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 999
-            Height = 546
+            Width = 1007
+            Height = 554
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_TipoMat
@@ -7876,8 +7894,8 @@ object frmCadPessoa: TfrmCadPessoa
   end
   object StaticText2: TStaticText
     Left = 0
-    Top = 622
-    Width = 1007
+    Top = 630
+    Width = 1015
     Height = 17
     Align = alBottom
     Caption = 'F2 Consultar'

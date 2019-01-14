@@ -30,8 +30,8 @@ object frmCadProduto2: TfrmCadProduto2
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 883
-    Height = 593
+    Width = 891
+    Height = 601
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -49,8 +49,8 @@ object frmCadProduto2: TfrmCadProduto2
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 145
-        Width = 879
-        Height = 408
+        Width = 887
+        Height = 416
         Align = alClient
         Ctl3D = False
         DataSource = dmCadProduto.dsProduto_Consulta
@@ -248,7 +248,7 @@ object frmCadProduto2: TfrmCadProduto2
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 879
+        Width = 887
         Height = 34
         Align = alTop
         Color = clSilver
@@ -621,8 +621,8 @@ object frmCadProduto2: TfrmCadProduto2
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 553
-        Width = 879
+        Top = 561
+        Width = 887
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -638,7 +638,7 @@ object frmCadProduto2: TfrmCadProduto2
       object pnlCons_Produto: TPanel
         Left = 0
         Top = 34
-        Width = 879
+        Width = 887
         Height = 111
         Align = alTop
         Color = clSilver
@@ -975,7 +975,7 @@ object frmCadProduto2: TfrmCadProduto2
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 879
+        Width = 887
         Height = 36
         Align = alTop
         Color = 8404992
@@ -1201,8 +1201,8 @@ object frmCadProduto2: TfrmCadProduto2
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 36
-        Width = 879
-        Height = 534
+        Width = 887
+        Height = 542
         ActivePage = TabSheet1
         ActivePageDefault = TabSheet1
         Align = alClient
@@ -1217,13 +1217,13 @@ object frmCadProduto2: TfrmCadProduto2
           object pnlCadastro: TPanel
             Left = 0
             Top = 0
-            Width = 875
+            Width = 883
             Height = 269
             Align = alTop
             Enabled = False
             TabOrder = 0
             DesignSize = (
-              875
+              883
               269)
             object Label1: TLabel
               Left = 55
@@ -1971,8 +1971,8 @@ object frmCadProduto2: TfrmCadProduto2
           object RzPageControl3: TRzPageControl
             Left = 0
             Top = 269
-            Width = 875
-            Height = 242
+            Width = 883
+            Height = 250
             ActivePage = TS_Livro
             ActivePageDefault = TS_Livro
             Align = alClient
@@ -1985,8 +1985,8 @@ object frmCadProduto2: TfrmCadProduto2
               object pnlLivro: TPanel
                 Left = 0
                 Top = 0
-                Width = 871
-                Height = 219
+                Width = 879
+                Height = 227
                 Align = alClient
                 Enabled = False
                 TabOrder = 0
@@ -2100,14 +2100,14 @@ object frmCadProduto2: TfrmCadProduto2
               object pnlFiscal: TPanel
                 Left = 0
                 Top = 0
-                Width = 871
-                Height = 219
+                Width = 879
+                Height = 227
                 Align = alClient
                 Enabled = False
                 TabOrder = 0
                 DesignSize = (
-                  871
-                  219)
+                  879
+                  227)
                 object Label20: TLabel
                   Left = 81
                   Top = 80
@@ -2491,8 +2491,8 @@ object frmCadProduto2: TfrmCadProduto2
               object pnlOpcoes: TPanel
                 Left = 0
                 Top = 0
-                Width = 871
-                Height = 219
+                Width = 879
+                Height = 227
                 Align = alClient
                 Enabled = False
                 TabOrder = 0
@@ -2671,7 +2671,7 @@ object frmCadProduto2: TfrmCadProduto2
               object Panel5: TPanel
                 Left = 0
                 Top = 0
-                Width = 871
+                Width = 879
                 Height = 31
                 Align = alTop
                 Color = clSilver
@@ -2903,8 +2903,8 @@ object frmCadProduto2: TfrmCadProduto2
               object SMDBGrid6: TSMDBGrid
                 Left = 0
                 Top = 31
-                Width = 871
-                Height = 188
+                Width = 879
+                Height = 196
                 Align = alClient
                 Ctl3D = False
                 DataSource = dmCadProduto.dsProduto_UF
@@ -3048,15 +3048,15 @@ object frmCadProduto2: TfrmCadProduto2
           object pnlCadastro_Forn: TPanel
             Left = 0
             Top = 0
-            Width = 875
-            Height = 511
+            Width = 883
+            Height = 519
             Align = alClient
             Enabled = False
             TabOrder = 0
             object Panel4: TPanel
               Left = 1
               Top = 1
-              Width = 873
+              Width = 881
               Height = 32
               Align = alTop
               Color = clSilver
@@ -3110,8 +3110,8 @@ object frmCadProduto2: TfrmCadProduto2
             object SMDBGrid2: TSMDBGrid
               Left = 1
               Top = 33
-              Width = 873
-              Height = 477
+              Width = 881
+              Height = 485
               Align = alClient
               DataSource = dmCadProduto.dsProduto_Forn
               Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -3292,8 +3292,8 @@ object frmCadProduto2: TfrmCadProduto2
   end
   object StaticText2: TStaticText
     Left = 0
-    Top = 593
-    Width = 883
+    Top = 601
+    Width = 891
     Height = 17
     Align = alBottom
     Caption = 'F2 Pesquisar'

@@ -705,8 +705,9 @@ begin
   end;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadPedido.prc_Filtrar_Produto_Cliente;
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
   fDMCadPedido.prc_Inserir_Itens;
@@ -760,8 +761,9 @@ begin
   end;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadPedido.prc_Filtrar_Produto_Cliente;
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
   fDMCadPedido.cdsPedido_Itens.Edit;
@@ -1226,8 +1228,9 @@ begin
   prc_Posiciona_Pedido;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadPedido.prc_Filtrar_Produto_Cliente;
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
   fDMCadPedido.cdsFilial.Locate('ID',fDMCadPedido.cdsPedido_ConsultaFILIAL.AsInteger,[loCaseInsensitive]);
@@ -1510,8 +1513,9 @@ begin
   if (fDMCadPedido.Tag = 1) then
   begin
     //02/06/2016  incluido a filial
-    if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-      fDMCadPedido.prc_Filtrar_Produto_Cliente;
+    if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+       (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+      uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
     //****************
     if (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) then
       fDMCadPedido.cdsPedido.Post;

@@ -3641,7 +3641,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'SUMIDOR, PES.TIPO_CONTRIBUINTE, INSC_SUFRAMA, INSC_MUNICIPAL, PE' +
       'S.CARIMBO, PES.PERC_DESC_SUFRAMA, PES.ORGAO_PUBLICO, PES.IMP_COD' +
       '_PRODUTO_CLI,'#13#10'IMP_COR_CLIENTE, PES.MDIA1, PES.MDIA2, PES.insc_s' +
-      'uframa'#13#10'FROM PESSOA PES'#13#10#13#10
+      'uframa, IPI_PAGO_FILIAL'#13#10'FROM PESSOA PES'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3911,6 +3911,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsClienteMDIA2: TIntegerField
       FieldName = 'MDIA2'
+    end
+    object cdsClienteIPI_PAGO_FILIAL: TStringField
+      FieldName = 'IPI_PAGO_FILIAL'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsCliente: TDataSource
@@ -5022,8 +5027,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'RODUTO_CLI'#13#10',P.NUM_MS'#13#10',IMP_CONSUMO_NFE'#13#10',DT_ALT_PRECOCUSTO'#13#10',PR' +
       'ECO_CUSTO_TOTAL'#13#10',PERC_MARGEMLUCRO'#13#10',PERC_DESC_MAX'#13#10',SPED_TIPO_I' +
       'TEM'#13#10',ID_CSTICMS_BRED'#13#10',USA_PRECO_COR'#13#10',TAMANHO'#13#10',COD_BARRA2'#13#10',Q' +
-      'TD_EMBALAGEM'#13#10',ID_MARCA'#13#10',UNIDADE2'#13#10',ID_CSTICMS'#13#10'FROM PRODUTO P'#13 +
-      #10'WHERE INATIVO = '#39'N'#39#13#10
+      'TD_EMBALAGEM'#13#10',ID_MARCA'#13#10',UNIDADE2'#13#10',ID_CSTICMS'#13#10',P.NOME_MODELO'#13 +
+      #10'FROM PRODUTO P'#13#10'WHERE INATIVO = '#39'N'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -5260,6 +5265,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsProdutoID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
+    end
+    object cdsProdutoNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
     end
   end
   object dsProduto: TDataSource

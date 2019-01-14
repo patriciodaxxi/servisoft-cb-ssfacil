@@ -220,6 +220,7 @@ object fCupomFiscalC: TfCupomFiscalC
         Alignment = taCenter
         Expanded = False
         FieldName = 'FINANCEIRO_OK'
+        Width = 64
         Visible = True
       end>
   end

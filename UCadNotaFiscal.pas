@@ -3583,6 +3583,15 @@ var
   vIDAux: Integer;
   vConexao: Boolean;
 begin
+  fDMCadNotaFiscal.cdsParametros.Close;
+  fDMCadNotaFiscal.cdsParametros.Open;
+  fDMCadNotaFiscal.qParametros_Geral.Close;
+  fDMCadNotaFiscal.qParametros_Geral.Open;
+  fDMCadNotaFiscal.qParametros_Imp.Close;
+  fDMCadNotaFiscal.qParametros_Imp.Open;
+  fDMCadNotaFiscal.qParametros_NFe.Close;
+  fDMCadNotaFiscal.qParametros_NFe.Open;
+
   if CheckBox1.Visible then
     fDMCadNotaFiscal.vNaoMostrarCampoVazio := CheckBox1.Checked
   else

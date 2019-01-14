@@ -3,8 +3,8 @@ object DMCadPosicao: TDMCadPosicao
   OnCreate = DataModuleCreate
   Left = 281
   Top = 222
-  Height = 328
-  Width = 585
+  Height = 409
+  Width = 862
   object sdsPosicao: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -54,6 +54,9 @@ object DMCadPosicao: TDMCadPosicao
       FieldName = 'PRIMEIRO_MAT'
       FixedChar = True
       Size = 1
+    end
+    object sdsPosicaoID_SETOR: TIntegerField
+      FieldName = 'ID_SETOR'
     end
   end
   object dspPosicao: TDataSetProvider
@@ -111,10 +114,49 @@ object DMCadPosicao: TDMCadPosicao
       FixedChar = True
       Size = 1
     end
+    object cdsPosicaoID_SETOR: TIntegerField
+      FieldName = 'ID_SETOR'
+    end
   end
   object dsPosicao: TDataSource
     DataSet = cdsPosicao
     Left = 264
     Top = 32
+  end
+  object sdsSetor: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, NOME'#13#10'FROM SETOR'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 80
+    Top = 128
+  end
+  object dspSetor: TDataSetProvider
+    DataSet = sdsSetor
+    OnUpdateError = dspPosicaoUpdateError
+    Left = 152
+    Top = 128
+  end
+  object cdsSetor: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspSetor'
+    Left = 224
+    Top = 128
+    object cdsSetorID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsSetorNOME: TStringField
+      FieldName = 'NOME'
+    end
+  end
+  object dsSetor: TDataSource
+    DataSet = cdsSetor
+    Left = 288
+    Top = 128
   end
 end

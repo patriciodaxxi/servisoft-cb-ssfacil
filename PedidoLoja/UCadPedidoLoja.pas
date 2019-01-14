@@ -1666,8 +1666,9 @@ begin
   prc_Posiciona_Pedido;
   prc_Posiciona_Imp;
 
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadPedido.prc_Filtrar_Produto_Cliente;
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
 
   fRelPedido              := TfRelPedido.Create(Self);
   fRelPedido.vImpPreco    := ckImpPreco.Checked;

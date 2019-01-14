@@ -9142,7 +9142,7 @@ object DMCadPedido: TDMCadPedido
       'S.VLR_LIMITE_COMPRA, PES.TIPO_CONSUMIDOR, PES.TIPO_CONTRIBUINTE,' +
       ' USUARIO_LOG,'#13#10'       PES.INSC_SUFRAMA, PES.DDDCELULAR, PES.CELU' +
       'LAR, PES.ID_GRUPO, PES.IMP_COR_CLIENTE,'#13#10'       PES.MOSTRAR_AVIS' +
-      'O,PES.OBS_AVISO'#13#10'from PESSOA PES'#13#10
+      'O,PES.OBS_AVISO, IPI_PAGO_FILIAL'#13#10'from PESSOA PES'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -9283,6 +9283,11 @@ object DMCadPedido: TDMCadPedido
     object cdsClienteOBS_AVISO: TStringField
       FieldName = 'OBS_AVISO'
       Size = 150
+    end
+    object cdsClienteIPI_PAGO_FILIAL: TStringField
+      FieldName = 'IPI_PAGO_FILIAL'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsCliente: TDataSource

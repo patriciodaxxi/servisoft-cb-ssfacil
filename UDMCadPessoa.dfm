@@ -587,6 +587,11 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'CAIXINHA'
       Size = 30
     end
+    object sdsPessoaIPI_PAGO_FILIAL: TStringField
+      FieldName = 'IPI_PAGO_FILIAL'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
@@ -1221,6 +1226,11 @@ object DMCadPessoa: TDMCadPessoa
     object cdsPessoaCAIXINHA: TStringField
       FieldName = 'CAIXINHA'
       Size = 30
+    end
+    object cdsPessoaIPI_PAGO_FILIAL: TStringField
+      FieldName = 'IPI_PAGO_FILIAL'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsPessoa: TDataSource

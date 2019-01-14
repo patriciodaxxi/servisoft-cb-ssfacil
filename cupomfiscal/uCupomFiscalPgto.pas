@@ -125,6 +125,8 @@ type
     procedure Panel7Enter(Sender: TObject);
     procedure Panel4Exit(Sender: TObject);
     procedure ComboVendedorChange(Sender: TObject);
+    procedure DBEdit4Click(Sender: TObject);
+    procedure CurrencyEdit1Click(Sender: TObject);
   private
     { Private declarations }
     vPercJuros, vVlrDesconto_Ant: Real;
@@ -798,7 +800,6 @@ begin
 
 //////////////////////////////////////////////
   fDMCupomFiscal.cdsCupomFiscalVLR_COFINS.AsFloat   := 0;
-  fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_ICMS.AsFloat     := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_IPI.AsFloat      := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_PIS.AsFloat      := 0;
@@ -810,7 +811,7 @@ begin
   fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_MUNICIPAL.AsFloat := 0;
 //////////////////////////////////////////////
 
-  vVlrParcelado := fDmCupomFiscal.vSomaOriginal - fDmCupomFiscal.vVlrEntrada;
+  vVlrParcelado := fDmCupomFiscal.vSomaOriginal -fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency - fDmCupomFiscal.vVlrEntrada;
 
   prc_ControleParcelas(vVlrParcelado,vPercJuros,vQtdParcelas);
 
@@ -988,7 +989,7 @@ begin
     fDmCupomFiscal.cdsCupomFiscalPERC_VENDEDOR.AsFloat := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsVendedorPERC_COMISSAO_VEND.AsFloat))
   else
     fDmCupomFiscal.cdsCupomFiscalPERC_VENDEDOR.AsFloat := StrToFloat(FormatFloat('0.00',0));
-  if fDmCupomFiscal.cdsCupomParametrosAUTENTICA_VENDEDOR.AsString = 'S' then
+  if (fDmCupomFiscal.cdsCupomParametrosAUTENTICA_VENDEDOR.AsString = 'S') and (vSenha = '') then
   begin
     frmSenha := TfrmSenha.Create(Self);
     frmSenha.Label2.Caption := 'Autenticar Vendedor';
@@ -1384,6 +1385,7 @@ end;
 
 procedure TfCupomFiscalPgto.ComboVendedorChange(Sender: TObject);
 begin
+  vSenha := '';
   vSenhaVendedor := fDmCupomFiscal.cdsVendedorSENHA.AsString;
 end;
 
@@ -1420,6 +1422,16 @@ begin
     fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency := fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsCurrency + vTot;
     fDmCupomFiscal.cdsCupom_Parc.Post;
   end;
+end;
+
+procedure TfCupomFiscalPgto.DBEdit4Click(Sender: TObject);
+begin
+  DBEdit4.SelectAll;
+end;
+
+procedure TfCupomFiscalPgto.CurrencyEdit1Click(Sender: TObject);
+begin
+  CurrencyEdit1.SelectAll;
 end;
 
 end.

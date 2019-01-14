@@ -3,7 +3,7 @@ object DMConsPedido: TDMConsPedido
   OnCreate = DataModuleCreate
   Left = 198
   Top = 11
-  Height = 704
+  Height = 707
   Width = 1035
   object sdsPedido_Item: TSQLDataSet
     NoMetadata = True
@@ -3276,14 +3276,20 @@ object DMConsPedido: TDMConsPedido
       'sao) DTEMISSAO'#13#10' FROM PRODUTO PRO'#13#10' left join vpedido_item v'#13#10'  ' +
       ' on v.id_produto = pro.id'#13#10'WHERE PRO.tipo_reg = '#39'P'#39#13#10'  AND pro.i' +
       'nativo = '#39'N'#39' '#13#10'  AND not exists (select 1 from vpedido_item vp'#13#10 +
-      '                    where vp.dtemissao >= :data'#13#10'               ' +
-      '       and vp.id_produto = pro.id'#13#10'                      and vp.' +
-      'tipo_reg = '#39'P'#39')'#13#10'GROUP BY PRO.id, PRO.referencia, PRO.nome'
+      '                    where vp.dtemissao >= :Data1'#13#10'              ' +
+      '        and vp.dtemissao <= :Data2'#13#10'                      and vp' +
+      '.id_produto = pro.id'#13#10'                      and vp.tipo_reg = '#39'P' +
+      #39')'#13#10'GROUP BY PRO.id, PRO.referencia, PRO.nome'
     MaxBlobSize = -1
     Params = <
       item
         DataType = ftDate
-        Name = 'data'
+        Name = 'Data1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'Data2'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
@@ -5238,5 +5244,89 @@ object DMConsPedido: TDMConsPedido
     DataSet = cdsTipoMat
     Left = 384
     Top = 560
+  end
+  object sdsCliente_Sem_Venda: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT P.codigo, P.nome, P.cnpj_cpf, P.cidade, P.uf, MAX(v.dtemi' +
+      'ssao) DTEMISSAO'#13#10' FROM pessoa P'#13#10' left join vpedido_item v'#13#10'   o' +
+      'n v.id_cliente = P.codigo'#13#10'WHERE P.TP_CLIENTE = '#39'S'#39#13#10'  AND P.INA' +
+      'TIVO = '#39'N'#39#13#10'  AND not exists (select 1 from vpedido_item vp'#13#10'   ' +
+      '                 where vp.dtemissao >= :Data1'#13#10'                 ' +
+      '     and vp.dtemissao <= :Data2'#13#10'                      and vp.id' +
+      '_cliente = P.codigo'#13#10'                      and vp.tipo_reg = '#39'P'#39 +
+      ')'#13#10'GROUP BY P.codigo, P.nome, P.cnpj_cpf, P.cidade, P.uf'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'Data1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'Data2'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 288
+    Top = 624
+  end
+  object dspCliente_Sem_Venda: TDataSetProvider
+    DataSet = sdsCliente_Sem_Venda
+    Left = 328
+    Top = 624
+  end
+  object cdsCliente_Sem_Venda: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspCliente_Sem_Venda'
+    Left = 368
+    Top = 624
+    object cdsCliente_Sem_VendaCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object cdsCliente_Sem_VendaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsCliente_Sem_VendaCNPJ_CPF: TStringField
+      FieldName = 'CNPJ_CPF'
+    end
+    object cdsCliente_Sem_VendaCIDADE: TStringField
+      FieldName = 'CIDADE'
+      Size = 40
+    end
+    object cdsCliente_Sem_VendaUF: TStringField
+      FieldName = 'UF'
+      FixedChar = True
+      Size = 2
+    end
+    object cdsCliente_Sem_VendaDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+  end
+  object dsCliente_Sem_Venda: TDataSource
+    DataSet = cdsCliente_Sem_Venda
+    Left = 416
+    Top = 624
+  end
+  object frxCliente_Sem_Venda: TfrxDBDataset
+    UserName = 'frxCliente_Sem_Venda'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'CODIGO=CODIGO'
+      'NOME=NOME'
+      'CNPJ_CPF=CNPJ_CPF'
+      'CIDADE=CIDADE'
+      'UF=UF'
+      'DTEMISSAO=DTEMISSAO')
+    DataSource = dsCliente_Sem_Venda
+    BCDToCurrency = False
+    Left = 920
+    Top = 504
   end
 end

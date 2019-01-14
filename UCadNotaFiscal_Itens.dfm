@@ -1516,6 +1516,14 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Alignment = taRightJustify
         Caption = 'C'#243'd.Enq IPI:'
       end
+      object Label65: TLabel
+        Left = 569
+        Top = 259
+        Width = 62
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr.IPI Devol:'
+      end
       object RxDBLookupCombo7: TRxDBLookupCombo
         Left = 72
         Top = 15
@@ -1987,6 +1995,15 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
           TabOrder = 0
         end
       end
+      object DBEdit36: TDBEdit
+        Left = 634
+        Top = 251
+        Width = 94
+        Height = 21
+        DataField = 'VLR_IPI_DEVOL'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        TabOrder = 26
+      end
     end
     object TabSheet3: TRzTabSheet
       Color = clMoneyGreen
@@ -2219,6 +2236,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'VLR_AFRMM'
               Title.Alignment = taCenter
               Title.Caption = 'Valor AFRMM'
+              Width = 64
               Visible = True
             end
             item
@@ -2227,6 +2245,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'TIPO_INTERMEDIO'
               Title.Alignment = taCenter
               Title.Caption = 'Tipo Interm'#233'dio'
+              Width = 64
               Visible = True
             end
             item
@@ -2235,6 +2254,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'CNPJ'
               Title.Alignment = taCenter
               Title.Caption = 'CNPJ Terceiro'
+              Width = 64
               Visible = True
             end
             item
@@ -2243,6 +2263,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'UF_TERCEIRO'
               Title.Alignment = taCenter
               Title.Caption = 'UF Terceiro'
+              Width = 64
               Visible = True
             end>
         end

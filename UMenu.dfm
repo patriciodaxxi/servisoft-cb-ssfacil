@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 623
+    Height = 631
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -233,7 +233,7 @@ object fMenu: TfMenu
           OnClick = Grupo1Click
         end
         object Linha1: TMenuItem
-          Caption = 'Linha'
+          Caption = 'Linha / Constru'#231#227'o'
           OnClick = Linha1Click
         end
         object MarcadeProduto1: TMenuItem
@@ -770,7 +770,7 @@ object fMenu: TfMenu
         OnClick = ConsultaNotasEntradaSada1Click
       end
       object ConsultaProdutosSemVendasPedidosnoPerodo1: TMenuItem
-        Caption = 'Consulta Produtos Sem Vendas(Pedidos) no Per'#237'odo'
+        Caption = 'Consulta Produtos/Clientes Sem Vendas(Pedidos) no Per'#237'odo'
         OnClick = ConsultaProdutosSemVendasPedidosnoPerodo1Click
       end
       object ConsultaPedidoProcesso1: TMenuItem
@@ -3917,72 +3917,6 @@ object fMenu: TfMenu
         GroupName = 'Tipo M'#225'quinas'
       end
       item
-        FormName = 'frmCadProduto'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnRecalcular_Mat'
-        Caption = 'Recalcular'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnExcluir_Tam'
-        Caption = 'Excluir a Grade'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnCopiarProduto'
-        Caption = 'Copiar Produto'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'Label4'
-        Caption = 'N'#227'o mostrar Pre'#231'o Custo:'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'Label12'
-        Caption = 'N'#227'o mostrar Pre'#231'o Venda:'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'Label24'
-        Caption = 'N'#227'o mostrar % Margem:'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'RzCheckList1'
-        Caption = 'Imprimir Pre'#231'o Custo/Venda'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnDigita_DP'
-        Caption = 'Digitar Desenho Passamento'
-        GroupName = 'Produtos'
-      end
-      item
         FormName = 'frmCadDocEstoque'
         CompName = 'btnInserir'
         Caption = 'Inserir'
@@ -4089,6 +4023,66 @@ object fMenu: TfMenu
         CompName = 'ImprimirMinuta1'
         Caption = 'Imprimir Minuta'
         GroupName = 'Nota Fiscal'
+      end
+      item
+        FormName = 'frmConsProduto_Sem_Ped'
+        CompName = 'btnInativar'
+        Caption = 'Inativar os Clientes Selecionados'
+        GroupName = 'Consulta Produto / Clientes Sem Vendas'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Material'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Material'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Material'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnExcluir_Tam'
+        Caption = 'Excluir a Grade'
+        GroupName = 'Material'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnCopiarProduto'
+        Caption = 'Copiar Produto'
+        GroupName = 'Material'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'Label4'
+        Caption = 'N'#227'o mostrar Pre'#231'o Custo:'
+        GroupName = 'Material'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'Label12'
+        Caption = 'N'#227'o mostrar Pre'#231'o Venda:'
+        GroupName = 'Material'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'Label24'
+        Caption = 'N'#227'o mostrar % Margem:'
+        GroupName = 'Material'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'RzCheckList1'
+        Caption = 'Imprimir Pre'#231'o Custo/Venda'
+        GroupName = 'Material'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

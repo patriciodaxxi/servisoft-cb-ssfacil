@@ -27,22 +27,26 @@ type
     DBEdit3: TDBEdit;
     DBEdit1: TDBEdit;
     RxDBLookupCombo1: TRxDBLookupCombo;
-    SMDBGrid1: TSMDBGrid;
-    pnlItem: TPanel;
-    btnInserir_Itens: TNxButton;
-    btnAlterar_Itens: TNxButton;
-    btnExcluir_Itens: TNxButton;
-    btnCopiarCombinacao: TNxButton;
     SMDBGrid2: TSMDBGrid;
     btnImprimir: TNxButton;
-    Image1: TImage;
     Label1: TLabel;
     Label4: TLabel;
     DBEdi4: TDBEdit;
     BitBtn20: TBitBtn;
     Label107: TLabel;
     OpenPictureDialog1: TOpenPictureDialog;
+    Panel1: TPanel;
+    Image1: TImage;
+    SMDBGrid1: TSMDBGrid;
+    pnlItem: TPanel;
+    btnInserir_Itens: TNxButton;
+    btnAlterar_Itens: TNxButton;
+    btnExcluir_Itens: TNxButton;
+    btnCopiarCombinacao: TNxButton;
     btnCopiarPrincipal: TNxButton;
+    Label6: TLabel;
+    Shape1: TShape;
+    Label7: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -67,6 +71,10 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure BitBtn20Click(Sender: TObject);
     procedure btnCopiarPrincipalClick(Sender: TObject);
+    procedure SMDBGrid2GetCellParams(Sender: TObject; Field: TField;
+      AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     ffrmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat;
@@ -93,7 +101,7 @@ var
 implementation
 
 uses rsDBUtils, USel_Produto, uUtilPadrao, USel_Combinacao, StdConvs, DmdDatabase, Math, StrUtils, UCopiar_Comb,
-  UAltProd;
+  UAltProd, UCadProduto_Comb_AltCor;
 
 {$R *.dfm}
 
@@ -663,6 +671,32 @@ begin
     fDMCadProduto.cdsProduto_Comb_Mat.Post;
     fDMCadProduto.cdsProduto_Consumo.Next;
   end;
+end;
+
+procedure TfrmCadProduto_Comb.SMDBGrid2GetCellParams(Sender: TObject;
+  Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
+begin
+  if (fDMCadProduto.cdsProduto_Comb_MatclUsa_Cor.AsString = 'S') and (fDMCadProduto.cdsProduto_Comb_MatID_COR.AsInteger <= 0) then
+  begin
+    Background  := clYellow;
+    AFont.Color := clBlack;
+  end;
+end;
+
+procedure TfrmCadProduto_Comb.SMDBGrid2KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  ffrmCadProduto_Comb_AltCor: TfrmCadProduto_Comb_AltCor;
+begin
+  if (Key = Vk_F3) and (fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]) and (fDMCadProduto.cdsProduto_Comb_MatID_MATERIAL.AsInteger > 0) then
+  begin
+    ffrmCadProduto_Comb_AltCor := TfrmCadProduto_Comb_AltCor.Create(self);
+    ffrmCadProduto_Comb_AltCor.fDMCadProduto := fDMCadProduto;
+    ffrmCadProduto_Comb_AltCor.ShowModal;
+    FreeAndNil(ffrmCadProduto_Comb_AltCor);
+    if (fDMCadProduto.cdsProduto_Comb.State in [dsEdit]) and not(btnConfirmar.Enabled) then
+      fDMCadProduto.cdsProduto_Comb.Post;
+  end
 end;
 
 end.

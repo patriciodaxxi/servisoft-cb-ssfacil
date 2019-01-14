@@ -856,6 +856,17 @@ type
     sdsParametros_EtiqNAO_IMP_MSG_TROCA: TStringField;
     cdsParametros_EtiqNAO_IMP_MSG_TROCA: TStringField;
     cdsPedidoDTENTREGA_PED: TDateField;
+    sdsCliente_Sem_Venda: TSQLDataSet;
+    dspCliente_Sem_Venda: TDataSetProvider;
+    cdsCliente_Sem_Venda: TClientDataSet;
+    dsCliente_Sem_Venda: TDataSource;
+    cdsCliente_Sem_VendaCODIGO: TIntegerField;
+    cdsCliente_Sem_VendaNOME: TStringField;
+    cdsCliente_Sem_VendaCNPJ_CPF: TStringField;
+    cdsCliente_Sem_VendaCIDADE: TStringField;
+    cdsCliente_Sem_VendaUF: TStringField;
+    cdsCliente_Sem_VendaDTEMISSAO: TDateField;
+    frxCliente_Sem_Venda: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConsumoNewRecord(DataSet: TDataSet);
     procedure cdsPedido_MatCalcFields(DataSet: TDataSet);
