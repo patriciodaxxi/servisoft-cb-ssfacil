@@ -833,6 +833,8 @@ begin
   fDMCadNecessidade_Compras.mMaterialNome_Material.AsString := fDMCadNecessidade_Compras.cdsLote_MatNOME_MATERIAL.AsString;
   fDMCadNecessidade_Compras.mMaterialQtd_OC_Fat.AsFloat := StrToFloat(FormatFloat('0.0000', fDMCadNecessidade_Compras.cdsLote_MatQTD_OC_FAT.AsFloat));
   fDMCadNecessidade_Compras.mMaterialGerado_Sobra_OC.AsString := fDMCadNecessidade_Compras.mMaterialGerado_Sobra_OC.AsString;
+  fDMCadNecessidade_Compras.mMaterialID_Setor.AsInteger  := fDMCadNecessidade_Compras.cdsLote_MatID_SETOR.AsInteger;
+  fDMCadNecessidade_Compras.mMaterialNome_Setor.AsString := fDMCadNecessidade_Compras.cdsLote_MatNOME_SETOR.AsString;
   if fDMCadNecessidade_Compras.mMaterialGerado_Sobra_OC.AsString <> 'S' then
     fDMCadNecessidade_Compras.mMaterialGerado_Sobra_OC.AsString := 'N';
   if fDMCadNecessidade_Compras.cdsLote_MatID_FORNECEDOR.AsInteger > 0 then

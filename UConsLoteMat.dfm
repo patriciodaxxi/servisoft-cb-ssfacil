@@ -19,8 +19,8 @@ object frmConsLoteMat: TfrmConsLoteMat
   object pnlCadastro: TPanel
     Left = 0
     Top = 0
-    Width = 1035
-    Height = 89
+    Width = 1043
+    Height = 91
     Align = alTop
     BevelOuter = bvNone
     Color = clSilver
@@ -298,9 +298,9 @@ object frmConsLoteMat: TfrmConsLoteMat
   end
   object RzPageControl1: TRzPageControl
     Left = 0
-    Top = 89
-    Width = 1035
-    Height = 503
+    Top = 91
+    Width = 1043
+    Height = 508
     ActivePage = TS_Material
     ActivePageDefault = TS_Material
     Align = alClient
@@ -317,8 +317,8 @@ object frmConsLoteMat: TfrmConsLoteMat
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 1031
-        Height = 384
+        Width = 1039
+        Height = 389
         Align = alClient
         Ctl3D = False
         DataSource = DMCadNecessidade_Compras.dsmMaterial
@@ -456,7 +456,6 @@ object frmConsLoteMat: TfrmConsLoteMat
             ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
-            Width = 64
             Visible = True
           end
           item
@@ -492,8 +491,8 @@ object frmConsLoteMat: TfrmConsLoteMat
       end
       object SMDBGrid5: TSMDBGrid
         Left = 0
-        Top = 384
-        Width = 1031
+        Top = 389
+        Width = 1039
         Height = 96
         Align = alBottom
         DataSource = DMCadNecessidade_Compras.dsmEmbalagem
@@ -563,8 +562,8 @@ object frmConsLoteMat: TfrmConsLoteMat
       object SMDBGrid4: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 1031
-        Height = 480
+        Width = 1039
+        Height = 485
         Align = alClient
         Ctl3D = False
         DataSource = DMCadNecessidade_Compras.dsmMaterial_Prod

@@ -400,6 +400,7 @@ type
     qDuplicidadeQTD_CONSUMO: TFloatField;
     sdsLote_Mat_GravaOBS: TStringField;
     cdsLote_Mat_GravaOBS: TStringField;
+    qParametros_LoteLOTE_CALCADO_NOVO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNecessidade_ComprasUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

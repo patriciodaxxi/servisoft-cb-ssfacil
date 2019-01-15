@@ -1747,7 +1747,7 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     SQL.Strings = (
       
         'SELECT P.lote_textil, P.id_cor_cru, COMB.nome NOME_COR, USA_NECE' +
-        'SSIDADE_IF'
+        'SSIDADE_IF, LOTE_CALCADO_NOVO'
       'FROM PARAMETROS_LOTE P'
       'LEFT JOIN COMBINACAO COMB'
       'ON P.id_cor_cru = COMB.id')
@@ -1768,6 +1768,11 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     end
     object qParametros_LoteUSA_NECESSIDADE_IF: TStringField
       FieldName = 'USA_NECESSIDADE_IF'
+      Size = 1
+    end
+    object qParametros_LoteLOTE_CALCADO_NOVO: TStringField
+      FieldName = 'LOTE_CALCADO_NOVO'
+      FixedChar = True
       Size = 1
     end
   end
