@@ -1408,7 +1408,7 @@ object DMCadCFOP: TDMCadCFOP
   end
   object frxReport1: TfrxReport
     Tag = 1
-    Version = '5.1.1'
+    Version = '5.6.8'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -1433,6 +1433,7 @@ object DMCadCFOP: TDMCadCFOP
     Background = False
     HTMLTags = True
     Quality = 95
+    Transparency = False
     Author = 'FastReport'
     Subject = 'FastReport PDF export'
     ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
@@ -1442,6 +1443,7 @@ object DMCadCFOP: TDMCadCFOP
     FitWindow = False
     CenterWindow = False
     PrintScaling = False
+    PdfA = False
     Left = 768
     Top = 399
   end
@@ -1456,6 +1458,7 @@ object DMCadCFOP: TDMCadCFOP
     TimeOut = 60
     ConfurmReading = False
     UseMAPI = SMTP
+    MAPISendFlag = 0
     Left = 808
     Top = 399
   end

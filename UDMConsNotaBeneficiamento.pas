@@ -472,7 +472,7 @@ begin
                                                  0,0,0,0,0,
                                                  cdsBaixa_NFDevolvidaQTD.AsFloat,
                                                  cdsNotaPendenteVLR_UNITARIO.AsFloat,
-                                                 0,0,'',0,'','N',0); //ver aqui sobre Lote Controle
+                                                 0,0,'',0,'','N',0,0);
       cdsBaixa_NFDevolvida.Edit;
       cdsBaixa_NFDevolvidaID_MOVESTOQUE.AsInteger := vID_Estoque;
       cdsBaixa_NFDevolvida.Post;

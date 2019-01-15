@@ -50,6 +50,16 @@ object DMCadOperacao_Nota: TDMCadOperacao_Nota
       FixedChar = True
       Size = 1
     end
+    object sdsOperacao_NotaESTOQUE_DE_TERCEIRO: TStringField
+      FieldName = 'ESTOQUE_DE_TERCEIRO'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsOperacao_NotaESTOQUE_EM_TERCEIRO: TStringField
+      FieldName = 'ESTOQUE_EM_TERCEIRO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspOperacao_Nota: TDataSetProvider
     DataSet = sdsOperacao_Nota
@@ -98,6 +108,16 @@ object DMCadOperacao_Nota: TDMCadOperacao_Nota
     end
     object cdsOperacao_NotaMOSTRAR_CLI_TRIANG2: TStringField
       FieldName = 'MOSTRAR_CLI_TRIANG2'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsOperacao_NotaESTOQUE_DE_TERCEIRO: TStringField
+      FieldName = 'ESTOQUE_DE_TERCEIRO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsOperacao_NotaESTOQUE_EM_TERCEIRO: TStringField
+      FieldName = 'ESTOQUE_EM_TERCEIRO'
       FixedChar = True
       Size = 1
     end

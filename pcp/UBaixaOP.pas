@@ -230,7 +230,7 @@ begin
                                                    CurrencyEdit3.value,
                                                    0,
                                                    0,0,'',
-                                                   0,Edit1.Text,'N',0); //ver aqui sobre Lote Controle  04/11/2015
+                                                   0,Edit1.Text,'N',0,0); //ver aqui sobre Lote Controle  04/11/2015
                                                    //aqui é sem cor, Ciex usa
     end;
     fDMCadOP.cdsOP_Itens.Edit;
@@ -321,7 +321,7 @@ begin
                                                      StrToFloat(FormatFloat('0.0000',fDMCadOP.cdsOP_Itens_Baixa_MatQTD.AsFloat)),
                                                      0,
                                                      0,0,'',
-                                                     0,vNumLote_Controle,'N',0); //ver aqui sobre Lote Controle  04/11/2015
+                                                     0,vNumLote_Controle,'N',0,0);
 
         fDMCadOP.cdsOP_Itens_Baixa_Mat.Edit;
         fDMCadOP.cdsOP_Itens_Baixa_MatID_MOVESTOQUE.AsInteger := vID_Estoque;

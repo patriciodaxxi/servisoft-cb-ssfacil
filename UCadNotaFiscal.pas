@@ -2778,7 +2778,8 @@ begin
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DESCONTO.AsFloat,0,'',
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,
-                                                             vGeraCusto,uCalculo_NotaFiscal.vVlrCusto_Total);  //ver aqui sobre Lote Controle  04/11/2015
+                                                             vGeraCusto,uCalculo_NotaFiscal.vVlrCusto_Total,
+                                                             fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger); //14/01/2019 incluída a operação
 
                 fDMCadNotaFiscal.cdsNotaFiscal_Itens.Edit;
                 fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
@@ -4627,7 +4628,8 @@ begin
                                           vDescAux,fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat,'',
                                           fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
                                           fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,vGeraCusto,
-                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat);
+                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,
+                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger);
 end;
 
 procedure TfrmCadNotaFiscal.prc_scroll_Itens(DataSet: TDataSet);

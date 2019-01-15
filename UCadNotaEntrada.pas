@@ -170,6 +170,8 @@ type
     DBEdit63: TDBEdit;
     DBEdit64: TDBEdit;
     btnAjustaItens: TBitBtn;
+    rxdbOperacao: TRxDBLookupCombo;
+    lblOperacao: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -1720,7 +1722,8 @@ begin
                                                vlrDesconto,fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat,'',
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,vGerarCusto,
-                                               uCalculo_NotaFiscal.vVlrCusto_Total);   //ver aqui sobre Lote Controle  04/11/2015
+                                               uCalculo_NotaFiscal.vVlrCusto_Total,
+                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger); //14/01/2019
 
 end;
 

@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_Tributos
+        ActivePage = TS_Dados
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -719,7 +719,7 @@ object frmCadFilial: TfrmCadFilial
           Enabled = False
           object Label1: TLabel
             Left = 64
-            Top = 41
+            Top = 40
             Width = 31
             Height = 13
             Alignment = taRightJustify
@@ -727,7 +727,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label4: TLabel
             Left = 78
-            Top = 256
+            Top = 272
             Width = 17
             Height = 13
             Alignment = taRightJustify
@@ -735,7 +735,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label2: TLabel
             Left = 305
-            Top = 256
+            Top = 272
             Width = 24
             Height = 13
             Alignment = taRightJustify
@@ -751,7 +751,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label3: TLabel
             Left = 34
-            Top = 112
+            Top = 107
             Width = 61
             Height = 13
             Alignment = taRightJustify
@@ -759,7 +759,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label5: TLabel
             Left = 46
-            Top = 184
+            Top = 179
             Width = 49
             Height = 13
             Alignment = taRightJustify
@@ -767,7 +767,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label10: TLabel
             Left = 57
-            Top = 89
+            Top = 84
             Width = 38
             Height = 13
             Alignment = taRightJustify
@@ -775,7 +775,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label7: TLabel
             Left = 65
-            Top = 208
+            Top = 222
             Width = 30
             Height = 13
             Alignment = taRightJustify
@@ -783,7 +783,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label9: TLabel
             Left = 59
-            Top = 232
+            Top = 246
             Width = 36
             Height = 13
             Alignment = taRightJustify
@@ -791,7 +791,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label16: TLabel
             Left = 18
-            Top = 280
+            Top = 296
             Width = 77
             Height = 13
             Alignment = taRightJustify
@@ -799,7 +799,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label17: TLabel
             Left = 257
-            Top = 280
+            Top = 296
             Width = 70
             Height = 13
             Alignment = taRightJustify
@@ -807,7 +807,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label11: TLabel
             Left = 22
-            Top = 136
+            Top = 133
             Width = 73
             Height = 13
             Alignment = taRightJustify
@@ -815,7 +815,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label12: TLabel
             Left = 18
-            Top = 160
+            Top = 156
             Width = 77
             Height = 13
             Alignment = taRightJustify
@@ -823,7 +823,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label13: TLabel
             Left = 353
-            Top = 160
+            Top = 156
             Width = 32
             Height = 13
             Alignment = taRightJustify
@@ -839,7 +839,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label15: TLabel
             Left = 28
-            Top = 65
+            Top = 62
             Width = 67
             Height = 13
             Alignment = taRightJustify
@@ -847,7 +847,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label61: TLabel
             Left = 314
-            Top = 137
+            Top = 133
             Width = 71
             Height = 13
             Alignment = taRightJustify
@@ -855,7 +855,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label65: TLabel
             Left = 67
-            Top = 304
+            Top = 318
             Width = 28
             Height = 13
             Alignment = taRightJustify
@@ -863,7 +863,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label66: TLabel
             Left = 36
-            Top = 328
+            Top = 342
             Width = 59
             Height = 13
             Alignment = taRightJustify
@@ -871,15 +871,31 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label92: TLabel
             Left = 15
-            Top = 352
+            Top = 366
             Width = 80
             Height = 13
             Alignment = taRightJustify
             Caption = 'Email Financeiro:'
           end
+          object Label137: TLabel
+            Left = 27
+            Top = 200
+            Width = 67
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Complemento:'
+          end
+          object Label138: TLabel
+            Left = 370
+            Top = 179
+            Width = 15
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'N'#186':'
+          end
           object DBEdit7: TDBEdit
             Left = 98
-            Top = 33
+            Top = 32
             Width = 409
             Height = 21
             CharCase = ecUpperCase
@@ -889,7 +905,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object RxDBLookupCombo1: TRxDBLookupCombo
             Left = 98
-            Top = 248
+            Top = 264
             Width = 89
             Height = 21
             DropDownCount = 8
@@ -902,7 +918,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit1: TDBEdit
             Left = 330
-            Top = 248
+            Top = 264
             Width = 113
             Height = 21
             CharCase = ecUpperCase
@@ -925,7 +941,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit2: TDBEdit
             Left = 98
-            Top = 104
+            Top = 102
             Width = 201
             Height = 21
             CharCase = ecUpperCase
@@ -936,7 +952,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit3: TDBEdit
             Left = 98
-            Top = 176
+            Top = 171
             Width = 255
             Height = 21
             CharCase = ecUpperCase
@@ -946,7 +962,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit5: TDBEdit
             Left = 98
-            Top = 200
+            Top = 218
             Width = 409
             Height = 21
             CharCase = ecUpperCase
@@ -955,8 +971,8 @@ object frmCadFilial: TfrmCadFilial
             TabOrder = 13
           end
           object DBEdit6: TDBEdit
-            Left = 354
-            Top = 176
+            Left = 386
+            Top = 171
             Width = 68
             Height = 21
             CharCase = ecUpperCase
@@ -965,9 +981,9 @@ object frmCadFilial: TfrmCadFilial
             TabOrder = 11
           end
           object DBEdit8: TDBEdit
-            Left = 423
-            Top = 176
-            Width = 84
+            Left = 98
+            Top = 195
+            Width = 255
             Height = 21
             CharCase = ecUpperCase
             DataField = 'COMPLEMENTO_END'
@@ -976,7 +992,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object RxDBLookupCombo2: TRxDBLookupCombo
             Left = 98
-            Top = 224
+            Top = 241
             Width = 409
             Height = 21
             DropDownCount = 15
@@ -991,7 +1007,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit11: TDBEdit
             Left = 98
-            Top = 272
+            Top = 288
             Width = 27
             Height = 21
             CharCase = ecUpperCase
@@ -1001,7 +1017,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit12: TDBEdit
             Left = 126
-            Top = 272
+            Top = 288
             Width = 105
             Height = 21
             CharCase = ecUpperCase
@@ -1011,7 +1027,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit13: TDBEdit
             Left = 330
-            Top = 272
+            Top = 288
             Width = 27
             Height = 21
             CharCase = ecUpperCase
@@ -1021,7 +1037,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit14: TDBEdit
             Left = 358
-            Top = 272
+            Top = 288
             Width = 105
             Height = 21
             CharCase = ecUpperCase
@@ -1031,7 +1047,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit9: TDBEdit
             Left = 98
-            Top = 128
+            Top = 125
             Width = 201
             Height = 21
             CharCase = ecUpperCase
@@ -1041,7 +1057,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit10: TDBEdit
             Left = 98
-            Top = 152
+            Top = 148
             Width = 201
             Height = 21
             CharCase = ecUpperCase
@@ -1051,7 +1067,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit15: TDBEdit
             Left = 386
-            Top = 152
+            Top = 148
             Width = 121
             Height = 21
             CharCase = ecUpperCase
@@ -1080,7 +1096,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit16: TDBEdit
             Left = 98
-            Top = 57
+            Top = 55
             Width = 409
             Height = 21
             CharCase = ecUpperCase
@@ -1090,7 +1106,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object RxDBComboBox8: TRxDBComboBox
             Left = 98
-            Top = 80
+            Top = 78
             Width = 145
             Height = 21
             Style = csDropDownList
@@ -1110,7 +1126,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit41: TDBEdit
             Left = 386
-            Top = 129
+            Top = 125
             Width = 121
             Height = 21
             CharCase = ecUpperCase
@@ -1120,7 +1136,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit42: TDBEdit
             Left = 98
-            Top = 296
+            Top = 311
             Width = 409
             Height = 21
             DataField = 'EMAIL'
@@ -1129,7 +1145,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit43: TDBEdit
             Left = 98
-            Top = 320
+            Top = 334
             Width = 409
             Height = 21
             DataField = 'HOMEPAGE'
@@ -1138,7 +1154,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit59: TDBEdit
             Left = 98
-            Top = 344
+            Top = 358
             Width = 409
             Height = 21
             DataField = 'EMAIL_FINANCEIRO'

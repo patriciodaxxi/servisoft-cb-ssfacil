@@ -770,7 +770,9 @@ uses
   UCadOrcamento_Aprov in 'UCadOrcamento_Aprov.pas' {frmCadOrcamento_Aprov},
   UConsMatLote in 'UConsMatLote.pas' {frmConsMatLote},
   UCadMaterial in 'UCadMaterial.pas' {frmCadMaterial},
-  UCadProduto_Comb_AltCor in 'UCadProduto_Comb_AltCor.pas' {frmCadProduto_Comb_AltCor};
+  UCadProduto_Comb_AltCor in 'UCadProduto_Comb_AltCor.pas' {frmCadProduto_Comb_AltCor},
+  UConsEstoqueTerc in 'UConsEstoqueTerc.pas' {frmConsEstoqueTerc},
+  UDMEstoqueTerc in 'UDMEstoqueTerc.pas' {DMEstoqueTerc: TDataModule};
 
 {$R *.res}
 

@@ -336,6 +336,8 @@ type
     BitBtn6: TBitBtn;
     BitBtn7: TBitBtn;
     BitBtn8: TBitBtn;
+    Label133: TLabel;
+    RxDBLookupCombo9: TRxDBLookupCombo;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -651,6 +653,8 @@ begin
   oDBUtils.SetDataSourceProperties(Self,fDMRecebeXML);
   pcDados.ActivePageIndex := 0;
   prc_le_Grid(SMDBGrid1,Name,fDMRecebeXML.qParametros_GeralENDGRIDS.AsString);
+
+  fDMRecebeXML.cdsOperacao_Nota.Open;
 
   if (vImportar_NotaSaida) then
   begin
@@ -2048,6 +2052,10 @@ begin
     fDMRecebeXML.cdsNotaFiscal.Insert;
     fDMRecebeXML.cdsNotaFiscalID.AsInteger     := vNumSeq;
     fDMRecebeXML.cdsNotaFiscalFILIAL.AsInteger := vFilial_Local;
+    if trim(RxDBLookupCombo9.Text) <> '' then
+      fDMRecebeXML.cdsNotaFiscalID_OPERACAO_NOTA.AsInteger := RxDBLookupCombo9.KeyValue
+    else
+      fDMRecebeXML.cdsNotaFiscalID_OPERACAO_NOTA.Clear;
     if not(vImportar_NotaSaida) then
     begin
       fDMRecebeXML.cdsNotaFiscalNUMNOTA.AsInteger := fDMRecebeXML.cdsCabecalhonNF.AsInteger;
@@ -2136,6 +2144,13 @@ begin
     fDMRecebeXML.cdsNotaFiscal_ItensID.AsInteger          := fDMRecebeXML.cdsNotaFiscalID.AsInteger;
     fDMRecebeXML.cdsNotaFiscal_ItensITEM.AsInteger        := vItem;
     fDMRecebeXML.cdsNotaFiscal_ItensID_PRODUTO.AsInteger  := fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger;
+    //14/01/2019
+    if fDMRecebeXML.cdsNotaFiscalID_OPERACAO_NOTA.AsInteger > 0 then
+      fDMRecebeXML.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger := fDMRecebeXML.cdsNotaFiscalID_OPERACAO_NOTA.AsInteger
+    else
+      fDMRecebeXML.cdsNotaFiscal_ItensID_OPERACAO_NOTA.Clear;
+    //******************
+
     fDMRecebeXML.cdsNotaFiscal_ItensID_NCM.AsInteger      := fDMRecebeXML.mItensNotaID_NCM.AsInteger;
     fDMRecebeXML.cdsNotaFiscal_ItensQTD.AsFloat           := fDMRecebeXML.mItensNotaQtd.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMRecebeXML.mItensNotaQtd.AsFloat;
@@ -2314,7 +2329,8 @@ begin
                                                fDMRecebeXML.mItensNotaUnidadeInterno.AsString,
                                                fDMRecebeXML.cdsNotaFiscal_ItensID_COR.AsInteger,
                                                fDMRecebeXML.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,'S',
-                                               fDMRecebeXML.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat);
+                                               fDMRecebeXML.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,
+                                               fDMRecebeXML.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger);
 
   lbStatusEstoque.Color   := clMoneyGreen;
   lbStatusEstoque.Caption := 'Gerou o estoque dos itens';

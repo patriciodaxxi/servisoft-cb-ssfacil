@@ -154,14 +154,12 @@ type
     btnExcluir_Tam: TNxButton;
     TS_Opcoes: TRzTabSheet;
     pnlOpcoes: TPanel;
-    Label13: TLabel;
     Label21: TLabel;
     Label14: TLabel;
     Label15: TLabel;
     DBCheckBox4: TDBCheckBox;
     DBCheckBox1: TDBCheckBox;
     DBCheckBox2: TDBCheckBox;
-    RxDBComboBox1: TRxDBComboBox;
     RxDBComboBox5: TRxDBComboBox;
     DBEdit12: TDBEdit;
     DBEdit13: TDBEdit;
@@ -768,6 +766,8 @@ type
     DBEdit159: TDBEdit;
     Label247: TLabel;
     Edit12: TEdit;
+    Label13: TLabel;
+    RxDBComboBox1: TRxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

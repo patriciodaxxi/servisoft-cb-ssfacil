@@ -1,9 +1,9 @@
 object DMConsNotaBeneficiamento: TDMConsNotaBeneficiamento
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 267
-  Top = 47
-  Height = 627
+  Left = 111
+  Top = 58
+  Height = 639
   Width = 1117
   object sdsNotaEntrada: TSQLDataSet
     NoMetadata = True
@@ -19,8 +19,7 @@ object DMConsNotaBeneficiamento: TDMConsNotaBeneficiamento
       #10'ON NF.ID_CLIENTE = CLI.CODIGO'#13#10'INNER JOIN FILIAL FIL'#13#10'ON NF.FIL' +
       'IAL = FIL.ID'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON NI.ID_PRODUTO = PRO.ID'#13 +
       #10'INNER JOIN TAB_CFOP CFOP'#13#10'ON NI.ID_CFOP = CFOP.ID'#13#10'LEFT JOIN PE' +
-      'SSOA TRI'#13#10'ON NF.ID_CLIENTETRIANG = TRI.CODIGO'#13#10'WHERE NF.TIPO_REG' +
-      ' = '#39'NTE'#39#13#10#13#10
+      'SSOA TRI'#13#10'ON NF.ID_CLIENTETRIANG = TRI.CODIGO'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

@@ -97,6 +97,8 @@ type
     cdsEstoque_MovPRECO_CUSTO_TOTAL: TFloatField;
     sdsEstoque_MovUNIDADE: TStringField;
     cdsEstoque_MovUNIDADE: TStringField;
+    sdsEstoque_MovID_OPERACAO: TIntegerField;
+    cdsEstoque_MovID_OPERACAO: TIntegerField;
     procedure cdsEstoque_MovReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
@@ -115,7 +117,7 @@ type
                        //Vlr_Unitario_Orig,Vlr_Desconto_Orig: Real; Qtd_Pacote: Real = 0; Unidade_Interna: String = '' ;
                        //ID_COR: Integer = 0): Integer;
                        Vlr_Unitario_Orig,Vlr_Desconto_Orig: Real; Qtd_Pacote: Real; Unidade_Interna: String;
-                       ID_COR: Integer; Num_Lote_Controle, Gerar_Custo: String ; Preco_Custo_Total : Real): Integer;
+                       ID_COR: Integer; Num_Lote_Controle, Gerar_Custo: String ; Preco_Custo_Total : Real ; ID_Operacao : Integer): Integer;
 
     function fnc_Buscar_Estoque(CodProduto: Integer ; ID_Local_Estoque: Integer; ID_Cor : Integer): Real;
 
@@ -181,7 +183,8 @@ function TDMEstoque.fnc_Gravar_Estoque(ID_Estoque, ID_Filial, ID_Local_Estoque, 
   Unidade_Orig, Serie, Tamanho: String; Data: TDateTime; Vlr_Unitario, Qtd,
   Perc_ICMS, Perc_IPI, Vlr_Desconto, Perc_Trib, Vlr_Frete, Qtd_Orig,
   Vlr_Unitario_Orig, Vlr_Desconto_Orig: Real; Qtd_Pacote: Real;
-  Unidade_Interna: String; ID_COR: Integer; Num_Lote_Controle, Gerar_Custo: String ; Preco_Custo_Total : Real): Integer;
+  Unidade_Interna: String; ID_COR: Integer; Num_Lote_Controle, Gerar_Custo: String ; Preco_Custo_Total : Real ;
+  ID_Operacao : Integer): Integer;
 var
   vAux: Integer;
   vQtdAux: Real;
@@ -286,6 +289,14 @@ begin
       else
         cdsEstoque_MovGERAR_CUSTO.AsString := 'N';
     end;
+
+    //14/01/2019 Vai gravar a operação para controle do estoque em terceiro e de terceiro
+    if ID_Operacao <= 0 then
+      cdsEstoque_MovID_OPERACAO.Clear
+    else
+      cdsEstoque_MovID_OPERACAO.AsInteger := ID_Operacao;
+    //*******************************
+
     cdsEstoque_Mov.Post;
     cdsEstoque_Mov.ApplyUpdates(0);
     Result := vAux;

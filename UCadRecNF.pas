@@ -1773,7 +1773,7 @@ begin
                                                vVlrAux,
                                                vDescAux,fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat,'',
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
-                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,'N',0);  //ver aqui sobre Lote Controle  04/11/2015
+                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,'N',0,0); 
 
 end;
 

@@ -758,7 +758,7 @@ begin
                                                  cdsPedido_PendVLR_UNITARIO.AsFloat,
                                                  cdsPedido_PendVLR_DESCONTO.AsFloat,0,'',
                                                  cdsPedido_PendID_COR.AsInteger,
-                                                 '','N',0); //ver aqui sobre Lote Controle  04/11/2015
+                                                 '','N',0,0); //ver aqui sobre Lote Controle  04/11/2015
       cdsBaixa_Pedido.Edit;
       cdsBaixa_PedidoID_MOVESTOQUE.AsInteger := vID_Estoque;
       cdsBaixa_Pedido.Post;
@@ -909,7 +909,7 @@ begin
                                              qMaterialPRECO_CUSTO.AsFloat,
                                              0,0,'',
                                              cdsBaixa_Pedido_MPID_COR.AsInteger,
-                                             '','N',0); //ver aqui sobre Lote Controle  04/11/2015
+                                             '','N',0,0); //ver aqui sobre Lote Controle  04/11/2015
   cdsBaixa_Pedido_MP.Edit;
   cdsBaixa_Pedido_MPID_MOVESTOQUE.AsInteger := vID_Estoque;
   cdsBaixa_Pedido_MP.Post;

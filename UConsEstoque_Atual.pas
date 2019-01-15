@@ -5,11 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids, Mask, 
   DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr, UDMConsEstoque, RxLookup, UCBase, NxCollection, ToolEdit, CurrEdit,
-  UConsProduto_Pes, UConsEstoque_Mov, Menus, StrUtils;
+  UConsProduto_Pes, UConsEstoque_Mov, Menus, StrUtils, RzTabs;
 
 type
   TfrmConsEstoque_Atual = class(TForm)
-    SMDBGrid1: TSMDBGrid;
     Panel2: TPanel;
     Label7: TLabel;
     Panel1: TPanel;
@@ -22,6 +21,13 @@ type
     RadioGroup2: TRadioGroup;
     btnConsultar: TNxButton;
     ceIDProduto: TCurrencyEdit;
+    RzPageControl1: TRzPageControl;
+    TS_Estoque: TRzTabSheet;
+    SMDBGrid1: TSMDBGrid;
+    TS_DeTerceiros: TRzTabSheet;
+    TS_EmTerceiros: TRzTabSheet;
+    SMDBGrid2: TSMDBGrid;
+    SMDBGrid3: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -34,6 +40,8 @@ type
       Shift: TShiftState);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure SMDBGrid2TitleClick(Column: TColumn);
+    procedure SMDBGrid3TitleClick(Column: TColumn);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -42,7 +50,10 @@ type
     ffrmConsEstoque_Mov : TfrmConsEstoque_Mov;
 
     procedure prc_Consultar;
+    procedure prc_Consultar_DeTerceiros;
+    procedure prc_Consultar_EmTerceiros;
     procedure prc_Chamar_Sel_Produto(Tipo: String);
+
   public
     { Public declarations }
   end;
@@ -165,7 +176,14 @@ begin
     fDMConsEstoque.cdsEstoque_Atual.IndexFieldNames := 'NOME_PRODUTO;NOME_COMBINACAO;TAMANHO'
   else
     fDMConsEstoque.cdsEstoque_Atual.IndexFieldNames := 'NOME_PRODUTO';
-  prc_Consultar;
+  if RzPageControl1.ActivePage = TS_Estoque then
+    prc_Consultar
+  else
+  if RzPageControl1.ActivePage = TS_DeTerceiros then
+    prc_Consultar_DeTerceiros
+  else
+  if RzPageControl1.ActivePage = TS_EmTerceiros then
+    prc_Consultar_EmTerceiros;
 end;
 
 procedure TfrmConsEstoque_Atual.ceIDProdutoKeyDown(Sender: TObject;
@@ -224,6 +242,44 @@ begin
     ceIDProduto.Clear;
     FreeAndNil(frmConsEstoque_Mov);
   end;
+end;
+
+procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros;
+begin
+  fDMConsEstoque.cdsEstoque_De_Terc.Close;
+  fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.cdsEstoque_De_Terc.Open;
+end;
+
+procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiros;
+begin
+  fDMConsEstoque.cdsEstoque_Em_Terc.Close;
+  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.cdsEstoque_Em_Terc.Open;
+end;
+
+procedure TfrmConsEstoque_Atual.SMDBGrid2TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMConsEstoque.cdsEstoque_De_Terc.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid2.Columns.Count - 1 do
+    if not (SMDBGrid2.Columns.Items[I] = Column) then
+      SMDBGrid2.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmConsEstoque_Atual.SMDBGrid3TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMConsEstoque.cdsEstoque_Em_Terc.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid3.Columns.Count - 1 do
+    if not (SMDBGrid3.Columns.Items[I] = Column) then
+      SMDBGrid3.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.

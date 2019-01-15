@@ -336,6 +336,8 @@ type
     FuncionrioResumido1: TMenuItem;
     ConsultaEstoqueAtual1: TMenuItem;
     BaixaNotadeBeneficiamento1: TMenuItem;
+    N52: TMenuItem;
+    ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -571,6 +573,8 @@ type
     procedure FuncionarioCompleto1Click(Sender: TObject);
     procedure ConsultaEstoqueAtual1Click(Sender: TObject);
     procedure BaixaNotadeBeneficiamento1Click(Sender: TObject);
+    procedure ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1Click(
+      Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -586,6 +590,7 @@ type
     vTipo_Reg_Cons_Fat: String;
     vTipo_Reg_Pedido: String; //P=Pedido  C=Compras
     vVersao: String;
+    vTipo_ConsNotaBeneficiamento : String; //F= Fornecedor   C=Cliente
 
     procedure OpenForm(FClass: TFormClass; vEstado: TWindowState; TipoPessoa: String = '');
     procedure GetBuildInfo(exeName: String; var V1, V2, V3, V4: word);
@@ -889,6 +894,7 @@ end;
 
 procedure TfMenu.ConsultaNotasdeBeneficiamento1Click(Sender: TObject);
 begin
+  vTipo_ConsNotaBeneficiamento := 'F';
   OpenForm(TfrmConsNotaBeneficiamento,wsMaximized);
 end;
 
@@ -2047,6 +2053,13 @@ end;
 procedure TfMenu.BaixaNotadeBeneficiamento1Click(Sender: TObject);
 begin
   OpenForm(TfrmBaixaNFDevolvida,wsMaximized);
+end;
+
+procedure TfMenu.ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1Click(
+  Sender: TObject);
+begin
+  vTipo_ConsNotaBeneficiamento := 'C';
+  OpenForm(TfrmConsNotaBeneficiamento,wsMaximized);
 end;
 
 initialization

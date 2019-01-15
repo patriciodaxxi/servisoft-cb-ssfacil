@@ -75,6 +75,8 @@ type
     DBEdit14: TDBEdit;
     Label24: TLabel;
     DBEdit15: TDBEdit;
+    lblOperacao: TLabel;
+    rxdbOperacao: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);

@@ -29,6 +29,10 @@ type
     cdsOperacao_NotaMOSTRA_EDI: TStringField;
     sdsOperacao_NotaMOSTRAR_CLI_TRIANG2: TStringField;
     cdsOperacao_NotaMOSTRAR_CLI_TRIANG2: TStringField;
+    sdsOperacao_NotaESTOQUE_DE_TERCEIRO: TStringField;
+    sdsOperacao_NotaESTOQUE_EM_TERCEIRO: TStringField;
+    cdsOperacao_NotaESTOQUE_DE_TERCEIRO: TStringField;
+    cdsOperacao_NotaESTOQUE_EM_TERCEIRO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspOperacao_NotaUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

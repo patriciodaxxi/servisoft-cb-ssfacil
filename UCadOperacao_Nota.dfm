@@ -1,6 +1,6 @@
 object frmCadOperacao_Nota: TfrmCadOperacao_Nota
-  Left = 361
-  Top = 23
+  Left = 269
+  Top = 17
   Width = 844
   Height = 681
   Caption = 'Cadastro da Opera'#231#227'o da Nota'
@@ -119,7 +119,6 @@ object frmCadOperacao_Nota: TfrmCadOperacao_Nota
             FieldName = 'MOSTRA_EDI'
             Title.Alignment = taCenter
             Title.Caption = 'Mostra EDI na importa'#231#227'o'
-            Width = 64
             Visible = True
           end>
       end
@@ -853,6 +852,30 @@ object frmCadOperacao_Nota: TfrmCadOperacao_Nota
           DataField = 'MOSTRAR_CLI_TRIANG2'
           DataSource = DMCadOperacao_Nota.dsOperacao_Nota
           TabOrder = 7
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object DBCheckBox3: TDBCheckBox
+          Left = 118
+          Top = 192
+          Width = 355
+          Height = 17
+          Caption = 'Controla Estoque DE Terceiro (Produto de Terceiro na Empresa)'
+          DataField = 'ESTOQUE_DE_TERCEIRO'
+          DataSource = DMCadOperacao_Nota.dsOperacao_Nota
+          TabOrder = 8
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object DBCheckBox4: TDBCheckBox
+          Left = 118
+          Top = 208
+          Width = 355
+          Height = 17
+          Caption = 'Controla Estoque EM Terceiro (Produto da Empresa em Terceiro)'
+          DataField = 'ESTOQUE_EM_TERCEIRO'
+          DataSource = DMCadOperacao_Nota.dsOperacao_Nota
+          TabOrder = 9
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
