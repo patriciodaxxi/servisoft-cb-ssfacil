@@ -16907,6 +16907,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_LoteLOTE_CALCADO_NOVO: TStringField
+      FieldName = 'LOTE_CALCADO_NOVO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros_Est: TSQLQuery
     MaxBlobSize = -1

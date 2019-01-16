@@ -1883,11 +1883,13 @@ object frmCadOC: TfrmCadOC
                 Expanded = False
                 FieldName = 'QTD_FATURADO'
                 Title.Caption = 'Qtd. Entregue'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_RESTANTE'
+                Width = 64
                 Visible = True
               end
               item
@@ -1922,16 +1924,19 @@ object frmCadOC: TfrmCadOC
                 FieldName = 'VLR_ICMS'
                 Title.Alignment = taCenter
                 Title.Caption = 'Complemento'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_CANCELADO'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'CANCELADO'
+                Width = 64
                 Visible = True
               end>
           end

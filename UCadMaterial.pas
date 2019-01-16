@@ -558,6 +558,9 @@ begin
       fDMCadProduto.cdsProduto_GradeNum.ApplyUpdates(0);
     end;
 
+    if (fDMCadProduto.qParametros_ProdUSA_TAM_REFER_GRADE.AsString = 'S') and (fDMCadProduto.cdsProduto_MatTam.Active) then
+      fDMCadProduto.cdsProduto_MatTam.ApplyUpdates(0);
+
     vCodProduto_Pos := 0;
     vReferencia_Pos := '';
 

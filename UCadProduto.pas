@@ -2116,12 +2116,16 @@ begin
 end;
 
 procedure TfrmCadProduto.btnAlterar_ConsumoClick(Sender: TObject);
+var
+  vItemAux : Integer;
 begin
   if (fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger < 1) or not(fDMCadProduto.cdsProduto_Consumo.Active) or
      (fDMCadProduto.cdsProduto_Consumo.IsEmpty) then
     exit;
   if uAltProd.fnc_Custo(fDMCadProduto.cdsProdutoID.AsInteger,fDMCadProduto) then
     exit;
+
+  vItemAux := fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger;
 
   fDMCadProduto.cdsProduto_Consumo.Edit;
 
@@ -2131,6 +2135,8 @@ begin
 
   FreeAndNil(ffrmCadProduto_Consumo);
   ceVlr_Total_Mat.Value := fDMCadProduto.fnc_Calcular_Mat;
+
+  fDMCadProduto.cdsProduto_Consumo.Locate('ITEM',vItemAux,([Locaseinsensitive]));
 end;
 
 procedure TfrmCadProduto.RxDBComboBox7Change(Sender: TObject);
@@ -3736,6 +3742,7 @@ end;
 procedure TfrmCadProduto.RxDBLookupCombo16Enter(Sender: TObject);
 begin
   vID_Linha_Ant := fDMCadProduto.cdsProdutoID_LINHA.AsInteger;
+  fDMCadProduto.cdsLinha.IndexFieldNames := 'NOME';
 end;
 
 procedure TfrmCadProduto.RxDBLookupCombo16Exit(Sender: TObject);

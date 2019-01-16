@@ -742,6 +742,15 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
             Visible = True
           end
           item
+            Expanded = False
+            FieldName = 'Vlr_Unitario'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. Unit'#225'rio'
+            Width = 67
+            Visible = True
+          end
+          item
             Alignment = taCenter
             Expanded = False
             FieldName = 'Unidade'
@@ -840,14 +849,6 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
             ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'Vlr_Unitario'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Vlr. Unit'#225'rio'
             Visible = True
           end
           item

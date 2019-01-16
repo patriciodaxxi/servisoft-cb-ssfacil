@@ -180,6 +180,12 @@ procedure TfRelOC.RLReport1BeforePrint(Sender: TObject;
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
 
+  if fDMCadPedido.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S' then
+    RLDBText29.DataField := 'ID_PRODUTO'
+  else
+    RLDBText29.DataField := 'REFERENCIA';
+
+
   if vImpSaldo then
   begin
     RLDBText22.DataField := 'QTD_RESTANTE';

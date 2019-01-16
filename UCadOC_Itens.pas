@@ -585,7 +585,10 @@ begin
     if not fnc_Verificar_Produto then
       MessageDlg('*** Código do Produto não encontrado!', mtError, [mbOk], 0)
     else
+    begin
+      
       DBEdit2.SetFocus
+    end;
   end;
 end;
 

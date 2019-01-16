@@ -323,9 +323,13 @@ begin
       vQtdSel := vQtdSel + 1;
       if (fDMCadNecessidade_Compras.mMaterialID_Fornecedor.AsInteger <= 0) and (StrToFloat(FormatFloat('0.0000', fDMCadNecessidade_Compras.mMaterialQtd_Para_OC.AsFloat)) > 0) then
         vMSGAux := '*** Existe material selecionado sem fornecedor!'
-      else if (StrToFloat(FormatFloat('0.000000', fDMCadNecessidade_Compras.mMaterialVlr_Unitario.AsFloat)) <= 0) and (StrToFloat(FormatFloat('0.0000', fDMCadNecessidade_Compras.mMaterialQtd_Para_OC.AsFloat)) > 0) then
+      else
+      if (StrToFloat(FormatFloat('0.000000', fDMCadNecessidade_Compras.mMaterialVlr_Unitario.AsFloat)) <= 0)
+         and (StrToFloat(FormatFloat('0.0000', fDMCadNecessidade_Compras.mMaterialQtd_Para_OC.AsFloat)) > 0)
+         and (trim(fDMCadNecessidade_Compras.qParametros_LoteLOTE_CALCADO_NOVO.AsString) <> 'S') then
         vMSGAux := '*** Existe material selecionado sem preço!'
-      else if (fDMCadNecessidade_Compras.mMaterialNum_OC.AsInteger > 0) or (fDMCadNecessidade_Compras.mMaterialID_MovEstoque_Res.AsInteger > 0) then
+      else
+      if (fDMCadNecessidade_Compras.mMaterialNum_OC.AsInteger > 0) or (fDMCadNecessidade_Compras.mMaterialID_MovEstoque_Res.AsInteger > 0) then
         vMSGAux := '*** OC/Reserva já gerada para alguns materiais selecionados!';
     end;
     fDMCadNecessidade_Compras.mMaterial.Next;
@@ -672,7 +676,9 @@ begin
     Exit;
   end;
   vIndice_mMaterial := fDMCadNecessidade_Compras.mMaterial.IndexFieldNames;
-  fDMCadNecessidade_Compras.mMaterial.IndexFieldNames := 'Nome_Fornecedor;ID_Fornecedor;Nome_Material;Nome_Cor;Tamanho';
+  //16/01/2019  Alterado a Ordem conforme a Lotus
+  //fDMCadNecessidade_Compras.mMaterial.IndexFieldNames := 'Nome_Fornecedor;ID_Fornecedor;Nome_Material;Nome_Cor;Tamanho';
+  fDMCadNecessidade_Compras.mMaterial.IndexFieldNames := 'Nome_Material;Nome_Cor;Tamanho';
   fDMCadNecessidade_Compras.mMaterial.First;
   vOpcaoImp := '(Filial: ' + IntToStr(vFilial) + ')';
   if fDMCadNecessidade_Compras.mMaterialNum_Mapa.AsInteger > 0 then
@@ -862,7 +868,10 @@ begin
     fDMCadNecessidade_Compras.mMaterialID_Fornecedor.AsInteger := fDMCadNecessidade_Compras.cdsLote_MatID_FORNECEDOR_MAT.AsInteger;
     fDMCadNecessidade_Compras.mMaterialNome_Fornecedor.AsString := fDMCadNecessidade_Compras.cdsLote_MatNOME_FORNECEDOR_MAT.AsString;
   end;
-  fDMCadNecessidade_Compras.mMaterialVlr_Unitario.AsFloat := fDMCadNecessidade_Compras.cdsLote_MatPRECO_CUSTO.AsFloat;
+  if StrToFLoat(FormatFloat('0.000000',fDMCadNecessidade_Compras.cdsLote_MatPRECO_CUSTO.AsFloat)) > 0 then
+    fDMCadNecessidade_Compras.mMaterialVlr_Unitario.AsFloat := fDMCadNecessidade_Compras.cdsLote_MatPRECO_CUSTO.AsFloat
+  else
+    fDMCadNecessidade_Compras.mMaterialVlr_Unitario.AsFloat := fDMCadNecessidade_Compras.cdsLote_MatPRECO_CUSTO_COR.AsFloat;
   fDMCadNecessidade_Compras.mMaterialVlr_Total.AsFloat := StrToFloat(FormatFloat('0.00', fDMCadNecessidade_Compras.cdsLote_MatPRECO_CUSTO.AsFloat * fDMCadNecessidade_Compras.cdsLote_MatQTD_CONSUMO.AsFloat));
   fDMCadNecessidade_Compras.mMaterialPerc_IPI.AsFloat := fDMCadNecessidade_Compras.cdsLote_MatPERC_IPI.AsFloat;
   fDMCadNecessidade_Compras.mMaterialGerar_OC.AsBoolean := False;
@@ -1236,7 +1245,10 @@ begin
       fDMCadNecessidade_Compras.mMaterialNome_Fornecedor.AsString := fDMCadNecessidade_Compras.cdsLote_MatNOME_FORNECEDOR_MAT.AsString;
     end;
     fDMCadNecessidade_Compras.mMaterialNome_Material.AsString := fDMCadNecessidade_Compras.cdsLote_MatNOME_MATERIAL.AsString;
-    fDMCadNecessidade_Compras.mMaterialVlr_Unitario.AsFloat := fDMCadNecessidade_Compras.cdsLote_MatPRECO_CUSTO.AsFloat;
+    if StrToFloat(FormatFloat('0.000000',fDMCadNecessidade_Compras.cdsLote_MatPRECO_CUSTO.AsFloat)) > 0 then
+      fDMCadNecessidade_Compras.mMaterialVlr_Unitario.AsFloat := fDMCadNecessidade_Compras.cdsLote_MatPRECO_CUSTO.AsFloat
+    else
+      fDMCadNecessidade_Compras.mMaterialVlr_Unitario.AsFloat := fDMCadNecessidade_Compras.cdsLote_MatPRECO_CUSTO_COR.AsFloat;
     fDMCadNecessidade_Compras.mMaterialGerar_OC.AsBoolean := False;
     if fDMCadNecessidade_Compras.qParametros_LoteUSA_NECESSIDADE_IF.AsString <> 'S' then
       fDMCadNecessidade_Compras.mMaterialNome_Mapa.AsString := fDMCadNecessidade_Compras.qLoteNOME.AsString

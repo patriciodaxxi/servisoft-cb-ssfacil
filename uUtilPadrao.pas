@@ -61,7 +61,8 @@ uses
   function fnc_Ajusta_DtVencimento(Dia_Vecto,Dia1,Dia2,QDias_MPag : Integer ; DtVecto : TDateTime)  : TDateTime;
 
   function fnc_Busca_CodProduto_Cliente(ID_Produto, ID_Fornecedor, ID_Cor: Integer; Tamanho, Tamanho_Cli: String): String;
-  function fnc_Busca_Tam_Material(ID_Produto: Integer; Tamanho: String): String;
+  function fnc_Busca_Tam_Material(ID_Produto: Integer; Tamanho: String): String; // aqui pesquisa pelo Produto_Gradenum
+  function fnc_Busca_Tam_Material2(ID_Produto, ID_GRADE_PROD: Integer; Tamanho: String): String; // aqui pesquisa pelo produto_mattam
 
   function fnc_Verifica_Tipo_Lote: String;
 
@@ -1604,6 +1605,28 @@ begin
       else
         Result := DtVecto - (Dia_Vecto - dia2)
     end;
+  end;
+end;
+
+function fnc_Busca_Tam_Material2(ID_Produto, ID_GRADE_PROD: Integer; Tamanho: String): String; // aqui pesquisa pelo produto_mattam
+var
+  sds: TSQLDataSet;
+begin
+  Result := '';
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'select MT.TAM_MATERIAL from produto_mattam MT where MT.ID = :ID and  MT.ID_GRADE = :ID_GRADE AND MT.TAMANHO = :TAMANHO ';
+    sds.ParamByName('ID').AsInteger       := ID_Produto;
+    sds.ParamByName('ID_GRADE').AsInteger := ID_GRADE_PROD;
+    sds.ParamByName('TAMANHO').AsString   := Tamanho;
+    sds.Open;
+    if trim(sds.FieldByName('TAM_MATERIAL').AsString) <> '' then
+      Result := sds.FieldByName('TAM_MATERIAL').AsString;
+  finally
+    FreeAndNil(sds);
   end;
 end;
 

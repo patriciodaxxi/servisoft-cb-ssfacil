@@ -980,22 +980,24 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'OME_FORNECEDOR_MAT,'#13#10'L.QTD_OC, L.QTD_RESERVA, L.GERADO, L.QTD_OC' +
       '_ORIGINAL,'#13#10'L.ID_MOVESTOQUE_RES, FORN2.nome NOME_FORNECEDOR,'#13#10'L.' +
       'QTD_OC_FAT, L.QTD_SOBRA_OC, L.QTD_USADA_OC, L.GERADO_SOBRA_OC, L' +
-      '.TINGIMENTO,'#13#10'L.ID_SETOR, SS.NOME NOME_SETOR,'#13#10'coalesce(coalesce' +
-      '((SELECT EA.qtd FROM ESTOQUE_ATUAL EA  WHERE EA.id_produto = L.i' +
-      'd_material'#13#10'    AND EA.id_cor = L.id_cor'#13#10'    AND EA.tamanho = L' +
-      '.tamanho'#13#10'    AND EA.id_local_estoque = 1'#13#10'    AND EA.FILIAL = :' +
-      'FILIAL),0)  -'#13#10'    coalesce((SELECT ER.qtd FROM ESTOQUE_RES ER'#13#10 +
-      '                WHERE ER.id_produto = L.id_material'#13#10'           ' +
-      '       AND ER.id_cor = L.id_cor'#13#10'                  AND ER.tamanh' +
-      'o = L.tamanho),0),0)  Qtd_Estoque,'#13#10'   coalesce((SELECT sum(EOC.' +
-      'QTD_SALDO) qtd FROM vestoque_oc EOC'#13#10'     WHERE EOC.id_produto =' +
-      ' L.id_material'#13#10'       AND EOC.id_cor = L.id_cor'#13#10'       AND EOC' +
-      '.tamanho = L.tamanho'#13#10'       ),0)  Qtd_Estoque_OC'#13#10'FROM LOTE_MAT' +
-      ' L'#13#10'INNER JOIN PRODUTO MAT'#13#10'ON L.id_material = MAT.id'#13#10'LEFT JOIN' +
-      ' COMBINACAO COMB'#13#10'ON L.id_cor = COMB.id'#13#10'LEFT JOIN PESSOA FORN'#13#10 +
-      'ON MAT.id_fornecedor = FORN.codigo'#13#10'LEFT JOIN PESSOA FORN2'#13#10'ON l' +
-      '.id_fornecedor = FORN2.codigo'#13#10'LEFT JOIN SETOR SS'#13#10'ON L.ID_SETOR' +
-      ' = SS.ID'#13#10
+      '.TINGIMENTO,'#13#10'L.ID_SETOR, SS.NOME NOME_SETOR, mcomb.preco_custo ' +
+      'preco_custo_cor,'#13#10'coalesce(coalesce((SELECT EA.qtd FROM ESTOQUE_' +
+      'ATUAL EA  WHERE EA.id_produto = L.id_material'#13#10'    AND EA.id_cor' +
+      ' = L.id_cor'#13#10'    AND EA.tamanho = L.tamanho'#13#10'    AND EA.id_local' +
+      '_estoque = 1'#13#10'    AND EA.FILIAL = :FILIAL),0)  -'#13#10'    coalesce((' +
+      'SELECT ER.qtd FROM ESTOQUE_RES ER'#13#10'                WHERE ER.id_p' +
+      'roduto = L.id_material'#13#10'                  AND ER.id_cor = L.id_c' +
+      'or'#13#10'                  AND ER.tamanho = L.tamanho),0),0)  Qtd_Est' +
+      'oque,'#13#10'   coalesce((SELECT sum(EOC.QTD_SALDO) qtd FROM vestoque_' +
+      'oc EOC'#13#10'     WHERE EOC.id_produto = L.id_material'#13#10'       AND EO' +
+      'C.id_cor = L.id_cor'#13#10'       AND EOC.tamanho = L.tamanho'#13#10'       ' +
+      '),0)  Qtd_Estoque_OC'#13#10'FROM LOTE_MAT L'#13#10'INNER JOIN PRODUTO MAT'#13#10'O' +
+      'N L.id_material = MAT.id'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON L.id_cor' +
+      ' = COMB.id'#13#10'LEFT JOIN PESSOA FORN'#13#10'ON MAT.id_fornecedor = FORN.c' +
+      'odigo'#13#10'LEFT JOIN PESSOA FORN2'#13#10'ON l.id_fornecedor = FORN2.codigo' +
+      #13#10'LEFT JOIN SETOR SS'#13#10'ON L.ID_SETOR = SS.ID'#13#10'LEFT JOIN PRODUTO_C' +
+      'OMB MCOMB'#13#10'ON L.ID_MATERIAL = MCOMB.ID'#13#10'AND L.ID_COR = MCOMB.id_' +
+      'cor_combinacao'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -1130,6 +1132,9 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     end
     object sdsLote_MatNOME_SETOR: TStringField
       FieldName = 'NOME_SETOR'
+    end
+    object sdsLote_MatPRECO_CUSTO_COR: TFloatField
+      FieldName = 'PRECO_CUSTO_COR'
     end
   end
   object dspLote_Mat: TDataSetProvider
@@ -1270,6 +1275,9 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     end
     object cdsLote_MatNOME_SETOR: TStringField
       FieldName = 'NOME_SETOR'
+    end
+    object cdsLote_MatPRECO_CUSTO_COR: TFloatField
+      FieldName = 'PRECO_CUSTO_COR'
     end
   end
   object dsLote_Mat: TDataSource

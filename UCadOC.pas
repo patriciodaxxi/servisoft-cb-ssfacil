@@ -736,6 +736,11 @@ end;
 procedure TfrmCadOC.btnAlterar_ItensClick(Sender: TObject);
 var
   vMSGAux: String;
+  vID_ProdutoAux : Integer; //
+  vID_CorAux : Integer; //
+  vTamanhoAux : String; //
+  vItemAux : Integer; //
+  vPrecoAux : Real; //
 begin
   vMSGAux := '';
   if (fDMCadPedido.cdsPedido_Itens.IsEmpty) or (fDMCadPedido.cdsPedido_ItensITEM.AsInteger <= 0) then
@@ -766,6 +771,10 @@ begin
     uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
+  vID_ProdutoAux := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
+  vID_CorAux     := fDMCadPedido.cdsPedido_ItensID_COR.AsInteger;
+  vTamanhoAux    := fDMCadPedido.cdsPedido_ItensTAMANHO.AsString;
+  
   fDMCadPedido.cdsPedido_Itens.Edit;
 
   ffrmCadOC_Itens := TfrmCadOC_Itens.Create(self);
@@ -773,6 +782,16 @@ begin
   ffrmCadOC_Itens.ShowModal;
 
   FreeAndNil(ffrmCadOC_Itens);
+
+  //16/01/2019
+  if fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S' then
+  begin
+    //fDMCadPedido.
+    //
+
+  end;
+  //*******************
+
 
   btnCalcular_ValoresClick(Sender);
 end;

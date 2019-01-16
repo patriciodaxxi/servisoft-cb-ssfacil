@@ -404,6 +404,8 @@ type
     qParametros_Est: TSQLQuery;
     qParametros_EstUSA_RESERVA: TStringField;
     qParametrosMOSTRAR_EMBALAGEM: TStringField;
+    sdsLote_MatPRECO_CUSTO_COR: TFloatField;
+    cdsLote_MatPRECO_CUSTO_COR: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNecessidade_ComprasUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
