@@ -1,6 +1,6 @@
 object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
-  Left = 313
-  Top = 113
+  Left = 234
+  Top = 83
   Width = 928
   Height = 586
   Caption = 'frmAjuste_OperacaoNota'
@@ -23,9 +23,8 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
     Align = alTop
     Color = clSilver
     TabOrder = 0
-    Visible = False
     object lblCliente: TLabel
-      Left = 57
+      Left = 273
       Top = 70
       Width = 35
       Height = 13
@@ -33,7 +32,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       Caption = 'Cliente:'
     end
     object lblSerie: TLabel
-      Left = 65
+      Left = 281
       Top = 32
       Width = 27
       Height = 13
@@ -41,7 +40,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       Caption = 'S'#233'rie:'
     end
     object lblNumNota: TLabel
-      Left = 210
+      Left = 426
       Top = 32
       Width = 41
       Height = 13
@@ -49,7 +48,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       Caption = 'N'#186' Nota:'
     end
     object Label5: TLabel
-      Left = 6
+      Left = 222
       Top = 52
       Width = 86
       Height = 13
@@ -57,14 +56,14 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       Caption = 'Dt.Emiss'#227'o Inicial:'
     end
     object Label6: TLabel
-      Left = 227
+      Left = 443
       Top = 52
       Width = 25
       Height = 13
       Caption = 'Final:'
     end
     object Label12: TLabel
-      Left = 69
+      Left = 285
       Top = 12
       Width = 23
       Height = 13
@@ -72,7 +71,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       Caption = 'Filial:'
     end
     object Edit2: TEdit
-      Left = 95
+      Left = 311
       Top = 64
       Width = 250
       Height = 19
@@ -82,7 +81,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       TabOrder = 5
     end
     object edtSerie: TEdit
-      Left = 95
+      Left = 311
       Top = 24
       Width = 55
       Height = 22
@@ -93,7 +92,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       TabOrder = 1
     end
     object CurrencyEdit1: TCurrencyEdit
-      Left = 255
+      Left = 471
       Top = 24
       Width = 89
       Height = 21
@@ -105,7 +104,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       TabOrder = 2
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
-      Left = 95
+      Left = 311
       Top = 4
       Width = 250
       Height = 21
@@ -118,7 +117,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       TabOrder = 0
     end
     object btnConsultar: TNxButton
-      Left = 346
+      Left = 567
       Top = 54
       Width = 177
       Height = 30
@@ -187,30 +186,51 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       ParentFont = False
       TabOrder = 6
       Transparent = True
+      OnClick = btnConsultarClick
     end
     object NxDatePicker1: TNxDatePicker
-      Left = 95
+      Left = 311
       Top = 44
       Width = 90
       Height = 21
       TabOrder = 3
-      Text = '22/05/2013'
       HideFocus = False
-      Date = 41416.000000000000000000
+      Date = 43480.000000000000000000
       NoneCaption = 'Limpar'
       TodayCaption = 'Hoje'
     end
     object NxDatePicker2: TNxDatePicker
-      Left = 255
+      Left = 471
       Top = 44
       Width = 90
       Height = 21
       TabOrder = 4
-      Text = '22/05/2013'
       HideFocus = False
-      Date = 41416.000000000000000000
+      Date = 43480.000000000000000000
       NoneCaption = 'Limpar'
       TodayCaption = 'Hoje'
+    end
+    object RadioGroup1: TRadioGroup
+      Left = 1
+      Top = 1
+      Width = 208
+      Height = 83
+      Align = alLeft
+      Caption = ' Tipo '
+      ItemIndex = 2
+      Items.Strings = (
+        'Notas Emitidas pelo Faturamento'
+        'Notas Entrada pelo Compras'
+        'Ambas')
+      TabOrder = 7
+    end
+    object ckMostrarOperacao: TCheckBox
+      Left = 592
+      Top = 8
+      Width = 225
+      Height = 17
+      Caption = 'Mostrar s'#243' os que n'#227'o tem Opera'#231#227'o'
+      TabOrder = 8
     end
   end
   object Panel1: TPanel
@@ -219,11 +239,11 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
     Width = 920
     Height = 41
     Align = alBottom
-    Color = 16777136
+    Color = 9961263
     TabOrder = 1
     object Label1: TLabel
       Left = 10
-      Top = 12
+      Top = 18
       Width = 50
       Height = 13
       Alignment = taRightJustify
@@ -231,8 +251,8 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
       Left = 63
-      Top = 4
-      Width = 250
+      Top = 10
+      Width = 314
       Height = 21
       DropDownCount = 8
       Ctl3D = False
@@ -243,17 +263,20 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       TabOrder = 0
     end
     object NxButton1: TNxButton
-      Left = 336
-      Top = 8
-      Width = 321
+      Left = 383
+      Top = 6
+      Width = 353
+      Height = 28
       Caption = 'Confirmar a Opera'#231#227'o para as Notas Selecionadas'
+      Down = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlue
-      Font.Height = -11
+      Font.Height = -13
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      OnClick = NxButton1Click
     end
   end
   object SMDBGrid1: TSMDBGrid
@@ -265,7 +288,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
     BorderStyle = bsNone
     Ctl3D = False
     DataSource = DMCadNotaFiscal.dsNotaFiscal_Consulta
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
     ParentCtl3D = False
     ReadOnly = True
     TabOrder = 2
@@ -286,13 +309,13 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
     GridStyle.EvenColor = clWindow
     TitleHeight.PixelCount = 24
     FooterColor = clBtnFace
-    ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+    ExOptions = [eoCheckBoxSelect, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
     RegistryKey = 'Software\Scalabium'
     RegistrySection = 'SMDBGrid'
-    WidthOfIndicator = 11
+    WidthOfIndicator = 27
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 25
+    ColCount = 16
     RowCount = 2
     Columns = <
       item
@@ -302,6 +325,14 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
         Title.Alignment = taCenter
         Title.Caption = 'Filial'
         Width = 33
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME_OPERACAO_NOTA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Opera'#231#227'o Nota'
+        Width = 200
         Visible = True
       end
       item
@@ -352,6 +383,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
         FieldName = 'CODCFOP'
         Title.Alignment = taCenter
         Title.Caption = 'CFOP'
+        Width = 64
         Visible = True
       end
       item
@@ -366,7 +398,7 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
       item
         Expanded = False
         FieldName = 'NOMECLIENTE'
-        Title.Caption = 'Nome do Cliente / Fornecedor'
+        Title.Caption = 'Nome Terceiro'
         Width = 271
         Visible = True
       end
@@ -391,53 +423,13 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
         FieldName = 'VLR_DUPLICATA'
         Title.Alignment = taCenter
         Title.Caption = 'Valor Duplicatas'
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'CANCELADA'
-        Title.Alignment = taCenter
-        Title.Caption = 'Cancelada'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NFECHAVEACESSO'
-        Title.Alignment = taCenter
-        Title.Caption = 'Chave Acesso NFe'
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'TIPO_PRAZO'
-        Title.Alignment = taCenter
-        Title.Caption = 'Tipo Prazo'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ID_CFOP'
-        Title.Caption = 'ID CFOP'
+        Width = 64
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'ID_CLIENTE'
-        Title.Caption = 'ID CLIENTE'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ID_CONDPGTO'
-        Title.Caption = 'ID CONDPGTO'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ID_VENDEDOR'
-        Title.Caption = 'ID VENDEDOR'
+        Title.Caption = 'ID Terceiro'
         Visible = True
       end
       item
@@ -445,34 +437,6 @@ object frmAjuste_OperacaoNota: TfrmAjuste_OperacaoNota
         Expanded = False
         FieldName = 'ID'
         Title.Alignment = taCenter
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'STATUS_MANIFESTO'
-        Title.Alignment = taCenter
-        Width = 57
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DESCRICAO_MANIFESTO'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'VLR_ENTRADA'
-        Title.Alignment = taCenter
-        Title.Caption = 'Vlr. Entrada'
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'USUARIO'
-        Title.Alignment = taCenter
-        Title.Caption = 'Usu'#225'rio'
-        Width = 113
         Visible = True
       end>
   end

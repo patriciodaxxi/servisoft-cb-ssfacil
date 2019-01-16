@@ -4309,12 +4309,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'NTE, NT.USUARIO,'#13#10'CLI.NOME NOMECLIENTE, CFOP.CODCFOP, CLI.FANTAS' +
       'IA, VEND.NOME NOME_VENDEDOR, NT.REC_COPIADO, '#13#10'CLI.cnpj_cpf CNPJ' +
       '_CPF_CLIENTE,  NT.ID_TRANSPORTADORA,  CLI.insc_suframa INSC_SUFR' +
-      'AMA_CLIENTE, '#13#10'case'#13#10'  WHEN NT.tipo_prazo = '#39'P'#39' then '#39'A PRAZO'#39#13#10 +
-      '  WHEN NT.tipo_prazo = '#39'V'#39' then '#39'A VISTA'#39#13#10'  else '#39#39#13#10'  end DESC' +
-      'RICAO_PRAZO'#13#10'FROM NOTAFISCAL NT'#13#10'INNER JOIN PESSOA CLI'#13#10'  ON NT.' +
-      'ID_CLIENTE = CLI.CODIGO'#13#10'LEFT JOIN TAB_CFOP CFOP'#13#10'  ON NT.ID_CFO' +
-      'P = CFOP.ID'#13#10'LEFT JOIN PESSOA VEND'#13#10'ON NT.id_vendedor = VEND.COD' +
-      'IGO'#13#10#13#10#13#10#13#10
+      'AMA_CLIENTE,'#13#10'OPN.NOME NOME_OPERACAO_NOTA, NT.ID_OPERACAO_NOTA, ' +
+      #13#10'case'#13#10'  WHEN NT.tipo_prazo = '#39'P'#39' then '#39'A PRAZO'#39#13#10'  WHEN NT.tip' +
+      'o_prazo = '#39'V'#39' then '#39'A VISTA'#39#13#10'  else '#39#39#13#10'  end DESCRICAO_PRAZO'#13#10 +
+      'FROM NOTAFISCAL NT'#13#10'INNER JOIN PESSOA CLI'#13#10'  ON NT.ID_CLIENTE = ' +
+      'CLI.CODIGO'#13#10'LEFT JOIN TAB_CFOP CFOP'#13#10'  ON NT.ID_CFOP = CFOP.ID'#13#10 +
+      'LEFT JOIN PESSOA VEND'#13#10'ON NT.id_vendedor = VEND.CODIGO'#13#10'LEFT JOI' +
+      'N OPERACAO_NOTA OPN'#13#10'ON NT.ID_OPERACAO_NOTA = OPN.ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -4506,6 +4507,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object cdsNotaFiscal_ConsultaINSC_SUFRAMA_CLIENTE: TStringField
       FieldName = 'INSC_SUFRAMA_CLIENTE'
       Size = 9
+    end
+    object cdsNotaFiscal_ConsultaNOME_OPERACAO_NOTA: TStringField
+      FieldName = 'NOME_OPERACAO_NOTA'
+      Size = 40
+    end
+    object cdsNotaFiscal_ConsultaID_OPERACAO_NOTA: TIntegerField
+      FieldName = 'ID_OPERACAO_NOTA'
     end
   end
   object dsNotaFiscal_Consulta: TDataSource

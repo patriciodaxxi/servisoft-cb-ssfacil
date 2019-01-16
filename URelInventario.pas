@@ -46,6 +46,7 @@ type
   public
     { Public declarations }
     fDMConsEstoque: TDMConsEstoque;
+    vOrderm : String; //G= Grupo Estrutura   N=Nome
   end;
 
 var
@@ -78,6 +79,8 @@ end;
 procedure TfRelInventario.FormCreate(Sender: TObject);
 begin
   fDMRel := TDMRel.Create(Self);
+  if vOrderm <> 'G' then
+    RLGroup1.DataFields := EmptyStr;
 end;
 
 procedure TfRelInventario.FormDestroy(Sender: TObject);

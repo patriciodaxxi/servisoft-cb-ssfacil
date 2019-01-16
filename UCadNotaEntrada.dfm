@@ -25,7 +25,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     Top = 0
     Width = 941
     Height = 679
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -268,7 +268,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Width = 250
           Height = 21
           CharCase = ecUpperCase
-          TabOrder = 6
+          TabOrder = 5
           OnKeyDown = Edit2KeyDown
         end
         object edtSerie: TEdit
@@ -277,7 +277,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Width = 55
           Height = 21
           CharCase = ecUpperCase
-          TabOrder = 3
+          TabOrder = 1
           OnKeyDown = edtSerieKeyDown
         end
         object DateEdit1: TDateEdit
@@ -287,7 +287,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Height = 21
           NumGlyphs = 2
           StartOfWeek = Sun
-          TabOrder = 4
+          TabOrder = 3
         end
         object DateEdit2: TDateEdit
           Left = 254
@@ -296,7 +296,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Height = 21
           NumGlyphs = 2
           StartOfWeek = Sun
-          TabOrder = 5
+          TabOrder = 4
         end
         object RxDBLookupCombo1: TRxDBLookupCombo
           Left = 95
@@ -316,7 +316,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Height = 21
           NumGlyphs = 2
           StartOfWeek = Sun
-          TabOrder = 1
+          TabOrder = 6
         end
         object dtedtEntradaFin: TDateEdit
           Left = 608
@@ -325,7 +325,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Height = 21
           NumGlyphs = 2
           StartOfWeek = Sun
-          TabOrder = 2
+          TabOrder = 7
         end
         object CurrencyEdit1: TCurrencyEdit
           Left = 254
@@ -335,7 +335,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           AutoSize = False
           DecimalPlaces = 0
           DisplayFormat = '0'
-          TabOrder = 7
+          TabOrder = 2
           OnKeyDown = CurrencyEdit1KeyDown
         end
         object btnConsultar: TNxButton

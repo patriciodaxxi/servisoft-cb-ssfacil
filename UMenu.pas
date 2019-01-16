@@ -338,6 +338,9 @@ type
     BaixaNotadeBeneficiamento1: TMenuItem;
     N52: TMenuItem;
     ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1: TMenuItem;
+    ConsultaEstoquedeTerceiroeEmTerceiro1: TMenuItem;
+    N53: TMenuItem;
+    AjusteOperaoNasNotas1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -575,6 +578,8 @@ type
     procedure BaixaNotadeBeneficiamento1Click(Sender: TObject);
     procedure ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1Click(
       Sender: TObject);
+    procedure ConsultaEstoquedeTerceiroeEmTerceiro1Click(Sender: TObject);
+    procedure AjusteOperaoNasNotas1Click(Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -633,7 +638,8 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   uCadFuncionario_Res, UConsAniversario, UExcluirPed, UConsLoteMat, UConsProduto_Custo, UConsFrete, UConsMaterial_Nec, UConsPedido_Orc,
   UConsEstoque_Res, UBaixaMaterialOP, uCadTipo_Material, UConsMatPrima, UConsMaterialOP, UConsMaterial_Nec_Rem, uBaixaPedidoProc,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina,
-  UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida;
+  UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida,
+  UConsEstoqueTerc, UAjuste_OperacaoNota;
 
 {$R *.dfm}
 
@@ -2060,6 +2066,17 @@ procedure TfMenu.ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1Click(
 begin
   vTipo_ConsNotaBeneficiamento := 'C';
   OpenForm(TfrmConsNotaBeneficiamento,wsMaximized);
+end;
+
+procedure TfMenu.ConsultaEstoquedeTerceiroeEmTerceiro1Click(
+  Sender: TObject);
+begin
+  OpenForm(TfrmConsEstoqueTerc,wsMaximized);
+end;
+
+procedure TfMenu.AjusteOperaoNasNotas1Click(Sender: TObject);
+begin
+  OpenForm(TfrmAjuste_OperacaoNota,wsMaximized);
 end;
 
 initialization

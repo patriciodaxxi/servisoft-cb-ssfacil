@@ -43,6 +43,7 @@ type
     Marca1: TMenuItem;
     Produto1: TMenuItem;
     ckImpAgrupado: TCheckBox;
+    ckImpInventario: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -307,8 +308,16 @@ begin
     vTipo_Config_Email := 4;
     prc_Monta_Cab;
     fDMConsEstoque.cdsFilial.Locate('ID',RxDBLookupCombo1.KeyValue,[loCaseInsensitive]);
-    fDMConsEstoque.cdsEstoque.IndexFieldNames := 'NOMEGRUPO;NOMEPRODUTO;NOME_COR;TAMPRODUTO';
+    if ckImpInventario.Checked then
+      fDMConsEstoque.cdsEstoque.IndexFieldNames := 'NOMEGRUPO;NOMEPRODUTO;NOME_COR;TAMPRODUTO'
+    else
+      fDMConsEstoque.cdsEstoque.IndexFieldNames := 'NOMEPRODUTO;NOME_COR;TAMPRODUTO';
     fRelInventario                := TfRelInventario.Create(Self);
+    if ckImpInventario.Checked then
+      fRelInventario.vOrderm := 'G'
+    else
+      fRelInventario.vOrderm := 'N';
+    fRelInventario.fDMConsEstoque := fDMConsEstoque;
     fRelInventario.fDMConsEstoque := fDMConsEstoque;
     fRelInventario.RLReport1.PreviewModal;
     fRelInventario.RLReport1.Free;

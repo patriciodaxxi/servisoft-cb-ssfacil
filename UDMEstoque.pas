@@ -123,7 +123,10 @@ type
 
     procedure prc_Excluir_EstoqueMov(ID: Integer);
     procedure prc_Abrir_Estoque_Mov(ID: Integer);
-    procedure prc_Imprime_Estoque(vTipo: String);// vTipo = Produto ou Material 
+    procedure prc_Imprime_Estoque(vTipo: String);// vTipo = Produto ou Material
+
+    procedure prc_Localizar(ID: Integer);
+    
   end;
 
 var
@@ -443,6 +446,13 @@ begin
     WriteLn(f);
 
   CloseFile(f);
+end;
+
+procedure TDMEstoque.prc_Localizar(ID: Integer);
+begin
+  cdsEstoque_Mov.Close;
+  sdsEstoque_Mov.ParamByName('ID').AsInteger := ID;
+  cdsEstoque_Mov.Open;
 end;
 
 end.

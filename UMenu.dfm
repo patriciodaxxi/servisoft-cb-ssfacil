@@ -555,6 +555,10 @@ object fMenu: TfMenu
         Caption = 'Consulta Estoque Reserva'
         OnClick = ConsultaEstoqueReserva1Click
       end
+      object ConsultaEstoquedeTerceiroeEmTerceiro1: TMenuItem
+        Caption = 'Consulta Estoque de Terceiro e Em Terceiro'
+        OnClick = ConsultaEstoquedeTerceiroeEmTerceiro1Click
+      end
       object N49: TMenuItem
         Caption = '-'
       end
@@ -572,6 +576,13 @@ object fMenu: TfMenu
       object ConsultarMateriaPrimanoProduto1: TMenuItem
         Caption = 'Consultar Materia Prima no Produto'
         OnClick = ConsultarMateriaPrimanoProduto1Click
+      end
+      object N53: TMenuItem
+        Caption = '-'
+      end
+      object AjusteOperaoNasNotas1: TMenuItem
+        Caption = 'Ajuste Opera'#231#227'o Nas Notas'
+        OnClick = AjusteOperaoNasNotas1Click
       end
     end
     object Compras1: TMenuItem

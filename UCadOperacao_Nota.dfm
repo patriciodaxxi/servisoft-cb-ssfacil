@@ -119,6 +119,7 @@ object frmCadOperacao_Nota: TfrmCadOperacao_Nota
             FieldName = 'MOSTRA_EDI'
             Title.Alignment = taCenter
             Title.Caption = 'Mostra EDI na importa'#231#227'o'
+            Width = 64
             Visible = True
           end>
       end

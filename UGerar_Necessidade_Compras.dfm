@@ -38,16 +38,28 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
     object Label5: TLabel
       Left = 552
       Top = 131
-      Width = 216
-      Height = 13
+      Width = 286
+      Height = 14
       Caption = 'Material n'#227'o esta cadastrado na ficha t'#233'cnica'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
     end
     object Label6: TLabel
       Left = 552
       Top = 146
-      Width = 186
-      Height = 13
+      Width = 244
+      Height = 14
       Caption = 'J'#225' gerado OC e ou Reservado Estoque'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
     end
     object Shape2: TShape
       Left = 513
@@ -55,6 +67,26 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
       Width = 35
       Height = 14
       Brush.Color = clMoneyGreen
+    end
+    object Shape3: TShape
+      Left = 825
+      Top = 145
+      Width = 35
+      Height = 14
+      Brush.Color = 4915199
+    end
+    object Label9: TLabel
+      Left = 864
+      Top = 146
+      Width = 170
+      Height = 14
+      Caption = 'Selecionado para gerar OC'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
     end
     object btnConsultar: TNxButton
       Left = 512

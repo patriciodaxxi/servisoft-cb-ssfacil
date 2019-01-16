@@ -153,7 +153,12 @@ end;
 
 procedure TDMCadOperacao_Nota.cdsOperacao_NotaNewRecord(DataSet: TDataSet);
 begin
-  cdsOperacao_NotaSERIE_NFE.AsString := '';
+  cdsOperacao_NotaSERIE_NFE.AsString           := '';
+  cdsOperacao_NotaMOSTRA_EDI.AsString          := 'N';
+  cdsOperacao_NotaMOSTRAR_CLI_TRIANG2.AsString := 'N';
+  cdsOperacao_NotaESTOQUE_DE_TERCEIRO.AsString := 'N';
+  cdsOperacao_NotaESTOQUE_EM_TERCEIRO.AsString := 'N';
+  cdsOperacao_NotaPEDIR_FINALIDADE.AsString    := 'N';
 end;
 
 procedure TDMCadOperacao_Nota.DoLogAdditionalValues(ATableName: string;

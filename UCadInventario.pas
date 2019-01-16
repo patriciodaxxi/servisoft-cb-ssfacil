@@ -471,7 +471,7 @@ end;
 procedure TfrmCadInventario.prc_Abrir_Produto(Tipo_Reg: String);
 begin
   fDMCadInventario.cdsProduto.Close;
-  fDMCadInventario.cdsProduto.IndexFieldNames := 'NOME;TAMANHO;NOME_COR';
+  fDMCadInventario.cdsProduto.IndexFieldNames := 'NOME;NOME_COR;TAMANHO';
   fDMCadInventario.sdsProduto.CommandText := fDMCadInventario.ctProduto
                                            + ' AND PRO.TIPO_REG = ' + QuotedStr(Tipo_Reg);
   fDMCadInventario.cdsProduto.Open;

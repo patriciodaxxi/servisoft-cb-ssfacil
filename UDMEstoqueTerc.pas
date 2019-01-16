@@ -55,13 +55,32 @@ type
     cdsEstoque_DeTerc_CliID_PESSOA: TIntegerField;
     cdsEstoque_DeTerc_CliNOME_PESSOA: TStringField;
     cdsEstoque_DeTerc_CliTAMANHO: TStringField;
+    sdsEstoque_EmTerc_Cli: TSQLDataSet;
+    dspEstoque_EmTerc_Cli: TDataSetProvider;
+    cdsEstoque_EmTerc_Cli: TClientDataSet;
+    dsEstoque_EmTerc_Cli: TDataSource;
+    cdsEstoque_EmTerc_CliID_PRODUTO: TIntegerField;
+    cdsEstoque_EmTerc_CliFILIAL: TIntegerField;
+    cdsEstoque_EmTerc_CliID_COR: TIntegerField;
+    cdsEstoque_EmTerc_CliQTD: TFloatField;
+    cdsEstoque_EmTerc_CliNOME_COMBINACAO: TStringField;
+    cdsEstoque_EmTerc_CliNOME_PRODUTO: TStringField;
+    cdsEstoque_EmTerc_CliREFERENCIA: TStringField;
+    cdsEstoque_EmTerc_CliID_PESSOA: TIntegerField;
+    cdsEstoque_EmTerc_CliNOME_PESSOA: TStringField;
+    cdsEstoque_EmTerc_CliTAMANHO: TStringField;
+    qParametros: TSQLQuery;
+    qParametrosUSA_GRADE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     ctEstoque_DeTerc_Mov : String;
+    ctEstoque_DeTerc_Cli : String;
     ctEstoque_EmTerc_Mov : String;
+    ctEstoque_EmTerc_Cli : String;
+
   end;
 
 var
@@ -77,6 +96,9 @@ procedure TDMEstoqueTerc.DataModuleCreate(Sender: TObject);
 begin
   ctEstoque_DeTerc_Mov := sdsEstoque_DeTerc_Mov.CommandText;
   ctEstoque_EmTerc_Mov := sdsEstoque_EmTerc_Mov.CommandText;
+  ctEstoque_DeTerc_Cli := sdsEstoque_DeTerc_Cli.CommandText;
+  ctEstoque_EmTerc_Cli := sdsEstoque_EmTerc_Cli.CommandText;
+  qParametros.Open;
 end;
 
 end.

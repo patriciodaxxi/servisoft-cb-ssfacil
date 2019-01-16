@@ -30,11 +30,16 @@ type
     RzPageControl1: TRzPageControl;
     TS_DeTerceiro: TRzTabSheet;
     TS_EmTerceiro: TRzTabSheet;
-    SMDBGrid2: TSMDBGrid;
     RzPageControl2: TRzPageControl;
     TS_DeTerceiro_Det: TRzTabSheet;
     TS_DeTerceiro_Cli: TRzTabSheet;
     SMDBGrid1: TSMDBGrid;
+    SMDBGrid3: TSMDBGrid;
+    RzPageControl3: TRzPageControl;
+    TS_EmTerceiro_Det: TRzTabSheet;
+    TS_EmTerceiro_Cli: TRzTabSheet;
+    SMDBGrid5: TSMDBGrid;
+    SMDBGrid2: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -44,7 +49,9 @@ type
     vComando : String;
 
     procedure prc_ConsEstoque_DeTer_Mov;
+    procedure prc_ConsEstoque_DeTer_Cli;
     procedure prc_ConsEstoque_EmTer_Mov;
+    procedure prc_ConsEstoque_EmTer_Cli;
     procedure prc_Condicao;
 
   public
@@ -70,10 +77,22 @@ procedure TfrmConsEstoqueTerc.btnConsultarClick(Sender: TObject);
 begin
   prc_Condicao;
   if RzPageControl1.ActivePage = TS_DeTerceiro then
-    prc_ConsEstoque_DeTer_Mov
+  begin
+    if RzPageControl2.ActivePage = TS_DeTerceiro_Det then
+      prc_ConsEstoque_DeTer_Mov
+    else
+    if RzPageControl2.ActivePage = TS_DeTerceiro_Cli then
+      prc_ConsEstoque_DeTer_Cli;
+  end
   else
   if RzPageControl1.ActivePage = TS_EmTerceiro then
-    prc_ConsEstoque_EmTer_Mov;
+  begin
+    if RzPageControl3.ActivePage = TS_EmTerceiro_Det then
+      prc_ConsEstoque_EmTer_Mov
+    else
+    if RzPageControl3.ActivePage = TS_EmTerceiro_Cli then
+      prc_ConsEstoque_EmTer_Cli;
+  end;
 end;
 
 procedure TfrmConsEstoqueTerc.prc_ConsEstoque_DeTer_Mov;
@@ -84,9 +103,32 @@ begin
 end;
 
 procedure TfrmConsEstoqueTerc.FormShow(Sender: TObject);
+var
+  i : Integer;
 begin
   fDMEstoqueTerc := TDMEstoqueTerc.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMEstoqueTerc);
+
+  for i := 1 to SMDBGrid2.ColCount - 2 do
+  begin
+    if (SMDBGrid2.Columns[i].FieldName = 'TAMANHO') then
+      SMDBGrid2.Columns[i].Visible := fDMEstoqueTerc.qParametrosUSA_GRADE.AsString = 'S';
+  end;
+  for i := 1 to SMDBGrid3.ColCount - 2 do
+  begin
+    if (SMDBGrid3.Columns[i].FieldName = 'TAMANHO') then
+      SMDBGrid3.Columns[i].Visible := fDMEstoqueTerc.qParametrosUSA_GRADE.AsString = 'S';
+  end;
+  for i := 1 to SMDBGrid1.ColCount - 2 do
+  begin
+    if (SMDBGrid1.Columns[i].FieldName = 'TAMANHO') then
+      SMDBGrid1.Columns[i].Visible := fDMEstoqueTerc.qParametrosUSA_GRADE.AsString = 'S';
+  end;
+  for i := 1 to SMDBGrid5.ColCount - 2 do
+  begin
+    if (SMDBGrid5.Columns[i].FieldName = 'TAMANHO') then
+      SMDBGrid5.Columns[i].Visible := fDMEstoqueTerc.qParametrosUSA_GRADE.AsString = 'S';
+  end;
 end;
 
 procedure TfrmConsEstoqueTerc.prc_ConsEstoque_EmTer_Mov;
@@ -116,6 +158,32 @@ begin
     0: vComando := vComando + ' AND EM.TIPO_ES = ' + QuotedStr('E');
     1: vComando := vComando + ' AND EM.TIPO_ES = ' + QuotedStr('S');
   end;
+end;
+
+procedure TfrmConsEstoqueTerc.prc_ConsEstoque_DeTer_Cli;
+var
+  vComandoAux, vComandoAux2: String;
+  i: Integer;
+begin
+  vComandoAux  := copy(fDMEstoqueTerc.ctEstoque_DeTerc_Cli,i,Length(fDMEstoqueTerc.ctEstoque_DeTerc_Cli) - i + 1);
+  vComandoAux2 := copy(fDMEstoqueTerc.ctEstoque_DeTerc_Cli,1,i-1);
+  vComando     := vComandoAux2 + vComando + vComandoAux;
+  fDMEstoqueTerc.cdsEstoque_DeTerc_Cli.Close;
+  fDMEstoqueTerc.sdsEstoque_DeTerc_Cli.CommandText := vComando;
+  fDMEstoqueTerc.cdsEstoque_DeTerc_Cli.Open;
+end;
+
+procedure TfrmConsEstoqueTerc.prc_ConsEstoque_EmTer_Cli;
+var
+  vComandoAux, vComandoAux2: String;
+  i: Integer;
+begin
+  vComandoAux  := copy(fDMEstoqueTerc.ctEstoque_EmTerc_Cli,i,Length(fDMEstoqueTerc.ctEstoque_EmTerc_Cli) - i + 1);
+  vComandoAux2 := copy(fDMEstoqueTerc.ctEstoque_EmTerc_Cli,1,i-1);
+  vComando     := vComandoAux2 + vComando + vComandoAux;
+  fDMEstoqueTerc.cdsEstoque_EmTerc_Cli.Close;
+  fDMEstoqueTerc.sdsEstoque_EmTerc_Cli.CommandText := vComando;
+  fDMEstoqueTerc.cdsEstoque_EmTerc_Cli.Open;
 end;
 
 end.

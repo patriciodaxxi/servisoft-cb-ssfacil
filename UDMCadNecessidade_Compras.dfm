@@ -520,6 +520,11 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       FixedChar = True
       Size = 1
     end
+    object qParametrosMOSTRAR_EMBALAGEM: TStringField
+      FieldName = 'MOSTRAR_EMBALAGEM'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qMaterial: TSQLQuery
     MaxBlobSize = -1
@@ -1525,8 +1530,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'FROM LOTE L'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 512
-    Top = 200
+    Left = 560
+    Top = 184
     object qLoteNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
     end
@@ -1920,7 +1925,7 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'WHERE USUARIO = :USUARIO')
     SQLConnection = dmDatabase.scoDados
     Left = 464
-    Top = 128
+    Top = 104
     object qParametros_UsuarioALT_MATERIAL_NEC: TStringField
       FieldName = 'ALT_MATERIAL_NEC'
       FixedChar = True
@@ -2356,5 +2361,21 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     DataSet = cdsConsLote_Mat_OC
     Left = 648
     Top = 24
+  end
+  object qParametros_Est: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_RESERVA'
+      'FROM PARAMETROS_EST'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 456
+    Top = 176
+    object qParametros_EstUSA_RESERVA: TStringField
+      FieldName = 'USA_RESERVA'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

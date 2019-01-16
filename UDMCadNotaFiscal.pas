@@ -2933,6 +2933,8 @@ type
     cdsProdutoID_CSTICMS: TIntegerField;
     cdsClienteIPI_PAGO_FILIAL: TStringField;
     cdsProdutoNOME_MODELO: TStringField;
+    cdsNotaFiscal_ConsultaNOME_OPERACAO_NOTA: TStringField;
+    cdsNotaFiscal_ConsultaID_OPERACAO_NOTA: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
