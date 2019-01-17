@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, Grids, DBGrids, SMDBGrid,
   StdCtrls, RxLookup, DBFilter, Mask, ToolEdit, CurrEdit, FMTBcd, DB, Provider, DBClient, SqlExpr, DBCtrls, Buttons, jpeg,
   DBTables, uDmCupomFiscal, uDmEstoque, uDmMovimento, rsDBUtils, uDmParametros, NxCollection, UCupomFiscalImposto, StrUtils,
-  ValEdit, UCBase, ACBrBase;
+  ValEdit, UCBase, ACBrBase, ACBrBAL, ACBrDevice;
 
 type
   TfCupomFiscal = class(TForm)
@@ -72,6 +72,7 @@ type
     CurrencyEdit7: TCurrencyEdit;
     Label10: TLabel;
     DBEdit5: TDBEdit;
+    ACBrBAL1: TACBrBAL;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Edit1Exit(Sender: TObject);
@@ -125,6 +126,7 @@ type
     procedure DBEdit4KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure SMDBGrid1DblClick(Sender: TObject);
+    procedure ACBrBAL1LePeso(Peso: Double; Resposta: String);
   private
     { Private declarations }
     vAliqIcms: Real;
@@ -143,6 +145,7 @@ type
     function fnc_VerficaFracionado(vUnidade: String): Boolean;
     procedure FinalizaParcial(vTipo: String);
     procedure prc_CorTamanho;
+    procedure prcPesa;
   public
     { Public declarations }
     fDmCupomFiscal: TDmCupomFiscal;
@@ -371,7 +374,7 @@ begin
   begin
     Edit3.ReadOnly := True;
     Edit3.TabStop  := False;
-  end;   
+  end;
 
   if not posicionaProduto then
     Exit;
@@ -385,6 +388,16 @@ begin
     else
       CurrencyEdit2.Value := fDmCupomFiscal.cdsProdutoPRECO_VENDA.AsCurrency;
     //*************
+    if (Length(Edit1.Text) < 5) and
+       ((fDmCupomFiscal.cdsCupomParametrosUSA_BALANCA.AsString = 'S') and
+       ((fDmCupomFiscal.cdsProdutoUNIDADE.AsString = 'KG') or
+       (fDmCupomFiscal.cdsProdutoUNIDADE.AsString = 'Kg') or
+       (fDmCupomFiscal.cdsProdutoUNIDADE.AsString = 'kg'))) then
+    begin
+       if acbrBal1.Ativo then
+          ACBrBAL1.Desativar;
+       prcPesa;
+    end;
 
     CurrencyEdit3.Value := StrToFloat(FormatFloat('0.00',CurrencyEdit2.Value * CurrencyEdit1.Value));
     prc_Move_Itens;
@@ -1216,30 +1229,12 @@ end;
 
 procedure TfCupomFiscal.CurrencyEdit1KeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
-var
-  strPeso: String;
 begin
   if Key = vk_F3 then
   begin
-    if vBalanca = 'URANO' then
-    begin
-      StrPeso := _LePeso;
-      if StrPeso = 'Porta serial fechada!'#$D#$A then
-      begin
-        ShowMessage('Porta serial fechada!');
-        Exit;
-      end;
-      Edit2.Text := _LePeso;
-      CurrencyEdit1.Value := StrToFloat(Copy(Edit2.Text,20,6));
-    end
-    else
-    if vBalanca = 'ACBR' then
-    begin
-    end;
-
+    prcPesa;
     if CurrencyEdit1.TabOrder = 0 then
       Edit1.SetFocus;
-
   end;
   if (Key = Vk_Return) then
     if CurrencyEdit1.TabOrder = 0 then
@@ -1904,6 +1899,66 @@ begin
   if fDmCupomFiscal.vTipo_Cofins = 'V' then
     ComboBox2.ItemIndex := 1;}
   fCupomFiscalImposto.ShowModal;
+end;
+
+procedure TfCupomFiscal.prcPesa;
+var
+  strPeso: String;
+  TimeOut: Integer;
+begin
+    if vBalanca = 'URANO' then
+    begin
+      StrPeso := _LePeso;
+      if StrPeso = 'Porta serial fechada!'#$D#$A then
+      begin
+        ShowMessage('Porta serial fechada!');
+        Exit;
+      end;
+      Edit2.Text := _LePeso;
+      CurrencyEdit1.Value := StrToFloat(Copy(Edit2.Text,20,6));
+    end
+    else
+    if vBalanca = 'ACBR' then
+    begin
+       // se houver conecção aberta, Fecha a conecção
+       if acbrBal1.Ativo then
+          ACBrBAL1.Desativar;
+
+       // configura porta de comunicação
+       ACBrBAL1.Modelo           := TACBrBALModelo(2);
+       ACBrBAL1.Device.HandShake := TACBrHandShake(0);
+       ACBrBAL1.Device.Parity    := TACBrSerialParity(0);
+       ACBrBAL1.Device.Stop      := TACBrSerialStop(0);
+       ACBrBAL1.Device.Data      := StrToInt('8');
+       ACBrBAL1.Device.Baud      := StrToInt('2400');
+       ACBrBAL1.Device.Porta     := 'COM2';
+
+       // Conecta com a balança
+       ACBrBAL1.Ativar;
+       TimeOut := 2000 ;
+       ACBrBAL1.LePeso( TimeOut );
+    end;
+end;
+
+procedure TfCupomFiscal.ACBrBAL1LePeso(Peso: Double; Resposta: String);
+var
+  Valid: Integer;
+begin
+   CurrencyEdit1.Value := Peso;
+
+   if Peso > 0 then
+   else
+    begin
+      valid := Trunc(ACBrBAL1.UltimoPesoLido);
+      case valid of
+         0 : ShowMessage('TimeOut !'+sLineBreak+
+                         'Coloque o produto sobre a Balança!');
+        -1 : ShowMessage('Peso Instável ! ' +sLineBreak+
+                         'Tente Nova Leitura');
+        -2 : ShowMessage('Peso Negativo !');
+       -10 : ShowMessage('Sobrepeso !');
+      end;
+    end ;
 end;
 
 end.
