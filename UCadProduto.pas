@@ -2070,6 +2070,8 @@ begin
 end;
 
 procedure TfrmCadProduto.btnExcluir_ConsumoClick(Sender: TObject);
+var
+  vItemAux : Integer;
 begin
   if fDMCadProduto.cdsProduto_Consumo.IsEmpty then
     exit;
@@ -2085,12 +2087,18 @@ begin
     fDMCadProduto.cdsProduto_Consumo_Tam.Delete;
 
   fDMCadProduto.cdsProduto_Consumo_Proc.First;
-  while fDMCadProduto.cdsProduto_Consumo_Proc.Eof do
+  while not fDMCadProduto.cdsProduto_Consumo_Proc.Eof do
     fDMCadProduto.cdsProduto_Consumo_Proc.Delete;
 
   fDMCadProduto.cdsProduto_Consumo.Delete;
 
+  vItemAux := fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger;
+
+  SMDBGrid3.DisableScroll;
   ceVlr_Total_Mat.Value := fDMCadProduto.fnc_Calcular_Mat;
+  SMDBGrid3.EnableScroll;
+
+  fDMCadProduto.cdsProduto_Consumo.Locate('ITEM',vItemAux,([Locaseinsensitive]));
 end;
 
 procedure TfrmCadProduto.btnInserir_ConsumoClick(Sender: TObject);

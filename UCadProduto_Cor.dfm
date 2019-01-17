@@ -1,6 +1,6 @@
 object frmCadProduto_Cor: TfrmCadProduto_Cor
-  Left = 406
-  Top = 126
+  Left = 342
+  Top = 106
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro de Cores'
@@ -635,6 +635,8 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
       Width = 121
       Height = 21
       AutoSize = False
+      DecimalPlaces = 5
+      DisplayFormat = '0.00###'
       TabOrder = 2
     end
     object CurrencyEdit2: TCurrencyEdit
@@ -643,6 +645,8 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
       Width = 121
       Height = 21
       AutoSize = False
+      DecimalPlaces = 5
+      DisplayFormat = '0.00###'
       TabOrder = 3
     end
   end

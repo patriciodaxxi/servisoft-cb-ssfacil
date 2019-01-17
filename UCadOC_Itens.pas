@@ -104,7 +104,7 @@ type
 
     procedure prc_Gravar_Tam;
     procedure prc_Gravar_mItens;
-    procedure prc_Abrir_Combinacao;
+    procedure prc_Abrir_Combinacao(ID : Integer);
     procedure prc_Estoque(ID_Produto : Integer);
 
     function fnc_Busca_Sobra_OC : Real;    
@@ -189,7 +189,7 @@ begin
   vID_CorAux := fDMCadPedido.cdsPedido_ItensID_COR.AsInteger;
   if fDMCadPedido.cdsPedido_ItensID_COR.AsInteger > 0 then
   begin
-    prc_Abrir_Combinacao;
+    prc_Abrir_Combinacao(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
     fDMCadPedido.cdsCombinacao.Locate('ID_COR_COMBINACAO',vID_CorAux,[loCaseInsensitive]);
     RxDBLookupCombo5.KeyValue := vID_CorAux ;
   end;
@@ -321,9 +321,9 @@ begin
     fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
     if (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P') and (fDMCadPedido.cdsPedidoDTENTREGA.AsDateTime > 10) then
       fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime := fDMCadPedido.cdsPedidoDTENTREGA.AsDateTime;
-    fDMCadPedido.cdsPedido_ItensVLR_TOTAL_ATELIER.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat * fDMCadPedido.cdsPedido_ItensQTD.AsFloat));
+    fDMCadPedido.cdsPedido_ItensVLR_TOTAL_ATELIER.AsFloat    := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat * fDMCadPedido.cdsPedido_ItensQTD.AsFloat));
     fDMCadPedido.cdsPedido_ItensNOME_COR_COMBINACAO.AsString := RxDBLookupCombo5.Text;
-    fDMCadPedido.cdsPedido_ItensTIPO_REG.AsString := 'C';
+    fDMCadPedido.cdsPedido_ItensTIPO_REG.AsString            := 'C';
 
     //09/06/2017
     //07/02/2018 aqui
@@ -552,7 +552,7 @@ end;
 procedure TfrmCadOC_Itens.Panel4Exit(Sender: TObject);
 begin
   fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,[loCaseInsensitive]);
-  prc_Abrir_Combinacao;
+  prc_Abrir_Combinacao(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
 end;
 
 procedure TfrmCadOC_Itens.Edit1KeyDown(Sender: TObject; var Key: Word;
@@ -586,8 +586,11 @@ begin
       MessageDlg('*** Código do Produto não encontrado!', mtError, [mbOk], 0)
     else
     begin
-      
-      DBEdit2.SetFocus
+      prc_Abrir_Combinacao(StrToInt(DBEdit15.Text));
+      if fDMCadPedido.cdsCombinacao.RecordCount > 0 then
+        RxDBLookupCombo5.SetFocus
+      else
+        DBEdit2.SetFocus;
     end;
   end;
 end;
@@ -832,10 +835,11 @@ begin
   end;
 end;
 
-procedure TfrmCadOC_Itens.prc_Abrir_Combinacao;
+procedure TfrmCadOC_Itens.prc_Abrir_Combinacao(ID : Integer);
 begin
   fDMCadPedido.cdsCombinacao.Close;
-  fDMCadPedido.sdsCombinacao.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
+  //fDMCadPedido.sdsCombinacao.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
+  fDMCadPedido.sdsCombinacao.ParamByName('ID').AsInteger := ID;
   fDMCadPedido.cdsCombinacao.Open;
 end;
 

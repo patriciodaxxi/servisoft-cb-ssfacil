@@ -1,8 +1,7 @@
 object DMCadNotaFiscal: TDMCadNotaFiscal
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 57
-  Top = 6
+  Left = 59
   Height = 728
   Width = 1296
   object sdsNotaFiscal: TSQLDataSet
@@ -6106,12 +6105,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 819
-    Top = 96
+    Top = 92
   end
   object dspOrigem_Prod: TDataSetProvider
     DataSet = sdsOrigem_Prod
     Left = 851
-    Top = 96
+    Top = 92
   end
   object cdsOrigem_Prod: TClientDataSet
     Aggregates = <>
@@ -6119,7 +6118,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspOrigem_Prod'
     Left = 891
-    Top = 96
+    Top = 92
     object cdsOrigem_ProdORIGEM: TStringField
       FieldName = 'ORIGEM'
       Required = True
@@ -6133,7 +6132,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsOrigem_Prod: TDataSource
     DataSet = cdsOrigem_Prod
     Left = 931
-    Top = 96
+    Top = 92
   end
   object sdsTab_NCM: TSQLDataSet
     NoMetadata = True
@@ -6148,12 +6147,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 819
-    Top = 144
+    Top = 136
   end
   object dspTab_NCM: TDataSetProvider
     DataSet = sdsTab_NCM
     Left = 851
-    Top = 144
+    Top = 136
   end
   object cdsTab_NCM: TClientDataSet
     Aggregates = <>
@@ -6161,7 +6160,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspTab_NCM'
     Left = 891
-    Top = 144
+    Top = 136
     object cdsTab_NCMID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6239,7 +6238,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsTab_NCM: TDataSource
     DataSet = cdsTab_NCM
     Left = 931
-    Top = 144
+    Top = 136
   end
   object sdsTab_Pis: TSQLDataSet
     NoMetadata = True
@@ -6249,12 +6248,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 819
-    Top = 186
+    Top = 177
   end
   object dspTab_Pis: TDataSetProvider
     DataSet = sdsTab_Pis
     Left = 851
-    Top = 186
+    Top = 177
   end
   object cdsTab_Pis: TClientDataSet
     Aggregates = <>
@@ -6262,7 +6261,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspTab_Pis'
     Left = 891
-    Top = 186
+    Top = 177
     object cdsTab_PisID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6284,7 +6283,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsTab_Pis: TDataSource
     DataSet = cdsTab_Pis
     Left = 931
-    Top = 186
+    Top = 177
   end
   object sdsTab_Cofins: TSQLDataSet
     NoMetadata = True
@@ -6294,12 +6293,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 819
-    Top = 231
+    Top = 222
   end
   object dspTab_Cofins: TDataSetProvider
     DataSet = sdsTab_Cofins
     Left = 851
-    Top = 232
+    Top = 223
   end
   object cdsTab_Cofins: TClientDataSet
     Aggregates = <>
@@ -6307,7 +6306,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspTab_Cofins'
     Left = 891
-    Top = 232
+    Top = 223
     object cdsTab_CofinsID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6329,7 +6328,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsTab_Cofins: TDataSource
     DataSet = cdsTab_Cofins
     Left = 931
-    Top = 232
+    Top = 223
   end
   object sdsCondPgto: TSQLDataSet
     NoMetadata = True
@@ -6339,7 +6338,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 819
-    Top = 280
+    Top = 271
     object sdsCondPgtoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6383,7 +6382,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dspCondPgto: TDataSetProvider
     DataSet = sdsCondPgto
     Left = 851
-    Top = 280
+    Top = 271
   end
   object cdsCondPgto: TClientDataSet
     Aggregates = <>
@@ -6391,7 +6390,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspCondPgto'
     Left = 891
-    Top = 280
+    Top = 271
     object cdsCondPgtoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6438,12 +6437,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsCondPgto: TDataSource
     DataSet = cdsCondPgto
     Left = 931
-    Top = 280
+    Top = 271
   end
   object dsCondPgto_Mestre: TDataSource
     DataSet = sdsCondPgto
     Left = 801
-    Top = 321
+    Top = 312
   end
   object sdsCondPgto_Dia: TSQLDataSet
     NoMetadata = True
@@ -6460,7 +6459,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 841
-    Top = 340
+    Top = 331
     object sdsCondPgto_DiaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6481,7 +6480,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsCondPgtosdsCondPgto_Dia
     Params = <>
     Left = 905
-    Top = 340
+    Top = 331
     object cdsCondPgto_DiaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6505,12 +6504,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 825
-    Top = 446
+    Top = 420
   end
   object dspNFe_Email: TDataSetProvider
     DataSet = sdsNFe_Email
     Left = 857
-    Top = 446
+    Top = 420
   end
   object cdsNFe_Email: TClientDataSet
     Aggregates = <>
@@ -6518,7 +6517,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspNFe_Email'
     Left = 897
-    Top = 446
+    Top = 420
     object cdsNFe_EmailID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6535,7 +6534,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsNFe_Email: TDataSource
     DataSet = cdsNFe_Email
     Left = 937
-    Top = 446
+    Top = 420
   end
   object qNatOper: TSQLQuery
     MaxBlobSize = -1
@@ -6581,7 +6580,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     StoreDefs = True
     Left = 985
-    Top = 613
+    Top = 585
     Data = {
       690000009619E0BD01000000180000000300000000000300000069000D4E756D
       53657175656E6369616C0400010000000000034F627302004A00000001000557
@@ -6602,7 +6601,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsmCCe: TDataSource
     DataSet = mCCe
     Left = 1025
-    Top = 613
+    Top = 611
   end
   object sdsNotaFiscal_CCe: TSQLDataSet
     NoMetadata = True
@@ -6795,7 +6794,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '')
     SQLConnection = dmDatabase.scoDados
     Left = 985
-    Top = 320
+    Top = 311
     object qRegime_TribID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6816,7 +6815,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 825
-    Top = 492
+    Top = 466
     object sdsDuplicataID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7004,7 +7003,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dspDuplicata: TDataSetProvider
     DataSet = sdsDuplicata
     Left = 865
-    Top = 492
+    Top = 466
   end
   object cdsDuplicata: TClientDataSet
     Aggregates = <>
@@ -7015,7 +7014,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     OnNewRecord = cdsDuplicataNewRecord
     OnReconcileError = cdsDuplicataReconcileError
     Left = 905
-    Top = 492
+    Top = 466
     object cdsDuplicataID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7214,7 +7213,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsDuplicata_Mestre: TDataSource
     DataSet = sdsDuplicata
     Left = 825
-    Top = 532
+    Top = 506
   end
   object sdsDuplicata_Hist: TSQLDataSet
     NoMetadata = True
@@ -7231,7 +7230,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 897
-    Top = 548
+    Top = 522
     object sdsDuplicata_HistID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7308,7 +7307,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     OnReconcileError = cdsDuplicata_HistReconcileError
     Left = 969
-    Top = 548
+    Top = 522
     object cdsDuplicata_HistID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7698,12 +7697,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 833
-    Top = 636
+    Top = 606
   end
   object dspFornecedor: TDataSetProvider
     DataSet = sdsFornecedor
     Left = 865
-    Top = 636
+    Top = 606
   end
   object cdsFornecedor: TClientDataSet
     Aggregates = <>
@@ -7711,7 +7710,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspFornecedor'
     Left = 905
-    Top = 636
+    Top = 606
     object cdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -7728,7 +7727,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsFornecedor: TDataSource
     DataSet = cdsFornecedor
     Left = 945
-    Top = 636
+    Top = 606
   end
   object sdsPedido: TSQLDataSet
     NoMetadata = True
@@ -8642,7 +8641,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '')
     SQLConnection = dmDatabase.scoDados
     Left = 985
-    Top = 237
+    Top = 228
     object qProduto_FornCOD_MATERIAL_FORN: TStringField
       FieldName = 'COD_MATERIAL_FORN'
     end
@@ -8667,12 +8666,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 827
-    Top = 592
+    Top = 564
   end
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
     Left = 867
-    Top = 592
+    Top = 564
   end
   object cdsCidade: TClientDataSet
     Aggregates = <>
@@ -8680,7 +8679,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspCidade'
     Left = 907
-    Top = 592
+    Top = 564
     object cdsCidadeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8701,7 +8700,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsCidade: TDataSource
     DataSet = cdsCidade
     Left = 947
-    Top = 592
+    Top = 564
   end
   object sdsNotaFiscal_Imp_Ad: TSQLDataSet
     NoMetadata = True
@@ -11846,7 +11845,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'GROUP BY N.TIPO_NOTA')
     SQLConnection = dmDatabase.scoDados
     Left = 992
-    Top = 184
+    Top = 175
     object qEstoque_DescaaQTD: TFloatField
       FieldName = 'QTD'
     end
@@ -11969,7 +11968,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 1001
-    Top = 488
+    Top = 471
   end
   object sdsNotaFiscal_ProdPrincipal: TSQLDataSet
     NoMetadata = True
@@ -12074,12 +12073,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 816
-    Top = 393
+    Top = 376
   end
   object dspLocal_Estoque: TDataSetProvider
     DataSet = sdsLocal_Estoque
     Left = 851
-    Top = 393
+    Top = 376
   end
   object cdsLocal_Estoque: TClientDataSet
     Aggregates = <>
@@ -12087,7 +12086,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspLocal_Estoque'
     Left = 891
-    Top = 393
+    Top = 376
     object cdsLocal_EstoqueID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -12136,7 +12135,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsLocal_Estoque: TDataSource
     DataSet = cdsLocal_Estoque
     Left = 931
-    Top = 393
+    Top = 376
   end
   object mLoteControle: TClientDataSet
     Active = True
@@ -13616,6 +13615,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NTEATUALIZA_PRECO_MAIOR: TStringField
+      FieldName = 'ATUALIZA_PRECO_MAIOR'
+      FixedChar = True
+      Size = 1
+    end
   end
   object mVerReserva: TClientDataSet
     Active = True
@@ -13720,7 +13724,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     StoreDefs = True
     Left = 992
-    Top = 288
+    Top = 279
     Data = {
       2C0000009619E0BD0100000018000000010000000000030000002C000949445F
       50656469646F04000100000000000000}
@@ -14569,5 +14573,142 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     BCDToCurrency = False
     Left = 560
     Top = 640
+  end
+  object sdsProduto_Comb: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT PCOMB.*'#13#10'FROM PRODUTO_COMB PCOMB'#13#10'WHERE PCOMB.ID = :ID'#13#10' ' +
+      ' AND PCOMB.ID_COR_COMBINACAO = :ID_COR_COMBINACAO'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_COR_COMBINACAO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 833
+    Top = 649
+    object sdsProduto_CombID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object sdsProduto_CombITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object sdsProduto_CombID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object sdsProduto_CombNOME: TStringField
+      FieldName = 'NOME'
+      Size = 50
+    end
+    object sdsProduto_CombINATIVO: TStringField
+      FieldName = 'INATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsProduto_CombTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsProduto_CombPRECO_CUSTO: TFloatField
+      FieldName = 'PRECO_CUSTO'
+    end
+    object sdsProduto_CombPRECO_VENDA: TFloatField
+      FieldName = 'PRECO_VENDA'
+    end
+    object sdsProduto_CombPERC_MARGEMLUCRO: TFloatField
+      FieldName = 'PERC_MARGEMLUCRO'
+    end
+    object sdsProduto_CombID_COR_COMBINACAO: TIntegerField
+      FieldName = 'ID_COR_COMBINACAO'
+    end
+    object sdsProduto_CombFOTO: TStringField
+      FieldName = 'FOTO'
+      Size = 200
+    end
+    object sdsProduto_CombOBSMATERIAL: TStringField
+      FieldName = 'OBSMATERIAL'
+      Size = 100
+    end
+    object sdsProduto_CombNOME_FOTO: TStringField
+      FieldName = 'NOME_FOTO'
+      Size = 100
+    end
+  end
+  object dspProduto_Comb: TDataSetProvider
+    DataSet = sdsProduto_Comb
+    Left = 865
+    Top = 649
+  end
+  object cdsProduto_Comb: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProduto_Comb'
+    Left = 905
+    Top = 649
+    object cdsProduto_CombID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsProduto_CombITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsProduto_CombID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object cdsProduto_CombNOME: TStringField
+      FieldName = 'NOME'
+      Size = 50
+    end
+    object cdsProduto_CombINATIVO: TStringField
+      FieldName = 'INATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProduto_CombTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProduto_CombPRECO_CUSTO: TFloatField
+      FieldName = 'PRECO_CUSTO'
+    end
+    object cdsProduto_CombPRECO_VENDA: TFloatField
+      FieldName = 'PRECO_VENDA'
+    end
+    object cdsProduto_CombPERC_MARGEMLUCRO: TFloatField
+      FieldName = 'PERC_MARGEMLUCRO'
+    end
+    object cdsProduto_CombID_COR_COMBINACAO: TIntegerField
+      FieldName = 'ID_COR_COMBINACAO'
+    end
+    object cdsProduto_CombFOTO: TStringField
+      FieldName = 'FOTO'
+      Size = 200
+    end
+    object cdsProduto_CombOBSMATERIAL: TStringField
+      FieldName = 'OBSMATERIAL'
+      Size = 100
+    end
+    object cdsProduto_CombNOME_FOTO: TStringField
+      FieldName = 'NOME_FOTO'
+      Size = 100
+    end
+  end
+  object dsProduto_Comb: TDataSource
+    DataSet = cdsProduto_Comb
+    Left = 945
+    Top = 649
   end
 end

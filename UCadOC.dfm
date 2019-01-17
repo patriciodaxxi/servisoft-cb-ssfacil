@@ -25,7 +25,7 @@ object frmCadOC: TfrmCadOC
     Top = 0
     Width = 1030
     Height = 690
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOC: TfrmCadOC
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1828,7 +1828,7 @@ object frmCadOC: TfrmCadOC
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 19
+            ColCount = 20
             RowCount = 2
             Columns = <
               item
@@ -1883,13 +1883,11 @@ object frmCadOC: TfrmCadOC
                 Expanded = False
                 FieldName = 'QTD_FATURADO'
                 Title.Caption = 'Qtd. Entregue'
-                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_RESTANTE'
-                Width = 64
                 Visible = True
               end
               item
@@ -1924,19 +1922,24 @@ object frmCadOC: TfrmCadOC
                 FieldName = 'VLR_ICMS'
                 Title.Alignment = taCenter
                 Title.Caption = 'Complemento'
-                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_CANCELADO'
-                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'CANCELADO'
-                Width = 64
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ITEM_ORIGINAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Item Original'
                 Visible = True
               end>
           end
