@@ -923,7 +923,7 @@ begin
       fDmCupomFiscal.cdsCupom_ItensTAMANHO.AsString := '';
     fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat      := CurrencyEdit2.Value;
     fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsFloat := CurrencyEdit2.Value;
-    fDmCupomFiscal.vSomaOriginal := fDmCupomFiscal.vSomaOriginal + (CurrencyEdit2.Value * fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat);
+    fDmCupomFiscal.vSomaOriginal := fDmCupomFiscal.vSomaOriginal + CurrencyEdit3.Value;
 
     if CurrencyEdit6.Value > 0 then
     begin
