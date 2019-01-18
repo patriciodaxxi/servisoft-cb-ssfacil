@@ -755,7 +755,17 @@ begin
     
   vInclusao_Edicao := 'I';
 
-  fDMCadPedido.prc_Inserir;
+  //17/01/2019
+  //fDMCadPedido.prc_Inserir;
+  uGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
+  if not(fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) then
+  begin
+    prc_Excluir_Registro;
+    vInclusao_Edicao := '';
+    exit;
+  end;
+  //********************
+
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'P';
 
   if fDMCadPedido.cdsPedido.State in [dsBrowse] then
@@ -1151,6 +1161,11 @@ begin
     Exit;
 
   fDMCadPedido.cdsPedido.CancelUpdates;
+  //17/01/2019
+  if vInclusao_Edicao = 'I' then
+    prc_Excluir_Registro;
+  //********************
+  
   vInclusao_Edicao := '';
   vSenha           := '';
 
@@ -1161,6 +1176,7 @@ begin
   TS_Consulta.TabEnabled    := True;
   RzPageControl1.ActivePage := TS_Consulta;
   fDMCadPedido.vID_CFOP     := 0;
+
 end;
 
 procedure TfrmCadPedido.SMDBGrid1DblClick(Sender: TObject);

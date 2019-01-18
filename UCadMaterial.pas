@@ -297,6 +297,8 @@ type
     procedure SMDBGrid3KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure SpeedButton16Click(Sender: TObject);
+    procedure btnImportar_TamClick(Sender: TObject);
+    procedure btnExcluir_TamClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -345,6 +347,7 @@ type
     function fnc_Filial: Boolean;
     procedure prc_Atualiza_Percentual;
     procedure prc_Gravar_Produto_Cad_Ant;
+    procedure prc_Gravar_ProdutoTam;
 
   public
     { Public declarations }
@@ -1975,6 +1978,51 @@ begin
   FreeAndNil(ffrmCadGrade);
   fDMCadProduto.cdsGrade.Close;
   fDMCadProduto.cdsGrade.Open;
+end;
+
+procedure TfrmCadMaterial.btnImportar_TamClick(Sender: TObject);
+begin
+  if fDMCadProduto.cdsProdutoID_GRADE.AsInteger <= 0 then
+  begin
+    MessageDlg('*** Grade não foi informada!', mtError, [mbOk], 0);
+    RxDBLookupCombo9.SetFocus;
+    exit;
+  end;
+
+  prc_Gravar_ProdutoTam;
+end;
+
+procedure TfrmCadMaterial.btnExcluir_TamClick(Sender: TObject);
+begin
+  if fDMCadProduto.cdsProduto_Tam.IsEmpty then
+    exit;
+
+  if MessageDlg('Deseja excluir os tamanhos?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+
+  fDMCadProduto.cdsProduto_Tam.First;
+  while not fDMCadProduto.cdsProduto_Tam.Eof do
+  fDMCadProduto.cdsProduto_Tam.Delete;
+
+  fDMCadProduto.cdsProdutoID_GRADE.Clear;
+end;
+
+procedure TfrmCadMaterial.prc_Gravar_ProdutoTam;
+begin
+  fDMCadProduto.qGrade_Itens.Close;
+  fDMCadProduto.qGrade_Itens.ParamByName('ID').AsInteger := fDMCadProduto.cdsProdutoID_GRADE.AsInteger;
+  fDMCadProduto.qGrade_Itens.Open;
+  while not fDMCadProduto.qGrade_Itens.Eof do
+  begin
+    if not fDMCadProduto.cdsProduto_Tam.Locate('TAMANHO',fDMCadProduto.qGrade_ItensTAMANHO.AsString,([Locaseinsensitive])) then
+    begin
+      fDMCadProduto.cdsProduto_Tam.Insert;
+      fDMCadProduto.cdsProduto_TamID.AsInteger     := fDMCadProduto.cdsProdutoID.AsInteger;
+      fDMCadProduto.cdsProduto_TamTAMANHO.AsString := fDMCadProduto.qGrade_ItensTAMANHO.AsString;
+      fDMCadProduto.cdsProduto_Tam.Post;
+    end;
+    fDMCadProduto.qGrade_Itens.Next;
+  end;
 end;
 
 end.

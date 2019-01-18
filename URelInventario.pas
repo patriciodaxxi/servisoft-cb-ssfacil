@@ -40,6 +40,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure RLBand2BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand3BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     fDMRel: TDMRel;
@@ -97,6 +98,13 @@ begin
   if trim(fDMConsEstoque.cdsEstoqueNOME_COR.AsString) <> '' then
     vNomeAux := vNomeAux + ' ' + fDMConsEstoque.cdsEstoqueNOME_COR.AsString;
   RLMemo1.Lines.Text := vNomeAux;
+end;
+
+procedure TfRelInventario.RLBand3BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  if vOrderm <> 'G' then
+    PrintIt := False;
 end;
 
 end.

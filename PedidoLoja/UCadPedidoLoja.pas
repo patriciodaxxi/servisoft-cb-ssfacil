@@ -525,7 +525,9 @@ begin
     
   vInclusao_Edicao := 'I';
 
-  fDMCadPedido.prc_Inserir;
+  //fDMCadPedido.prc_Inserir;
+  UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
+
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'P';
 
   if fDMCadPedido.cdsPedido.State in [dsBrowse] then

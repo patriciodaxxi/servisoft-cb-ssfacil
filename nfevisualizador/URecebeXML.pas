@@ -1717,35 +1717,41 @@ begin
   vExiste := False;
   lbStatusMaterial.Color := clMoneyGreen;
   if (fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and not(ckAssociar.Checked) then
-    exit;
+    fDMRecebeXML.prc_Abrir_Produto(-1);
+  //  exit;
 
   if fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0 then
     fDMRecebeXML.prc_Abrir_Produto(fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger)
   else
   begin
-    if not fDMRecebeXML.fnc_Abrir_Produto_Forn(vCodFornecedor,fDMRecebeXML.mItensNotaCodProduto.AsString,fDMRecebeXML.mItensNotaCodBarra.AsString) then
+    //17/01/2019 só o if do controalr_grava_prod foi incluido
+    if (trim(fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString) <> 'S') or
+       ((fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and (ckAssociar.Checked)) then
     begin
-      if fDMRecebeXML.qParametrosPROCURAR_POR_REF_XML.AsString <> 'S' then
-        fDMRecebeXML.prc_Abrir_Produto(-1);
-    end
-    else
-    begin
-      vExiste := True;
-      fDMRecebeXML.mItensNota.Edit;
-      if fDMRecebeXML.qParametrosPROCURAR_POR_REF_XML.AsString = 'S' then
-        fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger := fDMRecebeXML.cdsProdutoID.AsInteger
+      if not fDMRecebeXML.fnc_Abrir_Produto_Forn(vCodFornecedor,fDMRecebeXML.mItensNotaCodProduto.AsString,fDMRecebeXML.mItensNotaCodBarra.AsString) then
+      begin
+        if fDMRecebeXML.qParametrosPROCURAR_POR_REF_XML.AsString <> 'S' then
+          fDMRecebeXML.prc_Abrir_Produto(-1);
+      end
       else
       begin
-        fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger := fDMRecebeXML.cdsProduto_FornID.AsInteger;
-        if fDMRecebeXML.cdsProdutoID.AsInteger <> fDMRecebeXML.cdsProduto_FornID.AsInteger then
-          fDMRecebeXML.prc_Abrir_Produto(fDMRecebeXML.cdsProduto_FornID.AsInteger);
+        vExiste := True;
+        fDMRecebeXML.mItensNota.Edit;
+        if fDMRecebeXML.qParametrosPROCURAR_POR_REF_XML.AsString = 'S' then
+          fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger := fDMRecebeXML.cdsProdutoID.AsInteger
+        else
+        begin
+          fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger := fDMRecebeXML.cdsProduto_FornID.AsInteger;
+          if fDMRecebeXML.cdsProdutoID.AsInteger <> fDMRecebeXML.cdsProduto_FornID.AsInteger then
+            fDMRecebeXML.prc_Abrir_Produto(fDMRecebeXML.cdsProduto_FornID.AsInteger);
+        end;
+        fDMRecebeXML.mItensNotaReferencia_Int.AsString := fDMRecebeXML.cdsProdutoREFERENCIA.AsString;
+        fDMRecebeXML.mItensNotaPerc_Margem.AsFloat     := fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat;
+        fDMRecebeXML.mItensNotaID_Grupo.AsInteger      := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
+        fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
+        prc_Monta_Grupo('N');
+        fDMRecebeXML.mItensNota.Post;
       end;
-      fDMRecebeXML.mItensNotaReferencia_Int.AsString := fDMRecebeXML.cdsProdutoREFERENCIA.AsString;
-      fDMRecebeXML.mItensNotaPerc_Margem.AsFloat     := fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat;
-      fDMRecebeXML.mItensNotaID_Grupo.AsInteger      := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
-      fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
-      prc_Monta_Grupo('N');
-      fDMRecebeXML.mItensNota.Post;
     end;
   end;
   if fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger <= 0 then
@@ -1848,8 +1854,8 @@ var
   vVlrAux: Real;
   //vUnidadeAux: String;
 begin
-  if (fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and not(ckAssociar.Checked) then
-    exit;
+  //if (fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and not(ckAssociar.Checked) then
+  //  exit;
 
   vAux := dmDatabase.ProximaSequencia('PRODUTO',0);
   vAux := vAux;
@@ -1907,6 +1913,11 @@ begin
     fDMRecebeXML.cdsProdutoUSA_PERC_IMP_INTERESTADUAL.AsString := 'N';
   //***********
 
+  //if (fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and not(ckAssociar.Checked) then
+  //  exit;
+
+  //if (trim(fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString) <> 'S') or
+  //   ((fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and (ckAssociar.Checked)) then
   fDMRecebeXML.cdsProdutoID_FORNECEDOR.AsInteger  := vCodFornecedor;
   //12/07/2018
   if (fDMRecebeXML.mItensNotaCodBarra2.AsString <> '') and (fDMRecebeXML.mItensNotaCodBarra.AsString <> fDMRecebeXML.mItensNotaCodBarra2.AsString) then
@@ -2489,6 +2500,9 @@ var
 begin
   //Foi tirado dia 02/11/2017
   //if (fDMRecebeXML.qParametrosATUALIZAR_PRECO.AsString <> 'S') and (fDMRecebeXML.qParametros_NTEATUALIZAR_CUSTO.AsString <> 'S') then
+  if (fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and not(ckAssociar.Checked) then
+    exit;
+
   if not(fDMRecebeXML.mItensNotaAtualizarPreco.AsBoolean) and not(fDMRecebeXML.mItensNotaAtualizarCustoTotal.AsBoolean) then
     exit;
 

@@ -226,7 +226,7 @@ var
   x, i: integer;
   vID_LocalAux: Integer;
 begin
-  fDMCadPedido.prc_Inserir;
+  UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
   vID_Aux           := fDMCadPedido.cdsPedidoID.AsInteger;
   vID_Pedido_Gerado := fDMCadPedido.cdsPedidoID.AsInteger;
   fDMCadPedido.cdsPedidoTIPO_REG.AsString           := 'P';

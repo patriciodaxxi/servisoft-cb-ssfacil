@@ -16,6 +16,7 @@ procedure prc_Excluir_Pedido(fDMCadPedido: TDMCadPedido);
 procedure Excluir_Duplicata_Ped(ID : Integer);
 procedure prc_Excluir_Item_Ped(fDMCadPedido: TDMCadPedido);
 procedure prc_Gravar_cdsHist_Senha(fDMCadPedido: TDMCadPedido);
+procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
 
 function fnc_Existe_OC(fDMCadPedido: TDMCadPedido): Integer;
 
@@ -178,6 +179,7 @@ var
   fDMEstoque: TDMEstoque;
   vGravou: Boolean;
   vID: Integer;
+  Flag : Boolean;
 begin
   fDMCadPedido.vMSGErro := '';
   vGravou  := False;
@@ -318,12 +320,28 @@ begin
   dmDatabase.scoDados.StartTransaction(ID);
 
   try
-    sds.SQLConnection := dmDatabase.scoDados;
-    sds.NoMetadata    := True;
-    sds.GetMetadata   := False;
-    sds.CommandText   := ' UPDATE TABELALOC SET FLAG = 1 ' +
-                         ' WHERE TABELA = ' + QuotedStr('PEDIDO');
-    sds.ExecSQL();
+    try
+      sds.SQLConnection := dmDatabase.scoDados;
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+      sds.CommandText   := 'UPDATE TABELALOC SET FLAG = 1 WHERE TABELA = ' + QuotedStr('PEDIDO');
+      Flag := False;
+      while not Flag do
+      begin
+        try
+          sds.Close;
+          sds.ExecSQL;
+          Flag := True;
+        except
+          on E: Exception do
+          begin
+            Flag := False;
+          end;
+        end;
+      end;
+    except
+      raise
+    end;
 
     //10/11/2015  if do adiatamento incluida
     if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') then
@@ -728,6 +746,76 @@ begin
     dmDatabase.scoDados.Rollback(ID);
     raise;
   end;
+end;
+
+procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
+var
+  vAux: Integer;
+  vNumAux: Integer;
+  ID: TTransactionDesc;
+  sds: TSQLDataSet;
+  Flag: Boolean;
+  vIDPed : Integer;
+
+begin
+  sds     := TSQLDataSet.Create(nil);
+
+  ID.TransactionID  := 5;
+  ID.IsolationLevel := xilREADCOMMITTED;
+  dmDatabase.scoDados.StartTransaction(ID);
+  try
+    try
+      sds.SQLConnection := dmDatabase.scoDados;
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+      sds.CommandText   := 'UPDATE TABELALOC SET FLAG = 1 WHERE TABELA = ' + QuotedStr('PEDIDO');
+      Flag := False;
+      while not Flag do
+      begin
+        try
+          sds.Close;
+          sds.ExecSQL;
+          Flag := True;
+        except
+          on E: Exception do
+          begin
+            Flag := False;
+          end;
+        end;
+      end;
+    except
+      raise
+    end;
+
+    if not fDMCadPedido.cdsPedido.Active then
+      fDMCadPedido.prc_Localizar(-1);
+    vAux := dmDatabase.ProximaSequencia('PEDIDO',0);
+
+    fDMCadPedido.mSenha.EmptyDataSet;
+
+    fDMCadPedido.cdsPedido.Insert;
+    fDMCadPedido.cdsPedidoID.AsInteger         := vAux;
+    fDMCadPedido.cdsPedidoFILIAL.AsInteger     := vFilial;
+    fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime := Date;
+    fDMCadPedido.cdsPedido.Post;
+
+    vIDPed := fDMCadPedido.cdsPedidoID.AsInteger;
+    fDMCadPedido.cdsPedido.ApplyUpdates(0);
+
+    dmDatabase.scoDados.Commit(ID);
+
+    fDMCadPedido.cdsPedido.Locate('ID',vIDPed,([Locaseinsensitive]));
+
+    fDMCadPedido.cdsPedido.Edit;
+
+  except
+    on e: Exception do
+    begin
+      dmDatabase.scoDados.Rollback(ID);
+      raise Exception.Create('Erro ao inserir o Pedido: ' + #13 + e.Message);
+    end;
+  end;
+
 end;
 
 end.

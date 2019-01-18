@@ -1402,7 +1402,14 @@ procedure TfrmCadPedido_Itens.SpeedButton4Click(Sender: TObject);
 begin
   fDMCadPedido.cdsParametros.Close;
   fDMCadPedido.cdsParametros.Open;
-  fDMCadPedido.prc_Abrir_Produto;
+  //17/01/2019  O IF foi incluído prc_Filtrar_Produto_Cliente
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False)
+  else
+    fDMCadPedido.prc_Abrir_Produto;
+  //****************
+
   SpeedButton12Click(Sender);
   if (RxDBLookupCombo2.Text <> '') then
     prc_Abrir_Combinacao;

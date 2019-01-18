@@ -3463,7 +3463,7 @@ type
     //*********
 
     procedure prc_Localizar(ID: Integer);
-    procedure prc_Inserir;
+    //procedure prc_Inserir;  foi colocado para o UGrava_Pedido
 
     procedure prc_Inserir_Itens;
 
@@ -3507,7 +3507,7 @@ uses DmdDatabase, uUtilPadrao, LogProvider, uCalculo_Pedido, UDMAprovacao_Ped, S
 
 { TDMCadCFOP}
 
-procedure TDMCadPedido.prc_Inserir;
+{procedure TDMCadPedido.prc_Inserir;
 var
   vAux: Integer;
   vNumAux: Integer;
@@ -3522,7 +3522,7 @@ begin
   cdsPedidoID.AsInteger         := vAux;
   cdsPedidoFILIAL.AsInteger     := vFilial;
   cdsPedidoDTEMISSAO.AsDateTime := Date;
-end;
+end;}
 
 procedure TDMCadPedido.prc_Localizar(ID: Integer); //-1 é para inclusão
 begin

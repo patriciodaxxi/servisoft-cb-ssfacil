@@ -238,6 +238,7 @@ object fRelInventario: TfRelInventario
           Width = 734
           Height = 15
           BandType = btHeader
+          BeforePrint = RLBand3BeforePrint
           object RLLabel8: TRLLabel
             Left = 80
             Top = 2

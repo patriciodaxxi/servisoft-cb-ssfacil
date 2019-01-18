@@ -495,7 +495,7 @@ end;
 procedure TfrmCadProduto_Comb.SpeedButton2Click(Sender: TObject);
 begin
   //09/04/2018 foi colocado o IF para mostrar a cor ou a combinação  (até 27/03/2018 abria só a cor)
-  if (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
+  if (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') or (fDMCadProduto.qParametros_LoteUSA_COR_COMB.AsString = 'S') then
   begin
     ffrmCadCor := TfrmCadCor.Create(self);
     ffrmCadCor.ShowModal;

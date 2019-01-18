@@ -4609,15 +4609,16 @@ begin
       fDMNFe.mItensNFeVlrDespAduaneira.AsFloat  := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrDespAduaneira.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ADUANEIRA.AsFloat));
     end;
     fDMNFe.mItensNFeQtd.AsFloat               := StrToFloat(FormatFloat('0.00000',fDMNFe.mItensNFeQtd.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
+    //17/01/2019 foi tirado o if abaixo
     //11/07/2018
-    if StrToFloat(FormatFloat('0.0000',fDMNFe.mItensNFeQtd_Trib.AsFloat)) <= 0 then
-    begin
+    //if StrToFloat(FormatFloat('0.0000',fDMNFe.mItensNFeQtd_Trib.AsFloat)) <= 0 then
+    //begin
       //04/07/2017
       if StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat)) > 0 then
         fDMNFe.mItensNFeQtd_Trib.AsFloat := StrToFloat(FormatFloat('0.00000',fDMNFe.mItensNFeQtd_Trib.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat))
       else
         fDMNFe.mItensNFeQtd_Trib.AsFloat := StrToFloat(FormatFloat('0.00000',fDMNFe.mItensNFeQtd.AsFloat));
-    end;
+    //end;
     //*****************
 
     fDMNFe.mItensNFeVlrTotal.AsFloat          := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrTotal.AsFloat + (fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat

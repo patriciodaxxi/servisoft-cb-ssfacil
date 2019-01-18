@@ -500,7 +500,9 @@ end;
 
 procedure TfrmGerar_Necessidade_Compras.prc_Inserir_OC;
 begin
-  fDMCadPedido.prc_Inserir;
+  //fDMCadPedido.prc_Inserir;
+  UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
+
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'C';
   fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime := Date;
   fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger := fDMCadNecessidade_Compras.mMaterialID_Fornecedor.AsInteger;
