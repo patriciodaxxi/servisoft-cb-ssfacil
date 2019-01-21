@@ -1088,16 +1088,25 @@ begin
     or ((fDMCadNotaFiscal.cdsFilialSIMPLES.AsString = 'S') and (fDMCadNotaFiscal.cdsCFOPGERAR_ICMS_SIMPLES.AsString = 'S') )) then
   begin
     fDMCadNotaFiscal.qNCM_CST.Close;
+    //21/01/2019  Foi incluido para calcular o FCP da ST
     vIDAux := fnc_Busca_NCM_CST;
+    vAux   := StrToFloat(FormatFloat('0.00',0));
     if trim(fDMCadNotaFiscal.cdsTab_NCMCALCULA_FCP.AsString) = 'S' then //O IF para controlar por NCM foi colocado dia 26/10/2018
     begin
       if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qNCM_CSTPERC_FCP.AsFloat)) > 0 then
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qNCM_CSTPERC_FCP.AsFloat))
+        vAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qNCM_CSTPERC_FCP.AsFloat))
       else
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsUFPERC_CP.AsFloat));
+        vAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsUFPERC_CP.AsFloat));
+      if fDMCadNotaFiscal.cdsTab_NCMGERAR_ST.AsString = 'S' then
+        fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat := StrToFloat(FormatFloat('0.00',vAux))
+      else
+        fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP.AsFloat := StrToFloat(FormatFloat('0.00',vAux));
     end
     else
+    begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP.AsFloat := StrToFloat(FormatFloat('0.00',0));
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat   := StrToFloat(FormatFloat('0.00',0));
+    end;
   end;
   //******
   //16/10/2018

@@ -4675,7 +4675,7 @@ begin
     fDMNFe.mItensNFeBase_ICMS_FCP.AsFloat := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeBase_ICMS_FCP.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP.AsFloat));
     fDMNFe.mItensNFeVLR_FCP_ST.AsFloat  := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVLR_FCP_ST.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat));
     fDMNFe.mItensNFeBASE_FCP_ST.AsFloat := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeBASE_FCP_ST.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_FCP_ST.AsFloat));
-    fDMNFe.mItensNFePERC_FCP_ST.AsFloat := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFePERC_FCP_ST.AsFloat));
+    fDMNFe.mItensNFePERC_FCP_ST.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat));
     //*************
 
     //4.00 alguns campos são novos
