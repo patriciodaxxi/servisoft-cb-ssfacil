@@ -81,7 +81,7 @@ object fCupomParametros: TfCupomParametros
     Top = 35
     Width = 873
     Height = 566
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
