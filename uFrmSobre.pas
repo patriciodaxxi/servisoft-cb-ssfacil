@@ -43,7 +43,6 @@ begin
 
   if (SQLQuery1ID_RESP_SUPORTE.IsNull) or (SQLQuery1ID_RESP_SUPORTE.AsInteger <= 0) then
   begin
-    //Memo1.Lines.Add(' CRI Consultoria');
     Memo1.Lines.Add('  Cleomar - Cel.: (51) 9942-0952');
     Memo1.Lines.Add('                  (51) 3598-6584');
   end

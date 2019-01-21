@@ -25,7 +25,7 @@ object frmCadOC: TfrmCadOC
     Top = 0
     Width = 1030
     Height = 690
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOC: TfrmCadOC
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -41,9 +41,9 @@ object frmCadOC: TfrmCadOC
       Caption = 'Tela de Consulta'
       object SMDBGrid1: TSMDBGrid
         Left = 0
-        Top = 126
+        Top = 140
         Width = 1026
-        Height = 500
+        Height = 486
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPedido.dsPedido_Consulta
@@ -170,14 +170,14 @@ object frmCadOC: TfrmCadOC
         Left = 0
         Top = 30
         Width = 1026
-        Height = 96
+        Height = 110
         Align = alTop
         Color = clSilver
         TabOrder = 0
         Visible = False
         object lblCliente: TLabel
           Left = 43
-          Top = 78
+          Top = 95
           Width = 57
           Height = 13
           Alignment = taRightJustify
@@ -185,7 +185,7 @@ object frmCadOC: TfrmCadOC
         end
         object lblNumNota: TLabel
           Left = 67
-          Top = 37
+          Top = 36
           Width = 33
           Height = 13
           Alignment = taRightJustify
@@ -193,7 +193,7 @@ object frmCadOC: TfrmCadOC
         end
         object Label5: TLabel
           Left = 14
-          Top = 58
+          Top = 56
           Width = 86
           Height = 13
           Alignment = taRightJustify
@@ -201,7 +201,7 @@ object frmCadOC: TfrmCadOC
         end
         object Label6: TLabel
           Left = 268
-          Top = 58
+          Top = 56
           Width = 25
           Height = 13
           Alignment = taRightJustify
@@ -217,7 +217,7 @@ object frmCadOC: TfrmCadOC
         end
         object lblSerie: TLabel
           Left = 233
-          Top = 37
+          Top = 36
           Width = 60
           Height = 13
           Alignment = taRightJustify
@@ -225,47 +225,77 @@ object frmCadOC: TfrmCadOC
         end
         object Label28: TLabel
           Left = 465
-          Top = 37
+          Top = 36
           Width = 60
           Height = 13
           Alignment = taRightJustify
           Caption = 'N'#186' Ord.Prod:'
         end
+        object Label36: TLabel
+          Left = 600
+          Top = 77
+          Width = 252
+          Height = 25
+          Caption = '...Aguarde Exclu'#237'ndo...'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -20
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Visible = False
+        end
+        object Label67: TLabel
+          Left = 64
+          Top = 76
+          Width = 35
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Op'#231#227'o:'
+        end
         object edtCliente: TEdit
           Left = 102
-          Top = 71
+          Top = 88
           Width = 293
-          Height = 21
+          Height = 19
           CharCase = ecUpperCase
-          TabOrder = 6
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 7
           OnKeyDown = edtClienteKeyDown
         end
         object cePedInterno: TCurrencyEdit
           Left = 102
-          Top = 29
+          Top = 28
           Width = 100
           Height = 21
           AutoSize = False
+          Ctl3D = False
           DecimalPlaces = 0
           DisplayFormat = '0'
+          ParentCtl3D = False
           TabOrder = 1
           OnKeyDown = cePedInternoKeyDown
         end
         object DateEdit1: TDateEdit
           Left = 102
-          Top = 50
+          Top = 48
           Width = 100
           Height = 21
+          Ctl3D = False
           NumGlyphs = 2
+          ParentCtl3D = False
           StartOfWeek = Sun
           TabOrder = 4
         end
         object DateEdit2: TDateEdit
           Left = 295
-          Top = 50
+          Top = 48
           Width = 100
           Height = 21
+          Ctl3D = False
           NumGlyphs = 2
+          ParentCtl3D = False
           StartOfWeek = Sun
           TabOrder = 5
         end
@@ -275,23 +305,28 @@ object frmCadOC: TfrmCadOC
           Width = 355
           Height = 21
           DropDownCount = 8
+          Ctl3D = False
           LookupField = 'ID'
           LookupDisplay = 'NOME_INTERNO'
           LookupSource = DMCadPedido.dsFilial
+          ParentCtl3D = False
           TabOrder = 0
         end
         object edtPedCliente: TEdit
           Left = 295
-          Top = 29
+          Top = 28
           Width = 162
           Height = 21
+          AutoSize = False
           CharCase = ecUpperCase
+          Ctl3D = False
+          ParentCtl3D = False
           TabOrder = 2
           OnKeyDown = edtPedClienteKeyDown
         end
         object btnConsultar: TNxButton
-          Left = 395
-          Top = 64
+          Left = 398
+          Top = 78
           Width = 177
           Height = 30
           Caption = 'Efetuar Pesquisa'
@@ -357,7 +392,7 @@ object frmCadOC: TfrmCadOC
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 8
           Transparent = True
           OnClick = btnConsultarClick
         end
@@ -367,7 +402,7 @@ object frmCadOC: TfrmCadOC
           Width = 135
           Height = 18
           Caption = 'Mostrar N'#227'o Aprovados'
-          TabOrder = 8
+          TabOrder = 9
         end
         object btnGravarOrdProd: TBitBtn
           Left = 768
@@ -375,20 +410,40 @@ object frmCadOC: TfrmCadOC
           Width = 185
           Height = 25
           Caption = 'Gravar as Ord. Produ'#231#227'o na OC'
-          TabOrder = 9
+          TabOrder = 10
           Visible = False
           OnClick = btnGravarOrdProdClick
         end
         object ceNumOrdProd: TCurrencyEdit
           Left = 527
-          Top = 29
+          Top = 28
           Width = 100
           Height = 21
           AutoSize = False
+          Ctl3D = False
           DecimalPlaces = 0
           DisplayFormat = '0'
+          ParentCtl3D = False
           TabOrder = 3
           OnKeyDown = cePedInternoKeyDown
+        end
+        object cbxOpcao: TComboBox
+          Left = 102
+          Top = 68
+          Width = 145
+          Height = 21
+          BevelKind = bkSoft
+          Style = csDropDownList
+          Ctl3D = False
+          ItemHeight = 13
+          ItemIndex = 2
+          ParentCtl3D = False
+          TabOrder = 6
+          Text = 'Ambos'
+          Items.Strings = (
+            'Pendente'
+            'Entregues'
+            'Ambos')
         end
       end
       object StaticText1: TStaticText

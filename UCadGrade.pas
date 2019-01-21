@@ -51,6 +51,7 @@ type
     btnInserir_Itens: TNxButton;
     btnExcluir_Itens: TNxButton;
     NxButton1: TNxButton;
+    DBCheckBox2: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

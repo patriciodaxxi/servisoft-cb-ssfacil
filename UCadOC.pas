@@ -171,6 +171,9 @@ type
     Panel2: TPanel;
     Label63: TLabel;
     RxDBLookupCombo10: TRxDBLookupCombo;
+    Label36: TLabel;
+    cbxOpcao: TComboBox;
+    Label67: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -293,6 +296,8 @@ begin
 end;
 
 procedure TfrmCadOC.btnExcluirClick(Sender: TObject);
+var
+  vNumOC : Integer;
 begin
   if not fnc_Verifica_Registro then
     exit;
@@ -315,11 +320,20 @@ begin
       exit;
   end;
 
+  vNumOC := fDMCadPedido.cdsPedidoNUM_PEDIDO.AsInteger;
+  Label36.Visible := True;
+  Refresh;
+
   prc_Excluir_Registro;
 
   fDMCadPedido.mSenha.EmptyDataSet;
 
   btnConsultarClick(Sender);
+
+  Label36.Visible := False;
+  Refresh;
+
+  MessageDlg('*** OC ' + IntToStr(vNumOC) + ' Excluída', mtConfirmation, [mbOk], 0);
 end;
 
 procedure TfrmCadOC.btnInserirClick(Sender: TObject);
@@ -467,6 +481,7 @@ end;
 procedure TfrmCadOC.FormShow(Sender: TObject);
 var
   i: Integer;
+  vData : TDateTime;
 begin
   vTipo_Pedido     := 'C';
   vInclusao_Edicao := '';
@@ -525,6 +540,10 @@ begin
   Label28.Visible        := (fDMCadPedido.cdsParametrosUSA_LOTE.AsString = 'S');
   ceNumOrdProd.Visible   := (fDMCadPedido.cdsParametrosUSA_LOTE.AsString = 'S');
   btnConsReserva.Visible := (fDMCadPedido.qParametros_EstUSA_RESERVA.AsString = 'S');
+
+  vData          := EncodeDate(YearOf(Date),MonthOf(Date),01);
+  DateEdit1.Date := vData;
+
 end;
 
 procedure TfrmCadOC.prc_Consultar(ID: Integer);
@@ -534,31 +553,37 @@ begin
   if ID > 0 then
     fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.ID = ' + IntToStr(ID)
   else
-  if cePedInterno.AsInteger > 0 then
-    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.NUM_PEDIDO = ' + cePedInterno.Text;
+  begin
+    if cePedInterno.AsInteger > 0 then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.NUM_PEDIDO = ' + cePedInterno.Text;
+    if not(RxDBLookupCombo1.Text = '') then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
+                                                             ' AND PED.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
+    if Trim(edtPedCliente.Text) <> '' then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
+                                                             ' AND PED.PEDIDO_CLIENTE = ' + QuotedStr(edtPedCliente.Text);
+    if DateEdit1.Date > 10 then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText
+                          + ' AND PED.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date));
+    if DateEdit2.Date > 10 then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText
+                          + ' AND PED.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.date));
+    if Trim(edtCliente.Text) <> '' then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText
+                                      + ' AND ((CLI.NOME LIKE ' + QuotedStr('%'+edtCliente.Text+'%') + ')'
+                                      + ' OR (CLI.FANTASIA LIKE ' + QuotedStr('%'+edtCliente.Text+'%') + '))';
 
-  if not(RxDBLookupCombo1.Text = '') then
-    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
-                                                           ' AND PED.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
-  if Trim(edtPedCliente.Text) <> '' then
-    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
-                                                           ' AND PED.PEDIDO_CLIENTE = ' + QuotedStr(edtPedCliente.Text);
-  if DateEdit1.Date > 10 then
-    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText
-                        + ' AND PED.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date));
-  if DateEdit2.Date > 10 then
-    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText
-                        + ' AND PED.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.date));
-  if Trim(edtCliente.Text) <> '' then
-    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText
-                                    + ' AND ((CLI.NOME LIKE ' + QuotedStr('%'+edtCliente.Text+'%') + ')'
-                                    + ' OR (CLI.FANTASIA LIKE ' + QuotedStr('%'+edtCliente.Text+'%') + '))';
+    if (fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and not(ckNaoAprovado.Checked) then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
+                                                   ' AND PED.APROVADO_PED <> ' + QuotedStr('N');
+    if ceNumOrdProd.AsInteger > 0 then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.NUM_ORDPROD = ' + IntToStr(ceNumOrdProd.AsInteger);
 
-  if (fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and not(ckNaoAprovado.Checked) then
-    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
-                                                 ' AND PED.APROVADO_PED <> ' + QuotedStr('N');
-  if ceNumOrdProd.AsInteger > 0 then
-    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.NUM_ORDPROD = ' + IntToStr(ceNumOrdProd.AsInteger);
+    case cbxOpcao.ItemIndex of
+      0: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND COALESCE(PED.FATURADO,''N'') <> ' + QuotedStr('S');
+      1: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.FATURADO = ' + QuotedStr('S');
+    end;
+  end;  
   fDMCadPedido.cdsPedido_Consulta.Open;
 end;
 
@@ -743,6 +768,9 @@ var
   vTamanhoAux : String; //
   vItemAux : Integer; //
   vPrecoAux : Real; //
+  vPerc_IpiAux, vPerc_ICMSAux : Real;
+  vCarimboAux, vCaixinhaAux : String;
+  vDtEntregaAux : TDateTime;
 begin
   vMSGAux := '';
   if (fDMCadPedido.cdsPedido_Itens.IsEmpty) or (fDMCadPedido.cdsPedido_ItensITEM.AsInteger <= 0) then
@@ -776,7 +804,14 @@ begin
   vID_ProdutoAux := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
   vID_CorAux     := fDMCadPedido.cdsPedido_ItensID_COR.AsInteger;
   vTamanhoAux    := fDMCadPedido.cdsPedido_ItensTAMANHO.AsString;
-  
+  vPrecoAux      := StrToFloat(FormatFloat('0.00000000',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat));
+  vItemAux       := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+  vPerc_IpiAux   := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat));
+  vPerc_ICMSAux  := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat));
+  vCarimboAux    := fDMCadPedido.cdsPedido_ItensCARIMBO.AsString;
+  vCaixinhaAux   := fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString;
+  vDtEntregaAux  := fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime;
+
   fDMCadPedido.cdsPedido_Itens.Edit;
 
   ffrmCadOC_Itens := TfrmCadOC_Itens.Create(self);
@@ -785,17 +820,36 @@ begin
 
   FreeAndNil(ffrmCadOC_Itens);
 
-  //16/01/2019
-  if fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S' then
+  //19/01/2019  vai alterar o preço em todos os tamanhos do produto com a mesma cor
+  if (fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S') and (trim(fDMCadPedido.cdsPedido_ItensTAMANHO.AsString) <> '')  then
   begin
-    //fDMCadPedido.
-    //
+    if (vID_CorAux <> fDMCadPedido.cdsPedido_ItensID_COR.AsInteger)
+      or (StrToFloat(FormatFloat('0.00000000',vPrecoAux)) <> StrToFloat(FormatFloat('0.00000000',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat)))
+      or (StrToFloat(FormatFloat('0.00',vPerc_IpiAux))  <> StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat)))
+      or (StrToFloat(FormatFloat('0.00',vPerc_ICMSAux)) <> StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat)))
+      or (trim(vCarimboAux) <> trim(fDMCadPedido.cdsPedido_ItensCARIMBO.AsString))
+      or (trim(vCaixinhaAux) <> trim(fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString))
+      or (vDtEntregaAux <> fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime) then
+    begin
+      SMDBGrid2.DisableScroll;
+      uGrava_Pedido.prc_Alterar_Item_Tam(fDMCadPedido,
+                                         fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,
+                                         fDMCadPedido.cdsPedido_ItensITEM.AsInteger,
+                                         fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger,
+                                         StrToFloat(FormatFloat('0.00000000',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat)),
+                                         StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat)),
+                                         StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat)),
+                                         fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime,
+                                         fDMCadPedido.cdsPedido_ItensCARIMBO.AsString,
+                                         fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString);
 
+      SMDBGrid2.EnableScroll;
+    end;
   end;
   //*******************
 
-
   btnCalcular_ValoresClick(Sender);
+  fDMCadPedido.cdsPedido_Itens.Locate('ITEM',vItemAux,[loCaseInsensitive]);
 end;
 
 procedure TfrmCadOC.btnCalcular_ValoresClick(Sender: TObject);

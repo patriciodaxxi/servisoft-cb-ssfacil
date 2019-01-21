@@ -38,12 +38,12 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
     object Label5: TLabel
       Left = 552
       Top = 131
-      Width = 286
-      Height = 14
+      Width = 258
+      Height = 13
       Caption = 'Material n'#227'o esta cadastrado na ficha t'#233'cnica'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
@@ -51,12 +51,12 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
     object Label6: TLabel
       Left = 552
       Top = 146
-      Width = 244
-      Height = 14
+      Width = 221
+      Height = 13
       Caption = 'J'#225' gerado OC e ou Reservado Estoque'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
@@ -78,12 +78,32 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
     object Label9: TLabel
       Left = 864
       Top = 146
-      Width = 170
-      Height = 14
+      Width = 156
+      Height = 13
       Caption = 'Selecionado para gerar OC'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Shape4: TShape
+      Left = 825
+      Top = 130
+      Width = 35
+      Height = 14
+      Brush.Color = 8963327
+    end
+    object Label10: TLabel
+      Left = 864
+      Top = 131
+      Width = 165
+      Height = 13
+      Caption = 'Selecionado sem Fornecedor'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False

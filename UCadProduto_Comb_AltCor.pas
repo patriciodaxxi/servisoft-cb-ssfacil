@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, UDMCadProduto, StdCtrls,
-  Buttons, RxLookup, DBCtrls, Mask, RxDBComb, ToolEdit, RXDBCtrl, DB;
+  Buttons, RxLookup, DBCtrls, Mask, RxDBComb, ToolEdit, RXDBCtrl, DB,
+  NxCollection;
 
 type
   TfrmCadProduto_Comb_AltCor = class(TForm)
@@ -16,10 +17,14 @@ type
     RxDBLookupCombo3: TRxDBLookupCombo;
     Label2: TLabel;
     DBText1: TDBText;
+    NxButton1: TNxButton;
+    SpeedButton4: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
+    procedure NxButton1Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -38,7 +43,7 @@ var
 
 implementation
 
-uses rsDBUtils;
+uses rsDBUtils, UCadMaterial;
 
 {$R *.dfm}
 
@@ -120,6 +125,27 @@ procedure TfrmCadProduto_Comb_AltCor.prc_Abrir_Material_Cor;
 begin
   fDMCadProduto.cdsMaterial_Cor.Close;
   fDMCadProduto.sdsMaterial_Cor.ParamByName('ID').AsInteger := fDMCadProduto.cdsProduto_Comb_MatID_MATERIAL.AsInteger;
+  fDMCadProduto.cdsMaterial_Cor.Open;
+end;
+
+procedure TfrmCadProduto_Comb_AltCor.NxButton1Click(Sender: TObject);
+var
+  ffrmCadMaterial: TfrmCadMaterial;
+begin
+  ffrmCadMaterial := TfrmCadMaterial.Create(self);
+  if fDMCadProduto.cdsProduto_Comb_MatID_MATERIAL.AsInteger > 0 then
+    ffrmCadMaterial.vID_Produto_Local := fDMCadProduto.cdsProduto_Comb_MatID_MATERIAL.AsInteger
+  else
+    ffrmCadMaterial.vID_Produto_Local := 0;
+  ffrmCadMaterial.ShowModal;
+  FreeAndNil(ffrmCadMaterial);
+
+  SpeedButton4Click(Sender);
+end;
+
+procedure TfrmCadProduto_Comb_AltCor.SpeedButton4Click(Sender: TObject);
+begin
+  fDMCadProduto.cdsMaterial_Cor.Close;
   fDMCadProduto.cdsMaterial_Cor.Open;
 end;
 

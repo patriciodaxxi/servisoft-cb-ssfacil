@@ -1,6 +1,6 @@
 object frmCadProduto_Consumo: TfrmCadProduto_Consumo
-  Left = 407
-  Top = 179
+  Left = 266
+  Top = 196
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro dos Itens'
@@ -492,7 +492,6 @@ object frmCadProduto_Consumo: TfrmCadProduto_Consumo
       LookupDisplay = 'NOME'
       LookupSource = dmCadProduto.dsSetor
       TabOrder = 7
-      OnExit = RxDBLookupCombo4Exit
     end
     object DBCheckBox1: TDBCheckBox
       Left = 570

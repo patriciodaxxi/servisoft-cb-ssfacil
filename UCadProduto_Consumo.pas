@@ -79,6 +79,7 @@ type
     function  fnc_Erro: Boolean;
     procedure prc_Monta_Tamanho;
     procedure prc_Atualiza_Comb;
+    procedure prc_Inserir_Mat_Comb;
 
   public
     { Public declarations }
@@ -92,7 +93,7 @@ var
 
 implementation
 
-uses rsDBUtils, USel_Produto, uUtilPadrao;
+uses rsDBUtils, USel_Produto, uUtilPadrao, UCadProduto_Consumo_Copiar;
 
 {$R *.dfm}
 
@@ -107,6 +108,8 @@ end;
 procedure TfrmCadProduto_Consumo.FormShow(Sender: TObject);
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadProduto);
+
+
 
   if fDMCadProduto.cdsProduto_Consumo.State in [dsInsert] then
   begin
@@ -141,7 +144,8 @@ begin
   RxDBLookupCombo4.Visible := (fDMCadProduto.qParametrosUSA_POSICAO_CONSUMO.AsString = 'S');
   Label8.Visible           := (fDMCadProduto.qParametrosUSA_SETOR_CONSUMO.AsString = 'S');
   RxDBLookupCombo5.Visible := (fDMCadProduto.qParametrosUSA_SETOR_CONSUMO.AsString = 'S');
-  RxDBComboBox1.ReadOnly   := ((fDMCadProduto.qParametrosUSA_GRADE.AsString <> 'S') and (fDMCadProduto.cdsProdutoID_GRADE.AsInteger <= 0));
+  RxDBComboBox1.ReadOnly   := ((fDMCadProduto.qParametrosUSA_GRADE.AsString <> 'S') and (fDMCadProduto.cdsProdutoID_GRADE.AsInteger <= 0)) OR
+                              (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
 
   if RxDBComboBox1.ReadOnly then
     RxDBComboBox1.Color := clSilver
@@ -416,7 +420,14 @@ end;
 procedure TfrmCadProduto_Consumo.prc_Atualiza_Comb;
 begin
   if vID_Material_Loc <= 0 then
+  begin
+    if fDMCadProduto.cdsProduto_Comb.RecordCount > 0 then
+    begin
+      if MessageDlg('Deseja incluir o material nas combinações existentes?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+        prc_Inserir_Mat_Comb;
+    end;
     exit;
+  end;
 
   if (vID_Material_Loc <> fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger)
     or (StrToFloat(FormatFloat('0.00000',vQtd_Consumo)) <> StrToFloat(FormatFloat('0.00000',fDMCadProduto.cdsProduto_ConsumoQTD_CONSUMO.AsFloat)))
@@ -459,6 +470,14 @@ end;
 procedure TfrmCadProduto_Consumo.RxDBLookupCombo4Enter(Sender: TObject);
 begin
   vID_PosicaoAnt := fDMCadProduto.cdsProduto_ConsumoID_POSICAO.AsInteger;
+end;
+
+procedure TfrmCadProduto_Consumo.prc_Inserir_Mat_Comb;
+begin
+  frmCadProduto_Consumo_Copiar := TfrmCadProduto_Consumo_Copiar.Create(self);
+  frmCadProduto_Consumo_Copiar.fDMCadProduto := fDMCadProduto;
+  frmCadProduto_Consumo_Copiar.ShowModal;
+  FreeAndNil(frmCadProduto_Consumo_Copiar);
 end;
 
 end.
