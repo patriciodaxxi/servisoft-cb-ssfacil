@@ -427,6 +427,8 @@ begin
 end;
 
 procedure TfrmConsEstoque_Mov.prc_Imprimir_Produto_Det;
+var
+  vArq : String;
 begin
   if not(fDMConsEstoque.cdsEstoque_Mov.Active) then
   begin
@@ -436,10 +438,25 @@ begin
   case ComboBox1.ItemIndex of
     0: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPRODUTO;TAMANHO;NOME_COR;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NOMEPESSOA;NUMNOTA';
     1: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPESSOA;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
+    3: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOME_CENTROCUSTO;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
   end;
   if (ckEstruturado.Checked) and (ComboBox1.ItemIndex < 2) then
     fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOME_GRUPO;'+fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames;
   SMDBGrid1.DisableScroll;
+  if ComboBox1.ItemIndex = 3 then
+  begin
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Estoque_CCusto.fr3';
+    if FileExists(vArq) then
+      fDMConsEstoque.frxReport1.Report.LoadFromFile(vArq)
+    else
+    begin
+      ShowMessage('Relatorio não localizado! ' + vArq);
+      Exit;
+    end;
+    fDMConsEstoque.frxReport1.variables['Opcao_Imp'] := QuotedStr(fDMConsEstoque.vDescOpcao_Rel);
+    fDMConsEstoque.frxReport1.ShowReport;
+  end
+  else
   if ComboBox1.ItemIndex = 2 then
   begin
     fRelEstoqueMov_Prod2                := TfRelEstoqueMov_Prod2.Create(Self);

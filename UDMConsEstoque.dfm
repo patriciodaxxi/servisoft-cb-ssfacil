@@ -269,12 +269,14 @@ object DMConsEstoque: TDMConsEstoque
       'SELECT EM.*, PES.NOME NOMEPESSOA, PRO.NOME NOMEPRODUTO, PRO.REFE' +
       'RENCIA, PES.CNPJ_CPF,'#13#10'CFOP.CODCFOP, GR.NOME NOME_GRUPO, COMB.no' +
       'me NOME_COR, LEST.nome NOME_LOCAL, '#13#10'LEST.cod_local, PRO.preco_c' +
-      'usto'#13#10'FROM ESTOQUE_MOV EM'#13#10'LEFT JOIN PESSOA PES ON (EM.ID_PESSOA' +
-      ' = PES.CODIGO)'#13#10'INNER JOIN PRODUTO PRO ON (EM.ID_PRODUTO = PRO.I' +
-      'D)'#13#10'LEFT JOIN TAB_CFOP CFOP ON (EM.ID_CFOP = CFOP.ID)'#13#10'LEFT JOIN' +
-      ' GRUPO GR ON (PRO.ID_GRUPO = GR.ID)'#13#10'LEFT JOIN combinacao COMB O' +
-      'N (EM.id_cor = COMB.id)'#13#10'LEFT JOIN local_estoque LEST ON (EM.id_' +
-      'local_estoque = LEST.id)'#13#10
+      'usto, CC.descricao NOME_CENTROCUSTO,'#13#10'(EM.vlr_unitario * EM.qtd2' +
+      ') VLR_TOTAL'#13#10'FROM ESTOQUE_MOV EM'#13#10'LEFT JOIN PESSOA PES ON (EM.ID' +
+      '_PESSOA = PES.CODIGO)'#13#10'INNER JOIN PRODUTO PRO ON (EM.ID_PRODUTO ' +
+      '= PRO.ID)'#13#10'LEFT JOIN TAB_CFOP CFOP ON (EM.ID_CFOP = CFOP.ID)'#13#10'LE' +
+      'FT JOIN GRUPO GR ON (PRO.ID_GRUPO = GR.ID)'#13#10'LEFT JOIN combinacao' +
+      ' COMB ON (EM.id_cor = COMB.id)'#13#10'LEFT JOIN local_estoque LEST ON ' +
+      '(EM.id_local_estoque = LEST.id)'#13#10'LEFT JOIN centrocusto CC ON EM.' +
+      'id_centrocusto = CC.ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -443,6 +445,16 @@ object DMConsEstoque: TDMConsEstoque
     object cdsEstoque_MovPRECO_CUSTO_TOTAL: TFloatField
       FieldName = 'PRECO_CUSTO_TOTAL'
       DisplayFormat = '0.000##'
+    end
+    object cdsEstoque_MovID_CENTROCUSTO: TIntegerField
+      FieldName = 'ID_CENTROCUSTO'
+    end
+    object cdsEstoque_MovNOME_CENTROCUSTO: TStringField
+      FieldName = 'NOME_CENTROCUSTO'
+      Size = 50
+    end
+    object cdsEstoque_MovVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
     end
   end
   object dsEstoque_Mov: TDataSource
@@ -1167,8 +1179,8 @@ object DMConsEstoque: TDMConsEstoque
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43284.725669537040000000
-    ReportOptions.LastChange = 43284.729814085650000000
+    ReportOptions.CreateDate = 42032.577038136600000000
+    ReportOptions.LastChange = 43487.008498310200000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -3232,7 +3244,7 @@ object DMConsEstoque: TDMConsEstoque
       'Unidade=Unidade')
     DataSource = dsmBalanco_Ver
     BCDToCurrency = False
-    Left = 688
+    Left = 680
     Top = 568
   end
   object sdsEstoque_Atual: TSQLDataSet
@@ -3449,5 +3461,60 @@ object DMConsEstoque: TDMConsEstoque
     DataSet = cdsEstoque_Em_Terc
     Left = 1096
     Top = 486
+  end
+  object frxEstoque_Mov: TfrxDBDataset
+    UserName = 'frxEstoque_Mov'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'FILIAL=FILIAL'
+      'ID_PRODUTO=ID_PRODUTO'
+      'ID_COR=ID_COR'
+      'DTMOVIMENTO=DTMOVIMENTO'
+      'TIPO_ES=TIPO_ES'
+      'TIPO_MOV=TIPO_MOV'
+      'NUMNOTA=NUMNOTA'
+      'ID_PESSOA=ID_PESSOA'
+      'VLR_UNITARIO=VLR_UNITARIO'
+      'QTD=QTD'
+      'PERC_ICMS=PERC_ICMS'
+      'PERC_IPI=PERC_IPI'
+      'VLR_DESCONTO=VLR_DESCONTO'
+      'UNIDADE=UNIDADE'
+      'QTD2=QTD2'
+      'TAMANHO=TAMANHO'
+      'PERC_TRIBUTACAO=PERC_TRIBUTACAO'
+      'VLR_FRETE=VLR_FRETE'
+      'ID_CFOP=ID_CFOP'
+      'ID_NOTA=ID_NOTA'
+      'SERIE=SERIE'
+      'UNIDADE_ORIG=UNIDADE_ORIG'
+      'VLR_UNITARIOORIG=VLR_UNITARIOORIG'
+      'QTD_ORIG=QTD_ORIG'
+      'VLR_DESCONTOORIG=VLR_DESCONTOORIG'
+      'MERCADO=MERCADO'
+      'NOMEPESSOA=NOMEPESSOA'
+      'NOMEPRODUTO=NOMEPRODUTO'
+      'REFERENCIA=REFERENCIA'
+      'QTD_ENT=QTD_ENT'
+      'QTD_SAI=QTD_SAI'
+      'CNPJ_CPF=CNPJ_CPF'
+      'CODCFOP=CODCFOP'
+      'NOME_GRUPO=NOME_GRUPO'
+      'NOME_COR=NOME_COR'
+      'ID_LOCAL_ESTOQUE=ID_LOCAL_ESTOQUE'
+      'NOME_LOCAL=NOME_LOCAL'
+      'COD_LOCAL=COD_LOCAL'
+      'NUM_LOTE_CONTROLE=NUM_LOTE_CONTROLE'
+      'GERAR_CUSTO=GERAR_CUSTO'
+      'PRECO_CUSTO=PRECO_CUSTO'
+      'PRECO_CUSTO_TOTAL=PRECO_CUSTO_TOTAL'
+      'ID_CENTROCUSTO=ID_CENTROCUSTO'
+      'NOME_CENTROCUSTO=NOME_CENTROCUSTO'
+      'VLR_TOTAL=VLR_TOTAL')
+    DataSource = dsEstoque_Mov
+    BCDToCurrency = False
+    Left = 736
+    Top = 568
   end
 end
