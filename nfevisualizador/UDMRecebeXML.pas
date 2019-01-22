@@ -2055,6 +2055,28 @@ type
     cdsOperacao_NotaMOSTRAR_CLI_TRIANG2: TStringField;
     cdsOperacao_NotaESTOQUE_DE_TERCEIRO: TStringField;
     cdsOperacao_NotaESTOQUE_EM_TERCEIRO: TStringField;
+    mParc: TClientDataSet;
+    mParcParcela: TIntegerField;
+    mParcNumDuplicata: TStringField;
+    mParcDtVencimento: TDateField;
+    mParcVlrVencimento: TFloatField;
+    mParcID_Conta: TIntegerField;
+    mParcID_TipoCobranca: TIntegerField;
+    dsmParc: TDataSource;
+    sdsContas: TSQLDataSet;
+    dspContas: TDataSetProvider;
+    cdsContas: TClientDataSet;
+    dsContas: TDataSource;
+    cdsContasID: TIntegerField;
+    cdsContasNOME: TStringField;
+    sdsTipoCobranca: TSQLDataSet;
+    dspTipoCobranca: TDataSetProvider;
+    cdsTipoCobranca: TClientDataSet;
+    dsTipoCobranca: TDataSource;
+    cdsTipoCobrancaID: TIntegerField;
+    cdsTipoCobrancaNOME: TStringField;
+    mParclkNomeConta: TStringField;
+    mParclkNomeTipoCobranca: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2179,6 +2201,8 @@ begin
   qParametros_OC.Open;
   qParametros_NTE.Open;
   qParametros_Custo.Open;
+  cdsContas.Open;
+  cdsTipoCobranca.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do

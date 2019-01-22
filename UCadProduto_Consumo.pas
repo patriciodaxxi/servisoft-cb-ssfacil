@@ -65,6 +65,8 @@ type
     procedure RxDBLookupCombo1Exit(Sender: TObject);
     procedure RxDBLookupCombo2Exit(Sender: TObject);
     procedure RxDBLookupCombo4Enter(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
   private
     { Private declarations }
     ffrmCadUnidade: TfrmCadUnidade;
@@ -93,7 +95,8 @@ var
 
 implementation
 
-uses rsDBUtils, USel_Produto, uUtilPadrao, UCadProduto_Consumo_Copiar;
+uses rsDBUtils, USel_Produto, uUtilPadrao, UCadProduto_Consumo_Copiar,
+  UCadPosicao;
 
 {$R *.dfm}
 
@@ -478,6 +481,23 @@ begin
   frmCadProduto_Consumo_Copiar.fDMCadProduto := fDMCadProduto;
   frmCadProduto_Consumo_Copiar.ShowModal;
   FreeAndNil(frmCadProduto_Consumo_Copiar);
+end;
+
+procedure TfrmCadProduto_Consumo.SpeedButton5Click(Sender: TObject);
+var
+  ffrmCadPosicao: TfrmCadPosicao;
+begin
+  ffrmCadPosicao := TfrmCadPosicao.Create(self);
+  ffrmCadPosicao.ShowModal;
+  FreeAndNil(ffrmCadPosicao);
+
+  SpeedButton6Click(sender);
+end;
+
+procedure TfrmCadProduto_Consumo.SpeedButton6Click(Sender: TObject);
+begin
+  fDMCadProduto.cdsPosicao.Close;
+  fDMCadProduto.cdsPosicao.Open;
 end;
 
 end.
