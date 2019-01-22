@@ -2224,7 +2224,6 @@ object DMCadDuplicata: TDMCadDuplicata
     end
   end
   object mCheque: TClientDataSet
-    Active = True
     Aggregates = <>
     FieldDefs = <
       item
@@ -2294,19 +2293,6 @@ object DMCadDuplicata: TDMCadDuplicata
     StoreDefs = True
     Left = 520
     Top = 480
-    Data = {
-      690100009619E0BD01000000180000000E00000000000300000069010A4E756D
-      5F43686571756504000100000000000849445F42616E636F0400010000000000
-      0849445F436F6E746104000100000000000A566C725F43686571756508000400
-      00000000094474426F6D50617261040006000000000007546974756C61720100
-      4900000001000557494454480200020028000C466F6E655F546974756C617201
-      004900000001000557494454480200020014000B526563656269646F5F446504
-      000100000000000D4E6F6D655F526563656269646F0100490000000100055749
-      4454480200020028000B456D697469646F5F506F720100490000000100055749
-      4454480200020001000949445F4368657175650400010000000000074167656E
-      63696101004900000001000557494454480200020005000E436F64436F6D7065
-      6E736163616F0400010000000000084E756D436F6E7461010049000000010005
-      5749445448020002000C000000}
     object mChequeNum_Cheque: TIntegerField
       FieldName = 'Num_Cheque'
     end
@@ -2386,7 +2372,6 @@ object DMCadDuplicata: TDMCadDuplicata
     Top = 144
   end
   object cdsBanco: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -3389,7 +3374,7 @@ object DMCadDuplicata: TDMCadDuplicata
     PrintOptions.PrintMode = pmSplit
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42671.419546678200000000
-    ReportOptions.LastChange = 43455.640830289350000000
+    ReportOptions.LastChange = 43487.394562731480000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -3401,8 +3386,8 @@ object DMCadDuplicata: TDMCadDuplicata
     Top = 423
     Datasets = <
       item
-        DataSet = frxDBDataset3
-        DataSetName = 'frxmDuplicata_Consulta'
+        DataSet = frxDBDataset2
+        DataSetName = 'frxmTitulos'
       end>
     Variables = <>
     Style = <>
@@ -3418,21 +3403,49 @@ object DMCadDuplicata: TDMCadDuplicata
       RightMargin = 3.000000000000000000
       TopMargin = 3.000000000000000000
       BottomMargin = 5.000000000000000000
-      object MasterData1: TfrxMasterData
+      object ReportTitle1: TfrxReportTitle
         FillType = ftBrush
         Height = 22.677180000000000000
         Top = 18.897650000000000000
         Width = 262.677335000000000000
-        DataSet = frxDBDataset3
-        DataSetName = 'frxmDuplicata_Consulta'
-        RowCount = 0
         object Memo1: TfrxMemoView
-          Left = 11.338590000000000000
+          Left = 31.181122500000000000
           Top = 3.779530000000000000
-          Width = 94.488250000000000000
+          Width = 200.315090000000000000
           Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
           Memo.UTF8 = (
-            '[frxmDuplicata_Consulta."NUMDUPLICATA"]')
+            'CARN'#195#352' DE PAGAMENTO')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 102.047310000000000000
+        Top = 102.047310000000000000
+        Width = 262.677335000000000000
+        DataSet = frxDBDataset2
+        DataSetName = 'frxmTitulos'
+        RowCount = 0
+        object Memo2: TfrxMemoView
+          Left = 11.338590000000000000
+          Top = 15.118120000000000000
+          Width = 204.094620000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8 = (
+            '[frxmTitulos."Dt_Vencimento"]')
+          ParentFont = False
         end
       end
     end

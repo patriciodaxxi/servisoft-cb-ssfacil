@@ -2842,6 +2842,24 @@ begin
     Exit
   else
   begin
+    fDMCadDuplicata.mTitulos.EmptyDataSet;
+    fDMCadDuplicata.cdsDuplicata_Consulta.First;
+    while not fDMCadDuplicata.cdsDuplicata_Consulta.Eof do
+    begin
+      fDMCadDuplicata.mTitulos.Insert;
+      fDMCadDuplicata.mTitulosDt_Vencimento.AsDateTime := fDMCadDuplicata.cdsDuplicata_ConsultaDTVENCIMENTO.AsDateTime;
+      fDMCadDuplicata.mTitulosID.AsInteger           := fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger;
+      fDMCadDuplicata.mTitulosID_Cliente.AsInteger   := fDMCadDuplicata.cdsDuplicata_ConsultaID_PESSOA.AsInteger;
+      fDMCadDuplicata.mTitulosNome_Cliente.AsString  := fDMCadDuplicata.cdsDuplicata_ConsultaNOME_PESSOA.AsString;
+      fDMCadDuplicata.mTitulosNum_Duplicata.AsString := fDMCadDuplicata.cdsDuplicata_ConsultaNUMDUPLICATA.AsString;
+      fDMCadDuplicata.mTitulosParcela.AsString       := fDMCadDuplicata.cdsDuplicata_ConsultaPARCELA.AsString;
+      fDMCadDuplicata.mTitulosVlr_Parcela.AsFloat    := fDMCadDuplicata.cdsDuplicata_ConsultaVLR_RESTANTE.AsCurrency;
+      fDMCadDuplicata.mTitulosCNPJ_Cliente.AsString  := fDMCadDuplicata.cdsDuplicata_ConsultaCNPJ_CPF.AsString;
+      fDMCadDuplicata.mTitulos.Post;
+      fDMCadDuplicata.cdsDuplicata_Consulta.Next;
+    end;
+
+    fDMCadDuplicata.vTipo_Rel := 'DE';
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\CarneDupl.fr3';
     if FileExists(vArq) then
       fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
