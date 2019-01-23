@@ -61,6 +61,9 @@ type
     Label29: TLabel;
     DBEdit11: TDBEdit;
     DBEdit12: TDBEdit;
+    pnlNomeProduto: TPanel;
+    Label22: TLabel;
+    DBEdit1: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
@@ -221,6 +224,7 @@ begin
     vQtd_Prod_Ant := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat))
   else
     vQtd_Prod_Ant := StrToFloat(FormatFloat('0.0000',0));
+  pnlNomeProduto.Visible := (fDMCadNotaFiscal.qParametros_PedPERMITE_ALT_NOMEPROD.AsString = 'S');
 
   Label58.Visible  := (fDMCadNotaFiscal.cdsParametrosTIPO_COMISSAO_PROD.AsString = 'I');
   DBEdit33.Visible := (fDMCadNotaFiscal.cdsParametrosTIPO_COMISSAO_PROD.AsString = 'I');
