@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Buttons, CurrEdit, ToolEdit, Mask, DBCtrls,
-  RXDBCtrl, UDMRecebeXML;
+  RXDBCtrl, UDMRecebeXML, RxLookup;
 
 type
   TfrmRecebeXML_Duplicatas = class(TForm)
@@ -13,12 +13,16 @@ type
     pnlRodape: TPanel;
     btnConfirmar: TBitBtn;
     btnCancelar: TBitBtn;
-    dbedtItem: TDBEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    DBEdit1: TDBEdit;
-    DBDateEdit1: TDBDateEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBDateEdit2: TDBDateEdit;
+    Label7: TLabel;
+    RxDBLookupCombo1: TRxDBLookupCombo;
+    Label8: TLabel;
+    RxDBLookupCombo2: TRxDBLookupCombo;
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
   private
@@ -45,7 +49,7 @@ begin
     exit;
   vFlagErro := False;
   try
-    fDMRecebeXML.cdsParcelas.Post;
+    fDMRecebeXML.mParc.Post;
   except
     on E: exception do
     begin
@@ -63,11 +67,9 @@ var
 begin
   Result   := True;
   vMsgErro := '';
-  if trim(fDMRecebeXML.cdsParcelasnDup.AsString) = '' then
-    vMsgErro := vMsgErro + #13 + '*** Número Duplicata não informado!';
-  if fDMRecebeXML.cdsParcelasdVenc.AsDateTime < 10 then
+  if fDMRecebeXML.mParcDtVencimento.AsDateTime < 10 then
     vMsgErro := vMsgErro + #13 + '*** Data Duplicata não informado!';
-  if fDMRecebeXML.cdsParcelasvDup.AsFloat = 0 then
+  if fDMRecebeXML.mParcVlrVencimento.AsFloat = 0 then
     vMsgErro := vMsgErro + #13 + '*** Valor Duplicata não informado!';
   if vMsgErro <> '' then
   begin
@@ -81,7 +83,7 @@ procedure TfrmRecebeXML_Duplicatas.btnCancelarClick(Sender: TObject);
 begin
   if MessageDlg('Deseja cancelar a inclusão/alteração?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
-  fDMRecebeXML.cdsParcelas.Cancel;
+  fDMRecebeXML.mParc.Cancel;
   Close;
 end;
 

@@ -54,6 +54,7 @@ begin
   vNum_Mapa    := fDMCadNecessidade_Compras.mMaterialNum_Mapa.AsInteger;
   vID_Material := fDMCadNecessidade_Compras.mMaterialID_Material.AsInteger;
   vID_Cor      := fDMCadNecessidade_Compras.mMaterialID_Cor.AsInteger;
+  fDMCadNecessidade_Compras.mMaterial.IndexFieldNames := 'ID_MATERIAL;ID_COR;TAMANHO';
   fDMCadNecessidade_Compras.mMaterial.First;
   while not fDMCadNecessidade_Compras.mMaterial.Eof do
   begin

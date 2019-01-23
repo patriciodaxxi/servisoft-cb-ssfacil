@@ -478,10 +478,15 @@ end;
 procedure TfrmCadOC_Itens.SpeedButton1Click(Sender: TObject);
 begin
   ffrmCadProduto := TfrmCadProduto.Create(self);
+  if RxDBLookupCombo4.Text <> '' then
+    ffrmCadProduto.vID_Produto_Local := RxDBLookupCombo4.KeyValue
+  else
+  if RxDBLookupCombo2.Text <> '' then
+    ffrmCadProduto.vID_Produto_Local := RxDBLookupCombo2.KeyValue
+  else
+    ffrmCadProduto.vID_Produto_Local := 0;
   ffrmCadProduto.ShowModal;
-
   FreeAndNil(ffrmCadProduto);
-
   SpeedButton4Click(sender);
 end;
 

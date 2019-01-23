@@ -1,6 +1,6 @@
 object frmCadProduto_Consumo: TfrmCadProduto_Consumo
-  Left = 407
-  Top = 179
+  Left = 266
+  Top = 196
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro dos Itens'
@@ -286,7 +286,7 @@ object frmCadProduto_Consumo: TfrmCadProduto_Consumo
       Height = 22
       Hint = 'Abre a tela de Produtos'
       Caption = '...'
-      OnClick = SpeedButton1Click
+      OnClick = SpeedButton5Click
     end
     object SpeedButton6: TSpeedButton
       Left = 463
@@ -336,7 +336,7 @@ object frmCadProduto_Consumo: TfrmCadProduto_Consumo
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEFFFFFFFFFFFFFFFF
         FFFEFEFFFFFFFFFFFFFF}
       Margin = 0
-      OnClick = SpeedButton4Click
+      OnClick = SpeedButton6Click
     end
     object DBEdit2: TDBEdit
       Left = 150
@@ -492,7 +492,6 @@ object frmCadProduto_Consumo: TfrmCadProduto_Consumo
       LookupDisplay = 'NOME'
       LookupSource = dmCadProduto.dsSetor
       TabOrder = 7
-      OnExit = RxDBLookupCombo4Exit
     end
     object DBCheckBox1: TDBCheckBox
       Left = 570

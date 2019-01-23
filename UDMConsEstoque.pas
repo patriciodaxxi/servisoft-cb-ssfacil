@@ -563,6 +563,10 @@ type
     cdsEstoque_Em_TercNOME_COMBINACAO: TStringField;
     cdsEstoque_Em_TercNOME_PRODUTO: TStringField;
     cdsEstoque_Em_TercREFERENCIA: TStringField;
+    cdsEstoque_MovID_CENTROCUSTO: TIntegerField;
+    cdsEstoque_MovNOME_CENTROCUSTO: TStringField;
+    frxEstoque_Mov: TfrxDBDataset;
+    cdsEstoque_MovVLR_TOTAL: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

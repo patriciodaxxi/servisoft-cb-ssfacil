@@ -55,6 +55,8 @@ type
     Edit3: TEdit;
     Shape3: TShape;
     Label9: TLabel;
+    Shape4: TShape;
+    Label10: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -557,6 +559,9 @@ begin
 
   fDMCadPedido.cdsPedido_ItensREFERENCIA.AsString := fDMCadNecessidade_Compras.qMaterialREFERENCIA.AsString;
   fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadNecessidade_Compras.qMaterialNOME.AsString;
+  if trim(fDMCadPedido.cdsPedido_ItensTAMANHO.AsString) <> '' then
+    fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString + ' TAM. ' + fDMCadPedido.cdsPedido_ItensTAMANHO.AsString;
+
   fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000', fDMCadNecessidade_Compras.mMaterialVlr_Unitario.AsFloat));
   fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00', fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat * fDMCadPedido.cdsPedido_ItensQTD.AsFloat));
   fDMCadPedido.cdsPedido_ItensID_NCM.AsInteger := fDMCadNecessidade_Compras.qMaterialID_NCM.AsInteger;
@@ -672,8 +677,12 @@ begin
   else
   if (fDMCadNecessidade_Compras.mMaterialNum_OC.AsInteger > 0) or (fDMCadNecessidade_Compras.mMaterialID_MovEstoque_Res.AsInteger > 0) then
     Background := clMoneyGreen
-  else if not (fDMCadNecessidade_Compras.mMaterialMaterial_OK.AsBoolean) and not (fDMCadNecessidade_Compras.mMaterial.IsEmpty) then
+  else
+  if not (fDMCadNecessidade_Compras.mMaterialMaterial_OK.AsBoolean) and not (fDMCadNecessidade_Compras.mMaterial.IsEmpty) then
     Background := clSilver
+  else
+  if (fDMCadNecessidade_Compras.mMaterialGerar_OC.AsBoolean) and (fDMCadNecessidade_Compras.mMaterialID_Fornecedor.AsInteger <= 0) then
+    Background := $0088C4FF
   else
   if fDMCadNecessidade_Compras.mMaterialGerar_OC.AsBoolean then
     Background := $004AFFFF;

@@ -24,7 +24,7 @@ object frmRecebeXML: TfrmRecebeXML
     Top = 146
     Width = 1035
     Height = 507
-    ActivePage = TabSheet4
+    ActivePage = tsDuplicatasDeducoes
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -3574,27 +3574,13 @@ object frmRecebeXML: TfrmRecebeXML
         Height = 469
         Align = alClient
         TabOrder = 0
-        object dgDuplicatas: TDBGrid
-          Left = 1
-          Top = 42
-          Width = 1015
-          Height = 426
-          Align = alClient
-          DataSource = DMRecebeXML.dsParcelas
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-        end
         object Panel11: TPanel
           Left = 1
           Top = 1
           Width = 1015
           Height = 41
           Align = alTop
-          TabOrder = 1
+          TabOrder = 0
           object BitBtn6: TBitBtn
             Left = 45
             Top = 5
@@ -3668,7 +3654,7 @@ object frmRecebeXML: TfrmRecebeXML
               E4EDFDFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           end
           object BitBtn7: TBitBtn
-            Left = 225
+            Left = 168
             Top = 5
             Width = 121
             Height = 33
@@ -3738,7 +3724,7 @@ object frmRecebeXML: TfrmRecebeXML
               FEFFFFFFFFFFFFFFFFFFFFFFF9FEFE000000}
           end
           object BitBtn8: TBitBtn
-            Left = 405
+            Left = 292
             Top = 5
             Width = 121
             Height = 33
@@ -3809,6 +3795,107 @@ object frmRecebeXML: TfrmRecebeXML
               FFFFFFFFFFFFFDF9F9EAA8A59F5C5A5D1C1E250000100000111F1D22585B539F
               A29CF5F6EEFFFFFDFFFFFFFEFFFFFDFEFCFCFBFEFFFEFCFBFFFF}
           end
+        end
+        object SMDBGrid2: TSMDBGrid
+          Left = 1
+          Top = 42
+          Width = 1015
+          Height = 426
+          Align = alClient
+          Ctl3D = False
+          DataSource = DMRecebeXML.dsmParc
+          Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentCtl3D = False
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Flat = True
+          BandsFont.Charset = DEFAULT_CHARSET
+          BandsFont.Color = clWindowText
+          BandsFont.Height = -11
+          BandsFont.Name = 'MS Sans Serif'
+          BandsFont.Style = []
+          Groupings = <>
+          GridStyle.Style = gsCustom
+          GridStyle.OddColor = clWindow
+          GridStyle.EvenColor = clWindow
+          TitleHeight.PixelCount = 24
+          FooterColor = clBtnFace
+          ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+          RegistryKey = 'Software\Scalabium'
+          RegistrySection = 'SMDBGrid'
+          WidthOfIndicator = 11
+          DefaultRowHeight = 17
+          ScrollBars = ssHorizontal
+          ColCount = 8
+          RowCount = 2
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'NumDuplicata'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'N'#186' Duplicata'
+              Title.Color = 16777130
+              Width = 125
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DtVencimento'
+              Title.Alignment = taCenter
+              Title.Caption = 'Data'
+              Title.Color = 16777130
+              Width = 93
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VlrVencimento'
+              Title.Alignment = taCenter
+              Title.Caption = 'Valor'
+              Title.Color = 16777130
+              Width = 121
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_Conta'
+              Title.Alignment = taCenter
+              Title.Caption = 'ID Conta'
+              Title.Color = 16777130
+              Width = 56
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'lkNomeConta'
+              Title.Alignment = taCenter
+              Title.Caption = 'Nome Conta'
+              Title.Color = 16777130
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_TipoCobranca'
+              Title.Alignment = taCenter
+              Title.Caption = 'ID Tipo Cobran'#231'a'
+              Title.Color = 16777130
+              Width = 78
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'lkNomeTipoCobranca'
+              Title.Alignment = taCenter
+              Title.Caption = 'Nome Tipo Cobran'#231'a'
+              Title.Color = 16777130
+              Width = 182
+              Visible = True
+            end>
         end
       end
     end

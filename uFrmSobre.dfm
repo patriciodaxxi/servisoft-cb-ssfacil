@@ -16,8 +16,8 @@ object frmSobre: TfrmSobre
   OnClose = FormClose
   OnCreate = FormCreate
   DesignSize = (
-    465
-    372)
+    473
+    379)
   PixelsPerInch = 96
   TextHeight = 13
   object Image1: TImage

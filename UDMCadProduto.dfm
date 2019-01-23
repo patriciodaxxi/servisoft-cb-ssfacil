@@ -2038,19 +2038,20 @@ object dmCadProduto: TdmCadProduto
       'PO.COD_PRINCIPAL, LI.AUTOR, LI.DTLANCAMENTO, LI.PAGINA, LI.SELO,' +
       ' LI.CICLO, PRO.QTD_EMBALAGEM, PRO.QTD_PECA_EMB,'#13#10'       PRO.LARG' +
       'URA, PRO.ALTURA,PRO.ESPESSURA, PRO.TAM_CALC, PRO.TIPO_PRODUCAO, ' +
-      ' PRO.NOME_MODELO, '#13#10'       case'#13#10'         when (PRO.TIPO_REG = '#39 +
-      'P'#39') then '#39'Produto'#39#13#10'         when (PRO.TIPO_REG = '#39'M'#39') then '#39'Mat' +
-      'erial'#39#13#10'         when (PRO.TIPO_REG = '#39'N'#39') then '#39'Outros'#39#13#10'      ' +
-      '   when (PRO.TIPO_REG = '#39'C'#39') then '#39'Material Consumo'#39#13#10'         w' +
-      'hen (PRO.TIPO_REG = '#39'I'#39') then '#39'Imobilizado'#39#13#10'         when (PRO.' +
-      'TIPO_REG = '#39'S'#39') then '#39'Semiacabado'#39#13#10'         else '#39#39#13#10'       end' +
-      ' as TIPO_REG_DESCRICAO,'#13#10#13#10'       (select sum(E2.QTD) QTDGERAL'#13#10 +
-      '        from ESTOQUE_ATUAL E2'#13#10'        where E2.ID_PRODUTO = PRO' +
-      '.ID) QTD_ESTOQUE'#13#10'from PRODUTO PRO'#13#10'left join TAB_NCM NCM on (PR' +
-      'O.ID_NCM = NCM.ID)'#13#10'left join MARCA on (PRO.ID_MARCA = MARCA.ID)' +
-      #13#10'left join GRUPO on (PRO.ID_GRUPO = GRUPO.ID)'#13#10'left join PRODUT' +
-      'O_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left join PRODUTO_LIVRO LI on ' +
-      '(PRO.ID = LI.ID)  '
+      ' PRO.NOME_MODELO, FORN.NOME NOME_FORNECEDOR,'#13#10'       case'#13#10'     ' +
+      '    when (PRO.TIPO_REG = '#39'P'#39') then '#39'Produto'#39#13#10'         when (PRO' +
+      '.TIPO_REG = '#39'M'#39') then '#39'Material'#39#13#10'         when (PRO.TIPO_REG = ' +
+      #39'N'#39') then '#39'Outros'#39#13#10'         when (PRO.TIPO_REG = '#39'C'#39') then '#39'Mat' +
+      'erial Consumo'#39#13#10'         when (PRO.TIPO_REG = '#39'I'#39') then '#39'Imobili' +
+      'zado'#39#13#10'         when (PRO.TIPO_REG = '#39'S'#39') then '#39'Semiacabado'#39#13#10'  ' +
+      '       else '#39#39#13#10'       end as TIPO_REG_DESCRICAO,'#13#10#13#10'       (sel' +
+      'ect sum(E2.QTD) QTDGERAL'#13#10'        from ESTOQUE_ATUAL E2'#13#10'       ' +
+      ' where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE'#13#10'from PRODUTO PRO'#13#10'le' +
+      'ft join TAB_NCM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left join MARCA on' +
+      ' (PRO.ID_MARCA = MARCA.ID)'#13#10'left join GRUPO on (PRO.ID_GRUPO = G' +
+      'RUPO.ID)'#13#10'left join PRODUTO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left' +
+      ' join PRODUTO_LIVRO LI on (PRO.ID = LI.ID)  '#13#10'left join PESSOA F' +
+      'ORN'#13#10'on pro.id_fornecedor = forn.codigo'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -2304,6 +2305,10 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_ConsultaNOME_MODELO: TStringField
       FieldName = 'NOME_MODELO'
       Size = 100
+    end
+    object cdsProduto_ConsultaNOME_FORNECEDOR: TStringField
+      FieldName = 'NOME_FORNECEDOR'
+      Size = 60
     end
   end
   object dsProduto_Consulta: TDataSource
@@ -2560,6 +2565,11 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'NOME'
       Size = 50
     end
+    object sdsGradeGRADE_REF: TStringField
+      FieldName = 'GRADE_REF'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspGrade: TDataSetProvider
     DataSet = sdsGrade
@@ -2580,6 +2590,11 @@ object dmCadProduto: TdmCadProduto
     object cdsGradeNOME: TStringField
       FieldName = 'NOME'
       Size = 50
+    end
+    object cdsGradeGRADE_REF: TStringField
+      FieldName = 'GRADE_REF'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsGrade: TDataSource

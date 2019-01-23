@@ -331,13 +331,13 @@ type
     CurrencyEdit2: TCurrencyEdit;
     NxButton1: TNxButton;
     Panel10: TPanel;
-    dgDuplicatas: TDBGrid;
     Panel11: TPanel;
     BitBtn6: TBitBtn;
     BitBtn7: TBitBtn;
     BitBtn8: TBitBtn;
     Label133: TLabel;
     RxDBLookupCombo9: TRxDBLookupCombo;
+    SMDBGrid2: TSMDBGrid;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -408,6 +408,7 @@ type
 
     procedure Le_cdsDetalhe;
     procedure Grava_mItensNota;
+    procedure prc_Grava_mParc;
 
     procedure Procura_DadosCabecalho;
     procedure Busca_SitTrib(Codigo: String);
@@ -772,6 +773,7 @@ end;
 procedure TfrmRecebeXML.Le_cdsDetalhe;
 begin
   fDMRecebeXML.mItensNota.EmptyDataSet;
+  fDMRecebeXML.mParc.EmptyDataSet;
 
   fDMRecebeXML.cdsDetalhe.First;
   while not fDMRecebeXML.cdsDetalhe.Eof do
@@ -780,6 +782,16 @@ begin
 
     fDMRecebeXML.cdsDetalhe.Next;
   end;
+
+
+  fDMRecebeXML.cdsParcelas.First;
+  while not fDMRecebeXML.cdsParcelas.Eof do
+  begin
+    prc_Grava_mParc;
+
+    fDMRecebeXML.cdsParcelas.Next;
+  end;
+
 end;
 
 procedure TfrmRecebeXML.Grava_mItensNota;
@@ -2360,7 +2372,8 @@ begin
     fDMRecebeXML.cdsNotaFiscal.Post;
 
   try
-    fDMRecebeXML.cdsParcelas.First;
+    //22/01/2019  Foi alterado para buscar da tabela temporária
+    {fDMRecebeXML.cdsParcelas.First;
     while not fDMRecebeXML.cdsParcelas.Eof do
     begin
       vItemAux := vItemAux + 1;
@@ -2378,6 +2391,25 @@ begin
       vVlrParc := StrtoFloat(FormatFloat('0.00',vVlrParc + fDMRecebeXML.cdsNotaFiscal_ParcVLR_VENCIMENTO.AsFloat));
 
       fDMRecebeXML.cdsParcelas.Next;
+    end;}
+
+    fDMRecebeXML.mParc.First;
+    while not fDMRecebeXML.mParc.Eof do
+    begin
+      vItemAux := vItemAux + 1;
+
+      fDMRecebeXML.cdsNotaFiscal_Parc.Insert;
+      fDMRecebeXML.cdsNotaFiscal_ParcID.AsInteger              := fDMRecebeXML.cdsNotaFiscalID.AsInteger;
+      fDMRecebeXML.cdsNotaFiscal_ParcITEM.AsInteger            := vItemAux;
+      fDMRecebeXML.cdsNotaFiscal_ParcDTVENCIMENTO.AsDateTime   := fDMRecebeXML.mParcDtVencimento.AsDateTime;
+      fDMRecebeXML.cdsNotaFiscal_ParcVLR_VENCIMENTO.AsFloat    := StrtoFloat(FormatFloat('0.00',fDMRecebeXML.mParcVlrVencimento.AsFloat));
+      if fDMRecebeXML.mParcID_Conta.AsInteger > 0 then
+        fDMRecebeXML.cdsNotaFiscal_ParcID_CONTA.AsInteger := fDMRecebeXML.mParcID_Conta.AsInteger;
+      if fDMRecebeXML.mParcID_TipoCobranca.AsInteger > 0 then
+        fDMRecebeXML.cdsNotaFiscal_ParcID_TIPOCOBRANCA.AsInteger := fDMRecebeXML.mParcID_TipoCobranca.AsInteger;
+      fDMRecebeXML.cdsNotaFiscal_Parc.Post;
+      vVlrParc := StrtoFloat(FormatFloat('0.00',vVlrParc + fDMRecebeXML.cdsNotaFiscal_ParcVLR_VENCIMENTO.AsFloat));
+      fDMRecebeXML.mParc.Next;
     end;
 
     if fDMRecebeXML.cdsNotaFiscal.State in [dsBrowse] then
@@ -2614,7 +2646,8 @@ begin
     vFilial_Local := RxDBLookupCombo6.KeyValue;
   end;
   //*******
-  if fDMRecebeXML.cdsParcelas.IsEmpty then
+  //if fDMRecebeXML.cdsParcelas.IsEmpty then
+  if fDMRecebeXML.mParc.IsEmpty then
   begin
     if MessageDlg('Nota sem Financeiro, deseja continuar?',mtConfirmation,[mbNo,mbYes],0)=mrNo then
       Exit;
@@ -3784,11 +3817,17 @@ begin
   if fDMRecebeXML.mItensNotaUsa_Cor.AsString = 'S' then
     fDMRecebeXML.mItensNotaID_Cor.AsInteger := vID_Cor_Pos;
   fDMRecebeXML.mItensNotaUsa_Preco_Cor.AsString      := vUsa_Preco_Cor_Pos;
-  if fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger,([LocaseInsensitive])) then
+
+  //22/01/2019 foi incluido o if para ler o produto somente quando for associado
+  if ((fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and (ckAssociar.Checked)) or
+     (trim(fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString) <> 'S') then
   begin
-    fDMRecebeXML.mItensNotaPerc_Margem.AsFloat := fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat;
-    fDMRecebeXML.mItensNotaID_Grupo.AsInteger  := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
-    prc_Monta_Grupo('N');
+    if fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger,([LocaseInsensitive])) then
+    begin
+      fDMRecebeXML.mItensNotaPerc_Margem.AsFloat := fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat;
+      fDMRecebeXML.mItensNotaID_Grupo.AsInteger  := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
+      prc_Monta_Grupo('N');
+    end;
   end;
   fDMRecebeXML.mItensNota.Post;
   prc_Mostrar_Cor;
@@ -3887,9 +3926,10 @@ end;
 
 procedure TfrmRecebeXML.BitBtn7Click(Sender: TObject);
 begin
-  if fDMRecebeXML.cdsParcelas.IsEmpty then
+  //if fDMRecebeXML.cdsParcelas.IsEmpty then
+  if fDMRecebeXML.mParc.IsEmpty then
     exit;
-  fDMRecebeXML.cdsParcelas.Edit;
+  fDMRecebeXML.mParc.Edit;
   ffrmRecebeXML_Duplicatas := TfrmRecebeXML_Duplicatas.Create(self);
   ffrmRecebeXML_Duplicatas.fDMRecebeXML := fDMRecebeXML;
   ffrmRecebeXML_Duplicatas.ShowModal;
@@ -3898,11 +3938,23 @@ end;
 
 procedure TfrmRecebeXML.BitBtn8Click(Sender: TObject);
 begin
-  if fDMRecebeXML.cdsParcelas.IsEmpty then
+  //if fDMRecebeXML.cdsParcelas.IsEmpty then
+  if fDMRecebeXML.mParc.IsEmpty then
     exit;
   if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
-  fDMRecebeXML.cdsParcelas.Delete;
+  fDMRecebeXML.mParc.Delete;
+end;
+
+procedure TfrmRecebeXML.prc_Grava_mParc;
+begin
+  fDMRecebeXML.mParc.Insert;
+  fDMRecebeXML.mParcNumDuplicata.AsString   := fDMRecebeXML.cdsParcelasnDup.AsString;
+  fDMRecebeXML.mParcDtVencimento.AsDateTime := fDMRecebeXML.cdsParcelasdVenc.AsDateTime;
+  fDMRecebeXML.mParcVlrVencimento.AsFloat   := fDMRecebeXML.cdsParcelasvDup.AsFloat;
+  fDMRecebeXML.mParcID_Conta.Clear;
+  fDMRecebeXML.mParcID_TipoCobranca.Clear;
+  fDMRecebeXML.mParc.Post;
 end;
 
 end.

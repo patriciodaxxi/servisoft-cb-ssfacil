@@ -17,6 +17,8 @@ procedure Excluir_Duplicata_Ped(ID : Integer);
 procedure prc_Excluir_Item_Ped(fDMCadPedido: TDMCadPedido);
 procedure prc_Gravar_cdsHist_Senha(fDMCadPedido: TDMCadPedido);
 procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
+procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido ; ID_Cor, Item, Item_Original : Integer ; Preco, Perc_IPI, Perc_ICMS : Real ;
+                               DtEntrega : TDateTime ; Carimbo,Caixinha : String);
 
 function fnc_Existe_OC(fDMCadPedido: TDMCadPedido): Integer;
 
@@ -816,6 +818,63 @@ begin
     end;
   end;
 
+end;
+
+procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido ; ID_Cor, Item, Item_Original : Integer ; Preco, Perc_IPI, Perc_ICMS : Real ;
+                               DtEntrega : TDateTime ; Carimbo,Caixinha : String);
+begin
+  fDMCadPedido.cdsPedido_Itens.First;
+  while not fDMCadPedido.cdsPedido_Itens.Eof do
+  begin
+    if (fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger = Item_Original) and (fDMCadPedido.cdsPedido_ItensITEM.AsInteger <> Item) then
+    begin
+      if fDMCadPedido.cdsPedido_ItensID_COR.AsInteger <> ID_Cor then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensID_COR.AsInteger := ID_Cor;
+      end;
+      if StrToFloat(FormatFloat('0.000000',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat)) <> StrToFloat(FormatFloat('0.000000',Preco)) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.000000',Preco));
+      end;
+      if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat)) <> StrToFloat(FormatFloat('0.00',Perc_IPI)) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat := StrToFloat(FormatFloat('0.00',Perc_IPI));
+      end;
+      if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat)) <> StrToFloat(FormatFloat('0.00',Perc_ICMS)) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat := StrToFloat(FormatFloat('0.00',Perc_ICMS));
+      end;
+      if fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime <> DtEntrega then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensDTENTREGA.AsFloat := DtEntrega;
+      end;
+      if trim(fDMCadPedido.cdsPedido_ItensCARIMBO.AsString) <> trim(Carimbo) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensCARIMBO.AsString := Carimbo;
+      end;
+      if trim(fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString) <> trim(Caixinha) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString := Caixinha;
+      end;
+      if (fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+        fDMCadPedido.cdsPedido_Itens.Post;
+    end;
+    fDMCadPedido.cdsPedido_Itens.Next;
+  end;
 end;
 
 end.

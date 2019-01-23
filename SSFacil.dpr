@@ -773,7 +773,8 @@ uses
   UCadProduto_Comb_AltCor in 'UCadProduto_Comb_AltCor.pas' {frmCadProduto_Comb_AltCor},
   UConsEstoqueTerc in 'UConsEstoqueTerc.pas' {frmConsEstoqueTerc},
   UDMEstoqueTerc in 'UDMEstoqueTerc.pas' {DMEstoqueTerc: TDataModule},
-  UAjuste_OperacaoNota in 'UAjuste_OperacaoNota.pas' {frmAjuste_OperacaoNota};
+  UAjuste_OperacaoNota in 'UAjuste_OperacaoNota.pas' {frmAjuste_OperacaoNota},
+  UCadProduto_Consumo_Copiar in 'UCadProduto_Consumo_Copiar.pas' {frmCadProduto_Consumo_Copiar};
 
 {$R *.res}
 

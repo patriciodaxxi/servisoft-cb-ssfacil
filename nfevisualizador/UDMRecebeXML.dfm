@@ -13,12 +13,12 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 416
-    Top = 24
+    Top = 7
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
     Left = 456
-    Top = 24
+    Top = 7
   end
   object cdsCFOP: TClientDataSet
     Aggregates = <>
@@ -26,7 +26,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspCFOP'
     Left = 496
-    Top = 24
+    Top = 7
     object cdsCFOPID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -153,7 +153,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsCFOP: TDataSource
     DataSet = cdsCFOP
     Left = 544
-    Top = 24
+    Top = 7
   end
   object XMLTransformProvider1: TXMLTransformProvider
     TransformRead.TransformationFile = 'C:\Delphi7\SSFacil\EXE\nfe_v2.00_ToDp.xtr'
@@ -162,14 +162,14 @@ object DMRecebeXML: TDMRecebeXML
       '482503669.xml'
     CacheData = True
     Left = 408
-    Top = 248
+    Top = 288
   end
   object cdsCabecalho: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'XMLTransformProvider1'
-    Left = 424
-    Top = 304
+    Left = 416
+    Top = 320
     object cdsCabecalhoversao: TStringField
       FieldName = 'versao'
       Required = True
@@ -810,8 +810,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsCabecalho: TDataSource
     DataSet = cdsCabecalho
-    Left = 496
-    Top = 304
+    Left = 440
+    Top = 320
   end
   object cdsNFeRef: TClientDataSet
     Aggregates = <>
@@ -5915,7 +5915,7 @@ object DMRecebeXML: TDMRecebeXML
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 424
-    Top = 80
+    Top = 52
     object sdsEstoque_MovID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6016,7 +6016,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsEstoque_Mov
     OnUpdateError = dspEstoque_MovUpdateError
     Left = 464
-    Top = 80
+    Top = 52
   end
   object cdsEstoque_Mov: TClientDataSet
     Aggregates = <>
@@ -6024,7 +6024,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspEstoque_Mov'
     Left = 504
-    Top = 80
+    Top = 52
     object cdsEstoque_MovID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6124,7 +6124,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsEstoque_Mov: TDataSource
     DataSet = cdsEstoque_Mov
     Left = 552
-    Top = 80
+    Top = 52
   end
   object sdsTab_CSTICMS: TSQLDataSet
     NoMetadata = True
@@ -6134,12 +6134,12 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 472
-    Top = 146
+    Top = 95
   end
   object dspTab_CSTICMS: TDataSetProvider
     DataSet = sdsTab_CSTICMS
     Left = 504
-    Top = 146
+    Top = 95
   end
   object cdsTab_CSTICMS: TClientDataSet
     Aggregates = <>
@@ -6147,7 +6147,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspTab_CSTICMS'
     Left = 544
-    Top = 146
+    Top = 95
     object cdsTab_CSTICMSID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6177,7 +6177,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsTab_CSTICMS: TDataSource
     DataSet = cdsTab_CSTICMS
     Left = 584
-    Top = 146
+    Top = 95
   end
   object qUnidade: TSQLQuery
     MaxBlobSize = -1
@@ -6398,7 +6398,7 @@ object DMRecebeXML: TDMRecebeXML
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 464
-    Top = 202
+    Top = 141
     object sdsNCMID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6428,7 +6428,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsNCM
     OnUpdateError = dspNCMUpdateError
     Left = 496
-    Top = 202
+    Top = 141
   end
   object cdsNCM: TClientDataSet
     Aggregates = <>
@@ -6437,7 +6437,7 @@ object DMRecebeXML: TDMRecebeXML
     ProviderName = 'dspNCM'
     OnNewRecord = cdsNCMNewRecord
     Left = 536
-    Top = 202
+    Top = 141
     object cdsNCMID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6466,7 +6466,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsNCM: TDataSource
     DataSet = cdsNCM
     Left = 576
-    Top = 202
+    Top = 141
   end
   object sdsUnidade: TSQLDataSet
     NoMetadata = True
@@ -8125,12 +8125,12 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 656
+    Left = 696
     Top = 208
   end
   object dspSitTrib_CF: TDataSetProvider
     DataSet = sdsSitTrib_CF
-    Left = 688
+    Left = 728
     Top = 208
   end
   object cdsSitTrib_CF: TClientDataSet
@@ -8138,7 +8138,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspSitTrib_CF'
-    Left = 720
+    Left = 760
     Top = 208
     object cdsSitTrib_CFID: TIntegerField
       FieldName = 'ID'
@@ -8154,7 +8154,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsSitTrib_CF: TDataSource
     DataSet = cdsSitTrib_CF
-    Left = 752
+    Left = 792
     Top = 208
   end
   object qProduto_Uni2: TSQLQuery
@@ -8685,8 +8685,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM PARAMETROS_CUSTO'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 271
+    Left = 880
+    Top = 335
     object qParametros_CustoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8877,5 +8877,167 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = cdsOperacao_Nota
     Left = 1144
     Top = 18
+  end
+  object mParc: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Parcela'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NumDuplicata'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'DtVencimento'
+        DataType = ftDate
+      end
+      item
+        Name = 'VlrVencimento'
+        DataType = ftFloat
+      end
+      item
+        Name = 'ID_Conta'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_TipoCobranca'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 568
+    Top = 320
+    Data = {
+      9F0000009619E0BD0100000018000000060000000000030000009F0007506172
+      63656C6104000100000000000C4E756D4475706C696361746101004900000001
+      00055749445448020002003C000C447456656E63696D656E746F040006000000
+      00000D566C7256656E63696D656E746F08000400000000000849445F436F6E74
+      6104000100000000000F49445F5469706F436F6272616E636104000100000000
+      000000}
+    object mParcParcela: TIntegerField
+      FieldName = 'Parcela'
+    end
+    object mParcNumDuplicata: TStringField
+      FieldName = 'NumDuplicata'
+      Size = 60
+    end
+    object mParcDtVencimento: TDateField
+      FieldName = 'DtVencimento'
+    end
+    object mParcVlrVencimento: TFloatField
+      FieldName = 'VlrVencimento'
+    end
+    object mParcID_Conta: TIntegerField
+      FieldName = 'ID_Conta'
+    end
+    object mParcID_TipoCobranca: TIntegerField
+      FieldName = 'ID_TipoCobranca'
+    end
+    object mParclkNomeConta: TStringField
+      FieldKind = fkLookup
+      FieldName = 'lkNomeConta'
+      LookupDataSet = cdsContas
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_Conta'
+      Size = 40
+      Lookup = True
+    end
+    object mParclkNomeTipoCobranca: TStringField
+      FieldKind = fkLookup
+      FieldName = 'lkNomeTipoCobranca'
+      LookupDataSet = cdsTipoCobranca
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_TipoCobranca'
+      Size = 60
+      Lookup = True
+    end
+  end
+  object dsmParc: TDataSource
+    DataSet = mParc
+    Left = 600
+    Top = 320
+  end
+  object sdsContas: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, NOME'#13#10'FROM CONTAS'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 464
+    Top = 186
+  end
+  object dspContas: TDataSetProvider
+    DataSet = sdsContas
+    OnUpdateError = dspNCMUpdateError
+    Left = 496
+    Top = 186
+  end
+  object cdsContas: TClientDataSet
+    Active = True
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspContas'
+    Left = 536
+    Top = 186
+    object cdsContasID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsContasNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+  end
+  object dsContas: TDataSource
+    DataSet = cdsContas
+    Left = 576
+    Top = 186
+  end
+  object sdsTipoCobranca: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, NOME'#13#10'FROM tipocobranca'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 464
+    Top = 231
+  end
+  object dspTipoCobranca: TDataSetProvider
+    DataSet = sdsTipoCobranca
+    OnUpdateError = dspNCMUpdateError
+    Left = 496
+    Top = 231
+  end
+  object cdsTipoCobranca: TClientDataSet
+    Active = True
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspContas'
+    Left = 536
+    Top = 231
+    object cdsTipoCobrancaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTipoCobrancaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+  end
+  object dsTipoCobranca: TDataSource
+    DataSet = cdsTipoCobranca
+    Left = 576
+    Top = 231
   end
 end

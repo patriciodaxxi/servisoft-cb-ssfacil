@@ -343,6 +343,7 @@ function TdmDatabase.verificaLiberacao: Boolean;
 var
   vData: String;
   vAux : String;
+  vMsgLib : WideString;
 begin
   Result := True;
 

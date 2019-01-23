@@ -27,6 +27,11 @@ object DMCadGrade: TDMCadGrade
       FixedChar = True
       Size = 1
     end
+    object sdsGradeGRADE_REF: TStringField
+      FieldName = 'GRADE_REF'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspGrade: TDataSetProvider
     DataSet = sdsGrade
@@ -57,6 +62,11 @@ object DMCadGrade: TDMCadGrade
     end
     object cdsGradesdsGrade_Itens: TDataSetField
       FieldName = 'sdsGrade_Itens'
+    end
+    object cdsGradeGRADE_REF: TStringField
+      FieldName = 'GRADE_REF'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsGrade: TDataSource

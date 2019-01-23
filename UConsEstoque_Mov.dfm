@@ -480,7 +480,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 32
+        ColCount = 33
         RowCount = 2
         Columns = <
           item
@@ -711,6 +711,14 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Produto'
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME_CENTROCUSTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Centro Custo'
+            Width = 186
+            Visible = True
           end>
       end
       object RzGroupBox2: TRzGroupBox
@@ -828,7 +836,8 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
           Items.Strings = (
             'Produto'
             'Cliente/Fornecedor'
-            'Conforme ordenado na tabela abaixo')
+            'Conforme ordenado na tabela abaixo'
+            'Centro de Custo')
         end
         object ckEstruturado: TCheckBox
           Left = 376

@@ -1877,6 +1877,9 @@ type
     cdsProduto_Comb_MatclUsa_Cor: TStringField;
     cdsProduto_ConsultaNOME_MODELO: TStringField;
     cdsPosicaoID_SETOR: TIntegerField;
+    sdsGradeGRADE_REF: TStringField;
+    cdsGradeGRADE_REF: TStringField;
+    cdsProduto_ConsultaNOME_FORNECEDOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -1994,6 +1997,8 @@ type
     procedure prc_Abrir_Produto_MatTam(ID: Integer);
     procedure prc_Abrir_Produto_Maq(ID: Integer);
     procedure prc_Inserir_Produto_Consumo_Proc;
+
+    procedure prc_Gravar_Comb_Mat_Consumo;
 
     function fnc_Calcular_Mat: Real;
 
@@ -2594,7 +2599,7 @@ begin
   cdsProduto_ConsumoIMP_ROTULO.AsString   := 'N';
   cdsProduto_ConsumoIMP_TALAO.AsString    := 'N';
   cdsProduto_ConsumoTINGIMENTO.AsString   := 'N';
-  if cdsProduto_Comb.RecordCount > 0 then
+  if (cdsProduto_Comb.Active) and (cdsProduto_Comb.RecordCount > 0) then
     cdsProduto_ConsumoESPECIFICO.AsString := 'S'
   else
     cdsProduto_ConsumoESPECIFICO.AsString := 'N';
@@ -3641,6 +3646,28 @@ begin
   cdsProduto_Consumo_ProcID.AsInteger        := cdsProduto_ConsumoID.AsInteger;
   cdsProduto_Consumo_ProcITEM.AsInteger      := cdsProduto_ConsumoITEM.AsInteger;
   cdsProduto_Consumo_ProcITEM_PROC.AsInteger := vItemAux + 1;
+end;
+
+procedure TdmCadProduto.prc_Gravar_Comb_Mat_Consumo;
+begin
+  prc_Inserir_ProdCombMat;
+  cdsProduto_Comb_MatITEM_MAT.AsInteger    := cdsProduto_ConsumoITEM.AsInteger;
+  cdsProduto_Comb_MatID_MATERIAL.AsInteger := cdsProduto_ConsumoID_MATERIAL.AsInteger;
+  cdsProduto_Comb_MatID_COR.Clear;
+  if cdsProduto_ConsumoID_POSICAO.AsInteger > 0 then
+    cdsProduto_Comb_MatID_POSICAO.AsInteger := cdsProduto_ConsumoID_POSICAO.AsInteger;
+  if cdsProduto_ConsumoID_SETOR.AsInteger > 0 then
+    cdsProduto_Comb_MatID_SETOR.AsInteger := cdsProduto_ConsumoID_SETOR.AsInteger;
+  //cdsProduto_Comb_MatNOME_COR_COMBINACAO.AsString := cdsProduto_ mCombinacaoAuxNome_Cor.AsString;
+  if qParametros_ProdUSA_CONSUMO_COMB.AsString = 'S' then
+  begin
+    cdsProduto_Comb_MatQTD_CONSUMO.AsFloat := cdsProduto_ConsumoQTD_CONSUMO.AsFloat;
+    cdsProduto_Comb_MatQTD_UNIDADE.AsFloat := cdsProduto_ConsumoQTD_UNIDADE.AsFloat;
+    cdsProduto_Comb_MatUNIDADE.AsString    := cdsProduto_ConsumoUNIDADE.AsString;
+    cdsProduto_Comb_MatIMP_TALAO.AsString  := cdsProduto_ConsumoIMP_TALAO.AsString;
+    cdsProduto_Comb_MatTINGIMENTO.AsString := cdsProduto_ConsumoTINGIMENTO.AsString;
+  end;
+  cdsProduto_Comb_Mat.Post;
 end;
 
 end.

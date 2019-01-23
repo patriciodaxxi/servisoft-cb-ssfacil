@@ -638,20 +638,18 @@ begin
 end;
 
 procedure TfrmCadProduto_Comb.btnCopiarPrincipalClick(Sender: TObject);
-var
-  vItemAux: Integer;
 begin
   if not fDMCadProduto.cdsProduto_Comb_Mat.IsEmpty then
   begin
     MessageDlg('*** Já existe material informado na combinação!', mtInformation, [mbOk], 0);
     exit;
   end;
-  vItemAux := 0;
   fDMCadProduto.cdsProduto_Consumo.First;
   while not fDMCadProduto.cdsProduto_Consumo.Eof do
   begin
-    vItemAux := vItemAux + 1;
-    fDMCadProduto.prc_Inserir_ProdCombMat;
+    fDMCadProduto.prc_Gravar_Comb_Mat_Consumo;
+    //18/01/2019  Foi colocado no DMCadProduto
+    {fDMCadProduto.prc_Inserir_ProdCombMat;
     fDMCadProduto.cdsProduto_Comb_MatITEM_MAT.AsInteger    := fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger;
     fDMCadProduto.cdsProduto_Comb_MatID_MATERIAL.AsInteger := fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger;
     fDMCadProduto.cdsProduto_Comb_MatID_COR.Clear;
@@ -668,7 +666,7 @@ begin
       fDMCadProduto.cdsProduto_Comb_MatIMP_TALAO.AsString  := fDMCadProduto.cdsProduto_ConsumoIMP_TALAO.AsString;
       fDMCadProduto.cdsProduto_Comb_MatTINGIMENTO.AsString := fDMCadProduto.cdsProduto_ConsumoTINGIMENTO.AsString;
     end;
-    fDMCadProduto.cdsProduto_Comb_Mat.Post;
+    fDMCadProduto.cdsProduto_Comb_Mat.Post;}
     fDMCadProduto.cdsProduto_Consumo.Next;
   end;
 end;

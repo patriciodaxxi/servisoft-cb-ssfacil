@@ -1211,6 +1211,25 @@ begin
     exit;
   end;
 
+  //19/01/2019
+  if (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M') and (fDMCadProduto.cdsProdutoID_GRADE.AsInteger > 0) then
+  begin
+    vMSgNotificacao := '';
+    if fDMCadProduto.cdsGrade.Locate('ID',fDMCadProduto.cdsProdutoID_GRADE.AsInteger,([Locaseinsensitive])) then
+    begin
+      if (fDMCadProduto.cdsGradeGRADE_REF.AsString = 'S') and
+         (((fDMCadProduto.qParametros_ProdUSA_TAM_REFER_GRADE.AsString = 'S') and (fDMCadProduto.cdsProduto_MatTam.RecordCount <= 0)) or
+         ((trim(fDMCadProduto.qParametros_ProdUSA_TAM_REFER_GRADE.AsString) <> 'S') and (fDMCadProduto.cdsProduto_GradeNum.RecordCount <= 0))) then
+        vMSgNotificacao := 'Não foi lançado a Grade Referenciada, confirma?'
+    end;
+    if (trim(vMSgNotificacao) <> '') and (MessageDlg(vMSgNotificacao,mtConfirmation,[mbYes,mbNo],0) = mrNo) then
+    begin
+      vMSgNotificacao := '';
+      exit;
+    end;
+  end;
+  //*****************
+
   if (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProdutoTIPO_MAT.AsString = 'A')
     and (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'S') then
   begin
@@ -1551,6 +1570,9 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'PRECO_CUSTO') then
       SMDBGrid1.Columns[i].Visible := label4.Enabled
     else
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_FORNECEDOR') then
+      SMDBGrid1.Columns[i].Visible := False
+    else
     if (SMDBGrid1.Columns[i].FieldName = 'PRECO_CUSTO_TOTAL') then
       SMDBGrid1.Columns[i].Visible := label4.Enabled
     else
@@ -1780,8 +1802,20 @@ begin
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
+var
+  i : integer;
 begin
   SMDBGrid1.DisableScroll;
+
+  if fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S' then
+  begin
+    for i := 1 to SMDBGrid1.ColCount - 2 do
+    begin
+      if (SMDBGrid1.Columns[i].FieldName = 'NOME_FORNECEDOR') then
+        SMDBGrid1.Columns[i].Visible := (ComboBox2.ItemIndex = 1);
+    end;
+  end;
+
   fDMCadProduto.cdsProduto_Consulta.Close;
   fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.ctConsulta;
   if ceID.AsInteger > 0 then
@@ -3403,9 +3437,10 @@ procedure TfrmCadProduto.DBEdit7Exit(Sender: TObject);
 var
   vAux: Integer;
 begin
-  if fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S' then
+  if (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S') and (trim(fDMCadProduto.cdsProdutoREFERENCIA.AsString) = '') then
     fDMCadProduto.cdsProdutoREFERENCIA.AsString := fDMCadProduto.cdsProdutoTIPO_REG.AsString + '.' +FormatFloat('000000',fDMCadProduto.cdsProdutoID.AsInteger)
   else
+  if (trim(fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString) <> 'S') then
   begin
     if (trim(DBEdit7.Text) = '') and (fDMCadProduto.cdsProdutoTIPO_REG.AsString <> '') then
     begin

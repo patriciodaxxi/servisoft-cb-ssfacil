@@ -404,6 +404,10 @@ type
     ImprimirMinuta1: TMenuItem;
     Label111: TLabel;
     DBEdit72: TDBEdit;
+    Label113: TLabel;
+    Label114: TLabel;
+    DBEdit73: TDBEdit;
+    DBEdit74: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);

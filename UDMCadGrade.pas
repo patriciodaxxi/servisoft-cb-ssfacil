@@ -38,6 +38,8 @@ type
     sdsGrade_ItensTAMANHO_EUR: TStringField;
     cdsGrade_ItensTAMANHO_USA: TStringField;
     cdsGrade_ItensTAMANHO_EUR: TStringField;
+    sdsGradeGRADE_REF: TStringField;
+    cdsGradeGRADE_REF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspGradeUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -163,6 +165,7 @@ end;
 procedure TDMCadGrade.cdsGradeNewRecord(DataSet: TDataSet);
 begin
   cdsGradePOSSUI_MARCACAO.AsString := 'N';
+  cdsGradeGRADE_REF.AsString       := 'N';
 end;
 
 procedure TDMCadGrade.DoLogAdditionalValues(ATableName: string;

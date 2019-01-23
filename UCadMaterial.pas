@@ -209,6 +209,7 @@ type
     Label160: TLabel;
     DBCheckBox3: TDBCheckBox;
     ComboBox2: TComboBox;
+    btnCopiarProduto: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -299,6 +300,7 @@ type
     procedure SpeedButton16Click(Sender: TObject);
     procedure btnImportar_TamClick(Sender: TObject);
     procedure btnExcluir_TamClick(Sender: TObject);
+    procedure btnCopiarProdutoClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -487,6 +489,25 @@ begin
     exit;
   end;
 
+  //19/01/2019
+  if (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M') and (fDMCadProduto.cdsProdutoID_GRADE.AsInteger > 0) then
+  begin
+    vMSgNotificacao := '';
+    if fDMCadProduto.cdsGrade.Locate('ID',fDMCadProduto.cdsProdutoID_GRADE.AsInteger,([Locaseinsensitive])) then
+    begin
+      if (fDMCadProduto.cdsGradeGRADE_REF.AsString = 'S') and
+         (((fDMCadProduto.qParametros_ProdUSA_TAM_REFER_GRADE.AsString = 'S') and (fDMCadProduto.cdsProduto_MatTam.RecordCount <= 0)) or
+         ((trim(fDMCadProduto.qParametros_ProdUSA_TAM_REFER_GRADE.AsString) <> 'S') and (fDMCadProduto.cdsProduto_GradeNum.RecordCount <= 0))) then
+        vMSgNotificacao := 'Não foi lançado a Grade Referenciada, confirma?'
+    end;
+    if (trim(vMSgNotificacao) <> '') and (MessageDlg(vMSgNotificacao,mtConfirmation,[mbYes,mbNo],0) = mrNo) then
+    begin
+      vMSgNotificacao := '';
+      exit;
+    end;
+  end;
+  //*****************
+
   sds  := TSQLDataSet.Create(nil);
   if fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger > 0 then
     sds2 := TSQLDataSet.Create(nil);
@@ -625,8 +646,10 @@ begin
   prc_Habilita;
   RxDBComboBox7.Enabled := True;
 
-  RxDBComboBox7.SetFocus;
+  fDMCadProduto.cdsProdutoTIPO_REG.AsString := 'M';
+  //RxDBComboBox7.SetFocus;
   lblDescLargura.Caption := '';
+
 
   if (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N')  then
     fDMCadProduto.prc_Abrir_Produto_Processo(fDMCadProduto.cdsProdutoID.AsInteger);
@@ -2023,6 +2046,105 @@ begin
     end;
     fDMCadProduto.qGrade_Itens.Next;
   end;
+end;
+
+procedure TfrmCadMaterial.btnCopiarProdutoClick(Sender: TObject);
+var
+  x, x2: Integer;
+begin
+  if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) then
+    exit;
+
+  if MessageDlg('Deseja copiar o produto selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+
+  fDMCopiarProduto := TDMCopiarProduto.Create(Self);
+  fDMCopiarProduto.prc_Localizar(fDMCadProduto.cdsProduto_ConsultaID.AsInteger);
+  if fDMCopiarProduto.cdsProduto.IsEmpty then
+  begin
+    MessageDlg('Produto não encontrado!', mtError, [mbOk], 0);
+    FreeAndNil(fDMCopiarProduto);
+    exit;
+  end;
+
+  if not fnc_Filial then
+    exit;
+
+  try
+    fDMCadProduto.prc_Inserir;
+    if not(fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]) then
+      exit;
+
+    for x := 0 to (fDMCopiarProduto.cdsProduto.FieldCount - 1) do
+    begin
+      if (fDMCopiarProduto.cdsProduto.Fields[x].FieldName <> 'ID') and (fDMCopiarProduto.cdsProduto.Fields[x].FieldName <> 'COD_BARRA') then
+         fDMCadProduto.cdsProduto.FieldByName(fDMCopiarProduto.cdsProduto.Fields[x].FieldName).AsVariant := fDMCopiarProduto.cdsProduto.Fields[x].Value;
+    end;
+
+    fDMCopiarProduto.cdsProduto_Consumo.First;
+    while not fDMCopiarProduto.cdsProduto_Consumo.Eof do
+    begin
+      fDMCadProduto.prc_Inserir_ProdConsumo;
+      for x := 0 to (fDMCopiarProduto.cdsProduto_Consumo.FieldCount - 1) do
+      begin
+        if (fDMCopiarProduto.cdsProduto_Consumo.Fields[x].FieldName <> 'ID') then
+          fDMCadProduto.cdsProduto_Consumo.FieldByName(fDMCopiarProduto.cdsProduto_Consumo.Fields[x].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Consumo.Fields[x].Value;
+      end;
+      fDMCadProduto.cdsProduto_Consumo.Post;
+
+      fDMCopiarProduto.cdsProduto_Consumo_Tam.First;
+      while not fDMCopiarProduto.cdsProduto_Consumo_Tam.Eof do
+      begin
+        fDMCadProduto.cdsProduto_Consumo_Tam.Insert;
+        for x2 := 0 to (fDMCopiarProduto.cdsProduto_Consumo_Tam.FieldCount - 1) do
+        begin
+          if (fDMCopiarProduto.cdsProduto_Consumo_Tam.Fields[x2].FieldName <> 'ID') then
+            fDMCadProduto.cdsProduto_Consumo_Tam.FieldByName(fDMCopiarProduto.cdsProduto_Consumo_Tam.Fields[x2].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Consumo_Tam.Fields[x2].Value;
+        end;
+        fDMCadProduto.cdsProduto_Consumo_Tam.Post;
+        fDMCopiarProduto.cdsProduto_Consumo_Tam.Next;
+      end;
+
+      fDMCopiarProduto.cdsProduto_Consumo_Proc.First;
+      while not fDMCopiarProduto.cdsProduto_Consumo_Proc.Eof do
+      begin
+        fDMCadProduto.cdsProduto_Consumo_Proc.Insert;
+        for x2 := 0 to (fDMCopiarProduto.cdsProduto_Consumo_Proc.FieldCount - 1) do
+        begin
+          if (fDMCopiarProduto.cdsProduto_Consumo_Proc.Fields[x2].FieldName <> 'ID') then
+            fDMCadProduto.cdsProduto_Consumo_Proc.FieldByName(fDMCopiarProduto.cdsProduto_Consumo_Proc.Fields[x2].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Consumo_Proc.Fields[x2].Value;
+        end;
+        fDMCadProduto.cdsProduto_Consumo_Proc.Post;
+        fDMCopiarProduto.cdsProduto_Consumo_Proc.Next;
+      end;
+
+      fDMCopiarProduto.cdsProduto_Consumo.Next;
+    end;
+
+    fDMCopiarProduto.cdsProduto_Tam.First;
+    while not fDMCopiarProduto.cdsProduto_Tam.Eof do
+    begin
+      fDMCadProduto.cdsProduto_Tam.Insert;
+      for x := 0 to (fDMCopiarProduto.cdsProduto_Tam.FieldCount - 1) do
+      begin
+        if (fDMCopiarProduto.cdsProduto_Tam.Fields[x].FieldName <> 'ID') then
+          fDMCadProduto.cdsProduto_Tam.FieldByName(fDMCopiarProduto.cdsProduto_Tam.Fields[x].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Tam.Fields[x].Value;
+      end;
+      fDMCadProduto.cdsProduto_Tam.Post;
+      fDMCopiarProduto.cdsProduto_Tam.Next;
+    end;
+
+  except
+    on e: Exception do
+    begin
+      Raise Exception.Create('Ocorreu o seguinte erro ao copiar: ' + #13 + e.Message);
+    end;
+  end;
+  FreeAndNil(fDMCopiarProduto);
+
+  RzPageControl1.ActivePage := TS_Cadastro;
+  btnAlterarClick(Sender);
+  btnAlterar_NomeClick(Sender);
 end;
 
 end.
