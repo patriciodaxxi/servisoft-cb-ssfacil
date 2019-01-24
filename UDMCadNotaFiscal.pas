@@ -2966,6 +2966,7 @@ type
     cdsProduto_CombOBSMATERIAL: TStringField;
     cdsProduto_CombNOME_FOTO: TStringField;
     qParametros_NTEATUALIZA_PRECO_MAIOR: TStringField;
+    qParametros_PedPERMITE_ALT_NOMEPROD: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

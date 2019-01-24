@@ -296,7 +296,6 @@ type
     Label124: TLabel;
     DBEdit76: TDBEdit;
     DBEdit77: TDBEdit;
-    Label125: TLabel;
     Label117: TLabel;
     RxDBComboBox1: TRxDBComboBox;
     ckAtualizaRef: TCheckBox;
@@ -338,6 +337,11 @@ type
     Label133: TLabel;
     RxDBLookupCombo9: TRxDBLookupCombo;
     SMDBGrid2: TSMDBGrid;
+    Label134: TLabel;
+    DBEdit82: TDBEdit;
+    DBEdit83: TDBEdit;
+    RxDBComboBox2: TRxDBComboBox;
+    Label125: TLabel;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -377,6 +381,9 @@ type
     procedure BitBtn6Click(Sender: TObject);
     procedure BitBtn7Click(Sender: TObject);
     procedure BitBtn8Click(Sender: TObject);
+    procedure DBEdit82KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBEdit82Exit(Sender: TObject);
   private
     { Private declarations }
     vCodCidade: Integer;
@@ -466,6 +473,7 @@ type
     procedure prc_Aplicar_Margem;
 
     procedure prc_Monta_Grupo(Mostra_Msg: String);
+    procedure prc_Monta_ContaOrc(Mostra_Msg: String);
 
     procedure prc_verifica_TipoVenda;
 
@@ -493,7 +501,8 @@ var
 implementation
 
 uses
-  DmdDatabase, uUtilPadrao, UMenu, rsDBUtils, uNFeComandos, USel_Pessoa, USel_Grupo, USel_Produto_Cor;
+  DmdDatabase, uUtilPadrao, UMenu, rsDBUtils, uNFeComandos, USel_Pessoa, USel_Grupo, USel_Produto_Cor,
+  USel_ContaOrc;
 
 {$R *.dfm}
 
@@ -536,8 +545,12 @@ begin
       fDMRecebeXML.mItensNotaPerc_Margem.AsFloat         := StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat));
       if fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger > 0 then
         fDMRecebeXML.mItensNotaID_Grupo.AsInteger := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
+      if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
+        fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
       fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
+      fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
       prc_Monta_Grupo('N');
+      prc_Monta_ContaOrc('N');
     end
     else
     begin
@@ -559,7 +572,11 @@ begin
       fDMRecebeXML.mItensNotaPerc_Margem.AsFloat := StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat));
       if fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger > 0 then
         fDMRecebeXML.mItensNotaID_Grupo.AsInteger := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
+      if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
+        fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
+      fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
       prc_Monta_Grupo('N');
+      prc_Monta_ContaOrc('N');
     end;
     fDMRecebeXML.mItensNotaTipoVenda.AsString      := '';
     fDMRecebeXML.mItensNotaTipoVenda_Prod.AsString := '';
@@ -867,6 +884,7 @@ begin
   fDMRecebeXML.mItensNotaConverter_Unid_Medida.AsBoolean := False;
 
   fDMRecebeXML.mItensNotaID_Grupo.Clear;
+  fDMRecebeXML.mItensNotaID_ContaOrcamento.Clear;
   fDMRecebeXML.mItensNotaNome_Grupo.AsString := '';
 
   Busca_MaterialFornecedor;
@@ -1143,6 +1161,15 @@ begin
 
   fDMRecebeXML.mItensNotaPreco_Custo_Total.AsFloat := StrToFloat(FormatFloat('0.00000',fnc_Montar_PrecoCustoTotal(fDMRecebeXML.mItensNotaUnidadeInterno.AsString)));
 
+  if fDMRecebeXML.cdsFornecedorCODIGO.AsInteger = vCodFornecedor then
+  begin
+    if fDMRecebeXML.cdsFornecedorFORNECEDOR_CONTA_ID.AsInteger > 0 then
+    begin
+      fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsFornecedorFORNECEDOR_CONTA_ID.AsInteger;
+      prc_Monta_ContaOrc('N');
+    end;
+  end;
+
   fDMRecebeXML.mItensNota.Post;
 end;
 
@@ -1381,6 +1408,8 @@ begin
       case ComboBox1.ItemIndex of
         0: ffrmSel_Produto_Cor.vTipo_Prod := 'P';
         1: ffrmSel_Produto_Cor.vTipo_Prod := 'M';
+        2: ffrmSel_Produto_Cor.vTipo_Prod := 'C';
+        3: ffrmSel_Produto_Cor.vTipo_Prod := 'I';
       end;
       ffrmSel_Produto_Cor.ShowModal;
       FreeAndNil(ffrmSel_Produto_Cor);
@@ -1392,6 +1421,8 @@ begin
       case ComboBox1.ItemIndex of
         0: ffrmSel_Produto.vTipo_Prod := 'P';
         1: ffrmSel_Produto.vTipo_Prod := 'M';
+        2: ffrmSel_Produto.vTipo_Prod := 'C';
+        3: ffrmSel_Produto.vTipo_Prod := 'I';
       end;
       ffrmSel_Produto.ShowModal;
       FreeAndNil(ffrmSel_Produto);
@@ -1431,8 +1462,14 @@ begin
       begin
         fDMRecebeXML.mItensNotaPerc_Margem.AsFloat := StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat));
         fDMRecebeXML.mItensNotaID_Grupo.AsInteger  := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
-        fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
+        if fDMRecebeXML.mItensNotaID_Grupo.AsInteger <= 0 then
+          fDMRecebeXML.mItensNotaID_Grupo.Clear;
+        if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
+          fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
+        fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
+        fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
         prc_Monta_Grupo('N');
+        prc_Monta_ContaOrc('N');
       end;
       fDMRecebeXML.mItensNota.Post;
       prc_Mostrar_Cor;
@@ -1760,8 +1797,14 @@ begin
         fDMRecebeXML.mItensNotaReferencia_Int.AsString := fDMRecebeXML.cdsProdutoREFERENCIA.AsString;
         fDMRecebeXML.mItensNotaPerc_Margem.AsFloat     := fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat;
         fDMRecebeXML.mItensNotaID_Grupo.AsInteger      := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
+        if fDMRecebeXML.mItensNotaID_Grupo.AsInteger <= 0 then
+          fDMRecebeXML.mItensNotaID_Grupo.Clear;
+        if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
+          fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
         fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
+        fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
         prc_Monta_Grupo('N');
+        prc_Monta_ContaOrc('N');
         fDMRecebeXML.mItensNota.Post;
       end;
     end;
@@ -1791,8 +1834,20 @@ begin
         else
           fDMRecebeXML.cdsProdutoID_GRUPO.Clear;
       end;
+      if (fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger > 0) and (fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger <> fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger) then
+      begin
+        if not(fDMRecebeXML.cdsProduto.State in [dsEdit]) then
+          fDMRecebeXML.cdsProduto.Edit;
+        if fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger > 0 then
+          fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger := fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger
+        else
+          fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.Clear;
+      end;
       if not(fDMRecebeXML.cdsProduto.State in [dsEdit]) then
         fDMRecebeXML.cdsProduto.Edit;
+      if fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString <> fDMRecebeXML.mItensNotaPosse_Material.AsString then
+        fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString := fDMRecebeXML.mItensNotaPosse_Material.AsString;
+
       if fDMRecebeXML.mItensNotaGerar_CLiquido.AsBoolean then
         fDMRecebeXML.cdsProdutoUSA_CLIQ.AsString := 'S'
       else
@@ -1894,6 +1949,7 @@ begin
     0: fDMRecebeXML.cdsProdutoTIPO_REG.AsString := 'P';
     1: fDMRecebeXML.cdsProdutoTIPO_REG.AsString := 'M';
     2: fDMRecebeXML.cdsProdutoTIPO_REG.AsString := 'C';
+    3: fDMRecebeXML.cdsProdutoTIPO_REG.AsString := 'I';
   end;
   if (fDMRecebeXML.qParametros_RecXMLUSA_REF_SEQUENCIAL.AsString = 'S') and (trim(fDMRecebeXML.mItensNotaReferencia_Int.AsString) <> '') then
   begin
@@ -1972,6 +2028,9 @@ begin
   fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
   if fDMRecebeXML.mItensNotaID_Grupo.AsInteger > 0 then
     fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger := fDMRecebeXML.mItensNotaID_Grupo.AsInteger;
+  if fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger > 0 then
+    fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger := fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger;
+  fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString := fDMRecebeXML.mItensNotaPosse_Material.AsString;
 
   //26/01/2017
   if fDMRecebeXML.qParametros_RecXMLMOSTRAR_VLR_VENDA.AsString = 'S' then
@@ -1998,8 +2057,13 @@ begin
   fDMRecebeXML.mItensNotaReferencia_Int.AsString     := fDMRecebeXML.cdsProdutoREFERENCIA.AsString;
   fDMRecebeXML.mItensNotaPerc_Margem.AsFloat         := fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat;
   fDMRecebeXML.mItensNotaID_Grupo.AsInteger          := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
+  if fDMRecebeXML.mItensNotaID_Grupo.AsInteger <= 0 then
+    fDMRecebeXML.mItensNotaID_Grupo.Clear;
+  if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
+    fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
+  fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;      
   prc_Monta_Grupo('N');
-
+  prc_Monta_ContaOrc('N');
   //*************
 
   fDMRecebeXML.mItensNota.Post;
@@ -2260,6 +2324,9 @@ begin
       end;
     end;
     //**************************
+    if fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger > 0 then
+      fDMRecebeXML.cdsNotaFiscal_ItensCONTA_ORCAMENTO_ID.AsInteger := fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger
+    else
     if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
       fDMRecebeXML.cdsNotaFiscal_ItensCONTA_ORCAMENTO_ID.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
 
@@ -3822,11 +3889,15 @@ begin
   if ((fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and (ckAssociar.Checked)) or
      (trim(fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString) <> 'S') then
   begin
-    if fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger,([LocaseInsensitive])) then
+    fDMRecebeXML.prc_Abrir_Produto(fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger);
+    if not fDMRecebeXML.cdsProduto.IsEmpty then
     begin
       fDMRecebeXML.mItensNotaPerc_Margem.AsFloat := fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat;
       fDMRecebeXML.mItensNotaID_Grupo.AsInteger  := fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger;
       prc_Monta_Grupo('N');
+      if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
+        fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
+      fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
     end;
   end;
   fDMRecebeXML.mItensNota.Post;
@@ -3877,6 +3948,7 @@ begin
     0: fDMRecebeXML.qRefSeq.ParamByName('TIPO_REG').AsString := 'P';
     1: fDMRecebeXML.qRefSeq.ParamByName('TIPO_REG').AsString := 'M';
     2: fDMRecebeXML.qRefSeq.ParamByName('TIPO_REG').AsString := 'C';
+    3: fDMRecebeXML.qRefSeq.ParamByName('TIPO_REG').AsString := 'I';
   end;
   fDMRecebeXML.qRefSeq.Open;
   Result := fDMRecebeXML.qRefSeqREFERENCIA_SEQ.AsInteger;
@@ -3955,6 +4027,52 @@ begin
   fDMRecebeXML.mParcID_Conta.Clear;
   fDMRecebeXML.mParcID_TipoCobranca.Clear;
   fDMRecebeXML.mParc.Post;
+end;
+
+procedure TfrmRecebeXML.DBEdit82KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    vID_ContaOrcamento_Pos := fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger;
+    frmSel_ContaOrc := TfrmSel_ContaOrc.Create(Self);
+    frmSel_ContaOrc.ComboBox2.ItemIndex := 2;
+    frmSel_ContaOrc.ShowModal;
+    if not (fDMRecebeXML.mItensNota.State in [dsEdit]) then
+      fDMRecebeXML.mItensNota.Edit;
+    fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := vID_ContaOrcamento_Pos;
+    prc_Monta_ContaOrc('S');
+    fDMRecebeXML.mItensNota.Post;
+  end;
+end;
+
+procedure TfrmRecebeXML.prc_Monta_ContaOrc(Mostra_Msg: String);
+begin
+  if not (fDMRecebeXML.mItensNota.State in [dsEdit,dsInsert]) then
+    exit;
+
+  if fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger > 0 then
+  begin
+    fDMRecebeXML.qConta_Orcamento.Close;
+    fDMRecebeXML.qConta_Orcamento.ParamByName('ID').AsInteger := fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger;
+    fDMRecebeXML.qConta_Orcamento.Open;
+    if fDMRecebeXML.qConta_Orcamento.IsEmpty then
+    begin
+      fDMRecebeXML.mItensNotaNome_ContaOrcamento.AsString := '';
+      fDMRecebeXML.mItensNotaID_ContaOrcamento.Clear;
+      if Mostra_Msg = 'S' then
+        MessageDlg('*** ID da Conta de Orçamento não encontrada!', mtInformation, [mbOk], 0);
+    end
+    else
+      fDMRecebeXML.mItensNotaNome_ContaOrcamento.AsString := fDMRecebeXML.qConta_OrcamentoCODIGO.AsString + ' ' + fDMRecebeXML.qConta_OrcamentoDESCRICAO.AsString;
+  end
+  else
+    fDMRecebeXML.mItensNotaNome_ContaOrcamento.AsString := '';
+end;
+
+procedure TfrmRecebeXML.DBEdit82Exit(Sender: TObject);
+begin
+  prc_Monta_ContaOrc('N');
 end;
 
 end.

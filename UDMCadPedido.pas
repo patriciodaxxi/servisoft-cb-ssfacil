@@ -3379,6 +3379,7 @@ type
     qParametros_PedINF_QTD_TALAO: TStringField;
     cdsClienteIPI_PAGO_FILIAL: TStringField;
     qParametros_LoteLOTE_CALCADO_NOVO: TStringField;
+    cdsPedido_ConsultaCNPJ_CPF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

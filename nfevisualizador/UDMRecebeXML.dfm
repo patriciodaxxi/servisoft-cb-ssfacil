@@ -2311,6 +2311,24 @@ object DMRecebeXML: TDMRecebeXML
         Name = 'Gerar_Estoque'
         DataType = ftString
         Size = 1
+      end
+      item
+        Name = 'ID_ContaOrcamento'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_CentroCusto'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Nome_ContaOrcamento'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'Posse_Material'
+        DataType = ftString
+        Size = 1
       end>
     IndexDefs = <
       item
@@ -2327,7 +2345,7 @@ object DMRecebeXML: TDMRecebeXML
     Left = 464
     Top = 488
     Data = {
-      6A0A00009619E0BD0100000018000000690000000000030000006A0A04497465
+      E60A00009619E0BD01000000180000006D000000000003000000E60A04497465
       6D04000100000000000A436F6450726F6475746F010049000000010005574944
       5448020002003C0011436F6450726F6475746F496E7465726E6F040001000000
       000006436F64436F72040001000000000008436F644772616465040001000000
@@ -2409,8 +2427,12 @@ object DMRecebeXML: TDMRecebeXML
       50495F437573746F010049000000010005574944544802000200010011507265
       636F5F437573746F5F546F74616C080004000000000009436F64426172726132
       0100490000000100055749445448020002000E000D47657261725F4573746F71
-      7565010049000000010005574944544802000200010001000D44454641554C54
-      5F4F524445520200820000000000}
+      756501004900000001000557494454480200020001001149445F436F6E74614F
+      7263616D656E746F04000100000000000E49445F43656E74726F437573746F04
+      00010000000000134E6F6D655F436F6E74614F7263616D656E746F0100490000
+      000100055749445448020002003C000E506F7373655F4D6174657269616C0100
+      49000000010005574944544802000200010001000D44454641554C545F4F5244
+      45520200820000000000}
     object mItensNotaItem: TIntegerField
       FieldName = 'Item'
     end
@@ -2812,6 +2834,20 @@ object DMRecebeXML: TDMRecebeXML
     end
     object mItensNotaGerar_Estoque: TStringField
       FieldName = 'Gerar_Estoque'
+      Size = 1
+    end
+    object mItensNotaID_ContaOrcamento: TIntegerField
+      FieldName = 'ID_ContaOrcamento'
+    end
+    object mItensNotaID_CentroCusto: TIntegerField
+      FieldName = 'ID_CentroCusto'
+    end
+    object mItensNotaNome_ContaOrcamento: TStringField
+      FieldName = 'Nome_ContaOrcamento'
+      Size = 60
+    end
+    object mItensNotaPosse_Material: TStringField
+      FieldName = 'Posse_Material'
       Size = 1
     end
   end
@@ -7526,10 +7562,11 @@ object DMRecebeXML: TDMRecebeXML
       'I.item, PI.VLR_DESCONTO, PRO.ID_NCM, PI.UNIDADE, PI.PERC_IPI,'#13#10'P' +
       'I.OBS_COMPLEMENTAR, PI.NUMOS, PE.TIPO_FRETE, PE.ID_CONDPGTO, PE.' +
       'IMP_OC_NOTA, '#13#10'PI.ID_VARIACAO, PRO.usa_cor, PRO.usa_preco_cor, P' +
-      'I.ID_COR, CLI.USA_OC_XML'#13#10'FROM PEDIDO PE'#13#10'INNER JOIN PEDIDO_ITEM' +
-      ' PI'#13#10'ON PE.ID = PI.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON PE.ID_CLIENTE =' +
-      ' CLI.CODIGO'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON PI.ID_PRODUTO = PRO.ID'#13#10 +
-      'WHERE PI.qtd_restante > 0'#13#10'      AND PE.TIPO_REG = '#39'C'#39
+      'I.ID_COR, CLI.USA_OC_XML,'#13#10'PI.TAMANHO'#13#10'FROM PEDIDO PE'#13#10'INNER JOI' +
+      'N PEDIDO_ITEM PI'#13#10'ON PE.ID = PI.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON PE' +
+      '.ID_CLIENTE = CLI.CODIGO'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON PI.ID_PRODU' +
+      'TO = PRO.ID'#13#10'WHERE PI.qtd_restante > 0'#13#10'      AND PE.TIPO_REG = ' +
+      #39'C'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -7659,6 +7696,10 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'USA_OC_XML'
       FixedChar = True
       Size = 1
+    end
+    object cdsOCTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
     end
   end
   object dsOC: TDataSource
@@ -9023,7 +9064,7 @@ object DMRecebeXML: TDMRecebeXML
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
-    ProviderName = 'dspContas'
+    ProviderName = 'dspTipoCobranca'
     Left = 536
     Top = 231
     object cdsTipoCobrancaID: TIntegerField
@@ -9039,5 +9080,37 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = cdsTipoCobranca
     Left = 576
     Top = 231
+  end
+  object qConta_Orcamento: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT *'
+      'FROM CONTA_ORCAMENTO'
+      'WHERE ID = :ID')
+    SQLConnection = dmDatabase.scoDados
+    Left = 866
+    Top = 433
+    object qConta_OrcamentoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qConta_OrcamentoTIPO: TStringField
+      FieldName = 'TIPO'
+      FixedChar = True
+      Size = 1
+    end
+    object qConta_OrcamentoCODIGO: TStringField
+      FieldName = 'CODIGO'
+    end
+    object qConta_OrcamentoDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 50
+    end
   end
 end

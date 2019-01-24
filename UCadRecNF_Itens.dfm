@@ -22,8 +22,8 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 571
-    Width = 1167
+    Top = 579
+    Width = 1175
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -62,7 +62,7 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1167
+    Width = 1175
     Height = 106
     Align = alTop
     Color = clMoneyGreen
@@ -71,7 +71,7 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
     object Panel5: TPanel
       Left = 1
       Top = 26
-      Width = 1165
+      Width = 1173
       Height = 79
       Align = alClient
       Color = clMoneyGreen
@@ -279,7 +279,7 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
     object pnlCod_Barras: TPanel
       Left = 1
       Top = 1
-      Width = 1165
+      Width = 1173
       Height = 25
       Align = alTop
       Color = clMoneyGreen
@@ -304,8 +304,8 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 106
-    Width = 1167
-    Height = 465
+    Width = 1175
+    Height = 473
     ActivePage = TabSheet1
     ActivePageDefault = TabSheet1
     Align = alClient
@@ -688,7 +688,7 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
       object pnlCor: TPanel
         Left = 0
         Top = 0
-        Width = 1163
+        Width = 1171
         Height = 22
         Align = alTop
         BevelOuter = bvNone

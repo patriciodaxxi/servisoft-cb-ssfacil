@@ -2245,10 +2245,13 @@ begin
     end
     else
     begin
-      if cdsProduto_Comb.RecordCount > 0 then
-        cdsProdutoUSA_COR.AsString := 'S'
-      else
-        cdsProdutoUSA_COR.AsString := 'N';
+      if cdsProduto_Comb.Active then
+      begin
+        if cdsProduto_Comb.RecordCount > 0 then
+          cdsProdutoUSA_COR.AsString := 'S'
+        else
+          cdsProdutoUSA_COR.AsString := 'N';
+      end;
     end;
   end;
  // Foi tirado no dia 25/09 e colocado na trigger TRG_Produto

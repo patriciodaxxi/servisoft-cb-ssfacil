@@ -2077,6 +2077,16 @@ type
     cdsTipoCobrancaNOME: TStringField;
     mParclkNomeConta: TStringField;
     mParclkNomeTipoCobranca: TStringField;
+    mItensNotaID_ContaOrcamento: TIntegerField;
+    mItensNotaID_CentroCusto: TIntegerField;
+    qConta_Orcamento: TSQLQuery;
+    qConta_OrcamentoID: TIntegerField;
+    qConta_OrcamentoTIPO: TStringField;
+    qConta_OrcamentoCODIGO: TStringField;
+    qConta_OrcamentoDESCRICAO: TStringField;
+    mItensNotaNome_ContaOrcamento: TStringField;
+    mItensNotaPosse_Material: TStringField;
+    cdsOCTAMANHO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2673,6 +2683,7 @@ begin
   mItensNotaSOMAR_ST_NO_CUSTO.AsString    := qParametros_NTESOMAR_ST_NO_CUSTO.AsString;
   mItensNotaGravar_Adic_Prod.AsString     := 'N';
   mItensNotaGerar_Estoque.AsString        := 'S';
+  mItensNotaPosse_Material.AsString       := 'E';
 end;
 
 procedure TDMRecebeXML.prc_Abrir_Combinacao(ID_Produto: Integer);
