@@ -64,6 +64,7 @@ type
     SMDBGrid2: TSMDBGrid;
     ts_Data: TRzTabSheet;
     SMDBGrid3: TSMDBGrid;
+    chkAcrescimo: TRzCheckList;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -155,7 +156,11 @@ begin
 
   if RzPageControl1.ActivePage = ts_Geral then
   begin
-    vComando := 'SELECT V.*, (V.VLR_TOTAL + V.VLR_IPI + V.VLR_FRETE) VLR_TOTAL_BRU ';
+    if chkAcrescimo.ItemChecked[1] then
+      vComando := 'SELECT V.*, (V.VLR_TOTAL + V.VLR_IPI + V.VLR_FRETE + V.VLR_DESCONTO) VLR_TOTAL_BRU '
+    else
+      vComando := 'SELECT V.*, (V.VLR_TOTAL + V.VLR_IPI + V.VLR_FRETE) VLR_TOTAL_BRU ';
+
     vComandoAux := ' FROM VFAT_ACUM V ';
     for i := 1 to 8 do
       vTexto[i] := '';

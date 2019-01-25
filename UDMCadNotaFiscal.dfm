@@ -4904,7 +4904,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 311
   end
   object cdsTipoCobranca: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -4985,7 +4984,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 358
   end
   object cdsContas: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -12785,6 +12783,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object qParametros_PedUSA_TAB_PRECO: TStringField
       FieldName = 'USA_TAB_PRECO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedPERMITE_ALT_NOMEPROD: TStringField
+      FieldName = 'PERMITE_ALT_NOMEPROD'
       FixedChar = True
       Size = 1
     end

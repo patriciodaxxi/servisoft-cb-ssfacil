@@ -1,8 +1,8 @@
 object frmConsFat: TfrmConsFat
-  Left = 383
+  Left = 43
   Top = 99
-  Width = 920
-  Height = 543
+  Width = 1260
+  Height = 583
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'frmConsFat'
   Color = clBtnFace
@@ -19,7 +19,7 @@ object frmConsFat: TfrmConsFat
   object NxPanel1: TNxPanel
     Left = 0
     Top = 0
-    Width = 904
+    Width = 1244
     Height = 76
     Align = alTop
     UseDockManager = False
@@ -230,18 +230,56 @@ object frmConsFat: TfrmConsFat
       ParentCtl3D = False
       TabOrder = 3
     end
+    object chkAcrescimo: TRzCheckList
+      Left = 726
+      Top = 0
+      Width = 155
+      Height = 48
+      Items.Strings = (
+        '//...Acrescentar...'
+        'Valor Desconto')
+      Items.ItemEnabled = (
+        True
+        True)
+      Items.ItemState = (
+        0
+        0)
+      HighlightColor = clBlack
+      Align = alCustom
+      Color = 15722978
+      Columns = 1
+      Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      FocusColor = clInactiveCaption
+      FrameColor = clInactiveCaption
+      FrameHotColor = clInactiveCaption
+      GroupColor = clInactiveCaption
+      GroupFont.Charset = DEFAULT_CHARSET
+      GroupFont.Color = clBlue
+      GroupFont.Height = -11
+      GroupFont.Name = 'MS Sans Serif'
+      GroupFont.Style = [fsBold]
+      ItemHeight = 20
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 9
+    end
   end
   object Panel1: TPanel
-    Left = 684
+    Left = 1024
     Top = 76
     Width = 220
-    Height = 429
+    Height = 468
     Align = alRight
     TabOrder = 1
     object Label23: TLabel
-      Left = 35
+      Left = 37
       Top = 5
-      Width = 80
+      Width = 78
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.Mercadoria:'
@@ -269,9 +307,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label25: TLabel
-      Left = 67
+      Left = 69
       Top = 21
-      Width = 48
+      Width = 46
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.Bruto:'
@@ -299,9 +337,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label27: TLabel
-      Left = 58
+      Left = 60
       Top = 37
-      Width = 57
+      Width = 55
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.L'#237'quido:'
@@ -329,9 +367,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label29: TLabel
-      Left = 81
+      Left = 83
       Top = 95
-      Width = 34
+      Width = 32
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.IPI:'
@@ -344,9 +382,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label30: TLabel
-      Left = 83
+      Left = 86
       Top = 111
-      Width = 32
+      Width = 29
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.ST:'
@@ -404,9 +442,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label34: TLabel
-      Left = 67
+      Left = 69
       Top = 127
-      Width = 48
+      Width = 46
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.ICMS:'
@@ -419,9 +457,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label35: TLabel
-      Left = 78
+      Left = 80
       Top = 167
-      Width = 37
+      Width = 35
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.PIS:'
@@ -449,9 +487,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label37: TLabel
-      Left = 53
+      Left = 55
       Top = 183
-      Width = 62
+      Width = 60
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.COFINS:'
@@ -479,9 +517,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label39: TLabel
-      Left = 45
+      Left = 47
       Top = 271
-      Width = 70
+      Width = 68
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.Desconto:'
@@ -509,9 +547,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label41: TLabel
-      Left = 69
+      Left = 71
       Top = 255
-      Width = 46
+      Width = 44
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.Frete:'
@@ -539,9 +577,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label4: TLabel
-      Left = 38
+      Left = 40
       Top = 53
-      Width = 77
+      Width = 75
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.Devolu'#231#227'o:'
@@ -599,9 +637,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label9: TLabel
-      Left = 37
+      Left = 39
       Top = 143
-      Width = 78
+      Width = 76
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.ICMS Difal:'
@@ -629,9 +667,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label11: TLabel
-      Left = 85
+      Left = 87
       Top = 207
-      Width = 30
+      Width = 28
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.IR:'
@@ -644,9 +682,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label12: TLabel
-      Left = 69
+      Left = 71
       Top = 223
-      Width = 46
+      Width = 44
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.CSLL:'
@@ -689,9 +727,9 @@ object frmConsFat: TfrmConsFat
       Transparent = True
     end
     object Label15: TLabel
-      Left = 5
+      Left = 7
       Top = 303
-      Width = 110
+      Width = 108
       Height = 13
       Alignment = taRightJustify
       Caption = 'V.Custo (Compra):'
@@ -722,15 +760,15 @@ object frmConsFat: TfrmConsFat
   object Panel2: TPanel
     Left = 0
     Top = 76
-    Width = 684
-    Height = 429
+    Width = 1024
+    Height = 468
     Align = alClient
     TabOrder = 2
     object RzPageControl1: TRzPageControl
       Left = 1
       Top = 1
-      Width = 682
-      Height = 427
+      Width = 1022
+      Height = 466
       ActivePage = ts_Data
       Align = alClient
       TabIndex = 2
@@ -741,8 +779,8 @@ object frmConsFat: TfrmConsFat
         object SMDBGrid1: TSMDBGrid
           Left = 0
           Top = 0
-          Width = 678
-          Height = 404
+          Width = 1018
+          Height = 443
           Align = alClient
           Ctl3D = False
           DataSource = DMConsFat.dsFatAcum
@@ -970,8 +1008,8 @@ object frmConsFat: TfrmConsFat
         object SMDBGrid2: TSMDBGrid
           Left = 0
           Top = 0
-          Width = 678
-          Height = 404
+          Width = 1018
+          Height = 443
           Align = alClient
           DataSource = DMConsFat.dsConsCliente
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1112,8 +1150,8 @@ object frmConsFat: TfrmConsFat
         object SMDBGrid3: TSMDBGrid
           Left = 0
           Top = 0
-          Width = 678
-          Height = 404
+          Width = 1018
+          Height = 443
           Align = alClient
           DataSource = DMConsFat.dsConsData
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
