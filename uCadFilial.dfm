@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_Dados
+        ActivePage = TS_SPED
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 0
+        TabIndex = 4
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -2621,24 +2621,6 @@ object frmCadFilial: TfrmCadFilial
               'B'
               'C')
           end
-          object RxDBComboBox12: TRxDBComboBox
-            Left = 77
-            Top = 52
-            Width = 403
-            Height = 21
-            Style = csDropDownList
-            DataField = 'SPED_ATIVIDADE'
-            DataSource = DMCadFilial.dsFilial
-            EnableValues = False
-            ItemHeight = 13
-            Items.Strings = (
-              'Industrial ou equiparado a industrial'
-              'Outros')
-            TabOrder = 2
-            Values.Strings = (
-              '0'
-              '1')
-          end
           object RzGroupBox4: TRzGroupBox
             Left = 80
             Top = 95
@@ -2740,6 +2722,24 @@ object frmCadFilial: TfrmCadFilial
                 '4'
                 '9')
             end
+          end
+          object RxDBComboBox25: TRxDBComboBox
+            Left = 77
+            Top = 52
+            Width = 284
+            Height = 21
+            Style = csDropDownList
+            DataField = 'SPED_ATIVIDADE'
+            DataSource = DMCadFilial.dsFilial
+            EnableValues = True
+            ItemHeight = 13
+            Items.Strings = (
+              '0 - Industrial ou equiparado a industrial'
+              '1 - Outros')
+            TabOrder = 2
+            Values.Strings = (
+              '0'
+              '1')
           end
         end
         object TabSheet1: TRzTabSheet

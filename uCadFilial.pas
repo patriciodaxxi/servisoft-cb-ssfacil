@@ -161,7 +161,6 @@ type
     Label63: TLabel;
     RxDBComboBox11: TRxDBComboBox;
     Label64: TLabel;
-    RxDBComboBox12: TRxDBComboBox;
     btnInserir: TNxButton;
     btnExcluir: TNxButton;
     btnPesquisar: TNxButton;
@@ -378,6 +377,7 @@ type
     DBCheckBox22: TDBCheckBox;
     Label137: TLabel;
     Label138: TLabel;
+    RxDBComboBox25: TRxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
