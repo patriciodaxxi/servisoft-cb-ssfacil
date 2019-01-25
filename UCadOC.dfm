@@ -25,7 +25,7 @@ object frmCadOC: TfrmCadOC
     Top = 0
     Width = 1030
     Height = 690
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOC: TfrmCadOC
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -77,7 +77,7 @@ object frmCadOC: TfrmCadOC
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 13
+        ColCount = 15
         RowCount = 2
         Columns = <
           item
@@ -163,6 +163,22 @@ object frmCadOC: TfrmCadOC
             Expanded = False
             FieldName = 'ID'
             Title.Alignment = taCenter
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_CLIENTE'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID Fornecedor'
+            Width = 60
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CNPJ_CPF'
+            Title.Alignment = taCenter
+            Title.Caption = 'CNPJ / CPF'
+            Width = 150
             Visible = True
           end>
       end
@@ -1938,11 +1954,13 @@ object frmCadOC: TfrmCadOC
                 Expanded = False
                 FieldName = 'QTD_FATURADO'
                 Title.Caption = 'Qtd. Entregue'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_RESTANTE'
+                Width = 64
                 Visible = True
               end
               item
@@ -1977,16 +1995,19 @@ object frmCadOC: TfrmCadOC
                 FieldName = 'VLR_ICMS'
                 Title.Alignment = taCenter
                 Title.Caption = 'Complemento'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_CANCELADO'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'CANCELADO'
+                Width = 64
                 Visible = True
               end
               item

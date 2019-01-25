@@ -353,7 +353,7 @@ object frmConsOC: TfrmConsOC
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 21
+        ColCount = 22
         RowCount = 2
         Columns = <
           item
@@ -403,6 +403,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'REFERENCIA'
             Title.Alignment = taCenter
             Title.Caption = 'Refer'#234'ncia'
+            Width = 64
             Visible = True
           end
           item
@@ -422,6 +423,14 @@ object frmConsOC: TfrmConsOC
             Visible = True
           end
           item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'TAMANHO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tam'
+            Visible = True
+          end
+          item
             Expanded = False
             FieldName = 'QTD'
             Title.Alignment = taCenter
@@ -433,6 +442,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'QTD_FATURADO'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd Entregue'
+            Width = 64
             Visible = True
           end
           item
@@ -440,6 +450,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'QTD_RESTANTE'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Pendente'
+            Width = 64
             Visible = True
           end
           item
@@ -447,6 +458,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'QTD_CANCELADO'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Cancelada'
+            Width = 64
             Visible = True
           end
           item
@@ -478,6 +490,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'ID_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
+            Width = 64
             Visible = True
           end
           item
@@ -1012,6 +1025,7 @@ object frmConsOC: TfrmConsOC
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
+            Width = 64
             Visible = True
           end
           item
@@ -1024,6 +1038,7 @@ object frmConsOC: TfrmConsOC
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
+            Width = 64
             Visible = True
           end>
       end

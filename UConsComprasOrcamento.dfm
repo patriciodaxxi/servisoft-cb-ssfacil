@@ -1,6 +1,6 @@
 object frmConsComprasServico: TfrmConsComprasServico
-  Left = 376
-  Top = 132
+  Left = 208
+  Top = 124
   Width = 928
   Height = 480
   Caption = 'frmConsComprasServico'
@@ -18,7 +18,7 @@ object frmConsComprasServico: TfrmConsComprasServico
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 912
+    Width = 920
     Height = 69
     Align = alTop
     BevelOuter = bvNone
@@ -252,8 +252,8 @@ object frmConsComprasServico: TfrmConsComprasServico
   object RzPageControl3: TRzPageControl
     Left = 0
     Top = 69
-    Width = 912
-    Height = 372
+    Width = 920
+    Height = 380
     ActivePage = TS_Cliente_Acum
     ActivePageDefault = TS_Cliente_Acum
     Align = alClient
@@ -277,8 +277,8 @@ object frmConsComprasServico: TfrmConsComprasServico
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 908
-        Height = 349
+        Width = 916
+        Height = 357
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFat.dsComprasServico

@@ -4052,55 +4052,55 @@ object fMenu: TfMenu
         FormName = 'frmCadProduto'
         CompName = 'btnInserir'
         Caption = 'Inserir'
-        GroupName = 'Material'
+        GroupName = 'Produtos'
       end
       item
         FormName = 'frmCadProduto'
         CompName = 'btnExcluir'
         Caption = 'Excluir'
-        GroupName = 'Material'
+        GroupName = 'Produtos'
       end
       item
         FormName = 'frmCadProduto'
         CompName = 'btnAlterar'
         Caption = 'Alterar'
-        GroupName = 'Material'
+        GroupName = 'Produtos'
       end
       item
         FormName = 'frmCadProduto'
         CompName = 'btnExcluir_Tam'
         Caption = 'Excluir a Grade'
-        GroupName = 'Material'
+        GroupName = 'Produtos'
       end
       item
         FormName = 'frmCadProduto'
         CompName = 'btnCopiarProduto'
         Caption = 'Copiar Produto'
-        GroupName = 'Material'
+        GroupName = 'Produtos'
       end
       item
         FormName = 'frmCadProduto'
         CompName = 'Label4'
         Caption = 'N'#227'o mostrar Pre'#231'o Custo:'
-        GroupName = 'Material'
+        GroupName = 'Produtos'
       end
       item
         FormName = 'frmCadProduto'
         CompName = 'Label12'
         Caption = 'N'#227'o mostrar Pre'#231'o Venda:'
-        GroupName = 'Material'
+        GroupName = 'Produtos'
       end
       item
         FormName = 'frmCadProduto'
         CompName = 'Label24'
         Caption = 'N'#227'o mostrar % Margem:'
-        GroupName = 'Material'
+        GroupName = 'Produtos'
       end
       item
         FormName = 'frmCadProduto'
         CompName = 'RzCheckList1'
         Caption = 'Imprimir Pre'#231'o Custo/Venda'
-        GroupName = 'Material'
+        GroupName = 'Produtos'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

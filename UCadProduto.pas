@@ -342,7 +342,6 @@ type
     BitBtn2: TBitBtn;
     SMDBGrid2: TSMDBGrid;
     pnl_Eng_Consumo: TPanel;
-    pnl_Eng_Processo: TPanel;
     pnlConsumo: TPanel;
     Label74: TLabel;
     btnInserir_Consumo: TNxButton;
@@ -358,7 +357,6 @@ type
     btnEmbalagem: TNxButton;
     btnAtelier: TNxButton;
     btnCBarra: TNxButton;
-    SMDBGrid9: TSMDBGrid;
     btnCor2: TNxButton;
     Label117: TLabel;
     RxDBLookupCombo18: TRxDBLookupCombo;
@@ -727,26 +725,11 @@ type
     DBEdit152: TDBEdit;
     Label236: TLabel;
     btnAjustarPeso: TBitBtn;
-    gbxProcesso: TRzGroupBox;
-    btnInserir_Processo: TNxButton;
-    btnAlterar_Processo: TNxButton;
-    btnExcluir_Processo: TNxButton;
-    RzGroupBox1: TRzGroupBox;
-    Label163: TLabel;
-    RxDBLookupCombo21: TRxDBLookupCombo;
-    Label162: TLabel;
-    RxDBComboBox10: TRxDBComboBox;
-    Label164: TLabel;
-    RxDBComboBox11: TRxDBComboBox;
-    SpeedButton13: TSpeedButton;
-    SpeedButton14: TSpeedButton;
     Label118: TLabel;
-    SMDBGrid16: TSMDBGrid;
     Label238: TLabel;
     DBEdit154: TDBEdit;
     Label239: TLabel;
     DBEdit155: TDBEdit;
-    btnAjuda_TipoMat: TNxButton;
     Exportaparabalana1: TMenuItem;
     ExportarProduto1: TMenuItem;
     AtualizarPreo1: TMenuItem;
@@ -768,6 +751,26 @@ type
     Edit12: TEdit;
     Label13: TLabel;
     RxDBComboBox1: TRxDBComboBox;
+    Panel19: TPanel;
+    pnl_Eng_Processo: TPanel;
+    SMDBGrid9: TSMDBGrid;
+    gbxProcesso: TRzGroupBox;
+    btnInserir_Processo: TNxButton;
+    btnAlterar_Processo: TNxButton;
+    btnExcluir_Processo: TNxButton;
+    RzGroupBox1: TRzGroupBox;
+    Label163: TLabel;
+    Label162: TLabel;
+    Label164: TLabel;
+    SpeedButton13: TSpeedButton;
+    SpeedButton14: TSpeedButton;
+    RxDBLookupCombo21: TRxDBLookupCombo;
+    RxDBComboBox10: TRxDBComboBox;
+    RxDBComboBox11: TRxDBComboBox;
+    btnAjuda_TipoMat: TNxButton;
+    SMDBGrid16: TSMDBGrid;
+    Panel8: TPanel;
+    NxButton2: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -969,6 +972,7 @@ type
     procedure SpeedButton17Click(Sender: TObject);
     procedure Edit12KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure NxButton2Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1754,6 +1758,9 @@ begin
   SMDBGrid16.Visible := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
   if SMDBGrid16.Visible then
     pnl_Eng_Processo.Visible := False;
+  Panel8.Visible := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
+  
+
   Label118.Visible    := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
   StaticText1.Caption := 'Duplo clique para consultar     F3 Consultar Cadastro Anterior';
   if fDMCadProduto.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
@@ -1792,7 +1799,11 @@ begin
     pnl_Eng_Processo.Align := alClient
   else
   if SMDBGrid16.Visible then
+  begin
      SMDBGrid16.Align := alClient;
+     Panel8.Align     := alLeft;
+  end;
+
   if fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S' then
     Label110.Caption := 'Construção/Linha:';
   Label246.Visible  := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
@@ -2106,12 +2117,33 @@ end;
 procedure TfrmCadProduto.btnExcluir_ConsumoClick(Sender: TObject);
 var
   vItemAux : Integer;
+  vFlag : Boolean;
 begin
   if fDMCadProduto.cdsProduto_Consumo.IsEmpty then
     exit;
 
   if uAltProd.fnc_Custo(fDMCadProduto.cdsProdutoID.AsInteger,fDMCadProduto) then
     exit;
+
+  if (fDMCadProduto.cdsProduto_Comb.RecordCount > 0) and (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S') then
+  begin
+    vFlag := False;
+    fDMCadProduto.cdsProduto_Comb.First;
+    while not fDMCadProduto.cdsProduto_Comb.Eof do
+    begin
+      if fDMCadProduto.cdsProduto_Comb_Mat.Locate('ITEM_MAT',fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger,([Locaseinsensitive])) then
+      begin
+        vFlag := True;
+        fDMCadProduto.cdsProduto_Comb.Last;
+      end;
+      fDMCadProduto.cdsProduto_Comb.Next;
+    end;
+    if vFlag then
+    begin
+      MessageDlg('*** Esse Material esta na Combinação ' + fDMCadProduto.cdsProduto_CombNOME.AsString, mtError, [mbOk], 0);
+      exit;
+    end;
+  end;
 
   if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
@@ -5786,6 +5818,15 @@ procedure TfrmCadProduto.Edit12KeyDown(Sender: TObject; var Key: Word;
 begin
   if (Key = Vk_Return) and (trim(Edit12.Text) <> '') then
     btnConsultarClick(Sender);
+end;
+
+procedure TfrmCadProduto.NxButton2Click(Sender: TObject);
+begin
+  if fDMCadProduto.cdsProduto_Consumo_Proc.IsEmpty then
+    exit;
+  if MessageDlg('Deseja excluir o Processo Selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+  fDMCadProduto.cdsProduto_Consumo_Proc.Delete;
 end;
 
 end.
