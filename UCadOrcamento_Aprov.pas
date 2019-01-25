@@ -515,7 +515,7 @@ begin
   fDMCadPedido.cdsPedidoVLR_IPI.AsFloat      := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_IPI.AsFloat   + fDMCadPedido.cdsPedido_ItensVLR_IPI.AsFloat));
   fDMCadPedido.cdsPedidoVLR_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_DESCONTO.AsFloat +
                                                 fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat + fDMCadPedido.cdsPedido_ItensVLR_DESCONTORATEIO.AsFloat));
-  fDMCadPedido.cdsPedidoVLR_FRETE.AsFloat    := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_FRETE.AsFloat + fDMCadPedido.cdsPedido_ItensVLR_FRETE.AsFloat));
+  fDMCadPedido.cdsPedidoVLR_FRETE.AsFloat    := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_FRETE.AsFloat));
 
   fDMCadPedido.cdsPedidoQTD.AsFloat          := fDMCadPedido.cdsPedidoQTD.AsFloat + fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
   fDMCadPedido.cdsPedidoQTD_RESTANTE.AsFloat := fDMCadPedido.cdsPedidoQTD_RESTANTE.AsFloat + fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
