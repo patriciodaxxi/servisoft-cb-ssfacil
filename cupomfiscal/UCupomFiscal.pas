@@ -183,7 +183,7 @@ implementation
 //---------------TROCAR IMPRESSORA
 uses UCupomFiscalPgto, UCupomFiscalCanc, USel_Produto, uUtilPadrao, uComandaR, uCupomCliente, uCalculo_CupomFiscal, Math,
   USenha, uUtilCupom, UConsPreco, USel_Sacola_CF, USel_Pedido_CF, DmdDatabase, uMenu, UCupomFiscalCli, USel_Comanda_CF,
-  uCupomFiscalParcela, uSel_CorTamanho;
+  uCupomFiscalParcela, uSel_CorTamanho, uBalanca;
 
 {$R *.dfm}
 
@@ -505,6 +505,13 @@ procedure TfCupomFiscal.Edit1KeyDown(Sender: TObject; var Key: Word;
 begin
   if (Key = Vk_Return) then
   begin
+    if Copy(Edit1.Text,Length(Edit1.Text),1) = '*' then
+    begin
+      CurrencyEdit1.Value := StrToFloat(Copy(Edit1.Text,1,Length(Edit1.Text) - 1));
+      Edit1.Clear;
+      Exit;
+    end;
+
     prc_EnterCodigo;
     if fDmCupomFiscal.cdsCupomParametrosUSA_COR_TAMANHO.AsString = 'S' then
       prc_CorTamanho;
@@ -1931,7 +1938,10 @@ begin
        ACBrBAL1.Device.Stop      := TACBrSerialStop(0);
        ACBrBAL1.Device.Data      := StrToInt('8');
        ACBrBAL1.Device.Baud      := StrToInt('2400');
+       ACBrBAL1.Device.Baud      := StrToInt('2400');
        ACBrBAL1.Device.Porta     := 'COM2';
+
+
 
        // Conecta com a balança
        ACBrBAL1.Ativar;

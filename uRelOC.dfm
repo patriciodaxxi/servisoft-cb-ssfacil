@@ -1,9 +1,8 @@
 object fRelOC: TfRelOC
   Left = 47
   Top = 49
-  Width = 1044
+  Width = 873
   Height = 666
-  VertScrollBar.Position = 329
   Caption = 'Relat'#243'rio Or'#231'amento'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,8 +17,8 @@ object fRelOC: TfRelOC
   PixelsPerInch = 96
   TextHeight = 13
   object RLReport1: TRLReport
-    Left = 80
-    Top = -209
+    Left = 24
+    Top = 8
     Width = 794
     Height = 1123
     DataSource = DMCadPedido.dsPedidoImp

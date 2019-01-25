@@ -1244,7 +1244,7 @@ begin
   if (trim(fDMCadPedido.cdsPedidoImpEMAIL_COMPRAS.AsString) <> '') then
     vEmail_Fortes := fDMCadPedido.cdsPedidoImpEMAIL_COMPRAS.AsString;
   vEmail_Assunto_Fortes := 'Ordem de Compra N° ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
-  vEmail_Fortes_Corpo   := 'Em anexo Ordem de Compra  N° ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
+  vEmail_Fortes_Corpo   := 'Em anexo Ordem de Compra N° ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
   vTipo_Config_Email    := 4;
   vFilial               := fDMCadPedido.cdsPedidoImpFILIAL.AsInteger;
 

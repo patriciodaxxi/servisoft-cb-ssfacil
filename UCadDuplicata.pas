@@ -240,6 +240,7 @@ type
     RecibodePagamento1: TMenuItem;
     SaldoClienteFornecedor1: TMenuItem;
     Carn1: TMenuItem;
+    ransfernciadeICMS1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -323,6 +324,7 @@ type
     procedure RecibodePagamento1Click(Sender: TObject);
     procedure SaldoClienteFornecedor1Click(Sender: TObject);
     procedure Carn1Click(Sender: TObject);
+    procedure ransfernciadeICMS1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -2870,6 +2872,21 @@ begin
     end;
     fDMCadDuplicata.frxReport1.ShowReport;
   end;
+end;
+
+procedure TfrmCadDuplicata.ransfernciadeICMS1Click(Sender: TObject);
+var
+  vArq: String;  
+begin
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Transf_ICMS.fr3';
+    if FileExists(vArq) then
+      fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
+    else
+    begin
+      ShowMessage('Relatório não localizado! ' + vArq);
+      Exit;
+    end;
+    fDMCadDuplicata.frxReport1.ShowReport;
 end;
 
 end.

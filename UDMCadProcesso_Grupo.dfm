@@ -1,8 +1,8 @@
 object DMCadProcesso_Grupo: TDMCadProcesso_Grupo
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 290
-  Top = 205
+  Left = 332
+  Top = 162
   Height = 357
   Width = 832
   object sdsProcesso_Grupo: TSQLDataSet
@@ -171,6 +171,8 @@ object DMCadProcesso_Grupo: TDMCadProcesso_Grupo
     Top = 144
   end
   object sdsProcesso: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 'SELECT ID, NOME, TIPO, ENCERADO, ENTRADA_AUTO'#13#10'FROM PROCESSO'
     MaxBlobSize = -1
     Params = <>
@@ -260,6 +262,8 @@ object DMCadProcesso_Grupo: TDMCadProcesso_Grupo
     end
   end
   object sdsServico_OS: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 'SELECT ID, NOME'#13#10'FROM SERVICO_OS'#13#10'WHERE INATIVO = '#39'N'#39
     MaxBlobSize = -1
     Params = <>
