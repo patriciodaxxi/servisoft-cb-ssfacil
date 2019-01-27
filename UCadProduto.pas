@@ -751,7 +751,6 @@ type
     Edit12: TEdit;
     Label13: TLabel;
     RxDBComboBox1: TRxDBComboBox;
-    Panel19: TPanel;
     pnl_Eng_Processo: TPanel;
     SMDBGrid9: TSMDBGrid;
     gbxProcesso: TRzGroupBox;
@@ -769,8 +768,6 @@ type
     RxDBComboBox11: TRxDBComboBox;
     btnAjuda_TipoMat: TNxButton;
     SMDBGrid16: TSMDBGrid;
-    Panel8: TPanel;
-    NxButton2: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1758,8 +1755,6 @@ begin
   SMDBGrid16.Visible := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
   if SMDBGrid16.Visible then
     pnl_Eng_Processo.Visible := False;
-  Panel8.Visible := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
-  
 
   Label118.Visible    := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
   StaticText1.Caption := 'Duplo clique para consultar     F3 Consultar Cadastro Anterior';
@@ -1801,7 +1796,7 @@ begin
   if SMDBGrid16.Visible then
   begin
      SMDBGrid16.Align := alClient;
-     Panel8.Align     := alLeft;
+     //nel8.Align     := alLeft;
   end;
 
   if fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S' then

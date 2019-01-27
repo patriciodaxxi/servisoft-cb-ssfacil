@@ -3255,8 +3255,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Profissionais: TPanel
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -3607,8 +3607,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlConjuge: TPanel
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -3973,8 +3973,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Conta: TPanel
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -4102,8 +4102,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid3: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Dep
@@ -4178,8 +4178,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid4: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefP
@@ -4269,8 +4269,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid5: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefC
@@ -4339,8 +4339,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid6: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Aut
@@ -5691,7 +5691,7 @@ object frmCadPessoa: TfrmCadPessoa
             OnClick = SpeedButton9Click
           end
           object Label153: TLabel
-            Left = 557
+            Left = 501
             Top = 273
             Width = 286
             Height = 13
@@ -6099,8 +6099,8 @@ object frmCadPessoa: TfrmCadPessoa
             TabOrder = 14
           end
           object DBCheckBox13: TDBCheckBox
-            Left = 536
-            Top = 33
+            Left = 720
+            Top = 369
             Width = 153
             Height = 17
             Caption = 'Usa Transfer'#234'ncia ICMS'
@@ -6117,8 +6117,8 @@ object frmCadPessoa: TfrmCadPessoa
             ValueUnchecked = 'N'
           end
           object DBCheckBox14: TDBCheckBox
-            Left = 536
-            Top = 51
+            Left = 720
+            Top = 387
             Width = 225
             Height = 17
             Caption = 'Cliente Estoque (Pedido sem Faturamento)'
@@ -6135,8 +6135,8 @@ object frmCadPessoa: TfrmCadPessoa
             ValueUnchecked = 'N'
           end
           object DBCheckBox15: TDBCheckBox
-            Left = 536
-            Top = 67
+            Left = 720
+            Top = 403
             Width = 249
             Height = 17
             Caption = 'Agrupa Tamanhos na Emiss'#227'o da Nota Fiscal'
@@ -6167,8 +6167,8 @@ object frmCadPessoa: TfrmCadPessoa
             OnChange = RxDBLookupCombo27Change
           end
           object DBCheckBox6: TDBCheckBox
-            Left = 536
-            Top = 83
+            Left = 720
+            Top = 419
             Width = 145
             Height = 17
             Caption = 'Cobrar Taxa Banc'#225'ria'
@@ -6312,8 +6312,8 @@ object frmCadPessoa: TfrmCadPessoa
             TabOrder = 5
           end
           object DBCheckBox24: TDBCheckBox
-            Left = 536
-            Top = 99
+            Left = 720
+            Top = 435
             Width = 89
             Height = 17
             Caption = 'Protestar'
@@ -6330,8 +6330,8 @@ object frmCadPessoa: TfrmCadPessoa
             ValueUnchecked = 'N'
           end
           object DBCheckBox25: TDBCheckBox
-            Left = 536
-            Top = 115
+            Left = 720
+            Top = 451
             Width = 265
             Height = 17
             Caption = 'Controlar o Custo L'#237'quido na Entrada'
@@ -6348,8 +6348,8 @@ object frmCadPessoa: TfrmCadPessoa
             ValueUnchecked = 'N'
           end
           object DBCheckBox26: TDBCheckBox
-            Left = 536
-            Top = 131
+            Left = 720
+            Top = 467
             Width = 265
             Height = 17
             Caption = 'Usar a OC/Item que vem no XML do fornecedor'
@@ -6566,6 +6566,24 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Style = []
             ParentFont = False
             TabOrder = 38
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
+          end
+          object DBCheckBox32: TDBCheckBox
+            Left = 721
+            Top = 483
+            Width = 265
+            Height = 17
+            Caption = 'Imprimir o nome do Produto do Cliente na NFe'
+            DataField = 'IMP_NOMEPROD_CLIENTE'
+            DataSource = DMCadPessoa.dsPessoa
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 39
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -7932,8 +7950,8 @@ object frmCadPessoa: TfrmCadPessoa
   end
   object ACBrConsultaCPF1: TACBrConsultaCPF
     ProxyPort = '8080'
-    Left = 578
-    Top = 85
+    Left = 650
+    Top = 77
   end
   object PopupMenu1: TPopupMenu
     Left = 489
