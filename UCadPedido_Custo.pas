@@ -189,7 +189,7 @@ begin
   fDMCadPedido.cdsPedido_Itens.First;
   while not fDMCadPedido.cdsPedido_Itens.Eof do
   begin
-    if (fDMCadPedido.cdsPedido_ItensPRECO_CUSTO.AsFloat = 0) then
+    if (fDMCadPedido.cdsPedido_ItensPRECO_CUSTO.AsFloat = 0) or (fDMCadPedido.cdsPedido_ItensPRECO_CUSTO.AsFloat <> fDMCadPedido.qProdutoPRECO_CUSTO.AsFloat) then
     begin
       fDMCadPedido.cdsPedido_Itens.Edit;
       fDMCadPedido.prc_Abrir_qProduto(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
