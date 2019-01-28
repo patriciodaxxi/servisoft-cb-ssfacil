@@ -1656,9 +1656,9 @@ begin
   if (fDMCadPedido.qParametros_PedINF_QTD_TALAO.AsString = 'S') and (fDMInformar_Tam.vQtd_Por_Talao > 0) then
   begin
     vQtdAux := Round(fDMInformar_Tam.vQtd_Grade);
+    vQtdAux := vQtdAux div fDMInformar_Tam.vQtd_Por_Talao;
     if vQtdAux mod fDMInformar_Tam.vQtd_Por_Talao > 0 then
       vQtdAux := vQtdAux + 1;
-    vQtdAux := vQtdAux div fDMInformar_Tam.vQtd_Por_Talao;
     fDMInformar_Tam.mItens.EmptyDataSet;
     x := 0;
     while x < vQtdAux do
