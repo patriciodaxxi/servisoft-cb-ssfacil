@@ -204,6 +204,10 @@ type
     Personalizado1: TMenuItem;
     Label41: TLabel;
     RxDBLookupCombo7: TRxDBLookupCombo;
+    Label42: TLabel;
+    DBEdit29: TDBEdit;
+    Label44: TLabel;
+    DBEdit30: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);

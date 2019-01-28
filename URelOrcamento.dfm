@@ -1,6 +1,6 @@
 object fRelOrcamento: TfRelOrcamento
-  Left = 235
-  Top = 30
+  Left = 236
+  Top = 63
   Width = 924
   Height = 666
   VertScrollBar.Position = 326
@@ -1648,21 +1648,6 @@ object fRelOrcamento: TfRelOrcamento
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object RLDBText27: TRLDBText
-          Left = 124
-          Top = 2
-          Width = 111
-          Height = 13
-          AutoSize = False
-          DataField = 'VLR_FRETE'
-          DataSource = DMCadPedido.dsPedidoImp
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
         object RLLabel15: TRLLabel
           Left = 481
           Top = 2
@@ -1700,6 +1685,19 @@ object fRelOrcamento: TfRelOrcamento
           Alignment = taRightJustify
           AutoSize = False
           Caption = '0,00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object rlVlrFrete: TRLLabel
+          Left = 128
+          Top = 2
+          Width = 56
+          Height = 14
+          Alignment = taRightJustify
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
