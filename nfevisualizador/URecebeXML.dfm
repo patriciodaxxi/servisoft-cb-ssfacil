@@ -2270,7 +2270,7 @@ object frmRecebeXML: TfrmRecebeXML
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 35
+          ColCount = 36
           RowCount = 2
           Columns = <
             item
@@ -2375,6 +2375,13 @@ object frmRecebeXML: TfrmRecebeXML
               Title.Alignment = taCenter
               Title.Caption = 'Refer'#234'ncia Interna'
               Width = 88
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Tamanho'
+              Title.Alignment = taCenter
               Visible = True
             end
             item
@@ -3025,7 +3032,7 @@ object frmRecebeXML: TfrmRecebeXML
               Caption = 'CEST Nota:'
             end
             object Label130: TLabel
-              Left = 367
+              Left = 215
               Top = 80
               Width = 73
               Height = 13
@@ -3047,6 +3054,14 @@ object frmRecebeXML: TfrmRecebeXML
               Height = 13
               Alignment = taRightJustify
               Caption = 'Posse Prod:'
+            end
+            object Label135: TLabel
+              Left = 438
+              Top = 95
+              Width = 48
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Tamanho:'
             end
             object DBEdit69: TDBEdit
               Left = 272
@@ -3114,7 +3129,7 @@ object frmRecebeXML: TfrmRecebeXML
               TabOrder = 2
             end
             object DBCheckBox1: TDBCheckBox
-              Left = 272
+              Left = 400
               Top = 20
               Width = 145
               Height = 17
@@ -3205,7 +3220,7 @@ object frmRecebeXML: TfrmRecebeXML
               TabOrder = 12
             end
             object ckAtualizaRef: TCheckBox
-              Left = 146
+              Left = 274
               Top = 20
               Width = 125
               Height = 17
@@ -3299,7 +3314,7 @@ object frmRecebeXML: TfrmRecebeXML
               TabOrder = 9
             end
             object DBEdit81: TDBEdit
-              Left = 440
+              Left = 288
               Top = 74
               Width = 81
               Height = 18
@@ -3313,8 +3328,8 @@ object frmRecebeXML: TfrmRecebeXML
               TabOrder = 14
             end
             object DBCheckBox10: TDBCheckBox
-              Left = 452
-              Top = 98
+              Left = 436
+              Top = 66
               Width = 92
               Height = 17
               Caption = 'Gerar Estoque'
@@ -3370,6 +3385,24 @@ object frmRecebeXML: TfrmRecebeXML
               Values.Strings = (
                 'E'
                 'T')
+            end
+            object RxDBLookupCombo10: TRxDBLookupCombo
+              Left = 487
+              Top = 89
+              Width = 82
+              Height = 19
+              DropDownCount = 8
+              DropDownWidth = 300
+              Ctl3D = False
+              DataField = 'Tamanho'
+              DataSource = DMRecebeXML.dsmItensNota
+              ListStyle = lsDelimited
+              LookupField = 'TAMANHO'
+              LookupDisplay = 'TAMANHO'
+              LookupSource = DMRecebeXML.dsTamanho
+              ParentCtl3D = False
+              TabOrder = 19
+              OnEnter = RxDBLookupCombo4Enter
             end
           end
         end

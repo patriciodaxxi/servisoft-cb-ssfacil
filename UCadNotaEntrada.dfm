@@ -25,7 +25,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     Top = 0
     Width = 941
     Height = 679
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1452,7 +1452,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 34
+            ColCount = 35
             RowCount = 2
             Columns = <
               item
@@ -1696,6 +1696,13 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 Title.Alignment = taCenter
                 Title.Caption = 'Pre'#231'o Custo Total'
                 Width = 64
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_COR'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cor'
                 Visible = True
               end>
           end

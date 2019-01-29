@@ -2087,6 +2087,13 @@ type
     mItensNotaNome_ContaOrcamento: TStringField;
     mItensNotaPosse_Material: TStringField;
     cdsOCTAMANHO: TStringField;
+    sdsTamanho: TSQLDataSet;
+    dspTamanho: TDataSetProvider;
+    cdsTamanho: TClientDataSet;
+    cdsTamanhoID: TIntegerField;
+    cdsTamanhoTAMANHO: TStringField;
+    dsTamanho: TDataSource;
+    qParametrosUSA_GRADE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2213,6 +2220,8 @@ begin
   qParametros_Custo.Open;
   cdsContas.Open;
   cdsTipoCobranca.Open;
+  cdsTamanho.Open;
+
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
@@ -2684,6 +2693,7 @@ begin
   mItensNotaGravar_Adic_Prod.AsString     := 'N';
   mItensNotaGerar_Estoque.AsString        := 'S';
   mItensNotaPosse_Material.AsString       := 'E';
+  mItensNotaTamanho.AsString              := '';
 end;
 
 procedure TDMRecebeXML.prc_Abrir_Combinacao(ID_Produto: Integer);
@@ -2772,6 +2782,7 @@ begin
   vUsa_Cor_Pos       := cdsOCUSA_COR.AsString;
   vUsa_Preco_Cor_Pos := cdsOCUSA_PRECO_COR.AsString;
   vID_Cor_Pos        := cdsOCID_COR.AsInteger;
+  vTamanho_Pos       := cdsOCTAMANHO.AsString;
 end;
 
 procedure TDMRecebeXML.cdsProduto_FornBeforePost(DataSet: TDataSet);

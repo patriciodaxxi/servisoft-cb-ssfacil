@@ -342,6 +342,8 @@ type
     DBEdit83: TDBEdit;
     RxDBComboBox2: TRxDBComboBox;
     Label125: TLabel;
+    Label135: TLabel;
+    RxDBLookupCombo10: TRxDBLookupCombo;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -715,6 +717,8 @@ begin
     else
     if (fDMRecebeXML.qParametrosUSA_LOTE_CONTROLE.AsString <> 'S') and (SMDBGrid1.Columns[i].FieldName = 'Num_Lote_Controle') then
       SMDBGrid1.Columns[i].Visible := False;
+    if (SMDBGrid1.Columns[i].FieldName = 'Tamanho') then
+      SMDBGrid1.Columns[i].Visible := (fDMRecebeXML.qParametrosUSA_GRADE.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'Vlr_Venda') then
       SMDBGrid1.Columns[i].Visible := (fDMRecebeXML.qParametros_RecXMLMOSTRAR_VLR_VENDA.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'Vlr_Custo_Prod') then
@@ -745,6 +749,9 @@ begin
   Label132.Visible      := (fDMRecebeXML.qParametros_RecXMLUSA_REF_SEQUENCIAL.AsString = 'S');
   CurrencyEdit2.Visible := (fDMRecebeXML.qParametros_RecXMLUSA_REF_SEQUENCIAL.AsString = 'S');
   NxButton1.Visible     := (fDMRecebeXML.qParametros_RecXMLUSA_REF_SEQUENCIAL.AsString = 'S');
+  
+  Label135.Visible          := (fDMRecebeXML.qParametrosUSA_GRADE.AsString = 'S');
+  RxDBLookupCombo10.Visible := (fDMRecebeXML.qParametrosUSA_GRADE.AsString = 'S');
 
   fDMRecebeXML.mItensNota.AFTERSCROLL := prc_scroll;
 end;
@@ -2292,6 +2299,8 @@ begin
     if fDMRecebeXML.mItensNotaGerar_Estoque.AsString <> 'S' then
       fDMRecebeXML.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
     fDMRecebeXML.cdsNotaFiscal_ItensTAMANHO.AsString      := fDMRecebeXML.mItensNotaTamanho.AsString;
+    if trim(fDMRecebeXML.cdsNotaFiscal_ItensTAMANHO.AsString) = '' then
+      fDMRecebeXML.cdsNotaFiscal_ItensTAMANHO.AsString := '';
     fDMRecebeXML.cdsNotaFiscal_ItensQTDDEVOLVIDA.AsFloat  := 0;
     fDMRecebeXML.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMRecebeXML.mItensNotaQtd.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensVLR_FRETE.AsFloat     := fDMRecebeXML.mItensNotaVlrFrete.AsFloat;
@@ -3884,6 +3893,10 @@ begin
   if fDMRecebeXML.mItensNotaUsa_Cor.AsString = 'S' then
     fDMRecebeXML.mItensNotaID_Cor.AsInteger := vID_Cor_Pos;
   fDMRecebeXML.mItensNotaUsa_Preco_Cor.AsString      := vUsa_Preco_Cor_Pos;
+  //29/01/2019
+  if trim(vTamanho_Pos) <> '' then
+    fDMRecebeXML.mItensNotaTamanho.AsString := vTamanho_Pos;
+  //***********************
 
   //22/01/2019 foi incluido o if para ler o produto somente quando for associado
   if ((fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and (ckAssociar.Checked)) or

@@ -165,7 +165,8 @@ var
   vProcesso_Parcial : String; //E=Encerrar    G=Gerar Novo registro no Baixa_Processo     C=Cancelar e retornar
   vItem_Ped_Pos : Integer;
   vCodBarra_Pos : String;
-  vTipo_Etiqueta : String; //ROT=Rotulo 
+  vTipo_Etiqueta : String; //ROT=Rotulo
+  vTamanho_Pos : String; 
 
 implementation
 

@@ -878,11 +878,13 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
       TitleHeight.PixelCount = 24
       FooterColor = clBtnFace
       ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+      OnGetCellParams = SMDBGrid1GetCellParams
       RegistryKey = 'Software\Scalabium'
       RegistrySection = 'SMDBGrid'
       WidthOfIndicator = 11
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
+      ColCount = 6
       RowCount = 2
       Columns = <
         item
@@ -920,6 +922,15 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
           Title.Caption = 'ID Cod. Combina'#231#227'o'
           Title.Color = 16777134
           Width = 82
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'INATIVO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Inativo'
+          Title.Color = 16777134
           Visible = True
         end>
     end

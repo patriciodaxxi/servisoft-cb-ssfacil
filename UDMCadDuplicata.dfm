@@ -765,13 +765,22 @@ object DMCadDuplicata: TDMCadDuplicata
     object cdsDuplicata_HistclCheque: TStringField
       FieldKind = fkCalculated
       FieldName = 'clCheque'
+      ProviderFlags = []
       Size = 1
       Calculated = True
     end
     object cdsDuplicata_HistclFormaPgto: TStringField
       FieldKind = fkCalculated
       FieldName = 'clFormaPgto'
+      ProviderFlags = []
       Size = 50
+      Calculated = True
+    end
+    object cdsDuplicata_HistclNomeConta: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clNomeConta'
+      ProviderFlags = []
+      Size = 40
       Calculated = True
     end
   end

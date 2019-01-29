@@ -199,6 +199,16 @@ begin
       vCalcImportacao := 0;
       vCalcAduaneira  := 0;
     //end;
+    if fDMCadNotaFiscal.cdsNotaFiscalCALCULAR_IMP_ITEM.AsString = 'S' then
+    begin
+      vCalcImportacao := 0;
+      vCalcAduaneira  := 0;
+    end
+    else
+    begin
+      vCalcImportacao := fDMCadNotaFiscal.cdsNotaFiscalVLR_IMPORTACAO.AsFloat;
+      vCalcAduaneira  := fDMCadNotaFiscal.cdsNotaFiscalVLR_ADUANEIRA.AsFloat;
+    end;
 
     vVlrDuplicata   := 0;
     vVlrDuplicataOutros := 0;
@@ -459,6 +469,10 @@ begin
     if ((fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_DUPLICATA.AsString = 'S') or (not(vFlagGeraDupl))) and (not(Repetir)) then
       prc_Calcular_Frete_Novo(fDMCadNotaFiscal);
     //**********
+    //29/01/2019  Cálculo para a Lotus, pois calcula o Valor da Aduaneira pelo total
+    if ((fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_DUPLICATA.AsString = 'S') or (not(vFlagGeraDupl))) and (not(Repetir)) then
+      prc_calcular_Aduaneira_Novo(fDMCadNotaFiscal);
+    //****************
 
     if copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '3' then
     begin
@@ -492,7 +506,8 @@ begin
       //prc_Calcular_Frete_Novo(fDMCadNotaFiscal);
       prc_calcular_TaxaCiscomex_Novo(fDMCadNotaFiscal);
       prc_calcular_AFRMM_Novo(fDMCadNotaFiscal);
-      prc_calcular_Aduaneira_Novo(fDMCadNotaFiscal);
+      //Foi colocado acima do cálculo do valor de importação, pois a Lotus informa o valor de Aduaneiro Geral   29/01/2019
+      //prc_calcular_Aduaneira_Novo(fDMCadNotaFiscal);
       prc_calcular_Seguro_Novo(fDMCadNotaFiscal);
       prc_Calcular_Vlr_Outros(fDMCadNotaFiscal);
       prc_Calcular_OutrasDespesas_Novo(fDMCadNotaFiscal);

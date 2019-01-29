@@ -3558,6 +3558,11 @@ object DMRecebeXML: TDMRecebeXML
       FixedChar = True
       Size = 1
     end
+    object qParametrosUSA_GRADE: TStringField
+      FieldName = 'USA_GRADE'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsCidade: TSQLDataSet
     NoMetadata = True
@@ -8127,12 +8132,12 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 1024
-    Top = 178
+    Top = 194
   end
   object dspUnidade2: TDataSetProvider
     DataSet = sdsUnidade2
     Left = 1056
-    Top = 178
+    Top = 194
   end
   object cdsUnidade2: TClientDataSet
     Aggregates = <>
@@ -8140,7 +8145,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspUnidade2'
     Left = 1096
-    Top = 176
+    Top = 192
     object cdsUnidade2UNIDADE: TStringField
       FieldName = 'UNIDADE'
       Required = True
@@ -8157,7 +8162,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsUnidade2: TDataSource
     DataSet = cdsUnidade2
     Left = 1136
-    Top = 178
+    Top = 194
   end
   object sdsSitTrib_CF: TSQLDataSet
     NoMetadata = True
@@ -9112,5 +9117,38 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'DESCRICAO'
       Size = 50
     end
+  end
+  object sdsTamanho: TSQLDataSet
+    CommandText = 'SELECT *'#13#10'FROM TAMANHO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 1032
+    Top = 143
+  end
+  object dspTamanho: TDataSetProvider
+    DataSet = sdsTamanho
+    Left = 1072
+    Top = 144
+  end
+  object cdsTamanho: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTamanho'
+    Left = 1112
+    Top = 144
+    object cdsTamanhoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTamanhoTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+  end
+  object dsTamanho: TDataSource
+    DataSet = cdsTamanho
+    Left = 1144
+    Top = 144
   end
 end

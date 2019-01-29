@@ -75,6 +75,8 @@ type
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
+      AFont: TFont; var Background: TColor; Highlight: Boolean);
   private
     { Private declarations }
     ffrmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat;
@@ -695,6 +697,13 @@ begin
     if (fDMCadProduto.cdsProduto_Comb.State in [dsEdit]) and not(btnConfirmar.Enabled) then
       fDMCadProduto.cdsProduto_Comb.Post;
   end
+end;
+
+procedure TfrmCadProduto_Comb.SMDBGrid1GetCellParams(Sender: TObject;
+  Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
+begin
+  if fDMCadProduto.cdsProduto_CombINATIVO.AsString = 'S' then
+    AFont.Color := clRed;
 end;
 
 end.

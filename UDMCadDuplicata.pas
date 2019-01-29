@@ -1085,6 +1085,7 @@ type
     cdsContaOrcamentoSUPERIOR: TStringField;
     cdsPessoaFUNCIONARIO_CONTA_ID: TIntegerField;
     cdsPessoaTP_FUNCIONARIO: TStringField;
+    cdsDuplicata_HistclNomeConta: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
@@ -2146,6 +2147,12 @@ end;
 
 procedure TDMCadDuplicata.cdsDuplicata_HistCalcFields(DataSet: TDataSet);
 begin
+  cdsDuplicata_HistclNomeConta.AsString := '';
+  if cdsDuplicata_HistID_CONTA.AsInteger > 0 then
+  begin
+    if cdsContas.Locate('ID',cdsDuplicata_HistID_CONTA.AsInteger,([Locaseinsensitive])) then
+      cdsDuplicata_HistclNomeConta.AsString := cdsContasNOME.AsString;
+  end;
   if cdsDuplicata_HistID_FORMA_PAGAMENTO.AsInteger > 0 then
   begin
     qFormaPgto.Close;
