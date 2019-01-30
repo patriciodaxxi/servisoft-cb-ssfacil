@@ -5658,15 +5658,11 @@ object dmCupomFiscal: TdmCupomFiscal
     Top = 544
   end
   object mPedidoAux: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID_Pedido'
     Params = <>
-    Left = 465
+    Left = 473
     Top = 544
-    Data = {
-      2C0000009619E0BD0100000018000000010000000000030000002C000949445F
-      50656469646F04000100000000000000}
     object mPedidoAuxID_Pedido: TIntegerField
       FieldName = 'ID_Pedido'
     end
