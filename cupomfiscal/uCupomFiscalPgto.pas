@@ -198,11 +198,19 @@ begin
     end
     else
     begin
-      vVlrParcelas := StrToFloat(FormatFloat('0.00',vVlrParcelado / vQtdParc));
-      vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrParcelado));
+      if vQtdParc > 1 then
+      begin
+        vVlrParcelas := StrToFloat(FormatFloat('0.00',vVlrParcelado / vQtdParc));
+        vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrParcelado));
+      end
+      else
+      begin
+        vVlrParcelas := StrToFloat(FormatFloat('0.00',vVlrParcelado));
+        vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrParcelado));
+      end;
     end;
   end;
-  fDmCupomFiscal.vSomaParcelas := vVlrRestante;
+  fDmCupomFiscal.vSomaParcelas := StrToFloat(FormatFloat('0.00',vVlrRestante));
 
   if (fDmCupomFiscal.cdsCondPgto.Locate('ID',RxDBLookupCombo2.KeyValue,[loCaseInsensitive])) then
   begin
@@ -270,7 +278,7 @@ begin
   fDmCupomFiscal.cdsCupom_ParcID.AsInteger            := fDmCupomFiscal.cdsCupomFiscalID.AsInteger;
   fDmCupomFiscal.cdsCupom_ParcPARCELA.AsInteger       := vParcelaAux + 1;
   fDmCupomFiscal.cdsCupom_ParcDTVENCIMENTO.AsDateTime := Data;
-  fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsFloat  := Valor;
+  fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsFloat  := StrToFloat(FormatFloat('0.00',Valor));
   if fDmCupomFiscal.cdsCupom_ParcPARCELA.AsInteger = 0 then
   begin
     fDmCupomFiscal.qTipoDinheiro.Open;
@@ -815,7 +823,7 @@ begin
 
   prc_ControleParcelas(vVlrParcelado,vPercJuros,vQtdParcelas);
 
-  vVlrTotal    := fDmCupomFiscal.vVlrEntrada + fDmCupomFiscal.vSomaParcelas;
+  vVlrTotal    := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.vVlrEntrada + fDmCupomFiscal.vSomaParcelas));
   vVlrProdutos := fDmCupomFiscal.vSomaOriginal;
   fDmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := 0;
 
@@ -1337,7 +1345,7 @@ begin
   begin
     fDmCupomFiscal.cdsCupom_Itens.Edit;
     fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.00',(fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
-                                                            vVlrTotal / vVlrProdutos)));
+                                                            (StrToFloat(FormatFloat('0.0000',vVlrTotal / vVlrProdutos))))));
     prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,  //aqui
                                          fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat,fDmCupomFiscal.cdsCupom_ItensPERC_DESCONTO.AsFloat,
                                          fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat,'S',0);

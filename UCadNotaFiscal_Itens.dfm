@@ -480,7 +480,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     Top = 172
     Width = 792
     Height = 403
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     ActivePageDefault = TabSheet1
     Align = alClient
     BackgroundColor = clGray
@@ -490,7 +490,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     ParentBackgroundColor = False
     ParentColor = False
     TabColors.Shadow = clGray
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     TextColors.DisabledShadow = 8421440
     TextColors.Selected = clBlue
@@ -2236,7 +2236,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'VLR_AFRMM'
               Title.Alignment = taCenter
               Title.Caption = 'Valor AFRMM'
-              Width = 64
               Visible = True
             end
             item
@@ -2245,7 +2244,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'TIPO_INTERMEDIO'
               Title.Alignment = taCenter
               Title.Caption = 'Tipo Interm'#233'dio'
-              Width = 64
               Visible = True
             end
             item
@@ -2254,7 +2252,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'CNPJ'
               Title.Alignment = taCenter
               Title.Caption = 'CNPJ Terceiro'
-              Width = 64
               Visible = True
             end
             item
@@ -2263,7 +2260,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'UF_TERCEIRO'
               Title.Alignment = taCenter
               Title.Caption = 'UF Terceiro'
-              Width = 64
               Visible = True
             end>
         end
