@@ -1339,13 +1339,21 @@ begin
 end;
 
 procedure TfCupomFiscalPgto.prc_AtualizaPrecos(vVlrProdutos, vVlrTotal: Currency);
+var
+  vVlrRestante : Real;
 begin
+  vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrTotal));
   fDmCupomFiscal.cdsCupom_Itens.First;
   while not fDmCupomFiscal.cdsCupom_Itens.Eof do
   begin
     fDmCupomFiscal.cdsCupom_Itens.Edit;
-    fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.00',(fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
-                                                            (StrToFloat(FormatFloat('0.0000',vVlrTotal / vVlrProdutos))))));
+    fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.00##',(fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
+                                                            vVlrTotal / vVlrProdutos)));
+    //vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrRestante -
+    //               (fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency * fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat)));
+    //if (fDmCupomFiscal.cdsCupom_Itens.RecordCount = fDmCupomFiscal.cdsCupom_Itens.RecNo) and ( StrToFloat(FormatFloat('0.00',vVlrRestante)) <> StrToFloat(FormatFloat('0.00',0))) then
+    //  fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency + vVlrRestante));
+
     prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,  //aqui
                                          fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat,fDmCupomFiscal.cdsCupom_ItensPERC_DESCONTO.AsFloat,
                                          fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat,'S',0);

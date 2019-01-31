@@ -687,7 +687,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           Left = 0
           Top = 15
           Width = 278
-          Height = 14
+          Height = 13
           BeforePrint = RLBand2BeforePrint
           object RLDBText6: TRLDBText
             Left = 2
@@ -710,9 +710,9 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
             ParentFont = False
           end
           object RLDBText8: TRLDBText
-            Left = 234
+            Left = 225
             Top = 1
-            Width = 37
+            Width = 43
             Height = 12
             Alignment = taRightJustify
             AutoSize = False
@@ -732,9 +732,9 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
             ParentFont = False
           end
           object RLDBText7: TRLDBText
-            Left = 202
+            Left = 184
             Top = 1
-            Width = 32
+            Width = 41
             Height = 12
             Alignment = taRightJustify
             AutoSize = False
@@ -754,7 +754,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
             ParentFont = False
           end
           object RLDBText14: TRLDBText
-            Left = 182
+            Left = 164
             Top = 1
             Width = 20
             Height = 12
@@ -776,7 +776,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
             ParentFont = False
           end
           object RLDBText15: TRLDBText
-            Left = 155
+            Left = 136
             Top = 2
             Width = 27
             Height = 11
@@ -796,17 +796,12 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
             Font.Style = []
             ParentFont = False
           end
-          object RLDBText16: TRLDBText
-            Left = 36
-            Top = 2
-            Width = 119
-            Height = 11
-            AutoSize = False
-            Borders.Sides = sdCustom
-            Borders.DrawLeft = False
-            Borders.DrawTop = False
-            Borders.DrawRight = False
-            Borders.DrawBottom = False
+          object RLDBMemo1: TRLDBMemo
+            Left = 37
+            Top = 0
+            Width = 101
+            Height = 12
+            Behavior = [beSiteExpander]
             DataField = 'NomeProduto'
             DataSource = DMNFCe.dsmiItensNFe
             Font.Charset = DEFAULT_CHARSET
@@ -819,7 +814,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
         end
         object RLBand13: TRLBand
           Left = 0
-          Top = 29
+          Top = 28
           Width = 278
           Height = 78
           BandType = btSummary
@@ -1035,7 +1030,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
             ParentFont = False
           end
           object RLLabel24: TRLLabel
-            Left = 158
+            Left = 140
             Top = 2
             Width = 22
             Height = 11
@@ -1048,7 +1043,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
             ParentFont = False
           end
           object RLLabel25: TRLLabel
-            Left = 183
+            Left = 168
             Top = 2
             Width = 16
             Height = 11
@@ -1076,7 +1071,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           object RLLabel27: TRLLabel
             Left = 234
             Top = 2
-            Width = 37
+            Width = 36
             Height = 11
             Caption = 'Vl.Total'
             Font.Charset = DEFAULT_CHARSET
