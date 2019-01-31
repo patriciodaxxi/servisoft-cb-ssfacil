@@ -278,7 +278,7 @@ type
     BalanoEstoqueVeculo1: TMenuItem;
     N31: TMenuItem;
     Utilitrios1: TMenuItem;
-    tbProcesso: TToolButton;
+    tbOrcamento: TToolButton;
     OrdemServiotica1: TMenuItem;
     GerarIntegraoContbil1: TMenuItem;
     RegraCFOP1: TMenuItem;
@@ -522,7 +522,7 @@ type
     procedure BalanoEstoqueVeculo1Click(Sender: TObject);
     procedure SPEDBlocoH1Click(Sender: TObject);
     procedure Utilitrios1Click(Sender: TObject);
-    procedure tbProcessoClick(Sender: TObject);
+    procedure tbOrcamentoClick(Sender: TObject);
     procedure OrdemServiotica1Click(Sender: TObject);
     procedure GerarIntegraoContbil1Click(Sender: TObject);
     procedure RegraCFOP1Click(Sender: TObject);
@@ -1486,8 +1486,7 @@ begin
   tbPedido.Visible     := PedidoComercial1.Visible;
   tbProduto.Visible    := Produto1.Visible;
   tbPessoa.Visible     := Pessoa1.Visible;
-  tbProcesso.Visible   := ConsultaPedidoProcesso1.Visible;
-
+  tbOrcamento.Visible  := Oramento1.Visible;
   vUsuario := UserControl1.CurrentUser.LoginName;
 end;
 
@@ -1751,9 +1750,9 @@ begin
   prc_ShellExecute('SSUtilitarios.exe');
 end;
 
-procedure TfMenu.tbProcessoClick(Sender: TObject);
+procedure TfMenu.tbOrcamentoClick(Sender: TObject);
 begin
-  OpenForm(TfrmConsPedido_Proc,wsMaximized);
+  OpenForm(TfrmCadOrcamento,wsMaximized);
 end;
 
 procedure TfMenu.OrdemServiotica1Click(Sender: TObject);
