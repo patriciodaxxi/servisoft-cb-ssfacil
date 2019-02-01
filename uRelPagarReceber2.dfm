@@ -339,32 +339,38 @@ object fRelPagarReceber2: TfRelPagarReceber2
             Top = 16
             Width = 742
             Height = 14
+            Borders.Sides = sdCustom
+            Borders.DrawLeft = False
+            Borders.DrawTop = False
+            Borders.DrawRight = False
+            Borders.DrawBottom = False
+            Borders.Style = bsCross
             BeforePrint = RLBand4BeforePrint
             object RLDBText3: TRLDBText
               Left = 137
               Top = 2
-              Width = 245
+              Width = 242
               Height = 10
               AutoSize = False
               DataField = 'NOME_PESSOA'
               DataSource = DMCadDuplicata.dsDuplicata_Consulta
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Arial'
               Font.Style = []
               ParentFont = False
             end
             object RLDBText4: TRLDBText
-              Left = 382
+              Left = 379
               Top = 2
-              Width = 47
-              Height = 10
+              Width = 49
+              Height = 12
               DataField = 'DTEMISSAO'
               DataSource = DMCadDuplicata.dsDuplicata_Consulta
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Arial'
               Font.Style = []
               ParentFont = False
@@ -386,7 +392,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
             object RLDBText2: TRLDBText
               Left = 429
               Top = 2
-              Width = 47
+              Width = 48
               Height = 10
               Alignment = taCenter
               AutoSize = False
@@ -394,7 +400,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
               DataSource = DMCadDuplicata.dsDuplicata_Consulta
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Arial'
               Font.Style = []
               ParentFont = False
@@ -410,7 +416,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
               DataSource = DMCadDuplicata.dsDuplicata_Consulta
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Arial'
               Font.Style = []
               ParentFont = False
@@ -426,7 +432,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
               DataSource = DMCadDuplicata.dsDuplicata_Consulta
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Arial'
               Font.Style = []
               ParentFont = False
@@ -442,7 +448,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
               DataSource = DMCadDuplicata.dsDuplicata_Consulta
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Arial'
               Font.Style = []
               ParentFont = False
@@ -451,11 +457,11 @@ object fRelPagarReceber2: TfRelPagarReceber2
               Left = 1
               Top = 0
               Width = 20
-              Height = 8
+              Height = 12
               Caption = 'REC'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Courier New'
               Font.Style = []
               ParentFont = False
@@ -463,12 +469,12 @@ object fRelPagarReceber2: TfRelPagarReceber2
             object RLLabel28: TRLLabel
               Left = 23
               Top = 0
-              Width = 15
-              Height = 10
+              Width = 24
+              Height = 12
               Caption = '(999)'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Arial'
               Font.Style = []
               ParentFont = False
@@ -484,24 +490,33 @@ object fRelPagarReceber2: TfRelPagarReceber2
               DataSource = DMCadDuplicata.dsDuplicata_Consulta
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Arial'
               Font.Style = []
               ParentFont = False
             end
             object RLLabel40: TRLLabel
-              Left = 714
+              Left = 715
               Top = 2
-              Width = 27
-              Height = 10
+              Width = 24
+              Height = 12
               Alignment = taCenter
               Caption = 'REC'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -8
+              Font.Height = -9
               Font.Name = 'Arial'
               Font.Style = []
               ParentFont = False
+            end
+            object RLDraw4: TRLDraw
+              Left = 0
+              Top = 13
+              Width = 742
+              Height = 1
+              Align = faBottom
+              DrawKind = dkLine
+              Pen.Style = psDot
             end
           end
           object RLBand3: TRLBand

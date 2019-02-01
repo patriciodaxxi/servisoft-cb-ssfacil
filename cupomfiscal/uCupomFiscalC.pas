@@ -1623,7 +1623,7 @@ begin
                                                  fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
                                                  fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
                                                  0,0,'',
-                                                 fDmCupomFiscal.cdsCupom_ItensID_COR_COMBINACO.AsInteger,'','N',0);
+                                                 fDmCupomFiscal.cdsCupom_ItensID_COR_COMBINACO.AsInteger,'','N',0,0);
 
       fDmCupomFiscal.cdsCupom_ItensID_MOVIMENTO.AsInteger := fDMMovimento.fnc_Gravar_Movimento(0,
                                                    fDMCupomFiscal.cdsCupomFiscalFILIAL.AsInteger,
@@ -2104,7 +2104,7 @@ begin
                                                  fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
                                                  fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
                                                  vDescAux,0,'',
-                                                 fDmCupomFiscal.cdsCupom_ItensID_COR_COMBINACO.AsInteger,'','N',0);
+                                                 fDmCupomFiscal.cdsCupom_ItensID_COR_COMBINACO.AsInteger,'','N',0,0);
 
     if (not fDmCupomFiscal.cdsProduto.IsEmpty) and
        (fDmCupomFiscal.cdsProdutoTIPO_REG.AsString <> 'N') and (vFinanceiro) then

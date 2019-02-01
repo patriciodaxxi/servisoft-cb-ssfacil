@@ -59,7 +59,6 @@ type
     RLDBText7: TRLDBText;
     RLDBText14: TRLDBText;
     RLDBText15: TRLDBText;
-    RLDBText16: TRLDBText;
     RLBand13: TRLBand;
     RLLabel29: TRLLabel;
     RLLabel32: TRLLabel;
@@ -88,6 +87,7 @@ type
     RLBand14: TRLBand;
     RLDraw1: TRLDraw;
     RLMemo2: TRLMemo;
+    RLDBMemo1: TRLDBMemo;
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);

@@ -173,7 +173,6 @@ type
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure btnImprimirClick(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
-    procedure RzPageControl2Change(Sender: TObject);
     procedure btnInserir_UnidClick(Sender: TObject);
     procedure RxDBLookupCombo6Exit(Sender: TObject);
     procedure btnExcluir_UniClick(Sender: TObject);
@@ -181,6 +180,7 @@ type
     procedure btnAjustar_IBPTClick(Sender: TObject);
     procedure GroupBox2Enter(Sender: TObject);
     procedure GroupBox2Exit(Sender: TObject);
+    procedure GroupBox3Enter(Sender: TObject);
   private
     { Private declarations }
     fDMCadNCM: TDMCadNCM;
@@ -873,17 +873,6 @@ begin
   fDMCadNCM.cdsUnidade.Open;
 end;
 
-procedure TfrmCadNCM.RzPageControl2Change(Sender: TObject);
-begin
-  if RzPageControl2.ActivePage = TS_Unidade_Conv then
-  begin
-    fDMCadNCM.prc_Abrir_Unidade_Conv(fDMCadNCM.cdsNCMUNIDADE_TRIB.AsString);
-
-
-  end;
-
-end;
-
 procedure TfrmCadNCM.btnInserir_UnidClick(Sender: TObject);
 begin
   if fDMCadNCM.cdsNCMUNIDADE_TRIB.AsString = '' then
@@ -1004,6 +993,11 @@ end;
 procedure TfrmCadNCM.GroupBox2Exit(Sender: TObject);
 begin
   fDMCadNCM.cdsTab_CSTICMS.IndexFieldNames := 'ID';
+end;
+
+procedure TfrmCadNCM.GroupBox3Enter(Sender: TObject);
+begin
+  fDMCadNCM.prc_Abrir_Unidade_Conv(fDMCadNCM.cdsNCMUNIDADE_TRIB.AsString);
 end;
 
 end.
