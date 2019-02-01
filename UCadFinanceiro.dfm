@@ -23,8 +23,8 @@ object frmCadFinanceiro: TfrmCadFinanceiro
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 904
-    Height = 670
+    Width = 896
+    Height = 662
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -42,8 +42,8 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 151
-        Width = 900
-        Height = 479
+        Width = 892
+        Height = 471
         Align = alClient
         Ctl3D = False
         DataSource = DMCadFinanceiro.dsFinanceiro_Consulta
@@ -164,7 +164,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 900
+        Width = 892
         Height = 30
         Align = alTop
         Color = clSilver
@@ -469,8 +469,8 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 630
-        Width = 900
+        Top = 622
+        Width = 892
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -486,7 +486,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 900
+        Width = 892
         Height = 121
         Align = alTop
         TabOrder = 0
@@ -630,10 +630,10 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           TabOrder = 2
         end
         object RzGroupBox1: TRzGroupBox
-          Left = 447
+          Left = 446
           Top = 5
-          Width = 169
-          Height = 80
+          Width = 171
+          Height = 112
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -651,7 +651,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           TabOrder = 8
           VisualStyle = vsGradient
           object Label8: TLabel
-            Left = 8
+            Left = 36
             Top = 14
             Width = 40
             Height = 13
@@ -659,7 +659,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
             Caption = 'Entrada:'
           end
           object Label10: TLabel
-            Left = 16
+            Left = 44
             Top = 29
             Width = 32
             Height = 13
@@ -667,43 +667,77 @@ object frmCadFinanceiro: TfrmCadFinanceiro
             Caption = 'Sa'#237'da:'
           end
           object Label11: TLabel
-            Left = 18
-            Top = 45
+            Left = 46
+            Top = 44
             Width = 30
             Height = 13
             Alignment = taRightJustify
             Caption = 'Saldo:'
           end
           object lblEntrada: TLabel
-            Left = 56
+            Left = 77
             Top = 14
-            Width = 97
+            Width = 86
             Height = 13
             Alignment = taRightJustify
             AutoSize = False
             Caption = '0,00'
           end
           object lblSaida: TLabel
-            Left = 56
-            Top = 28
-            Width = 97
+            Left = 77
+            Top = 29
+            Width = 86
             Height = 13
             Alignment = taRightJustify
             AutoSize = False
             Caption = '0,00'
           end
           object lblSaldo: TLabel
-            Left = 56
-            Top = 42
-            Width = 97
+            Left = 77
+            Top = 44
+            Width = 86
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = '0,00'
+          end
+          object Label29: TLabel
+            Left = 8
+            Top = 59
+            Width = 68
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'chq Vencidos:'
+          end
+          object lblChequeVencido: TLabel
+            Left = 77
+            Top = 59
+            Width = 86
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = '0,00'
+          end
+          object Label31: TLabel
+            Left = 18
+            Top = 74
+            Width = 58
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Saldo Geral:'
+          end
+          object lblSaldoGeral: TLabel
+            Left = 77
+            Top = 74
+            Width = 86
             Height = 13
             Alignment = taRightJustify
             AutoSize = False
             Caption = '0,00'
           end
           object btnRecalcular: TBitBtn
-            Left = 97
-            Top = 58
+            Left = 98
+            Top = 89
             Width = 69
             Height = 21
             Caption = 'Recalcular'
@@ -733,8 +767,8 @@ object frmCadFinanceiro: TfrmCadFinanceiro
         object RzGroupBox2: TRzGroupBox
           Left = 624
           Top = 5
-          Width = 140
-          Height = 51
+          Width = 174
+          Height = 61
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -761,7 +795,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           end
           object Label14: TLabel
             Left = 9
-            Top = 33
+            Top = 35
             Width = 47
             Height = 13
             Alignment = taRightJustify
@@ -778,7 +812,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           end
           object Label22: TLabel
             Left = 57
-            Top = 32
+            Top = 34
             Width = 78
             Height = 13
             Alignment = taRightJustify
@@ -787,8 +821,8 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           end
         end
         object btnConsultar: TNxButton
-          Left = 443
-          Top = 86
+          Left = 624
+          Top = 87
           Width = 176
           Height = 30
           Caption = 'Efetuar Pesquisa'
@@ -865,7 +899,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 900
+        Width = 892
         Height = 35
         Align = alTop
         Color = 8404992
@@ -1091,14 +1125,14 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 900
-        Height = 612
+        Width = 892
+        Height = 604
         Align = alClient
         Enabled = False
         TabOrder = 0
         DesignSize = (
-          900
-          612)
+          892
+          604)
         object Label1: TLabel
           Left = 64
           Top = 48
@@ -1363,7 +1397,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 898
+          Width = 890
           Height = 31
           Align = alTop
           Color = clSilver
@@ -1596,8 +1630,8 @@ object frmCadFinanceiro: TfrmCadFinanceiro
   end
   object StaticText2: TStaticText
     Left = 0
-    Top = 670
-    Width = 904
+    Top = 662
+    Width = 896
     Height = 17
     Align = alBottom
     Caption = 'F2 Consultar'
@@ -1614,12 +1648,12 @@ object frmCadFinanceiro: TfrmCadFinanceiro
     GroupName = 'Mov. Financeiro'
     UserControl = fMenu.UserControl1
     NotAllowed = naDisabled
-    Left = 481
-    Top = 76
+    Left = 817
+    Top = 44
   end
   object PopupMenu1: TPopupMenu
     Left = 521
-    Top = 47
+    Top = 23
     object Conta1: TMenuItem
       Caption = 'Conta'
       OnClick = Conta1Click
@@ -1642,7 +1676,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
     MoedaNoPlural = 'Reais'
     TipoDoTexto = ttMaiuscula
     Genero = gMasculino
-    Left = 624
-    Top = 24
+    Left = 848
+    Top = 48
   end
 end
