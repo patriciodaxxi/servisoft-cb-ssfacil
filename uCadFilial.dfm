@@ -2588,6 +2588,14 @@ object frmCadFilial: TfrmCadFilial
             Alignment = taRightJustify
             Caption = 'Atividade:'
           end
+          object Label139: TLabel
+            Left = 16
+            Top = 82
+            Width = 57
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Per'#237'odo IPI:'
+          end
           object RxDBLookupCombo13: TRxDBLookupCombo
             Left = 77
             Top = 8
@@ -2601,29 +2609,9 @@ object frmCadFilial: TfrmCadFilial
             LookupSource = DMCadFilial.dsContabilista
             TabOrder = 0
           end
-          object RxDBComboBox11: TRxDBComboBox
-            Left = 77
-            Top = 30
-            Width = 145
-            Height = 21
-            Style = csDropDownList
-            DataField = 'SPED_PERFIL'
-            DataSource = DMCadFilial.dsFilial
-            EnableValues = False
-            ItemHeight = 13
-            Items.Strings = (
-              'Perfil A'
-              'Perfil B'
-              'Perfil C')
-            TabOrder = 1
-            Values.Strings = (
-              'A'
-              'B'
-              'C')
-          end
           object RzGroupBox4: TRzGroupBox
             Left = 80
-            Top = 95
+            Top = 111
             Width = 489
             Height = 61
             BorderColor = clNavy
@@ -2740,6 +2728,44 @@ object frmCadFilial: TfrmCadFilial
             Values.Strings = (
               '0'
               '1')
+          end
+          object RxDBComboBox12: TRxDBComboBox
+            Left = 77
+            Top = 74
+            Width = 145
+            Height = 21
+            Style = csDropDownList
+            DataField = 'SPED_PERIODO_IPI'
+            DataSource = DMCadFilial.dsFilial
+            EnableValues = True
+            ItemHeight = 13
+            Items.Strings = (
+              '0 = Mensal'
+              '1 = Decendial')
+            TabOrder = 4
+            Values.Strings = (
+              '0'
+              '1')
+          end
+          object RxDBComboBox11: TRxDBComboBox
+            Left = 77
+            Top = 30
+            Width = 145
+            Height = 21
+            Style = csDropDownList
+            DataField = 'SPED_PERFIL'
+            DataSource = DMCadFilial.dsFilial
+            EnableValues = True
+            ItemHeight = 13
+            Items.Strings = (
+              'Perfil A'
+              'Perfil B'
+              'Perfil C')
+            TabOrder = 1
+            Values.Strings = (
+              'A'
+              'B'
+              'C')
           end
         end
         object TabSheet1: TRzTabSheet

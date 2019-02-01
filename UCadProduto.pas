@@ -3211,6 +3211,7 @@ begin
   end;
   prc_Combinacao;
   DBCheckBox17.Visible := (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'P');
+  TS_Ativo.TabVisible  := (RxDBComboBox7.ItemIndex = 4);
 end;
 
 procedure TfrmCadProduto.RxDBComboBox4Change(Sender: TObject);
