@@ -93,6 +93,7 @@ type
     RLBand12: TRLBand;
     RLLabel44: TRLLabel;
     RLLabel45: TRLLabel;
+    RLDraw4: TRLDraw;
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand4BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand3BeforePrint(Sender: TObject; var PrintIt: Boolean);

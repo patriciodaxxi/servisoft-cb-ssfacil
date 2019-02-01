@@ -322,6 +322,7 @@ type
     procedure prc_Estoque(ID_Produto: Integer);
     procedure prc_Le_NCM_Geral;
     procedure prc_Calcula_IPI_Pago_Empresa;
+    procedure prc_Unidade_Trib;
 
     function fnc_Verifica_Simples: Boolean;
     function fnc_Verifica_SubstTributaria: Boolean;
@@ -1347,20 +1348,7 @@ begin
 
     //08/07/2017  Unidade tributável
     if (fDMCadNotaFiscal.cdsCFOPUSA_UNIDADE_TRIB.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE_TRIB.AsString) <> '') then
-    begin
-
-      vQtdAux := fnc_Unidade_Conv(fDMCadNotaFiscal);
-      if StrToFloat(FormatFloat('0.00000',vQtdAux)) > 0 then
-      begin
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat          := StrToFloat(FormatFloat('0.0000',vQtdAux));
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO_TRIB.AsFloat := StrToFloat(FormatFloat('0.0000000000',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat / fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat));
-      end
-      else
-      begin
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat          := StrToFloat(FormatFloat('0.0000',0));
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO_TRIB.AsFloat := StrToFloat(FormatFloat('0.0000000000',0));
-      end;
-    end;
+      prc_Unidade_Trib;
     //******************
 
     prc_Calculo_GeralItem(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat,fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat,
@@ -1443,6 +1431,13 @@ begin
           fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString      := fDMInformar_Tam.vTamanho_Ini;
           fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat           := fDMInformar_Tam.vQtd_Ini;
           fDMCadNotaFiscal.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMInformar_Tam.vQtd_Ini;
+          if (fDMCadNotaFiscal.cdsCFOPUSA_UNIDADE_TRIB.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE_TRIB.AsString) <> '') then
+          begin
+            fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat));
+            prc_Unidade_Trib;
+          end;
+
+          //fDMCadNotaFiscal.cdsNotaFiscal_Itens
           vEditar := True;
         end;
       end;
@@ -2139,6 +2134,9 @@ var
   x: Integer;
   vItemAux: Integer;
 begin
+  if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger <> fDMCadNotaFiscal.cdsCFOPID.AsInteger then
+    fDMCadNotaFiscal.cdsCFOP.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger,[loCaseInsensitive]);
+
   fDMInformar_Tam.mItens.First;
   fDMInformar_Tam.mTamanho.First;
   while not fDMInformar_Tam.mTamanho.Eof do
@@ -2180,10 +2178,17 @@ begin
         except
         end;
       end;
+
       fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMInformar_Tam.mItensNome_Produto_Original.AsString + ' TAM. ' + fDMInformar_Tam.mTamanhoTamanho.AsString;
       fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString      := fDMInformar_Tam.mTamanhoTamanho.AsString;
       fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat           := fDMInformar_Tam.mTamanhoQtd.AsFloat;
       fDMCadNotaFiscal.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMInformar_Tam.mTamanhoQtd.AsFloat;
+
+      if (fDMCadNotaFiscal.cdsCFOPUSA_UNIDADE_TRIB.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE_TRIB.AsString) <> '') then
+      begin
+        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat));
+        prc_Unidade_Trib;
+      end;
 
       fDMCadNotaFiscal.cdsNotaFiscal_Itens.Post;
 
@@ -3205,6 +3210,23 @@ begin
   vVlrAux := StrToFloat(FormatFloat('0.0000',vVlrAux / vIPIAux));
   fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000',vVlrAux));
   prc_Calcular_VlrItens;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.prc_Unidade_Trib;
+var
+  vQtdAux: Real;
+begin
+  vQtdAux := fnc_Unidade_Conv(fDMCadNotaFiscal);
+  if StrToFloat(FormatFloat('0.00000',vQtdAux)) > 0 then
+  begin
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat          := StrToFloat(FormatFloat('0.0000',vQtdAux));
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO_TRIB.AsFloat := StrToFloat(FormatFloat('0.0000000000',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat / fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat));
+  end
+  else
+  begin
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat          := StrToFloat(FormatFloat('0.0000',0));
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO_TRIB.AsFloat := StrToFloat(FormatFloat('0.0000000000',0));
+  end;
 end;
 
 end.
