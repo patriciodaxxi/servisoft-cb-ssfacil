@@ -509,8 +509,8 @@ object dmCadContaOrc: TdmCadContaOrc
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT A.*,B.DESCRICAO'#13#10'FROM CONTA_ORCAMENTO_CCUSTO A'#13#10'inner JOI' +
-      'N CENTROCUSTO B ON A.ID_CENTROCUSTO = B.ID'#13#10'WHERE A.ID = :ID'
+      'SELECT A.*,B.DESCRICAO'#13#10'FROM CONTA_ORCAMENTO_CCUSTO A'#13#10'LEFT JOIN' +
+      ' CENTROCUSTO B ON A.ID_CENTROCUSTO = B.ID'#13#10'WHERE A.ID = :ID'
     DataSource = dsContaOrc_Mestre
     MaxBlobSize = -1
     Params = <

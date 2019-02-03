@@ -427,9 +427,9 @@ end;
 
 procedure TdmCadContaOrc.prc_Abrir_CentroCusto(ID: Integer);
 begin
-  cdsContaOrc_CCusto.Close;
-  sdsContaOrc_CCusto.ParamByName('ID').AsInteger := ID;
-  cdsContaOrc_CCusto.Open;
+  //cdsContaOrc_CCusto.Close;
+  //sdsContaOrc_CCusto.ParamByName('ID').AsInteger := ID;
+  //cdsContaOrc_CCusto.Open;
 end;
 
 procedure TdmCadContaOrc.cdsConsultaCalcFields(DataSet: TDataSet);

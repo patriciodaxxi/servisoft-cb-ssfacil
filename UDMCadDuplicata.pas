@@ -1086,6 +1086,23 @@ type
     cdsPessoaFUNCIONARIO_CONTA_ID: TIntegerField;
     cdsPessoaTP_FUNCIONARIO: TStringField;
     cdsDuplicata_HistclNomeConta: TStringField;
+    sdsDuplicata_CCusto: TSQLDataSet;
+    sdsDuplicata_CCustoID: TIntegerField;
+    sdsDuplicata_CCustoITEM: TIntegerField;
+    sdsDuplicata_CCustoID_CENTROCUSTO: TIntegerField;
+    sdsDuplicata_CCustoPERCENTUAL: TFloatField;
+    cdsDuplicatasdsDuplicata_CCusto: TDataSetField;
+    cdsDuplicata_CCusto: TClientDataSet;
+    cdsDuplicata_CCustoID: TIntegerField;
+    cdsDuplicata_CCustoITEM: TIntegerField;
+    cdsDuplicata_CCustoID_CENTROCUSTO: TIntegerField;
+    cdsDuplicata_CCustoPERCENTUAL: TFloatField;
+    dsDuplicata_CCusto: TDataSource;
+    qParametros_FinUSA_CCUSTO_DUP: TStringField;
+    qCCusto: TSQLQuery;
+    qCCustoID: TIntegerField;
+    qCCustoDESCRICAO: TStringField;
+    cdsDuplicata_CCustoclNome_CCusto: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
@@ -1100,6 +1117,7 @@ type
       var Action: TReconcileAction);
     procedure frxReport1BeforePrint(Sender: TfrxReportComponent);
     procedure cdsDuplicata_HistCalcFields(DataSet: TDataSet);
+    procedure cdsDuplicata_CCustoCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     fDMCadExtComissao: TDMCadExtComissao;
@@ -1143,6 +1161,7 @@ type
     procedure prc_Inserir;
     procedure prc_Gravar;
     procedure prc_Excluir;
+    procedure prc_Excluir_Dup_CCusto;
     procedure prc_Gravar_Dupicata_Hist(Tipo, Historico: String; Vlr_Pagamento, Vlr_Juros, Vlr_Desconto,
       Vlr_Despesa, Vlr_Taxa, Vlr_Multa: Real; ID_Forma_Pagamento: Integer = 0 ; ID_Descontada: Integer = 0 );
     procedure prc_Gravar_Financeiro(Valor: Real; Tipo: String; ID_Forma_Pagamento: Integer = 0;
@@ -1165,6 +1184,9 @@ type
     procedure prc_Gravar_ChequeHist(Devolvido : String);
 
     procedure prc_Inserir_Cob;
+    
+    procedure prc_Gerar_Dup_CCusto;
+
   end;
 
 var
@@ -2198,6 +2220,57 @@ begin
   cdsDuplicata_CobUSUARIO.AsString     := vUsuario;
   cdsDuplicata_CobDTUSUARIO.AsDateTime := Date;
   cdsDuplicata_CobHRUSUARIO.AsDateTime := Now;
+end;
+
+procedure TDMCadDuplicata.cdsDuplicata_CCustoCalcFields(DataSet: TDataSet);
+begin
+  cdsDuplicata_CCustoclNome_CCusto.AsString := '';
+  if cdsDuplicata_CCustoID_CENTROCUSTO.AsInteger > 0 then
+  begin
+    qCCusto.Close;
+    qCCusto.ParamByName('ID').AsInteger := cdsDuplicata_CCustoID_CENTROCUSTO.AsInteger;
+    qCCusto.Open;
+    cdsDuplicata_CCustoclNome_CCusto.AsString := qCCustoDESCRICAO.AsString;
+  end;
+end;
+
+procedure TDMCadDuplicata.prc_Excluir_Dup_CCusto;
+begin
+  cdsDuplicata_CCusto.First;
+  while not cdsDuplicata_CCusto.Eof do
+    cdsDuplicata_CCusto.Delete;
+end;
+
+procedure TDMCadDuplicata.prc_Gerar_Dup_CCusto;
+var
+  sds: TSQLDataSet;
+  vItem : Integer;
+begin
+  vItem := 0;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT ID, ITEM, ID_CENTROCUSTO, PERCENTUAL FROM CONTA_ORCAMENTO_CCUSTO WHERE ID = :ID ';
+    sds.ParamByName('ID').AsInteger := cdsDuplicataID_CONTA_ORCAMENTO.AsInteger;
+    sds.Open;
+    while not sds.Eof do
+    begin
+      vItem := vItem + 1;
+      cdsDuplicata_CCusto.Insert;
+      cdsDuplicata_CCustoID.AsInteger   := cdsDuplicataID.AsInteger;
+      cdsDuplicata_CCustoITEM.AsInteger := vItem;
+      cdsDuplicata_CCustoID_CENTROCUSTO.AsInteger := sds.FieldByName('ID_CENTROCUSTO').AsInteger;
+      cdsDuplicata_CCustoPERCENTUAL.AsFloat       := sds.FieldByName('PERCENTUAL').AsFloat;
+      cdsDuplicata_CCusto.Post;
+      sds.Next;
+    end;
+
+  finally
+    FreeAndNil(sds);
+  end;
+
 end;
 
 end.
