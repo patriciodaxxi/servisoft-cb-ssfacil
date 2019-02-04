@@ -10,6 +10,9 @@ uses
   UCadDuplicata_Total, ComObj, UCadDuplicata_LeItau, SqlExpr, ComCtrls;
 
 type
+  TEnumMostraNossoNumero = (tpTodos,tpSim, tpNao);
+
+type
   TfrmCadDuplicata = class(TForm)
     RzPageControl1: TRzPageControl;
     TS_Consulta: TRzTabSheet;
@@ -42,8 +45,6 @@ type
     Shape2: TShape;
     Shape3: TShape;
     Label35: TLabel;
-    RzGroupBox2: TRzGroupBox;
-    SMDBGrid2: TSMDBGrid;
     pnlTotal: TPanel;
     Label36: TLabel;
     Label37: TLabel;
@@ -241,6 +242,15 @@ type
     SaldoClienteFornecedor1: TMenuItem;
     Carn1: TMenuItem;
     ransfernciadeICMS1: TMenuItem;
+    Label65: TLabel;
+    ComboNossoNumero: TNxComboBox;
+    RzPageControl2: TRzPageControl;
+    TS_Historico: TRzTabSheet;
+    SMDBGrid2: TSMDBGrid;
+    TS_CCusto: TRzTabSheet;
+    SMDBGrid3: TSMDBGrid;
+    Panel4: TPanel;
+    btnGerarCCusto: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -325,6 +335,8 @@ type
     procedure SaldoClienteFornecedor1Click(Sender: TObject);
     procedure Carn1Click(Sender: TObject);
     procedure ransfernciadeICMS1Click(Sender: TObject);
+    procedure RzGroupBox4Enter(Sender: TObject);
+    procedure btnGerarCCustoClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -342,6 +354,7 @@ type
     vOpcaoImp: string;
     vTipo_Relatorio: String;
     vID_Conta_Orc_Loc: Integer;
+    vID_Conta_Orc_Ant: Integer;
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
     procedure prc_Gravar_Registro;
@@ -365,6 +378,7 @@ type
     procedure prc_GridHist;
     procedure prc_Mostra_Aprov;
     procedure prc_Monta_Saldo;
+    procedure prc_Habilitar;
   public
     { Public declarations }
     procedure prc_Posiciona_Duplicata(ID: Integer);
@@ -490,12 +504,8 @@ begin
       mGerarDup.EmptyDataSet;
     end;
 
-    TS_Consulta.TabEnabled := not (TS_Consulta.TabEnabled);
+    prc_Habilitar;
     RzPageControl1.ActivePage := TS_Consulta;
-    pnlCadastro.Enabled := not (pnlCadastro.Enabled);
-    btnConfirmar.Enabled := not (btnConfirmar.Enabled);
-    btnAlterar.Enabled := not (btnAlterar.Enabled);
-    btnCobranca.Enabled := not(btnCobranca.Enabled);
 
     gbxDadosPagamento.Visible := False;
 
@@ -549,12 +559,7 @@ begin
 
   RzPageControl1.ActivePage := TS_Cadastro;
 
-  TS_Consulta.TabEnabled := False;
-  btnAlterar.Enabled := False;
-  btnConfirmar.Enabled := True;
-  btnCobranca.Enabled  := False;
-  pnlCadastro.Enabled := True;
-  RxDBComboBox11.SetFocus;
+  prc_Habilitar;
 
   fDMCadDuplicata.mGerarDup.EmptyDataSet;
 
@@ -679,6 +684,11 @@ begin
   DBDateEdit4.Enabled  := (fDMCadDuplicata.qParametros_UsuarioPERMITE_APROVAR_DUP.AsString = 'S');
   if (fDMCadDuplicata.qParametros_FinUSA_APROVA_DUP.AsString = 'S') then
     btnOpcao.Enabled := (fDMCadDuplicata.qParametros_UsuarioPERMITE_APROVAR_DUP.AsString = 'S');
+  TS_CCusto.TabVisible   := (fDMCadDuplicata.qParametros_FinUSA_CCUSTO_DU.AsString = 'S');
+  if TS_CCusto.TabVisible then
+    RzPageControl2.ActivePage := TS_CCusto
+  else
+    RzPageControl2.ActivePage := TS_Historico;
 end;
 
 procedure TfrmCadDuplicata.prc_Consultar(ID: Integer = 0; ID_FIN: Integer = 0; Num_Duplicata: string = ''; Inserir: Boolean = False);
@@ -771,6 +781,13 @@ begin
         2: fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND ((DUP.APROVADO <> ' + QuotedStr('S') + ') OR (DUP.APROVADO IS NULL))';
       end;
     end;
+    case TEnumMostraNossoNumero(ComboNossoNumero.ItemIndex) of
+      tpTodos : ;
+      tpSim  : fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND (COALESCE(DUP.NOSSONUMERO,'''') <> '''''  + ')';
+      tpNao  : fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND (COALESCE(DUP.NOSSONUMERO,'''') = '''''  + ')';
+    else ;
+    end;
+
   end;
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO';
   fDMCadDuplicata.cdsDuplicata_Consulta.Open;
@@ -805,12 +822,8 @@ begin
     exit;
 
   fDMCadDuplicata.cdsDuplicata.CancelUpdates;
-  TS_Consulta.TabEnabled := True;
+  prc_Habilitar;
   RzPageControl1.ActivePage := TS_Consulta;
-  pnlCadastro.Enabled := not (pnlCadastro.Enabled);
-  btnConfirmar.Enabled := not (btnConfirmar.Enabled);
-  btnAlterar.Enabled  := not (btnAlterar.Enabled);
-  btnCobranca.Enabled := not(btnCobranca.Enabled);
 end;
 
 procedure TfrmCadDuplicata.SMDBGrid1DblClick(Sender: TObject);
@@ -836,11 +849,7 @@ begin
 
   fDMCadDuplicata.cdsDuplicata.Edit;
 
-  TS_Consulta.TabEnabled := False;
-  btnAlterar.Enabled := False;
-  btnConfirmar.Enabled := True;
-  pnlCadastro.Enabled := True;
-  btnCobranca.Enabled := False;
+  prc_Habilitar;
 
   prc_Verifica_Usuario;
   if RxDBComboBox11.Enabled then
@@ -1740,6 +1749,7 @@ end;
 
 procedure TfrmCadDuplicata.RxDBLookupCombo9Enter(Sender: TObject);
 begin
+  vID_Conta_Orc_Ant := fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger;
   if vID_Conta_Orc_Loc > 0 then
   begin
     fDMCadDuplicata.cdsContaOrcamento.Filtered := False;
@@ -1757,6 +1767,32 @@ begin
   stat1.Panels[2].Text := '';
 //  fDMCadDuplicata.cdsContaOrcamento.Close;
 //  StaticText2.Visible := False;
+  //03/02/2019
+  if trim(fDMCadDuplicata.qParametros_FinUSA_CCUSTO_DUP.AsString) <> 'S' then
+    exit;
+
+  if (vID_Conta_Orc_Ant > 0) then
+  begin
+    if fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger <= 0 then
+    begin
+      if MessageDlg('Conta de Orçamento esta zerada, o sistema vai excluir o centro de custo, Confirma?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      begin
+        RxDBLookupCombo9.KeyValue := vID_Conta_Orc_Ant;
+        RxDBLookupCombo9.SetFocus;
+      end
+      else
+        fDMCadDuplicata.prc_Excluir_Dup_CCusto;
+    end
+    else
+    if vID_Conta_Orc_Ant <> fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger then
+    begin
+      fDMCadDuplicata.prc_Excluir_Dup_CCusto;
+      fDMCadDuplicata.prc_Gerar_Dup_CCusto;
+    end;
+  end
+  else
+  if  fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger > 0 then
+    fDMCadDuplicata.prc_Gerar_Dup_CCusto;
 end;
 
 procedure TfrmCadDuplicata.RxDBLookupCombo9KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -2623,7 +2659,7 @@ begin
   for i := 1 to SMDBGrid2.ColCount - 2 do
   begin
     if (SMDBGrid2.Columns[i].FieldName = 'NUMCHEQUE') then
-      SMDBGrid1.Columns[i].Visible := (fdmCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'S');
+      SMDBGrid2.Columns[i].Visible := (fdmCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'S');
   end;
 end;
 
@@ -2887,6 +2923,50 @@ begin
       Exit;
     end;
     fDMCadDuplicata.frxReport1.ShowReport;
+end;
+
+procedure TfrmCadDuplicata.RzGroupBox4Enter(Sender: TObject);
+begin
+  if fDMCadDuplicata.qParametros_FinUSA_CCUSTO_DUP.AsString = 'S' then
+    RzPageControl2.ActivePage := TS_CCusto;
+end;
+
+procedure TfrmCadDuplicata.prc_Habilitar;
+var
+  i : Integer;
+begin
+  TS_Consulta.TabEnabled := not(TS_Consulta.TabEnabled);
+  btnAlterar.Enabled     := not(btnAlterar.Enabled);
+  btnConfirmar.Enabled   := not(btnConfirmar.Enabled);
+  pnlCadastro.Enabled    := not(pnlCadastro.Enabled);
+  btnCobranca.Enabled    := not(btnCobranca.Enabled);
+  btnGerarCCusto.Enabled := not(btnGerarCCusto.Enabled);
+  SMDBGrid3.ReadOnly     := not(SMDBGrid3.ReadOnly);
+  if not SMDBGrid3.ReadOnly then
+  begin
+    for i := 1 to SMDBGrid3.ColCount - 2 do
+    begin
+      if (SMDBGrid3.Columns[i].FieldName = 'PERCENTUAL') then
+        SMDBGrid3.Columns[i].ReadOnly := False
+      else
+        SMDBGrid3.Columns[i].ReadOnly := True;
+    end;
+  end;
+end;
+
+procedure TfrmCadDuplicata.btnGerarCCustoClick(Sender: TObject);
+begin
+  if fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger <= 0 then
+  begin
+    MessageDlg('*** Conta de Orçamento não informada!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+
+  if MessageDlg('Gerar Centro de Custo referente à Conta de Orçamento Informada?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    exit;
+
+  fDMCadDuplicata.prc_Excluir_Dup_CCusto;
+  fDMCadDuplicata.prc_Gerar_Dup_CCusto;
 end;
 
 end.
