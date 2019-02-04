@@ -2155,7 +2155,7 @@ end;
 
 procedure TDMCadDuplicata.frxReport1BeforePrint(Sender: TfrxReportComponent);
 var
-  vArq: String;
+  vArq : String;
 begin
   //DE é descontada, e não vai imprimir a linha abaixo, foi colocado o IF no dia 08/03/2018
   vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Extrato_Cliente_Fornecedor.fr3';
