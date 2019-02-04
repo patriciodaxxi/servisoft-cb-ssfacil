@@ -3850,10 +3850,17 @@ object frmCadDuplicata: TfrmCadDuplicata
         Top = 426
         Width = 1050
         Height = 158
+<<<<<<< HEAD
         ActivePage = TS_CCusto
         ActivePageDefault = TS_Historico
         Align = alClient
         TabIndex = 1
+=======
+        ActivePage = TS_Historico
+        ActivePageDefault = TS_Historico
+        Align = alClient
+        TabIndex = 0
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
         TabOrder = 2
         FixedDimension = 19
         object TS_Historico: TRzTabSheet
@@ -3865,6 +3872,10 @@ object frmCadDuplicata: TfrmCadDuplicata
             Height = 135
             Align = alClient
             Ctl3D = False
+<<<<<<< HEAD
+=======
+            DataSource = DMCadDuplicata.dsDuplicata_Hist
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentCtl3D = False
             ReadOnly = True
@@ -3943,24 +3954,40 @@ object frmCadDuplicata: TfrmCadDuplicata
                 Expanded = False
                 FieldName = 'VLR_PAGAMENTO'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
+                Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_JUROSPAGOS'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
+                Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_DESCONTOS'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
+                Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_DESPESAS'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
+                Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
@@ -3974,12 +4001,20 @@ object frmCadDuplicata: TfrmCadDuplicata
                 Expanded = False
                 FieldName = 'VLR_DEVOLUCAO'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
+                Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_JUROSCALCULADO'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
+                Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
@@ -4033,6 +4068,10 @@ object frmCadDuplicata: TfrmCadDuplicata
             Height = 135
             Align = alClient
             Ctl3D = False
+<<<<<<< HEAD
+=======
+            DataSource = DMCadDuplicata.dsDuplicata_CCusto
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentCtl3D = False
             ReadOnly = True
