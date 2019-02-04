@@ -397,8 +397,10 @@ begin
   fDMInformar_Tam.mItensDoc.Insert;
   for x := 0 to (fDMCadDocEstoque.cdsDocEstoque_Itens.FieldCount - 1) do
   begin
-    if (fDMCadDocEstoque.cdsDocEstoque_Itens.Fields[x].FieldName <> 'NOME_COR_COMBINACAO') then
+    if (fDMCadDocEstoque.cdsDocEstoque_Itens.Fields[x].FieldName <> 'NOME_COR_COMBINACAO') and
+       (fDMCadDocEstoque.cdsDocEstoque_Itens.Fields[x].FieldName <> 'ID_MOVESTOQUE_DESTINO') then
       fDMInformar_Tam.mItensDoc.FieldByName(fDMCadDocEstoque.cdsDocEstoque_Itens.Fields[x].FieldName).AsVariant := fDMCadDocEstoque.cdsDocEstoque_Itens.Fields[x].Value;
+
   end;
   fDMInformar_Tam.mItensDocNome_Produto_Original.AsString := fDMCadDocEstoque.cdsDocEstoque_ItensNOME_PRODUTO.AsString;
   fDMInformar_Tam.mItensDoc.Post;
