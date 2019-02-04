@@ -154,14 +154,12 @@ type
     btnExcluir_Tam: TNxButton;
     TS_Opcoes: TRzTabSheet;
     pnlOpcoes: TPanel;
-    Label13: TLabel;
     Label21: TLabel;
     Label14: TLabel;
     Label15: TLabel;
     DBCheckBox4: TDBCheckBox;
     DBCheckBox1: TDBCheckBox;
     DBCheckBox2: TDBCheckBox;
-    RxDBComboBox1: TRxDBComboBox;
     RxDBComboBox5: TRxDBComboBox;
     DBEdit12: TDBEdit;
     DBEdit13: TDBEdit;
@@ -344,7 +342,6 @@ type
     BitBtn2: TBitBtn;
     SMDBGrid2: TSMDBGrid;
     pnl_Eng_Consumo: TPanel;
-    pnl_Eng_Processo: TPanel;
     pnlConsumo: TPanel;
     Label74: TLabel;
     btnInserir_Consumo: TNxButton;
@@ -360,7 +357,6 @@ type
     btnEmbalagem: TNxButton;
     btnAtelier: TNxButton;
     btnCBarra: TNxButton;
-    SMDBGrid9: TSMDBGrid;
     btnCor2: TNxButton;
     Label117: TLabel;
     RxDBLookupCombo18: TRxDBLookupCombo;
@@ -729,26 +725,11 @@ type
     DBEdit152: TDBEdit;
     Label236: TLabel;
     btnAjustarPeso: TBitBtn;
-    gbxProcesso: TRzGroupBox;
-    btnInserir_Processo: TNxButton;
-    btnAlterar_Processo: TNxButton;
-    btnExcluir_Processo: TNxButton;
-    RzGroupBox1: TRzGroupBox;
-    Label163: TLabel;
-    RxDBLookupCombo21: TRxDBLookupCombo;
-    Label162: TLabel;
-    RxDBComboBox10: TRxDBComboBox;
-    Label164: TLabel;
-    RxDBComboBox11: TRxDBComboBox;
-    SpeedButton13: TSpeedButton;
-    SpeedButton14: TSpeedButton;
     Label118: TLabel;
-    SMDBGrid16: TSMDBGrid;
     Label238: TLabel;
     DBEdit154: TDBEdit;
     Label239: TLabel;
     DBEdit155: TDBEdit;
-    btnAjuda_TipoMat: TNxButton;
     Exportaparabalana1: TMenuItem;
     ExportarProduto1: TMenuItem;
     AtualizarPreo1: TMenuItem;
@@ -759,6 +740,34 @@ type
     RxDBLookupCombo25: TRxDBLookupCombo;
     Label244: TLabel;
     DBEdit158: TDBEdit;
+    SpeedButton15: TSpeedButton;
+    SpeedButton16: TSpeedButton;
+    SpeedButton17: TSpeedButton;
+    SpeedButton18: TSpeedButton;
+    Label245: TLabel;
+    Label246: TLabel;
+    DBEdit159: TDBEdit;
+    Label247: TLabel;
+    Edit12: TEdit;
+    Label13: TLabel;
+    RxDBComboBox1: TRxDBComboBox;
+    pnl_Eng_Processo: TPanel;
+    SMDBGrid9: TSMDBGrid;
+    gbxProcesso: TRzGroupBox;
+    btnInserir_Processo: TNxButton;
+    btnAlterar_Processo: TNxButton;
+    btnExcluir_Processo: TNxButton;
+    RzGroupBox1: TRzGroupBox;
+    Label163: TLabel;
+    Label162: TLabel;
+    Label164: TLabel;
+    SpeedButton13: TSpeedButton;
+    SpeedButton14: TSpeedButton;
+    RxDBLookupCombo21: TRxDBLookupCombo;
+    RxDBComboBox10: TRxDBComboBox;
+    RxDBComboBox11: TRxDBComboBox;
+    btnAjuda_TipoMat: TNxButton;
+    SMDBGrid16: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -954,6 +963,13 @@ type
     procedure btnAjuda_TipoMatClick(Sender: TObject);
     procedure AtualizarPreo1Click(Sender: TObject);
     procedure ExportarProduto1Click(Sender: TObject);
+    procedure SpeedButton15Click(Sender: TObject);
+    procedure SpeedButton16Click(Sender: TObject);
+    procedure SpeedButton18Click(Sender: TObject);
+    procedure SpeedButton17Click(Sender: TObject);
+    procedure Edit12KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure NxButton2Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1050,6 +1066,9 @@ type
 
     procedure prcExportaCadastroMGV5;
     procedure prcAtualizaPrecoMGV5;
+
+    procedure prc_Verificar_Cor_Comb(ID : Integer);
+
   public
     { Public declarations }
     vID_Produto_Local: Integer;
@@ -1064,7 +1083,7 @@ uses rsDBUtils, uUtilPadrao, URelProduto, URelProduto_Grupo, USel_Grupo, USel_Pl
   USel_EnqIPI, USel_CodCest, VarUtils, UCadProduto_Serie, UCadProduto_Cad_Ant, UCadProcesso_Grupo, USel_ContaOrc, USel_Produto,
   uCopiar_Comb_Agrupado, UCadProduto_GradeNum, UCadProduto_Lote, USel_Produto_Lote, UCadProduto_Larg,
   UAltProd, UCadProduto_GradeRefTam, USel_Maquina,
-  UCadProduto_Consumo_Proc;
+  UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu;
 
 {$R *.dfm}
 
@@ -1179,6 +1198,10 @@ var
   vMaterial : String;
   Flag : Boolean;
 begin
+  if fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S' then
+    if (trim(fDMCadProduto.cdsProdutoNOME_MODELO.AsString) <> '') and (fDMCadProduto.cdsProdutoTIPO_REG.AsString <> 'P') then
+      fDMCadProduto.cdsProdutoNOME_MODELO.Clear;
+
   vIDAux := fDMCadProduto.cdsProdutoID.AsInteger;
   if trim(fDMCadProduto.cdsProdutoREFERENCIA.AsString) = '' then
     fDMCadProduto.cdsProdutoREFERENCIA.AsString := fDMCadProduto.cdsProdutoID.AsString;
@@ -1188,6 +1211,25 @@ begin
     MessageDlg(fDMCadProduto.vMsgErro, mtError, [mbOk], 0);
     exit;
   end;
+
+  //19/01/2019
+  if (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M') and (fDMCadProduto.cdsProdutoID_GRADE.AsInteger > 0) then
+  begin
+    vMSgNotificacao := '';
+    if fDMCadProduto.cdsGrade.Locate('ID',fDMCadProduto.cdsProdutoID_GRADE.AsInteger,([Locaseinsensitive])) then
+    begin
+      if (fDMCadProduto.cdsGradeGRADE_REF.AsString = 'S') and
+         (((fDMCadProduto.qParametros_ProdUSA_TAM_REFER_GRADE.AsString = 'S') and (fDMCadProduto.cdsProduto_MatTam.RecordCount <= 0)) or
+         ((trim(fDMCadProduto.qParametros_ProdUSA_TAM_REFER_GRADE.AsString) <> 'S') and (fDMCadProduto.cdsProduto_GradeNum.RecordCount <= 0))) then
+        vMSgNotificacao := 'Não foi lançado a Grade Referenciada, confirma?'
+    end;
+    if (trim(vMSgNotificacao) <> '') and (MessageDlg(vMSgNotificacao,mtConfirmation,[mbYes,mbNo],0) = mrNo) then
+    begin
+      vMSgNotificacao := '';
+      exit;
+    end;
+  end;
+  //*****************
 
   if (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProdutoTIPO_MAT.AsString = 'A')
     and (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'S') then
@@ -1529,6 +1571,9 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'PRECO_CUSTO') then
       SMDBGrid1.Columns[i].Visible := label4.Enabled
     else
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_FORNECEDOR') then
+      SMDBGrid1.Columns[i].Visible := False
+    else
     if (SMDBGrid1.Columns[i].FieldName = 'PRECO_CUSTO_TOTAL') then
       SMDBGrid1.Columns[i].Visible := label4.Enabled
     else
@@ -1554,7 +1599,10 @@ begin
         SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametros_PedPEDIDO_LOJA.AsString = 'S')
     else
     if (SMDBGrid1.Columns[i].FieldName = 'TAM_CALC') then
-        SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametros_ProdMOSTRAR_TAM_CALC.AsString = 'S');
+        SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametros_ProdMOSTRAR_TAM_CALC.AsString = 'S')
+    else
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_MODELO') then
+        SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S')
   end;
   DBMemo2.Visible     := (fDMCadProduto.qParametros_ProdMOSTRAR_OBS_CONSULTA.AsString = 'S');
   Label37.Visible     := ((fDMCadProduto.qParametrosUSA_COD_BARRAS.AsString = 'S') and (fDMCadProduto.qParametrosUSA_COD_BARRAS_PROPRIO.AsString <> 'S'));
@@ -1568,11 +1616,11 @@ begin
 
   btnCBarra.Visible := ((fDMCadProduto.qParametrosUSA_COD_BARRAS.AsString = 'S') and (fDMCadProduto.qParametrosUSA_COD_BARRAS_PROPRIO.AsString = 'S'));
 
-  Label102.Visible          := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S');
-  RxDBLookupCombo14.Visible := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S');
+  Label102.Visible          := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
+  RxDBLookupCombo14.Visible := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
 
-  RxDbCliente.Visible := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S');
-  Label111.Visible    := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S');
+  RxDbCliente.Visible := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
+  Label111.Visible    := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
 
   SMDBGrid1.Visible := (fDMCadProduto.qParametrosEMPRESA_VEICULO.AsString <> 'S');
   SMDBGrid4.Visible := (fDMCadProduto.qParametrosEMPRESA_VEICULO.AsString = 'S');
@@ -1626,8 +1674,10 @@ begin
   Label110.Visible          := ((fDMCadProduto.qParametrosMOSTRAR_LINHA_PROD.AsString = 'S') or (fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S'));
   RxDBLookupCombo16.Visible := ((fDMCadProduto.qParametrosMOSTRAR_LINHA_PROD.AsString = 'S') or (fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S'));
   SpeedButton12.Visible     := ((fDMCadProduto.qParametrosMOSTRAR_LINHA_PROD.AsString = 'S') or (fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S'));
+  SpeedButton15.Visible     := ((fDMCadProduto.qParametrosMOSTRAR_LINHA_PROD.AsString = 'S') or (fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S'));
   Label29.Visible           := (fDMCadProduto.qParametrosMOSTRAR_MARCAR_PROD.AsString = 'S');
   RxDBLookupCombo7.Visible  := (fDMCadProduto.qParametrosMOSTRAR_MARCAR_PROD.AsString = 'S');
+  SpeedButton4.Visible      := (fDMCadProduto.qParametrosMOSTRAR_MARCAR_PROD.AsString = 'S');
 
   for i := 1 to SMDBGrid3.ColCount - 2 do
   begin
@@ -1705,6 +1755,7 @@ begin
   SMDBGrid16.Visible := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
   if SMDBGrid16.Visible then
     pnl_Eng_Processo.Visible := False;
+
   Label118.Visible    := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
   StaticText1.Caption := 'Duplo clique para consultar     F3 Consultar Cadastro Anterior';
   if fDMCadProduto.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
@@ -1743,14 +1794,34 @@ begin
     pnl_Eng_Processo.Align := alClient
   else
   if SMDBGrid16.Visible then
+  begin
      SMDBGrid16.Align := alClient;
+     //nel8.Align     := alLeft;
+  end;
+
   if fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S' then
     Label110.Caption := 'Construção/Linha:';
+  Label246.Visible  := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  DBEdit159.Visible := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  Label247.Visible  := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  Edit12.Visible    := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
+var
+  i : integer;
 begin
   SMDBGrid1.DisableScroll;
+
+  if fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S' then
+  begin
+    for i := 1 to SMDBGrid1.ColCount - 2 do
+    begin
+      if (SMDBGrid1.Columns[i].FieldName = 'NOME_FORNECEDOR') then
+        SMDBGrid1.Columns[i].Visible := (ComboBox2.ItemIndex = 1);
+    end;
+  end;
+
   fDMCadProduto.cdsProduto_Consulta.Close;
   fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.ctConsulta;
   if ceID.AsInteger > 0 then
@@ -1789,6 +1860,10 @@ begin
     if (RxDbFilial.Text <> '') and (fDMCadProduto.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
       fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText
                                       + ' AND PRO.FILIAL = ' + IntToStr(RxDbFilial.KeyValue);
+
+    if trim(Edit12.Text) <> '' then
+      fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText
+                                      + ' AND PRO.NOME_MODELO LIKE ' + QuotedStr('%'+Edit12.Text+'%');
 
     case ComboBox2.ItemIndex of
       0: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND TIPO_REG = ' + QuotedStr('P');
@@ -1915,7 +1990,10 @@ begin
 end;
 
 procedure TfrmCadProduto.btnConfirmarClick(Sender: TObject);
+var
+  vIDAux : Integer;
 begin
+  vIDAux := fDMCadProduto.cdsProdutoID.AsInteger;
   prc_Gravar_Registro;
   if  (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'S') and (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
   begin
@@ -1928,6 +2006,8 @@ begin
     FreeAndNil(frmCopiar_Comb_Agrupado);
     fDMCadProduto.cdsProduto_Comb.Close;
   end;
+  if (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S') then
+    prc_Verificar_Cor_Comb(vIDAux);
 end;
 
 procedure TfrmCadProduto.FormDestroy(Sender: TObject);
@@ -2030,12 +2110,35 @@ begin
 end;
 
 procedure TfrmCadProduto.btnExcluir_ConsumoClick(Sender: TObject);
+var
+  vItemAux : Integer;
+  vFlag : Boolean;
 begin
   if fDMCadProduto.cdsProduto_Consumo.IsEmpty then
     exit;
 
   if uAltProd.fnc_Custo(fDMCadProduto.cdsProdutoID.AsInteger,fDMCadProduto) then
     exit;
+
+  if (fDMCadProduto.cdsProduto_Comb.RecordCount > 0) and (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S') then
+  begin
+    vFlag := False;
+    fDMCadProduto.cdsProduto_Comb.First;
+    while not fDMCadProduto.cdsProduto_Comb.Eof do
+    begin
+      if fDMCadProduto.cdsProduto_Comb_Mat.Locate('ITEM_MAT',fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger,([Locaseinsensitive])) then
+      begin
+        vFlag := True;
+        fDMCadProduto.cdsProduto_Comb.Last;
+      end;
+      fDMCadProduto.cdsProduto_Comb.Next;
+    end;
+    if vFlag then
+    begin
+      MessageDlg('*** Esse Material esta na Combinação ' + fDMCadProduto.cdsProduto_CombNOME.AsString, mtError, [mbOk], 0);
+      exit;
+    end;
+  end;
 
   if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
@@ -2045,12 +2148,18 @@ begin
     fDMCadProduto.cdsProduto_Consumo_Tam.Delete;
 
   fDMCadProduto.cdsProduto_Consumo_Proc.First;
-  while fDMCadProduto.cdsProduto_Consumo_Proc.Eof do
+  while not fDMCadProduto.cdsProduto_Consumo_Proc.Eof do
     fDMCadProduto.cdsProduto_Consumo_Proc.Delete;
 
   fDMCadProduto.cdsProduto_Consumo.Delete;
 
+  vItemAux := fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger;
+
+  SMDBGrid3.DisableScroll;
   ceVlr_Total_Mat.Value := fDMCadProduto.fnc_Calcular_Mat;
+  SMDBGrid3.EnableScroll;
+
+  fDMCadProduto.cdsProduto_Consumo.Locate('ITEM',vItemAux,([Locaseinsensitive]));
 end;
 
 procedure TfrmCadProduto.btnInserir_ConsumoClick(Sender: TObject);
@@ -2076,12 +2185,16 @@ begin
 end;
 
 procedure TfrmCadProduto.btnAlterar_ConsumoClick(Sender: TObject);
+var
+  vItemAux : Integer;
 begin
   if (fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger < 1) or not(fDMCadProduto.cdsProduto_Consumo.Active) or
      (fDMCadProduto.cdsProduto_Consumo.IsEmpty) then
     exit;
   if uAltProd.fnc_Custo(fDMCadProduto.cdsProdutoID.AsInteger,fDMCadProduto) then
     exit;
+
+  vItemAux := fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger;
 
   fDMCadProduto.cdsProduto_Consumo.Edit;
 
@@ -2091,6 +2204,8 @@ begin
 
   FreeAndNil(ffrmCadProduto_Consumo);
   ceVlr_Total_Mat.Value := fDMCadProduto.fnc_Calcular_Mat;
+
+  fDMCadProduto.cdsProduto_Consumo.Locate('ITEM',vItemAux,([Locaseinsensitive]));
 end;
 
 procedure TfrmCadProduto.RxDBComboBox7Change(Sender: TObject);
@@ -2149,6 +2264,8 @@ begin
   end;
   DBCheckBox11.Visible := ((fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'P') or (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'S'));
   TS_Tingimento.TabVisible := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M'));
+  Label246.Visible  := (RxDBComboBox7.ItemIndex = 0) and (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  DBEdit159.Visible := (RxDBComboBox7.ItemIndex = 0) and (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
 end;
 
 procedure TfrmCadProduto.SMDBGrid1TitleClick(Column: TColumn);
@@ -2643,6 +2760,7 @@ begin
 
   RzPageControl1.ActivePage := TS_Cadastro;
   btnAlterarClick(Sender);
+  btnAlterar_NomeClick(Sender);
 end;
 
 procedure TfrmCadProduto.SMDBGrid3DblClick(Sender: TObject);
@@ -3093,6 +3211,7 @@ begin
   end;
   prc_Combinacao;
   DBCheckBox17.Visible := (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'P');
+  TS_Ativo.TabVisible  := (RxDBComboBox7.ItemIndex = 4);
 end;
 
 procedure TfrmCadProduto.RxDBComboBox4Change(Sender: TObject);
@@ -3346,17 +3465,23 @@ procedure TfrmCadProduto.DBEdit7Exit(Sender: TObject);
 var
   vAux: Integer;
 begin
-  if (trim(DBEdit7.Text) = '') and (fDMCadProduto.cdsProdutoTIPO_REG.AsString <> '') then
+  if (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S') and (trim(fDMCadProduto.cdsProdutoREFERENCIA.AsString) = '') then
+    fDMCadProduto.cdsProdutoREFERENCIA.AsString := fDMCadProduto.cdsProdutoTIPO_REG.AsString + '.' +FormatFloat('000000',fDMCadProduto.cdsProdutoID.AsInteger)
+  else
+  if (trim(fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString) <> 'S') then
   begin
-    vAux := fDMCadProduto.fnc_Referencia_Proxima_Seq(fDMCadProduto.cdsProdutoTIPO_REG.AsString);
-    fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger := vAux;
-    fDMCadProduto.cdsProdutoREFERENCIA.AsString      := fDMCadProduto.cdsProdutoTIPO_REG.AsString + '.' +FormatFloat('000000',fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger);
+    if (trim(DBEdit7.Text) = '') and (fDMCadProduto.cdsProdutoTIPO_REG.AsString <> '') then
+    begin
+      vAux := fDMCadProduto.fnc_Referencia_Proxima_Seq(fDMCadProduto.cdsProdutoTIPO_REG.AsString);
+      fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger := vAux;
+      fDMCadProduto.cdsProdutoREFERENCIA.AsString      := fDMCadProduto.cdsProdutoTIPO_REG.AsString + '.' +FormatFloat('000000',fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger);
+    end;
+    if ((trim(DBEdit7.Text) <> '') and ((trim(fDMCadProduto.cdsProdutoREFERENCIA_PADRAO.AsString) = '')) or (fDMCadProduto.cdsProduto.State in [dsInsert])
+       or (DBEdit7.Text <> vReferencia_Ant)) then
+      fDMCadProduto.cdsProdutoREFERENCIA_PADRAO.AsString := DBEdit7.Text;
+    if (trim(DBEdit7.Text) <> '') and (Copy(DBEdit7.Text,1,2) <> fDMCadProduto.cdsProdutoTIPO_REG.AsString + '.') then
+      fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger := 0;
   end;
-  if ((trim(DBEdit7.Text) <> '') and ((trim(fDMCadProduto.cdsProdutoREFERENCIA_PADRAO.AsString) = '')) or (fDMCadProduto.cdsProduto.State in [dsInsert])
-     or (DBEdit7.Text <> vReferencia_Ant)) then
-    fDMCadProduto.cdsProdutoREFERENCIA_PADRAO.AsString := DBEdit7.Text;
-  if (trim(DBEdit7.Text) <> '') and (Copy(DBEdit7.Text,1,2) <> fDMCadProduto.cdsProdutoTIPO_REG.AsString + '.') then
-    fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger := 0;
 end;
 
 procedure TfrmCadProduto.btnInserir_UniClick(Sender: TObject);
@@ -3693,6 +3818,7 @@ end;
 procedure TfrmCadProduto.RxDBLookupCombo16Enter(Sender: TObject);
 begin
   vID_Linha_Ant := fDMCadProduto.cdsProdutoID_LINHA.AsInteger;
+  fDMCadProduto.cdsLinha.IndexFieldNames := 'NOME';
 end;
 
 procedure TfrmCadProduto.RxDBLookupCombo16Exit(Sender: TObject);
@@ -5608,6 +5734,95 @@ end;
 procedure TfrmCadProduto.ExportarProduto1Click(Sender: TObject);
 begin
   prcExportaCadastroMGV5;
+end;
+
+procedure TfrmCadProduto.SpeedButton15Click(Sender: TObject);
+var
+  ffrmCadLinha: TfrmCadLinha;
+begin
+  ffrmCadLinha := TfrmCadLinha.Create(self);
+  ffrmCadLinha.ShowModal;
+  FreeAndNil(ffrmCadLinha);
+  fDMCadProduto.cdsLinha.Close;
+  fDMCadProduto.cdsLinha.Open;
+end;
+
+procedure TfrmCadProduto.SpeedButton16Click(Sender: TObject);
+var
+  ffrmCadGrade: TfrmCadGrade;
+begin
+  ffrmCadGrade := TfrmCadGrade.Create(self);
+  ffrmCadGrade.ShowModal;
+  FreeAndNil(ffrmCadGrade);
+  fDMCadProduto.cdsGrade.Close;
+  fDMCadProduto.cdsGrade.Open;
+end;
+
+procedure TfrmCadProduto.SpeedButton18Click(Sender: TObject);
+begin
+  fDMCadProduto.cdsCliente.Close;
+  fDMCadProduto.cdsCliente.Open;
+end;
+
+procedure TfrmCadProduto.SpeedButton17Click(Sender: TObject);
+var
+  ffrmCadPessoa: TfrmCadPessoa;
+begin
+  ffrmCadPessoa := TfrmCadPessoa.Create(self);
+  ffrmCadPessoa.ShowModal;
+  FreeAndNil(ffrmCadPessoa);
+  fDMCadProduto.cdsCliente.Close;
+  fDMCadProduto.cdsCliente.Open;
+end;
+
+procedure TfrmCadProduto.prc_Verificar_Cor_Comb(ID : Integer);
+var
+  sds: TSQLDataSet;
+  vOBS : String;
+begin
+  vOBS := '';
+  sds  := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT COUNT(1) CONTADOR, PC.NOME FROM PRODUTO_COMB_MAT PMAT '
+                       + 'INNER JOIN PRODUTO_COMB PC ON PMAT.ID = PC.ID '
+                       + 'LEFT JOIN PRODUTO M ON PMAT.ID_MATERIAL = M.ID '
+                       + 'WHERE PMAT.ID = ' + IntToStr(ID)
+                       + '  AND M.USA_COR = ' + QuotedStr('S')
+                       + '  AND ((PMAT.ID_COR <= 0) or (PMAT.ID_COR IS NULL)) '
+                       + ' GROUP BY PC.NOME ';
+    sds.Open;
+    while not sds.Eof do
+    begin
+      if sds.FieldByName('CONTADOR').AsInteger > 0 then
+        vOBS := vOBS + #13 + sds.FieldByName('NOME').AsString;
+      sds.Next;
+    end;
+
+  finally
+    FreeAndNil(sds);
+  end;
+
+  if trim(vOBS) <> '' then
+    MessageDlg('*** Combinações sem a COR no Material!' + #13 + vOBS , mtInformation, [mbOk], 0);
+end;
+
+procedure TfrmCadProduto.Edit12KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_Return) and (trim(Edit12.Text) <> '') then
+    btnConsultarClick(Sender);
+end;
+
+procedure TfrmCadProduto.NxButton2Click(Sender: TObject);
+begin
+  if fDMCadProduto.cdsProduto_Consumo_Proc.IsEmpty then
+    exit;
+  if MessageDlg('Deseja excluir o Processo Selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+  fDMCadProduto.cdsProduto_Consumo_Proc.Delete;
 end;
 
 end.

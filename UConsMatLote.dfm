@@ -435,7 +435,7 @@ object frmConsMatLote: TfrmConsMatLote
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
+    Left = 112
     Top = 408
   end
   object dspMatLote: TDataSetProvider

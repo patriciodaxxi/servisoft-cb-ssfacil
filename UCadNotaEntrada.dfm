@@ -25,7 +25,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     Top = 0
     Width = 941
     Height = 679
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -126,6 +126,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'DTEMISSAO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Emiss'#227'o'
+            Width = 64
             Visible = True
           end
           item
@@ -134,6 +135,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'DTSAIDAENTRADA'
             Title.Alignment = taCenter
             Title.Caption = 'Data Entrada'
+            Width = 64
             Visible = True
           end
           item
@@ -142,6 +144,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'CODCFOP'
             Title.Alignment = taCenter
             Title.Caption = 'CFOP'
+            Width = 64
             Visible = True
           end
           item
@@ -163,6 +166,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'VLR_DUPLICATA'
             Title.Alignment = taCenter
             Title.Caption = 'Valor Duplicatas'
+            Width = 64
             Visible = True
           end
           item
@@ -179,12 +183,14 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'TIPO_PRAZO'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Prazo'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ID_CLIENTE'
             Title.Caption = 'ID Fornecedor'
+            Width = 64
             Visible = True
           end>
       end
@@ -262,7 +268,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Width = 250
           Height = 21
           CharCase = ecUpperCase
-          TabOrder = 6
+          TabOrder = 5
           OnKeyDown = Edit2KeyDown
         end
         object edtSerie: TEdit
@@ -271,7 +277,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Width = 55
           Height = 21
           CharCase = ecUpperCase
-          TabOrder = 3
+          TabOrder = 1
           OnKeyDown = edtSerieKeyDown
         end
         object DateEdit1: TDateEdit
@@ -281,7 +287,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Height = 21
           NumGlyphs = 2
           StartOfWeek = Sun
-          TabOrder = 4
+          TabOrder = 3
         end
         object DateEdit2: TDateEdit
           Left = 254
@@ -290,7 +296,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Height = 21
           NumGlyphs = 2
           StartOfWeek = Sun
-          TabOrder = 5
+          TabOrder = 4
         end
         object RxDBLookupCombo1: TRxDBLookupCombo
           Left = 95
@@ -310,7 +316,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Height = 21
           NumGlyphs = 2
           StartOfWeek = Sun
-          TabOrder = 1
+          TabOrder = 6
         end
         object dtedtEntradaFin: TDateEdit
           Left = 608
@@ -319,7 +325,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Height = 21
           NumGlyphs = 2
           StartOfWeek = Sun
-          TabOrder = 2
+          TabOrder = 7
         end
         object CurrencyEdit1: TCurrencyEdit
           Left = 254
@@ -329,7 +335,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           AutoSize = False
           DecimalPlaces = 0
           DisplayFormat = '0'
-          TabOrder = 7
+          TabOrder = 2
           OnKeyDown = CurrencyEdit1KeyDown
         end
         object btnConsultar: TNxButton
@@ -981,7 +987,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
         Left = 0
         Top = 31
         Width = 937
-        Height = 136
+        Height = 157
         Align = alTop
         Enabled = False
         TabOrder = 0
@@ -1040,14 +1046,14 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Left = 1
           Top = 30
           Width = 935
-          Height = 72
+          Height = 93
           Align = alClient
           TabOrder = 1
           OnEnter = pnlClienteEnter
           OnExit = pnlClienteExit
           object Label18: TLabel
             Left = 13
-            Top = 34
+            Top = 55
             Width = 56
             Height = 13
             Alignment = taRightJustify
@@ -1055,7 +1061,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           end
           object lblDtSaida: TLabel
             Left = 209
-            Top = 34
+            Top = 55
             Width = 54
             Height = 13
             Alignment = taRightJustify
@@ -1079,7 +1085,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           end
           object lblTipo_Prazo: TLabel
             Left = 39
-            Top = 55
+            Top = 76
             Width = 30
             Height = 13
             Alignment = taRightJustify
@@ -1203,7 +1209,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           end
           object Label11: TLabel
             Left = 450
-            Top = 30
+            Top = 51
             Width = 141
             Height = 13
             Caption = 'F2 para pesquisar Fornecedor'
@@ -1216,32 +1222,40 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           end
           object Label2: TLabel
             Left = 363
-            Top = 53
+            Top = 74
             Width = 85
             Height = 13
             Alignment = taRightJustify
             Caption = 'Cliente Triangular:'
           end
+          object lblOperacao: TLabel
+            Left = 19
+            Top = 35
+            Width = 50
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Opera'#231#227'o:'
+          end
           object DBDateEdit1: TDBDateEdit
             Left = 72
-            Top = 27
+            Top = 48
             Width = 118
             Height = 21
             DataField = 'DTEMISSAO'
             DataSource = DMCadNotaFiscal.dsNotaFiscal
             NumGlyphs = 2
-            TabOrder = 4
+            TabOrder = 5
             StartOfWeek = Sun
           end
           object DBDateEdit2: TDBDateEdit
             Left = 266
-            Top = 27
+            Top = 48
             Width = 100
             Height = 21
             DataField = 'DTSAIDAENTRADA'
             DataSource = DMCadNotaFiscal.dsNotaFiscal
             NumGlyphs = 2
-            TabOrder = 5
+            TabOrder = 6
             StartOfWeek = Sun
           end
           object RxDBLookupCombo2: TRxDBLookupCombo
@@ -1276,7 +1290,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           end
           object rxcbTipo_Prazo: TRxDBComboBox
             Left = 72
-            Top = 48
+            Top = 69
             Width = 118
             Height = 21
             Style = csDropDownList
@@ -1288,7 +1302,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
               'A Prazo'
               'A Vista'
               'Nenhum')
-            TabOrder = 6
+            TabOrder = 7
             Values.Strings = (
               'P'
               'V'
@@ -1314,7 +1328,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           end
           object RxDBLookupCombo4: TRxDBLookupCombo
             Left = 450
-            Top = 45
+            Top = 66
             Width = 295
             Height = 21
             DropDownCount = 15
@@ -1324,14 +1338,28 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             LookupField = 'CODIGO'
             LookupDisplay = 'NOME;CNPJ_CPF'
             LookupSource = DMCadNotaFiscal.dsCliente
-            TabOrder = 7
+            TabOrder = 8
             OnEnter = RxDBLookupCombo3Enter
             OnKeyDown = RxDBLookupCombo4KeyDown
+          end
+          object rxdbOperacao: TRxDBLookupCombo
+            Left = 72
+            Top = 27
+            Width = 293
+            Height = 21
+            DropDownCount = 8
+            DropDownWidth = 500
+            DataField = 'ID_OPERACAO_NOTA'
+            DataSource = DMCadNotaFiscal.dsNotaFiscal
+            LookupField = 'ID'
+            LookupDisplay = 'NOME'
+            LookupSource = DMCadNotaFiscal.dsOperacao_Nota
+            TabOrder = 4
           end
         end
         object Panel3: TPanel
           Left = 1
-          Top = 102
+          Top = 123
           Width = 935
           Height = 33
           Align = alBottom
@@ -1374,9 +1402,9 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 167
+        Top = 188
         Width = 937
-        Height = 457
+        Height = 436
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -1394,7 +1422,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             Left = 0
             Top = 57
             Width = 933
-            Height = 377
+            Height = 356
             Align = alClient
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1424,7 +1452,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 34
+            ColCount = 35
             RowCount = 2
             Columns = <
               item
@@ -1458,6 +1486,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'NUM_LOTE_CONTROLE'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#186' Lote Controle'
+                Width = 64
                 Visible = True
               end
               item
@@ -1480,6 +1509,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'CODCFOP'
                 Title.Alignment = taCenter
                 Title.Caption = 'CFOP'
+                Width = 64
                 Visible = True
               end
               item
@@ -1555,6 +1585,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'NUMERO_OC'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#186' Pedido Cliente'
+                Width = 64
                 Visible = True
               end
               item
@@ -1562,6 +1593,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'NUMERO_OS'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#186' OS'
+                Width = 64
                 Visible = True
               end
               item
@@ -1647,6 +1679,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'GERAR_ESTOQUE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Gerar Estoque'
+                Width = 64
                 Visible = True
               end
               item
@@ -1662,6 +1695,14 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'PRECO_CUSTO_TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Pre'#231'o Custo Total'
+                Width = 64
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_COR'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cor'
                 Visible = True
               end>
           end
@@ -1958,7 +1999,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Enabled = False
           DesignSize = (
             933
-            434)
+            413)
           object Label27: TLabel
             Left = 303
             Top = 46
@@ -2556,7 +2597,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             Left = 0
             Top = 76
             Width = 933
-            Height = 358
+            Height = 337
             Align = alClient
             Ctl3D = False
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Parc
@@ -2603,6 +2644,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
               item
                 Expanded = False
                 FieldName = 'VLR_VENCIMENTO'
+                Width = 64
                 Visible = True
               end
               item
@@ -2775,7 +2817,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             Left = 0
             Top = 199
             Width = 933
-            Height = 235
+            Height = 214
             Align = alClient
             Caption = ' Eventos '
             TabOrder = 1
@@ -2783,7 +2825,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
               Left = 2
               Top = 15
               Width = 929
-              Height = 218
+              Height = 197
               Align = alClient
               Ctl3D = False
               DataSource = DMCadNotaFiscal.dsNotaFiscal_NFe
@@ -2847,11 +2889,13 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 item
                   Expanded = False
                   FieldName = 'NFERECIBO'
+                  Width = 64
                   Visible = True
                 end
                 item
                   Expanded = False
                   FieldName = 'DATAHORAAUT'
+                  Width = 64
                   Visible = True
                 end
                 item

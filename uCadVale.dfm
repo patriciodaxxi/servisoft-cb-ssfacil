@@ -24,7 +24,7 @@ object frmCadVale: TfrmCadVale
     Top = 0
     Width = 789
     Height = 572
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadVale: TfrmCadVale
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -3029,6 +3029,7 @@ object frmCadVale: TfrmCadVale
               item
                 Expanded = False
                 FieldName = 'NOME_SERVICO_INT'
+                Width = 64
                 Visible = True
               end
               item
@@ -3039,11 +3040,13 @@ object frmCadVale: TfrmCadVale
               item
                 Expanded = False
                 FieldName = 'VLR_UNITARIO'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_TOTAL'
+                Width = 64
                 Visible = True
               end>
           end

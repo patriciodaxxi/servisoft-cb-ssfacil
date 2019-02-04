@@ -89,6 +89,7 @@ begin
     if MessageDlg('Confirmar a transferência de produtos?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
       exit;
 
+  SMDBGrid1.DisableScroll;
   fDMCadTab_Preco.cdsTab_Preco_Itens.Last;
   vItem_Local := fDMCadTab_Preco.cdsTab_Preco_ItensITEM.AsInteger;
   fDMCadTab_Preco.cdsProduto.First;
@@ -113,6 +114,7 @@ begin
     end;
     fDMCadTab_Preco.cdsProduto.Next;
   end;
+  SMDBGrid1.EnableScroll;
   Close;
 end;
 

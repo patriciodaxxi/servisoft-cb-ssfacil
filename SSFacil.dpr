@@ -112,7 +112,6 @@ uses
   UDMImportarXML in 'ImportarXMLNFe\UDMImportarXML.pas' {DMImportarXML: TDataModule},
   UDMConsPedido in 'UDMConsPedido.pas' {DMConsPedido: TDataModule},
   UConsPedido in 'UConsPedido.pas' {frmConsPedido},
-  UCadMaterial in 'UCadMaterial.pas' {frmCadMaterial},
   UCadNotaFiscal_Itens_Imp in 'UCadNotaFiscal_Itens_Imp.pas' {frmCadNotaFiscal_Itens_Imp},
   UCadNotaFiscal_Obs in 'UCadNotaFiscal_Obs.pas' {frmCadNotaFiscal_Obs},
   UDMCadTab_Preco in 'UDMCadTab_Preco.pas' {DMCadTab_Preco: TDataModule},
@@ -769,7 +768,13 @@ uses
   UConsEstoque_Atual in 'UConsEstoque_Atual.pas' {frmConsEstoque_Atual},
   UBaixaNFDevolvida in 'UBaixaNFDevolvida.pas' {frmBaixaNFDevolvida},
   UCadOrcamento_Aprov in 'UCadOrcamento_Aprov.pas' {frmCadOrcamento_Aprov},
-  UConsMatLote in 'UConsMatLote.pas' {frmConsMatLote};
+  UConsMatLote in 'UConsMatLote.pas' {frmConsMatLote},
+  UCadMaterial in 'UCadMaterial.pas' {frmCadMaterial},
+  UCadProduto_Comb_AltCor in 'UCadProduto_Comb_AltCor.pas' {frmCadProduto_Comb_AltCor},
+  UConsEstoqueTerc in 'UConsEstoqueTerc.pas' {frmConsEstoqueTerc},
+  UDMEstoqueTerc in 'UDMEstoqueTerc.pas' {DMEstoqueTerc: TDataModule},
+  UAjuste_OperacaoNota in 'UAjuste_OperacaoNota.pas' {frmAjuste_OperacaoNota},
+  UCadProduto_Consumo_Copiar in 'UCadProduto_Consumo_Copiar.pas' {frmCadProduto_Consumo_Copiar};
 
 {$R *.res}
 

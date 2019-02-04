@@ -249,6 +249,7 @@ object frmCadLinha: TfrmCadLinha
             FieldName = 'UNIDADE'
             Title.Alignment = taCenter
             Title.Caption = 'Unidade'
+            Width = 64
             Visible = True
           end
           item

@@ -96,12 +96,10 @@ begin
     RxDBLookupCombo2.KeyValue := fDMCadTab_Preco.cdsTab_Preco_ItensID_PRODUTO.AsInteger;
     RxDBLookupCombo4.KeyValue := fDMCadTab_Preco.cdsTab_Preco_ItensID_PRODUTO.AsInteger;
     if fDMCadTab_Preco.cdsTab_Preco_ItensID_COR.AsInteger > 0 then
-    begin
-      prc_Abrir_Combinacao;
-      RxDBLookupCombo3.KeyValue := fDMCadTab_Preco.cdsTab_Preco_ItensID_COR.AsInteger;
-    end
+      RxDBLookupCombo3.KeyValue := fDMCadTab_Preco.cdsTab_Preco_ItensID_COR.AsInteger
     else
       RxDBLookupCombo3.ClearValue;
+    prc_Abrir_Combinacao;
     if trim(RxDBLookupCombo4.Text) <> '' then
       vCodProdutoAnt  := RxDBLookupCombo4.KeyValue;
     if fDMCadTab_Preco.cdsProduto.Locate('ID', fDMCadTab_Preco.cdsTab_Preco_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]) then
@@ -123,7 +121,9 @@ begin
   begin
     Panel2.Visible := (fDMCadTab_Preco.cdsProdutoUSA_PRECO_COR.AsString = 'S');
     if fDMCadTab_Preco.cdsProdutoUSA_PRECO_COR.AsString = 'S' then
-      prc_Abrir_Combinacao;
+      prc_Abrir_Combinacao
+    else
+      fDMCadTab_Preco.cdsCombinacao.Close;
   end;
 
   CurrencyEdit1.Value := fDMCadTab_Preco.cdsProdutoPRECO_CUSTO.AsFloat;
@@ -150,6 +150,12 @@ begin
   if fDMCadTab_Preco.cdsProdutoID.AsInteger <> RxDBLookupCombo4.KeyValue then
     fDMCadTab_Preco.cdsProduto.Locate('ID', RxDBLookupCombo4.KeyValue,[loCaseInsensitive]);
 
+  if (fDMCadTab_Preco.cdsProdutoUSA_PRECO_COR.AsString <> 'S') and (trim(RxDBLookupCombo3.Text) <> '') then
+  begin
+    MessageDlg('*** Cor informada para Produto que não esta marcado que o Preço é por Cor!', mtError, [mbOk], 0);
+    exit;
+  end;
+
   try
     if vStatus = 'A' then
       fDMCadTab_Preco.cdsTab_Preco_Itens.Edit
@@ -163,7 +169,10 @@ begin
     fDMCadTab_Preco.cdsTab_Preco_ItensPRECO_CUSTO.AsFloat  := CurrencyEdit1.Value;
     fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA.AsFloat    := CurrencyEdit2.Value;
     if (trim(RxDBLookupCombo3.Text) <> '') and (fDMCadTab_Preco.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-      fDMCadTab_Preco.cdsTab_Preco_ItensID_COR.AsFloat := RxDBLookupCombo3.KeyValue
+    begin
+      fDMCadTab_Preco.cdsTab_Preco_ItensID_COR.AsFloat    := RxDBLookupCombo3.KeyValue;
+      fDMCadTab_Preco.cdsTab_Preco_ItensNOME_COR.AsString := RxDBLookupCombo3.Text;
+    end
     else
       fDMCadTab_Preco.cdsTab_Preco_ItensID_COR.AsFloat := 0;
     fDMCadTab_Preco.cdsTab_Preco_Itens.Post;

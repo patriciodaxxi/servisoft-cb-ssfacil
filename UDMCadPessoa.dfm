@@ -592,6 +592,11 @@ object DMCadPessoa: TDMCadPessoa
       FixedChar = True
       Size = 1
     end
+    object sdsPessoaIMP_NOMEPROD_CLIENTE: TStringField
+      FieldName = 'IMP_NOMEPROD_CLIENTE'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
@@ -1229,6 +1234,11 @@ object DMCadPessoa: TDMCadPessoa
     end
     object cdsPessoaIPI_PAGO_FILIAL: TStringField
       FieldName = 'IPI_PAGO_FILIAL'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPessoaIMP_NOMEPROD_CLIENTE: TStringField
+      FieldName = 'IMP_NOMEPROD_CLIENTE'
       FixedChar = True
       Size = 1
     end
@@ -5436,7 +5446,7 @@ object DMCadPessoa: TDMCadPessoa
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT ID, USA_OPCAO_IMP_COD_CLI'
+      'SELECT ID, USA_OPCAO_IMP_COD_CLI, IMP_NOMEPROD_CLIENTE'
       'FROM PARAMETROS_NFE')
     SQLConnection = dmDatabase.scoDados
     Left = 936
@@ -5447,6 +5457,11 @@ object DMCadPessoa: TDMCadPessoa
     end
     object qParametros_NFeUSA_OPCAO_IMP_COD_CLI: TStringField
       FieldName = 'USA_OPCAO_IMP_COD_CLI'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_NFeIMP_NOMEPROD_CLIENTE: TStringField
+      FieldName = 'IMP_NOMEPROD_CLIENTE'
       FixedChar = True
       Size = 1
     end

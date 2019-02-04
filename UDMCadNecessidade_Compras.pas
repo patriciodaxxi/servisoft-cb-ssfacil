@@ -400,6 +400,12 @@ type
     qDuplicidadeQTD_CONSUMO: TFloatField;
     sdsLote_Mat_GravaOBS: TStringField;
     cdsLote_Mat_GravaOBS: TStringField;
+    qParametros_LoteLOTE_CALCADO_NOVO: TStringField;
+    qParametros_Est: TSQLQuery;
+    qParametros_EstUSA_RESERVA: TStringField;
+    qParametrosMOSTRAR_EMBALAGEM: TStringField;
+    sdsLote_MatPRECO_CUSTO_COR: TFloatField;
+    cdsLote_MatPRECO_CUSTO_COR: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNecessidade_ComprasUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -504,6 +510,8 @@ begin
   qParametros_Lote.Open;
   qParametros_Geral.Close;
   qParametros_Geral.Open;
+  qParametros_Est.Close;
+  qParametros_Est.Open;
   cdsSetor.Open;
 
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;

@@ -52,6 +52,14 @@ type
     RLDBText8: TRLDBText;
     RLDBText9: TRLDBText;
     rllbSaldo: TRLLabel;
+    RLBand2: TRLBand;
+    rllSaldoGeral: TRLLabel;
+    RLLabel18: TRLLabel;
+    RLLabel19: TRLLabel;
+    rllSaldoSumary: TRLLabel;
+    RLLabel23: TRLLabel;
+    rllChequesVencidos: TRLLabel;
+    RLDraw3: TRLDraw;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -61,6 +69,7 @@ type
     procedure RLBand4BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand5AfterPrint(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure RLBand2BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     fDMRel: TDMRel;
@@ -70,6 +79,7 @@ type
     fDMCadFinanceiro: TDMCadFinanceiro;
     vOpcaoImp : String;
     vVlrSaldo : Real;
+    vVlrSaldoGeral : Real;
     vID_Conta : Integer;
     vSaldo_Ini : Real;
 
@@ -107,6 +117,7 @@ procedure TfRelFinanceiro_Conta.FormCreate(Sender: TObject);
 begin
   fDMRel := TDMRel.Create(Self);
   vVlrSaldo  := 0;
+  vVlrSaldoGeral := 0;
   vID_Conta  := 0;
   vSaldo_Ini := 0;
 end;
@@ -135,12 +146,13 @@ end;
 procedure TfRelFinanceiro_Conta.RLBand4BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 var
-  vAux : Real;  
+  vAux : Real;
 begin
   vAux := StrToFloat(FormatFloat('0.00',RLDBResult1.Value - RLDBResult2.Value));
   rllbSaldo_Periodo.Caption := FormatFloat('###,###,##0.00',vAux);
 
   rllbSaldo_Final.Caption   := FormatFloat('###,###,##0.00',vVlrSaldo);
+  vVlrSaldoGeral := vVlrSaldoGeral + vAux;
 end;
 
 procedure TfRelFinanceiro_Conta.prc_Montar_SaldoAnt;
@@ -174,6 +186,14 @@ end;
 procedure TfRelFinanceiro_Conta.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(fDMRel);
+end;
+
+procedure TfRelFinanceiro_Conta.RLBand2BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  rllChequesVencidos.Caption := FormatFloat('###,###,##0.00',fDMCadFinanceiro.qChequesVLR_VENCIDO.AsFloat);
+  rllSaldoSumary.Caption := FormatFloat('###,###,##0.00',vVlrSaldoGeral);
+  rllSaldoGeral.Caption := FormatFloat('###,###,##0.00',vVlrSaldoGeral - fDMCadFinanceiro.qChequesVLR_VENCIDO.AsFloat);
 end;
 
 end.

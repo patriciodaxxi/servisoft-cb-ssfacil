@@ -27,22 +27,26 @@ type
     DBEdit3: TDBEdit;
     DBEdit1: TDBEdit;
     RxDBLookupCombo1: TRxDBLookupCombo;
-    SMDBGrid1: TSMDBGrid;
-    pnlItem: TPanel;
-    btnInserir_Itens: TNxButton;
-    btnAlterar_Itens: TNxButton;
-    btnExcluir_Itens: TNxButton;
-    btnCopiarCombinacao: TNxButton;
     SMDBGrid2: TSMDBGrid;
     btnImprimir: TNxButton;
-    Image1: TImage;
     Label1: TLabel;
     Label4: TLabel;
     DBEdi4: TDBEdit;
     BitBtn20: TBitBtn;
     Label107: TLabel;
     OpenPictureDialog1: TOpenPictureDialog;
+    Panel1: TPanel;
+    Image1: TImage;
+    SMDBGrid1: TSMDBGrid;
+    pnlItem: TPanel;
+    btnInserir_Itens: TNxButton;
+    btnAlterar_Itens: TNxButton;
+    btnExcluir_Itens: TNxButton;
+    btnCopiarCombinacao: TNxButton;
     btnCopiarPrincipal: TNxButton;
+    Label6: TLabel;
+    Shape1: TShape;
+    Label7: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -67,6 +71,12 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure BitBtn20Click(Sender: TObject);
     procedure btnCopiarPrincipalClick(Sender: TObject);
+    procedure SMDBGrid2GetCellParams(Sender: TObject; Field: TField;
+      AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
+      AFont: TFont; var Background: TColor; Highlight: Boolean);
   private
     { Private declarations }
     ffrmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat;
@@ -93,7 +103,7 @@ var
 implementation
 
 uses rsDBUtils, USel_Produto, uUtilPadrao, USel_Combinacao, StdConvs, DmdDatabase, Math, StrUtils, UCopiar_Comb,
-  UAltProd;
+  UAltProd, UCadProduto_Comb_AltCor;
 
 {$R *.dfm}
 
@@ -487,7 +497,7 @@ end;
 procedure TfrmCadProduto_Comb.SpeedButton2Click(Sender: TObject);
 begin
   //09/04/2018 foi colocado o IF para mostrar a cor ou a combinação  (até 27/03/2018 abria só a cor)
-  if (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
+  if (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') or (fDMCadProduto.qParametros_LoteUSA_COR_COMB.AsString = 'S') then
   begin
     ffrmCadCor := TfrmCadCor.Create(self);
     ffrmCadCor.ShowModal;
@@ -630,20 +640,18 @@ begin
 end;
 
 procedure TfrmCadProduto_Comb.btnCopiarPrincipalClick(Sender: TObject);
-var
-  vItemAux: Integer;
 begin
   if not fDMCadProduto.cdsProduto_Comb_Mat.IsEmpty then
   begin
     MessageDlg('*** Já existe material informado na combinação!', mtInformation, [mbOk], 0);
     exit;
   end;
-  vItemAux := 0;
   fDMCadProduto.cdsProduto_Consumo.First;
   while not fDMCadProduto.cdsProduto_Consumo.Eof do
   begin
-    vItemAux := vItemAux + 1;
-    fDMCadProduto.prc_Inserir_ProdCombMat;
+    fDMCadProduto.prc_Gravar_Comb_Mat_Consumo;
+    //18/01/2019  Foi colocado no DMCadProduto
+    {fDMCadProduto.prc_Inserir_ProdCombMat;
     fDMCadProduto.cdsProduto_Comb_MatITEM_MAT.AsInteger    := fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger;
     fDMCadProduto.cdsProduto_Comb_MatID_MATERIAL.AsInteger := fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger;
     fDMCadProduto.cdsProduto_Comb_MatID_COR.Clear;
@@ -660,9 +668,42 @@ begin
       fDMCadProduto.cdsProduto_Comb_MatIMP_TALAO.AsString  := fDMCadProduto.cdsProduto_ConsumoIMP_TALAO.AsString;
       fDMCadProduto.cdsProduto_Comb_MatTINGIMENTO.AsString := fDMCadProduto.cdsProduto_ConsumoTINGIMENTO.AsString;
     end;
-    fDMCadProduto.cdsProduto_Comb_Mat.Post;
+    fDMCadProduto.cdsProduto_Comb_Mat.Post;}
     fDMCadProduto.cdsProduto_Consumo.Next;
   end;
+end;
+
+procedure TfrmCadProduto_Comb.SMDBGrid2GetCellParams(Sender: TObject;
+  Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
+begin
+  if (fDMCadProduto.cdsProduto_Comb_MatclUsa_Cor.AsString = 'S') and (fDMCadProduto.cdsProduto_Comb_MatID_COR.AsInteger <= 0) then
+  begin
+    Background  := clYellow;
+    AFont.Color := clBlack;
+  end;
+end;
+
+procedure TfrmCadProduto_Comb.SMDBGrid2KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+var
+  ffrmCadProduto_Comb_AltCor: TfrmCadProduto_Comb_AltCor;
+begin
+  if (Key = Vk_F3) and (fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]) and (fDMCadProduto.cdsProduto_Comb_MatID_MATERIAL.AsInteger > 0) then
+  begin
+    ffrmCadProduto_Comb_AltCor := TfrmCadProduto_Comb_AltCor.Create(self);
+    ffrmCadProduto_Comb_AltCor.fDMCadProduto := fDMCadProduto;
+    ffrmCadProduto_Comb_AltCor.ShowModal;
+    FreeAndNil(ffrmCadProduto_Comb_AltCor);
+    if (fDMCadProduto.cdsProduto_Comb.State in [dsEdit]) and not(btnConfirmar.Enabled) then
+      fDMCadProduto.cdsProduto_Comb.Post;
+  end
+end;
+
+procedure TfrmCadProduto_Comb.SMDBGrid1GetCellParams(Sender: TObject;
+  Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
+begin
+  if fDMCadProduto.cdsProduto_CombINATIVO.AsString = 'S' then
+    AFont.Color := clRed;
 end;
 
 end.

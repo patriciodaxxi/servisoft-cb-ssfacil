@@ -95,6 +95,10 @@ type
     MovimentopData1: TMenuItem;
     Recibo1: TMenuItem;
     ValorPorExtenso1: TValorPorExtenso;
+    Label29: TLabel;
+    lblChequeVencido: TLabel;
+    Label31: TLabel;
+    lblSaldoGeral: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -318,15 +322,20 @@ begin
   fDMCadFinanceiro.qCheques.ParamByName('DATA').AsDate := Date;
   fDMCadFinanceiro.qCheques.Open;
   Label21.Caption := FormatFloat('###,###,##0.00',fDMCadFinanceiro.qChequesVLR_VENCIDO.AsFloat);
+  lblChequeVencido.Caption := FormatFloat('###,###,##0.00',fDMCadFinanceiro.qChequesVLR_VENCIDO.AsFloat);
   if StrToFloat(FormatFloat('0.00',fDMCadFinanceiro.qChequesVLR_VENCIDO.AsFloat)) > 0 then
   begin
     Label21.Font.Color := clRed;
     Label21.Font.Style := [fsBold];
+    lblChequeVencido.Font.Color := clRed;
+    lblChequeVencido.Font.Style := [fsBold];
   end
   else
   begin
     Label21.Font.Color := clNavy;
     Label21.Font.Style := [];
+    lblChequeVencido.Font.Color := clNavy;
+    lblChequeVencido.Font.Style := [];
   end;
 
   Label22.Caption := FormatFloat('###,###,##0.00',fDMCadFinanceiro.qChequesVLR_AVENCER.AsFloat);
@@ -466,6 +475,20 @@ begin
   lblEntrada.Caption := FormatFloat('###,###,##0.00',vEntrada);
   lblSaida.Caption   := FormatFloat('###,###,##0.00',vSaida);
   lblSaldo.Caption   := FormatFloat('###,###,##0.00',vSaldo);
+
+  lblChequeVencido.Caption := FormatFloat('###,###,##0.00',fDMCadFinanceiro.qChequesVLR_VENCIDO.AsFloat);
+  lblSaldoGeral.Caption :=  FormatFloat('###,###,##0.00',(vSaldo - fDMCadFinanceiro.qChequesVLR_VENCIDO.AsFloat));
+  if StrToFloat(FormatFloat('0.00',fDMCadFinanceiro.qChequesVLR_VENCIDO.AsFloat)) > 0 then
+  begin
+    lblChequeVencido.Font.Color := clRed;
+    lblChequeVencido.Font.Style := [fsBold];
+  end
+  else
+  begin
+    lblChequeVencido.Font.Color := clNavy;
+    lblChequeVencido.Font.Style := [];
+  end;
+
 end;
 
 procedure TfrmCadFinanceiro.btnRecalcularClick(Sender: TObject);

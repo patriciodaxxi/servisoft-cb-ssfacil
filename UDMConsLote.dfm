@@ -1,10 +1,10 @@
 object DMConsLote: TDMConsLote
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 423
-  Top = 225
-  Height = 346
-  Width = 643
+  Left = 379
+  Top = 84
+  Height = 550
+  Width = 801
   object sdsOrdProd: TSQLDataSet
     CommandText = 
       'SELECT L.num_ordem, SUM(T.qtd) Qtd'#13#10'FROM TALAO_PED T'#13#10'INNER JOIN' +

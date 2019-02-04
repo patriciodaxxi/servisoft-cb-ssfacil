@@ -13,12 +13,12 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 416
-    Top = 24
+    Top = 7
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
     Left = 456
-    Top = 24
+    Top = 7
   end
   object cdsCFOP: TClientDataSet
     Aggregates = <>
@@ -26,7 +26,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspCFOP'
     Left = 496
-    Top = 24
+    Top = 7
     object cdsCFOPID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -153,7 +153,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsCFOP: TDataSource
     DataSet = cdsCFOP
     Left = 544
-    Top = 24
+    Top = 7
   end
   object XMLTransformProvider1: TXMLTransformProvider
     TransformRead.TransformationFile = 'C:\Delphi7\SSFacil\EXE\nfe_v2.00_ToDp.xtr'
@@ -162,14 +162,14 @@ object DMRecebeXML: TDMRecebeXML
       '482503669.xml'
     CacheData = True
     Left = 408
-    Top = 248
+    Top = 288
   end
   object cdsCabecalho: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'XMLTransformProvider1'
-    Left = 424
-    Top = 304
+    Left = 416
+    Top = 320
     object cdsCabecalhoversao: TStringField
       FieldName = 'versao'
       Required = True
@@ -810,8 +810,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsCabecalho: TDataSource
     DataSet = cdsCabecalho
-    Left = 496
-    Top = 304
+    Left = 440
+    Top = 320
   end
   object cdsNFeRef: TClientDataSet
     Aggregates = <>
@@ -2311,6 +2311,24 @@ object DMRecebeXML: TDMRecebeXML
         Name = 'Gerar_Estoque'
         DataType = ftString
         Size = 1
+      end
+      item
+        Name = 'ID_ContaOrcamento'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_CentroCusto'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Nome_ContaOrcamento'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'Posse_Material'
+        DataType = ftString
+        Size = 1
       end>
     IndexDefs = <
       item
@@ -2327,7 +2345,7 @@ object DMRecebeXML: TDMRecebeXML
     Left = 464
     Top = 488
     Data = {
-      6A0A00009619E0BD0100000018000000690000000000030000006A0A04497465
+      E60A00009619E0BD01000000180000006D000000000003000000E60A04497465
       6D04000100000000000A436F6450726F6475746F010049000000010005574944
       5448020002003C0011436F6450726F6475746F496E7465726E6F040001000000
       000006436F64436F72040001000000000008436F644772616465040001000000
@@ -2409,8 +2427,12 @@ object DMRecebeXML: TDMRecebeXML
       50495F437573746F010049000000010005574944544802000200010011507265
       636F5F437573746F5F546F74616C080004000000000009436F64426172726132
       0100490000000100055749445448020002000E000D47657261725F4573746F71
-      7565010049000000010005574944544802000200010001000D44454641554C54
-      5F4F524445520200820000000000}
+      756501004900000001000557494454480200020001001149445F436F6E74614F
+      7263616D656E746F04000100000000000E49445F43656E74726F437573746F04
+      00010000000000134E6F6D655F436F6E74614F7263616D656E746F0100490000
+      000100055749445448020002003C000E506F7373655F4D6174657269616C0100
+      49000000010005574944544802000200010001000D44454641554C545F4F5244
+      45520200820000000000}
     object mItensNotaItem: TIntegerField
       FieldName = 'Item'
     end
@@ -2812,6 +2834,20 @@ object DMRecebeXML: TDMRecebeXML
     end
     object mItensNotaGerar_Estoque: TStringField
       FieldName = 'Gerar_Estoque'
+      Size = 1
+    end
+    object mItensNotaID_ContaOrcamento: TIntegerField
+      FieldName = 'ID_ContaOrcamento'
+    end
+    object mItensNotaID_CentroCusto: TIntegerField
+      FieldName = 'ID_CentroCusto'
+    end
+    object mItensNotaNome_ContaOrcamento: TStringField
+      FieldName = 'Nome_ContaOrcamento'
+      Size = 60
+    end
+    object mItensNotaPosse_Material: TStringField
+      FieldName = 'Posse_Material'
       Size = 1
     end
   end
@@ -3519,6 +3555,11 @@ object DMRecebeXML: TDMRecebeXML
     end
     object qParametrosUSA_NFCE: TStringField
       FieldName = 'USA_NFCE'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametrosUSA_GRADE: TStringField
+      FieldName = 'USA_GRADE'
       FixedChar = True
       Size = 1
     end
@@ -5915,7 +5956,7 @@ object DMRecebeXML: TDMRecebeXML
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 424
-    Top = 80
+    Top = 52
     object sdsEstoque_MovID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6016,7 +6057,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsEstoque_Mov
     OnUpdateError = dspEstoque_MovUpdateError
     Left = 464
-    Top = 80
+    Top = 52
   end
   object cdsEstoque_Mov: TClientDataSet
     Aggregates = <>
@@ -6024,7 +6065,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspEstoque_Mov'
     Left = 504
-    Top = 80
+    Top = 52
     object cdsEstoque_MovID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6124,7 +6165,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsEstoque_Mov: TDataSource
     DataSet = cdsEstoque_Mov
     Left = 552
-    Top = 80
+    Top = 52
   end
   object sdsTab_CSTICMS: TSQLDataSet
     NoMetadata = True
@@ -6134,12 +6175,12 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 472
-    Top = 146
+    Top = 95
   end
   object dspTab_CSTICMS: TDataSetProvider
     DataSet = sdsTab_CSTICMS
     Left = 504
-    Top = 146
+    Top = 95
   end
   object cdsTab_CSTICMS: TClientDataSet
     Aggregates = <>
@@ -6147,7 +6188,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspTab_CSTICMS'
     Left = 544
-    Top = 146
+    Top = 95
     object cdsTab_CSTICMSID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6177,7 +6218,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsTab_CSTICMS: TDataSource
     DataSet = cdsTab_CSTICMS
     Left = 584
-    Top = 146
+    Top = 95
   end
   object qUnidade: TSQLQuery
     MaxBlobSize = -1
@@ -6398,7 +6439,7 @@ object DMRecebeXML: TDMRecebeXML
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 464
-    Top = 202
+    Top = 141
     object sdsNCMID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6428,7 +6469,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsNCM
     OnUpdateError = dspNCMUpdateError
     Left = 496
-    Top = 202
+    Top = 141
   end
   object cdsNCM: TClientDataSet
     Aggregates = <>
@@ -6437,7 +6478,7 @@ object DMRecebeXML: TDMRecebeXML
     ProviderName = 'dspNCM'
     OnNewRecord = cdsNCMNewRecord
     Left = 536
-    Top = 202
+    Top = 141
     object cdsNCMID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6466,7 +6507,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsNCM: TDataSource
     DataSet = cdsNCM
     Left = 576
-    Top = 202
+    Top = 141
   end
   object sdsUnidade: TSQLDataSet
     NoMetadata = True
@@ -7526,10 +7567,11 @@ object DMRecebeXML: TDMRecebeXML
       'I.item, PI.VLR_DESCONTO, PRO.ID_NCM, PI.UNIDADE, PI.PERC_IPI,'#13#10'P' +
       'I.OBS_COMPLEMENTAR, PI.NUMOS, PE.TIPO_FRETE, PE.ID_CONDPGTO, PE.' +
       'IMP_OC_NOTA, '#13#10'PI.ID_VARIACAO, PRO.usa_cor, PRO.usa_preco_cor, P' +
-      'I.ID_COR, CLI.USA_OC_XML'#13#10'FROM PEDIDO PE'#13#10'INNER JOIN PEDIDO_ITEM' +
-      ' PI'#13#10'ON PE.ID = PI.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON PE.ID_CLIENTE =' +
-      ' CLI.CODIGO'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON PI.ID_PRODUTO = PRO.ID'#13#10 +
-      'WHERE PI.qtd_restante > 0'#13#10'      AND PE.TIPO_REG = '#39'C'#39
+      'I.ID_COR, CLI.USA_OC_XML,'#13#10'PI.TAMANHO'#13#10'FROM PEDIDO PE'#13#10'INNER JOI' +
+      'N PEDIDO_ITEM PI'#13#10'ON PE.ID = PI.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON PE' +
+      '.ID_CLIENTE = CLI.CODIGO'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON PI.ID_PRODU' +
+      'TO = PRO.ID'#13#10'WHERE PI.qtd_restante > 0'#13#10'      AND PE.TIPO_REG = ' +
+      #39'C'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -7659,6 +7701,10 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'USA_OC_XML'
       FixedChar = True
       Size = 1
+    end
+    object cdsOCTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
     end
   end
   object dsOC: TDataSource
@@ -8086,12 +8132,12 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 1024
-    Top = 178
+    Top = 194
   end
   object dspUnidade2: TDataSetProvider
     DataSet = sdsUnidade2
     Left = 1056
-    Top = 178
+    Top = 194
   end
   object cdsUnidade2: TClientDataSet
     Aggregates = <>
@@ -8099,7 +8145,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspUnidade2'
     Left = 1096
-    Top = 176
+    Top = 192
     object cdsUnidade2UNIDADE: TStringField
       FieldName = 'UNIDADE'
       Required = True
@@ -8116,7 +8162,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsUnidade2: TDataSource
     DataSet = cdsUnidade2
     Left = 1136
-    Top = 178
+    Top = 194
   end
   object sdsSitTrib_CF: TSQLDataSet
     NoMetadata = True
@@ -8125,12 +8171,12 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 656
+    Left = 696
     Top = 208
   end
   object dspSitTrib_CF: TDataSetProvider
     DataSet = sdsSitTrib_CF
-    Left = 688
+    Left = 728
     Top = 208
   end
   object cdsSitTrib_CF: TClientDataSet
@@ -8138,7 +8184,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspSitTrib_CF'
-    Left = 720
+    Left = 760
     Top = 208
     object cdsSitTrib_CFID: TIntegerField
       FieldName = 'ID'
@@ -8154,7 +8200,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsSitTrib_CF: TDataSource
     DataSet = cdsSitTrib_CF
-    Left = 752
+    Left = 792
     Top = 208
   end
   object qProduto_Uni2: TSQLQuery
@@ -8685,8 +8731,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM PARAMETROS_CUSTO'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 271
+    Left = 880
+    Top = 335
     object qParametros_CustoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8801,5 +8847,308 @@ object DMRecebeXML: TDMRecebeXML
     object qRefSeqREFERENCIA_SEQ: TIntegerField
       FieldName = 'REFERENCIA_SEQ'
     end
+  end
+  object sdsOperacao_Nota: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM OPERACAO_NOTA'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 1032
+    Top = 18
+  end
+  object dspOperacao_Nota: TDataSetProvider
+    DataSet = sdsOperacao_Nota
+    OnUpdateError = dspNCMUpdateError
+    Left = 1064
+    Top = 18
+  end
+  object cdsOperacao_Nota: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspOperacao_Nota'
+    OnNewRecord = cdsNCMNewRecord
+    Left = 1104
+    Top = 18
+    object cdsOperacao_NotaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsOperacao_NotaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+    object cdsOperacao_NotaPEDIR_FINALIDADE: TStringField
+      FieldName = 'PEDIR_FINALIDADE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsOperacao_NotaNATUREZA_NOTA: TStringField
+      FieldName = 'NATUREZA_NOTA'
+      Size = 60
+    end
+    object cdsOperacao_NotaSERIE_NFE: TStringField
+      FieldName = 'SERIE_NFE'
+      Size = 3
+    end
+    object cdsOperacao_NotaTIPO_NOTA: TStringField
+      FieldName = 'TIPO_NOTA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsOperacao_NotaMOSTRA_EDI: TStringField
+      FieldName = 'MOSTRA_EDI'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsOperacao_NotaMOSTRAR_CLI_TRIANG2: TStringField
+      FieldName = 'MOSTRAR_CLI_TRIANG2'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsOperacao_NotaESTOQUE_DE_TERCEIRO: TStringField
+      FieldName = 'ESTOQUE_DE_TERCEIRO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsOperacao_NotaESTOQUE_EM_TERCEIRO: TStringField
+      FieldName = 'ESTOQUE_EM_TERCEIRO'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dsOperacao_Nota: TDataSource
+    DataSet = cdsOperacao_Nota
+    Left = 1144
+    Top = 18
+  end
+  object mParc: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Parcela'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NumDuplicata'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'DtVencimento'
+        DataType = ftDate
+      end
+      item
+        Name = 'VlrVencimento'
+        DataType = ftFloat
+      end
+      item
+        Name = 'ID_Conta'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_TipoCobranca'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 568
+    Top = 320
+    Data = {
+      9F0000009619E0BD0100000018000000060000000000030000009F0007506172
+      63656C6104000100000000000C4E756D4475706C696361746101004900000001
+      00055749445448020002003C000C447456656E63696D656E746F040006000000
+      00000D566C7256656E63696D656E746F08000400000000000849445F436F6E74
+      6104000100000000000F49445F5469706F436F6272616E636104000100000000
+      000000}
+    object mParcParcela: TIntegerField
+      FieldName = 'Parcela'
+    end
+    object mParcNumDuplicata: TStringField
+      FieldName = 'NumDuplicata'
+      Size = 60
+    end
+    object mParcDtVencimento: TDateField
+      FieldName = 'DtVencimento'
+    end
+    object mParcVlrVencimento: TFloatField
+      FieldName = 'VlrVencimento'
+    end
+    object mParcID_Conta: TIntegerField
+      FieldName = 'ID_Conta'
+    end
+    object mParcID_TipoCobranca: TIntegerField
+      FieldName = 'ID_TipoCobranca'
+    end
+    object mParclkNomeConta: TStringField
+      FieldKind = fkLookup
+      FieldName = 'lkNomeConta'
+      LookupDataSet = cdsContas
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_Conta'
+      Size = 40
+      Lookup = True
+    end
+    object mParclkNomeTipoCobranca: TStringField
+      FieldKind = fkLookup
+      FieldName = 'lkNomeTipoCobranca'
+      LookupDataSet = cdsTipoCobranca
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'ID_TipoCobranca'
+      Size = 60
+      Lookup = True
+    end
+  end
+  object dsmParc: TDataSource
+    DataSet = mParc
+    Left = 600
+    Top = 320
+  end
+  object sdsContas: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, NOME'#13#10'FROM CONTAS'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 464
+    Top = 186
+  end
+  object dspContas: TDataSetProvider
+    DataSet = sdsContas
+    OnUpdateError = dspNCMUpdateError
+    Left = 496
+    Top = 186
+  end
+  object cdsContas: TClientDataSet
+    Active = True
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspContas'
+    Left = 536
+    Top = 186
+    object cdsContasID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsContasNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+  end
+  object dsContas: TDataSource
+    DataSet = cdsContas
+    Left = 576
+    Top = 186
+  end
+  object sdsTipoCobranca: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, NOME'#13#10'FROM tipocobranca'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 464
+    Top = 231
+  end
+  object dspTipoCobranca: TDataSetProvider
+    DataSet = sdsTipoCobranca
+    OnUpdateError = dspNCMUpdateError
+    Left = 496
+    Top = 231
+  end
+  object cdsTipoCobranca: TClientDataSet
+    Active = True
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspTipoCobranca'
+    Left = 536
+    Top = 231
+    object cdsTipoCobrancaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTipoCobrancaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+  end
+  object dsTipoCobranca: TDataSource
+    DataSet = cdsTipoCobranca
+    Left = 576
+    Top = 231
+  end
+  object qConta_Orcamento: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT *'
+      'FROM CONTA_ORCAMENTO'
+      'WHERE ID = :ID')
+    SQLConnection = dmDatabase.scoDados
+    Left = 866
+    Top = 433
+    object qConta_OrcamentoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qConta_OrcamentoTIPO: TStringField
+      FieldName = 'TIPO'
+      FixedChar = True
+      Size = 1
+    end
+    object qConta_OrcamentoCODIGO: TStringField
+      FieldName = 'CODIGO'
+    end
+    object qConta_OrcamentoDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 50
+    end
+  end
+  object sdsTamanho: TSQLDataSet
+    CommandText = 'SELECT *'#13#10'FROM TAMANHO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 1032
+    Top = 143
+  end
+  object dspTamanho: TDataSetProvider
+    DataSet = sdsTamanho
+    Left = 1072
+    Top = 144
+  end
+  object cdsTamanho: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTamanho'
+    Left = 1112
+    Top = 144
+    object cdsTamanhoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTamanhoTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+  end
+  object dsTamanho: TDataSource
+    DataSet = cdsTamanho
+    Left = 1144
+    Top = 144
   end
 end

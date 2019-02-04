@@ -26,7 +26,7 @@ object frmCadCFOP: TfrmCadCFOP
     Top = 0
     Width = 937
     Height = 608
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadCFOP: TfrmCadCFOP
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -875,7 +875,7 @@ object frmCadCFOP: TfrmCadCFOP
         Left = 0
         Top = 30
         Width = 933
-        Height = 289
+        Height = 288
         Align = alTop
         Enabled = False
         TabOrder = 0
@@ -987,8 +987,8 @@ object frmCadCFOP: TfrmCadCFOP
         end
         object gbxImpostos: TRzGroupBox
           Left = 25
-          Top = 80
-          Width = 330
+          Top = 77
+          Width = 356
           Height = 147
           BorderColor = clBlack
           BorderInner = fsButtonUp
@@ -1156,8 +1156,8 @@ object frmCadCFOP: TfrmCadCFOP
           end
         end
         object gbxFaturamento: TRzGroupBox
-          Left = 361
-          Top = 80
+          Left = 385
+          Top = 77
           Width = 186
           Height = 203
           BorderColor = clBlack
@@ -1332,9 +1332,9 @@ object frmCadCFOP: TfrmCadCFOP
         end
         object gbxEstoque: TRzGroupBox
           Left = 25
-          Top = 230
-          Width = 331
-          Height = 53
+          Top = 225
+          Width = 356
+          Height = 58
           BorderColor = clBlack
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -1353,7 +1353,7 @@ object frmCadCFOP: TfrmCadCFOP
           VisualStyle = vsGradient
           object DBCheckBox17: TDBCheckBox
             Left = 8
-            Top = 16
+            Top = 13
             Width = 137
             Height = 17
             Caption = 'Controlar Estoque'
@@ -1368,7 +1368,7 @@ object frmCadCFOP: TfrmCadCFOP
           end
           object DBCheckBox18: TDBCheckBox
             Left = 8
-            Top = 32
+            Top = 27
             Width = 154
             Height = 17
             Caption = 'Baixar Estoque Consumo'
@@ -1381,8 +1381,8 @@ object frmCadCFOP: TfrmCadCFOP
             ValueUnchecked = 'N'
           end
           object DBCheckBox19: TDBCheckBox
-            Left = 168
-            Top = 16
+            Left = 166
+            Top = 8
             Width = 137
             Height = 17
             Caption = 'Gerar Custo M'#233'dio'
@@ -1396,7 +1396,7 @@ object frmCadCFOP: TfrmCadCFOP
           end
         end
         object RzGroupBox1: TRzGroupBox
-          Left = 551
+          Left = 575
           Top = 80
           Width = 276
           Height = 99
@@ -1554,7 +1554,7 @@ object frmCadCFOP: TfrmCadCFOP
           end
         end
         object RzGroupBox2: TRzGroupBox
-          Left = 551
+          Left = 575
           Top = 180
           Width = 276
           Height = 103
@@ -1731,13 +1731,13 @@ object frmCadCFOP: TfrmCadCFOP
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 319
+        Top = 318
         Width = 933
-        Height = 266
-        ActivePage = TabSheet4
+        Height = 267
+        ActivePage = TabSheet1
         ActivePageDefault = TabSheet1
         Align = alClient
-        TabIndex = 3
+        TabIndex = 0
         TabOrder = 2
         FixedDimension = 19
         object TabSheet1: TRzTabSheet
@@ -1859,7 +1859,7 @@ object frmCadCFOP: TfrmCadCFOP
             Left = 0
             Top = 31
             Width = 929
-            Height = 212
+            Height = 213
             Align = alClient
             DataSource = DMCadCFOP.dsCFOP_Variacao
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1988,7 +1988,7 @@ object frmCadCFOP: TfrmCadCFOP
             Left = 0
             Top = 47
             Width = 929
-            Height = 196
+            Height = 197
             Align = alClient
             DataField = 'LEI'
             DataSource = DMCadCFOP.dsCFOP
@@ -2090,7 +2090,7 @@ object frmCadCFOP: TfrmCadCFOP
             Left = 0
             Top = 0
             Width = 929
-            Height = 243
+            Height = 244
             Align = alClient
             Enabled = False
             TabOrder = 0

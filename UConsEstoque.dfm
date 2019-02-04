@@ -467,6 +467,7 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'PRECO_VENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Venda'
+        Width = 64
         Visible = True
       end
       item
@@ -474,6 +475,7 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'LOCALIZACAO'
         Title.Alignment = taCenter
         Title.Caption = 'Localiza'#231#227'o'
+        Width = 64
         Visible = True
       end
       item
@@ -683,6 +685,16 @@ object frmConsEstoque: TfrmConsEstoque
       Transparent = True
       OnClick = NxButton1Click
     end
+    object ckImpInventario: TCheckBox
+      Left = 472
+      Top = 8
+      Width = 329
+      Height = 17
+      Caption = 'Imprimir Por Ordem de Estrutura o Invent'#225'rio'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
   end
   object UCControls1: TUCControls
     GroupName = 'Consulta Estoque'
@@ -692,8 +704,8 @@ object frmConsEstoque: TfrmConsEstoque
     Top = 224
   end
   object PopupMenu1: TPopupMenu
-    Left = 528
-    Top = 134
+    Left = 648
+    Top = 286
     object Produtos1: TMenuItem
       Caption = 'Grupo'
       OnClick = Produtos1Click

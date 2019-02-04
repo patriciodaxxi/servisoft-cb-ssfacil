@@ -22,9 +22,9 @@ object frmCadContaOrc: TfrmCadContaOrc
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 833
-    Height = 543
-    ActivePage = TS_Cadastro
+    Width = 841
+    Height = 551
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadContaOrc: TfrmCadContaOrc
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -41,8 +41,8 @@ object frmCadContaOrc: TfrmCadContaOrc
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 829
-        Height = 385
+        Width = 837
+        Height = 393
         Align = alClient
         Ctl3D = False
         DataSource = dmCadContaOrc.dsConsulta
@@ -122,6 +122,7 @@ object frmCadContaOrc: TfrmCadContaOrc
             FieldName = 'clPerc_Adim'
             Title.Alignment = taCenter
             Title.Caption = '% ADM.'
+            Width = 64
             Visible = True
           end
           item
@@ -136,7 +137,7 @@ object frmCadContaOrc: TfrmCadContaOrc
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 829
+        Width = 837
         Height = 32
         Align = alTop
         Color = clSilver
@@ -485,8 +486,8 @@ object frmCadContaOrc: TfrmCadContaOrc
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 503
-        Width = 829
+        Top = 511
+        Width = 837
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -502,7 +503,7 @@ object frmCadContaOrc: TfrmCadContaOrc
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 829
+        Width = 837
         Height = 35
         Align = alTop
         Color = clSilver
@@ -599,8 +600,8 @@ object frmCadContaOrc: TfrmCadContaOrc
       end
       object Panel5: TPanel
         Left = 0
-        Top = 452
-        Width = 829
+        Top = 460
+        Width = 837
         Height = 51
         Align = alBottom
         Color = 16768185
@@ -779,7 +780,7 @@ object frmCadContaOrc: TfrmCadContaOrc
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 829
+        Width = 837
         Height = 35
         Align = alTop
         Color = 8404992
@@ -1005,8 +1006,8 @@ object frmCadContaOrc: TfrmCadContaOrc
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 829
-        Height = 224
+        Width = 837
+        Height = 232
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -1352,13 +1353,13 @@ object frmCadContaOrc: TfrmCadContaOrc
       end
       object pc_Itens: TRzPageControl
         Left = 0
-        Top = 259
-        Width = 829
+        Top = 267
+        Width = 837
         Height = 261
-        ActivePage = ts_Orc_ValoresAnuais
+        ActivePage = ts_CentroCusto
         ActivePageDefault = ts_CentroCusto
         Align = alBottom
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 2
         FixedDimension = 19
         object ts_CentroCusto: TRzTabSheet
@@ -1366,7 +1367,7 @@ object frmCadContaOrc: TfrmCadContaOrc
           object SMDBGrid3: TSMDBGrid
             Left = 0
             Top = 32
-            Width = 825
+            Width = 833
             Height = 206
             Align = alClient
             Ctl3D = False
@@ -1433,7 +1434,7 @@ object frmCadContaOrc: TfrmCadContaOrc
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 825
+            Width = 833
             Height = 32
             Align = alTop
             TabOrder = 1
@@ -1667,7 +1668,7 @@ object frmCadContaOrc: TfrmCadContaOrc
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 63
-            Width = 825
+            Width = 833
             Height = 175
             Align = alClient
             Ctl3D = False
@@ -1724,7 +1725,7 @@ object frmCadContaOrc: TfrmCadContaOrc
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 825
+            Width = 833
             Height = 31
             Align = alTop
             Enabled = False
@@ -1788,7 +1789,7 @@ object frmCadContaOrc: TfrmCadContaOrc
           object Panel7: TPanel
             Left = 0
             Top = 31
-            Width = 825
+            Width = 833
             Height = 32
             Align = alTop
             TabOrder = 2
@@ -2022,8 +2023,8 @@ object frmCadContaOrc: TfrmCadContaOrc
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 543
-    Width = 833
+    Top = 551
+    Width = 841
     Height = 19
     Panels = <
       item

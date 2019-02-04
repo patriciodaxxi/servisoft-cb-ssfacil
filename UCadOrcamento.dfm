@@ -1,6 +1,6 @@
 object frmCadOrcamento: TfrmCadOrcamento
-  Left = 163
-  Top = 14
+  Left = 318
+  Top = 22
   Width = 1016
   Height = 708
   Caption = 'Or'#231'amento de Venda'
@@ -25,7 +25,7 @@ object frmCadOrcamento: TfrmCadOrcamento
     Top = 0
     Width = 1000
     Height = 669
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOrcamento: TfrmCadOrcamento
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -740,6 +740,7 @@ object frmCadOrcamento: TfrmCadOrcamento
             FieldName = 'NOME_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Vendedor'
+            Width = 64
             Visible = True
           end
           item
@@ -1881,6 +1882,7 @@ object frmCadOrcamento: TfrmCadOrcamento
               item
                 Expanded = False
                 FieldName = 'REFERENCIA'
+                Width = 64
                 Visible = True
               end
               item
@@ -1975,6 +1977,7 @@ object frmCadOrcamento: TfrmCadOrcamento
                 FieldName = 'GRAVACAO_COM_ERRO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Com Notifica'#231#227'o'
+                Width = 64
                 Visible = True
               end>
           end
@@ -3182,6 +3185,7 @@ object frmCadOrcamento: TfrmCadOrcamento
               item
                 Expanded = False
                 FieldName = 'VLR_TOTAL'
+                Width = 64
                 Visible = True
               end>
           end
@@ -3385,6 +3389,34 @@ object frmCadOrcamento: TfrmCadOrcamento
             Height = 13
             Alignment = taRightJustify
             Caption = '% Margem:'
+          end
+          object Label42: TLabel
+            Left = 368
+            Top = 141
+            Width = 55
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Peso Bruto:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label44: TLabel
+            Left = 357
+            Top = 163
+            Width = 66
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Peso L'#237'quido:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
           end
           object btnCalcular_Valores: TBitBtn
             Left = 745
@@ -3730,6 +3762,26 @@ object frmCadOrcamento: TfrmCadOrcamento
             DataSource = DMCadPedido.dsPedido
             MaxLength = 18
             TabOrder = 9
+          end
+          object DBEdit29: TDBEdit
+            Left = 425
+            Top = 133
+            Width = 100
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'PESOBRUTO'
+            DataSource = DMCadPedido.dsPedido
+            TabOrder = 10
+          end
+          object DBEdit30: TDBEdit
+            Left = 425
+            Top = 155
+            Width = 100
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'PESOLIQUIDO'
+            DataSource = DMCadPedido.dsPedido
+            TabOrder = 11
           end
         end
         object TS_Trilhos: TRzTabSheet

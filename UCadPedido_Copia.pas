@@ -48,7 +48,7 @@ var
 
 implementation
 
-uses DB, uUtilPadrao;
+uses DB, uUtilPadrao, uGrava_Pedido;
 
 {$R *.dfm}
 
@@ -99,7 +99,7 @@ procedure TfrmCadPedido_Copia.prc_Copiar_Pedido;
 var
   i: Integer;
 begin
-  fDMCadPedido.prc_Inserir;
+  UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
   for i := 0 to ( fDMCopiaPedido.cdsPedido.FieldCount - 1) do
   begin
     if (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'DTEMISSAO') and

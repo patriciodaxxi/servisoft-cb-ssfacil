@@ -909,34 +909,34 @@ begin
   if RxDBLookupCombo4.Text <> '' then
     vOpcaoAux := vOpcaoAux + '(Referência: ' + RxDBLookupCombo4.Text + ')';
   if (DateEdit1.Date > 10) and (DateEdit2.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Emissão: ' + DateEdit1.Text + ' a ' + DateEdit2.Text + ')'
+    vOpcaoAux := vOpcaoAux + '(Emissão: ' + DateEdit1.Text + ' a ' + DateEdit2.Text + ')'
   else
   if (DateEdit1.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Emissão Ini: ' + DateEdit1.Text + ')'
+    vOpcaoAux := vOpcaoAux + '(Emissão Ini: ' + DateEdit1.Text + ')'
   else
   if (DateEdit2.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Emissão Fin: ' + DateEdit2.Text + ')';
+    vOpcaoAux := vOpcaoAux + '(Emissão Fin: ' + DateEdit2.Text + ')';
 
   if (DateEdit3.Date > 10) and (DateEdit4.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Entrega: ' + DateEdit3.Text + ' a ' + DateEdit4.Text + ')'
+    vOpcaoAux := vOpcaoAux + '(Entrega: ' + DateEdit3.Text + ' a ' + DateEdit4.Text + ')'
   else
   if (DateEdit3.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Entrega Ini: ' + DateEdit3.Text + ')'
+    vOpcaoAux := vOpcaoAux + '(Entrega Ini: ' + DateEdit3.Text + ')'
   else
   if (DateEdit4.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Entrega Fin: ' + DateEdit4.Text + ')'
+    vOpcaoAux := vOpcaoAux + '(Entrega Fin: ' + DateEdit4.Text + ')'
   else
   if (DateEdit5.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Fat.Ini: ' + DateEdit5.Text + ')'
+    vOpcaoAux := vOpcaoAux + '(Fat.Ini: ' + DateEdit5.Text + ')'
   else
   if (DateEdit6.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Fat.Fin: ' + DateEdit4.Text + ')'
+    vOpcaoAux := vOpcaoAux + '(Fat.Fin: ' + DateEdit4.Text + ')'
   else
   if (DateEdit7.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Exp.Ini: ' + DateEdit7.Text + ')'
+    vOpcaoAux := vOpcaoAux + '(Exp.Ini: ' + DateEdit7.Text + ')'
   else
   if (DateEdit8.Date > 10) then
-    vOpcaoAux := vOpcaoAux + '(Dt.Exp.Fin: ' + DateEdit8.Text + ')';
+    vOpcaoAux := vOpcaoAux + '(Exp.Fin: ' + DateEdit8.Text + ')';
   if RxDBLookupCombo5.Text <> '' then
     vOpcaoAux := vOpcaoAux + '(Vendedor: ' + RxDBLookupCombo5.Text + ')';
   case ComboBox2.ItemIndex of

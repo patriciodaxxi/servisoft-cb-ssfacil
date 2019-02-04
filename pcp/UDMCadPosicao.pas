@@ -29,6 +29,14 @@ type
     cdsPosicaoQTD_LIMITE: TIntegerField;
     sdsPosicaoPRIMEIRO_MAT: TStringField;
     cdsPosicaoPRIMEIRO_MAT: TStringField;
+    sdsPosicaoID_SETOR: TIntegerField;
+    cdsPosicaoID_SETOR: TIntegerField;
+    sdsSetor: TSQLDataSet;
+    dspSetor: TDataSetProvider;
+    cdsSetor: TClientDataSet;
+    dsSetor: TDataSource;
+    cdsSetorID: TIntegerField;
+    cdsSetorNOME: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspPosicaoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -110,6 +118,9 @@ var
   aIndices: array of string;
 begin
   ctCommand := sdsPosicao.CommandText;
+
+  cdsSetor.Open;
+
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do

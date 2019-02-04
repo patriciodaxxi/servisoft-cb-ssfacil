@@ -76,6 +76,7 @@ begin
 
   vFlagErro := False;
   try
+    fdmCadContaOrc.cdsContaOrc_CCustoDESCRICAO.AsString := edtNomeCentroCusto.Text;
     fdmCadContaOrc.cdsContaOrc_CCusto.Post;
   except
     on E: exception do

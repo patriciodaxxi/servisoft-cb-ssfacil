@@ -1,6 +1,6 @@
 object fRelFinanceiro_Conta: TfRelFinanceiro_Conta
-  Left = 245
-  Top = 129
+  Left = 297
+  Top = 111
   Width = 914
   Height = 532
   Caption = 'fRelFinanceiro_Conta'
@@ -388,9 +388,8 @@ object fRelFinanceiro_Conta: TfRelFinanceiro_Conta
           object RLDBResult1: TRLDBResult
             Left = 77
             Top = 3
-            Width = 116
+            Width = 103
             Height = 12
-            Alignment = taRightJustify
             AutoSize = False
             DataField = 'VLR_ENTRADA'
             DataSource = DMCadFinanceiro.dsFinanceiro_Consulta
@@ -401,9 +400,8 @@ object fRelFinanceiro_Conta: TfRelFinanceiro_Conta
           object RLDBResult2: TRLDBResult
             Left = 263
             Top = 3
-            Width = 116
+            Width = 103
             Height = 12
-            Alignment = taRightJustify
             AutoSize = False
             DataField = 'VLR_SAIDA'
             DataSource = DMCadFinanceiro.dsFinanceiro_Consulta
@@ -414,9 +412,8 @@ object fRelFinanceiro_Conta: TfRelFinanceiro_Conta
           object rllbSaldo_Periodo: TRLLabel
             Left = 474
             Top = 3
-            Width = 116
+            Width = 103
             Height = 12
-            Alignment = taRightJustify
             AutoSize = False
             Caption = 'Saldo Per'#237'odo:'
           end
@@ -425,7 +422,6 @@ object fRelFinanceiro_Conta: TfRelFinanceiro_Conta
             Top = 3
             Width = 96
             Height = 12
-            Alignment = taRightJustify
             AutoSize = False
             Caption = 'Saldo'
             Font.Charset = DEFAULT_CHARSET
@@ -561,6 +557,106 @@ object fRelFinanceiro_Conta: TfRelFinanceiro_Conta
             Font.Style = []
             ParentFont = False
           end
+        end
+      end
+      object RLBand2: TRLBand
+        Left = 0
+        Top = 105
+        Width = 742
+        Height = 27
+        BandType = btSummary
+        BeforePrint = RLBand2BeforePrint
+        object rllSaldoGeral: TRLLabel
+          Left = 609
+          Top = 11
+          Width = 96
+          Height = 12
+          AutoSize = False
+          Caption = 'Saldo'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -10
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object RLLabel18: TRLLabel
+          Left = 536
+          Top = 10
+          Width = 63
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Saldo Geral:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -10
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object RLLabel19: TRLLabel
+          Left = 333
+          Top = 10
+          Width = 37
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Saldo: '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -10
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object rllSaldoSumary: TRLLabel
+          Left = 375
+          Top = 11
+          Width = 96
+          Height = 12
+          AutoSize = False
+          Caption = 'Saldo'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -10
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object RLLabel23: TRLLabel
+          Left = 72
+          Top = 10
+          Width = 90
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Cheques Vencidos'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -10
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object rllChequesVencidos: TRLLabel
+          Left = 167
+          Top = 11
+          Width = 96
+          Height = 12
+          AutoSize = False
+          Caption = 'Saldo Cheque'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -10
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object RLDraw3: TRLDraw
+          Left = 0
+          Top = 0
+          Width = 742
+          Height = 2
+          Align = faTop
+          DrawKind = dkLine
         end
       end
     end

@@ -544,6 +544,7 @@ type
     Label194: TLabel;
     DBEdit108: TDBEdit;
     DBCheckBox31: TDBCheckBox;
+    DBCheckBox32: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -809,6 +810,7 @@ begin
   DBCheckBox29.Visible := (fDMCadPessoa.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S');
   Label194.Visible     := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
   DBEdit108.Visible    := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
+  DBCheckBox32.Visible := (fDMCadPessoa.qParametros_NFeIMP_NOMEPROD_CLIENTE.AsString = 'S');
 end;
 
 procedure TfrmCadPessoa.btnInserirClick(Sender: TObject);

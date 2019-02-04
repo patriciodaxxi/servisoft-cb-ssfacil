@@ -391,6 +391,11 @@ object DMCadFilial: TDMCadFilial
       FixedChar = True
       Size = 1
     end
+    object sdsFilialSPED_PERIODO_IPI: TStringField
+      FieldName = 'SPED_PERIODO_IPI'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
@@ -808,6 +813,11 @@ object DMCadFilial: TDMCadFilial
     end
     object cdsFilialTIPO_EMP: TStringField
       FieldName = 'TIPO_EMP'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilialSPED_PERIODO_IPI: TStringField
+      FieldName = 'SPED_PERIODO_IPI'
       FixedChar = True
       Size = 1
     end

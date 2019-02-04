@@ -4,7 +4,7 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
   Width = 952
   Height = 666
   BorderIcons = [biSystemMenu, biMaximize]
-  Caption = 'Consultar Notas de Beneficiamento'
+  Caption = 'Consultar Notas de Beneficiamento / Estoque de Terceiros'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,7 +22,7 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 936
+    Width = 944
     Height = 95
     Align = alTop
     Color = clSilver
@@ -60,7 +60,7 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
       Caption = 'Material:'
     end
     object Label5: TLabel
-      Left = 302
+      Left = 312
       Top = 13
       Width = 35
       Height = 13
@@ -110,21 +110,22 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
     object ComboBox1: TComboBox
       Left = 101
       Top = 5
-      Width = 145
+      Width = 204
       Height = 21
       Style = csDropDownList
       ItemHeight = 13
-      ItemIndex = 0
+      ItemIndex = 1
       TabOrder = 0
-      Text = 'Beneficiamento'
+      Text = 'Beneficiamento/Estoque Terceiro'
       Items.Strings = (
         'Beneficiamento'
+        'Beneficiamento/Estoque Terceiro'
         'Todas')
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
       Left = 101
       Top = 49
-      Width = 382
+      Width = 392
       Height = 21
       DropDownCount = 8
       DropDownWidth = 500
@@ -137,7 +138,7 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
     object RxDBLookupCombo3: TRxDBLookupCombo
       Left = 101
       Top = 27
-      Width = 382
+      Width = 392
       Height = 21
       DropDownCount = 8
       DropDownWidth = 500
@@ -149,7 +150,7 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 101
       Top = 71
-      Width = 382
+      Width = 392
       Height = 21
       DropDownCount = 8
       DropDownWidth = 500
@@ -160,7 +161,7 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
       OnKeyDown = RxDBLookupCombo1KeyDown
     end
     object ComboBox2: TComboBox
-      Left = 338
+      Left = 348
       Top = 5
       Width = 145
       Height = 21
@@ -192,9 +193,9 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
       OnClick = btnAtualizarClick
     end
     object btnConsultar: TNxButton
-      Left = 484
+      Left = 504
       Top = 63
-      Width = 167
+      Width = 163
       Height = 30
       Caption = 'Efetuar Pesquisa'
       Font.Charset = DEFAULT_CHARSET
@@ -264,9 +265,9 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
       OnClick = btnConsultarClick
     end
     object btnImprimir: TNxButton
-      Left = 650
+      Left = 666
       Top = 63
-      Width = 167
+      Width = 163
       Height = 30
       Caption = 'Imprimir'
       Font.Charset = DEFAULT_CHARSET
@@ -339,8 +340,8 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 95
-    Width = 936
-    Height = 532
+    Width = 944
+    Height = 540
     ActivePage = TabSheet1
     ActivePageDefault = TabSheet1
     Align = alClient
@@ -352,8 +353,8 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 932
-        Height = 472
+        Width = 940
+        Height = 480
         Align = alClient
         Ctl3D = False
         DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
@@ -528,6 +529,7 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
             FieldName = 'ID_PRODUTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Produto'
+            Width = 64
             Visible = True
           end
           item
@@ -546,8 +548,8 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
       end
       object Panel3: TPanel
         Left = 0
-        Top = 472
-        Width = 932
+        Top = 480
+        Width = 940
         Height = 37
         Align = alBottom
         Color = clSilver
@@ -601,8 +603,8 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
       object SMDBGrid3: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 932
-        Height = 509
+        Width = 940
+        Height = 517
         Align = alClient
         Ctl3D = False
         DataSource = DMConsNotaBeneficiamento.dsmMaterial

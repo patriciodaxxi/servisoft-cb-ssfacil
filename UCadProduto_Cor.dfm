@@ -1,11 +1,11 @@
 object frmCadProduto_Cor: TfrmCadProduto_Cor
-  Left = 406
-  Top = 126
+  Left = 342
+  Top = 106
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro de Cores'
   ClientHeight = 495
-  ClientWidth = 620
+  ClientWidth = 642
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,7 +24,7 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 620
+    Width = 642
     Height = 30
     Align = alTop
     Color = 8404992
@@ -404,7 +404,7 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 121
-    Width = 620
+    Width = 642
     Height = 374
     Align = alClient
     Ctl3D = False
@@ -430,13 +430,14 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
     GridStyle.EvenColor = clWindow
     TitleHeight.PixelCount = 24
     FooterColor = clBtnFace
-    ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+    ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
     OnGetCellParams = SMDBGrid1GetCellParams
     RegistryKey = 'Software\Scalabium'
     RegistrySection = 'SMDBGrid'
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
+    ColCount = 6
     RowCount = 2
     Columns = <
       item
@@ -463,7 +464,7 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Custo'
         Title.Color = 16777134
-        Width = 97
+        Width = 95
         Visible = True
       end
       item
@@ -472,14 +473,24 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Venda'
         Title.Color = 16777134
-        Width = 99
+        Width = 87
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'INATIVO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Inativo'
+        Title.Color = 16777134
+        Width = 41
         Visible = True
       end>
   end
   object pnlDados: TPanel
     Left = 0
     Top = 30
-    Width = 620
+    Width = 642
     Height = 91
     Align = alTop
     Enabled = False
@@ -635,6 +646,8 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
       Width = 121
       Height = 21
       AutoSize = False
+      DecimalPlaces = 5
+      DisplayFormat = '0.00###'
       TabOrder = 2
     end
     object CurrencyEdit2: TCurrencyEdit
@@ -643,6 +656,8 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
       Width = 121
       Height = 21
       AutoSize = False
+      DecimalPlaces = 5
+      DisplayFormat = '0.00###'
       TabOrder = 3
     end
   end

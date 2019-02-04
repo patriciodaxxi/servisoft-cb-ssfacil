@@ -1,6 +1,6 @@
 object frmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat
-  Left = 370
-  Top = 220
+  Left = 306
+  Top = 199
   Width = 753
   Height = 277
   BorderIcons = [biSystemMenu]
@@ -222,6 +222,8 @@ object frmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat
       LookupSource = dmCadProduto.dsPosicao
       ParentCtl3D = False
       TabOrder = 2
+      OnEnter = RxDBLookupCombo4Enter
+      OnExit = RxDBLookupCombo4Exit
     end
     object RxDBLookupCombo3: TRxDBLookupCombo
       Left = 150

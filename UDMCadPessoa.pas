@@ -1186,6 +1186,9 @@ type
     qParametros_GeralPERMITE_CNPJ_DUPLICADO_TRANSP: TStringField;
     sdsPessoaIPI_PAGO_FILIAL: TStringField;
     cdsPessoaIPI_PAGO_FILIAL: TStringField;
+    sdsPessoaIMP_NOMEPROD_CLIENTE: TStringField;
+    cdsPessoaIMP_NOMEPROD_CLIENTE: TStringField;
+    qParametros_NFeIMP_NOMEPROD_CLIENTE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

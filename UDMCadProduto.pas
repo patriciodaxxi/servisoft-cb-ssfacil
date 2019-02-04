@@ -1870,6 +1870,16 @@ type
     sdsProdutoID_CSTICMS: TIntegerField;
     cdsProdutoID_CSTICMS: TIntegerField;
     qParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField;
+    sdsProdutoNOME_MODELO: TStringField;
+    cdsProdutoNOME_MODELO: TStringField;
+    qParametros_LoteLOTE_CALCADO_NOVO: TStringField;
+    cdsMaterialUSA_COR: TStringField;
+    cdsProduto_Comb_MatclUsa_Cor: TStringField;
+    cdsProduto_ConsultaNOME_MODELO: TStringField;
+    cdsPosicaoID_SETOR: TIntegerField;
+    sdsGradeGRADE_REF: TStringField;
+    cdsGradeGRADE_REF: TStringField;
+    cdsProduto_ConsultaNOME_FORNECEDOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -1987,6 +1997,8 @@ type
     procedure prc_Abrir_Produto_MatTam(ID: Integer);
     procedure prc_Abrir_Produto_Maq(ID: Integer);
     procedure prc_Inserir_Produto_Consumo_Proc;
+
+    procedure prc_Gravar_Comb_Mat_Consumo;
 
     function fnc_Calcular_Mat: Real;
 
@@ -2222,12 +2234,25 @@ begin
     cdsProdutoUSA_PRECO_COR.AsString := 'N';
 
   if ((cdsProdutoTIPO_REG.AsString = 'M') and (qParametrosINFORMAR_COR_MATERIAL.AsString = 'S')) or
-     ((cdsProdutoTIPO_REG.AsString = 'P') and (qParametrosINFORMAR_COR_PROD.AsString = 'C')) then
+     (((cdsProdutoTIPO_REG.AsString = 'P') or (cdsProdutoTIPO_REG.AsString = 'S')) and (qParametrosINFORMAR_COR_PROD.AsString = 'C')) then
   begin
-    if cdsProduto_Cor.RecordCount > 0 then
-      cdsProdutoUSA_COR.AsString := 'S'
+    if (cdsProdutoTIPO_REG.AsString = 'M') then
+    begin
+      if cdsProduto_Cor.RecordCount > 0 then
+        cdsProdutoUSA_COR.AsString := 'S'
+      else
+        cdsProdutoUSA_COR.AsString := 'N';
+    end
     else
-      cdsProdutoUSA_COR.AsString := 'N';
+    begin
+      if cdsProduto_Comb.Active then
+      begin
+        if cdsProduto_Comb.RecordCount > 0 then
+          cdsProdutoUSA_COR.AsString := 'S'
+        else
+          cdsProdutoUSA_COR.AsString := 'N';
+      end;
+    end;
   end;
  // Foi tirado no dia 25/09 e colocado na trigger TRG_Produto
 {  if (cdsProdutoTIPO_REG.AsString = 'P') and (qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
@@ -2386,7 +2411,7 @@ begin
     cdsAtelier.Open;
   if qParametrosUSA_SETOR_CONSUMO.AsString = 'S' then
     cdsSetor.Open;
-  if (qParametrosTIPO_COMISSAO_PROD.AsString = 'I') then
+  if (qParametrosTIPO_COMISSAO_PROD.AsString = 'I') or (qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') then
     cdsCliente.Open;
   if (qParametrosINFORMAR_COR_MATERIAL_RZ.AsString = 'S') or (qParametrosINFORMAR_COR_MATERIAL_RZ.AsString = 'P') then
     cdsCor_RZ.Open;
@@ -2506,7 +2531,7 @@ begin
   if vTipoAux = '' then
     vTipoAux := 'A';
   cdsMaterial.Close;
-  sdsMaterial.CommandText := 'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_TOTAL ' +
+  sdsMaterial.CommandText := 'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_TOTAL, USA_COR ' +
                              'FROM PRODUTO ' +
                              'WHERE INATIVO = ' + QuotedStr('N');
   if vTipoAux <> 'A' then
@@ -2577,7 +2602,7 @@ begin
   cdsProduto_ConsumoIMP_ROTULO.AsString   := 'N';
   cdsProduto_ConsumoIMP_TALAO.AsString    := 'N';
   cdsProduto_ConsumoTINGIMENTO.AsString   := 'N';
-  if cdsProduto_Comb.RecordCount > 0 then
+  if (cdsProduto_Comb.Active) and (cdsProduto_Comb.RecordCount > 0) then
     cdsProduto_ConsumoESPECIFICO.AsString := 'S'
   else
     cdsProduto_ConsumoESPECIFICO.AsString := 'N';
@@ -3027,10 +3052,10 @@ begin
   if cdsProduto_Comb_MatID_POSICAO.AsInteger > 0 then
     if not cdsPosicao.Active then
       cdsPosicao.Open;
-  if cdsProduto_Comb_MatID_MATERIAL.AsInteger > 0 then
+  if (cdsProduto_Comb_MatID_MATERIAL.AsInteger > 0) and (cdsMaterial.Locate('ID',cdsProduto_Comb_MatID_MATERIAL.AsInteger,([Locaseinsensitive]))) then
   begin
-    if cdsMaterial.Locate('ID',cdsProduto_Comb_MatID_MATERIAL.AsInteger,([Locaseinsensitive])) then
-      cdsProduto_Comb_MatclNome_Material.AsString := cdsMaterialNOME.AsString;
+    cdsProduto_Comb_MatclNome_Material.AsString := cdsMaterialNOME.AsString;
+    cdsProduto_Comb_MatclUsa_Cor.AsString       := cdsMaterialUSA_COR.AsString;
   end;
   cdsProduto_Comb_MatclPrimeiro_Mat.AsString := '';
   if cdsProduto_Comb_MatID_POSICAO.AsInteger > 0 then
@@ -3624,6 +3649,28 @@ begin
   cdsProduto_Consumo_ProcID.AsInteger        := cdsProduto_ConsumoID.AsInteger;
   cdsProduto_Consumo_ProcITEM.AsInteger      := cdsProduto_ConsumoITEM.AsInteger;
   cdsProduto_Consumo_ProcITEM_PROC.AsInteger := vItemAux + 1;
+end;
+
+procedure TdmCadProduto.prc_Gravar_Comb_Mat_Consumo;
+begin
+  prc_Inserir_ProdCombMat;
+  cdsProduto_Comb_MatITEM_MAT.AsInteger    := cdsProduto_ConsumoITEM.AsInteger;
+  cdsProduto_Comb_MatID_MATERIAL.AsInteger := cdsProduto_ConsumoID_MATERIAL.AsInteger;
+  cdsProduto_Comb_MatID_COR.Clear;
+  if cdsProduto_ConsumoID_POSICAO.AsInteger > 0 then
+    cdsProduto_Comb_MatID_POSICAO.AsInteger := cdsProduto_ConsumoID_POSICAO.AsInteger;
+  if cdsProduto_ConsumoID_SETOR.AsInteger > 0 then
+    cdsProduto_Comb_MatID_SETOR.AsInteger := cdsProduto_ConsumoID_SETOR.AsInteger;
+  //cdsProduto_Comb_MatNOME_COR_COMBINACAO.AsString := cdsProduto_ mCombinacaoAuxNome_Cor.AsString;
+  if qParametros_ProdUSA_CONSUMO_COMB.AsString = 'S' then
+  begin
+    cdsProduto_Comb_MatQTD_CONSUMO.AsFloat := cdsProduto_ConsumoQTD_CONSUMO.AsFloat;
+    cdsProduto_Comb_MatQTD_UNIDADE.AsFloat := cdsProduto_ConsumoQTD_UNIDADE.AsFloat;
+    cdsProduto_Comb_MatUNIDADE.AsString    := cdsProduto_ConsumoUNIDADE.AsString;
+    cdsProduto_Comb_MatIMP_TALAO.AsString  := cdsProduto_ConsumoIMP_TALAO.AsString;
+    cdsProduto_Comb_MatTINGIMENTO.AsString := cdsProduto_ConsumoTINGIMENTO.AsString;
+  end;
+  cdsProduto_Comb_Mat.Post;
 end;
 
 end.

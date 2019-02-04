@@ -404,6 +404,10 @@ type
     ImprimirMinuta1: TMenuItem;
     Label111: TLabel;
     DBEdit72: TDBEdit;
+    Label113: TLabel;
+    Label114: TLabel;
+    DBEdit73: TDBEdit;
+    DBEdit74: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -2778,7 +2782,8 @@ begin
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DESCONTO.AsFloat,0,'',
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,
-                                                             vGeraCusto,uCalculo_NotaFiscal.vVlrCusto_Total);  //ver aqui sobre Lote Controle  04/11/2015
+                                                             vGeraCusto,uCalculo_NotaFiscal.vVlrCusto_Total,
+                                                             fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger); //14/01/2019 incluída a operação
 
                 fDMCadNotaFiscal.cdsNotaFiscal_Itens.Edit;
                 fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
@@ -3583,6 +3588,15 @@ var
   vIDAux: Integer;
   vConexao: Boolean;
 begin
+  fDMCadNotaFiscal.cdsParametros.Close;
+  fDMCadNotaFiscal.cdsParametros.Open;
+  fDMCadNotaFiscal.qParametros_Geral.Close;
+  fDMCadNotaFiscal.qParametros_Geral.Open;
+  fDMCadNotaFiscal.qParametros_Imp.Close;
+  fDMCadNotaFiscal.qParametros_Imp.Open;
+  fDMCadNotaFiscal.qParametros_NFe.Close;
+  fDMCadNotaFiscal.qParametros_NFe.Open;
+
   if CheckBox1.Visible then
     fDMCadNotaFiscal.vNaoMostrarCampoVazio := CheckBox1.Checked
   else
@@ -4618,7 +4632,8 @@ begin
                                           vDescAux,fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat,'',
                                           fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
                                           fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,vGeraCusto,
-                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat);
+                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,
+                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger);
 end;
 
 procedure TfrmCadNotaFiscal.prc_scroll_Itens(DataSet: TDataSet);
@@ -5275,7 +5290,6 @@ begin
 end;
 
 end.
-
 
 
 

@@ -2041,6 +2041,59 @@ type
     qParametros_RecXMLUSA_REF_SEQUENCIAL: TStringField;
     qRefSeq: TSQLQuery;
     qRefSeqREFERENCIA_SEQ: TIntegerField;
+    sdsOperacao_Nota: TSQLDataSet;
+    dspOperacao_Nota: TDataSetProvider;
+    cdsOperacao_Nota: TClientDataSet;
+    dsOperacao_Nota: TDataSource;
+    cdsOperacao_NotaID: TIntegerField;
+    cdsOperacao_NotaNOME: TStringField;
+    cdsOperacao_NotaPEDIR_FINALIDADE: TStringField;
+    cdsOperacao_NotaNATUREZA_NOTA: TStringField;
+    cdsOperacao_NotaSERIE_NFE: TStringField;
+    cdsOperacao_NotaTIPO_NOTA: TStringField;
+    cdsOperacao_NotaMOSTRA_EDI: TStringField;
+    cdsOperacao_NotaMOSTRAR_CLI_TRIANG2: TStringField;
+    cdsOperacao_NotaESTOQUE_DE_TERCEIRO: TStringField;
+    cdsOperacao_NotaESTOQUE_EM_TERCEIRO: TStringField;
+    mParc: TClientDataSet;
+    mParcParcela: TIntegerField;
+    mParcNumDuplicata: TStringField;
+    mParcDtVencimento: TDateField;
+    mParcVlrVencimento: TFloatField;
+    mParcID_Conta: TIntegerField;
+    mParcID_TipoCobranca: TIntegerField;
+    dsmParc: TDataSource;
+    sdsContas: TSQLDataSet;
+    dspContas: TDataSetProvider;
+    cdsContas: TClientDataSet;
+    dsContas: TDataSource;
+    cdsContasID: TIntegerField;
+    cdsContasNOME: TStringField;
+    sdsTipoCobranca: TSQLDataSet;
+    dspTipoCobranca: TDataSetProvider;
+    cdsTipoCobranca: TClientDataSet;
+    dsTipoCobranca: TDataSource;
+    cdsTipoCobrancaID: TIntegerField;
+    cdsTipoCobrancaNOME: TStringField;
+    mParclkNomeConta: TStringField;
+    mParclkNomeTipoCobranca: TStringField;
+    mItensNotaID_ContaOrcamento: TIntegerField;
+    mItensNotaID_CentroCusto: TIntegerField;
+    qConta_Orcamento: TSQLQuery;
+    qConta_OrcamentoID: TIntegerField;
+    qConta_OrcamentoTIPO: TStringField;
+    qConta_OrcamentoCODIGO: TStringField;
+    qConta_OrcamentoDESCRICAO: TStringField;
+    mItensNotaNome_ContaOrcamento: TStringField;
+    mItensNotaPosse_Material: TStringField;
+    cdsOCTAMANHO: TStringField;
+    sdsTamanho: TSQLDataSet;
+    dspTamanho: TDataSetProvider;
+    cdsTamanho: TClientDataSet;
+    cdsTamanhoID: TIntegerField;
+    cdsTamanhoTAMANHO: TStringField;
+    dsTamanho: TDataSource;
+    qParametrosUSA_GRADE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2165,6 +2218,10 @@ begin
   qParametros_OC.Open;
   qParametros_NTE.Open;
   qParametros_Custo.Open;
+  cdsContas.Open;
+  cdsTipoCobranca.Open;
+  cdsTamanho.Open;
+
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
@@ -2635,6 +2692,8 @@ begin
   mItensNotaSOMAR_ST_NO_CUSTO.AsString    := qParametros_NTESOMAR_ST_NO_CUSTO.AsString;
   mItensNotaGravar_Adic_Prod.AsString     := 'N';
   mItensNotaGerar_Estoque.AsString        := 'S';
+  mItensNotaPosse_Material.AsString       := 'E';
+  mItensNotaTamanho.AsString              := '';
 end;
 
 procedure TDMRecebeXML.prc_Abrir_Combinacao(ID_Produto: Integer);
@@ -2723,6 +2782,7 @@ begin
   vUsa_Cor_Pos       := cdsOCUSA_COR.AsString;
   vUsa_Preco_Cor_Pos := cdsOCUSA_PRECO_COR.AsString;
   vID_Cor_Pos        := cdsOCID_COR.AsInteger;
+  vTamanho_Pos       := cdsOCTAMANHO.AsString;
 end;
 
 procedure TDMRecebeXML.cdsProduto_FornBeforePost(DataSet: TDataSet);

@@ -946,6 +946,7 @@ object fCupomDevolucao: TfCupomDevolucao
               Expanded = False
               FieldName = 'VLR_CREDITO'
               Title.Caption = 'VLR. CR'#201'DITO'
+              Width = 64
               Visible = True
             end
             item

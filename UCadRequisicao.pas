@@ -163,8 +163,8 @@ var
 begin
   if (fDMCadDocEstoque.qParametros_EstREQ_NUM_LOTE.AsString = 'S') and (fDMCadDocEstoque.cdsDocEstoqueNUM_LOTE.AsInteger <= 0) then
   begin
-    MessageDlg('*** Nº do Lote é obrigatório!', mtError, [mbOk], 0);
-    exit;
+    if MessageDlg('Nº do Lote não informado, confirma a requisição sem o Lote??',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+      exit;
   end;
 
   prc_Calcular_Total;
@@ -205,7 +205,7 @@ begin
                                                      fDMCadDocEstoque.cdsDocEstoque_ItensVLR_UNITARIO.AsFloat,
                                                      0,0,'',
                                                      fDMCadDocEstoque.cdsDocEstoque_ItensID_COR.AsInteger,
-                                                     '','N',0); //ver aqui sobre Lote Controle  04/11/2015
+                                                     '','N',0,0);
         fDMCadDocEstoque.cdsDocEstoque_Itens.Edit;
         fDMCadDocEstoque.cdsDocEstoque_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
         fDMCadDocEstoque.cdsDocEstoque_Itens.Post;

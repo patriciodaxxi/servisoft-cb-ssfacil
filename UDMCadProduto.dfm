@@ -467,6 +467,10 @@ object dmCadProduto: TdmCadProduto
     object sdsProdutoID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
     end
+    object sdsProdutoNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -988,6 +992,10 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsProdutoID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
+    end
+    object cdsProdutoNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
     end
   end
   object dsProduto: TDataSource
@@ -1620,8 +1628,8 @@ object dmCadProduto: TdmCadProduto
     GetMetadata = False
     CommandText = 
       'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_T' +
-      'OTAL'#13#10'FROM PRODUTO'#13#10'WHERE ((TIPO_REG = '#39'M'#39') OR (TIPO_REG = '#39'S'#39'))' +
-      #13#10'      AND  INATIVO = '#39'N'#39#13#10
+      'OTAL, USA_COR'#13#10'FROM PRODUTO'#13#10'WHERE ((TIPO_REG = '#39'M'#39') OR (TIPO_RE' +
+      'G = '#39'S'#39'))'#13#10'      AND  INATIVO = '#39'N'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1660,6 +1668,11 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsMaterialPRECO_CUSTO_TOTAL: TFloatField
       FieldName = 'PRECO_CUSTO_TOTAL'
+    end
+    object cdsMaterialUSA_COR: TStringField
+      FieldName = 'USA_COR'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsMaterial: TDataSource
@@ -2025,18 +2038,20 @@ object dmCadProduto: TdmCadProduto
       'PO.COD_PRINCIPAL, LI.AUTOR, LI.DTLANCAMENTO, LI.PAGINA, LI.SELO,' +
       ' LI.CICLO, PRO.QTD_EMBALAGEM, PRO.QTD_PECA_EMB,'#13#10'       PRO.LARG' +
       'URA, PRO.ALTURA,PRO.ESPESSURA, PRO.TAM_CALC, PRO.TIPO_PRODUCAO, ' +
-      #13#10'       case'#13#10'         when (PRO.TIPO_REG = '#39'P'#39') then '#39'Produto'#39 +
-      #13#10'         when (PRO.TIPO_REG = '#39'M'#39') then '#39'Material'#39#13#10'         w' +
-      'hen (PRO.TIPO_REG = '#39'N'#39') then '#39'Outros'#39#13#10'         when (PRO.TIPO_' +
-      'REG = '#39'C'#39') then '#39'Material Consumo'#39#13#10'         when (PRO.TIPO_REG ' +
-      '= '#39'I'#39') then '#39'Imobilizado'#39#13#10'         when (PRO.TIPO_REG = '#39'S'#39') th' +
-      'en '#39'Semiacabado'#39#13#10'         else '#39#39#13#10'       end as TIPO_REG_DESCR' +
-      'ICAO,'#13#10#13#10'       (select sum(E2.QTD) QTDGERAL'#13#10'        from ESTOQ' +
-      'UE_ATUAL E2'#13#10'        where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE'#13#10 +
-      'from PRODUTO PRO'#13#10'left join TAB_NCM NCM on (PRO.ID_NCM = NCM.ID)' +
-      #13#10'left join MARCA on (PRO.ID_MARCA = MARCA.ID)'#13#10'left join GRUPO ' +
-      'on (PRO.ID_GRUPO = GRUPO.ID)'#13#10'left join PRODUTO_VEICULO PV on (P' +
-      'RO.ID = PV.ID)'#13#10'left join PRODUTO_LIVRO LI on (PRO.ID = LI.ID)  '
+      ' PRO.NOME_MODELO, FORN.NOME NOME_FORNECEDOR,'#13#10'       case'#13#10'     ' +
+      '    when (PRO.TIPO_REG = '#39'P'#39') then '#39'Produto'#39#13#10'         when (PRO' +
+      '.TIPO_REG = '#39'M'#39') then '#39'Material'#39#13#10'         when (PRO.TIPO_REG = ' +
+      #39'N'#39') then '#39'Outros'#39#13#10'         when (PRO.TIPO_REG = '#39'C'#39') then '#39'Mat' +
+      'erial Consumo'#39#13#10'         when (PRO.TIPO_REG = '#39'I'#39') then '#39'Imobili' +
+      'zado'#39#13#10'         when (PRO.TIPO_REG = '#39'S'#39') then '#39'Semiacabado'#39#13#10'  ' +
+      '       else '#39#39#13#10'       end as TIPO_REG_DESCRICAO,'#13#10#13#10'       (sel' +
+      'ect sum(E2.QTD) QTDGERAL'#13#10'        from ESTOQUE_ATUAL E2'#13#10'       ' +
+      ' where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE'#13#10'from PRODUTO PRO'#13#10'le' +
+      'ft join TAB_NCM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left join MARCA on' +
+      ' (PRO.ID_MARCA = MARCA.ID)'#13#10'left join GRUPO on (PRO.ID_GRUPO = G' +
+      'RUPO.ID)'#13#10'left join PRODUTO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left' +
+      ' join PRODUTO_LIVRO LI on (PRO.ID = LI.ID)  '#13#10'left join PESSOA F' +
+      'ORN'#13#10'on pro.id_fornecedor = forn.codigo'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -2286,6 +2301,14 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_ConsultaTIPO_PRODUCAO: TStringField
       FieldName = 'TIPO_PRODUCAO'
       Size = 1
+    end
+    object cdsProduto_ConsultaNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
+    end
+    object cdsProduto_ConsultaNOME_FORNECEDOR: TStringField
+      FieldName = 'NOME_FORNECEDOR'
+      Size = 60
     end
   end
   object dsProduto_Consulta: TDataSource
@@ -2542,6 +2565,11 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'NOME'
       Size = 50
     end
+    object sdsGradeGRADE_REF: TStringField
+      FieldName = 'GRADE_REF'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspGrade: TDataSetProvider
     DataSet = sdsGrade
@@ -2562,6 +2590,11 @@ object dmCadProduto: TdmCadProduto
     object cdsGradeNOME: TStringField
       FieldName = 'NOME'
       Size = 50
+    end
+    object cdsGradeGRADE_REF: TStringField
+      FieldName = 'GRADE_REF'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsGrade: TDataSource
@@ -2633,6 +2666,9 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'PRIMEIRO_MAT'
       FixedChar = True
       Size = 1
+    end
+    object cdsPosicaoID_SETOR: TIntegerField
+      FieldName = 'ID_SETOR'
     end
   end
   object dsPosicao: TDataSource
@@ -4826,6 +4862,12 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'clSetor'
       ProviderFlags = []
       Size = 40
+      Calculated = True
+    end
+    object cdsProduto_Comb_MatclUsa_Cor: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clUsa_Cor'
+      Size = 1
       Calculated = True
     end
   end
@@ -7651,6 +7693,11 @@ object dmCadProduto: TdmCadProduto
     end
     object qParametros_LoteLOTE_PROCESSO: TStringField
       FieldName = 'LOTE_PROCESSO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_LoteLOTE_CALCADO_NOVO: TStringField
+      FieldName = 'LOTE_CALCADO_NOVO'
       FixedChar = True
       Size = 1
     end

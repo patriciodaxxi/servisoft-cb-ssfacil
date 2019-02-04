@@ -22,9 +22,9 @@ object frmCadPosicao: TfrmCadPosicao
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 716
-    Height = 448
-    ActivePage = TS_Cadastro
+    Width = 724
+    Height = 456
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadPosicao: TfrmCadPosicao
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -40,8 +40,8 @@ object frmCadPosicao: TfrmCadPosicao
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 81
-        Width = 712
-        Height = 327
+        Width = 720
+        Height = 335
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPosicao.dsPosicao
@@ -55,6 +55,7 @@ object frmCadPosicao: TfrmCadPosicao
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
         OnDblClick = SMDBGrid1DblClick
+        OnTitleClick = SMDBGrid1TitleClick
         Flat = True
         BandsFont.Charset = DEFAULT_CHARSET
         BandsFont.Color = clWindowText
@@ -121,7 +122,7 @@ object frmCadPosicao: TfrmCadPosicao
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 712
+        Width = 720
         Height = 35
         Align = alTop
         Color = clSilver
@@ -349,8 +350,8 @@ object frmCadPosicao: TfrmCadPosicao
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 408
-        Width = 712
+        Top = 416
+        Width = 720
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -366,7 +367,7 @@ object frmCadPosicao: TfrmCadPosicao
       object pnlPesquisa: TPanel
         Left = 0
         Top = 35
-        Width = 712
+        Width = 720
         Height = 46
         Align = alTop
         Color = clSilver
@@ -467,7 +468,7 @@ object frmCadPosicao: TfrmCadPosicao
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 712
+        Width = 720
         Height = 37
         Align = alTop
         Color = 8404992
@@ -693,14 +694,14 @@ object frmCadPosicao: TfrmCadPosicao
       object pnlCadastro: TPanel
         Left = 0
         Top = 37
-        Width = 712
-        Height = 388
+        Width = 720
+        Height = 396
         Align = alClient
         Enabled = False
         TabOrder = 0
         DesignSize = (
-          712
-          388)
+          720
+          396)
         object Label1: TLabel
           Left = 63
           Top = 39
@@ -716,6 +717,14 @@ object frmCadPosicao: TfrmCadPosicao
           Height = 13
           Alignment = taRightJustify
           Caption = 'ID:'
+        end
+        object Label4: TLabel
+          Left = 63
+          Top = 61
+          Width = 31
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Sertor:'
         end
         object DBEdit7: TDBEdit
           Left = 96
@@ -742,7 +751,7 @@ object frmCadPosicao: TfrmCadPosicao
         end
         object gbxVendedor: TRzGroupBox
           Left = 94
-          Top = 82
+          Top = 106
           Width = 451
           Height = 65
           Anchors = [akLeft, akTop, akRight]
@@ -760,7 +769,7 @@ object frmCadPosicao: TfrmCadPosicao
           Font.Style = []
           ParentCtl3D = False
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 4
           VisualStyle = vsGradient
           object Label3: TLabel
             Left = 96
@@ -830,16 +839,29 @@ object frmCadPosicao: TfrmCadPosicao
         end
         object DBCheckBox2: TDBCheckBox
           Left = 96
-          Top = 60
+          Top = 84
           Width = 193
           Height = 17
           Caption = 'Primeiro Material'
           DataField = 'PRIMEIRO_MAT'
           DataSource = DMCadPosicao.dsPosicao
-          TabOrder = 2
+          TabOrder = 3
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox1Click
+        end
+        object RxDBLookupCombo1: TRxDBLookupCombo
+          Left = 96
+          Top = 53
+          Width = 321
+          Height = 21
+          DropDownCount = 8
+          DataField = 'ID_SETOR'
+          DataSource = DMCadPosicao.dsPosicao
+          LookupField = 'ID'
+          LookupDisplay = 'NOME'
+          LookupSource = DMCadPosicao.dsSetor
+          TabOrder = 2
         end
       end
     end

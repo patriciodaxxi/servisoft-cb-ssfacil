@@ -40,12 +40,14 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure RLBand2BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand3BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     fDMRel: TDMRel;
   public
     { Public declarations }
     fDMConsEstoque: TDMConsEstoque;
+    vOrderm : String; //G= Grupo Estrutura   N=Nome
   end;
 
 var
@@ -78,6 +80,8 @@ end;
 procedure TfRelInventario.FormCreate(Sender: TObject);
 begin
   fDMRel := TDMRel.Create(Self);
+  if vOrderm <> 'G' then
+    RLGroup1.DataFields := EmptyStr;
 end;
 
 procedure TfRelInventario.FormDestroy(Sender: TObject);
@@ -94,6 +98,13 @@ begin
   if trim(fDMConsEstoque.cdsEstoqueNOME_COR.AsString) <> '' then
     vNomeAux := vNomeAux + ' ' + fDMConsEstoque.cdsEstoqueNOME_COR.AsString;
   RLMemo1.Lines.Text := vNomeAux;
+end;
+
+procedure TfRelInventario.RLBand3BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  if vOrderm <> 'G' then
+    PrintIt := False;
 end;
 
 end.

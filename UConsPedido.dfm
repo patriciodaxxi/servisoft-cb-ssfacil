@@ -1,6 +1,6 @@
 object frmConsPedido: TfrmConsPedido
-  Left = 180
-  Top = 80
+  Left = 169
+  Top = 36
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
   Caption = 'Consulta Pedidos'
@@ -450,7 +450,7 @@ object frmConsPedido: TfrmConsPedido
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 36
+        ColCount = 37
         RowCount = 2
         Columns = <
           item
@@ -587,6 +587,14 @@ object frmConsPedido: TfrmConsPedido
             Title.Alignment = taCenter
             Title.Caption = 'Cor / Combina'#231#227'o'
             Width = 225
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'TAMANHO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tam'
             Visible = True
           end
           item

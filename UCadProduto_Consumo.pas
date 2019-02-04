@@ -41,6 +41,8 @@ type
     lblID: TLabel;
     dbedtID: TDBEdit;
     DBCheckBox2: TDBCheckBox;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -62,6 +64,9 @@ type
     procedure dbedtIDExit(Sender: TObject);
     procedure RxDBLookupCombo1Exit(Sender: TObject);
     procedure RxDBLookupCombo2Exit(Sender: TObject);
+    procedure RxDBLookupCombo4Enter(Sender: TObject);
+    procedure SpeedButton5Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
   private
     { Private declarations }
     ffrmCadUnidade: TfrmCadUnidade;
@@ -71,10 +76,12 @@ type
     vID_Setor_Loc : Integer;
     vID_Material_Loc : Integer;
     vItem_Loc : Integer;
+    vID_PosicaoAnt : Integer;
 
     function  fnc_Erro: Boolean;
     procedure prc_Monta_Tamanho;
     procedure prc_Atualiza_Comb;
+    procedure prc_Inserir_Mat_Comb;
 
   public
     { Public declarations }
@@ -88,7 +95,8 @@ var
 
 implementation
 
-uses rsDBUtils, USel_Produto, uUtilPadrao;
+uses rsDBUtils, USel_Produto, uUtilPadrao, UCadProduto_Consumo_Copiar,
+  UCadPosicao;
 
 {$R *.dfm}
 
@@ -103,6 +111,8 @@ end;
 procedure TfrmCadProduto_Consumo.FormShow(Sender: TObject);
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadProduto);
+
+
 
   if fDMCadProduto.cdsProduto_Consumo.State in [dsInsert] then
   begin
@@ -137,7 +147,8 @@ begin
   RxDBLookupCombo4.Visible := (fDMCadProduto.qParametrosUSA_POSICAO_CONSUMO.AsString = 'S');
   Label8.Visible           := (fDMCadProduto.qParametrosUSA_SETOR_CONSUMO.AsString = 'S');
   RxDBLookupCombo5.Visible := (fDMCadProduto.qParametrosUSA_SETOR_CONSUMO.AsString = 'S');
-  RxDBComboBox1.ReadOnly   := ((fDMCadProduto.qParametrosUSA_GRADE.AsString <> 'S') and (fDMCadProduto.cdsProdutoID_GRADE.AsInteger <= 0));
+  RxDBComboBox1.ReadOnly   := ((fDMCadProduto.qParametrosUSA_GRADE.AsString <> 'S') and (fDMCadProduto.cdsProdutoID_GRADE.AsInteger <= 0)) OR
+                              (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
 
   if RxDBComboBox1.ReadOnly then
     RxDBComboBox1.Color := clSilver
@@ -315,6 +326,10 @@ end;
 procedure TfrmCadProduto_Consumo.SpeedButton1Click(Sender: TObject);
 begin
   ffrmCadMaterial := TfrmCadMaterial.Create(self);
+  if fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger > 0 then
+    ffrmCadMaterial.vID_Produto_Local := fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger
+  else
+    ffrmCadMaterial.vID_Produto_Local := 0;
   ffrmCadMaterial.ShowModal;
   FreeAndNil(ffrmCadMaterial);
 
@@ -359,7 +374,18 @@ end;
 procedure TfrmCadProduto_Consumo.RxDBLookupCombo4Exit(Sender: TObject);
 begin
   if RxDBLookupCombo4.Text <> '' then
+  begin
+    if fDMCadProduto.cdsPosicaoID.AsInteger <> RxDBLookupCombo4.KeyValue then
+      fDMCadProduto.cdsPosicao.Locate('ID',RxDBLookupCombo4.KeyValue,([Locaseinsensitive]));
     fDMCadProduto.cdsProduto_ConsumoIMP_TALAO.AsString := fDMCadProduto.cdsPosicaoIMP_TALAO.AsString;
+    if (RxDBLookupCombo4.KeyValue <> vID_PosicaoAnt) then
+    begin
+      if (fDMCadProduto.cdsPosicaoID_SETOR.AsInteger > 0) then
+        fDMCadProduto.cdsProduto_ConsumoID_SETOR.AsInteger := fDMCadProduto.cdsPosicaoID_SETOR.AsInteger
+      else
+        fDMCadProduto.cdsProduto_ConsumoID_SETOR.Clear;
+    end;
+  end;
 end;
 
 procedure TfrmCadProduto_Consumo.dbedtIDEnter(Sender: TObject);
@@ -397,7 +423,14 @@ end;
 procedure TfrmCadProduto_Consumo.prc_Atualiza_Comb;
 begin
   if vID_Material_Loc <= 0 then
+  begin
+    if fDMCadProduto.cdsProduto_Comb.RecordCount > 0 then
+    begin
+      if MessageDlg('Deseja incluir o material nas combinações existentes?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+        prc_Inserir_Mat_Comb;
+    end;
     exit;
+  end;
 
   if (vID_Material_Loc <> fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger)
     or (StrToFloat(FormatFloat('0.00000',vQtd_Consumo)) <> StrToFloat(FormatFloat('0.00000',fDMCadProduto.cdsProduto_ConsumoQTD_CONSUMO.AsFloat)))
@@ -435,6 +468,36 @@ begin
     end;
   end;
 
+end;
+
+procedure TfrmCadProduto_Consumo.RxDBLookupCombo4Enter(Sender: TObject);
+begin
+  vID_PosicaoAnt := fDMCadProduto.cdsProduto_ConsumoID_POSICAO.AsInteger;
+end;
+
+procedure TfrmCadProduto_Consumo.prc_Inserir_Mat_Comb;
+begin
+  frmCadProduto_Consumo_Copiar := TfrmCadProduto_Consumo_Copiar.Create(self);
+  frmCadProduto_Consumo_Copiar.fDMCadProduto := fDMCadProduto;
+  frmCadProduto_Consumo_Copiar.ShowModal;
+  FreeAndNil(frmCadProduto_Consumo_Copiar);
+end;
+
+procedure TfrmCadProduto_Consumo.SpeedButton5Click(Sender: TObject);
+var
+  ffrmCadPosicao: TfrmCadPosicao;
+begin
+  ffrmCadPosicao := TfrmCadPosicao.Create(self);
+  ffrmCadPosicao.ShowModal;
+  FreeAndNil(ffrmCadPosicao);
+
+  SpeedButton6Click(sender);
+end;
+
+procedure TfrmCadProduto_Consumo.SpeedButton6Click(Sender: TObject);
+begin
+  fDMCadProduto.cdsPosicao.Close;
+  fDMCadProduto.cdsPosicao.Open;
 end;
 
 end.

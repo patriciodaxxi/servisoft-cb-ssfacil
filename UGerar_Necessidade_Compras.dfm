@@ -38,16 +38,28 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
     object Label5: TLabel
       Left = 552
       Top = 131
-      Width = 216
+      Width = 258
       Height = 13
       Caption = 'Material n'#227'o esta cadastrado na ficha t'#233'cnica'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
     end
     object Label6: TLabel
       Left = 552
       Top = 146
-      Width = 186
+      Width = 221
       Height = 13
       Caption = 'J'#225' gerado OC e ou Reservado Estoque'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
     end
     object Shape2: TShape
       Left = 513
@@ -55,6 +67,46 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
       Width = 35
       Height = 14
       Brush.Color = clMoneyGreen
+    end
+    object Shape3: TShape
+      Left = 825
+      Top = 145
+      Width = 35
+      Height = 14
+      Brush.Color = 4915199
+    end
+    object Label9: TLabel
+      Left = 864
+      Top = 146
+      Width = 156
+      Height = 13
+      Caption = 'Selecionado para gerar OC'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Shape4: TShape
+      Left = 825
+      Top = 130
+      Width = 35
+      Height = 14
+      Brush.Color = 8963327
+    end
+    object Label10: TLabel
+      Left = 864
+      Top = 131
+      Width = 165
+      Height = 13
+      Caption = 'Selecionado sem Fornecedor'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
     end
     object btnConsultar: TNxButton
       Left = 512
@@ -710,6 +762,15 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
             Visible = True
           end
           item
+            Expanded = False
+            FieldName = 'Vlr_Unitario'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. Unit'#225'rio'
+            Width = 67
+            Visible = True
+          end
+          item
             Alignment = taCenter
             Expanded = False
             FieldName = 'Unidade'
@@ -808,14 +869,6 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
             ReadOnly = True
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'Vlr_Unitario'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Vlr. Unit'#225'rio'
             Visible = True
           end
           item

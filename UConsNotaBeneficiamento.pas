@@ -89,14 +89,36 @@ end;
 procedure TfrmConsNotaBeneficiamento.FormShow(Sender: TObject);
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMConsNotaBeneficiamento);
+  if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
+  begin
+    ComboBox1.Clear;
+    Caption := 'Consultar Notas de Beneficiamento / Estoque em Terceiros';
+    ComboBox1.Items.Add('Beneficiamento');
+    ComboBox1.Items.Add('Beneficiamento/Estoque Terceiro');
+    ComboBox1.Items.Add('Todas');
+  end;
 end;
 
 procedure TfrmConsNotaBeneficiamento.prc_Consultar_NotaEntrada;
+var
+  vAux : String;
 begin
   fDMConsNotaBeneficiamento.cdsNotaEntrada.Close;
   fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.ctNotaEntrada;
-  if ComboBox1.ItemIndex = 0 then
-    fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' AND CFOP.BENEFICIAMENTO = ' + QuotedStr('S');
+  if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
+    fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTS')
+  else
+    fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTE');
+  //vAux := 'CFOP.RETORNO_NE';
+  //if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
+  //  vAux := 'CFOP.RETORNO_NS';
+  case ComboBox1.ItemIndex of
+    0 : fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' AND CFOP.BENEFICIAMENTO = ' + QuotedStr('S');
+    1 : fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' AND CFOP.BENEFICIAMENTO = ' + QuotedStr('S');
+    //1 : fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText
+      //                                                        + ' AND (CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + ' OR ' + vAux + ' = ' + QuotedStr('S') + ')';
+  end;
+
   if RxDBLookupCombo3.Text <> '' then
     fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText
                                                + ' AND NF.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);

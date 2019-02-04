@@ -130,6 +130,9 @@ object DMEstoque: TDMEstoque
       FieldName = 'UNIDADE'
       Size = 6
     end
+    object sdsEstoque_MovID_OPERACAO: TIntegerField
+      FieldName = 'ID_OPERACAO'
+    end
   end
   object dspEstoque_Mov: TDataSetProvider
     DataSet = sdsEstoque_Mov
@@ -255,6 +258,9 @@ object DMEstoque: TDMEstoque
     object cdsEstoque_MovUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Size = 6
+    end
+    object cdsEstoque_MovID_OPERACAO: TIntegerField
+      FieldName = 'ID_OPERACAO'
     end
   end
   object dsEstoque_Mov: TDataSource

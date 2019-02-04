@@ -755,7 +755,17 @@ begin
     
   vInclusao_Edicao := 'I';
 
-  fDMCadPedido.prc_Inserir;
+  //17/01/2019
+  //fDMCadPedido.prc_Inserir;
+  uGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
+  if not(fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) then
+  begin
+    prc_Excluir_Registro;
+    vInclusao_Edicao := '';
+    exit;
+  end;
+  //********************
+
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'P';
 
   if fDMCadPedido.cdsPedido.State in [dsBrowse] then
@@ -1151,6 +1161,11 @@ begin
     Exit;
 
   fDMCadPedido.cdsPedido.CancelUpdates;
+  //17/01/2019
+  if vInclusao_Edicao = 'I' then
+    prc_Excluir_Registro;
+  //********************
+  
   vInclusao_Edicao := '';
   vSenha           := '';
 
@@ -1161,6 +1176,7 @@ begin
   TS_Consulta.TabEnabled    := True;
   RzPageControl1.ActivePage := TS_Consulta;
   fDMCadPedido.vID_CFOP     := 0;
+
 end;
 
 procedure TfrmCadPedido.SMDBGrid1DblClick(Sender: TObject);
@@ -1368,11 +1384,9 @@ begin
       exit;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or
-     (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
-  begin
-    fDMCadPedido.prc_Filtrar_Produto_Cliente;
-  end;
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
   fDMCadPedido.prc_Inserir_Itens;
@@ -1466,9 +1480,9 @@ begin
   vItemAux := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or
-     (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
-    fDMCadPedido.prc_Filtrar_Produto_Cliente;
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
   fDMCadPedido.cdsPedido_Itens.Edit;
@@ -3170,9 +3184,9 @@ begin
   end;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or
-     (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
-    fDMCadPedido.prc_Filtrar_Produto_Cliente;
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
   ffrmCadPedido_Itens_Copia  := TfrmCadPedido_Itens_Copia.Create(self);
@@ -3302,9 +3316,9 @@ begin
   if (fDMCadPedido.Tag = 1) then
   begin
     //02/06/2016  incluido a filial
-    if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or
-      (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
-      fDMCadPedido.prc_Filtrar_Produto_Cliente;
+    if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+       (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+      uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
     //****************
     if (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) then
       fDMCadPedido.cdsPedido.Post;
@@ -3662,9 +3676,9 @@ begin
   prc_Posiciona_Imp;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or
-     (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
-    fDMCadPedido.prc_Filtrar_Produto_Cliente;
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
   if fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S' then

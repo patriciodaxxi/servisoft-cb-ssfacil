@@ -1328,13 +1328,12 @@ object frmCadNCM: TfrmCadNCM
         Top = 202
         Width = 946
         Height = 302
-        ActivePage = TS_Geral
+        ActivePage = TS_Unidade_Conv
         ActivePageDefault = TS_SubTrib
         Align = alClient
-        TabIndex = 3
+        TabIndex = 2
         TabOrder = 2
         TextColors.Selected = clBlue
-        OnChange = RzPageControl2Change
         FixedDimension = 19
         object TS_SubTrib: TRzTabSheet
           Caption = 'Subst. Tribut'#225'ria'
@@ -2500,6 +2499,7 @@ object frmCadNCM: TfrmCadNCM
             ParentColor = False
             ParentFont = False
             TabOrder = 0
+            OnEnter = GroupBox3Enter
             object Label20: TLabel
               Left = 22
               Top = 11

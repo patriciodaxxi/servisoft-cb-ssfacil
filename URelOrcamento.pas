@@ -119,7 +119,6 @@ type
     RLDraw6: TRLDraw;
     RLLabel45: TRLLabel;
     RLLabel22: TRLLabel;
-    RLDBText27: TRLDBText;
     RLLabel15: TRLLabel;
     RLBand8: TRLBand;
     RLLabel31: TRLLabel;
@@ -147,6 +146,7 @@ type
     RLLabel133: TRLLabel;
     RLDraw14: TRLDraw;
     RLImage2: TRLImage;
+    rlVlrFrete: TRLLabel;
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand7BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -299,6 +299,7 @@ begin
   RLLabel15.Visible := not(fDMCadPedido.cdsPedidoImp_Itens.IsEmpty);
   RLLabel48.Visible := not(fDMCadPedido.cdsPedidoImp_Itens.IsEmpty);
   RLLabel48.Caption := FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_ICMSSUBST.AsFloat);
+  rlVlrFrete.Caption := FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_FRETE.AsFloat);
   RLLabel44.Caption := FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_TOTAL.AsFloat);
 
   if trim(fDMCadPedido.qParametros_GeralEND_ASSINATURA.AsString) <> '' then

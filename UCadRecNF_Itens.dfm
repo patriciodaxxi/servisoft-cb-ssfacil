@@ -1,8 +1,8 @@
 object frmCadRecNF_Itens: TfrmCadRecNF_Itens
-  Left = 244
+  Left = 100
   Top = 52
-  Width = 800
-  Height = 485
+  Width = 1183
+  Height = 644
   BorderIcons = [biSystemMenu]
   Caption = 'Cadastro dos Itens do Recibo'
   Color = clBtnFace
@@ -22,8 +22,8 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 420
-    Width = 792
+    Top = 579
+    Width = 1175
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -62,8 +62,8 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 792
-    Height = 121
+    Width = 1175
+    Height = 106
     Align = alTop
     Color = clMoneyGreen
     TabOrder = 0
@@ -71,16 +71,16 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
     object Panel5: TPanel
       Left = 1
       Top = 26
-      Width = 790
-      Height = 94
+      Width = 1173
+      Height = 79
       Align = alClient
       Color = clMoneyGreen
       TabOrder = 1
       OnEnter = Panel5Enter
       OnExit = Panel5Exit
       object Shape1: TShape
-        Left = 608
-        Top = 54
+        Left = 698
+        Top = 22
         Width = 113
         Height = 36
         Brush.Color = clMoneyGreen
@@ -166,8 +166,8 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
         ParentFont = False
       end
       object Label30: TLabel
-        Left = 628
-        Top = 57
+        Left = 719
+        Top = 25
         Width = 86
         Height = 16
         Caption = 'Qtd.Estoque'
@@ -179,8 +179,8 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
         ParentFont = False
       end
       object lblEstoque: TLabel
-        Left = 616
-        Top = 74
+        Left = 711
+        Top = 42
         Width = 94
         Height = 13
         Alignment = taRightJustify
@@ -246,11 +246,40 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
         OnExit = DBEdit15Exit
         OnKeyDown = DBEdit15KeyDown
       end
+      object pnlNomeProduto: TPanel
+        Left = 1
+        Top = 51
+        Width = 696
+        Height = 20
+        BevelOuter = bvNone
+        Color = clMoneyGreen
+        TabOrder = 3
+        object Label22: TLabel
+          Left = 112
+          Top = 7
+          Width = 31
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Nome:'
+        end
+        object DBEdit1: TDBEdit
+          Left = 146
+          Top = 1
+          Width = 498
+          Height = 19
+          Ctl3D = False
+          DataField = 'NOME_PRODUTO'
+          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+          ParentCtl3D = False
+          TabOrder = 0
+          OnExit = DBEdit5Exit
+        end
+      end
     end
     object pnlCod_Barras: TPanel
       Left = 1
       Top = 1
-      Width = 790
+      Width = 1173
       Height = 25
       Align = alTop
       Color = clMoneyGreen
@@ -274,9 +303,9 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
   end
   object RzPageControl1: TRzPageControl
     Left = 0
-    Top = 121
-    Width = 792
-    Height = 299
+    Top = 106
+    Width = 1175
+    Height = 473
     ActivePage = TabSheet1
     ActivePageDefault = TabSheet1
     Align = alClient
@@ -659,7 +688,7 @@ object frmCadRecNF_Itens: TfrmCadRecNF_Itens
       object pnlCor: TPanel
         Left = 0
         Top = 0
-        Width = 788
+        Width = 1171
         Height = 22
         Align = alTop
         BevelOuter = bvNone

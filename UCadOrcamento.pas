@@ -204,6 +204,10 @@ type
     Personalizado1: TMenuItem;
     Label41: TLabel;
     RxDBLookupCombo7: TRxDBLookupCombo;
+    Label42: TLabel;
+    DBEdit29: TDBEdit;
+    Label44: TLabel;
+    DBEdit30: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -419,7 +423,9 @@ begin
 
   fDMCadPedido.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 
-  fDMCadPedido.prc_Inserir;
+  //fDMCadPedido.prc_Inserir;
+  UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
+
   lblNome_Filial.Caption := vFilial_Nome;
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'O';
 

@@ -1013,31 +1013,32 @@ object DMCadPedido: TDMCadPedido
       'IO, PED.VLR_DUPLICATA, PED.QTD_LIBERADA, PED.QTD_CONFERIDO, PED.' +
       'DTRECEBIMENTO, NUM_ORDPROD,'#13#10'       PED.CONFERIDO, PED.SELECIONA' +
       'DO, PED.IMPRESSO, VEND.NOME NOME_VENDEDOR, OPN.NOME NOME_OPERACA' +
-      'O,'#13#10'       PED.FINANCEIRO_CONF, PED.AMOSTRA, '#13#10'       case(selec' +
-      't max(PP.ITEM)'#13#10'            from PEDIDO_PROCESSO PP'#13#10'           ' +
-      ' where PP.ID = PED.ID)'#13#10'         when '#39'1'#39' then '#39'Cadastro'#39#13#10'     ' +
-      '    when '#39'5'#39' then '#39'Lib.Expedi'#231#227'o'#39#13#10'         when '#39'10'#39' then '#39'Fatu' +
-      'rado'#39#13#10'         when '#39'15'#39' then '#39'Lib.Transporte'#39#13#10'       end DESC' +
-      'RICAO_STATUS,'#13#10'       (select'#13#10'               case'#13#10'            ' +
-      '     when sum(TOT_PED) = 0 then '#39'N'#39#13#10'                 when sum(T' +
-      'OT_PED) >= sum(TOT_ITENS) then '#39'S'#39#13#10'                 else '#39'P'#39#13#10' ' +
-      '              end'#13#10'        from (select count(1) TOT_ITENS, 0 TO' +
-      'T_PED'#13#10'              from PEDIDO_ITEM PIT'#13#10'              where P' +
-      'IT.ID = PED.ID'#13#10'              union all'#13#10'              select 0 ' +
-      'TOT_ITENS, count(1) TOT_PED'#13#10'              from (select ID_PEDID' +
-      'O, ITEM_PEDIDO'#13#10'                    from LOTE_PED LPD'#13#10'         ' +
-      '           where LPD.ID_PEDIDO = PED.ID'#13#10'                    gro' +
-      'up by ID_PEDIDO, ITEM_PEDIDO))) GEROU_PRODUCAO,'#13#10'       (select ' +
-      'count(1) CONT_TALAO'#13#10'        from TALAO_PED TP'#13#10'        where TP' +
-      '.ID_PEDIDO = PED.ID) CONT_TALAO,'#13#10'       (select count(1) CONT_T' +
-      'ALAO2'#13#10'        from LOTE_PED_CALC LPC'#13#10'        where LPC.ID_PEDI' +
-      'DO = PED.ID) CONT_TALAO2,'#13#10'       (select coalesce(sum(PRECO_CUS' +
-      'TO * QTD), 0)'#13#10'        from PEDIDO_ITEM'#13#10'        where ID = PED.' +
-      'ID) VALOR_CUSTO'#13#10#13#10'from PEDIDO PED'#13#10'left join PESSOA CLI on PED.' +
-      'ID_CLIENTE = CLI.CODIGO'#13#10'left join PESSOA TRA on PED.ID_TRANSPOR' +
-      'TADORA = TRA.CODIGO'#13#10'left join PEDIDO_APROV AP on PED.ID = AP.ID' +
-      #13#10'left join PESSOA VEND on PED.ID_VENDEDOR = VEND.CODIGO'#13#10'left j' +
-      'oin OPERACAO_NOTA OPN on PED.ID_OPERACAO_NOTA = OPN.ID  '
+      'O,'#13#10'       PED.FINANCEIRO_CONF, PED.AMOSTRA, CLI.CNPJ_CPF,'#13#10'    ' +
+      '   case(select max(PP.ITEM)'#13#10'            from PEDIDO_PROCESSO PP' +
+      #13#10'            where PP.ID = PED.ID)'#13#10'         when '#39'1'#39' then '#39'Cad' +
+      'astro'#39#13#10'         when '#39'5'#39' then '#39'Lib.Expedi'#231#227'o'#39#13#10'         when '#39'1' +
+      '0'#39' then '#39'Faturado'#39#13#10'         when '#39'15'#39' then '#39'Lib.Transporte'#39#13#10'  ' +
+      '     end DESCRICAO_STATUS,'#13#10'       (select'#13#10'               case'#13 +
+      #10'                 when sum(TOT_PED) = 0 then '#39'N'#39#13#10'              ' +
+      '   when sum(TOT_PED) >= sum(TOT_ITENS) then '#39'S'#39#13#10'               ' +
+      '  else '#39'P'#39#13#10'               end'#13#10'        from (select count(1) TO' +
+      'T_ITENS, 0 TOT_PED'#13#10'              from PEDIDO_ITEM PIT'#13#10'        ' +
+      '      where PIT.ID = PED.ID'#13#10'              union all'#13#10'          ' +
+      '    select 0 TOT_ITENS, count(1) TOT_PED'#13#10'              from (se' +
+      'lect ID_PEDIDO, ITEM_PEDIDO'#13#10'                    from LOTE_PED L' +
+      'PD'#13#10'                    where LPD.ID_PEDIDO = PED.ID'#13#10'          ' +
+      '          group by ID_PEDIDO, ITEM_PEDIDO))) GEROU_PRODUCAO,'#13#10'  ' +
+      '     (select count(1) CONT_TALAO'#13#10'        from TALAO_PED TP'#13#10'   ' +
+      '     where TP.ID_PEDIDO = PED.ID) CONT_TALAO,'#13#10'       (select co' +
+      'unt(1) CONT_TALAO2'#13#10'        from LOTE_PED_CALC LPC'#13#10'        wher' +
+      'e LPC.ID_PEDIDO = PED.ID) CONT_TALAO2,'#13#10'       (select coalesce(' +
+      'sum(PRECO_CUSTO * QTD), 0)'#13#10'        from PEDIDO_ITEM'#13#10'        wh' +
+      'ere ID = PED.ID) VALOR_CUSTO'#13#10#13#10'from PEDIDO PED'#13#10'left join PESSO' +
+      'A CLI on PED.ID_CLIENTE = CLI.CODIGO'#13#10'left join PESSOA TRA on PE' +
+      'D.ID_TRANSPORTADORA = TRA.CODIGO'#13#10'left join PEDIDO_APROV AP on P' +
+      'ED.ID = AP.ID'#13#10'left join PESSOA VEND on PED.ID_VENDEDOR = VEND.C' +
+      'ODIGO'#13#10'left join OPERACAO_NOTA OPN on PED.ID_OPERACAO_NOTA = OPN' +
+      '.ID  '#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1255,6 +1256,9 @@ object DMCadPedido: TDMCadPedido
     object cdsPedido_ConsultaAMOSTRA: TStringField
       FieldName = 'AMOSTRA'
       Size = 1
+    end
+    object cdsPedido_ConsultaCNPJ_CPF: TStringField
+      FieldName = 'CNPJ_CPF'
     end
   end
   object dsPedido_Consulta: TDataSource
@@ -3532,9 +3536,11 @@ object DMCadPedido: TDMCadPedido
       DisplayFormat = '0.000##'
     end
     object cdsPedido_ItenssdsPedido_Cli: TDataSetField
+      Tag = 1
       FieldName = 'sdsPedido_Cli'
     end
     object cdsPedido_ItenssdsPedido_Material: TDataSetField
+      Tag = 1
       FieldName = 'sdsPedido_Material'
     end
     object cdsPedido_ItensGERAR_LOTE: TStringField
@@ -3549,13 +3555,13 @@ object DMCadPedido: TDMCadPedido
     object cdsPedido_ItensDTPRODUCAO: TDateField
       FieldName = 'DTPRODUCAO'
     end
-    object cdsPedido_ItensID_NCM: TIntegerField
-      FieldName = 'ID_NCM'
-    end
     object cdsPedido_ItensNCM: TStringField
       FieldName = 'NCM'
       ProviderFlags = []
       Size = 10
+    end
+    object cdsPedido_ItensID_NCM: TIntegerField
+      FieldName = 'ID_NCM'
     end
     object cdsPedido_ItensNUM_TALAO: TStringField
       FieldName = 'NUM_TALAO'
@@ -3567,6 +3573,7 @@ object DMCadPedido: TDMCadPedido
       Size = 1
     end
     object cdsPedido_ItenssdsPedido_Item_Tipo: TDataSetField
+      Tag = 1
       FieldName = 'sdsPedido_Item_Tipo'
     end
     object cdsPedido_ItensEND_FOTO: TStringField
@@ -3619,44 +3626,56 @@ object DMCadPedido: TDMCadPedido
       Size = 60
     end
     object cdsPedido_ItensTIPO_ACESSORIO: TStringField
+      Tag = 1
       FieldName = 'TIPO_ACESSORIO'
       FixedChar = True
       Size = 1
     end
     object cdsPedido_ItensCOMPRIMENTO_VOLUME: TFloatField
+      Tag = 1
       FieldName = 'COMPRIMENTO_VOLUME'
     end
     object cdsPedido_ItensQTD_LANCAR_ESTOQUE: TFloatField
+      Tag = 1
       FieldName = 'QTD_LANCAR_ESTOQUE'
     end
     object cdsPedido_ItensPERC_COMISSAO: TFloatField
       FieldName = 'PERC_COMISSAO'
     end
     object cdsPedido_ItensDTEXPEDICAO: TDateField
+      Tag = 1
       FieldName = 'DTEXPEDICAO'
     end
     object cdsPedido_ItensDTFATURA: TDateField
+      Tag = 1
       FieldName = 'DTFATURA'
     end
     object cdsPedido_ItensPERC_ICMS_FCP: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMS_FCP'
     end
     object cdsPedido_ItensPERC_ICMS_UF_DEST: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMS_UF_DEST'
     end
     object cdsPedido_ItensPERC_ICMS_PARTILHA: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMS_PARTILHA'
     end
     object cdsPedido_ItensVLR_ICMS_FCP: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMS_FCP'
     end
     object cdsPedido_ItensVLR_ICMS_UF_DEST: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMS_UF_DEST'
     end
     object cdsPedido_ItensVLR_ICMS_UF_REMET: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMS_UF_REMET'
     end
     object cdsPedido_ItensPERC_ICMS_INTER: TFloatField
+      Tag = 1
       FieldName = 'PERC_ICMS_INTER'
     end
     object cdsPedido_ItensVLR_DUPLICATA: TFloatField
@@ -3668,34 +3687,43 @@ object DMCadPedido: TDMCadPedido
       Size = 1
     end
     object cdsPedido_ItensVLR_DESCONTO_CALC: TFloatField
+      Tag = 1
       FieldName = 'VLR_DESCONTO_CALC'
       ProviderFlags = []
     end
     object cdsPedido_ItensDTCONFERENCIA: TDateField
+      Tag = 1
       FieldName = 'DTCONFERENCIA'
     end
     object cdsPedido_ItensHRCONFERENCIA: TTimeField
+      Tag = 1
       FieldName = 'HRCONFERENCIA'
     end
     object cdsPedido_ItensUSUARIO_CONF: TStringField
+      Tag = 1
       FieldName = 'USUARIO_CONF'
       Size = 15
     end
     object cdsPedido_ItensVLR_ICMSFRETE: TFloatField
+      Tag = 1
       FieldName = 'VLR_ICMSFRETE'
     end
     object cdsPedido_ItensQTD_SOBRA_OC: TFloatField
+      Tag = 1
       FieldName = 'QTD_SOBRA_OC'
     end
     object cdsPedido_ItensTIPO_SERVICO: TStringField
+      Tag = 1
       FieldName = 'TIPO_SERVICO'
       FixedChar = True
       Size = 1
     end
     object cdsPedido_ItensID_SERVICO_INT: TIntegerField
+      Tag = 1
       FieldName = 'ID_SERVICO_INT'
     end
     object cdsPedido_ItensNOME_SERVICO_INT: TStringField
+      Tag = 1
       FieldName = 'NOME_SERVICO_INT'
       Size = 150
     end
@@ -3710,18 +3738,23 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'PERC_MARGEM2'
     end
     object cdsPedido_ItensID_OS_SERV: TIntegerField
+      Tag = 1
       FieldName = 'ID_OS_SERV'
     end
     object cdsPedido_ItensNUM_OS_SERV: TIntegerField
+      Tag = 1
       FieldName = 'NUM_OS_SERV'
     end
     object cdsPedido_ItensID_SERVICO: TIntegerField
+      Tag = 1
       FieldName = 'ID_SERVICO'
     end
     object cdsPedido_ItensNUM_NOTA_ENT: TIntegerField
+      Tag = 1
       FieldName = 'NUM_NOTA_ENT'
     end
     object cdsPedido_ItensSERIE_NOTA_ENT: TStringField
+      Tag = 1
       FieldName = 'SERIE_NOTA_ENT'
       Size = 3
     end
@@ -3742,55 +3775,68 @@ object DMCadPedido: TDMCadPedido
       Size = 30
     end
     object cdsPedido_ItensQTD_CAIXA: TIntegerField
+      Tag = 1
       FieldName = 'QTD_CAIXA'
     end
     object cdsPedido_ItensNUM_LOTE_CONTROLE: TStringField
       FieldName = 'NUM_LOTE_CONTROLE'
     end
     object cdsPedido_ItensclVlr_Total_Custo: TFloatField
+      Tag = 1
       FieldKind = fkCalculated
       FieldName = 'clVlr_Total_Custo'
       DisplayFormat = '0.00'
       Calculated = True
     end
     object cdsPedido_ItensclVlr_Diferenca: TFloatField
+      Tag = 1
       FieldKind = fkCalculated
       FieldName = 'clVlr_Diferenca'
       DisplayFormat = '0.00'
       Calculated = True
     end
     object cdsPedido_ItensCOD_COR_CLIENTE: TStringField
+      Tag = 1
       FieldName = 'COD_COR_CLIENTE'
       Size = 10
     end
     object cdsPedido_ItensNOME_COR_CLIENTE: TStringField
+      Tag = 1
       FieldName = 'NOME_COR_CLIENTE'
       Size = 100
     end
     object cdsPedido_ItensTAMANHO_CLIENTE: TStringField
+      Tag = 1
       FieldName = 'TAMANHO_CLIENTE'
       Size = 10
     end
     object cdsPedido_ItensFOTO: TStringField
+      Tag = 1
       FieldName = 'FOTO'
       Size = 250
     end
     object cdsPedido_ItensVLR_MATERIAL: TFloatField
+      Tag = 1
       FieldName = 'VLR_MATERIAL'
     end
     object cdsPedido_ItensTEMPO: TFloatField
+      Tag = 1
       FieldName = 'TEMPO'
     end
     object cdsPedido_ItensDTBAIXA: TDateField
+      Tag = 1
       FieldName = 'DTBAIXA'
     end
     object cdsPedido_ItensTEMPO_REAL: TFloatField
+      Tag = 1
       FieldName = 'TEMPO_REAL'
     end
     object cdsPedido_ItensVLR_UNITARIO_REAL: TFloatField
+      Tag = 1
       FieldName = 'VLR_UNITARIO_REAL'
     end
     object cdsPedido_ItensFATOR_CALCULO_REAL: TFloatField
+      Tag = 1
       FieldName = 'FATOR_CALCULO_REAL'
     end
     object cdsPedido_ItensTIPO_OS: TStringField
@@ -3807,6 +3853,7 @@ object DMCadPedido: TDMCadPedido
       Size = 30
     end
     object cdsPedido_ItensBASE_IPI: TFloatField
+      Tag = 1
       FieldName = 'BASE_IPI'
       DisplayFormat = '0.00'
     end
@@ -16861,6 +16908,11 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_LoteUSA_LOTE_PED_SPROC: TStringField
       FieldName = 'USA_LOTE_PED_SPROC'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_LoteLOTE_CALCADO_NOVO: TStringField
+      FieldName = 'LOTE_CALCADO_NOVO'
       FixedChar = True
       Size = 1
     end

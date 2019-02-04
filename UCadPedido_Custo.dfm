@@ -218,9 +218,9 @@ object frmCadPedido_Custo: TfrmCadPedido_Custo
     Align = alBottom
     TabOrder = 2
     object Label1: TLabel
-      Left = 136
+      Left = 139
       Top = 8
-      Width = 110
+      Width = 107
       Height = 16
       Alignment = taRightJustify
       Caption = 'Vlr. Total Custo:'
@@ -249,9 +249,9 @@ object frmCadPedido_Custo: TfrmCadPedido_Custo
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 376
+      Left = 380
       Top = 8
-      Width = 113
+      Width = 109
       Height = 16
       Alignment = taRightJustify
       Caption = 'Vlr. Total Venda:'
@@ -263,9 +263,9 @@ object frmCadPedido_Custo: TfrmCadPedido_Custo
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 666
+      Left = 668
       Top = 8
-      Width = 95
+      Width = 93
       Height = 16
       Alignment = taRightJustify
       Caption = 'Vlr. Diferen'#231'a:'

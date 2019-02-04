@@ -20,8 +20,8 @@ object frmCadTabPreco_Itens: TfrmCadTabPreco_Itens
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 123
-    Width = 726
+    Top = 131
+    Width = 734
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -60,7 +60,7 @@ object frmCadTabPreco_Itens: TfrmCadTabPreco_Itens
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 726
+    Width = 734
     Height = 45
     Align = alTop
     Color = clMoneyGreen
@@ -187,7 +187,7 @@ object frmCadTabPreco_Itens: TfrmCadTabPreco_Itens
   object Panel2: TPanel
     Left = 0
     Top = 45
-    Width = 726
+    Width = 734
     Height = 28
     Align = alTop
     Color = clMoneyGreen
@@ -219,8 +219,8 @@ object frmCadTabPreco_Itens: TfrmCadTabPreco_Itens
   object Panel4: TPanel
     Left = 0
     Top = 73
-    Width = 726
-    Height = 50
+    Width = 734
+    Height = 58
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 2

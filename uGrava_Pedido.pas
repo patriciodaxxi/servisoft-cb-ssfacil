@@ -16,6 +16,9 @@ procedure prc_Excluir_Pedido(fDMCadPedido: TDMCadPedido);
 procedure Excluir_Duplicata_Ped(ID : Integer);
 procedure prc_Excluir_Item_Ped(fDMCadPedido: TDMCadPedido);
 procedure prc_Gravar_cdsHist_Senha(fDMCadPedido: TDMCadPedido);
+procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
+procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido ; ID_Cor, Item, Item_Original : Integer ; Preco, Perc_IPI, Perc_ICMS : Real ;
+                               DtEntrega : TDateTime ; Carimbo,Caixinha : String);
 
 function fnc_Existe_OC(fDMCadPedido: TDMCadPedido): Integer;
 
@@ -178,6 +181,7 @@ var
   fDMEstoque: TDMEstoque;
   vGravou: Boolean;
   vID: Integer;
+  Flag : Boolean;
 begin
   fDMCadPedido.vMSGErro := '';
   vGravou  := False;
@@ -318,12 +322,28 @@ begin
   dmDatabase.scoDados.StartTransaction(ID);
 
   try
-    sds.SQLConnection := dmDatabase.scoDados;
-    sds.NoMetadata    := True;
-    sds.GetMetadata   := False;
-    sds.CommandText   := ' UPDATE TABELALOC SET FLAG = 1 ' +
-                         ' WHERE TABELA = ' + QuotedStr('PEDIDO');
-    sds.ExecSQL();
+    try
+      sds.SQLConnection := dmDatabase.scoDados;
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+      sds.CommandText   := 'UPDATE TABELALOC SET FLAG = 1 WHERE TABELA = ' + QuotedStr('PEDIDO');
+      Flag := False;
+      while not Flag do
+      begin
+        try
+          sds.Close;
+          sds.ExecSQL;
+          Flag := True;
+        except
+          on E: Exception do
+          begin
+            Flag := False;
+          end;
+        end;
+      end;
+    except
+      raise
+    end;
 
     //10/11/2015  if do adiatamento incluida
     if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') then
@@ -455,7 +475,8 @@ begin
                                                          0,0,'',
                                                          fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,
                                                          fDMCadPedido.cdsPedido_ItensNUM_LOTE_CONTROLE.AsString,'N',
-                                                         vVlrAux);
+                                                         vVlrAux,
+                                                         fDMCadPedido.cdsPedidoID_OPERACAO_NOTA.AsInteger);
           end;
           if fDMCadPedido.cdsPedido_ItensID_MOVESTOQUE.AsInteger <> vID_Estoque then
           begin
@@ -726,6 +747,133 @@ begin
   except
     dmDatabase.scoDados.Rollback(ID);
     raise;
+  end;
+end;
+
+procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
+var
+  vAux: Integer;
+  vNumAux: Integer;
+  ID: TTransactionDesc;
+  sds: TSQLDataSet;
+  Flag: Boolean;
+  vIDPed : Integer;
+
+begin
+  sds     := TSQLDataSet.Create(nil);
+
+  ID.TransactionID  := 5;
+  ID.IsolationLevel := xilREADCOMMITTED;
+  dmDatabase.scoDados.StartTransaction(ID);
+  try
+    try
+      sds.SQLConnection := dmDatabase.scoDados;
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+      sds.CommandText   := 'UPDATE TABELALOC SET FLAG = 1 WHERE TABELA = ' + QuotedStr('PEDIDO');
+      Flag := False;
+      while not Flag do
+      begin
+        try
+          sds.Close;
+          sds.ExecSQL;
+          Flag := True;
+        except
+          on E: Exception do
+          begin
+            Flag := False;
+          end;
+        end;
+      end;
+    except
+      raise
+    end;
+
+    if not fDMCadPedido.cdsPedido.Active then
+      fDMCadPedido.prc_Localizar(-1);
+    vAux := dmDatabase.ProximaSequencia('PEDIDO',0);
+
+    fDMCadPedido.mSenha.EmptyDataSet;
+
+    fDMCadPedido.cdsPedido.Insert;
+    fDMCadPedido.cdsPedidoID.AsInteger         := vAux;
+    fDMCadPedido.cdsPedidoFILIAL.AsInteger     := vFilial;
+    fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime := Date;
+    fDMCadPedido.cdsPedido.Post;
+
+    vIDPed := fDMCadPedido.cdsPedidoID.AsInteger;
+    fDMCadPedido.cdsPedido.ApplyUpdates(0);
+
+    dmDatabase.scoDados.Commit(ID);
+
+    fDMCadPedido.cdsPedido.Locate('ID',vIDPed,([Locaseinsensitive]));
+
+    fDMCadPedido.cdsPedido.Edit;
+
+  except
+    on e: Exception do
+    begin
+      dmDatabase.scoDados.Rollback(ID);
+      raise Exception.Create('Erro ao inserir o Pedido: ' + #13 + e.Message);
+    end;
+  end;
+
+end;
+
+procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido ; ID_Cor, Item, Item_Original : Integer ; Preco, Perc_IPI, Perc_ICMS : Real ;
+                               DtEntrega : TDateTime ; Carimbo,Caixinha : String);
+begin
+  fDMCadPedido.cdsPedido_Itens.First;
+  while not fDMCadPedido.cdsPedido_Itens.Eof do
+  begin
+    if (fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger = Item_Original) and (fDMCadPedido.cdsPedido_ItensITEM.AsInteger <> Item) then
+    begin
+      if fDMCadPedido.cdsPedido_ItensID_COR.AsInteger <> ID_Cor then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensID_COR.AsInteger := ID_Cor;
+      end;
+      if StrToFloat(FormatFloat('0.000000',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat)) <> StrToFloat(FormatFloat('0.000000',Preco)) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.000000',Preco));
+      end;
+      if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat)) <> StrToFloat(FormatFloat('0.00',Perc_IPI)) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat := StrToFloat(FormatFloat('0.00',Perc_IPI));
+      end;
+      if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat)) <> StrToFloat(FormatFloat('0.00',Perc_ICMS)) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat := StrToFloat(FormatFloat('0.00',Perc_ICMS));
+      end;
+      if fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime <> DtEntrega then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensDTENTREGA.AsFloat := DtEntrega;
+      end;
+      if trim(fDMCadPedido.cdsPedido_ItensCARIMBO.AsString) <> trim(Carimbo) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensCARIMBO.AsString := Carimbo;
+      end;
+      if trim(fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString) <> trim(Caixinha) then
+      begin
+        if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+          fDMCadPedido.cdsPedido_Itens.Edit;
+        fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString := Caixinha;
+      end;
+      if (fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
+        fDMCadPedido.cdsPedido_Itens.Post;
+    end;
+    fDMCadPedido.cdsPedido_Itens.Next;
   end;
 end;
 

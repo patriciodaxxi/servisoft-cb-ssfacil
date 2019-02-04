@@ -65,6 +65,8 @@ type
     { Private declarations }
   public
     { Public declarations }
+    ctMatLote : String;
+    
   end;
 
 var

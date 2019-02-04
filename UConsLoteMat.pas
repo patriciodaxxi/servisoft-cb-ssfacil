@@ -308,7 +308,7 @@ begin
   fDMCadNecessidade_Compras.cdsLote_Mat.First;
   while not fDMCadNecessidade_Compras.cdsLote_Mat.Eof do
   begin
-    if fDMCadNecessidade_Compras.qParametros_LoteUSA_NECESSIDADE_IF.AsString = 'S' then
+    if (fDMCadNecessidade_Compras.qParametros_LoteUSA_NECESSIDADE_IF.AsString = 'S') or (fDMCadNecessidade_Compras.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S') then
       prc_Gravar_mMaterial_Agrup
     else
       prc_Gravar_mMaterial;
@@ -343,6 +343,8 @@ begin
   fDMCadNecessidade_Compras.mMaterial.Insert;
   fDMCadNecessidade_Compras.mMaterialNum_Mapa.AsInteger := fDMCadNecessidade_Compras.qLoteNUM_ORDEM.AsInteger;
   fDMCadNecessidade_Compras.mMaterialItem.AsInteger := fDMCadNecessidade_Compras.cdsLote_MatITEM.AsInteger;
+  fDMCadNecessidade_Compras.mMaterialNome_Setor.AsString  := fDMCadNecessidade_Compras.cdsLote_MatNOME_SETOR.AsString;
+  fDMCadNecessidade_Compras.mMaterialID_Setor.AsInteger   := fDMCadNecessidade_Compras.cdsLote_MatID_SETOR.AsInteger;
   fDMCadNecessidade_Compras.mMaterialID_Material.AsInteger := fDMCadNecessidade_Compras.cdsLote_MatID_MATERIAL.AsInteger;
   fDMCadNecessidade_Compras.mMaterialID_Cor.AsInteger := fDMCadNecessidade_Compras.cdsLote_MatID_COR.AsInteger;
   fDMCadNecessidade_Compras.mMaterialNome_Cor.AsString := fDMCadNecessidade_Compras.cdsLote_MatNOME_COR.AsString;

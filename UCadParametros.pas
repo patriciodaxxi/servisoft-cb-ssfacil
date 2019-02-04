@@ -1017,7 +1017,6 @@ type
     Label312: TLabel;
     RxDBComboBox116: TRxDBComboBox;
     DBCheckBox300: TDBCheckBox;
-    DBCheckBox301: TDBCheckBox;
     DBCheckBox302: TDBCheckBox;
     DBCheckBox303: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -1571,7 +1570,6 @@ begin
     Label291.Visible          := (fDMCadParametros.cdsParametros_ProdGERAR_REF_GRUPO.AsString = 'S');
     DBEdit43.Visible          := (fDMCadParametros.cdsParametros_ProdGERAR_REF_GRUPO.AsString = 'S');
     DBCheckBox252.Visible     := (fDMCadParametros.cdsParametros_ProdUSA_CONSUMO_COMB.AsString = 'S');
-    DBCheckBox301.Visible     := (fDMCadParametros.cdsParametros_LoteLOTE_TEXTIL.AsString = 'S');
   end
   else
   if RzPageControl2.ActivePage = TS_Usuario then

@@ -278,7 +278,7 @@ type
     BalanoEstoqueVeculo1: TMenuItem;
     N31: TMenuItem;
     Utilitrios1: TMenuItem;
-    tbProcesso: TToolButton;
+    tbOrcamento: TToolButton;
     OrdemServiotica1: TMenuItem;
     GerarIntegraoContbil1: TMenuItem;
     RegraCFOP1: TMenuItem;
@@ -336,6 +336,11 @@ type
     FuncionrioResumido1: TMenuItem;
     ConsultaEstoqueAtual1: TMenuItem;
     BaixaNotadeBeneficiamento1: TMenuItem;
+    N52: TMenuItem;
+    ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1: TMenuItem;
+    ConsultaEstoquedeTerceiroeEmTerceiro1: TMenuItem;
+    N53: TMenuItem;
+    AjusteOperaoNasNotas1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -517,7 +522,7 @@ type
     procedure BalanoEstoqueVeculo1Click(Sender: TObject);
     procedure SPEDBlocoH1Click(Sender: TObject);
     procedure Utilitrios1Click(Sender: TObject);
-    procedure tbProcessoClick(Sender: TObject);
+    procedure tbOrcamentoClick(Sender: TObject);
     procedure OrdemServiotica1Click(Sender: TObject);
     procedure GerarIntegraoContbil1Click(Sender: TObject);
     procedure RegraCFOP1Click(Sender: TObject);
@@ -571,6 +576,10 @@ type
     procedure FuncionarioCompleto1Click(Sender: TObject);
     procedure ConsultaEstoqueAtual1Click(Sender: TObject);
     procedure BaixaNotadeBeneficiamento1Click(Sender: TObject);
+    procedure ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1Click(
+      Sender: TObject);
+    procedure ConsultaEstoquedeTerceiroeEmTerceiro1Click(Sender: TObject);
+    procedure AjusteOperaoNasNotas1Click(Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -586,6 +595,7 @@ type
     vTipo_Reg_Cons_Fat: String;
     vTipo_Reg_Pedido: String; //P=Pedido  C=Compras
     vVersao: String;
+    vTipo_ConsNotaBeneficiamento : String; //F= Fornecedor   C=Cliente
 
     procedure OpenForm(FClass: TFormClass; vEstado: TWindowState; TipoPessoa: String = '');
     procedure GetBuildInfo(exeName: String; var V1, V2, V3, V4: word);
@@ -628,7 +638,8 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   uCadFuncionario_Res, UConsAniversario, UExcluirPed, UConsLoteMat, UConsProduto_Custo, UConsFrete, UConsMaterial_Nec, UConsPedido_Orc,
   UConsEstoque_Res, UBaixaMaterialOP, uCadTipo_Material, UConsMatPrima, UConsMaterialOP, UConsMaterial_Nec_Rem, uBaixaPedidoProc,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina,
-  UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida;
+  UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida,
+  UConsEstoqueTerc, UAjuste_OperacaoNota;
 
 {$R *.dfm}
 
@@ -889,6 +900,7 @@ end;
 
 procedure TfMenu.ConsultaNotasdeBeneficiamento1Click(Sender: TObject);
 begin
+  vTipo_ConsNotaBeneficiamento := 'F';
   OpenForm(TfrmConsNotaBeneficiamento,wsMaximized);
 end;
 
@@ -1474,8 +1486,7 @@ begin
   tbPedido.Visible     := PedidoComercial1.Visible;
   tbProduto.Visible    := Produto1.Visible;
   tbPessoa.Visible     := Pessoa1.Visible;
-  tbProcesso.Visible   := ConsultaPedidoProcesso1.Visible;
-
+  tbOrcamento.Visible  := Oramento1.Visible;
   vUsuario := UserControl1.CurrentUser.LoginName;
 end;
 
@@ -1739,9 +1750,9 @@ begin
   prc_ShellExecute('SSUtilitarios.exe');
 end;
 
-procedure TfMenu.tbProcessoClick(Sender: TObject);
+procedure TfMenu.tbOrcamentoClick(Sender: TObject);
 begin
-  OpenForm(TfrmConsPedido_Proc,wsMaximized);
+  OpenForm(TfrmCadOrcamento,wsMaximized);
 end;
 
 procedure TfMenu.OrdemServiotica1Click(Sender: TObject);
@@ -2047,6 +2058,24 @@ end;
 procedure TfMenu.BaixaNotadeBeneficiamento1Click(Sender: TObject);
 begin
   OpenForm(TfrmBaixaNFDevolvida,wsMaximized);
+end;
+
+procedure TfMenu.ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1Click(
+  Sender: TObject);
+begin
+  vTipo_ConsNotaBeneficiamento := 'C';
+  OpenForm(TfrmConsNotaBeneficiamento,wsMaximized);
+end;
+
+procedure TfMenu.ConsultaEstoquedeTerceiroeEmTerceiro1Click(
+  Sender: TObject);
+begin
+  OpenForm(TfrmConsEstoqueTerc,wsMaximized);
+end;
+
+procedure TfMenu.AjusteOperaoNasNotas1Click(Sender: TObject);
+begin
+  OpenForm(TfrmAjuste_OperacaoNota,wsMaximized);
 end;
 
 initialization

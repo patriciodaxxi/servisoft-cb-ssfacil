@@ -38,6 +38,8 @@ type
     RxDBComboBox1: TRxDBComboBox;
     Label2: TLabel;
     DBCheckBox2: TDBCheckBox;
+    Label4: TLabel;
+    RxDBLookupCombo1: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -53,6 +55,7 @@ type
     procedure btnPesquisarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBCheckBox1Click(Sender: TObject);
+    procedure SMDBGrid1TitleClick(Column: TColumn);
   private
     { Private declarations }
     fDMCadPosicao: TDMCadPosicao;
@@ -235,6 +238,19 @@ begin
   Label3.Visible        := (DBCheckBox1.Checked);
   RxDBComboBox1.Visible := (DBCheckBox1.Checked);
   RxDBComboBox2.Visible := (DBCheckBox1.Checked);
+end;
+
+procedure TfrmCadPosicao.SMDBGrid1TitleClick(Column: TColumn);
+var
+  i: Integer;
+  ColunaOrdenada: String;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMCadPosicao.cdsPosicao.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid1.Columns.Count - 1 do
+    if not (SMDBGrid1.Columns.Items[I].Title = Column.Title) then
+      SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.

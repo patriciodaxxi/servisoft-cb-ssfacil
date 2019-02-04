@@ -605,6 +605,8 @@ type
     cdsFilialTIPO_EMP: TStringField;
     sdsFilialRelatoriosDESCRICAO: TStringField;
     cdsFilialRelatoriosDESCRICAO: TStringField;
+    sdsFilialSPED_PERIODO_IPI: TStringField;
+    cdsFilialSPED_PERIODO_IPI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);

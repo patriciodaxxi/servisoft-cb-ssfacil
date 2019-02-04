@@ -3914,6 +3914,7 @@ object dmCupomFiscal: TdmCupomFiscal
     Top = 352
   end
   object mCupomItens: TClientDataSet
+    Active = True
     Aggregates = <>
     FieldDefs = <
       item
@@ -3946,6 +3947,12 @@ object dmCupomFiscal: TdmCupomFiscal
     StoreDefs = True
     Left = 440
     Top = 488
+    Data = {
+      8C0000009619E0BD0100000018000000060000000000030000008C000C4E4F4D
+      455F50524F4455544F0100490000000100055749445448020002002800035154
+      44080004000000000008564C525F554E4954080004000000000009564C525F54
+      4F54414C08000400000000000A49445F50524F4455544F040001000000000006
+      43415254414F04000100000000000000}
     object mCupomItensNOME_PRODUTO: TStringField
       DisplayWidth = 48
       FieldName = 'NOME_PRODUTO'
@@ -3978,11 +3985,16 @@ object dmCupomFiscal: TdmCupomFiscal
     Top = 488
   end
   object mCupom: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     BeforeDelete = mCupomBeforeDelete
     Left = 440
     Top = 440
+    Data = {
+      4C0000009619E0BD0100000018000000030000000000030000004C0006434152
+      54414F04000100000000000849445F4355504F4D040001000000000009564C52
+      5F544F54414C08000400000000000000}
     object mCupomCARTAO: TIntegerField
       FieldName = 'CARTAO'
     end
@@ -5662,8 +5674,8 @@ object dmCupomFiscal: TdmCupomFiscal
     Aggregates = <>
     IndexFieldNames = 'ID_Pedido'
     Params = <>
-    Left = 465
-    Top = 544
+    Left = 473
+    Top = 552
     Data = {
       2C0000009619E0BD0100000018000000010000000000030000002C000949445F
       50656469646F04000100000000000000}

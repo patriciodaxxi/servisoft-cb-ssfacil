@@ -22,7 +22,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     Left = 0
     Top = 0
     Width = 670
-    Height = 73
+    Height = 71
     Align = alTop
     Color = clMoneyGreen
     TabOrder = 0
@@ -279,9 +279,9 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   end
   object Panel2: TPanel
     Left = 0
-    Top = 125
+    Top = 145
     Width = 670
-    Height = 398
+    Height = 378
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 3
@@ -376,7 +376,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     end
     object Label16: TLabel
       Left = 17
-      Top = 308
+      Top = 300
       Width = 95
       Height = 13
       Alignment = taRightJustify
@@ -384,7 +384,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     end
     object Label17: TLabel
       Left = 26
-      Top = 330
+      Top = 322
       Width = 80
       Height = 52
       Alignment = taRightJustify
@@ -484,7 +484,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     end
     object DBCheckBox1: TDBCheckBox
       Left = 113
-      Top = 279
+      Top = 271
       Width = 70
       Height = 17
       Caption = 'Estoque'
@@ -558,7 +558,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     end
     object DBMemo1: TDBMemo
       Left = 113
-      Top = 300
+      Top = 292
       Width = 424
       Height = 80
       Ctl3D = True
@@ -734,7 +734,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   end
   object pnlCombinacao: TPanel
     Left = 0
-    Top = 99
+    Top = 119
     Width = 670
     Height = 26
     Align = alTop
@@ -766,24 +766,32 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   end
   object Panel4: TPanel
     Left = 0
-    Top = 73
+    Top = 71
     Width = 670
-    Height = 26
+    Height = 48
     Align = alTop
     Color = clMoneyGreen
     TabOrder = 1
     object lblFinalidade: TLabel
-      Left = 45
-      Top = 10
+      Left = 46
+      Top = 32
       Width = 90
       Height = 13
       Alignment = taRightJustify
       Caption = 'Finalidade Compra:'
     end
+    object lblOperacao: TLabel
+      Left = 85
+      Top = 10
+      Width = 50
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Opera'#231#227'o:'
+    end
     object rxcbFinalidade: TRxDBComboBox
-      Left = 138
-      Top = 2
-      Width = 303
+      Left = 139
+      Top = 24
+      Width = 359
       Height = 21
       Style = csDropDownList
       DataField = 'FINALIDADE'
@@ -801,6 +809,20 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
         'R'
         'I'
         'O')
+    end
+    object rxdbOperacao: TRxDBLookupCombo
+      Left = 138
+      Top = 2
+      Width = 359
+      Height = 21
+      DropDownCount = 8
+      DropDownWidth = 500
+      DataField = 'ID_OPERACAO_NOTA'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      LookupField = 'ID'
+      LookupDisplay = 'NOME'
+      LookupSource = DMCadNotaFiscal.dsOperacao_Nota
+      TabOrder = 1
     end
   end
 end

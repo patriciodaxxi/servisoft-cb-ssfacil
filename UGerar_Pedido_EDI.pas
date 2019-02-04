@@ -418,7 +418,8 @@ begin
     fDMGerar_EDI.mGeradoPedidoCliente.AsString := fDMCadPedido.cdsPedidoPEDIDO_CLIENTE.AsString;
     fDMGerar_EDI.mGerado.Post;
   end;
-  fDMCadPedido.prc_Inserir;
+  //fDMCadPedido.prc_Inserir;
+  UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
 
   if fDMGerar_EDI.qFilialSIMPLES.AsString = 'S' then
     fDMCadPedido.prc_Abrir_CSTICMS('S')

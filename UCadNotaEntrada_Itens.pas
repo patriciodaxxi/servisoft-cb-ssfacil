@@ -75,6 +75,8 @@ type
     DBEdit14: TDBEdit;
     Label24: TLabel;
     DBEdit15: TDBEdit;
+    lblOperacao: TLabel;
+    rxdbOperacao: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -195,7 +197,9 @@ begin
   if Panel4.Visible then
     Panel4.TabOrder := 1;
   Label9.Visible           := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
-  RxDBLookupCombo6.Visible := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S'));
+  RxDBLookupCombo6.Visible := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
+  Label15.Visible          := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
+  RxDBLookupCombo7.Visible := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
 end;
 
 procedure TfrmCadNotaEntrada_Itens.Panel2Enter(Sender: TObject);

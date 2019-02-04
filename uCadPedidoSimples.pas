@@ -204,7 +204,9 @@ begin
 
   fDMCadPedido.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 
-  fDMCadPedido.prc_Inserir;
+  //fDMCadPedido.prc_Inserir;
+  UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
+  
   lblNome_Filial.Caption := vFilial_Nome;
   fDMCadPedido.cdsPedidoTIPO_REG.AsString       := 'S';
 
