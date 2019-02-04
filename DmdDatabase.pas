@@ -560,8 +560,7 @@ begin
     end;
 
   finally
-    FreeAndNil(Config);
-
+    FreeAndNil(Config);        
   end;
 
   AtualizaFDB;
