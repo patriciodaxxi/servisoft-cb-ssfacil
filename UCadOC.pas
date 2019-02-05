@@ -297,7 +297,7 @@ end;
 
 procedure TfrmCadOC.btnExcluirClick(Sender: TObject);
 var
-  vNumOC : Integer;
+  vNumOC: Integer;
 begin
   if not fnc_Verifica_Registro then
     exit;
@@ -481,7 +481,7 @@ end;
 procedure TfrmCadOC.FormShow(Sender: TObject);
 var
   i: Integer;
-  vData : TDateTime;
+  vData: TDateTime;
 begin
   vTipo_Pedido     := 'C';
   vInclusao_Edicao := '';
@@ -763,14 +763,14 @@ end;
 procedure TfrmCadOC.btnAlterar_ItensClick(Sender: TObject);
 var
   vMSGAux: String;
-  vID_ProdutoAux : Integer; //
-  vID_CorAux : Integer; //
-  vTamanhoAux : String; //
-  vItemAux : Integer; //
-  vPrecoAux : Real; //
-  vPerc_IpiAux, vPerc_ICMSAux : Real;
-  vCarimboAux, vCaixinhaAux : String;
-  vDtEntregaAux : TDateTime;
+  vID_ProdutoAux: Integer; //
+  vID_CorAux: Integer; //
+  vTamanhoAux: String; //
+  vItemAux: Integer; //
+  vPrecoAux: Real; //
+  vPerc_IpiAux, vPerc_ICMSAux: Real;
+  vCarimboAux, vCaixinhaAux: String;
+  vDtEntregaAux: TDateTime;
 begin
   vMSGAux := '';
   if (fDMCadPedido.cdsPedido_Itens.IsEmpty) or (fDMCadPedido.cdsPedido_ItensITEM.AsInteger <= 0) then
@@ -1322,7 +1322,7 @@ begin
   if (trim(fDMCadPedido.cdsPedidoImpEMAIL_COMPRAS.AsString) <> '') then
     vEmail_Fortes := fDMCadPedido.cdsPedidoImpEMAIL_COMPRAS.AsString;
   vEmail_Assunto_Fortes := 'Ordem de Compra N° ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
-  vEmail_Fortes_Corpo   := 'Em anexo Ordem de Compra N° ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
+  vEmail_Fortes_Corpo   := 'Em anexo Ordem de Compra  N° ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
   vTipo_Config_Email    := 4;
   vFilial               := fDMCadPedido.cdsPedidoImpFILIAL.AsInteger;
 

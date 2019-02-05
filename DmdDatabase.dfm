@@ -15,8 +15,8 @@ object dmDatabase: TdmDatabase
     Params.Strings = (
       'DriverName=Interbase'
       
-        'Database=localhost:C:\Delphi7\SSFacil\Clientes\fb2\RFGeradores.f' +
-        'db'
+        'Database=localhost:D:\Fontes\$Servisoft\Bases\SSFacil\SSFACIL.fd' +
+        'b'
       'RoleName=RoleName'
       'User_Name=sysdba'
       'Password=masterkey'

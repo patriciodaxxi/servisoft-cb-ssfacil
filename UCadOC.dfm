@@ -25,7 +25,7 @@ object frmCadOC: TfrmCadOC
     Top = 0
     Width = 1030
     Height = 690
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOC: TfrmCadOC
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -77,7 +77,7 @@ object frmCadOC: TfrmCadOC
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 15
+        ColCount = 13
         RowCount = 2
         Columns = <
           item
@@ -163,22 +163,6 @@ object frmCadOC: TfrmCadOC
             Expanded = False
             FieldName = 'ID'
             Title.Alignment = taCenter
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ID_CLIENTE'
-            Title.Alignment = taCenter
-            Title.Caption = 'ID Fornecedor'
-            Width = 60
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CNPJ_CPF'
-            Title.Alignment = taCenter
-            Title.Caption = 'CNPJ / CPF'
-            Width = 150
             Visible = True
           end>
       end
@@ -1954,13 +1938,11 @@ object frmCadOC: TfrmCadOC
                 Expanded = False
                 FieldName = 'QTD_FATURADO'
                 Title.Caption = 'Qtd. Entregue'
-                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_RESTANTE'
-                Width = 64
                 Visible = True
               end
               item
@@ -1995,21 +1977,16 @@ object frmCadOC: TfrmCadOC
                 FieldName = 'VLR_ICMS'
                 Title.Alignment = taCenter
                 Title.Caption = 'Complemento'
-                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_CANCELADO'
-                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'CANCELADO'
-                Width = 64
-<<<<<<< HEAD
-=======
                 Visible = True
               end
               item
@@ -2018,7 +1995,6 @@ object frmCadOC: TfrmCadOC
                 FieldName = 'ITEM_ORIGINAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Item Original'
->>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end>
           end
