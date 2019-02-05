@@ -146,6 +146,17 @@ type
     qCombinacao: TSQLQuery;
     qCombinacaoNOME: TStringField;
     cdsEstoque_AtualQTD_RESERVA: TFloatField;
+    sdsEstMov: TSQLDataSet;
+    dspEstMov: TDataSetProvider;
+    cdsEstMov: TClientDataSet;
+    dsEstMov: TDataSource;
+    cdsEstMovQTD: TFloatField;
+    cdsEstMovID_PRODUTO: TIntegerField;
+    cdsEstMovID_COR: TIntegerField;
+    cdsEstMovTAMANHO: TStringField;
+    qParametros_Est: TSQLQuery;
+    qParametros_EstINVENTARIO_ESTMOV: TStringField;
+    cdsProdutoQTD: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsInventarioNewRecord(DataSet: TDataSet);
     procedure dspInventarioUpdateError(Sender: TObject;
@@ -250,6 +261,7 @@ begin
   cdsFilial.Open;
   cdsEstoque_Atual.Open;
   qParametros.Open;
+  qParametros_Est.Open;
   cdsLocal_Estoque.Open;
 
   //*** Logs Implantado na versão .353
@@ -324,23 +336,33 @@ var
   vTam : String;
   vCor : Integer;
 begin
-  if (trim(cdsProdutoTAMANHO.AsString) = '') or (cdsProdutoTAMANHO.IsNull) then
-    vTam := ''
-  else
-    vTam := cdsProdutoTAMANHO.AsString;
-  if cdsProdutoID_COR_COMBINACAO.AsInteger > 0 then
-    vCor := cdsProdutoID_COR_COMBINACAO.AsInteger
-  else
-    vCor := 0;
-  if cdsEstoque_Atual.FindKey([cdsProdutoID.AsInteger,vTam,vCor]) then
-  begin
-    cdsProdutoclQtd.AsFloat       := StrToFloat(FormatFloat('0.0000',cdsEstoque_AtualQTD.AsFloat - cdsEstoque_AtualQTD_RESERVA.AsFloat));
-    cdsProdutoclQtd_Geral.AsFloat := StrToFloat(FormatFloat('0.0000',cdsEstoque_AtualQTD_GERAL.AsFloat));
-  end
+  cdsProdutoclQtd.AsFloat       := StrToFloat(FormatFloat('0.0000',0));
+  cdsProdutoclQtd_Geral.AsFloat := StrToFloat(FormatFloat('0.0000',0));
+  if qParametros_EstINVENTARIO_ESTMOV.AsString = 'S' then
+    cdsProdutoclQtd.AsFloat := StrToFloat(FormatFloat('0.0000',cdsProdutoQTD.AsFloat))
   else
   begin
-    cdsProdutoclQtd.AsFloat       := StrToFloat(FormatFloat('0.0000',0));
-    cdsProdutoclQtd_Geral.AsFloat := StrToFloat(FormatFloat('0.0000',0));
+    if (trim(cdsProdutoTAMANHO.AsString) = '') or (cdsProdutoTAMANHO.IsNull) then
+      vTam := ''
+    else
+      vTam := cdsProdutoTAMANHO.AsString;
+    if cdsProdutoID_COR_COMBINACAO.AsInteger > 0 then
+      vCor := cdsProdutoID_COR_COMBINACAO.AsInteger
+    else
+      vCor := 0;
+    if qParametros_EstINVENTARIO_ESTMOV.AsString = 'S' then
+    begin
+      if cdsEstMov.FindKey([cdsProdutoID.AsInteger,vTam,vCor]) then
+        cdsProdutoclQtd.AsFloat := StrToFloat(FormatFloat('0.0000',cdsEstMovQTD.AsFloat));
+    end
+    else
+    begin
+      if cdsEstoque_Atual.FindKey([cdsProdutoID.AsInteger,vTam,vCor]) then
+      begin
+        cdsProdutoclQtd.AsFloat       := StrToFloat(FormatFloat('0.0000',cdsEstoque_AtualQTD.AsFloat - cdsEstoque_AtualQTD_RESERVA.AsFloat));
+        cdsProdutoclQtd_Geral.AsFloat := StrToFloat(FormatFloat('0.0000',cdsEstoque_AtualQTD_GERAL.AsFloat));
+      end;
+    end;
   end;
 end;
 

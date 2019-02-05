@@ -1179,8 +1179,8 @@ object DMConsEstoque: TDMConsEstoque
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42032.577038136600000000
-    ReportOptions.LastChange = 43487.008498310200000000
+    ReportOptions.CreateDate = 43500.689950381900000000
+    ReportOptions.LastChange = 43500.870602870370000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -3254,13 +3254,16 @@ object DMConsEstoque: TDMConsEstoque
       'SELECT PRO.ID, SUM(coalesce(EA.qtd,0)) QTD,'#13#10'EA.id_cor, EA.taman' +
       'ho, EA.id_local_estoque, PRO.NOME NOME_PRODUTO, PRO.REFERENCIA,'#13 +
       #10'COMB.NOME NOME_COMBINACAO, PRO.localizacao, SUM(coalesce(ER.qtd' +
-      ',0)) QTD_RESERVA,'#13#10'PRO.qtd_estoque_min'#13#10'FROM ESTOQUE_ATUAL EA'#13#10'I' +
-      'NNER JOIN PRODUTO PRO'#13#10'ON EA.id_produto = PRO.ID'#13#10'LEFT JOIN COMB' +
-      'INACAO COMB'#13#10'ON EA.ID_COR = COMB.ID'#13#10'left join estoque_res ER'#13#10'O' +
-      'N EA.id_produto = ER.id_produto'#13#10'AND EA.id_cor = ER.ID_COR'#13#10'AND ' +
-      'EA.tamanho = ER.TAMANHO'#13#10'AND EA.FILIAL = ER.filial'#13#10'GROUP BY EA.' +
-      'id_cor, EA.tamanho, EA.id_local_estoque, PRO.NOME, PRO.REFERENCI' +
-      'A,'#13#10'COMB.NOME, PRO.localizacao, PRO.ID, PRO.qtd_estoque_min'#13#10
+      ',0)) QTD_RESERVA,'#13#10'PRO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM,' +
+      ' NCM.NCM, NCM.NOME NOME_NCM'#13#10'FROM ESTOQUE_ATUAL EA'#13#10'INNER JOIN P' +
+      'RODUTO PRO'#13#10'ON EA.id_produto = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB' +
+      #13#10'ON EA.ID_COR = COMB.ID'#13#10'LEFT JOIN TAB_NCM NCM'#13#10'ON PRO.ID_NCM =' +
+      ' NCM.ID'#13#10'left join estoque_res ER'#13#10'ON EA.id_produto = ER.id_prod' +
+      'uto'#13#10'AND EA.id_cor = ER.ID_COR'#13#10'AND EA.tamanho = ER.TAMANHO'#13#10'AND' +
+      ' EA.FILIAL = ER.filial'#13#10'GROUP BY EA.id_cor, EA.tamanho, EA.id_lo' +
+      'cal_estoque, PRO.NOME, PRO.REFERENCIA,'#13#10'COMB.NOME, PRO.localizac' +
+      'ao, PRO.ID, PRO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM,'#13#10'NCM.N' +
+      'CM, NCM.NOME'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3325,6 +3328,21 @@ object DMConsEstoque: TDMConsEstoque
     object cdsEstoque_AtualQTD_ESTOQUE_MIN: TFloatField
       FieldName = 'QTD_ESTOQUE_MIN'
       DisplayFormat = '#'
+    end
+    object cdsEstoque_AtualUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object cdsEstoque_AtualID_NCM: TIntegerField
+      FieldName = 'ID_NCM'
+    end
+    object cdsEstoque_AtualNCM: TStringField
+      FieldName = 'NCM'
+      Size = 10
+    end
+    object cdsEstoque_AtualNOME_NCM: TStringField
+      FieldName = 'NOME_NCM'
+      Size = 250
     end
   end
   object dsEstoque_Atual: TDataSource
@@ -3516,5 +3534,89 @@ object DMConsEstoque: TDMConsEstoque
     BCDToCurrency = False
     Left = 736
     Top = 568
+  end
+  object frxEstoque_Atual: TfrxDBDataset
+    UserName = 'frxEstoque_Atual'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'QTD=QTD'
+      'ID_COR=ID_COR'
+      'TAMANHO=TAMANHO'
+      'ID_LOCAL_ESTOQUE=ID_LOCAL_ESTOQUE'
+      'NOME_PRODUTO=NOME_PRODUTO'
+      'REFERENCIA=REFERENCIA'
+      'NOME_COMBINACAO=NOME_COMBINACAO'
+      'ID=ID'
+      'LOCALIZACAO=LOCALIZACAO'
+      'QTD_RESERVA=QTD_RESERVA'
+      'QTD_ESTOQUE_MIN=QTD_ESTOQUE_MIN'
+      'UNIDADE=UNIDADE')
+    DataSource = dsEstoque_Atual
+    BCDToCurrency = False
+    Left = 800
+    Top = 568
+  end
+  object mNCM: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 912
+    Top = 552
+    Data = {
+      660000009619E0BD01000000180000000400000000000300000066000649445F
+      4E434D0400010000000000034E434D0100490000000100055749445448020002
+      000800044E6F6D650100490000000100055749445448020002003C0003517464
+      08000400000000000000}
+    object mNCMID_NCM: TIntegerField
+      FieldName = 'ID_NCM'
+    end
+    object mNCMNCM: TStringField
+      FieldName = 'NCM'
+      Size = 8
+    end
+    object mNCMNome: TStringField
+      FieldName = 'Nome'
+      Size = 60
+    end
+    object mNCMQtd: TFloatField
+      FieldName = 'Qtd'
+    end
+  end
+  object dsmNCM: TDataSource
+    DataSet = mNCM
+    Left = 960
+    Top = 552
+  end
+  object frxmNCM: TfrxDBDataset
+    UserName = 'frxmNCM'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID_NCM=ID_NCM'
+      'NCM=NCM'
+      'Nome=Nome'
+      'Qtd=Qtd')
+    DataSource = dsmNCM
+    BCDToCurrency = False
+    Left = 856
+    Top = 568
+  end
+  object mUnidade: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 1016
+    Top = 552
+    Data = {
+      360000009619E0BD010000001800000001000000000003000000360007556E69
+      6461646501004900000001000557494454480200020006000000}
+    object mUnidadeUnidade: TStringField
+      FieldName = 'Unidade'
+      Size = 6
+    end
+  end
+  object dsmUnidade: TDataSource
+    DataSet = mUnidade
+    Left = 1056
+    Top = 552
   end
 end

@@ -272,20 +272,21 @@ object DMCadInventario: TDMCadInventario
     GetMetadata = False
     CommandText = 
       'SELECT PT.TAMANHO, PRO.*, GR.NOME NOME_GRUPO, PC.NOME NOME_COR, ' +
-      'PC.id_cor_combinacao'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO_TAM PT' +
-      #13#10'ON PRO.ID = PT.ID'#13#10'LEFT JOIN PRODUTO_COMB PC'#13#10'ON PRO.ID = PC.I' +
-      'D'#13#10'LEFT JOIN GRUPO GR'#13#10'ON PRO.ID_GRUPO = GR.ID'#13#10'WHERE PRO.INATIV' +
-      'O = '#39'N'#39#13#10'      AND PRO.ESTOQUE = '#39'S'#39#13#10#13#10
+      'PC.id_cor_combinacao, CAST (0.0000 as Float) QTD'#13#10'FROM PRODUTO P' +
+      'RO'#13#10'LEFT JOIN PRODUTO_TAM PT'#13#10'ON PRO.ID = PT.ID'#13#10'LEFT JOIN PRODU' +
+      'TO_COMB PC'#13#10'ON PRO.ID = PC.ID'#13#10'LEFT JOIN GRUPO GR'#13#10'ON PRO.ID_GRU' +
+      'PO = GR.ID'#13#10'WHERE PRO.INATIVO = '#39'N'#39#13#10'      AND PRO.ESTOQUE = '#39'S'#39 +
+      #13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 488
-    Top = 192
+    Left = 512
+    Top = 160
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
-    Left = 520
-    Top = 192
+    Left = 544
+    Top = 160
   end
   object cdsProduto: TClientDataSet
     Aggregates = <>
@@ -293,8 +294,8 @@ object DMCadInventario: TDMCadInventario
     Params = <>
     ProviderName = 'dspProduto'
     OnCalcFields = cdsProdutoCalcFields
-    Left = 560
-    Top = 192
+    Left = 584
+    Top = 160
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -349,11 +350,15 @@ object DMCadInventario: TDMCadInventario
       FieldName = 'clQtd_Geral'
       Calculated = True
     end
+    object cdsProdutoQTD: TFloatField
+      FieldName = 'QTD'
+      Required = True
+    end
   end
   object dsProduto: TDataSource
     DataSet = cdsProduto
-    Left = 600
-    Top = 192
+    Left = 624
+    Top = 160
   end
   object sdsInventario_Consulta: TSQLDataSet
     NoMetadata = True
@@ -584,7 +589,7 @@ object DMCadInventario: TDMCadInventario
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
     Left = 384
-    Top = 240
+    Top = 176
     object qParametrosINFORMAR_COR_MATERIAL: TStringField
       FieldName = 'INFORMAR_COR_MATERIAL'
       FixedChar = True
@@ -723,6 +728,83 @@ object DMCadInventario: TDMCadInventario
     object qCombinacaoNOME: TStringField
       FieldName = 'NOME'
       Size = 60
+    end
+  end
+  object sdsEstMov: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT SUM(E.qtd2) QTD , E.ID_PRODUTO,'#13#10'CASE'#13#10'  WHEN E.ID_COR IS' +
+      ' NULL THEN 0'#13#10'  ELSE E.ID_COR'#13#10'  END ID_COR,'#13#10'CASE'#13#10'  WHEN E.TAM' +
+      'ANHO IS NULL THEN '#39#39#13#10'  ELSE E.TAMANHO'#13#10'  END TAMANHO'#13#10'FROM esto' +
+      'que_mov  E'#13#10'WHERE E.filial = :FILIAL'#13#10'  AND E.id_local_estoque =' +
+      ' :ID_LOCAL_ESTOQUE'#13#10'  AND E.dtmovimento <= :DATA'#13#10'GROUP BY E.ID_' +
+      'PRODUTO, id_cor, tamanho'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_LOCAL_ESTOQUE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 480
+    Top = 456
+  end
+  object dspEstMov: TDataSetProvider
+    DataSet = sdsEstMov
+    Left = 512
+    Top = 456
+  end
+  object cdsEstMov: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID_PRODUTO;TAMANHO;ID_COR'
+    Params = <>
+    ProviderName = 'dspEstMov'
+    Left = 552
+    Top = 456
+    object cdsEstMovQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsEstMovID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsEstMovID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object cdsEstMovTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+  end
+  object dsEstMov: TDataSource
+    DataSet = cdsEstMov
+    Left = 592
+    Top = 456
+  end
+  object qParametros_Est: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT INVENTARIO_ESTMOV'
+      'FROM PARAMETROS_EST')
+    SQLConnection = dmDatabase.scoDados
+    Left = 384
+    Top = 224
+    object qParametros_EstINVENTARIO_ESTMOV: TStringField
+      FieldName = 'INVENTARIO_ESTMOV'
+      FixedChar = True
+      Size = 1
     end
   end
 end

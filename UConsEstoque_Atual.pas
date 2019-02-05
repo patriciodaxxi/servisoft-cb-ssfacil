@@ -28,6 +28,11 @@ type
     TS_EmTerceiros: TRzTabSheet;
     SMDBGrid2: TSMDBGrid;
     SMDBGrid3: TSMDBGrid;
+    btnImprimir: TNxButton;
+    TS_NCM: TRzTabSheet;
+    SMDBGrid4: TSMDBGrid;
+    SMDBGrid5: TSMDBGrid;
+    Panel3: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -42,17 +47,21 @@ type
       Shift: TShiftState);
     procedure SMDBGrid2TitleClick(Column: TColumn);
     procedure SMDBGrid3TitleClick(Column: TColumn);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
     ColunaOrdenada: String;
     ffrmConsProduto_Pes: TfrmConsProduto_Pes;
     ffrmConsEstoque_Mov : TfrmConsEstoque_Mov;
+    vOpcaoImp : String;
 
     procedure prc_Consultar;
     procedure prc_Consultar_DeTerceiros;
     procedure prc_Consultar_EmTerceiros;
     procedure prc_Chamar_Sel_Produto(Tipo: String);
+    procedure prc_Monta_Cab;
+    procedure prc_Monta_mNCM;
 
   public
     { Public declarations }
@@ -176,8 +185,12 @@ begin
     fDMConsEstoque.cdsEstoque_Atual.IndexFieldNames := 'NOME_PRODUTO;NOME_COMBINACAO;TAMANHO'
   else
     fDMConsEstoque.cdsEstoque_Atual.IndexFieldNames := 'NOME_PRODUTO';
-  if RzPageControl1.ActivePage = TS_Estoque then
-    prc_Consultar
+  if (RzPageControl1.ActivePage = TS_Estoque) or (RzPageControl1.ActivePage = TS_NCM) then
+  begin
+    prc_Consultar;
+    if (RzPageControl1.ActivePage = TS_NCM) then
+      prc_Monta_mNCM;
+  end
   else
   if RzPageControl1.ActivePage = TS_DeTerceiros then
     prc_Consultar_DeTerceiros
@@ -280,6 +293,89 @@ begin
   for i := 0 to SMDBGrid3.Columns.Count - 1 do
     if not (SMDBGrid3.Columns.Items[I] = Column) then
       SMDBGrid3.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmConsEstoque_Atual.btnImprimirClick(Sender: TObject);
+var
+  vArq: string;
+begin
+  if (RzPageControl1.ActivePage = TS_Estoque) then
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Estoque_Atual.fr3'
+  else
+  if (RzPageControl1.ActivePage = TS_NCM) then
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Estoque_NCM.fr3'
+  else
+    exit;
+  prc_Monta_Cab;
+  if FileExists(vArq) then
+    fDMConsEstoque.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatorio não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMConsEstoque.frxReport1.variables['ImpOpcao'] := QuotedStr(vOpcaoImp);
+  fDMConsEstoque.frxReport1.ShowReport;
+end;
+
+procedure TfrmConsEstoque_Atual.prc_Monta_Cab;
+begin
+  vOpcaoImp := '';
+  vOpcaoImp := '';
+  case RadioGroup1.ItemIndex of
+    0: vOpcaoImp := vOpcaoImp + '(Com Saldo)';
+    1: vOpcaoImp := vOpcaoImp + '(Negativo)';
+    2: vOpcaoImp := vOpcaoImp + '(Mínimo)';
+  end;
+  case RadioGroup2.ItemIndex of
+    0: vOpcaoImp := vOpcaoImp + '(Produto)';
+    1: vOpcaoImp := vOpcaoImp + '(Material)';
+    2: vOpcaoImp := vOpcaoImp + '(Material Consumo)';
+    3: vOpcaoImp := vOpcaoImp + '(Semi Acabado)';
+  end;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    vOpcaoImp := vOpcaoImp + '(Filial: ' + RxDBLookupCombo1.Text + ')';
+  if trim(edtRef.Text) <> '' then
+    vOpcaoImp := vOpcaoImp + '(Ref: ' + edtRef.Text + ')';
+  if ceIDProduto.AsInteger > 0 then
+    vOpcaoImp := vOpcaoImp + '(ID Produto: ' + ceIDProduto.Text + ')';
+end;
+
+procedure TfrmConsEstoque_Atual.prc_Monta_mNCM;
+begin
+  SMDBGrid4.DisableScroll;
+  fDMConsEstoque.mNCM.EmptyDataSet;
+  fDMConsEstoque.mUnidade.EmptyDataSet;
+  fDMConsEstoque.cdsEstoque_Atual.First;
+  while not fDMConsEstoque.cdsEstoque_Atual.Eof do
+  begin
+    if StrToFloat(FormatFloat('0.0000',fDMConsEstoque.cdsEstoque_AtualQTD.AsFloat)) > 0 then
+    begin
+      if not fDMConsEstoque.mUnidade.Locate('Unidade',fDMConsEstoque.cdsEstoque_AtualUNIDADE.AsString,[loCaseInsensitive]) then
+      begin
+        fDMConsEstoque.mUnidade.Insert;
+        fDMConsEstoque.mUnidadeUnidade.AsString := fDMConsEstoque.cdsEstoque_AtualUNIDADE.AsString;
+        fDMConsEstoque.mUnidade.Post;
+      end;
+      if fDMConsEstoque.mNCM.Locate('ID_NCM',fDMConsEstoque.cdsEstoque_AtualID_NCM.AsInteger,[loCaseInsensitive]) then
+       fDMConsEstoque.mNCM.Edit
+       else
+      begin
+        fDMConsEstoque.mNCM.Insert;
+        fDMConsEstoque.mNCMID_NCM.AsInteger := fDMConsEstoque.cdsEstoque_AtualID_NCM.AsInteger;
+        fDMConsEstoque.mNCMNCM.AsString     := fDMConsEstoque.cdsEstoque_AtualNCM.AsString;
+        if trim(fDMConsEstoque.cdsEstoque_AtualNOME_NCM.AsString) <> '' then
+          fDMConsEstoque.mNCMNome.AsString := fDMConsEstoque.cdsEstoque_AtualNOME_NCM.AsString
+        else
+          fDMConsEstoque.mNCMNome.AsString := fDMConsEstoque.cdsEstoque_AtualNOME_PRODUTO.AsString;
+        fDMConsEstoque.mNCMQtd.AsFloat := 0;
+      end;
+      fDMConsEstoque.mNCMQtd.AsFloat := StrToFloat(FormatFloat('0.00',fDMConsEstoque.mNCMQtd.AsFloat + fDMConsEstoque.cdsEstoque_AtualQTD.AsFloat));
+      fDMConsEstoque.mNCM.Post;
+    end;
+    fDMConsEstoque.cdsEstoque_Atual.Next;
+  end;
+  SMDBGrid4.EnableScroll;
 end;
 
 end.

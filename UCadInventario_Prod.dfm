@@ -30,9 +30,9 @@ object frmCadInventario_Prod: TfrmCadInventario_Prod
       Caption = 'Produto'
       object SMDBGrid1: TSMDBGrid
         Left = 0
-        Top = 34
+        Top = 78
         Width = 999
-        Height = 500
+        Height = 456
         Align = alClient
         Ctl3D = False
         DataSource = DMCadInventario.dsProduto
@@ -147,7 +147,7 @@ object frmCadInventario_Prod: TfrmCadInventario_Prod
         Left = 0
         Top = 0
         Width = 999
-        Height = 34
+        Height = 37
         Align = alTop
         Color = 8404992
         TabOrder = 1
@@ -231,6 +231,37 @@ object frmCadInventario_Prod: TfrmCadInventario_Prod
           Height = 17
           TabOrder = 1
           Visible = False
+        end
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 37
+        Width = 999
+        Height = 41
+        Align = alTop
+        Color = clSilver
+        TabOrder = 2
+        object NxButton3: TNxButton
+          Left = 264
+          Top = 8
+          Width = 75
+          Caption = 'Filtrar'
+          TabOrder = 0
+          OnClick = NxButton3Click
+        end
+        object RadioGroup1: TRadioGroup
+          Left = 7
+          Top = 1
+          Width = 251
+          Height = 32
+          Caption = ' Op'#231#227'o '
+          Columns = 3
+          ItemIndex = 0
+          Items.Strings = (
+            'Ambos'
+            'Com Saldo'
+            'Negativo')
+          TabOrder = 1
         end
       end
     end

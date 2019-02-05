@@ -967,6 +967,7 @@ object frmCadInventario: TfrmCadInventario
           DataSource = DMCadInventario.dsInventario
           NumGlyphs = 2
           TabOrder = 1
+          OnEnter = DBDateEdit1Enter
         end
         object DBEdit3: TDBEdit
           Left = 680

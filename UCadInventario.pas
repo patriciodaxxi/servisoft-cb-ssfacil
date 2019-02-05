@@ -91,6 +91,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnLiberaGridClick(Sender: TObject);
+    procedure DBDateEdit1Enter(Sender: TObject);
   private
     { Private declarations }
     fDMCadInventario: TDMCadInventario;
@@ -109,6 +110,7 @@ type
     procedure prc_Abrir_Produto(Tipo_Reg: String);
     procedure prc_Le_CFOP_Orig;
     procedure prc_Abrir_Estoque_Atual;
+    procedure prc_Abrir_EstMov;
     procedure prc_Le_Itens;
 
     procedure prc_Habilita;
@@ -426,7 +428,7 @@ begin
         exit;
       fDMCadInventario.cdsInventario_Itens.Close;
       fDMCadInventario.cdsInventario_Itens.Open;
-      prc_Abrir_Produto(fDMCadInventario.cdsInventarioTipo_Reg.AsString);
+      //prc_Abrir_Produto(fDMCadInventario.cdsInventarioTipo_Reg.AsString);
     end;
   end;
 end;
@@ -459,8 +461,11 @@ begin
     exit;
     RxDBComboBox6.SetFocus;
   end;
+  if fDMCadInventario.qParametros_EstINVENTARIO_ESTMOV.AsString = 'S' then
+    prc_Abrir_EstMov
+  else
+    prc_Abrir_Estoque_Atual;
   prc_Abrir_Produto(fDMCadInventario.cdsInventarioTIPO_REG.AsString);
-  prc_Abrir_Estoque_Atual;
 
   ffrmCadInventario_Prod := TfrmCadInventario_Prod.Create(self);
   ffrmCadInventario_Prod.fDMCadInventario := fDMCadInventario;
@@ -472,8 +477,43 @@ procedure TfrmCadInventario.prc_Abrir_Produto(Tipo_Reg: String);
 begin
   fDMCadInventario.cdsProduto.Close;
   fDMCadInventario.cdsProduto.IndexFieldNames := 'NOME;NOME_COR;TAMANHO';
-  fDMCadInventario.sdsProduto.CommandText := fDMCadInventario.ctProduto
-                                           + ' AND PRO.TIPO_REG = ' + QuotedStr(Tipo_Reg);
+  if fDMCadInventario.qParametros_EstINVENTARIO_ESTMOV.AsString = 'S' then
+  begin
+    fDMCadInventario.sdsProduto.CommandText := 'SELECT AUX.*, (SELECT SUM(EM.QTD2) QTD  FROM ESTOQUE_MOV EM '
+                                             + ' where EM.filial = :FILIAL '
+                                             + '  AND EM.id_local_estoque = :ID_LOCAL_ESTOQUE '
+                                             + '  AND EM.dtmovimento <= :DATA '
+                                             + '  AND EM.ID_PRODUTO = AUX.ID '
+                                             + '  AND EM.ID_COR = AUX.ID_COR_COMBINACAO '
+                                             + '  AND EM.TAMANHO = AUX.TAMANHO) QTD'
+                                             + '  FROM ('
+                                             + '  SELECT PRO.ID, PRO.REFERENCIA, PRO.nome, PRO.INATIVO, PRO.perc_ipi,'
+                                             + '  PRO.preco_custo, PRO.preco_venda, PRO.unidade, GR.NOME NOME_GRUPO,'
+                                             + '  PC.NOME NOME_COR,'
+                                             + '  CASE'
+                                             + ' WHEN PT.TAMANHO IS NULL THEN ' + QuotedStr('')
+                                             + ' ELSE PT.TAMANHO '
+                                             + '   END TAMANHO, '
+                                             + ' CASE'
+                                             + '   WHEN PC.ID_COR_COMBINACAO IS NULL THEN 0'
+                                             + '   ELSE PC.id_cor_combinacao'
+                                             + '   END ID_COR_COMBINACAO'
+                                             + ' FROM PRODUTO PRO'
+                                             + ' LEFT JOIN PRODUTO_TAM PT'
+                                             + ' ON PRO.ID = PT.ID'
+                                             + ' LEFT JOIN PRODUTO_COMB PC'
+                                             + ' ON PRO.ID = PC.ID'
+                                             + ' LEFT JOIN GRUPO GR'
+                                             + ' ON PRO.ID_GRUPO = GR.ID'
+                                             + ' WHERE PRO.INATIVO = ' + QuotedStr('N')
+                                             + ' AND PRO.ESTOQUE = ' + QuotedStr('S')
+                                             + ' AND PRO.TIPO_REG = ' + QuotedStr(Tipo_Reg) + ') AUX';
+    fDMCadInventario.sdsProduto.ParamByName('FILIAL').AsInteger           := fDMCadInventario.cdsInventarioFILIAL.AsInteger;
+    fDMCadInventario.sdsProduto.ParamByName('ID_LOCAL_ESTOQUE').AsInteger := fDMCadInventario.cdsInventarioID_LOCAL_ESTOQUE.AsInteger;
+    fDMCadInventario.sdsProduto.ParamByName('DATA').AsDate                := fDMCadInventario.cdsInventarioDATA.AsDateTime;
+  end
+  else
+    fDMCadInventario.sdsProduto.CommandText := fDMCadInventario.ctProduto + ' AND PRO.TIPO_REG = ' + QuotedStr(Tipo_Reg);
   fDMCadInventario.cdsProduto.Open;
 end;
 
@@ -561,7 +601,7 @@ begin
     end;
     fDMCadInventario.cdsInventario_Itens.Next;
   end;
-  
+
   fDMCadInventario.mExcluir.First;
   while not fDMCadInventario.mExcluir.Eof do
   begin
@@ -624,6 +664,20 @@ begin
       or (SMDBGrid2.Columns[i].FieldName = 'VLR_UNITARIO') then
       SMDBGrid2.Columns[i].ReadOnly := not(SMDBGrid2.Columns[i].ReadOnly);
   end;
+end;
+
+procedure TfrmCadInventario.prc_Abrir_EstMov;
+begin
+  fDMCadInventario.cdsEstMov.Close;
+  fDMCadInventario.sdsEstMov.ParamByName('FILIAL').AsInteger           := fDMCadInventario.cdsInventarioFILIAL.AsInteger;
+  fDMCadInventario.sdsEstMov.ParamByName('ID_LOCAL_ESTOQUE').AsInteger := fDMCadInventario.cdsInventarioID_LOCAL_ESTOQUE.AsInteger;
+  fDMCadInventario.sdsEstMov.ParamByName('DATA').AsDate                := fDMCadInventario.cdsInventarioDATA.AsDateTime;
+  fDMCadInventario.cdsEstMov.Open;
+end;
+
+procedure TfrmCadInventario.DBDateEdit1Enter(Sender: TObject);
+begin
+  DBDateEdit1.ReadOnly := ((fDMCadInventario.qParametros_EstINVENTARIO_ESTMOV.AsString = 'S') and (fDMCadInventario.cdsInventario_Itens.RecordCount > 0));
 end;
 
 end.

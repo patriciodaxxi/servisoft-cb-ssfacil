@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMCadInventario, Grids, DBGrids,
-  SMDBGrid, ExtCtrls, NxCollection, ComCtrls;
+  SMDBGrid, ExtCtrls, NxCollection, ComCtrls, StdCtrls;
 
 type
   TfrmCadInventario_Prod = class(TForm)
@@ -14,9 +14,13 @@ type
     Panel1: TPanel;
     btnConfirmar: TNxButton;
     ProgressBar1: TProgressBar;
+    Panel2: TPanel;
+    NxButton3: TNxButton;
+    RadioGroup1: TRadioGroup;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConfirmarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure NxButton3Click(Sender: TObject);
   private
     { Private declarations }
     procedure prc_Gravar_Itens;    
@@ -37,6 +41,7 @@ uses DB, rsDBUtils;
 procedure TfrmCadInventario_Prod.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  fDMCadInventario.cdsProduto.Filtered := False;
   Action := Cafree;
 end;
 
@@ -118,7 +123,22 @@ begin
     else
     if (SMDBGrid1.Columns[i].FieldName = 'clQtd_Geral') then
       SMDBGrid1.Columns[i].Visible := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
-  end;                 
+  end;
+  Panel2.Visible := (fDMCadInventario.qParametros_EstINVENTARIO_ESTMOV.AsString = 'S');
+end;
+
+procedure TfrmCadInventario_Prod.NxButton3Click(Sender: TObject);
+begin
+  fDMCadInventario.cdsProduto.Filtered := False;
+  if RadioGroup1.ItemIndex > 0 then
+  begin
+    if RadioGroup1.ItemIndex = 1 then
+      fDMCadInventario.cdsProduto.Filter   := 'QTD > 0'
+    else
+    if RadioGroup1.ItemIndex = 2 then
+      fDMCadInventario.cdsProduto.Filter   := 'QTD < 0';
+    fDMCadInventario.cdsProduto.Filtered := True;
+  end;
 end;
 
 end.
