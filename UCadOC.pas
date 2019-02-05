@@ -867,7 +867,7 @@ begin
     fDMCadPedido.cdsPedidoLOCALENTREGA.AsString := 'E';
   fDMCadPedido.cdsPedidoID_TRANSPORTADORA.AsInteger := fDMCadPedido.cdsClienteID_TRANSPORTADORA.AsInteger;
   fDMCadPedido.cdsPedidoID_REDESPACHO.AsInteger     := fDMCadPedido.cdsClienteID_REDESPACHO.AsInteger;
-  if fDMCadPedido.cdsClienteID_CONDPGTO.AsInteger > 0 then
+  if (fDMCadPedido.cdsClienteID_CONDPGTO.AsInteger > 0) and (fDMCadPedido.cdsPedidoID_CONDPGTO.IsNull) then
     fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger := fDMCadPedido.cdsClienteID_CONDPGTO.AsInteger;
 end;
 

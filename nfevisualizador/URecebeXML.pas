@@ -2757,22 +2757,23 @@ begin
     dmDatabase.scoDados.Commit(ID);
 
     ShowMessage('Nota gerada!');
+    DateEdit1.Clear;
 
     ceVlrFrete_Nota.Value := 0;
 
     fDMRecebeXML.cdsCabecalho.Close;
 
     if vCodFornecedor > 0 then
-       begin
-         if (not vImportar_NotaSaida) and (fDMRecebeXML.qParametros_RecXMLUSA_DIRETORIO_COPIADO.asString <> 'N') then
-           prc_Copiar_Arquivo;
-       end;
+    begin
+      if (not vImportar_NotaSaida) and (fDMRecebeXML.qParametros_RecXMLUSA_DIRETORIO_COPIADO.asString <> 'N') then
+        prc_Copiar_Arquivo;
+    end;
 
   except
     on e: Exception do
     begin
       dmDatabase.scoDados.Rollback(ID);
-      vErro      := e.Message;
+      vErro := e.Message;
       Raise Exception.Create('Ocorreu o seguinte erro ao executar: ' + #13 + vErro);
     end
   end;
@@ -2783,7 +2784,7 @@ end;
 
 procedure TfrmRecebeXML.btnAbrirXMLClick(Sender: TObject);
 var
-  vArquivoAux, vPath, vFile : String;
+  vArquivoAux, vPath, vFile: String;
   vFlag: Boolean;
   i: Integer;
   oNFe: TStrings;
@@ -3194,8 +3195,7 @@ begin
     begin
       Raise Exception.Create('Ocorreu o seguinte erro ao gravar a tabela de Produto_Uni: ' + #13 + e.Message);
     end
-  end;
-
+  end;                         
 end;
 
 procedure TfrmRecebeXML.btnConfirmarClick(Sender: TObject);

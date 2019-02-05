@@ -1836,7 +1836,7 @@ object frmCadOC: TfrmCadOC
         Top = 205
         Width = 1026
         Height = 406
-        ActivePage = RzTabSheet1
+        ActivePage = RzTabSheet2
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -1844,7 +1844,7 @@ object frmCadOC: TfrmCadOC
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -1938,11 +1938,13 @@ object frmCadOC: TfrmCadOC
                 Expanded = False
                 FieldName = 'QTD_FATURADO'
                 Title.Caption = 'Qtd. Entregue'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_RESTANTE'
+                Width = 64
                 Visible = True
               end
               item
@@ -1977,16 +1979,19 @@ object frmCadOC: TfrmCadOC
                 FieldName = 'VLR_ICMS'
                 Title.Alignment = taCenter
                 Title.Caption = 'Complemento'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_CANCELADO'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'CANCELADO'
+                Width = 64
                 Visible = True
               end
               item
