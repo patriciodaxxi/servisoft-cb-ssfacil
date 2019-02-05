@@ -2008,6 +2008,8 @@ object frmCadOC: TfrmCadOC
                 Expanded = False
                 FieldName = 'CANCELADO'
                 Width = 64
+<<<<<<< HEAD
+=======
                 Visible = True
               end
               item
@@ -2016,6 +2018,7 @@ object frmCadOC: TfrmCadOC
                 FieldName = 'ITEM_ORIGINAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Item Original'
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end>
           end

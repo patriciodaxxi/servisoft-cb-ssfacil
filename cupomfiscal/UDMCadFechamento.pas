@@ -896,10 +896,15 @@ begin
   cdsFechamentoVLR_INFORMADO.AsFloat  := StrToFloat(FormatFloat('0.00',vVlrInformado));
   cdsFechamentoVLR_DIFERENCA.AsFloat  := StrToFloat(FormatFloat('0.00',vVlrDiferenca));
 
-  if StrToFloat(FormatFloat('0.00',cdsFechamentoVLR_DIFERENCA.AsFloat)) <> 0 then
-    cdsFechamentoTIPO_FECHAMENTO.AsString := 'E'
-  else
-    cdsFechamentoTIPO_FECHAMENTO.AsString := 'S';
+
+  if (cdsFechamentoTIPO_FECHAMENTO.AsString = 'S') or
+     (cdsFechamentoTIPO_FECHAMENTO.AsString = 'E') then
+  begin
+    if StrToFloat(FormatFloat('0.00',cdsFechamentoVLR_DIFERENCA.AsFloat)) <> 0 then
+      cdsFechamentoTIPO_FECHAMENTO.AsString := 'E'
+    else
+      cdsFechamentoTIPO_FECHAMENTO.AsString := 'S';
+  end;
 end;
 
 procedure TDMCadFechamento.prc_Imprime_FechamentoW(vID: Integer); //com write

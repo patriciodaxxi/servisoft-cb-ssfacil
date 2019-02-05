@@ -1596,4 +1596,12 @@ object fCupomFiscal: TfCupomFiscal
     Left = 361
     Top = 614
   end
+  object ACBrBAL1: TACBrBAL
+    Porta = 'COM1'
+    Intervalo = 2000
+    Device.Baud = 2400
+    OnLePeso = ACBrBAL1LePeso
+    Left = 352
+    Top = 56
+  end
 end

@@ -115,7 +115,11 @@ AutoIncBuild=0
 MajorVer=1
 MinorVer=4
 Release=0
+<<<<<<< HEAD
+Build=31
+=======
 Build=33
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
 Debug=0
 PreRelease=0
 Special=0
@@ -124,9 +128,15 @@ DLL=0
 Locale=1046
 CodePage=1252
 [Version Info Keys]
+<<<<<<< HEAD
+CompanyName=Servisoft Info. Ltda.
+FileDescription=Cupom Fiscal - Varejo
+FileVersion=1.4.0.31
+=======
 CompanyName=
 FileDescription=
 FileVersion=1.4.0.33
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
 InternalName=
 LegalCopyright=
 LegalTrademarks=

@@ -241,6 +241,10 @@ type
     RecibodePagamento1: TMenuItem;
     SaldoClienteFornecedor1: TMenuItem;
     Carn1: TMenuItem;
+<<<<<<< HEAD
+    ransfernciadeICMS1: TMenuItem;
+=======
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
     Label65: TLabel;
     ComboNossoNumero: TNxComboBox;
     RzPageControl2: TRzPageControl;
@@ -333,6 +337,10 @@ type
     procedure RecibodePagamento1Click(Sender: TObject);
     procedure SaldoClienteFornecedor1Click(Sender: TObject);
     procedure Carn1Click(Sender: TObject);
+<<<<<<< HEAD
+    procedure ransfernciadeICMS1Click(Sender: TObject);
+=======
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
     procedure RzGroupBox4Enter(Sender: TObject);
     procedure btnGerarCCustoClick(Sender: TObject);
   private
@@ -682,7 +690,11 @@ begin
   DBDateEdit4.Enabled  := (fDMCadDuplicata.qParametros_UsuarioPERMITE_APROVAR_DUP.AsString = 'S');
   if (fDMCadDuplicata.qParametros_FinUSA_APROVA_DUP.AsString = 'S') then
     btnOpcao.Enabled := (fDMCadDuplicata.qParametros_UsuarioPERMITE_APROVAR_DUP.AsString = 'S');
+<<<<<<< HEAD
+  TS_CCusto.TabVisible   := (fDMCadDuplicata.qParametros_FinUSA_CCUSTO_DU.AsString = 'S');
+=======
   TS_CCusto.TabVisible   := (fDMCadDuplicata.qParametros_FinUSA_CCUSTO_DUP.AsString = 'S');
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
   if TS_CCusto.TabVisible then
     RzPageControl2.ActivePage := TS_CCusto
   else
@@ -2878,6 +2890,24 @@ begin
     Exit
   else
   begin
+    fDMCadDuplicata.mTitulos.EmptyDataSet;
+    fDMCadDuplicata.cdsDuplicata_Consulta.First;
+    while not fDMCadDuplicata.cdsDuplicata_Consulta.Eof do
+    begin
+      fDMCadDuplicata.mTitulos.Insert;
+      fDMCadDuplicata.mTitulosDt_Vencimento.AsDateTime := fDMCadDuplicata.cdsDuplicata_ConsultaDTVENCIMENTO.AsDateTime;
+      fDMCadDuplicata.mTitulosID.AsInteger           := fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger;
+      fDMCadDuplicata.mTitulosID_Cliente.AsInteger   := fDMCadDuplicata.cdsDuplicata_ConsultaID_PESSOA.AsInteger;
+      fDMCadDuplicata.mTitulosNome_Cliente.AsString  := fDMCadDuplicata.cdsDuplicata_ConsultaNOME_PESSOA.AsString;
+      fDMCadDuplicata.mTitulosNum_Duplicata.AsString := fDMCadDuplicata.cdsDuplicata_ConsultaNUMDUPLICATA.AsString;
+      fDMCadDuplicata.mTitulosParcela.AsString       := fDMCadDuplicata.cdsDuplicata_ConsultaPARCELA.AsString;
+      fDMCadDuplicata.mTitulosVlr_Parcela.AsFloat    := fDMCadDuplicata.cdsDuplicata_ConsultaVLR_RESTANTE.AsCurrency;
+      fDMCadDuplicata.mTitulosCNPJ_Cliente.AsString  := fDMCadDuplicata.cdsDuplicata_ConsultaCNPJ_CPF.AsString;
+      fDMCadDuplicata.mTitulos.Post;
+      fDMCadDuplicata.cdsDuplicata_Consulta.Next;
+    end;
+
+    fDMCadDuplicata.vTipo_Rel := 'DE';
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\CarneDupl.fr3';
     if FileExists(vArq) then
       fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
@@ -2890,6 +2920,24 @@ begin
   end;
 end;
 
+<<<<<<< HEAD
+procedure TfrmCadDuplicata.ransfernciadeICMS1Click(Sender: TObject);
+var
+  vArq: String;  
+begin
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Transf_ICMS.fr3';
+    if FileExists(vArq) then
+      fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
+    else
+    begin
+      ShowMessage('Relatório não localizado! ' + vArq);
+      Exit;
+    end;
+    fDMCadDuplicata.frxReport1.ShowReport;
+end;
+
+=======
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
 procedure TfrmCadDuplicata.RzGroupBox4Enter(Sender: TObject);
 begin
   if fDMCadDuplicata.qParametros_FinUSA_CCUSTO_DUP.AsString = 'S' then
@@ -2927,7 +2975,11 @@ begin
     exit;
   end;
 
+<<<<<<< HEAD
+  if MessageDlg('Gerar Centro de Custo referente à Conta de Orçamento Informada?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+=======
   if MessageDlg('Gerar Centro de Custo referente a Conta de Orçamento Informada?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
     exit;
 
   fDMCadDuplicata.prc_Excluir_Dup_CCusto;

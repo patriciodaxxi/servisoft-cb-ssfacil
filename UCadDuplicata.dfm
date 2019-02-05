@@ -46,7 +46,6 @@ object frmCadDuplicata: TfrmCadDuplicata
         Height = 333
         Align = alClient
         Ctl3D = False
-        DataSource = DMCadDuplicata.dsDuplicata_Consulta
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
         ParentCtl3D = False
         ReadOnly = True
@@ -133,7 +132,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'DTFINANCEIRO'
             Title.Caption = 'Data Financeira'
-            Width = 64
             Visible = True
           end
           item
@@ -216,7 +214,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'VLR_RESTANTE'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Pendente'
-            Width = 64
             Visible = True
           end
           item
@@ -238,7 +235,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'VLR_DESPESAS'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Despesas'
-            Width = 64
             Visible = True
           end
           item
@@ -269,7 +265,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'PERC_BASE_COMISSAO'
             Title.Alignment = taCenter
             Title.Caption = '% Base Comiss'#227'o'
-            Width = 64
             Visible = True
           end
           item
@@ -277,7 +272,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'VLR_DEVOLUCAO'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Devolu'#231#227'o'
-            Width = 64
             Visible = True
           end
           item
@@ -285,7 +279,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'VLR_DESCONTO'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Desconto'
-            Width = 64
             Visible = True
           end
           item
@@ -303,7 +296,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'TIPO_LANCAMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Lan'#231'amento'
-            Width = 64
             Visible = True
           end
           item
@@ -312,7 +304,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'TRANSFERENCIA_ICMS'
             Title.Alignment = taCenter
             Title.Caption = 'Transf. ICMS'
-            Width = 64
             Visible = True
           end
           item
@@ -326,7 +317,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'NOME_BANCO'
             Title.Caption = 'Banco'
-            Width = 64
             Visible = True
           end
           item
@@ -388,7 +378,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'TITULO_CARTORIO'
             Title.Alignment = taCenter
             Title.Caption = 'Em Cart'#243'rio'
-            Width = 64
             Visible = True
           end
           item
@@ -397,7 +386,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'PROTESTADO'
             Title.Alignment = taCenter
             Title.Caption = 'Protestado'
-            Width = 64
             Visible = True
           end
           item
@@ -1000,7 +988,6 @@ object frmCadDuplicata: TfrmCadDuplicata
           Ctl3D = False
           LookupField = 'ID'
           LookupDisplay = 'NOME_INTERNO'
-          LookupSource = DMCadDuplicata.dsFilial
           ParentCtl3D = False
           TabOrder = 1
         end
@@ -1013,7 +1000,6 @@ object frmCadDuplicata: TfrmCadDuplicata
           Ctl3D = False
           LookupField = 'CODIGO'
           LookupDisplay = 'NOME'
-          LookupSource = DMCadDuplicata.dsPessoa
           ParentCtl3D = False
           TabOrder = 2
           OnEnter = RxDBLookupCombo2Enter
@@ -1046,7 +1032,6 @@ object frmCadDuplicata: TfrmCadDuplicata
           Ctl3D = False
           LookupField = 'ID'
           LookupDisplay = 'NOME'
-          LookupSource = DMCadDuplicata.dsContas
           ParentCtl3D = False
           TabOrder = 7
         end
@@ -1059,7 +1044,6 @@ object frmCadDuplicata: TfrmCadDuplicata
           Ctl3D = False
           LookupField = 'ID'
           LookupDisplay = 'NOME'
-          LookupSource = DMCadDuplicata.dsTipoCobranca
           ParentCtl3D = False
           TabOrder = 8
         end
@@ -1283,7 +1267,6 @@ object frmCadDuplicata: TfrmCadDuplicata
           Ctl3D = False
           LookupField = 'CODIGO'
           LookupDisplay = 'NOME'
-          LookupSource = DMCadDuplicata.dsVendedor
           ParentCtl3D = False
           TabOrder = 9
         end
@@ -2106,7 +2089,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Width = 33
             Height = 13
             DataField = 'FILIAL'
-            DataSource = DMCadDuplicata.dsDuplicata
           end
           object DBEdit8: TDBEdit
             Left = 730
@@ -2117,7 +2099,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             CharCase = ecUpperCase
             Color = clSilver
             DataField = 'ID'
-            DataSource = DMCadDuplicata.dsDuplicata
             ReadOnly = True
             TabOrder = 0
           end
@@ -2130,7 +2111,6 @@ object frmCadDuplicata: TfrmCadDuplicata
           Style = csDropDownList
           Color = 14286771
           DataField = 'TIPO_ES'
-          DataSource = DMCadDuplicata.dsDuplicata
           EnableValues = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2159,7 +2139,6 @@ object frmCadDuplicata: TfrmCadDuplicata
           Style = csDropDownList
           Color = 14286771
           DataField = 'TIPO_MOV'
-          DataSource = DMCadDuplicata.dsDuplicata
           EnableValues = True
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2352,7 +2331,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'NUMDUPLICATA'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 0
               OnExit = DBEdit7Exit
@@ -2363,7 +2341,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Width = 90
               Height = 21
               DataField = 'DTEMISSAO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Ctl3D = False
               NumGlyphs = 2
               ParentCtl3D = False
@@ -2378,7 +2355,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'PARCELA'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 1
             end
@@ -2388,7 +2364,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Width = 121
               Height = 21
               DataField = 'DTVENCIMENTO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Ctl3D = False
               NumGlyphs = 2
               ParentCtl3D = False
@@ -2403,7 +2378,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'VLR_PARCELA'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 7
             end
@@ -2416,10 +2390,8 @@ object frmCadDuplicata: TfrmCadDuplicata
               DropDownWidth = 700
               Ctl3D = False
               DataField = 'ID_PESSOA'
-              DataSource = DMCadDuplicata.dsDuplicata
               LookupField = 'CODIGO'
               LookupDisplay = 'NOME;CNPJ_CPF'
-              LookupSource = DMCadDuplicata.dsPessoa
               ParentCtl3D = False
               TabOrder = 9
               OnEnter = RxDBLookupCombo3Enter
@@ -2434,7 +2406,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'DESCRICAO'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 10
             end
@@ -2493,7 +2464,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'NUMNOTA'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 5
             end
@@ -2505,7 +2475,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'SERIE'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 6
             end
@@ -2517,7 +2486,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'MES_REF'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 12
             end
@@ -2529,7 +2497,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'ANO_REF'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 13
             end
@@ -2541,7 +2508,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'DESCRICAO2'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 11
             end
@@ -2552,7 +2518,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Height = 17
               Caption = 'NGR'
               DataField = 'NGR'
-              DataSource = DMCadDuplicata.dsDuplicata
               TabOrder = 4
               ValueChecked = 'S'
               ValueUnchecked = 'N'
@@ -2871,10 +2836,8 @@ object frmCadDuplicata: TfrmCadDuplicata
               DropDownCount = 15
               Ctl3D = False
               DataField = 'ID_CONTA_BOLETO'
-              DataSource = DMCadDuplicata.dsDuplicata
               LookupField = 'ID'
               LookupDisplay = 'NOME'
-              LookupSource = DMCadDuplicata.dsContas
               ParentCtl3D = False
               TabOrder = 0
               OnEnter = RxDBLookupCombo4Enter
@@ -2887,10 +2850,8 @@ object frmCadDuplicata: TfrmCadDuplicata
               DropDownCount = 15
               Ctl3D = False
               DataField = 'ID_TIPOCOBRANCA'
-              DataSource = DMCadDuplicata.dsDuplicata
               LookupField = 'ID'
               LookupDisplay = 'NOME'
-              LookupSource = DMCadDuplicata.dsTipoCobranca
               ParentCtl3D = False
               TabOrder = 1
               OnEnter = RxDBLookupCombo5Enter
@@ -2903,10 +2864,8 @@ object frmCadDuplicata: TfrmCadDuplicata
               DropDownCount = 15
               Ctl3D = False
               DataField = 'ID_CONTA_ORCAMENTO'
-              DataSource = DMCadDuplicata.dsDuplicata
               LookupField = 'ID'
               LookupDisplay = 'DESCRICAO'
-              LookupSource = DMCadDuplicata.dsContaOrcamento
               ParentCtl3D = False
               TabOrder = 3
               OnCloseUp = RxDBLookupCombo9CloseUp
@@ -2921,7 +2880,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Width = 90
               Height = 21
               DataField = 'DTRECEBIMENTO_TITULO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Ctl3D = False
               NumGlyphs = 2
               ParentCtl3D = False
@@ -2936,10 +2894,8 @@ object frmCadDuplicata: TfrmCadDuplicata
               DropDownCount = 15
               Ctl3D = False
               DataField = 'ID_CARTEIRA'
-              DataSource = DMCadDuplicata.dsDuplicata
               LookupField = 'ID'
               LookupDisplay = 'NOME'
-              LookupSource = DMCadDuplicata.dsCarteira
               ParentCtl3D = False
               TabOrder = 2
               OnEnter = RxDBLookupCombo13Enter
@@ -2951,7 +2907,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Height = 15
               Caption = 'Aprovado'
               DataField = 'APROVADO'
-              DataSource = DMCadDuplicata.dsDuplicata
               TabOrder = 5
               ValueChecked = 'S'
               ValueUnchecked = 'N'
@@ -2963,7 +2918,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Width = 90
               Height = 21
               DataField = 'DTAPROVADO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Ctl3D = False
               NumGlyphs = 2
               ParentCtl3D = False
@@ -3091,7 +3045,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               DropDownCount = 15
               Ctl3D = False
               DataField = 'ID_VENDEDOR'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3099,7 +3052,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Font.Style = []
               LookupField = 'CODIGO'
               LookupDisplay = 'NOME'
-              LookupSource = DMCadDuplicata.dsVendedor
               ParentCtl3D = False
               ParentFont = False
               TabOrder = 0
@@ -3113,7 +3065,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Height = 19
               Ctl3D = False
               DataField = 'PERC_COMISSAO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3130,7 +3081,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Height = 19
               Ctl3D = False
               DataField = 'PERC_BASE_COMISSAO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3186,7 +3136,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'TIPO_LANCAMENTO'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               ReadOnly = True
               TabOrder = 0
@@ -3199,7 +3148,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               CharCase = ecUpperCase
               Ctl3D = False
               DataField = 'NOSSONUMERO'
-              DataSource = DMCadDuplicata.dsDuplicata
               ParentCtl3D = False
               TabOrder = 1
             end
@@ -3389,7 +3337,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'ID_CONTA'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3397,7 +3344,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Font.Style = []
               LookupField = 'ID'
               LookupDisplay = 'NOME'
-              LookupSource = DMCadDuplicata.dsContas
               ParentCtl3D = False
               ParentFont = False
               ReadOnly = True
@@ -3413,7 +3359,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'VLR_RESTANTE'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3433,7 +3378,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'VLR_PAGO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3453,7 +3397,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'VLR_DEVOLUCAO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3473,7 +3416,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'VLR_DESPESAS'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3492,7 +3434,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'VLR_DESCONTO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3512,7 +3453,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'VLR_JUROSPAGOS'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3532,7 +3472,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'DTULTPAGAMENTO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3552,7 +3491,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'QTD_DIASATRASO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3571,7 +3509,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               TabStop = False
               Caption = 'Pago em cart'#243'rio'
               DataField = 'PAGO_CARTORIO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3591,7 +3528,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               TabStop = False
               Caption = 'Arquivo Gerado'
               DataField = 'ARQUIVO_GERADO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3611,7 +3547,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'NUM_REMESSA'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3630,7 +3565,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Color = clSilver
               Ctl3D = False
               DataField = 'VLR_TAXA_BANCARIA'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3647,7 +3581,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Height = 17
               Caption = 'Protestado'
               DataField = 'PROTESTADO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3666,7 +3599,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Caption = 'Boleto Impresso'
               Color = clSilver
               DataField = 'IMP_BOLETO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3686,7 +3618,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Caption = 'ICMS'
               Color = clSilver
               DataField = 'TRANSFERENCIA_ICMS'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3706,7 +3637,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Caption = 'T'#237'tulo em Cart'#243'rio'
               Color = clSilver
               DataField = 'TITULO_CARTORIO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3726,7 +3656,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               TabStop = False
               Caption = 'Perdido'
               DataField = 'PERDIDO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3745,7 +3674,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Caption = 'Instru'#231#227'o de Protesto'
               Color = clSilver
               DataField = 'INSTRUCAO_PROTESTO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3864,7 +3792,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               DropDownCount = 15
               Ctl3D = False
               DataField = 'ID_CONTABIL_OPE_LACTO'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3872,7 +3799,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Font.Style = []
               LookupField = 'ID'
               LookupDisplay = 'NOME'
-              LookupSource = DMCadDuplicata.dsContabil_Ope
               ParentCtl3D = False
               ParentFont = False
               TabOrder = 0
@@ -3885,7 +3811,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               DropDownCount = 15
               Ctl3D = False
               DataField = 'ID_CONTABIL_OPE_BAIXA'
-              DataSource = DMCadDuplicata.dsDuplicata
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3893,7 +3818,6 @@ object frmCadDuplicata: TfrmCadDuplicata
               Font.Style = []
               LookupField = 'ID'
               LookupDisplay = 'NOME'
-              LookupSource = DMCadDuplicata.dsContabil_Ope
               ParentCtl3D = False
               ParentFont = False
               TabOrder = 1
@@ -3908,7 +3832,6 @@ object frmCadDuplicata: TfrmCadDuplicata
           Caption = 'Lan'#231'amento por Regime de Caixa'
           Color = 14286771
           DataField = 'REGIME_CAIXA'
-          DataSource = DMCadDuplicata.dsDuplicata
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -3927,10 +3850,17 @@ object frmCadDuplicata: TfrmCadDuplicata
         Top = 426
         Width = 1050
         Height = 158
+<<<<<<< HEAD
+        ActivePage = TS_CCusto
+        ActivePageDefault = TS_Historico
+        Align = alClient
+        TabIndex = 1
+=======
         ActivePage = TS_Historico
         ActivePageDefault = TS_Historico
         Align = alClient
         TabIndex = 0
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
         TabOrder = 2
         FixedDimension = 19
         object TS_Historico: TRzTabSheet
@@ -3942,7 +3872,10 @@ object frmCadDuplicata: TfrmCadDuplicata
             Height = 135
             Align = alClient
             Ctl3D = False
+<<<<<<< HEAD
+=======
             DataSource = DMCadDuplicata.dsDuplicata_Hist
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentCtl3D = False
             ReadOnly = True
@@ -4021,28 +3954,40 @@ object frmCadDuplicata: TfrmCadDuplicata
                 Expanded = False
                 FieldName = 'VLR_PAGAMENTO'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
                 Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_JUROSPAGOS'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
                 Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_DESCONTOS'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
                 Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_DESPESAS'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
                 Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
@@ -4056,14 +4001,20 @@ object frmCadDuplicata: TfrmCadDuplicata
                 Expanded = False
                 FieldName = 'VLR_DEVOLUCAO'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
                 Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_JUROSCALCULADO'
                 Title.Color = 16777170
+<<<<<<< HEAD
+=======
                 Width = 64
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
                 Visible = True
               end
               item
@@ -4117,7 +4068,10 @@ object frmCadDuplicata: TfrmCadDuplicata
             Height = 135
             Align = alClient
             Ctl3D = False
+<<<<<<< HEAD
+=======
             DataSource = DMCadDuplicata.dsDuplicata_CCusto
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentCtl3D = False
             ReadOnly = True
@@ -4323,6 +4277,10 @@ object frmCadDuplicata: TfrmCadDuplicata
     object SaldoClienteFornecedor1: TMenuItem
       Caption = 'Extrato Cliente/Fornecedor'
       OnClick = SaldoClienteFornecedor1Click
+    end
+    object ransfernciadeICMS1: TMenuItem
+      Caption = 'Transfer'#234'ncia de ICMS'
+      OnClick = ransfernciadeICMS1Click
     end
     object N1: TMenuItem
       Caption = '-'

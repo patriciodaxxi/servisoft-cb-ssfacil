@@ -897,7 +897,10 @@ procedure TfCupomFiscalPgto.ceFormaPgtoKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   if (Key = Vk_Return) then
+  begin
     ceFormaPgtoExit(Sender);
+    DBEdit1.SetFocus;
+  end;
 end;
 
 procedure TfCupomFiscalPgto.RxDBLookupCombo3Change(Sender: TObject);

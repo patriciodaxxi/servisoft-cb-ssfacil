@@ -86,7 +86,8 @@ uses
   uXMLNFCe4_00 in '..\nfce\uXMLNFCe4_00.pas',
   enviNFe_v400 in '..\nfe\4.00\enviNFe_v400.pas',
   uGrava_Erro in '..\uGrava_Erro.pas',
-  uNFeConsts in '..\..\NFe 4.00\NFESrv\uNFeConsts.pas';
+  uNFeConsts in '..\..\NFe 4.00\NFESrv\uNFeConsts.pas',
+  uBalanca in 'uBalanca.pas';
 
 {$R *.res}
 

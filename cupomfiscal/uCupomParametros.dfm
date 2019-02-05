@@ -81,7 +81,7 @@ object fCupomParametros: TfCupomParametros
     Top = 35
     Width = 873
     Height = 566
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -1834,9 +1834,8 @@ object fCupomParametros: TfCupomParametros
           Width = 145
           Height = 21
           ItemHeight = 13
-          ItemIndex = 0
           TabOrder = 0
-          Text = 'URANO'
+          Text = 'ACBR'
           Items.Strings = (
             'URANO'
             'ACBR')
@@ -1942,6 +1941,7 @@ object fCupomParametros: TfCupomParametros
             item
               Expanded = False
               FieldName = 'NUMREGISTRO'
+              Width = 64
               Visible = True
             end>
         end
