@@ -21,10 +21,17 @@ object frmRecebeXML: TfrmRecebeXML
   TextHeight = 13
   object pcDados: TPageControl
     Left = 0
+<<<<<<< HEAD
+    Top = 131
+    Width = 1035
+    Height = 522
+    ActivePage = TabSheet1
+=======
     Top = 146
     Width = 1035
     Height = 519
     ActivePage = TabSheet4
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -224,7 +231,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 47
           Top = 23
           Width = 54
-          Height = 26
+          Height = 19
           TabStop = False
           Ctl3D = False
           DataField = 'serie'
@@ -243,7 +250,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 159
           Top = 17
           Width = 131
-          Height = 26
+          Height = 25
           TabStop = False
           Ctl3D = False
           DataField = 'nNF'
@@ -262,7 +269,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 354
           Top = 17
           Width = 143
-          Height = 26
+          Height = 25
           TabStop = False
           Ctl3D = False
           DataField = 'ide_dEmi'
@@ -281,7 +288,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 596
           Top = 23
           Width = 94
-          Height = 26
+          Height = 19
           TabStop = False
           Ctl3D = False
           DataField = 'dSaiEnt'
@@ -300,7 +307,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 795
           Top = 23
           Width = 94
-          Height = 26
+          Height = 19
           TabStop = False
           Ctl3D = False
           DataField = 'hSaiEnt'
@@ -319,7 +326,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 47
           Top = 66
           Width = 54
-          Height = 26
+          Height = 19
           TabStop = False
           Ctl3D = False
           DataField = 'mod'
@@ -338,7 +345,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 353
           Top = 62
           Width = 129
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -354,7 +361,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 554
           Top = 62
           Width = 129
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -370,7 +377,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 783
           Top = 62
           Width = 94
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -386,7 +393,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 353
           Top = 80
           Width = 129
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -402,7 +409,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 7
           Top = 119
           Width = 224
-          Height = 26
+          Height = 19
           TabStop = False
           Ctl3D = False
           DataField = 'dhCont'
@@ -421,7 +428,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 7
           Top = 162
           Width = 834
-          Height = 26
+          Height = 19
           TabStop = False
           Ctl3D = False
           DataField = 'xJust'
@@ -440,7 +447,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 554
           Top = 80
           Width = 323
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -456,7 +463,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 353
           Top = 41
           Width = 144
-          Height = 26
+          Height = 19
           TabStop = False
           Ctl3D = False
           DataField = 'ide_dhemi'
@@ -544,7 +551,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 66
           Top = 21
           Width = 631
-          Height = 26
+          Height = 19
           TabStop = False
           Ctl3D = False
           DataField = 'emit_xNome'
@@ -563,7 +570,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 66
           Top = 39
           Width = 164
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -579,7 +586,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 314
           Top = 39
           Width = 129
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -595,7 +602,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 645
           Top = 39
           Width = 52
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -612,7 +619,11 @@ object frmRecebeXML: TfrmRecebeXML
         Left = 0
         Top = 377
         Width = 1027
+<<<<<<< HEAD
+        Height = 117
+=======
         Height = 114
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
         Align = alClient
         Caption = 'Destinat'#225'rio'
         Color = clMoneyGreen
@@ -680,7 +691,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 66
           Top = 21
           Width = 631
-          Height = 26
+          Height = 19
           TabStop = False
           Ctl3D = False
           DataField = 'dest_xNome'
@@ -699,7 +710,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 66
           Top = 39
           Width = 164
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -715,7 +726,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 314
           Top = 39
           Width = 129
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -731,7 +742,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 645
           Top = 39
           Width = 52
-          Height = 26
+          Height = 19
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -883,13 +894,21 @@ object frmRecebeXML: TfrmRecebeXML
         Left = 0
         Top = 0
         Width = 1027
+<<<<<<< HEAD
+        Height = 494
+=======
         Height = 491
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0
         DesignSize = (
           1027
+<<<<<<< HEAD
+          494)
+=======
           491)
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
         object Label29: TLabel
           Left = 18
           Top = 29
@@ -2230,7 +2249,11 @@ object frmRecebeXML: TfrmRecebeXML
         Left = 0
         Top = 0
         Width = 1027
+<<<<<<< HEAD
+        Height = 494
+=======
         Height = 491
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0
@@ -2238,7 +2261,11 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 1
           Top = 1
           Width = 1025
+<<<<<<< HEAD
+          Height = 258
+=======
           Height = 267
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
           Align = alTop
           Ctl3D = False
           DataSource = DMRecebeXML.dsmItensNota
@@ -2542,7 +2569,11 @@ object frmRecebeXML: TfrmRecebeXML
         end
         object Panel7: TPanel
           Left = 1
+<<<<<<< HEAD
+          Top = 426
+=======
           Top = 423
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
           Width = 1025
           Height = 67
           Align = alBottom
@@ -2647,9 +2678,15 @@ object frmRecebeXML: TfrmRecebeXML
         end
         object PageControl1: TPageControl
           Left = 1
+<<<<<<< HEAD
+          Top = 259
+          Width = 584
+          Height = 167
+=======
           Top = 268
           Width = 611
           Height = 155
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
           ActivePage = TabSheet9
           Align = alLeft
           Font.Charset = DEFAULT_CHARSET
@@ -2949,8 +2986,13 @@ object frmRecebeXML: TfrmRecebeXML
             ImageIndex = 1
             ParentFont = False
             DesignSize = (
+<<<<<<< HEAD
+              556
+              159)
+=======
               583
               147)
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
             object Label106: TLabel
               Left = 57
               Top = 44
@@ -3407,10 +3449,17 @@ object frmRecebeXML: TfrmRecebeXML
           end
         end
         object Panel9: TPanel
+<<<<<<< HEAD
+          Left = 585
+          Top = 259
+          Width = 441
+          Height = 167
+=======
           Left = 612
           Top = 268
           Width = 414
           Height = 155
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
           Align = alClient
           TabOrder = 3
           object Label123: TLabel
@@ -3664,9 +3713,29 @@ object frmRecebeXML: TfrmRecebeXML
         Left = 0
         Top = 0
         Width = 1017
+<<<<<<< HEAD
+        Height = 484
+        Align = alClient
+        TabOrder = 0
+        object dgDuplicatas: TDBGrid
+          Left = 1
+          Top = 42
+          Width = 1015
+          Height = 441
+          Align = alClient
+          DataSource = DMRecebeXML.dsParcelas
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+        end
+=======
         Height = 481
         Align = alClient
         TabOrder = 0
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
         object Panel11: TPanel
           Left = 1
           Top = 1
@@ -4664,14 +4733,22 @@ object frmRecebeXML: TfrmRecebeXML
     Left = 0
     Top = 0
     Width = 1035
+<<<<<<< HEAD
+    Height = 131
+=======
     Height = 146
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
     Align = alTop
     BevelOuter = bvNone
     Color = clMoneyGreen
     TabOrder = 1
     DesignSize = (
       1035
+<<<<<<< HEAD
+      131)
+=======
       146)
+>>>>>>> 12c49a293360aa4fc77adb678b3deac5ff7c0410
     object Label4: TLabel
       Left = 269
       Top = 3
