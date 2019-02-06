@@ -2883,6 +2883,11 @@ procedure TfrmCadDuplicata.Detalhada21Click(Sender: TObject);
 var
   vArq : String;
 begin
+  if (fDMCadDuplicata.cdsDuplicata_Consulta.IsEmpty) then
+  begin
+    ShowMessage('*** Não existe registro para impressão!');
+    exit;
+  end;
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO;TIPO_ES;TIPO_MOV';
   SMDBGrid1.DisableScroll;
   prc_Monta_Cab(True);
@@ -2900,7 +2905,11 @@ begin
     1:
       vTipo_Relatorio := 'Relatório de Contas a Pagar';
     2:
-      vTipo_Relatorio := 'Relatório de Contas a Pagar/Receber';
+    begin
+      ShowMessage('Selecione conta a pagar ou receber, ambos não é suportado por este relatório!');
+      SMDBGrid1.EnableScroll;
+      Exit;
+    end;
   end;
   fDMCadDuplicata.frxReport1.variables['TIPO'] := QuotedStr(vTipo_Relatorio);
   fDMCadDuplicata.frxReport1.variables['ImpOpcao'] := QuotedStr(vOpcaoImp);
