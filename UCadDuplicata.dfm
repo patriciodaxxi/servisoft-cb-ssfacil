@@ -4191,6 +4191,10 @@ object frmCadDuplicata: TfrmCadDuplicata
       Caption = 'Carn'#234
       OnClick = Carn1Click
     end
+    object Detalhada21: TMenuItem
+      Caption = 'Detalhada 2'
+      OnClick = Detalhada21Click
+    end
   end
   object PopupMenu2: TPopupMenu
     Left = 721

@@ -245,6 +245,7 @@ type
     Carn1: TMenuItem;
     Label65: TLabel;
     ComboNossoNumero: TNxComboBox;
+    Detalhada21: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -328,6 +329,7 @@ type
     procedure RecibodePagamento1Click(Sender: TObject);
     procedure SaldoClienteFornecedor1Click(Sender: TObject);
     procedure Carn1Click(Sender: TObject);
+    procedure Detalhada21Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -2264,13 +2266,24 @@ end;
 
 procedure TfrmCadDuplicata.prc_Monta_Cab(Extrato: Boolean);
 begin
-  vOpcaoImp := '';
+  vOpcaoImp := 'Opções: ';
   case RadioGroup2.ItemIndex of
     0:
-      vOpcaoImp := '(Entrada)';
+      vOpcaoImp := vOpcaoImp + '(Entrada)';
     1:
-      vOpcaoImp := '(Saida)';
+      vOpcaoImp := vOpcaoImp + '(Saida)';
   end;
+
+  case RadioGroup1.ItemIndex of
+    0:
+      vOpcaoImp := vOpcaoImp + ' - (Em aberto)';
+    1:
+      vOpcaoImp := vOpcaoImp + ' - (Quitado)';
+    2:
+      vOpcaoImp := vOpcaoImp + ' - (Descontado)';
+  end;
+
+
   if (trim(NxDatePicker1.Text) <> '') and (trim(NxDatePicker2.Text) <> '') then
   //if (NxDatePicker1.Date > 10) and (NxDatePicker2.Date > 10) then
     vOpcaoImp := vOpcaoImp + '(Emissão: ' + NxDatePicker1.Text + ' a ' + NxDatePicker2.Text + ')'
@@ -2864,6 +2877,35 @@ begin
     end;
     fDMCadDuplicata.frxReport1.ShowReport;
   end;
+end;
+
+procedure TfrmCadDuplicata.Detalhada21Click(Sender: TObject);
+var
+  vArq : String;
+begin
+  fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO;TIPO_ES;TIPO_MOV';
+  SMDBGrid1.DisableScroll;
+  prc_Monta_Cab(True);
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Detalhada_Lotus.fr3';
+  if FileExists(vArq) then
+    fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatorio não localizado! ' + vArq);
+    Exit;
+  end;
+  case RadioGroup2.ItemIndex of
+    0:
+      vTipo_Relatorio := 'Relatório de Contas a Receber';
+    1:
+      vTipo_Relatorio := 'Relatório de Contas a Pagar';
+    2:
+      vTipo_Relatorio := 'Relatório de Contas a Pagar/Receber';
+  end;
+  fDMCadDuplicata.frxReport1.variables['TIPO'] := QuotedStr(vTipo_Relatorio);
+  fDMCadDuplicata.frxReport1.variables['ImpOpcao'] := QuotedStr(vOpcaoImp);
+  fDMCadDuplicata.frxReport1.ShowReport;
+  SMDBGrid1.EnableScroll;
 end;
 
 end.

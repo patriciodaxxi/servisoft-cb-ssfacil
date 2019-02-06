@@ -2162,7 +2162,7 @@ begin
   if frxReport1.Report.FileName = vArq then
     Exit;
 
-  if vTipo_Rel <> 'DE' then
+  if (vTipo_Rel <> 'DE') and (frxReport1.FindComponent('lblPeriodo')<> nil) then
     TfrxMemoView(frxReport1.FindComponent('lblPeriodo')).Text := 'Vencimento de ' + FormatDateTime('DD/MM/YYYY',vDataIni) +
                                                                  ' até ' + FormatDateTime('DD/MM/YYYY',vDataFim);
 end;

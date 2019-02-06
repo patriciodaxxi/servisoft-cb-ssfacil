@@ -2236,7 +2236,6 @@ object DMCadDuplicata: TDMCadDuplicata
     end
   end
   object mCheque: TClientDataSet
-    Active = True
     Aggregates = <>
     FieldDefs = <
       item
@@ -2306,19 +2305,6 @@ object DMCadDuplicata: TDMCadDuplicata
     StoreDefs = True
     Left = 520
     Top = 496
-    Data = {
-      690100009619E0BD01000000180000000E00000000000300000069010A4E756D
-      5F43686571756504000100000000000849445F42616E636F0400010000000000
-      0849445F436F6E746104000100000000000A566C725F43686571756508000400
-      00000000094474426F6D50617261040006000000000007546974756C61720100
-      4900000001000557494454480200020028000C466F6E655F546974756C617201
-      004900000001000557494454480200020014000B526563656269646F5F446504
-      000100000000000D4E6F6D655F526563656269646F0100490000000100055749
-      4454480200020028000B456D697469646F5F506F720100490000000100055749
-      4454480200020001000949445F4368657175650400010000000000074167656E
-      63696101004900000001000557494454480200020005000E436F64436F6D7065
-      6E736163616F0400010000000000084E756D436F6E7461010049000000010005
-      5749445448020002000C000000}
     object mChequeNum_Cheque: TIntegerField
       FieldName = 'Num_Cheque'
     end
@@ -2398,7 +2384,6 @@ object DMCadDuplicata: TDMCadDuplicata
     Top = 144
   end
   object cdsBanco: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -3398,12 +3383,13 @@ object DMCadDuplicata: TDMCadDuplicata
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
-    PrintOptions.PrintMode = pmSplit
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42671.419546678200000000
-    ReportOptions.LastChange = 43455.640830289350000000
+    ReportOptions.CreateDate = 43039.651099594900000000
+    ReportOptions.LastChange = 43502.468003726860000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
+      ''
+      ''
       'begin'
       ''
       'end.')
@@ -3416,35 +3402,557 @@ object DMCadDuplicata: TDMCadDuplicata
         DataSet = frxDBDataset3
         DataSetName = 'frxmDuplicata_Consulta'
       end>
-    Variables = <>
+    Variables = <
+      item
+        Name = ' Variaveis'
+        Value = Null
+      end
+      item
+        Name = 'ImpOpcao'
+        Value = Null
+      end
+      item
+        Name = 'TIPO'
+        Value = Null
+      end>
     Style = <>
     object Data: TfrxDataPage
       Height = 1000.000000000000000000
       Width = 1000.000000000000000000
     end
     object Page1: TfrxReportPage
-      PaperWidth = 78.000000000000000000
-      PaperHeight = 600.000000000000000000
-      PaperSize = 256
-      LeftMargin = 5.500000000000000000
-      RightMargin = 3.000000000000000000
-      TopMargin = 3.000000000000000000
-      BottomMargin = 5.000000000000000000
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.ShadowColor = clWhite
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 22.677180000000000000
-        Top = 18.897650000000000000
-        Width = 262.677335000000000000
+        Height = 22.677165350000000000
+        Top = 207.874150000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'MasterData1OnBeforePrint'
         DataSet = frxDBDataset3
         DataSetName = 'frxmDuplicata_Consulta'
         RowCount = 0
-        object Memo1: TfrxMemoView
-          Left = 11.338590000000000000
+        object Memo4: TfrxMemoView
+          Left = 3.779530000000000000
           Top = 3.779530000000000000
-          Width = 94.488250000000000000
-          Height = 18.897650000000000000
+          Width = 83.149660000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = 'dd/mm/yyyy'
+          DisplayFormat.Kind = fkDateTime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxmDuplicata_Consulta."DTVENCIMENTO"]')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 347.512060000000000000
+          Top = 3.779530000000000000
+          Width = 71.811070000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[frxmDuplicata_Consulta."VLR_RESTANTE"]')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 425.984540000000000000
+          Top = 3.779530000000000000
+          Width = 71.811070000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
           Memo.UTF8 = (
             '[frxmDuplicata_Consulta."NUMDUPLICATA"]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Left = 282.685220000000000000
+          Top = 3.779530000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[frxmDuplicata_Consulta."VLR_PARCELA"]')
+          ParentFont = False
+        end
+        object Memo14: TfrxMemoView
+          Left = 90.826840000000000000
+          Top = 3.779530000000000000
+          Width = 173.858380000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxmDuplicata_Consulta."NOME_PESSOA"]')
+          ParentFont = False
+        end
+        object Memo22: TfrxMemoView
+          Left = 503.354670000000000000
+          Top = 3.779530000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxmDuplicata_Consulta."DTRECEBIMENTO_TITULO"]')
+          ParentFont = False
+        end
+        object Memo23: TfrxMemoView
+          Left = 648.520100000000000000
+          Top = 3.779530000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxmDuplicata_Consulta."NOME_BANCO"]')
+          ParentFont = False
+        end
+        object Memo24: TfrxMemoView
+          Left = 567.945270000000000000
+          Top = 3.779530000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxmDuplicata_Consulta."NOME_TIPOCOBRANCA"]')
+          ParentFont = False
+        end
+        object Line3: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 18.897650000000000000
+          Width = 710.551640000000000000
+          Color = clBlack
+          Frame.ShadowColor = clWhite
+          Frame.Style = fsDot
+          Diagonal = True
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 396.850650000000000000
+        Width = 718.110700000000000000
+        object Memo1: TfrxMemoView
+          Top = 3.779530000000000000
+          Width = 718.110700000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[Page#]')
+          ParentFont = False
+        end
+      end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Top = 185.196970000000000000
+        Width = 718.110700000000000000
+        OnBeforePrint = 'GroupHeader1OnBeforePrint'
+        Condition = 'frxmDuplicata_Consulta."DTVENCIMENTO"'
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 22.677165350000000000
+        Top = 253.228510000000000000
+        Width = 718.110700000000000000
+        object Line2: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 17.897650000000000000
+          Width = 710.551640000000000000
+          Color = clBlack
+          Frame.ShadowColor = clWhite
+          Frame.Style = fsDot
+          Diagonal = True
+        end
+        object Memo25: TfrxMemoView
+          Left = 48.448670000000000000
+          Top = 1.779530000000000000
+          Width = 83.149660000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'Valor do Dia:')
+          ParentFont = False
+        end
+        object Memo12: TfrxMemoView
+          Left = 425.637910000000000000
+          Top = 1.779530000000000000
+          Width = 71.811070000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            '[SUM(<frxmDuplicata_Consulta."VLR_RESTANTE">,MasterData1)]')
+          ParentFont = False
+        end
+        object Memo13: TfrxMemoView
+          Left = 293.031540000000000000
+          Top = 1.779530000000000000
+          Width = 124.724490000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'Total Pendente do dia:')
+          ParentFont = False
+        end
+        object Memo26: TfrxMemoView
+          Left = 546.787570000000000000
+          Top = 1.779530000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'Qtd.de t'#195#173'tulos:')
+          ParentFont = False
+        end
+        object SysMemo4: TfrxSysMemoView
+          Left = 629.937230000000000000
+          Top = 1.779530000000000000
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            '[COUNT(MasterData1)]')
+          ParentFont = False
+        end
+        object Memo16: TfrxMemoView
+          Left = 140.173160000000000000
+          Top = 1.779530000000000000
+          Width = 71.811070000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            '[SUM(<frxmDuplicata_Consulta."VLR_PARCELA">,MasterData1)]')
+          ParentFont = False
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 37.795300000000000000
+        Top = 298.582870000000000000
+        Width = 718.110700000000000000
+        object Memo15: TfrxMemoView
+          Left = 215.433210000000000000
+          Top = 11.338590000000000000
+          Width = 143.622140000000000000
+          Height = 22.677167800000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          Memo.UTF8 = (
+            'Valor Total Recebido:')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+        object Memo18: TfrxMemoView
+          Left = 360.260050000000000000
+          Top = 11.338590000000000000
+          Width = 94.488250000000000000
+          Height = 22.677180000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftLeft, ftRight, ftTop, ftBottom]
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[SUM(<frxmDuplicata_Consulta."VLR_RESTANTE">,MasterData1)]')
+          ParentFont = False
+          VAlign = vaBottom
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 105.826840000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo3: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 84.267780000000000000
+          Width = 79.370130000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Dt.Vencto')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Left = 90.826840000000000000
+          Top = 84.267780000000000000
+          Width = 94.488250000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Fornecedor')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 275.126160000000000000
+          Top = 84.267780000000000000
+          Width = 64.252010000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            'Vlr.Parcela')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 343.732530000000000000
+          Top = 84.267780000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            'Saldo a Pagar')
+          ParentFont = False
+        end
+        object Memo11: TfrxMemoView
+          Left = 425.984540000000000000
+          Top = 84.267780000000000000
+          Width = 71.811070000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Documento')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 503.354670000000000000
+          Top = 84.267780000000000000
+          Width = 56.692950000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Dt.Recto')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 567.945270000000000000
+          Top = 84.267780000000000000
+          Width = 75.590600000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Tipo Cobran'#195#167'a')
+          ParentFont = False
+        end
+        object Memo21: TfrxMemoView
+          Left = 648.520100000000000000
+          Top = 84.267780000000000000
+          Width = 45.354360000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Banco')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 102.590600000000000000
+          Width = 714.331170000000000000
+          Color = clBlack
+          Frame.ShadowColor = clWhite
+          Frame.Style = fsDot
+          Diagonal = True
+        end
+        object ImpOpcao: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 60.472480000000000000
+          Width = 340.157700000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[ImpOpcao]')
+          ParentFont = False
+        end
+        object SysMemo1: TfrxSysMemoView
+          Left = 650.638220000000000000
+          Top = 49.133890000000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[DATE]')
+          ParentFont = False
+        end
+        object Memo19: TfrxMemoView
+          Left = 597.165740000000000000
+          Top = 49.133890000000000000
+          Width = 49.133890000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            'Emiss'#195#163'o:')
+          ParentFont = False
+        end
+        object Memo27: TfrxMemoView
+          Left = 604.724800000000000000
+          Top = 30.236240000000000000
+          Width = 41.574830000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            'P'#195#161'gina:')
+          ParentFont = False
+        end
+        object Page: TfrxMemoView
+          Left = 650.638220000000000000
+          Top = 30.236240000000000000
+          Width = 79.370130000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[Page]')
+          ParentFont = False
+        end
+        object TIPO: TfrxMemoView
+          Left = 190.866265000000000000
+          Top = 7.559060000000000000
+          Width = 336.378170000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold, fsUnderline]
+          HAlign = haCenter
+          Memo.UTF8 = (
+            '[TIPO]')
+          ParentFont = False
         end
       end
     end
