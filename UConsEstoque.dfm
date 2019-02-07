@@ -359,7 +359,7 @@ object frmConsEstoque: TfrmConsEstoque
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 21
+    ColCount = 22
     RowCount = 2
     Columns = <
       item
@@ -426,6 +426,15 @@ object frmConsEstoque: TfrmConsEstoque
         Visible = True
       end
       item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'UNIDADE'
+        Title.Alignment = taCenter
+        Title.Caption = 'Unid.'
+        Width = 51
+        Visible = True
+      end
+      item
         Expanded = False
         FieldName = 'QTD'
         Title.Alignment = taCenter
@@ -467,7 +476,6 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'PRECO_VENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Venda'
-        Width = 64
         Visible = True
       end
       item
@@ -475,7 +483,6 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'LOCALIZACAO'
         Title.Alignment = taCenter
         Title.Caption = 'Localiza'#231#227'o'
-        Width = 64
         Visible = True
       end
       item

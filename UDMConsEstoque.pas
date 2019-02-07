@@ -582,6 +582,8 @@ type
     mUnidade: TClientDataSet;
     dsmUnidade: TDataSource;
     mUnidadeUnidade: TStringField;
+    mAuxEst_AcumUnidade: TStringField;
+    cdsEstoque_AcumUNIDADE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

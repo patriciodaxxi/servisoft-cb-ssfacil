@@ -688,9 +688,9 @@ object DMConsEstoque: TDMConsEstoque
       'SELECT EM.id_produto, PRO.nome NOMEPRODUTO, PRO.REFERENCIA, SUM(' +
       'EM.qtd_ent) QTD_ENT,'#13#10'SUM(EM.qtd_sai) QTD_SAI, SUM(QTD2) SALDO, ' +
       #13#10'SUM(EM.QTD_ENT * EM.vlr_unitario) VLR_ENTRADA,'#13#10'SUM(EM.QTD_SAI' +
-      ' * EM.vlr_unitario) VLR_SAIDA'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JOIN P' +
-      'RODUTO PRO'#13#10'ON EM.ID_PRODUTO = PRO.ID'#13#10'GROUP BY EM.id_produto, P' +
-      'RO.nome, PRO.REFERENCIA'
+      ' * EM.vlr_unitario) VLR_SAIDA,'#13#10'pro.unidade'#13#10'FROM ESTOQUE_MOV EM' +
+      #13#10'INNER JOIN PRODUTO PRO'#13#10'ON EM.ID_PRODUTO = PRO.ID'#13#10'GROUP BY EM' +
+      '.id_produto, PRO.nome, PRO.REFERENCIA, pro.unidade'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -738,6 +738,10 @@ object DMConsEstoque: TDMConsEstoque
     object cdsEstoque_AcumVLR_SAIDA: TFloatField
       FieldName = 'VLR_SAIDA'
       DisplayFormat = '###,###,##0.00'
+    end
+    object cdsEstoque_AcumUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
     end
   end
   object dsEstoque_Acum: TDataSource
@@ -2250,18 +2254,69 @@ object DMConsEstoque: TDMConsEstoque
   object mAuxEst_Acum: TClientDataSet
     Active = True
     Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'ID_Produto'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Referencia'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'NomeProduto'
+        DataType = ftString
+        Size = 100
+      end
+      item
+        Name = 'Qtd_Ant'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Qtd_Ent'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Qtd_Sai'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Saldo'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_Entrada'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_Saida'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Saldo_Periodo'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Unidade'
+        DataType = ftString
+        Size = 6
+      end>
+    IndexDefs = <>
     Params = <>
+    StoreDefs = True
     Left = 368
     Top = 464
     Data = {
-      E60000009619E0BD01000000180000000A000000000003000000E6000A49445F
+      020100009619E0BD01000000180000000B00000000000300000002010A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
       01000557494454480200020014000B4E6F6D6550726F6475746F010049000000
       0100055749445448020002006400075174645F416E7408000400000000000751
       74645F456E740800040000000000075174645F53616908000400000000000553
       616C646F08000400000000000B566C725F456E74726164610800040000000000
       09566C725F536169646108000400000000000D53616C646F5F506572696F646F
-      08000400000000000000}
+      080004000000000007556E696461646501004900000001000557494454480200
+      020006000000}
     object mAuxEst_AcumID_Produto: TIntegerField
       FieldName = 'ID_Produto'
     end
@@ -2299,6 +2354,10 @@ object DMConsEstoque: TDMConsEstoque
     object mAuxEst_AcumSaldo_Periodo: TFloatField
       FieldName = 'Saldo_Periodo'
       DisplayFormat = '###,###,##0.0000##'
+    end
+    object mAuxEst_AcumUnidade: TStringField
+      FieldName = 'Unidade'
+      Size = 6
     end
   end
   object dsmAuxEst_Acum: TDataSource

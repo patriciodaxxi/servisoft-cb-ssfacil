@@ -2046,12 +2046,14 @@ object dmCadProduto: TdmCadProduto
       'zado'#39#13#10'         when (PRO.TIPO_REG = '#39'S'#39') then '#39'Semiacabado'#39#13#10'  ' +
       '       else '#39#39#13#10'       end as TIPO_REG_DESCRICAO,'#13#10#13#10'       (sel' +
       'ect sum(E2.QTD) QTDGERAL'#13#10'        from ESTOQUE_ATUAL E2'#13#10'       ' +
-      ' where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE'#13#10'from PRODUTO PRO'#13#10'le' +
-      'ft join TAB_NCM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left join MARCA on' +
-      ' (PRO.ID_MARCA = MARCA.ID)'#13#10'left join GRUPO on (PRO.ID_GRUPO = G' +
-      'RUPO.ID)'#13#10'left join PRODUTO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left' +
-      ' join PRODUTO_LIVRO LI on (PRO.ID = LI.ID)  '#13#10'left join PESSOA F' +
-      'ORN'#13#10'on pro.id_fornecedor = forn.codigo'#13#10
+      ' where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE, PCUSTO.CONTADOR CONT' +
+      '_POSSUIPRECO'#13#10'from PRODUTO PRO'#13#10'left join TAB_NCM NCM on (PRO.ID' +
+      '_NCM = NCM.ID)'#13#10'left join MARCA on (PRO.ID_MARCA = MARCA.ID)'#13#10'le' +
+      'ft join GRUPO on (PRO.ID_GRUPO = GRUPO.ID)'#13#10'left join PRODUTO_VE' +
+      'ICULO PV on (PRO.ID = PV.ID)'#13#10'left join PRODUTO_LIVRO LI on (PRO' +
+      '.ID = LI.ID)  '#13#10'left join PESSOA FORN'#13#10'on pro.id_fornecedor = fo' +
+      'rn.codigo'#13#10'LEFT JOIN vpossui_pcusto PCUSTO'#13#10'ON PRO.ID = PCUSTO.I' +
+      'D'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

@@ -319,6 +319,7 @@ begin
     fDMConsEstoque.mAuxEst_AcumVlr_Entrada.AsFloat  := StrToFloat(FormatFloat('0.00##',fDMConsEstoque.cdsEstoque_AcumVLR_ENTRADA.AsFloat));
     fDMConsEstoque.mAuxEst_AcumVlr_Saida.AsFloat    := StrToFloat(FormatFloat('0.00##',fDMConsEstoque.cdsEstoque_AcumVLR_SAIDA.AsFloat));
     fDMConsEstoque.mAuxEst_AcumSaldo_Periodo.AsFloat := StrToFloat(FormatFloat('0.000000',fDMConsEstoque.mAuxEst_AcumQtd_Ent.AsFloat - fDMConsEstoque.mAuxEst_AcumQtd_Sai.AsFloat));
+    fDMConsEstoque.mAuxEst_AcumUnidade.AsString      := fDMConsEstoque.cdsEstoque_AcumUnidade.AsString;
     fDMConsEstoque.mAuxEst_Acum.Post;
     fDMConsEstoque.cdsEstoque_Acum.Next;
   end;
@@ -748,6 +749,7 @@ begin
         fDMConsEstoque.mAuxEst_AcumID_Produto.AsInteger := fDMConsEstoque.cdsEstoque_AntID_PRODUTO.AsInteger;
         fDMConsEstoque.mAuxEst_AcumReferencia.AsString  := fDMConsEstoque.cdsEstoque_AntREFERENCIA.AsString;
         fDMConsEstoque.mAuxEst_AcumNomeProduto.AsString := fDMConsEstoque.cdsEstoque_AntNOMEPRODUTO.AsString;
+        
         fDMConsEstoque.mAuxEst_AcumQtd_Ent.AsFloat      := StrToFloat(FormatFloat('0.00',0));
         fDMConsEstoque.mAuxEst_AcumQtd_Sai.AsFloat      := StrToFloat(FormatFloat('0.00',0));
         fDMConsEstoque.mAuxEst_AcumVlr_Entrada.AsFloat  := StrToFloat(FormatFloat('0.00',0));
