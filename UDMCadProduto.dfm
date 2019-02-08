@@ -2312,6 +2312,9 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'NOME_FORNECEDOR'
       Size = 60
     end
+    object cdsProduto_ConsultaCONT_POSSUIPRECO: TIntegerField
+      FieldName = 'CONT_POSSUIPRECO'
+    end
   end
   object dsProduto_Consulta: TDataSource
     DataSet = cdsProduto_Consulta
@@ -6612,7 +6615,7 @@ object dmCadProduto: TdmCadProduto
       'FROM PARAMETROS_PROD')
     SQLConnection = dmDatabase.scoDados
     Left = 1130
-    Top = 356
+    Top = 360
     object qParametros_ProdUSA_PRODUTO_FILIAL: TStringField
       FieldName = 'USA_PRODUTO_FILIAL'
       FixedChar = True
@@ -6771,6 +6774,11 @@ object dmCadProduto: TdmCadProduto
     end
     object qParametros_ProdMOSTRAR_FICHA_TEXTIL: TStringField
       FieldName = 'MOSTRAR_FICHA_TEXTIL'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdINDICAR_PCUSTO: TStringField
+      FieldName = 'INDICAR_PCUSTO'
       FixedChar = True
       Size = 1
     end

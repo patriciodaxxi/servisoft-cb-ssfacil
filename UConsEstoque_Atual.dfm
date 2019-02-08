@@ -280,10 +280,10 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
     Top = 131
     Width = 926
     Height = 387
-    ActivePage = TS_NCM
+    ActivePage = TS_Estoque
     ActivePageDefault = TS_Estoque
     Align = alClient
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 2
     FixedDimension = 19
     object TS_Estoque: TRzTabSheet

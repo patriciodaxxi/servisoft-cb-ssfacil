@@ -203,7 +203,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 10
+      TabOrder = 9
       Transparent = True
       OnClick = btnConsultarClick
     end
@@ -275,18 +275,9 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
         FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 11
+      TabOrder = 10
       Transparent = True
       OnClick = btnImprimirClick
-    end
-    object CheckBox1: TCheckBox
-      Left = 569
-      Top = 88
-      Width = 137
-      Height = 17
-      Caption = 'Mostrar Produto Inativo'
-      TabOrder = 8
-      OnClick = CheckBox1Click
     end
     object RadioGroup2: TRadioGroup
       Left = 1
@@ -302,7 +293,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
         'Mat.Consumo'
         'Semi Acabado'
         'Ambos')
-      TabOrder = 12
+      TabOrder = 11
       OnClick = RadioGroup2Click
     end
     object RadioGroup1: TRadioGroup
@@ -317,7 +308,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
         'Entrada'
         'Sa'#237'da'
         'Ambos')
-      TabOrder = 13
+      TabOrder = 12
     end
     object rxdbGrupo: TRxDBLookupCombo
       Left = 326
@@ -342,7 +333,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
       LookupField = 'ID'
       LookupDisplay = 'NOME'
       LookupSource = DMConsEstoque.dsLocal_Estoque
-      TabOrder = 9
+      TabOrder = 8
     end
     object CurrencyEdit1: TCurrencyEdit
       Left = 792
@@ -352,7 +343,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
       AutoSize = False
       DecimalPlaces = 0
       DisplayFormat = '0'
-      TabOrder = 14
+      TabOrder = 13
       Visible = False
     end
     object btnExcel: TNxButton
@@ -368,7 +359,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
       Font.Style = []
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 15
+      TabOrder = 14
       Transparent = True
       OnClick = btnExcelClick
     end
@@ -422,7 +413,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
     Top = 130
     Width = 941
     Height = 388
-    ActivePage = TS_Produto_Det
+    ActivePage = TS_Produto_Acum
     ActivePageDefault = TS_Produto_Det
     Align = alClient
     BackgroundColor = clGray
@@ -435,7 +426,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     TextColors.Selected = clBlue
     OnChange = RzPageControl1Change

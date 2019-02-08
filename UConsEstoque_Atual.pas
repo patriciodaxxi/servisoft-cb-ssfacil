@@ -88,7 +88,6 @@ begin
   i := PosEx('GROUP',fDMConsEstoque.ctEstoque_Atual,0);
   vComandoAux  := copy(fDMConsEstoque.ctEstoque_Atual,i,Length(fDMConsEstoque.ctEstoque_Atual) - i + 1);
   vComandoAux2 := copy(fDMConsEstoque.ctEstoque_Atual,1,i-1);
-  vComando := ' WHERE 0 = 0 ';
   if ceIDProduto.AsInteger > 0 then
     vComando := vComando + ' AND PRO.ID = ' + ceIDProduto.Text
   else

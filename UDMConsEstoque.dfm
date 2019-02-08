@@ -68,26 +68,26 @@ object DMConsEstoque: TDMConsEstoque
       ' '#39#39') THEN '#39'1'#39#13#10'      WHEN (PT.TAMANHO <> '#39#39') THEN PT.TAMANHO'#13#10'  ' +
       '   end'#13#10'LEFT JOIN LOCAL_ESTOQUE LEST'#13#10'ON EA.id_local_estoque = L' +
       'EST.id'#13#10'WHERE PRO.ESTOQUE = '#39'S'#39#13#10'  AND PRO.TIPO_REG = :TIPO_REG'#13 +
-      #10') AUX'#13#10#13#10#13#10
+      #10'  AND PRO.INATIVO = '#39'N'#39#13#10') AUX'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'TIPO_REG'
         ParamType = ptInput
       end>
@@ -276,7 +276,8 @@ object DMConsEstoque: TDMConsEstoque
       'FT JOIN GRUPO GR ON (PRO.ID_GRUPO = GR.ID)'#13#10'LEFT JOIN combinacao' +
       ' COMB ON (EM.id_cor = COMB.id)'#13#10'LEFT JOIN local_estoque LEST ON ' +
       '(EM.id_local_estoque = LEST.id)'#13#10'LEFT JOIN centrocusto CC ON EM.' +
-      'id_centrocusto = CC.ID'#13#10#13#10
+      'id_centrocusto = CC.ID'#13#10'WHERE PRO.inativo = '#39'N'#39#13#10'  AND PRO.estoq' +
+      'ue = '#39'S'#39#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -689,8 +690,9 @@ object DMConsEstoque: TDMConsEstoque
       'EM.qtd_ent) QTD_ENT,'#13#10'SUM(EM.qtd_sai) QTD_SAI, SUM(QTD2) SALDO, ' +
       #13#10'SUM(EM.QTD_ENT * EM.vlr_unitario) VLR_ENTRADA,'#13#10'SUM(EM.QTD_SAI' +
       ' * EM.vlr_unitario) VLR_SAIDA,'#13#10'pro.unidade'#13#10'FROM ESTOQUE_MOV EM' +
-      #13#10'INNER JOIN PRODUTO PRO'#13#10'ON EM.ID_PRODUTO = PRO.ID'#13#10'GROUP BY EM' +
-      '.id_produto, PRO.nome, PRO.REFERENCIA, pro.unidade'
+      #13#10'INNER JOIN PRODUTO PRO'#13#10'ON EM.ID_PRODUTO = PRO.ID'#13#10'WHERE PRO.E' +
+      'STOQUE = '#39'S'#39#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10'GROUP BY EM.id_produto, P' +
+      'RO.nome, PRO.REFERENCIA, pro.unidade'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1107,9 +1109,9 @@ object DMConsEstoque: TDMConsEstoque
       'M(EM.QTD_ENT * EM.vlr_unitario) VLR_ENTRADA,'#13#10'SUM(EM.QTD_SAI * E' +
       'M.vlr_unitario) VLR_SAIDA'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JOIN PRODU' +
       'TO PRO'#13#10'ON EM.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN LOCAL_ESTOQUE LEST'#13 +
-      #10'ON EM.id_local_estoque = LEST.id'#13#10'GROUP BY EM.id_produto, PRO.n' +
-      'ome, PRO.REFERENCIA, EM.id_local_estoque,'#13#10'LEST.cod_local, LEST.' +
-      'nome'
+      #10'ON EM.id_local_estoque = LEST.id'#13#10'WHERE PRO.INATIVO = '#39'N'#39#13#10'  AN' +
+      'D PRO.ESTOQUE = '#39'S'#39#13#10'GROUP BY EM.id_produto, PRO.nome, PRO.REFER' +
+      'ENCIA, EM.id_local_estoque,'#13#10'LEST.cod_local, LEST.nome'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3128,7 +3130,8 @@ object DMConsEstoque: TDMConsEstoque
       'SELECT E.ID_PRODUTO, E.ID_COR, E.TAMANHO, E.QTD,'#13#10'P.NOME NOME_PR' +
       'ODUTO, P.REFERENCIA, P.UNIDADE, C.NOME NOME_COMBINACAO'#13#10'FROM EST' +
       'OQUE_RES E'#13#10'INNER JOIN PRODUTO P'#13#10'ON E.ID_PRODUTO = P.ID'#13#10'LEFT J' +
-      'OIN COMBINACAO C'#13#10'ON E.ID_COR = C.ID'#13#10
+      'OIN COMBINACAO C'#13#10'ON E.ID_COR = C.ID'#13#10'where P.INATIVO = '#39'N'#39#13#10'   ' +
+      'AND P.ESTOQUE = '#39'S'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3211,9 +3214,10 @@ object DMConsEstoque: TDMConsEstoque
       'filial, SUM(EM.qtd2) Qtd_Reserva,'#13#10'PRO.nome NOME_PRODUTO, PRO.RE' +
       'FERENCIA, COMB.nome NOME_COMBINACAO'#13#10'FROM estoque_mov_res EM'#13#10'IN' +
       'NER JOIN PRODUTO PRO'#13#10'ON EM.id_produto = PRO.id'#13#10'LEFT JOIN combi' +
-      'nacao COMB'#13#10'ON EM.id_cor = COMB.id'#13#10'GROUP BY EM.id_produto, EM.i' +
-      'd_cor, EM.tamanho, EM.num_ordem,'#13#10'EM.filial, PRO.nome,'#13#10'PRO.REFE' +
-      'RENCIA, COMB.nome'#13#10
+      'nacao COMB'#13#10'ON EM.id_cor = COMB.id'#13#10'WHERE PRO.INATIVO = '#39'N'#39#13#10'  A' +
+      'ND PRO.ESTOQUE = '#39'S'#39#13#10'GROUP BY EM.id_produto, EM.id_cor, EM.tama' +
+      'nho, EM.num_ordem,'#13#10'EM.filial, PRO.nome,'#13#10'PRO.REFERENCIA, COMB.n' +
+      'ome'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3319,10 +3323,11 @@ object DMConsEstoque: TDMConsEstoque
       #13#10'ON EA.ID_COR = COMB.ID'#13#10'LEFT JOIN TAB_NCM NCM'#13#10'ON PRO.ID_NCM =' +
       ' NCM.ID'#13#10'left join estoque_res ER'#13#10'ON EA.id_produto = ER.id_prod' +
       'uto'#13#10'AND EA.id_cor = ER.ID_COR'#13#10'AND EA.tamanho = ER.TAMANHO'#13#10'AND' +
-      ' EA.FILIAL = ER.filial'#13#10'GROUP BY EA.id_cor, EA.tamanho, EA.id_lo' +
-      'cal_estoque, PRO.NOME, PRO.REFERENCIA,'#13#10'COMB.NOME, PRO.localizac' +
-      'ao, PRO.ID, PRO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM,'#13#10'NCM.N' +
-      'CM, NCM.NOME'#13#10
+      ' EA.FILIAL = ER.filial'#13#10'WHERE PRO.ESTOQUE = '#39'S'#39#13#10'   AND PRO.INAT' +
+      'IVO = '#39'N'#39#13#10'GROUP BY EA.id_cor, EA.tamanho, EA.id_local_estoque, ' +
+      'PRO.NOME, PRO.REFERENCIA,'#13#10'COMB.NOME, PRO.localizacao, PRO.ID, P' +
+      'RO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM,'#13#10'NCM.NCM, NCM.NOME'#13 +
+      #10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

@@ -768,6 +768,8 @@ type
     RxDBComboBox11: TRxDBComboBox;
     btnAjuda_TipoMat: TNxButton;
     SMDBGrid16: TSMDBGrid;
+    Shape1: TShape;
+    Label248: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1805,6 +1807,20 @@ begin
   DBEdit159.Visible := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
   Label247.Visible  := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
   Edit12.Visible    := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  Shape1.Visible    := ((fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.AsString <> 'N') and not(fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.IsNull));
+  Label248.Visible  := ((fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.AsString <> 'N') and not(fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.IsNull));
+  if ((fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.AsString <> 'N') and not(fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.IsNull)) then
+  begin
+    if fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.AsString = 'P' then
+      Label248.Caption := 'Produto'
+    else
+    if fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.AsString = 'M' then
+      Label248.Caption := 'Material'
+    else
+    if fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.AsString = 'C' then
+      Label248.Caption := 'Material de Consumo';
+    Label248.Caption := Label248.Caption + ' Sem Preço Custo ';
+  end;
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
@@ -2378,7 +2394,13 @@ procedure TfrmCadProduto.SMDBGrid1GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
   if fDMCadProduto.cdsProduto_ConsultaINATIVO.AsString = 'S' then
-    AFont.Color := clRed;
+    AFont.Color := clRed
+  else
+  if fDMCadProduto.cdsProduto_ConsultacoINATIVO.AsString = 'S' then
+  begin
+    Background  := clYellow;
+    AFont.Color := clBlack;
+  end;
 end;
 
 procedure TfrmCadProduto.RxDBLookupCombo5Enter(Sender: TObject);

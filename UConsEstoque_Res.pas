@@ -71,7 +71,7 @@ uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, USel_Produto, StrUtils;
 procedure TfrmConsEstoque_Res.prc_Consultar;
 begin
   fDMConsEstoque.cdsEstoque_Res.Close;
-  fDMConsEstoque.sdsEstoque_Res.CommandText := fDMConsEstoque.ctEstoque_Res + ' WHERE (0 = 0) ';
+  fDMConsEstoque.sdsEstoque_Res.CommandText := fDMConsEstoque.ctEstoque_Res;
   if ceIDProduto.AsInteger > 0 then
     fDMConsEstoque.sdsEstoque_Res.CommandText := fDMConsEstoque.sdsEstoque_Res.CommandText + ' AND E.ID_PRODUTO = ' + ceIDProduto.Text
   else
@@ -218,7 +218,6 @@ begin
     vComandoAux2 := fDMConsEstoque.ctEstoque_Res_Ord;
   end;
   fDMConsEstoque.cdsEstoque_Res_Ord.Close;
-  vComandoAux2 := vComandoAux2 + ' WHERE (0 = 0) ';
   if ceIDProduto.AsInteger > 0 then
     vComandoAux2 := vComandoAux2 + ' AND EM.ID_PRODUTO = ' + ceIDProduto.Text
   else

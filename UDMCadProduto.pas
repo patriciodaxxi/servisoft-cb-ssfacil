@@ -1880,6 +1880,8 @@ type
     sdsGradeGRADE_REF: TStringField;
     cdsGradeGRADE_REF: TStringField;
     cdsProduto_ConsultaNOME_FORNECEDOR: TStringField;
+    qParametros_ProdINDICAR_PCUSTO: TStringField;
+    cdsProduto_ConsultaCONT_POSSUIPRECO: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

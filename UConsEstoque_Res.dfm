@@ -61,7 +61,7 @@ object frmConsEstoque_Res: TfrmConsEstoque_Res
       Left = 112
       Top = 23
       Width = 182
-      Height = 21
+      Height = 19
       CharCase = ecUpperCase
       Ctl3D = False
       ParentCtl3D = False
@@ -111,10 +111,10 @@ object frmConsEstoque_Res: TfrmConsEstoque_Res
     Top = 64
     Width = 926
     Height = 454
-    ActivePage = TS_OP
+    ActivePage = TS_Geral
     ActivePageDefault = TS_Geral
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     FixedDimension = 19
     object TS_Geral: TRzTabSheet

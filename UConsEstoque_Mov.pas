@@ -34,7 +34,6 @@ type
     Panel2: TPanel;
     Label8: TLabel;
     ComboBox1: TComboBox;
-    CheckBox1: TCheckBox;
     RadioGroup2: TRadioGroup;
     RadioGroup1: TRadioGroup;
     rxdbGrupo: TRxDBLookupCombo;
@@ -81,7 +80,6 @@ type
     procedure btnConsultarClick(Sender: TObject);
     procedure SMDBGrid2TitleClick(Column: TColumn);
     procedure btnImprimirClick(Sender: TObject);
-    procedure CheckBox1Click(Sender: TObject);
     procedure rxdbGrupoKeyDowno(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure rxdbGrupoDropDown(Sender: TObject);
@@ -157,7 +155,7 @@ uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoqueMov_Prod, URelEstoqu
 procedure TfrmConsEstoque_Mov.prc_Consultar;
 begin
   fDMConsEstoque.cdsEstoque_Mov.Close;
-  fDMConsEstoque.sdsEstoque_Mov.CommandText := fDMConsEstoque.ctEstoque_Mov + ' WHERE 0 = 0 ' + vComando;
+  fDMConsEstoque.sdsEstoque_Mov.CommandText := fDMConsEstoque.ctEstoque_Mov + vComando;
   fDMConsEstoque.cdsEstoque_Mov.Open;
 end;
 
@@ -360,8 +358,6 @@ begin
     if (DateEdit2.Date > 10) then
       vComando := vComando + ' AND EM.DATA <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.date));
   end;
-  if not CheckBox1.Checked then
-    vComando := vComando + ' AND PRO.INATIVO = ' + QuotedStr('N');
   case RadioGroup2.ItemIndex of
     0: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('P');
     1: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('M');
@@ -497,14 +493,6 @@ begin
   fRelEstoqueMov_Acum.RLReport1.Free;
   FreeAndNil(fRelEstoqueMov_Acum);
   SMDBGrid2.EnableScroll;
-end;
-
-procedure TfrmConsEstoque_Mov.CheckBox1Click(Sender: TObject);
-begin
-  if CheckBox1.Checked then
-    fDMConsEstoque.prc_Abrir_Produto('S')
-  else
-    fDMConsEstoque.prc_Abrir_Produto('N');
 end;
 
 procedure TfrmConsEstoque_Mov.rxdbGrupoKeyDowno(Sender: TObject;
