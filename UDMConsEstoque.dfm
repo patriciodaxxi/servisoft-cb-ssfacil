@@ -888,23 +888,35 @@ object DMConsEstoque: TDMConsEstoque
     CommandText = 
       'SELECT EM.ID_PRODUTO, EM.TAMANHO, SUM(EM.QTD2) QTD_ESTOQUE, PRO.' +
       'REFERENCIA, PRO.NOME NOME_PRODUTO, PRO.UNIDADE,'#13#10'  EM.id_cor, CO' +
-      'MB.NOME NOME_COMBINACAO, '#13#10'    (select SUM(ENT.QTD * ENT.VLR_UNI' +
-      'TARIO) VLR_ENTRADA'#13#10'      FROM estoque_mov ENT'#13#10'      WHERE ENT.' +
-      'tipo_es = '#39'E'#39#13#10'        AND ENT.gerar_custo = '#39'S'#39#13#10'        AND EN' +
-      'T.ID_PRODUTO = EM.ID_PRODUTO'#13#10'        AND ENT.tamanho = EM.TAMAN' +
-      'HO'#13#10'        AND ENT.FILIAL = :FILIAL'#13#10'        AND ENT.DTMOVIMENT' +
-      'O <= :DTMOVIMENTO) VLR_ENTRADA,'#13#10'    (select SUM(ENT.QTD) QTD_EN' +
-      'TRADA'#13#10'      FROM estoque_mov ENT'#13#10'      WHERE ENT.tipo_es = '#39'E'#39 +
-      #13#10'        AND ENT.gerar_custo = '#39'S'#39#13#10'        AND ENT.ID_PRODUTO ' +
-      '= EM.ID_PRODUTO'#13#10'        AND ENT.tamanho = EM.TAMANHO'#13#10'        A' +
-      'ND ENT.FILIAL = :FILIAL'#13#10'        AND ENT.DTMOVIMENTO <= :DTMOVIM' +
-      'ENTO) QTD_ENTRADA'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JOIN PRODUTO PRO'#13#10 +
-      'ON EM.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON EM.ID_C' +
-      'OR = COMB.ID'#13#10'WHERE EM.FILIAL = :FILIAL'#13#10'  AND EM.DTMOVIMENTO <=' +
-      ' :DTMOVIMENTO'#13#10'  AND PRO.TIPO_REG = :TIPO_REG'#13#10'  AND PRO.INATIVO' +
-      ' = '#39'N'#39#13#10'  AND PRO.ESTOQUE = '#39'S'#39#13#10'GROUP BY EM.ID_PRODUTO, EM.TAMA' +
-      'NHO, PRO.REFERENCIA, PRO.NOME, PRO.UNIDADE, EM.id_cor, COMB.NOME' +
-      #13#10
+      'MB.NOME NOME_COMBINACAO, PRO.sped_tipo_item,'#13#10'case'#13#10'  WHEN PRO.s' +
+      'ped_tipo_item = '#39'00'#39' THEN '#39'00 - Mercadoria para Revenda'#39#13#10'  WHEN' +
+      ' PRO.sped_tipo_item = '#39'01'#39' THEN '#39'01- Mat'#233'ria-Prima'#39#13#10'  WHEN PRO.' +
+      'sped_tipo_item = '#39'02'#39' THEN '#39'02- Embalagem'#39#13#10'  WHEN PRO.sped_tipo' +
+      '_item = '#39'03'#39' THEN '#39'03 - Produto em Processo'#39#13#10'  WHEN PRO.sped_ti' +
+      'po_item = '#39'04'#39' THEN '#39'04 - Produto Acabado'#39#13#10'  WHEN PRO.sped_tipo' +
+      '_item = '#39'05'#39' THEN '#39'05 - SubProduto'#39#13#10'  WHEN PRO.sped_tipo_item =' +
+      ' '#39'06'#39' THEN '#39'06 - Produto Intermedi'#225'rio'#39#13#10'  WHEN PRO.sped_tipo_it' +
+      'em = '#39'07'#39' THEN '#39'07 - Material de Uso e Consumo'#39#13#10'  WHEN PRO.sped' +
+      '_tipo_item = '#39'08'#39' THEN '#39'08 - Ativo Imobilizado'#39#13#10'  WHEN PRO.sped' +
+      '_tipo_item = '#39'10'#39' THEN '#39'10 - Outros Insumos'#39#13#10'  WHEN PRO.sped_ti' +
+      'po_item = '#39'99'#39' THEN '#39'99 - Outras'#39#13#10'  ELSE '#39#39#13#10'  END TIPO_SPED,'#13#10 +
+      #13#10'    (select SUM(ENT.QTD * ENT.VLR_UNITARIO) VLR_ENTRADA'#13#10'     ' +
+      ' FROM estoque_mov ENT'#13#10'      WHERE ENT.tipo_es = '#39'E'#39#13#10'        AN' +
+      'D ENT.gerar_custo = '#39'S'#39#13#10'        AND ENT.ID_PRODUTO = EM.ID_PROD' +
+      'UTO'#13#10'        AND ENT.tamanho = EM.TAMANHO'#13#10'        AND ENT.FILIA' +
+      'L = :FILIAL'#13#10'        AND ENT.DTMOVIMENTO <= :DTMOVIMENTO) VLR_EN' +
+      'TRADA,'#13#10'    (select SUM(ENT.QTD) QTD_ENTRADA'#13#10'      FROM estoque' +
+      '_mov ENT'#13#10'      WHERE ENT.tipo_es = '#39'E'#39#13#10'        AND ENT.gerar_c' +
+      'usto = '#39'S'#39#13#10'        AND ENT.ID_PRODUTO = EM.ID_PRODUTO'#13#10'        ' +
+      'AND ENT.tamanho = EM.TAMANHO'#13#10'        AND ENT.FILIAL = :FILIAL'#13#10 +
+      '        AND ENT.DTMOVIMENTO <= :DTMOVIMENTO) QTD_ENTRADA'#13#10'FROM E' +
+      'STOQUE_MOV EM'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON EM.ID_PRODUTO = PRO.ID' +
+      #13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON EM.ID_COR = COMB.ID'#13#10'WHERE EM.FI' +
+      'LIAL = :FILIAL'#13#10'  AND EM.DTMOVIMENTO <= :DTMOVIMENTO'#13#10'  AND ((PR' +
+      'O.TIPO_REG = :TIPO_REG) or (PRO.SPED_TIPO_ITEM = :SPED_TIPO_ITEM' +
+      '))'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10'  AND PRO.ESTOQUE = '#39'S'#39#13#10'GROUP BY E' +
+      'M.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, PRO.UNIDADE,' +
+      ' EM.id_cor, COMB.NOME, PRO.sped_tipo_item'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -940,6 +952,11 @@ object DMConsEstoque: TDMConsEstoque
       item
         DataType = ftString
         Name = 'TIPO_REG'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'SPED_TIPO_ITEM'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
@@ -1007,6 +1024,16 @@ object DMConsEstoque: TDMConsEstoque
     object cdsBalancoNOME_COMBINACAO: TStringField
       FieldName = 'NOME_COMBINACAO'
       Size = 60
+    end
+    object cdsBalancoSPED_TIPO_ITEM: TStringField
+      FieldName = 'SPED_TIPO_ITEM'
+      Size = 2
+    end
+    object cdsBalancoTIPO_SPED: TStringField
+      FieldName = 'TIPO_SPED'
+      Required = True
+      FixedChar = True
+      Size = 30
     end
   end
   object dsBalanco: TDataSource

@@ -584,6 +584,8 @@ type
     mUnidadeUnidade: TStringField;
     mAuxEst_AcumUnidade: TStringField;
     cdsEstoque_AcumUNIDADE: TStringField;
+    cdsBalancoSPED_TIPO_ITEM: TStringField;
+    cdsBalancoTIPO_SPED: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

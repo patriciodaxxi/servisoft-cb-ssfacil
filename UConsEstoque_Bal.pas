@@ -13,7 +13,6 @@ type
     Label2: TLabel;
     RxDBLookupCombo1: TRxDBLookupCombo;
     RadioGroup1: TRadioGroup;
-    RadioGroup2: TRadioGroup;
     btnConsultar: TNxButton;
     Label1: TLabel;
     DateEdit1: TDateEdit;
@@ -31,14 +30,19 @@ type
     Panel3: TPanel;
     Shape2: TShape;
     Label4: TLabel;
-    Label5: TLabel;
-    CurrencyEdit1: TCurrencyEdit;
     NxButton1: TNxButton;
     CheckBox1: TCheckBox;
+    Label5: TLabel;
+    CurrencyEdit1: TCurrencyEdit;
+    ComboBox1: TComboBox;
+    Label6: TLabel;
+    Label7: TLabel;
+    ComboBox2: TComboBox;
+    Label8: TLabel;
+    ComboBox3: TComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
-    procedure RadioGroup2Click(Sender: TObject);
     procedure Edit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure RxDBLookupCombo2Enter(Sender: TObject);
@@ -57,6 +61,8 @@ type
     procedure NxButton1Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure ComboBox2Exit(Sender: TObject);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -86,11 +92,32 @@ begin
   fDMConsEstoque.cdsBalanco.Close;
   fDMConsEstoque.sdsBalanco.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsBalanco.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
-  case RadioGroup2.ItemIndex of
-    0: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'P';
-    1: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'M';
-    2: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'C';
-    3: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'S';
+  if ComboBox1.ItemIndex = 0 then
+  begin
+    case ComboBox2.ItemIndex of
+      0: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'P';
+      1: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'M';
+      2: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'C';
+      3: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'S';
+    end;
+    fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '-';
+  end
+  else
+  begin
+    case ComboBox3.ItemIndex of
+      0: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '00'; 
+      1: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '01';
+      2: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '02';
+      3: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '03';
+      4: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '04';
+      5: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '05';
+      6: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '06';
+      7: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '07';
+      8: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '08';
+      9: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '10';
+     10: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '99';
+    end;
+    fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString := '-';
   end;
   fDMConsEstoque.cdsBalanco.Open;
 end;
@@ -105,7 +132,7 @@ procedure TfrmConsEstoque_Bal.FormShow(Sender: TObject);
 begin
   fDMConsEstoque := TDMConsEstoque.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMConsEstoque);
-  RadioGroup2Click(Sender);
+  ComboBox2Exit(Sender);
   fDMConsEstoque.cdsFilial.First;
   if (fDMConsEstoque.cdsFilial.RecordCount < 2) and (fDMConsEstoque.cdsFilialID.AsInteger > 0) then
     RxDBLookupCombo1.KeyValue := fDMConsEstoque.cdsFilialID.AsInteger;
@@ -121,20 +148,6 @@ begin
   for i := 0 to SMDBGrid1.Columns.Count - 1 do
     if not (SMDBGrid1.Columns.Items[I] = Column) then
       SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
-end;
-
-procedure TfrmConsEstoque_Bal.RadioGroup2Click(Sender: TObject);
-var
-  i: Integer;
-begin
-  for i := 1 to SMDBGrid1.ColCount - 2 do
-  begin
-    if (SMDBGrid1.Columns[i].FieldName = 'TAMANHO') then
-      SMDBGrid1.Columns[i].Visible := (fDMConsEstoque.qParametrosUSA_GRADE.AsString = 'S');
-    if (SMDBGrid1.Columns[i].FieldName = 'NOME_COR') then
-      SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametrosINFORMAR_COR_MATERIAL.AsString = 'S') or
-                                      (fDMConsEstoque.qParametrosINFORMAR_COR_PROD.AsString = 'C'));
-  end;
 end;
 
 procedure TfrmConsEstoque_Bal.Edit1KeyDown(Sender: TObject; var Key: Word;
@@ -387,6 +400,28 @@ procedure TfrmConsEstoque_Bal.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if (Shift = [ssCtrl]) and (Key = 87) then
     CheckBox1.Visible := not(CheckBox1.Visible);
+end;
+
+procedure TfrmConsEstoque_Bal.ComboBox1Change(Sender: TObject);
+begin
+  label7.Visible    := (ComboBox1.ItemIndex = 0);
+  ComboBox2.Visible := (ComboBox1.ItemIndex = 0);
+  label8.Visible    := (ComboBox1.ItemIndex = 1);
+  ComboBox3.Visible := (ComboBox1.ItemIndex = 1);
+end;
+
+procedure TfrmConsEstoque_Bal.ComboBox2Exit(Sender: TObject);
+var
+  i: Integer;
+begin
+  for i := 1 to SMDBGrid1.ColCount - 2 do
+  begin
+    if (SMDBGrid1.Columns[i].FieldName = 'TAMANHO') then
+      SMDBGrid1.Columns[i].Visible := (fDMConsEstoque.qParametrosUSA_GRADE.AsString = 'S');
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_COR') then
+      SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametrosINFORMAR_COR_MATERIAL.AsString = 'S') or
+                                      (fDMConsEstoque.qParametrosINFORMAR_COR_PROD.AsString = 'C'));
+  end;
 end;
 
 end.

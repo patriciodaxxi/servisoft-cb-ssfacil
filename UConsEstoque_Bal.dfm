@@ -28,7 +28,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
     Color = clSilver
     TabOrder = 0
     object Label2: TLabel
-      Left = 282
+      Left = 434
       Top = 13
       Width = 23
       Height = 13
@@ -36,22 +36,40 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Caption = 'Filial:'
     end
     object Label1: TLabel
-      Left = 224
+      Left = 376
       Top = 36
       Width = 81
       Height = 13
       Alignment = taRightJustify
       Caption = 'Data Refer'#234'ncia:'
     end
-    object Label5: TLabel
-      Left = 736
+    object Label6: TLabel
+      Left = 120
       Top = 13
-      Width = 66
+      Width = 58
       Height = 13
-      Caption = 'P'#225'gina Inicial:'
+      Alignment = taRightJustify
+      Caption = 'Usar o Tipo:'
+    end
+    object Label7: TLabel
+      Left = 109
+      Top = 36
+      Width = 69
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Tipo Cadastro:'
+    end
+    object Label8: TLabel
+      Left = 122
+      Top = 59
+      Width = 56
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Tipo SPED:'
+      Visible = False
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
-      Left = 306
+      Left = 458
       Top = 5
       Width = 361
       Height = 21
@@ -74,24 +92,8 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         'Ambos')
       TabOrder = 1
     end
-    object RadioGroup2: TRadioGroup
-      Left = 97
-      Top = 1
-      Width = 120
-      Height = 81
-      Align = alLeft
-      Caption = ' Tipo '
-      ItemIndex = 0
-      Items.Strings = (
-        'Produto'
-        'Material'
-        'Material Consumo'
-        'Semi Acabado')
-      TabOrder = 2
-      OnClick = RadioGroup2Click
-    end
     object btnConsultar: TNxButton
-      Left = 306
+      Left = 458
       Top = 50
       Width = 177
       Height = 30
@@ -158,20 +160,20 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
       Transparent = True
       OnClick = btnConsultarClick
     end
     object DateEdit1: TDateEdit
-      Left = 306
-      Top = 27
+      Left = 458
+      Top = 28
       Width = 121
       Height = 21
       NumGlyphs = 2
-      TabOrder = 4
+      TabOrder = 3
     end
     object btnImprimir_Est: TNxButton
-      Left = 482
+      Left = 634
       Top = 50
       Width = 177
       Height = 30
@@ -238,19 +240,66 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
       Transparent = True
       OnClick = btnImprimir_EstClick
     end
-    object CurrencyEdit1: TCurrencyEdit
-      Left = 805
+    object ComboBox1: TComboBox
+      Left = 180
       Top = 5
-      Width = 75
+      Width = 181
       Height = 21
-      AutoSize = False
-      DecimalPlaces = 0
-      DisplayFormat = '0'
+      Style = csDropDownList
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 5
+      Text = 'Por Tipo de Cadastro'
+      OnChange = ComboBox1Change
+      Items.Strings = (
+        'Por Tipo de Cadastro'
+        'Por Tipo SPED')
+    end
+    object ComboBox2: TComboBox
+      Left = 180
+      Top = 28
+      Width = 181
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      ItemIndex = 0
       TabOrder = 6
+      Text = 'Produto'
+      OnExit = ComboBox2Exit
+      Items.Strings = (
+        'Produto'
+        'Material'
+        'Material Consumo'
+        'Semi Acabado'
+        'Imobilizado')
+    end
+    object ComboBox3: TComboBox
+      Left = 180
+      Top = 51
+      Width = 181
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      ItemIndex = 7
+      TabOrder = 7
+      Text = '07 - Material de Uso e Consumo'
+      Visible = False
+      Items.Strings = (
+        '00 - Mercadoria para Revenda'
+        '01- Mat'#233'ria-Prima'
+        '02- Embalagem'
+        '03 - Produto em Processo'
+        '04 - Produto Acabado'
+        '05 - SubProduto'
+        '06 - Produto Intermedi'#225'rio'
+        '07 - Material de Uso e Consumo'
+        '08 - Ativo Imobilizado'
+        '10 - Outros Insumos'
+        '99 - Outras')
     end
   end
   object StaticText1: TStaticText
@@ -285,9 +334,9 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Caption = 'Balan'#231'o'
       object SMDBGrid1: TSMDBGrid
         Left = 0
-        Top = 30
+        Top = 25
         Width = 922
-        Height = 365
+        Height = 370
         Align = alClient
         Ctl3D = False
         DataSource = DMConsEstoque.dsBalanco
@@ -321,7 +370,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 11
+        ColCount = 12
         RowCount = 2
         Columns = <
           item
@@ -403,13 +452,21 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
             Title.Caption = 'Vlr. Total Entrada'
             Width = 78
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TIPO_SPED'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo SPED'
+            Width = 231
+            Visible = True
           end>
       end
       object Panel3: TPanel
         Left = 0
         Top = 0
         Width = 922
-        Height = 30
+        Height = 25
         Align = alTop
         Color = clSilver
         TabOrder = 1
@@ -426,6 +483,23 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
           Width = 122
           Height = 13
           Caption = 'Produto sem Pre'#231'o M'#233'dio'
+        end
+        object Label5: TLabel
+          Left = 16
+          Top = 9
+          Width = 66
+          Height = 13
+          Caption = 'P'#225'gina Inicial:'
+        end
+        object CurrencyEdit1: TCurrencyEdit
+          Left = 85
+          Top = 1
+          Width = 75
+          Height = 21
+          AutoSize = False
+          DecimalPlaces = 0
+          DisplayFormat = '0'
+          TabOrder = 0
         end
       end
     end
