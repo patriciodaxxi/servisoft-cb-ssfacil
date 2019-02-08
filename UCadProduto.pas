@@ -3189,20 +3189,23 @@ begin
   if (vTipo_Reg_Ant <> fDMCadProduto.cdsProdutoTIPO_REG.AsString) and (fDMCadProduto.cdsProduto.State in [dsInsert]) and
      (copy(fDMCadProduto.cdsProdutoREFERENCIA.AsString,2,1) = '.') then
     fDMCadProduto.cdsProdutoREFERENCIA.AsString := '';
-  if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'P' then
-    fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '04'
-  else
-  if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'S' then
-    fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '06'
-  else
-  if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M' then
-    fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '01'
-  else
-  if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'C' then
-    fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '07'
-  else
-  if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'I' then
-    fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '08';
+  if (vTipo_Reg_Ant <> fDMCadProduto.cdsProdutoTIPO_REG.AsString) or (fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.IsNull) then
+  begin
+    if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'P' then
+      fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '04'
+    else
+    if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'S' then
+      fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '06'
+    else
+    if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M' then
+      fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '01'
+    else
+    if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'C' then
+      fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '07'
+    else
+    if fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'I' then
+      fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString := '08';
+  end;
   if (vTipo_Reg_Ant <> fDMCadProduto.cdsProdutoTIPO_REG.AsString) and (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M') then
   begin
     if (fDMCadProduto.qParametrosINFORMAR_COR_PROD.AsString = 'C') or (fDMCadProduto.qParametrosINFORMAR_COR_MATERIAL.AsString = 'S') then
