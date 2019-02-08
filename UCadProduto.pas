@@ -2396,10 +2396,14 @@ begin
   if fDMCadProduto.cdsProduto_ConsultaINATIVO.AsString = 'S' then
     AFont.Color := clRed
   else
-  if fDMCadProduto.cdsProduto_ConsultacoINATIVO.AsString = 'S' then
+  if ((fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.AsString <> 'N') and not(fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.IsNull))
+    and (fDMCadProduto.cdsProduto_ConsultaCONT_POSSUIPRECO.AsInteger > 0) then
   begin
-    Background  := clYellow;
-    AFont.Color := clBlack;
+    if (fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.AsString = 'A') or (fDMCadProduto.qParametros_ProdINDICAR_PCUSTO.AsString = fDMCadProduto.cdsProduto_ConsultaTIPO_REG.AsString) then
+    begin
+      Background  := clYellow;
+      AFont.Color := clBlack;
+    end;
   end;
 end;
 
