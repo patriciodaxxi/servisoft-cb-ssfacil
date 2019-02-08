@@ -209,8 +209,8 @@ begin
     exit;
   fDMConsEstoque.cdsEstoque_Mov.Close;
   fDMConsEstoque.sdsEstoque_Mov.CommandText := fDMConsEstoque.ctEstoque_Mov
-                                             + ' WHERE EM.ID_PRODUTO = ' + IntToStr(fDMConsEstoque.cdsBalancoID_PRODUTO.AsInteger)
-                                             + '   AND EM.DTMOVIMENTO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date));
+                                             + '  AND EM.ID_PRODUTO = ' + IntToStr(fDMConsEstoque.cdsBalancoID_PRODUTO.AsInteger)
+                                             + '  AND EM.DTMOVIMENTO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date));
   if fDMConsEstoque.cdsBalancoID_COR.AsInteger > 0 then
     fDMConsEstoque.sdsEstoque_Mov.CommandText := fDMConsEstoque.sdsEstoque_Mov.CommandText + '   AND EM.ID_COR = ' + IntToStr(fDMConsEstoque.cdsBalancoID_COR.AsInteger);
   fDMConsEstoque.cdsEstoque_Mov.Open;
