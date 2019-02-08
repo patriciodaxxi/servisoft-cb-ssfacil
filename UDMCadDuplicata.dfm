@@ -4490,8 +4490,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM PARAMETROS_FIN'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 664
-    Top = 448
+    Left = 680
+    Top = 392
     object qParametros_FinID: TIntegerField
       FieldName = 'ID'
       Required = True
