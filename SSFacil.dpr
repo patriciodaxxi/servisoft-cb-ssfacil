@@ -783,14 +783,14 @@ begin
     Application.Initialize;
     Application.Title := 'SSFacil';
 
-//    Application.CreateForm(TfrmAbertura, frmAbertura);
-//  frmAbertura.Show;
-//    frmAbertura.Refresh;
+    Application.CreateForm(TfrmAbertura, frmAbertura);
+  frmAbertura.Show;
+    frmAbertura.Refresh;
 
     Application.CreateForm(TdmDataBase, dmDataBase);
 
-//    frmAbertura.Hide;
-//    frmAbertura.Free;
+    frmAbertura.Hide;
+    frmAbertura.Free;
 
     Application.CreateForm(TDMUtil, DMUtil);
     Application.CreateForm(TfMenu, fMenu);
