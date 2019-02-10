@@ -770,6 +770,8 @@ type
     SMDBGrid16: TSMDBGrid;
     Shape1: TShape;
     Label248: TLabel;
+    Label249: TLabel;
+    ComboBox3: TComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1636,6 +1638,8 @@ begin
     TabSheet2.Caption := 'Dados Fornecedor';
   Label28.Visible       := (fDMCadProduto.qParametrosUSA_SPED.AsString = 'S');
   RxDBComboBox4.Visible := (fDMCadProduto.qParametrosUSA_SPED.AsString = 'S');
+  Label249.Visible      := (fDMCadProduto.qParametrosUSA_SPED.AsString = 'S');
+  ComboBox3.Visible     := (fDMCadProduto.qParametrosUSA_SPED.AsString = 'S');
   Label97.Visible       := (fDMCadProduto.qParametrosEMPRESA_INJETADO.AsString = 'S');
   DBEdit41.Visible      := (fDMCadProduto.qParametrosEMPRESA_INJETADO.AsString = 'S');
 
@@ -1887,6 +1891,21 @@ begin
       2: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND TIPO_REG = ' + QuotedStr('N');
       3: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND TIPO_REG = ' + QuotedStr('C');
       5: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND TIPO_REG = ' + QuotedStr('S');
+    end;
+
+    case ComboBox3.ItemIndex of
+      0: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('00');
+      1: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('01');
+      2: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('02');
+      3: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('03');
+      4: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('04');
+      5: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('05');
+      6: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('06');
+      7: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('07');
+      8: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('08');
+      9: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('09');
+     10: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('10');
+     11: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('99');
     end;
 
     //Consulta Veículo
