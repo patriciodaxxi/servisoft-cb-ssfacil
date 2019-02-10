@@ -1,10 +1,10 @@
 object DMConsEstoque: TDMConsEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 94
-  Top = 16
-  Height = 654
-  Width = 1179
+  Left = 101
+  Top = 23
+  Height = 699
+  Width = 1224
   object sdsEstoque: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -909,16 +909,34 @@ object DMConsEstoque: TDMConsEstoque
       '_mov ENT'#13#10'      WHERE ENT.tipo_es = '#39'E'#39#13#10'        AND ENT.gerar_c' +
       'usto = '#39'S'#39#13#10'        AND ENT.ID_PRODUTO = EM.ID_PRODUTO'#13#10'        ' +
       'AND ENT.tamanho = EM.TAMANHO'#13#10'        AND ENT.FILIAL = :FILIAL'#13#10 +
-      '        AND ENT.DTMOVIMENTO <= :DTMOVIMENTO) QTD_ENTRADA'#13#10'FROM E' +
-      'STOQUE_MOV EM'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON EM.ID_PRODUTO = PRO.ID' +
-      #13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON EM.ID_COR = COMB.ID'#13#10'WHERE EM.FI' +
-      'LIAL = :FILIAL'#13#10'  AND EM.DTMOVIMENTO <= :DTMOVIMENTO'#13#10'  AND ((PR' +
-      'O.TIPO_REG = :TIPO_REG) or (PRO.SPED_TIPO_ITEM = :SPED_TIPO_ITEM' +
-      '))'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10'  AND PRO.ESTOQUE = '#39'S'#39#13#10'GROUP BY E' +
-      'M.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, PRO.UNIDADE,' +
-      ' EM.id_cor, COMB.NOME, PRO.sped_tipo_item'#13#10#13#10#13#10
+      '        AND ENT.DTMOVIMENTO <= :DTMOVIMENTO) QTD_ENTRADA,'#13#10'     ' +
+      '  (select first (1) ENT.PERC_ICMS'#13#10'        from ESTOQUE_MOV ENT'#13 +
+      #10'        where ENT.TIPO_ES = '#39'E'#39' and'#13#10'              ENT.GERAR_CU' +
+      'STO = '#39'S'#39' and'#13#10'              ENT.ID_PRODUTO = EM.ID_PRODUTO and'#13 +
+      #10'              ENT.TAMANHO = EM.TAMANHO and'#13#10'              ENT.F' +
+      'ILIAL = :FILIAL and'#13#10'              ENT.DTMOVIMENTO <= :DTMOVIMEN' +
+      'TO and'#13#10'              ENT.TIPO_ES = '#39'E'#39' and'#13#10'              ENT.P' +
+      'ERC_ICMS > 0'#13#10'        order by ENT.ID desc) PERC_ICMS, PRO.PERC_' +
+      'IPI'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON EM.ID_PRODU' +
+      'TO = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON EM.ID_COR = COMB.ID'#13#10 +
+      'WHERE EM.FILIAL = :FILIAL'#13#10'  AND EM.DTMOVIMENTO <= :DTMOVIMENTO'#13 +
+      #10'  AND ((PRO.TIPO_REG = :TIPO_REG) or (PRO.SPED_TIPO_ITEM = :SPE' +
+      'D_TIPO_ITEM))'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10'  AND PRO.ESTOQUE = '#39'S'#39#13 +
+      #10'GROUP BY EM.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, P' +
+      'RO.UNIDADE, EM.id_cor, COMB.NOME, PRO.sped_tipo_item, PRO.PERC_I' +
+      'PI'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DTMOVIMENTO'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'
@@ -1034,6 +1052,16 @@ object DMConsEstoque: TDMConsEstoque
       Required = True
       FixedChar = True
       Size = 30
+    end
+    object cdsBalancoPERC_ICMS: TFloatField
+      DisplayLabel = '% ICMS'
+      FieldName = 'PERC_ICMS'
+      DisplayFormat = '##0.00'
+    end
+    object cdsBalancoPERC_IPI: TFloatField
+      DisplayLabel = '% IPI'
+      FieldName = 'PERC_IPI'
+      DisplayFormat = '##0.00'
     end
   end
   object dsBalanco: TDataSource
@@ -1212,8 +1240,8 @@ object DMConsEstoque: TDMConsEstoque
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43500.689950381900000000
-    ReportOptions.LastChange = 43500.870602870370000000
+    ReportOptions.CreateDate = 43284.725669537000000000
+    ReportOptions.LastChange = 43506.879853206020000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -2277,7 +2305,7 @@ object DMConsEstoque: TDMConsEstoque
       'clVlr_Total=clVlr_Total')
     DataSource = dsBalanco_Vei
     BCDToCurrency = False
-    Left = 736
+    Left = 728
     Top = 471
   end
   object mAuxEst_Acum: TClientDataSet
@@ -3096,7 +3124,7 @@ object DMConsEstoque: TDMConsEstoque
       'Nome_Grupo=Nome_Grupo')
     DataSource = dsmProduto_Marca
     BCDToCurrency = False
-    Left = 616
+    Left = 592
     Top = 520
   end
   object qConsulta_Produto_Lote: TSQLQuery
@@ -3147,8 +3175,8 @@ object DMConsEstoque: TDMConsEstoque
       'QTD=QTD')
     DataSet = qConsulta_Produto_Lote
     BCDToCurrency = False
-    Left = 544
-    Top = 560
+    Left = 688
+    Top = 520
   end
   object sdsEstoque_Res: TSQLDataSet
     NoMetadata = True
@@ -3230,7 +3258,7 @@ object DMConsEstoque: TDMConsEstoque
       'NOME_COMBINACAO=NOME_COMBINACAO')
     DataSource = dsEstoque_Res
     BCDToCurrency = False
-    Left = 672
+    Left = 640
     Top = 520
   end
   object sdsEstoque_Res_Ord: TSQLDataSet
@@ -3315,8 +3343,8 @@ object DMConsEstoque: TDMConsEstoque
       'NOME_COMBINACAO=NOME_COMBINACAO')
     DataSource = dsEstoque_Res_Ord
     BCDToCurrency = False
-    Left = 624
-    Top = 560
+    Left = 728
+    Top = 520
   end
   object frxmBalanco_Ver: TfrxDBDataset
     UserName = 'frxmBalanco_Ver'
@@ -3334,7 +3362,7 @@ object DMConsEstoque: TDMConsEstoque
       'Unidade=Unidade')
     DataSource = dsmBalanco_Ver
     BCDToCurrency = False
-    Left = 680
+    Left = 544
     Top = 568
   end
   object sdsEstoque_Atual: TSQLDataSet
@@ -3623,7 +3651,7 @@ object DMConsEstoque: TDMConsEstoque
       'VLR_TOTAL=VLR_TOTAL')
     DataSource = dsEstoque_Mov
     BCDToCurrency = False
-    Left = 736
+    Left = 592
     Top = 568
   end
   object frxEstoque_Atual: TfrxDBDataset
@@ -3644,7 +3672,7 @@ object DMConsEstoque: TDMConsEstoque
       'UNIDADE=UNIDADE')
     DataSource = dsEstoque_Atual
     BCDToCurrency = False
-    Left = 800
+    Left = 640
     Top = 568
   end
   object mNCM: TClientDataSet
@@ -3688,7 +3716,7 @@ object DMConsEstoque: TDMConsEstoque
       'Qtd=Qtd')
     DataSource = dsmNCM
     BCDToCurrency = False
-    Left = 856
+    Left = 688
     Top = 568
   end
   object mUnidade: TClientDataSet
@@ -3709,5 +3737,30 @@ object DMConsEstoque: TDMConsEstoque
     DataSet = mUnidade
     Left = 1056
     Top = 552
+  end
+  object frxBalanco: TfrxDBDataset
+    UserName = 'frxBalanco'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID_PRODUTO=ID_PRODUTO'
+      'TAMANHO=TAMANHO'
+      'QTD_ESTOQUE=QTD_ESTOQUE'
+      'REFERENCIA=REFERENCIA'
+      'NOME_PRODUTO=NOME_PRODUTO'
+      'UNIDADE=UNIDADE'
+      'VLR_ENTRADA=VLR_ENTRADA'
+      'QTD_ENTRADA=QTD_ENTRADA'
+      'clPreco_Medio=clPreco_Medio'
+      'clVlr_Total=clVlr_Total'
+      'ID_COR=ID_COR'
+      'NOME_COMBINACAO=NOME_COMBINACAO'
+      'SPED_TIPO_ITEM=SPED_TIPO_ITEM'
+      'TIPO_SPED=TIPO_SPED'
+      'PERC_ICMS=PERC_ICMS'
+      'PERC_IPI=PERC_IPI')
+    DataSource = dsBalanco
+    BCDToCurrency = False
+    Left = 728
+    Top = 568
   end
 end

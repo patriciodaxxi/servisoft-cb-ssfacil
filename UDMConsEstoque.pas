@@ -586,6 +586,9 @@ type
     cdsEstoque_AcumUNIDADE: TStringField;
     cdsBalancoSPED_TIPO_ITEM: TStringField;
     cdsBalancoTIPO_SPED: TStringField;
+    cdsBalancoPERC_ICMS: TFloatField;
+    cdsBalancoPERC_IPI: TFloatField;
+    frxBalanco: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

@@ -2891,7 +2891,7 @@ begin
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO;TIPO_ES;TIPO_MOV';
   SMDBGrid1.DisableScroll;
   prc_Monta_Cab(True);
-  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Detalhada_Lotus.fr3';
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\ContasPagar_Lotus.fr3';
   if FileExists(vArq) then
     fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
   else

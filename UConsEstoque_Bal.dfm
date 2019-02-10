@@ -370,7 +370,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 12
+        ColCount = 14
         RowCount = 2
         Columns = <
           item
@@ -459,6 +459,18 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
             Title.Alignment = taCenter
             Title.Caption = 'Tipo SPED'
             Width = 231
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PERC_ICMS'
+            Title.Alignment = taCenter
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PERC_IPI'
+            Title.Alignment = taCenter
             Visible = True
           end>
       end

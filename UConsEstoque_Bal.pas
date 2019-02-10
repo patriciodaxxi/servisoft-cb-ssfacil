@@ -3,7 +3,7 @@ unit UConsEstoque_Bal;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids, Mask, 
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids, Mask,
   DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr, UDMConsEstoque, RxLookup, UCBase, NxCollection, ToolEdit, DBFilter,
   RzTabs, CurrEdit;
 
@@ -198,19 +198,36 @@ begin
 end;
 
 procedure TfrmConsEstoque_Bal.btnImprimir_EstClick(Sender: TObject);
+var
+  vArq : String;
 begin
   SMDBGrid1.DisableScroll;
   vTipo_Config_Email := 4;
   fDMConsEstoque.cdsFilial.Locate('ID',RxDBLookupCombo1.KeyValue,[loCaseInsensitive]);
   fDMConsEstoque.cdsBalanco.IndexFieldNames := 'NOME_PRODUTO;TAMANHO';
 
-  fRelEstoque_Bal                := TfRelEstoque_Bal.Create(Self);
-  fRelEstoque_Bal.fDMConsEstoque := fDMConsEstoque;
-  fRelEstoque_Bal.vDataRef       := DateEdit1.Date;
-  fRelEstoque_Bal.vNumPagIni     := CurrencyEdit1.AsInteger;
-  fRelEstoque_Bal.RLReport1.PreviewModal;
-  fRelEstoque_Bal.RLReport1.Free;
-  FreeAndNil(fRelEstoque_Bal);
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco.fr3';
+  if FileExists(vArq) then
+  begin
+    fDMConsEstoque.frxReport1.Report.LoadFromFile(vArq);
+    fDMConsEstoque.cdsBalanco.First;
+    fDMConsEstoque.frxReport1.variables['Empresa'] := QuotedStr(fDMConsEstoque.cdsFilialNOME.AsString);
+    fDMConsEstoque.frxReport1.variables['DataReferencia'] := QuotedStr(FormatDateTime('DD/MM/YYYY',DateEdit1.date));
+    fDMConsEstoque.frxReport1.ShowReport;
+  end
+  else
+  begin
+    fRelEstoque_Bal                := TfRelEstoque_Bal.Create(Self);
+    try
+      fRelEstoque_Bal.fDMConsEstoque := fDMConsEstoque;
+      fRelEstoque_Bal.vDataRef       := DateEdit1.Date;
+      fRelEstoque_Bal.vNumPagIni     := CurrencyEdit1.AsInteger;
+      fRelEstoque_Bal.RLReport1.PreviewModal;
+      fRelEstoque_Bal.RLReport1.Free;
+    finally
+      FreeAndNil(fRelEstoque_Bal);
+    end;
+  end;
   SMDBGrid1.EnableScroll;
 end;
 
