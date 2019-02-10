@@ -23,7 +23,7 @@ object frmCadPessoa: TfrmCadPessoa
     Top = 0
     Width = 1015
     Height = 630
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -35,7 +35,7 @@ object frmCadPessoa: TfrmCadPessoa
     Font.Style = []
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1334,7 +1334,7 @@ object frmCadPessoa: TfrmCadPessoa
         Top = 30
         Width = 1011
         Height = 577
-        ActivePage = TS_Pessoa_Dados
+        ActivePage = TS_Pessoa_Financeiro
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1342,7 +1342,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19
@@ -3255,8 +3255,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Profissionais: TPanel
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -3607,8 +3607,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlConjuge: TPanel
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -3973,8 +3973,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Conta: TPanel
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -4102,8 +4102,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid3: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Dep
@@ -4178,8 +4178,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid4: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefP
@@ -4269,8 +4269,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid5: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefC
@@ -4339,8 +4339,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid6: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1000
-                Height = 275
+                Width = 1005
+                Height = 289
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Aut
