@@ -31,8 +31,8 @@ object frmCadEDI_Config: TfrmCadEDI_Config
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 784
-    Height = 570
+    Width = 792
+    Height = 577
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -49,8 +49,8 @@ object frmCadEDI_Config: TfrmCadEDI_Config
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 780
-        Height = 463
+        Width = 788
+        Height = 470
         Align = alClient
         Ctl3D = True
         DataSource = DMCadEDI_Config.dsEdi_Config
@@ -111,7 +111,7 @@ object frmCadEDI_Config: TfrmCadEDI_Config
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 780
+        Width = 788
         Height = 32
         Align = alTop
         Color = clSilver
@@ -339,8 +339,8 @@ object frmCadEDI_Config: TfrmCadEDI_Config
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 530
-        Width = 780
+        Top = 537
+        Width = 788
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -356,7 +356,7 @@ object frmCadEDI_Config: TfrmCadEDI_Config
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 780
+        Width = 788
         Height = 35
         Align = alTop
         TabOrder = 3
@@ -456,7 +456,7 @@ object frmCadEDI_Config: TfrmCadEDI_Config
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 780
+        Width = 788
         Height = 35
         Align = alTop
         Color = 8404992
@@ -682,8 +682,8 @@ object frmCadEDI_Config: TfrmCadEDI_Config
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 780
-        Height = 512
+        Width = 788
+        Height = 519
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -961,7 +961,7 @@ object frmCadEDI_Config: TfrmCadEDI_Config
             'West Coast'
             'Dass'
             'Outros'
-            '')
+            'Ramarim')
           ParentCtl3D = False
           TabOrder = 1
           Values.Strings = (
@@ -969,7 +969,8 @@ object frmCadEDI_Config: TfrmCadEDI_Config
             'BEIRA_RIO'
             'WEST_COAST'
             'DASS'
-            'OUTRO')
+            'OUTRO'
+            'RAMARIM')
           OnChange = RxDBComboBox2Change
           OnExit = RxDBComboBox2Exit
         end

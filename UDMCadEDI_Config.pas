@@ -390,6 +390,55 @@ begin
     cdsEdi_ConfigTAMANHO_TAM.AsInteger           := 3;
     cdsEdi_ConfigRESERVADO_INI.AsInteger         := 213;
     cdsEdi_ConfigRESERVADO_TAM.AsInteger         := 70;
+  end
+  else
+  if cdsEdi_ConfigLAYOUT.AsString = 'RAMARIM' then
+  begin
+    cdsEdi_ConfigCNPJ_CLIENTE_INI.AsInteger      := 1;
+    cdsEdi_ConfigCNPJ_CLIENTE_TAM.AsInteger      := 14;
+    cdsEdi_ConfigNUM_OC_INI.AsInteger            := 15;
+    cdsEdi_ConfigNUM_OC_TAM.AsInteger            := 10;
+    cdsEdi_ConfigOCO_INI.AsInteger               := 25;
+    cdsEdi_ConfigOCO_TAM.AsInteger               := 2;
+    cdsEdi_ConfigPLANO_INI.AsInteger             := 27;
+    cdsEdi_ConfigPLANO_TAM.AsInteger             := 6;
+    cdsEdi_ConfigDTEMISSAO_INI.AsInteger         := 33;
+    cdsEdi_ConfigDTEMISSAO_TAM.AsInteger         := 8;
+    cdsEdi_ConfigTIPO_OPERACAO_INI.AsInteger     := 41;
+    cdsEdi_ConfigTIPO_OPERACAO_TAM.AsInteger     := 1;
+    cdsEdi_ConfigDTENTREGA_INI.AsInteger         := 42;
+    cdsEdi_ConfigDTENTREGA_TAM.AsInteger         := 8;
+    cdsEdi_ConfigCOD_LOCAL_ENTREGA_INI.AsInteger := 50;
+    cdsEdi_ConfigCOD_LOCAL_ENTREGA_TAM.AsInteger := 2;
+    cdsEdi_ConfigFABRICA_INI.AsInteger           := 52;
+    cdsEdi_ConfigFABRICA_TAM.AsInteger           := 4;
+    cdsEdi_ConfigCOD_PRODUTO_INI.AsInteger       := 56;
+    cdsEdi_ConfigCOD_PRODUTO_TAM.AsInteger       := 15;
+    cdsEdi_ConfigQTD_INI.AsInteger               := 71;
+    cdsEdi_ConfigQTD_TAM.AsInteger               := 9;
+    cdsEdi_ConfigQTD_DEC.AsInteger               := 3;
+    cdsEdi_ConfigUNIDADE_INI.AsInteger           := 80;
+    cdsEdi_ConfigUNIDADE_TAM.AsInteger           := 3;
+    cdsEdi_ConfigPERC_TRANSF_INI.AsInteger       := 83;
+    cdsEdi_ConfigPERC_TRANSF_TAM.AsInteger       := 3;
+    cdsEdi_ConfigVLR_UNITARIO_INI.AsInteger      := 86;
+    cdsEdi_ConfigVLR_UNITARIO_TAM.AsInteger      := 14;
+    cdsEdi_ConfigVLR_UNITARIO_DEC.AsInteger      := 4;
+    cdsEdi_ConfigCOND_PGTO_INI.AsInteger         := 103;
+    cdsEdi_ConfigCOND_PGTO_TAM.AsInteger         := 15;
+    cdsEdi_ConfigDRAWBACK_INI.AsInteger          := 118;
+    cdsEdi_ConfigDRAWBACK_TAM.AsInteger          := 1;
+    cdsEdi_ConfigNOME_PRODUTO_INI.AsInteger      := 213;
+    cdsEdi_ConfigNOME_PRODUTO_TAM.AsInteger      := 70;
+    cdsEdi_ConfigCNPJ_FORNECEDOR_INI.AsInteger   := 199;
+    cdsEdi_ConfigCNPJ_FORNECEDOR_TAM.AsInteger   := 14;
+    cdsEdi_ConfigPLANO2_INI.AsInteger            := 286;
+    cdsEdi_ConfigPLANO2_TAM.AsInteger            := 7;
+    cdsEdi_ConfigUSA_PLANO.AsString              := '2';
+    cdsEdi_ConfigTAMANHO_INI.AsInteger           := 283;
+    cdsEdi_ConfigTAMANHO_TAM.AsInteger           := 3;
+    cdsEdi_ConfigRESERVADO_INI.AsInteger         := 293;
+    cdsEdi_ConfigRESERVADO_TAM.AsInteger         := 200;
   end;
 end;
 
