@@ -628,6 +628,8 @@ object DmCadSetor: TDmCadSetor
     end
   end
   object sdsConsulta: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 'SELECT *'#13#10'FROM SETOR '
     MaxBlobSize = -1
     Params = <>
