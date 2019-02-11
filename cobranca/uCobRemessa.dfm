@@ -815,6 +815,7 @@ object fCobRemessa: TfCobRemessa
     Width = 89
     Height = 21
     TabOrder = 5
+    Text = '17/12/2018'
     HideFocus = False
     Date = 43451.000000000000000000
     NoneCaption = 'None'
@@ -826,6 +827,7 @@ object fCobRemessa: TfCobRemessa
     Width = 89
     Height = 21
     TabOrder = 4
+    Text = '17/12/2018'
     HideFocus = False
     Date = 43451.000000000000000000
     NoneCaption = 'None'
