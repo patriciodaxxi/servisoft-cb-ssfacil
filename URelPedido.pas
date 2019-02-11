@@ -242,7 +242,8 @@ procedure TfRelPedido.RLBand1BeforePrint(Sender: TObject;
 begin
   RLLabel42.Visible    := (fDMCadPedido.cdsParametrosUSA_ID_PRODUTO.AsString = 'S');
   rlEndFilial.Caption  := fDMCadPedido.cdsPedidoImpEND_FILIAL.AsString + ',' + fDMCadPedido.cdsPedidoImpNUM_END_FILIAL.AsString;
-  rlEndereco.Caption   := fDMCadPedido.cdsPedidoImpEND_CLIENTE.AsString + ', ' + fDMCadPedido.cdsPedidoImpNUM_END_CLIENTE.AsString;
+  rlEndereco.Caption   := fDMCadPedido.cdsPedidoImpEND_CLIENTE.AsString + ', ' + fDMCadPedido.cdsPedidoImpNUM_END_CLIENTE.AsString +
+                          fDMCadPedido.cdsPedidoImpCOMPL_END_CLIENTE.AsString;
   rlEndEntrega.Caption := '';
   if Trim(fDMCadPedido.cdsPedidoImpENDERECO_ENT.AsString) <> '' then
   begin
