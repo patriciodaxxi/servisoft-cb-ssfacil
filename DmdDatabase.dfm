@@ -202,8 +202,8 @@ object dmDatabase: TdmDatabase
   end
   object Encoder64: TIdEncoderMIME
     FillChar = '='
-    Left = 184
-    Top = 24
+    Left = 208
+    Top = 32
   end
   object sdsExecRemoto: TSQLDataSet
     MaxBlobSize = -1
