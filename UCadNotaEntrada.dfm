@@ -1405,7 +1405,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
         Top = 188
         Width = 937
         Height = 436
-        ActivePage = RzTabSheet1
+        ActivePage = ts_Duplicata
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -1413,7 +1413,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 2
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet

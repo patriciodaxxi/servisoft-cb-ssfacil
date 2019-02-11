@@ -1103,6 +1103,8 @@ type
     qCCustoID: TIntegerField;
     qCCustoDESCRICAO: TStringField;
     cdsDuplicata_CCustoclNome_CCusto: TStringField;
+    sdsDuplicata_CCustoVALOR: TFloatField;
+    cdsDuplicata_CCustoVALOR: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
@@ -1195,7 +1197,7 @@ var
 implementation
 
 //uses DmdDatabase, StdConvs, LogProvider, SysInit;
-uses DmdDatabase, uUtilPadrao, DateUtils;
+uses DmdDatabase, uUtilPadrao, DateUtils, Math;
 
 {$R *.dfm}
 
@@ -1237,6 +1239,10 @@ begin
 end;
 
 procedure TDMCadDuplicata.prc_Gravar;
+var
+  vVlrAux : Real;
+  vPerc : Real;
+  vItem : Integer;
 begin
   if (cdsDuplicataTIPO_ES.AsString = 'S') or (cdsDuplicataID_VENDEDOR.AsInteger <= 0) then
     cdsDuplicataID_VENDEDOR.Clear;
@@ -1253,6 +1259,33 @@ begin
   vMsgErro := '';
   if (fnc_Erro_Registro) or (trim(vMsgErro) <> '') then
     Exit;
+  if (qParametros_FinUSA_CCUSTO_DUP.AsString = 'S') then
+  begin
+    vPerc := 100;
+    vItem := 0;
+    cdsDuplicata_CCusto.First;
+    while not cdsDuplicata_CCusto.Eof do
+    begin
+      vItem := vItem + 1;
+      if StrToFloat(FormatFloat('0.00',cdsDuplicata_CCustoPERCENTUAL.AsFloat)) <= 0 then
+      begin
+        cdsDuplicata_CCusto.Edit;
+        if vItem = cdsDuplicata_CCusto.RecordCount then
+          cdsDuplicata_CCustoPERCENTUAL.AsFloat := StrToFloat(FormatFloat('0.00',vPerc))
+        else
+        begin
+          vVlrAux := StrToFloat(FormatFloat('0.00',(cdsDuplicata_CCustoVALOR.AsFloat / cdsDuplicataVLR_PARCELA.AsFloat) * 100));
+          if StrToFloat(FormatFloat('0.00',vVlrAux)) > StrToFloat(FormatFloat('0.00',vPerc)) then
+            vVlrAux := StrToFloat(FormatFloat('0.00',vPerc));
+          cdsDuplicata_CCustoPERCENTUAL.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
+        end;
+        vPerc := StrToFloat(FormatFloat('0.00',vPerc - vVlrAux));
+        cdsDuplicata_CCusto.Post;
+      end;
+      cdsDuplicata_CCusto.Next;
+    end;
+  end;
+
   cdsDuplicata.Post;
   prc_Gravar_Dupicata_Hist('ENT','ENTRADA DO TITULOS',cdsDuplicataVLR_PARCELA.AsFloat,0,0,0,0,0);
 
@@ -2245,14 +2278,20 @@ procedure TDMCadDuplicata.prc_Gerar_Dup_CCusto;
 var
   sds: TSQLDataSet;
   vItem : Integer;
+  vVlrAux : Real;
+  vVlrParcela : Real;
 begin
-  vItem := 0;
+  vItem       := 0;
+  vVlrAux     := 0;
+  vVlrParcela := cdsDuplicataVLR_PARCELA.AsFloat;
   sds := TSQLDataSet.Create(nil);
   try
     sds.SQLConnection := dmDatabase.scoDados;
     sds.NoMetadata    := True;
     sds.GetMetadata   := False;
-    sds.CommandText   := 'SELECT ID, ITEM, ID_CENTROCUSTO, PERCENTUAL FROM CONTA_ORCAMENTO_CCUSTO WHERE ID = :ID ';
+    sds.CommandText   := 'SELECT ID, ITEM, ID_CENTROCUSTO, PERCENTUAL, '
+                       + '(SELECT COUNT(1) CONTADOR FROM CONTA_ORCAMENTO_CCUSTO WHERE ID = :ID) '
+                       + 'FROM CONTA_ORCAMENTO_CCUSTO WHERE ID = :ID ';
     sds.ParamByName('ID').AsInteger := cdsDuplicataID_CONTA_ORCAMENTO.AsInteger;
     sds.Open;
     while not sds.Eof do
@@ -2263,6 +2302,21 @@ begin
       cdsDuplicata_CCustoITEM.AsInteger := vItem;
       cdsDuplicata_CCustoID_CENTROCUSTO.AsInteger := sds.FieldByName('ID_CENTROCUSTO').AsInteger;
       cdsDuplicata_CCustoPERCENTUAL.AsFloat       := sds.FieldByName('PERCENTUAL').AsFloat;
+      if StrToFloat(FormatFloat('0.00',cdsDuplicata_CCustoPERCENTUAL.AsFloat)) = 100 then
+        cdsDuplicata_CCustoVALOR.AsFloat := StrToFloat(FormatFloat('0.00',vVlrParcela))
+      else
+      begin
+        if vItem = sds.FieldByName('CONTADOR').AsInteger then
+          vVlrAux := StrToFloat(FormatFloat('0.00',vVlrParcela))
+        else
+        begin
+          vVlrAux := StrToFloat(FormatFloat('0.00',(cdsDuplicataVLR_PARCELA.AsFloat * cdsDuplicata_CCustoPERCENTUAL.AsFloat) / 100));
+          if StrToFloat(FormatFloat('0.00',vVlrAux)) > StrToFloat(FormatFloat('0.00',vVlrParcela)) then
+            vVlrAux := StrToFloat(FormatFloat('0.00',vVlrParcela));
+        end;
+        cdsDuplicata_CCustoVALOR.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
+      end;
+      vVlrParcela := StrToFloat(FormatFloat('0.00',vVlrParcela - cdsDuplicata_CCustoVALOR.AsFloat));
       cdsDuplicata_CCusto.Post;
       sds.Next;
     end;

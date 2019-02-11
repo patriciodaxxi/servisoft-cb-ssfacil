@@ -2924,7 +2924,7 @@ begin
   begin
     for i := 1 to SMDBGrid3.ColCount - 2 do
     begin
-      if (SMDBGrid3.Columns[i].FieldName = 'PERCENTUAL') then
+      if (SMDBGrid3.Columns[i].FieldName = 'PERCENTUAL') or (SMDBGrid3.Columns[i].FieldName = 'VALOR') then
         SMDBGrid3.Columns[i].ReadOnly := False
       else
         SMDBGrid3.Columns[i].ReadOnly := True;

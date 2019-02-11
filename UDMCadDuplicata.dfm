@@ -5283,8 +5283,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'SELECT *'
       'FROM PARAMETROS_CTA_ORC')
     SQLConnection = dmDatabase.scoDados
-    Left = 368
-    Top = 184
+    Left = 352
+    Top = 192
     object qParametros_Cta_OrcID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5844,6 +5844,9 @@ object DMCadDuplicata: TDMCadDuplicata
     object sdsDuplicata_CCustoPERCENTUAL: TFloatField
       FieldName = 'PERCENTUAL'
     end
+    object sdsDuplicata_CCustoVALOR: TFloatField
+      FieldName = 'VALOR'
+    end
   end
   object cdsDuplicata_CCusto: TClientDataSet
     Aggregates = <>
@@ -5874,6 +5877,9 @@ object DMCadDuplicata: TDMCadDuplicata
       ProviderFlags = []
       Size = 40
       Calculated = True
+    end
+    object cdsDuplicata_CCustoVALOR: TFloatField
+      FieldName = 'VALOR'
     end
   end
   object dsDuplicata_CCusto: TDataSource
