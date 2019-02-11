@@ -65,6 +65,7 @@ type
     Label9: TLabel;
     RxDBLookupCombo2: TRxDBLookupCombo;
     btnLiberaGrid: TBitBtn;
+    NxButton1: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

@@ -61,6 +61,8 @@ var
   ffrmAltEstoque_Mov: TfrmAltEstoque_Mov;
   vIDAux : Integer;
 begin
+  fDMConsEstoque.qParametros_Usuario.Close;
+  fDMConsEstoque.qParametros_Usuario.Open;
   if fDMConsEstoque.qParametros_UsuarioALT_ESTOQUE_MOV.AsString <> 'S' then
     exit;
   if not(fDMConsEstoque.cdsEstoque_Mov.Active) or (fDMConsEstoque.cdsEstoque_Mov.IsEmpty) then

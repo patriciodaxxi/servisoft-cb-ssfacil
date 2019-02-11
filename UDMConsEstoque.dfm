@@ -1578,6 +1578,11 @@ object DMConsEstoque: TDMConsEstoque
       FixedChar = True
       Size = 1
     end
+    object qParametros_EstGRAVAR_ESTMOV_BAL: TStringField
+      FieldName = 'GRAVAR_ESTMOV_BAL'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoque_Mov_Res: TSQLDataSet
     NoMetadata = True

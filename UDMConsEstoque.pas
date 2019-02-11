@@ -589,6 +589,7 @@ type
     cdsBalancoPERC_ICMS: TFloatField;
     cdsBalancoPERC_IPI: TFloatField;
     frxBalanco: TfrxDBDataset;
+    qParametros_EstGRAVAR_ESTMOV_BAL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

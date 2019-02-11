@@ -198,6 +198,7 @@ begin
     DBEdit2.Color := clSilver
   else
     DBEdit2.Color := clWindow;
+
   //************
 end;
 

@@ -350,6 +350,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
         OnDblClick = SMDBGrid1DblClick
+        OnKeyDown = SMDBGrid1KeyDown
         OnTitleClick = SMDBGrid1TitleClick
         Flat = True
         BandsFont.Charset = DEFAULT_CHARSET

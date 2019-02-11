@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids, Mask,
   DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr, UDMConsEstoque, RxLookup, UCBase, NxCollection, ToolEdit, DBFilter,
-  RzTabs, CurrEdit;
+  RzTabs, CurrEdit, UDMEstoque;
 
 type
   TfrmConsEstoque_Bal = class(TForm)
@@ -63,12 +63,16 @@ type
       Shift: TShiftState);
     procedure ComboBox1Change(Sender: TObject);
     procedure ComboBox2Exit(Sender: TObject);
+    procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
+    fDMEstoque: TDMEstoque;
     ColunaOrdenada: String;
 
     procedure prc_Consultar;
+    procedure prc_Gravar_Estoque;
 
   public
     { Public declarations }
@@ -125,6 +129,8 @@ end;
 procedure TfrmConsEstoque_Bal.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  if fDMConsEstoque.qParametros_EstGRAVAR_ESTMOV_BAL.AsString = 'S' then
+    FreeAndNil(fDMEstoque);
   Action := Cafree;
 end;
 
@@ -136,6 +142,12 @@ begin
   fDMConsEstoque.cdsFilial.First;
   if (fDMConsEstoque.cdsFilial.RecordCount < 2) and (fDMConsEstoque.cdsFilialID.AsInteger > 0) then
     RxDBLookupCombo1.KeyValue := fDMConsEstoque.cdsFilialID.AsInteger;
+  StaticText1.Caption := 'Duplo clique para mostrar o movimento do estoque do produto selecionado';
+  if fDMConsEstoque.qParametros_EstGRAVAR_ESTMOV_BAL.AsString = 'S' then
+  begin
+    fDMEstoque := TDMEstoque.Create(Self);
+    StaticText1.Caption := StaticText1.Caption + '    F5= Gravar Estoque Mov';
+  end;
 end;
 
 procedure TfrmConsEstoque_Bal.SMDBGrid1TitleClick(Column: TColumn);
@@ -439,6 +451,102 @@ begin
       SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametrosINFORMAR_COR_MATERIAL.AsString = 'S') or
                                       (fDMConsEstoque.qParametrosINFORMAR_COR_PROD.AsString = 'C'));
   end;
+end;
+
+procedure TfrmConsEstoque_Bal.SMDBGrid1KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F5) and (fDMConsEstoque.qParametros_EstGRAVAR_ESTMOV_BAL.AsString = 'S')  then
+    prc_Gravar_Estoque;
+end;
+
+procedure TfrmConsEstoque_Bal.prc_Gravar_Estoque;
+var
+  vID_Estoque : Integer;
+  sds: TSQLDataSet;
+  vID_Cor : Integer;
+  vTamamho : String;
+  vQtd : Real;
+  vTipo_ES : String;
+begin
+  if not(fDMConsEstoque.cdsBalanco.Active) or (fDMConsEstoque.cdsBalancoID_PRODUTO.AsInteger <= 0) then
+    exit;
+
+  vID_Cor  := fDMConsEstoque.cdsBalancoID_COR.AsInteger;
+  vTamamho := fDMConsEstoque.cdsBalancoTAMANHO.AsString;
+  if fDMConsEstoque.cdsBalancoID_COR.AsInteger <= 0 then
+    vID_Cor := 0;
+  if trim(fDMConsEstoque.cdsBalancoTAMANHO.AsString) = '' then
+    vTamamho := '';
+
+  vQtd := StrToFloat(FormatFloat('0.0000',0));
+
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+
+    sds.Close;
+    sds.CommandText := 'SELECT SUM(M.QTD2) QTD'
+                     + ' FROM ESTOQUE_MOV M '
+                     + ' WHERE M.DTMOVIMENTO <= :DTMOVIMENTO '
+                     + ' AND M.ID_PRODUTO = :ID_PRODUTO '
+                     + ' AND M.TAMANHO = :TAMANHO '
+                     + ' AND M.ID_COR = :ID_COR ';
+    sds.ParamByName('ID_PRODUTO').AsInteger := fDMConsEstoque.cdsBalancoID_PRODUTO.AsInteger;
+    sds.ParamByName('DTMOVIMENTO').AsDate   := DateEdit1.Date;
+    sds.ParamByName('TAMANHO').AsString     := vTamamho;
+    sds.ParamByName('ID_COR').AsInteger     := vID_Cor;
+    sds.Open;
+
+    vQtd := StrToFloat(FormatFloat('0.0000',sds.FieldByName('QTD').AsFloat));
+
+  finally
+    FreeAndNil(sds);
+  end;
+
+  if StrToFloat(FormatFloat('0.0000',vQtd)) = StrToFloat(FormatFloat('0.0000',0)) then
+    exit;
+
+  if StrToFloat(FormatFloat('0.0000',vQtd)) < StrToFloat(FormatFloat('0.0000',0)) then
+  begin
+    vTipo_ES := 'E';
+    vQtd     := StrToFloat(FormatFloat('0.0000',vQtd * -1));
+  end
+  else
+    vTipo_ES := 'S';
+
+  vID_Estoque := fDMEstoque.fnc_Gravar_Estoque(0,
+                                               RxDBLookupCombo1.KeyValue,
+                                               1, //aqui verificar o local do estoque
+                                               fDMConsEstoque.cdsBalancoID_PRODUTO.AsInteger,
+                                               0,
+                                               0,
+                                               0,
+                                               0,0,
+                                               vTipo_ES,
+                                               'BAL',
+                                               fDMConsEstoque.cdsBalancoUNIDADE.AsString,
+                                               fDMConsEstoque.cdsBalancoUNIDADE.AsString,
+                                               '',
+                                               vTamamho,
+                                               DateEdit1.Date,
+                                               fDMConsEstoque.cdsBalancoclPreco_Medio.AsFloat,
+                                               vQtd,
+                                               0,
+                                               0,
+                                               0,
+                                               0,
+                                               0,
+                                               vQtd,
+                                               fDMConsEstoque.cdsBalancoclPreco_Medio.AsFloat,
+                                               0,0,
+                                               fDMConsEstoque.cdsBalancoUNIDADE.AsString,
+                                               vID_Cor,
+                                               '',
+                                               'N',0,0); //14/01/2019 incluída a operação
+  MessageDlg('*** Gravou a Quantidade no Estoque!', mtConfirmation, [mbOk], 0);
 end;
 
 end.
