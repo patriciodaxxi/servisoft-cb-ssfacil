@@ -26,13 +26,27 @@ type
     SMDBGrid1: TSMDBGrid;
     TS_DeTerceiros: TRzTabSheet;
     TS_EmTerceiros: TRzTabSheet;
-    SMDBGrid2: TSMDBGrid;
-    SMDBGrid3: TSMDBGrid;
     btnImprimir: TNxButton;
     TS_NCM: TRzTabSheet;
     SMDBGrid4: TSMDBGrid;
     SMDBGrid5: TSMDBGrid;
     Panel3: TPanel;
+    RzPageControl2: TRzPageControl;
+    TS_DeTerceiros_Prod: TRzTabSheet;
+    TS_DeTerceiros_Pes: TRzTabSheet;
+    SMDBGrid2: TSMDBGrid;
+    SMDBGrid6: TSMDBGrid;
+    Panel4: TPanel;
+    Label3: TLabel;
+    DateEdit1: TDateEdit;
+    Panel5: TPanel;
+    Label4: TLabel;
+    DateEdit2: TDateEdit;
+    RzPageControl3: TRzPageControl;
+    TS_EmTerceiros_Prod: TRzTabSheet;
+    TS_EmTerceiros_Pes: TRzTabSheet;
+    SMDBGrid3: TSMDBGrid;
+    SMDBGrid7: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -58,7 +72,9 @@ type
 
     procedure prc_Consultar;
     procedure prc_Consultar_DeTerceiros;
+    procedure prc_Consultar_DeTerceiros_Pes;
     procedure prc_Consultar_EmTerceiros;
+    procedure prc_Consultar_EmTerceiros_Pes;
     procedure prc_Chamar_Sel_Produto(Tipo: String);
     procedure prc_Monta_Cab;
     procedure prc_Monta_mNCM;
@@ -192,10 +208,30 @@ begin
   end
   else
   if RzPageControl1.ActivePage = TS_DeTerceiros then
-    prc_Consultar_DeTerceiros
+  begin
+    if DateEdit1.Date <= 10 then
+    begin
+      MessageDlg('*** Data não informada!',mtInformation, [mbOk], 0);
+      exit;
+    end;
+    if RzPageControl2.ActivePage = TS_DeTerceiros_Prod then
+      prc_Consultar_DeTerceiros
+    else
+      prc_Consultar_DeTerceiros_Pes;
+  end
   else
   if RzPageControl1.ActivePage = TS_EmTerceiros then
-    prc_Consultar_EmTerceiros;
+  begin
+    if DateEdit2.Date <= 10 then
+    begin
+      MessageDlg('*** Data não informada!',mtInformation, [mbOk], 0);
+      exit;
+    end;
+    if RzPageControl3.ActivePage = TS_EmTerceiros_Prod then
+      prc_Consultar_EmTerceiros
+    else
+      prc_Consultar_EmTerceiros_Pes;
+  end;
 end;
 
 procedure TfrmConsEstoque_Atual.ceIDProdutoKeyDown(Sender: TObject;
@@ -259,14 +295,16 @@ end;
 procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros;
 begin
   fDMConsEstoque.cdsEstoque_De_Terc.Close;
-  fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsEstoque_De_Terc.Open;
 end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiros;
 begin
   fDMConsEstoque.cdsEstoque_Em_Terc.Close;
-  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('DTMOVIMENTO').AsDate := DateEdit2.Date;
   fDMConsEstoque.cdsEstoque_Em_Terc.Open;
 end;
 
@@ -375,6 +413,22 @@ begin
     fDMConsEstoque.cdsEstoque_Atual.Next;
   end;
   SMDBGrid4.EnableScroll;
+end;
+
+procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros_Pes;
+begin
+  fDMConsEstoque.cdsEstoque_De_Terc_Pes.Close;
+  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
+  fDMConsEstoque.cdsEstoque_De_Terc_Pes.Open;
+end;
+
+procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiros_Pes;
+begin
+  fDMConsEstoque.cdsEstoque_Em_Terc_Pes.Close;
+  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('DTMOVIMENTO').AsDate := DateEdit2.Date;
+  fDMConsEstoque.cdsEstoque_Em_Terc_Pes.Open;
 end;
 
 end.
