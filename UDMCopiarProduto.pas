@@ -372,6 +372,8 @@ type
     cdsProdutoUNIDADE2: TStringField;
     cdsProdutoID_CSTICMS: TIntegerField;
     cdsProdutoNOME_MODELO: TStringField;
+    sdsProdutoID_LINHA: TIntegerField;
+    cdsProdutoID_LINHA: TIntegerField;
     procedure dspProdutoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
       UpdateKind: TUpdateKind; var Response: TResolverResponse);

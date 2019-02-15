@@ -268,6 +268,9 @@ object DMCopiarProduto: TDMCopiarProduto
       FieldName = 'NOME_MODELO'
       Size = 100
     end
+    object sdsProdutoID_LINHA: TIntegerField
+      FieldName = 'ID_LINHA'
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -560,6 +563,9 @@ object DMCopiarProduto: TDMCopiarProduto
     object cdsProdutoNOME_MODELO: TStringField
       FieldName = 'NOME_MODELO'
       Size = 100
+    end
+    object cdsProdutoID_LINHA: TIntegerField
+      FieldName = 'ID_LINHA'
     end
   end
   object dsProduto: TDataSource

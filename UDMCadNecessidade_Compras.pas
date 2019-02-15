@@ -406,6 +406,8 @@ type
     qParametrosMOSTRAR_EMBALAGEM: TStringField;
     sdsLote_MatPRECO_CUSTO_COR: TFloatField;
     cdsLote_MatPRECO_CUSTO_COR: TFloatField;
+    sdsLoteNOME_MODELO: TStringField;
+    cdsLoteNOME_MODELO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNecessidade_ComprasUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

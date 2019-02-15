@@ -1261,7 +1261,9 @@ procedure TfrmCadDuplicata.prc_Gravar_Selecionados;
 var
   vHist: string;
   vPagou: Boolean;
+  vQtdePagto : Integer;
 begin
+  vQtdePagto := 0;
   vPagou := False;
   fDMCadDuplicata.vID_Cheque := 0;
   fDMCadDuplicata.cdsDuplicata_Consulta.First;
@@ -1294,12 +1296,15 @@ begin
         vTipo_ES_Loc := fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString;
         fDMCadDuplicata.cdsDuplicata.ApplyUpdates(0);
         vPagou := True;
+        Inc(vQtdePagto);
       end;
     end;
     fDMCadDuplicata.cdsDuplicata_Consulta.Next;
   end;
   if (not vPagou) then
-    ShowMessage('Nenhum pagamento realizado!');
+    ShowMessage('Nenhum pagamento realizado!')
+  else
+    ShowMessage(IntToStr(vQtdePagto) + ' Pagamento(s) Realizado(s)');
   btnConsultarClick(frmCadDuplicata);
 end;
 

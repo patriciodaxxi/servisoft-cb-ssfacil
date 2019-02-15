@@ -12649,6 +12649,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeVALIDAR_PESO_NFE: TStringField
+      FieldName = 'VALIDAR_PESO_NFE'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoqueLoteAux: TSQLDataSet
     NoMetadata = True

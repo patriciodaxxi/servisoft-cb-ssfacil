@@ -1615,6 +1615,14 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscalTIPO_DESTINO_OPERACAO.AsInteger := 2;
   //****************
 
+  //15/02/2019 verifica o peso bruto e liquido conforme parâmetro
+  if (fDMCadNotaFiscal.qParametros_NFeVALIDAR_PESO_NFE.AsString = 'S') then
+  begin
+    if (fDMCadNotaFiscal.cdsNotaFiscalPESOBRUTO.AsFloat <= 0) or (fDMCadNotaFiscal.cdsNotaFiscalPESOLIQUIDO.AsFloat <= 0) then
+       if MessageDlg('Peso Líquido/Brunto não informado, deseja continuar?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+         exit;
+  end;
+
   //20/08/2016  Verifica se a finalidade de devolução, foi informada a nota referenciada
   if (fDMCadNotaFiscal.cdsCFOPNFEFINALIDADE.AsString = '2') and (fDMCadNotaFiscal.cdsNotaFiscalNFEFINALIDADE.AsString <> '4') then
   begin

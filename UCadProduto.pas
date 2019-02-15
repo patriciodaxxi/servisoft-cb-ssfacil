@@ -1560,6 +1560,7 @@ begin
   DBEdit5.Visible  := not(Label12.Enabled);
   DBEdit11.Visible := not(Label24.Enabled);
   DBEdit57.Visible := not(Label4.Enabled);
+  btnGradeRef.Visible  := (RxDBComboBox7.ItemIndex = 1);
 
   label4.Enabled   := not(label4.Enabled);
   label12.Enabled  := not(label12.Enabled);

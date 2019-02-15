@@ -1006,7 +1006,10 @@ begin
   fDMCadNecessidade_Compras.mMaterial_ProdNum_Mapa.AsInteger := vNum_Necessidade;
   fDMCadNecessidade_Compras.mMaterial_ProdID_Produto.AsInteger := fDMCadNecessidade_Compras.cdsLoteID_PRODUTO.AsInteger;
   fDMCadNecessidade_Compras.mMaterial_ProdReferencia.AsString := fDMCadNecessidade_Compras.cdsLoteREFERENCIA.AsString;
-  fDMCadNecessidade_Compras.mMaterial_ProdNome_Produto.AsString := fDMCadNecessidade_Compras.cdsLoteNOME_PRODUTO.AsString;
+  if fDMCadNecessidade_Compras.cdsLoteNOME_MODELO.AsString <> '' then
+    fDMCadNecessidade_Compras.mMaterial_ProdNome_Produto.AsString := fDMCadNecessidade_Compras.cdsLoteNOME_MODELO.AsString
+  else
+    fDMCadNecessidade_Compras.mMaterial_ProdNome_Produto.AsString := fDMCadNecessidade_Compras.cdsLoteNOME_PRODUTO.AsString;
   fDMCadNecessidade_Compras.mMaterial_ProdID_Combinacao.AsInteger := fDMCadNecessidade_Compras.cdsLoteID_COMBINACAO.AsInteger;
   fDMCadNecessidade_Compras.mMaterial_ProdNome_Combinacao.AsString := fDMCadNecessidade_Compras.cdsLoteNOME_COMBINACAO.AsString;
   fDMCadNecessidade_Compras.mMaterial_ProdQtd.AsFloat := fDMCadNecessidade_Compras.cdsLoteQTD.AsFloat;
