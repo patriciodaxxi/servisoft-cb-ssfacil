@@ -772,6 +772,7 @@ type
     Label248: TLabel;
     Label249: TLabel;
     ComboBox3: TComboBox;
+    ListacomCdigodeBarras1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -974,6 +975,7 @@ type
     procedure Edit12KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure NxButton2Click(Sender: TObject);
+    procedure ListacomCdigodeBarras1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -5028,7 +5030,7 @@ begin
       fDMCadProduto.cdsProduto_Consulta.Filtered := False;
       fDMCadProduto.cdsProduto_Consulta.Filter   := 'TESTE = ' + QuotedStr('S');
       fDMCadProduto.cdsProduto_Consulta.Filtered := True;
-    end;  
+    end;
     fRelProduto               := TfRelProduto .Create(Self);
     fRelProduto.vSelecionados := Selecionados;
     fRelProduto.vImpConsumo   := RzCheckList1.ItemChecked[1];
@@ -5871,6 +5873,27 @@ begin
   if MessageDlg('Deseja excluir o Processo Selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
   fDMCadProduto.cdsProduto_Consumo_Proc.Delete;
+end;
+
+procedure TfrmCadProduto.ListacomCdigodeBarras1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) then
+  begin
+    MessageDlg('*** Não há produto selecionado para a impressão!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Produtos_CBarra.fr3';
+  if FileExists(vArq) then
+    fDMCadProduto.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadProduto.frxReport1.ShowReport;
 end;
 
 end.
