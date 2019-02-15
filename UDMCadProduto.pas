@@ -1883,6 +1883,7 @@ type
     qParametros_ProdINDICAR_PCUSTO: TStringField;
     cdsProduto_ConsultaCONT_POSSUIPRECO: TIntegerField;
     cdsProduto_ConsultaDTCAD: TDateField;
+    cdsProduto_ConsultaNOME_LINHA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
