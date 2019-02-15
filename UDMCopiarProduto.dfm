@@ -564,6 +564,9 @@ object DMCopiarProduto: TDMCopiarProduto
       FieldName = 'NOME_MODELO'
       Size = 100
     end
+    object cdsProdutoID_LINHA: TIntegerField
+      FieldName = 'ID_LINHA'
+    end
   end
   object dsProduto: TDataSource
     DataSet = cdsProduto
