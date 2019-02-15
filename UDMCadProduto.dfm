@@ -2047,13 +2047,13 @@ object dmCadProduto: TdmCadProduto
       '       else '#39#39#13#10'       end as TIPO_REG_DESCRICAO,'#13#10#13#10'       (sel' +
       'ect sum(E2.QTD) QTDGERAL'#13#10'        from ESTOQUE_ATUAL E2'#13#10'       ' +
       ' where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE, PCUSTO.CONTADOR CONT' +
-      '_POSSUIPRECO'#13#10'from PRODUTO PRO'#13#10'left join TAB_NCM NCM on (PRO.ID' +
-      '_NCM = NCM.ID)'#13#10'left join MARCA on (PRO.ID_MARCA = MARCA.ID)'#13#10'le' +
-      'ft join GRUPO on (PRO.ID_GRUPO = GRUPO.ID)'#13#10'left join PRODUTO_VE' +
-      'ICULO PV on (PRO.ID = PV.ID)'#13#10'left join PRODUTO_LIVRO LI on (PRO' +
-      '.ID = LI.ID)  '#13#10'left join PESSOA FORN'#13#10'on pro.id_fornecedor = fo' +
-      'rn.codigo'#13#10'LEFT JOIN vpossui_pcusto PCUSTO'#13#10'ON PRO.ID = PCUSTO.I' +
-      'D'
+      '_POSSUIPRECO, PRO.DTCAD'#13#10'from PRODUTO PRO'#13#10'left join TAB_NCM NCM' +
+      ' on (PRO.ID_NCM = NCM.ID)'#13#10'left join MARCA on (PRO.ID_MARCA = MA' +
+      'RCA.ID)'#13#10'left join GRUPO on (PRO.ID_GRUPO = GRUPO.ID)'#13#10'left join' +
+      ' PRODUTO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left join PRODUTO_LIVRO' +
+      ' LI on (PRO.ID = LI.ID)  '#13#10'left join PESSOA FORN'#13#10'on pro.id_forn' +
+      'ecedor = forn.codigo'#13#10'LEFT JOIN vpossui_pcusto PCUSTO'#13#10'ON PRO.ID' +
+      ' = PCUSTO.ID'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -2314,6 +2314,10 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsProduto_ConsultaCONT_POSSUIPRECO: TIntegerField
       FieldName = 'CONT_POSSUIPRECO'
+    end
+    object cdsProduto_ConsultaDTCAD: TDateField
+      DisplayLabel = 'Data Cadastro'
+      FieldName = 'DTCAD'
     end
   end
   object dsProduto_Consulta: TDataSource

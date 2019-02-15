@@ -2328,7 +2328,7 @@ begin
   else if (trim(NxDatePicker3.Text) <> '') then
     vOpcaoImp := vOpcaoImp + '(A partir do vencimento: ' + NxDatePicker3.Text + ')'
   else if (trim(NxDatePicker4.Text) <> '') then
-    vOpcaoImp := vOpcaoImp + '(Até a vencimento: ' + NxDatePicker4.Text + ')';
+    vOpcaoImp := vOpcaoImp + '(Até o vencimento: ' + NxDatePicker4.Text + ')';
 end;
 
 procedure TfrmCadDuplicata.DBCheckBox8Exit(Sender: TObject);
@@ -2959,7 +2959,7 @@ begin
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO;TIPO_ES;TIPO_MOV';
   SMDBGrid1.DisableScroll;
   prc_Monta_Cab(True);
-  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Detalhada_Lotus.fr3';
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\ContasPagar_Lotus.fr3';
   if FileExists(vArq) then
     fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
   else

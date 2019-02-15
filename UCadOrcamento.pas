@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, DB, SqlExpr,
   DBGrids, ExtCtrls, StdCtrls, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, UCadOrcamento_Itens, UEscolhe_Filial,
   UCBase, Menus, NxEdit, NxCollection, UDMRel, UCadOrcamento_Aprov, Variants, Mask, RzTabs, RzPanel, UCadPedido_Desconto, ComObj,
-  UCadPedido_Ace, uCadObs_Aux, UCadPedido_ItensRed, UCadOrcamento_NaoAprovado;
+  UCadPedido_Ace, uCadObs_Aux, UCadPedido_ItensRed, UCadOrcamento_NaoAprovado, classe.validaemail, frxExportPDF, frxExportMail;
 
 type
   TfrmCadOrcamento = class(TForm)
@@ -1648,6 +1648,9 @@ end;
 procedure TfrmCadOrcamento.ItemClick(Sender: TObject);
 var
   vArq, x : String;
+  email : TValidaEmail;
+  enviar : TfrxMailExport;
+  pdf : TfrxPDFExport;
 begin
   prc_Posiciona_Imp;
   fDMCadPedido.cdsPedidoServicoImp.Close;
@@ -1675,6 +1678,28 @@ begin
     fDMCadPedido.cdsPedidoImp_Itens.Filtered := True;
   end;
 
+  email := TValidaEmail.create(fDMCadPedido.cdsPedidoImpFILIAL.AsInteger,'3');
+  try
+    pdf := TfrxPDFExport.Create(nil);
+    enviar := TfrxMailExport.Create(nil);
+    enviar.SmtpPort := email.porta;
+    enviar.Login := email.usuario;
+    enviar.Password := email.senha;
+    enviar.SmtpHost := email.host;
+    enviar.Address := fDMCadPedido.cdsPedidoImpEMAIL_NFE_CLIENTE.AsString;
+    enviar.FromName := fDMCadPedido.cdsPedidoImpNOME_FILIAL.AsString;
+    enviar.ExportFilter := pdf;
+    enviar.FilterDesc := 'PDF por e-mail';
+    enviar.FromMail := email.email;
+    enviar.FromCompany := 'russimar@terra.com.br';
+    enviar.Subject := 'Orçamento nº: ' + IntToStr(fDMCadPedido.cdsPedidoImpNUM_ORCAMENTO.AsInteger);
+    enviar.UseIniFile := False;
+    enviar.ShowExportDialog := False;
+  finally
+    FreeAndNil(email);
+  end;
+
+
   if fDMCadPedido.cdsFilialRelatorios.Locate('TIPO',1,([loCaseInsensitive])) then //tipo 1 = orçamento
   begin
 
@@ -1693,7 +1718,12 @@ begin
       else
         fDMCadPedido.frxReport1.variables['ImpPreco'] := QuotedStr('N');
     end;
+    fDMCadPedido.frxReport1.PrepareReport(True);
+//    fDMCadPedido.frxReport1.Export(enviar);
     fDMCadPedido.frxReport1.ShowReport;
+    FreeAndNil(enviar);
+    FreeAndNil(pdf);
+
   end
   else
   begin

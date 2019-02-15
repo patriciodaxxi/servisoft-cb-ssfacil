@@ -1,6 +1,6 @@
 object frmCadOrcamento: TfrmCadOrcamento
-  Left = 318
-  Top = 22
+  Left = 154
+  Top = 17
   Width = 1016
   Height = 708
   Caption = 'Or'#231'amento de Venda'
@@ -25,7 +25,7 @@ object frmCadOrcamento: TfrmCadOrcamento
     Top = 0
     Width = 1000
     Height = 669
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOrcamento: TfrmCadOrcamento
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19

@@ -280,10 +280,10 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
     Top = 131
     Width = 926
     Height = 387
-    ActivePage = TS_Estoque
+    ActivePage = TS_EmTerceiros
     ActivePageDefault = TS_Estoque
     Align = alClient
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 2
     FixedDimension = 19
     object TS_Estoque: TRzTabSheet
@@ -416,188 +416,561 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
     end
     object TS_DeTerceiros: TRzTabSheet
       Caption = 'Estoque De Terceiros'
-      object SMDBGrid2: TSMDBGrid
+      object RzPageControl2: TRzPageControl
+        Left = 0
+        Top = 32
+        Width = 922
+        Height = 332
+        ActivePage = TS_DeTerceiros_Pes
+        Align = alClient
+        TabIndex = 1
+        TabOrder = 0
+        FixedDimension = 19
+        object TS_DeTerceiros_Prod: TRzTabSheet
+          Caption = 'Acumulado por Produto'
+          object SMDBGrid2: TSMDBGrid
+            Left = 0
+            Top = 0
+            Width = 918
+            Height = 309
+            Align = alClient
+            Ctl3D = False
+            DataSource = DMConsEstoque.dsEstoque_De_Terc
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnTitleClick = SMDBGrid2TitleClick
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 6
+            RowCount = 2
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Produto'
+                Title.Color = 16777124
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'REFERENCIA'
+                Title.Caption = 'Refer'#234'ncia'
+                Title.Color = 16777124
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Produto'
+                Title.Color = 16777124
+                Width = 281
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_COMBINACAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Cor'
+                Title.Color = 16777124
+                Width = 218
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'QTD'
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtd'
+                Title.Color = 16777124
+                Width = 166
+                Visible = True
+              end>
+          end
+        end
+        object TS_DeTerceiros_Pes: TRzTabSheet
+          Caption = 'Produto e Terceiro'
+          object SMDBGrid6: TSMDBGrid
+            Left = 0
+            Top = 0
+            Width = 918
+            Height = 309
+            Align = alClient
+            Ctl3D = False
+            DataSource = DMConsEstoque.dsEstoque_De_Terc_Pes
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnTitleClick = SMDBGrid2TitleClick
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 12
+            RowCount = 2
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Produto'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'REFERENCIA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Refer'#234'ncia'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Produto'
+                Title.Color = 7864319
+                Width = 261
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_COMBINACAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cor'
+                Title.Color = 7864319
+                Width = 178
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'TAMANHO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tamanho'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'UNIDADE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Unid.'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'QTD'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID_PESSOA'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Terceiro'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_TERCEIRO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Terceiro'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'NCM'
+                Title.Alignment = taCenter
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DESC_SPED_TIPO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tipo Produto SPED'
+                Title.Color = 7864319
+                Visible = True
+              end>
+          end
+        end
+      end
+      object Panel4: TPanel
         Left = 0
         Top = 0
         Width = 922
-        Height = 364
-        Align = alClient
-        Ctl3D = False
-        DataSource = DMConsEstoque.dsEstoque_De_Terc
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        ParentCtl3D = False
-        ParentFont = False
-        ReadOnly = True
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        OnTitleClick = SMDBGrid2TitleClick
-        Flat = True
-        BandsFont.Charset = DEFAULT_CHARSET
-        BandsFont.Color = clWindowText
-        BandsFont.Height = -11
-        BandsFont.Name = 'MS Sans Serif'
-        BandsFont.Style = []
-        Groupings = <>
-        GridStyle.Style = gsCustom
-        GridStyle.OddColor = clWindow
-        GridStyle.EvenColor = clWindow
-        TitleHeight.PixelCount = 24
-        FooterColor = clBtnFace
-        ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
-        RegistryKey = 'Software\Scalabium'
-        RegistrySection = 'SMDBGrid'
-        WidthOfIndicator = 11
-        DefaultRowHeight = 17
-        ScrollBars = ssHorizontal
-        ColCount = 6
-        RowCount = 2
-        Columns = <
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'ID_PRODUTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'ID Produto'
-            Title.Color = 16777124
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'REFERENCIA'
-            Title.Caption = 'Refer'#234'ncia'
-            Title.Color = 16777124
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_PRODUTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Produto'
-            Title.Color = 16777124
-            Width = 281
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_COMBINACAO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Cor'
-            Title.Color = 16777124
-            Width = 218
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'QTD'
-            Title.Alignment = taCenter
-            Title.Caption = 'Qtd'
-            Title.Color = 16777124
-            Width = 166
-            Visible = True
-          end>
+        Height = 32
+        Align = alTop
+        Color = clSilver
+        TabOrder = 1
+        object Label3: TLabel
+          Left = 14
+          Top = 14
+          Width = 49
+          Height = 13
+          Caption = 'Data Ref::'
+        end
+        object DateEdit1: TDateEdit
+          Left = 64
+          Top = 6
+          Width = 121
+          Height = 21
+          NumGlyphs = 2
+          TabOrder = 0
+        end
       end
     end
     object TS_EmTerceiros: TRzTabSheet
       Caption = 'Estoque Em Terceiros'
-      object SMDBGrid3: TSMDBGrid
+      object Panel5: TPanel
         Left = 0
         Top = 0
         Width = 922
-        Height = 364
-        Align = alClient
-        Ctl3D = False
-        DataSource = DMConsEstoque.dsEstoque_Em_Terc
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        ParentCtl3D = False
-        ParentFont = False
-        ReadOnly = True
+        Height = 32
+        Align = alTop
+        Color = clSilver
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        OnTitleClick = SMDBGrid3TitleClick
-        Flat = True
-        BandsFont.Charset = DEFAULT_CHARSET
-        BandsFont.Color = clWindowText
-        BandsFont.Height = -11
-        BandsFont.Name = 'MS Sans Serif'
-        BandsFont.Style = []
-        Groupings = <>
-        GridStyle.Style = gsCustom
-        GridStyle.OddColor = clWindow
-        GridStyle.EvenColor = clWindow
-        TitleHeight.PixelCount = 24
-        FooterColor = clBtnFace
-        ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
-        RegistryKey = 'Software\Scalabium'
-        RegistrySection = 'SMDBGrid'
-        WidthOfIndicator = 11
-        DefaultRowHeight = 17
-        ScrollBars = ssHorizontal
-        ColCount = 6
-        RowCount = 2
-        Columns = <
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'ID_PRODUTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'ID Produto'
-            Title.Color = 11337561
-            Visible = True
+        object Label4: TLabel
+          Left = 14
+          Top = 14
+          Width = 49
+          Height = 13
+          Caption = 'Data Ref::'
+        end
+        object DateEdit2: TDateEdit
+          Left = 64
+          Top = 6
+          Width = 121
+          Height = 21
+          NumGlyphs = 2
+          TabOrder = 0
+        end
+      end
+      object RzPageControl3: TRzPageControl
+        Left = 0
+        Top = 32
+        Width = 922
+        Height = 332
+        ActivePage = TS_EmTerceiros_Prod
+        Align = alClient
+        TabIndex = 0
+        TabOrder = 1
+        FixedDimension = 19
+        object TS_EmTerceiros_Prod: TRzTabSheet
+          Caption = 'Acumulado Por Produto'
+          object SMDBGrid3: TSMDBGrid
+            Left = 0
+            Top = 0
+            Width = 918
+            Height = 309
+            Align = alClient
+            Ctl3D = False
+            DataSource = DMConsEstoque.dsEstoque_Em_Terc
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnTitleClick = SMDBGrid3TitleClick
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 6
+            RowCount = 2
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Produto'
+                Title.Color = 11337561
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'REFERENCIA'
+                Title.Caption = 'Refer'#234'ncia'
+                Title.Color = 11337561
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Produto'
+                Title.Color = 11337561
+                Width = 281
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_COMBINACAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Cor'
+                Title.Color = 11337561
+                Width = 218
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'QTD'
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtd'
+                Title.Color = 11337561
+                Width = 166
+                Visible = True
+              end>
           end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'REFERENCIA'
-            Title.Caption = 'Refer'#234'ncia'
-            Title.Color = 11337561
-            Visible = True
+        end
+        object TS_EmTerceiros_Pes: TRzTabSheet
+          Caption = 'TS_EmTerceiros_Pes'
+          object SMDBGrid7: TSMDBGrid
+            Left = 0
+            Top = 0
+            Width = 918
+            Height = 309
+            Align = alClient
+            Ctl3D = False
+            DataSource = DMConsEstoque.dsEstoque_Em_Terc_Pes
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnTitleClick = SMDBGrid2TitleClick
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 13
+            RowCount = 2
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Produto'
+                Title.Color = 7864319
+                Width = 56
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'REFERENCIA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Refer'#234'ncia'
+                Title.Color = 7864319
+                Width = 92
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Produto'
+                Title.Color = 7864319
+                Width = 250
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_COMBINACAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cor'
+                Title.Color = 7864319
+                Width = 144
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'TAMANHO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tamanho'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'UNIDADE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Unid.'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'QTD'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_TERCEIRO'
+                Title.Caption = 'Nome Terceiro'
+                Title.Color = 7864319
+                Width = 311
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID_PESSOA'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Terceiro'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'NCM'
+                Title.Alignment = taCenter
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DESC_SPED_TIPO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tipo Produto SPED'
+                Title.Color = 7864319
+                Width = 185
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'TIPO_TER'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tipo Mov.'
+                Title.Color = 7864319
+                Visible = True
+              end>
           end
-          item
-            Expanded = False
-            FieldName = 'NOME_PRODUTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Produto'
-            Title.Color = 11337561
-            Width = 281
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_COMBINACAO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Cor'
-            Title.Color = 11337561
-            Width = 218
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'QTD'
-            Title.Alignment = taCenter
-            Title.Caption = 'Qtd'
-            Title.Color = 11337561
-            Width = 166
-            Visible = True
-          end>
+        end
       end
     end
     object TS_NCM: TRzTabSheet
