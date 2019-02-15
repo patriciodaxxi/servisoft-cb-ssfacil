@@ -1,8 +1,8 @@
 object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 162
-  Top = 17
+  Left = 301
+  Top = 23
   Height = 674
   Width = 1102
   object sdsNecessidade_Compras: TSQLDataSet
@@ -17,8 +17,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 88
-    Top = 32
+    Left = 48
+    Top = 9
     object sdsNecessidade_ComprasID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -34,16 +34,16 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     DataSet = sdsNecessidade_Compras
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspNecessidade_ComprasUpdateError
-    Left = 160
-    Top = 32
+    Left = 80
+    Top = 9
   end
   object cdsNecessidade_Compras: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspNecessidade_Compras'
-    Left = 224
-    Top = 32
+    Left = 112
+    Top = 9
     object cdsNecessidade_ComprasID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -60,8 +60,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsNecessidade_Compras: TDataSource
     DataSet = cdsNecessidade_Compras
-    Left = 296
-    Top = 32
+    Left = 144
+    Top = 9
   end
   object mMaterial: TClientDataSet
     Active = True
@@ -247,8 +247,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     Params = <>
     StoreDefs = True
     OnNewRecord = mMaterialNewRecord
-    Left = 592
-    Top = 112
+    Left = 536
+    Top = 312
     Data = {
       A80300009619E0BD010000001800000027000000000003000000A803084E756D
       5F4D61706104000100000000000B49445F4D6174657269616C04000100000000
@@ -415,8 +415,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsmMaterial: TDataSource
     DataSet = mMaterial
-    Left = 728
-    Top = 72
+    Left = 571
+    Top = 312
   end
   object mMaterial_Prod: TClientDataSet
     Active = True
@@ -457,8 +457,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     IndexFieldNames = 'Num_Mapa;ID_Produto'
     Params = <>
     StoreDefs = True
-    Left = 664
-    Top = 184
+    Left = 536
+    Top = 368
     Data = {
       C40000009619E0BD010000001800000007000000000003000000C400084E756D
       5F4D61706104000100000000000A49445F50726F6475746F0400010000000000
@@ -493,8 +493,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsmMaterial_Prod: TDataSource
     DataSet = mMaterial_Prod
-    Left = 728
-    Top = 184
+    Left = 571
+    Top = 368
   end
   object qParametros: TSQLQuery
     MaxBlobSize = -1
@@ -503,8 +503,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'SELECT *'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 392
-    Top = 400
+    Left = 536
+    Top = 32
     object qParametrosINFORMAR_COR_PROD: TStringField
       FieldName = 'INFORMAR_COR_PROD'
       FixedChar = True
@@ -544,8 +544,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'ON P.ID_FORNECEDOR = FORN.CODIGO'
       'WHERE P.ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 400
+    Left = 600
+    Top = 96
     object qMaterialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -608,22 +608,22 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 120
-    Top = 448
+    Left = 48
+    Top = 369
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
     OnUpdateError = dspNecessidade_ComprasUpdateError
-    Left = 192
-    Top = 448
+    Left = 80
+    Top = 369
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 256
-    Top = 448
+    Left = 112
+    Top = 369
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -639,8 +639,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 328
-    Top = 448
+    Left = 144
+    Top = 369
   end
   object sdsFornecedor: TSQLDataSet
     NoMetadata = True
@@ -651,21 +651,21 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 120
-    Top = 528
+    Left = 48
+    Top = 425
   end
   object dspFornecedor: TDataSetProvider
     DataSet = sdsFornecedor
-    Left = 176
-    Top = 528
+    Left = 80
+    Top = 425
   end
   object cdsFornecedor: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFornecedor'
-    Left = 240
-    Top = 528
+    Left = 112
+    Top = 425
     object cdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -680,8 +680,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsFornecedor: TDataSource
     DataSet = cdsFornecedor
-    Left = 288
-    Top = 528
+    Left = 144
+    Top = 425
   end
   object mEmbalagem: TClientDataSet
     Active = True
@@ -711,8 +711,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 872
-    Top = 144
+    Left = 536
+    Top = 528
     Data = {
       920000009619E0BD01000000180000000500000000000300000092000B49445F
       4D6174657269616C04000100000000000D4E6F6D655F4D6174657269616C0100
@@ -742,8 +742,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsmEmbalagem: TDataSource
     DataSet = mEmbalagem
-    Left = 920
-    Top = 144
+    Left = 568
+    Top = 528
   end
   object sdsNecessidade_Compras_Ord: TSQLDataSet
     NoMetadata = True
@@ -759,8 +759,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 88
-    Top = 120
+    Left = 48
+    Top = 97
     object sdsNecessidade_Compras_OrdID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -778,8 +778,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     DataSetField = cdsNecessidade_ComprassdsNecessidade_Compras_Ord
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 224
-    Top = 120
+    Left = 80
+    Top = 97
     object cdsNecessidade_Compras_OrdID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -794,13 +794,13 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsNecessidade_Compras_Ord: TDataSource
     DataSet = cdsNecessidade_Compras_Ord
-    Left = 296
-    Top = 120
+    Left = 112
+    Top = 97
   end
   object dsNecessidade_Compras_Mestre: TDataSource
     DataSet = sdsNecessidade_Compras
     Left = 48
-    Top = 80
+    Top = 57
   end
   object qProximoNumDoc: TSQLQuery
     MaxBlobSize = -1
@@ -809,8 +809,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'SELECT MAX(NUM_DOC) NUM_DOC'
       'FROM NECESSIDADE_COMPRAS')
     SQLConnection = dmDatabase.scoDados
-    Left = 880
-    Top = 328
+    Left = 570
+    Top = 160
     object qProximoNumDocNUM_MAPA: TIntegerField
       FieldName = 'NUM_MAPA'
     end
@@ -825,12 +825,12 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42032.577038136600000000
-    ReportOptions.LastChange = 43098.447833935180000000
+    ReportOptions.LastChange = 43511.585536331020000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 624
-    Top = 320
+    Left = 848
+    Top = 32
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -853,8 +853,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 664
-    Top = 320
+    Left = 880
+    Top = 32
   end
   object frxMailExport1: TfrxMailExport
     UseFileCache = True
@@ -868,12 +868,12 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     ConfurmReading = False
     UseMAPI = SMTP
     MAPISendFlag = 0
-    Left = 704
-    Top = 320
+    Left = 920
+    Top = 32
   end
   object frxRichObject1: TfrxRichObject
-    Left = 736
-    Top = 320
+    Left = 952
+    Top = 32
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxmMaterial'
@@ -920,8 +920,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'Nome_Setor=Nome_Setor')
     DataSource = dsmMaterial
     BCDToCurrency = False
-    Left = 624
-    Top = 368
+    Left = 606
+    Top = 312
   end
   object frxDBDataset2: TfrxDBDataset
     UserName = 'frxmMaterial_Prod'
@@ -936,15 +936,15 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'Qtd=Qtd')
     DataSource = dsmMaterial_Prod
     BCDToCurrency = False
-    Left = 664
+    Left = 608
     Top = 368
   end
   object mLote: TClientDataSet
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 856
-    Top = 264
+    Left = 536
+    Top = 480
     Data = {
       640000009619E0BD0100000018000000040000000000030000006400084E756D
       5F4D61706104000100000000000749445F4C6F74650400010000000000084E75
@@ -965,8 +965,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsmLote: TDataSource
     DataSet = mLote
-    Left = 896
-    Top = 264
+    Left = 571
+    Top = 480
   end
   object sdsLote_Mat: TSQLDataSet
     NoMetadata = True
@@ -1006,8 +1006,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 64
-    Top = 184
+    Left = 48
+    Top = 161
     object sdsLote_MatNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
       Required = True
@@ -1141,16 +1141,16 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     DataSet = sdsLote_Mat
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspNecessidade_ComprasUpdateError
-    Left = 136
-    Top = 184
+    Left = 80
+    Top = 161
   end
   object cdsLote_Mat: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NUM_ORDEM'
     Params = <>
     ProviderName = 'dspLote_Mat'
-    Left = 200
-    Top = 192
+    Left = 112
+    Top = 161
     object cdsLote_MatNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
       Required = True
@@ -1282,16 +1282,16 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsLote_Mat: TDataSource
     DataSet = cdsLote_Mat
-    Left = 272
-    Top = 184
+    Left = 144
+    Top = 161
   end
   object mMaterial_Ord: TClientDataSet
     Active = True
     Aggregates = <>
     IndexFieldNames = 'Num_Mapa;Num_Ord'
     Params = <>
-    Left = 664
-    Top = 128
+    Left = 536
+    Top = 424
     Data = {
       580000009619E0BD0100000018000000030000000000030000005800084E756D
       5F4D6170610400010000000000074E756D5F4F72640400010000000000084E6F
@@ -1309,18 +1309,19 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsmMaterial_Ord: TDataSource
     DataSet = mMaterial_Ord
-    Left = 736
-    Top = 128
+    Left = 568
+    Top = 424
   end
   object sdsLote: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT L.ID, L.id_produto, L.id_combinacao, L.num_ordem, L.carim' +
-      'bo, L.QTD,'#13#10'L.nome, P.nome NOME_PRODUTO, P.referencia, COMB.nome' +
-      ' NOME_COMBINACAO'#13#10'FROM LOTE L'#13#10'INNER JOIN PRODUTO P'#13#10'ON L.id_pro' +
-      'duto = P.id'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON L.id_combinacao = COM' +
-      'B.id'#13#10#13#10'WHERE L.num_ordem = :NUM_ORDEM'#13#10#13#10#13#10#13#10#13#10
+      'select L.ID, L.ID_PRODUTO, L.ID_COMBINACAO, L.NUM_ORDEM, L.CARIM' +
+      'BO, L.QTD, L.NOME, P.NOME NOME_PRODUTO, P.REFERENCIA,'#13#10'       CO' +
+      'MB.NOME NOME_COMBINACAO, P.NOME_MODELO NOME_MODELO'#13#10'from LOTE L'#13 +
+      #10'inner join PRODUTO P on L.ID_PRODUTO = P.ID'#13#10'left join COMBINAC' +
+      'AO COMB on L.ID_COMBINACAO = COMB.ID'#13#10#13#10'where L.NUM_ORDEM = :NUM' +
+      '_ORDEM'#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -1329,8 +1330,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 64
-    Top = 240
+    Left = 48
+    Top = 209
     object sdsLoteID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1366,21 +1367,25 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       FieldName = 'NOME'
       Size = 30
     end
+    object sdsLoteNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
+    end
   end
   object dspLote: TDataSetProvider
     DataSet = sdsLote
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspNecessidade_ComprasUpdateError
-    Left = 136
-    Top = 240
+    Left = 80
+    Top = 209
   end
   object cdsLote: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspLote'
-    Left = 200
-    Top = 240
+    Left = 112
+    Top = 209
     object cdsLoteID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1416,11 +1421,15 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       FieldName = 'NOME'
       Size = 30
     end
+    object cdsLoteNOME_MODELO: TStringField
+      FieldName = 'NOME_MODELO'
+      Size = 100
+    end
   end
   object dsLote: TDataSource
     DataSet = cdsLote
-    Left = 272
-    Top = 240
+    Left = 144
+    Top = 209
   end
   object qNecessidade: TSQLQuery
     MaxBlobSize = -1
@@ -1437,8 +1446,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'ON N.id = NC.id'
       'WHERE NC.num_ordproducao = :NUM_ORDEM')
     SQLConnection = dmDatabase.scoDados
-    Left = 464
-    Top = 496
+    Left = 536
+    Top = 160
     object qNecessidadeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1458,8 +1467,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'INNER JOIN PEDIDO P'
       'ON T.ID_PEDIDO = P.ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 888
-    Top = 408
+    Left = 600
+    Top = 160
     object qPedidoNUM_PEDIDO: TIntegerField
       FieldName = 'NUM_PEDIDO'
     end
@@ -1489,21 +1498,21 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 624
-    Top = 496
+    Left = 280
+    Top = 144
   end
   object dspMProduto: TDataSetProvider
     DataSet = sdsMProduto
-    Left = 680
-    Top = 496
+    Left = 312
+    Top = 144
   end
   object cdsMProduto: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'REFERENCIA'
     Params = <>
     ProviderName = 'dspMProduto'
-    Left = 744
-    Top = 496
+    Left = 344
+    Top = 144
     object cdsMProdutoID_MATERIAL: TIntegerField
       FieldName = 'ID_MATERIAL'
     end
@@ -1527,8 +1536,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsMProduto: TDataSource
     DataSet = cdsMProduto
-    Left = 792
-    Top = 496
+    Left = 376
+    Top = 144
   end
   object qLote: TSQLQuery
     MaxBlobSize = -1
@@ -1538,8 +1547,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'FROM LOTE L'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 560
-    Top = 184
+    Left = 632
+    Top = 96
     object qLoteNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
     end
@@ -1574,8 +1583,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'WHERE LM.id_material = :ID_Material'
       '  AND LM.num_ordem = :Num_Ordem')
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 328
+    Left = 568
+    Top = 96
     object qVerifica_MatCONTADOR: TIntegerField
       FieldName = 'CONTADOR'
       Required = True
@@ -1600,8 +1609,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 64
-    Top = 296
+    Left = 48
+    Top = 257
     object sdsLote_Mat_OCNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
       Required = True
@@ -1624,15 +1633,15 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object DSPLote_Mat_OC: TDataSetProvider
     DataSet = sdsLote_Mat_OC
-    Left = 136
-    Top = 296
+    Left = 80
+    Top = 257
   end
   object cdsLote_Mat_OC: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspLote_Mat_OC'
-    Left = 192
-    Top = 296
+    Left = 112
+    Top = 257
     object cdsLote_Mat_OCNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
       Required = True
@@ -1655,8 +1664,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsLote_Mat_OC: TDataSource
     DataSet = cdsLote_Mat_OC
-    Left = 240
-    Top = 296
+    Left = 144
+    Top = 257
   end
   object sdsPedido_Sobra_OC: TSQLDataSet
     NoMetadata = True
@@ -1688,8 +1697,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 56
-    Top = 368
+    Left = 48
+    Top = 313
     object sdsPedido_Sobra_OCID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1716,15 +1725,15 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dspPedido_Sobra_OC: TDataSetProvider
     DataSet = sdsPedido_Sobra_OC
-    Left = 128
-    Top = 368
+    Left = 80
+    Top = 313
   end
   object cdsPedido_Sobra_OC: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPedido_Sobra_OC'
-    Left = 184
-    Top = 368
+    Left = 112
+    Top = 313
     object cdsPedido_Sobra_OCID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1751,8 +1760,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsPedido_Sobra_OC: TDataSource
     DataSet = cdsPedido_Sobra_OC
-    Left = 232
-    Top = 368
+    Left = 144
+    Top = 313
   end
   object qParametros_Lote: TSQLQuery
     MaxBlobSize = -1
@@ -1765,8 +1774,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'LEFT JOIN COMBINACAO COMB'
       'ON P.id_cor_cru = COMB.id')
     SQLConnection = dmDatabase.scoDados
-    Left = 400
-    Top = 344
+    Left = 632
+    Top = 32
     object qParametros_LoteLOTE_TEXTIL: TStringField
       FieldName = 'LOTE_TEXTIL'
       FixedChar = True
@@ -1808,8 +1817,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'WHERE I.ID = :ID'
       '  AND I.ITEM = :ITEM')
     SQLConnection = dmDatabase.scoDados
-    Left = 944
-    Top = 480
+    Left = 632
+    Top = 160
     object qVerifica_OCCANCELADO: TStringField
       FieldName = 'CANCELADO'
       FixedChar = True
@@ -1831,26 +1840,26 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 617
-    Top = 256
+    Left = 281
+    Top = 8
   end
   object dspCombinacao: TDataSetProvider
     DataSet = sdsCombinacao
-    Left = 649
-    Top = 256
+    Left = 313
+    Top = 8
   end
   object dsCombinacao: TDataSource
     DataSet = cdsCombinacao
-    Left = 712
-    Top = 256
+    Left = 376
+    Top = 8
   end
   object cdsCombinacao: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCombinacao'
-    Left = 681
-    Top = 256
+    Left = 345
+    Top = 8
     object cdsCombinacaoID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
       Required = True
@@ -1881,8 +1890,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 784
-    Top = 24
+    Left = 280
+    Top = 88
     object sdsProduto_TamID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1895,15 +1904,15 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dspProduto_Tam: TDataSetProvider
     DataSet = sdsProduto_Tam
-    Left = 848
-    Top = 24
+    Left = 312
+    Top = 88
   end
   object cdsProduto_Tam: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto_Tam'
-    Left = 912
-    Top = 24
+    Left = 344
+    Top = 88
     object cdsProduto_TamID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1916,8 +1925,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsProduto_Tam: TDataSource
     DataSet = cdsProduto_Tam
-    Left = 968
-    Top = 24
+    Left = 376
+    Top = 88
   end
   object qParametros_Usuario: TSQLQuery
     MaxBlobSize = -1
@@ -1932,8 +1941,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'FROM PARAMETROS_USUARIO'
       'WHERE USUARIO = :USUARIO')
     SQLConnection = dmDatabase.scoDados
-    Left = 464
-    Top = 104
+    Left = 568
+    Top = 32
     object qParametros_UsuarioALT_MATERIAL_NEC: TStringField
       FieldName = 'ALT_MATERIAL_NEC'
       FixedChar = True
@@ -1964,8 +1973,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 120
-    Top = 584
+    Left = 48
+    Top = 481
     object sdsLote_Mat_GravaNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2065,16 +2074,16 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dspLote_Mat_Grava: TDataSetProvider
     DataSet = sdsLote_Mat_Grava
-    Left = 168
-    Top = 584
+    Left = 80
+    Top = 481
   end
   object cdsLote_Mat_Grava: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NUM_ORDEM;ITEM'
     Params = <>
     ProviderName = 'dspLote_Mat_Grava'
-    Left = 232
-    Top = 584
+    Left = 112
+    Top = 481
     object cdsLote_Mat_GravaNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2209,8 +2218,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       '  AND L.TAMANHO = :TAMANHO'
       '  AND L.CARIMBOAUX = :CARIMBOAUX')
     SQLConnection = dmDatabase.scoDados
-    Left = 416
-    Top = 248
+    Left = 536
+    Top = 96
     object qDuplicidadeITEM: TIntegerField
       FieldName = 'ITEM'
       Required = True
@@ -2231,8 +2240,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     SQL.Strings = (
       'SELECT ENDGRIDS FROM PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 552
-    Top = 488
+    Left = 664
+    Top = 32
     object qParametros_GeralENDGRIDS: TStringField
       FieldName = 'ENDGRIDS'
       Size = 250
@@ -2264,8 +2273,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       '  AND I.TAMANHO = :TAMANHO'
       '  AND I.QTD_RESTANTE > 0')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 544
+    Left = 664
+    Top = 96
     object qQtdOCQTD_RESTANTE: TFloatField
       FieldName = 'QTD_RESTANTE'
     end
@@ -2277,21 +2286,21 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 520
-    Top = 568
+    Left = 280
+    Top = 200
   end
   object dspSetor: TDataSetProvider
     DataSet = sdsSetor
-    Left = 576
-    Top = 568
+    Left = 312
+    Top = 200
   end
   object cdsSetor: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspSetor'
-    Left = 640
-    Top = 568
+    Left = 344
+    Top = 200
     object cdsSetorID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2302,8 +2311,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsSetor: TDataSource
     DataSet = cdsSetor
-    Left = 688
-    Top = 568
+    Left = 376
+    Top = 200
   end
   object sdsConsLote_Mat_OC: TSQLDataSet
     NoMetadata = True
@@ -2325,20 +2334,20 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 472
-    Top = 24
+    Left = 48
+    Top = 537
   end
   object dspConsLote_Mat_OC: TDataSetProvider
     DataSet = sdsConsLote_Mat_OC
-    Left = 544
-    Top = 24
+    Left = 80
+    Top = 537
   end
   object cdsConsLote_Mat_OC: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsLote_Mat_OC'
-    Left = 600
-    Top = 24
+    Left = 112
+    Top = 537
     object cdsConsLote_Mat_OCNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
       Required = True
@@ -2367,8 +2376,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
   end
   object dsConsLote_Mat_OC: TDataSource
     DataSet = cdsConsLote_Mat_OC
-    Left = 648
-    Top = 24
+    Left = 144
+    Top = 537
   end
   object qParametros_Est: TSQLQuery
     MaxBlobSize = -1
@@ -2378,8 +2387,8 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
       'FROM PARAMETROS_EST'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 456
-    Top = 176
+    Left = 600
+    Top = 32
     object qParametros_EstUSA_RESERVA: TStringField
       FieldName = 'USA_RESERVA'
       FixedChar = True
