@@ -1,4 +1,3 @@
-
 unit uAbertura;
 
 interface
