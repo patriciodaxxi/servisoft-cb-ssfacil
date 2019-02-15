@@ -2970,6 +2970,7 @@ type
     qProduto_FornNOME_COR_FORN: TStringField;
     qParametros_NFeIMP_NOMEPROD_CLIENTE: TStringField;
     cdsClienteIMP_NOMEPROD_CLIENTE: TStringField;
+    qParametros_NFeVALIDAR_PESO_NFE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
