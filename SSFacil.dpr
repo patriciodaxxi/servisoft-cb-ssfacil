@@ -775,7 +775,9 @@ uses
   UDMEstoqueTerc in 'UDMEstoqueTerc.pas' {DMEstoqueTerc: TDataModule},
   UAjuste_OperacaoNota in 'UAjuste_OperacaoNota.pas' {frmAjuste_OperacaoNota},
   UCadProduto_Consumo_Copiar in 'UCadProduto_Consumo_Copiar.pas' {frmCadProduto_Consumo_Copiar},
-  classe.validaemail in 'Classes\classe.validaemail.pas';
+  classe.validaemail in 'Classes\classe.validaemail.pas',
+  UConsNotas in 'UConsNotas.pas' {frmConsNotas},
+  UDMConsNotas in 'UDMConsNotas.pas' {DMConsNotas: TDataModule};
 
 {$R *.res}
 

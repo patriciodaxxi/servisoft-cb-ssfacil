@@ -670,17 +670,17 @@ object DMConsFaturamento: TDMConsFaturamento
     CommandText = 
       'select MOV.VLR_TOTAL, MOV.ID_PRODUTO, MOV.REFERENCIA, MOV.NOME_P' +
       'RODUTO_SERV, MOV.QTD, MOV.UNIDADE, MOV.VLR_UNITARIO,'#13#10'       MOV' +
-      '.VLR_TOTAL, MOV.NUM_NOTA, MOV.NUM_RPS, MOV.FILIAL, CLI.NOME NOME' +
-      '_CLIENTE, MOV.DTEMISSAO, MOV.DTENTRADASAIDA,'#13#10'       MOV.VLR_DES' +
-      'CONTO, MOV.SERIE, MOV.TIPO_MOV, MOV.TIPO_ES, MOV.TIPO_REG,'#13#10'    ' +
-      '   (MOV.VLR_ICMSSUBST) VLR_ICMSSUBST, MOV.ID_COR, COMB.NOME NOME' +
-      '_COR'#13#10'from MOVIMENTO MOV'#13#10'inner join PESSOA CLI on MOV.ID_PESSOA' +
-      ' = CLI.CODIGO'#13#10'inner join TAB_CFOP TCFOP on (MOV.ID_CFOP = TCFOP' +
-      '.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON MOV.ID_COR = COMB.ID'#13#10'where M' +
-      'OV.CANCELADO = '#39'N'#39' and'#13#10'      MOV.DENEGADA = '#39'N'#39' and'#13#10'      MOV.' +
-      'TIPO_ES = '#39'S'#39' and'#13#10'      ((MOV.TIPO_REG = '#39'NTS'#39' and'#13#10'      TCFOP' +
-      '.FATURAMENTO = '#39'S'#39') or (MOV.TIPO_REG = '#39'NSE'#39' and'#13#10'      MOV.VLR_' +
-      'LIQUIDO_NFSE > 0))'
+      '.VLR_TOTAL VLR_TOTAL_GERAL, MOV.NUM_NOTA, MOV.NUM_RPS, MOV.FILIA' +
+      'L, CLI.NOME NOME_CLIENTE, MOV.DTEMISSAO, MOV.DTENTRADASAIDA,'#13#10'  ' +
+      '     MOV.VLR_DESCONTO, MOV.SERIE, MOV.TIPO_MOV, MOV.TIPO_ES, MOV' +
+      '.TIPO_REG,'#13#10'       (MOV.VLR_ICMSSUBST) VLR_ICMSSUBST, MOV.ID_COR' +
+      ', COMB.NOME NOME_COR'#13#10'from MOVIMENTO MOV'#13#10'inner join PESSOA CLI ' +
+      'on MOV.ID_PESSOA = CLI.CODIGO'#13#10'inner join TAB_CFOP TCFOP on (MOV' +
+      '.ID_CFOP = TCFOP.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON MOV.ID_COR = ' +
+      'COMB.ID'#13#10'where MOV.CANCELADO = '#39'N'#39' and'#13#10'      MOV.DENEGADA = '#39'N'#39 +
+      ' and'#13#10'      MOV.TIPO_ES = '#39'S'#39' and'#13#10'      ((MOV.TIPO_REG = '#39'NTS'#39' ' +
+      'and'#13#10'      TCFOP.FATURAMENTO = '#39'S'#39') or (MOV.TIPO_REG = '#39'NSE'#39' and' +
+      #13#10'      MOV.VLR_LIQUIDO_NFSE > 0))'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -792,6 +792,9 @@ object DMConsFaturamento: TDMConsFaturamento
     object cdsProduto_DetNOME_COR: TStringField
       FieldName = 'NOME_COR'
       Size = 60
+    end
+    object cdsProduto_DetVLR_TOTAL_GERAL: TFloatField
+      FieldName = 'VLR_TOTAL_GERAL'
     end
   end
   object dsProduto_Det: TDataSource
@@ -2435,5 +2438,181 @@ object DMConsFaturamento: TDMConsFaturamento
     BCDToCurrency = False
     Left = 968
     Top = 408
+  end
+  object sdsProduto_Det_Geral: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select (V.VLR_TOTAL - coalesce( V.vlr_icmssubst,0) - coalesce(V.' +
+      'vlr_ipi,0) - coalesce(V.vlr_frete,0) ) VLR_TOTAL,'#13#10'  V.ID_PRODUT' +
+      'O, V.REFERENCIA, V.NOME_PRODUTO_SERV, V.QTD, V.UNIDADE, V.VLR_UN' +
+      'ITARIO, V.VLR_TOTAL VLR_TOTAL_GERAL, V.NUM_NOTA, V.NUM_RPS, V.FI' +
+      'LIAL, V.NOME_CLIENTE, V.DTEMISSAO, V.DTENTRADASAIDA,'#13#10'          ' +
+      '           V.VLR_DESCONTO, V.SERIE, V.TIPO_MOV, V.TIPO_ES, V.TIP' +
+      'O_REG, V.VLR_ICMSSUBST, V.ID_COR,'#13#10'                     COMB.NOM' +
+      'E NOME_COR, v.beneficiamento, v.faturamento, v.maoobra, V.codcfo' +
+      'p, v.vlr_frete'#13#10'from vconsnotas V'#13#10'left join COMBINACAO COMB on ' +
+      '(V.ID_COR = COMB.ID)'#13#10#13#10#13#10#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 360
+    Top = 480
+  end
+  object dspProduto_Det_Geral: TDataSetProvider
+    DataSet = sdsProduto_Det_Geral
+    OnUpdateError = dspNotaFiscal_CliUpdateError
+    Left = 408
+    Top = 480
+  end
+  object cdsProduto_Det_Geral: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProduto_Det_Geral'
+    Left = 448
+    Top = 480
+    object cdsProduto_Det_GeralVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+      DisplayFormat = '0.00##'
+    end
+    object cdsProduto_Det_GeralID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsProduto_Det_GeralREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsProduto_Det_GeralNOME_PRODUTO_SERV: TStringField
+      FieldName = 'NOME_PRODUTO_SERV'
+      Size = 100
+    end
+    object cdsProduto_Det_GeralQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsProduto_Det_GeralUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object cdsProduto_Det_GeralVLR_UNITARIO: TFloatField
+      FieldName = 'VLR_UNITARIO'
+      DisplayFormat = '0.00##'
+    end
+    object cdsProduto_Det_GeralVLR_TOTAL_GERAL: TFloatField
+      FieldName = 'VLR_TOTAL_GERAL'
+      DisplayFormat = '0.00##'
+    end
+    object cdsProduto_Det_GeralNUM_NOTA: TIntegerField
+      FieldName = 'NUM_NOTA'
+    end
+    object cdsProduto_Det_GeralNUM_RPS: TIntegerField
+      FieldName = 'NUM_RPS'
+    end
+    object cdsProduto_Det_GeralFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+    object cdsProduto_Det_GeralNOME_CLIENTE: TStringField
+      FieldName = 'NOME_CLIENTE'
+      Size = 60
+    end
+    object cdsProduto_Det_GeralDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsProduto_Det_GeralDTENTRADASAIDA: TDateField
+      FieldName = 'DTENTRADASAIDA'
+    end
+    object cdsProduto_Det_GeralVLR_DESCONTO: TFloatField
+      FieldName = 'VLR_DESCONTO'
+      DisplayFormat = '0.00##'
+    end
+    object cdsProduto_Det_GeralSERIE: TStringField
+      FieldName = 'SERIE'
+      Size = 3
+    end
+    object cdsProduto_Det_GeralTIPO_MOV: TStringField
+      FieldName = 'TIPO_MOV'
+      Size = 3
+    end
+    object cdsProduto_Det_GeralTIPO_ES: TStringField
+      FieldName = 'TIPO_ES'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProduto_Det_GeralTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      Size = 3
+    end
+    object cdsProduto_Det_GeralVLR_ICMSSUBST: TFloatField
+      FieldName = 'VLR_ICMSSUBST'
+      DisplayFormat = '0.00##'
+    end
+    object cdsProduto_Det_GeralID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object cdsProduto_Det_GeralNOME_COR: TStringField
+      FieldName = 'NOME_COR'
+      Size = 60
+    end
+    object cdsProduto_Det_GeralBENEFICIAMENTO: TStringField
+      FieldName = 'BENEFICIAMENTO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProduto_Det_GeralFATURAMENTO: TStringField
+      FieldName = 'FATURAMENTO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProduto_Det_GeralMAOOBRA: TStringField
+      FieldName = 'MAOOBRA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProduto_Det_GeralCODCFOP: TStringField
+      FieldName = 'CODCFOP'
+      Size = 5
+    end
+    object cdsProduto_Det_GeralVLR_FRETE: TFloatField
+      FieldName = 'VLR_FRETE'
+      DisplayFormat = '0.00##'
+    end
+  end
+  object dsProduto_Det_Geral: TDataSource
+    DataSet = cdsProduto_Det_Geral
+    Left = 488
+    Top = 480
+  end
+  object frxProduto_Det_Geral: TfrxDBDataset
+    UserName = 'frxProduto_Det_Geral'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'VLR_TOTAL=VLR_TOTAL'
+      'ID_PRODUTO=ID_PRODUTO'
+      'REFERENCIA=REFERENCIA'
+      'NOME_PRODUTO_SERV=NOME_PRODUTO_SERV'
+      'QTD=QTD'
+      'UNIDADE=UNIDADE'
+      'VLR_UNITARIO=VLR_UNITARIO'
+      'VLR_TOTAL_GERAL=VLR_TOTAL_GERAL'
+      'NUM_NOTA=NUM_NOTA'
+      'NUM_RPS=NUM_RPS'
+      'FILIAL=FILIAL'
+      'NOME_CLIENTE=NOME_CLIENTE'
+      'DTEMISSAO=DTEMISSAO'
+      'DTENTRADASAIDA=DTENTRADASAIDA'
+      'VLR_DESCONTO=VLR_DESCONTO'
+      'SERIE=SERIE'
+      'TIPO_MOV=TIPO_MOV'
+      'TIPO_ES=TIPO_ES'
+      'TIPO_REG=TIPO_REG'
+      'VLR_ICMSSUBST=VLR_ICMSSUBST'
+      'ID_COR=ID_COR'
+      'NOME_COR=NOME_COR'
+      'BENEFICIAMENTO=BENEFICIAMENTO'
+      'FATURAMENTO=FATURAMENTO'
+      'MAOOBRA=MAOOBRA'
+      'CODCFOP=CODCFOP')
+    DataSource = dsProduto_Det_Geral
+    BCDToCurrency = False
+    Left = 976
+    Top = 453
   end
 end

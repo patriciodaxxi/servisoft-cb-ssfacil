@@ -20,7 +20,7 @@ object frmConsFaturamento: TfrmConsFaturamento
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1002
+    Width = 1010
     Height = 83
     Align = alTop
     BevelOuter = bvNone
@@ -330,9 +330,9 @@ object frmConsFaturamento: TfrmConsFaturamento
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 104
-    Width = 1002
-    Height = 373
-    ActivePage = TS_Cliente
+    Width = 1010
+    Height = 381
+    ActivePage = TS_Produto_Det
     ActivePageDefault = TS_Cliente
     Align = alClient
     BackgroundColor = clGray
@@ -345,7 +345,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 5
     TabOrder = 2
     TextColors.Selected = clBlue
     FixedDimension = 19
@@ -354,9 +354,9 @@ object frmConsFaturamento: TfrmConsFaturamento
       object RzPageControl3: TRzPageControl
         Left = 0
         Top = 0
-        Width = 998
-        Height = 350
-        ActivePage = TS_Cliente_Cid_Det
+        Width = 1006
+        Height = 358
+        ActivePage = TS_Cliente_Acum
         ActivePageDefault = TS_Cliente_Acum
         Align = alClient
         Color = 16755027
@@ -369,7 +369,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         ParentColor = False
         ParentFont = False
         TabColors.Unselected = clGray
-        TabIndex = 3
+        TabIndex = 0
         TabOrder = 0
         TextColors.Unselected = 5197647
         FixedDimension = 19
@@ -379,8 +379,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid1: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 327
+            Width = 1002
+            Height = 335
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli
@@ -477,8 +477,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid12: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 327
+            Width = 1002
+            Height = 335
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli_UF
@@ -589,8 +589,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid13: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 327
+            Width = 1002
+            Height = 335
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli_Cid
@@ -709,8 +709,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid18: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 327
+            Width = 1002
+            Height = 335
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli_Cid_Det
@@ -849,8 +849,8 @@ object frmConsFaturamento: TfrmConsFaturamento
       object SMDBGrid2: TSMDBGrid
         Left = 0
         Top = 25
-        Width = 998
-        Height = 325
+        Width = 1006
+        Height = 333
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal_CliProd
@@ -950,7 +950,7 @@ object frmConsFaturamento: TfrmConsFaturamento
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 998
+        Width = 1006
         Height = 25
         Align = alTop
         Color = clSilver
@@ -998,8 +998,8 @@ object frmConsFaturamento: TfrmConsFaturamento
       object SMDBGrid3: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 998
-        Height = 350
+        Width = 1006
+        Height = 358
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal_Prod
@@ -1096,8 +1096,8 @@ object frmConsFaturamento: TfrmConsFaturamento
       object SMDBGrid4: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 998
-        Height = 350
+        Width = 1006
+        Height = 358
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal_DT
@@ -1188,8 +1188,8 @@ object frmConsFaturamento: TfrmConsFaturamento
       object RzPageControl4: TRzPageControl
         Left = 0
         Top = 0
-        Width = 998
-        Height = 350
+        Width = 1006
+        Height = 358
         ActivePage = TS_UF_Acumulado
         ActivePageDefault = TS_UF_Acumulado
         Align = alClient
@@ -1201,8 +1201,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid7: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 327
+            Width = 1002
+            Height = 335
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_UF
@@ -1292,8 +1292,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid14: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 327
+            Width = 1002
+            Height = 335
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsProduto_UF
@@ -1401,6 +1401,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 Expanded = False
                 FieldName = 'clPerc_SobreFat'
                 Title.Caption = '% Sobre Total'
+                Width = 64
                 Visible = True
               end
               item
@@ -1416,8 +1417,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid15: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 327
+            Width = 1002
+            Height = 335
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsGrupo_UF
@@ -1523,143 +1524,369 @@ object frmConsFaturamento: TfrmConsFaturamento
     end
     object TS_Produto_Det: TRzTabSheet
       Caption = 'Produto Detalhado'
-      object SMDBGrid5: TSMDBGrid
+      object RzPageControl5: TRzPageControl
         Left = 0
         Top = 0
-        Width = 998
-        Height = 350
+        Width = 1006
+        Height = 358
+        ActivePage = TS_Produto_Det_Geral
+        ActivePageDefault = TS_PRODUTO_DET_Fat
         Align = alClient
-        Ctl3D = False
-        DataSource = DMConsFaturamento.dsProduto_Det
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        ParentCtl3D = False
-        ReadOnly = True
+        TabIndex = 1
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        OnTitleClick = SMDBGrid5TitleClick
-        Flat = True
-        BandsFont.Charset = DEFAULT_CHARSET
-        BandsFont.Color = clWindowText
-        BandsFont.Height = -11
-        BandsFont.Name = 'MS Sans Serif'
-        BandsFont.Style = []
-        Groupings = <>
-        GridStyle.Style = gsCustom
-        GridStyle.OddColor = clWindow
-        GridStyle.EvenColor = clWindow
-        TitleHeight.PixelCount = 24
-        FooterColor = clBtnFace
-        ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
-        RegistryKey = 'Software\Scalabium'
-        RegistrySection = 'SMDBGrid'
-        WidthOfIndicator = 11
-        DefaultRowHeight = 17
-        ScrollBars = ssHorizontal
-        ColCount = 18
-        RowCount = 2
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'TIPO_MOV'
-            Width = 47
-            Visible = True
+        FixedDimension = 19
+        object TS_PRODUTO_DET_Fat: TRzTabSheet
+          Caption = 'Faturados'
+          object SMDBGrid5: TSMDBGrid
+            Left = 0
+            Top = 0
+            Width = 1002
+            Height = 335
+            Align = alClient
+            Ctl3D = False
+            DataSource = DMConsFaturamento.dsProduto_Det
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnTitleClick = SMDBGrid5TitleClick
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 20
+            RowCount = 2
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'TIPO_MOV'
+                Width = 47
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'REFERENCIA'
+                Width = 62
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_PRODUTO_SERV'
+                Width = 305
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_COR'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cor'
+                Width = 241
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_CLIENTE'
+                Width = 210
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'QTD'
+                Width = 73
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_TOTAL_GERAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Total Bruto'
+                Width = 72
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_TOTAL'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'UNIDADE'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_UNITARIO'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_ICMSSUBST'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. ST'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_DESCONTO'
+                Width = 58
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'SERIE'
+                Width = 34
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NUM_NOTA'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NUM_RPS'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DTEMISSAO'
+                Width = 76
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DTENTRADASAIDA'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FILIAL'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_IPI'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. IPI'
+                Visible = True
+              end>
           end
-          item
-            Expanded = False
-            FieldName = 'REFERENCIA'
-            Width = 62
-            Visible = True
+        end
+        object TS_Produto_Det_Geral: TRzTabSheet
+          Caption = 'Geral'
+          object SMDBGrid19: TSMDBGrid
+            Left = 0
+            Top = 0
+            Width = 1002
+            Height = 335
+            Align = alClient
+            Ctl3D = False
+            DataSource = DMConsFaturamento.dsProduto_Det_Geral
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnTitleClick = SMDBGrid5TitleClick
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 20
+            RowCount = 2
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'TIPO_MOV'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tipo Mov'
+                Width = 38
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'CODCFOP'
+                Title.Alignment = taCenter
+                Title.Caption = 'CFOP'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'REFERENCIA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Refer'#234'ncia'
+                Width = 62
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_PRODUTO_SERV'
+                Title.Alignment = taCenter
+                Title.Caption = 'Produto / Servi'#231'o'
+                Width = 275
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_COR'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cor'
+                Width = 241
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_CLIENTE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Colaborador'
+                Width = 190
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'QTD'
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtde.'
+                Width = 73
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_TOTAL_GERAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Total Bruto'
+                Width = 72
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_TOTAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Total'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'UNIDADE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Unid.'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_UNITARIO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Unit'#225'rio'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_ICMSSUBST'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. ST'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_DESCONTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Desconto'
+                Width = 58
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'SERIE'
+                Title.Alignment = taCenter
+                Title.Caption = 'S'#233'rie'
+                Width = 34
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'NUM_NOTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#186' Nota'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'DTEMISSAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Dt. Emiss'#227'o'
+                Width = 76
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'DTENTRADASAIDA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Dt. Entrada / Sa'#237'da'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'FILIAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Filial'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_IPI'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. IPI'
+                Visible = True
+              end>
           end
-          item
-            Expanded = False
-            FieldName = 'NOME_PRODUTO_SERV'
-            Width = 305
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_COR'
-            Title.Alignment = taCenter
-            Title.Caption = 'Cor'
-            Width = 241
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_CLIENTE'
-            Width = 210
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'QTD'
-            Width = 73
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'VLR_TOTAL'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'UNIDADE'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'VLR_UNITARIO'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'VLR_ICMSSUBST'
-            Title.Alignment = taCenter
-            Title.Caption = 'Vlr. ST'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'VLR_DESCONTO'
-            Width = 58
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SERIE'
-            Width = 34
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NUM_NOTA'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NUM_RPS'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DTEMISSAO'
-            Width = 76
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DTENTRADASAIDA'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FILIAL'
-            Visible = True
-          end>
+        end
       end
     end
     object TS_Nota: TRzTabSheet
@@ -1667,8 +1894,8 @@ object frmConsFaturamento: TfrmConsFaturamento
       object SMDBGrid6: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 998
-        Height = 350
+        Width = 1006
+        Height = 358
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal
@@ -1756,6 +1983,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Expanded = False
             FieldName = 'VLR_FATURAMENTO'
             Title.Caption = 'Vlr. Faturamento'
+            Width = 64
             Visible = True
           end
           item
@@ -1819,8 +2047,8 @@ object frmConsFaturamento: TfrmConsFaturamento
       object SMDBGrid8: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 998
-        Height = 350
+        Width = 1006
+        Height = 358
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsCupomFiscal
@@ -1914,8 +2142,8 @@ object frmConsFaturamento: TfrmConsFaturamento
       object SMDBGrid17: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 998
-        Height = 350
+        Width = 1006
+        Height = 358
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsReciboNF
@@ -2005,8 +2233,8 @@ object frmConsFaturamento: TfrmConsFaturamento
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 25
-        Width = 998
-        Height = 325
+        Width = 1006
+        Height = 333
         ActivePage = TS_Vendedor_Acum
         ActivePageDefault = TS_Vendedor_Acum
         Align = alClient
@@ -2030,8 +2258,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid10: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 302
+            Width = 1002
+            Height = 310
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Vend
@@ -2137,8 +2365,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid9: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 302
+            Width = 1002
+            Height = 310
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_VendCli
@@ -2253,8 +2481,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid11: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 302
+            Width = 1002
+            Height = 310
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_VendProd
@@ -2359,6 +2587,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'clPerc_SobreFat'
                 Title.Alignment = taCenter
                 Title.Caption = '% Sobre Total'
+                Width = 64
                 Visible = True
               end>
           end
@@ -2369,8 +2598,8 @@ object frmConsFaturamento: TfrmConsFaturamento
           object SMDBGrid16: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 994
-            Height = 302
+            Width = 1002
+            Height = 310
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsVendCliProd
@@ -2412,11 +2641,13 @@ object frmConsFaturamento: TfrmConsFaturamento
               item
                 Expanded = False
                 FieldName = 'DTEMISSAO'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'TIPO_MOV'
+                Width = 64
                 Visible = True
               end
               item
@@ -2428,6 +2659,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               item
                 Expanded = False
                 FieldName = 'COD_GRUPO'
+                Width = 64
                 Visible = True
               end
               item
@@ -2462,6 +2694,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               item
                 Expanded = False
                 FieldName = 'VLR_DUPLICATA'
+                Width = 64
                 Visible = True
               end
               item
@@ -2472,16 +2705,19 @@ object frmConsFaturamento: TfrmConsFaturamento
               item
                 Expanded = False
                 FieldName = 'VLR_VENDAS'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_ICMSSUBST'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'UF_CLI'
+                Width = 64
                 Visible = True
               end>
           end
@@ -2490,7 +2726,7 @@ object frmConsFaturamento: TfrmConsFaturamento
       object Panel6: TPanel
         Left = 0
         Top = 0
-        Width = 998
+        Width = 1006
         Height = 25
         Align = alTop
         Color = clSilver
@@ -2509,8 +2745,8 @@ object frmConsFaturamento: TfrmConsFaturamento
   end
   object Panel3: TPanel
     Left = 0
-    Top = 477
-    Width = 1002
+    Top = 485
+    Width = 1010
     Height = 27
     Align = alBottom
     Color = 16769217
@@ -2615,7 +2851,7 @@ object frmConsFaturamento: TfrmConsFaturamento
   object Panel4: TPanel
     Left = 0
     Top = 83
-    Width = 1002
+    Width = 1010
     Height = 21
     Align = alTop
     BevelOuter = bvNone
@@ -2691,8 +2927,8 @@ object frmConsFaturamento: TfrmConsFaturamento
   end
   object Panel5: TPanel
     Left = 0
-    Top = 504
-    Width = 1002
+    Top = 512
+    Width = 1010
     Height = 25
     Align = alBottom
     Color = 16769217

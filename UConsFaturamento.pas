@@ -36,7 +36,6 @@ type
     ComboBox1: TComboBox;
     CheckBox1: TCheckBox;
     TS_Produto_Det: TRzTabSheet;
-    SMDBGrid5: TSMDBGrid;
     ceVlrVendas: TCurrencyEdit;
     Label8: TLabel;
     Label9: TLabel;
@@ -103,6 +102,11 @@ type
     chkCupomEnv: TCheckBox;
     TS_Cliente_Cid_Det: TRzTabSheet;
     SMDBGrid18: TSMDBGrid;
+    RzPageControl5: TRzPageControl;
+    TS_PRODUTO_DET_Fat: TRzTabSheet;
+    TS_Produto_Det_Geral: TRzTabSheet;
+    SMDBGrid5: TSMDBGrid;
+    SMDBGrid19: TSMDBGrid;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -149,6 +153,7 @@ type
     procedure prc_Consultar_Nota_UF;
     procedure prc_Consultar_Nota_UF_Produto;
     procedure prc_Consultar_Produto_Det;
+    procedure prc_Consultar_Produto_Det_Geral;
     procedure prc_Consultar_Nota;
     procedure prc_Consultar_ReciboNF;
     procedure prc_Monta_Cab;
@@ -230,7 +235,12 @@ begin
     prc_Consultar_Nota_DT
   else
   if RzPageControl1.ActivePage = TS_Produto_Det then
-    prc_Consultar_Produto_Det
+  begin
+    if RzPageControl5.ActivePage = TS_PRODUTO_DET_Fat then
+      prc_Consultar_Produto_Det
+    else
+      prc_Consultar_Produto_Det_Geral;
+  end
   else
   if RzPageControl1.ActivePage = TS_Nota then
     prc_Consultar_Nota
@@ -923,7 +933,7 @@ begin
   fDMConsFaturamento.cdsProduto_Det.Close;
   fDMConsFaturamento.cdsProduto_Det.IndexFieldNames := '';
   fDMConsFaturamento.sdsProduto_Det.CommandText := ' SELECT (' + vDesc + ') VLR_TOTAL, V.ID_PRODUTO, V.REFERENCIA, V.NOME_PRODUTO_SERV, '
-                                                 + ' V.QTD, V.unidade, V.vlr_unitario, V.vlr_total, V.num_nota, V.num_rps, V.filial, '
+                                                 + ' V.QTD, V.unidade, V.vlr_unitario, V.vlr_total VLR_TOTAL_GERAL, V.num_nota, V.num_rps, V.filial, '
                                                  + ' V.NOME_CLIENTE, V.DTEMISSAO, V.dtentradasaida, V.VLR_DESCONTO,  V.SERIE, V.TIPO_MOV, '
                                                  + ' V.TIPO_ES, V.TIPO_REG, V.VLR_ICMSSUBST, V.ID_COR ';
   fDMConsFaturamento.sdsProduto_Det.CommandText := fDMConsFaturamento.sdsProduto_Det.CommandText + vComando;
@@ -1846,6 +1856,16 @@ begin
   prc_Opcao_Rel_Vendedor;
   fDMConsFaturamento.frxReport1.ShowReport;
   SMDBGrid13.EnableScroll;
+end;
+
+procedure TfrmConsFaturamento.prc_Consultar_Produto_Det_Geral;
+var
+  vDesc: String;
+begin
+  fDMConsFaturamento.cdsProduto_Det_Geral.Close;
+  fDMConsFaturamento.cdsProduto_Det_Geral.IndexFieldNames := '';
+  fDMConsFaturamento.sdsProduto_Det_Geral.CommandText     := fDMConsFaturamento.ctProduto_Det_Geral + vComando;
+  fDMConsFaturamento.cdsProduto_Det_Geral.Open;
 end;
 
 end.

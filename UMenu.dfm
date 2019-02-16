@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 623
+    Height = 631
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -626,6 +626,10 @@ object fMenu: TfMenu
         Caption = 'Consulta Pedido x Materiais Terceiros'
         OnClick = ConsultaMateriaisTerceiros1Click
       end
+      object ConsultaNotas1: TMenuItem
+        Caption = 'Consulta Notas'
+        OnClick = ConsultaNotas1Click
+      end
       object ConsultaCompras1: TMenuItem
         Caption = 'Consulta Compras (Notas)'
         OnClick = ConsultaCompras1Click
@@ -770,6 +774,10 @@ object fMenu: TfMenu
       end
       object N6: TMenuItem
         Caption = '-'
+      end
+      object ConsultasNotas1: TMenuItem
+        Caption = 'Consultas Notas'
+        OnClick = ConsultasNotas1Click
       end
       object ConsultaFaturamento1: TMenuItem
         Caption = 'Consulta Faturamento (Detalhado)'
@@ -4422,7 +4430,7 @@ object fMenu: TfMenu
     Left = 648
     Top = 376
     Bitmap = {
-      494C01010D000E00040030003000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C01010D000E00040030003000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C0000000C000000001002000000000000040
       0200000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -9178,6 +9186,7 @@ object fMenu: TfMenu
       00001FFFFFFD000083FF0000000000001F04000000A7FFE000005FFFFFFD0000
       03FF0000000000000F880000001BFFE000001FFFFFFFFF003FFF000000000000
       3C5200580413FFFF88019FFFFFFFFFE03FFF0000000000000C0000401801FFFF
-      E000FFFFFFFFFF003FFF000000000000}
+      E000FFFFFFFFFF003FFF00000000000000000000000000000000000000000000
+      000000000000}
   end
 end

@@ -341,6 +341,8 @@ type
     ConsultaEstoquedeTerceiroeEmTerceiro1: TMenuItem;
     N53: TMenuItem;
     AjusteOperaoNasNotas1: TMenuItem;
+    ConsultasNotas1: TMenuItem;
+    ConsultaNotas1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -580,6 +582,8 @@ type
       Sender: TObject);
     procedure ConsultaEstoquedeTerceiroeEmTerceiro1Click(Sender: TObject);
     procedure AjusteOperaoNasNotas1Click(Sender: TObject);
+    procedure ConsultasNotas1Click(Sender: TObject);
+    procedure ConsultaNotas1Click(Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -639,7 +643,7 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   UConsEstoque_Res, UBaixaMaterialOP, uCadTipo_Material, UConsMatPrima, UConsMaterialOP, UConsMaterial_Nec_Rem, uBaixaPedidoProc,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina,
   UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida,
-  UConsEstoqueTerc, UAjuste_OperacaoNota;
+  UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas;
 
 {$R *.dfm}
 
@@ -2076,6 +2080,18 @@ end;
 procedure TfMenu.AjusteOperaoNasNotas1Click(Sender: TObject);
 begin
   OpenForm(TfrmAjuste_OperacaoNota,wsMaximized);
+end;
+
+procedure TfMenu.ConsultasNotas1Click(Sender: TObject);
+begin
+  vTipo_Reg_Cons_Fat := 'NTS';
+  OpenForm(TfrmConsNotas,wsMaximized);
+end;
+
+procedure TfMenu.ConsultaNotas1Click(Sender: TObject);
+begin
+  vTipo_Reg_Cons_Fat := 'NTE';
+  OpenForm(TfrmConsNotas,wsMaximized);
 end;
 
 initialization
