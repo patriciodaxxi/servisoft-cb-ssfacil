@@ -615,7 +615,7 @@ var
 implementation
 
 uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF, UCadCidade, UCadNotaFiscal, UCadPercSimples,
-  UCadPessoa, UCadProduto, UCadCondPgto, UCadNCM, UCadRegime_Trib, UCadOrigem_Prod, UCadParametros, UCadTipoCobranca, UCadCFOP,
+  UCadPessoa, UCadProduto, UCadCondPgto, UCadNCM, UCadRegime_Trib, UCadOrigem_Prod, UCadTipoCobranca, UCadCFOP,
   UCadCofins, UCadPis, UCadCSTIcms, UCadCSTIpi, UCadObs_Aux, UCadUnidade, UCadNotaEntrada, UCadContas, UCadNFe_Email, uCadVale,
   UCadPedido, URecebeXML, UCadOperacao_Nota, UCadRegra_Empresa, UConsEstoque, UCadDocEstoque, UConsEstoque_Mov, UCadDuplicata,
   UConsNotaBeneficiamento, UConsPedido, UCadTabPreco, UConsTabPreco, UCadOrcamento, UCadFinanceiro, UCadProxima_Nota, UConsOP,
@@ -780,7 +780,7 @@ end;
 
 procedure TfMenu.Parmetros1Click(Sender: TObject);
 begin
-  OpenForm(TfrmCadParametros,wsMaximized);
+  prc_ShellExecute('SSFacil_Parametros.exe');
 end;
 
 procedure TfMenu.PercentualSimples1Click(Sender: TObject);
