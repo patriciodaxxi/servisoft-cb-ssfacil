@@ -19,8 +19,8 @@ object frmGerar_Lote: TfrmGerar_Lote
   object RzPageControl2: TRzPageControl
     Left = 0
     Top = 0
-    Width = 912
-    Height = 546
+    Width = 920
+    Height = 554
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -38,7 +38,7 @@ object frmGerar_Lote: TfrmGerar_Lote
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 908
+        Width = 916
         Height = 32
         Align = alTop
         Color = clSilver
@@ -196,7 +196,7 @@ object frmGerar_Lote: TfrmGerar_Lote
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 908
+        Width = 916
         Height = 105
         Align = alTop
         TabOrder = 1
@@ -524,8 +524,8 @@ object frmGerar_Lote: TfrmGerar_Lote
       object SMDBGrid2: TSMDBGrid
         Left = 0
         Top = 137
-        Width = 908
-        Height = 386
+        Width = 916
+        Height = 394
         Align = alClient
         Ctl3D = False
         DataSource = DMCadLote.dsConsulta_Lote
@@ -599,6 +599,7 @@ object frmGerar_Lote: TfrmGerar_Lote
             FieldName = 'UNIDADE'
             Title.Alignment = taCenter
             Title.Caption = 'Unid.'
+            Width = 64
             Visible = True
           end
           item
@@ -625,11 +626,13 @@ object frmGerar_Lote: TfrmGerar_Lote
           item
             Expanded = False
             FieldName = 'DTEMISSAO'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'HREMISSAO'
+            Width = 64
             Visible = True
           end
           item
@@ -645,6 +648,7 @@ object frmGerar_Lote: TfrmGerar_Lote
             FieldName = 'CARIMBO'
             Title.Alignment = taCenter
             Title.Caption = 'Carimbo'
+            Width = 64
             Visible = True
           end>
       end
@@ -654,7 +658,7 @@ object frmGerar_Lote: TfrmGerar_Lote
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 908
+        Width = 916
         Height = 32
         Align = alTop
         Color = 8404992
@@ -809,7 +813,7 @@ object frmGerar_Lote: TfrmGerar_Lote
       object pnlCadastro: TPanel
         Left = 0
         Top = 32
-        Width = 908
+        Width = 916
         Height = 52
         Align = alTop
         BevelOuter = bvNone
@@ -870,8 +874,8 @@ object frmGerar_Lote: TfrmGerar_Lote
       object GroupBox1: TGroupBox
         Left = 0
         Top = 84
-        Width = 908
-        Height = 439
+        Width = 916
+        Height = 447
         Align = alClient
         Caption = ' Pedidos Pendentes  (N'#227'o gerado Lote/Tal'#227'o) '
         Font.Charset = DEFAULT_CHARSET
@@ -884,8 +888,8 @@ object frmGerar_Lote: TfrmGerar_Lote
         object SMDBGrid1: TSMDBGrid
           Left = 2
           Top = 15
-          Width = 904
-          Height = 422
+          Width = 912
+          Height = 430
           Align = alClient
           Ctl3D = False
           DataSource = DMCadLote.dsPendente
@@ -1125,6 +1129,7 @@ object frmGerar_Lote: TfrmGerar_Lote
               Title.Font.Height = -11
               Title.Font.Name = 'MS Sans Serif'
               Title.Font.Style = []
+              Width = 64
               Visible = True
             end
             item
@@ -1142,6 +1147,7 @@ object frmGerar_Lote: TfrmGerar_Lote
               Title.Font.Height = -11
               Title.Font.Name = 'MS Sans Serif'
               Title.Font.Style = []
+              Width = 64
               Visible = True
             end>
         end
@@ -1152,7 +1158,7 @@ object frmGerar_Lote: TfrmGerar_Lote
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 908
+        Width = 916
         Height = 66
         Align = alTop
         TabOrder = 0
@@ -1332,8 +1338,8 @@ object frmGerar_Lote: TfrmGerar_Lote
       object SMDBGrid3: TSMDBGrid
         Left = 0
         Top = 66
-        Width = 908
-        Height = 457
+        Width = 916
+        Height = 465
         Align = alClient
         Ctl3D = False
         DataSource = DMCadLote.dsPedido_PorTalao
@@ -1380,6 +1386,7 @@ object frmGerar_Lote: TfrmGerar_Lote
             FieldName = 'PEDIDO_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Pedido Cliente'
+            Width = 64
             Visible = True
           end
           item
@@ -1394,6 +1401,7 @@ object frmGerar_Lote: TfrmGerar_Lote
             FieldName = 'NUM_ORDEM'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Ordem Produ'#231#227'o'
+            Width = 64
             Visible = True
           end
           item

@@ -174,11 +174,16 @@ begin
   Label3.Caption     := vTexto2 + ':';
 
   fDMConsNotas.vTipo_Reg := fMenu.vTipo_Reg_Cons_Fat;
-  Label8.Visible := (fMenu.vTipo_Reg_Cons_Fat <> 'NTE');
+  {Label8.Visible := (fMenu.vTipo_Reg_Cons_Fat <> 'NTE');
   Label9.Visible := (fMenu.vTipo_Reg_Cons_Fat <> 'NTE');
   ceVlrServico.Visible   := (fMenu.vTipo_Reg_Cons_Fat <> 'NTE');
   ceVlrVendas.Visible    := (fMenu.vTipo_Reg_Cons_Fat <> 'NTE');
-  TS_ReciboNF.TabVisible := (fMenu.vTipo_Reg_Cons_Fat <> 'NTE');
+  TS_ReciboNF.TabVisible := (fMenu.vTipo_Reg_Cons_Fat <> 'NTE');}
+
+  TS_DTEmissao.TabVisible   := False;
+  TS_Nota.TabVisible        := False;
+  TS_NotaServico.TabVisible := False;
+  TS_ReciboNF.TabVisible    := False;
 
   prc_Ajustar_Grids(SMDBGrid4);
   prc_Ajustar_Grids(SMDBGrid6);
@@ -404,7 +409,15 @@ begin
     ShowMessage('Relatorio não localizado! ' + vArq);
     Exit;
   end;
+
   SMDBGrid19.DisableScroll;
+  case ComboBox2.ItemIndex of
+    0 : fDMConsNotas.cdsProduto_Det.IndexFieldNames := 'NOME_PRODUTO_SERV;NUM_NOTA;SERIE';
+    1 : fDMConsNotas.cdsProduto_Det.IndexFieldNames := 'CODCFOP;NUM_NOTA;SERIE;NOME_PRODUTO_SERV';
+    2 : fDMConsNotas.cdsProduto_Det.IndexFieldNames := 'NUM_NOTA;SERIE;NOME_PRODUTO_SERV';
+    3 : fDMConsNotas.cdsProduto_Det.IndexFieldNames := 'NOME_CLIENTE;NUM_NOTA;SERIE;NOME_PRODUTO_SERV';
+  end;
+
   fDMConsNotas.frxReport1.variables['ImpOpcao'] := QuotedStr(fDMConsNotas.vDescOpcao_Rel);
   fDMConsNotas.frxReport1.ShowReport;
   SMDBGrid19.EnableScroll;

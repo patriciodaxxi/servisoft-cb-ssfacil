@@ -307,7 +307,7 @@ object frmConsNotas: TfrmConsNotas
     Top = 87
     Width = 1010
     Height = 385
-    ActivePage = TS_Produto_Det
+    ActivePage = TS_DTEmissao
     Align = alClient
     BackgroundColor = clGray
     BoldCurrentTab = True
@@ -319,7 +319,7 @@ object frmConsNotas: TfrmConsNotas
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     TextColors.Selected = clBlue
     FixedDimension = 19
@@ -535,6 +535,7 @@ object frmConsNotas: TfrmConsNotas
             FieldName = 'UNIDADE'
             Title.Alignment = taCenter
             Title.Caption = 'Unid.'
+            Width = 64
             Visible = True
           end
           item
@@ -591,6 +592,7 @@ object frmConsNotas: TfrmConsNotas
             FieldName = 'DTENTRADASAIDA'
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Entrada / Sa'#237'da'
+            Width = 64
             Visible = True
           end
           item
@@ -757,6 +759,7 @@ object frmConsNotas: TfrmConsNotas
             Expanded = False
             FieldName = 'VLR_FATURAMENTO'
             Title.Caption = 'Vlr. Faturamento'
+            Width = 64
             Visible = True
           end
           item
