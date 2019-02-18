@@ -645,6 +645,7 @@ begin
 
   prc_Habilita;
   RxDBComboBox7.Enabled := True;
+  RxDBComboBox7.SetFocus;
 
   fDMCadProduto.cdsProdutoTIPO_REG.AsString := 'M';
   //RxDBComboBox7.SetFocus;
@@ -664,7 +665,6 @@ begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadProduto);
   fDMCadProduto.qParametros_Ped.Open;
   prc_le_Grid(SMDBGrid1, Name, fDMCadProduto.qParametros_GeralENDGRIDS.AsString);
-
   DBEdit3.Visible  := not(Label4.Enabled);
   DBEdit57.Visible := not(Label4.Enabled);
   DBEdit5.Visible  := not(Label12.Enabled);
@@ -838,8 +838,8 @@ begin
   btnAlterar_Nome.Enabled := True;
 
   RxDBComboBox7.Enabled := True;
-
   prc_Habilita;
+  RxDBComboBox7.SetFocus;
 end;
 
 procedure TfrmCadMaterial.btnConfirmarClick(Sender: TObject);
@@ -1279,6 +1279,7 @@ begin
     if fDMCadProduto.qParametrosUSA_CARIMBO.AsString = 'S' then
       fDMCadProduto.prc_Abrir_Produto_Carimbo(fDMCadProduto.cdsProdutoID.AsInteger);
   end;
+  btnGradeRef.Visible  := (RxDBComboBox7.ItemIndex = 1);
   prc_Combinacao;
 end;
 
