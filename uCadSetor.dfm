@@ -23,8 +23,8 @@ object frmCadSetor: TfrmCadSetor
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 841
-    Height = 532
+    Width = 849
+    Height = 539
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -42,8 +42,8 @@ object frmCadSetor: TfrmCadSetor
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 837
-        Height = 425
+        Width = 845
+        Height = 432
         Align = alClient
         Ctl3D = False
         DataSource = DmCadSetor.dsConsulta
@@ -126,6 +126,7 @@ object frmCadSetor: TfrmCadSetor
             FieldName = 'ORDEM_ORC'
             Title.Alignment = taCenter
             Title.Caption = 'Ordem Consulta'
+            Width = 64
             Visible = True
           end
           item
@@ -141,7 +142,7 @@ object frmCadSetor: TfrmCadSetor
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 837
+        Width = 845
         Height = 32
         Align = alTop
         Color = clSilver
@@ -369,8 +370,8 @@ object frmCadSetor: TfrmCadSetor
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 492
-        Width = 837
+        Top = 499
+        Width = 845
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -386,7 +387,7 @@ object frmCadSetor: TfrmCadSetor
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 837
+        Width = 845
         Height = 35
         Align = alTop
         Color = clSilver
@@ -486,7 +487,7 @@ object frmCadSetor: TfrmCadSetor
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 837
+        Width = 845
         Height = 35
         Align = alTop
         Color = 8404992
@@ -712,8 +713,8 @@ object frmCadSetor: TfrmCadSetor
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 837
-        Height = 210
+        Width = 845
+        Height = 217
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -1006,8 +1007,8 @@ object frmCadSetor: TfrmCadSetor
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 245
-        Width = 837
+        Top = 252
+        Width = 845
         Height = 264
         ActivePage = TS_Processo
         ActivePageDefault = TS_Processo
@@ -1020,7 +1021,7 @@ object frmCadSetor: TfrmCadSetor
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 30
-            Width = 833
+            Width = 841
             Height = 211
             Align = alClient
             DataSource = DmCadSetor.dsSetor_Proc
@@ -1087,7 +1088,7 @@ object frmCadSetor: TfrmCadSetor
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 833
+            Width = 841
             Height = 30
             Align = alTop
             Color = clSilver

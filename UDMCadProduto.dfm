@@ -1617,6 +1617,12 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_ConsumosdsProduto_Consumo_Proc: TDataSetField
       FieldName = 'sdsProduto_Consumo_Proc'
     end
+    object cdsProduto_ConsumoclUsa_Processo: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clUsa_Processo'
+      Size = 1
+      Calculated = True
+    end
   end
   object dsProduto_Consumo: TDataSource
     DataSet = cdsProduto_Consumo
@@ -2683,6 +2689,11 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsPosicaoID_SETOR: TIntegerField
       FieldName = 'ID_SETOR'
+    end
+    object cdsPosicaoUSA_PROCESSO: TStringField
+      FieldName = 'USA_PROCESSO'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsPosicao: TDataSource
@@ -4250,7 +4261,7 @@ object dmCadProduto: TdmCadProduto
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT ID, NOME'
+      'SELECT ID, NOME, USA_PROCESSO'
       'FROM POSICAO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
@@ -4263,6 +4274,11 @@ object dmCadProduto: TdmCadProduto
     object qPosicaoNOME: TStringField
       FieldName = 'NOME'
       Size = 30
+    end
+    object qPosicaoUSA_PROCESSO: TStringField
+      FieldName = 'USA_PROCESSO'
+      FixedChar = True
+      Size = 1
     end
   end
   object qNCM: TSQLQuery
@@ -8719,8 +8735,8 @@ object dmCadProduto: TdmCadProduto
       'FROM GRADE'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1151
-    Top = 428
+    Left = 1159
+    Top = 412
     object qGradeNOME: TStringField
       FieldName = 'NOME'
       Size = 50
@@ -9793,7 +9809,7 @@ object dmCadProduto: TdmCadProduto
     DataSet = sdsProduto_Consumo_Proc
     UpdateMode = upWhereKeyOnly
     Left = 1120
-    Top = 496
+    Top = 464
   end
   object sdsProduto_Consumo_Proc: TSQLDataSet
     NoMetadata = True
@@ -9818,7 +9834,7 @@ object dmCadProduto: TdmCadProduto
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 1080
-    Top = 496
+    Top = 464
     object sdsProduto_Consumo_ProcID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -9844,7 +9860,7 @@ object dmCadProduto: TdmCadProduto
     IndexFieldNames = 'ID;ITEM;ITEM_PROC'
     Params = <>
     Left = 1160
-    Top = 496
+    Top = 464
     object cdsProduto_Consumo_ProcID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -9877,7 +9893,7 @@ object dmCadProduto: TdmCadProduto
   object dsProduto_Consumo_Proc: TDataSource
     DataSet = cdsProduto_Consumo_Proc
     Left = 1200
-    Top = 496
+    Top = 464
   end
   object frxProdutoConsulta: TfrxDBDataset
     UserName = 'frxProdutoConsulta'
@@ -9948,5 +9964,41 @@ object dmCadProduto: TdmCadProduto
     BCDToCurrency = False
     Left = 1118
     Top = 609
+  end
+  object sdsPosicao_Proc: TSQLDataSet
+    CommandText = 'SELECT *'#13#10'FROM POSICAO_PROC'#13#10'WHERE ID =  :ID'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 1088
+    Top = 528
+  end
+  object dspPosicao_Proc: TDataSetProvider
+    DataSet = sdsPosicao_Proc
+    Left = 1128
+    Top = 528
+  end
+  object cdsPosicao_Proc: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspPosicao_Proc'
+    Left = 1176
+    Top = 528
+    object cdsPosicao_ProcID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPosicao_ProcITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsPosicao_ProcID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
+    end
   end
 end

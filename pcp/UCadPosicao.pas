@@ -40,6 +40,15 @@ type
     DBCheckBox2: TDBCheckBox;
     Label4: TLabel;
     RxDBLookupCombo1: TRxDBLookupCombo;
+    DBCheckBox3: TDBCheckBox;
+    RzGroupBox1: TRzGroupBox;
+    Panel3: TPanel;
+    Label5: TLabel;
+    RxDBLookupCombo2: TRxDBLookupCombo;
+    btnInserir_Itens: TNxButton;
+    btnAlterar_Itens: TNxButton;
+    btnExcluir_Itens: TNxButton;
+    SMDBGrid2: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -56,15 +65,23 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBCheckBox1Click(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
+    procedure DBCheckBox3Click(Sender: TObject);
+    procedure RzPageControl1Change(Sender: TObject);
+    procedure btnInserir_ItensClick(Sender: TObject);
+    procedure btnAlterar_ItensClick(Sender: TObject);
+    procedure btnExcluir_ItensClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadPosicao: TDMCadPosicao;
+    vItem_Proc : Integer;
 
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
     procedure prc_Gravar_Registro;
     procedure prc_Consultar;
     procedure prc_Limpar_Edit_Consulta;
+    procedure prc_Habilitar;
+
   public
     { Public declarations }            
   end;
@@ -108,11 +125,8 @@ begin
     MessageDlg(fDMCadPosicao.vMsgErro, mtError, [mbOk], 0);
     exit;
   end;
-  TS_Consulta.TabEnabled    := not(TS_Consulta.TabEnabled);
   RzPageControl1.ActivePage := TS_Consulta;
-  pnlCadastro.Enabled       := not(pnlCadastro.Enabled);
-  btnConfirmar.Enabled      := not(btnConfirmar.Enabled);
-  btnAlterar.Enabled        := not(btnAlterar.Enabled);
+  prc_Habilitar;
 end;
 
 procedure TfrmCadPosicao.prc_Inserir_Registro;
@@ -124,10 +138,8 @@ begin
 
   RzPageControl1.ActivePage := TS_Cadastro;
 
-  TS_Consulta.TabEnabled := False;
-  btnAlterar.Enabled     := False;
-  btnConfirmar.Enabled   := True;
-  pnlCadastro.Enabled    := True;
+  prc_Habilitar;
+
   DBEdit7.SetFocus;
 end;
 
@@ -165,11 +177,8 @@ begin
     exit;
 
   fDMCadPosicao.cdsPosicao.CancelUpdates;
-  TS_Consulta.TabEnabled    := True;
+  prc_Habilitar;
   RzPageControl1.ActivePage := TS_Consulta;
-  pnlCadastro.Enabled       := not(pnlCadastro.Enabled);
-  btnConfirmar.Enabled      := not(btnConfirmar.Enabled);
-  btnAlterar.Enabled        := not(btnAlterar.Enabled);
 end;
 
 procedure TfrmCadPosicao.SMDBGrid1DblClick(Sender: TObject);
@@ -184,10 +193,7 @@ begin
 
   fDMCadPosicao.cdsPosicao.Edit;
 
-  TS_Consulta.TabEnabled := False;
-  btnAlterar.Enabled     := False;
-  btnConfirmar.Enabled   := True;
-  pnlCadastro.Enabled    := True;
+  prc_Habilitar;
 end;
 
 procedure TfrmCadPosicao.btnConfirmarClick(Sender: TObject);
@@ -251,6 +257,77 @@ begin
   for i := 0 to SMDBGrid1.Columns.Count - 1 do
     if not (SMDBGrid1.Columns.Items[I].Title = Column.Title) then
       SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmCadPosicao.DBCheckBox3Click(Sender: TObject);
+begin
+  RzGroupBox1.Visible := DBCheckBox3.Checked;
+end;
+
+procedure TfrmCadPosicao.RzPageControl1Change(Sender: TObject);
+begin
+  if RzPageControl1.ActivePage = TS_Cadastro then
+    RzGroupBox1.Visible := (fDMCadPosicao.cdsPosicaoUSA_PROCESSO.AsString = 'S');
+end;
+
+procedure TfrmCadPosicao.btnInserir_ItensClick(Sender: TObject);
+var
+  vItemAux : Integer;
+begin
+  if trim(RxDBLookupCombo2.Text) = '' then
+  begin
+    MessageDlg('*** Processo não informado', mtError, [mbOk], 0);
+    exit;
+  end;
+
+  if vItem_Proc > 0 then
+  begin
+    fDMCadPosicao.cdsPosicao_Proc.Locate('ITEM',vItem_Proc,([Locaseinsensitive]));
+    fDMCadPosicao.cdsPosicao_Proc.Editt;
+  end
+  else
+  begin
+    fDMCadPosicao.cdsPosicao_Proc.Last;
+    vItemAux := fDMCadPosicao.cdsPosicao_ProcITEM.AsInteger;
+    fDMCadPosicao.cdsPosicao_Proc.Insert;
+    fDMCadPosicao.cdsPosicao_ProcID.AsInteger           := fDMCadPosicao.cdsPosicaoID.AsInteger;
+    fDMCadPosicao.cdsPosicao_ProcITEM.AsInteger         := vItemAux + 1;
+  end;
+  fDMCadPosicao.cdsPosicao_ProcID_PROCESSO.AsInteger  := RxDBLookupCombo2.KeyValue;
+  fDMCadPosicao.cdsPosicao_ProcNOME_PROCESSO.AsString := RxDBLookupCombo2.Text;
+  fDMCadPosicao.cdsPosicao_Proc.Post;
+
+  RxDBLookupCombo2.ClearValue;
+  RxDBLookupCombo2.SetFocus;
+  vItem_Proc := 0;
+end;
+
+procedure TfrmCadPosicao.prc_Habilitar;
+begin
+  TS_Consulta.TabEnabled   := not(TS_Consulta.TabEnabled);
+  btnAlterar.Enabled       := not(btnAlterar.Enabled);
+  btnConfirmar.Enabled     := not(btnConfirmar.Enable)d
+  pnlCadastro.Enabled      := not(pnlCadastro.Enabled);
+  btnInserir_Itens.Enabled := not(btnInserir_Itens.Enabled);
+  btnAlterar_Itens.Enabled := not(btnAlterar_Itens.Enabled);
+  btnExcluir_Itens.Enabled := not(btnExcluir_Itens.Enabled);
+end;
+
+procedure TfrmCadPosicao.btnAlterar_ItensClick(Sender: TObject);
+begin
+  if fDMCadPosicao.cdsPosicao_Proc.RecordCount <= 0 then
+    exit;
+
+  vItem_Proc := fDMCadPosicao.cdsPosicao_ProcITEM.AsInteger;  
+  RxDBLookupCombo2.KeyValue := fDMCadPosicao.cdsPosicao_ProcID_PROCESSO.AsInteger;
+  RxDBLookupCombo2.SetFocus;
+end;
+
+procedure TfrmCadPosicao.btnExcluir_ItensClick(Sender: TObject);
+begin
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+  fDMCadPosicao.cdsPosicao_Proc.Delete;
 end;
 
 end.

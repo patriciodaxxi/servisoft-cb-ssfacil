@@ -37,6 +37,27 @@ type
     dsSetor: TDataSource;
     cdsSetorID: TIntegerField;
     cdsSetorNOME: TStringField;
+    sdsPosicaoUSA_PROCESSO: TStringField;
+    cdsPosicaoUSA_PROCESSO: TStringField;
+    dsPosicao_Mestre: TDataSource;
+    sdsPosicao_Proc: TSQLDataSet;
+    sdsPosicao_ProcID: TIntegerField;
+    sdsPosicao_ProcITEM: TIntegerField;
+    sdsPosicao_ProcID_PROCESSO: TIntegerField;
+    cdsPosicaosdsPosicao_Proc: TDataSetField;
+    cdsPosicao_Proc: TClientDataSet;
+    cdsPosicao_ProcID: TIntegerField;
+    cdsPosicao_ProcITEM: TIntegerField;
+    cdsPosicao_ProcID_PROCESSO: TIntegerField;
+    dsPosicao_Proc: TDataSource;
+    sdsProcesso: TSQLDataSet;
+    dspProcesso: TDataSetProvider;
+    cdsProcesso: TClientDataSet;
+    dsProcesso: TDataSource;
+    cdsProcessoID: TIntegerField;
+    cdsProcessoNOME: TStringField;
+    sdsPosicao_ProcNOME_PROCESSO: TStringField;
+    cdsPosicao_ProcNOME_PROCESSO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspPosicaoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -85,6 +106,9 @@ procedure TDMCadPosicao.prc_Excluir;
 begin
   if not(cdsPosicao.Active) or (cdsPosicao.IsEmpty) then
     exit;
+  cdsPosicao_Proc.First;
+  while not cdsPosicao_Proc.Eof do
+    cdsPosicao_Proc.Delete;
   cdsPosicao.Delete;
   cdsPosicao.ApplyUpdates(0);
 end;
@@ -120,6 +144,7 @@ begin
   ctCommand := sdsPosicao.CommandText;
 
   cdsSetor.Open;
+  cdsProcesso.Open;
 
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
@@ -159,7 +184,12 @@ end;
 
 procedure TDMCadPosicao.cdsPosicaoNewRecord(DataSet: TDataSet);
 begin
-  cdsPosicaoIMP_TALAO.AsString := 'N';
+  cdsPosicaoIMP_TALAO.AsString    := 'N';
+  cdsPosicaoUSA_PROCESSO.AsString := 'N';
+  cdsPosicaoGERAR_TALAO.AsString  := 'N';
+  cdsPosicaoIMP_AGRUPADO_MATERIAL.AsString := 'N';
+  cdsPosicaoIMP_MATERIAL.AsString          := 'N';
+  cdsPosicaoPRIMEIRO_MAT.AsString          := 'N';
 end;
 
 procedure TDMCadPosicao.DoLogAdditionalValues(ATableName: string;

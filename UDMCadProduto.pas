@@ -1885,6 +1885,15 @@ type
     cdsProduto_ConsultaDTCAD: TDateField;
     frxProdutoConsulta: TfrxDBDataset;
     cdsProduto_ConsultaNOME_LINHA: TStringField;
+    sdsPosicao_Proc: TSQLDataSet;
+    dspPosicao_Proc: TDataSetProvider;
+    cdsPosicao_Proc: TClientDataSet;
+    cdsPosicao_ProcID: TIntegerField;
+    cdsPosicao_ProcITEM: TIntegerField;
+    cdsPosicao_ProcID_PROCESSO: TIntegerField;
+    cdsPosicaoUSA_PROCESSO: TStringField;
+    qPosicaoUSA_PROCESSO: TStringField;
+    cdsProduto_ConsumoclUsa_Processo: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2576,8 +2585,9 @@ begin
   qPosicao.Close;
   qPosicao.ParamByName('ID').AsInteger := cdsProduto_ConsumoID_POSICAO.AsInteger;
   qPosicao.Open;
-  cdsProduto_ConsumoNOME_POSICAO.AsString := qPosicaoNOME.AsString;
-  cdsProduto_ConsumoNOME_SETOR.AsString := '';
+  cdsProduto_ConsumoNOME_POSICAO.AsString   := qPosicaoNOME.AsString;
+  cdsProduto_ConsumoNOME_SETOR.AsString     := '';
+  cdsProduto_ConsumoclUsa_Processo.AsString := qPosicaoUSA_PROCESSO.AsString;
   if cdsProduto_ConsumoID_SETOR.AsInteger > 0 then
   begin
     qSetor.Close;

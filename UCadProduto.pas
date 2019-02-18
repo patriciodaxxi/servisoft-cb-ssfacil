@@ -773,6 +773,8 @@ type
     Label249: TLabel;
     ComboBox3: TComboBox;
     ListacomCdigodeBarras1: TMenuItem;
+    btnExcluir_Proc: TNxButton;
+    btnAtualizar_Proc: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -974,8 +976,9 @@ type
     procedure SpeedButton17Click(Sender: TObject);
     procedure Edit12KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure NxButton2Click(Sender: TObject);
+    procedure btnExcluir_ProcClick(Sender: TObject);
     procedure ListacomCdigodeBarras1Click(Sender: TObject);
+    procedure btnAtualizar_ProcClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1698,6 +1701,8 @@ begin
       SMDBGrid3.Columns[i].Visible := (fDMCadProduto.qParametrosGRAVAR_CONSUMO_NOTA.AsString <> 'S');
     if (SMDBGrid3.Columns[i].FieldName = 'clPreco_Venda') then
       SMDBGrid3.Columns[i].Visible := (fDMCadProduto.qParametrosGRAVAR_CONSUMO_NOTA.AsString = 'S');
+    if (SMDBGrid3.Columns[i].FieldName = 'clUsa_Processo') then
+      SMDBGrid3.Columns[i].Visible := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
   end;
   
   if vID_Produto_Local > 0 then
@@ -2972,6 +2977,8 @@ begin
   btnInserir_Lote.Enabled     := not(btnInserir_Lote.Enabled);
   btnAlterar_Lote.Enabled     := not(btnAlterar_Lote.Enabled);
   btnExcluir_Lote.Enabled     := not(btnExcluir_Lote.Enabled);
+  btnExcluir_Proc.Enabled     := not(btnExcluir_Proc.Enabled);
+  btnAtualizar_Proc.Enabled   := not(btnAtualizar_Proc.Enabled);
 
   pnlFiscal.Enabled            := not(pnlFiscal.Enabled);
   pnlTingimento.Enabled        := not(pnlTingimento.Enabled);
@@ -2982,6 +2989,8 @@ begin
 
   //pnlDesenho_Passamento.Enabled := not(pnlDesenho_Passamento.Enabled);
   pnlDigitaDP.Enabled         := not(pnlDigitaDP.Enabled);
+
+  Label118.Visible           := not(Label118.Visible);
 
   DBEdit29.ReadOnly          := not(DBEdit29.ReadOnly);
   DBMemo1.ReadOnly           := not(DBMemo1.ReadOnly);
@@ -5867,7 +5876,7 @@ begin
     btnConsultarClick(Sender);
 end;
 
-procedure TfrmCadProduto.NxButton2Click(Sender: TObject);
+procedure TfrmCadProduto.btnExcluir_ProcClick(Sender: TObject);
 begin
   if fDMCadProduto.cdsProduto_Consumo_Proc.IsEmpty then
     exit;
@@ -5895,6 +5904,39 @@ begin
     Exit;
   end;
   fDMCadProduto.frxReport1.ShowReport;
+end;
+
+procedure TfrmCadProduto.btnAtualizar_ProcClick(Sender: TObject);
+var
+  vItemAux : Integer;
+begin
+  if fDMCadProduto.cdsProduto_Consumo_Proc.RecordCount > 0 then
+  begin
+    MessageDlg('*** Já existe processo lançado nesta Posição!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+  
+  if MessageDlg('Deseja Atualizar o Processo?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+
+  vItemAux := 0;
+
+  fDMCadProduto.cdsPosicao_Proc.Close;
+  fDMCadProduto.sdsPosicao_Proc.ParamByName('ID').AsInteger := fDMCadProduto.cdsProduto_ConsumoID_POSICAO.AsInteger;
+  fDMCadProduto.cdsPosicao_Proc.Open;
+  fDMCadProduto.cdsPosicao_Proc.First;
+  while not fDMCadProduto.cdsPosicao_Proc.Eof do
+  begin
+    vItemAux := vItemAux + 1;
+    fDMCadProduto.dsProduto_Consumo_Proc.Insert;
+    fDMCadProduto.cdsProduto_Consumo_ProcID.AsInteger          := fDMCadProduto.cdsProduto_ConsumoID.AsInteger;
+    fDMCadProduto.cdsProduto_Consumo_ProcITEM.AsInteger        := fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger;
+    fDMCadProduto.cdsProduto_Consumo_ProcITEM_PROC.AsInteger   := vItemAux;
+    fDMCadProduto.cdsProduto_Consumo_ProcID_PROCESSO.AsInteger := fDMCadProduto.cdsPosicao_ProcID_PROCESSO.AsInteger;
+    fDMCadProduto.dsProduto_Consumo_Proc.pos;
+
+    fDMCadProduto.cdsPosicao_Proc.Next;
+  end;
 end;
 
 end.
