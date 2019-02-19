@@ -206,13 +206,22 @@ begin
   //Verificação de erros para não deixar gravar o item
   Result := True;
   vMsgErro := '';
+  if fDMCadTab_Preco.cdsProdutoID.AsInteger <> fDMCadTab_Preco.cdsTab_Preco_ItensID_PRODUTO.AsInteger then
+    fDMCadTab_Preco.cdsProduto.Locate('ID', fDMCadTab_Preco.cdsTab_Preco_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
   if Trim(RxDBLookupCombo4.Text) = '' then
     vMsgErro := vMsgErro + #13 + '*** Produto não informado!';
+  if (fDMCadTab_Preco.cdsProdutoUSA_PRECO_COR.AsString = 'S') and (trim(RxDBLookupCombo3.Text) = '') then
+    vMsgErro := vMsgErro + #13 + '*** Cor não informada!';
   if CurrencyEdit2.Value <= 0 then
     vMsgErro := vMsgErro + #13 + '*** Preço não informado!';
-
   if (trim(RxDBLookupCombo4.Text) <> '') and (vStatus <> 'A')  then
   begin
+    if fDMCadTab_Preco.cdsProdutoUSA_PRECO_COR.AsString = 'S' then
+    begin
+      if fDMCadTab_Preco.cdsTab_Preco_Itens.Locate('ID_PRODUTO;ID_COR',VarArrayOf([RxDBLookupCombo4.KeyValue,RxDBLookupCombo3.KeyValue]),[locaseinsensitive]) then
+        vMsgErro := vMsgErro + #13 + '*** Produto/Cor já esta cadastrado no item ' + fDMCadTab_Preco.cdsTab_Preco_ItensITEM.AsString;
+    end
+    else
     if fDMCadTab_Preco.cdsTab_Preco_Itens.Locate('ID_PRODUTO',RxDBLookupCombo4.KeyValue,[loCaseInsensitive]) then
       vMsgErro := vMsgErro + #13 + '*** Produto já esta cadastrado no item ' + fDMCadTab_Preco.cdsTab_Preco_ItensITEM.AsString;
   end;

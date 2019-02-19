@@ -2461,7 +2461,7 @@ object frmCadPedido: TfrmCadPedido
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 48
+            ColCount = 49
             RowCount = 2
             Columns = <
               item
@@ -2644,6 +2644,13 @@ object frmCadPedido: TfrmCadPedido
               item
                 Expanded = False
                 FieldName = 'DTENTREGA'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'TAMANHO'
+                Title.Alignment = taCenter
                 Visible = True
               end
               item
