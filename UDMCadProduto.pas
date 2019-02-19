@@ -1894,7 +1894,6 @@ type
     cdsPosicaoUSA_PROCESSO: TStringField;
     qPosicaoUSA_PROCESSO: TStringField;
     cdsProduto_ConsumoclUsa_Processo: TStringField;
-    cdsProduto_ConsumoclPossui_Processo: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

@@ -4,7 +4,7 @@ object DmCadSetor: TDmCadSetor
   Left = 350
   Top = 135
   Height = 532
-  Width = 771
+  Width = 871
   object sdsSetor: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -372,6 +372,9 @@ object DmCadSetor: TDmCadSetor
       FixedChar = True
       Size = 1
     end
+    object sdsProcessoID_POSICAO_IMP: TIntegerField
+      FieldName = 'ID_POSICAO_IMP'
+    end
   end
   object dspProcesso: TDataSetProvider
     DataSet = sdsProcesso
@@ -386,6 +389,7 @@ object DmCadSetor: TDmCadSetor
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspProcesso'
+    OnCalcFields = cdsProcessoCalcFields
     OnNewRecord = cdsProcessoNewRecord
     Left = 176
     Top = 355
@@ -462,6 +466,16 @@ object DmCadSetor: TDmCadSetor
       FieldName = 'RETRABALHO'
       FixedChar = True
       Size = 1
+    end
+    object cdsProcessoID_POSICAO_IMP: TIntegerField
+      FieldName = 'ID_POSICAO_IMP'
+    end
+    object cdsProcessoclNome_Posicao_Imp: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clNome_Posicao_Imp'
+      ProviderFlags = []
+      Size = 40
+      Calculated = True
     end
   end
   object dsProcesso: TDataSource
@@ -733,5 +747,41 @@ object DmCadSetor: TDmCadSetor
       FixedChar = True
       Size = 1
     end
+  end
+  object sdsPosicao: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, NOME'#13#10'FROM POSICAO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 608
+    Top = 360
+  end
+  object dspPosicao: TDataSetProvider
+    DataSet = sdsPosicao
+    Left = 664
+    Top = 360
+  end
+  object cdsPosicao: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspPosicao'
+    Left = 720
+    Top = 360
+    object cdsPosicaoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPosicaoNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+  end
+  object dsPosicao: TDataSource
+    DataSet = cdsPosicao
+    Left = 776
+    Top = 360
   end
 end

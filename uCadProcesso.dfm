@@ -24,7 +24,7 @@ object frmCadProcesso: TfrmCadProcesso
     Top = 0
     Width = 779
     Height = 511
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -32,7 +32,7 @@ object frmCadProcesso: TfrmCadProcesso
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -74,7 +74,7 @@ object frmCadProcesso: TfrmCadProcesso
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 7
+        ColCount = 8
         RowCount = 2
         Columns = <
           item
@@ -119,6 +119,13 @@ object frmCadProcesso: TfrmCadProcesso
             FieldName = 'ORDEM_MAPA'
             Title.Alignment = taCenter
             Title.Caption = 'Ordem Mapa'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'clNome_Posicao_Imp'
+            Title.Alignment = taCenter
+            Title.Caption = 'Posi'#231#227'o Imprimir'
             Visible = True
           end>
       end
@@ -756,6 +763,14 @@ object frmCadProcesso: TfrmCadProcesso
           Alignment = taRightJustify
           Caption = 'Ordem do Mapa:'
         end
+        object Label9: TLabel
+          Left = 8
+          Top = 264
+          Width = 243
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Imprimir o Material que esta cadastrado na Posi'#231#227'o:'
+        end
         object DBEdit1: TDBEdit
           Left = 128
           Top = 12
@@ -958,6 +973,19 @@ object frmCadProcesso: TfrmCadProcesso
           TabOrder = 11
           ValueChecked = 'S'
           ValueUnchecked = 'N'
+        end
+        object RxDBLookupCombo1: TRxDBLookupCombo
+          Left = 255
+          Top = 257
+          Width = 329
+          Height = 21
+          DropDownCount = 8
+          DataField = 'ID_POSICAO_IMP'
+          DataSource = DmCadSetor.dsProcesso
+          LookupField = 'ID'
+          LookupDisplay = 'NOME'
+          LookupSource = DmCadSetor.dsPosicao
+          TabOrder = 12
         end
       end
     end

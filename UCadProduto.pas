@@ -2990,7 +2990,7 @@ begin
   //pnlDesenho_Passamento.Enabled := not(pnlDesenho_Passamento.Enabled);
   pnlDigitaDP.Enabled         := not(pnlDigitaDP.Enabled);
 
-  Label118.Visible           := not(Label118.Visible);
+  Label118.Enabled           := not(Label118.Enabled);
 
   DBEdit29.ReadOnly          := not(DBEdit29.ReadOnly);
   DBMemo1.ReadOnly           := not(DBMemo1.ReadOnly);

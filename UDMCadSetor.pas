@@ -147,6 +147,15 @@ type
     qParametros_LoteTIPO_PROCESSO: TStringField;
     sdsProcessoRETRABALHO: TStringField;
     cdsProcessoRETRABALHO: TStringField;
+    sdsProcessoID_POSICAO_IMP: TIntegerField;
+    cdsProcessoID_POSICAO_IMP: TIntegerField;
+    sdsPosicao: TSQLDataSet;
+    dspPosicao: TDataSetProvider;
+    cdsPosicao: TClientDataSet;
+    dsPosicao: TDataSource;
+    cdsPosicaoID: TIntegerField;
+    cdsPosicaoNOME: TStringField;
+    cdsProcessoclNome_Posicao_Imp: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -157,6 +166,7 @@ type
     procedure cdsProcessoNewRecord(DataSet: TDataSet);
     procedure cdsSetor_ProcCalcFields(DataSet: TDataSet);
     procedure cdsSetorNewRecord(DataSet: TDataSet);
+    procedure cdsProcessoCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
@@ -255,6 +265,7 @@ begin
   qParametros.Open;
   qParametros_Lote.Open;
   qParametros_Geral.Open;
+  cdsPosicao.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
@@ -398,6 +409,13 @@ begin
   qSetor.Close;
   qSetor.ParamByName('ID').AsInteger := ID;
   qSetor.Open;
+end;
+
+procedure TDmCadSetor.cdsProcessoCalcFields(DataSet: TDataSet);
+begin
+  cdsProcessoclNome_Posicao_Imp.AsString := '';
+  if (cdsProcessoID_POSICAO_IMP.AsInteger > 0) and (cdsPosicao.Locate('ID',cdsProcessoID_POSICAO_IMP.AsInteger,([Locaseinsensitive]))) then
+    cdsProcessoclNome_Posicao_Imp.AsString := cdsPosicaoNOME.AsString;
 end;
 
 end.

@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadSetor, Mask, 
-  db, RxDBComb, UCBase, StdCtrls, DBCtrls, ExtCtrls, RzTabs, DBGrids, ToolEdit, CurrEdit, NxCollection, RzPanel;
+  db, RxDBComb, UCBase, StdCtrls, DBCtrls, ExtCtrls, RzTabs, DBGrids, ToolEdit, CurrEdit, NxCollection, RzPanel,
+  RxLookup;
 
 type
   TfrmCadProcesso = class(TForm)
@@ -49,6 +50,8 @@ type
     DBEdit5: TDBEdit;
     DBCheckBox6: TDBCheckBox;
     DBCheckBox7: TDBCheckBox;
+    Label9: TLabel;
+    RxDBLookupCombo1: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
