@@ -82,6 +82,7 @@ type
     procedure prc_Monta_Tamanho;
     procedure prc_Atualiza_Comb;
     procedure prc_Inserir_Mat_Comb;
+    procedure prc_Gravar_Posicao_Proc;
 
   public
     { Public declarations }
@@ -113,11 +114,11 @@ begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadProduto);
 
 
-
   if fDMCadProduto.cdsProduto_Consumo.State in [dsInsert] then
   begin
     vID_Material_Loc := 0;
     vItem_Loc        := 0;
+    vID_Posicao_Loc  := 0;
   end
   else
   begin
@@ -219,10 +220,14 @@ begin
         fDMCadProduto.cdsProduto_Consumo_Tam.Delete;
     end;
 
+    if vID_Posicao_Loc <> fDMCadProduto.cdsProduto_ConsumoID_POSICAO.AsInteger then
+      prc_Gravar_Posicao_Proc;
+
     //25/05/2018
     if (fDMCadProduto.qParametros_ProdUSA_CONSUMO_COMB.AsString = 'S') and (fDMCadProduto.qParametros_ProdATUALIZAR_COMB.AsString = 'S') then
       prc_Atualiza_Comb;
     //***************
+
 
   except
     on E: exception do
@@ -498,6 +503,38 @@ procedure TfrmCadProduto_Consumo.SpeedButton6Click(Sender: TObject);
 begin
   fDMCadProduto.cdsPosicao.Close;
   fDMCadProduto.cdsPosicao.Open;
+end;
+
+procedure TfrmCadProduto_Consumo.prc_Gravar_Posicao_Proc;
+var
+  vItemAux : Integer;
+begin
+  fDMCadProduto.cdsPosicao_Proc.Close;
+  fDMCadProduto.sdsPosicao_Proc.ParamByName('ID').AsInteger := fDMCadProduto.cdsProduto_ConsumoID_POSICAO.AsInteger;
+  fDMCadProduto.cdsPosicao_Proc.Open;
+  if fDMCadProduto.cdsPosicao_Proc.RecordCount <= 0 then
+    exit;
+
+  if MessageDlg('Deseja gravar o Processo na Posição informada?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+
+  fDMCadProduto.cdsProduto_Consumo_Proc.First;
+  while not fDMCadProduto.cdsProduto_Consumo_Proc.Eof do
+    fDMCadProduto.cdsProduto_Consumo_Proc.Delete;
+
+  vItemAux := 0;
+  fDMCadProduto.cdsPosicao_Proc.First;
+  while not fDMCadProduto.cdsPosicao_Proc.Eof do
+  begin
+    vItemAux := vItemAux + 1;
+    fDMCadProduto.cdsProduto_Consumo_Proc.Insert;
+    fDMCadProduto.cdsProduto_Consumo_ProcID.AsInteger          := fDMCadProduto.cdsProduto_ConsumoID.AsInteger;
+    fDMCadProduto.cdsProduto_Consumo_ProcITEM.AsInteger        := fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger;
+    fDMCadProduto.cdsProduto_Consumo_ProcITEM_PROC.AsInteger   := vItemAux;
+    fDMCadProduto.cdsProduto_Consumo_ProcID_PROCESSO.AsInteger := fDMCadProduto.cdsPosicao_ProcID_PROCESSO.AsInteger;
+    fDMCadProduto.cdsProduto_Consumo_Proc.Post;
+    fDMCadProduto.cdsPosicao_Proc.Next;
+  end;
 end;
 
 end.

@@ -1623,6 +1623,10 @@ object dmCadProduto: TdmCadProduto
       Size = 1
       Calculated = True
     end
+    object cdsProduto_ConsumoclPossui_Processo: TStringField
+      FieldName = 'clPossui_Processo'
+      Size = 1
+    end
   end
   object dsProduto_Consumo: TDataSource
     DataSet = cdsProduto_Consumo

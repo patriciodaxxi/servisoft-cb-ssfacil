@@ -5928,12 +5928,12 @@ begin
   while not fDMCadProduto.cdsPosicao_Proc.Eof do
   begin
     vItemAux := vItemAux + 1;
-    fDMCadProduto.dsProduto_Consumo_Proc.Insert;
+    fDMCadProduto.cdsProduto_Consumo_Proc.Insert;
     fDMCadProduto.cdsProduto_Consumo_ProcID.AsInteger          := fDMCadProduto.cdsProduto_ConsumoID.AsInteger;
     fDMCadProduto.cdsProduto_Consumo_ProcITEM.AsInteger        := fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger;
     fDMCadProduto.cdsProduto_Consumo_ProcITEM_PROC.AsInteger   := vItemAux;
     fDMCadProduto.cdsProduto_Consumo_ProcID_PROCESSO.AsInteger := fDMCadProduto.cdsPosicao_ProcID_PROCESSO.AsInteger;
-    fDMCadProduto.dsProduto_Consumo_Proc.pos;
+    fDMCadProduto.cdsProduto_Consumo_Proc.Post;
 
     fDMCadProduto.cdsPosicao_Proc.Next;
   end;

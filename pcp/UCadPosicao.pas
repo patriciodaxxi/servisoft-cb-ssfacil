@@ -283,7 +283,7 @@ begin
   if vItem_Proc > 0 then
   begin
     fDMCadPosicao.cdsPosicao_Proc.Locate('ITEM',vItem_Proc,([Locaseinsensitive]));
-    fDMCadPosicao.cdsPosicao_Proc.Editt;
+    fDMCadPosicao.cdsPosicao_Proc.Edit;
   end
   else
   begin
@@ -306,7 +306,7 @@ procedure TfrmCadPosicao.prc_Habilitar;
 begin
   TS_Consulta.TabEnabled   := not(TS_Consulta.TabEnabled);
   btnAlterar.Enabled       := not(btnAlterar.Enabled);
-  btnConfirmar.Enabled     := not(btnConfirmar.Enable)d
+  btnConfirmar.Enabled     := not(btnConfirmar.Enabled);
   pnlCadastro.Enabled      := not(pnlCadastro.Enabled);
   btnInserir_Itens.Enabled := not(btnInserir_Itens.Enabled);
   btnAlterar_Itens.Enabled := not(btnAlterar_Itens.Enabled);
