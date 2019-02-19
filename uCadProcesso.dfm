@@ -74,7 +74,7 @@ object frmCadProcesso: TfrmCadProcesso
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 8
+        ColCount = 9
         RowCount = 2
         Columns = <
           item
@@ -126,6 +126,15 @@ object frmCadProcesso: TfrmCadProcesso
             FieldName = 'clNome_Posicao_Imp'
             Title.Alignment = taCenter
             Title.Caption = 'Posi'#231#227'o Imprimir'
+            Width = 228
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'clNOme_Posicao_Imp2'
+            Title.Alignment = taCenter
+            Title.Caption = 'Posi'#231#227'o Imprimir 2'
+            Width = 189
             Visible = True
           end>
       end
@@ -764,12 +773,20 @@ object frmCadProcesso: TfrmCadProcesso
           Caption = 'Ordem do Mapa:'
         end
         object Label9: TLabel
-          Left = 8
+          Left = 16
           Top = 264
           Width = 243
           Height = 13
           Alignment = taRightJustify
           Caption = 'Imprimir o Material que esta cadastrado na Posi'#231#227'o:'
+        end
+        object Label10: TLabel
+          Left = 7
+          Top = 287
+          Width = 252
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Imprimir o Material que esta cadastrado na Posi'#231#227'o 2:'
         end
         object DBEdit1: TDBEdit
           Left = 128
@@ -975,7 +992,7 @@ object frmCadProcesso: TfrmCadProcesso
           ValueUnchecked = 'N'
         end
         object RxDBLookupCombo1: TRxDBLookupCombo
-          Left = 255
+          Left = 263
           Top = 257
           Width = 329
           Height = 21
@@ -986,6 +1003,19 @@ object frmCadProcesso: TfrmCadProcesso
           LookupDisplay = 'NOME'
           LookupSource = DmCadSetor.dsPosicao
           TabOrder = 12
+        end
+        object RxDBLookupCombo2: TRxDBLookupCombo
+          Left = 263
+          Top = 280
+          Width = 329
+          Height = 21
+          DropDownCount = 8
+          DataField = 'ID_POSICAO_IMP2'
+          DataSource = DmCadSetor.dsProcesso
+          LookupField = 'ID'
+          LookupDisplay = 'NOME'
+          LookupSource = DmCadSetor.dsPosicao
+          TabOrder = 13
         end
       end
     end

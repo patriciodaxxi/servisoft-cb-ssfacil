@@ -156,6 +156,9 @@ type
     cdsPosicaoID: TIntegerField;
     cdsPosicaoNOME: TStringField;
     cdsProcessoclNome_Posicao_Imp: TStringField;
+    sdsProcessoID_POSICAO_IMP2: TIntegerField;
+    cdsProcessoID_POSICAO_IMP2: TIntegerField;
+    cdsProcessoclNOme_Posicao_Imp2: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -413,9 +416,12 @@ end;
 
 procedure TDmCadSetor.cdsProcessoCalcFields(DataSet: TDataSet);
 begin
-  cdsProcessoclNome_Posicao_Imp.AsString := '';
+  cdsProcessoclNome_Posicao_Imp.AsString  := '';
+  cdsProcessoclNome_Posicao_Imp2.AsString := '';
   if (cdsProcessoID_POSICAO_IMP.AsInteger > 0) and (cdsPosicao.Locate('ID',cdsProcessoID_POSICAO_IMP.AsInteger,([Locaseinsensitive]))) then
     cdsProcessoclNome_Posicao_Imp.AsString := cdsPosicaoNOME.AsString;
+  if (cdsProcessoID_POSICAO_IMP2.AsInteger > 0) and (cdsPosicao.Locate('ID',cdsProcessoID_POSICAO_IMP2.AsInteger,([Locaseinsensitive]))) then
+    cdsProcessoclNome_Posicao_Imp2.AsString := cdsPosicaoNOME.AsString;
 end;
 
 end.
