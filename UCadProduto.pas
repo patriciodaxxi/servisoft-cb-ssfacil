@@ -775,6 +775,7 @@ type
     ListacomCdigodeBarras1: TMenuItem;
     btnExcluir_Proc: TNxButton;
     btnAtualizar_Proc: TNxButton;
+    btnAjustarProcesso: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -979,6 +980,7 @@ type
     procedure btnExcluir_ProcClick(Sender: TObject);
     procedure ListacomCdigodeBarras1Click(Sender: TObject);
     procedure btnAtualizar_ProcClick(Sender: TObject);
+    procedure btnAjustarProcessoClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1077,6 +1079,7 @@ type
     procedure prcAtualizaPrecoMGV5;
 
     procedure prc_Verificar_Cor_Comb(ID : Integer);
+    procedure prc_Gravar_Consumo_Proc;
 
   public
     { Public declarations }
@@ -2874,12 +2877,13 @@ begin
   else
   if (Shift = [ssCtrl]) and (Key = 82) and (RzPageControl1.ActivePage = TS_Consulta) then
   begin
-    btnConverter.Visible      := not(btnConverter.Visible);
-    BitBtn6.Visible           := not(BitBtn6.Visible);
-    btnAjustaRef2.Visible     := not(btnAjustaRef2.Visible);
-    btnAjustarObsMat.Visible  := not(btnAjustarObsMat.Visible);
-    btnAjustarRef_Ord.Visible := not(btnAjustarRef_Ord.Visible);
-    btnAjustarPeso.Visible    := not(btnAjustarPeso.Visible);
+    btnConverter.Visible       := not(btnConverter.Visible);
+    BitBtn6.Visible            := not(BitBtn6.Visible);
+    btnAjustaRef2.Visible      := not(btnAjustaRef2.Visible);
+    btnAjustarObsMat.Visible   := not(btnAjustarObsMat.Visible);
+    btnAjustarRef_Ord.Visible  := not(btnAjustarRef_Ord.Visible);
+    btnAjustarPeso.Visible     := not(btnAjustarPeso.Visible);
+    btnAjustarProcesso.Visible := not(btnAjustarProcesso.Visible);
   end;
 end;
 
@@ -5907,8 +5911,6 @@ begin
 end;
 
 procedure TfrmCadProduto.btnAtualizar_ProcClick(Sender: TObject);
-var
-  vItemAux : Integer;
 begin
   if fDMCadProduto.cdsProduto_Consumo_Proc.RecordCount > 0 then
   begin
@@ -5919,8 +5921,42 @@ begin
   if MessageDlg('Deseja Atualizar o Processo?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
 
-  vItemAux := 0;
+  prc_Gravar_Consumo_Proc;
+end;
 
+procedure TfrmCadProduto.btnAjustarProcessoClick(Sender: TObject);
+var
+  vItemAux : Integer;
+begin
+  if fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString <> 'S' then
+    exit;
+  if MessageDlg('Deseja gerar os processos no consumo?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+
+  fDMCadProduto.cdsProduto_Consulta.First;
+  while not fDMCadProduto.cdsProduto_Consulta.Eof do
+  begin
+    if fDMCadProduto.cdsProduto_ConsultaTIPO_REG.AsString = 'P' then
+    begin
+      prc_Posiciona_Produto;
+      vItemAux := 0;
+      fDMCadProduto.cdsProduto_Consumo.First;
+      while not fDMCadProduto.cdsProduto_Consumo.Eof do
+      begin
+        if fDMCadProduto.cdsProduto_Consumo_Proc.IsEmpty then
+          prc_Gravar_Consumo_Proc;
+        fDMCadProduto.cdsProduto_Consumo.Next;
+      end;
+    end;
+    fDMCadProduto.cdsProduto_Consulta.Next;
+  end;
+end;
+
+procedure TfrmCadProduto.prc_Gravar_Consumo_Proc;
+var
+  vItemAux : Integer;
+begin
+  vItemAux := 0;
   fDMCadProduto.cdsPosicao_Proc.Close;
   fDMCadProduto.sdsPosicao_Proc.ParamByName('ID').AsInteger := fDMCadProduto.cdsProduto_ConsumoID_POSICAO.AsInteger;
   fDMCadProduto.cdsPosicao_Proc.Open;
