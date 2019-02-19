@@ -1105,6 +1105,7 @@ type
     cdsDuplicata_CCustoclNome_CCusto: TStringField;
     sdsDuplicata_CCustoVALOR: TFloatField;
     cdsDuplicata_CCustoVALOR: TFloatField;
+    cdsDuplicata_ConsultaTELEFONE1: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
