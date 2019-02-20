@@ -1446,6 +1446,13 @@ procedure TfrmCadPedido.btnAlterar_ItensClick(Sender: TObject);
 var
   vMSGAux: String;
   vItemAux: Integer;
+  vID_ProdutoAux: Integer; //
+  vID_CorAux: Integer; //
+  vTamanhoAux: String; //
+  vPrecoAux: Real; //
+  vPerc_IpiAux, vPerc_ICMSAux: Real;
+  vCarimboAux, vCaixinhaAux: String;
+  vDtEntregaAux: TDateTime;
 begin
   vMSGAux := '';
   if (fDMCadPedido.cdsPedido_Itens.IsEmpty) or (fDMCadPedido.cdsPedido_ItensITEM.AsInteger <= 0) then
@@ -1487,6 +1494,8 @@ begin
 
   fDMCadPedido.cdsPedido_Itens.Edit;
 
+  SMDBGrid2.DisableScroll;
+  
   if fDMCadPedido.qParametros_PedUSA_ITEM_RED.AsString = 'S' then
   begin
     ffrmCadPedido_ItensRed := TfrmCadPedido_ItensRed.Create(self);
@@ -1503,7 +1512,33 @@ begin
     ffrmCadPedido_Itens.ShowModal;
     FreeAndNil(ffrmCadPedido_Itens);
   end;
-  SMDBGrid2.DisableScroll;
+
+  //19/01/2019  vai alterar o preço em todos os tamanhos do produto com a mesma cor
+  if (fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S') and (trim(fDMCadPedido.cdsPedido_ItensTAMANHO.AsString) <> '')  then
+  begin
+    if (vID_CorAux <> fDMCadPedido.cdsPedido_ItensID_COR.AsInteger)
+      or (StrToFloat(FormatFloat('0.00000000',vPrecoAux)) <> StrToFloat(FormatFloat('0.00000000',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat)))
+      or (StrToFloat(FormatFloat('0.00',vPerc_IpiAux))  <> StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat)))
+      or (StrToFloat(FormatFloat('0.00',vPerc_ICMSAux)) <> StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat)))
+      or (trim(vCarimboAux) <> trim(fDMCadPedido.cdsPedido_ItensCARIMBO.AsString))
+      or (trim(vCaixinhaAux) <> trim(fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString))
+      or (vDtEntregaAux <> fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime) then
+    begin
+      uGrava_Pedido.prc_Alterar_Item_Tam(fDMCadPedido,
+                                         fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,
+                                         fDMCadPedido.cdsPedido_ItensITEM.AsInteger,
+                                         fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger,
+                                         StrToFloat(FormatFloat('0.00000000',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat)),
+                                         StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat)),
+                                         StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat)),
+                                         fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime,
+                                         fDMCadPedido.cdsPedido_ItensCARIMBO.AsString,
+                                         fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString);
+
+    end;
+  end;
+  //*******************
+
   btnCalcular_ValoresClick(Sender);
   SMDBGrid2.EnableScroll;
   fDMCadPedido.cdsPedido_Itens.Locate('ITEM',vItemAux,[loCaseInsensitive]);
