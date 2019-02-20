@@ -23,10 +23,10 @@ object frmEtiq_Individual: TfrmEtiq_Individual
     Top = 0
     Width = 912
     Height = 447
-    ActivePage = TS_ConfImpressora
+    ActivePage = TS_Avulsa
     ActivePageDefault = TS_Pedido
     Align = alClient
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
