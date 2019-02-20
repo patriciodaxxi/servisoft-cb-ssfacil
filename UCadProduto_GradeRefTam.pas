@@ -20,6 +20,7 @@ type
     btnConfirmar: TNxButton;
     btnCancelar: TNxButton;
     btnAlterar: TNxButton;
+    btnExcluir: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
@@ -28,6 +29,7 @@ type
     procedure btnMontaGradeClick(Sender: TObject);
     procedure RxDBLookupCombo1Change(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
   private
     { Private declarations }
     procedure MontaGrade;
@@ -60,6 +62,7 @@ begin
   fDMCadProduto.mGradeRefTam.EmptyDataSet;
   pnlDados.Enabled      := (fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]);
   btnMontaGrade.Enabled := (fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]);
+  btnExcluir.Enabled    := (fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]);
   VDBGrid1.Enabled      := (fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]);
   if pnlDados.Enabled then
     RxDBLookupCombo1.SetFocus;
@@ -116,6 +119,7 @@ begin
   btnConfirmar.Enabled  := False;
   btnCancelar.Enabled   := False;
   btnMontaGrade.Enabled := False;
+  btnExcluir.Enabled    := False;
 end;
 
 procedure TfrmCadProduto_GradeRefTam.btnCancelarClick(Sender: TObject);
@@ -127,6 +131,7 @@ begin
   btnConfirmar.Enabled  := False;
   btnCancelar.Enabled   := False;
   btnMontaGrade.Enabled := False;
+  btnExcluir.Enabled    := False;
   RxDBLookupCombo1.SetFocus;
 end;
 
@@ -176,6 +181,7 @@ begin
   btnMontaGrade.Enabled := (trim(RxDBLookupCombo1.Text) <> '');
   btnCancelar.Enabled   := False;
   btnConfirmar.Enabled  := False;
+  btnExcluir.Enabled    := False;
 end;
 
 procedure TfrmCadProduto_GradeRefTam.btnAlterarClick(Sender: TObject);
@@ -197,6 +203,34 @@ begin
       fDMCadProduto.mGradeRefTam.Post;
     end;
     fDMCadProduto.mGradeRefTam.Next;
+  end;
+end;
+
+procedure TfrmCadProduto_GradeRefTam.btnExcluirClick(Sender: TObject);
+var
+  vOpcaoAux : String;
+  vID_GradeAux : Integer;
+begin
+  if fDMCadProduto.cdsProduto_MatTamID.AsInteger <= 0 then
+    exit;
+  vOpcaoAux := InputBox('Excluir Grade Referenciada','T=Toda a grade   I=Individual     N=Não excluir', 'I');
+  if (trim(vOpcaoAux) = 'I') or (trim(vOpcaoAux) = 'i') then
+    fDMCadProduto.cdsProduto_MatTam.Delete
+  else
+  if (trim(vOpcaoAux) = 'T') or (trim(vOpcaoAux) = 't') then
+  begin
+    SMDBGrid1.DisableScroll;
+    vID_GradeAux := fDMCadProduto.cdsProduto_MatTamID_GRADE.AsInteger;
+    fDMCadProduto.cdsProduto_MatTam.First;
+    fDMCadProduto.cdsProduto_MatTam.Locate('ID_GRADE',vID_GradeAux,([Locaseinsensitive]));
+    while not fDMCadProduto.cdsProduto_MatTam.Eof do
+    begin
+      if fDMCadProduto.cdsProduto_MatTamID_GRADE.AsInteger = vID_GradeAux then
+        fDMCadProduto.cdsProduto_MatTam.Delete
+      else
+        fDMCadProduto.cdsProduto_MatTam.Last;
+    end;
+    SMDBGrid1.EnableScroll;
   end;
 end;
 
