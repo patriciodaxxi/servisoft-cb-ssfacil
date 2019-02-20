@@ -563,6 +563,9 @@ begin
       fDMRecebeXML.mItensNotaUsa_Cor.AsString       := fDMRecebeXML.cdsProdutoUSA_COR.AsString;
       fDMRecebeXML.mItensNotaUsa_Preco_Cor.AsString := fDMRecebeXML.cdsProdutoUSA_PRECO_COR.AsString;
       fDMRecebeXML.mItensNotaID_Cor.AsInteger       := fDMRecebeXML.cdsProduto_FornID_COR.AsInteger;
+      fDMRecebeXML.mItensNotaTamanho.AsString       := fDMRecebeXML.cdsProduto_FornTAMANHO.AsString;
+      if trim(fDMRecebeXML.mItensNotaTamanho.AsString) = '' then
+        fDMRecebeXML.mItensNotaTamanho.AsString := '';
       fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
       if fDMRecebeXML.mItensNotaID_Cor.AsInteger > 0 then
       begin
@@ -1406,6 +1409,7 @@ begin
     vCodCombinacao_Pos := 0;
     vPreco_Venda_Rec_XML_Pos := StrToFloat(FormatFloat('0.0000',fDMRecebeXML.mItensNotaVlr_Venda.AsFloat));
     vPreco_Custo_Rec_XML_Pos := StrToFloat(FormatFloat('0.0000',fDMRecebeXML.mItensNotaVlr_Custo_Prod.AsFloat));
+    vTamanho_Pos             := '';
 
     if (fDMRecebeXML.qParametrosINFORMAR_COR_MATERIAL.AsString = 'S') or (fDMRecebeXML.qParametrosINFORMAR_COR_PROD.AsString = 'C')
       or (fDMRecebeXML.qParametrosINFORMAR_COR_PROD.AsString = 'B') then
@@ -1450,6 +1454,7 @@ begin
       fDMRecebeXML.mItensNotaReferencia_Int.AsString := vReferencia_Pos;
       fDMRecebeXML.mItensNotaUnidadeInterno.AsString := vUnidade_Pos;
       fDMRecebeXML.mItensNotaUsa_Cor.AsString        := vUsa_Cor_Pos;
+      fDMRecebeXML.mItensNotaTamanho.AsString        := vTamanho_Pos;
       fDMRecebeXML.mItensNotaUsa_Preco_Cor.AsString  := vUsa_Preco_Cor_Pos;
       fDMRecebeXML.mItensNotaVlr_Venda.AsFloat       := StrToFloat(FormatFloat('0.0000',vPreco_Venda_Rec_XML_Pos));
       fDMRecebeXML.mItensNotaVlr_Custo_Prod.AsFloat  := StrToFloat(FormatFloat('0.0000',vPreco_Custo_Rec_XML_Pos));
@@ -1890,7 +1895,7 @@ begin
 
   if fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0 then
   begin
-    if not fDMRecebeXML.fnc_Verifica_Produto_Forn(fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger,fDMRecebeXML.mItensNotaCodFornecedor.AsInteger,fDMRecebeXML.mItensNotaCodProduto.AsString) then
+    if not fDMRecebeXML.fnc_Verifica_Produto_Forn(fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger,fDMRecebeXML.mItensNotaCodFornecedor.AsInteger,fDMRecebeXML.mItensNotaCodProduto.AsString,fDMRecebeXML.mItensNotaTamanho.AsString) then
     begin
       //fDMRecebeXML.prc_Abrir_Produto_Forn2(fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger);
       Gravar_MaterialFornecedor;
@@ -1917,6 +1922,7 @@ begin
     if not fDMRecebeXML.mItensNotaConverter_Unid_Medida.AsBoolean then
       fDMRecebeXML.cdsProduto_FornITEM_UNIDADE.AsInteger := -1;
     fDMRecebeXML.cdsProduto_FornID_COR.AsInteger := fDMRecebeXML.mItensNotaID_Cor.AsInteger;
+
     fDMRecebeXML.cdsProduto_Forn.Post;
     fDMRecebeXML.cdsProduto_Forn.ApplyUpdates(0);
   end;
@@ -2121,6 +2127,10 @@ begin
   vVlrAux := fnc_Montar_PrecoCustoTotal(fDMRecebeXML.cdsProdutoUNIDADE.AsString);
   fDMRecebeXML.cdsProduto_FornPRECO_CUSTO_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00000',vVlrAux));
   //************
+  if trim(fDMRecebeXML.mItensNotaTamanho.AsString) <> '' then
+    fDMRecebeXML.cdsProduto_FornTAMANHO.AsString := fDMRecebeXML.mItensNotaTamanho.AsString
+  else
+    fDMRecebeXML.cdsProduto_FornTAMANHO.AsString := '';
   fDMRecebeXML.cdsProduto_Forn.Post;
   fDMRecebeXML.cdsProduto_Forn.ApplyUpdates(0);
 end;

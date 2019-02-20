@@ -5,7 +5,7 @@ object frmSel_Produto_Cor: TfrmSel_Produto_Cor
   BorderStyle = bsSingle
   Caption = 'frmSel_Produto_Cor'
   ClientHeight = 540
-  ClientWidth = 1048
+  ClientWidth = 1087
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,7 +23,7 @@ object frmSel_Produto_Cor: TfrmSel_Produto_Cor
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1048
+    Width = 1087
     Height = 41
     Align = alTop
     BevelOuter = bvNone
@@ -91,7 +91,7 @@ object frmSel_Produto_Cor: TfrmSel_Produto_Cor
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 41
-    Width = 1048
+    Width = 1087
     Height = 482
     Align = alClient
     Ctl3D = False
@@ -126,7 +126,7 @@ object frmSel_Produto_Cor: TfrmSel_Produto_Cor
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 7
+    ColCount = 8
     RowCount = 2
     Columns = <
       item
@@ -159,7 +159,7 @@ object frmSel_Produto_Cor: TfrmSel_Produto_Cor
         FieldName = 'COD_BARRA'
         Title.Alignment = taCenter
         Title.Caption = 'C'#243'd. Barra'
-        Width = 114
+        Width = 104
         Visible = True
       end
       item
@@ -176,13 +176,21 @@ object frmSel_Produto_Cor: TfrmSel_Produto_Cor
         FieldName = 'NOME_COMBINACAO'
         Title.Alignment = taCenter
         Title.Caption = 'Nome Combina'#231#227'o'
+        Width = 290
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TAMANHO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Tamanho'
         Visible = True
       end>
   end
   object StaticText1: TStaticText
     Left = 0
     Top = 523
-    Width = 1048
+    Width = 1087
     Height = 17
     Align = alBottom
     BorderStyle = sbsSingle
@@ -203,9 +211,10 @@ object frmSel_Produto_Cor: TfrmSel_Produto_Cor
     CommandText = 
       'SELECT PRO.ID, PRO.NOME, PRO.REFERENCIA, PRO.PRECO_VENDA, PRO.UN' +
       'IDADE,'#13#10'PRO.PRECO_CUSTO, PRO.COD_BARRA, PRO.USA_COR, PRO.USA_PRE' +
-      'CO_COR,'#13#10'pc.id_cor_combinacao, pc.nome Nome_Combinacao'#13#10'FROM PRO' +
-      'DUTO PRO'#13#10'LEFT JOIN produto_comb PC'#13#10'ON PRO.ID = PC.ID'#13#10'WHERE PR' +
-      'O.INATIVO = '#39'N'#39#13#10#13#10
+      'CO_COR,'#13#10'pc.id_cor_combinacao, pc.nome Nome_Combinacao, T.tamanh' +
+      'o'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN produto_comb PC'#13#10'ON PRO.ID = PC.I' +
+      'D'#13#10'LEFT JOIN PRODUTO_TAM T'#13#10'on T.ID = PRO.ID'#13#10'WHERE PRO.INATIVO ' +
+      '= '#39'N'#39#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -260,6 +269,10 @@ object frmSel_Produto_Cor: TfrmSel_Produto_Cor
     object cdsProdutoNOME_COMBINACAO: TStringField
       FieldName = 'NOME_COMBINACAO'
       Size = 50
+    end
+    object cdsProdutoTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
     end
   end
   object dspProduto: TDataSetProvider
