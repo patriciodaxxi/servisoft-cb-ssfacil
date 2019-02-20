@@ -10484,7 +10484,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43510.740964722220000000
+    ReportOptions.LastChange = 43516.730867083330000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint

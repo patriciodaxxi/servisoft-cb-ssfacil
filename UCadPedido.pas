@@ -2408,7 +2408,7 @@ begin
         fDMCadPedido.mEtiqueta_NavReferencia.AsString := fDMCadPedido.mEtiqueta_NavReferencia.AsString + '-E';
       end
       else
-        fDMCadPedido.mEtiqueta_NavEncerado.AsString     := '';
+        fDMCadPedido.mEtiqueta_NavEncerado.AsString := '';
       if (Tipo = 'A') or (Tipo = 'AE') then
       begin
         if trim(fDMCadPedido.cdsPedidoImp_ItensCOD_PRODUTO_CLIENTE.AsString) <> '' then
@@ -2448,20 +2448,38 @@ var
   i: Integer;
   F: TextFile;
   vTexto: String;
-
+  vArq: string;      
 Const
   cINegrito = #27#71;
   cFNegrito = #27#72;
 
 begin
-  if trim(fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString) <> '' then
+  fDMCadPedido.qFilial_Rel.Close;
+  fDMCadPedido.qFilial_Rel.ParamByName('ID').AsInteger      := fDMCadPedido.cdsPedidoImpFILIAL.AsInteger;
+  fDMCadPedido.qFilial_Rel.ParamByName('TIPO').AsInteger    := 7;
+  fDMCadPedido.qFilial_Rel.ParamByName('POSICAO').AsInteger := 1;
+  fDMCadPedido.qFilial_Rel.Open;
+  if trim(fDMCadPedido.qFilial_RelCAMINHO.AsString) = '' then
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\SulTextil_Etiq1.fr3'
+  else
+    vArq := fDMCadPedido.qFilial_RelCAMINHO.AsString;
+  if FileExists(vArq) then
+    fDMCadPedido.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadPedido.frxReport1.ShowReport;
+
+
+{  if trim(fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString) <> '' then
     AssignFile(F,fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString) //impressao via dos
   else
   begin
     MessageDlg('*** Caminho da impressora DOS não informado!', mtInformation, [mbOk], 0);
     Exit;
   end;
-
 
   Rewrite(F);
   Write(F,'0'#15);
@@ -2484,7 +2502,7 @@ begin
         Writeln(F);
       fDMCadPedido.mEtiqueta_Nav.Next;
     end;
-  CloseFile(F);
+  CloseFile(F);}
 end;
 
 procedure TfrmCadPedido.Excel1Click(Sender: TObject);
@@ -2973,7 +2991,7 @@ begin
     fDMCadPedido.frxReport1.Report.LoadFromFile(vArq)
   else
   begin
-    ShowMessage('Relatorio não localizado! ' + vArq);
+    ShowMessage('Relatório não localizado! ' + vArq);
     Exit;
   end;
   fDMCadPedido.frxReport1.ShowReport;
