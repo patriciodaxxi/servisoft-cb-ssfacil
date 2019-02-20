@@ -822,8 +822,12 @@ end;
 
 procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido ; ID_Cor, Item, Item_Original : Integer ; Preco, Perc_IPI, Perc_ICMS : Real ;
                                DtEntrega : TDateTime ; Carimbo,Caixinha : String);
+var
+  vFlag : Boolean;                               
 begin
+  vFlag := False;
   fDMCadPedido.cdsPedido_Itens.First;
+  fDMCadPedido.cdsPedido_Itens.Locate('ITEM_ORIGINAL',Item_Original,([Locaseinsensitive]));
   while not fDMCadPedido.cdsPedido_Itens.Eof do
   begin
     if (fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger = Item_Original) and (fDMCadPedido.cdsPedido_ItensITEM.AsInteger <> Item) then
@@ -872,7 +876,11 @@ begin
       end;
       if (fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) then
         fDMCadPedido.cdsPedido_Itens.Post;
-    end;
+      vFlag := True;
+    end
+    else
+    if vFlag then
+      fDMCadPedido.cdsPedido_Itens.Last;
     fDMCadPedido.cdsPedido_Itens.Next;
   end;
 end;

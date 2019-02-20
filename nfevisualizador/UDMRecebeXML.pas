@@ -2166,7 +2166,7 @@ type
     procedure prc_Abrir_Combinacao(ID_Produto: Integer);
     procedure prc_Move_Dados_Da_OC;
 
-    function fnc_Verifica_Produto_Forn(ID_Produto, ID_Fornecedor: Integer; Cod_Produto_Forn: String): Boolean;
+    function fnc_Verifica_Produto_Forn(ID_Produto, ID_Fornecedor: Integer; Cod_Produto_Forn, Tamanho: String): Boolean;
     function fnc_Proximo_Item_Forn(ID_Produto: Integer): Integer; 
   end;
 
@@ -2703,7 +2703,7 @@ begin
   cdsCombinacao.Open;
 end;
 
-function TDMRecebeXML.fnc_Verifica_Produto_Forn(ID_Produto,ID_Fornecedor: Integer; Cod_Produto_Forn: String): Boolean;
+function TDMRecebeXML.fnc_Verifica_Produto_Forn(ID_Produto, ID_Fornecedor: Integer; Cod_Produto_Forn, Tamanho: String): Boolean;
 var
   sds: TSQLDataSet;
 begin
@@ -2718,6 +2718,8 @@ begin
                      + 'WHERE PF.id = :ID '
                      + 'AND PF.ID_FORNECEDOR = :ID_FORNECEDOR '
                      + 'AND PF.COD_MATERIAL_FORN = :COD_MATERIAL_FORN ';
+    if trim(Tamanho) <> '' then
+      sds.CommandText := sds.CommandText + ' AND PF.TAMANHO = ' + QuotedStr(Tamanho);
     sds.ParamByName('ID').AsInteger               := ID_Produto;
     sds.ParamByName('ID_Fornecedor').AsInteger    := ID_Fornecedor;
     sds.ParamByName('COD_MATERIAL_FORN').AsString := Cod_Produto_Forn;

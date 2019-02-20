@@ -2224,6 +2224,7 @@ var
   vVlr_Unitario_Aux: Real;
   vID_Terceiro_Aux: Integer;
   vDTEntrega_Aux: TDateTime;
+  vFlag : Boolean;
 begin
   if fDMCadPedido.cdsPedido_Itens.RecordCount <= 1 then
     exit;
@@ -2232,6 +2233,7 @@ begin
     (vID_Terceiro_Ant <> fDMCadPedido.cdsPedido_ItensID_ATELIER.AsInteger) or (vDtEntrega_Ant <> fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime)
     or (vCaixinha_Ant <> fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString)then
   begin
+    vFlag := False;
     vItemAux          := fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger;
     vId_ProdutoAux    := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
     vId_CombinacaoAux := fDMCadPedido.cdsPedido_ItensID_COR.AsInteger;
@@ -2243,6 +2245,7 @@ begin
     vDTEntrega_Aux    := fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime;
 
     fDMCadPedido.cdsPedido_Itens.First;
+    fDMCadPedido.cdsPedido_Itens.Locate('ITEM_ORIGINAL',vItemAux,[loCaseInsensitive]);
     while not fDMCadPedido.cdsPedido_Itens.Eof do
     begin
       if fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger =  vItemAux then
@@ -2265,7 +2268,11 @@ begin
         if fDMCadPedido.cdsPedido_ItensID_ATELIER.AsInteger <> vID_Terceiro_Aux then
           fDMCadPedido.cdsPedido_ItensID_ATELIER.AsInteger := vID_Terceiro_Aux;
         fDMCadPedido.cdsPedido_Itens.Post;
-      end;
+        vFlag := True;
+      end
+      else
+      if vFlag then
+        fDMCadPedido.cdsPedido_Itens.Last;
       fDMCadPedido.cdsPedido_Itens.Next;
     end;
   end;

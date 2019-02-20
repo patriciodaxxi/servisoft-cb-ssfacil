@@ -25,7 +25,7 @@ object frmCadOC: TfrmCadOC
     Top = 0
     Width = 1030
     Height = 690
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOC: TfrmCadOC
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -3189,8 +3189,8 @@ object frmCadOC: TfrmCadOC
     GroupName = 'OC Fornecedor'
     UserControl = fMenu.UserControl1
     NotAllowed = naDisabled
-    Left = 722
-    Top = 134
+    Left = 714
+    Top = 102
   end
   object PopupMenu1: TPopupMenu
     Left = 609

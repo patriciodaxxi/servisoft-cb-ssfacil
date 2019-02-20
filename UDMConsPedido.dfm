@@ -2528,8 +2528,8 @@ object DMConsPedido: TDMConsPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43425.589071840280000000
+    ReportOptions.CreateDate = 41928.578144409700000000
+    ReportOptions.LastChange = 43248.966217442100000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint

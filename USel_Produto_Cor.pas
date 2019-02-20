@@ -31,6 +31,7 @@ type
     cdsProdutoUSA_PRECO_COR: TStringField;
     cdsProdutoID_COR_COMBINACAO: TIntegerField;
     cdsProdutoNOME_COMBINACAO: TStringField;
+    cdsProdutoTAMANHO: TStringField;
     procedure BitBtn1Click(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -110,6 +111,10 @@ begin
   vUnidade_Pos       := cdsProdutoUNIDADE.AsString;
   vUsa_Cor_Pos       := cdsProdutoUSA_COR.AsString;
   vUsa_Preco_Cor_Pos := cdsProdutoUSA_PRECO_COR.AsString;
+  if trim(cdsProdutoTAMANHO.AsString) <> '' then
+    vTamanho_Pos := cdsProdutoTAMANHO.AsString
+  else
+    vTamanho_Pos := '';
   Close;
 end;
 
