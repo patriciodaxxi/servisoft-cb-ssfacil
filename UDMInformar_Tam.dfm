@@ -996,6 +996,26 @@ object DMInformar_Tam: TDMInformar_Tam
       item
         Name = 'Item_Tam'
         DataType = ftInteger
+      end
+      item
+        Name = 'BASE_ICMSSUBST_RET'
+        DataType = ftFloat
+      end
+      item
+        Name = 'PERC_BASE_ICMS_RED'
+        DataType = ftFloat
+      end
+      item
+        Name = 'VLR_ICMSSUBST_RET'
+        DataType = ftFloat
+      end
+      item
+        Name = 'PERC_ICMS_RED'
+        DataType = ftFloat
+      end
+      item
+        Name = 'PERC_BASE_ICMSSUBT_RED'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     Params = <>
@@ -1004,7 +1024,7 @@ object DMInformar_Tam: TDMInformar_Tam
     Left = 88
     Top = 200
     Data = {
-      201400009619E0BD0100000018000000CC00000000000300000020140A49445F
+      A51400009619E0BD0100000018000000D1000000000003000000A5140A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
       010005574944544802000200140007556E696461646501004900000001000557
       494454480200020006000351746408000400000000000749445F43464F500400
@@ -1165,7 +1185,11 @@ object DMInformar_Tam: TDMInformar_Tam
       6E68610100490000000100055749445448020002001E000D564C525F4950495F
       4445564F4C08000400000000000A504552435F4445564F4C0800040000000000
       08424153455F4950490800040000000000084974656D5F54616D040001000000
-      00000000}
+      000012424153455F49434D5353554253545F5245540800040000000000125045
+      52435F424153455F49434D535F524544080004000000000011564C525F49434D
+      5353554253545F52455408000400000000000D504552435F49434D535F524544
+      080004000000000016504552435F424153455F49434D53535542545F52454408
+      000400000000000000}
     object mItensID_Produto: TIntegerField
       FieldName = 'ID_Produto'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1954,6 +1978,21 @@ object DMInformar_Tam: TDMInformar_Tam
     object mItensItem_Tam: TIntegerField
       Tag = 1
       FieldName = 'Item_Tam'
+    end
+    object mItensBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object mItensPERC_BASE_ICMS_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMS_RED'
+    end
+    object mItensVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object mItensPERC_ICMS_RED: TFloatField
+      FieldName = 'PERC_ICMS_RED'
+    end
+    object mItensPERC_BASE_ICMSSUBT_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMSSUBT_RED'
     end
   end
   object mPedido_Cli: TClientDataSet

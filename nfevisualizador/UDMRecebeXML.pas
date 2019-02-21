@@ -2114,6 +2114,7 @@ type
     cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField;
     sdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField;
     cdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField;
+    cdsCFOPMARCAR_NCM_ST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

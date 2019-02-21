@@ -1154,6 +1154,20 @@ object frmCadCFOP: TfrmCadCFOP
               'V'
               'O')
           end
+          object DBCheckBox22: TDBCheckBox
+            Left = 162
+            Top = 13
+            Width = 186
+            Height = 17
+            Caption = 'Marcar que o NCM ST na Entrada'
+            Ctl3D = False
+            DataField = 'MARCAR_NCM_ST'
+            DataSource = DMCadCFOP.dsCFOP
+            ParentCtl3D = False
+            TabOrder = 9
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
+          end
         end
         object gbxFaturamento: TRzGroupBox
           Left = 385

@@ -1658,17 +1658,17 @@ begin
 
   try
 
-  //21/02/2019
-  //  if fDMRecebeXML.cdsCFOP.Locate('ID',fDMRecebeXML.mItensNotaCFOPInterno  .Text, ([LocaseInsensitive])) then
-
-
-//fDMRecebeXML.mItensNotaCFOPInterno.AsInteger
-
     fDMRecebeXML.cdsNCM.Insert;
     fDMRecebeXML.cdsNCMID.AsInteger      := vAux;
     fDMRecebeXML.cdsNCMNCM.AsString      := fDMRecebeXML.mItensNotaNCM.AsString;
     fDMRecebeXML.cdsNCMCOD_CEST.AsString := fDMRecebeXML.mItensNotaCEST.AsString;
     fDMRecebeXML.cdsNCMNOME.AsString     := '';
+    if fDMRecebeXML.cdsCFOP.Locate('CODCFOP',fDMRecebeXML.mItensNotaCFOPOriginal.Text, ([LocaseInsensitive])) then
+    begin
+      if (fDMRecebeXML.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') or (fDMRecebeXML.cdsCFOPMARCAR_NCM_ST.AsString = 'S') then
+        fDMRecebeXML.cdsNCMGERAR_ST.AsString := 'S';
+    end;
+
     fDMRecebeXML.cdsNCM.Post;
     fDMRecebeXML.cdsNCM.ApplyUpdates(0);
 

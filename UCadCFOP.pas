@@ -138,6 +138,7 @@ type
     DBMemo3: TDBMemo;
     ProgressBar1: TProgressBar;
     DBCheckBox21: TDBCheckBox;
+    DBCheckBox22: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

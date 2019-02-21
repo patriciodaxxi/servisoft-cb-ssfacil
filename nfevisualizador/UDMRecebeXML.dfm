@@ -149,6 +149,11 @@ object DMRecebeXML: TDMRecebeXML
       FixedChar = True
       Size = 1
     end
+    object cdsCFOPMARCAR_NCM_ST: TStringField
+      FieldName = 'MARCAR_NCM_ST'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsCFOP: TDataSource
     DataSet = cdsCFOP
