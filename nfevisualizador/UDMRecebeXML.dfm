@@ -5642,6 +5642,36 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'COD_BARRA2'
       Size = 14
     end
+    object sdsNotaFiscal_ItensPERC_MVA: TFloatField
+      FieldName = 'PERC_MVA'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_DESON: TFloatField
+      FieldName = 'PERC_ICMS_DESON'
+    end
+    object sdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object sdsNotaFiscal_ItensBASE_IPI: TFloatField
+      FieldName = 'BASE_IPI'
+    end
+    object sdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMS_RED'
+    end
+    object sdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
+      FieldName = 'PERC_ICMS_RED'
+    end
+    object sdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMSSUBT_RED'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField
+      FieldName = 'PERC_ICMSSUBST_INTERNO'
+    end
+    object sdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField
+      FieldName = 'PERC_REDUCAO_ICMSSUBST'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -5936,6 +5966,36 @@ object DMRecebeXML: TDMRecebeXML
     object cdsNotaFiscal_ItensCOD_BARRA2: TStringField
       FieldName = 'COD_BARRA2'
       Size = 14
+    end
+    object cdsNotaFiscal_ItensPERC_MVA: TFloatField
+      FieldName = 'PERC_MVA'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_DESON: TFloatField
+      FieldName = 'PERC_ICMS_DESON'
+    end
+    object cdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object cdsNotaFiscal_ItensBASE_IPI: TFloatField
+      FieldName = 'BASE_IPI'
+    end
+    object cdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMS_RED'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
+      FieldName = 'PERC_ICMS_RED'
+    end
+    object cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMSSUBT_RED'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField
+      FieldName = 'PERC_ICMSSUBST_INTERNO'
+    end
+    object cdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField
+      FieldName = 'PERC_REDUCAO_ICMSSUBST'
     end
   end
   object dsNotaFiscal_Itens: TDataSource

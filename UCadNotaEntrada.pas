@@ -250,7 +250,7 @@ type
     procedure prc_Gravar_Registro;
     procedure prc_Consultar(ID: Integer);
 
-    procedure prc_Posiciona_NotaFiscal;
+    procedure prc_Posiciona_NotaFiscal(Excluir : Boolean = False);
     procedure prc_Posicionar_Cliente;
 
     procedure prc_Gravar_NotaFiscal_Parc(Parcela: Integer; Data: TDateTime; Valor: Real);
@@ -307,7 +307,7 @@ begin
     exit;
   end;
 
-  prc_Posiciona_NotaFiscal;
+  prc_Posiciona_NotaFiscal(True);
 
   if fDMCadNotaFiscal.cdsNotaFiscal.IsEmpty then
     exit;
@@ -680,7 +680,7 @@ begin
   FreeAndNil(fDMCadNotaFiscal);
 end;
 
-procedure TfrmCadNotaEntrada.prc_Posiciona_NotaFiscal;
+procedure TfrmCadNotaEntrada.prc_Posiciona_NotaFiscal(Excluir : Boolean = False);
 begin
   fDMCadNotaFiscal.prc_Localizar(fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID.AsInteger);
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Close;
@@ -692,7 +692,7 @@ begin
     vFilial_Nome := fDMCadNotaFiscal.cdsFilialNOME_INTERNO.AsString;
   lblNome_Filial.Caption := vFilial_Nome;
 
-  if fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger > 0 then
+  if (fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger > 0) and not(Excluir) then
   begin
     if (fDMCadNotaFiscal.cdsCFOP.Active) then
     begin

@@ -2268,6 +2268,19 @@ begin
     fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS.AsFloat      := fDMRecebeXML.mItensNotaVlrIcms.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMS.AsFloat     := fDMRecebeXML.mItensNotaBaseIcms.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensID_CSTICMS.AsInteger  := fDMRecebeXML.mItensNotaCodSitTribInterno.AsInteger;
+
+    //20/02/2019
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED.AsFloat := fDMRecebeXML.mItensNotaPercRedBCST.AsFloat;
+    //fDMRecebeXML.cdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST.AsFloat := fDMRecebeXML.mItensNotaperc
+    fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat         := fDMRecebeXML.mItensNotaBaseCST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO.AsFloat := fDMRecebeXML.mItensNotaPercIcmsST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsFloat          := fDMRecebeXML.mItensNotaVlrIcmsST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_BASE_ICMS_RED.AsFloat     := fDMRecebeXML.mItensNotaPercRedIcms.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat     := fDMRecebeXML.mItensNotaBaseCSTRet.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat      := fDMRecebeXML.mItensNotaVlrIcmsCSTRet.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_MVA.AsFloat                := fDMRecebeXML.mItensNotaPercMVAST.AsFloat;
+    //****************
+
     if trim(fDMRecebeXML.mItensNotaTipoVenda.AsString) <> '' then
       fDMRecebeXML.cdsNotaFiscal_ItensFINALIDADE.AsString := fDMRecebeXML.mItensNotaTipoVenda.AsString;
     if fDMRecebeXML.mItensNotaCodSitTribInterno.AsInteger <= 0 then

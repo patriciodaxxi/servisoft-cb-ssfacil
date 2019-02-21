@@ -1,7 +1,7 @@
 object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   Left = 296
   Top = 74
-  Width = 678
+  Width = 721
   Height = 588
   Caption = 'Cadastro dos Itens da Nota'
   Color = clBtnFace
@@ -21,7 +21,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 670
+    Width = 713
     Height = 71
     Align = alTop
     Color = clMoneyGreen
@@ -241,7 +241,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object Panel3: TPanel
     Left = 0
     Top = 523
-    Width = 670
+    Width = 713
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -280,7 +280,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object Panel2: TPanel
     Left = 0
     Top = 145
-    Width = 670
+    Width = 713
     Height = 378
     Align = alClient
     Color = clMoneyGreen
@@ -654,11 +654,11 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
       TabOrder = 13
     end
     object RzGroupBox2: TRzGroupBox
-      Left = 472
-      Top = 61
+      Left = 504
+      Top = 37
       Width = 185
-      Height = 108
-      Caption = ' PIS/COFINS '
+      Height = 92
+      Caption = ' PIS / COFINS '
       Color = clMoneyGreen
       FlatColor = clBlack
       TabOrder = 17
@@ -672,7 +672,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
       end
       object Label22: TLabel
         Left = 16
-        Top = 66
+        Top = 56
         Width = 53
         Height = 13
         Alignment = taRightJustify
@@ -680,7 +680,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
       end
       object Label23: TLabel
         Left = 12
-        Top = 88
+        Top = 74
         Width = 57
         Height = 13
         Alignment = taRightJustify
@@ -688,7 +688,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
       end
       object Label24: TLabel
         Left = 31
-        Top = 42
+        Top = 38
         Width = 38
         Height = 13
         Alignment = taRightJustify
@@ -698,44 +698,195 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
         Left = 72
         Top = 12
         Width = 88
-        Height = 21
+        Height = 19
+        Ctl3D = False
         DataField = 'PERC_PIS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
         TabOrder = 0
       end
       object DBEdit13: TDBEdit
         Left = 72
-        Top = 58
+        Top = 48
         Width = 88
-        Height = 21
+        Height = 19
+        Ctl3D = False
         DataField = 'PERC_COFINS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
         TabOrder = 2
       end
       object DBEdit14: TDBEdit
         Left = 72
-        Top = 80
+        Top = 66
         Width = 88
-        Height = 21
+        Height = 19
+        Ctl3D = False
         DataField = 'VLR_COFINS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
         TabOrder = 3
       end
       object DBEdit15: TDBEdit
         Left = 72
-        Top = 34
+        Top = 30
         Width = 88
-        Height = 21
+        Height = 19
+        Ctl3D = False
         DataField = 'VLR_PIS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
         TabOrder = 1
+      end
+    end
+    object RzGroupBox1: TRzGroupBox
+      Left = 504
+      Top = 133
+      Width = 187
+      Height = 148
+      Caption = ' ICMS'
+      Color = clMoneyGreen
+      FlatColor = clBlack
+      TabOrder = 18
+      object Label25: TLabel
+        Left = 15
+        Top = 20
+        Width = 78
+        Height = 13
+        Alignment = taRightJustify
+        Caption = '% Red Base ST:'
+      end
+      object Label26: TLabel
+        Left = 36
+        Top = 56
+        Width = 57
+        Height = 13
+        Alignment = taRightJustify
+        Caption = '% ICMS ST:'
+      end
+      object Label27: TLabel
+        Left = 29
+        Top = 74
+        Width = 64
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr. ICMS ST:'
+      end
+      object Label28: TLabel
+        Left = 49
+        Top = 38
+        Width = 44
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Base ST:'
+      end
+      object Label29: TLabel
+        Left = 3
+        Top = 92
+        Width = 90
+        Height = 13
+        Alignment = taRightJustify
+        Caption = '% Red Base ICMS:'
+      end
+      object Label30: TLabel
+        Left = 15
+        Top = 110
+        Width = 78
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Base ST Retida:'
+      end
+      object Label31: TLabel
+        Left = 24
+        Top = 128
+        Width = 69
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr. ST Retida:'
+      end
+      object DBEdit16: TDBEdit
+        Left = 96
+        Top = 12
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'PERC_BASE_ICMSSUBT_RED'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 0
+      end
+      object DBEdit17: TDBEdit
+        Left = 96
+        Top = 48
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'PERC_ICMSSUBST_INTERNO'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 2
+      end
+      object DBEdit18: TDBEdit
+        Left = 96
+        Top = 66
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'VLR_ICMSSUBST'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 3
+      end
+      object DBEdit19: TDBEdit
+        Left = 96
+        Top = 30
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'BASE_ICMSSUBST'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 1
+      end
+      object DBEdit20: TDBEdit
+        Left = 96
+        Top = 84
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'PERC_BASE_ICMS_RED'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 4
+      end
+      object DBEdit21: TDBEdit
+        Left = 96
+        Top = 102
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'BASE_ICMSSUBST_RET'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 5
+      end
+      object DBEdit22: TDBEdit
+        Left = 96
+        Top = 120
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'VLR_ICMSSUBST_RET'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 6
       end
     end
   end
   object pnlCombinacao: TPanel
     Left = 0
     Top = 119
-    Width = 670
+    Width = 713
     Height = 26
     Align = alTop
     Color = clMoneyGreen
@@ -767,7 +918,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object Panel4: TPanel
     Left = 0
     Top = 71
-    Width = 670
+    Width = 713
     Height = 48
     Align = alTop
     Color = clMoneyGreen

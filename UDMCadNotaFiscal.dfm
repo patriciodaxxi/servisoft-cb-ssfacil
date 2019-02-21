@@ -1809,6 +1809,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object sdsNotaFiscal_ItensBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object sdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object sdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMS_RED'
+    end
+    object sdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
+      FieldName = 'PERC_ICMS_RED'
+    end
+    object sdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMSSUBT_RED'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -2466,6 +2481,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
+    end
+    object cdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object cdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMS_RED'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
+      FieldName = 'PERC_ICMS_RED'
+    end
+    object cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMSSUBT_RED'
     end
   end
   object dsNotaFiscal_Itens: TDataSource
@@ -4911,6 +4941,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 311
   end
   object cdsTipoCobranca: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -4991,6 +5022,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 358
   end
   object cdsContas: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>

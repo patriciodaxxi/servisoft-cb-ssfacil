@@ -2971,6 +2971,16 @@ type
     qParametros_NFeIMP_NOMEPROD_CLIENTE: TStringField;
     cdsClienteIMP_NOMEPROD_CLIENTE: TStringField;
     qParametros_NFeVALIDAR_PESO_NFE: TStringField;
+    sdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField;
+    sdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField;
+    sdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField;
+    sdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField;
+    sdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField;
+    cdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField;
+    cdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField;
+    cdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField;
+    cdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField;
+    cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
