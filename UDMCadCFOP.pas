@@ -416,6 +416,8 @@ type
     cdsCFOP_ImpENQIPI: TStringField;
     sdsCFOPALT_NCM_CUSTO: TStringField;
     cdsCFOPALT_NCM_CUSTO: TStringField;
+    sdsCFOPMARCAR_NCM_ST: TStringField;
+    cdsCFOPMARCAR_NCM_ST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsCFOPNewRecord(DataSet: TDataSet);
     procedure dspCFOPUpdateError(Sender: TObject;
@@ -521,6 +523,8 @@ begin
   end;
   if (cdsCFOPGERAR_ESTOQUE.AsString <> 'S') then
     cdsCFOPGERAR_ESTOQUE_MP.AsString := 'N';
+  if cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S' then
+    cdsCFOPMARCAR_NCM_ST.AsString := 'S';
   cdsCFOP.Post;
   cdsCFOP.ApplyUpdates(0);
 end;
@@ -727,6 +731,7 @@ begin
   cdsCFOPSUBSTITUICAO_TRIB.AsString      := 'N';
   cdsCFOPGERAR_CUSTO_MEDIO.AsString      := 'S';
   cdsCFOPINATIVO.AsString                := 'N';
+  cdsCFOPMARCAR_NCM_ST.AsString          := 'N';
 end;
 
 procedure TDMCadCFOP.dspCFOPUpdateError(Sender: TObject;

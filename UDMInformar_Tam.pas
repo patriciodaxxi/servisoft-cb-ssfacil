@@ -310,6 +310,11 @@ type
     mItensPERC_DEVOL: TFloatField;
     mItensBASE_IPI: TFloatField;
     mItensItem_Tam: TIntegerField;
+    mItensBASE_ICMSSUBST_RET: TFloatField;
+    mItensPERC_BASE_ICMS_RED: TFloatField;
+    mItensVLR_ICMSSUBST_RET: TFloatField;
+    mItensPERC_ICMS_RED: TFloatField;
+    mItensPERC_BASE_ICMSSUBT_RED: TFloatField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private

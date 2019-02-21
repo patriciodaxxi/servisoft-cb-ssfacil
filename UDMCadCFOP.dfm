@@ -238,6 +238,11 @@ object DMCadCFOP: TDMCadCFOP
       FixedChar = True
       Size = 1
     end
+    object sdsCFOPMARCAR_NCM_ST: TStringField
+      FieldName = 'MARCAR_NCM_ST'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
@@ -488,6 +493,11 @@ object DMCadCFOP: TDMCadCFOP
     end
     object cdsCFOPALT_NCM_CUSTO: TStringField
       FieldName = 'ALT_NCM_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCFOPMARCAR_NCM_ST: TStringField
+      FieldName = 'MARCAR_NCM_ST'
       FixedChar = True
       Size = 1
     end
