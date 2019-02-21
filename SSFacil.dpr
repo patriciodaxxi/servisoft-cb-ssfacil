@@ -774,7 +774,8 @@ uses
   classe.validaemail in 'Classes\classe.validaemail.pas',
   UConsNotas in 'UConsNotas.pas' {frmConsNotas},
   UDMConsNotas in 'UDMConsNotas.pas' {DMConsNotas: TDataModule},
-  uNFeConsts in 'uNFeConsts.pas';
+  uNFeConsts in 'uNFeConsts.pas',
+  uProdutoAtualizaPreco in 'uProdutoAtualizaPreco.pas' {frmProdutoAtualizaPreco};
 
 {$R *.res}
 

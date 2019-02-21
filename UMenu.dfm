@@ -216,6 +216,10 @@ object fMenu: TfMenu
         object N22: TMenuItem
           Caption = '-'
         end
+        object AtualizarPreosporCdigodeBarras1: TMenuItem
+          Caption = 'Atualizar Pre'#231'os por C'#243'digo de Barras'
+          OnClick = AtualizarPreosporCdigodeBarras1Click
+        end
         object CdigoBarra1: TMenuItem
           Caption = 'C'#243'digo Barra'
           OnClick = CdigoBarra1Click
