@@ -81,7 +81,7 @@ object fCupomParametros: TfCupomParametros
     Top = 35
     Width = 873
     Height = 566
-    ActivePage = TabSheet3
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -742,19 +742,27 @@ object fCupomParametros: TfCupomParametros
           Left = 4
           Top = 420
           Width = 841
-          Height = 53
+          Height = 85
           Caption = ' Configura'#231#227'o NFCe '
           TabOrder = 4
           object Label71: TLabel
-            Left = 4
+            Left = 36
             Top = 24
             Width = 80
             Height = 13
             Alignment = taRightJustify
             Caption = 'Enviar S'#237'ncrono:'
           end
+          object Label72: TLabel
+            Left = 10
+            Top = 48
+            Width = 105
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Senha Cancelamento:'
+          end
           object RxDBComboBox42: TRxDBComboBox
-            Left = 86
+            Left = 118
             Top = 16
             Width = 187
             Height = 21
@@ -771,6 +779,16 @@ object fCupomParametros: TfCupomParametros
             Values.Strings = (
               'S'
               'N')
+          end
+          object DBEdit13: TDBEdit
+            Left = 118
+            Top = 40
+            Width = 67
+            Height = 21
+            DataField = 'SENHA_CANCELAR_CUPOM'
+            DataSource = dmCupomFiscal.dsCupomParametros
+            PasswordChar = '*'
+            TabOrder = 1
           end
         end
       end

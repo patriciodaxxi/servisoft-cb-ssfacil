@@ -142,9 +142,8 @@ function GeraCodigoBarras(AServidor, ACNPJ, AUF, ACNPJBarras: string; AValorNF: 
 implementation
 
 uses
-  IdTCPClient, uNFeConsts, StrUtils, Dialogs, IdAntiFreeze, DB, Controls,
-  IdAntiFreezeBase, Forms, StdCtrls, JvTransparentForm, IdIOHandlerSocket,
-  IdTCPConnection, XMLIntf, XMLDoc, NxCollection, Graphics;
+  IdTCPClient, uNFeConsts, StrUtils, Dialogs, IdAntiFreeze, DB, Controls, IdAntiFreezeBase, Forms, StdCtrls, JvTransparentForm,
+  IdIOHandlerSocket, IdTCPConnection, XMLIntf, XMLDoc, NxCollection, Graphics;
 
 type
   IAguarde = interface

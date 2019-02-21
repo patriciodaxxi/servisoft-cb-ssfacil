@@ -175,6 +175,8 @@ type
     GroupBox9: TGroupBox;
     Label71: TLabel;
     RxDBComboBox42: TRxDBComboBox;
+    Label72: TLabel;
+    DBEdit13: TDBEdit;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);

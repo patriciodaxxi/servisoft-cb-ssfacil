@@ -162,7 +162,7 @@ implementation
 
 uses UEscolhe_Filial, uUtilPadrao, UCupomFiscalCli, UCupomFiscal, ACBrECF, uComandaR, uCartao, uCupomFiscalPgtoMulti, uMenu,
   DmdDatabase, uCalculo_CupomFiscal, UDMCadCupomFiscal_MP, uAlteraDt_NFCe, UDMNFCe,
-  uGrava_Erro;
+  uGrava_Erro, USenha;
 
 {$R *.dfm}
 
@@ -900,6 +900,7 @@ end;
 procedure TfCupomFiscalC.btnCancelarClick(Sender: TObject);
 var
   iRetorno, vNumCupomAux: Integer;
+  vSenhaCanc: string;
 begin
   vPosicionar := True;
   if not(fDmCupomFiscal.vCancelar) then
@@ -911,6 +912,21 @@ begin
     MessageDlg('*** Cupom se encontra no fechamento ' + fDmCupomFiscal.cdsCupom_ConsID_FECHAMENTO.AsString +
                ' do dia ' + fDmCupomFiscal.cdsCupom_ConsDTFECHAMENTO.AsString + '!', mtInformation, [mbOk], 0);
     Exit;
+  end;
+
+  if (fDmCupomFiscal.cdsCupomParametrosSENHA_CANCELAR_CUPOM.AsString <> '') then
+  begin
+    vSenhaCanc := fDmCupomFiscal.cdsCupomParametrosSENHA_CANCELAR_CUPOM.AsString;
+    frmSenha := TfrmSenha.Create(Self);
+    frmSenha.Label2.Caption := 'Autorizar Cancelamento';
+    frmSenha.Label3.Caption := '';
+    frmSenha.Label4.Caption := 'Informe a Senha';
+    frmSenha.ShowModal;
+    if vSenha <> vSenhaCanc then
+    begin
+      ShowMessage('Senha inválida!');
+      Exit;
+    end;
   end;
 
   iRetorno     := 1;

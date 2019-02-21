@@ -2828,6 +2828,10 @@ object dmCupomFiscal: TdmCupomFiscal
       FixedChar = True
       Size = 1
     end
+    object sdsCupomParametrosSENHA_CANCELAR_CUPOM: TStringField
+      FieldName = 'SENHA_CANCELAR_CUPOM'
+      Size = 10
+    end
   end
   object dspCupomParametros: TDataSetProvider
     DataSet = sdsCupomParametros
@@ -3090,6 +3094,10 @@ object dmCupomFiscal: TdmCupomFiscal
       FieldName = 'USA_MODO_SINCRONO'
       FixedChar = True
       Size = 1
+    end
+    object cdsCupomParametrosSENHA_CANCELAR_CUPOM: TStringField
+      FieldName = 'SENHA_CANCELAR_CUPOM'
+      Size = 10
     end
   end
   object sdsSitTribCF: TSQLDataSet

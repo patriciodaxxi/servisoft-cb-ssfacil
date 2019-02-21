@@ -1466,6 +1466,8 @@ type
     cdsCupom_ItensVLR_ACRESCIMO: TFloatField;
     sdsCupom_ItensVLR_UNIT_ORIGINAL: TFloatField;
     cdsCupom_ItensVLR_UNIT_ORIGINAL: TFloatField;
+    sdsCupomParametrosSENHA_CANCELAR_CUPOM: TStringField;
+    cdsCupomParametrosSENHA_CANCELAR_CUPOM: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);
