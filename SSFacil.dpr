@@ -733,7 +733,6 @@ uses
   UDMPreFat in 'UDMPreFat.pas' {DMPreFat: TDataModule},
   enviNFe_v400 in 'nfe\4.00\enviNFe_v400.pas',
   uXMLNFe4_00 in 'nfe\4.00\uXMLNFe4_00.pas',
-  uNFeConsts in '..\NFe 4.00\NFESrv\uNFeConsts.pas',
   UImpEtiq_Emb in 'UImpEtiq_Emb.pas' {frmImpEtiq_Emb},
   UCadNotaEntrada_Itens_Ajuste in 'UCadNotaEntrada_Itens_Ajuste.pas' {frmCadNotaEntrada_Itens_Ajuste},
   UBaixaPedidoProc in 'UBaixaPedidoProc.pas' {frmBaixaPedidoProc},
@@ -774,7 +773,8 @@ uses
   UCadProduto_Consumo_Copiar in 'UCadProduto_Consumo_Copiar.pas' {frmCadProduto_Consumo_Copiar},
   classe.validaemail in 'Classes\classe.validaemail.pas',
   UConsNotas in 'UConsNotas.pas' {frmConsNotas},
-  UDMConsNotas in 'UDMConsNotas.pas' {DMConsNotas: TDataModule};
+  UDMConsNotas in 'UDMConsNotas.pas' {DMConsNotas: TDataModule},
+  uNFeConsts in 'uNFeConsts.pas';
 
 {$R *.res}
 

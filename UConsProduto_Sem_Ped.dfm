@@ -237,9 +237,9 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
     Top = 102
     Width = 898
     Height = 509
-    ActivePage = TS_Clientes
+    ActivePage = TS_Produto
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 2
     FixedDimension = 19
     object TS_Produto: TRzTabSheet

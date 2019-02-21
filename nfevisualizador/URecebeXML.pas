@@ -1657,6 +1657,13 @@ begin
   vAux := dmDatabase.ProximaSequencia('TAB_NCM',0);
 
   try
+
+  //21/02/2019
+  //  if fDMRecebeXML.cdsCFOP.Locate('ID',fDMRecebeXML.mItensNotaCFOPInterno  .Text, ([LocaseInsensitive])) then
+
+
+//fDMRecebeXML.mItensNotaCFOPInterno.AsInteger
+
     fDMRecebeXML.cdsNCM.Insert;
     fDMRecebeXML.cdsNCMID.AsInteger      := vAux;
     fDMRecebeXML.cdsNCMNCM.AsString      := fDMRecebeXML.mItensNotaNCM.AsString;

@@ -292,7 +292,7 @@ var
   sErro: string;
 begin
   Result := EmptyStr;
-  TCPClient := CriarTCPClient(AServidor, 'Enviando nota sincrona... Aguarde...');
+  TCPClient := CriarTCPClient(AServidor, 'Enviando nota sincrona ... Aguarde...');
   try
     try
       TCPClient.Connect(1000);
