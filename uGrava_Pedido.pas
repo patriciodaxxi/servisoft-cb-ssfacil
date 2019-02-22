@@ -3,22 +3,21 @@ unit uGrava_Pedido;
 interface
 
 uses
-  Classes, SysUtils, DB, Dialogs, Variants, SqlExpr, DmdDatabase, UDMCadPedido, dbXPress,
-  UDMAprovacao_Ped, UDMEstoque;
+  Classes, SysUtils, DB, Dialogs, Variants, SqlExpr, DmdDatabase, UDMCadPedido, dbXPress, UDMAprovacao_Ped, UDMEstoque;
 
-procedure prc_Gravar(fDMCadPedido: TDMCadPedido ; Tipo: String = '');
-procedure Gravar_Duplicata(fDMCadPedido: TDMCadPedido ; Tipo, TransfICMS: String; Parcela: Integer; Valor: Real; Data: TDateTime; Prazo: String = '');
+procedure prc_Gravar(fDMCadPedido: TDMCadPedido; Tipo: String = '');
+procedure Gravar_Duplicata(fDMCadPedido: TDMCadPedido; Tipo, TransfICMS: String; Parcela: Integer; Valor: Real; Data: TDateTime; Prazo: String = '');
                                                //Tipo  P= Contas a Pagar   R= Contas a Receber
                                                //Prazo = ENT=Entrada  AVI=Avista
-procedure Gravar_Dupicata_Hist(fDMCadPedido: TDMCadPedido ; Tipo: String);
+procedure Gravar_Dupicata_Hist(fDMCadPedido: TDMCadPedido; Tipo: String);
 
 procedure prc_Excluir_Pedido(fDMCadPedido: TDMCadPedido);
-procedure Excluir_Duplicata_Ped(ID : Integer);
+procedure Excluir_Duplicata_Ped(ID: Integer);
 procedure prc_Excluir_Item_Ped(fDMCadPedido: TDMCadPedido);
 procedure prc_Gravar_cdsHist_Senha(fDMCadPedido: TDMCadPedido);
 procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
-procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido ; ID_Cor, Item, Item_Original : Integer ; Preco, Perc_IPI, Perc_ICMS : Real ;
-                               DtEntrega : TDateTime ; Carimbo,Caixinha : String);
+procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido; ID_Cor, Item, Item_Original: Integer; Preco, Perc_IPI, Perc_ICMS: Real;
+                               DtEntrega: TDateTime; Carimbo,Caixinha: String);
 
 function fnc_Existe_OC(fDMCadPedido: TDMCadPedido): Integer;
 
@@ -27,7 +26,7 @@ implementation
 uses
   DateUtils, uUtilPadrao, uCalculo_Pedido;
 
-procedure Gravar_Dupicata_Hist(fDMCadPedido: TDMCadPedido ; Tipo: String);
+procedure Gravar_Dupicata_Hist(fDMCadPedido: TDMCadPedido; Tipo: String);
 var
   vItemAux: Integer;
 begin
@@ -64,7 +63,7 @@ begin
 end;
 
 
-procedure Gravar_Duplicata(fDMCadPedido: TDMCadPedido ; Tipo, TransfICMS: String; Parcela: Integer; Valor: Real; Data: TDateTime; Prazo: String = '');
+procedure Gravar_Duplicata(fDMCadPedido: TDMCadPedido; Tipo, TransfICMS: String; Parcela: Integer; Valor: Real; Data: TDateTime; Prazo: String = '');
 var
   vAux: Integer;
 begin
@@ -161,7 +160,7 @@ begin
     Result := fDMCadPedido.qVerifica_OCNUM_PEDIDO.AsInteger;
 end;
 
-procedure prc_Gravar(fDMCadPedido: TDMCadPedido ; Tipo: String = '');
+procedure prc_Gravar(fDMCadPedido: TDMCadPedido; Tipo: String = '');
 var
   sds: TSQLDataSet;
   ID: TTransactionDesc;
@@ -181,7 +180,7 @@ var
   fDMEstoque: TDMEstoque;
   vGravou: Boolean;
   vID: Integer;
-  Flag : Boolean;
+  Flag: Boolean;
 begin
   fDMCadPedido.vMSGErro := '';
   vGravou  := False;
@@ -226,15 +225,15 @@ begin
   end;
 
   case vVerificaCampos of
-    1 : begin
+    1: begin
           if (fDMCadPedido.cdsPedidoEMAIL_COMPRAS.AsString = '') and (fDMCadPedido.cdsPedidoDDD.AsInteger <= 0) and (fDMCadPedido.cdsPedidoFONE.AsString = '') then
             fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** E-mail ou Telefone com DDD devem ser informado!'
         end ;
-    2 : begin
+    2: begin
           if (fDMCadPedido.cdsPedidoEMAIL_COMPRAS.AsString = '') then
             fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** E-mail deve ser informado!'
          end;
-    3 : begin
+    3: begin
           if (fDMCadPedido.cdsPedidoDDD.AsInteger <= 0) or (fDMCadPedido.cdsPedidoFONE.AsString = '') then
             fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Telefone com DDD devem ser informado!'
         end;
@@ -639,7 +638,7 @@ begin
 
 end;
 
-procedure Excluir_Duplicata_Ped(ID : Integer);
+procedure Excluir_Duplicata_Ped(ID: Integer);
 var
   sds: TSQLDataSet;
 begin
@@ -659,7 +658,7 @@ var
   ID: TTransactionDesc;
   vFlag: Boolean;
   vID_CliAux: Integer;
-  vIDAux : Integer;
+  vIDAux: Integer;
 begin
   if not(fDMCadPedido.cdsPedido.Active) or (fDMCadPedido.cdsPedido.IsEmpty) then
     exit;
@@ -757,7 +756,7 @@ var
   ID: TTransactionDesc;
   sds: TSQLDataSet;
   Flag: Boolean;
-  vIDPed : Integer;
+  vIDPed: Integer;
 
 begin
   sds     := TSQLDataSet.Create(nil);
@@ -820,10 +819,10 @@ begin
 
 end;
 
-procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido ; ID_Cor, Item, Item_Original : Integer ; Preco, Perc_IPI, Perc_ICMS : Real ;
-                               DtEntrega : TDateTime ; Carimbo,Caixinha : String);
+procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido; ID_Cor, Item, Item_Original: Integer; Preco, Perc_IPI, Perc_ICMS: Real;
+                               DtEntrega: TDateTime; Carimbo, Caixinha: String);
 var
-  vFlag : Boolean;                               
+  vFlag: Boolean;                               
 begin
   vFlag := False;
   fDMCadPedido.cdsPedido_Itens.First;

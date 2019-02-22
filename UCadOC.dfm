@@ -236,7 +236,7 @@ object frmCadOC: TfrmCadOC
           Top = 77
           Width = 252
           Height = 25
-          Caption = '...Aguarde Exclu'#237'ndo...'
+          Caption = '...Aguarde Excluindo...'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clRed
           Font.Height = -20
