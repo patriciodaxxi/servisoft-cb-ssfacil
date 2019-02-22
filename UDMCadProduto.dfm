@@ -10001,4 +10001,23 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'ID_PROCESSO'
     end
   end
+  object qAtualizaPreco: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftCurrency
+        Name = 'P1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID1'
+        ParamType = ptUnknown
+      end>
+    SQL.Strings = (
+      'UPDATE PRODUTO SET PRECO_VENDA = :P1 WHERE ID = :ID1')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1080
+    Top = 424
+  end
 end
