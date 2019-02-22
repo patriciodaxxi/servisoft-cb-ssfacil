@@ -809,6 +809,7 @@ begin
 //////////////////////////////////////////////
   fDMCupomFiscal.cdsCupomFiscalVLR_COFINS.AsFloat   := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_ICMS.AsFloat     := 0;
+  fDMCupomFiscal.cdsCupomFiscalBASE_ICMS.AsFloat    := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_IPI.AsFloat      := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_PIS.AsFloat      := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsFloat := 0;
@@ -1343,7 +1344,7 @@ end;
 
 procedure TfCupomFiscalPgto.prc_AtualizaPrecos(vVlrProdutos, vVlrTotal: Currency);
 var
-  vVlrRestante : Real;
+  vVlrRestante: Real;
 begin
   vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrTotal));
   fDmCupomFiscal.cdsCupom_Itens.First;
