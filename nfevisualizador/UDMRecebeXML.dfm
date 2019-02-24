@@ -166,8 +166,8 @@ object DMRecebeXML: TDMRecebeXML
       'C:\A\Ciex\NFe_01_S001_019000_43170793480192000161550010000190001' +
       '482503669.xml'
     CacheData = True
-    Left = 408
-    Top = 288
+    Left = 400
+    Top = 280
   end
   object cdsCabecalho: TClientDataSet
     Aggregates = <>
