@@ -120,7 +120,6 @@ object frmCadFilial: TfrmCadFilial
             FieldName = 'FONE'
             Title.Alignment = taCenter
             Title.Caption = 'Fone'
-            Width = 64
             Visible = True
           end>
       end
@@ -707,10 +706,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_SPED
+        ActivePage = TS_Dados
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 4
+        TabIndex = 0
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -1539,7 +1538,7 @@ object frmCadFilial: TfrmCadFilial
             Width = 257
             Height = 112
             Caption = ' % Tributos Lei 12.741/12 '
-            TabOrder = 17
+            TabOrder = 16
             object Label54: TLabel
               Left = 13
               Top = 28
@@ -1621,7 +1620,7 @@ object frmCadFilial: TfrmCadFilial
             CharCase = ecUpperCase
             DataField = 'PERC_LISTA_CAMEX'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 16
+            TabOrder = 21
           end
           object RxDBLookupCombo15: TRxDBLookupCombo
             Left = 130
@@ -1642,11 +1641,11 @@ object frmCadFilial: TfrmCadFilial
             Left = 352
             Top = 136
             Width = 97
-            Height = 17
+            Height = 25
             Caption = 'Calcular Difal'
             DataField = 'CALCULAR_DIFAL'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 18
+            TabOrder = 17
             ValueChecked = 'S'
             ValueUnchecked = 'N'
             OnClick = DBCheckBox15Click
@@ -1659,7 +1658,7 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'Gerar valores do Difal'
             DataField = 'DIFAL_GERAR_VALORES'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 19
+            TabOrder = 18
             ValueChecked = 'S'
             ValueUnchecked = 'N'
             OnClick = DBCheckBox16Click
@@ -1672,7 +1671,7 @@ object frmCadFilial: TfrmCadFilial
             DataField = 'OBS_DIFAL'
             DataSource = DMCadFilial.dsFilial
             ScrollBars = ssVertical
-            TabOrder = 20
+            TabOrder = 22
             OnKeyPress = DBMemo1KeyPress
           end
           object DBEdit83: TDBEdit
@@ -1703,7 +1702,7 @@ object frmCadFilial: TfrmCadFilial
             DataField = 'SERIE_CPF'
             DataSource = DMCadFilial.dsFilial
             ReadOnly = True
-            TabOrder = 21
+            TabOrder = 23
           end
           object DBCheckBox22: TDBCheckBox
             Left = 512
@@ -1713,10 +1712,23 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'Ind'#250'stria'
             DataField = 'TIPO_EMP'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 22
+            TabOrder = 20
             ValueChecked = 'S'
             ValueUnchecked = 'N'
             OnClick = DBCheckBox16Click
+          end
+          object DBCheckBox23: TDBCheckBox
+            Left = 352
+            Top = 169
+            Width = 97
+            Height = 17
+            Caption = 'Usa ST Retido ou C'#225'lculo Efetivo'
+            DataField = 'USA_ENVIO_ST_RET'
+            DataSource = DMCadFilial.dsFilial
+            TabOrder = 19
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
+            OnClick = DBCheckBox15Click
           end
         end
         object TS_Parametros: TRzTabSheet

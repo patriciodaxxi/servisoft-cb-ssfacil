@@ -4113,6 +4113,18 @@ object fMenu: TfMenu
         CompName = 'RzCheckList1'
         Caption = 'Imprimir Pre'#231'o Custo/Venda'
         GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto_Imp'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Produtos Impostos'
+      end
+      item
+        FormName = 'frmCadProduto_Imp'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Produtos Impostos'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

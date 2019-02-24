@@ -224,7 +224,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 47
           Top = 23
           Width = 54
-          Height = 19
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'serie'
@@ -243,7 +243,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 159
           Top = 17
           Width = 131
-          Height = 25
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'nNF'
@@ -262,7 +262,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 354
           Top = 17
           Width = 143
-          Height = 25
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'ide_dEmi'
@@ -281,7 +281,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 596
           Top = 23
           Width = 94
-          Height = 19
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'dSaiEnt'
@@ -300,7 +300,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 795
           Top = 23
           Width = 94
-          Height = 19
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'hSaiEnt'
@@ -319,7 +319,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 47
           Top = 66
           Width = 54
-          Height = 19
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'mod'
@@ -338,7 +338,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 353
           Top = 62
           Width = 129
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -354,7 +354,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 554
           Top = 62
           Width = 129
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -370,7 +370,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 783
           Top = 62
           Width = 94
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -386,7 +386,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 353
           Top = 80
           Width = 129
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -402,7 +402,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 7
           Top = 119
           Width = 224
-          Height = 19
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'dhCont'
@@ -421,7 +421,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 7
           Top = 162
           Width = 834
-          Height = 19
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'xJust'
@@ -440,7 +440,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 554
           Top = 80
           Width = 323
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -456,7 +456,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 353
           Top = 41
           Width = 144
-          Height = 19
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'ide_dhemi'
@@ -544,7 +544,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 66
           Top = 21
           Width = 631
-          Height = 19
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'emit_xNome'
@@ -563,7 +563,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 66
           Top = 39
           Width = 164
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -579,7 +579,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 314
           Top = 39
           Width = 129
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -595,7 +595,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 645
           Top = 39
           Width = 52
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -680,7 +680,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 66
           Top = 21
           Width = 631
-          Height = 19
+          Height = 26
           TabStop = False
           Ctl3D = False
           DataField = 'dest_xNome'
@@ -699,7 +699,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 66
           Top = 39
           Width = 164
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -715,7 +715,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 314
           Top = 39
           Width = 129
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -731,7 +731,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 645
           Top = 39
           Width = 52
-          Height = 19
+          Height = 26
           Ctl3D = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -2647,11 +2647,11 @@ object frmRecebeXML: TfrmRecebeXML
         end
         object PageControl1: TPageControl
           Left = 1
-          Top = 268
-          Width = 611
-          Height = 155
-          ActivePage = TabSheet9
-          Align = alLeft
+          Top = 270
+          Width = 1025
+          Height = 153
+          ActivePage = TabSheet8
+          Align = alBottom
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -2670,7 +2670,7 @@ object frmRecebeXML: TfrmRecebeXML
             Font.Style = []
             ParentFont = False
             object Label94: TLabel
-              Left = 78
+              Left = 46
               Top = 10
               Width = 31
               Height = 13
@@ -2678,7 +2678,7 @@ object frmRecebeXML: TfrmRecebeXML
               Caption = 'CFOP:'
             end
             object Label95: TLabel
-              Left = 69
+              Left = 37
               Top = 44
               Width = 40
               Height = 13
@@ -2686,7 +2686,7 @@ object frmRecebeXML: TfrmRecebeXML
               Caption = '% ICMS:'
             end
             object Label99: TLabel
-              Left = 53
+              Left = 21
               Top = 26
               Width = 56
               Height = 13
@@ -2694,15 +2694,15 @@ object frmRecebeXML: TfrmRecebeXML
               Caption = 'Base ICMS:'
             end
             object Label100: TLabel
-              Left = 270
-              Top = 44
+              Left = 30
+              Top = 80
               Width = 47
               Height = 13
               Alignment = taRightJustify
               Caption = 'Vlr. ICMS:'
             end
             object Label101: TLabel
-              Left = 47
+              Left = 15
               Top = 62
               Width = 62
               Height = 13
@@ -2710,23 +2710,15 @@ object frmRecebeXML: TfrmRecebeXML
               Caption = 'Sit.Tribut'#225'ria:'
             end
             object Label104: TLabel
-              Left = 82
-              Top = 80
+              Left = 234
+              Top = 44
               Width = 27
               Height = 13
               Alignment = taRightJustify
               Caption = '% IPI:'
             end
-            object Label105: TLabel
-              Left = 283
-              Top = 80
-              Width = 34
-              Height = 13
-              Alignment = taRightJustify
-              Caption = 'Vlr. IPI:'
-            end
             object Label109: TLabel
-              Left = 264
+              Left = 208
               Top = 26
               Width = 52
               Height = 13
@@ -2734,7 +2726,7 @@ object frmRecebeXML: TfrmRecebeXML
               Caption = 'Sit.Trib.CF:'
             end
             object Label121: TLabel
-              Left = 256
+              Left = 200
               Top = 10
               Width = 61
               Height = 13
@@ -2742,16 +2734,16 @@ object frmRecebeXML: TfrmRecebeXML
               Caption = 'CFOP NFCe:'
             end
             object Label127: TLabel
-              Left = 253
-              Top = 98
+              Left = 397
+              Top = 28
               Width = 64
               Height = 13
               Alignment = taRightJustify
               Caption = 'Vlr. ICMS ST:'
             end
             object Label128: TLabel
-              Left = 72
-              Top = 98
+              Left = 424
+              Top = 10
               Width = 37
               Height = 13
               Alignment = taRightJustify
@@ -2759,16 +2751,96 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label117: TLabel
               Left = 36
-              Top = 118
+              Top = 126
               Width = 73
               Height = 13
               Alignment = taRightJustify
               Caption = 'Tipo Aquisi'#231#227'o:'
             end
+            object Label136: TLabel
+              Left = 417
+              Top = 46
+              Width = 44
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Base ST:'
+            end
+            object Label105: TLabel
+              Left = 227
+              Top = 62
+              Width = 34
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Vlr. IPI:'
+            end
+            object Label137: TLabel
+              Left = 196
+              Top = 80
+              Width = 65
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Vlr. IPI Devol:'
+            end
+            object Label138: TLabel
+              Left = 433
+              Top = 64
+              Width = 28
+              Height = 13
+              Alignment = taRightJustify
+              Caption = '% ST:'
+            end
+            object Label139: TLabel
+              Left = 626
+              Top = 28
+              Width = 67
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Vlr. Base Efet:'
+            end
+            object Label140: TLabel
+              Left = 586
+              Top = 10
+              Width = 107
+              Height = 13
+              Alignment = taRightJustify
+              Caption = '% Base Redu'#231#227'o Efet:'
+            end
+            object Label141: TLabel
+              Left = 631
+              Top = 46
+              Width = 62
+              Height = 13
+              Alignment = taRightJustify
+              Caption = '% ICMS Efet:'
+            end
+            object Label142: TLabel
+              Left = 624
+              Top = 64
+              Width = 69
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Vlr. ICMS Efet:'
+            end
+            object Label143: TLabel
+              Left = 397
+              Top = 86
+              Width = 64
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Base ST Ret:'
+            end
+            object Label144: TLabel
+              Left = 403
+              Top = 104
+              Width = 58
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Vlr. ST Ret.:'
+            end
             object RxDBLookupCombo2: TRxDBLookupCombo
-              Left = 112
+              Left = 80
               Top = 2
-              Width = 121
+              Width = 106
               Height = 19
               DropDownCount = 8
               DropDownWidth = 500
@@ -2784,42 +2856,42 @@ object frmRecebeXML: TfrmRecebeXML
               OnExit = RxDBLookupCombo2Exit
             end
             object DBEdit60: TDBEdit
-              Left = 112
+              Left = 80
               Top = 38
-              Width = 121
+              Width = 106
               Height = 19
               Ctl3D = False
               DataField = 'AliqIcms'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 4
+              TabOrder = 2
             end
             object DBEdit61: TDBEdit
-              Left = 112
+              Left = 80
               Top = 20
-              Width = 121
+              Width = 106
               Height = 19
               Ctl3D = False
               DataField = 'BaseIcms'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 2
+              TabOrder = 1
             end
             object DBEdit62: TDBEdit
-              Left = 320
-              Top = 38
+              Left = 80
+              Top = 74
               Width = 106
               Height = 19
               Ctl3D = False
               DataField = 'VlrIcms'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 5
+              TabOrder = 4
             end
             object RxDBLookupCombo3: TRxDBLookupCombo
-              Left = 112
+              Left = 80
               Top = 56
-              Width = 121
+              Width = 106
               Height = 19
               DropDownCount = 8
               DropDownWidth = 300
@@ -2831,33 +2903,22 @@ object frmRecebeXML: TfrmRecebeXML
               LookupDisplay = 'COD_CST;PERCENTUAL'
               LookupSource = DMRecebeXML.dsTab_CSTICMS
               ParentCtl3D = False
-              TabOrder = 6
+              TabOrder = 3
               OnChange = RxDBLookupCombo3Change
             end
             object DBEdit66: TDBEdit
-              Left = 112
-              Top = 74
-              Width = 121
+              Left = 264
+              Top = 38
+              Width = 106
               Height = 19
               Ctl3D = False
               DataField = 'AliqIPI'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 7
-            end
-            object DBEdit67: TDBEdit
-              Left = 320
-              Top = 74
-              Width = 106
-              Height = 19
-              Ctl3D = False
-              DataField = 'VlrIPI'
-              DataSource = DMRecebeXML.dsmItensNota
-              ParentCtl3D = False
               TabOrder = 8
             end
             object RxDBLookupCombo5: TRxDBLookupCombo
-              Left = 320
+              Left = 264
               Top = 20
               Width = 82
               Height = 19
@@ -2870,11 +2931,11 @@ object frmRecebeXML: TfrmRecebeXML
               LookupDisplay = 'CODIGO'
               LookupSource = DMRecebeXML.dsSitTrib_CF
               ParentCtl3D = False
-              TabOrder = 3
+              TabOrder = 7
               OnChange = RxDBLookupCombo2Change
             end
             object RxDBLookupCombo8: TRxDBLookupCombo
-              Left = 320
+              Left = 264
               Top = 2
               Width = 82
               Height = 19
@@ -2887,36 +2948,36 @@ object frmRecebeXML: TfrmRecebeXML
               LookupDisplay = 'CODCFOP;NOME'
               LookupSource = DMRecebeXML.dsCFOP
               ParentCtl3D = False
-              TabOrder = 1
+              TabOrder = 6
               OnChange = RxDBLookupCombo8Change
             end
             object DBEdit78: TDBEdit
-              Left = 320
-              Top = 92
-              Width = 106
+              Left = 464
+              Top = 22
+              Width = 100
               Height = 19
               Ctl3D = False
               DataField = 'VlrIcmsST'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 10
+              TabOrder = 12
             end
             object DBEdit79: TDBEdit
-              Left = 112
-              Top = 92
-              Width = 121
+              Left = 464
+              Top = 4
+              Width = 100
               Height = 19
               Ctl3D = False
               DataField = 'PercMVAST'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
               ReadOnly = True
-              TabOrder = 9
+              TabOrder = 11
             end
             object RxDBComboBox1: TRxDBComboBox
               Left = 112
-              Top = 110
-              Width = 315
+              Top = 118
+              Width = 257
               Height = 21
               Style = csDropDownList
               Ctl3D = False
@@ -2930,13 +2991,124 @@ object frmRecebeXML: TfrmRecebeXML
                 'Revenda'
                 'Industrializa'#231#227'o')
               ParentCtl3D = False
-              TabOrder = 11
+              TabOrder = 5
               Values.Strings = (
                 'G'
                 'C'
                 'R'
                 'I')
               OnClick = RxDBComboBox1Click
+            end
+            object DBEdit84: TDBEdit
+              Left = 464
+              Top = 40
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'BaseCST'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 13
+            end
+            object DBEdit67: TDBEdit
+              Left = 264
+              Top = 56
+              Width = 106
+              Height = 19
+              Ctl3D = False
+              DataField = 'VlrIPI'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 9
+            end
+            object DBEdit85: TDBEdit
+              Left = 264
+              Top = 74
+              Width = 106
+              Height = 19
+              Ctl3D = False
+              DataField = 'VlrIPI'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 10
+            end
+            object DBEdit86: TDBEdit
+              Left = 464
+              Top = 58
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'PercIcmsST'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 14
+            end
+            object DBEdit87: TDBEdit
+              Left = 696
+              Top = 22
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'Vlr_Base_Efet'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 18
+            end
+            object DBEdit88: TDBEdit
+              Left = 696
+              Top = 4
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'Perc_Base_Red_Efet'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              ReadOnly = True
+              TabOrder = 17
+            end
+            object DBEdit89: TDBEdit
+              Left = 696
+              Top = 40
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'Perc_ICMS_Efet'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 19
+            end
+            object DBEdit90: TDBEdit
+              Left = 696
+              Top = 58
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'Vlr_ICMS_Efet'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 20
+            end
+            object DBEdit91: TDBEdit
+              Left = 464
+              Top = 80
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'BaseCSTRet'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 15
+            end
+            object DBEdit92: TDBEdit
+              Left = 464
+              Top = 98
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'VlrIcmsCSTRet'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 16
             end
           end
           object TabSheet9: TTabSheet
@@ -2949,8 +3121,8 @@ object frmRecebeXML: TfrmRecebeXML
             ImageIndex = 1
             ParentFont = False
             DesignSize = (
-              583
-              147)
+              977
+              145)
             object Label106: TLabel
               Left = 57
               Top = 44
@@ -3220,8 +3392,8 @@ object frmRecebeXML: TfrmRecebeXML
               TabOrder = 12
             end
             object ckAtualizaRef: TCheckBox
-              Left = 274
-              Top = 20
+              Left = 660
+              Top = 12
               Width = 125
               Height = 17
               Anchors = [akTop, akRight]
@@ -3405,253 +3577,249 @@ object frmRecebeXML: TfrmRecebeXML
               OnEnter = RxDBLookupCombo4Enter
             end
           end
-        end
-        object Panel9: TPanel
-          Left = 612
-          Top = 268
-          Width = 414
-          Height = 155
-          Align = alClient
-          TabOrder = 3
-          object Label123: TLabel
-            Left = 10
-            Top = 134
-            Width = 83
-            Height = 13
-            Alignment = taRightJustify
-            Caption = '% Margem Pre'#231'o:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label131: TLabel
-            Left = 244
-            Top = 134
-            Width = 57
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Custo Total:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-          end
-          object GroupBox5: TGroupBox
-            Left = 8
-            Top = 4
-            Width = 161
-            Height = 69
-            Caption = ' Vlr. do Frete da Nota '
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 0
-            object Label126: TLabel
-              Left = 8
-              Top = 40
-              Width = 132
-              Height = 26
-              Caption = 'Esse valor n'#227'o vem na nota'#13#10'Precisa ser informado'
+          object TS_Calculo: TTabSheet
+            Caption = 'C'#225'lculos'
+            ImageIndex = 2
+            object Label123: TLabel
+              Left = 10
+              Top = 132
+              Width = 83
+              Height = 13
+              Alignment = taRightJustify
+              Caption = '% Margem Pre'#231'o:'
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = clMaroon
+              Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
               ParentFont = False
             end
-            object ceVlrFrete_Nota: TCurrencyEdit
-              Left = 24
-              Top = 16
-              Width = 121
-              Height = 21
-              AutoSize = False
-              DisplayFormat = '0.00'
-              TabOrder = 0
+            object Label131: TLabel
+              Left = 268
+              Top = 134
+              Width = 57
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Custo Total:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
             end
-          end
-          object DBCheckBox2: TDBCheckBox
-            Left = 13
-            Top = 83
-            Width = 145
-            Height = 17
-            Caption = 'Atualizar Pre'#231'o Compra'
-            DataField = 'AtualizarPreco'
-            DataSource = DMRecebeXML.dsmItensNota
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 1
-            ValueChecked = 'True'
-            ValueUnchecked = 'False'
-          end
-          object DBCheckBox3: TDBCheckBox
-            Left = 13
-            Top = 100
-            Width = 196
-            Height = 17
-            Caption = 'Atualizar Custo Total'
-            DataField = 'AtualizarCustoTotal'
-            DataSource = DMRecebeXML.dsmItensNota
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 2
-            ValueChecked = 'True'
-            ValueUnchecked = 'False'
-            OnClick = DBCheckBox3Click
-          end
-          object DBEdit75: TDBEdit
-            Left = 97
-            Top = 128
-            Width = 81
-            Height = 19
-            Ctl3D = False
-            DataField = 'Perc_Margem'
-            DataSource = DMRecebeXML.dsmItensNota
-            ParentCtl3D = False
-            TabOrder = 3
-          end
-          object DBCheckBox4: TDBCheckBox
-            Left = 181
-            Top = 73
-            Width = 196
-            Height = 17
-            Caption = 'Subtrair o ICMS do Custo do Produto'
-            DataField = 'SUB_ICMS_CUSTO'
-            DataSource = DMRecebeXML.dsmItensNota
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 4
-            ValueChecked = 'S'
-            ValueUnchecked = 'N'
-          end
-          object DBCheckBox5: TDBCheckBox
-            Left = 181
-            Top = 105
-            Width = 236
-            Height = 17
-            Caption = 'Subtrair o Pis/Cofins do Custo do Produto'
-            DataField = 'SUB_PISCOFINS_CUSTO'
-            DataSource = DMRecebeXML.dsmItensNota
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 5
-            ValueChecked = 'S'
-            ValueUnchecked = 'N'
-          end
-          object DBCheckBox6: TDBCheckBox
-            Left = 181
-            Top = 11
-            Width = 196
-            Height = 17
-            Caption = 'Somar IPI no custo'
-            DataField = 'SOMAR_IPI_NO_CUSTO'
-            DataSource = DMRecebeXML.dsmItensNota
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 6
-            ValueChecked = 'S'
-            ValueUnchecked = 'N'
-          end
-          object DBCheckBox7: TDBCheckBox
-            Left = 181
-            Top = 27
-            Width = 196
-            Height = 17
-            Caption = 'Somar Frete no custo'
-            DataField = 'SOMAR_FRETE_NO_CUSTO'
-            DataSource = DMRecebeXML.dsmItensNota
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 7
-            ValueChecked = 'S'
-            ValueUnchecked = 'N'
-          end
-          object DBCheckBox8: TDBCheckBox
-            Left = 181
-            Top = 42
-            Width = 196
-            Height = 17
-            Caption = 'Somar ST no custo'
-            DataField = 'SOMAR_ST_NO_CUSTO'
-            DataSource = DMRecebeXML.dsmItensNota
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 8
-            ValueChecked = 'S'
-            ValueUnchecked = 'N'
-          end
-          object DBCheckBox9: TDBCheckBox
-            Left = 181
-            Top = 88
-            Width = 236
-            Height = 17
-            Caption = 'Subtrair o IPI do Custo do Produto'
-            DataField = 'SUB_PISCOFINS_CUSTO'
-            DataSource = DMRecebeXML.dsmItensNota
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 9
-            ValueChecked = 'S'
-            ValueUnchecked = 'N'
-          end
-          object DBEdit73: TDBEdit
-            Left = 305
-            Top = 128
-            Width = 81
-            Height = 19
-            Ctl3D = False
-            DataField = 'Preco_Custo_Total'
-            DataSource = DMRecebeXML.dsmItensNota
-            ParentCtl3D = False
-            TabOrder = 10
-          end
-          object BitBtn5: TBitBtn
-            Left = 320
-            Top = 32
-            Width = 75
-            Height = 25
-            Caption = 'Recalcular'
-            TabOrder = 11
-            OnClick = BitBtn5Click
+            object GroupBox5: TGroupBox
+              Left = 8
+              Top = 4
+              Width = 161
+              Height = 69
+              Caption = ' Vlr. do Frete da Nota '
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              object Label126: TLabel
+                Left = 8
+                Top = 40
+                Width = 132
+                Height = 26
+                Caption = 'Esse valor n'#227'o vem na nota'#13#10'Precisa ser informado'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clMaroon
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+              end
+              object ceVlrFrete_Nota: TCurrencyEdit
+                Left = 24
+                Top = 16
+                Width = 121
+                Height = 21
+                AutoSize = False
+                DisplayFormat = '0.00'
+                TabOrder = 0
+              end
+            end
+            object DBCheckBox3: TDBCheckBox
+              Left = 13
+              Top = 100
+              Width = 196
+              Height = 17
+              Caption = 'Atualizar Custo Total'
+              DataField = 'AtualizarCustoTotal'
+              DataSource = DMRecebeXML.dsmItensNota
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 1
+              ValueChecked = 'True'
+              ValueUnchecked = 'False'
+              OnClick = DBCheckBox3Click
+            end
+            object DBCheckBox2: TDBCheckBox
+              Left = 13
+              Top = 83
+              Width = 145
+              Height = 17
+              Caption = 'Atualizar Pre'#231'o Compra'
+              DataField = 'AtualizarPreco'
+              DataSource = DMRecebeXML.dsmItensNota
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 2
+              ValueChecked = 'True'
+              ValueUnchecked = 'False'
+            end
+            object DBEdit75: TDBEdit
+              Left = 97
+              Top = 123
+              Width = 81
+              Height = 22
+              Ctl3D = False
+              DataField = 'Perc_Margem'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 3
+            end
+            object DBCheckBox4: TDBCheckBox
+              Left = 205
+              Top = 73
+              Width = 196
+              Height = 17
+              Caption = 'Subtrair o ICMS do Custo do Produto'
+              DataField = 'SUB_ICMS_CUSTO'
+              DataSource = DMRecebeXML.dsmItensNota
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 4
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+            end
+            object DBCheckBox5: TDBCheckBox
+              Left = 205
+              Top = 105
+              Width = 236
+              Height = 17
+              Caption = 'Subtrair o Pis/Cofins do Custo do Produto'
+              DataField = 'SUB_PISCOFINS_CUSTO'
+              DataSource = DMRecebeXML.dsmItensNota
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 5
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+            end
+            object DBCheckBox6: TDBCheckBox
+              Left = 205
+              Top = 11
+              Width = 196
+              Height = 17
+              Caption = 'Somar IPI no custo'
+              DataField = 'SOMAR_IPI_NO_CUSTO'
+              DataSource = DMRecebeXML.dsmItensNota
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 6
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+            end
+            object DBCheckBox7: TDBCheckBox
+              Left = 205
+              Top = 27
+              Width = 196
+              Height = 17
+              Caption = 'Somar Frete no custo'
+              DataField = 'SOMAR_FRETE_NO_CUSTO'
+              DataSource = DMRecebeXML.dsmItensNota
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 7
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+            end
+            object DBCheckBox8: TDBCheckBox
+              Left = 205
+              Top = 42
+              Width = 196
+              Height = 17
+              Caption = 'Somar ST no custo'
+              DataField = 'SOMAR_ST_NO_CUSTO'
+              DataSource = DMRecebeXML.dsmItensNota
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 8
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+            end
+            object DBCheckBox9: TDBCheckBox
+              Left = 205
+              Top = 88
+              Width = 236
+              Height = 17
+              Caption = 'Subtrair o IPI do Custo do Produto'
+              DataField = 'SUB_PISCOFINS_CUSTO'
+              DataSource = DMRecebeXML.dsmItensNota
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 9
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+            end
+            object DBEdit73: TDBEdit
+              Left = 329
+              Top = 125
+              Width = 81
+              Height = 22
+              Ctl3D = False
+              DataField = 'Preco_Custo_Total'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 10
+            end
+            object BitBtn5: TBitBtn
+              Left = 352
+              Top = 32
+              Width = 75
+              Height = 25
+              Caption = 'Recalcular'
+              TabOrder = 11
+              OnClick = BitBtn5Click
+            end
           end
         end
       end

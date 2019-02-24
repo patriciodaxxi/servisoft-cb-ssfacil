@@ -1,7 +1,7 @@
 unit uRecebeXML;
 
 interface
-
+                      
 uses
   inifiles, Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, xmldom, Grids, DBGrids, DB,
   Xmlxform, ExtCtrls, StdCtrls, ComCtrls, Mask, DBCtrls, RXDBCtrl, SMDBGrid, Buttons, DBTables, ToolEdit, RxLookup, DBXpress,
@@ -260,14 +260,12 @@ type
     Label100: TLabel;
     Label101: TLabel;
     Label104: TLabel;
-    Label105: TLabel;
     RxDBLookupCombo2: TRxDBLookupCombo;
     DBEdit60: TDBEdit;
     DBEdit61: TDBEdit;
     DBEdit62: TDBEdit;
     RxDBLookupCombo3: TRxDBLookupCombo;
     DBEdit66: TDBEdit;
-    DBEdit67: TDBEdit;
     Label109: TLabel;
     RxDBLookupCombo5: TRxDBLookupCombo;
     Label121: TLabel;
@@ -301,29 +299,12 @@ type
     ckAtualizaRef: TCheckBox;
     btnConfirmar: TNxButton;
     Label48: TLabel;
-    Panel9: TPanel;
-    Label123: TLabel;
-    GroupBox5: TGroupBox;
-    Label126: TLabel;
-    ceVlrFrete_Nota: TCurrencyEdit;
-    DBCheckBox2: TDBCheckBox;
-    DBCheckBox3: TDBCheckBox;
-    DBEdit75: TDBEdit;
     Label129: TLabel;
     DBEdit80: TDBEdit;
     Label130: TLabel;
     DBEdit81: TDBEdit;
-    DBCheckBox4: TDBCheckBox;
-    DBCheckBox5: TDBCheckBox;
-    DBCheckBox6: TDBCheckBox;
-    DBCheckBox7: TDBCheckBox;
-    DBCheckBox8: TDBCheckBox;
     SpeedButton2: TSpeedButton;
     ckUsaNome: TCheckBox;
-    DBCheckBox9: TDBCheckBox;
-    Label131: TLabel;
-    DBEdit73: TDBEdit;
-    BitBtn5: TBitBtn;
     DBCheckBox10: TDBCheckBox;
     ckAssociar: TCheckBox;
     Label132: TLabel;
@@ -344,6 +325,43 @@ type
     Label125: TLabel;
     Label135: TLabel;
     RxDBLookupCombo10: TRxDBLookupCombo;
+    TS_Calculo: TTabSheet;
+    GroupBox5: TGroupBox;
+    Label126: TLabel;
+    ceVlrFrete_Nota: TCurrencyEdit;
+    DBCheckBox3: TDBCheckBox;
+    DBCheckBox2: TDBCheckBox;
+    Label123: TLabel;
+    DBEdit75: TDBEdit;
+    Label131: TLabel;
+    DBCheckBox4: TDBCheckBox;
+    DBCheckBox5: TDBCheckBox;
+    DBCheckBox6: TDBCheckBox;
+    DBCheckBox7: TDBCheckBox;
+    DBCheckBox8: TDBCheckBox;
+    DBCheckBox9: TDBCheckBox;
+    DBEdit73: TDBEdit;
+    BitBtn5: TBitBtn;
+    Label136: TLabel;
+    DBEdit84: TDBEdit;
+    Label105: TLabel;
+    DBEdit67: TDBEdit;
+    Label137: TLabel;
+    DBEdit85: TDBEdit;
+    Label138: TLabel;
+    DBEdit86: TDBEdit;
+    Label139: TLabel;
+    Label140: TLabel;
+    DBEdit87: TDBEdit;
+    DBEdit88: TDBEdit;
+    Label141: TLabel;
+    DBEdit89: TDBEdit;
+    Label142: TLabel;
+    DBEdit90: TDBEdit;
+    Label143: TLabel;
+    DBEdit91: TDBEdit;
+    Label144: TLabel;
+    DBEdit92: TDBEdit;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -486,6 +504,7 @@ type
     procedure prc_Abrir_OC;
     function fnc_Proxima_Ref : Integer;
     procedure prc_Gerar_Ref;
+    procedure prc_Gravar_Produto_Imp;
 
   public
     { Public declarations }
@@ -989,6 +1008,12 @@ begin
       Move_Campos(vTipoIcms+'pRedBC','PercRedIcms','N');
       Move_Campos(vTipoIcms+'vBCSTRet','BaseCSTRet','N');
       Move_Campos(vTipoIcms+'vICMSSTRet','VlrIcmsCSTRet','N');
+      Move_Campos(vTipoIcms+'pST','PercIcmsST','N');
+      Move_Campos(vTipoIcms+'pRedBCEfet','Perc_Base_Red_Efet','N');
+      Move_Campos(vTipoIcms+'vBCEfet','Vlr_Base_Efet','N');
+      Move_Campos(vTipoIcms+'pICMSEfet','Perc_ICMS_Efet','N');
+      Move_Campos(vTipoIcms+'vICMSEfet','Vlr_ICMS_Efet','N');
+
       if fDMRecebeXML.mItensNotaOrigem.AsString = '' then
         fDMRecebeXML.mItensNotaOrigem.AsString := '0';
     end
@@ -1010,6 +1035,7 @@ begin
         fDMRecebeXML.mItensNotaModIcmsST.AsString          := '';
         fDMRecebeXML.mItensNotaBaseCSTRet.AsFloat          := fDMRecebeXML.cdsDetalheICMSST_vBCSTRet.AsFloat;
         fDMRecebeXML.mItensNotaVlrIcmsCSTRet.AsFloat       := fDMRecebeXML.cdsDetalheICMSST_vICMSSTRet.AsFloat;
+
 
         //Move_Campos(vTipoIcms+'pMVAST','PercMVAST','N');
         //Move_Campos(vTipoIcms+'pRedBCST','PercRedBCST','N');
@@ -1047,6 +1073,13 @@ begin
       ///Move_Campos(vTipoIcms+'pRedBC','PercRedIcms');
       Move_Campos(vTipoIcms+'vBCSTRet','BaseCSTRet','N');
       Move_Campos(vTipoIcms+'vICMSSTRet','VlrIcmsCSTRet','N');
+
+      Move_Campos(vTipoIcms+'pST','PercIcmsST','N');
+      Move_Campos(vTipoIcms+'pRedBCEfet','Perc_Base_Red_Efet','N');
+      Move_Campos(vTipoIcms+'vBCEfet','Vlr_Base_Efet','N');
+      Move_Campos(vTipoIcms+'pICMSEfet','Perc_ICMS_Efet','N');
+      Move_Campos(vTipoIcms+'vICMSEfet','Vlr_ICMS_Efet','N');
+
     end;
   end;
 
@@ -2280,13 +2313,22 @@ begin
     fDMRecebeXML.cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED.AsFloat := fDMRecebeXML.mItensNotaPercRedBCST.AsFloat;
     //fDMRecebeXML.cdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST.AsFloat := fDMRecebeXML.mItensNotaperc
     fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat         := fDMRecebeXML.mItensNotaBaseCST.AsFloat;
-    fDMRecebeXML.cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO.AsFloat := fDMRecebeXML.mItensNotaPercIcmsST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO.AsFloat := fDMRecebeXML.mItensNotaPercIcmsST.AsFloat; //pst
     fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsFloat          := fDMRecebeXML.mItensNotaVlrIcmsST.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensPERC_BASE_ICMS_RED.AsFloat     := fDMRecebeXML.mItensNotaPercRedIcms.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat     := fDMRecebeXML.mItensNotaBaseCSTRet.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat      := fDMRecebeXML.mItensNotaVlrIcmsCSTRet.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensPERC_MVA.AsFloat                := fDMRecebeXML.mItensNotaPercMVAST.AsFloat;
     //****************
+
+    //24/02/2019
+    fDMRecebeXML.cdsNotaFiscal_ItensVLR_IPI_DEVOL.AsFloat := fDMRecebeXML.mItensNotaVlr_IPI_Devol.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_DEVOL.AsFloat    := fDMRecebeXML.mItensNotaPerc_Devol.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_BASE_RED_EFET.AsFloat := fDMRecebeXML.mItensNotaPerc_Base_Red_Efet.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat      := fDMRecebeXML.mItensNotaVlr_Base_Efet.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_ICMS_EFET.AsFloat     := fDMRecebeXML.mItensNotaPerc_ICMS_Efet.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat      := fDMRecebeXML.mItensNotaVlr_ICMS_Efet.AsFloat;
+    //******************
 
     if trim(fDMRecebeXML.mItensNotaTipoVenda.AsString) <> '' then
       fDMRecebeXML.cdsNotaFiscal_ItensFINALIDADE.AsString := fDMRecebeXML.mItensNotaTipoVenda.AsString;
@@ -2839,15 +2881,22 @@ begin
         end;
         //******************
 
+        //24/02/2019
+        prc_Gravar_Produto_Imp;
+        //******************
+
         fDMRecebeXML.cdsNotaFiscal_Itens.Edit;
         fDMRecebeXML.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
         fDMRecebeXML.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger  := vID_Mov;
         fDMRecebeXML.cdsNotaFiscal_Itens.Post;
         fDMRecebeXML.mItensNota.Next;
+
       end;
     end;
 
     fDMRecebeXML.cdsNotaFiscal.ApplyUpdates(0);
+
+
 
     pcDados.ActivePage := TabSheet5;
 
@@ -4116,6 +4165,69 @@ end;
 procedure TfrmRecebeXML.DBEdit82Exit(Sender: TObject);
 begin
   prc_Monta_ContaOrc('N');
+end;
+
+procedure TfrmRecebeXML.prc_Gravar_Produto_Imp;
+var
+  vQtdAux : Real;
+begin
+  if fDMRecebeXML.cdsFilialUSA_ENVIO_ST_RET.AsString <> 'S' then
+    exit;
+
+  if (StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat)) <= 0) and
+     (StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat)) <= 0) and
+     (StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsFloat)) <= 0) then
+    exit;
+
+  fDMRecebeXML.cdsProduto_Imp.Close;
+  fDMRecebeXML.sdsProduto_Imp.ParamByName('ID').AsInteger := fDMRecebeXML.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
+  fDMRecebeXML.cdsProduto_Imp.Open;
+
+  if (fDMRecebeXML.cdsProduto_Imp.IsEmpty) then
+    fDMRecebeXML.cdsProduto_Imp.Insert
+  else
+  begin
+    if fDMRecebeXML.cdsProduto_Imp.Data <= fDMRecebeXML.cdsNotaFiscalDTEMISSAO.AsDateTime then
+      fDMRecebeXML.cdsProduto_Imp.Edit
+    else
+      exit;
+  end;
+
+  if fDMRecebeXML.cdsProduto_Imp.State in [dsInsert] then
+    fDMRecebeXML.cdsProduto_ImpID.AsInteger := fDMRecebeXML.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
+
+  fDMRecebeXML.cdsProduto_ImpDATA.AsDateTime := fDMRecebeXML.cdsNotaFiscalDTEMISSAO.AsDateTime;
+
+  if StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat)) > 0 then
+  begin
+    fDMRecebeXML.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat;
+    fDMRecebeXML.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat;
+  end
+  else
+  if StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat)) > 0 then
+  begin
+    fDMRecebeXML.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := fDMRecebeXML.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat;
+    fDMRecebeXML.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat;
+  end
+  else
+  if StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat)) > 0 then
+  begin
+    fDMRecebeXML.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat;
+    fDMRecebeXML.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsFloat;
+  end;
+  fDMRecebeXML.cdsProduto_ImpQTD_ORIGINAL.AsFloat  := StrToFloat(FormatFloat('0.0000',fDMRecebeXML.cdsNotaFiscal_ItensQTD.AsFloat));
+  fDMRecebeXML.cdsProduto_ImpUNIDADE_ORIG.AsString := fDMRecebeXML.cdsNotaFiscal_ItensUNIDADE.AsString;
+  fDMRecebeXML.cdsProduto_ImpQTD_PACOTE.AsFloat    := StrToCurr(FormatCurr('0.00000',fDMRecebeXML.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat));
+
+  vQtdAux := StrToFloat(FormatFloat('0.0000',fDMRecebeXML.cdsProduto_ImpQTD_ORIGINAL.AsFloat));
+  if (StrToFloat(FormatFloat('0.00000',fDMRecebeXML.cdsProduto_ImpQTD_PACOTE.AsFloat)) <> 0) and (StrToFloat(FormatFloat('0.00000',fDMRecebeXML.cdsProduto_ImpQTD_PACOTE.AsFloat)) <> 1) then
+    vQtdAux := StrToCurr(FormatCurr('0.00000',fDMRecebeXML.cdsProduto_ImpQTD_ORIGINAL.AsFloat * fDMRecebeXML.cdsProduto_ImpQTD_PACOTE.AsFloat));
+
+  fDMRecebeXML.cdsProduto_ImpBASE_ST.AsFloat := StrToCurr(FormatCurr('0.00000',fDMRecebeXML.cdsProduto_ImpBASE_ST_ORIG.AsFloat / vQtdAux));
+  fDMRecebeXML.cdsProduto_ImpVLR_ST.AsFloat  := StrToCurr(FormatCurr('0.00000',fDMRecebeXML.cdsProduto_ImpVLR_ST_ORIG.AsFloat / vQtdAux));
+
+  fDMRecebeXML.cdsProduto_Imp.Post;
+  fDMRecebeXML.cdsProduto_Imp.ApplyUpdates(0);
 end;
 
 end.

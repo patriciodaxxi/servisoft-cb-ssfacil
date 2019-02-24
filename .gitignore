@@ -66,3 +66,5 @@ __recovery/
 *.stat
 URelPedido.ddp
 *.ddp
+SSFacil_Ant.dof
+SSFacil_ant.res
