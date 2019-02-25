@@ -235,7 +235,7 @@ type
     vQtd_Material: Integer;
     vState: String;
     vCarimbo_Ant, vRemessa_Ant: String;
-    vCaixinha_Ant: String;
+    vCaixinha_Ant : String;
     vQtd_Prod_Ant: Real;
     vVlr_Unitario_Ant: Real;
     vID_Produto_Ant: Integer;
@@ -247,8 +247,8 @@ type
     vID_Servico_Ant: Integer;
     vUnidade_Ant: String;
 
-    vVlrTotal_Ant: Real;
-    vPerc_IPI_Ant: Real;
+    vVlrTotal_Ant : Real;
+    vPerc_IPI_Ant : Real;
 
     procedure prc_Buscar_Imposto(Auxiliar, Nome: String);
     procedure prc_Calcular_VlrMat;
@@ -271,7 +271,7 @@ type
     procedure prc_Sel_Unidade(Venda: Boolean = False);
     procedure prc_Calcular_VlrItens;
     procedure prc_Opcao_TipoOS;
-    procedure prc_Gravar_mItens2(Item: Integer);
+    procedure prc_Gravar_mItens2(Item : Integer);
     procedure prc_Calcula_IPI_Pago_Empresa;
     function prc_Senha_Desconto: Boolean;
     function fnc_Busca_Preco_Orig: Real;
@@ -286,7 +286,7 @@ type
     vGravacao_Ok: Boolean;
 
     procedure prc_Move_Dados_Itens;
-    function fnc_Estoque_OK(ID_Produto, ID_Cor: Integer; Tamanho: String; Qtd: Real): Boolean;
+    function fnc_Estoque_OK(ID_Produto, ID_Cor: Integer ; Tamanho: String ; Qtd: Real): Boolean;
 
   end;
 
@@ -574,7 +574,7 @@ var
   vPerc_Icms_Suf, vPerc_Cofins_Suf, vPerc_Pis_Suf, vPerc_IPI_Suf: Real;
   vAux: Real;
   vUsouICM: Boolean;
-  vIDAux: Integer;
+  vIDAux : Integer;
 begin
   vID_ICMS := 0;
   vID_IPI  := 0;
@@ -1647,10 +1647,10 @@ var
   vQtdAux,
   vOriginal,
   vQtdTalao,
-  vItemOriginal: Integer;
-  vFLag: Boolean;
-  vQtdTotal: Integer;
-  vQtdUsar: Integer;
+  vItemOriginal : Integer;
+  vFLag : Boolean;
+  vQtdTotal : Integer;
+  vQtdUsar : Integer;
 begin
   // 05/01/2019 Lotus
   if (fDMCadPedido.qParametros_PedINF_QTD_TALAO.AsString = 'S') and (fDMInformar_Tam.vQtd_Por_Talao > 0) then
@@ -1863,8 +1863,8 @@ end;
 procedure TfrmCadPedido_Itens.prc_Gravar_mItens;
 var
   x: Integer;
-  vQtdAux: Integer;
-  vContTalao: Integer;
+  vQtdAux : Integer;
+  vContTalao : Integer;
 begin
   fDMInformar_Tam.mItens.EmptyDataSet;
   fDMInformar_Tam.mPedido_Cli.EmptyDataSet;
@@ -2220,11 +2220,11 @@ var
   vId_CombinacaoAux: Integer;
   vAux: Integer;
   vCarimboAux, vRemessaAux: String;
-  vCaixinhaAux: String;
+  vCaixinhaAux : String;
   vVlr_Unitario_Aux: Real;
   vID_Terceiro_Aux: Integer;
   vDTEntrega_Aux: TDateTime;
-  vFlag: Boolean;
+  vFlag : Boolean;
 begin
   if fDMCadPedido.cdsPedido_Itens.RecordCount <= 1 then
     exit;
@@ -2697,9 +2697,9 @@ begin
   end;
 end;
 
-procedure TfrmCadPedido_Itens.prc_Gravar_mItens2(Item: Integer);
+procedure TfrmCadPedido_Itens.prc_Gravar_mItens2(Item : Integer);
 var
-  x: Integer;
+  x : Integer;
 begin
   fDMInformar_Tam.mItens.Insert;
   for x := 0 to (fDMCadPedido.cdsPedido_Itens.FieldCount - 1) do
@@ -2715,8 +2715,8 @@ end;
 
 procedure TfrmCadPedido_Itens.prc_Calcula_IPI_Pago_Empresa;
 var
-  vVlrAux: Real;
-  vIPIAux: Real;
+  vVlrAux : Real;
+  vIPIAux : Real;
 begin
   vVlrAux := fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat * fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat;
   vIPIAux := fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat +

@@ -1824,6 +1824,18 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object sdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
       FieldName = 'PERC_BASE_ICMSSUBT_RED'
     end
+    object sdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField
+      FieldName = 'PERC_BASE_RED_EFET'
+    end
+    object sdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField
+      FieldName = 'PERC_ICMS_EFET'
+    end
+    object sdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -2496,6 +2508,18 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
       FieldName = 'PERC_BASE_ICMSSUBT_RED'
+    end
+    object cdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField
+      FieldName = 'PERC_BASE_RED_EFET'
+    end
+    object cdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField
+      FieldName = 'PERC_ICMS_EFET'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
     end
   end
   object dsNotaFiscal_Itens: TDataSource
@@ -4812,6 +4836,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsFilialFINALIDADE_PADRAO: TStringField
       FieldName = 'FINALIDADE_PADRAO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilialUSA_ENVIO_ST_RET: TStringField
+      FieldName = 'USA_ENVIO_ST_RET'
       FixedChar = True
       Size = 1
     end
@@ -10358,8 +10387,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'LEFT JOIN TAB_NCM N'
       'ON I.CODIGO = N.NCM')
     SQLConnection = dmDatabase.scoDados
-    Left = 1144
-    Top = 516
+    Left = 1216
+    Top = 196
     object qIBPTPERC_NACIONAL: TFloatField
       FieldName = 'PERC_NACIONAL'
     end
@@ -10414,8 +10443,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '     AND P.TAMANHO = :TAMANHO'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 1096
-    Top = 516
+    Left = 992
+    Top = 148
     object qPeso_TamPESO_LIQUIDO: TFloatField
       FieldName = 'PESO_LIQUIDO'
       DisplayFormat = '0.000000'
@@ -10658,8 +10687,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'WHERE DE.TIPO_PRODUTO = '#39'I'#39
       '  AND DE.COD_CFOP_ENT = :COD_CFOP_ENT')
     SQLConnection = dmDatabase.scoDados
-    Left = 1192
-    Top = 516
+    Left = 1224
+    Top = 100
     object qDePara_CFOPID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -13351,8 +13380,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_USUARIO'
       'WHERE USUARIO = :USUARIO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1032
-    Top = 536
+    Left = 976
+    Top = 16
     object qParametros_UsuarioID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14766,5 +14795,229 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSet = cdsProduto_Comb
     Left = 945
     Top = 649
+  end
+  object mProdAux: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'ID_Produto'
+        DataType = ftInteger
+      end>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end>
+    IndexFieldNames = 'ID_Produto'
+    Params = <>
+    StoreDefs = True
+    Left = 768
+    Top = 376
+    Data = {
+      430000009619E0BD01000000180000000100000000000300000043000A49445F
+      50726F6475746F040001000000000001000D44454641554C545F4F5244455202
+      00820000000000}
+    object mProdAuxID_Produto: TIntegerField
+      FieldName = 'ID_Produto'
+    end
+  end
+  object qNTEProdImp: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUTO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      
+        'SELECT FIRST 1 N.ID, N.dtemissao, I.id_produto, I.qtd, I.qtd_pac' +
+        'ote, I.vlr_unitario, I.vlr_icmssubst,'
+      
+        'I.vlr_icmssubst_ret, I.vlr_icms_efet, I.base_icms, I.base_icmssu' +
+        'bst, I.base_icmssubst_ret,'
+      
+        'I.vlr_base_efet, I.perc_icmssubst_interno, P.DATA, P.base_st_ori' +
+        'g, i.unidade'
+      'FROM  NOTAFISCAL N'
+      'INNER JOIN NOTAFISCAL_ITENS I'
+      'LEFT JOIN PRODUTO_IMP P'
+      'ON I.ID_PRODUTO = P.ID'
+      'ON N.ID = I.ID'
+      'WHERE I.id_produto = :ID_PRODUTO'
+      '  AND N.TIPO_REG = '#39'NTE'#39
+      '  and ((coalesce(i.base_icmssubst,0) > 0)'
+      '     or (coalesce(i.base_icmssubst_ret,0) > 0)'
+      '     or (coalesce(i.vlr_base_efet,0) > 0))'
+      'ORDER BY N.dtemissao DESC'
+      ''
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 768
+    Top = 600
+    object qNTEProdImpID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qNTEProdImpDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object qNTEProdImpID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object qNTEProdImpQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object qNTEProdImpQTD_PACOTE: TFloatField
+      FieldName = 'QTD_PACOTE'
+    end
+    object qNTEProdImpVLR_UNITARIO: TFloatField
+      FieldName = 'VLR_UNITARIO'
+    end
+    object qNTEProdImpVLR_ICMSSUBST: TFloatField
+      FieldName = 'VLR_ICMSSUBST'
+    end
+    object qNTEProdImpVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object qNTEProdImpVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
+    end
+    object qNTEProdImpBASE_ICMS: TFloatField
+      FieldName = 'BASE_ICMS'
+    end
+    object qNTEProdImpBASE_ICMSSUBST: TFloatField
+      FieldName = 'BASE_ICMSSUBST'
+    end
+    object qNTEProdImpBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object qNTEProdImpVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object qNTEProdImpPERC_ICMSSUBST_INTERNO: TFloatField
+      FieldName = 'PERC_ICMSSUBST_INTERNO'
+    end
+    object qNTEProdImpDATA: TDateField
+      FieldName = 'DATA'
+    end
+    object qNTEProdImpBASE_ST_ORIG: TFloatField
+      FieldName = 'BASE_ST_ORIG'
+    end
+    object qNTEProdImpUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+  end
+  object sdsProduto_Imp: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM PRODUTO_IMP'#13#10'WHERE ID = :ID'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 1016
+    Top = 520
+    object sdsProduto_ImpID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsProduto_ImpBASE_ST: TFloatField
+      FieldName = 'BASE_ST'
+    end
+    object sdsProduto_ImpVLR_ST: TFloatField
+      FieldName = 'VLR_ST'
+    end
+    object sdsProduto_ImpPERC_ST: TFloatField
+      FieldName = 'PERC_ST'
+    end
+    object sdsProduto_ImpDATA: TDateField
+      FieldName = 'DATA'
+    end
+    object sdsProduto_ImpQTD_ORIGINAL: TFloatField
+      FieldName = 'QTD_ORIGINAL'
+    end
+    object sdsProduto_ImpUNIDADE_ORIG: TStringField
+      FieldName = 'UNIDADE_ORIG'
+      Size = 6
+    end
+    object sdsProduto_ImpTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      Size = 1
+    end
+    object sdsProduto_ImpBASE_ST_ORIG: TFloatField
+      FieldName = 'BASE_ST_ORIG'
+    end
+    object sdsProduto_ImpVLR_ST_ORIG: TFloatField
+      FieldName = 'VLR_ST_ORIG'
+    end
+    object sdsProduto_ImpQTD_PACOTE: TFloatField
+      FieldName = 'QTD_PACOTE'
+    end
+  end
+  object dspProduto_Imp: TDataSetProvider
+    DataSet = sdsProduto_Imp
+    UpdateMode = upWhereKeyOnly
+    Left = 1048
+    Top = 520
+  end
+  object cdsProduto_Imp: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspProduto_Imp'
+    Left = 1080
+    Top = 520
+    object cdsProduto_ImpID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsProduto_ImpBASE_ST: TFloatField
+      FieldName = 'BASE_ST'
+    end
+    object cdsProduto_ImpVLR_ST: TFloatField
+      FieldName = 'VLR_ST'
+    end
+    object cdsProduto_ImpPERC_ST: TFloatField
+      FieldName = 'PERC_ST'
+    end
+    object cdsProduto_ImpDATA: TDateField
+      FieldName = 'DATA'
+    end
+    object cdsProduto_ImpQTD_ORIGINAL: TFloatField
+      FieldName = 'QTD_ORIGINAL'
+    end
+    object cdsProduto_ImpUNIDADE_ORIG: TStringField
+      FieldName = 'UNIDADE_ORIG'
+      Size = 6
+    end
+    object cdsProduto_ImpTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      Size = 1
+    end
+    object cdsProduto_ImpBASE_ST_ORIG: TFloatField
+      FieldName = 'BASE_ST_ORIG'
+    end
+    object cdsProduto_ImpVLR_ST_ORIG: TFloatField
+      FieldName = 'VLR_ST_ORIG'
+    end
+    object cdsProduto_ImpQTD_PACOTE: TFloatField
+      FieldName = 'QTD_PACOTE'
+    end
+  end
+  object dsProduto_Imp: TDataSource
+    DataSet = cdsProduto_Imp
+    Left = 1112
+    Top = 520
   end
 end
