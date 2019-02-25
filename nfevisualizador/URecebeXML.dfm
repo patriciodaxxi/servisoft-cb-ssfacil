@@ -4202,46 +4202,55 @@ object frmRecebeXML: TfrmRecebeXML
           item
             Expanded = False
             FieldName = 'Id'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'tpAmb'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'verAplic'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'chNFe'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'dhRecbto'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nProt'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'digVal'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'cStat'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'xMotivo'
+            Width = 64
             Visible = True
           end>
       end

@@ -1,6 +1,6 @@
 object frmCadProduto_Imp: TfrmCadProduto_Imp
-  Left = 444
-  Top = 118
+  Left = 337
+  Top = 182
   Width = 625
   Height = 341
   BorderIcons = [biSystemMenu]
@@ -373,11 +373,11 @@ object frmCadProduto_Imp: TfrmCadProduto_Imp
       ItemHeight = 13
       Items.Strings = (
         'R=Retida Anteriormente'
-        'E=Calcular o Efetivo, isto eh, entrou de uma industria')
+        'C=Entrou destacando a ST')
       TabOrder = 1
       Values.Strings = (
         'R'
-        'E')
+        'C')
     end
   end
   object UCControls1: TUCControls

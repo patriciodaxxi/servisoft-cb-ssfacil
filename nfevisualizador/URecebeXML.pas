@@ -4202,18 +4202,21 @@ begin
   begin
     fDMRecebeXML.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat;
     fDMRecebeXML.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat;
+    fDMRecebeXML.cdsProduto_ImpTIPO_REG.AsString     := 'R';
   end
-  else
-  if StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat)) > 0 then
-  begin
-    fDMRecebeXML.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := fDMRecebeXML.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat;
-    fDMRecebeXML.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat;
-  end
+  //else
+  //if StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat)) > 0 then
+  //begin
+  //  fDMRecebeXML.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := fDMRecebeXML.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat;
+  //  fDMRecebeXML.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat;
+  //  fDMRecebeXML.cdsProduto_ImpTIPO_REG.AsString     := 'R';
+  //end
   else
   if StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat)) > 0 then
   begin
     fDMRecebeXML.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat;
     fDMRecebeXML.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsFloat;
+    fDMRecebeXML.cdsProduto_ImpTIPO_REG.AsString     := 'C';
   end;
   fDMRecebeXML.cdsProduto_ImpQTD_ORIGINAL.AsFloat  := StrToFloat(FormatFloat('0.0000',fDMRecebeXML.cdsNotaFiscal_ItensQTD.AsFloat));
   fDMRecebeXML.cdsProduto_ImpUNIDADE_ORIG.AsString := fDMRecebeXML.cdsNotaFiscal_ItensUNIDADE.AsString;

@@ -677,18 +677,20 @@ begin
   begin
     fDMCadNotaFiscal.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := Base_ICMSSubstRet;
     fDMCadNotaFiscal.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := Vlr_ICMSSubst_Ret;
+    fDMCadNotaFiscal.cdsProduto_ImpTIPO_REG.AsString     := 'R';
   end
-  else
-  if StrToFloat(FormatFloat('0.00',Base_Icms_Efet)) > 0 then
-  begin
-    fDMCadNotaFiscal.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := Base_Icms_Efet;
-    fDMCadNotaFiscal.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := Vlr_Icms_Efet;
-  end
+  //else
+  //if StrToFloat(FormatFloat('0.00',Base_Icms_Efet)) > 0 then
+  //begin
+  //  fDMCadNotaFiscal.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := Base_Icms_Efet;
+  //  fDMCadNotaFiscal.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := Vlr_Icms_Efet;
+  //end
   else
   if StrToFloat(FormatFloat('0.00',Base_IcmsSubst)) > 0 then
   begin
     fDMCadNotaFiscal.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := Base_IcmsSubst;
     fDMCadNotaFiscal.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := Vlr_IcmsSubst;
+    fDMCadNotaFiscal.cdsProduto_ImpTIPO_REG.AsString     := 'C';
   end;
   fDMCadNotaFiscal.cdsProduto_ImpQTD_ORIGINAL.AsFloat  := StrToFloat(FormatFloat('0.0000',Qtd));
   fDMCadNotaFiscal.cdsProduto_ImpUNIDADE_ORIG.AsString := Unidade;
@@ -703,7 +705,6 @@ begin
 
   fDMCadNotaFiscal.cdsProduto_Imp.Post;
   fDMCadNotaFiscal.cdsProduto_Imp.ApplyUpdates(0);
-
 end;
 
 procedure Prc_Excluir_Produto_Imp(fDMCadNotaFiscal: TDMCadNotaFiscal ; Data : TDateTime);
