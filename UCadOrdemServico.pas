@@ -892,7 +892,9 @@ begin
     fDMCadOrdemServico.cdsOrdemServico.Edit;
     fDMCadOrdemServico.cdsOrdemServicoDTCONCLUIDO.Clear;
     fDMCadOrdemServico.cdsOrdemServicoHRCONCLUIDO.Clear;
+    fDMCadOrdemServico.cdsOrdemServicoDTENTREGA.Clear;
     fDMCadOrdemServico.cdsOrdemServicoCONCLUIDO.AsString := 'N';
+    fDMCadOrdemServico.cdsOrdemServicoSTATUS.AsString    := '1';
     fDMCadOrdemServico.cdsOrdemServico.Post;
 
     fDMCadOrdemServico.cdsOrdemServico_Itens.First;
@@ -907,16 +909,14 @@ begin
     end;
     fDMCadOrdemServico.cdsOrdemServico.ApplyUpdates(0);
 
-    dmDatabase.scoDados.Commit(ID);
-
+    dmDatabase.scoDados.Commit(ID);             
   except
     on e: Exception do
     begin
       dmDatabase.scoDados.Rollback(ID);
       raise Exception.Create('Erro ao reabrir a Ordem de Serviço: ' + #13 + e.Message);
     end;
-  end;
-
+  end;                                                     
   prc_Consultar(vIDAux);
 end;
 
