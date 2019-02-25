@@ -1296,12 +1296,6 @@ object DMRecebeXML: TDMRecebeXML
     object cdsDetalheICMS60_CST: TIntegerField
       FieldName = 'ICMS60_CST'
     end
-    object cdsDetalheICMS60_vBCSTRet: TFloatField
-      FieldName = 'ICMS60_vBCSTRet'
-    end
-    object cdsDetalheICMS60_vICMSSTRet: TFloatField
-      FieldName = 'ICMS60_vICMSSTRet'
-    end
     object cdsDetalheICMS70_orig: TIntegerField
       FieldName = 'ICMS70_orig'
     end
@@ -1775,6 +1769,46 @@ object DMRecebeXML: TDMRecebeXML
     object cdsDetalheCEST: TStringField
       FieldName = 'CEST'
       Size = 7
+    end
+    object cdsDetalheICMS60_pST: TStringField
+      FieldName = 'ICMS60_pST'
+      Size = 31
+    end
+    object cdsDetalheICMS60_vBCFCPSTRet: TStringField
+      FieldName = 'ICMS60_vBCFCPSTRet'
+      Size = 31
+    end
+    object cdsDetalheICMS60_pFCPSTRet: TStringField
+      FieldName = 'ICMS60_pFCPSTRet'
+      Size = 31
+    end
+    object cdsDetalheICMS60_vFCPSTRet: TStringField
+      FieldName = 'ICMS60_vFCPSTRet'
+      Size = 31
+    end
+    object cdsDetalheICMS60_pRedBCEfet: TStringField
+      FieldName = 'ICMS60_pRedBCEfet'
+      Size = 31
+    end
+    object cdsDetalheICMS60_vBCEfet: TStringField
+      FieldName = 'ICMS60_vBCEfet'
+      Size = 31
+    end
+    object cdsDetalheICMS60_pICMSEfet: TStringField
+      FieldName = 'ICMS60_pICMSEfet'
+      Size = 31
+    end
+    object cdsDetalheICMS60_vICMSEfet: TStringField
+      FieldName = 'ICMS60_vICMSEfet'
+      Size = 31
+    end
+    object cdsDetalheICMS60_vBCSTRet: TStringField
+      FieldName = 'ICMS60_vBCSTRet'
+      Size = 31
+    end
+    object cdsDetalheICMS60_vICMSSTRet: TStringField
+      FieldName = 'ICMS60_vICMSSTRet'
+      Size = 31
     end
   end
   object dsDetalhe: TDataSource
@@ -2334,6 +2368,30 @@ object DMRecebeXML: TDMRecebeXML
         Name = 'Posse_Material'
         DataType = ftString
         Size = 1
+      end
+      item
+        Name = 'Perc_Devol'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_IPI_Devol'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Perc_Base_Red_Efet'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_Base_Efet'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Perc_ICMS_Efet'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_ICMS_Efet'
+        DataType = ftFloat
       end>
     IndexDefs = <
       item
@@ -2350,7 +2408,7 @@ object DMRecebeXML: TDMRecebeXML
     Left = 464
     Top = 488
     Data = {
-      E60A00009619E0BD01000000180000006D000000000003000000E60A04497465
+      6D0B00009619E0BD0100000018000000730000000000030000006D0B04497465
       6D04000100000000000A436F6450726F6475746F010049000000010005574944
       5448020002003C0011436F6450726F6475746F496E7465726E6F040001000000
       000006436F64436F72040001000000000008436F644772616465040001000000
@@ -2436,8 +2494,12 @@ object DMRecebeXML: TDMRecebeXML
       7263616D656E746F04000100000000000E49445F43656E74726F437573746F04
       00010000000000134E6F6D655F436F6E74614F7263616D656E746F0100490000
       000100055749445448020002003C000E506F7373655F4D6174657269616C0100
-      49000000010005574944544802000200010001000D44454641554C545F4F5244
-      45520200820000000000}
+      4900000001000557494454480200020001000A506572635F4465766F6C080004
+      00000000000D566C725F4950495F4465766F6C08000400000000001250657263
+      5F426173655F5265645F4566657408000400000000000D566C725F426173655F
+      4566657408000400000000000E506572635F49434D535F456665740800040000
+      0000000D566C725F49434D535F45666574080004000000000001000D44454641
+      554C545F4F524445520200820000000000}
     object mItensNotaItem: TIntegerField
       FieldName = 'Item'
     end
@@ -2854,6 +2916,24 @@ object DMRecebeXML: TDMRecebeXML
     object mItensNotaPosse_Material: TStringField
       FieldName = 'Posse_Material'
       Size = 1
+    end
+    object mItensNotaPerc_Devol: TFloatField
+      FieldName = 'Perc_Devol'
+    end
+    object mItensNotaVlr_IPI_Devol: TFloatField
+      FieldName = 'Vlr_IPI_Devol'
+    end
+    object mItensNotaPerc_Base_Red_Efet: TFloatField
+      FieldName = 'Perc_Base_Red_Efet'
+    end
+    object mItensNotaVlr_Base_Efet: TFloatField
+      FieldName = 'Vlr_Base_Efet'
+    end
+    object mItensNotaPerc_ICMS_Efet: TFloatField
+      FieldName = 'Perc_ICMS_Efet'
+    end
+    object mItensNotaVlr_ICMS_Efet: TFloatField
+      FieldName = 'Vlr_ICMS_Efet'
     end
   end
   object dsmItensNota: TDataSource
@@ -3576,8 +3656,8 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 96
+    Left = 104
+    Top = 64
     object sdsCidadeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3598,16 +3678,16 @@ object DMRecebeXML: TDMRecebeXML
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
     OnUpdateError = dspCidadeUpdateError
-    Left = 168
-    Top = 96
+    Left = 176
+    Top = 64
   end
   object cdsCidade: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspCidade'
-    Left = 232
-    Top = 96
+    Left = 240
+    Top = 64
     object cdsCidadeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3627,8 +3707,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsCidade: TDataSource
     DataSet = cdsCidade
-    Left = 304
-    Top = 96
+    Left = 312
+    Top = 64
   end
   object sdsPais: TSQLDataSet
     NoMetadata = True
@@ -3637,8 +3717,8 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 152
+    Left = 104
+    Top = 120
     object sdsPaisID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3655,16 +3735,16 @@ object DMRecebeXML: TDMRecebeXML
   object dspPais: TDataSetProvider
     DataSet = sdsPais
     OnUpdateError = dspPaisUpdateError
-    Left = 168
-    Top = 152
+    Left = 176
+    Top = 120
   end
   object cdsPais: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspPais'
-    Left = 232
-    Top = 152
+    Left = 240
+    Top = 120
     object cdsPaisID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3680,8 +3760,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsPais: TDataSource
     DataSet = cdsPais
-    Left = 304
-    Top = 152
+    Left = 312
+    Top = 120
   end
   object sdsFornecedor: TSQLDataSet
     NoMetadata = True
@@ -3690,8 +3770,8 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 208
+    Left = 104
+    Top = 168
     object sdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -4028,16 +4108,16 @@ object DMRecebeXML: TDMRecebeXML
   object dspFornecedor: TDataSetProvider
     DataSet = sdsFornecedor
     OnUpdateError = dspFornecedorUpdateError
-    Left = 168
-    Top = 208
+    Left = 176
+    Top = 168
   end
   object cdsFornecedor: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFornecedor'
     OnNewRecord = cdsFornecedorNewRecord
-    Left = 232
-    Top = 208
+    Left = 240
+    Top = 168
     object cdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -4373,8 +4453,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsFornecedor: TDataSource
     DataSet = cdsFornecedor
-    Left = 304
-    Top = 208
+    Left = 312
+    Top = 168
   end
   object sdsProduto_Forn: TSQLDataSet
     NoMetadata = True
@@ -4385,8 +4465,8 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 264
+    Left = 104
+    Top = 224
     object sdsProduto_FornID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -4460,8 +4540,8 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsProduto_Forn
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProduto_FornUpdateError
-    Left = 168
-    Top = 264
+    Left = 176
+    Top = 224
   end
   object cdsProduto_Forn: TClientDataSet
     Aggregates = <>
@@ -4469,8 +4549,8 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspProduto_Forn'
     BeforePost = cdsProduto_FornBeforePost
-    Left = 232
-    Top = 264
+    Left = 240
+    Top = 224
     object cdsProduto_FornID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -4542,8 +4622,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsProduto_Forn: TDataSource
     DataSet = cdsProduto_Forn
-    Left = 304
-    Top = 264
+    Left = 312
+    Top = 224
   end
   object sdsNotaFiscal: TSQLDataSet
     NoMetadata = True
@@ -4929,7 +5009,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspNotaFiscal'
     Left = 232
-    Top = 352
+    Top = 360
     object cdsNotaFiscalFILIAL: TIntegerField
       FieldName = 'FILIAL'
       Required = True
@@ -5659,6 +5739,12 @@ object DMRecebeXML: TDMRecebeXML
     object sdsNotaFiscal_ItensBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object sdsNotaFiscal_ItensVLR_IPI_DEVOL: TFloatField
+      FieldName = 'VLR_IPI_DEVOL'
+    end
+    object sdsNotaFiscal_ItensPERC_DEVOL: TFloatField
+      FieldName = 'PERC_DEVOL'
+    end
     object sdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField
       FieldName = 'PERC_BASE_ICMS_RED'
     end
@@ -5671,11 +5757,17 @@ object DMRecebeXML: TDMRecebeXML
     object sdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
       FieldName = 'PERC_BASE_ICMSSUBT_RED'
     end
-    object sdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField
-      FieldName = 'PERC_ICMSSUBST_INTERNO'
+    object sdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField
+      FieldName = 'PERC_BASE_RED_EFET'
     end
-    object sdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField
-      FieldName = 'PERC_REDUCAO_ICMSSUBST'
+    object sdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField
+      FieldName = 'PERC_ICMS_EFET'
+    end
+    object sdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
     end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
@@ -6001,6 +6093,24 @@ object DMRecebeXML: TDMRecebeXML
     end
     object cdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField
       FieldName = 'PERC_REDUCAO_ICMSSUBST'
+    end
+    object cdsNotaFiscal_ItensVLR_IPI_DEVOL: TFloatField
+      FieldName = 'VLR_IPI_DEVOL'
+    end
+    object cdsNotaFiscal_ItensPERC_DEVOL: TFloatField
+      FieldName = 'PERC_DEVOL'
+    end
+    object cdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField
+      FieldName = 'PERC_BASE_RED_EFET'
+    end
+    object cdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField
+      FieldName = 'PERC_ICMS_EFET'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
     end
   end
   object dsNotaFiscal_Itens: TDataSource
@@ -8372,6 +8482,11 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'CNPJ_CPF'
       Size = 18
     end
+    object cdsFilialUSA_ENVIO_ST_RET: TStringField
+      FieldName = 'USA_ENVIO_ST_RET'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
@@ -8382,8 +8497,8 @@ object DMRecebeXML: TDMRecebeXML
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT ID, NOME, NOME_INTERNO, CNPJ_CPF'#13#10'FROM FILIAL'#13#10'WHERE INAT' +
-      'IVO = '#39'N'#39#13#10
+      'SELECT ID, NOME, NOME_INTERNO, CNPJ_CPF, USA_ENVIO_ST_RET'#13#10'FROM ' +
+      'FILIAL'#13#10'WHERE INATIVO = '#39'N'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -9215,5 +9330,115 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = cdsTamanho
     Left = 1144
     Top = 144
+  end
+  object sdsProduto_Imp: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM PRODUTO_IMP'#13#10'WHERE ID = :ID'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 104
+    Top = 272
+    object sdsProduto_ImpID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsProduto_ImpBASE_ST: TFloatField
+      FieldName = 'BASE_ST'
+    end
+    object sdsProduto_ImpVLR_ST: TFloatField
+      FieldName = 'VLR_ST'
+    end
+    object sdsProduto_ImpPERC_ST: TFloatField
+      FieldName = 'PERC_ST'
+    end
+    object sdsProduto_ImpDATA: TDateField
+      FieldName = 'DATA'
+    end
+    object sdsProduto_ImpQTD_ORIGINAL: TFloatField
+      FieldName = 'QTD_ORIGINAL'
+    end
+    object sdsProduto_ImpUNIDADE_ORIG: TStringField
+      FieldName = 'UNIDADE_ORIG'
+      Size = 6
+    end
+    object sdsProduto_ImpTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      Size = 1
+    end
+    object sdsProduto_ImpBASE_ST_ORIG: TFloatField
+      FieldName = 'BASE_ST_ORIG'
+    end
+    object sdsProduto_ImpVLR_ST_ORIG: TFloatField
+      FieldName = 'VLR_ST_ORIG'
+    end
+    object sdsProduto_ImpQTD_PACOTE: TFloatField
+      FieldName = 'QTD_PACOTE'
+    end
+  end
+  object dspProduto_Imp: TDataSetProvider
+    DataSet = sdsProduto_Imp
+    UpdateMode = upWhereKeyOnly
+    OnUpdateError = dspProduto_FornUpdateError
+    Left = 176
+    Top = 272
+  end
+  object cdsProduto_Imp: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspProduto_Imp'
+    BeforePost = cdsProduto_FornBeforePost
+    Left = 240
+    Top = 272
+    object cdsProduto_ImpID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsProduto_ImpBASE_ST: TFloatField
+      FieldName = 'BASE_ST'
+    end
+    object cdsProduto_ImpVLR_ST: TFloatField
+      FieldName = 'VLR_ST'
+    end
+    object cdsProduto_ImpPERC_ST: TFloatField
+      FieldName = 'PERC_ST'
+    end
+    object cdsProduto_ImpDATA: TDateField
+      FieldName = 'DATA'
+    end
+    object cdsProduto_ImpQTD_ORIGINAL: TFloatField
+      FieldName = 'QTD_ORIGINAL'
+    end
+    object cdsProduto_ImpUNIDADE_ORIG: TStringField
+      FieldName = 'UNIDADE_ORIG'
+      Size = 6
+    end
+    object cdsProduto_ImpTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      Size = 1
+    end
+    object cdsProduto_ImpBASE_ST_ORIG: TFloatField
+      FieldName = 'BASE_ST_ORIG'
+    end
+    object cdsProduto_ImpVLR_ST_ORIG: TFloatField
+      FieldName = 'VLR_ST_ORIG'
+    end
+    object cdsProduto_ImpQTD_PACOTE: TFloatField
+      FieldName = 'QTD_PACOTE'
+    end
+  end
+  object dsProduto_Imp: TDataSource
+    DataSet = cdsProduto_Imp
+    Left = 312
+    Top = 272
   end
 end

@@ -1,12 +1,12 @@
 
-{*********************************************************************************************************************************}
-{                                                                                                                                 }
-{                                                        XML Data Binding                                                         }
-{                                                                                                                                 }
-{         Generated on: 25/02/2019 14:29:25                                                                                       }
-{       Generated from: C:\Users\edson.alanis\Google Drive\!desenvolvimento\cleomar\FlexDocs\NFe_Util\Schemas\enviNFe_v4.00.xsd   }
-{                                                                                                                                 }
-{*********************************************************************************************************************************}
+{********************************************************************************************************************************}
+{                                                                                                                                }
+{                                                        XML Data Binding                                                        }
+{                                                                                                                                }
+{         Generated on: 11/06/2018 17:32:21                                                                                      }
+{       Generated from: C:\Users\SouthSystem\Google Drive\!desenvolvimento\cleomar\FlexDocs\NFe_Util\Schemas\enviNFe_v4.00.xsd   }
+{                                                                                                                                }
+{********************************************************************************************************************************}
 
 unit enviNFe_v400;
 
@@ -154,7 +154,7 @@ type
 { IXMLTEnviNFe }
 
   IXMLTEnviNFe = interface(IXMLNode)
-    ['{B5ECE66D-F2A8-4102-A933-B7CE7E9BF8E1}']
+    ['{E16D7BB4-0B7F-412C-B123-FBC913CC818F}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_IdLote: WideString;
@@ -173,7 +173,7 @@ type
 { IXMLTNFe }
 
   IXMLTNFe = interface(IXMLNode)
-    ['{8A852EA9-467B-4811-BC61-E4FC3CFDB945}']
+    ['{6AF1CB49-E621-4303-A358-88E658FD013D}']
     { Property Accessors }
     function Get_InfNFe: IXMLInfNFe;
     function Get_InfNFeSupl: IXMLInfNFeSupl;
@@ -187,7 +187,7 @@ type
 { IXMLTNFeList }
 
   IXMLTNFeList = interface(IXMLNodeCollection)
-    ['{0FD995B3-2BE2-49E0-97FA-70E4211E1640}']
+    ['{8866FA91-DCB0-4A92-BA8D-E684EDD4D855}']
     { Methods & Properties }
     function Add: IXMLTNFe;
     function Insert(const Index: Integer): IXMLTNFe;
@@ -199,7 +199,7 @@ type
 { IXMLInfNFe }
 
   IXMLInfNFe = interface(IXMLNode)
-    ['{41DADA40-B981-4D72-AB09-7FBB6C264748}']
+    ['{9873DE7E-320D-46DB-9A01-9F6FCDF78FC4}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_Id: WideString;
@@ -245,7 +245,7 @@ type
 { IXMLIde }
 
   IXMLIde = interface(IXMLNode)
-    ['{6CBCB5C7-0BED-4B2E-98DB-22C93C87EC7A}']
+    ['{B0A9EDD9-01AA-440A-94CD-488A1281D611}']
     { Property Accessors }
     function Get_CUF: WideString;
     function Get_CNF: WideString;
@@ -321,7 +321,7 @@ type
 { IXMLNFref }
 
   IXMLNFref = interface(IXMLNode)
-    ['{204B9A83-26DD-48EF-B222-861144E2CCD6}']
+    ['{8995A181-3B89-45B9-9902-9C50668D243B}']
     { Property Accessors }
     function Get_RefNFe: WideString;
     function Get_RefNF: IXMLRefNF;
@@ -341,7 +341,7 @@ type
 { IXMLNFrefList }
 
   IXMLNFrefList = interface(IXMLNodeCollection)
-    ['{CA118CA0-00A6-4570-B36C-84D4085BB3C9}']
+    ['{185D2ED8-C990-4784-94D4-D5E240BE38A0}']
     { Methods & Properties }
     function Add: IXMLNFref;
     function Insert(const Index: Integer): IXMLNFref;
@@ -353,7 +353,7 @@ type
 { IXMLRefNF }
 
   IXMLRefNF = interface(IXMLNode)
-    ['{1B6C01B6-7426-4881-9C79-132A4422CD7A}']
+    ['{A4DBB65C-0799-488C-A66E-5B85C6A89092}']
     { Property Accessors }
     function Get_CUF: WideString;
     function Get_AAMM: WideString;
@@ -379,7 +379,7 @@ type
 { IXMLRefNFP }
 
   IXMLRefNFP = interface(IXMLNode)
-    ['{DA2B3878-170D-4036-A909-69F1CFF3EE90}']
+    ['{3F368A29-43C9-4666-A03F-821ED8A07246}']
     { Property Accessors }
     function Get_CUF: WideString;
     function Get_AAMM: WideString;
@@ -411,7 +411,7 @@ type
 { IXMLRefECF }
 
   IXMLRefECF = interface(IXMLNode)
-    ['{EFE6D3ED-10D8-446C-98D9-C12AD759A6A6}']
+    ['{ABA3FB9E-9164-4EAD-9B35-7F0D455C6B81}']
     { Property Accessors }
     function Get_Mod_: WideString;
     function Get_NECF: WideString;
@@ -428,7 +428,7 @@ type
 { IXMLEmit }
 
   IXMLEmit = interface(IXMLNode)
-    ['{8E42E8CB-C7BB-468D-A0E3-1CE752843744}']
+    ['{377F6B2E-664E-4ADE-B6D7-55BA5FA6088D}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_CPF: WideString;
@@ -465,7 +465,7 @@ type
 { IXMLTEnderEmi }
 
   IXMLTEnderEmi = interface(IXMLNode)
-    ['{5E5F1705-4B20-4324-9D24-65C312F21B5A}']
+    ['{3DBCB37B-7E6D-4671-A58A-ADECF60EBA67}']
     { Property Accessors }
     function Get_XLgr: WideString;
     function Get_Nro: WideString;
@@ -506,7 +506,7 @@ type
 { IXMLAvulsa }
 
   IXMLAvulsa = interface(IXMLNode)
-    ['{9B94834B-29A0-4EEB-B6C3-6C203DFEC986}']
+    ['{55B6C5E6-A8B4-4111-8A4F-0DE857BBBC33}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_XOrgao: WideString;
@@ -547,7 +547,7 @@ type
 { IXMLDest }
 
   IXMLDest = interface(IXMLNode)
-    ['{1EB679C0-2E3C-4465-80E1-865FF98547F0}']
+    ['{7637DBCC-6ACF-4BE2-B9D2-2881BA4234B7}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_CPF: WideString;
@@ -584,7 +584,7 @@ type
 { IXMLTEndereco }
 
   IXMLTEndereco = interface(IXMLNode)
-    ['{9D497C0A-DCC6-4CB1-8AB0-36F2FA50B5F5}']
+    ['{7AE120A0-E40B-45D4-8BD9-ECD502E8B8E2}']
     { Property Accessors }
     function Get_XLgr: WideString;
     function Get_Nro: WideString;
@@ -625,7 +625,7 @@ type
 { IXMLTLocal }
 
   IXMLTLocal = interface(IXMLNode)
-    ['{C7EBEB86-B23B-4F06-9150-0380199E9E87}']
+    ['{8124B734-AE1D-49CD-890A-19AD8BF1AEAC}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_CPF: WideString;
@@ -660,7 +660,7 @@ type
 { IXMLAutXML }
 
   IXMLAutXML = interface(IXMLNode)
-    ['{631ED979-6A08-4764-8625-8DF83AC8A0A6}']
+    ['{62DBF733-9F96-400E-9E99-97A1B9480649}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_CPF: WideString;
@@ -674,7 +674,7 @@ type
 { IXMLAutXMLList }
 
   IXMLAutXMLList = interface(IXMLNodeCollection)
-    ['{6FAE157C-DB30-4863-A1EA-86B5E82EF233}']
+    ['{892F5857-6A61-40C6-8903-CBB8F10AADBE}']
     { Methods & Properties }
     function Add: IXMLAutXML;
     function Insert(const Index: Integer): IXMLAutXML;
@@ -686,7 +686,7 @@ type
 { IXMLDet }
 
   IXMLDet = interface(IXMLNode)
-    ['{9AA2DE52-C928-4FDA-8370-0FDDE54648C9}']
+    ['{C9E95CCD-8B29-48D9-B264-CDF3E5158BB9}']
     { Property Accessors }
     function Get_NItem: WideString;
     function Get_Prod: IXMLProd;
@@ -706,7 +706,7 @@ type
 { IXMLDetList }
 
   IXMLDetList = interface(IXMLNodeCollection)
-    ['{611B99AA-A8C3-4684-BF3D-9AFB582BB4F3}']
+    ['{FC2E6A82-36FE-4897-A97B-BEC7841A4A42}']
     { Methods & Properties }
     function Add: IXMLDet;
     function Insert(const Index: Integer): IXMLDet;
@@ -718,7 +718,7 @@ type
 { IXMLProd }
 
   IXMLProd = interface(IXMLNode)
-    ['{D5A0FF6A-F3D7-4639-B677-E8D8BC088F9A}']
+    ['{DADD1C4F-F424-4DBF-94BD-11F2B66B805C}']
     { Property Accessors }
     function Get_CProd: WideString;
     function Get_CEAN: WideString;
@@ -823,7 +823,7 @@ type
 { IXMLDI }
 
   IXMLDI = interface(IXMLNode)
-    ['{A5DF8CDF-F093-4161-80E1-6400A0CADE7C}']
+    ['{32125290-727A-4447-A75D-B5B3BA29D9FA}']
     { Property Accessors }
     function Get_NDI: WideString;
     function Get_DDI: WideString;
@@ -866,7 +866,7 @@ type
 { IXMLDIList }
 
   IXMLDIList = interface(IXMLNodeCollection)
-    ['{09A29E0F-F6E2-4250-A1F0-F24210360D63}']
+    ['{5C7897ED-895E-4844-AF6F-E935842DF520}']
     { Methods & Properties }
     function Add: IXMLDI;
     function Insert(const Index: Integer): IXMLDI;
@@ -878,7 +878,7 @@ type
 { IXMLAdi }
 
   IXMLAdi = interface(IXMLNode)
-    ['{D99ADA14-FEEB-470B-A550-06D586699B69}']
+    ['{97A109FE-79A1-4D8D-9F38-87BD8A6AFF2C}']
     { Property Accessors }
     function Get_NAdicao: WideString;
     function Get_NSeqAdic: WideString;
@@ -901,7 +901,7 @@ type
 { IXMLAdiList }
 
   IXMLAdiList = interface(IXMLNodeCollection)
-    ['{416EEEDE-BE84-4B8F-A8E9-4AB98F14F32A}']
+    ['{290AA456-C8AE-4D54-ABF6-C8B41DDEEEF2}']
     { Methods & Properties }
     function Add: IXMLAdi;
     function Insert(const Index: Integer): IXMLAdi;
@@ -913,7 +913,7 @@ type
 { IXMLDetExport }
 
   IXMLDetExport = interface(IXMLNode)
-    ['{B1F2F6B9-B551-4941-AEE0-F5835E96712C}']
+    ['{B3DA58F0-5A35-440D-9E69-B32DFDFA98F8}']
     { Property Accessors }
     function Get_NDraw: WideString;
     function Get_ExportInd: IXMLExportInd;
@@ -926,7 +926,7 @@ type
 { IXMLDetExportList }
 
   IXMLDetExportList = interface(IXMLNodeCollection)
-    ['{FC1BA6FB-7F39-408B-8822-CAF9F9780490}']
+    ['{F1EEF09F-768F-4D4B-B63E-974B2527B268}']
     { Methods & Properties }
     function Add: IXMLDetExport;
     function Insert(const Index: Integer): IXMLDetExport;
@@ -938,7 +938,7 @@ type
 { IXMLExportInd }
 
   IXMLExportInd = interface(IXMLNode)
-    ['{4A0750B4-79F6-44C3-AF0D-395208B6789F}']
+    ['{B011D1FF-BE29-4ABB-97E0-E054DD246C20}']
     { Property Accessors }
     function Get_NRE: WideString;
     function Get_ChNFe: WideString;
@@ -955,7 +955,7 @@ type
 { IXMLRastro }
 
   IXMLRastro = interface(IXMLNode)
-    ['{6BF50187-488A-4B7C-8315-455C504B96CE}']
+    ['{CCDA9324-484D-4478-8334-B91619DB5649}']
     { Property Accessors }
     function Get_NLote: WideString;
     function Get_QLote: WideString;
@@ -978,7 +978,7 @@ type
 { IXMLRastroList }
 
   IXMLRastroList = interface(IXMLNodeCollection)
-    ['{6643E327-2045-41F0-A4F6-5F37EE0C3259}']
+    ['{8CE6E479-5CF0-49F2-8951-E5CF6CD0880C}']
     { Methods & Properties }
     function Add: IXMLRastro;
     function Insert(const Index: Integer): IXMLRastro;
@@ -990,7 +990,7 @@ type
 { IXMLVeicProd }
 
   IXMLVeicProd = interface(IXMLNode)
-    ['{E0F3BB56-73D4-4D13-9672-86C08B9F6A41}']
+    ['{B1D78678-078E-4D63-91BC-B2B7397A8D53}']
     { Property Accessors }
     function Get_TpOp: WideString;
     function Get_Chassi: WideString;
@@ -1070,7 +1070,7 @@ type
 { IXMLMed }
 
   IXMLMed = interface(IXMLNode)
-    ['{BF9894F6-E69D-4513-847B-F2C8BEC3DF42}']
+    ['{431A8775-5A90-4E22-8308-B9BBF7BEB690}']
     { Property Accessors }
     function Get_CProdANVISA: WideString;
     function Get_VPMC: WideString;
@@ -1084,7 +1084,7 @@ type
 { IXMLArma }
 
   IXMLArma = interface(IXMLNode)
-    ['{59704780-47F2-4B2E-91E1-0BD1A8461A10}']
+    ['{B0A350C1-3BD8-476D-A4BE-24CBED8E9426}']
     { Property Accessors }
     function Get_TpArma: WideString;
     function Get_NSerie: WideString;
@@ -1104,7 +1104,7 @@ type
 { IXMLArmaList }
 
   IXMLArmaList = interface(IXMLNodeCollection)
-    ['{70F42FBB-9E97-4EB1-9C48-6F4297B3F2C6}']
+    ['{4173FB3E-68F0-42AF-BAC1-9B7B1FC1FA59}']
     { Methods & Properties }
     function Add: IXMLArma;
     function Insert(const Index: Integer): IXMLArma;
@@ -1116,7 +1116,7 @@ type
 { IXMLComb }
 
   IXMLComb = interface(IXMLNode)
-    ['{3C062899-6B60-4B26-B183-1D2FEAD265E0}']
+    ['{1B1AB5D1-4B02-4310-87DE-0E75BA7F52A6}']
     { Property Accessors }
     function Get_CProdANP: WideString;
     function Get_DescANP: WideString;
@@ -1155,7 +1155,7 @@ type
 { IXMLCIDE }
 
   IXMLCIDE = interface(IXMLNode)
-    ['{E6F94C96-9EF1-4F23-9B46-C3D8EE7F9056}']
+    ['{5ACAF5B9-9F79-4FF0-A6D8-B2B7E8426873}']
     { Property Accessors }
     function Get_QBCProd: WideString;
     function Get_VAliqProd: WideString;
@@ -1172,7 +1172,7 @@ type
 { IXMLEncerrante }
 
   IXMLEncerrante = interface(IXMLNode)
-    ['{FA1BCFB9-3746-4B2C-BA5B-5F884D179843}']
+    ['{E47B17CF-0DD4-4E76-A876-D2CB27EAE4CC}']
     { Property Accessors }
     function Get_NBico: WideString;
     function Get_NBomba: WideString;
@@ -1195,7 +1195,7 @@ type
 { IXMLImposto }
 
   IXMLImposto = interface(IXMLNode)
-    ['{D73E2046-A6E0-4FB4-9869-7DEC9A094242}']
+    ['{F5F8E8FE-3E5B-4B87-894B-A9DBE4EE234F}']
     { Property Accessors }
     function Get_VTotTrib: WideString;
     function Get_ICMS: IXMLICMS;
@@ -1224,7 +1224,7 @@ type
 { IXMLICMS }
 
   IXMLICMS = interface(IXMLNode)
-    ['{D19F134A-867A-4D0E-91F4-96B20A271C07}']
+    ['{7A741593-BEF0-4106-BC40-E6332AEFBC32}']
     { Property Accessors }
     function Get_ICMS00: IXMLICMS00;
     function Get_ICMS10: IXMLICMS10;
@@ -1266,7 +1266,7 @@ type
 { IXMLICMS00 }
 
   IXMLICMS00 = interface(IXMLNode)
-    ['{4F5BD0A2-D758-42B8-BF60-70BBAE489A25}']
+    ['{81AF535E-DA39-413F-8462-C2E3B1A28EF3}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1298,7 +1298,7 @@ type
 { IXMLICMS10 }
 
   IXMLICMS10 = interface(IXMLNode)
-    ['{5AD11A64-CE14-4A52-8A23-FB50900B272D}']
+    ['{ECFBF470-4D16-4E6D-B881-E60C6376E506}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1360,7 +1360,7 @@ type
 { IXMLICMS20 }
 
   IXMLICMS20 = interface(IXMLNode)
-    ['{D33C61FC-3DD2-4F6A-AD42-C639E7235B16}']
+    ['{49A4BA1D-1F54-405B-A649-F837B4EC8960}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1404,7 +1404,7 @@ type
 { IXMLICMS30 }
 
   IXMLICMS30 = interface(IXMLNode)
-    ['{A12F50E4-5803-4FCB-B5B3-7C512C911DBB}']
+    ['{0F0A6118-B549-4A7F-A135-77A6CADB5684}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1451,7 +1451,7 @@ type
 { IXMLICMS40 }
 
   IXMLICMS40 = interface(IXMLNode)
-    ['{271098C4-4184-4EA4-92C9-A7AAF7828AFC}']
+    ['{A4CD2BD6-53F2-4EE6-B54F-ACCA84028908}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1471,7 +1471,7 @@ type
 { IXMLICMS51 }
 
   IXMLICMS51 = interface(IXMLNode)
-    ['{09C94E9B-063B-4572-B54E-497BD5D5A8BF}']
+    ['{59967C15-AC7C-4000-AF98-BF7728AA7369}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1518,7 +1518,7 @@ type
 { IXMLICMS60 }
 
   IXMLICMS60 = interface(IXMLNode)
-    ['{35B8A622-E847-48D2-9E73-63C85E04006C}']
+    ['{DEA67F41-CF1C-4062-A8F3-007481CF662C}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1528,10 +1528,6 @@ type
     function Get_VBCFCPSTRet: WideString;
     function Get_PFCPSTRet: WideString;
     function Get_VFCPSTRet: WideString;
-    function Get_PRedBCEfet: WideString;
-    function Get_VBCEfet: WideString;
-    function Get_PICMSEfet: WideString;
-    function Get_VICMSEfet: WideString;
     procedure Set_Orig(Value: WideString);
     procedure Set_CST(Value: WideString);
     procedure Set_VBCSTRet(Value: WideString);
@@ -1540,10 +1536,6 @@ type
     procedure Set_VBCFCPSTRet(Value: WideString);
     procedure Set_PFCPSTRet(Value: WideString);
     procedure Set_VFCPSTRet(Value: WideString);
-    procedure Set_PRedBCEfet(Value: WideString);
-    procedure Set_VBCEfet(Value: WideString);
-    procedure Set_PICMSEfet(Value: WideString);
-    procedure Set_VICMSEfet(Value: WideString);
     { Methods & Properties }
     property Orig: WideString read Get_Orig write Set_Orig;
     property CST: WideString read Get_CST write Set_CST;
@@ -1553,16 +1545,12 @@ type
     property VBCFCPSTRet: WideString read Get_VBCFCPSTRet write Set_VBCFCPSTRet;
     property PFCPSTRet: WideString read Get_PFCPSTRet write Set_PFCPSTRet;
     property VFCPSTRet: WideString read Get_VFCPSTRet write Set_VFCPSTRet;
-    property PRedBCEfet: WideString read Get_PRedBCEfet write Set_PRedBCEfet;
-    property VBCEfet: WideString read Get_VBCEfet write Set_VBCEfet;
-    property PICMSEfet: WideString read Get_PICMSEfet write Set_PICMSEfet;
-    property VICMSEfet: WideString read Get_VICMSEfet write Set_VICMSEfet;
   end;
 
 { IXMLICMS70 }
 
   IXMLICMS70 = interface(IXMLNode)
-    ['{8678F866-17BC-4D49-8951-83A99D4A1FC0}']
+    ['{17679920-E3AE-46B9-9D00-4B7D03DF2DFF}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1633,7 +1621,7 @@ type
 { IXMLICMS90 }
 
   IXMLICMS90 = interface(IXMLNode)
-    ['{4C7F1773-5A55-4E39-BC46-1F6C03F49486}']
+    ['{1651E64F-F177-4378-A638-7682FA2DC482}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1704,7 +1692,7 @@ type
 { IXMLICMSPart }
 
   IXMLICMSPart = interface(IXMLNode)
-    ['{0C1B1577-89E4-44E2-95B2-3D7F9D535232}']
+    ['{700B78D0-6F08-4BA9-B87D-FAEDF69AD8FC}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1757,7 +1745,7 @@ type
 { IXMLICMSST }
 
   IXMLICMSST = interface(IXMLNode)
-    ['{C2FC6960-07BA-465E-8C11-772F2A85CD32}']
+    ['{4E69CAE6-FF6A-42DA-8A19-135585DA515B}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CST: WideString;
@@ -1783,7 +1771,7 @@ type
 { IXMLICMSSN101 }
 
   IXMLICMSSN101 = interface(IXMLNode)
-    ['{7DB0F21B-656F-461E-9D39-C9E416112E46}']
+    ['{584D0334-A52C-41B8-8C46-3F0F7AEAA40C}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CSOSN: WideString;
@@ -1803,7 +1791,7 @@ type
 { IXMLICMSSN102 }
 
   IXMLICMSSN102 = interface(IXMLNode)
-    ['{AB1BA960-918A-4191-9915-23D4D608549D}']
+    ['{F1C3B411-D596-4950-B771-CA992A0524F4}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CSOSN: WideString;
@@ -1817,7 +1805,7 @@ type
 { IXMLICMSSN201 }
 
   IXMLICMSSN201 = interface(IXMLNode)
-    ['{C22E568F-2036-4460-9FE4-424A3DE9FC85}']
+    ['{C6894643-BDB3-4AB6-B142-B4CCDAC1EE15}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CSOSN: WideString;
@@ -1864,7 +1852,7 @@ type
 { IXMLICMSSN202 }
 
   IXMLICMSSN202 = interface(IXMLNode)
-    ['{56479FD3-6394-45CB-BC72-8B841718325C}']
+    ['{BCBE07B3-0AEB-433C-A428-D4BB678F7F7C}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CSOSN: WideString;
@@ -1905,7 +1893,7 @@ type
 { IXMLICMSSN500 }
 
   IXMLICMSSN500 = interface(IXMLNode)
-    ['{9857CCB7-D421-479F-A63C-8DD33621D338}']
+    ['{D77309DA-1ADE-4CCE-AD7A-B264C019C9C7}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CSOSN: WideString;
@@ -1915,10 +1903,6 @@ type
     function Get_VBCFCPSTRet: WideString;
     function Get_PFCPSTRet: WideString;
     function Get_VFCPSTRet: WideString;
-    function Get_PRedBCEfet: WideString;
-    function Get_VBCEfet: WideString;
-    function Get_PICMSEfet: WideString;
-    function Get_VICMSEfet: WideString;
     procedure Set_Orig(Value: WideString);
     procedure Set_CSOSN(Value: WideString);
     procedure Set_VBCSTRet(Value: WideString);
@@ -1927,10 +1911,6 @@ type
     procedure Set_VBCFCPSTRet(Value: WideString);
     procedure Set_PFCPSTRet(Value: WideString);
     procedure Set_VFCPSTRet(Value: WideString);
-    procedure Set_PRedBCEfet(Value: WideString);
-    procedure Set_VBCEfet(Value: WideString);
-    procedure Set_PICMSEfet(Value: WideString);
-    procedure Set_VICMSEfet(Value: WideString);
     { Methods & Properties }
     property Orig: WideString read Get_Orig write Set_Orig;
     property CSOSN: WideString read Get_CSOSN write Set_CSOSN;
@@ -1940,16 +1920,12 @@ type
     property VBCFCPSTRet: WideString read Get_VBCFCPSTRet write Set_VBCFCPSTRet;
     property PFCPSTRet: WideString read Get_PFCPSTRet write Set_PFCPSTRet;
     property VFCPSTRet: WideString read Get_VFCPSTRet write Set_VFCPSTRet;
-    property PRedBCEfet: WideString read Get_PRedBCEfet write Set_PRedBCEfet;
-    property VBCEfet: WideString read Get_VBCEfet write Set_VBCEfet;
-    property PICMSEfet: WideString read Get_PICMSEfet write Set_PICMSEfet;
-    property VICMSEfet: WideString read Get_VICMSEfet write Set_VICMSEfet;
   end;
 
 { IXMLICMSSN900 }
 
   IXMLICMSSN900 = interface(IXMLNode)
-    ['{035A6AFE-DD27-4B91-A654-62B3927A2D5E}']
+    ['{794F5089-36CC-4BB1-8722-814C1D5A2486}']
     { Property Accessors }
     function Get_Orig: WideString;
     function Get_CSOSN: WideString;
@@ -2011,7 +1987,7 @@ type
 { IXMLTIpi }
 
   IXMLTIpi = interface(IXMLNode)
-    ['{23FA40E5-747B-412D-8C56-17E68FEAA8BA}']
+    ['{F60E9D7E-718B-4015-86FD-4AFD95F408CE}']
     { Property Accessors }
     function Get_CNPJProd: WideString;
     function Get_CSelo: WideString;
@@ -2035,7 +2011,7 @@ type
 { IXMLIPITrib }
 
   IXMLIPITrib = interface(IXMLNode)
-    ['{685A1B1F-5D1A-4A9E-BFC7-E240A5264E2C}']
+    ['{0DF43993-5D57-4B95-8DE3-A8FDB1081B92}']
     { Property Accessors }
     function Get_CST: WideString;
     function Get_VBC: WideString;
@@ -2061,7 +2037,7 @@ type
 { IXMLIPINT }
 
   IXMLIPINT = interface(IXMLNode)
-    ['{B51B1A03-3447-4A10-A871-41E3CD09B67B}']
+    ['{211445BC-5E59-45E6-A144-B247880466FB}']
     { Property Accessors }
     function Get_CST: WideString;
     procedure Set_CST(Value: WideString);
@@ -2072,7 +2048,7 @@ type
 { IXMLII }
 
   IXMLII = interface(IXMLNode)
-    ['{7E7CED5E-09B3-4661-B1D5-F502F98A5EFF}']
+    ['{167AAAC6-5760-4151-9632-172BDA3A61A8}']
     { Property Accessors }
     function Get_VBC: WideString;
     function Get_VDespAdu: WideString;
@@ -2092,7 +2068,7 @@ type
 { IXMLISSQN }
 
   IXMLISSQN = interface(IXMLNode)
-    ['{4593C608-2291-4BE8-9C16-BA84E7EE9AA7}']
+    ['{B36B4545-4494-4AD6-A4F6-C5AA4CAC2A31}']
     { Property Accessors }
     function Get_VBC: WideString;
     function Get_VAliq: WideString;
@@ -2148,7 +2124,7 @@ type
 { IXMLPIS }
 
   IXMLPIS = interface(IXMLNode)
-    ['{5F48A165-67E1-4148-B3A5-596DAA0FB90C}']
+    ['{8741C38F-E78F-4CD4-9431-70188205A282}']
     { Property Accessors }
     function Get_PISAliq: IXMLPISAliq;
     function Get_PISQtde: IXMLPISQtde;
@@ -2164,7 +2140,7 @@ type
 { IXMLPISAliq }
 
   IXMLPISAliq = interface(IXMLNode)
-    ['{E798B8DE-D5AE-40BE-8020-91D6CC9417B7}']
+    ['{FB0D841F-3352-495F-B97D-1F82E21FC241}']
     { Property Accessors }
     function Get_CST: WideString;
     function Get_VBC: WideString;
@@ -2184,7 +2160,7 @@ type
 { IXMLPISQtde }
 
   IXMLPISQtde = interface(IXMLNode)
-    ['{0BC1094F-295E-4264-8D45-5D136084B0B0}']
+    ['{042C7647-D710-4B30-9F42-4334C890D4AC}']
     { Property Accessors }
     function Get_CST: WideString;
     function Get_QBCProd: WideString;
@@ -2204,7 +2180,7 @@ type
 { IXMLPISNT }
 
   IXMLPISNT = interface(IXMLNode)
-    ['{3AA2FE56-064D-4466-9520-668784B4BA71}']
+    ['{7129C945-A120-4EAE-8168-0FA60856F34A}']
     { Property Accessors }
     function Get_CST: WideString;
     procedure Set_CST(Value: WideString);
@@ -2215,7 +2191,7 @@ type
 { IXMLPISOutr }
 
   IXMLPISOutr = interface(IXMLNode)
-    ['{67D33951-365F-4759-A735-88C5754BE91F}']
+    ['{772971D8-1F23-4104-96DD-DE35642705BD}']
     { Property Accessors }
     function Get_CST: WideString;
     function Get_VBC: WideString;
@@ -2241,7 +2217,7 @@ type
 { IXMLPISST }
 
   IXMLPISST = interface(IXMLNode)
-    ['{7AA6948C-4B69-4C92-AD1B-72A2EAF0A63B}']
+    ['{B060E8EC-B4AB-46DD-A0B8-F4BC48E7A88E}']
     { Property Accessors }
     function Get_VBC: WideString;
     function Get_PPIS: WideString;
@@ -2264,7 +2240,7 @@ type
 { IXMLCOFINS }
 
   IXMLCOFINS = interface(IXMLNode)
-    ['{DAB416E4-B5D3-428B-BC80-733E2D14D4B7}']
+    ['{DA49DC5D-D084-4797-BE53-21CA81CC7837}']
     { Property Accessors }
     function Get_COFINSAliq: IXMLCOFINSAliq;
     function Get_COFINSQtde: IXMLCOFINSQtde;
@@ -2280,7 +2256,7 @@ type
 { IXMLCOFINSAliq }
 
   IXMLCOFINSAliq = interface(IXMLNode)
-    ['{C6D687B1-BF57-4710-AF40-A2E4D1259D2A}']
+    ['{E917D563-4497-4BFC-B367-32091DFCCC61}']
     { Property Accessors }
     function Get_CST: WideString;
     function Get_VBC: WideString;
@@ -2300,7 +2276,7 @@ type
 { IXMLCOFINSQtde }
 
   IXMLCOFINSQtde = interface(IXMLNode)
-    ['{401080A2-6111-4D51-BB9E-303B667397FC}']
+    ['{734032B9-141A-46F0-97D3-9B95C5D619CC}']
     { Property Accessors }
     function Get_CST: WideString;
     function Get_QBCProd: WideString;
@@ -2320,7 +2296,7 @@ type
 { IXMLCOFINSNT }
 
   IXMLCOFINSNT = interface(IXMLNode)
-    ['{88720A31-364E-4F98-A84D-243F842AD434}']
+    ['{90A337E1-98AC-4AA2-A9B8-E206859D027C}']
     { Property Accessors }
     function Get_CST: WideString;
     procedure Set_CST(Value: WideString);
@@ -2331,7 +2307,7 @@ type
 { IXMLCOFINSOutr }
 
   IXMLCOFINSOutr = interface(IXMLNode)
-    ['{F24D9028-8DAF-4BBE-9B45-EC81F3C6E086}']
+    ['{0A703977-EFB9-40F2-8623-809086A1DB37}']
     { Property Accessors }
     function Get_CST: WideString;
     function Get_VBC: WideString;
@@ -2357,7 +2333,7 @@ type
 { IXMLCOFINSST }
 
   IXMLCOFINSST = interface(IXMLNode)
-    ['{78FB2C2E-4B14-442C-9038-6DC0B0ABC2B4}']
+    ['{7290577C-2F9C-45F3-8E3C-22DC4B0C6E43}']
     { Property Accessors }
     function Get_VBC: WideString;
     function Get_PCOFINS: WideString;
@@ -2380,7 +2356,7 @@ type
 { IXMLICMSUFDest }
 
   IXMLICMSUFDest = interface(IXMLNode)
-    ['{58BD47EA-1617-48D9-895C-0308F89B4C33}']
+    ['{2085EE2A-F400-4CC1-8BA2-950BB2340191}']
     { Property Accessors }
     function Get_VBCUFDest: WideString;
     function Get_VBCFCPUFDest: WideString;
@@ -2415,7 +2391,7 @@ type
 { IXMLImpostoDevol }
 
   IXMLImpostoDevol = interface(IXMLNode)
-    ['{60C4241B-92F2-4CC3-8830-3D158A3C0E4B}']
+    ['{932FBCC7-FF1D-44BF-9C03-86EF763811FE}']
     { Property Accessors }
     function Get_PDevol: WideString;
     function Get_IPI: IXMLIPI;
@@ -2428,7 +2404,7 @@ type
 { IXMLIPI }
 
   IXMLIPI = interface(IXMLNode)
-    ['{B90D3E5B-7B54-4056-BEB9-467E4EC8749D}']
+    ['{CAF5F7F1-632D-45AF-80CA-BA7FD333576D}']
     { Property Accessors }
     function Get_VIPIDevol: WideString;
     procedure Set_VIPIDevol(Value: WideString);
@@ -2439,7 +2415,7 @@ type
 { IXMLTotal }
 
   IXMLTotal = interface(IXMLNode)
-    ['{D132F994-3CD5-4DA1-9355-4A1A69F31EEB}']
+    ['{CC2EEA5E-D9CF-448B-82D9-1D3A3D648FB2}']
     { Property Accessors }
     function Get_ICMSTot: IXMLICMSTot;
     function Get_ISSQNtot: IXMLISSQNtot;
@@ -2453,7 +2429,7 @@ type
 { IXMLICMSTot }
 
   IXMLICMSTot = interface(IXMLNode)
-    ['{F53D279D-EDED-4636-9D18-2AC60B29EDC0}']
+    ['{DDA4E710-BDB7-4AE5-ADAB-7E877A7976BA}']
     { Property Accessors }
     function Get_VBC: WideString;
     function Get_VICMS: WideString;
@@ -2530,7 +2506,7 @@ type
 { IXMLISSQNtot }
 
   IXMLISSQNtot = interface(IXMLNode)
-    ['{3BE27B46-A1CC-49B9-B253-A4500D859074}']
+    ['{2C1232E3-4B7A-4710-9CAB-06040E95470B}']
     { Property Accessors }
     function Get_VServ: WideString;
     function Get_VBC: WideString;
@@ -2574,7 +2550,7 @@ type
 { IXMLRetTrib }
 
   IXMLRetTrib = interface(IXMLNode)
-    ['{E44FCC14-D85D-4084-8D12-A0A6BE486FD8}']
+    ['{50CBFEDB-4B20-4C24-87D8-4334188AEC99}']
     { Property Accessors }
     function Get_VRetPIS: WideString;
     function Get_VRetCOFINS: WideString;
@@ -2603,7 +2579,7 @@ type
 { IXMLTransp }
 
   IXMLTransp = interface(IXMLNode)
-    ['{FC0DC7F8-E328-49C9-89FB-D7EDCD9A36D2}']
+    ['{E96CA053-1BBE-42C1-8324-DD41BA75CAFE}']
     { Property Accessors }
     function Get_ModFrete: WideString;
     function Get_Transporta: IXMLTransporta;
@@ -2630,7 +2606,7 @@ type
 { IXMLTransporta }
 
   IXMLTransporta = interface(IXMLNode)
-    ['{D0FE3BB3-1D32-49A3-A2BB-CC3EC6655988}']
+    ['{D1DE975E-4DB6-4377-A6F8-300F850DAF89}']
     { Property Accessors }
     function Get_CNPJ: WideString;
     function Get_CPF: WideString;
@@ -2659,7 +2635,7 @@ type
 { IXMLRetTransp }
 
   IXMLRetTransp = interface(IXMLNode)
-    ['{5FBBC9E7-EE41-4F5A-A2CA-2A0D0E46C473}']
+    ['{DEF70442-7FA6-4B72-9479-9E4078FF5F64}']
     { Property Accessors }
     function Get_VServ: WideString;
     function Get_VBCRet: WideString;
@@ -2685,7 +2661,7 @@ type
 { IXMLTVeiculo }
 
   IXMLTVeiculo = interface(IXMLNode)
-    ['{749498BE-83EE-4B96-9089-734B675A8A67}']
+    ['{A51E8DD2-BB57-4EBC-949B-E14F25477197}']
     { Property Accessors }
     function Get_Placa: WideString;
     function Get_UF: WideString;
@@ -2702,7 +2678,7 @@ type
 { IXMLTVeiculoList }
 
   IXMLTVeiculoList = interface(IXMLNodeCollection)
-    ['{A8678892-4A39-4D08-B40C-C8454F709518}']
+    ['{10ABFC8C-87A7-4E86-BE6C-ABBCFB66A4E9}']
     { Methods & Properties }
     function Add: IXMLTVeiculo;
     function Insert(const Index: Integer): IXMLTVeiculo;
@@ -2714,7 +2690,7 @@ type
 { IXMLVol }
 
   IXMLVol = interface(IXMLNode)
-    ['{FC8A2C1B-087F-44BD-BD13-616234E4B234}']
+    ['{41E5BD91-53E3-4236-92F4-B794F34D97B4}']
     { Property Accessors }
     function Get_QVol: WideString;
     function Get_Esp: WideString;
@@ -2742,7 +2718,7 @@ type
 { IXMLVolList }
 
   IXMLVolList = interface(IXMLNodeCollection)
-    ['{5FD36819-5187-481E-B0EF-D990A00D51BE}']
+    ['{CA32BE88-87C3-45C6-AD8C-BAC539893C1C}']
     { Methods & Properties }
     function Add: IXMLVol;
     function Insert(const Index: Integer): IXMLVol;
@@ -2754,7 +2730,7 @@ type
 { IXMLLacres }
 
   IXMLLacres = interface(IXMLNode)
-    ['{83430C85-F774-45B9-85CD-AEE7D8EE7328}']
+    ['{D72502FE-5A55-41C7-BECE-B49C106A3F98}']
     { Property Accessors }
     function Get_NLacre: WideString;
     procedure Set_NLacre(Value: WideString);
@@ -2765,7 +2741,7 @@ type
 { IXMLLacresList }
 
   IXMLLacresList = interface(IXMLNodeCollection)
-    ['{CC7D17ED-3CBD-4013-BCEB-97606DF327C3}']
+    ['{C1BDBE41-D883-4361-9F6D-DCDB456A7A51}']
     { Methods & Properties }
     function Add: IXMLLacres;
     function Insert(const Index: Integer): IXMLLacres;
@@ -2777,7 +2753,7 @@ type
 { IXMLCobr }
 
   IXMLCobr = interface(IXMLNode)
-    ['{6B774848-7824-477B-AC5E-6B707111265F}']
+    ['{52EA9193-929D-445E-A27A-5ED0E0E0222C}']
     { Property Accessors }
     function Get_Fat: IXMLFat;
     function Get_Dup: IXMLDupList;
@@ -2789,7 +2765,7 @@ type
 { IXMLFat }
 
   IXMLFat = interface(IXMLNode)
-    ['{C2169B05-5AD7-46E9-8233-4647BF6C2FE9}']
+    ['{A4F8CE55-F776-4FE4-82C7-C6FB7AB1B4EB}']
     { Property Accessors }
     function Get_NFat: WideString;
     function Get_VOrig: WideString;
@@ -2809,7 +2785,7 @@ type
 { IXMLDup }
 
   IXMLDup = interface(IXMLNode)
-    ['{186CBA53-84FB-4DF5-97D9-9B7A0CC9EE65}']
+    ['{C441B7E0-0E86-49BF-A0F4-5692CCCE2C90}']
     { Property Accessors }
     function Get_NDup: WideString;
     function Get_DVenc: WideString;
@@ -2826,7 +2802,7 @@ type
 { IXMLDupList }
 
   IXMLDupList = interface(IXMLNodeCollection)
-    ['{43BC6F67-B26C-40E7-B41E-7DC8376EB568}']
+    ['{21253D33-8DAF-4A11-A0E8-BF5708EDF41B}']
     { Methods & Properties }
     function Add: IXMLDup;
     function Insert(const Index: Integer): IXMLDup;
@@ -2838,7 +2814,7 @@ type
 { IXMLPag }
 
   IXMLPag = interface(IXMLNode)
-    ['{F3F9429F-A9F7-4358-A422-6B349CD24365}']
+    ['{BABD1FCE-73F0-43F0-A182-56BA16FF4339}']
     { Property Accessors }
     function Get_DetPag: IXMLDetPagList;
     function Get_VTroco: WideString;
@@ -2851,7 +2827,7 @@ type
 { IXMLDetPag }
 
   IXMLDetPag = interface(IXMLNode)
-    ['{9E5D5241-9E40-47B5-A088-20FFAC42DEE4}']
+    ['{84A44C4D-F27E-49A1-9B41-3E73B08E3AC0}']
     { Property Accessors }
     function Get_IndPag: WideString;
     function Get_TPag: WideString;
@@ -2870,7 +2846,7 @@ type
 { IXMLDetPagList }
 
   IXMLDetPagList = interface(IXMLNodeCollection)
-    ['{D260A5C9-7041-4B84-B7DA-EDB86DF7259C}']
+    ['{35DA6B56-4530-491E-99A0-026B2661C5BD}']
     { Methods & Properties }
     function Add: IXMLDetPag;
     function Insert(const Index: Integer): IXMLDetPag;
@@ -2882,7 +2858,7 @@ type
 { IXMLCard }
 
   IXMLCard = interface(IXMLNode)
-    ['{50445BE4-33F3-46BD-8539-D56809552DC8}']
+    ['{C8F5D1EB-99F2-4E3C-8D61-16412A499D09}']
     { Property Accessors }
     function Get_TpIntegra: WideString;
     function Get_CNPJ: WideString;
@@ -2902,7 +2878,7 @@ type
 { IXMLInfAdic }
 
   IXMLInfAdic = interface(IXMLNode)
-    ['{B66181E9-A730-4888-8AEF-1A983D017CBF}']
+    ['{CFCC125B-A195-4416-8900-CA8AB212C338}']
     { Property Accessors }
     function Get_InfAdFisco: WideString;
     function Get_InfCpl: WideString;
@@ -2922,7 +2898,7 @@ type
 { IXMLObsCont }
 
   IXMLObsCont = interface(IXMLNode)
-    ['{93FDD845-CE1E-419E-9873-27C76478F0AC}']
+    ['{53420F97-211F-4D1A-BFC5-310F84615DAB}']
     { Property Accessors }
     function Get_XCampo: WideString;
     function Get_XTexto: WideString;
@@ -2936,7 +2912,7 @@ type
 { IXMLObsContList }
 
   IXMLObsContList = interface(IXMLNodeCollection)
-    ['{8553B96E-5E82-44DE-A888-C70E860F20B6}']
+    ['{2E39055A-8FB6-4754-9850-5C306A2CBFE4}']
     { Methods & Properties }
     function Add: IXMLObsCont;
     function Insert(const Index: Integer): IXMLObsCont;
@@ -2948,7 +2924,7 @@ type
 { IXMLObsFisco }
 
   IXMLObsFisco = interface(IXMLNode)
-    ['{05E99A9E-FD4F-4802-ABC7-E04615A298FF}']
+    ['{21226C99-002C-4C18-8389-A992D4275B76}']
     { Property Accessors }
     function Get_XCampo: WideString;
     function Get_XTexto: WideString;
@@ -2962,7 +2938,7 @@ type
 { IXMLObsFiscoList }
 
   IXMLObsFiscoList = interface(IXMLNodeCollection)
-    ['{0FE006CB-24E1-4F18-B39B-DABB57D89D30}']
+    ['{F583F57F-7FDE-4BA1-A20A-71A263A1F88A}']
     { Methods & Properties }
     function Add: IXMLObsFisco;
     function Insert(const Index: Integer): IXMLObsFisco;
@@ -2974,7 +2950,7 @@ type
 { IXMLProcRef }
 
   IXMLProcRef = interface(IXMLNode)
-    ['{086DFBEB-E9F2-432C-9AD8-734786B4CDAD}']
+    ['{EBD7D878-B8A6-4BC2-8C7C-37536619400D}']
     { Property Accessors }
     function Get_NProc: WideString;
     function Get_IndProc: WideString;
@@ -2988,7 +2964,7 @@ type
 { IXMLProcRefList }
 
   IXMLProcRefList = interface(IXMLNodeCollection)
-    ['{A6F629E0-0730-4009-9D86-7DD7DA882993}']
+    ['{640F7C97-47D4-4D82-B5F2-BFF20E04D034}']
     { Methods & Properties }
     function Add: IXMLProcRef;
     function Insert(const Index: Integer): IXMLProcRef;
@@ -3000,7 +2976,7 @@ type
 { IXMLExporta }
 
   IXMLExporta = interface(IXMLNode)
-    ['{96FBD08D-F6E2-44B0-9ABF-5EAFF490A934}']
+    ['{3E632AC3-A46B-4908-9292-989AA6AFBFD4}']
     { Property Accessors }
     function Get_UFSaidaPais: WideString;
     function Get_XLocExporta: WideString;
@@ -3017,7 +2993,7 @@ type
 { IXMLCompra }
 
   IXMLCompra = interface(IXMLNode)
-    ['{6DA7BA68-F24E-4B1F-8F8F-C1490E4D006F}']
+    ['{B5C37D98-06F0-4DF5-A375-7AE20A834D90}']
     { Property Accessors }
     function Get_XNEmp: WideString;
     function Get_XPed: WideString;
@@ -3034,7 +3010,7 @@ type
 { IXMLCana }
 
   IXMLCana = interface(IXMLNode)
-    ['{6780C285-0E32-45AD-A0BD-53C195722111}']
+    ['{A40ED631-3769-4699-B51B-D0AED6A8DCBF}']
     { Property Accessors }
     function Get_Safra: WideString;
     function Get_Ref: WideString;
@@ -3070,7 +3046,7 @@ type
 { IXMLForDia }
 
   IXMLForDia = interface(IXMLNode)
-    ['{4CD583B0-6253-42E7-8F58-9600F4A515C0}']
+    ['{4B029A65-3813-4F46-9C77-80B477DC6BC5}']
     { Property Accessors }
     function Get_Dia: WideString;
     function Get_Qtde: WideString;
@@ -3084,7 +3060,7 @@ type
 { IXMLForDiaList }
 
   IXMLForDiaList = interface(IXMLNodeCollection)
-    ['{5898FDA5-6B5F-47A3-8587-B28214232170}']
+    ['{3470DAC2-2502-400B-8815-1F577372F6D5}']
     { Methods & Properties }
     function Add: IXMLForDia;
     function Insert(const Index: Integer): IXMLForDia;
@@ -3096,7 +3072,7 @@ type
 { IXMLDeduc }
 
   IXMLDeduc = interface(IXMLNode)
-    ['{DDA1A2FF-164D-407D-A7ED-2C000F2D9DC6}']
+    ['{F963817E-31B2-4A05-94BC-329EC967FFCF}']
     { Property Accessors }
     function Get_XDed: WideString;
     function Get_VDed: WideString;
@@ -3110,7 +3086,7 @@ type
 { IXMLDeducList }
 
   IXMLDeducList = interface(IXMLNodeCollection)
-    ['{9F4E71A7-18E0-4FF4-9642-FBB7F748F42C}']
+    ['{92599F45-64EE-45E9-998A-FCA0AFD854D8}']
     { Methods & Properties }
     function Add: IXMLDeduc;
     function Insert(const Index: Integer): IXMLDeduc;
@@ -3122,7 +3098,7 @@ type
 { IXMLInfNFeSupl }
 
   IXMLInfNFeSupl = interface(IXMLNode)
-    ['{8AB38183-3FF1-48F6-A61C-0BB6F549B226}']
+    ['{E62A0D31-9A4C-4F7B-8D8A-04D2A893184A}']
     { Property Accessors }
     function Get_QrCode: WideString;
     function Get_UrlChave: WideString;
@@ -3136,7 +3112,7 @@ type
 { IXMLSignatureType_ds }
 
   IXMLSignatureType_ds = interface(IXMLNode)
-    ['{854B3682-40EF-4269-B526-F179C5968F0B}']
+    ['{BCEC8F4F-6D57-4B4B-87A6-54C32E94928C}']
     { Property Accessors }
     function Get_Id: WideString;
     function Get_SignedInfo: IXMLSignedInfoType_ds;
@@ -3153,7 +3129,7 @@ type
 { IXMLSignedInfoType_ds }
 
   IXMLSignedInfoType_ds = interface(IXMLNode)
-    ['{AD71A404-99D0-49B2-BAE0-CF2AC5BF75A6}']
+    ['{6FFA29AC-1968-4CAB-BD6C-5C518F472019}']
     { Property Accessors }
     function Get_Id: WideString;
     function Get_CanonicalizationMethod: IXMLCanonicalizationMethod_ds;
@@ -3170,7 +3146,7 @@ type
 { IXMLCanonicalizationMethod_ds }
 
   IXMLCanonicalizationMethod_ds = interface(IXMLNode)
-    ['{A7049DA9-4C1D-4C25-A6CD-7320F20AC97F}']
+    ['{C72EF73C-362E-40AB-9FC3-D605C4752259}']
     { Property Accessors }
     function Get_Algorithm: WideString;
     procedure Set_Algorithm(Value: WideString);
@@ -3181,7 +3157,7 @@ type
 { IXMLSignatureMethod_ds }
 
   IXMLSignatureMethod_ds = interface(IXMLNode)
-    ['{1F55D4B9-8A80-4A33-9830-17FC9D5A8340}']
+    ['{4D325DFD-CA2F-42AB-B90F-263F9E496963}']
     { Property Accessors }
     function Get_Algorithm: WideString;
     procedure Set_Algorithm(Value: WideString);
@@ -3192,7 +3168,7 @@ type
 { IXMLReferenceType_ds }
 
   IXMLReferenceType_ds = interface(IXMLNode)
-    ['{5B4741D3-755D-4B1B-BF8F-5826875BF2AB}']
+    ['{EB0DCAE8-9AD2-4C0B-99BF-B3F1F4F16C73}']
     { Property Accessors }
     function Get_Id: WideString;
     function Get_URI: WideString;
@@ -3216,7 +3192,7 @@ type
 { IXMLTransformsType_ds }
 
   IXMLTransformsType_ds = interface(IXMLNodeCollection)
-    ['{BFA97D00-D162-40E9-9F7B-6AB57E41CF8B}']
+    ['{273CC01D-63CA-475A-AB7F-96559DE6CDC4}']
     { Property Accessors }
     function Get_Transform(Index: Integer): IXMLTransformType_ds;
     { Methods & Properties }
@@ -3228,7 +3204,7 @@ type
 { IXMLTransformType_ds }
 
   IXMLTransformType_ds = interface(IXMLNodeCollection)
-    ['{6736402E-2621-4EBA-97F2-5FE5100ED4A0}']
+    ['{439AE75B-69AF-47CE-A4F5-BF932EFFB250}']
     { Property Accessors }
     function Get_Algorithm: WideString;
     function Get_XPath(Index: Integer): WideString;
@@ -3243,7 +3219,7 @@ type
 { IXMLDigestMethod_ds }
 
   IXMLDigestMethod_ds = interface(IXMLNode)
-    ['{558CAB81-9F79-4061-95BC-367E16ECAECE}']
+    ['{8C5BF088-E2A2-4BAC-BFB7-0A5B67915A5A}']
     { Property Accessors }
     function Get_Algorithm: WideString;
     procedure Set_Algorithm(Value: WideString);
@@ -3254,7 +3230,7 @@ type
 { IXMLSignatureValueType_ds }
 
   IXMLSignatureValueType_ds = interface(IXMLNode)
-    ['{83BF7BBE-53A9-483A-9332-556ADF45C87B}']
+    ['{435DA4AE-4A23-49A7-93FE-306CC7B8A73E}']
     { Property Accessors }
     function Get_Id: WideString;
     procedure Set_Id(Value: WideString);
@@ -3265,7 +3241,7 @@ type
 { IXMLKeyInfoType_ds }
 
   IXMLKeyInfoType_ds = interface(IXMLNode)
-    ['{D8B603B9-18E9-49F5-ACE8-CBFA56421B3D}']
+    ['{87C65BA1-0D09-4F2D-9B6E-090C024FEC9C}']
     { Property Accessors }
     function Get_Id: WideString;
     function Get_X509Data: IXMLX509DataType_ds;
@@ -3278,7 +3254,7 @@ type
 { IXMLX509DataType_ds }
 
   IXMLX509DataType_ds = interface(IXMLNode)
-    ['{D7B65C40-6798-4A83-B8BE-E2CFAFC6F9E5}']
+    ['{FAA73955-16A6-4EDF-AF7B-E8DEE15DC5EC}']
     { Property Accessors }
     function Get_X509Certificate: WideString;
     procedure Set_X509Certificate(Value: WideString);
@@ -3289,7 +3265,7 @@ type
 { IXMLTProtNFe }
 
   IXMLTProtNFe = interface(IXMLNode)
-    ['{13E78365-D53A-44FF-8945-CCAF02E1FE8B}']
+    ['{216FEB85-E0E4-4635-8C21-D32289C23866}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_InfProt: IXMLInfProt;
@@ -3304,7 +3280,7 @@ type
 { IXMLTProtNFeList }
 
   IXMLTProtNFeList = interface(IXMLNodeCollection)
-    ['{C85143A3-5A8D-42CA-9599-9B586EB67495}']
+    ['{9FB9124D-58B1-4E5E-87FD-0D9975067C20}']
     { Methods & Properties }
     function Add: IXMLTProtNFe;
     function Insert(const Index: Integer): IXMLTProtNFe;
@@ -3316,7 +3292,7 @@ type
 { IXMLInfProt }
 
   IXMLInfProt = interface(IXMLNode)
-    ['{CC86B6B7-9C33-4B78-AD01-C7B528F9D15D}']
+    ['{AAEA2BCE-C191-4DE1-A8E3-DEDB18452D7F}']
     { Property Accessors }
     function Get_Id: WideString;
     function Get_TpAmb: WideString;
@@ -3351,7 +3327,7 @@ type
 { IXMLTRetEnviNFe }
 
   IXMLTRetEnviNFe = interface(IXMLNode)
-    ['{7E363EDD-60F6-410F-A610-B6F66ED67E01}']
+    ['{3FF76681-D469-45E2-B0EF-A2AA370E6BD9}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_TpAmb: WideString;
@@ -3384,7 +3360,7 @@ type
 { IXMLInfRec }
 
   IXMLInfRec = interface(IXMLNode)
-    ['{D864372A-357C-4282-A572-8C401EF62128}']
+    ['{7E8B9993-A4A4-46D3-91F3-6F17DE615B1C}']
     { Property Accessors }
     function Get_NRec: WideString;
     function Get_TMed: WideString;
@@ -3398,7 +3374,7 @@ type
 { IXMLTConsReciNFe }
 
   IXMLTConsReciNFe = interface(IXMLNode)
-    ['{8A543723-E596-44DE-B7A4-D75CD54B7338}']
+    ['{FBC59A7C-CF45-4615-8AF3-D74F97A26144}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_TpAmb: WideString;
@@ -3415,7 +3391,7 @@ type
 { IXMLTRetConsReciNFe }
 
   IXMLTRetConsReciNFe = interface(IXMLNode)
-    ['{FE93A805-7852-4283-865E-4E0C47891CF6}']
+    ['{F746037A-9B4E-465C-8A1E-81737FB7342A}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_TpAmb: WideString;
@@ -3455,7 +3431,7 @@ type
 { IXMLTNfeProc }
 
   IXMLTNfeProc = interface(IXMLNode)
-    ['{56BA24F2-4253-47D0-A851-4F5732513A85}']
+    ['{6116800C-6C6C-41EB-AFE9-B261AF2F3B0A}']
     { Property Accessors }
     function Get_Versao: WideString;
     function Get_NFe: IXMLTNFe;
@@ -3470,7 +3446,7 @@ type
 { IXMLNVEList }
 
   IXMLNVEList = interface(IXMLNodeCollection)
-    ['{855956F3-F2BB-441A-90CE-3478116BC757}']
+    ['{53EA71CD-720B-49AC-96FB-9FF7340B8AFD}']
     { Methods & Properties }
     function Add(const Value: WideString): IXMLNode;
     function Insert(const Index: Integer; const Value: WideString): IXMLNode;
@@ -4644,10 +4620,6 @@ type
     function Get_VBCFCPSTRet: WideString;
     function Get_PFCPSTRet: WideString;
     function Get_VFCPSTRet: WideString;
-    function Get_PRedBCEfet: WideString;
-    function Get_VBCEfet: WideString;
-    function Get_PICMSEfet: WideString;
-    function Get_VICMSEfet: WideString;
     procedure Set_Orig(Value: WideString);
     procedure Set_CST(Value: WideString);
     procedure Set_VBCSTRet(Value: WideString);
@@ -4656,10 +4628,6 @@ type
     procedure Set_VBCFCPSTRet(Value: WideString);
     procedure Set_PFCPSTRet(Value: WideString);
     procedure Set_VFCPSTRet(Value: WideString);
-    procedure Set_PRedBCEfet(Value: WideString);
-    procedure Set_VBCEfet(Value: WideString);
-    procedure Set_PICMSEfet(Value: WideString);
-    procedure Set_VICMSEfet(Value: WideString);
   end;
 
 { TXMLICMS70 }
@@ -4917,10 +4885,6 @@ type
     function Get_VBCFCPSTRet: WideString;
     function Get_PFCPSTRet: WideString;
     function Get_VFCPSTRet: WideString;
-    function Get_PRedBCEfet: WideString;
-    function Get_VBCEfet: WideString;
-    function Get_PICMSEfet: WideString;
-    function Get_VICMSEfet: WideString;
     procedure Set_Orig(Value: WideString);
     procedure Set_CSOSN(Value: WideString);
     procedure Set_VBCSTRet(Value: WideString);
@@ -4929,10 +4893,6 @@ type
     procedure Set_VBCFCPSTRet(Value: WideString);
     procedure Set_PFCPSTRet(Value: WideString);
     procedure Set_VFCPSTRet(Value: WideString);
-    procedure Set_PRedBCEfet(Value: WideString);
-    procedure Set_VBCEfet(Value: WideString);
-    procedure Set_PICMSEfet(Value: WideString);
-    procedure Set_VICMSEfet(Value: WideString);
   end;
 
 { TXMLICMSSN900 }
@@ -9743,46 +9703,6 @@ begin
   ChildNodes['vFCPSTRet'].NodeValue := Value;
 end;
 
-function TXMLICMS60.Get_PRedBCEfet: WideString;
-begin
-  Result := ChildNodes['pRedBCEfet'].Text;
-end;
-
-procedure TXMLICMS60.Set_PRedBCEfet(Value: WideString);
-begin
-  ChildNodes['pRedBCEfet'].NodeValue := Value;
-end;
-
-function TXMLICMS60.Get_VBCEfet: WideString;
-begin
-  Result := ChildNodes['vBCEfet'].Text;
-end;
-
-procedure TXMLICMS60.Set_VBCEfet(Value: WideString);
-begin
-  ChildNodes['vBCEfet'].NodeValue := Value;
-end;
-
-function TXMLICMS60.Get_PICMSEfet: WideString;
-begin
-  Result := ChildNodes['pICMSEfet'].Text;
-end;
-
-procedure TXMLICMS60.Set_PICMSEfet(Value: WideString);
-begin
-  ChildNodes['pICMSEfet'].NodeValue := Value;
-end;
-
-function TXMLICMS60.Get_VICMSEfet: WideString;
-begin
-  Result := ChildNodes['vICMSEfet'].Text;
-end;
-
-procedure TXMLICMS60.Set_VICMSEfet(Value: WideString);
-begin
-  ChildNodes['vICMSEfet'].NodeValue := Value;
-end;
-
 { TXMLICMS70 }
 
 function TXMLICMS70.Get_Orig: WideString;
@@ -10809,46 +10729,6 @@ end;
 procedure TXMLICMSSN500.Set_VFCPSTRet(Value: WideString);
 begin
   ChildNodes['vFCPSTRet'].NodeValue := Value;
-end;
-
-function TXMLICMSSN500.Get_PRedBCEfet: WideString;
-begin
-  Result := ChildNodes['pRedBCEfet'].Text;
-end;
-
-procedure TXMLICMSSN500.Set_PRedBCEfet(Value: WideString);
-begin
-  ChildNodes['pRedBCEfet'].NodeValue := Value;
-end;
-
-function TXMLICMSSN500.Get_VBCEfet: WideString;
-begin
-  Result := ChildNodes['vBCEfet'].Text;
-end;
-
-procedure TXMLICMSSN500.Set_VBCEfet(Value: WideString);
-begin
-  ChildNodes['vBCEfet'].NodeValue := Value;
-end;
-
-function TXMLICMSSN500.Get_PICMSEfet: WideString;
-begin
-  Result := ChildNodes['pICMSEfet'].Text;
-end;
-
-procedure TXMLICMSSN500.Set_PICMSEfet(Value: WideString);
-begin
-  ChildNodes['pICMSEfet'].NodeValue := Value;
-end;
-
-function TXMLICMSSN500.Get_VICMSEfet: WideString;
-begin
-  Result := ChildNodes['vICMSEfet'].Text;
-end;
-
-procedure TXMLICMSSN500.Set_VICMSEfet(Value: WideString);
-begin
-  ChildNodes['vICMSEfet'].NodeValue := Value;
 end;
 
 { TXMLICMSSN900 }

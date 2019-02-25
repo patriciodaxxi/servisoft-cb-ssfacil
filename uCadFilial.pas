@@ -380,6 +380,7 @@ type
     Label139: TLabel;
     RxDBComboBox12: TRxDBComboBox;
     RxDBComboBox11: TRxDBComboBox;
+    DBCheckBox23: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
