@@ -24,11 +24,6 @@ function fnc_Calcula_PercComissao(fDMCadNotaFiscal: TDMCadNotaFiscal): Boolean;
 
 procedure prc_Ajustar_ExtComissao(fDMCadNotaFiscal: TDMCadNotaFiscal);
 
-procedure prc_Gravar_Produto_Imp(fDMCadNotaFiscal: TDMCadNotaFiscal ; DtEmissao : TDateTime ; ID_Produto : Integer ;
-Base_ICMSSubstRet, Vlr_ICMSSubst_Ret, Base_Icms_Efet, Vlr_Icms_Efet,Base_IcmsSubst, Vlr_IcmsSubst, Qtd, Qtd_Pacote : Real ; Unidade : String );
-procedure Prc_Excluir_Produto_Imp(fDMCadNotaFiscal: TDMCadNotaFiscal ; Data : TDateTime);
-
-
 {unction fnc_Verifica_Nota_Ramiro(fDMCadNotaFiscal: TDMCadNotaFiscal; nNota: Integer): Boolean;}
 
 implementation
@@ -648,96 +643,6 @@ begin
   end;
 
 end;}
-
-procedure prc_Gravar_Produto_Imp(fDMCadNotaFiscal: TDMCadNotaFiscal ; DtEmissao : TDateTime ; ID_Produto : Integer ;
-Base_ICMSSubstRet, Vlr_ICMSSubst_Ret, Base_Icms_Efet, Vlr_Icms_Efet,Base_IcmsSubst, Vlr_IcmsSubst, Qtd, Qtd_Pacote : Real ; Unidade : String );
-var
-  vQtdAux : Real;
-begin
-  fDMCadNotaFiscal.cdsProduto_Imp.Close;
-  fDMCadNotaFiscal.sdsProduto_Imp.ParamByName('ID').AsInteger := ID_Produto;
-  fDMCadNotaFiscal.cdsProduto_Imp.Open;
-
-  if (fDMCadNotaFiscal.cdsProduto_Imp.IsEmpty) then
-    fDMCadNotaFiscal.cdsProduto_Imp.Insert
-  else
-  begin
-    if fDMCadNotaFiscal.cdsProduto_Imp.Data <= DtEmissao then
-      fDMCadNotaFiscal.cdsProduto_Imp.Edit
-    else
-      exit;
-  end;
-
-  if fDMCadNotaFiscal.cdsProduto_Imp.State in [dsInsert] then
-    fDMCadNotaFiscal.cdsProduto_ImpID.AsInteger := ID_Produto;
-
-  fDMCadNotaFiscal.cdsProduto_ImpDATA.AsDateTime := DtEmissao;
-
-  if StrToFloat(FormatFloat('0.00',Base_ICMSSubstRet)) > 0 then
-  begin
-    fDMCadNotaFiscal.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := Base_ICMSSubstRet;
-    fDMCadNotaFiscal.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := Vlr_ICMSSubst_Ret;
-    fDMCadNotaFiscal.cdsProduto_ImpTIPO_REG.AsString     := 'R';
-  end
-  //else
-  //if StrToFloat(FormatFloat('0.00',Base_Icms_Efet)) > 0 then
-  //begin
-  //  fDMCadNotaFiscal.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := Base_Icms_Efet;
-  //  fDMCadNotaFiscal.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := Vlr_Icms_Efet;
-  //end
-  else
-  if StrToFloat(FormatFloat('0.00',Base_IcmsSubst)) > 0 then
-  begin
-    fDMCadNotaFiscal.cdsProduto_ImpBASE_ST_ORIG.AsFloat  := Base_IcmsSubst;
-    fDMCadNotaFiscal.cdsProduto_ImpVLR_ST_ORIG.AsFloat   := Vlr_IcmsSubst;
-    fDMCadNotaFiscal.cdsProduto_ImpTIPO_REG.AsString     := 'C';
-  end;
-  fDMCadNotaFiscal.cdsProduto_ImpQTD_ORIGINAL.AsFloat  := StrToFloat(FormatFloat('0.0000',Qtd));
-  fDMCadNotaFiscal.cdsProduto_ImpUNIDADE_ORIG.AsString := Unidade;
-  fDMCadNotaFiscal.cdsProduto_ImpQTD_PACOTE.AsFloat    := StrToCurr(FormatCurr('0.00000',Qtd_Pacote));
-
-  vQtdAux := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsProduto_ImpQTD_ORIGINAL.AsFloat));
-  if (StrToFloat(FormatFloat('0.00000',fDMCadNotaFiscal.cdsProduto_ImpQTD_PACOTE.AsFloat)) <> 0) and (StrToFloat(FormatFloat('0.00000',fDMCadNotaFiscal.cdsProduto_ImpQTD_PACOTE.AsFloat)) <> 1) then
-    vQtdAux := StrToCurr(FormatCurr('0.00000',fDMCadNotaFiscal.cdsProduto_ImpQTD_ORIGINAL.AsFloat * fDMCadNotaFiscal.cdsProduto_ImpQTD_PACOTE.AsFloat));
-
-  fDMCadNotaFiscal.cdsProduto_ImpBASE_ST.AsFloat := StrToCurr(FormatCurr('0.00000',fDMCadNotaFiscal.cdsProduto_ImpBASE_ST_ORIG.AsFloat / vQtdAux));
-  fDMCadNotaFiscal.cdsProduto_ImpVLR_ST.AsFloat  := StrToCurr(FormatCurr('0.00000',fDMCadNotaFiscal.cdsProduto_ImpVLR_ST_ORIG.AsFloat / vQtdAux));
-
-  fDMCadNotaFiscal.cdsProduto_Imp.Post;
-  fDMCadNotaFiscal.cdsProduto_Imp.ApplyUpdates(0);
-end;
-
-procedure Prc_Excluir_Produto_Imp(fDMCadNotaFiscal: TDMCadNotaFiscal ; Data : TDateTime);
-begin
-  fDMCadNotaFiscal.mProdAux.First;
-  while not fDMCadNotaFiscal.mProdAux.Eof do
-  begin
-    fDMCadNotaFiscal.qNTEProdImp.Close;
-    fDMCadNotaFiscal.qNTEProdImp.ParamByName('ID_PRODUTO').AsInteger := fDMCadNotaFiscal.mProdAuxID_Produto.AsInteger;
-    fDMCadNotaFiscal.qNTEProdImp.Open;
-    if (Data > fDMCadNotaFiscal.qNTEProdImpDTEMISSAO.AsDateTime) and
-       ((fDMCadNotaFiscal.qNTEProdImpBASE_ICMSSUBST_RET.AsFloat > 0) or
-        (fDMCadNotaFiscal.qNTEProdImpBASE_ICMSSUBST.AsFloat > 0) or
-        (fDMCadNotaFiscal.qNTEProdImpVLR_BASE_EFET.AsFloat > 0)) then
-    begin
-      prc_Gravar_Produto_Imp(fDMCadNotaFiscal,
-                             fDMCadNotaFiscal.qNTEProdImpDTEMISSAO.AsDateTime,
-                             fDMCadNotaFiscal.mProdAuxID_Produto.AsInteger,
-                             fDMCadNotaFiscal.qNTEProdImpBASE_ICMSSUBST_RET.AsFloat,
-                             fDMCadNotaFiscal.qNTEProdImpVLR_ICMSSUBST_RET.AsFloat,
-                             fDMCadNotaFiscal.qNTEProdImpVLR_BASE_EFET.AsFloat,
-                             fDMCadNotaFiscal.qNTEProdImpVLR_ICMS_EFET.AsFloat,
-                             fDMCadNotaFiscal.qNTEProdImpBASE_ICMSSUBST.AsFloat,
-                             fDMCadNotaFiscal.qNTEProdImpVLR_ICMSSUBST.AsFloat,
-                             fDMCadNotaFiscal.qNTEProdImpQTD.AsFloat,
-                             fDMCadNotaFiscal.qNTEProdImpQTD_PACOTE.AsFloat,
-                             fDMCadNotaFiscal.qNTEProdImpUnidade.AsString);
-    end;
-
-    fDMCadNotaFiscal.mProdAux.Next;
-  end;
-
-end;
 
 end.
 

@@ -1895,34 +1895,6 @@ type
     qPosicaoUSA_PROCESSO: TStringField;
     cdsProduto_ConsumoclUsa_Processo: TStringField;
     qAtualizaPreco: TSQLQuery;
-    sdsProduto_Imp: TSQLDataSet;
-    dspProduto_Imp: TDataSetProvider;
-    cdsProduto_Imp: TClientDataSet;
-    dsProduto_Imp: TDataSource;
-    sdsProduto_ImpID: TIntegerField;
-    sdsProduto_ImpBASE_ST: TFloatField;
-    sdsProduto_ImpVLR_ST: TFloatField;
-    sdsProduto_ImpPERC_ST: TFloatField;
-    sdsProduto_ImpDATA: TDateField;
-    sdsProduto_ImpQTD_ORIGINAL: TFloatField;
-    sdsProduto_ImpUNIDADE_ORIG: TStringField;
-    sdsProduto_ImpTIPO_REG: TStringField;
-    cdsProduto_ImpID: TIntegerField;
-    cdsProduto_ImpBASE_ST: TFloatField;
-    cdsProduto_ImpVLR_ST: TFloatField;
-    cdsProduto_ImpPERC_ST: TFloatField;
-    cdsProduto_ImpDATA: TDateField;
-    cdsProduto_ImpQTD_ORIGINAL: TFloatField;
-    cdsProduto_ImpUNIDADE_ORIG: TStringField;
-    cdsProduto_ImpTIPO_REG: TStringField;
-    sdsProduto_ImpBASE_ST_ORIG: TFloatField;
-    sdsProduto_ImpVLR_ST_ORIG: TFloatField;
-    cdsProduto_ImpBASE_ST_ORIG: TFloatField;
-    cdsProduto_ImpVLR_ST_ORIG: TFloatField;
-    sdsProduto_ImpQTD_PACOTE: TFloatField;
-    cdsProduto_ImpQTD_PACOTE: TFloatField;
-    qFilial_STRet: TSQLQuery;
-    qFilial_STRetCONTADOR: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2430,8 +2402,6 @@ begin
   qParametros_Ser.Open;
   cdsFilial.Open;
   cdsCSTICMS.Open;
-  qFilial_STRet.Close;
-  qFilial_STRet.Open;
 
   if qParametros_ProdUSA_CONSUMO_COMB.AsString = 'S' then
     ctFicha_Tecnica := StringReplace(ctFicha_Tecnica,'VFICHA_TECNICA','VFICHA_TECNICA_COMB',[rfReplaceAll, rfIgnoreCase]);

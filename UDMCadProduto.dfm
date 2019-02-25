@@ -1,8 +1,8 @@
 object dmCadProduto: TdmCadProduto
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 51
-  Top = 46
+  Left = 45
+  Top = 6
   Height = 714
   Width = 1288
   object sdsProduto: TSQLDataSet
@@ -6198,8 +6198,8 @@ object dmCadProduto: TdmCadProduto
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 916
-    Top = 568
+    Left = 900
+    Top = 552
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -6222,8 +6222,8 @@ object dmCadProduto: TdmCadProduto
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 956
-    Top = 568
+    Left = 940
+    Top = 552
   end
   object frxMailExport1: TfrxMailExport
     UseFileCache = True
@@ -6238,12 +6238,12 @@ object dmCadProduto: TdmCadProduto
     ConfurmReading = False
     UseMAPI = SMTP
     MAPISendFlag = 0
-    Left = 996
-    Top = 568
+    Left = 980
+    Top = 552
   end
   object frxRichObject1: TfrxRichObject
-    Left = 1028
-    Top = 568
+    Left = 1012
+    Top = 552
   end
   object frxDBDataset2: TfrxDBDataset
     UserName = 'frxProduto'
@@ -10019,128 +10019,5 @@ object dmCadProduto: TdmCadProduto
     SQLConnection = dmDatabase.scoDados
     Left = 1080
     Top = 424
-  end
-  object sdsProduto_Imp: TSQLDataSet
-    NoMetadata = True
-    GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM PRODUTO_IMP'#13#10'WHERE ID = :ID'
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptInput
-      end>
-    SQLConnection = dmDatabase.scoDados
-    Left = 896
-    Top = 528
-    object sdsProduto_ImpID: TIntegerField
-      FieldName = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object sdsProduto_ImpBASE_ST: TFloatField
-      FieldName = 'BASE_ST'
-    end
-    object sdsProduto_ImpVLR_ST: TFloatField
-      FieldName = 'VLR_ST'
-    end
-    object sdsProduto_ImpPERC_ST: TFloatField
-      FieldName = 'PERC_ST'
-    end
-    object sdsProduto_ImpDATA: TDateField
-      FieldName = 'DATA'
-    end
-    object sdsProduto_ImpQTD_ORIGINAL: TFloatField
-      FieldName = 'QTD_ORIGINAL'
-    end
-    object sdsProduto_ImpUNIDADE_ORIG: TStringField
-      FieldName = 'UNIDADE_ORIG'
-      Size = 6
-    end
-    object sdsProduto_ImpTIPO_REG: TStringField
-      FieldName = 'TIPO_REG'
-      Size = 1
-    end
-    object sdsProduto_ImpBASE_ST_ORIG: TFloatField
-      FieldName = 'BASE_ST_ORIG'
-    end
-    object sdsProduto_ImpVLR_ST_ORIG: TFloatField
-      FieldName = 'VLR_ST_ORIG'
-    end
-    object sdsProduto_ImpQTD_PACOTE: TFloatField
-      FieldName = 'QTD_PACOTE'
-    end
-  end
-  object dspProduto_Imp: TDataSetProvider
-    DataSet = sdsProduto_Imp
-    UpdateMode = upWhereKeyOnly
-    Left = 925
-    Top = 528
-  end
-  object cdsProduto_Imp: TClientDataSet
-    Aggregates = <>
-    IndexFieldNames = 'ID'
-    Params = <>
-    ProviderName = 'dspProduto_Imp'
-    Left = 957
-    Top = 527
-    object cdsProduto_ImpID: TIntegerField
-      FieldName = 'ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object cdsProduto_ImpBASE_ST: TFloatField
-      FieldName = 'BASE_ST'
-    end
-    object cdsProduto_ImpVLR_ST: TFloatField
-      FieldName = 'VLR_ST'
-    end
-    object cdsProduto_ImpPERC_ST: TFloatField
-      FieldName = 'PERC_ST'
-    end
-    object cdsProduto_ImpDATA: TDateField
-      FieldName = 'DATA'
-    end
-    object cdsProduto_ImpQTD_ORIGINAL: TFloatField
-      FieldName = 'QTD_ORIGINAL'
-    end
-    object cdsProduto_ImpUNIDADE_ORIG: TStringField
-      FieldName = 'UNIDADE_ORIG'
-      Size = 6
-    end
-    object cdsProduto_ImpTIPO_REG: TStringField
-      FieldName = 'TIPO_REG'
-      Size = 1
-    end
-    object cdsProduto_ImpBASE_ST_ORIG: TFloatField
-      FieldName = 'BASE_ST_ORIG'
-    end
-    object cdsProduto_ImpVLR_ST_ORIG: TFloatField
-      FieldName = 'VLR_ST_ORIG'
-    end
-    object cdsProduto_ImpQTD_PACOTE: TFloatField
-      FieldName = 'QTD_PACOTE'
-    end
-  end
-  object dsProduto_Imp: TDataSource
-    DataSet = cdsProduto_Imp
-    Left = 989
-    Top = 528
-  end
-  object qFilial_STRet: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQL.Strings = (
-      'select count(1) contador'
-      'from filial f'
-      'where f.USA_ENVIO_ST_RET = '#39'S'#39)
-    SQLConnection = dmDatabase.scoDados
-    Left = 1208
-    Top = 360
-    object qFilial_STRetCONTADOR: TIntegerField
-      FieldName = 'CONTADOR'
-      Required = True
-    end
   end
 end

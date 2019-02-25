@@ -396,11 +396,6 @@ object DMCadFilial: TDMCadFilial
       FixedChar = True
       Size = 1
     end
-    object sdsFilialUSA_ENVIO_ST_RET: TStringField
-      FieldName = 'USA_ENVIO_ST_RET'
-      FixedChar = True
-      Size = 1
-    end
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
@@ -823,11 +818,6 @@ object DMCadFilial: TDMCadFilial
     end
     object cdsFilialSPED_PERIODO_IPI: TStringField
       FieldName = 'SPED_PERIODO_IPI'
-      FixedChar = True
-      Size = 1
-    end
-    object cdsFilialUSA_ENVIO_ST_RET: TStringField
-      FieldName = 'USA_ENVIO_ST_RET'
       FixedChar = True
       Size = 1
     end

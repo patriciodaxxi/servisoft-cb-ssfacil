@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, UDMCadNotaFiscal,
   StdCtrls, Buttons, RxLookup, DBCtrls, DB, Mask, RxDBComb, UCadProduto, UCadUnidade, UCadCFOP, UDMInformar_Tam,
-  NxCollection, UInformar_Tam, SqlExpr, RzPanel, RzTabs;
+  NxCollection, UInformar_Tam, SqlExpr, RzPanel;
 
 type
   TfrmCadNotaEntrada_Itens = class(TForm)
@@ -24,17 +24,6 @@ type
     SpeedButton5: TSpeedButton;
     Label10: TLabel;
     RxDBLookupCombo4: TRxDBLookupCombo;
-    Label12: TLabel;
-    pnlCombinacao: TPanel;
-    Label53: TLabel;
-    RxDBLookupCombo14: TRxDBLookupCombo;
-    Panel4: TPanel;
-    lblFinalidade: TLabel;
-    rxcbFinalidade: TRxDBComboBox;
-    lblOperacao: TLabel;
-    rxdbOperacao: TRxDBLookupCombo;
-    RzPageControl1: TRzPageControl;
-    TS_Itens: TRzTabSheet;
     Panel2: TPanel;
     Label3: TLabel;
     Label4: TLabel;
@@ -42,68 +31,67 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
-    Label11: TLabel;
-    Label13: TLabel;
-    Label14: TLabel;
-    Label9: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
-    lblTamanho: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
-    Label20: TLabel;
     DBEdit2: TDBEdit;
     DBEdit3: TDBEdit;
     DBEdit4: TDBEdit;
     DBEdit5: TDBEdit;
     DBEdit6: TDBEdit;
     DBCheckBox1: TDBCheckBox;
+    Label11: TLabel;
     RxDBLookupCombo5: TRxDBLookupCombo;
+    Label13: TLabel;
     DBEdit7: TDBEdit;
     DBEdit8: TDBEdit;
+    Label14: TLabel;
+    Label12: TLabel;
+    Label9: TLabel;
     RxDBLookupCombo6: TRxDBLookupCombo;
+    Label15: TLabel;
     RxDBLookupCombo7: TRxDBLookupCombo;
+    Label16: TLabel;
     DBMemo1: TDBMemo;
+    Label17: TLabel;
     btnGrade: TNxButton;
     dblcTamanho: TRxDBLookupCombo;
+    lblTamanho: TLabel;
     DBEdit9: TDBEdit;
+    Label18: TLabel;
+    Label19: TLabel;
     DBEdit10: TDBEdit;
+    pnlCombinacao: TPanel;
+    Label53: TLabel;
+    RxDBLookupCombo14: TRxDBLookupCombo;
+    Label20: TLabel;
     DBEdit11: TDBEdit;
-    TS_Impostos: TRzTabSheet;
+    Panel4: TPanel;
+    lblFinalidade: TLabel;
+    rxcbFinalidade: TRxDBComboBox;
     RzGroupBox2: TRzGroupBox;
     Label21: TLabel;
-    Label22: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
     DBEdit12: TDBEdit;
+    Label22: TLabel;
     DBEdit13: TDBEdit;
+    Label23: TLabel;
     DBEdit14: TDBEdit;
+    Label24: TLabel;
     DBEdit15: TDBEdit;
+    lblOperacao: TLabel;
+    rxdbOperacao: TRxDBLookupCombo;
     RzGroupBox1: TRzGroupBox;
     Label25: TLabel;
     Label26: TLabel;
     Label27: TLabel;
     Label28: TLabel;
-    Label29: TLabel;
-    Label30: TLabel;
-    Label31: TLabel;
     DBEdit16: TDBEdit;
     DBEdit17: TDBEdit;
     DBEdit18: TDBEdit;
     DBEdit19: TDBEdit;
+    Label29: TLabel;
     DBEdit20: TDBEdit;
+    Label30: TLabel;
     DBEdit21: TDBEdit;
+    Label31: TLabel;
     DBEdit22: TDBEdit;
-    RzGroupBox3: TRzGroupBox;
-    Label32: TLabel;
-    Label33: TLabel;
-    Label34: TLabel;
-    Label35: TLabel;
-    DBEdit23: TDBEdit;
-    DBEdit24: TDBEdit;
-    DBEdit25: TDBEdit;
-    DBEdit26: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -142,7 +130,6 @@ type
 
     procedure prc_Gravar_Tam;
     procedure prc_Abrir_Combinacao;
-
 
   public
     { Public declarations }

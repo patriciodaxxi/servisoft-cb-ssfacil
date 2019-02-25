@@ -2981,61 +2981,6 @@ type
     cdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField;
     cdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField;
     cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField;
-    sdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField;
-    sdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField;
-    sdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField;
-    sdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField;
-    cdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField;
-    cdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField;
-    cdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField;
-    cdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField;
-    cdsFilialUSA_ENVIO_ST_RET: TStringField;
-    mProdAux: TClientDataSet;
-    mProdAuxID_Produto: TIntegerField;
-    qNTEProdImp: TSQLQuery;
-    qNTEProdImpID: TIntegerField;
-    qNTEProdImpDTEMISSAO: TDateField;
-    qNTEProdImpID_PRODUTO: TIntegerField;
-    qNTEProdImpQTD: TFloatField;
-    qNTEProdImpQTD_PACOTE: TFloatField;
-    qNTEProdImpVLR_UNITARIO: TFloatField;
-    qNTEProdImpVLR_ICMSSUBST: TFloatField;
-    qNTEProdImpVLR_ICMSSUBST_RET: TFloatField;
-    qNTEProdImpVLR_ICMS_EFET: TFloatField;
-    qNTEProdImpBASE_ICMS: TFloatField;
-    qNTEProdImpBASE_ICMSSUBST: TFloatField;
-    qNTEProdImpBASE_ICMSSUBST_RET: TFloatField;
-    qNTEProdImpVLR_BASE_EFET: TFloatField;
-    qNTEProdImpPERC_ICMSSUBST_INTERNO: TFloatField;
-    qNTEProdImpDATA: TDateField;
-    qNTEProdImpBASE_ST_ORIG: TFloatField;
-    sdsProduto_Imp: TSQLDataSet;
-    sdsProduto_ImpID: TIntegerField;
-    sdsProduto_ImpBASE_ST: TFloatField;
-    sdsProduto_ImpVLR_ST: TFloatField;
-    sdsProduto_ImpPERC_ST: TFloatField;
-    sdsProduto_ImpDATA: TDateField;
-    sdsProduto_ImpQTD_ORIGINAL: TFloatField;
-    sdsProduto_ImpUNIDADE_ORIG: TStringField;
-    sdsProduto_ImpTIPO_REG: TStringField;
-    sdsProduto_ImpBASE_ST_ORIG: TFloatField;
-    sdsProduto_ImpVLR_ST_ORIG: TFloatField;
-    sdsProduto_ImpQTD_PACOTE: TFloatField;
-    dspProduto_Imp: TDataSetProvider;
-    cdsProduto_Imp: TClientDataSet;
-    cdsProduto_ImpID: TIntegerField;
-    cdsProduto_ImpBASE_ST: TFloatField;
-    cdsProduto_ImpVLR_ST: TFloatField;
-    cdsProduto_ImpPERC_ST: TFloatField;
-    cdsProduto_ImpDATA: TDateField;
-    cdsProduto_ImpQTD_ORIGINAL: TFloatField;
-    cdsProduto_ImpUNIDADE_ORIG: TStringField;
-    cdsProduto_ImpTIPO_REG: TStringField;
-    cdsProduto_ImpBASE_ST_ORIG: TFloatField;
-    cdsProduto_ImpVLR_ST_ORIG: TFloatField;
-    cdsProduto_ImpQTD_PACOTE: TFloatField;
-    dsProduto_Imp: TDataSource;
-    qNTEProdImpUNIDADE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
@@ -3222,9 +3167,6 @@ begin
   if not(cdsNotaFiscal.Active) or (cdsNotaFiscal.IsEmpty) then
     exit;
 
-  if cdsNotaFiscalFILIAL.AsInteger <> cdsFilialID.AsInteger then
-    cdsFilial.Locate('ID',cdsNotaFiscalFILIAL.AsInteger,([Locaseinsensitive]));
-
   vExcluir   := False;
   vID_CliAux := 0;
   mPedidoAux.EmptyDataSet;
@@ -3328,20 +3270,6 @@ begin
         end;
       end;
 
-      //ProdAux referente ao produto impostos 24/02/2019
-      if (cdsFilialUSA_ENVIO_ST_RET.AsString = 'S') and (cdsNotaFiscalTIPO_REG.AsString = 'NTE') and
-         ((StrToFloat(FormatFloat('0.00',cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat)) > 0) or
-          (StrToFloat(FormatFloat('0.00',cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat)) > 0) or
-          (StrToFloat(FormatFloat('0.00',cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat)) > 0)) then
-      begin
-        if not(mProdAux.FindKey([cdsNotaFiscal_ItensID_PRODUTO.AsInteger])) then
-        begin
-          mProdAux.Insert;
-          mProdAuxID_Produto.AsInteger := cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
-          mProdAux.Post;
-        end;
-      end;
-
       //03/09/2018
       if not cdsNotaFiscal_Copia.IsEmpty then
       begin
@@ -3353,7 +3281,7 @@ begin
         end;
         cdsNotaFiscal_Copia.Delete;
       end;
-
+      
       cdsNotaFiscal_Itens.Delete;
     end;
 
@@ -3379,7 +3307,6 @@ begin
     vExcluir := True;
 
   except
-    mProdAux.EmptyDataSet;
     dmDatabase.scoDados.Rollback(ID);
     raise;
   end;

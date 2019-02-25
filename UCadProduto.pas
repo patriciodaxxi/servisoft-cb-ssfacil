@@ -1095,7 +1095,7 @@ uses rsDBUtils, uUtilPadrao, URelProduto, URelProduto_Grupo, USel_Grupo, USel_Pl
   USel_EnqIPI, USel_CodCest, VarUtils, UCadProduto_Serie, UCadProduto_Cad_Ant, UCadProcesso_Grupo, USel_ContaOrc, USel_Produto,
   uCopiar_Comb_Agrupado, UCadProduto_GradeNum, UCadProduto_Lote, USel_Produto_Lote, UCadProduto_Larg,
   UAltProd, UCadProduto_GradeRefTam, USel_Maquina,
-  UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu, UCadProduto_Imp;
+  UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu;
 
 {$R *.dfm}
 
@@ -1836,9 +1836,6 @@ begin
       Label248.Caption := 'Material de Consumo';
     Label248.Caption := Label248.Caption + ' Sem Preço Custo ';
   end;
-
-  if fDMCadProduto.qFilial_STRetCONTADOR.AsInteger > 0 then
-    StaticText1.Caption := StaticText1.Caption + '  | F7 ST Entrada ';
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
@@ -4438,7 +4435,6 @@ procedure TfrmCadProduto.SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
 var  
   ffrmCadProduto_Cad_Ant: TfrmCadProduto_Cad_Ant;
   ffrmSel_Produto_Lote: TfrmSel_Produto_Lote;
-  ffrmCadProduto_Imp: TfrmCadProduto_Imp;
   vId: Integer;
   vTipoReg, vIndexName: String;
 begin
@@ -4459,13 +4455,6 @@ begin
     ffrmSel_Produto_Lote.vID_Produto_Loc := fDMCadProduto.cdsProduto_ConsultaID.AsInteger;
     ffrmSel_Produto_Lote.ShowModal;
     FreeAndNil(ffrmSel_Produto_Lote);
-  end
-  else
-  if (Key = Vk_F7) and (fDMCadProduto.cdsProduto_Consulta.Active) and (fDMCadProduto.cdsProduto_ConsultaID.AsInteger > 0) then
-  begin
-    ffrmCadProduto_Imp := TfrmCadProduto_Imp.Create(Self);
-    ffrmCadProduto_Imp.ShowModal;
-    FreeAndNil(ffrmCadProduto_Imp);
   end
   else
   if (Key = Vk_F6) and not(fDMCadProduto.cdsProduto_Consulta.IsEmpty) then

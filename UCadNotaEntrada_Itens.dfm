@@ -245,7 +245,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     Height = 34
     Align = alBottom
     Color = 8404992
-    TabOrder = 3
+    TabOrder = 4
     object BitBtn4: TBitBtn
       Left = 322
       Top = 5
@@ -275,6 +275,612 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
       ParentFont = False
       TabOrder = 0
       OnClick = BitBtn1Click
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 145
+    Width = 713
+    Height = 378
+    Align = alClient
+    Color = clMoneyGreen
+    TabOrder = 3
+    OnEnter = Panel2Enter
+    object Label3: TLabel
+      Left = 66
+      Top = 13
+      Width = 43
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Unidade:'
+    end
+    object Label4: TLabel
+      Left = 51
+      Top = 36
+      Width = 58
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Quantidade:'
+    end
+    object Label5: TLabel
+      Left = 69
+      Top = 100
+      Width = 40
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '% ICMS:'
+    end
+    object Label6: TLabel
+      Left = 82
+      Top = 123
+      Width = 27
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '% IPI:'
+    end
+    object Label7: TLabel
+      Left = 55
+      Top = 59
+      Width = 54
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Vlr.Unit'#225'rio:'
+    end
+    object Label8: TLabel
+      Left = 67
+      Top = 189
+      Width = 42
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Vlr.Total:'
+    end
+    object Label11: TLabel
+      Left = 56
+      Top = 79
+      Width = 53
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'CST ICMS:'
+    end
+    object Label13: TLabel
+      Left = 49
+      Top = 145
+      Width = 60
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '% Desconto:'
+    end
+    object Label14: TLabel
+      Left = 45
+      Top = 167
+      Width = 64
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Vlr.Desconto:'
+    end
+    object Label9: TLabel
+      Left = 8
+      Top = 211
+      Width = 101
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Conta de Or'#231'amento:'
+    end
+    object Label15: TLabel
+      Left = 30
+      Top = 233
+      Width = 79
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Centro de Custo:'
+    end
+    object Label16: TLabel
+      Left = 17
+      Top = 300
+      Width = 95
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Obs. Complementar:'
+    end
+    object Label17: TLabel
+      Left = 26
+      Top = 322
+      Width = 80
+      Height = 52
+      Alignment = taRightJustify
+      Caption = 'Esta observa'#231#227'o'#13#10'vai ser copiada '#13#10'para a Nota de'#13#10'Sa'#237'da'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblTamanho: TLabel
+      Left = 228
+      Top = 32
+      Width = 48
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Tamanho:'
+      Visible = False
+    end
+    object Label18: TLabel
+      Left = 232
+      Top = 9
+      Width = 127
+      Height = 13
+      Caption = 'F2 Trocar Unidade Medida'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label19: TLabel
+      Left = 473
+      Top = 13
+      Width = 76
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Qtd.Unid. Conv:'
+      Visible = False
+    end
+    object Label20: TLabel
+      Left = 28
+      Top = 255
+      Width = 81
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'N'#186' Lote Controle:'
+    end
+    object DBEdit2: TDBEdit
+      Left = 112
+      Top = 27
+      Width = 115
+      Height = 21
+      DataField = 'QTD'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      TabOrder = 1
+      OnExit = DBEdit2Exit
+    end
+    object DBEdit3: TDBEdit
+      Left = 112
+      Top = 93
+      Width = 115
+      Height = 21
+      DataField = 'PERC_ICMS'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      TabOrder = 6
+    end
+    object DBEdit4: TDBEdit
+      Left = 112
+      Top = 115
+      Width = 115
+      Height = 21
+      DataField = 'PERC_IPI'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      TabOrder = 7
+    end
+    object DBEdit5: TDBEdit
+      Left = 112
+      Top = 49
+      Width = 115
+      Height = 21
+      DataField = 'VLR_UNITARIO'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      TabOrder = 4
+      OnExit = DBEdit5Exit
+    end
+    object DBEdit6: TDBEdit
+      Left = 112
+      Top = 181
+      Width = 115
+      Height = 21
+      DataField = 'VLR_TOTAL'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      TabOrder = 10
+    end
+    object DBCheckBox1: TDBCheckBox
+      Left = 113
+      Top = 271
+      Width = 70
+      Height = 17
+      Caption = 'Estoque'
+      DataField = 'GERAR_ESTOQUE'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      TabOrder = 14
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
+    end
+    object RxDBLookupCombo5: TRxDBLookupCombo
+      Left = 112
+      Top = 71
+      Width = 115
+      Height = 21
+      DropDownCount = 8
+      DropDownWidth = 500
+      DataField = 'ID_CSTICMS'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      LookupField = 'ID'
+      LookupDisplay = 'COD_CST;PERCENTUAL'
+      LookupSource = DMCadNotaFiscal.dsTab_CSTICMS
+      TabOrder = 5
+    end
+    object DBEdit7: TDBEdit
+      Left = 112
+      Top = 137
+      Width = 115
+      Height = 21
+      DataField = 'PERC_DESCONTO'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      TabOrder = 8
+      OnExit = DBEdit7Exit
+    end
+    object DBEdit8: TDBEdit
+      Left = 112
+      Top = 159
+      Width = 115
+      Height = 21
+      DataField = 'VLR_DESCONTO'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      TabOrder = 9
+      OnExit = DBEdit8Exit
+    end
+    object RxDBLookupCombo6: TRxDBLookupCombo
+      Left = 112
+      Top = 203
+      Width = 300
+      Height = 21
+      DropDownCount = 8
+      DropDownWidth = 550
+      DataField = 'CONTA_ORCAMENTO_ID'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      LookupField = 'ID'
+      LookupDisplay = 'DESCRICAO'
+      LookupSource = DMCadNotaFiscal.dsContaOrcamento
+      TabOrder = 11
+    end
+    object RxDBLookupCombo7: TRxDBLookupCombo
+      Left = 112
+      Top = 225
+      Width = 300
+      Height = 21
+      DropDownCount = 8
+      DropDownWidth = 550
+      DataField = 'CENTRO_CUSTO_ID'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      LookupField = 'ID'
+      LookupDisplay = 'DESCRICAO'
+      LookupSource = DMCadNotaFiscal.dsCentroCusto
+      TabOrder = 12
+    end
+    object DBMemo1: TDBMemo
+      Left = 113
+      Top = 292
+      Width = 424
+      Height = 80
+      Ctl3D = True
+      DataField = 'OBS_COMPLEMENTAR'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      MaxLength = 100
+      ParentCtl3D = False
+      ScrollBars = ssVertical
+      TabOrder = 15
+    end
+    object btnGrade: TNxButton
+      Left = 226
+      Top = 25
+      Width = 142
+      Height = 25
+      Hint = 'Abre a tela de tamanhos'
+      Caption = 'Grade'
+      Color = 16752448
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      Glyph.Data = {
+        A2000000424DA2000000000000003E000000280000001A000000190000000100
+        010000000000640000000000000000000000020000000200000000000000FFFF
+        FF00BFFFFF80BFFFFF80BFFFFF80BFFFFF80BFFFFF80B80E0180B00E0180B386
+        7980BFC7F980BF87F180BF0FE180BF0FE180BF0FE180BF8FF180BF8FF980B00E
+        0180B01E0180BC7F8780BE7FCF80BFFFFF80BFFFFF80BFFFFF80BFFFFF80C000
+        0000FFFFFFC0}
+      GlyphSpacing = 5
+      ParentColor = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      Transparent = True
+      Visible = False
+      OnClick = btnGradeClick
+    end
+    object dblcTamanho: TRxDBLookupCombo
+      Left = 278
+      Top = 25
+      Width = 115
+      Height = 21
+      DropDownCount = 8
+      Ctl3D = True
+      DataField = 'TAMANHO'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      LookupField = 'TAMANHO'
+      LookupDisplay = 'TAMANHO'
+      LookupSource = DMInformar_Tam.dsProduto_Tam
+      ParentCtl3D = False
+      TabOrder = 3
+      Visible = False
+    end
+    object DBEdit9: TDBEdit
+      Left = 112
+      Top = 5
+      Width = 115
+      Height = 21
+      Color = clSilver
+      DataField = 'UNIDADE'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      ReadOnly = True
+      TabOrder = 0
+      OnKeyDown = DBEdit9KeyDown
+    end
+    object DBEdit10: TDBEdit
+      Left = 552
+      Top = 5
+      Width = 73
+      Height = 19
+      TabStop = False
+      Color = clSilver
+      Ctl3D = False
+      DataField = 'QTD_PACOTE'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 16
+      Visible = False
+      OnKeyDown = DBEdit9KeyDown
+    end
+    object DBEdit11: TDBEdit
+      Left = 112
+      Top = 247
+      Width = 298
+      Height = 21
+      CharCase = ecUpperCase
+      DataField = 'NUM_LOTE_CONTROLE'
+      DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+      TabOrder = 13
+    end
+    object RzGroupBox2: TRzGroupBox
+      Left = 504
+      Top = 37
+      Width = 185
+      Height = 92
+      Caption = ' PIS / COFINS '
+      Color = clMoneyGreen
+      FlatColor = clBlack
+      TabOrder = 17
+      object Label21: TLabel
+        Left = 38
+        Top = 20
+        Width = 31
+        Height = 13
+        Alignment = taRightJustify
+        Caption = '% PIS:'
+      end
+      object Label22: TLabel
+        Left = 16
+        Top = 56
+        Width = 53
+        Height = 13
+        Alignment = taRightJustify
+        Caption = '% COFINS:'
+      end
+      object Label23: TLabel
+        Left = 12
+        Top = 74
+        Width = 57
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr.COFINS:'
+      end
+      object Label24: TLabel
+        Left = 31
+        Top = 38
+        Width = 38
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr. PIS:'
+      end
+      object DBEdit12: TDBEdit
+        Left = 72
+        Top = 12
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'PERC_PIS'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 0
+      end
+      object DBEdit13: TDBEdit
+        Left = 72
+        Top = 48
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'PERC_COFINS'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 2
+      end
+      object DBEdit14: TDBEdit
+        Left = 72
+        Top = 66
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'VLR_COFINS'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 3
+      end
+      object DBEdit15: TDBEdit
+        Left = 72
+        Top = 30
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'VLR_PIS'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 1
+      end
+    end
+    object RzGroupBox1: TRzGroupBox
+      Left = 504
+      Top = 133
+      Width = 187
+      Height = 148
+      Caption = ' ICMS'
+      Color = clMoneyGreen
+      FlatColor = clBlack
+      TabOrder = 18
+      object Label25: TLabel
+        Left = 15
+        Top = 20
+        Width = 78
+        Height = 13
+        Alignment = taRightJustify
+        Caption = '% Red Base ST:'
+      end
+      object Label26: TLabel
+        Left = 36
+        Top = 56
+        Width = 57
+        Height = 13
+        Alignment = taRightJustify
+        Caption = '% ICMS ST:'
+      end
+      object Label27: TLabel
+        Left = 29
+        Top = 74
+        Width = 64
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr. ICMS ST:'
+      end
+      object Label28: TLabel
+        Left = 49
+        Top = 38
+        Width = 44
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Base ST:'
+      end
+      object Label29: TLabel
+        Left = 3
+        Top = 92
+        Width = 90
+        Height = 13
+        Alignment = taRightJustify
+        Caption = '% Red Base ICMS:'
+      end
+      object Label30: TLabel
+        Left = 15
+        Top = 110
+        Width = 78
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Base ST Retida:'
+      end
+      object Label31: TLabel
+        Left = 24
+        Top = 128
+        Width = 69
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr. ST Retida:'
+      end
+      object DBEdit16: TDBEdit
+        Left = 96
+        Top = 12
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'PERC_BASE_ICMSSUBT_RED'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 0
+      end
+      object DBEdit17: TDBEdit
+        Left = 96
+        Top = 48
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'PERC_ICMSSUBST_INTERNO'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 2
+      end
+      object DBEdit18: TDBEdit
+        Left = 96
+        Top = 66
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'VLR_ICMSSUBST'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 3
+      end
+      object DBEdit19: TDBEdit
+        Left = 96
+        Top = 30
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'BASE_ICMSSUBST'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 1
+      end
+      object DBEdit20: TDBEdit
+        Left = 96
+        Top = 84
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'PERC_BASE_ICMS_RED'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 4
+      end
+      object DBEdit21: TDBEdit
+        Left = 96
+        Top = 102
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'BASE_ICMSSUBST_RET'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 5
+      end
+      object DBEdit22: TDBEdit
+        Left = 96
+        Top = 120
+        Width = 88
+        Height = 19
+        Ctl3D = False
+        DataField = 'VLR_ICMSSUBST_RET'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        ParentCtl3D = False
+        TabOrder = 6
+      end
     end
   end
   object pnlCombinacao: TPanel
@@ -368,716 +974,6 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
       LookupDisplay = 'NOME'
       LookupSource = DMCadNotaFiscal.dsOperacao_Nota
       TabOrder = 1
-    end
-  end
-  object RzPageControl1: TRzPageControl
-    Left = 0
-    Top = 145
-    Width = 713
-    Height = 378
-    ActivePage = TS_Impostos
-    ActivePageDefault = TS_Itens
-    Align = alClient
-    TabIndex = 1
-    TabOrder = 4
-    FixedDimension = 19
-    object TS_Itens: TRzTabSheet
-      Caption = 'Itens'
-      object Panel2: TPanel
-        Left = 0
-        Top = 0
-        Width = 709
-        Height = 355
-        Align = alClient
-        Color = clMoneyGreen
-        TabOrder = 0
-        OnEnter = Panel2Enter
-        object Label3: TLabel
-          Left = 66
-          Top = 13
-          Width = 43
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Unidade:'
-        end
-        object Label4: TLabel
-          Left = 51
-          Top = 36
-          Width = 58
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Quantidade:'
-        end
-        object Label5: TLabel
-          Left = 69
-          Top = 100
-          Width = 40
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% ICMS:'
-        end
-        object Label6: TLabel
-          Left = 82
-          Top = 123
-          Width = 27
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% IPI:'
-        end
-        object Label7: TLabel
-          Left = 55
-          Top = 59
-          Width = 54
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Vlr.Unit'#225'rio:'
-        end
-        object Label8: TLabel
-          Left = 67
-          Top = 189
-          Width = 42
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Vlr.Total:'
-        end
-        object Label11: TLabel
-          Left = 56
-          Top = 79
-          Width = 53
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'CST ICMS:'
-        end
-        object Label13: TLabel
-          Left = 49
-          Top = 145
-          Width = 60
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% Desconto:'
-        end
-        object Label14: TLabel
-          Left = 45
-          Top = 167
-          Width = 64
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Vlr.Desconto:'
-        end
-        object Label9: TLabel
-          Left = 8
-          Top = 211
-          Width = 101
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Conta de Or'#231'amento:'
-        end
-        object Label15: TLabel
-          Left = 30
-          Top = 233
-          Width = 79
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Centro de Custo:'
-        end
-        object Label16: TLabel
-          Left = 17
-          Top = 300
-          Width = 95
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Obs. Complementar:'
-        end
-        object Label17: TLabel
-          Left = 26
-          Top = 322
-          Width = 80
-          Height = 52
-          Alignment = taRightJustify
-          Caption = 'Esta observa'#231#227'o'#13#10'vai ser copiada '#13#10'para a Nota de'#13#10'Sa'#237'da'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentFont = False
-        end
-        object lblTamanho: TLabel
-          Left = 228
-          Top = 32
-          Width = 48
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Tamanho:'
-          Visible = False
-        end
-        object Label18: TLabel
-          Left = 232
-          Top = 9
-          Width = 127
-          Height = 13
-          Caption = 'F2 Trocar Unidade Medida'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clMaroon
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentFont = False
-        end
-        object Label19: TLabel
-          Left = 473
-          Top = 13
-          Width = 76
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Qtd.Unid. Conv:'
-          Visible = False
-        end
-        object Label20: TLabel
-          Left = 28
-          Top = 255
-          Width = 81
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'N'#186' Lote Controle:'
-        end
-        object DBEdit2: TDBEdit
-          Left = 112
-          Top = 27
-          Width = 115
-          Height = 21
-          DataField = 'QTD'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          TabOrder = 1
-          OnExit = DBEdit2Exit
-        end
-        object DBEdit3: TDBEdit
-          Left = 112
-          Top = 93
-          Width = 115
-          Height = 21
-          DataField = 'PERC_ICMS'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          TabOrder = 6
-        end
-        object DBEdit4: TDBEdit
-          Left = 112
-          Top = 115
-          Width = 115
-          Height = 21
-          DataField = 'PERC_IPI'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          TabOrder = 7
-        end
-        object DBEdit5: TDBEdit
-          Left = 112
-          Top = 49
-          Width = 115
-          Height = 21
-          DataField = 'VLR_UNITARIO'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          TabOrder = 4
-          OnExit = DBEdit5Exit
-        end
-        object DBEdit6: TDBEdit
-          Left = 112
-          Top = 181
-          Width = 115
-          Height = 21
-          DataField = 'VLR_TOTAL'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          TabOrder = 10
-        end
-        object DBCheckBox1: TDBCheckBox
-          Left = 113
-          Top = 271
-          Width = 70
-          Height = 17
-          Caption = 'Estoque'
-          DataField = 'GERAR_ESTOQUE'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          TabOrder = 14
-          ValueChecked = 'S'
-          ValueUnchecked = 'N'
-        end
-        object RxDBLookupCombo5: TRxDBLookupCombo
-          Left = 112
-          Top = 71
-          Width = 115
-          Height = 21
-          DropDownCount = 8
-          DropDownWidth = 500
-          DataField = 'ID_CSTICMS'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          LookupField = 'ID'
-          LookupDisplay = 'COD_CST;PERCENTUAL'
-          LookupSource = DMCadNotaFiscal.dsTab_CSTICMS
-          TabOrder = 5
-        end
-        object DBEdit7: TDBEdit
-          Left = 112
-          Top = 137
-          Width = 115
-          Height = 21
-          DataField = 'PERC_DESCONTO'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          TabOrder = 8
-          OnExit = DBEdit7Exit
-        end
-        object DBEdit8: TDBEdit
-          Left = 112
-          Top = 159
-          Width = 115
-          Height = 21
-          DataField = 'VLR_DESCONTO'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          TabOrder = 9
-          OnExit = DBEdit8Exit
-        end
-        object RxDBLookupCombo6: TRxDBLookupCombo
-          Left = 112
-          Top = 203
-          Width = 300
-          Height = 21
-          DropDownCount = 8
-          DropDownWidth = 550
-          DataField = 'CONTA_ORCAMENTO_ID'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          LookupField = 'ID'
-          LookupDisplay = 'DESCRICAO'
-          LookupSource = DMCadNotaFiscal.dsContaOrcamento
-          TabOrder = 11
-        end
-        object RxDBLookupCombo7: TRxDBLookupCombo
-          Left = 112
-          Top = 225
-          Width = 300
-          Height = 21
-          DropDownCount = 8
-          DropDownWidth = 550
-          DataField = 'CENTRO_CUSTO_ID'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          LookupField = 'ID'
-          LookupDisplay = 'DESCRICAO'
-          LookupSource = DMCadNotaFiscal.dsCentroCusto
-          TabOrder = 12
-        end
-        object DBMemo1: TDBMemo
-          Left = 113
-          Top = 292
-          Width = 424
-          Height = 80
-          Ctl3D = True
-          DataField = 'OBS_COMPLEMENTAR'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          MaxLength = 100
-          ParentCtl3D = False
-          ScrollBars = ssVertical
-          TabOrder = 15
-        end
-        object btnGrade: TNxButton
-          Left = 226
-          Top = 25
-          Width = 142
-          Height = 25
-          Hint = 'Abre a tela de tamanhos'
-          Caption = 'Grade'
-          Color = 16752448
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlue
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = [fsBold]
-          Glyph.Data = {
-            A2000000424DA2000000000000003E000000280000001A000000190000000100
-            010000000000640000000000000000000000020000000200000000000000FFFF
-            FF00BFFFFF80BFFFFF80BFFFFF80BFFFFF80BFFFFF80B80E0180B00E0180B386
-            7980BFC7F980BF87F180BF0FE180BF0FE180BF0FE180BF8FF180BF8FF980B00E
-            0180B01E0180BC7F8780BE7FCF80BFFFFF80BFFFFF80BFFFFF80BFFFFF80C000
-            0000FFFFFFC0}
-          GlyphSpacing = 5
-          ParentColor = False
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 2
-          Transparent = True
-          Visible = False
-          OnClick = btnGradeClick
-        end
-        object dblcTamanho: TRxDBLookupCombo
-          Left = 278
-          Top = 25
-          Width = 115
-          Height = 21
-          DropDownCount = 8
-          Ctl3D = True
-          DataField = 'TAMANHO'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          LookupField = 'TAMANHO'
-          LookupDisplay = 'TAMANHO'
-          LookupSource = DMInformar_Tam.dsProduto_Tam
-          ParentCtl3D = False
-          TabOrder = 3
-          Visible = False
-        end
-        object DBEdit9: TDBEdit
-          Left = 112
-          Top = 5
-          Width = 115
-          Height = 21
-          Color = clSilver
-          DataField = 'UNIDADE'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ReadOnly = True
-          TabOrder = 0
-          OnKeyDown = DBEdit9KeyDown
-        end
-        object DBEdit10: TDBEdit
-          Left = 552
-          Top = 5
-          Width = 73
-          Height = 19
-          TabStop = False
-          Color = clSilver
-          Ctl3D = False
-          DataField = 'QTD_PACOTE'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          ReadOnly = True
-          TabOrder = 16
-          Visible = False
-          OnKeyDown = DBEdit9KeyDown
-        end
-        object DBEdit11: TDBEdit
-          Left = 112
-          Top = 247
-          Width = 298
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'NUM_LOTE_CONTROLE'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          TabOrder = 13
-        end
-      end
-    end
-    object TS_Impostos: TRzTabSheet
-      Caption = 'Impostos'
-      object RzGroupBox2: TRzGroupBox
-        Left = 16
-        Top = 13
-        Width = 185
-        Height = 92
-        Caption = ' PIS / COFINS '
-        Color = clMoneyGreen
-        FlatColor = clBlack
-        TabOrder = 0
-        object Label21: TLabel
-          Left = 38
-          Top = 20
-          Width = 31
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% PIS:'
-        end
-        object Label22: TLabel
-          Left = 16
-          Top = 56
-          Width = 53
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% COFINS:'
-        end
-        object Label23: TLabel
-          Left = 12
-          Top = 74
-          Width = 57
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Vlr.COFINS:'
-        end
-        object Label24: TLabel
-          Left = 31
-          Top = 38
-          Width = 38
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Vlr. PIS:'
-        end
-        object DBEdit12: TDBEdit
-          Left = 72
-          Top = 12
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'PERC_PIS'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 0
-        end
-        object DBEdit13: TDBEdit
-          Left = 72
-          Top = 48
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'PERC_COFINS'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 2
-        end
-        object DBEdit14: TDBEdit
-          Left = 72
-          Top = 66
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'VLR_COFINS'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 3
-        end
-        object DBEdit15: TDBEdit
-          Left = 72
-          Top = 30
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'VLR_PIS'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 1
-        end
-      end
-      object RzGroupBox1: TRzGroupBox
-        Left = 208
-        Top = 13
-        Width = 187
-        Height = 161
-        Caption = ' ICMS ST '
-        Color = clMoneyGreen
-        FlatColor = clBlack
-        TabOrder = 1
-        object Label25: TLabel
-          Left = 15
-          Top = 20
-          Width = 78
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% Red Base ST:'
-        end
-        object Label26: TLabel
-          Left = 36
-          Top = 56
-          Width = 57
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% ICMS ST:'
-        end
-        object Label27: TLabel
-          Left = 29
-          Top = 74
-          Width = 64
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Vlr. ICMS ST:'
-        end
-        object Label28: TLabel
-          Left = 49
-          Top = 38
-          Width = 44
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Base ST:'
-        end
-        object Label29: TLabel
-          Left = 3
-          Top = 92
-          Width = 90
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% Red Base ICMS:'
-        end
-        object Label30: TLabel
-          Left = 15
-          Top = 119
-          Width = 78
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Base ST Retida:'
-        end
-        object Label31: TLabel
-          Left = 24
-          Top = 137
-          Width = 69
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Vlr. ST Retida:'
-        end
-        object DBEdit16: TDBEdit
-          Left = 96
-          Top = 12
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'PERC_BASE_ICMSSUBT_RED'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 0
-        end
-        object DBEdit17: TDBEdit
-          Left = 96
-          Top = 48
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'PERC_ICMSSUBST_INTERNO'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 2
-        end
-        object DBEdit18: TDBEdit
-          Left = 96
-          Top = 66
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'VLR_ICMSSUBST'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 3
-        end
-        object DBEdit19: TDBEdit
-          Left = 96
-          Top = 30
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'BASE_ICMSSUBST'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 1
-        end
-        object DBEdit20: TDBEdit
-          Left = 96
-          Top = 84
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'PERC_BASE_ICMS_RED'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 4
-        end
-        object DBEdit21: TDBEdit
-          Left = 96
-          Top = 113
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'BASE_ICMSSUBST_RET'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 5
-        end
-        object DBEdit22: TDBEdit
-          Left = 96
-          Top = 131
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'VLR_ICMSSUBST_RET'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 6
-        end
-      end
-      object RzGroupBox3: TRzGroupBox
-        Left = 403
-        Top = 13
-        Width = 187
-        Height = 92
-        Caption = ' ICMS Efetivo '
-        Color = clMoneyGreen
-        FlatColor = clBlack
-        TabOrder = 2
-        object Label32: TLabel
-          Left = 32
-          Top = 20
-          Width = 61
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% Red Base:'
-        end
-        object Label33: TLabel
-          Left = 53
-          Top = 56
-          Width = 40
-          Height = 13
-          Alignment = taRightJustify
-          Caption = '% ICMS:'
-        end
-        object Label34: TLabel
-          Left = 46
-          Top = 74
-          Width = 47
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Vlr. ICMS:'
-        end
-        object Label35: TLabel
-          Left = 66
-          Top = 38
-          Width = 27
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Base:'
-        end
-        object DBEdit23: TDBEdit
-          Left = 96
-          Top = 12
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'PERC_BASE_RED_EFET'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 0
-        end
-        object DBEdit24: TDBEdit
-          Left = 96
-          Top = 48
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'PERC_ICMS_EFET'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 2
-        end
-        object DBEdit25: TDBEdit
-          Left = 96
-          Top = 66
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'VLR_ICMS_EFET'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 3
-        end
-        object DBEdit26: TDBEdit
-          Left = 96
-          Top = 30
-          Width = 88
-          Height = 19
-          Ctl3D = False
-          DataField = 'VLR_BASE_EFET'
-          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-          ParentCtl3D = False
-          TabOrder = 1
-        end
-      end
     end
   end
 end

@@ -327,14 +327,8 @@ begin
 end;
 
 procedure TfrmCadNotaEntrada.prc_Excluir_Registro;
-var
-  vDataAux : TDateTime;
 begin
-  vDataAux := fDMCadNotaFiscal.cdsNotaFiscalDTEMISSAO.AsDateTime;
-  fDMCadNotaFiscal.mProdAux.EmptyDataSet;
   fDMCadNotaFiscal.prc_Excluir;
-  if not fDMCadNotaFiscal.mProdAux.IsEmpty then
-    uGrava_NotaFiscal.Prc_Excluir_Produto_Imp(fDMCadNotaFiscal,vDataAux);
 end;
 
 procedure TfrmCadNotaEntrada.prc_Gravar_Registro;
@@ -437,25 +431,6 @@ begin
           fDMCadNotaFiscal.mPedidoAux.Post;
         end;
         //****************
-
-        //24/02/2019
-        if (fDMCadNotaFiscal.cdsFilialUSA_ENVIO_ST_RET.AsString = 'S') and ((StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat)) > 0) or
-           (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat)) > 0) or
-           (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsFloat)) > 0)) then
-          uGrava_NotaFiscal.prc_Gravar_Produto_Imp(fDMCadNotaFiscal,
-                             fDMCadNotaFiscal.cdsNotaFiscalDTEMISSAO.AsDateTime,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsFloat,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat,
-                             fDMCadNotaFiscal.cdsNotaFiscal_ItensUnidade.AsString);
-        //************
-
         fDMCadNotaFiscal.cdsNotaFiscal_Itens.Next;
       end;
 
