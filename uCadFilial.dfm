@@ -120,7 +120,6 @@ object frmCadFilial: TfrmCadFilial
             FieldName = 'FONE'
             Title.Alignment = taCenter
             Title.Caption = 'Fone'
-            Width = 64
             Visible = True
           end>
       end
@@ -1269,8 +1268,8 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'S'#233'rie Normal (NFe):'
           end
           object Label59: TLabel
-            Left = 443
-            Top = 200
+            Left = 451
+            Top = 232
             Width = 122
             Height = 26
             Alignment = taRightJustify
@@ -1614,8 +1613,8 @@ object frmCadFilial: TfrmCadFilial
             end
           end
           object DBEdit40: TDBEdit
-            Left = 569
-            Top = 205
+            Left = 577
+            Top = 237
             Width = 65
             Height = 21
             CharCase = ecUpperCase
@@ -1729,7 +1728,18 @@ object frmCadFilial: TfrmCadFilial
             TabOrder = 19
             ValueChecked = 'S'
             ValueUnchecked = 'N'
-            OnClick = DBCheckBox15Click
+          end
+          object DBCheckBox24: TDBCheckBox
+            Left = 352
+            Top = 185
+            Width = 313
+            Height = 17
+            Caption = 'Calcular ICMS Efetivo'
+            DataField = 'CALCULAR_ICMS_EFET'
+            DataSource = DMCadFilial.dsFilial
+            TabOrder = 24
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
           end
         end
         object TS_Parametros: TRzTabSheet

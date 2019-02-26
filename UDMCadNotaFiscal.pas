@@ -3052,6 +3052,9 @@ type
     qProdSTBASE_ST_RET: TFloatField;
     qProdSTVLR_ST: TFloatField;
     qProdSTVLR_ST_RET: TFloatField;
+    cdsFilialCALCULAR_ICMS_EFET: TStringField;
+    qProdSTPERC_ST: TFloatField;
+    cdsTab_NCMPERC_ICMS: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

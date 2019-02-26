@@ -1201,6 +1201,12 @@ type
     sdsNotaFiscalBASE_IPI: TFloatField;
     cdsNotaFiscalVLR_IPI_DEVOL: TFloatField;
     cdsNotaFiscalBASE_IPI: TFloatField;
+    mItensNFeBase_ST_Ret: TFloatField;
+    mItensNFeVlr_ST_Ret: TFloatField;
+    mItensNFePerc_ST_Ret: TFloatField;
+    mItensNFeBase_ICMS_Efet: TFloatField;
+    mItensNFeVlr_ICMS_Efet: TFloatField;
+    mItensNFePerc_ICMS_Efet: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);

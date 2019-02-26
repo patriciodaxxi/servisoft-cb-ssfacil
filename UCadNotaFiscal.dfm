@@ -2521,7 +2521,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
         Top = 229
         Width = 942
         Height = 390
-        ActivePage = TabSheet3
+        ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -2529,7 +2529,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 2
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -2539,7 +2539,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             Left = 0
             Top = 52
             Width = 938
-            Height = 102
+            Height = 86
             Align = alClient
             Ctl3D = False
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
@@ -3109,9 +3109,9 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
           end
           object SMDBGrid6: TSMDBGrid
             Left = 0
-            Top = 233
+            Top = 217
             Width = 938
-            Height = 60
+            Height = 75
             Align = alBottom
             Ctl3D = False
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
@@ -3170,7 +3170,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = 'CST ICMS'
                 Title.Color = 16758897
-                Width = 43
+                Width = 61
                 Visible = True
               end
               item
@@ -3179,7 +3179,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = 'Base ICMS'
                 Title.Color = 16758897
-                Width = 38
+                Width = 60
                 Visible = True
               end
               item
@@ -3189,7 +3189,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = '% ICMS'
                 Title.Color = 16758897
-                Width = 28
                 Visible = True
               end
               item
@@ -3208,7 +3207,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = 'CST IPI'
                 Title.Color = 16758897
-                Width = 38
+                Width = 48
                 Visible = True
               end
               item
@@ -3330,9 +3329,9 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
           end
           object SMDBGrid7: TSMDBGrid
             Left = 0
-            Top = 293
+            Top = 292
             Width = 938
-            Height = 74
+            Height = 75
             Align = alBottom
             Ctl3D = False
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
@@ -3366,7 +3365,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             WidthOfIndicator = 11
             DefaultRowHeight = 16
             ScrollBars = ssHorizontal
-            ColCount = 31
+            ColCount = 37
             RowCount = 2
             Columns = <
               item
@@ -3636,13 +3635,63 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. ICMS UF Remet.'
                 Title.Color = 16758639
+                Width = 112
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'BASE_ICMSSUBST_RET'
+                Title.Caption = 'Base ST Ret'
+                Title.Color = 16758639
+                Width = 75
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PERC_ICMSSUBST_INTERNO'
+                Title.Caption = '% ST'
+                Title.Color = 16758639
+                Width = 65
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_ICMSSUBST_RET'
+                Title.Caption = 'Vlr. ST Ret.'
+                Title.Color = 16758639
+                Width = 75
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_BASE_EFET'
+                Title.Alignment = taCenter
+                Title.Caption = 'Base ICMS Efet.'
+                Title.Color = 16758639
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PERC_ICMS_EFET'
+                Title.Alignment = taCenter
+                Title.Caption = '% ICMS Efet.'
+                Title.Color = 16758639
+                Width = 67
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_ICMS_EFET'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr ICMS Efet.'
+                Title.Color = 16758639
                 Width = 82
                 Visible = True
               end>
           end
           object VDBGrid1: TVDBGrid
             Left = 0
-            Top = 154
+            Top = 138
             Width = 938
             Height = 79
             Align = alBottom

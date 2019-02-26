@@ -2022,7 +2022,7 @@ begin
   //10/11/2015
   //prc_Abrir_qProduto_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,vUF);
   prc_Abrir_qProduto_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_Produto.AsInteger,vUF);
-  
+
   if not(fDMCadNotaFiscal.qProduto_UF.IsEmpty) then
   begin
     if (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProduto_UFPERC_REDUCAO_ST.AsFloat)) > 0) then
@@ -2062,7 +2062,7 @@ begin
 
   if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0  then
     vPerc_Interno := fDMCadNotaFiscal.qNCM_UFPERC_ICMS_INTERNO.AsFloat;
-  vBaseSubst   := 0;          
+  vBaseSubst   := 0;
   vVlrSubst    := 0;
   if copy(fDMCadNotaFiscal.cdsNotaFiscal_ItensCODCFOP.AsString,1,1) <> '3' then
   begin
@@ -4068,6 +4068,9 @@ begin
 end;
 
 procedure prc_Calcular_ST_Ret(fDMCadNotaFiscal: TDMCadNotaFiscal);
+var
+  vPerc_Interno : Real;
+  vVlrAux : Real;
 begin
   fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat := 0;
   fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat  := 0;
@@ -4080,8 +4083,9 @@ begin
     exit;
   if  ((fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_CST.AsString <> '60') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_CST.AsString <> '500')) then
     exit;
-  if fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger <> 1 then
-    exit;
+  //Vai Calcular para todos
+  //if fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger <> 1 then
+    //exit;
   if fDMCadNotaFiscal.cdsFilialUSA_ENVIO_ST_RET.AsString <> 'S' then
     exit;
 
@@ -4095,8 +4099,45 @@ begin
   if StrToFloat(FormatFloat('0.0000', fDMCadNotaFiscal.qProdSTBASE_ST_RET.AsFloat)) <= 0 then
     exit;
 
-  fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTBASE_ST_RET.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
-  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTVLR_ST_RET.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat     := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTBASE_ST_RET.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat      := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTVLR_ST_RET.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTPERC_ST.AsFloat));
+
+  if fDMCadNotaFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString <> 'S' then
+    exit;
+
+  //Busca o %
+  vPerc_Interno := 0;
+  prc_Abrir_qProduto_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_Produto.AsInteger,fDMCadNotaFiscal.cdsFilialUF.AsString);
+  if not(fDMCadNotaFiscal.qProduto_UF.IsEmpty) and (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat)) > 0) then
+    vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat));
+
+  if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0  then
+  begin
+    prc_Abrir_qNCM_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,fDMCadNotaFiscal.cdsFilialUF.AsString,'A');
+    if StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.qNCM_UFPERC_ICMS_INTERNO.AsFloat)) > 0 then
+      vPerc_Interno := fDMCadNotaFiscal.qNCM_UFPERC_ICMS_INTERNO.AsFloat;
+  end;
+  if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0 then
+  begin
+    if fDMCadNotaFiscal.cdsTab_NCMID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger then
+      fDMCadNotaFiscal.cdsTab_NCM.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsString,[loCaseInsensitive]);
+    if StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
+      vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsTab_NCMPERC_ICMS.AsFloat))
+    else
+    begin
+      fDMCadNotaFiscal.cdsUF.Locate('UF',fDMCadNotaFiscal.cdsFilialUF.AsString,[loCaseInsensitive]);
+      vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsUFPERC_ICMS_INTERNO.AsFloat));
+    end;
+  end;
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_EFET.AsFloat := vPerc_Interno;
+
+  if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_EFET.AsFloat)) > 0 then
+  begin
+    vVlrAux := StrToFloat(FormatFloat('0.00',(fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_EFET.AsFloat) / 100));
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat));
+  end;
 end;
 
 end.

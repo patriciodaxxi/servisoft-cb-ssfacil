@@ -609,6 +609,8 @@ type
     cdsFilialSPED_PERIODO_IPI: TStringField;
     sdsFilialUSA_ENVIO_ST_RET: TStringField;
     cdsFilialUSA_ENVIO_ST_RET: TStringField;
+    sdsFilialCALCULAR_ICMS_EFET: TStringField;
+    cdsFilialCALCULAR_ICMS_EFET: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);
