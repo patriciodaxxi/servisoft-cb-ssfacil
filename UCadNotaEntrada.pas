@@ -327,14 +327,8 @@ begin
 end;
 
 procedure TfrmCadNotaEntrada.prc_Excluir_Registro;
-var
-  vDataAux : TDateTime;
 begin
-  vDataAux := fDMCadNotaFiscal.cdsNotaFiscalDTEMISSAO.AsDateTime;
-  fDMCadNotaFiscal.mProdAux.EmptyDataSet;
   fDMCadNotaFiscal.prc_Excluir;
-  if not fDMCadNotaFiscal.mProdAux.IsEmpty then
-    uGrava_NotaFiscal.Prc_Excluir_Produto_Imp(fDMCadNotaFiscal,vDataAux);
 end;
 
 procedure TfrmCadNotaEntrada.prc_Gravar_Registro;

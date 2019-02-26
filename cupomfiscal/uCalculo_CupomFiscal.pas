@@ -14,6 +14,8 @@ uses
   function fnc_Calcular_IPI(fDMCupomFiscal: TDMCupomFiscal; VlrTotal, VlrDesconto, PercIPI: Real): Real;
   procedure prc_Move_Itens_Ajuste(fDMCupomFiscal: TDMCupomFiscal);
 
+  procedure prc_Calcular_ST_Ret(fDMCupomFiscal: TDMCupomFiscal);
+
 implementation
 
 uses Math;
@@ -96,6 +98,13 @@ begin
   fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency
                                                           + fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency
                                                           + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
+  //26/02/2019
+  prc_Calcular_ST_Ret(fDMCupomFiscal);
+  fDMCupomFiscal.cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat := fDMCupomFiscal.cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat + fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat;
+  fDMCupomFiscal.cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat  := fDMCupomFiscal.cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat;
+  fDMCupomFiscal.cdsCupomFiscalVLR_BASE_EFET.AsFloat      := fDMCupomFiscal.cdsCupomFiscalVLR_BASE_EFET.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat;
+  fDMCupomFiscal.cdsCupomFiscalVLR_ICMS_EFET.AsFloat      := fDMCupomFiscal.cdsCupomFiscalVLR_ICMS_EFET.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat;
+  //**************
 
   fDMCupomFiscal.cdsCupomFiscalBASE_ICMS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalBASE_ICMS.AsCurrency + fDMCupomFiscal.cdsCupom_ItensBASE_ICMS.AsCurrency));
   fDMCupomFiscal.cdsCupomFiscalVLR_ICMS.AsCurrency  := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_ICMS.AsCurrency + fDMCupomFiscal.cdsCupom_ItensVLR_ICMS.AsCurrency));
@@ -218,6 +227,13 @@ begin
   fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_FEDERAL.AsFloat   := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_MUNICIPAL.AsFloat := 0;
 
+  //26/02/2019
+  fDMCupomFiscal.cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat  := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_BASE_EFET.AsFloat      := 0;
+  fDMCupomFiscal.cdsCupomFiscalVLR_ICMS_EFET.AsFloat      := 0;
+  //**************
+
   vContador := 0;
   fDMCupomFiscal.cdsCupom_Itens.First;
   while not fDMCupomFiscal.cdsCupom_Itens.Eof do
@@ -316,6 +332,34 @@ begin
                 'Cupom fiscal não será validado!')
   else
     fDmCupomFiscal.prc_Mover_CST;
+end;
+
+procedure prc_Calcular_ST_Ret(fDMCupomFiscal: TDMCupomFiscal);
+begin
+  fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat := 0;
+  fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat  := 0;
+  fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat      := 0;
+  fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat      := 0;
+
+  if (fDMCupomFiscal.cdsCFOPENVIAR_BASE_ST.AsString <> 'S') then
+    exit;
+  if (fDMCupomFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
+    exit;
+  if fDMCupomFiscal.cdsFilialUSA_ENVIO_ST_RET.AsString <> 'S' then
+    exit;
+
+  //ver como pegar o % ST
+  fDMCupomFiscal.qProdST.Close;
+  fDMCupomFiscal.qProdST.ParamByName('ID_Produto').AsInteger := fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger;
+  fDMCupomFiscal.qProdST.Open;
+  if fDMCupomFiscal.qProdST.IsEmpty then
+    Exit;
+
+  if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProdSTBASE_ST_RET.AsFloat)) <= 0 then
+    exit;
+
+  fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProdSTBASE_ST_RET.AsFloat * fDMCupomFiscal.cdsCupom_ItensQTD.AsFloat));
+  fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProdSTVLR_ST_RET.AsFloat * fDMCupomFiscal.cdsCupom_ItensQTD.AsFloat));
 end;
 
 end.

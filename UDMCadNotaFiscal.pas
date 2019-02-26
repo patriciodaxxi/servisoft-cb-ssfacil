@@ -3345,7 +3345,7 @@ begin
       end;
 
       //ProdAux referente ao produto impostos 24/02/2019
-      if (cdsFilialUSA_ENVIO_ST_RET.AsString = 'S') and (cdsNotaFiscalTIPO_REG.AsString = 'NTE') and
+      {if (cdsFilialUSA_ENVIO_ST_RET.AsString = 'S') and (cdsNotaFiscalTIPO_REG.AsString = 'NTE') and
          ((StrToFloat(FormatFloat('0.00',cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat)) > 0) or
           (StrToFloat(FormatFloat('0.00',cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat)) > 0) or
           (StrToFloat(FormatFloat('0.00',cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat)) > 0)) then
@@ -3356,7 +3356,7 @@ begin
           mProdAuxID_Produto.AsInteger := cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
           mProdAux.Post;
         end;
-      end;
+      end;}
 
       //03/09/2018
       if not cdsNotaFiscal_Copia.IsEmpty then
@@ -3395,7 +3395,7 @@ begin
     vExcluir := True;
 
   except
-    mProdAux.EmptyDataSet;
+    //mProdAux.EmptyDataSet;
     dmDatabase.scoDados.Rollback(ID);
     raise;
   end;

@@ -14,7 +14,7 @@ object dmCupomFiscal: TdmCupomFiscal
       'R'#13#10'FROM CUPOMFISCAL CF'#13#10'INNER JOIN PESSOA P ON (CF.ID_CLIENTE = ' +
       'P.CODIGO)'#13#10'LEFT JOIN CONDPGTO CP ON (CP.ID = CF.ID_CONDPGTO)'#13#10'LE' +
       'FT JOIN TIPOCOBRANCA TC ON (TC.ID = CF.ID_TIPOCOBRANCA)'#13#10'LEFT JO' +
-      'IN PESSOA V ON (CF.ID_VENDEDOR = V.CODIGO)'
+      'IN PESSOA V ON (CF.ID_VENDEDOR = V.CODIGO)'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -261,6 +261,18 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object sdsCupomFiscalDTORIGINAL: TDateField
       FieldName = 'DTORIGINAL'
+    end
+    object sdsCupomFiscalBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object sdsCupomFiscalVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object sdsCupomFiscalVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object sdsCupomFiscalVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
     end
   end
   object dspCupomFiscal: TDataSetProvider
@@ -539,6 +551,18 @@ object dmCupomFiscal: TdmCupomFiscal
     object cdsCupomFiscalDTORIGINAL: TDateField
       FieldName = 'DTORIGINAL'
     end
+    object cdsCupomFiscalBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object cdsCupomFiscalVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object cdsCupomFiscalVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object cdsCupomFiscalVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
+    end
   end
   object dsCupomFiscal: TDataSource
     DataSet = cdsCupomFiscal
@@ -768,6 +792,21 @@ object dmCupomFiscal: TdmCupomFiscal
     object sdsCupom_ItensVLR_UNIT_ORIGINAL: TFloatField
       FieldName = 'VLR_UNIT_ORIGINAL'
     end
+    object sdsCupom_ItensBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object sdsCupom_ItensVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object sdsCupom_ItensVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object sdsCupom_ItensVLR_ICMS_EFE: TFloatField
+      FieldName = 'VLR_ICMS_EFE'
+    end
+    object sdsCupom_ItensPERC_ST: TFloatField
+      FieldName = 'PERC_ST'
+    end
   end
   object cdsCupom_Itens: TClientDataSet
     Aggregates = <>
@@ -982,6 +1021,21 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupom_ItensVLR_UNIT_ORIGINAL: TFloatField
       FieldName = 'VLR_UNIT_ORIGINAL'
+    end
+    object cdsCupom_ItensBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object cdsCupom_ItensVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object cdsCupom_ItensVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object cdsCupom_ItensVLR_ICMS_EFE: TFloatField
+      FieldName = 'VLR_ICMS_EFE'
+    end
+    object cdsCupom_ItensPERC_ST: TFloatField
+      FieldName = 'PERC_ST'
     end
   end
   object dsCupom_Itens: TDataSource
@@ -2457,6 +2511,11 @@ object dmCupomFiscal: TdmCupomFiscal
     object cdsFilialSERIE_NFCE: TStringField
       FieldName = 'SERIE_NFCE'
       Size = 3
+    end
+    object cdsFilialUSA_ENVIO_ST_RET: TStringField
+      FieldName = 'USA_ENVIO_ST_RET'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsFilial: TDataSource
@@ -4031,7 +4090,8 @@ object dmCupomFiscal: TdmCupomFiscal
       'nd_ven, T.substituicao_trib, T.mva, T.beneficiamento, T.maoobra,' +
       ' T.perc_tributo,'#13#10'T.perc_cofins, T.perc_pis, T.ENTRADASAIDA, T.G' +
       'ERAR_DESONERACAO_ICMS, T.GERAR_ESTOQUE, T.BAIXAR_FUT, T.ID_PIS_S' +
-      'IMP, T.ID_COFINS_SIMP'#13#10'FROM TAB_CFOP T'#13#10'WHERE T.USA_NFCE = '#39'S'#39
+      'IMP, T.ID_COFINS_SIMP, T.ENVIAR_BASE_ST'#13#10'FROM TAB_CFOP T'#13#10'WHERE ' +
+      'T.USA_NFCE = '#39'S'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -4196,6 +4256,11 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCFOPID_COFINS_SIMP: TIntegerField
       FieldName = 'ID_COFINS_SIMP'
+    end
+    object cdsCFOPENVIAR_BASE_ST: TStringField
+      FieldName = 'ENVIAR_BASE_ST'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsCFOP: TDataSource
@@ -6877,6 +6942,41 @@ object dmCupomFiscal: TdmCupomFiscal
     object qClienteCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
+    end
+  end
+  object qProdST: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id_produto'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select first 1 m.*'
+      'from vmovprodst m'
+      'where m.id_produto = :id_produto'
+      'order by m.dtemissao desc')
+    SQLConnection = dmDatabase.scoDados
+    Left = 920
+    Top = 488
+    object qProdSTDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object qProdSTID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object qProdSTBASE_ST: TFloatField
+      FieldName = 'BASE_ST'
+    end
+    object qProdSTBASE_ST_RET: TFloatField
+      FieldName = 'BASE_ST_RET'
+    end
+    object qProdSTVLR_ST: TFloatField
+      FieldName = 'VLR_ST'
+    end
+    object qProdSTVLR_ST_RET: TFloatField
+      FieldName = 'VLR_ST_RET'
     end
   end
 end

@@ -25,7 +25,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     Top = 0
     Width = 941
     Height = 679
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -126,6 +126,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'DTEMISSAO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Emiss'#227'o'
+            Width = 64
             Visible = True
           end
           item
@@ -134,6 +135,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'DTSAIDAENTRADA'
             Title.Alignment = taCenter
             Title.Caption = 'Data Entrada'
+            Width = 64
             Visible = True
           end
           item
@@ -142,6 +144,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'CODCFOP'
             Title.Alignment = taCenter
             Title.Caption = 'CFOP'
+            Width = 64
             Visible = True
           end
           item
@@ -163,6 +166,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'VLR_DUPLICATA'
             Title.Alignment = taCenter
             Title.Caption = 'Valor Duplicatas'
+            Width = 64
             Visible = True
           end
           item
@@ -179,12 +183,14 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
             FieldName = 'TIPO_PRAZO'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Prazo'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ID_CLIENTE'
             Title.Caption = 'ID Fornecedor'
+            Width = 64
             Visible = True
           end>
       end
@@ -1480,6 +1486,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'NUM_LOTE_CONTROLE'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#186' Lote Controle'
+                Width = 64
                 Visible = True
               end
               item
@@ -1502,6 +1509,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'CODCFOP'
                 Title.Alignment = taCenter
                 Title.Caption = 'CFOP'
+                Width = 64
                 Visible = True
               end
               item
@@ -1577,6 +1585,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'NUMERO_OC'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#186' Pedido Cliente'
+                Width = 64
                 Visible = True
               end
               item
@@ -1584,6 +1593,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'NUMERO_OS'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#186' OS'
+                Width = 64
                 Visible = True
               end
               item
@@ -1669,6 +1679,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'GERAR_ESTOQUE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Gerar Estoque'
+                Width = 64
                 Visible = True
               end
               item
@@ -1684,6 +1695,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 FieldName = 'PRECO_CUSTO_TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Pre'#231'o Custo Total'
+                Width = 64
                 Visible = True
               end
               item
@@ -2632,6 +2644,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
               item
                 Expanded = False
                 FieldName = 'VLR_VENCIMENTO'
+                Width = 64
                 Visible = True
               end
               item
@@ -2876,11 +2889,13 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
                 item
                   Expanded = False
                   FieldName = 'NFERECIBO'
+                  Width = 64
                   Visible = True
                 end
                 item
                   Expanded = False
                   FieldName = 'DATAHORAAUT'
+                  Width = 64
                   Visible = True
                 end
                 item
