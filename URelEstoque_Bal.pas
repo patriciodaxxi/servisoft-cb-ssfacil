@@ -36,20 +36,29 @@ type
     RLDBResult1: TRLDBResult;
     RLLabel11: TRLLabel;
     RLDBText4: TRLDBText;
+    RLLabel12: TRLLabel;
+    RLLabel13: TRLLabel;
+    rlICMS: TRLLabel;
+    rlIPI: TRLLabel;
+    rlTotIcms: TRLLabel;
+    rlTotIPI: TRLLabel;
+    RLDBText5: TRLDBText;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand2BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure RLBand3BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     fDMRel: TDMRel;
+    vTotICMS, vTotIPI: Real;
   public
     { Public declarations }
     fDMConsEstoque: TDMConsEstoque;
-    vDataRef : TDateTime;
-    vNumPagIni : Integer;
+    vDataRef: TDateTime;
+    vNumPagIni: Integer;
   end;
 
 var
@@ -101,6 +110,10 @@ begin
     vNomeProduto       := vNomeProduto + ' ' + fDMConsEstoque.cdsBalancoTAMANHO.AsString;
   end;                                                                                   
   RLMemo1.Lines.Text := vNomeProduto;
+  rlICMS.Caption := FormatFloat('0.00',fDMConsEstoque.cdsBalancoPERC_ICMS.asFloat / 100 * fDMConsEstoque.cdsBalancoclPreco_Medio.AsFloat * fdmConsEstoque.cdsBalancoQTD_ESTOQUE.AsFloat);
+  rlIPI.Caption  := FormatFloat('0.00',fDMConsEstoque.cdsBalancoPERC_IPI.asFloat / 100 * fDMConsEstoque.cdsBalancoclPreco_Medio.AsFloat * fdmConsEstoque.cdsBalancoQTD_ESTOQUE.AsFloat);
+  vTotICMS := vTotICMS + StrToFloat(FormatFloat('0.00',fDMConsEstoque.cdsBalancoPERC_ICMS.asFloat / 100 * fDMConsEstoque.cdsBalancoclPreco_Medio.AsFloat * fdmConsEstoque.cdsBalancoQTD_ESTOQUE.AsFloat));
+  vTotIPI  := vTotIPI + StrToFloat(FormatFloat('0.00',fDMConsEstoque.cdsBalancoPERC_IPI.asFloat / 100 * fDMConsEstoque.cdsBalancoclPreco_Medio.AsFloat * fdmConsEstoque.cdsBalancoQTD_ESTOQUE.AsFloat));
 end;
 
 procedure TfRelEstoque_Bal.FormCreate(Sender: TObject);
@@ -110,11 +123,20 @@ begin
     RLReport1.FirstPageNumber := 1
   else
     RLReport1.FirstPageNumber := vNumPagIni;
+  vTotICMS := 0;
+  vTotIPI  := 0;
 end;
 
 procedure TfRelEstoque_Bal.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(fDMRel);
+end;
+
+procedure TfRelEstoque_Bal.RLBand3BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  rlTotIcms.Caption := 'ICMS ' + FormatFloat('0.00',vTotICMS);
+  rlTotIPI.Caption  := 'IPI ' + FormatFloat('0.00',vTotIPI);
 end;
 
 end.

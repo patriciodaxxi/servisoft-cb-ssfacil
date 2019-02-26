@@ -120,6 +120,7 @@ object frmCadFilial: TfrmCadFilial
             FieldName = 'FONE'
             Title.Alignment = taCenter
             Title.Caption = 'Fone'
+            Width = 64
             Visible = True
           end>
       end
@@ -1620,7 +1621,7 @@ object frmCadFilial: TfrmCadFilial
             CharCase = ecUpperCase
             DataField = 'PERC_LISTA_CAMEX'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 21
+            TabOrder = 22
           end
           object RxDBLookupCombo15: TRxDBLookupCombo
             Left = 130
@@ -1671,7 +1672,7 @@ object frmCadFilial: TfrmCadFilial
             DataField = 'OBS_DIFAL'
             DataSource = DMCadFilial.dsFilial
             ScrollBars = ssVertical
-            TabOrder = 22
+            TabOrder = 23
             OnKeyPress = DBMemo1KeyPress
           end
           object DBEdit83: TDBEdit
@@ -1702,7 +1703,7 @@ object frmCadFilial: TfrmCadFilial
             DataField = 'SERIE_CPF'
             DataSource = DMCadFilial.dsFilial
             ReadOnly = True
-            TabOrder = 23
+            TabOrder = 24
           end
           object DBCheckBox22: TDBCheckBox
             Left = 512
@@ -1712,7 +1713,7 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'Ind'#250'stria'
             DataField = 'TIPO_EMP'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 20
+            TabOrder = 21
             ValueChecked = 'S'
             ValueUnchecked = 'N'
             OnClick = DBCheckBox16Click
@@ -1722,7 +1723,7 @@ object frmCadFilial: TfrmCadFilial
             Top = 169
             Width = 313
             Height = 17
-            Caption = 'Usa ST Retido ou C'#225'lculo Efetivo'
+            Caption = 'Usa ST Retido'
             DataField = 'USA_ENVIO_ST_RET'
             DataSource = DMCadFilial.dsFilial
             TabOrder = 19
@@ -1737,7 +1738,7 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'Calcular ICMS Efetivo'
             DataField = 'CALCULAR_ICMS_EFET'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 24
+            TabOrder = 20
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end

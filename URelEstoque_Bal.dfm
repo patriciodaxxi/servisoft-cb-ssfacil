@@ -27,29 +27,29 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
     Font.Height = -8
     Font.Name = 'Arial'
     Font.Style = []
-    Margins.LeftMargin = 9.000000000000000000
+    Margins.LeftMargin = 6.000000000000000000
     Margins.TopMargin = 7.000000000000000000
-    Margins.RightMargin = 9.000000000000000000
+    Margins.RightMargin = 6.000000000000000000
     Margins.BottomMargin = 9.000000000000000000
     ShowProgress = False
     BeforePrint = RLReport1BeforePrint
     object RLBand1: TRLBand
-      Left = 34
+      Left = 23
       Top = 26
-      Width = 726
+      Width = 748
       Height = 49
       BandType = btHeader
       BeforePrint = RLBand1BeforePrint
       object RLDraw1: TRLDraw
         Left = 0
         Top = 34
-        Width = 726
+        Width = 748
         Height = 15
         Align = faBottom
         Pen.Style = psDot
       end
       object RLLabel1: TRLLabel
-        Left = 267
+        Left = 278
         Top = 0
         Width = 192
         Height = 16
@@ -121,14 +121,14 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
         Caption = 'C'#243'digo'
       end
       object RLLabel4: TRLLabel
-        Left = 192
+        Left = 183
         Top = 37
         Width = 22
         Height = 10
         Caption = 'Nome'
       end
       object RLLabel5: TRLLabel
-        Left = 569
+        Left = 458
         Top = 37
         Width = 21
         Height = 10
@@ -149,51 +149,65 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
         Caption = 'Filial:'
       end
       object RLLabel3: TRLLabel
-        Left = 621
+        Left = 508
         Top = 37
         Width = 35
         Height = 10
         Caption = 'Pr. M'#233'dio'
       end
       object RLLabel9: TRLLabel
-        Left = 690
+        Left = 714
         Top = 37
         Width = 33
         Height = 10
         Caption = 'Vlr. Total'
       end
       object RLLabel11: TRLLabel
-        Left = 87
+        Left = 82
         Top = 37
         Width = 39
         Height = 10
         Caption = 'Refer'#234'ncia'
       end
+      object RLLabel12: TRLLabel
+        Left = 578
+        Top = 37
+        Width = 22
+        Height = 10
+        Caption = 'ICMS'
+      end
+      object RLLabel13: TRLLabel
+        Left = 647
+        Top = 37
+        Width = 11
+        Height = 10
+        Caption = 'IPI'
+      end
     end
     object RLSubDetail1: TRLSubDetail
-      Left = 34
+      Left = 23
       Top = 75
-      Width = 726
+      Width = 748
       Height = 120
       DataSource = DMConsEstoque.dsBalanco
       object RLBand2: TRLBand
         Left = 0
         Top = 0
-        Width = 726
+        Width = 748
         Height = 15
         BeforePrint = RLBand2BeforePrint
         object RLDraw2: TRLDraw
           Left = 0
           Top = 13
-          Width = 726
+          Width = 748
           Height = 2
           Align = faBottom
           DrawKind = dkLine
           Pen.Style = psDot
         end
         object RLLabel8: TRLLabel
-          Left = 2
-          Top = 2
+          Left = 0
+          Top = 1
           Width = 82
           Height = 10
           Alignment = taCenter
@@ -201,16 +215,16 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           Caption = 'Nome'
         end
         object RLMemo1: TRLMemo
-          Left = 190
-          Top = 2
-          Width = 331
+          Left = 183
+          Top = 1
+          Width = 275
           Height = 10
           Behavior = [beSiteExpander]
         end
         object RLDBText1: TRLDBText
-          Left = 523
-          Top = 2
-          Width = 69
+          Left = 458
+          Top = 1
+          Width = 50
           Height = 10
           Alignment = taRightJustify
           AutoSize = False
@@ -218,9 +232,9 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           DataSource = DMConsEstoque.dsBalanco
         end
         object RLDBText2: TRLDBText
-          Left = 595
-          Top = 2
-          Width = 64
+          Left = 508
+          Top = 1
+          Width = 50
           Height = 10
           Alignment = taRightJustify
           AutoSize = False
@@ -228,8 +242,8 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           DataSource = DMConsEstoque.dsBalanco
         end
         object RLDBText3: TRLDBText
-          Left = 661
-          Top = 3
+          Left = 685
+          Top = 1
           Width = 63
           Height = 10
           Alignment = taRightJustify
@@ -238,23 +252,52 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           DataSource = DMConsEstoque.dsBalanco
         end
         object RLDBText4: TRLDBText
-          Left = 87
-          Top = 2
+          Left = 82
+          Top = 1
           Width = 101
           Height = 10
           AutoSize = False
           DataField = 'REFERENCIA'
           DataSource = DMConsEstoque.dsBalanco
         end
+        object rlICMS: TRLLabel
+          Left = 584
+          Top = 1
+          Width = 42
+          Height = 10
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = '0.00'
+        end
+        object rlIPI: TRLLabel
+          Left = 624
+          Top = 1
+          Width = 50
+          Height = 10
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = '0.00'
+        end
+        object RLDBText5: TRLDBText
+          Left = 560
+          Top = 1
+          Width = 30
+          Height = 10
+          Alignment = taRightJustify
+          AutoSize = False
+          DataField = 'PERC_ICMS'
+          DataSource = DMConsEstoque.dsBalanco
+        end
       end
       object RLBand3: TRLBand
         Left = 0
         Top = 15
-        Width = 726
+        Width = 748
         Height = 15
         BandType = btSummary
+        BeforePrint = RLBand3BeforePrint
         object RLLabel10: TRLLabel
-          Left = 555
+          Left = 451
           Top = 2
           Width = 55
           Height = 10
@@ -267,7 +310,7 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           ParentFont = False
         end
         object RLDBResult1: TRLDBResult
-          Left = 662
+          Left = 686
           Top = 2
           Width = 62
           Height = 10
@@ -277,6 +320,36 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           DisplayMask = '###,###,##0.00'
           Info = riSum
           ResetAfterPrint = True
+        end
+        object rlTotIcms: TRLLabel
+          Left = 560
+          Top = 2
+          Width = 55
+          Height = 10
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = '0.00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object rlTotIPI: TRLLabel
+          Left = 624
+          Top = 2
+          Width = 55
+          Height = 10
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = '0.00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
         end
       end
     end

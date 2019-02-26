@@ -657,7 +657,7 @@ type
     ctEstoque_Res: String;
     ctEstoque_Res_Ord: String;
     vDescOpcao_Rel: String;
-    vOpcao_ProdMat: String;
+     vOpcao_ProdMat: String;
     procedure prc_Abrir_Produto(Inativo: String);
     procedure prc_Abrir_Veiculo(Inativo: String);
     procedure prc_Abrir_Produto_Lote(ID: Integer);
