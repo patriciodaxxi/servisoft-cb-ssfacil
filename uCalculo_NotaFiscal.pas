@@ -4103,7 +4103,10 @@ begin
   fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat      := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTVLR_ST_RET.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
   fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTPERC_ST.AsFloat));
 
-  if fDMCadNotaFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString <> 'S' then
+  if (fDMCadNotaFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString = 'N') or (Trim(fDMCadNotaFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString) = '')  then
+    exit;
+
+  if (fDMCadNotaFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString = 'C') and (fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger <> 1) then
     exit;
 
   //Busca o %

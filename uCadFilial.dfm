@@ -1335,6 +1335,13 @@ object frmCadFilial: TfrmCadFilial
             Height = 13
             Caption = 'Faixa aceita 920 a 969'
           end
+          object Label140: TLabel
+            Left = 456
+            Top = 184
+            Width = 106
+            Height = 13
+            Caption = 'Calcular ICMS Efetivo:'
+          end
           object RxDBComboBox3: TRxDBComboBox
             Left = 130
             Top = 205
@@ -1621,7 +1628,7 @@ object frmCadFilial: TfrmCadFilial
             CharCase = ecUpperCase
             DataField = 'PERC_LISTA_CAMEX'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 22
+            TabOrder = 21
           end
           object RxDBLookupCombo15: TRxDBLookupCombo
             Left = 130
@@ -1672,7 +1679,7 @@ object frmCadFilial: TfrmCadFilial
             DataField = 'OBS_DIFAL'
             DataSource = DMCadFilial.dsFilial
             ScrollBars = ssVertical
-            TabOrder = 23
+            TabOrder = 22
             OnKeyPress = DBMemo1KeyPress
           end
           object DBEdit83: TDBEdit
@@ -1703,7 +1710,7 @@ object frmCadFilial: TfrmCadFilial
             DataField = 'SERIE_CPF'
             DataSource = DMCadFilial.dsFilial
             ReadOnly = True
-            TabOrder = 24
+            TabOrder = 23
           end
           object DBCheckBox22: TDBCheckBox
             Left = 512
@@ -1713,7 +1720,7 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'Ind'#250'stria'
             DataField = 'TIPO_EMP'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 21
+            TabOrder = 20
             ValueChecked = 'S'
             ValueUnchecked = 'N'
             OnClick = DBCheckBox16Click
@@ -1730,17 +1737,25 @@ object frmCadFilial: TfrmCadFilial
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
-          object DBCheckBox24: TDBCheckBox
-            Left = 352
-            Top = 185
-            Width = 313
-            Height = 17
-            Caption = 'Calcular ICMS Efetivo'
+          object RxDBComboBox26: TRxDBComboBox
+            Left = 564
+            Top = 176
+            Width = 145
+            Height = 21
+            Style = csDropDownList
             DataField = 'CALCULAR_ICMS_EFET'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 20
-            ValueChecked = 'S'
-            ValueUnchecked = 'N'
+            EnableValues = True
+            ItemHeight = 13
+            Items.Strings = (
+              'Somente de Consumidor Final'
+              'Ambos'
+              'N'#227'o Calcular')
+            TabOrder = 24
+            Values.Strings = (
+              'C'
+              'S'
+              'N')
           end
         end
         object TS_Parametros: TRzTabSheet

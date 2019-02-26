@@ -228,11 +228,27 @@ begin
   DetXML.Imposto.ICMS.ICMS60.CST        := CodSitTrib;
   DetXML.Imposto.ICMS.ICMS60.VBCSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeIcmsBaseSubst.AsFloat) ,',','.');
   //4.00
-  //if (vTipo_Consumidor = '1') and (StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFePercIcmsSubstInterno.AsFloat)) > 0) then
-    //DetXML.Imposto.ICMS.ICMS60.PST := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePercIcmsSubstInterno.AsFloat + fDMNFCe.mItensNFePerc_ICMS_FCP.AsFloat) ,',','.');
-    DetXML.Imposto.ICMS.ICMS60.PST := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePercIcmsSubstInterno.AsFloat + 0) ,',','.');
+  //26/02/2019
+  DetXML.Imposto.ICMS.ICMS60.VBCSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeBase_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMS60.PST := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePerc_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMS60.VICMSSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ST_Ret.AsFloat) ,',','.');
+  //4.00
+  if (StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat)) > 0) then
+  begin
+    DetXML.Imposto.ICMS.ICMS60.VBCFCPSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeBASE_FCP_ST.AsFloat) ,',','.');
+    DetXML.Imposto.ICMS.ICMS60.PFCPSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat) ,',','.');
+    DetXML.Imposto.ICMS.ICMS60.VFCPSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeVLR_FCP_ST.AsFloat) ,',','.');
+  end;
+  //***************
+  //26/02/2019
+  if StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ICMS_Efet.AsFloat)) > 0 then
+  begin
+    DetXML.Imposto.ICMS.ICMS60.PRedBCEfet  := '0.00';
+    DetXML.Imposto.ICMS.ICMS60.VBCEfet     := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeBase_ICMS_Efet.AsFloat) ,',','.');
+    DetXML.Imposto.ICMS.ICMS60.PICMSEfet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePerc_ICMS_Efet.AsFloat) ,',','.');
+    DetXML.Imposto.ICMS.ICMS60.VICMSEfet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ICMS_Efet.AsFloat) ,',','.');
+  end;
   //****************
-  DetXML.Imposto.ICMS.ICMS60.VICMSSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeIcmsVlrSubst.AsFloat) ,',','.');
 end;
 
 procedure prc_Monta_ICMS70(fDMNFCe: TDMNFCe; Origem, CodSitTrib: String; Perc_Interno: Real);
@@ -330,14 +346,32 @@ procedure prc_Monta_ICMSSN500(fDMNFCe: TDMNFCe; Origem, CodSitTrib: String);
 begin
   DetXML.Imposto.ICMS.ICMSSN500.Orig       := Origem;
   DetXML.Imposto.ICMS.ICMSSN500.CSOSN      := CodSitTrib;
-  DetXML.Imposto.ICMS.ICMSSN500.VBCSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeIcmsBaseSubst.AsFloat) ,',','.');
+
+  //26/02/2019
+  DetXML.Imposto.ICMS.ICMSSN500.VBCSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeBase_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMSSN500.PST := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePerc_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMSSN500.VICMSSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ST_Ret.AsFloat) ,',','.');
+  //***************
+
   //4.00
-  //if (vTipo_Consumidor = '1') and (StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFePercIcmsSubstInterno.AsFloat)) > 0) then
-  //  DetXML.Imposto.ICMS.ICMSSN500.PST := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePercIcmsSubstInterno.AsFloat + fDMNFCe.mItensNFePerc_ICMS_FCP.AsFloat) ,',','.')
-  //else
-    DetXML.Imposto.ICMS.ICMSSN500.PST := Replace(FormatFloat('0.00',0) ,',','.');
+  if (StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat)) > 0) then
+  begin
+    DetXML.Imposto.ICMS.ICMSSN500.VBCFCPSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeBASE_FCP_ST.AsFloat) ,',','.');
+    DetXML.Imposto.ICMS.ICMSSN500.PFCPSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat) ,',','.');
+    DetXML.Imposto.ICMS.ICMSSN500.VFCPSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeVLR_FCP_ST.AsFloat) ,',','.');
+  end;
+  //***************
+
+  //26/02/2019
+  if StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ICMS_Efet.AsFloat)) > 0 then
+  begin
+    DetXML.Imposto.ICMS.ICMSSN500.PRedBCEfet  := '';
+    DetXML.Imposto.ICMS.ICMSSN500.VBCEfet     := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeBase_ICMS_Efet.AsFloat) ,',','.');
+    DetXML.Imposto.ICMS.ICMSSN500.PICMSEfet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePerc_ICMS_Efet.AsFloat) ,',','.');
+    DetXML.Imposto.ICMS.ICMSSN500.VICMSEfet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ICMS_Efet.AsFloat) ,',','.');
+  end;
   //****************
-  DetXML.Imposto.ICMS.ICMSSN500.VICMSSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeIcmsVlrSubst.AsFloat) ,',','.');
+
 end;
 
 procedure prc_Monta_ICMSSN900(fDMNFCe: TDMNFCe; Origem, CodSitTrib: String; Perc_Interno, Perc_Simples: Real);

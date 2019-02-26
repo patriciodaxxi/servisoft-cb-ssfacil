@@ -1630,6 +1630,30 @@ object DMNFCe: TDMNFCe
         Name = 'Unidade_Trib'
         DataType = ftString
         Size = 6
+      end
+      item
+        Name = 'Base_ST_Ret'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_ST_Ret'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Perc_ST_Ret'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Base_ICMS_Efet'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_Icms_Efet'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Perc_Icms_Efet'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     IndexFieldNames = 'Filial;NumNota;ItemNota'
@@ -1640,7 +1664,7 @@ object DMNFCe: TDMNFCe
     Left = 224
     Top = 424
     Data = {
-      7A0700009619E0BD01000000180000004E0000000000030000007A070646696C
+      F90700009619E0BD010000001800000054000000000003000000F9070646696C
       69616C0400010000000000074E756D4E6F74610400010000000000084974656D
       4E6F746104000100000000000A436F6450726F6475746F010049000000010005
       57494454480200020014000A436F644E61744F70657201004900000001000557
@@ -1699,7 +1723,11 @@ object DMNFCe: TDMNFCe
       49000000010005574944544802000200030009436F6442617272613201004900
       00000100055749445448020002000E0011566C725F556E69746172696F5F5472
       69620800040000000000085174645F5472696208000400000000000C556E6964
-      6164655F5472696201004900000001000557494454480200020006000000}
+      6164655F5472696201004900000001000557494454480200020006000B426173
+      655F53545F52657408000400000000000A566C725F53545F5265740800040000
+      0000000B506572635F53545F52657408000400000000000E426173655F49434D
+      535F4566657408000400000000000D566C725F49636D735F4566657408000400
+      000000000E506572635F49636D735F4566657408000400000000000000}
     object mItensNFeFilial: TIntegerField
       FieldName = 'Filial'
     end
@@ -1969,6 +1997,24 @@ object DMNFCe: TDMNFCe
     object mItensNFeUnidade_Trib: TStringField
       FieldName = 'Unidade_Trib'
       Size = 6
+    end
+    object mItensNFeBase_ST_Ret: TFloatField
+      FieldName = 'Base_ST_Ret'
+    end
+    object mItensNFeVlr_ST_Ret: TFloatField
+      FieldName = 'Vlr_ST_Ret'
+    end
+    object mItensNFePerc_ST_Ret: TFloatField
+      FieldName = 'Perc_ST_Ret'
+    end
+    object mItensNFeBase_ICMS_Efet: TFloatField
+      FieldName = 'Base_ICMS_Efet'
+    end
+    object mItensNFeVlr_Icms_Efet: TFloatField
+      FieldName = 'Vlr_Icms_Efet'
+    end
+    object mItensNFePerc_Icms_Efet: TFloatField
+      FieldName = 'Perc_Icms_Efet'
     end
   end
   object mAuxDadosNFe: TClientDataSet
