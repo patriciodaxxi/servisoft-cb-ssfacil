@@ -58,6 +58,8 @@ uses
   procedure prc_Atualiza_Estoque(ID: Integer; Preco: Real);
   procedure prc_Atualiza_Movimento(ID: Integer; Preco: Real);
 
+  procedure prc_Calcular_ST_Ret(fDMCadNotaFiscal: TDMCadNotaFiscal);
+
   function fnc_Unidade_Conv(fDMCadNotaFiscal: TDMCadNotaFiscal): Real;
   function fnc_Buscar_Regra_CFOP(fDMCadNotaFiscal: TDMCadNotaFiscal; ID_CFOP: Integer): Integer;
 var
@@ -160,6 +162,13 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_PROPRIO.AsFloat  := 0;
     fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP.AsFloat          := 0;
     fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_FCP.AsFloat           := 0;
+
+    //26/02/20219
+    fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat := 0;
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat  := 0;
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_EFET.AsFloat      := 0;
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_EFET.AsFloat      := 0;
+
     //21/01/2019
     fDMCadNotaFiscal.cdsNotaFiscalBASE_FCP_ST.AsFloat            := 0;
     fDMCadNotaFiscal.cdsNotaFiscalVLR_FCP_ST.AsFloat             := 0;
@@ -270,11 +279,19 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscalVLR_DESC_SUFRAMA.AsFloat       := 0;
     fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP.AsFloat          := 0;
     fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_FCP.AsFloat           := 0;
+
+    //26/02/20219
+    fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat := 0;
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat  := 0;
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_EFET.AsFloat      := 0;
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_EFET.AsFloat      := 0;
+
+
     //21/01/20149
     fDMCadNotaFiscal.cdsNotaFiscalBASE_FCP_ST.AsFloat := 0;
     fDMCadNotaFiscal.cdsNotaFiscalVLR_FCP_ST.AsFloat  := 0;
     //******************
-    
+
     fDMCadNotaFiscal.cdsNotaFiscalVLR_DESC_SUFRAMA.AsFloat := 0;
     //4.00
     fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat     := 0;
@@ -572,6 +589,9 @@ begin
          prc_Calcular_Diferencial_ICMS(fDMCadNotaFiscal);
     end;
 
+    //26/02/2019
+    prc_Calcular_ST_Ret(fDMCadNotaFiscal);
+
     //Cálculo tributos federais, estaduais, e municipais cfe. disposto na lei 12.741/12
     prc_Calcular_Tributos_Transparencia(fDMCadNotaFiscal);
 
@@ -677,6 +697,14 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscalVLR_TRIBUTOS_MUNICIPAL.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_TRIBUTOS_MUNICIPAL.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TRIBUTOS_MUNICIPAL.AsFloat));
     fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_PROPRIO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_PROPRIO.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_PROPRIO.AsFloat));
     fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_PROPRIO.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_PROPRIO.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_PROPRIO.AsFloat));
+
+    //26/02/2019
+    fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat));
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat));
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_EFET.AsFloat      := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_EFET.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat));
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_EFET.AsFloat      := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_EFET.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat));
+    //**************************
+
     //4.00
     fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP.AsFloat));
     fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_FCP.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_FCP.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat));
@@ -699,7 +727,7 @@ begin
     if copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) <> '7' then
     begin
       fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_FCP_DEST.AsFloat  := fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_FCP_DEST.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat;
-      fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat; 
+      fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat;
       fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_UF_DEST.AsFloat   := fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_UF_DEST.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_DEST.AsFloat;
       fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_UF_REMET.AsFloat  := fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_UF_REMET.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_REMET.AsFloat;
     end;
@@ -1088,6 +1116,10 @@ begin
   prc_calcular_AFRMM_Novo(fDMCadNotaFiscal);
   prc_Calcular_OutrasDespesas_Novo(fDMCadNotaFiscal);
 
+  //26/02/2019
+  prc_Calcular_ST_Ret(fDMCadNotaFiscal);
+  //*************
+
   if copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) <> '3' then
   begin
     fDMCadNotaFiscal.cdsNotaFiscalVLR_NOTA.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_NOTA.AsCurrency + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat - fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DESCONTO.AsFloat));
@@ -1114,6 +1146,13 @@ begin
   fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST.AsCurrency  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST.AsCurrency + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsCurrency));
   fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_PROPRIO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_PROPRIO.AsCurrency + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_PROPRIO.AsCurrency));
   fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_PROPRIO.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_PROPRIO.AsCurrency + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_PROPRIO.AsCurrency));
+
+  //26/02/2019
+  fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat));
+  fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat));
+  fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_EFET.AsFloat      := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_EFET.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat));
+  fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_EFET.AsFloat      := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_EFET.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat));
+  //**************************
 
   //4.00
   fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP.AsCurrency + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP.AsCurrency));
@@ -4026,6 +4065,38 @@ begin
     Result := fDMCadNotaFiscal.qRegra_CFOPITEM.AsInteger
   else
     Result := 0;
+end;
+
+procedure prc_Calcular_ST_Ret(fDMCadNotaFiscal: TDMCadNotaFiscal);
+begin
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat := 0;
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat  := 0;
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat      := 0;
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat      := 0;
+
+  if (fDMCadNotaFiscal.cdsCFOPENVIAR_BASE_ST.AsString <> 'S') then
+    exit;
+  if (fDMCadNotaFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
+    exit;
+  if  ((fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_CST.AsString <> '60') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_CST.AsString <> '500')) then
+    exit;
+  if fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger <> 1 then
+    exit;
+  if fDMCadNotaFiscal.cdsFilialUSA_ENVIO_ST_RET.AsString <> 'S' then
+    exit;
+
+  //ver como pegar o % ST
+  fDMCadNotaFiscal.qProdST.Close;
+  fDMCadNotaFiscal.qProdST.ParamByName('ID_Produto').AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
+  fDMCadNotaFiscal.qProdST.Open;
+  if fDMCadNotaFiscal.qProdST.IsEmpty then
+    Exit;
+
+  if StrToFloat(FormatFloat('0.0000', fDMCadNotaFiscal.qProdSTBASE_ST_RET.AsFloat)) <= 0 then
+    exit;
+
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTBASE_ST_RET.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTVLR_ST_RET.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
 end;
 
 end.

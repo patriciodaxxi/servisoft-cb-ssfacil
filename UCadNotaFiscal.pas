@@ -408,6 +408,15 @@ type
     Label114: TLabel;
     DBEdit73: TDBEdit;
     DBEdit74: TDBEdit;
+    RzGroupBox5: TRzGroupBox;
+    Label112: TLabel;
+    Label115: TLabel;
+    Label116: TLabel;
+    Label117: TLabel;
+    DBEdit75: TDBEdit;
+    DBEdit76: TDBEdit;
+    DBEdit77: TDBEdit;
+    DBEdit78: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);

@@ -776,7 +776,9 @@ uses
   UDMConsNotas in 'UDMConsNotas.pas' {DMConsNotas: TDataModule},
   uNFeConsts in 'uNFeConsts.pas',
   uProdutoAtualizaPreco in 'uProdutoAtualizaPreco.pas' {frmProdutoAtualizaPreco},
-  UCadProduto_Imp in 'UCadProduto_Imp.pas' {frmCadProduto_Imp};
+  uDmCadMovProdST in 'uDmCadMovProdST.pas' {DmCadMovProdST: TDataModule},
+  uCadMovProdST in 'uCadMovProdST.pas' {frmCadMovProdST},
+  UCadProduto_ST in 'UCadProduto_ST.pas' {frmCadProduto_ST};
 
 {$R *.res}
 

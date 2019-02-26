@@ -1168,6 +1168,20 @@ object frmCadCFOP: TfrmCadCFOP
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
+          object DBCheckBox23: TDBCheckBox
+            Left = 162
+            Top = 30
+            Width = 186
+            Height = 17
+            Caption = 'Enviar Base ST/Efetivo'
+            Ctl3D = False
+            DataField = 'ENVIAR_BASE_ST'
+            DataSource = DMCadCFOP.dsCFOP
+            ParentCtl3D = False
+            TabOrder = 10
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
+          end
         end
         object gbxFaturamento: TRzGroupBox
           Left = 385

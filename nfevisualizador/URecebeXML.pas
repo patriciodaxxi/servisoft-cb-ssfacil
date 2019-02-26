@@ -530,11 +530,26 @@ uses
 procedure TfrmRecebeXML.Move_Campos(Campo1,Campo2, Soma: String);
 var
   i: Integer;
+//  vAux : String;
 begin
   for i:=0 to (fDMRecebeXML.cdsDetalhe.FieldCount-1) do
   begin
     if fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = Campo1 then
-      fDMRecebeXML.mItensNota.FieldByName(Campo2).AsString := fDMRecebeXML.cdsDetalhe.FieldByName(Campo1).AsString;
+    begin
+      if fDMRecebeXML.cdsDetalhe.Fields[i].DataType = ftString then
+      begin
+        //vAux := Monta_Numero(fDMRecebeXML.cdsDetalhe.FieldByName(Campo1).AsString,0);
+        //if vAux <> '' then
+          fDMRecebeXML.mItensNota.FieldByName(Campo2).AsString :=  Replace(fDMRecebeXML.cdsDetalhe.FieldByName(Campo1).AssTring,'.',',')
+        //else
+        //  fDMRecebeXML.mItensNota.FieldByName(Campo2).AsString :=  '0';
+      end
+      else
+        fDMRecebeXML.mItensNota.FieldByName(Campo2).AsString := fDMRecebeXML.cdsDetalhe.FieldByName(Campo1).AsString;
+
+    end
+    //if fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = Campo1 then
+      //fDMRecebeXML.mItensNota.FieldByName(Campo2).AsString := fDMRecebeXML.cdsDetalhe.FieldByName(Campo1).AsString;
   end;
 end;
 
@@ -1301,9 +1316,9 @@ begin
   end;
 
   //08/04/2015
-  Label91.Visible          := ((vFilial <= 0) or (fDMRecebeXML.qParametros_GeralUSA_TRIANGULAR.AsString = 'S'));
-  RxDBLookupCombo1.Visible := ((vFilial <= 0) or (fDMRecebeXML.qParametros_GeralUSA_TRIANGULAR.AsString = 'S'));
-  SpeedButton1.Visible     := ((vFilial <= 0) or (fDMRecebeXML.qParametros_GeralUSA_TRIANGULAR.AsString = 'S'));
+  Label91.Visible          := ((vFilial_Local <= 0) or (fDMRecebeXML.qParametros_GeralUSA_TRIANGULAR.AsString = 'S'));
+  RxDBLookupCombo1.Visible := ((vFilial_Local <= 0) or (fDMRecebeXML.qParametros_GeralUSA_TRIANGULAR.AsString = 'S'));
+  SpeedButton1.Visible     := ((vFilial_Local <= 0) or (fDMRecebeXML.qParametros_GeralUSA_TRIANGULAR.AsString = 'S'));
   Label114.Visible         := (vFilial_Local <= 0);
   RxDBLookupCombo6.Visible := (vFilial_Local <= 0);
   if fDMRecebeXML.cdsCliente.Locate('CNPJ_CPF',edCNPJDest2.Text, ([LocaseInsensitive])) then
@@ -4171,7 +4186,7 @@ procedure TfrmRecebeXML.prc_Gravar_Produto_Imp;
 var
   vQtdAux : Real;
 begin
-  if fDMRecebeXML.cdsFilialUSA_ENVIO_ST_RET.AsString <> 'S' then
+{  if fDMRecebeXML.cdsFilialUSA_ENVIO_ST_RET.AsString <> 'S' then
     exit;
 
   if (StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat)) <= 0) and
@@ -4187,7 +4202,7 @@ begin
     fDMRecebeXML.cdsProduto_Imp.Insert
   else
   begin
-    if fDMRecebeXML.cdsProduto_Imp.Data <= fDMRecebeXML.cdsNotaFiscalDTEMISSAO.AsDateTime then
+    if fDMRecebeXML.cdsProduto_ImpDATA.AsDateTime <= fDMRecebeXML.cdsNotaFiscalDTEMISSAO.AsDateTime then
       fDMRecebeXML.cdsProduto_Imp.Edit
     else
       exit;
@@ -4230,7 +4245,7 @@ begin
   fDMRecebeXML.cdsProduto_ImpVLR_ST.AsFloat  := StrToCurr(FormatCurr('0.00000',fDMRecebeXML.cdsProduto_ImpVLR_ST_ORIG.AsFloat / vQtdAux));
 
   fDMRecebeXML.cdsProduto_Imp.Post;
-  fDMRecebeXML.cdsProduto_Imp.ApplyUpdates(0);
+  fDMRecebeXML.cdsProduto_Imp.ApplyUpdates(0);}
 end;
 
 end.

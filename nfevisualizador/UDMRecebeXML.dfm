@@ -5769,6 +5769,12 @@ object DMRecebeXML: TDMRecebeXML
     object sdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
       FieldName = 'VLR_ICMS_EFET'
     end
+    object sdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField
+      FieldName = 'PERC_REDUCAO_ICMSSUBST'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField
+      FieldName = 'PERC_ICMSSUBST_INTERNO'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -7734,6 +7740,8 @@ object DMRecebeXML: TDMRecebeXML
     Top = 567
   end
   object sdsOC: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 
       'SELECT PE.ID, PE.id_cliente, PE.DTEMISSAO, PI.id_produto, PI.id_' +
       'cfop, PE.NUM_PEDIDO,'#13#10'PI.vlr_unitario, PI.qtd, PI.qtd_faturado, ' +
@@ -9299,6 +9307,8 @@ object DMRecebeXML: TDMRecebeXML
     end
   end
   object sdsTamanho: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 'SELECT *'#13#10'FROM TAMANHO'
     MaxBlobSize = -1
     Params = <>
@@ -9395,7 +9405,6 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspProduto_Imp'
-    BeforePost = cdsProduto_FornBeforePost
     Left = 240
     Top = 272
     object cdsProduto_ImpID: TIntegerField

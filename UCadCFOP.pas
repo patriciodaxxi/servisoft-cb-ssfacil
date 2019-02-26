@@ -139,6 +139,7 @@ type
     ProgressBar1: TProgressBar;
     DBCheckBox21: TDBCheckBox;
     DBCheckBox22: TDBCheckBox;
+    DBCheckBox23: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

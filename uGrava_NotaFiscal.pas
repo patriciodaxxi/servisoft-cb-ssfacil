@@ -654,7 +654,7 @@ Base_ICMSSubstRet, Vlr_ICMSSubst_Ret, Base_Icms_Efet, Vlr_Icms_Efet,Base_IcmsSub
 var
   vQtdAux : Real;
 begin
-  fDMCadNotaFiscal.cdsProduto_Imp.Close;
+{  fDMCadNotaFiscal.cdsProduto_Imp.Close;
   fDMCadNotaFiscal.sdsProduto_Imp.ParamByName('ID').AsInteger := ID_Produto;
   fDMCadNotaFiscal.cdsProduto_Imp.Open;
 
@@ -662,7 +662,7 @@ begin
     fDMCadNotaFiscal.cdsProduto_Imp.Insert
   else
   begin
-    if fDMCadNotaFiscal.cdsProduto_Imp.Data <= DtEmissao then
+    if fDMCadNotaFiscal.cdsProduto_ImpData.AsDateTime <= DtEmissao then   //aqio tipo e quando excluyr
       fDMCadNotaFiscal.cdsProduto_Imp.Edit
     else
       exit;
@@ -704,12 +704,12 @@ begin
   fDMCadNotaFiscal.cdsProduto_ImpVLR_ST.AsFloat  := StrToCurr(FormatCurr('0.00000',fDMCadNotaFiscal.cdsProduto_ImpVLR_ST_ORIG.AsFloat / vQtdAux));
 
   fDMCadNotaFiscal.cdsProduto_Imp.Post;
-  fDMCadNotaFiscal.cdsProduto_Imp.ApplyUpdates(0);
+  fDMCadNotaFiscal.cdsProduto_Imp.ApplyUpdates(0);}
 end;
 
 procedure Prc_Excluir_Produto_Imp(fDMCadNotaFiscal: TDMCadNotaFiscal ; Data : TDateTime);
 begin
-  fDMCadNotaFiscal.mProdAux.First;
+{  fDMCadNotaFiscal.mProdAux.First;
   while not fDMCadNotaFiscal.mProdAux.Eof do
   begin
     fDMCadNotaFiscal.qNTEProdImp.Close;
@@ -735,7 +735,7 @@ begin
     end;
 
     fDMCadNotaFiscal.mProdAux.Next;
-  end;
+  end;}
 
 end;
 

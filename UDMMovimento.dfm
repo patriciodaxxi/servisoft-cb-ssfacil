@@ -1,7 +1,7 @@
 object DMMovimento: TDMMovimento
   OldCreateOrder = False
-  Left = 504
-  Top = 207
+  Left = 519
+  Top = 140
   Height = 478
   Width = 454
   object sdsMovimento: TSQLDataSet

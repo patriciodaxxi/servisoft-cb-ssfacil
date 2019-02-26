@@ -657,6 +657,13 @@ object fMenu: TfMenu
         Caption = 'Consulta Materiais Por Ordem de Produ'#231#227'o'
         OnClick = ConsultaMateriaisPorLote1Click
       end
+      object N54: TMenuItem
+        Caption = '-'
+      end
+      object MovimentoProdutoST1: TMenuItem
+        Caption = 'Movimento Produto ST'
+        OnClick = MovimentoProdutoST1Click
+      end
       object N10: TMenuItem
         Caption = '-'
       end
@@ -4125,6 +4132,24 @@ object fMenu: TfMenu
         CompName = 'btnExcluir'
         Caption = 'Excluir'
         GroupName = 'Produtos Impostos'
+      end
+      item
+        FormName = 'frmCadMovProdST'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Movimento Produto ST'
+      end
+      item
+        FormName = 'frmCadMovProdST'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Movimento Produto ST'
+      end
+      item
+        FormName = 'frmCadMovProdST'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Movimento Produto ST'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

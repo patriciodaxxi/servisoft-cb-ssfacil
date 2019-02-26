@@ -480,7 +480,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     Top = 172
     Width = 792
     Height = 403
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     ActivePageDefault = TabSheet1
     Align = alClient
     BackgroundColor = clGray
@@ -490,7 +490,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     ParentBackgroundColor = False
     ParentColor = False
     TabColors.Shadow = clGray
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     TextColors.DisabledShadow = 8421440
     TextColors.Selected = clBlue
@@ -1437,7 +1437,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'Vlr.Desconto:'
       end
       object Label31: TLabel
-        Left = 407
+        Left = 375
         Top = 215
         Width = 56
         Height = 13
@@ -1445,7 +1445,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'Base ICMS:'
       end
       object Label32: TLabel
-        Left = 419
+        Left = 387
         Top = 237
         Width = 44
         Height = 13
@@ -1461,7 +1461,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = '% C'#225'lculo Base ICMS:'
       end
       object Label35: TLabel
-        Left = 432
+        Left = 400
         Top = 259
         Width = 31
         Height = 13
@@ -1469,7 +1469,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'Vlr.IPI:'
       end
       object Label36: TLabel
-        Left = 313
+        Left = 281
         Top = 164
         Width = 122
         Height = 13
@@ -1477,7 +1477,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = '% Tributos Lei 12.741/12:'
       end
       object Label50: TLabel
-        Left = 445
+        Left = 413
         Top = 164
         Width = 38
         Height = 13
@@ -1485,7 +1485,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'Federal:'
       end
       object Label51: TLabel
-        Left = 565
+        Left = 533
         Top = 164
         Width = 44
         Height = 13
@@ -1493,7 +1493,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'Estadual:'
       end
       object Label52: TLabel
-        Left = 435
+        Left = 403
         Top = 185
         Width = 48
         Height = 13
@@ -1517,7 +1517,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'C'#243'd.Enq IPI:'
       end
       object Label65: TLabel
-        Left = 569
+        Left = 537
         Top = 259
         Width = 62
         Height = 13
@@ -1707,7 +1707,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         TabOrder = 15
       end
       object DBEdit1: TDBEdit
-        Left = 466
+        Left = 434
         Top = 207
         Width = 94
         Height = 21
@@ -1716,7 +1716,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         TabOrder = 20
       end
       object DBEdit13: TDBEdit
-        Left = 466
+        Left = 434
         Top = 229
         Width = 94
         Height = 21
@@ -1735,7 +1735,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         TabOrder = 10
       end
       object DBEdit16: TDBEdit
-        Left = 466
+        Left = 434
         Top = 251
         Width = 94
         Height = 21
@@ -1744,7 +1744,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         TabOrder = 22
       end
       object DBEdit17: TDBEdit
-        Left = 486
+        Left = 454
         Top = 156
         Width = 74
         Height = 21
@@ -1753,7 +1753,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         TabOrder = 17
       end
       object DBEdit27: TDBEdit
-        Left = 612
+        Left = 580
         Top = 156
         Width = 74
         Height = 21
@@ -1762,7 +1762,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         TabOrder = 18
       end
       object DBEdit28: TDBEdit
-        Left = 486
+        Left = 454
         Top = 177
         Width = 74
         Height = 21
@@ -1996,7 +1996,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         end
       end
       object DBEdit36: TDBEdit
-        Left = 634
+        Left = 602
         Top = 251
         Width = 94
         Height = 21

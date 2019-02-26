@@ -120,6 +120,7 @@ object frmCadFilial: TfrmCadFilial
             FieldName = 'FONE'
             Title.Alignment = taCenter
             Title.Caption = 'Fone'
+            Width = 64
             Visible = True
           end>
       end
@@ -706,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_Dados
+        ActivePage = TS_Tributos
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -1720,7 +1721,7 @@ object frmCadFilial: TfrmCadFilial
           object DBCheckBox23: TDBCheckBox
             Left = 352
             Top = 169
-            Width = 97
+            Width = 313
             Height = 17
             Caption = 'Usa ST Retido ou C'#225'lculo Efetivo'
             DataField = 'USA_ENVIO_ST_RET'

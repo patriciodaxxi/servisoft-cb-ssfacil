@@ -243,6 +243,11 @@ object DMCadCFOP: TDMCadCFOP
       FixedChar = True
       Size = 1
     end
+    object sdsCFOPENVIAR_BASE_ST: TStringField
+      FieldName = 'ENVIAR_BASE_ST'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
@@ -498,6 +503,11 @@ object DMCadCFOP: TDMCadCFOP
     end
     object cdsCFOPMARCAR_NCM_ST: TStringField
       FieldName = 'MARCAR_NCM_ST'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCFOPENVIAR_BASE_ST: TStringField
+      FieldName = 'ENVIAR_BASE_ST'
       FixedChar = True
       Size = 1
     end

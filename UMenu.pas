@@ -344,6 +344,8 @@ type
     ConsultasNotas1: TMenuItem;
     ConsultaNotas1: TMenuItem;
     AtualizarPreosporCdigodeBarras1: TMenuItem;
+    N54: TMenuItem;
+    MovimentoProdutoST1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -586,6 +588,7 @@ type
     procedure ConsultasNotas1Click(Sender: TObject);
     procedure ConsultaNotas1Click(Sender: TObject);
     procedure AtualizarPreosporCdigodeBarras1Click(Sender: TObject);
+    procedure MovimentoProdutoST1Click(Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -646,7 +649,7 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina,
   UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida,
   UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas,
-  uProdutoAtualizaPreco;
+  uProdutoAtualizaPreco, uCadMovProdST;
 
 {$R *.dfm}
 
@@ -2100,6 +2103,11 @@ end;
 procedure TfMenu.AtualizarPreosporCdigodeBarras1Click(Sender: TObject);
 begin
   OpenForm(TfrmProdutoAtualizaPreco,wsMaximized);
+end;
+
+procedure TfMenu.MovimentoProdutoST1Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadMovProdST,wsMaximized);
 end;
 
 initialization

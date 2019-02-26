@@ -184,6 +184,15 @@ type
     DBEdit61: TDBEdit;
     Label77: TLabel;
     DBEdit62: TDBEdit;
+    RzGroupBox5: TRzGroupBox;
+    Label78: TLabel;
+    Label79: TLabel;
+    Label80: TLabel;
+    DBEdit63: TDBEdit;
+    DBEdit64: TDBEdit;
+    DBEdit65: TDBEdit;
+    Label81: TLabel;
+    DBEdit66: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -204,6 +213,8 @@ type
     vCofins_Ant, vSeguro_Ant, vPis_Ant, vTaxa_Siscomex_Ant, vImportacao_Ant, vOutros_Valores_Ant: Real;
     vAduaneira_Ant, vVlrSiscomex_Ant: Real;
     vBase_ICMS_ST_Ant, vVlr_ICMS_ST_Ant: Real;
+    vBase_ST_Ret_Ant , vVlr_ST_Ret_Ant, vBase_Efet_Ant, vVlr_ICMS_Efet_Ant : Real;
+
     vVlr_Tributos: Real;
     vVlr_Nota: Real;
     vVlr_ICMS_FCP, vVlr_ICMS_UF_Dest, vVlr_ICMS_UF_Remet: Real;
@@ -283,6 +294,13 @@ begin
   vVlr_FCP_Dest      := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat;
   vBase_FCP_Dest     := fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat;
 
+  //26/02/2019
+  vBase_ST_Ret_Ant   := fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat;
+  vVlr_ST_Ret_Ant    := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat;
+  vBase_Efet_Ant     := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat;
+  vVlr_ICMS_Efet_Ant := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat;
+  //************
+                                                       
   fDMCadNotaFiscal.prc_Abrir_Desoneracao(fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_CST.AsString);
 
   Label46.Visible  := (fDMCadNotaFiscal.cdsParametrosUSA_DESONERACAO.AsString = 'S');
@@ -349,6 +367,13 @@ begin
                       + fDMCadNotaFiscal.cdsNotaFiscalVLR_OUTROS.AsFloat + fDMCadNotaFiscal.cdsNotaFiscalVLR_ADUANEIRA.AsFloat;
 
   fDMCadNotaFiscal.cdsNotaFiscalVLR_OUTRASDESP.AsFloat := vOutrasDespesasAux;
+
+  //26/02/2019
+  fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat := (fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat - vBase_ST_Ret_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat;
+  fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat := (fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat - vVlr_ST_Ret_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat;
+  fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_EFET.AsFloat     := (fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_EFET.AsFloat - vBase_Efet_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat;
+  fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_EFET.AsFloat     := (fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_EFET.AsFloat - vVlr_ICMS_Efet_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat;
+  //*************************
 
   try
     fDMCadNotaFiscal.cdsNotaFiscal_Itens.Post;

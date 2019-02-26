@@ -887,6 +887,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_CONTATO'
             Title.Alignment = taCenter
             Title.Caption = 'Contato'
+            Width = 64
             Visible = True
           end
           item
@@ -941,6 +942,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Cli'
+            Width = 64
             Visible = True
           end
           item
@@ -949,6 +951,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_FORNECEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Forn.'
+            Width = 64
             Visible = True
           end
           item
@@ -966,6 +969,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Repr.'
+            Width = 64
             Visible = True
           end
           item
@@ -974,6 +978,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'ORGAO_PUBLICO'
             Title.Alignment = taCenter
             Title.Caption = 'Org'#227'o P'#250'blico'
+            Width = 64
             Visible = True
           end
           item
@@ -981,6 +986,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTPEDIDO'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Pedido'
+            Width = 64
             Visible = True
           end
           item
@@ -988,6 +994,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Faturamento'
+            Width = 64
             Visible = True
           end
           item
@@ -1027,6 +1034,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_GRUPO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Grupo'
+            Width = 64
             Visible = True
           end
           item
@@ -1034,6 +1042,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_CONTA_ORCAMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Or'#231'amento'
+            Width = 64
             Visible = True
           end
           item
@@ -1041,6 +1050,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_CLI'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Cliente'
+            Width = 64
             Visible = True
           end
           item
@@ -1048,6 +1058,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_FORN'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Fornecedor'
+            Width = 64
             Visible = True
           end
           item
@@ -1055,6 +1066,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_TRANSP'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Transp.'
+            Width = 64
             Visible = True
           end
           item
@@ -1069,11 +1081,13 @@ object frmCadPessoa: TfrmCadPessoa
             Expanded = False
             FieldName = 'INSCR_EST'
             Title.Caption = 'Inscr. Estadual'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'EMAIL_NFE'
+            Width = 64
             Visible = True
           end>
       end
@@ -2478,9 +2492,9 @@ object frmCadPessoa: TfrmCadPessoa
               EnableValues = True
               ItemHeight = 13
               Items.Strings = (
-                'Contribuinte ICMS'
-                'Contribuinte Isento'
-                'N'#227'o Contribuinte')
+                '1 Contribuinte ICMS'
+                '2 Contribuinte Isento'
+                '9 N'#227'o Contribuinte')
               TabOrder = 3
               Values.Strings = (
                 '1'
@@ -2497,8 +2511,8 @@ object frmCadPessoa: TfrmCadPessoa
               DataField = 'TIPO_CONSUMIDOR'
               DataSource = DMCadPessoa.dsPessoa
               Items.Strings = (
-                'Normal'
-                'Final')
+                '0 = Normal'
+                '1 = Final')
               TabOrder = 31
               Values.Strings = (
                 '0'
@@ -4245,6 +4259,7 @@ object frmCadPessoa: TfrmCadPessoa
                     Expanded = False
                     FieldName = 'OBS'
                     Title.Color = 12320699
+                    Width = 64
                     Visible = True
                   end>
               end

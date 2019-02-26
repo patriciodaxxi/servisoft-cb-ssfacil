@@ -564,6 +564,18 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object sdsNotaFiscalBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object sdsNotaFiscalVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object sdsNotaFiscalVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
+    end
+    object sdsNotaFiscalBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object sdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
   end
   object dspNotaFiscal: TDataSetProvider
     DataSet = sdsNotaFiscal
@@ -1203,6 +1215,18 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object cdsNotaFiscalBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
       DisplayFormat = '0.00'
+    end
+    object cdsNotaFiscalVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object cdsNotaFiscalVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
+    end
+    object cdsNotaFiscalBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object cdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
     end
   end
   object dsNotaFiscal: TDataSource
@@ -4135,7 +4159,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'ICMS_DIFERIDO, T.USA_REGRA_ORGAO_PUBLICO, t.id_cofins_simp, t.id' +
       '_pis_simp,'#13#10't.perc_pis_simp, t.perc_cofins_simp, t.tipo_pis_simp' +
       ', t.tipo_cofins_simp,'#13#10'T.NFEFINALIDADE, T.GERAR_CUSTO_MEDIO, T.D' +
-      'EVOLUCAO, t.usa_unidade_trib, T.ALT_NCM_CUSTO'#13#10'FROM TAB_CFOP T'
+      'EVOLUCAO, t.usa_unidade_trib, T.ALT_NCM_CUSTO, T.ENVIAR_BASE_ST'#13 +
+      #10'FROM TAB_CFOP T'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -4345,6 +4370,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsCFOPALT_NCM_CUSTO: TStringField
       FieldName = 'ALT_NCM_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCFOPENVIAR_BASE_ST: TStringField
+      FieldName = 'ENVIAR_BASE_ST'
       FixedChar = True
       Size = 1
     end
@@ -15019,5 +15049,40 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSet = cdsProduto_Imp
     Left = 1112
     Top = 520
+  end
+  object qProdST: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id_produto'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select first 1 m.*'
+      'from vmovprodst m'
+      'where m.id_produto = :id_produto'
+      'order by m.dtemissao desc')
+    SQLConnection = dmDatabase.scoDados
+    Left = 784
+    Top = 560
+    object qProdSTDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object qProdSTID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object qProdSTBASE_ST: TFloatField
+      FieldName = 'BASE_ST'
+    end
+    object qProdSTBASE_ST_RET: TFloatField
+      FieldName = 'BASE_ST_RET'
+    end
+    object qProdSTVLR_ST: TFloatField
+      FieldName = 'VLR_ST'
+    end
+    object qProdSTVLR_ST_RET: TFloatField
+      FieldName = 'VLR_ST_RET'
+    end
   end
 end
