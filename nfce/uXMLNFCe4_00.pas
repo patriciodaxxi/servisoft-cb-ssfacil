@@ -233,12 +233,12 @@ begin
   DetXML.Imposto.ICMS.ICMS60.PST := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePerc_ST_Ret.AsFloat) ,',','.');
   DetXML.Imposto.ICMS.ICMS60.VICMSSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ST_Ret.AsFloat) ,',','.');
   //4.00
-  if (StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat)) > 0) then
+  {if (StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat)) > 0) then
   begin
     DetXML.Imposto.ICMS.ICMS60.VBCFCPSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeBASE_FCP_ST.AsFloat) ,',','.');
     DetXML.Imposto.ICMS.ICMS60.PFCPSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat) ,',','.');
     DetXML.Imposto.ICMS.ICMS60.VFCPSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeVLR_FCP_ST.AsFloat) ,',','.');
-  end;
+  end;}
   //***************
   //26/02/2019
   if StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ICMS_Efet.AsFloat)) > 0 then
@@ -354,12 +354,12 @@ begin
   //***************
 
   //4.00
-  if (StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat)) > 0) then
+  {if (StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat)) > 0) then
   begin
     DetXML.Imposto.ICMS.ICMSSN500.VBCFCPSTRet := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeBASE_FCP_ST.AsFloat) ,',','.');
     DetXML.Imposto.ICMS.ICMSSN500.PFCPSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFePERC_FCP_ST.AsFloat) ,',','.');
     DetXML.Imposto.ICMS.ICMSSN500.VFCPSTRet   := Replace(FormatFloat('0.00',fDMNFCe.mItensNFeVLR_FCP_ST.AsFloat) ,',','.');
-  end;
+  end;}
   //***************
 
   //26/02/2019

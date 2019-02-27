@@ -1923,6 +1923,7 @@ type
     cdsProduto_ImpQTD_PACOTE: TFloatField;
     qFilial_STRet: TSQLQuery;
     qFilial_STRetCONTADOR: TIntegerField;
+    cdsProduto_ConsultaGERAR_ST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
