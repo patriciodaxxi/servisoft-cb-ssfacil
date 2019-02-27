@@ -655,9 +655,11 @@ type
     ctVeiculo: String;
     ctqProduto: String;
     ctEstoque_Res: String;
+    ctBalanco: String;
     ctEstoque_Res_Ord: String;
     vDescOpcao_Rel: String;
     vOpcao_ProdMat: String;
+
     procedure prc_Abrir_Produto(Inativo: String);
     procedure prc_Abrir_Veiculo(Inativo: String);
     procedure prc_Abrir_Produto_Lote(ID: Integer);
@@ -697,6 +699,7 @@ begin
   ctEstoque_Res      := sdsEstoque_Res.CommandText;
   ctEstoque_Res_Ord  := sdsEstoque_Res_Ord.CommandText;
   ctEstoque_Atual    := sdsEstoque_Atual.CommandText;
+  ctBalanco          := sdsBalanco.CommandText;
   cdsFilial.Open;
   cdsMarca.Open;
   cdsGrupo.Open;

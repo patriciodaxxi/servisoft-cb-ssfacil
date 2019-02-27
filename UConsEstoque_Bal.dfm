@@ -77,7 +77,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       LookupField = 'ID'
       LookupDisplay = 'NOME_INTERNO'
       LookupSource = DMConsEstoque.dsFilial
-      TabOrder = 0
+      TabOrder = 4
     end
     object RadioGroup1: TRadioGroup
       Left = 1
@@ -90,7 +90,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Items.Strings = (
         'Com Saldo'
         'Ambos')
-      TabOrder = 1
+      TabOrder = 0
     end
     object btnConsultar: TNxButton
       Left = 458
@@ -160,7 +160,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 6
       Transparent = True
       OnClick = btnConsultarClick
     end
@@ -170,7 +170,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Width = 121
       Height = 21
       NumGlyphs = 2
-      TabOrder = 3
+      TabOrder = 5
     end
     object btnImprimir_Est: TNxButton
       Left = 634
@@ -240,7 +240,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 7
       Transparent = True
       OnClick = btnImprimir_EstClick
     end
@@ -252,7 +252,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Style = csDropDownList
       ItemHeight = 13
       ItemIndex = 0
-      TabOrder = 5
+      TabOrder = 1
       Text = 'Por Tipo de Cadastro'
       OnChange = ComboBox1Change
       Items.Strings = (
@@ -267,7 +267,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Style = csDropDownList
       ItemHeight = 13
       ItemIndex = 0
-      TabOrder = 6
+      TabOrder = 2
       Text = 'Produto'
       OnExit = ComboBox2Exit
       Items.Strings = (
@@ -275,7 +275,8 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         'Material'
         'Material Consumo'
         'Semi Acabado'
-        'Imobilizado')
+        'Imobilizado'
+        'Todos')
     end
     object ComboBox3: TComboBox
       Left = 180
@@ -284,9 +285,9 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Height = 21
       Style = csDropDownList
       ItemHeight = 13
-      ItemIndex = 7
-      TabOrder = 7
-      Text = '07 - Material de Uso e Consumo'
+      ItemIndex = 0
+      TabOrder = 3
+      Text = '00 - Mercadoria para Revenda'
       Visible = False
       Items.Strings = (
         '00 - Mercadoria para Revenda'

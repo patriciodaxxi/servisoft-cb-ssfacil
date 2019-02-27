@@ -93,23 +93,53 @@ var
   vQtdAux: Integer;
 begin
   vQtdAux := 0;
+
   fDMConsEstoque.cdsBalanco.Close;
-  fDMConsEstoque.sdsBalanco.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsBalanco.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
+  fDMConsEstoque.sdsBalanco.CommandText := fDMConsEstoque.ctBalanco;
+  if ComboBox2.ItemIndex < 5 then
+    fDMConsEstoque.sdsBalanco.CommandText := fDMConsEstoque.sdsBalanco.CommandText + ' ' +
+                                             ' WHERE EM.FILIAL = :FILIAL ' +
+                                             ' AND EM.DTMOVIMENTO <= :DTMOVIMENTO ' +
+                                             ' AND ((PRO.TIPO_REG = :TIPO_REG) or (PRO.SPED_TIPO_ITEM = :SPED_TIPO_ITEM)) ' +
+                                             ' AND PRO.INATIVO = ''N'' ' +
+                                             ' AND PRO.ESTOQUE = ''S'' ' +
+                                             ' GROUP BY EM.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, PRO.UNIDADE, ' +
+                                             'EM.id_cor, COMB.NOME, PRO.sped_tipo_item, PRO.PERC_IPI'
+  else
+    fDMConsEstoque.sdsBalanco.CommandText := fDMConsEstoque.sdsBalanco.CommandText + ' ' +
+                                           ' WHERE EM.FILIAL = :FILIAL ' +
+                                           ' AND EM.DTMOVIMENTO <= :DTMOVIMENTO ' +
+                                           ' AND PRO.INATIVO = ''N'' ' +
+                                           ' AND PRO.ESTOQUE = ''S'' ' +
+                                           ' AND PRO.TIPO_REG IN (''P'',''M'',''C'',''S'') ' +
+                                           ' GROUP BY EM.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, PRO.UNIDADE, ' +
+                                           'EM.id_cor, COMB.NOME, PRO.sped_tipo_item, PRO.PERC_IPI';
+
   if ComboBox1.ItemIndex = 0 then
   begin
     case ComboBox2.ItemIndex of
-      0: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'P';
-      1: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'M';
-      2: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'C';
-      3: fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'S';
+      0: begin
+           fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'P';
+           fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '-';
+         end;
+      1: begin
+           fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'M';
+           fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '-';
+         end;
+      2: begin
+           fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'C';
+           fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '-';
+         end;
+      3: begin
+           fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString  := 'S';
+           fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '-';
+         end;
     end;
-    fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '-';
   end
   else
   begin
     case ComboBox3.ItemIndex of
-      0: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '00'; 
+      0: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '00';
       1: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '01';
       2: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '02';
       3: fDMConsEstoque.sdsBalanco.ParamByName('SPED_TIPO_ITEM').AsString := '03';
@@ -123,6 +153,8 @@ begin
     end;
     fDMConsEstoque.sdsBalanco.ParamByName('TIPO_REG').AsString := '-';
   end;
+  fDMConsEstoque.sdsBalanco.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsBalanco.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsBalanco.Open;
 end;
 
@@ -211,7 +243,7 @@ end;
 
 procedure TfrmConsEstoque_Bal.btnImprimir_EstClick(Sender: TObject);
 var
-  vArq : String;
+  vArq: String;
 begin
   SMDBGrid1.DisableScroll;
   vTipo_Config_Email := 4;
@@ -229,7 +261,7 @@ begin
   end
   else
   begin
-    fRelEstoque_Bal                := TfRelEstoque_Bal.Create(Self);
+    fRelEstoque_Bal := TfRelEstoque_Bal.Create(Self);
     try
       fRelEstoque_Bal.fDMConsEstoque := fDMConsEstoque;
       fRelEstoque_Bal.vDataRef       := DateEdit1.Date;

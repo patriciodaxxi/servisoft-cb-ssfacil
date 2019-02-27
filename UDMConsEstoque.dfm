@@ -917,62 +917,37 @@ object DMConsEstoque: TDMConsEstoque
       'TO and'#13#10'              ENT.TIPO_ES = '#39'E'#39' and'#13#10'              ENT.P' +
       'ERC_ICMS > 0'#13#10'        order by ENT.ID desc) PERC_ICMS, PRO.PERC_' +
       'IPI'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JOIN PRODUTO PRO ON EM.ID_PRODUT' +
-      'O = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB ON EM.ID_COR = COMB.ID'#13#10'WH' +
-      'ERE EM.FILIAL = :FILIAL'#13#10'  AND EM.DTMOVIMENTO <= :DTMOVIMENTO'#13#10' ' +
-      ' AND ((PRO.TIPO_REG = :TIPO_REG) or (PRO.SPED_TIPO_ITEM = :SPED_' +
-      'TIPO_ITEM))'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10'  AND PRO.ESTOQUE = '#39'S'#39#13#10'G' +
-      'ROUP BY EM.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, PRO' +
-      '.UNIDADE, EM.id_cor, COMB.NOME, PRO.sped_tipo_item, PRO.PERC_IPI'
+      'O = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB ON EM.ID_COR = COMB.ID'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftDate
         Name = 'DTMOVIMENTO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftDate
         Name = 'DTMOVIMENTO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftDate
         Name = 'DTMOVIMENTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'FILIAL'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DTMOVIMENTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'TIPO_REG'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SPED_TIPO_ITEM'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
