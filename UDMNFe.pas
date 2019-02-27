@@ -1207,6 +1207,7 @@ type
     mItensNFeBase_ICMS_Efet: TFloatField;
     mItensNFeVlr_ICMS_Efet: TFloatField;
     mItensNFePerc_ICMS_Efet: TFloatField;
+    mItensNFePERC_BASE_RED_EFET: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);
