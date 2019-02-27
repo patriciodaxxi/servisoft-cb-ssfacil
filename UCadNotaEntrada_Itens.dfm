@@ -1,6 +1,6 @@
 object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
-  Left = 296
-  Top = 74
+  Left = 359
+  Top = 89
   Width = 721
   Height = 612
   Caption = 'Cadastro dos Itens da Nota'
@@ -375,10 +375,10 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     Top = 145
     Width = 713
     Height = 402
-    ActivePage = TS_Itens
+    ActivePage = TS_Impostos
     ActivePageDefault = TS_Itens
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 4
     FixedDimension = 19
     object TS_Itens: TRzTabSheet
