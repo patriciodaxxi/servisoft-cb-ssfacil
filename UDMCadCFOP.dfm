@@ -1,8 +1,8 @@
 object DMCadCFOP: TDMCadCFOP
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 255
-  Top = 72
+  Left = 189
+  Top = 52
   Height = 591
   Width = 1007
   object sdsCFOP: TSQLDataSet
@@ -1282,10 +1282,10 @@ object DMCadCFOP: TDMCadCFOP
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT T.ID, T.CODCFOP, T.NOME, T.gerar_ipi, T.gerar_icms, T.ger' +
-      'ar_duplicata,'#13#10'T.somar_vlrtotalproduto, T.gerar_icms_simples, T.' +
-      'tipo_empresa, T.beneficiamento, T.nome_interno, T.INATIVO'#13#10'FROM ' +
-      'TAB_CFOP T'
+      'select T.ID, T.CODCFOP, T.NOME, T.GERAR_IPI, T.GERAR_ICMS, T.GER' +
+      'AR_DUPLICATA, T.SOMAR_VLRTOTALPRODUTO,'#13#10'       T.GERAR_ICMS_SIMP' +
+      'LES, T.TIPO_EMPRESA, T.BENEFICIAMENTO, T.NOME_INTERNO, T.INATIVO' +
+      ', T.SUBSTITUICAO_TRIB'#13#10'from TAB_CFOP T  '
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1367,6 +1367,11 @@ object DMCadCFOP: TDMCadCFOP
     object cdsCFOP_ConsultaINATIVO: TStringField
       DisplayLabel = 'Inativo'
       FieldName = 'INATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCFOP_ConsultaSUBSTITUICAO_TRIB: TStringField
+      FieldName = 'SUBSTITUICAO_TRIB'
       FixedChar = True
       Size = 1
     end

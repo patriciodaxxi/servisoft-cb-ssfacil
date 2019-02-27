@@ -1,6 +1,6 @@
 object frmCadCFOP: TfrmCadCFOP
-  Left = 314
-  Top = 51
+  Left = 204
+  Top = 42
   Width = 945
   Height = 639
   Caption = 'Cadastro de CFOP (Natureza de Opera'#231#227'o)'
@@ -24,9 +24,9 @@ object frmCadCFOP: TfrmCadCFOP
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 937
-    Height = 608
-    ActivePage = TS_Cadastro
+    Width = 929
+    Height = 600
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadCFOP: TfrmCadCFOP
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -43,8 +43,8 @@ object frmCadCFOP: TfrmCadCFOP
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 107
-        Width = 933
-        Height = 461
+        Width = 925
+        Height = 453
         Align = alClient
         Ctl3D = False
         DataSource = DMCadCFOP.dsCFOP_Consulta
@@ -78,7 +78,7 @@ object frmCadCFOP: TfrmCadCFOP
         WidthOfIndicator = 23
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 12
+        ColCount = 13
         RowCount = 2
         Columns = <
           item
@@ -137,6 +137,12 @@ object frmCadCFOP: TfrmCadCFOP
           end
           item
             Expanded = False
+            FieldName = 'SUBSTITUICAO_TRIB'
+            Title.Caption = 'Subst. Tribut'#225'ria'
+            Visible = True
+          end
+          item
+            Expanded = False
             FieldName = 'BENEFICIAMENTO'
             Width = 88
             Visible = True
@@ -150,7 +156,7 @@ object frmCadCFOP: TfrmCadCFOP
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 933
+        Width = 925
         Height = 30
         Align = alTop
         Color = clSilver
@@ -454,8 +460,8 @@ object frmCadCFOP: TfrmCadCFOP
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 568
-        Width = 933
+        Top = 560
+        Width = 925
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -471,7 +477,7 @@ object frmCadCFOP: TfrmCadCFOP
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 933
+        Width = 925
         Height = 77
         Align = alTop
         Color = clSilver
@@ -635,7 +641,7 @@ object frmCadCFOP: TfrmCadCFOP
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 933
+        Width = 925
         Height = 30
         Align = alTop
         Color = 8404992
@@ -874,7 +880,7 @@ object frmCadCFOP: TfrmCadCFOP
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 933
+        Width = 925
         Height = 288
         Align = alTop
         Enabled = False
@@ -1760,8 +1766,8 @@ object frmCadCFOP: TfrmCadCFOP
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 318
-        Width = 933
-        Height = 267
+        Width = 925
+        Height = 259
         ActivePage = TabSheet1
         ActivePageDefault = TabSheet1
         Align = alClient
@@ -1773,7 +1779,7 @@ object frmCadCFOP: TfrmCadCFOP
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 929
+            Width = 921
             Height = 31
             Align = alTop
             Color = clSilver
@@ -1886,8 +1892,8 @@ object frmCadCFOP: TfrmCadCFOP
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 31
-            Width = 929
-            Height = 213
+            Width = 921
+            Height = 205
             Align = alClient
             DataSource = DMCadCFOP.dsCFOP_Variacao
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -2015,8 +2021,8 @@ object frmCadCFOP: TfrmCadCFOP
           object DBMemo1: TDBMemo
             Left = 0
             Top = 47
-            Width = 929
-            Height = 197
+            Width = 921
+            Height = 189
             Align = alClient
             DataField = 'LEI'
             DataSource = DMCadCFOP.dsCFOP
@@ -2028,7 +2034,7 @@ object frmCadCFOP: TfrmCadCFOP
           object Panel5: TPanel
             Left = 0
             Top = 0
-            Width = 929
+            Width = 921
             Height = 47
             Align = alTop
             Color = clSilver
@@ -2117,8 +2123,8 @@ object frmCadCFOP: TfrmCadCFOP
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 929
-            Height = 244
+            Width = 921
+            Height = 236
             Align = alClient
             Enabled = False
             TabOrder = 0
