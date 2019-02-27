@@ -1684,6 +1684,12 @@ begin
   cdsCupomFiscalVLR_RECEBIDO.AsFloat  := 0;
   cdsCupomFiscalVLR_TROCO.AsFloat     := 0;
   cdsCupomFiscalID_CONDPGTO.AsInteger := 0;
+
+  cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat := 0;
+  cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat  := 0;
+  cdsCupomFiscalVLR_BASE_EFET.AsFloat      := 0;
+  cdsCupomFiscalVLR_ICMS_EFET.AsFloat      := 0;
+
   cdsCupomFiscalID_CONTA.AsInteger    := cdsParametrosID_CONTA_FECHAMENTO.AsInteger;
   cdsCupomFiscalFILIAL.AsInteger      := cdsFilialID.AsInteger;
   cdsCupomFiscalTIPO_PGTO.AsString    := 'V';
