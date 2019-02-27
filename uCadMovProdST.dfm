@@ -843,7 +843,7 @@ object frmCadMovProdST: TfrmCadMovProdST
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
-          Caption = ' Base De Entrada na Nota '
+          Caption = ' Base De Entrada '
           Ctl3D = True
           FlatColor = clNavy
           FlatColorAdjustment = 2
@@ -857,42 +857,43 @@ object frmCadMovProdST: TfrmCadMovProdST
           TabOrder = 4
           VisualStyle = vsGradient
           object Label7: TLabel
-            Left = 36
+            Left = 35
             Top = 76
-            Width = 49
+            Width = 50
             Height = 13
             Alignment = taRightJustify
-            Caption = 'Qtd. Nota:'
+            Caption = 'Qtd. Total:'
             FocusControl = DBEdit6
           end
           object Label10: TLabel
-            Left = 31
+            Left = 17
             Top = 94
-            Width = 54
+            Width = 68
             Height = 13
-            Caption = 'Unid. Nota:'
+            Alignment = taRightJustify
+            Caption = 'Unid. Entrada:'
             FocusControl = DBEdit8
           end
           object Label11: TLabel
-            Left = 15
+            Left = 41
             Top = 24
-            Width = 70
+            Width = 44
             Height = 13
             Alignment = taRightJustify
-            Caption = 'Base ST Nota:'
+            Caption = 'Base ST:'
             FocusControl = DBEdit1
           end
           object Label12: TLabel
-            Left = 24
+            Left = 50
             Top = 42
-            Width = 61
+            Width = 35
             Height = 13
             Alignment = taRightJustify
-            Caption = 'Vlr. ST Nota:'
+            Caption = 'Vlr. ST:'
             FocusControl = DBEdit5
           end
           object Label13: TLabel
-            Left = 55
+            Left = 57
             Top = 58
             Width = 28
             Height = 13

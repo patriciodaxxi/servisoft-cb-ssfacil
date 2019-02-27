@@ -4874,6 +4874,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object cdsFilialCALCULAR_ICMS_EFET: TStringField
+      FieldName = 'CALCULAR_ICMS_EFET'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
@@ -6238,7 +6243,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'MVA_UF_DESTINO, COD_CEST, n.unidade_trib, N.ID_CFOP, N.ID_PIS, N' +
       '.ID_COFINS,'#13#10'N.ID_CST_ICMS, N.PERC_PIS, N.PERC_COFINS, N.PERC_BA' +
       'SE_ICMS, N.ID_OBS_LEI,'#13#10'N.ID_CSTIPI, N.PERC_IPI, N.TIPO_ESCALA, ' +
-      'N.CALCULA_FCP'#13#10'FROM TAB_NCM N'
+      'N.CALCULA_FCP, N.PERC_ICMS'#13#10'FROM TAB_NCM N'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -6329,6 +6334,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'CALCULA_FCP'
       FixedChar = True
       Size = 1
+    end
+    object cdsTab_NCMPERC_ICMS: TFloatField
+      FieldName = 'PERC_ICMS'
     end
   end
   object dsTab_NCM: TDataSource
@@ -15083,6 +15091,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object qProdSTVLR_ST_RET: TFloatField
       FieldName = 'VLR_ST_RET'
+    end
+    object qProdSTPERC_ST: TFloatField
+      FieldName = 'PERC_ST'
     end
   end
 end

@@ -659,7 +659,6 @@ type
     ctEstoque_Res_Ord: String;
     vDescOpcao_Rel: String;
     vOpcao_ProdMat: String;
-
     procedure prc_Abrir_Produto(Inativo: String);
     procedure prc_Abrir_Veiculo(Inativo: String);
     procedure prc_Abrir_Produto_Lote(ID: Integer);
@@ -668,7 +667,6 @@ type
     procedure prc_Posiciona_Produto(ID: Integer; Referencia: String);
 
     function fnc_Saldo_Ant(ID_Produto, Filial: Integer; Tamanho: String; Data: TDateTime; ID_COR: Integer = 0): Real;
-
   end;
 
 var

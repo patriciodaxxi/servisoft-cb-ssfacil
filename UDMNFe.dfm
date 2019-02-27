@@ -1864,6 +1864,30 @@ object DMNFe: TDMNFe
       item
         Name = 'Base_IPI'
         DataType = ftFloat
+      end
+      item
+        Name = 'Base_ST_Ret'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_ST_Ret'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Perc_ST_Ret'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Base_ICMS_Efet'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_ICMS_Efet'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Perc_ICMS_Efet'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     IndexFieldNames = 'Filial;NumNota;ItemNota'
@@ -1874,7 +1898,7 @@ object DMNFe: TDMNFe
     Left = 224
     Top = 424
     Data = {
-      800900009619E0BD01000000180000006300000000000300000080090646696C
+      FF0900009619E0BD010000001800000069000000000003000000FF090646696C
       69616C0400010000000000074E756D4E6F74610400010000000000084974656D
       4E6F746104000100000000000A436F6450726F6475746F010049000000010005
       57494454480200020014000A436F644E61744F70657201004900000001000557
@@ -1950,7 +1974,11 @@ object DMNFe: TDMNFe
       455354080004000000000009436F644261727261320100490000000100055749
       445448020002000E000C566C724950495F4465766F6C08000400000000000A50
       6572635F4465766F6C080004000000000008426173655F495049080004000000
-      00000000}
+      00000B426173655F53545F52657408000400000000000A566C725F53545F5265
+      7408000400000000000B506572635F53545F52657408000400000000000E4261
+      73655F49434D535F4566657408000400000000000D566C725F49434D535F4566
+      657408000400000000000E506572635F49434D535F4566657408000400000000
+      000000}
     object mItensNFeFilial: TIntegerField
       FieldName = 'Filial'
     end
@@ -2283,6 +2311,24 @@ object DMNFe: TDMNFe
     end
     object mItensNFeBase_IPI: TFloatField
       FieldName = 'Base_IPI'
+    end
+    object mItensNFeBase_ST_Ret: TFloatField
+      FieldName = 'Base_ST_Ret'
+    end
+    object mItensNFeVlr_ST_Ret: TFloatField
+      FieldName = 'Vlr_ST_Ret'
+    end
+    object mItensNFePerc_ST_Ret: TFloatField
+      FieldName = 'Perc_ST_Ret'
+    end
+    object mItensNFeBase_ICMS_Efet: TFloatField
+      FieldName = 'Base_ICMS_Efet'
+    end
+    object mItensNFeVlr_ICMS_Efet: TFloatField
+      FieldName = 'Vlr_ICMS_Efet'
+    end
+    object mItensNFePerc_ICMS_Efet: TFloatField
+      FieldName = 'Perc_ICMS_Efet'
     end
   end
   object mAuxDadosNFe: TClientDataSet

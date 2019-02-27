@@ -640,6 +640,12 @@ type
     mItensNFeQtd_Trib: TFloatField;
     mItensNFeUnidade_Trib: TStringField;
     cdsCupomFiscalQTD_ITENS: TIntegerField;
+    mItensNFeBase_ST_Ret: TFloatField;
+    mItensNFeVlr_ST_Ret: TFloatField;
+    mItensNFePerc_ST_Ret: TFloatField;
+    mItensNFeBase_ICMS_Efet: TFloatField;
+    mItensNFeVlr_Icms_Efet: TFloatField;
+    mItensNFePerc_Icms_Efet: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);

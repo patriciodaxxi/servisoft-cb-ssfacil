@@ -1269,8 +1269,8 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'S'#233'rie Normal (NFe):'
           end
           object Label59: TLabel
-            Left = 443
-            Top = 200
+            Left = 451
+            Top = 232
             Width = 122
             Height = 26
             Alignment = taRightJustify
@@ -1334,6 +1334,13 @@ object frmCadFilial: TfrmCadFilial
             Width = 108
             Height = 13
             Caption = 'Faixa aceita 920 a 969'
+          end
+          object Label140: TLabel
+            Left = 456
+            Top = 184
+            Width = 106
+            Height = 13
+            Caption = 'Calcular ICMS Efetivo:'
           end
           object RxDBComboBox3: TRxDBComboBox
             Left = 130
@@ -1614,8 +1621,8 @@ object frmCadFilial: TfrmCadFilial
             end
           end
           object DBEdit40: TDBEdit
-            Left = 569
-            Top = 205
+            Left = 577
+            Top = 237
             Width = 65
             Height = 21
             CharCase = ecUpperCase
@@ -1723,13 +1730,32 @@ object frmCadFilial: TfrmCadFilial
             Top = 169
             Width = 313
             Height = 17
-            Caption = 'Usa ST Retido ou C'#225'lculo Efetivo'
+            Caption = 'Usa ST Retido'
             DataField = 'USA_ENVIO_ST_RET'
             DataSource = DMCadFilial.dsFilial
             TabOrder = 19
             ValueChecked = 'S'
             ValueUnchecked = 'N'
-            OnClick = DBCheckBox15Click
+          end
+          object RxDBComboBox26: TRxDBComboBox
+            Left = 564
+            Top = 176
+            Width = 145
+            Height = 21
+            Style = csDropDownList
+            DataField = 'CALCULAR_ICMS_EFET'
+            DataSource = DMCadFilial.dsFilial
+            EnableValues = True
+            ItemHeight = 13
+            Items.Strings = (
+              'Somente de Consumidor Final'
+              'Ambos'
+              'N'#227'o Calcular')
+            TabOrder = 24
+            Values.Strings = (
+              'C'
+              'S'
+              'N')
           end
         end
         object TS_Parametros: TRzTabSheet

@@ -1388,8 +1388,8 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           TabOrder = 51
         end
         object RzGroupBox2: TRzGroupBox
-          Left = 829
-          Top = 407
+          Left = 824
+          Top = 389
           Width = 181
           Height = 83
           BorderColor = clNavy
@@ -1576,7 +1576,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object RzGroupBox4: TRzGroupBox
           Left = 821
-          Top = 320
+          Top = 309
           Width = 172
           Height = 75
           BorderColor = clNavy
@@ -1699,9 +1699,9 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object RzGroupBox5: TRzGroupBox
           Left = 821
-          Top = 519
+          Top = 476
           Width = 191
-          Height = 96
+          Height = 144
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -1729,7 +1729,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           end
           object Label79: TLabel
             Left = 25
-            Top = 43
+            Top = 61
             Width = 55
             Height = 13
             Alignment = taRightJustify
@@ -1737,7 +1737,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           end
           object Label80: TLabel
             Left = 28
-            Top = 61
+            Top = 88
             Width = 52
             Height = 13
             Alignment = taRightJustify
@@ -1745,11 +1745,27 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           end
           object Label81: TLabel
             Left = 40
-            Top = 79
+            Top = 124
             Width = 40
             Height = 13
             Alignment = taRightJustify
             Caption = 'Vlr Efet.:'
+          end
+          object Label82: TLabel
+            Left = 52
+            Top = 43
+            Width = 28
+            Height = 13
+            Alignment = taRightJustify
+            Caption = '% ST:'
+          end
+          object Label83: TLabel
+            Left = 18
+            Top = 106
+            Width = 62
+            Height = 13
+            Alignment = taRightJustify
+            Caption = '% ICMS Efet:'
           end
           object DBEdit63: TDBEdit
             Left = 81
@@ -1765,7 +1781,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           end
           object DBEdit64: TDBEdit
             Left = 81
-            Top = 35
+            Top = 53
             Width = 87
             Height = 19
             Color = clWhite
@@ -1773,11 +1789,11 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
             DataField = 'VLR_ICMSSUBST_RET'
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
             ParentCtl3D = False
-            TabOrder = 1
+            TabOrder = 2
           end
           object DBEdit65: TDBEdit
             Left = 81
-            Top = 53
+            Top = 80
             Width = 87
             Height = 19
             Color = clWhite
@@ -1785,11 +1801,11 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
             DataField = 'VLR_BASE_EFET'
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
             ParentCtl3D = False
-            TabOrder = 2
+            TabOrder = 3
           end
           object DBEdit66: TDBEdit
             Left = 81
-            Top = 71
+            Top = 116
             Width = 87
             Height = 19
             Color = clWhite
@@ -1797,7 +1813,31 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
             DataField = 'VLR_ICMS_EFET'
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
             ParentCtl3D = False
-            TabOrder = 3
+            TabOrder = 5
+          end
+          object DBEdit67: TDBEdit
+            Left = 81
+            Top = 35
+            Width = 87
+            Height = 19
+            Color = clWhite
+            Ctl3D = False
+            DataField = 'PERC_ICMSSUBST_INTERNO'
+            DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+            ParentCtl3D = False
+            TabOrder = 1
+          end
+          object DBEdit68: TDBEdit
+            Left = 81
+            Top = 98
+            Width = 87
+            Height = 19
+            Color = clWhite
+            Ctl3D = False
+            DataField = 'PERC_ICMS_EFET'
+            DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+            ParentCtl3D = False
+            TabOrder = 4
           end
         end
       end

@@ -15,6 +15,9 @@ uses
   procedure prc_Move_Itens_Ajuste(fDMCupomFiscal: TDMCupomFiscal);
 
   procedure prc_Calcular_ST_Ret(fDMCupomFiscal: TDMCupomFiscal);
+  procedure prc_Abrir_qProduto_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF: String);
+  procedure prc_Abrir_qNCM_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF, Importado_Nacional: String);
+
 
 implementation
 
@@ -335,6 +338,9 @@ begin
 end;
 
 procedure prc_Calcular_ST_Ret(fDMCupomFiscal: TDMCupomFiscal);
+var
+  vPerc_Interno : Real;
+  vVlrAux : Real;
 begin
   fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat := 0;
   fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat  := 0;
@@ -360,6 +366,62 @@ begin
 
   fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProdSTBASE_ST_RET.AsFloat * fDMCupomFiscal.cdsCupom_ItensQTD.AsFloat));
   fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProdSTVLR_ST_RET.AsFloat * fDMCupomFiscal.cdsCupom_ItensQTD.AsFloat));
+
+  if (fDMCupomFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString = 'N') or (Trim(fDMCupomFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString) = '')  then
+    exit;
+
+  //Busca o %
+  vPerc_Interno := 0;
+  prc_Abrir_qProduto_UF(fDMCupomFiscal,fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,fDMCupomFiscal.cdsFilialUF.AsString);
+  if not(fDMCupomFiscal.qProduto_UF.IsEmpty) and (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat)) > 0) then
+    vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat));
+
+  if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0  then
+  begin
+    prc_Abrir_qNCM_UF(fDMCupomFiscal,fDMCupomFiscal.cdsCupom_ItensID_NCM.AsInteger,fDMCupomFiscal.cdsFilialUF.AsString,'A');
+    if StrToFloat(FormatFloat('0.000',fDMCupomFiscal.qNCM_UFPERC_ICMS_INTERNO.AsFloat)) > 0 then
+      vPerc_Interno := fDMCupomFiscal.qNCM_UFPERC_ICMS_INTERNO.AsFloat;
+  end;
+  if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0 then
+  begin
+    if fDMCupomFiscal.cdsTab_NCMID.AsInteger <> fDMCupomFiscal.cdsCupom_ItensID_NCM.AsInteger then
+      fDMCupomFiscal.cdsTab_NCM.Locate('ID',fDMCupomFiscal.cdsCupom_ItensID_NCM.AsString,[loCaseInsensitive]);
+    if StrToFloat(FormatFloat('0.000',fDMCupomFiscal.cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
+      vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsTab_NCMPERC_ICMS.AsFloat))
+    else
+    begin
+      fDMCupomFiscal.qUF.Close;
+      fDMCupomFiscal.qUF.ParamByName('UF').AsString := fDMCupomFiscal.cdsFilialUF.AsString;
+      fDMCupomFiscal.qUF.Open;
+      vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qUFPERC_ICMS_INTERNO.AsFloat));
+    end;
+  end;
+  fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat := vPerc_Interno;
+
+  if StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat)) > 0 then
+  begin
+    vVlrAux := StrToFloat(FormatFloat('0.00',(fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat * fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat) / 100));
+    fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
+    fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
+  end;
+
+end;
+
+procedure prc_Abrir_qProduto_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF: String);
+begin
+  fDMCupomFiscal.qProduto_UF.Close;
+  fDMCupomFiscal.qProduto_UF.ParamByName('ID').AsInteger := ID_NCM;
+  fDMCupomFiscal.qProduto_UF.ParamByName('UF').AsString  := UF;
+  fDMCupomFiscal.qProduto_UF.Open;
+end;
+
+procedure prc_Abrir_qNCM_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF, Importado_Nacional: String);
+begin
+  fDMCupomFiscal.qNCM_UF.Close;
+  fDMCupomFiscal.qNCM_UF.ParamByName('ID').AsInteger          := ID_NCM;
+  fDMCupomFiscal.qNCM_UF.ParamByName('UF').AsString           := UF;
+  fDMCupomFiscal.qNCM_UF.ParamByName('TIPO_PRODUTO').AsString := Importado_Nacional;
+  fDMCupomFiscal.qNCM_UF.Open;
 end;
 
 end.

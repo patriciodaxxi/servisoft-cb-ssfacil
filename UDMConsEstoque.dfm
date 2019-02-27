@@ -917,39 +917,44 @@ object DMConsEstoque: TDMConsEstoque
       'TO and'#13#10'              ENT.TIPO_ES = '#39'E'#39' and'#13#10'              ENT.P' +
       'ERC_ICMS > 0'#13#10'        order by ENT.ID desc) PERC_ICMS, PRO.PERC_' +
       'IPI'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JOIN PRODUTO PRO ON EM.ID_PRODUT' +
-      'O = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB ON EM.ID_COR = COMB.ID'
+      'O = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB ON EM.ID_COR = COMB.ID'#13#10'WH' +
+      'ERE EM.FILIAL = :FILIAL'#13#10'  AND EM.DTMOVIMENTO <= :DTMOVIMENTO'#13#10' ' +
+      ' AND ((PRO.TIPO_REG = :TIPO_REG) or (PRO.SPED_TIPO_ITEM = :SPED_' +
+      'TIPO_ITEM))'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10'  AND PRO.ESTOQUE = '#39'S'#39#13#10'G' +
+      'ROUP BY EM.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, PRO' +
+      '.UNIDADE, EM.id_cor, COMB.NOME, PRO.sped_tipo_item, PRO.PERC_IPI'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'DTMOVIMENTO'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'DTMOVIMENTO'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'DTMOVIMENTO'
         ParamType = ptInput
-      end>
+	  end>
     SQLConnection = dmDatabase.scoDados
     Left = 464
     Top = 240
@@ -2755,7 +2760,7 @@ object DMConsEstoque: TDMConsEstoque
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEstoque_Med_Semi'
-    Left = 848
+    Left = 840
     Top = 360
     object cdsEstoque_Med_SemiQTD: TFloatField
       FieldName = 'QTD'
@@ -3025,7 +3030,7 @@ object DMConsEstoque: TDMConsEstoque
     Params = <>
     StoreDefs = True
     Left = 744
-    Top = 280
+    Top = 256
     Data = {
       290100009619E0BD01000000180000000B000000000003000000290102494404
       000100000000000C4E6F6D655F50726F6475746F010049000000010005574944
@@ -3078,8 +3083,8 @@ object DMConsEstoque: TDMConsEstoque
   end
   object dsmProduto_Marca: TDataSource
     DataSet = mProduto_Marca
-    Left = 784
-    Top = 280
+    Left = 776
+    Top = 256
   end
   object frxProdutoMarca: TfrxDBDataset
     UserName = 'frxProdutoMarca'

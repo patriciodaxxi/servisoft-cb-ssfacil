@@ -4692,6 +4692,16 @@ begin
     fDMNFe.mItensNFePERC_FCP_ST.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat));
     //*************
 
+    //26/02/2019
+    fDMNFe.mItensNFeBase_ST_Ret.AsFloat := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeBase_ST_Ret.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat));
+    fDMNFe.mItensNFeVlr_ST_Ret.AsFloat  := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlr_ST_Ret.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat));
+    fDMNFe.mItensNFePerc_ST_Ret.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO.AsFloat));
+
+    fDMNFe.mItensNFeBase_ICMS_Efet.AsFloat := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeBase_ICMS_Efet.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat));
+    fDMNFe.mItensNFeVlr_ICMS_Efet.AsFloat  := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlr_ICMS_Efet.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat));
+    fDMNFe.mItensNFePerc_ICMS_Efet.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_EFET.AsFloat));
+    //****************
+
     //4.00 alguns campos são novos
     fDMNFe.mItensNFeVLR_ICMS_FCP_DEST.AsFloat  := StrToFloat(FormatFloat('0.000',fDMNFe.mItensNFeVLR_ICMS_FCP_DEST.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat));
     fDMNFe.mItensNFeBASE_ICMS_FCP_DEST.AsFloat := StrToFloat(FormatFloat('0.000',fDMNFe.mItensNFeBASE_ICMS_FCP_DEST.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat));
@@ -4705,6 +4715,22 @@ begin
     fDMNFe.mItensNFeVlrIPI_Devol.AsFloat := StrToFloat(FormatFloat('0.000',fDMNFe.mItensNFeVlrIPI_Devol.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_IPI_DEVOL.AsFloat));
     fDMNFe.mItensNFePerc_Devol.AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_DEVOL.AsFloat));
     //***********************
+
+    //26/02/2019
+    if (fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '60') or (fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '500') then
+    begin
+      Texto1 := '';
+      if StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeBase_ST_Ret.AsFloat)) > 0 then
+      begin
+        Texto1 := 'Base ST Ret Ant: ' + FormatFloat('0.00',fDMNFe.mItensNFeBase_ST_Ret.AsFloat)
+                     + '  Vlr.ST Ret Ant: ' + FormatFloat('0.00',fDMNFe.mItensNFeVlr_ST_Ret.AsFloat);
+        if StrToFloat(FormatFloat('0.000',fDMNFe.mItensNFePerc_ST_Ret.AsFloat)) > 0 then
+          Texto1 := Texto1 +  ' % ST: ' + FormatFloat('0.00',fDMNFe.mItensNFePerc_ST_Ret.AsFloat);
+      end;
+      if trim(Texto1) <> '' then
+        fDMNFe.mItensNFeInfAdicionais.AsString := fDMNFe.mItensNFeInfAdicionais.AsString + '(' + Texto1 + ')';
+    end;
+    //****************** 
 
     fDMNFe.mItensNFe.Post;
     if fDMNFe.qParametrosENVIARNOTABENEF_NANFE.AsString = 'S' then

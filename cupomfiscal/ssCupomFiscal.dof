@@ -90,8 +90,8 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=
-UnitOutputDir=
+OutputDir=C:\Delphi7\SSFacil\EXE
+UnitOutputDir=C:\Delphi7\SSFacil\DCU
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
@@ -115,7 +115,7 @@ AutoIncBuild=0
 MajorVer=1
 MinorVer=4
 Release=0
-Build=34
+Build=35
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Servisoft Info. Ltda.
 FileDescription=Cupom Fiscal - Varejo
-FileVersion=1.4.0.34
+FileVersion=1.4.0.35
 InternalName=
 LegalCopyright=
 LegalTrademarks=
@@ -139,3 +139,12 @@ C:\Program Files (x86)\FastReports\FastReport 5\LibD7\dclfrxcs7.bpl=FastReport 5
 C:\Program Files (x86)\FastReports\FastReport 5\LibD7\dclfrxbde7.bpl=FastReport 5.0 BDE Components
 C:\Program Files (x86)\FastReports\FastReport 5\LibD7\dclfsbde7.bpl=FastScript 1.9 BDE Components
 c:\program files (x86)\borland\delphi7\Bin\DBWEBXPRT.BPL=Borland Web Wizard Package
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
+[HistoryLists\hlUnitOutputDirectory]
+Count=1
+Item0=C:\Delphi7\SSFacil\DCU
+[HistoryLists\hlOutputDirectorry]
+Count=1
+Item0=C:\Delphi7\SSFacil\EXE

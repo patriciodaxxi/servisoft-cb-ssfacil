@@ -14,7 +14,7 @@ object dmCupomFiscal: TdmCupomFiscal
       'R'#13#10'FROM CUPOMFISCAL CF'#13#10'INNER JOIN PESSOA P ON (CF.ID_CLIENTE = ' +
       'P.CODIGO)'#13#10'LEFT JOIN CONDPGTO CP ON (CP.ID = CF.ID_CONDPGTO)'#13#10'LE' +
       'FT JOIN TIPOCOBRANCA TC ON (TC.ID = CF.ID_TIPOCOBRANCA)'#13#10'LEFT JO' +
-      'IN PESSOA V ON (CF.ID_VENDEDOR = V.CODIGO)'#13#10
+      'IN PESSOA V ON (CF.ID_VENDEDOR = V.CODIGO)'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -807,6 +807,9 @@ object dmCupomFiscal: TdmCupomFiscal
     object sdsCupom_ItensPERC_ST: TFloatField
       FieldName = 'PERC_ST'
     end
+    object sdsCupom_ItensPERC_ICMS_EFET: TFloatField
+      FieldName = 'PERC_ICMS_EFET'
+    end
   end
   object cdsCupom_Itens: TClientDataSet
     Aggregates = <>
@@ -1036,6 +1039,9 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupom_ItensPERC_ST: TFloatField
       FieldName = 'PERC_ST'
+    end
+    object cdsCupom_ItensPERC_ICMS_EFET: TFloatField
+      FieldName = 'PERC_ICMS_EFET'
     end
   end
   object dsCupom_Itens: TDataSource
@@ -2514,6 +2520,11 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsFilialUSA_ENVIO_ST_RET: TStringField
       FieldName = 'USA_ENVIO_ST_RET'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilialCALCULAR_ICMS_EFET: TStringField
+      FieldName = 'CALCULAR_ICMS_EFET'
       FixedChar = True
       Size = 1
     end
@@ -6977,6 +6988,146 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object qProdSTVLR_ST_RET: TFloatField
       FieldName = 'VLR_ST_RET'
+    end
+    object qProdSTPERC_ST: TFloatField
+      FieldName = 'PERC_ST'
+    end
+  end
+  object qProduto_UF: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'UF'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT *'
+      'FROM PRODUTO_UF'
+      'WHERE ID = :ID'
+      '  AND UF = :UF')
+    SQLConnection = dmDatabase.scoDados
+    Left = 859
+    Top = 452
+    object qProduto_UFID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qProduto_UFUF: TStringField
+      FieldName = 'UF'
+      Required = True
+      Size = 2
+    end
+    object qProduto_UFPERC_ICMS: TFloatField
+      FieldName = 'PERC_ICMS'
+    end
+    object qProduto_UFPERC_ICMS_INTERNO: TFloatField
+      FieldName = 'PERC_ICMS_INTERNO'
+    end
+    object qProduto_UFPERC_REDUCAO_ST: TFloatField
+      FieldName = 'PERC_REDUCAO_ST'
+    end
+    object qProduto_UFPERC_REDUCAO_ICMS: TFloatField
+      FieldName = 'PERC_REDUCAO_ICMS'
+    end
+    object qProduto_UFID_CST_ICMS: TIntegerField
+      FieldName = 'ID_CST_ICMS'
+    end
+  end
+  object qNCM_UF: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'UF'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'TIPO_PRODUTO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT T.ncm, T.perc_red_strib, TUF.*'
+      'FROM TAB_NCM T'
+      'INNER join TAB_NCM_UF TUF'
+      'ON T.ID = TUF.ID'
+      'WHERE TUF.ID = :ID'
+      '     AND TUF.UF = :UF'
+      '     AND TUF.TIPO_PRODUTO = :TIPO_PRODUTO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 937
+    Top = 544
+    object qNCM_UFID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qNCM_UFITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object qNCM_UFUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object qNCM_UFMVAINTERNO: TFloatField
+      FieldName = 'MVAINTERNO'
+    end
+    object qNCM_UFNCM: TStringField
+      FieldName = 'NCM'
+      Size = 10
+    end
+    object qNCM_UFPERC_RED_STRIB: TFloatField
+      FieldName = 'PERC_RED_STRIB'
+    end
+    object qNCM_UFPERC_RED_MVA: TFloatField
+      FieldName = 'PERC_RED_MVA'
+    end
+    object qNCM_UFPERC_RED_MVA_GERAL: TFloatField
+      FieldName = 'PERC_RED_MVA_GERAL'
+    end
+    object qNCM_UFTIPO_EMPRESA: TStringField
+      FieldName = 'TIPO_EMPRESA'
+      FixedChar = True
+      Size = 1
+    end
+    object qNCM_UFTIPO_PRODUTO: TStringField
+      FieldName = 'TIPO_PRODUTO'
+      FixedChar = True
+      Size = 1
+    end
+    object qNCM_UFAJUSTAR_MVA: TStringField
+      FieldName = 'AJUSTAR_MVA'
+      FixedChar = True
+      Size = 1
+    end
+    object qNCM_UFPERC_ICMS_INTERNO: TFloatField
+      FieldName = 'PERC_ICMS_INTERNO'
+    end
+    object qNCM_UFID_OBS_LEI: TIntegerField
+      FieldName = 'ID_OBS_LEI'
+    end
+    object qNCM_UFPERC_RED_BASE_ST: TFloatField
+      FieldName = 'PERC_RED_BASE_ST'
+    end
+    object qNCM_UFPERC_RED_BASE_ST_SIMPLES: TFloatField
+      FieldName = 'PERC_RED_BASE_ST_SIMPLES'
+    end
+    object qNCM_UFPERC_RED_MVA_CLI_GERAL: TFloatField
+      FieldName = 'PERC_RED_MVA_CLI_GERAL'
+    end
+    object qNCM_UFPERC_RED_MVA_CLI_SIMPLES: TFloatField
+      FieldName = 'PERC_RED_MVA_CLI_SIMPLES'
     end
   end
 end

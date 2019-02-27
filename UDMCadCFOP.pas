@@ -420,6 +420,7 @@ type
     cdsCFOPMARCAR_NCM_ST: TStringField;
     sdsCFOPENVIAR_BASE_ST: TStringField;
     cdsCFOPENVIAR_BASE_ST: TStringField;
+    cdsCFOP_ConsultaSUBSTITUICAO_TRIB: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsCFOPNewRecord(DataSet: TDataSet);
     procedure dspCFOPUpdateError(Sender: TObject;
