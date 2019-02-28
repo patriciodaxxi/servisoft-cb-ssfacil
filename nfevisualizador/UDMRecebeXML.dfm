@@ -2952,6 +2952,7 @@ object DMRecebeXML: TDMRecebeXML
     Top = 16
     object sdsProdutoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsProdutoREFERENCIA: TStringField
@@ -3117,6 +3118,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
+    UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProdutoUpdateError
     Left = 168
     Top = 16
@@ -3130,6 +3132,7 @@ object DMRecebeXML: TDMRecebeXML
     Top = 16
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsProdutoREFERENCIA: TStringField

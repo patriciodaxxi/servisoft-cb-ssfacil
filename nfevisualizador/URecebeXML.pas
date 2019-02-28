@@ -2441,7 +2441,7 @@ begin
     fDMRecebeXML.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00000',fDMRecebeXML.mItensNotaPreco_Custo_Total.AsFloat));
     //****************
 
-    fDMRecebeXML.cdsNotaFiscal_ItensCOD_BARRA2.AsString := fDMRecebeXML.mItensNotaCodBarra2.AsString; 
+    fDMRecebeXML.cdsNotaFiscal_ItensCOD_BARRA2.AsString := fDMRecebeXML.mItensNotaCodBarra2.AsString;
 
     fDMRecebeXML.cdsNotaFiscal_Itens.Post;
     Atualiza_Preco;
