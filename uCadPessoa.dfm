@@ -23,7 +23,7 @@ object frmCadPessoa: TfrmCadPessoa
     Top = 0
     Width = 1015
     Height = 630
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -35,7 +35,7 @@ object frmCadPessoa: TfrmCadPessoa
     Font.Style = []
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -780,7 +780,7 @@ object frmCadPessoa: TfrmCadPessoa
         WidthOfIndicator = 23
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 39
+        ColCount = 41
         RowCount = 2
         Columns = <
           item
@@ -1086,8 +1086,24 @@ object frmCadPessoa: TfrmCadPessoa
           end
           item
             Expanded = False
+            FieldName = 'NOME_REGIME'
+            Title.Alignment = taCenter
+            Title.Caption = 'Regime'
+            Width = 275
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COD_REGIME'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Regime'
+            Visible = True
+          end
+          item
+            Expanded = False
             FieldName = 'EMAIL_NFE'
-            Width = 64
+            Title.Caption = 'Email NFe'
+            Width = 300
             Visible = True
           end>
       end

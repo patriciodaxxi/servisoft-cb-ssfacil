@@ -1189,6 +1189,8 @@ type
     sdsPessoaIMP_NOMEPROD_CLIENTE: TStringField;
     cdsPessoaIMP_NOMEPROD_CLIENTE: TStringField;
     qParametros_NFeIMP_NOMEPROD_CLIENTE: TStringField;
+    cdsPessoa_ConsultaNOME_REGIME: TStringField;
+    cdsPessoa_ConsultaCOD_REGIME: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

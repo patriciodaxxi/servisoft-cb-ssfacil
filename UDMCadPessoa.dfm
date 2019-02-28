@@ -3191,16 +3191,17 @@ object DMCadPessoa: TDMCadPessoa
       'inal'#39#13#10'  end Desc_Tipo_Consumidor,'#13#10'case'#13#10'  when p.tipo_contribu' +
       'inte = 1 then '#39'Contribuinte'#39#13#10'  when p.tipo_contribuinte = 2 the' +
       'n '#39'Isento'#39#13#10'  when p.tipo_contribuinte = 9 then '#39'N'#227'o Contrib.'#39#13#10 +
-      '  end Desc_Tipo_Contribuinte'#13#10'FROM PESSOA P'#13#10'LEFT JOIN CONDPGTO ' +
-      'COND ON (P.ID_CONDPGTO = COND.ID)'#13#10'LEFT JOIN PESSOA VEND ON (P.I' +
-      'D_VENDEDOR = VEND.CODIGO)'#13#10'LEFT JOIN GRUPO_PESSOA GP ON (P.ID_GR' +
-      'UPO = GP.ID)'#13#10'LEFT JOIN PESSOA_FISICA PF ON (P.CODIGO = PF.CODIG' +
-      'O)'#13#10'LEFT JOIN CONTA_ORCAMENTO CCLI ON (P.CLIENTE_CONTA_ID = CCLI' +
-      '.ID)'#13#10'LEFT JOIN CONTA_ORCAMENTO CFORN ON (P.FORNECEDOR_CONTA_ID ' +
-      '= CFORN.ID)'#13#10'LEFT JOIN CONTA_ORCAMENTO CTRA ON (P.TRANSPORTADORA' +
-      '_CONTA_ID = CTRA.ID)'#13#10'LEFT JOIN CONTA_ORCAMENTO CVEND ON (P.VEND' +
-      'EDOR_CONTA_ID = CVEND.ID)'#13#10'LEFT JOIN PESSOA_VEND PV ON P.CODIGO ' +
-      '= PV.CODIGO'#13#10#13#10#13#10#13#10#13#10#13#10#13#10
+      '  end Desc_Tipo_Contribuinte, RT.NOME NOME_REGIME, RT.codigo COD' +
+      '_REGIME'#13#10'FROM PESSOA P'#13#10'LEFT JOIN CONDPGTO COND ON (P.ID_CONDPGT' +
+      'O = COND.ID)'#13#10'LEFT JOIN PESSOA VEND ON (P.ID_VENDEDOR = VEND.COD' +
+      'IGO)'#13#10'LEFT JOIN GRUPO_PESSOA GP ON (P.ID_GRUPO = GP.ID)'#13#10'LEFT JO' +
+      'IN PESSOA_FISICA PF ON (P.CODIGO = PF.CODIGO)'#13#10'LEFT JOIN CONTA_O' +
+      'RCAMENTO CCLI ON (P.CLIENTE_CONTA_ID = CCLI.ID)'#13#10'LEFT JOIN CONTA' +
+      '_ORCAMENTO CFORN ON (P.FORNECEDOR_CONTA_ID = CFORN.ID)'#13#10'LEFT JOI' +
+      'N CONTA_ORCAMENTO CTRA ON (P.TRANSPORTADORA_CONTA_ID = CTRA.ID)'#13 +
+      #10'LEFT JOIN CONTA_ORCAMENTO CVEND ON (P.VENDEDOR_CONTA_ID = CVEND' +
+      '.ID)'#13#10'LEFT JOIN PESSOA_VEND PV ON P.CODIGO = PV.CODIGO'#13#10'LEFT JOI' +
+      'N regime_trib RT ON P.id_regime_trib = RT.id'#13#10#13#10#13#10#13#10#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3865,6 +3866,13 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'DESC_TIPO_CONTRIBUINTE'
       FixedChar = True
       Size = 16
+    end
+    object cdsPessoa_ConsultaNOME_REGIME: TStringField
+      FieldName = 'NOME_REGIME'
+      Size = 100
+    end
+    object cdsPessoa_ConsultaCOD_REGIME: TIntegerField
+      FieldName = 'COD_REGIME'
     end
   end
   object dsPessoa_Consulta: TDataSource

@@ -104,7 +104,13 @@ var
   i : Integer;
 begin
   ColunaOrdenada := Column.FieldName;
-  fDMConsNotas_SER.cdsConsulta.IndexFieldNames := Column.FieldName;
+  if Column.FieldName = 'DTEMISSAO_CAD' then
+    fDMConsNotas_SER.cdsConsulta.IndexFieldNames := 'DTEMISSAO_CAD;FILIAL;NUMNOTA;SERIE'
+  else
+  if Column.FieldName = 'NOME_CLIENTE' then
+    fDMConsNotas_SER.cdsConsulta.IndexFieldNames := 'NOME_CLIENTE;FILIAL;NUMNOTA;SERIE'
+  else
+    fDMConsNotas_SER.cdsConsulta.IndexFieldNames := Column.FieldName;
   Column.Title.Color := clBtnShadow;
   for i := 0 to SMDBGrid1.Columns.Count - 1 do
     if not (SMDBGrid1.Columns.Items[I] = Column) then
@@ -116,7 +122,7 @@ begin
   if not fDMConsNotas_SER.cdsConsulta.Active then
     exit;
   vTipo_Config_Email := 3;
-  fDMConsNotas_SER.cdsConsulta.IndexFieldNames := 'FILIAL;SERIE;NUMNOTA';
+  //fDMConsNotas_SER.cdsConsulta.IndexFieldNames := 'FILIAL;SERIE;NUMNOTA';
 
   fRelNotas_SER := TfRelNotas_SER.Create(Self);
   fRelNotas_SER.fDMConsNotas_SER := fDMConsNotas_SER;

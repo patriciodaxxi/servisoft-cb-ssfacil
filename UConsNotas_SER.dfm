@@ -1,6 +1,6 @@
 object frmConsNotas_SER: TfrmConsNotas_SER
-  Left = 300
-  Top = 109
+  Left = 232
+  Top = 90
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Consulta Notas Servi'#231'os'
