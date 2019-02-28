@@ -79,6 +79,8 @@ type
     Label31: TLabel;
     Label32: TLabel;
     btnAtualizaVlr: TNxButton;
+    Label59: TLabel;
+    RxDBLookupCombo12: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);

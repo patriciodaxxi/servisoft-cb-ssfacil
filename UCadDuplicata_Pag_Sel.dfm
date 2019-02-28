@@ -1,8 +1,8 @@
 object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
-  Left = 308
+  Left = 460
   Top = 231
-  Width = 470
-  Height = 198
+  Width = 481
+  Height = 219
   Caption = 'Pagamento Duplicata'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,8 +20,8 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 133
-    Width = 462
+    Top = 146
+    Width = 465
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -60,8 +60,8 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 462
-    Height = 133
+    Width = 465
+    Height = 146
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 0
@@ -72,6 +72,20 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
       Height = 13
       Alignment = taRightJustify
       Caption = 'Dt. Pagamento:'
+    end
+    object Label59: TLabel
+      Left = 66
+      Top = 77
+      Width = 46
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Op.Baixa:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
     end
     object DtPagamento: TDateEdit
       Left = 113
@@ -84,7 +98,7 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
     end
     object gbxCheque: TRzGroupBox
       Left = 114
-      Top = 76
+      Top = 100
       Width = 309
       Height = 37
       BorderColor = clNavy
@@ -101,7 +115,7 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
       Font.Style = []
       ParentCtl3D = False
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 3
       Visible = False
       VisualStyle = vsGradient
       OnExit = gbxChequeExit
@@ -161,7 +175,7 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 460
+      Width = 463
       Height = 45
       Align = alTop
       BevelOuter = bvNone
@@ -331,6 +345,25 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
         TabOrder = 1
         OnExit = RxDBLookupCombo2Exit
       end
+    end
+    object RxDBLookupCombo12: TRxDBLookupCombo
+      Left = 114
+      Top = 69
+      Width = 259
+      Height = 21
+      DropDownCount = 15
+      Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      LookupField = 'ID'
+      LookupDisplay = 'NOME'
+      LookupSource = DMCadDuplicata.dsContabil_Ope
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 2
     end
   end
 end

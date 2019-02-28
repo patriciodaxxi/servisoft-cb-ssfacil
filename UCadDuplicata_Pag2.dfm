@@ -1,8 +1,8 @@
 object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
   Left = 275
   Top = 145
-  Width = 682
-  Height = 494
+  Width = 684
+  Height = 510
   Caption = 'Pagamento Duplicata'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,8 +20,8 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 421
-    Width = 666
+    Top = 437
+    Width = 668
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -60,8 +60,8 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
   object Panel2: TPanel
     Left = 0
     Top = 96
-    Width = 666
-    Height = 325
+    Width = 668
+    Height = 341
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 0
@@ -83,7 +83,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object Label9: TLabel
       Left = 75
-      Top = 306
+      Top = 321
       Width = 44
       Height = 13
       Alignment = taRightJustify
@@ -142,7 +142,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object Label22: TLabel
       Left = 63
-      Top = 204
+      Top = 219
       Width = 59
       Height = 13
       Alignment = taRightJustify
@@ -166,7 +166,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object Label24: TLabel
       Left = 192
-      Top = 202
+      Top = 217
       Width = 26
       Height = 13
       Alignment = taRightJustify
@@ -198,7 +198,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object Label26: TLabel
       Left = 481
-      Top = 206
+      Top = 221
       Width = 104
       Height = 13
       Caption = 'Total de Cheques:'
@@ -212,7 +212,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object Label28: TLabel
       Left = 512
-      Top = 224
+      Top = 239
       Width = 73
       Height = 13
       Caption = 'Vlr.Cheques:'
@@ -226,7 +226,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object Label29: TLabel
       Left = 585
-      Top = 224
+      Top = 239
       Width = 7
       Height = 13
       Caption = '0'
@@ -240,7 +240,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object Label30: TLabel
       Left = 585
-      Top = 206
+      Top = 221
       Width = 7
       Height = 13
       Caption = '0'
@@ -254,7 +254,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object Label31: TLabel
       Left = 525
-      Top = 240
+      Top = 255
       Width = 60
       Height = 13
       Alignment = taRightJustify
@@ -269,7 +269,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object Label32: TLabel
       Left = 585
-      Top = 240
+      Top = 255
       Width = 7
       Height = 13
       Caption = '0'
@@ -280,6 +280,20 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
       Font.Style = []
       ParentFont = False
       Visible = False
+    end
+    object Label59: TLabel
+      Left = 75
+      Top = 197
+      Width = 46
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Op.Baixa:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
     end
     object cePagamento: TCurrencyEdit
       Left = 122
@@ -327,16 +341,16 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
       Width = 121
       Height = 17
       Caption = 'Pago em cart'#243'rio'
-      TabOrder = 8
+      TabOrder = 9
     end
     object Edit1: TEdit
       Left = 122
-      Top = 298
+      Top = 313
       Width = 489
       Height = 21
       CharCase = ecUpperCase
       MaxLength = 70
-      TabOrder = 10
+      TabOrder = 11
     end
     object DtPagamento: TDateEdit
       Left = 122
@@ -366,7 +380,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 664
+      Width = 666
       Height = 46
       Align = alTop
       BevelOuter = bvNone
@@ -544,7 +558,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object gbxCheque: TRzGroupBox
       Left = 124
-      Top = 259
+      Top = 274
       Width = 325
       Height = 37
       BorderColor = clNavy
@@ -561,7 +575,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
       Font.Style = []
       ParentCtl3D = False
       ParentFont = False
-      TabOrder = 9
+      TabOrder = 10
       Visible = False
       VisualStyle = vsGradient
       OnEnter = gbxChequeEnter
@@ -630,7 +644,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
       DisplayFormat = '0.00'
       ParentCtl3D = False
       ReadOnly = True
-      TabOrder = 11
+      TabOrder = 12
       OnKeyPress = ceJurosKeyPress
     end
     object ceTaxaBancaria: TCurrencyEdit
@@ -661,7 +675,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     end
     object btnInformarCheque: TNxButton
       Left = 121
-      Top = 225
+      Top = 240
       Width = 200
       Caption = 'Informar Cheque Terceiro'
       Font.Charset = DEFAULT_CHARSET
@@ -670,13 +684,13 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 12
+      TabOrder = 13
       Visible = False
       OnClick = btnInformarChequeClick
     end
     object btnBuscarCheque: TNxButton
       Left = 321
-      Top = 225
+      Top = 240
       Width = 184
       Caption = 'Repassar Cheque de Terceiro'
       Font.Charset = DEFAULT_CHARSET
@@ -685,24 +699,45 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 13
+      TabOrder = 14
       Visible = False
       OnClick = btnBuscarChequeClick
     end
     object btnAtualizaVlr: TNxButton
       Left = 528
-      Top = 256
+      Top = 271
       Width = 113
       Caption = 'Atualiza Valor Pagto.'
-      TabOrder = 14
+      TabOrder = 15
       Visible = False
       OnClick = btnAtualizaVlrClick
+    end
+    object RxDBLookupCombo12: TRxDBLookupCombo
+      Left = 122
+      Top = 189
+      Width = 259
+      Height = 21
+      DropDownCount = 15
+      Ctl3D = False
+      DataField = 'ID_CONTABIL_OPE_BAIXA'
+      DataSource = DMCadDuplicata.dsDuplicata
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      LookupField = 'ID'
+      LookupDisplay = 'NOME'
+      LookupSource = DMCadDuplicata.dsContabil_Ope
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 8
     end
   end
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 666
+    Width = 668
     Height = 96
     Align = alTop
     Color = clSilver

@@ -1278,6 +1278,7 @@ begin
         if fDMCadDuplicata.vID_Banco_Cheque > 0 then
           fDMCadDuplicata.cdsDuplicataID_BANCO.AsInteger := fDMCadDuplicata.vID_Banco_Cheque;
         fDMCadDuplicata.cdsDuplicataID_CONTA.AsInteger := fDMCadDuplicata.vID_ContaPgtoSel;
+        fDMCadDuplicata.cdsDuplicataID_CONTABIL_OPE_BAIXA.AsInteger := fDMCadDuplicata.vId_Contabil_OP_Baixa;
         fDMCadDuplicata.cdsDuplicataDTULTPAGAMENTO.AsDateTime := fDMCadDuplicata.vDtPgtoSel;
         fDMCadDuplicata.cdsDuplicataVLR_PAGO.AsFloat := StrToFloat(FormatFloat('0.00', fDMCadDuplicata.cdsDuplicataVLR_PAGO.AsFloat + fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat));
         if fDMCadDuplicata.mCheque.IsEmpty then

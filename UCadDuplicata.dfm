@@ -1,6 +1,6 @@
 object frmCadDuplicata: TfrmCadDuplicata
-  Left = 171
-  Top = 21
+  Left = 288
+  Top = 13
   Width = 1062
   Height = 657
   Caption = 'Duplicatas (A Receber/A Pagar)'
@@ -25,7 +25,7 @@ object frmCadDuplicata: TfrmCadDuplicata
     Top = 0
     Width = 1046
     Height = 599
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -33,7 +33,7 @@ object frmCadDuplicata: TfrmCadDuplicata
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19

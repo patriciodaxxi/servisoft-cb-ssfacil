@@ -29,6 +29,8 @@ type
     SpeedButton3: TSpeedButton;
     RxDBLookupCombo1: TRxDBLookupCombo;
     RxDBLookupCombo2: TRxDBLookupCombo;
+    Label59: TLabel;
+    RxDBLookupCombo12: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -100,6 +102,7 @@ begin
 
   fDMCadDuplicata.vDtPgtoSel       := DtPagamento.Date;
   fDMCadDuplicata.vID_ContaPgtoSel := RxDBLookupCombo1.KeyValue;
+  fDMCadDuplicata.vId_Contabil_OP_Baixa := RxDBLookupCombo12.KeyValue;
   if RxDBLookupCombo2.Text <> '' then
     fDMCadDuplicata.vID_FormaPgto := RxDBLookupCombo2.KeyValue
   else
