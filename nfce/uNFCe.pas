@@ -1157,6 +1157,17 @@ begin
       fDMNFCe.mItensNFePercTribIcms.AsFloat       := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsCupom_ItensPERC_TRIBICMS.AsFloat));
       fDMNFCe.mItensNFeInfAdicionais.Value        := Trim(fDMNFCe.mItensNFeInfAdicionais.Value);
 
+      //26/02/2019
+      fDMNFCe.mItensNFeBase_ST_Ret.AsFloat := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeBase_ST_Ret.AsFloat + fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat));
+      fDMNFCe.mItensNFeVlr_ST_Ret.AsFloat  := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ST_Ret.AsFloat + fDMCupomFiscal.cdscupom_ItensVLR_ICMSSUBST_RET.AsFloat));
+      fDMNFCe.mItensNFePerc_ST_Ret.AsFloat := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensPERC_ST.AsFloat));
+
+      fDMNFCe.mItensNFePERC_BASE_RED_EFET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat));
+      fDMNFCe.mItensNFeBase_ICMS_Efet.AsFloat     := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeBase_ICMS_Efet.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat));
+      fDMNFCe.mItensNFeVlr_ICMS_Efet.AsFloat      := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlr_ICMS_Efet.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat));
+      fDMNFCe.mItensNFePerc_ICMS_Efet.AsFloat     := StrToFloat(FormatFloat('0.00', fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat));
+      //****************
+
       fDMNFCe.mItensNFe.Post;
 
       //27/01/2017

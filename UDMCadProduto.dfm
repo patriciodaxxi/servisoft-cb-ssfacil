@@ -1,8 +1,8 @@
 object dmCadProduto: TdmCadProduto
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 51
-  Top = 46
+  Left = 40
+  Top = 12
   Height = 714
   Width = 1288
   object sdsProduto: TSQLDataSet
@@ -6197,8 +6197,8 @@ object dmCadProduto: TdmCadProduto
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43511.469836354170000000
+    ReportOptions.CreateDate = 42975.625256284700000000
+    ReportOptions.LastChange = 42977.428648483800000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -8032,18 +8032,13 @@ object dmCadProduto: TdmCadProduto
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT * FROM VFICHA_TECNICA'#13#10'WHERE ID = :ID AND ITEM = :ITEM'#13#10'O' +
-      'RDER BY ID_SETOR'
+      'SELECT * FROM VFICHA_TECNICA3'#13#10'WHERE ID = :ID '#13#10'ORDER BY ID_SETO' +
+      'R'
     MaxBlobSize = -1
     Params = <
       item
         DataType = ftInteger
         Name = 'ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ITEM'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
@@ -8073,7 +8068,7 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsFichaTecnicaFOTO: TStringField
       FieldName = 'FOTO'
-      Size = 150
+      Size = 200
     end
     object cdsFichaTecnicaNCM: TStringField
       FieldName = 'NCM'
@@ -8085,6 +8080,9 @@ object dmCadProduto: TdmCadProduto
     object cdsFichaTecnicaNOME_COMBINACAO: TStringField
       FieldName = 'NOME_COMBINACAO'
       Size = 50
+    end
+    object cdsFichaTecnicaID_MATERIAL: TIntegerField
+      FieldName = 'ID_MATERIAL'
     end
     object cdsFichaTecnicaMATERIAL: TStringField
       FieldName = 'MATERIAL'
@@ -8111,6 +8109,25 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'NOME_POSICAO'
       Size = 30
     end
+    object cdsFichaTecnicaID_COR_MAT: TFMTBCDField
+      FieldName = 'ID_COR_MAT'
+      Precision = 15
+      Size = 0
+    end
+    object cdsFichaTecnicaID_POSICAO: TIntegerField
+      FieldName = 'ID_POSICAO'
+    end
+    object cdsFichaTecnicaID_COR_COMBINACAO: TIntegerField
+      FieldName = 'ID_COR_COMBINACAO'
+    end
+    object cdsFichaTecnicaQTD_ESTOQUE_MIN: TFloatField
+      FieldName = 'QTD_ESTOQUE_MIN'
+    end
+    object cdsFichaTecnicaTIPO: TStringField
+      FieldName = 'TIPO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsFichaTecnica: TDataSource
     DataSet = cdsFichaTecnica
@@ -8128,13 +8145,19 @@ object dmCadProduto: TdmCadProduto
       'NCM=NCM'
       'ITEM=ITEM'
       'NOME_COMBINACAO=NOME_COMBINACAO'
+      'ID_MATERIAL=ID_MATERIAL'
       'MATERIAL=MATERIAL'
       'NOME_COR=NOME_COR'
       'QTD_CONSUMO=QTD_CONSUMO'
       'UNIDADE=UNIDADE'
       'ID_SETOR=ID_SETOR'
       'NOME_SETOR=NOME_SETOR'
-      'NOME_POSICAO=NOME_POSICAO')
+      'NOME_POSICAO=NOME_POSICAO'
+      'ID_COR_MAT=ID_COR_MAT'
+      'ID_POSICAO=ID_POSICAO'
+      'ID_COR_COMBINACAO=ID_COR_COMBINACAO'
+      'QTD_ESTOQUE_MIN=QTD_ESTOQUE_MIN'
+      'TIPO=TIPO')
     DataSource = dsFichaTecnica
     BCDToCurrency = False
     Left = 1036

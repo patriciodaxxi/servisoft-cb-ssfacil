@@ -1139,6 +1139,7 @@ type
     ctTotalAtraso: String;
     ctDescontada_Consulta: String;
     ctChequePend : String;
+    vId_Contabil_OP_Baixa : Integer;
     vDtUltPagamento: TDateTime;//Esta data é usada para o estorno
     vID_ContaPgtoSel: Integer;
     vDtPgtoSel, vDataIni, vDataFim: TDateTime;

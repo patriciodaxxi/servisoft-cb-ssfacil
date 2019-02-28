@@ -14,7 +14,7 @@ object dmCupomFiscal: TdmCupomFiscal
       'R'#13#10'FROM CUPOMFISCAL CF'#13#10'INNER JOIN PESSOA P ON (CF.ID_CLIENTE = ' +
       'P.CODIGO)'#13#10'LEFT JOIN CONDPGTO CP ON (CP.ID = CF.ID_CONDPGTO)'#13#10'LE' +
       'FT JOIN TIPOCOBRANCA TC ON (TC.ID = CF.ID_TIPOCOBRANCA)'#13#10'LEFT JO' +
-      'IN PESSOA V ON (CF.ID_VENDEDOR = V.CODIGO)'#13#10#13#10
+      'IN PESSOA V ON (CF.ID_VENDEDOR = V.CODIGO)'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -810,6 +810,9 @@ object dmCupomFiscal: TdmCupomFiscal
     object sdsCupom_ItensPERC_ICMS_EFET: TFloatField
       FieldName = 'PERC_ICMS_EFET'
     end
+    object sdsCupom_ItensPERC_BASE_RED_EFET: TFloatField
+      FieldName = 'PERC_BASE_RED_EFET'
+    end
   end
   object cdsCupom_Itens: TClientDataSet
     Aggregates = <>
@@ -1042,6 +1045,9 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupom_ItensPERC_ICMS_EFET: TFloatField
       FieldName = 'PERC_ICMS_EFET'
+    end
+    object cdsCupom_ItensPERC_BASE_RED_EFET: TFloatField
+      FieldName = 'PERC_BASE_RED_EFET'
     end
   end
   object dsCupom_Itens: TDataSource
@@ -1964,6 +1970,9 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsProdutoID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
+    end
+    object cdsProdutoPERC_REDUCAOICMS: TFloatField
+      FieldName = 'PERC_REDUCAOICMS'
     end
   end
   object dsProduto: TDataSource

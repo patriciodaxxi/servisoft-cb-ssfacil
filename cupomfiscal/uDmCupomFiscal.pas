@@ -1525,6 +1525,9 @@ type
     qNCM_UFPERC_RED_MVA_CLI_SIMPLES: TFloatField;
     sdsCupom_ItensPERC_ICMS_EFET: TFloatField;
     cdsCupom_ItensPERC_ICMS_EFET: TFloatField;
+    cdsProdutoPERC_REDUCAOICMS: TFloatField;
+    sdsCupom_ItensPERC_BASE_RED_EFET: TFloatField;
+    cdsCupom_ItensPERC_BASE_RED_EFET: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);
@@ -1566,7 +1569,8 @@ type
     vVlr_Pis, vVlr_Cofins: Real;
     vID_CSTICMS, vID_CSTIPI: Integer;
     vID_NCM: Integer;
-    vPerc_ICMS, vPerc_IPI, vPerc_TribICMS: Real;
+    vPerc_ICMS, vPerc_IPI, vPerc_TribICMS : Real;
+    vPerc_Trib_Efet, vPerc_ICMS_Efet: Real;
     vMotivoCancelamento: String;
     vDescricao_Operacao: String;
     vSair_Tela: Boolean;
@@ -1680,6 +1684,12 @@ begin
   cdsCupomFiscalVLR_RECEBIDO.AsFloat  := 0;
   cdsCupomFiscalVLR_TROCO.AsFloat     := 0;
   cdsCupomFiscalID_CONDPGTO.AsInteger := 0;
+
+  cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat := 0;
+  cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat  := 0;
+  cdsCupomFiscalVLR_BASE_EFET.AsFloat      := 0;
+  cdsCupomFiscalVLR_ICMS_EFET.AsFloat      := 0;
+
   cdsCupomFiscalID_CONTA.AsInteger    := cdsParametrosID_CONTA_FECHAMENTO.AsInteger;
   cdsCupomFiscalFILIAL.AsInteger      := cdsFilialID.AsInteger;
   cdsCupomFiscalTIPO_PGTO.AsString    := 'V';
@@ -2709,6 +2719,8 @@ begin
   //08/07/2016
   //if qVariacaoID_CSTIPI.AsInteger > 0 then
   //  vID_CSTIPI := qVariacaoID_CSTIPI.AsInteger;
+  vPerc_Trib_Efet := 0;
+  vPerc_ICMS_Efet := 0;
   if cdsFilialSIMPLES.AsString = 'S' then
   begin
     vPerc_ICMS     := 0;
@@ -2722,6 +2734,11 @@ begin
     vPerc_ICMS := qUFPERC_ICMS.AsFloat;
     if cdsTab_CSTICMS.Locate('ID',vID_CSTICMS,[loCaseInsensitive]) then
       vPerc_TribICMS := StrToFloat(FormatFloat('0.0000',cdsTab_CSTICMSPERCENTUAL.AsFloat));
+    if (cdsFilialCALCULAR_ICMS_EFET.AsString = 'C') or (cdsFilialCALCULAR_ICMS_EFET.AsString = 'S') then
+    begin
+      vPerc_ICMS_Efet := qUFPERC_ICMS.AsFloat;
+      vPerc_Trib_Efet := StrToFloat(FormatFloat('0.0000',cdsTab_CSTICMSPERCENTUAL.AsFloat));
+    end;
   end;
   if (cdsCFOPGERAR_IPI.AsString <> 'S') then
     vPerc_IPI := 0
@@ -2765,6 +2782,8 @@ begin
   begin
     if StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
       vPerc_ICMS := StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat));
+
+
 
     //07/12/2018  
     if cdsProdutoID_CSTICMS.AsInteger > 0 then

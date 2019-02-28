@@ -811,6 +811,12 @@ begin
   fDMCupomFiscal.cdsCupomFiscalVLR_ICMS.AsFloat     := 0;
   fDMCupomFiscal.cdsCupomFiscalBASE_ICMS.AsFloat    := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_IPI.AsFloat      := 0;
+
+  fDmCupomFiscal.cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat := 0;
+  fDmCupomFiscal.cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat  := 0;
+  fDmCupomFiscal.cdsCupomFiscalVLR_BASE_EFET.AsFloat      := 0;
+  fDmCupomFiscal.cdsCupomFiscalVLR_ICMS_EFET.AsFloat      := 0;
+
   fDMCupomFiscal.cdsCupomFiscalVLR_PIS.AsFloat      := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsFloat := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat    := 0;

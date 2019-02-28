@@ -1,8 +1,8 @@
 object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
-  Left = 296
-  Top = 74
+  Left = 359
+  Top = 89
   Width = 721
-  Height = 588
+  Height = 612
   Caption = 'Cadastro dos Itens da Nota'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -240,7 +240,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 523
+    Top = 547
     Width = 713
     Height = 34
     Align = alBottom
@@ -374,7 +374,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     Left = 0
     Top = 145
     Width = 713
-    Height = 378
+    Height = 402
     ActivePage = TS_Impostos
     ActivePageDefault = TS_Itens
     Align = alClient
@@ -387,7 +387,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
         Left = 0
         Top = 0
         Width = 709
-        Height = 355
+        Height = 379
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0

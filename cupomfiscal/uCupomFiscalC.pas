@@ -1801,6 +1801,11 @@ begin
         fDmCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_FEDERAL.AsFloat   := 0;
         fDmCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_MUNICIPAL.AsFloat := 0;
 
+        fDmCupomFiscal.cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat := 0;
+        fDmCupomFiscal.cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat  := 0;
+        fDmCupomFiscal.cdsCupomFiscalVLR_BASE_EFET.AsFloat      := 0;
+        fDmCupomFiscal.cdsCupomFiscalVLR_ICMS_EFET.AsFloat      := 0;
+
         fDmCupomFiscal.cdsCupom_Itens.First;
         while not fDmCupomFiscal.cdsCupom_Itens.Eof do
         begin

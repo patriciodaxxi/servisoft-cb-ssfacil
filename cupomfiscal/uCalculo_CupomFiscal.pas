@@ -15,6 +15,7 @@ uses
   procedure prc_Move_Itens_Ajuste(fDMCupomFiscal: TDMCupomFiscal);
 
   procedure prc_Calcular_ST_Ret(fDMCupomFiscal: TDMCupomFiscal);
+  procedure prc_Calcular_ICMS_Efet(fDMCupomFiscal: TDMCupomFiscal);
   procedure prc_Abrir_qProduto_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF: String);
   procedure prc_Abrir_qNCM_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF, Importado_Nacional: String);
 
@@ -103,6 +104,8 @@ begin
                                                           + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
   //26/02/2019
   prc_Calcular_ST_Ret(fDMCupomFiscal);
+  prc_Calcular_ICMS_Efet(fDMCupomFiscal);
+  
   fDMCupomFiscal.cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat := fDMCupomFiscal.cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat + fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat;
   fDMCupomFiscal.cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat  := fDMCupomFiscal.cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat;
   fDMCupomFiscal.cdsCupomFiscalVLR_BASE_EFET.AsFloat      := fDMCupomFiscal.cdsCupomFiscalVLR_BASE_EFET.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat;
@@ -339,14 +342,13 @@ end;
 
 procedure prc_Calcular_ST_Ret(fDMCupomFiscal: TDMCupomFiscal);
 var
-  vPerc_Interno : Real;
-  vVlrAux : Real;
+  vBaseSTRet : Real;
+  vVlrSTRet : Real;
 begin
   fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat := 0;
   fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat  := 0;
   fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat      := 0;
   fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat      := 0;
-
   if (fDMCupomFiscal.cdsCFOPENVIAR_BASE_ST.AsString <> 'S') then
     exit;
   if (fDMCupomFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
@@ -361,20 +363,68 @@ begin
   if fDMCupomFiscal.qProdST.IsEmpty then
     Exit;
 
-  if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProdSTBASE_ST_RET.AsFloat)) <= 0 then
+  if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProdSTBASE_ST_RET.AsFloat)) > 0 then
+  begin
+    vBaseSTRet := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProdSTBASE_ST_RET.AsFloat));
+    vVlrSTRet  := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProdSTVLR_ST_RET.AsFloat));
+  end
+  else
+  begin
+    vBaseSTRet := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProdSTBASE_ST.AsFloat));
+    vVlrSTRet  := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProdSTVLR_ST.AsFloat));
+  end;
+  if StrToFloat(FormatFloat('0.0000',vBaseSTRet)) <= 0 then
     exit;
+  fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat := StrToFloat(FormatFloat('0.00',vBaseSTRet * fDMCupomFiscal.cdsCupom_ItensQTD.AsFloat));
+  fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat  := StrToFloat(FormatFloat('0.00',vVlrSTRet * fDMCupomFiscal.cdsCupom_ItensQTD.AsFloat));
+  fDMCupomFiscal.cdsCupom_ItensPERC_ST.AsFloat            := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProdSTPERC_ST.AsFloat));
+end;
 
-  fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProdSTBASE_ST_RET.AsFloat * fDMCupomFiscal.cdsCupom_ItensQTD.AsFloat));
-  fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat  := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProdSTVLR_ST_RET.AsFloat * fDMCupomFiscal.cdsCupom_ItensQTD.AsFloat));
+procedure prc_Abrir_qProduto_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF: String);
+begin
+  fDMCupomFiscal.qProduto_UF.Close;
+  fDMCupomFiscal.qProduto_UF.ParamByName('ID').AsInteger := ID_NCM;
+  fDMCupomFiscal.qProduto_UF.ParamByName('UF').AsString  := UF;
+  fDMCupomFiscal.qProduto_UF.Open;
+end;
+
+procedure prc_Abrir_qNCM_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF, Importado_Nacional: String);
+begin
+  fDMCupomFiscal.qNCM_UF.Close;
+  fDMCupomFiscal.qNCM_UF.ParamByName('ID').AsInteger          := ID_NCM;
+  fDMCupomFiscal.qNCM_UF.ParamByName('UF').AsString           := UF;
+  fDMCupomFiscal.qNCM_UF.ParamByName('TIPO_PRODUTO').AsString := Importado_Nacional;
+  fDMCupomFiscal.qNCM_UF.Open;
+end;
+
+procedure prc_Calcular_ICMS_Efet(fDMCupomFiscal: TDMCupomFiscal);
+var
+  vPerc_Interno : Real;
+  vVlrAux : Real;
+  vPerc_Red : Real;
+begin
+  fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat := 0;
+  fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat  := 0;
+  if (fDMCupomFiscal.cdsCFOPENVIAR_BASE_ST.AsString <> 'S') then
+    exit;
+  if (fDMCupomFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
+    exit;
+  if fDMCupomFiscal.cdsFilialUSA_ENVIO_ST_RET.AsString <> 'S' then
+    exit;
 
   if (fDMCupomFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString = 'N') or (Trim(fDMCupomFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString) = '')  then
     exit;
 
   //Busca o %
   vPerc_Interno := 0;
+  vPerc_Red     := 0;
   prc_Abrir_qProduto_UF(fDMCupomFiscal,fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,fDMCupomFiscal.cdsFilialUF.AsString);
   if not(fDMCupomFiscal.qProduto_UF.IsEmpty) and (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat)) > 0) then
+  begin
     vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat));
+    if StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat)) > 0 then
+      vPerc_Red := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat));
+  end;
 
   if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0  then
   begin
@@ -396,32 +446,29 @@ begin
       vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qUFPERC_ICMS_INTERNO.AsFloat));
     end;
   end;
+  if (StrToFloat(FormatFloat('0.0000',vPerc_Red)) <= 0) then
+  begin
+    if fDMCupomFiscal.cdsProdutoID.AsInteger <> fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger then
+      fDMCupomFiscal.cdsProduto.Locate('ID',fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
+    if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0 then
+      vPerc_Red := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat));
+  end;
+  fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat := 0;
+  if StrToFloat(FormatFloat('0.0000',vPerc_Red)) > 0 then
+    fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat := StrToFloat(FormatFloat('0.0000',100 - vPerc_Red));
+
   fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat := vPerc_Interno;
 
   if StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat)) > 0 then
   begin
-    vVlrAux := StrToFloat(FormatFloat('0.00',(fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat * fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat) / 100));
+    vVlrAux := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
+    if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat)) > 0 then
+      vVlrAux := vVlrAux - (StrToFloat(FormatFloat('0.0000',(vVlrAux * fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat) / 100)));
+    fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
+    vVlrAux := StrToFloat(FormatFloat('0.00',(vVlrAux * fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat) / 100));
     fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
-    fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
   end;
 
-end;
-
-procedure prc_Abrir_qProduto_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF: String);
-begin
-  fDMCupomFiscal.qProduto_UF.Close;
-  fDMCupomFiscal.qProduto_UF.ParamByName('ID').AsInteger := ID_NCM;
-  fDMCupomFiscal.qProduto_UF.ParamByName('UF').AsString  := UF;
-  fDMCupomFiscal.qProduto_UF.Open;
-end;
-
-procedure prc_Abrir_qNCM_UF(fDMCupomFiscal: TDMCupomFiscal;ID_NCM: Integer; UF, Importado_Nacional: String);
-begin
-  fDMCupomFiscal.qNCM_UF.Close;
-  fDMCupomFiscal.qNCM_UF.ParamByName('ID').AsInteger          := ID_NCM;
-  fDMCupomFiscal.qNCM_UF.ParamByName('UF').AsString           := UF;
-  fDMCupomFiscal.qNCM_UF.ParamByName('TIPO_PRODUTO').AsString := Importado_Nacional;
-  fDMCupomFiscal.qNCM_UF.Open;
 end;
 
 end.
