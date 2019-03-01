@@ -260,6 +260,9 @@ begin
   fDMCadPedido.cdsPedidoVLR_DESCONTO.AsFloat  := 0;
   fDMCadPedido.cdsPedidoCANCELADO.AsString    := 'N'; 
   fDMCadPedido.cdsPedidoDOLAR.AsString        := 'N';
+  if fDMCadPedido.qParametros_PedDTENTREGA_ZERADA_ORC.AsString = 'S' then
+    fDMCadPedido.cdsPedidoDTENTREGA.Clear
+  else
   if fDMCadPedido.cdsOrcamentoDTENTREGA.AsDateTime > 10 then
     fDMCadPedido.cdsPedidoDTENTREGA.AsDateTime  := fDMCadPedido.cdsOrcamentoDTENTREGA.AsDateTime
   else

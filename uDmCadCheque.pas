@@ -271,6 +271,9 @@ type
     sdsChequeMOTIVO_COMP: TStringField;
     cdsChequeMOTIVO_COMP: TStringField;
     cdsCheque_ConsultaMOTIVO_COMP: TStringField;
+    cdsCheque_ConsultaREC_EMITIDO: TStringField;
+    qParametros_Geral: TSQLQuery;
+    qParametros_GeralENDGRIDS: TStringField;
     procedure cdsCheque_HistCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsChequeNewRecord(DataSet: TDataSet);
@@ -341,6 +344,7 @@ begin
   cdsContaOrcamento.Open;
   qParametros.Close;
   qParametros.Open;
+  qParametros_Geral.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do

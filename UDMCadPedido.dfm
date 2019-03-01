@@ -14845,6 +14845,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedDTENTREGA_ZERADA_ORC: TStringField
+      FieldName = 'DTENTREGA_ZERADA_ORC'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 

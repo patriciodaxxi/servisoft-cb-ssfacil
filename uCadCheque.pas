@@ -159,6 +159,7 @@ var
 begin
   fDmCadCheque := TDMCadCheque.Create(Self);
   oDBUtils.SetDataSourceProperties(Self,fDmCadCheque);
+  prc_le_Grid(SMDBGrid1, Name, fDmCadCheque.qParametros_GeralENDGRIDS.AsString);
 
   vData := EncodeDate(YearOf(Date),MonthOf(Date),01);
   DateEdit1.Date := vData;
@@ -174,6 +175,7 @@ end;
 procedure TfrmCadCheque.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  prc_Grava_Grid(SMDBGrid1, Name, fDmCadCheque.qParametros_GeralENDGRIDS.AsString);
   Action := Cafree;
 end;
 

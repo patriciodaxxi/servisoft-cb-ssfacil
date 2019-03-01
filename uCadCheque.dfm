@@ -21,8 +21,8 @@ object frmCadCheque: TfrmCadCheque
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 898
-    Height = 561
+    Width = 906
+    Height = 569
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -40,8 +40,8 @@ object frmCadCheque: TfrmCadCheque
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 145
-        Width = 894
-        Height = 376
+        Width = 902
+        Height = 384
         Align = alClient
         Ctl3D = False
         DataSource = dmCadCheque.dsCheque_Consulta
@@ -74,7 +74,7 @@ object frmCadCheque: TfrmCadCheque
         WidthOfIndicator = 27
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 13
+        ColCount = 14
         RowCount = 2
         Columns = <
           item
@@ -173,12 +173,19 @@ object frmCadCheque: TfrmCadCheque
             FieldName = 'ID'
             Title.Alignment = taCenter
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'REC_EMITIDO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Recebido de / Emitido Para'
+            Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 894
+        Width = 902
         Height = 32
         Align = alTop
         Color = clSilver
@@ -497,8 +504,8 @@ object frmCadCheque: TfrmCadCheque
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 521
-        Width = 894
+        Top = 529
+        Width = 902
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -514,7 +521,7 @@ object frmCadCheque: TfrmCadCheque
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 894
+        Width = 902
         Height = 113
         Align = alTop
         Color = clSilver
@@ -828,7 +835,7 @@ object frmCadCheque: TfrmCadCheque
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 894
+        Width = 902
         Height = 35
         Align = alTop
         Color = 8404992
@@ -1054,7 +1061,7 @@ object frmCadCheque: TfrmCadCheque
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 894
+        Width = 902
         Height = 285
         Align = alTop
         Enabled = False
@@ -1062,7 +1069,7 @@ object frmCadCheque: TfrmCadCheque
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 892
+          Width = 900
           Height = 31
           Align = alTop
           Color = clSilver
@@ -1116,16 +1123,16 @@ object frmCadCheque: TfrmCadCheque
         object RzPageControl2: TRzPageControl
           Left = 1
           Top = 105
-          Width = 892
+          Width = 900
           Height = 179
-          ActivePage = TS_Cliente
+          ActivePage = TS_Mim
           ActivePageDefault = TS_Mim
           Align = alClient
           BackgroundColor = 16765348
           FlatColor = 8421440
           ParentBackgroundColor = False
           ShowShadow = False
-          TabIndex = 1
+          TabIndex = 0
           TabOrder = 1
           TextColors.Unselected = 8421440
           FixedDimension = 19
@@ -1359,7 +1366,7 @@ object frmCadCheque: TfrmCadCheque
         object Panel4: TPanel
           Left = 1
           Top = 32
-          Width = 892
+          Width = 900
           Height = 73
           Align = alTop
           TabOrder = 0
@@ -1471,8 +1478,8 @@ object frmCadCheque: TfrmCadCheque
       object RzPageControl3: TRzPageControl
         Left = 0
         Top = 320
-        Width = 894
-        Height = 218
+        Width = 902
+        Height = 226
         ActivePage = RzTabSheet2
         ActivePageDefault = RzTabSheet2
         Align = alClient
@@ -1487,8 +1494,8 @@ object frmCadCheque: TfrmCadCheque
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 890
-            Height = 195
+            Width = 898
+            Height = 203
             TabStop = False
             Align = alClient
             Ctl3D = False
@@ -1547,8 +1554,8 @@ object frmCadCheque: TfrmCadCheque
           object SMDBGrid3: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 890
-            Height = 195
+            Width = 898
+            Height = 203
             TabStop = False
             Align = alClient
             Ctl3D = False

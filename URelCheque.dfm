@@ -156,7 +156,7 @@ object fRelCheque: TfRelCheque
         Caption = 'Nominal'
       end
       object RLLabel13: TRLLabel
-        Left = 809
+        Left = 824
         Top = 28
         Width = 50
         Height = 10
@@ -170,14 +170,14 @@ object fRelCheque: TfRelCheque
         Caption = 'Emit.Por'
       end
       object RLLabel7: TRLLabel
-        Left = 558
+        Left = 545
         Top = 28
-        Width = 32
+        Width = 94
         Height = 10
-        Caption = 'Emitente'
+        Caption = 'Recebido de / Emitido Para'
       end
       object RLLabel11: TRLLabel
-        Left = 694
+        Left = 716
         Top = 28
         Width = 28
         Height = 10
@@ -289,16 +289,16 @@ object fRelCheque: TfRelCheque
           object RLDBText7: TRLDBText
             Left = 373
             Top = 1
-            Width = 183
+            Width = 172
             Height = 12
             AutoSize = False
             DataField = 'NOMINAL'
             DataSource = dmCadCheque.dsCheque_Consulta
           end
           object RLDBMemo1: TRLDBMemo
-            Left = 807
+            Left = 821
             Top = 0
-            Width = 253
+            Width = 241
             Height = 12
             Behavior = [beSiteExpander]
             DataField = 'UTILIZADO_PARA'
@@ -324,16 +324,16 @@ object fRelCheque: TfRelCheque
             DataSource = dmCadCheque.dsCheque_Consulta
           end
           object RLDBText1: TRLDBText
-            Left = 557
+            Left = 546
             Top = 1
-            Width = 137
+            Width = 164
             Height = 12
             AutoSize = False
-            DataField = 'NOME_CORRENTISTA'
+            DataField = 'REC_EMITIDO'
             DataSource = dmCadCheque.dsCheque_Consulta
           end
           object RLDBText9: TRLDBText
-            Left = 695
+            Left = 712
             Top = 1
             Width = 111
             Height = 12

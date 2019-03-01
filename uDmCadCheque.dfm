@@ -278,21 +278,24 @@ object dmCadCheque: TdmCadCheque
       '|| '#39' '#39' || C.titular Contato,'#13#10'CASE'#13#10'  WHEN C.EMITIDO_POR = '#39'1'#39' T' +
       'HEN C.TITULAR'#13#10'  WHEN C.EMITIDO_POR = '#39'2'#39' THEN E.NOME'#13#10'  WHEN C.' +
       'EMITIDO_POR = '#39'3'#39' THEN E.NOME'#13#10'  END NOME_CORRENTISTA,'#13#10'CASE'#13#10'  ' +
-      'WHEN C.EMITIDO_POR = '#39'1'#39' THEN CT.NOME'#13#10'  WHEN C.EMITIDO_POR = '#39'2' +
-      #39' THEN BC.NOME'#13#10'  WHEN C.EMITIDO_POR = '#39'3'#39' THEN BC.NOME'#13#10'  END N' +
-      'OME_CONTA_BANCO,'#13#10#13#10'CASE'#13#10'  WHEN C.EMITIDO_POR = '#39'1'#39' THEN '#39'MIM'#39#13 +
-      #10'  WHEN C.EMITIDO_POR = '#39'2'#39' THEN '#39'CLIENTE'#39#13#10'  WHEN C.EMITIDO_POR' +
-      ' = '#39'3'#39' THEN '#39'TERCEITO'#39#13#10'  END DESCRICAO_EMITIDO,'#13#10'CASE'#13#10'  WHEN C' +
-      '.EMITIDO_POR = '#39'1'#39' THEN '#39'1'#39#13#10'  WHEN C.EMITIDO_POR = '#39'2'#39' THEN '#39'2'#39 +
-      #13#10'  WHEN C.EMITIDO_POR = '#39'3'#39' THEN '#39'2'#39#13#10'  END TIPO_EMIT,'#13#10'CASE'#13#10' ' +
-      ' WHEN C.STATUS = '#39'0'#39' THEN '#39'Pendente'#39#13#10'  WHEN C.STATUS = '#39'1'#39' THEN' +
-      ' '#39'Dep'#243'sito'#39#13#10'  WHEN C.STATUS = '#39'2'#39' THEN '#39'Devolvido 1'#39#13#10'  WHEN C.' +
-      'STATUS = '#39'3'#39' THEN '#39'Reapresentado'#39#13#10'  WHEN C.STATUS = '#39'4'#39' THEN '#39'D' +
-      'evolvido 2'#39#13#10'  WHEN C.STATUS = '#39'5'#39' THEN '#39'Compensado'#39#13#10'  WHEN C.S' +
-      'TATUS = '#39'6'#39' THEN '#39'Repasse'#39#13#10'  END DESC_STATUS'#13#10#13#10'FROM CHEQUE C'#13#10 +
-      'LEFT JOIN CONTAS CT'#13#10'ON C.ID_CONTA = CT.ID'#13#10'LEFT JOIN BANCO BC'#13#10 +
-      'ON C.id_banco = BC.ID'#13#10'LEFT JOIN PESSOA E ON (E.CODIGO = C.RECEB' +
-      'IDO_DE)'#13#10'LEFT JOIN PESSOA R ON (R.CODIGO =  C.EMITIDO_PARA)'#13#10#13#10
+      'WHEN C.EMITIDO_POR = '#39'1'#39' THEN R.NOME'#13#10'  WHEN C.EMITIDO_POR = '#39'2'#39 +
+      ' THEN E.NOME'#13#10'  WHEN C.EMITIDO_POR = '#39'3'#39' THEN E.NOME'#13#10'  END REC_' +
+      'EMITIDO,'#13#10'CASE'#13#10'  WHEN C.EMITIDO_POR = '#39'1'#39' THEN CT.NOME'#13#10'  WHEN ' +
+      'C.EMITIDO_POR = '#39'2'#39' THEN BC.NOME'#13#10'  WHEN C.EMITIDO_POR = '#39'3'#39' THE' +
+      'N BC.NOME'#13#10'  END NOME_CONTA_BANCO,'#13#10#13#10'CASE'#13#10'  WHEN C.EMITIDO_POR' +
+      ' = '#39'1'#39' THEN '#39'MIM'#39#13#10'  WHEN C.EMITIDO_POR = '#39'2'#39' THEN '#39'CLIENTE'#39#13#10'  ' +
+      'WHEN C.EMITIDO_POR = '#39'3'#39' THEN '#39'TERCEITO'#39#13#10'  END DESCRICAO_EMITID' +
+      'O,'#13#10'CASE'#13#10'  WHEN C.EMITIDO_POR = '#39'1'#39' THEN '#39'1'#39#13#10'  WHEN C.EMITIDO_' +
+      'POR = '#39'2'#39' THEN '#39'2'#39#13#10'  WHEN C.EMITIDO_POR = '#39'3'#39' THEN '#39'2'#39#13#10'  END T' +
+      'IPO_EMIT,'#13#10'CASE'#13#10'  WHEN C.STATUS = '#39'0'#39' THEN '#39'Pendente'#39#13#10'  WHEN C' +
+      '.STATUS = '#39'1'#39' THEN '#39'Dep'#243'sito'#39#13#10'  WHEN C.STATUS = '#39'2'#39' THEN '#39'Devol' +
+      'vido 1'#39#13#10'  WHEN C.STATUS = '#39'3'#39' THEN '#39'Reapresentado'#39#13#10'  WHEN C.ST' +
+      'ATUS = '#39'4'#39' THEN '#39'Devolvido 2'#39#13#10'  WHEN C.STATUS = '#39'5'#39' THEN '#39'Compe' +
+      'nsado'#39#13#10'  WHEN C.STATUS = '#39'6'#39' THEN '#39'Repasse'#39#13#10'  END DESC_STATUS'#13 +
+      #10#13#10#13#10#13#10'FROM CHEQUE C'#13#10'LEFT JOIN CONTAS CT'#13#10'ON C.ID_CONTA = CT.ID' +
+      #13#10'LEFT JOIN BANCO BC'#13#10'ON C.id_banco = BC.ID'#13#10'LEFT JOIN PESSOA E ' +
+      'ON (E.CODIGO = C.RECEBIDO_DE)'#13#10'LEFT JOIN PESSOA R ON (R.CODIGO =' +
+      '  C.EMITIDO_PARA)'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -450,6 +453,10 @@ object dmCadCheque: TdmCadCheque
     object cdsCheque_ConsultaMOTIVO_COMP: TStringField
       FieldName = 'MOTIVO_COMP'
       Size = 250
+    end
+    object cdsCheque_ConsultaREC_EMITIDO: TStringField
+      FieldName = 'REC_EMITIDO'
+      Size = 60
     end
   end
   object dsCheque_Consulta: TDataSource
@@ -1246,6 +1253,20 @@ object dmCadCheque: TdmCadCheque
       FieldName = 'USA_CONTA_ORCAMENTO'
       FixedChar = True
       Size = 1
+    end
+  end
+  object qParametros_Geral: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT ENDGRIDS'
+      'FROM PARAMETROS_GERAL')
+    SQLConnection = dmDatabase.scoDados
+    Left = 310
+    Top = 262
+    object qParametros_GeralENDGRIDS: TStringField
+      FieldName = 'ENDGRIDS'
+      Size = 250
     end
   end
 end
