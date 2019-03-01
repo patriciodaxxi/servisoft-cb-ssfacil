@@ -19,14 +19,14 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
   object pnlCadastro: TPanel
     Left = 0
     Top = 0
-    Width = 1035
+    Width = 1043
     Height = 161
     Align = alTop
     BevelOuter = bvNone
     Color = clSilver
     TabOrder = 0
     DesignSize = (
-      1035
+      1043
       161)
     object Shape1: TShape
       Left = 513
@@ -632,8 +632,8 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 161
-    Width = 1035
-    Height = 411
+    Width = 1043
+    Height = 419
     ActivePage = TS_Material
     ActivePageDefault = TS_Material
     Align = alClient
@@ -650,8 +650,8 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 1031
-        Height = 292
+        Width = 1039
+        Height = 300
         Align = alClient
         Ctl3D = False
         DataSource = DMCadNecessidade_Compras.dsmMaterial
@@ -932,8 +932,8 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
       end
       object SMDBGrid5: TSMDBGrid
         Left = 0
-        Top = 292
-        Width = 1031
+        Top = 300
+        Width = 1039
         Height = 96
         Align = alBottom
         DataSource = DMCadNecessidade_Compras.dsmEmbalagem
@@ -1003,8 +1003,8 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
       object SMDBGrid4: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 1031
-        Height = 388
+        Width = 1039
+        Height = 396
         Align = alClient
         Ctl3D = False
         DataSource = DMCadNecessidade_Compras.dsmMaterial_Prod
@@ -1102,8 +1102,8 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 572
-    Width = 1035
+    Top = 580
+    Width = 1043
     Height = 19
     Color = 15138764
     Panels = <

@@ -1,8 +1,8 @@
 object fMenu: TfMenu
-  Left = 352
-  Top = 5
+  Left = 291
+  Top = 0
   Width = 837
-  Height = 682
+  Height = 686
   Caption = 'Menu'
   Color = clSilver
   Constraints.MinHeight = 650
@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 631
+    Height = 635
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -1119,6 +1119,10 @@ object fMenu: TfMenu
       object BaixarMaterialPorOrdemdeProduo1: TMenuItem
         Caption = 'Baixar Material Por Ordem de Produ'#231#227'o'
         OnClick = BaixarMaterialPorOrdemdeProduo1Click
+      end
+      object AjusteEstoqueReservaPorOrdemProduo1: TMenuItem
+        Caption = 'Ajuste Estoque Reserva Por Ordem Produ'#231#227'o'
+        OnClick = AjusteEstoqueReservaPorOrdemProduo1Click
       end
       object N44: TMenuItem
         Caption = '-'

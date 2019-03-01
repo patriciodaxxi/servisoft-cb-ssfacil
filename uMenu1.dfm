@@ -1,6 +1,6 @@
 object fMenu1: TfMenu1
-  Left = 206
-  Top = 69
+  Left = 196
+  Top = 35
   Width = 928
   Height = 630
   BorderIcons = []

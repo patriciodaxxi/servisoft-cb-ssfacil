@@ -413,7 +413,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
     Top = 130
     Width = 941
     Height = 388
-    ActivePage = TS_Produto_Acum
+    ActivePage = TS_Reserva
     ActivePageDefault = TS_Produto_Det
     Align = alClient
     BackgroundColor = clGray
@@ -426,7 +426,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 3
     TabOrder = 1
     TextColors.Selected = clBlue
     OnChange = RzPageControl1Change

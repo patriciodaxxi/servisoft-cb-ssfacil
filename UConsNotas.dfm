@@ -307,7 +307,8 @@ object frmConsNotas: TfrmConsNotas
     Top = 87
     Width = 1010
     Height = 385
-    ActivePage = TS_DTEmissao
+    ActivePage = TS_Produto_Det
+    ActivePageDefault = TS_Produto_Det
     Align = alClient
     BackgroundColor = clGray
     BoldCurrentTab = True
@@ -319,7 +320,7 @@ object frmConsNotas: TfrmConsNotas
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     TextColors.Selected = clBlue
     FixedDimension = 19

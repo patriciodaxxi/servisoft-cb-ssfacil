@@ -298,6 +298,7 @@ begin
   end;
   vQtdAux := StrToFloat(FormatFloat('0.00000',fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat * Qtd_Consumo));
   mMaterialQtd.AsFloat := StrToFloat(FormatFloat('0.00000',mMaterialQtd.AsFloat + vQtdAux));
+
   mMaterial.Post;
 end;
 
@@ -372,7 +373,7 @@ begin
                                                              cdsNotaFiscal_MPNUM_ORDEM.AsInteger,
                                                              cdsNotaFiscal_MPTAMANHO.AsString,
                                                              'S','NTS',cdsNotaFiscal_MPQTD_RESERVA.AsFloat,
-                                                             fDMCadNotaFiscal.cdsNotaFiscalDTEMISSAO.AsDateTime,'');
+                                                             fDMCadNotaFiscal.cdsNotaFiscalDTEMISSAO.AsDateTime,'',);
     FreeAndNil(fDMEstoque_Res);
   end;
   cdsNotaFiscal_MPID_MOVESTOQUE_RES.AsInteger := vID_Estoque_Res;
@@ -502,38 +503,6 @@ begin
       prc_Gravar_mMaterial_Comb(cdsProduto_CMatQTD_CONSUMO.AsFloat,'');
     cdsProduto_CMat.Next;
   end;
-
-  {cdsConsumo.Close;
-  sdsConsumo.ParamByName('ID_COMBINACAO').AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger;
-  sdsConsumo.ParamByName('ID_PRODUTO').AsInteger    := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
-  cdsConsumo.Open;
-  if cdsConsumo.IsEmpty then
-    exit;
-
-  cdsConsumo.First;
-  while not cdsConsumo.Eof do
-  begin
-    vTamanho := '';
-    if trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString) <> '' then
-      vTamanho := fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString;
-    vQtdAux  := StrToFloat(FormatFloat('0.00000',cdsConsumoQTD_CONSUMO.AsFloat));
-    if (cdsConsumoID_GRADE_MAT.AsInteger > 0) or (cdsConsumoTIPO_CONSUMO.AsString = 'T') then
-    begin
-      if (cdsConsumoTIPO_CONSUMO.AsString = 'T') then
-      begin
-        qConsumo_Tam.Close;
-        qConsumo_Tam.ParamByName('ID').AsInteger     := cdsConsumoID.AsInteger;
-        qConsumo_Tam.ParamByName('ITEM').AsInteger   := cdsConsumoITEM_CONSUMO.AsInteger;
-        qConsumo_Tam.ParamByName('TAMANHO').AsString := vTamanho;
-        qConsumo_Tam.Open;
-        vQtdAux := StrToFloat(FormatFloat('0.00000',qConsumo_TamQTD_CONSUMO.AsFloat));
-      end;
-      prc_Gravar_mMaterial_Comb(vQtdAux,vTamanho);
-    end
-    else
-      prc_Gravar_mMaterial_Comb(cdsConsumoQTD_CONSUMO.AsFloat,'');
-    cdsConsumo.Next;
-  end;}
 end;
 
 procedure TDMCadNotaFiscal_MP.prc_Gravar_mMaterial_Comb(Qtd_Consumo : Real; Tamanho : String);

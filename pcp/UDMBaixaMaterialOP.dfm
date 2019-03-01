@@ -1,9 +1,9 @@
 object DMBaixaMaterial: TDMBaixaMaterial
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 238
-  Top = 113
-  Height = 493
+  Left = 198
+  Top = 87
+  Height = 535
   Width = 992
   object sdsLoteMat: TSQLDataSet
     NoMetadata = True
@@ -359,20 +359,20 @@ object DMBaixaMaterial: TDMBaixaMaterial
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 656
-    Top = 72
+    Left = 680
+    Top = 16
   end
   object dspMaterial_Nec: TDataSetProvider
     DataSet = sdsMaterial_Nec
-    Left = 712
-    Top = 72
+    Left = 736
+    Top = 16
   end
   object cdsMaterial_Nec: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspMaterial_Nec'
-    Left = 760
-    Top = 72
+    Left = 784
+    Top = 16
     object cdsMaterial_NecQPED: TFloatField
       FieldName = 'QPED'
     end
@@ -428,8 +428,8 @@ object DMBaixaMaterial: TDMBaixaMaterial
   end
   object dsMaterial_Nec: TDataSource
     DataSet = cdsMaterial_Nec
-    Left = 816
-    Top = 72
+    Left = 840
+    Top = 16
   end
   object sdsTalao_Est: TSQLDataSet
     NoMetadata = True
@@ -679,5 +679,94 @@ object DMBaixaMaterial: TDMBaixaMaterial
     DataSet = cdsConsPend
     Left = 288
     Top = 328
+  end
+  object sdsMatRes: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select AUX.QTD, AUX.NUM_ORDEM, AUX.ID_PRODUTO, coalesce(AUX.ID_C' +
+      'OR,0) ID_COR,'#13#10'coalesce(AUX.TAMANHO,'#39#39') TAMANHO, AUX.FILIAL, P.N' +
+      'OME NOME_PRODUTO, COMB.NOME NOME_COMBINACAO'#13#10'from ('#13#10'select sum(' +
+      'em.qtd2) qtd , em.num_ordem, em.id_produto, em.id_cor, em.tamanh' +
+      'o, em.filial'#13#10'from estoque_mov_res em'#13#10'group by em.num_ordem, em' +
+      '.id_produto, em.id_cor, em.tamanho, em.filial) aux'#13#10'LEFT JOIN PR' +
+      'ODUTO P'#13#10'ON AUX.ID_PRODUTO = P.ID'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON' +
+      ' AUX.ID_COR = COMB.ID'#13#10'where round(aux.qtd,4) > 0'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 688
+    Top = 80
+    object sdsMatResQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object sdsMatResNUM_ORDEM: TIntegerField
+      FieldName = 'NUM_ORDEM'
+    end
+    object sdsMatResID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object sdsMatResID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object sdsMatResTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+    object sdsMatResFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+    object sdsMatResNOME_PRODUTO: TStringField
+      FieldName = 'NOME_PRODUTO'
+      Size = 100
+    end
+    object sdsMatResNOME_COMBINACAO: TStringField
+      FieldName = 'NOME_COMBINACAO'
+      Size = 60
+    end
+  end
+  object dspMatRes: TDataSetProvider
+    DataSet = sdsMatRes
+    Left = 744
+    Top = 80
+  end
+  object cdsMatRes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspMatRes'
+    Left = 792
+    Top = 80
+    object cdsMatResQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsMatResNUM_ORDEM: TIntegerField
+      FieldName = 'NUM_ORDEM'
+    end
+    object cdsMatResID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsMatResID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object cdsMatResTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+    object cdsMatResNOME_PRODUTO: TStringField
+      FieldName = 'NOME_PRODUTO'
+      Size = 100
+    end
+    object cdsMatResNOME_COMBINACAO: TStringField
+      FieldName = 'NOME_COMBINACAO'
+      Size = 60
+    end
+    object cdsMatResFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+  end
+  object dsMatRes: TDataSource
+    DataSet = cdsMatRes
+    Left = 848
+    Top = 80
   end
 end

@@ -1,6 +1,6 @@
 object frmBaixa_Material_OP: TfrmBaixa_Material_OP
-  Left = 222
-  Top = 78
+  Left = 185
+  Top = 105
   Width = 987
   Height = 480
   Caption = 'Baixa Material OP'
@@ -145,6 +145,7 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
     DataSource = DMBaixaMaterial.dsLoteMat
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
     ParentCtl3D = False
+    ReadOnly = True
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -163,7 +164,7 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
     GridStyle.EvenColor = clWindow
     TitleHeight.PixelCount = 24
     FooterColor = clBtnFace
-    ExOptions = [eoCheckBoxSelect, eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+    ExOptions = [eoCheckBoxSelect, eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
     OnGetCellParams = SMDBGrid1GetCellParams
     RegistryKey = 'Software\Scalabium'
     RegistrySection = 'SMDBGrid'
@@ -177,7 +178,6 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
         Alignment = taCenter
         Expanded = False
         FieldName = 'NUM_ORDEM'
-        ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'N'#186' Ordem'
         Visible = True
@@ -186,7 +186,6 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
         Alignment = taCenter
         Expanded = False
         FieldName = 'ITEM'
-        ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Item'
         Width = 29
@@ -196,7 +195,6 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
         Alignment = taCenter
         Expanded = False
         FieldName = 'ID_MATERIAL'
-        ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'ID Material'
         Width = 55
@@ -205,7 +203,6 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
       item
         Expanded = False
         FieldName = 'NOME'
-        ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Nome Material'
         Width = 340
@@ -244,7 +241,6 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
       item
         Expanded = False
         FieldName = 'QTD_EST_BAIXADO'
-        ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Qtd. Estoque Baixado'
         Width = 64
@@ -253,7 +249,6 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
       item
         Expanded = False
         FieldName = 'Saldo'
-        ReadOnly = True
         Title.Alignment = taCenter
         Width = 70
         Visible = True
@@ -269,7 +264,6 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
       item
         Expanded = False
         FieldName = 'UNIDADE'
-        ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Unidade'
         Width = 61
@@ -469,6 +463,7 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
+      OnDblClick = SMDBGrid2DblClick
       Flat = True
       BandsFont.Charset = DEFAULT_CHARSET
       BandsFont.Color = clWindowText

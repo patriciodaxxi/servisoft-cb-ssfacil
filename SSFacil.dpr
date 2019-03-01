@@ -778,7 +778,8 @@ uses
   uProdutoAtualizaPreco in 'uProdutoAtualizaPreco.pas' {frmProdutoAtualizaPreco},
   uDmCadMovProdST in 'uDmCadMovProdST.pas' {DmCadMovProdST: TDataModule},
   uCadMovProdST in 'uCadMovProdST.pas' {frmCadMovProdST},
-  UCadProduto_ST in 'UCadProduto_ST.pas' {frmCadProduto_ST};
+  UCadProduto_ST in 'UCadProduto_ST.pas' {frmCadProduto_ST},
+  UAjusteEstoqueOP_Res in 'UAjusteEstoqueOP_Res.pas' {frmAjusteEstoqueOP_Res};
 
 {$R *.res}
 

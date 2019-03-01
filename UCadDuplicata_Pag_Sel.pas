@@ -102,7 +102,11 @@ begin
 
   fDMCadDuplicata.vDtPgtoSel       := DtPagamento.Date;
   fDMCadDuplicata.vID_ContaPgtoSel := RxDBLookupCombo1.KeyValue;
-  fDMCadDuplicata.vId_Contabil_OP_Baixa := RxDBLookupCombo12.KeyValue;
+  if Trim(RxDBLookupCombo12.Text) <> '' then
+    fDMCadDuplicata.vId_Contabil_OP_Baixa := RxDBLookupCombo12.KeyValue
+  else
+    fDMCadDuplicata.vId_Contabil_OP_Baixa := 0;
+
   if RxDBLookupCombo2.Text <> '' then
     fDMCadDuplicata.vID_FormaPgto := RxDBLookupCombo2.KeyValue
   else

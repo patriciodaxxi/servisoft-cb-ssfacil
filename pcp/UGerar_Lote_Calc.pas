@@ -1406,6 +1406,7 @@ var
   vQtdAux: Real;
   vID_CorAnt, vID_MaterialAnt: Integer;
 begin
+
   fDMCadLote.cdsConsumo.Close;
   if Tipo = 'T' then
   begin
@@ -1428,6 +1429,8 @@ begin
   fDMCadLote.cdsConsumo.First;
   while not fDMCadLote.cdsConsumo.Eof do
   begin
+    //if fDMCadLote.cdsConsumoID_MATERIAL.AsInteger = 55 then
+    //  ShowMessage('Aqui');
     vCarimbo := fDMCadLote.cdsLoteCARIMBO.AsString;
     //15/11/2016  Foi incluido o if do usa carimbo
     if (fDMCadLote.cdsConsumoTRANSFER.AsString <> 'S') and (fDMCadLote.cdsConsumoUSA_CARIMBO_OC.AsString <> 'S') then

@@ -140,6 +140,26 @@ type
     dsConsPend: TDataSource;
     cdsConsPendSALDO: TFloatField;
     cdsConsPendNUM_ORDEM: TIntegerField;
+    sdsMatRes: TSQLDataSet;
+    dspMatRes: TDataSetProvider;
+    cdsMatRes: TClientDataSet;
+    dsMatRes: TDataSource;
+    cdsMatResQTD: TFloatField;
+    cdsMatResNUM_ORDEM: TIntegerField;
+    cdsMatResID_PRODUTO: TIntegerField;
+    cdsMatResID_COR: TIntegerField;
+    cdsMatResTAMANHO: TStringField;
+    cdsMatResNOME_PRODUTO: TStringField;
+    cdsMatResNOME_COMBINACAO: TStringField;
+    sdsMatResQTD: TFloatField;
+    sdsMatResNUM_ORDEM: TIntegerField;
+    sdsMatResID_PRODUTO: TIntegerField;
+    sdsMatResID_COR: TIntegerField;
+    sdsMatResTAMANHO: TStringField;
+    sdsMatResFILIAL: TIntegerField;
+    sdsMatResNOME_PRODUTO: TStringField;
+    sdsMatResNOME_COMBINACAO: TStringField;
+    cdsMatResFILIAL: TIntegerField;
     procedure cdsLoteMatCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
   private

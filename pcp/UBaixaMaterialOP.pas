@@ -45,6 +45,7 @@ type
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure NxPanel1Click(Sender: TObject);
+    procedure SMDBGrid2DblClick(Sender: TObject);
   private
     { Private declarations }
     fDMBaixaMaterial: TDMBaixaMaterial;
@@ -107,6 +108,7 @@ var
   sds: TSQLDataSet;
   vID_Estoque, vID_Estoque_Res : Integer;
   vGravou : Boolean;
+
 begin
   fDMEstoque     := TDMEstoque.Create(Self);
   fDMEstoque_Res := TDMEstoque_Res.Create(Self);
@@ -166,7 +168,7 @@ begin
                                                          'S', 'LOT',
                                                          fDMBaixaMaterial.cdsLoteMatEstQTD_RES.AsFloat,
                                                          fDMBaixaMaterial.cdsLoteMatEstDTMOVIMENTO.AsDateTime,'');
-         fDMBaixaMaterial.cdsLoteMatEstID_MOVESTOQUE_RES.AsInteger := vID_Estoque_Res;
+          fDMBaixaMaterial.cdsLoteMatEstID_MOVESTOQUE_RES.AsInteger := vID_Estoque_Res;
         end;
         fDMBaixaMaterial.cdsLoteMatEstID_MOVESTOQUE.AsInteger     := vID_Estoque;
         fDMBaixaMaterial.cdsLoteMatEst.Post;
@@ -235,6 +237,14 @@ procedure TfrmBaixa_Material_OP.NxPanel1Click(Sender: TObject);
 begin
   fDMBaixaMaterial.cdsConsPend.Close;
   fDMBaixaMaterial.cdsConsPend.Open;
+end;
+
+procedure TfrmBaixa_Material_OP.SMDBGrid2DblClick(Sender: TObject);
+begin
+  if not (fDMBaixaMaterial.cdsConsPend.Active) or (fDMBaixaMaterial.cdsConsPendNUM_ORDEM.AsInteger <= 0) then
+    exit;
+  edtOrdemProducao.Text := fDMBaixaMaterial.cdsConsPendNUM_ORDEM.AsString;
+  btnPesquisaClick(Sender);
 end;
 
 end.

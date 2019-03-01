@@ -346,6 +346,7 @@ type
     AtualizarPreosporCdigodeBarras1: TMenuItem;
     N54: TMenuItem;
     MovimentoProdutoST1: TMenuItem;
+    AjusteEstoqueReservaPorOrdemProduo1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -589,6 +590,7 @@ type
     procedure ConsultaNotas1Click(Sender: TObject);
     procedure AtualizarPreosporCdigodeBarras1Click(Sender: TObject);
     procedure MovimentoProdutoST1Click(Sender: TObject);
+    procedure AjusteEstoqueReservaPorOrdemProduo1Click(Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -649,7 +651,7 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina,
   UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida,
   UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas,
-  uProdutoAtualizaPreco, uCadMovProdST;
+  uProdutoAtualizaPreco, uCadMovProdST, UAjusteEstoqueOP_Res;
 
 {$R *.dfm}
 
@@ -2108,6 +2110,11 @@ end;
 procedure TfMenu.MovimentoProdutoST1Click(Sender: TObject);
 begin
   OpenForm(TfrmCadMovProdST,wsMaximized);
+end;
+
+procedure TfMenu.AjusteEstoqueReservaPorOrdemProduo1Click(Sender: TObject);
+begin
+  OpenForm(TfrmAjusteEstoqueOP_Res,wsMaximized);
 end;
 
 initialization
