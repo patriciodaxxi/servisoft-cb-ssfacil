@@ -774,7 +774,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object Label9: TLabel
           Left = 16
-          Top = 264
+          Top = 288
           Width = 243
           Height = 13
           Alignment = taRightJustify
@@ -782,11 +782,18 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object Label10: TLabel
           Left = 7
-          Top = 287
+          Top = 311
           Width = 252
           Height = 13
           Alignment = taRightJustify
           Caption = 'Imprimir o Material que esta cadastrado na Posi'#231#227'o 2:'
+        end
+        object Label11: TLabel
+          Left = 128
+          Top = 176
+          Width = 66
+          Height = 13
+          Caption = 'Tipo Estoque:'
         end
         object DBEdit1: TDBEdit
           Left = 128
@@ -813,7 +820,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object RzGroupBox1: TRzGroupBox
           Left = 128
-          Top = 178
+          Top = 202
           Width = 451
           Height = 65
           BorderColor = clNavy
@@ -993,7 +1000,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object RxDBLookupCombo1: TRxDBLookupCombo
           Left = 263
-          Top = 257
+          Top = 281
           Width = 329
           Height = 21
           DropDownCount = 8
@@ -1006,7 +1013,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object RxDBLookupCombo2: TRxDBLookupCombo
           Left = 263
-          Top = 280
+          Top = 304
           Width = 329
           Height = 21
           DropDownCount = 8
@@ -1016,6 +1023,26 @@ object frmCadProcesso: TfrmCadProcesso
           LookupDisplay = 'NOME'
           LookupSource = DmCadSetor.dsPosicao
           TabOrder = 13
+        end
+        object RxDBComboBox2: TRxDBComboBox
+          Left = 197
+          Top = 172
+          Width = 172
+          Height = 21
+          Style = csDropDownList
+          DataField = 'ESTOQUE'
+          DataSource = DmCadSetor.dsProcesso
+          EnableValues = True
+          ItemHeight = 13
+          Items.Strings = (
+            'Entrar no Estoque'
+            'Sair do Estoque'
+            'N'#227'o gerar Estoque')
+          TabOrder = 14
+          Values.Strings = (
+            'E'
+            'S'
+            'N')
         end
       end
     end
