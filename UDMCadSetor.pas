@@ -162,6 +162,8 @@ type
     qParametros_LoteLOTE_CALCADO_NOVO: TStringField;
     sdsProcessoESTOQUE: TStringField;
     cdsProcessoESTOQUE: TStringField;
+    sdsProcessoESTOQUE_CRU: TStringField;
+    cdsProcessoESTOQUE_CRU: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

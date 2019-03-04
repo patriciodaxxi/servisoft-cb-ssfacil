@@ -1044,6 +1044,18 @@ object frmCadProcesso: TfrmCadProcesso
             'S'
             'N')
         end
+        object DBCheckBox8: TDBCheckBox
+          Left = 376
+          Top = 173
+          Width = 281
+          Height = 17
+          Caption = 'Baixar Estoque Pelo Cru (Semi Acabado)'
+          DataField = 'ESTOQUE_CRU'
+          DataSource = DmCadSetor.dsProcesso
+          TabOrder = 15
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
       end
     end
   end
