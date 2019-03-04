@@ -1,6 +1,6 @@
 object fCobRetorno: TfCobRetorno
-  Left = 288
-  Top = 90
+  Left = 189
+  Top = 84
   Width = 988
   Height = 563
   Caption = 'fCobRetorno'
@@ -21,7 +21,7 @@ object fCobRetorno: TfCobRetorno
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 980
+    Width = 972
     Height = 51
     Align = alTop
     Color = clSilver
@@ -120,8 +120,8 @@ object fCobRetorno: TfCobRetorno
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 51
-    Width = 980
-    Height = 408
+    Width = 972
+    Height = 400
     Align = alClient
     Ctl3D = False
     DataSource = DMCob_Eletronica.dsmRetorno
@@ -423,8 +423,8 @@ object fCobRetorno: TfCobRetorno
   end
   object Panel2: TPanel
     Left = 0
-    Top = 476
-    Width = 980
+    Top = 468
+    Width = 972
     Height = 56
     Align = alBottom
     Color = clSilver
@@ -558,7 +558,7 @@ object fCobRetorno: TfCobRetorno
     object stat1: TStatusBar
       Left = 1
       Top = 39
-      Width = 978
+      Width = 970
       Height = 16
       Panels = <
         item
@@ -573,8 +573,8 @@ object fCobRetorno: TfCobRetorno
   end
   object StaticText1: TStaticText
     Left = 0
-    Top = 459
-    Width = 980
+    Top = 451
+    Width = 972
     Height = 17
     Align = alBottom
     BevelKind = bkTile

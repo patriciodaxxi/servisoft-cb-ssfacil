@@ -867,6 +867,11 @@ type
     cdsDuplicata_CobID_DUPLICATA_HIST: TIntegerField;
     cdsDuplicata_CobID_CONTA: TIntegerField;
     dsDuplicata_Cob: TDataSource;
+    qParametros_FinID_CONTABIL_OPE_BAIXA: TIntegerField;
+    qParametros_Geral: TSQLQuery;
+    qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField;
+    sdsDuplicataID_CONTABIL_OPE_BAIXA: TIntegerField;
+    cdsDuplicataID_CONTABIL_OPE_BAIXA: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mRetornoNewRecord(DataSet: TDataSet);
     procedure RLPreviewSetup1Send(Sender: TObject);
@@ -1486,6 +1491,9 @@ begin
       cdsDuplicataPROTESTADO.AsString := 'S';
     if trim(vAceite) <> '' then
       cdsDuplicataACEITE.AsString := vAceite;
+    if qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S' then
+      cdsDuplicataID_CONTABIL_OPE_BAIXA.AsInteger := qParametros_FinID_CONTABIL_OPE_BAIXA.AsInteger;
+
     cdsDuplicata.Post;
     cdsDuplicata.ApplyUpdates(0);
 

@@ -640,7 +640,8 @@ begin
       fDMCadDuplicata.prc_Gravar_Financeiro(fDmCadDuplicata.cdsDuplicataVLR_TAXA_BANCARIA.AsFloat, 'T', fDMCadDuplicata.cdsDuplicataID_TIPOCOBRANCA.AsInteger);
 
     fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat := StrToFloat(FormatFloat('0.00', 0));
-
+    if fDmCadDuplicata.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S' then
+      fDmCadDuplicata.cdsDuplicataID_CONTABIL_OPE_BAIXA.AsInteger := fDmCadDuplicata.qParametros_FinID_CONTABIL_OPE_BAIXA.AsInteger;
     fDMCadDuplicata.cdsDuplicata.Post;
 
     if fDMCadDuplicata.cdsDuplicata.State in [dsEdit, dsInsert] then

@@ -1,8 +1,8 @@
 object DMCadDuplicata: TDMCadDuplicata
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 50
-  Top = 19
+  Left = 224
+  Top = 10
   Height = 687
   Width = 1209
   object sdsDuplicata: TSQLDataSet
@@ -270,7 +270,7 @@ object DMCadDuplicata: TDMCadDuplicata
     Options = [poCascadeDeletes]
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspDuplicataUpdateError
-    Left = 146
+    Left = 106
     Top = 9
   end
   object cdsDuplicata: TClientDataSet
@@ -280,7 +280,7 @@ object DMCadDuplicata: TDMCadDuplicata
     ProviderName = 'dspDuplicata'
     BeforePost = cdsDuplicataBeforePost
     OnNewRecord = cdsDuplicataNewRecord
-    Left = 210
+    Left = 138
     Top = 9
     object cdsDuplicataID: TIntegerField
       FieldName = 'ID'
@@ -553,13 +553,13 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDuplicata: TDataSource
     DataSet = cdsDuplicata
-    Left = 282
+    Left = 170
     Top = 9
   end
   object dsDuplicata_Mestre: TDataSource
     DataSet = sdsDuplicata
     Left = 42
-    Top = 65
+    Top = 57
   end
   object sdsDuplicata_Hist: TSQLDataSet
     NoMetadata = True
@@ -575,8 +575,8 @@ object DMCadDuplicata: TDMCadDuplicata
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 82
-    Top = 113
+    Left = 66
+    Top = 105
     object sdsDuplicata_HistID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -661,8 +661,8 @@ object DMCadDuplicata: TDMCadDuplicata
     Params = <>
     OnCalcFields = cdsDuplicata_HistCalcFields
     OnNewRecord = cdsDuplicata_HistNewRecord
-    Left = 178
-    Top = 113
+    Left = 98
+    Top = 105
     object cdsDuplicata_HistID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -789,8 +789,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDuplicata_Hist: TDataSource
     DataSet = cdsDuplicata_Hist
-    Left = 250
-    Top = 113
+    Left = 130
+    Top = 105
   end
   object sdsPessoa: TSQLDataSet
     NoMetadata = True
@@ -809,21 +809,21 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 128
+    Left = 264
+    Top = 296
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
-    Left = 536
-    Top = 128
+    Left = 296
+    Top = 296
   end
   object cdsPessoa: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspPessoa'
-    Left = 576
-    Top = 128
+    Left = 328
+    Top = 296
     object cdsPessoaCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -944,8 +944,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsPessoa: TDataSource
     DataSet = cdsPessoa
-    Left = 616
-    Top = 128
+    Left = 360
+    Top = 296
   end
   object sdsVendedor: TSQLDataSet
     NoMetadata = True
@@ -957,21 +957,21 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 176
+    Left = 264
+    Top = 352
   end
   object dspVendedor: TDataSetProvider
     DataSet = sdsVendedor
-    Left = 536
-    Top = 176
+    Left = 296
+    Top = 352
   end
   object cdsVendedor: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspVendedor'
-    Left = 576
-    Top = 176
+    Left = 328
+    Top = 352
     object cdsVendedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -994,8 +994,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsVendedor: TDataSource
     DataSet = cdsVendedor
-    Left = 616
-    Top = 176
+    Left = 360
+    Top = 352
   end
   object sdsTipoCobranca: TSQLDataSet
     NoMetadata = True
@@ -1004,21 +1004,21 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 232
+    Left = 264
+    Top = 408
   end
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
-    Left = 536
-    Top = 232
+    Left = 296
+    Top = 408
   end
   object cdsTipoCobranca: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspTipoCobranca'
-    Left = 576
-    Top = 232
+    Left = 328
+    Top = 408
     object cdsTipoCobrancaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1068,8 +1068,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsTipoCobranca: TDataSource
     DataSet = cdsTipoCobranca
-    Left = 616
-    Top = 232
+    Left = 360
+    Top = 408
   end
   object sdsContas: TSQLDataSet
     NoMetadata = True
@@ -1080,21 +1080,21 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 496
-    Top = 288
+    Left = 264
+    Top = 456
   end
   object dspContas: TDataSetProvider
     DataSet = sdsContas
-    Left = 536
-    Top = 288
+    Left = 296
+    Top = 456
   end
   object cdsContas: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspContas'
-    Left = 576
-    Top = 288
+    Left = 328
+    Top = 456
     object cdsContasID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1125,8 +1125,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsContas: TDataSource
     DataSet = cdsContas
-    Left = 616
-    Top = 288
+    Left = 360
+    Top = 456
   end
   object sdsDuplicata_Consulta: TSQLDataSet
     NoMetadata = True
@@ -1151,21 +1151,21 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 376
-    Top = 16
+    Left = 264
+    Top = 8
   end
   object dspDuplicata_Consulta: TDataSetProvider
     DataSet = sdsDuplicata_Consulta
-    Left = 464
-    Top = 32
+    Left = 296
+    Top = 8
   end
   object cdsDuplicata_Consulta: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspDuplicata_Consulta'
     OnCalcFields = cdsDuplicata_ConsultaCalcFields
-    Left = 504
-    Top = 56
+    Left = 328
+    Top = 8
     object cdsDuplicata_ConsultaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1513,8 +1513,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDuplicata_Consulta: TDataSource
     DataSet = cdsDuplicata_Consulta
-    Left = 576
-    Top = 32
+    Left = 360
+    Top = 8
   end
   object sdsFilial: TSQLDataSet
     NoMetadata = True
@@ -1523,21 +1523,21 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 336
+    Left = 264
+    Top = 504
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 536
-    Top = 336
+    Left = 296
+    Top = 504
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 576
-    Top = 336
+    Left = 328
+    Top = 504
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1690,8 +1690,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 616
-    Top = 336
+    Left = 360
+    Top = 504
   end
   object qParametros: TSQLQuery
     MaxBlobSize = -1
@@ -1700,8 +1700,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'SELECT *'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 376
-    Top = 120
+    Left = 952
+    Top = 72
     object qParametrosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1884,8 +1884,8 @@ object DMCadDuplicata: TDMCadDuplicata
     Aggregates = <>
     IndexFieldNames = 'ID_Duplicata'
     Params = <>
-    Left = 440
-    Top = 456
+    Left = 632
+    Top = 24
     Data = {
       2F0000009619E0BD0100000018000000010000000000030000002F000C49445F
       4475706C696361746104000100000000000000}
@@ -1895,8 +1895,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsmImpDuplicata: TDataSource
     DataSet = mImpDuplicata
-    Left = 480
-    Top = 456
+    Left = 664
+    Top = 24
   end
   object sdsFinanceiro: TSQLDataSet
     NoMetadata = True
@@ -1905,8 +1905,8 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 80
-    Top = 320
+    Left = 56
+    Top = 256
     object sdsFinanceiroID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1973,8 +1973,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dspFinanceiro: TDataSetProvider
     DataSet = sdsFinanceiro
-    Left = 112
-    Top = 320
+    Left = 88
+    Top = 256
   end
   object cdsFinanceiro: TClientDataSet
     Aggregates = <>
@@ -1982,8 +1982,8 @@ object DMCadDuplicata: TDMCadDuplicata
     Params = <>
     ProviderName = 'dspFinanceiro'
     OnReconcileError = cdsFinanceiroReconcileError
-    Left = 152
-    Top = 320
+    Left = 120
+    Top = 256
     object cdsFinanceiroID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2049,8 +2049,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsFinanceiro: TDataSource
     DataSet = cdsFinanceiro
-    Left = 192
-    Top = 320
+    Left = 152
+    Top = 256
   end
   object sdsCondPgto: TSQLDataSet
     NoMetadata = True
@@ -2059,8 +2059,8 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 298
-    Top = 284
+    Left = 266
+    Top = 60
     object sdsCondPgtoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2077,16 +2077,16 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dspCondPgto: TDataSetProvider
     DataSet = sdsCondPgto
-    Left = 330
-    Top = 284
+    Left = 298
+    Top = 60
   end
   object cdsCondPgto: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspCondPgto'
-    Left = 370
-    Top = 284
+    Left = 330
+    Top = 60
     object cdsCondPgtoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2106,13 +2106,13 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsCondPgto: TDataSource
     DataSet = cdsCondPgto
-    Left = 410
-    Top = 284
+    Left = 362
+    Top = 60
   end
   object dsCondPgto_Mestre: TDataSource
     DataSet = sdsCondPgto
-    Left = 280
-    Top = 320
+    Left = 264
+    Top = 112
   end
   object sdsCondPgto_Dia: TSQLDataSet
     NoMetadata = True
@@ -2128,8 +2128,8 @@ object DMCadDuplicata: TDMCadDuplicata
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 320
-    Top = 360
+    Left = 264
+    Top = 160
     object sdsCondPgto_DiaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2146,8 +2146,8 @@ object DMCadDuplicata: TDMCadDuplicata
     Aggregates = <>
     DataSetField = cdsCondPgtosdsCondPgto_Dia
     Params = <>
-    Left = 376
-    Top = 360
+    Left = 296
+    Top = 160
     object cdsCondPgto_DiaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2177,7 +2177,7 @@ object DMCadDuplicata: TDMCadDuplicata
       'and dup.transferencia_icms = '#39'N'#39
       'GROUP BY DUP.TIPO_ES, DUP.TIPO_MOV,  DUP.FILIAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 896
+    Left = 1016
     Top = 72
     object qTotalAtrasoTIPO_ES: TStringField
       FieldName = 'TIPO_ES'
@@ -2210,8 +2210,8 @@ object DMCadDuplicata: TDMCadDuplicata
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 392
+    Left = 264
+    Top = 552
     object sdsPendenteVLR_RESTANTE: TFloatField
       FieldName = 'VLR_RESTANTE'
     end
@@ -2222,15 +2222,15 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dspPendente: TDataSetProvider
     DataSet = sdsPendente
-    Left = 536
-    Top = 392
+    Left = 296
+    Top = 552
   end
   object cdsPendente: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPendente'
-    Left = 576
-    Top = 392
+    Left = 328
+    Top = 552
     object cdsPendenteVLR_RESTANTE: TFloatField
       FieldName = 'VLR_RESTANTE'
     end
@@ -2308,8 +2308,8 @@ object DMCadDuplicata: TDMCadDuplicata
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 520
-    Top = 496
+    Left = 744
+    Top = 24
     Data = {
       690100009619E0BD01000000180000000E00000000000300000069010A4E756D
       5F43686571756504000100000000000849445F42616E636F0400010000000000
@@ -2383,8 +2383,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsmCheque: TDataSource
     DataSet = mCheque
-    Left = 560
-    Top = 496
+    Left = 776
+    Top = 24
   end
   object sdsBanco: TSQLDataSet
     NoMetadata = True
@@ -2393,13 +2393,13 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 696
-    Top = 144
+    Left = 464
+    Top = 112
   end
   object dspBanco: TDataSetProvider
     DataSet = sdsBanco
-    Left = 728
-    Top = 144
+    Left = 496
+    Top = 112
   end
   object cdsBanco: TClientDataSet
     Active = True
@@ -2407,8 +2407,8 @@ object DMCadDuplicata: TDMCadDuplicata
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspBanco'
-    Left = 768
-    Top = 144
+    Left = 528
+    Top = 112
     object cdsBancoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2429,8 +2429,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsBanco: TDataSource
     DataSet = cdsBanco
-    Left = 808
-    Top = 144
+    Left = 560
+    Top = 112
   end
   object sdsCheque: TSQLDataSet
     NoMetadata = True
@@ -2444,8 +2444,8 @@ object DMCadDuplicata: TDMCadDuplicata
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 72
-    Top = 360
+    Left = 56
+    Top = 304
     object sdsChequeID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2527,8 +2527,8 @@ object DMCadDuplicata: TDMCadDuplicata
   object dspCheque: TDataSetProvider
     DataSet = sdsCheque
     UpdateMode = upWhereKeyOnly
-    Left = 128
-    Top = 360
+    Left = 88
+    Top = 304
   end
   object cdsCheque: TClientDataSet
     Aggregates = <>
@@ -2536,8 +2536,8 @@ object DMCadDuplicata: TDMCadDuplicata
     Params = <>
     ProviderName = 'dspCheque'
     BeforePost = cdsChequeBeforePost
-    Left = 184
-    Top = 360
+    Left = 120
+    Top = 304
     object cdsChequeID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2624,13 +2624,13 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsCheque: TDataSource
     DataSet = cdsCheque
-    Left = 240
-    Top = 360
+    Left = 152
+    Top = 304
   end
   object dsCheque_Mestre: TDataSource
     DataSet = sdsCheque
-    Left = 40
-    Top = 392
+    Left = 32
+    Top = 352
   end
   object sdsCheque_Tit: TSQLDataSet
     NoMetadata = True
@@ -2646,8 +2646,8 @@ object DMCadDuplicata: TDMCadDuplicata
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
-    Top = 432
+    Left = 56
+    Top = 400
     object sdsCheque_TitID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2681,8 +2681,8 @@ object DMCadDuplicata: TDMCadDuplicata
     DataSetField = cdsChequesdsCheque_Tit
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 168
-    Top = 432
+    Left = 88
+    Top = 400
     object cdsCheque_TitID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2713,8 +2713,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsCheque_Tit: TDataSource
     DataSet = cdsCheque_Tit
-    Left = 232
-    Top = 432
+    Left = 120
+    Top = 400
   end
   object sdsPagto: TSQLDataSet
     NoMetadata = True
@@ -2740,20 +2740,20 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 704
-    Top = 216
+    Left = 464
+    Top = 168
   end
   object dspPagto: TDataSetProvider
     DataSet = sdsPagto
-    Left = 736
-    Top = 216
+    Left = 496
+    Top = 168
   end
   object cdsPagto: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPagto'
-    Left = 776
-    Top = 216
+    Left = 528
+    Top = 168
     object cdsPagtoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2868,8 +2868,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsPagto: TDataSource
     DataSet = cdsPagto
-    Left = 816
-    Top = 216
+    Left = 560
+    Top = 168
   end
   object sdsContaOrcamento: TSQLDataSet
     NoMetadata = True
@@ -2884,21 +2884,21 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 697
-    Top = 16
+    Left = 265
+    Top = 208
   end
   object dspContaOrcamento: TDataSetProvider
     DataSet = sdsContaOrcamento
-    Left = 729
-    Top = 16
+    Left = 297
+    Top = 208
   end
   object cdsContaOrcamento: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'DESCRICAO'
     Params = <>
     ProviderName = 'dspContaOrcamento'
-    Left = 769
-    Top = 16
+    Left = 329
+    Top = 208
     object cdsContaOrcamentoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2925,8 +2925,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsContaOrcamento: TDataSource
     DataSet = cdsContaOrcamento
-    Left = 809
-    Top = 16
+    Left = 361
+    Top = 208
   end
   object qPessoa: TSQLQuery
     MaxBlobSize = -1
@@ -2941,8 +2941,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM PESSOA'
       'WHERE CODIGO = :CODIGO')
     SQLConnection = dmDatabase.scoDados
-    Left = 824
-    Top = 592
+    Left = 888
+    Top = 72
     object qPessoaCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -2965,8 +2965,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM FERIADO'
       'WHERE DATA = :DATA')
     SQLConnection = dmDatabase.scoDados
-    Left = 848
-    Top = 544
+    Left = 888
+    Top = 120
     object qFeriadoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2997,8 +2997,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM DUPLICATA'
       'WHERE TIPO_ES = :TIPO_ES')
     SQLConnection = dmDatabase.scoDados
-    Left = 760
-    Top = 576
+    Left = 888
+    Top = 24
     object qProximaDupNUMDUPLICATA_SEQ: TIntegerField
       FieldName = 'NUMDUPLICATA_SEQ'
     end
@@ -3008,8 +3008,8 @@ object DMCadDuplicata: TDMCadDuplicata
     Aggregates = <>
     IndexFieldNames = 'Parcela'
     Params = <>
-    Left = 624
-    Top = 576
+    Left = 632
+    Top = 72
     Data = {
       520000009619E0BD01000000180000000300000000000300000052000C447456
       656E63696D656E746F04000600000000000A566C7250617263656C6108000400
@@ -3028,8 +3028,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsmGerarDup: TDataSource
     DataSet = mGerarDup
-    Left = 680
-    Top = 576
+    Left = 664
+    Top = 72
   end
   object sdsDescontada: TSQLDataSet
     NoMetadata = True
@@ -3043,8 +3043,8 @@ object DMCadDuplicata: TDMCadDuplicata
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 136
-    Top = 528
+    Left = 48
+    Top = 496
     object sdsDescontadaID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3105,16 +3105,16 @@ object DMCadDuplicata: TDMCadDuplicata
   object dspDescontada: TDataSetProvider
     DataSet = sdsDescontada
     UpdateMode = upWhereKeyOnly
-    Left = 168
-    Top = 528
+    Left = 80
+    Top = 496
   end
   object cdsDescontada: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspDescontada'
-    Left = 208
-    Top = 528
+    Left = 112
+    Top = 496
     object cdsDescontadaID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3177,8 +3177,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDescontada: TDataSource
     DataSet = cdsDescontada
-    Left = 248
-    Top = 528
+    Left = 144
+    Top = 496
   end
   object mTitulos: TClientDataSet
     Active = True
@@ -3233,8 +3233,8 @@ object DMCadDuplicata: TDMCadDuplicata
     IndexFieldNames = 'ID'
     Params = <>
     StoreDefs = True
-    Left = 456
-    Top = 592
+    Left = 744
+    Top = 72
     Data = {
       FB0000009619E0BD010000001800000009000000000003000000FB0002494404
       000100000000000A49445F436C69656E746504000100000000000C4E6F6D655F
@@ -3277,8 +3277,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsmTitulos: TDataSource
     DataSet = mTitulos
-    Left = 496
-    Top = 592
+    Left = 776
+    Top = 72
   end
   object sdsDescontada_Consulta: TSQLDataSet
     NoMetadata = True
@@ -3292,22 +3292,22 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 792
-    Top = 296
+    Left = 464
+    Top = 216
   end
   object dspDescontada_Consulta: TDataSetProvider
     DataSet = sdsDescontada_Consulta
     UpdateMode = upWhereKeyOnly
-    Left = 824
-    Top = 296
+    Left = 496
+    Top = 216
   end
   object cdsDescontada_Consulta: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspDescontada_Consulta'
-    Left = 864
-    Top = 296
+    Left = 528
+    Top = 216
     object cdsDescontada_ConsultaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3378,15 +3378,15 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDescontada_Consulta: TDataSource
     DataSet = cdsDescontada_Consulta
-    Left = 904
-    Top = 296
+    Left = 560
+    Top = 216
   end
   object mExcluir_Dup: TClientDataSet
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 928
-    Top = 568
+    Left = 744
+    Top = 184
     Data = {
       2F0000009619E0BD0100000018000000010000000000030000002F000C49445F
       4475706C696361746104000100000000000000}
@@ -3434,8 +3434,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'end.')
     OnBeforePrint = frxReport1BeforePrint
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 784
-    Top = 423
+    Left = 952
+    Top = 471
     Datasets = <
       item
         DataSet = frxDBDataset3
@@ -3838,8 +3838,8 @@ object DMCadDuplicata: TDMCadDuplicata
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 840
-    Top = 424
+    Left = 984
+    Top = 472
   end
   object frxMailExport1: TfrxMailExport
     UseFileCache = True
@@ -3853,12 +3853,12 @@ object DMCadDuplicata: TDMCadDuplicata
     ConfurmReading = False
     UseMAPI = SMTP
     MAPISendFlag = 0
-    Left = 880
-    Top = 424
+    Left = 1016
+    Top = 472
   end
   object frxRichObject1: TfrxRichObject
-    Left = 912
-    Top = 424
+    Left = 1048
+    Top = 472
   end
   object frxDBDataset2: TfrxDBDataset
     UserName = 'frxmTitulos'
@@ -3875,8 +3875,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'CNPJ_Cliente=CNPJ_Cliente')
     DataSource = dsmTitulos
     BCDToCurrency = False
-    Left = 832
-    Top = 472
+    Left = 984
+    Top = 520
   end
   object sdsDescontada_Imp: TSQLDataSet
     NoMetadata = True
@@ -3896,21 +3896,21 @@ object DMCadDuplicata: TDMCadDuplicata
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 784
-    Top = 368
+    Left = 464
+    Top = 264
   end
   object dspDescontada_Imp: TDataSetProvider
     DataSet = sdsDescontada_Imp
-    Left = 816
-    Top = 368
+    Left = 496
+    Top = 264
   end
   object cdsDescontada_Imp: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspDescontada_Imp'
-    Left = 856
-    Top = 368
+    Left = 528
+    Top = 264
     object cdsDescontada_ImpID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3996,8 +3996,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDescontada_Imp: TDataSource
     DataSet = cdsDescontada_Imp
-    Left = 896
-    Top = 368
+    Left = 560
+    Top = 264
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxDescontada_Imp'
@@ -4030,13 +4030,13 @@ object DMCadDuplicata: TDMCadDuplicata
       'FONE=FONE')
     DataSource = dsDescontada_Imp
     BCDToCurrency = False
-    Left = 784
-    Top = 472
+    Left = 952
+    Top = 520
   end
   object dsDescontada_Mestre: TDataSource
     DataSet = sdsDescontada
-    Left = 72
-    Top = 568
+    Left = 48
+    Top = 544
   end
   object sdsDescontada_Valores: TSQLDataSet
     NoMetadata = True
@@ -4052,7 +4052,7 @@ object DMCadDuplicata: TDMCadDuplicata
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 152
+    Left = 48
     Top = 592
     object sdsDescontada_ValoresID: TIntegerField
       FieldName = 'ID'
@@ -4083,8 +4083,8 @@ object DMCadDuplicata: TDMCadDuplicata
     DataSetField = cdsDescontadasdsDescontada_Valores
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 200
-    Top = 584
+    Left = 80
+    Top = 592
     object cdsDescontada_ValoresID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -4111,8 +4111,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDescontada_Valores: TDataSource
     DataSet = cdsDescontada_Valores
-    Left = 272
-    Top = 584
+    Left = 112
+    Top = 592
   end
   object sdsCadastro_Valores: TSQLDataSet
     NoMetadata = True
@@ -4121,21 +4121,21 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 200
+    Left = 464
+    Top = 360
   end
   object dspCadastro_Valores: TDataSetProvider
     DataSet = sdsCadastro_Valores
-    Left = 968
-    Top = 200
+    Left = 496
+    Top = 360
   end
   object cdsCadastro_Valores: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ORDEM'
     Params = <>
     ProviderName = 'dspCadastro_Valores'
-    Left = 1008
-    Top = 200
+    Left = 528
+    Top = 360
     object cdsCadastro_ValoresID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4153,8 +4153,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsCadastro_Valores: TDataSource
     DataSet = cdsCadastro_Valores
-    Left = 1048
-    Top = 200
+    Left = 560
+    Top = 360
   end
   object qConta_Orcamento: TSQLQuery
     MaxBlobSize = -1
@@ -4169,8 +4169,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM CONTA_ORCAMENTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 376
-    Top = 496
+    Left = 952
+    Top = 120
     object qConta_OrcamentoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4232,8 +4232,8 @@ object DMCadDuplicata: TDMCadDuplicata
     IndexFieldNames = 'Item'
     Params = <>
     StoreDefs = True
-    Left = 1016
-    Top = 504
+    Left = 632
+    Top = 128
     Data = {
       B00000009619E0BD010000001800000007000000000003000000B00002494404
       00010000000000044974656D04000100000000000A49445F56616C6F72657304
@@ -4268,8 +4268,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsmCadastro: TDataSource
     DataSet = mCadastro
-    Left = 1048
-    Top = 504
+    Left = 664
+    Top = 128
   end
   object sdsDescontada_Imp_Valores: TSQLDataSet
     NoMetadata = True
@@ -4283,22 +4283,22 @@ object DMCadDuplicata: TDMCadDuplicata
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 968
-    Top = 360
+    Left = 464
+    Top = 456
   end
   object dspDescontada_Imp_Valores: TDataSetProvider
     DataSet = sdsDescontada_Imp_Valores
     UpdateMode = upWhereKeyOnly
-    Left = 1000
-    Top = 360
+    Left = 496
+    Top = 456
   end
   object cdsDescontada_Imp_Valores: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspDescontada_Imp_Valores'
-    Left = 1040
-    Top = 360
+    Left = 528
+    Top = 456
     object cdsDescontada_Imp_ValoresID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4324,8 +4324,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDescontada_Imp_Valores: TDataSource
     DataSet = cdsDescontada_Imp_Valores
-    Left = 1080
-    Top = 360
+    Left = 560
+    Top = 456
   end
   object qParametros_Fin: TSQLQuery
     MaxBlobSize = -1
@@ -4335,8 +4335,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM PARAMETROS_FIN'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 680
-    Top = 392
+    Left = 952
+    Top = 24
     object qParametros_FinID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4401,6 +4401,9 @@ object DMCadDuplicata: TDMCadDuplicata
       FixedChar = True
       Size = 1
     end
+    object qParametros_FinID_CONTABIL_OPE_BAIXA: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_BAIXA'
+    end
   end
   object qParametros_Usuario: TSQLQuery
     MaxBlobSize = -1
@@ -4415,8 +4418,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM PARAMETROS_USUARIO'
       'WHERE USUARIO = :USUARIO')
     SQLConnection = dmDatabase.scoDados
-    Left = 664
-    Top = 504
+    Left = 984
+    Top = 24
     object qParametros_UsuarioID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4465,8 +4468,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM PARAMETROS_GERAL'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 376
-    Top = 544
+    Left = 1048
+    Top = 24
     object qParametros_GeralID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4489,8 +4492,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM PARAMETROS_COM'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 376
-    Top = 600
+    Left = 1016
+    Top = 24
     object qParametros_ComID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4557,8 +4560,8 @@ object DMCadDuplicata: TDMCadDuplicata
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 1000
-    Top = 128
+    Left = 632
+    Top = 184
     Data = {
       3C0100009619E0BD01000000180000000A0000000000030000003C0102494404
       000100000000000C4E756D4475706C6963617461010049000000010005574944
@@ -4607,8 +4610,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsmLeItau: TDataSource
     DataSet = mLeItau
-    Left = 1056
-    Top = 120
+    Left = 664
+    Top = 184
   end
   object mLeItau2: TClientDataSet
     Active = True
@@ -4651,8 +4654,8 @@ object DMCadDuplicata: TDMCadDuplicata
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 1000
-    Top = 80
+    Left = 744
+    Top = 128
     Data = {
       DC0000009619E0BD010000001800000007000000000003000000DC0002494404
       000100000000000C4E756D4475706C6963617461010049000000010005574944
@@ -4693,8 +4696,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsmLeItau2: TDataSource
     DataSet = mLeItau2
-    Left = 1032
-    Top = 80
+    Left = 776
+    Top = 128
   end
   object sdsItau: TSQLDataSet
     CommandText = 
@@ -4705,20 +4708,20 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1008
-    Top = 24
+    Left = 464
+    Top = 8
   end
   object dspItau: TDataSetProvider
     DataSet = sdsItau
-    Left = 1040
-    Top = 24
+    Left = 496
+    Top = 8
   end
   object cdsItau: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspItau'
-    Left = 1072
-    Top = 24
+    Left = 528
+    Top = 8
     object cdsItauID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4975,8 +4978,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM duplicata D'
       'WHERE D.ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1104
-    Top = 80
+    Left = 1048
+    Top = 72
     object qItauHistID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5083,8 +5086,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'TELEFONE1=TELEFONE1')
     DataSource = dsDuplicata_Consulta
     BCDToCurrency = False
-    Left = 888
-    Top = 472
+    Left = 1016
+    Top = 520
   end
   object sdsContabil_Ope: TSQLDataSet
     NoMetadata = True
@@ -5093,21 +5096,21 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 960
-    Top = 250
+    Left = 464
+    Top = 410
   end
   object dspContabil_Ope: TDataSetProvider
     DataSet = sdsContabil_Ope
-    Left = 992
-    Top = 250
+    Left = 496
+    Top = 410
   end
   object cdsContabil_Ope: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspContabil_Ope'
-    Left = 1032
-    Top = 250
+    Left = 528
+    Top = 410
     object cdsContabil_OpeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5119,8 +5122,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsContabil_Ope: TDataSource
     DataSet = cdsContabil_Ope
-    Left = 1080
-    Top = 250
+    Left = 560
+    Top = 410
   end
   object qParametros_Cta_Orc: TSQLQuery
     MaxBlobSize = -1
@@ -5129,8 +5132,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'SELECT *'
       'FROM PARAMETROS_CTA_ORC')
     SQLConnection = dmDatabase.scoDados
-    Left = 352
-    Top = 192
+    Left = 920
+    Top = 24
     object qParametros_Cta_OrcID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5152,8 +5155,8 @@ object DMCadDuplicata: TDMCadDuplicata
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 984
-    Top = 432
+    Left = 464
+    Top = 512
     object sdsCarteiraID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5191,15 +5194,15 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dspCarteira: TDataSetProvider
     DataSet = sdsCarteira
-    Left = 1032
-    Top = 432
+    Left = 496
+    Top = 512
   end
   object cdsCarteira: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCarteira'
-    Left = 1080
-    Top = 432
+    Left = 528
+    Top = 512
     object cdsCarteiraID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5237,8 +5240,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsCarteira: TDataSource
     DataSet = cdsCarteira
-    Left = 1120
-    Top = 432
+    Left = 560
+    Top = 512
   end
   object qFormaPgto: TSQLQuery
     MaxBlobSize = -1
@@ -5253,8 +5256,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM TIPOCOBRANCA T'
       'WHERE T.ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 432
-    Top = 104
+    Left = 920
+    Top = 72
     object qFormaPgtoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5281,19 +5284,19 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1024
+    Left = 464
     Top = 568
   end
   object dspChequePend: TDataSetProvider
     DataSet = sdsChequePend
-    Left = 1048
+    Left = 496
     Top = 568
   end
   object cdsChequePend: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspChequePend'
-    Left = 1072
+    Left = 528
     Top = 568
     object cdsChequePendID: TIntegerField
       FieldName = 'ID'
@@ -5384,7 +5387,7 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsChequePend: TDataSource
     DataSet = cdsChequePend
-    Left = 1096
+    Left = 560
     Top = 568
   end
   object qChequeTit: TSQLQuery
@@ -5410,8 +5413,8 @@ object DMCadDuplicata: TDMCadDuplicata
       '  AND T.ID_DUPLICATA = :ID_DUPLICATA'
       '  AND T.ITEM_HIST = :ITEM_HIST')
     SQLConnection = dmDatabase.scoDados
-    Left = 920
-    Top = 520
+    Left = 984
+    Top = 72
     object qChequeTitID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5444,8 +5447,8 @@ object DMCadDuplicata: TDMCadDuplicata
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
-    Top = 480
+    Left = 56
+    Top = 448
     object sdsCheque_HistID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -5470,8 +5473,8 @@ object DMCadDuplicata: TDMCadDuplicata
     DataSetField = cdsChequesdsCheque_Hist
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 168
-    Top = 480
+    Left = 88
+    Top = 448
     object cdsCheque_HistID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -5493,8 +5496,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsCheque_Hist: TDataSource
     DataSet = cdsCheque_Hist
-    Left = 232
-    Top = 480
+    Left = 120
+    Top = 448
   end
   object sdsDuplicata_Cob: TSQLDataSet
     CommandText = 'SELECT *'#13#10'FROM DUPLICATA_COB'#13#10'WHERE ID = :ID'
@@ -5508,8 +5511,8 @@ object DMCadDuplicata: TDMCadDuplicata
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 82
-    Top = 161
+    Left = 66
+    Top = 153
     object sdsDuplicata_CobID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -5554,8 +5557,8 @@ object DMCadDuplicata: TDMCadDuplicata
     DataSetField = cdsDuplicatasdsDuplicata_Cob
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 170
-    Top = 161
+    Left = 98
+    Top = 153
     object cdsDuplicata_CobID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -5597,8 +5600,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDuplicata_Cob: TDataSource
     DataSet = cdsDuplicata_Cob
-    Left = 250
-    Top = 161
+    Left = 130
+    Top = 153
   end
   object sdsOcorrencia: TSQLDataSet
     NoMetadata = True
@@ -5614,21 +5617,21 @@ object DMCadDuplicata: TDMCadDuplicata
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 872
-    Top = 168
+    Left = 464
+    Top = 312
   end
   object dspOcorrencia: TDataSetProvider
     DataSet = sdsOcorrencia
-    Left = 912
-    Top = 168
+    Left = 496
+    Top = 312
   end
   object cdsOcorrencia: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspOcorrencia'
-    Left = 952
-    Top = 168
+    Left = 528
+    Top = 312
     object cdsOcorrenciaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5655,8 +5658,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsOcorrencia: TDataSource
     DataSet = cdsOcorrencia
-    Left = 992
-    Top = 168
+    Left = 560
+    Top = 312
   end
   object sdsDuplicata_CCusto: TSQLDataSet
     NoMetadata = True
@@ -5672,8 +5675,8 @@ object DMCadDuplicata: TDMCadDuplicata
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 80
-    Top = 208
+    Left = 64
+    Top = 200
     object sdsDuplicata_CCustoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -5699,8 +5702,8 @@ object DMCadDuplicata: TDMCadDuplicata
     DataSetField = cdsDuplicatasdsDuplicata_CCusto
     Params = <>
     OnCalcFields = cdsDuplicata_CCustoCalcFields
-    Left = 168
-    Top = 208
+    Left = 96
+    Top = 200
     object cdsDuplicata_CCustoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -5730,8 +5733,8 @@ object DMCadDuplicata: TDMCadDuplicata
   end
   object dsDuplicata_CCusto: TDataSource
     DataSet = cdsDuplicata_CCusto
-    Left = 248
-    Top = 208
+    Left = 128
+    Top = 200
   end
   object qCCusto: TSQLQuery
     MaxBlobSize = -1
@@ -5746,8 +5749,8 @@ object DMCadDuplicata: TDMCadDuplicata
       'FROM CENTROCUSTO C'
       'WHERE C.ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 856
-    Top = 88
+    Left = 920
+    Top = 120
     object qCCustoID: TIntegerField
       FieldName = 'ID'
       Required = True

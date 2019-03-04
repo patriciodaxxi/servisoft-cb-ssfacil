@@ -1106,6 +1106,7 @@ type
     sdsDuplicata_CCustoVALOR: TFloatField;
     cdsDuplicata_CCustoVALOR: TFloatField;
     cdsDuplicata_ConsultaTELEFONE1: TStringField;
+    qParametros_FinID_CONTABIL_OPE_BAIXA: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);

@@ -1,8 +1,8 @@
 object DMCob_Eletronica: TDMCob_Eletronica
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 137
-  Top = 78
+  Left = 24
+  Top = 79
   Height = 617
   Width = 1182
   object sdsDuplicata: TSQLDataSet
@@ -402,6 +402,9 @@ object DMCob_Eletronica: TDMCob_Eletronica
     object sdsDuplicataID_OCORRENCIA_COB: TIntegerField
       FieldName = 'ID_OCORRENCIA_COB'
     end
+    object sdsDuplicataID_CONTABIL_OPE_BAIXA: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_BAIXA'
+    end
   end
   object dspDuplicata: TDataSetProvider
     DataSet = sdsDuplicata
@@ -776,6 +779,9 @@ object DMCob_Eletronica: TDMCob_Eletronica
     end
     object cdsDuplicataID_OCORRENCIA_COB: TIntegerField
       FieldName = 'ID_OCORRENCIA_COB'
+    end
+    object cdsDuplicataID_CONTABIL_OPE_BAIXA: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_BAIXA'
     end
   end
   object dsDuplicata: TDataSource
@@ -4445,6 +4451,9 @@ object DMCob_Eletronica: TDMCob_Eletronica
       FixedChar = True
       Size = 1
     end
+    object qParametros_FinID_CONTABIL_OPE_BAIXA: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_BAIXA'
+    end
   end
   object qContas_Sacado: TSQLQuery
     MaxBlobSize = -1
@@ -4691,5 +4700,20 @@ object DMCob_Eletronica: TDMCob_Eletronica
     DataSet = cdsDuplicata_Cob
     Left = 216
     Top = 128
+  end
+  object qParametros_Geral: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select MOSTRAR_COD_CONTABIL from'
+      'PARAMETROS_GERAL')
+    SQLConnection = dmDatabase.scoDados
+    Left = 408
+    Top = 248
+    object qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField
+      FieldName = 'MOSTRAR_COD_CONTABIL'
+      FixedChar = True
+      Size = 1
+    end
   end
 end
