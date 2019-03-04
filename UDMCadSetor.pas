@@ -160,6 +160,8 @@ type
     cdsProcessoID_POSICAO_IMP2: TIntegerField;
     cdsProcessoclNOme_Posicao_Imp2: TStringField;
     qParametros_LoteLOTE_CALCADO_NOVO: TStringField;
+    sdsProcessoESTOQUE: TStringField;
+    cdsProcessoESTOQUE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

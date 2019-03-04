@@ -378,6 +378,10 @@ object DmCadSetor: TDmCadSetor
     object sdsProcessoID_POSICAO_IMP2: TIntegerField
       FieldName = 'ID_POSICAO_IMP2'
     end
+    object sdsProcessoESTOQUE: TStringField
+      FieldName = 'ESTOQUE'
+      Size = 1
+    end
   end
   object dspProcesso: TDataSetProvider
     DataSet = sdsProcesso
@@ -488,6 +492,10 @@ object DmCadSetor: TDmCadSetor
       FieldName = 'clNOme_Posicao_Imp2'
       Size = 40
       Calculated = True
+    end
+    object cdsProcessoESTOQUE: TStringField
+      FieldName = 'ESTOQUE'
+      Size = 1
     end
   end
   object dsProcesso: TDataSource
