@@ -24,7 +24,7 @@ object frmCadProcesso: TfrmCadProcesso
     Top = 0
     Width = 779
     Height = 511
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -32,7 +32,7 @@ object frmCadProcesso: TfrmCadProcesso
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet

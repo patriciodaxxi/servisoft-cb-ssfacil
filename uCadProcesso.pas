@@ -162,6 +162,10 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'CALCULA_AREA') then
       SMDBGrid1.Columns[i].Visible := (fDMCadSetor.qParametros_SerUSA_PROCESSO_OS.AsString = 'S');
   end;
+  Label9.Visible           := (fDMCadSetor.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  Label10.Visible          := (fDMCadSetor.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  RxDBLookupCombo1.Visible := (fDMCadSetor.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+  RxDBLookupCombo2.Visible := (fDMCadSetor.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
 end;
 
 procedure TfrmCadProcesso.prc_Consultar;

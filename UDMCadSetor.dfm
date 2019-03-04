@@ -636,7 +636,7 @@ object DmCadSetor: TDmCadSetor
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT LOTE_TEXTIL, TIPO_PROCESSO'
+      'SELECT LOTE_TEXTIL, TIPO_PROCESSO, LOTE_CALCADO_NOVO'
       'FROM PARAMETROS_LOTE'
       '')
     SQLConnection = dmDatabase.scoDados
@@ -649,6 +649,11 @@ object DmCadSetor: TDmCadSetor
     end
     object qParametros_LoteTIPO_PROCESSO: TStringField
       FieldName = 'TIPO_PROCESSO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_LoteLOTE_CALCADO_NOVO: TStringField
+      FieldName = 'LOTE_CALCADO_NOVO'
       FixedChar = True
       Size = 1
     end
