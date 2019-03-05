@@ -166,6 +166,8 @@ type
     cdsProcessoESTOQUE_CRU: TStringField;
     sdsProcessoESTOQUE_DT_ES: TStringField;
     cdsProcessoESTOQUE_DT_ES: TStringField;
+    sdsSetorTIPO_SETOR: TStringField;
+    cdsSetorTIPO_SETOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -399,6 +401,7 @@ begin
   cdsSetorQTD_LIMITE_POR_TALAO.AsInteger := 0;
   cdsSetorENTRADA_AUT.AsString           := 'N';
   cdsSetorIMP_MAPA.AsString              := 'N';
+  cdsSetorTIPO_SETOR.AsString            := 'N';
 end;
 
 procedure TDmCadSetor.prc_Inserir_Setor_Proc;

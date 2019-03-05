@@ -65,6 +65,10 @@ object DmCadSetor: TDmCadSetor
       FixedChar = True
       Size = 1
     end
+    object sdsSetorTIPO_SETOR: TStringField
+      FieldName = 'TIPO_SETOR'
+      Size = 1
+    end
   end
   object dspSetor: TDataSetProvider
     DataSet = sdsSetor
@@ -132,6 +136,10 @@ object DmCadSetor: TDmCadSetor
     object cdsSetorLER_CBARRA1: TStringField
       FieldName = 'LER_CBARRA1'
       FixedChar = True
+      Size = 1
+    end
+    object cdsSetorTIPO_SETOR: TStringField
+      FieldName = 'TIPO_SETOR'
       Size = 1
     end
   end

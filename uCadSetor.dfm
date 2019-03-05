@@ -126,7 +126,6 @@ object frmCadSetor: TfrmCadSetor
             FieldName = 'ORDEM_ORC'
             Title.Alignment = taCenter
             Title.Caption = 'Ordem Consulta'
-            Width = 64
             Visible = True
           end
           item
@@ -1002,6 +1001,18 @@ object frmCadSetor: TfrmCadSetor
           DataSource = DmCadSetor.dsSetor
           TabOrder = 11
           ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object DBCheckBox9: TDBCheckBox
+          Left = 128
+          Top = 84
+          Width = 185
+          Height = 17
+          Caption = 'Esteira'
+          DataField = 'TIPO_SETOR'
+          DataSource = DmCadSetor.dsSetor
+          TabOrder = 12
+          ValueChecked = 'E'
           ValueUnchecked = 'N'
         end
       end
