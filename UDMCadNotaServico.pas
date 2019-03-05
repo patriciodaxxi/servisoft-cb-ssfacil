@@ -1622,6 +1622,8 @@ begin
   cdsNotaServicoRETEM_CSLL.AsString      := 'N';
   cdsNotaServicoRETEM_INSS.AsString      := 'N';
   cdsNotaServicoRETEM_PISCOFINS.AsString := 'N';
+  cdsNotaServicoPERC_PIS.AsFloat         := cdsFilialPERC_PIS.AsFloat;
+  cdsNotaServicoPERC_COFINS.AsFloat      := cdsFilialPERC_COFINS.AsFloat;
 end;
 
 procedure TDMCadNotaServico.prc_Excluir;
