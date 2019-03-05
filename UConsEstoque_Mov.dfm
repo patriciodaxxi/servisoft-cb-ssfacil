@@ -407,13 +407,21 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
       OnExit = ceIDPessoaExit
       OnKeyDown = ceIDPessoaKeyDown
     end
+    object ckSemCor: TCheckBox
+      Left = 629
+      Top = 89
+      Width = 97
+      Height = 17
+      Caption = 'Sem Cor'
+      TabOrder = 15
+    end
   end
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 130
     Width = 941
     Height = 388
-    ActivePage = TS_Reserva
+    ActivePage = TS_Produto_Det
     ActivePageDefault = TS_Produto_Det
     Align = alClient
     BackgroundColor = clGray
@@ -426,7 +434,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 1
     TextColors.Selected = clBlue
     OnChange = RzPageControl1Change
@@ -471,7 +479,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 33
+        ColCount = 34
         RowCount = 2
         Columns = <
           item
@@ -539,7 +547,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'DTMOVIMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Movimento'
-            Width = 64
             Visible = True
           end
           item
@@ -606,7 +613,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'PRECO_CUSTO_TOTAL'
             Title.Alignment = taCenter
             Title.Caption = 'Pre'#231'o Custo Total'
-            Width = 64
             Visible = True
           end
           item
@@ -615,7 +621,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'NUM_LOTE_CONTROLE'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Lote Controle'
-            Width = 64
             Visible = True
           end
           item
@@ -641,7 +646,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             Expanded = False
             FieldName = 'VLR_DESCONTO'
             Title.Caption = 'Vlr. Desconto'
-            Width = 64
             Visible = True
           end
           item
@@ -655,7 +659,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'SERIE'
             Title.Alignment = taCenter
             Title.Caption = 'S'#233'rie Nota'
-            Width = 64
             Visible = True
           end
           item
@@ -669,7 +672,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'UNIDADE_ORIG'
             Title.Alignment = taCenter
             Title.Caption = 'Unid. da Nota'
-            Width = 64
             Visible = True
           end
           item
@@ -677,7 +679,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'QTD_ORIG'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. da Nota'
-            Width = 64
             Visible = True
           end
           item
@@ -685,7 +686,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'VLR_UNITARIOORIG'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Unit'#225'rio da Nota'
-            Width = 64
             Visible = True
           end
           item
@@ -709,7 +709,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'ID_PRODUTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Produto'
-            Width = 64
             Visible = True
           end
           item
@@ -718,6 +717,13 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             Title.Alignment = taCenter
             Title.Caption = 'Centro Custo'
             Width = 186
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_COR'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID Cor'
             Visible = True
           end>
       end
@@ -1245,7 +1251,6 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'REFERENCIA'
             Title.Alignment = taCenter
             Title.Caption = 'Refer'#234'ncia'
-            Width = 64
             Visible = True
           end
           item

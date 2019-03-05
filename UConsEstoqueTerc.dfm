@@ -306,9 +306,9 @@ object frmConsEstoqueTerc: TfrmConsEstoqueTerc
     Top = 90
     Width = 920
     Height = 359
-    ActivePage = TS_EmTerceiro
+    ActivePage = TS_DeTerceiro
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     FixedDimension = 19
     object TS_DeTerceiro: TRzTabSheet
@@ -622,7 +622,7 @@ object frmConsEstoqueTerc: TfrmConsEstoqueTerc
         Top = 0
         Width = 916
         Height = 336
-        ActivePage = TS_EmTerceiro_Cli
+        ActivePage = TS_EmTerceiro_Det
         ActivePageDefault = TS_EmTerceiro_Det
         Align = alClient
         Color = 16744448
@@ -631,7 +631,7 @@ object frmConsEstoqueTerc: TfrmConsEstoqueTerc
         ShowShadow = False
         TabColors.Shadow = 16776176
         TabColors.Unselected = clScrollBar
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 0
         TabOrientation = toBottom
         FixedDimension = 19

@@ -439,7 +439,7 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'QTD'
         Title.Alignment = taCenter
         Title.Caption = 'Quantidade'
-        Width = 70
+        Width = 89
         Visible = True
       end
       item
@@ -447,6 +447,7 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'QTD_RESERVA'
         Title.Alignment = taCenter
         Title.Caption = 'Q. Reserva'
+        Width = 94
         Visible = True
       end
       item
@@ -454,7 +455,7 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'QTDGERAL'
         Title.Alignment = taCenter
         Title.Caption = 'Qtd. Geral (Soma das Empresas)'
-        Width = 92
+        Width = 113
         Visible = True
       end
       item

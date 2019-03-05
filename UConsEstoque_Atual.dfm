@@ -280,10 +280,10 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
     Top = 131
     Width = 926
     Height = 387
-    ActivePage = TS_EmTerceiros
+    ActivePage = TS_Estoque
     ActivePageDefault = TS_Estoque
     Align = alClient
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 2
     FixedDimension = 19
     object TS_Estoque: TRzTabSheet
@@ -387,7 +387,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             FieldName = 'QTD'
             Title.Alignment = taCenter
             Title.Caption = 'Quantidade'
-            Width = 70
+            Width = 112
             Visible = True
           end
           item
@@ -395,6 +395,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             FieldName = 'QTD_RESERVA'
             Title.Alignment = taCenter
             Title.Caption = 'Q. Reserva'
+            Width = 97
             Visible = True
           end
           item

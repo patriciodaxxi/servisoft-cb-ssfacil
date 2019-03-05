@@ -73,6 +73,7 @@ type
     Label16: TLabel;
     edtNome_Pessoa: TEdit;
     ceIDPessoa: TCurrencyEdit;
+    ckSemCor: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -374,6 +375,8 @@ begin
     vComando := vComando + ' AND EM.ID_LOCAL_ESTOQUE = ' + IntToStr(rxdbLocalEstoque.KeyValue);
   if (CurrencyEdit1.AsInteger > 0) and (RzPageControl1.ActivePage = TS_Reserva) then
     vComando := vComando + ' AND EM.NUM_ORDEM = ' + IntToStr(CurrencyEdit1.AsInteger);
+  if ckSemCor.Checked then
+    vComando := vComando + ' AND EM.ID_COR = 0 ';
 end;
 
 procedure TfrmConsEstoque_Mov.SMDBGrid2TitleClick(Column: TColumn);
