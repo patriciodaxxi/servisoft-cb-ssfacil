@@ -69,6 +69,9 @@ object DmCadSetor: TDmCadSetor
       FieldName = 'TIPO_SETOR'
       Size = 1
     end
+    object sdsSetorID_SETOR_PRINCIPAL: TIntegerField
+      FieldName = 'ID_SETOR_PRINCIPAL'
+    end
   end
   object dspSetor: TDataSetProvider
     DataSet = sdsSetor
@@ -141,6 +144,9 @@ object DmCadSetor: TDmCadSetor
     object cdsSetorTIPO_SETOR: TStringField
       FieldName = 'TIPO_SETOR'
       Size = 1
+    end
+    object cdsSetorID_SETOR_PRINCIPAL: TIntegerField
+      FieldName = 'ID_SETOR_PRINCIPAL'
     end
   end
   object dsSetor: TDataSource

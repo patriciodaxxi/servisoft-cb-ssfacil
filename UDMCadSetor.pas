@@ -168,6 +168,8 @@ type
     cdsProcessoESTOQUE_DT_ES: TStringField;
     sdsSetorTIPO_SETOR: TStringField;
     cdsSetorTIPO_SETOR: TStringField;
+    sdsSetorID_SETOR_PRINCIPAL: TIntegerField;
+    cdsSetorID_SETOR_PRINCIPAL: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

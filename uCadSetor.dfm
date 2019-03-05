@@ -713,7 +713,7 @@ object frmCadSetor: TfrmCadSetor
         Left = 0
         Top = 35
         Width = 845
-        Height = 217
+        Height = 252
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -786,7 +786,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object btnFuncionario: TNxButton
           Left = 126
-          Top = 171
+          Top = 203
           Width = 153
           Height = 30
           Caption = 'Funcion'#225'rios'
@@ -859,7 +859,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object RzGroupBox1: TRzGroupBox
           Left = 126
-          Top = 108
+          Top = 140
           Width = 451
           Height = 59
           BorderColor = clNavy
@@ -1018,9 +1018,9 @@ object frmCadSetor: TfrmCadSetor
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 252
+        Top = 287
         Width = 845
-        Height = 264
+        Height = 229
         ActivePage = TS_Processo
         ActivePageDefault = TS_Processo
         Align = alBottom
@@ -1033,7 +1033,7 @@ object frmCadSetor: TfrmCadSetor
             Left = 0
             Top = 30
             Width = 841
-            Height = 211
+            Height = 176
             Align = alClient
             DataSource = DmCadSetor.dsSetor_Proc
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
