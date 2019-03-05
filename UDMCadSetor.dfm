@@ -386,6 +386,10 @@ object DmCadSetor: TDmCadSetor
       FieldName = 'ESTOQUE_CRU'
       Size = 1
     end
+    object sdsProcessoESTOQUE_DT_ES: TStringField
+      FieldName = 'ESTOQUE_DT_ES'
+      Size = 1
+    end
   end
   object dspProcesso: TDataSetProvider
     DataSet = sdsProcesso
@@ -503,6 +507,10 @@ object DmCadSetor: TDmCadSetor
     end
     object cdsProcessoESTOQUE_CRU: TStringField
       FieldName = 'ESTOQUE_CRU'
+      Size = 1
+    end
+    object cdsProcessoESTOQUE_DT_ES: TStringField
+      FieldName = 'ESTOQUE_DT_ES'
       Size = 1
     end
   end

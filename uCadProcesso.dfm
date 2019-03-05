@@ -774,7 +774,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object Label9: TLabel
           Left = 16
-          Top = 288
+          Top = 312
           Width = 243
           Height = 13
           Alignment = taRightJustify
@@ -782,7 +782,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object Label10: TLabel
           Left = 7
-          Top = 311
+          Top = 335
           Width = 252
           Height = 13
           Alignment = taRightJustify
@@ -793,7 +793,16 @@ object frmCadProcesso: TfrmCadProcesso
           Top = 176
           Width = 66
           Height = 13
+          Alignment = taRightJustify
           Caption = 'Tipo Estoque:'
+        end
+        object Label12: TLabel
+          Left = 73
+          Top = 197
+          Width = 121
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Gerar Estoque Pela Data:'
         end
         object DBEdit1: TDBEdit
           Left = 128
@@ -820,7 +829,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object RzGroupBox1: TRzGroupBox
           Left = 128
-          Top = 202
+          Top = 226
           Width = 451
           Height = 65
           BorderColor = clNavy
@@ -1000,7 +1009,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object RxDBLookupCombo1: TRxDBLookupCombo
           Left = 263
-          Top = 281
+          Top = 305
           Width = 329
           Height = 21
           DropDownCount = 8
@@ -1013,7 +1022,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object RxDBLookupCombo2: TRxDBLookupCombo
           Left = 263
-          Top = 304
+          Top = 328
           Width = 329
           Height = 21
           DropDownCount = 8
@@ -1046,7 +1055,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object DBCheckBox8: TDBCheckBox
           Left = 376
-          Top = 173
+          Top = 170
           Width = 281
           Height = 17
           Caption = 'Baixar Estoque Pelo Cru (Semi Acabado)'
@@ -1055,6 +1064,24 @@ object frmCadProcesso: TfrmCadProcesso
           TabOrder = 15
           ValueChecked = 'S'
           ValueUnchecked = 'N'
+        end
+        object RxDBComboBox3: TRxDBComboBox
+          Left = 197
+          Top = 193
+          Width = 172
+          Height = 21
+          Style = csDropDownList
+          DataField = 'ESTOQUE_DT_ES'
+          DataSource = DmCadSetor.dsProcesso
+          EnableValues = True
+          ItemHeight = 13
+          Items.Strings = (
+            'E= Data de Entrada'
+            'S= Data de Sa'#237'da')
+          TabOrder = 16
+          Values.Strings = (
+            'E'
+            'S')
         end
       end
     end

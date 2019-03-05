@@ -57,6 +57,8 @@ type
     RxDBComboBox2: TRxDBComboBox;
     Label11: TLabel;
     DBCheckBox8: TDBCheckBox;
+    Label12: TLabel;
+    RxDBComboBox3: TRxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -169,6 +171,12 @@ begin
   Label10.Visible          := (fDMCadSetor.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
   RxDBLookupCombo1.Visible := (fDMCadSetor.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
   RxDBLookupCombo2.Visible := (fDMCadSetor.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
+
+  Label11.Visible          := (fDMCadSetor.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
+  RxDBComboBox2.Visible    := (fDMCadSetor.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
+  Label12.Visible          := (fDMCadSetor.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
+  RxDBComboBox3.Visible    := (fDMCadSetor.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
+  DBCheckBox8.Visible      := (fDMCadSetor.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
 end;
 
 procedure TfrmCadProcesso.prc_Consultar;

@@ -164,6 +164,8 @@ type
     cdsProcessoESTOQUE: TStringField;
     sdsProcessoESTOQUE_CRU: TStringField;
     cdsProcessoESTOQUE_CRU: TStringField;
+    sdsProcessoESTOQUE_DT_ES: TStringField;
+    cdsProcessoESTOQUE_DT_ES: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
