@@ -3429,6 +3429,11 @@ object DMRecebeXML: TDMRecebeXML
       FixedChar = True
       Size = 1
     end
+    object qCFOPGERAR_ESTOQUE: TStringField
+      FieldName = 'GERAR_ESTOQUE'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros: TSQLQuery
     MaxBlobSize = -1
