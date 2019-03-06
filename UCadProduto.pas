@@ -2169,23 +2169,26 @@ begin
   if uAltProd.fnc_Custo(fDMCadProduto.cdsProdutoID.AsInteger,fDMCadProduto) then
     exit;
 
-  if (fDMCadProduto.cdsProduto_Comb.RecordCount > 0) and (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S') then
+  if (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S') then
   begin
-    vFlag := False;
-    fDMCadProduto.cdsProduto_Comb.First;
-    while not fDMCadProduto.cdsProduto_Comb.Eof do
+    if (fDMCadProduto.cdsProduto_Comb.RecordCount > 0) then
     begin
-      if fDMCadProduto.cdsProduto_Comb_Mat.Locate('ITEM_MAT',fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger,([Locaseinsensitive])) then
+      vFlag := False;
+      fDMCadProduto.cdsProduto_Comb.First;
+      while not fDMCadProduto.cdsProduto_Comb.Eof do
       begin
-        vFlag := True;
-        fDMCadProduto.cdsProduto_Comb.Last;
+        if fDMCadProduto.cdsProduto_Comb_Mat.Locate('ITEM_MAT',fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger,([Locaseinsensitive])) then
+        begin
+          vFlag := True;
+          fDMCadProduto.cdsProduto_Comb.Last;
+        end;
+        fDMCadProduto.cdsProduto_Comb.Next;
       end;
-      fDMCadProduto.cdsProduto_Comb.Next;
-    end;
-    if vFlag then
-    begin
-      MessageDlg('*** Esse Material esta na Combinação ' + fDMCadProduto.cdsProduto_CombNOME.AsString, mtError, [mbOk], 0);
-      exit;
+      if vFlag then
+      begin
+        MessageDlg('*** Esse Material esta na Combinação ' + fDMCadProduto.cdsProduto_CombNOME.AsString, mtError, [mbOk], 0);
+        exit;
+      end;
     end;
   end;
 
