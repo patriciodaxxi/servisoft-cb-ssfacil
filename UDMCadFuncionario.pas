@@ -235,6 +235,14 @@ type
     cdsFuncionario_ConsultaNUM_CARTAO: TIntegerField;
     sdsFuncionarioBAIXA_PROCESSO: TStringField;
     cdsFuncionarioBAIXA_PROCESSO: TStringField;
+    sdsFuncionario_SertorID_ESTEIRA: TIntegerField;
+    cdsFuncionario_SetorID_ESTEIRA: TIntegerField;
+    sdsSetor_Esteira: TSQLDataSet;
+    dspSetor_Esteira: TDataSetProvider;
+    cdsSetor_Esteira: TClientDataSet;
+    dsSetor_Esteira: TDataSource;
+    cdsSetor_EsteiraID: TIntegerField;
+    cdsSetor_EsteiraNOME: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFuncionarioNewRecord(DataSet: TDataSet);
     procedure dspFuncionarioUpdateError(Sender: TObject;

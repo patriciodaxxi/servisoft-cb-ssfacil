@@ -1,6 +1,6 @@
 object frmCadFuncionario_Res: TfrmCadFuncionario_Res
-  Left = 216
-  Top = 98
+  Left = 243
+  Top = 97
   Width = 877
   Height = 594
   Caption = 'Cadastro de Funcion'#225'rios Resumido'
@@ -21,8 +21,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 869
-    Height = 544
+    Width = 861
+    Height = 536
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -49,7 +49,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object pnlPesquisa: TPanel
         Left = 0
         Top = 35
-        Width = 865
+        Width = 857
         Height = 38
         Align = alTop
         Color = clSilver
@@ -173,8 +173,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 73
-        Width = 865
-        Height = 448
+        Width = 857
+        Height = 440
         Align = alClient
         Ctl3D = False
         DataSource = DMCadFuncionario.dsFuncionario_Consulta
@@ -244,7 +244,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 865
+        Width = 857
         Height = 35
         Align = alTop
         Color = clSilver
@@ -408,7 +408,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 865
+        Width = 857
         Height = 35
         Align = alTop
         Color = 8404992
@@ -634,7 +634,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object pnlDados: TPanel
         Left = 0
         Top = 35
-        Width = 865
+        Width = 857
         Height = 114
         Align = alTop
         Enabled = False
@@ -776,8 +776,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 149
-        Width = 865
-        Height = 372
+        Width = 857
+        Height = 364
         ActivePage = TS_Setor
         Align = alClient
         TabIndex = 1
@@ -788,14 +788,14 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           object pnlProcesso: TPanel
             Left = 0
             Top = 0
-            Width = 861
-            Height = 349
+            Width = 853
+            Height = 341
             Align = alClient
             Caption = 'pnlProcesso'
             TabOrder = 0
             DesignSize = (
-              861
-              349)
+              853
+              341)
             object Label37: TLabel
               Left = 54
               Top = 34
@@ -805,8 +805,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
             end
             object SMDBGrid3: TSMDBGrid
               Left = 1
-              Top = 121
-              Width = 859
+              Top = 113
+              Width = 851
               Height = 227
               Align = alBottom
               Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1158,7 +1158,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 861
+            Width = 853
             Height = 41
             Align = alTop
             Color = clSilver
@@ -1169,6 +1169,19 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
               Width = 31
               Height = 13
               Caption = 'Setor'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object Label3: TLabel
+              Left = 280
+              Top = 3
+              Width = 39
+              Height = 13
+              Caption = 'Esteira'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -1188,7 +1201,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
               TabOrder = 0
             end
             object btnInserir_Setor: TNxButton
-              Left = 276
+              Left = 548
               Top = 11
               Width = 31
               Height = 30
@@ -1262,7 +1275,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
               OnClick = btnInserir_SetorClick
             end
             object btnAlterar_Setor: TNxButton
-              Left = 305
+              Left = 577
               Top = 11
               Width = 31
               Height = 30
@@ -1324,11 +1337,11 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
                 FEFFFFFFFFFFFFFFFFFFFFFFF9FEFE000000}
               ParentShowHint = False
               ShowHint = True
-              TabOrder = 2
+              TabOrder = 3
               OnClick = btnAlterar_SetorClick
             end
             object btnExcluir_Setor: TNxButton
-              Left = 334
+              Left = 606
               Top = 11
               Width = 31
               Height = 30
@@ -1399,16 +1412,27 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
-              TabOrder = 3
+              TabOrder = 4
               Transparent = True
               OnClick = btnExcluir_SetorClick
+            end
+            object RxDBLookupCombo2: TRxDBLookupCombo
+              Left = 280
+              Top = 16
+              Width = 265
+              Height = 21
+              DropDownCount = 8
+              LookupField = 'ID'
+              LookupDisplay = 'NOME'
+              LookupSource = DMCadFuncionario.dsSetor_Esteira
+              TabOrder = 2
             end
           end
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 41
-            Width = 861
-            Height = 308
+            Width = 853
+            Height = 300
             Align = alClient
             Ctl3D = False
             DataSource = DMCadFuncionario.dsFuncionario_Setor
@@ -1439,7 +1463,6 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 4
             RowCount = 2
             Columns = <
               item
@@ -1466,6 +1489,13 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
                 Title.Caption = 'Nome Setor'
                 Width = 341
                 Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_ESTEIRA'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Esteira'
+                Visible = True
               end>
           end
         end
@@ -1474,8 +1504,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 544
-    Width = 869
+    Top = 536
+    Width = 861
     Height = 19
     Panels = <
       item

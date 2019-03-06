@@ -59,6 +59,8 @@ type
     SMDBGrid2: TSMDBGrid;
     DBCheckBox2: TDBCheckBox;
     DBCheckBox3: TDBCheckBox;
+    Label3: TLabel;
+    RxDBLookupCombo2: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -134,6 +136,7 @@ begin
   fDMCadFuncionario := TDMCadFuncionario.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMCadFuncionario);
   fDMCadFuncionario.cdsSetor.Open;
+  fDMCadFuncionario.cdsSetor_Esteira.Open;
   fnc_Busca_Nome_Filial;
   StatusBar1.Panels[0].Text := vUsuario;
   StatusBar1.Panels[1].Text := vFilial_Nome;
@@ -468,8 +471,11 @@ begin
   fDMCadFuncionario.prc_Inserir_Setor;
   fDMCadFuncionario.cdsFuncionario_SetorID_SETOR.AsInteger  := RxDBLookupCombo1.KeyValue;
   fDMCadFuncionario.cdsFuncionario_SetorNOME_SETOR.AsString := RxDBLookupCombo1.Text;
+  if (RxDBLookupCombo2.KeyValue > 0) or (RxDBLookupCombo2.KeyValue <> null) then
+    fDMCadFuncionario.cdsFuncionario_SetorID_ESTEIRA.AsInteger := RxDBLookupCombo2.KeyValue;
   fDMCadFuncionario.cdsFuncionario_Setor.Post;
   RxDBLookupCombo1.ClearValue;
+  RxDBLookupCombo2.ClearValue;
   RxDBLookupCombo1.SetFocus;
   vItem_Setor := 0;
 end;
@@ -484,6 +490,7 @@ begin
 
   vItem_Setor := fDMCadFuncionario.cdsFuncionario_SetorITEM.AsInteger;
   RxDBLookupCombo1.KeyValue := fDMCadFuncionario.cdsFuncionario_SetorID_SETOR.AsInteger;
+  RxDBLookupCombo2.KeyValue := fDMCadFuncionario.cdsFuncionario_SetorID_ESTEIRA.AsInteger;
   RxDBLookupCombo1.SetFocus;
 end;
 

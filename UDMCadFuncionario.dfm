@@ -12,7 +12,7 @@ object DMCadFuncionario: TDMCadFuncionario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 112
+    Left = 48
     Top = 32
     object sdsFuncionarioCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -201,7 +201,7 @@ object DMCadFuncionario: TDMCadFuncionario
     DataSet = sdsFuncionario
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspFuncionarioUpdateError
-    Left = 192
+    Left = 78
     Top = 32
   end
   object cdsFuncionario: TClientDataSet
@@ -210,7 +210,7 @@ object DMCadFuncionario: TDMCadFuncionario
     Params = <>
     ProviderName = 'dspFuncionario'
     OnNewRecord = cdsFuncionarioNewRecord
-    Left = 256
+    Left = 108
     Top = 32
     object cdsFuncionarioCODIGO: TIntegerField
       DisplayLabel = 'C'#243'digo'
@@ -431,7 +431,7 @@ object DMCadFuncionario: TDMCadFuncionario
   end
   object dsFuncionario: TDataSource
     DataSet = cdsFuncionario
-    Left = 328
+    Left = 139
     Top = 32
   end
   object sdsUF: TSQLDataSet
@@ -441,21 +441,21 @@ object DMCadFuncionario: TDMCadFuncionario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 464
-    Top = 192
+    Left = 264
+    Top = 144
   end
   object dspUF: TDataSetProvider
     DataSet = sdsUF
-    Left = 496
-    Top = 192
+    Left = 296
+    Top = 144
   end
   object cdsUF: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'UF'
     Params = <>
     ProviderName = 'dspUF'
-    Left = 536
-    Top = 192
+    Left = 328
+    Top = 144
     object cdsUFUF: TStringField
       FieldName = 'UF'
       Required = True
@@ -477,8 +477,8 @@ object DMCadFuncionario: TDMCadFuncionario
   end
   object dsUF: TDataSource
     DataSet = cdsUF
-    Left = 576
-    Top = 192
+    Left = 360
+    Top = 144
   end
   object sdsCidade: TSQLDataSet
     NoMetadata = True
@@ -487,21 +487,21 @@ object DMCadFuncionario: TDMCadFuncionario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 466
-    Top = 236
+    Left = 266
+    Top = 196
   end
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
-    Left = 498
-    Top = 236
+    Left = 298
+    Top = 196
   end
   object cdsCidade: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCidade'
-    Left = 538
-    Top = 236
+    Left = 330
+    Top = 196
     object cdsCidadeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -521,8 +521,8 @@ object DMCadFuncionario: TDMCadFuncionario
   end
   object dsCidade: TDataSource
     DataSet = cdsCidade
-    Left = 578
-    Top = 236
+    Left = 362
+    Top = 196
   end
   object qParametros: TSQLQuery
     MaxBlobSize = -1
@@ -532,8 +532,8 @@ object DMCadFuncionario: TDMCadFuncionario
       'FROM PARAMETROS'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 456
-    Top = 328
+    Left = 760
+    Top = 104
     object qParametrosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -658,8 +658,8 @@ object DMCadFuncionario: TDMCadFuncionario
       'from filial f'
       'where f.id = (select min(f2.id) from filial f2)')
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 328
+    Left = 792
+    Top = 104
     object qFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -676,20 +676,20 @@ object DMCadFuncionario: TDMCadFuncionario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 464
-    Top = 280
+    Left = 264
+    Top = 248
   end
   object dspSetor: TDataSetProvider
     DataSet = sdsSetor
-    Left = 504
-    Top = 280
+    Left = 296
+    Top = 248
   end
   object cdsSetor: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspSetor'
-    Left = 544
-    Top = 280
+    Left = 328
+    Top = 248
     object cdsSetorID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -700,8 +700,8 @@ object DMCadFuncionario: TDMCadFuncionario
   end
   object dsSetor: TDataSource
     DataSet = cdsSetor
-    Left = 584
-    Top = 280
+    Left = 360
+    Top = 248
   end
   object sdsFilial: TSQLDataSet
     NoMetadata = True
@@ -710,21 +710,21 @@ object DMCadFuncionario: TDMCadFuncionario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 456
-    Top = 384
+    Left = 264
+    Top = 296
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 488
-    Top = 384
+    Left = 296
+    Top = 296
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 520
-    Top = 384
+    Left = 328
+    Top = 296
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -740,12 +740,12 @@ object DMCadFuncionario: TDMCadFuncionario
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 552
-    Top = 384
+    Left = 360
+    Top = 296
   end
   object dsFuncionario_Mestre: TDataSource
     DataSet = sdsFuncionario
-    Left = 56
+    Left = 48
     Top = 88
   end
   object sdsFuncionario_Reajuste: TSQLDataSet
@@ -762,8 +762,8 @@ object DMCadFuncionario: TDMCadFuncionario
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 120
-    Top = 144
+    Left = 48
+    Top = 136
     object sdsFuncionario_ReajusteCODIGO: TIntegerField
       FieldName = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -790,8 +790,8 @@ object DMCadFuncionario: TDMCadFuncionario
     DataSetField = cdsFuncionariosdsFuncionario_Reajuste
     IndexFieldNames = 'CODIGO;ITEM'
     Params = <>
-    Left = 232
-    Top = 144
+    Left = 80
+    Top = 136
     object cdsFuncionario_ReajusteCODIGO: TIntegerField
       FieldName = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -815,8 +815,8 @@ object DMCadFuncionario: TDMCadFuncionario
   end
   object dsFuncionario_Reajuste: TDataSource
     DataSet = cdsFuncionario_Reajuste
-    Left = 328
-    Top = 144
+    Left = 112
+    Top = 136
   end
   object sdsFuncionario_Consulta: TSQLDataSet
     NoMetadata = True
@@ -829,20 +829,20 @@ object DMCadFuncionario: TDMCadFuncionario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 456
-    Top = 24
+    Left = 264
+    Top = 96
   end
   object dspFuncionario_Consulta: TDataSetProvider
     DataSet = sdsFuncionario_Consulta
-    Left = 488
-    Top = 24
+    Left = 296
+    Top = 96
   end
   object cdsFuncionario_Consulta: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFuncionario_Consulta'
-    Left = 528
-    Top = 24
+    Left = 328
+    Top = 96
     object cdsFuncionario_ConsultaCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -888,8 +888,8 @@ object DMCadFuncionario: TDMCadFuncionario
   end
   object dsFuncionario_Consulta: TDataSource
     DataSet = cdsFuncionario_Consulta
-    Left = 568
-    Top = 24
+    Left = 360
+    Top = 96
   end
   object sdsFuncionario_Proc: TSQLDataSet
     NoMetadata = True
@@ -908,8 +908,8 @@ object DMCadFuncionario: TDMCadFuncionario
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 128
-    Top = 248
+    Left = 48
+    Top = 184
     object sdsFuncionario_ProcID_PROCESSO: TIntegerField
       FieldName = 'ID_PROCESSO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -931,8 +931,8 @@ object DMCadFuncionario: TDMCadFuncionario
     DataSetField = cdsFuncionariosdsFuncionario_Proc
     IndexFieldNames = 'CODIGO;ID_PROCESSO'
     Params = <>
-    Left = 176
-    Top = 248
+    Left = 80
+    Top = 184
     object cdsFuncionario_ProcID_PROCESSO: TIntegerField
       FieldName = 'ID_PROCESSO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -951,8 +951,8 @@ object DMCadFuncionario: TDMCadFuncionario
   end
   object dsFuncionario_Proc: TDataSource
     DataSet = cdsFuncionario_Proc
-    Left = 224
-    Top = 248
+    Left = 112
+    Top = 184
   end
   object qProcesso: TSQLQuery
     MaxBlobSize = -1
@@ -966,8 +966,8 @@ object DMCadFuncionario: TDMCadFuncionario
       'SELECT * FROM PROCESSO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 96
+    Left = 728
+    Top = 104
     object qProcessoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -984,21 +984,21 @@ object DMCadFuncionario: TDMCadFuncionario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 210
-    Top = 420
+    Left = 266
+    Top = 36
   end
   object dspUsuario: TDataSetProvider
     DataSet = sdsUsuario
-    Left = 242
-    Top = 420
+    Left = 298
+    Top = 36
   end
   object cdsUsuario: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'UCUSERNAME'
     Params = <>
     ProviderName = 'dspUsuario'
-    Left = 282
-    Top = 420
+    Left = 330
+    Top = 36
     object cdsUsuarioUCIDUSER: TIntegerField
       FieldName = 'UCIDUSER'
     end
@@ -1036,8 +1036,8 @@ object DMCadFuncionario: TDMCadFuncionario
   end
   object dsUsuario: TDataSource
     DataSet = cdsUsuario
-    Left = 322
-    Top = 420
+    Left = 362
+    Top = 36
   end
   object sdsFuncionario_Sertor: TSQLDataSet
     CommandText = 
@@ -1053,8 +1053,8 @@ object DMCadFuncionario: TDMCadFuncionario
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 128
-    Top = 296
+    Left = 48
+    Top = 232
     object sdsFuncionario_SertorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1072,14 +1072,17 @@ object DMCadFuncionario: TDMCadFuncionario
       FieldName = 'NOME_SETOR'
       ProviderFlags = []
     end
+    object sdsFuncionario_SertorID_ESTEIRA: TIntegerField
+      FieldName = 'ID_ESTEIRA'
+    end
   end
   object cdsFuncionario_Setor: TClientDataSet
     Aggregates = <>
     DataSetField = cdsFuncionariosdsFuncionario_Sertor
     IndexFieldNames = 'CODIGO;ITEM'
     Params = <>
-    Left = 184
-    Top = 296
+    Left = 80
+    Top = 232
     object cdsFuncionario_SetorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1097,11 +1100,14 @@ object DMCadFuncionario: TDMCadFuncionario
       FieldName = 'NOME_SETOR'
       ProviderFlags = []
     end
+    object cdsFuncionario_SetorID_ESTEIRA: TIntegerField
+      FieldName = 'ID_ESTEIRA'
+    end
   end
   object dsFuncionario_Setor: TDataSource
     DataSet = cdsFuncionario_Setor
-    Left = 224
-    Top = 296
+    Left = 112
+    Top = 232
   end
   object qParametros_Lote: TSQLQuery
     MaxBlobSize = -1
@@ -1110,8 +1116,8 @@ object DMCadFuncionario: TDMCadFuncionario
       'select p.lote_textil, p.LOTE_CALCADO_NOVO'
       'from parametros_lote p')
     SQLConnection = dmDatabase.scoDados
-    Left = 352
-    Top = 272
+    Left = 696
+    Top = 104
     object qParametros_LoteLOTE_TEXTIL: TStringField
       FieldName = 'LOTE_TEXTIL'
       FixedChar = True
@@ -1122,5 +1128,39 @@ object DMCadFuncionario: TDMCadFuncionario
       FixedChar = True
       Size = 1
     end
+  end
+  object sdsSetor_Esteira: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM SETOR'#13#10'WHERE TIPO_SETOR = '#39'E'#39
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 272
+    Top = 344
+  end
+  object dspSetor_Esteira: TDataSetProvider
+    DataSet = sdsSetor_Esteira
+    Left = 304
+    Top = 344
+  end
+  object cdsSetor_Esteira: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspSetor_Esteira'
+    Left = 336
+    Top = 344
+    object cdsSetor_EsteiraID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsSetor_EsteiraNOME: TStringField
+      FieldName = 'NOME'
+    end
+  end
+  object dsSetor_Esteira: TDataSource
+    DataSet = cdsSetor_Esteira
+    Left = 368
+    Top = 344
   end
 end
