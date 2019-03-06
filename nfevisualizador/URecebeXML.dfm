@@ -24,7 +24,7 @@ object frmRecebeXML: TfrmRecebeXML
     Top = 146
     Width = 1035
     Height = 519
-    ActivePage = TabSheet1
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -3109,6 +3109,18 @@ object frmRecebeXML: TfrmRecebeXML
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
               TabOrder = 16
+            end
+            object DBCheckBox11: TDBCheckBox
+              Left = 612
+              Top = 90
+              Width = 92
+              Height = 17
+              Caption = 'Gerar Estoque'
+              DataField = 'Gerar_Estoque'
+              DataSource = DMRecebeXML.dsmItensNota
+              TabOrder = 21
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
             end
           end
           object TabSheet9: TTabSheet

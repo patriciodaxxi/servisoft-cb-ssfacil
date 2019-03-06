@@ -2168,6 +2168,7 @@ type
     cdsDetalheICMS60_vICMSSTRet: TStringField;
     sdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField;
     sdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField;
+    qCFOPGERAR_ESTOQUE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
