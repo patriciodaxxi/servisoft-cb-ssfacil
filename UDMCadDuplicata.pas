@@ -1274,7 +1274,10 @@ begin
       begin
         cdsDuplicata_CCusto.Edit;
         if vItem = cdsDuplicata_CCusto.RecordCount then
-          cdsDuplicata_CCustoPERCENTUAL.AsFloat := StrToFloat(FormatFloat('0.00',vPerc))
+        begin
+          if StrToFloat(FormatFloat('0.00',vPerc)) > 0 then
+            cdsDuplicata_CCustoPERCENTUAL.AsFloat := StrToFloat(FormatFloat('0.00',vPerc));
+        end
         else
         begin
           vVlrAux := StrToFloat(FormatFloat('0.00',(cdsDuplicata_CCustoVALOR.AsFloat / cdsDuplicataVLR_PARCELA.AsFloat) * 100));
@@ -1282,9 +1285,9 @@ begin
             vVlrAux := StrToFloat(FormatFloat('0.00',vPerc));
           cdsDuplicata_CCustoPERCENTUAL.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
         end;
-        vPerc := StrToFloat(FormatFloat('0.00',vPerc - vVlrAux));
         cdsDuplicata_CCusto.Post;
       end;
+      vPerc := StrToFloat(FormatFloat('0.00',vPerc - cdsDuplicata_CCustoPERCENTUAL.AsFloat));
       cdsDuplicata_CCusto.Next;
     end;
   end;

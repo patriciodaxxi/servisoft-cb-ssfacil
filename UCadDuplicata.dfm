@@ -1,6 +1,6 @@
 object frmCadDuplicata: TfrmCadDuplicata
-  Left = 288
-  Top = 13
+  Left = 158
+  Top = 12
   Width = 1062
   Height = 657
   Caption = 'Duplicatas (A Receber/A Pagar)'
@@ -3927,10 +3927,10 @@ object frmCadDuplicata: TfrmCadDuplicata
         Top = 426
         Width = 1042
         Height = 150
-        ActivePage = TS_Historico
+        ActivePage = TS_CCusto
         ActivePageDefault = TS_Historico
         Align = alClient
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 2
         FixedDimension = 19
         object TS_Historico: TRzTabSheet

@@ -39,7 +39,6 @@ type
     btnAlterar: TNxButton;
     btnConfirmar: TNxButton;
     btnCancelar: TNxButton;
-    btnFuncionario: TNxButton;
     RzGroupBox1: TRzGroupBox;
     Label5: TLabel;
     DBCheckBox2: TDBCheckBox;
@@ -77,7 +76,6 @@ type
       Shift: TShiftState);
     procedure btnPesquisarClick(Sender: TObject);
     procedure DBCheckBox3Click(Sender: TObject);
-    procedure btnFuncionarioClick(Sender: TObject);
     procedure DBCheckBox1Click(Sender: TObject);
     procedure RzPageControl1Change(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -278,11 +276,6 @@ procedure TfrmCadSetor.DBCheckBox3Click(Sender: TObject);
 begin
   Label5.Visible  := (DBCheckBox3.Checked);
   DBEdit4.Visible := (DBCheckBox3.Checked);
-end;
-
-procedure TfrmCadSetor.btnFuncionarioClick(Sender: TObject);
-begin
-  //Chamar o form frmCadSetor_Func, esta sendo usado para a PHD (Foi tirado no dia 20/02/2015)
 end;
 
 procedure TfrmCadSetor.prc_Posiciona_Reg;

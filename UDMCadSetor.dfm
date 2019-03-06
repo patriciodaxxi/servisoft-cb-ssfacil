@@ -842,7 +842,7 @@ object DmCadSetor: TDmCadSetor
   object sdsSetorPrincipal: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT ID, NOME FROM SETOR WHERE TIPO_SETOR <> '#39'E'#39
+    CommandText = 'SELECT ID, NOME FROM SETOR WHERE COALESCE(TIPO_SETOR,'#39#39') <> '#39'E'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
