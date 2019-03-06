@@ -615,7 +615,9 @@ begin
        (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_DESC_SUFRAMA')  and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_AFRMM') and
        (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PERC_ISSQN')        and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_ISSQN') and
        (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PRECO_CUSTO_TOTAL') and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_AJUSTE_CUSTO') and
-       (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'sdsNotaFiscal_Copia') then
+       (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'sdsNotaFiscal_Copia') and
+       (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PERC_BASE_RED_EFET')  and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_BASE_EFET') and
+       (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PERC_ICMS_EFET')      and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_ICMS_EFET') then
       fDMInformar_Tam.mItens.FieldByName(fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName).AsVariant := fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].Value;
   end;
   fDMInformar_Tam.mItensNome_Produto_Original.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString;

@@ -2269,7 +2269,9 @@ begin
        (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PERC_ISSQN')          and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_ISSQN') and
        (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PRECO_CUSTO_TOTAL')   and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_AJUSTE_CUSTO') and
        (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'sdsNotaFiscal_Copia') and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_IPI_DEVOL')  and
-       (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PERC_DEVOL')          and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'BASE_IPI') then
+       (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PERC_DEVOL')          and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'BASE_IPI') and
+       (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PERC_BASE_RED_EFET')  and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_BASE_EFET') and
+       (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'PERC_ICMS_EFET')      and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName <> 'VLR_ICMS_EFET') then
       fDMInformar_Tam.mItens.FieldByName(fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].FieldName).AsVariant := fDMCadNotaFiscal.cdsNotaFiscal_Itens.Fields[x].Value;
   end;
   fDMInformar_Tam.mItensItem_original.AsInteger        := fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger;
