@@ -126,6 +126,7 @@ object frmCadSetor: TfrmCadSetor
             FieldName = 'ORDEM_ORC'
             Title.Alignment = taCenter
             Title.Caption = 'Ordem Consulta'
+            Width = 64
             Visible = True
           end
           item
@@ -750,6 +751,14 @@ object frmCadSetor: TfrmCadSetor
           Alignment = taRightJustify
           Caption = 'Ordem da Consulta/Imp:'
         end
+        object Label4: TLabel
+          Left = 54
+          Top = 119
+          Width = 70
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Setor principal:'
+        end
         object DBEdit1: TDBEdit
           Left = 128
           Top = 12
@@ -771,7 +780,7 @@ object frmCadSetor: TfrmCadSetor
           DataField = 'ID'
           DataSource = DmCadSetor.dsSetor
           ReadOnly = True
-          TabOrder = 4
+          TabOrder = 13
         end
         object DBEdit3: TDBEdit
           Left = 416
@@ -852,7 +861,7 @@ object frmCadSetor: TfrmCadSetor
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 12
           Transparent = True
           Visible = False
           OnClick = btnFuncionarioClick
@@ -876,7 +885,7 @@ object frmCadSetor: TfrmCadSetor
           Font.Style = []
           ParentCtl3D = False
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 11
           VisualStyle = vsGradient
           object Label5: TLabel
             Left = 307
@@ -941,7 +950,7 @@ object frmCadSetor: TfrmCadSetor
           CharCase = ecUpperCase
           DataField = 'ORDEM_ORC'
           DataSource = DmCadSetor.dsSetor
-          TabOrder = 6
+          TabOrder = 3
         end
         object DBCheckBox4: TDBCheckBox
           Left = 344
@@ -951,7 +960,7 @@ object frmCadSetor: TfrmCadSetor
           Caption = 'Imprimir no Tal'#227'o'
           DataField = 'GERAR_TALAO'
           DataSource = DmCadSetor.dsSetor
-          TabOrder = 7
+          TabOrder = 4
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -963,7 +972,7 @@ object frmCadSetor: TfrmCadSetor
           Caption = 'Entrada autom'#225'tica'
           DataField = 'ENTRADA_AUT'
           DataSource = DmCadSetor.dsSetor
-          TabOrder = 8
+          TabOrder = 7
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -987,7 +996,7 @@ object frmCadSetor: TfrmCadSetor
           Caption = 'Encerra a Produ'#231#227'o'
           DataField = 'ENCERRA_PROD'
           DataSource = DmCadSetor.dsSetor
-          TabOrder = 10
+          TabOrder = 5
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -999,7 +1008,7 @@ object frmCadSetor: TfrmCadSetor
           Caption = 'Ler Somente um vez o C'#243'd.Barra (Entrada/Saida)'
           DataField = 'LER_CBARRA1'
           DataSource = DmCadSetor.dsSetor
-          TabOrder = 11
+          TabOrder = 8
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -1011,9 +1020,24 @@ object frmCadSetor: TfrmCadSetor
           Caption = 'Esteira'
           DataField = 'TIPO_SETOR'
           DataSource = DmCadSetor.dsSetor
-          TabOrder = 12
+          TabOrder = 6
           ValueChecked = 'E'
           ValueUnchecked = 'N'
+          OnClick = DBCheckBox9Click
+        end
+        object RxDBLookupCombo1: TRxDBLookupCombo
+          Left = 128
+          Top = 111
+          Width = 281
+          Height = 21
+          DropDownCount = 15
+          DataField = 'ID_SETOR_PRINCIPAL'
+          DataSource = DmCadSetor.dsSetor
+          LookupField = 'ID'
+          LookupDisplay = 'NOME'
+          LookupSource = DmCadSetor.dsSetorPrincipal
+          TabOrder = 10
+          OnEnter = RxDBLookupCombo1Enter
         end
       end
       object RzPageControl2: TRzPageControl
