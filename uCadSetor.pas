@@ -9,7 +9,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadSetor, Mask, 
-  db, RxDBComb, UCBase, StdCtrls, DBCtrls, ExtCtrls, RzTabs, DBGrids, ToolEdit, CurrEdit, NxCollection, RzPanel;
+  db, RxDBComb, UCBase, StdCtrls, DBCtrls, ExtCtrls, RzTabs, DBGrids, ToolEdit, CurrEdit, NxCollection, RzPanel,
+  RxLookup;
 
 type
   TfrmCadSetor = class(TForm)
@@ -60,6 +61,8 @@ type
     DBCheckBox7: TDBCheckBox;
     DBCheckBox8: TDBCheckBox;
     DBCheckBox9: TDBCheckBox;
+    RxDBLookupCombo1: TRxDBLookupCombo;
+    Label4: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -82,6 +85,8 @@ type
     procedure btnAlterar_ItensClick(Sender: TObject);
     procedure btnExcluir_ItensClick(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
+    procedure RxDBLookupCombo1Enter(Sender: TObject);
+    procedure DBCheckBox9Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadSetor: TDMCadSetor;
@@ -190,6 +195,9 @@ begin
   DBCheckBox6.Visible := (fDMCadSetor.qParametros_GeralEMPRESA_CALCADOS.AsString = 'S');
   DBCheckBox7.Visible := (fDMCadSetor.qParametros_GeralEMPRESA_CALCADOS.AsString = 'S');
   DBCheckBox8.Visible := (fDMCadSetor.qParametros_GeralEMPRESA_CALCADOS.AsString = 'S');
+
+  RxDBLookupCombo1.Visible := fDMCadSetor.cdsSetorTIPO_SETOR.AsString = 'E';
+  fDMCadSetor.cdsSetorPrincipal.Open;
 end;
 
 procedure TfrmCadSetor.prc_Consultar;
@@ -371,6 +379,16 @@ begin
   for i := 0 to SMDBGrid1.Columns.Count - 1 do
     if not (SMDBGrid1.Columns.Items[I] = Column) then
       SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmCadSetor.RxDBLookupCombo1Enter(Sender: TObject);
+begin
+  fDMCadSetor.cdsSetorPrincipal.indexFieldNames := 'NOME';
+end;
+
+procedure TfrmCadSetor.DBCheckBox9Click(Sender: TObject);
+begin
+  RxDBLookupCombo1.Visible := DBCheckBox9.Checked;
 end;
 
 end.

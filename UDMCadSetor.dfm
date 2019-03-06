@@ -839,4 +839,44 @@ object DmCadSetor: TDmCadSetor
     Left = 776
     Top = 360
   end
+  object sdsSetorPrincipal: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, NOME FROM SETOR WHERE TIPO_SETOR <> '#39'E'#39
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 112
+    Top = 403
+  end
+  object dspSetorPrincipal: TDataSetProvider
+    DataSet = sdsSetorPrincipal
+    Options = [poCascadeUpdates]
+    UpdateMode = upWhereKeyOnly
+    OnUpdateError = dspProcessoUpdateError
+    Left = 144
+    Top = 403
+  end
+  object cdsSetorPrincipal: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspSetorPrincipal'
+    OnCalcFields = cdsProcessoCalcFields
+    OnNewRecord = cdsProcessoNewRecord
+    Left = 176
+    Top = 403
+    object cdsSetorPrincipalID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsSetorPrincipalNOME: TStringField
+      FieldName = 'NOME'
+    end
+  end
+  object dsSetorPrincipal: TDataSource
+    DataSet = cdsSetorPrincipal
+    Left = 208
+    Top = 403
+  end
 end

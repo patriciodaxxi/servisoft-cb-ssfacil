@@ -170,6 +170,12 @@ type
     cdsSetorTIPO_SETOR: TStringField;
     sdsSetorID_SETOR_PRINCIPAL: TIntegerField;
     cdsSetorID_SETOR_PRINCIPAL: TIntegerField;
+    sdsSetorPrincipal: TSQLDataSet;
+    dspSetorPrincipal: TDataSetProvider;
+    cdsSetorPrincipal: TClientDataSet;
+    dsSetorPrincipal: TDataSource;
+    cdsSetorPrincipalID: TIntegerField;
+    cdsSetorPrincipalNOME: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

@@ -362,6 +362,7 @@ type
     DBEdit91: TDBEdit;
     Label144: TLabel;
     DBEdit92: TDBEdit;
+    DBCheckBox11: TDBCheckBox;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -423,6 +424,7 @@ type
     vID_CFOP_NFCe: Integer;
     vCODCFOP_NFCe: String;
     vFilial_Local: Integer;
+    vGerar_Estoque : String;
 
     ffrmRecebeXML_ConsItens: TfrmRecebeXML_ConsItens;
     ffrmSel_Produto: TfrmSel_Produto;
@@ -866,6 +868,7 @@ var
   vTexto2: String;
   vFlag: Boolean;
 begin
+  vGerar_Estoque := 'N';
   fDMRecebeXML.mItensNota.Insert;
   fDMRecebeXML.mItensNotaItem.AsInteger              := fDMRecebeXML.cdsDetalhenItem.AsInteger;
   fDMRecebeXML.mItensNotaCodProduto.AsString         := fDMRecebeXML.cdsDetalhecProd.AsString;
@@ -1227,7 +1230,8 @@ begin
       prc_Monta_ContaOrc('N');
     end;
   end;
-
+  if (vGerar_Estoque = 'S') or (vGerar_Estoque = 'N') then
+    fDMRecebeXML.mItensNotaGerar_Estoque.AsString := vGerar_Estoque;
   fDMRecebeXML.mItensNota.Post;
 end;
 
@@ -1407,6 +1411,8 @@ begin
     if not fDMRecebeXML.qCFOP.IsEmpty then
       Result := fDMRecebeXML.qCFOPID.AsInteger
   end;
+  if not fDMRecebeXML.qCFOP.IsEmpty then
+    vGerar_Estoque := fDMRecebeXML.qCFOPGERAR_ESTOQUE.AsString;
 end;
 
 procedure TfrmRecebeXML.SMDBGrid1GetCellParams(Sender: TObject;
@@ -3965,6 +3971,10 @@ procedure TfrmRecebeXML.RxDBLookupCombo2Exit(Sender: TObject);
 begin
   //13/11/2017  Verifica se atualiza a NCM ou o Preço de custo
   prc_Verifica_Atualizacao_NCM_Custo;
+  if (fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString = 'S') or (fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString = 'N') then
+    fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString
+  else
+    fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'S';
   //**********************
 end;
 
