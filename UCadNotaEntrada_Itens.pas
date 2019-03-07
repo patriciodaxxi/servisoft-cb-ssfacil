@@ -291,7 +291,10 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensCODPIS.AsString        := fDMCadNotaFiscal.cdsTab_PisCODIGO.AsString;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_CST.AsString       := fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_IPI.AsString       := fDMCadNotaFiscal.cdsTab_CSTIPICOD_IPI.AsString;
-    fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fDMCadNotaFiscal.cdsCFOPGERAR_ESTOQUE.AsString;
+    if fDMCadNotaFiscal.cdsProdutoESTOQUE.AsString = 'N' then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N'
+    else
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fDMCadNotaFiscal.cdsCFOPGERAR_ESTOQUE.AsString;
   end;
   fDMCadNotaFiscal.cdsNotaFiscal_ItensCODCFOP.AsString     := fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString;
   fDMCadNotaFiscal.cdsNotaFiscal_ItensSOMAR_VLRTOTALPRODUTO.AsString := 'S';
@@ -311,6 +314,13 @@ begin
     if fDMCadNotaFiscal.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
       fDMCadNotaFiscal.cdsNotaFiscal_ItensCONTA_ORCAMENTO_ID.AsInteger := fDMCadNotaFiscal.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
   end;
+
+  //07/03/2019  Estoque por benegficiamento e tipo de material  SLTextil vai ter esse controle devido ao Algodão e ao Poliester
+  if (Trim(fDMCadNotaFiscal.cdsProdutoESTOQUE.AsString) <> 'N') and (fDMCadNotaFiscal.cdsCFOPBENEFICIAMENTO.AsString = 'S')
+    and (fDMCadNotaFiscal.cdsCFOPGERAR_ESTOQUE.AsString = 'S') then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fnc_Estoque_Tipo_Mat(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,'E');
+  //***************
+
 end;
 
 procedure TfrmCadNotaEntrada_Itens.DBEdit2Exit(Sender: TObject);
@@ -483,6 +493,15 @@ begin
   if (fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString) = '') and (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and
      (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsEdit])then
     vMsgErro := vMsgErro + #13 + '*** Tamanho não informado!';
+
+  //07/03/2019
+  if (pnlCombinacao.Visible) and (fDMCadNotaFiscal.cdsCombinacao.Active) and (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger <= 0) then
+  begin
+    if fDMCadNotaFiscal.cdsCombinacao.RecordCount > 0 then
+      vMsgErro := vMsgErro + #13 + '*** Produto não informado a COR!';
+  end;
+  //**********************
+
   if vMsgErro <> '' then
   begin
     MessageDlg(vMsgErro, mtError, [mbOk], 0);
@@ -717,6 +736,9 @@ procedure TfrmCadNotaEntrada_Itens.Panel1Exit(Sender: TObject);
 begin
   if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_MATERIAL.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'C') or (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'B') then
     prc_Abrir_Combinacao;
+  if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger := 0;
+  ///***********
 end;
 
 end.

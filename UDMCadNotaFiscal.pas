@@ -3055,6 +3055,7 @@ type
     cdsFilialCALCULAR_ICMS_EFET: TStringField;
     qProdSTPERC_ST: TFloatField;
     cdsTab_NCMPERC_ICMS: TFloatField;
+    qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

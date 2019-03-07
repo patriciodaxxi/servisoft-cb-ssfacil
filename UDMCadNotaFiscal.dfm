@@ -12485,6 +12485,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField
+      FieldName = 'USA_ESTOQUE_TIPO_MAT'
+      Size = 1
+    end
   end
   object qParametros_Com: TSQLQuery
     MaxBlobSize = -1

@@ -600,6 +600,8 @@ begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N'
     else
       fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fDMCadNotaFiscal.cdsCFOPGERAR_ESTOQUE.AsString;
+    if fDMCadNotaFiscal.cdsProdutoESTOQUE.AsString = 'N' then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
   end;
 
   fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger := fDMCadNotaFiscal.cdsProdutoID_NCM.AsInteger;
@@ -1116,6 +1118,12 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensDIFERENCA_ICMS.AsString := 'S'
   else
     fDMCadNotaFiscal.cdsNotaFiscal_ItensDIFERENCA_ICMS.AsString := 'N';
+
+  //07/03/2019  Estoque por benegficiamento e tipo de material  SLTextil vai ter esse controle devido ao Algodão e ao Poliester
+  if (Trim(fDMCadNotaFiscal.cdsProdutoESTOQUE.AsString) <> 'N') and (fDMCadNotaFiscal.cdsCFOPBENEFICIAMENTO.AsString = 'S') and (fDMCadNotaFiscal.cdsCFOPGERAR_ESTOQUE.AsString = 'S')  then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fnc_Estoque_Tipo_Mat(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString);
+  //***************
+
 end;
 
 procedure TfrmCadNotaFiscal_Itens.DBEdit2Exit(Sender: TObject);
@@ -1577,6 +1585,14 @@ begin
     if StrToFloat(FormatFloat('0.00',vAux)) > StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_DESC_MAX.AsFloat)) then
       vMsgErro := vMsgErro + #13 + '*** % Desconto informado maior que o máximo de ' + FormatFloat('0.00##',fDMCadNotaFiscal.cdsProdutoPERC_DESC_MAX.AsFloat) + ', que está informado no produto!';
   end;
+  //07/03/2019
+  if (pnlCor.Visible) and (fDMCadNotaFiscal.cdsCombinacao.Active) and (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger <= 0) then
+  begin
+    if fDMCadNotaFiscal.cdsCombinacao.RecordCount > 0 then
+      vMsgErro := vMsgErro + #13 + '*** Produto não informado a COR!';
+  end;
+  //**********************
+
   if vMsgErro <> '' then
   begin
     MessageDlg(vMsgErro, mtError, [mbOk], 0);
@@ -1687,6 +1703,11 @@ var
   vID_CFOPAux: Integer;
 begin
   //fDMCadNotaFiscal.vID_Variacao := 0;
+  //07/03/2019
+  if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger := 0;
+  ///***********
+
   vID_CFOPAux := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger;
   if fDMCadNotaFiscal.cdsClienteCODIGO.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger then
     fDMCadNotaFiscal.cdsCliente.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,[loCaseInsensitive]);

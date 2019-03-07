@@ -68,6 +68,8 @@ uses
 
   function fnc_Converte_Horas(Hora: Real): Real;
 
+  function fnc_Estoque_Tipo_Mat(ID_Produto : Integer ; Tipo_ES : string): string;  //E= Entrada  S= Saida
+
   //procedure prc_Enviar_Email_Proc(MSG: String);
 
   function Criptografar(ABase: integer; AChave, AValue: string): string;
@@ -1630,5 +1632,30 @@ begin
     FreeAndNil(sds);
   end;
 end;
+
+function fnc_Estoque_Tipo_Mat(ID_Produto : Integer ; Tipo_ES : string): string; //E= Entrada  S= Saida
+var
+  sds: TSQLDataSet;
+begin
+  Result := 'S';
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText := 'SELECT P.TIPO_MAT, P.ESTOQUE, TM.estoque_benef_saida, TM.estoque_benef_ret FROM PRODUTO P '
+                     + ' INNER JOIN PARAMETROS_TIPO_MAT TM ON P.TIPO_MAT = TM.TIPO_MAT '
+                     + ' WHERE P.ID = :ID ';
+    sds.ParamByName('ID').AsInteger := ID_Produto;
+    sds.Open;
+    if (Tipo_ES = 'E') and (sds.FieldByName('estoque_benef_ret').AsString = 'N') then
+      Result := 'N';
+    if (Tipo_ES = 'S') and (sds.FieldByName('estoque_benef_saida').AsString = 'N') then
+      Result := 'N';
+  finally
+    FreeAndNil(sds);
+  end;
+end;
+
 
 end.

@@ -2169,6 +2169,8 @@ type
     sdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField;
     sdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField;
     qCFOPGERAR_ESTOQUE: TStringField;
+    qParametros_Est: TSQLQuery;
+    qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2293,6 +2295,7 @@ begin
   qParametros_OC.Open;
   qParametros_NTE.Open;
   qParametros_Custo.Open;
+  qParametros_Est.Open;
   cdsContas.Open;
   cdsTipoCobranca.Open;
   cdsTamanho.Open;

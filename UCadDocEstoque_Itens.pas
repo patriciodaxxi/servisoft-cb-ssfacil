@@ -359,6 +359,14 @@ begin
       vMsgErro := vMsgErro + #13 + '*** Campo Nº Lote não pode ser em branco, pois no produto esta cadastrado Lote!';
   end;
 
+  //07/03/2019
+  if (pnlCor.Visible) and (fDMCadDocEstoque.cdsCombinacao.Active) and (fDMCadDocEstoque.cdsDocEstoque_ItensID_COR.AsInteger <= 0) then
+  begin
+    if fDMCadDocEstoque.cdsCombinacao.RecordCount > 0 then
+      vMsgErro := vMsgErro + #13 + '*** Produto não informado a COR!';
+  end;
+  //**********************
+
   if vMsgErro <> '' then
   begin
     MessageDlg(vMsgErro, mtError, [mbOk], 0);

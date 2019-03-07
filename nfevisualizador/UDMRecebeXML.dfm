@@ -9458,4 +9458,21 @@ object DMRecebeXML: TDMRecebeXML
     Left = 312
     Top = 272
   end
+  object qParametros_Est: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_ESTOQUE_TIPO_MAT'
+      'FROM PARAMETROS_EST'
+      ''
+      ' '
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 872
+    Top = 136
+    object qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField
+      FieldName = 'USA_ESTOQUE_TIPO_MAT'
+      Size = 1
+    end
+  end
 end
