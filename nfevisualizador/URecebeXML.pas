@@ -619,6 +619,7 @@ begin
       prc_Monta_Grupo('N');
       prc_Monta_ContaOrc('N');
     end;
+
     fDMRecebeXML.mItensNotaTipoVenda.AsString      := '';
     fDMRecebeXML.mItensNotaTipoVenda_Prod.AsString := '';
     if not fDMRecebeXML.cdsProduto.IsEmpty then
@@ -888,6 +889,7 @@ begin
   fDMRecebeXML.mItensNotaVlrTotal.AsFloat            := fDMRecebeXML.cdsDetalhevProd.AsFloat;
   fDMRecebeXML.mItensNotaNomeProduto.AsString        := fDMRecebeXML.cdsDetalhexProd.AsString;
   fDMRecebeXML.mItensNotaGerar_Estoque.AsString      := 'S';
+
   fDMRecebeXML.mItensNotaCodBarra.AsString  := '';
   fDMRecebeXML.mItensNotaCodBarra2.AsString := '';
   if (trim(fDMRecebeXML.cdsDetalhecEAN.AsString) <> '') and (copy(fDMRecebeXML.cdsDetalhecEAN.AsString,1,3) <> 'SEM') then
@@ -934,11 +936,11 @@ begin
   fDMRecebeXML.mItensNotaID_ContaOrcamento.Clear;
   fDMRecebeXML.mItensNotaNome_Grupo.AsString := '';
 
-  Busca_MaterialFornecedor;
-
   fDMRecebeXML.mItensNotaCFOPInterno.AsInteger  := fnc_Busca_CFOP;
   fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger := vID_CFOP_NFCe;
   fDMRecebeXML.mItensNotaCodCFOP_NFCe.AsString  := vCODCFOP_NFCe;
+
+  Busca_MaterialFornecedor;
 
   if fDMRecebeXML.qDeParaID_SITTRIB_CF.AsInteger > 0 then
   begin
@@ -1232,6 +1234,18 @@ begin
   end;
   if (vGerar_Estoque = 'S') or (vGerar_Estoque = 'N') then
     fDMRecebeXML.mItensNotaGerar_Estoque.AsString := vGerar_Estoque;
+
+  //07/03/2019  Estoque por benegficiamento e tipo de material  SLTextil vai ter esse controle devido ao Algodão e ao Poliester
+  if fDMRecebeXML.qParametros_EstUSA_ESTOQUE_TIPO_MAT.AsString = 'S' then
+  begin
+    if fDMRecebeXML.cdsCFOP.Locate('ID',fDMRecebeXML.mItensNotaCFOPInterno.AsInteger, ([LocaseInsensitive])) then
+    begin
+      if (Trim(fDMRecebeXML.cdsProdutoESTOQUE.AsString) <> 'N') and (fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString = 'S')  then
+        fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fnc_Estoque_Tipo_Mat(fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger,'E');
+    end
+  end;
+  //***************
+
   fDMRecebeXML.mItensNota.Post;
 end;
 
@@ -3975,7 +3989,19 @@ begin
     fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString
   else
     fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'S';
-  //**********************
+
+  //07/03/2019  Estoque por benegficiamento e tipo de material  SLTextil vai ter esse controle devido ao Algodão e ao Poliester
+  if fDMRecebeXML.qParametros_EstUSA_ESTOQUE_TIPO_MAT.AsString = 'S' then
+  begin
+    if fDMRecebeXML.cdsCFOP.Locate('ID',fDMRecebeXML.mItensNotaCFOPInterno.AsInteger, ([LocaseInsensitive])) then
+    begin
+      if fDMRecebeXML.cdsProdutoID.AsInteger <> fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger then
+        fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger, ([LocaseInsensitive]));
+      if (Trim(fDMRecebeXML.cdsProdutoESTOQUE.AsString) <> 'N') and (fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString = 'S')  then
+        fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fnc_Estoque_Tipo_Mat(fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger,'E');
+    end
+  end;
+  //***************
 end;
 
 procedure TfrmRecebeXML.prc_Ajuste_Prod_Pela_OC(PeloXML: Boolean);
