@@ -112,21 +112,21 @@ begin
       vComando := vComando + ' AND PRO.REFERENCIA LIKE ' + QuotedStr('%'+edtRef.Text+'%')
     else
     begin
-      case RadioGroup1.ItemIndex of
-        0: vComando := vComando + ' AND EA.QTD > ' + IntToStr(vQtdAux);
-        1: vComando := vComando + ' AND EA.QTD < ' + IntToStr(vQtdAux);
-        2: vComando := vComando + ' AND coalesce(EA.QTD,0) < coalesce(PRO.QTD_ESTOQUE_MIN,0) ';
+      case RadioGroup2.ItemIndex of
+        0: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('P');
+        1: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('M');
+        2: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('C');
+        3: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('S');
       end;
     end;
   end;
+  case RadioGroup1.ItemIndex of
+    0: vComando := vComando + ' AND EA.QTD > ' + IntToStr(vQtdAux);
+    1: vComando := vComando + ' AND EA.QTD < ' + IntToStr(vQtdAux);
+    2: vComando := vComando + ' AND coalesce(EA.QTD,0) < coalesce(PRO.QTD_ESTOQUE_MIN,0) ';
+  end;
   if RxDBLookupCombo1.Text <> '' then
     vComando := vComando + ' AND EA.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
-  case RadioGroup2.ItemIndex of
-    0: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('P');
-    1: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('M');
-    2: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('C');
-    3: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('S');
-  end;
   fDMConsEstoque.sdsEstoque_Atual.CommandText := vComandoAux2 + vComando + vComandoAux;
   fDMConsEstoque.cdsEstoque_Atual.Open;
 end;
