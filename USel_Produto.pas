@@ -142,18 +142,19 @@ type
     procedure btnConfirmarClick(Sender: TObject);
   private
     { Private declarations }
-    ctProdutoLocal: String;
-    ctProdAux: String;
     procedure prc_Consultar;
     procedure prc_Monta_mPreco;
     procedure prc_Monta_Lote;
     procedure prc_Gravar_mCarrinho;
   public
     { Public declarations }
+    ctProdutoLocal: String;
+    ctProdAux: String;
     fDMSel_Produto: TDMSel_Produto;
     vTipo_Prod: String; //P=Produto  M=Material  'Vázio'=Ambos
     vVenda: Boolean;
-    vID_TabPreco : Integer;
+    vID_TabPreco: Integer;
+    vNome: String;
   end;
 
 var
@@ -167,6 +168,15 @@ uses DmdDatabase, uUtilPadrao, StrUtils, USel_Produto_Preco, rsDBUtils, USel_Pro
 
 procedure TfrmSel_Produto.BitBtn1Click(Sender: TObject);
 begin
+  qFilial.Close;
+  qFilial.Open;
+  qParametros.Close;
+  qParametros.Open;
+  qParametros_Fin.Close;
+  qParametros_Fin.Open;
+  qParametros_Geral.Close;
+  qParametros_Geral.Open;
+  qParametros_Prod.Open;
   prc_Consultar;
 end;
 
@@ -196,11 +206,8 @@ begin
       sdsProduto.CommandText := vComando + '(SELECT I.VLR_VENDA PRECO_PROMOCAO FROM TAB_PRECO T '
                                          + ' INNER JOIN TAB_PRECO_ITENS I ON T.ID = I.ID AND I.ID_PRODUTO = PRO.ID '
                                          + ' WHERE T.tabpromocional = ' + QuotedStr('S')
-                                         //+ '   AND T.ID = 4 '
                                          + ' AND T.dtinicial >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',Date))
                                          + ' AND T.DTFINAL >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',Date)) + ') ' + vComando2
-      //sdsProduto.ParamByName('DTINICIAL').AsDate := Date;
-      //sdsProduto.ParamByName('DTFINAL').AsDate   := Date;
     end;
   end
   else

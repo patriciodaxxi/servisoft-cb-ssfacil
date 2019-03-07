@@ -1140,6 +1140,7 @@ begin
   fDmCupomFiscal.prcLocalizar(fDmCupomFiscal.cdsCupom_ConsID.AsInteger);
   fDmCupomFiscal.vPosicao := 5;
   vIDPosicao := fDmCupomFiscal.cdsCupomFiscalID.AsInteger;
+  fDmCupomFiscal.vSomaOriginal := fdmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency; 
 
   fCupomFiscal := TfCupomFiscal.Create(Self);
   fCupomFiscal.fDmCupomFiscal := fDmCupomFiscal;
