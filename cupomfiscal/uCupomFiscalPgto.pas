@@ -1357,7 +1357,7 @@ begin
   while not fDmCupomFiscal.cdsCupom_Itens.Eof do
   begin
     fDmCupomFiscal.cdsCupom_Itens.Edit;
-    fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.00##',(fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
+    fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.000',(fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
                                                             vVlrTotal / vVlrProdutos)));
     //vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrRestante -
     //               (fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency * fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat)));

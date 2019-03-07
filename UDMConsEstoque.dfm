@@ -886,43 +886,38 @@ object DMConsEstoque: TDMConsEstoque
     GetMetadata = False
     CommandText = 
       'SELECT EM.ID_PRODUTO, EM.TAMANHO, SUM(EM.QTD2) QTD_ESTOQUE, PRO.' +
-      'REFERENCIA, PRO.NOME NOME_PRODUTO, PRO.UNIDADE,'#13#10'  EM.id_cor, CO' +
-      'MB.NOME NOME_COMBINACAO, PRO.sped_tipo_item,'#13#10'case'#13#10'  WHEN PRO.s' +
-      'ped_tipo_item = '#39'00'#39' THEN '#39'00 - Mercadoria para Revenda'#39#13#10'  WHEN' +
-      ' PRO.sped_tipo_item = '#39'01'#39' THEN '#39'01- Mat'#233'ria-Prima'#39#13#10'  WHEN PRO.' +
-      'sped_tipo_item = '#39'02'#39' THEN '#39'02- Embalagem'#39#13#10'  WHEN PRO.sped_tipo' +
-      '_item = '#39'03'#39' THEN '#39'03 - Produto em Processo'#39#13#10'  WHEN PRO.sped_ti' +
-      'po_item = '#39'04'#39' THEN '#39'04 - Produto Acabado'#39#13#10'  WHEN PRO.sped_tipo' +
-      '_item = '#39'05'#39' THEN '#39'05 - SubProduto'#39#13#10'  WHEN PRO.sped_tipo_item =' +
-      ' '#39'06'#39' THEN '#39'06 - Produto Intermedi'#225'rio'#39#13#10'  WHEN PRO.sped_tipo_it' +
-      'em = '#39'07'#39' THEN '#39'07 - Material de Uso e Consumo'#39#13#10'  WHEN PRO.sped' +
-      '_tipo_item = '#39'08'#39' THEN '#39'08 - Ativo Imobilizado'#39#13#10'  WHEN PRO.sped' +
-      '_tipo_item = '#39'10'#39' THEN '#39'10 - Outros Insumos'#39#13#10'  WHEN PRO.sped_ti' +
-      'po_item = '#39'99'#39' THEN '#39'99 - Outras'#39#13#10'  ELSE '#39#39#13#10'  END TIPO_SPED,'#13#10 +
-      #13#10'    (select SUM(ENT.QTD * ENT.VLR_UNITARIO) VLR_ENTRADA'#13#10'     ' +
-      ' FROM estoque_mov ENT'#13#10'      WHERE ENT.tipo_es = '#39'E'#39#13#10'        AN' +
-      'D ENT.gerar_custo = '#39'S'#39#13#10'        AND ENT.ID_PRODUTO = EM.ID_PROD' +
-      'UTO'#13#10'        AND ENT.tamanho = EM.TAMANHO'#13#10'        AND ENT.FILIA' +
-      'L = :FILIAL'#13#10'        AND ENT.DTMOVIMENTO <= :DTMOVIMENTO) VLR_EN' +
-      'TRADA,'#13#10'    (select SUM(ENT.QTD) QTD_ENTRADA'#13#10'      FROM estoque' +
-      '_mov ENT'#13#10'      WHERE ENT.tipo_es = '#39'E'#39#13#10'        AND ENT.gerar_c' +
-      'usto = '#39'S'#39#13#10'        AND ENT.ID_PRODUTO = EM.ID_PRODUTO'#13#10'        ' +
-      'AND ENT.tamanho = EM.TAMANHO'#13#10'        AND ENT.FILIAL = :FILIAL'#13#10 +
-      '        AND ENT.DTMOVIMENTO <= :DTMOVIMENTO) QTD_ENTRADA,'#13#10'     ' +
-      '  (select first (1) ENT.PERC_ICMS'#13#10'        from ESTOQUE_MOV ENT'#13 +
-      #10'        where ENT.TIPO_ES = '#39'E'#39' and'#13#10'              ENT.GERAR_CU' +
-      'STO = '#39'S'#39' and'#13#10'              ENT.ID_PRODUTO = EM.ID_PRODUTO and'#13 +
-      #10'              ENT.TAMANHO = EM.TAMANHO and'#13#10'              ENT.F' +
-      'ILIAL = :FILIAL and'#13#10'              ENT.DTMOVIMENTO <= :DTMOVIMEN' +
-      'TO and'#13#10'              ENT.TIPO_ES = '#39'E'#39' and'#13#10'              ENT.P' +
-      'ERC_ICMS > 0'#13#10'        order by ENT.ID desc) PERC_ICMS, PRO.PERC_' +
-      'IPI'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JOIN PRODUTO PRO ON EM.ID_PRODUT' +
-      'O = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB ON EM.ID_COR = COMB.ID'#13#10'WH' +
-      'ERE EM.FILIAL = :FILIAL'#13#10'  AND EM.DTMOVIMENTO <= :DTMOVIMENTO'#13#10' ' +
-      ' AND ((PRO.TIPO_REG = :TIPO_REG) or (PRO.SPED_TIPO_ITEM = :SPED_' +
-      'TIPO_ITEM))'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10'  AND PRO.ESTOQUE = '#39'S'#39#13#10'G' +
-      'ROUP BY EM.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, PRO' +
-      '.UNIDADE, EM.id_cor, COMB.NOME, PRO.sped_tipo_item, PRO.PERC_IPI'
+      'REFERENCIA, PRO.NOME NOME_PRODUTO, PRO.UNIDADE,  EM.id_cor, COMB' +
+      '.NOME NOME_COMBINACAO, PRO.sped_tipo_item,'#13#10'case'#13#10'  WHEN PRO.spe' +
+      'd_tipo_item = '#39'00'#39' THEN '#39'00 - Mercadoria para Revenda'#39#13#10'  WHEN P' +
+      'RO.sped_tipo_item = '#39'01'#39' THEN '#39'01- Mat'#233'ria-Prima'#39#13#10'  WHEN PRO.sp' +
+      'ed_tipo_item = '#39'02'#39' THEN '#39'02- Embalagem'#39#13#10'  WHEN PRO.sped_tipo_i' +
+      'tem = '#39'03'#39' THEN '#39'03 - Produto em Processo'#39#13#10'  WHEN PRO.sped_tipo' +
+      '_item = '#39'04'#39' THEN '#39'04 - Produto Acabado'#39#13#10'  WHEN PRO.sped_tipo_i' +
+      'tem = '#39'05'#39' THEN '#39'05 - SubProduto'#39#13#10'  WHEN PRO.sped_tipo_item = '#39 +
+      '06'#39' THEN '#39'06 - Produto Intermedi'#225'rio'#39#13#10'  WHEN PRO.sped_tipo_item' +
+      ' = '#39'07'#39' THEN '#39'07 - Material de Uso e Consumo'#39#13#10'  WHEN PRO.sped_t' +
+      'ipo_item = '#39'08'#39' THEN '#39'08 - Ativo Imobilizado'#39#13#10'  WHEN PRO.sped_t' +
+      'ipo_item = '#39'10'#39' THEN '#39'10 - Outros Insumos'#39#13#10'  WHEN PRO.sped_tipo' +
+      '_item = '#39'99'#39' THEN '#39'99 - Outras'#39#13#10'  ELSE '#39#39#13#10'  END TIPO_SPED,'#13#10#13#10 +
+      '    (select SUM(ENT.QTD * ENT.VLR_UNITARIO) VLR_ENTRADA'#13#10'      F' +
+      'ROM estoque_mov ENT'#13#10'      WHERE ENT.tipo_es = '#39'E'#39#13#10'        AND ' +
+      'ENT.gerar_custo = '#39'S'#39#13#10'        AND ENT.ID_PRODUTO = EM.ID_PRODUT' +
+      'O'#13#10'        AND ENT.tamanho = EM.TAMANHO'#13#10'        AND ENT.FILIAL ' +
+      '= :FILIAL'#13#10'        AND ENT.DTMOVIMENTO <= :DTMOVIMENTO) VLR_ENTR' +
+      'ADA,'#13#10'    (select SUM(ENT.QTD) QTD_ENTRADA'#13#10'      FROM estoque_m' +
+      'ov ENT'#13#10'      WHERE ENT.tipo_es = '#39'E'#39#13#10'        AND ENT.gerar_cus' +
+      'to = '#39'S'#39#13#10'        AND ENT.ID_PRODUTO = EM.ID_PRODUTO'#13#10'        AN' +
+      'D ENT.tamanho = EM.TAMANHO'#13#10'        AND ENT.FILIAL = :FILIAL'#13#10'  ' +
+      '      AND ENT.DTMOVIMENTO <= :DTMOVIMENTO) QTD_ENTRADA,'#13#10'       ' +
+      '(select first (1) ENT.PERC_ICMS'#13#10'        from ESTOQUE_MOV ENT'#13#10' ' +
+      '       where ENT.TIPO_ES = '#39'E'#39' and'#13#10'              ENT.GERAR_CUST' +
+      'O = '#39'S'#39' and'#13#10'              ENT.ID_PRODUTO = EM.ID_PRODUTO and'#13#10' ' +
+      '             ENT.TAMANHO = EM.TAMANHO and'#13#10'              ENT.FIL' +
+      'IAL = :FILIAL and'#13#10'              ENT.DTMOVIMENTO <= :DTMOVIMENTO' +
+      ' and'#13#10'              ENT.TIPO_ES = '#39'E'#39' and'#13#10'              ENT.PER' +
+      'C_ICMS > 0'#13#10'        order by ENT.ID desc) PERC_ICMS, PRO.PERC_IP' +
+      'I'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JOIN PRODUTO PRO ON EM.ID_PRODUTO ' +
+      '= PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB ON EM.ID_COR = COMB.ID'
     MaxBlobSize = -1
     Params = <
       item
@@ -954,7 +949,7 @@ object DMConsEstoque: TDMConsEstoque
         DataType = ftUnknown
         Name = 'DTMOVIMENTO'
         ParamType = ptInput
-	  end>
+      end>
     SQLConnection = dmDatabase.scoDados
     Left = 464
     Top = 240

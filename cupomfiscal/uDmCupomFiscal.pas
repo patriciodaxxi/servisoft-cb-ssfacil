@@ -3269,6 +3269,7 @@ var
 begin
   if not cdsProduto.Active then
     cdsProduto.Open;
+
   if cdsCupom_ItensID_PRODUTO.AsInteger <> cdsProdutoID.AsInteger then
     cdsProduto.Locate('ID',cdsCupom_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
 
