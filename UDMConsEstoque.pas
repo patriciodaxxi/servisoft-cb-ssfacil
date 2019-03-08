@@ -537,7 +537,6 @@ type
     cdsEstoque_AtualNOME_PRODUTO: TStringField;
     cdsEstoque_AtualREFERENCIA: TStringField;
     cdsEstoque_AtualNOME_COMBINACAO: TStringField;
-    cdsEstoque_AtualID: TIntegerField;
     cdsEstoque_AtualLOCALIZACAO: TStringField;
     cdsEstoque_AtualQTD_RESERVA: TFloatField;
     cdsEstoque_AtualQTD_ESTOQUE_MIN: TFloatField;
@@ -629,6 +628,7 @@ type
     cdsEstoque_Em_Terc_PesNCM: TStringField;
     cdsEstoque_Em_Terc_PesTIPO_TER: TStringField;
     cdsEstoque_Em_Terc_PesDESC_SPED_TIPO: TStringField;
+    cdsEstoque_AtualID_PRODUTO: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
