@@ -43,6 +43,7 @@ type
     rlTotIcms: TRLLabel;
     rlTotIPI: TRLLabel;
     RLDBText5: TRLDBText;
+    rlTotQtd: TRLLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -53,7 +54,7 @@ type
   private
     { Private declarations }
     fDMRel: TDMRel;
-    vTotICMS, vTotIPI: Real;
+    vTotICMS, vTotIPI, vTotQtd: Real;
   public
     { Public declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -114,6 +115,7 @@ begin
   rlIPI.Caption  := FormatFloat('0.00',fDMConsEstoque.cdsBalancoPERC_IPI.asFloat / 100 * fDMConsEstoque.cdsBalancoclPreco_Medio.AsFloat * fdmConsEstoque.cdsBalancoQTD_ESTOQUE.AsFloat);
   vTotICMS := vTotICMS + StrToFloat(FormatFloat('0.00',fDMConsEstoque.cdsBalancoPERC_ICMS.asFloat / 100 * fDMConsEstoque.cdsBalancoclPreco_Medio.AsFloat * fdmConsEstoque.cdsBalancoQTD_ESTOQUE.AsFloat));
   vTotIPI  := vTotIPI + StrToFloat(FormatFloat('0.00',fDMConsEstoque.cdsBalancoPERC_IPI.asFloat / 100 * fDMConsEstoque.cdsBalancoclPreco_Medio.AsFloat * fdmConsEstoque.cdsBalancoQTD_ESTOQUE.AsFloat));
+  vTotQtd := vTotQtd + StrToFloat(FormatFloat('0.00',fDMConsEstoque.cdsBalancoQTD_ESTOQUE.AsFloat));
 end;
 
 procedure TfRelEstoque_Bal.FormCreate(Sender: TObject);
@@ -137,6 +139,7 @@ procedure TfRelEstoque_Bal.RLBand3BeforePrint(Sender: TObject;
 begin
   rlTotIcms.Caption := 'ICMS ' + FormatFloat('0.00',vTotICMS);
   rlTotIPI.Caption  := 'IPI ' + FormatFloat('0.00',vTotIPI);
+  rlTotQtd.Caption  := FormatFloat('0.00',vTotQtd); 
 end;
 
 end.
