@@ -155,6 +155,7 @@ begin
   end;
   fDMConsEstoque.sdsBalanco.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsBalanco.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
+  fDMConsEstoque.cdsBalanco.IndexFieldNames := 'NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
   fDMConsEstoque.cdsBalanco.Open;
 end;
 
@@ -248,7 +249,8 @@ begin
   SMDBGrid1.DisableScroll;
   vTipo_Config_Email := 4;
   fDMConsEstoque.cdsFilial.Locate('ID',RxDBLookupCombo1.KeyValue,[loCaseInsensitive]);
-  fDMConsEstoque.cdsBalanco.IndexFieldNames := 'NOME_PRODUTO;TAMANHO';
+  fDMConsEstoque.cdsBalanco.IndexFieldNames := 'NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+
 
   vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco.fr3';
   if FileExists(vArq) then
