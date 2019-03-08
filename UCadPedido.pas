@@ -8,7 +8,7 @@ uses
   UCadPedido_Itens, UCadPedido_Desconto, UEscolhe_Filial, UCBase, RzPanel, UCadTabPreco, Math, UCadPedido_Cancelamento,
   DateUtils, dbXPress, NxCollection, Menus, Variants, USel_TabPreco, ULeExcel, NxEdit, VarUtils, UEtiq_Individual, Provider,
   UCadPedido_Ace, UGerar_Rotulos, UGerar_Rotulos_Color, DBClient, UCadPedido_Itens_Copia, UConsOrdProd_Ped, UConsHist_Chapa,
-  UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed;
+  UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed,classe.validaemail, frxExportPDF, frxExportMail;
 
 type
   TfrmCadPedido = class(TForm)
@@ -172,7 +172,6 @@ type
     Shape9: TShape;
     Label45: TLabel;
     N1: TMenuItem;
-    Personalizado1: TMenuItem;
     gbxTransportes: TRzGroupBox;
     pnlTransporte: TPanel;
     Label84: TLabel;
@@ -233,14 +232,11 @@ type
     gbImpressao: TGroupBox;
     cbPorta: TCheckBox;
     cbVidro: TCheckBox;
-    Personalizado21: TMenuItem;
-    Personalizado31: TMenuItem;
     EtiquetaRtulo1: TMenuItem;
     Rtulo11: TMenuItem;
     Rtulo21: TMenuItem;
     EtiquetaIndividual1: TMenuItem;
     Pedido1: TMenuItem;
-    PedidosPersonalizados1: TMenuItem;
     btnCopiar_Item: TBitBtn;
     btnCopiarPedido: TNxButton;
     Rtulo31: TMenuItem;
@@ -360,6 +356,7 @@ type
     DBCheckBox6: TDBCheckBox;
     Label85: TLabel;
     DBEdit27: TDBEdit;
+    Personalizado1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -419,7 +416,6 @@ type
     procedure RxDBLookupCombo3Exit(Sender: TObject);
     procedure EtiquetaCaixaIndividual1Click(Sender: TObject);
     procedure btnFilialClick(Sender: TObject);
-    procedure Personalizado1Click(Sender: TObject);
     procedure btnExcluirParcelasClick(Sender: TObject);
     procedure btnGerarParcelasClick(Sender: TObject);
     procedure rxdbCondicaoPgtoChange(Sender: TObject);
@@ -434,11 +430,9 @@ type
     procedure btnExcluir_RoldanasClick(Sender: TObject);
     procedure Rtulo11Click(Sender: TObject);
     procedure Rtulo21Click(Sender: TObject);
-    procedure Personalizado21Click(Sender: TObject);
     procedure btnCopiar_ItemClick(Sender: TObject);
     procedure btnCopiarPedidoClick(Sender: TObject);
     procedure Rtulo31Click(Sender: TObject);
-    procedure Personalizado31Click(Sender: TObject);
     procedure SMDBGrid9GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure SMDBGrid10GetCellParams(Sender: TObject; Field: TField;
@@ -484,6 +478,7 @@ type
   private
     { Private declarations }
     vRetirada: String;
+    fLista : TStringList;
     fDMCadPedido: TDMCadPedido;
     fDMSel_Produto: TDMSel_Produto;
     ffrmCadPedido_Itens: TfrmCadPedido_Itens;
@@ -509,6 +504,7 @@ type
     procedure prc_Excluir_Registro;
     procedure prc_Gravar_Registro;
     procedure prc_Consultar(ID: Integer);
+    procedure ItemClick(Sender:TObject);
 
     procedure prc_Informar_Filial;
     procedure prc_Posiciona_Pedido;
@@ -525,6 +521,7 @@ type
     procedure prc_Gravar_Pedido_Excel;
     procedure prc_Opcao_Consumidor;
     procedure prc_Opcao_Prazo;
+    procedure prc_Abre_Filial_Menu(Empresa : Integer; Tipo : Integer);    
 
     function fnc_senha(Opcao_Senha, Campo_Senha, Tipo, Desc1, Desc2, Desc3: String ; Item: Integer): Boolean;
 
@@ -1082,6 +1079,8 @@ begin
   btnConsTempo.Visible := (fDMCadPedido.qParametros_GeralUSA_TIPO_MATERIAL.AsString = 'S');
   DBCheckBox5.Visible  := (fDMCadPedido.qParametros_FinUSA_NGR.AsString = 'S');
   DBCheckBox6.Visible  := (fDMCadPedido.qParametros_PedUSA_AMOSTRA.AsString = 'S');
+  prc_Abre_Filial_Menu(1,2);
+
 end;
 
 procedure TfrmCadPedido.prc_Consultar(ID: Integer);
@@ -2792,15 +2791,6 @@ begin
   end;
 end;
 
-procedure TfrmCadPedido.Personalizado1Click(Sender: TObject);
-begin
-  fDMCadPedido.vNum_Rel_Fast := 1;
-  fDMCadPedido.vTipo_Rel_Ped := '';
-  fDMCadPedido.vImpPreco     := ckImpPreco.Checked;
-  prc_Posiciona_Imp;
-  prc_Monta_Impressao(False);//Color Shoes
-end;
-
 procedure TfrmCadPedido.btnExcluirParcelasClick(Sender: TObject);
 begin
   if (fDMCadPedido.cdsPedido_Parc.IsEmpty) or (fDMCadPedido.cdsPedido_ParcID.AsInteger <= 0) then
@@ -3155,7 +3145,8 @@ begin
   else
   begin
     if fDMCadPedido.cdsFilialRelatorios.Locate('TIPO;POSICAO',VarArrayOf([2,vAux]),([loCaseInsensitive])) then //tipo 2 = Pedido
-      vArq := fDMCadPedido.cdsFilialRelatoriosCAMINHO.AsString
+//      vArq := fDMCadPedido.cdsFilialRelatoriosCAMINHO.AsString
+    vArq := fDMCadPedido.qFilial_Relatorio_MenuCAMINHO.AsString
     else
     begin
       ShowMessage('Relatório não definido no cadastro da empresa (filial)!');
@@ -3200,15 +3191,6 @@ begin
   fDMCadPedido.cdsPedidoImp_Itens.IndexFieldNames := vIndice;
   if trim(fDMCadPedido.vMSGErro) <> '' then
     MessageDlg(fDMCadPedido.vMSGErro, mtInformation, [mbOk], 0);
-end;
-
-procedure TfrmCadPedido.Personalizado21Click(Sender: TObject);
-begin
-  fDMCadPedido.vNum_Rel_Fast := 2;
-  fDMCadPedido.vTipo_Rel_Ped := '';
-  fDMCadPedido.vImpPreco     := ckImpPreco.Checked;
-  prc_Posiciona_Imp;
-  prc_Monta_Impressao(True);//Color Shoes
 end;
 
 procedure TfrmCadPedido.btnCopiar_ItemClick(Sender: TObject);
@@ -3392,15 +3374,6 @@ begin
   ffrmGerar_Rotulos_Color.cePedInterno.AsInteger := fDMCadPedido.cdsPedido_ConsultaNUM_PEDIDO.AsInteger;
   ffrmGerar_Rotulos_Color.ShowModal;
   FreeAndNil(ffrmGerar_Rotulos_Color);
-end;
-
-procedure TfrmCadPedido.Personalizado31Click(Sender: TObject);
-begin
-  fDMCadPedido.vNum_Rel_Fast := 3;
-  fDMCadPedido.vTipo_Rel_Ped := '';
-  fDMCadPedido.vImpPreco     := ckImpPreco.Checked;
-  prc_Posiciona_Imp;
-  prc_Monta_Impressao(True);//Color Shoes
 end;
 
 procedure TfrmCadPedido.SMDBGrid9GetCellParams(Sender: TObject;
@@ -4257,6 +4230,75 @@ begin
     sds.Close;
   finally
     FreeAndNil(sds);
+  end;
+end;
+
+procedure TfrmCadPedido.ItemClick(Sender: TObject);
+var
+  vArq, x : String;
+  email : TValidaEmail;
+  enviar : TfrxMailExport;
+  pdf : TfrxPDFExport;
+begin
+  x := StringReplace(TMenuItem(Sender).Caption,'&','',[rfReplaceAll]);
+  fDMCadPedido.qFilial_Relatorio_Menu.Locate('DESCRICAO',x,[loCaseInsensitive]);
+
+  fDMCadPedido.vNum_Rel_Fast := 1;
+  fDMCadPedido.vTipo_Rel_Ped := '';
+  fDMCadPedido.vImpPreco     := ckImpPreco.Checked;
+  prc_Posiciona_Imp;
+
+  email := TValidaEmail.create(fDMCadPedido.cdsPedidoImpFILIAL.AsInteger,'3');
+  try
+    pdf := TfrxPDFExport.Create(nil);
+    enviar := TfrxMailExport.Create(nil);
+    enviar.SmtpPort := email.porta;
+    enviar.Login := email.usuario;
+    enviar.Password := email.senha;
+    enviar.SmtpHost := email.host;
+    enviar.Address := fDMCadPedido.cdsPedidoImpEMAIL_NFE_CLIENTE.AsString;
+    enviar.FromName := fDMCadPedido.cdsPedidoImpNOME_FILIAL.AsString;
+    enviar.ExportFilter := pdf;
+    enviar.FilterDesc := 'PDF por e-mail';
+    enviar.FromMail := email.email;
+    enviar.FromCompany := 'russimar@terra.com.br';
+    enviar.Subject := 'Pedido nº: ' + IntToStr(fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsInteger);
+    enviar.UseIniFile := False;
+    enviar.ShowExportDialog := False;
+  finally
+    FreeAndNil(email);
+  end;
+
+  prc_Monta_Impressao(False);//Color Shoes
+
+end;
+
+procedure TfrmCadPedido.prc_Abre_Filial_Menu(Empresa, Tipo: Integer);
+var
+  i : integer;
+  item : TMenuItem;
+begin
+  fLista := TStringList.Create;
+  i := 0;
+  fLista.Clear;
+  fDMCadPedido.qFilial_Relatorio_Menu.Close;
+  fDMCadPedido.qFilial_Relatorio_Menu.ParamByName('ID').AsInteger := Empresa;
+  fDMCadPedido.qFilial_Relatorio_Menu.ParamByName('TIPO').AsInteger := Tipo;
+  fDMCadPedido.qFilial_Relatorio_Menu.Open;
+  fDMCadPedido.qFilial_Relatorio_Menu.First;
+  while not fDMCadPedido.qFilial_Relatorio_Menu.eof do
+  begin
+    if fDMCadPedido.qFilial_Relatorio_MenuDESCRICAO.AsString <> '' then
+    begin
+        item := TMenuItem.Create(Self);
+        item.Caption := fDMCadPedido.qFilial_Relatorio_MenuDESCRICAO.AsString;
+        item.onClick := ItemClick;
+        item.Tag := i;
+        i := i + 1;
+        PopupMenu1.Items[4].Add(item);
+        fLista.Add(fDMCadPedido.qFilial_Relatorio_MenuCAMINHO.AsString);
+    end;
+    fDMCadPedido.qFilial_Relatorio_Menu.Next
   end;
 end;
 

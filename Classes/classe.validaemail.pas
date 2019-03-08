@@ -99,21 +99,21 @@ end;
 procedure TValidaEmail.setSenha(const Value: String);
 begin
   if Value = '' then
-    raise Exception.Create('Senha não informada nos parâmetros');
+    raise Exception.Create('Senha do email não informada nos parâmetros');
   FSenha := Value;
 end;
 
 procedure TValidaEmail.setUsuario(const Value: String);
 begin
   if Value = '' then
-    raise Exception.Create('Usuário não informado nos parâmetros');
+    raise Exception.Create('Usuário do email não informado nos parâmetros');
   FUsuario := Value;
 end;
 
 procedure TValidaEmail.setPorta(const Value: Integer);
 begin
   if Value = 0 then
-    raise Exception.Create('Porta não informada nos parâmetros');
+    raise Exception.Create('Porta do smtp não informada nos parâmetros');
   FPorta := Value;
 end;
 
