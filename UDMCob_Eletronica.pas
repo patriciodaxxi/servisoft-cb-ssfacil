@@ -1491,8 +1491,8 @@ begin
       cdsDuplicataPROTESTADO.AsString := 'S';
     if trim(vAceite) <> '' then
       cdsDuplicataACEITE.AsString := vAceite;
-    if qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S' then
-      cdsDuplicataID_CONTABIL_OPE_BAIXA.AsInteger := qParametros_FinID_CONTABIL_OPE_BAIXA.AsInteger;
+//    if qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S' then
+//      cdsDuplicataID_CONTABIL_OPE_BAIXA.AsInteger := qParametros_FinID_CONTABIL_OPE_BAIXA.AsInteger;
 
     cdsDuplicata.Post;
     cdsDuplicata.ApplyUpdates(0);
