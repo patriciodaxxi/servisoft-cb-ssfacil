@@ -3345,20 +3345,16 @@ object DMConsEstoque: TDMConsEstoque
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT PRO.ID, SUM(coalesce(EA.qtd,0)) QTD,'#13#10'EA.id_cor, EA.taman' +
-      'ho, EA.id_local_estoque, PRO.NOME NOME_PRODUTO, PRO.REFERENCIA,'#13 +
-      #10'COMB.NOME NOME_COMBINACAO, PRO.localizacao, SUM(coalesce(ER.qtd' +
-      ',0)) QTD_RESERVA,'#13#10'PRO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM,' +
-      ' NCM.NCM, NCM.NOME NOME_NCM'#13#10'FROM ESTOQUE_ATUAL EA'#13#10'INNER JOIN P' +
-      'RODUTO PRO'#13#10'ON EA.id_produto = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB' +
-      #13#10'ON EA.ID_COR = COMB.ID'#13#10'LEFT JOIN TAB_NCM NCM'#13#10'ON PRO.ID_NCM =' +
-      ' NCM.ID'#13#10'left join estoque_res ER'#13#10'ON EA.id_produto = ER.id_prod' +
-      'uto'#13#10'AND EA.id_cor = ER.ID_COR'#13#10'AND EA.tamanho = ER.TAMANHO'#13#10'AND' +
-      ' EA.FILIAL = ER.filial'#13#10'WHERE PRO.ESTOQUE = '#39'S'#39#13#10'   AND PRO.INAT' +
-      'IVO = '#39'N'#39#13#10'GROUP BY EA.id_cor, EA.tamanho, EA.id_local_estoque, ' +
-      'PRO.NOME, PRO.REFERENCIA,'#13#10'COMB.NOME, PRO.localizacao, PRO.ID, P' +
-      'RO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM,'#13#10'NCM.NCM, NCM.NOME'#13 +
-      #10
+      'select aux.*,'#13#10'PRO.NOME NOME_PRODUTO, PRO.REFERENCIA,'#13#10'COMB.NOME' +
+      ' NOME_COMBINACAO, PRO.localizacao,'#13#10'PRO.qtd_estoque_min, PRO.UNI' +
+      'DADE, PRO.ID_NCM, NCM.NCM, NCM.NOME NOME_NCM'#13#10'from ('#13#10'select ea.' +
+      'id_produto, ea.filial, sum(ea.qtd) qtd, ea.id_cor, ea.tamanho,'#13#10 +
+      'ea.id_local_estoque, sum(ea.qtd_reserva) qtd_reserva'#13#10'from vesto' +
+      'que_atual ea'#13#10'group by ea.id_produto, ea.filial, ea.id_cor, ea.t' +
+      'amanho,'#13#10'ea.id_local_estoque'#13#10') aux'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON ' +
+      'AUX.id_produto = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON AUX.ID_CO' +
+      'R = COMB.ID'#13#10'LEFT JOIN TAB_NCM NCM'#13#10'ON PRO.ID_NCM = NCM.ID'#13#10'WHER' +
+      'E PRO.ESTOQUE = '#39'S'#39#13#10'   AND PRO.INATIVO = '#39'N'#39#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3408,10 +3404,6 @@ object DMConsEstoque: TDMConsEstoque
       FieldName = 'NOME_COMBINACAO'
       Size = 60
     end
-    object cdsEstoque_AtualID: TIntegerField
-      FieldName = 'ID'
-      Required = True
-    end
     object cdsEstoque_AtualLOCALIZACAO: TStringField
       FieldName = 'LOCALIZACAO'
       Size = 30
@@ -3438,6 +3430,9 @@ object DMConsEstoque: TDMConsEstoque
     object cdsEstoque_AtualNOME_NCM: TStringField
       FieldName = 'NOME_NCM'
       Size = 250
+    end
+    object cdsEstoque_AtualID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
     end
   end
   object dsEstoque_Atual: TDataSource

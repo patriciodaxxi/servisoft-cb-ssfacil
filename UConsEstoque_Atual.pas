@@ -99,11 +99,27 @@ var
   vComando : String;
   i : Integer;
 begin
-  fDMConsEstoque.cdsEstoque_Atual.Close;
   vQtdAux := 0;
-  i := PosEx('GROUP',fDMConsEstoque.ctEstoque_Atual,0);
-  vComandoAux  := copy(fDMConsEstoque.ctEstoque_Atual,i,Length(fDMConsEstoque.ctEstoque_Atual) - i + 1);
-  vComandoAux2 := copy(fDMConsEstoque.ctEstoque_Atual,1,i-1);
+  fDMConsEstoque.cdsEstoque_Atual.Close;
+  vComando := 'select aux.*, PRO.NOME NOME_PRODUTO, PRO.REFERENCIA, COMB.NOME NOME_COMBINACAO, PRO.localizacao, '
+            + ' PRO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM, NCM.NCM, NCM.NOME NOME_NCM '
+            + ' from ( '
+            + ' select ea.id_produto, sum(ea.qtd) qtd, ea.id_cor, ea.tamanho, '
+            + ' ea.id_local_estoque, sum(ea.qtd_reserva) qtd_reserva '
+            + ' from vestoque_atual ea ';
+  if RxDBLookupCombo1.Text <> '' then
+    vComando := vComando + ' where ea.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
+  vComando := vComando + ' group by ea.id_produto, ea.id_cor, ea.tamanho, ea.id_local_estoque '
+            + ') aux '
+            + 'INNER JOIN PRODUTO PRO '
+            + 'ON AUX.id_produto = PRO.ID '
+            + ' LEFT JOIN COMBINACAO COMB '
+            + ' ON AUX.ID_COR = COMB.ID '
+            + ' LEFT JOIN TAB_NCM NCM '
+            + ' ON PRO.ID_NCM = NCM.ID '
+            + ' WHERE PRO.ESTOQUE = ' + QuotedStr('S')
+            + '    AND PRO.INATIVO = ' + QuotedStr('N');
+
   if ceIDProduto.AsInteger > 0 then
     vComando := vComando + ' AND PRO.ID = ' + ceIDProduto.Text
   else
@@ -121,13 +137,11 @@ begin
     end;
   end;
   case RadioGroup1.ItemIndex of
-    0: vComando := vComando + ' AND EA.QTD > ' + IntToStr(vQtdAux);
-    1: vComando := vComando + ' AND EA.QTD < ' + IntToStr(vQtdAux);
-    2: vComando := vComando + ' AND coalesce(EA.QTD,0) < coalesce(PRO.QTD_ESTOQUE_MIN,0) ';
+    0: vComando := vComando + ' AND aux.QTD > ' + IntToStr(vQtdAux);
+    1: vComando := vComando + ' AND aux.QTD < ' + IntToStr(vQtdAux);
+    2: vComando := vComando + ' AND coalesce(aux.QTD,0) < coalesce(PRO.QTD_ESTOQUE_MIN,0) ';
   end;
-  if RxDBLookupCombo1.Text <> '' then
-    vComando := vComando + ' AND EA.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
-  fDMConsEstoque.sdsEstoque_Atual.CommandText := vComandoAux2 + vComando + vComandoAux;
+  fDMConsEstoque.sdsEstoque_Atual.CommandText := vComando;
   fDMConsEstoque.cdsEstoque_Atual.Open;
 end;
 
@@ -276,7 +290,7 @@ begin
       2: vTipoReg := 'C';
       3: vTipoReg := 'S';
     end;
-    vId := fDMConsEstoque.cdsEstoque_AtualID.AsInteger;
+    vId := fDMConsEstoque.cdsEstoque_AtualID_PRODUTO.AsInteger;
     vIndexName  := fDMConsEstoque.cdsEstoque_Atual.IndexFieldNames;
     vIndexValue := fDMConsEstoque.cdsEstoque_Atual.FieldByName(vIndexName).AsString;
     ceIDProduto.AsInteger := vId;

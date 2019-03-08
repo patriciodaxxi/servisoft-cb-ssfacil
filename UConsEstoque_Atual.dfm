@@ -337,7 +337,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Columns = <
           item
             Expanded = False
-            FieldName = 'ID'
+            FieldName = 'ID_PRODUTO'
             Title.Alignment = taCenter
             Title.Caption = 'ID Produto'
             Width = 52
@@ -619,7 +619,6 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
                 Title.Color = 7864319
-                Width = 64
                 Visible = True
               end
               item
@@ -644,7 +643,6 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome Terceiro'
                 Title.Color = 7864319
-                Width = 64
                 Visible = True
               end
               item
@@ -661,7 +659,6 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Produto SPED'
                 Title.Color = 7864319
-                Width = 64
                 Visible = True
               end>
           end
@@ -971,7 +968,6 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Mov.'
                 Title.Color = 7864319
-                Width = 64
                 Visible = True
               end>
           end
