@@ -261,7 +261,6 @@ object frmCadFuncionario: TfrmCadFuncionario
             Expanded = False
             FieldName = 'CPF'
             Title.Alignment = taCenter
-            Width = 64
             Visible = True
           end>
       end

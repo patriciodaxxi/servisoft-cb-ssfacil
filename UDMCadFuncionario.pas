@@ -243,6 +243,8 @@ type
     dsSetor_Esteira: TDataSource;
     cdsSetor_EsteiraID: TIntegerField;
     cdsSetor_EsteiraNOME: TStringField;
+    sdsFuncionarioSENHA: TStringField;
+    cdsFuncionarioSENHA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFuncionarioNewRecord(DataSet: TDataSet);
     procedure dspFuncionarioUpdateError(Sender: TObject;
