@@ -851,7 +851,7 @@ object fMenu: TfMenu
         Caption = '-'
       end
       object SPEDBlocoH1: TMenuItem
-        Caption = 'SPED Bloco H '
+        Caption = 'SPED Bloco H / K'
         OnClick = SPEDBlocoH1Click
       end
       object GerarFCI1: TMenuItem

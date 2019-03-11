@@ -21,8 +21,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 861
-    Height = 536
+    Width = 869
+    Height = 544
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -49,7 +49,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object pnlPesquisa: TPanel
         Left = 0
         Top = 35
-        Width = 857
+        Width = 865
         Height = 38
         Align = alTop
         Color = clSilver
@@ -173,8 +173,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 73
-        Width = 857
-        Height = 440
+        Width = 865
+        Height = 448
         Align = alClient
         Ctl3D = False
         DataSource = DMCadFuncionario.dsFuncionario_Consulta
@@ -244,7 +244,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 857
+        Width = 865
         Height = 35
         Align = alTop
         Color = clSilver
@@ -408,7 +408,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 857
+        Width = 865
         Height = 35
         Align = alTop
         Color = 8404992
@@ -634,7 +634,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object pnlDados: TPanel
         Left = 0
         Top = 35
-        Width = 857
+        Width = 865
         Height = 114
         Align = alTop
         Enabled = False
@@ -664,17 +664,25 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           Caption = 'N'#186' Matr'#237'cula:'
         end
         object Label24: TLabel
-          Left = 311
+          Left = 428
           Top = 41
           Width = 63
           Height = 13
           Alignment = taRightJustify
           Caption = 'N'#186' Crach'#225':'
         end
+        object Label4: TLabel
+          Left = 451
+          Top = 62
+          Width = 41
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Senha:'
+        end
         object DBEdit7: TDBEdit
           Left = 121
           Top = 12
-          Width = 380
+          Width = 498
           Height = 21
           CharCase = ecUpperCase
           Ctl3D = True
@@ -721,7 +729,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           TabOrder = 3
         end
         object DBEdit22: TDBEdit
-          Left = 378
+          Left = 495
           Top = 33
           Width = 124
           Height = 21
@@ -747,7 +755,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
         object DBCheckBox2: TDBCheckBox
           Left = 120
           Top = 74
-          Width = 248
+          Width = 145
           Height = 17
           Caption = 'Baixar Lote Completo'
           Color = clBtnFace
@@ -761,7 +769,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
         object DBCheckBox3: TDBCheckBox
           Left = 120
           Top = 91
-          Width = 243
+          Width = 145
           Height = 17
           Caption = 'Baixar Processos'
           Color = clBtnFace
@@ -772,12 +780,23 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
+        object DBEdit1: TDBEdit
+          Left = 496
+          Top = 54
+          Width = 124
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'SENHA'
+          DataSource = DMCadFuncionario.dsFuncionario
+          PasswordChar = '*'
+          TabOrder = 8
+        end
       end
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 149
-        Width = 857
-        Height = 364
+        Width = 865
+        Height = 372
         ActivePage = TS_Setor
         Align = alClient
         TabIndex = 1
@@ -788,14 +807,14 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           object pnlProcesso: TPanel
             Left = 0
             Top = 0
-            Width = 853
-            Height = 341
+            Width = 861
+            Height = 349
             Align = alClient
             Caption = 'pnlProcesso'
             TabOrder = 0
             DesignSize = (
-              853
-              341)
+              861
+              349)
             object Label37: TLabel
               Left = 54
               Top = 34
@@ -805,8 +824,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
             end
             object SMDBGrid3: TSMDBGrid
               Left = 1
-              Top = 113
-              Width = 851
+              Top = 121
+              Width = 859
               Height = 227
               Align = alBottom
               Anchors = [akLeft, akTop, akRight, akBottom]
@@ -1158,7 +1177,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 853
+            Width = 861
             Height = 41
             Align = alTop
             Color = clSilver
@@ -1431,8 +1450,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 41
-            Width = 853
-            Height = 300
+            Width = 861
+            Height = 308
             Align = alClient
             Ctl3D = False
             DataSource = DMCadFuncionario.dsFuncionario_Setor
@@ -1504,8 +1523,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 536
-    Width = 861
+    Top = 544
+    Width = 869
     Height = 19
     Panels = <
       item

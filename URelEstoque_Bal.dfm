@@ -297,7 +297,7 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
         BandType = btSummary
         BeforePrint = RLBand3BeforePrint
         object RLLabel10: TRLLabel
-          Left = 451
+          Left = 395
           Top = 2
           Width = 55
           Height = 10
@@ -338,6 +338,21 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
         end
         object rlTotIPI: TRLLabel
           Left = 624
+          Top = 2
+          Width = 55
+          Height = 10
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = '0.00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object rlTotQtd: TRLLabel
+          Left = 456
           Top = 2
           Width = 55
           Height = 10

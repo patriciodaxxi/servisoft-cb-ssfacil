@@ -245,7 +245,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     Height = 34
     Align = alBottom
     Color = 8404992
-    TabOrder = 3
+    TabOrder = 4
     object BitBtn4: TBitBtn
       Left = 322
       Top = 5
@@ -379,7 +379,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     ActivePageDefault = TS_Itens
     Align = alClient
     TabIndex = 0
-    TabOrder = 4
+    TabOrder = 3
     FixedDimension = 19
     object TS_Itens: TRzTabSheet
       Caption = 'Itens'

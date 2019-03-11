@@ -196,6 +196,10 @@ object DMCadFuncionario: TDMCadFuncionario
       FixedChar = True
       Size = 1
     end
+    object sdsFuncionarioSENHA: TStringField
+      FieldName = 'SENHA'
+      Size = 15
+    end
   end
   object dspFuncionario: TDataSetProvider
     DataSet = sdsFuncionario
@@ -427,6 +431,10 @@ object DMCadFuncionario: TDMCadFuncionario
       FieldName = 'BAIXA_PROCESSO'
       FixedChar = True
       Size = 1
+    end
+    object cdsFuncionarioSENHA: TStringField
+      FieldName = 'SENHA'
+      Size = 15
     end
   end
   object dsFuncionario: TDataSource

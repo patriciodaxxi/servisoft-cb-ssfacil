@@ -2650,7 +2650,7 @@ object frmRecebeXML: TfrmRecebeXML
           Top = 270
           Width = 1025
           Height = 153
-          ActivePage = TabSheet8
+          ActivePage = TabSheet9
           Align = alBottom
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -4214,46 +4214,55 @@ object frmRecebeXML: TfrmRecebeXML
           item
             Expanded = False
             FieldName = 'Id'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'tpAmb'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'verAplic'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'chNFe'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'dhRecbto'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nProt'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'digVal'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'cStat'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'xMotivo'
+            Width = 64
             Visible = True
           end>
       end
