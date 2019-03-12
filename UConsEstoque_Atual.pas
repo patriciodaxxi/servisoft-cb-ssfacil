@@ -47,6 +47,7 @@ type
     TS_EmTerceiros_Pes: TRzTabSheet;
     SMDBGrid3: TSMDBGrid;
     SMDBGrid7: TSMDBGrid;
+    TS_Detalhe_Terc: TRzTabSheet;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -225,7 +226,12 @@ begin
   begin
     if DateEdit1.Date <= 10 then
     begin
-      MessageDlg('*** Data não informada!',mtInformation, [mbOk], 0);
+      MessageDlg('*** Data não informada!',mtError, [mbOk], 0);
+      exit;
+    end;
+    if Trim(RxDBLookupCombo1.Text) = '' then
+    begin
+      MessageDlg('*** Filial não informada!',mtError, [mbOk], 0);
       exit;
     end;
     if RzPageControl2.ActivePage = TS_DeTerceiros_Prod then
@@ -239,6 +245,11 @@ begin
     if DateEdit2.Date <= 10 then
     begin
       MessageDlg('*** Data não informada!',mtInformation, [mbOk], 0);
+      exit;
+    end;
+    if Trim(RxDBLookupCombo1.Text) = '' then
+    begin
+      MessageDlg('*** Filial não informada!',mtError, [mbOk], 0);
       exit;
     end;
     if RzPageControl3.ActivePage = TS_EmTerceiros_Prod then
