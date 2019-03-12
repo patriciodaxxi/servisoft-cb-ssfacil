@@ -629,6 +629,7 @@ type
     cdsEstoque_Em_Terc_PesTIPO_TER: TStringField;
     cdsEstoque_Em_Terc_PesDESC_SPED_TIPO: TStringField;
     cdsEstoque_AtualID_PRODUTO: TIntegerField;
+    cdsEstoque_MovCODIGO_GRUPO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

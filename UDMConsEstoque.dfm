@@ -1,7 +1,7 @@
 object DMConsEstoque: TDMConsEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 93
+  Left = 254
   Height = 699
   Width = 1224
   object sdsEstoque: TSQLDataSet
@@ -265,18 +265,18 @@ object DMConsEstoque: TDMConsEstoque
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT EM.*, PES.NOME NOMEPESSOA, PRO.NOME NOMEPRODUTO, PRO.REFE' +
-      'RENCIA, PES.CNPJ_CPF,'#13#10'CFOP.CODCFOP, GR.NOME NOME_GRUPO, COMB.no' +
-      'me NOME_COR, LEST.nome NOME_LOCAL, '#13#10'LEST.cod_local, PRO.preco_c' +
-      'usto, CC.descricao NOME_CENTROCUSTO,'#13#10'(EM.vlr_unitario * EM.qtd2' +
-      ') VLR_TOTAL'#13#10'FROM ESTOQUE_MOV EM'#13#10'LEFT JOIN PESSOA PES ON (EM.ID' +
-      '_PESSOA = PES.CODIGO)'#13#10'INNER JOIN PRODUTO PRO ON (EM.ID_PRODUTO ' +
-      '= PRO.ID)'#13#10'LEFT JOIN TAB_CFOP CFOP ON (EM.ID_CFOP = CFOP.ID)'#13#10'LE' +
-      'FT JOIN GRUPO GR ON (PRO.ID_GRUPO = GR.ID)'#13#10'LEFT JOIN combinacao' +
-      ' COMB ON (EM.id_cor = COMB.id)'#13#10'LEFT JOIN local_estoque LEST ON ' +
-      '(EM.id_local_estoque = LEST.id)'#13#10'LEFT JOIN centrocusto CC ON EM.' +
-      'id_centrocusto = CC.ID'#13#10'WHERE PRO.inativo = '#39'N'#39#13#10'  AND PRO.estoq' +
-      'ue = '#39'S'#39#13#10#13#10#13#10
+      'select EM.*, PES.NOME NOMEPESSOA, PRO.NOME NOMEPRODUTO, PRO.REFE' +
+      'RENCIA, PES.CNPJ_CPF, CFOP.CODCFOP, GR.NOME NOME_GRUPO,'#13#10'       ' +
+      'COMB.NOME NOME_COR, LEST.NOME NOME_LOCAL, LEST.COD_LOCAL, PRO.PR' +
+      'ECO_CUSTO, CC.DESCRICAO NOME_CENTROCUSTO,'#13#10'       GR.CODIGO CODI' +
+      'GO_GRUPO, (EM.VLR_UNITARIO * EM.QTD2) VLR_TOTAL'#13#10'from ESTOQUE_MO' +
+      'V EM'#13#10'left join PESSOA PES on (EM.ID_PESSOA = PES.CODIGO)'#13#10'inner' +
+      ' join PRODUTO PRO on (EM.ID_PRODUTO = PRO.ID)'#13#10'left join TAB_CFO' +
+      'P CFOP on (EM.ID_CFOP = CFOP.ID)'#13#10'left join GRUPO GR on (PRO.ID_' +
+      'GRUPO = GR.ID)'#13#10'left join COMBINACAO COMB on (EM.ID_COR = COMB.I' +
+      'D)'#13#10'left join LOCAL_ESTOQUE LEST on (EM.ID_LOCAL_ESTOQUE = LEST.' +
+      'ID)'#13#10'left join CENTROCUSTO CC on EM.ID_CENTROCUSTO = CC.ID'#13#10'wher' +
+      'e PRO.INATIVO = '#39'N'#39' and'#13#10'      PRO.ESTOQUE = '#39'S'#39'   '#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -455,6 +455,9 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_MovVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
+    end
+    object cdsEstoque_MovCODIGO_GRUPO: TStringField
+      FieldName = 'CODIGO_GRUPO'
     end
   end
   object dsEstoque_Mov: TDataSource
@@ -1211,8 +1214,8 @@ object DMConsEstoque: TDMConsEstoque
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43284.725669537000000000
-    ReportOptions.LastChange = 43506.879853206020000000
+    ReportOptions.CreateDate = 42032.577038136600000000
+    ReportOptions.LastChange = 43535.857902696760000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -3670,7 +3673,8 @@ object DMConsEstoque: TDMConsEstoque
       'PRECO_CUSTO_TOTAL=PRECO_CUSTO_TOTAL'
       'ID_CENTROCUSTO=ID_CENTROCUSTO'
       'NOME_CENTROCUSTO=NOME_CENTROCUSTO'
-      'VLR_TOTAL=VLR_TOTAL')
+      'VLR_TOTAL=VLR_TOTAL'
+      'CODIGO_GRUPO=CODIGO_GRUPO')
     DataSource = dsEstoque_Mov
     BCDToCurrency = False
     Left = 592
