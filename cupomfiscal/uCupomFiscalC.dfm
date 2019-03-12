@@ -61,7 +61,7 @@ object fCupomFiscalC: TfCupomFiscalC
     WidthOfIndicator = 23
     DefaultRowHeight = 22
     ScrollBars = ssHorizontal
-    ColCount = 17
+    ColCount = 18
     RowCount = 2
     Columns = <
       item
@@ -207,19 +207,32 @@ object fCupomFiscalC: TfCupomFiscalC
         Title.Font.Height = -11
         Title.Font.Name = 'Verdana'
         Title.Font.Style = [fsBold]
-        Width = 95
+        Width = 60
         Visible = True
       end
       item
         Alignment = taCenter
         Expanded = False
         FieldName = 'ESTOQUE_OK'
+        Title.Alignment = taCenter
+        Title.Caption = 'Est. OK'
+        Width = 40
         Visible = True
       end
       item
         Alignment = taCenter
         Expanded = False
         FieldName = 'FINANCEIRO_OK'
+        Title.Alignment = taCenter
+        Title.Caption = 'Fin. OK'
+        Width = 40
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CLIENTE_OBS'
+        Title.Caption = 'Obs.'
+        Width = 90
         Visible = True
       end>
   end
