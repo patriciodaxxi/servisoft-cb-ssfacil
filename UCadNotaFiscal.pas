@@ -904,7 +904,7 @@ begin
                   or (StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat)) <= 0))
              and ((fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE.AsString <> fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE_TRIB.AsString)
                 or (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE_TRIB.AsString) = '')) then
-            vMSGUnidExp := vMSGUnidExp + #13 + 'Item: ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsString + ', Verificar a Unidade Tributável, poís a  conversão não foi feita!';
+            vMSGUnidExp := vMSGUnidExp + #13 + 'Item ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsString + ': verificar a conversão de Unidade Tributável!';
           //*************************
 
           if (fDMCadNotaFiscal.cdsParametrosBAIXA_ESTOQUE_MP.AsString = 'F') and ((fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString = 'S') or

@@ -18,7 +18,7 @@ object frmGerar_NFSe: TfrmGerar_NFSe
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 912
+    Width = 920
     Height = 69
     Align = alTop
     Color = clSilver
@@ -190,7 +190,7 @@ object frmGerar_NFSe: TfrmGerar_NFSe
   object Panel2: TPanel
     Left = 0
     Top = 69
-    Width = 912
+    Width = 920
     Height = 38
     Align = alTop
     Color = 16769217
@@ -471,8 +471,8 @@ object frmGerar_NFSe: TfrmGerar_NFSe
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 107
-    Width = 912
-    Height = 489
+    Width = 920
+    Height = 496
     ActivePage = TS_Contrato
     ActivePageDefault = TS_Contrato
     Align = alClient
@@ -484,8 +484,8 @@ object frmGerar_NFSe: TfrmGerar_NFSe
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 908
-        Height = 466
+        Width = 916
+        Height = 473
         Align = alClient
         Ctl3D = False
         DataSource = DMCadOS.dsContrato
@@ -668,8 +668,8 @@ object frmGerar_NFSe: TfrmGerar_NFSe
       object SMDBGrid2: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 908
-        Height = 466
+        Width = 916
+        Height = 473
         Align = alClient
         Ctl3D = False
         DataSource = DMCadOS.dsMov_Servico
