@@ -622,25 +622,9 @@ type
     cdsEstoque_Em_Terc_PesDESC_SPED_TIPO: TStringField;
     cdsEstoque_AtualID_PRODUTO: TIntegerField;
     sdsEstoque_Em_Terc_Det: TSQLDataSet;
-    DataSetProvider1: TDataSetProvider;
-    ClientDataSet1: TClientDataSet;
-    StringField1: TStringField;
-    IntegerField1: TIntegerField;
-    IntegerField2: TIntegerField;
-    IntegerField3: TIntegerField;
-    FloatField1: TFloatField;
-    StringField2: TStringField;
-    StringField3: TStringField;
-    StringField4: TStringField;
-    IntegerField4: TIntegerField;
-    StringField5: TStringField;
-    StringField6: TStringField;
-    StringField7: TStringField;
-    StringField8: TStringField;
-    StringField9: TStringField;
-    StringField10: TStringField;
-    StringField11: TStringField;
-    DataSource1: TDataSource;
+    dspEstoque_Em_Terc_Det: TDataSetProvider;
+    cdsEstoque_Em_Terc_Det: TClientDataSet;
+    dsEstoque_Em_Terc_Det: TDataSource;
     cdsEstoque_Em_TercID_PRODUTO: TIntegerField;
     cdsEstoque_Em_TercNCM: TStringField;
     cdsEstoque_Em_TercID_COR: TIntegerField;
@@ -654,6 +638,23 @@ type
     cdsEstoque_Em_TercNCM_EX: TStringField;
     cdsEstoque_Em_TercQTD: TFloatField;
     cdsEstoque_MovCODIGO_GRUPO: TStringField;
+    cdsEstoque_Em_Terc_DetID_PRODUTO: TIntegerField;
+    cdsEstoque_Em_Terc_DetNCM: TStringField;
+    cdsEstoque_Em_Terc_DetID_COR: TIntegerField;
+    cdsEstoque_Em_Terc_DetNOME_COMBINACAO: TStringField;
+    cdsEstoque_Em_Terc_DetNOME_PRODUTO: TStringField;
+    cdsEstoque_Em_Terc_DetREFERENCIA: TStringField;
+    cdsEstoque_Em_Terc_DetTAMANHO: TStringField;
+    cdsEstoque_Em_Terc_DetUNIDADE: TStringField;
+    cdsEstoque_Em_Terc_DetSPED_TIPO_ITEM: TStringField;
+    cdsEstoque_Em_Terc_DetDESC_SPED_TIPO: TStringField;
+    cdsEstoque_Em_Terc_DetNCM_EX: TStringField;
+    cdsEstoque_Em_Terc_DetID_PESSOA: TIntegerField;
+    cdsEstoque_Em_Terc_DetNOME_TERCEIRO: TStringField;
+    cdsEstoque_Em_Terc_DetQTD: TFloatField;
+    sdsEstoque_Em_Terc_PesB: TSQLDataSet;
+    sdsEstoque_Em_TercB: TSQLDataSet;
+    sdsEstoque_Em_Terc_DetB: TSQLDataSet;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -677,6 +678,7 @@ type
     ctEstoque_Lote: String;
     ctEstoque_Mov_Res: String;
     ctEstoque_Mov_Vei: String;
+
     ctVeiculo: String;
     ctqProduto: String;
     ctEstoque_Res: String;
@@ -723,6 +725,7 @@ begin
   ctEstoque_Res_Ord  := sdsEstoque_Res_Ord.CommandText;
   ctEstoque_Atual    := sdsEstoque_Atual.CommandText;
   ctBalanco          := sdsBalanco.CommandText;
+
   cdsFilial.Open;
   cdsMarca.Open;
   cdsGrupo.Open;
