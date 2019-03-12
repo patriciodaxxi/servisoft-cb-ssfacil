@@ -927,9 +927,16 @@ begin
     vTipoProtesto := fDmCob_Eletronica.fnc_busca_tipo_instrucao(fDmCob_Eletronica.cdsContasID_BANCO.AsInteger,
                                                                 fDmCob_Eletronica.cdsContasID_INSTRUCAO1.AsInteger,
                                                                 fDmCob_Eletronica.cdsContasID_INSTRUCAO2.AsInteger);
+
     if vTipoProtesto = 'U' then
       Titulo.TipoDiasProtesto := diUteis
     else
+      Titulo.TipoDiasProtesto := diCorridos;
+
+   if (fDmCob_Eletronica.cdsContasCOD_BANCO.AsString = '748') and (fDmCob_Eletronica.cdsContasDIAS_PROTESTO.AsInteger > 0) then
+     if (fDmCob_Eletronica.cdsContasDIAS_PROTESTO.AsInteger = 3) or (fDmCob_Eletronica.cdsContasDIAS_PROTESTO.AsInteger = 4) then
+       Titulo.TipoDiasProtesto := diUteis
+     else
       Titulo.TipoDiasProtesto := diCorridos;
 
    // Sicredi - Quando qtde de dias > 4 = dias úteis senão dias corridos
