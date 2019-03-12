@@ -276,6 +276,7 @@ begin
       prc_Gravar_NFSe_Agr;
   end
   else
+
   if fDMCadOS.qParametros_SerAGRUPA_CONTRATO_NFSE.AsString <> 'S' then
   begin
     fDMCadOS.cdsContrato.First;
