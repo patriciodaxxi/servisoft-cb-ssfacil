@@ -67,6 +67,8 @@ uses
   function fnc_Verifica_Tipo_Lote: String;
 
   function fnc_Converte_Horas(Hora: Real): Real;
+  function CharEspeciais(Texto:String):String;
+  function  SQLLocate(Tabela, CampoProcura, CampoRetorno, ValorFind : string) : string ;
 
   function fnc_Estoque_Tipo_Mat(ID_Produto : Integer ; Tipo_ES : string): string;  //E= Entrada  S= Saida
 
@@ -93,7 +95,6 @@ uses
     ABase  -> Número da base utilizada para gerar o serial
     AChave -> Chave utilizada para gerar o serial
   }
-
 var
   vCodProduto_Pos: Integer;
   vCodPessoa_Pos: Integer;
@@ -1633,6 +1634,21 @@ begin
   end;
 end;
 
+function CharEspeciais(Texto: String): String;
+var
+  i,t:integer;
+begin
+  Result := '';
+  t:=length(texto);
+  i:=1;
+  While i <= t do
+  begin
+   if texto[i] in ['1'..'9','a'..'z','A'..'Z'] Then
+     result:=result+Texto[i];
+   i:=i+1;
+  end;
+end;
+
 function fnc_Estoque_Tipo_Mat(ID_Produto : Integer ; Tipo_ES : string): string; //E= Entrada  S= Saida
 var
   sds: TSQLDataSet;
@@ -1656,6 +1672,30 @@ begin
     FreeAndNil(sds);
   end;
 end;
+
+function SQLLocate(Tabela, CampoProcura, CampoRetorno, ValorFind : string) : string ;
+var
+  MyQuery : TSQLQuery;
+begin
+  if ValorFind <> '' then
+  begin
+    MyQuery := TSQLQuery.Create(dmDatabase);
+    MyQuery.SQLConnection :=  dmDatabase.scoDados;
+    MyQuery.Close;
+    MyQuery.SQL.Clear ;
+    MyQuery.SQL.Add('select ' + CampoRetorno + ' from ' + Tabela) ;
+    MyQuery.SQL.Add('where  ' + CampoProcura + ' = ' + ValorFind) ;
+    MyQuery.Open ;
+    if not MyQuery.EOF then
+      SQLLocate := MyQuery.FieldByName(CampoRetorno).AsString
+    else
+      SQLLocate := '' ;
+    MyQuery.Destroy ;
+  end
+  else
+    ValorFind := '' ;
+end ;
+
 
 
 end.

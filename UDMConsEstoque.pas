@@ -653,6 +653,7 @@ type
     cdsEstoque_Em_TercDESC_SPED_TIPO: TStringField;
     cdsEstoque_Em_TercNCM_EX: TStringField;
     cdsEstoque_Em_TercQTD: TFloatField;
+    cdsEstoque_MovCODIGO_GRUPO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
