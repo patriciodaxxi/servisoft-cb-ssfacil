@@ -280,10 +280,10 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
     Top = 131
     Width = 926
     Height = 387
-    ActivePage = TS_Estoque
+    ActivePage = TS_EmTerceiros
     ActivePageDefault = TS_Estoque
     Align = alClient
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 2
     FixedDimension = 19
     object TS_Estoque: TRzTabSheet
@@ -619,6 +619,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end
               item
@@ -643,6 +644,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome Terceiro'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end
               item
@@ -659,6 +661,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Produto SPED'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end>
           end
@@ -769,7 +772,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 6
+            ColCount = 8
             RowCount = 2
             Columns = <
               item
@@ -808,12 +811,30 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Visible = True
               end
               item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'TAMANHO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tamanho'
+                Title.Color = 11337561
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'SPED_TIPO_ITEM'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tipo Sped'
+                Title.Color = 11337561
+                Width = 41
+                Visible = True
+              end
+              item
                 Expanded = False
                 FieldName = 'QTD'
                 Title.Alignment = taCenter
                 Title.Caption = 'Qtd'
                 Title.Color = 11337561
-                Width = 166
+                Width = 141
                 Visible = True
               end>
           end
@@ -968,6 +989,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Mov.'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end>
           end
@@ -1104,6 +1126,9 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Color = clSilver
         TabOrder = 2
       end
+    end
+    object TS_Detalhe_Terc: TRzTabSheet
+      Caption = 'Detalhe (Em e De Terceiro)'
     end
   end
 end
