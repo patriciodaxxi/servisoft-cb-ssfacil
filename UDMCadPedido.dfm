@@ -10484,7 +10484,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43516.730867083330000000
+    ReportOptions.LastChange = 43339.742338449100000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -11401,7 +11401,8 @@ object DMCadPedido: TDMCadPedido
     GetMetadata = False
     CommandText = 
       'SELECT M.id, M.nome, M.tipo_reg, M.vlr_unitario, M.TIPO_PRECO, M' +
-      '.TIPO_VP'#13#10'FROM MATRIZ_PRECO M'#13#10'WHERE M.TIPO_REG = '#39'ACB'#39
+      '.TIPO_VP, M.CALCULA_MEDIDAS'#13#10'FROM MATRIZ_PRECO M'#13#10'WHERE M.TIPO_R' +
+      'EG = '#39'ACB'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -11442,6 +11443,11 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsAcabamentoTIPO_VP: TStringField
       FieldName = 'TIPO_VP'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsAcabamentoCALCULA_MEDIDAS: TStringField
+      FieldName = 'CALCULA_MEDIDAS'
       FixedChar = True
       Size = 1
     end

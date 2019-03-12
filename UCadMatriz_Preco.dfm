@@ -23,9 +23,9 @@ object frmCadMatriz_Preco: TfrmCadMatriz_Preco
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 821
-    Height = 431
-    ActivePage = TS_Consulta
+    Width = 813
+    Height = 423
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadMatriz_Preco: TfrmCadMatriz_Preco
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -41,8 +41,8 @@ object frmCadMatriz_Preco: TfrmCadMatriz_Preco
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 88
-        Width = 817
-        Height = 303
+        Width = 809
+        Height = 295
         Align = alClient
         Ctl3D = False
         DataSource = DMCadMatriz_Preco.dsMatriz_Preco
@@ -128,7 +128,7 @@ object frmCadMatriz_Preco: TfrmCadMatriz_Preco
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 817
+        Width = 809
         Height = 32
         Align = alTop
         Color = clSilver
@@ -356,8 +356,8 @@ object frmCadMatriz_Preco: TfrmCadMatriz_Preco
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 391
-        Width = 817
+        Top = 383
+        Width = 809
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -373,7 +373,7 @@ object frmCadMatriz_Preco: TfrmCadMatriz_Preco
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 817
+        Width = 809
         Height = 56
         Align = alTop
         Color = clSilver
@@ -498,7 +498,7 @@ object frmCadMatriz_Preco: TfrmCadMatriz_Preco
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 817
+        Width = 809
         Height = 35
         Align = alTop
         Color = 8404992
@@ -724,8 +724,8 @@ object frmCadMatriz_Preco: TfrmCadMatriz_Preco
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 817
-        Height = 373
+        Width = 809
+        Height = 365
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -872,6 +872,18 @@ object frmCadMatriz_Preco: TfrmCadMatriz_Preco
             'V'
             'P')
           OnChange = RxDBComboBox1Change
+        end
+        object DBCheckBox1: TDBCheckBox
+          Left = 120
+          Top = 115
+          Width = 121
+          Height = 17
+          Caption = 'Calcular Medidas'
+          DataField = 'CALCULA_MEDIDAS'
+          DataSource = DMCadMatriz_Preco.dsMatriz_Preco
+          TabOrder = 6
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
         end
       end
     end

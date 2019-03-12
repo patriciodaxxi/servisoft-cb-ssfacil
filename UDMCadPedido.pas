@@ -3381,6 +3381,7 @@ type
     qParametros_LoteLOTE_CALCADO_NOVO: TStringField;
     cdsPedido_ConsultaCNPJ_CPF: TStringField;
     qParametros_PedDTENTREGA_ZERADA_ORC: TStringField;
+    cdsAcabamentoCALCULA_MEDIDAS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

@@ -50,21 +50,26 @@ object DMCadMatriz_Preco: TDMCadMatriz_Preco
       FixedChar = True
       Size = 1
     end
+    object sdsMatriz_PrecoCALCULA_MEDIDAS: TStringField
+      FieldName = 'CALCULA_MEDIDAS'
+      FixedChar = True
+      Size = 1
+    end
     object sdsMatriz_PrecoDESCRICAO_TIPO: TStringField
       FieldName = 'DESCRICAO_TIPO'
-      ProviderFlags = []
+      Required = True
       FixedChar = True
       Size = 16
     end
     object sdsMatriz_PrecoDESCRICAO_TIPO_PRECO: TStringField
       FieldName = 'DESCRICAO_TIPO_PRECO'
-      ProviderFlags = []
+      Required = True
       FixedChar = True
       Size = 11
     end
     object sdsMatriz_PrecoDESCRICAO_TIPO_VP: TStringField
       FieldName = 'DESCRICAO_TIPO_VP'
-      ProviderFlags = []
+      Required = True
       FixedChar = True
       Size = 10
     end
@@ -127,6 +132,11 @@ object DMCadMatriz_Preco: TDMCadMatriz_Preco
       ProviderFlags = []
       FixedChar = True
       Size = 10
+    end
+    object cdsMatriz_PrecoCALCULA_MEDIDAS: TStringField
+      FieldName = 'CALCULA_MEDIDAS'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsMatriz_Preco: TDataSource
