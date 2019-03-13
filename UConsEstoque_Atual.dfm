@@ -280,10 +280,10 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
     Top = 131
     Width = 926
     Height = 387
-    ActivePage = TS_Detalhe_Terc
+    ActivePage = TS_Estoque
     ActivePageDefault = TS_Estoque
     Align = alClient
-    TabIndex = 4
+    TabIndex = 0
     TabOrder = 2
     FixedDimension = 19
     object TS_Estoque: TRzTabSheet
@@ -619,6 +619,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end
               item
@@ -643,6 +644,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome Terceiro'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end
               item
@@ -659,6 +661,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Produto SPED'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end>
           end
@@ -994,6 +997,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Mov.'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end>
           end
@@ -1445,6 +1449,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Mov.'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end>
           end

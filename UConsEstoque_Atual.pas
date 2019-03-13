@@ -273,7 +273,6 @@ begin
   else
   if RzPageControl1.ActivePage = TS_Detalhe_Terc then
   begin
-    if
     if RzPageControl4.ActivePage = TS_EmTerceiro_Det then
       prc_Consultar_EmTerceiro_Det
     else
