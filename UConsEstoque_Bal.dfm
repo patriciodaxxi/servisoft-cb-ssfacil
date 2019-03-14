@@ -23,7 +23,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
     Left = 0
     Top = 0
     Width = 926
-    Height = 83
+    Height = 113
     Align = alTop
     Color = clSilver
     TabOrder = 0
@@ -51,23 +51,6 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Alignment = taRightJustify
       Caption = 'Usar o Tipo:'
     end
-    object Label7: TLabel
-      Left = 109
-      Top = 36
-      Width = 69
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Tipo Cadastro:'
-    end
-    object Label8: TLabel
-      Left = 122
-      Top = 59
-      Width = 56
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Tipo SPED:'
-      Visible = False
-    end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 458
       Top = 5
@@ -77,13 +60,13 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       LookupField = 'ID'
       LookupDisplay = 'NOME_INTERNO'
       LookupSource = DMConsEstoque.dsFilial
-      TabOrder = 4
+      TabOrder = 2
     end
     object RadioGroup1: TRadioGroup
       Left = 1
       Top = 1
       Width = 96
-      Height = 81
+      Height = 111
       Align = alLeft
       Caption = ' Op'#231#227'o '
       ItemIndex = 0
@@ -160,7 +143,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 4
       Transparent = True
       OnClick = btnConsultarClick
     end
@@ -170,7 +153,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Width = 121
       Height = 21
       NumGlyphs = 2
-      TabOrder = 5
+      TabOrder = 3
     end
     object btnImprimir_Est: TNxButton
       Left = 634
@@ -240,7 +223,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 5
       Transparent = True
       OnClick = btnImprimir_EstClick
     end
@@ -259,48 +242,22 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         'Por Tipo de Cadastro'
         'Por Tipo SPED')
     end
-    object ComboBox2: TComboBox
-      Left = 180
-      Top = 28
-      Width = 181
-      Height = 21
-      Style = csDropDownList
-      ItemHeight = 13
-      ItemIndex = 0
-      TabOrder = 2
-      Text = 'Produto'
-      OnExit = ComboBox2Exit
-      Items.Strings = (
-        'Produto'
-        'Material'
-        'Material Consumo'
-        'Semi Acabado'
-        'Imobilizado'
-        'Todos')
+    object btnTipoCadastro: TNxButton
+      Left = 184
+      Top = 40
+      Width = 145
+      Caption = 'Selecionar Tipo Cadastro'
+      TabOrder = 6
+      OnClick = btnTipoCadastroClick
     end
-    object ComboBox3: TComboBox
-      Left = 180
-      Top = 51
-      Width = 181
-      Height = 21
-      Style = csDropDownList
-      ItemHeight = 13
-      ItemIndex = 0
-      TabOrder = 3
-      Text = '00 - Mercadoria para Revenda'
-      Visible = False
-      Items.Strings = (
-        '00 - Mercadoria para Revenda'
-        '01- Mat'#233'ria-Prima'
-        '02- Embalagem'
-        '03 - Produto em Processo'
-        '04 - Produto Acabado'
-        '05 - SubProduto'
-        '06 - Produto Intermedi'#225'rio'
-        '07 - Material de Uso e Consumo'
-        '08 - Ativo Imobilizado'
-        '10 - Outros Insumos'
-        '99 - Outras')
+    object btnTipoSped: TNxButton
+      Left = 184
+      Top = 64
+      Width = 145
+      Caption = 'Selecionar Tipo SPED'
+      Enabled = False
+      TabOrder = 7
+      OnClick = btnTipoSpedClick
     end
   end
   object StaticText1: TStaticText
@@ -322,9 +279,9 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
   end
   object RzPageControl1: TRzPageControl
     Left = 0
-    Top = 83
+    Top = 113
     Width = 926
-    Height = 418
+    Height = 388
     ActivePage = TS_Balanco
     ActivePageDefault = TS_Balanco
     Align = alClient
@@ -337,7 +294,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         Left = 0
         Top = 25
         Width = 922
-        Height = 370
+        Height = 340
         Align = alClient
         Ctl3D = False
         DataSource = DMConsEstoque.dsBalanco
@@ -523,7 +480,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         Left = 0
         Top = 34
         Width = 922
-        Height = 361
+        Height = 331
         Align = alClient
         Ctl3D = False
         DataSource = DMConsEstoque.dsmBalanco_Ver
