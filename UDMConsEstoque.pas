@@ -655,6 +655,7 @@ type
     sdsEstoque_Em_Terc_PesB: TSQLDataSet;
     sdsEstoque_Em_TercB: TSQLDataSet;
     sdsEstoque_Em_Terc_DetB: TSQLDataSet;
+    cdsBalancoTIPO_REG: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

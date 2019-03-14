@@ -238,6 +238,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       TabOrder = 1
       Text = 'Por Tipo de Cadastro'
       OnChange = ComboBox1Change
+      OnClick = ComboBox1Click
       Items.Strings = (
         'Por Tipo de Cadastro'
         'Por Tipo SPED')
@@ -329,7 +330,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 14
+        ColCount = 15
         RowCount = 2
         Columns = <
           item
@@ -430,6 +431,14 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
             Expanded = False
             FieldName = 'PERC_IPI'
             Title.Alignment = taCenter
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TIPO_REG'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo Cadastro'
+            Width = 64
             Visible = True
           end>
       end
