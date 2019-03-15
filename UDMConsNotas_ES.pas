@@ -225,11 +225,10 @@ type
     ctConsulta: String;
     ctNotaFiscal_Rot: String;
     ctMinuta: String;
-    ctCliente : String;
+    ctCliente: String;
 
-    procedure prc_Abrir_Cliente(ID : Integer);
-    procedure prc_Abrir_Transportadora(ID : Integer);
-
+    procedure prc_Abrir_Cliente(ID: Integer);
+    procedure prc_Abrir_Transportadora(ID: Integer);
   end;
 
 var

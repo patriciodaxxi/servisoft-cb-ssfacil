@@ -926,7 +926,7 @@ object DMConsNotas_ES: TDMConsNotas_ES
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43412.594282847230000000
+    ReportOptions.LastChange = 43539.490109618050000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
