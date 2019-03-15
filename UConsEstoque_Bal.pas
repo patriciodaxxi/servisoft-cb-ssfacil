@@ -542,11 +542,13 @@ begin
                      + ' WHERE M.DTMOVIMENTO <= :DTMOVIMENTO '
                      + ' AND M.ID_PRODUTO = :ID_PRODUTO '
                      + ' AND M.TAMANHO = :TAMANHO '
-                     + ' AND M.ID_COR = :ID_COR ';
+                     + ' AND M.ID_COR = :ID_COR '
+                     + ' AND M.FILIAL = :FILIAL ';
     sds.ParamByName('ID_PRODUTO').AsInteger := fDMConsEstoque.cdsBalancoID_PRODUTO.AsInteger;
     sds.ParamByName('DTMOVIMENTO').AsDate   := DateEdit1.Date;
     sds.ParamByName('TAMANHO').AsString     := vTamamho;
     sds.ParamByName('ID_COR').AsInteger     := vID_Cor;
+    sds.ParamByName('FILIAL').AsInteger     := RxDBLookupCombo1.KeyValue;
     sds.Open;
 
     vQtd := StrToFloat(FormatFloat('0.0000',sds.FieldByName('QTD').AsFloat));
