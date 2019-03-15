@@ -3527,11 +3527,11 @@ object DMConsEstoque: TDMConsEstoque
     CommandText = 
       'SELECT V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_' +
       'produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.sped_tipo_item, ' +
-      'V.desc_sped_tipo, V.ncm_ex,'#13#10'SUM(V.qtd) QTD'#13#10'FROM vemterceiro_be' +
-      'nef V'#13#10'WHERE V.filial = :FILIAL'#13#10'  and v.data <= :data'#13#10'GROUP BY' +
-      ' V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_produt' +
-      'o,'#13#10'V.referencia, V.tamanho, V.unidade, V.sped_tipo_item, V.desc' +
-      '_sped_tipo, V.ncm_ex'#13#10#13#10
+      'V.desc_sped_tipo, V.ncm_ex,'#13#10'SUM(V.qtd) QTD'#13#10'FROM vemterceiro V'#13 +
+      #10'WHERE V.filial = :FILIAL'#13#10'  and v.data <= :data'#13#10'GROUP BY V.ID_' +
+      'PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_produto,'#13#10'V.' +
+      'referencia, V.tamanho, V.unidade, V.sped_tipo_item, V.desc_sped_' +
+      'tipo, V.ncm_ex'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item

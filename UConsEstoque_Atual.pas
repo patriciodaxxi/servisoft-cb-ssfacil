@@ -342,7 +342,7 @@ procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros;
 begin
   fDMConsEstoque.cdsEstoque_De_Terc.Close;
   fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
+  fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('Data').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsEstoque_De_Terc.Open;
 end;
 
@@ -353,8 +353,8 @@ begin
   else
     fDMConsEstoque.dspEstoque_Em_Terc.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc;
   fDMConsEstoque.cdsEstoque_Em_Terc.Close;
-  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('DTMOVIMENTO').AsDate := DateEdit2.Date;
+  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('Data').AsDate      := DateEdit2.Date;
   fDMConsEstoque.cdsEstoque_Em_Terc.Open;
 end;
 
@@ -469,7 +469,7 @@ procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros_Pes;
 begin
   fDMConsEstoque.cdsEstoque_De_Terc_Pes.Close;
   fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
+  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('Data').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsEstoque_De_Terc_Pes.Open;
 end;
 
@@ -481,7 +481,7 @@ begin
   else
     fDMConsEstoque.dspEstoque_Em_Terc_Pes.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_Pes;
   fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('DTMOVIMENTO').AsDate := DateEdit2.Date;
+  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('Data').AsDate := DateEdit2.Date;
   fDMConsEstoque.cdsEstoque_Em_Terc_Pes.Open;
 end;
 
