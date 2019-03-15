@@ -199,6 +199,8 @@ begin
   else
     DBEdit2.Color := clWindow;
 
+  if fDMCadDocEstoque.cdsDocEstoqueTIPO_ES.AsString = 'E' then
+    fDMCadDocEstoque.cdsDocEstoque_ItensGERAR_CUSTO.AsString := 'S';
   //************
 end;
 
