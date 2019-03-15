@@ -1,8 +1,8 @@
 object DMConsEstoque: TDMConsEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 58
-  Top = 11
+  Left = 324
+  Top = 9
   Height = 699
   Width = 1224
   object sdsEstoque: TSQLDataSet
@@ -270,14 +270,16 @@ object DMConsEstoque: TDMConsEstoque
       'RENCIA, PES.CNPJ_CPF, CFOP.CODCFOP, GR.NOME NOME_GRUPO,'#13#10'       ' +
       'COMB.NOME NOME_COR, LEST.NOME NOME_LOCAL, LEST.COD_LOCAL, PRO.PR' +
       'ECO_CUSTO, CC.DESCRICAO NOME_CENTROCUSTO,'#13#10'       GR.CODIGO CODI' +
-      'GO_GRUPO, (EM.VLR_UNITARIO * EM.QTD2) VLR_TOTAL'#13#10'from ESTOQUE_MO' +
-      'V EM'#13#10'left join PESSOA PES on (EM.ID_PESSOA = PES.CODIGO)'#13#10'inner' +
-      ' join PRODUTO PRO on (EM.ID_PRODUTO = PRO.ID)'#13#10'left join TAB_CFO' +
-      'P CFOP on (EM.ID_CFOP = CFOP.ID)'#13#10'left join GRUPO GR on (PRO.ID_' +
-      'GRUPO = GR.ID)'#13#10'left join COMBINACAO COMB on (EM.ID_COR = COMB.I' +
-      'D)'#13#10'left join LOCAL_ESTOQUE LEST on (EM.ID_LOCAL_ESTOQUE = LEST.' +
-      'ID)'#13#10'left join CENTROCUSTO CC on EM.ID_CENTROCUSTO = CC.ID'#13#10'wher' +
-      'e PRO.INATIVO = '#39'N'#39' and'#13#10'      PRO.ESTOQUE = '#39'S'#39'   '#13#10#13#10
+      'GO_GRUPO,DI.MOTIVO,'#13#10'       (EM.VLR_UNITARIO * EM.QTD2) VLR_TOTA' +
+      'L'#13#10'from ESTOQUE_MOV EM'#13#10'left join PESSOA PES on (EM.ID_PESSOA = ' +
+      'PES.CODIGO)'#13#10'inner join PRODUTO PRO on (EM.ID_PRODUTO = PRO.ID)'#13 +
+      #10'left join TAB_CFOP CFOP on (EM.ID_CFOP = CFOP.ID)'#13#10'left join GR' +
+      'UPO GR on (PRO.ID_GRUPO = GR.ID)'#13#10'left join COMBINACAO COMB on (' +
+      'EM.ID_COR = COMB.ID)'#13#10'left join LOCAL_ESTOQUE LEST on (EM.ID_LOC' +
+      'AL_ESTOQUE = LEST.ID)'#13#10'left join CENTROCUSTO CC on EM.ID_CENTROC' +
+      'USTO = CC.ID'#13#10'left join DOCESTOQUE_ITENS DI on DI.ID_MOVESTOQUE ' +
+      '= EM.ID'#13#10'where PRO.INATIVO = '#39'N'#39' and'#13#10'      PRO.ESTOQUE = '#39'S'#39#13#10#13 +
+      #10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -459,6 +461,10 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_MovCODIGO_GRUPO: TStringField
       FieldName = 'CODIGO_GRUPO'
+    end
+    object cdsEstoque_MovMOTIVO: TStringField
+      FieldName = 'MOTIVO'
+      Size = 100
     end
   end
   object dsEstoque_Mov: TDataSource
@@ -3662,7 +3668,8 @@ object DMConsEstoque: TDMConsEstoque
       'ID_CENTROCUSTO=ID_CENTROCUSTO'
       'NOME_CENTROCUSTO=NOME_CENTROCUSTO'
       'VLR_TOTAL=VLR_TOTAL'
-      'CODIGO_GRUPO=CODIGO_GRUPO')
+      'CODIGO_GRUPO=CODIGO_GRUPO'
+      'MOTIVO=MOTIVO')
     DataSource = dsEstoque_Mov
     BCDToCurrency = False
     Left = 592
