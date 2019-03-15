@@ -1,6 +1,6 @@
 object fRelEstoque_Bal: TfRelEstoque_Bal
-  Left = 248
-  Top = 105
+  Left = 204
+  Top = 86
   Width = 928
   Height = 573
   Caption = 'fRelEstoque_Bal'
@@ -185,10 +185,10 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
       end
     end
     object RLSubDetail1: TRLSubDetail
-      Left = 23
-      Top = 75
+      Left = 0
+      Top = 0
       Width = 748
-      Height = 120
+      Height = 123
       DataSource = DMConsEstoque.dsBalanco
       object RLBand2: TRLBand
         Left = 0

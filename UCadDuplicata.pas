@@ -2660,7 +2660,7 @@ begin
     ShowMessage('Relatorio não localizado! ' + vArq);
     Exit;
   end;
-  if NxDatePicker3.AsInteger > 1 then
+  if NxDatePicker3.Date > 1 then
     fDMCadDuplicata.vDataIni := NxDatePicker3.Date
   else
     fDMCadDuplicata.vDataIni := 36526;

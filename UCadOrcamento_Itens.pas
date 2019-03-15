@@ -666,7 +666,7 @@ begin
         if (trim(fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString) = '')  then
           fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString;
       if (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') and (fDMCadPedido.cdsPedido_Item_Tipo.RecordCount > 0) then
-        fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString + ' ' + fDMCadPedido.cdsPedido_Item_TipoCOMPLEMENTO_NOME.AsString;
+        fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString + ' ' + fDMCadPedido.cdsPedido_Item_TipoCOMPLEMENTO_NOME.AsString;
     end;
     if fDMCadPedido.cdsParametrosDIGITACAO_PED_ITENS.AsString = '1' then
       fDMCadPedido.cdsPedido_ItensREFERENCIA.AsString := fDMCadPedido.cdsProdutoREFERENCIA.AsString;

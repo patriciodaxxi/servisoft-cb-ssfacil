@@ -973,7 +973,8 @@ object fRelPedido_JW: TfRelPedido_JW
           Left = 0
           Top = 48
           Width = 1071
-          Height = 31
+          Height = 44
+          AutoSize = True
           BeforePrint = RLBand2BeforePrint
           object RLDBText21: TRLDBText
             Left = 782
@@ -992,9 +993,9 @@ object fRelPedido_JW: TfRelPedido_JW
             ParentFont = False
           end
           object RLDBText22: TRLDBText
-            Left = 588
+            Left = 584
             Top = 2
-            Width = 39
+            Width = 48
             Height = 12
             Alignment = taCenter
             DataField = 'QTD_TIPO'
@@ -1049,7 +1050,8 @@ object fRelPedido_JW: TfRelPedido_JW
             Left = 109
             Top = 2
             Width = 348
-            Height = 12
+            Height = 25
+            AutoSize = False
             Behavior = [beSiteExpander]
             DataField = 'NOMEPRODUTO'
             DataSource = DMCadPedido.dsPedidoImp_Itens
@@ -1109,7 +1111,7 @@ object fRelPedido_JW: TfRelPedido_JW
             Left = 984
             Top = 3
             Width = 80
-            Height = 57
+            Height = 42
             Borders.Sides = sdCustom
             Borders.DrawLeft = False
             Borders.DrawTop = False
@@ -1119,7 +1121,7 @@ object fRelPedido_JW: TfRelPedido_JW
           end
           object RLMemo3: TRLMemo
             Left = 121
-            Top = 15
+            Top = 27
             Width = 842
             Height = 14
             Behavior = [beSiteExpander]
@@ -1179,7 +1181,7 @@ object fRelPedido_JW: TfRelPedido_JW
         end
         object RLBand4: TRLBand
           Left = 0
-          Top = 97
+          Top = 110
           Width = 1071
           Height = 54
           BandType = btSummary
@@ -1352,7 +1354,7 @@ object fRelPedido_JW: TfRelPedido_JW
         end
         object RLBand5: TRLBand
           Left = 0
-          Top = 79
+          Top = 92
           Width = 1071
           Height = 18
           BeforePrint = RLBand5BeforePrint

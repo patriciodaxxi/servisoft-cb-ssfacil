@@ -846,13 +846,19 @@ begin
 end;
 
 procedure TfrmCadPedido_TipoItem.prc_Calcular_Medida_Corte;
+var
+  vMedida_Corte : Integer;
 begin
+  if fDMCadPedido.cdsAcabamentoCALCULA_MEDIDAS.AsString = 'S' then
+    vMedida_Corte := 2
+  else
+    vMedida_Corte := 0;
   if (RzPageControl1.ActivePage = TS_Porta) or (RzPageControl1.ActivePage = TS_Vidro) then
   begin
     if fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat > 0 then
-      fDMCadPedido.cdsPedido_Item_TipoLARGURA_CORTE.AsFloat := (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat + 2);
+      fDMCadPedido.cdsPedido_Item_TipoLARGURA_CORTE.AsFloat := (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat + vMedida_Corte);
     if fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat > 0 then
-      fDMCadPedido.cdsPedido_Item_TipoALTURA_CORTE.AsFloat := (fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat + 2);
+      fDMCadPedido.cdsPedido_Item_TipoALTURA_CORTE.AsFloat := (fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat + vMedida_Corte);
   end;
 end;
 

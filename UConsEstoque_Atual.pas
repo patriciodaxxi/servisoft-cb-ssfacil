@@ -48,6 +48,17 @@ type
     SMDBGrid3: TSMDBGrid;
     SMDBGrid7: TSMDBGrid;
     TS_Detalhe_Terc: TRzTabSheet;
+    Panel6: TPanel;
+    Label6: TLabel;
+    DateEdit3: TDateEdit;
+    DateEdit4: TDateEdit;
+    Label8: TLabel;
+    CheckBox1: TCheckBox;
+    RzPageControl4: TRzPageControl;
+    TS_EmTerceiro_Det: TRzTabSheet;
+    SMDBGrid8: TSMDBGrid;
+    TS_DeTerceiro_Det: TRzTabSheet;
+    SMDBGrid9: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -79,6 +90,8 @@ type
     procedure prc_Chamar_Sel_Produto(Tipo: String);
     procedure prc_Monta_Cab;
     procedure prc_Monta_mNCM;
+    procedure prc_Consultar_EmTerceiro_Det;
+    procedure prc_Consultar_DeTerceiro_Det;
 
   public
     { Public declarations }
@@ -256,6 +269,14 @@ begin
       prc_Consultar_EmTerceiros
     else
       prc_Consultar_EmTerceiros_Pes;
+  end
+  else
+  if RzPageControl1.ActivePage = TS_Detalhe_Terc then
+  begin
+    if RzPageControl4.ActivePage = TS_EmTerceiro_Det then
+      prc_Consultar_EmTerceiro_Det
+    else
+      prc_Consultar_DeTerceiro_Det;
   end;
 end;
 
@@ -321,15 +342,19 @@ procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros;
 begin
   fDMConsEstoque.cdsEstoque_De_Terc.Close;
   fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
+  fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('Data').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsEstoque_De_Terc.Open;
 end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiros;
 begin
+  if CheckBox1.Checked then
+    fDMConsEstoque.dspEstoque_Em_Terc.DataSet := fDMConsEstoque.sdsEstoque_Em_TercB
+  else
+    fDMConsEstoque.dspEstoque_Em_Terc.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc;
   fDMConsEstoque.cdsEstoque_Em_Terc.Close;
-  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('DTMOVIMENTO').AsDate := DateEdit2.Date;
+  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('Data').AsDate      := DateEdit2.Date;
   fDMConsEstoque.cdsEstoque_Em_Terc.Open;
 end;
 
@@ -444,16 +469,38 @@ procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros_Pes;
 begin
   fDMConsEstoque.cdsEstoque_De_Terc_Pes.Close;
   fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
+  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('Data').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsEstoque_De_Terc_Pes.Open;
 end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiros_Pes;
 begin
   fDMConsEstoque.cdsEstoque_Em_Terc_Pes.Close;
+  if CheckBox1.Checked then
+    fDMConsEstoque.dspEstoque_Em_Terc_Pes.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_PesB
+  else
+    fDMConsEstoque.dspEstoque_Em_Terc_Pes.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_Pes;
   fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('DTMOVIMENTO').AsDate := DateEdit2.Date;
+  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('Data').AsDate := DateEdit2.Date;
   fDMConsEstoque.cdsEstoque_Em_Terc_Pes.Open;
+end;
+
+procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiro_Det;
+begin
+
+end;
+
+procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiro_Det;
+begin
+  if CheckBox1.Checked then
+    fDMConsEstoque.dspEstoque_Em_Terc_Det.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_DetB
+  else
+    fDMConsEstoque.dspEstoque_Em_Terc_Det.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_Det;
+  fDMConsEstoque.cdsEstoque_Em_Terc_Det.Close;
+  fDMConsEstoque.sdsEstoque_Em_Terc_Det.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_Em_Terc_Det.ParamByName('DATA1').AsDate     := DateEdit3.Date;
+  fDMConsEstoque.sdsEstoque_Em_Terc_Det.ParamByName('DATA2').AsDate     := DateEdit4.Date;
+  fDMConsEstoque.cdsEstoque_Em_Terc_Det.Open;
 end;
 
 end.

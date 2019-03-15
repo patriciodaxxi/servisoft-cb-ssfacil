@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids, Mask,
   DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr, UDMConsEstoque, RxLookup, UCBase, NxCollection, ToolEdit, DBFilter,
-  RzTabs, CurrEdit, UDMEstoque;
+  RzTabs, CurrEdit, UDMEstoque, RzLstBox, RzChkLst;
 
 type
   TfrmConsEstoque_Bal = class(TForm)
@@ -36,10 +36,8 @@ type
     CurrencyEdit1: TCurrencyEdit;
     ComboBox1: TComboBox;
     Label6: TLabel;
-    Label7: TLabel;
-    ComboBox2: TComboBox;
-    Label8: TLabel;
-    ComboBox3: TComboBox;
+    btnTipoCadastro: TNxButton;
+    btnTipoSped: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -65,6 +63,9 @@ type
     procedure ComboBox2Exit(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btnTipoCadastroClick(Sender: TObject);
+    procedure btnTipoSpedClick(Sender: TObject);
+    procedure ComboBox1Click(Sender: TObject);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -84,38 +85,40 @@ var
 implementation
 
 uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque_Bal,
-  UConsEstoque_Bal_Det;
+  UConsEstoque_Bal_Det, USel_Balanco;
 
 {$R *.dfm}
 
 procedure TfrmConsEstoque_Bal.prc_Consultar;
 var
   vQtdAux: Integer;
+  vCampo : String;
 begin
   vQtdAux := 0;
 
   fDMConsEstoque.cdsBalanco.Close;
   fDMConsEstoque.sdsBalanco.CommandText := fDMConsEstoque.ctBalanco;
-  if ComboBox2.ItemIndex < 5 then
-    fDMConsEstoque.sdsBalanco.CommandText := fDMConsEstoque.sdsBalanco.CommandText + ' ' +
-                                             ' WHERE EM.FILIAL = :FILIAL ' +
-                                             ' AND EM.DTMOVIMENTO <= :DTMOVIMENTO ' +
-                                             ' AND ((PRO.TIPO_REG = :TIPO_REG) or (PRO.SPED_TIPO_ITEM = :SPED_TIPO_ITEM)) ' +
-                                             ' AND PRO.INATIVO = ''N'' ' +
-                                             ' AND PRO.ESTOQUE = ''S'' ' +
-                                             ' GROUP BY EM.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, PRO.UNIDADE, ' +
-                                             'EM.id_cor, COMB.NOME, PRO.sped_tipo_item, PRO.PERC_IPI'
-  else
-    fDMConsEstoque.sdsBalanco.CommandText := fDMConsEstoque.sdsBalanco.CommandText + ' ' +
+  case ComboBox1.ItemIndex of
+    0 : vCampo := 'PRO.TIPO_REG';
+    1 : vCampo := 'PRO.SPED_TIPO_ITEM'
+  end;
+
+  fDMConsEstoque.sdsBalanco.CommandText := fDMConsEstoque.sdsBalanco.CommandText + ' ' +
                                            ' WHERE EM.FILIAL = :FILIAL ' +
                                            ' AND EM.DTMOVIMENTO <= :DTMOVIMENTO ' +
+                                           ' AND ' + vCampo + ' IN (' + vSelPesquisa + ') ' +
                                            ' AND PRO.INATIVO = ''N'' ' +
                                            ' AND PRO.ESTOQUE = ''S'' ' +
-                                           ' AND PRO.TIPO_REG IN (''P'',''M'',''C'',''S'') ' +
                                            ' GROUP BY EM.ID_PRODUTO, EM.TAMANHO, PRO.REFERENCIA, PRO.NOME, PRO.UNIDADE, ' +
-                                           'EM.id_cor, COMB.NOME, PRO.sped_tipo_item, PRO.PERC_IPI';
+                                           'EM.id_cor, COMB.NOME, PRO.sped_tipo_item, PRO.PERC_IPI, PRO.TIPO_REG';
 
-  if ComboBox1.ItemIndex = 0 then
+  fDMConsEstoque.sdsBalanco.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsBalanco.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
+  fDMConsEstoque.cdsBalanco.IndexFieldNames := 'NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+
+  fDMConsEstoque.cdsBalanco.Open;
+
+{  if ComboBox1.ItemIndex = 0 then
   begin
     case ComboBox2.ItemIndex of
       0: begin
@@ -156,7 +159,7 @@ begin
   fDMConsEstoque.sdsBalanco.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsBalanco.ParamByName('DTMOVIMENTO').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsBalanco.IndexFieldNames := 'NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
-  fDMConsEstoque.cdsBalanco.Open;
+  fDMConsEstoque.cdsBalanco.Open;}
 end;
 
 procedure TfrmConsEstoque_Bal.FormClose(Sender: TObject;
@@ -171,6 +174,7 @@ procedure TfrmConsEstoque_Bal.FormShow(Sender: TObject);
 begin
   fDMConsEstoque := TDMConsEstoque.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMConsEstoque);
+  vSelPesquisa := '';
   ComboBox2Exit(Sender);
   fDMConsEstoque.cdsFilial.First;
   if (fDMConsEstoque.cdsFilial.RecordCount < 2) and (fDMConsEstoque.cdsFilialID.AsInteger > 0) then
@@ -226,6 +230,12 @@ begin
     RxDBLookupCombo1.SetFocus;
     exit;
   end;
+  if trim(vSelPesquisa) = '' then
+  begin
+    MessageDlg('*** Não foi escolhido nenhum tipo!', mtError, [mbOk], 0);
+    exit;
+  end;
+
   if DateEdit1.Date <= 10 then
   begin
     MessageDlg('*** Data Referência não informada!', mtError, [mbOk], 0);
@@ -249,10 +259,17 @@ begin
   SMDBGrid1.DisableScroll;
   vTipo_Config_Email := 4;
   fDMConsEstoque.cdsFilial.Locate('ID',RxDBLookupCombo1.KeyValue,[loCaseInsensitive]);
-  fDMConsEstoque.cdsBalanco.IndexFieldNames := 'NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+  if ComboBox1.ItemIndex = 0 then
+  begin
+    fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_REG;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco2.fr3';
+  end
+  else
+  begin
+    fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_SPED;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco.fr3';
+  end;
 
-
-  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco.fr3';
   if FileExists(vArq) then
   begin
     fDMConsEstoque.frxReport1.Report.LoadFromFile(vArq);
@@ -467,10 +484,8 @@ end;
 
 procedure TfrmConsEstoque_Bal.ComboBox1Change(Sender: TObject);
 begin
-  label7.Visible    := (ComboBox1.ItemIndex = 0);
-  ComboBox2.Visible := (ComboBox1.ItemIndex = 0);
-  label8.Visible    := (ComboBox1.ItemIndex = 1);
-  ComboBox3.Visible := (ComboBox1.ItemIndex = 1);
+  btnTipoCadastro.Enabled := (ComboBox1.ItemIndex = 0);
+  btnTipoSped.Enabled     := (ComboBox1.ItemIndex = 1);
 end;
 
 procedure TfrmConsEstoque_Bal.ComboBox2Exit(Sender: TObject);
@@ -527,11 +542,13 @@ begin
                      + ' WHERE M.DTMOVIMENTO <= :DTMOVIMENTO '
                      + ' AND M.ID_PRODUTO = :ID_PRODUTO '
                      + ' AND M.TAMANHO = :TAMANHO '
-                     + ' AND M.ID_COR = :ID_COR ';
+                     + ' AND M.ID_COR = :ID_COR '
+                     + ' AND M.FILIAL = :FILIAL ';
     sds.ParamByName('ID_PRODUTO').AsInteger := fDMConsEstoque.cdsBalancoID_PRODUTO.AsInteger;
     sds.ParamByName('DTMOVIMENTO').AsDate   := DateEdit1.Date;
     sds.ParamByName('TAMANHO').AsString     := vTamamho;
     sds.ParamByName('ID_COR').AsInteger     := vID_Cor;
+    sds.ParamByName('FILIAL').AsInteger     := RxDBLookupCombo1.KeyValue;
     sds.Open;
 
     vQtd := StrToFloat(FormatFloat('0.0000',sds.FieldByName('QTD').AsFloat));
@@ -581,6 +598,28 @@ begin
                                                '',
                                                'N',0,0); //14/01/2019 incluída a operação
   MessageDlg('*** Gravou a Quantidade no Estoque!', mtConfirmation, [mbOk], 0);
+end;
+
+procedure TfrmConsEstoque_Bal.btnTipoCadastroClick(Sender: TObject);
+begin
+  frmSel_Balanco := TfrmSel_Balanco.Create(self);
+  frmSel_Balanco.vTipo_Pesquisa := 'P';
+  frmSel_Balanco.ShowModal;
+  FreeAndNil(frmSel_Balanco);
+end;
+
+procedure TfrmConsEstoque_Bal.btnTipoSpedClick(Sender: TObject);
+begin
+  frmSel_Balanco := TfrmSel_Balanco.Create(self);
+  frmSel_Balanco.vTipo_Pesquisa := 'S';
+  frmSel_Balanco.ShowModal;
+  FreeAndNil(frmSel_Balanco);
+end;
+
+procedure TfrmConsEstoque_Bal.ComboBox1Click(Sender: TObject);
+begin
+  btnTipoCadastro.Enabled := (ComboBox1.ItemIndex = 0);
+  btnTipoSped.Enabled     := (ComboBox1.ItemIndex = 1);
 end;
 
 end.

@@ -3937,9 +3937,12 @@ begin
     begin
       if (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '3') and (fDMCadNotaFiscal.cdsNotaFiscal_Imp.IsEmpty) then
       begin
-        vCampo_Faltando := 2;
-        ShowMessage('*** Atenção:  Não foi informado a adição (dados da importação) do item ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsString + '.' + #13 +
-                    'Para ajustar, alterar o item e na Aba "Dados Importação" incluir os dados da importação!');
+        if (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,2) <> '32') then
+        begin
+          vCampo_Faltando := 2;
+          ShowMessage('*** Atenção:  Não foi informado a adição (dados da importação) do item ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsString + '.' + #13 +
+                      'Para ajustar, alterar o item e na Aba "Dados Importação" incluir os dados da importação!');
+        end;
       end;
     end;
     //**************
