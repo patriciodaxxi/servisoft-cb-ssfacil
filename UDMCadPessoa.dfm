@@ -597,6 +597,13 @@ object DMCadPessoa: TDMCadPessoa
       FixedChar = True
       Size = 1
     end
+    object sdsPessoaSENHA_PEDIDO: TStringField
+      FieldName = 'SENHA_PEDIDO'
+      Size = 25
+    end
+    object sdsPessoaDESC_MAXIMO: TFloatField
+      FieldName = 'DESC_MAXIMO'
+    end
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
@@ -1241,6 +1248,14 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'IMP_NOMEPROD_CLIENTE'
       FixedChar = True
       Size = 1
+    end
+    object cdsPessoaSENHA_PEDIDO: TStringField
+      FieldName = 'SENHA_PEDIDO'
+      Size = 25
+    end
+    object cdsPessoaDESC_MAXIMO: TFloatField
+      FieldName = 'DESC_MAXIMO'
+      DisplayFormat = '##0.00'
     end
   end
   object dsPessoa: TDataSource

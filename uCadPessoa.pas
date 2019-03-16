@@ -3,11 +3,14 @@ unit uCadPessoa;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, RzTabs, StdCtrls, DBCtrls, RzButton, db, 
-  RxDBComb, RxLookup, Mask, Grids, DateUtils, DBGrids, SMDBGrid, Buttons, ExtCtrls, UCBase, uDmCadPessoa, RzDBChk, RzRadChk,
-  UNFe_ConsultaCadastro, RzPanel, ToolEdit, RXDBCtrl, UConsPessoa_Fat, UConsPessoa_Fin, UCadPessoa_Servico, RzLstBox, ComObj,
-  UCadPessoa_Servico_Int, NxCollection, dbXPress, SqlExpr, UConsCNPJ_ACBR, UConsCPF_ACBR, ACBrBase, ACBrSocket, Menus, ComCtrls,
-  RzChkLst, ACBrConsultaCPF, UConsPessoa_Prod, CurrEdit, uConsAgenda;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, RzTabs, StdCtrls, DBCtrls, RzButton, db, RxDBComb, RxLookup, Mask,
+  Grids, DateUtils, DBGrids, SMDBGrid, Buttons, ExtCtrls, UCBase, uDmCadPessoa,
+  RzDBChk, RzRadChk, UNFe_ConsultaCadastro, RzPanel, ToolEdit, RXDBCtrl,
+  UConsPessoa_Fat, UConsPessoa_Fin, UCadPessoa_Servico, RzLstBox, ComObj,
+  UCadPessoa_Servico_Int, NxCollection, dbXPress, SqlExpr, UConsCNPJ_ACBR,
+  UConsCPF_ACBR, ACBrBase, ACBrSocket, Menus, ComCtrls, RzChkLst,
+  ACBrConsultaCPF, UConsPessoa_Prod, CurrEdit, uConsAgenda;
 
 type
   TfrmCadPessoa = class(TForm)
@@ -135,7 +138,6 @@ type
     DBDateEdit4: TDBDateEdit;
     RxDBLookupCombo23: TRxDBLookupCombo;
     DBMemo1: TDBMemo;
-    SMDBGrid2: TSMDBGrid;
     DBCheckBox13: TDBCheckBox;
     DBCheckBox14: TDBCheckBox;
     DBCheckBox15: TDBCheckBox;
@@ -169,7 +171,6 @@ type
     DBMemo2: TDBMemo;
     RxDBLookupCombo25: TRxDBLookupCombo;
     ACBrConsultaCPF1: TACBrConsultaCPF;
-    Panel8: TPanel;
     Label91: TLabel;
     DBEdit49: TDBEdit;
     Label93: TLabel;
@@ -248,7 +249,7 @@ type
     DBCheckBox2: TDBCheckBox;
     DBCheckBox3: TDBCheckBox;
     DBCheckBox4: TDBCheckBox;
-    DBCheckBox5: TDBCheckBox;
+    chkRepresentante: TDBCheckBox;
     ckAtelier: TDBCheckBox;
     ckAluno: TDBCheckBox;
     DBCheckBox16: TDBCheckBox;
@@ -256,11 +257,6 @@ type
     DBCheckBox18: TDBCheckBox;
     RxDBLookupCombo14: TRxDBLookupCombo;
     btnCadConsultar: TBitBtn;
-    GroupBox4: TGroupBox;
-    Label82: TLabel;
-    Label83: TLabel;
-    DBEdit53: TDBEdit;
-    RxDBComboBox4: TRxDBComboBox;
     DBEdit10: TDBEdit;
     DBEdit27: TDBEdit;
     btnCadConsultar_Receita: TBitBtn;
@@ -401,8 +397,6 @@ type
     RxDBComboBox15: TRxDBComboBox;
     TS_Atividade: TRzTabSheet;
     SMDBGrid7: TSMDBGrid;
-    Label184: TLabel;
-    RxDBLookupCombo41: TRxDBLookupCombo;
     lblCarteira: TLabel;
     RxDBLookupCombo42: TRxDBLookupCombo;
     SpeedButton10: TSpeedButton;
@@ -516,9 +510,6 @@ type
     DBCheckBox28: TDBCheckBox;
     Label187: TLabel;
     DBEdit103: TDBEdit;
-    Label188: TLabel;
-    CurrencyEdit1: TCurrencyEdit;
-    SpeedButton11: TSpeedButton;
     RzGroupBox2: TRzGroupBox;
     DBCheckBox27: TDBCheckBox;
     DBCheckBox23: TDBCheckBox;
@@ -545,6 +536,26 @@ type
     DBEdit108: TDBEdit;
     DBCheckBox31: TDBCheckBox;
     DBCheckBox32: TDBCheckBox;
+    RzPageControl3: TRzPageControl;
+    ts_Contatos: TRzTabSheet;
+    ts_Vendedor: TRzTabSheet;
+    Panel8: TPanel;
+    Panel13: TPanel;
+    SMDBGrid2: TSMDBGrid;
+    pnlVendedor: TPanel;
+    Label82: TLabel;
+    RxDBComboBox4: TRxDBComboBox;
+    Label83: TLabel;
+    DBEdit53: TDBEdit;
+    Label188: TLabel;
+    CurrencyEdit1: TCurrencyEdit;
+    SpeedButton11: TSpeedButton;
+    Label184: TLabel;
+    RxDBLookupCombo41: TRxDBLookupCombo;
+    lblSenha: TLabel;
+    DBEdit109: TDBEdit;
+    Label195: TLabel;
+    DBEdit110: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -572,7 +583,7 @@ type
     procedure SpeedButton7Click(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure btnCadConsultarClick(Sender: TObject);
-    procedure DBCheckBox5Click(Sender: TObject);
+    procedure chkRepresentanteClick(Sender: TObject);
     procedure SpeedButton8Click(Sender: TObject);
     procedure RxDBLookupCombo17Enter(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -648,8 +659,7 @@ type
     procedure DBCheckBox4Click(Sender: TObject);
     procedure RxDBLookupCombo44DropDown(Sender: TObject);
     procedure RxDBLookupCombo44CloseUp(Sender: TObject);
-    procedure RxDBLookupCombo44KeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure RxDBLookupCombo44KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DBEdit8Exit(Sender: TObject);
     procedure DBEdit9Exit(Sender: TObject);
     procedure DBEdit5Exit(Sender: TObject);
@@ -663,7 +673,7 @@ type
     ffrmCadPessoa_Servico_Int: TfrmCadPessoa_Servico_Int;
     ffrmConsCNPJ_ACBR: TfrmConsCNPJ_ACBR;
     ffrmConsCPF_ACBR: TfrmConsCPF_ACBR;
-    ffrmConsAgenda : TfrmConsAgenda;
+    ffrmConsAgenda: TfrmConsAgenda;
     vCod_Alfa_Ant: string;
     vRG_Ant: string;
     vTP_Cliente_Ant: string;
@@ -691,7 +701,8 @@ var
 implementation
 
 uses
-  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa, USel_ContaOrc, USel_EnqIPI, USel_Atividade;
+  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa,
+  USel_ContaOrc, USel_EnqIPI, USel_Atividade;
 
 {$R *.dfm}
 
@@ -741,31 +752,32 @@ begin
   TS_RegrasFiscais.TabVisible := not ckAluno.Checked;
   TS_Pessoa_Endereco.TabVisible := not ckAluno.Checked;
   DBRadioGroup1.Visible := not ckAluno.Checked;
-  RzGroupBox3.Visible   := fDMCadPessoa.qParametros_GeralUSA_SENHA_CONTRASENHA.AsString = 'S'; 
+  RzGroupBox3.Visible := fDMCadPessoa.qParametros_GeralUSA_SENHA_CONTRASENHA.AsString = 'S';
   Label87.Visible := (fDMCadPessoa.qParametrosUSA_LIMITE_CREDITO.AsString = 'S');
   DBEdit47.Visible := (fDMCadPessoa.qParametrosUSA_LIMITE_CREDITO.AsString = 'S');
-  if fDMCadPessoa.qParametrosESCOLA.AsString = 'S' then
-  begin
-    DBCheckBox5.Caption := 'Professor';
-    GroupBox4.Caption := ' Opção do Professor ';
-    Label26.Caption := 'Professor';
-    ComboBox1.Clear;
-    ComboBox1.Items.Add('Cliente');
-    ComboBox1.Items.Add('Fornecedor');
-    ComboBox1.Items.Add('Transportadora');
-    ComboBox1.Items.Add('Professor');
-    ComboBox1.Items.Add('Atelier');
-    ComboBox1.Items.Add('Exportação');
-    ComboBox1.Items.Add('Preposto');
-    ComboBox1.Items.Add('Funcionario');
-    ComboBox1.Items.Add('Ambos');
-    ComboBox1.ItemIndex := 8;
-    for i := 1 to SMDBGrid1.ColCount - 2 do
-    begin
-      if (SMDBGrid1.Columns[i].FieldName = 'TP_VENDEDOR') then
-        SMDBGrid1.Columns[i].Title.Caption := 'Professor';
-    end;
-  end;
+  // Foi comentado no dia 12/03/2019 - o GroupBox4 era usado pelo vendedor, agora está no PageControl
+//  if fDMCadPessoa.qParametrosESCOLA.AsString = 'S' then
+//  begin
+//    DBCheckBox5.Caption := 'Professor';
+//    GroupBox4.Caption := ' Opção do Professor ';
+//    Label26.Caption := 'Professor';
+//    ComboBox1.Clear;
+//    ComboBox1.Items.Add('Cliente');
+//    ComboBox1.Items.Add('Fornecedor');
+//    ComboBox1.Items.Add('Transportadora');
+//    ComboBox1.Items.Add('Professor');
+//    ComboBox1.Items.Add('Atelier');
+//    ComboBox1.Items.Add('Exportação');
+//    ComboBox1.Items.Add('Preposto');
+//    ComboBox1.Items.Add('Funcionario');
+//    ComboBox1.Items.Add('Ambos');
+//    ComboBox1.ItemIndex := 8;
+//    for i := 1 to SMDBGrid1.ColCount - 2 do
+//    begin
+//      if (SMDBGrid1.Columns[i].FieldName = 'TP_VENDEDOR') then
+//        SMDBGrid1.Columns[i].Title.Caption := 'Professor';
+//    end;
+//  end;
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin
     if (SMDBGrid1.Columns[i].FieldName = 'COD_ALFA') then
@@ -773,7 +785,6 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'COD_VENDEDOR') then
       SMDBGrid1.Columns[i].Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
   end;
-
   DBCheckBox16.Visible := (fDMCadPessoa.qParametrosCADASTRA_ORGAO_PUBLICO.AsString = 'S');
   Label92.Visible := (fDMCadPessoa.qParametrosEMPRESA_CONTABIL.AsString = 'S');
   DBEdit50.Visible := (fDMCadPessoa.qParametrosEMPRESA_CONTABIL.AsString = 'S');
@@ -799,17 +810,19 @@ begin
 
   Label184.Visible := (fDMCadPessoa.qParametros_GeralINF_USUARIO_VEND.AsString = 'S');
   RxDBLookupCombo41.Visible := (fDMCadPessoa.qParametros_GeralINF_USUARIO_VEND.AsString = 'S');
-  DBCheckBox26.Visible      := (fDMCadPessoa.qParametros_RecXMLUSA_OC_XML.AsString = 'S');
+  DBEdit109.Visible := (fDMCadPessoa.qParametros_GeralINF_USUARIO_VEND.AsString = 'S');
+  lblSenha.Visible := (fDMCadPessoa.qParametros_GeralINF_USUARIO_VEND.AsString = 'S');
+  DBCheckBox26.Visible := (fDMCadPessoa.qParametros_RecXMLUSA_OC_XML.AsString = 'S');
 
-  Label188.Visible      := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+  Label188.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
   CurrencyEdit1.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
   SpeedButton11.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
 
   TS_TipoMaterial.TabVisible := (fDMCadPessoa.qParametros_GeralUSA_TIPO_MATERIAL.AsString = 'S');
 
   DBCheckBox29.Visible := (fDMCadPessoa.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S');
-  Label194.Visible     := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
-  DBEdit108.Visible    := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
+  Label194.Visible := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
+  DBEdit108.Visible := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
   DBCheckBox32.Visible := (fDMCadPessoa.qParametros_NFeIMP_NOMEPROD_CLIENTE.AsString = 'S');
 end;
 
@@ -1087,13 +1100,11 @@ begin
         fDMCadPessoa.cdsPessoa_Vend.Delete;
         fDMCadPessoa.cdsPessoa_Vend.ApplyUpdates(0);
       end
-      else
-      if (CurrencyEdit1.AsInteger > 0) and (CurrencyEdit1.AsInteger <> fDMCadPessoa.cdsPessoa_VendCOD_VENDEDOR.AsInteger) then
+      else if (CurrencyEdit1.AsInteger > 0) and (CurrencyEdit1.AsInteger <> fDMCadPessoa.cdsPessoa_VendCOD_VENDEDOR.AsInteger) then
       begin
         if fDMCadPessoa.cdsPessoa_VendCOD_VENDEDOR.AsInteger > 0 then
           fDMCadPessoa.cdsPessoa_Vend.Edit
-        else
-        if fDMCadPessoa.cdsPessoa_VendCOD_VENDEDOR.AsInteger <= 0 then
+        else if fDMCadPessoa.cdsPessoa_VendCOD_VENDEDOR.AsInteger <= 0 then
         begin
           fDMCadPessoa.cdsPessoa_Vend.Insert;
           fDMCadPessoa.cdsPessoa_VendCODIGO.AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
@@ -1198,8 +1209,7 @@ begin
   pnlDados_Conta.Enabled := True;
 
   RxDBComboBox1.SetFocus;
-  TS_Fisica.TabVisible := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F') and
-                          (fDMCadPessoa.qParametros_GeralMOSTRAR_DADOS_PESSOA_FISICA.AsString = 'S'));
+  TS_Fisica.TabVisible := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F') and (fDMCadPessoa.qParametros_GeralMOSTRAR_DADOS_PESSOA_FISICA.AsString = 'S'));
 end;
 
 procedure TfrmCadPessoa.RzPageControl1Change(Sender: TObject);
@@ -1211,16 +1221,16 @@ begin
     lblRG.Visible := (fDMCadPessoa.cdsPessoa_ConsultaPESSOA.AsString = 'F');
     dbeRG.Visible := (fDMCadPessoa.cdsPessoa_ConsultaPESSOA.AsString = 'F');
 
-    DBCheckBox5Click(Sender);
+    chkRepresentanteClick(Sender);
     if not (fDMCadPessoa.cdsPessoa.State in [dsEdit, dsInsert]) then
       prc_Posiciona_Pessoa;
 
     prc_Abrir_Pessoas_Outras;
 
     CurrencyEdit1.AsInteger := 0;
-    Label188.Visible        := ((fDMCadPessoa.cdsPessoaTP_VENDEDOR.AsString = 'S') and (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S'));
-    CurrencyEdit1.Visible   := ((fDMCadPessoa.cdsPessoaTP_VENDEDOR.AsString = 'S') and (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S'));
-    SpeedButton11.Visible   := ((fDMCadPessoa.cdsPessoaTP_VENDEDOR.AsString = 'S') and (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S'));
+    Label188.Visible := ((fDMCadPessoa.cdsPessoaTP_VENDEDOR.AsString = 'S') and (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S'));
+    CurrencyEdit1.Visible := ((fDMCadPessoa.cdsPessoaTP_VENDEDOR.AsString = 'S') and (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S'));
+    SpeedButton11.Visible := ((fDMCadPessoa.cdsPessoaTP_VENDEDOR.AsString = 'S') and (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S'));
     if (fDMCadPessoa.cdsPessoaTP_VENDEDOR.AsString = 'S') and (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S') then
       CurrencyEdit1.AsInteger := fDMCadPessoa.cdsPessoa_VendCOD_VENDEDOR.AsInteger;
 
@@ -1237,9 +1247,9 @@ begin
 
     DBCheckBox27.Visible := (fDMCadPessoa.cdsPessoaID_EDI.AsInteger > 0);
 
-    Label190.Visible  := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
+    Label190.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
     DBEdit106.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
-    Label191.Visible  := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
+    Label191.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
     DBEdit107.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
   end;
 end;
@@ -1354,8 +1364,7 @@ begin
   begin
     if (fDMCadPessoa.qParametros_GeralPERMITE_CNPJ_DUPLICADO_TRANSP.AsString = 'S') and (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S') then
       vNomeAux := VerificaDuplicidade(DBEdit6.Text, 'T', fDMCadPessoa.cdsPessoaCODIGO.AsInteger, fDMCadPessoa.cdsPessoaFILIAL.AsInteger)
-    else
-    if fDMCadPessoa.qParametros_GeralUSAR_PESSOA_FILIAL.AsString = 'S' then
+    else if fDMCadPessoa.qParametros_GeralUSAR_PESSOA_FILIAL.AsString = 'S' then
       vNomeAux := VerificaDuplicidade(DBEdit6.Text, 'P', fDMCadPessoa.cdsPessoaCODIGO.AsInteger, fDMCadPessoa.cdsPessoaFILIAL.AsInteger)
     else
       vNomeAux := VerificaDuplicidade(DBEdit6.Text, 'P', fDMCadPessoa.cdsPessoaCODIGO.AsInteger, 0);
@@ -1422,8 +1431,8 @@ begin
   fDMCadPessoa.cdsPessoa_Consulta.IndexFieldNames := Column.FieldName;
   Column.Title.Color := clBtnShadow;
   for i := 0 to SMDBGrid1.Columns.Count - 1 do
-    if not (SMDBGrid1.Columns.Items[I] = Column) then
-      SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
+    if not (SMDBGrid1.Columns.Items[i] = Column) then
+      SMDBGrid1.Columns.Items[i].Title.Color := clBtnFace;
 end;
 
 procedure TfrmCadPessoa.btnCadConsultarClick(Sender: TObject);
@@ -1497,15 +1506,19 @@ begin
     MessageDlg('*** Município precisa ser informado manualmente, pois a Sefaz não esta retornando o Cód. do Município!', mtInformation, [mbOk], 0);
 end;
 
-procedure TfrmCadPessoa.DBCheckBox5Click(Sender: TObject);
+procedure TfrmCadPessoa.chkRepresentanteClick(Sender: TObject);
 begin
-  GroupBox4.Visible := (DBCheckBox5.Checked);
-  if DBCheckBox5.Checked then
+  ts_Vendedor.TabVisible := chkRepresentante.Checked;
+  if not ts_Vendedor.TabVisible then
+    RzPageControl3.ActivePage := ts_Contatos;
+  if chkRepresentante.Checked then
   begin
-    Label188.Visible      := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+    ts_Vendedor.TabVisible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+    Label188.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
     CurrencyEdit1.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
     SpeedButton11.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
   end;
+
 end;
 
 procedure TfrmCadPessoa.prc_Configurarr_vTipoPessoa;
@@ -1527,7 +1540,7 @@ begin
       fMenu.vTipoPessoa := 'P';
     7:
       fMenu.vTipoPessoa := 'N'; //Funcionário
-        8:
+    8:
       fMenu.vTipoPessoa := '';
   end;
 end;
@@ -1865,14 +1878,14 @@ begin
   vTipo_Config_Email := 3;
   fRelPessoa := TfRelPessoa.Create(Self);
   fRelPessoa.fDMCadPessoa := fDMCadPessoa;
-  fRelPessoa.vTipoPessoa  := fMenu.vTipoPessoa;
+  fRelPessoa.vTipoPessoa := fMenu.vTipoPessoa;
   //fRelPessoa.vImpEndereco := ckImpEndereco.Checked;
   fRelPessoa.vImpEndereco := RzCheckList1.ItemChecked[1];
-  fRelPessoa.vImpEmail    := RzCheckList1.ItemChecked[2];
+  fRelPessoa.vImpEmail := RzCheckList1.ItemChecked[2];
   fRelPessoa.vImpEndCobranca := RzCheckList1.ItemChecked[3];
-  fRelPessoa.vImpEndEntrega  := RzCheckList1.ItemChecked[4];
-  fRelPessoa.vImpFinanceiro  := RzCheckList1.ItemChecked[5];
-  fRelPessoa.vImpVendedor    := RzCheckList1.ItemChecked[6];
+  fRelPessoa.vImpEndEntrega := RzCheckList1.ItemChecked[4];
+  fRelPessoa.vImpFinanceiro := RzCheckList1.ItemChecked[5];
+  fRelPessoa.vImpVendedor := RzCheckList1.ItemChecked[6];
   fRelPessoa.vImpDtPedidoNota := RzCheckList1.ItemChecked[7];
 
   fRelPessoa.RLReport1.PreviewModal;
@@ -2143,8 +2156,8 @@ end;
 
 procedure TfrmCadPessoa.DBCheckBox3Exit(Sender: TObject);
 begin
-  Label107.Visible     := ((fDMCadPessoa.qParametros_FinUSA_LIMITE_COMPRAS.AsString = 'S') and (fDMCadPessoa.cdsPessoaTP_FORNECEDOR.AsString = 'S'));
-  DBEdit48.Visible     := ((fDMCadPessoa.qParametros_FinUSA_LIMITE_COMPRAS.AsString = 'S') and (fDMCadPessoa.cdsPessoaTP_FORNECEDOR.AsString = 'S'));
+  Label107.Visible := ((fDMCadPessoa.qParametros_FinUSA_LIMITE_COMPRAS.AsString = 'S') and (fDMCadPessoa.cdsPessoaTP_FORNECEDOR.AsString = 'S'));
+  DBEdit48.Visible := ((fDMCadPessoa.qParametros_FinUSA_LIMITE_COMPRAS.AsString = 'S') and (fDMCadPessoa.cdsPessoaTP_FORNECEDOR.AsString = 'S'));
   DBCheckBox25.Visible := (fDMCadPessoa.cdsPessoaTP_FORNECEDOR.AsString = 'S');
 end;
 
@@ -2152,17 +2165,16 @@ procedure TfrmCadPessoa.RxDBComboBox5Exit(Sender: TObject);
 begin
   if fDMCadPessoa.cdsPessoaUF.AsString <> '' then
   begin
-    fDMCadPessoa.cdsUF.Locate('UF', fDMCadPessoa.cdsPessoaUF.AsString , ([Locaseinsensitive]));
+    fDMCadPessoa.cdsUF.Locate('UF', fDMCadPessoa.cdsPessoaUF.AsString, ([Locaseinsensitive]));
     if (RxDBComboBox5.ItemIndex = 1) and (trim(fDMCadPessoa.cdsUFACEITA_ISENTO.AsString) <> 'S') then
     begin
-      MessageDlg('*** a UF  ' + fDMCadPessoa.cdsPessoaUF.AsString + ', não aceita Contribuinte do tipo Isento ' +#13 +
-                 '   O Sistema vai alterar para (Não Contribuinte) ' + #13 + #13 + '   Favor verificar se esta correto', mtError, [mbOk], 0);
+      MessageDlg('*** a UF  ' + fDMCadPessoa.cdsPessoaUF.AsString + ', não aceita Contribuinte do tipo Isento ' + #13 + '   O Sistema vai alterar para (Não Contribuinte) ' + #13 + #13 + '   Favor verificar se esta correto', mtError, [mbOk], 0);
       exit;
     end;
   end;
   if fDMCadPessoa.cdsPessoaTIPO_CONTRIBUINTE.AsInteger = 2 then
     fDMCadPessoa.cdsPessoaINSCR_EST.AsString := 'ISENTO'
-  else if fDMCadPessoa.cdsPessoaTIPO_CONTRIBUINTE.AsInteger = 9 then                             
+  else if fDMCadPessoa.cdsPessoaTIPO_CONTRIBUINTE.AsInteger = 9 then
     fDMCadPessoa.cdsPessoaINSCR_EST.AsString := '';
   case fDMCadPessoa.cdsPessoaTIPO_CONTRIBUINTE.AsInteger of
     1:
@@ -2394,7 +2406,7 @@ var
 begin
   vCodPessoa := fDMCadPessoa.cdsPessoa_ConsultaCODIGO.AsInteger;
   fDMCadPessoa.cdsPessoa_Consulta.Filtered := False;
-  fDMCadPessoa.cdsPessoa_Consulta.Filter   := 'CODIGO = ' + IntToStr(vCodPessoa);
+  fDMCadPessoa.cdsPessoa_Consulta.Filter := 'CODIGO = ' + IntToStr(vCodPessoa);
   fDMCadPessoa.cdsPessoa_Consulta.Filtered := True;
 
   fDMCadPessoa.cdsPessoa_Aut.Close;
@@ -2413,7 +2425,7 @@ begin
   fDMCadPessoa.frxReport1.ShowReport;
 
   fDMCadPessoa.cdsPessoa_Consulta.Filtered := False;
-  fDMCadPessoa.cdsPessoa_Consulta.Filter   := '';
+  fDMCadPessoa.cdsPessoa_Consulta.Filter := '';
   fDMCadPessoa.cdsPessoa_Consulta.IndexFieldNames := 'CODIGO';
   fDMCadPessoa.cdsPessoa_Consulta.FindKey([vCodPessoa]);
 end;
@@ -2441,9 +2453,9 @@ begin
   planilha.columns.Autofit;
   vTexto := ExtractFilePath(Application.ExeName);
 
-  vTexto := vTexto + Name + '_Pessoa_'+Monta_Numero(DateToStr(Date),0);
+  vTexto := vTexto + Name + '_Pessoa_' + Monta_Numero(DateToStr(Date), 0);
 
-  Planilha.ActiveWorkBook.SaveAs(vTexto);
+  planilha.ActiveWorkBook.SaveAs(vTexto);
   Screen.Cursor := crDefault;
 end;
 
@@ -2456,7 +2468,7 @@ procedure TfrmCadPessoa.DBEdit102Exit(Sender: TObject);
 begin
   if fDMCadPessoa.cdsPessoaID_TAB_PRECO.AsInteger > 0 then
   begin
-    if not(fDMCadPessoa.cdsTab_Preco.Locate('ID', fDMCadPessoa.cdsPessoaID_TAB_PRECO.AsInteger, ([Locaseinsensitive]))) then
+    if not (fDMCadPessoa.cdsTab_Preco.Locate('ID', fDMCadPessoa.cdsPessoaID_TAB_PRECO.AsInteger, ([Locaseinsensitive]))) then
     begin
       MessageDlg('*** Código não encontrado!', mtError, [mbOk], 0);
       DBEdit102.SelectAll;
@@ -2468,7 +2480,7 @@ end;
 procedure TfrmCadPessoa.SpeedButton11Click(Sender: TObject);
 var
   sds: TSQLDataSet;
-  vCod : Integer;
+  vCod: Integer;
 begin
   vCod := 0;
   sds := TSQLDataSet.Create(nil);
@@ -2498,7 +2510,7 @@ begin
     sds.CommandText := 'SELECT CODIGO FROM PESSOA_VEND WHERE COD_VENDEDOR = :COD_VENDEDOR ';
     sds.ParamByName('COD_VENDEDOR').AsInteger := CurrencyEdit1.AsInteger;
     sds.Open;
-    if (sds.FieldByName('CODIGO').AsInteger > 0) AND (sds.FieldByName('CODIGO').AsInteger <> fDMCadPessoa.cdsPessoaCODIGO.AsInteger) then
+    if (sds.FieldByName('CODIGO').AsInteger > 0) and (sds.FieldByName('CODIGO').AsInteger <> fDMCadPessoa.cdsPessoaCODIGO.AsInteger) then
     begin
       MessageDlg('*** Este código já existe no ID do Vendedor ' + sds.FieldByName('CODIGO').AsString, mtError, [mbOk], 0);
       CurrencyEdit1.SetFocus;
@@ -2510,9 +2522,9 @@ end;
 
 procedure TfrmCadPessoa.DBCheckBox4Click(Sender: TObject);
 begin
-  Label190.Visible  := (DBCheckBox4.Checked);
+  Label190.Visible := (DBCheckBox4.Checked);
   DBEdit106.Visible := (DBCheckBox4.Checked);
-  Label191.Visible  := (DBCheckBox4.Checked);
+  Label191.Visible := (DBCheckBox4.Checked);
   DBEdit107.Visible := (DBCheckBox4.Checked);
 end;
 
@@ -2526,8 +2538,7 @@ begin
   RxDBLookupCombo44.LookupDisplay := 'DESCRICAO';
 end;
 
-procedure TfrmCadPessoa.RxDBLookupCombo44KeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TfrmCadPessoa.RxDBLookupCombo44KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if (Key = Vk_F2) then
     prc_Chamar_frmSel_ContaOrc('FUNCIONARIO_CONTA_ID', fDMCadPessoa.cdsPessoaATELIER_CONTA_ID.AsInteger);
