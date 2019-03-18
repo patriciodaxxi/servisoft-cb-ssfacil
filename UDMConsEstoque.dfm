@@ -1,8 +1,7 @@
 object DMConsEstoque: TDMConsEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 324
-  Top = 9
+  Left = 141
   Height = 699
   Width = 1224
   object sdsEstoque: TSQLDataSet
@@ -1228,7 +1227,7 @@ object DMConsEstoque: TDMConsEstoque
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43284.725669537000000000
-    ReportOptions.LastChange = 43538.551488622690000000
+    ReportOptions.LastChange = 43542.690431296290000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -3460,163 +3459,159 @@ object DMConsEstoque: TDMConsEstoque
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT EM.id_produto, EM.filial, EM.ID_COR, sum(em.qtd2) QTD, C.' +
-      'NOME NOME_COMBINACAO,'#13#10'P.NOME NOME_PRODUTO, P.REFERENCIA'#13#10'FROM E' +
-      'STOQUE_MOV EM'#13#10'INNER JOIN PRODUTO P'#13#10'ON EM.ID_PRODUTO = P.ID'#13#10'LE' +
-      'FT JOIN operacao_nota ONOTA'#13#10'ON EM.ID_OPERACAO = ONOTA.ID'#13#10'LEFT ' +
-      'JOIN COMBINACAO C'#13#10'ON EM.ID_COR = C.ID'#13#10'WHERE EM.FILIAL = :FILIA' +
-      'L'#13#10'  AND P.posse_material = '#39'T'#39#13#10'  --AND coalesce(ONOTA.estoque_' +
-      'de_terceiro,'#39'N'#39') = '#39'S'#39#13#10'  AND EM.DTMOVIMENTO <= :DTMOVIMENTO'#13#10'GR' +
-      'OUP BY EM.id_produto, EM.filial, EM.ID_COR, C.NOME,'#13#10'P.NOME, P.R' +
-      'EFERENCIA'#13#10
+      'select v.ID_PRODUTO, v.NOME_PRODUTO , v.REFERENCIA,'#13#10'sum(v.QTDRE' +
+      'STANTE) QTDRESTANTE, sum(v.vlr_total) VLR_TOTAL, v.UNIDADE,'#13#10'v.N' +
+      'OME_COMBINACAO, v.TAMANHO, v.DESC_TIPO_SPED'#13#10'from vestoque_de_te' +
+      'rc v'#13#10'where v.DATA <= :DATA AND'#13#10'      V.FILIAL = :FILIAL'#13#10'group' +
+      ' by V.ID_PRODUTO, V.NOME_PRODUTO, V.REFERENCIA, V.UNIDADE, V.nom' +
+      'e_combinacao,'#13#10'v.DESC_TIPO_SPED, V.TAMANHO'#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'DTMOVIMENTO'
-        ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 984
-    Top = 389
+    Left = 992
+    Top = 413
   end
   object dspEstoque_De_Terc: TDataSetProvider
     DataSet = sdsEstoque_De_Terc
-    Left = 1024
-    Top = 389
+    Left = 1032
+    Top = 413
   end
   object cdsEstoque_De_Terc: TClientDataSet
     Aggregates = <>
-    IndexFieldNames = 'ID_PRODUTO;NOME_COMBINACAO'
+    IndexFieldNames = 'NOME_PRODUTO;NOME_COMBINACAO;TAMANHO'
     Params = <>
     ProviderName = 'dspEstoque_De_Terc'
     OnCalcFields = cdsBalanco_VeiCalcFields
-    Left = 1072
-    Top = 389
+    Left = 1080
+    Top = 413
     object cdsEstoque_De_TercID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
     end
-    object cdsEstoque_De_TercFILIAL: TIntegerField
-      FieldName = 'FILIAL'
+    object cdsEstoque_De_TercREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
     end
-    object cdsEstoque_De_TercID_COR: TIntegerField
-      FieldName = 'ID_COR'
+    object cdsEstoque_De_TercQTDRESTANTE: TFloatField
+      FieldName = 'QTDRESTANTE'
     end
-    object cdsEstoque_De_TercQTD: TFloatField
-      FieldName = 'QTD'
+    object cdsEstoque_De_TercVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+    end
+    object cdsEstoque_De_TercUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
     end
     object cdsEstoque_De_TercNOME_COMBINACAO: TStringField
       FieldName = 'NOME_COMBINACAO'
       Size = 60
     end
+    object cdsEstoque_De_TercDESC_TIPO_SPED: TStringField
+      FieldName = 'DESC_TIPO_SPED'
+      Required = True
+      FixedChar = True
+      Size = 30
+    end
+    object cdsEstoque_De_TercTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
     object cdsEstoque_De_TercNOME_PRODUTO: TStringField
       FieldName = 'NOME_PRODUTO'
       Size = 100
     end
-    object cdsEstoque_De_TercREFERENCIA: TStringField
-      FieldName = 'REFERENCIA'
-    end
   end
   object dsEstoque_De_Terc: TDataSource
     DataSet = cdsEstoque_De_Terc
-    Left = 1104
-    Top = 389
+    Left = 1112
+    Top = 413
   end
   object sdsEstoque_Em_Terc: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_' +
-      'produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.sped_tipo_item, ' +
-      'V.desc_sped_tipo, V.ncm_ex,'#13#10'SUM(V.qtd) QTD'#13#10'FROM vemterceiro V'#13 +
-      #10'WHERE V.filial = :FILIAL'#13#10'  and v.data <= :data'#13#10'GROUP BY V.ID_' +
-      'PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_produto,'#13#10'V.' +
-      'referencia, V.tamanho, V.unidade, V.sped_tipo_item, V.desc_sped_' +
-      'tipo, V.ncm_ex'#13#10#13#10
+      'select V.ID_PRODUTO, V.nome_produto, V.REFERENCIA,'#13#10'sum(V.QTDRES' +
+      'TANTE) QTDRESTANTE, sum(V.vlr_total) VLR_TOTAL, V.UNIDADE,'#13#10'V.NO' +
+      'ME_COMBINACAO, V.TAMANHO, V.DESC_TIPO_SPED'#13#10'from vestoque_em_ter' +
+      'c V'#13#10'where V.data <= :DATA AND'#13#10'      V.FILIAL = :FILIAL'#13#10'group ' +
+      'by V.ID_PRODUTO, V.nome_produto, V.REFERENCIA, V.UNIDADE,'#13#10'V.NOM' +
+      'E_COMBINACAO, V.TAMANHO, V.DESC_TIPO_SPED'#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
-        Name = 'FILIAL'
+        DataType = ftDate
+        Name = 'DATA'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
-        Name = 'data'
+        DataType = ftInteger
+        Name = 'FILIAL'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 984
-    Top = 433
+    Left = 992
+    Top = 537
   end
   object dspEstoque_Em_Terc: TDataSetProvider
     DataSet = sdsEstoque_Em_Terc
-    Left = 1024
-    Top = 433
+    Left = 1032
+    Top = 537
   end
   object cdsEstoque_Em_Terc: TClientDataSet
     Aggregates = <>
-    IndexFieldNames = 'ID_PRODUTO;NOME_COMBINACAO'
+    IndexFieldNames = 'ID_PRODUTO;NOME_COMBINACAO;TAMANHO'
     Params = <>
     ProviderName = 'dspEstoque_Em_Terc'
     OnCalcFields = cdsBalanco_VeiCalcFields
-    Left = 1072
-    Top = 433
+    Left = 1080
+    Top = 537
     object cdsEstoque_Em_TercID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
-    end
-    object cdsEstoque_Em_TercNCM: TStringField
-      FieldName = 'NCM'
-      Size = 10
-    end
-    object cdsEstoque_Em_TercID_COR: TIntegerField
-      FieldName = 'ID_COR'
-    end
-    object cdsEstoque_Em_TercNOME_COMBINACAO: TStringField
-      FieldName = 'NOME_COMBINACAO'
-      Size = 60
-    end
-    object cdsEstoque_Em_TercNOME_PRODUTO: TStringField
-      FieldName = 'NOME_PRODUTO'
-      Size = 100
     end
     object cdsEstoque_Em_TercREFERENCIA: TStringField
       FieldName = 'REFERENCIA'
     end
-    object cdsEstoque_Em_TercTAMANHO: TStringField
-      FieldName = 'TAMANHO'
-      Size = 10
+    object cdsEstoque_Em_TercQTDRESTANTE: TFloatField
+      FieldName = 'QTDRESTANTE'
+    end
+    object cdsEstoque_Em_TercVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
     end
     object cdsEstoque_Em_TercUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Size = 6
     end
-    object cdsEstoque_Em_TercSPED_TIPO_ITEM: TStringField
-      FieldName = 'SPED_TIPO_ITEM'
-      Size = 2
+    object cdsEstoque_Em_TercNOME_COMBINACAO: TStringField
+      FieldName = 'NOME_COMBINACAO'
+      Size = 60
     end
-    object cdsEstoque_Em_TercDESC_SPED_TIPO: TStringField
-      FieldName = 'DESC_SPED_TIPO'
+    object cdsEstoque_Em_TercTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+    object cdsEstoque_Em_TercDESC_TIPO_SPED: TStringField
+      FieldName = 'DESC_TIPO_SPED'
+      Required = True
       FixedChar = True
       Size = 30
     end
-    object cdsEstoque_Em_TercNCM_EX: TStringField
-      FieldName = 'NCM_EX'
-      Size = 2
-    end
-    object cdsEstoque_Em_TercQTD: TFloatField
-      FieldName = 'QTD'
+    object cdsEstoque_Em_TercNOME_PRODUTO: TStringField
+      FieldName = 'NOME_PRODUTO'
+      Size = 100
     end
   end
   object dsEstoque_Em_Terc: TDataSource
     DataSet = cdsEstoque_Em_Terc
-    Left = 1104
-    Top = 433
+    Left = 1112
+    Top = 537
   end
   object frxEstoque_Mov: TfrxDBDataset
     UserName = 'frxEstoque_Mov'
@@ -3789,177 +3784,131 @@ object DMConsEstoque: TDMConsEstoque
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT EM.id_produto, EM.filial, EM.ID_COR, sum(em.qtd2) QTD, C.' +
-      'NOME NOME_COMBINACAO,'#13#10'P.NOME NOME_PRODUTO, P.REFERENCIA, EM.ID_' +
-      'PESSOA , EM.TAMANHO,'#13#10'P.unidade, P.sped_tipo_item, P.ncm_ex, NCM' +
-      '.ncm, TER.NOME NOME_TERCEIRO,'#13#10'case'#13#10'  when p.sped_tipo_item = '#39 +
-      '00'#39' then '#39'00 - Mercadoria para Revenda'#39#13#10'  when p.sped_tipo_item' +
-      ' = '#39'01'#39' then '#39'01- Mat'#233'ria-Prima'#39#13#10'  when p.sped_tipo_item = '#39'02'#39 +
-      ' then '#39'02- Embalagem'#39#13#10'  when p.sped_tipo_item = '#39'03'#39' then '#39'03 -' +
-      ' Produto em Processo'#39#13#10'  when p.sped_tipo_item = '#39'04'#39' then '#39'04 -' +
-      ' Produto Acabado'#39#13#10'  when p.sped_tipo_item = '#39'05'#39' then '#39'05 - Sub' +
-      'Produto'#39#13#10'  when p.sped_tipo_item = '#39'06'#39' then '#39'06 - Produto Inte' +
-      'rmedi'#225'rio'#39#13#10'  when p.sped_tipo_item = '#39'07'#39' then '#39'07 - Material d' +
-      'e Uso e Consumo'#39#13#10'  when p.sped_tipo_item = '#39'08'#39' then '#39'08 - Ativ' +
-      'o Imobilizado'#39#13#10'  when p.sped_tipo_item = '#39'09'#39' then '#39'09 - Servi'#231 +
-      'os'#39#13#10'  when p.sped_tipo_item = '#39'10'#39' then '#39'10 - Outros Insumos'#39#13#10 +
-      '  when p.sped_tipo_item = '#39'99'#39' then '#39'99 - Outras'#39#13#10'  else '#39#39#13#10'  ' +
-      'end DESC_SPED_TIPO'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JOIN PRODUTO P'#13#10'O' +
-      'N EM.ID_PRODUTO = P.ID'#13#10'LEFT JOIN TAB_NCM NCM'#13#10'ON P.ID_NCM = NCM' +
-      '.ID'#13#10'LEFT JOIN COMBINACAO C'#13#10'ON EM.ID_COR = C.ID'#13#10'LEFT JOIN PESS' +
-      'OA TER'#13#10'ON EM.ID_PESSOA = TER.CODIGO'#13#10'WHERE EM.FILIAL = :FILIAL'#13 +
-      #10'  AND P.POSSE_MATERIAL = '#39'T'#39#13#10'  AND EM.DTMOVIMENTO <= :DTMOVIME' +
-      'NTO'#13#10'GROUP BY EM.id_produto, EM.filial, EM.ID_COR, C.NOME,'#13#10'P.NO' +
-      'ME, P.REFERENCIA, EM.ID_PESSOA, EM.TAMANHO,'#13#10'P.unidade, P.sped_t' +
-      'ipo_item, P.ncm_ex, NCM.ncm, TER.NOME'#13#10
+      'select V.ID_PRODUTO, V.NOME_PRODUTO, V.REFERENCIA,'#13#10'sum(V.QTDRES' +
+      'TANTE) QTDRESTANTE, sum(V.vlr_total) VLR_TOTAL, V.UNIDADE,'#13#10'V.NO' +
+      'ME_COMBINACAO, V.ID_TERCEIRO, V.NOME_TERCEIRO,'#13#10'V.TAMANHO, V.DES' +
+      'C_TIPO_SPED'#13#10'from vestoque_DE_terc V'#13#10'where V.data <= :DATA AND'#13 +
+      #10'      V.FILIAL = :FILIAL'#13#10'group by V.ID_PRODUTO, V.NOME_PRODUTO' +
+      ', V.REFERENCIA, V.UNIDADE, V.nome_combinacao,'#13#10'V.desc_tipo_sped,' +
+      ' V.id_terceiro, V.nome_terceiro, V.TAMANHO'#13#10#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'DTMOVIMENTO'
-        ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 992
-    Top = 496
+    Top = 456
   end
   object dspEstoque_De_Terc_Pes: TDataSetProvider
     DataSet = sdsEstoque_De_Terc_Pes
     Left = 1032
-    Top = 496
+    Top = 456
   end
   object cdsEstoque_De_Terc_Pes: TClientDataSet
     Aggregates = <>
-    IndexFieldNames = 'NOME_PRODUTO;NOME_COMBINACAO;TAMANHO'
+    IndexFieldNames = 'NOME_TERCEIRO;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO'
     Params = <>
     ProviderName = 'dspEstoque_De_Terc_Pes'
     OnCalcFields = cdsBalanco_VeiCalcFields
     Left = 1080
-    Top = 496
+    Top = 456
     object cdsEstoque_De_Terc_PesID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
     end
-    object cdsEstoque_De_Terc_PesFILIAL: TIntegerField
-      FieldName = 'FILIAL'
+    object cdsEstoque_De_Terc_PesREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
     end
-    object cdsEstoque_De_Terc_PesID_COR: TIntegerField
-      FieldName = 'ID_COR'
+    object cdsEstoque_De_Terc_PesQTDRESTANTE: TFloatField
+      FieldName = 'QTDRESTANTE'
     end
-    object cdsEstoque_De_Terc_PesQTD: TFloatField
-      FieldName = 'QTD'
+    object cdsEstoque_De_Terc_PesVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+    end
+    object cdsEstoque_De_Terc_PesUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
     end
     object cdsEstoque_De_Terc_PesNOME_COMBINACAO: TStringField
       FieldName = 'NOME_COMBINACAO'
+      Size = 60
+    end
+    object cdsEstoque_De_Terc_PesDESC_TIPO_SPED: TStringField
+      FieldName = 'DESC_TIPO_SPED'
+      Required = True
+      FixedChar = True
+      Size = 30
+    end
+    object cdsEstoque_De_Terc_PesID_TERCEIRO: TIntegerField
+      FieldName = 'ID_TERCEIRO'
+    end
+    object cdsEstoque_De_Terc_PesNOME_TERCEIRO: TStringField
+      FieldName = 'NOME_TERCEIRO'
       Size = 60
     end
     object cdsEstoque_De_Terc_PesNOME_PRODUTO: TStringField
       FieldName = 'NOME_PRODUTO'
       Size = 100
     end
-    object cdsEstoque_De_Terc_PesREFERENCIA: TStringField
-      FieldName = 'REFERENCIA'
-    end
-    object cdsEstoque_De_Terc_PesID_PESSOA: TIntegerField
-      FieldName = 'ID_PESSOA'
-    end
     object cdsEstoque_De_Terc_PesTAMANHO: TStringField
       FieldName = 'TAMANHO'
       Size = 10
-    end
-    object cdsEstoque_De_Terc_PesUNIDADE: TStringField
-      FieldName = 'UNIDADE'
-      Size = 6
-    end
-    object cdsEstoque_De_Terc_PesSPED_TIPO_ITEM: TStringField
-      FieldName = 'SPED_TIPO_ITEM'
-      Size = 2
-    end
-    object cdsEstoque_De_Terc_PesNCM_EX: TStringField
-      FieldName = 'NCM_EX'
-      Size = 2
-    end
-    object cdsEstoque_De_Terc_PesNCM: TStringField
-      FieldName = 'NCM'
-      Size = 10
-    end
-    object cdsEstoque_De_Terc_PesNOME_TERCEIRO: TStringField
-      FieldName = 'NOME_TERCEIRO'
-      Size = 60
-    end
-    object cdsEstoque_De_Terc_PesDESC_SPED_TIPO: TStringField
-      FieldName = 'DESC_SPED_TIPO'
-      Required = True
-      FixedChar = True
-      Size = 30
     end
   end
   object dsEstoque_De_Terc_Pes: TDataSource
     DataSet = cdsEstoque_De_Terc_Pes
     Left = 1112
-    Top = 496
+    Top = 456
   end
   object sdsEstoque_Em_Terc_Pes: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_' +
-      'produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.sped_tipo_item, ' +
-      'V.desc_sped_tipo, V.ncm_ex,'#13#10'V.id_pessoa, P.NOME NOME_TERCEIRO,'#13 +
-      #10'SUM(V.qtd) QTD'#13#10'FROM vemterceiro V'#13#10'LEFT JOIN PESSOA P'#13#10'ON V.ID' +
-      '_PESSOA = P.CODIGO'#13#10'WHERE V.filial = :FILIAL'#13#10'  and v.data <= :d' +
-      'ata'#13#10'GROUP BY V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, ' +
-      'V.nome_produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.sped_tipo' +
-      '_item, V.desc_sped_tipo, V.ncm_ex,'#13#10'V.id_pessoa, P.NOME'#13#10
+      'select V.ID_PRODUTO, V.NOME_PRODUTO, V.REFERENCIA,'#13#10'sum(V.QTDRES' +
+      'TANTE) QTDRESTANTE, sum(V.vlr_total) VLR_TOTAL, V.UNIDADE,'#13#10'V.NO' +
+      'ME_COMBINACAO, V.ID_TERCEIRO, V.NOME_TERCEIRO,'#13#10'V.TAMANHO, V.DES' +
+      'C_TIPO_SPED'#13#10'from vestoque_em_terc V'#13#10'where V.data <= :DATA AND'#13 +
+      #10'      V.FILIAL = :FILIAL'#13#10'group by V.ID_PRODUTO, V.NOME_PRODUTO' +
+      ', V.REFERENCIA, V.UNIDADE, V.nome_combinacao,'#13#10'V.desc_tipo_sped,' +
+      ' V.id_terceiro, V.nome_terceiro, V.TAMANHO'#13#10#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'data'
-        ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 992
-    Top = 542
+    Top = 590
   end
   object dspEstoque_Em_Terc_Pes: TDataSetProvider
     DataSet = sdsEstoque_Em_Terc_Pes
     Left = 1032
-    Top = 542
+    Top = 590
   end
   object cdsEstoque_Em_Terc_Pes: TClientDataSet
     Aggregates = <>
-    IndexFieldNames = 'ID_PRODUTO;NOME_COMBINACAO'
+    IndexFieldNames = 'NOME_TERCEIRO;ID_PRODUTO;NOME_COMBINACAO;TAMANHO'
     Params = <>
     ProviderName = 'dspEstoque_Em_Terc_Pes'
     OnCalcFields = cdsBalanco_VeiCalcFields
     Left = 1080
-    Top = 542
-    object cdsEstoque_Em_Terc_PesNOME_TERCEIRO: TStringField
-      FieldName = 'NOME_TERCEIRO'
-      Size = 60
-    end
+    Top = 590
     object cdsEstoque_Em_Terc_PesID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
-    end
-    object cdsEstoque_Em_Terc_PesID_COR: TIntegerField
-      FieldName = 'ID_COR'
-    end
-    object cdsEstoque_Em_Terc_PesQTD: TFloatField
-      FieldName = 'QTD'
-    end
-    object cdsEstoque_Em_Terc_PesNOME_COMBINACAO: TStringField
-      FieldName = 'NOME_COMBINACAO'
-      Size = 60
     end
     object cdsEstoque_Em_Terc_PesNOME_PRODUTO: TStringField
       FieldName = 'NOME_PRODUTO'
@@ -3968,37 +3917,33 @@ object DMConsEstoque: TDMConsEstoque
     object cdsEstoque_Em_Terc_PesREFERENCIA: TStringField
       FieldName = 'REFERENCIA'
     end
-    object cdsEstoque_Em_Terc_PesID_PESSOA: TIntegerField
-      FieldName = 'ID_PESSOA'
+    object cdsEstoque_Em_Terc_PesQTDRESTANTE: TFloatField
+      FieldName = 'QTDRESTANTE'
     end
-    object cdsEstoque_Em_Terc_PesTAMANHO: TStringField
-      FieldName = 'TAMANHO'
-      Size = 10
+    object cdsEstoque_Em_Terc_PesVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
     end
     object cdsEstoque_Em_Terc_PesUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Size = 6
     end
-    object cdsEstoque_Em_Terc_PesSPED_TIPO_ITEM: TStringField
-      FieldName = 'SPED_TIPO_ITEM'
-      Size = 2
+    object cdsEstoque_Em_Terc_PesNOME_COMBINACAO: TStringField
+      FieldName = 'NOME_COMBINACAO'
+      Size = 60
     end
-    object cdsEstoque_Em_Terc_PesNCM_EX: TStringField
-      FieldName = 'NCM_EX'
-      Size = 2
+    object cdsEstoque_Em_Terc_PesID_TERCEIRO: TIntegerField
+      FieldName = 'ID_TERCEIRO'
     end
-    object cdsEstoque_Em_Terc_PesNCM: TStringField
-      FieldName = 'NCM'
+    object cdsEstoque_Em_Terc_PesNOME_TERCEIRO: TStringField
+      FieldName = 'NOME_TERCEIRO'
+      Size = 60
+    end
+    object cdsEstoque_Em_Terc_PesTAMANHO: TStringField
+      FieldName = 'TAMANHO'
       Size = 10
     end
-    object cdsEstoque_Em_Terc_PesTIPO_TER: TStringField
-      FieldName = 'TIPO_TER'
-      Required = True
-      FixedChar = True
-      Size = 1
-    end
-    object cdsEstoque_Em_Terc_PesDESC_SPED_TIPO: TStringField
-      FieldName = 'DESC_SPED_TIPO'
+    object cdsEstoque_Em_Terc_PesDESC_TIPO_SPED: TStringField
+      FieldName = 'DESC_TIPO_SPED'
       Required = True
       FixedChar = True
       Size = 30
@@ -4007,194 +3952,6 @@ object DMConsEstoque: TDMConsEstoque
   object dsEstoque_Em_Terc_Pes: TDataSource
     DataSet = cdsEstoque_Em_Terc_Pes
     Left = 1112
-    Top = 542
-  end
-  object sdsEstoque_Em_Terc_Det: TSQLDataSet
-    NoMetadata = True
-    GetMetadata = False
-    CommandText = 
-      'SELECT V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_' +
-      'produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.sped_tipo_item, ' +
-      'V.desc_sped_tipo, V.ncm_ex,'#13#10'V.id_pessoa, P.NOME NOME_TERCEIRO, ' +
-      'v.data, v.ncm, v.tipo_es, v.tipo_ter'#13#10'FROM vemterceiro V'#13#10'LEFT J' +
-      'OIN PESSOA P'#13#10'ON V.ID_PESSOA = P.CODIGO'#13#10'WHERE V.filial = :FILIA' +
-      'L'#13#10'  and v.data between :DATA1 and :DATA2'#13#10#13#10
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'FILIAL'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'DATA1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'DATA2'
-        ParamType = ptInput
-      end>
-    SQLConnection = dmDatabase.scoDados
-    Left = 1000
-    Top = 587
-  end
-  object dspEstoque_Em_Terc_Det: TDataSetProvider
-    DataSet = sdsEstoque_Em_Terc_Det
-    Left = 1032
-    Top = 587
-  end
-  object cdsEstoque_Em_Terc_Det: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspEstoque_Em_Terc_Pes'
-    OnCalcFields = cdsBalanco_VeiCalcFields
-    Left = 1080
-    Top = 587
-    object cdsEstoque_Em_Terc_DetID_PRODUTO: TIntegerField
-      FieldName = 'ID_PRODUTO'
-    end
-    object cdsEstoque_Em_Terc_DetNCM: TStringField
-      FieldName = 'NCM'
-      Size = 10
-    end
-    object cdsEstoque_Em_Terc_DetID_COR: TIntegerField
-      FieldName = 'ID_COR'
-    end
-    object cdsEstoque_Em_Terc_DetNOME_COMBINACAO: TStringField
-      FieldName = 'NOME_COMBINACAO'
-      Size = 60
-    end
-    object cdsEstoque_Em_Terc_DetNOME_PRODUTO: TStringField
-      FieldName = 'NOME_PRODUTO'
-      Size = 100
-    end
-    object cdsEstoque_Em_Terc_DetREFERENCIA: TStringField
-      FieldName = 'REFERENCIA'
-    end
-    object cdsEstoque_Em_Terc_DetTAMANHO: TStringField
-      FieldName = 'TAMANHO'
-      Size = 10
-    end
-    object cdsEstoque_Em_Terc_DetUNIDADE: TStringField
-      FieldName = 'UNIDADE'
-      Size = 6
-    end
-    object cdsEstoque_Em_Terc_DetSPED_TIPO_ITEM: TStringField
-      FieldName = 'SPED_TIPO_ITEM'
-      Size = 2
-    end
-    object cdsEstoque_Em_Terc_DetDESC_SPED_TIPO: TStringField
-      FieldName = 'DESC_SPED_TIPO'
-      FixedChar = True
-      Size = 30
-    end
-    object cdsEstoque_Em_Terc_DetNCM_EX: TStringField
-      FieldName = 'NCM_EX'
-      Size = 2
-    end
-    object cdsEstoque_Em_Terc_DetID_PESSOA: TIntegerField
-      FieldName = 'ID_PESSOA'
-    end
-    object cdsEstoque_Em_Terc_DetNOME_TERCEIRO: TStringField
-      FieldName = 'NOME_TERCEIRO'
-      Size = 60
-    end
-    object cdsEstoque_Em_Terc_DetQTD: TFloatField
-      FieldName = 'QTD'
-    end
-  end
-  object dsEstoque_Em_Terc_Det: TDataSource
-    DataSet = cdsEstoque_Em_Terc_Det
-    Left = 1112
-    Top = 587
-  end
-  object sdsEstoque_Em_Terc_PesB: TSQLDataSet
-    NoMetadata = True
-    GetMetadata = False
-    CommandText = 
-      'SELECT V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_' +
-      'produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.sped_tipo_item, ' +
-      'V.desc_sped_tipo, V.ncm_ex,'#13#10'V.id_pessoa, P.NOME NOME_TERCEIRO,'#13 +
-      #10'SUM(V.qtd) QTD'#13#10'FROM vemterceiro_benef V'#13#10'LEFT JOIN PESSOA P'#13#10'O' +
-      'N V.ID_PESSOA = P.CODIGO'#13#10'WHERE V.filial = :FILIAL'#13#10'  and v.data' +
-      ' <= :data'#13#10'GROUP BY V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combin' +
-      'acao, V.nome_produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.spe' +
-      'd_tipo_item, V.desc_sped_tipo, V.ncm_ex,'#13#10'V.id_pessoa, P.NOME'
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'FILIAL'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'data'
-        ParamType = ptInput
-      end>
-    SQLConnection = dmDatabase.scoDados
-    Left = 968
-    Top = 542
-  end
-  object sdsEstoque_Em_TercB: TSQLDataSet
-    NoMetadata = True
-    GetMetadata = False
-    CommandText = 
-      'SELECT V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_' +
-      'produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.sped_tipo_item, ' +
-      'V.desc_sped_tipo, V.ncm_ex,'#13#10'V.id_pessoa, P.NOME NOME_TERCEIRO,'#13 +
-      #10'SUM(V.qtd) QTD'#13#10'FROM vemterceiro_benef V'#13#10'LEFT JOIN PESSOA P'#13#10'O' +
-      'N V.ID_PESSOA = P.CODIGO'#13#10'WHERE V.filial = :FILIAL'#13#10'  and v.data' +
-      ' <= :data'#13#10'GROUP BY V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combin' +
-      'acao, V.nome_produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.spe' +
-      'd_tipo_item, V.desc_sped_tipo, V.ncm_ex,'#13#10'V.id_pessoa, P.NOME'
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'FILIAL'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'data'
-        ParamType = ptInput
-      end>
-    SQLConnection = dmDatabase.scoDados
-    Left = 952
-    Top = 438
-  end
-  object sdsEstoque_Em_Terc_DetB: TSQLDataSet
-    NoMetadata = True
-    GetMetadata = False
-    CommandText = 
-      'SELECT V.ID_PRODUTO, V.NCM, V.ID_COR, V.nome_combinacao, V.nome_' +
-      'produto,'#13#10'V.referencia, V.tamanho, V.unidade, V.sped_tipo_item, ' +
-      'V.desc_sped_tipo, V.ncm_ex,'#13#10'V.id_pessoa, P.NOME NOME_TERCEIRO, ' +
-      'v.data, v.ncm, v.tipo_es, v.tipo_ter'#13#10'FROM vemterceiro_Benef V'#13#10 +
-      'LEFT JOIN PESSOA P'#13#10'ON V.ID_PESSOA = P.CODIGO'#13#10'WHERE V.filial = ' +
-      ':FILIAL'#13#10'  and v.data between :DATA1 and :DATA2'#13#10
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'FILIAL'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'DATA1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'DATA2'
-        ParamType = ptInput
-      end>
-    SQLConnection = dmDatabase.scoDados
-    Left = 968
     Top = 590
   end
 end
