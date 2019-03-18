@@ -2225,6 +2225,5 @@ begin
   fDmCupomFiscal.cdsCupom_Parc.Post;
 end;
 
-
 end.
 

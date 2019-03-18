@@ -6978,8 +6978,8 @@ object dmCupomFiscal: TdmCupomFiscal
       'where m.id_produto = :id_produto'
       'order by m.dtemissao desc')
     SQLConnection = dmDatabase.scoDados
-    Left = 920
-    Top = 488
+    Left = 896
+    Top = 456
     object qProdSTDTEMISSAO: TDateField
       FieldName = 'DTEMISSAO'
     end
@@ -7075,8 +7075,8 @@ object dmCupomFiscal: TdmCupomFiscal
       '     AND TUF.UF = :UF'
       '     AND TUF.TIPO_PRODUTO = :TIPO_PRODUTO')
     SQLConnection = dmDatabase.scoDados
-    Left = 937
-    Top = 544
+    Left = 929
+    Top = 456
     object qNCM_UFID: TIntegerField
       FieldName = 'ID'
       Required = True
