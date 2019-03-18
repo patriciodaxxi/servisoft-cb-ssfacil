@@ -3,7 +3,8 @@ unit uDmCadCentroCusto;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, LogTypes;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, LogTypes,
+  frxClass, frxDBSet;
 
 type
   TdmCadCentroCusto = class(TDataModule)
@@ -59,6 +60,8 @@ type
     cdsConsultaCOD_PRINCIPAL: TIntegerField;
     cdsConsultaDT_CADASTRO: TDateField;
     cdsConsultaNOME_AUX: TStringField;
+    frxReport1: TfrxReport;
+    frxCentroCusto: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCentroCustoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

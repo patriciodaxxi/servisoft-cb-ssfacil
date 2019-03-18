@@ -42,6 +42,7 @@ type
     btnAlterar: TNxButton;
     btnConfirmar: TNxButton;
     btnCancelar: TNxButton;
+    btnImprimir: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -62,6 +63,7 @@ type
     procedure btnInserirClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure RzPageControl1Change(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadCentroCusto: TDMCadCentroCusto;
@@ -83,7 +85,7 @@ var
 
 implementation
 
-uses DmdDatabase, rsDBUtils;
+uses DmdDatabase, rsDBUtils, uUtilPadrao;
 
 {$R *.dfm}
 
@@ -141,6 +143,7 @@ begin
   fDMCadCentroCusto.cdsSuperior.Open;
   btnConsultarClick(Sender);
   Edit4.SetFocus;
+  fnc_Busca_Nome_Filial;
 end;
 
 procedure TfrmCadCentroCusto.prc_Consultar;
@@ -325,6 +328,26 @@ begin
       prc_Posiciona_Reg;
     end;
   end;
+end;
+
+procedure TfrmCadCentroCusto.btnImprimirClick(Sender: TObject);
+var
+  vArq : String;
+begin
+  if not (fDMCadCentroCusto.cdsConsulta.Active) or (fDMCadCentroCusto.cdsConsulta.IsEmpty) or (fDMCadCentroCusto.cdsConsultaID.AsInteger <= 0) then
+    exit;
+  fDMCadCentroCusto.cdsConsulta.First;
+
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\centrocusto.fr3';
+  if FileExists(vArq) then
+    fDMCadCentroCusto.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado: ' + vArq);
+    Exit;
+  end;
+  fDMCadCentroCusto.frxReport1.Variables['EMPRESA'] := QuotedStr(vFilial_Nome);
+  fDMCadCentroCusto.frxReport1.ShowReport;
 end;
 
 end.
