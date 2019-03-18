@@ -3,8 +3,8 @@ unit UDMPedidoImp;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, SqlExpr, Provider, DBClient, frxClass,
-  frxDBSet, frxRich, frxExportMail, frxExportPDF;
+  SysUtils, Classes, FMTBcd, DB, SqlExpr, Provider, DBClient, frxClass, frxDBSet,
+  frxRich, frxExportMail, frxExportPDF;
 
 type
   TDMPedidoImp = class(TDataModule)
@@ -148,14 +148,13 @@ type
     procedure frxPedidoImp_LucratividadeNext(Sender: TObject);
     procedure DataModuleCreate(Sender: TObject);
   private
-    procedure prc_Abre_Item_Lucratividade(ID : Integer);
+    procedure prc_Abre_Item_Lucratividade(ID: Integer);
 
     { Private declarations }
   public
-
-    ctPedidoOrcamento : String;
-    ctTalao_Proc : String;
-    vImp_Etiqueta : Boolean;
+    ctPedidoOrcamento: string;
+    ctTalao_Proc: string;
+    vImp_Etiqueta: Boolean;
 
     { Public declarations }
   end;
@@ -165,7 +164,8 @@ var
 
 implementation
 
-uses DmdDatabase;
+uses
+  DmdDatabase;
 
 {$R *.dfm}
 
@@ -194,7 +194,8 @@ end;
 procedure TDMPedidoImp.DataModuleCreate(Sender: TObject);
 begin
   ctPedidoOrcamento := sdsPedidoOrcImp.CommandText;
-  ctTalao_Proc      := sdsTalao_Proc.CommandText;
+  ctTalao_Proc := sdsTalao_Proc.CommandText;
 end;
 
 end.
+
