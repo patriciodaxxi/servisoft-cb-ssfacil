@@ -24,9 +24,9 @@ object frmCadCFOP: TfrmCadCFOP
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 929
-    Height = 600
-    ActivePage = TS_Consulta
+    Width = 937
+    Height = 608
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadCFOP: TfrmCadCFOP
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -43,8 +43,8 @@ object frmCadCFOP: TfrmCadCFOP
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 107
-        Width = 925
-        Height = 453
+        Width = 933
+        Height = 461
         Align = alClient
         Ctl3D = False
         DataSource = DMCadCFOP.dsCFOP_Consulta
@@ -156,7 +156,7 @@ object frmCadCFOP: TfrmCadCFOP
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 925
+        Width = 933
         Height = 30
         Align = alTop
         Color = clSilver
@@ -460,8 +460,8 @@ object frmCadCFOP: TfrmCadCFOP
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 560
-        Width = 925
+        Top = 568
+        Width = 933
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -477,7 +477,7 @@ object frmCadCFOP: TfrmCadCFOP
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 925
+        Width = 933
         Height = 77
         Align = alTop
         Color = clSilver
@@ -641,7 +641,7 @@ object frmCadCFOP: TfrmCadCFOP
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 925
+        Width = 933
         Height = 30
         Align = alTop
         Color = 8404992
@@ -880,7 +880,7 @@ object frmCadCFOP: TfrmCadCFOP
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 925
+        Width = 933
         Height = 288
         Align = alTop
         Enabled = False
@@ -1212,11 +1212,19 @@ object frmCadCFOP: TfrmCadCFOP
           VisualStyle = vsGradient
           object Label23: TLabel
             Left = 4
-            Top = 171
+            Top = 167
             Width = 51
             Height = 13
             Alignment = taRightJustify
             Caption = 'Finalidade:'
+          end
+          object Label26: TLabel
+            Left = 23
+            Top = 188
+            Width = 32
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Posse:'
           end
           object DBCheckBox10: TDBCheckBox
             Left = 8
@@ -1287,6 +1295,7 @@ object frmCadCFOP: TfrmCadCFOP
             TabOrder = 4
             ValueChecked = 'S'
             ValueUnchecked = 'N'
+            OnClick = DBCheckBox14Click
           end
           object DBCheckBox15: TDBCheckBox
             Left = 8
@@ -1318,7 +1327,7 @@ object frmCadCFOP: TfrmCadCFOP
           end
           object RxDBComboBox3: TRxDBComboBox
             Left = 57
-            Top = 163
+            Top = 159
             Width = 124
             Height = 21
             Style = csDropDownList
@@ -1362,6 +1371,25 @@ object frmCadCFOP: TfrmCadCFOP
             TabOrder = 9
             ValueChecked = 'S'
             ValueUnchecked = 'N'
+          end
+          object RxDBComboBox4: TRxDBComboBox
+            Left = 57
+            Top = 180
+            Width = 124
+            Height = 21
+            Style = csDropDownList
+            DataField = 'BENEFICIAMENTO_POSSE'
+            DataSource = DMCadCFOP.dsCFOP
+            DropDownCount = 2
+            EnableValues = True
+            ItemHeight = 13
+            Items.Strings = (
+              'Empresa'
+              'Terceiro')
+            TabOrder = 10
+            Values.Strings = (
+              'E'
+              'T')
           end
         end
         object gbxEstoque: TRzGroupBox
@@ -1766,8 +1794,8 @@ object frmCadCFOP: TfrmCadCFOP
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 318
-        Width = 925
-        Height = 259
+        Width = 933
+        Height = 267
         ActivePage = TabSheet1
         ActivePageDefault = TabSheet1
         Align = alClient
@@ -1779,7 +1807,7 @@ object frmCadCFOP: TfrmCadCFOP
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 921
+            Width = 929
             Height = 31
             Align = alTop
             Color = clSilver
@@ -1892,8 +1920,8 @@ object frmCadCFOP: TfrmCadCFOP
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 31
-            Width = 921
-            Height = 205
+            Width = 929
+            Height = 213
             Align = alClient
             DataSource = DMCadCFOP.dsCFOP_Variacao
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -2021,8 +2049,8 @@ object frmCadCFOP: TfrmCadCFOP
           object DBMemo1: TDBMemo
             Left = 0
             Top = 47
-            Width = 921
-            Height = 189
+            Width = 929
+            Height = 197
             Align = alClient
             DataField = 'LEI'
             DataSource = DMCadCFOP.dsCFOP
@@ -2034,7 +2062,7 @@ object frmCadCFOP: TfrmCadCFOP
           object Panel5: TPanel
             Left = 0
             Top = 0
-            Width = 921
+            Width = 929
             Height = 47
             Align = alTop
             Color = clSilver
@@ -2123,8 +2151,8 @@ object frmCadCFOP: TfrmCadCFOP
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 921
-            Height = 236
+            Width = 929
+            Height = 244
             Align = alClient
             Enabled = False
             TabOrder = 0
