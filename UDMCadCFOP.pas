@@ -421,6 +421,8 @@ type
     sdsCFOPENVIAR_BASE_ST: TStringField;
     cdsCFOPENVIAR_BASE_ST: TStringField;
     cdsCFOP_ConsultaSUBSTITUICAO_TRIB: TStringField;
+    sdsCFOPBENEFICIAMENTO_POSSE: TStringField;
+    cdsCFOPBENEFICIAMENTO_POSSE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsCFOPNewRecord(DataSet: TDataSet);
     procedure dspCFOPUpdateError(Sender: TObject;

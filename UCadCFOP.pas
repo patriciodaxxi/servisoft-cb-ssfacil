@@ -140,6 +140,8 @@ type
     DBCheckBox21: TDBCheckBox;
     DBCheckBox22: TDBCheckBox;
     DBCheckBox23: TDBCheckBox;
+    Label26: TLabel;
+    RxDBComboBox4: TRxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -178,6 +180,7 @@ type
     procedure RxDBLookupCombo8Change(Sender: TObject);
     procedure btnGerar_RegraClick(Sender: TObject);
     procedure btnGerar_VarClick(Sender: TObject);
+    procedure DBCheckBox14Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadCFOP: TDMCadCFOP;
@@ -536,6 +539,7 @@ begin
     DBCheckBox9Click(Sender);
     DBCheckBox17Click(Sender);
     btnGerar_Regra.Visible := (fDMCadCFOP.cdsCFOPID_REGRA.AsInteger > 0);
+    DBCheckBox14Click(Sender);
   end;
 end;
 
@@ -784,6 +788,12 @@ begin
     fDMCadCFOP.mAuxItens.Post;
     fDMCadCFOP.cdsCFOP_Variacao.Next;
   end;
+end;
+
+procedure TfrmCadCFOP.DBCheckBox14Click(Sender: TObject);
+begin
+  Label26.Visible       := DBCheckBox14.Checked;
+  RxDBComboBox4.Visible := DBCheckBox14.Checked;
 end;
 
 end.

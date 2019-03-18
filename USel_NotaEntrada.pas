@@ -1,3 +1,5 @@
+//Tag 50 quando entra 1901, vem do frmcadnotaentrada
+
 unit USel_NotaEntrada;
 
 interface
@@ -6,7 +8,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, RxLookup, StdCtrls, UDMCadNotaFiscal, Buttons, Grids,
   DBGrids, SMDBGrid, DB, UCadNotaFiscal_Itens, RzPanel, Mask, ToolEdit,
-  CurrEdit;
+  CurrEdit, UCadNotaEntrada_Itens;
 
 type
   TfrmSel_NotaEntrada = class(TForm)
@@ -76,8 +78,8 @@ type
   public
     { Public declarations }
     fDMCadNotaFiscal       : TDMCadNotaFiscal;
-
     ffrmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens;
+    ffrmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens;
 
   end;
 
@@ -112,7 +114,7 @@ begin
   fDMCadNotaFiscal.cdsFornecedor.Close;
   fDMCadNotaFiscal.cdsFornecedor.Open;
   fDMCadNotaFiscal.mSelecionado_Nota.EmptyDataSet;
-  gbxConsumo.Visible := (fDMCadNotaFiscal.cdsParametrosUSA_CONSUMO.AsString = 'S');
+  gbxConsumo.Visible := (fDMCadNotaFiscal.cdsParametrosUSA_CONSUMO.AsString = 'S') and (Tag <> 50);
   if (fDMCadNotaFiscal.cdsParametrosUSA_CONSUMO.AsString = 'S') then
   begin
     SMDBGrid2.DisableScroll;
@@ -169,6 +171,10 @@ begin
   else
     fDMCadNotaFiscal.sdsNotaEntrada.CommandText := fDMCadNotaFiscal.ctNotaEntrada + ' AND (NT.ID = ' + IntToStr(ID_Nota) + ')'
                                                  + ' AND (NI.ITEM = ' + IntToStr(Item_Nota) + ')';
+  if Tag = 50 then
+    fDMCadNotaFiscal.sdsNotaEntrada.ParamByName('TIPO_REG').AsString := 'NTS'
+  else
+    fDMCadNotaFiscal.sdsNotaEntrada.ParamByName('TIPO_REG').AsString := 'NTE';
   fDMCadNotaFiscal.cdsNotaEntrada.Open;
 end;
 
@@ -291,9 +297,12 @@ begin
           begin
             prc_Gravar_NotaItens;
             prc_Gravar_NotaNDevolvida;
+            //18/03/2019
+            if fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsEdit] then
+              fDMCadNotaFiscal.cdsNotaFiscal_Itens.Post;
+            //**************
           end;
         end;
-        //prc_Gravar_mSelecionado;
       end;
       vID_CFOPAux := fDMCadNotaFiscal.cdsNotaEntradaID_CFOP.AsInteger;
     end;
@@ -326,6 +335,7 @@ procedure TfrmSel_NotaEntrada.prc_Gravar_NotaItens;
 var
   vItemAux: Integer;
   vVlrAux: Real;
+  vGravaOK : Boolean;
 begin
   try
     fDMCadNotaFiscal.cdsNotaFiscal_Itens.Last;
@@ -336,11 +346,26 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger       := vItemAux;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger := fDMCadNotaFiscal.cdsNotaEntradaID_PRODUTO.AsInteger;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger    := RxDBLookupCombo3.KeyValue;
-    ffrmCadNotaFiscal_Itens.RxDBLookupCombo1.KeyValue        := RxDBLookupCombo3.KeyValue;
-    ffrmCadNotaFiscal_Itens.RxDBLookupCombo1Exit(ffrmCadNotaFiscal_Itens);
-    fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger := fDMCadNotaFiscal.vID_Variacao;
-    ffrmCadNotaFiscal_Itens.vNotaSelecionada   := True;
-    ffrmCadNotaFiscal_Itens.prc_Move_Dados_Itens;
+
+    //17/03/2019 If incluído para controlar o retorno das notas que estavam em terceiro
+    if Tag = 50 then
+    begin
+      ffrmCadNotaEntrada_Itens.RxDBLookupCombo1.KeyValue        := RxDBLookupCombo3.KeyValue;
+      //ffrmCadNotaEntrada_Itens.RxDBLookupCombo1Exit(ffrmCadNotaFiscal_Itens);
+      //fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger := fDMCadNotaFiscal.vID_Variacao;
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger := 0;
+      ffrmCadNotaEntrada_Itens.vNotaSelecionada   := True;
+      ffrmCadNotaEntrada_Itens.prc_Move_Dados_Itens;
+    end
+    else
+    begin
+      ffrmCadNotaFiscal_Itens.RxDBLookupCombo1.KeyValue        := RxDBLookupCombo3.KeyValue;
+      ffrmCadNotaFiscal_Itens.RxDBLookupCombo1Exit(ffrmCadNotaFiscal_Itens);
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger := fDMCadNotaFiscal.vID_Variacao;
+      ffrmCadNotaFiscal_Itens.vNotaSelecionada   := True;
+      ffrmCadNotaFiscal_Itens.prc_Move_Dados_Itens;
+    end;
+    //***************
 
     //23/01/2018
     if fDMCadNotaFiscal.cdsFilialID_REGIME_TRIB.AsInteger = fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger then
@@ -381,7 +406,7 @@ begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat := StrToCurr(FormatCurr('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat))
     else
       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat));
-      
+
     if fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat > 0 then
     begin
       if fDMCadNotaFiscal.cdsParametrosARREDONDAR_5.AsString = 'B' then
@@ -409,12 +434,24 @@ begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_COR_COMBINACAO.AsString := fDMCadNotaFiscal.cdsNotaEntradaNOME_COR.AsString;
     end;
     //*********************
-    ffrmCadNotaFiscal_Itens.vNotaSelecionada   := True;
-    ffrmCadNotaFiscal_Itens.vPedidoSelecionado := False;
-    ffrmCadNotaFiscal_Itens.BitBtn1Click(ffrmCadNotaFiscal_Itens);
-    ffrmCadNotaFiscal_Itens.vNotaSelecionada   := False;
-
-    if ffrmCadNotaFiscal_Itens.vGravacao_Ok then
+    if Tag = 50 then
+    begin
+      ffrmCadNotaEntrada_Itens.vNotaSelecionada   := True;
+      ffrmCadNotaEntrada_Itens.vPedidoSelecionado := False;
+      ffrmCadNotaEntrada_Itens.BitBtn1Click(ffrmCadNotaEntrada_Itens);
+      ffrmCadNotaEntrada_Itens.vNotaSelecionada   := False;
+      vGravaOK := ffrmCadNotaEntrada_Itens.vGravacao_Ok;
+    end
+    else
+    begin
+      ffrmCadNotaFiscal_Itens.vNotaSelecionada   := True;
+      ffrmCadNotaFiscal_Itens.vPedidoSelecionado := False;
+      ffrmCadNotaFiscal_Itens.BitBtn1Click(ffrmCadNotaFiscal_Itens);
+      ffrmCadNotaFiscal_Itens.vNotaSelecionada   := False;
+      vGravaOK := ffrmCadNotaFiscal_Itens.vGravacao_Ok;
+    end;
+    //if ffrmCadNotaFiscal_Itens.vGravacao_Ok then
+    if vGravaOK then
     begin
       fDMCadNotaFiscal.cdsNotaEntrada.Edit;
       fDMCadNotaFiscal.cdsNotaEntradaQTDDEVOLVIDA.AsFloat  := fDMCadNotaFiscal.cdsNotaEntradaQTDDEVOLVIDA.AsFloat + fDMCadNotaFiscal.cdsNotaEntradaQTD_ADEVOLVER.AsFloat;
@@ -821,8 +858,19 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger       := vItemAux;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger := fDMCadNotaFiscal.mAgrupaMatID_Material.AsInteger;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger    := RxDBLookupCombo3.KeyValue;
-    ffrmCadNotaFiscal_Itens.vNotaSelecionada := True;
-    ffrmCadNotaFiscal_Itens.prc_Move_Dados_Itens;
+
+    //17/03/2019 If incluído para controlar o retorno das notas que estavam em terceiro
+    if Tag = 50 then
+    begin
+      ffrmCadNotaEntrada_Itens.vNotaSelecionada := True;
+      ffrmCadNotaEntrada_Itens.prc_Move_Dados_Itens;
+    end
+    else
+    begin
+      ffrmCadNotaFiscal_Itens.vNotaSelecionada := True;
+      ffrmCadNotaFiscal_Itens.prc_Move_Dados_Itens;
+    end;
+    //**********************
 
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger     := fDMCadNotaFiscal.mAgrupaMatID_NCM.AsInteger;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE.AsString     := fDMCadNotaFiscal.mAgrupaMatUnidade.AsString;
@@ -852,10 +900,23 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NTE.AsInteger          := 0;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_NTE.AsInteger        := 99999;
 
-    ffrmCadNotaFiscal_Itens.vNotaSelecionada   := True;
-    ffrmCadNotaFiscal_Itens.vPedidoSelecionado := False;
-    ffrmCadNotaFiscal_Itens.BitBtn1Click(ffrmCadNotaFiscal_Itens);
-    ffrmCadNotaFiscal_Itens.vNotaSelecionada   := False;
+    //17/03/2019 If incluído para controlar o retorno das notas que estavam em terceiro
+    if Tag = 50 then
+    begin
+      ffrmCadNotaEntrada_Itens.vNotaSelecionada   := True;
+      ffrmCadNotaEntrada_Itens.vPedidoSelecionado := False;
+      ffrmCadNotaEntrada_Itens.BitBtn1Click(ffrmCadNotaEntrada_Itens);
+      ffrmCadNotaEntrada_Itens.vNotaSelecionada   := False;
+    end
+    else
+    begin
+      ffrmCadNotaFiscal_Itens.vNotaSelecionada   := True;
+      ffrmCadNotaFiscal_Itens.vPedidoSelecionado := False;
+      ffrmCadNotaFiscal_Itens.BitBtn1Click(ffrmCadNotaFiscal_Itens);
+      ffrmCadNotaFiscal_Itens.vNotaSelecionada   := False;
+    end;
+    //********************************
+
   except
     on E: exception do
     begin

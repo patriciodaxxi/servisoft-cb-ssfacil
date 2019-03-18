@@ -368,8 +368,13 @@ end;
 
 procedure TfrmConsNotaBeneficiamento.btnConsultarClick(Sender: TObject);
 begin
-  prc_Consultar_NotaEntrada;
-  Le_cdsNotaEntrada;
+  Screen.Cursor := crHourGlass;
+  try
+    prc_Consultar_NotaEntrada;
+    Le_cdsNotaEntrada;
+  finally
+    Screen.Cursor := crDefault;
+  end;
 end;
 
 procedure TfrmConsNotaBeneficiamento.btnImprimirClick(Sender: TObject);

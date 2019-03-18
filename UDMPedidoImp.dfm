@@ -571,8 +571,8 @@ object DMPedidoImp: TDMPedidoImp
       'OR'#39', PES.NOME) NOME, sum(PED.VLR_TOTAL) VALOR_TOTAL,'#13#10'       sum' +
       '(PED.VLR_FRETE) VALOR_FRETE, sum(PED.VLR_DESCONTO) VALOR_DESCONT' +
       'O, count(PED.ID) NUMERO_REGISTROS'#13#10'from PEDIDO PED'#13#10'left join PE' +
-      'SSOA PES on PED.ID_VENDEDOR = PES.CODIGO'#13#10'where 0 = 0'#13#10'group by ' +
-      'PED.ID_VENDEDOR, PES.NOME  '
+      'SSOA PES on PED.ID_VENDEDOR = PES.CODIGO'#13#10'where 0 = 0 AND PED.PE' +
+      'DIDO_CLIENTE is not null'#13#10'group by PED.ID_VENDEDOR, PES.NOME  '
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -601,14 +601,14 @@ object DMPedidoImp: TDMPedidoImp
   end
   object dspPedidoOrcImp: TDataSetProvider
     DataSet = sdsPedidoOrcImp
-    Left = 120
+    Left = 80
     Top = 152
   end
   object cdsPedidoOrcImp: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPedidoOrcImp'
-    Left = 168
+    Left = 112
     Top = 152
     object cdsPedidoOrcImpID_VENDEDOR: TIntegerField
       FieldName = 'ID_VENDEDOR'
@@ -636,7 +636,7 @@ object DMPedidoImp: TDMPedidoImp
   end
   object dsPedidoOrcImp: TDataSource
     DataSet = cdsPedidoOrcImp
-    Left = 224
+    Left = 144
     Top = 152
   end
   object frxPedido_Orcamento: TfrxDBDataset

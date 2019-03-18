@@ -7,7 +7,7 @@ uses
   DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb,
   RXDBCtrl, RzEdit, RzDBEdit, UCadNotaEntrada_Itens, UCadNotaFiscal_Desconto, UCadNotaFiscal_OutrasDesp, DateUtils,
   UEscolhe_Filial, UCBase, UDMEstoque, Menus, NxCollection, dbXPress, USel_Pedido, UDMMovimento, UNFe, UDMNFe, RzButton,
-  uDmConsPedido, uEtiq_Individual, UDMCadProduto_Lote;
+  uDmConsPedido, uEtiq_Individual, UDMCadProduto_Lote, uSel_NotaEntrada;
 
 type
   TfrmCadNotaEntrada = class(TForm)
@@ -225,6 +225,7 @@ type
       Shift: TShiftState);
     procedure btnAjustaItensClick(Sender: TObject);
     procedure SMDBGrid2TitleClick(Column: TColumn);
+    procedure btnCopiarNotaDevolucaoClick(Sender: TObject);
   private
     { Private declarations }
 
@@ -242,6 +243,7 @@ type
     ffrmCadNotaFiscal_Desconto: TfrmCadNotaFiscal_Desconto;
     ffrmSel_Pedido: TfrmSel_Pedido;
     ffNFe: TfNFe;
+    ffrmSel_NotaEntrada: TfrmSel_NotaEntrada;
 
     vID_Estoque, vID_Mov: Integer;
 
@@ -1061,7 +1063,8 @@ begin
   SMDBGrid_Dupl.ReadOnly   := not(SMDBGrid_Dupl.ReadOnly);
   RzMenuToolbarButton1.Enabled := not(RzMenuToolbarButton1.Enabled);
 
-  btnCopiarPedido.Enabled  := not(btnCopiarPedido.Enabled);
+  btnCopiarPedido.Enabled        := not(btnCopiarPedido.Enabled);
+  btnCopiarNotaDevolucao.Enabled := not(btnCopiarNotaDevolucao.Enabled);
 
   btnInserir_Itens.Enabled := not(btnInserir_Itens.Enabled);
   btnAlterar_Itens.Enabled := not(btnAlterar_Itens.Enabled);
@@ -1811,6 +1814,35 @@ begin
   for i := 0 to SMDBGrid2.Columns.Count - 1 do
     if not (SMDBGrid2.Columns.Items[I] = Column) then
       SMDBGrid2.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmCadNotaEntrada.btnCopiarNotaDevolucaoClick(Sender: TObject);
+begin
+  if fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger <= 0 then
+  begin
+    MessageDlg('***  Fornecedor não informado!', mtError, [mbOk], 0);
+    Exit;
+  end;
+  fDMCadNotaFiscal.cdsProduto.Close;
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente
+  else
+    fDMCadNotaFiscal.cdsProduto.Open;
+
+  fDMCadNotaFiscal.vID_CFOP := 0;
+  prc_Posicionar_Cliente;
+  if fDMCadNotaFiscal.cdsParametrosID_OPERACAO_BENEF_RET.AsInteger > 0 then
+    uCalculo_NotaFiscal.prc_Posicionar_Regra_Empresa(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsParametrosID_OPERACAO_BENEF_RET.AsInteger,'O');
+
+  ffrmCadNotaEntrada_Itens := TfrmCadNotaEntrada_Itens.Create(self);
+  ffrmCadNotaEntrada_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;
+  ffrmSel_NotaEntrada := TfrmSel_NotaEntrada.Create(self);
+  ffrmSel_NotaEntrada.Tag := 50;
+  ffrmSel_NotaEntrada.fDMCadNotaFiscal        := fDMCadNotaFiscal;
+  ffrmSel_NotaEntrada.ffrmCadNotaEntrada_Itens := ffrmCadNotaEntrada_Itens;
+  ffrmSel_NotaEntrada.ShowModal;
+  FreeAndNil(ffrmSel_NotaEntrada);
+  FreeAndNil(ffrmCadNotaEntrada_Itens);
 end;
 
 end.

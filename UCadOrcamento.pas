@@ -972,7 +972,7 @@ begin
     fDMCadPedido.cdsPedidoOBS.AsString := fDMCadPedido.qGrupoPessoaNOME.AsString;
   end;
 
-  if (vID_ClienteAnt = fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger) or (fDMCadPedido.cdsPedido.State in [dsEdit]) then
+  if (vID_ClienteAnt = fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger) then //or (fDMCadPedido.cdsPedido.State in [dsEdit])
     exit;
 
   if fDMCadPedido.cdsPedidoEMAIL_COMPRAS.AsString = '' then
