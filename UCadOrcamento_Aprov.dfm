@@ -1,6 +1,6 @@
 object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
-  Left = 206
-  Top = 72
+  Left = 353
+  Top = 60
   Width = 984
   Height = 596
   Caption = 'frmCadOrcamento_Aprov'
@@ -20,7 +20,7 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 976
+    Width = 968
     Height = 33
     Align = alTop
     Color = clSilver
@@ -29,13 +29,17 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 89
-    Width = 976
-    Height = 362
+    Width = 968
+    Height = 354
+    Hint = 'Click bot'#227'o direto para selecionar todos'
     Align = alClient
     Ctl3D = False
     DataSource = DMCadPedido.dsmOrcamento_Itens
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
     ParentCtl3D = False
+    ParentShowHint = False
+    PopupMenu = PopupMenu1
+    ShowHint = True
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -157,7 +161,7 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
   object Panel2: TPanel
     Left = 0
     Top = 33
-    Width = 976
+    Width = 968
     Height = 56
     Align = alTop
     Color = clSilver
@@ -265,8 +269,8 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
   end
   object gbxDuplicata: TRzGroupBox
     Left = 0
-    Top = 451
-    Width = 976
+    Top = 443
+    Width = 968
     Height = 114
     Align = alBottom
     BorderColor = clMaroon
@@ -312,13 +316,21 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
     object Memo1: TMemo
       Left = 6
       Top = 45
-      Width = 964
+      Width = 956
       Height = 63
       Align = alBottom
       Ctl3D = False
       ParentCtl3D = False
       ScrollBars = ssVertical
       TabOrder = 1
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 408
+    Top = 49
+    object SelecionarTodos1: TMenuItem
+      Caption = 'Selecionar Todos'
+      OnClick = SelecionarTodos1Click
     end
   end
 end

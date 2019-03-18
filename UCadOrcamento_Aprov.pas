@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, UDMCadPedido, ExtCtrls, Grids, DBGrids, SMDBGrid, DBCtrls,
-  StdCtrls, Mask, ToolEdit, RzPanel, NxCollection, DB, UCadPedido;
+  StdCtrls, Mask, ToolEdit, RzPanel, NxCollection, DB, UCadPedido, Menus;
 
   //Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, ,
   //DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl,
@@ -26,11 +26,14 @@ type
     Label4: TLabel;
     Memo1: TMemo;
     btnConfirmar: TNxButton;
+    PopupMenu1: TPopupMenu;
+    SelecionarTodos1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure SelecionarTodos1Click(Sender: TObject);
   private
     { Private declarations }
     vItem_Pedido: Integer;
@@ -547,6 +550,19 @@ begin
     fDMCadPedido.cdsOrcamento_ItensDTAPROVADO_NAO.Clear;
   fDMCadPedido.cdsOrcamento_Itens.Post;
   fDMCadPedido.cdsOrcamento_Itens.ApplyUpdates(0);
+end;
+
+procedure TfrmCadOrcamento_Aprov.SelecionarTodos1Click(Sender: TObject);
+begin
+  fDMCadPedido.mOrcamento_Itens.First;
+  while not fDMCadPedido.mOrcamento_Itens.Eof do
+  begin
+    fDMCadPedido.mOrcamento_Itens.Edit;
+    fDMCadPedido.mOrcamento_ItensAprovar.AsBoolean := True;
+    fDMCadPedido.mOrcamento_Itens.Post;
+    fDMCadPedido.mOrcamento_Itens.Next;
+  end;
+  fDMCadPedido.mOrcamento_Itens.First;
 end;
 
 end.

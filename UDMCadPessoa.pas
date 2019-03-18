@@ -1191,6 +1191,10 @@ type
     qParametros_NFeIMP_NOMEPROD_CLIENTE: TStringField;
     cdsPessoa_ConsultaNOME_REGIME: TStringField;
     cdsPessoa_ConsultaCOD_REGIME: TIntegerField;
+    sdsPessoaSENHA_PEDIDO: TStringField;
+    cdsPessoaSENHA_PEDIDO: TStringField;
+    sdsPessoaDESC_MAXIMO: TFloatField;
+    cdsPessoaDESC_MAXIMO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
