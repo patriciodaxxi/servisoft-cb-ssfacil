@@ -62,14 +62,16 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
     object ComboBox1: TComboBox
       Left = 500
       Top = 31
-      Width = 145
+      Width = 213
       Height = 21
       ItemHeight = 13
       ItemIndex = 0
       TabOrder = 3
-      Text = 'Beneficiamento'
+      Text = 'Beneficiamento/Terceiros'
       Items.Strings = (
+        'Beneficiamento/Terceiros'
         'Beneficiamento'
+        'Terceiros'
         'Todas')
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
@@ -85,7 +87,7 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
       TabOrder = 2
     end
     object BitBtn1: TBitBtn
-      Left = 646
+      Left = 718
       Top = 26
       Width = 147
       Height = 29
@@ -167,7 +169,7 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
       TabOrder = 0
     end
     object ckAgrupar: TCheckBox
-      Left = 808
+      Left = 1032
       Top = 16
       Width = 97
       Height = 17
