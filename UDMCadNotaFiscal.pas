@@ -4214,6 +4214,8 @@ begin
     if cdsNotaFiscal_ItensID_CFOP.AsInteger <= 0 then
       cdsNotaFiscal_ItensID_CFOP.Clear;
   end;
+  if cdsNotaFiscal_ItensQTDRESTANTE.IsNull then
+    cdsNotaFiscal_ItensQTDRESTANTE.AsFloat := cdsNotaFiscal_ItensQTD.AsFloat;
 end;
 
 function TDMCadNotaFiscal.fnc_verificar_CFOP(ID: Integer): Boolean;

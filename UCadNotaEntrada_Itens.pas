@@ -151,6 +151,7 @@ type
 
     vGravacao_Ok: Boolean;
     vPedidoSelecionado: Boolean;
+    vNotaSelecionada: Boolean;
 
     procedure prc_Move_Dados_Itens;
     procedure prc_Gravar_mItens;
@@ -398,26 +399,32 @@ begin
 
     //Tamanho aqui
     //if (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString) = '') then
-    if (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') then
+    if not vNotaSelecionada then
     begin
-      //if not Assigned(fDMInformar_Tam) then
-      //  fDMInformar_Tam := TDMInformar_Tam.Create(Self);
-      if (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsEdit]) or (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger > 0) then
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' TAM. ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString
-      else
+      if (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') then
       begin
-        prc_Gravar_mItens;
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' TAM. ' + fDMInformar_Tam.vTamanho_Ini;
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString      := fDMInformar_Tam.vTamanho_Ini;
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat           := fDMInformar_Tam.vQtd_Ini;
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMInformar_Tam.vQtd_Ini;
+        //if not Assigned(fDMInformar_Tam) then
+        //  fDMInformar_Tam := TDMInformar_Tam.Create(Self);
+        if (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsEdit]) or (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger > 0) then
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' TAM. ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString
+        else
+        begin
+          prc_Gravar_mItens;
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' TAM. ' + fDMInformar_Tam.vTamanho_Ini;
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString      := fDMInformar_Tam.vTamanho_Ini;
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat           := fDMInformar_Tam.vQtd_Ini;
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMInformar_Tam.vQtd_Ini;
+        end;
       end;
     end;
     //*****
     fDMCadNotaFiscal.cdsNotaFiscal_Itens.Post;
     //Tamanho aqui
-    if (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger <= 0) then
-      prc_Gravar_Tam;
+    if not(vNotaSelecionada) then
+    begin
+      if (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger <= 0) then
+        prc_Gravar_Tam;
+    end;
     fDMCadNotaFiscal.cdsNotaFiscalQTDTOTAL_ITENS.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_Itens.RecordCount;
     vGravacao_Ok := True;
   except
@@ -429,7 +436,12 @@ begin
     end;
   end;
   fDMCadNotaFiscal.vState_Item := '';
-  if not vFlagErro then
+  if vNotaSelecionada then
+  begin
+    vNotaSelecionada := False;
+    Exit;
+  end;
+  if not(vFlagErro) then
     Close;
 end;
 

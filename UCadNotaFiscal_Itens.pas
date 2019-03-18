@@ -1370,6 +1370,9 @@ begin
     if (fDMCadNotaFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
       if not fnc_Verifica_SubstTributaria then
         exit;
+
+    
+
     //Esse if foi incluido no dia   26/05/2016  para controlar se gravou na tabela de tamanhos
     if (fDMCadNotaFiscal.qParametros_NFeGRAVAR_TAB_TAMANHO.AsString = 'S') then
     begin
