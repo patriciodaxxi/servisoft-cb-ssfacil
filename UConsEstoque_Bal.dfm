@@ -28,7 +28,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
     Color = clSilver
     TabOrder = 0
     object Label2: TLabel
-      Left = 434
+      Left = 530
       Top = 13
       Width = 23
       Height = 13
@@ -36,7 +36,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Caption = 'Filial:'
     end
     object Label1: TLabel
-      Left = 376
+      Left = 472
       Top = 36
       Width = 81
       Height = 13
@@ -44,7 +44,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Caption = 'Data Refer'#234'ncia:'
     end
     object Label6: TLabel
-      Left = 120
+      Left = 216
       Top = 13
       Width = 58
       Height = 13
@@ -52,7 +52,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Caption = 'Usar o Tipo:'
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
-      Left = 458
+      Left = 554
       Top = 5
       Width = 361
       Height = 21
@@ -63,20 +63,20 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       TabOrder = 2
     end
     object RadioGroup1: TRadioGroup
-      Left = 1
+      Left = 97
       Top = 1
       Width = 96
       Height = 111
       Align = alLeft
-      Caption = ' Op'#231#227'o '
-      ItemIndex = 0
+      Caption = ' Ordenar por'
+      ItemIndex = 1
       Items.Strings = (
-        'Com Saldo'
-        'Ambos')
+        'Refer'#234'ncia'
+        'Nome')
       TabOrder = 0
     end
     object btnConsultar: TNxButton
-      Left = 458
+      Left = 554
       Top = 50
       Width = 177
       Height = 30
@@ -148,7 +148,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       OnClick = btnConsultarClick
     end
     object DateEdit1: TDateEdit
-      Left = 458
+      Left = 554
       Top = 28
       Width = 121
       Height = 21
@@ -156,7 +156,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       TabOrder = 3
     end
     object btnImprimir_Est: TNxButton
-      Left = 634
+      Left = 730
       Top = 50
       Width = 177
       Height = 30
@@ -228,7 +228,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       OnClick = btnImprimir_EstClick
     end
     object ComboBox1: TComboBox
-      Left = 180
+      Left = 276
       Top = 5
       Width = 181
       Height = 21
@@ -244,7 +244,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         'Por Tipo SPED')
     end
     object btnTipoCadastro: TNxButton
-      Left = 184
+      Left = 280
       Top = 40
       Width = 145
       Caption = 'Selecionar Tipo Cadastro'
@@ -252,13 +252,26 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       OnClick = btnTipoCadastroClick
     end
     object btnTipoSped: TNxButton
-      Left = 184
+      Left = 280
       Top = 64
       Width = 145
       Caption = 'Selecionar Tipo SPED'
       Enabled = False
       TabOrder = 7
       OnClick = btnTipoSpedClick
+    end
+    object RadioGroup2: TRadioGroup
+      Left = 1
+      Top = 1
+      Width = 96
+      Height = 111
+      Align = alLeft
+      Caption = ' Op'#231#227'o'
+      ItemIndex = 0
+      Items.Strings = (
+        'Com Saldo'
+        'Ambos')
+      TabOrder = 8
     end
   end
   object StaticText1: TStaticText

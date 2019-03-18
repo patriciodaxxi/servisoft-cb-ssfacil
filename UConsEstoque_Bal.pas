@@ -38,6 +38,7 @@ type
     Label6: TLabel;
     btnTipoCadastro: TNxButton;
     btnTipoSped: TNxButton;
+    RadioGroup2: TRadioGroup;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -261,12 +262,18 @@ begin
   fDMConsEstoque.cdsFilial.Locate('ID',RxDBLookupCombo1.KeyValue,[loCaseInsensitive]);
   if ComboBox1.ItemIndex = 0 then
   begin
-    fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_REG;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+    case RadioGroup1.ItemIndex of
+      0: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_REG;REFERENCIA;NOME_COMBINACAO;TAMANHO';
+      1: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_REG;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+    end;
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco2.fr3';
   end
   else
   begin
-    fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_SPED;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+    case RadioGroup1.ItemIndex of
+      0: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_SPED;REFERENCIA;NOME_COMBINACAO;TAMANHO';
+      1: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_SPED;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+    end;
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco.fr3';
   end;
 
