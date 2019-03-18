@@ -151,7 +151,21 @@ begin
 end;
 
 procedure TfrmSel_NotaEntrada.prc_Consultar_NotaEntrada(ID_Nota : Integer = 0 ; Item_Nota : Integer =  0);
+var
+  vPosse : String;
+  vBenef_Posse : String;
 begin
+  if Tag = 50 then
+  begin
+    vPosse := ' o2.estoque_EM_terceiro = ' + QuotedStr('S');
+    vBenef_Posse := ' AND CFOP.BENEFICIAMENTO_POSSE = '  + QuotedStr('E');
+  end
+  else
+  begin
+    vPosse := ' o2.estoque_DE_terceiro = ' + QuotedStr('S');
+    vBenef_Posse := ' AND CFOP.BENEFICIAMENTO_POSSE = '  + QuotedStr('T');
+  end;
+
   fDMCadNotaFiscal.cdsNotaEntrada.Close;
   if ID_Nota <= 0 then
   begin
@@ -165,7 +179,9 @@ begin
       fDMCadNotaFiscal.sdsNotaEntrada.CommandText := fDMCadNotaFiscal.sdsNotaEntrada.CommandText
                                                + ' AND NI.ID_PRODUTO = ' + IntToStr(RxDBLookupCombo2.KeyValue);
     case ComboBox1.ItemIndex of
-      0: fDMCadNotaFiscal.sdsNotaEntrada.CommandText := fDMCadNotaFiscal.sdsNotaEntrada.CommandText + ' AND CFOP.BENEFICIAMENTO = ' + QuotedStr('S');
+      0: fDMCadNotaFiscal.sdsNotaEntrada.CommandText := fDMCadNotaFiscal.sdsNotaEntrada.CommandText + ' AND ((CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + vBenef_Posse + ') OR ' + vPosse + ')';
+      1: fDMCadNotaFiscal.sdsNotaEntrada.CommandText := fDMCadNotaFiscal.sdsNotaEntrada.CommandText + ' AND (CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + vBenef_Posse + ')';
+      2: fDMCadNotaFiscal.sdsNotaEntrada.CommandText := fDMCadNotaFiscal.sdsNotaEntrada.CommandText + ' AND ' + vPosse;
     end;
   end
   else

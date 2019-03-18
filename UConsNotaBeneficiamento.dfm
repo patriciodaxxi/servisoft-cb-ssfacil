@@ -4,7 +4,7 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
   Width = 952
   Height = 666
   BorderIcons = [biSystemMenu, biMaximize]
-  Caption = 'Consultar Notas de Beneficiamento / Estoque de Terceiros'
+  Caption = 'Consultar Notas de Beneficiamento / Estoque DE Terceiros'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -114,12 +114,13 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
       Height = 21
       Style = csDropDownList
       ItemHeight = 13
-      ItemIndex = 1
+      ItemIndex = 0
       TabOrder = 0
-      Text = 'Beneficiamento/Estoque Terceiro'
+      Text = 'Beneficiamento/Terceiro'
       Items.Strings = (
+        'Beneficiamento/Terceiro'
         'Beneficiamento'
-        'Beneficiamento/Estoque Terceiro'
+        'Terceiro'
         'Todas')
     end
     object RxDBLookupCombo2: TRxDBLookupCombo

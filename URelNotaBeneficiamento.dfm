@@ -3,6 +3,7 @@ object fRelNotaBeneficiamento: TfRelNotaBeneficiamento
   Top = 154
   Width = 1221
   Height = 532
+  HorzScrollBar.Position = 763
   Caption = 'fRelNotaBeneficiamento'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +18,7 @@ object fRelNotaBeneficiamento: TfRelNotaBeneficiamento
   PixelsPerInch = 96
   TextHeight = 13
   object RLReport1: TRLReport
-    Left = 24
+    Left = -739
     Top = 16
     Width = 1123
     Height = 794
@@ -48,7 +49,7 @@ object fRelNotaBeneficiamento: TfRelNotaBeneficiamento
       ParentFont = False
       BeforePrint = RLBand1BeforePrint
       object RLLabel1: TRLLabel
-        Left = 440
+        Left = 416
         Top = 4
         Width = 149
         Height = 16
@@ -833,7 +834,7 @@ object fRelNotaBeneficiamento: TfRelNotaBeneficiamento
     end
   end
   object RLReport2: TRLReport
-    Left = 1165
+    Left = 402
     Top = 16
     Width = 794
     Height = 1123

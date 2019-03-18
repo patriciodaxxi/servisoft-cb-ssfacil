@@ -623,7 +623,7 @@ object fMenu: TfMenu
         OnClick = ConsultaMapadeCompra1Click
       end
       object ConsultaNotasdeBeneficiamento1: TMenuItem
-        Caption = 'Consulta Notas de Beneficiamento'
+        Caption = 'Consulta Notas de Beneficiamento / Estoque DE Terceiros'
         OnClick = ConsultaNotasdeBeneficiamento1Click
       end
       object ConsultaMateriaisTerceiros1: TMenuItem
@@ -738,7 +738,7 @@ object fMenu: TfMenu
         Caption = '-'
       end
       object ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1: TMenuItem
-        Caption = 'Consulta Notas de Beneficiamento / Estoque em Terceiro'
+        Caption = 'Consulta Notas de Beneficiamento / Estoque EM Terceiro'
         OnClick = ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1Click
       end
       object N11: TMenuItem

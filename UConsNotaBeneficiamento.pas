@@ -91,48 +91,53 @@ begin
   oDBUtils.SetDataSourceProperties(Self, fDMConsNotaBeneficiamento);
   if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
   begin
-    ComboBox1.Clear;
-    Caption := 'Consultar Notas de Beneficiamento / Estoque em Terceiros';
-    ComboBox1.Items.Add('Beneficiamento');
-    ComboBox1.Items.Add('Beneficiamento/Estoque Terceiro');
-    ComboBox1.Items.Add('Todas');
+    //ComboBox1.Clear;
+    Caption := 'Consultar Notas de Beneficiamento / Estoque EM Terceiros';
+    //ComboBox1.Items.Add('Beneficiamento');
+    //ComboBox1.Items.Add('Beneficiamento/Estoque Terceiro');
+    //ComboBox1.Items.Add('Todas');
   end;
 end;
 
 procedure TfrmConsNotaBeneficiamento.prc_Consultar_NotaEntrada;
 var
-  vAux : String;
+  vPosse : String;
+  vBenef_Posse : String;
+  vComando : String;
 begin
-  fDMConsNotaBeneficiamento.cdsNotaEntrada.Close;
-  fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.ctNotaEntrada;
   if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
-    fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTS')
+  begin
+    vPosse := ' o2.estoque_EM_terceiro = ' + QuotedStr('S');
+    vBenef_Posse := ' AND CFOP.BENEFICIAMENTO_POSSE = '  + QuotedStr('E');
+  end
   else
-    fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTE');
-  //vAux := 'CFOP.RETORNO_NE';
-  //if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
-  //  vAux := 'CFOP.RETORNO_NS';
-  case ComboBox1.ItemIndex of
-    0 : fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' AND CFOP.BENEFICIAMENTO = ' + QuotedStr('S');
-    1 : fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' AND CFOP.BENEFICIAMENTO = ' + QuotedStr('S');
-    //1 : fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText
-      //                                                        + ' AND (CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + ' OR ' + vAux + ' = ' + QuotedStr('S') + ')';
+  begin
+    vPosse := ' o2.estoque_DE_terceiro = ' + QuotedStr('S');
+    vBenef_Posse := ' AND CFOP.BENEFICIAMENTO_POSSE = '  + QuotedStr('T');
   end;
 
-  if RxDBLookupCombo3.Text <> '' then
-    fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText
-                                               + ' AND NF.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
-  if RxDBLookupCombo2.Text <> '' then
-    fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText
-                                               + ' AND ((NF.ID_CLIENTE = ' + IntToStr(RxDBLookupCombo2.KeyValue) + ')'
-                                               + '  OR (NF.ID_CLIENTETRIANG = ' + IntToStr(RxDBLookupCombo2.KeyValue) + '))';
-  if RxDBLookupCombo1.Text <> '' then
-    fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText
-                                               + ' AND NI.ID_PRODUTO = ' + IntToStr(RxDBLookupCombo1.KeyValue);
-  case ComboBox2.ItemIndex of
-    0 : fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' AND NI.QTDRESTANTE > 0 ';
-    1 : fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText + ' AND NI.QTDRESTANTE <= 0 ';
+  fDMConsNotaBeneficiamento.cdsNotaEntrada.Close;
+  vComando := fDMConsNotaBeneficiamento.ctNotaEntrada;
+  if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
+    vComando := vComando + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTS')
+  else
+    vComando := vComando + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTE');
+  case ComboBox1.ItemIndex of
+    0: vComando := vComando + ' AND ((CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + vBenef_Posse + ') OR ' + vPosse + ')';
+    1: vComando := vComando + ' AND (CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + vBenef_Posse + ')';
+    2: vComando := vComando + ' AND ' + vPosse;
   end;
+  if RxDBLookupCombo3.Text <> '' then
+    vComando := vComando + ' AND NF.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
+  if RxDBLookupCombo2.Text <> '' then
+    vComando := vComando + ' AND ((NF.ID_CLIENTE = ' + IntToStr(RxDBLookupCombo2.KeyValue) + ')' + '  OR (NF.ID_CLIENTETRIANG = ' + IntToStr(RxDBLookupCombo2.KeyValue) + '))';
+  if RxDBLookupCombo1.Text <> '' then
+    vComando := vComando + ' AND NI.ID_PRODUTO = ' + IntToStr(RxDBLookupCombo1.KeyValue);
+  case ComboBox2.ItemIndex of
+    0 : vComando := vComando + ' AND NI.QTDRESTANTE > 0 ';
+    1 : vComando := vComando + ' AND NI.QTDRESTANTE <= 0 ';
+  end;
+  fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := vComando;
   fDMConsNotaBeneficiamento.cdsNotaEntrada.Open;
 end;
 
@@ -378,6 +383,8 @@ begin
 end;
 
 procedure TfrmConsNotaBeneficiamento.btnImprimirClick(Sender: TObject);
+var
+  vAux : String;
 begin
   SMDBGrid1.DisableScroll;
   vTipo_Config_Email := 3;
@@ -386,10 +393,9 @@ begin
   fRelNotaBeneficiamento.vImpNota   := CheckBox1.Checked;
   fRelNotaBeneficiamento.vOpcaoImp  := '';
   fRelNotaBeneficiamento.vOpcaoForn := '';
-  case ComboBox1.ItemIndex of
-    0 : fRelNotaBeneficiamento.vOpcaoImp := fRelNotaBeneficiamento.vOpcaoImp + '(Notas Beneficiamento)';
-    1 : fRelNotaBeneficiamento.vOpcaoImp := fRelNotaBeneficiamento.vOpcaoImp + '(Todas Notas)';
-  end;
+
+  fRelNotaBeneficiamento.vOpcaoImp := fRelNotaBeneficiamento.vOpcaoImp + '(' + ComboBox1.Text + ')';
+
   case ComboBox2.ItemIndex of
     0 : fRelNotaBeneficiamento.vOpcaoImp := fRelNotaBeneficiamento.vOpcaoImp + '(Pendente)';
     1 : fRelNotaBeneficiamento.vOpcaoImp := fRelNotaBeneficiamento.vOpcaoImp + '(Devolvida)';
@@ -400,6 +406,14 @@ begin
     fRelNotaBeneficiamento.vOpcaoImp := fRelNotaBeneficiamento.vOpcaoImp + '(Material: ' + RxDBLookupCombo1.Text + ')';
   if RxDBLookupCombo2.Text <> '' then
     fRelNotaBeneficiamento.vOpcaoForn := fRelNotaBeneficiamento.vOpcaoForn + 'Fornecedor: ' + RxDBLookupCombo2.Text;
+
+  vAux := 'Produtos';
+  if RzPageControl1.ActivePage = TabSheet1 then
+    vAux := 'Notas';
+  if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
+    fRelNotaBeneficiamento.vCab := 'Relatório de ' + vAux + ' (EM Terceiro)'
+  else
+    fRelNotaBeneficiamento.vCab := 'Relatório de ' + vAux + ' (DE Terceiro)';
 
   if RzPageControl1.ActivePage = TabSheet1 then
   begin

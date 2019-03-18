@@ -7637,12 +7637,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'ID'#13#10'INNER JOIN TAB_CFOP CFOP'#13#10'ON NI.ID_CFOP = CFOP.ID'#13#10'INNER JOI' +
       'N PESSOA CLI'#13#10'ON NT.ID_CLIENTE = CLI.CODIGO'#13#10'LEFT JOIN PESSOA TR' +
       'I'#13#10'ON NT.ID_CLIENTETRIANG = TRI.CODIGO'#13#10'LEFT JOIN COMBINACAO COM' +
-      'B'#13#10'ON NI.ID_COR = COMB.ID'#13#10'WHERE NT.TIPO_REG = :TIPO_REG'#13#10'  AND ' +
-      'NI.QTDRESTANTE > 0'#13#10#13#10
+      'B'#13#10'ON NI.ID_COR = COMB.ID'#13#10'LEFT JOIN OPERACAO_NOTA O2'#13#10'ON NI.ID_' +
+      'OPERACAO_NOTA = O2.ID'#13#10'WHERE NT.TIPO_REG = :TIPO_REG'#13#10'  AND NI.Q' +
+      'TDRESTANTE > 0'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'TIPO_REG'
         ParamType = ptInput
       end>

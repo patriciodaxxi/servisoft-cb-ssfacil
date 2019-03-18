@@ -118,6 +118,7 @@ type
     vImpNota : Boolean;
     vOpcaoImp : String;
     vOpcaoForn : String;
+    vCab : String;
   end;
 
 var
@@ -140,6 +141,7 @@ procedure TfRelNotaBeneficiamento.RLBand1BeforePrint(Sender: TObject;
 begin
   rllbOpcao.Caption  := vOpcaoImp;
   RLLabel29.Caption  := vOpcaoForn;
+  RLLabel1.Caption   := vCab;
 end;
 
 procedure TfRelNotaBeneficiamento.RLBand2BeforePrint(Sender: TObject;
@@ -187,6 +189,7 @@ procedure TfRelNotaBeneficiamento.RLBand4BeforePrint(Sender: TObject;
 begin
   rllbOpcao_Mat.Caption      := vOpcaoImp;
   rllbFornecedor_Mat.Caption := vOpcaoForn;
+  RLLabel30.Caption          := vCab;
 end;
 
 procedure TfRelNotaBeneficiamento.RLReport2BeforePrint(Sender: TObject;
