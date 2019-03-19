@@ -107,6 +107,24 @@ begin
   end;
   Label4.Visible   := fDMCadDuplicata.qParametros_FinMOSTRAR_VLR_MULTA_DUP.AsString = 'S';
   lblMulta.Visible := fDMCadDuplicata.qParametros_FinMOSTRAR_VLR_MULTA_DUP.AsString = 'S';
+
+  if (fDMCadDuplicata.qParametros_FinCONTROLAR_DUP_USUARIO.AsString = 'S') then
+  begin
+    if fDMCadDuplicata.qParametros_UsuarioMOSTRAR_DUP_REC_PAG.AsString = 'R' then
+      RadioGroup2.ItemIndex := 0
+    else if fDMCadDuplicata.qParametros_UsuarioMOSTRAR_DUP_REC_PAG.AsString = 'P' then
+      RadioGroup2.ItemIndex := 1
+    else if fDMCadDuplicata.qParametros_UsuarioMOSTRAR_DUP_REC_PAG.AsString = 'A' then
+      RadioGroup2.ItemIndex := 2
+    else
+      RadioGroup2.ItemIndex := -1;
+
+    if RadioGroup2.ItemIndex < 2 then
+      RadioGroup2.Enabled := False;
+  end
+  else
+    RadioGroup2.Enabled := True;
+
 end;
 
 procedure TfrmConsDuplicata_Pag.prc_Consultar;
