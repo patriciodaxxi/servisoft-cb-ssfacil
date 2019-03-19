@@ -64,6 +64,8 @@ type
     procedure SMDBGrid3TitleClick(Column: TColumn);
     procedure btnImprimirClick(Sender: TObject);
     procedure RzPageControl1Change(Sender: TObject);
+    procedure SMDBGrid7TitleClick(Column: TColumn);
+    procedure SMDBGrid6TitleClick(Column: TColumn);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -473,6 +475,30 @@ begin
   edtRef.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
   Label5.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
   ceIDProduto.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
+end;
+
+procedure TfrmConsEstoque_Atual.SMDBGrid7TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMConsEstoque.cdsEstoque_Em_Terc_Pes.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid7.Columns.Count - 1 do
+    if not (SMDBGrid7.Columns.Items[I] = Column) then
+      SMDBGrid7.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmConsEstoque_Atual.SMDBGrid6TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMConsEstoque.cdsEstoque_De_Terc_Pes.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid6.Columns.Count - 1 do
+    if not (SMDBGrid6.Columns.Items[I] = Column) then
+      SMDBGrid6.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.

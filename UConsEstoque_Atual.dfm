@@ -423,9 +423,9 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Top = 32
         Width = 922
         Height = 331
-        ActivePage = TS_DeTerceiros_Pes
+        ActivePage = TS_DeTerceiros_Prod
         Align = alClient
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 0
         FixedDimension = 19
         object TS_DeTerceiros_Prod: TRzTabSheet
@@ -579,7 +579,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
-            OnTitleClick = SMDBGrid2TitleClick
+            OnTitleClick = SMDBGrid6TitleClick
             Flat = True
             BandsFont.Charset = DEFAULT_CHARSET
             BandsFont.Color = clWindowText
@@ -768,9 +768,9 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Top = 32
         Width = 922
         Height = 331
-        ActivePage = TS_EmTerceiros_Pes
+        ActivePage = TS_EmTerceiros_Prod
         Align = alClient
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 1
         FixedDimension = 19
         object TS_EmTerceiros_Prod: TRzTabSheet
@@ -918,7 +918,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
-            OnTitleClick = SMDBGrid2TitleClick
+            OnTitleClick = SMDBGrid7TitleClick
             Flat = True
             BandsFont.Charset = DEFAULT_CHARSET
             BandsFont.Color = clWindowText
