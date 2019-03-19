@@ -246,7 +246,7 @@ begin
   prc_Consultar;
 
   fDMConsEstoque.cdsBalanco.Filter   := '';
-  if RadioGroup1.ItemIndex = 0 then
+  if RadioGroup2.ItemIndex = 0 then
   begin
     fDMConsEstoque.cdsBalanco.Filter   := 'QTD_ESTOQUE > '''+'0'+'''';
     fDMConsEstoque.cdsBalanco.Filtered := True;
