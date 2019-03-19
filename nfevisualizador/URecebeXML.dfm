@@ -2270,7 +2270,7 @@ object frmRecebeXML: TfrmRecebeXML
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 36
+          ColCount = 37
           RowCount = 2
           Columns = <
             item
@@ -2295,6 +2295,15 @@ object frmRecebeXML: TfrmRecebeXML
               Title.Alignment = taCenter
               Title.Caption = 'Item OC'
               Width = 50
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Num_Nota_NTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'N'#186' Nota Retorno'
+              Width = 69
               Visible = True
             end
             item
@@ -2552,7 +2561,7 @@ object frmRecebeXML: TfrmRecebeXML
             1025
             67)
           object Shape1: TShape
-            Left = 528
+            Left = 736
             Top = 17
             Width = 25
             Height = 16
@@ -2560,7 +2569,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clRed
           end
           object Label67: TLabel
-            Left = 556
+            Left = 764
             Top = 20
             Width = 115
             Height = 13
@@ -2568,7 +2577,7 @@ object frmRecebeXML: TfrmRecebeXML
             Caption = 'Produto n'#227'o encontrado'
           end
           object Shape2: TShape
-            Left = 355
+            Left = 563
             Top = 9
             Width = 25
             Height = 16
@@ -2576,7 +2585,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clYellow
           end
           object Shape3: TShape
-            Left = 355
+            Left = 563
             Top = 39
             Width = 25
             Height = 16
@@ -2584,7 +2593,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clAqua
           end
           object Label68: TLabel
-            Left = 384
+            Left = 592
             Top = 43
             Width = 86
             Height = 13
@@ -2592,7 +2601,7 @@ object frmRecebeXML: TfrmRecebeXML
             Caption = 'Unidade Diferente'
           end
           object Shape4: TShape
-            Left = 528
+            Left = 736
             Top = 32
             Width = 25
             Height = 16
@@ -2600,7 +2609,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clGray
           end
           object Label90: TLabel
-            Left = 556
+            Left = 764
             Top = 35
             Width = 109
             Height = 13
@@ -2608,7 +2617,7 @@ object frmRecebeXML: TfrmRecebeXML
             Caption = 'CFOP N'#227'o Encontrada'
           end
           object Label76: TLabel
-            Left = 383
+            Left = 591
             Top = 12
             Width = 124
             Height = 13
@@ -2616,7 +2625,7 @@ object frmRecebeXML: TfrmRecebeXML
             Caption = 'N'#227'o possui n'#250'mero na OC'
           end
           object Shape5: TShape
-            Left = 355
+            Left = 563
             Top = 24
             Width = 25
             Height = 16
@@ -2624,7 +2633,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clMaroon
           end
           object Label118: TLabel
-            Left = 383
+            Left = 591
             Top = 27
             Width = 72
             Height = 13
@@ -2634,9 +2643,11 @@ object frmRecebeXML: TfrmRecebeXML
           object Label48: TLabel
             Left = 10
             Top = 11
-            Width = 219
+            Width = 469
             Height = 48
-            Caption = 'F3 - Associar Produto'#13#10'F4 - Associar OC     '
+            Caption = 
+              'F3 - Associar Produto           F5 - Associar Nota'#13#10'F4 - Associa' +
+              'r OC     '
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clMaroon
             Font.Height = -21

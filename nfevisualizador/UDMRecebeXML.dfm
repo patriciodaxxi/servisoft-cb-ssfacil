@@ -2392,6 +2392,18 @@ object DMRecebeXML: TDMRecebeXML
       item
         Name = 'Vlr_ICMS_Efet'
         DataType = ftFloat
+      end
+      item
+        Name = 'Item_NTE'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_NTE'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Num_Nota_NTE'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -2408,7 +2420,7 @@ object DMRecebeXML: TDMRecebeXML
     Left = 464
     Top = 488
     Data = {
-      6D0B00009619E0BD0100000018000000730000000000030000006D0B04497465
+      A20B00009619E0BD010000001800000076000000000003000000A20B04497465
       6D04000100000000000A436F6450726F6475746F010049000000010005574944
       5448020002003C0011436F6450726F6475746F496E7465726E6F040001000000
       000006436F64436F72040001000000000008436F644772616465040001000000
@@ -2498,8 +2510,10 @@ object DMRecebeXML: TDMRecebeXML
       00000000000D566C725F4950495F4465766F6C08000400000000001250657263
       5F426173655F5265645F4566657408000400000000000D566C725F426173655F
       4566657408000400000000000E506572635F49434D535F456665740800040000
-      0000000D566C725F49434D535F45666574080004000000000001000D44454641
-      554C545F4F524445520200820000000000}
+      0000000D566C725F49434D535F456665740800040000000000084974656D5F4E
+      544504000100000000000649445F4E544504000100000000000C4E756D5F4E6F
+      74615F4E5445040001000000000001000D44454641554C545F4F524445520200
+      820000000000}
     object mItensNotaItem: TIntegerField
       FieldName = 'Item'
     end
@@ -2934,6 +2948,15 @@ object DMRecebeXML: TDMRecebeXML
     end
     object mItensNotaVlr_ICMS_Efet: TFloatField
       FieldName = 'Vlr_ICMS_Efet'
+    end
+    object mItensNotaItem_NTE: TIntegerField
+      FieldName = 'Item_NTE'
+    end
+    object mItensNotaID_NTE: TIntegerField
+      FieldName = 'ID_NTE'
+    end
+    object mItensNotaNum_Nota_NTE: TIntegerField
+      FieldName = 'Num_Nota_NTE'
     end
   end
   object dsmItensNota: TDataSource
@@ -4474,7 +4497,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 104
-    Top = 224
+    Top = 213
     object sdsProduto_FornID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -4549,7 +4572,7 @@ object DMRecebeXML: TDMRecebeXML
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProduto_FornUpdateError
     Left = 176
-    Top = 224
+    Top = 213
   end
   object cdsProduto_Forn: TClientDataSet
     Aggregates = <>
@@ -4558,7 +4581,7 @@ object DMRecebeXML: TDMRecebeXML
     ProviderName = 'dspProduto_Forn'
     BeforePost = cdsProduto_FornBeforePost
     Left = 240
-    Top = 224
+    Top = 213
     object cdsProduto_FornID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -4631,7 +4654,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsProduto_Forn: TDataSource
     DataSet = cdsProduto_Forn
     Left = 312
-    Top = 224
+    Top = 213
   end
   object sdsNotaFiscal: TSQLDataSet
     NoMetadata = True
@@ -4641,7 +4664,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 96
-    Top = 349
+    Top = 332
     object sdsNotaFiscalID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5009,7 +5032,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsNotaFiscal
     OnUpdateError = dspNotaFiscalUpdateError
     Left = 168
-    Top = 349
+    Top = 332
   end
   object cdsNotaFiscal: TClientDataSet
     Aggregates = <>
@@ -5017,7 +5040,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspNotaFiscal'
     Left = 232
-    Top = 360
+    Top = 332
     object cdsNotaFiscalFILIAL: TIntegerField
       FieldName = 'FILIAL'
       Required = True
@@ -5427,12 +5450,12 @@ object DMRecebeXML: TDMRecebeXML
   object dsNotaFiscal: TDataSource
     DataSet = cdsNotaFiscal
     Left = 304
-    Top = 349
+    Top = 332
   end
   object dsNotaFiscal_Mestre: TDataSource
     DataSet = sdsNotaFiscal
     Left = 40
-    Top = 385
+    Top = 360
   end
   object sdsNotaFiscal_Itens: TSQLDataSet
     NoMetadata = True
@@ -5449,7 +5472,7 @@ object DMRecebeXML: TDMRecebeXML
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 96
-    Top = 432
+    Top = 383
     object sdsNotaFiscal_ItensID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5792,7 +5815,7 @@ object DMRecebeXML: TDMRecebeXML
     BeforePost = cdsNotaFiscal_ItensBeforePost
     OnNewRecord = cdsNotaFiscal_ItensNewRecord
     Left = 152
-    Top = 432
+    Top = 383
     object cdsNotaFiscal_ItensID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6126,11 +6149,14 @@ object DMRecebeXML: TDMRecebeXML
     object cdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
       FieldName = 'VLR_ICMS_EFET'
     end
+    object cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida: TDataSetField
+      FieldName = 'sdsNotaFiscal_NDevolvida'
+    end
   end
   object dsNotaFiscal_Itens: TDataSource
     DataSet = cdsNotaFiscal_Itens
     Left = 224
-    Top = 432
+    Top = 383
   end
   object sdsEstoque_Mov: TSQLDataSet
     NoMetadata = True
@@ -7318,7 +7344,7 @@ object DMRecebeXML: TDMRecebeXML
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 96
-    Top = 504
+    Top = 479
     object sdsNotaFiscal_ParcID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7346,7 +7372,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     Left = 184
-    Top = 504
+    Top = 479
     object cdsNotaFiscal_ParcID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7579,7 +7605,7 @@ object DMRecebeXML: TDMRecebeXML
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 104
-    Top = 567
+    Top = 525
     object sdsNotaFiscal_RefID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7652,7 +7678,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     Left = 160
-    Top = 567
+    Top = 525
     object cdsNotaFiscal_RefID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7745,7 +7771,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsNotaFiscal_Ref: TDataSource
     DataSet = cdsNotaFiscal_Ref
     Left = 232
-    Top = 567
+    Top = 525
   end
   object sdsOC: TSQLDataSet
     NoMetadata = True
@@ -9362,7 +9388,7 @@ object DMRecebeXML: TDMRecebeXML
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 104
-    Top = 272
+    Top = 261
     object sdsProduto_ImpID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -9406,7 +9432,7 @@ object DMRecebeXML: TDMRecebeXML
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProduto_FornUpdateError
     Left = 176
-    Top = 272
+    Top = 261
   end
   object cdsProduto_Imp: TClientDataSet
     Aggregates = <>
@@ -9414,7 +9440,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspProduto_Imp'
     Left = 240
-    Top = 272
+    Top = 261
     object cdsProduto_ImpID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -9456,7 +9482,7 @@ object DMRecebeXML: TDMRecebeXML
   object dsProduto_Imp: TDataSource
     DataSet = cdsProduto_Imp
     Left = 312
-    Top = 272
+    Top = 261
   end
   object qParametros_Est: TSQLQuery
     MaxBlobSize = -1
@@ -9474,5 +9500,400 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'USA_ESTOQUE_TIPO_MAT'
       Size = 1
     end
+  end
+  object sdsNotaEntrada: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT NT.SERIE, NT.NUMNOTA, NT.ID_CLIENTE, NT.ID, NI.ID_PRODUTO' +
+      ', NI.QTD, NI.QTDRESTANTE,'#13#10'NI.QTDDEVOLVIDA, NI.VLR_UNITARIO, NI.' +
+      'ID_CSTIPI, NI.ID_CSTICMS, NI.PERC_ICMS, NI.PERC_IPI, NI.NOME_PRO' +
+      'DUTO, NI.REFERENCIA,'#13#10'CFOP.CODCFOP, CFOP.BENEFICIAMENTO, NT.DTEM' +
+      'ISSAO, NT.DTSAIDAENTRADA, CLI.NOME NOMECLIENTE,'#13#10'NI.UNIDADE, NI.' +
+      'QTD_ADEVOLVER, NI.ID_NCM, NT.FILIAL, NI.ITEM,'#13#10'NT.NFECHAVEACESSO' +
+      ', CLI.CNPJ_CPF, NI.QTD_NOTAATUAL, NI.OBS_COMPLEMENTAR, NT.ID_CLI' +
+      'ENTETRIANG,'#13#10'TRI.NOME NOME_CLIENTETRIANG, NI.ID_CFOP, NI.NUM_LOT' +
+      'E_CONTROLE, NI.PERC_TRIBICMS,'#13#10'NI.ID_COR, COMB.NOME NOME_COR, PR' +
+      'O.USA_COR, PRO.usa_preco_cor, NI.TAMANHO'#13#10'FROM NOTAFISCAL NT'#13#10'IN' +
+      'NER JOIN NOTAFISCAL_ITENS NI'#13#10'ON NT.ID = NI.ID'#13#10'INNER JOIN TAB_C' +
+      'FOP CFOP'#13#10'ON NI.ID_CFOP = CFOP.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON NT.' +
+      'ID_CLIENTE = CLI.CODIGO'#13#10'inner join produto pro'#13#10'ON NI.ID_PRODUT' +
+      'O = PRO.ID'#13#10'LEFT JOIN PESSOA TRI'#13#10'ON NT.ID_CLIENTETRIANG = TRI.C' +
+      'ODIGO'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON NI.ID_COR = COMB.ID'#13#10'LEFT J' +
+      'OIN OPERACAO_NOTA O2'#13#10'ON NI.ID_OPERACAO_NOTA = O2.ID'#13#10'WHERE NT.T' +
+      'IPO_REG = '#39'NTS'#39#13#10'  AND NI.QTDRESTANTE > 0'#13#10'  AND PRO.INATIVO = '#39 +
+      'N'#39#13#10'  AND ((CFOP.beneficiamento = '#39'S'#39' AND CFOP.beneficiamento_po' +
+      'sse = '#39'E'#39') OR (O2.estoque_em_terceiro = '#39'S'#39'))'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 472
+    Top = 273
+  end
+  object dspNotaEntrada: TDataSetProvider
+    DataSet = sdsNotaEntrada
+    Left = 504
+    Top = 273
+  end
+  object cdsNotaEntrada: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspNotaEntrada'
+    Left = 544
+    Top = 273
+    object cdsNotaEntradaSERIE: TStringField
+      FieldName = 'SERIE'
+      Size = 3
+    end
+    object cdsNotaEntradaNUMNOTA: TIntegerField
+      FieldName = 'NUMNOTA'
+    end
+    object cdsNotaEntradaID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object cdsNotaEntradaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsNotaEntradaID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsNotaEntradaQTD: TFloatField
+      FieldName = 'QTD'
+      DisplayFormat = '###,##0.0000#'
+    end
+    object cdsNotaEntradaQTDRESTANTE: TFloatField
+      FieldName = 'QTDRESTANTE'
+      DisplayFormat = '###,##0.0000#'
+    end
+    object cdsNotaEntradaQTDDEVOLVIDA: TFloatField
+      FieldName = 'QTDDEVOLVIDA'
+      DisplayFormat = '###,##0.0000#'
+    end
+    object cdsNotaEntradaVLR_UNITARIO: TFloatField
+      FieldName = 'VLR_UNITARIO'
+      DisplayFormat = '###,##0.000##'
+    end
+    object cdsNotaEntradaID_CSTIPI: TIntegerField
+      FieldName = 'ID_CSTIPI'
+    end
+    object cdsNotaEntradaID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
+    end
+    object cdsNotaEntradaPERC_ICMS: TFloatField
+      FieldName = 'PERC_ICMS'
+    end
+    object cdsNotaEntradaPERC_IPI: TFloatField
+      FieldName = 'PERC_IPI'
+    end
+    object cdsNotaEntradaCODCFOP: TStringField
+      FieldName = 'CODCFOP'
+      Size = 5
+    end
+    object cdsNotaEntradaBENEFICIAMENTO: TStringField
+      FieldName = 'BENEFICIAMENTO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsNotaEntradaDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsNotaEntradaDTSAIDAENTRADA: TDateField
+      FieldName = 'DTSAIDAENTRADA'
+    end
+    object cdsNotaEntradaNOMECLIENTE: TStringField
+      FieldName = 'NOMECLIENTE'
+      Size = 60
+    end
+    object cdsNotaEntradaUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object cdsNotaEntradaQTD_ADEVOLVER: TFloatField
+      FieldName = 'QTD_ADEVOLVER'
+      DisplayFormat = '###,##0.0000'
+    end
+    object cdsNotaEntradaID_NCM: TIntegerField
+      FieldName = 'ID_NCM'
+    end
+    object cdsNotaEntradaFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+    object cdsNotaEntradaITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsNotaEntradaNFECHAVEACESSO: TStringField
+      FieldName = 'NFECHAVEACESSO'
+      Size = 44
+    end
+    object cdsNotaEntradaCNPJ_CPF: TStringField
+      FieldName = 'CNPJ_CPF'
+      Size = 18
+    end
+    object cdsNotaEntradaNOME_PRODUTO: TStringField
+      FieldName = 'NOME_PRODUTO'
+      Size = 100
+    end
+    object cdsNotaEntradaREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsNotaEntradaQTD_NOTAATUAL: TFloatField
+      FieldName = 'QTD_NOTAATUAL'
+      DisplayFormat = '###,##0.0000#'
+    end
+    object cdsNotaEntradaOBS_COMPLEMENTAR: TStringField
+      FieldName = 'OBS_COMPLEMENTAR'
+      Size = 250
+    end
+    object cdsNotaEntradaID_CLIENTETRIANG: TIntegerField
+      FieldName = 'ID_CLIENTETRIANG'
+    end
+    object cdsNotaEntradaNOME_CLIENTETRIANG: TStringField
+      FieldName = 'NOME_CLIENTETRIANG'
+      Size = 60
+    end
+    object cdsNotaEntradaID_CFOP: TIntegerField
+      FieldName = 'ID_CFOP'
+    end
+    object cdsNotaEntradaNUM_LOTE_CONTROLE: TStringField
+      FieldName = 'NUM_LOTE_CONTROLE'
+    end
+    object cdsNotaEntradaPERC_TRIBICMS: TFloatField
+      FieldName = 'PERC_TRIBICMS'
+    end
+    object cdsNotaEntradaID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object cdsNotaEntradaNOME_COR: TStringField
+      FieldName = 'NOME_COR'
+      Size = 60
+    end
+    object cdsNotaEntradaUSA_COR: TStringField
+      FieldName = 'USA_COR'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsNotaEntradaUSA_PRECO_COR: TStringField
+      FieldName = 'USA_PRECO_COR'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsNotaEntradaTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+  end
+  object dsNotaEntrada: TDataSource
+    DataSet = cdsNotaEntrada
+    Left = 584
+    Top = 273
+  end
+  object qDevol: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      
+        'select N.ID, N.NUMNOTA, N.NFECHAVEACESSO, N.DTEMISSAO, N.FILIAL,' +
+        ' N.ID_CLIENTE, N.SERIE, I.QTD, I.ITEM, I.ID_PRODUTO'
+      'from NOTAFISCAL N'
+      'inner join NOTAFISCAL_ITENS I on N.ID = I.ID'
+      'where I.ID = :ID and'
+      '      I.ITEM = :ITEM   ')
+    SQLConnection = dmDatabase.scoDados
+    Left = 408
+    Top = 144
+    object qDevolID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qDevolNUMNOTA: TIntegerField
+      FieldName = 'NUMNOTA'
+    end
+    object qDevolNFECHAVEACESSO: TStringField
+      FieldName = 'NFECHAVEACESSO'
+      Size = 44
+    end
+    object qDevolDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object qDevolFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+    object qDevolID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object qDevolSERIE: TStringField
+      FieldName = 'SERIE'
+      Size = 3
+    end
+    object qDevolQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object qDevolITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object qDevolID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+  end
+  object sdsNotaFiscal_NDevolvida: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT ND.*'#13#10'FROM NOTAFISCAL_NDEVOLVIDA ND'#13#10'WHERE ND.ID = :ID'#13#10' ' +
+      '  AND ND.ITEM = :ITEM'
+    DataSource = dsNotaFiscal_Itens_Mestre
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Size = 4
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
+        ParamType = ptInput
+        Size = 4
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 123
+    Top = 434
+    object sdsNotaFiscal_NDevolvidaID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsNotaFiscal_NDevolvidaITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsNotaFiscal_NDevolvidaITEM_NDEV: TIntegerField
+      FieldName = 'ITEM_NDEV'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsNotaFiscal_NDevolvidaID_FORNECEDOR: TIntegerField
+      FieldName = 'ID_FORNECEDOR'
+    end
+    object sdsNotaFiscal_NDevolvidaFILIAL_NTE: TIntegerField
+      FieldName = 'FILIAL_NTE'
+    end
+    object sdsNotaFiscal_NDevolvidaID_NTE: TIntegerField
+      FieldName = 'ID_NTE'
+    end
+    object sdsNotaFiscal_NDevolvidaITEM_NTE: TIntegerField
+      FieldName = 'ITEM_NTE'
+    end
+    object sdsNotaFiscal_NDevolvidaQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object sdsNotaFiscal_NDevolvidaNFECHAVEACESSO_NTE: TStringField
+      FieldName = 'NFECHAVEACESSO_NTE'
+      Size = 44
+    end
+    object sdsNotaFiscal_NDevolvidaNUMNOTA_ENTRADA: TIntegerField
+      FieldName = 'NUMNOTA_ENTRADA'
+    end
+    object sdsNotaFiscal_NDevolvidaSERIE_ENTRADA: TStringField
+      FieldName = 'SERIE_ENTRADA'
+      Size = 3
+    end
+    object sdsNotaFiscal_NDevolvidaMODELO: TStringField
+      FieldName = 'MODELO'
+      Size = 2
+    end
+    object sdsNotaFiscal_NDevolvidaDTEMISSAO_NTE: TDateField
+      FieldName = 'DTEMISSAO_NTE'
+    end
+    object sdsNotaFiscal_NDevolvidaTIPO_NOTA: TStringField
+      FieldName = 'TIPO_NOTA'
+      Size = 1
+    end
+  end
+  object cdsNotaFiscal_NDevolvida: TClientDataSet
+    Aggregates = <>
+    DataSetField = cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida
+    IndexFieldNames = 'ID;ITEM;ITEM_NDEV'
+    Params = <>
+    Left = 171
+    Top = 434
+    object cdsNotaFiscal_NDevolvidaID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsNotaFiscal_NDevolvidaITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsNotaFiscal_NDevolvidaITEM_NDEV: TIntegerField
+      FieldName = 'ITEM_NDEV'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsNotaFiscal_NDevolvidaID_FORNECEDOR: TIntegerField
+      FieldName = 'ID_FORNECEDOR'
+    end
+    object cdsNotaFiscal_NDevolvidaFILIAL_NTE: TIntegerField
+      FieldName = 'FILIAL_NTE'
+    end
+    object cdsNotaFiscal_NDevolvidaID_NTE: TIntegerField
+      FieldName = 'ID_NTE'
+    end
+    object cdsNotaFiscal_NDevolvidaITEM_NTE: TIntegerField
+      FieldName = 'ITEM_NTE'
+    end
+    object cdsNotaFiscal_NDevolvidaQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsNotaFiscal_NDevolvidaNFECHAVEACESSO_NTE: TStringField
+      FieldName = 'NFECHAVEACESSO_NTE'
+      Size = 44
+    end
+    object cdsNotaFiscal_NDevolvidaNUMNOTA_ENTRADA: TIntegerField
+      FieldName = 'NUMNOTA_ENTRADA'
+    end
+    object cdsNotaFiscal_NDevolvidaSERIE_ENTRADA: TStringField
+      FieldName = 'SERIE_ENTRADA'
+      Size = 3
+    end
+    object cdsNotaFiscal_NDevolvidaMODELO: TStringField
+      FieldName = 'MODELO'
+      Size = 2
+    end
+    object cdsNotaFiscal_NDevolvidaDTEMISSAO_NTE: TDateField
+      FieldName = 'DTEMISSAO_NTE'
+    end
+    object cdsNotaFiscal_NDevolvidaTIPO_NOTA: TStringField
+      FieldName = 'TIPO_NOTA'
+      Size = 1
+    end
+  end
+  object dsNotaFiscal_NDevolvida: TDataSource
+    DataSet = cdsNotaFiscal_NDevolvida
+    Left = 211
+    Top = 434
+  end
+  object dsNotaFiscal_Itens_Mestre: TDataSource
+    DataSet = sdsNotaFiscal_Itens
+    Left = 48
+    Top = 400
   end
 end

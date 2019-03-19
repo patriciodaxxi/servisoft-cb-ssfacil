@@ -780,7 +780,8 @@ uses
   uCadMovProdST in 'uCadMovProdST.pas' {frmCadMovProdST},
   UCadProduto_ST in 'UCadProduto_ST.pas' {frmCadProduto_ST},
   UAjusteEstoqueOP_Res in 'UAjusteEstoqueOP_Res.pas' {frmAjusteEstoqueOP_Res},
-  USel_Balanco in 'USel_Balanco.pas' {frmSel_Balanco};
+  USel_Balanco in 'USel_Balanco.pas' {frmSel_Balanco},
+  URecebeXML_ConsNota in 'nfevisualizador\URecebeXML_ConsNota.pas' {frmRecebeXML_ConsNota};
 
 {$R *.res}
 

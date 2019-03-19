@@ -2171,6 +2171,96 @@ type
     qCFOPGERAR_ESTOQUE: TStringField;
     qParametros_Est: TSQLQuery;
     qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField;
+    sdsNotaEntrada: TSQLDataSet;
+    dspNotaEntrada: TDataSetProvider;
+    cdsNotaEntrada: TClientDataSet;
+    cdsNotaEntradaSERIE: TStringField;
+    cdsNotaEntradaNUMNOTA: TIntegerField;
+    cdsNotaEntradaID_CLIENTE: TIntegerField;
+    cdsNotaEntradaID: TIntegerField;
+    cdsNotaEntradaID_PRODUTO: TIntegerField;
+    cdsNotaEntradaQTD: TFloatField;
+    cdsNotaEntradaQTDRESTANTE: TFloatField;
+    cdsNotaEntradaQTDDEVOLVIDA: TFloatField;
+    cdsNotaEntradaVLR_UNITARIO: TFloatField;
+    cdsNotaEntradaID_CSTIPI: TIntegerField;
+    cdsNotaEntradaID_CSTICMS: TIntegerField;
+    cdsNotaEntradaPERC_ICMS: TFloatField;
+    cdsNotaEntradaPERC_IPI: TFloatField;
+    cdsNotaEntradaCODCFOP: TStringField;
+    cdsNotaEntradaBENEFICIAMENTO: TStringField;
+    cdsNotaEntradaDTEMISSAO: TDateField;
+    cdsNotaEntradaDTSAIDAENTRADA: TDateField;
+    cdsNotaEntradaNOMECLIENTE: TStringField;
+    cdsNotaEntradaUNIDADE: TStringField;
+    cdsNotaEntradaQTD_ADEVOLVER: TFloatField;
+    cdsNotaEntradaID_NCM: TIntegerField;
+    cdsNotaEntradaFILIAL: TIntegerField;
+    cdsNotaEntradaITEM: TIntegerField;
+    cdsNotaEntradaNFECHAVEACESSO: TStringField;
+    cdsNotaEntradaCNPJ_CPF: TStringField;
+    cdsNotaEntradaNOME_PRODUTO: TStringField;
+    cdsNotaEntradaREFERENCIA: TStringField;
+    cdsNotaEntradaQTD_NOTAATUAL: TFloatField;
+    cdsNotaEntradaOBS_COMPLEMENTAR: TStringField;
+    cdsNotaEntradaID_CLIENTETRIANG: TIntegerField;
+    cdsNotaEntradaNOME_CLIENTETRIANG: TStringField;
+    cdsNotaEntradaID_CFOP: TIntegerField;
+    cdsNotaEntradaNUM_LOTE_CONTROLE: TStringField;
+    cdsNotaEntradaPERC_TRIBICMS: TFloatField;
+    cdsNotaEntradaID_COR: TIntegerField;
+    cdsNotaEntradaNOME_COR: TStringField;
+    dsNotaEntrada: TDataSource;
+    mItensNotaItem_NTE: TIntegerField;
+    mItensNotaID_NTE: TIntegerField;
+    mItensNotaNum_Nota_NTE: TIntegerField;
+    cdsNotaEntradaUSA_COR: TStringField;
+    cdsNotaEntradaUSA_PRECO_COR: TStringField;
+    cdsNotaEntradaTAMANHO: TStringField;
+    qDevol: TSQLQuery;
+    qDevolID: TIntegerField;
+    qDevolNUMNOTA: TIntegerField;
+    qDevolNFECHAVEACESSO: TStringField;
+    qDevolDTEMISSAO: TDateField;
+    qDevolFILIAL: TIntegerField;
+    qDevolID_CLIENTE: TIntegerField;
+    qDevolSERIE: TStringField;
+    qDevolQTD: TFloatField;
+    qDevolITEM: TIntegerField;
+    qDevolID_PRODUTO: TIntegerField;
+    sdsNotaFiscal_NDevolvida: TSQLDataSet;
+    sdsNotaFiscal_NDevolvidaID: TIntegerField;
+    sdsNotaFiscal_NDevolvidaITEM: TIntegerField;
+    sdsNotaFiscal_NDevolvidaITEM_NDEV: TIntegerField;
+    sdsNotaFiscal_NDevolvidaID_FORNECEDOR: TIntegerField;
+    sdsNotaFiscal_NDevolvidaFILIAL_NTE: TIntegerField;
+    sdsNotaFiscal_NDevolvidaID_NTE: TIntegerField;
+    sdsNotaFiscal_NDevolvidaITEM_NTE: TIntegerField;
+    sdsNotaFiscal_NDevolvidaQTD: TFloatField;
+    sdsNotaFiscal_NDevolvidaNFECHAVEACESSO_NTE: TStringField;
+    sdsNotaFiscal_NDevolvidaNUMNOTA_ENTRADA: TIntegerField;
+    sdsNotaFiscal_NDevolvidaSERIE_ENTRADA: TStringField;
+    sdsNotaFiscal_NDevolvidaMODELO: TStringField;
+    sdsNotaFiscal_NDevolvidaDTEMISSAO_NTE: TDateField;
+    sdsNotaFiscal_NDevolvidaTIPO_NOTA: TStringField;
+    cdsNotaFiscal_NDevolvida: TClientDataSet;
+    cdsNotaFiscal_NDevolvidaID: TIntegerField;
+    cdsNotaFiscal_NDevolvidaITEM: TIntegerField;
+    cdsNotaFiscal_NDevolvidaITEM_NDEV: TIntegerField;
+    cdsNotaFiscal_NDevolvidaID_FORNECEDOR: TIntegerField;
+    cdsNotaFiscal_NDevolvidaFILIAL_NTE: TIntegerField;
+    cdsNotaFiscal_NDevolvidaID_NTE: TIntegerField;
+    cdsNotaFiscal_NDevolvidaITEM_NTE: TIntegerField;
+    cdsNotaFiscal_NDevolvidaQTD: TFloatField;
+    cdsNotaFiscal_NDevolvidaNFECHAVEACESSO_NTE: TStringField;
+    cdsNotaFiscal_NDevolvidaNUMNOTA_ENTRADA: TIntegerField;
+    cdsNotaFiscal_NDevolvidaSERIE_ENTRADA: TStringField;
+    cdsNotaFiscal_NDevolvidaMODELO: TStringField;
+    cdsNotaFiscal_NDevolvidaDTEMISSAO_NTE: TDateField;
+    cdsNotaFiscal_NDevolvidaTIPO_NOTA: TStringField;
+    dsNotaFiscal_NDevolvida: TDataSource;
+    dsNotaFiscal_Itens_Mestre: TDataSource;
+    cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida: TDataSetField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2217,9 +2307,11 @@ type
     ctCommand_CFOP: String;
     ctCommand_Produto: String;
     ctOC: String;
+    ctNotaEntrada : String;
     ctProduto_Forn: String;
     vID_Pedido, vItem_Pedido: Integer;
     vNum_Pedido: String;
+    vID_NTE, vItem_NTE, vNum_Nota_NTE : Integer;
     vUnidade: String;
     vProduto_Inativo: String;
     vGerar_CLiq : String;
@@ -2242,6 +2334,7 @@ type
 
     procedure prc_Abrir_Combinacao(ID_Produto: Integer);
     procedure prc_Move_Dados_Da_OC;
+    procedure prc_Move_Dados_Da_Nota;
 
     function fnc_Verifica_Produto_Forn(ID_Produto, ID_Fornecedor: Integer; Cod_Produto_Forn, Tamanho: String): Boolean;
     function fnc_Proximo_Item_Forn(ID_Produto: Integer): Integer; 
@@ -2270,6 +2363,7 @@ begin
   ctCommand_CFOP    := sdsCFOP.CommandText;
   ctCommand_Produto := sdsProduto.CommandText;
   ctOC              := sdsOC.CommandText;
+  ctNotaEntrada     := sdsNotaEntrada.CommandText;
   ctProduto_Forn    := sdsProduto_Forn.CommandText;
   qParametros.Close;
   qParametros.ParamByName('ID').AsInteger := 1;
@@ -2345,7 +2439,10 @@ begin
                                + '   AND SERIE = ' + QuotedStr(Serie)
                                + '   AND TIPO_REG = ' + QuotedStr('NTE');
   cdsNotaFiscal.Open;
-
+  cdsNotaFiscal_Itens.Close;
+  cdsNotaFiscal_Itens.Open;
+  cdsNotaFiscal_NDevolvida.Close;
+  cdsNotaFiscal_NDevolvida.Open;
   if not(vImportar_NotaSaida) then
     if not(cdsNotaFiscal.IsEmpty) and (cdsNotaFiscalNUMNOTA.AsInteger = NumNota) then
       Result := True;
@@ -2882,6 +2979,20 @@ end;
 procedure TDMRecebeXML.prc_Inserir_Parcela;
 begin
   cdsParcelas.Insert;
+end;
+
+procedure TDMRecebeXML.prc_Move_Dados_Da_Nota;
+begin
+  vNum_Nota_NTE      := cdsNotaEntradaNUMNOTA.AsInteger;
+  vID_NTE            := cdsNotaEntradaID.AsInteger;
+  vItem_NTE          := cdsNotaEntradaITEM.AsInteger;
+  vUnidade           := cdsNotaEntradaUNIDADE.AsString;
+  vCodProduto_Pos    := cdsNotaEntradaID_PRODUTO.AsInteger;
+  vReferencia_Pos    := cdsNotaEntradaREFERENCIA.AsString;
+  vUsa_Cor_Pos       := cdsNotaEntradaUSA_COR.AsString;
+  vUsa_Preco_Cor_Pos := cdsNotaEntradaUSA_PRECO_COR.AsString;
+  vID_Cor_Pos        := cdsNotaEntradaID_COR.AsInteger;
+  vTamanho_Pos       := cdsNotaEntradaTAMANHO.AsString;
 end;
 
 end.
