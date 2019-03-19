@@ -137,6 +137,7 @@ begin
     0 : vComando := vComando + ' AND NI.QTDRESTANTE > 0 ';
     1 : vComando := vComando + ' AND NI.QTDRESTANTE <= 0 ';
   end;
+  vComando := vComando + ' AND PRO.INATIVO = ' + QuotedStr('N');
   fDMConsNotaBeneficiamento.sdsNotaEntrada.CommandText := vComando;
   fDMConsNotaBeneficiamento.cdsNotaEntrada.Open;
 end;

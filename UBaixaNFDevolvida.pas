@@ -25,7 +25,6 @@ type
     Label3: TLabel;
     Label1: TLabel;
     Label5: TLabel;
-    Label6: TLabel;
     Shape1: TShape;
     Label13: TLabel;
     Shape2: TShape;
@@ -34,7 +33,6 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     RxDBLookupCombo3: TRxDBLookupCombo;
     RxDBLookupCombo1: TRxDBLookupCombo;
-    ComboBox2: TComboBox;
     btnConsultar: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -241,11 +239,50 @@ begin
 end;
 
 procedure TfrmBaixaNFDevolvida.prc_Consultar_NotaEntrada;
+var
+  vPosse : String;
+  vBenef_Posse : String;
+  vComando : String;
 begin
+  if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
+  begin
+    vPosse := ' o2.estoque_EM_terceiro = ' + QuotedStr('S');
+    vBenef_Posse := ' AND CFOP.BENEFICIAMENTO_POSSE = '  + QuotedStr('E');
+  end
+  else
+  begin
+    vPosse := ' o2.estoque_DE_terceiro = ' + QuotedStr('S');
+    vBenef_Posse := ' AND CFOP.BENEFICIAMENTO_POSSE = '  + QuotedStr('T');
+  end;
+
   fDMConsNotaBeneficiamento.cdsNotaPendente.Close;
+  vComando := fDMConsNotaBeneficiamento.ctNotaPendente;
+  if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
+    vComando := vComando + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTS')
+  else
+    vComando := vComando + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTE');
+  case ComboBox1.ItemIndex of
+    0: vComando := vComando + ' AND ((CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + vBenef_Posse + ') OR (' + vPosse + '))';
+    1: vComando := vComando + ' AND (CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + vBenef_Posse + ')';
+    2: vComando := vComando + ' AND ' + vPosse;
+  end;
+  if RxDBLookupCombo3.Text <> '' then
+    vComando := vComando + ' AND NF.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
+  if RxDBLookupCombo2.Text <> '' then
+    vComando := vComando + ' AND ((NF.ID_CLIENTE = ' + IntToStr(RxDBLookupCombo2.KeyValue) + ')' + '  OR (NF.ID_CLIENTETRIANG = ' + IntToStr(RxDBLookupCombo2.KeyValue) + '))';
+  if RxDBLookupCombo1.Text <> '' then
+    vComando := vComando + ' AND NI.ID_PRODUTO = ' + IntToStr(RxDBLookupCombo1.KeyValue);
+  vComando := vComando + ' AND NI.QTDRESTANTE > 0 ';
+  vComando := vComando + ' AND PRO.INATIVO = ' + QuotedStr('N');
+  fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := vComando;
+  fDMConsNotaBeneficiamento.cdsNotaPendente.Open;
+
+  {fDMConsNotaBeneficiamento.cdsNotaPendente.Close;
   fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.ctNotaPendente;
   if ComboBox1.ItemIndex = 0 then
     fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText + ' AND CFOP.BENEFICIAMENTO = ' + QuotedStr('S');
+
+
   if RxDBLookupCombo3.Text <> '' then
     fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText
                                                + ' AND NF.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
@@ -260,7 +297,7 @@ begin
     0 : fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText + ' AND NI.QTDRESTANTE > 0 ';
     1 : fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText + ' AND NI.QTDRESTANTE <= 0 ';
   end;
-  fDMConsNotaBeneficiamento.cdsNotaPendente.Open;
+  fDMConsNotaBeneficiamento.cdsNotaPendente.Open;}
 end;
 
 end.

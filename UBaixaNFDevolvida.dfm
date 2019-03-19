@@ -59,14 +59,6 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
       Alignment = taRightJustify
       Caption = 'Material:'
     end
-    object Label6: TLabel
-      Left = 302
-      Top = 13
-      Width = 35
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Op'#231#227'o:'
-    end
     object Shape1: TShape
       Left = 837
       Top = 57
@@ -114,11 +106,11 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
       Height = 21
       Style = csDropDownList
       ItemHeight = 13
-      ItemIndex = 0
       TabOrder = 0
-      Text = 'Beneficiamento'
       Items.Strings = (
+        'Beneficiamento/Terceiro'
         'Beneficiamento'
+        'Terceiro'
         'Todas')
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
@@ -157,21 +149,6 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
       LookupDisplay = 'NOME;REFERENCIA'
       LookupSource = DMConsNotaBeneficiamento.dsProduto
       TabOrder = 3
-    end
-    object ComboBox2: TComboBox
-      Left = 338
-      Top = 5
-      Width = 145
-      Height = 21
-      Style = csDropDownList
-      ItemHeight = 13
-      ItemIndex = 0
-      TabOrder = 4
-      Text = 'Pendente'
-      Items.Strings = (
-        'Pendente'
-        'Devolvida'
-        'Ambas')
     end
     object btnConsultar: TNxButton
       Left = 484
@@ -241,7 +218,7 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
       Transparent = True
       OnClick = btnConsultarClick
     end
@@ -449,22 +426,25 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
     WidthOfIndicator = 27
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 18
+    ColCount = 22
     RowCount = 2
     Columns = <
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'DTEMISSAO'
         Title.Alignment = taCenter
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'NUMNOTA'
         Title.Alignment = taCenter
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'SERIE'
         Title.Alignment = taCenter
@@ -472,9 +452,58 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
         Visible = True
       end
       item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'ITEM_NTE'
+        Title.Alignment = taCenter
+        Width = 38
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'CODCFOP'
+        Title.Alignment = taCenter
+        Title.Caption = 'CFOP'
+        Width = 40
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'ID_PRODUTO'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID Produto'
+        Width = 48
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOMEPRODUTO'
+        Title.Alignment = taCenter
+        Width = 287
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME_COR'
+        Title.Alignment = taCenter
+        Title.Caption = 'Nome Cor'
+        Width = 167
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'TAMANHO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Tamanho'
+        Visible = True
+      end
+      item
         Expanded = False
         FieldName = 'QTD'
         Title.Alignment = taCenter
+        Width = 80
         Visible = True
       end
       item
@@ -482,6 +511,8 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
         FieldName = 'QTDRESTANTE'
         ReadOnly = True
         Title.Alignment = taCenter
+        Title.Color = 16777088
+        Width = 82
         Visible = True
       end
       item
@@ -503,6 +534,7 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'ID_CLIENTE'
         Title.Alignment = taCenter
@@ -512,36 +544,19 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
         Expanded = False
         FieldName = 'NOMECLIENTE'
         Title.Alignment = taCenter
-        Width = 394
+        Width = 290
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'CNPJ_CPF'
         Title.Alignment = taCenter
-        Width = 64
+        Width = 121
         Visible = True
       end
       item
-        Expanded = False
-        FieldName = 'ITEM_NTE'
-        Title.Alignment = taCenter
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ID_PRODUTO'
-        Title.Alignment = taCenter
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOMEPRODUTO'
-        Title.Alignment = taCenter
-        Width = 491
-        Visible = True
-      end
-      item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'REFERENCIA'
         Title.Alignment = taCenter
@@ -549,6 +564,7 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'BENEFICIAMENTO'
         Title.Alignment = taCenter
@@ -563,10 +579,18 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'UNIDADE'
         Title.Alignment = taCenter
         Width = 64
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_COR'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID Cor'
         Visible = True
       end>
   end

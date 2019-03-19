@@ -376,6 +376,12 @@ type
     cdsNotaPendenteNOME_CLIENTETRIANG: TStringField;
     sdsNotaPendenteID_CFOP: TIntegerField;
     cdsNotaPendenteID_CFOP: TIntegerField;
+    sdsNotaPendenteNOME_COR: TStringField;
+    sdsNotaPendenteID_COR: TIntegerField;
+    cdsNotaPendenteNOME_COR: TStringField;
+    cdsNotaPendenteID_COR: TIntegerField;
+    sdsNotaPendenteTAMANHO: TStringField;
+    cdsNotaPendenteTAMANHO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     ctBaixa_NFDevolvida : string;

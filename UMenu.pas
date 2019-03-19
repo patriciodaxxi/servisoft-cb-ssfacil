@@ -347,6 +347,7 @@ type
     N54: TMenuItem;
     MovimentoProdutoST1: TMenuItem;
     AjusteEstoqueReservaPorOrdemProduo1: TMenuItem;
+    BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -591,6 +592,8 @@ type
     procedure AtualizarPreosporCdigodeBarras1Click(Sender: TObject);
     procedure MovimentoProdutoST1Click(Sender: TObject);
     procedure AjusteEstoqueReservaPorOrdemProduo1Click(Sender: TObject);
+    procedure BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1Click(
+      Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -2069,6 +2072,7 @@ end;
 
 procedure TfMenu.BaixaNotadeBeneficiamento1Click(Sender: TObject);
 begin
+  vTipo_ConsNotaBeneficiamento := 'F';
   OpenForm(TfrmBaixaNFDevolvida,wsMaximized);
 end;
 
@@ -2115,6 +2119,13 @@ end;
 procedure TfMenu.AjusteEstoqueReservaPorOrdemProduo1Click(Sender: TObject);
 begin
   OpenForm(TfrmAjusteEstoqueOP_Res,wsMaximized);
+end;
+
+procedure TfMenu.BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1Click(
+  Sender: TObject);
+begin
+  vTipo_ConsNotaBeneficiamento := 'C';
+  OpenForm(TfrmBaixaNFDevolvida,wsMaximized);
 end;
 
 initialization

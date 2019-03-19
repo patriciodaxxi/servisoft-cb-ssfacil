@@ -1256,13 +1256,15 @@ object DMConsNotaBeneficiamento: TDMConsNotaBeneficiamento
       ',   NI.QTD, NI.QTDRESTANTE,NI.QTD_ADEVOLVER,'#13#10'       NI.QTDDEVOL' +
       'VIDA, FIL.NOME NOMEFILIAL, CFOP.CODCFOP,   CFOP.BENEFICIAMENTO, ' +
       'NI.VLR_UNITARIO, NI.UNIDADE,'#13#10'       NF.FILIAL, TRI.NOME NOME_CL' +
-      'IENTETRIANG, NI.ID_CFOP'#13#10'from NOTAFISCAL NF  '#13#10'inner join NOTAFI' +
-      'SCAL_ITENS NI   on NF.ID = NI.ID  '#13#10'inner join PESSOA CLI   on N' +
-      'F.ID_CLIENTE = CLI.CODIGO  '#13#10'inner join FILIAL FIL   on NF.FILIA' +
-      'L = FIL.ID  '#13#10'inner join PRODUTO PRO   on NI.ID_PRODUTO = PRO.ID' +
-      '  '#13#10'inner join TAB_CFOP CFOP   on NI.ID_CFOP = CFOP.ID  '#13#10'left j' +
-      'oin PESSOA TRI   on NF.ID_CLIENTETRIANG = TRI.CODIGO  '#13#10'where NF' +
-      '.TIPO_REG = '#39'NTE'#39
+      'IENTETRIANG, NI.ID_CFOP, COMB.NOME NOME_COR, NI.ID_COR, NI.TAMAN' +
+      'HO'#13#10'from NOTAFISCAL NF  '#13#10'inner join NOTAFISCAL_ITENS NI   on NF' +
+      '.ID = NI.ID  '#13#10'inner join PESSOA CLI   on NF.ID_CLIENTE = CLI.CO' +
+      'DIGO  '#13#10'inner join FILIAL FIL   on NF.FILIAL = FIL.ID  '#13#10'inner j' +
+      'oin PRODUTO PRO   on NI.ID_PRODUTO = PRO.ID  '#13#10'inner join TAB_CF' +
+      'OP CFOP   on NI.ID_CFOP = CFOP.ID  '#13#10'LEFT JOIN COMBINACAO COMB O' +
+      'N NI.ID_COR = COMB.ID'#13#10'left join PESSOA TRI   on NF.ID_CLIENTETR' +
+      'IANG = TRI.CODIGO'#13#10'left join OPERACAO_NOTA O2  on NI.ID_OPERACAO' +
+      '_NOTA = O2.ID'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1347,6 +1349,17 @@ object DMConsNotaBeneficiamento: TDMConsNotaBeneficiamento
     end
     object sdsNotaPendenteID_CFOP: TIntegerField
       FieldName = 'ID_CFOP'
+    end
+    object sdsNotaPendenteNOME_COR: TStringField
+      FieldName = 'NOME_COR'
+      Size = 60
+    end
+    object sdsNotaPendenteID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object sdsNotaPendenteTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
     end
   end
   object dspNotaPendente: TDataSetProvider
@@ -1460,6 +1473,17 @@ object DMConsNotaBeneficiamento: TDMConsNotaBeneficiamento
     end
     object cdsNotaPendenteID_CFOP: TIntegerField
       FieldName = 'ID_CFOP'
+    end
+    object cdsNotaPendenteNOME_COR: TStringField
+      FieldName = 'NOME_COR'
+      Size = 60
+    end
+    object cdsNotaPendenteID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object cdsNotaPendenteTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
     end
   end
   object dsNotaPendente: TDataSource

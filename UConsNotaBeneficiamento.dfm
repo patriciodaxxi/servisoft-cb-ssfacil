@@ -530,7 +530,6 @@ object frmConsNotaBeneficiamento: TfrmConsNotaBeneficiamento
             FieldName = 'ID_PRODUTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Produto'
-            Width = 64
             Visible = True
           end
           item

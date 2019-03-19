@@ -612,7 +612,7 @@ object fMenu: TfMenu
         OnClick = BaixaOrdemdeCompraManual1Click
       end
       object BaixaNotadeBeneficiamento1: TMenuItem
-        Caption = 'Baixa Nota de Beneficiamento'
+        Caption = 'Baixa Nota de Beneficiamento / Estoque De Terceiro'
         OnClick = BaixaNotadeBeneficiamento1Click
       end
       object N16: TMenuItem
@@ -623,7 +623,7 @@ object fMenu: TfMenu
         OnClick = ConsultaMapadeCompra1Click
       end
       object ConsultaNotasdeBeneficiamento1: TMenuItem
-        Caption = 'Consulta Notas de Beneficiamento / Estoque DE Terceiros'
+        Caption = 'Consulta Notas de Beneficiamento / Estoque De Terceiros (Manual)'
         OnClick = ConsultaNotasdeBeneficiamento1Click
       end
       object ConsultaMateriaisTerceiros1: TMenuItem
@@ -738,8 +738,12 @@ object fMenu: TfMenu
         Caption = '-'
       end
       object ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1: TMenuItem
-        Caption = 'Consulta Notas de Beneficiamento / Estoque EM Terceiro'
+        Caption = 'Consulta Notas de Beneficiamento / Estoque Em Terceiro'
         OnClick = ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1Click
+      end
+      object BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1: TMenuItem
+        Caption = 'Baixa Notas de Beneficiamento / Estoque Em Terceiro (Manual)'
+        OnClick = BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1Click
       end
       object N11: TMenuItem
         Caption = '-'

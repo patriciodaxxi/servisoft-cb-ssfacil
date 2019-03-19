@@ -50,6 +50,8 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure RxDBLookupCombo2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     procedure prc_Consultar_NotaEntrada(ID_Nota : Integer = 0 ; Item_Nota : Integer =  0);
@@ -88,7 +90,7 @@ var
 
 implementation
 
-uses rsDBUtils, VarUtils, StrUtils, Math;
+uses rsDBUtils, VarUtils, StrUtils, Math, uUtilPadrao, USel_Produto;
 
 {$R *.dfm}
 
@@ -1074,6 +1076,21 @@ procedure TfrmSel_NotaEntrada.CurrencyEdit1KeyDown(Sender: TObject;
 begin
   if (Key = Vk_Return) then
     BitBtn1Click(Sender);
+end;
+
+procedure TfrmSel_NotaEntrada.RxDBLookupCombo2KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    vCodProduto_Pos := 0;
+    frmSel_Produto  := TfrmSel_Produto.Create(Self);
+    frmSel_Produto.vTipo_Prod := '';
+    frmSel_Produto.ShowModal;
+    if vCodProduto_Pos > 0 then
+      RxDBLookupCombo2.KeyValue := vCodProduto_Pos;
+    FreeAndNil(frmSel_Produto);
+  end;
 end;
 
 end.
