@@ -3,9 +3,9 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
   Top = 71
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Selecionar as OC'
+  Caption = 'Selecionar as Notas Para Retorno Em Terceiro'
   ClientHeight = 569
-  ClientWidth = 963
+  ClientWidth = 1045
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 46
-    Width = 963
+    Width = 1045
     Height = 498
     Align = alClient
     BorderStyle = bsNone
@@ -65,7 +65,7 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
         Title.Alignment = taCenter
         Title.Caption = 'N'#186' Nota'
         Title.Color = 16769217
-        Width = 66
+        Width = 61
         Visible = True
       end
       item
@@ -110,6 +110,7 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
         Title.Alignment = taCenter
         Title.Caption = 'Refer'#234'ncia'
         Title.Color = 16769217
+        Width = 121
         Visible = True
       end
       item
@@ -119,6 +120,7 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
         Title.Alignment = taCenter
         Title.Caption = 'Tam'
         Title.Color = 16769217
+        Width = 53
         Visible = True
       end
       item
@@ -127,7 +129,7 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
         Title.Alignment = taCenter
         Title.Caption = 'Nome Produto'
         Title.Color = 16769217
-        Width = 249
+        Width = 285
         Visible = True
       end
       item
@@ -172,6 +174,7 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
         Title.Alignment = taCenter
         Title.Caption = 'CNPJ/CPF'
         Title.Color = 16769217
+        Width = 64
         Visible = True
       end
       item
@@ -196,7 +199,7 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
   object Panel2: TPanel
     Left = 0
     Top = 544
-    Width = 963
+    Width = 1045
     Height = 25
     Align = alBottom
     Color = 16760704
@@ -204,7 +207,7 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
     object Label1: TLabel
       Left = 1
       Top = 11
-      Width = 961
+      Width = 1043
       Height = 13
       Align = alBottom
       Caption = 'Duplo Clique para selecionar a OC'
@@ -219,7 +222,7 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 963
+    Width = 1045
     Height = 46
     Align = alTop
     Color = clSilver
@@ -243,9 +246,9 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
     object Label3: TLabel
       Left = 386
       Top = 13
-      Width = 324
+      Width = 262
       Height = 13
-      Caption = '(Com isso o sistema n'#227'o vai encontrar Ordem de Compra)'
+      Caption = '(Com isso o sistema n'#227'o vai encontrar a Nota)'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clRed
