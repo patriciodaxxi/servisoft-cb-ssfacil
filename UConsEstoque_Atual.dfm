@@ -1,9 +1,9 @@
 object frmConsEstoque_Atual: TfrmConsEstoque_Atual
-  Left = 162
-  Top = 101
+  Left = 179
+  Top = 93
   BorderStyle = bsSingle
   Caption = 'Consulta Estoque'
-  ClientHeight = 518
+  ClientHeight = 517
   ClientWidth = 926
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -279,11 +279,11 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
     Left = 0
     Top = 131
     Width = 926
-    Height = 387
-    ActivePage = TS_DeTerceiros
+    Height = 386
+    ActivePage = TS_EmTerceiros
     ActivePageDefault = TS_Estoque
     Align = alClient
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 2
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -293,7 +293,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 0
         Top = 0
         Width = 922
-        Height = 364
+        Height = 363
         Align = alClient
         Ctl3D = False
         DataSource = DMConsEstoque.dsEstoque_Atual
@@ -422,7 +422,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 0
         Top = 32
         Width = 922
-        Height = 332
+        Height = 331
         ActivePage = TS_DeTerceiros_Pes
         Align = alClient
         TabIndex = 1
@@ -434,7 +434,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Left = 0
             Top = 0
             Width = 918
-            Height = 309
+            Height = 308
             Align = alClient
             Ctl3D = False
             DataSource = DMConsEstoque.dsEstoque_De_Terc
@@ -494,7 +494,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
               end
               item
                 Expanded = False
-                FieldName = 'NOMEPRODUTO'
+                FieldName = 'NOME_PRODUTO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome Produto'
                 Title.Color = 16777124
@@ -532,11 +532,12 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
                 Title.Color = 16777124
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'VLR_TOTAL'
+                FieldName = 'VLR_TOTAL_RESTANTE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Total'
                 Title.Color = 16777124
@@ -548,6 +549,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo SPED'
                 Title.Color = 16777124
+                Width = 64
                 Visible = True
               end>
           end
@@ -558,7 +560,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Left = 0
             Top = 0
             Width = 918
-            Height = 309
+            Height = 308
             Align = alClient
             Ctl3D = False
             DataSource = DMConsEstoque.dsEstoque_De_Terc_Pes
@@ -632,6 +634,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Refer'#234'ncia'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end
               item
@@ -664,6 +667,15 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
               item
                 Alignment = taCenter
                 Expanded = False
+                FieldName = 'QTDRESTANTE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtd.'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
                 FieldName = 'UNIDADE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
@@ -672,17 +684,8 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Visible = True
               end
               item
-                Alignment = taCenter
                 Expanded = False
-                FieldName = 'QTDRESTANTE'
-                Title.Alignment = taCenter
-                Title.Caption = 'Qtd.'
-                Title.Color = 7864319
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'VLR_TOTAL'
+                FieldName = 'VLR_TOTAL_RESTANTE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Total'
                 Title.Color = 7864319
@@ -694,6 +697,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Produto SPED'
                 Title.Color = 7864319
+                Width = 64
                 Visible = True
               end>
           end
@@ -756,16 +760,17 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
           Height = 17
           Caption = 'Somente Beneficiamento'
           TabOrder = 1
+          Visible = False
         end
       end
       object RzPageControl3: TRzPageControl
         Left = 0
         Top = 32
         Width = 922
-        Height = 332
-        ActivePage = TS_EmTerceiros_Prod
+        Height = 331
+        ActivePage = TS_EmTerceiros_Pes
         Align = alClient
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 1
         FixedDimension = 19
         object TS_EmTerceiros_Prod: TRzTabSheet
@@ -774,7 +779,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Left = 0
             Top = 0
             Width = 918
-            Height = 309
+            Height = 308
             Align = alClient
             Ctl3D = False
             DataSource = DMConsEstoque.dsEstoque_Em_Terc
@@ -812,7 +817,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 8
+            ColCount = 9
             RowCount = 2
             Columns = <
               item
@@ -834,7 +839,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
               end
               item
                 Expanded = False
-                FieldName = 'NOMEPRODUTO'
+                FieldName = 'NOME_PRODUTO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome Produto'
                 Title.Color = 11337561
@@ -861,20 +866,29 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
               end
               item
                 Expanded = False
-                FieldName = 'SPED_TIPO_ITEM'
+                FieldName = 'QTDRESTANTE'
                 Title.Alignment = taCenter
-                Title.Caption = 'Tipo Sped'
+                Title.Caption = 'Qtd'
                 Title.Color = 11337561
-                Width = 41
+                Width = 118
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'QTD'
+                FieldName = 'DESC_TIPO_SPED'
                 Title.Alignment = taCenter
-                Title.Caption = 'Qtd'
+                Title.Caption = 'Tipo Sped'
                 Title.Color = 11337561
-                Width = 141
+                Width = 130
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_TOTAL_RESTANTE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Total'
+                Title.Color = 11337561
+                Width = 95
                 Visible = True
               end>
           end
@@ -885,7 +899,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Left = 0
             Top = 0
             Width = 918
-            Height = 309
+            Height = 308
             Align = alClient
             Ctl3D = False
             DataSource = DMConsEstoque.dsEstoque_Em_Terc_Pes
@@ -923,9 +937,27 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 13
+            ColCount = 12
             RowCount = 2
             Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID_TERCEIRO'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Terceiro'
+                Title.Color = 7864319
+                Width = 51
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_TERCEIRO'
+                Title.Caption = 'Nome Terceiro'
+                Title.Color = 7864319
+                Width = 256
+                Visible = True
+              end
               item
                 Alignment = taCenter
                 Expanded = False
@@ -933,7 +965,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'ID Produto'
                 Title.Color = 7864319
-                Width = 56
+                Width = 50
                 Visible = True
               end
               item
@@ -952,7 +984,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome Produto'
                 Title.Color = 7864319
-                Width = 250
+                Width = 242
                 Visible = True
               end
               item
@@ -976,6 +1008,14 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
               item
                 Alignment = taCenter
                 Expanded = False
+                FieldName = 'QTDRESTANTE'
+                Title.Caption = 'Qtde.'
+                Title.Color = 7864319
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
                 FieldName = 'UNIDADE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
@@ -983,40 +1023,8 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Visible = True
               end
               item
-                Alignment = taCenter
                 Expanded = False
-                FieldName = 'QTD'
-                Title.Color = 7864319
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'NOME_TERCEIRO'
-                Title.Caption = 'Nome Terceiro'
-                Title.Color = 7864319
-                Width = 311
-                Visible = True
-              end
-              item
-                Alignment = taCenter
-                Expanded = False
-                FieldName = 'ID_PESSOA'
-                Title.Alignment = taCenter
-                Title.Caption = 'ID Terceiro'
-                Title.Color = 7864319
-                Visible = True
-              end
-              item
-                Alignment = taCenter
-                Expanded = False
-                FieldName = 'NCM'
-                Title.Alignment = taCenter
-                Title.Color = 7864319
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'DESC_SPED_TIPO'
+                FieldName = 'DESC_TIPO_SPED'
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Produto SPED'
                 Title.Color = 7864319
@@ -1025,9 +1033,9 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
               end
               item
                 Expanded = False
-                FieldName = 'TIPO_TER'
+                FieldName = 'VLR_TOTAL_RESTANTE'
                 Title.Alignment = taCenter
-                Title.Caption = 'Tipo Mov.'
+                Title.Caption = 'Vlr. Total'
                 Title.Color = 7864319
                 Visible = True
               end>
@@ -1041,7 +1049,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 0
         Top = 0
         Width = 754
-        Height = 364
+        Height = 363
         Align = alClient
         Ctl3D = False
         DataSource = DMConsEstoque.dsmNCM
@@ -1115,7 +1123,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 792
         Top = 0
         Width = 130
-        Height = 364
+        Height = 363
         Align = alRight
         Ctl3D = False
         DataSource = DMConsEstoque.dsmUnidade
@@ -1160,7 +1168,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 754
         Top = 0
         Width = 38
-        Height = 364
+        Height = 363
         Align = alRight
         Color = clSilver
         TabOrder = 2

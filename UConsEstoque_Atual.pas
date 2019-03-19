@@ -101,6 +101,7 @@ var
   vComando : String;
   i : Integer;
 begin
+  Screen.Cursor := crHourGlass;
   vQtdAux := 0;
   fDMConsEstoque.cdsEstoque_Atual.Close;
   vComando := 'select aux.*, PRO.NOME NOME_PRODUTO, PRO.REFERENCIA, COMB.NOME NOME_COMBINACAO, PRO.localizacao, '
@@ -145,6 +146,7 @@ begin
   end;
   fDMConsEstoque.sdsEstoque_Atual.CommandText := vComando;
   fDMConsEstoque.cdsEstoque_Atual.Open;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TfrmConsEstoque_Atual.FormClose(Sender: TObject;
@@ -320,18 +322,22 @@ end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros;
 begin
+  Screen.Cursor := crHourGlass;
   fDMConsEstoque.cdsEstoque_De_Terc.Close;
   fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('Data').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsEstoque_De_Terc.Open;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiros;
 begin
+  Screen.Cursor := crHourGlass;
   fDMConsEstoque.cdsEstoque_Em_Terc.Close;
   fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('Data').AsDate      := DateEdit2.Date;
   fDMConsEstoque.cdsEstoque_Em_Terc.Open;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TfrmConsEstoque_Atual.SMDBGrid2TitleClick(Column: TColumn);
@@ -443,22 +449,22 @@ end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros_Pes;
 begin
+  Screen.Cursor := crHourGlass;
   fDMConsEstoque.cdsEstoque_De_Terc_Pes.Close;
-  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('Data').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsEstoque_De_Terc_Pes.Open;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiros_Pes;
 begin
+  Screen.Cursor := crHourGlass;
   fDMConsEstoque.cdsEstoque_Em_Terc_Pes.Close;
-  if CheckBox1.Checked then
-    fDMConsEstoque.dspEstoque_Em_Terc_Pes.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_PesB
-  else
-    fDMConsEstoque.dspEstoque_Em_Terc_Pes.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_Pes;
-  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('Data').AsDate := DateEdit2.Date;
   fDMConsEstoque.cdsEstoque_Em_Terc_Pes.Open;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TfrmConsEstoque_Atual.RzPageControl1Change(Sender: TObject);

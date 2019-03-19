@@ -586,9 +586,9 @@ begin
     scoDados.StartTransaction(ID);
     try
       sds.SQLConnection := scoDados;
-      sds.NoMetadata  := True;
-      sds.GetMetadata := False;
-      sds.CommandText := 'SELECT FLAG FROM TABELALOC WHERE TABELA = :TABELA';
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+      sds.CommandText   := 'SELECT FLAG FROM TABELALOC WHERE TABELA = :TABELA';
       sds.ParamByName('TABELA').AsString := NomeTabela;
       sds.Open;
 

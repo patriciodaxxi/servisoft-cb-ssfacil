@@ -85,6 +85,7 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
       LookupDisplay = 'NOME;REFERENCIA'
       LookupSource = DMCadNotaFiscal.dsProduto
       TabOrder = 2
+      OnKeyDown = RxDBLookupCombo2KeyDown
     end
     object BitBtn1: TBitBtn
       Left = 718
@@ -450,7 +451,7 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
       WidthOfIndicator = 25
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
-      ColCount = 22
+      ColCount = 23
       RowCount = 2
       Columns = <
         item
@@ -499,6 +500,14 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
           Title.Alignment = taCenter
           Title.Caption = 'N'#186' Lote Controle'
           Width = 101
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ID_PRODUTO'
+          Title.Alignment = taCenter
+          Title.Caption = 'ID Produto'
+          Width = 52
           Visible = True
         end
         item

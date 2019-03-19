@@ -1,7 +1,8 @@
 object DMConsEstoque: TDMConsEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 141
+  Left = 105
+  Top = 2
   Height = 699
   Width = 1224
   object sdsEstoque: TSQLDataSet
@@ -3459,14 +3460,33 @@ object DMConsEstoque: TDMConsEstoque
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'select v.ID_PRODUTO, v.NOME_PRODUTO , v.REFERENCIA,'#13#10'sum(v.QTDRE' +
-      'STANTE) QTDRESTANTE, sum(v.vlr_total) VLR_TOTAL, v.UNIDADE,'#13#10'v.N' +
-      'OME_COMBINACAO, v.TAMANHO, v.DESC_TIPO_SPED'#13#10'from vestoque_de_te' +
-      'rc v'#13#10'where v.DATA <= :DATA AND'#13#10'      V.FILIAL = :FILIAL'#13#10'group' +
-      ' by V.ID_PRODUTO, V.NOME_PRODUTO, V.REFERENCIA, V.UNIDADE, V.nom' +
-      'e_combinacao,'#13#10'v.DESC_TIPO_SPED, V.TAMANHO'#13#10
+      'select aux.*, ROUND(ROUND(AUX.VLR_TOTAL / AUX.QTD,5) * AUX.QTDRE' +
+      'STANTE,2) VLR_TOTAL_RESTANTE'#13#10'from ('#13#10'select v.ID_PRODUTO, v.NOM' +
+      'E_PRODUTO , v.REFERENCIA,'#13#10'sum(v.QTDRESTANTE) QTDRESTANTE_ATUAL,' +
+      #13#10'SUM('#13#10'V.qtd - coalesce((select sum(NDEV.QTD)'#13#10'                ' +
+      '    from vndevolvida ndev'#13#10'                      where ndev.id_n' +
+      'te = V.ID and ndev.item_nte = V.item'#13#10'                       and' +
+      ' NDEV.data <= :DATA),0)'#13#10'- coalesce((select sum(BDEV.qtd) from b' +
+      'aixa_nfdevolvida BDEV'#13#10'             where Bdev.id_nota = V.id an' +
+      'd BDEV.item_nota = V.item'#13#10'               and Bdev.dt_baixa <= :' +
+      'DATA ),0))'#13#10'QTDRESTANTE, SUM(V.qtd) QTD,'#13#10'sum(v.vlr_total) VLR_T' +
+      'OTAL, v.UNIDADE,'#13#10'v.NOME_COMBINACAO, v.TAMANHO, v.DESC_TIPO_SPED' +
+      #13#10#13#10'from vestoque_de_terc v'#13#10'where v.DATA <= :DATA'#13#10'      AND V.' +
+      'FILIAL = :FILIAL'#13#10'group by V.ID_PRODUTO, V.NOME_PRODUTO, V.REFER' +
+      'ENCIA, V.UNIDADE, V.nome_combinacao,'#13#10'v.DESC_TIPO_SPED, V.TAMANH' +
+      'O) aux'#13#10'WHERE ROUND(AUX.QTDRESTANTE,4) > 0'#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
       item
         DataType = ftDate
         Name = 'DATA'
@@ -3502,6 +3522,7 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_De_TercQTDRESTANTE: TFloatField
       FieldName = 'QTDRESTANTE'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_De_TercVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
@@ -3528,6 +3549,15 @@ object DMConsEstoque: TDMConsEstoque
       FieldName = 'NOME_PRODUTO'
       Size = 100
     end
+    object cdsEstoque_De_TercQTDRESTANTE_ATUAL: TFloatField
+      FieldName = 'QTDRESTANTE_ATUAL'
+    end
+    object cdsEstoque_De_TercQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsEstoque_De_TercVLR_TOTAL_RESTANTE: TFloatField
+      FieldName = 'VLR_TOTAL_RESTANTE'
+    end
   end
   object dsEstoque_De_Terc: TDataSource
     DataSet = cdsEstoque_De_Terc
@@ -3538,14 +3568,34 @@ object DMConsEstoque: TDMConsEstoque
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'select V.ID_PRODUTO, V.nome_produto, V.REFERENCIA,'#13#10'sum(V.QTDRES' +
-      'TANTE) QTDRESTANTE, sum(V.vlr_total) VLR_TOTAL, V.UNIDADE,'#13#10'V.NO' +
-      'ME_COMBINACAO, V.TAMANHO, V.DESC_TIPO_SPED'#13#10'from vestoque_em_ter' +
-      'c V'#13#10'where V.data <= :DATA AND'#13#10'      V.FILIAL = :FILIAL'#13#10'group ' +
-      'by V.ID_PRODUTO, V.nome_produto, V.REFERENCIA, V.UNIDADE,'#13#10'V.NOM' +
-      'E_COMBINACAO, V.TAMANHO, V.DESC_TIPO_SPED'#13#10
+      'SELECT AUX.*, ROUND(ROUND(AUX.VLR_TOTAL / AUX.QTD,5) * AUX.QTDRE' +
+      'STANTE,2) VLR_TOTAL_RESTANTE'#13#10'FROM('#13#10'select V.ID_PRODUTO, V.nome' +
+      '_produto, V.REFERENCIA,'#13#10'sum(V.QTDRESTANTE) QTDRESTANTE_ATUAL, S' +
+      'UM(V.qtd) QTD,'#13#10'SUM(V.QTD - coalesce((select sum(NDEV.QTD)'#13#10'    ' +
+      '                from notafiscal_ndevolvida ndev'#13#10'               ' +
+      '     inner join notafiscal nf2 on ndev.id = nf2.id'#13#10'            ' +
+      '         where ndev.id_nte = V.id and ndev.item_nte = V.item'#13#10'  ' +
+      '                     and nf2.dtemissao <= :DATA),0)'#13#10'- coalesce(' +
+      '(select sum(BDEV.qtd) from baixa_nfdevolvida BDEV'#13#10'             ' +
+      'where Bdev.id_nota = V.id and BDEV.item_nota = V.item'#13#10'         ' +
+      '      and Bdev.dt_baixa <= :DATA ),0))'#13#10'QTDRESTANTE, sum(V.vlr_t' +
+      'otal) VLR_TOTAL, V.UNIDADE,'#13#10'V.NOME_COMBINACAO, V.TAMANHO, V.DES' +
+      'C_TIPO_SPED'#13#10'from vestoque_em_terc V'#13#10'where V.data <= :DATA AND'#13 +
+      #10'      V.FILIAL = :FILIAL'#13#10'group by V.ID_PRODUTO, V.nome_produto' +
+      ', V.REFERENCIA, V.UNIDADE,'#13#10'V.NOME_COMBINACAO, V.TAMANHO, V.DESC' +
+      '_TIPO_SPED) AUX'#13#10'WHERE AUX.QTDRESTANTE > 0'#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
       item
         DataType = ftDate
         Name = 'DATA'
@@ -3558,12 +3608,12 @@ object DMConsEstoque: TDMConsEstoque
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 992
-    Top = 537
+    Top = 513
   end
   object dspEstoque_Em_Terc: TDataSetProvider
     DataSet = sdsEstoque_Em_Terc
     Left = 1032
-    Top = 537
+    Top = 513
   end
   object cdsEstoque_Em_Terc: TClientDataSet
     Aggregates = <>
@@ -3572,7 +3622,7 @@ object DMConsEstoque: TDMConsEstoque
     ProviderName = 'dspEstoque_Em_Terc'
     OnCalcFields = cdsBalanco_VeiCalcFields
     Left = 1080
-    Top = 537
+    Top = 513
     object cdsEstoque_Em_TercID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
     end
@@ -3607,11 +3657,20 @@ object DMConsEstoque: TDMConsEstoque
       FieldName = 'NOME_PRODUTO'
       Size = 100
     end
+    object cdsEstoque_Em_TercQTDRESTANTE_ATUAL: TFloatField
+      FieldName = 'QTDRESTANTE_ATUAL'
+    end
+    object cdsEstoque_Em_TercQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsEstoque_Em_TercVLR_TOTAL_RESTANTE: TFloatField
+      FieldName = 'VLR_TOTAL_RESTANTE'
+    end
   end
   object dsEstoque_Em_Terc: TDataSource
     DataSet = cdsEstoque_Em_Terc
     Left = 1112
-    Top = 537
+    Top = 513
   end
   object frxEstoque_Mov: TfrxDBDataset
     UserName = 'frxEstoque_Mov'
@@ -3784,15 +3843,34 @@ object DMConsEstoque: TDMConsEstoque
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'select V.ID_PRODUTO, V.NOME_PRODUTO, V.REFERENCIA,'#13#10'sum(V.QTDRES' +
-      'TANTE) QTDRESTANTE, sum(V.vlr_total) VLR_TOTAL, V.UNIDADE,'#13#10'V.NO' +
-      'ME_COMBINACAO, V.ID_TERCEIRO, V.NOME_TERCEIRO,'#13#10'V.TAMANHO, V.DES' +
-      'C_TIPO_SPED'#13#10'from vestoque_DE_terc V'#13#10'where V.data <= :DATA AND'#13 +
-      #10'      V.FILIAL = :FILIAL'#13#10'group by V.ID_PRODUTO, V.NOME_PRODUTO' +
-      ', V.REFERENCIA, V.UNIDADE, V.nome_combinacao,'#13#10'V.desc_tipo_sped,' +
-      ' V.id_terceiro, V.nome_terceiro, V.TAMANHO'#13#10#13#10
+      'select aux.*, ROUND(ROUND(AUX.VLR_TOTAL / AUX.QTD,5) * AUX.QTDRE' +
+      'STANTE,2) VLR_TOTAL_RESTANTE'#13#10'from ('#13#10'select v.ID_PRODUTO, v.NOM' +
+      'E_PRODUTO , v.REFERENCIA,'#13#10'sum(v.QTDRESTANTE) QTDRESTANTE_ATUAL,' +
+      #13#10'SUM('#13#10'V.qtd - coalesce((select sum(NDEV.QTD)'#13#10'                ' +
+      '    from vndevolvida ndev'#13#10'                      where ndev.id_n' +
+      'te = V.ID and ndev.item_nte = V.item'#13#10'                       and' +
+      ' NDEV.data <= :DATA),0)'#13#10'- coalesce((select sum(BDEV.qtd) from b' +
+      'aixa_nfdevolvida BDEV'#13#10'             where Bdev.id_nota = V.id an' +
+      'd BDEV.item_nota = V.item'#13#10'               and Bdev.dt_baixa <= :' +
+      'DATA ),0))'#13#10'QTDRESTANTE, SUM(V.qtd) QTD,'#13#10'sum(v.vlr_total) VLR_T' +
+      'OTAL, v.UNIDADE,'#13#10'v.NOME_COMBINACAO, v.TAMANHO, v.DESC_TIPO_SPED' +
+      ', v.id_terceiro, v.nome_terceiro'#13#10#13#10'from vestoque_de_terc v'#13#10'whe' +
+      're v.DATA <= :DATA'#13#10'      AND V.FILIAL = :FILIAL'#13#10'group by V.ID_' +
+      'PRODUTO, V.NOME_PRODUTO, V.REFERENCIA, V.UNIDADE, V.nome_combina' +
+      'cao,'#13#10'v.DESC_TIPO_SPED, V.TAMANHO, v.id_terceiro, v.nome_terceir' +
+      'o) aux'#13#10'WHERE ROUND(AUX.QTDRESTANTE,4) > 0'#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
       item
         DataType = ftDate
         Name = 'DATA'
@@ -3861,6 +3939,15 @@ object DMConsEstoque: TDMConsEstoque
       FieldName = 'TAMANHO'
       Size = 10
     end
+    object cdsEstoque_De_Terc_PesQTDRESTANTE_ATUAL: TFloatField
+      FieldName = 'QTDRESTANTE_ATUAL'
+    end
+    object cdsEstoque_De_Terc_PesQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsEstoque_De_Terc_PesVLR_TOTAL_RESTANTE: TFloatField
+      FieldName = 'VLR_TOTAL_RESTANTE'
+    end
   end
   object dsEstoque_De_Terc_Pes: TDataSource
     DataSet = cdsEstoque_De_Terc_Pes
@@ -3871,15 +3958,35 @@ object DMConsEstoque: TDMConsEstoque
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'select V.ID_PRODUTO, V.NOME_PRODUTO, V.REFERENCIA,'#13#10'sum(V.QTDRES' +
-      'TANTE) QTDRESTANTE, sum(V.vlr_total) VLR_TOTAL, V.UNIDADE,'#13#10'V.NO' +
-      'ME_COMBINACAO, V.ID_TERCEIRO, V.NOME_TERCEIRO,'#13#10'V.TAMANHO, V.DES' +
-      'C_TIPO_SPED'#13#10'from vestoque_em_terc V'#13#10'where V.data <= :DATA AND'#13 +
-      #10'      V.FILIAL = :FILIAL'#13#10'group by V.ID_PRODUTO, V.NOME_PRODUTO' +
-      ', V.REFERENCIA, V.UNIDADE, V.nome_combinacao,'#13#10'V.desc_tipo_sped,' +
-      ' V.id_terceiro, V.nome_terceiro, V.TAMANHO'#13#10#13#10
+      'SELECT AUX.*, ROUND(ROUND(AUX.VLR_TOTAL / AUX.QTD,5) * AUX.QTDRE' +
+      'STANTE,2) VLR_TOTAL_RESTANTE'#13#10'FROM('#13#10'select V.ID_PRODUTO, V.nome' +
+      '_produto, V.REFERENCIA,'#13#10'sum(V.QTDRESTANTE) QTDRESTANTE_ATUAL, S' +
+      'UM(V.qtd) QTD,'#13#10'SUM(V.QTD - coalesce((select sum(NDEV.QTD)'#13#10'    ' +
+      '                from notafiscal_ndevolvida ndev'#13#10'               ' +
+      '     inner join notafiscal nf2 on ndev.id = nf2.id'#13#10'            ' +
+      '         where ndev.id_nte = V.id and ndev.item_nte = V.item'#13#10'  ' +
+      '                     and nf2.dtemissao <= :DATA),0)'#13#10'- coalesce(' +
+      '(select sum(BDEV.qtd) from baixa_nfdevolvida BDEV'#13#10'             ' +
+      'where Bdev.id_nota = V.id and BDEV.item_nota = V.item'#13#10'         ' +
+      '      and Bdev.dt_baixa <= :DATA ),0))'#13#10'QTDRESTANTE, sum(V.vlr_t' +
+      'otal) VLR_TOTAL, V.UNIDADE,'#13#10'V.NOME_COMBINACAO, V.TAMANHO, V.DES' +
+      'C_TIPO_SPED, V.ID_TERCEIRO, V.nome_terceiro'#13#10'from vestoque_em_te' +
+      'rc V'#13#10'where V.data <= :DATA AND'#13#10'      V.FILIAL = :FILIAL'#13#10'group' +
+      ' by V.ID_PRODUTO, V.nome_produto, V.REFERENCIA, V.UNIDADE,'#13#10'V.NO' +
+      'ME_COMBINACAO, V.TAMANHO, V.DESC_TIPO_SPED, V.ID_TERCEIRO, V.nom' +
+      'e_terceiro) AUX'#13#10'WHERE AUX.QTDRESTANTE > 0'#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DATA'
+        ParamType = ptInput
+      end
       item
         DataType = ftDate
         Name = 'DATA'
@@ -3892,12 +3999,12 @@ object DMConsEstoque: TDMConsEstoque
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 992
-    Top = 590
+    Top = 566
   end
   object dspEstoque_Em_Terc_Pes: TDataSetProvider
     DataSet = sdsEstoque_Em_Terc_Pes
     Left = 1032
-    Top = 590
+    Top = 566
   end
   object cdsEstoque_Em_Terc_Pes: TClientDataSet
     Aggregates = <>
@@ -3906,7 +4013,7 @@ object DMConsEstoque: TDMConsEstoque
     ProviderName = 'dspEstoque_Em_Terc_Pes'
     OnCalcFields = cdsBalanco_VeiCalcFields
     Left = 1080
-    Top = 590
+    Top = 566
     object cdsEstoque_Em_Terc_PesID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
     end
@@ -3948,10 +4055,19 @@ object DMConsEstoque: TDMConsEstoque
       FixedChar = True
       Size = 30
     end
+    object cdsEstoque_Em_Terc_PesQTDRESTANTE_ATUAL: TFloatField
+      FieldName = 'QTDRESTANTE_ATUAL'
+    end
+    object cdsEstoque_Em_Terc_PesQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsEstoque_Em_Terc_PesVLR_TOTAL_RESTANTE: TFloatField
+      FieldName = 'VLR_TOTAL_RESTANTE'
+    end
   end
   object dsEstoque_Em_Terc_Pes: TDataSource
     DataSet = cdsEstoque_Em_Terc_Pes
     Left = 1112
-    Top = 590
+    Top = 566
   end
 end

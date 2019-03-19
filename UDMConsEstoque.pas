@@ -627,6 +627,18 @@ type
     cdsEstoque_Em_Terc_PesDESC_TIPO_SPED: TStringField;
     cdsEstoque_De_TercNOME_PRODUTO: TStringField;
     cdsEstoque_Em_TercNOME_PRODUTO: TStringField;
+    cdsEstoque_De_TercQTDRESTANTE_ATUAL: TFloatField;
+    cdsEstoque_De_TercQTD: TFloatField;
+    cdsEstoque_De_Terc_PesQTDRESTANTE_ATUAL: TFloatField;
+    cdsEstoque_De_Terc_PesQTD: TFloatField;
+    cdsEstoque_De_TercVLR_TOTAL_RESTANTE: TFloatField;
+    cdsEstoque_De_Terc_PesVLR_TOTAL_RESTANTE: TFloatField;
+    cdsEstoque_Em_TercQTDRESTANTE_ATUAL: TFloatField;
+    cdsEstoque_Em_TercQTD: TFloatField;
+    cdsEstoque_Em_TercVLR_TOTAL_RESTANTE: TFloatField;
+    cdsEstoque_Em_Terc_PesQTDRESTANTE_ATUAL: TFloatField;
+    cdsEstoque_Em_Terc_PesQTD: TFloatField;
+    cdsEstoque_Em_Terc_PesVLR_TOTAL_RESTANTE: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
