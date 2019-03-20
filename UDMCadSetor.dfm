@@ -404,6 +404,11 @@ object DmCadSetor: TDmCadSetor
       FieldName = 'ESTOQUE_DT_ES'
       Size = 1
     end
+    object sdsProcessoCONTROLE_MAQUINA: TStringField
+      FieldName = 'CONTROLE_MAQUINA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspProcesso: TDataSetProvider
     DataSet = sdsProcesso
@@ -525,6 +530,11 @@ object DmCadSetor: TDmCadSetor
     end
     object cdsProcessoESTOQUE_DT_ES: TStringField
       FieldName = 'ESTOQUE_DT_ES'
+      Size = 1
+    end
+    object cdsProcessoCONTROLE_MAQUINA: TStringField
+      FieldName = 'CONTROLE_MAQUINA'
+      FixedChar = True
       Size = 1
     end
   end

@@ -1083,6 +1083,18 @@ object frmCadProcesso: TfrmCadProcesso
             'E'
             'S')
         end
+        object DBCheckBox9: TDBCheckBox
+          Left = 376
+          Top = 192
+          Width = 281
+          Height = 17
+          Caption = 'Controle Por M'#225'quina'
+          DataField = 'CONTROLE_MAQUINA'
+          DataSource = DmCadSetor.dsProcesso
+          TabOrder = 17
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
       end
     end
   end
