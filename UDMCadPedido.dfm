@@ -4746,25 +4746,26 @@ object DMCadPedido: TDMCadPedido
       '_Total_Calc,'#13#10'(pi.vlr_desconto + pi.vlr_descontorateio) Vlr_Desc' +
       'onto_Calc,'#13#10'(pro.pesobruto * pi.qtd_caixa) peso_varejo, PT.ID_MA' +
       'TERIAL,'#13#10'PT.ID_TIPO_MATERIAL, TMAT.NOME NOME_TIPO_MATERIAL, PT.E' +
-      'SPESSURA, PT.DENSIDADE, PT.ALTURA_CORTE, PT.LARGURA_CORTE,'#13#10#13#10'CA' +
-      'SE'#13#10'  WHEN (PLOTE.LOCALIZACAO IS NOT NULL) AND (PLOTE.LOCALIZACA' +
-      'O <> '#39#39') THEN PLOTE.LOCALIZACAO'#13#10'  WHEN (PRO.LOCALIZACAO IS NOT ' +
-      'NULL) AND (PRO.LOCALIZACAO <> '#39#39') THEN PRO.LOCALIZACAO'#13#10'  ELSE N' +
-      'ULL'#13#10'  END LOCALIZACAO,'#13#10'case '#13#10'  WHEN PI.TIPO_OS = '#39'OC'#39' THEN PI' +
-      '.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'OP'#39' THEN PI.TIPO_OS'#13#10'  WHEN PI.TI' +
-      'PO_OS = '#39'RE'#39' THEN PI.TIPO_OS'#13#10'  ELSE '#39#39#13#10'  END DESC_TIPO_OS'#13#10#13#10'F' +
-      'ROM PEDIDO_ITEM PI'#13#10'LEFT JOIN PRODUTO PRO ON (PI.ID_PRODUTO = PR' +
-      'O.ID)'#13#10'LEFT JOIN MARCA ON (PRO.ID_MARCA = MARCA.ID)'#13#10'LEFT JOIN P' +
-      'EDIDO_ITEM_TIPO PT ON (PI.ID = PT.ID AND PI.ITEM = PT.ITEM)'#13#10'LEF' +
-      'T JOIN TAB_NCM NCM ON (PRO.ID_NCM = NCM.ID)'#13#10'LEFT JOIN COMBINACA' +
-      'O COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JOIN PRODUTO_TAM PTAM ON (' +
-      'PI.id_produto = PTAM.id AND PI.tamanho = PTAM.tamanho)'#13#10'LEFT JOI' +
-      'N PESSOA ATE ON (PI.id_atelier = ATE.CODIGO )'#13#10'LEFT JOIN PRODUTO' +
-      '_LOTE PLOTE ON (PI.ID_PRODUTO = PLOTE.ID AND PI.NUM_LOTE_CONTROL' +
-      'E = PLOTE.NUM_LOTE_CONTROLE)'#13#10'LEFT JOIN TIPO_MATERIAL TMAT ON (P' +
-      'T.ID_TIPO_MATERIAL = TMAT.ID)'#13#10'WHERE PI.ID = :ID'#13#10'AND ((PI.TIPO_' +
-      'ACESSORIO = '#39'N'#39') OR (PI.TIPO_ACESSORIO IS NULL))'#13#10' AND (PI.QTD >' +
-      ' 0)'
+      'SPESSURA, PT.DENSIDADE, PT.ALTURA_CORTE, PT.LARGURA_CORTE,MP.NOM' +
+      'E NOME_ACABAMENTO,'#13#10#13#10'CASE'#13#10'  WHEN (PLOTE.LOCALIZACAO IS NOT NUL' +
+      'L) AND (PLOTE.LOCALIZACAO <> '#39#39') THEN PLOTE.LOCALIZACAO'#13#10'  WHEN ' +
+      '(PRO.LOCALIZACAO IS NOT NULL) AND (PRO.LOCALIZACAO <> '#39#39') THEN P' +
+      'RO.LOCALIZACAO'#13#10'  ELSE NULL'#13#10'  END LOCALIZACAO,'#13#10'case '#13#10'  WHEN P' +
+      'I.TIPO_OS = '#39'OC'#39' THEN PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'OP'#39' THEN ' +
+      'PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'RE'#39' THEN PI.TIPO_OS'#13#10'  ELSE '#39#39#13 +
+      #10'  END DESC_TIPO_OS'#13#10#13#10'FROM PEDIDO_ITEM PI'#13#10'LEFT JOIN PRODUTO PR' +
+      'O ON (PI.ID_PRODUTO = PRO.ID)'#13#10'LEFT JOIN MARCA ON (PRO.ID_MARCA ' +
+      '= MARCA.ID)'#13#10'LEFT JOIN PEDIDO_ITEM_TIPO PT ON (PI.ID = PT.ID AND' +
+      ' PI.ITEM = PT.ITEM)'#13#10'LEFT JOIN TAB_NCM NCM ON (PRO.ID_NCM = NCM.' +
+      'ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JO' +
+      'IN PRODUTO_TAM PTAM ON (PI.id_produto = PTAM.id AND PI.tamanho =' +
+      ' PTAM.tamanho)'#13#10'LEFT JOIN PESSOA ATE ON (PI.id_atelier = ATE.COD' +
+      'IGO )'#13#10'LEFT JOIN PRODUTO_LOTE PLOTE ON (PI.ID_PRODUTO = PLOTE.ID' +
+      ' AND PI.NUM_LOTE_CONTROLE = PLOTE.NUM_LOTE_CONTROLE)'#13#10'LEFT JOIN ' +
+      'TIPO_MATERIAL TMAT ON (PT.ID_TIPO_MATERIAL = TMAT.ID)'#13#10'LEFT JOIN' +
+      ' MATRIZ_PRECO MP ON MP.ID = PT.ID_ACABAMENTO'#13#10'WHERE PI.ID = :ID'#13 +
+      #10'AND ((PI.TIPO_ACESSORIO = '#39'N'#39') OR (PI.TIPO_ACESSORIO IS NULL))'#13 +
+      #10' AND (PI.QTD > 0)'
     MaxBlobSize = -1
     Params = <
       item
@@ -5348,6 +5349,10 @@ object DMCadPedido: TDMCadPedido
       FieldKind = fkCalculated
       FieldName = 'COD_BARRAS'
       Calculated = True
+    end
+    object cdsPedidoImp_ItensNOME_ACABAMENTO: TStringField
+      FieldName = 'NOME_ACABAMENTO'
+      Size = 30
     end
   end
   object dsPedidoImp_Itens: TDataSource
@@ -10484,7 +10489,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43339.742338449100000000
+    ReportOptions.LastChange = 43544.421642939810000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -10886,7 +10891,8 @@ object DMCadPedido: TDMCadPedido
       'DESC_TIPO_OS=DESC_TIPO_OS'
       'ALTURA_CORTE=ALTURA_CORTE'
       'LARGURA_CORTE=LARGURA_CORTE'
-      'COD_BARRAS=COD_BARRAS')
+      'COD_BARRAS=COD_BARRAS'
+      'NOME_ACABAMENTO=NOME_ACABAMENTO')
     DataSource = dsPedidoImp_Itens
     BCDToCurrency = False
     Left = 905

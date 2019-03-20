@@ -3382,6 +3382,7 @@ type
     cdsPedido_ConsultaCNPJ_CPF: TStringField;
     qParametros_PedDTENTREGA_ZERADA_ORC: TStringField;
     cdsAcabamentoCALCULA_MEDIDAS: TStringField;
+    cdsPedidoImp_ItensNOME_ACABAMENTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
