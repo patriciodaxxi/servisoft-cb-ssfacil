@@ -3383,6 +3383,7 @@ type
     qParametros_PedDTENTREGA_ZERADA_ORC: TStringField;
     cdsAcabamentoCALCULA_MEDIDAS: TStringField;
     cdsPedidoImp_ItensNOME_ACABAMENTO: TStringField;
+    qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
