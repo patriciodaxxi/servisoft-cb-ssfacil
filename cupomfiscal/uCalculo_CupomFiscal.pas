@@ -98,13 +98,12 @@ begin
                     fDMCupomFiscal.cdsCupom_ItensID_CSTICMS.AsInteger,'');
   //Cálculo tributos federais, estaduais, e municipais cfe. disposto na lei 12.741/12
   prc_Calcular_Tributos_Transparencia(fDMCupomFiscal);
-//  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency + fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat)); juca 21/03/19
-//  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency
-//                                                          + fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency
-//                                                          + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat)); juca 21/03/19
-  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency + fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
-  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency +
-                                                          fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency));
+
+  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency + fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
+  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency
+                                                          + fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency
+                                                          + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
+
   //26/02/2019
   prc_Calcular_ST_Ret(fDMCupomFiscal);
   prc_Calcular_ICMS_Efet(fDMCupomFiscal);
