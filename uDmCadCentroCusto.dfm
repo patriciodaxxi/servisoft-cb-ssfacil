@@ -84,6 +84,10 @@ object dmCadCentroCusto: TdmCadCentroCusto
       FieldName = 'CEP'
       Size = 9
     end
+    object sdsCentroCustoNUM_CONTRATO: TStringField
+      FieldName = 'NUM_CONTRATO'
+      Size = 30
+    end
   end
   object dspCentroCusto: TDataSetProvider
     DataSet = sdsCentroCusto
@@ -162,6 +166,10 @@ object dmCadCentroCusto: TdmCadCentroCusto
     object cdsCentroCustoCEP: TStringField
       FieldName = 'CEP'
       Size = 9
+    end
+    object cdsCentroCustoNUM_CONTRATO: TStringField
+      FieldName = 'NUM_CONTRATO'
+      Size = 30
     end
   end
   object dsCentroCusto: TDataSource

@@ -58,6 +58,8 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     Label13: TLabel;
     RxDBLookupCombo3: TRxDBLookupCombo;
+    Label14: TLabel;
+    DBEdit9: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
