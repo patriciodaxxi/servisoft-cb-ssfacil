@@ -13973,8 +13973,8 @@ object DMCadPedido: TDMCadPedido
       '      AND TIPO = :TIPO'
       '      AND POSICAO = :POSICAO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1168
-    Top = 530
+    Left = 1288
+    Top = 66
     object qFilial_RelID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14520,8 +14520,8 @@ object DMCadPedido: TDMCadPedido
       'FROM PARAMETROS_USUARIO'
       'WHERE USUARIO = :USUARIO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1232
-    Top = 554
+    Left = 1296
+    Top = 34
     object qParametros_UsuarioID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -15178,8 +15178,8 @@ object DMCadPedido: TDMCadPedido
       'LEFT JOIN COMBINACAO COR'
       'ON AUX.ID_COR_MAT = COR.ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1240
-    Top = 594
+    Left = 1296
+    Top = 234
     object qConsumoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -16172,6 +16172,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField
+      FieldName = 'MATERIAL_FORNECEDOR_OC'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros_Geral: TSQLQuery
     MaxBlobSize = -1
@@ -17026,8 +17031,8 @@ object DMCadPedido: TDMCadPedido
       'FROM GRUPO_PESSOA'
       'WHERE ID = :ID1')
     SQLConnection = dmDatabase.scoDados
-    Left = 1168
-    Top = 565
+    Left = 1280
+    Top = 373
     object qGrupoPessoaNOME: TStringField
       FieldName = 'NOME'
       Size = 40
@@ -17614,8 +17619,8 @@ object DMCadPedido: TDMCadPedido
       '      AND TIPO = :TIPO'
       'ORDER BY POSICAO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1202
-    Top = 615
+    Left = 1298
+    Top = 295
     object qFilial_Relatorio_MenuID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -17704,5 +17709,156 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'COD_CST'
       Size = 3
     end
+  end
+  object sdsTriCCusto: TSQLDataSet
+    CommandText = 
+      'SELECT P.ID, P.num_pedido, P.pedido_cliente, P.id_cliente_triang' +
+      'ular,'#13#10'TRI.NOME NOME_TRIANGULAR, TRI.endereco END_TRI, TRI.compl' +
+      'emento_end COMPL_TRI,'#13#10'TRI.bairro BAIRRO_TRI, TRI.cidade CID_TRI' +
+      ', TRI.cep CEP_TRI, TRI.uf UF_TRI,'#13#10'TRI.num_end NUM_END_TRI,'#13#10'CC.' +
+      'descricao NOME_CCUSTO, CC.endereco END_CCUSTO, CC.complemento_en' +
+      'd COMPL_CCUSTO,'#13#10'CC.bairro BAIRRO_CCUSTO, CC.ID_CIDADE ID_CIDADE' +
+      '_CCUSTO, CC.cep CEP_CCUSTO,'#13#10'CC.uf UF_CCUSTO, CC.num_end NUM_END' +
+      '_CCUSTO, CID.NOME CID_CCUSTO'#13#10'FROM PEDIDO P'#13#10'LEFT JOIN PESSOA TR' +
+      'I'#13#10'ON P.id_cliente_triangular = TRI.CODIGO'#13#10'LEFT JOIN CENTROCUST' +
+      'O CC'#13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CC.ID_CI' +
+      'DADE = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 1176
+    Top = 560
+  end
+  object dspTriCCusto: TDataSetProvider
+    DataSet = sdsTriCCusto
+    Left = 1208
+    Top = 560
+  end
+  object cdsTriCCusto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTriCCusto'
+    Left = 1240
+    Top = 560
+    object cdsTriCCustoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTriCCustoNUM_PEDIDO: TIntegerField
+      FieldName = 'NUM_PEDIDO'
+    end
+    object cdsTriCCustoPEDIDO_CLIENTE: TStringField
+      FieldName = 'PEDIDO_CLIENTE'
+    end
+    object cdsTriCCustoID_CLIENTE_TRIANGULAR: TIntegerField
+      FieldName = 'ID_CLIENTE_TRIANGULAR'
+    end
+    object cdsTriCCustoNOME_TRIANGULAR: TStringField
+      FieldName = 'NOME_TRIANGULAR'
+      Size = 60
+    end
+    object cdsTriCCustoEND_TRI: TStringField
+      FieldName = 'END_TRI'
+      Size = 60
+    end
+    object cdsTriCCustoCOMPL_TRI: TStringField
+      FieldName = 'COMPL_TRI'
+      Size = 60
+    end
+    object cdsTriCCustoBAIRRO_TRI: TStringField
+      FieldName = 'BAIRRO_TRI'
+      Size = 30
+    end
+    object cdsTriCCustoCID_TRI: TStringField
+      FieldName = 'CID_TRI'
+      Size = 40
+    end
+    object cdsTriCCustoCEP_TRI: TStringField
+      FieldName = 'CEP_TRI'
+      Size = 10
+    end
+    object cdsTriCCustoUF_TRI: TStringField
+      FieldName = 'UF_TRI'
+      FixedChar = True
+      Size = 2
+    end
+    object cdsTriCCustoNUM_END_TRI: TStringField
+      FieldName = 'NUM_END_TRI'
+    end
+    object cdsTriCCustoNOME_CCUSTO: TStringField
+      FieldName = 'NOME_CCUSTO'
+      Size = 50
+    end
+    object cdsTriCCustoEND_CCUSTO: TStringField
+      FieldName = 'END_CCUSTO'
+      Size = 60
+    end
+    object cdsTriCCustoCOMPL_CCUSTO: TStringField
+      FieldName = 'COMPL_CCUSTO'
+      Size = 40
+    end
+    object cdsTriCCustoBAIRRO_CCUSTO: TStringField
+      FieldName = 'BAIRRO_CCUSTO'
+      Size = 30
+    end
+    object cdsTriCCustoID_CIDADE_CCUSTO: TIntegerField
+      FieldName = 'ID_CIDADE_CCUSTO'
+    end
+    object cdsTriCCustoCEP_CCUSTO: TStringField
+      FieldName = 'CEP_CCUSTO'
+      Size = 9
+    end
+    object cdsTriCCustoUF_CCUSTO: TStringField
+      FieldName = 'UF_CCUSTO'
+      Size = 2
+    end
+    object cdsTriCCustoNUM_END_CCUSTO: TStringField
+      FieldName = 'NUM_END_CCUSTO'
+      Size = 15
+    end
+    object cdsTriCCustoCID_CCUSTO: TStringField
+      FieldName = 'CID_CCUSTO'
+      Size = 40
+    end
+  end
+  object dsTriCCusto: TDataSource
+    DataSet = cdsTriCCusto
+    Left = 1272
+    Top = 560
+  end
+  object frxTriCCusto: TfrxDBDataset
+    UserName = 'frxTriCCusto'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'NUM_PEDIDO=NUM_PEDIDO'
+      'PEDIDO_CLIENTE=PEDIDO_CLIENTE'
+      'ID_CLIENTE_TRIANGULAR=ID_CLIENTE_TRIANGULAR'
+      'NOME_TRIANGULAR=NOME_TRIANGULAR'
+      'END_TRI=END_TRI'
+      'COMPL_TRI=COMPL_TRI'
+      'BAIRRO_TRI=BAIRRO_TRI'
+      'CID_TRI=CID_TRI'
+      'CEP_TRI=CEP_TRI'
+      'UF_TRI=UF_TRI'
+      'NUM_END_TRI=NUM_END_TRI'
+      'NOME_CCUSTO=NOME_CCUSTO'
+      'END_CCUSTO=END_CCUSTO'
+      'COMPL_CCUSTO=COMPL_CCUSTO'
+      'BAIRRO_CCUSTO=BAIRRO_CCUSTO'
+      'ID_CIDADE_CCUSTO=ID_CIDADE_CCUSTO'
+      'CEP_CCUSTO=CEP_CCUSTO'
+      'UF_CCUSTO=UF_CCUSTO'
+      'NUM_END_CCUSTO=NUM_END_CCUSTO'
+      'CID_CCUSTO=CID_CCUSTO')
+    DataSource = dsTriCCusto
+    BCDToCurrency = False
+    Left = 1288
+    Top = 564
   end
 end

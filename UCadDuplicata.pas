@@ -2036,7 +2036,9 @@ begin
     if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (fDMCadDuplicata.cdsDuplicata_ConsultaID_DESCONTADA.AsInteger > 0) and (fDMCadDuplicata.cdsDuplicata_ConsultaCONFIRMA_PGTO.AsString <> 'S') then
     begin
       fDMCadDuplicata.prc_Localizar(fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
-      if not (fDMCadDuplicata.cdsDuplicata.IsEmpty) and (StrToFloat(FormatFloat('0.00', fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat)) <= 0) and (fDMCadDuplicata.cdsDuplicataCONFIRMA_PGTO.AsString <> 'S') then
+      //if not (fDMCadDuplicata.cdsDuplicata.IsEmpty) and (StrToFloat(FormatFloat('0.00', fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat)) <= 0) and (fDMCadDuplicata.cdsDuplicataCONFIRMA_PGTO.AsString <> 'S') then
+      //21/03/2019
+      if not (fDMCadDuplicata.cdsDuplicata.IsEmpty) and (fDMCadDuplicata.cdsDuplicataCONFIRMA_PGTO.AsString <> 'S') then
       begin
         fDMCadDuplicata.cdsDuplicata.Edit;
         fDMCadDuplicata.cdsDuplicataCONFIRMA_PGTO.AsString := 'N';

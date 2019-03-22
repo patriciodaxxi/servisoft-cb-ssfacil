@@ -732,8 +732,8 @@ begin
   end;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
-     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+  if ((fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S')) and (fDMCadPedido.qParametros_ProdMATERIAL_FORNECEDOR_OC.AsString = 'S') then
     uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
@@ -796,8 +796,8 @@ begin
   end;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
-     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+  if ((fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S')) and (fDMCadPedido.qParametros_ProdMATERIAL_FORNECEDOR_OC.AsString = 'S') then
     uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
@@ -1303,8 +1303,8 @@ begin
   prc_Posiciona_Pedido;
 
   //02/06/2016  incluido a filial
-  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
-     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+  if ((fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S')) and (fDMCadPedido.qParametros_ProdMATERIAL_FORNECEDOR_OC.AsString = 'S') then
     uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
   //****************
 
@@ -1588,8 +1588,8 @@ begin
   if (fDMCadPedido.Tag = 1) then
   begin
     //02/06/2016  incluido a filial
-    if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
-       (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+  if ((fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S')) and (fDMCadPedido.qParametros_ProdMATERIAL_FORNECEDOR_OC.AsString = 'S') then
       uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
     //****************
     if (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) then

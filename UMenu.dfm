@@ -4076,6 +4076,36 @@ object fMenu: TfMenu
         GroupName = 'Consulta Produto / Clientes Sem Vendas'
       end
       item
+        FormName = 'frmCadProduto_Imp'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Produtos Impostos'
+      end
+      item
+        FormName = 'frmCadProduto_Imp'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Produtos Impostos'
+      end
+      item
+        FormName = 'frmCadMovProdST'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Movimento Produto ST'
+      end
+      item
+        FormName = 'frmCadMovProdST'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Movimento Produto ST'
+      end
+      item
+        FormName = 'frmCadMovProdST'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Movimento Produto ST'
+      end
+      item
         FormName = 'frmCadProduto'
         CompName = 'btnInserir'
         Caption = 'Inserir'
@@ -4130,34 +4160,10 @@ object fMenu: TfMenu
         GroupName = 'Produtos'
       end
       item
-        FormName = 'frmCadProduto_Imp'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Produtos Impostos'
-      end
-      item
-        FormName = 'frmCadProduto_Imp'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Produtos Impostos'
-      end
-      item
-        FormName = 'frmCadMovProdST'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Movimento Produto ST'
-      end
-      item
-        FormName = 'frmCadMovProdST'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Movimento Produto ST'
-      end
-      item
-        FormName = 'frmCadMovProdST'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Movimento Produto ST'
+        FormName = 'frmCadProduto'
+        CompName = 'btnRecalcular_Mat'
+        Caption = 'Recalcular'
+        GroupName = 'Produtos'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

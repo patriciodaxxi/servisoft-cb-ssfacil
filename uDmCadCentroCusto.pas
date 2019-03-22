@@ -62,6 +62,44 @@ type
     cdsConsultaNOME_AUX: TStringField;
     frxReport1: TfrxReport;
     frxCentroCusto: TfrxDBDataset;
+    sdsCentroCustoENDERECO: TStringField;
+    sdsCentroCustoNUM_END: TStringField;
+    sdsCentroCustoBAIRRO: TStringField;
+    sdsCentroCustoID_CIDADE: TIntegerField;
+    sdsCentroCustoUF: TStringField;
+    sdsCentroCustoCOMPLEMENTO_END: TStringField;
+    sdsCentroCustoCEP: TStringField;
+    cdsCentroCustoENDERECO: TStringField;
+    cdsCentroCustoNUM_END: TStringField;
+    cdsCentroCustoBAIRRO: TStringField;
+    cdsCentroCustoID_CIDADE: TIntegerField;
+    cdsCentroCustoUF: TStringField;
+    cdsCentroCustoCOMPLEMENTO_END: TStringField;
+    cdsCentroCustoCEP: TStringField;
+    sdsCidade: TSQLDataSet;
+    dspCidade: TDataSetProvider;
+    cdsCidade: TClientDataSet;
+    cdsCidadeID: TIntegerField;
+    cdsCidadeNOME: TStringField;
+    cdsCidadeUF: TStringField;
+    cdsCidadeCODMUNICIPIO: TStringField;
+    cdsCidadeID_PROVEDOR: TIntegerField;
+    dsCidade: TDataSource;
+    dsUF: TDataSource;
+    cdsUF: TClientDataSet;
+    cdsUFUF: TStringField;
+    cdsUFPERC_ICMS: TFloatField;
+    cdsUFIDPAIS: TIntegerField;
+    cdsUFCODUF: TStringField;
+    cdsUFPERC_ICMS_INTERNO: TFloatField;
+    cdsUFQTD_DIGITOS_IE: TIntegerField;
+    cdsUFACEITA_ISENTO: TStringField;
+    dspUF: TDataSetProvider;
+    sdsUF: TSQLDataSet;
+    qParametros_Fin: TSQLQuery;
+    qParametros_FinUSA_END_CCUSTO: TStringField;
+    sdsCentroCustoNUM_CONTRATO: TStringField;
+    cdsCentroCustoNUM_CONTRATO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCentroCustoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -75,11 +113,14 @@ type
     vMsgCentroCusto : String;
     ctCommand : String;
     ctConsulta : String;
+    ctCidade : String;
 
     procedure prc_Localizar(ID : Integer); //-1 = Inclusão
     procedure prc_Inserir;
     procedure prc_Gravar;
     procedure prc_Excluir;
+
+    procedure prc_Abrir_Cidade(UF: String);
 
   end;
 
@@ -153,6 +194,10 @@ var
 begin
   ctCommand  := sdsCentroCusto.CommandText;
   ctConsulta := sdsConsulta.CommandText;
+  ctCidade   := sdsCidade.CommandText;
+
+  qParametros_Fin.Open;
+  cdsUF.Open;
 
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
@@ -192,6 +237,15 @@ procedure TdmCadCentroCusto.DoLogAdditionalValues(ATableName: string;
   var AValues: TArrayLogData; var UserName: string);
 begin
   UserName := vUsuario;
+end;
+
+procedure TdmCadCentroCusto.prc_Abrir_Cidade(UF: String);
+begin
+  cdsCidade.Close;
+  sdsCidade.CommandText := ctCidade;
+  if (trim(UF) <> '') and (trim(UF) <> 'EX') then
+    sdsCidade.CommandText := sdsCidade.CommandText + ' WHERE UF = ' + QuotedStr(UF);
+  cdsCidade.Open;
 end;
 
 end.
