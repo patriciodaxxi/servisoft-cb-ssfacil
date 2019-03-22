@@ -1,6 +1,6 @@
 object frmConsEstoque_Mov: TfrmConsEstoque_Mov
-  Left = 189
-  Top = 87
+  Left = 221
+  Top = 81
   BorderStyle = bsSingle
   Caption = 'Consulta Estoque Movimento'
   ClientHeight = 518

@@ -639,6 +639,9 @@ type
     cdsEstoque_Em_Terc_PesQTDRESTANTE_ATUAL: TFloatField;
     cdsEstoque_Em_Terc_PesQTD: TFloatField;
     cdsEstoque_Em_Terc_PesVLR_TOTAL_RESTANTE: TFloatField;
+    cdsEstoque_MovCODIGO_CCUSTO: TStringField;
+    cdsEstoque_MovCODIGO_SUPERIOR: TStringField;
+    cdsEstoque_MovDESC_SUPERIOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

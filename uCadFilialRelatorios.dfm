@@ -1,8 +1,8 @@
 object frmCadFilialRelatorios: TfrmCadFilialRelatorios
-  Left = 386
-  Top = 224
-  Width = 608
-  Height = 194
+  Left = 416
+  Top = 281
+  Width = 656
+  Height = 226
   Caption = 'frmCadFilialRelatorios'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -57,8 +57,8 @@ object frmCadFilialRelatorios: TfrmCadFilialRelatorios
   end
   object Panel1: TPanel
     Left = 0
-    Top = 120
-    Width = 592
+    Top = 151
+    Width = 640
     Height = 36
     Align = alBottom
     Color = 8404992
@@ -224,5 +224,17 @@ object frmCadFilialRelatorios: TfrmCadFilialRelatorios
     DataField = 'DESCRICAO'
     DataSource = DMCadFilial.dsFilialRelatorios
     TabOrder = 4
+  end
+  object DBCheckBox1: TDBCheckBox
+    Left = 104
+    Top = 117
+    Width = 113
+    Height = 17
+    Caption = 'Gerar Tamanho'
+    DataField = 'GERAR_TAMANHO'
+    DataSource = DMCadFilial.dsFilialRelatorios
+    TabOrder = 6
+    ValueChecked = 'S'
+    ValueUnchecked = 'N'
   end
 end

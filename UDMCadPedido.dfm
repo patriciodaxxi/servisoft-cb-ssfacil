@@ -17612,11 +17612,13 @@ object DMCadPedido: TDMCadPedido
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT *'
+      
+        'SELECT ID,ITEM,TIPO,CAMINHO,POSICAO,COALESCE(DESCRICAO,'#39'Personal' +
+        'izado '#39' || posicao)DESCRICAO, GERAR_TAMANHO'
       'FROM FILIAL_RELATORIOS'
       'WHERE ID = :ID'
       '      AND TIPO = :TIPO'
-      '     AND DESCRICAO <> '#39#39)
+      'ORDER BY POSICAO')
     SQLConnection = dmDatabase.scoDados
     Left = 1298
     Top = 295
@@ -17641,6 +17643,11 @@ object DMCadPedido: TDMCadPedido
     object qFilial_Relatorio_MenuDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
       Size = 70
+    end
+    object qFilial_Relatorio_MenuGERAR_TAMANHO: TStringField
+      FieldName = 'GERAR_TAMANHO'
+      FixedChar = True
+      Size = 1
     end
   end
   object qParametros_Ser: TSQLQuery
