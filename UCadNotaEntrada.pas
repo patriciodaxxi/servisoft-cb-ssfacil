@@ -577,7 +577,7 @@ begin
       SMDBGrid2.Columns[i].Visible := False;
   end;
   btnConsultar.Click;
-  RxDBLookupCombo4.Visible    := (fDMCadNotaFiscal.qParametros_GeralUSA_TRIANGULAR.AsString = 'S'); 
+  RxDBLookupCombo4.Visible    := (fDMCadNotaFiscal.qParametros_GeralUSA_TRIANGULAR.AsString = 'S');
   Label2.Visible              := (fDMCadNotaFiscal.qParametros_GeralUSA_TRIANGULAR.AsString = 'S');
   Label62.Visible             := (fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S');
   rxdbConta_Orcamento.Visible := (fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S');
@@ -792,7 +792,9 @@ begin
   end;
 
   //02/06/2016  incluido a filial
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
+  if ((fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S')) and
+     (fDMCadNotaFiscal.qParametros_ProdMATERIAL_FORNECEDOR_OC.AsString = 'S') then
     fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(True);
   //********************
 
@@ -823,8 +825,10 @@ begin
         if (fDMCadNotaFiscal.qParametros_GeralUSAR_PESSOA_FILIAL.AsString = 'S') then
           fDMCadNotaFiscal.prc_Abrir_cdsCliente(vTipo_Reg,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger);
       //04/08/2016
-      if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-        fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente;
+      if ((fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or
+         (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S')) and
+         (fDMCadNotaFiscal.qParametros_ProdMATERIAL_FORNECEDOR_OC.AsString = 'S') then
+        fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(True);
     end;
   end;
 end;
@@ -1823,9 +1827,10 @@ begin
     MessageDlg('***  Fornecedor não informado!', mtError, [mbOk], 0);
     Exit;
   end;
-  fDMCadNotaFiscal.cdsProduto.Close;
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente
+  if ((fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S')) and
+     (fDMCadNotaFiscal.qParametros_ProdMATERIAL_FORNECEDOR_OC.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(True)
   else
     fDMCadNotaFiscal.cdsProduto.Open;
 

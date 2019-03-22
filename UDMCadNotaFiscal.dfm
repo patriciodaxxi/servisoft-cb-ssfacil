@@ -13285,6 +13285,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField
+      FieldName = 'MATERIAL_FORNECEDOR_OC'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros_Geral: TSQLQuery
     MaxBlobSize = -1
