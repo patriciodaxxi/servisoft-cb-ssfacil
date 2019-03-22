@@ -24,7 +24,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
     Top = 0
     Width = 755
     Height = 555
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -88,6 +88,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Expanded = False
             FieldName = 'TIPO'
             Title.Caption = 'Tipo'
+            Width = 64
             Visible = True
           end
           item
@@ -107,12 +108,14 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Expanded = False
             FieldName = 'APROPRIACAO'
             Title.Caption = 'Apropria'#231#227'o'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'SUPERIOR'
             Title.Caption = 'Superior'
+            Width = 64
             Visible = True
           end
           item

@@ -389,7 +389,7 @@ end;
 
 procedure TfrmCadCentroCusto.DBEdit10Enter(Sender: TObject);
 begin
-  fDMCadPessoa.cdsPESSOACNPJ_CPF.EditMask := '00.000.000/0000-00';
+  fDMCadCentroCusto.cdsCentroCustoCNPJ.EditMask := '00.000.000/0000-00';
 end;
 
 procedure TfrmCadCentroCusto.DBEdit10Exit(Sender: TObject);
