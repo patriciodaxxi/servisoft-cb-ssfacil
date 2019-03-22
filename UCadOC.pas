@@ -174,6 +174,13 @@ type
     Label36: TLabel;
     cbxOpcao: TComboBox;
     Label67: TLabel;
+    Personalizados1: TMenuItem;
+    N1: TMenuItem;
+    OrdemdeCompra11: TMenuItem;
+    Label37: TLabel;
+    DBEdit11: TDBEdit;
+    Label40: TLabel;
+    CurrencyEdit1: TCurrencyEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -237,6 +244,7 @@ type
     procedure btnConsReservaClick(Sender: TObject);
     procedure btnCopiarPedidoClick(Sender: TObject);
     procedure btnDescontoClick(Sender: TObject);
+    procedure OrdemdeCompra11Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -544,6 +552,11 @@ begin
   vData          := EncodeDate(YearOf(Date),MonthOf(Date),01);
   DateEdit1.Date := vData;
 
+  Label37.Visible  := (fDMCadPedido.qParametros_OCUSA_NUM_DOC.AsString = 'S');
+  DBEdit11.Visible := (fDMCadPedido.qParametros_OCUSA_NUM_DOC.AsString = 'S');
+
+  Label40.Visible       := (fDMCadPedido.qParametros_OCUSA_NUM_DOC.AsString = 'S');
+  CurrencyEdit1.Visible := (fDMCadPedido.qParametros_OCUSA_NUM_DOC.AsString = 'S');
 end;
 
 procedure TfrmCadOC.prc_Consultar(ID: Integer);
@@ -583,7 +596,11 @@ begin
       0: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND COALESCE(PED.FATURADO,''N'') <> ' + QuotedStr('S');
       1: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.FATURADO = ' + QuotedStr('S');
     end;
-  end;  
+
+    if CurrencyEdit1.AsInteger > 0 then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.NUM_DOC = ' + IntToStr(CurrencyEdit1.AsInteger);
+
+  end;
   fDMCadPedido.cdsPedido_Consulta.Open;
 end;
 
@@ -1318,6 +1335,13 @@ begin
   fDMCadPedido.sdsPedidoImp_Itens.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ConsultaID.AsInteger;
   fDMCadPedido.cdsPedidoImp_Itens.Open;
 
+  if fDMCadPedido.qParametros_FinUSA_END_CCUSTO.AsString = 'S' then
+  begin
+    fDMCadPedido.cdsTriCCusto.Close;
+    fDMCadPedido.sdsTriCCusto.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ConsultaID.AsInteger;
+    fDMCadPedido.cdsTriCCusto.Open;
+  end;
+
   vEmail_Fortes := fDMCadPedido.cdsPedidoImpEMAIL_COMPRAS_FORN.AsString;
   if (trim(fDMCadPedido.cdsPedidoImpEMAIL_COMPRAS.AsString) <> '') then
     vEmail_Fortes := fDMCadPedido.cdsPedidoImpEMAIL_COMPRAS.AsString;
@@ -1325,6 +1349,9 @@ begin
   vEmail_Fortes_Corpo   := 'Em anexo Ordem de Compra  N° ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
   vTipo_Config_Email    := 4;
   vFilial               := fDMCadPedido.cdsPedidoImpFILIAL.AsInteger;
+
+  if Tipo_Imp = 'P' then //Personalizado
+    exit;
 
   if fDMCadPedido.cdsParametrosTIPO_REL_OC.AsString = 'PE' then
   begin
@@ -1610,6 +1637,29 @@ begin
 
   FreeAndNil(ffrmCadPedido_Desconto);
   btnCalcular_ValoresClick(Sender);
+end;
+
+procedure TfrmCadOC.OrdemdeCompra11Click(Sender: TObject);
+var
+  vArq : String;
+begin
+  prc_Controle_Imp('P');
+
+  fDMCadPedido.qFilial_Rel.Close;
+  fDMCadPedido.qFilial_Rel.ParamByName('ID').AsInteger      := fDMCadPedido.cdsPedidoImpFILIAL.AsInteger;
+  fDMCadPedido.qFilial_Rel.ParamByName('TIPO').AsInteger    := 3;
+  fDMCadPedido.qFilial_Rel.ParamByName('POSICAO').AsInteger := 1;
+  fDMCadPedido.qFilial_Rel.Open;
+  vArq := fDMCadPedido.qFilial_RelCAMINHO.AsString;
+
+  if FileExists(vArq) then
+    fDMCadPedido.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadPedido.frxReport1.ShowReport;
 end;
 
 end.
