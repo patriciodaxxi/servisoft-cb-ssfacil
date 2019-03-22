@@ -1535,6 +1535,11 @@ object DMCadFilial: TDMCadFilial
       FieldName = 'DESCRICAO'
       Size = 70
     end
+    object sdsFilialRelatoriosGERAR_TAMANHO: TStringField
+      FieldName = 'GERAR_TAMANHO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsFilialRelatorios: TClientDataSet
     Aggregates = <>
@@ -1573,6 +1578,11 @@ object DMCadFilial: TDMCadFilial
     object cdsFilialRelatoriosDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
       Size = 70
+    end
+    object cdsFilialRelatoriosGERAR_TAMANHO: TStringField
+      FieldName = 'GERAR_TAMANHO'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsFilialRelatorios: TDataSource
