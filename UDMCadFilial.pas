@@ -611,6 +611,8 @@ type
     cdsFilialUSA_ENVIO_ST_RET: TStringField;
     sdsFilialCALCULAR_ICMS_EFET: TStringField;
     cdsFilialCALCULAR_ICMS_EFET: TStringField;
+    sdsFilialRelatoriosGERAR_TAMANHO: TStringField;
+    cdsFilialRelatoriosGERAR_TAMANHO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);

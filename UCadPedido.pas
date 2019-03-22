@@ -4243,12 +4243,12 @@ begin
   x := StringReplace(TMenuItem(Sender).Caption,'&','',[rfReplaceAll]);
   fDMCadPedido.qFilial_Relatorio_Menu.Locate('DESCRICAO',x,[loCaseInsensitive]);
 
-  fDMCadPedido.vNum_Rel_Fast := 1;
+  fDMCadPedido.vNum_Rel_Fast := fDMCadPedido.qFilial_Relatorio_MenuPOSICAO.AsInteger;
   fDMCadPedido.vTipo_Rel_Ped := '';
   fDMCadPedido.vImpPreco     := ckImpPreco.Checked;
   prc_Posiciona_Imp;
 
-  email := TValidaEmail.create(fDMCadPedido.cdsPedidoImpFILIAL.AsInteger,'3');
+  email := TValidaEmail.create(fDMCadPedido.cdsPedidoImpFILIAL.AsInteger,'1');
   try
     pdf := TfrxPDFExport.Create(nil);
     enviar := TfrxMailExport.Create(nil);
@@ -4261,7 +4261,7 @@ begin
     enviar.ExportFilter := pdf;
     enviar.FilterDesc := 'PDF por e-mail';
     enviar.FromMail := email.email;
-    enviar.FromCompany := 'russimar@terra.com.br';
+    enviar.FromCompany := email.email;
     enviar.Subject := 'Pedido nº: ' + IntToStr(fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsInteger);
     enviar.UseIniFile := False;
     enviar.ShowExportDialog := False;
@@ -4269,7 +4269,7 @@ begin
     FreeAndNil(email);
   end;
 
-  prc_Monta_Impressao(False);//Color Shoes
+  prc_Monta_Impressao(fDMCadPedido.qFilial_Relatorio_MenuGERAR_TAMANHO.AsString = 'S');//Color Shoes
 
 end;
 

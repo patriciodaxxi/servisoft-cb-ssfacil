@@ -3383,6 +3383,7 @@ type
     qParametros_PedDTENTREGA_ZERADA_ORC: TStringField;
     cdsAcabamentoCALCULA_MEDIDAS: TStringField;
     cdsPedidoImp_ItensNOME_ACABAMENTO: TStringField;
+    qFilial_Relatorio_MenuGERAR_TAMANHO: TStringField;
     qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField;
     sdsTriCCusto: TSQLDataSet;
     dspTriCCusto: TDataSetProvider;
@@ -3410,6 +3411,7 @@ type
     cdsTriCCustoNUM_END_CCUSTO: TStringField;
     cdsTriCCustoCID_CCUSTO: TStringField;
     frxTriCCusto: TfrxDBDataset;
+    cdsTriCCustoNUM_CONTRATO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

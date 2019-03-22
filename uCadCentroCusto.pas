@@ -58,6 +58,17 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     Label13: TLabel;
     RxDBLookupCombo3: TRxDBLookupCombo;
+    Label14: TLabel;
+    DBEdit9: TDBEdit;
+    Label15: TLabel;
+    DBEdit10: TDBEdit;
+    Label16: TLabel;
+    DBEdit11: TDBEdit;
+    DBEdit12: TDBEdit;
+    Label54: TLabel;
+    DBEdit13: TDBEdit;
+    Label17: TLabel;
+    DBEdit14: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -80,6 +91,8 @@ type
     procedure RzPageControl1Change(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure RxDBLookupCombo3Exit(Sender: TObject);
+    procedure DBEdit10Enter(Sender: TObject);
+    procedure DBEdit10Exit(Sender: TObject);
   private
     { Private declarations }
     fDMCadCentroCusto: TDMCadCentroCusto;
@@ -372,6 +385,24 @@ end;
 procedure TfrmCadCentroCusto.RxDBLookupCombo3Exit(Sender: TObject);
 begin
   fDMCadCentroCusto.prc_Abrir_Cidade(RxDBLookupCombo3.Text)
+end;
+
+procedure TfrmCadCentroCusto.DBEdit10Enter(Sender: TObject);
+begin
+  fDMCadPessoa.cdsPESSOACNPJ_CPF.EditMask := '00.000.000/0000-00';
+end;
+
+procedure TfrmCadCentroCusto.DBEdit10Exit(Sender: TObject);
+var
+  vTexto : String;
+begin
+  vTexto := Monta_Numero(DBEdit10.Text,0);
+  if not ValidaCNPJ(DBEdit10.Text) then
+  begin
+    ShowMessage('CNPJ incorreto!');
+    fDMCadCentroCusto.cdsCentroCustoCNPJ.Clear;
+    DBEdit10.SetFocus;
+  end;
 end;
 
 end.

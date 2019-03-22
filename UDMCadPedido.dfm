@@ -4012,6 +4012,7 @@ object DMCadPedido: TDMCadPedido
     Top = 285
   end
   object cdsPedidoImp: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -10488,8 +10489,8 @@ object DMCadPedido: TDMCadPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43544.421642939810000000
+    ReportOptions.CreateDate = 42052.436473541700000000
+    ReportOptions.LastChange = 43546.400803344900000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -17611,11 +17612,13 @@ object DMCadPedido: TDMCadPedido
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT *'
+      
+        'SELECT ID,ITEM,TIPO,CAMINHO,POSICAO,COALESCE(DESCRICAO,'#39'Personal' +
+        'izado '#39' || posicao)DESCRICAO, GERAR_TAMANHO'
       'FROM FILIAL_RELATORIOS'
       'WHERE ID = :ID'
       '      AND TIPO = :TIPO'
-      '     AND DESCRICAO <> '#39#39)
+      'ORDER BY POSICAO')
     SQLConnection = dmDatabase.scoDados
     Left = 1298
     Top = 295
@@ -17640,6 +17643,11 @@ object DMCadPedido: TDMCadPedido
     object qFilial_Relatorio_MenuDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
       Size = 70
+    end
+    object qFilial_Relatorio_MenuGERAR_TAMANHO: TStringField
+      FieldName = 'GERAR_TAMANHO'
+      FixedChar = True
+      Size = 1
     end
   end
   object qParametros_Ser: TSQLQuery
@@ -17712,10 +17720,10 @@ object DMCadPedido: TDMCadPedido
       'descricao NOME_CCUSTO, CC.endereco END_CCUSTO, CC.complemento_en' +
       'd COMPL_CCUSTO,'#13#10'CC.bairro BAIRRO_CCUSTO, CC.ID_CIDADE ID_CIDADE' +
       '_CCUSTO, CC.cep CEP_CCUSTO,'#13#10'CC.uf UF_CCUSTO, CC.num_end NUM_END' +
-      '_CCUSTO, CID.NOME CID_CCUSTO'#13#10'FROM PEDIDO P'#13#10'LEFT JOIN PESSOA TR' +
-      'I'#13#10'ON P.id_cliente_triangular = TRI.CODIGO'#13#10'LEFT JOIN CENTROCUST' +
-      'O CC'#13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CC.ID_CI' +
-      'DADE = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
+      '_CCUSTO, CID.NOME CID_CCUSTO, CC.NUM_CONTRATO'#13#10'FROM PEDIDO P'#13#10'LE' +
+      'FT JOIN PESSOA TRI'#13#10'ON P.id_cliente_triangular = TRI.CODIGO'#13#10'LEF' +
+      'T JOIN CENTROCUSTO CC'#13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE' +
+      ' CID'#13#10'ON CC.ID_CIDADE = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -17818,6 +17826,10 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'CID_CCUSTO'
       Size = 40
     end
+    object cdsTriCCustoNUM_CONTRATO: TStringField
+      FieldName = 'NUM_CONTRATO'
+      Size = 30
+    end
   end
   object dsTriCCusto: TDataSource
     DataSet = cdsTriCCusto
@@ -17848,7 +17860,8 @@ object DMCadPedido: TDMCadPedido
       'CEP_CCUSTO=CEP_CCUSTO'
       'UF_CCUSTO=UF_CCUSTO'
       'NUM_END_CCUSTO=NUM_END_CCUSTO'
-      'CID_CCUSTO=CID_CCUSTO')
+      'CID_CCUSTO=CID_CCUSTO'
+      'NUM_CONTRATO=NUM_CONTRATO')
     DataSource = dsTriCCusto
     BCDToCurrency = False
     Left = 1288

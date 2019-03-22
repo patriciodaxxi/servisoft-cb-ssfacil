@@ -98,6 +98,18 @@ type
     sdsUF: TSQLDataSet;
     qParametros_Fin: TSQLQuery;
     qParametros_FinUSA_END_CCUSTO: TStringField;
+    sdsCentroCustoNUM_CONTRATO: TStringField;
+    cdsCentroCustoNUM_CONTRATO: TStringField;
+    sdsCentroCustoCNPJ: TStringField;
+    sdsCentroCustoDDD: TIntegerField;
+    sdsCentroCustoFONE: TStringField;
+    sdsCentroCustoEMAIL: TStringField;
+    sdsCentroCustoCONTATO: TStringField;
+    cdsCentroCustoCNPJ: TStringField;
+    cdsCentroCustoDDD: TIntegerField;
+    cdsCentroCustoFONE: TStringField;
+    cdsCentroCustoEMAIL: TStringField;
+    cdsCentroCustoCONTATO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCentroCustoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
