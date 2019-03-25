@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_Dados
+        ActivePage = TS_NotaServico
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
