@@ -1,6 +1,6 @@
 object frmCadRecNF: TfrmCadRecNF
-  Left = 214
-  Top = 9
+  Left = 241
+  Top = 3
   Width = 954
   Height = 718
   Caption = 'Recibo NF'
@@ -22,8 +22,8 @@ object frmCadRecNF: TfrmCadRecNF
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 946
-    Height = 670
+    Width = 938
+    Height = 662
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -44,8 +44,8 @@ object frmCadRecNF: TfrmCadRecNF
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 119
-        Width = 942
-        Height = 511
+        Width = 934
+        Height = 503
         Align = alClient
         BorderStyle = bsNone
         Ctl3D = False
@@ -170,6 +170,7 @@ object frmCadRecNF: TfrmCadRecNF
             FieldName = 'TIPO_PRAZO'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Prazo'
+            Width = 64
             Visible = True
           end
           item
@@ -205,13 +206,14 @@ object frmCadRecNF: TfrmCadRecNF
             FieldName = 'USUARIO'
             Title.Alignment = taCenter
             Title.Caption = 'Usu'#225'rio'
+            Width = 64
             Visible = True
           end>
       end
       object pnlPesquisa: TPanel
         Left = 0
         Top = 34
-        Width = 942
+        Width = 934
         Height = 85
         Align = alTop
         Color = clSilver
@@ -406,8 +408,8 @@ object frmCadRecNF: TfrmCadRecNF
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 630
-        Width = 942
+        Top = 622
+        Width = 934
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -425,7 +427,7 @@ object frmCadRecNF: TfrmCadRecNF
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 942
+        Width = 934
         Height = 34
         Align = alTop
         Color = clSilver
@@ -803,7 +805,7 @@ object frmCadRecNF: TfrmCadRecNF
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 942
+        Width = 934
         Height = 35
         Align = alTop
         Color = 8404992
@@ -1029,7 +1031,7 @@ object frmCadRecNF: TfrmCadRecNF
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 942
+        Width = 934
         Height = 124
         Align = alTop
         Enabled = False
@@ -1037,7 +1039,7 @@ object frmCadRecNF: TfrmCadRecNF
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 940
+          Width = 932
           Height = 31
           Align = alTop
           Color = clSilver
@@ -1133,7 +1135,7 @@ object frmCadRecNF: TfrmCadRecNF
         object pnlCliente: TPanel
           Left = 1
           Top = 32
-          Width = 940
+          Width = 932
           Height = 91
           Align = alClient
           TabOrder = 1
@@ -1466,8 +1468,8 @@ object frmCadRecNF: TfrmCadRecNF
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 188
-        Width = 942
-        Height = 431
+        Width = 934
+        Height = 423
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -1485,8 +1487,8 @@ object frmCadRecNF: TfrmCadRecNF
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 60
-            Width = 938
-            Height = 348
+            Width = 930
+            Height = 340
             Align = alClient
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1678,7 +1680,7 @@ object frmCadRecNF: TfrmCadRecNF
           object pnlItem: TPanel
             Left = 0
             Top = 26
-            Width = 938
+            Width = 930
             Height = 34
             Align = alTop
             Color = clSilver
@@ -1911,7 +1913,7 @@ object frmCadRecNF: TfrmCadRecNF
           object pnlLocalEstoque: TPanel
             Left = 0
             Top = 0
-            Width = 938
+            Width = 930
             Height = 26
             Align = alTop
             Enabled = False
@@ -1955,8 +1957,8 @@ object frmCadRecNF: TfrmCadRecNF
           Color = clSilver
           Caption = 'Dados'
           DesignSize = (
-            938
-            408)
+            930
+            400)
           object Label3: TLabel
             Left = 24
             Top = 368
@@ -2638,8 +2640,8 @@ object frmCadRecNF: TfrmCadRecNF
       end
       object Panel10: TPanel
         Left = 0
-        Top = 619
-        Width = 942
+        Top = 611
+        Width = 934
         Height = 28
         Align = alBottom
         Color = clSilver
@@ -2725,7 +2727,7 @@ object frmCadRecNF: TfrmCadRecNF
       object Panel3: TPanel
         Left = 0
         Top = 159
-        Width = 942
+        Width = 934
         Height = 29
         Align = alTop
         Color = clSilver
@@ -2769,8 +2771,8 @@ object frmCadRecNF: TfrmCadRecNF
   end
   object StaticText2: TStaticText
     Left = 0
-    Top = 670
-    Width = 946
+    Top = 662
+    Width = 938
     Height = 17
     Align = alBottom
     Caption = 'F2 Consultar'
