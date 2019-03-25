@@ -7,6 +7,8 @@ uses
   SMDBGrid, RzTabs, NxCollection, NxEdit, StdCtrls, Mask, ToolEdit, RxLookup, ExtCtrls, UDMConsFat;
 
 type
+  tEnumTipo = (tpSintetico, tpAnalitico);
+type
   TfrmConsComprasServico = class(TForm)
     Panel1: TPanel;
     Label2: TLabel;
@@ -22,6 +24,8 @@ type
     Label1: TLabel;
     RxDBLookupCombo2: TRxDBLookupCombo;
     Label3: TLabel;
+    comboTipo: TComboBox;
+    Label4: TLabel;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -98,7 +102,12 @@ procedure TfrmConsComprasServico.btnImprimirClick(Sender: TObject);
 var
   vArq : String;
 begin
-  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Compras_Servico_Contabil.fr3';
+  case tEnumTipo(comboTipo.ItemIndex) of
+   tpSintetico : vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Compras_Servico_Contabil.fr3';
+   tpAnalitico : vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Compras_Servico_Contabil_Det.fr3';
+  end;
+
+//  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Compras_Servico_Contabil.fr3';
   if FileExists(vArq) then
     fDMConsFat.frxReport1.Report.LoadFromFile(vArq)
   else

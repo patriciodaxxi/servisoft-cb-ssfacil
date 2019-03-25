@@ -135,9 +135,27 @@ type
     cdsConsDataVLR_TOTAL_BRU: TFloatField;
     frxConsData: TfrxDBDataset;
     cdsConsDataVLR_TOTAL_LIQ: TFloatField;
+    sdsComprasServico_Item: TSQLDataSet;
+    dspComprasServico_Item: TDataSetProvider;
+    cdsComprasServico_Item: TClientDataSet;
+    dsComprasServico_Item: TDataSource;
+    cdsComprasServico_ItemID: TIntegerField;
+    cdsComprasServico_ItemITEM: TIntegerField;
+    cdsComprasServico_ItemID_PRODUTO: TIntegerField;
+    cdsComprasServico_ItemREFERENCIA: TStringField;
+    cdsComprasServico_ItemNOME: TStringField;
+    cdsComprasServico_ItemUNIDADE: TStringField;
+    cdsComprasServico_ItemQTD: TFloatField;
+    cdsComprasServico_ItemVLR_UNITARIO: TFloatField;
+    cdsComprasServico_ItemVLR_TOTAL: TFloatField;
+    cdsComprasServico_ItemTIPO_REGISTRO: TStringField;
+    cdsComprasServicosTIPO_REGISTRO: TStringField;
+    frxComprasServicoItem: TfrxDBDataset;
+    cdsComprasServicosID: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure frxReport1BeforePrint(Sender: TfrxReportComponent);
     procedure cdsComprasServicosCalcFields(DataSet: TDataSet);
+    procedure frxComprasServicoItemFirst(Sender: TObject);
   private
     { Private declarations }
   public
@@ -173,6 +191,14 @@ procedure TDMConsFat.cdsComprasServicosCalcFields(DataSet: TDataSet);
 begin
   if (cdsComprasServicosCONTA.AsString <> '') and (cdsComprasServicosNOME_CONTA.AsString <> '') then
     cdsComprasServicosCTA_CONTA.AsString := cdsComprasServicosCONTA.AsString + ' - ' + cdsComprasServicosNOME_CONTA.AsString;
+end;
+
+procedure TDMConsFat.frxComprasServicoItemFirst(Sender: TObject);
+begin
+  cdsComprasServico_Item.Close;
+  sdsComprasServico_Item.ParamByName('ID').asInteger := cdsComprasServicosID.asinteger;
+  sdsComprasServico_Item.ParamByName('TREG').AsString := cdsComprasServicosTIPO_REGISTRO.AsString;
+  cdsComprasServico_Item.Open;
 end;
 
 end.
