@@ -88,6 +88,25 @@ object dmCadCentroCusto: TdmCadCentroCusto
       FieldName = 'NUM_CONTRATO'
       Size = 30
     end
+    object sdsCentroCustoCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Size = 18
+    end
+    object sdsCentroCustoDDD: TIntegerField
+      FieldName = 'DDD'
+    end
+    object sdsCentroCustoFONE: TStringField
+      FieldName = 'FONE'
+      Size = 10
+    end
+    object sdsCentroCustoEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 150
+    end
+    object sdsCentroCustoCONTATO: TStringField
+      FieldName = 'CONTATO'
+      Size = 60
+    end
   end
   object dspCentroCusto: TDataSetProvider
     DataSet = sdsCentroCusto
@@ -170,6 +189,25 @@ object dmCadCentroCusto: TdmCadCentroCusto
     object cdsCentroCustoNUM_CONTRATO: TStringField
       FieldName = 'NUM_CONTRATO'
       Size = 30
+    end
+    object cdsCentroCustoCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Size = 18
+    end
+    object cdsCentroCustoDDD: TIntegerField
+      FieldName = 'DDD'
+    end
+    object cdsCentroCustoFONE: TStringField
+      FieldName = 'FONE'
+      Size = 10
+    end
+    object cdsCentroCustoEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 150
+    end
+    object cdsCentroCustoCONTATO: TStringField
+      FieldName = 'CONTATO'
+      Size = 60
     end
   end
   object dsCentroCusto: TDataSource

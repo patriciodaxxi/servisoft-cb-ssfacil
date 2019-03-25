@@ -3958,43 +3958,44 @@ object DMCadPedido: TDMCadPedido
       'FIL.CNPJ_CPF CNPJ_CPF_FILIAL, FIL.INSCR_EST INSCR_EST_FILIAL, FI' +
       'L.NUM_END NUM_END_FILIAL, FIL.ENDLOGO,'#13#10'       FIL.NOME_INTERNO ' +
       'NOME_INTERNO_FIL,FIL.EMAIL EMAIL_FIL, FIL.DDDFAX DDDFAX_FIL, FIL' +
-      '.FAX FAX_FIL,'#13#10#13#10'       TRA.NOME NOME_TRA, TRA.ENDERECO END_TRA,' +
-      ' TRA.NUM_END NUM_END_TRA, TRA.BAIRRO BAIRRO_TRA, TRA.CIDADE CIDA' +
-      'DE_TRA,'#13#10'       TRA.UF UF_TRA, TRA.DDDFONE1 DDD_TRA, TRA.TELEFON' +
-      'E1 FONE_TRA, TRA.DDDFAX DDD_FAX_TRA, TRA.FAX FAX_TRA,'#13#10'       TR' +
-      'A.CNPJ_CPF CNPJ_CPF_TRA, TRA.INSCR_EST INSCR_EST_TRA, TRA.CEP CE' +
-      'P_TRA,'#13#10#13#10'       RED.NOME NOME_RED, COND.NOME NOME_CONDPGTO,'#13#10'  ' +
-      '     (PED.VLR_TOTAL + PED.VLR_DESCONTO) VLR_ITENS2, VEND.NOME NO' +
-      'ME_VENDEDOR, VEND.DDDFONE1 VENDEDOR_DDD,'#13#10'       VEND.TELEFONE1 ' +
-      'VENDEDOR_FONE, TRA.NOME NOME_TRANSPORTADORA, FUN.CODIGO ID_FUNCI' +
-      'ONARIO, FUN.NOME NOME_FUNCIONARIO,'#13#10'       FUN.EMAIL EMAIL_FUNCI' +
-      'ONARIO,'#13#10#13#10'       MAPA.NUM_MAPA, MAPA.NOME NOME_MAPA, ATE.NOME N' +
-      'OME_ATELIER, OPN.NOME NOME_OPERACAO, OPN.TIPO_NOTA,'#13#10'       GP.N' +
-      'OME NOME_GRUPO_PESSOA, CLI.IMP_COR_CLIENTE, CAST(PED.DDD AS VARC' +
-      'HAR(02)) DDD_PEDIDO, PED.FONE FONE_PEDIDO,'#13#10'       CLI.OBS_AVISO' +
-      ', CLI.MOSTRAR_AVISO, ATE.CNPJ_CPF CNPJ_CPF_ATELIER, ATE.PESSOA P' +
-      'ESSOA_ATELIER, CLI.NOME_CONTATO,'#13#10'       CASE'#13#10'         WHEN PED' +
-      '.ID_CLIENTE = (SELECT PA2.ID_CLIENTE_CONSUMIDOR'#13#10'               ' +
-      '                 FROM PARAMETROS PA2) THEN PED.NOME_CONSUMIDOR'#13#10 +
-      '         ELSE PED.NOME_CLIENTE'#13#10'       END NOME_CLIENTE2,'#13#10'     ' +
-      '  CASE'#13#10'         WHEN PED.TIPO_FRETE = '#39'1'#39' THEN '#39'1 Emitente'#39#13#10'  ' +
-      '       WHEN PED.TIPO_FRETE = '#39'2'#39' THEN '#39' 2 Destinat'#225'rio'#39#13#10'       ' +
-      '  WHEN PED.TIPO_FRETE = '#39'3'#39' THEN '#39' 3 Terceiros'#39#13#10'         WHEN P' +
-      'ED.TIPO_FRETE = '#39'4'#39' THEN '#39' 4 Transporte Pr'#243'prio por conta do Rem' +
-      'etente'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'5'#39' THEN '#39' 5 Transporte ' +
-      'Pr'#243'prio por conta do Destinat'#225'rio'#39#13#10'         WHEN PED.TIPO_FRETE' +
-      ' = '#39'9'#39' THEN '#39' 9 Sem Frete'#39#13#10'       END DESC_TIPO_FRETE'#13#10#13#10'FROM P' +
-      'EDIDO PED'#13#10'LEFT JOIN PESSOA CLI ON PED.ID_CLIENTE = CLI.CODIGO'#13#10 +
-      'INNER JOIN FILIAL FIL ON (PED.FILIAL = FIL.ID)'#13#10'LEFT JOIN PESSOA' +
-      ' TRA ON (PED.ID_TRANSPORTADORA = TRA.CODIGO)'#13#10'LEFT JOIN PESSOA R' +
-      'ED ON (PED.ID_REDESPACHO = RED.CODIGO)'#13#10'LEFT JOIN CONDPGTO COND ' +
-      'ON (PED.ID_CONDPGTO = COND.ID)'#13#10'LEFT JOIN PESSOA VEND ON (PED.ID' +
-      '_VENDEDOR = VEND.CODIGO)'#13#10'LEFT JOIN FUNCIONARIO FUN ON (PED.ID_F' +
-      'UNCIONARIO = FUN.CODIGO)'#13#10'LEFT JOIN MAPA_COMPRAS MAPA ON (PED.ID' +
-      '_MAPA = MAPA.ID)'#13#10'LEFT JOIN PESSOA ATE ON (PED.ID_ATELIER = ATE.' +
-      'CODIGO)'#13#10'LEFT JOIN OPERACAO_NOTA OPN ON (PED.ID_OPERACAO_NOTA = ' +
-      'OPN.ID)'#13#10'LEFT JOIN GRUPO_PESSOA GP ON PED.ID_GRUPO_PESSOA = GP.I' +
-      'D'#13#10'WHERE PED.ID = :ID'#13#10#13#10'  '
+      '.FAX FAX_FIL,'#13#10'       FIL.complemento_end COMPL_END_FILIAL,'#13#10#13#10' ' +
+      '      TRA.NOME NOME_TRA, TRA.ENDERECO END_TRA, TRA.NUM_END NUM_E' +
+      'ND_TRA, TRA.BAIRRO BAIRRO_TRA, TRA.CIDADE CIDADE_TRA,'#13#10'       TR' +
+      'A.UF UF_TRA, TRA.DDDFONE1 DDD_TRA, TRA.TELEFONE1 FONE_TRA, TRA.D' +
+      'DDFAX DDD_FAX_TRA, TRA.FAX FAX_TRA,'#13#10'       TRA.CNPJ_CPF CNPJ_CP' +
+      'F_TRA, TRA.INSCR_EST INSCR_EST_TRA, TRA.CEP CEP_TRA,'#13#10#13#10'       R' +
+      'ED.NOME NOME_RED, COND.NOME NOME_CONDPGTO,'#13#10'       (PED.VLR_TOTA' +
+      'L + PED.VLR_DESCONTO) VLR_ITENS2, VEND.NOME NOME_VENDEDOR, VEND.' +
+      'DDDFONE1 VENDEDOR_DDD,'#13#10'       VEND.TELEFONE1 VENDEDOR_FONE, TRA' +
+      '.NOME NOME_TRANSPORTADORA, FUN.CODIGO ID_FUNCIONARIO, FUN.NOME N' +
+      'OME_FUNCIONARIO,'#13#10'       FUN.EMAIL EMAIL_FUNCIONARIO,'#13#10#13#10'       ' +
+      'MAPA.NUM_MAPA, MAPA.NOME NOME_MAPA, ATE.NOME NOME_ATELIER, OPN.N' +
+      'OME NOME_OPERACAO, OPN.TIPO_NOTA,'#13#10'       GP.NOME NOME_GRUPO_PES' +
+      'SOA, CLI.IMP_COR_CLIENTE, CAST(PED.DDD AS VARCHAR(02)) DDD_PEDID' +
+      'O, PED.FONE FONE_PEDIDO,'#13#10'       CLI.OBS_AVISO, CLI.MOSTRAR_AVIS' +
+      'O, ATE.CNPJ_CPF CNPJ_CPF_ATELIER, ATE.PESSOA PESSOA_ATELIER, CLI' +
+      '.NOME_CONTATO,'#13#10'       CASE'#13#10'         WHEN PED.ID_CLIENTE = (SEL' +
+      'ECT PA2.ID_CLIENTE_CONSUMIDOR'#13#10'                                F' +
+      'ROM PARAMETROS PA2) THEN PED.NOME_CONSUMIDOR'#13#10'         ELSE PED.' +
+      'NOME_CLIENTE'#13#10'       END NOME_CLIENTE2,'#13#10'       CASE'#13#10'         W' +
+      'HEN PED.TIPO_FRETE = '#39'1'#39' THEN '#39'1 Emitente'#39#13#10'         WHEN PED.TI' +
+      'PO_FRETE = '#39'2'#39' THEN '#39' 2 Destinat'#225'rio'#39#13#10'         WHEN PED.TIPO_FR' +
+      'ETE = '#39'3'#39' THEN '#39' 3 Terceiros'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'4' +
+      #39' THEN '#39' 4 Transporte Pr'#243'prio por conta do Remetente'#39#13#10'         ' +
+      'WHEN PED.TIPO_FRETE = '#39'5'#39' THEN '#39' 5 Transporte Pr'#243'prio por conta ' +
+      'do Destinat'#225'rio'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'9'#39' THEN '#39' 9 Se' +
+      'm Frete'#39#13#10'       END DESC_TIPO_FRETE'#13#10#13#10'FROM PEDIDO PED'#13#10'LEFT JO' +
+      'IN PESSOA CLI ON PED.ID_CLIENTE = CLI.CODIGO'#13#10'INNER JOIN FILIAL ' +
+      'FIL ON (PED.FILIAL = FIL.ID)'#13#10'LEFT JOIN PESSOA TRA ON (PED.ID_TR' +
+      'ANSPORTADORA = TRA.CODIGO)'#13#10'LEFT JOIN PESSOA RED ON (PED.ID_REDE' +
+      'SPACHO = RED.CODIGO)'#13#10'LEFT JOIN CONDPGTO COND ON (PED.ID_CONDPGT' +
+      'O = COND.ID)'#13#10'LEFT JOIN PESSOA VEND ON (PED.ID_VENDEDOR = VEND.C' +
+      'ODIGO)'#13#10'LEFT JOIN FUNCIONARIO FUN ON (PED.ID_FUNCIONARIO = FUN.C' +
+      'ODIGO)'#13#10'LEFT JOIN MAPA_COMPRAS MAPA ON (PED.ID_MAPA = MAPA.ID)'#13#10 +
+      'LEFT JOIN PESSOA ATE ON (PED.ID_ATELIER = ATE.CODIGO)'#13#10'LEFT JOIN' +
+      ' OPERACAO_NOTA OPN ON (PED.ID_OPERACAO_NOTA = OPN.ID)'#13#10'LEFT JOIN' +
+      ' GRUPO_PESSOA GP ON PED.ID_GRUPO_PESSOA = GP.ID'#13#10'WHERE PED.ID = ' +
+      ':ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -4012,6 +4013,7 @@ object DMCadPedido: TDMCadPedido
     Top = 285
   end
   object cdsPedidoImp: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -4706,6 +4708,10 @@ object DMCadPedido: TDMCadPedido
     object cdsPedidoImpFAX_FIL: TStringField
       FieldName = 'FAX_FIL'
       Size = 15
+    end
+    object cdsPedidoImpCOMPL_END_FILIAL: TStringField
+      FieldName = 'COMPL_END_FILIAL'
+      Size = 60
     end
   end
   object dsPedidoImp: TDataSource
@@ -10488,8 +10494,8 @@ object DMCadPedido: TDMCadPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43544.421642939810000000
+    ReportOptions.CreateDate = 42052.436473541700000000
+    ReportOptions.LastChange = 43546.606529490740000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -10681,7 +10687,8 @@ object DMCadPedido: TDMCadPedido
       'COMPL_END_CLIENTE=COMPL_END_CLIENTE'
       'EMAIL_FIL=EMAIL_FIL'
       'DDDFAX_FIL=DDDFAX_FIL'
-      'FAX_FIL=FAX_FIL')
+      'FAX_FIL=FAX_FIL'
+      'COMPL_END_FILIAL=COMPL_END_FILIAL')
     DataSource = dsPedidoImp
     BCDToCurrency = False
     Left = 824
@@ -14993,6 +15000,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_FinUSA_END_CCUSTO: TStringField
+      FieldName = 'USA_END_CCUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros_NFe: TSQLQuery
     MaxBlobSize = -1
@@ -16087,6 +16099,11 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_OCUSA_NOMEPROD_FORN_OC: TStringField
       FieldName = 'USA_NOMEPROD_FORN_OC'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_OCUSA_NUM_DOC: TStringField
+      FieldName = 'USA_NUM_DOC'
       FixedChar = True
       Size = 1
     end
@@ -17715,14 +17732,18 @@ object DMCadPedido: TDMCadPedido
       'SELECT P.ID, P.num_pedido, P.pedido_cliente, P.id_cliente_triang' +
       'ular,'#13#10'TRI.NOME NOME_TRIANGULAR, TRI.endereco END_TRI, TRI.compl' +
       'emento_end COMPL_TRI,'#13#10'TRI.bairro BAIRRO_TRI, TRI.cidade CID_TRI' +
-      ', TRI.cep CEP_TRI, TRI.uf UF_TRI,'#13#10'TRI.num_end NUM_END_TRI,'#13#10'CC.' +
-      'descricao NOME_CCUSTO, CC.endereco END_CCUSTO, CC.complemento_en' +
-      'd COMPL_CCUSTO,'#13#10'CC.bairro BAIRRO_CCUSTO, CC.ID_CIDADE ID_CIDADE' +
-      '_CCUSTO, CC.cep CEP_CCUSTO,'#13#10'CC.uf UF_CCUSTO, CC.num_end NUM_END' +
-      '_CCUSTO, CID.NOME CID_CCUSTO'#13#10'FROM PEDIDO P'#13#10'LEFT JOIN PESSOA TR' +
-      'I'#13#10'ON P.id_cliente_triangular = TRI.CODIGO'#13#10'LEFT JOIN CENTROCUST' +
-      'O CC'#13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CC.ID_CI' +
-      'DADE = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
+      ', TRI.cep CEP_TRI, TRI.uf UF_TRI,'#13#10'TRI.num_end NUM_END_TRI, TRI.' +
+      'nome_contato CONTATO_TRI, TRI.cnpj_cpf CNPJ_TRI,'#13#10'TRI.email_nfe ' +
+      'EMAL_TRI, TRI.dddfone1 DDD_TRI, TRI.telefone1 FONE_TRI,'#13#10'TRI.ins' +
+      'cr_est INSC_TRI,'#13#10'CC.descricao NOME_CCUSTO, CC.endereco END_CCUS' +
+      'TO, CC.complemento_end COMPL_CCUSTO,'#13#10'CC.bairro BAIRRO_CCUSTO, C' +
+      'C.ID_CIDADE ID_CIDADE_CCUSTO, CC.cep CEP_CCUSTO,'#13#10'CC.uf UF_CCUST' +
+      'O, CC.num_end NUM_END_CCUSTO, CID.NOME CID_CCUSTO, CC.NUM_CONTRA' +
+      'TO,'#13#10'CC.contato CONTATO_CCUSTO, CC.cnpj CNPJ_CCUSTO,'#13#10'CC.email E' +
+      'MAIL_CCUSTO, CC.ddd DDD_CCUSTO , CC.fone FONE_CCUSTO'#13#10'FROM PEDID' +
+      'O P'#13#10'LEFT JOIN PESSOA TRI'#13#10'ON P.id_atelier = TRI.CODIGO'#13#10'LEFT JO' +
+      'IN CENTROCUSTO CC'#13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE CID' +
+      #13#10'ON CC.ID_CIDADE = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -17825,6 +17846,51 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'CID_CCUSTO'
       Size = 40
     end
+    object cdsTriCCustoNUM_CONTRATO: TStringField
+      FieldName = 'NUM_CONTRATO'
+      Size = 30
+    end
+    object cdsTriCCustoCONTATO_TRI: TStringField
+      FieldName = 'CONTATO_TRI'
+      Size = 40
+    end
+    object cdsTriCCustoCNPJ_TRI: TStringField
+      FieldName = 'CNPJ_TRI'
+    end
+    object cdsTriCCustoEMAL_TRI: TStringField
+      FieldName = 'EMAL_TRI'
+      Size = 250
+    end
+    object cdsTriCCustoDDD_TRI: TIntegerField
+      FieldName = 'DDD_TRI'
+    end
+    object cdsTriCCustoFONE_TRI: TStringField
+      FieldName = 'FONE_TRI'
+      Size = 15
+    end
+    object cdsTriCCustoCONTATO_CCUSTO: TStringField
+      FieldName = 'CONTATO_CCUSTO'
+      Size = 60
+    end
+    object cdsTriCCustoCNPJ_CCUSTO: TStringField
+      FieldName = 'CNPJ_CCUSTO'
+      Size = 18
+    end
+    object cdsTriCCustoEMAIL_CCUSTO: TStringField
+      FieldName = 'EMAIL_CCUSTO'
+      Size = 150
+    end
+    object cdsTriCCustoDDD_CCUSTO: TIntegerField
+      FieldName = 'DDD_CCUSTO'
+    end
+    object cdsTriCCustoFONE_CCUSTO: TStringField
+      FieldName = 'FONE_CCUSTO'
+      Size = 10
+    end
+    object cdsTriCCustoINSC_TRI: TStringField
+      FieldName = 'INSC_TRI'
+      Size = 18
+    end
   end
   object dsTriCCusto: TDataSource
     DataSet = cdsTriCCusto
@@ -17855,7 +17921,19 @@ object DMCadPedido: TDMCadPedido
       'CEP_CCUSTO=CEP_CCUSTO'
       'UF_CCUSTO=UF_CCUSTO'
       'NUM_END_CCUSTO=NUM_END_CCUSTO'
-      'CID_CCUSTO=CID_CCUSTO')
+      'CID_CCUSTO=CID_CCUSTO'
+      'NUM_CONTRATO=NUM_CONTRATO'
+      'CONTATO_TRI=CONTATO_TRI'
+      'CNPJ_TRI=CNPJ_TRI'
+      'EMAL_TRI=EMAL_TRI'
+      'DDD_TRI=DDD_TRI'
+      'FONE_TRI=FONE_TRI'
+      'CONTATO_CCUSTO=CONTATO_CCUSTO'
+      'CNPJ_CCUSTO=CNPJ_CCUSTO'
+      'EMAIL_CCUSTO=EMAIL_CCUSTO'
+      'DDD_CCUSTO=DDD_CCUSTO'
+      'FONE_CCUSTO=FONE_CCUSTO'
+      'INSC_TRI=INSC_TRI')
     DataSource = dsTriCCusto
     BCDToCurrency = False
     Left = 1288

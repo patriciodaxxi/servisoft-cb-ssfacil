@@ -3411,6 +3411,21 @@ type
     cdsTriCCustoNUM_END_CCUSTO: TStringField;
     cdsTriCCustoCID_CCUSTO: TStringField;
     frxTriCCusto: TfrxDBDataset;
+    cdsTriCCustoNUM_CONTRATO: TStringField;
+    cdsTriCCustoCONTATO_TRI: TStringField;
+    cdsTriCCustoCNPJ_TRI: TStringField;
+    cdsTriCCustoEMAL_TRI: TStringField;
+    cdsTriCCustoDDD_TRI: TIntegerField;
+    cdsTriCCustoFONE_TRI: TStringField;
+    cdsTriCCustoCONTATO_CCUSTO: TStringField;
+    cdsTriCCustoCNPJ_CCUSTO: TStringField;
+    cdsTriCCustoEMAIL_CCUSTO: TStringField;
+    cdsTriCCustoDDD_CCUSTO: TIntegerField;
+    cdsTriCCustoFONE_CCUSTO: TStringField;
+    cdsPedidoImpCOMPL_END_FILIAL: TStringField;
+    cdsTriCCustoINSC_TRI: TStringField;
+    qParametros_OCUSA_NUM_DOC: TStringField;
+    qParametros_FinUSA_END_CCUSTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -4642,6 +4657,7 @@ end;
 procedure TDMCadPedido.cdsPedidoImp_ItensCalcFields(DataSet: TDataSet);
 begin
   cdsPedidoImp_ItensCOD_BARRAS.AsString := '2 - ' + FormatFloat('000000',cdsPedidoImpNUM_PEDIDO.AsInteger) + ' / ' + FormatFloat('000',cdsPedidoImp_ItensITEM.AsInteger);
+
 end;
 
 end.
