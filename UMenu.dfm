@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 635
+    Height = 627
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -733,6 +733,10 @@ object fMenu: TfMenu
       object ReciboNF1: TMenuItem
         Caption = 'Recibo NF'
         OnClick = ReciboNF1Click
+      end
+      object PedidoWeb1: TMenuItem
+        Caption = 'Pedido Web'
+        OnClick = PedidoWeb1Click
       end
       object N52: TMenuItem
         Caption = '-'
