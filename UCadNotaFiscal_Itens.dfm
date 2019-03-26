@@ -29,8 +29,8 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     Color = 8404992
     TabOrder = 2
     object BitBtn4: TBitBtn
-      Left = 374
-      Top = 5
+      Left = 254
+      Top = -139
       Width = 98
       Height = 25
       Caption = '(F10) Ca&ncelar'
@@ -2236,7 +2236,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'VLR_AFRMM'
               Title.Alignment = taCenter
               Title.Caption = 'Valor AFRMM'
-              Width = 64
               Visible = True
             end
             item
@@ -2245,7 +2244,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'TIPO_INTERMEDIO'
               Title.Alignment = taCenter
               Title.Caption = 'Tipo Interm'#233'dio'
-              Width = 64
               Visible = True
             end
             item
@@ -2254,7 +2252,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'CNPJ'
               Title.Alignment = taCenter
               Title.Caption = 'CNPJ Terceiro'
-              Width = 64
               Visible = True
             end
             item
@@ -2263,7 +2260,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'UF_TERCEIRO'
               Title.Alignment = taCenter
               Title.Caption = 'UF Terceiro'
-              Width = 64
               Visible = True
             end>
         end

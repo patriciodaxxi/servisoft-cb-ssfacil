@@ -3590,8 +3590,7 @@ begin
   if not cdsNotaFiscal_Copia.IsEmpty then
     cdsNotaFiscal_Copia.Delete;
 
-  cdsNotaFiscal_Itens.Delete;
-
+  cdsNotaFiscal_Itens.Delete;                              
 end;
 
 procedure TDMCadNotaFiscal.prc_Inserir_Itens(Montar_Imp: Boolean = True);
