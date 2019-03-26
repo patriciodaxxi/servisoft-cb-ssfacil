@@ -2044,23 +2044,24 @@ object dmCadProduto: TdmCadProduto
       'PO.COD_PRINCIPAL, LI.AUTOR, LI.DTLANCAMENTO, LI.PAGINA, LI.SELO,' +
       ' LI.CICLO, PRO.QTD_EMBALAGEM, PRO.QTD_PECA_EMB,'#13#10'       PRO.LARG' +
       'URA, PRO.ALTURA,PRO.ESPESSURA, PRO.TAM_CALC, PRO.TIPO_PRODUCAO, ' +
-      ' PRO.NOME_MODELO, FORN.NOME NOME_FORNECEDOR,'#13#10'       case'#13#10'     ' +
-      '    when (PRO.TIPO_REG = '#39'P'#39') then '#39'Produto'#39#13#10'         when (PRO' +
-      '.TIPO_REG = '#39'M'#39') then '#39'Material'#39#13#10'         when (PRO.TIPO_REG = ' +
-      #39'N'#39') then '#39'Outros'#39#13#10'         when (PRO.TIPO_REG = '#39'C'#39') then '#39'Mat' +
-      'erial Consumo'#39#13#10'         when (PRO.TIPO_REG = '#39'I'#39') then '#39'Imobili' +
-      'zado'#39#13#10'         when (PRO.TIPO_REG = '#39'S'#39') then '#39'Semiacabado'#39#13#10'  ' +
-      '       else '#39#39#13#10'       end as TIPO_REG_DESCRICAO,'#13#10#13#10'       (sel' +
-      'ect sum(E2.QTD) QTDGERAL'#13#10'        from ESTOQUE_ATUAL E2'#13#10'       ' +
-      ' where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE, PCUSTO.CONTADOR CONT' +
-      '_POSSUIPRECO, PRO.DTCAD, LIN.NOME NOME_LINHA, coalesce(NCM.gerar' +
-      '_st,'#39'N'#39') GERAR_ST'#13#10'from PRODUTO PRO'#13#10'left join TAB_NCM NCM on (P' +
-      'RO.ID_NCM = NCM.ID)'#13#10'left join MARCA on (PRO.ID_MARCA = MARCA.ID' +
-      ')'#13#10'left join GRUPO on (PRO.ID_GRUPO = GRUPO.ID)'#13#10'left join PRODU' +
-      'TO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left join PRODUTO_LIVRO LI on' +
-      ' (PRO.ID = LI.ID)  '#13#10'left join PESSOA FORN'#13#10'on pro.id_fornecedor' +
-      ' = forn.codigo'#13#10'LEFT JOIN vpossui_pcusto PCUSTO'#13#10'ON PRO.ID = PCU' +
-      'STO.ID'#13#10'left join LINHA LIN on (lin.id = pro.id_linha)'#13#10
+      ' PRO.NOME_MODELO, FORN.NOME NOME_FORNECEDOR, LIN.NOME NOME_LINHA' +
+      ','#13#10'       case'#13#10'         when (PRO.TIPO_REG = '#39'P'#39') then '#39'Produto' +
+      #39#13#10'         when (PRO.TIPO_REG = '#39'M'#39') then '#39'Material'#39#13#10'         ' +
+      'when (PRO.TIPO_REG = '#39'N'#39') then '#39'Outros'#39#13#10'         when (PRO.TIPO' +
+      '_REG = '#39'C'#39') then '#39'Material Consumo'#39#13#10'         when (PRO.TIPO_REG' +
+      ' = '#39'I'#39') then '#39'Imobilizado'#39#13#10'         when (PRO.TIPO_REG = '#39'S'#39') t' +
+      'hen '#39'Semiacabado'#39#13#10'         else '#39#39#13#10'       end as TIPO_REG_DESC' +
+      'RICAO,'#13#10#13#10'       (select sum(E2.QTD) QTDGERAL'#13#10'        from ESTO' +
+      'QUE_ATUAL E2'#13#10'        where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE,' +
+      ' PCUSTO.CONTADOR CONT_POSSUIPRECO, PRO.DTCAD, LIN.NOME NOME_LINH' +
+      'A, coalesce(NCM.gerar_st,'#39'N'#39') GERAR_ST'#13#10'from PRODUTO PRO'#13#10'left j' +
+      'oin TAB_NCM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left join MARCA on (PR' +
+      'O.ID_MARCA = MARCA.ID)'#13#10'left join GRUPO on (PRO.ID_GRUPO = GRUPO' +
+      '.ID)'#13#10'left join PRODUTO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left joi' +
+      'n PRODUTO_LIVRO LI on (PRO.ID = LI.ID)  '#13#10'left join PESSOA FORN ' +
+      'on pro.id_fornecedor = forn.codigo'#13#10'LEFT JOIN vpossui_pcusto PCU' +
+      'STO ON PRO.ID = PCUSTO.ID'#13#10'left join LINHA LIN on (lin.id = pro.' +
+      'id_linha)'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
