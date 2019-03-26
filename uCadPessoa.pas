@@ -691,6 +691,7 @@ type
     procedure prc_Abrir_EnqIPI(ID: Integer);
     procedure prc_Abrir_Atividade(ID: Integer);
     procedure prc_CriaExcel(vDados: TDataSource);
+    procedure prc_opcao_vendedor;
   public
     { Public declarations }
   end;
@@ -1251,6 +1252,8 @@ begin
     DBEdit106.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
     Label191.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
     DBEdit107.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
+
+    prc_opcao_vendedor;
   end;
 end;
 
@@ -1508,17 +1511,7 @@ end;
 
 procedure TfrmCadPessoa.chkRepresentanteClick(Sender: TObject);
 begin
-  ts_Vendedor.TabVisible := chkRepresentante.Checked;
-  if not ts_Vendedor.TabVisible then
-    RzPageControl3.ActivePage := ts_Contatos;
-  if chkRepresentante.Checked then
-  begin
-    ts_Vendedor.TabVisible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
-    Label188.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
-    CurrencyEdit1.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
-    SpeedButton11.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
-  end;
-
+  prc_opcao_vendedor
 end;
 
 procedure TfrmCadPessoa.prc_Configurarr_vTipoPessoa;
@@ -2572,6 +2565,20 @@ procedure TfrmCadPessoa.DBEdit7Exit(Sender: TObject);
 begin
   if DBEdit7.Text <> '' then
     DBEdit7.Text := Trim(DBEdit7.Text);
+end;
+
+procedure TfrmCadPessoa.prc_opcao_vendedor;
+begin
+  ts_Vendedor.TabVisible := chkRepresentante.Checked;
+  if not ts_Vendedor.TabVisible then
+    RzPageControl3.ActivePage := ts_Contatos;
+  if chkRepresentante.Checked then
+  begin
+    //ts_Vendedor.TabVisible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+    Label188.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+    CurrencyEdit1.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+    SpeedButton11.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+  end;
 end;
 
 end.

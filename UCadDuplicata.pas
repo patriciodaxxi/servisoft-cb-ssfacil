@@ -2119,9 +2119,11 @@ begin
 end;
 
 procedure TfrmCadDuplicata.GravarComissao1Click(Sender: TObject);
+var
+  vPerc : Real;
 begin
-  ShowMessage('Desabilitado, ver com o suporte!');
-  exit;
+ // ShowMessage('Desabilitado, ver com o suporte!');
+ // exit;
   fDMCadDuplicata.cdsDuplicata.Open;
   fDMCadDuplicata.cdsPessoa.IndexFieldNames := 'CODIGO';
   fDMCadDuplicata.cdsPessoa.First;
@@ -2132,23 +2134,39 @@ begin
       fDMCadDuplicata.cdsPessoa.Next;
       Continue;
     end;
+
+     //if fDMCadDuplicata.cdsPessoaCODIGO.AsInteger = 1833 then
+     //  ShowMessage('aqui 273');
+
     fDMCadDuplicata.cdsDuplicata.Close;
     fDMCadDuplicata.sdsDuplicata.CommandText := 'SELECT * FROM DUPLICATA WHERE TIPO_ES = ''E'' AND ID_PESSOA = ' + fDMCadDuplicata.cdsPessoaCODIGO.AsString;
     fDMCadDuplicata.cdsDuplicata.Open;
+    fDMCadDuplicata.cdsDuplicata.First;
     while not fDMCadDuplicata.cdsDuplicata.Eof do
     begin
-      fDMCadDuplicata.cdsDuplicata.Edit;
-      fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger := fDMCadDuplicata.cdsPessoaID_VENDEDOR.AsInteger;
-      fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat := fDMCadDuplicata.cdsPessoaPERC_COMISSAO.AsFloat;
-      fDMCadDuplicata.cdsDuplicata.Post;
-      fDMCadDuplicata.cdsDuplicata.ApplyUpdates(0);
+       if fDMCadDuplicata.cdsDuplicataNUMNOTA.AsInteger = 273 then
+         ShowMessage('aqui 273');
+
+      if (fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger <= 0) or (StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat)) <= 0) then
+      begin
+        fDMCadDuplicata.cdsDuplicata.Edit;
+        fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger := fDMCadDuplicata.cdsPessoaID_VENDEDOR.AsInteger;
+        fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat := fDMCadDuplicata.cdsPessoaPERC_COMISSAO.AsFloat;
+        if StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsPessoaPERC_COMISSAO.AsFloat)) <= 0 then
+        begin
+          if fDMCadDuplicata.cdsVendedor.Locate('CODIGO',fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger,[loCaseInsensitive]) then
+            fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat := fDMCadDuplicata.cdsVendedorPERC_COMISSAO_VEND.AsFloat;
+        end;
+        fDMCadDuplicata.cdsDuplicata.Post;
+        fDMCadDuplicata.cdsDuplicata.ApplyUpdates(0);
+      end;
       fDMCadDuplicata.cdsDuplicata.Next;
     end;
     fDMCadDuplicata.cdsPessoa.Next;
   end;
   fDMCadDuplicata.cdsDuplicata.Close;
   fDMCadDuplicata.sdsDuplicata.CommandText := fDMCadDuplicata.ctCommand;
-  fDMCadDuplicata.cdsDuplicata.Open;
+  //fDMCadDuplicata.cdsDuplicata.Open;
 
   RadioGroup2.ItemIndex := 0;
   RadioGroup1.ItemIndex := 1;
@@ -2157,17 +2175,20 @@ begin
   while not fDMCadDuplicata.cdsDuplicata_Consulta.Eof do
   begin
     prc_Posiciona_Duplicata(fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
-    fDMCadDuplicata.cdsDuplicata_Hist.Last;
-    if fDMCadDuplicata.cdsDuplicata_HistTIPO_HISTORICO.AsString = 'PAG' then
-      if fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger = 0 then
-      begin
-        fDMCadDuplicata.cdsDuplicata_Hist.Edit;
-        fDMCadDuplicata.cdsDuplicataID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
-        fDMCadDuplicata.cdsDuplicata_Hist.Post;
-      end;
+    if (fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger > 0) and (StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat)) > 0) then
+    begin
+      fDMCadDuplicata.cdsDuplicata_Hist.Last;
+      if fDMCadDuplicata.cdsDuplicata_HistTIPO_HISTORICO.AsString = 'PAG' then
+        if fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger <= 0 then
+        begin
+          fDMCadDuplicata.cdsDuplicata_Hist.Edit;
+          fDMCadDuplicata.cdsDuplicataID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
+          fDMCadDuplicata.cdsDuplicata_Hist.Post;
+          fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
+        end;
+    end;
     fDMCadDuplicata.cdsDuplicata_Consulta.Next;
   end;
-  fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
 end;
 
 procedure TfrmCadDuplicata.GravaComissao2Click(Sender: TObject);

@@ -2392,9 +2392,9 @@ object frmCadPessoa: TfrmCadPessoa
               Top = 414
               Width = 1073
               Height = 189
-              ActivePage = ts_Contatos
+              ActivePage = ts_Vendedor
               Align = alBottom
-              TabIndex = 0
+              TabIndex = 1
               TabOrder = 43
               FixedDimension = 19
               object ts_Contatos: TRzTabSheet
