@@ -272,9 +272,9 @@ object DMConsEstoque: TDMConsEstoque
       'ECO_CUSTO, CC.DESCRICAO NOME_CENTROCUSTO,'#13#10'       GR.CODIGO CODI' +
       'GO_GRUPO, DI.MOTIVO, CC.CODIGO CODIGO_CCUSTO, CC1.CODIGO CODIGO_' +
       'SUPERIOR, CC1.DESCRICAO DESC_SUPERIOR,'#13#10'       (EM.VLR_UNITARIO ' +
-      '* EM.QTD2) VLR_TOTAL'#13#10'from ESTOQUE_MOV EM'#13#10'left join PESSOA PES ' +
-      'on (EM.ID_PESSOA = PES.CODIGO)'#13#10'inner join PRODUTO PRO on (EM.ID' +
-      '_PRODUTO = PRO.ID)'#13#10'left join TAB_CFOP CFOP on (EM.ID_CFOP = CFO' +
+      '* EM.QTD2) VLR_TOTAL'#13#10'from ESTOQUE_MOV EM'#13#10'inner join PRODUTO PR' +
+      'O on (EM.ID_PRODUTO = PRO.ID)'#13#10'left join PESSOA PES on (EM.ID_PE' +
+      'SSOA = PES.CODIGO)'#13#10'left join TAB_CFOP CFOP on (EM.ID_CFOP = CFO' +
       'P.ID)'#13#10'left join GRUPO GR on (PRO.ID_GRUPO = GR.ID)'#13#10'left join C' +
       'OMBINACAO COMB on (EM.ID_COR = COMB.ID)'#13#10'left join LOCAL_ESTOQUE' +
       ' LEST on (EM.ID_LOCAL_ESTOQUE = LEST.ID)'#13#10'left join CENTROCUSTO ' +
@@ -294,8 +294,8 @@ object DMConsEstoque: TDMConsEstoque
     Top = 167
   end
   object cdsEstoque_Mov: TClientDataSet
+    Active = True
     Aggregates = <>
-    IndexFieldNames = 'NOMEPRODUTO;DTMOVIMENTO;TIPO_ES'
     Params = <>
     ProviderName = 'dspEstoque_Mov'
     Left = 224
