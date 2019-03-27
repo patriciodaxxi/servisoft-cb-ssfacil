@@ -2261,6 +2261,7 @@ type
     dsNotaFiscal_NDevolvida: TDataSource;
     dsNotaFiscal_Itens_Mestre: TDataSource;
     cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida: TDataSetField;
+    cdsOCATUALIZA_PRECO_CUSTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2307,14 +2308,15 @@ type
     ctCommand_CFOP: String;
     ctCommand_Produto: String;
     ctOC: String;
-    ctNotaEntrada : String;
+    ctNotaEntrada: String;
     ctProduto_Forn: String;
     vID_Pedido, vItem_Pedido: Integer;
     vNum_Pedido: String;
-    vID_NTE, vItem_NTE, vNum_Nota_NTE : Integer;
+    vID_NTE, vItem_NTE, vNum_Nota_NTE: Integer;
     vUnidade: String;
     vProduto_Inativo: String;
-    vGerar_CLiq : String;
+    vGerar_CLiq: String;
+    vAtualizaCusto: String;
 
     procedure prc_Abrir_Produto(ID: Integer);
     procedure prc_Abrir_Estoque_Mov(ID: Integer);
@@ -2960,6 +2962,7 @@ begin
   vUsa_Preco_Cor_Pos := cdsOCUSA_PRECO_COR.AsString;
   vID_Cor_Pos        := cdsOCID_COR.AsInteger;
   vTamanho_Pos       := cdsOCTAMANHO.AsString;
+  vAtualizaCusto     := cdsOCATUALIZA_PRECO_CUSTO.AsString;
 end;
 
 procedure TDMRecebeXML.cdsProduto_FornBeforePost(DataSet: TDataSet);
@@ -2969,7 +2972,7 @@ begin
   if (cdsProduto_FornTAMANHO_CLIENTE.IsNull) or (trim(cdsProduto_FornTAMANHO_CLIENTE.AsString) = '') then
     cdsProduto_FornTAMANHO_CLIENTE.AsString := '';
 end;
-                      
+
 procedure TDMRecebeXML.cdsDuplicataNewRecord(DataSet: TDataSet);
 begin
   cdsDuplicataNGR.AsString      := 'N';

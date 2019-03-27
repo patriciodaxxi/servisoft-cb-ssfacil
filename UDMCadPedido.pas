@@ -3426,6 +3426,8 @@ type
     cdsTriCCustoINSC_TRI: TStringField;
     qParametros_OCUSA_NUM_DOC: TStringField;
     qParametros_FinUSA_END_CCUSTO: TStringField;
+    sdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField;
+    cdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

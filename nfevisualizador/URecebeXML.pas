@@ -4044,6 +4044,7 @@ begin
   fDMRecebeXML.mItensNotaReferencia_Int.AsString     := vReferencia_Pos;
   fDMRecebeXML.mItensNotaUsa_Cor.AsString            := vUsa_Cor_Pos;
   fDMRecebeXML.mItensNotaUnidadeInterno.AsString     := fDMRecebeXML.vUnidade;
+  fDMRecebeXML.mItensNotaAtualizarPreco.AsString     := fDMRecebeXML.vAtualizaCusto;
   if fDMRecebeXML.mItensNotaUsa_Cor.AsString = 'S' then
     fDMRecebeXML.mItensNotaID_Cor.AsInteger := vID_Cor_Pos;
   fDMRecebeXML.mItensNotaUsa_Preco_Cor.AsString      := vUsa_Preco_Cor_Pos;

@@ -1557,6 +1557,7 @@ object DMCadPedido: TDMCadPedido
     Top = 316
   end
   object cdsTipoCobranca: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -1633,6 +1634,7 @@ object DMCadPedido: TDMCadPedido
     Top = 364
   end
   object cdsContas: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -3239,6 +3241,11 @@ object DMCadPedido: TDMCadPedido
     object sdsPedido_ItensBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object sdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField
+      FieldName = 'ATUALIZA_PRECO_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsPedido_Itens: TClientDataSet
     Aggregates = <>
@@ -3857,6 +3864,11 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'BASE_IPI'
       DisplayFormat = '0.00'
     end
+    object cdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField
+      FieldName = 'ATUALIZA_PRECO_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsPedido_Itens: TDataSource
     DataSet = cdsPedido_Itens
@@ -4013,7 +4025,6 @@ object DMCadPedido: TDMCadPedido
     Top = 285
   end
   object cdsPedidoImp: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>

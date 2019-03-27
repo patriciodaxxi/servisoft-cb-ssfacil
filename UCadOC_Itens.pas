@@ -56,6 +56,7 @@ type
     RxDBLookupCombo5: TRxDBLookupCombo;
     Label9: TLabel;
     RxDBComboBox1: TRxDBComboBox;
+    DBCheckBox1: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
