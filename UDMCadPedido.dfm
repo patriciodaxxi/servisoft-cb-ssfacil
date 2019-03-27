@@ -6086,8 +6086,8 @@ object DMCadPedido: TDMCadPedido
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT ID, DESCRICAO NOME, CODIGO'#13#10'FROM CENTROCUSTO'#13#10'WHERE TIPO ' +
-      '= '#39'A'#39#13#10
+      'SELECT ID, DESCRICAO NOME, CODIGO, NUM_PRESTACAO'#13#10'FROM CENTROCUS' +
+      'TO'#13#10'WHERE TIPO = '#39'A'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -6116,6 +6116,10 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsProjetoCODIGO: TStringField
       FieldName = 'CODIGO'
+    end
+    object cdsProjetoNUM_PRESTACAO: TStringField
+      FieldName = 'NUM_PRESTACAO'
+      Size = 30
     end
   end
   object dsProjeto: TDataSource
@@ -10495,7 +10499,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43546.606529490740000000
+    ReportOptions.LastChange = 43551.460594282410000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -17735,15 +17739,28 @@ object DMCadPedido: TDMCadPedido
       ', TRI.cep CEP_TRI, TRI.uf UF_TRI,'#13#10'TRI.num_end NUM_END_TRI, TRI.' +
       'nome_contato CONTATO_TRI, TRI.cnpj_cpf CNPJ_TRI,'#13#10'TRI.email_nfe ' +
       'EMAL_TRI, TRI.dddfone1 DDD_TRI, TRI.telefone1 FONE_TRI,'#13#10'TRI.ins' +
-      'cr_est INSC_TRI,'#13#10'CC.descricao NOME_CCUSTO, CC.endereco END_CCUS' +
-      'TO, CC.complemento_end COMPL_CCUSTO,'#13#10'CC.bairro BAIRRO_CCUSTO, C' +
-      'C.ID_CIDADE ID_CIDADE_CCUSTO, CC.cep CEP_CCUSTO,'#13#10'CC.uf UF_CCUST' +
-      'O, CC.num_end NUM_END_CCUSTO, CID.NOME CID_CCUSTO, CC.NUM_CONTRA' +
-      'TO,'#13#10'CC.contato CONTATO_CCUSTO, CC.cnpj CNPJ_CCUSTO,'#13#10'CC.email E' +
-      'MAIL_CCUSTO, CC.ddd DDD_CCUSTO , CC.fone FONE_CCUSTO'#13#10'FROM PEDID' +
-      'O P'#13#10'LEFT JOIN PESSOA TRI'#13#10'ON P.id_atelier = TRI.CODIGO'#13#10'LEFT JO' +
-      'IN CENTROCUSTO CC'#13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE CID' +
-      #13#10'ON CC.ID_CIDADE = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
+      'cr_est INSC_TRI,'#13#10'CASE'#13#10'  WHEN coalesce(TRI.endereco_pgto,'#39#39') = ' +
+      #39#39' THEN tri.endereco'#13#10'  else TRI.endereco_pgto'#13#10'  end END_TRI_CO' +
+      'B,'#13#10'CASE'#13#10'  WHEN coalesce(TRI.bairro_pgto,'#39#39') = '#39#39' THEN tri.bair' +
+      'ro'#13#10'  else TRI.bairro_pgto'#13#10'  end BAIRRO_TRI_COB,'#13#10'CASE'#13#10'  WHEN ' +
+      'coalesce(TRI.cidade_pgto,'#39#39') = '#39#39' THEN tri.cidade'#13#10'  else TRI.ci' +
+      'dade_pgto'#13#10'  end CID_TRI_COB,'#13#10'CASE'#13#10'  WHEN coalesce(TRI.cep_pgt' +
+      'o,'#39#39') = '#39#39' THEN tri.cep'#13#10'  else TRI.cep_pgto'#13#10'  end CEP_TRI_COB,' +
+      #13#10'CASE'#13#10'  WHEN coalesce(TRI.num_end_pgto,'#39#39') = '#39#39' THEN TRI.num_e' +
+      'nd'#13#10'  else TRI.num_end_pgto'#13#10'  end num_end_COB,'#13#10'CASE'#13#10'  WHEN co' +
+      'alesce(TRI.complemento_end_pgto,'#39#39') = '#39#39' THEN TRI.complemento_en' +
+      'd'#13#10'  else TRI.complemento_end_pgto'#13#10'  end COMPL_TRI_COB,'#13#10'CASE'#13#10 +
+      '  WHEN coalesce(TRI.uf_pgto,'#39#39') = '#39#39' THEN TRI.uf'#13#10'  else TRI.uf_' +
+      'pgto'#13#10'  end UF_TRI_COB,'#13#10#13#10'CC.descricao NOME_CCUSTO, CC.endereco' +
+      ' END_CCUSTO, CC.complemento_end COMPL_CCUSTO,'#13#10'CC.bairro BAIRRO_' +
+      'CCUSTO, CC.ID_CIDADE ID_CIDADE_CCUSTO, CC.cep CEP_CCUSTO,'#13#10'CC.uf' +
+      ' UF_CCUSTO, CC.num_end NUM_END_CCUSTO, CID.NOME CID_CCUSTO, CC.N' +
+      'UM_CONTRATO,'#13#10'CC.contato CONTATO_CCUSTO, CC.cnpj CNPJ_CCUSTO,'#13#10'C' +
+      'C.email EMAIL_CCUSTO, CC.ddd DDD_CCUSTO , CC.fone FONE_CCUSTO, C' +
+      'C.NUM_PRESTACAO'#13#10'FROM PEDIDO P'#13#10'LEFT JOIN PESSOA TRI'#13#10'ON P.id_at' +
+      'elier = TRI.CODIGO'#13#10'LEFT JOIN CENTROCUSTO CC'#13#10'ON P.ID_PROJETO = ' +
+      'CC.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CC.ID_CIDADE = CID.ID'#13#10'WHERE P.I' +
+      'D = :ID'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -17891,6 +17908,38 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'INSC_TRI'
       Size = 18
     end
+    object cdsTriCCustoNUM_PRESTACAO: TStringField
+      FieldName = 'NUM_PRESTACAO'
+      Size = 30
+    end
+    object cdsTriCCustoEND_TRI_COB: TStringField
+      FieldName = 'END_TRI_COB'
+      Size = 60
+    end
+    object cdsTriCCustoBAIRRO_TRI_COB: TStringField
+      FieldName = 'BAIRRO_TRI_COB'
+      Size = 30
+    end
+    object cdsTriCCustoCID_TRI_COB: TStringField
+      FieldName = 'CID_TRI_COB'
+      Size = 40
+    end
+    object cdsTriCCustoCEP_TRI_COB: TStringField
+      FieldName = 'CEP_TRI_COB'
+      Size = 10
+    end
+    object cdsTriCCustoNUM_END_COB: TStringField
+      FieldName = 'NUM_END_COB'
+    end
+    object cdsTriCCustoCOMPL_TRI_COB: TStringField
+      FieldName = 'COMPL_TRI_COB'
+      Size = 60
+    end
+    object cdsTriCCustoUF_TRI_COB: TStringField
+      FieldName = 'UF_TRI_COB'
+      FixedChar = True
+      Size = 2
+    end
   end
   object dsTriCCusto: TDataSource
     DataSet = cdsTriCCusto
@@ -17933,7 +17982,8 @@ object DMCadPedido: TDMCadPedido
       'EMAIL_CCUSTO=EMAIL_CCUSTO'
       'DDD_CCUSTO=DDD_CCUSTO'
       'FONE_CCUSTO=FONE_CCUSTO'
-      'INSC_TRI=INSC_TRI')
+      'INSC_TRI=INSC_TRI'
+      'NUM_PRESTACAO=NUM_PRESTACAO')
     DataSource = dsTriCCusto
     BCDToCurrency = False
     Left = 1288

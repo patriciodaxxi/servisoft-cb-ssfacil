@@ -3426,6 +3426,15 @@ type
     cdsTriCCustoINSC_TRI: TStringField;
     qParametros_OCUSA_NUM_DOC: TStringField;
     qParametros_FinUSA_END_CCUSTO: TStringField;
+    cdsTriCCustoNUM_PRESTACAO: TStringField;
+    cdsTriCCustoEND_TRI_COB: TStringField;
+    cdsTriCCustoBAIRRO_TRI_COB: TStringField;
+    cdsTriCCustoCID_TRI_COB: TStringField;
+    cdsTriCCustoCEP_TRI_COB: TStringField;
+    cdsTriCCustoNUM_END_COB: TStringField;
+    cdsTriCCustoCOMPL_TRI_COB: TStringField;
+    cdsTriCCustoUF_TRI_COB: TStringField;
+    cdsProjetoNUM_PRESTACAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

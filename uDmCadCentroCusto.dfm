@@ -107,6 +107,10 @@ object dmCadCentroCusto: TdmCadCentroCusto
       FieldName = 'CONTATO'
       Size = 60
     end
+    object sdsCentroCustoNUM_PRESTACAO: TStringField
+      FieldName = 'NUM_PRESTACAO'
+      Size = 30
+    end
   end
   object dspCentroCusto: TDataSetProvider
     DataSet = sdsCentroCusto
@@ -208,6 +212,10 @@ object dmCadCentroCusto: TdmCadCentroCusto
     object cdsCentroCustoCONTATO: TStringField
       FieldName = 'CONTATO'
       Size = 60
+    end
+    object cdsCentroCustoNUM_PRESTACAO: TStringField
+      FieldName = 'NUM_PRESTACAO'
+      Size = 30
     end
   end
   object dsCentroCusto: TDataSource
