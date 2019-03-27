@@ -3428,6 +3428,13 @@ type
     qParametros_FinUSA_END_CCUSTO: TStringField;
     sdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField;
     cdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField;
+    cdsTriCCustoEND_TRI_COB: TStringField;
+    cdsTriCCustoBAIRRO_TRI_COB: TStringField;
+    cdsTriCCustoCID_TRI_COB: TStringField;
+    cdsTriCCustoCEP_TRI_COB: TStringField;
+    cdsTriCCustoNUM_END_COB: TStringField;
+    cdsTriCCustoCOMPL_TRI_COB: TStringField;
+    cdsTriCCustoUF_TRI_COB: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
