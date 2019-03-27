@@ -1998,11 +1998,13 @@ begin
     end;
     fDMCadNotaFiscal.prc_Excluir_Item;
   end;
+  SmDBGrid2.DisableScroll;
   btnCalcular_ValoresClick(Sender);
   //30/07/2013
   if fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert] then
     btnGerarParcelasClick(Sender);
   fDMCadNotaFiscal.cdsNotaEntrada.Close;
+  smDBGrid2.EnableScroll;
 end;
 
 procedure TfrmCadNotaFiscal.btnInserir_ItensClick(Sender: TObject);
@@ -2151,11 +2153,14 @@ begin
   ffrmCadNotaFiscal_Itens.rxcbFinalidade.Visible := rxcbFinalidade.Visible;
 
   FreeAndNil(ffrmCadNotaFiscal_Itens);
+
+  SMDBGrid2.DisableScroll;
   btnCalcular_ValoresClick(Sender);
 
   //30/07/2013
   if fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert] then
     btnGerarParcelasClick(Sender);
+  SMDBGrid2.EnableScroll;
 
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Locate('ID;Item',VarArrayOf([fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger,vItemAux]),[locaseinsensitive]);
 end;
