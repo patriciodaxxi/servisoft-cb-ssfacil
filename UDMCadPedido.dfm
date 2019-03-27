@@ -6086,8 +6086,8 @@ object DMCadPedido: TDMCadPedido
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT ID, DESCRICAO NOME, CODIGO, NUM_PRESTACAO'#13#10'FROM CENTROCUS' +
-      'TO'#13#10'WHERE TIPO = '#39'A'#39#13#10
+      'SELECT ID, DESCRICAO NOME, CODIGO'#13#10'FROM CENTROCUSTO'#13#10'WHERE TIPO ' +
+      '= '#39'A'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -6116,10 +6116,6 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsProjetoCODIGO: TStringField
       FieldName = 'CODIGO'
-    end
-    object cdsProjetoNUM_PRESTACAO: TStringField
-      FieldName = 'NUM_PRESTACAO'
-      Size = 30
     end
   end
   object dsProjeto: TDataSource
@@ -10499,7 +10495,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43551.460594282410000000
+    ReportOptions.LastChange = 43551.460594282400000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -17978,7 +17974,13 @@ object DMCadPedido: TDMCadPedido
       'DDD_CCUSTO=DDD_CCUSTO'
       'FONE_CCUSTO=FONE_CCUSTO'
       'INSC_TRI=INSC_TRI'
-      'NUM_PRESTACAO=NUM_PRESTACAO')
+      'END_TRI_COB=END_TRI_COB'
+      'BAIRRO_TRI_COB=BAIRRO_TRI_COB'
+      'CID_TRI_COB=CID_TRI_COB'
+      'CEP_TRI_COB=CEP_TRI_COB'
+      'NUM_END_COB=NUM_END_COB'
+      'COMPL_TRI_COB=COMPL_TRI_COB'
+      'UF_TRI_COB=UF_TRI_COB')
     DataSource = dsTriCCusto
     BCDToCurrency = False
     Left = 1288
