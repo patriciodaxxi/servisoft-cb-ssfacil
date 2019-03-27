@@ -3426,7 +3426,6 @@ type
     cdsTriCCustoINSC_TRI: TStringField;
     qParametros_OCUSA_NUM_DOC: TStringField;
     qParametros_FinUSA_END_CCUSTO: TStringField;
-    cdsTriCCustoNUM_PRESTACAO: TStringField;
     cdsTriCCustoEND_TRI_COB: TStringField;
     cdsTriCCustoBAIRRO_TRI_COB: TStringField;
     cdsTriCCustoCID_TRI_COB: TStringField;

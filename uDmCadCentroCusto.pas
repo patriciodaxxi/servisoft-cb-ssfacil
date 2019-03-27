@@ -110,8 +110,8 @@ type
     cdsCentroCustoFONE: TStringField;
     cdsCentroCustoEMAIL: TStringField;
     cdsCentroCustoCONTATO: TStringField;
-    sdsCentroCustoNUM_PRESTACAO: TStringField;
-    cdsCentroCustoNUM_PRESTACAO: TStringField;
+    sdsCentroCustoVLR_CONTRATO: TFloatField;
+    cdsCentroCustoVLR_CONTRATO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCentroCustoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

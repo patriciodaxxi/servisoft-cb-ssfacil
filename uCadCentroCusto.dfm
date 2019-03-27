@@ -981,12 +981,12 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Caption = 'Email:'
           end
           object Label18: TLabel
-            Left = 9
+            Left = 53
             Top = 34
-            Width = 105
+            Width = 61
             Height = 13
             Alignment = taRightJustify
-            Caption = 'N'#186' Presta'#231#227'o Servi'#231'o:'
+            Caption = 'Vlr. Contrato:'
           end
           object DBEdit5: TDBEdit
             Left = 115
@@ -1140,7 +1140,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Width = 232
             Height = 21
             CharCase = ecUpperCase
-            DataField = 'NUM_CONTRATO'
+            DataField = 'VLR_CONTRATO'
             DataSource = dmCadCentroCusto.dsCentroCusto
             TabOrder = 1
           end

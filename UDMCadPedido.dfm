@@ -17756,11 +17756,10 @@ object DMCadPedido: TDMCadPedido
       'CCUSTO, CC.ID_CIDADE ID_CIDADE_CCUSTO, CC.cep CEP_CCUSTO,'#13#10'CC.uf' +
       ' UF_CCUSTO, CC.num_end NUM_END_CCUSTO, CID.NOME CID_CCUSTO, CC.N' +
       'UM_CONTRATO,'#13#10'CC.contato CONTATO_CCUSTO, CC.cnpj CNPJ_CCUSTO,'#13#10'C' +
-      'C.email EMAIL_CCUSTO, CC.ddd DDD_CCUSTO , CC.fone FONE_CCUSTO, C' +
-      'C.NUM_PRESTACAO'#13#10'FROM PEDIDO P'#13#10'LEFT JOIN PESSOA TRI'#13#10'ON P.id_at' +
-      'elier = TRI.CODIGO'#13#10'LEFT JOIN CENTROCUSTO CC'#13#10'ON P.ID_PROJETO = ' +
-      'CC.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CC.ID_CIDADE = CID.ID'#13#10'WHERE P.I' +
-      'D = :ID'#13#10
+      'C.email EMAIL_CCUSTO, CC.ddd DDD_CCUSTO , CC.fone FONE_CCUSTO '#13#10 +
+      'FROM PEDIDO P'#13#10'LEFT JOIN PESSOA TRI'#13#10'ON P.id_atelier = TRI.CODIG' +
+      'O'#13#10'LEFT JOIN CENTROCUSTO CC'#13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN ' +
+      'CIDADE CID'#13#10'ON CC.ID_CIDADE = CID.ID'#13#10'WHERE P.ID = :ID'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -17907,10 +17906,6 @@ object DMCadPedido: TDMCadPedido
     object cdsTriCCustoINSC_TRI: TStringField
       FieldName = 'INSC_TRI'
       Size = 18
-    end
-    object cdsTriCCustoNUM_PRESTACAO: TStringField
-      FieldName = 'NUM_PRESTACAO'
-      Size = 30
     end
     object cdsTriCCustoEND_TRI_COB: TStringField
       FieldName = 'END_TRI_COB'
