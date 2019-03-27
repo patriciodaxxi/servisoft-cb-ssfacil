@@ -245,7 +245,6 @@ begin
   vQtdEntrada := 0;
   vQtdSaida   := 0;
 
-  SMDBGrid1.DisableScroll;
   fDMConsEstoque.cdsEstoque_Mov.First;
   while not fDMConsEstoque.cdsEstoque_Mov.Eof do
   begin
@@ -266,6 +265,7 @@ end;
 
 procedure TfrmConsEstoque_Mov.btnConsultarClick(Sender: TObject);
 begin
+  SMDBGrid1.DisableScroll;
   prc_Condicao;
   if RzPageControl1.ActivePage = TS_Produto_Det then
   begin
@@ -284,6 +284,7 @@ begin
     prc_Consultar_Reserva;
     prc_Le_cdsEstoque_Mov_Res;
   end;
+  SMDBGrid1.EnableScroll;
 end;
 
 procedure TfrmConsEstoque_Mov.prc_Consultar_Acum;

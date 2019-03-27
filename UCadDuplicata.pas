@@ -2182,7 +2182,7 @@ begin
         if fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger <= 0 then
         begin
           fDMCadDuplicata.cdsDuplicata_Hist.Edit;
-          fDMCadDuplicata.cdsDuplicataID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
+          fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
           fDMCadDuplicata.cdsDuplicata_Hist.Post;
           fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
         end;
@@ -2196,17 +2196,20 @@ begin
   fDMCadDuplicata.cdsDuplicata_Consulta.First;
   while not fDMCadDuplicata.cdsDuplicata_Consulta.Eof do
   begin
-    prc_Posiciona_Duplicata(fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
-    fDMCadDuplicata.cdsDuplicata_Hist.Last;
-    if fDMCadDuplicata.cdsDuplicata_HistTIPO_HISTORICO.AsString = 'PAG' then
+    if fDMCadDuplicata.cdsDuplicata_ConsultaTIPO_ES.AsString = 'E' then
     begin
-      if not fnc_Existe_Comissao then
-      //if fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger = 0 then
+      prc_Posiciona_Duplicata(fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
+      fDMCadDuplicata.cdsDuplicata_Hist.Last;
+      if fDMCadDuplicata.cdsDuplicata_HistTIPO_HISTORICO.AsString = 'PAG' then
       begin
-        fDMCadDuplicata.cdsDuplicata_Hist.Edit;
-        fDMCadDuplicata.cdsDuplicataID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
-        fDMCadDuplicata.cdsDuplicata_Hist.Post;
-        fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
+        if not fnc_Existe_Comissao then
+        //if fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger = 0 then
+        begin
+          fDMCadDuplicata.cdsDuplicata_Hist.Edit;
+          fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
+          fDMCadDuplicata.cdsDuplicata_Hist.Post;
+          fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
+        end;
       end;
     end;
     fDMCadDuplicata.cdsDuplicata_Consulta.Next;
