@@ -88,6 +88,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Expanded = False
             FieldName = 'TIPO'
             Title.Caption = 'Tipo'
+            Width = 64
             Visible = True
           end
           item
@@ -107,12 +108,14 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Expanded = False
             FieldName = 'APROPRIACAO'
             Title.Caption = 'Apropria'#231#227'o'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'SUPERIOR'
             Title.Caption = 'Superior'
+            Width = 64
             Visible = True
           end
           item

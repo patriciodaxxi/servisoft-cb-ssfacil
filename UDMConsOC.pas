@@ -195,6 +195,8 @@ type
     cdsOC_ItemAPROVADO_PED: TStringField;
     cdsOCAPROVADO_PED: TStringField;
     cdsFilialNOME_INTERNO: TStringField;
+    cdsOC_ProjetoVLR_CONTRATO: TFloatField;
+    cdsOC_ProjetoNUM_CONTRATO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

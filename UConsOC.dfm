@@ -289,7 +289,7 @@ object frmConsOC: TfrmConsOC
     Top = 165
     Width = 898
     Height = 446
-    ActivePage = TS_Item
+    ActivePage = TS_Projeto
     ActivePageDefault = TS_Item
     Align = alClient
     Color = 16755027
@@ -302,7 +302,7 @@ object frmConsOC: TfrmConsOC
     ParentColor = False
     ParentFont = False
     TabColors.Unselected = clGray
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 1
     TextColors.Unselected = 5197647
     FixedDimension = 19
@@ -884,7 +884,7 @@ object frmConsOC: TfrmConsOC
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 13
+        ColCount = 15
         RowCount = 2
         Columns = <
           item
@@ -1038,6 +1038,23 @@ object frmConsOC: TfrmConsOC
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
+            Width = 64
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VLR_CONTRATO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. Contrato'
+            Width = 64
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'NUM_CONTRATO'
+            Title.Alignment = taCenter
+            Title.Caption = 'N'#186' Contrato'
             Width = 64
             Visible = True
           end>
