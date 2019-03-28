@@ -1,8 +1,8 @@
 object DMRecebeXML: TDMRecebeXML
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 65528
-  Top = 65528
+  Left = 65524
+  Top = 38
   Height = 744
   Width = 1382
   object sdsCFOP: TSQLDataSet
@@ -822,7 +822,7 @@ object DMRecebeXML: TDMRecebeXML
     Aggregates = <>
     DataSetField = cdsCabecalhoNFref
     Params = <>
-    Left = 672
+    Left = 670
     Top = 424
     object cdsNFeRefrefNFe: TIntegerField
       FieldName = 'refNFe'
@@ -2417,7 +2417,7 @@ object DMRecebeXML: TDMRecebeXML
     StoreDefs = True
     BeforePost = mItensNotaBeforePost
     OnNewRecord = mItensNotaNewRecord
-    Left = 464
+    Left = 465
     Top = 488
     Data = {
       A20B00009619E0BD010000001800000076000000000003000000A20B04497465
@@ -7949,11 +7949,15 @@ object DMRecebeXML: TDMRecebeXML
     Top = 160
   end
   object mPedidoAux: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID_Pedido'
     Params = <>
     Left = 776
     Top = 112
+    Data = {
+      2C0000009619E0BD0100000018000000010000000000030000002C000949445F
+      50656469646F04000100000000000000}
     object mPedidoAuxID_Pedido: TIntegerField
       FieldName = 'ID_Pedido'
     end
