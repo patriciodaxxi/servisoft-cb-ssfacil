@@ -1,8 +1,8 @@
 object dmCadProduto: TdmCadProduto
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 40
-  Top = 12
+  Left = 253
+  Top = 29
   Height = 714
   Width = 1288
   object sdsProduto: TSQLDataSet
@@ -4812,7 +4812,7 @@ object dmCadProduto: TdmCadProduto
   object cdsProduto_Comb_Mat: TClientDataSet
     Aggregates = <>
     DataSetField = cdsProduto_CombsdsProduto_Comb_Mat
-    IndexFieldNames = 'ID;ITEM;ITEM_MAT'
+    IndexFieldNames = 'ID;ID_SETOR;ID_POSICAO'
     Params = <>
     BeforePost = cdsProduto_Comb_MatBeforePost
     OnCalcFields = cdsProduto_Comb_MatCalcFields
