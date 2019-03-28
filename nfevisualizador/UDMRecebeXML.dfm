@@ -9197,6 +9197,7 @@ object DMRecebeXML: TDMRecebeXML
     Top = 18
   end
   object mParc: TClientDataSet
+    Active = True
     Aggregates = <>
     FieldDefs = <
       item
@@ -9224,11 +9225,25 @@ object DMRecebeXML: TDMRecebeXML
         Name = 'ID_TipoCobranca'
         DataType = ftInteger
       end>
-    IndexDefs = <>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end>
+    IndexFieldNames = 'DtVencimento'
     Params = <>
     StoreDefs = True
     Left = 568
     Top = 320
+    Data = {
+      9F0000009619E0BD0100000018000000060000000000030000009F0007506172
+      63656C6104000100000000000C4E756D4475706C696361746101004900000001
+      00055749445448020002003C000C447456656E63696D656E746F040006000000
+      00000D566C7256656E63696D656E746F08000400000000000849445F436F6E74
+      6104000100000000000F49445F5469706F436F6272616E636104000100000000
+      000000}
     object mParcParcela: TIntegerField
       FieldName = 'Parcela'
     end
