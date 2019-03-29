@@ -2395,6 +2395,8 @@ begin
   cdsContas.Open;
   cdsTipoCobranca.Open;
   cdsTamanho.Open;
+  if not mParc.Active then
+    mParc.CreateDataSet;
 
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
@@ -2981,7 +2983,7 @@ end;
 
 procedure TDMRecebeXML.prc_Inserir_Parcela;
 begin
-  cdsParcelas.Insert;
+  mParc.Insert;
 end;
 
 procedure TDMRecebeXML.prc_Move_Dados_Da_Nota;

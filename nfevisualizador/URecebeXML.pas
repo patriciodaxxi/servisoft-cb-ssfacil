@@ -4159,7 +4159,7 @@ begin
   fDMRecebeXML.prc_Inserir_Parcela;
   ffrmRecebeXML_Duplicatas := TfrmRecebeXML_Duplicatas.Create(self);
   ffrmRecebeXML_Duplicatas.fDMRecebeXML := fDMRecebeXML;
-  ffrmRecebeXML_Duplicatas.fDMRecebeXML.cdsParcelasnDup.AsString := fDMRecebeXML.cdsCabecalhonNF.AsString;
+  ffrmRecebeXML_Duplicatas.fDMRecebeXML.mParcNumDuplicata.AsString := fDMRecebeXML.cdsCabecalhonNF.AsString;
   ffrmRecebeXML_Duplicatas.ShowModal;
   FreeAndNil(ffrmRecebeXML_Duplicatas);
 end;
