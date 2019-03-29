@@ -110,6 +110,14 @@ object dmCadCentroCusto: TdmCadCentroCusto
     object sdsCentroCustoVLR_CONTRATO: TFloatField
       FieldName = 'VLR_CONTRATO'
     end
+    object sdsCentroCustoCONTATO_COMPRAS: TStringField
+      FieldName = 'CONTATO_COMPRAS'
+      Size = 60
+    end
+    object sdsCentroCustoEMAIL_COMRAS: TStringField
+      FieldName = 'EMAIL_COMRAS'
+      Size = 150
+    end
   end
   object dspCentroCusto: TDataSetProvider
     DataSet = sdsCentroCusto
@@ -214,6 +222,14 @@ object dmCadCentroCusto: TdmCadCentroCusto
     end
     object cdsCentroCustoVLR_CONTRATO: TFloatField
       FieldName = 'VLR_CONTRATO'
+    end
+    object cdsCentroCustoCONTATO_COMPRAS: TStringField
+      FieldName = 'CONTATO_COMPRAS'
+      Size = 60
+    end
+    object cdsCentroCustoEMAIL_COMRAS: TStringField
+      FieldName = 'EMAIL_COMRAS'
+      Size = 150
     end
   end
   object dsCentroCusto: TDataSource

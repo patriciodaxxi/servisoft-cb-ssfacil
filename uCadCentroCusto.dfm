@@ -867,10 +867,10 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           TabOrder = 6
         end
         object gbxEndereco: TRzGroupBox
-          Left = 97
-          Top = 128
+          Left = 98
+          Top = 127
           Width = 641
-          Height = 257
+          Height = 324
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -990,6 +990,29 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Height = 13
             Alignment = taRightJustify
             Caption = 'Vlr. Contrato:'
+          end
+          object Label20: TLabel
+            Left = 21
+            Top = 263
+            Width = 192
+            Height = 13
+            Caption = 'Respons'#225'vel Pelas Compras...................'
+          end
+          object Label21: TLabel
+            Left = 73
+            Top = 307
+            Width = 40
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Contato:'
+          end
+          object Label22: TLabel
+            Left = 85
+            Top = 287
+            Width = 28
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Email:'
           end
           object DBEdit5: TDBEdit
             Left = 115
@@ -1146,6 +1169,26 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             DataField = 'VLR_CONTRATO'
             DataSource = dmCadCentroCusto.dsCentroCusto
             TabOrder = 1
+          end
+          object DBEdit16: TDBEdit
+            Left = 114
+            Top = 300
+            Width = 395
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'CONTATO_COMPRAS'
+            DataSource = dmCadCentroCusto.dsCentroCusto
+            TabOrder = 15
+          end
+          object DBEdit18: TDBEdit
+            Left = 115
+            Top = 279
+            Width = 395
+            Height = 21
+            CharCase = ecLowerCase
+            DataField = 'EMAIL_COMRAS'
+            DataSource = dmCadCentroCusto.dsCentroCusto
+            TabOrder = 14
           end
         end
       end

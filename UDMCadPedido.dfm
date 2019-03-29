@@ -10506,7 +10506,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43551.460594282400000000
+    ReportOptions.LastChange = 43553.623404791670000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -17763,10 +17763,11 @@ object DMCadPedido: TDMCadPedido
       'CCUSTO, CC.ID_CIDADE ID_CIDADE_CCUSTO, CC.cep CEP_CCUSTO,'#13#10'CC.uf' +
       ' UF_CCUSTO, CC.num_end NUM_END_CCUSTO, CID.NOME CID_CCUSTO, CC.N' +
       'UM_CONTRATO,'#13#10'CC.contato CONTATO_CCUSTO, CC.cnpj CNPJ_CCUSTO,'#13#10'C' +
-      'C.email EMAIL_CCUSTO, CC.ddd DDD_CCUSTO , CC.fone FONE_CCUSTO '#13#10 +
-      'FROM PEDIDO P'#13#10'LEFT JOIN PESSOA TRI'#13#10'ON P.id_atelier = TRI.CODIG' +
-      'O'#13#10'LEFT JOIN CENTROCUSTO CC'#13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN ' +
-      'CIDADE CID'#13#10'ON CC.ID_CIDADE = CID.ID'#13#10'WHERE P.ID = :ID'#13#10
+      'C.email EMAIL_CCUSTO, CC.ddd DDD_CCUSTO , CC.fone FONE_CCUSTO , ' +
+      'CC.email_comras, CC.contato_compras'#13#10'FROM PEDIDO P'#13#10'LEFT JOIN PE' +
+      'SSOA TRI'#13#10'ON P.id_atelier = TRI.CODIGO'#13#10'LEFT JOIN CENTROCUSTO CC' +
+      #13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CC.ID_CIDADE' +
+      ' = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -17942,6 +17943,14 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 2
     end
+    object cdsTriCCustoEMAIL_COMRAS: TStringField
+      FieldName = 'EMAIL_COMRAS'
+      Size = 150
+    end
+    object cdsTriCCustoCONTATO_COMPRAS: TStringField
+      FieldName = 'CONTATO_COMPRAS'
+      Size = 60
+    end
   end
   object dsTriCCusto: TDataSource
     DataSet = cdsTriCCusto
@@ -17991,7 +18000,9 @@ object DMCadPedido: TDMCadPedido
       'CEP_TRI_COB=CEP_TRI_COB'
       'NUM_END_COB=NUM_END_COB'
       'COMPL_TRI_COB=COMPL_TRI_COB'
-      'UF_TRI_COB=UF_TRI_COB')
+      'UF_TRI_COB=UF_TRI_COB'
+      'EMAIL_COMRAS=EMAIL_COMRAS'
+      'CONTATO_COMPRAS=CONTATO_COMPRAS')
     DataSource = dsTriCCusto
     BCDToCurrency = False
     Left = 1288
