@@ -1,6 +1,6 @@
 object frmCadTipoCobranca: TfrmCadTipoCobranca
-  Left = 190
-  Top = 51
+  Left = 181
+  Top = 20
   Width = 914
   Height = 653
   Caption = 'Cadastro de Tipo de Cobran'#231'a'
@@ -22,7 +22,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
     Top = 0
     Width = 906
     Height = 622
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -30,7 +30,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -863,12 +863,11 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label10: TLabel
           Left = 9
-          Top = 232
+          Top = 254
           Width = 82
           Height = 13
           Alignment = taRightJustify
           Caption = 'Percentual Juros:'
-          Visible = False
         end
         object Label11: TLabel
           Left = 166
@@ -885,12 +884,11 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label12: TLabel
           Left = 64
-          Top = 254
+          Top = 232
           Width = 27
           Height = 13
           Alignment = taRightJustify
           Caption = 'Taxa:'
-          Visible = False
         end
         object DBEdit7: TDBEdit
           Left = 96
@@ -1265,25 +1263,23 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object DBEdit2: TDBEdit
           Left = 96
-          Top = 224
+          Top = 246
           Width = 65
           Height = 21
           CharCase = ecUpperCase
           DataField = 'PERC_JUROS'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 18
-          Visible = False
+          TabOrder = 19
         end
         object DBEdit3: TDBEdit
           Left = 96
-          Top = 246
+          Top = 224
           Width = 65
           Height = 21
           CharCase = ecUpperCase
           DataField = 'TAXA'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 19
-          Visible = False
+          TabOrder = 18
         end
         object RxDBComboBox3: TRxDBComboBox
           Left = 163

@@ -826,7 +826,7 @@ begin
   fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_MUNICIPAL.AsFloat := 0;
 //////////////////////////////////////////////
 
-  vVlrParcelado := fDmCupomFiscal.vSomaOriginal -fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency - fDmCupomFiscal.vVlrEntrada;
+  vVlrParcelado := fDmCupomFiscal.vSomaOriginal - fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency - fDmCupomFiscal.vVlrEntrada;
 
   prc_ControleParcelas(vVlrParcelado,vPercJuros,vQtdParcelas);
 
@@ -923,7 +923,19 @@ begin
     Label17.Visible       := True;
     CurrencyEdit2.Visible := True;
     CurrencyEdit2.Value   := vPercJuros;
+
+    Panel6.Visible := False;
+  end
+  else
+  begin
+    Panel6.Visible := (fDmCupomFiscal.cdsCupomParametrosUSA_DESCONTO.AsString = 'T') or
+                      (fDmCupomFiscal.cdsCupomParametrosUSA_DESCONTO.AsString = 'A');
+    if Panel6.Visible then
+      Height := 710
+    else
+      Height := 590;
   end;
+
 
   case AnsiIndexStr(fDmCupomFiscal.cdsTipoCobrancaGERAR_NFCE.AsString,['S','N','O']) of
     0: begin
@@ -1357,16 +1369,14 @@ begin
   while not fDmCupomFiscal.cdsCupom_Itens.Eof do
   begin
     fDmCupomFiscal.cdsCupom_Itens.Edit;
-    fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.000',(fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
-                                                            vVlrTotal / vVlrProdutos)));
-    //vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrRestante -
-    //               (fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency * fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat)));
-    //if (fDmCupomFiscal.cdsCupom_Itens.RecordCount = fDmCupomFiscal.cdsCupom_Itens.RecNo) and ( StrToFloat(FormatFloat('0.00',vVlrRestante)) <> StrToFloat(FormatFloat('0.00',0))) then
-    //  fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency + vVlrRestante));
+    if CurrencyEdit2.Value > 0 then
+      fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.000',(fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
+                                                              vVlrTotal / vVlrProdutos)));
 
     prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,  //aqui
                                          fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat,fDmCupomFiscal.cdsCupom_ItensPERC_DESCONTO.AsFloat,
-                                         fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat,'S',0);
+                                         fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat,'S',
+                                         fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsCurrency);
     fDmCupomFiscal.prc_Busca_IBPT;
     fDmCupomFiscal.cdsCupom_Itens.Post;
     fDmCupomFiscal.cdsCupom_Itens.Next;
@@ -1399,8 +1409,8 @@ begin
   if fDmCupomFiscal.cdsCupomFiscal.State in [dsBrowse] then
     fDmCupomFiscal.cdsCupomFiscal.Edit;
 
-  fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency -
-                                                       fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency;
+//  fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency -
+//                                                       fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency;
   DBEdit1.Text := DBEdit7.Text;
 end;
 
