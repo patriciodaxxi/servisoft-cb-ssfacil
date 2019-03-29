@@ -181,6 +181,7 @@ type
     DBEdit11: TDBEdit;
     Label40: TLabel;
     CurrencyEdit1: TCurrencyEdit;
+    OC21: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -245,6 +246,7 @@ type
     procedure btnCopiarPedidoClick(Sender: TObject);
     procedure btnDescontoClick(Sender: TObject);
     procedure OrdemdeCompra11Click(Sender: TObject);
+    procedure OC21Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -1649,6 +1651,29 @@ begin
   fDMCadPedido.qFilial_Rel.ParamByName('ID').AsInteger      := fDMCadPedido.cdsPedidoImpFILIAL.AsInteger;
   fDMCadPedido.qFilial_Rel.ParamByName('TIPO').AsInteger    := 3;
   fDMCadPedido.qFilial_Rel.ParamByName('POSICAO').AsInteger := 1;
+  fDMCadPedido.qFilial_Rel.Open;
+  vArq := fDMCadPedido.qFilial_RelCAMINHO.AsString;
+
+  if FileExists(vArq) then
+    fDMCadPedido.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadPedido.frxReport1.ShowReport;
+end;
+
+procedure TfrmCadOC.OC21Click(Sender: TObject);
+var
+  vArq : String;
+begin
+  prc_Controle_Imp('P');
+
+  fDMCadPedido.qFilial_Rel.Close;
+  fDMCadPedido.qFilial_Rel.ParamByName('ID').AsInteger      := fDMCadPedido.cdsPedidoImpFILIAL.AsInteger;
+  fDMCadPedido.qFilial_Rel.ParamByName('TIPO').AsInteger    := 3;
+  fDMCadPedido.qFilial_Rel.ParamByName('POSICAO').AsInteger := 2;
   fDMCadPedido.qFilial_Rel.Open;
   vArq := fDMCadPedido.qFilial_RelCAMINHO.AsString;
 

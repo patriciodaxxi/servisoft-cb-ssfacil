@@ -508,7 +508,7 @@ object frmManifesto: TfrmManifesto
             Transparent = True
           end
           object btnMan: TNxButton
-            Left = 100
+            Left = 101
             Top = 61
             Width = 141
             Height = 28

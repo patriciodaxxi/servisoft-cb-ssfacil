@@ -25,7 +25,7 @@ object frmCadOC: TfrmCadOC
     Top = 0
     Width = 1030
     Height = 690
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOC: TfrmCadOC
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -3242,8 +3242,12 @@ object frmCadOC: TfrmCadOC
     object Personalizados1: TMenuItem
       Caption = 'Personalizados'
       object OrdemdeCompra11: TMenuItem
-        Caption = 'OC 1'
+        Caption = 'OC 1 '
         OnClick = OrdemdeCompra11Click
+      end
+      object OC21: TMenuItem
+        Caption = 'OC 2'
+        OnClick = OC21Click
       end
     end
   end
