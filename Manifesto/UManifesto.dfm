@@ -610,6 +610,13 @@ object frmManifesto: TfrmManifesto
           Percent = 0
           TotalParts = 0
         end
+        object Edit1: TEdit
+          Left = 893
+          Top = 11
+          Width = 206
+          Height = 21
+          TabOrder = 0
+        end
       end
       object Panel1: TPanel
         Left = 0

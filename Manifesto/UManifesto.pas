@@ -87,6 +87,7 @@ type
     btnMan: TNxButton;
     btnDownload: TNxButton;
     cbOpcao: TComboBox;
+    Edit1: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -1402,6 +1403,9 @@ begin
       CurrencyEdit2.Text := '0'
     else
       CurrencyEdit2.Text := maxNSU;
+
+    Edit1.Text := vNSUInf;
+    
     CurrencyEdit7.Value := qtdeDocto;
 
     SXml := TStringStream.Create('');
