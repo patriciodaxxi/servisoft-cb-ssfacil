@@ -251,6 +251,7 @@ type
     Panel4: TPanel;
     btnGerarCCusto: TNxButton;
     Detalhada21: TMenuItem;
+    chkTotalDia: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -2089,7 +2090,7 @@ begin
   else
     vFilial := 0;
   vTipo_Config_Email := 3;
-  prc_Imp_Detalhada(True, 'A');
+  prc_Imp_Detalhada(not(chkTotalDia.Checked), 'A');
 end;
 
 procedure TfrmCadDuplicata.ListaSimples1Click(Sender: TObject);
