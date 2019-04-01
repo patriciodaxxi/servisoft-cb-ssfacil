@@ -67,7 +67,7 @@ end;
 procedure TfrmConsProdSTRet.prc_Consultar;
 begin
   fDMCadMovProdST.cdsConsProdST.Close;
-  fDMCadMovProdST.sdsConsProdST.CommandText := fDMCadMovProdST.ctConsProdST;
+  fDMCadMovProdST.sdsConsProdST.CommandText := fDMCadMovProdST.ctConsProdST + ' WHERE 0 = 0 ';
   if ceIDProduto.AsInteger > 0 then
     fDMCadMovProdST.sdsConsProdST.CommandText := fDMCadMovProdST.sdsConsProdST.CommandText + ' AND AUX.ID = ' + IntToStr(ceIDProduto.AsInteger)
   else

@@ -256,7 +256,7 @@ object DmCadMovProdST: TDmCadMovProdST
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsProdST'
-    Left = 476
+    Left = 475
     Top = 271
     object cdsConsProdSTID: TIntegerField
       FieldName = 'ID'
@@ -303,7 +303,7 @@ object DmCadMovProdST: TDmCadMovProdST
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43500.689950381900000000
-    ReportOptions.LastChange = 43556.681013043980000000
+    ReportOptions.LastChange = 43556.695563287040000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
