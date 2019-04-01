@@ -39,6 +39,7 @@ type
     btnTipoCadastro: TNxButton;
     btnTipoSped: TNxButton;
     RadioGroup2: TRadioGroup;
+    btnImpGrade: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -67,6 +68,7 @@ type
     procedure btnTipoCadastroClick(Sender: TObject);
     procedure btnTipoSpedClick(Sender: TObject);
     procedure ComboBox1Click(Sender: TObject);
+    procedure btnImpGradeClick(Sender: TObject);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -85,8 +87,7 @@ var
 
 implementation
 
-uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque_Bal,
-  UConsEstoque_Bal_Det, USel_Balanco;
+uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque_Bal, UConsEstoque_Bal_Det, USel_Balanco;
 
 {$R *.dfm}
 
@@ -627,6 +628,33 @@ procedure TfrmConsEstoque_Bal.ComboBox1Click(Sender: TObject);
 begin
   btnTipoCadastro.Enabled := (ComboBox1.ItemIndex = 0);
   btnTipoSped.Enabled     := (ComboBox1.ItemIndex = 1);
+end;
+
+procedure TfrmConsEstoque_Bal.btnImpGradeClick(Sender: TObject);
+var
+  vArq: String;
+begin
+  SMDBGrid1.DisableScroll;
+  vTipo_Config_Email := 4;
+  fDMConsEstoque.cdsFilial.Locate('ID',RxDBLookupCombo1.KeyValue,[loCaseInsensitive]);
+  if ComboBox1.ItemIndex = 0 then
+  begin
+    case RadioGroup1.ItemIndex of
+      0: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_REG;REFERENCIA;NOME_COMBINACAO;TAMANHO';
+      1: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_REG;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+    end;
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco_grade.fr3';
+  end;
+
+  if FileExists(vArq) then
+  begin
+    fDMConsEstoque.frxReport1.Report.LoadFromFile(vArq);
+    fDMConsEstoque.cdsBalanco.First;
+    fDMConsEstoque.frxReport1.variables['Empresa'] := QuotedStr(fDMConsEstoque.cdsFilialNOME.AsString);
+    fDMConsEstoque.frxReport1.variables['DataReferencia'] := QuotedStr(FormatDateTime('DD/MM/YYYY',DateEdit1.date));
+    fDMConsEstoque.frxReport1.ShowReport;
+  end;
+  SMDBGrid1.EnableScroll;
 end;
 
 end.

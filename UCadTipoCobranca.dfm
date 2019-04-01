@@ -22,7 +22,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
     Top = 0
     Width = 906
     Height = 622
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -30,7 +30,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
