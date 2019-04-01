@@ -10708,7 +10708,7 @@ object DMCadPedido: TDMCadPedido
       'COMPL_END_FILIAL=COMPL_END_FILIAL')
     DataSource = dsPedidoImp
     BCDToCurrency = False
-    Left = 824
+    Left = 825
     Top = 452
   end
   object frxDBDataset2: TfrxDBDataset
