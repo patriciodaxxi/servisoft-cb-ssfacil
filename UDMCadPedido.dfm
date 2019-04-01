@@ -413,6 +413,9 @@ object DMCadPedido: TDMCadPedido
     object sdsPedidoBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object sdsPedidoID_PEDWEB: TIntegerField
+      FieldName = 'ID_PEDWEB'
+    end
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
@@ -873,6 +876,9 @@ object DMCadPedido: TDMCadPedido
     object cdsPedidoBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
       DisplayFormat = '0.00'
+    end
+    object cdsPedidoID_PEDWEB: TIntegerField
+      FieldName = 'ID_PEDWEB'
     end
   end
   object dsPedido: TDataSource
