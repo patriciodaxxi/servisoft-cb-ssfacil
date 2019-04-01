@@ -1721,6 +1721,7 @@ var
   vDia : Integer;
   vHora : Real;
   vMin : Real;
+  vAux2 : Real;
 
 begin
   Result := '';
