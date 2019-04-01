@@ -23,6 +23,8 @@ type
     RxDBLookupCombo1: TRxDBLookupCombo;
     Label8: TLabel;
     RxDBLookupCombo2: TRxDBLookupCombo;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
   private

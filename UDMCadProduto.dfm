@@ -2051,17 +2051,17 @@ object dmCadProduto: TdmCadProduto
       '_REG = '#39'C'#39') then '#39'Material Consumo'#39#13#10'         when (PRO.TIPO_REG' +
       ' = '#39'I'#39') then '#39'Imobilizado'#39#13#10'         when (PRO.TIPO_REG = '#39'S'#39') t' +
       'hen '#39'Semiacabado'#39#13#10'         else '#39#39#13#10'       end as TIPO_REG_DESC' +
-      'RICAO,'#13#10#13#10'       (select sum(E2.QTD) QTDGERAL'#13#10'        from ESTO' +
-      'QUE_ATUAL E2'#13#10'        where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE,' +
-      ' PCUSTO.CONTADOR CONT_POSSUIPRECO, PRO.DTCAD, LIN.NOME NOME_LINH' +
-      'A, coalesce(NCM.gerar_st,'#39'N'#39') GERAR_ST'#13#10'from PRODUTO PRO'#13#10'left j' +
-      'oin TAB_NCM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left join MARCA on (PR' +
-      'O.ID_MARCA = MARCA.ID)'#13#10'left join GRUPO on (PRO.ID_GRUPO = GRUPO' +
-      '.ID)'#13#10'left join PRODUTO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left joi' +
-      'n PRODUTO_LIVRO LI on (PRO.ID = LI.ID)  '#13#10'left join PESSOA FORN ' +
-      'on pro.id_fornecedor = forn.codigo'#13#10'LEFT JOIN vpossui_pcusto PCU' +
-      'STO ON PRO.ID = PCUSTO.ID'#13#10'left join LINHA LIN on (lin.id = pro.' +
-      'id_linha)'#13#10
+      'RICAO,'#13#10#13#10'       (select cast(sum(E2.QTD) AS Float) QTDGERAL'#13#10'  ' +
+      '      from ESTOQUE_ATUAL E2'#13#10'        where E2.ID_PRODUTO = PRO.I' +
+      'D) QTD_ESTOQUE, PCUSTO.CONTADOR CONT_POSSUIPRECO, PRO.DTCAD, LIN' +
+      '.NOME NOME_LINHA, coalesce(NCM.gerar_st,'#39'N'#39') GERAR_ST'#13#10'from PROD' +
+      'UTO PRO'#13#10'left join TAB_NCM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left jo' +
+      'in MARCA on (PRO.ID_MARCA = MARCA.ID)'#13#10'left join GRUPO on (PRO.I' +
+      'D_GRUPO = GRUPO.ID)'#13#10'left join PRODUTO_VEICULO PV on (PRO.ID = P' +
+      'V.ID)'#13#10'left join PRODUTO_LIVRO LI on (PRO.ID = LI.ID)  '#13#10'left jo' +
+      'in PESSOA FORN on pro.id_fornecedor = forn.codigo'#13#10'LEFT JOIN vpo' +
+      'ssui_pcusto PCUSTO ON PRO.ID = PCUSTO.ID'#13#10'left join LINHA LIN on' +
+      ' (lin.id = pro.id_linha)'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -2221,12 +2221,6 @@ object dmCadProduto: TdmCadProduto
       DisplayLabel = 'Data Venda'
       FieldName = 'DT_VENDA'
     end
-    object cdsProduto_ConsultaQTD_ESTOQUE: TFMTBCDField
-      FieldName = 'QTD_ESTOQUE'
-      DisplayFormat = '0.000##'
-      Precision = 15
-      Size = 6
-    end
     object cdsProduto_ConsultaNOMEGRUPO: TStringField
       FieldName = 'NOMEGRUPO'
       Size = 40
@@ -2335,6 +2329,9 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'GERAR_ST'
       FixedChar = True
       Size = 1
+    end
+    object cdsProduto_ConsultaQTD_ESTOQUE: TFloatField
+      FieldName = 'QTD_ESTOQUE'
     end
   end
   object dsProduto_Consulta: TDataSource

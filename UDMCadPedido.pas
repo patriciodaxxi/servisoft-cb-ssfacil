@@ -3435,6 +3435,8 @@ type
     cdsTriCCustoNUM_END_COB: TStringField;
     cdsTriCCustoCOMPL_TRI_COB: TStringField;
     cdsTriCCustoUF_TRI_COB: TStringField;
+    cdsTriCCustoEMAIL_COMRAS: TStringField;
+    cdsTriCCustoCONTATO_COMPRAS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3472,8 +3474,7 @@ type
 
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
 
-    procedure prc_Imp_Desconto;
-
+    procedure prc_Imp_Desconto;                
   public
     { Public declarations }
     vMSGErro: String;
@@ -3494,9 +3495,9 @@ type
     vID_Cond_Pagto_Ant: Integer;
     vGravou_OK_Ajuste: Boolean;
     vImpPreco: Boolean;
-    vImp_cabecalho : Boolean;
-    vID_Operacao : Integer;
-    vFinalidade : String;
+    vImp_cabecalho: Boolean;
+    vID_Operacao: Integer;
+    vFinalidade: String;
 
     vVlr_Unitario_Copia: Real;
     vID_Cor_Copia: Integer;
@@ -3510,12 +3511,12 @@ type
     vImpPedTerceiro: Boolean;
 
     //********* ADD
-    vFator_Calculo : Real;
-    vTempo_Prod_Calc : Real;
-    vVlr_Unitario_Calc : Real;
-    vQtd_Calc : Real;
-    vConfirma_Calc : Boolean;
-    vVlr_Maquina_Calc : Real;
+    vFator_Calculo: Real;
+    vTempo_Prod_Calc: Real;
+    vVlr_Unitario_Calc: Real;
+    vQtd_Calc: Real;
+    vConfirma_Calc: Boolean;
+    vVlr_Maquina_Calc: Real;
     //*********
 
     procedure prc_Localizar(ID: Integer);
@@ -3530,7 +3531,7 @@ type
 
     procedure prc_Situacao_Orc(ID_Orcamento: Integer);
     procedure prc_Abrir_Produto;
-    procedure prc_Abrir_ProdutoLoja(ID : Integer ; Cod_Barra, Referencia : String);
+    procedure prc_Abrir_ProdutoLoja(ID: Integer ; Cod_Barra, Referencia: String);
     function fnc_Existe_Fat(ID: Integer): Integer;
     function fnc_Existe_DupPaga(ID: Integer): Integer;
     procedure prc_Abrir_CSTICMS(Tipo: String);
@@ -4033,7 +4034,7 @@ begin
   cdsProduto.Open;
 end;
 
-procedure TDMCadPedido.prc_Abrir_ProdutoLoja(ID : Integer ; Cod_Barra, Referencia : String);
+procedure TDMCadPedido.prc_Abrir_ProdutoLoja(ID: Integer ; Cod_Barra, Referencia: String);
 begin
   cdsProduto.Close;
   sdsProduto.CommandText := ctProduto;

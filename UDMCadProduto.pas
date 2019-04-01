@@ -283,7 +283,6 @@ type
     sdsProdutoUSA_PERC_IMP_INTERESTADUAL: TStringField;
     cdsProdutoUSA_PERC_IMP_INTERESTADUAL: TStringField;
     qParametrosMOSTRAR_NOME_ETIQUETA: TStringField;
-    cdsProduto_ConsultaQTD_ESTOQUE: TFMTBCDField;
     sdsProdutoIMPRIMIR_ETIQUETA_NAV: TStringField;
     cdsProdutoIMPRIMIR_ETIQUETA_NAV: TStringField;
     sdsPosicao: TSQLDataSet;
@@ -1930,6 +1929,7 @@ type
     cdsFichaTecnicaID_COR_COMBINACAO: TIntegerField;
     cdsFichaTecnicaQTD_ESTOQUE_MIN: TFloatField;
     cdsFichaTecnicaTIPO: TStringField;
+    cdsProduto_ConsultaQTD_ESTOQUE: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

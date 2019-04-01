@@ -9224,7 +9224,14 @@ object DMRecebeXML: TDMRecebeXML
         Name = 'ID_TipoCobranca'
         DataType = ftInteger
       end>
-    IndexDefs = <>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end>
+    IndexFieldNames = 'DtVencimento'
     Params = <>
     StoreDefs = True
     Left = 568
