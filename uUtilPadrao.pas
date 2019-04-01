@@ -18,6 +18,7 @@ uses
   function Formatar_Campo(Campo: String; Tamanho: Integer): String;
   function fnc_Calcular_Hora(Hora_Ini, Hora_Fin: TDateTime): Real;
   function fnc_Calcular_Hora2(Hora_Ini, Hora_Fin, DataIni, DataFin: TDateTime): Real;
+  
   function fnc_Data_Vencimento(Data: TDateTime): TDateTime;
   function fnc_Montar_Campo(Separador: String = ';'; vReg: String = ''): String;
   function fnc_Montar_Valor(Campo: String): String;
@@ -31,6 +32,7 @@ uses
   function fnc_Verificar_Local(Usa_Local_Estoque: String): Integer;
   function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor: Integer ; Filial : Integer = 1): Real;
   function fnc_HorarioVerao: Boolean;
+  
   function fnc_Buscar_Comissao_Prod(ID_Produto, ID_Cliente, ID_Vendedor: Integer): Real;
   procedure prc_le_Grid(Grid: TSMDBGrid; Form, Caminho: string);
   procedure prc_Grava_Grid(Grid: TSMDBGrid; Form, Caminho: string);
@@ -67,6 +69,9 @@ uses
   function fnc_Verifica_Tipo_Lote: String;
 
   function fnc_Converte_Horas(Hora: Real): Real;
+  function fnc_Converte_Min_Dec(Hora: Real): Real;
+  function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2 : Real) : String;
+
   function CharEspeciais(Texto:String):String;
   function  SQLLocate(Tabela, CampoProcura, CampoRetorno, ValorFind : string) : string ;
 
@@ -1697,6 +1702,65 @@ begin
     ValorFind := '' ;
 end ;
 
+function fnc_Converte_Min_Dec(Hora: Real): Real; //Converte de Decimal para Minutos 
+var
+  vAux : Real;
+begin
+  Result := 0;
+  //vAux := Frac vTempo - Trunc(vTempo);
+  vAux := Frac(Hora);
+  if StrToFloat(FormatFloat('0.00',vAux)) > 0 then
+    Result := Trunc(Hora) + StrToFloat(FormatFloat('0.00',(vAux * 60) / 100));
+
+end;
+
+function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2 : Real) : String;
+var
+  vAux : Real;
+  vTexto : String;
+  vDia : Integer;
+  vHora : Real;
+  vMin : Real;
+
+begin
+  Result := '';
+
+  vAux  := StrToInt(FormatFloat('',HourOf(Hora1)));
+  vMin  := StrToInt(FormatFloat('',Minuteof(Hora1)));
+  vMin  := StrToFloat(FormatFloat('0.00',(vAux2 * 100) / 60));
+  vAux2 := Frac(Hora2);
+  vMin  := vMin + StrToFloat(FormatFloat('0.00',(vAux2 * 100) / 60));
+  vAux  := vAux + Trunc(vMin) + Trunc(Hora2);
+  vAux2 := Frac(vMin);
+  vAux2 := fnc_Converte_Min_Dec(vAux2);
+  
+
+
+  vTexto := IntToStr( HourOf(Hora1));
+  vTexto := vTexto + ',' + FormatFloat('00', MinuteOf(Hora1));
+
+
+
+  vAux := StrToFloat(vTexto)  + Hora2;
+
+  vAux := vAux / 24;
+  vDia := Trunc(vAux);
+
+  Data := Data + vDia;
+
+  vAux := frac(vAux);
+
+  vAux := vAux * 24;
+
+  vAux2 := frac(vAux);
+  vaux2 := fnc_Converte_Min_Dec(vAux2);
+  vAux  := Trunc(vAux) + vAux2;
+
+  Result := DateToStr(Data) + 'H' + FloatToStr(vAux);
+
+  ShowMessage(Result);
+
+end;
 
 
 end.
