@@ -2470,6 +2470,10 @@ begin
   fDMCadProduto.cdsProduto_Forn.Open;
   fDMCadProduto.cdsProduto_Consumo.Close;
   fDMCadProduto.cdsProduto_Consumo.Open;
+  fDMCadProduto.cdsProduto_Consumo_Proc.Close;
+  fDMCadProduto.cdsProduto_Consumo_Proc.Open;
+  fDMCadProduto.cdsProduto_Consumo_Proc.First;
+
   if (fDMCadProduto.qParametrosEMPRESA_VEICULO.AsString = 'S') then
     fDMCadProduto.prc_Abrir_Veiculo(fDMCadProduto.cdsProdutoID.AsInteger);
 
@@ -5940,7 +5944,7 @@ begin
     MessageDlg('*** Já existe processo lançado nesta Posição!', mtInformation, [mbOk], 0);
     exit;
   end;
-  
+
   if MessageDlg('Deseja Atualizar o Processo?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
 
@@ -5967,7 +5971,9 @@ begin
       while not fDMCadProduto.cdsProduto_Consumo.Eof do
       begin
         if fDMCadProduto.cdsProduto_Consumo_Proc.IsEmpty then
+        begin
           prc_Gravar_Consumo_Proc;
+          fDMCadProduto.cdsProduto_Consumo_Proc.ApplyUpdates(0);        end;
         fDMCadProduto.cdsProduto_Consumo.Next;
       end;
     end;
@@ -5996,6 +6002,7 @@ begin
 
     fDMCadProduto.cdsPosicao_Proc.Next;
   end;
+
 end;
 
 end.

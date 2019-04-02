@@ -2633,6 +2633,7 @@ begin
     qSetor.Open;
     cdsProduto_ConsumoNOME_SETOR.AsString := qSetorNOME.AsString;
   end;
+
 end;
 
 function TdmCadProduto.fnc_Calcular_Mat: Real;

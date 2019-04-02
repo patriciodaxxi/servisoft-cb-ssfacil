@@ -10512,7 +10512,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43553.623404791670000000
+    ReportOptions.LastChange = 43556.723590925930000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -17949,13 +17949,13 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 2
     end
-    object cdsTriCCustoEMAIL_COMRAS: TStringField
-      FieldName = 'EMAIL_COMRAS'
-      Size = 150
-    end
     object cdsTriCCustoCONTATO_COMPRAS: TStringField
       FieldName = 'CONTATO_COMPRAS'
       Size = 60
+    end
+    object cdsTriCCustoEMAIL_COMRAS: TStringField
+      FieldName = 'EMAIL_COMRAS'
+      Size = 150
     end
   end
   object dsTriCCusto: TDataSource

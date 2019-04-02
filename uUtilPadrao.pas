@@ -1710,7 +1710,11 @@ begin
   //vAux := Frac vTempo - Trunc(vTempo);
   vAux := Frac(Hora);
   if StrToFloat(FormatFloat('0.00',vAux)) > 0 then
-    Result := Trunc(Hora) + StrToFloat(FormatFloat('0.00',(vAux * 60) / 100));
+  begin
+    vAux := StrToFloat(FormatFloat('0.00',(vAux * 60) / 100));
+    vAux := Trunc(Hora) + vAux;
+    Result := vAux;
+  end;
 
 end;
 
@@ -1720,29 +1724,38 @@ var
   vTexto : String;
   vDia : Integer;
   vHora : Real;
-  vMin : Real;
   vAux2 : Real;
+  i : Integer;
+  vMin : Real;
+  vSeg, vMil : real;
+
+  vH, vM, vS, vMS : Word;
 
 begin
   Result := '';
+  //vTexto := TimeToStr(Hora1);
+  vAux  := StrToInt(FormatFloat('00',HourOf(Hora1)));
 
-  vAux  := StrToInt(FormatFloat('',HourOf(Hora1)));
-  vMin  := StrToInt(FormatFloat('',Minuteof(Hora1)));
-  vMin  := StrToFloat(FormatFloat('0.00',(vAux2 * 100) / 60));
+
+  DecodeTime(Hora1,vH,vM,vS,vMS);
+
+  vMin  := vM;
+
+  //vMin  := StrToFloat(Copy(vTexto,4,2));
+  //vMin  := StrToFloat(FormatFloat('0.00',(vMIn /100) * 100) / 60));
+  vMin  := StrToFloat(FormatFloat('0.00',(vMIn / 60)));
+
   vAux2 := Frac(Hora2);
   vMin  := vMin + StrToFloat(FormatFloat('0.00',(vAux2 * 100) / 60));
   vAux  := vAux + Trunc(vMin) + Trunc(Hora2);
   vAux2 := Frac(vMin);
   vAux2 := fnc_Converte_Min_Dec(vAux2);
-  
+  vAux  := StrToFloat(FormatFloat('0.00',vAux + vAux2));
 
+  //vTexto := IntToStr( HourOf(Hora1));
+  //vTexto := vTexto + ',' + FormatFloat('00', MinuteOf(Hora1));
 
-  vTexto := IntToStr( HourOf(Hora1));
-  vTexto := vTexto + ',' + FormatFloat('00', MinuteOf(Hora1));
-
-
-
-  vAux := StrToFloat(vTexto)  + Hora2;
+  //vAux := StrToFloat(vTexto)  + Hora2;
 
   vAux := vAux / 24;
   vDia := Trunc(vAux);
@@ -1754,12 +1767,14 @@ begin
   vAux := vAux * 24;
 
   vAux2 := frac(vAux);
-  vaux2 := fnc_Converte_Min_Dec(vAux2);
+  //vaux2 := fnc_Converte_Min_Dec(vAux2);
   vAux  := Trunc(vAux) + vAux2;
+
+
 
   Result := DateToStr(Data) + 'H' + FloatToStr(vAux);
 
-  ShowMessage(Result);
+
 
 end;
 

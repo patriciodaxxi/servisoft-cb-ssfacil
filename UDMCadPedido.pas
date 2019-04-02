@@ -3435,10 +3435,10 @@ type
     cdsTriCCustoNUM_END_COB: TStringField;
     cdsTriCCustoCOMPL_TRI_COB: TStringField;
     cdsTriCCustoUF_TRI_COB: TStringField;
-    cdsTriCCustoEMAIL_COMRAS: TStringField;
     cdsTriCCustoCONTATO_COMPRAS: TStringField;
     sdsPedidoID_PEDWEB: TIntegerField;
     cdsPedidoID_PEDWEB: TIntegerField;
+    cdsTriCCustoEMAIL_COMRAS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

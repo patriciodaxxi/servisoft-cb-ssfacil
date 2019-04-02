@@ -24,7 +24,7 @@ object frmCadProcesso: TfrmCadProcesso
     Top = 0
     Width = 779
     Height = 511
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -32,7 +32,7 @@ object frmCadProcesso: TfrmCadProcesso
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -74,7 +74,7 @@ object frmCadProcesso: TfrmCadProcesso
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 9
+        ColCount = 10
         RowCount = 2
         Columns = <
           item
@@ -135,6 +135,10 @@ object frmCadProcesso: TfrmCadProcesso
             Title.Alignment = taCenter
             Title.Caption = 'Posi'#231#227'o Imprimir 2'
             Width = 189
+            Visible = True
+          end
+          item
+            Expanded = False
             Visible = True
           end>
       end
