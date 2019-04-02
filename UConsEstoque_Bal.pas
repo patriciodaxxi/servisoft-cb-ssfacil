@@ -94,7 +94,7 @@ uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque_Bal, UConsEstoque_B
 procedure TfrmConsEstoque_Bal.prc_Consultar;
 var
   vQtdAux: Integer;
-  vCampo : String;
+  vCampo: String;
 begin
   vQtdAux := 0;
 

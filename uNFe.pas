@@ -3820,8 +3820,12 @@ begin
   begin
     if fDMCadNotaFiscal.cdsNotaFiscalQTD_TOTAL_PRODUTOS.AsFloat > 0 then
     begin
-     vTexto := 'Qtde de peças: ' + FormatFloat('###,##0.00', fDMCadNotaFiscal.cdsNotaFiscalQTD_TOTAL_PRODUTOS.AsFloat);
-     Grava_DadosAdicionaisNFe('('+vTexto+')',0);
+      if fDMCadNotaFiscal.cdsParametrosUNIDADE_PECA.AsString <> '' then
+        vTexto := 'Qtde de ' + fDMCadNotaFiscal.cdsParametrosUNIDADE_PECA.AsString + ':' +
+                  FormatFloat('###,##0.00', fDMCadNotaFiscal.cdsNotaFiscalQTD_TOTAL_PRODUTOS.AsFloat)
+      else
+        vTexto := 'Qtde de peças: ' + FormatFloat('###,##0.00', fDMCadNotaFiscal.cdsNotaFiscalQTD_TOTAL_PRODUTOS.AsFloat);
+      Grava_DadosAdicionaisNFe('('+vTexto+')',0);
     end;
   end;
 
