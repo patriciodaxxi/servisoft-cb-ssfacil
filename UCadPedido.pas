@@ -4248,7 +4248,7 @@ begin
   fDMCadPedido.vImpPreco     := ckImpPreco.Checked;
   prc_Posiciona_Imp;
 
-  email := TValidaEmail.create(fDMCadPedido.cdsPedidoImpFILIAL.AsInteger,'1');
+  email := TValidaEmail.create(fDMCadPedido.cdsPedidoImpFILIAL.AsInteger,'6');
   try
     pdf := TfrxPDFExport.Create(nil);
     enviar := TfrxMailExport.Create(nil);

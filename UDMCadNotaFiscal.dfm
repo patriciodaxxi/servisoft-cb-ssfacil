@@ -9156,7 +9156,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM NOTAFISCAL_NFE'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1009
+    Left = 1010
     Top = 429
     object qProximaItem_NFeITEM: TIntegerField
       FieldName = 'ITEM'

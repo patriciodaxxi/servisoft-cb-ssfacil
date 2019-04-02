@@ -413,6 +413,9 @@ object DMCadPedido: TDMCadPedido
     object sdsPedidoBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object sdsPedidoID_PEDWEB: TIntegerField
+      FieldName = 'ID_PEDWEB'
+    end
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
@@ -873,6 +876,9 @@ object DMCadPedido: TDMCadPedido
     object cdsPedidoBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
       DisplayFormat = '0.00'
+    end
+    object cdsPedidoID_PEDWEB: TIntegerField
+      FieldName = 'ID_PEDWEB'
     end
   end
   object dsPedido: TDataSource
@@ -10506,7 +10512,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43553.623404791670000000
+    ReportOptions.LastChange = 43556.723590925930000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -10702,7 +10708,7 @@ object DMCadPedido: TDMCadPedido
       'COMPL_END_FILIAL=COMPL_END_FILIAL')
     DataSource = dsPedidoImp
     BCDToCurrency = False
-    Left = 824
+    Left = 825
     Top = 452
   end
   object frxDBDataset2: TfrxDBDataset
@@ -17943,13 +17949,13 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 2
     end
-    object cdsTriCCustoEMAIL_COMRAS: TStringField
-      FieldName = 'EMAIL_COMRAS'
-      Size = 150
-    end
     object cdsTriCCustoCONTATO_COMPRAS: TStringField
       FieldName = 'CONTATO_COMPRAS'
       Size = 60
+    end
+    object cdsTriCCustoEMAIL_COMRAS: TStringField
+      FieldName = 'EMAIL_COMRAS'
+      Size = 150
     end
   end
   object dsTriCCusto: TDataSource

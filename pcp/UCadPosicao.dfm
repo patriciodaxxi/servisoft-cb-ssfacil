@@ -42,7 +42,7 @@ object frmCadPosicao: TfrmCadPosicao
         Left = 0
         Top = 81
         Width = 720
-        Height = 335
+        Height = 232
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPosicao.dsPosicao
@@ -75,7 +75,7 @@ object frmCadPosicao: TfrmCadPosicao
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 6
+        ColCount = 7
         RowCount = 2
         Columns = <
           item
@@ -117,6 +117,13 @@ object frmCadPosicao: TfrmCadPosicao
             FieldName = 'IMP_AGRUPADO_MATERIAL'
             Title.Alignment = taCenter
             Title.Caption = 'Imp. Agrupado'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'USA_PROCESSO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Usa Processo'
             Visible = True
           end>
       end
@@ -462,6 +469,82 @@ object frmCadPosicao: TfrmCadPosicao
           Transparent = True
           OnClick = btnConsultarClick
         end
+      end
+      object SMDBGrid3: TSMDBGrid
+        Left = 0
+        Top = 332
+        Width = 720
+        Height = 84
+        Align = alBottom
+        Ctl3D = False
+        DataSource = DMCadPosicao.dsPosicao_Proc
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        ParentCtl3D = False
+        ReadOnly = True
+        TabOrder = 4
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        Flat = True
+        BandsFont.Charset = DEFAULT_CHARSET
+        BandsFont.Color = clWindowText
+        BandsFont.Height = -11
+        BandsFont.Name = 'MS Sans Serif'
+        BandsFont.Style = []
+        Groupings = <>
+        GridStyle.Style = gsCustom
+        GridStyle.OddColor = clWindow
+        GridStyle.EvenColor = clWindow
+        TitleHeight.PixelCount = 24
+        FooterColor = clBtnFace
+        ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+        RegistryKey = 'Software\Scalabium'
+        RegistrySection = 'SMDBGrid'
+        WidthOfIndicator = 11
+        DefaultRowHeight = 17
+        ScrollBars = ssHorizontal
+        ColCount = 4
+        RowCount = 2
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'ITEM'
+            Title.Alignment = taCenter
+            Title.Caption = 'Item'
+            Title.Color = 13619151
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'ID_PROCESSO'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID Processo'
+            Title.Color = 13619151
+            Width = 71
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME_PROCESSO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nome Processo'
+            Title.Color = 13619151
+            Width = 269
+            Visible = True
+          end>
+      end
+      object Panel4: TPanel
+        Left = 0
+        Top = 313
+        Width = 720
+        Height = 19
+        Align = alBottom
+        Color = 8404992
+        TabOrder = 5
       end
     end
     object TS_Cadastro: TRzTabSheet

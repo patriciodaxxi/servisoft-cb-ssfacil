@@ -1,8 +1,8 @@
 object dmCadProduto: TdmCadProduto
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 253
-  Top = 29
+  Left = 107
+  Top = 27
   Height = 714
   Width = 1288
   object sdsProduto: TSQLDataSet
