@@ -24,7 +24,7 @@ object frmRecebeXML: TfrmRecebeXML
     Top = 146
     Width = 1035
     Height = 519
-    ActivePage = tsDuplicatasDeducoes
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -2238,8 +2238,8 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 1
           Top = 1
           Width = 1025
-          Height = 267
-          Align = alTop
+          Height = 269
+          Align = alClient
           Ctl3D = False
           DataSource = DMRecebeXML.dsmItensNota
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]

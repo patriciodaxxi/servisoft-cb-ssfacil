@@ -5760,4 +5760,28 @@ object DMCadDuplicata: TDMCadDuplicata
       Size = 50
     end
   end
+  object qOrcCCusto: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_CENTROCUSTO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select co.percentual from conta_orcamento_ccusto CO'
+      'WHERE CO.ID = :ID'
+      '  and co.id_centrocusto = :ID_CENTROCUSTO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1014
+    Top = 124
+    object qOrcCCustoPERCENTUAL: TFloatField
+      FieldName = 'PERCENTUAL'
+    end
+  end
 end

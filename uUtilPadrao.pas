@@ -175,7 +175,8 @@ var
   vCodBarra_Pos : String;
   vTipo_Etiqueta : String; //ROT=Rotulo
   vTamanho_Pos : String;
-  vSelPesquisa : String; 
+  vSelPesquisa : String;
+  vSelCentroCusto : String; 
 
 implementation
 

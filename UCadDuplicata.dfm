@@ -1,8 +1,8 @@
 object frmCadDuplicata: TfrmCadDuplicata
-  Left = 41
-  Top = 118
+  Left = 86
+  Top = 23
   Width = 1062
-  Height = 657
+  Height = 687
   Caption = 'Duplicatas (A Receber/A Pagar)'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,9 +23,9 @@ object frmCadDuplicata: TfrmCadDuplicata
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1046
-    Height = 599
-    ActivePage = TS_Consulta
+    Width = 1054
+    Height = 637
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -33,7 +33,7 @@ object frmCadDuplicata: TfrmCadDuplicata
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -42,8 +42,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 218
-        Width = 1042
-        Height = 325
+        Width = 1050
+        Height = 363
         Align = alClient
         Ctl3D = False
         DataSource = DMCadDuplicata.dsDuplicata_Consulta
@@ -412,7 +412,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1042
+        Width = 1050
         Height = 30
         Align = alTop
         Color = 8404992
@@ -742,7 +742,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1042
+        Width = 1050
         Height = 158
         Align = alTop
         Color = clSilver
@@ -1370,8 +1370,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       end
       object pnlTotal: TPanel
         Left = 0
-        Top = 543
-        Width = 1042
+        Top = 581
+        Width = 1050
         Height = 33
         Align = alBottom
         Color = clSilver
@@ -1524,7 +1524,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel5: TPanel
         Left = 0
         Top = 188
-        Width = 1042
+        Width = 1050
         Height = 30
         Align = alTop
         Color = 16770764
@@ -1792,7 +1792,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1042
+        Width = 1050
         Height = 30
         Align = alTop
         Color = 8404992
@@ -2039,7 +2039,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 1042
+        Width = 1050
         Height = 396
         Align = alTop
         Enabled = False
@@ -2079,7 +2079,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 1040
+          Width = 1048
           Height = 27
           Align = alTop
           Color = clSilver
@@ -2188,7 +2188,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object Panel6: TPanel
           Left = 1
           Top = 55
-          Width = 1040
+          Width = 1048
           Height = 340
           Align = alBottom
           BevelOuter = bvNone
@@ -3933,12 +3933,12 @@ object frmCadDuplicata: TfrmCadDuplicata
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 426
-        Width = 1042
-        Height = 150
-        ActivePage = TS_Historico
+        Width = 1050
+        Height = 188
+        ActivePage = TS_CCusto
         ActivePageDefault = TS_Historico
         Align = alClient
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 2
         FixedDimension = 19
         object TS_Historico: TRzTabSheet
@@ -3946,8 +3946,8 @@ object frmCadDuplicata: TfrmCadDuplicata
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 1038
-            Height = 127
+            Width = 1046
+            Height = 165
             Align = alClient
             Ctl3D = False
             DataSource = DMCadDuplicata.dsDuplicata_Hist
@@ -4119,10 +4119,10 @@ object frmCadDuplicata: TfrmCadDuplicata
         object TS_CCusto: TRzTabSheet
           Caption = 'Centro de Custo'
           object SMDBGrid3: TSMDBGrid
-            Left = 97
+            Left = 114
             Top = 0
-            Width = 941
-            Height = 127
+            Width = 932
+            Height = 165
             Align = alClient
             Ctl3D = False
             DataSource = DMCadDuplicata.dsDuplicata_CCusto
@@ -4207,17 +4207,17 @@ object frmCadDuplicata: TfrmCadDuplicata
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 97
-            Height = 127
+            Width = 114
+            Height = 165
             Align = alLeft
             Color = clSilver
             TabOrder = 1
             object btnGerarCCusto: TNxButton
-              Left = 8
-              Top = 16
-              Width = 75
+              Left = 5
+              Top = 10
+              Width = 103
               Height = 31
-              Caption = 'Gerar'
+              Caption = 'Gerar Padr'#227'o'
               Enabled = False
               Glyph.Data = {
                 AE060000424DAE06000000000000360000002800000017000000170000000100
@@ -4277,6 +4277,37 @@ object frmCadDuplicata: TfrmCadDuplicata
               TabOrder = 0
               OnClick = btnGerarCCustoClick
             end
+            object btnIndividual: TNxButton
+              Left = 5
+              Top = 45
+              Width = 103
+              Height = 31
+              Hint = 'Busca somente as que est'#227'o faltando'
+              Caption = 'Individual'
+              Enabled = False
+              TabOrder = 1
+              OnClick = btnIndividualClick
+            end
+            object btnExcluir_CCusto: TNxButton
+              Left = 5
+              Top = 77
+              Width = 103
+              Height = 31
+              Caption = 'Excluir'
+              Enabled = False
+              TabOrder = 2
+              OnClick = btnExcluir_CCustoClick
+            end
+            object btnRecalcular_CCusto: TNxButton
+              Left = 5
+              Top = 109
+              Width = 103
+              Height = 31
+              Caption = 'Recalcular'
+              Enabled = False
+              TabOrder = 3
+              OnClick = btnRecalcular_CCustoClick
+            end
           end
         end
       end
@@ -4284,8 +4315,8 @@ object frmCadDuplicata: TfrmCadDuplicata
   end
   object stat1: TStatusBar
     Left = 0
-    Top = 599
-    Width = 1046
+    Top = 637
+    Width = 1054
     Height = 19
     Panels = <
       item
