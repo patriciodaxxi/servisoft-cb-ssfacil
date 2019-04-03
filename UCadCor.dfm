@@ -1,6 +1,6 @@
 object frmCadCor: TfrmCadCor
-  Left = 313
-  Top = 188
+  Left = 279
+  Top = 102
   Width = 763
   Height = 462
   BorderIcons = [biSystemMenu, biMaximize]
