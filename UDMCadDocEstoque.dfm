@@ -69,6 +69,9 @@ object DMCadDocEstoque: TDMCadDocEstoque
     object sdsDocEstoqueNUM_LOTE: TIntegerField
       FieldName = 'NUM_LOTE'
     end
+    object sdsDocEstoqueNUM_PEDIDO: TIntegerField
+      FieldName = 'NUM_PEDIDO'
+    end
   end
   object dspDocEstoque: TDataSetProvider
     DataSet = sdsDocEstoque
@@ -147,6 +150,9 @@ object DMCadDocEstoque: TDMCadDocEstoque
     end
     object cdsDocEstoqueNUM_LOTE: TIntegerField
       FieldName = 'NUM_LOTE'
+    end
+    object cdsDocEstoqueNUM_PEDIDO: TIntegerField
+      FieldName = 'NUM_PEDIDO'
     end
   end
   object dsDocEstoque: TDataSource
@@ -1937,7 +1943,7 @@ object DMCadDocEstoque: TDMCadDocEstoque
     SQL.Strings = (
       
         'SELECT P.USA_LOCALIZACAO_LOTE, CONTROLA_DOC_CLIFORN, P.REQ_ENTRE' +
-        'GUE_POR, P.REQ_NUM_LOTE'
+        'GUE_POR, P.REQ_NUM_LOTE, P.REQ_NUM_PED'
       'FROM PARAMETROS_EST P'
       '')
     SQLConnection = dmDatabase.scoDados
@@ -1960,6 +1966,11 @@ object DMCadDocEstoque: TDMCadDocEstoque
     end
     object qParametros_EstREQ_NUM_LOTE: TStringField
       FieldName = 'REQ_NUM_LOTE'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_EstREQ_NUM_PED: TStringField
+      FieldName = 'REQ_NUM_PED'
       FixedChar = True
       Size = 1
     end

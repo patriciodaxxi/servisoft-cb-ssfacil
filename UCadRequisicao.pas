@@ -66,6 +66,8 @@ type
     Label7: TLabel;
     DBEdit2: TDBEdit;
     Label8: TLabel;
+    Label9: TLabel;
+    DBEdit3: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -84,8 +86,11 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
+    procedure DBEdit2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure DBEdit3KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBEdit3Exit(Sender: TObject);
   private
     { Private declarations }
 
@@ -110,6 +115,8 @@ type
 
     procedure prc_Calcular_Total;
 
+    function fnc_Existe_Ped : Boolean;
+
   public
     { Public declarations }
   end;
@@ -120,7 +127,7 @@ var
 implementation
 
 uses DateUtils, rsDBUtils, uUtilPadrao, URelRequisicao, DmdDatabase,
-  UConsMatLote;
+  UConsMatLote, UConsMatPed;
 
 {$R *.dfm}
 
@@ -166,6 +173,12 @@ begin
     if MessageDlg('Nº do Lote não informado, confirma a requisição sem o Lote??',mtConfirmation,[mbYes,mbNo],0) = mrNo then
       exit;
   end;
+  if (fDMCadDocEstoque.qParametros_EstREQ_NUM_PED.AsString = 'S') and (fDMCadDocEstoque.cdsDocEstoqueNUM_PEDIDO.AsInteger <= 0) then
+  begin
+    if MessageDlg('Nº do Pedido não informado, confirma a requisição sem o Pedido??',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+      exit;
+  end;
+
 
   prc_Calcular_Total;
   if fDMCadDocEstoque.cdsDocEstoqueNUM_REQUISICAO.AsInteger <= 0 then
@@ -305,11 +318,13 @@ begin
   RxDBLookupCombo2.Visible := (fDMCadDocEstoque.qParametros_EstREQ_ENTREGUE_POR.AsString = 'S');
   Label7.Visible           := (fDMCadDocEstoque.qParametros_EstREQ_NUM_LOTE.AsString = 'S');
   DBEdit2.Visible          := (fDMCadDocEstoque.qParametros_EstREQ_NUM_LOTE.AsString = 'S');
-  
-  
-
-
-
+  Label8.Visible           := (fDMCadDocEstoque.qParametros_EstREQ_NUM_LOTE.AsString = 'S') or (fDMCadDocEstoque.qParametros_EstREQ_NUM_PED.AsString = 'S');
+  if (fDMCadDocEstoque.qParametros_EstREQ_NUM_LOTE.AsString = 'S') then
+    Label8.Caption := 'F5 para consultar Materiais do Lote'
+  else
+    Label8.Caption := 'F5 para consultar Materiais do Pedido';
+  Label9.Visible           := (fDMCadDocEstoque.qParametros_EstREQ_NUM_PED.AsString = 'S');
+  DBEdit3.Visible          := (fDMCadDocEstoque.qParametros_EstREQ_NUM_PED.AsString = 'S');
 end;
 
 procedure TfrmCadRequisicao.prc_Consultar(ID: Integer);
@@ -556,7 +571,7 @@ begin
   fDMCadDocEstoque.cdsFuncionario.Open;
 end;
 
-procedure TfrmCadRequisicao.FormKeyDown(Sender: TObject; var Key: Word;
+procedure TfrmCadRequisicao.DBEdit2KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if (Key = Vk_F5) then
@@ -566,6 +581,57 @@ begin
       frmConsMatLote.CurrencyEdit2.AsInteger := fDMCadDocEstoque.cdsDocEstoqueNUM_LOTE.AsInteger;
     frmConsMatLote.ShowModal;
     FreeAndNil(frmConsMatLote);
+  end;
+end;
+
+procedure TfrmCadRequisicao.DBEdit3KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F5) then
+  begin
+    frmConsMatPed := TfrmConsMatPed.Create(Self);
+    if fDMCadDocEstoque.cdsDocEstoque.State in [dsEdit,dsInsert] then
+    begin
+      if Trim(DBEdit3.Text) <> '' then
+        frmConsMatPed.CurrencyEdit2.AsInteger := StrToInt(DBEdit3.Text);
+    end;
+    frmConsMatPed.ShowModal;
+    FreeAndNil(frmConsMatPed);
+  end;
+end;
+
+function TfrmCadRequisicao.fnc_Existe_Ped: Boolean;
+var
+  sds: TSQLDataSet;
+begin
+  Result := False;
+
+  sds := TSQLDataSet.Create(nil);
+
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT COUNT(1) CONTADOR FROM PEDIDO P  WHERE P.NUM_PEDIDO = :NUM_PEDIDO  AND P.TIPO_REG = ' + QuotedStr('P');
+    sds.ParamByName('NUM_PEDIDO').AsInteger := fDMCadDocEstoque.cdsDocEstoqueNUM_PEDIDO.AsInteger;
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := True;
+  finally
+    FreeAndNil(sds);
+  end;
+end;
+
+procedure TfrmCadRequisicao.DBEdit3Exit(Sender: TObject);
+begin
+  if fDMCadDocEstoque.cdsDocEstoqueNUM_PEDIDO.AsInteger > 0 then
+  begin
+    if not fnc_Existe_Ped then
+    begin
+      MessageDlg('*** Pedido ' + fDMCadDocEstoque.cdsDocEstoqueNUM_PEDIDO.AsString + ' não encontrado!', mtError, [mbOk], 0);
+      DBEdit3.SetFocus;
+      exit;
+    end;
   end;
 end;
 

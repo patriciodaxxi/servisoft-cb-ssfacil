@@ -202,7 +202,8 @@ begin
   if (StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoPERC_COMISSAO.AsFloat)) > 0) and (fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger <= 0) and
      (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') then
     fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Pedido com % de comissão e o vendedor não informado!';
-  if (fDMCadPedido.qParametros_PedEXIGIR_NUM_PED_CLIENTE.AsString = 'S') and (trim(fDMCadPedido.cdsPedidoPEDIDO_CLIENTE.AsString) = '') then
+  if (fDMCadPedido.qParametros_PedEXIGIR_NUM_PED_CLIENTE.AsString = 'S') and (trim(fDMCadPedido.cdsPedidoPEDIDO_CLIENTE.AsString) = '')
+    and (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') then
     fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Nº Pedido Cliente (OC) não informado!';
   if (fDMCadPedido.qParametros_GeralEMPRESA_VAREJO.AsString = 'S') and (fDMCadPedido.cdsPedidoTIPO_ATENDIMENTO.AsInteger = 4)
     and (fDMCadPedido.cdsPedidoID_TRANSPORTADORA.AsInteger <= 0) then
