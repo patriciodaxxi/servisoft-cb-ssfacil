@@ -95,6 +95,9 @@ type
     RLLabel45: TRLLabel;
     RLLabel47: TRLLabel;
     RLDBText10: TRLDBText;
+    RLBand13: TRLBand;
+    RLLabel46: TRLLabel;
+    rlMemoObs: TRLMemo;
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand4BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand3BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -111,6 +114,7 @@ type
     procedure RLBand2BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand11BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand12BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand13BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     fDMRel: TDMRel;
@@ -423,6 +427,26 @@ begin
     exit;
   RLLabel45.Caption  := FormatFloat('###,###,##0.00',vVlrDescontado_Total);
   vVlrDescontado_Total := 0;
+end;
+
+procedure TfRelPagarReceber3.RLBand13BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  PrintIt :=  fDMCadDuplicata.vImpObs;
+  if PrintIt then
+  begin
+    if (Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString) = '') and (Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString) = '') then
+      PrintIt := False;
+  end;
+  if PrintIt then
+  begin
+    rlMemoObs.Lines.Clear;
+    rlMemoObs.Lines.Text := fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString;
+    if Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString) <> '' then
+      rlMemoObs.Lines.Text := rlMemoObs.Lines.Text + ' - ' + fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString
+    else
+      rlMemoObs.Lines.Text := fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString;
+  end;
 end;
 
 end.

@@ -25,7 +25,7 @@ object frmCadDuplicata: TfrmCadDuplicata
     Top = 0
     Width = 1054
     Height = 637
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -33,7 +33,7 @@ object frmCadDuplicata: TfrmCadDuplicata
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1366,6 +1366,14 @@ object frmCadDuplicata: TfrmCadDuplicata
           Height = 17
           Caption = 'Imprimir Total Dia'
           TabOrder = 18
+        end
+        object CheckBox2: TCheckBox
+          Left = 875
+          Top = 135
+          Width = 76
+          Height = 17
+          Caption = 'Imp. OBS'
+          TabOrder = 21
         end
       end
       object pnlTotal: TPanel
@@ -3935,10 +3943,10 @@ object frmCadDuplicata: TfrmCadDuplicata
         Top = 426
         Width = 1050
         Height = 188
-        ActivePage = TS_CCusto
+        ActivePage = TS_Historico
         ActivePageDefault = TS_Historico
         Align = alClient
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 2
         FixedDimension = 19
         object TS_Historico: TRzTabSheet

@@ -6009,7 +6009,7 @@ object DMCadPedido: TDMCadPedido
   object dsObs_Aux: TDataSource
     DataSet = cdsObs_Aux
     Left = 744
-    Top = 224
+    Top = 223
   end
   object sdsPedido_Cli: TSQLDataSet
     NoMetadata = True

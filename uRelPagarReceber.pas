@@ -80,10 +80,18 @@ type
     RLTotalSaldo: TRLLabel;
     RLTotalPagar: TRLLabel;
     RLLabel30: TRLLabel;
+    RLBand9: TRLBand;
+    RLLabel27: TRLLabel;
+    RLBand10: TRLBand;
+    RLLabel28: TRLLabel;
+    rlMemoObs: TRLMemo;
+    rlMemoObs2: TRLMemo;
     procedure FormCreate(Sender: TObject);
     procedure RLBand4BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand5BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand8BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand9BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand10BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     vSomaE, vSomaS: Currency;
@@ -138,6 +146,46 @@ begin
   RLTotalPagar.Caption   := FormatCurr('0.00',vTotalS);
   RLTotalReceber.Caption := FormatCurr('0.00',vTotalE);
   RLTotalSaldo.Caption   := FormatCurr('0.00',vTotalE - vTotalS);
+end;
+
+procedure TfRelPagarReceber.RLBand9BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  PrintIt := fDMCadDuplicata.vImpObs;
+  if PrintIt then
+  begin
+    if (Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString) = '') and (Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString) = '') then
+      PrintIt := False;
+  end;
+  if PrintIt then
+  begin
+    rlMemoObs.Lines.Clear;
+    rlMemoObs.Lines.Text := fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString;
+    if Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString) <> '' then
+      rlMemoObs.Lines.Text := rlMemoObs.Lines.Text + ' - ' + fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString
+    else
+      rlMemoObs.Lines.Text := fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString;
+  end;
+end;
+
+procedure TfRelPagarReceber.RLBand10BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  PrintIt := fDMCadDuplicata.vImpObs;
+  if PrintIt then
+  begin
+    if (Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString) = '') and (Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString) = '') then
+      PrintIt := False;
+  end;
+  if PrintIt then
+  begin
+    rlMemoObs2.Lines.Clear;
+    rlMemoObs2.Lines.Text := fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString;
+    if Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString) <> '' then
+      rlMemoObs2.Lines.Text := rlMemoObs2.Lines.Text + ' - ' + fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString
+    else
+      rlMemoObs2.Lines.Text := fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString;
+  end;
 end;
 
 end.

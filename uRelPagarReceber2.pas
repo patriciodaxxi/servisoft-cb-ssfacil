@@ -93,7 +93,12 @@ type
     RLBand12: TRLBand;
     RLLabel44: TRLLabel;
     RLLabel45: TRLLabel;
+    RLBand13: TRLBand;
+    RLLabel46: TRLLabel;
+    RLDraw5: TRLDraw;
     RLDraw4: TRLDraw;
+    RLDraw6: TRLDraw;
+    rlMemoObs: TRLMemo;
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand4BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand3BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -110,6 +115,7 @@ type
     procedure RLBand2BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand11BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand12BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand13BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     fDMRel: TDMRel;
@@ -223,6 +229,8 @@ begin
   end
   else
     RLLabel40.Caption := fDMCadDuplicata.cdsDuplicata_ConsultaCOD_BANCO.AsString;
+  RLDraw5.Enabled := not(fDMCadDuplicata.vImpObs);
+  RLDraw5.Visible := not(fDMCadDuplicata.vImpObs);
 end;
 
 procedure TfRelPagarReceber2.RLBand3BeforePrint(Sender: TObject;
@@ -422,6 +430,26 @@ begin
     exit;
   RLLabel45.Caption  := FormatFloat('###,###,##0.00',vVlrDescontado_Total);
   vVlrDescontado_Total := 0;
+end;
+
+procedure TfRelPagarReceber2.RLBand13BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  PrintIt := fDMCadDuplicata.vImpObs;
+  if PrintIt then
+  begin
+    if (Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString) = '') and (Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString) = '') then
+      PrintIt := False;
+  end;
+  if PrintIt then
+  begin
+    rlMemoObs.Lines.Clear;
+    rlMemoObs.Lines.Text := fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString;
+    if Trim(fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString) <> '' then
+      rlMemoObs.Lines.Text := rlMemoObs.Lines.Text + ' - ' + fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString
+    else
+      rlMemoObs.Lines.Text := fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString;
+  end;
 end;
 
 end.

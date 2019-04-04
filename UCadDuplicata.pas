@@ -255,6 +255,7 @@ type
     btnIndividual: TNxButton;
     btnExcluir_CCusto: TNxButton;
     btnRecalcular_CCusto: TNxButton;
+    CheckBox2: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -1480,6 +1481,7 @@ begin
   else
     vFilial := 0;
   vTipo_Config_Email := 3;
+  fDMCadDuplicata.vImpObs := CheckBox2.Checked;
   prc_Imp_Detalhada(False, '');
 end;
 

@@ -218,7 +218,7 @@ object fRelPagarReceber3: TfRelPagarReceber3
         Left = 0
         Top = 0
         Width = 1071
-        Height = 117
+        Height = 157
         DataFields = 'DTVENCIMENTO'
         object RLBand2: TRLBand
           Left = 0
@@ -257,7 +257,7 @@ object fRelPagarReceber3: TfRelPagarReceber3
         end
         object RLBand5: TRLBand
           Left = 0
-          Top = 68
+          Top = 96
           Width = 1071
           Height = 19
           BandType = btSummary
@@ -294,9 +294,9 @@ object fRelPagarReceber3: TfRelPagarReceber3
             ResetAfterPrint = True
           end
           object RLDBResult5: TRLDBResult
-            Left = 891
+            Left = 897
             Top = 4
-            Width = 75
+            Width = 69
             Height = 10
             Alignment = taRightJustify
             DataField = 'VLR_PAGO'
@@ -347,13 +347,13 @@ object fRelPagarReceber3: TfRelPagarReceber3
           Left = 0
           Top = 18
           Width = 1071
-          Height = 50
+          Height = 78
           DataFields = 'DTVENCIMENTO;TIPO_ES;TIPO_MOV'
           object RLBand4: TRLBand
             Left = 0
             Top = 16
             Width = 1071
-            Height = 14
+            Height = 15
             BeforePrint = RLBand4BeforePrint
             object RLDBText3: TRLDBText
               Left = 297
@@ -373,7 +373,7 @@ object fRelPagarReceber3: TfRelPagarReceber3
             object RLDBText4: TRLDBText
               Left = 614
               Top = 2
-              Width = 47
+              Width = 48
               Height = 10
               DataField = 'DTEMISSAO'
               DataSource = DMCadDuplicata.dsDuplicata_Consulta
@@ -401,7 +401,7 @@ object fRelPagarReceber3: TfRelPagarReceber3
             object RLDBText2: TRLDBText
               Left = 669
               Top = 2
-              Width = 47
+              Width = 48
               Height = 10
               Alignment = taCenter
               AutoSize = False
@@ -536,15 +536,15 @@ object fRelPagarReceber3: TfRelPagarReceber3
           end
           object RLBand3: TRLBand
             Left = 0
-            Top = 30
+            Top = 46
             Width = 1071
             Height = 18
             BandType = btSummary
             BeforePrint = RLBand3BeforePrint
             object RLDBResult2: TRLDBResult
-              Left = 727
+              Left = 733
               Top = 4
-              Width = 90
+              Width = 84
               Height = 10
               Alignment = taRightJustify
               DataField = 'VLR_PARCELA'
@@ -573,9 +573,9 @@ object fRelPagarReceber3: TfRelPagarReceber3
               ParentFont = False
             end
             object RLDBResult3: TRLDBResult
-              Left = 891
+              Left = 897
               Top = 4
-              Width = 75
+              Width = 69
               Height = 10
               Alignment = taRightJustify
               DataField = 'VLR_PAGO'
@@ -635,16 +635,37 @@ object fRelPagarReceber3: TfRelPagarReceber3
             BeforePrint = RLBand6BeforePrint
             object RLLabel14: TRLLabel
               Left = 184
-              Top = 2
+              Top = 1
               Width = 6
               Height = 12
               Caption = '.'
             end
           end
+          object RLBand13: TRLBand
+            Left = 0
+            Top = 31
+            Width = 1071
+            Height = 15
+            BeforePrint = RLBand13BeforePrint
+            object RLLabel46: TRLLabel
+              Left = 88
+              Top = 1
+              Width = 23
+              Height = 12
+              Caption = 'Obs:'
+            end
+            object rlMemoObs: TRLMemo
+              Left = 111
+              Top = 1
+              Width = 863
+              Height = 12
+              Behavior = [beSiteExpander]
+            end
+          end
         end
         object RLBand11: TRLBand
           Left = 0
-          Top = 87
+          Top = 115
           Width = 1071
           Height = 19
           BandType = btSummary
@@ -681,7 +702,7 @@ object fRelPagarReceber3: TfRelPagarReceber3
       end
       object RLBand7: TRLBand
         Left = 0
-        Top = 117
+        Top = 157
         Width = 1071
         Height = 27
         BandType = btSummary
@@ -718,9 +739,9 @@ object fRelPagarReceber3: TfRelPagarReceber3
           ResetAfterPrint = True
         end
         object RLDBResult8: TRLDBResult
-          Left = 896
+          Left = 897
           Top = 4
-          Width = 70
+          Width = 69
           Height = 10
           Alignment = taRightJustify
           DataField = 'VLR_PAGO'
@@ -735,9 +756,9 @@ object fRelPagarReceber3: TfRelPagarReceber3
           ResetAfterPrint = True
         end
         object RLDBResult9: TRLDBResult
-          Left = 967
+          Left = 947
           Top = 4
-          Width = 69
+          Width = 89
           Height = 10
           Alignment = taRightJustify
           DataField = 'VLR_RESTANTE'
@@ -800,7 +821,7 @@ object fRelPagarReceber3: TfRelPagarReceber3
       end
       object RLBand8: TRLBand
         Left = 0
-        Top = 144
+        Top = 184
         Width = 1071
         Height = 29
         BandType = btSummary
@@ -1013,7 +1034,7 @@ object fRelPagarReceber3: TfRelPagarReceber3
       end
       object RLBand10: TRLBand
         Left = 0
-        Top = 173
+        Top = 213
         Width = 1071
         Height = 20
         BandType = btSummary
@@ -1077,7 +1098,7 @@ object fRelPagarReceber3: TfRelPagarReceber3
       end
       object RLBand12: TRLBand
         Left = 0
-        Top = 193
+        Top = 233
         Width = 1071
         Height = 20
         BandType = btSummary

@@ -1157,6 +1157,7 @@ type
     vGerou_Descontada: Boolean;
     vID_Cheque: Integer;
     vTipo_Rel : String;
+    vImpObs : Boolean;
 
     vCReceber_Tot, vCReceber_Pago_Tot, vCReceber_Pend_Tot, vCReceber_Atraso_Tot: Real;
     vCPagar_Tot, vCPagar_Pago_Tot, vCPagar_Pend_Tot, vCPagar_Atraso_Tot: Real;
