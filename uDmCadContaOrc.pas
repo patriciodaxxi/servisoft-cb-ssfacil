@@ -167,6 +167,8 @@ type
     sdsANT: TSQLDataSet;
     qTotalPares: TSQLQuery;
     qTotalParesPREVISAO: TFMTBCDField;
+    qParametros_Fin: TSQLQuery;
+    qParametros_FinINF_ZERO_PERC_CC: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspContaOrcUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -265,9 +267,12 @@ begin
     vTotalAliq := vTotalAliq + cdsContaOrc_CCustoPERCENTUAL.AsFloat;
     cdsContaOrc_CCusto.Next;
   end;
-  if (vTotalAliq > 0) and (vTotalAliq < 100) then
-    if MessageDlg('Soma das alíquotas do Centro de Custo não atingiu os 100%, deseja Confirmar?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
-      vMsgConta := 'O Registro não foi gravado!';
+  //if Trim( qParametros_FinINF_ZERO_PERC_CC.AsString) <> 'S' then
+  //begin
+    if (vTotalAliq > 0) and (vTotalAliq < 100) then
+      if MessageDlg('Soma das alíquotas do Centro de Custo não atingiu os 100%, deseja Confirmar?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
+        vMsgConta := 'O Registro não foi gravado!';
+  //end;
 
   if (vTotalAliq > 0) and (vTotalAliq > 100) then
     vMsgConta := 'Soma das alíquotas do Centro de Custo ultrapassou os 100%';
@@ -326,6 +331,7 @@ begin
   qParametros_Geral.Open;
   qParametros_Cta_Orc.Close;
   qParametros_Cta_Orc.Open;
+  qParametros_Fin.Open;
   cdsTipo_Conta_Orc.Open;
   //*** Logs Implantado na versão .353 (neste datamodule foi na versão .611)
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;

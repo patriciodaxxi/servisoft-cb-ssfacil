@@ -497,7 +497,7 @@ object dmCadContaOrc: TdmCadContaOrc
       'SELECT *'
       'FROM PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 368
+    Left = 369
     Top = 288
     object qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField
       FieldName = 'MOSTRAR_COD_CONTABIL'
@@ -871,6 +871,21 @@ object dmCadContaOrc: TdmCadContaOrc
       FieldName = 'PREVISAO'
       Precision = 15
       Size = 0
+    end
+  end
+  object qParametros_Fin: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT INF_ZERO_PERC_CC'
+      'FROM PARAMETROS_FIN')
+    SQLConnection = dmDatabase.scoDados
+    Left = 234
+    Top = 362
+    object qParametros_FinINF_ZERO_PERC_CC: TStringField
+      FieldName = 'INF_ZERO_PERC_CC'
+      FixedChar = True
+      Size = 1
     end
   end
 end

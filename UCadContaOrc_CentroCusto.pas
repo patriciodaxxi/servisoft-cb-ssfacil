@@ -98,8 +98,11 @@ begin
   vMsgErro := '';
   if fdmCadContaOrc.cdsContaOrc_CCustoID_CENTROCUSTO.AsInteger <= 0 then
     vMsgErro := vMsgErro + #13 + '*** Centro de Custo não informado!';
-  if StrToFloat(FormatFloat('0.00',fdmCadContaOrc.cdsContaOrc_CCustoPERCENTUAL.AsFloat)) <= 0 then
-    vMsgErro := vMsgErro + #13 + '*** % de Custo não informado!';
+  if Trim(fdmCadContaOrc.qParametros_FinINF_ZERO_PERC_CC.AsString) <> 'S' then
+  begin
+    if StrToFloat(FormatFloat('0.00',fdmCadContaOrc.cdsContaOrc_CCustoPERCENTUAL.AsFloat)) <= 0 then
+      vMsgErro := vMsgErro + #13 + '*** % de Custo não informado!';
+  end;
   if vMsgErro <> '' then
   begin
     MessageDlg(vMsgErro, mtError, [mbOk], 0);

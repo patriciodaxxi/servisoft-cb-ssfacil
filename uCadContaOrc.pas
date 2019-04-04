@@ -260,10 +260,13 @@ begin
   lblPesquisaConta.Visible     := (fDMCadContaOrc.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S');
   Label9.Visible               := (fDMCadContaOrc.qParametros_Cta_OrcMOSTRAR_PESSOA.AsString = 'S');
   RxDBLookupCombo2.Visible     := (fDMCadContaOrc.qParametros_Cta_OrcMOSTRAR_PESSOA.AsString = 'S');
-  if ts_Orc_ValoresAnuais.TabVisible then
+  if Trim(fDMCadContaOrc.qParametros_FinINF_ZERO_PERC_CC.AsString) <> 'S' then
   begin
-    pc_Itens.ActivePageDefault := ts_Orc_ValoresAnuais;
-    pc_Itens.ActivePage        := ts_Orc_ValoresAnuais;
+    if ts_Orc_ValoresAnuais.TabVisible then
+    begin
+      pc_Itens.ActivePageDefault := ts_Orc_ValoresAnuais;
+      pc_Itens.ActivePage        := ts_Orc_ValoresAnuais;
+    end;
   end;
   CurrencyEdit4.AsInteger := YearOf(Date);
 end;
