@@ -1499,7 +1499,7 @@ object dmCadProduto: TdmCadProduto
   object cdsProduto_Consumo: TClientDataSet
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Consumo
-    IndexFieldNames = 'ID;ITEM'
+    IndexFieldNames = 'ID;ID_SETOR;ID_POSICAO'
     Params = <>
     BeforePost = cdsProduto_ConsumoBeforePost
     OnCalcFields = cdsProduto_ConsumoCalcFields

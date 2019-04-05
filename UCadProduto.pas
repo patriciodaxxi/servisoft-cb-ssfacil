@@ -2241,7 +2241,7 @@ begin
   FreeAndNil(ffrmCadProduto_Consumo);
 
   ceVlr_Total_Mat.Value := fDMCadProduto.fnc_Calcular_Mat;
-  fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;ITEM';
+  fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;ID_POSICAO';
 end;
 
 procedure TfrmCadProduto.btnAlterar_ConsumoClick(Sender: TObject);
