@@ -70,7 +70,7 @@ uses
 
   function fnc_Converte_Horas(Hora: Real): Real;
   function fnc_Converte_Min_Dec(Hora: Real): Real;
-  function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2 : Real) : String;
+  function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real) : String;
 
   function CharEspeciais(Texto:String):String;
   function  SQLLocate(Tabela, CampoProcura, CampoRetorno, ValorFind : string) : string ;
@@ -1721,7 +1721,7 @@ begin
 
 end;
 
-function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2 : Real) : String;
+function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real) : String;
 var
   vAux : Real;
   vTexto : String;
@@ -1737,6 +1737,9 @@ var
   vDtAux : TDateTime;
 
 begin
+  if StrToFloat(FormatFloat('0.000',Total_HoraDia)) <= 0 then
+    Total_HoraDia := StrToFloat(FormatFloat('0.00',24));
+
   Result := '';
   //vTexto := TimeToStr(Hora1);
   vAux  := StrToInt(FormatFloat('00',HourOf(Hora1)));
@@ -1761,7 +1764,8 @@ begin
 
   //vAux := StrToFloat(vTexto)  + Hora2;
 
-  vAux := vAux / 24;
+  //vAux := vAux / 24;
+  vAux := vAux / Total_HoraDia;
   vDia := Trunc(vAux);
 
   if vDia > 0 then
@@ -1779,7 +1783,8 @@ begin
 
   vAux := frac(vAux);
 
-  vAux := vAux * 24;
+  //vAux := vAux * 24;
+  vAux := vAux * Total_HoraDia;
 
   vAux2 := frac(vAux);
   //vaux2 := fnc_Converte_Min_Dec(vAux2);
