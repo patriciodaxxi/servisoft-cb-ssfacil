@@ -1787,6 +1787,8 @@ begin
   vAux := vAux * Total_HoraDia;
 
   vAux2 := frac(vAux);
+  if vAux < 1 then
+    vaux2 := fnc_Converte_Min_Dec(vAux2);
   //vaux2 := fnc_Converte_Min_Dec(vAux2);
   vAux  := Trunc(vAux) + vAux2;
 

@@ -4,9 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Mask, ToolEdit, CurrEdit, ExtCtrls, NxCollection,
-  FMTBcd, DB, DBClient, Provider, SqlExpr, Grids, DBGrids, SMDBGrid,
-  DBCtrls;
+  Dialogs, StdCtrls, Mask, ToolEdit, CurrEdit, ExtCtrls, NxCollection, FMTBcd,
+  DB, DBClient, Provider, SqlExpr, Grids, DBGrids, SMDBGrid, DBCtrls;
 
 type
   TfrmConsMatPed = class(TForm)
@@ -57,15 +56,13 @@ type
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
-    procedure CurrencyEdit2KeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure CurrencyEdit2KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure SMDBGrid1DblClick(Sender: TObject);
     procedure SMDBGrid2Exit(Sender: TObject);
   private
     { Private declarations }
 
     procedure prc_Consultar;
-
   public
     { Public declarations }
   end;
@@ -75,7 +72,8 @@ var
 
 implementation
 
-uses DmdDatabase;
+uses
+  DmdDatabase;
 
 {$R *.dfm}
 
@@ -108,8 +106,7 @@ begin
   cdsMatLote.IndexFieldNames := Column.FieldName;
 end;
 
-procedure TfrmConsMatPed.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TfrmConsMatPed.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := Cafree;
 end;
@@ -120,21 +117,20 @@ begin
     prc_Consultar;
 end;
 
-procedure TfrmConsMatPed.CurrencyEdit2KeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TfrmConsMatPed.CurrencyEdit2KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if (key = vk_Return) and (CurrencyEdit2.AsInteger > 0) then
+  if (Key = vk_Return) and (CurrencyEdit2.AsInteger > 0) then
     prc_Consultar;
 end;
 
 procedure TfrmConsMatPed.SMDBGrid1DblClick(Sender: TObject);
 begin
-  if not(cdsMatLote.Active) or (cdsMatLoteID_MATERIAL.AsInteger <= 0) then
+  if not (cdsMatLote.Active) or (cdsMatLoteID_MATERIAL.AsInteger <= 0) then
     exit;
   cdsReq.Close;
-  sdsReq.ParamByName('NUM_PEDIDO').AsInteger   := cdsMatLoteNUM_PEDIDO.AsInteger;
+  sdsReq.ParamByName('NUM_PEDIDO').AsInteger := cdsMatLoteNUM_PEDIDO.AsInteger;
   sdsReq.ParamByName('ID_PRODUTO').AsInteger := cdsMatLoteID_MATERIAL.AsInteger;
-  sdsReq.ParamByName('ID_COR').AsInteger     := cdsMatLoteID_COR_MAT.AsInteger;
+  sdsReq.ParamByName('ID_COR').AsInteger := cdsMatLoteID_COR_MAT.AsInteger;
   cdsReq.Open;
   SMDBGrid2.Visible := True;
   SMDBGrid2.SetFocus;
@@ -146,3 +142,4 @@ begin
 end;
 
 end.
+
