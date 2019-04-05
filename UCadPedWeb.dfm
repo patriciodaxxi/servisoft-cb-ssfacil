@@ -1,7 +1,7 @@
 object frmCadPedWeb: TfrmCadPedWeb
-  Left = 154
-  Top = 87
-  Width = 1143
+  Left = 105
+  Top = 70
+  Width = 1187
   Height = 573
   Caption = 'Pedido Web - frmCadPedidoWeb'
   Color = clBtnFace
@@ -19,7 +19,7 @@ object frmCadPedWeb: TfrmCadPedWeb
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 64
-    Width = 1127
+    Width = 1171
     Height = 336
     Hint = 'Click bot'#227'o direto para selecionar todos'
     Align = alClient
@@ -93,6 +93,7 @@ object frmCadPedWeb: TfrmCadPedWeb
         FieldName = 'HORA_EMISSAO'
         Title.Alignment = taCenter
         Title.Color = 16776176
+        Width = 64
         Visible = True
       end
       item
@@ -100,6 +101,7 @@ object frmCadPedWeb: TfrmCadPedWeb
         FieldName = 'PRAZO_PEDIDO'
         Title.Alignment = taCenter
         Title.Color = 16776176
+        Width = 64
         Visible = True
       end
       item
@@ -147,6 +149,7 @@ object frmCadPedWeb: TfrmCadPedWeb
         FieldName = 'TIPO_OPERACAO'
         Title.Alignment = taCenter
         Title.Color = 16776176
+        Width = 64
         Visible = True
       end
       item
@@ -163,6 +166,7 @@ object frmCadPedWeb: TfrmCadPedWeb
         FieldName = 'GERADO'
         Title.Alignment = taCenter
         Title.Color = 16776176
+        Width = 64
         Visible = True
       end
       item
@@ -178,7 +182,7 @@ object frmCadPedWeb: TfrmCadPedWeb
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1127
+    Width = 1171
     Height = 64
     Align = alTop
     Color = clSilver
@@ -312,7 +316,7 @@ object frmCadPedWeb: TfrmCadPedWeb
   object Panel1: TPanel
     Left = 0
     Top = 424
-    Width = 1127
+    Width = 1171
     Height = 90
     Align = alBottom
     Color = clSilver
@@ -320,7 +324,7 @@ object frmCadPedWeb: TfrmCadPedWeb
     object Panel4: TPanel
       Left = 1
       Top = 1
-      Width = 867
+      Width = 911
       Height = 88
       Align = alClient
       TabOrder = 0
@@ -332,10 +336,10 @@ object frmCadPedWeb: TfrmCadPedWeb
         Caption = 'Data Gera'#231#227'o:'
       end
       object btnConfirmar: TNxButton
-        Left = 524
-        Top = 11
-        Width = 153
-        Height = 38
+        Left = 220
+        Top = 14
+        Width = 133
+        Height = 35
         Caption = 'Confirmar'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -404,10 +408,10 @@ object frmCadPedWeb: TfrmCadPedWeb
         OnClick = btnConfirmarClick
       end
       object NxButton1: TNxButton
-        Left = 695
-        Top = 11
-        Width = 153
-        Height = 38
+        Left = 352
+        Top = 14
+        Width = 133
+        Height = 35
         Caption = 'Fechar'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -483,9 +487,39 @@ object frmCadPedWeb: TfrmCadPedWeb
         NumGlyphs = 2
         TabOrder = 2
       end
+      object RzGroupBox2: TRzGroupBox
+        Left = 568
+        Top = 1
+        Width = 342
+        Height = 86
+        Align = alRight
+        Caption = 'Cond.Pagamento'
+        FlatColor = clGreen
+        TabOrder = 3
+        object Label10: TLabel
+          Left = 8
+          Top = 24
+          Width = 59
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Cond.Pagto:'
+        end
+        object comboCondPagamento: TRxDBLookupCombo
+          Left = 71
+          Top = 16
+          Width = 267
+          Height = 21
+          DropDownCount = 15
+          DropDownWidth = 200
+          LookupField = 'ID'
+          LookupDisplay = 'NOME'
+          LookupSource = DMCadPedido.dsCondPgto
+          TabOrder = 0
+        end
+      end
     end
     object RzGroupBox1: TRzGroupBox
-      Left = 868
+      Left = 912
       Top = 1
       Width = 258
       Height = 88
@@ -528,7 +562,7 @@ object frmCadPedWeb: TfrmCadPedWeb
   object Panel3: TPanel
     Left = 0
     Top = 400
-    Width = 1127
+    Width = 1171
     Height = 24
     Align = alBottom
     Color = clSilver
@@ -536,7 +570,7 @@ object frmCadPedWeb: TfrmCadPedWeb
     object RzProgressBar1: TRzProgressBar
       Left = 1
       Top = 2
-      Width = 1125
+      Width = 1169
       Height = 21
       Align = alBottom
       BorderWidth = 0
@@ -550,7 +584,7 @@ object frmCadPedWeb: TfrmCadPedWeb
   object JvStatusBar1: TJvStatusBar
     Left = 0
     Top = 514
-    Width = 1127
+    Width = 1171
     Height = 20
     Panels = <
       item
@@ -568,5 +602,11 @@ object frmCadPedWeb: TfrmCadPedWeb
     object SelecionarTodos1: TMenuItem
       Caption = 'Selecionar Todos'
     end
+  end
+  object Timer1: TTimer
+    Interval = 60000
+    OnTimer = Timer1Timer
+    Left = 976
+    Top = 24
   end
 end

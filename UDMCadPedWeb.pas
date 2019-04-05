@@ -12,7 +12,6 @@ type
     sdsPedWebID_USUARIO: TIntegerField;
     sdsPedWebID_PESSOA: TIntegerField;
     sdsPedWebHORA_EMISSAO: TStringField;
-    sdsPedWebPRAZO_PEDIDO: TIntegerField;
     sdsPedWebID_FORMA_PAGAMENTO: TIntegerField;
     sdsPedWebVLR_DESCONTO: TFMTBCDField;
     sdsPedWebTIPO_OPERACAO: TIntegerField;
@@ -25,7 +24,6 @@ type
     cdsPedWebID_USUARIO: TIntegerField;
     cdsPedWebID_PESSOA: TIntegerField;
     cdsPedWebHORA_EMISSAO: TStringField;
-    cdsPedWebPRAZO_PEDIDO: TIntegerField;
     cdsPedWebID_FORMA_PAGAMENTO: TIntegerField;
     cdsPedWebVLR_DESCONTO: TFMTBCDField;
     cdsPedWebTIPO_OPERACAO: TIntegerField;
@@ -41,7 +39,6 @@ type
     sdsConsultaPedWebID_USUARIO: TIntegerField;
     sdsConsultaPedWebID_PESSOA: TIntegerField;
     sdsConsultaPedWebHORA_EMISSAO: TStringField;
-    sdsConsultaPedWebPRAZO_PEDIDO: TIntegerField;
     sdsConsultaPedWebID_FORMA_PAGAMENTO: TIntegerField;
     sdsConsultaPedWebVLR_DESCONTO: TFMTBCDField;
     sdsConsultaPedWebVLR_TOTAL: TFMTBCDField;
@@ -54,7 +51,6 @@ type
     cdsConsultaPedWebID_USUARIO: TIntegerField;
     cdsConsultaPedWebID_PESSOA: TIntegerField;
     cdsConsultaPedWebHORA_EMISSAO: TStringField;
-    cdsConsultaPedWebPRAZO_PEDIDO: TIntegerField;
     cdsConsultaPedWebID_FORMA_PAGAMENTO: TIntegerField;
     cdsConsultaPedWebVLR_DESCONTO: TFMTBCDField;
     cdsConsultaPedWebVLR_TOTAL: TFMTBCDField;
@@ -105,6 +101,10 @@ type
     cdsVendedorCODIGO: TIntegerField;
     cdsVendedorNOME: TStringField;
     cdsVendedorCOD_VENDEDOR: TIntegerField;
+    sdsPedWebPRAZO_PEDIDO: TStringField;
+    cdsPedWebPRAZO_PEDIDO: TStringField;
+    sdsConsultaPedWebPRAZO_PEDIDO: TStringField;
+    cdsConsultaPedWebPRAZO_PEDIDO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

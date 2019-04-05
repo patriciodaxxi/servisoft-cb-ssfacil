@@ -1,7 +1,7 @@
 object DMCadPedWeb: TDMCadPedWeb
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 672
+  Left = 408
   Top = 153
   Height = 377
   Width = 492
@@ -27,9 +27,6 @@ object DMCadPedWeb: TDMCadPedWeb
     object sdsPedWebHORA_EMISSAO: TStringField
       FieldName = 'HORA_EMISSAO'
       Size = 10
-    end
-    object sdsPedWebPRAZO_PEDIDO: TIntegerField
-      FieldName = 'PRAZO_PEDIDO'
     end
     object sdsPedWebID_FORMA_PAGAMENTO: TIntegerField
       FieldName = 'ID_FORMA_PAGAMENTO'
@@ -65,6 +62,10 @@ object DMCadPedWeb: TDMCadPedWeb
     object sdsPedWebDATA_EMISSAO: TDateField
       FieldName = 'DATA_EMISSAO'
     end
+    object sdsPedWebPRAZO_PEDIDO: TStringField
+      FieldName = 'PRAZO_PEDIDO'
+      Size = 30
+    end
   end
   object dspPedWeb: TDataSetProvider
     DataSet = sdsPedWeb
@@ -93,10 +94,6 @@ object DMCadPedWeb: TDMCadPedWeb
       DisplayLabel = 'Hora_Emissao'
       FieldName = 'HORA_EMISSAO'
       Size = 10
-    end
-    object cdsPedWebPRAZO_PEDIDO: TIntegerField
-      DisplayLabel = 'Prazo'
-      FieldName = 'PRAZO_PEDIDO'
     end
     object cdsPedWebID_FORMA_PAGAMENTO: TIntegerField
       DisplayLabel = 'Forma Pagamento'
@@ -142,6 +139,12 @@ object DMCadPedWeb: TDMCadPedWeb
     object cdsPedWebDATA_EMISSAO: TDateField
       FieldName = 'DATA_EMISSAO'
     end
+    object cdsPedWebPRAZO_PEDIDO: TStringField
+      DisplayLabel = 'Prazo Pedido'
+      DisplayWidth = 15
+      FieldName = 'PRAZO_PEDIDO'
+      Size = 30
+    end
   end
   object dsPedWeb: TDataSource
     DataSet = cdsPedWeb
@@ -174,9 +177,6 @@ object DMCadPedWeb: TDMCadPedWeb
     object sdsConsultaPedWebHORA_EMISSAO: TStringField
       FieldName = 'HORA_EMISSAO'
       Size = 10
-    end
-    object sdsConsultaPedWebPRAZO_PEDIDO: TIntegerField
-      FieldName = 'PRAZO_PEDIDO'
     end
     object sdsConsultaPedWebID_FORMA_PAGAMENTO: TIntegerField
       FieldName = 'ID_FORMA_PAGAMENTO'
@@ -220,6 +220,10 @@ object DMCadPedWeb: TDMCadPedWeb
     object sdsConsultaPedWebDATA_EMISSAO: TDateField
       FieldName = 'DATA_EMISSAO'
     end
+    object sdsConsultaPedWebPRAZO_PEDIDO: TStringField
+      FieldName = 'PRAZO_PEDIDO'
+      Size = 30
+    end
   end
   object dspConsultaPedWeb: TDataSetProvider
     DataSet = sdsConsultaPedWeb
@@ -250,10 +254,6 @@ object DMCadPedWeb: TDMCadPedWeb
       DisplayLabel = 'Hora Emiss'#227'o'
       FieldName = 'HORA_EMISSAO'
       Size = 10
-    end
-    object cdsConsultaPedWebPRAZO_PEDIDO: TIntegerField
-      DisplayLabel = 'Prazo'
-      FieldName = 'PRAZO_PEDIDO'
     end
     object cdsConsultaPedWebID_FORMA_PAGAMENTO: TIntegerField
       DisplayLabel = 'Forma Pagto'
@@ -307,6 +307,12 @@ object DMCadPedWeb: TDMCadPedWeb
       DisplayLabel = 'Data Emiss'#227'o'
       FieldName = 'DATA_EMISSAO'
     end
+    object cdsConsultaPedWebPRAZO_PEDIDO: TStringField
+      DisplayLabel = 'Prazo Pedido'
+      DisplayWidth = 15
+      FieldName = 'PRAZO_PEDIDO'
+      Size = 30
+    end
     object cdsConsultaPedWebValorTotalDesconto: TAggregateField
       FieldName = 'ValorTotalDesconto'
       Active = True
@@ -344,8 +350,8 @@ object DMCadPedWeb: TDMCadPedWeb
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 40
-    Top = 136
+    Left = 32
+    Top = 128
     object sdsPedWeb_ItemID_PEDIDO: TIntegerField
       FieldName = 'ID_PEDIDO'
       Required = True
@@ -375,8 +381,8 @@ object DMCadPedWeb: TDMCadPedWeb
     Aggregates = <>
     DataSetField = cdsPedWebsdsPedWeb_Item
     Params = <>
-    Left = 72
-    Top = 136
+    Left = 64
+    Top = 128
     object cdsPedWeb_ItemID_PEDIDO: TIntegerField
       DisplayLabel = 'ID Pedido'
       FieldName = 'ID_PEDIDO'
@@ -413,8 +419,8 @@ object DMCadPedWeb: TDMCadPedWeb
   end
   object dsPedWeb_Item: TDataSource
     DataSet = cdsPedWeb_Item
-    Left = 104
-    Top = 136
+    Left = 96
+    Top = 128
   end
   object qParametros_Geral: TSQLQuery
     MaxBlobSize = -1
@@ -422,8 +428,8 @@ object DMCadPedWeb: TDMCadPedWeb
     SQL.Strings = (
       'SELECT FILIAL_PADRAO_PEDWEB FROM PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 304
-    Top = 128
+    Left = 368
+    Top = 232
     object qParametros_GeralFILIAL_PADRAO_PEDWEB: TIntegerField
       FieldName = 'FILIAL_PADRAO_PEDWEB'
     end
@@ -438,20 +444,20 @@ object DMCadPedWeb: TDMCadPedWeb
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 216
-    Top = 80
+    Left = 312
+    Top = 176
   end
   object dspVendedor: TDataSetProvider
     DataSet = sdsVendedor
-    Left = 242
-    Top = 80
+    Left = 338
+    Top = 176
   end
   object cdsVendedor: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVendedor'
-    Left = 270
-    Top = 80
+    Left = 366
+    Top = 176
     object cdsVendedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -466,7 +472,7 @@ object DMCadPedWeb: TDMCadPedWeb
   end
   object dsVendedor: TDataSource
     DataSet = cdsVendedor
-    Left = 300
-    Top = 80
+    Left = 396
+    Top = 176
   end
 end

@@ -3481,7 +3481,7 @@ type
     { Public declarations }
     vMSGErro: String;
     vMsgErroParc: String;
-    ctCommand, ctConsulta, ctProduto, ctDuplicata: String;
+    ctCommand, ctConsulta, ctProduto, ctDuplicata : String;
     ctServico: String;
     ctCliente, ctCFOP: String;
     ctqProximoPedido: String;
@@ -3526,7 +3526,8 @@ type
 
     procedure prc_Inserir_Itens;
 
-    procedure prc_Abrir_cdsCliente(Tipo: String = 'C');
+    procedure prc_Abrir_cdsCliente(Tipo: String = 'C'); overload;
+    procedure prc_Abrir_cdsCliente(ID : Integer); overload;
     procedure prc_Abrir_cdsCFOP(Tipo_Reg: String);
     procedure prc_Abrir_qProduto(ID:Integer);
     procedure Abrir_Duplicatas(ID: Integer);
@@ -3847,6 +3848,7 @@ end;
 
 procedure TDMCadPedido.prc_Abrir_cdsCliente(Tipo: String);
 begin
+  inherited;
   cdsCliente.Close;
   sdsCliente.CommandText := ctCliente + ' WHERE INATIVO = ' + QuotedStr('N');
   if Tipo = 'F' then
@@ -4670,6 +4672,16 @@ procedure TDMCadPedido.cdsPedidoImp_ItensCalcFields(DataSet: TDataSet);
 begin
   cdsPedidoImp_ItensCOD_BARRAS.AsString := '2 - ' + FormatFloat('000000',cdsPedidoImpNUM_PEDIDO.AsInteger) + ' / ' + FormatFloat('000',cdsPedidoImp_ItensITEM.AsInteger);
 
+end;
+
+procedure TDMCadPedido.prc_Abrir_cdsCliente(ID: Integer);
+begin
+  inherited;
+  cdsCliente.Close;
+  sdsCliente.CommandText := ctCliente + ' WHERE INATIVO = ' + QuotedStr('N');
+  if ID > 0 then
+    sdsCliente.CommandText := sdsCliente.CommandText + ' AND CODIGO = ' + inttostr(ID);
+  cdsCliente.Open;
 end;
 
 end.

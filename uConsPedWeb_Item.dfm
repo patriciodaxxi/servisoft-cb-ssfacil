@@ -51,13 +51,6 @@ object frmConsPedWeb_Item: TfrmConsPedWeb_Item
     Columns = <
       item
         Expanded = False
-        FieldName = 'ID_PEDIDO'
-        Title.Alignment = taCenter
-        Title.Color = clHighlight
-        Visible = True
-      end
-      item
-        Expanded = False
         FieldName = 'ID_PRODUTO'
         Title.Alignment = taCenter
         Title.Color = clHighlight
@@ -100,6 +93,13 @@ object frmConsPedWeb_Item: TfrmConsPedWeb_Item
         Title.Caption = 'Observa'#231#227'o'
         Title.Color = clHighlight
         Width = 396
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_PEDIDO'
+        Title.Alignment = taCenter
+        Title.Color = clHighlight
         Visible = True
       end>
   end

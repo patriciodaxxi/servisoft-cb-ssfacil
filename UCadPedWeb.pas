@@ -36,6 +36,10 @@ type
     Label30: TLabel;
     rxdbVendedor: TRxDBLookupCombo;
     btnConsultar: TNxButton;
+    Timer1: TTimer;
+    RzGroupBox2: TRzGroupBox;
+    Label10: TLabel;
+    comboCondPagamento: TRxDBLookupCombo;
     procedure FormDestroy(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConfirmarClick(Sender: TObject);
@@ -43,6 +47,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1DblClick(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
     ctComando : String;
@@ -164,6 +169,9 @@ begin
   fdmCadPedido.cdsPedidoVLR_TOTAL.AsFloat     := fdmCadPedWeb.cdsPedWebVLR_TOTAL.AsFloat;
   fdmCadPedido.cdsPedidoDTEMISSAO.AsDateTime  := fdmCadPedWeb.cdsPedWebDATA_EMISSAO.AsDateTime;
   fdmCadPedido.cdsPedidoUSUARIO.AsString      := vUsuario;
+  fdmcadpedido.cdsPedidoID_PEDWEB.AsInteger   := fdmCadPedWeb.cdsConsultaPedWebID.AsInteger;
+  if (comboCondPagamento.KeyValue <> '') and (comboCondPagamento.KeyValue <> null) then
+    fdmCadPedido.cdsPedidoID_CONDPGTO.AsInteger := comboCondPagamento.KeyValue;
 end;
 
 procedure TfrmCadPedWeb.prc_Gravar_Registro;
@@ -202,8 +210,6 @@ begin
   oDBUtils.SetDataSourceProperties(Self, fdmCadPedWeb);
   fdmCadPedido := TDMCadPedido.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fdmCadPedido);
-  fdmCadPedWeb.cdsConsultaPedWeb.Close;
-  fdmCadPedWeb.cdsConsultaPedWeb.Open;
   fdmCadPedWeb.cdsVendedor.Close;
   fdmCadPedWeb.cdsVendedor.Open;
   edtDate.Date := Date;
@@ -211,7 +217,10 @@ begin
   fdmCadPedWeb.qParametros_Geral.Open;
   fdmCadPedido.cdsCliente.Close;
   fdmCadPedido.cdsCliente.Open;
+  fdmcadPedido.cdsCondPgto.Close;
+  fdmcadPedido.cdsCondPgto.Open;
   ctComando := fdmCadPedWeb.sdsConsultaPedWeb.CommandText;
+  prc_Consultar;
 end;
 
 procedure TfrmCadPedWeb.SMDBGrid1DblClick(Sender: TObject);
@@ -237,6 +246,7 @@ begin
     vComando := vComando + ' AND PWEB.DATA_EMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date));
   if rxdbVendedor.KeyValue > 0 then
     vComando := vComando + ' AND PWEB.ID_USUARIO = ' + IntToStr(fdmCadPedWeb.cdsVendedorCOD_VENDEDOR.AsInteger);
+  vComando := vComando + ' order by PWEB.DATA_EMISSAO, PWEB.HORA_EMISSAO ';
   fdmCadPedWeb.sdsConsultaPedWeb.CommandText := vComando;
   fdmCadPedWeb.cdsConsultaPedWeb.Open;
   prc_Calcular_Totais;
@@ -260,6 +270,12 @@ begin
     edtValorTotal.Value := 0;
   end;
 
+end;
+
+procedure TfrmCadPedWeb.Timer1Timer(Sender: TObject);
+begin
+  if not (fdmCadPedWeb.cdsPedWeb.State in [dsEdit, dsInsert]) and not (SMDBGrid1.SelectedRows.CurrentRowSelected) then
+    btnConsultarClick(Sender);
 end;
 
 end.
