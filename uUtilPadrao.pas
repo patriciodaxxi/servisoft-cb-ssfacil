@@ -77,6 +77,8 @@ uses
 
   function fnc_Estoque_Tipo_Mat(ID_Produto : Integer ; Tipo_ES : string): string;  //E= Entrada  S= Saida
 
+  function fnc_Cliente_Fil_Fat(ID_Cliente , ID_Filial  : Integer) : Boolean;
+
   //procedure prc_Enviar_Email_Proc(MSG: String);
 
   function Criptografar(ABase: integer; AChave, AValue: string): string;
@@ -1785,6 +1787,27 @@ begin
 
   Result := DateToStr(Data) + 'H' + FormatFloat('00.00',vAux);
 
+end;
+
+function fnc_Cliente_Fil_Fat(ID_Cliente , ID_Filial  : Integer) : Boolean;
+var
+  sds: TSQLDataSet;
+begin
+  Result := False;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText := 'SELECT COUNT(1) CONTADOR FROM PESSOA_FIL P WHERE P.CODIGO = :CODIGO AND P.FILIAL = :FILIAL ';
+    sds.ParamByName('CODIGO').AsInteger := ID_Cliente;
+    sds.ParamByName('FILIAL').AsInteger := ID_Filial;
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := True;
+  finally
+    FreeAndNil(sds);
+  end;
 end;
 
 end.

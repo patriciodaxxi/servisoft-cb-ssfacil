@@ -2609,8 +2609,6 @@ begin
 end;
 
 procedure TfrmCadNotaFiscal.btnCopiarPedidoClick(Sender: TObject);
-var
-  vItemAux: Integer;
 begin
   if (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger <= 0) and (fDMCadNotaFiscal.qParametros_NFePERMITE_IMPORTAR_S_CLIENTE.AsString <> 'S')  then
   begin
@@ -2623,10 +2621,13 @@ begin
     Exit;
   end;
 
-  if fDMCadNotaFiscal.cdsNotaFiscal_Itens.Locate('ID_PEDIDO',fDMCadNotaFiscal.cdsPedidoID.AsInteger,[loCaseInsensitive]) then
+  if (fDMCadNotaFiscal.qParametros_NFeUSA_CLIENTE_FAT_FIL.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger > 0) and
+     not(fnc_Cliente_Fil_Fat(fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger)) then
+  begin
+    MessageDlg('*** Cliente não pode faturar para esta Filial ', mtInformation , [mbOk], 0);
+    exit;
+  end;
 
-
-  vItemAux := fDMCadNotaFiscal.cdsNotaFiscal_Itens.RecordCount;
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);
   ffrmCadNotaFiscal_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;
 
@@ -2903,6 +2904,14 @@ var
 begin
   if not(fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert]) then
     exit;
+
+  if (fDMCadNotaFiscal.qParametros_NFeUSA_CLIENTE_FAT_FIL.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger > 0) and
+     not(fnc_Cliente_Fil_Fat(fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger)) then
+  begin
+    MessageDlg('*** Cliente não pode faturar para esta Filial ', mtInformation , [mbOk], 0);
+    RxDBLookupCombo3.SetFocus;
+    exit;
+  end;
 
   if (vID_Cliente_Ant <> fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger) and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.RecordCount <= 0) then
   begin

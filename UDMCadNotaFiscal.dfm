@@ -12764,6 +12764,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeUSA_CLIENTE_FAT_FIL: TStringField
+      FieldName = 'USA_CLIENTE_FAT_FIL'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoqueLoteAux: TSQLDataSet
     NoMetadata = True

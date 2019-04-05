@@ -5469,7 +5469,9 @@ object DMCadPessoa: TDMCadPessoa
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT ID, USA_OPCAO_IMP_COD_CLI, IMP_NOMEPROD_CLIENTE'
+      
+        'SELECT ID, USA_OPCAO_IMP_COD_CLI, IMP_NOMEPROD_CLIENTE, USA_CLIE' +
+        'NTE_FAT_FIL'
       'FROM PARAMETROS_NFE')
     SQLConnection = dmDatabase.scoDados
     Left = 936
@@ -5485,6 +5487,11 @@ object DMCadPessoa: TDMCadPessoa
     end
     object qParametros_NFeIMP_NOMEPROD_CLIENTE: TStringField
       FieldName = 'IMP_NOMEPROD_CLIENTE'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_NFeUSA_CLIENTE_FAT_FIL: TStringField
+      FieldName = 'USA_CLIENTE_FAT_FIL'
       FixedChar = True
       Size = 1
     end
@@ -6413,7 +6420,7 @@ object DMCadPessoa: TDMCadPessoa
     BeforeInsert = cdsPessoa_TipoMatBeforeInsert
     AfterInsert = cdsPessoa_TipoMatAfterInsert
     AfterPost = cdsPessoa_TipoMatAfterPost
-    Left = 152
+    Left = 151
     Top = 419
     object cdsPessoa_TipoMatCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -6488,12 +6495,12 @@ object DMCadPessoa: TDMCadPessoa
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 298
-    Top = 380
+    Top = 396
   end
   object dspTipo_Material: TDataSetProvider
     DataSet = sdsTipo_Material
     Left = 330
-    Top = 380
+    Top = 396
   end
   object cdsTipo_Material: TClientDataSet
     Aggregates = <>
@@ -6501,7 +6508,7 @@ object DMCadPessoa: TDMCadPessoa
     Params = <>
     ProviderName = 'dspTipo_Material'
     Left = 370
-    Top = 380
+    Top = 396
     object cdsTipo_MaterialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6524,7 +6531,7 @@ object DMCadPessoa: TDMCadPessoa
   object dsTipo_Material: TDataSource
     DataSet = cdsTipo_Material
     Left = 410
-    Top = 380
+    Top = 396
   end
   object qParametros_CTA_ORC: TSQLQuery
     MaxBlobSize = -1
@@ -6554,6 +6561,102 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'USA_CAIXINHA'
       FixedChar = True
       Size = 1
+    end
+  end
+  object dsPessoa_Fil: TDataSource
+    DataSet = cdsPessoa_Fil
+    Left = 400
+    Top = 342
+  end
+  object cdsPessoa_Fil: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'CODIGO'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ITEM'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'FILIAL'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NOME_FILIAL'
+        DataType = ftString
+        Size = 60
+      end>
+    IndexDefs = <>
+    IndexFieldNames = 'CODIGO;ITEM'
+    Params = <>
+    ProviderName = 'dspPessoa_Fil'
+    StoreDefs = True
+    BeforeInsert = cdsPessoa_FilBeforeInsert
+    AfterInsert = cdsPessoa_FilAfterInsert
+    AfterPost = cdsPessoa_FilAfterPost
+    Left = 360
+    Top = 343
+    object cdsPessoa_FilCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPessoa_FilITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPessoa_FilFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+    object cdsPessoa_FillkNome_Filial: TStringField
+      FieldKind = fkLookup
+      FieldName = 'lkNome_Filial'
+      LookupDataSet = cdsFilial
+      LookupKeyFields = 'ID'
+      LookupResultField = 'NOME'
+      KeyFields = 'FILIAL'
+      ProviderFlags = []
+      Size = 60
+      Lookup = True
+    end
+  end
+  object dspPessoa_Fil: TDataSetProvider
+    DataSet = sdsPessoa_Fil
+    UpdateMode = upWhereKeyOnly
+    Left = 312
+    Top = 343
+  end
+  object sdsPessoa_Fil: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT PF.*'#13#10'FROM PESSOA_FIL PF'#13#10'WHERE PF.CODIGO = :CODIGO'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 264
+    Top = 343
+    object sdsPessoa_FilCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPessoa_FilITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPessoa_FilFILIAL: TIntegerField
+      FieldName = 'FILIAL'
     end
   end
 end

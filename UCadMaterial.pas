@@ -269,7 +269,6 @@ type
     procedure RxDBLookupCombo2Enter(Sender: TObject);
     procedure SMDBGrid7DblClick(Sender: TObject);
     procedure btnAlterar_NomeClick(Sender: TObject);
-    procedure DBEdit1Change(Sender: TObject);
     procedure DBEdit7Enter(Sender: TObject);
     procedure RxDBComboBox7Enter(Sender: TObject);
     procedure SpeedButton12Click(Sender: TObject);
@@ -1026,7 +1025,6 @@ begin
     begin
       RZPageControl3.ActivePage  := TS_Fiscal;
     end;
-    DBEdit1Change(Sender);
     edtCod_EnqIPI.Clear;
     prc_Abrir_EnqIPI(fDMCadProduto.cdsProdutoID_ENQIPI.AsInteger);
     edtCod_EnqIPI.Text := fDMCadProduto.qEnqIPICODIGO.AsString;
@@ -1539,15 +1537,6 @@ begin
       end;
   end;
   FreeAndNil(sds);
-end;
-
-procedure TfrmCadMaterial.DBEdit1Change(Sender: TObject);
-var
-  vAux: Real;
-begin
-  vAux := 0;
-  if trim(DBEdit1.Text) <> '' then
-    vAux := StrToFloat(DBEdit1.Text);
 end;
 
 procedure TfrmCadMaterial.DBEdit7Enter(Sender: TObject);
