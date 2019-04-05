@@ -1735,7 +1735,6 @@ var
   vH, vM, vS, vMS : Word;
 
   vDtAux : TDateTime;
-
 begin
   if StrToFloat(FormatFloat('0.000',Total_HoraDia)) <= 0 then
     Total_HoraDia := StrToFloat(FormatFloat('0.00',24));
@@ -1791,6 +1790,10 @@ begin
     vaux2 := fnc_Converte_Min_Dec(vAux2);
   //vaux2 := fnc_Converte_Min_Dec(vAux2);
   vAux  := Trunc(vAux) + vAux2;
+
+  vTexto := FormatFloat('00.00',vAux);
+
+  prc_Calcula_Intervalo;
 
   Result := DateToStr(Data) + 'H' + FormatFloat('00.00',vAux);
 
