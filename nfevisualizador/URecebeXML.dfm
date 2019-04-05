@@ -2661,7 +2661,7 @@ object frmRecebeXML: TfrmRecebeXML
           Top = 270
           Width = 1025
           Height = 153
-          ActivePage = TabSheet9
+          ActivePage = TabSheet8
           Align = alBottom
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText

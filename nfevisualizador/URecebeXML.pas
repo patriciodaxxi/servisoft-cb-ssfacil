@@ -997,8 +997,11 @@ begin
       while (vTipoIcms = '') or (i <= vContadorIcms) do
       begin
         inc(i);
-        if Trim(fDMRecebeXML.cdsDetalhe.FieldByName(vDescICMS[i]+'Orig').AsString) <> '' then
-          vTipoIcms := vDescICMS[i];
+        if vDescICMS[i] <> '' then
+        begin
+          if Trim(fDMRecebeXML.cdsDetalhe.FieldByName(vDescICMS[i]+'Orig').AsString) <> '' then
+            vTipoIcms := vDescICMS[i];
+        end;
       end;
     end;
   except
@@ -1069,6 +1072,35 @@ begin
         //Move_Campos(vTipoIcms+'vICMSST','VlrIcmsST','N');
         //Move_Campos(vTipoIcms+'pRedBC','PercRedIcms','N');
       end;
+  end
+  else
+  if (fDMRecebeXML.cdsCabecalhoCRT.AsInteger = 1) then
+  begin
+      fDMRecebeXML.mItensNotaOrigem.AsString  := fDMRecebeXML.cdsDetalhe.FieldByName(vTipoIcms+'Orig').AsString;
+      busca_SitTrib(fDMRecebeXML.cdsDetalhe.FieldByName(vTipoIcms+'CSOSN').AsString);
+      fDMRecebeXML.mItensNotaCodSitTribInterno.AsInteger := vCSTInterno;
+      fDMRecebeXML.mItensNotaCodSitTrib.AsString         := fDMRecebeXML.cdsDetalhe.FieldByName(vTipoIcms+'CSOSN').AsString;
+      Move_Campos(vTipoIcms+'ModBC','ModICMS','N');
+      Move_Campos(vTipoIcms+'vBC','BaseIcms','N');
+      Move_Campos(vTipoIcms+'pICMS','AliqIcms','N');
+      Move_Campos(vTipoIcms+'vICMS','VlrIcms','N');
+      Move_Campos(vTipoIcms+'ModBCST','ModIcmsST','N');
+      Move_Campos(vTipoIcms+'pMVAST','PercMVAST','N');
+      Move_Campos(vTipoIcms+'pRedBCST','PercRedBCST','N');
+      Move_Campos(vTipoIcms+'vBCST','BaseCST','N');
+      Move_Campos(vTipoIcms+'pICMSST','PercIcmsST','N');
+      Move_Campos(vTipoIcms+'vICMSST','VlrIcmsST','N');
+      Move_Campos(vTipoIcms+'pRedBC','PercRedIcms','N');
+      Move_Campos(vTipoIcms+'vBCSTRet','BaseCSTRet','N');
+      Move_Campos(vTipoIcms+'vICMSSTRet','VlrIcmsCSTRet','N');
+      Move_Campos(vTipoIcms+'pST','PercIcmsST','N');
+      Move_Campos(vTipoIcms+'pRedBCEfet','Perc_Base_Red_Efet','N');
+      Move_Campos(vTipoIcms+'vBCEfet','Vlr_Base_Efet','N');
+      Move_Campos(vTipoIcms+'pICMSEfet','Perc_ICMS_Efet','N');
+      Move_Campos(vTipoIcms+'vICMSEfet','Vlr_ICMS_Efet','N');
+
+      if fDMRecebeXML.mItensNotaOrigem.AsString = '' then
+        fDMRecebeXML.mItensNotaOrigem.AsString := '0';
   end
   else
   if (vTipoIcms <> 'SER') then
@@ -1330,6 +1362,9 @@ begin
     vDescICMS[4] := 'ICMSSN202_';
     vDescICMS[5] := 'ICMSSN500_';
     vDescICMS[6] := 'ICMSSN900_';
+    vDescICMS[7] := '';
+    vDescICMS[8] := '';
+    vDescICMS[9] := '';
   end;
 
   if vFilial_Local = 0 then

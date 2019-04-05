@@ -1726,17 +1726,18 @@ var
   vDia : Integer;
   vHora : Real;
   vAux2 : Real;
-  i : Integer;
+  i, i2 : Integer;
   vMin : Real;
   vSeg, vMil : real;
 
   vH, vM, vS, vMS : Word;
 
+  vDtAux : TDateTime;
+
 begin
   Result := '';
   //vTexto := TimeToStr(Hora1);
   vAux  := StrToInt(FormatFloat('00',HourOf(Hora1)));
-
 
   DecodeTime(Hora1,vH,vM,vS,vMS);
 
@@ -1761,7 +1762,18 @@ begin
   vAux := vAux / 24;
   vDia := Trunc(vAux);
 
-  Data := Data + vDia;
+  if vDia > 0 then
+  begin
+    i2     := vDia;
+    vDtAux := Data;
+    for i := 1 to i2 do
+    begin
+      vDtAux := vDtAux + 1;
+      vDtAux := fnc_Data_Vencimento(vDtAux);
+    end;
+    Data := vDtAux;
+  end;
+  //Data := Data + vDia;
 
   vAux := frac(vAux);
 
@@ -1771,13 +1783,8 @@ begin
   //vaux2 := fnc_Converte_Min_Dec(vAux2);
   vAux  := Trunc(vAux) + vAux2;
 
-
-
-  Result := DateToStr(Data) + 'H' + FloatToStr(vAux);
-
-
+  Result := DateToStr(Data) + 'H' + FormatFloat('00.00',vAux);
 
 end;
-
 
 end.
