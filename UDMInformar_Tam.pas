@@ -315,6 +315,7 @@ type
     mItensVLR_ICMSSUBST_RET: TFloatField;
     mItensPERC_ICMS_RED: TFloatField;
     mItensPERC_BASE_ICMSSUBT_RED: TFloatField;
+    mItensATUALIZA_PRECO_CUSTO: TStringField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private

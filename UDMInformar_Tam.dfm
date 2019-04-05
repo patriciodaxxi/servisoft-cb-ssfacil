@@ -1,7 +1,7 @@
 object DMInformar_Tam: TDMInformar_Tam
   OldCreateOrder = False
-  Left = 219
-  Top = 113
+  Left = 473
+  Top = 87
   Height = 434
   Width = 883
   object mTamanho: TClientDataSet
@@ -1016,6 +1016,11 @@ object DMInformar_Tam: TDMInformar_Tam
       item
         Name = 'PERC_BASE_ICMSSUBT_RED'
         DataType = ftFloat
+      end
+      item
+        Name = 'ATUALIZA_PRECO_CUSTO'
+        DataType = ftString
+        Size = 1
       end>
     IndexDefs = <>
     Params = <>
@@ -1024,7 +1029,7 @@ object DMInformar_Tam: TDMInformar_Tam
     Left = 88
     Top = 200
     Data = {
-      A51400009619E0BD0100000018000000D1000000000003000000A5140A49445F
+      CE1400009619E0BD0100000018000000D2000000000003000000CE140A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
       010005574944544802000200140007556E696461646501004900000001000557
       494454480200020006000351746408000400000000000749445F43464F500400
@@ -1189,7 +1194,8 @@ object DMInformar_Tam: TDMInformar_Tam
       52435F424153455F49434D535F524544080004000000000011564C525F49434D
       5353554253545F52455408000400000000000D504552435F49434D535F524544
       080004000000000016504552435F424153455F49434D53535542545F52454408
-      000400000000000000}
+      0004000000000014415455414C495A415F505245434F5F435553544F01004900
+      000001000557494454480200020001000000}
     object mItensID_Produto: TIntegerField
       FieldName = 'ID_Produto'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1993,6 +1999,10 @@ object DMInformar_Tam: TDMInformar_Tam
     end
     object mItensPERC_BASE_ICMSSUBT_RED: TFloatField
       FieldName = 'PERC_BASE_ICMSSUBT_RED'
+    end
+    object mItensATUALIZA_PRECO_CUSTO: TStringField
+      FieldName = 'ATUALIZA_PRECO_CUSTO'
+      Size = 1
     end
   end
   object mPedido_Cli: TClientDataSet
