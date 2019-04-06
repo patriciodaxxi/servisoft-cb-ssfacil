@@ -1,8 +1,8 @@
 object DMConsFinanceiro: TDMConsFinanceiro
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 228
-  Top = 46
+  Left = 221
+  Top = 135
   Height = 653
   Width = 874
   object sdsFilial: TSQLDataSet
@@ -213,8 +213,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'FROM CONTA_ORCAMENTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 80
+    Left = 592
+    Top = 48
     object qConta_OrcamentoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -652,8 +652,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 408
-    Top = 168
+    Left = 416
+    Top = 152
     Data = {
       460200009619E0BD020000001800000018000000000003000000460207546970
       6F5F455301004900000001000557494454480200020001000C49445F436F6E74
@@ -765,8 +765,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsmConta_Orc_Dt: TDataSource
     DataSet = mConta_Orc_Dt
-    Left = 464
-    Top = 168
+    Left = 456
+    Top = 152
   end
   object sdsDespesa: TSQLDataSet
     NoMetadata = True
@@ -1032,8 +1032,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'FROM NOTAFISCAL N'
       'WHERE N.ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 600
-    Top = 136
+    Left = 688
+    Top = 48
     object qNota_EntradaVLR_ICMS: TFloatField
       FieldName = 'VLR_ICMS'
     end
@@ -1168,8 +1168,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'FROM PARAMETROS_CTA_ORC'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 184
+    Left = 736
+    Top = 48
     object qParametros_Cta_OrcID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1250,20 +1250,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 616
-    Top = 432
+    Left = 592
+    Top = 272
   end
   object dspDuplicata_Det: TDataSetProvider
     DataSet = sdsDuplicata_Det
-    Left = 664
-    Top = 432
+    Left = 648
+    Top = 272
   end
   object cdsDuplicata_Det: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspDuplicata_Det'
-    Left = 712
-    Top = 432
+    Left = 696
+    Top = 272
     object cdsDuplicata_DetNUMDUPLICATA: TStringField
       FieldName = 'NUMDUPLICATA'
     end
@@ -1302,8 +1302,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsDuplicata_det: TDataSource
     DataSet = cdsDuplicata_Det
-    Left = 760
-    Top = 432
+    Left = 744
+    Top = 272
   end
   object dsPedido_Pend: TDataSource
     DataSet = cdsPedido_Pend
@@ -1321,20 +1321,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 376
+    Left = 592
+    Top = 216
   end
   object dspDuplicata_Cli: TDataSetProvider
     DataSet = sdsDuplicata_Cli
-    Left = 656
-    Top = 376
+    Left = 640
+    Top = 216
   end
   object cdsDuplicata_Cli: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspDuplicata_Cli'
-    Left = 704
-    Top = 376
+    Left = 688
+    Top = 216
     object cdsDuplicata_CliVLR_PARCELA: TFloatField
       FieldName = 'VLR_PARCELA'
       DisplayFormat = '0.00'
@@ -1357,8 +1357,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsDuplicata_Cli: TDataSource
     DataSet = cdsDuplicata_Cli
-    Left = 752
-    Top = 376
+    Left = 736
+    Top = 216
   end
   object sdsPedido_Cli: TSQLDataSet
     NoMetadata = True
@@ -1423,21 +1423,21 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 280
+    Left = 592
+    Top = 160
   end
   object dspPrazoMedio: TDataSetProvider
     DataSet = sdsPrazoMedio
-    Left = 656
-    Top = 280
+    Left = 640
+    Top = 160
   end
   object cdsPrazoMedio: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'QTDDias'
     Params = <>
     ProviderName = 'dspPrazoMedio'
-    Left = 704
-    Top = 280
+    Left = 688
+    Top = 160
     object cdsPrazoMedioQTDDIAS: TIntegerField
       FieldName = 'QTDDIAS'
     end
@@ -1452,8 +1452,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsPrazoMedio: TDataSource
     DataSet = cdsPrazoMedio
-    Left = 752
-    Top = 280
+    Left = 736
+    Top = 160
   end
   object mPrazo: TClientDataSet
     Active = True
@@ -1484,8 +1484,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
     IndexFieldNames = 'Item'
     Params = <>
     StoreDefs = True
-    Left = 712
-    Top = 152
+    Left = 592
+    Top = 104
     Data = {
       730000009619E0BD010000001800000005000000000003000000730009446573
       63726963616F0100490000000100055749445448020002003C00075174644469
@@ -1511,8 +1511,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsmPrazo: TDataSource
     DataSet = mPrazo
-    Left = 760
-    Top = 152
+    Left = 640
+    Top = 104
   end
   object sdsCliente: TSQLDataSet
     NoMetadata = True
@@ -1555,5 +1555,676 @@ object DMConsFinanceiro: TDMConsFinanceiro
     DataSet = cdsCliente
     Left = 464
     Top = 480
+  end
+  object qConta_Orcamento_Ccusto: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      
+        'select CO.*, CC.CODIGO CODIGO_CCUSTO, CC.DESCRICAO NOME_CCUSTO, ' +
+        'CC.ID ID_CCUSTO, CC.NIVEL NIVEL_CCUSTO'
+      'from CONTA_ORCAMENTO CO'
+      'left join CONTA_ORCAMENTO_CCUSTO COC on CO.ID = COC.ID'
+      'left join CENTROCUSTO CC on CC.ID = COC.ID_CENTROCUSTO'
+      'where CO.ID = :ID   ')
+    SQLConnection = dmDatabase.scoDados
+    Left = 640
+    Top = 48
+    object qConta_Orcamento_CcustoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qConta_Orcamento_CcustoTIPO: TStringField
+      FieldName = 'TIPO'
+      FixedChar = True
+      Size = 1
+    end
+    object qConta_Orcamento_CcustoCODIGO: TStringField
+      FieldName = 'CODIGO'
+    end
+    object qConta_Orcamento_CcustoDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 50
+    end
+    object qConta_Orcamento_CcustoNIVEL: TIntegerField
+      FieldName = 'NIVEL'
+    end
+    object qConta_Orcamento_CcustoSUPERIOR: TStringField
+      FieldName = 'SUPERIOR'
+    end
+    object qConta_Orcamento_CcustoINATIVO: TStringField
+      FieldName = 'INATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object qConta_Orcamento_CcustoID_PESSOA: TIntegerField
+      FieldName = 'ID_PESSOA'
+    end
+    object qConta_Orcamento_CcustoDIA_VENCIMENTO: TIntegerField
+      FieldName = 'DIA_VENCIMENTO'
+    end
+    object qConta_Orcamento_CcustoDTVENCIMENTO: TDateField
+      FieldName = 'DTVENCIMENTO'
+    end
+    object qConta_Orcamento_CcustoTIPO_CALCULO: TStringField
+      FieldName = 'TIPO_CALCULO'
+      FixedChar = True
+      Size = 1
+    end
+    object qConta_Orcamento_CcustoVALOR: TFloatField
+      FieldName = 'VALOR'
+    end
+    object qConta_Orcamento_CcustoTIPO_DESPESA: TStringField
+      FieldName = 'TIPO_DESPESA'
+      FixedChar = True
+      Size = 1
+    end
+    object qConta_Orcamento_CcustoTIPO_RD: TStringField
+      FieldName = 'TIPO_RD'
+      FixedChar = True
+      Size = 1
+    end
+    object qConta_Orcamento_CcustoCOD_CONTABIL: TIntegerField
+      FieldName = 'COD_CONTABIL'
+    end
+    object qConta_Orcamento_CcustoID_TIPO_CONTA: TIntegerField
+      FieldName = 'ID_TIPO_CONTA'
+    end
+    object qConta_Orcamento_CcustoVLR_ORC: TFloatField
+      FieldName = 'VLR_ORC'
+    end
+    object qConta_Orcamento_CcustoANO: TIntegerField
+      FieldName = 'ANO'
+    end
+    object qConta_Orcamento_CcustoCODIGO_CCUSTO: TStringField
+      FieldName = 'CODIGO_CCUSTO'
+    end
+    object qConta_Orcamento_CcustoNOME_CCUSTO: TStringField
+      FieldName = 'NOME_CCUSTO'
+      Size = 50
+    end
+    object qConta_Orcamento_CcustoID_CCUSTO: TIntegerField
+      FieldName = 'ID_CCUSTO'
+    end
+    object qConta_Orcamento_CcustoNIVEL_CCUSTO: TIntegerField
+      FieldName = 'NIVEL_CCUSTO'
+    end
+  end
+  object sdsConsulta_Conta_Orc_CCus: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select sum(iif (DCCUS.valor > 0, DCCUS.valor, Dup.vlr_parcela)) ' +
+      'VLR_PARCELA, sum(DUP.VLR_DEVOLUCAO) VLR_DEVOLUCAO, sum(DUP.VLR_R' +
+      'ESTANTE) VLR_RESTANTE,'#13#10'       sum(DUP.VLR_PAGO) VLR_PAGO, DUP.T' +
+      'IPO_ES, ORC.DESCRICAO NOME_CONTA_ORCAMENTO, ORC.CODIGO COD_CONTA' +
+      '_ORCAMENTO,'#13#10'       DUP.ID_CONTA_ORCAMENTO, ORC.SUPERIOR, ORC.NI' +
+      'VEL, DCCUS.ID_CENTROCUSTO, CC.DESCRICAO NOME_CCUSTO,'#13#10'       CC.' +
+      'CODIGO CODIGO_CCUSTO, CC.NIVEL NIVEL_CCUSTO, SUM(DCCUS.VALOR) VL' +
+      'R_CCUS'#13#10'from DUPLICATA DUP'#13#10'left join CONTA_ORCAMENTO ORC on DUP' +
+      '.ID_CONTA_ORCAMENTO = ORC.ID'#13#10'left join DUPLICATA_CCUSTO DCCUS o' +
+      'n DCCUS.ID = DUP.ID and (DCCUS.VALOR > 0)'#13#10'left join CENTROCUSTO' +
+      ' CC on CC.ID = DCCUS.ID_CENTROCUSTO'#13#10'where DUP.TIPO_MOV <> '#39'H'#39' a' +
+      'nd'#13#10'      DUP.FILIAL = 1 and'#13#10'      DUP.DTVENCIMENTO between '#39'01' +
+      '/01/2019'#39' and '#39'03/31/2019'#39#13#10'GROUP BY DUP.TIPO_ES, ORC.DESCRICAO,' +
+      ' ORC.CODIGO, DUP.ID_CONTA_ORCAMENTO, ORC.SUPERIOR, ORC.NIVEL,'#13#10' ' +
+      '        DCCUS.ID_CENTROCUSTO, CC.DESCRICAO, CC.CODIGO, CC.NIVEL'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 104
+    Top = 440
+  end
+  object dspConsulta_Conta_Orc_CCus: TDataSetProvider
+    DataSet = sdsConsulta_Conta_Orc_CCus
+    Left = 152
+    Top = 440
+  end
+  object cdsConsulta_Conta_Orc_CCus: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspConsulta_Conta_Orc_CCus'
+    Left = 200
+    Top = 440
+    object cdsConsulta_Conta_Orc_CCusVLR_PARCELA: TFloatField
+      FieldName = 'VLR_PARCELA'
+    end
+    object cdsConsulta_Conta_Orc_CCusVLR_DEVOLUCAO: TFloatField
+      FieldName = 'VLR_DEVOLUCAO'
+    end
+    object cdsConsulta_Conta_Orc_CCusVLR_RESTANTE: TFloatField
+      FieldName = 'VLR_RESTANTE'
+    end
+    object cdsConsulta_Conta_Orc_CCusVLR_PAGO: TFloatField
+      FieldName = 'VLR_PAGO'
+    end
+    object cdsConsulta_Conta_Orc_CCusTIPO_ES: TStringField
+      FieldName = 'TIPO_ES'
+      Size = 1
+    end
+    object cdsConsulta_Conta_Orc_CCusNOME_CONTA_ORCAMENTO: TStringField
+      FieldName = 'NOME_CONTA_ORCAMENTO'
+      Size = 50
+    end
+    object cdsConsulta_Conta_Orc_CCusCOD_CONTA_ORCAMENTO: TStringField
+      FieldName = 'COD_CONTA_ORCAMENTO'
+    end
+    object cdsConsulta_Conta_Orc_CCusID_CONTA_ORCAMENTO: TIntegerField
+      FieldName = 'ID_CONTA_ORCAMENTO'
+    end
+    object cdsConsulta_Conta_Orc_CCusSUPERIOR: TStringField
+      FieldName = 'SUPERIOR'
+    end
+    object cdsConsulta_Conta_Orc_CCusNIVEL: TIntegerField
+      FieldName = 'NIVEL'
+    end
+    object cdsConsulta_Conta_Orc_CCusID_CENTROCUSTO: TIntegerField
+      FieldName = 'ID_CENTROCUSTO'
+    end
+    object cdsConsulta_Conta_Orc_CCusNOME_CCUSTO: TStringField
+      FieldName = 'NOME_CCUSTO'
+      Size = 50
+    end
+    object cdsConsulta_Conta_Orc_CCusCODIGO_CCUSTO: TStringField
+      FieldName = 'CODIGO_CCUSTO'
+    end
+    object cdsConsulta_Conta_Orc_CCusNIVEL_CCUSTO: TIntegerField
+      FieldName = 'NIVEL_CCUSTO'
+    end
+    object cdsConsulta_Conta_Orc_CCusVLR_CCUS: TFloatField
+      FieldName = 'VLR_CCUS'
+    end
+  end
+  object mContas_Orc_CCusto: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'ID'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Codigo'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Nome'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'Tipo_ES'
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'Vlr_Total'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_Pago'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Vlr_Restante'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Tipo_Conta'
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'Qtd_Restante'
+        DataType = ftFloat
+      end
+      item
+        Name = 'ID_CCusto'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Nome_CCusto'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'Codigo_CCusto'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Vlr_CentroCusto'
+        DataType = ftFloat
+      end>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end>
+    IndexFieldNames = 'ID;ID_CCUSTO'
+    Params = <>
+    StoreDefs = True
+    Left = 416
+    Top = 208
+    Data = {
+      630100009619E0BD01000000180000000D000000000003000000630102494404
+      0001000000000006436F6469676F010049000000010005574944544802000200
+      1400044E6F6D650100490000000100055749445448020002003C00075469706F
+      5F4553010049000000010005574944544802000200010009566C725F546F7461
+      6C080004000000000008566C725F5061676F08000400000000000C566C725F52
+      657374616E746508000400000000000A5469706F5F436F6E7461010049000000
+      01000557494454480200020001000C5174645F52657374616E74650800040000
+      0000000949445F43437573746F04000100000000000B4E6F6D655F4343757374
+      6F0100490000000100055749445448020002003C000D436F6469676F5F434375
+      73746F01004900000001000557494454480200020014000F566C725F43656E74
+      726F437573746F080004000000000001000D44454641554C545F4F5244455202
+      00820000000000}
+    object mContas_Orc_CCustoID: TIntegerField
+      FieldName = 'ID'
+    end
+    object mContas_Orc_CCustoCodigo: TStringField
+      DisplayLabel = 'C'#243'digo'
+      FieldName = 'Codigo'
+    end
+    object mContas_Orc_CCustoNome: TStringField
+      FieldName = 'Nome'
+      Size = 60
+    end
+    object mContas_Orc_CCustoTipo_ES: TStringField
+      FieldName = 'Tipo_ES'
+      Size = 1
+    end
+    object mContas_Orc_CCustoVlr_Total: TFloatField
+      DisplayLabel = 'Valor Total'
+      FieldName = 'Vlr_Total'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object mContas_Orc_CCustoVlr_Pago: TFloatField
+      DisplayLabel = 'Valor Pago'
+      FieldName = 'Vlr_Pago'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object mContas_Orc_CCustoVlr_Restante: TFloatField
+      DisplayLabel = 'Valor Restante'
+      FieldName = 'Vlr_Restante'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object mContas_Orc_CCustoTipo_Conta: TStringField
+      DisplayLabel = 'Tipo Conta'
+      FieldName = 'Tipo_Conta'
+      Size = 1
+    end
+    object mContas_Orc_CCustoQtd_Restante: TFloatField
+      DisplayLabel = 'Qtde Restante'
+      FieldName = 'Qtd_Restante'
+    end
+    object mContas_Orc_CCustoID_CCusto: TIntegerField
+      FieldName = 'ID_CCusto'
+    end
+    object mContas_Orc_CCustoNome_CCusto: TStringField
+      DisplayLabel = 'Nome CCusto'
+      FieldName = 'Nome_CCusto'
+      Size = 60
+    end
+    object mContas_Orc_CCustoCodigo_CCusto: TStringField
+      DisplayLabel = 'C'#243'digo CCusto'
+      FieldName = 'Codigo_CCusto'
+    end
+    object mContas_Orc_CCustoVlr_CentroCusto: TFloatField
+      DisplayLabel = 'Vlr Centro Custo'
+      FieldName = 'Vlr_CentroCusto'
+      DisplayFormat = '###,###,##0.00'
+    end
+  end
+  object dsmContas_Orc_CCusto: TDataSource
+    DataSet = mContas_Orc_CCusto
+    Left = 464
+    Top = 208
+  end
+  object frxReport1: TfrxReport
+    Tag = 1
+    Version = '5.6.8'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 42992.427233402800000000
+    ReportOptions.LastChange = 43558.481186296300000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    OnBeforePrint = frxReport1BeforePrint
+    OnReportPrint = 'frxReportOnReportPrint'
+    Left = 592
+    Top = 328
+    Datasets = <
+      item
+        DataSet = frxCentroCusto
+        DataSetName = 'frxCentroCusto'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 166.299320000000000000
+        Width = 718.110700000000000000
+        DataSet = frxCentroCusto
+        DataSetName = 'frxCentroCusto'
+        RowCount = 0
+        object Memo3: TfrxMemoView
+          Left = 15.118120000000000000
+          Top = 3.779530000000000000
+          Width = 68.031540000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxCentroCusto."Codigo"]')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 94.488250000000000000
+          Top = 3.779530000000000000
+          Width = 185.196970000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxCentroCusto."Nome"]')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Left = 544.252320000000000000
+          Top = 3.779530000000000000
+          Width = 94.488250000000000000
+          Height = 11.338590000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[frxCentroCusto."Vlr_Total"]')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 298.582870000000000000
+          Top = 3.779530000000000000
+          Width = 52.913420000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxCentroCusto."Codigo_CCusto"]')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo7: TfrxMemoView
+          Left = 362.834880000000000000
+          Top = 3.779530000000000000
+          Width = 166.299320000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxCentroCusto."Nome_CCusto"]')
+          ParentFont = False
+        end
+      end
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 45.714285710000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object Memo2: TfrxMemoView
+          Left = 196.190476190000000000
+          Top = 21.461193560000000000
+          Width = 298.582870000000000000
+          Height = 18.897650000000000000
+          AutoWidth = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Lucida Console'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Per'#195#173'odo de 99/99/9999 at'#195#169' 99/99/9999')
+          ParentFont = False
+        end
+        object Memo1: TfrxMemoView
+          Left = 219.212740000000000000
+          Top = 3.007111900000000000
+          Width = 279.685220000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'Contas de Or'#195#167'amento por Centro de Custo')
+          ParentFont = False
+        end
+        object Line2: TfrxLineView
+          Left = 4.761904760000000000
+          Top = 41.102350000000000000
+          Width = 708.571428570000000000
+          Color = clBlack
+          Frame.ShadowColor = clWhite
+          Frame.Style = fsDot
+          Diagonal = True
+        end
+        object Page: TfrxMemoView
+          Left = 688.606679040000000000
+          Top = 2.977118100000000000
+          Width = 22.677180000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[Page]')
+          ParentFont = False
+        end
+        object Memo36: TfrxMemoView
+          Left = 649.523809530000000000
+          Top = 2.024737150000000000
+          Width = 41.574830000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            'P'#195#161'gina:')
+          ParentFont = False
+        end
+        object Date: TfrxMemoView
+          Left = 650.811379040000000000
+          Top = 20.149969040000000000
+          Width = 60.472480000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = 'mm/dd/yyyy'
+          DisplayFormat.Kind = fkDateTime
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[Date]')
+          ParentFont = False
+        end
+      end
+      object PageFooter1: TfrxPageFooter
+        FillType = ftBrush
+        Height = 30.236240000000000000
+        Top = 249.448980000000000000
+        Width = 718.110700000000000000
+      end
+      object ColumnHeader1: TfrxColumnHeader
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 86.929190000000000000
+        Width = 718.110700000000000000
+        object Memo8: TfrxMemoView
+          Left = 15.118120000000000000
+          Top = 3.779530000000000000
+          Width = 68.031540000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'C'#195#179'd.Conta')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Left = 94.488250000000000000
+          Top = 3.779530000000000000
+          Width = 181.417440000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'Nome.Conta')
+          ParentFont = False
+        end
+        object Memo10: TfrxMemoView
+          Left = 298.582870000000000000
+          Top = 3.779530000000000000
+          Width = 52.913420000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'Cod.CCusto')
+          ParentFont = False
+          Formats = <
+            item
+            end
+            item
+            end>
+        end
+        object Memo11: TfrxMemoView
+          Left = 362.834880000000000000
+          Top = 3.779530000000000000
+          Width = 166.299320000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'Nome CCusto')
+          ParentFont = False
+        end
+        object Memo12: TfrxMemoView
+          Left = 555.590910000000000000
+          Top = 3.779530000000000000
+          Width = 83.149660000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8 = (
+            'Valor')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Left = 7.559060000000000000
+          Top = 17.118120000000000000
+          Width = 708.571428570000000000
+          Color = clBlack
+          Frame.ShadowColor = clWhite
+          Frame.Style = fsDot
+          Diagonal = True
+        end
+      end
+    end
+  end
+  object frxCentroCusto: TfrxDBDataset
+    UserName = 'frxCentroCusto'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'Codigo=Codigo'
+      'Nome=Nome'
+      'Tipo_ES=Tipo_ES'
+      'Vlr_Total=Vlr_Total'
+      'Vlr_Pago=Vlr_Pago'
+      'Vlr_Restante=Vlr_Restante'
+      'Tipo_Conta=Tipo_Conta'
+      'Qtd_Restante=Qtd_Restante'
+      'ID_CCusto=ID_CCusto'
+      'Nome_CCusto=Nome_CCusto'
+      'Codigo_CCusto=Codigo_CCusto'
+      'Vlr_CentroCusto=Vlr_CentroCusto')
+    DataSource = dsmContas_Orc_CCusto
+    BCDToCurrency = False
+    Left = 592
+    Top = 384
   end
 end

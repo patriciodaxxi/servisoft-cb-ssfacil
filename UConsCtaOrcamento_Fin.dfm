@@ -1,7 +1,7 @@
 object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
-  Left = 279
-  Top = 104
-  Width = 950
+  Left = 228
+  Top = 77
+  Width = 1009
   Height = 533
   Caption = 'frmConsCtaOrcamento_Fin'
   Color = clBtnFace
@@ -18,7 +18,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 934
+    Width = 993
     Height = 117
     Align = alTop
     Color = clSilver
@@ -327,8 +327,8 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   end
   object StaticText1: TStaticText
     Left = 0
-    Top = 478
-    Width = 934
+    Top = 477
+    Width = 993
     Height = 17
     Align = alBottom
     Caption = 'Duplo Clique para detalhar'
@@ -343,11 +343,11 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 117
-    Width = 934
-    Height = 361
-    ActivePage = TS_Resumido
+    Width = 993
+    Height = 360
+    ActivePage = ts_CentroCusto
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     FixedDimension = 19
     object TS_Resumido: TRzTabSheet
@@ -355,8 +355,8 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 930
-        Height = 311
+        Width = 989
+        Height = 310
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFinanceiro.dsmConta_Orc
@@ -437,8 +437,8 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       end
       object Panel2: TPanel
         Left = 0
-        Top = 311
-        Width = 930
+        Top = 310
+        Width = 989
         Height = 27
         Align = alBottom
         TabOrder = 1
@@ -523,6 +523,104 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
           Font.Style = [fsBold]
           ParentFont = False
         end
+      end
+    end
+    object ts_CentroCusto: TRzTabSheet
+      Caption = 'Centro Custo'
+      object SMDBGrid2: TSMDBGrid
+        Left = 0
+        Top = 0
+        Width = 989
+        Height = 337
+        Align = alClient
+        DataSource = DMConsFinanceiro.dsmContas_Orc_CCusto
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Courier New'
+        Font.Style = []
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        ParentFont = False
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        Flat = False
+        BandsFont.Charset = DEFAULT_CHARSET
+        BandsFont.Color = clWindowText
+        BandsFont.Height = -11
+        BandsFont.Name = 'MS Sans Serif'
+        BandsFont.Style = []
+        Groupings = <>
+        GridStyle.Style = gsCustom
+        GridStyle.OddColor = clWindow
+        GridStyle.EvenColor = clWindow
+        TitleHeight.PixelCount = 24
+        FooterColor = clBtnFace
+        ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+        RegistryKey = 'Software\Scalabium'
+        RegistrySection = 'SMDBGrid'
+        WidthOfIndicator = 11
+        DefaultRowHeight = 18
+        ScrollBars = ssHorizontal
+        ColCount = 11
+        RowCount = 2
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Codigo'
+            Width = 95
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome'
+            Width = 231
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Codigo_CCusto'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome_CCusto'
+            Width = 262
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Vlr_Total'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Vlr_Pago'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Vlr_Restante'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_CCusto'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Vlr_CentroCusto'
+            Visible = True
+          end>
       end
     end
   end
