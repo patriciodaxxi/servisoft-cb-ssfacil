@@ -1,6 +1,6 @@
 object frmConsFat: TfrmConsFat
-  Left = 43
-  Top = 99
+  Left = 84
+  Top = 78
   Width = 1260
   Height = 583
   BorderIcons = [biSystemMenu, biMaximize]
@@ -172,22 +172,8 @@ object frmConsFat: TfrmConsFat
       TabOrder = 5
       OnClick = btnConsultarClick
     end
-    object btnCancelar: TNxButton
-      Left = 378
-      Top = 46
-      Width = 92
-      Height = 24
-      Caption = 'Cancelar'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 6
-    end
     object btImprimir: TNxButton
-      Left = 470
+      Left = 379
       Top = 46
       Width = 92
       Height = 24
@@ -198,11 +184,11 @@ object frmConsFat: TfrmConsFat
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 6
       OnClick = btImprimirClick
     end
     object btExcel: TNxButton
-      Left = 562
+      Left = 471
       Top = 46
       Width = 92
       Height = 24
@@ -213,7 +199,7 @@ object frmConsFat: TfrmConsFat
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 7
       OnClick = btExcelClick
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
@@ -266,7 +252,7 @@ object frmConsFat: TfrmConsFat
       ItemHeight = 20
       ParentCtl3D = False
       ParentFont = False
-      TabOrder = 9
+      TabOrder = 8
     end
   end
   object Panel1: TPanel

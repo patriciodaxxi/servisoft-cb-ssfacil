@@ -18,7 +18,6 @@ type
     RxDBLookupCombo1: TRxDBLookupCombo;
     RzCheckList1: TRzCheckList;
     btnConsultar: TNxButton;
-    btnCancelar: TNxButton;
     Panel1: TPanel;
     Label23: TLabel;
     Label24: TLabel;
