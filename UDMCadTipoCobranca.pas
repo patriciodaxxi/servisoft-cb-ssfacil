@@ -73,11 +73,32 @@ type
     sdsTipoCobrancaTAXA_TIPO: TStringField;
     cdsTipoCobrancaTAXA: TFloatField;
     cdsTipoCobrancaTAXA_TIPO: TStringField;
+    dsMestre: TDataSource;
+    sdsTipoCobranca_Itens: TSQLDataSet;
+    cdsTipoCobranca_Itens: TClientDataSet;
+    dsTipoCobranca_Itens: TDataSource;
+    sdsTipoCobranca_ItensID: TIntegerField;
+    sdsTipoCobranca_ItensITEM: TIntegerField;
+    sdsTipoCobranca_ItensID_CONDPAGTO: TIntegerField;
+    cdsTipoCobrancasdsTipoCobranca_Itens: TDataSetField;
+    cdsTipoCobranca_ItensID: TIntegerField;
+    cdsTipoCobranca_ItensITEM: TIntegerField;
+    cdsTipoCobranca_ItensID_CONDPAGTO: TIntegerField;
+    sdsCondPagto: TSQLDataSet;
+    dspCondPagto: TDataSetProvider;
+    cdsCondPagto: TClientDataSet;
+    dsCondPagto: TDataSource;
+    sdsCondPagtoID: TIntegerField;
+    sdsCondPagtoNOME: TStringField;
+    cdsCondPagtoID: TIntegerField;
+    cdsCondPagtoNOME: TStringField;
+    cdsTipoCobranca_ItensNome_CondPagto: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspTipoCobrancaUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
       UpdateKind: TUpdateKind; var Response: TResolverResponse);
     procedure cdsTipoCobrancaNewRecord(DataSet: TDataSet);
+    procedure cdsTipoCobranca_ItensCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
@@ -89,6 +110,7 @@ type
     procedure prc_Inserir;
     procedure prc_Gravar;
     procedure prc_Excluir;
+    procedure prc_Inserir_CondPgto;
   end;
 
 var
@@ -206,6 +228,24 @@ procedure TDMCadTipoCobranca.DoLogAdditionalValues(ATableName: string;
   var AValues: TArrayLogData; var UserName: string);
 begin
   UserName := vUsuario;
+end;
+
+procedure TDMCadTipoCobranca.prc_Inserir_CondPgto;
+var
+  vItemAux : Integer;
+begin
+  cdsTipoCobranca_Itens.Last;
+  vItemAux := cdsTipoCobranca_ItensITEM.AsInteger;
+  cdsTipoCobranca_Itens.Insert;
+  cdsTipoCobranca_ItensID.AsInteger   := cdsTipoCobrancaID.AsInteger;
+  cdsTipoCobranca_ItensITEM.AsInteger := vItemAux + 1;
+end;
+
+procedure TDMCadTipoCobranca.cdsTipoCobranca_ItensCalcFields(
+  DataSet: TDataSet);
+begin
+  if cdsTipoCobranca_ItensID_CONDPAGTO.AsString <> '' then
+    cdsTipoCobranca_ItensNome_CondPagto.AsString := SQLLocate('CONDPGTO','ID','NOME',cdsTipoCobranca_ItensID_CONDPAGTO.AsString);
 end;
 
 end.

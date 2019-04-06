@@ -1,6 +1,6 @@
 object frmCadTipoCobranca: TfrmCadTipoCobranca
-  Left = 181
-  Top = 20
+  Left = 254
+  Top = 63
   Width = 914
   Height = 653
   Caption = 'Cadastro de Tipo de Cobran'#231'a'
@@ -20,9 +20,9 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 906
-    Height = 622
-    ActivePage = TS_Consulta
+    Width = 898
+    Height = 614
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -30,7 +30,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -38,8 +38,8 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 902
-        Height = 515
+        Width = 894
+        Height = 507
         Align = alClient
         Ctl3D = False
         DataSource = DMCadTipoCobranca.dsTipoCobranca
@@ -169,7 +169,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 902
+        Width = 894
         Height = 30
         Align = alTop
         Color = clSilver
@@ -400,8 +400,8 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 582
-        Width = 902
+        Top = 574
+        Width = 894
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -417,7 +417,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 902
+        Width = 894
         Height = 37
         Align = alTop
         Color = clSilver
@@ -558,7 +558,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 902
+        Width = 894
         Height = 30
         Align = alTop
         Color = 8404992
@@ -787,8 +787,8 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 902
-        Height = 569
+        Width = 894
+        Height = 561
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -810,7 +810,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label2: TLabel
           Left = 462
-          Top = 136
+          Top = 130
           Width = 47
           Height = 13
           Alignment = taRightJustify
@@ -819,7 +819,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label3: TLabel
           Left = 100
-          Top = 135
+          Top = 129
           Width = 180
           Height = 13
           Alignment = taRightJustify
@@ -827,7 +827,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label4: TLabel
           Left = 25
-          Top = 210
+          Top = 177
           Width = 66
           Height = 13
           Alignment = taRightJustify
@@ -835,7 +835,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label5: TLabel
           Left = 96
-          Top = 292
+          Top = 240
           Width = 179
           Height = 13
           Caption = '(N'#227'o marcar faturamento para perdas)'
@@ -847,8 +847,8 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           ParentFont = False
         end
         object Label7: TLabel
-          Left = 440
-          Top = 316
+          Left = 728
+          Top = 168
           Width = 179
           Height = 52
           Caption = 
@@ -863,7 +863,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label10: TLabel
           Left = 9
-          Top = 254
+          Top = 221
           Width = 82
           Height = 13
           Alignment = taRightJustify
@@ -871,7 +871,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label11: TLabel
           Left = 166
-          Top = 230
+          Top = 197
           Width = 141
           Height = 13
           Caption = 'Para c'#225'lculo de parcelamento'
@@ -884,7 +884,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label12: TLabel
           Left = 64
-          Top = 232
+          Top = 199
           Width = 27
           Height = 13
           Alignment = taRightJustify
@@ -915,13 +915,13 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object DBEdit1: TDBEdit
           Left = 512
-          Top = 128
+          Top = 122
           Width = 65
           Height = 21
           CharCase = ecUpperCase
           DataField = 'QTDDIAS'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 15
+          TabOrder = 28
           Visible = False
         end
         object DBCheckBox4: TDBCheckBox
@@ -932,7 +932,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Cheque'
           DataField = 'CHEQUE'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 7
+          TabOrder = 3
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox4Click
@@ -945,20 +945,20 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Dinheiro'
           DataField = 'DINHEIRO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 2
+          TabOrder = 18
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox5Click
         end
         object DBCheckBox6: TDBCheckBox
           Left = 96
-          Top = 182
+          Top = 149
           Width = 137
           Height = 17
           Caption = 'Mostrar no Cupom Fiscal'
           DataField = 'MOSTRARNOCUPOM'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 16
+          TabOrder = 6
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox6Click
@@ -984,7 +984,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Cart'#227'o de D'#233'bito'
           DataField = 'CARTAODEBITO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 4
+          TabOrder = 2
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox8Click
@@ -997,7 +997,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Descontado'
           DataField = 'DESCONTADO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 8
+          TabOrder = 20
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox1Click
@@ -1010,7 +1010,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Dep'#243'sito'
           DataField = 'DEPOSITO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 5
+          TabOrder = 19
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox2Click
@@ -1023,50 +1023,50 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Cobran'#231'a Banc'#225'ria (boleto)'
           DataField = 'GERARBOLETO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 3
+          TabOrder = 25
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox3Click
         end
         object DBCheckBox10: TDBCheckBox
-          Left = 96
-          Top = 314
+          Left = 384
+          Top = 166
           Width = 201
           Height = 17
           Caption = 'Soma Faturamento Bruto'
           DataField = 'FATURAMENTO_BRUTO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 21
+          TabOrder = 10
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object DBCheckBox11: TDBCheckBox
-          Left = 96
-          Top = 338
+          Left = 384
+          Top = 182
           Width = 201
           Height = 17
           Caption = 'Exige cliente (Para Cr'#233'di'#225'rio)'
           DataField = 'EXIGE_CLIENTE'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 23
+          TabOrder = 11
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object DBCheckBox12: TDBCheckBox
-          Left = 96
-          Top = 362
+          Left = 384
+          Top = 198
           Width = 201
           Height = 17
           Caption = 'Abre Gaveta'
           DataField = 'ABRE_GAVETA'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 24
+          TabOrder = 12
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object RxDBComboBox1: TRxDBComboBox
           Left = 96
-          Top = 202
+          Top = 169
           Width = 245
           Height = 21
           Style = csDropDownList
@@ -1078,21 +1078,21 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
             'Obrigat'#243'rio'
             'Proibido'
             'Opcional')
-          TabOrder = 17
+          TabOrder = 7
           Values.Strings = (
             'S'
             'N'
             'O')
         end
         object DBCheckBox9: TDBCheckBox
-          Left = 96
-          Top = 386
+          Left = 384
+          Top = 214
           Width = 201
           Height = 17
           Caption = 'Imprime Carn'#234' - Cr'#233'dito da Loja'
           DataField = 'IMPRIME_CARNE'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 25
+          TabOrder = 13
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -1104,32 +1104,32 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Credi'#225'rio (Pendura)'
           DataField = 'CREDITO_LOJA'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 6
+          TabOrder = 26
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox13Click
         end
         object DBCheckBox14: TDBCheckBox
-          Left = 96
-          Top = 410
+          Left = 384
+          Top = 230
           Width = 201
           Height = 17
           Caption = 'Pre'#231'o '#224' Vista'
           DataField = 'PRECO_AVISTA'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 26
+          TabOrder = 14
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object DBCheckBox15: TDBCheckBox
-          Left = 96
-          Top = 434
+          Left = 384
+          Top = 246
           Width = 201
           Height = 17
           Caption = 'Enviar no Aplicativo'
           DataField = 'ENVIAR_APLICATIVO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 27
+          TabOrder = 15
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -1141,7 +1141,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Outros'
           DataField = 'OUTROS'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 9
+          TabOrder = 27
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox16Click
@@ -1154,7 +1154,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Vale Alimenta'#231#227'o'
           DataField = 'VALE_ALIMENTACAO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 10
+          TabOrder = 4
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox17Click
@@ -1167,7 +1167,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Vale Refei'#231#227'o'
           DataField = 'VALE_REFEICAO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 11
+          TabOrder = 21
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox18Click
@@ -1180,7 +1180,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Vale Presente'
           DataField = 'VALE_PRESENTE'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 12
+          TabOrder = 5
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox19Click
@@ -1193,14 +1193,14 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Caption = 'Vale Combust'#237'vel'
           DataField = 'VALE_COMBUSTIVEL'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 13
+          TabOrder = 22
           ValueChecked = 'S'
           ValueUnchecked = 'N'
           OnClick = DBCheckBox20Click
         end
         object RxDBComboBox2: TRxDBComboBox
           Left = 288
-          Top = 128
+          Top = 122
           Width = 162
           Height = 21
           Style = csDropDownList
@@ -1222,7 +1222,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
             '15- Boleto Banc'#225'rio'
             '90 - Sem Pagamento'
             '99- Outros')
-          TabOrder = 14
+          TabOrder = 23
           Values.Strings = (
             '01'
             '02'
@@ -1238,52 +1238,52 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
             '99')
         end
         object DBCheckBox21: TDBCheckBox
-          Left = 288
-          Top = 314
+          Left = 576
+          Top = 166
           Width = 147
           Height = 17
           Caption = 'Soma Faturamento L'#237'quido'
           DataField = 'FATURAMENTO_LIQUIDO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 22
+          TabOrder = 24
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object DBCheckBox22: TDBCheckBox
-          Left = 96
-          Top = 458
+          Left = 384
+          Top = 262
           Width = 201
           Height = 17
           Caption = 'Fechamento autom'#225'tico de caixa'
           DataField = 'FECHAMENTO_AUTOMATICO'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 28
+          TabOrder = 16
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
         object DBEdit2: TDBEdit
           Left = 96
-          Top = 246
+          Top = 213
           Width = 65
           Height = 21
           CharCase = ecUpperCase
           DataField = 'PERC_JUROS'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 19
+          TabOrder = 9
         end
         object DBEdit3: TDBEdit
           Left = 96
-          Top = 224
+          Top = 191
           Width = 65
           Height = 21
           CharCase = ecUpperCase
           DataField = 'TAXA'
           DataSource = DMCadTipoCobranca.dsTipoCobranca
-          TabOrder = 18
+          TabOrder = 8
         end
         object RxDBComboBox3: TRxDBComboBox
           Left = 163
-          Top = 246
+          Top = 213
           Width = 177
           Height = 21
           Style = csDropDownList
@@ -1295,10 +1295,313 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
           Items.Strings = (
             'PORCENTAGEM'
             'VALOR (R$)')
-          TabOrder = 20
+          TabOrder = 17
           Values.Strings = (
             'P'
             'V')
+        end
+        object Panel3: TPanel
+          Left = 1
+          Top = 293
+          Width = 892
+          Height = 267
+          Align = alBottom
+          TabOrder = 30
+          object Panel12: TPanel
+            Left = 1
+            Top = 1
+            Width = 890
+            Height = 32
+            Align = alTop
+            Color = clSilver
+            TabOrder = 0
+            object btnInserir_CondPagto: TNxButton
+              Left = 1
+              Top = 1
+              Width = 146
+              Height = 30
+              Align = alLeft
+              Caption = 'Inserir'
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = []
+              Glyph.Data = {
+                F6060000424DF606000000000000360000002800000018000000180000000100
+                180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDF7F8E9DEE096898D695A6040383D4434
+                3C6A5B6196898EEADEE0FDF6F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE7E2E38D8383121512001C15005750
+                19948D26B5B01DB5B20F968F005751001C131315128E8285E7E2E2FFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBEB4B63837350040321D
+                AC963CFFEF3FFFFF46FFFF4DFFFF47FFFF45FFFF43FFFF3EFFF01BAF97003E33
+                383636BFB4B5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFADA3A51919
+                19117C6529F3CC36FFDE44F3DA3EEDDA31F1E031F3E639F0E536F1DF3AEFDD3E
+                F2DC37FEDF2FF2CC0E7C651C1B1AB0A2A5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                BDB4B9191A181D8C6E30FCCB2AE5BA2DE4BE2AE8C729EACF22EED81FEFDB23ED
+                DA22EFD926EAD22BE6C82FE1C028E5BB28FFCA158F6C1B1917BFB4B7FFFFFFFF
+                FFFFFFFFFFE6E2E43936371674502CF6B617D59F25D8AB1BDEB50CE2B759E5CF
+                AAF3EEABF1EBABF1EBA9F3ED59E5CE0EE0B81ADEB721DAAD16D7A125F7B31373
+                50393635E6E3E4FFFFFFFFFFFF8D838801371B2FD99413D59218D09B19D6A413
+                DAAA00DBAB74E0CBFFF5F8FFF4F6FFF4F6FFF4F872E2C900DCAC10D9AA17D6A4
+                17D19B18D4932CD99700361D8E8489FFFFFFFCF9FC13171223915428DA8B15CA
+                8918D09218D49713D79D00D7A067DDC3FBF5F6F5F4F4F5F4F4FCF4F765DEC500
+                D8A318D6A01CD29A16D0951ACA8A25DA8D189358131513FCF8FBE9E2E7000C00
+                39D28020C77616C5810EC7810ACA8507CE8A00CB8D60D5B7FBF5F7F6F4F4F6F4
+                F4FBF5F760D6B900CD8F05CF8D0AC9850EC88118C67E24C67635D480000B00EA
+                E1E5979094003A0F2FDB7F17C06C2DC57F69CEA675D3B16DD4B064D3B2A4DCCD
+                F8F4F5F4F4F4F4F4F4F8F3F5A3DBCB60D2B169D5B172D3B063CEA22AC67C1FBD
+                6C36DB7B0039109592946B626711692A32D06F1AB86248C783DCECE4FFF8FDFC
+                F4F8FCF4F7F8F3F5F5F4F4F3F4F4F3F4F4F5F4F4F8F3F5FBF5F6FBF4F8FFF8FD
+                DAECE34BC6841EB66730CE6F11672A656269403D3E1D81392BC96120B75D47C0
+                80D6E9E1FFF7FBF5F4F4F5F4F4F5F4F4F4F4F3F3F4F4F3F4F4F4F4F3F5F4F4F5
+                F4F4F5F4F4FFF7FCDAE9E04CC27F23B65E36C76424833A463F3E464142227B30
+                45C25F31B75653BF79DBEAE0FFF7FCF5F4F5F5F5F5F5F4F4F3F4F4F3F4F3F3F4
+                F3F4F4F4F5F4F5F5F5F5F5F4F5FFF7FCDBE8E252C17E2BB85839C35B19812B44
+                3D40696364105E1841C55533B9545EC27EDEEAE2FEF9FDFAF5FAFAF6F9F6F5F7
+                F5F4F5F3F4F3F3F4F3F5F4F5F6F5F7FAF6F9FAF5F9FEF9FEDCE9E15DC07C39B7
+                563FC658106419686269989095002D004DC8534EB95E55B96972B87C76B78474
+                B9866BB27EA3C7ADF8F6F7F4F4F4F4F4F4F7F6F7A3C6AB6BB17C72B88376B783
+                73B78053B8684FBA5D49C8530031009A949AE9E4E90000004BB64861BE635ABA
+                664ABB5A45B95E45BC6138B95984C996FAF6F9F5F4F5F5F4F5FAF6F986C7963C
+                B65949BD6044BB5C4CB95D59B9635FBE5E49B649000100E9E3E9FCFAFC111311
+                20701963C55A6DC17368BE6E69C0746AC2755FBF6C98CEA1FAF5F8F5F3F5F5F3
+                F5F9F5F995CEA05DC06D6CC27766C27069BF6D73C17162C659226F1B121510FC
+                F9FCFFFFFF8E868F00220051AD397DCD717FC2787BC17477C5776BC073A8CFAB
+                FFFBFFFEFAFFFEFAFFFFFBFFA5D2A96BBF7076C47874C3747BC4797CCB734EAE
+                3B0022008E888FFFFFFFFFFFFFE6E3E735353518490671CA5591D2878DC88485
+                C88083C77BA6CBA0D0DBD0CFDCCECEDACDD2DAD0A2C8A183C57D88C87C8ECA85
+                8FD38571C9561B4B08333634E4E3E6FFFFFFFFFFFFFFFFFFBDB7BE181616265C
+                137FD060A4DE98A6D49D9FCD8C99CC8D8FC58C92C98796C68793C78C97C98C9D
+                CE90A4D39CA7DE9786CE602E5C13161617BBB8BEFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFAEA8AF17161618460369B246ADE38EC2E6AEB9DEB1B0DCADB5DCA6BDD7
+                ACB8DBAABBE0ADBBE6B2A6E2926CB0461E4502151618ACA7B0FFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFBEB8BE353532001A002E65147FBE53A8E282
+                B9EA9EC0E8ACC5ECA8BCEA9EACE1847CBC57276712001900333532BCB8BFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6E5E78E87910D
+                130C000000001D00184C002C6B15286B1117480200190000000010160C8B8692
+                E5E5E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFDFAFDE8E4EC939399636A63403E4048404262666392919AEA
+                E4EDFDFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+              GlyphSpacing = 5
+              ParentFont = False
+              TabOrder = 0
+              Transparent = True
+              OnClick = btnInserir_CondPagtoClick
+            end
+            object btnAlterar_CondPagto: TNxButton
+              Left = 147
+              Top = 1
+              Width = 147
+              Height = 30
+              Align = alLeft
+              Caption = 'Alterar'
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = []
+              Glyph.Data = {
+                AE060000424DAE06000000000000360000002800000017000000170000000100
+                1800000000007806000000000000000000000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFFDDDAD9D4CCC8B9ACA8B0A59FCDC2
+                BDD4CECDE9E7E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
+                0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9E9A96533E351F1A180C2D3C
+                094662104D68093F5212222A2A1E17715E5BD8D6D9FFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFEEECEB20120D141D271D
+                88B322BFF61EC1FF20C1FF20C0FF1FBFFF22BFF923B4F31757700D06006A615D
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFAEA9A81D12
+                0F2D82A42FCFFF1DC3FF20BBFF1FB9FF20B5FF26B9FB37B8F435B8F631B9FA34
+                CDFF30B7EE0931403C2B22F6F6F6FFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFF
+                D7CDCF0300002385A51EC9FF20B8FE1EB7FD1FB7FD20B9FE20B8FC1FB8FF1DB5
+                FE1DB6FD21B6FE20B5FD1CBEFF24C8FF123C4E3B271FFFFFFFFFFFFFFFFFFF00
+                0000FFFFFFF7F7F60200001D8CB21FCFFF1CB3F822C0FF20BFFF1FBAFF1EB5FF
+                1FB9FE1FB9FD1EB7FF1EB7FF1EB8FF1EB7FF1FB8FC1FBBFF24CAFF002E3E645D
+                5CFFFFFFFFFFFF000000FFFFFF665E5C0C384A27D3FF20BAFF269AC6122C4028
+                A3DD21B1F022CFFF24BBFF21BAFD20B8FE1FB6FE1FB7FF1EB8FD21B8FE1FB9FD
+                1FBDFF24B5EE020000D4D2D4FFFFFF000000E4E0E00F000020B7E71EBAFF1CB8
+                FF1BB3EF24678D13405912566B1541581AB2ED1EC3FF1DB8FF1AB7FD1AB6FF20
+                B9FE1DB7FF20B6FE1FB5FE22CFFF114C646A615EFFFFFF000000B3ABAA002F49
+                35C1FF2CB8F82FB7F733C6FF1C546E2EC1EC36DCFF24617334698A2D6C814BD4
+                FF3FBAF939BBF42EB9F62AB7F525B5FD1FB7FF1CBAFF22B5F41B0F09E9E7E600
+                0000695B5810688329C3FF23B7FA1FB8FA29C1FF398ABA4495BB2C61792C5A74
+                439CC415121C32687959E6FF4FBFFA4EC1F93BBCFA1AB5FC1EB8FF1EB9FF24BE
+                F7011319D2CECD000000382E2F1286A922C0FF1CB5FF28B7FD59C5FD5DE4FF1A
+                303850A7CB1B35411009094CA6C9111319376A7B5EDAFF53C6FE58C6F948C2F9
+                19B4FD1EB8FF1DC1FF003249BBB3AE0000002622211A90B91FBFFF1DB6FC57C6
+                FD65CBF761CBFD73D2FF0A0B1156A0BF18232D1A1A1857AACC10111C3A6B7B6F
+                E4FF5EC8F96ACCF93FBFFA1BB4FF21C3FF01435EA49B99000000251F201388B0
+                1ABFFF3DC0FA77CFF870CCF86FCDF871D8FF4E86970100006FB6D81A292C170C
+                0C69B4D30D1017477C8983EAFF71CBFB6ACDF724B6FF20C1FF003957A9A08B00
+                00005548481C82A31CBFFF6CC9F785D2F581D0F683CEF77ECFF98CE9FF6DA3B7
+                06000072A9C42B3C411918167AB5D21415184E727C88DFFF88D1FA3BBFFB1BBD
+                FF123547D0C3B4000000BBB2AB4688A62DBCFF82CDF193D1EE8FD0F18FD1F38C
+                D4F58CD2F69BECFF62909C15100F85B6CC3839422A2E3086B7CE191C1F5F8B9B
+                99E2FF4EC3FA14B8F96D6C6DEAE7D9000000E9E4E267707309BAFC86D2F9A0D9
+                F698D8F699D7F59AD7F59AD7F599D6F5A4EDFF7A9FAC0B00018ABACC2F3D4219
+                101387B8CF9DD8F4A6DDF542C5FF2F9FD1A18D89FDFAEB000000FEFEFEA89286
+                379FCC5ED1FFB9DFF1A8DCF2AADDF4A9DCF2A9DCF2A9DBF2A5DBF2BAF5FF7FA7
+                B0140D0C84A0AE4D5A65A5D4E6A9E1FCABDEF223C7FF6D7C85CDC9C5FFFDF400
+                0000FFFFFFD6D4D478807E35BFFFB4E5F6B9DFF0B2DEF4B3DEF2B3DFF3B3DFF3
+                B4DEF2B3DDF3C8F4FF798E953C474FC2F1FFB6E4FAC3E0EF8CDCFF3D9DCC9488
+                83FFFFFFFFFFFD000000FFFFFFFFFFFFC8BBB2658A9B60CAF9D7EBF4CBE3F1C5
+                E1F3C5E2F2C6E2F2C6E2F2C6E2F2C5E3F1D0F1FFDEFBFFC4E5F3D2E5F1BAE8FF
+                34ABD58D8884F8F6F4FFFFFFFCFFFF000000FFFFFFFDFDFDFCFDFEBAB0AA7098
+                A47DD0F8DDEBF3DFE9F3D3E9EFD2E9F0D2E8F0D1E6EECAE1E8CCE3E8CFE1E7E6
+                E8EEAFE2FC56B7DE92928FE0D9D6FFFFFFFCFAFAF0F3F3000000FFFFFFFCFCFC
+                FDFDFDFFFFFFCFC0C48D9E9C60B1DAACE0F5E1EEF4E4EEF2E7EEF2E8EEF3E6ED
+                F2E2EBF3D9EBF47BCDEE6CA4BCA59D9AF5EBEAFFFFFFFFFFFFFFFDFEEBF3F000
+                0000FFFFFFFEFEFEFFFFFFFFFFFFFFFFFFE8E0E2CBBDB383A3AF77AFCE8DC4DB
+                A0CFE4A2D0E596CCE284BDD76EA8BFAAADA8D9CAC5FCFCFBFFFFFFFEFFFFFFFF
+                FFFFFFFFFCFEFD000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEF7
+                F1EDE2DDD5CBCCCAB5C1C4B4BFC2BFC3C1D6D2CFEEE7E3FAF7F5FFFFFFFFFFFF
+                FEFFFFFFFFFFFFFFFFFFFFFFF9FEFE000000}
+              GlyphSpacing = 5
+              ParentFont = False
+              TabOrder = 1
+              Transparent = True
+              OnClick = btnAlterar_CondPagtoClick
+            end
+            object btnExcluir_CondPagto: TNxButton
+              Left = 294
+              Top = 1
+              Width = 147
+              Height = 30
+              Align = alLeft
+              Caption = 'Excluir'
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = []
+              Glyph.Data = {
+                F6060000424DF606000000000000360000002800000018000000180000000100
+                180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFDFDF4A5A19F5955581F1C260000070000
+                0C1B2021595C59A7A8A3FEFEF5FFFFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCC1BEB93E3B4C00000B00004100008D
+                010AB20C16BB0710B40002A1000073000033000006414247C9C7BEFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6F4EE827F7B00003300007903
+                18BA0717C6040FBB0008B10203AE0202AC0406A50004AD0306A7000096000052
+                040325858782F4F6F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2F1EB716F6B0000
+                440014B5031CCB0011BB0003B50000BC0000BD0001BB0000BF0101BB0001BA00
+                00B80102A702029F000079000023707376F3F4F1FFFFFFFFFFFFFFFFFFFCFBF7
+                76757400004A0323D4011BD10007BB0000B90000BC0000BA0100BB0300BE0300
+                C00100C10001BA0000BD0201BC0102AC0201A402009500002878797AFCFCFAFF
+                FFFFFFFFFFB2ACA900013E0025CA021DD70008BF0000BB0000BF0000BF0000BE
+                0100BF0200BF0200C10000C10001BD0000BE0000BD0101C00000B70200A30000
+                80000024B3B3AFFFFFFFFFFFFC20213900169F022CE3010CCB0000C10000C500
+                00C50000C50000C50000C70000C60000C50000C20102BF0100C40100C70000C7
+                0001CA0002AF0202990000631E1F34FFFFFED8DACE0000340834F00420D80000
+                C70000CE0000D20000D30000D40000D40000D50000D50000D40000D50000D000
+                00D40000D60000D40100D30101C90002A103029C00000FDCDCD685858000028E
+                0A36F60312D10000CC0000C90000B50000B10000B10000B10000B10000B10000
+                B20000B50000B40000B50000B20000B50000C70000DA0100BA0107A00000488B
+                8687403A3A002CDE032FE80006D80000C54947BA9694CF9797D19393CF9494CF
+                9494CF9494CF9493CF9195D09594D19792D29696D28F94CF4948B80201CD0201
+                C70006A10000873D393B0D0C121444FF0029E80000D53738CFDBDDEBFFFFFFFF
+                FFFEFFFFFEFFFFFEFFFFFEFFFFFEFFFFFEFEFFFEFFFFFEFFFEFEFFFFFEFFFFFF
+                DEDCEA3938D70000CF0005A30509B009061300020E0F4EFF002BEA0000D45B5A
+                DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFF
+                FFFFFFFFFFFFFFFFFFFFFC5A5EE00000D70007A10711B5000015000209144EFF
+                002FEB0005E20806D49496DFFFFFFFF3F1FAF3F2FCF3F2FCF3F2FCF3F2FCF3F2
+                FCF2F2FCF2F2FCF2F3FBF3F3FBFFFFFF9D93DA0D06D40000D20007A90B14BE00
+                001209070C0C3FFF0537FB071BEE0000E20000DB0000D90706DA0405D80403D8
+                0403D80403D80403D80304D80302DE0504D80708D70000D70000DA0000EC0107
+                CA000BAF000FB40D0A0D373533001EC90543FF042CF20001E70000EF0000EE00
+                00EB0000EA0000EA0000EA0000EA0000EA0000E60000EB0000EA0000E50000E8
+                0000F20001EB000DB70015AF0000933C3B3E84838000006B1045FF033AF4061C
+                EE0000EC0000F10000F10000F10000F10000F10000F00000F10100F10000F300
+                00F00200EF0200F20000F7000BD40014B00417BE000051888588DEDAD300000C
+                0B30EB0342FF0434F50413F10000F00000F20000F40000F30000F30000F20000
+                F50100F80000F50000F70100F90300F8000ADF0017BA0018BD070FBA000009DC
+                DCD4FFFFFE211B270005820A3AFE0341FA0532F70317F20104F30000F60000F8
+                0000FB0000F80100F90000F80000F70000FC0003F4000EE0001AC4001DBD0317
+                C8000071211D2EFFFFFEFFFFFFB4B3A80000210215B2083FFF0444FB0235F502
+                24F10413F50307F80001F80000F80100F90001F70004F6000CED0018D9001FCA
+                0023C7041DCE0006A3000024B3B2ABFFFFFFFDFFFFFCFCFA7A767100002D0214
+                C10D39FA0743FF003CF50234F1022AEE0324EB031CEF001AEC001EE40222E101
+                26D70028D00427D1051CD60007B700002F767670FBFCF9FFFEFFF9FCFFFFFFFF
+                F5F4EE73726C00002E0004A80822EE0A39FB013EF7003BF3053BE90135E20037
+                DF0231DD002EDB002DDB0225DD0815D40001A200003571716AF3F3ECFFFFFFFE
+                FDFDFDFBFFFEFDFCFFFFFFF7F7F284838100002D000072070BCF081DF40428F7
+                0429F70529EE0528EE0525EB051DEE0618EA0208C7000073000031848383F7F7
+                F1FFFFFFFFFCFFFEFEFBFFFBFAFBFDFEFAFFFDFFFFFFFFFFFDC4C2BA3E3F4D00
+                00160000590000B90000FF0D10FF0C0CFF0000FF0000BA00005F000014403E49
+                C2C2BBFFFFFEFEFFFFFAFDFDFEFDFDFFFFFCFBFFFBFFFFFEFFFBFFFBFDFCFCFF
+                FFFFFFFFFFFFFDF9F9EAA8A59F5C5A5D1C1E250000100000111F1D22585B539F
+                A29CF5F6EEFFFFFDFFFFFFFEFFFFFDFEFCFCFBFEFFFEFCFBFFFF}
+              GlyphSpacing = 5
+              ParentFont = False
+              TabOrder = 2
+              Transparent = True
+              OnClick = btnExcluir_CondPagtoClick
+            end
+          end
+          object SMDBGrid13: TSMDBGrid
+            Left = 1
+            Top = 33
+            Width = 890
+            Height = 233
+            Align = alClient
+            Ctl3D = False
+            DataSource = DMCadTipoCobranca.dsTipoCobranca_Itens
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ReadOnly = True
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 4
+            RowCount = 2
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'ITEM'
+                Title.Caption = 'Item'
+                Width = 82
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_CONDPAGTO'
+                Title.Caption = 'Cod.Cond Pagto'
+                Width = 123
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Nome_CondPagto'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Cond.Pagto'
+                Visible = True
+              end>
+          end
         end
       end
     end

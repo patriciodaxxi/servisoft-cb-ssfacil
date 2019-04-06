@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, UDMCadTipoCobranca, UCBase,
-  DB, StdCtrls, DBCtrls, Mask, ExtCtrls, DBGrids, RzTabs, SMDBGrid, NxCollection, RxDBComb;
+  DB, StdCtrls, DBCtrls, Mask, ExtCtrls, DBGrids, RzTabs, SMDBGrid, NxCollection, RxDBComb, UCadTipoCobranca_Itens;
 
 type
   TfrmCadTipoCobranca = class(TForm)
@@ -73,6 +73,12 @@ type
     Label12: TLabel;
     DBEdit3: TDBEdit;
     RxDBComboBox3: TRxDBComboBox;
+    Panel3: TPanel;
+    Panel12: TPanel;
+    btnInserir_CondPagto: TNxButton;
+    btnAlterar_CondPagto: TNxButton;
+    btnExcluir_CondPagto: TNxButton;
+    SMDBGrid13: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -99,15 +105,21 @@ type
     procedure DBCheckBox1Click(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure btnInserir_CondPagtoClick(Sender: TObject);
+    procedure btnAlterar_CondPagtoClick(Sender: TObject);
+    procedure btnExcluir_CondPagtoClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadTipoCobranca: TDMCadTipoCobranca;
+    ffrmCadTipoCobranca_Itens : TfrmCadTipoCobranca_Itens;
 
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
     procedure prc_Gravar_Registro;
     procedure prc_Consultar;
     procedure prc_Cod_Imp_Fiscal;
+    procedure prc_Habilita;
+    
   public
     { Public declarations }
   end;
@@ -157,6 +169,7 @@ begin
   pnlCadastro.Enabled       := not(pnlCadastro.Enabled);
   btnConfirmar.Enabled      := not(btnConfirmar.Enabled);
   btnAlterar.Enabled        := not(btnAlterar.Enabled);
+  prc_Habilita;
 end;
 
 procedure TfrmCadTipoCobranca.prc_Inserir_Registro;
@@ -165,9 +178,8 @@ begin
 
   if fDMCadTipoCobranca.cdsTipoCobranca.State in [dsBrowse] then
     exit;
-
   RzPageControl1.ActivePage := TS_Cadastro;
-
+  prc_Habilita;
   TS_Consulta.TabEnabled := False;
   btnAlterar.Enabled     := False;
   btnConfirmar.Enabled   := True;
@@ -215,6 +227,7 @@ begin
   pnlCadastro.Enabled       := not(pnlCadastro.Enabled);
   btnConfirmar.Enabled      := not(btnConfirmar.Enabled);
   btnAlterar.Enabled        := not(btnAlterar.Enabled);
+  prc_Habilita;  
 end;
 
 procedure TfrmCadTipoCobranca.SMDBGrid1DblClick(Sender: TObject);
@@ -234,6 +247,7 @@ begin
   btnAlterar.Enabled     := False;
   btnConfirmar.Enabled   := True;
   pnlCadastro.Enabled    := True;
+  prc_Habilita;
 end;
 
 procedure TfrmCadTipoCobranca.btnConfirmarClick(Sender: TObject);
@@ -425,6 +439,44 @@ begin
     AFont.Color := clRed;
     AFont.Style := [fsBold];
   end
+end;
+
+procedure TfrmCadTipoCobranca.btnInserir_CondPagtoClick(Sender: TObject);
+begin
+  fDMCadTipoCobranca.prc_Inserir_CondPgto;
+  ffrmCadTipoCobranca_Itens := TfrmCadTipoCobranca_Itens.Create(self);
+  ffrmCadTipoCobranca_Itens.fDMCadTipoCobranca := fDMCadTipoCobranca;
+  ffrmCadTipoCobranca_Itens.ShowModal;
+  FreeAndNil(ffrmCadTipoCobranca_Itens);
+end;
+
+procedure TfrmCadTipoCobranca.prc_Habilita;
+begin
+  btnInserir_CondPagto.Enabled     := not(btnInserir_CondPagto.Enabled);
+  btnAlterar_CondPagto.Enabled     := not(btnAlterar_CondPagto.Enabled);
+  btnExcluir_CondPagto.Enabled     := not(btnExcluir_CondPagto.Enabled);
+end;
+
+procedure TfrmCadTipoCobranca.btnAlterar_CondPagtoClick(Sender: TObject);
+begin
+  if fDMCadTipoCobranca.cdsTipoCobranca_Itens.IsEmpty then
+    exit;
+
+  fDMCadTipoCobranca.cdsTipoCobranca_Itens.Edit;
+
+  ffrmCadTipoCobranca_Itens := TfrmCadTipoCobranca_Itens.Create(self);
+  ffrmCadTipoCobranca_Itens.fDMCadTipoCobranca := fDMCadTipoCobranca;
+  ffrmCadTipoCobranca_Itens.ShowModal;
+  FreeAndNil(ffrmCadTipoCobranca_Itens);
+end;
+
+procedure TfrmCadTipoCobranca.btnExcluir_CondPagtoClick(Sender: TObject);
+begin
+  if fDMCadTipoCobranca.cdsTipoCobranca_Itens.IsEmpty then
+    exit;
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+  fDMCadTipoCobranca.cdsTipoCobranca_Itens.Delete;
 end;
 
 end.

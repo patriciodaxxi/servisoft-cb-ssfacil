@@ -783,7 +783,8 @@ uses
   USel_Balanco in 'USel_Balanco.pas' {frmSel_Balanco},
   URecebeXML_ConsNota in 'nfevisualizador\URecebeXML_ConsNota.pas' {frmRecebeXML_ConsNota},
   UConsProdSTRet in 'UConsProdSTRet.pas' {frmConsProdSTRet},
-  UConsMatPed in 'UConsMatPed.pas' {frmConsMatPed};
+  UConsMatPed in 'UConsMatPed.pas' {frmConsMatPed},
+  UCadTipoCobranca_Itens in 'UCadTipoCobranca_Itens.pas' {frmCadTipoCobranca_Itens};
 
 {$R *.res}
 
