@@ -1,4 +1,4 @@
-unit uUtilPadrao;
+unit uCalcula_Hora;
 
 interface
 
@@ -189,7 +189,6 @@ var
   vSelCentroCusto : String;
   vDiaAdicional : Integer;
   vDtHora_Res : String;
-  vPrimeira_Hora : TTime;
 
 implementation
 
@@ -1859,7 +1858,6 @@ var
   sds: TSQLDataSet;
   vTempo : Real;
   vTexto : string;
-  vHR1,VHR2 : TTime;
 begin
   Result := 0;
   vDiaAdicional := 0;
@@ -1869,9 +1867,9 @@ begin
     sds.NoMetadata    := True;
     sds.GetMetadata   := False;
     sds.CommandText   := ' SELECT I.id, i.hrinicial, i.hrfinal FROM intervalo_tempo I '
-                       + ' WHERE (I.HRINICIAL >= :HRINICIAL1 and I.HRINICIAL < :HRINICIAL2) '
-                       + ' or (I.HRFINAL > :HRINICIAL1  and I.HRFINAL < :HRINICIAL2) '
-                       + ' or (I.HRINICIAL < :HRINICIAL1 and I.HRFINAL > :HRINICIAL1) '
+                       + ' WHERE (I.HRINICIAL between :HRINICIAL1 AND :HRINICIAL2) '
+                       + ' or (I.HRFINAL between :HRINICIAL1 AND :HRINICIAL2) '
+                       + ' or (I.HRINICIAL <= :HRINICIAL1 AND I.hrfinal > :HRINICIAL1) '
                        + ' ORDER BY I.HRINICIAL ';
     sds.ParamByName('HRINICIAL1').AsTime := HrInicial;
     sds.ParamByName('HRINICIAL2').AsTime := HrFinal;
@@ -1880,11 +1878,7 @@ begin
     sds.First;
     while not sds.Eof do
     begin
-      //if (vHrEmissaoNFe > sds.FieldByName('HRINICIAL').AsDateTime) and (vHrEmissaoNFe < sds.FieldByName('HRFINAL').AsDateTime) then
-      //  vHrEmissaoNFe := sds.FieldByName('HRFINAL').AsDateTime;
-      //end
-      //else
-        vTempo := vTempo + fnc_Diferenca_Horas2(sds.FieldByName('HRINICIAL').AsDateTime,sds.FieldByName('HRFINAL').AsDateTime);
+      vTempo := vTempo + fnc_Diferenca_Horas2(sds.FieldByName('HRINICIAL').AsDateTime,sds.FieldByName('HRFINAL').AsDateTime);
       sds.Next;
     end;
   finally
@@ -1902,13 +1896,12 @@ begin
   Fini := Inicio;
   FFim := Fim;
   if (Inicio > Fim) then
-    vTexto :=  TimeToStr((StrTotime('23:59:59')-Fini)+FFim+(StrTotime('00:00:01')))
+    vTexto :=  TimeToStr((StrTotime('23:59:59')-Fini)+FFim)
   else
     vTexto := TimeToStr(FFim-Fini);
   vTexto := Copy(vTexto,1,5);
   vTexto := Replace(vTexto,':',',');
-  //Result := fnc_Converte_Horas(StrToFloat(vTexto));
-  Result := StrToFloat(vTexto);
+  Result := fnc_Converte_Horas(StrToFloat(vTexto));
 end;
 
 procedure prc_Soma_Data_Hora_Res(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real);
@@ -1923,7 +1916,6 @@ var
   vH, vM, vS, vMS : Word;
   vDtAux : TDateTime;
   vTempo : Real;
-  vFlag : Boolean;
 
   procedure calcula;
   var
@@ -1972,54 +1964,35 @@ var
         Data := vDtAux;
       end;
       vAux := frac(vAux);
-      vAux := StrToFloat(FormatFloat('0.00',vAux * 24));
-      if vAux < 1 then
-        vAux := StrToFloat(FormatFloat('0.00',(vAux * 100) / 60));
+      vAux := vAux * 24;
     end;
     vAux2 := frac(vAux);
     if vAux < 1 then
       vaux2 := fnc_Converte_Min_Dec(vAux2);
-    vAux   := Trunc(vAux) + vAux2;
+    vAux  := Trunc(vAux) + vAux2;
     vTexto := FormatFloat('00.00',vAux);
     vTexto := Replace(vTexto,',',':');
-  end;     
+  end;
 
 begin
-  vPrimeira_Hora := -1;
   vDtHora_Res := '';
   if StrToFloat(FormatFloat('0.000',Total_HoraDia)) <= 0 then
     Total_HoraDia := StrToFloat(FormatFloat('0.00',24));
 
   Calcula;
 
-  vPrimeira_Hora := StrToTime(vTexto);
-
   vTempo := 0;
-
-  vFlag := False;
-  while not vFlag do
+  if vDia > 0 then
+    vTempo := fnc_Calcula_Intervalo(StrToTime('00:01'),StrToTime(vTexto))
+  else
+    vTempo := fnc_Calcula_Intervalo(Hora1,StrToTime(vTexto));
+  if StrToFloat(FormatFloat('0.00',vTempo)) > 0 then
   begin
-    if vDia > 0 then
-      vTempo := fnc_Calcula_Intervalo(StrToTime('00:01'),StrToTime(vTexto))
-    else
-      vTempo := fnc_Calcula_Intervalo(Hora1,StrToTime(vTexto));
-    if StrToFloat(FormatFloat('0.00',vTempo)) > 0 then
-    begin
-      Hora1  := StrToTime(vTexto);
-      Hora2  := vTempo;
-      Calcula;
-      Hora1  := StrToTime(vTexto);
-
-      //vTempo := fnc_Calcula_Intervalo(Hora1,StrToTime(vTexto));
-
-
-      //prc_Soma_Data_Hora_Res(Data,StrToTime(vTexto),vTempo,StrToFloat(FormatFloat('0.00',Total_HoraDia)));
-    end
-    else
-      vFlag := True;
-
+    Hora1  := StrToTime(vTexto);
+    Hora2  := vTempo;
+    Calcula;
+    //prc_Soma_Data_Hora_Res(Data,StrToTime(vTexto),vTempo,StrToFloat(FormatFloat('0.00',Total_HoraDia)));
   end;
-
   vDtHora_Res := DateToStr(Data) + 'H' + FormatFloat('00.00',vAux);
 
 end;
