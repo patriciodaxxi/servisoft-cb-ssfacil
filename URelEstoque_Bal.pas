@@ -44,6 +44,7 @@ type
     rlTotIcms: TRLLabel;
     rlTotIPI: TRLLabel;
     rlTotQtd: TRLLabel;
+    rlLiquido: TRLLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -139,7 +140,9 @@ procedure TfRelEstoque_Bal.RLBand3BeforePrint(Sender: TObject;
 begin
   rlTotIcms.Caption := 'ICMS ' + FormatFloat('0.00',vTotICMS);
   rlTotIPI.Caption  := 'IPI ' + FormatFloat('0.00',vTotIPI);
-  rlTotQtd.Caption  := FormatFloat('0.00',vTotQtd); 
+  rlTotQtd.Caption  := FormatFloat('0.00',vTotQtd);
+
+  rlLiquido.Caption := 'TOTAL LÍQUIDO: R$ ' + FormatFloat('#,###,##0.00',RLDBResult1.Value - vTotICMS - vTotIPI);
 end;
 
 end.

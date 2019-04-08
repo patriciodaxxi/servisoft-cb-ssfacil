@@ -185,8 +185,8 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
       end
     end
     object RLSubDetail1: TRLSubDetail
-      Left = 0
-      Top = 0
+      Left = 23
+      Top = 75
       Width = 748
       Height = 123
       DataSource = DMConsEstoque.dsBalanco
@@ -222,7 +222,7 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           Behavior = [beSiteExpander]
         end
         object RLDBText1: TRLDBText
-          Left = 458
+          Left = 456
           Top = 1
           Width = 50
           Height = 10
@@ -270,9 +270,9 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           Caption = '0.00'
         end
         object rlIPI: TRLLabel
-          Left = 624
+          Left = 628
           Top = 1
-          Width = 50
+          Width = 49
           Height = 10
           Alignment = taRightJustify
           AutoSize = False
@@ -293,7 +293,7 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
         Left = 0
         Top = 15
         Width = 748
-        Height = 15
+        Height = 42
         BandType = btSummary
         BeforePrint = RLBand3BeforePrint
         object RLLabel10: TRLLabel
@@ -310,9 +310,9 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           ParentFont = False
         end
         object RLDBResult1: TRLDBResult
-          Left = 686
+          Left = 685
           Top = 2
-          Width = 62
+          Width = 63
           Height = 10
           Alignment = taRightJustify
           DataField = 'clVlr_Total'
@@ -324,7 +324,7 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
         object rlTotIcms: TRLLabel
           Left = 560
           Top = 2
-          Width = 55
+          Width = 66
           Height = 10
           Alignment = taRightJustify
           AutoSize = False
@@ -337,9 +337,9 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           ParentFont = False
         end
         object rlTotIPI: TRLLabel
-          Left = 624
+          Left = 628
           Top = 2
-          Width = 55
+          Width = 49
           Height = 10
           Alignment = taRightJustify
           AutoSize = False
@@ -354,7 +354,7 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
         object rlTotQtd: TRLLabel
           Left = 456
           Top = 2
-          Width = 55
+          Width = 50
           Height = 10
           Alignment = taRightJustify
           AutoSize = False
@@ -362,6 +362,20 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object rlLiquido: TRLLabel
+          Left = 723
+          Top = 26
+          Width = 24
+          Height = 14
+          Alignment = taRightJustify
+          Caption = '0.00'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
