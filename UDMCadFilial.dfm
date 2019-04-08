@@ -415,6 +415,7 @@ object DMCadFilial: TDMCadFilial
     Top = 32
   end
   object cdsFilial: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -1542,6 +1543,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilialRelatorios: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilialRelatorios
     IndexFieldNames = 'ID;ITEM'
@@ -1624,6 +1626,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Email: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Email
     IndexFieldNames = 'ID;ITEM'
@@ -1770,6 +1773,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Download: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Download
     IndexFieldNames = 'ID;ITEM'
@@ -2201,6 +2205,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFILIAL_CBarra: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFILIAL_CBarra
     IndexFieldNames = 'ID;ITEM'
@@ -2339,6 +2344,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_NFCe: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_NFCe
     IndexFieldNames = 'ID'
@@ -2479,6 +2485,12 @@ object DMCadFilial: TDMCadFilial
     object sdsFilial_ContabilCOD_CONTABIL_MULTA_CPA: TIntegerField
       FieldName = 'COD_CONTABIL_MULTA_CPA'
     end
+    object sdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CRE: TIntegerField
+      FieldName = 'COD_CONTABIL_TXBANCARIA_CRE'
+    end
+    object sdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CPA: TIntegerField
+      FieldName = 'COD_CONTABIL_TXBANCARIA_CPA'
+    end
   end
   object cdsFilial_Contabil: TClientDataSet
     Aggregates = <>
@@ -2518,6 +2530,12 @@ object DMCadFilial: TDMCadFilial
     end
     object cdsFilial_ContabilCOD_CONTABIL_MULTA_CPA: TIntegerField
       FieldName = 'COD_CONTABIL_MULTA_CPA'
+    end
+    object cdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CRE: TIntegerField
+      FieldName = 'COD_CONTABIL_TXBANCARIA_CRE'
+    end
+    object cdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CPA: TIntegerField
+      FieldName = 'COD_CONTABIL_TXBANCARIA_CPA'
     end
   end
   object dsFilial_Contabil: TDataSource
@@ -2607,6 +2625,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_MDFe: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_MDFe
     IndexFieldNames = 'ID'
@@ -2723,6 +2742,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Custo: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Custo
     IndexFieldNames = 'ID'
@@ -2845,6 +2865,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_SMS: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_SMS
     IndexFieldNames = 'ID'

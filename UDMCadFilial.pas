@@ -613,6 +613,10 @@ type
     cdsFilialCALCULAR_ICMS_EFET: TStringField;
     sdsFilialRelatoriosGERAR_TAMANHO: TStringField;
     cdsFilialRelatoriosGERAR_TAMANHO: TStringField;
+    sdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CRE: TIntegerField;
+    sdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CPA: TIntegerField;
+    cdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CRE: TIntegerField;
+    cdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CPA: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);
