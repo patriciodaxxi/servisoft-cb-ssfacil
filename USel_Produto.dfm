@@ -1066,17 +1066,17 @@ object frmSel_Produto: TfrmSel_Produto
       'IDADE,PRO.OBS,'#13#10'PRO.PRECO_CUSTO, PV.PLACA, PRO.COD_BARRA,'#13#10'cast(' +
       '0 as Float) AS VLR_VENDA1, cast(0 as Float) AS VLR_VENDA2, cast(' +
       '0 as Float) AS VLR_VENDA3,'#13#10'PRO.USA_COR, PRO.USA_PRECO_COR, (SEL' +
-      'ECT SUM(EST.QTD) QTD FROM ESTOQUE_ATUAL EST'#13#10'                  W' +
-      'HERE EST.FILIAL = :FILIAL AND'#13#10'                    EST.ID_PRODUT' +
-      'O = PRO.ID) QTD,'#13#10'(SELECT SUM(E2.QTD) QTDGERAL FROM ESTOQUE_ATUA' +
-      'L E2'#13#10'                    WHERE E2.ID_PRODUTO = PRO.ID) QTDGERAL' +
-      ','#13#10'                   /**/ cast(0 as Float) AS PRECO_PROMOCAO'#13#10'F' +
-      'ROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO_VEICULO PV'#13#10'ON PRO.ID = PV.ID' +
-      #13#10#13#10#13#10
+      'ECT cast(sum(EST.QTD) AS Float) QTD FROM ESTOQUE_ATUAL EST'#13#10'    ' +
+      '              WHERE EST.FILIAL = :FILIAL AND'#13#10'                  ' +
+      '  EST.ID_PRODUTO = PRO.ID) QTD,'#13#10'(SELECT cast(sum(E2.QTD) AS Flo' +
+      'at) QTDGERAL FROM ESTOQUE_ATUAL E2'#13#10'                    WHERE E2' +
+      '.ID_PRODUTO = PRO.ID) QTDGERAL,'#13#10'                   /**/ cast(0 ' +
+      'as Float) AS PRECO_PROMOCAO'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO' +
+      '_VEICULO PV'#13#10'ON PRO.ID = PV.ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end>
@@ -1099,16 +1099,6 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object FloatField2: TFloatField
       FieldName = 'PRECO_CUSTO'
-    end
-    object FMTBCDField1: TFMTBCDField
-      FieldName = 'QTD'
-      Precision = 15
-      Size = 6
-    end
-    object FMTBCDField2: TFMTBCDField
-      FieldName = 'QTDGERAL'
-      Precision = 15
-      Size = 6
     end
     object StringField3: TStringField
       FieldName = 'PLACA'
@@ -1149,6 +1139,12 @@ object frmSel_Produto: TfrmSel_Produto
       FieldName = 'OBS'
       BlobType = ftMemo
       Size = 1
+    end
+    object sdsProdAuxQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object sdsProdAuxQTDGERAL: TFloatField
+      FieldName = 'QTDGERAL'
     end
   end
   object qParametros_Prod: TSQLQuery

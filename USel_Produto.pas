@@ -77,8 +77,6 @@ type
     StringField2: TStringField;
     FloatField1: TFloatField;
     FloatField2: TFloatField;
-    FMTBCDField1: TFMTBCDField;
-    FMTBCDField2: TFMTBCDField;
     StringField3: TStringField;
     StringField4: TStringField;
     StringField5: TStringField;
@@ -120,6 +118,8 @@ type
     sdsProdutoQTDGERAL: TFloatField;
     cdsProdutoQTD: TFloatField;
     cdsProdutoQTDGERAL: TFloatField;
+    sdsProdAuxQTD: TFloatField;
+    sdsProdAuxQTDGERAL: TFloatField;
     procedure BitBtn1Click(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
