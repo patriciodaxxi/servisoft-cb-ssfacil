@@ -706,17 +706,17 @@ object frmSel_Produto: TfrmSel_Produto
       'SELECT PRO.ID, PRO.NOME, PRO.REFERENCIA, PRO.PRECO_VENDA, PRO.UN' +
       'IDADE, PRO.PRECO_CUSTO, PV.PLACA, '#13#10' PRO.COD_BARRA, VT.VLR_VENDA' +
       '1, VT.VLR_VENDA2, VT.VLR_VENDA3, PRO.USA_COR, PRO.OBS, PRO.USA_P' +
-      'RECO_COR, '#13#10'(SELECT SUM(EST.QTD) QTD '#13#10'  FROM ESTOQUE_ATUAL EST ' +
-      #13#10'  WHERE EST.FILIAL = :FILIAL AND EST.ID_PRODUTO = PRO.ID) QTD,' +
-      #13#10'(SELECT SUM(E2.QTD) QTDGERAL '#13#10'  FROM ESTOQUE_ATUAL E2 '#13#10'  WHE' +
-      'RE E2.ID_PRODUTO = PRO.ID) QTDGERAL,'#13#10'  CAST(0 AS FLOAT) AS PREC' +
-      'O_PROMOCAO, PRO.OBS'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO_VEICULO' +
-      ' PV ON (PRO.ID = PV.ID)'#13#10'LEFT JOIN VTAB_PRECO VT ON PRO.ID = VT.' +
-      'ID_PRODUTO'#13#10#13#10
+      'RECO_COR, '#13#10'(SELECT cast(sum(EST.QTD) AS Float) QTD'#13#10'  FROM ESTO' +
+      'QUE_ATUAL EST'#13#10'  WHERE EST.FILIAL = :FILIAL AND EST.ID_PRODUTO =' +
+      ' PRO.ID) QTD,'#13#10'(SELECT cast(sum(E2.QTD) AS Float) QTDGERAL'#13#10'  FR' +
+      'OM ESTOQUE_ATUAL E2 '#13#10'  WHERE E2.ID_PRODUTO = PRO.ID) QTDGERAL,'#13 +
+      #10'  CAST(0 AS FLOAT) AS PRECO_PROMOCAO, PRO.OBS'#13#10'FROM PRODUTO PRO' +
+      #13#10'LEFT JOIN PRODUTO_VEICULO PV ON (PRO.ID = PV.ID)'#13#10'LEFT JOIN VT' +
+      'AB_PRECO VT ON PRO.ID = VT.ID_PRODUTO'#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end>
@@ -776,19 +776,15 @@ object frmSel_Produto: TfrmSel_Produto
       FixedChar = True
       Size = 1
     end
-    object sdsProdutoQTD: TFMTBCDField
-      FieldName = 'QTD'
-      Precision = 15
-      Size = 6
-    end
-    object sdsProdutoQTDGERAL: TFMTBCDField
-      FieldName = 'QTDGERAL'
-      Precision = 15
-      Size = 6
-    end
     object sdsProdutoPRECO_PROMOCAO: TFloatField
       FieldName = 'PRECO_PROMOCAO'
       Required = True
+    end
+    object sdsProdutoQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object sdsProdutoQTDGERAL: TFloatField
+      FieldName = 'QTDGERAL'
     end
   end
   object cdsProduto: TClientDataSet
@@ -816,16 +812,6 @@ object frmSel_Produto: TfrmSel_Produto
     object cdsProdutoPRECO_CUSTO: TFloatField
       FieldName = 'PRECO_CUSTO'
       DisplayFormat = '0.000'
-    end
-    object cdsProdutoQTD: TFMTBCDField
-      FieldName = 'QTD'
-      Precision = 15
-      Size = 6
-    end
-    object cdsProdutoQTDGERAL: TFMTBCDField
-      FieldName = 'QTDGERAL'
-      Precision = 15
-      Size = 6
     end
     object cdsProdutoPLACA: TStringField
       FieldName = 'PLACA'
@@ -866,6 +852,12 @@ object frmSel_Produto: TfrmSel_Produto
       FieldName = 'OBS'
       BlobType = ftMemo
       Size = 1
+    end
+    object cdsProdutoQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsProdutoQTDGERAL: TFloatField
+      FieldName = 'QTDGERAL'
     end
   end
   object dspProduto: TDataSetProvider
