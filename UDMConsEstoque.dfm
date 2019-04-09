@@ -3567,9 +3567,11 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_De_TercQTDRESTANTE_ATUAL: TFloatField
       FieldName = 'QTDRESTANTE_ATUAL'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_De_TercQTD: TFloatField
       FieldName = 'QTD'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_De_TercVLR_TOTAL_RESTANTE: TFloatField
       FieldName = 'VLR_TOTAL_RESTANTE'
@@ -3637,8 +3639,8 @@ object DMConsEstoque: TDMConsEstoque
     Params = <>
     ProviderName = 'dspEstoque_Em_Terc'
     OnCalcFields = cdsBalanco_VeiCalcFields
-    Left = 1080
-    Top = 513
+    Left = 1082
+    Top = 512
     object cdsEstoque_Em_TercID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
     end
@@ -3647,6 +3649,7 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_Em_TercQTDRESTANTE: TFloatField
       FieldName = 'QTDRESTANTE'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_Em_TercVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
@@ -3675,9 +3678,11 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_Em_TercQTDRESTANTE_ATUAL: TFloatField
       FieldName = 'QTDRESTANTE_ATUAL'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_Em_TercQTD: TFloatField
       FieldName = 'QTD'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_Em_TercVLR_TOTAL_RESTANTE: TFloatField
       FieldName = 'VLR_TOTAL_RESTANTE'
@@ -3926,6 +3931,7 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_De_Terc_PesQTDRESTANTE: TFloatField
       FieldName = 'QTDRESTANTE'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_De_Terc_PesVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
@@ -3961,9 +3967,11 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_De_Terc_PesQTDRESTANTE_ATUAL: TFloatField
       FieldName = 'QTDRESTANTE_ATUAL'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_De_Terc_PesQTD: TFloatField
       FieldName = 'QTD'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_De_Terc_PesVLR_TOTAL_RESTANTE: TFloatField
       FieldName = 'VLR_TOTAL_RESTANTE'
@@ -4046,6 +4054,7 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_Em_Terc_PesQTDRESTANTE: TFloatField
       FieldName = 'QTDRESTANTE'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_Em_Terc_PesVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
@@ -4077,9 +4086,11 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_Em_Terc_PesQTDRESTANTE_ATUAL: TFloatField
       FieldName = 'QTDRESTANTE_ATUAL'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_Em_Terc_PesQTD: TFloatField
       FieldName = 'QTD'
+      DisplayFormat = '0.000#'
     end
     object cdsEstoque_Em_Terc_PesVLR_TOTAL_RESTANTE: TFloatField
       FieldName = 'VLR_TOTAL_RESTANTE'

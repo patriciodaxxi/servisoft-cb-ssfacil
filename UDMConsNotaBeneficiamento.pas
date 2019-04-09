@@ -382,6 +382,8 @@ type
     cdsNotaPendenteID_COR: TIntegerField;
     sdsNotaPendenteTAMANHO: TStringField;
     cdsNotaPendenteTAMANHO: TStringField;
+    sdsNotaPendenteGERAR_ESTOQUE: TStringField;
+    cdsNotaPendenteGERAR_ESTOQUE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     ctBaixa_NFDevolvida : string;
@@ -393,7 +395,7 @@ type
     ctNotaEntrada : String;
     ctNotaPendente : String;
     procedure prc_Abrir_Baixa_NFDevolvida(ID, ID_Nota: Integer);
-    procedure prc_Gravar_Baixa(Tipo_Reg_Pedido, Estoque, Tipo_Mov : String ; DtBaixa : TDateTime);
+    procedure prc_Gravar_Baixa(Tipo_Reg_Pedido, Estoque, Tipo_Mov, Tipo_Benef : String ; DtBaixa : TDateTime);
 
   end;
 
@@ -430,7 +432,7 @@ begin
 end;
 
 procedure TDMConsNotaBeneficiamento.prc_Gravar_Baixa(Tipo_Reg_Pedido,
-  Estoque, Tipo_Mov: String; DtBaixa: TDateTime);
+  Estoque, Tipo_Mov, Tipo_Benef : String; DtBaixa: TDateTime);
 var
   ID: TTransactionDesc;
   vAux : Integer;
@@ -457,8 +459,13 @@ begin
     cdsBaixa_NFDevolvidaID_MOVESTOQUE.AsInteger := 0;
     cdsBaixa_NFDevolvida.Post;
 
+    //Verificar o estoque quando é EM TErceiro, pois a baixa precisa ser vista pelo 1901 e não pelo 5901
+    if (Tipo_Benef = 'C') then
+      Estoque := 'N';
+
     if Estoque = 'S' then
     begin
+
       vID_Estoque := fDMEstoque.fnc_Gravar_Estoque(0,
                                                  cdsNotaPendenteFILIAL.AsInteger,
                                                  1, //aqui verificar o local do estoque

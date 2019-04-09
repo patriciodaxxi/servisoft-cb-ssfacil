@@ -560,7 +560,6 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
         Expanded = False
         FieldName = 'REFERENCIA'
         Title.Alignment = taCenter
-        Width = 64
         Visible = True
       end
       item

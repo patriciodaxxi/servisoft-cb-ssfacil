@@ -84,6 +84,7 @@ begin
   fDMConsNotaBeneficiamento.cdsFilial.First;
   if (fDMConsNotaBeneficiamento.cdsFilial.RecordCount < 2) and (fDMConsNotaBeneficiamento.cdsFilialID.AsInteger > 0) then
     RxDBLookupCombo3.KeyValue := fDMConsNotaBeneficiamento.cdsFilialID.AsInteger;
+  ckEstoque.Visible := (Trim(fMenu.vTipo_ConsNotaBeneficiamento) <> 'C');
 end;
 
 procedure TfrmBaixaNFDevolvida.SMDBGrid1TitleClick(Column: TColumn);
@@ -151,7 +152,7 @@ begin
 
   vContadorAux := 0;
 
-//  fDMConsNotaBeneficiamento.fDMEstoque := fDMEstoque;
+  fDMConsNotaBeneficiamento.fDMEstoque := fDMEstoque;
 //  fDMConsNotaBeneficiamento.mPedidoAux.EmptyDataSet;
   fDMConsNotaBeneficiamento.cdsNotaPendente.First;
   while not fDMConsNotaBeneficiamento.cdsNotaPendente.Eof do
@@ -160,7 +161,7 @@ begin
     begin
       vContadorAux := vContadorAux + 1;
       //aqui 24/01/2014
-      fDMConsNotaBeneficiamento.prc_Gravar_Baixa('P',vEstoque,'P',DateEdit5.Date);
+      fDMConsNotaBeneficiamento.prc_Gravar_Baixa('P',vEstoque,'P',fMenu.vTipo_ConsNotaBeneficiamento, DateEdit5.Date,);
 //      if vTipo_Baixa_Ped <> 'PRO' then
 //      begin
 //        if not(fDMBaixaPedido.mPedidoAux.FindKey([fDMBaixaPedido.cdsPedido_PendID.AsInteger])) then
