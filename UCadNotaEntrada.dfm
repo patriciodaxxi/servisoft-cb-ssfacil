@@ -1,6 +1,6 @@
 object frmCadNotaEntrada: TfrmCadNotaEntrada
-  Left = 172
-  Top = 26
+  Left = 175
+  Top = 22
   Width = 949
   Height = 710
   Caption = 'Nota Entrada'
@@ -25,7 +25,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     Top = 0
     Width = 941
     Height = 679
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19

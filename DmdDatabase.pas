@@ -279,7 +279,7 @@ begin
 
       while not cdsVersao.Eof do
       begin
-        S := cdsVersaoSCRIPT.Value; // ScriptFile: String - your whole script
+        S := cdsVersaoSCRIPT.AsString; // ScriptFile: String - your whole script
         vFlag := True;
         while vFlag do
         begin

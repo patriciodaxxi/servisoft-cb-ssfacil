@@ -116,7 +116,7 @@ object dmDatabase: TdmDatabase
     SQL.Strings = (
       'SELECT VERSAO_BANCO FROM PARAMETROS')
     SQLConnection = scoDados
-    Left = 40
+    Left = 41
     Top = 128
     object sqVersaoAtualVERSAO_BANCO: TIntegerField
       FieldName = 'VERSAO_BANCO'
