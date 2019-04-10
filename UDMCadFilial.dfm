@@ -411,18 +411,17 @@ object DMCadFilial: TDMCadFilial
     DataSet = sdsFilial
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspFilialUpdateError
-    Left = 144
+    Left = 104
     Top = 32
   end
   object cdsFilial: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspFilial'
     BeforePost = cdsFilialBeforePost
     OnNewRecord = cdsFilialNewRecord
-    Left = 208
+    Left = 136
     Top = 32
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
@@ -845,7 +844,7 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 272
+    Left = 168
     Top = 32
   end
   object sdsCidade: TSQLDataSet
@@ -858,21 +857,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 416
-    Top = 266
+    Left = 336
+    Top = 82
   end
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
-    Left = 480
-    Top = 266
+    Left = 368
+    Top = 82
   end
   object cdsCidade: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCidade'
-    Left = 536
-    Top = 266
+    Left = 400
+    Top = 82
     object cdsCidadeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -896,8 +895,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsCidade: TDataSource
     DataSet = cdsCidade
-    Left = 592
-    Top = 266
+    Left = 432
+    Top = 82
   end
   object sdsTab_Pis: TSQLDataSet
     NoMetadata = True
@@ -906,21 +905,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 418
-    Top = 312
+    Left = 338
+    Top = 128
   end
   object dspTab_Pis: TDataSetProvider
     DataSet = sdsTab_Pis
-    Left = 482
-    Top = 312
+    Left = 370
+    Top = 128
   end
   object cdsTab_Pis: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspTab_Pis'
-    Left = 538
-    Top = 312
+    Left = 402
+    Top = 128
     object cdsTab_PisID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -936,8 +935,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsTab_Pis: TDataSource
     DataSet = cdsTab_Pis
-    Left = 594
-    Top = 312
+    Left = 434
+    Top = 128
   end
   object sdsTab_Cofins: TSQLDataSet
     NoMetadata = True
@@ -946,21 +945,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 418
-    Top = 360
+    Left = 338
+    Top = 176
   end
   object dspTab_Cofins: TDataSetProvider
     DataSet = sdsTab_Cofins
-    Left = 482
-    Top = 360
+    Left = 370
+    Top = 176
   end
   object cdsTab_Cofins: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspTab_Cofins'
-    Left = 538
-    Top = 360
+    Left = 402
+    Top = 176
     object cdsTab_CofinsID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -976,8 +975,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsTab_Cofins: TDataSource
     DataSet = cdsTab_Cofins
-    Left = 594
-    Top = 360
+    Left = 434
+    Top = 176
   end
   object sdsTab_CSTICMS: TSQLDataSet
     NoMetadata = True
@@ -986,21 +985,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 416
-    Top = 408
+    Left = 344
+    Top = 224
   end
   object dspTab_CSTICMS: TDataSetProvider
     DataSet = sdsTab_CSTICMS
-    Left = 480
-    Top = 408
+    Left = 376
+    Top = 224
   end
   object cdsTab_CSTICMS: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'COD_CST'
     Params = <>
     ProviderName = 'dspTab_CSTICMS'
-    Left = 536
-    Top = 408
+    Left = 408
+    Top = 224
     object cdsTab_CSTICMSID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1029,8 +1028,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsTab_CSTICMS: TDataSource
     DataSet = cdsTab_CSTICMS
-    Left = 592
-    Top = 408
+    Left = 440
+    Top = 224
   end
   object sdsTab_CSTIPI: TSQLDataSet
     NoMetadata = True
@@ -1039,21 +1038,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 418
-    Top = 460
+    Left = 346
+    Top = 270
   end
   object dspTab_CSTIPI: TDataSetProvider
     DataSet = sdsTab_CSTIPI
-    Left = 482
-    Top = 460
+    Left = 378
+    Top = 270
   end
   object cdsTab_CSTIPI: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'COD_IPI'
     Params = <>
     ProviderName = 'dspTab_CSTIPI'
-    Left = 538
-    Top = 460
+    Left = 410
+    Top = 270
     object cdsTab_CSTIPIID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1074,8 +1073,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsTab_CSTIPI: TDataSource
     DataSet = cdsTab_CSTIPI
-    Left = 594
-    Top = 460
+    Left = 442
+    Top = 270
   end
   object sdsRegimeTrib: TSQLDataSet
     NoMetadata = True
@@ -1084,21 +1083,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 418
-    Top = 508
+    Left = 348
+    Top = 316
   end
   object dspRegimeTrib: TDataSetProvider
     DataSet = sdsRegimeTrib
-    Left = 482
-    Top = 508
+    Left = 380
+    Top = 316
   end
   object cdsRegimeTrib: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspRegimeTrib'
-    Left = 538
-    Top = 508
+    Left = 412
+    Top = 316
     object cdsRegimeTribID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1113,8 +1112,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsRegimeTrib: TDataSource
     DataSet = cdsRegimeTrib
-    Left = 594
-    Top = 508
+    Left = 444
+    Top = 316
   end
   object sdsUF: TSQLDataSet
     NoMetadata = True
@@ -1123,21 +1122,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 418
-    Top = 558
+    Left = 346
+    Top = 363
   end
   object dspUF: TDataSetProvider
     DataSet = sdsUF
-    Left = 482
-    Top = 558
+    Left = 378
+    Top = 363
   end
   object cdsUF: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'UF'
     Params = <>
     ProviderName = 'dspUF'
-    Left = 538
-    Top = 558
+    Left = 410
+    Top = 363
     object cdsUFUF: TStringField
       FieldName = 'UF'
       Required = True
@@ -1159,8 +1158,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsUF: TDataSource
     DataSet = cdsUF
-    Left = 594
-    Top = 558
+    Left = 442
+    Top = 363
   end
   object sdsRegimeTrib_NFSe: TSQLDataSet
     NoMetadata = True
@@ -1169,21 +1168,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 690
-    Top = 278
+    Left = 546
+    Top = 190
   end
   object dspRegimeTrib_NFSe: TDataSetProvider
     DataSet = sdsRegimeTrib_NFSe
-    Left = 762
-    Top = 278
+    Left = 578
+    Top = 190
   end
   object cdsRegimeTrib_NFSe: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspRegimeTrib_NFSe'
-    Left = 826
-    Top = 278
+    Left = 610
+    Top = 190
     object cdsRegimeTrib_NFSeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1202,8 +1201,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsRegimeTrib_NFSe: TDataSource
     DataSet = cdsRegimeTrib_NFSe
-    Left = 898
-    Top = 278
+    Left = 642
+    Top = 190
   end
   object sdsNatureza: TSQLDataSet
     NoMetadata = True
@@ -1212,21 +1211,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 698
-    Top = 356
+    Left = 538
+    Top = 244
   end
   object dspNatureza: TDataSetProvider
     DataSet = sdsNatureza
-    Left = 730
-    Top = 356
+    Left = 570
+    Top = 244
   end
   object cdsNatureza: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspNatureza'
-    Left = 770
-    Top = 356
+    Left = 605
+    Top = 244
     object cdsNaturezaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1246,8 +1245,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsNatureza: TDataSource
     DataSet = cdsNatureza
-    Left = 810
-    Top = 356
+    Left = 640
+    Top = 244
   end
   object sdsServico_Sint: TSQLDataSet
     NoMetadata = True
@@ -1258,21 +1257,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 706
-    Top = 62
+    Left = 538
+    Top = 38
   end
   object dspServico_Sint: TDataSetProvider
     DataSet = sdsServico_Sint
-    Left = 778
-    Top = 62
+    Left = 570
+    Top = 38
   end
   object cdsServico_Sint: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspServico_Sint'
-    Left = 842
-    Top = 62
+    Left = 602
+    Top = 38
     object cdsServico_SintID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1298,8 +1297,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsServico_Sint: TDataSource
     DataSet = cdsServico_Sint
-    Left = 914
-    Top = 62
+    Left = 634
+    Top = 38
   end
   object sdsServico_Pad: TSQLDataSet
     NoMetadata = True
@@ -1310,21 +1309,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 706
-    Top = 134
+    Left = 538
+    Top = 94
   end
   object dspServico_Pad: TDataSetProvider
     DataSet = sdsServico_Pad
-    Left = 778
-    Top = 134
+    Left = 570
+    Top = 94
   end
   object cdsServico_Pad: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspServico_Pad'
-    Left = 842
-    Top = 134
+    Left = 602
+    Top = 94
     object cdsServico_PadID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1350,8 +1349,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsServico_Pad: TDataSource
     DataSet = cdsServico_Pad
-    Left = 914
-    Top = 134
+    Left = 634
+    Top = 94
   end
   object sdsAtividade_Cid: TSQLDataSet
     NoMetadata = True
@@ -1360,20 +1359,20 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 696
-    Top = 216
+    Left = 544
+    Top = 144
   end
   object dspAtividade_Cid: TDataSetProvider
     DataSet = sdsAtividade_Cid
-    Left = 768
-    Top = 216
+    Left = 576
+    Top = 144
   end
   object cdsAtividade_Cid: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspAtividade_Cid'
-    Left = 840
-    Top = 216
+    Left = 608
+    Top = 144
     object cdsAtividade_CidID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1389,8 +1388,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsAtividade_Cid: TDataSource
     DataSet = cdsAtividade_Cid
-    Left = 904
-    Top = 216
+    Left = 640
+    Top = 144
   end
   object sdsContabilista: TSQLDataSet
     NoMetadata = True
@@ -1399,21 +1398,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 698
-    Top = 404
+    Left = 538
+    Top = 292
   end
   object dspContabilista: TDataSetProvider
     DataSet = sdsContabilista
-    Left = 730
-    Top = 404
+    Left = 570
+    Top = 292
   end
   object cdsContabilista: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspContabilista'
-    Left = 770
-    Top = 404
+    Left = 605
+    Top = 292
     object cdsContabilistaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1488,13 +1487,13 @@ object DMCadFilial: TDMCadFilial
   end
   object dsContabilista: TDataSource
     DataSet = cdsContabilista
-    Left = 810
-    Top = 404
+    Left = 640
+    Top = 292
   end
   object dsmFilial: TDataSource
     DataSet = sdsFilial
-    Left = 320
-    Top = 32
+    Left = 232
+    Top = 56
   end
   object sdsFilialRelatorios: TSQLDataSet
     NoMetadata = True
@@ -1511,7 +1510,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 88
+    Top = 80
     object sdsFilialRelatoriosID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1543,14 +1542,13 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilialRelatorios: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilialRelatorios
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     OnCalcFields = cdsFilialRelatoriosCalcFields
-    Left = 200
-    Top = 88
+    Left = 136
+    Top = 80
     object cdsFilialRelatoriosID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1589,8 +1587,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFilialRelatorios: TDataSource
     DataSet = cdsFilialRelatorios
-    Left = 272
-    Top = 88
+    Left = 168
+    Top = 80
   end
   object sdsFilial_Email: TSQLDataSet
     NoMetadata = True
@@ -1607,7 +1605,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 144
+    Top = 125
     object sdsFilial_EmailID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1626,14 +1624,13 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Email: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Email
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     OnCalcFields = cdsFilial_EmailCalcFields
-    Left = 192
-    Top = 144
+    Left = 136
+    Top = 125
     object cdsFilial_EmailID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1671,8 +1668,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFilial_Email: TDataSource
     DataSet = cdsFilial_Email
-    Left = 272
-    Top = 144
+    Left = 168
+    Top = 125
   end
   object qConfig_Email: TSQLQuery
     MaxBlobSize = -1
@@ -1687,8 +1684,8 @@ object DMCadFilial: TDMCadFilial
       'FROM CONFIG_EMAIL'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 944
-    Top = 376
+    Left = 848
+    Top = 40
     object qConfig_EmailNOME_CONFIG: TStringField
       FieldName = 'NOME_CONFIG'
       Required = True
@@ -1706,21 +1703,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 698
-    Top = 460
+    Left = 538
+    Top = 340
   end
   object dspConfig_Email: TDataSetProvider
     DataSet = sdsConfig_Email
-    Left = 730
-    Top = 460
+    Left = 570
+    Top = 340
   end
   object cdsConfig_Email: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME_CONFIG'
     Params = <>
     ProviderName = 'dspConfig_Email'
-    Left = 770
-    Top = 460
+    Left = 605
+    Top = 340
     object cdsConfig_EmailID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1733,8 +1730,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsConfig_Email: TDataSource
     DataSet = cdsConfig_Email
-    Left = 810
-    Top = 460
+    Left = 640
+    Top = 340
   end
   object sdsFilial_Download: TSQLDataSet
     NoMetadata = True
@@ -1751,7 +1748,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 192
+    Top = 170
     object sdsFilial_DownloadID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1773,14 +1770,13 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Download: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Download
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     OnCalcFields = cdsFilial_DownloadCalcFields
-    Left = 192
-    Top = 192
+    Left = 136
+    Top = 170
     object cdsFilial_DownloadID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1809,8 +1805,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFilial_Download: TDataSource
     DataSet = cdsFilial_Download
-    Left = 272
-    Top = 192
+    Left = 168
+    Top = 170
   end
   object sdsConfig_NFe: TSQLDataSet
     NoMetadata = True
@@ -1828,8 +1824,8 @@ object DMCadFilial: TDMCadFilial
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase_NFeBD.scoNFeBD
-    Left = 720
-    Top = 560
+    Left = 536
+    Top = 387
     object sdsConfig_NFeCNPJ_TITULAR: TStringField
       FieldName = 'CNPJ_TITULAR'
       ProviderFlags = []
@@ -1990,15 +1986,15 @@ object DMCadFilial: TDMCadFilial
   end
   object dspConfig_NFe: TDataSetProvider
     DataSet = sdsConfig_NFe
-    Left = 792
-    Top = 560
+    Left = 573
+    Top = 387
   end
   object cdsConfig_NFe: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConfig_NFe'
-    Left = 856
-    Top = 560
+    Left = 605
+    Top = 387
     object cdsConfig_NFeCNPJ_TITULAR: TStringField
       FieldName = 'CNPJ_TITULAR'
       ProviderFlags = []
@@ -2159,8 +2155,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsConfig_NFe: TDataSource
     DataSet = cdsConfig_NFe
-    Left = 928
-    Top = 560
+    Left = 637
+    Top = 387
   end
   object sdsFILIAL_CBarra: TSQLDataSet
     NoMetadata = True
@@ -2177,7 +2173,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 248
+    Top = 216
     object sdsFILIAL_CBarraID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2205,7 +2201,6 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFILIAL_CBarra: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFILIAL_CBarra
     IndexFieldNames = 'ID;ITEM'
@@ -2214,8 +2209,8 @@ object DMCadFilial: TDMCadFilial
     AfterInsert = cdsFILIAL_CBarraAfterInsert
     BeforePost = cdsFILIAL_CBarraBeforePost
     OnFilterRecord = cdsFILIAL_CBarraFilterRecord
-    Left = 192
-    Top = 248
+    Left = 136
+    Top = 216
     object cdsFILIAL_CBarraID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2244,8 +2239,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFILIAL_CBarra: TDataSource
     DataSet = cdsFILIAL_CBarra
-    Left = 272
-    Top = 248
+    Left = 168
+    Top = 216
   end
   object qParametros: TSQLQuery
     MaxBlobSize = -1
@@ -2254,8 +2249,8 @@ object DMCadFilial: TDMCadFilial
       'SELECT P.usa_cod_barras, P.usa_cod_barras_proprio'
       'FROM PARAMETROS P')
     SQLConnection = dmDatabase.scoDados
-    Left = 416
-    Top = 200
+    Left = 784
+    Top = 40
     object qParametrosUSA_COD_BARRAS: TStringField
       FieldName = 'USA_COD_BARRAS'
       FixedChar = True
@@ -2276,21 +2271,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 169
-    Top = 560
+    Left = 345
+    Top = 416
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
-    Left = 201
-    Top = 560
+    Left = 377
+    Top = 416
   end
   object cdsCFOP: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'CODCFOP;NOME'
     Params = <>
     ProviderName = 'dspCFOP'
-    Left = 241
-    Top = 560
+    Left = 409
+    Top = 416
     object cdsCFOPID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2310,8 +2305,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsCFOP: TDataSource
     DataSet = cdsCFOP
-    Left = 281
-    Top = 560
+    Left = 441
+    Top = 416
   end
   object sdsFilial_NFCe: TSQLDataSet
     NoMetadata = True
@@ -2328,7 +2323,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 304
+    Top = 264
     object sdsFilial_NFCeID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2344,13 +2339,12 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_NFCe: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_NFCe
     IndexFieldNames = 'ID'
     Params = <>
-    Left = 192
-    Top = 304
+    Left = 136
+    Top = 264
     object cdsFilial_NFCeID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2368,8 +2362,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFilial_NFCe: TDataSource
     DataSet = cdsFilial_NFCe
-    Left = 272
-    Top = 304
+    Left = 168
+    Top = 264
   end
   object sdsEnqIPI: TSQLDataSet
     NoMetadata = True
@@ -2378,21 +2372,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 128
-    Top = 608
+    Left = 344
+    Top = 464
   end
   object dspEnqIPI: TDataSetProvider
     DataSet = sdsEnqIPI
-    Left = 200
-    Top = 608
+    Left = 376
+    Top = 464
   end
   object cdsEnqIPI: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspEnqIPI'
-    Left = 272
-    Top = 608
+    Left = 408
+    Top = 464
     object cdsEnqIPIID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2413,8 +2407,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsEnqIPI: TDataSource
     DataSet = cdsEnqIPI
-    Left = 344
-    Top = 608
+    Left = 440
+    Top = 464
   end
   object qParametros_Geral: TSQLQuery
     MaxBlobSize = -1
@@ -2424,8 +2418,8 @@ object DMCadFilial: TDMCadFilial
       'FROM PARAMETROS_GERAL'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 544
-    Top = 191
+    Left = 752
+    Top = 39
     object qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField
       FieldName = 'MOSTRAR_COD_CONTABIL'
       FixedChar = True
@@ -2452,7 +2446,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 352
+    Top = 312
     object sdsFilial_ContabilID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2497,8 +2491,8 @@ object DMCadFilial: TDMCadFilial
     DataSetField = cdsFilialsdsFilial_Contabil
     IndexFieldNames = 'ID'
     Params = <>
-    Left = 192
-    Top = 352
+    Left = 136
+    Top = 312
     object cdsFilial_ContabilID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2540,8 +2534,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFilial_Contabil: TDataSource
     DataSet = cdsFilial_Contabil
-    Left = 272
-    Top = 352
+    Left = 168
+    Top = 312
   end
   object sdsContabil_Ope: TSQLDataSet
     NoMetadata = True
@@ -2550,21 +2544,21 @@ object DMCadFilial: TDMCadFilial
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 424
-    Top = 130
+    Left = 336
+    Top = 34
   end
   object dspContabil_Ope: TDataSetProvider
     DataSet = sdsContabil_Ope
-    Left = 488
-    Top = 130
+    Left = 368
+    Top = 34
   end
   object cdsContabil_Ope: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspContabil_Ope'
-    Left = 544
-    Top = 130
+    Left = 400
+    Top = 34
     object cdsContabil_OpeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2576,8 +2570,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsContabil_Ope: TDataSource
     DataSet = cdsContabil_Ope
-    Left = 600
-    Top = 130
+    Left = 432
+    Top = 34
   end
   object sdsFilial_MDFe: TSQLDataSet
     NoMetadata = True
@@ -2594,7 +2588,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 400
+    Top = 360
     object sdsFilial_MDFeID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2625,13 +2619,12 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_MDFe: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_MDFe
     IndexFieldNames = 'ID'
     Params = <>
-    Left = 192
-    Top = 400
+    Left = 138
+    Top = 360
     object cdsFilial_MDFeID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2664,8 +2657,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFilial_MDFe: TDataSource
     DataSet = cdsFilial_MDFe
-    Left = 272
-    Top = 400
+    Left = 168
+    Top = 360
   end
   object sdsFilial_Custo: TSQLDataSet
     NoMetadata = True
@@ -2681,8 +2674,8 @@ object DMCadFilial: TDMCadFilial
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 72
-    Top = 448
+    Left = 76
+    Top = 407
     object sdsFilial_CustoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2742,13 +2735,12 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Custo: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Custo
     IndexFieldNames = 'ID'
     Params = <>
-    Left = 192
-    Top = 448
+    Left = 136
+    Top = 408
     object cdsFilial_CustoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2809,8 +2801,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFilial_Custo: TDataSource
     DataSet = cdsFilial_Custo
-    Left = 272
-    Top = 448
+    Left = 168
+    Top = 408
   end
   object qParametros_Ped: TSQLQuery
     MaxBlobSize = -1
@@ -2820,8 +2812,8 @@ object DMCadFilial: TDMCadFilial
       'FROM PARAMETROS_PED'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 592
-    Top = 71
+    Left = 816
+    Top = 39
     object qParametros_PedENVIA_SMS: TStringField
       FieldName = 'ENVIA_SMS'
       FixedChar = True
@@ -2843,7 +2835,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 496
+    Top = 456
     object sdsFilial_SMSID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2865,13 +2857,11 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_SMS: TClientDataSet
-    Active = True
     Aggregates = <>
-    DataSetField = cdsFilialsdsFilial_SMS
     IndexFieldNames = 'ID'
     Params = <>
-    Left = 192
-    Top = 496
+    Left = 136
+    Top = 456
     object cdsFilial_SMSID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2894,8 +2884,8 @@ object DMCadFilial: TDMCadFilial
   end
   object dsFilial_SMS: TDataSource
     DataSet = cdsFilial_SMS
-    Left = 272
-    Top = 496
+    Left = 168
+    Top = 456
   end
   object qCopiar_Filial_Rel: TSQLQuery
     MaxBlobSize = -1
@@ -2908,7 +2898,157 @@ object DMCadFilial: TDMCadFilial
     SQL.Strings = (
       'EXECUTE PROCEDURE PRC_COPIA_REL_FILIAL(:FILIAL)')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 456
+    Left = 720
+    Top = 40
+  end
+  object sdsFilial_Certificados: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM FILIAL_CERTIFICADOS'#13#10'WHERE ID = :ID'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Size = 4
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 72
+    Top = 504
+    object sdsFilial_CertificadosID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsFilial_CertificadosCHAVE_ACESSO: TMemoField
+      FieldName = 'CHAVE_ACESSO'
+      BlobType = ftMemo
+      Size = 1
+    end
+    object sdsFilial_CertificadosCNPJ_TITULAR: TStringField
+      FieldName = 'CNPJ_TITULAR'
+    end
+    object sdsFilial_CertificadosEMISSOR: TStringField
+      FieldName = 'EMISSOR'
+      Size = 60
+    end
+    object sdsFilial_CertificadosNOME_TITULAR: TStringField
+      FieldName = 'NOME_TITULAR'
+      Size = 100
+    end
+    object sdsFilial_CertificadosNUMERO_SERIE: TStringField
+      FieldName = 'NUMERO_SERIE'
+      Size = 100
+    end
+    object sdsFilial_CertificadosUTILIZA_NFE: TIntegerField
+      FieldName = 'UTILIZA_NFE'
+    end
+    object sdsFilial_CertificadosUTILIZA_NFSE: TIntegerField
+      FieldName = 'UTILIZA_NFSE'
+    end
+    object sdsFilial_CertificadosVALIDADE_INICIO: TSQLTimeStampField
+      FieldName = 'VALIDADE_INICIO'
+    end
+    object sdsFilial_CertificadosVALIDADE_FIM: TSQLTimeStampField
+      FieldName = 'VALIDADE_FIM'
+    end
+    object sdsFilial_CertificadosUTILIZA_MDFE: TIntegerField
+      FieldName = 'UTILIZA_MDFE'
+    end
+    object sdsFilial_CertificadosUSUARIO_WEB: TStringField
+      FieldName = 'USUARIO_WEB'
+      Size = 100
+    end
+    object sdsFilial_CertificadosSENHA_WEB: TStringField
+      FieldName = 'SENHA_WEB'
+      Size = 30
+    end
+    object sdsFilial_CertificadosAGUARDARCONSULTARETORNO: TIntegerField
+      FieldName = 'AGUARDARCONSULTARETORNO'
+    end
+    object sdsFilial_CertificadosCONSULTARLOTEAPOSENVIO: TStringField
+      FieldName = 'CONSULTARLOTEAPOSENVIO'
+      Size = 1
+    end
+    object sdsFilial_CertificadosINTERVALOTENTATIVAS: TIntegerField
+      FieldName = 'INTERVALOTENTATIVAS'
+    end
+  end
+  object cdsFilial_Certificados: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspFilial_Certificados'
+    Left = 136
+    Top = 504
+    object cdsFilial_CertificadosID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsFilial_CertificadosCHAVE_ACESSO: TMemoField
+      FieldName = 'CHAVE_ACESSO'
+      BlobType = ftMemo
+      Size = 1
+    end
+    object cdsFilial_CertificadosCNPJ_TITULAR: TStringField
+      FieldName = 'CNPJ_TITULAR'
+    end
+    object cdsFilial_CertificadosEMISSOR: TStringField
+      FieldName = 'EMISSOR'
+      Size = 60
+    end
+    object cdsFilial_CertificadosNOME_TITULAR: TStringField
+      FieldName = 'NOME_TITULAR'
+      Size = 100
+    end
+    object cdsFilial_CertificadosNUMERO_SERIE: TStringField
+      FieldName = 'NUMERO_SERIE'
+      Size = 100
+    end
+    object cdsFilial_CertificadosUTILIZA_NFE: TIntegerField
+      FieldName = 'UTILIZA_NFE'
+    end
+    object cdsFilial_CertificadosUTILIZA_NFSE: TIntegerField
+      FieldName = 'UTILIZA_NFSE'
+    end
+    object cdsFilial_CertificadosVALIDADE_INICIO: TSQLTimeStampField
+      FieldName = 'VALIDADE_INICIO'
+    end
+    object cdsFilial_CertificadosVALIDADE_FIM: TSQLTimeStampField
+      FieldName = 'VALIDADE_FIM'
+    end
+    object cdsFilial_CertificadosUTILIZA_MDFE: TIntegerField
+      FieldName = 'UTILIZA_MDFE'
+    end
+    object cdsFilial_CertificadosUSUARIO_WEB: TStringField
+      FieldName = 'USUARIO_WEB'
+      Size = 100
+    end
+    object cdsFilial_CertificadosSENHA_WEB: TStringField
+      FieldName = 'SENHA_WEB'
+      Size = 30
+    end
+    object cdsFilial_CertificadosAGUARDARCONSULTARETORNO: TIntegerField
+      FieldName = 'AGUARDARCONSULTARETORNO'
+    end
+    object cdsFilial_CertificadosCONSULTARLOTEAPOSENVIO: TStringField
+      FieldName = 'CONSULTARLOTEAPOSENVIO'
+      Size = 1
+    end
+    object cdsFilial_CertificadosINTERVALOTENTATIVAS: TIntegerField
+      FieldName = 'INTERVALOTENTATIVAS'
+    end
+  end
+  object dsFilial_Certificados: TDataSource
+    DataSet = cdsFilial_Certificados
+    Left = 168
+    Top = 504
+  end
+  object dspFilial_Certificados: TDataSetProvider
+    DataSet = sdsFilial_Certificados
+    Left = 104
+    Top = 504
   end
 end

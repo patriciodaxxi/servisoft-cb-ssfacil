@@ -784,7 +784,9 @@ uses
   URecebeXML_ConsNota in 'nfevisualizador\URecebeXML_ConsNota.pas' {frmRecebeXML_ConsNota},
   UConsProdSTRet in 'UConsProdSTRet.pas' {frmConsProdSTRet},
   UConsMatPed in 'UConsMatPed.pas' {frmConsMatPed},
-  UCadTipoCobranca_Itens in 'UCadTipoCobranca_Itens.pas' {frmCadTipoCobranca_Itens};
+  UCadTipoCobranca_Itens in 'UCadTipoCobranca_Itens.pas' {frmCadTipoCobranca_Itens},
+  UCadFilial_Certificado in 'UCadFilial_Certificado.pas' {frmCadFilial_Certificado},
+  UDMCadFilial_Certificado in 'UDMCadFilial_Certificado.pas' {DMFilial_Certificado: TDataModule};
 
 {$R *.res}
 
