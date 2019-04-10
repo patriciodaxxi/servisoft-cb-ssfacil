@@ -1,8 +1,8 @@
 object dmCadProduto: TdmCadProduto
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 107
-  Top = 27
+  Left = 46
+  Top = 20
   Height = 714
   Width = 1288
   object sdsProduto: TSQLDataSet
@@ -476,6 +476,7 @@ object dmCadProduto: TdmCadProduto
     DataSet = sdsProduto
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProdutoUpdateError
+    OnGetTableName = dspProdutoGetTableName
     Left = 82
     Top = 1
   end
@@ -1428,7 +1429,10 @@ object dmCadProduto: TdmCadProduto
   object sdsProduto_Consumo: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT PRO.*'#13#10'FROM PRODUTO_CONSUMO PRO'#13#10'WHERE PRO.ID = :ID'
+    CommandText = 
+      'SELECT PRO.*, POS.NOME NOME_POSICAO'#13#10'FROM PRODUTO_CONSUMO PRO'#13#10'L' +
+      'EFT JOIN POSICAO POS ON (PRO.ID_POSICAO = POS.ID)'#13#10'WHERE PRO.ID ' +
+      '= :ID'
     DataSource = dsProduto_Mestre
     MaxBlobSize = -1
     Params = <
@@ -1494,6 +1498,11 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'ESPECIFICO'
       FixedChar = True
       Size = 1
+    end
+    object sdsProduto_ConsumoNOME_POSICAO: TStringField
+      FieldName = 'NOME_POSICAO'
+      ProviderFlags = []
+      Size = 30
     end
   end
   object cdsProduto_Consumo: TClientDataSet
@@ -1577,13 +1586,6 @@ object dmCadProduto: TdmCadProduto
       ProviderFlags = []
       Calculated = True
     end
-    object cdsProduto_ConsumoNOME_POSICAO: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'NOME_POSICAO'
-      ProviderFlags = []
-      Size = 30
-      Calculated = True
-    end
     object cdsProduto_ConsumoID_SETOR: TIntegerField
       FieldName = 'ID_SETOR'
     end
@@ -1622,6 +1624,11 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'clUsa_Processo'
       Size = 1
       Calculated = True
+    end
+    object cdsProduto_ConsumoNOME_POSICAO: TStringField
+      FieldName = 'NOME_POSICAO'
+      ProviderFlags = []
+      Size = 30
     end
   end
   object dsProduto_Consumo: TDataSource
@@ -3868,6 +3875,8 @@ object dmCadProduto: TdmCadProduto
     Top = 374
   end
   object sdsProduto_Uni: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 'SELECT *'#13#10'FROM PRODUTO_UNI'#13#10'WHERE ID = :ID'
     DataSource = dsProduto_Mestre
     MaxBlobSize = -1
@@ -4544,6 +4553,7 @@ object dmCadProduto: TdmCadProduto
     DataSet = sdsProduto_Comb
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProdutoUpdateError
+    OnGetTableName = dspProduto_CombGetTableName
     Left = 242
     Top = 102
   end
@@ -4739,8 +4749,9 @@ object dmCadProduto: TdmCadProduto
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT M.*'#13#10'FROM PRODUTO_COMB_MAT M'#13#10'WHERE M.ID = :ID'#13#10'    AND M' +
-      '.ITEM = :ITEM'
+      'SELECT M.*, POS.NOME NOME_POSICAO'#13#10'FROM PRODUTO_COMB_MAT M'#13#10'LEFT' +
+      ' JOIN POSICAO POS ON (M.ID_POSICAO = POS.ID)'#13#10'WHERE M.ID = :ID'#13#10 +
+      '    AND M.ITEM = :ITEM'
     DataSource = dsProduto_Comb_Mestre
     MaxBlobSize = -1
     Params = <
@@ -4804,6 +4815,11 @@ object dmCadProduto: TdmCadProduto
     end
     object sdsProduto_Comb_MatID_SETOR: TIntegerField
       FieldName = 'ID_SETOR'
+    end
+    object sdsProduto_Comb_MatNOME_POSICAO: TStringField
+      FieldName = 'NOME_POSICAO'
+      ProviderFlags = []
+      Size = 30
     end
   end
   object cdsProduto_Comb_Mat: TClientDataSet
@@ -4902,6 +4918,11 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'clUsa_Cor'
       Size = 1
       Calculated = True
+    end
+    object cdsProduto_Comb_MatNOME_POSICAO: TStringField
+      FieldName = 'NOME_POSICAO'
+      ProviderFlags = []
+      Size = 30
     end
   end
   object dsProduto_Comb_Mat: TDataSource
@@ -6005,6 +6026,7 @@ object dmCadProduto: TdmCadProduto
     Top = 331
   end
   object cdsProcesso: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProcesso'

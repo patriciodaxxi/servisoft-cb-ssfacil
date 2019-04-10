@@ -2241,7 +2241,7 @@ begin
   FreeAndNil(ffrmCadProduto_Consumo);
 
   ceVlr_Total_Mat.Value := fDMCadProduto.fnc_Calcular_Mat;
-  fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;ID_POSICAO';
+  fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;NOME_POSICAO';
 end;
 
 procedure TfrmCadProduto.btnAlterar_ConsumoClick(Sender: TObject);
@@ -2562,7 +2562,7 @@ begin
     prc_Controle_Veiculo
   else
   if (RzPageControl2.ActivePage = TS_Engenharia) and (fDMCadProduto.cdsProdutoID.AsInteger > 0) and (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L') then
-    fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;ITEM'
+    fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;NOME_POSICAO'
   else
   if (RzPageControl2.ActivePage = TS_PCP) and (fDMCadProduto.cdsProdutoID.AsInteger > 0) then
     prc_Controle_PCP

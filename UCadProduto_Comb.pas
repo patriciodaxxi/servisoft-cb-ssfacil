@@ -163,7 +163,7 @@ begin
   //DBEdit3.Visible          := (fDMCadProduto.qParametros_LoteUSA_COR_COMB.AsString <> 'S');
   RxDBLookupCombo1.Visible := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') or (fDMCadProduto.qParametros_LoteUSA_COR_COMB.AsString = 'S'));
 
-  fDMCadProduto.cdsProduto_Comb_Mat.IndexFieldNames := 'ID;ID_SETOR;ITEM';
+  fDMCadProduto.cdsProduto_Comb_Mat.IndexFieldNames := 'ID;ID_SETOR;NOME_POSICAO';
 end;
 
 function TfrmCadProduto_Comb.fnc_Erro: Boolean;

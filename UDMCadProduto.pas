@@ -642,7 +642,6 @@ type
     cdsProduto_ConsumoNOMEMATERIAL: TStringField;
     cdsProduto_ConsumoREFERENCIA: TStringField;
     cdsProduto_ConsumoPRECO_CUSTO: TFloatField;
-    cdsProduto_ConsumoNOME_POSICAO: TStringField;
     qMaterial: TSQLQuery;
     qMaterialID: TIntegerField;
     qMaterialNOME: TStringField;
@@ -1930,6 +1929,10 @@ type
     cdsFichaTecnicaQTD_ESTOQUE_MIN: TFloatField;
     cdsFichaTecnicaTIPO: TStringField;
     cdsProduto_ConsultaQTD_ESTOQUE: TFloatField;
+    sdsProduto_ConsumoNOME_POSICAO: TStringField;
+    cdsProduto_ConsumoNOME_POSICAO: TStringField;
+    sdsProduto_Comb_MatNOME_POSICAO: TStringField;
+    cdsProduto_Comb_MatNOME_POSICAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -1971,6 +1974,10 @@ type
     procedure cdsProduto_Textil_DPBeforeInsert(DataSet: TDataSet);
     procedure cdsProduto_Textil_DPAfterInsert(DataSet: TDataSet);
     procedure cdsProduto_Textil_DPBeforePost(DataSet: TDataSet);
+    procedure dspProdutoGetTableName(Sender: TObject; DataSet: TDataSet;
+      var TableName: String);
+    procedure dspProduto_CombGetTableName(Sender: TObject;
+      DataSet: TDataSet; var TableName: String);
   private
     { Private declarations }
     vID_Produto_Forn: Integer;
@@ -2365,28 +2372,28 @@ end;
 
 procedure TdmCadProduto.prc_Localizar(ID: Integer);
 begin
+  cdsProduto_Consumo_Tam.Close;
+  cdsProduto_Consumo_Proc.Close;
+  cdsProduto_Consumo.Close;
   cdsProduto.Close;
+  cdsProduto_Tam.Close;
+  cdsProduto_Forn.Close;
   sdsProduto.CommandText := ctCommand;
   if ID <> 0 then
     sdsProduto.CommandText := sdsProduto.CommandText +
                               ' WHERE PRO.ID = ' + IntToStr(ID);
   cdsProduto.Open;
-  cdsProduto_Consumo.Close;
   cdsProduto_Consumo.Open;
-  cdsProduto_Consumo_Tam.Close;
   cdsProduto_Consumo_Tam.Open;
-  cdsProduto_Consumo_Proc.Close;
   cdsProduto_Consumo_Proc.Open;
+  cdsProduto_Forn.Open;
+  cdsProduto_Tam.Open;
   cdsProduto_Consumo.Last;
   cdsProduto_Consumo.First;
   cdsProduto_Consumo_Tam.Last;
   cdsProduto_Consumo_Tam.First;
   cdsProduto_Consumo_Proc.Last;
   cdsProduto_Consumo_Proc.First;
-  cdsProduto_Forn.Close;
-  cdsProduto_Forn.Open;
-  cdsProduto_Tam.Close;
-  cdsProduto_Tam.Open;
 end;
 
 procedure TdmCadProduto.DataModuleCreate(Sender: TObject);
@@ -2620,11 +2627,13 @@ begin
   if (StrToFloat(FormatFloat('0.000000',cdsProduto_ConsumoPRECO_CUSTO.AsFloat)) > 0) and
      (StrToFloat(FormatFloat('0.000000',cdsProduto_ConsumoQTD_CONSUMO.AsFloat)) > 0) then
     cdsProduto_ConsumoclVlr_Total.AsFloat := StrToFloat(FormatFloat('0.00',cdsProduto_ConsumoPRECO_CUSTO.AsFloat * cdsProduto_ConsumoQTD_CONSUMO.AsFloat));
+
+  cdsProduto_ConsumoNOME_SETOR.AsString     := '';
+
   qPosicao.Close;
   qPosicao.ParamByName('ID').AsInteger := cdsProduto_ConsumoID_POSICAO.AsInteger;
   qPosicao.Open;
-  cdsProduto_ConsumoNOME_POSICAO.AsString   := qPosicaoNOME.AsString;
-  cdsProduto_ConsumoNOME_SETOR.AsString     := '';
+
   cdsProduto_ConsumoclUsa_Processo.AsString := qPosicaoUSA_PROCESSO.AsString;
   if cdsProduto_ConsumoID_SETOR.AsInteger > 0 then
   begin
@@ -3725,6 +3734,20 @@ begin
     cdsProduto_Comb_MatTINGIMENTO.AsString := cdsProduto_ConsumoTINGIMENTO.AsString;
   end;
   cdsProduto_Comb_Mat.Post;
+end;
+
+procedure TdmCadProduto.dspProdutoGetTableName(Sender: TObject;
+  DataSet: TDataSet; var TableName: String);
+begin
+  if DataSet.Name = 'sdsProduto_Consumo' then
+    TableName := 'PRODUTO_CONSUMO';
+end;
+
+procedure TdmCadProduto.dspProduto_CombGetTableName(Sender: TObject;
+  DataSet: TDataSet; var TableName: String);
+begin
+  if DataSet.Name = 'sdsProduto_Comb_Mat' then
+    TableName := 'PRODUTO_COMB_MAT';
 end;
 
 end.

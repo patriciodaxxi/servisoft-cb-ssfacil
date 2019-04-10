@@ -769,7 +769,7 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
       end
       item
         Expanded = False
-        FieldName = 'clNome_Posicao'
+        FieldName = 'NOME_POSICAO'
         Title.Alignment = taCenter
         Title.Caption = 'Posi'#231#227'o'
         Title.Color = 16777134
