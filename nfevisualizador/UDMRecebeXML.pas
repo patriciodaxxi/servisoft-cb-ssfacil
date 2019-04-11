@@ -2262,6 +2262,8 @@ type
     dsNotaFiscal_Itens_Mestre: TDataSource;
     cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida: TDataSetField;
     cdsOCATUALIZA_PRECO_CUSTO: TStringField;
+    sdsEstoque_MovREF_PROD_FORNECEDOR: TStringField;
+    cdsEstoque_MovREF_PROD_FORNECEDOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

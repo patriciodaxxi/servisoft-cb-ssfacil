@@ -643,6 +643,7 @@ type
     cdsEstoque_MovCODIGO_SUPERIOR: TStringField;
     cdsEstoque_MovDESC_SUPERIOR: TStringField;
     cdsBalancoREF_NOME_COR: TStringField;
+    cdsEstoque_MovREF_PROD_FORNECEDOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
