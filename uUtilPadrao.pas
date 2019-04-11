@@ -190,6 +190,7 @@ var
   vDiaAdicional : Integer;
   vDtHora_Res : String;
   vPrimeira_Hora : TTime;
+  vPrimeira_Data : TDate;
 
 implementation
 
@@ -1993,6 +1994,7 @@ begin
   Calcula;
 
   vPrimeira_Hora := StrToTime(vTexto);
+  vPrimeira_Data := Data;
 
   vTempo := 0;
 
