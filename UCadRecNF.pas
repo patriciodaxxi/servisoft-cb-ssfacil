@@ -508,7 +508,13 @@ begin
                                                        fDMCadNotaFiscal.cdsNotaFiscalID_CONDPGTO.AsInteger,0,fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,vPercAux,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_REMET.AsFloat,
-                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_DEST.AsFloat,1,0,'N');
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_DEST.AsFloat,1,0,'N',
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_FCP_ST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
         end;
         if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger <> vID_Estoque) or
            (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov) then

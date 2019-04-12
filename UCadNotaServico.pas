@@ -674,7 +674,9 @@ begin
                                                      fDMCadNotaServico.cdsNotaServicoID_CONDPGTO.AsInteger,0,
                                                      fDMCadNotaServico.cdsNotaServicoID_VENDEDOR.AsInteger,0,
                                                      fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0,1,0,
-                                                     fDMCadNotaServico.cdsNotaServicoRETEM_PISCOFINS.AsString);
+                                                     fDMCadNotaServico.cdsNotaServicoRETEM_PISCOFINS.AsString,
+                                                     0,0,0,0,0,0);
+
       end;
 
       if vID_Mov <> fDMCadNotaServico.cdsNotaServicoID_MOVIMENTO.AsInteger then
@@ -4611,7 +4613,8 @@ begin
                                                fDMCadNotaServico.cdsNotaServicoID_CONDPGTO.AsInteger,0,
                                                fDMCadNotaServico.cdsNotaServicoID_VENDEDOR.AsInteger,0,
                                                fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0,1,0,
-                                               fDMCadNotaServico.cdsNotaServicoRETEM_PISCOFINS.AsString);
+                                               fDMCadNotaServico.cdsNotaServicoRETEM_PISCOFINS.AsString,
+                                               0,0,0,0,0,0);
 end;
 
 procedure TfrmCadNotaServico.prc_Le_fCds;
