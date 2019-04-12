@@ -582,7 +582,13 @@ begin
                                                      fDMCadNotaFiscal.cdsNotaFiscalPERC_COMISSAO.AsFloat,
                                                      fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_REMET.AsFloat,
                                                      fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_DEST.AsFloat,
-                                                     cTerminal,fDMCadNotaFiscal.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,'N');
+                                                     cTerminal,fDMCadNotaFiscal.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,'N',
+                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_FCP_ST.AsFloat,
+                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP.AsFloat,
+                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
+                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
+                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
+                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
 
         if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov then
         begin
@@ -727,7 +733,8 @@ begin
                                                    fDMCadNotaServico.cdsNotaServicoID_CONDPGTO.AsInteger,0,
                                                    fDMCadNotaServico.cdsNotaServicoID_VENDEDOR.AsInteger,0,
                                                    fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0, cTerminal,0,
-                                                   fDMCadNotaServico.cdsNotaServicoRETEM_PISCOFINS.AsString);
+                                                   fDMCadNotaServico.cdsNotaServicoRETEM_PISCOFINS.AsString,
+                                                   0,0,0,0,0,0);
 
       if vID_Mov <> fDMCadNotaServico.cdsNotaServicoID_MOVIMENTO.AsInteger then
       begin
@@ -887,7 +894,8 @@ begin
                                                      cdsCupomFiscalID_CONDPGTO.AsInteger,0,
                                                      cdsCupomFiscalID_VENDEDOR.AsInteger,0,
                                                      cdsCupomFiscalPERC_VENDEDOR.AsFloat,0,0,
-                                                     cdsCupomFiscalTERMINAL_ID.AsInteger,0,'N');
+                                                     cdsCupomFiscalTERMINAL_ID.AsInteger,0,'N',
+                                                     0,0,0,0,0,0);
       end;
       if (cdsCupomFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov) then
       begin
@@ -985,7 +993,8 @@ begin
                                                    fDMCadRecibo.cdsReciboID_CONDPGTO.AsInteger,
                                                    fDMCadRecibo.cdsReciboID.AsInteger,
                                                    fDMCadRecibo.cdsReciboID_VENDEDOR.AsInteger,0,
-                                                   fDMCadRecibo.cdsReciboPERC_COMISSAO.AsFloat,0,0, cTerminal,0,'N');
+                                                   fDMCadRecibo.cdsReciboPERC_COMISSAO.AsFloat,0,0, cTerminal,0,'N',
+                                                   0,0,0,0,0,0);
 
       if vID_Mov <> fDMCadRecibo.cdsReciboID_MOVIMENTO.AsInteger then
       begin

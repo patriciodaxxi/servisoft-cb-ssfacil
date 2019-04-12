@@ -5035,6 +5035,7 @@ object DMRecebeXML: TDMRecebeXML
     Top = 332
   end
   object cdsNotaFiscal: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -5806,6 +5807,24 @@ object DMRecebeXML: TDMRecebeXML
     object sdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField
       FieldName = 'PERC_ICMSSUBST_INTERNO'
     end
+    object sdsNotaFiscal_ItensBASE_ICMS_FCP: TFloatField
+      FieldName = 'BASE_ICMS_FCP'
+    end
+    object sdsNotaFiscal_ItensBASE_FCP_ST: TFloatField
+      FieldName = 'BASE_FCP_ST'
+    end
+    object sdsNotaFiscal_ItensVLR_FCP_ST: TFloatField
+      FieldName = 'VLR_FCP_ST'
+    end
+    object sdsNotaFiscal_ItensPERC_FCP_ST: TFloatField
+      FieldName = 'PERC_FCP_ST'
+    end
+    object sdsNotaFiscal_ItensVLR_ICMS_FCP_DEST: TFloatField
+      FieldName = 'VLR_ICMS_FCP_DEST'
+    end
+    object sdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField
+      FieldName = 'BASE_ICMS_FCP_DEST'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -6151,6 +6170,24 @@ object DMRecebeXML: TDMRecebeXML
     end
     object cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida: TDataSetField
       FieldName = 'sdsNotaFiscal_NDevolvida'
+    end
+    object cdsNotaFiscal_ItensBASE_ICMS_FCP: TFloatField
+      FieldName = 'BASE_ICMS_FCP'
+    end
+    object cdsNotaFiscal_ItensBASE_FCP_ST: TFloatField
+      FieldName = 'BASE_FCP_ST'
+    end
+    object cdsNotaFiscal_ItensVLR_FCP_ST: TFloatField
+      FieldName = 'VLR_FCP_ST'
+    end
+    object cdsNotaFiscal_ItensPERC_FCP_ST: TFloatField
+      FieldName = 'PERC_FCP_ST'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST: TFloatField
+      FieldName = 'VLR_ICMS_FCP_DEST'
+    end
+    object cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField
+      FieldName = 'BASE_ICMS_FCP_DEST'
     end
   end
   object dsNotaFiscal_Itens: TDataSource
@@ -7373,6 +7410,7 @@ object DMRecebeXML: TDMRecebeXML
     end
   end
   object cdsNotaFiscal_Parc: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Parc
     IndexFieldNames = 'ID;ITEM'
@@ -7679,6 +7717,7 @@ object DMRecebeXML: TDMRecebeXML
     end
   end
   object cdsNotaFiscal_Ref: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Ref
     IndexFieldNames = 'ID;ITEM'
