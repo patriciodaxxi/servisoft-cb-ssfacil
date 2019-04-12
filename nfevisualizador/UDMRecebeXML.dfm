@@ -5035,7 +5035,6 @@ object DMRecebeXML: TDMRecebeXML
     Top = 332
   end
   object cdsNotaFiscal: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -7410,7 +7409,6 @@ object DMRecebeXML: TDMRecebeXML
     end
   end
   object cdsNotaFiscal_Parc: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Parc
     IndexFieldNames = 'ID;ITEM'
@@ -7717,7 +7715,6 @@ object DMRecebeXML: TDMRecebeXML
     end
   end
   object cdsNotaFiscal_Ref: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Ref
     IndexFieldNames = 'ID;ITEM'
