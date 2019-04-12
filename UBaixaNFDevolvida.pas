@@ -34,6 +34,7 @@ type
     RxDBLookupCombo3: TRxDBLookupCombo;
     RxDBLookupCombo1: TRxDBLookupCombo;
     btnConsultar: TNxButton;
+    NxButton1: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -46,6 +47,7 @@ type
     procedure RxDBLookupCombo2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure prc_Consultar_NotaEntrada;
+    procedure NxButton1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -299,6 +301,20 @@ begin
     1 : fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText + ' AND NI.QTDRESTANTE <= 0 ';
   end;
   fDMConsNotaBeneficiamento.cdsNotaPendente.Open;}
+end;
+
+procedure TfrmBaixaNFDevolvida.NxButton1Click(Sender: TObject);
+begin
+  fDMConsNotaBeneficiamento.cdsNotaPendente.First;
+  while not fDMConsNotaBeneficiamento.cdsNotaPendente.eof do
+  begin
+    SMDBGrid1.SelectedRows.CurrentRowSelected := True;
+    fDMConsNotaBeneficiamento.cdsNotaPendente.Edit;
+    fDMConsNotaBeneficiamento.cdsNotaPendenteQTD_ADEVOLVER.AsFloat := fDMConsNotaBeneficiamento.cdsNotaPendenteQTDRESTANTE.AsFloat;
+    fDMConsNotaBeneficiamento.cdsNotaPendente.Post;
+    fDMConsNotaBeneficiamento.cdsNotaPendente.Next;
+  end;
+
 end;
 
 end.
