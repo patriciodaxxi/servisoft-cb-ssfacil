@@ -23,7 +23,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
     Top = 0
     Width = 993
     Height = 665
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -31,7 +31,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -99,6 +99,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             FieldName = 'NUMNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Documento'
+            Width = 64
             Visible = True
           end
           item
@@ -152,6 +153,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             FieldName = 'ID_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
+            Width = 64
             Visible = True
           end>
       end
@@ -2080,6 +2082,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
                   FieldName = 'lkNome_Conta'
                   Title.Alignment = taCenter
                   Title.Caption = 'Nome Conta'
+                  Width = 64
                   Visible = True
                 end
                 item

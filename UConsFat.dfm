@@ -1,8 +1,8 @@
 object frmConsFat: TfrmConsFat
-  Left = 74
-  Top = 41
+  Left = 84
+  Top = 78
   Width = 1260
-  Height = 621
+  Height = 583
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'frmConsFat'
   Color = clBtnFace
@@ -19,7 +19,7 @@ object frmConsFat: TfrmConsFat
   object NxPanel1: TNxPanel
     Left = 0
     Top = 0
-    Width = 1252
+    Width = 1244
     Height = 76
     Align = alTop
     UseDockManager = False
@@ -188,8 +188,8 @@ object frmConsFat: TfrmConsFat
       OnClick = btImprimirClick
     end
     object btExcel: TNxButton
-      Left = 472
-      Top = 47
+      Left = 471
+      Top = 46
       Width = 92
       Height = 24
       Caption = 'Excel'
@@ -256,10 +256,10 @@ object frmConsFat: TfrmConsFat
     end
   end
   object Panel1: TPanel
-    Left = 1032
+    Left = 1024
     Top = 76
     Width = 220
-    Height = 514
+    Height = 468
     Align = alRight
     TabOrder = 1
     object Label23: TLabel
@@ -444,7 +444,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label35: TLabel
       Left = 80
-      Top = 287
+      Top = 167
       Width = 35
       Height = 13
       Alignment = taRightJustify
@@ -459,7 +459,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label36: TLabel
       Left = 175
-      Top = 287
+      Top = 167
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -474,7 +474,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label37: TLabel
       Left = 55
-      Top = 303
+      Top = 183
       Width = 60
       Height = 13
       Alignment = taRightJustify
@@ -489,7 +489,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label38: TLabel
       Left = 175
-      Top = 303
+      Top = 183
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -504,7 +504,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label39: TLabel
       Left = 47
-      Top = 391
+      Top = 271
       Width = 68
       Height = 13
       Alignment = taRightJustify
@@ -519,7 +519,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label40: TLabel
       Left = 175
-      Top = 391
+      Top = 271
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -534,7 +534,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label41: TLabel
       Left = 71
-      Top = 375
+      Top = 255
       Width = 44
       Height = 13
       Alignment = taRightJustify
@@ -549,7 +549,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label42: TLabel
       Left = 175
-      Top = 375
+      Top = 255
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -654,7 +654,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label11: TLabel
       Left = 87
-      Top = 327
+      Top = 207
       Width = 28
       Height = 13
       Alignment = taRightJustify
@@ -669,7 +669,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label12: TLabel
       Left = 71
-      Top = 343
+      Top = 223
       Width = 44
       Height = 13
       Alignment = taRightJustify
@@ -684,7 +684,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label13: TLabel
       Left = 175
-      Top = 343
+      Top = 223
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -699,7 +699,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label14: TLabel
       Left = 175
-      Top = 327
+      Top = 207
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -714,7 +714,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label15: TLabel
       Left = 7
-      Top = 423
+      Top = 303
       Width = 108
       Height = 13
       Alignment = taRightJustify
@@ -729,97 +729,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label16: TLabel
       Left = 175
-      Top = 423
-      Width = 25
-      Height = 13
-      Alignment = taRightJustify
-      Caption = '0,00'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      Transparent = True
-    end
-    object Label7: TLabel
-      Left = 11
-      Top = 199
-      Width = 102
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'V.ICMS FCP Dest:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      Transparent = True
-    end
-    object Label18: TLabel
-      Left = 58
-      Top = 183
-      Width = 55
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'V.FCP ST:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      Transparent = True
-    end
-    object Label19: TLabel
-      Left = 41
-      Top = 167
-      Width = 72
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'V.ICMS FCP:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      Transparent = True
-    end
-    object Label20: TLabel
-      Left = 173
-      Top = 166
-      Width = 25
-      Height = 13
-      Alignment = taRightJustify
-      Caption = '0,00'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      Transparent = True
-    end
-    object Label21: TLabel
-      Left = 173
-      Top = 183
-      Width = 25
-      Height = 13
-      Alignment = taRightJustify
-      Caption = '0,00'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      Transparent = True
-    end
-    object Label22: TLabel
-      Left = 173
-      Top = 199
+      Top = 303
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -836,15 +746,15 @@ object frmConsFat: TfrmConsFat
   object Panel2: TPanel
     Left = 0
     Top = 76
-    Width = 1032
-    Height = 514
+    Width = 1024
+    Height = 468
     Align = alClient
     TabOrder = 2
     object RzPageControl1: TRzPageControl
       Left = 1
       Top = 1
-      Width = 1030
-      Height = 512
+      Width = 1022
+      Height = 466
       ActivePage = ts_Data
       Align = alClient
       TabIndex = 2
@@ -855,8 +765,8 @@ object frmConsFat: TfrmConsFat
         object SMDBGrid1: TSMDBGrid
           Left = 0
           Top = 0
-          Width = 1026
-          Height = 489
+          Width = 1018
+          Height = 443
           Align = alClient
           Ctl3D = False
           DataSource = DMConsFat.dsFatAcum
@@ -888,7 +798,7 @@ object frmConsFat: TfrmConsFat
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 31
+          ColCount = 25
           RowCount = 2
           Columns = <
             item
@@ -1039,27 +949,6 @@ object frmConsFat: TfrmConsFat
             end
             item
               Expanded = False
-              FieldName = 'VLR_ICMS_FCP_DEST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vlr. Icms FCP Dest'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VLR_ICMS_FCP'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vlr. ICMS FCP'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VLR_FCP_ST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vlr. FCP ST'
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'VLR_CUSTO'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. Custo (Compra)'
@@ -1097,27 +986,6 @@ object frmConsFat: TfrmConsFat
               Title.Alignment = taCenter
               Title.Caption = 'ID Pessoa'
               Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_FCP_ST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base FCP ST'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_ICMS_FCP'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base Icms FCP'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_ICMS_FCP_DEST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base ICMS FCP Dest'
-              Visible = True
             end>
         end
       end
@@ -1126,8 +994,8 @@ object frmConsFat: TfrmConsFat
         object SMDBGrid2: TSMDBGrid
           Left = 0
           Top = 0
-          Width = 1026
-          Height = 489
+          Width = 1018
+          Height = 443
           Align = alClient
           DataSource = DMConsFat.dsConsCliente
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1155,7 +1023,7 @@ object frmConsFat: TfrmConsFat
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 23
+          ColCount = 17
           RowCount = 2
           Columns = <
             item
@@ -1260,48 +1128,6 @@ object frmConsFat: TfrmConsFat
               Title.Caption = 'Valor CSSL Venda'
               Width = 64
               Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VLR_ICMS_FCP_DEST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vlr. ICMS FCP Dest'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VLR_ICMS_FCP'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vlr. ICMS FCP'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VLR_FCP_ST'
-              Title.Alignment = taCenter
-              Title.Caption = 'VLR. FCP ST'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_FCP_ST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base FCP ST'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_ICMS_FCP'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base ICMS FCP'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_ICMS_FCP_DEST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base ICMS FCP Dest'
-              Visible = True
             end>
         end
       end
@@ -1310,8 +1136,8 @@ object frmConsFat: TfrmConsFat
         object SMDBGrid3: TSMDBGrid
           Left = 0
           Top = 0
-          Width = 1026
-          Height = 489
+          Width = 1018
+          Height = 443
           Align = alClient
           DataSource = DMConsFat.dsConsData
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1339,7 +1165,7 @@ object frmConsFat: TfrmConsFat
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 23
+          ColCount = 17
           RowCount = 2
           Columns = <
             item
@@ -1442,48 +1268,6 @@ object frmConsFat: TfrmConsFat
               Expanded = False
               FieldName = 'VLR_TOTAL_BRU'
               Title.Caption = 'Valor Bruto'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VLR_ICMS_FCP_DEST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vlr. ICMS FCP Dest'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VLR_ICMS_FCP'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vlr. ICMS FCP'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'VLR_FCP_ST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Vlr. FCP ST'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_FCP_ST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base FCP ST'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_ICMS_FCP'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base ICMS FCP'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_ICMS_FCP_DEST'
-              Title.Alignment = taCenter
-              Title.Caption = 'Base ICMS FCP Dest'
               Visible = True
             end>
         end

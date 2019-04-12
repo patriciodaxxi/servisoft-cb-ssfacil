@@ -279,24 +279,6 @@ object DMMovimento: TDMMovimento
       FixedChar = True
       Size = 1
     end
-    object sdsMovimentoBASE_FCP_ST: TFloatField
-      FieldName = 'BASE_FCP_ST'
-    end
-    object sdsMovimentoBASE_ICMS_FCP: TFloatField
-      FieldName = 'BASE_ICMS_FCP'
-    end
-    object sdsMovimentoBASE_ICMS_FCP_DEST: TFloatField
-      FieldName = 'BASE_ICMS_FCP_DEST'
-    end
-    object sdsMovimentoVLR_ICMS_FCP_DEST: TFloatField
-      FieldName = 'VLR_ICMS_FCP_DEST'
-    end
-    object sdsMovimentoVLR_ICMS_FCP: TFloatField
-      FieldName = 'VLR_ICMS_FCP'
-    end
-    object sdsMovimentoVLR_FCP_ST: TFloatField
-      FieldName = 'VLR_FCP_ST'
-    end
   end
   object dspMovimento: TDataSetProvider
     DataSet = sdsMovimento
@@ -572,24 +554,6 @@ object DMMovimento: TDMMovimento
       FieldName = 'RETEM_PISCOFINS'
       FixedChar = True
       Size = 1
-    end
-    object cdsMovimentoBASE_FCP_ST: TFloatField
-      FieldName = 'BASE_FCP_ST'
-    end
-    object cdsMovimentoBASE_ICMS_FCP: TFloatField
-      FieldName = 'BASE_ICMS_FCP'
-    end
-    object cdsMovimentoBASE_ICMS_FCP_DEST: TFloatField
-      FieldName = 'BASE_ICMS_FCP_DEST'
-    end
-    object cdsMovimentoVLR_ICMS_FCP_DEST: TFloatField
-      FieldName = 'VLR_ICMS_FCP_DEST'
-    end
-    object cdsMovimentoVLR_ICMS_FCP: TFloatField
-      FieldName = 'VLR_ICMS_FCP'
-    end
-    object cdsMovimentoVLR_FCP_ST: TFloatField
-      FieldName = 'VLR_FCP_ST'
     end
   end
   object dsMovimento: TDataSource

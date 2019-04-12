@@ -357,8 +357,7 @@ begin
                                                      fDMCadNotaServico.cdsNotaServicoTIPO_PRAZO.AsString,
                                                      fDMCadNotaServico.cdsNotaServicoID_CONDPGTO.AsInteger,0,
                                                      fDMCadNotaServico.cdsNotaServicoID_VENDEDOR.AsInteger,0,
-                                                     fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0,1,0,'N',
-                                                     0,0,0,0,0,0);
+                                                     fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0,1,0,'N');
       end;
 
       if vID_Mov <> fDMCadNotaServico.cdsNotaServicoID_MOVIMENTO.AsInteger then

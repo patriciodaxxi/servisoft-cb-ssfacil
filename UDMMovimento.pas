@@ -186,18 +186,6 @@ type
     cdsMovimentoPRECO_CUSTO_TOTAL: TFloatField;
     sdsMovimentoRETEM_PISCOFINS: TStringField;
     cdsMovimentoRETEM_PISCOFINS: TStringField;
-    sdsMovimentoBASE_FCP_ST: TFloatField;
-    sdsMovimentoBASE_ICMS_FCP: TFloatField;
-    sdsMovimentoBASE_ICMS_FCP_DEST: TFloatField;
-    sdsMovimentoVLR_ICMS_FCP_DEST: TFloatField;
-    sdsMovimentoVLR_ICMS_FCP: TFloatField;
-    sdsMovimentoVLR_FCP_ST: TFloatField;
-    cdsMovimentoBASE_FCP_ST: TFloatField;
-    cdsMovimentoBASE_ICMS_FCP: TFloatField;
-    cdsMovimentoBASE_ICMS_FCP_DEST: TFloatField;
-    cdsMovimentoVLR_ICMS_FCP_DEST: TFloatField;
-    cdsMovimentoVLR_ICMS_FCP: TFloatField;
-    cdsMovimentoVLR_FCP_ST: TFloatField;
     procedure cdsMovimentoReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
@@ -215,9 +203,7 @@ type
                                   Cancelada, Denegada, Unidade, Motivo_CD, Nome_Produto_Serv, Referencia: String; DtEmissao, DtEntradaSaida: TDateTime;
                                   Tamanho, Tipo_Condicao: String; ID_CondPgto,ID_Recibo, ID_Vendedor, ID_Cor: Integer; Perc_Comissao,
                                   Vlr_Icms_UF_Remet, Vlr_Icms_UF_Dest: Real;
-                                  Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String;
-                                  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST : Real ): Integer;
-
+                                  Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String ): Integer;
     procedure prc_ImprimeVendasCupomW;//WriteLn
     procedure prc_ImprimeVendasCupomC(cAvanco: Word);//Canvas
   end;
@@ -264,8 +250,7 @@ function TDMMovimento.fnc_Gravar_Movimento(ID_Mov, Filial, Item,
   Cancelada, Denegada, Unidade, Motivo_CD, Nome_Produto_Serv, Referencia: String;
   DtEmissao, DtEntradaSaida: TDateTime; Tamanho, Tipo_Condicao: String;
   ID_CondPgto, ID_Recibo, ID_Vendedor, ID_Cor: Integer; Perc_Comissao, Vlr_Icms_UF_Remet, Vlr_Icms_UF_Dest: Real;
-  Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String ;
-  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST  : Real): Integer;
+  Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String): Integer;
 var
   vAux: Integer;
 begin
@@ -437,15 +422,6 @@ begin
     cdsMovimentoVLR_ICMS_UF_DEST.AsFloat  := StrToFloat(FormatFloat('0.00',Vlr_Icms_UF_Dest));
     //***********
     cdsMovimentoTERMINAL_ID.AsInteger := Terminal; //PDV
-
-    //11/04/2019
-    cdsMovimentoBASE_FCP_ST.AsFloat        := BASE_FCP_ST;
-    cdsMovimentoBASE_ICMS_FCP.AsFloat      := BASE_ICMS_FCP;
-    cdsMovimentoBASE_ICMS_FCP_DEST.AsFloat := BASE_ICMS_FCP_DEST;
-    cdsMovimentoVLR_ICMS_FCP_DEST.AsFloat  := VLR_ICMS_FCP_DEST;
-    cdsMovimentoVLR_ICMS_FCP.AsFloat       := VLR_ICMS_FCP;
-    cdsMovimentoVLR_FCP_ST.AsFloat         := VLR_FCP_ST;
-    //********************
 
     cdsMovimento.Post;
     cdsMovimento.ApplyUpdates(0);

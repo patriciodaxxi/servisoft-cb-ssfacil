@@ -64,12 +64,6 @@ type
     ts_Data: TRzTabSheet;
     SMDBGrid3: TSMDBGrid;
     chkAcrescimo: TRzCheckList;
-    Label7: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
-    Label20: TLabel;
-    Label21: TLabel;
-    Label22: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -142,8 +136,6 @@ var
   vVlr_IR, vVlr_CSLL: Real;
   vAux: Real;
   vVlr_Custo: Real;
-  vVlr_ICMS_FCP, vVlr_FCP_ST, vVlr_ICMS_FCP_Dest : Real;
-
 begin
   vVlr_Total := 0;
   vVlr_Total_Bru := 0;
@@ -160,9 +152,6 @@ begin
   vVlr_IR := 0;
   vVlr_CSLL := 0;
   vVlr_Custo := 0;
-  vVlr_ICMS_FCP := 0;
-  vVlr_FCP_ST := 0;
-  vVlr_ICMS_FCP_Dest := 0;
 
   if RzPageControl1.ActivePage = ts_Geral then
   begin
@@ -237,11 +226,6 @@ begin
         vVlr_IR := vVlr_IR + fDMConsFat.cdsFatAcumVLR_IR_VENDA.AsFloat;
         vVlr_Custo := vVlr_Custo + fDMConsFat.cdsFatAcumVLR_CUSTO.AsFloat;
         vVlr_Frete := vVlr_Frete + fDMConsFat.cdsFatAcumVLR_FRETE.AsFloat;
-
-        vVlr_ICMS_FCP := vVlr_ICMS_FCP + fDMConsFat.cdsFatAcumVLR_ICMS_FCP.AsFloat;
-        vVlr_FCP_ST   := vVlr_FCP_ST + fDMConsFat.cdsFatAcumVLR_FCP_ST.AsFloat;
-        vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsFatAcumVLR_ICMS_FCP_DEST.AsFloat;
-
       end;
       fDMConsFat.cdsFatAcum.Next;
     end;
@@ -319,10 +303,6 @@ begin
         vVlr_IR := vVlr_IR + fDMConsFat.cdsConsClienteVLR_IR_VENDA.AsFloat;
         vVlr_Custo := vVlr_Custo + fDMConsFat.cdsConsClienteVLR_CUSTO.AsFloat;
         vVlr_Frete := vVlr_Frete + fDMConsFat.cdsConsClienteVLR_FRETE.AsFloat;
-
-        vVlr_ICMS_FCP := vVlr_ICMS_FCP + fDMConsFat.cdsConsClienteVLR_ICMS_FCP.AsFloat;
-        vVlr_FCP_ST   := vVlr_FCP_ST + fDMConsFat.cdsConsClienteVLR_FCP_ST.AsFloat;
-        vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsConsClienteVLR_ICMS_FCP_DEST.AsFloat;
       end;
       fDMConsFat.cdsConsCliente.Next;
     end;
@@ -400,11 +380,6 @@ begin
         vVlr_IR := vVlr_IR + fDMConsFat.cdsConsDataVLR_IR_VENDA.AsFloat;
         vVlr_Custo := vVlr_Custo + fDMConsFat.cdsConsDataVLR_CUSTO.AsFloat;
         vVlr_Frete := vVlr_Frete + fDMConsFat.cdsConsDataVLR_FRETE.AsFloat;
-
-        vVlr_ICMS_FCP := vVlr_ICMS_FCP + fDMConsFat.cdsConsDataVLR_ICMS_FCP.AsFloat;
-        vVlr_FCP_ST   := vVlr_FCP_ST + fDMConsFat.cdsConsDataVLR_FCP_ST.AsFloat;
-        vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsConsDataVLR_ICMS_FCP_DEST.AsFloat;
-
       end;
       fDMConsFat.cdsConsData.Next;
     end;
@@ -429,10 +404,6 @@ begin
   Label13.Caption := FormatFloat('###,###,##0.00', vVlr_CSLL);
 
   Label16.Caption := FormatFloat('###,###,##0.00', vVlr_Custo);
-
-  Label20.Caption := FormatFloat('###,###,##0.00', vVlr_ICMS_FCP);
-  Label21.Caption := FormatFloat('###,###,##0.00', vVlr_FCP_ST);
-  Label22.Caption := FormatFloat('###,###,##0.00', vVlr_ICMS_FCP_Dest);
 
   vAux := StrToFloat(FormatFloat('0.00', vVlr_Total_Liq - vVlr_Devolucao));
   Label8.Caption := FormatFloat('###,###,##0.00', vAux);

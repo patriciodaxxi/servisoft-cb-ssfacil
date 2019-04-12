@@ -3513,14 +3513,7 @@ begin
                                                fDMRecebeXML.cdsNotaFiscalID_CONDPGTO.AsInteger,0,0,0,0,
                                                fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_UF_REMET.AsFloat,
                                                fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_UF_DEST.AsFloat,1,
-                                               fDMRecebeXML.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,'N',
-                                               fDMRecebeXML.cdsNotaFiscal_ItensBASE_FCP_ST.AsFloat,
-                                               fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMS_FCP.AsFloat,
-                                               fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
-                                               fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
-                                               fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
-                                               fDMRecebeXML.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
-
+                                               fDMRecebeXML.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,'N');
 end;
 
 procedure TfrmRecebeXML.DBEdit70Exit(Sender: TObject);
