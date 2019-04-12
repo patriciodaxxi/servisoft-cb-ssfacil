@@ -440,11 +440,11 @@ begin
     prc_Abrir_Combinacao;
   if fDMCadPedido.cdsParametrosEMPRESA_AMBIENTES.AsString = 'S' then
     btnDigMaterial.Caption := 'Digitar Opções';
-  vCarimbo_Ant      := fDMCadPedido.cdsPedido_ItensCARIMBO.AsString;
-  vCaixinha_Ant     := fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString;
-  vRemessa_Ant      := fDMCadPedido.cdsPedido_ItensNUMOS.AsString;
-  vID_Terceiro_Ant  := fDMCadPedido.cdsPedido_ItensID_ATELIER.AsInteger;
-  vDtEntrega_Ant    := fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime;
+  vCarimbo_Ant     := fDMCadPedido.cdsPedido_ItensCARIMBO.AsString;
+  vCaixinha_Ant    := fDMCadPedido.cdsPedido_ItensCAIXINHA.AsString;
+  vRemessa_Ant     := fDMCadPedido.cdsPedido_ItensNUMOS.AsString;
+  vID_Terceiro_Ant := fDMCadPedido.cdsPedido_ItensID_ATELIER.AsInteger;
+  vDtEntrega_Ant   := fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime;
 
   vVlr_Unitario_Ant := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat));
   if vState = 'E' then
@@ -862,19 +862,11 @@ begin
   vPreco_Pos := 0;
   if (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') and (fDMCadPedido.cdsPedido_Item_Tipo.RecordCount > 0) then
   begin
-    //Foi alterado no dia 28/03/2014
-    //fDMCadPedido.cdsPedido_ItensQTD.AsFloat          := fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat;
-    //fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00000',fDMCadPedido.cdsPedido_Item_TipoVLR_TOTAL.AsFloat / fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat));
-    //15/09/2015: Foi alterado conforme Adriano,
     if fDMCadPedido.cdsPedido_Item_TipoTIPO_ORCAMENTO.AsString = 'C' then
     begin
       fDMCadPedido.cdsPedido_ItensQTD.AsFloat          := fDMCadPedido.cdsPedido_Item_TipoQTD.AsFloat;
       fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00000',fDMCadPedido.cdsPedido_Item_TipoVLR_UNITARIO.AsFloat));
-      //11/09/2015: Foi alterado conforme Adriano, vai gravar no estoque por KG (usando o campo da nota QTD_ESTOQUE)
-      //fDMCadPedido.cdsPedido_ItensQTD.AsFloat          := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_Item_TipoVLR_TOTAL.AsFloat / fDMCadPedido.cdsPedido_Item_TipoVLR_KG.AsFloat));
-      //fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00000',fDMCadPedido.cdsPedido_Item_TipoVLR_KG.AsFloat));
       fDMCadPedido.cdsPedido_ItensQTD_PECA.AsInteger         := fDMCadPedido.cdsPedido_Item_TipoQTD.AsInteger;
-      //fDMCadPedido.cdsPedido_ItensQTD_LANCAR_ESTOQUE.AsFloat := StrToFloat(FormatFloat('0.0000',(fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat * fDMCadPedido.cdsPedido_Item_TipoQTD.AsInteger)));
       fDMCadPedido.cdsPedido_ItensQTD_LANCAR_ESTOQUE.AsFloat := StrToFloat(FormatFloat('0.0000',(fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat)));
     end
     else
@@ -1069,8 +1061,8 @@ begin
 
   if ((fDMCadPedido.cdsParametrosCONTROLAR_ESTOQUE_SAIDA.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensGERAR_ESTOQUE.AsString = 'S')) or (fDMCadPedido.qParametros_EstVERIFICA_ESTOQUE_ENT_PEDIDO.AsString = 'S') then
   begin
-    if (fDMCadPedido.cdsProdutoUSA_GRADE.AsString <> 'S')
-       or ((vEditar) and (StrToFloat(FormatFloat('0.0000',vQtd_Prod_Ant)) <> StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat))))  then
+    if (fDMCadPedido.cdsProdutoUSA_GRADE.AsString <> 'S') or
+       ((vEditar) and (StrToFloat(FormatFloat('0.0000',vQtd_Prod_Ant)) <> StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat))))  then
     begin
       vQtdAux := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat));
       if (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') and (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD_LANCAR_ESTOQUE.AsFloat)) > 0) then
@@ -1111,7 +1103,7 @@ begin
   try
     if RxDBLookupCombo7.Text <> '' then
       fDMCadPedido.cdsPedido_ItensNCM.AsString := RxDBLookupCombo7.Text;
-    if fDMCadPedido.cdsProdutoID.AsInteger <>  fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger then
+    if fDMCadPedido.cdsProdutoID.AsInteger <> fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger then
       fDMCadPedido.cdsProduto.Locate('ID',fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
     if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat)) > 0 then
       fDMCadPedido.cdsPedidoTIPO_DESCONTO.AsString := 'I';
@@ -1150,8 +1142,8 @@ begin
                                              fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat);
 
     fDMCadPedido.cdsPedido_ItensGRAVACAO_COM_ERRO.AsString := '';
-    if   (((fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger <= 0) or (fDMCadPedido.cdsPedido_ItensID_CFOP.IsNull)) and (fDMCadPedido.cdsTab_NCMGERAR_ST.AsString = 'S'))
-      or (fDMCadPedido.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
+    if (((fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger <= 0) or (fDMCadPedido.cdsPedido_ItensID_CFOP.IsNull)) and
+       (fDMCadPedido.cdsTab_NCMGERAR_ST.AsString = 'S')) or (fDMCadPedido.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
     begin
       if not fnc_Verifica_SubstTributaria then
         exit;
