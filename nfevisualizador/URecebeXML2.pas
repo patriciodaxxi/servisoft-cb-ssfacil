@@ -1180,45 +1180,40 @@ begin
 
   try
     fDMRecebeXML.cdsEstoque_Mov.Insert;
-    fDMRecebeXML.cdsEstoque_MovID.AsInteger            := vAux;
-    fDMRecebeXML.cdsEstoque_MovFILIAL.AsInteger        := vFilial_Local;
-    fDMRecebeXML.cdsEstoque_MovID_PRODUTO.AsInteger    := fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger;
-    fDMRecebeXML.cdsEstoque_MovID_COR.AsInteger        := fDMRecebeXML.mItensNotaCodCor.AsInteger;
-    fDMRecebeXML.cdsEstoque_MovTAMANHO.AsString        := fDMRecebeXML.mItensNotaTamanho.AsString;
-    fDMRecebeXML.cdsEstoque_MovDTMOVIMENTO.AsDateTime  := fDMRecebeXML.cdsNotaFiscalDTSAIDAENTRADA.AsDateTime;;
-    fDMRecebeXML.cdsEstoque_MovTIPO_ES.AsString        := 'E';
+    fDMRecebeXML.cdsEstoque_MovID.AsInteger           := vAux;
+    fDMRecebeXML.cdsEstoque_MovFILIAL.AsInteger       := vFilial_Local;
+    fDMRecebeXML.cdsEstoque_MovID_PRODUTO.AsInteger   := fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger;
+    fDMRecebeXML.cdsEstoque_MovID_COR.AsInteger       := fDMRecebeXML.mItensNotaCodCor.AsInteger;
+    fDMRecebeXML.cdsEstoque_MovTAMANHO.AsString       := fDMRecebeXML.mItensNotaTamanho.AsString;
+    fDMRecebeXML.cdsEstoque_MovDTMOVIMENTO.AsDateTime := fDMRecebeXML.cdsNotaFiscalDTSAIDAENTRADA.AsDateTime;;
+    fDMRecebeXML.cdsEstoque_MovTIPO_ES.AsString       := 'E';
     if vImportar_NotaSaida then
-      fDMRecebeXML.cdsEstoque_MovTIPO_MOV.AsString       := 'NTS'
+      fDMRecebeXML.cdsEstoque_MovTIPO_MOV.AsString := 'NTS'
     else
-      fDMRecebeXML.cdsEstoque_MovTIPO_MOV.AsString       := 'NTE';
-    fDMRecebeXML.cdsEstoque_MovNUMNOTA.AsInteger       := fDMRecebeXML.cdsNotaFiscalNUMNOTA.AsInteger;
-    fDMRecebeXML.cdsEstoque_MovID_PESSOA.AsInteger     := fDMRecebeXML.cdsNotaFiscalID_CLIENTE.AsInteger;
+      fDMRecebeXML.cdsEstoque_MovTIPO_MOV.AsString := 'NTE';
+    fDMRecebeXML.cdsEstoque_MovNUMNOTA.AsInteger      := fDMRecebeXML.cdsNotaFiscalNUMNOTA.AsInteger;
+    fDMRecebeXML.cdsEstoque_MovID_PESSOA.AsInteger    := fDMRecebeXML.cdsNotaFiscalID_CLIENTE.AsInteger;
     //Foi alterado dia 04/05/2013 - Para converter a quantidade
-    //fDMRecebeXML.cdsEstoque_MovVLR_UNITARIO.AsFloat    := fDMRecebeXML.mItensNotaVlrUnitario.AsFloat;
-    //fDMRecebeXML.cdsEstoque_MovQTD.AsFloat             := fDMRecebeXML.mItensNotaQtd.AsFloat;
-    //fDMRecebeXML.cdsEstoque_MovQTD2.AsFloat            := fDMRecebeXML.mItensNotaQtd.AsFloat;
-    fDMRecebeXML.cdsEstoque_MovVLR_UNITARIO.AsFloat    := StrToFloat(FormatFloat('0.00000',vVlrUnitAux));
-    fDMRecebeXML.cdsEstoque_MovQTD.AsFloat             := StrToFloat(FormatFloat('0.000000',vQtdAux));
-    fDMRecebeXML.cdsEstoque_MovQTD2.AsFloat            := StrToFloat(FormatFloat('0.000000',vQtdAux));
-    //fDMRecebeXML.cdsEstoque_MovUNIDADE.AsString        := fDMRecebeXML.mItensNotaUnidade.AsString;
+    fDMRecebeXML.cdsEstoque_MovVLR_UNITARIO.AsFloat   := StrToFloat(FormatFloat('0.00000',vVlrUnitAux));
+    fDMRecebeXML.cdsEstoque_MovQTD.AsFloat            := StrToFloat(FormatFloat('0.000000',vQtdAux));
+    fDMRecebeXML.cdsEstoque_MovQTD2.AsFloat           := StrToFloat(FormatFloat('0.000000',vQtdAux));
     if trim(fDMRecebeXML.mItensNotaUnidadeInterno.AsString) <> '' then
-      fDMRecebeXML.cdsEstoque_MovUNIDADE.AsString      := fDMRecebeXML.mItensNotaUnidadeInterno.AsString
+      fDMRecebeXML.cdsEstoque_MovUNIDADE.AsString := fDMRecebeXML.mItensNotaUnidadeInterno.AsString
     else
-      fDMRecebeXML.cdsEstoque_MovUNIDADE.AsString      := fDMRecebeXML.mItensNotaUnidade.AsString;
-    fDMRecebeXML.cdsEstoque_MovPERC_ICMS.AsFloat       := fDMRecebeXML.mItensNotaAliqIcms.AsFloat;
-    fDMRecebeXML.cdsEstoque_MovPERC_IPI.AsFloat        := fDMRecebeXML.mItensNotaAliqIPI.AsFloat;
-    fDMRecebeXML.cdsEstoque_MovVLR_DESCONTO.AsFloat    := StrToFloat(FormatFloat('0.000',vDescAux));
+      fDMRecebeXML.cdsEstoque_MovUNIDADE.AsString := fDMRecebeXML.mItensNotaUnidade.AsString;
+    fDMRecebeXML.cdsEstoque_MovPERC_ICMS.AsFloat      := fDMRecebeXML.mItensNotaAliqIcms.AsFloat;
+    fDMRecebeXML.cdsEstoque_MovPERC_IPI.AsFloat       := fDMRecebeXML.mItensNotaAliqIPI.AsFloat;
+    fDMRecebeXML.cdsEstoque_MovVLR_DESCONTO.AsFloat   := StrToFloat(FormatFloat('0.000',vDescAux));
     fDMRecebeXML.cdsEstoque_MovPERC_TRIBUTACAO.AsFloat := fDMRecebeXML.mItensNotaPercRedIcms.AsFloat;
-    fDMRecebeXML.cdsEstoque_MovVLR_FRETE.AsFloat       := StrToFloat(FormatFloat('0.00',vVlrFreteInd));
-    fDMRecebeXML.cdsEstoque_MovID_CFOP.AsInteger       := fDMRecebeXML.mItensNotaCFOPInterno.AsInteger;
-    fDMRecebeXML.cdsEstoque_MovSERIE.AsString          := fDMRecebeXML.cdsNotaFiscalSERIE.AsString;
-    fDMRecebeXML.cdsEstoque_MovID_NOTA.AsInteger       := fDMRecebeXML.cdsNotaFiscalID.AsInteger;
-
-    fDMRecebeXML.cdsEstoque_MovQTD_ORIG.AsFloat         := StrToFloat(FormatFloat('0.000000',fDMRecebeXML.mItensNotaQtd.AsFloat));
+    fDMRecebeXML.cdsEstoque_MovVLR_FRETE.AsFloat      := StrToFloat(FormatFloat('0.00',vVlrFreteInd));
+    fDMRecebeXML.cdsEstoque_MovID_CFOP.AsInteger      := fDMRecebeXML.mItensNotaCFOPInterno.AsInteger;
+    fDMRecebeXML.cdsEstoque_MovSERIE.AsString         := fDMRecebeXML.cdsNotaFiscalSERIE.AsString;
+    fDMRecebeXML.cdsEstoque_MovID_NOTA.AsInteger      := fDMRecebeXML.cdsNotaFiscalID.AsInteger;
+    fDMRecebeXML.cdsEstoque_MovQTD_ORIG.AsFloat       := StrToFloat(FormatFloat('0.000000',fDMRecebeXML.mItensNotaQtd.AsFloat));
     fDMRecebeXML.cdsEstoque_MovVLR_UNITARIOORIG.AsFloat := StrToFloat(FormatFloat('0.00000',fDMRecebeXML.mItensNotaVlrUnitario.AsFloat));
     fDMRecebeXML.cdsEstoque_MovUNIDADE_ORIG.AsString    := fDMRecebeXML.mItensNotaUnidade.AsString;
     fDMRecebeXML.cdsEstoque_MovVLR_DESCONTOORIG.AsFloat := fDMRecebeXML.mItensNotaVlrDesconto.AsFloat;
-    //fDMRecebeXML.cdsEstoque_MovVLR_FRETE.AsFloat        := fDMRecebeXML.mItensNotaVlrFrete.AsFloat;
+    fDMRecebeXML.cdsEstoque_MovREF_PROD_FORNECEDOR.AsString := fDMRecebeXML.mItensNotaCodProduto.AsString;
 
     fDMRecebeXML.cdsEstoque_Mov.Post;
     fDMRecebeXML.cdsEstoque_Mov.ApplyUpdates(0);

@@ -6267,6 +6267,9 @@ object DMRecebeXML: TDMRecebeXML
       FixedChar = True
       Size = 1
     end
+    object sdsEstoque_MovREF_PROD_FORNECEDOR: TStringField
+      FieldName = 'REF_PROD_FORNECEDOR'
+    end
   end
   object dspEstoque_Mov: TDataSetProvider
     DataSet = sdsEstoque_Mov
@@ -6375,6 +6378,9 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'GERAR_CUSTO'
       FixedChar = True
       Size = 1
+    end
+    object cdsEstoque_MovREF_PROD_FORNECEDOR: TStringField
+      FieldName = 'REF_PROD_FORNECEDOR'
     end
   end
   object dsEstoque_Mov: TDataSource

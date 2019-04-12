@@ -477,6 +477,9 @@ object DMConsEstoque: TDMConsEstoque
       FieldName = 'DESC_SUPERIOR'
       Size = 50
     end
+    object cdsEstoque_MovREF_PROD_FORNECEDOR: TStringField
+      FieldName = 'REF_PROD_FORNECEDOR'
+    end
   end
   object dsEstoque_Mov: TDataSource
     DataSet = cdsEstoque_Mov
