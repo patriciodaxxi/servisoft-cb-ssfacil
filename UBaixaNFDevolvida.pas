@@ -156,6 +156,7 @@ begin
 
   fDMConsNotaBeneficiamento.fDMEstoque := fDMEstoque;
 //  fDMConsNotaBeneficiamento.mPedidoAux.EmptyDataSet;
+  SMDBGrid1.DisableScroll;
   fDMConsNotaBeneficiamento.cdsNotaPendente.First;
   while not fDMConsNotaBeneficiamento.cdsNotaPendente.Eof do
   begin
@@ -177,6 +178,7 @@ begin
     end;
     fDMConsNotaBeneficiamento.cdsNotaPendente.Next;
   end;
+  SMDBGrid1.EnableScroll;
 
   //Atualiza Status do pedido somente quando for faturado ou quando for dado a baixa da ordem de compra do fornecedor
 {  if vTipo_Baixa_Ped <> 'PRO' then
@@ -305,6 +307,7 @@ end;
 
 procedure TfrmBaixaNFDevolvida.NxButton1Click(Sender: TObject);
 begin
+  SMDBGrid1.DisableScroll;
   fDMConsNotaBeneficiamento.cdsNotaPendente.First;
   while not fDMConsNotaBeneficiamento.cdsNotaPendente.eof do
   begin
@@ -314,7 +317,7 @@ begin
     fDMConsNotaBeneficiamento.cdsNotaPendente.Post;
     fDMConsNotaBeneficiamento.cdsNotaPendente.Next;
   end;
-
+  SMDBGrid1.EnableScroll;
 end;
 
 end.
