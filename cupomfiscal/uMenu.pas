@@ -568,7 +568,8 @@ begin
     fDMCadFechamento.cdsFechamento.ApplyUpdates(0);
   end;
   if (fDmCadFechamento.vTipo_Valor <> 'X') and (vTipo = 'I') then
-    fDmCadFechamento.prc_Imprime_Vlr_InformadoC(vIDAux);
+    if MessageDlg('Imprimir recibo?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+      fDmCadFechamento.prc_Imprime_Vlr_InformadoC(vIDAux);
 end;
 
 procedure TfMenu.Estoque1Click(Sender: TObject);

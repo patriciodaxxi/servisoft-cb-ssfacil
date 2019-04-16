@@ -3782,6 +3782,7 @@ begin
   if vID_Terceiro_Aux > 0 then
     cdsPedido_ItensID_ATELIER.AsInteger := vID_Terceiro_Aux;
   cdsPedido_ItensTIPO_OS.AsString := 'OU';
+  cdsPedido_ItensATUALIZA_PRECO_CUSTO.AsString := 'N';
 end;
 
 procedure TDMCadPedido.cdsPedidoNewRecord(DataSet: TDataSet);

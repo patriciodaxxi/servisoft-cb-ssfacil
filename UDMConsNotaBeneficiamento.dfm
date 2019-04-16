@@ -453,7 +453,7 @@ object DMConsNotaBeneficiamento: TDMConsNotaBeneficiamento
     Aggregates = <>
     Params = <>
     ProviderName = 'dspNotaDevolvida'
-    Left = 264
+    Left = 265
     Top = 112
     object cdsNotaDevolvidaID: TIntegerField
       FieldName = 'ID'

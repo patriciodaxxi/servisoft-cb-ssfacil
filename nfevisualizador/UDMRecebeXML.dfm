@@ -5806,6 +5806,24 @@ object DMRecebeXML: TDMRecebeXML
     object sdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField
       FieldName = 'PERC_ICMSSUBST_INTERNO'
     end
+    object sdsNotaFiscal_ItensBASE_ICMS_FCP: TFloatField
+      FieldName = 'BASE_ICMS_FCP'
+    end
+    object sdsNotaFiscal_ItensBASE_FCP_ST: TFloatField
+      FieldName = 'BASE_FCP_ST'
+    end
+    object sdsNotaFiscal_ItensVLR_FCP_ST: TFloatField
+      FieldName = 'VLR_FCP_ST'
+    end
+    object sdsNotaFiscal_ItensPERC_FCP_ST: TFloatField
+      FieldName = 'PERC_FCP_ST'
+    end
+    object sdsNotaFiscal_ItensVLR_ICMS_FCP_DEST: TFloatField
+      FieldName = 'VLR_ICMS_FCP_DEST'
+    end
+    object sdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField
+      FieldName = 'BASE_ICMS_FCP_DEST'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -6152,6 +6170,24 @@ object DMRecebeXML: TDMRecebeXML
     object cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida: TDataSetField
       FieldName = 'sdsNotaFiscal_NDevolvida'
     end
+    object cdsNotaFiscal_ItensBASE_ICMS_FCP: TFloatField
+      FieldName = 'BASE_ICMS_FCP'
+    end
+    object cdsNotaFiscal_ItensBASE_FCP_ST: TFloatField
+      FieldName = 'BASE_FCP_ST'
+    end
+    object cdsNotaFiscal_ItensVLR_FCP_ST: TFloatField
+      FieldName = 'VLR_FCP_ST'
+    end
+    object cdsNotaFiscal_ItensPERC_FCP_ST: TFloatField
+      FieldName = 'PERC_FCP_ST'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST: TFloatField
+      FieldName = 'VLR_ICMS_FCP_DEST'
+    end
+    object cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField
+      FieldName = 'BASE_ICMS_FCP_DEST'
+    end
   end
   object dsNotaFiscal_Itens: TDataSource
     DataSet = cdsNotaFiscal_Itens
@@ -6267,6 +6303,9 @@ object DMRecebeXML: TDMRecebeXML
       FixedChar = True
       Size = 1
     end
+    object sdsEstoque_MovREF_PROD_FORNECEDOR: TStringField
+      FieldName = 'REF_PROD_FORNECEDOR'
+    end
   end
   object dspEstoque_Mov: TDataSetProvider
     DataSet = sdsEstoque_Mov
@@ -6375,6 +6414,9 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'GERAR_CUSTO'
       FixedChar = True
       Size = 1
+    end
+    object cdsEstoque_MovREF_PROD_FORNECEDOR: TStringField
+      FieldName = 'REF_PROD_FORNECEDOR'
     end
   end
   object dsEstoque_Mov: TDataSource

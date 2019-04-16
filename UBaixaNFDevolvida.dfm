@@ -222,6 +222,15 @@ object frmBaixaNFDevolvida: TfrmBaixaNFDevolvida
       Transparent = True
       OnClick = btnConsultarClick
     end
+    object NxButton1: TNxButton
+      Left = 506
+      Top = 11
+      Width = 154
+      Height = 25
+      Caption = 'Selecionar Todos'
+      TabOrder = 5
+      OnClick = NxButton1Click
+    end
   end
   object Panel2: TPanel
     Left = 0

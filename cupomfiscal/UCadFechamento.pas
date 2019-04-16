@@ -94,6 +94,10 @@ type
     Label2: TLabel;
     NxButton1: TNxButton;
     RxDBComboBox1: TRxDBComboBox;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -127,6 +131,10 @@ type
     procedure btGavetaClick(Sender: TObject);
     procedure btnReabrirClick(Sender: TObject);
     procedure btnConsDetalhamentoClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton4Click(Sender: TObject);
   private
     { Private declarations }
     vTipoNotaAnt: String;
@@ -549,8 +557,9 @@ begin
   btnAlterar.Enabled   := not(btnAlterar.Enabled);
   btnGerar.Enabled     := not(btnGerar.Enabled);
   btnSuprimento.Enabled := not(btnSuprimento.Enabled);
-  btnSangria.Enabled    := not(btnSangria.Enabled);
-  SMDBGrid5.ReadOnly    := not(SMDBGrid5.ReadOnly);
+  btnSangria.Enabled   := not(btnSangria.Enabled);
+  SMDBGrid5.ReadOnly   := not(SMDBGrid5.ReadOnly);
+  pnlItem.Enabled      := not(pnlItem.Enabled);
 end;
 
 procedure TfrmCadFechamento.FormCloseQuery(Sender: TObject;
@@ -1292,6 +1301,48 @@ begin
   ffrmCadFechamento_Det.fDMCadFechamento := fDMCadFechamento;
   ffrmCadFechamento_Det.ShowModal;
   FreeAndNil(ffrmCadFechamento_Det);
+end;
+
+procedure TfrmCadFechamento.SpeedButton1Click(Sender: TObject);
+begin
+  ffrmCadFechamento_Sangria := TfrmCadFechamento_Sangria.Create(self);
+  ffrmCadFechamento_Sangria.fDMCadFechamento := fDMCadFechamento;
+  vID_Fechamento_Pos := fDMCadFechamento.cdsFechamentoID.AsInteger;
+  ffrmCadFechamento_Sangria.vES := 'E';
+  ffrmCadFechamento_Sangria.ShowModal;
+  FreeAndNil(ffrmCadFechamento_Sangria);
+  fDMCadFechamento.cdsFechamento_Sup.Close;
+  fDMCadFechamento.cdsFechamento_Sup.Open;
+end;
+
+procedure TfrmCadFechamento.SpeedButton3Click(Sender: TObject);
+begin
+  ffrmCadFechamento_Sangria := TfrmCadFechamento_Sangria.Create(self);
+  ffrmCadFechamento_Sangria.fDMCadFechamento := fDMCadFechamento;
+  vID_Fechamento_Pos := fDMCadFechamento.cdsFechamentoID.AsInteger;
+  ffrmCadFechamento_Sangria.vES := 'S';
+  ffrmCadFechamento_Sangria.ShowModal;
+  FreeAndNil(ffrmCadFechamento_Sangria);
+  fDMCadFechamento.cdsFechamento_San.Close;
+  fDMCadFechamento.cdsFechamento_San.Open;
+end;
+
+procedure TfrmCadFechamento.SpeedButton2Click(Sender: TObject);
+begin
+  if MessageDlg('Deseja realmente excluir este suprimento?',mtConfirmation,[mbOk,mbNo],0) = mrOk then
+  begin
+    fDMCadFechamento.cdsFechamento_Sup.Delete;
+    fDMCadFechamento.cdsFechamento_Sup.ApplyUpdates(0);
+  end;
+end;
+
+procedure TfrmCadFechamento.SpeedButton4Click(Sender: TObject);
+begin
+  if MessageDlg('Deseja realmente excluir esta sangria?',mtConfirmation,[mbOk,mbNo],0) = mrOk then
+  begin
+    fDMCadFechamento.cdsFechamento_San.Delete;
+    fDMCadFechamento.cdsFechamento_San.ApplyUpdates(0);
+  end;
 end;
 
 end.

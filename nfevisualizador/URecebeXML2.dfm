@@ -22,7 +22,7 @@ object frmRecebeXML2: TfrmRecebeXML2
     Top = 127
     Width = 873
     Height = 538
-    ActivePage = TabSheet2
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 0
     object TabSheet2: TTabSheet
@@ -1843,46 +1843,55 @@ object frmRecebeXML2: TfrmRecebeXML2
           item
             Expanded = False
             FieldName = 'Id'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'tpAmb'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'verAplic'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'chNFe'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'dhRecbto'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nProt'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'digVal'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'cStat'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'xMotivo'
+            Width = 64
             Visible = True
           end>
       end
@@ -2307,7 +2316,7 @@ object frmRecebeXML2: TfrmRecebeXML2
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 2
+        ColCount = 53
         RowCount = 2
       end
       object btnAtualizar: TNxButton
