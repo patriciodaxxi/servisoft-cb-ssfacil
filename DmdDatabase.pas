@@ -2,7 +2,6 @@ unit DmdDatabase;
 
 interface
 
-
 uses
   SysUtils, Classes, DBXpress, DB, SqlExpr, Forms, IniFiles, IdCoder, IdCoder3to4, IdCoderMIME, FMTBcd, IdBaseComponent,
   DBClient, Provider, Dialogs, MidasLib, RLFilters, RLRichFilter, RLXLSFilter, RLPDFFilter, RLPreviewForm;

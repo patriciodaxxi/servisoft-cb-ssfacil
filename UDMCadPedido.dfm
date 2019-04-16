@@ -4031,6 +4031,7 @@ object DMCadPedido: TDMCadPedido
     Top = 285
   end
   object cdsPedidoImp: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -10512,7 +10513,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43556.723590925930000000
+    ReportOptions.LastChange = 42321.628830243100000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -10709,7 +10710,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp
     BCDToCurrency = False
     Left = 825
-    Top = 452
+    Top = 450
   end
   object frxDBDataset2: TfrxDBDataset
     UserName = 'frxPedidoImp_Cli'
@@ -10717,7 +10718,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp_Cli
     BCDToCurrency = False
     Left = 864
-    Top = 452
+    Top = 451
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -10740,7 +10741,7 @@ object DMCadPedido: TDMCadPedido
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 864
+    Left = 863
     Top = 407
   end
   object frxMailExport1: TfrxMailExport
@@ -13862,8 +13863,8 @@ object DMCadPedido: TDMCadPedido
       'Qtd_Produto=Qtd_Produto')
     DataSource = dsmEmbalegem
     BCDToCurrency = False
-    Left = 832
-    Top = 493
+    Left = 833
+    Top = 494
   end
   object mCarimbo: TClientDataSet
     Active = True
@@ -13912,7 +13913,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmCarimbo
     BCDToCurrency = False
     Left = 1000
-    Top = 449
+    Top = 448
   end
   object sdsPedidoImp_Carimbo: TSQLDataSet
     NoMetadata = True
@@ -14047,8 +14048,8 @@ object DMCadPedido: TDMCadPedido
       'Total_Volume=Total_Volume')
     DataSource = dsmRotulos
     BCDToCurrency = False
-    Left = 824
-    Top = 534
+    Left = 825
+    Top = 535
   end
   object frxDBDataset13: TfrxDBDataset
     UserName = 'frxmRotulos_Prod'
