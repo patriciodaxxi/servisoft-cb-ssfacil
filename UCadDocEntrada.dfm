@@ -99,6 +99,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             FieldName = 'NUMNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Documento'
+            Width = 64
             Visible = True
           end
           item
@@ -152,6 +153,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             FieldName = 'ID_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
+            Width = 64
             Visible = True
           end>
       end
@@ -2080,6 +2082,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
                   FieldName = 'lkNome_Conta'
                   Title.Alignment = taCenter
                   Title.Caption = 'Nome Conta'
+                  Width = 64
                   Visible = True
                 end
                 item

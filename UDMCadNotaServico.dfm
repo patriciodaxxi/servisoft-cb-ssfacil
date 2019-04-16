@@ -4994,8 +4994,7 @@ object DMCadNotaServico: TDMCadNotaServico
       'FROM NOTASERVICO'
       'WHERE FILIAL = :FILIAL'
       '    AND SERIE = :SERIE'
-      ''
-      '')
+      ' AND TIPO_ES = '#39'S'#39)
     SQLConnection = dmDatabase.scoDados
     Left = 1112
     Top = 16
