@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadMovProdST,
   UCBase, RxLookup, StdCtrls, RxDBComb, Mask, DBCtrls, RXSpin, ExtCtrls, db, DBGrids, RzTabs, NxCollection, ToolEdit, RXDBCtrl,
-  CurrEdit, RzPanel;
+  CurrEdit, RzPanel, ComCtrls;
 
 type
   TfrmCadMovProdST = class(TForm)
@@ -19,9 +19,7 @@ type
     StaticText1: TStaticText;
     Panel3: TPanel;
     Label8: TLabel;
-    Label3: TLabel;
     DBEdit4: TDBEdit;
-    RxDBLookupCombo1: TRxDBLookupCombo;
     UCControls1: TUCControls;
     btnInserir: TNxButton;
     btnExcluir: TNxButton;
@@ -62,6 +60,10 @@ type
     DBEdit3: TDBEdit;
     DBEdit9: TDBEdit;
     NxButton1: TNxButton;
+    Label33: TLabel;
+    edtIdProduto: TEdit;
+    edtNomeProduto: TEdit;
+    cStat: TStatusBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -76,7 +78,11 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure RzPageControl1Change(Sender: TObject);
     procedure NxButton1Click(Sender: TObject);
-    procedure RxDBLookupCombo1KeyDown(Sender: TObject; var Key: Word;
+    procedure edtIdProdutoEnter(Sender: TObject);
+    procedure edtIdProdutoExit(Sender: TObject);
+    procedure edtIdProdutoKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtNomeProdutoKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
     { Private declarations }
@@ -88,10 +94,10 @@ type
 
     procedure prc_Posiciona_Reg;
 
-    procedure prc_Habilita; 
+    procedure prc_Habilita;
 
   public
-    { Public declarations } 
+    { Public declarations }
   end;
 
 var
@@ -118,6 +124,7 @@ procedure TfrmCadMovProdST.prc_Gravar_Registro;
 var
   vIDAux : Integer;
 begin
+  fDMCadMovProdST.cdsMovProdSTID_PRODUTO.AsInteger := StrToInt(edtIdProduto.Text);
   vIDAux := fDMCadMovProdST.cdsMovProdSTID.AsInteger;
   fDMCadMovProdST.prc_Gravar;
   if fDMCadMovProdST.cdsMovProdST.State in [dsEdit,dsInsert] then
@@ -140,9 +147,9 @@ begin
     exit;
 
   RzPageControl1.ActivePage := TS_Cadastro;
-
   prc_Habilita;
-
+  edtIdProduto.Clear;
+  edtNomeProduto.Clear;
   DBEdit3.SetFocus;
 end;
 
@@ -150,6 +157,8 @@ procedure TfrmCadMovProdST.FormShow(Sender: TObject);
 begin
   fDMCadMovProdST := TDMCadMovProdST.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMCadMovProdST);
+  cStat.Panels[0].Text := vUsuario;
+  cStat.Panels[1].Text := fnc_Busca_Nome_Filial;
 end;
 
 procedure TfrmCadMovProdST.prc_Consultar;
@@ -261,6 +270,11 @@ end;
 procedure TfrmCadMovProdST.prc_Posiciona_Reg;
 begin
   fDMCadMovProdST.prc_Localizar(fDMCadMovProdST.cdsConsultaID.AsInteger);
+  if fDMCadMovProdST.cdsMovProdSTID_PRODUTO.AsInteger > 0 then
+  begin
+    edtIdProduto.Text := IntToStr(fDMCadMovProdST.cdsMovProdSTID_PRODUTO.AsInteger);
+    edtIdProdutoExit(edtIdProduto);
+  end;
 end;
 
 procedure TfrmCadMovProdST.RzPageControl1Change(Sender: TObject);
@@ -289,7 +303,55 @@ begin
   fDMCadMovProdST.cdsMovProdSTVLR_ST.AsFloat  := StrToCurr(FormatCurr('0.00000',fDMCadMovProdST.cdsMovProdSTVLR_ST_ORIGINAL.AsFloat / vQtdAux));
 end;
 
-procedure TfrmCadMovProdST.RxDBLookupCombo1KeyDown(Sender: TObject;
+procedure TfrmCadMovProdST.edtIdProdutoEnter(Sender: TObject);
+begin
+  cStat.Panels[2].Text := 'F2 Consulta Produto';
+end;
+
+procedure TfrmCadMovProdST.edtIdProdutoExit(Sender: TObject);
+begin
+  cStat.Panels[2].Text := '';
+  if trim(edtIdProduto.Text) = '' then
+  begin
+    edtNomeProduto.Clear;
+    fDMCadMovProdST.cdsMovProdSTID_PRODUTO.AsInteger := 0;
+    exit;
+  end;
+  edtNomeProduto.Clear;
+  edtIdProduto.Text := Trim(edtIdProduto.Text);
+  fDMCadMovProdST.prc_Abrir_Produto(StrToInt(edtIdProduto.Text));
+  if fDMCadMovProdST.cdsProduto.IsEmpty then
+  begin
+    MessageDlg('*** Produto não encontrado!',mtError, [mbOk], 0);
+    edtIdProduto.SetFocus;
+    exit;
+  end;
+  edtNomeProduto.Text := fDMCadMovProdST.cdsProdutoNOME.AsString;
+end;
+
+procedure TfrmCadMovProdST.edtIdProdutoKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (key = vk_return) then
+  begin
+    if trim(edtIdProduto.Text) = '' then
+      edtNomeProduto.SetFocus
+    else
+      DateEdit1.SetFocus;
+  end
+  else
+  if (Key = Vk_F2) then
+  begin
+    vCodProduto_Pos := fDMCadMovProdST.cdsMovProdSTID_PRODUTO.AsInteger;
+    frmSel_Produto := TfrmSel_Produto.Create(Self);
+    frmSel_Produto.ShowModal;
+    if vCodProduto_Pos > 0 then
+      edtIdProduto.Text := IntToStr(vCodProduto_Pos);
+    fDMCadMovProdST.cdsMovProdSTID_PRODUTO.AsInteger := vCodProduto_Pos;
+  end;
+end;
+
+procedure TfrmCadMovProdST.edtNomeProdutoKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   if (Key = Vk_F2) then
@@ -298,9 +360,10 @@ begin
     frmSel_Produto := TfrmSel_Produto.Create(Self);
     frmSel_Produto.ShowModal;
     if vCodProduto_Pos > 0 then
-      RxDBLookupCombo1.KeyValue := vCodProduto_Pos;
+      edtIdProduto.Text := IntToStr(vCodProduto_Pos);
     fDMCadMovProdST.cdsMovProdSTID_PRODUTO.AsInteger := vCodProduto_Pos;
-  end
+  end;
+
 end;
 
 end.

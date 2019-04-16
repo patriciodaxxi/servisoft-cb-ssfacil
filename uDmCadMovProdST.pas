@@ -91,12 +91,12 @@ type
     ctCommand : String;
     ctConsulta : String;
     ctConsProdST : String;
-
+    ctProduto : String;
     procedure prc_Localizar(ID : Integer); //-1 = Inclusão
     procedure prc_Inserir;
     procedure prc_Gravar;
     procedure prc_Excluir;
-
+    procedure prc_Abrir_Produto(ID : Integer);
   end;
 
 var
@@ -163,6 +163,7 @@ begin
   ctCommand    := sdsMovProdST.CommandText;
   ctConsulta   := sdsConsulta.CommandText;
   ctConsProdST := sdsConsProdST.CommandText;
+  ctProduto    := sdsProduto.CommandText;
 
   cdsProduto.Open;
 
@@ -204,6 +205,15 @@ procedure TDmCadMovProdST.DoLogAdditionalValues(ATableName: string;
   var AValues: TArrayLogData; var UserName: string);
 begin
   UserName := vUsuario;
+end;
+
+procedure TDmCadMovProdST.prc_Abrir_Produto(ID: Integer);
+begin
+  cdsProduto.Close;
+  sdsProduto.CommandText := ctProduto;
+  if ID > 0 then
+    sdsProduto.CommandText := sdsProduto.CommandText + ' WHERE ID = ' + IntToStr(ID);
+  cdsProduto.Open;
 end;
 
 end.

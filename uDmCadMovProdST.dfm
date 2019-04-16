@@ -194,7 +194,7 @@ object DmCadMovProdST: TDmCadMovProdST
   object sdsProduto: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT ID, REFERENCIA, NOME'#13#10'FROM PRODUTO'
+    CommandText = 'SELECT ID, REFERENCIA, NOME'#13#10'FROM PRODUTO'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
