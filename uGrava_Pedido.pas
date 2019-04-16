@@ -591,6 +591,7 @@ var
   vCampoSenha: String;
   vAux: Integer;
 begin
+  fDMCadPedido.sdsHist_Senha.CommandText := fDMCadPedido.ctHistSenha;
   fDMCadPedido.cdsHist_Senha.Close;
   fDMCadPedido.sdsHist_Senha.CommandText := fDMCadPedido.sdsHist_Senha.CommandText + ' WHERE ID = 0 ';
   fDMCadPedido.cdsHist_Senha.Open;

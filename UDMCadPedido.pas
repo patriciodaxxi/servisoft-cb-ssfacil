@@ -3481,7 +3481,7 @@ type
     { Public declarations }
     vMSGErro: String;
     vMsgErroParc: String;
-    ctCommand, ctConsulta, ctProduto, ctDuplicata : String;
+    ctCommand, ctConsulta, ctProduto, ctDuplicata, ctHistSenha : String;
     ctServico: String;
     ctCliente, ctCFOP: String;
     ctqProximoPedido: String;
@@ -3611,6 +3611,7 @@ begin
   ctCFOP       := sdsCFOP.CommandText;
   ctServico    := sdsServico.CommandText;
   ctDuplicata  := sdsDuplicata.CommandText;
+  ctHistSenha  := sdsHist_Senha.CommandText;
   vID_Variacao := 0;
   cdsParametros.Close;
   cdsFilial.Close;
