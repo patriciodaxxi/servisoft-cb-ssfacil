@@ -4195,9 +4195,10 @@ begin
   if FileExists(cdsPedidoImpENDLOGO.AsString) then
   begin
     if frxReport1.FindComponent('Picture1')<> nil then
+    begin
       TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImpENDLOGO.AsString);
+    end;
   end;
-
 end;
 
 procedure TDMCadPedido.cdsPedido_Item_TipoCalcFields(DataSet: TDataSet);
@@ -4378,14 +4379,17 @@ begin
 
   if vTipo_Rel_Ped = 'PICTO' then
     Exit;
-  if vNum_Rel_Fast = 3 then
-  begin
-    TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture := nil;
-    if FileExists(mItensImpFoto_End.AsString) then
+
+  try
+    if (vNum_Rel_Fast = 3) then
     begin
-      TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture.LoadFromFile(mItensImpFoto_End.AsString);
-      ShowMessage(mItensImpFoto_End.AsString + ' Acima');
+      TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture := nil;
+      if FileExists(mItensImpFoto_End.AsString) then
+      begin
+        TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture.LoadFromFile(mItensImpFoto_End.AsString);
+      end;
     end;
+  except
   end;
 
   if (vNum_Rel_Fast > 1) or (vTipo_Rel_Ped = 'P') or (vTipo_Rel_Ped = 'R') and (cdsParametrosUSA_GRADE.AsString = 'S') then
@@ -4427,14 +4431,16 @@ begin
       end;
     end;
 
-    if vNum_Rel_Fast = 3 then
-    begin
-      TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture := nil;
-      if FileExists(mItensImpFoto_End.AsString) then
+    try
+      if vNum_Rel_Fast = 3 then
       begin
-        TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture.LoadFromFile(mItensImpFoto_End.AsString);
-        ShowMessage(mItensImpFoto_End.AsString + ' Abaixo');
-    end;
+       TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture := nil;
+        if FileExists(mItensImpFoto_End.AsString) then
+        begin
+          TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture.LoadFromFile(mItensImpFoto_End.AsString);
+        end;
+      end;
+    except
     end;
 
     i := 0;
@@ -4508,6 +4514,7 @@ begin
       TfrxMemoView(frxReport1.FindComponent('Qtd_S'+vCompl2+IntToStr(i))).Visible   := True;
     end;
   end;
+
 end;
 
 procedure TDMCadPedido.frxDBDataset1First(Sender: TObject);
