@@ -366,9 +366,9 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
     Top = 137
     Width = 993
     Height = 340
-    ActivePage = ts_Centro_Orcamento
+    ActivePage = TS_Resumido
     Align = alClient
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 2
     FixedDimension = 19
     object TS_Resumido: TRzTabSheet

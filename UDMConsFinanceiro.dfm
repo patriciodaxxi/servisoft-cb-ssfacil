@@ -1899,7 +1899,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43572.599348611110000000
+    ReportOptions.LastChange = 43572.654736087960000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -1930,15 +1930,15 @@ object DMConsFinanceiro: TDMConsFinanceiro
       BottomMargin = 10.000000000000000000
       object MasterData1: TfrxMasterData
         FillType = ftBrush
-        Height = 22.677180000000000000
+        Height = 18.897650000000000000
         Top = 211.653680000000000000
         Width = 718.110700000000000000
-        DataSet = frxCentroCusto
-        DataSetName = 'frxCentroCusto'
+        DataSet = frxCCustoOrcamento
+        DataSetName = 'frxCCustoOrcamento'
         RowCount = 0
         object Memo5: TfrxMemoView
           Left = 544.252320000000000000
-          Top = 3.779530000000000000
+          Top = 2.779530000000000000
           Width = 94.488250000000000000
           Height = 11.338590000000000000
           DisplayFormat.FormatStr = '%2.2n'
@@ -1954,8 +1954,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Memo7: TfrxMemoView
-          Left = 18.897650000000000000
-          Top = 3.779530000000000000
+          Left = 15.118120000000000000
+          Top = 2.779530000000000000
           Width = 90.708720000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -1968,8 +1968,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Memo3: TfrxMemoView
-          Left = 124.724490000000000000
-          Top = 3.779530000000000000
+          Left = 120.724490000000000000
+          Top = 2.779530000000000000
           Width = 294.803340000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -2013,7 +2013,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Memo.UTF8 = (
-            'Contas de Or'#195#167'amento por Centro de Custo')
+            'Centro de Custo por Contas de Or'#195#167'amento ')
           ParentFont = False
         end
         object Line2: TfrxLineView
@@ -2076,7 +2076,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 294.803340000000000000
+        Top = 332.598640000000000000
         Width = 718.110700000000000000
       end
       object ColumnHeader1: TfrxColumnHeader
@@ -2099,7 +2099,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Memo9: TfrxMemoView
-          Left = 124.724490000000000000
+          Left = 120.724490000000000000
+          Top = 3.779530000000000000
           Width = 181.417440000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -2143,20 +2144,63 @@ object DMConsFinanceiro: TDMConsFinanceiro
         Width = 718.110700000000000000
         Condition = 'frxCCustoOrcamento."CODIGO_GRUPO"'
         object Memo13: TfrxMemoView
-          Left = 11.338590000000000000
+          Left = 37.795300000000000000
           Top = 3.779530000000000000
           Width = 347.716760000000000000
-          Height = 11.338590000000000000
+          Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -9
+          Font.Height = -11
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Memo.UTF8 = (
             
               '[frxCCustoOrcamento."CODIGO_GRUPO"] - [frxCCustoOrcamento."NOME_' +
               'GRUPO"]')
           ParentFont = False
+        end
+      end
+      object GroupFooter1: TfrxGroupFooter
+        FillType = ftBrush
+        Height = 18.897650000000000000
+        Top = 253.228510000000000000
+        Width = 718.110700000000000000
+        object Memo4: TfrxMemoView
+          Left = 98.267780000000000000
+          Width = 68.031540000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'Total')
+          ParentFont = False
+        end
+        object SysMemo1: TfrxSysMemoView
+          Left = 430.866420000000000000
+          Width = 207.874150000000000000
+          Height = 11.338590000000000000
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[SUM(<frxCCustoOrcamento."VLR_PARCELA">,MasterData1)]')
+          ParentFont = False
+        end
+        object Line3: TfrxLineView
+          Left = 3.779530000000000000
+          Top = 15.118120000000000000
+          Width = 708.571428570000000000
+          Color = clBlack
+          Frame.ShadowColor = clWhite
+          Diagonal = True
         end
       end
     end
