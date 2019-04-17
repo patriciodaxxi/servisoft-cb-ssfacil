@@ -397,7 +397,8 @@ begin
                                                             0, //VENDEDOR
                                                             0,
                                                             0, //PERC. COMISSAO
-                                                            0,0,vTerminal,0,'N');
+                                                            0,0,vTerminal,0,'N',
+                                                            0,0,0,0,0,0);
 
     fDmDevolucao.cdsDevolucaoItens.Post;
 
