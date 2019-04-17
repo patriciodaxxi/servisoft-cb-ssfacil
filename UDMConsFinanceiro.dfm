@@ -1,8 +1,8 @@
 object DMConsFinanceiro: TDMConsFinanceiro
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 221
-  Top = 135
+  Left = 279
+  Top = 112
   Height = 653
   Width = 874
   object sdsFilial: TSQLDataSet
@@ -12,20 +12,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 40
+    Left = 72
+    Top = 24
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 144
-    Top = 40
+    Left = 104
+    Top = 24
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 192
-    Top = 40
+    Left = 136
+    Top = 24
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -41,8 +41,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 232
-    Top = 40
+    Left = 168
+    Top = 24
   end
   object sdsConsulta_Conta_Orc: TSQLDataSet
     NoMetadata = True
@@ -59,20 +59,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 104
+    Left = 72
+    Top = 80
   end
   object dspConsulta_Conta_Orc: TDataSetProvider
     DataSet = sdsConsulta_Conta_Orc
-    Left = 144
-    Top = 104
+    Left = 104
+    Top = 80
   end
   object cdsConsulta_Conta_Orc: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsulta_Conta_Orc'
-    Left = 192
-    Top = 104
+    Left = 136
+    Top = 80
     object cdsConsulta_Conta_OrcVLR_PARCELA: TFloatField
       FieldName = 'VLR_PARCELA'
     end
@@ -155,8 +155,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
     Params = <>
     StoreDefs = True
     OnNewRecord = mConta_OrcNewRecord
-    Left = 416
-    Top = 56
+    Left = 504
+    Top = 80
     Data = {
       E10000009619E0BD010000001800000009000000000003000000E10002494404
       0001000000000006436F6469676F010049000000010005574944544802000200
@@ -213,8 +213,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'FROM CONTA_ORCAMENTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 592
-    Top = 48
+    Left = 504
+    Top = 24
     object qConta_OrcamentoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -272,8 +272,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsmConta_Orc: TDataSource
     DataSet = mConta_Orc
-    Left = 456
-    Top = 56
+    Left = 536
+    Top = 80
   end
   object sdsConsulta_Conta_Orc_Dt: TSQLDataSet
     NoMetadata = True
@@ -291,20 +291,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 168
+    Left = 72
+    Top = 128
   end
   object dspConsulta_Conta_Orc_Dt: TDataSetProvider
     DataSet = sdsConsulta_Conta_Orc_Dt
-    Left = 144
-    Top = 168
+    Left = 104
+    Top = 128
   end
   object cdsConsulta_Conta_Orc_Dt: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsulta_Conta_Orc_Dt'
-    Left = 192
-    Top = 168
+    Left = 136
+    Top = 128
     object cdsConsulta_Conta_Orc_DtVLR_PARCELA: TFloatField
       FieldName = 'VLR_PARCELA'
     end
@@ -435,8 +435,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 416
-    Top = 104
+    Left = 504
+    Top = 240
     Data = {
       E20100009619E0BD010000001800000013000000000003000000E20107546970
       6F5F455301004900000001000557494454480200020001000C49445F436F6E74
@@ -530,8 +530,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsmConta_Orc_Dt_ant: TDataSource
     DataSet = mConta_Orc_Dt_ant
-    Left = 456
-    Top = 104
+    Left = 536
+    Top = 240
   end
   object mConta_Orc_Dt: TClientDataSet
     Active = True
@@ -652,8 +652,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 416
-    Top = 152
+    Left = 504
+    Top = 136
     Data = {
       460200009619E0BD020000001800000018000000000003000000460207546970
       6F5F455301004900000001000557494454480200020001000C49445F436F6E74
@@ -765,8 +765,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsmConta_Orc_Dt: TDataSource
     DataSet = mConta_Orc_Dt
-    Left = 456
-    Top = 152
+    Left = 536
+    Top = 136
   end
   object sdsDespesa: TSQLDataSet
     NoMetadata = True
@@ -783,20 +783,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 248
+    Left = 72
+    Top = 176
   end
   object dspDespesa: TDataSetProvider
     DataSet = sdsDespesa
-    Left = 144
-    Top = 248
+    Left = 104
+    Top = 176
   end
   object cdsDespesa: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspDespesa'
-    Left = 192
-    Top = 248
+    Left = 136
+    Top = 176
     object cdsDespesaNUMDUPLICATA: TStringField
       FieldName = 'NUMDUPLICATA'
     end
@@ -927,8 +927,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
     Params = <>
     StoreDefs = True
     OnNewRecord = mDespesaNewRecord
-    Left = 424
-    Top = 296
+    Left = 504
+    Top = 184
     Data = {
       780100009619E0BD01000000180000000F000000000003000000780109447445
       6D697373616F04000600000000001249445F436F6E7461734F7263616D656E74
@@ -1016,8 +1016,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsmDespesa: TDataSource
     DataSet = mDespesa
-    Left = 472
-    Top = 296
+    Left = 536
+    Top = 184
   end
   object qNota_Entrada: TSQLQuery
     MaxBlobSize = -1
@@ -1032,8 +1032,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'FROM NOTAFISCAL N'
       'WHERE N.ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 688
-    Top = 48
+    Left = 568
+    Top = 24
     object qNota_EntradaVLR_ICMS: TFloatField
       FieldName = 'VLR_ICMS'
     end
@@ -1053,20 +1053,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 320
+    Left = 72
+    Top = 232
   end
   object dspFornecedor: TDataSetProvider
     DataSet = sdsFornecedor
-    Left = 144
-    Top = 320
+    Left = 104
+    Top = 232
   end
   object cdsFornecedor: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFornecedor'
-    Left = 192
-    Top = 320
+    Left = 136
+    Top = 232
     object cdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -1082,8 +1082,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsFornecedor: TDataSource
     DataSet = cdsFornecedor
-    Left = 232
-    Top = 320
+    Left = 168
+    Top = 232
   end
   object sdsOC_Pendente: TSQLDataSet
     NoMetadata = True
@@ -1101,20 +1101,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
-    Top = 384
+    Left = 72
+    Top = 288
   end
   object dspOC_Pendente: TDataSetProvider
     DataSet = sdsOC_Pendente
-    Left = 152
-    Top = 384
+    Left = 104
+    Top = 288
   end
   object cdsOC_Pendente: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspOC_Pendente'
-    Left = 200
-    Top = 384
+    Left = 136
+    Top = 288
     object cdsOC_PendenteTIPO_REG: TStringField
       FieldName = 'TIPO_REG'
       FixedChar = True
@@ -1168,8 +1168,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'FROM PARAMETROS_CTA_ORC'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 736
-    Top = 48
+    Left = 600
+    Top = 24
     object qParametros_Cta_OrcID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1193,20 +1193,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 352
-    Top = 416
+    Left = 264
+    Top = 192
   end
   object dspPedido_Pend: TDataSetProvider
     DataSet = sdsPedido_Pend
-    Left = 400
-    Top = 416
+    Left = 296
+    Top = 192
   end
   object cdsPedido_Pend: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPedido_Pend'
-    Left = 448
-    Top = 416
+    Left = 328
+    Top = 192
     object cdsPedido_PendID_CLIENTE: TIntegerField
       FieldName = 'ID_CLIENTE'
     end
@@ -1250,20 +1250,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 592
-    Top = 272
+    Left = 264
+    Top = 136
   end
   object dspDuplicata_Det: TDataSetProvider
     DataSet = sdsDuplicata_Det
-    Left = 648
-    Top = 272
+    Left = 296
+    Top = 136
   end
   object cdsDuplicata_Det: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspDuplicata_Det'
-    Left = 696
-    Top = 272
+    Left = 328
+    Top = 136
     object cdsDuplicata_DetNUMDUPLICATA: TStringField
       FieldName = 'NUMDUPLICATA'
     end
@@ -1302,13 +1302,13 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsDuplicata_det: TDataSource
     DataSet = cdsDuplicata_Det
-    Left = 744
-    Top = 272
+    Left = 360
+    Top = 136
   end
   object dsPedido_Pend: TDataSource
     DataSet = cdsPedido_Pend
-    Left = 488
-    Top = 416
+    Left = 360
+    Top = 192
   end
   object sdsDuplicata_Cli: TSQLDataSet
     NoMetadata = True
@@ -1321,20 +1321,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 592
-    Top = 216
+    Left = 264
+    Top = 80
   end
   object dspDuplicata_Cli: TDataSetProvider
     DataSet = sdsDuplicata_Cli
-    Left = 640
-    Top = 216
+    Left = 296
+    Top = 80
   end
   object cdsDuplicata_Cli: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspDuplicata_Cli'
-    Left = 688
-    Top = 216
+    Left = 328
+    Top = 80
     object cdsDuplicata_CliVLR_PARCELA: TFloatField
       FieldName = 'VLR_PARCELA'
       DisplayFormat = '0.00'
@@ -1357,8 +1357,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsDuplicata_Cli: TDataSource
     DataSet = cdsDuplicata_Cli
-    Left = 736
-    Top = 216
+    Left = 360
+    Top = 80
   end
   object sdsPedido_Cli: TSQLDataSet
     NoMetadata = True
@@ -1372,20 +1372,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 352
-    Top = 360
+    Left = 72
+    Top = 384
   end
   object dspPedido_Cli: TDataSetProvider
     DataSet = sdsPedido_Cli
-    Left = 400
-    Top = 360
+    Left = 104
+    Top = 384
   end
   object cdsPedido_Cli: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPedido_Cli'
-    Left = 448
-    Top = 360
+    Left = 136
+    Top = 384
     object cdsPedido_CliID_CLIENTE: TIntegerField
       FieldName = 'ID_CLIENTE'
     end
@@ -1410,8 +1410,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsPedido_Cli: TDataSource
     DataSet = cdsPedido_Cli
-    Left = 488
-    Top = 360
+    Left = 168
+    Top = 384
   end
   object sdsPrazoMedio: TSQLDataSet
     NoMetadata = True
@@ -1423,21 +1423,21 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 592
-    Top = 160
+    Left = 264
+    Top = 24
   end
   object dspPrazoMedio: TDataSetProvider
     DataSet = sdsPrazoMedio
-    Left = 640
-    Top = 160
+    Left = 296
+    Top = 24
   end
   object cdsPrazoMedio: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'QTDDias'
     Params = <>
     ProviderName = 'dspPrazoMedio'
-    Left = 688
-    Top = 160
+    Left = 328
+    Top = 24
     object cdsPrazoMedioQTDDIAS: TIntegerField
       FieldName = 'QTDDIAS'
     end
@@ -1452,8 +1452,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsPrazoMedio: TDataSource
     DataSet = cdsPrazoMedio
-    Left = 736
-    Top = 160
+    Left = 360
+    Top = 24
   end
   object mPrazo: TClientDataSet
     Active = True
@@ -1484,8 +1484,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
     IndexFieldNames = 'Item'
     Params = <>
     StoreDefs = True
-    Left = 592
-    Top = 104
+    Left = 504
+    Top = 344
     Data = {
       730000009619E0BD010000001800000005000000000003000000730009446573
       63726963616F0100490000000100055749445448020002003C00075174644469
@@ -1511,8 +1511,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsmPrazo: TDataSource
     DataSet = mPrazo
-    Left = 640
-    Top = 104
+    Left = 536
+    Top = 344
   end
   object sdsCliente: TSQLDataSet
     NoMetadata = True
@@ -1523,21 +1523,21 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 352
-    Top = 480
+    Left = 264
+    Top = 240
   end
   object dspCliente: TDataSetProvider
     DataSet = sdsCliente
-    Left = 384
-    Top = 480
+    Left = 296
+    Top = 240
   end
   object cdsCliente: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCliente'
-    Left = 424
-    Top = 480
+    Left = 328
+    Top = 240
     object cdsClienteCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -1553,8 +1553,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsCliente: TDataSource
     DataSet = cdsCliente
-    Left = 464
-    Top = 480
+    Left = 360
+    Top = 240
   end
   object qConta_Orcamento_Ccusto: TSQLQuery
     MaxBlobSize = -1
@@ -1573,8 +1573,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'left join CENTROCUSTO CC on CC.ID = COC.ID_CENTROCUSTO'
       'where CO.ID = :ID   ')
     SQLConnection = dmDatabase.scoDados
-    Left = 640
-    Top = 48
+    Left = 536
+    Top = 24
     object qConta_Orcamento_CcustoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1677,20 +1677,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
-    Top = 440
+    Left = 72
+    Top = 336
   end
   object dspConsulta_Conta_Orc_CCus: TDataSetProvider
     DataSet = sdsConsulta_Conta_Orc_CCus
-    Left = 152
-    Top = 440
+    Left = 104
+    Top = 336
   end
   object cdsConsulta_Conta_Orc_CCus: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsulta_Conta_Orc_CCus'
-    Left = 200
-    Top = 440
+    Left = 136
+    Top = 336
     object cdsConsulta_Conta_Orc_CCusVLR_PARCELA: TFloatField
       FieldName = 'VLR_PARCELA'
     end
@@ -1812,8 +1812,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
     IndexFieldNames = 'ID;ID_CCUSTO'
     Params = <>
     StoreDefs = True
-    Left = 416
-    Top = 208
+    Left = 504
+    Top = 296
     Data = {
       630100009619E0BD01000000180000000D000000000003000000630102494404
       0001000000000006436F6469676F010049000000010005574944544802000200
@@ -1886,8 +1886,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object dsmContas_Orc_CCusto: TDataSource
     DataSet = mContas_Orc_CCusto
-    Left = 464
-    Top = 208
+    Left = 536
+    Top = 296
   end
   object frxReport1: TfrxReport
     Tag = 1
@@ -1899,7 +1899,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43558.481186296300000000
+    ReportOptions.LastChange = 43572.599348611110000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -1907,12 +1907,12 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'end.')
     OnBeforePrint = frxReport1BeforePrint
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 592
-    Top = 328
+    Left = 512
+    Top = 416
     Datasets = <
       item
-        DataSet = frxCentroCusto
-        DataSetName = 'frxCentroCusto'
+        DataSet = frxCCustoOrcamento
+        DataSetName = 'frxCCustoOrcamento'
       end>
     Variables = <>
     Style = <>
@@ -1931,39 +1931,11 @@ object DMConsFinanceiro: TDMConsFinanceiro
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 22.677180000000000000
-        Top = 166.299320000000000000
+        Top = 211.653680000000000000
         Width = 718.110700000000000000
         DataSet = frxCentroCusto
         DataSetName = 'frxCentroCusto'
         RowCount = 0
-        object Memo3: TfrxMemoView
-          Left = 15.118120000000000000
-          Top = 3.779530000000000000
-          Width = 68.031540000000000000
-          Height = 11.338590000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            '[frxCentroCusto."Codigo"]')
-          ParentFont = False
-        end
-        object Memo4: TfrxMemoView
-          Left = 94.488250000000000000
-          Top = 3.779530000000000000
-          Width = 185.196970000000000000
-          Height = 11.338590000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            '[frxCentroCusto."Nome"]')
-          ParentFont = False
-        end
         object Memo5: TfrxMemoView
           Left = 544.252320000000000000
           Top = 3.779530000000000000
@@ -1978,32 +1950,13 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Font.Style = []
           HAlign = haRight
           Memo.UTF8 = (
-            '[frxCentroCusto."Vlr_Total"]')
+            '[frxCCustoOrcamento."VLR_PARCELA"]')
           ParentFont = False
-        end
-        object Memo6: TfrxMemoView
-          Left = 298.582870000000000000
-          Top = 3.779530000000000000
-          Width = 52.913420000000000000
-          Height = 11.338590000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            '[frxCentroCusto."Codigo_CCusto"]')
-          ParentFont = False
-          Formats = <
-            item
-            end
-            item
-            end>
         end
         object Memo7: TfrxMemoView
-          Left = 362.834880000000000000
+          Left = 18.897650000000000000
           Top = 3.779530000000000000
-          Width = 166.299320000000000000
+          Width = 90.708720000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2011,7 +1964,21 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Font.Name = 'Arial'
           Font.Style = []
           Memo.UTF8 = (
-            '[frxCentroCusto."Nome_CCusto"]')
+            '[frxCCustoOrcamento."CONTA_ORCAMENTO"]')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 124.724490000000000000
+          Top = 3.779530000000000000
+          Width = 294.803340000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            '[frxCCustoOrcamento."NOME_ORCAMENTO"]')
           ParentFont = False
         end
       end
@@ -2109,7 +2076,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 249.448980000000000000
+        Top = 294.803340000000000000
         Width = 718.110700000000000000
       end
       object ColumnHeader1: TfrxColumnHeader
@@ -2132,8 +2099,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Memo9: TfrxMemoView
-          Left = 94.488250000000000000
-          Top = 3.779530000000000000
+          Left = 124.724490000000000000
           Width = 181.417440000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -2143,39 +2109,6 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Font.Style = [fsBold]
           Memo.UTF8 = (
             'Nome.Conta')
-          ParentFont = False
-        end
-        object Memo10: TfrxMemoView
-          Left = 298.582870000000000000
-          Top = 3.779530000000000000
-          Width = 52.913420000000000000
-          Height = 11.338590000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8 = (
-            'Cod.CCusto')
-          ParentFont = False
-          Formats = <
-            item
-            end
-            item
-            end>
-        end
-        object Memo11: TfrxMemoView
-          Left = 362.834880000000000000
-          Top = 3.779530000000000000
-          Width = 166.299320000000000000
-          Height = 11.338590000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          Memo.UTF8 = (
-            'Nome CCusto')
           ParentFont = False
         end
         object Memo12: TfrxMemoView
@@ -2203,6 +2136,29 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Diagonal = True
         end
       end
+      object GroupHeader1: TfrxGroupHeader
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 166.299320000000000000
+        Width = 718.110700000000000000
+        Condition = 'frxCCustoOrcamento."CODIGO_GRUPO"'
+        object Memo13: TfrxMemoView
+          Left = 11.338590000000000000
+          Top = 3.779530000000000000
+          Width = 347.716760000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            
+              '[frxCCustoOrcamento."CODIGO_GRUPO"] - [frxCCustoOrcamento."NOME_' +
+              'GRUPO"]')
+          ParentFont = False
+        end
+      end
     end
   end
   object frxCentroCusto: TfrxDBDataset
@@ -2224,7 +2180,150 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'Vlr_CentroCusto=Vlr_CentroCusto')
     DataSource = dsmContas_Orc_CCusto
     BCDToCurrency = False
+    Left = 552
+    Top = 416
+  end
+  object sdsCCustoOrcamento: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select sum(iif(DDCC.VALOR > 0, DDCC.VALOR, DD.VLR_PARCELA)) VLR_' +
+      'PARCELA, CC.CODIGO CODIGO_GRUPO,'#13#10'       CC1.CODIGO CODIGO_GRUPO' +
+      '_SUP, CC.DESCRICAO NOME_GRUPO, CO.CODIGO CONTA_ORCAMENTO, DD.ID_' +
+      'CONTA_ORCAMENTO,  CO.DESCRICAO NOME_ORCAMENTO'#13#10'from DUPLICATA DD' +
+      #13#10'left join DUPLICATA_CCUSTO DDCC on DD.ID = DDCC.ID'#13#10'left join ' +
+      'CENTROCUSTO CC on CC.ID = DDCC.ID_CENTROCUSTO'#13#10'left join CENTROC' +
+      'USTO CC1 on CC1.ID = CC.SUPERIOR'#13#10'left join CONTA_ORCAMENTO CO o' +
+      'n CO.ID = DD.ID_CONTA_ORCAMENTO'#13#10'where DD.DTVENCIMENTO between :' +
+      'DTINICIAL and :DTFINAL and'#13#10'      ((:ID_CENTROCUSTO = 0) or (DDC' +
+      'C.ID_CENTROCUSTO = :ID_CENTROCUSTO)) and'#13#10'      DDCC.ID_CENTROCU' +
+      'STO > 0'#13#10'group by CC.CODIGO, CC1.CODIGO, CC.DESCRICAO, CO.CODIGO' +
+      ', DD.ID_CONTA_ORCAMENTO, CO.DESCRICAO'#13#10'order by CC.CODIGO'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'DTINICIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'DTFINAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_CENTROCUSTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_CENTROCUSTO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 264
+    Top = 296
+  end
+  object dspCCustoOrcamento: TDataSetProvider
+    DataSet = sdsCCustoOrcamento
+    Left = 296
+    Top = 296
+  end
+  object cdsCCustoOrcamento: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCCustoOrcamento'
+    Left = 328
+    Top = 296
+    object cdsCCustoOrcamentoVLR_PARCELA: TFloatField
+      DisplayLabel = 'Vlr Parcela'
+      FieldName = 'VLR_PARCELA'
+      DisplayFormat = '##0.00'
+    end
+    object cdsCCustoOrcamentoCODIGO_GRUPO: TStringField
+      DisplayLabel = 'C'#243'digo Grupo'
+      FieldName = 'CODIGO_GRUPO'
+    end
+    object cdsCCustoOrcamentoCODIGO_GRUPO_SUP: TStringField
+      DisplayLabel = 'C'#243'digo Superior'
+      FieldName = 'CODIGO_GRUPO_SUP'
+    end
+    object cdsCCustoOrcamentoNOME_GRUPO: TStringField
+      DisplayLabel = 'Nome Grupo'
+      FieldName = 'NOME_GRUPO'
+      Size = 50
+    end
+    object cdsCCustoOrcamentoCONTA_ORCAMENTO: TStringField
+      DisplayLabel = 'Conta Or'#231'amento'
+      FieldName = 'CONTA_ORCAMENTO'
+    end
+    object cdsCCustoOrcamentoID_CONTA_ORCAMENTO: TIntegerField
+      FieldName = 'ID_CONTA_ORCAMENTO'
+    end
+    object cdsCCustoOrcamentoNOME_ORCAMENTO: TStringField
+      DisplayLabel = 'Nome Or'#231'amento'
+      FieldName = 'NOME_ORCAMENTO'
+      Size = 50
+    end
+  end
+  object dsCCustoOrcamento: TDataSource
+    DataSet = cdsCCustoOrcamento
+    Left = 360
+    Top = 296
+  end
+  object sdsCentroCusto: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, CODIGO, DESCRICAO FROM CENTROCUSTO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 264
+    Top = 344
+  end
+  object dspCentroCusto: TDataSetProvider
+    DataSet = sdsCentroCusto
+    Left = 296
+    Top = 344
+  end
+  object cdsCentroCusto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCentroCusto'
+    Left = 328
+    Top = 344
+    object cdsCentroCustoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsCentroCustoCODIGO: TStringField
+      FieldName = 'CODIGO'
+    end
+    object cdsCentroCustoDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 50
+    end
+  end
+  object dsCentroCusto: TDataSource
+    DataSet = cdsCentroCusto
+    Left = 360
+    Top = 344
+  end
+  object frxCCustoOrcamento: TfrxDBDataset
+    UserName = 'frxCCustoOrcamento'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'VLR_PARCELA=VLR_PARCELA'
+      'CODIGO_GRUPO=CODIGO_GRUPO'
+      'CODIGO_GRUPO_SUP=CODIGO_GRUPO_SUP'
+      'NOME_GRUPO=NOME_GRUPO'
+      'CONTA_ORCAMENTO=CONTA_ORCAMENTO'
+      'ID_CONTA_ORCAMENTO=ID_CONTA_ORCAMENTO'
+      'NOME_ORCAMENTO=NOME_ORCAMENTO')
+    DataSource = dsCCustoOrcamento
+    BCDToCurrency = False
     Left = 592
-    Top = 384
+    Top = 416
   end
 end

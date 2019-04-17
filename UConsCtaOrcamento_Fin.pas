@@ -40,6 +40,11 @@ type
     Label10: TLabel;
     ts_CentroCusto: TRzTabSheet;
     SMDBGrid2: TSMDBGrid;
+    ts_Centro_Orcamento: TRzTabSheet;
+    Panel3: TPanel;
+    SMDBGrid3: TSMDBGrid;
+    Label11: TLabel;
+    comboCentroCusto: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -61,6 +66,7 @@ type
     procedure prc_Le_Consulta_CCusto;
     procedure prc_Consultar_CCusto;
     procedure prc_Gravar_mConta_Orc_CCusto;
+    procedure prc_Consultar_CCusto_Orcamento;
   public
     { Public declarations }
 
@@ -119,11 +125,16 @@ begin
     fDMConsFinanceiro.mConta_Orc.IndexFieldNames := 'TIPO_ES;CODIGO';
   end
   else
+  if RzPageControl1.ActivePage = TS_Resumido then
   begin
     prc_Consultar_CCusto;
     prc_Le_Consulta_CCusto;
     fDMConsFinanceiro.mContas_Orc_CCusto.IndexFieldNames := 'TIPO_ES;CODIGO';
-  end;
+  end
+  else
+    prc_Consultar_CCusto_Orcamento;
+
+
   Label6.Caption := FormatFloat('###,###,###,###,##0.00', fDMConsFinanceiro.vTotal_Rec);
   Label8.Caption := FormatFloat('###,###,###,###,##0.00', fDMConsFinanceiro.vTotal_Desp);
   vAux := StrToFloat(FormatFloat('0.00', fDMConsFinanceiro.vTotal_Rec - fDMConsFinanceiro.vTotal_Desp));
@@ -173,6 +184,8 @@ begin
     RxDBLookupCombo1.KeyValue := fDMConsFinanceiro.cdsFilialID.AsInteger;
   DateEdit1.SetFocus;
   fDMConsFinanceiro.qParametros_Cta_Orc.Open;
+  fDMConsFinanceiro.cdsCentroCusto.Close;
+  fDMConsFinanceiro.cdsCentroCusto.Open;
 end;
 
 procedure TfrmConsCtaOrcamento_Fin.prc_Le_Consulta;
@@ -344,6 +357,28 @@ begin
     fDMConsFinanceiro.vDataFim := FormatDateTime('DD/MM/YYYY',DateEdit2.Date);
     fDMConsFinanceiro.frxReport1.ShowReport;
     SMDBGrid2.EnableScroll;
+  end
+  else if RzPageControl1.ActivePage = ts_Centro_Orcamento then
+  begin
+    if fDMConsFinanceiro.cdsCCustoOrcamento.IsEmpty then
+    begin
+      ShowMessage('Sem dados para imprimir, refaça a consulta!');
+      Exit;
+    end;
+    SMDBGrid3.DisableScroll;
+    fDMConsFinanceiro.cdsCCustoOrcamento.First;
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Orcamento_CentroCusto2.fr3';
+    if FileExists(vArq) then
+      fDMConsFinanceiro.frxReport1.Report.LoadFromFile(vArq)
+    else
+    begin
+      ShowMessage('Relatório não localizado! ' + vArq);
+      Exit;
+    end;
+    fDMConsFinanceiro.vDataIni := FormatDateTime('DD/MM/YYYY',DateEdit1.Date);
+    fDMConsFinanceiro.vDataFim := FormatDateTime('DD/MM/YYYY',DateEdit2.Date);
+    fDMConsFinanceiro.frxReport1.ShowReport;
+    SMDBGrid3.EnableScroll;
   end;
 
 end;
@@ -657,6 +692,18 @@ begin
     fDMConsFinanceiro.vTotal_Rec := StrToFloat(FormatFloat('0.00', fDMConsFinanceiro.vTotal_Rec + fDMConsFinanceiro.cdsConsulta_Conta_Orc_CCusVLR_PARCELA.AsFloat))
   else
     fDMConsFinanceiro.vTotal_Desp := StrToFloat(FormatFloat('0.00', fDMConsFinanceiro.vTotal_Desp + fDMConsFinanceiro.cdsConsulta_Conta_Orc_CCusVLR_PARCELA.AsFloat));
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.prc_Consultar_CCusto_Orcamento;
+begin
+  fDMConsFinanceiro.cdsCCustoOrcamento.Close;
+  fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
+  fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('DTFINAL').AsDate := DateEdit2.Date;
+  if (comboCentroCusto.KeyValue > 0) or (comboCentroCusto.KeyValue <> null) then
+    fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('ID_CENTROCUSTO').AsInteger := comboCentroCusto.KeyValue
+  else
+    fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('ID_CENTROCUSTO').AsInteger := 0;
+  fDMConsFinanceiro.cdsCCustoOrcamento.open;
 end;
 
 end.

@@ -1,6 +1,6 @@
 object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
-  Left = 228
-  Top = 77
+  Left = 289
+  Top = 65
   Width = 1009
   Height = 533
   Caption = 'frmConsCtaOrcamento_Fin'
@@ -19,7 +19,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
     Left = 0
     Top = 0
     Width = 993
-    Height = 117
+    Height = 137
     Align = alTop
     Color = clSilver
     TabOrder = 0
@@ -54,6 +54,13 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Height = 13
       Alignment = taRightJustify
       Caption = 'Op'#231#227'o dos T'#237'tulos:'
+    end
+    object Label11: TLabel
+      Left = 197
+      Top = 93
+      Width = 68
+      Height = 13
+      Caption = 'Centro Centro:'
     end
     object DateEdit1: TDateEdit
       Left = 266
@@ -149,7 +156,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
     end
     object btnConsultar: TNxButton
       Left = 265
-      Top = 85
+      Top = 105
       Width = 182
       Height = 30
       Caption = 'Efeturar Pesquisa'
@@ -221,7 +228,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
     end
     object btnImprimir: TNxButton
       Left = 446
-      Top = 85
+      Top = 105
       Width = 182
       Height = 30
       Caption = 'Imprimir'
@@ -295,7 +302,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Left = 1
       Top = 1
       Width = 145
-      Height = 115
+      Height = 135
       Align = alLeft
       Caption = ' Imprimir Detalhado '
       TabOrder = 8
@@ -324,6 +331,20 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
         TabOrder = 2
       end
     end
+    object comboCentroCusto: TRxDBLookupCombo
+      Left = 266
+      Top = 84
+      Width = 299
+      Height = 21
+      DropDownCount = 8
+      DropDownWidth = 300
+      Ctl3D = False
+      LookupField = 'ID'
+      LookupDisplay = 'DESCRICAO;CODIGO'
+      LookupSource = DMConsFinanceiro.dsCentroCusto
+      ParentCtl3D = False
+      TabOrder = 9
+    end
   end
   object StaticText1: TStaticText
     Left = 0
@@ -342,12 +363,12 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   end
   object RzPageControl1: TRzPageControl
     Left = 0
-    Top = 117
+    Top = 137
     Width = 993
-    Height = 360
-    ActivePage = ts_CentroCusto
+    Height = 340
+    ActivePage = ts_Centro_Orcamento
     Align = alClient
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 2
     FixedDimension = 19
     object TS_Resumido: TRzTabSheet
@@ -356,7 +377,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
         Left = 0
         Top = 0
         Width = 989
-        Height = 310
+        Height = 290
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFinanceiro.dsmConta_Orc
@@ -437,7 +458,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       end
       object Panel2: TPanel
         Left = 0
-        Top = 310
+        Top = 290
         Width = 989
         Height = 27
         Align = alBottom
@@ -531,7 +552,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
         Left = 0
         Top = 0
         Width = 989
-        Height = 337
+        Height = 317
         Align = alClient
         DataSource = DMConsFinanceiro.dsmContas_Orc_CCusto
         Font.Charset = DEFAULT_CHARSET
@@ -621,6 +642,87 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
             FieldName = 'Vlr_CentroCusto'
             Visible = True
           end>
+      end
+    end
+    object ts_Centro_Orcamento: TRzTabSheet
+      Caption = 'Centro Custo/Or'#231'amento'
+      object Panel3: TPanel
+        Left = 0
+        Top = 0
+        Width = 989
+        Height = 317
+        Align = alClient
+        TabOrder = 0
+        object SMDBGrid3: TSMDBGrid
+          Left = 1
+          Top = 1
+          Width = 987
+          Height = 315
+          Align = alClient
+          DataSource = DMConsFinanceiro.dsCCustoOrcamento
+          Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Flat = False
+          BandsFont.Charset = DEFAULT_CHARSET
+          BandsFont.Color = clWindowText
+          BandsFont.Height = -11
+          BandsFont.Name = 'MS Sans Serif'
+          BandsFont.Style = []
+          Groupings = <>
+          GridStyle.Style = gsCustom
+          GridStyle.OddColor = clWindow
+          GridStyle.EvenColor = clWindow
+          TitleHeight.PixelCount = 24
+          FooterColor = clBtnFace
+          ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+          RegistryKey = 'Software\Scalabium'
+          RegistrySection = 'SMDBGrid'
+          WidthOfIndicator = 11
+          DefaultRowHeight = 17
+          ScrollBars = ssHorizontal
+          ColCount = 7
+          RowCount = 2
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'CODIGO_GRUPO'
+              Width = 91
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CODIGO_GRUPO_SUP'
+              Width = 103
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOME_GRUPO'
+              Width = 272
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CONTA_ORCAMENTO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOME_ORCAMENTO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VLR_PARCELA'
+              Width = 79
+              Visible = True
+            end>
+        end
       end
     end
   end

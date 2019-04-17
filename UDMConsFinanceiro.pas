@@ -308,6 +308,25 @@ type
     mContas_Orc_CCustoVlr_CentroCusto: TFloatField;
     frxReport1: TfrxReport;
     frxCentroCusto: TfrxDBDataset;
+    sdsCCustoOrcamento: TSQLDataSet;
+    dspCCustoOrcamento: TDataSetProvider;
+    cdsCCustoOrcamento: TClientDataSet;
+    dsCCustoOrcamento: TDataSource;
+    cdsCCustoOrcamentoVLR_PARCELA: TFloatField;
+    cdsCCustoOrcamentoCODIGO_GRUPO: TStringField;
+    cdsCCustoOrcamentoCODIGO_GRUPO_SUP: TStringField;
+    cdsCCustoOrcamentoNOME_GRUPO: TStringField;
+    cdsCCustoOrcamentoCONTA_ORCAMENTO: TStringField;
+    cdsCCustoOrcamentoID_CONTA_ORCAMENTO: TIntegerField;
+    cdsCCustoOrcamentoNOME_ORCAMENTO: TStringField;
+    sdsCentroCusto: TSQLDataSet;
+    dspCentroCusto: TDataSetProvider;
+    cdsCentroCusto: TClientDataSet;
+    dsCentroCusto: TDataSource;
+    cdsCentroCustoID: TIntegerField;
+    cdsCentroCustoCODIGO: TStringField;
+    cdsCentroCustoDESCRICAO: TStringField;
+    frxCCustoOrcamento: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConta_OrcNewRecord(DataSet: TDataSet);
     procedure mDespesaNewRecord(DataSet: TDataSet);
@@ -317,7 +336,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    ctConsulta_Conta_Orc, ctConsulta_Conta_Orc_Dt, ctConsulta_Conta_Orc_CCusto : String;
+    ctConsulta_Conta_Orc, ctConsulta_Conta_Orc_Dt, ctConsulta_Conta_Orc_CCusto, ctCCustoOrcamento : String;
     ctDespesa : String;
     ctOC_Pendente : String;
     ctDuplicata_Det : String;
@@ -356,6 +375,7 @@ begin
   ctConsulta_Conta_Orc    := sdsConsulta_Conta_Orc.CommandText;
   ctConsulta_Conta_Orc_CCusto := sdsConsulta_Conta_Orc_CCus.CommandText;
   ctConsulta_Conta_Orc_Dt := sdsConsulta_Conta_Orc_Dt.CommandText;
+  ctCCustoOrcamento       := sdsCCustoOrcamento.CommandText;
   ctDespesa               := sdsDespesa.CommandText;
   ctOC_Pendente           := sdsOC_Pendente.CommandText;
   ctDuplicata_Det         := sdsDuplicata_Det.CommandText;
