@@ -1379,11 +1379,14 @@ begin
 
   fDMCadPessoa.qFilial.Close;
   fDMCadPessoa.qFilial.Open;
+
   fDMCadPessoa.cdsConsultaCadastro.Close;
-  if fDMCadPessoa.qFilialPESSOA.AsString = 'F' then
-    texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 11)
-  else
-    texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 14);
+  //20/04/2019
+  texto := fnc_CNPJCFP_FilialNFeConfig;
+  //if fDMCadPessoa.qFilialPESSOA.AsString = 'F' then
+  //  texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 11)
+  //else
+  //  texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 14);
   vLocalServidorNFe := fDMCadPessoa.qParametrosLOCALSERVIDORNFE.AsString;
   if trim(fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString) <> '' then
     vLocalServidorNFe := fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString;
