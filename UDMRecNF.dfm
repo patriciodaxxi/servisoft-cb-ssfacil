@@ -1,7 +1,7 @@
 object DMRecNF: TDMRecNF
   OldCreateOrder = False
-  Left = 401
-  Top = 219
+  Left = 375
+  Top = 175
   Height = 406
   Width = 692
   object sdsNotaFiscal: TSQLDataSet
@@ -621,7 +621,7 @@ object DMRecNF: TDMRecNF
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43171.872272835650000000
+    ReportOptions.LastChange = 43572.707052418980000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     Left = 440
