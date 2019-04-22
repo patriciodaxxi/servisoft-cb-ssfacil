@@ -422,7 +422,7 @@ object DMCadFilial: TDMCadFilial
     BeforePost = cdsFilialBeforePost
     OnNewRecord = cdsFilialNewRecord
     Left = 136
-    Top = 32
+    Top = 31
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]

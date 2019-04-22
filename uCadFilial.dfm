@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_Config_Danfe_NFe
+        ActivePage = TS_NotaServico
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 9
+        TabIndex = 3
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -2598,6 +2598,16 @@ object frmCadFilial: TfrmCadFilial
             DataSource = DMCadFilial.dsFilial
             TabOrder = 13
             OnExit = DBEdit72Exit
+          end
+          object DBCheckBox24: TDBCheckBox
+            Left = 384
+            Top = 386
+            Width = 97
+            Height = 17
+            Caption = 'Enviar NFSe pelo ACBR'
+            TabOrder = 25
+            ValueChecked = 'True'
+            ValueUnchecked = 'False'
           end
         end
         object TS_SPED: TRzTabSheet
@@ -5270,7 +5280,7 @@ object frmCadFilial: TfrmCadFilial
             object gbxCustoVenda: TRzGroupBox
               Left = 25
               Top = 15
-              Width = 534
+              Width = 542
               Height = 226
               Anchors = [akLeft, akTop, akRight]
               BorderColor = clNavy
@@ -5446,7 +5456,7 @@ object frmCadFilial: TfrmCadFilial
             object RzGroupBox3: TRzGroupBox
               Left = 257
               Top = 15
-              Width = 534
+              Width = 542
               Height = 226
               Anchors = [akLeft, akTop, akRight]
               BorderColor = clNavy
