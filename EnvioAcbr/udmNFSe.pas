@@ -60,7 +60,7 @@ implementation
 
 //uses UnitLibrary, DataModulo, pnfsNFSe;
 
-uses pnfsNFSe, DmdDatabase, uUtilPadrao, ACBrNFSeWebServices;
+uses DmdDatabase, uUtilPadrao;
 
 {$R *.dfm}
 

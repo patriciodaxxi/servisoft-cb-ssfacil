@@ -244,6 +244,9 @@ var
 begin
   vQtdEntrada := 0;
   vQtdSaida   := 0;
+  fDMConsEstoque.mEstoque_CentroCusto.close;
+  fDMConsEstoque.mEstoque_CentroCusto.CreateDataSet;
+  fDMConsEstoque.mEstoque_CentroCusto.EmptyDataSet;
 
   fDMConsEstoque.cdsEstoque_Mov.First;
   while not fDMConsEstoque.cdsEstoque_Mov.Eof do
@@ -252,6 +255,24 @@ begin
       vQtdEntrada := vQtdEntrada + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat
     else
       vQtdSaida := vQtdSaida + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat;
+    if fDMConsEstoque.cdsEstoque_MovTIPO_ES.AsString = 'S' then
+    begin
+     if not(fDMConsEstoque.mEstoque_CentroCusto.Locate('Id_Produto',fDMConsEstoque.cdsEstoque_MovID_PRODUTO.AsInteger,[loCaseInsensitive])) then
+       fDMConsEstoque.mEstoque_CentroCusto.Insert
+     else
+       fDMConsEstoque.mEstoque_CentroCusto.Edit;
+      fDMConsEstoque.mEstoque_CentroCustoId_Produto.AsInteger        := fDMConsEstoque.cdsEstoque_MovID_PRODUTO.AsInteger;
+      fDMConsEstoque.mEstoque_CentroCustoNome_Produto.AsString       := fDMConsEstoque.cdsEstoque_MovNOMEPRODUTO.AsString;
+      fDMConsEstoque.mEstoque_CentroCustoCodigo_Grupo.AsString       := fDMConsEstoque.cdsEstoque_MovCODIGO_GRUPO.AsString;
+      fDMConsEstoque.mEstoque_CentroCustoNome_Grupo.AsString         := fDMConsEstoque.cdsEstoque_MovNOME_GRUPO.AsString;
+      fDMConsEstoque.mEstoque_CentroCustoCodigo_CentroCusto.AsString := fDMConsEstoque.cdsEstoque_MovCODIGO_CCUSTO.AsString;
+      fDMConsEstoque.mEstoque_CentroCustoNome_CentroCusto.AsString   := fDMConsEstoque.cdsEstoque_MovNOME_CENTROCUSTO.AsString;
+      fDMConsEstoque.mEstoque_CentroCustoCodigo_Superior.AsString    := fDMConsEstoque.cdsEstoque_MovCODIGO_SUPERIOR.AsString;
+      fDMConsEstoque.mEstoque_CentroCustoNome_Superior.AsString      := fDMConsEstoque.cdsEstoque_MovDESC_SUPERIOR.AsString;
+      fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat                := fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat;
+      fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat            := fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat + (fDMConsEstoque.cdsEstoque_MovVLR_UNITARIO.AsFloat * fDMConsEstoque.cdsEstoque_MovQTD.AsFloat) ;
+      fDMConsEstoque.mEstoque_CentroCusto.Post;
+    end;
     fDMConsEstoque.cdsEstoque_Mov.Next;
   end;
 
@@ -259,7 +280,6 @@ begin
   lblEntrada.Caption := FormatFloat('###,###,##0.0000',vQtdEntrada);
   lblSaida.Caption   := FormatFloat('###,###,##0.0000',vQtdSaida);
   lblSaldo.Caption   := FormatFloat('###,###,##0.0000',vSaldo);
-
   SMDBGrid1.EnableScroll;
 end;
 
@@ -439,7 +459,8 @@ begin
   case ComboBox1.ItemIndex of
     0: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPRODUTO;TAMANHO;NOME_COR;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NOMEPESSOA;NUMNOTA';
     1: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPESSOA;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
-    3: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'CODIGO_CCUSTO;CODIGO_GRUPO;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
+//    3: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'CODIGO_CCUSTO;CODIGO_GRUPO;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
+    3: fDMConsEstoque.mEstoque_CentroCusto.IndexFieldNames := 'Codigo_CentroCusto;Codigo_Grupo;Nome_Produto';
   end;
   if (ckEstruturado.Checked) and (ComboBox1.ItemIndex < 2) then
     fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOME_GRUPO;'+fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames;
