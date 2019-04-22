@@ -56,6 +56,11 @@ object DMCadProvedor: TDMCadProvedor
       FixedChar = True
       Size = 1
     end
+    object sdsProvedorPERMITE_CANCELAMENTO: TStringField
+      FieldName = 'PERMITE_CANCELAMENTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspProvedor: TDataSetProvider
     DataSet = sdsProvedor
@@ -110,6 +115,11 @@ object DMCadProvedor: TDMCadProvedor
     end
     object cdsProvedorUSA_ATIVIDADE_CID_SERV: TStringField
       FieldName = 'USA_ATIVIDADE_CID_SERV'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProvedorPERMITE_CANCELAMENTO: TStringField
+      FieldName = 'PERMITE_CANCELAMENTO'
       FixedChar = True
       Size = 1
     end

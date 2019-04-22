@@ -1,8 +1,8 @@
 object DMCadNotaServico: TDMCadNotaServico
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 15
-  Top = 32
+  Left = 36
+  Top = 47
   Height = 670
   Width = 1310
   object sdsNotaServico: TSQLDataSet
@@ -1048,11 +1048,11 @@ object DMCadNotaServico: TDMCadNotaServico
       'SELECT NS.*, CLI.NOME NOME_CLIENTE, FIL.NOME_INTERNO FANTASIA_FI' +
       'LIAL, PR.NOME NOME_PROVEDOR, CLI.CNPJ_CPF,'#13#10'CLI.PESSOA,'#13#10'  (SELE' +
       'CT MIN(P.dtvencimento) DTVENCIMENTO'#13#10'     FROM notaservico_parc ' +
-      'P'#13#10'      WHERE P.ID = NS.ID)'#13#10'FROM NOTASERVICO NS'#13#10'INNER JOIN PE' +
-      'SSOA CLI'#13#10'  ON NS.ID_CLIENTE = CLI.CODIGO'#13#10'INNER JOIN FILIAL FIL' +
-      #13#10'ON NS.FILIAL = FIL.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CID.ID = FIL.I' +
-      'D_CIDADE'#13#10'LEFT JOIN PROVEDOR PR'#13#10'ON CID.ID_PROVEDOR = PR.ID'#13#10#13#10#13 +
-      #10
+      'P'#13#10'      WHERE P.ID = NS.ID), cid.envio_nfse, cid.nome cidade'#13#10'F' +
+      'ROM NOTASERVICO NS'#13#10'INNER JOIN PESSOA CLI'#13#10'  ON NS.ID_CLIENTE = ' +
+      'CLI.CODIGO'#13#10'INNER JOIN FILIAL FIL'#13#10'ON NS.FILIAL = FIL.ID'#13#10'LEFT J' +
+      'OIN CIDADE CID'#13#10'ON CID.ID = FIL.ID_CIDADE'#13#10'LEFT JOIN PROVEDOR PR' +
+      #13#10'ON CID.ID_PROVEDOR = PR.ID'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1355,6 +1355,15 @@ object DMCadNotaServico: TDMCadNotaServico
     object cdsNotaServico_ConsultaDTENTRADA: TDateField
       FieldName = 'DTENTRADA'
     end
+    object cdsNotaServico_ConsultaENVIO_NFSE: TStringField
+      FieldName = 'ENVIO_NFSE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsNotaServico_ConsultaCIDADE: TStringField
+      FieldName = 'CIDADE'
+      Size = 40
+    end
   end
   object dsNotaServico_Consulta: TDataSource
     DataSet = cdsNotaServico_Consulta
@@ -1396,12 +1405,12 @@ object DMCadNotaServico: TDMCadNotaServico
       'GIME_TIB_ESP, CID.CODMUNICIPIO, PRO.TIPO_RETORNO,'#13#10'PRO.mostrar_a' +
       'liquota_pd, PRO.inf_cod_servico, CID.LINKNFSE, CID.FONE_PREFEITU' +
       'RA, CID.SITE_PREFEITURA,'#13#10'CID.END_LOGO_PREFEITURA, PRO.usa_ativi' +
-      'dade_cid_serv, CID.CANCELAMENTO_NFSE'#13#10'FROM FILIAL FIL'#13#10'LEFT JOIN' +
-      ' NFSE_NATUREZA NAT ON (FIL.ID_NATUREZA = NAT.ID)'#13#10'LEFT JOIN SERV' +
-      'ICO SER ON (FIL.ID_SERVICO_SINT = SER.ID)'#13#10'LEFT JOIN REGIME_TRIB' +
-      ' RT ON (FIL.ID_REGIME_TRIB_NFSE = RT.ID)'#13#10'LEFT JOIN CIDADE CID O' +
-      'N (FIL.ID_CIDADE = CID.ID)'#13#10'LEFT JOIN PROVEDOR PRO ON (CID.ID_PR' +
-      'OVEDOR = PRO.ID)'#13#10
+      'dade_cid_serv, CID.CANCELAMENTO_NFSE, CID.envio_nfse'#13#10'FROM FILIA' +
+      'L FIL'#13#10'LEFT JOIN NFSE_NATUREZA NAT ON (FIL.ID_NATUREZA = NAT.ID)' +
+      #13#10'LEFT JOIN SERVICO SER ON (FIL.ID_SERVICO_SINT = SER.ID)'#13#10'LEFT ' +
+      'JOIN REGIME_TRIB RT ON (FIL.ID_REGIME_TRIB_NFSE = RT.ID)'#13#10'LEFT J' +
+      'OIN CIDADE CID ON (FIL.ID_CIDADE = CID.ID)'#13#10'LEFT JOIN PROVEDOR P' +
+      'RO ON (CID.ID_PROVEDOR = PRO.ID)'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1738,6 +1747,11 @@ object DMCadNotaServico: TDMCadNotaServico
     end
     object cdsFilialCANCELAMENTO_NFSE: TStringField
       FieldName = 'CANCELAMENTO_NFSE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilialENVIO_NFSE: TStringField
+      FieldName = 'ENVIO_NFSE'
       FixedChar = True
       Size = 1
     end
@@ -2969,8 +2983,8 @@ object DMCadNotaServico: TDMCadNotaServico
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT CID.*, PRO.TIPO_NATUREZA'#13#10'FROM CIDADE CID'#13#10'LEFT JOIN PROV' +
-      'EDOR PRO'#13#10'ON CID.ID_PROVEDOR = PRO.ID'#13#10
+      'SELECT CID.*, PRO.TIPO_NATUREZA,PRO.PERMITE_CANCELAMENTO'#13#10'FROM C' +
+      'IDADE CID'#13#10'LEFT JOIN PROVEDOR PRO'#13#10'ON CID.ID_PROVEDOR = PRO.ID'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3015,6 +3029,11 @@ object DMCadNotaServico: TDMCadNotaServico
     end
     object cdsCidadeCANCELAMENTO_NFSE: TStringField
       FieldName = 'CANCELAMENTO_NFSE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCidadePERMITE_CANCELAMENTO: TStringField
+      FieldName = 'PERMITE_CANCELAMENTO'
       FixedChar = True
       Size = 1
     end
@@ -3589,20 +3608,22 @@ object DMCadNotaServico: TDMCadNotaServico
       'FILIAL, FIL.INCENTIVO_CULTURAL,'#13#10'RT.CODIGO CODREGIME_TRIBUTACAO,' +
       ' RT.NOME NOME_REGIME_TRIBUTACAO, FIL.email EMAIL_FIL_CADASTRO,'#13#10 +
       'CID_TRIB.codmunicipio COD_MUNICIPIO_TRIB, COND.nome NOME_CONDPGT' +
-      'O, TCOB.nome NOME_TIPOCOBRANCA, SER.COD_SERVICO_EQUIV'#13#10'FROM NOTA' +
-      'SERVICO NS'#13#10'INNER JOIN PESSOA CLI  ON (NS.ID_CLIENTE = CLI.CODIG' +
-      'O)'#13#10'INNER JOIN SERVICO SER ON (NS.ID_SERVICO = SER.ID)'#13#10'INNER JO' +
-      'IN FILIAL FIL ON (NS.FILIAL = FIL.ID)'#13#10'LEFT JOIN NFSE_NATUREZA N' +
-      'AT ON (NS.ID_NATUREZA = NAT.ID)'#13#10'LEFT JOIN CIDADE CID ON (CLI.ID' +
-      '_CIDADE = CID.ID)'#13#10'LEFT JOIN CIDADE CID_FIL ON (FIL.ID_CIDADE = ' +
-      'CID_FIL.ID)'#13#10'LEFT JOIN CIDADE CID_TRIB ON (NS.ID_CIDADE_TRIB = C' +
-      'ID_TRIB.ID)'#13#10'LEFT JOIN CONDPGTO CP ON (NS.ID_CONDPGTO = CP.ID)'#13#10 +
-      'LEFT JOIN ATIVIDADE_CID ATI ON (NS.ID_ATIVIDADe_CID = ATI.ID)'#13#10'L' +
-      'EFT JOIN CNAE ON (NS.CNAE_NFSE = CNAE.CODIGO)'#13#10'LEFT JOIN PAIS ON' +
-      ' (PAIS.ID = CLI.ID_PAIS)'#13#10'LEFT JOIN REGIME_TRIB RT ON (FIL.id_re' +
-      'gime_trib_nfse = RT.id)'#13#10'LEFT JOIN condpgto COND ON (NS.id_condp' +
-      'gto = COND.id)'#13#10'LEFT JOIN tipocobranca TCOB ON (NS.id_tipo_cobra' +
-      'nca = TCOB.id)'#13#10
+      'O, TCOB.nome NOME_TIPOCOBRANCA, SER.COD_SERVICO_EQUIV,'#13#10'UF.CODUF' +
+      ' CODUF_FIL, UF2.coduf CODUF_CLI'#13#10'FROM NOTASERVICO NS'#13#10'INNER JOIN' +
+      ' PESSOA CLI  ON (NS.ID_CLIENTE = CLI.CODIGO)'#13#10'INNER JOIN SERVICO' +
+      ' SER ON (NS.ID_SERVICO = SER.ID)'#13#10'INNER JOIN FILIAL FIL ON (NS.F' +
+      'ILIAL = FIL.ID)'#13#10'LEFT JOIN UF ON FIL.UF = UF.UF'#13#10'LEFT JOIN UF UF' +
+      '2 ON CLI.UF = UF2.UF'#13#10'LEFT JOIN NFSE_NATUREZA NAT ON (NS.ID_NATU' +
+      'REZA = NAT.ID)'#13#10'LEFT JOIN CIDADE CID ON (CLI.ID_CIDADE = CID.ID)' +
+      #13#10'LEFT JOIN CIDADE CID_FIL ON (FIL.ID_CIDADE = CID_FIL.ID)'#13#10'LEFT' +
+      ' JOIN CIDADE CID_TRIB ON (NS.ID_CIDADE_TRIB = CID_TRIB.ID)'#13#10'LEFT' +
+      ' JOIN CONDPGTO CP ON (NS.ID_CONDPGTO = CP.ID)'#13#10'LEFT JOIN ATIVIDA' +
+      'DE_CID ATI ON (NS.ID_ATIVIDADe_CID = ATI.ID)'#13#10'LEFT JOIN CNAE ON ' +
+      '(NS.CNAE_NFSE = CNAE.CODIGO)'#13#10'LEFT JOIN PAIS ON (PAIS.ID = CLI.I' +
+      'D_PAIS)'#13#10'LEFT JOIN REGIME_TRIB RT ON (FIL.id_regime_trib_nfse = ' +
+      'RT.id)'#13#10'LEFT JOIN condpgto COND ON (NS.id_condpgto = COND.id)'#13#10'L' +
+      'EFT JOIN tipocobranca TCOB ON (NS.id_tipo_cobranca = TCOB.id)'#13#10#13 +
+      #10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -4167,6 +4188,14 @@ object DMCadNotaServico: TDMCadNotaServico
     object cdsNotaServico_ImpCOD_SERVICO_EQUIV: TStringField
       FieldName = 'COD_SERVICO_EQUIV'
       Size = 5
+    end
+    object cdsNotaServico_ImpCODUF_FIL: TStringField
+      FieldName = 'CODUF_FIL'
+      Size = 2
+    end
+    object cdsNotaServico_ImpCODUF_CLI: TStringField
+      FieldName = 'CODUF_CLI'
+      Size = 2
     end
   end
   object dsNotaServico_Imp: TDataSource

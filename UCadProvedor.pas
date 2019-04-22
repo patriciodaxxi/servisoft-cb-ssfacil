@@ -49,6 +49,7 @@ type
     Label9: TLabel;
     RxDBComboBox5: TRxDBComboBox;
     Label10: TLabel;
+    dbchkPermiteCancelamento: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

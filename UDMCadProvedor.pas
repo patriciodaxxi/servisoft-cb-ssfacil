@@ -29,6 +29,8 @@ type
     cdsProvedorRETENCAO_ISSQN: TStringField;
     sdsProvedorUSA_ATIVIDADE_CID_SERV: TStringField;
     cdsProvedorUSA_ATIVIDADE_CID_SERV: TStringField;
+    sdsProvedorPERMITE_CANCELAMENTO: TStringField;
+    cdsProvedorPERMITE_CANCELAMENTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspProvedorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
