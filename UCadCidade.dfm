@@ -21,8 +21,8 @@ object frmCadCidade: TfrmCadCidade
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 593
-    Height = 423
+    Width = 601
+    Height = 431
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -40,8 +40,8 @@ object frmCadCidade: TfrmCadCidade
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 88
-        Width = 589
-        Height = 295
+        Width = 597
+        Height = 303
         Align = alClient
         Ctl3D = True
         DataSource = DMCadCidade.dsCidade
@@ -107,7 +107,7 @@ object frmCadCidade: TfrmCadCidade
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 589
+        Width = 597
         Height = 35
         Align = alTop
         Color = clSilver
@@ -335,8 +335,8 @@ object frmCadCidade: TfrmCadCidade
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 383
-        Width = 589
+        Top = 391
+        Width = 597
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -352,7 +352,7 @@ object frmCadCidade: TfrmCadCidade
       object pnlPesquisa: TPanel
         Left = 0
         Top = 35
-        Width = 589
+        Width = 597
         Height = 53
         Align = alTop
         Color = clSilver
@@ -469,7 +469,7 @@ object frmCadCidade: TfrmCadCidade
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 589
+        Width = 597
         Height = 37
         Align = alTop
         Color = 8404992
@@ -695,8 +695,8 @@ object frmCadCidade: TfrmCadCidade
       object pnlCadastro: TPanel
         Left = 0
         Top = 37
-        Width = 589
-        Height = 363
+        Width = 597
+        Height = 371
         Align = alClient
         Enabled = False
         TabOrder = 0

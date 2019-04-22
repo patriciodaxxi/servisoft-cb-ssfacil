@@ -378,6 +378,7 @@ begin
   ffrmCadTabPreco_Sel_Produto := TfrmCadTabPreco_Sel_Produto.Create(self);
   ffrmCadTabPreco_Sel_Produto.fDMCadTab_Preco := fDMCadTab_Preco;
   ffrmCadTabPreco_Sel_Produto.ShowModal;
+  FreeAndNil(ffrmCadTabPreco_Sel_Produto);
 end;
 
 procedure TfrmCadTabPreco.SMDBGrid2GetCellParams(Sender: TObject;

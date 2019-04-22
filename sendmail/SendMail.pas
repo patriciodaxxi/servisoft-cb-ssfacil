@@ -203,7 +203,9 @@ begin
                                  , 'ssfacil'
                                  , sds.FieldByName('SMTP_SENHA').AsString );
 
-    vCNPJ_Filial :=Monta_Texto(sds.FieldByName('CNPJ_CPF_FILIAL').AsString,14);
+    //vCNPJ_Filial :=Monta_Texto(sds.FieldByName('CNPJ_CPF_FILIAL').AsString,14);
+    vCNPJ_Filial := fnc_CNPJCFP_FilialNFeConfig;
+
     vLocalServidorNFe := sds_Param.FieldByName('LOCALSERVIDORNFE').AsString;
     if sds.FieldByName('LOCALSERVIDORNFE').AsString <> '' then
       vLocalServidorNFe := sds.FieldByName('LOCALSERVIDORNFE').AsString;

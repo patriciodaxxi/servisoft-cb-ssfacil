@@ -5,7 +5,7 @@ object frmCadTabPreco_Sel_Produto: TfrmCadTabPreco_Sel_Produto
   BorderStyle = bsSingle
   Caption = 'Transfer'#234'ncia do produto para a tabela de pre'#231'o'
   ClientHeight = 471
-  ClientWidth = 914
+  ClientWidth = 982
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,7 +23,7 @@ object frmCadTabPreco_Sel_Produto: TfrmCadTabPreco_Sel_Produto
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 914
+    Width = 982
     Height = 68
     Align = alTop
     Color = clSilver
@@ -143,7 +143,7 @@ object frmCadTabPreco_Sel_Produto: TfrmCadTabPreco_Sel_Produto
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 68
-    Width = 914
+    Width = 982
     Height = 386
     Align = alClient
     Ctl3D = False
@@ -175,9 +175,16 @@ object frmCadTabPreco_Sel_Produto: TfrmCadTabPreco_Sel_Produto
     WidthOfIndicator = 27
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 6
+    ColCount = 7
     RowCount = 2
     Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID'
+        Title.Alignment = taCenter
+        Width = 56
+        Visible = True
+      end
       item
         Expanded = False
         FieldName = 'REFERENCIA'
@@ -221,7 +228,7 @@ object frmCadTabPreco_Sel_Produto: TfrmCadTabPreco_Sel_Produto
   object StaticText1: TStaticText
     Left = 0
     Top = 454
-    Width = 914
+    Width = 982
     Height = 17
     Align = alBottom
     BorderStyle = sbsSingle
