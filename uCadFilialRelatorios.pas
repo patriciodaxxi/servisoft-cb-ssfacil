@@ -21,6 +21,7 @@ type
     RxDBComboBox2: TRxDBComboBox;
     Label5: TLabel;
     DBEdit2: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BitBtn2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);

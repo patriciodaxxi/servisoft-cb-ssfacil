@@ -4,7 +4,9 @@ interface
 
 uses
   Classes, SysUtils, Dialogs, Variants, Forms, ShellApi, Windows, StrUtils, SqlExpr, DmdDatabase, DBClient, Controls, SMDBGrid,
-  DB, UEscolhe_Filial, Printers, Messages;
+  DB, UEscolhe_Filial, Printers, Messages, DmdDatabase_NFeBD;
+
+
 
   function Monta_Numero(Campo: String; Tamanho: Integer): String;
   function TirarAcento(texto: string): string;
@@ -18,6 +20,7 @@ uses
   function Formatar_Campo(Campo: String; Tamanho: Integer): String;
   function fnc_Calcular_Hora(Hora_Ini, Hora_Fin: TDateTime): Real;
   function fnc_Calcular_Hora2(Hora_Ini, Hora_Fin, DataIni, DataFin: TDateTime): Real;
+  
   function fnc_Data_Vencimento(Data: TDateTime): TDateTime;
   function fnc_Montar_Campo(Separador: String = ';'; vReg: String = ''): String;
   function fnc_Montar_Valor(Campo: String): String;
@@ -31,6 +34,7 @@ uses
   function fnc_Verificar_Local(Usa_Local_Estoque: String): Integer;
   function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor: Integer ; Filial : Integer = 1): Real;
   function fnc_HorarioVerao: Boolean;
+  
   function fnc_Buscar_Comissao_Prod(ID_Produto, ID_Cliente, ID_Vendedor: Integer): Real;
   procedure prc_le_Grid(Grid: TSMDBGrid; Form, Caminho: string);
   procedure prc_Grava_Grid(Grid: TSMDBGrid; Form, Caminho: string);
@@ -67,10 +71,21 @@ uses
   function fnc_Verifica_Tipo_Lote: String;
 
   function fnc_Converte_Horas(Hora: Real): Real;
+  function fnc_Converte_Min_Dec(Hora: Real): Real;
+  //function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real) : String;
+  function fnc_Diferenca_Horas2(Inicio, Fim : TTime) : Real;
+  function fnc_Calcula_Intervalo(HrInicial,HrFinal : TTime) : Real;
+
+  procedure prc_Soma_Data_Hora_Res(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real);
+
   function CharEspeciais(Texto:String):String;
   function  SQLLocate(Tabela, CampoProcura, CampoRetorno, ValorFind : string) : string ;
 
   function fnc_Estoque_Tipo_Mat(ID_Produto : Integer ; Tipo_ES : string): string;  //E= Entrada  S= Saida
+
+  function fnc_Cliente_Fil_Fat(ID_Cliente , ID_Filial  : Integer) : Boolean;
+
+  function fnc_CNPJCFP_FilialNFeConfig : String;
 
   //procedure prc_Enviar_Email_Proc(MSG: String);
 
@@ -95,6 +110,8 @@ uses
     ABase  -> Número da base utilizada para gerar o serial
     AChave -> Chave utilizada para gerar o serial
   }
+
+
 var
   vCodProduto_Pos: Integer;
   vCodPessoa_Pos: Integer;
@@ -170,7 +187,12 @@ var
   vCodBarra_Pos : String;
   vTipo_Etiqueta : String; //ROT=Rotulo
   vTamanho_Pos : String;
-  vSelPesquisa : String; 
+  vSelPesquisa : String;
+  vSelCentroCusto : String;
+  vDiaAdicional : Integer;
+  vDtHora_Res : String;
+  vPrimeira_Hora : TTime;
+  vPrimeira_Data : TDate;
 
 implementation
 
@@ -1697,6 +1719,363 @@ begin
     ValorFind := '' ;
 end ;
 
+function fnc_Converte_Min_Dec(Hora: Real): Real; //Converte de Decimal para Minutos 
+var
+  vAux : Real;
+begin
+  Result := 0;
+  //vAux := Frac vTempo - Trunc(vTempo);
+  vAux := Frac(Hora);
+  if StrToFloat(FormatFloat('0.00',vAux)) > 0 then
+  begin
+    vAux := StrToFloat(FormatFloat('0.00',(vAux * 60) / 100));
+    vAux := Trunc(Hora) + vAux;
+    Result := vAux;
+  end;
 
+end;
+
+{function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real) : String;
+var
+  vAux : Real;
+  vTexto : String;
+  vDia : Integer;
+  vHora : Real;
+  vAux2 : Real;
+  i, i2 : Integer;
+  vMin : Real;
+  vSeg, vMil : real;
+  vH, vM, vS, vMS : Word;
+  vDtAux : TDateTime;
+  vTempo : Real;
+begin
+  if StrToFloat(FormatFloat('0.000',Total_HoraDia)) <= 0 then
+    Total_HoraDia := StrToFloat(FormatFloat('0.00',24));
+
+  vAux2 := Hora2 / Total_HoraDia;
+  vDia  := Trunc(vAux2);
+  if vDia > 0 then
+  begin
+    i2     := vDia;
+    vDtAux := Data;
+    for i := 1 to i2 do
+    begin
+      vDtAux := vDtAux + 1;
+      vDtAux := fnc_Data_Vencimento(vDtAux);
+    end;
+    Data := vDtAux;
+  end;
+
+  Result := '';
+  //vTexto := TimeToStr(Hora1);
+  vAux  := StrToInt(FormatFloat('00',HourOf(Hora1)));
+
+  DecodeTime(Hora1,vH,vM,vS,vMS);
+
+  vMin  := vM;
+
+  //vMin  := StrToFloat(Copy(vTexto,4,2));
+  //vMin  := StrToFloat(FormatFloat('0.00',(vMIn /100) * 100) / 60));
+  vMin  := StrToFloat(FormatFloat('0.00',(vMIn / 60)));
+
+  vAux2 := Frac(Hora2);
+  vMin  := vMin + StrToFloat(FormatFloat('0.00',(vAux2 * 100) / 60));
+  vAux  := vAux + Trunc(vMin) + Trunc(Hora2);
+  vAux2 := Frac(vMin);
+  vAux2 := fnc_Converte_Min_Dec(vAux2);
+  vAux  := StrToFloat(FormatFloat('0.00',vAux + vAux2));
+
+  //vTexto := IntToStr( HourOf(Hora1));
+  //vTexto := vTexto + ',' + FormatFloat('00', MinuteOf(Hora1));
+
+  //vAux := StrToFloat(vTexto)  + Hora2;
+
+  //vAux := vAux / 24;
+  //vAux := vAux / Total_HoraDia;
+  //vDia  := Trunc(vAux);
+  vDia := 0;
+  if vAux >= 24 then
+  begin
+    vAux := vAux / 24;
+    vDia := Trunc(vAux);
+    if vDia > 0 then
+    begin
+      i2     := vDia;
+      vDtAux := Data;
+      for i := 1 to i2 do
+      begin
+        vDtAux := vDtAux + 1;
+        vDtAux := fnc_Data_Vencimento(vDtAux);
+      end;
+      Data := vDtAux;
+    end;
+    vAux := frac(vAux);
+    vAux := vAux * 24;
+  end;
+
+  vAux2 := frac(vAux);
+  if vAux < 1 then
+    vaux2 := fnc_Converte_Min_Dec(vAux2);
+  //vaux2 := fnc_Converte_Min_Dec(vAux2);
+  vAux  := Trunc(vAux) + vAux2;
+
+  vTexto := FormatFloat('00.00',vAux);
+  vTexto := Replace(vTexto,',',':');
+
+  vTempo := 0;
+  if vDia > 0 then
+    vTempo := fnc_Calcula_Intervalo(StrToTime('00:01'),StrToTime(vTexto))
+  else
+    vTempo := fnc_Calcula_Intervalo(Hora1,StrToTime(vTexto));
+  if StrToFloat(FormatFloat('0.00',vTempo)) > 0 then
+  begin
+    Hora1  := StrToTime(vTexto);
+    vTexto := fnc_Soma_Data_Hora(Data,StrToTime(vTexto),vTempo,StrToFloat(FormatFloat('0.00',Total_HoraDia)));
+  end;
+
+  Result := DateToStr(Data) + 'H' + FormatFloat('00.00',vAux);
+end;}
+
+function fnc_Cliente_Fil_Fat(ID_Cliente , ID_Filial  : Integer) : Boolean;
+var
+  sds: TSQLDataSet;
+begin
+  Result := False;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText := 'SELECT COUNT(1) CONTADOR FROM PESSOA_FIL P WHERE P.CODIGO = :CODIGO AND P.FILIAL = :FILIAL ';
+    sds.ParamByName('CODIGO').AsInteger := ID_Cliente;
+    sds.ParamByName('FILIAL').AsInteger := ID_Filial;
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := True;
+  finally
+    FreeAndNil(sds);
+  end;
+end;
+
+function fnc_Calcula_Intervalo(HrInicial,HrFinal : TTime) : Real;
+var
+  sds: TSQLDataSet;
+  vTempo : Real;
+  vTexto : string;
+  vHR1,VHR2 : TTime;
+begin
+  Result := 0;
+  vDiaAdicional := 0;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := ' SELECT I.id, i.hrinicial, i.hrfinal FROM intervalo_tempo I '
+                       + ' WHERE (I.HRINICIAL >= :HRINICIAL1 and I.HRINICIAL < :HRINICIAL2) '
+                       + ' or (I.HRFINAL > :HRINICIAL1  and I.HRFINAL < :HRINICIAL2) '
+                       + ' or (I.HRINICIAL < :HRINICIAL1 and I.HRFINAL > :HRINICIAL1) '
+                       + ' ORDER BY I.HRINICIAL ';
+    sds.ParamByName('HRINICIAL1').AsTime := HrInicial;
+    sds.ParamByName('HRINICIAL2').AsTime := HrFinal;
+    sds.Open;
+    vTempo := 0;
+    sds.First;
+    while not sds.Eof do
+    begin
+      //if (vHrEmissaoNFe > sds.FieldByName('HRINICIAL').AsDateTime) and (vHrEmissaoNFe < sds.FieldByName('HRFINAL').AsDateTime) then
+      //  vHrEmissaoNFe := sds.FieldByName('HRFINAL').AsDateTime;
+      //end
+      //else
+        vTempo := vTempo + fnc_Diferenca_Horas2(sds.FieldByName('HRINICIAL').AsDateTime,sds.FieldByName('HRFINAL').AsDateTime);
+      sds.Next;
+    end;
+  finally
+    FreeAndNil(sds);
+  end;
+  Result := vTempo;
+end;
+
+function fnc_Diferenca_Horas2(Inicio, Fim : TTime) : Real;
+var
+  FIni,FFim : TDateTime;
+  vTexto : String;
+  vAux : Real;
+begin
+  Fini := Inicio;
+  FFim := Fim;
+  if (Inicio > Fim) then
+    vTexto :=  TimeToStr((StrTotime('23:59:59')-Fini)+FFim+(StrTotime('00:00:01')))
+  else
+    vTexto := TimeToStr(FFim-Fini);
+  vTexto := Copy(vTexto,1,5);
+  vTexto := Replace(vTexto,':',',');
+  //Result := fnc_Converte_Horas(StrToFloat(vTexto));
+  Result := StrToFloat(vTexto);
+end;
+
+procedure prc_Soma_Data_Hora_Res(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real);
+var
+  vAux : Real;
+  vTexto : String;
+  vDia : Integer;
+  vHora : Real;
+  vAux2 : Real;
+  vMin : Real;
+  vSeg, vMil : real;
+  vH, vM, vS, vMS : Word;
+  vDtAux : TDateTime;
+  vTempo : Real;
+  vFlag : Boolean;
+
+  procedure calcula;
+  var
+    i : Integer;
+    i2 : Integer;
+  begin
+    vAux2 := Hora2 / Total_HoraDia;
+    vDia  := Trunc(vAux2);
+    if vDia > 0 then
+    begin
+      i2     := vDia;
+      vDtAux := Data;
+      for i := 1 to i2 do
+      begin
+        vDtAux := vDtAux + 1;
+        vDtAux := fnc_Data_Vencimento(vDtAux);
+      end;
+      Data := vDtAux;
+    end;
+
+    vAux  := StrToInt(FormatFloat('00',HourOf(Hora1)));
+    DecodeTime(Hora1,vH,vM,vS,vMS);
+    vMin  := vM;
+    vMin  := StrToFloat(FormatFloat('0.00',(vMIn / 60)));
+
+    vAux2 := Frac(Hora2);
+    vMin  := vMin + StrToFloat(FormatFloat('0.00',(vAux2 * 100) / 60));
+    vAux  := vAux + Trunc(vMin) + Trunc(Hora2);
+    vAux2 := Frac(vMin);
+    vAux2 := fnc_Converte_Min_Dec(vAux2);
+    vAux  := StrToFloat(FormatFloat('0.00',vAux + vAux2));
+    vDia := 0;
+    if vAux >= 24 then
+    begin
+      vAux := vAux / 24;
+      vDia := Trunc(vAux);
+      if vDia > 0 then
+      begin
+        i2     := vDia;
+        vDtAux := Data;
+        for i := 1 to i2 do
+        begin
+          vDtAux := vDtAux + 1;
+          vDtAux := fnc_Data_Vencimento(vDtAux);
+        end;
+        Data := vDtAux;
+      end;
+      vAux := frac(vAux);
+      vAux := StrToFloat(FormatFloat('0.00',vAux * 24));
+      if vAux < 1 then
+        vAux := StrToFloat(FormatFloat('0.00',(vAux * 100) / 60));
+    end;
+    vAux2 := frac(vAux);
+    if vAux < 1 then
+      vaux2 := fnc_Converte_Min_Dec(vAux2);
+    vAux   := Trunc(vAux) + vAux2;
+    vTexto := FormatFloat('00.00',vAux);
+    vTexto := Replace(vTexto,',',':');
+  end;     
+
+begin
+  vPrimeira_Hora := -1;
+  vDtHora_Res := '';
+  if StrToFloat(FormatFloat('0.000',Total_HoraDia)) <= 0 then
+    Total_HoraDia := StrToFloat(FormatFloat('0.00',24));
+
+  Calcula;
+
+  vPrimeira_Hora := StrToTime(vTexto);
+  vPrimeira_Data := Data;
+
+  vTempo := 0;
+
+  vFlag := False;
+  while not vFlag do
+  begin
+    if vDia > 0 then
+      vTempo := fnc_Calcula_Intervalo(StrToTime('00:01'),StrToTime(vTexto))
+    else
+      vTempo := fnc_Calcula_Intervalo(Hora1,StrToTime(vTexto));
+    if StrToFloat(FormatFloat('0.00',vTempo)) > 0 then
+    begin
+      Hora1  := StrToTime(vTexto);
+      Hora2  := vTempo;
+      Calcula;
+      Hora1  := StrToTime(vTexto);
+
+      //vTempo := fnc_Calcula_Intervalo(Hora1,StrToTime(vTexto));
+
+
+      //prc_Soma_Data_Hora_Res(Data,StrToTime(vTexto),vTempo,StrToFloat(FormatFloat('0.00',Total_HoraDia)));
+    end
+    else
+      vFlag := True;
+
+  end;
+
+  vDtHora_Res := DateToStr(Data) + 'H' + FormatFloat('00.00',vAux);
+
+end;
+
+function fnc_CNPJCFP_FilialNFeConfig : String;
+var
+  sds: TSQLDataSet;
+  sds2 : TSQLDataSet;
+  vCNPJAux : String;
+begin
+  dmDatabase_NFeBD := TdmDatabase_NFeBD.Create(dmDatabase_NFeBD);
+
+  Result   := '';
+  vCNPJAux := '';
+  sds      := TSQLDataSet.Create(nil);
+  sds2     := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase_NFeBD.scoNFeBD;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds2.SQLConnection := dmDatabase.scoDados;
+    sds2.NoMetadata    := True;
+    sds2.GetMetadata   := False;
+    sds2.Close;
+    sds2.CommandText   := 'select f.cnpj_cpf, f.pessoa  from filial f where coalesce(f.inativo,' + QuotedStr('N') + ') = ' + QuotedStr( 'N');
+    sds2.Open;
+    sds2.First;
+    while not sds2.Eof do
+    begin
+      if Trim(Result) = '' then
+      begin
+        sds.Close;
+        sds.CommandText   := ' SELECT CC.CNPJ_TITULAR, CC.chave_acesso, CC.validade_inicio, CC.validade_fim FROM CONFIG_NFE CN '
+                           + ' INNER JOIN CONFIG_CERTIFICADOS CC ON CN.ID_CERTIFICADO = CC.ID '
+                           + ' WHERE CC.CNPJ_TITULAR = :CNPJ_TITULAR ';
+        if sds2.FieldByName('pessoa').AsString = 'F' then
+          vCNPJAux := Monta_Numero(sds2.FieldByName('cnpj_cpf').AsString,11)
+        else
+          vCNPJAux := Monta_Numero(sds2.FieldByName('cnpj_cpf').AsString,14);
+        sds.ParamByName('CNPJ_TITULAR').AsString := vCNPJAux;
+        sds.Open;
+        if sds.FieldByName('validade_fim').AsDateTime >= Date then
+          Result := vCNPJAux;
+      end;
+      sds2.Next;
+    end;
+  finally
+    FreeAndNil(sds);
+    FreeAndNil(sds2);
+    FreeAndNil(dmDatabase_NFeBD);
+  end;
+
+end;
 
 end.

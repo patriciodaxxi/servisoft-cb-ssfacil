@@ -580,7 +580,8 @@ object frmConsDuplicata_Pag: TfrmConsDuplicata_Pag
           ItemIndex = 0
           Items.Strings = (
             'A Receber'
-            'A Pagar')
+            'A Pagar'
+            'Ambos')
           TabOrder = 9
         end
         object DateEdit1: TDateEdit

@@ -3,7 +3,8 @@ unit uDmCadMovProdST;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, LogTypes;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, LogTypes,
+  frxClass, frxDBSet, frxRich, frxExportMail, frxExportPDF;
 
 type
   TDmCadMovProdST = class(TDataModule)
@@ -59,6 +60,23 @@ type
     cdsProdutoID: TIntegerField;
     cdsProdutoREFERENCIA: TStringField;
     cdsProdutoNOME: TStringField;
+    sdsConsProdST: TSQLDataSet;
+    dspConsProdST: TDataSetProvider;
+    cdsConsProdST: TClientDataSet;
+    dsConsProdST: TDataSource;
+    cdsConsProdSTID: TIntegerField;
+    cdsConsProdSTNOME: TStringField;
+    cdsConsProdSTREFERENCIA: TStringField;
+    cdsConsProdSTNCM: TStringField;
+    cdsConsProdSTGERAR_ST: TStringField;
+    cdsConsProdSTDTEMISSAO: TDateField;
+    cdsConsProdSTBASE_ST: TFloatField;
+    cdsConsProdSTBASE_ST_RET: TFloatField;
+    frxReport1: TfrxReport;
+    frxPDFExport1: TfrxPDFExport;
+    frxMailExport1: TfrxMailExport;
+    frxRichObject1: TfrxRichObject;
+    frxConsProdST: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspMovProdSTUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -72,12 +90,13 @@ type
     vMsgMovProdST : String;
     ctCommand : String;
     ctConsulta : String;
-
+    ctConsProdST : String;
+    ctProduto : String;
     procedure prc_Localizar(ID : Integer); //-1 = Inclusão
     procedure prc_Inserir;
     procedure prc_Gravar;
     procedure prc_Excluir;
-
+    procedure prc_Abrir_Produto(ID : Integer);
   end;
 
 var
@@ -141,8 +160,11 @@ var
   vIndices: string;
   aIndices: array of string;
 begin
-  ctCommand  := sdsMovProdST.CommandText;
-  ctConsulta := sdsConsulta.CommandText;
+  ctCommand    := sdsMovProdST.CommandText;
+  ctConsulta   := sdsConsulta.CommandText;
+  ctConsProdST := sdsConsProdST.CommandText;
+  ctProduto    := sdsProduto.CommandText;
+
   cdsProduto.Open;
 
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
@@ -183,6 +205,15 @@ procedure TDmCadMovProdST.DoLogAdditionalValues(ATableName: string;
   var AValues: TArrayLogData; var UserName: string);
 begin
   UserName := vUsuario;
+end;
+
+procedure TDmCadMovProdST.prc_Abrir_Produto(ID: Integer);
+begin
+  cdsProduto.Close;
+  sdsProduto.CommandText := ctProduto;
+  if ID > 0 then
+    sdsProduto.CommandText := sdsProduto.CommandText + ' WHERE ID = ' + IntToStr(ID);
+  cdsProduto.Open;
 end;
 
 end.

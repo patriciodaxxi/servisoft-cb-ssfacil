@@ -251,6 +251,11 @@ type
     Panel4: TPanel;
     btnGerarCCusto: TNxButton;
     Detalhada21: TMenuItem;
+    chkTotalDia: TCheckBox;
+    btnIndividual: TNxButton;
+    btnExcluir_CCusto: TNxButton;
+    btnRecalcular_CCusto: TNxButton;
+    CheckBox2: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -337,6 +342,9 @@ type
     procedure RzGroupBox4Enter(Sender: TObject);
     procedure btnGerarCCustoClick(Sender: TObject);
     procedure Detalhada21Click(Sender: TObject);
+    procedure btnIndividualClick(Sender: TObject);
+    procedure btnExcluir_CCustoClick(Sender: TObject);
+    procedure btnRecalcular_CCustoClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -379,6 +387,9 @@ type
     procedure prc_Mostra_Aprov;
     procedure prc_Monta_Saldo;
     procedure prc_Habilitar;
+
+    procedure prc_Gravar_Dup_CCusto(ID : String);
+
   public
     { Public declarations }
     procedure prc_Posiciona_Duplicata(ID: Integer);
@@ -392,7 +403,7 @@ implementation
 
 uses
   DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, uRelPagarReceber, uRelPagarReceber2, URelCheque_Copia, USel_ContaOrc, USel_Pessoa,
-  uUtilCobranca, UCadDuplicata_Desc, uRelPagarReceber3, UChequeDupHist, UCadDuplicata_Cob, uMenu1, uRelRecibo_Pgto;
+  uUtilCobranca, UCadDuplicata_Desc, uRelPagarReceber3, UChequeDupHist, UCadDuplicata_Cob, uMenu1, uRelRecibo_Pgto, USel_CentroCusto;
 
 {$R *.dfm}
 
@@ -1470,6 +1481,7 @@ begin
   else
     vFilial := 0;
   vTipo_Config_Email := 3;
+  fDMCadDuplicata.vImpObs := CheckBox2.Checked;
   prc_Imp_Detalhada(False, '');
 end;
 
@@ -2036,7 +2048,9 @@ begin
     if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (fDMCadDuplicata.cdsDuplicata_ConsultaID_DESCONTADA.AsInteger > 0) and (fDMCadDuplicata.cdsDuplicata_ConsultaCONFIRMA_PGTO.AsString <> 'S') then
     begin
       fDMCadDuplicata.prc_Localizar(fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
-      if not (fDMCadDuplicata.cdsDuplicata.IsEmpty) and (StrToFloat(FormatFloat('0.00', fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat)) <= 0) and (fDMCadDuplicata.cdsDuplicataCONFIRMA_PGTO.AsString <> 'S') then
+      //if not (fDMCadDuplicata.cdsDuplicata.IsEmpty) and (StrToFloat(FormatFloat('0.00', fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat)) <= 0) and (fDMCadDuplicata.cdsDuplicataCONFIRMA_PGTO.AsString <> 'S') then
+      //21/03/2019
+      if not (fDMCadDuplicata.cdsDuplicata.IsEmpty) and (fDMCadDuplicata.cdsDuplicataCONFIRMA_PGTO.AsString <> 'S') then
       begin
         fDMCadDuplicata.cdsDuplicata.Edit;
         fDMCadDuplicata.cdsDuplicataCONFIRMA_PGTO.AsString := 'N';
@@ -2087,7 +2101,7 @@ begin
   else
     vFilial := 0;
   vTipo_Config_Email := 3;
-  prc_Imp_Detalhada(True, 'A');
+  prc_Imp_Detalhada(not(chkTotalDia.Checked), 'A');
 end;
 
 procedure TfrmCadDuplicata.ListaSimples1Click(Sender: TObject);
@@ -2117,9 +2131,11 @@ begin
 end;
 
 procedure TfrmCadDuplicata.GravarComissao1Click(Sender: TObject);
+var
+  vPerc : Real;
 begin
-  ShowMessage('Desabilitado, ver com o suporte!');
-  exit;
+ // ShowMessage('Desabilitado, ver com o suporte!');
+ // exit;
   fDMCadDuplicata.cdsDuplicata.Open;
   fDMCadDuplicata.cdsPessoa.IndexFieldNames := 'CODIGO';
   fDMCadDuplicata.cdsPessoa.First;
@@ -2130,23 +2146,39 @@ begin
       fDMCadDuplicata.cdsPessoa.Next;
       Continue;
     end;
+
+     //if fDMCadDuplicata.cdsPessoaCODIGO.AsInteger = 1833 then
+     //  ShowMessage('aqui 273');
+
     fDMCadDuplicata.cdsDuplicata.Close;
     fDMCadDuplicata.sdsDuplicata.CommandText := 'SELECT * FROM DUPLICATA WHERE TIPO_ES = ''E'' AND ID_PESSOA = ' + fDMCadDuplicata.cdsPessoaCODIGO.AsString;
     fDMCadDuplicata.cdsDuplicata.Open;
+    fDMCadDuplicata.cdsDuplicata.First;
     while not fDMCadDuplicata.cdsDuplicata.Eof do
     begin
-      fDMCadDuplicata.cdsDuplicata.Edit;
-      fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger := fDMCadDuplicata.cdsPessoaID_VENDEDOR.AsInteger;
-      fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat := fDMCadDuplicata.cdsPessoaPERC_COMISSAO.AsFloat;
-      fDMCadDuplicata.cdsDuplicata.Post;
-      fDMCadDuplicata.cdsDuplicata.ApplyUpdates(0);
+       if fDMCadDuplicata.cdsDuplicataNUMNOTA.AsInteger = 273 then
+         ShowMessage('aqui 273');
+
+      if (fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger <= 0) or (StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat)) <= 0) then
+      begin
+        fDMCadDuplicata.cdsDuplicata.Edit;
+        fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger := fDMCadDuplicata.cdsPessoaID_VENDEDOR.AsInteger;
+        fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat := fDMCadDuplicata.cdsPessoaPERC_COMISSAO.AsFloat;
+        if StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsPessoaPERC_COMISSAO.AsFloat)) <= 0 then
+        begin
+          if fDMCadDuplicata.cdsVendedor.Locate('CODIGO',fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger,[loCaseInsensitive]) then
+            fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat := fDMCadDuplicata.cdsVendedorPERC_COMISSAO_VEND.AsFloat;
+        end;
+        fDMCadDuplicata.cdsDuplicata.Post;
+        fDMCadDuplicata.cdsDuplicata.ApplyUpdates(0);
+      end;
       fDMCadDuplicata.cdsDuplicata.Next;
     end;
     fDMCadDuplicata.cdsPessoa.Next;
   end;
   fDMCadDuplicata.cdsDuplicata.Close;
   fDMCadDuplicata.sdsDuplicata.CommandText := fDMCadDuplicata.ctCommand;
-  fDMCadDuplicata.cdsDuplicata.Open;
+  //fDMCadDuplicata.cdsDuplicata.Open;
 
   RadioGroup2.ItemIndex := 0;
   RadioGroup1.ItemIndex := 1;
@@ -2155,17 +2187,20 @@ begin
   while not fDMCadDuplicata.cdsDuplicata_Consulta.Eof do
   begin
     prc_Posiciona_Duplicata(fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
-    fDMCadDuplicata.cdsDuplicata_Hist.Last;
-    if fDMCadDuplicata.cdsDuplicata_HistTIPO_HISTORICO.AsString = 'PAG' then
-      if fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger = 0 then
-      begin
-        fDMCadDuplicata.cdsDuplicata_Hist.Edit;
-        fDMCadDuplicata.cdsDuplicataID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
-        fDMCadDuplicata.cdsDuplicata_Hist.Post;
-      end;
+    if (fDMCadDuplicata.cdsDuplicataID_VENDEDOR.AsInteger > 0) and (StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsDuplicataPERC_COMISSAO.AsFloat)) > 0) then
+    begin
+      fDMCadDuplicata.cdsDuplicata_Hist.Last;
+      if fDMCadDuplicata.cdsDuplicata_HistTIPO_HISTORICO.AsString = 'PAG' then
+        if fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger <= 0 then
+        begin
+          fDMCadDuplicata.cdsDuplicata_Hist.Edit;
+          fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
+          fDMCadDuplicata.cdsDuplicata_Hist.Post;
+          fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
+        end;
+    end;
     fDMCadDuplicata.cdsDuplicata_Consulta.Next;
   end;
-  fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
 end;
 
 procedure TfrmCadDuplicata.GravaComissao2Click(Sender: TObject);
@@ -2173,17 +2208,20 @@ begin
   fDMCadDuplicata.cdsDuplicata_Consulta.First;
   while not fDMCadDuplicata.cdsDuplicata_Consulta.Eof do
   begin
-    prc_Posiciona_Duplicata(fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
-    fDMCadDuplicata.cdsDuplicata_Hist.Last;
-    if fDMCadDuplicata.cdsDuplicata_HistTIPO_HISTORICO.AsString = 'PAG' then
+    if fDMCadDuplicata.cdsDuplicata_ConsultaTIPO_ES.AsString = 'E' then
     begin
-      if not fnc_Existe_Comissao then
-      //if fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger = 0 then
+      prc_Posiciona_Duplicata(fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
+      fDMCadDuplicata.cdsDuplicata_Hist.Last;
+      if fDMCadDuplicata.cdsDuplicata_HistTIPO_HISTORICO.AsString = 'PAG' then
       begin
-        fDMCadDuplicata.cdsDuplicata_Hist.Edit;
-        fDMCadDuplicata.cdsDuplicataID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
-        fDMCadDuplicata.cdsDuplicata_Hist.Post;
-        fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
+        if not fnc_Existe_Comissao then
+        //if fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger = 0 then
+        begin
+          fDMCadDuplicata.cdsDuplicata_Hist.Edit;
+          fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao;
+          fDMCadDuplicata.cdsDuplicata_Hist.Post;
+          fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
+        end;
       end;
     end;
     fDMCadDuplicata.cdsDuplicata_Consulta.Next;
@@ -2925,7 +2963,10 @@ begin
   pnlCadastro.Enabled    := not(pnlCadastro.Enabled);
   btnCobranca.Enabled    := not(btnCobranca.Enabled);
   btnGerarCCusto.Enabled := not(btnGerarCCusto.Enabled);
-  SMDBGrid3.ReadOnly     := not(SMDBGrid3.ReadOnly);
+  btnIndividual.Enabled  := not(btnIndividual.Enabled);
+  btnRecalcular_CCusto.Enabled  := not(btnRecalcular_CCusto.Enabled);
+  btnExcluir_CCusto.Enabled     := not(btnExcluir_CCusto.Enabled);
+  SMDBGrid3.ReadOnly            := not(SMDBGrid3.ReadOnly);
   if not SMDBGrid3.ReadOnly then
   begin
     for i := 1 to SMDBGrid3.ColCount - 2 do
@@ -2989,6 +3030,99 @@ begin
   fDMCadDuplicata.frxReport1.variables['ImpOpcao'] := QuotedStr(vOpcaoImp);
   fDMCadDuplicata.frxReport1.ShowReport;
   SMDBGrid1.EnableScroll;
+end;
+
+procedure TfrmCadDuplicata.btnIndividualClick(Sender: TObject);
+var
+  vTexto : String;
+  vFlag : Boolean;
+begin
+  vSelCentroCusto := '';
+  frmSel_CentroCusto := TfrmSel_CentroCusto.Create(Self);
+  frmSel_CentroCusto.Panel2.Visible := True;
+  if fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger > 0 then
+    frmSel_CentroCusto.RxDBLookupCombo9.KeyValue := fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger
+  else
+    frmSel_CentroCusto.RxDBLookupCombo9.ClearValue;
+  frmSel_CentroCusto.ShowModal;
+  FreeAndNil(frmSel_CentroCusto);
+
+  if Trim(vSelCentroCusto) <> '' then
+  begin
+    vRegistro_CSV2 := vSelCentroCusto;
+    vFlag := False;
+    while not vFlag do
+    begin
+      vTexto := fnc_Montar_Campo(';',vRegistro_CSV2);
+      prc_Gravar_Dup_CCusto(vTexto);
+      if Trim(vRegistro_CSV2) = '' then
+        vFlag := True;
+    end;
+  end;
+end;
+
+procedure TfrmCadDuplicata.prc_Gravar_Dup_CCusto(ID: String);
+var
+  vItem : Integer;
+begin
+  if fDMCadDuplicata.cdsDuplicata_CCusto.Locate('ID_CENTROCUSTO', StrToInt(ID), [loCaseInsensitive]) then
+    exit;
+
+  fDMCadDuplicata.cdsDuplicata_CCusto.Last;
+  vItem := fDMCadDuplicata.cdsDuplicata_CCustoITEM.AsInteger;
+
+  fDMCadDuplicata.cdsDuplicata_CCusto.Insert;
+  fDMCadDuplicata.cdsDuplicata_CCustoID.AsInteger   := fDMCadDuplicata.cdsDuplicataID.AsInteger;
+  fDMCadDuplicata.cdsDuplicata_CCustoITEM.AsInteger := vItem + 1;
+  fDMCadDuplicata.cdsDuplicata_CCustoID_CENTROCUSTO.AsInteger := StrToInt(ID);
+  fDMCadDuplicata.cdsDuplicata_CCustoPERCENTUAL.AsFloat := 0;
+  fDMCadDuplicata.cdsDuplicata_CCustoVALOR.AsFloat      := 0;
+  fDMCadDuplicata.cdsDuplicata_CCusto.Post;
+
+end;
+
+procedure TfrmCadDuplicata.btnExcluir_CCustoClick(Sender: TObject);
+begin
+  if MessageDlg('Deseja excluir este Centro de Custo?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    exit;
+
+  fDMCadDuplicata.cdsDuplicata_CCusto.Delete;
+end;
+
+procedure TfrmCadDuplicata.btnRecalcular_CCustoClick(Sender: TObject);
+var
+  vAux : Real;
+  vParc : Real;
+  vCont : Integer;
+begin
+  vCont := 0;
+  fDMCadDuplicata.cdsDuplicata_CCusto.First;
+  while not fDMCadDuplicata.cdsDuplicata_CCusto.Eof do
+  begin
+    if fDMCadDuplicata.cdsDuplicata_CCustoPERCENTUAL.AsFloat > 0 then
+      vCont := vCont + 1;
+    fDMCadDuplicata.cdsDuplicata_CCusto.Next;
+  end;
+
+  vParc := StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsDuplicataVLR_PARCELA.AsFloat));
+  fDMCadDuplicata.cdsDuplicata_CCusto.First;
+  while not fDMCadDuplicata.cdsDuplicata_CCusto.Eof do
+  begin
+    if fDMCadDuplicata.cdsDuplicata_CCustoPERCENTUAL.AsFloat > 0 then
+    begin
+      fDMCadDuplicata.cdsDuplicata_CCusto.Edit;
+      vCont := vCont - 1;
+      if vCont = 0 then
+        fDMCadDuplicata.cdsDuplicata_CCustoVALOR.AsFloat := StrToFloat(FormatFloat('0.00',vParc))
+      else
+        fDMCadDuplicata.cdsDuplicata_CCustoVALOR.AsFloat := StrToFloat(FormatFloat('0.00',(fDMCadDuplicata.cdsDuplicataVLR_PARCELA.AsFloat
+                                                            * fDMCadDuplicata.cdsDuplicata_CCustoPERCENTUAL.AsFloat) / 100));
+      fDMCadDuplicata.cdsDuplicata_CCusto.Post;
+      vParc := StrToFloat(FormatFloat('0.00',vParc - fDMCadDuplicata.cdsDuplicata_CCustoVALOR.AsFloat));
+    end;
+    fDMCadDuplicata.cdsDuplicata_CCusto.Next;
+  end;
+  
 end;
 
 end.

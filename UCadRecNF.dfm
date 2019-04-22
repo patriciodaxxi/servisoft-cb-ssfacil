@@ -1,6 +1,6 @@
 object frmCadRecNF: TfrmCadRecNF
-  Left = 214
-  Top = 9
+  Left = 241
+  Top = 3
   Width = 954
   Height = 718
   Caption = 'Recibo NF'

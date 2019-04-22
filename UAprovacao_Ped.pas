@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Grids, DBGrids,
-  SMDBGrid, NxCollection, UDMAprovacao_Ped, Mask, ToolEdit, RzPanel, SqlExpr, dbXPress, DB, CurrEdit;
+  SMDBGrid, NxCollection, UDMAprovacao_Ped, Mask, ToolEdit, RzPanel, SqlExpr, dbXPress, DB, CurrEdit, UDMCadPedido,
+  ComCtrls;
 
 type
   TfrmAprovacao_Ped = class(TForm)
@@ -51,6 +52,9 @@ type
     Shape10: TShape;
     Label17: TLabel;
     Shape11: TShape;
+    btnPedidoApp: TNxButton;
+    lblPedidoWeb: TLabel;
+    ProgressBar1: TProgressBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -67,14 +71,19 @@ type
       Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btnPedidoAppClick(Sender: TObject);
   private
     { Private declarations }
     fDMAprovacao_Ped: TDMAprovacao_Ped;
+    fDMCadPedido : TDMCadPedido;
     vTotal_Pedido: Integer;
     vVlrTotal: Real;
     vData_Aprov: TDateTime;
     vMotivo_Aprov: WideString;
-    
+
+    procedure prc_Inserir_Registro_Web;
+    procedure prc_Gravar_Registro_Web;
+    procedure prc_Gravar_Itens_Web;
     procedure prc_Consultar;
     procedure prc_Le_mPedido(Tipo: String);
     procedure prc_Gravar_Pedido_Aprov(ID_Pedido: Integer; Tipo: String);
@@ -88,7 +97,7 @@ var
 
 implementation
 
-uses rsDBUtils, uUtilPadrao, DmdDatabase, UConsPessoa_Fin;
+uses rsDBUtils, uUtilPadrao, DmdDatabase, UConsPessoa_Fin, uGrava_Pedido, uCalculo_Pedido;
 
 {$R *.dfm}
 
@@ -101,6 +110,17 @@ end;
 procedure TfrmAprovacao_Ped.btnConsultarClick(Sender: TObject);
 begin
   prc_Consultar;
+  if btnPedidoApp.Visible then
+  begin
+    fDMAprovacao_Ped.prc_Consultar_PedWeb;
+    if not (fDMAprovacao_Ped.cdsConsultaPedWeb.IsEmpty) then
+    begin
+      lblPedidoWeb.Visible := True;
+      lblPedidoWeb.Font.Color := clRed;
+      lblPedidoWeb.Caption := 'Pedido(s) web pendente(s)!';
+      lblPedidoWeb.Refresh;
+    end;
+  end;
 end;
 
 procedure TfrmAprovacao_Ped.prc_Consultar;
@@ -141,7 +161,7 @@ begin
     end;
     vID_Cliente := fDMAprovacao_Ped.qBuscaPedID_CLIENTE.AsInteger;
     vID_Pedido  := fDMAprovacao_Ped.qBuscaPedID.AsInteger;
-  end;                                     
+  end;
 
   SMDBGrid1.UnSelectAllClick(SMDBGrid1);
   SMDBGrid2.UnSelectAllClick(SMDBGrid2);
@@ -226,6 +246,10 @@ procedure TfrmAprovacao_Ped.FormShow(Sender: TObject);
 begin
   fDMAprovacao_Ped := TDMAprovacao_Ped.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMAprovacao_Ped);
+  fDMCadPedido := TDMCadPedido.Create(Self);
+  oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
+  fDMAprovacao_Ped.qParametros_Geral.Open;
+  btnPedidoApp.Visible := fDMAprovacao_Ped.qParametros_GeralFILIAL_PADRAO_PEDWEB.AsInteger > 0;
 end;
 
 procedure TfrmAprovacao_Ped.btnAprovarClientesClick(Sender: TObject);
@@ -552,6 +576,127 @@ begin
     btnAprovarClientes.Enabled    := not(btnAprovarClientes.Enabled);
     btnNaoAprovarClientes.Enabled := not(btnNaoAprovarClientes.Enabled);
   end;
+end;
+
+procedure TfrmAprovacao_Ped.btnPedidoAppClick(Sender: TObject);
+var
+  vGerar : Boolean;
+  vContador : Integer;
+  SavCursor: TCursor;
+begin
+  vFilial := fDMAprovacao_Ped.qParametros_GeralFILIAL_PADRAO_PEDWEB.AsInteger;
+  vGerar := False;
+  vContador := 0;
+  fDMAprovacao_Ped.prc_Consultar_PedWeb;
+  fDMAprovacao_Ped.cdsConsultaPedWeb.First;
+  SavCursor := Screen.Cursor;
+  Screen.Cursor := crHourGlass;
+  ProgressBar1.Min := 0;
+  ProgressBar1.Max := fDMAprovacao_Ped.cdsConsultaPedWeb.RecordCount;
+  try
+    while not fDMAprovacao_Ped.cdsConsultaPedWeb.Eof do
+    begin
+      vGerar := True;
+      Inc(vContador);
+      ProgressBar1.Position := ProgressBar1.Position + 1;
+      fDMCadPedido.prc_Abrir_cdsCliente(fDMAprovacao_Ped.cdsConsultaPedWebID_PESSOA.AsInteger);
+      fDMAprovacao_Ped.prc_Localiza_PedWeb(fDMAprovacao_Ped.cdsConsultaPedWebID.AsInteger);
+      prc_Inserir_Registro_Web;
+      prc_Gravar_Registro_Web;
+
+      // Grava Aprovação na tabela PEDWEB
+      fDMAprovacao_Ped.cdsPedWeb.Edit;
+      fDMAprovacao_Ped.cdsPedWebGERADO.AsString := 'S';
+      fDMAprovacao_Ped.cdsPedWebDATA_APROVADO.AsDateTime := Date;
+      fDMAprovacao_Ped.cdsPedWeb.Post;
+      fDMAprovacao_Ped.cdsPedWeb.ApplyUpdates(0);
+      fDMAprovacao_Ped.cdsConsultaPedWeb.Next;
+    end;
+  finally
+    Screen.Cursor := SavCursor;
+    lblPedidoWeb.Visible := False;
+    lblPedidoWeb.Font.Color := clRed;
+    lblPedidoWeb.Caption := '';
+    lblPedidoWeb.Refresh;
+    ProgressBar1.Position := 0;
+  end;
+
+  if not vGerar then
+  begin
+    ShowMessage('Nenhum registro encontrado!');
+    exit;
+  end
+  else
+    ShowMessage('Pedido(s): ' + IntToStr(vContador)+ ' Gerado(s)');
+  btnConsultarClick(Sender);
+end;
+
+procedure TfrmAprovacao_Ped.prc_Gravar_Itens_Web;
+begin
+  fDMAprovacao_Ped.cdsPedWeb_Item.First;
+  while not fDMAprovacao_Ped.cdsPedWeb_Item.Eof do
+  begin
+    fDMCadPedido.prc_Inserir_Itens;
+    fdmCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger := fDMAprovacao_Ped.cdsPedWeb_ItemID_PRODUTO.AsInteger;
+    fdmCadPedido.cdsPedido_ItensQTD.AsFloat          := fDMAprovacao_Ped.cdsPedWeb_ItemQUANTIDADE.AsFloat;
+    fdmCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat := fDMAprovacao_Ped.cdsPedWeb_ItemQUANTIDADE.AsFloat;
+    fdmCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat := fDMAprovacao_Ped.cdsPedWeb_ItemVLR_DESCONTO.AsFloat;
+    fdmCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := fDMAprovacao_Ped.cdsPedWeb_ItemVLR_UNITARIO.AsFloat;
+    fdmCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat    := fDMAprovacao_Ped.cdsPedWeb_ItemVLR_TOTAL.AsFloat;
+    fdmCadPedido.cdsPedido_ItensOBS.AsString         := fDMAprovacao_Ped.cdsPedWeb_ItemOBS.AsString;
+    fdmCadPedido.cdsPedido_ItensUNIDADE.AsString     := SQLLocate('PRODUTO','ID','UNIDADE',fDMAprovacao_Ped.cdsPedWeb_ItemID_PRODUTO.AsString);
+    fdmCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := SQLLocate('PRODUTO','ID','NOME',fDMAprovacao_Ped.cdsPedWeb_ItemID_PRODUTO.AsString);
+    fDMCadPedido.cdsPedido_Itens.Post;
+    fDMCadPedido.cdsPedido_Itens.ApplyUpdates(0);
+    fDMAprovacao_Ped.cdsPedWeb_Item.Next;
+  end;
+end;
+
+procedure TfrmAprovacao_Ped.prc_Gravar_Registro_Web;
+begin
+  prc_Gravar_Itens_Web;
+  uCalculo_Pedido.prc_Calcula_Perc_Comissao(fDMCadPedido);
+  if fdmCadPedido.cdsPedido.State in [dsBrowse] then
+    fdmCadPedido.cdsPedido.Edit;
+
+  uGrava_Pedido.prc_Gravar(fDMCadPedido,'ALT');
+end;
+
+procedure TfrmAprovacao_Ped.prc_Inserir_Registro_Web;
+var
+  vID_LocalAux: Integer;
+begin
+  vID_LocalAux := fnc_Verificar_Local(fDMCadPedido.cdsParametrosUSA_LOCAL_ESTOQUE.AsString);
+  if vID_LocalAux <= 0 then
+    exit;
+  uGrava_Pedido.prc_Inserir_Ped(fdmCadPedido);
+  fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'P';
+  if (fDMCadPedido.cdsParametrosTIPO_ESTOQUE.AsString = 'P') or (vID_LocalAux > 0) then
+    fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger := vID_LocalAux;
+  fDMCadPedido.cdsPedidoID_REGIMETRIB.AsInteger := fDMCadPedido.cdsFilialID_REGIME_TRIB.AsInteger;
+  fDMCadPedido.cdsPedidoSIMPLES_FILIAL.AsString := fDMCadPedido.cdsFilialSIMPLES.AsString;
+  fDMCadPedido.cdsPedidoID_REGIMETRIB.AsInteger := fDMCadPedido.cdsFilialID_REGIME_TRIB.AsInteger;
+  fDMCadPedido.cdsPedidoSIMPLES_FILIAL.AsString := fDMCadPedido.cdsFilialSIMPLES.AsString;
+  fDMCadPedido.prc_Abrir_CSTICMS(fDMCadPedido.cdsFilialSIMPLES.AsString);
+  fDMCadPedido.cdsPedidoTIPO_ATENDIMENTO.AsInteger := 1;
+  fDMCadPedido.prc_Abrir_cdsCFOP('S');
+  fdmCadPedido.cdsPedidoID_VENDEDOR.AsInteger := fDMAprovacao_Ped.cdsPedWebID_USUARIO.AsInteger;
+  fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger  := fDMAprovacao_Ped.cdsPedWebID_PESSOA.AsInteger;
+  if (fdmCadPedido.qParametros_PedUSA_OPERACAO_AUT.AsString = 'S') and (fdmCadPedido.cdsParametrosID_OPERACAO_VENDA.AsInteger > 0) then
+  begin
+    fdmCadPedido.cdsPedidoID_OPERACAO_NOTA.AsInteger := fdmCadPedido.cdsParametrosID_OPERACAO_VENDA.AsInteger;
+    if (trim(fdmCadPedido.cdsFilialFINALIDADE_PADRAO.AsString) <> '') and (not(fdmCadPedido.cdsFilialFINALIDADE_PADRAO.IsNull)) then
+      fDMCadPedido.cdsPedidoFINALIDADE.AsString := fdmCadPedido.cdsFilialFINALIDADE_PADRAO.AsString;
+  end;
+  fdmCadPedido.cdsPedidoNOME_CLIENTE.AsString := SQLLocate('PESSOA','CODIGO','NOME',fDMAprovacao_Ped.cdsPedWebID_PESSOA.AsString);
+  fdmCadPedido.cdsPedidoID_CONDPGTO.AsInteger := fDMAprovacao_Ped.cdsPedWebID_FORMA_PAGAMENTO.AsInteger;
+  fdmCadPedido.cdsPedidoVLR_DESCONTO.AsFloat  := fDMAprovacao_Ped.cdsPedWebVLR_DESCONTO.AsFloat;
+  fdmCadPedido.cdsPedidoVLR_TOTAL.AsFloat     := fDMAprovacao_Ped.cdsPedWebVLR_TOTAL.AsFloat;
+  fdmCadPedido.cdsPedidoDTEMISSAO.AsDateTime  := fDMAprovacao_Ped.cdsPedWebDATA_EMISSAO.AsDateTime;
+  fdmCadPedido.cdsPedidoUSUARIO.AsString      := vUsuario;
+  fdmcadpedido.cdsPedidoID_PEDWEB.AsInteger   := fDMAprovacao_Ped.cdsConsultaPedWebID.AsInteger;
+  fdmCadPedido.cdsPedidoID_CONDPGTO.AsInteger := fDMAprovacao_Ped.cdsConsultaPedWebCOND_PAGAMENTO.AsInteger;
+  fdmCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P';
 end;
 
 end.

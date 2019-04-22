@@ -347,6 +347,10 @@ type
     N54: TMenuItem;
     MovimentoProdutoST1: TMenuItem;
     AjusteEstoqueReservaPorOrdemProduo1: TMenuItem;
+    BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1: TMenuItem;
+    PedidoWeb1: TMenuItem;
+    ConsultaProdutosST1: TMenuItem;
+    ConfiguraoCertificado1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -591,6 +595,11 @@ type
     procedure AtualizarPreosporCdigodeBarras1Click(Sender: TObject);
     procedure MovimentoProdutoST1Click(Sender: TObject);
     procedure AjusteEstoqueReservaPorOrdemProduo1Click(Sender: TObject);
+    procedure BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1Click(
+      Sender: TObject);
+    procedure PedidoWeb1Click(Sender: TObject);
+    procedure ConsultaProdutosST1Click(Sender: TObject);
+    procedure ConfiguraoCertificado1Click(Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -651,7 +660,7 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina,
   UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida,
   UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas,
-  uProdutoAtualizaPreco, uCadMovProdST, UAjusteEstoqueOP_Res;
+  uProdutoAtualizaPreco, uCadMovProdST, UAjusteEstoqueOP_Res, UCadPedWeb, UConsProdSTRet, UCadFilial_Certificado;
 
 {$R *.dfm}
 
@@ -2069,6 +2078,7 @@ end;
 
 procedure TfMenu.BaixaNotadeBeneficiamento1Click(Sender: TObject);
 begin
+  vTipo_ConsNotaBeneficiamento := 'F';
   OpenForm(TfrmBaixaNFDevolvida,wsMaximized);
 end;
 
@@ -2115,6 +2125,28 @@ end;
 procedure TfMenu.AjusteEstoqueReservaPorOrdemProduo1Click(Sender: TObject);
 begin
   OpenForm(TfrmAjusteEstoqueOP_Res,wsMaximized);
+end;
+
+procedure TfMenu.BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1Click(
+  Sender: TObject);
+begin
+  vTipo_ConsNotaBeneficiamento := 'C';
+  OpenForm(TfrmBaixaNFDevolvida,wsMaximized);
+end;
+
+procedure TfMenu.PedidoWeb1Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadPedWeb,wsMaximized);
+end;
+
+procedure TfMenu.ConsultaProdutosST1Click(Sender: TObject);
+begin
+  OpenForm(TfrmConsProdSTRet,wsMaximized);
+end;
+
+procedure TfMenu.ConfiguraoCertificado1Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadFilial_Certificado,wsMaximized);
 end;
 
 initialization

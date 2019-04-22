@@ -245,7 +245,6 @@ begin
   vQtdEntrada := 0;
   vQtdSaida   := 0;
 
-  SMDBGrid1.DisableScroll;
   fDMConsEstoque.cdsEstoque_Mov.First;
   while not fDMConsEstoque.cdsEstoque_Mov.Eof do
   begin
@@ -266,6 +265,7 @@ end;
 
 procedure TfrmConsEstoque_Mov.btnConsultarClick(Sender: TObject);
 begin
+  SMDBGrid1.DisableScroll;
   prc_Condicao;
   if RzPageControl1.ActivePage = TS_Produto_Det then
   begin
@@ -284,6 +284,7 @@ begin
     prc_Consultar_Reserva;
     prc_Le_cdsEstoque_Mov_Res;
   end;
+  SMDBGrid1.EnableScroll;
 end;
 
 procedure TfrmConsEstoque_Mov.prc_Consultar_Acum;
@@ -438,7 +439,7 @@ begin
   case ComboBox1.ItemIndex of
     0: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPRODUTO;TAMANHO;NOME_COR;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NOMEPESSOA;NUMNOTA';
     1: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPESSOA;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
-    3: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOME_CENTROCUSTO;CODIGO_GRUPO;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
+    3: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'CODIGO_CCUSTO;CODIGO_GRUPO;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
   end;
   if (ckEstruturado.Checked) and (ComboBox1.ItemIndex < 2) then
     fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOME_GRUPO;'+fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames;

@@ -3382,6 +3382,63 @@ type
     cdsPedido_ConsultaCNPJ_CPF: TStringField;
     qParametros_PedDTENTREGA_ZERADA_ORC: TStringField;
     cdsAcabamentoCALCULA_MEDIDAS: TStringField;
+    cdsPedidoImp_ItensNOME_ACABAMENTO: TStringField;
+    qFilial_Relatorio_MenuGERAR_TAMANHO: TStringField;
+    qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField;
+    sdsTriCCusto: TSQLDataSet;
+    dspTriCCusto: TDataSetProvider;
+    cdsTriCCusto: TClientDataSet;
+    dsTriCCusto: TDataSource;
+    cdsTriCCustoID: TIntegerField;
+    cdsTriCCustoNUM_PEDIDO: TIntegerField;
+    cdsTriCCustoPEDIDO_CLIENTE: TStringField;
+    cdsTriCCustoID_CLIENTE_TRIANGULAR: TIntegerField;
+    cdsTriCCustoNOME_TRIANGULAR: TStringField;
+    cdsTriCCustoEND_TRI: TStringField;
+    cdsTriCCustoCOMPL_TRI: TStringField;
+    cdsTriCCustoBAIRRO_TRI: TStringField;
+    cdsTriCCustoCID_TRI: TStringField;
+    cdsTriCCustoCEP_TRI: TStringField;
+    cdsTriCCustoUF_TRI: TStringField;
+    cdsTriCCustoNUM_END_TRI: TStringField;
+    cdsTriCCustoNOME_CCUSTO: TStringField;
+    cdsTriCCustoEND_CCUSTO: TStringField;
+    cdsTriCCustoCOMPL_CCUSTO: TStringField;
+    cdsTriCCustoBAIRRO_CCUSTO: TStringField;
+    cdsTriCCustoID_CIDADE_CCUSTO: TIntegerField;
+    cdsTriCCustoCEP_CCUSTO: TStringField;
+    cdsTriCCustoUF_CCUSTO: TStringField;
+    cdsTriCCustoNUM_END_CCUSTO: TStringField;
+    cdsTriCCustoCID_CCUSTO: TStringField;
+    frxTriCCusto: TfrxDBDataset;
+    cdsTriCCustoNUM_CONTRATO: TStringField;
+    cdsTriCCustoCONTATO_TRI: TStringField;
+    cdsTriCCustoCNPJ_TRI: TStringField;
+    cdsTriCCustoEMAL_TRI: TStringField;
+    cdsTriCCustoDDD_TRI: TIntegerField;
+    cdsTriCCustoFONE_TRI: TStringField;
+    cdsTriCCustoCONTATO_CCUSTO: TStringField;
+    cdsTriCCustoCNPJ_CCUSTO: TStringField;
+    cdsTriCCustoEMAIL_CCUSTO: TStringField;
+    cdsTriCCustoDDD_CCUSTO: TIntegerField;
+    cdsTriCCustoFONE_CCUSTO: TStringField;
+    cdsPedidoImpCOMPL_END_FILIAL: TStringField;
+    cdsTriCCustoINSC_TRI: TStringField;
+    qParametros_OCUSA_NUM_DOC: TStringField;
+    qParametros_FinUSA_END_CCUSTO: TStringField;
+    sdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField;
+    cdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField;
+    cdsTriCCustoEND_TRI_COB: TStringField;
+    cdsTriCCustoBAIRRO_TRI_COB: TStringField;
+    cdsTriCCustoCID_TRI_COB: TStringField;
+    cdsTriCCustoCEP_TRI_COB: TStringField;
+    cdsTriCCustoNUM_END_COB: TStringField;
+    cdsTriCCustoCOMPL_TRI_COB: TStringField;
+    cdsTriCCustoUF_TRI_COB: TStringField;
+    cdsTriCCustoCONTATO_COMPRAS: TStringField;
+    sdsPedidoID_PEDWEB: TIntegerField;
+    cdsPedidoID_PEDWEB: TIntegerField;
+    cdsTriCCustoEMAIL_COMRAS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3419,13 +3476,12 @@ type
 
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
 
-    procedure prc_Imp_Desconto;
-
+    procedure prc_Imp_Desconto;                
   public
     { Public declarations }
     vMSGErro: String;
     vMsgErroParc: String;
-    ctCommand, ctConsulta, ctProduto, ctDuplicata: String;
+    ctCommand, ctConsulta, ctProduto, ctDuplicata, ctHistSenha : String;
     ctServico: String;
     ctCliente, ctCFOP: String;
     ctqProximoPedido: String;
@@ -3441,9 +3497,9 @@ type
     vID_Cond_Pagto_Ant: Integer;
     vGravou_OK_Ajuste: Boolean;
     vImpPreco: Boolean;
-    vImp_cabecalho : Boolean;
-    vID_Operacao : Integer;
-    vFinalidade : String;
+    vImp_cabecalho: Boolean;
+    vID_Operacao: Integer;
+    vFinalidade: String;
 
     vVlr_Unitario_Copia: Real;
     vID_Cor_Copia: Integer;
@@ -3457,12 +3513,12 @@ type
     vImpPedTerceiro: Boolean;
 
     //********* ADD
-    vFator_Calculo : Real;
-    vTempo_Prod_Calc : Real;
-    vVlr_Unitario_Calc : Real;
-    vQtd_Calc : Real;
-    vConfirma_Calc : Boolean;
-    vVlr_Maquina_Calc : Real;
+    vFator_Calculo: Real;
+    vTempo_Prod_Calc: Real;
+    vVlr_Unitario_Calc: Real;
+    vQtd_Calc: Real;
+    vConfirma_Calc: Boolean;
+    vVlr_Maquina_Calc: Real;
     //*********
 
     procedure prc_Localizar(ID: Integer);
@@ -3470,14 +3526,15 @@ type
 
     procedure prc_Inserir_Itens;
 
-    procedure prc_Abrir_cdsCliente(Tipo: String = 'C');
+    procedure prc_Abrir_cdsCliente(Tipo: String = 'C'); overload;
+    procedure prc_Abrir_cdsCliente(ID : Integer); overload;
     procedure prc_Abrir_cdsCFOP(Tipo_Reg: String);
     procedure prc_Abrir_qProduto(ID:Integer);
     procedure Abrir_Duplicatas(ID: Integer);
 
     procedure prc_Situacao_Orc(ID_Orcamento: Integer);
     procedure prc_Abrir_Produto;
-    procedure prc_Abrir_ProdutoLoja(ID : Integer ; Cod_Barra, Referencia : String);
+    procedure prc_Abrir_ProdutoLoja(ID: Integer ; Cod_Barra, Referencia: String);
     function fnc_Existe_Fat(ID: Integer): Integer;
     function fnc_Existe_DupPaga(ID: Integer): Integer;
     procedure prc_Abrir_CSTICMS(Tipo: String);
@@ -3554,6 +3611,7 @@ begin
   ctCFOP       := sdsCFOP.CommandText;
   ctServico    := sdsServico.CommandText;
   ctDuplicata  := sdsDuplicata.CommandText;
+  ctHistSenha  := sdsHist_Senha.CommandText;
   vID_Variacao := 0;
   cdsParametros.Close;
   cdsFilial.Close;
@@ -3724,6 +3782,7 @@ begin
   if vID_Terceiro_Aux > 0 then
     cdsPedido_ItensID_ATELIER.AsInteger := vID_Terceiro_Aux;
   cdsPedido_ItensTIPO_OS.AsString := 'OU';
+  cdsPedido_ItensATUALIZA_PRECO_CUSTO.AsString := 'N';
 end;
 
 procedure TDMCadPedido.cdsPedidoNewRecord(DataSet: TDataSet);
@@ -3791,6 +3850,7 @@ end;
 
 procedure TDMCadPedido.prc_Abrir_cdsCliente(Tipo: String);
 begin
+  inherited;
   cdsCliente.Close;
   sdsCliente.CommandText := ctCliente + ' WHERE INATIVO = ' + QuotedStr('N');
   if Tipo = 'F' then
@@ -3980,7 +4040,7 @@ begin
   cdsProduto.Open;
 end;
 
-procedure TDMCadPedido.prc_Abrir_ProdutoLoja(ID : Integer ; Cod_Barra, Referencia : String);
+procedure TDMCadPedido.prc_Abrir_ProdutoLoja(ID: Integer ; Cod_Barra, Referencia: String);
 begin
   cdsProduto.Close;
   sdsProduto.CommandText := ctProduto;
@@ -4135,9 +4195,10 @@ begin
   if FileExists(cdsPedidoImpENDLOGO.AsString) then
   begin
     if frxReport1.FindComponent('Picture1')<> nil then
+    begin
       TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImpENDLOGO.AsString);
+    end;
   end;
-
 end;
 
 procedure TDMCadPedido.cdsPedido_Item_TipoCalcFields(DataSet: TDataSet);
@@ -4318,14 +4379,17 @@ begin
 
   if vTipo_Rel_Ped = 'PICTO' then
     Exit;
-  if vNum_Rel_Fast = 3 then
-  begin
-    TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture := nil;
-    if FileExists(mItensImpFoto_End.AsString) then
+
+  try
+    if (vNum_Rel_Fast = 3) then
     begin
-      TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture.LoadFromFile(mItensImpFoto_End.AsString);
-      ShowMessage(mItensImpFoto_End.AsString + ' Acima');
+      TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture := nil;
+      if FileExists(mItensImpFoto_End.AsString) then
+      begin
+        TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture.LoadFromFile(mItensImpFoto_End.AsString);
+      end;
     end;
+  except
   end;
 
   if (vNum_Rel_Fast > 1) or (vTipo_Rel_Ped = 'P') or (vTipo_Rel_Ped = 'R') and (cdsParametrosUSA_GRADE.AsString = 'S') then
@@ -4367,14 +4431,16 @@ begin
       end;
     end;
 
-    if vNum_Rel_Fast = 3 then
-    begin
-      TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture := nil;
-      if FileExists(mItensImpFoto_End.AsString) then
+    try
+      if vNum_Rel_Fast = 3 then
       begin
-        TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture.LoadFromFile(mItensImpFoto_End.AsString);
-        ShowMessage(mItensImpFoto_End.AsString + ' Abaixo');
-    end;
+       TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture := nil;
+        if FileExists(mItensImpFoto_End.AsString) then
+        begin
+          TfrxPictureView(frxReport1.FindComponent('Foto_Prod')).Picture.LoadFromFile(mItensImpFoto_End.AsString);
+        end;
+      end;
+    except
     end;
 
     i := 0;
@@ -4448,6 +4514,7 @@ begin
       TfrxMemoView(frxReport1.FindComponent('Qtd_S'+vCompl2+IntToStr(i))).Visible   := True;
     end;
   end;
+
 end;
 
 procedure TDMCadPedido.frxDBDataset1First(Sender: TObject);
@@ -4613,6 +4680,17 @@ end;
 procedure TDMCadPedido.cdsPedidoImp_ItensCalcFields(DataSet: TDataSet);
 begin
   cdsPedidoImp_ItensCOD_BARRAS.AsString := '2 - ' + FormatFloat('000000',cdsPedidoImpNUM_PEDIDO.AsInteger) + ' / ' + FormatFloat('000',cdsPedidoImp_ItensITEM.AsInteger);
+
+end;
+
+procedure TDMCadPedido.prc_Abrir_cdsCliente(ID: Integer);
+begin
+  inherited;
+  cdsCliente.Close;
+  sdsCliente.CommandText := ctCliente + ' WHERE INATIVO = ' + QuotedStr('N');
+  if ID > 0 then
+    sdsCliente.CommandText := sdsCliente.CommandText + ' AND CODIGO = ' + inttostr(ID);
+  cdsCliente.Open;
 end;
 
 end.

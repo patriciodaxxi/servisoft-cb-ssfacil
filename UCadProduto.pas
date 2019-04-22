@@ -776,6 +776,8 @@ type
     btnExcluir_Proc: TNxButton;
     btnAtualizar_Proc: TNxButton;
     btnAjustarProcesso: TBitBtn;
+    Label250: TLabel;
+    Edit13: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1066,21 +1068,20 @@ type
     procedure prc_Atualiza_Percentual;
     procedure prc_Gerar_Ref_Estruturada;
     procedure prc_Grava_Peso;
-    function fnc_Duplicidade_Mat(ID_Prod : Integer): String;
+    function fnc_Duplicidade_Mat(ID_Prod: Integer): String;
 
     function fnc_Verifica_Lote(ID: Integer; Num_Lote: String): Boolean;
 
     function fnc_Filial: Boolean;
 
     function fnc_Busca_Semi: Integer;
-    //function fnc_Custo(ID : Integer ; Combinacao : Boolean = False) : Boolean;
+    //function fnc_Custo(ID: Integer ; Combinacao: Boolean = False): Boolean;
 
     procedure prcExportaCadastroMGV5;
     procedure prcAtualizaPrecoMGV5;
 
-    procedure prc_Verificar_Cor_Comb(ID : Integer);
-    procedure prc_Gravar_Consumo_Proc;
-
+    procedure prc_Verificar_Cor_Comb(ID: Integer);
+    procedure prc_Gravar_Consumo_Proc; 
   public
     { Public declarations }
     vID_Produto_Local: Integer;
@@ -1207,8 +1208,8 @@ var
   vGerar_Ref: Boolean;
   vAux: Integer;
   vID_SemiAux: Integer;
-  vMaterial : String;
-  Flag : Boolean;
+  vMaterial: String;
+  Flag: Boolean;
 begin
   if fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S' then
     if (trim(fDMCadProduto.cdsProdutoNOME_MODELO.AsString) <> '') and (fDMCadProduto.cdsProdutoTIPO_REG.AsString <> 'P') then
@@ -1817,7 +1818,11 @@ begin
   end;
 
   if fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S' then
+  begin
     Label110.Caption := 'Construção/Linha:';
+    Label250.Visible := True;
+    Edit13.Visible   := True;
+  end;
   Label246.Visible  := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
   DBEdit159.Visible := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
   Label247.Visible  := (fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S');
@@ -1843,7 +1848,7 @@ end;
 
 procedure TfrmCadProduto.prc_Consultar;
 var
-  i : integer;
+  i: integer;
 begin
   SMDBGrid1.DisableScroll;
 
@@ -1899,6 +1904,9 @@ begin
       fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText
                                       + ' AND PRO.NOME_MODELO LIKE ' + QuotedStr('%'+Edit12.Text+'%');
 
+    if trim(Edit13.Text) <> '' then
+      fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText +
+                                                       ' AND LIN.NOME LIKE ' + QuotedStr('%'+Edit13.Text+'%');
     case ComboBox2.ItemIndex of
       0: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND TIPO_REG = ' + QuotedStr('P');
       1: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND TIPO_REG = ' + QuotedStr('M');
@@ -2040,7 +2048,7 @@ end;
 
 procedure TfrmCadProduto.btnConfirmarClick(Sender: TObject);
 var
-  vIDAux : Integer;
+  vIDAux: Integer;
 begin
   vIDAux := fDMCadProduto.cdsProdutoID.AsInteger;
   prc_Gravar_Registro;
@@ -2160,8 +2168,8 @@ end;
 
 procedure TfrmCadProduto.btnExcluir_ConsumoClick(Sender: TObject);
 var
-  vItemAux : Integer;
-  vFlag : Boolean;
+  vItemAux: Integer;
+  vFlag: Boolean;
 begin
   if fDMCadProduto.cdsProduto_Consumo.IsEmpty then
     exit;
@@ -2233,12 +2241,12 @@ begin
   FreeAndNil(ffrmCadProduto_Consumo);
 
   ceVlr_Total_Mat.Value := fDMCadProduto.fnc_Calcular_Mat;
-  fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;ITEM';
+  fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;NOME_POSICAO';
 end;
 
 procedure TfrmCadProduto.btnAlterar_ConsumoClick(Sender: TObject);
 var
-  vItemAux : Integer;
+  vItemAux: Integer;
 begin
   if (fDMCadProduto.cdsProduto_ConsumoITEM.AsInteger < 1) or not(fDMCadProduto.cdsProduto_Consumo.Active) or
      (fDMCadProduto.cdsProduto_Consumo.IsEmpty) then
@@ -2462,6 +2470,10 @@ begin
   fDMCadProduto.cdsProduto_Forn.Open;
   fDMCadProduto.cdsProduto_Consumo.Close;
   fDMCadProduto.cdsProduto_Consumo.Open;
+  fDMCadProduto.cdsProduto_Consumo_Proc.Close;
+  fDMCadProduto.cdsProduto_Consumo_Proc.Open;
+  fDMCadProduto.cdsProduto_Consumo_Proc.First;
+
   if (fDMCadProduto.qParametrosEMPRESA_VEICULO.AsString = 'S') then
     fDMCadProduto.prc_Abrir_Veiculo(fDMCadProduto.cdsProdutoID.AsInteger);
 
@@ -2550,7 +2562,7 @@ begin
     prc_Controle_Veiculo
   else
   if (RzPageControl2.ActivePage = TS_Engenharia) and (fDMCadProduto.cdsProdutoID.AsInteger > 0) and (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L') then
-    fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;ITEM'
+    fDMCadProduto.cdsProduto_Consumo.IndexFieldNames := 'ID;ID_SETOR;NOME_POSICAO'
   else
   if (RzPageControl2.ActivePage = TS_PCP) and (fDMCadProduto.cdsProdutoID.AsInteger > 0) then
     prc_Controle_PCP
@@ -4076,7 +4088,7 @@ end;
 
 procedure TfrmCadProduto.btnCorClick(Sender: TObject);
 var
-  vPreco : Real;
+  vPreco: Real;
 begin
   fDMCadProduto.prc_Abrir_Cor_Combinacao('C');
   ffrmCadProduto_Cor := TfrmCadProduto_Cor.Create(self);
@@ -4906,7 +4918,7 @@ end;
 procedure TfrmCadProduto.btnGradeRefClick(Sender: TObject);
 var
   ffrmCadProduto_GradeNum: TfrmCadProduto_GradeNum;
-  ffrmCadProduto_GradeRefTam : TfrmCadProduto_GradeRefTam;
+  ffrmCadProduto_GradeRefTam: TfrmCadProduto_GradeRefTam;
 begin
   if (fDMCadProduto.cdsProdutoID.AsInteger < 1) or not(fDMCadProduto.cdsProduto.Active) then
     exit;
@@ -5258,7 +5270,7 @@ begin
   ShowMessage('Conversão finalizada!');
 end;
 
-function TfrmCadProduto.fnc_Duplicidade_Mat(ID_Prod : Integer): String;
+function TfrmCadProduto.fnc_Duplicidade_Mat(ID_Prod: Integer): String;
 var
   sds: TSQLDataSet;
 begin
@@ -5290,7 +5302,7 @@ begin
   end;
 end;
 
-{function TfrmCadProduto.fnc_Custo(ID : Integer ; Combinacao : Boolean = False) : Boolean;
+{function TfrmCadProduto.fnc_Custo(ID: Integer; Combinacao: Boolean = False): Boolean;
 var
   ffrmSenha: TfrmSenha;
 begin
@@ -5339,7 +5351,7 @@ end;}
 
 procedure TfrmCadProduto.btnAjustarObsMatClick(Sender: TObject);
 var
-  vObsMaterial : String;
+  vObsMaterial: String;
 begin
   if fDMCadProduto.qParametros_ProdGRAVAR_PRIMEIRO_MAT.AsString <> 'S' then
     exit;
@@ -5590,7 +5602,7 @@ end;
 
 procedure TfrmCadProduto.prc_Grava_Peso;
 var
-  vPesoAux : Real;
+  vPesoAux: Real;
   sds: TSQLDataSet;
 begin
   vPesoAux := 0;
@@ -5658,7 +5670,7 @@ end;
 procedure TfrmCadProduto.SMDBGrid3KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
-  ffrmCadProduto_Consumo_Proc : TfrmCadProduto_Consumo_Proc;
+  ffrmCadProduto_Consumo_Proc: TfrmCadProduto_Consumo_Proc;
 begin
   if (Key = Vk_F3) then
   begin
@@ -5854,10 +5866,10 @@ begin
   fDMCadProduto.cdsCliente.Open;
 end;
 
-procedure TfrmCadProduto.prc_Verificar_Cor_Comb(ID : Integer);
+procedure TfrmCadProduto.prc_Verificar_Cor_Comb(ID: Integer);
 var
   sds: TSQLDataSet;
-  vOBS : String;
+  vOBS: String;
 begin
   vOBS := '';
   sds  := TSQLDataSet.Create(nil);
@@ -5932,7 +5944,7 @@ begin
     MessageDlg('*** Já existe processo lançado nesta Posição!', mtInformation, [mbOk], 0);
     exit;
   end;
-  
+
   if MessageDlg('Deseja Atualizar o Processo?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
 
@@ -5941,7 +5953,7 @@ end;
 
 procedure TfrmCadProduto.btnAjustarProcessoClick(Sender: TObject);
 var
-  vItemAux : Integer;
+  vItemAux: Integer;
 begin
   if fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString <> 'S' then
     exit;
@@ -5959,7 +5971,9 @@ begin
       while not fDMCadProduto.cdsProduto_Consumo.Eof do
       begin
         if fDMCadProduto.cdsProduto_Consumo_Proc.IsEmpty then
+        begin
           prc_Gravar_Consumo_Proc;
+          fDMCadProduto.cdsProduto_Consumo_Proc.ApplyUpdates(0);        end;
         fDMCadProduto.cdsProduto_Consumo.Next;
       end;
     end;
@@ -5969,7 +5983,7 @@ end;
 
 procedure TfrmCadProduto.prc_Gravar_Consumo_Proc;
 var
-  vItemAux : Integer;
+  vItemAux: Integer;
 begin
   vItemAux := 0;
   fDMCadProduto.cdsPosicao_Proc.Close;
@@ -5988,6 +6002,7 @@ begin
 
     fDMCadProduto.cdsPosicao_Proc.Next;
   end;
+
 end;
 
 end.

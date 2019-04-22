@@ -48,7 +48,7 @@ uses
   procedure prc_Gravar_cdsNotaFiscal_ItensAux(fDMCadNotaFiscal: TDMCadNotaFiscal);
   function fnc_busca_icm(fDMCadNotaFiscal: TDMCadNotaFiscal): Real;
 
-  procedure prc_Posicionar_Regra_Empresa(fDMCadNotaFiscal: TDMCadNotaFiscal; ID_Operacao: Integer; Finalidade: String ; Cabecalho : Boolean = False);
+  procedure prc_Posicionar_Regra_Empresa(fDMCadNotaFiscal: TDMCadNotaFiscal; ID_Operacao: Integer; Finalidade: String; Cabecalho: Boolean = False);
 
   procedure Atualiza_Preco2(fDMCadNotaFiscal: TDMCadNotaFiscal);
   procedure prc_Aplicar_Margem2(fDMCadNotaFiscal: TDMCadNotaFiscal);
@@ -66,7 +66,7 @@ uses
 var
   vVlrCusto: Real;
   vVlrCusto_Total: Real;
-  vVlrTotal_Nota_Calc : Real;
+  vVlrTotal_Nota_Calc: Real;
 
 implementation
 
@@ -426,9 +426,9 @@ begin
             vDescAux := StrToFloat(FormatFloat('0.00',vDesconto));
         end;
         if fDMCadNotaFiscal.cdsParametrosARREDONDAR_5.AsString = 'B' then
-          vDesconto     := StrToCurr(FormatCurr('0.00',vDesconto - vDescAux))
+          vDesconto := StrToCurr(FormatCurr('0.00',vDesconto - vDescAux))
         else
-          vDesconto     := StrToFloat(FormatFloat('0.00',vDesconto - vDescAux));
+          vDesconto := StrToFloat(FormatFloat('0.00',vDesconto - vDescAux));
         vDescontoItem := StrToFloat(FormatFloat('0.00',vDescAux));
       end;
     end
@@ -951,7 +951,7 @@ var
   vVlrDescAux: Real;
   vVlrFreteAnt, vVlrSeguroAnt, vVlrOutrasDespAnt, vVlrPisAnt, vVlrCofinsAnt, vVlrIPIAnt,
   vVlrTaxaCiscomex, vVlr_OutrosAnt, vVlrIPIDevolAnt: Real;
-  vVlrFCPSTAnt : Real;
+  vVlrFCPSTAnt: Real;
   vPercBase900: Real;
   vCodCST900: String;
   vCodCST: String;
@@ -1663,9 +1663,9 @@ end;
 
 procedure prc_Calcular_PisCofins_Suframa(fDMCadNotaFiscal: TDMCadNotaFiscal; VlrTotal: Real);
 var
-  vAux : Real;
-  vVlrDescAux : Real;
-  vICMSDeson : Real;
+  vAux: Real;
+  vVlrDescAux: Real;
+  vICMSDeson: Real;
 begin
   vVlrDescAux := 0;
   vICMSDeson  := 0;
@@ -2309,7 +2309,7 @@ end;
 procedure prc_Calcular_Peso(fDMCadNotaFiscal: TDMCadNotaFiscal);
 var
   vVlrAux: Real;
-  vQtdeAux : Real;
+  vQtdeAux: Real;
 begin
   if fDMCadNotaFiscal.cdsProdutoID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger then
     fDMCadNotaFiscal.cdsProduto.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,([Locaseinsensitive]));
@@ -2372,7 +2372,7 @@ end;
 function fnc_Calcula_Importacao(fDMCadNotaFiscal: TDMCadNotaFiscal): Real;
 var
   vAux: Real;
-  vVlrFreteAux : Real;
+  vVlrFreteAux: Real;
 begin
   Result := 0;
   if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IMPORTACAO.AsFloat)) > 0 then
@@ -2399,14 +2399,14 @@ var
   vID_Tipo_Cobranca_Aux, vID_Conta_Aux: Integer;
   vValorParc_Com, vValorOri_Com: Real;
   vPerc_Base_Com: Real;
-  vVlrImposto : Real;
-  vVlrFrete : Real;
-  vVlrDup : Real;
-  vVlrDupAux : Real;
-  viparc : Integer;
-  vVlrParc_Prim : Real;
-  vVlrParc_Ult : Real;
-  vValorParc_Orig : Real;
+  vVlrImposto: Real;
+  vVlrFrete: Real;
+  vVlrDup: Real;
+  vVlrDupAux: Real;
+  viparc: Integer;
+  vVlrParc_Prim: Real;
+  vVlrParc_Ult: Real;
+  vValorParc_Orig: Real;
 begin
   Result := False;
   fDMCadNotaFiscal.cdsNotaFiscal_Parc.First;
@@ -2849,7 +2849,7 @@ end;
 //4.00
 procedure prc_Calcular_FCP(fDMCadNotaFiscal: TDMCadNotaFiscal);
 var
-  vBaseAux : Real;
+  vBaseAux: Real;
 begin
   if fDMCadNotaFiscal.cdsNotaFiscalTIPO_REG.AsString = 'NTE' then
     exit;
@@ -3486,7 +3486,7 @@ begin
   fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat));
 end;
 
-procedure prc_Posicionar_Regra_Empresa(fDMCadNotaFiscal: TDMCadNotaFiscal; ID_Operacao: Integer; Finalidade: String ; Cabecalho : Boolean = False);
+procedure prc_Posicionar_Regra_Empresa(fDMCadNotaFiscal: TDMCadNotaFiscal; ID_Operacao: Integer; Finalidade: String; Cabecalho: Boolean = False);
 var
   vCodRegAux: Integer;
   vTipoAux: String;
@@ -4084,8 +4084,8 @@ end;
 
 procedure prc_Calcular_ST_Ret(fDMCadNotaFiscal: TDMCadNotaFiscal);
 var
-  vBaseSTRet : Real;
-  vVlrSTRet : Real;
+  vBaseSTRet: Real;
+  vVlrSTRet: Real;
 begin
   if fDMCadNotaFiscal.cdsNotaFiscalTIPO_REG.AsString = 'NTE' then
     exit;
@@ -4135,9 +4135,9 @@ end;
 
 procedure prc_Calcular_ICMS_Efet(fDMCadNotaFiscal: TDMCadNotaFiscal);
 var
-  vPerc_Interno : Real;
-  vVlrAux : Real;
-  vPerc_Red : Real;
+  vPerc_Interno: Real;
+  vVlrAux: Real;
+  vPerc_Red: Real;
 begin
   if fDMCadNotaFiscal.cdsNotaFiscalTIPO_REG.AsString = 'NTE' then
     exit;

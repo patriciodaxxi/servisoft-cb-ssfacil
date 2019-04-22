@@ -423,7 +423,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
       Height = 21
       DataField = 'PERC_ICMS'
       DataSource = DMCadPedido.dsPedido_Itens
-      TabOrder = 6
+      TabOrder = 7
     end
     object DBEdit4: TDBEdit
       Left = 140
@@ -432,7 +432,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
       Height = 21
       DataField = 'PERC_IPI'
       DataSource = DMCadPedido.dsPedido_Itens
-      TabOrder = 7
+      TabOrder = 8
     end
     object DBEdit5: TDBEdit
       Left = 140
@@ -451,7 +451,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
       Height = 21
       DataField = 'VLR_TOTAL'
       DataSource = DMCadPedido.dsPedido_Itens
-      TabOrder = 8
+      TabOrder = 9
     end
     object DBDateEdit1: TDBDateEdit
       Left = 140
@@ -461,7 +461,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
       DataField = 'DTENTREGA'
       DataSource = DMCadPedido.dsPedido_Itens
       NumGlyphs = 2
-      TabOrder = 5
+      TabOrder = 6
       StartOfWeek = Sun
     end
     object DBMemo2: TDBMemo
@@ -472,7 +472,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
       DataField = 'OBS'
       DataSource = DMCadPedido.dsPedido_Itens
       ScrollBars = ssVertical
-      TabOrder = 9
+      TabOrder = 10
     end
     object btnCliente: TRzBitBtn
       Left = 141
@@ -487,7 +487,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 10
+      TabOrder = 11
       OnClick = btnClienteClick
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
@@ -576,10 +576,22 @@ object frmCadOC_Itens: TfrmCadOC_Itens
       Items.Strings = (
         'Sim'
         'N'#227'o')
-      TabOrder = 11
+      TabOrder = 12
       Values.Strings = (
         'S'
         'N')
+    end
+    object DBCheckBox1: TDBCheckBox
+      Left = 264
+      Top = 68
+      Width = 265
+      Height = 17
+      Caption = 'Atualiza pre'#231'o de custo na entrada'
+      DataField = 'ATUALIZA_PRECO_CUSTO'
+      DataSource = DMCadPedido.dsPedido_Itens
+      TabOrder = 5
+      ValueChecked = 'True'
+      ValueUnchecked = 'False'
     end
   end
   object pnlCod_Barras: TPanel

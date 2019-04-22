@@ -1,8 +1,8 @@
 object dmCadProduto: TdmCadProduto
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 40
-  Top = 12
+  Left = 46
+  Top = 20
   Height = 714
   Width = 1288
   object sdsProduto: TSQLDataSet
@@ -476,6 +476,7 @@ object dmCadProduto: TdmCadProduto
     DataSet = sdsProduto
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProdutoUpdateError
+    OnGetTableName = dspProdutoGetTableName
     Left = 82
     Top = 1
   end
@@ -1428,7 +1429,10 @@ object dmCadProduto: TdmCadProduto
   object sdsProduto_Consumo: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT PRO.*'#13#10'FROM PRODUTO_CONSUMO PRO'#13#10'WHERE PRO.ID = :ID'
+    CommandText = 
+      'SELECT PRO.*, POS.NOME NOME_POSICAO'#13#10'FROM PRODUTO_CONSUMO PRO'#13#10'L' +
+      'EFT JOIN POSICAO POS ON (PRO.ID_POSICAO = POS.ID)'#13#10'WHERE PRO.ID ' +
+      '= :ID'
     DataSource = dsProduto_Mestre
     MaxBlobSize = -1
     Params = <
@@ -1495,11 +1499,16 @@ object dmCadProduto: TdmCadProduto
       FixedChar = True
       Size = 1
     end
+    object sdsProduto_ConsumoNOME_POSICAO: TStringField
+      FieldName = 'NOME_POSICAO'
+      ProviderFlags = []
+      Size = 30
+    end
   end
   object cdsProduto_Consumo: TClientDataSet
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Consumo
-    IndexFieldNames = 'ID;ITEM'
+    IndexFieldNames = 'ID;ID_SETOR;ID_POSICAO'
     Params = <>
     BeforePost = cdsProduto_ConsumoBeforePost
     OnCalcFields = cdsProduto_ConsumoCalcFields
@@ -1577,13 +1586,6 @@ object dmCadProduto: TdmCadProduto
       ProviderFlags = []
       Calculated = True
     end
-    object cdsProduto_ConsumoNOME_POSICAO: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'NOME_POSICAO'
-      ProviderFlags = []
-      Size = 30
-      Calculated = True
-    end
     object cdsProduto_ConsumoID_SETOR: TIntegerField
       FieldName = 'ID_SETOR'
     end
@@ -1622,6 +1624,11 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'clUsa_Processo'
       Size = 1
       Calculated = True
+    end
+    object cdsProduto_ConsumoNOME_POSICAO: TStringField
+      FieldName = 'NOME_POSICAO'
+      ProviderFlags = []
+      Size = 30
     end
   end
   object dsProduto_Consumo: TDataSource
@@ -2044,23 +2051,24 @@ object dmCadProduto: TdmCadProduto
       'PO.COD_PRINCIPAL, LI.AUTOR, LI.DTLANCAMENTO, LI.PAGINA, LI.SELO,' +
       ' LI.CICLO, PRO.QTD_EMBALAGEM, PRO.QTD_PECA_EMB,'#13#10'       PRO.LARG' +
       'URA, PRO.ALTURA,PRO.ESPESSURA, PRO.TAM_CALC, PRO.TIPO_PRODUCAO, ' +
-      ' PRO.NOME_MODELO, FORN.NOME NOME_FORNECEDOR,'#13#10'       case'#13#10'     ' +
-      '    when (PRO.TIPO_REG = '#39'P'#39') then '#39'Produto'#39#13#10'         when (PRO' +
-      '.TIPO_REG = '#39'M'#39') then '#39'Material'#39#13#10'         when (PRO.TIPO_REG = ' +
-      #39'N'#39') then '#39'Outros'#39#13#10'         when (PRO.TIPO_REG = '#39'C'#39') then '#39'Mat' +
-      'erial Consumo'#39#13#10'         when (PRO.TIPO_REG = '#39'I'#39') then '#39'Imobili' +
-      'zado'#39#13#10'         when (PRO.TIPO_REG = '#39'S'#39') then '#39'Semiacabado'#39#13#10'  ' +
-      '       else '#39#39#13#10'       end as TIPO_REG_DESCRICAO,'#13#10#13#10'       (sel' +
-      'ect sum(E2.QTD) QTDGERAL'#13#10'        from ESTOQUE_ATUAL E2'#13#10'       ' +
-      ' where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE, PCUSTO.CONTADOR CONT' +
-      '_POSSUIPRECO, PRO.DTCAD, LIN.NOME NOME_LINHA, coalesce(NCM.gerar' +
-      '_st,'#39'N'#39') GERAR_ST'#13#10'from PRODUTO PRO'#13#10'left join TAB_NCM NCM on (P' +
-      'RO.ID_NCM = NCM.ID)'#13#10'left join MARCA on (PRO.ID_MARCA = MARCA.ID' +
-      ')'#13#10'left join GRUPO on (PRO.ID_GRUPO = GRUPO.ID)'#13#10'left join PRODU' +
-      'TO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left join PRODUTO_LIVRO LI on' +
-      ' (PRO.ID = LI.ID)  '#13#10'left join PESSOA FORN'#13#10'on pro.id_fornecedor' +
-      ' = forn.codigo'#13#10'LEFT JOIN vpossui_pcusto PCUSTO'#13#10'ON PRO.ID = PCU' +
-      'STO.ID'#13#10'left join LINHA LIN on (lin.id = pro.id_linha)'#13#10
+      ' PRO.NOME_MODELO, FORN.NOME NOME_FORNECEDOR, LIN.NOME NOME_LINHA' +
+      ','#13#10'       case'#13#10'         when (PRO.TIPO_REG = '#39'P'#39') then '#39'Produto' +
+      #39#13#10'         when (PRO.TIPO_REG = '#39'M'#39') then '#39'Material'#39#13#10'         ' +
+      'when (PRO.TIPO_REG = '#39'N'#39') then '#39'Outros'#39#13#10'         when (PRO.TIPO' +
+      '_REG = '#39'C'#39') then '#39'Material Consumo'#39#13#10'         when (PRO.TIPO_REG' +
+      ' = '#39'I'#39') then '#39'Imobilizado'#39#13#10'         when (PRO.TIPO_REG = '#39'S'#39') t' +
+      'hen '#39'Semiacabado'#39#13#10'         else '#39#39#13#10'       end as TIPO_REG_DESC' +
+      'RICAO,'#13#10#13#10'       (select cast(sum(E2.QTD) AS Float) QTDGERAL'#13#10'  ' +
+      '      from ESTOQUE_ATUAL E2'#13#10'        where E2.ID_PRODUTO = PRO.I' +
+      'D) QTD_ESTOQUE, PCUSTO.CONTADOR CONT_POSSUIPRECO, PRO.DTCAD, LIN' +
+      '.NOME NOME_LINHA, coalesce(NCM.gerar_st,'#39'N'#39') GERAR_ST'#13#10'from PROD' +
+      'UTO PRO'#13#10'left join TAB_NCM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left jo' +
+      'in MARCA on (PRO.ID_MARCA = MARCA.ID)'#13#10'left join GRUPO on (PRO.I' +
+      'D_GRUPO = GRUPO.ID)'#13#10'left join PRODUTO_VEICULO PV on (PRO.ID = P' +
+      'V.ID)'#13#10'left join PRODUTO_LIVRO LI on (PRO.ID = LI.ID)  '#13#10'left jo' +
+      'in PESSOA FORN on pro.id_fornecedor = forn.codigo'#13#10'LEFT JOIN vpo' +
+      'ssui_pcusto PCUSTO ON PRO.ID = PCUSTO.ID'#13#10'left join LINHA LIN on' +
+      ' (lin.id = pro.id_linha)'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -2220,12 +2228,6 @@ object dmCadProduto: TdmCadProduto
       DisplayLabel = 'Data Venda'
       FieldName = 'DT_VENDA'
     end
-    object cdsProduto_ConsultaQTD_ESTOQUE: TFMTBCDField
-      FieldName = 'QTD_ESTOQUE'
-      DisplayFormat = '0.000##'
-      Precision = 15
-      Size = 6
-    end
     object cdsProduto_ConsultaNOMEGRUPO: TStringField
       FieldName = 'NOMEGRUPO'
       Size = 40
@@ -2334,6 +2336,9 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'GERAR_ST'
       FixedChar = True
       Size = 1
+    end
+    object cdsProduto_ConsultaQTD_ESTOQUE: TFloatField
+      FieldName = 'QTD_ESTOQUE'
     end
   end
   object dsProduto_Consulta: TDataSource
@@ -3870,6 +3875,8 @@ object dmCadProduto: TdmCadProduto
     Top = 374
   end
   object sdsProduto_Uni: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 'SELECT *'#13#10'FROM PRODUTO_UNI'#13#10'WHERE ID = :ID'
     DataSource = dsProduto_Mestre
     MaxBlobSize = -1
@@ -4546,6 +4553,7 @@ object dmCadProduto: TdmCadProduto
     DataSet = sdsProduto_Comb
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProdutoUpdateError
+    OnGetTableName = dspProduto_CombGetTableName
     Left = 242
     Top = 102
   end
@@ -4741,8 +4749,9 @@ object dmCadProduto: TdmCadProduto
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT M.*'#13#10'FROM PRODUTO_COMB_MAT M'#13#10'WHERE M.ID = :ID'#13#10'    AND M' +
-      '.ITEM = :ITEM'
+      'SELECT M.*, POS.NOME NOME_POSICAO'#13#10'FROM PRODUTO_COMB_MAT M'#13#10'LEFT' +
+      ' JOIN POSICAO POS ON (M.ID_POSICAO = POS.ID)'#13#10'WHERE M.ID = :ID'#13#10 +
+      '    AND M.ITEM = :ITEM'
     DataSource = dsProduto_Comb_Mestre
     MaxBlobSize = -1
     Params = <
@@ -4807,11 +4816,16 @@ object dmCadProduto: TdmCadProduto
     object sdsProduto_Comb_MatID_SETOR: TIntegerField
       FieldName = 'ID_SETOR'
     end
+    object sdsProduto_Comb_MatNOME_POSICAO: TStringField
+      FieldName = 'NOME_POSICAO'
+      ProviderFlags = []
+      Size = 30
+    end
   end
   object cdsProduto_Comb_Mat: TClientDataSet
     Aggregates = <>
     DataSetField = cdsProduto_CombsdsProduto_Comb_Mat
-    IndexFieldNames = 'ID;ITEM;ITEM_MAT'
+    IndexFieldNames = 'ID;ID_SETOR;ID_POSICAO'
     Params = <>
     BeforePost = cdsProduto_Comb_MatBeforePost
     OnCalcFields = cdsProduto_Comb_MatCalcFields
@@ -4904,6 +4918,11 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'clUsa_Cor'
       Size = 1
       Calculated = True
+    end
+    object cdsProduto_Comb_MatNOME_POSICAO: TStringField
+      FieldName = 'NOME_POSICAO'
+      ProviderFlags = []
+      Size = 30
     end
   end
   object dsProduto_Comb_Mat: TDataSource
@@ -6007,6 +6026,7 @@ object dmCadProduto: TdmCadProduto
     Top = 331
   end
   object cdsProcesso: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProcesso'

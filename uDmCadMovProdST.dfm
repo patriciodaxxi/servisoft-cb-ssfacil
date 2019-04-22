@@ -1,8 +1,8 @@
 object DmCadMovProdST: TDmCadMovProdST
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 118
-  Top = 192
+  Left = 161
+  Top = 175
   Height = 436
   Width = 807
   object sdsMovProdST: TSQLDataSet
@@ -194,7 +194,7 @@ object DmCadMovProdST: TDmCadMovProdST
   object sdsProduto: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT ID, REFERENCIA, NOME'#13#10'FROM PRODUTO'
+    CommandText = 'SELECT ID, REFERENCIA, NOME'#13#10'FROM PRODUTO'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -228,5 +228,146 @@ object DmCadMovProdST: TDmCadMovProdST
     DataSet = cdsProduto
     Left = 616
     Top = 136
+  end
+  object sdsConsProdST: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT AUX.*'#13#10'FROM ('#13#10'SELECT P.ID, P.NOME, P.REFERENCIA, NCM.ncm' +
+      ', NCM.gerar_st,'#13#10'(select first 1 V.dtemissao FROM vmovprodst V W' +
+      'HERE V.id_produto = P.ID order by v.dtemissao desc ),'#13#10'(select f' +
+      'irst 1 V.base_st FROM vmovprodst V WHERE V.id_produto = P.ID ord' +
+      'er by v.dtemissao desc ),'#13#10'(select first 1 V.base_st_ret FROM vm' +
+      'ovprodst V WHERE V.id_produto = P.ID order by v.dtemissao desc )' +
+      #13#10'FROM PRODUTO P'#13#10'INNER JOIN TAB_NCM NCM'#13#10'ON P.id_ncm = NCM.id'#13#10 +
+      'WHERE P.INATIVO = '#39'N'#39') AUX'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 387
+    Top = 271
+  end
+  object dspConsProdST: TDataSetProvider
+    DataSet = sdsConsProdST
+    Left = 436
+    Top = 271
+  end
+  object cdsConsProdST: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspConsProdST'
+    Left = 475
+    Top = 271
+    object cdsConsProdSTID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsConsProdSTNOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object cdsConsProdSTREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsConsProdSTNCM: TStringField
+      FieldName = 'NCM'
+      Size = 10
+    end
+    object cdsConsProdSTGERAR_ST: TStringField
+      FieldName = 'GERAR_ST'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsConsProdSTDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsConsProdSTBASE_ST: TFloatField
+      FieldName = 'BASE_ST'
+    end
+    object cdsConsProdSTBASE_ST_RET: TFloatField
+      FieldName = 'BASE_ST_RET'
+    end
+  end
+  object dsConsProdST: TDataSource
+    DataSet = cdsConsProdST
+    Left = 515
+    Top = 271
+  end
+  object frxReport1: TfrxReport
+    Tag = 1
+    Version = '5.6.8'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43500.689950381900000000
+    ReportOptions.LastChange = 43556.695563287040000000
+    ScriptLanguage = 'PascalScript'
+    StoreInDFM = False
+    OnReportPrint = 'frxReportOnReportPrint'
+    Left = 213
+    Top = 155
+  end
+  object frxPDFExport1: TfrxPDFExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    PrintOptimized = False
+    Outline = False
+    Background = False
+    HTMLTags = True
+    Quality = 95
+    Transparency = False
+    Author = 'FastReport'
+    Subject = 'FastReport PDF export'
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    PdfA = False
+    Left = 254
+    Top = 155
+  end
+  object frxMailExport1: TfrxMailExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    ShowExportDialog = True
+    SmtpPort = 25
+    UseIniFile = True
+    TimeOut = 60
+    ConfurmReading = False
+    UseMAPI = SMTP
+    MAPISendFlag = 0
+    Left = 294
+    Top = 155
+  end
+  object frxRichObject1: TfrxRichObject
+    Left = 326
+    Top = 155
+  end
+  object frxConsProdST: TfrxDBDataset
+    UserName = 'frxConsProdST'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'NOME=NOME'
+      'REFERENCIA=REFERENCIA'
+      'NCM=NCM'
+      'GERAR_ST=GERAR_ST'
+      'DTEMISSAO=DTEMISSAO'
+      'BASE_ST=BASE_ST'
+      'BASE_ST_RET=BASE_ST_RET')
+    DataSource = dsConsProdST
+    BCDToCurrency = False
+    Left = 214
+    Top = 200
   end
 end

@@ -56,6 +56,7 @@ type
     RxDBLookupCombo5: TRxDBLookupCombo;
     Label9: TLabel;
     RxDBComboBox1: TRxDBComboBox;
+    DBCheckBox1: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -91,9 +92,9 @@ type
     vCodProdutoAnt: Integer;
     vState: String;
 
-    vQtd_Loc : Real;
-    vQtd_Sobra_Pend : Real;
-    vQtd_Usada : Real;
+    vQtd_Loc: Real;
+    vQtd_Sobra_Pend: Real;
+    vQtd_Usada: Real;
 
     procedure prc_Calcular_VlrItens;
 
@@ -104,10 +105,10 @@ type
 
     procedure prc_Gravar_Tam;
     procedure prc_Gravar_mItens;
-    procedure prc_Abrir_Combinacao(ID : Integer);
-    procedure prc_Estoque(ID_Produto : Integer);
+    procedure prc_Abrir_Combinacao(ID: Integer);
+    procedure prc_Estoque(ID_Produto: Integer);
 
-    function fnc_Busca_Sobra_OC : Real;    
+    function fnc_Busca_Sobra_OC: Real;    
 
   public
     { Public declarations }
@@ -258,7 +259,6 @@ begin
     DBEdit2.Color := clSilver
   else
     DBEdit2.Color := clWindow;
-  //************
 end;
 
 procedure TfrmCadOC_Itens.DBEdit2Exit(Sender: TObject);
@@ -285,7 +285,7 @@ procedure TfrmCadOC_Itens.BitBtn1Click(Sender: TObject);
 var
   vFlagErro: Boolean;
   vEditar: Boolean;
-  vQtdAux : Real;
+  vQtdAux: Real;
 begin
   if fnc_Erro then
     exit;
@@ -295,9 +295,9 @@ begin
   else
     vEditar := False;
 
-  vFlagErro := False;  
+  vFlagErro := False;
 
-  try                                             
+  try
     if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat)) > 0 then
       fDMCadPedido.cdsPedidoTIPO_DESCONTO.AsString := 'I';
 
@@ -337,10 +337,6 @@ begin
       fDMCadPedido.cdsPedido_ItensQTD_SOBRA_OC.AsFloat := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
     //*******************
 
-    uCalculo_Pedido.prc_Calculo_GeralItem(fDMCadPedido,fDMCadPedido.cdsPedido_ItensQTD.AsFloat,fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat,
-                                       fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat,fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat,
-                                       fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat);
-
     //Tamanho aqui
     if fDMCadPedido.cdsProdutoUSA_GRADE.AsString = 'S' then
     begin
@@ -364,6 +360,10 @@ begin
     end;
     //*****
 
+    uCalculo_Pedido.prc_Calculo_GeralItem(fDMCadPedido,fDMCadPedido.cdsPedido_ItensQTD.AsFloat,fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat,
+                                       fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat,fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat,
+                                       fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat);
+
     fDMCadPedido.cdsPedido_Itens.Post;
 
     //Tamanho aqui
@@ -373,9 +373,9 @@ begin
   except
     on E: exception do
     begin
-      vFlagErro := True;  
+      vFlagErro := True;
       raise Exception.Create('Erro ao gravar, ' + E.Message);
-    end;                                                    
+    end;
   end;
 
   lblEstoque.Caption := '0';
@@ -418,7 +418,7 @@ begin
   if (fDMCadPedido.qParametros_EstUSA_RESERVA.AsString = 'S') then
   begin
     vQtdAux := StrToFloat(FormatFloat('0.00000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat - vQtd_Loc));
-    vQtdAux := StrToFloat(FormatFloat('0.00000',vQtd_Sobra_Pend + vQtdAux)); 
+    vQtdAux := StrToFloat(FormatFloat('0.00000',vQtd_Sobra_Pend + vQtdAux));
     if (StrToFloat(FormatFloat('0.00000',vQtd_Usada)) > 0) or (fDMCadPedido.cdsPedidoNUM_ORDPROD.AsInteger > 0)  then
     begin
       //if StrToFloat(FormatFloat('0.00000',vQtdAux)) < StrToFloat(FormatFloat('0.00000',vQtd_Sobra_Pend)) then
@@ -588,7 +588,7 @@ begin
   if (Key = Vk_Return) and (Trim(DBEdit15.Text) <> '') then
   begin
     if not fnc_Verificar_Produto then
-      MessageDlg('*** Código do Produto não encontrado!', mtError, [mbOk], 0)
+      MessageDlg('*** Código do produto não encontrado!', mtError, [mbOk], 0)
     else
     begin
       prc_Abrir_Combinacao(StrToInt(DBEdit15.Text));
@@ -707,18 +707,18 @@ begin
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COMPLEMENTO_PROD')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Num_Lote_Controle') and
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ID_EnqIPI')              and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Vlr_Outros') and
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_PIS_COFINS_SUFRAMA') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTD_TRIB') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_UNITARIO_TRIB')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'UNIDADE_TRIB') and
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_UNITARIO_TRIB')      and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'UNIDADE_TRIB') and
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_IPI_SUFRAMA')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'REC_COPIADO') and
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_IPI_DEVOL')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_DEVOL') and
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Item_Tam')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMSSUBST_RET') and
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_BASE_ICMS_RED')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMSSUBST_RET') and
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMS_RED')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMS_RET') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_BASE_ICMSSUBST_RED')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'OBSMATERIAL') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'TIPO_ESCALA')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMS_FCP') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_FCP_ST')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_FCP_ST') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_FCP_ST')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMS_FCP_DEST') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMS_FCP_DEST')       and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMS_SUFRAMA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_IPI_SUFRAMA') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_BASE_ICMSSUBST_RED') then
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_BASE_ICMSSUBST_RED') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'OBSMATERIAL') and
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'TIPO_ESCALA')        and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMS_FCP') and
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_FCP_ST')        and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_FCP_ST') and
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_FCP_ST')        and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'VLR_ICMS_FCP_DEST') and
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'BASE_ICMS_FCP_DEST') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_ICMS_SUFRAMA') and
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_IPI_SUFRAMA')   and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_BASE_ICMSSUBST_RED') then
               fDMCadPedido.cdsPedido_Itens.FieldByName(fDMInformar_Tam.mItens.Fields[x].FieldName).AsVariant := fDMInformar_Tam.mItens.Fields[x].Value;
         except
         end;
@@ -854,7 +854,7 @@ begin
   end;
 end;
 
-procedure TfrmCadOC_Itens.prc_Abrir_Combinacao(ID : Integer);
+procedure TfrmCadOC_Itens.prc_Abrir_Combinacao(ID: Integer);
 begin
   fDMCadPedido.cdsCombinacao.Close;
   //fDMCadPedido.sdsCombinacao.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
@@ -877,8 +877,8 @@ end;
 procedure TfrmCadOC_Itens.prc_Estoque(ID_Produto: Integer);
 var
   vQtdAux: Real;
-  vID_Cor : Integer;
-  vID_LocalAux : Integer;
+  vID_Cor: Integer;
+  vID_LocalAux: Integer;
 begin
   vQtdAux := 0;
   vID_Cor := 0;
@@ -899,15 +899,15 @@ begin
     sds.SQLConnection := dmDatabase.scoDados;
     sds.NoMetadata    := True;
     sds.GetMetadata   := False;
-    sds.CommandText := ' SELECT QTD_RESTANTE, QTD_USADA FROM PEDIDO_SOBRA_OC WHERE ID = ' + IntToStr(fDMCadPedido.cdsPedidoID.AsInteger)
-                     + '  AND ITEM = ' + IntToStr(fDMCadPedido.cdsPedido_ItensITEM.AsInteger);
+    sds.CommandText   := ' SELECT QTD_RESTANTE, QTD_USADA FROM PEDIDO_SOBRA_OC WHERE ID = ' +
+                         IntToStr(fDMCadPedido.cdsPedidoID.AsInteger) +
+                         '  AND ITEM = ' + IntToStr(fDMCadPedido.cdsPedido_ItensITEM.AsInteger);
     sds.Open;
     Result := StrToFloat(FormatFloat('0.00000',sds.FieldByName('QTD_RESTANTE').AsFloat));
     vQtd_Usada := StrToFloat(FormatFloat('0.00000',sds.FieldByName('QTD_USADA').AsFloat));
   finally
     FreeAndNil(sds);
   end;
-
 end;
 
 end.

@@ -315,23 +315,23 @@ type
     mItensVLR_ICMSSUBST_RET: TFloatField;
     mItensPERC_ICMS_RED: TFloatField;
     mItensPERC_BASE_ICMSSUBT_RED: TFloatField;
+    mItensATUALIZA_PRECO_CUSTO: TStringField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
     { Public declarations }
-    vGravar : String; //S=Confirmar   N=Cancelar
-    vQtd_Grade : Real;
-    vTamanho_Ini : String;
-    vQtd_Ini     : Real;
-    vID_Grade_Inf : Integer;
-    vQtd_Por_Talao : Integer; //05/01/2019
+    vGravar: String; //S=Confirmar   N=Cancelar
+    vQtd_Grade: Real;
+    vTamanho_Ini: String;
+    vQtd_Ini: Real;
+    vID_Grade_Inf: Integer;
+    vQtd_Por_Talao: Integer; //05/01/2019
 
-    procedure prc_Le_Produto_Tam(ID : Integer);
-    procedure prc_Gravar_mTamanho(Tamanho : String ; Qtd : Real);
-    procedure prc_Abrir_Produto_Tam(ID : Integer);
-
+    procedure prc_Le_Produto_Tam(ID: Integer);
+    procedure prc_Gravar_mTamanho(Tamanho: String; Qtd: Real);
+    procedure prc_Abrir_Produto_Tam(ID: Integer);               
   end;
 
 var
@@ -391,6 +391,5 @@ procedure TDMInformar_Tam.mTamanhoNewRecord(DataSet: TDataSet);
 begin
   mTamanhoGravar.AsBoolean := True;
 end;
-
 
 end.

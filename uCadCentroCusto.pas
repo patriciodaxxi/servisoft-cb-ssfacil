@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadCentroCusto,
   UCBase, RxLookup, StdCtrls, RxDBComb, Mask, DBCtrls, RXSpin, ExtCtrls, db, DBGrids, RzTabs, NxCollection, ToolEdit, RXDBCtrl,
-  CurrEdit;
+  CurrEdit, RzPanel;
 
 type
   TfrmCadCentroCusto = class(TForm)
@@ -43,6 +43,39 @@ type
     btnConfirmar: TNxButton;
     btnCancelar: TNxButton;
     btnImprimir: TNxButton;
+    gbxEndereco: TRzGroupBox;
+    Label7: TLabel;
+    DBEdit5: TDBEdit;
+    Label19: TLabel;
+    DBEdit6: TDBEdit;
+    Label9: TLabel;
+    DBEdit7: TDBEdit;
+    Label10: TLabel;
+    DBEdit17: TDBEdit;
+    Label11: TLabel;
+    DBEdit8: TDBEdit;
+    Label12: TLabel;
+    RxDBLookupCombo2: TRxDBLookupCombo;
+    Label13: TLabel;
+    RxDBLookupCombo3: TRxDBLookupCombo;
+    Label14: TLabel;
+    DBEdit9: TDBEdit;
+    Label15: TLabel;
+    DBEdit10: TDBEdit;
+    Label16: TLabel;
+    DBEdit11: TDBEdit;
+    DBEdit12: TDBEdit;
+    Label54: TLabel;
+    DBEdit13: TDBEdit;
+    Label17: TLabel;
+    DBEdit14: TDBEdit;
+    Label18: TLabel;
+    DBEdit15: TDBEdit;
+    Label20: TLabel;
+    Label21: TLabel;
+    Label22: TLabel;
+    DBEdit16: TDBEdit;
+    DBEdit18: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -64,6 +97,9 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure RzPageControl1Change(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure RxDBLookupCombo3Exit(Sender: TObject);
+    procedure DBEdit10Enter(Sender: TObject);
+    procedure DBEdit10Exit(Sender: TObject);
   private
     { Private declarations }
     fDMCadCentroCusto: TDMCadCentroCusto;
@@ -144,6 +180,7 @@ begin
   btnConsultarClick(Sender);
   Edit4.SetFocus;
   fnc_Busca_Nome_Filial;
+  gbxEndereco.Visible := (fDMCadCentroCusto.qParametros_FinUSA_END_CCUSTO.AsString = 'S');
 end;
 
 procedure TfrmCadCentroCusto.prc_Consultar;
@@ -314,6 +351,8 @@ end;
 procedure TfrmCadCentroCusto.prc_Posiciona_Reg;
 begin
   fDMCadCentroCusto.prc_Localizar(fDMCadCentroCusto.cdsConsultaID.AsInteger);
+  if fDMCadCentroCusto.qParametros_FinUSA_END_CCUSTO.AsString = 'S' then
+    fDMCadCentroCusto.prc_Abrir_Cidade(fDMCadCentroCusto.cdsCentroCustoUF.AsString);
 end;
 
 procedure TfrmCadCentroCusto.RzPageControl1Change(Sender: TObject);
@@ -348,6 +387,29 @@ begin
   end;
   fDMCadCentroCusto.frxReport1.Variables['EMPRESA'] := QuotedStr(vFilial_Nome);
   fDMCadCentroCusto.frxReport1.ShowReport;
+end;
+
+procedure TfrmCadCentroCusto.RxDBLookupCombo3Exit(Sender: TObject);
+begin
+  fDMCadCentroCusto.prc_Abrir_Cidade(RxDBLookupCombo3.Text)
+end;
+
+procedure TfrmCadCentroCusto.DBEdit10Enter(Sender: TObject);
+begin
+  fDMCadCentroCusto.cdsCentroCustoCNPJ.EditMask := '00.000.000/0000-00';
+end;
+
+procedure TfrmCadCentroCusto.DBEdit10Exit(Sender: TObject);
+var
+  vTexto : String;
+begin
+  vTexto := Monta_Numero(DBEdit10.Text,0);
+  if not ValidaCNPJ(DBEdit10.Text) then
+  begin
+    ShowMessage('CNPJ incorreto!');
+    fDMCadCentroCusto.cdsCentroCustoCNPJ.Clear;
+    DBEdit10.SetFocus;
+  end;
 end;
 
 end.

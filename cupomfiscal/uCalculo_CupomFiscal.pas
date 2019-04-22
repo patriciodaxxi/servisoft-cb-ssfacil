@@ -84,7 +84,6 @@ begin
     fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat := StrToCurr(FormatCurr('0.00',vVlrDescontoItem));
 
   fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat := StrToFloat(FormatFloat('0.00',Desc_Rateio));
-//  fDMCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat      := StrToFloat(FormatFloat('0.00',VlrAcrescimo));
   fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat          := StrToFloat(FormatFloat('0.00',vVlrTotalItem - vVlrDescontoItem -
                                                                         fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
   fDMCupomFiscal.cdsCupom_ItensVLR_IPI.AsFloat            := fnc_Calcular_IPI(fDMCupomFiscal,fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,vVlrDescontoItem +
@@ -98,14 +97,18 @@ begin
                     fDMCupomFiscal.cdsCupom_ItensID_CSTICMS.AsInteger,'');
   //Cálculo tributos federais, estaduais, e municipais cfe. disposto na lei 12.741/12
   prc_Calcular_Tributos_Transparencia(fDMCupomFiscal);
-  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency + fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
-  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency
-                                                          + fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency
-                                                          + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
+
+  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency +
+                                                                     fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
+                                                              //     + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
+  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency +
+                                                                     fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency));
+                                                              //     + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
+
   //26/02/2019
   prc_Calcular_ST_Ret(fDMCupomFiscal);
   prc_Calcular_ICMS_Efet(fDMCupomFiscal);
-  
+
   fDMCupomFiscal.cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat := fDMCupomFiscal.cdsCupomFiscalBASE_ICMSSUBST_RET.AsFloat + fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat;
   fDMCupomFiscal.cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat  := fDMCupomFiscal.cdsCupomFiscalVLR_ICMSSUBST_RET.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat;
   fDMCupomFiscal.cdsCupomFiscalVLR_BASE_EFET.AsFloat      := fDMCupomFiscal.cdsCupomFiscalVLR_BASE_EFET.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat;
@@ -297,8 +300,8 @@ begin
   end;
 
   fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.00',vVlrDesconto_Ori));
-  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat    := fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat -
-                                                       fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat;
+//  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat    := fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat -
+//                                                       fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat;
 end;
 
 procedure prc_Move_Itens_Ajuste(fDMCupomFiscal: TDMCupomFiscal);

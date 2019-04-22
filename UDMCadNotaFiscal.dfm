@@ -7635,11 +7635,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'E_CONTROLE, NI.PERC_TRIBICMS,'#13#10'NI.ID_COR, COMB.NOME NOME_COR'#13#10'FR' +
       'OM NOTAFISCAL NT'#13#10'INNER JOIN NOTAFISCAL_ITENS NI'#13#10'ON NT.ID = NI.' +
       'ID'#13#10'INNER JOIN TAB_CFOP CFOP'#13#10'ON NI.ID_CFOP = CFOP.ID'#13#10'INNER JOI' +
-      'N PESSOA CLI'#13#10'ON NT.ID_CLIENTE = CLI.CODIGO'#13#10'LEFT JOIN PESSOA TR' +
-      'I'#13#10'ON NT.ID_CLIENTETRIANG = TRI.CODIGO'#13#10'LEFT JOIN COMBINACAO COM' +
-      'B'#13#10'ON NI.ID_COR = COMB.ID'#13#10'LEFT JOIN OPERACAO_NOTA O2'#13#10'ON NI.ID_' +
-      'OPERACAO_NOTA = O2.ID'#13#10'WHERE NT.TIPO_REG = :TIPO_REG'#13#10'  AND NI.Q' +
-      'TDRESTANTE > 0'#13#10#13#10
+      'N PESSOA CLI'#13#10'ON NT.ID_CLIENTE = CLI.CODIGO'#13#10'inner join produto ' +
+      'pro'#13#10'ON NI.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN PESSOA TRI'#13#10'ON NT.ID_C' +
+      'LIENTETRIANG = TRI.CODIGO'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON NI.ID_C' +
+      'OR = COMB.ID'#13#10'LEFT JOIN OPERACAO_NOTA O2'#13#10'ON NI.ID_OPERACAO_NOTA' +
+      ' = O2.ID'#13#10'WHERE NT.TIPO_REG = :TIPO_REG'#13#10'  AND NI.QTDRESTANTE > ' +
+      '0'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -9155,7 +9156,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM NOTAFISCAL_NFE'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1009
+    Left = 1010
     Top = 429
     object qProximaItem_NFeITEM: TIntegerField
       FieldName = 'ITEM'
@@ -12763,6 +12764,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeUSA_CLIENTE_FAT_FIL: TStringField
+      FieldName = 'USA_CLIENTE_FAT_FIL'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoqueLoteAux: TSQLDataSet
     NoMetadata = True
@@ -13281,6 +13287,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object qParametros_ProdUSA_LOTE_PROD: TStringField
       FieldName = 'USA_LOTE_PROD'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField
+      FieldName = 'MATERIAL_FORNECEDOR_OC'
       FixedChar = True
       Size = 1
     end

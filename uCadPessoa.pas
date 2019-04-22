@@ -556,6 +556,10 @@ type
     DBEdit109: TDBEdit;
     Label195: TLabel;
     DBEdit110: TDBEdit;
+    TS_Pessoa_Fil: TRzTabSheet;
+    SMDBGrid9: TSMDBGrid;
+    pnlPessoa_Fil: TPanel;
+    btnCopiar_Fil: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -665,6 +669,7 @@ type
     procedure DBEdit5Exit(Sender: TObject);
     procedure DBEdit1Exit(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
+    procedure btnCopiar_FilClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -691,6 +696,9 @@ type
     procedure prc_Abrir_EnqIPI(ID: Integer);
     procedure prc_Abrir_Atividade(ID: Integer);
     procedure prc_CriaExcel(vDados: TDataSource);
+    procedure prc_opcao_vendedor;
+
+    procedure prc_Habilitar;
   public
     { Public declarations }
   end;
@@ -819,6 +827,7 @@ begin
   SpeedButton11.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
 
   TS_TipoMaterial.TabVisible := (fDMCadPessoa.qParametros_GeralUSA_TIPO_MATERIAL.AsString = 'S');
+  TS_Pessoa_Fil.TabVisible   := (fDMCadPessoa.qParametros_NFeUSA_CLIENTE_FAT_FIL.AsString = 'S');
 
   DBCheckBox29.Visible := (fDMCadPessoa.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S');
   Label194.Visible := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
@@ -867,38 +876,11 @@ begin
 end;
 
 procedure TfrmCadPessoa.btnAlterarClick(Sender: TObject);
-var
-  i: Integer;
 begin
   if (fDMCadPessoa.cdsPessoa.IsEmpty) or not (fDMCadPessoa.cdsPessoa.Active) or (fDMCadPessoa.cdsPessoaCODIGO.AsInteger < 1) then
     exit;
   fDMCadPessoa.cdsPessoa.Edit;
-  TS_Consulta.TabEnabled := False;
-  btnAlterar.Enabled := False;
-  btnConfirmar.Enabled := True;
-  TS_Pessoa_Dados.Enabled := True;
-  TS_Pessoa_Endereco.Enabled := True;
-  TS_Pessoa_Financeiro.Enabled := True;
-  Panel3.Enabled := True;
-  pnlPessoaFisica.Enabled := True;
-  pnlServico.Enabled := True;
-  DBMemo3.readonly := False;
-  SMDBGrid3.readonly := False;
-  SMDBGrid4.readonly := False;
-  SMDBGrid5.readonly := False;
-  SMDBGrid6.readonly := False;
-  SMDBGrid7.readonly := False;
-  SMDBGrid8.readonly := False;
-  for i := 1 to SMDBGrid7.ColCount - 2 do
-  begin
-    //if (SMDBGrid7.Columns[i].FieldName = 'ID_ATIVIDADE') then
-    //    SMDBGrid7.Columns[i].ReadOnly := False
-    //else
-    SMDBGrid7.Columns[i].readonly := True;
-  end;
-  pnlDados_Profissionais.Enabled := True;
-  pnlConjuge.Enabled := True;
-  pnlDados_Conta.Enabled := True;
+  prc_Habilitar;
 end;
 
 procedure TfrmCadPessoa.btnConfirmarClick(Sender: TObject);
@@ -925,27 +907,8 @@ begin
 
   fDMCadPessoa.prc_Abrir_Cidade('');
 
-  TS_Consulta.TabEnabled := True;
+  prc_Habilitar;
   RzPageControl1.ActivePage := TS_Consulta;
-  btnConfirmar.Enabled := False;
-  btnAlterar.Enabled := True;
-
-  TS_Pessoa_Dados.Enabled := False;
-  TS_Pessoa_Endereco.Enabled := False;
-  TS_Pessoa_Financeiro.Enabled := False;
-  Panel3.Enabled := False;
-  pnlPessoaFisica.Enabled := False;
-  pnlServico.Enabled := False;
-  DBMemo3.readonly := True;
-  SMDBGrid3.readonly := True;
-  SMDBGrid4.readonly := True;
-  SMDBGrid5.readonly := True;
-  SMDBGrid6.readonly := True;
-  SMDBGrid7.readonly := True;
-  SMDBGrid8.readonly := True;
-  pnlDados_Profissionais.Enabled := False;
-  pnlConjuge.Enabled := False;
-  pnlDados_Conta.Enabled := False;
 end;
 
 procedure TfrmCadPessoa.prc_Consultar(ID: Integer = 0);
@@ -1079,6 +1042,7 @@ begin
     fDMCadPessoa.cdsPessoa_Ativ.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_Aut.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_TipoMat.ApplyUpdates(0);
+    fDMCadPessoa.cdsPessoa_Fil.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_RefP.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_RefC.ApplyUpdates(0);
     if fDMCadPessoa.cdsPessoa_Fisica.State in [dsEdit, dsInsert] then
@@ -1119,26 +1083,8 @@ begin
 
     vCodPessoa_Pos := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
 
-    TS_Consulta.TabEnabled := not (TS_Consulta.TabEnabled);
+    prc_Habilitar;
     RzPageControl1.ActivePage := TS_Consulta;
-    btnConfirmar.Enabled := False;
-    btnAlterar.Enabled := True;
-    Panel3.Enabled := False;
-    pnlPessoaFisica.Enabled := False;
-    pnlServico.Enabled := False;
-    TS_Pessoa_Financeiro.Enabled := False;
-    TS_Pessoa_Dados.Enabled := False;
-    TS_Pessoa_Endereco.Enabled := False;
-    DBMemo3.readonly := True;
-    SMDBGrid3.readonly := True;
-    SMDBGrid4.readonly := True;
-    SMDBGrid5.readonly := True;
-    SMDBGrid7.readonly := True;
-    SMDBGrid6.readonly := True;
-    SMDBGrid8.readonly := True;
-    pnlDados_Profissionais.Enabled := False;
-    pnlConjuge.Enabled := False;
-    pnlDados_Conta.Enabled := False;
 
     if (not (fDMCadPessoa.cdsPessoa_Consulta.Active)) or (not fDMCadPessoa.cdsPessoa_Consulta.Locate('CODIGO', vCodAux, ([Locaseinsensitive]))) then
       prc_Consultar(vCodAux);
@@ -1155,8 +1101,6 @@ begin
 end;
 
 procedure TfrmCadPessoa.prc_Inserir_Registro(Tipo: string);
-var
-  i: Integer;
 begin
   if fDMCadPessoa.qParametros_GeralUSAR_PESSOA_FILIAL.AsString = 'S' then
   begin
@@ -1180,36 +1124,7 @@ begin
     Exit;
 
   RzPageControl1.ActivePage := TS_Cadastro;
-
-  TS_Consulta.TabEnabled := False;
-  btnAlterar.Enabled := False;
-  btnConfirmar.Enabled := True;
-  TS_Pessoa_Dados.Enabled := True;
-  TS_Pessoa_Endereco.Enabled := True;
-  TS_Pessoa_Financeiro.Enabled := True;
-  Panel3.Enabled := True;
-  pnlPessoaFisica.Enabled := True;
-  pnlServico.Enabled := True;
-  DBMemo3.readonly := False;
-  SMDBGrid3.readonly := False;
-  SMDBGrid4.readonly := False;
-  SMDBGrid5.readonly := False;
-  SMDBGrid7.readonly := False;
-  SMDBGrid8.readonly := False;
-  for i := 1 to SMDBGrid7.ColCount - 2 do
-  begin
-    //if (SMDBGrid7.Columns[i].FieldName = 'ID_ATIVIDADE') then
-    //    SMDBGrid7.Columns[i].ReadOnly := False
-    //else
-    SMDBGrid7.Columns[i].readonly := True;
-  end;
-  SMDBGrid6.readonly := False;
-  pnlDados_Profissionais.Enabled := True;
-  pnlConjuge.Enabled := True;
-  pnlDados_Conta.Enabled := True;
-
-  RxDBComboBox1.SetFocus;
-  TS_Fisica.TabVisible := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F') and (fDMCadPessoa.qParametros_GeralMOSTRAR_DADOS_PESSOA_FISICA.AsString = 'S'));
+  prc_Habilitar;
 end;
 
 procedure TfrmCadPessoa.RzPageControl1Change(Sender: TObject);
@@ -1251,6 +1166,8 @@ begin
     DBEdit106.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
     Label191.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
     DBEdit107.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
+
+    prc_opcao_vendedor;
   end;
 end;
 
@@ -1462,11 +1379,14 @@ begin
 
   fDMCadPessoa.qFilial.Close;
   fDMCadPessoa.qFilial.Open;
+
   fDMCadPessoa.cdsConsultaCadastro.Close;
-  if fDMCadPessoa.qFilialPESSOA.AsString = 'F' then
-    texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 11)
-  else
-    texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 14);
+  //20/04/2019
+  texto := fnc_CNPJCFP_FilialNFeConfig;
+  //if fDMCadPessoa.qFilialPESSOA.AsString = 'F' then
+  //  texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 11)
+  //else
+  //  texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 14);
   vLocalServidorNFe := fDMCadPessoa.qParametrosLOCALSERVIDORNFE.AsString;
   if trim(fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString) <> '' then
     vLocalServidorNFe := fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString;
@@ -1508,17 +1428,7 @@ end;
 
 procedure TfrmCadPessoa.chkRepresentanteClick(Sender: TObject);
 begin
-  ts_Vendedor.TabVisible := chkRepresentante.Checked;
-  if not ts_Vendedor.TabVisible then
-    RzPageControl3.ActivePage := ts_Contatos;
-  if chkRepresentante.Checked then
-  begin
-    ts_Vendedor.TabVisible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
-    Label188.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
-    CurrencyEdit1.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
-    SpeedButton11.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
-  end;
-
+  prc_opcao_vendedor
 end;
 
 procedure TfrmCadPessoa.prc_Configurarr_vTipoPessoa;
@@ -1684,6 +1594,10 @@ begin
   fDMCadPessoa.cdsPessoa_TipoMat.Close;
   fDMCadPessoa.sdsPessoa_TipoMat.ParamByName('CODIGO').AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
   fDMCadPessoa.cdsPessoa_TipoMat.Open;
+
+  fDMCadPessoa.cdsPessoa_Fil.Close;
+  fDMCadPessoa.sdsPessoa_Fil.ParamByName('CODIGO').AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
+  fDMCadPessoa.cdsPessoa_Fil.Open;
 end;
 
 procedure TfrmCadPessoa.Panel3Enter(Sender: TObject);
@@ -2244,7 +2158,6 @@ end;
 
 procedure TfrmCadPessoa.DBEdit25Exit(Sender: TObject);
 var
-  vNomeAux: string;
   vAux: string;
 begin
   vAux := Monta_Numero(DBEdit25.Text, 0);
@@ -2572,6 +2485,71 @@ procedure TfrmCadPessoa.DBEdit7Exit(Sender: TObject);
 begin
   if DBEdit7.Text <> '' then
     DBEdit7.Text := Trim(DBEdit7.Text);
+end;
+
+procedure TfrmCadPessoa.prc_opcao_vendedor;
+begin
+  ts_Vendedor.TabVisible := chkRepresentante.Checked;
+  if not ts_Vendedor.TabVisible then
+    RzPageControl3.ActivePage := ts_Contatos;
+  if chkRepresentante.Checked then
+  begin
+    //ts_Vendedor.TabVisible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+    Label188.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+    CurrencyEdit1.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+    SpeedButton11.Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+  end;
+end;
+
+procedure TfrmCadPessoa.btnCopiar_FilClick(Sender: TObject);
+var
+  vItem : Integer;
+begin
+  fDMCadPessoa.cdsPessoa_Fil.Last;
+  vItem := fDMCadPessoa.cdsPessoa_FilITEM.AsInteger;
+  fDMCadPessoa.cdsFilial.First;
+  while not fDMCadPessoa.cdsFilial.Eof do
+  begin
+    if not fDMCadPessoa.cdsPessoa_Fil.Locate('FILIAL', fDMCadPessoa.cdsFilialID.AsInteger , ([Locaseinsensitive])) then
+    begin
+      vItem := vItem + 1;
+      fDMCadPessoa.cdsPessoa_Fil.Insert;
+      fDMCadPessoa.cdsPessoa_FilCODIGO.AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
+      fDMCadPessoa.cdsPessoa_FilITEM.AsInteger   := vItem;
+      fDMCadPessoa.cdsPessoa_FilFILIAL.AsInteger := fDMCadPessoa.cdsFilialID.AsInteger;
+      fDMCadPessoa.cdsPessoa_Fil.Post;
+    end;
+    fDMCadPessoa.cdsFilial.Next;
+  end;
+end;
+
+procedure TfrmCadPessoa.prc_Habilitar;
+var
+  i : Integer;
+begin
+  TS_Consulta.TabEnabled       := not(TS_Consulta.TabEnabled);
+  btnAlterar.Enabled           := not(btnAlterar.Enabled);
+  btnCopiar_Fil.Enabled        := not(btnCopiar_Fil.Enabled);
+  btnConfirmar.Enabled         := not(btnConfirmar.Enabled);
+  TS_Pessoa_Dados.Enabled      := not(TS_Pessoa_Dados.Enabled);
+  TS_Pessoa_Endereco.Enabled   := not(TS_Pessoa_Endereco.Enabled);
+  TS_Pessoa_Financeiro.Enabled := not(TS_Pessoa_Financeiro.Enabled);
+  Panel3.Enabled               := not(Panel3.Enabled); 
+  pnlPessoaFisica.Enabled      := not(pnlPessoaFisica.Enabled);
+  pnlServico.Enabled           := not(pnlServico.Enabled);
+  DBMemo3.readonly             := not(DBMemo3.readonly);
+  SMDBGrid3.readonly           := not(SMDBGrid3.readonly);
+  SMDBGrid4.readonly           := not(SMDBGrid4.readonly);
+  SMDBGrid5.readonly           := not(SMDBGrid5.readonly);
+  SMDBGrid6.readonly           := not(SMDBGrid6.readonly);
+  SMDBGrid7.readonly           := not(SMDBGrid7.readonly);
+  SMDBGrid8.readonly           := not(SMDBGrid8.readonly);
+  SMDBGrid9.readonly           := not(SMDBGrid9.readonly);
+  pnlDados_Profissionais.Enabled := not(pnlDados_Profissionais.Enabled);
+  pnlConjuge.Enabled             := not(pnlConjuge.Enabled);
+  pnlDados_Conta.Enabled         := not(pnlDados_Conta.Enabled);
+  for i := 1 to SMDBGrid7.ColCount - 2 do
+    SMDBGrid7.Columns[i].readonly := not(SMDBGrid7.Columns[i].readonly)
 end;
 
 end.

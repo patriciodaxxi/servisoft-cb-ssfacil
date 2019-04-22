@@ -183,24 +183,113 @@ type
     qFilial_SMSFONE_ORIGEM: TStringField;
     qPedido2NOME_CONSUMIDOR: TStringField;
     qParametrosID_CLIENTE_CONSUMIDOR: TIntegerField;
+    qParametros_Geral: TSQLQuery;
+    qParametros_GeralFILIAL_PADRAO_PEDWEB: TIntegerField;
+    sdsConsultaPedWeb: TSQLDataSet;
+    sdsConsultaPedWebID: TIntegerField;
+    sdsConsultaPedWebID_USUARIO: TIntegerField;
+    sdsConsultaPedWebID_PESSOA: TIntegerField;
+    sdsConsultaPedWebHORA_EMISSAO: TStringField;
+    sdsConsultaPedWebID_FORMA_PAGAMENTO: TIntegerField;
+    sdsConsultaPedWebVLR_DESCONTO: TFMTBCDField;
+    sdsConsultaPedWebVLR_TOTAL: TFMTBCDField;
+    sdsConsultaPedWebTIPO_OPERACAO: TIntegerField;
+    sdsConsultaPedWebCOND_PAGAMENTO: TIntegerField;
+    sdsConsultaPedWebGERADO: TStringField;
+    sdsConsultaPedWebNOME_CLIENTE: TStringField;
+    sdsConsultaPedWebNOME_USUARIO: TStringField;
+    sdsConsultaPedWebOBS: TStringField;
+    sdsConsultaPedWebDATA_APROVADO: TDateField;
+    sdsConsultaPedWebDATA_EMISSAO: TDateField;
+    sdsConsultaPedWebPRAZO_PEDIDO: TStringField;
+    dspConsultaPedWeb: TDataSetProvider;
+    cdsConsultaPedWeb: TClientDataSet;
+    cdsConsultaPedWebID: TIntegerField;
+    cdsConsultaPedWebID_USUARIO: TIntegerField;
+    cdsConsultaPedWebID_PESSOA: TIntegerField;
+    cdsConsultaPedWebHORA_EMISSAO: TStringField;
+    cdsConsultaPedWebID_FORMA_PAGAMENTO: TIntegerField;
+    cdsConsultaPedWebVLR_DESCONTO: TFMTBCDField;
+    cdsConsultaPedWebVLR_TOTAL: TFMTBCDField;
+    cdsConsultaPedWebTIPO_OPERACAO: TIntegerField;
+    cdsConsultaPedWebCOND_PAGAMENTO: TIntegerField;
+    cdsConsultaPedWebGERADO: TStringField;
+    cdsConsultaPedWebNOME_CLIENTE: TStringField;
+    cdsConsultaPedWebNOME_USUARIO: TStringField;
+    cdsConsultaPedWebOBS: TStringField;
+    cdsConsultaPedWebDATA_APROVADO: TDateField;
+    cdsConsultaPedWebDATA_EMISSAO: TDateField;
+    cdsConsultaPedWebPRAZO_PEDIDO: TStringField;
+    dsConsultaPedWeb: TDataSource;
+    sdsPedWeb: TSQLDataSet;
+    sdsPedWebID: TIntegerField;
+    sdsPedWebID_USUARIO: TIntegerField;
+    sdsPedWebID_PESSOA: TIntegerField;
+    sdsPedWebHORA_EMISSAO: TStringField;
+    sdsPedWebID_FORMA_PAGAMENTO: TIntegerField;
+    sdsPedWebVLR_DESCONTO: TFMTBCDField;
+    sdsPedWebTIPO_OPERACAO: TIntegerField;
+    sdsPedWebCOND_PAGAMENTO: TIntegerField;
+    sdsPedWebGERADO: TStringField;
+    sdsPedWebVLR_TOTAL: TFMTBCDField;
+    sdsPedWebOBS: TStringField;
+    sdsPedWebDATA_APROVADO: TDateField;
+    sdsPedWebDATA_EMISSAO: TDateField;
+    sdsPedWebPRAZO_PEDIDO: TStringField;
+    dspPedWeb: TDataSetProvider;
+    cdsPedWeb: TClientDataSet;
+    cdsPedWebID: TIntegerField;
+    cdsPedWebID_USUARIO: TIntegerField;
+    cdsPedWebID_PESSOA: TIntegerField;
+    cdsPedWebHORA_EMISSAO: TStringField;
+    cdsPedWebID_FORMA_PAGAMENTO: TIntegerField;
+    cdsPedWebVLR_DESCONTO: TFMTBCDField;
+    cdsPedWebTIPO_OPERACAO: TIntegerField;
+    cdsPedWebCOND_PAGAMENTO: TIntegerField;
+    cdsPedWebGERADO: TStringField;
+    cdsPedWebVLR_TOTAL: TFMTBCDField;
+    cdsPedWebOBS: TStringField;
+    cdsPedWebsdsPedWeb_Item: TDataSetField;
+    cdsPedWebDATA_APROVADO: TDateField;
+    cdsPedWebDATA_EMISSAO: TDateField;
+    cdsPedWebPRAZO_PEDIDO: TStringField;
+    dsPedWeb: TDataSource;
+    dsMestre: TDataSource;
+    sdsPedWeb_Item: TSQLDataSet;
+    sdsPedWeb_ItemID_PEDIDO: TIntegerField;
+    sdsPedWeb_ItemID_PRODUTO: TIntegerField;
+    sdsPedWeb_ItemQUANTIDADE: TIntegerField;
+    sdsPedWeb_ItemVLR_UNITARIO: TFloatField;
+    sdsPedWeb_ItemVLR_DESCONTO: TFloatField;
+    sdsPedWeb_ItemVLR_TOTAL: TFloatField;
+    sdsPedWeb_ItemOBS: TStringField;
+    cdsPedWeb_Item: TClientDataSet;
+    cdsPedWeb_ItemID_PEDIDO: TIntegerField;
+    cdsPedWeb_ItemID_PRODUTO: TIntegerField;
+    cdsPedWeb_ItemQUANTIDADE: TIntegerField;
+    cdsPedWeb_ItemVLR_UNITARIO: TFloatField;
+    cdsPedWeb_ItemVLR_DESCONTO: TFloatField;
+    cdsPedWeb_ItemVLR_TOTAL: TFloatField;
+    cdsPedWeb_ItemOBS: TStringField;
+    dsPedWeb_Item: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedido_ProcessoNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
+    ctCommand : String;
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
     //function fnc_Enviar_URL(Nome_Transportadora : String) : String;
-
   public
     { Public declarations }
     ctAprovacao_Ped : String;
     ctPedido_Pend : String;
     ctCliente_Pend : String;
     ctFornecedor_Pend : String;
-
     procedure prc_Gravar_Pedido_Processo(Email : String; ID, ID_Transportadora : Integer ; Tipo_Status, Nome_Transportadora,
               Cod_Rastreameto : String ; DtProcesso : TDateTime ; Opcao : String = 'G');
-
     procedure prc_Saldo_SMS;
+    procedure prc_Consultar_PedWeb;
+    procedure prc_Localiza_PedWeb(ID : Integer);
 
   end;
 
@@ -232,6 +321,7 @@ begin
   ctPedido_Pend     := sdsPedido_Pend.CommandText;
   ctCliente_Pend    := sdsCliente_Pend.CommandText;
   ctFornecedor_Pend := sdsFornecedor_Pend.CommandText;
+  ctCommand         := sdsPedWeb.CommandText;
   qParametros.Open;
   qParametros_Ped.Open;
   //*** Logs Implantado na versão .353
@@ -689,6 +779,26 @@ begin
   finally
     FreeAndNil(api);
   end;
+end;
+
+procedure TDMAprovacao_Ped.prc_Consultar_PedWeb;
+begin
+  cdsConsultaPedWeb.Close;
+  cdsConsultaPedWeb.Open;
+end;
+
+procedure TDMAprovacao_Ped.prc_Localiza_PedWeb(ID: Integer);
+begin
+  cdsPedWeb.Close;
+  sdsPedWeb.CommandText := ctCommand;
+  if ID <> 0 then
+  begin
+    sdsPedWeb.CommandText := sdsPedWeb.CommandText + ' WHERE ID = :ID ';
+    sdsPedWeb.ParamByName('ID').AsInteger := ID;
+  end;
+  cdsPedWeb.Open;
+  cdsPedWeb_Item.Close;
+  cdsPedWeb_Item.Open;
 end;
 
 end.

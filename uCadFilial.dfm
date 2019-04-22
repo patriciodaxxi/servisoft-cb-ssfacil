@@ -1,6 +1,6 @@
 object frmCadFilial: TfrmCadFilial
-  Left = 187
-  Top = 31
+  Left = 188
+  Top = 37
   Width = 1102
   Height = 629
   Caption = 'Cadastro de Filial (Empresa)'
@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_Tributos
+        ActivePage = TS_Config_Danfe_NFe
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 1
+        TabIndex = 9
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -3567,7 +3567,7 @@ object frmCadFilial: TfrmCadFilial
             end
             object Label99: TLabel
               Left = 11
-              Top = 144
+              Top = 180
               Width = 200
               Height = 13
               Alignment = taRightJustify
@@ -3575,7 +3575,7 @@ object frmCadFilial: TfrmCadFilial
             end
             object Label100: TLabel
               Left = 24
-              Top = 164
+              Top = 200
               Width = 187
               Height = 13
               Alignment = taRightJustify
@@ -3613,6 +3613,22 @@ object frmCadFilial: TfrmCadFilial
               Alignment = taRightJustify
               Caption = 'C'#243'd. Cont'#225'bil Multa (C.Pagar):'
             end
+            object Label141: TLabel
+              Left = 16
+              Top = 128
+              Width = 195
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'C'#243'd. Cont'#225'bil Taxa Banc'#225'ria(C.Receber):'
+            end
+            object Label142: TLabel
+              Left = 29
+              Top = 146
+              Width = 182
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'C'#243'd. Cont'#225'bil Taxa Banc'#225'ria(C.Pagar):'
+            end
             object DBEdit62: TDBEdit
               Left = 213
               Top = 14
@@ -3648,7 +3664,7 @@ object frmCadFilial: TfrmCadFilial
             end
             object RxDBLookupCombo16: TRxDBLookupCombo
               Left = 213
-              Top = 136
+              Top = 172
               Width = 317
               Height = 21
               DropDownCount = 8
@@ -3663,7 +3679,7 @@ object frmCadFilial: TfrmCadFilial
             end
             object RxDBLookupCombo17: TRxDBLookupCombo
               Left = 213
-              Top = 156
+              Top = 192
               Width = 317
               Height = 21
               DropDownCount = 8
@@ -3719,6 +3735,28 @@ object frmCadFilial: TfrmCadFilial
               DataSource = DMCadFilial.dsFilial_Contabil
               ParentCtl3D = False
               TabOrder = 5
+            end
+            object DBEdit90: TDBEdit
+              Left = 213
+              Top = 122
+              Width = 82
+              Height = 19
+              Ctl3D = False
+              DataField = 'COD_CONTABIL_TXBANCARIA_CRE'
+              DataSource = DMCadFilial.dsFilial_Contabil
+              ParentCtl3D = False
+              TabOrder = 9
+            end
+            object DBEdit91: TDBEdit
+              Left = 213
+              Top = 140
+              Width = 83
+              Height = 19
+              Ctl3D = False
+              DataField = 'COD_CONTABIL_TXBANCARIA_CPA'
+              DataSource = DMCadFilial.dsFilial_Contabil
+              ParentCtl3D = False
+              TabOrder = 10
             end
           end
         end
@@ -5221,8 +5259,8 @@ object frmCadFilial: TfrmCadFilial
           object pnlCusto: TPanel
             Left = 0
             Top = 0
-            Width = 1086
-            Height = 521
+            Width = 1078
+            Height = 513
             Align = alClient
             Enabled = False
             TabOrder = 0

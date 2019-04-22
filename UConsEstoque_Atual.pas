@@ -47,18 +47,7 @@ type
     TS_EmTerceiros_Pes: TRzTabSheet;
     SMDBGrid3: TSMDBGrid;
     SMDBGrid7: TSMDBGrid;
-    TS_Detalhe_Terc: TRzTabSheet;
-    Panel6: TPanel;
-    Label6: TLabel;
-    DateEdit3: TDateEdit;
-    DateEdit4: TDateEdit;
-    Label8: TLabel;
     CheckBox1: TCheckBox;
-    RzPageControl4: TRzPageControl;
-    TS_EmTerceiro_Det: TRzTabSheet;
-    SMDBGrid8: TSMDBGrid;
-    TS_DeTerceiro_Det: TRzTabSheet;
-    SMDBGrid9: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -74,6 +63,9 @@ type
     procedure SMDBGrid2TitleClick(Column: TColumn);
     procedure SMDBGrid3TitleClick(Column: TColumn);
     procedure btnImprimirClick(Sender: TObject);
+    procedure RzPageControl1Change(Sender: TObject);
+    procedure SMDBGrid7TitleClick(Column: TColumn);
+    procedure SMDBGrid6TitleClick(Column: TColumn);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -90,8 +82,6 @@ type
     procedure prc_Chamar_Sel_Produto(Tipo: String);
     procedure prc_Monta_Cab;
     procedure prc_Monta_mNCM;
-    procedure prc_Consultar_EmTerceiro_Det;
-    procedure prc_Consultar_DeTerceiro_Det;
 
   public
     { Public declarations }
@@ -113,6 +103,7 @@ var
   vComando : String;
   i : Integer;
 begin
+  Screen.Cursor := crHourGlass;
   vQtdAux := 0;
   fDMConsEstoque.cdsEstoque_Atual.Close;
   vComando := 'select aux.*, PRO.NOME NOME_PRODUTO, PRO.REFERENCIA, COMB.NOME NOME_COMBINACAO, PRO.localizacao, '
@@ -157,6 +148,7 @@ begin
   end;
   fDMConsEstoque.sdsEstoque_Atual.CommandText := vComando;
   fDMConsEstoque.cdsEstoque_Atual.Open;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TfrmConsEstoque_Atual.FormClose(Sender: TObject;
@@ -269,14 +261,6 @@ begin
       prc_Consultar_EmTerceiros
     else
       prc_Consultar_EmTerceiros_Pes;
-  end
-  else
-  if RzPageControl1.ActivePage = TS_Detalhe_Terc then
-  begin
-    if RzPageControl4.ActivePage = TS_EmTerceiro_Det then
-      prc_Consultar_EmTerceiro_Det
-    else
-      prc_Consultar_DeTerceiro_Det;
   end;
 end;
 
@@ -340,22 +324,22 @@ end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros;
 begin
+  Screen.Cursor := crHourGlass;
   fDMConsEstoque.cdsEstoque_De_Terc.Close;
   fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsEstoque_De_Terc.ParamByName('Data').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsEstoque_De_Terc.Open;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiros;
 begin
-  if CheckBox1.Checked then
-    fDMConsEstoque.dspEstoque_Em_Terc.DataSet := fDMConsEstoque.sdsEstoque_Em_TercB
-  else
-    fDMConsEstoque.dspEstoque_Em_Terc.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc;
+  Screen.Cursor := crHourGlass;
   fDMConsEstoque.cdsEstoque_Em_Terc.Close;
   fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsEstoque_Em_Terc.ParamByName('Data').AsDate      := DateEdit2.Date;
   fDMConsEstoque.cdsEstoque_Em_Terc.Open;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TfrmConsEstoque_Atual.SMDBGrid2TitleClick(Column: TColumn);
@@ -467,40 +451,54 @@ end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiros_Pes;
 begin
+  Screen.Cursor := crHourGlass;
   fDMConsEstoque.cdsEstoque_De_Terc_Pes.Close;
-  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsEstoque_De_Terc_Pes.ParamByName('Data').AsDate := DateEdit1.Date;
   fDMConsEstoque.cdsEstoque_De_Terc_Pes.Open;
+  Screen.Cursor := crDefault;
 end;
 
 procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiros_Pes;
 begin
+  Screen.Cursor := crHourGlass;
   fDMConsEstoque.cdsEstoque_Em_Terc_Pes.Close;
-  if CheckBox1.Checked then
-    fDMConsEstoque.dspEstoque_Em_Terc_Pes.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_PesB
-  else
-    fDMConsEstoque.dspEstoque_Em_Terc_Pes.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_Pes;
-  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('FILIAL').AsInteger   := RxDBLookupCombo1.KeyValue;
+  fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMConsEstoque.sdsEstoque_Em_Terc_Pes.ParamByName('Data').AsDate := DateEdit2.Date;
   fDMConsEstoque.cdsEstoque_Em_Terc_Pes.Open;
+  Screen.Cursor := crDefault;
 end;
 
-procedure TfrmConsEstoque_Atual.prc_Consultar_DeTerceiro_Det;
+procedure TfrmConsEstoque_Atual.RzPageControl1Change(Sender: TObject);
 begin
-
+  Label1.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
+  edtRef.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
+  Label5.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
+  ceIDProduto.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
 end;
 
-procedure TfrmConsEstoque_Atual.prc_Consultar_EmTerceiro_Det;
+procedure TfrmConsEstoque_Atual.SMDBGrid7TitleClick(Column: TColumn);
+var
+  i: Integer;
 begin
-  if CheckBox1.Checked then
-    fDMConsEstoque.dspEstoque_Em_Terc_Det.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_DetB
-  else
-    fDMConsEstoque.dspEstoque_Em_Terc_Det.DataSet := fDMConsEstoque.sdsEstoque_Em_Terc_Det;
-  fDMConsEstoque.cdsEstoque_Em_Terc_Det.Close;
-  fDMConsEstoque.sdsEstoque_Em_Terc_Det.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
-  fDMConsEstoque.sdsEstoque_Em_Terc_Det.ParamByName('DATA1').AsDate     := DateEdit3.Date;
-  fDMConsEstoque.sdsEstoque_Em_Terc_Det.ParamByName('DATA2').AsDate     := DateEdit4.Date;
-  fDMConsEstoque.cdsEstoque_Em_Terc_Det.Open;
+  ColunaOrdenada := Column.FieldName;
+  fDMConsEstoque.cdsEstoque_Em_Terc_Pes.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid7.Columns.Count - 1 do
+    if not (SMDBGrid7.Columns.Items[I] = Column) then
+      SMDBGrid7.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmConsEstoque_Atual.SMDBGrid6TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMConsEstoque.cdsEstoque_De_Terc_Pes.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid6.Columns.Count - 1 do
+    if not (SMDBGrid6.Columns.Items[I] = Column) then
+      SMDBGrid6.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.

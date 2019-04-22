@@ -1,3 +1,4 @@
+
 unit UDMCadFilial;
 
 interface
@@ -611,6 +612,48 @@ type
     cdsFilialUSA_ENVIO_ST_RET: TStringField;
     sdsFilialCALCULAR_ICMS_EFET: TStringField;
     cdsFilialCALCULAR_ICMS_EFET: TStringField;
+    sdsFilialRelatoriosGERAR_TAMANHO: TStringField;
+    cdsFilialRelatoriosGERAR_TAMANHO: TStringField;
+    sdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CRE: TIntegerField;
+    sdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CPA: TIntegerField;
+    cdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CRE: TIntegerField;
+    cdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CPA: TIntegerField;
+    sdsFilial_Certificados: TSQLDataSet;
+    cdsFilial_Certificados: TClientDataSet;
+    dsFilial_Certificados: TDataSource;
+    dspFilial_Certificados: TDataSetProvider;
+    sdsFilial_CertificadosID: TIntegerField;
+    sdsFilial_CertificadosCHAVE_ACESSO: TMemoField;
+    sdsFilial_CertificadosCNPJ_TITULAR: TStringField;
+    sdsFilial_CertificadosEMISSOR: TStringField;
+    sdsFilial_CertificadosNOME_TITULAR: TStringField;
+    sdsFilial_CertificadosNUMERO_SERIE: TStringField;
+    sdsFilial_CertificadosUTILIZA_NFE: TIntegerField;
+    sdsFilial_CertificadosUTILIZA_NFSE: TIntegerField;
+    sdsFilial_CertificadosVALIDADE_INICIO: TSQLTimeStampField;
+    sdsFilial_CertificadosVALIDADE_FIM: TSQLTimeStampField;
+    sdsFilial_CertificadosUTILIZA_MDFE: TIntegerField;
+    sdsFilial_CertificadosUSUARIO_WEB: TStringField;
+    sdsFilial_CertificadosSENHA_WEB: TStringField;
+    sdsFilial_CertificadosAGUARDARCONSULTARETORNO: TIntegerField;
+    sdsFilial_CertificadosCONSULTARLOTEAPOSENVIO: TStringField;
+    sdsFilial_CertificadosINTERVALOTENTATIVAS: TIntegerField;
+    cdsFilial_CertificadosID: TIntegerField;
+    cdsFilial_CertificadosCHAVE_ACESSO: TMemoField;
+    cdsFilial_CertificadosCNPJ_TITULAR: TStringField;
+    cdsFilial_CertificadosEMISSOR: TStringField;
+    cdsFilial_CertificadosNOME_TITULAR: TStringField;
+    cdsFilial_CertificadosNUMERO_SERIE: TStringField;
+    cdsFilial_CertificadosUTILIZA_NFE: TIntegerField;
+    cdsFilial_CertificadosUTILIZA_NFSE: TIntegerField;
+    cdsFilial_CertificadosVALIDADE_INICIO: TSQLTimeStampField;
+    cdsFilial_CertificadosVALIDADE_FIM: TSQLTimeStampField;
+    cdsFilial_CertificadosUTILIZA_MDFE: TIntegerField;
+    cdsFilial_CertificadosUSUARIO_WEB: TStringField;
+    cdsFilial_CertificadosSENHA_WEB: TStringField;
+    cdsFilial_CertificadosAGUARDARCONSULTARETORNO: TIntegerField;
+    cdsFilial_CertificadosCONSULTARLOTEAPOSENVIO: TStringField;
+    cdsFilial_CertificadosINTERVALOTENTATIVAS: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);
@@ -701,6 +744,9 @@ begin
   cdsFilial_Custo.First;
   if not cdsFilial_Custo.IsEmpty then
     cdsFilial_Custo.Delete;
+  cdsFilial_Certificados.First;
+  if not cdsFilial_Certificados.IsEmpty then
+    cdsFilial_Certificados.Delete;
   cdsFilial.Delete;
   cdsFilial.ApplyUpdates(0);
 end;

@@ -1,7 +1,7 @@
 object frmConsComprasServico: TfrmConsComprasServico
-  Left = 208
-  Top = 124
-  Width = 928
+  Left = 160
+  Top = 135
+  Width = 1046
   Height = 480
   Caption = 'frmConsComprasServico'
   Color = clBtnFace
@@ -18,8 +18,8 @@ object frmConsComprasServico: TfrmConsComprasServico
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 920
-    Height = 69
+    Width = 1030
+    Height = 88
     Align = alTop
     BevelOuter = bvNone
     Color = clSilver
@@ -55,6 +55,13 @@ object frmConsComprasServico: TfrmConsComprasServico
       Height = 13
       Alignment = taRightJustify
       Caption = 'Data Inicial:'
+    end
+    object Label4: TLabel
+      Left = 17
+      Top = 69
+      Width = 84
+      Height = 13
+      Caption = 'Tipo de Relat'#243'rio:'
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 103
@@ -248,12 +255,25 @@ object frmConsComprasServico: TfrmConsComprasServico
       ParentCtl3D = False
       TabOrder = 5
     end
+    object comboTipo: TComboBox
+      Left = 104
+      Top = 61
+      Width = 217
+      Height = 21
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 6
+      Text = 'Sint'#233'tico'
+      Items.Strings = (
+        'Sint'#233'tico'
+        'Anal'#237'tico(Itens)')
+    end
   end
   object RzPageControl3: TRzPageControl
     Left = 0
-    Top = 69
-    Width = 920
-    Height = 380
+    Top = 88
+    Width = 1030
+    Height = 353
     ActivePage = TS_Cliente_Acum
     ActivePageDefault = TS_Cliente_Acum
     Align = alClient
@@ -277,8 +297,8 @@ object frmConsComprasServico: TfrmConsComprasServico
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 916
-        Height = 357
+        Width = 1026
+        Height = 330
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFat.dsComprasServico

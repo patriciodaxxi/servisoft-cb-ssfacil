@@ -1,10 +1,10 @@
 object DMCadTipoCobranca: TDMCadTipoCobranca
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 425
-  Top = 222
-  Height = 296
-  Width = 478
+  Left = 432
+  Top = 122
+  Height = 346
+  Width = 636
   object sdsTipoCobranca: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -159,7 +159,7 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
     OnUpdateError = dspTipoCobrancaUpdateError
-    Left = 128
+    Left = 87
     Top = 32
   end
   object cdsTipoCobranca: TClientDataSet
@@ -168,7 +168,7 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     Params = <>
     ProviderName = 'dspTipoCobranca'
     OnNewRecord = cdsTipoCobrancaNewRecord
-    Left = 192
+    Left = 120
     Top = 32
     object cdsTipoCobrancaID: TIntegerField
       FieldName = 'ID'
@@ -320,10 +320,13 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
       FixedChar = True
       Size = 1
     end
+    object cdsTipoCobrancasdsTipoCobranca_Itens: TDataSetField
+      FieldName = 'sdsTipoCobranca_Itens'
+    end
   end
   object dsTipoCobranca: TDataSource
     DataSet = cdsTipoCobranca
-    Left = 264
+    Left = 152
     Top = 32
   end
   object qParametros: TSQLQuery
@@ -333,12 +336,120 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
       'SELECT P.impressora_fiscal'
       'FROM PARAMETROS P')
     SQLConnection = dmDatabase.scoDados
-    Left = 256
-    Top = 152
+    Left = 400
+    Top = 24
     object qParametrosIMPRESSORA_FISCAL: TStringField
       FieldName = 'IMPRESSORA_FISCAL'
       FixedChar = True
       Size = 1
     end
+  end
+  object dsMestre: TDataSource
+    DataSet = sdsTipoCobranca
+    Left = 56
+    Top = 88
+  end
+  object sdsTipoCobranca_Itens: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT * FROM TIPOCOBRANCA_ITENS'#13#10'WHERE ID = :ID'
+    DataSource = dsMestre
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Size = 4
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 56
+    Top = 152
+    object sdsTipoCobranca_ItensID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object sdsTipoCobranca_ItensITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object sdsTipoCobranca_ItensID_CONDPAGTO: TIntegerField
+      FieldName = 'ID_CONDPAGTO'
+      Required = True
+    end
+  end
+  object cdsTipoCobranca_Itens: TClientDataSet
+    Aggregates = <>
+    DataSetField = cdsTipoCobrancasdsTipoCobranca_Itens
+    Params = <>
+    OnCalcFields = cdsTipoCobranca_ItensCalcFields
+    Left = 128
+    Top = 152
+    object cdsTipoCobranca_ItensID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTipoCobranca_ItensITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsTipoCobranca_ItensID_CONDPAGTO: TIntegerField
+      FieldName = 'ID_CONDPAGTO'
+      Required = True
+    end
+    object cdsTipoCobranca_ItensNome_CondPagto: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Nome_CondPagto'
+      Size = 50
+      Calculated = True
+    end
+  end
+  object dsTipoCobranca_Itens: TDataSource
+    DataSet = cdsTipoCobranca_Itens
+    Left = 168
+    Top = 152
+  end
+  object sdsCondPagto: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'select ID, NOME from CONDPGTO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 48
+    Top = 232
+    object sdsCondPagtoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object sdsCondPagtoNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+  end
+  object dspCondPagto: TDataSetProvider
+    DataSet = sdsCondPagto
+    Left = 80
+    Top = 232
+  end
+  object cdsCondPagto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCondPagto'
+    Left = 112
+    Top = 232
+    object cdsCondPagtoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsCondPagtoNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+  end
+  object dsCondPagto: TDataSource
+    DataSet = cdsCondPagto
+    Left = 144
+    Top = 232
   end
 end

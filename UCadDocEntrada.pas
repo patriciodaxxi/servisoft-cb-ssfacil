@@ -6,8 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadNotaServico,
   DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus,
   RXDBCtrl, RzEdit, RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, NxEdit,StrUtils, DateUtils,
-  ComCtrls, ValorPor, RzDBDTP, RzDTP, UConsFat_Mensal, RzRadChk, UDMMovimento,
-  UCadNotaServico_Obs, RzDBChk, USel_OS_Servico, Variants;
+  ComCtrls, ValorPor, RzDBDTP, RzDTP, UConsFat_Mensal, RzRadChk, UDMMovimento, UCadNotaServico_Obs, RzDBChk, USel_OS_Servico,
+  Variants;
 
 type
   TfrmCadDocEntrada = class(TForm)
@@ -357,7 +357,8 @@ begin
                                                      fDMCadNotaServico.cdsNotaServicoTIPO_PRAZO.AsString,
                                                      fDMCadNotaServico.cdsNotaServicoID_CONDPGTO.AsInteger,0,
                                                      fDMCadNotaServico.cdsNotaServicoID_VENDEDOR.AsInteger,0,
-                                                     fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0,1,0,'N');
+                                                     fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0,1,0,'N',
+                                                     0,0,0,0,0,0);
       end;
 
       if vID_Mov <> fDMCadNotaServico.cdsNotaServicoID_MOVIMENTO.AsInteger then

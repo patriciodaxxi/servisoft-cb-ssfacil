@@ -30,8 +30,8 @@ object dmDatabase: TdmDatabase
       'Interbase TransIsolation=ReadCommited'
       'Trim Char=False')
     VendorLib = 'gds32.dll'
-    Left = 32
-    Top = 16
+    Left = 38
+    Top = 24
   end
   object Decoder64: TIdDecoderMIME
     FillChar = '='
@@ -116,7 +116,7 @@ object dmDatabase: TdmDatabase
     SQL.Strings = (
       'SELECT VERSAO_BANCO FROM PARAMETROS')
     SQLConnection = scoDados
-    Left = 40
+    Left = 41
     Top = 128
     object sqVersaoAtualVERSAO_BANCO: TIntegerField
       FieldName = 'VERSAO_BANCO'

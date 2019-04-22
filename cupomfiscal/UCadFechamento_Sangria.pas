@@ -84,6 +84,11 @@ begin
   if vID_Fechamento_Pos > 0 then
     fDMCadFechamento.prc_Localizar(vID_Fechamento_Pos);
 
+  if not fDMCadFechamento.cdsFechamento_Ret.Active then
+  begin
+    fDMCadFechamento.cdsFechamento_Ret.Open;
+    
+  end;
   fDMCadFechamento.cdsFechamento_Ret.Last;
   fDMCadFechamento.vItem_Sangria := fDMCadFechamento.cdsFechamento_RetITEM.AsInteger;
   if vES = 'E' then

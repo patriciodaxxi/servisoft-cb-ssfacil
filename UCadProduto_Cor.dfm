@@ -5,7 +5,7 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
   BorderStyle = bsSingle
   Caption = 'Cadastro de Cores'
   ClientHeight = 495
-  ClientWidth = 642
+  ClientWidth = 706
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,7 +24,7 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 642
+    Width = 706
     Height = 30
     Align = alTop
     Color = 8404992
@@ -404,7 +404,7 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 121
-    Width = 642
+    Width = 706
     Height = 374
     Align = alClient
     Ctl3D = False
@@ -437,7 +437,7 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 6
+    ColCount = 7
     RowCount = 2
     Columns = <
       item
@@ -485,12 +485,21 @@ object frmCadProduto_Cor: TfrmCadProduto_Cor
         Title.Color = 16777134
         Width = 41
         Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'ID_COR_COMBINACAO'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID Cor'
+        Title.Color = 16777134
+        Visible = True
       end>
   end
   object pnlDados: TPanel
     Left = 0
     Top = 30
-    Width = 642
+    Width = 706
     Height = 91
     Align = alTop
     Enabled = False

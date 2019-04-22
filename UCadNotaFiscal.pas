@@ -640,6 +640,7 @@ type
     function fnc_Duplicata: Boolean;
     function fnc_Movimento: Boolean;
     function fnc_Duplicata_Enviada_Banco : String; //R= Remessa   N=Nosso Numero
+    procedure prc_Excluir_Grade(vItemOrig: Integer);
   public
     { Public declarations }
     vTipo_Reg: String; //NTS = Nota Fiscal   NTE = Nota Entrada
@@ -995,7 +996,14 @@ begin
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,vPercAux,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_REMET.AsFloat,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_DEST.AsFloat,1,
-                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,'N');
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,'N',
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_FCP_ST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
+
         end;
         if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger <> vID_Estoque) or
            (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov) then
@@ -1962,38 +1970,48 @@ begin
   if MessageDlg('Deseja excluir o item selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
 
-  if (fDMCadNotaFiscal.cdsParametrosUSA_VALE.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger > 0) then
+  if (fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_ORIGINAL.AsInteger > 0) then
   begin
-    if not(fDMCadNotaFiscal.mValeAux.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger])) then
+    if MessageDlg('O item selecionado faz parte de uma grade, deseja excluir toda a grade?',mtConfirmation,[mbNo,mbOk],0) = mrOk then
     begin
-      fDMCadNotaFiscal.mValeAux.Insert;
-      fDMCadNotaFiscal.mValeAuxID_Vale.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger;
-      fDMCadNotaFiscal.mValeAux.Post;
+      prc_Excluir_Grade(fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_ORIGINAL.AsInteger);
     end;
-  end;
-  if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger > 0) and not(fDMCadNotaFiscal.mPedidoAuxExcluir.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger])) then
+  end
+  else
   begin
-     fDMCadNotaFiscal.mPedidoAuxExcluir.Insert;
-     fDMCadNotaFiscal.mPedidoAuxExcluirID_pedido.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger;
-     fDMCadNotaFiscal.mPedidoAuxExcluir.Post;
-  end;
-  if not fDMCadNotaFiscal.cdsNotaFiscal_Copia.IsEmpty then
-  begin
-    if not(fDMCadNotaFiscal.mRecNFAux.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_CopiaID_RECNF.AsInteger])) then
+    if (fDMCadNotaFiscal.cdsParametrosUSA_VALE.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger > 0) then
     begin
-      fDMCadNotaFiscal.mRecNFAux.Insert;
-      fDMCadNotaFiscal.mRecNFAuxID_RecNF.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_CopiaID_RECNF.AsInteger;
-      fDMCadNotaFiscal.mRecNFAux.Post;
+      if not(fDMCadNotaFiscal.mValeAux.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger])) then
+      begin
+        fDMCadNotaFiscal.mValeAux.Insert;
+        fDMCadNotaFiscal.mValeAuxID_Vale.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger;
+        fDMCadNotaFiscal.mValeAux.Post;
+      end;
     end;
+    if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger > 0) and not(fDMCadNotaFiscal.mPedidoAuxExcluir.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger])) then
+    begin
+       fDMCadNotaFiscal.mPedidoAuxExcluir.Insert;
+       fDMCadNotaFiscal.mPedidoAuxExcluirID_pedido.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger;
+       fDMCadNotaFiscal.mPedidoAuxExcluir.Post;
+    end;
+    if not fDMCadNotaFiscal.cdsNotaFiscal_Copia.IsEmpty then
+    begin
+      if not(fDMCadNotaFiscal.mRecNFAux.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_CopiaID_RECNF.AsInteger])) then
+      begin
+        fDMCadNotaFiscal.mRecNFAux.Insert;
+        fDMCadNotaFiscal.mRecNFAuxID_RecNF.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_CopiaID_RECNF.AsInteger;
+        fDMCadNotaFiscal.mRecNFAux.Post;
+      end;
+    end;
+    fDMCadNotaFiscal.prc_Excluir_Item;
   end;
-
-  fDMCadNotaFiscal.prc_Excluir_Item;
-
+  SmDBGrid2.DisableScroll;
   btnCalcular_ValoresClick(Sender);
   //30/07/2013
   if fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert] then
     btnGerarParcelasClick(Sender);
   fDMCadNotaFiscal.cdsNotaEntrada.Close;
+  smDBGrid2.EnableScroll;
 end;
 
 procedure TfrmCadNotaFiscal.btnInserir_ItensClick(Sender: TObject);
@@ -2114,6 +2132,7 @@ begin
   fDMCadNotaFiscal.cdsParametros.Close;
   fDMCadNotaFiscal.cdsParametros.Open;
 
+  vItemAux := fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger;
   fDMCadNotaFiscal.vID_CFOP := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger;
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Edit;
   fDMCadNotaFiscal.vState_Item := 'E';
@@ -2141,14 +2160,16 @@ begin
   ffrmCadNotaFiscal_Itens.rxcbFinalidade.Visible := rxcbFinalidade.Visible;
 
   FreeAndNil(ffrmCadNotaFiscal_Itens);
-  vItemAux := fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger;
-  btnCalcular_ValoresClick(Sender);
 
-  fDMCadNotaFiscal.cdsNotaFiscal_Itens.Locate('ID;Item',VarArrayOf([fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger,vItemAux]),[locaseinsensitive]);
+  SMDBGrid2.DisableScroll;
+  btnCalcular_ValoresClick(Sender);
 
   //30/07/2013
   if fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert] then
     btnGerarParcelasClick(Sender);
+  SMDBGrid2.EnableScroll;
+
+  fDMCadNotaFiscal.cdsNotaFiscal_Itens.Locate('ID;Item',VarArrayOf([fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger,vItemAux]),[locaseinsensitive]);
 end;
 
 procedure TfrmCadNotaFiscal.btnBuscar_Obs_AuxClick(Sender: TObject);
@@ -2595,8 +2616,6 @@ begin
 end;
 
 procedure TfrmCadNotaFiscal.btnCopiarPedidoClick(Sender: TObject);
-var
-  vItemAux: Integer;
 begin
   if (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger <= 0) and (fDMCadNotaFiscal.qParametros_NFePERMITE_IMPORTAR_S_CLIENTE.AsString <> 'S')  then
   begin
@@ -2609,10 +2628,13 @@ begin
     Exit;
   end;
 
-  if fDMCadNotaFiscal.cdsNotaFiscal_Itens.Locate('ID_PEDIDO',fDMCadNotaFiscal.cdsPedidoID.AsInteger,[loCaseInsensitive]) then
+  if (fDMCadNotaFiscal.qParametros_NFeUSA_CLIENTE_FAT_FIL.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger > 0) and
+     not(fnc_Cliente_Fil_Fat(fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger)) then
+  begin
+    MessageDlg('*** Cliente não pode faturar para esta Filial ', mtInformation , [mbOk], 0);
+    exit;
+  end;
 
-
-  vItemAux := fDMCadNotaFiscal.cdsNotaFiscal_Itens.RecordCount;
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);
   ffrmCadNotaFiscal_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;
 
@@ -2889,6 +2911,14 @@ var
 begin
   if not(fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert]) then
     exit;
+
+  if (fDMCadNotaFiscal.qParametros_NFeUSA_CLIENTE_FAT_FIL.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger > 0) and
+     not(fnc_Cliente_Fil_Fat(fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger)) then
+  begin
+    MessageDlg('*** Cliente não pode faturar para esta Filial ', mtInformation , [mbOk], 0);
+    RxDBLookupCombo3.SetFocus;
+    exit;
+  end;
 
   if (vID_Cliente_Ant <> fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger) and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.RecordCount <= 0) then
   begin
@@ -5304,6 +5334,44 @@ begin
     Exit;
   end;
   fDMCadNotaFiscal.frxReport1.ShowReport;
+end;
+
+procedure TfrmCadNotaFiscal.prc_Excluir_Grade(vItemOrig: Integer);
+begin
+  fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filtered := False;
+  fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filter := 'ITEM_ORIGINAL = ''' + IntToStr(vItemOrig) + '''';
+  fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filtered := True;
+  fDMCadNotaFiscal.cdsNotaFiscal_Itens.First;
+  while not fDMCadNotaFiscal.cdsNotaFiscal_Itens.IsEmpty do
+  begin
+    if (fDMCadNotaFiscal.cdsParametrosUSA_VALE.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger > 0) then
+    begin
+      if not(fDMCadNotaFiscal.mValeAux.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger])) then
+      begin
+        fDMCadNotaFiscal.mValeAux.Insert;
+        fDMCadNotaFiscal.mValeAuxID_Vale.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger;
+        fDMCadNotaFiscal.mValeAux.Post;
+      end;
+    end;
+    if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger > 0) and not(fDMCadNotaFiscal.mPedidoAuxExcluir.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger])) then
+    begin
+       fDMCadNotaFiscal.mPedidoAuxExcluir.Insert;
+       fDMCadNotaFiscal.mPedidoAuxExcluirID_pedido.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger;
+       fDMCadNotaFiscal.mPedidoAuxExcluir.Post;
+    end;
+    if not fDMCadNotaFiscal.cdsNotaFiscal_Copia.IsEmpty then
+    begin
+      if not(fDMCadNotaFiscal.mRecNFAux.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_CopiaID_RECNF.AsInteger])) then
+      begin
+        fDMCadNotaFiscal.mRecNFAux.Insert;
+        fDMCadNotaFiscal.mRecNFAuxID_RecNF.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_CopiaID_RECNF.AsInteger;
+        fDMCadNotaFiscal.mRecNFAux.Post;
+      end;
+    end;
+    fDMCadNotaFiscal.prc_Excluir_Item;
+  end;
+  fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filtered := False;
+  fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filter   := '';
 end;
 
 end.

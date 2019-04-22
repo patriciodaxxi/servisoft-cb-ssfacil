@@ -801,16 +801,18 @@ object DMConsOC: TDMConsOC
       'N.NOME NOME_FUNCIONARIO, ITE.NOMEPRODUTO, ITE.REFERENCIA,'#13#10'ITE.D' +
       'TENTREGA DTENTREGA_ITEM,  SUM(PCLI.QTD) QTD,'#13#10'CC.DESCRICAO NOME_' +
       'PROJETO,SUM((ITE.VLR_UNITARIO - ITE.VLR_DESCONTO) * PCLI.QTD) VL' +
-      'R_PROJETO, PCLI.id_centrocusto'#13#10'FROM PEDIDO PED'#13#10'INNER JOIN PEDI' +
-      'DO_ITEM ITE'#13#10'ON PED.ID = ITE.ID'#13#10'INNER JOIN PEDIDO_CLI PCLI'#13#10'ON ' +
-      'ITE.ID = PCLI.ID'#13#10'AND ITE.ITEM = PCLI.ITEM'#13#10'INNER JOIN FILIAL FI' +
-      'L'#13#10'ON PED.FILIAL = FIL.id'#13#10'INNER JOIN PESSOA FORN'#13#10'ON PED.id_cli' +
-      'ente = FORN.CODIGO'#13#10'LEFT JOIN FUNCIONARIO FUN'#13#10'ON PED.ID_SOLICIT' +
-      'ANTE = FUN.CODIGO'#13#10'LEFT JOIN CENTROCUSTO CC'#13#10'ON PCLI.ID_CENTROCU' +
-      'STO = CC.ID'#13#10'GROUP BY PED.id_cliente, PED.ID, PED.dtemissao, PED' +
-      '.NUM_PEDIDO,'#13#10'PED.filial, FIL.NOME, FIL.nome_interno,'#13#10'FORN.NOME' +
-      ', FORN.FANTASIA, PED.VLR_TOTAL,'#13#10'FUN.NOME, ITE.DTENTREGA, CC.DES' +
-      'CRICAO, ITE.NOMEPRODUTO, ITE.REFERENCIA, PCLI.id_centrocusto'
+      'R_PROJETO, PCLI.id_centrocusto,'#13#10'CC.vlr_contrato, CC.num_contrat' +
+      'o'#13#10'FROM PEDIDO PED'#13#10'INNER JOIN PEDIDO_ITEM ITE'#13#10'ON PED.ID = ITE.' +
+      'ID'#13#10'INNER JOIN PEDIDO_CLI PCLI'#13#10'ON ITE.ID = PCLI.ID'#13#10'AND ITE.ITE' +
+      'M = PCLI.ITEM'#13#10'INNER JOIN FILIAL FIL'#13#10'ON PED.FILIAL = FIL.id'#13#10'IN' +
+      'NER JOIN PESSOA FORN'#13#10'ON PED.id_cliente = FORN.CODIGO'#13#10'LEFT JOIN' +
+      ' FUNCIONARIO FUN'#13#10'ON PED.ID_SOLICITANTE = FUN.CODIGO'#13#10'LEFT JOIN ' +
+      'CENTROCUSTO CC'#13#10'ON PCLI.ID_CENTROCUSTO = CC.ID'#13#10'GROUP BY PED.id_' +
+      'cliente, PED.ID, PED.dtemissao, PED.NUM_PEDIDO,'#13#10'PED.filial, FIL' +
+      '.NOME, FIL.nome_interno,'#13#10'FORN.NOME, FORN.FANTASIA, PED.VLR_TOTA' +
+      'L,'#13#10'FUN.NOME, ITE.DTENTREGA, CC.DESCRICAO, ITE.NOMEPRODUTO, ITE.' +
+      'REFERENCIA, PCLI.id_centrocusto,'#13#10'CC.vlr_contrato, CC.num_contra' +
+      'to'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -893,6 +895,14 @@ object DMConsOC: TDMConsOC
     object cdsOC_ProjetoID_CENTROCUSTO: TIntegerField
       FieldName = 'ID_CENTROCUSTO'
       Required = True
+    end
+    object cdsOC_ProjetoVLR_CONTRATO: TFloatField
+      FieldName = 'VLR_CONTRATO'
+      DisplayFormat = '0.00'
+    end
+    object cdsOC_ProjetoNUM_CONTRATO: TStringField
+      FieldName = 'NUM_CONTRATO'
+      Size = 30
     end
   end
   object dsOC_Projeto: TDataSource

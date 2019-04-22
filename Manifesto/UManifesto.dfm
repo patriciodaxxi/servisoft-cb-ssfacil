@@ -508,7 +508,7 @@ object frmManifesto: TfrmManifesto
             Transparent = True
           end
           object btnMan: TNxButton
-            Left = 100
+            Left = 101
             Top = 61
             Width = 141
             Height = 28
@@ -609,6 +609,13 @@ object frmManifesto: TfrmManifesto
           PartsComplete = 0
           Percent = 0
           TotalParts = 0
+        end
+        object Edit1: TEdit
+          Left = 893
+          Top = 11
+          Width = 206
+          Height = 21
+          TabOrder = 0
         end
       end
       object Panel1: TPanel

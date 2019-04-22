@@ -1195,6 +1195,18 @@ type
     cdsPessoaSENHA_PEDIDO: TStringField;
     sdsPessoaDESC_MAXIMO: TFloatField;
     cdsPessoaDESC_MAXIMO: TFloatField;
+    qParametros_NFeUSA_CLIENTE_FAT_FIL: TStringField;
+    dsPessoa_Fil: TDataSource;
+    cdsPessoa_Fil: TClientDataSet;
+    dspPessoa_Fil: TDataSetProvider;
+    sdsPessoa_Fil: TSQLDataSet;
+    sdsPessoa_FilCODIGO: TIntegerField;
+    sdsPessoa_FilITEM: TIntegerField;
+    sdsPessoa_FilFILIAL: TIntegerField;
+    cdsPessoa_FilCODIGO: TIntegerField;
+    cdsPessoa_FilITEM: TIntegerField;
+    cdsPessoa_FilFILIAL: TIntegerField;
+    cdsPessoa_FillkNome_Filial: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
@@ -1231,6 +1243,9 @@ type
     procedure cdsPessoa_TipoMatBeforeInsert(DataSet: TDataSet);
     procedure cdsPessoa_TipoMatAfterInsert(DataSet: TDataSet);
     procedure cdsPessoa_TipoMatAfterPost(DataSet: TDataSet);
+    procedure cdsPessoa_FilAfterInsert(DataSet: TDataSet);
+    procedure cdsPessoa_FilBeforeInsert(DataSet: TDataSet);
+    procedure cdsPessoa_FilAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
     vID_CidadePes: Integer;
@@ -1238,6 +1253,7 @@ type
     vItem_Dep: Integer;
     vItem_TipoMat : Integer;
     vItem_Ativ: Integer;
+    vItem_Fil : Integer;
     procedure prc_Gravar_Cidade;
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
   public
@@ -1366,6 +1382,9 @@ begin
     cdsPessoa_TipoMat.First;
     while not cdsPessoa_TipoMat.Eof do
       cdsPessoa_TipoMat.Delete;
+    cdsPessoa_Fil.First;
+    while not cdsPessoa_Fil.Eof do
+      cdsPessoa_Fil.Delete;
     cdsPessoa_RefP.First;
     while not cdsPessoa_RefP.Eof do
       cdsPessoa_RefP.Delete;
@@ -1378,6 +1397,7 @@ begin
     cdsPessoa_Ativ.ApplyUpdates(0);
     cdsPessoa_Aut.ApplyUpdates(0);
     cdsPessoa_TipoMat.ApplyUpdates(0);
+    cdsPessoa_Fil.ApplyUpdates(0);
     cdsPessoa_RefP.ApplyUpdates(0);
     cdsPessoa_RefC.ApplyUpdates(0);
     dmDatabase.scoDados.Commit(ID);
@@ -1447,6 +1467,7 @@ begin
   qParametros_NFe.Open;
   qParametros_RecXML.Open;
   cdsPessoa_TipoMat.Open;
+  cdsPessoa_Fil.Open;
   qParametros_CTA_ORC.Open;
   qParametros_Ped.Open;
   if qParametrosUSA_SERVICO.AsString = 'S' then
@@ -2057,6 +2078,24 @@ procedure TDMCadPessoa.cdsPessoa_TipoMatAfterPost(DataSet: TDataSet);
 begin
   if cdsPessoa_TipoMatID_TIPO_MATERIAL.AsInteger <= 0 then
     cdsPessoa_TipoMat.Delete;
+end;
+
+procedure TDMCadPessoa.cdsPessoa_FilAfterInsert(DataSet: TDataSet);
+begin
+  cdsPessoa_FilITEM.AsInteger   := vItem_Fil + 1;
+  cdsPessoa_FilCODIGO.AsInteger := cdsPessoaCODIGO.AsInteger;
+end;
+
+procedure TDMCadPessoa.cdsPessoa_FilBeforeInsert(DataSet: TDataSet);
+begin
+  cdsPessoa_Fil.Last;
+  vItem_Fil := cdsPessoa_FilITEM.AsInteger;
+end;
+
+procedure TDMCadPessoa.cdsPessoa_FilAfterPost(DataSet: TDataSet);
+begin
+  if cdsPessoa_FilFILIAL.AsInteger <= 0 then
+    cdsPessoa_Fil.Delete;
 end;
 
 end.

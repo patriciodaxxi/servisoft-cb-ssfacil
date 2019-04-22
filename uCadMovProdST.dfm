@@ -1,6 +1,6 @@
 object frmCadMovProdST: TfrmCadMovProdST
-  Left = 353
-  Top = 115
+  Left = 375
+  Top = 134
   Width = 763
   Height = 530
   BorderIcons = [biSystemMenu, biMaximize]
@@ -22,8 +22,8 @@ object frmCadMovProdST: TfrmCadMovProdST
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 755
-    Height = 499
+    Width = 747
+    Height = 472
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -41,8 +41,8 @@ object frmCadMovProdST: TfrmCadMovProdST
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 106
-        Width = 751
-        Height = 353
+        Width = 743
+        Height = 326
         Align = alClient
         Ctl3D = False
         DataSource = DmCadMovProdST.dsConsulta
@@ -178,7 +178,7 @@ object frmCadMovProdST: TfrmCadMovProdST
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 751
+        Width = 743
         Height = 32
         Align = alTop
         Color = clSilver
@@ -334,8 +334,8 @@ object frmCadMovProdST: TfrmCadMovProdST
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 459
-        Width = 751
+        Top = 432
+        Width = 743
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -351,7 +351,7 @@ object frmCadMovProdST: TfrmCadMovProdST
       object Panel3: TPanel
         Left = 0
         Top = 32
-        Width = 751
+        Width = 743
         Height = 74
         Align = alTop
         Color = clSilver
@@ -518,7 +518,7 @@ object frmCadMovProdST: TfrmCadMovProdST
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 751
+        Width = 743
         Height = 35
         Align = alTop
         Color = 8404992
@@ -744,8 +744,8 @@ object frmCadMovProdST: TfrmCadMovProdST
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 751
-        Height = 441
+        Width = 743
+        Height = 414
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -757,14 +757,6 @@ object frmCadMovProdST: TfrmCadMovProdST
           Alignment = taRightJustify
           Caption = 'ID:'
         end
-        object Label3: TLabel
-          Left = 45
-          Top = 16
-          Width = 40
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Produto:'
-        end
         object Label5: TLabel
           Left = 59
           Top = 38
@@ -774,11 +766,19 @@ object frmCadMovProdST: TfrmCadMovProdST
           Caption = 'Data:'
         end
         object Label9: TLabel
-          Left = 37
+          Left = 38
           Top = 60
           Width = 47
           Height = 13
           Caption = 'Tipo Reg:'
+        end
+        object Label33: TLabel
+          Left = 45
+          Top = 15
+          Width = 40
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Produto:'
         end
         object DBEdit4: TDBEdit
           Left = 624
@@ -791,21 +791,7 @@ object frmCadMovProdST: TfrmCadMovProdST
           DataField = 'ID'
           DataSource = DmCadMovProdST.dsMovProdST
           ReadOnly = True
-          TabOrder = 1
-        end
-        object RxDBLookupCombo1: TRxDBLookupCombo
-          Left = 88
-          Top = 8
-          Width = 417
-          Height = 21
-          DropDownCount = 15
-          DataField = 'ID_PRODUTO'
-          DataSource = DmCadMovProdST.dsMovProdST
-          LookupField = 'ID'
-          LookupDisplay = 'NOME'
-          LookupSource = DmCadMovProdST.dsProduto
-          TabOrder = 0
-          OnKeyDown = RxDBLookupCombo1KeyDown
+          TabOrder = 7
         end
         object DBDateEdit1: TDBDateEdit
           Left = 88
@@ -818,7 +804,7 @@ object frmCadMovProdST: TfrmCadMovProdST
           TabOrder = 2
         end
         object RxDBComboBox1: TRxDBComboBox
-          Left = 90
+          Left = 88
           Top = 52
           Width = 356
           Height = 21
@@ -854,7 +840,7 @@ object frmCadMovProdST: TfrmCadMovProdST
           Font.Style = []
           ParentCtl3D = False
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 0
           VisualStyle = vsGradient
           object Label7: TLabel
             Left = 35
@@ -918,7 +904,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             DataField = 'QTD_ORIGINAL'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 3
+            TabOrder = 4
           end
           object DBEdit8: TDBEdit
             Left = 88
@@ -929,7 +915,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             DataField = 'UNIDADE_ORIGINAL'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 4
+            TabOrder = 5
           end
           object DBEdit1: TDBEdit
             Left = 88
@@ -940,7 +926,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             DataField = 'BASE_ST_ORIGINAL'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 0
+            TabOrder = 2
           end
           object DBEdit5: TDBEdit
             Left = 88
@@ -951,7 +937,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             DataField = 'VLR_ST_ORIGINAL'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 1
+            TabOrder = 3
           end
           object DBEdit2: TDBEdit
             Left = 87
@@ -962,7 +948,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             DataField = 'PERC_ST'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 2
+            TabOrder = 0
           end
           object DBEdit7: TDBEdit
             Left = 87
@@ -973,7 +959,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             DataField = 'QTD_PACOTE'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 5
+            TabOrder = 1
           end
         end
         object RzGroupBox1: TRzGroupBox
@@ -1046,8 +1032,52 @@ object frmCadMovProdST: TfrmCadMovProdST
           TabOrder = 6
           OnClick = NxButton1Click
         end
+        object edtIdProduto: TEdit
+          Left = 88
+          Top = 9
+          Width = 96
+          Height = 19
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 1
+          OnEnter = edtIdProdutoEnter
+          OnExit = edtIdProdutoExit
+          OnKeyDown = edtIdProdutoKeyDown
+        end
+        object edtNomeProduto: TEdit
+          Left = 186
+          Top = 9
+          Width = 317
+          Height = 19
+          TabStop = False
+          Color = clAppWorkSpace
+          Ctl3D = False
+          ParentCtl3D = False
+          ReadOnly = True
+          TabOrder = 4
+          OnKeyDown = edtNomeProdutoKeyDown
+        end
       end
     end
+  end
+  object cStat: TStatusBar
+    Left = 0
+    Top = 472
+    Width = 747
+    Height = 19
+    Panels = <
+      item
+        Text = 'Usuario'
+        Width = 150
+      end
+      item
+        Text = 'Empresa'
+        Width = 300
+      end
+      item
+        Text = 'Mensagem'
+        Width = 200
+      end>
   end
   object UCControls1: TUCControls
     GroupName = 'Movimento Produto ST'

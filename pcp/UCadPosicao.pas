@@ -49,6 +49,8 @@ type
     btnAlterar_Itens: TNxButton;
     btnExcluir_Itens: TNxButton;
     SMDBGrid2: TSMDBGrid;
+    SMDBGrid3: TSMDBGrid;
+    Panel4: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

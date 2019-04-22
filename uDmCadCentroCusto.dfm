@@ -57,6 +57,67 @@ object dmCadCentroCusto: TdmCadCentroCusto
       ProviderFlags = []
       Size = 32765
     end
+    object sdsCentroCustoENDERECO: TStringField
+      FieldName = 'ENDERECO'
+      Size = 60
+    end
+    object sdsCentroCustoNUM_END: TStringField
+      FieldName = 'NUM_END'
+      Size = 15
+    end
+    object sdsCentroCustoBAIRRO: TStringField
+      FieldName = 'BAIRRO'
+      Size = 30
+    end
+    object sdsCentroCustoID_CIDADE: TIntegerField
+      FieldName = 'ID_CIDADE'
+    end
+    object sdsCentroCustoUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object sdsCentroCustoCOMPLEMENTO_END: TStringField
+      FieldName = 'COMPLEMENTO_END'
+      Size = 40
+    end
+    object sdsCentroCustoCEP: TStringField
+      FieldName = 'CEP'
+      Size = 9
+    end
+    object sdsCentroCustoNUM_CONTRATO: TStringField
+      FieldName = 'NUM_CONTRATO'
+      Size = 30
+    end
+    object sdsCentroCustoCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Size = 18
+    end
+    object sdsCentroCustoDDD: TIntegerField
+      FieldName = 'DDD'
+    end
+    object sdsCentroCustoFONE: TStringField
+      FieldName = 'FONE'
+      Size = 10
+    end
+    object sdsCentroCustoEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 150
+    end
+    object sdsCentroCustoCONTATO: TStringField
+      FieldName = 'CONTATO'
+      Size = 60
+    end
+    object sdsCentroCustoVLR_CONTRATO: TFloatField
+      FieldName = 'VLR_CONTRATO'
+    end
+    object sdsCentroCustoCONTATO_COMPRAS: TStringField
+      FieldName = 'CONTATO_COMPRAS'
+      Size = 60
+    end
+    object sdsCentroCustoEMAIL_COMRAS: TStringField
+      FieldName = 'EMAIL_COMRAS'
+      Size = 150
+    end
   end
   object dspCentroCusto: TDataSetProvider
     DataSet = sdsCentroCusto
@@ -108,6 +169,67 @@ object dmCadCentroCusto: TdmCadCentroCusto
       FieldName = 'NOME_AUX'
       ProviderFlags = []
       Size = 32765
+    end
+    object cdsCentroCustoENDERECO: TStringField
+      FieldName = 'ENDERECO'
+      Size = 60
+    end
+    object cdsCentroCustoNUM_END: TStringField
+      FieldName = 'NUM_END'
+      Size = 15
+    end
+    object cdsCentroCustoBAIRRO: TStringField
+      FieldName = 'BAIRRO'
+      Size = 30
+    end
+    object cdsCentroCustoID_CIDADE: TIntegerField
+      FieldName = 'ID_CIDADE'
+    end
+    object cdsCentroCustoUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object cdsCentroCustoCOMPLEMENTO_END: TStringField
+      FieldName = 'COMPLEMENTO_END'
+      Size = 40
+    end
+    object cdsCentroCustoCEP: TStringField
+      FieldName = 'CEP'
+      Size = 9
+    end
+    object cdsCentroCustoNUM_CONTRATO: TStringField
+      FieldName = 'NUM_CONTRATO'
+      Size = 30
+    end
+    object cdsCentroCustoCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Size = 18
+    end
+    object cdsCentroCustoDDD: TIntegerField
+      FieldName = 'DDD'
+    end
+    object cdsCentroCustoFONE: TStringField
+      FieldName = 'FONE'
+      Size = 10
+    end
+    object cdsCentroCustoEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 150
+    end
+    object cdsCentroCustoCONTATO: TStringField
+      FieldName = 'CONTATO'
+      Size = 60
+    end
+    object cdsCentroCustoVLR_CONTRATO: TFloatField
+      FieldName = 'VLR_CONTRATO'
+    end
+    object cdsCentroCustoCONTATO_COMPRAS: TStringField
+      FieldName = 'CONTATO_COMPRAS'
+      Size = 60
+    end
+    object cdsCentroCustoEMAIL_COMRAS: TStringField
+      FieldName = 'EMAIL_COMRAS'
+      Size = 150
     end
   end
   object dsCentroCusto: TDataSource
@@ -607,5 +729,121 @@ object dmCadCentroCusto: TdmCadCentroCusto
     BCDToCurrency = False
     Left = 504
     Top = 272
+  end
+  object sdsCidade: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM CIDADE'#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 594
+    Top = 164
+  end
+  object dspCidade: TDataSetProvider
+    DataSet = sdsCidade
+    Left = 626
+    Top = 164
+  end
+  object cdsCidade: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspCidade'
+    Left = 666
+    Top = 164
+    object cdsCidadeID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsCidadeNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+    object cdsCidadeUF: TStringField
+      FieldName = 'UF'
+      Size = 2
+    end
+    object cdsCidadeCODMUNICIPIO: TStringField
+      FieldName = 'CODMUNICIPIO'
+      Size = 7
+    end
+    object cdsCidadeID_PROVEDOR: TIntegerField
+      FieldName = 'ID_PROVEDOR'
+    end
+  end
+  object dsCidade: TDataSource
+    DataSet = cdsCidade
+    Left = 706
+    Top = 164
+  end
+  object dsUF: TDataSource
+    DataSet = cdsUF
+    Left = 704
+    Top = 112
+  end
+  object cdsUF: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'UF'
+    Params = <>
+    ProviderName = 'dspUF'
+    Left = 664
+    Top = 112
+    object cdsUFUF: TStringField
+      FieldName = 'UF'
+      Required = True
+      Size = 2
+    end
+    object cdsUFPERC_ICMS: TFloatField
+      FieldName = 'PERC_ICMS'
+    end
+    object cdsUFIDPAIS: TIntegerField
+      FieldName = 'IDPAIS'
+    end
+    object cdsUFCODUF: TStringField
+      FieldName = 'CODUF'
+      Size = 2
+    end
+    object cdsUFPERC_ICMS_INTERNO: TFloatField
+      FieldName = 'PERC_ICMS_INTERNO'
+    end
+    object cdsUFQTD_DIGITOS_IE: TIntegerField
+      FieldName = 'QTD_DIGITOS_IE'
+    end
+    object cdsUFACEITA_ISENTO: TStringField
+      FieldName = 'ACEITA_ISENTO'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dspUF: TDataSetProvider
+    DataSet = sdsUF
+    Left = 624
+    Top = 112
+  end
+  object sdsUF: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM UF'#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 592
+    Top = 112
+  end
+  object qParametros_Fin: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_END_CCUSTO'
+      'FROM PARAMETROS_FIN')
+    SQLConnection = dmDatabase.scoDados
+    Left = 360
+    Top = 128
+    object qParametros_FinUSA_END_CCUSTO: TStringField
+      FieldName = 'USA_END_CCUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

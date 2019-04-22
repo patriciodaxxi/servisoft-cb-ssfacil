@@ -1,5 +1,5 @@
 object fMenu: TfMenu
-  Left = 291
+  Left = 249
   Top = 0
   Width = 837
   Height = 686
@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 635
+    Height = 627
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -133,6 +133,10 @@ object fMenu: TfMenu
       object ConfiguraoEmail1: TMenuItem
         Caption = 'Configura'#231#227'o Email'
         OnClick = ConfiguraoEmail1Click
+      end
+      object ConfiguraoCertificado1: TMenuItem
+        Caption = 'Configura'#231#227'o Certificado'
+        OnClick = ConfiguraoCertificado1Click
       end
       object N2: TMenuItem
         Caption = '-'
@@ -612,7 +616,7 @@ object fMenu: TfMenu
         OnClick = BaixaOrdemdeCompraManual1Click
       end
       object BaixaNotadeBeneficiamento1: TMenuItem
-        Caption = 'Baixa Nota de Beneficiamento'
+        Caption = 'Baixa Nota de Beneficiamento / Estoque De Terceiro'
         OnClick = BaixaNotadeBeneficiamento1Click
       end
       object N16: TMenuItem
@@ -623,7 +627,7 @@ object fMenu: TfMenu
         OnClick = ConsultaMapadeCompra1Click
       end
       object ConsultaNotasdeBeneficiamento1: TMenuItem
-        Caption = 'Consulta Notas de Beneficiamento / Estoque DE Terceiros'
+        Caption = 'Consulta Notas de Beneficiamento / Estoque De Terceiros (Manual)'
         OnClick = ConsultaNotasdeBeneficiamento1Click
       end
       object ConsultaMateriaisTerceiros1: TMenuItem
@@ -663,6 +667,10 @@ object fMenu: TfMenu
       object MovimentoProdutoST1: TMenuItem
         Caption = 'Movimento Produto ST'
         OnClick = MovimentoProdutoST1Click
+      end
+      object ConsultaProdutosST1: TMenuItem
+        Caption = 'Consulta Produtos ST'
+        OnClick = ConsultaProdutosST1Click
       end
       object N10: TMenuItem
         Caption = '-'
@@ -734,12 +742,20 @@ object fMenu: TfMenu
         Caption = 'Recibo NF'
         OnClick = ReciboNF1Click
       end
+      object PedidoWeb1: TMenuItem
+        Caption = 'Pedido Web'
+        OnClick = PedidoWeb1Click
+      end
       object N52: TMenuItem
         Caption = '-'
       end
       object ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1: TMenuItem
-        Caption = 'Consulta Notas de Beneficiamento / Estoque EM Terceiro'
+        Caption = 'Consulta Notas de Beneficiamento / Estoque Em Terceiro'
         OnClick = ConsultaNotasdeBeneficiamentoEstoqueemTerceiro1Click
+      end
+      object BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1: TMenuItem
+        Caption = 'Baixa Notas de Beneficiamento / Estoque Em Terceiro (Manual)'
+        OnClick = BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1Click
       end
       object N11: TMenuItem
         Caption = '-'
@@ -4072,6 +4088,36 @@ object fMenu: TfMenu
         GroupName = 'Consulta Produto / Clientes Sem Vendas'
       end
       item
+        FormName = 'frmCadProduto_Imp'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Produtos Impostos'
+      end
+      item
+        FormName = 'frmCadProduto_Imp'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Produtos Impostos'
+      end
+      item
+        FormName = 'frmCadMovProdST'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Movimento Produto ST'
+      end
+      item
+        FormName = 'frmCadMovProdST'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Movimento Produto ST'
+      end
+      item
+        FormName = 'frmCadMovProdST'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Movimento Produto ST'
+      end
+      item
         FormName = 'frmCadProduto'
         CompName = 'btnInserir'
         Caption = 'Inserir'
@@ -4126,34 +4172,10 @@ object fMenu: TfMenu
         GroupName = 'Produtos'
       end
       item
-        FormName = 'frmCadProduto_Imp'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Produtos Impostos'
-      end
-      item
-        FormName = 'frmCadProduto_Imp'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Produtos Impostos'
-      end
-      item
-        FormName = 'frmCadMovProdST'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Movimento Produto ST'
-      end
-      item
-        FormName = 'frmCadMovProdST'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Movimento Produto ST'
-      end
-      item
-        FormName = 'frmCadMovProdST'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Movimento Produto ST'
+        FormName = 'frmCadProduto'
+        CompName = 'btnRecalcular_Mat'
+        Caption = 'Recalcular'
+        GroupName = 'Produtos'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

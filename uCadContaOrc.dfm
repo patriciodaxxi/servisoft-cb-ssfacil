@@ -24,7 +24,7 @@ object frmCadContaOrc: TfrmCadContaOrc
     Top = 0
     Width = 841
     Height = 551
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadContaOrc: TfrmCadContaOrc
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1356,10 +1356,10 @@ object frmCadContaOrc: TfrmCadContaOrc
         Top = 267
         Width = 837
         Height = 261
-        ActivePage = ts_CentroCusto
+        ActivePage = ts_Orc_ValoresAnuais
         ActivePageDefault = ts_CentroCusto
         Align = alBottom
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 2
         FixedDimension = 19
         object ts_CentroCusto: TRzTabSheet

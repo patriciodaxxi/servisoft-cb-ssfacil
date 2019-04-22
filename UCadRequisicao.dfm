@@ -16,7 +16,6 @@ object frmCadRequisicao: TfrmCadRequisicao
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
-  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -792,7 +791,7 @@ object frmCadRequisicao: TfrmCadRequisicao
         Left = 0
         Top = 34
         Width = 933
-        Height = 196
+        Height = 197
         Align = alTop
         Enabled = False
         TabOrder = 0
@@ -852,7 +851,7 @@ object frmCadRequisicao: TfrmCadRequisicao
           Left = 1
           Top = 32
           Width = 931
-          Height = 163
+          Height = 164
           Align = alClient
           TabOrder = 1
           object Label18: TLabel
@@ -873,7 +872,7 @@ object frmCadRequisicao: TfrmCadRequisicao
           end
           object Label2: TLabel
             Left = 82
-            Top = 96
+            Top = 97
             Width = 22
             Height = 13
             Alignment = taRightJustify
@@ -889,7 +888,7 @@ object frmCadRequisicao: TfrmCadRequisicao
           end
           object SpeedButton2: TSpeedButton
             Left = 425
-            Top = 45
+            Top = 48
             Width = 23
             Height = 22
             Hint = 'Atualiza tabela de Funcion'#225'rios'
@@ -947,32 +946,40 @@ object frmCadRequisicao: TfrmCadRequisicao
           end
           object Label4: TLabel
             Left = 39
-            Top = 76
+            Top = 77
             Width = 65
             Height = 13
             Alignment = taRightJustify
             Caption = 'Entregue Por:'
           end
           object Label7: TLabel
-            Left = 312
-            Top = 34
+            Left = 263
+            Top = 35
             Width = 39
             Height = 13
             Alignment = taRightJustify
             Caption = 'N'#186' Lote:'
           end
           object Label8: TLabel
-            Left = 426
-            Top = 29
-            Width = 200
+            Left = 303
+            Top = 12
+            Width = 251
             Height = 13
-            Caption = 'F5 para consultar Materiais do Lote'
+            Caption = 'F5 para consultar Materiais do Lote / Pedido'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clMaroon
             Font.Height = -11
             Font.Name = 'Verdana'
             Font.Style = []
             ParentFont = False
+          end
+          object Label9: TLabel
+            Left = 415
+            Top = 34
+            Width = 51
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'N'#186' Pedido:'
           end
           object DBDateEdit1: TDBDateEdit
             Left = 105
@@ -996,21 +1003,21 @@ object frmCadRequisicao: TfrmCadRequisicao
             DataSource = DMCadDocEstoque.dsDocEstoque
             MaxLength = 18
             ReadOnly = True
-            TabOrder = 5
+            TabOrder = 6
           end
           object DBMemo1: TDBMemo
             Left = 105
-            Top = 90
+            Top = 91
             Width = 513
             Height = 69
             DataField = 'OBS'
             DataSource = DMCadDocEstoque.dsDocEstoque
             ScrollBars = ssVertical
-            TabOrder = 4
+            TabOrder = 5
           end
           object RxDBLookupCombo3: TRxDBLookupCombo
             Left = 105
-            Top = 48
+            Top = 49
             Width = 320
             Height = 21
             DropDownCount = 8
@@ -1019,7 +1026,7 @@ object frmCadRequisicao: TfrmCadRequisicao
             LookupField = 'CODIGO'
             LookupDisplay = 'NOME'
             LookupSource = DMCadDocEstoque.dsFuncionario
-            TabOrder = 2
+            TabOrder = 3
           end
           object DBEdit1: TDBEdit
             Left = 105
@@ -1032,11 +1039,11 @@ object frmCadRequisicao: TfrmCadRequisicao
             DataField = 'NUM_REQUISICAO'
             DataSource = DMCadDocEstoque.dsDocEstoque
             MaxLength = 18
-            TabOrder = 6
+            TabOrder = 7
           end
           object RxDBLookupCombo2: TRxDBLookupCombo
             Left = 105
-            Top = 69
+            Top = 70
             Width = 320
             Height = 21
             DropDownCount = 8
@@ -1045,11 +1052,11 @@ object frmCadRequisicao: TfrmCadRequisicao
             LookupField = 'CODIGO'
             LookupDisplay = 'NOME'
             LookupSource = DMCadDocEstoque.dsFuncionario
-            TabOrder = 3
+            TabOrder = 4
           end
           object DBEdit2: TDBEdit
-            Left = 353
-            Top = 26
+            Left = 304
+            Top = 27
             Width = 72
             Height = 21
             CharCase = ecUpperCase
@@ -1057,14 +1064,28 @@ object frmCadRequisicao: TfrmCadRequisicao
             DataSource = DMCadDocEstoque.dsDocEstoque
             MaxLength = 18
             TabOrder = 1
+            OnKeyDown = DBEdit2KeyDown
+          end
+          object DBEdit3: TDBEdit
+            Left = 469
+            Top = 26
+            Width = 72
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'NUM_PEDIDO'
+            DataSource = DMCadDocEstoque.dsDocEstoque
+            MaxLength = 18
+            TabOrder = 2
+            OnExit = DBEdit3Exit
+            OnKeyDown = DBEdit3KeyDown
           end
         end
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 230
+        Top = 231
         Width = 933
-        Height = 319
+        Height = 318
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -1082,7 +1103,7 @@ object frmCadRequisicao: TfrmCadRequisicao
             Left = 0
             Top = 59
             Width = 929
-            Height = 237
+            Height = 236
             Align = alClient
             DataSource = DMCadDocEstoque.dsDocEstoque_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]

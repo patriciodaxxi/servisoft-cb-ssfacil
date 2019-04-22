@@ -21,8 +21,8 @@ object frmCadUF: TfrmCadUF
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 707
-    Height = 506
+    Width = 715
+    Height = 514
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -39,8 +39,8 @@ object frmCadUF: TfrmCadUF
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 66
-        Width = 703
-        Height = 400
+        Width = 711
+        Height = 408
         Align = alClient
         DataSource = DMCadUF.dsUF
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -142,7 +142,7 @@ object frmCadUF: TfrmCadUF
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 703
+        Width = 711
         Height = 34
         Align = alTop
         TabOrder = 1
@@ -238,8 +238,8 @@ object frmCadUF: TfrmCadUF
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 466
-        Width = 703
+        Top = 474
+        Width = 711
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -255,7 +255,7 @@ object frmCadUF: TfrmCadUF
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 703
+        Width = 711
         Height = 32
         Align = alTop
         Color = clSilver
@@ -487,8 +487,8 @@ object frmCadUF: TfrmCadUF
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 703
-        Height = 448
+        Width = 711
+        Height = 456
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -670,7 +670,7 @@ object frmCadUF: TfrmCadUF
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 703
+        Width = 711
         Height = 35
         Align = alTop
         Color = 8404992

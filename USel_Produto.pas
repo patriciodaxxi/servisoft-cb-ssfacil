@@ -25,8 +25,6 @@ type
     cdsProdutoREFERENCIA: TStringField;
     cdsProdutoPRECO_VENDA: TFloatField;
     cdsProdutoPRECO_CUSTO: TFloatField;
-    cdsProdutoQTD: TFMTBCDField;
-    cdsProdutoQTDGERAL: TFMTBCDField;
     ComboBox1: TComboBox;
     Label2: TLabel;
     qParametros: TSQLQuery;
@@ -79,8 +77,6 @@ type
     StringField2: TStringField;
     FloatField1: TFloatField;
     FloatField2: TFloatField;
-    FMTBCDField1: TFMTBCDField;
-    FMTBCDField2: TFMTBCDField;
     StringField3: TStringField;
     StringField4: TStringField;
     StringField5: TStringField;
@@ -115,11 +111,15 @@ type
     sdsProdutoUSA_COR: TStringField;
     sdsProdutoOBS: TMemoField;
     sdsProdutoUSA_PRECO_COR: TStringField;
-    sdsProdutoQTD: TFMTBCDField;
-    sdsProdutoQTDGERAL: TFMTBCDField;
     sdsProdutoPRECO_PROMOCAO: TFloatField;
     sdsProdAuxOBS: TMemoField;
     DBMemo1: TDBMemo;
+    sdsProdutoQTD: TFloatField;
+    sdsProdutoQTDGERAL: TFloatField;
+    cdsProdutoQTD: TFloatField;
+    cdsProdutoQTDGERAL: TFloatField;
+    sdsProdAuxQTD: TFloatField;
+    sdsProdAuxQTDGERAL: TFloatField;
     procedure BitBtn1Click(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);

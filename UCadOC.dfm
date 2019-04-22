@@ -253,6 +253,14 @@ object frmCadOC: TfrmCadOC
           Alignment = taRightJustify
           Caption = 'Op'#231#227'o:'
         end
+        object Label40: TLabel
+          Left = 487
+          Top = 56
+          Width = 38
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'N'#186' Doc:'
+        end
         object edtCliente: TEdit
           Left = 102
           Top = 88
@@ -444,6 +452,19 @@ object frmCadOC: TfrmCadOC
             'Pendente'
             'Entregues'
             'Ambos')
+        end
+        object CurrencyEdit1: TCurrencyEdit
+          Left = 527
+          Top = 48
+          Width = 100
+          Height = 21
+          AutoSize = False
+          Ctl3D = False
+          DecimalPlaces = 0
+          DisplayFormat = '0'
+          ParentCtl3D = False
+          TabOrder = 11
+          OnKeyDown = cePedInternoKeyDown
         end
       end
       object StaticText1: TStaticText
@@ -1484,6 +1505,14 @@ object frmCadOC: TfrmCadOC
             Alignment = taRightJustify
             Caption = 'N'#186' Ord. Produ'#231#227'o:'
           end
+          object Label37: TLabel
+            Left = 520
+            Top = 74
+            Width = 38
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'N'#186' Doc:'
+          end
           object RxDBLookupCombo2: TRxDBLookupCombo
             Left = 79
             Top = 45
@@ -1509,7 +1538,7 @@ object frmCadOC: TfrmCadOC
             DataField = 'NUM_PEDIDO'
             DataSource = DMCadPedido.dsPedido
             ReadOnly = True
-            TabOrder = 4
+            TabOrder = 8
           end
           object Panel3: TPanel
             Left = 0
@@ -1743,6 +1772,15 @@ object frmCadOC: TfrmCadOC
             DataSource = DMCadPedido.dsPedido
             TabOrder = 6
             OnEnter = DBEdit8Enter
+          end
+          object DBEdit11: TDBEdit
+            Left = 561
+            Top = 66
+            Width = 139
+            Height = 21
+            DataField = 'NUM_DOC'
+            DataSource = DMCadPedido.dsPedido
+            TabOrder = 4
           end
         end
         object pnlNota: TPanel
@@ -2017,7 +2055,7 @@ object frmCadOC: TfrmCadOC
             object btnInserir_Itens: TNxButton
               Left = 4
               Top = 3
-              Width = 152
+              Width = 149
               Height = 30
               Caption = 'Inserir Produto'
               Enabled = False
@@ -3189,8 +3227,8 @@ object frmCadOC: TfrmCadOC
     GroupName = 'OC Fornecedor'
     UserControl = fMenu.UserControl1
     NotAllowed = naDisabled
-    Left = 714
-    Top = 102
+    Left = 690
+    Top = 86
   end
   object PopupMenu1: TPopupMenu
     Left = 609
@@ -3202,6 +3240,20 @@ object frmCadOC: TfrmCadOC
     object OCSaldo1: TMenuItem
       Caption = 'OC Saldo'
       OnClick = OCSaldo1Click
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Personalizados1: TMenuItem
+      Caption = 'Personalizados'
+      object OrdemdeCompra11: TMenuItem
+        Caption = 'OC 1 '
+        OnClick = OrdemdeCompra11Click
+      end
+      object OC21: TMenuItem
+        Caption = 'OC 2'
+        OnClick = OC21Click
+      end
     end
   end
 end

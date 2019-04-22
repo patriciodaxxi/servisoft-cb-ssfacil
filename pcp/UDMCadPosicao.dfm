@@ -78,7 +78,7 @@ object DMCadPosicao: TDMCadPosicao
     Params = <>
     ProviderName = 'dspPosicao'
     OnNewRecord = cdsPosicaoNewRecord
-    Left = 216
+    Left = 218
     Top = 32
     object cdsPosicaoID: TIntegerField
       FieldName = 'ID'

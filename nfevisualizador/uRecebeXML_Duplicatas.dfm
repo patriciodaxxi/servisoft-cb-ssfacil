@@ -2,7 +2,7 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
   Left = 387
   Top = 215
   Width = 589
-  Height = 225
+  Height = 251
   Caption = 'Duplicatas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +17,7 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
     Left = 0
     Top = 0
     Width = 581
-    Height = 147
+    Height = 173
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 0
@@ -31,7 +31,7 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
     end
     object Label5: TLabel
       Left = 72
-      Top = 55
+      Top = 79
       Width = 27
       Height = 13
       Alignment = taRightJustify
@@ -39,7 +39,7 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
     end
     object Label6: TLabel
       Left = 14
-      Top = 73
+      Top = 97
       Width = 85
       Height = 13
       Alignment = taRightJustify
@@ -47,7 +47,7 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
     end
     object Label7: TLabel
       Left = 68
-      Top = 94
+      Top = 118
       Width = 31
       Height = 13
       Alignment = taRightJustify
@@ -55,11 +55,19 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
     end
     object Label8: TLabel
       Left = 26
-      Top = 114
+      Top = 138
       Width = 73
       Height = 13
       Alignment = taRightJustify
       Caption = 'Tipo Cobran'#231'a:'
+    end
+    object Label1: TLabel
+      Left = 60
+      Top = 50
+      Width = 39
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Parcela:'
     end
     object DBEdit2: TDBEdit
       Left = 104
@@ -77,18 +85,18 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
     end
     object DBEdit3: TDBEdit
       Left = 104
-      Top = 47
+      Top = 71
       Width = 120
       Height = 19
       Ctl3D = False
-      DataField = 'Parcela'
+      DataField = 'VlrVencimento'
       DataSource = DMRecebeXML.dsmParc
       ParentCtl3D = False
-      TabOrder = 1
+      TabOrder = 2
     end
     object DBDateEdit2: TDBDateEdit
       Left = 104
-      Top = 65
+      Top = 89
       Width = 120
       Height = 21
       DataField = 'DtVencimento'
@@ -96,11 +104,11 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
       Ctl3D = False
       NumGlyphs = 2
       ParentCtl3D = False
-      TabOrder = 2
+      TabOrder = 3
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 104
-      Top = 85
+      Top = 109
       Width = 276
       Height = 21
       DropDownCount = 8
@@ -111,11 +119,11 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
       LookupDisplay = 'NOME'
       LookupSource = DMRecebeXML.dsContas
       ParentCtl3D = False
-      TabOrder = 3
+      TabOrder = 4
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
       Left = 104
-      Top = 105
+      Top = 129
       Width = 276
       Height = 21
       DropDownCount = 8
@@ -126,12 +134,26 @@ object frmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas
       LookupDisplay = 'NOME'
       LookupSource = DMRecebeXML.dsTipoCobranca
       ParentCtl3D = False
-      TabOrder = 4
+      TabOrder = 5
+    end
+    object DBEdit1: TDBEdit
+      Left = 104
+      Top = 42
+      Width = 120
+      Height = 19
+      TabStop = False
+      Color = clSilver
+      Ctl3D = False
+      DataField = 'Parcela'
+      DataSource = DMRecebeXML.dsmParc
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 1
     end
   end
   object pnlRodape: TPanel
     Left = 0
-    Top = 147
+    Top = 173
     Width = 581
     Height = 47
     Align = alBottom

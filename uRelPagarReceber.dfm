@@ -422,7 +422,7 @@ object fRelPagarReceber: TfRelPagarReceber
       end
       object RLBand3: TRLBand
         Left = 0
-        Top = 20
+        Top = 36
         Width = 748
         Height = 165
         BandType = btSummary
@@ -432,11 +432,44 @@ object fRelPagarReceber: TfRelPagarReceber
         Borders.DrawRight = False
         Borders.DrawBottom = False
       end
+      object RLBand10: TRLBand
+        Left = 0
+        Top = 20
+        Width = 748
+        Height = 16
+        BeforePrint = RLBand10BeforePrint
+        object RLLabel28: TRLLabel
+          Left = 57
+          Top = 1
+          Width = 26
+          Height = 14
+          Caption = 'Obs:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+        object rlMemoObs2: TRLMemo
+          Left = 86
+          Top = 2
+          Width = 633
+          Height = 12
+          Behavior = [beSiteExpander]
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
+      end
     end
   end
   object RLReport2: TRLReport
-    Left = 808
-    Top = 8
+    Left = 759
+    Top = -24
     Width = 794
     Height = 1123
     DataSource = DMCadDuplicata.dsDuplicata_Consulta
@@ -617,7 +650,7 @@ object fRelPagarReceber: TfRelPagarReceber
         end
         object RLBand5: TRLBand
           Left = 0
-          Top = 32
+          Top = 48
           Width = 748
           Height = 20
           BandType = btColumnFooter
@@ -786,6 +819,39 @@ object fRelPagarReceber: TfRelPagarReceber
             Font.Height = -11
             Font.Name = 'Arial'
             Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object RLBand9: TRLBand
+          Left = 0
+          Top = 32
+          Width = 748
+          Height = 16
+          BeforePrint = RLBand9BeforePrint
+          object RLLabel27: TRLLabel
+            Left = 57
+            Top = 1
+            Width = 26
+            Height = 14
+            Caption = 'Obs:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object rlMemoObs: TRLMemo
+            Left = 86
+            Top = 2
+            Width = 659
+            Height = 12
+            Behavior = [beSiteExpander]
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
             ParentFont = False
           end
         end

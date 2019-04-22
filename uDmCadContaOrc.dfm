@@ -1,8 +1,8 @@
 object dmCadContaOrc: TdmCadContaOrc
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 242
-  Top = 109
+  Left = 216
+  Top = 86
   Height = 480
   Width = 906
   object sdsContaOrc: TSQLDataSet
@@ -110,7 +110,7 @@ object dmCadContaOrc: TdmCadContaOrc
     Options = [poCascadeUpdates]
     UpdateMode = upWhereChanged
     OnUpdateError = dspContaOrcUpdateError
-    Left = 96
+    Left = 64
     Top = 16
   end
   object cdsContaOrc: TClientDataSet
@@ -119,7 +119,7 @@ object dmCadContaOrc: TdmCadContaOrc
     Params = <>
     ProviderName = 'dspContaOrc'
     OnNewRecord = cdsContaOrcNewRecord
-    Left = 152
+    Left = 96
     Top = 16
     object cdsContaOrcID: TIntegerField
       FieldName = 'ID'
@@ -216,7 +216,7 @@ object dmCadContaOrc: TdmCadContaOrc
   end
   object dsContaOrc: TDataSource
     DataSet = cdsContaOrc
-    Left = 216
+    Left = 128
     Top = 16
   end
   object sdsSuperior: TSQLDataSet
@@ -228,8 +228,8 @@ object dmCadContaOrc: TdmCadContaOrc
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 544
-    Top = 96
+    Left = 392
+    Top = 56
     object sdsSuperiorID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -248,15 +248,15 @@ object dmCadContaOrc: TdmCadContaOrc
   object dspSuperior: TDataSetProvider
     DataSet = sdsSuperior
     OnUpdateError = dspContaOrcUpdateError
-    Left = 616
-    Top = 96
+    Left = 424
+    Top = 56
   end
   object cdsSuperior: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspSuperior'
-    Left = 680
-    Top = 96
+    Left = 456
+    Top = 56
     object cdsSuperiorID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -274,8 +274,8 @@ object dmCadContaOrc: TdmCadContaOrc
   end
   object dsSuperior: TDataSource
     DataSet = cdsSuperior
-    Left = 752
-    Top = 96
+    Left = 488
+    Top = 56
   end
   object sqProximo: TSQLQuery
     MaxBlobSize = -1
@@ -285,16 +285,16 @@ object dmCadContaOrc: TdmCadContaOrc
       'FROM CONTA_ORCAMENTO'
       'WHERE CODIGO LIKE '#39':C%'#39)
     SQLConnection = dmDatabase.scoDados
-    Left = 544
-    Top = 160
+    Left = 680
+    Top = 104
     object sqProximoMAX: TStringField
       FieldName = 'MAX'
     end
   end
   object dsContaOrc_Mestre: TDataSource
     DataSet = sdsContaOrc
-    Left = 40
-    Top = 80
+    Left = 32
+    Top = 64
   end
   object sdsContaOrc_Itens: TSQLDataSet
     NoMetadata = True
@@ -310,8 +310,8 @@ object dmCadContaOrc: TdmCadContaOrc
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 40
-    Top = 136
+    Left = 32
+    Top = 112
     object sdsContaOrc_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -339,8 +339,8 @@ object dmCadContaOrc: TdmCadContaOrc
     DataSetField = cdsContaOrcsdsContaOrc_Itens
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 128
-    Top = 136
+    Left = 96
+    Top = 112
     object cdsContaOrc_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -366,8 +366,8 @@ object dmCadContaOrc: TdmCadContaOrc
   end
   object dsContaOrc_Itens: TDataSource
     DataSet = cdsContaOrc_Itens
-    Left = 224
-    Top = 136
+    Left = 128
+    Top = 112
   end
   object sdsPessoa: TSQLDataSet
     NoMetadata = True
@@ -378,8 +378,8 @@ object dmCadContaOrc: TdmCadContaOrc
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 544
-    Top = 208
+    Left = 392
+    Top = 112
     object sdsPessoaCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -413,16 +413,16 @@ object dmCadContaOrc: TdmCadContaOrc
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
-    Left = 576
-    Top = 208
+    Left = 424
+    Top = 112
   end
   object cdsPessoa: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspPessoa'
-    Left = 616
-    Top = 208
+    Left = 456
+    Top = 112
     object cdsPessoaCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -457,8 +457,8 @@ object dmCadContaOrc: TdmCadContaOrc
   end
   object dsPessoa: TDataSource
     DataSet = cdsPessoa
-    Left = 656
-    Top = 208
+    Left = 488
+    Top = 112
   end
   object qCalculo: TSQLQuery
     MaxBlobSize = -1
@@ -469,8 +469,8 @@ object dmCadContaOrc: TdmCadContaOrc
       'WHERE CTA.inativo = '#39'N'#39
       '  AND CTA.tipo_despesa = '#39'F'#39)
     SQLConnection = dmDatabase.scoDados
-    Left = 544
-    Top = 328
+    Left = 712
+    Top = 56
     object qCalculoVALOR: TFloatField
       FieldName = 'VALOR'
     end
@@ -482,8 +482,8 @@ object dmCadContaOrc: TdmCadContaOrc
       'SELECT *'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 368
-    Top = 232
+    Left = 744
+    Top = 8
     object qParametrosUSA_PREVISAO: TStringField
       FieldName = 'USA_PREVISAO'
       FixedChar = True
@@ -497,8 +497,8 @@ object dmCadContaOrc: TdmCadContaOrc
       'SELECT *'
       'FROM PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 368
-    Top = 288
+    Left = 713
+    Top = 8
     object qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField
       FieldName = 'MOSTRAR_COD_CONTABIL'
       FixedChar = True
@@ -521,8 +521,8 @@ object dmCadContaOrc: TdmCadContaOrc
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 48
-    Top = 200
+    Left = 32
+    Top = 160
     object sdsContaOrc_CCustoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -551,8 +551,8 @@ object dmCadContaOrc: TdmCadContaOrc
     DataSetField = cdsContaOrcsdsContaOrc_CCusto
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 128
-    Top = 200
+    Left = 96
+    Top = 160
     object cdsContaOrc_CCustoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -580,8 +580,8 @@ object dmCadContaOrc: TdmCadContaOrc
   end
   object dsContaOrc_CCusto: TDataSource
     DataSet = cdsContaOrc_CCusto
-    Left = 224
-    Top = 200
+    Left = 128
+    Top = 160
   end
   object qCentroCusto: TSQLQuery
     MaxBlobSize = -1
@@ -595,8 +595,8 @@ object dmCadContaOrc: TdmCadContaOrc
       'SELECT * FROM CENTROCUSTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 160
-    Top = 272
+    Left = 648
+    Top = 8
     object qCentroCustoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -625,8 +625,8 @@ object dmCadContaOrc: TdmCadContaOrc
       'from PLANO_CONTABIL A'
       'where A.ID = :ID   ')
     SQLConnection = dmDatabase.scoDados
-    Left = 248
-    Top = 272
+    Left = 680
+    Top = 8
     object qPlanoContabilID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -643,8 +643,8 @@ object dmCadContaOrc: TdmCadContaOrc
       'SELECT *'
       'FROM PARAMETROS_CTA_ORC')
     SQLConnection = dmDatabase.scoDados
-    Left = 376
-    Top = 160
+    Left = 648
+    Top = 56
     object qParametros_Cta_OrcUSA_VALOR_ORC: TStringField
       FieldName = 'USA_VALOR_ORC'
       FixedChar = True
@@ -663,21 +663,21 @@ object dmCadContaOrc: TdmCadContaOrc
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 576
-    Top = 280
+    Left = 392
+    Top = 160
   end
   object dspTipo_Conta_Orc: TDataSetProvider
     DataSet = sdsTipo_Conta_Orc
-    Left = 608
-    Top = 280
+    Left = 424
+    Top = 160
   end
   object cdsTipo_Conta_Orc: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspTipo_Conta_Orc'
-    Left = 648
-    Top = 280
+    Left = 456
+    Top = 160
     object cdsTipo_Conta_OrcID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -689,8 +689,8 @@ object dmCadContaOrc: TdmCadContaOrc
   end
   object dsTipo_Conta_Orc: TDataSource
     DataSet = cdsTipo_Conta_Orc
-    Left = 688
-    Top = 280
+    Left = 488
+    Top = 160
   end
   object sdsConsulta: TSQLDataSet
     NoMetadata = True
@@ -711,7 +711,7 @@ object dmCadContaOrc: TdmCadContaOrc
     Options = [poCascadeUpdates]
     UpdateMode = upWhereChanged
     OnUpdateError = dspContaOrcUpdateError
-    Left = 456
+    Left = 424
     Top = 8
   end
   object cdsConsulta: TClientDataSet
@@ -719,7 +719,7 @@ object dmCadContaOrc: TdmCadContaOrc
     Params = <>
     ProviderName = 'dspConsulta'
     OnCalcFields = cdsConsultaCalcFields
-    Left = 512
+    Left = 456
     Top = 8
     object cdsConsultaID: TIntegerField
       FieldName = 'ID'
@@ -800,7 +800,7 @@ object dmCadContaOrc: TdmCadContaOrc
   end
   object dsConsulta: TDataSource
     DataSet = cdsConsulta
-    Left = 576
+    Left = 488
     Top = 8
   end
   object qTotalFixa: TSQLQuery
@@ -814,8 +814,8 @@ object dmCadContaOrc: TdmCadContaOrc
       '  AND C.vlr_orc IS NOT NULL'
       '  AND C.tipo = '#39'A'#39)
     SQLConnection = dmDatabase.scoDados
-    Left = 640
-    Top = 368
+    Left = 744
+    Top = 56
     object qTotalFixaVLR_ORC: TFloatField
       FieldName = 'VLR_ORC'
       DisplayFormat = '0.00'
@@ -832,8 +832,8 @@ object dmCadContaOrc: TdmCadContaOrc
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 433
-    Top = 368
+    Left = 425
+    Top = 216
   end
   object sdsANT: TSQLDataSet
     NoMetadata = True
@@ -849,8 +849,8 @@ object dmCadContaOrc: TdmCadContaOrc
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 408
-    Top = 56
+    Left = 392
+    Top = 216
   end
   object qTotalPares: TSQLQuery
     MaxBlobSize = -1
@@ -865,12 +865,27 @@ object dmCadContaOrc: TdmCadContaOrc
       'FROM projecao_semana p'
       'WHERE P.ANO = :ANO')
     SQLConnection = dmDatabase.scoDados
-    Left = 728
-    Top = 360
+    Left = 648
+    Top = 104
     object qTotalParesPREVISAO: TFMTBCDField
       FieldName = 'PREVISAO'
       Precision = 15
       Size = 0
+    end
+  end
+  object qParametros_Fin: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT INF_ZERO_PERC_CC'
+      'FROM PARAMETROS_FIN')
+    SQLConnection = dmDatabase.scoDados
+    Left = 680
+    Top = 56
+    object qParametros_FinINF_ZERO_PERC_CC: TStringField
+      FieldName = 'INF_ZERO_PERC_CC'
+      FixedChar = True
+      Size = 1
     end
   end
 end

@@ -25,7 +25,6 @@ type
     Label3: TLabel;
     Label1: TLabel;
     Label5: TLabel;
-    Label6: TLabel;
     Shape1: TShape;
     Label13: TLabel;
     Shape2: TShape;
@@ -34,8 +33,8 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     RxDBLookupCombo3: TRxDBLookupCombo;
     RxDBLookupCombo1: TRxDBLookupCombo;
-    ComboBox2: TComboBox;
     btnConsultar: TNxButton;
+    NxButton1: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -48,6 +47,7 @@ type
     procedure RxDBLookupCombo2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure prc_Consultar_NotaEntrada;
+    procedure NxButton1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -86,6 +86,7 @@ begin
   fDMConsNotaBeneficiamento.cdsFilial.First;
   if (fDMConsNotaBeneficiamento.cdsFilial.RecordCount < 2) and (fDMConsNotaBeneficiamento.cdsFilialID.AsInteger > 0) then
     RxDBLookupCombo3.KeyValue := fDMConsNotaBeneficiamento.cdsFilialID.AsInteger;
+  ckEstoque.Visible := (Trim(fMenu.vTipo_ConsNotaBeneficiamento) <> 'C');
 end;
 
 procedure TfrmBaixaNFDevolvida.SMDBGrid1TitleClick(Column: TColumn);
@@ -153,8 +154,9 @@ begin
 
   vContadorAux := 0;
 
-//  fDMConsNotaBeneficiamento.fDMEstoque := fDMEstoque;
+  fDMConsNotaBeneficiamento.fDMEstoque := fDMEstoque;
 //  fDMConsNotaBeneficiamento.mPedidoAux.EmptyDataSet;
+  SMDBGrid1.DisableScroll;
   fDMConsNotaBeneficiamento.cdsNotaPendente.First;
   while not fDMConsNotaBeneficiamento.cdsNotaPendente.Eof do
   begin
@@ -162,7 +164,7 @@ begin
     begin
       vContadorAux := vContadorAux + 1;
       //aqui 24/01/2014
-      fDMConsNotaBeneficiamento.prc_Gravar_Baixa('P',vEstoque,'P',DateEdit5.Date);
+      fDMConsNotaBeneficiamento.prc_Gravar_Baixa('P',vEstoque,'P',fMenu.vTipo_ConsNotaBeneficiamento, DateEdit5.Date,);
 //      if vTipo_Baixa_Ped <> 'PRO' then
 //      begin
 //        if not(fDMBaixaPedido.mPedidoAux.FindKey([fDMBaixaPedido.cdsPedido_PendID.AsInteger])) then
@@ -176,6 +178,7 @@ begin
     end;
     fDMConsNotaBeneficiamento.cdsNotaPendente.Next;
   end;
+  SMDBGrid1.EnableScroll;
 
   //Atualiza Status do pedido somente quando for faturado ou quando for dado a baixa da ordem de compra do fornecedor
 {  if vTipo_Baixa_Ped <> 'PRO' then
@@ -241,11 +244,50 @@ begin
 end;
 
 procedure TfrmBaixaNFDevolvida.prc_Consultar_NotaEntrada;
+var
+  vPosse : String;
+  vBenef_Posse : String;
+  vComando : String;
 begin
+  if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
+  begin
+    vPosse := ' o2.estoque_EM_terceiro = ' + QuotedStr('S');
+    vBenef_Posse := ' AND CFOP.BENEFICIAMENTO_POSSE = '  + QuotedStr('E');
+  end
+  else
+  begin
+    vPosse := ' o2.estoque_DE_terceiro = ' + QuotedStr('S');
+    vBenef_Posse := ' AND CFOP.BENEFICIAMENTO_POSSE = '  + QuotedStr('T');
+  end;
+
   fDMConsNotaBeneficiamento.cdsNotaPendente.Close;
+  vComando := fDMConsNotaBeneficiamento.ctNotaPendente;
+  if fMenu.vTipo_ConsNotaBeneficiamento = 'C' then
+    vComando := vComando + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTS')
+  else
+    vComando := vComando + ' WHERE NF.TIPO_REG = ' + QuotedStr('NTE');
+  case ComboBox1.ItemIndex of
+    0: vComando := vComando + ' AND ((CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + vBenef_Posse + ') OR (' + vPosse + '))';
+    1: vComando := vComando + ' AND (CFOP.BENEFICIAMENTO = ' + QuotedStr('S') + vBenef_Posse + ')';
+    2: vComando := vComando + ' AND ' + vPosse;
+  end;
+  if RxDBLookupCombo3.Text <> '' then
+    vComando := vComando + ' AND NF.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
+  if RxDBLookupCombo2.Text <> '' then
+    vComando := vComando + ' AND ((NF.ID_CLIENTE = ' + IntToStr(RxDBLookupCombo2.KeyValue) + ')' + '  OR (NF.ID_CLIENTETRIANG = ' + IntToStr(RxDBLookupCombo2.KeyValue) + '))';
+  if RxDBLookupCombo1.Text <> '' then
+    vComando := vComando + ' AND NI.ID_PRODUTO = ' + IntToStr(RxDBLookupCombo1.KeyValue);
+  vComando := vComando + ' AND NI.QTDRESTANTE > 0 ';
+  vComando := vComando + ' AND PRO.INATIVO = ' + QuotedStr('N');
+  fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := vComando;
+  fDMConsNotaBeneficiamento.cdsNotaPendente.Open;
+
+  {fDMConsNotaBeneficiamento.cdsNotaPendente.Close;
   fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.ctNotaPendente;
   if ComboBox1.ItemIndex = 0 then
     fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText + ' AND CFOP.BENEFICIAMENTO = ' + QuotedStr('S');
+
+
   if RxDBLookupCombo3.Text <> '' then
     fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText
                                                + ' AND NF.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
@@ -260,7 +302,22 @@ begin
     0 : fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText + ' AND NI.QTDRESTANTE > 0 ';
     1 : fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText := fDMConsNotaBeneficiamento.sdsNotaPendente.CommandText + ' AND NI.QTDRESTANTE <= 0 ';
   end;
-  fDMConsNotaBeneficiamento.cdsNotaPendente.Open;
+  fDMConsNotaBeneficiamento.cdsNotaPendente.Open;}
+end;
+
+procedure TfrmBaixaNFDevolvida.NxButton1Click(Sender: TObject);
+begin
+  SMDBGrid1.DisableScroll;
+  fDMConsNotaBeneficiamento.cdsNotaPendente.First;
+  while not fDMConsNotaBeneficiamento.cdsNotaPendente.eof do
+  begin
+    SMDBGrid1.SelectedRows.CurrentRowSelected := True;
+    fDMConsNotaBeneficiamento.cdsNotaPendente.Edit;
+    fDMConsNotaBeneficiamento.cdsNotaPendenteQTD_ADEVOLVER.AsFloat := fDMConsNotaBeneficiamento.cdsNotaPendenteQTDRESTANTE.AsFloat;
+    fDMConsNotaBeneficiamento.cdsNotaPendente.Post;
+    fDMConsNotaBeneficiamento.cdsNotaPendente.Next;
+  end;
+  SMDBGrid1.EnableScroll;
 end;
 
 end.

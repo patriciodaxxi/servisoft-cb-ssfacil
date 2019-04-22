@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids,
-  DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr;
+  DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr, RxLookup,
+  NxCollection;
 
 type
   TfrmSel_CentroCusto = class(TForm)
@@ -29,6 +30,20 @@ type
     cdsCentroCustoCODIGO: TStringField;
     cdsCentroCustoNOME_AUX: TStringField;
     cdsCentroCustoDESCRICAO: TStringField;
+    Panel2: TPanel;
+    Label52: TLabel;
+    RxDBLookupCombo9: TRxDBLookupCombo;
+    sdsContaOrcamento: TSQLDataSet;
+    dspContaOrcamento: TDataSetProvider;
+    cdsContaOrcamento: TClientDataSet;
+    cdsContaOrcamentoID: TIntegerField;
+    cdsContaOrcamentoTIPO: TStringField;
+    cdsContaOrcamentoCODIGO: TStringField;
+    cdsContaOrcamentoDESCRICAO: TStringField;
+    cdsContaOrcamentoNOME_AUX: TStringField;
+    cdsContaOrcamentoSUPERIOR: TStringField;
+    dsContaOrcamento: TDataSource;
+    NxButton1: TNxButton;
     procedure BitBtn1Click(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -40,6 +55,7 @@ type
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
+    procedure NxButton1Click(Sender: TObject);
   private
     { Private declarations }
     ctCentroCustoLocal : String;
@@ -47,6 +63,8 @@ type
     procedure prc_Move_Dados;
   public
     { Public declarations }
+    vID_Conta_Orcamento_Loc : Integer;
+
   end;
 
 var
@@ -69,6 +87,9 @@ begin
   sdsCentroCusto.CommandText := ctCentroCustoLocal;
   //if trim(Edit1.Text) <> '' then
     //sdsCentroCusto.CommandText := sdsCentroCusto.CommandText + ' WHERE B.DESCRICAO LIKE ' + QuotedStr('%'+Edit1.Text+'%');
+  if RxDBLookupCombo9.Text <> '' then
+    sdsCentroCusto.CommandText := sdsCentroCusto.CommandText + ' INNER JOIN conta_orcamento_ccusto CO ON B.ID = CO.id_centrocusto '
+                                + ' WHERE CO.ID = ' + IntToStr(RxDBLookupCombo9.KeyValue);
   cdsCentroCusto.Open;
 
   if trim(Edit1.Text) <> '' then
@@ -151,6 +172,12 @@ end;
 procedure TfrmSel_CentroCusto.FormShow(Sender: TObject);
 begin
   ctCentroCustoLocal := sdsCentroCusto.CommandText;
+  if Panel2.Visible then
+  begin
+    cdsContaOrcamento.Open;
+    if RxDBLookupCombo9.Text <> '' then
+      prc_Consultar;
+  end;
 end;
 
 procedure TfrmSel_CentroCusto.SMDBGrid1TitleClick(Column: TColumn);
@@ -169,6 +196,27 @@ end;
 procedure TfrmSel_CentroCusto.prc_Move_Dados;
 begin
   vID_Centro_Custo := cdsCentroCustoID.AsInteger;
+end;
+
+procedure TfrmSel_CentroCusto.NxButton1Click(Sender: TObject);
+var
+  vObs : String;
+begin
+  vObs := '';
+  cdsCentroCusto.First;
+  while not cdsCentroCusto.Eof do
+  begin
+    if (SMDBGrid1.SelectedRows.CurrentRowSelected) then
+    begin
+      if Trim(vObs) = '' then
+        vObs := cdsCentroCustoID.AsString
+      else
+        vObs := vObs + ';' + cdsCentroCustoID.AsString;
+    end;
+    cdsCentroCusto.Next;
+  end;
+  vSelCentroCusto := vObs;
+  Close;
 end;
 
 end.

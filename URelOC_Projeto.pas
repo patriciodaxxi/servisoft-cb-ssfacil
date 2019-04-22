@@ -59,11 +59,22 @@ type
     RLDBMemo1: TRLDBMemo;
     RLLabel6: TRLLabel;
     RLDBText2: TRLDBText;
+    RLDBText3: TRLDBText;
+    RLLabel12: TRLLabel;
+    RLLabel14: TRLLabel;
+    RLLabel18: TRLLabel;
+    RLLabel17: TRLLabel;
+    RLLabel24: TRLLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand4BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand2BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand5BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
+    vSaldo : Real;
+    vVlrContrato : Real;
   public
     { Public declarations }
     vOpcaoImp : String;
@@ -77,7 +88,7 @@ var
 
 implementation
 
-uses rsDBUtils;
+uses rsDBUtils, DB;
 
 {$R *.dfm}
 
@@ -98,12 +109,40 @@ begin
   RLLabel23.Visible   := vImp_Vlr;
   RLDBResult2.Visible := vImp_Vlr;
   RLDBResult6.Visible := vImp_Vlr;
+  RLLabel17.Visible   := vImp_Vlr;
+  RLLabel18.Visible   := vImp_Vlr;
+  RLLabel14.Visible   := vImp_Vlr;
+  RLLabel24.Visible   := vImp_Vlr;
+
+  vVlrContrato := 0;
+  vSaldo       := 0;
 end;
 
 procedure TfRelOC_Projeto.RLBand1BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 begin
   RLLabel3.Caption := vOpcaoImp;
+end;
+
+procedure TfRelOC_Projeto.RLBand4BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  vVlrContrato := StrToFloat(FormatFloat('0.00',fDMConsOC.cdsOC_ProjetoVLR_CONTRATO.AsFloat));
+  RLLabel24.Caption := FormatFloat('###,###,##0.00',fDMConsOC.cdsOC_ProjetoVLR_CONTRATO.AsFloat);
+end;
+
+procedure TfRelOC_Projeto.RLBand2BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  vSaldo := StrToFloat(FormatFloat('0.00',vSaldo + fDMConsOC.cdsOC_ProjetoVLR_PROJETO.AsFloat));
+end;
+
+procedure TfRelOC_Projeto.RLBand5BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  RLLabel18.Caption := FormatFloat('###,###,##0.00',vVlrContrato - vSaldo);
+  vSaldo            := 0;
+  vVlrContrato      := 0;
 end;
 
 end.

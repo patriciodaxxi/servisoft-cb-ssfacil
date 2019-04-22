@@ -276,6 +276,7 @@ object fRelOC_Projeto: TfRelOC_Projeto
           Width = 1063
           Height = 19
           BandType = btHeader
+          BeforePrint = RLBand4BeforePrint
           object RLLabel19: TRLLabel
             Left = 60
             Top = 4
@@ -292,12 +293,67 @@ object fRelOC_Projeto: TfRelOC_Projeto
           end
           object RLDBText12: TRLDBText
             Left = 102
-            Top = 4
-            Width = 728
+            Top = 3
+            Width = 447
             Height = 12
             AutoSize = False
             DataField = 'NOME_PROJETO'
             DataSource = DMConsOC.dsOC_Projeto
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold, fsUnderline]
+            ParentFont = False
+          end
+          object RLDBText3: TRLDBText
+            Left = 632
+            Top = 4
+            Width = 79
+            Height = 11
+            DataField = 'NUM_CONTRATO'
+            DataSource = DMConsOC.dsOC_Projeto
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold, fsUnderline]
+            ParentFont = False
+          end
+          object RLLabel12: TRLLabel
+            Left = 570
+            Top = 4
+            Width = 59
+            Height = 11
+            Alignment = taRightJustify
+            Caption = 'N'#186' Contrato:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold, fsUnderline]
+            ParentFont = False
+          end
+          object RLLabel14: TRLLabel
+            Left = 796
+            Top = 4
+            Width = 65
+            Height = 11
+            Alignment = taRightJustify
+            Caption = 'Vlr. Contrato:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold, fsUnderline]
+            ParentFont = False
+          end
+          object RLLabel24: TRLLabel
+            Left = 863
+            Top = 3
+            Width = 64
+            Height = 12
+            Caption = 'Vlr. Contrato:'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -9
@@ -311,6 +367,7 @@ object fRelOC_Projeto: TfRelOC_Projeto
           Top = 19
           Width = 1063
           Height = 15
+          BeforePrint = RLBand2BeforePrint
           object RLDBText1: TRLDBText
             Left = 1000
             Top = 2
@@ -436,6 +493,7 @@ object fRelOC_Projeto: TfRelOC_Projeto
           Width = 1063
           Height = 19
           BandType = btSummary
+          BeforePrint = RLBand5BeforePrint
           object RLDraw5: TRLDraw
             Left = 0
             Top = 0
@@ -495,6 +553,33 @@ object fRelOC_Projeto: TfRelOC_Projeto
             Height = 12
             Alignment = taRightJustify
             Caption = 'Total Por Projeto ===>'
+          end
+          object RLLabel18: TRLLabel
+            Left = 952
+            Top = 4
+            Width = 44
+            Height = 13
+            Caption = 'Vlr.Total:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object RLLabel17: TRLLabel
+            Left = 916
+            Top = 4
+            Width = 32
+            Height = 11
+            Alignment = taRightJustify
+            Caption = 'Saldo:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
           end
         end
       end

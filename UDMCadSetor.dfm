@@ -345,11 +345,6 @@ object DmCadSetor: TDmCadSetor
       FixedChar = True
       Size = 17
     end
-    object sdsProcessoCALCULA_AREA: TStringField
-      FieldName = 'CALCULA_AREA'
-      FixedChar = True
-      Size = 1
-    end
     object sdsProcessoQTD_DIAS_PRAZO: TIntegerField
       FieldName = 'QTD_DIAS_PRAZO'
     end
@@ -370,6 +365,11 @@ object DmCadSetor: TDmCadSetor
     end
     object sdsProcessoIMP_TALAO: TStringField
       FieldName = 'IMP_TALAO'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsProcessoCALCULA_AREA: TStringField
+      FieldName = 'CALCULA_AREA'
       FixedChar = True
       Size = 1
     end
@@ -402,6 +402,11 @@ object DmCadSetor: TDmCadSetor
     end
     object sdsProcessoESTOQUE_DT_ES: TStringField
       FieldName = 'ESTOQUE_DT_ES'
+      Size = 1
+    end
+    object sdsProcessoCONTROLE_MAQUINA: TStringField
+      FieldName = 'CONTROLE_MAQUINA'
+      FixedChar = True
       Size = 1
     end
   end
@@ -525,6 +530,11 @@ object DmCadSetor: TDmCadSetor
     end
     object cdsProcessoESTOQUE_DT_ES: TStringField
       FieldName = 'ESTOQUE_DT_ES'
+      Size = 1
+    end
+    object cdsProcessoCONTROLE_MAQUINA: TStringField
+      FieldName = 'CONTROLE_MAQUINA'
+      FixedChar = True
       Size = 1
     end
   end

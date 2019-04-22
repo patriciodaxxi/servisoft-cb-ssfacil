@@ -780,7 +780,13 @@ uses
   uCadMovProdST in 'uCadMovProdST.pas' {frmCadMovProdST},
   UCadProduto_ST in 'UCadProduto_ST.pas' {frmCadProduto_ST},
   UAjusteEstoqueOP_Res in 'UAjusteEstoqueOP_Res.pas' {frmAjusteEstoqueOP_Res},
-  USel_Balanco in 'USel_Balanco.pas' {frmSel_Balanco};
+  USel_Balanco in 'USel_Balanco.pas' {frmSel_Balanco},
+  URecebeXML_ConsNota in 'nfevisualizador\URecebeXML_ConsNota.pas' {frmRecebeXML_ConsNota},
+  UConsProdSTRet in 'UConsProdSTRet.pas' {frmConsProdSTRet},
+  UConsMatPed in 'UConsMatPed.pas' {frmConsMatPed},
+  UCadTipoCobranca_Itens in 'UCadTipoCobranca_Itens.pas' {frmCadTipoCobranca_Itens},
+  UCadFilial_Certificado in 'UCadFilial_Certificado.pas' {frmCadFilial_Certificado},
+  UDMCadFilial_Certificado in 'UDMCadFilial_Certificado.pas' {DMFilial_Certificado: TDataModule};
 
 {$R *.res}
 

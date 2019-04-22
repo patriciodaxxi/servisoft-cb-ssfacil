@@ -493,7 +493,7 @@ object frmGerarMovimento: TfrmGerarMovimento
     DataSetField = cdsCupomFiscalsdsCupomFiscal_Itens
     Params = <>
     Left = 640
-    Top = 128
+    Top = 127
     object cdsCupomFiscal_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]

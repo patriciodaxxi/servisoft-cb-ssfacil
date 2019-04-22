@@ -3056,6 +3056,8 @@ type
     qProdSTPERC_ST: TFloatField;
     cdsTab_NCMPERC_ICMS: TFloatField;
     qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField;
+    qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField;
+    qParametros_NFeUSA_CLIENTE_FAT_FIL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
@@ -3589,8 +3591,7 @@ begin
   if not cdsNotaFiscal_Copia.IsEmpty then
     cdsNotaFiscal_Copia.Delete;
 
-  cdsNotaFiscal_Itens.Delete;
-
+  cdsNotaFiscal_Itens.Delete;                              
 end;
 
 procedure TDMCadNotaFiscal.prc_Inserir_Itens(Montar_Imp: Boolean = True);

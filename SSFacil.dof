@@ -91,7 +91,7 @@ ImageBase=4194304
 ExeDescription=
 [Directories]
 OutputDir=C:\Delphi7\SSFacil\EXE
-UnitOutputDir=C:\Delphi7\SSFacil\DCU
+UnitOutputDir=C:\Delphi7\SSFacil\dcu
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
@@ -115,7 +115,7 @@ AutoIncBuild=0
 MajorVer=1
 MinorVer=0
 Release=1
-Build=918
+Build=952
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=
-FileVersion=1.0.1.918
+FileVersion=1.0.1.952
 InternalName=
 LegalCopyright=
 LegalTrademarks=
@@ -144,7 +144,7 @@ Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlUnitOutputDirectory]
 Count=1
-Item0=C:\Delphi7\SSFacil\DCU
+Item0=C:\Delphi7\SSFacil\dcu
 [HistoryLists\hlOutputDirectorry]
 Count=1
 Item0=C:\Delphi7\SSFacil\EXE

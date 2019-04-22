@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadNotaFiscal,
   RXDBCtrl, RzEdit, RzDBEdit, RzButton, UCadRecNF_Itens, UDMEstoque, TlHelp32, DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd,
   SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, UCBase, UEscolhe_Filial, USel_Pedido,
-  RzPanel, Menus, dbXPress, DateUtils, UDMMovimento, NxEdit, NxCollection, Variants, UDMCadNotaFiscal_MP;
+  RzPanel, Menus, dbXPress, DateUtils, UDMMovimento, NxEdit, NxCollection, Variants, UDMCadNotaFiscal_MP, frxExportPDF, frxExportMail;
 
 type
   TfrmCadRecNF = class(TForm)
@@ -226,7 +226,7 @@ implementation
 
 uses DmdDatabase, rsDBUtils, uUtilPadrao, USel_Pessoa, uCalculo_NotaFiscal, uUtilCliente, uUtilCobranca, UDMAprovacao_Ped,
   UConsPessoa_Fin, UConsPedido_Senha, UDMRecNF, USel_ContaOrc, USenha, uGrava_NotaFiscal, USel_Vale, UMenu, UCadNotaFiscal_Desconto,
-  UCadNotaFiscal_Canc, uMenu1;
+  UCadNotaFiscal_Canc, uMenu1, classe.validaemail;
 
 {$R *.dfm}
 
@@ -508,7 +508,13 @@ begin
                                                        fDMCadNotaFiscal.cdsNotaFiscalID_CONDPGTO.AsInteger,0,fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,vPercAux,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_REMET.AsFloat,
-                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_DEST.AsFloat,1,0,'N');
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_UF_DEST.AsFloat,1,0,'N',
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_FCP_ST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
         end;
         if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger <> vID_Estoque) or
            (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov) then
@@ -1799,8 +1805,11 @@ end;
 procedure TfrmCadRecNF.Recibo1Click(Sender: TObject);
 var
   fDMRecNF: TDMRecNF;
-  vArq : String;
+  vArq, x : String;
   vObsAux : String;
+  email : TValidaEmail;
+  enviar : TfrxMailExport;
+  pdf : TfrxPDFExport;
 begin
   if not (fDMCadNotaFiscal.cdsNotaFiscal_Consulta.Active) or (fDMCadNotaFiscal.cdsNotaFiscal_Consulta.IsEmpty) or
          (fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID.AsInteger < 1) then
@@ -1849,6 +1858,27 @@ begin
   fDMCadNotaFiscal.cdsParametros.Close;
   fDMCadNotaFiscal.cdsParametros.Open;
   vFilial := fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger;
+
+  email := TValidaEmail.create(vFilial,'1');
+  try
+    pdf := TfrxPDFExport.Create(nil);
+    enviar := TfrxMailExport.Create(nil);
+    enviar.SmtpPort := email.porta;
+    enviar.Login := email.usuario;
+    enviar.Password := email.senha;
+    enviar.SmtpHost := email.host;
+    enviar.Address := fDMCadNotaFiscal.cdsClienteEMAIL_NFE.AsString;
+    enviar.FromName := SQLLocate('FILIAL','ID','NOME',IntToStr(vFilial));
+    enviar.ExportFilter := pdf;
+    enviar.FilterDesc := 'PDF por e-mail';
+    enviar.FromMail := email.email;
+    enviar.FromCompany := email.email;
+    enviar.Subject := 'Recibo nº: ' + IntToStr(fDMCadNotaFiscal.cdsNotaFiscalNUMNOTA.AsInteger);
+    enviar.UseIniFile := False;
+    enviar.ShowExportDialog := False;
+  finally
+    FreeAndNil(email);
+  end;
 
   fDMRecNF.qFilialRel.Close;
   fDMRecNF.qFilialRel.ParamByName('ID').AsInteger      := vFilial;

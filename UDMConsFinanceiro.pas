@@ -3,7 +3,8 @@ unit UDMConsFinanceiro;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, StrUtils;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, StrUtils,
+  frxClass, frxDBSet;
 
 type
   TDMConsFinanceiro = class(TDataModule)
@@ -249,14 +250,93 @@ type
     cdsClienteNOME: TStringField;
     cdsClienteFANTASIA: TStringField;
     dsCliente: TDataSource;
+    qConta_Orcamento_Ccusto: TSQLQuery;
+    qConta_Orcamento_CcustoID: TIntegerField;
+    qConta_Orcamento_CcustoTIPO: TStringField;
+    qConta_Orcamento_CcustoCODIGO: TStringField;
+    qConta_Orcamento_CcustoDESCRICAO: TStringField;
+    qConta_Orcamento_CcustoNIVEL: TIntegerField;
+    qConta_Orcamento_CcustoSUPERIOR: TStringField;
+    qConta_Orcamento_CcustoINATIVO: TStringField;
+    qConta_Orcamento_CcustoID_PESSOA: TIntegerField;
+    qConta_Orcamento_CcustoDIA_VENCIMENTO: TIntegerField;
+    qConta_Orcamento_CcustoDTVENCIMENTO: TDateField;
+    qConta_Orcamento_CcustoTIPO_CALCULO: TStringField;
+    qConta_Orcamento_CcustoVALOR: TFloatField;
+    qConta_Orcamento_CcustoTIPO_DESPESA: TStringField;
+    qConta_Orcamento_CcustoTIPO_RD: TStringField;
+    qConta_Orcamento_CcustoCOD_CONTABIL: TIntegerField;
+    qConta_Orcamento_CcustoID_TIPO_CONTA: TIntegerField;
+    qConta_Orcamento_CcustoVLR_ORC: TFloatField;
+    qConta_Orcamento_CcustoANO: TIntegerField;
+    qConta_Orcamento_CcustoCODIGO_CCUSTO: TStringField;
+    qConta_Orcamento_CcustoNOME_CCUSTO: TStringField;
+    qConta_Orcamento_CcustoID_CCUSTO: TIntegerField;
+    sdsConsulta_Conta_Orc_CCus: TSQLDataSet;
+    dspConsulta_Conta_Orc_CCus: TDataSetProvider;
+    cdsConsulta_Conta_Orc_CCus: TClientDataSet;
+    cdsConsulta_Conta_Orc_CCusVLR_PARCELA: TFloatField;
+    cdsConsulta_Conta_Orc_CCusVLR_DEVOLUCAO: TFloatField;
+    cdsConsulta_Conta_Orc_CCusVLR_RESTANTE: TFloatField;
+    cdsConsulta_Conta_Orc_CCusVLR_PAGO: TFloatField;
+    cdsConsulta_Conta_Orc_CCusTIPO_ES: TStringField;
+    cdsConsulta_Conta_Orc_CCusNOME_CONTA_ORCAMENTO: TStringField;
+    cdsConsulta_Conta_Orc_CCusCOD_CONTA_ORCAMENTO: TStringField;
+    cdsConsulta_Conta_Orc_CCusID_CONTA_ORCAMENTO: TIntegerField;
+    cdsConsulta_Conta_Orc_CCusSUPERIOR: TStringField;
+    cdsConsulta_Conta_Orc_CCusNIVEL: TIntegerField;
+    cdsConsulta_Conta_Orc_CCusID_CENTROCUSTO: TIntegerField;
+    cdsConsulta_Conta_Orc_CCusNOME_CCUSTO: TStringField;
+    mContas_Orc_CCusto: TClientDataSet;
+    dsmContas_Orc_CCusto: TDataSource;
+    mContas_Orc_CCustoID: TIntegerField;
+    mContas_Orc_CCustoCodigo: TStringField;
+    mContas_Orc_CCustoNome: TStringField;
+    mContas_Orc_CCustoTipo_ES: TStringField;
+    mContas_Orc_CCustoVlr_Total: TFloatField;
+    mContas_Orc_CCustoVlr_Pago: TFloatField;
+    mContas_Orc_CCustoVlr_Restante: TFloatField;
+    mContas_Orc_CCustoTipo_Conta: TStringField;
+    mContas_Orc_CCustoQtd_Restante: TFloatField;
+    mContas_Orc_CCustoID_CCusto: TIntegerField;
+    mContas_Orc_CCustoNome_CCusto: TStringField;
+    mContas_Orc_CCustoCodigo_CCusto: TStringField;
+    cdsConsulta_Conta_Orc_CCusCODIGO_CCUSTO: TStringField;
+    cdsConsulta_Conta_Orc_CCusNIVEL_CCUSTO: TIntegerField;
+    qConta_Orcamento_CcustoNIVEL_CCUSTO: TIntegerField;
+    cdsConsulta_Conta_Orc_CCusVLR_CCUS: TFloatField;
+    mContas_Orc_CCustoVlr_CentroCusto: TFloatField;
+    frxReport1: TfrxReport;
+    frxCentroCusto: TfrxDBDataset;
+    sdsCCustoOrcamento: TSQLDataSet;
+    dspCCustoOrcamento: TDataSetProvider;
+    cdsCCustoOrcamento: TClientDataSet;
+    dsCCustoOrcamento: TDataSource;
+    cdsCCustoOrcamentoVLR_PARCELA: TFloatField;
+    cdsCCustoOrcamentoCODIGO_GRUPO: TStringField;
+    cdsCCustoOrcamentoCODIGO_GRUPO_SUP: TStringField;
+    cdsCCustoOrcamentoNOME_GRUPO: TStringField;
+    cdsCCustoOrcamentoCONTA_ORCAMENTO: TStringField;
+    cdsCCustoOrcamentoID_CONTA_ORCAMENTO: TIntegerField;
+    cdsCCustoOrcamentoNOME_ORCAMENTO: TStringField;
+    sdsCentroCusto: TSQLDataSet;
+    dspCentroCusto: TDataSetProvider;
+    cdsCentroCusto: TClientDataSet;
+    dsCentroCusto: TDataSource;
+    cdsCentroCustoID: TIntegerField;
+    cdsCentroCustoCODIGO: TStringField;
+    cdsCentroCustoDESCRICAO: TStringField;
+    frxCCustoOrcamento: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConta_OrcNewRecord(DataSet: TDataSet);
     procedure mDespesaNewRecord(DataSet: TDataSet);
+    procedure mContas_Orc_CCustoNewRecord(DataSet: TDataSet);
+    procedure frxReport1BeforePrint(Sender: TfrxReportComponent);
   private
     { Private declarations }
   public
     { Public declarations }
-    ctConsulta_Conta_Orc, ctConsulta_Conta_Orc_Dt : String;
+    ctConsulta_Conta_Orc, ctConsulta_Conta_Orc_Dt, ctConsulta_Conta_Orc_CCusto, ctCCustoOrcamento : String;
     ctDespesa : String;
     ctOC_Pendente : String;
     ctDuplicata_Det : String;
@@ -264,6 +344,7 @@ type
     ctPedido_Cli : String;
     ctPedido_Pend : String;
     ctPrazoMedio : String;
+    vDataIni, vDataFim: String;
 
     vDtInicial, vDtFinal : TDateTime;
     vTipo_Data : String;
@@ -292,7 +373,9 @@ procedure TDMConsFinanceiro.DataModuleCreate(Sender: TObject);
 begin
   cdsFilial.Open;
   ctConsulta_Conta_Orc    := sdsConsulta_Conta_Orc.CommandText;
+  ctConsulta_Conta_Orc_CCusto := sdsConsulta_Conta_Orc_CCus.CommandText;
   ctConsulta_Conta_Orc_Dt := sdsConsulta_Conta_Orc_Dt.CommandText;
+  ctCCustoOrcamento       := sdsCCustoOrcamento.CommandText;
   ctDespesa               := sdsDespesa.CommandText;
   ctOC_Pendente           := sdsOC_Pendente.CommandText;
   ctDuplicata_Det         := sdsDuplicata_Det.CommandText;
@@ -413,6 +496,22 @@ begin
     vComandoAux2 := vComandoAux2 + ' AND ((V.DTENTREGA IS NULL) or (V.DTENTREGA >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',Date)) + '))';
   sdsPedido_Pend.CommandText := vComandoAux2 + vComandoAux;
   cdsPedido_Pend.Open;
+end;
+
+procedure TDMConsFinanceiro.mContas_Orc_CCustoNewRecord(DataSet: TDataSet);
+begin
+  mContas_Orc_CCustoVlr_Pago.AsFloat     := 0;
+  mContas_Orc_CCustoVlr_Restante.AsFloat := 0;
+  mContas_Orc_CCustoVlr_Total.AsFloat    := 0;
+  mContas_Orc_CCustoTipo_Conta.AsString  := 'A';
+  mContas_Orc_CCustoQtd_Restante.AsFloat := 0;
+
+end;
+
+procedure TDMConsFinanceiro.frxReport1BeforePrint(
+  Sender: TfrxReportComponent);
+begin
+  TfrxMemoView(frxReport1.FindComponent('Memo2')).Text := 'Período de ' + vDataIni + ' até ' + vDataFim;
 end;
 
 end.

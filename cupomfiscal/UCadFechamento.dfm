@@ -1596,6 +1596,7 @@ object frmCadFechamento: TfrmCadFechamento
             Title.Alignment = taCenter
             Title.Caption = 'Diferen'#231'a Conferido'
             Title.Color = 16761220
+            Width = 64
             Visible = True
           end>
       end
@@ -1811,7 +1812,13 @@ object frmCadFechamento: TfrmCadFechamento
           Color = clWhite
           DataField = 'DESCRICAO'
           DataSource = DMCadFechamento.dsFechamento_San
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
           ParentColor = False
+          ParentFont = False
         end
         object DBText4: TDBText
           Left = 4
@@ -1821,7 +1828,13 @@ object frmCadFechamento: TfrmCadFechamento
           Color = clWhite
           DataField = 'DESCRICAO'
           DataSource = DMCadFechamento.dsFechamento_Sup
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlue
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
           ParentColor = False
+          ParentFont = False
         end
         object Label23: TLabel
           Left = 11
@@ -2043,15 +2056,16 @@ object frmCadFechamento: TfrmCadFechamento
         Height = 33
         Align = alTop
         Ctl3D = True
+        Enabled = False
         ParentCtl3D = False
         TabOrder = 5
         object Label1: TLabel
-          Left = 49
+          Left = 25
           Top = 6
-          Width = 97
+          Width = 107
           Height = 22
           Alignment = taCenter
-          Caption = 'Suprimento'
+          Caption = 'Suprimentos'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlue
           Font.Height = -19
@@ -2060,12 +2074,12 @@ object frmCadFechamento: TfrmCadFechamento
           ParentFont = False
         end
         object Label11: TLabel
-          Left = 268
+          Left = 252
           Top = 6
-          Width = 64
+          Width = 74
           Height = 22
           Alignment = taCenter
-          Caption = 'Sangria'
+          Caption = 'Sangrias'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clRed
           Font.Height = -19
@@ -2086,6 +2100,62 @@ object frmCadFechamento: TfrmCadFechamento
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
+        end
+        object SpeedButton1: TSpeedButton
+          Left = 153
+          Top = 8
+          Width = 23
+          Height = 22
+          Caption = '+'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlue
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          OnClick = SpeedButton1Click
+        end
+        object SpeedButton2: TSpeedButton
+          Left = 177
+          Top = 8
+          Width = 23
+          Height = 22
+          Caption = '-'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlue
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          OnClick = SpeedButton2Click
+        end
+        object SpeedButton3: TSpeedButton
+          Left = 353
+          Top = 8
+          Width = 23
+          Height = 22
+          Caption = '+'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          OnClick = SpeedButton3Click
+        end
+        object SpeedButton4: TSpeedButton
+          Left = 377
+          Top = 8
+          Width = 23
+          Height = 22
+          Caption = '-'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          OnClick = SpeedButton4Click
         end
       end
       object pnlNota: TPanel

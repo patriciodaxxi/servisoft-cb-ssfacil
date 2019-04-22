@@ -1,6 +1,6 @@
 object frmSel_CentroCusto: TfrmSel_CentroCusto
-  Left = 631
-  Top = 127
+  Left = 575
+  Top = 121
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmSel_CentroCusto'
@@ -22,7 +22,7 @@ object frmSel_CentroCusto: TfrmSel_CentroCusto
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 0
+    Top = 26
     Width = 668
     Height = 28
     Align = alTop
@@ -64,13 +64,13 @@ object frmSel_CentroCusto: TfrmSel_CentroCusto
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
-    Top = 28
+    Top = 54
     Width = 668
-    Height = 401
+    Height = 375
     Align = alClient
     Ctl3D = False
     DataSource = dsCentroCusto
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
     ParentCtl3D = False
     ReadOnly = True
     TabOrder = 1
@@ -94,10 +94,10 @@ object frmSel_CentroCusto: TfrmSel_CentroCusto
     GridStyle.EvenColor = clWindow
     TitleHeight.PixelCount = 24
     FooterColor = clBtnFace
-    ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+    ExOptions = [eoCheckBoxSelect, eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
     RegistryKey = 'Software\Scalabium'
     RegistrySection = 'SMDBGrid'
-    WidthOfIndicator = 11
+    WidthOfIndicator = 27
     DefaultRowHeight = 16
     ScrollBars = ssHorizontal
     ColCount = 4
@@ -138,6 +138,50 @@ object frmSel_CentroCusto: TfrmSel_CentroCusto
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 2
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 668
+    Height = 26
+    Align = alTop
+    TabOrder = 3
+    Visible = False
+    object Label52: TLabel
+      Left = 50
+      Top = 10
+      Width = 86
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Conta Or'#231'amento:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object RxDBLookupCombo9: TRxDBLookupCombo
+      Left = 138
+      Top = 2
+      Width = 316
+      Height = 21
+      DropDownCount = 15
+      Ctl3D = False
+      LookupField = 'ID'
+      LookupDisplay = 'DESCRICAO'
+      LookupSource = DMCadDuplicata.dsContaOrcamento
+      ParentCtl3D = False
+      TabOrder = 0
+    end
+    object NxButton1: TNxButton
+      Left = 477
+      Top = 1
+      Width = 144
+      Caption = 'Copiar Selecionados'
+      TabOrder = 1
+      OnClick = NxButton1Click
+    end
   end
   object sdsCentroCusto: TSQLDataSet
     NoMetadata = True
@@ -224,5 +268,62 @@ object frmSel_CentroCusto: TfrmSel_CentroCusto
       FieldName = 'DESCRICAO'
       Size = 50
     end
+  end
+  object sdsContaOrcamento: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT C.ID, C.DESCRICAO, C.TIPO, C.CODIGO, c.superior, CASE NIV' +
+      'EL'#13#10'           WHEN 5 THEN '#39'          '#39' ||  DESCRICAO'#13#10'         ' +
+      '  WHEN 4 THEN '#39'        '#39' ||  DESCRICAO'#13#10'           WHEN 3 THEN '#39 +
+      '      '#39' ||  DESCRICAO'#13#10'           WHEN 2 THEN '#39'    '#39' ||  DESCRIC' +
+      'AO'#13#10'           WHEN 1 THEN DESCRICAO'#13#10'           ELSE DESCRICAO'#13 +
+      #10'           END AS NOME_AUX'#13#10'FROM CONTA_ORCAMENTO C '#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 265
+    Top = 304
+  end
+  object dspContaOrcamento: TDataSetProvider
+    DataSet = sdsContaOrcamento
+    Left = 297
+    Top = 304
+  end
+  object cdsContaOrcamento: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'DESCRICAO'
+    Params = <>
+    ProviderName = 'dspContaOrcamento'
+    Left = 329
+    Top = 304
+    object cdsContaOrcamentoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsContaOrcamentoTIPO: TStringField
+      FieldName = 'TIPO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsContaOrcamentoCODIGO: TStringField
+      FieldName = 'CODIGO'
+    end
+    object cdsContaOrcamentoDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 50
+    end
+    object cdsContaOrcamentoNOME_AUX: TStringField
+      FieldName = 'NOME_AUX'
+      Size = 60
+    end
+    object cdsContaOrcamentoSUPERIOR: TStringField
+      FieldName = 'SUPERIOR'
+    end
+  end
+  object dsContaOrcamento: TDataSource
+    DataSet = cdsContaOrcamento
+    Left = 361
+    Top = 304
   end
 end

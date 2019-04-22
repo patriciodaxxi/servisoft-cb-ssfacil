@@ -278,7 +278,7 @@ begin
 
       while not cdsVersao.Eof do
       begin
-        S := cdsVersaoSCRIPT.Value; // ScriptFile: String - your whole script
+        S := cdsVersaoSCRIPT.AsString; // ScriptFile: String - your whole script
         vFlag := True;
         while vFlag do
         begin
@@ -586,9 +586,9 @@ begin
     scoDados.StartTransaction(ID);
     try
       sds.SQLConnection := scoDados;
-      sds.NoMetadata  := True;
-      sds.GetMetadata := False;
-      sds.CommandText := 'SELECT FLAG FROM TABELALOC WHERE TABELA = :TABELA';
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+      sds.CommandText   := 'SELECT FLAG FROM TABELALOC WHERE TABELA = :TABELA';
       sds.ParamByName('TABELA').AsString := NomeTabela;
       sds.Open;
 

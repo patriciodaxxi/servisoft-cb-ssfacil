@@ -203,7 +203,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
         Left = 0
         Top = 0
         Width = 742
-        Height = 117
+        Height = 136
         DataFields = 'DTVENCIMENTO'
         object RLBand2: TRLBand
           Left = 0
@@ -242,7 +242,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
         end
         object RLBand5: TRLBand
           Left = 0
-          Top = 68
+          Top = 88
           Width = 742
           Height = 19
           BandType = btSummary
@@ -332,13 +332,13 @@ object fRelPagarReceber2: TfRelPagarReceber2
           Left = 0
           Top = 18
           Width = 742
-          Height = 50
+          Height = 70
           DataFields = 'DTVENCIMENTO;TIPO_ES;TIPO_MOV'
           object RLBand4: TRLBand
             Left = 0
             Top = 16
             Width = 742
-            Height = 14
+            Height = 16
             Borders.Sides = sdCustom
             Borders.DrawLeft = False
             Borders.DrawTop = False
@@ -350,7 +350,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
               Left = 137
               Top = 2
               Width = 242
-              Height = 10
+              Height = 12
               AutoSize = False
               DataField = 'NOME_PESSOA'
               DataSource = DMCadDuplicata.dsDuplicata_Consulta
@@ -509,9 +509,9 @@ object fRelPagarReceber2: TfRelPagarReceber2
               Font.Style = []
               ParentFont = False
             end
-            object RLDraw4: TRLDraw
+            object RLDraw5: TRLDraw
               Left = 0
-              Top = 13
+              Top = 15
               Width = 742
               Height = 1
               Align = faBottom
@@ -521,7 +521,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
           end
           object RLBand3: TRLBand
             Left = 0
-            Top = 30
+            Top = 49
             Width = 742
             Height = 18
             BandType = btSummary
@@ -545,7 +545,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
             end
             object RLLabel13: TRLLabel
               Left = 216
-              Top = 0
+              Top = 2
               Width = 140
               Height = 14
               Alignment = taRightJustify
@@ -626,10 +626,55 @@ object fRelPagarReceber2: TfRelPagarReceber2
               Caption = '.'
             end
           end
+          object RLBand13: TRLBand
+            Left = 0
+            Top = 32
+            Width = 742
+            Height = 17
+            BeforePrint = RLBand13BeforePrint
+            object RLLabel46: TRLLabel
+              Left = 41
+              Top = 1
+              Width = 23
+              Height = 12
+              Caption = 'Obs:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -9
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLDraw4: TRLDraw
+              Left = 0
+              Top = 16
+              Width = 742
+              Height = 1
+              Align = faBottom
+              DrawKind = dkLine
+              Pen.Style = psDot
+            end
+            object RLDraw6: TRLDraw
+              Left = 0
+              Top = 15
+              Width = 742
+              Height = 1
+              Align = faBottom
+              DrawKind = dkLine
+              Pen.Style = psDot
+            end
+            object rlMemoObs: TRLMemo
+              Left = 66
+              Top = 1
+              Width = 660
+              Height = 12
+              Behavior = [beSiteExpander]
+            end
+          end
         end
         object RLBand11: TRLBand
           Left = 0
-          Top = 87
+          Top = 107
           Width = 742
           Height = 19
           BandType = btSummary
@@ -666,7 +711,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
       end
       object RLBand7: TRLBand
         Left = 0
-        Top = 117
+        Top = 136
         Width = 742
         Height = 27
         BandType = btSummary
@@ -785,7 +830,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
       end
       object RLBand8: TRLBand
         Left = 0
-        Top = 144
+        Top = 163
         Width = 742
         Height = 29
         BandType = btSummary
@@ -998,7 +1043,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
       end
       object RLBand10: TRLBand
         Left = 0
-        Top = 173
+        Top = 192
         Width = 742
         Height = 20
         BandType = btSummary
@@ -1062,7 +1107,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
       end
       object RLBand12: TRLBand
         Left = 0
-        Top = 193
+        Top = 212
         Width = 742
         Height = 20
         BandType = btSummary

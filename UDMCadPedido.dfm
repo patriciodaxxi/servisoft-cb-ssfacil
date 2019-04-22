@@ -413,6 +413,9 @@ object DMCadPedido: TDMCadPedido
     object sdsPedidoBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object sdsPedidoID_PEDWEB: TIntegerField
+      FieldName = 'ID_PEDWEB'
+    end
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
@@ -873,6 +876,9 @@ object DMCadPedido: TDMCadPedido
     object cdsPedidoBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
       DisplayFormat = '0.00'
+    end
+    object cdsPedidoID_PEDWEB: TIntegerField
+      FieldName = 'ID_PEDWEB'
     end
   end
   object dsPedido: TDataSource
@@ -1557,6 +1563,7 @@ object DMCadPedido: TDMCadPedido
     Top = 316
   end
   object cdsTipoCobranca: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -1633,6 +1640,7 @@ object DMCadPedido: TDMCadPedido
     Top = 364
   end
   object cdsContas: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -3239,6 +3247,11 @@ object DMCadPedido: TDMCadPedido
     object sdsPedido_ItensBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object sdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField
+      FieldName = 'ATUALIZA_PRECO_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsPedido_Itens: TClientDataSet
     Aggregates = <>
@@ -3857,6 +3870,11 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'BASE_IPI'
       DisplayFormat = '0.00'
     end
+    object cdsPedido_ItensATUALIZA_PRECO_CUSTO: TStringField
+      FieldName = 'ATUALIZA_PRECO_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsPedido_Itens: TDataSource
     DataSet = cdsPedido_Itens
@@ -3958,43 +3976,44 @@ object DMCadPedido: TDMCadPedido
       'FIL.CNPJ_CPF CNPJ_CPF_FILIAL, FIL.INSCR_EST INSCR_EST_FILIAL, FI' +
       'L.NUM_END NUM_END_FILIAL, FIL.ENDLOGO,'#13#10'       FIL.NOME_INTERNO ' +
       'NOME_INTERNO_FIL,FIL.EMAIL EMAIL_FIL, FIL.DDDFAX DDDFAX_FIL, FIL' +
-      '.FAX FAX_FIL,'#13#10#13#10'       TRA.NOME NOME_TRA, TRA.ENDERECO END_TRA,' +
-      ' TRA.NUM_END NUM_END_TRA, TRA.BAIRRO BAIRRO_TRA, TRA.CIDADE CIDA' +
-      'DE_TRA,'#13#10'       TRA.UF UF_TRA, TRA.DDDFONE1 DDD_TRA, TRA.TELEFON' +
-      'E1 FONE_TRA, TRA.DDDFAX DDD_FAX_TRA, TRA.FAX FAX_TRA,'#13#10'       TR' +
-      'A.CNPJ_CPF CNPJ_CPF_TRA, TRA.INSCR_EST INSCR_EST_TRA, TRA.CEP CE' +
-      'P_TRA,'#13#10#13#10'       RED.NOME NOME_RED, COND.NOME NOME_CONDPGTO,'#13#10'  ' +
-      '     (PED.VLR_TOTAL + PED.VLR_DESCONTO) VLR_ITENS2, VEND.NOME NO' +
-      'ME_VENDEDOR, VEND.DDDFONE1 VENDEDOR_DDD,'#13#10'       VEND.TELEFONE1 ' +
-      'VENDEDOR_FONE, TRA.NOME NOME_TRANSPORTADORA, FUN.CODIGO ID_FUNCI' +
-      'ONARIO, FUN.NOME NOME_FUNCIONARIO,'#13#10'       FUN.EMAIL EMAIL_FUNCI' +
-      'ONARIO,'#13#10#13#10'       MAPA.NUM_MAPA, MAPA.NOME NOME_MAPA, ATE.NOME N' +
-      'OME_ATELIER, OPN.NOME NOME_OPERACAO, OPN.TIPO_NOTA,'#13#10'       GP.N' +
-      'OME NOME_GRUPO_PESSOA, CLI.IMP_COR_CLIENTE, CAST(PED.DDD AS VARC' +
-      'HAR(02)) DDD_PEDIDO, PED.FONE FONE_PEDIDO,'#13#10'       CLI.OBS_AVISO' +
-      ', CLI.MOSTRAR_AVISO, ATE.CNPJ_CPF CNPJ_CPF_ATELIER, ATE.PESSOA P' +
-      'ESSOA_ATELIER, CLI.NOME_CONTATO,'#13#10'       CASE'#13#10'         WHEN PED' +
-      '.ID_CLIENTE = (SELECT PA2.ID_CLIENTE_CONSUMIDOR'#13#10'               ' +
-      '                 FROM PARAMETROS PA2) THEN PED.NOME_CONSUMIDOR'#13#10 +
-      '         ELSE PED.NOME_CLIENTE'#13#10'       END NOME_CLIENTE2,'#13#10'     ' +
-      '  CASE'#13#10'         WHEN PED.TIPO_FRETE = '#39'1'#39' THEN '#39'1 Emitente'#39#13#10'  ' +
-      '       WHEN PED.TIPO_FRETE = '#39'2'#39' THEN '#39' 2 Destinat'#225'rio'#39#13#10'       ' +
-      '  WHEN PED.TIPO_FRETE = '#39'3'#39' THEN '#39' 3 Terceiros'#39#13#10'         WHEN P' +
-      'ED.TIPO_FRETE = '#39'4'#39' THEN '#39' 4 Transporte Pr'#243'prio por conta do Rem' +
-      'etente'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'5'#39' THEN '#39' 5 Transporte ' +
-      'Pr'#243'prio por conta do Destinat'#225'rio'#39#13#10'         WHEN PED.TIPO_FRETE' +
-      ' = '#39'9'#39' THEN '#39' 9 Sem Frete'#39#13#10'       END DESC_TIPO_FRETE'#13#10#13#10'FROM P' +
-      'EDIDO PED'#13#10'LEFT JOIN PESSOA CLI ON PED.ID_CLIENTE = CLI.CODIGO'#13#10 +
-      'INNER JOIN FILIAL FIL ON (PED.FILIAL = FIL.ID)'#13#10'LEFT JOIN PESSOA' +
-      ' TRA ON (PED.ID_TRANSPORTADORA = TRA.CODIGO)'#13#10'LEFT JOIN PESSOA R' +
-      'ED ON (PED.ID_REDESPACHO = RED.CODIGO)'#13#10'LEFT JOIN CONDPGTO COND ' +
-      'ON (PED.ID_CONDPGTO = COND.ID)'#13#10'LEFT JOIN PESSOA VEND ON (PED.ID' +
-      '_VENDEDOR = VEND.CODIGO)'#13#10'LEFT JOIN FUNCIONARIO FUN ON (PED.ID_F' +
-      'UNCIONARIO = FUN.CODIGO)'#13#10'LEFT JOIN MAPA_COMPRAS MAPA ON (PED.ID' +
-      '_MAPA = MAPA.ID)'#13#10'LEFT JOIN PESSOA ATE ON (PED.ID_ATELIER = ATE.' +
-      'CODIGO)'#13#10'LEFT JOIN OPERACAO_NOTA OPN ON (PED.ID_OPERACAO_NOTA = ' +
-      'OPN.ID)'#13#10'LEFT JOIN GRUPO_PESSOA GP ON PED.ID_GRUPO_PESSOA = GP.I' +
-      'D'#13#10'WHERE PED.ID = :ID'#13#10#13#10'  '
+      '.FAX FAX_FIL,'#13#10'       FIL.complemento_end COMPL_END_FILIAL,'#13#10#13#10' ' +
+      '      TRA.NOME NOME_TRA, TRA.ENDERECO END_TRA, TRA.NUM_END NUM_E' +
+      'ND_TRA, TRA.BAIRRO BAIRRO_TRA, TRA.CIDADE CIDADE_TRA,'#13#10'       TR' +
+      'A.UF UF_TRA, TRA.DDDFONE1 DDD_TRA, TRA.TELEFONE1 FONE_TRA, TRA.D' +
+      'DDFAX DDD_FAX_TRA, TRA.FAX FAX_TRA,'#13#10'       TRA.CNPJ_CPF CNPJ_CP' +
+      'F_TRA, TRA.INSCR_EST INSCR_EST_TRA, TRA.CEP CEP_TRA,'#13#10#13#10'       R' +
+      'ED.NOME NOME_RED, COND.NOME NOME_CONDPGTO,'#13#10'       (PED.VLR_TOTA' +
+      'L + PED.VLR_DESCONTO) VLR_ITENS2, VEND.NOME NOME_VENDEDOR, VEND.' +
+      'DDDFONE1 VENDEDOR_DDD,'#13#10'       VEND.TELEFONE1 VENDEDOR_FONE, TRA' +
+      '.NOME NOME_TRANSPORTADORA, FUN.CODIGO ID_FUNCIONARIO, FUN.NOME N' +
+      'OME_FUNCIONARIO,'#13#10'       FUN.EMAIL EMAIL_FUNCIONARIO,'#13#10#13#10'       ' +
+      'MAPA.NUM_MAPA, MAPA.NOME NOME_MAPA, ATE.NOME NOME_ATELIER, OPN.N' +
+      'OME NOME_OPERACAO, OPN.TIPO_NOTA,'#13#10'       GP.NOME NOME_GRUPO_PES' +
+      'SOA, CLI.IMP_COR_CLIENTE, CAST(PED.DDD AS VARCHAR(02)) DDD_PEDID' +
+      'O, PED.FONE FONE_PEDIDO,'#13#10'       CLI.OBS_AVISO, CLI.MOSTRAR_AVIS' +
+      'O, ATE.CNPJ_CPF CNPJ_CPF_ATELIER, ATE.PESSOA PESSOA_ATELIER, CLI' +
+      '.NOME_CONTATO,'#13#10'       CASE'#13#10'         WHEN PED.ID_CLIENTE = (SEL' +
+      'ECT PA2.ID_CLIENTE_CONSUMIDOR'#13#10'                                F' +
+      'ROM PARAMETROS PA2) THEN PED.NOME_CONSUMIDOR'#13#10'         ELSE PED.' +
+      'NOME_CLIENTE'#13#10'       END NOME_CLIENTE2,'#13#10'       CASE'#13#10'         W' +
+      'HEN PED.TIPO_FRETE = '#39'1'#39' THEN '#39'1 Emitente'#39#13#10'         WHEN PED.TI' +
+      'PO_FRETE = '#39'2'#39' THEN '#39' 2 Destinat'#225'rio'#39#13#10'         WHEN PED.TIPO_FR' +
+      'ETE = '#39'3'#39' THEN '#39' 3 Terceiros'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'4' +
+      #39' THEN '#39' 4 Transporte Pr'#243'prio por conta do Remetente'#39#13#10'         ' +
+      'WHEN PED.TIPO_FRETE = '#39'5'#39' THEN '#39' 5 Transporte Pr'#243'prio por conta ' +
+      'do Destinat'#225'rio'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'9'#39' THEN '#39' 9 Se' +
+      'm Frete'#39#13#10'       END DESC_TIPO_FRETE'#13#10#13#10'FROM PEDIDO PED'#13#10'LEFT JO' +
+      'IN PESSOA CLI ON PED.ID_CLIENTE = CLI.CODIGO'#13#10'INNER JOIN FILIAL ' +
+      'FIL ON (PED.FILIAL = FIL.ID)'#13#10'LEFT JOIN PESSOA TRA ON (PED.ID_TR' +
+      'ANSPORTADORA = TRA.CODIGO)'#13#10'LEFT JOIN PESSOA RED ON (PED.ID_REDE' +
+      'SPACHO = RED.CODIGO)'#13#10'LEFT JOIN CONDPGTO COND ON (PED.ID_CONDPGT' +
+      'O = COND.ID)'#13#10'LEFT JOIN PESSOA VEND ON (PED.ID_VENDEDOR = VEND.C' +
+      'ODIGO)'#13#10'LEFT JOIN FUNCIONARIO FUN ON (PED.ID_FUNCIONARIO = FUN.C' +
+      'ODIGO)'#13#10'LEFT JOIN MAPA_COMPRAS MAPA ON (PED.ID_MAPA = MAPA.ID)'#13#10 +
+      'LEFT JOIN PESSOA ATE ON (PED.ID_ATELIER = ATE.CODIGO)'#13#10'LEFT JOIN' +
+      ' OPERACAO_NOTA OPN ON (PED.ID_OPERACAO_NOTA = OPN.ID)'#13#10'LEFT JOIN' +
+      ' GRUPO_PESSOA GP ON PED.ID_GRUPO_PESSOA = GP.ID'#13#10'WHERE PED.ID = ' +
+      ':ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -4012,6 +4031,7 @@ object DMCadPedido: TDMCadPedido
     Top = 285
   end
   object cdsPedidoImp: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -4707,6 +4727,10 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'FAX_FIL'
       Size = 15
     end
+    object cdsPedidoImpCOMPL_END_FILIAL: TStringField
+      FieldName = 'COMPL_END_FILIAL'
+      Size = 60
+    end
   end
   object dsPedidoImp: TDataSource
     DataSet = cdsPedidoImp
@@ -4746,25 +4770,26 @@ object DMCadPedido: TDMCadPedido
       '_Total_Calc,'#13#10'(pi.vlr_desconto + pi.vlr_descontorateio) Vlr_Desc' +
       'onto_Calc,'#13#10'(pro.pesobruto * pi.qtd_caixa) peso_varejo, PT.ID_MA' +
       'TERIAL,'#13#10'PT.ID_TIPO_MATERIAL, TMAT.NOME NOME_TIPO_MATERIAL, PT.E' +
-      'SPESSURA, PT.DENSIDADE, PT.ALTURA_CORTE, PT.LARGURA_CORTE,'#13#10#13#10'CA' +
-      'SE'#13#10'  WHEN (PLOTE.LOCALIZACAO IS NOT NULL) AND (PLOTE.LOCALIZACA' +
-      'O <> '#39#39') THEN PLOTE.LOCALIZACAO'#13#10'  WHEN (PRO.LOCALIZACAO IS NOT ' +
-      'NULL) AND (PRO.LOCALIZACAO <> '#39#39') THEN PRO.LOCALIZACAO'#13#10'  ELSE N' +
-      'ULL'#13#10'  END LOCALIZACAO,'#13#10'case '#13#10'  WHEN PI.TIPO_OS = '#39'OC'#39' THEN PI' +
-      '.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'OP'#39' THEN PI.TIPO_OS'#13#10'  WHEN PI.TI' +
-      'PO_OS = '#39'RE'#39' THEN PI.TIPO_OS'#13#10'  ELSE '#39#39#13#10'  END DESC_TIPO_OS'#13#10#13#10'F' +
-      'ROM PEDIDO_ITEM PI'#13#10'LEFT JOIN PRODUTO PRO ON (PI.ID_PRODUTO = PR' +
-      'O.ID)'#13#10'LEFT JOIN MARCA ON (PRO.ID_MARCA = MARCA.ID)'#13#10'LEFT JOIN P' +
-      'EDIDO_ITEM_TIPO PT ON (PI.ID = PT.ID AND PI.ITEM = PT.ITEM)'#13#10'LEF' +
-      'T JOIN TAB_NCM NCM ON (PRO.ID_NCM = NCM.ID)'#13#10'LEFT JOIN COMBINACA' +
-      'O COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JOIN PRODUTO_TAM PTAM ON (' +
-      'PI.id_produto = PTAM.id AND PI.tamanho = PTAM.tamanho)'#13#10'LEFT JOI' +
-      'N PESSOA ATE ON (PI.id_atelier = ATE.CODIGO )'#13#10'LEFT JOIN PRODUTO' +
-      '_LOTE PLOTE ON (PI.ID_PRODUTO = PLOTE.ID AND PI.NUM_LOTE_CONTROL' +
-      'E = PLOTE.NUM_LOTE_CONTROLE)'#13#10'LEFT JOIN TIPO_MATERIAL TMAT ON (P' +
-      'T.ID_TIPO_MATERIAL = TMAT.ID)'#13#10'WHERE PI.ID = :ID'#13#10'AND ((PI.TIPO_' +
-      'ACESSORIO = '#39'N'#39') OR (PI.TIPO_ACESSORIO IS NULL))'#13#10' AND (PI.QTD >' +
-      ' 0)'
+      'SPESSURA, PT.DENSIDADE, PT.ALTURA_CORTE, PT.LARGURA_CORTE,MP.NOM' +
+      'E NOME_ACABAMENTO,'#13#10#13#10'CASE'#13#10'  WHEN (PLOTE.LOCALIZACAO IS NOT NUL' +
+      'L) AND (PLOTE.LOCALIZACAO <> '#39#39') THEN PLOTE.LOCALIZACAO'#13#10'  WHEN ' +
+      '(PRO.LOCALIZACAO IS NOT NULL) AND (PRO.LOCALIZACAO <> '#39#39') THEN P' +
+      'RO.LOCALIZACAO'#13#10'  ELSE NULL'#13#10'  END LOCALIZACAO,'#13#10'case '#13#10'  WHEN P' +
+      'I.TIPO_OS = '#39'OC'#39' THEN PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'OP'#39' THEN ' +
+      'PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'RE'#39' THEN PI.TIPO_OS'#13#10'  ELSE '#39#39#13 +
+      #10'  END DESC_TIPO_OS'#13#10#13#10'FROM PEDIDO_ITEM PI'#13#10'LEFT JOIN PRODUTO PR' +
+      'O ON (PI.ID_PRODUTO = PRO.ID)'#13#10'LEFT JOIN MARCA ON (PRO.ID_MARCA ' +
+      '= MARCA.ID)'#13#10'LEFT JOIN PEDIDO_ITEM_TIPO PT ON (PI.ID = PT.ID AND' +
+      ' PI.ITEM = PT.ITEM)'#13#10'LEFT JOIN TAB_NCM NCM ON (PRO.ID_NCM = NCM.' +
+      'ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JO' +
+      'IN PRODUTO_TAM PTAM ON (PI.id_produto = PTAM.id AND PI.tamanho =' +
+      ' PTAM.tamanho)'#13#10'LEFT JOIN PESSOA ATE ON (PI.id_atelier = ATE.COD' +
+      'IGO )'#13#10'LEFT JOIN PRODUTO_LOTE PLOTE ON (PI.ID_PRODUTO = PLOTE.ID' +
+      ' AND PI.NUM_LOTE_CONTROLE = PLOTE.NUM_LOTE_CONTROLE)'#13#10'LEFT JOIN ' +
+      'TIPO_MATERIAL TMAT ON (PT.ID_TIPO_MATERIAL = TMAT.ID)'#13#10'LEFT JOIN' +
+      ' MATRIZ_PRECO MP ON MP.ID = PT.ID_ACABAMENTO'#13#10'WHERE PI.ID = :ID'#13 +
+      #10'AND ((PI.TIPO_ACESSORIO = '#39'N'#39') OR (PI.TIPO_ACESSORIO IS NULL))'#13 +
+      #10' AND (PI.QTD > 0)'
     MaxBlobSize = -1
     Params = <
       item
@@ -5348,6 +5373,10 @@ object DMCadPedido: TDMCadPedido
       FieldKind = fkCalculated
       FieldName = 'COD_BARRAS'
       Calculated = True
+    end
+    object cdsPedidoImp_ItensNOME_ACABAMENTO: TStringField
+      FieldName = 'NOME_ACABAMENTO'
+      Size = 30
     end
   end
   object dsPedidoImp_Itens: TDataSource
@@ -5981,7 +6010,7 @@ object DMCadPedido: TDMCadPedido
   object dsObs_Aux: TDataSource
     DataSet = cdsObs_Aux
     Left = 744
-    Top = 224
+    Top = 223
   end
   object sdsPedido_Cli: TSQLDataSet
     NoMetadata = True
@@ -10483,8 +10512,8 @@ object DMCadPedido: TDMCadPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43339.742338449100000000
+    ReportOptions.CreateDate = 42052.436473541700000000
+    ReportOptions.LastChange = 42321.628830243100000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -10676,11 +10705,12 @@ object DMCadPedido: TDMCadPedido
       'COMPL_END_CLIENTE=COMPL_END_CLIENTE'
       'EMAIL_FIL=EMAIL_FIL'
       'DDDFAX_FIL=DDDFAX_FIL'
-      'FAX_FIL=FAX_FIL')
+      'FAX_FIL=FAX_FIL'
+      'COMPL_END_FILIAL=COMPL_END_FILIAL')
     DataSource = dsPedidoImp
     BCDToCurrency = False
-    Left = 824
-    Top = 452
+    Left = 825
+    Top = 450
   end
   object frxDBDataset2: TfrxDBDataset
     UserName = 'frxPedidoImp_Cli'
@@ -10688,7 +10718,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp_Cli
     BCDToCurrency = False
     Left = 864
-    Top = 452
+    Top = 451
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -10711,7 +10741,7 @@ object DMCadPedido: TDMCadPedido
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 864
+    Left = 863
     Top = 407
   end
   object frxMailExport1: TfrxMailExport
@@ -10886,7 +10916,8 @@ object DMCadPedido: TDMCadPedido
       'DESC_TIPO_OS=DESC_TIPO_OS'
       'ALTURA_CORTE=ALTURA_CORTE'
       'LARGURA_CORTE=LARGURA_CORTE'
-      'COD_BARRAS=COD_BARRAS')
+      'COD_BARRAS=COD_BARRAS'
+      'NOME_ACABAMENTO=NOME_ACABAMENTO')
     DataSource = dsPedidoImp_Itens
     BCDToCurrency = False
     Left = 905
@@ -13832,8 +13863,8 @@ object DMCadPedido: TDMCadPedido
       'Qtd_Produto=Qtd_Produto')
     DataSource = dsmEmbalegem
     BCDToCurrency = False
-    Left = 832
-    Top = 493
+    Left = 833
+    Top = 494
   end
   object mCarimbo: TClientDataSet
     Active = True
@@ -13882,7 +13913,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmCarimbo
     BCDToCurrency = False
     Left = 1000
-    Top = 449
+    Top = 448
   end
   object sdsPedidoImp_Carimbo: TSQLDataSet
     NoMetadata = True
@@ -13967,8 +13998,8 @@ object DMCadPedido: TDMCadPedido
       '      AND TIPO = :TIPO'
       '      AND POSICAO = :POSICAO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1168
-    Top = 530
+    Left = 1288
+    Top = 66
     object qFilial_RelID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14017,8 +14048,8 @@ object DMCadPedido: TDMCadPedido
       'Total_Volume=Total_Volume')
     DataSource = dsmRotulos
     BCDToCurrency = False
-    Left = 824
-    Top = 534
+    Left = 825
+    Top = 535
   end
   object frxDBDataset13: TfrxDBDataset
     UserName = 'frxmRotulos_Prod'
@@ -14514,8 +14545,8 @@ object DMCadPedido: TDMCadPedido
       'FROM PARAMETROS_USUARIO'
       'WHERE USUARIO = :USUARIO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1232
-    Top = 554
+    Left = 1296
+    Top = 34
     object qParametros_UsuarioID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14987,6 +15018,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_FinUSA_END_CCUSTO: TStringField
+      FieldName = 'USA_END_CCUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros_NFe: TSQLQuery
     MaxBlobSize = -1
@@ -15172,8 +15208,8 @@ object DMCadPedido: TDMCadPedido
       'LEFT JOIN COMBINACAO COR'
       'ON AUX.ID_COR_MAT = COR.ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1240
-    Top = 594
+    Left = 1296
+    Top = 234
     object qConsumoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -16084,6 +16120,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_OCUSA_NUM_DOC: TStringField
+      FieldName = 'USA_NUM_DOC'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsPrc_Atualiza_DtEntrega: TSQLDataSet
     NoMetadata = True
@@ -16163,6 +16204,11 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_ProdGRAVAR_PRIMEIRO_MAT: TStringField
       FieldName = 'GRAVAR_PRIMEIRO_MAT'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField
+      FieldName = 'MATERIAL_FORNECEDOR_OC'
       FixedChar = True
       Size = 1
     end
@@ -17020,8 +17066,8 @@ object DMCadPedido: TDMCadPedido
       'FROM GRUPO_PESSOA'
       'WHERE ID = :ID1')
     SQLConnection = dmDatabase.scoDados
-    Left = 1168
-    Top = 565
+    Left = 1280
+    Top = 373
     object qGrupoPessoaNOME: TStringField
       FieldName = 'NOME'
       Size = 40
@@ -17600,14 +17646,16 @@ object DMCadPedido: TDMCadPedido
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT *'
+      
+        'SELECT ID,ITEM,TIPO,CAMINHO,POSICAO,COALESCE(DESCRICAO,'#39'Personal' +
+        'izado '#39' || posicao)DESCRICAO, GERAR_TAMANHO'
       'FROM FILIAL_RELATORIOS'
       'WHERE ID = :ID'
       '      AND TIPO = :TIPO'
-      '     AND DESCRICAO <> '#39#39)
+      'ORDER BY POSICAO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1202
-    Top = 615
+    Left = 1298
+    Top = 295
     object qFilial_Relatorio_MenuID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -17629,6 +17677,11 @@ object DMCadPedido: TDMCadPedido
     object qFilial_Relatorio_MenuDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
       Size = 70
+    end
+    object qFilial_Relatorio_MenuGERAR_TAMANHO: TStringField
+      FieldName = 'GERAR_TAMANHO'
+      FixedChar = True
+      Size = 1
     end
   end
   object qParametros_Ser: TSQLQuery
@@ -17691,5 +17744,275 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'COD_CST'
       Size = 3
     end
+  end
+  object sdsTriCCusto: TSQLDataSet
+    CommandText = 
+      'SELECT P.ID, P.num_pedido, P.pedido_cliente, P.id_cliente_triang' +
+      'ular,'#13#10'TRI.NOME NOME_TRIANGULAR, TRI.endereco END_TRI, TRI.compl' +
+      'emento_end COMPL_TRI,'#13#10'TRI.bairro BAIRRO_TRI, TRI.cidade CID_TRI' +
+      ', TRI.cep CEP_TRI, TRI.uf UF_TRI,'#13#10'TRI.num_end NUM_END_TRI, TRI.' +
+      'nome_contato CONTATO_TRI, TRI.cnpj_cpf CNPJ_TRI,'#13#10'TRI.email_nfe ' +
+      'EMAL_TRI, TRI.dddfone1 DDD_TRI, TRI.telefone1 FONE_TRI,'#13#10'TRI.ins' +
+      'cr_est INSC_TRI,'#13#10'CASE'#13#10'  WHEN coalesce(TRI.endereco_pgto,'#39#39') = ' +
+      #39#39' THEN tri.endereco'#13#10'  else TRI.endereco_pgto'#13#10'  end END_TRI_CO' +
+      'B,'#13#10'CASE'#13#10'  WHEN coalesce(TRI.bairro_pgto,'#39#39') = '#39#39' THEN tri.bair' +
+      'ro'#13#10'  else TRI.bairro_pgto'#13#10'  end BAIRRO_TRI_COB,'#13#10'CASE'#13#10'  WHEN ' +
+      'coalesce(TRI.cidade_pgto,'#39#39') = '#39#39' THEN tri.cidade'#13#10'  else TRI.ci' +
+      'dade_pgto'#13#10'  end CID_TRI_COB,'#13#10'CASE'#13#10'  WHEN coalesce(TRI.cep_pgt' +
+      'o,'#39#39') = '#39#39' THEN tri.cep'#13#10'  else TRI.cep_pgto'#13#10'  end CEP_TRI_COB,' +
+      #13#10'CASE'#13#10'  WHEN coalesce(TRI.num_end_pgto,'#39#39') = '#39#39' THEN TRI.num_e' +
+      'nd'#13#10'  else TRI.num_end_pgto'#13#10'  end num_end_COB,'#13#10'CASE'#13#10'  WHEN co' +
+      'alesce(TRI.complemento_end_pgto,'#39#39') = '#39#39' THEN TRI.complemento_en' +
+      'd'#13#10'  else TRI.complemento_end_pgto'#13#10'  end COMPL_TRI_COB,'#13#10'CASE'#13#10 +
+      '  WHEN coalesce(TRI.uf_pgto,'#39#39') = '#39#39' THEN TRI.uf'#13#10'  else TRI.uf_' +
+      'pgto'#13#10'  end UF_TRI_COB,'#13#10#13#10'CC.descricao NOME_CCUSTO, CC.endereco' +
+      ' END_CCUSTO, CC.complemento_end COMPL_CCUSTO,'#13#10'CC.bairro BAIRRO_' +
+      'CCUSTO, CC.ID_CIDADE ID_CIDADE_CCUSTO, CC.cep CEP_CCUSTO,'#13#10'CC.uf' +
+      ' UF_CCUSTO, CC.num_end NUM_END_CCUSTO, CID.NOME CID_CCUSTO, CC.N' +
+      'UM_CONTRATO,'#13#10'CC.contato CONTATO_CCUSTO, CC.cnpj CNPJ_CCUSTO,'#13#10'C' +
+      'C.email EMAIL_CCUSTO, CC.ddd DDD_CCUSTO , CC.fone FONE_CCUSTO , ' +
+      'CC.email_comras, CC.contato_compras'#13#10'FROM PEDIDO P'#13#10'LEFT JOIN PE' +
+      'SSOA TRI'#13#10'ON P.id_atelier = TRI.CODIGO'#13#10'LEFT JOIN CENTROCUSTO CC' +
+      #13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CC.ID_CIDADE' +
+      ' = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 1176
+    Top = 560
+  end
+  object dspTriCCusto: TDataSetProvider
+    DataSet = sdsTriCCusto
+    Left = 1208
+    Top = 560
+  end
+  object cdsTriCCusto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTriCCusto'
+    Left = 1240
+    Top = 560
+    object cdsTriCCustoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTriCCustoNUM_PEDIDO: TIntegerField
+      FieldName = 'NUM_PEDIDO'
+    end
+    object cdsTriCCustoPEDIDO_CLIENTE: TStringField
+      FieldName = 'PEDIDO_CLIENTE'
+    end
+    object cdsTriCCustoID_CLIENTE_TRIANGULAR: TIntegerField
+      FieldName = 'ID_CLIENTE_TRIANGULAR'
+    end
+    object cdsTriCCustoNOME_TRIANGULAR: TStringField
+      FieldName = 'NOME_TRIANGULAR'
+      Size = 60
+    end
+    object cdsTriCCustoEND_TRI: TStringField
+      FieldName = 'END_TRI'
+      Size = 60
+    end
+    object cdsTriCCustoCOMPL_TRI: TStringField
+      FieldName = 'COMPL_TRI'
+      Size = 60
+    end
+    object cdsTriCCustoBAIRRO_TRI: TStringField
+      FieldName = 'BAIRRO_TRI'
+      Size = 30
+    end
+    object cdsTriCCustoCID_TRI: TStringField
+      FieldName = 'CID_TRI'
+      Size = 40
+    end
+    object cdsTriCCustoCEP_TRI: TStringField
+      FieldName = 'CEP_TRI'
+      Size = 10
+    end
+    object cdsTriCCustoUF_TRI: TStringField
+      FieldName = 'UF_TRI'
+      FixedChar = True
+      Size = 2
+    end
+    object cdsTriCCustoNUM_END_TRI: TStringField
+      FieldName = 'NUM_END_TRI'
+    end
+    object cdsTriCCustoNOME_CCUSTO: TStringField
+      FieldName = 'NOME_CCUSTO'
+      Size = 50
+    end
+    object cdsTriCCustoEND_CCUSTO: TStringField
+      FieldName = 'END_CCUSTO'
+      Size = 60
+    end
+    object cdsTriCCustoCOMPL_CCUSTO: TStringField
+      FieldName = 'COMPL_CCUSTO'
+      Size = 40
+    end
+    object cdsTriCCustoBAIRRO_CCUSTO: TStringField
+      FieldName = 'BAIRRO_CCUSTO'
+      Size = 30
+    end
+    object cdsTriCCustoID_CIDADE_CCUSTO: TIntegerField
+      FieldName = 'ID_CIDADE_CCUSTO'
+    end
+    object cdsTriCCustoCEP_CCUSTO: TStringField
+      FieldName = 'CEP_CCUSTO'
+      Size = 9
+    end
+    object cdsTriCCustoUF_CCUSTO: TStringField
+      FieldName = 'UF_CCUSTO'
+      Size = 2
+    end
+    object cdsTriCCustoNUM_END_CCUSTO: TStringField
+      FieldName = 'NUM_END_CCUSTO'
+      Size = 15
+    end
+    object cdsTriCCustoCID_CCUSTO: TStringField
+      FieldName = 'CID_CCUSTO'
+      Size = 40
+    end
+    object cdsTriCCustoNUM_CONTRATO: TStringField
+      FieldName = 'NUM_CONTRATO'
+      Size = 30
+    end
+    object cdsTriCCustoCONTATO_TRI: TStringField
+      FieldName = 'CONTATO_TRI'
+      Size = 40
+    end
+    object cdsTriCCustoCNPJ_TRI: TStringField
+      FieldName = 'CNPJ_TRI'
+    end
+    object cdsTriCCustoEMAL_TRI: TStringField
+      FieldName = 'EMAL_TRI'
+      Size = 250
+    end
+    object cdsTriCCustoDDD_TRI: TIntegerField
+      FieldName = 'DDD_TRI'
+    end
+    object cdsTriCCustoFONE_TRI: TStringField
+      FieldName = 'FONE_TRI'
+      Size = 15
+    end
+    object cdsTriCCustoCONTATO_CCUSTO: TStringField
+      FieldName = 'CONTATO_CCUSTO'
+      Size = 60
+    end
+    object cdsTriCCustoCNPJ_CCUSTO: TStringField
+      FieldName = 'CNPJ_CCUSTO'
+      Size = 18
+    end
+    object cdsTriCCustoEMAIL_CCUSTO: TStringField
+      FieldName = 'EMAIL_CCUSTO'
+      Size = 150
+    end
+    object cdsTriCCustoDDD_CCUSTO: TIntegerField
+      FieldName = 'DDD_CCUSTO'
+    end
+    object cdsTriCCustoFONE_CCUSTO: TStringField
+      FieldName = 'FONE_CCUSTO'
+      Size = 10
+    end
+    object cdsTriCCustoINSC_TRI: TStringField
+      FieldName = 'INSC_TRI'
+      Size = 18
+    end
+    object cdsTriCCustoEND_TRI_COB: TStringField
+      FieldName = 'END_TRI_COB'
+      Size = 60
+    end
+    object cdsTriCCustoBAIRRO_TRI_COB: TStringField
+      FieldName = 'BAIRRO_TRI_COB'
+      Size = 30
+    end
+    object cdsTriCCustoCID_TRI_COB: TStringField
+      FieldName = 'CID_TRI_COB'
+      Size = 40
+    end
+    object cdsTriCCustoCEP_TRI_COB: TStringField
+      FieldName = 'CEP_TRI_COB'
+      Size = 10
+    end
+    object cdsTriCCustoNUM_END_COB: TStringField
+      FieldName = 'NUM_END_COB'
+    end
+    object cdsTriCCustoCOMPL_TRI_COB: TStringField
+      FieldName = 'COMPL_TRI_COB'
+      Size = 60
+    end
+    object cdsTriCCustoUF_TRI_COB: TStringField
+      FieldName = 'UF_TRI_COB'
+      FixedChar = True
+      Size = 2
+    end
+    object cdsTriCCustoCONTATO_COMPRAS: TStringField
+      FieldName = 'CONTATO_COMPRAS'
+      Size = 60
+    end
+    object cdsTriCCustoEMAIL_COMRAS: TStringField
+      FieldName = 'EMAIL_COMRAS'
+      Size = 150
+    end
+  end
+  object dsTriCCusto: TDataSource
+    DataSet = cdsTriCCusto
+    Left = 1272
+    Top = 560
+  end
+  object frxTriCCusto: TfrxDBDataset
+    UserName = 'frxTriCCusto'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'NUM_PEDIDO=NUM_PEDIDO'
+      'PEDIDO_CLIENTE=PEDIDO_CLIENTE'
+      'ID_CLIENTE_TRIANGULAR=ID_CLIENTE_TRIANGULAR'
+      'NOME_TRIANGULAR=NOME_TRIANGULAR'
+      'END_TRI=END_TRI'
+      'COMPL_TRI=COMPL_TRI'
+      'BAIRRO_TRI=BAIRRO_TRI'
+      'CID_TRI=CID_TRI'
+      'CEP_TRI=CEP_TRI'
+      'UF_TRI=UF_TRI'
+      'NUM_END_TRI=NUM_END_TRI'
+      'NOME_CCUSTO=NOME_CCUSTO'
+      'END_CCUSTO=END_CCUSTO'
+      'COMPL_CCUSTO=COMPL_CCUSTO'
+      'BAIRRO_CCUSTO=BAIRRO_CCUSTO'
+      'ID_CIDADE_CCUSTO=ID_CIDADE_CCUSTO'
+      'CEP_CCUSTO=CEP_CCUSTO'
+      'UF_CCUSTO=UF_CCUSTO'
+      'NUM_END_CCUSTO=NUM_END_CCUSTO'
+      'CID_CCUSTO=CID_CCUSTO'
+      'NUM_CONTRATO=NUM_CONTRATO'
+      'CONTATO_TRI=CONTATO_TRI'
+      'CNPJ_TRI=CNPJ_TRI'
+      'EMAL_TRI=EMAL_TRI'
+      'DDD_TRI=DDD_TRI'
+      'FONE_TRI=FONE_TRI'
+      'CONTATO_CCUSTO=CONTATO_CCUSTO'
+      'CNPJ_CCUSTO=CNPJ_CCUSTO'
+      'EMAIL_CCUSTO=EMAIL_CCUSTO'
+      'DDD_CCUSTO=DDD_CCUSTO'
+      'FONE_CCUSTO=FONE_CCUSTO'
+      'INSC_TRI=INSC_TRI'
+      'END_TRI_COB=END_TRI_COB'
+      'BAIRRO_TRI_COB=BAIRRO_TRI_COB'
+      'CID_TRI_COB=CID_TRI_COB'
+      'CEP_TRI_COB=CEP_TRI_COB'
+      'NUM_END_COB=NUM_END_COB'
+      'COMPL_TRI_COB=COMPL_TRI_COB'
+      'UF_TRI_COB=UF_TRI_COB'
+      'EMAIL_COMRAS=EMAIL_COMRAS'
+      'CONTATO_COMPRAS=CONTATO_COMPRAS')
+    DataSource = dsTriCCusto
+    BCDToCurrency = False
+    Left = 1288
+    Top = 564
   end
 end
