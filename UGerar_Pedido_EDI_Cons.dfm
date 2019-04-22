@@ -397,10 +397,10 @@ object frmGerar_Pedido_EDI_Cons: TfrmGerar_Pedido_EDI_Cons
           Caption = 'Combina'#231#227'o:'
         end
         object btnConfirmar: TNxButton
-          Left = 430
-          Top = 19
+          Left = 604
+          Top = 45
           Width = 171
-          Height = 32
+          Height = 29
           Caption = 'Relacionar Produto'
           Color = 16752448
           Font.Charset = DEFAULT_CHARSET

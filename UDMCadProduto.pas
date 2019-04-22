@@ -2387,6 +2387,8 @@ begin
   cdsProduto_Consumo_Tam.Open;
   cdsProduto_Consumo_Proc.Open;
   cdsProduto_Forn.Open;
+  cdsProduto_Forn.Last;
+  cdsProduto_Forn.First;
   cdsProduto_Tam.Open;
   cdsProduto_Consumo.Last;
   cdsProduto_Consumo.First;
