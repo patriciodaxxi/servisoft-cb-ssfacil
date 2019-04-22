@@ -23,7 +23,7 @@ object frmCadProvedor: TfrmCadProvedor
     Left = 0
     Top = 0
     Width = 965
-    Height = 609
+    Height = 608
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -41,7 +41,7 @@ object frmCadProvedor: TfrmCadProvedor
         Left = 0
         Top = 69
         Width = 961
-        Height = 500
+        Height = 499
         Align = alClient
         Ctl3D = False
         DataSource = DMCadProvedor.dsProvedor
@@ -341,7 +341,7 @@ object frmCadProvedor: TfrmCadProvedor
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 569
+        Top = 568
         Width = 961
         Height = 17
         Align = alBottom
@@ -685,7 +685,7 @@ object frmCadProvedor: TfrmCadProvedor
         Left = 0
         Top = 35
         Width = 961
-        Height = 551
+        Height = 550
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -952,6 +952,18 @@ object frmCadProvedor: TfrmCadProvedor
           Values.Strings = (
             'S'
             'N')
+        end
+        object dbchkPermiteCancelamento: TDBCheckBox
+          Left = 233
+          Top = 392
+          Width = 148
+          Height = 17
+          Caption = 'Permite Cancelamento'
+          DataField = 'PERMITE_CANCELAMENTO'
+          DataSource = DMCadProvedor.dsProvedor
+          TabOrder = 9
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
         end
       end
     end

@@ -1439,6 +1439,12 @@ type
     cdsNotaServico_ItensVLR_COFINS_CALC: TFloatField;
     qParametros_SerUSA_CALC_PISCOFINS: TStringField;
     cdsNotaServico_ImpCOD_SERVICO_EQUIV: TStringField;
+    cdsFilialENVIO_NFSE: TStringField;
+    cdsNotaServico_ImpCODUF_FIL: TStringField;
+    cdsNotaServico_ImpCODUF_CLI: TStringField;
+    cdsNotaServico_ConsultaENVIO_NFSE: TStringField;
+    cdsNotaServico_ConsultaCIDADE: TStringField;
+    cdsCidadePERMITE_CANCELAMENTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaServicoNewRecord(DataSet: TDataSet);
     procedure cdsNotaServicoBeforePost(DataSet: TDataSet);

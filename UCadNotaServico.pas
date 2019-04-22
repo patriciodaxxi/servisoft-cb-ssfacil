@@ -7,7 +7,7 @@ uses
   DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus,
   RXDBCtrl, RzEdit, RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, NxEdit,StrUtils, DateUtils,
   UCadNotaServico_Itens, UCadNotaServico_Canc, ComCtrls, ValorPor, RzDBDTP, RzDTP, UConsFat_Mensal, RzRadChk, UDMMovimento,
-  UCadNotaServico_Obs, uXMLClientDataSet_NFSe_CampoBom, uXMLClientDataSet_NFSe_PortoAlegre, RzDBChk, USel_OS_Servico, Variants;
+  UCadNotaServico_Obs, uXMLClientDataSet_NFSe_CampoBom, uXMLClientDataSet_NFSe_PortoAlegre, RzDBChk, USel_OS_Servico, Variants, udmNFSe;
 
 type
   TfrmCadNotaServico = class(TForm)
@@ -374,6 +374,7 @@ type
     ffrmCadNotaServico_Itens: TfrmCadNotaServico_Itens;
     ffrmCadNotaServico_Canc: TfrmCadNotaServico_Canc;
     fDMCadNotaServico: TDMCadNotaServico;
+    fDMNFSe: TDMNFSe;
     fDMMovimento: TDMMovimento;
     ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmConsFat_Mensal: TfrmConsFat_Mensal;
@@ -1989,6 +1990,7 @@ var
   vFlag: Boolean;
   vTexto: String;
   dtUltimo_Acesso: TDateTime;
+  vEnvioACBR : Boolean;
 begin
   if not(fDMCadNotaServico.cdsNotaServico_Consulta.Active) and (fDMCadNotaServico.cdsNotaServico_ConsultaID.AsInteger <= 0) then
     exit;
@@ -2007,6 +2009,14 @@ begin
   begin
     MessageDlg('*** Filial sem inscrição municipal!', mtError, [mbOk], 0);
     exit;
+  end;
+
+  if fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A' then
+  begin
+    vEnvioACBR := (fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A');
+    fDMNFSe    := TdmNFSe.Create(Self);
+    fDMNFSe.fDMCadNotaServico := fDMCadNotaServico;
+    fDMNFSe.ConfigurarComponente;
   end;
 
   //31/05/2017
@@ -2046,31 +2056,42 @@ begin
           end;
           if trim(fDMCadNotaServico.cdsNotaServico_ConsultaPROTOCOLO.AsString) <> '' then
             vProtocolo_Ret := fDMCadNotaServico.cdsNotaServico_ConsultaPROTOCOLO.AsString;
-          //aqui 19/11/2014 Campo Bom
-          if fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'CAMPO BOM' then
+
+          //25/03/2019
+          if fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A' then
           begin
-            if not vFlag then
-            begin
-              vFlag := True;
-              uXMLNFSe_CampoBom.prc_Inicio(fDMCadNotaServico);
-            end;
-            uXMLNFSe_CampoBom.prc_Gravar_XML(fDMCadNotaServico);
-          end
-          //aqui 11/03/2015 Porto Alegre
-          else
-          if fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'PORTO ALEGRE' then
-          begin
-            if not vFlag then
-            begin
-              vFlag := True;
-              uXMLNFSe_PortoAlegre.prc_Inicio_Envio(fDMCadNotaServico);
-            end;
-            uXMLNFSe_PortoAlegre.prc_Gravar_XML(fDMCadNotaServico);
+//            fDMNFSe.fDMCadNotaServico := fDMCadNotaServico;
+            fDMNFSe.prc_Abrir_NotaServico_Comunicacao(fDMCadNotaServico.cdsNotaServicoID.AsInteger);
+            fdmNFSe.Enviar_Nfse;
           end
           else
-          if trim(cNota) <> '' then
-            cNota := cNota + #13;
-          cNota := cNota + GerarNFSeTXT(0);
+          begin
+            //aqui 19/11/2014 Campo Bom
+            if fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'CAMPO BOM' then
+            begin
+              if not vFlag then
+              begin
+                vFlag := True;
+                uXMLNFSe_CampoBom.prc_Inicio(fDMCadNotaServico);
+              end;
+              uXMLNFSe_CampoBom.prc_Gravar_XML(fDMCadNotaServico);
+            end
+            //aqui 11/03/2015 Porto Alegre
+            else
+            if fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'PORTO ALEGRE' then
+            begin
+              if not vFlag then
+              begin
+                vFlag := True;
+                uXMLNFSe_PortoAlegre.prc_Inicio_Envio(fDMCadNotaServico);
+              end;
+              uXMLNFSe_PortoAlegre.prc_Gravar_XML(fDMCadNotaServico);
+            end
+            else
+            if trim(cNota) <> '' then
+              cNota := cNota + #13;
+            cNota := cNota + GerarNFSeTXT(0);
+          end;
         end;
       end;
       fDMCadNotaServico.cdsNotaServico_Consulta.Next;
@@ -2089,102 +2110,110 @@ begin
 
     if vNumLoteAnt = -99 then
       raise Exception.Create('*** Foram selecionados lotes diferentes para a mesma remessa, selecione novamente e faça o envio!');
-    if trim(vProtocolo_Ret) <> '' then
+    if Trim(fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString) <> 'A' then
     begin
-      vProcesso_OK := False;
-      i := 0;
-      while i < 5 do
+      if trim(vProtocolo_Ret) <> '' then
       begin
-        btnConsultar_NFSeClick(Sender);
-        if vProcesso_OK then
-          i := 10;
-        i := i + 1;
-      end;
-      if vProcesso_OK then
-        raise Exception.Create('*** Processo de envio e retorno concluído!')
-      else
-        raise Exception.Create('*** Nota já contém um protocolo, mas não está validada ' +#13 +
-                                    'Aguarde e tente efetuar consulta mais tarde.' + #13 +
-                                    'Para fazer o reenvio é necessário apagar o protocolo!');
-    end;
-    if trim(cNota) = '' then
-      MessageDlg('*** Nenhuma nota foi selecionada para o envio!', mtError, [mbOk], 0)
-    else
-    begin
-      if (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM') and (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString <> 'PORTO ALEGRE') then
-      begin
-        cTXT := TStringStream.Create(cNota);
-        try
-          cTXT.Position := 0;
-          cTXTStream.CopyFrom(cTXT, cTXT.Size);
-        finally
-          FreeAndNil(cTXT);
-        end;
-      end;
-
-      if (vFilial_Sel > 0) and (fDMCadNotaServico.cdsFilialID.AsInteger <> vFilial_Sel) then
-        fDMCadNotaServico.cdsFilial.Locate('ID',vFilial_Sel,[loCaseInsensitive]);
-
-      cTXTStream.Position := 0;
-      if fDMCadNotaServico.cdsFilialPESSOA.AsString = 'F' then
-        vCnpjAux := Monta_Texto(fDMCadNotaServico.cdsFilialCNPJ_CPF.AsString,11)
-      else
-        vCnpjAux := Monta_Texto(fDMCadNotaServico.cdsFilialCNPJ_CPF.AsString,14);
-
-      vRetorno           := '';
-      vProtocolo_Ret     := '';
-      vLote_Ret          := '';
-      vDtRecebimento_Ret := '';
-      //porto
-      if (vNumLote_NFSe <= 0) and (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM') then
-        vNumLote_NFSe := fDMCadNotaServico.fnc_Buscar_NumLote(fDMCadNotaServico.cdsFilialID.AsInteger);
-      if fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'CAMPO BOM' then
-        vNumLote_NFSe := 0;
-
-      if CheckBox1.Checked then
-        cTXTStream.SaveToFile('C:\a\teste1.xml');
-
-      try
-        vProcesso := 0;
-        if CheckBox1.Checked then
-          cTXTStream.SaveToFile('c:\a\teste222.xml');
-        vRetorno  := NFSe_EnviarLote(fnc_LocalServidorNFe,
-                                     vCnpjAux,
-                                     IntToStr(vNumLote_NFSe),
-                                     cTXTStream,
-                                     cXMLStream );
-        cXMLStream.Position := 0;
-        prc_Montar_Protocolo;
-        vProcesso := 1;
-        if (vProtocolo_Ret <> '') or (vLote_Ret <> '') then
+        vProcesso_OK := False;
+        i := 0;
+        while i < 5 do
         begin
-
-          prc_Gravar_Notas;
-          //aqui eu ia colocar sleep
-
           btnConsultar_NFSeClick(Sender);
+          if vProcesso_OK then
+            i := 10;
+         i := i + 1;
+        end;
+        if vProcesso_OK then
+          raise Exception.Create('*** Processo de envio e retorno concluído!')
+        else
+          raise Exception.Create('*** Nota já contém um protocolo, mas não está validada ' +#13 +
+                                      'Aguarde e tente efetuar consulta mais tarde.' + #13 +
+                                      'Para fazer o reenvio é necessário apagar o protocolo!');
+      end;  
+      if trim(cNota) = '' then
+        MessageDlg('*** Nenhuma nota foi selecionada para o envio!', mtError, [mbOk], 0)
+      else
+      begin
+        if (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM') and (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString <> 'PORTO ALEGRE') then
+        begin
+          cTXT := TStringStream.Create(cNota);
+          try
+            cTXT.Position := 0;
+            cTXTStream.CopyFrom(cTXT, cTXT.Size);
+          finally
+            FreeAndNil(cTXT);
+          end;
         end;
 
-      except
-        on E: exception do
-        begin
-          raise Exception.Create('Erro no envio: ' + E.Message);
+        if (vFilial_Sel > 0) and (fDMCadNotaServico.cdsFilialID.AsInteger <> vFilial_Sel) then
+          fDMCadNotaServico.cdsFilial.Locate('ID',vFilial_Sel,[loCaseInsensitive]);
+
+        cTXTStream.Position := 0;
+        if fDMCadNotaServico.cdsFilialPESSOA.AsString = 'F' then
+          vCnpjAux := Monta_Texto(fDMCadNotaServico.cdsFilialCNPJ_CPF.AsString,11)
+        else
+          vCnpjAux := Monta_Texto(fDMCadNotaServico.cdsFilialCNPJ_CPF.AsString,14);
+
+        vRetorno           := '';
+        vProtocolo_Ret     := '';
+        vLote_Ret          := '';
+        vDtRecebimento_Ret := '';
+        //porto
+        if (vNumLote_NFSe <= 0) and (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM') then
+          vNumLote_NFSe := fDMCadNotaServico.fnc_Buscar_NumLote(fDMCadNotaServico.cdsFilialID.AsInteger);
+        if fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'CAMPO BOM' then
+          vNumLote_NFSe := 0;
+
+        if CheckBox1.Checked then
+          cTXTStream.SaveToFile('C:\a\teste1.xml');
+
+        try
+          vProcesso := 0;
+          if CheckBox1.Checked then
+            cTXTStream.SaveToFile('c:\a\teste222.xml');
+          vRetorno  := NFSe_EnviarLote(fnc_LocalServidorNFe,
+                                       vCnpjAux,
+                                       IntToStr(vNumLote_NFSe),
+                                       cTXTStream,
+                                       cXMLStream );
+          cXMLStream.Position := 0;
+          prc_Montar_Protocolo;
+          vProcesso := 1;
+          if (vProtocolo_Ret <> '') or (vLote_Ret <> '') then
+          begin
+
+            prc_Gravar_Notas;
+            //aqui eu ia colocar sleep
+
+            btnConsultar_NFSeClick(Sender);
+          end;
+
+        except
+          on E: exception do
+          begin
+            raise Exception.Create('Erro no envio: ' + E.Message);
+          end;
         end;
       end;
     end;
 
     //mmoNFSeRetorno.Lines.LoadFromStream(cXMLStream);
   finally
-    if vProcesso < 1 then
+    if Trim(fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString) <> 'A' then
     begin
-      prc_Montar_Protocolo;
-      if (vProtocolo_Ret <> '') or (vLote_Ret <> '') then
-        prc_Gravar_Notas;
+      if vProcesso < 1 then
+      begin
+        prc_Montar_Protocolo;
+        if (vProtocolo_Ret <> '') or (vLote_Ret <> '') then
+          prc_Gravar_Notas;
+      end;
     end;
 
     FreeAndNil(cXMLStream);
     FreeAndNil(cTXTStream);
     FreeAndNil(cTXT);
+    if vEnvioACBR then
+      FreeAndNil(fDMNFSe);
   end;
 end;
 
@@ -2464,6 +2493,13 @@ begin
 
   if fDMCadNotaServico.cdsFilialID.AsInteger <> vFilial_Sel then
     fDMCadNotaServico.cdsFilial.Locate('ID',vFilial_Sel,[loCaseInsensitive]);
+
+  if Trim(fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString) = 'A' then
+  begin
+    MessageDlg('*** Opção não liberada para a Cidade ' + fDMCadNotaServico.cdsFilialCIDADE.AsString  +#13+
+               '    Opção não usada para ACBR!',  mtInformation, [mbOk], 0);
+    exit;
+  end;
 
   if vFlag then
   begin
@@ -2882,6 +2918,13 @@ begin
     MessageDlg('*** Nota não foi enviada!', mtError, [mbOk], 0);
     exit;
   end;
+  fDMCadNotaServico.prc_Abrir_Natureza;
+  if (Trim(fDMCadNotaServico.cdsNotaServico_ConsultaENVIO_NFSE.AsString) = 'A') and (fDMCadNotaServico.cdsCidadePERMITE_CANCELAMENTO.AsString <> 'S') then
+  begin
+    MessageDlg('*** Opção não liberada para a Cidade ' + fDMCadNotaServico.cdsNotaServico_ConsultaCIDADE.AsString  +#13+
+               '    Opção não usada para ACBR!',  mtInformation, [mbOk], 0);
+    exit;
+  end;
 
   prc_Posiciona_NotaFiscal;
 
@@ -2919,6 +2962,23 @@ begin
   ffrmCadNotaServico_Canc.ShowModal;
   FreeAndNil(ffrmCadNotaServico_Canc);
 
+  //Cancelamento pelo acbr
+  if fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A' then
+  begin
+    fDMCadNotaServico.cdsNotaServico_Imp.Close;
+    fDMCadNotaServico.sdsNotaServico_Imp.CommandText := fDMCadNotaServico.ctNotaServico_Imp + ' WHERE NS.ID = ' +
+                                                        IntToStr(fDMCadNotaServico.cdsNotaServico_ConsultaID.AsInteger);
+    fDMCadNotaServico.cdsNotaServico_Imp.Open;
+    fDMNFSe    := TdmNFSe.Create(Self);
+    try
+      fDMNFSe.fDMCadNotaServico := fDMCadNotaServico;
+      fdmNFSe.Cancelar_Nfse;
+    finally
+      FreeAndNil(fDMNFSe);
+    end;
+    btnConsultarClick(Sender);
+    Abort;
+  end;
   if (fDMCadNotaServico.vCod_Cancelamento <= 0) or (trim(fDMCadNotaServico.vMotivoCancelamento) = '') then
   begin
     MessageDlg('*** Código ou Motivo do cancelamento não informado!', mtError, [mbOk], 0);
@@ -3249,6 +3309,24 @@ begin
   fDMCadNotaServico.sdsNotaServico_Imp_Contrato.ParamByName('ID').AsInteger := fDMCadNotaServico.cdsNotaServico_ConsultaID.AsInteger;
   fDMCadNotaServico.cdsNotaServico_Imp_Contrato.Open;
 
+  if fDMCadNotaServico.cdsFilialID.AsInteger <> fDMCadNotaServico.cdsNotaServico_ImpFILIAL.AsInteger then
+    fDMCadNotaServico.cdsFilial.Locate('ID',fDMCadNotaServico.cdsNotaServico_ImpFILIAL.AsInteger,[loCaseInsensitive]);
+
+  //Impressão pelo acbr
+  if fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A' then
+  begin
+    fDMNFSe    := TdmNFSe.Create(Self);
+    try
+      fDMNFSe.fDMCadNotaServico := fDMCadNotaServico;
+      fDMNFSe.ConfigurarComponente;
+      fDMNFSe.prc_Abrir_NotaServico_Comunicacao(fDMCadNotaServico.cdsNotaServico_ImpID.AsInteger);
+      fdmNFSe.Enviar_Nfse;
+    finally
+      FreeAndNil(fDMNFSe);
+    end;
+    Abort;
+  end;
+
 ///////////////////////RELATÓRIO FORTES
   if (fDMCadNotaServico.cdsFilialIMPRESSAO_MATRICIAL.IsNull) or
      (fDMCadNotaServico.cdsFilialIMPRESSAO_MATRICIAL.AsString = '0') then
@@ -3389,6 +3467,9 @@ procedure TfrmCadNotaServico.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if (Key = Vk_F9) and (fDMCadNotaServico.cdsParametrosIMPRESSAO_MATRICIAL.AsString <> 'S') then
   begin
+    if Trim(fDMCadNotaServico.cdsNotaServico_ConsultaENVIO_NFSE.AsString) = 'A' then
+      exit;
+
     gbxLote_Protocolo.Visible := not(gbxLote_Protocolo.Visible);
     if (gbxLote_Protocolo.Visible) and (fDMCadNotaServico.cdsNotaServico_Consulta.Active) and
        (fDMCadNotaServico.cdsNotaServico_ConsultaNUMLOTE.AsInteger > 0) then
@@ -4246,6 +4327,13 @@ var
 begin
   if not(fDMCadNotaServico.cdsNotaServico_Consulta.Active) or (fDMCadNotaServico.cdsNotaServico_Consulta.IsEmpty) then
     exit;
+  if Trim(fDMCadNotaServico.cdsNotaServico_ConsultaENVIO_NFSE.AsString) = 'A' then
+  begin
+    MessageDlg('*** Opção não liberada para a Cidade ' + fDMCadNotaServico.cdsNotaServico_ConsultaCIDADE.AsString  +#13+
+               '    Opção não usada para ACBR!',  mtInformation, [mbOk], 0);
+    exit;
+  end;
+
   if (fDMCadNotaServico.cdsNotaServico_ConsultaNUMRPS.AsInteger <= 0) and (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM')
     and (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString <> 'PORTO ALEGRE') then
   begin

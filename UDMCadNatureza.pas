@@ -111,7 +111,7 @@ begin
   sdsNatureza.CommandText := ctCommand;
   if ID <> 0 then
     sdsNatureza.CommandText := sdsNatureza.CommandText +
-                            ' WHERE ID = ' + IntToStr(ID);
+                            ' WHERE NAT.ID = ' + IntToStr(ID);
   cdsNatureza.Open;
 end;
 
