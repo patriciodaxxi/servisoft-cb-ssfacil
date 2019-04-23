@@ -818,7 +818,7 @@ begin
   fDmCupomFiscal.cdsCupomFiscalVLR_ICMS_EFET.AsFloat      := 0;
 
   fDMCupomFiscal.cdsCupomFiscalVLR_PIS.AsFloat      := 0;
-  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsFloat := 0;
+//  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsFloat := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat    := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO.AsFloat  := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_ESTADUAL.AsFloat  := 0;
@@ -877,6 +877,7 @@ begin
     CurrencyEdit1.Value := (fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency *
                            100 / fDmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency);
     prc_Calcular_Geral(fDmCupomFiscal);
+    fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency;
   end
   else
     CurrencyEdit1.Value := 0;
@@ -1401,17 +1402,10 @@ end;
 
 procedure TfCupomFiscalPgto.Panel7Enter(Sender: TObject);
 begin
-  if fDmCupomFiscal.cdsParametrosUSA_NFCE.AsString = 'S' then
-    if StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat)) <>
-       StrToFloat(FormatFloat('0.00',vVlrDesconto_Ant)) then
-      prc_Calcular_Geral(fDmCupomFiscal);
-
-  if fDmCupomFiscal.cdsCupomFiscal.State in [dsBrowse] then
-    fDmCupomFiscal.cdsCupomFiscal.Edit;
-
-//  fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency -
-//                                                       fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency;
-  DBEdit1.Text := DBEdit7.Text;
+//  if fDmCupomFiscal.cdsParametrosUSA_NFCE.AsString = 'S' then
+//    if StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat)) <>
+//       StrToFloat(FormatFloat('0.00',vVlrDesconto_Ant)) then
+//      prc_Calcular_Geral(fDmCupomFiscal);
 end;
 
 procedure TfCupomFiscalPgto.Panel4Exit(Sender: TObject);
