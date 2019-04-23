@@ -821,6 +821,13 @@ object frmCadCidade: TfrmCadCidade
           Height = 13
           Caption = 'Logo Prefeitura:'
         end
+        object Label11: TLabel
+          Left = 21
+          Top = 310
+          Width = 99
+          Height = 13
+          Caption = 'Tipo de Envio NFSe:'
+        end
         object DBEdit7: TDBEdit
           Left = 96
           Top = 33
@@ -931,6 +938,26 @@ object frmCadCidade: TfrmCadCidade
           TabOrder = 9
           ValueChecked = 'P'
           ValueUnchecked = 'N'
+        end
+        object RxDBComboBox1: TRxDBComboBox
+          Left = 126
+          Top = 302
+          Width = 231
+          Height = 21
+          Style = csDropDownList
+          DataField = 'ENVIO_NFSE'
+          DataSource = DMCadCidade.dsCidade
+          EnableValues = True
+          ItemHeight = 13
+          Items.Strings = (
+            'ACBR'
+            'Flexdocs'
+            'Servisoft')
+          TabOrder = 10
+          Values.Strings = (
+            'A'
+            'F'
+            'S')
         end
       end
     end

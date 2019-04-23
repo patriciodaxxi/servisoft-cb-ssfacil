@@ -2168,6 +2168,7 @@ begin
       cdsProduto_GradeNum.First;
       while not cdsProduto_GradeNum.Eof do
         cdsProduto_GradeNum.Delete;
+      cdsProduto_GradeNum.ApplyUpdates(0);
     end;
     if cdsProduto_Comb.Active then
     begin
@@ -2178,6 +2179,7 @@ begin
         while not cdsProduto_Comb_Mat.Eof do
           cdsProduto_Comb_Mat.Delete;
         cdsProduto_Comb.Delete;
+        cdsProduto_Comb.ApplyUpdates(0);
       end;
     end;
     if cdsProduto_Cor.Active then
@@ -2185,6 +2187,7 @@ begin
       cdsProduto_Cor.First;
       while not cdsProduto_Cor.Eof do
         cdsProduto_Cor.Delete;
+      cdsProduto_Cor.ApplyUpdates(0);
     end;
     if cdsProduto_Carimbo.Active then
     begin
@@ -2205,12 +2208,14 @@ begin
       cdsProduto_Emb.First;
       while not cdsProduto_Emb.Eof do
         cdsProduto_Emb.Delete;
+      cdsProduto_Emb.ApplyUpdates(0);
     end;
     if cdsProduto_Atelier.Active then
     begin
       cdsProduto_Atelier.First;
       while not cdsProduto_Atelier.Eof do
         cdsProduto_Atelier.Delete;
+      cdsProduto_Atelier.ApplyUpdates(0);
     end;
     if cdsProduto_Maq.Active then
     begin
@@ -2224,6 +2229,7 @@ begin
       cdsProduto_MatTam.First;
       while not cdsProduto_MatTam.Eof do
         cdsProduto_MatTam.Delete;
+      cdsProduto_MatTam.ApplyUpdates(0);
     end;
     if (qParametrosEMPRESA_LIVRARIA.AsString = 'S') then
     begin
@@ -2231,6 +2237,7 @@ begin
         prc_Abrir_Produto_Livro(cdsProdutoID.AsInteger);
       if not cdsProduto_Livro.IsEmpty then
         cdsProduto_Livro.Delete;
+      cdsProduto_Livro.ApplyUpdates(0);
     end;
     //26/10/2017  Para a Renovar
     if qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
