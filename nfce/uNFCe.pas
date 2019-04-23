@@ -672,6 +672,7 @@ procedure TfNFCe.Grava_mAuxDadosNFe(Tipo, Codigo: String ; ID_Variacao: Integer 
 begin
   if Codigo <> '' then
   begin
+
     fDMNFCe.mAuxDadosNFe.Insert;
     fDMNFCe.mAuxDadosNFeTipo.AsString         := Tipo;
     fDMNFCe.mAuxDadosNFeCodigo.AsString       := Codigo;
@@ -1028,7 +1029,10 @@ begin
           //******
           //03/03/2018
           if fDMCupomFiscal.cdsTab_NCMID_OBS_LEI.AsInteger > 0 then
-            Grava_mAuxDadosNFe('LEI',fDMCupomFiscal.cdsTab_NCMID_OBS_LEI.AsString);
+          begin
+            if not fDMNFce.mAuxDadosNFe.Locate('Tipo;Codigo',VarArrayOf(['LEI',fDMCupomFiscal.cdsTab_NCMID_OBS_LEI.AsString]),[locaseinsensitive]) then
+              Grava_mAuxDadosNFe('LEI',fDMCupomFiscal.cdsTab_NCMID_OBS_LEI.AsString);
+          end;
           //**************
         end;
         fDMNFCe.mItensNFeNCM_EX.AsString := fDMCupomFiscal.cdsProdutoNCM_EX.AsString;
