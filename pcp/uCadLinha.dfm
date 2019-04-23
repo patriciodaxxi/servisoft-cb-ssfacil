@@ -23,7 +23,7 @@ object frmCadLinha: TfrmCadLinha
     Top = 0
     Width = 869
     Height = 563
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -34,7 +34,7 @@ object frmCadLinha: TfrmCadLinha
     Font.Style = [fsBold]
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -249,7 +249,6 @@ object frmCadLinha: TfrmCadLinha
             FieldName = 'UNIDADE'
             Title.Alignment = taCenter
             Title.Caption = 'Unidade'
-            Width = 64
             Visible = True
           end
           item
