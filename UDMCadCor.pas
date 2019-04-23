@@ -33,7 +33,7 @@ type
 
     procedure prc_Localizar(ID: Integer); //-1 = Inclusão
     procedure prc_Inserir;
-    procedure prc_Gravar;
+    procedure prc_Gravar(vAtualizaNome: Boolean; vNome: String);
     procedure prc_Excluir;
   end;
 
@@ -68,7 +68,9 @@ begin
   cdsCor.ApplyUpdates(0);
 end;
 
-procedure TDMCadCor.prc_Gravar;
+procedure TDMCadCor.prc_Gravar(vAtualizaNome: Boolean; vNome: String);
+var
+  sds: TSQLDataSet;
 begin
   vMsgCor := '';
   if trim(cdsCorNOME.AsString) = '' then
@@ -78,6 +80,28 @@ begin
 
   cdsCor.Post;
   cdsCor.ApplyUpdates(0);
+
+  if vAtualizaNome then
+  begin
+    sds := TSQLDataSet.Create(nil);
+    try
+      sds.SQLConnection := dmDatabase.scoDados;
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+      sds.CommandText := 'UPDATE PRODUTO_COMB ' +
+                         'SET NOME = ' + QuotedStr(vNome) +
+                         ' WHERE ID_COR_COMBINACAO = ' +
+                         ' (SELECT ID' +
+                         ' FROM COMBINACAO' +
+                         ' WHERE ID_COR = ' + cdsCorID.AsString + ')';
+      sds.ExecSQL(True);
+    except
+      on e: Exception do
+        begin
+          raise Exception.Create(e.Message);
+        end;
+    end; 
+ end;
 end;
 
 procedure TDMCadCor.prc_Localizar(ID: Integer);

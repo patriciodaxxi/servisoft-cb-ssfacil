@@ -50,9 +50,10 @@ type
   private
     { Private declarations }
     fDMCadCor: TDMCadCor;
+    vAtualizaNome: Boolean;
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
-    procedure prc_Gravar_Registro;
+    procedure prc_Gravar_Registro(vAtualizaNome: Boolean);
     procedure prc_Consultar;
     procedure prc_Limpar_Edit_Consulta;
 
@@ -97,7 +98,7 @@ end;
 
 procedure TfrmCadCor.prc_Gravar_Registro;
 begin
-  fDMCadCor.prc_Gravar;
+  fDMCadCor.prc_Gravar(vAtualizaNome,DBEdit2.Text);
   if fDMCadCor.cdsCor.State in [dsEdit,dsInsert] then
   begin
     MessageDlg(fDMCadCor.vMsgCor, mtError, [mbOk], 0);
@@ -178,6 +179,7 @@ begin
 
   DBEdit2.ReadOnly := True;
   fDMCadCor.cdsCor.Edit;
+  vAtualizaNome := False;
 
   TS_Consulta.TabEnabled := False;
   btnAlterar.Enabled     := False;
@@ -187,7 +189,7 @@ end;
 
 procedure TfrmCadCor.btnConfirmarClick(Sender: TObject);
 begin
-  prc_Gravar_Registro;
+  prc_Gravar_Registro(vAtualizaNome);
 end;
 
 procedure TfrmCadCor.FormDestroy(Sender: TObject);
@@ -236,13 +238,19 @@ begin
     sds.SQLConnection := dmDatabase.scoDados;
     sds.NoMetadata    := True;
     sds.GetMetadata   := False;
-    sds.CommandText := 'SELECT COUNT(1) CONTADOR  FROM PRODUTO_COMB P '
-                     + ' WHERE P.ID_COR_COMBINACAO = (SELECT C.ID FROM COMBINACAO C WHERE C.ID_COR = ' + IntToStr(fDMCadCor.cdsCorID.AsInteger) + ')';
+    sds.CommandText := 'SELECT COUNT(1) CONTADOR  FROM PRODUTO_COMB P ' +
+                       'WHERE P.ID_COR_COMBINACAO = (SELECT C.ID FROM COMBINACAO C WHERE C.ID_COR = ' + IntToStr(fDMCadCor.cdsCorID.AsInteger) + ')';
     sds.Open;
     if (sds.FieldByName('CONTADOR').AsInteger > 0) then
     begin
-      MessageDlg('*** Essa cor já esta sendo usada nas cores dos produtos/materiais!', mtInformation, [mbOk], 0);
-      DBEdit2.ReadOnly := True;
+      if MessageDlg('*** Essa cor já está sendo usada em produtos/materiais!' + #13 +
+                    '    Deseja atualizar todos os produtos/materiais?',mtInformation,[mbYes,mbNo],0) = mrYes then
+      begin
+        vAtualizaNome    := True;
+        DBEdit2.ReadOnly := False;
+      end
+      else
+        DBEdit2.ReadOnly := True;
     end
     else
     begin
