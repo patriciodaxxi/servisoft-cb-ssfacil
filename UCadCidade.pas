@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadCidade,
-  DBGrids, ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCadUF, UCBase, RxLookup, Mask, NxCollection;
+  DBGrids, ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCadUF, UCBase, RxLookup, Mask, NxCollection,
+  RxDBComb;
 
 type
   TfrmCadCidade = class(TForm)
@@ -49,6 +50,8 @@ type
     btnCancelar: TNxButton;
     btnConfirmar: TNxButton;
     DBCheckBox1: TDBCheckBox;
+    RxDBComboBox1: TRxDBComboBox;
+    Label11: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

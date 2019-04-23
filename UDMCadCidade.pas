@@ -49,6 +49,8 @@ type
     cdsCidadeEND_LOGO_PREFEITURA: TStringField;
     sdsCidadeCANCELAMENTO_NFSE: TStringField;
     cdsCidadeCANCELAMENTO_NFSE: TStringField;
+    sdsCidadeENVIO_NFSE: TStringField;
+    cdsCidadeENVIO_NFSE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCidadeUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

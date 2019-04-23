@@ -1,8 +1,8 @@
 object DMCadCidade: TDMCadCidade
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 281
-  Top = 222
+  Left = 415
+  Top = 187
   Height = 328
   Width = 585
   object sdsCidade: TSQLDataSet
@@ -54,6 +54,11 @@ object DMCadCidade: TDMCadCidade
       FixedChar = True
       Size = 1
     end
+    object sdsCidadeENVIO_NFSE: TStringField
+      FieldName = 'ENVIO_NFSE'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
@@ -67,7 +72,7 @@ object DMCadCidade: TDMCadCidade
     Params = <>
     ProviderName = 'dspCidade'
     Left = 192
-    Top = 32
+    Top = 31
     object cdsCidadeID: TIntegerField
       Alignment = taCenter
       FieldName = 'ID'
@@ -110,6 +115,11 @@ object DMCadCidade: TDMCadCidade
     end
     object cdsCidadeCANCELAMENTO_NFSE: TStringField
       FieldName = 'CANCELAMENTO_NFSE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCidadeENVIO_NFSE: TStringField
+      FieldName = 'ENVIO_NFSE'
       FixedChar = True
       Size = 1
     end
