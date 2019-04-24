@@ -1,7 +1,7 @@
 object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
-  Left = 289
-  Top = 65
-  Width = 1009
+  Left = 96
+  Top = 57
+  Width = 1169
   Height = 533
   Caption = 'frmConsCtaOrcamento_Fin'
   Color = clBtnFace
@@ -18,7 +18,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 993
+    Width = 1153
     Height = 137
     Align = alTop
     Color = clSilver
@@ -349,7 +349,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   object StaticText1: TStaticText
     Left = 0
     Top = 477
-    Width = 993
+    Width = 1153
     Height = 17
     Align = alBottom
     Caption = 'Duplo Clique para detalhar'
@@ -364,11 +364,11 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 137
-    Width = 993
+    Width = 1153
     Height = 340
-    ActivePage = TS_Resumido
+    ActivePage = ts_Centro_Orcamento
     Align = alClient
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 2
     FixedDimension = 19
     object TS_Resumido: TRzTabSheet
@@ -376,7 +376,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 989
+        Width = 1149
         Height = 290
         Align = alClient
         Ctl3D = False
@@ -459,7 +459,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object Panel2: TPanel
         Left = 0
         Top = 290
-        Width = 989
+        Width = 1149
         Height = 27
         Align = alBottom
         TabOrder = 1
@@ -551,7 +551,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object SMDBGrid2: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 989
+        Width = 1149
         Height = 317
         Align = alClient
         DataSource = DMConsFinanceiro.dsmContas_Orc_CCusto
@@ -649,14 +649,14 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 989
+        Width = 1149
         Height = 317
         Align = alClient
         TabOrder = 0
         object SMDBGrid3: TSMDBGrid
           Left = 1
           Top = 1
-          Width = 987
+          Width = 1147
           Height = 315
           Align = alClient
           DataSource = DMConsFinanceiro.dsCCustoOrcamento
@@ -691,35 +691,40 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
             item
               Expanded = False
               FieldName = 'CODIGO_GRUPO'
-              Width = 91
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CODIGO_GRUPO_SUP'
-              Width = 103
+              Title.Alignment = taCenter
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'NOME_GRUPO'
-              Width = 272
+              Title.Alignment = taCenter
+              Width = 298
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CONTA_ORCAMENTO'
+              Title.Alignment = taCenter
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'NOME_ORCAMENTO'
+              Title.Alignment = taCenter
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'VLR_PARCELA'
-              Width = 79
+              FieldName = 'VLR_ENTRADA'
+              Title.Alignment = taCenter
+              Width = 77
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VLR_SAIDA'
+              Title.Alignment = taCenter
+              Width = 73
               Visible = True
             end>
         end
