@@ -5,9 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadDuplicata, DBGrids,
   ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, RXDBCtrl, RzChkLst, RzPanel,
-  UEscolhe_Filial, URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus,
+  UEscolhe_Filial, URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, 
   NxCollection, StrUtils, DateUtils, UCadDuplicata_Gerar, UDMCadCheque, UCadDuplicata_Alt, UCadDuplicata_EscTipo, RzLstBox,
-  UCadDuplicata_Total, ComObj, UCadDuplicata_LeItau, SqlExpr, ComCtrls;
+  UCadDuplicata_Total, UCadDuplicata_LeItau, SqlExpr, ComCtrls;
 
 type
   TEnumMostraNossoNumero = (tpTodos,tpSim, tpNao);
@@ -1517,7 +1517,7 @@ end;
 procedure TfrmCadDuplicata.prc_Imp_Detalhada(vLista: Boolean; Tipo_Lista: string); //S Simples D Detalhada
 begin
   if Tipo_Lista <> 'S' then
-    fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO;TIPO_ES;TIPO_MOV';
+    fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO;TIPO_ES;TIPO_MOV;NOME_PESSOA';
   fDMCadDuplicata.qTotalAtraso.Close;
   if NxDatePicker3.Date > 0 then
     prc_Montar_TotalAtraso;
@@ -1889,6 +1889,12 @@ end;
 
 procedure TfrmCadDuplicata.NxButton2Click(Sender: TObject);
 begin
+  if DMCadDuplicata.cdsDuplicataVLR_PARCELA.AsCurrency = 0 then
+  begin
+    ShowMessage('Informe o valor da parcela!');
+    DBEdit4.SetFocus;
+    Exit;
+  end;
   ffrmCadDuplicata_Gerar := TfrmCadDuplicata_Gerar.Create(self);
   ffrmCadDuplicata_Gerar.fDMCadDuplicata := fDMCadDuplicata;
   ffrmCadDuplicata_Gerar.ShowModal;
