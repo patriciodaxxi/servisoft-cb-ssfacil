@@ -178,6 +178,8 @@ type
     cdsSetorPrincipalNOME: TStringField;
     sdsProcessoCONTROLE_MAQUINA: TStringField;
     cdsProcessoCONTROLE_MAQUINA: TStringField;
+    sdsProcessoMATERIAL_KG: TStringField;
+    cdsProcessoMATERIAL_KG: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

@@ -24,7 +24,7 @@ object frmCadProcesso: TfrmCadProcesso
     Top = 0
     Width = 779
     Height = 511
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -32,7 +32,7 @@ object frmCadProcesso: TfrmCadProcesso
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -1089,13 +1089,25 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object DBCheckBox9: TDBCheckBox
           Left = 376
-          Top = 192
+          Top = 191
           Width = 281
           Height = 17
           Caption = 'Controle Por M'#225'quina'
           DataField = 'CONTROLE_MAQUINA'
           DataSource = DmCadSetor.dsProcesso
           TabOrder = 17
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object DBCheckBox10: TDBCheckBox
+          Left = 376
+          Top = 211
+          Width = 281
+          Height = 17
+          Caption = 'Consultar Material Por KG'
+          DataField = 'MATERIAL_KG'
+          DataSource = DmCadSetor.dsProcesso
+          TabOrder = 18
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
