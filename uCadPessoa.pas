@@ -1125,6 +1125,7 @@ begin
 
   RzPageControl1.ActivePage := TS_Cadastro;
   prc_Habilitar;
+  RxDBComboBox1.SetFocus;
 end;
 
 procedure TfrmCadPessoa.RzPageControl1Change(Sender: TObject);

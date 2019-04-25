@@ -1611,6 +1611,10 @@ begin
     for i := 1 to vQtd - Length(cdsPessoaINSCR_EST.AsString) do
       cdsPessoaINSCR_EST.AsString := '0' + cdsPessoaINSCR_EST.AsString;
   end;
+  if cdsPessoaPESSOA.AsString = 'J' then
+    cdsPessoaTIPO_CONTRIBUINTE.AsString := '1'
+  else
+    cdsPessoaTIPO_CONTRIBUINTE.AsString := '9';
 end;
 
 procedure TDMCadPessoa.prc_Gravar_Cidade;

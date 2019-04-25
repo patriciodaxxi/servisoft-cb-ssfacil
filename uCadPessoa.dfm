@@ -23,7 +23,7 @@ object frmCadPessoa: TfrmCadPessoa
     Top = 0
     Width = 1083
     Height = 680
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -35,7 +35,7 @@ object frmCadPessoa: TfrmCadPessoa
     Font.Style = []
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -887,7 +887,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_CONTATO'
             Title.Alignment = taCenter
             Title.Caption = 'Contato'
-            Width = 64
             Visible = True
           end
           item
@@ -942,7 +941,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Cli'
-            Width = 64
             Visible = True
           end
           item
@@ -951,7 +949,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_FORNECEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Forn.'
-            Width = 64
             Visible = True
           end
           item
@@ -969,7 +966,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Repr.'
-            Width = 64
             Visible = True
           end
           item
@@ -978,7 +974,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'ORGAO_PUBLICO'
             Title.Alignment = taCenter
             Title.Caption = 'Org'#227'o P'#250'blico'
-            Width = 64
             Visible = True
           end
           item
@@ -986,7 +981,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTPEDIDO'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Pedido'
-            Width = 64
             Visible = True
           end
           item
@@ -994,7 +988,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Faturamento'
-            Width = 64
             Visible = True
           end
           item
@@ -1034,7 +1027,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_GRUPO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Grupo'
-            Width = 64
             Visible = True
           end
           item
@@ -1042,7 +1034,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_CONTA_ORCAMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Or'#231'amento'
-            Width = 64
             Visible = True
           end
           item
@@ -1050,7 +1041,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_CLI'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Cliente'
-            Width = 64
             Visible = True
           end
           item
@@ -1058,7 +1048,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_FORN'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Fornecedor'
-            Width = 64
             Visible = True
           end
           item
@@ -1066,7 +1055,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_TRANSP'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Transp.'
-            Width = 64
             Visible = True
           end
           item
@@ -1081,7 +1069,6 @@ object frmCadPessoa: TfrmCadPessoa
             Expanded = False
             FieldName = 'INSCR_EST'
             Title.Caption = 'Inscr. Estadual'
-            Width = 64
             Visible = True
           end
           item
@@ -1097,7 +1084,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_REGIME'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Regime'
-            Width = 64
             Visible = True
           end
           item
@@ -4348,7 +4334,6 @@ object frmCadPessoa: TfrmCadPessoa
                     Expanded = False
                     FieldName = 'OBS'
                     Title.Color = 12320699
-                    Width = 64
                     Visible = True
                   end>
               end
