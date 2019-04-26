@@ -1,8 +1,7 @@
 object DMCadNotaFiscal: TDMCadNotaFiscal
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 59
-  Top = 16
+  Left = 4
   Height = 712
   Width = 1296
   object sdsNotaFiscal: TSQLDataSet
@@ -13,6 +12,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 27
+    Top = 9
     object sdsNotaFiscalID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -582,7 +582,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Options = [poCascadeDeletes, poCascadeUpdates]
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspNotaFiscalUpdateError
-    Left = 59
+    Left = 51
+    Top = 9
   end
   object cdsNotaFiscal: TClientDataSet
     Aggregates = <>
@@ -591,7 +592,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     ProviderName = 'dspNotaFiscal'
     BeforePost = cdsNotaFiscalBeforePost
     OnNewRecord = cdsNotaFiscalNewRecord
-    Left = 91
+    Left = 75
+    Top = 9
     object cdsNotaFiscalID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1231,11 +1233,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal: TDataSource
     DataSet = cdsNotaFiscal
-    Left = 123
+    Left = 91
+    Top = 9
   end
   object dsNotaFiscal_Mestre: TDataSource
     DataSet = sdsNotaFiscal
-    Left = 153
+    Left = 137
+    Top = 9
   end
   object sdsNotaFiscal_Itens: TSQLDataSet
     NoMetadata = True
@@ -1262,7 +1266,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 27
-    Top = 42
+    Top = 51
     object sdsNotaFiscal_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1868,8 +1872,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     BeforePost = cdsNotaFiscal_ItensBeforePost
     OnNewRecord = cdsNotaFiscal_ItensNewRecord
-    Left = 67
-    Top = 42
+    Left = 51
+    Top = 51
     object cdsNotaFiscal_ItensCONTA_ORCAMENTO_ID: TIntegerField
       FieldName = 'CONTA_ORCAMENTO_ID'
     end
@@ -2548,8 +2552,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Itens: TDataSource
     DataSet = cdsNotaFiscal_Itens
-    Left = 107
-    Top = 42
+    Left = 75
+    Top = 51
   end
   object sdsNotaFiscal_Desconto: TSQLDataSet
     NoMetadata = True
@@ -2565,8 +2569,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 67
-    Top = 309
+    Left = 35
+    Top = 318
     object sdsNotaFiscal_DescontoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2586,8 +2590,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Desconto
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 107
-    Top = 309
+    Left = 59
+    Top = 318
     object cdsNotaFiscal_DescontoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2608,8 +2612,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Desconto: TDataSource
     DataSet = cdsNotaFiscal_Desconto
-    Left = 147
-    Top = 309
+    Left = 83
+    Top = 318
   end
   object sdsNotaFiscal_Lacre: TSQLDataSet
     NoMetadata = True
@@ -2625,8 +2629,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 67
-    Top = 350
+    Left = 35
+    Top = 359
     object sdsNotaFiscal_LacreID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2647,8 +2651,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Lacre
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 107
-    Top = 350
+    Left = 59
+    Top = 359
     object cdsNotaFiscal_LacreID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2666,8 +2670,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Lacre: TDataSource
     DataSet = cdsNotaFiscal_Lacre
-    Left = 147
-    Top = 350
+    Left = 83
+    Top = 359
   end
   object sdsNotaFiscal_NFe: TSQLDataSet
     NoMetadata = True
@@ -2683,8 +2687,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 67
-    Top = 391
+    Left = 35
+    Top = 400
     object sdsNotaFiscal_NFeID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2739,8 +2743,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscalsdsNotaFiscal_NFe
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 107
-    Top = 391
+    Left = 59
+    Top = 400
     object cdsNotaFiscal_NFeID: TIntegerField
       Alignment = taCenter
       FieldName = 'ID'
@@ -2806,8 +2810,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_NFe: TDataSource
     DataSet = cdsNotaFiscal_NFe
-    Left = 147
-    Top = 391
+    Left = 83
+    Top = 400
   end
   object sdsNotaFiscal_Parc: TSQLDataSet
     NoMetadata = True
@@ -2823,8 +2827,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 67
-    Top = 432
+    Left = 35
+    Top = 441
     object sdsNotaFiscal_ParcID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2857,8 +2861,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     BeforePost = cdsNotaFiscal_ParcBeforePost
-    Left = 107
-    Top = 432
+    Left = 59
+    Top = 441
     object cdsNotaFiscal_ParcID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2918,8 +2922,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Parc: TDataSource
     DataSet = cdsNotaFiscal_Parc
-    Left = 147
-    Top = 432
+    Left = 83
+    Top = 441
   end
   object sdsNotaFiscal_Reboque: TSQLDataSet
     NoMetadata = True
@@ -2935,8 +2939,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 67
-    Top = 473
+    Left = 35
+    Top = 482
     object sdsNotaFiscal_ReboqueID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2964,8 +2968,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Reboque
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 107
-    Top = 473
+    Left = 59
+    Top = 482
     object cdsNotaFiscal_ReboqueID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2990,8 +2994,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Reboque: TDataSource
     DataSet = cdsNotaFiscal_Reboque
-    Left = 147
-    Top = 473
+    Left = 83
+    Top = 482
   end
   object sdsNotaFiscal_Ref: TSQLDataSet
     NoMetadata = True
@@ -3007,8 +3011,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 67
-    Top = 516
+    Left = 35
+    Top = 525
     object sdsNotaFiscal_RefID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3086,8 +3090,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Ref
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 107
-    Top = 516
+    Left = 59
+    Top = 525
     object cdsNotaFiscal_RefID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3185,13 +3189,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Ref: TDataSource
     DataSet = cdsNotaFiscal_Ref
-    Left = 147
-    Top = 516
+    Left = 83
+    Top = 525
   end
   object dsNotaFiscal_Mestre_Item: TDataSource
     DataSet = sdsNotaFiscal_Itens
-    Left = 153
-    Top = 44
+    Left = 121
+    Top = 53
   end
   object sdsNotaFiscal_Ped: TSQLDataSet
     NoMetadata = True
@@ -3215,8 +3219,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 51
-    Top = 84
+    Left = 27
+    Top = 93
     object sdsNotaFiscal_PedID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3255,8 +3259,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID;ITEM;ITEM_NOTAPED'
     Params = <>
     OnNewRecord = cdsNotaFiscal_PedNewRecord
-    Left = 91
-    Top = 86
+    Left = 51
+    Top = 93
     object cdsNotaFiscal_PedID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3291,8 +3295,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Ped: TDataSource
     DataSet = cdsNotaFiscal_Ped
-    Left = 131
-    Top = 86
+    Left = 75
+    Top = 95
   end
   object sdsNotaFiscal_NDevolvida: TSQLDataSet
     NoMetadata = True
@@ -3318,8 +3322,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 51
-    Top = 130
+    Left = 27
+    Top = 139
     object sdsNotaFiscal_NDevolvidaID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3395,8 +3399,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID;ITEM;ITEM_NDEV'
     Params = <>
     OnNewRecord = cdsNotaFiscal_NDevolvidaNewRecord
-    Left = 91
-    Top = 130
+    Left = 51
+    Top = 139
     object cdsNotaFiscal_NDevolvidaID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3468,8 +3472,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_NDevolvida: TDataSource
     DataSet = cdsNotaFiscal_NDevolvida
-    Left = 131
-    Top = 130
+    Left = 75
+    Top = 139
   end
   object sdsNotaFiscal_Imp: TSQLDataSet
     NoMetadata = True
@@ -3493,8 +3497,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 51
-    Top = 174
+    Left = 27
+    Top = 183
     object sdsNotaFiscal_ImpID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3559,8 +3563,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscal_ItenssdsNotaFiscal_Imp
     IndexFieldNames = 'ID;ITEM;ITEM_IMP'
     Params = <>
-    Left = 91
-    Top = 175
+    Left = 51
+    Top = 184
     object cdsNotaFiscal_ImpID: TIntegerField
       DisplayLabel = 'ID Nota'
       FieldName = 'ID'
@@ -3632,21 +3636,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Imp: TDataSource
     DataSet = cdsNotaFiscal_Imp
-    Left = 131
-    Top = 175
+    Left = 75
+    Top = 184
   end
   object dsNotaFiscal_Mestre_Imp: TDataSource
     DataSet = sdsNotaFiscal_Imp
-    Left = 19
-    Top = 207
+    Left = 107
+    Top = 208
   end
   object cdsNotaFiscal_Imp_Ad: TClientDataSet
     Aggregates = <>
     DataSetField = cdsNotaFiscal_ImpsdsNotaFiscal_Imp_Ad
     IndexFieldNames = 'ID;ITEM;ITEM_IMP;ITEM_AD'
     Params = <>
-    Left = 91
-    Top = 230
+    Left = 51
+    Top = 231
     object cdsNotaFiscal_Imp_AdID: TIntegerField
       DisplayLabel = 'ID Nota'
       FieldName = 'ID'
@@ -3694,8 +3698,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Imp_Ad: TDataSource
     DataSet = cdsNotaFiscal_Imp_Ad
-    Left = 131
-    Top = 230
+    Left = 75
+    Top = 231
   end
   object sdsCliente: TSQLDataSet
     NoMetadata = True
@@ -3729,7 +3733,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspCliente: TDataSetProvider
     DataSet = sdsCliente
-    Left = 633
+    Left = 625
     Top = 40
   end
   object cdsCliente: TClientDataSet
@@ -3737,7 +3741,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCliente'
-    Left = 673
+    Left = 649
     Top = 40
     object cdsClienteCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -4004,7 +4008,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsCliente: TDataSource
     DataSet = cdsCliente
-    Left = 713
+    Left = 673
     Top = 40
   end
   object sdsVendedor: TSQLDataSet
@@ -4022,7 +4026,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspVendedor: TDataSetProvider
     DataSet = sdsVendedor
-    Left = 633
+    Left = 625
     Top = 88
   end
   object cdsVendedor: TClientDataSet
@@ -4030,7 +4034,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspVendedor'
-    Left = 673
+    Left = 649
     Top = 88
     object cdsVendedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -4054,7 +4058,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsVendedor: TDataSource
     DataSet = cdsVendedor
-    Left = 713
+    Left = 673
     Top = 88
   end
   object sdsTransportadora: TSQLDataSet
@@ -4073,7 +4077,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspTransportadora: TDataSetProvider
     DataSet = sdsTransportadora
-    Left = 633
+    Left = 625
     Top = 132
   end
   object cdsTransportadora: TClientDataSet
@@ -4081,7 +4085,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspTransportadora'
-    Left = 673
+    Left = 649
     Top = 132
     object cdsTransportadoraCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -4141,7 +4145,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsTransportadora: TDataSource
     DataSet = cdsTransportadora
-    Left = 713
+    Left = 673
     Top = 132
   end
   object sdsCFOP: TSQLDataSet
@@ -4164,21 +4168,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 377
-    Top = 480
+    Left = 417
+    Top = 290
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
-    Left = 409
-    Top = 480
+    Left = 441
+    Top = 290
   end
   object cdsCFOP: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'CODCFOP;ID'
     Params = <>
     ProviderName = 'dspCFOP'
-    Left = 449
-    Top = 480
+    Left = 465
+    Top = 290
     object cdsCFOPsdsCFOP_Variacao: TDataSetField
       FieldName = 'sdsCFOP_Variacao'
     end
@@ -4382,7 +4386,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsCFOP: TDataSource
     DataSet = cdsCFOP
     Left = 489
-    Top = 480
+    Top = 290
   end
   object sdsNotaFiscal_Consulta: TSQLDataSet
     NoMetadata = True
@@ -4409,13 +4413,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 401
-    Top = 16
+    Left = 217
+    Top = 8
   end
   object dspNotaFiscal_Consulta: TDataSetProvider
     DataSet = sdsNotaFiscal_Consulta
-    Left = 433
-    Top = 16
+    Left = 241
+    Top = 8
   end
   object cdsNotaFiscal_Consulta: TClientDataSet
     Aggregates = <>
@@ -4423,8 +4427,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspNotaFiscal_Consulta'
     OnCalcFields = cdsNotaFiscal_ConsultaCalcFields
-    Left = 473
-    Top = 16
+    Left = 265
+    Top = 8
     object cdsNotaFiscal_ConsultaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4608,8 +4612,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Consulta: TDataSource
     DataSet = cdsNotaFiscal_Consulta
-    Left = 513
-    Top = 16
+    Left = 289
+    Top = 8
   end
   object qProximaNota: TSQLQuery
     MaxBlobSize = -1
@@ -4631,8 +4635,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '    AND SERIE = :SERIE'
       '    AND TIPO_REG = '#39'NTS'#39)
     SQLConnection = dmDatabase.scoDados
-    Left = 233
-    Top = 139
+    Left = 1246
+    Top = 44
     object qProximaNotaNUMNOTA: TIntegerField
       FieldName = 'NUMNOTA'
     end
@@ -4649,7 +4653,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 633
+    Left = 625
     Top = 177
   end
   object cdsFilial: TClientDataSet
@@ -4657,7 +4661,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 673
+    Left = 649
     Top = 177
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
@@ -4882,7 +4886,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 713
+    Left = 673
     Top = 177
   end
   object sdsUF: TSQLDataSet
@@ -4897,7 +4901,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspUF: TDataSetProvider
     DataSet = sdsUF
-    Left = 633
+    Left = 625
     Top = 220
   end
   object cdsUF: TClientDataSet
@@ -4905,7 +4909,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'UF'
     Params = <>
     ProviderName = 'dspUF'
-    Left = 673
+    Left = 649
     Top = 220
     object cdsUFUF: TStringField
       FieldName = 'UF'
@@ -4946,7 +4950,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsUF: TDataSource
     DataSet = cdsUF
-    Left = 713
+    Left = 673
     Top = 220
   end
   object sdsObs_Aux: TSQLDataSet
@@ -4961,7 +4965,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspObs_Aux: TDataSetProvider
     DataSet = sdsObs_Aux
-    Left = 633
+    Left = 625
     Top = 263
   end
   object cdsObs_Aux: TClientDataSet
@@ -4969,7 +4973,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspObs_Aux'
-    Left = 673
+    Left = 649
     Top = 263
     object cdsObs_AuxID: TIntegerField
       FieldName = 'ID'
@@ -4986,7 +4990,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsObs_Aux: TDataSource
     DataSet = cdsObs_Aux
-    Left = 713
+    Left = 673
     Top = 263
   end
   object sdsTipoCobranca: TSQLDataSet
@@ -5001,7 +5005,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
-    Left = 633
+    Left = 625
     Top = 311
   end
   object cdsTipoCobranca: TClientDataSet
@@ -5010,7 +5014,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspTipoCobranca'
-    Left = 673
+    Left = 649
     Top = 311
     object cdsTipoCobrancaID: TIntegerField
       FieldName = 'ID'
@@ -5065,7 +5069,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsTipoCobranca: TDataSource
     DataSet = cdsTipoCobranca
-    Left = 713
+    Left = 673
     Top = 311
   end
   object sdsContas: TSQLDataSet
@@ -5082,7 +5086,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspContas: TDataSetProvider
     DataSet = sdsContas
-    Left = 633
+    Left = 625
     Top = 358
   end
   object cdsContas: TClientDataSet
@@ -5091,7 +5095,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspContas'
-    Left = 673
+    Left = 649
     Top = 358
     object cdsContasID: TIntegerField
       FieldName = 'ID'
@@ -5114,7 +5118,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsContas: TDataSource
     DataSet = cdsContas
-    Left = 713
+    Left = 673
     Top = 358
   end
   object sdsProduto: TSQLDataSet
@@ -5145,7 +5149,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
-    Left = 633
+    Left = 625
     Top = 406
   end
   object cdsProduto: TClientDataSet
@@ -5153,7 +5157,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspProduto'
-    Left = 673
+    Left = 649
     Top = 406
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
@@ -5381,7 +5385,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsProduto: TDataSource
     DataSet = cdsProduto
-    Left = 713
+    Left = 673
     Top = 406
   end
   object sdsUnidade: TSQLDataSet
@@ -5396,7 +5400,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspUnidade: TDataSetProvider
     DataSet = sdsUnidade
-    Left = 633
+    Left = 625
     Top = 451
   end
   object cdsUnidade: TClientDataSet
@@ -5404,7 +5408,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'UNIDADE'
     Params = <>
     ProviderName = 'dspUnidade'
-    Left = 673
+    Left = 649
     Top = 451
     object cdsUnidadeUNIDADE: TStringField
       FieldName = 'UNIDADE'
@@ -5421,7 +5425,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsUnidade: TDataSource
     DataSet = cdsUnidade
-    Left = 713
+    Left = 673
     Top = 451
   end
   object sdsParametros: TSQLDataSet
@@ -5475,7 +5479,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspParametros: TDataSetProvider
     DataSet = sdsParametros
-    Left = 633
+    Left = 625
     Top = 501
   end
   object cdsParametros: TClientDataSet
@@ -5483,7 +5487,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspParametros'
-    Left = 673
+    Left = 649
     Top = 501
     object cdsParametrosID: TIntegerField
       FieldName = 'ID'
@@ -6069,8 +6073,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       ' '
       ' ')
     SQLConnection = dmDatabase.scoDados
-    Left = 401
-    Top = 179
+    Left = 945
+    Top = 93
     object qTotalItemVLRTOTAL: TFloatField
       FieldName = 'VLRTOTAL'
     end
@@ -6096,12 +6100,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 817
+    Left = 769
     Top = 4
   end
   object dspTab_CSTICMS: TDataSetProvider
     DataSet = sdsTab_CSTICMS
-    Left = 849
+    Left = 793
     Top = 4
   end
   object cdsTab_CSTICMS: TClientDataSet
@@ -6109,7 +6113,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_CSTICMS'
-    Left = 889
+    Left = 817
     Top = 4
     object cdsTab_CSTICMSID: TIntegerField
       FieldName = 'ID'
@@ -6150,7 +6154,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsTab_CSTICMS: TDataSource
     DataSet = cdsTab_CSTICMS
-    Left = 929
+    Left = 841
     Top = 4
   end
   object sdsTab_CSTIPI: TSQLDataSet
@@ -6160,12 +6164,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 819
+    Left = 771
     Top = 48
   end
   object dspTab_CSTIPI: TDataSetProvider
     DataSet = sdsTab_CSTIPI
-    Left = 851
+    Left = 795
     Top = 48
   end
   object cdsTab_CSTIPI: TClientDataSet
@@ -6173,7 +6177,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_CSTIPI'
-    Left = 891
+    Left = 819
     Top = 48
     object cdsTab_CSTIPIID: TIntegerField
       FieldName = 'ID'
@@ -6195,7 +6199,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsTab_CSTIPI: TDataSource
     DataSet = cdsTab_CSTIPI
-    Left = 931
+    Left = 843
     Top = 48
   end
   object sdsOrigem_Prod: TSQLDataSet
@@ -6205,12 +6209,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 819
+    Left = 771
     Top = 92
   end
   object dspOrigem_Prod: TDataSetProvider
     DataSet = sdsOrigem_Prod
-    Left = 851
+    Left = 795
     Top = 92
   end
   object cdsOrigem_Prod: TClientDataSet
@@ -6218,7 +6222,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ORIGEM'
     Params = <>
     ProviderName = 'dspOrigem_Prod'
-    Left = 891
+    Left = 819
     Top = 92
     object cdsOrigem_ProdORIGEM: TStringField
       FieldName = 'ORIGEM'
@@ -6232,7 +6236,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsOrigem_Prod: TDataSource
     DataSet = cdsOrigem_Prod
-    Left = 931
+    Left = 843
     Top = 92
   end
   object sdsTab_NCM: TSQLDataSet
@@ -6247,12 +6251,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 819
+    Left = 771
     Top = 136
   end
   object dspTab_NCM: TDataSetProvider
     DataSet = sdsTab_NCM
-    Left = 851
+    Left = 795
     Top = 136
   end
   object cdsTab_NCM: TClientDataSet
@@ -6260,7 +6264,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_NCM'
-    Left = 891
+    Left = 819
     Top = 136
     object cdsTab_NCMID: TIntegerField
       FieldName = 'ID'
@@ -6341,7 +6345,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsTab_NCM: TDataSource
     DataSet = cdsTab_NCM
-    Left = 931
+    Left = 843
     Top = 136
   end
   object sdsTab_Pis: TSQLDataSet
@@ -6351,12 +6355,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 819
+    Left = 771
     Top = 177
   end
   object dspTab_Pis: TDataSetProvider
     DataSet = sdsTab_Pis
-    Left = 851
+    Left = 795
     Top = 177
   end
   object cdsTab_Pis: TClientDataSet
@@ -6364,7 +6368,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_Pis'
-    Left = 891
+    Left = 819
     Top = 177
     object cdsTab_PisID: TIntegerField
       FieldName = 'ID'
@@ -6386,7 +6390,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsTab_Pis: TDataSource
     DataSet = cdsTab_Pis
-    Left = 931
+    Left = 843
     Top = 177
   end
   object sdsTab_Cofins: TSQLDataSet
@@ -6396,12 +6400,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 819
+    Left = 771
     Top = 222
   end
   object dspTab_Cofins: TDataSetProvider
     DataSet = sdsTab_Cofins
-    Left = 851
+    Left = 795
     Top = 223
   end
   object cdsTab_Cofins: TClientDataSet
@@ -6409,7 +6413,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_Cofins'
-    Left = 891
+    Left = 819
     Top = 223
     object cdsTab_CofinsID: TIntegerField
       FieldName = 'ID'
@@ -6431,7 +6435,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsTab_Cofins: TDataSource
     DataSet = cdsTab_Cofins
-    Left = 931
+    Left = 843
     Top = 223
   end
   object sdsCondPgto: TSQLDataSet
@@ -6441,7 +6445,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 819
+    Left = 771
     Top = 271
     object sdsCondPgtoID: TIntegerField
       FieldName = 'ID'
@@ -6485,7 +6489,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspCondPgto: TDataSetProvider
     DataSet = sdsCondPgto
-    Left = 851
+    Left = 795
     Top = 271
   end
   object cdsCondPgto: TClientDataSet
@@ -6493,7 +6497,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspCondPgto'
-    Left = 891
+    Left = 819
     Top = 271
     object cdsCondPgtoID: TIntegerField
       FieldName = 'ID'
@@ -6540,13 +6544,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsCondPgto: TDataSource
     DataSet = cdsCondPgto
-    Left = 931
+    Left = 843
     Top = 271
   end
   object dsCondPgto_Mestre: TDataSource
     DataSet = sdsCondPgto
-    Left = 801
-    Top = 312
+    Left = 881
+    Top = 272
   end
   object sdsCondPgto_Dia: TSQLDataSet
     NoMetadata = True
@@ -6562,8 +6566,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 841
-    Top = 331
+    Left = 769
+    Top = 315
     object sdsCondPgto_DiaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6583,8 +6587,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Aggregates = <>
     DataSetField = cdsCondPgtosdsCondPgto_Dia
     Params = <>
-    Left = 905
-    Top = 331
+    Left = 817
+    Top = 315
     object cdsCondPgto_DiaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6607,21 +6611,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 825
-    Top = 420
+    Left = 769
+    Top = 404
   end
   object dspNFe_Email: TDataSetProvider
     DataSet = sdsNFe_Email
-    Left = 857
-    Top = 420
+    Left = 793
+    Top = 404
   end
   object cdsNFe_Email: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspNFe_Email'
-    Left = 897
-    Top = 420
+    Left = 817
+    Top = 404
     object cdsNFe_EmailID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6637,8 +6641,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNFe_Email: TDataSource
     DataSet = cdsNFe_Email
-    Left = 937
-    Top = 420
+    Left = 841
+    Top = 404
   end
   object qNatOper: TSQLQuery
     MaxBlobSize = -1
@@ -6655,8 +6659,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'ON NI.ID_CFOP = TC.ID'
       'WHERE NI.ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 497
-    Top = 180
+    Left = 1169
+    Top = 46
     object qNatOperCODCFOP: TStringField
       FieldName = 'CODCFOP'
       Size = 5
@@ -6683,8 +6687,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 985
-    Top = 585
+    Left = 1060
+    Top = 385
     Data = {
       690000009619E0BD01000000180000000300000000000300000069000D4E756D
       53657175656E6369616C0400010000000000034F627302004A00000001000557
@@ -6704,8 +6708,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsmCCe: TDataSource
     DataSet = mCCe
-    Left = 1025
-    Top = 611
+    Left = 1084
+    Top = 385
   end
   object sdsNotaFiscal_CCe: TSQLDataSet
     NoMetadata = True
@@ -6721,8 +6725,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 377
-    Top = 294
+    Left = 417
+    Top = 104
     object sdsNotaFiscal_CCeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6775,8 +6779,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     ProviderName = 'dspNotaFiscal_CCe'
-    Left = 449
-    Top = 294
+    Left = 465
+    Top = 104
     object cdsNotaFiscal_CCeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6827,12 +6831,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsNotaFical_CCe: TDataSource
     DataSet = cdsNotaFiscal_CCe
     Left = 489
-    Top = 294
+    Top = 104
   end
   object dspNotaFiscal_CCe: TDataSetProvider
     DataSet = sdsNotaFiscal_CCe
-    Left = 409
-    Top = 293
+    Left = 441
+    Top = 103
   end
   object qPercentual_Simples: TSQLQuery
     MaxBlobSize = -1
@@ -6862,8 +6866,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       ''
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 449
-    Top = 179
+    Left = 1193
+    Top = 45
     object qPercentual_SimplesID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6897,8 +6901,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       ''
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 985
-    Top = 311
+    Left = 1121
+    Top = 46
     object qRegime_TribID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6918,8 +6922,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 825
-    Top = 466
+    Left = 769
+    Top = 450
     object sdsDuplicataID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7106,8 +7110,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspDuplicata: TDataSetProvider
     DataSet = sdsDuplicata
-    Left = 865
-    Top = 466
+    Left = 793
+    Top = 450
   end
   object cdsDuplicata: TClientDataSet
     Aggregates = <>
@@ -7117,8 +7121,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     BeforePost = cdsDuplicataBeforePost
     OnNewRecord = cdsDuplicataNewRecord
     OnReconcileError = cdsDuplicataReconcileError
-    Left = 905
-    Top = 466
+    Left = 817
+    Top = 450
     object cdsDuplicataID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7316,8 +7320,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsDuplicata_Mestre: TDataSource
     DataSet = sdsDuplicata
-    Left = 825
-    Top = 506
+    Left = 865
+    Top = 450
   end
   object sdsDuplicata_Hist: TSQLDataSet
     NoMetadata = True
@@ -7333,8 +7337,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 897
-    Top = 522
+    Left = 769
+    Top = 498
     object sdsDuplicata_HistID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7410,8 +7414,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     OnReconcileError = cdsDuplicata_HistReconcileError
-    Left = 969
-    Top = 522
+    Left = 801
+    Top = 498
     object cdsDuplicata_HistID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7513,8 +7517,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '  AND ID_CLIENTE = :ID_CLIENTE'
       '  AND TIPO_REG = '#39'NTE'#39)
     SQLConnection = dmDatabase.scoDados
-    Left = 553
-    Top = 227
+    Left = 1217
+    Top = 45
     object qVerificaNotaSERIE: TStringField
       FieldName = 'SERIE'
       Size = 3
@@ -7542,7 +7546,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspOperacao_Nota: TDataSetProvider
     DataSet = sdsOperacao_Nota
-    Left = 633
+    Left = 625
     Top = 549
   end
   object cdsOperacao_Nota: TClientDataSet
@@ -7550,7 +7554,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspOperacao_Nota'
-    Left = 673
+    Left = 649
     Top = 549
     object cdsOperacao_NotaID: TIntegerField
       FieldName = 'ID'
@@ -7581,7 +7585,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsOperacao_Nota: TDataSource
     DataSet = cdsOperacao_Nota
-    Left = 713
+    Left = 673
     Top = 549
   end
   object qCFOP_Variacao: TSQLQuery
@@ -7603,8 +7607,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'WHERE ID = :ID'
       '  AND ITEM = :ITEM')
     SQLConnection = dmDatabase.scoDados
-    Left = 1145
-    Top = 144
+    Left = 1067
+    Top = 47
     object qCFOP_VariacaoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7649,21 +7653,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 377
-    Top = 341
+    Left = 417
+    Top = 151
   end
   object dspNotaEntrada: TDataSetProvider
     DataSet = sdsNotaEntrada
-    Left = 409
-    Top = 341
+    Left = 441
+    Top = 151
   end
   object cdsNotaEntrada: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspNotaEntrada'
-    Left = 449
-    Top = 333
+    Left = 465
+    Top = 143
     object cdsNotaEntradaSERIE: TStringField
       FieldName = 'SERIE'
       Size = 3
@@ -7796,7 +7800,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsNotaEntrada: TDataSource
     DataSet = cdsNotaEntrada
     Left = 489
-    Top = 341
+    Top = 151
   end
   object sdsFornecedor: TSQLDataSet
     NoMetadata = True
@@ -7807,21 +7811,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 833
-    Top = 606
+    Left = 209
+    Top = 615
   end
   object dspFornecedor: TDataSetProvider
     DataSet = sdsFornecedor
-    Left = 865
-    Top = 606
+    Left = 233
+    Top = 615
   end
   object cdsFornecedor: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFornecedor'
-    Left = 905
-    Top = 606
+    Left = 257
+    Top = 615
     object cdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -7837,8 +7841,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsFornecedor: TDataSource
     DataSet = cdsFornecedor
-    Left = 945
-    Top = 606
+    Left = 281
+    Top = 615
   end
   object sdsPedido: TSQLDataSet
     NoMetadata = True
@@ -7873,13 +7877,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 377
-    Top = 389
+    Left = 417
+    Top = 199
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
-    Left = 409
-    Top = 389
+    Left = 441
+    Top = 199
   end
   object cdsPedido: TClientDataSet
     Aggregates = <>
@@ -7887,8 +7891,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspPedido'
     OnCalcFields = cdsPedidoCalcFields
-    Left = 449
-    Top = 389
+    Left = 465
+    Top = 199
     object cdsPedidoID: TIntegerField
       Alignment = taCenter
       DisplayLabel = 'ID Pedido'
@@ -8202,7 +8206,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsPedido: TDataSource
     DataSet = cdsPedido
     Left = 489
-    Top = 389
+    Top = 199
   end
   object qRegra_Variacao: TSQLQuery
     MaxBlobSize = -1
@@ -8275,8 +8279,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       ''
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 1065
-    Top = 239
+    Left = 1095
+    Top = 46
     object qRegra_VariacaoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8360,8 +8364,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 377
-    Top = 552
+    Left = 417
+    Top = 336
     object sdsCFOP_VariacaoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8475,8 +8479,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsCFOPsdsCFOP_Variacao
     IndexFieldNames = 'NOME'
     Params = <>
-    Left = 449
-    Top = 552
+    Left = 441
+    Top = 336
     object cdsCFOP_VariacaoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8587,13 +8591,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsCFOP_Variacao: TDataSource
     DataSet = cdsCFOP_Variacao
-    Left = 489
-    Top = 552
+    Left = 465
+    Top = 336
   end
   object dsCFOP_Mestre: TDataSource
     DataSet = sdsCFOP
-    Left = 353
-    Top = 520
+    Left = 529
+    Top = 291
   end
   object mMaterialConsumo: TClientDataSet
     Active = True
@@ -8638,8 +8642,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'NomeMaterial'
     Params = <>
     StoreDefs = True
-    Left = 625
-    Top = 592
+    Left = 997
+    Top = 384
     Data = {
       CF0000009619E0BD010000001800000007000000000003000000CF000B49445F
       4D6174657269616C04000100000000000C4E6F6D654D6174657269616C010049
@@ -8673,8 +8677,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsmMaterialConsumo: TDataSource
     DataSet = mMaterialConsumo
-    Left = 681
-    Top = 592
+    Left = 1018
+    Top = 384
   end
   object qProduto_Consumo: TSQLQuery
     MaxBlobSize = -1
@@ -8692,8 +8696,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'WHERE PC.ID = :ID'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 1169
-    Top = 191
+    Left = 1065
+    Top = 3
     object qProduto_ConsumoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8751,8 +8755,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '  AND ID_COR = :ID_COR'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 985
-    Top = 228
+    Left = 1141
+    Top = 3
     object qProduto_FornCOD_MATERIAL_FORN: TStringField
       FieldName = 'COD_MATERIAL_FORN'
     end
@@ -8780,21 +8784,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 827
-    Top = 564
+    Left = 203
+    Top = 573
   end
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
-    Left = 867
-    Top = 564
+    Left = 235
+    Top = 573
   end
   object cdsCidade: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspCidade'
-    Left = 907
-    Top = 564
+    Left = 259
+    Top = 573
     object cdsCidadeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8814,8 +8818,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsCidade: TDataSource
     DataSet = cdsCidade
-    Left = 947
-    Top = 564
+    Left = 283
+    Top = 573
   end
   object sdsNotaFiscal_Imp_Ad: TSQLDataSet
     NoMetadata = True
@@ -8845,8 +8849,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 51
-    Top = 230
+    Left = 27
+    Top = 231
     object sdsNotaFiscal_Imp_AdID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -8889,8 +8893,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 1193
-    Top = 556
+    Left = 1113
+    Top = 273
     Data = {
       3E0000009619E0BD0100000018000000020000000000030000003E000B49445F
       4D6174657269616C0400010000000000075174644E6F74610800040000000000
@@ -8954,8 +8958,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID_Agrupa'
     Params = <>
     StoreDefs = True
-    Left = 753
-    Top = 120
+    Left = 1123
+    Top = 331
     Data = {
       F60000009619E0BD01000000180000000A000000000003000000F6000949445F
       41677275706104000100000000000B49445F4D6174657269616C040001000000
@@ -9058,8 +9062,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     PacketRecords = 0
     Params = <>
     StoreDefs = True
-    Left = 993
-    Top = 56
+    Left = 990
+    Top = 273
     Data = {
       FE0000009619E0BD01000000180000000A000000000003000000FE000949445F
       41677275706104000100000000000649445F4E54450400010000000000084974
@@ -9105,8 +9109,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsmAgrupaMat: TDataSource
     DataSet = mAgrupaMat
-    Left = 777
-    Top = 120
+    Left = 1150
+    Top = 331
   end
   object mSelecionado_Nota: TClientDataSet
     Active = True
@@ -9127,8 +9131,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 1113
-    Top = 556
+    Left = 1081
+    Top = 273
     Data = {
       460000009619E0BD01000000180000000300000000000300000046000649445F
       4E54450400010000000000084954454D5F4E5445040001000000000003515444
@@ -9156,8 +9160,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM NOTAFISCAL_NFE'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1010
-    Top = 429
+    Left = 970
+    Top = 137
     object qProximaItem_NFeITEM: TIntegerField
       FieldName = 'ITEM'
     end
@@ -9176,8 +9180,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 377
-    Top = 65
+    Left = 217
+    Top = 53
     object sdsNotaFiscal_EventosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9230,8 +9234,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscal_ConsultasdsNotaFiscal_Eventos
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 449
-    Top = 65
+    Left = 265
+    Top = 53
     object cdsNotaFiscal_EventosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9291,13 +9295,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Eventos: TDataSource
     DataSet = cdsNotaFiscal_Eventos
-    Left = 409
-    Top = 65
+    Left = 241
+    Top = 53
   end
   object dsNotaFiscal_Consulta_Mestre: TDataSource
     DataSet = sdsNotaFiscal_Consulta
-    Left = 545
-    Top = 17
+    Left = 329
+    Top = 10
   end
   object sdsPrc_Atualiza_Status_Ped: TSQLDataSet
     CommandText = 'PRC_ATUALIZA_STATUS_PED'
@@ -9310,8 +9314,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 537
-    Top = 72
+    Left = 1185
+    Top = 600
   end
   object mPedidoAux: TClientDataSet
     Active = True
@@ -9350,8 +9354,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     StoreDefs = True
     OnNewRecord = mPedidoAuxNewRecord
-    Left = 553
-    Top = 184
+    Left = 1022
+    Top = 273
     Data = {
       A70000009619E0BD010000001800000005000000000003000000A7000949445F
       50656469646F040001000000000010566C725F416469616E74616D656E746F08
@@ -9395,8 +9399,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'ON PF.pis_id_cofins = TC.id'
       'WHERE PF.CODIGO = :CODIGO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1065
-    Top = 144
+    Left = 993
+    Top = 3
     object qPessoa_FiscalCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -9509,20 +9513,20 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 1073
-    Top = 99
+    Left = 409
+    Top = 523
   end
   object dspPessoa_Contato: TDataSetProvider
     DataSet = sdsPessoa_Contato
-    Left = 1105
-    Top = 99
+    Left = 433
+    Top = 523
   end
   object cdsPessoa_Contato: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPessoa_Contato'
-    Left = 1145
-    Top = 99
+    Left = 457
+    Top = 523
     object cdsPessoa_ContatoCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -9565,21 +9569,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1081
-    Top = 3
+    Left = 409
+    Top = 427
   end
   object dspContaOrcamento: TDataSetProvider
     DataSet = sdsContaOrcamento
-    Left = 1113
-    Top = 3
+    Left = 433
+    Top = 427
   end
   object cdsContaOrcamento: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'DESCRICAO'
     Params = <>
     ProviderName = 'dspContaOrcamento'
-    Left = 1153
-    Top = 3
+    Left = 457
+    Top = 427
     object cdsContaOrcamentoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9603,8 +9607,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsContaOrcamento: TDataSource
     DataSet = cdsContaOrcamento
-    Left = 1193
-    Top = 3
+    Left = 481
+    Top = 427
   end
   object sdsCentroCusto: TSQLDataSet
     NoMetadata = True
@@ -9613,21 +9617,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1073
-    Top = 51
+    Left = 409
+    Top = 475
   end
   object dspCentroCusto: TDataSetProvider
     DataSet = sdsCentroCusto
-    Left = 1105
-    Top = 51
+    Left = 433
+    Top = 475
   end
   object cdsCentroCusto: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'DESCRICAO'
     Params = <>
     ProviderName = 'dspCentroCusto'
-    Left = 1145
-    Top = 51
+    Left = 457
+    Top = 475
     object cdsCentroCustoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9658,8 +9662,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsCentroCusto: TDataSource
     DataSet = cdsCentroCusto
-    Left = 1185
-    Top = 51
+    Left = 481
+    Top = 475
   end
   object qVerificaNEDevol: TSQLQuery
     MaxBlobSize = -1
@@ -9675,8 +9679,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'WHERE N.ID = :ID'
       ' AND N.QTDDEVOLVIDA > 0')
     SQLConnection = dmDatabase.scoDados
-    Left = 1145
-    Top = 239
+    Left = 1043
+    Top = 46
     object qVerificaNEDevolQTDDEVOLVIDA: TFloatField
       FieldName = 'QTDDEVOLVIDA'
     end
@@ -9699,8 +9703,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'WHERE ID_NOTA = :ID_NOTA'
       '   AND VLR_PAGO > 0')
     SQLConnection = dmDatabase.scoDados
-    Left = 1105
-    Top = 239
+    Left = 1019
+    Top = 46
     object qVerificaDuplID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9733,8 +9737,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '     AND TUF.UF = :UF'
       '     AND TUF.TIPO_PRODUTO = :TIPO_PRODUTO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1105
-    Top = 144
+    Left = 1017
+    Top = 3
     object qNCM_UFID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9835,8 +9839,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '  AND ((TC.TIPO_CONSUMIDOR = :TIPO_CONSUMIDOR)'
       '     or (TC.tipo_consumidor IS NULL))')
     SQLConnection = dmDatabase.scoDados
-    Left = 1080
-    Top = 191
+    Left = 994
+    Top = 46
     object qRegra_CFOPID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9956,16 +9960,16 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsVale: TDataSource
     DataSet = cdsVale
-    Left = 1177
-    Top = 284
+    Left = 289
+    Top = 533
   end
   object cdsVale: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVale'
     OnCalcFields = cdsPedidoCalcFields
-    Left = 1137
-    Top = 284
+    Left = 265
+    Top = 533
     object cdsValeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -10059,8 +10063,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspVale: TDataSetProvider
     DataSet = sdsVale
-    Left = 1105
-    Top = 284
+    Left = 241
+    Top = 533
   end
   object sdsVale: TSQLDataSet
     NoMetadata = True
@@ -10078,8 +10082,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1065
-    Top = 284
+    Left = 217
+    Top = 533
   end
   object sdsProduto_Consumo_Tam: TSQLDataSet
     NoMetadata = True
@@ -10106,20 +10110,20 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 1075
-    Top = 424
+    Left = 411
+    Top = 616
   end
   object dspProduto_Consumo_Tam: TDataSetProvider
     DataSet = sdsProduto_Consumo_Tam
-    Left = 1107
-    Top = 424
+    Left = 435
+    Top = 616
   end
   object cdsProduto_Consumo_Tam: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto_Consumo_Tam'
-    Left = 1147
-    Top = 424
+    Left = 459
+    Top = 616
     object cdsProduto_Consumo_TamQTD_CONSUMO: TFloatField
       FieldName = 'QTD_CONSUMO'
     end
@@ -10144,20 +10148,20 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 1075
-    Top = 376
+    Left = 771
+    Top = 592
   end
   object dspProduto_Consumo: TDataSetProvider
     DataSet = sdsProduto_Consumo
-    Left = 1107
-    Top = 376
+    Left = 795
+    Top = 592
   end
   object cdsProduto_Consumo: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto_Consumo'
-    Left = 1147
-    Top = 376
+    Left = 819
+    Top = 592
     object cdsProduto_ConsumoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -10268,8 +10272,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 1080
-    Top = 468
+    Left = 936
+    Top = 273
     Data = {
       810100009619E0BD01000000180000000F000000000003000000810102494404
       00010000000000044954454D0400010000000000084954454D5F494D50040001
@@ -10382,8 +10386,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 1128
-    Top = 468
+    Left = 960
+    Top = 273
     Data = {
       D00000009619E0BD010000001800000009000000000003000000D00002494404
       00010000000000044954454D0400010000000000084954454D5F494D50040001
@@ -10432,8 +10436,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'LEFT JOIN TAB_NCM N'
       'ON I.CODIGO = N.NCM')
     SQLConnection = dmDatabase.scoDados
-    Left = 1216
-    Top = 196
+    Left = 1092
+    Top = 2
     object qIBPTPERC_NACIONAL: TFloatField
       FieldName = 'PERC_NACIONAL'
     end
@@ -10488,8 +10492,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '     AND P.TAMANHO = :TAMANHO'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 992
-    Top = 148
+    Left = 1040
+    Top = 3
     object qPeso_TamPESO_LIQUIDO: TFloatField
       FieldName = 'PESO_LIQUIDO'
       DisplayFormat = '0.000000'
@@ -10562,7 +10566,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'Num_Pedido;ID_Produto;Tamanho'
     Params = <>
     StoreDefs = True
-    Left = 1080
+    Left = 936
     Top = 332
     Data = {
       1D0100009619E0BD01000000180000000B0000000000030000001D010949445F
@@ -10615,7 +10619,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsmMObra_Ped: TDataSource
     DataSet = mMObra_Ped
-    Left = 1112
+    Left = 958
     Top = 332
   end
   object mMObra_Nota: TClientDataSet
@@ -10668,7 +10672,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 1176
+    Left = 996
     Top = 332
     Data = {
       EF0000009619E0BD01000000180000000A000000000003000000EF000749445F
@@ -10715,7 +10719,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsmMObra_Nota: TDataSource
     DataSet = mMObra_Nota
-    Left = 1208
+    Left = 1017
     Top = 332
   end
   object qDePara_CFOP: TSQLQuery
@@ -10732,8 +10736,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'WHERE DE.TIPO_PRODUTO = '#39'I'#39
       '  AND DE.COD_CFOP_ENT = :COD_CFOP_ENT')
     SQLConnection = dmDatabase.scoDados
-    Left = 1224
-    Top = 100
+    Left = 944
+    Top = 47
     object qDePara_CFOPID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -10794,8 +10798,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '   AND TAMANHO = :TAMANHO '
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 1193
-    Top = 239
+    Left = 1117
+    Top = 2
     object qProduto_Consumo_TamID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -10827,8 +10831,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 67
-    Top = 559
+    Left = 35
+    Top = 568
     object sdsNotaFiscal_Imp_AuxID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -10909,8 +10913,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     AfterInsert = cdsNotaFiscal_Imp_AuxAfterInsert
     BeforePost = cdsNotaFiscal_Imp_AuxBeforePost
     OnNewRecord = cdsNotaFiscal_Imp_AuxNewRecord
-    Left = 107
-    Top = 559
+    Left = 59
+    Top = 568
     object cdsNotaFiscal_Imp_AuxID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -10986,8 +10990,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Imp_Aux: TDataSource
     DataSet = cdsNotaFiscal_Imp_Aux
-    Left = 147
-    Top = 559
+    Left = 83
+    Top = 568
   end
   object sdsObs_Lei: TSQLDataSet
     NoMetadata = True
@@ -10996,8 +11000,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 400
-    Top = 237
+    Left = 416
+    Top = 53
     object sdsObs_LeiID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -11013,16 +11017,16 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspObs_Lei: TDataSetProvider
     DataSet = sdsObs_Lei
-    Left = 432
-    Top = 237
+    Left = 440
+    Top = 53
   end
   object cdsObs_Lei: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspObs_Lei'
-    Left = 472
-    Top = 237
+    Left = 464
+    Top = 53
     object cdsObs_LeiID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -11038,8 +11042,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsObs_Lei: TDataSource
     DataSet = cdsObs_Lei
-    Left = 512
-    Top = 237
+    Left = 488
+    Top = 53
   end
   object sdsNotaFiscal_Lei: TSQLDataSet
     NoMetadata = True
@@ -11055,8 +11059,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 66
-    Top = 602
+    Left = 34
+    Top = 611
     object sdsNotaFiscal_LeiID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -11076,8 +11080,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Aggregates = <>
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Lei
     Params = <>
-    Left = 114
-    Top = 602
+    Left = 58
+    Top = 611
     object cdsNotaFiscal_LeiID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -11095,8 +11099,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Lei: TDataSource
     DataSet = cdsNotaFiscal_Lei
-    Left = 162
-    Top = 602
+    Left = 82
+    Top = 611
   end
   object sdsPedido_Tipo: TSQLDataSet
     NoMetadata = True
@@ -11117,13 +11121,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 377
-    Top = 432
+    Left = 417
+    Top = 242
   end
   object dspPedido_Tipo: TDataSetProvider
     DataSet = sdsPedido_Tipo
-    Left = 409
-    Top = 432
+    Left = 441
+    Top = 242
   end
   object cdsPedido_Tipo: TClientDataSet
     Aggregates = <>
@@ -11131,8 +11135,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspPedido_Tipo'
     OnCalcFields = cdsPedidoCalcFields
-    Left = 449
-    Top = 432
+    Left = 465
+    Top = 242
     object cdsPedido_TipoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -11218,7 +11222,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsPedido_Tipo: TDataSource
     DataSet = cdsPedido_Tipo
     Left = 489
-    Top = 432
+    Top = 242
   end
   object qProduto_UF: TSQLQuery
     MaxBlobSize = -1
@@ -11239,8 +11243,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'WHERE ID = :ID'
       '  AND UF = :UF')
     SQLConnection = dmDatabase.scoDados
-    Left = 1208
-    Top = 468
+    Left = 1000
+    Top = 138
     object qProduto_UFID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -11271,8 +11275,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Aggregates = <>
     IndexFieldNames = 'ID_Vale'
     Params = <>
-    Left = 1040
-    Top = 332
+    Left = 1096
+    Top = 224
     Data = {
       2A0000009619E0BD0100000018000000010000000000030000002A000749445F
       56616C6504000100000000000000}
@@ -11302,8 +11306,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 225
-    Top = 528
+    Left = 217
+    Top = 489
     object sdsNotaFiscal_DrawBackID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -11340,8 +11344,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscal_ItenssdsNotaFiscal_DrawBack
     IndexFieldNames = 'ID;ITEM;ITEM_DRAWBACK'
     Params = <>
-    Left = 256
-    Top = 528
+    Left = 240
+    Top = 489
     object cdsNotaFiscal_DrawBackID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -11375,8 +11379,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_DrawBack: TDataSource
     DataSet = cdsNotaFiscal_DrawBack
-    Left = 288
-    Top = 528
+    Left = 264
+    Top = 489
   end
   object qUF: TSQLQuery
     MaxBlobSize = -1
@@ -11393,8 +11397,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM UF U'
       'WHERE U.UF = :UF')
     SQLConnection = dmDatabase.scoDados
-    Left = 544
-    Top = 408
+    Left = 976
+    Top = 93
     object qUFPERC_ICMS: TFloatField
       FieldName = 'PERC_ICMS'
     end
@@ -11426,21 +11430,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 1097
-    Top = 601
+    Left = 937
+    Top = 497
   end
   object dspDesoneracao: TDataSetProvider
     DataSet = sdsDesoneracao
-    Left = 1129
-    Top = 600
+    Left = 961
+    Top = 496
   end
   object cdsDesoneracao: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'COD_DESONERACAO'
     Params = <>
     ProviderName = 'dspDesoneracao'
-    Left = 1161
-    Top = 600
+    Left = 985
+    Top = 496
     object cdsDesoneracaoCOD_CST_ICMS: TStringField
       FieldName = 'COD_CST_ICMS'
       Required = True
@@ -11457,8 +11461,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsDesoneracao: TDataSource
     DataSet = cdsDesoneracao
-    Left = 1209
-    Top = 600
+    Left = 1009
+    Top = 496
   end
   object qNCM_CST: TSQLQuery
     MaxBlobSize = -1
@@ -11481,8 +11485,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'WHERE NCM.ID = :ID'
       '  AND NCM.UF = :UF')
     SQLConnection = dmDatabase.scoDados
-    Left = 992
-    Top = 88
+    Left = 968
+    Top = 3
     object qNCM_CSTID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -11528,8 +11532,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 225
-    Top = 480
+    Left = 217
+    Top = 441
     object sdsNotaFiscal_FutID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -11567,8 +11571,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscal_ItenssdsNotaFiscal_Fut
     IndexFieldNames = 'ID;ITEM;ITEM_NOTAFUT'
     Params = <>
-    Left = 256
-    Top = 480
+    Left = 240
+    Top = 441
     object cdsNotaFiscal_FutID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -11603,8 +11607,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Fut: TDataSource
     DataSet = cdsNotaFiscal_Fut
-    Left = 288
-    Top = 480
+    Left = 264
+    Top = 441
   end
   object sdsNotaFiscal_OS: TSQLDataSet
     NoMetadata = True
@@ -11628,8 +11632,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 225
-    Top = 432
+    Left = 217
+    Top = 393
     object sdsNotaFiscal_OSID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -11670,8 +11674,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscal_ItenssdsNotaFiscal_OS
     IndexFieldNames = 'ID;ITEM;ITEM_NOTAOS'
     Params = <>
-    Left = 256
-    Top = 432
+    Left = 240
+    Top = 393
     object cdsNotaFiscal_OSID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -11709,8 +11713,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_OS: TDataSource
     DataSet = cdsNotaFiscal_OS
-    Left = 288
-    Top = 432
+    Left = 264
+    Top = 393
   end
   object sdsOS: TSQLDataSet
     NoMetadata = True
@@ -11734,7 +11738,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspOS: TDataSetProvider
     DataSet = sdsOS
-    Left = 633
+    Left = 625
     Top = 5
   end
   object cdsOS: TClientDataSet
@@ -11743,7 +11747,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspOS'
     OnCalcFields = cdsPedidoCalcFields
-    Left = 673
+    Left = 649
     Top = 5
     object cdsOSID: TIntegerField
       FieldName = 'ID'
@@ -11821,7 +11825,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsOS: TDataSource
     DataSet = cdsOS
-    Left = 713
+    Left = 673
     Top = 5
   end
   object sdsCombinacao: TSQLDataSet
@@ -11839,21 +11843,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 225
-    Top = 280
+    Left = 217
+    Top = 249
   end
   object dspCombinacao: TDataSetProvider
     DataSet = sdsCombinacao
-    Left = 257
-    Top = 280
+    Left = 241
+    Top = 249
   end
   object cdsCombinacao: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCombinacao'
-    Left = 289
-    Top = 280
+    Left = 265
+    Top = 249
     object cdsCombinacaoID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
       Required = True
@@ -11874,8 +11878,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsCombinacao: TDataSource
     DataSet = cdsCombinacao
-    Left = 320
-    Top = 280
+    Left = 288
+    Top = 249
   end
   object qDupPedido: TSQLQuery
     MaxBlobSize = -1
@@ -11890,8 +11894,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM DUPLICATA D'
       'WHERE D.ID_PEDIDO = :ID_PEDIDO')
     SQLConnection = dmDatabase.scoDados
-    Left = 544
-    Top = 456
+    Left = 1216
+    Top = 93
     object qDupPedidoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -11959,8 +11963,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '  AND (I.ID <> :ID_NOTA)'
       'GROUP BY N.TIPO_NOTA')
     SQLConnection = dmDatabase.scoDados
-    Left = 992
-    Top = 175
+    Left = 970
+    Top = 46
     object qEstoque_DescaaQTD: TFloatField
       FieldName = 'QTD'
     end
@@ -12020,20 +12024,20 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 225
-    Top = 232
+    Left = 217
+    Top = 201
   end
   object dspEstoque_Desc: TDataSetProvider
     DataSet = sdsEstoque_Desc
-    Left = 257
-    Top = 232
+    Left = 241
+    Top = 201
   end
   object cdsEstoque_Desc: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEstoque_Desc'
-    Left = 289
-    Top = 232
+    Left = 265
+    Top = 201
     object cdsEstoque_DescQTD: TFloatField
       FieldName = 'QTD'
     end
@@ -12047,8 +12051,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 544
-    Top = 504
+    Left = 1053
+    Top = 273
     Data = {
       840000009619E0BD01000000180000000500000000000300000084000B49445F
       4D6174657269616C04000100000000000E5174645F4361706163696461646504
@@ -12082,8 +12086,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 1001
-    Top = 471
+    Left = 1153
+    Top = 599
   end
   object sdsNotaFiscal_ProdPrincipal: TSQLDataSet
     NoMetadata = True
@@ -12097,8 +12101,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 225
-    Top = 328
+    Left = 217
+    Top = 297
     object sdsNotaFiscal_ProdPrincipalID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -12123,16 +12127,16 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dspNotaFiscal_ProdPrincipal: TDataSetProvider
     DataSet = sdsNotaFiscal_ProdPrincipal
     UpdateMode = upWhereKeyOnly
-    Left = 257
-    Top = 328
+    Left = 241
+    Top = 297
   end
   object cdsNotaFiscal_ProdPrincipal: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID;ITEM_ORIGINAL'
     Params = <>
     ProviderName = 'dspNotaFiscal_ProdPrincipal'
-    Left = 289
-    Top = 328
+    Left = 265
+    Top = 297
     object cdsNotaFiscal_ProdPrincipalID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -12156,8 +12160,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_ProdPrincipal: TDataSource
     DataSet = cdsNotaFiscal_ProdPrincipal
-    Left = 320
-    Top = 328
+    Left = 288
+    Top = 297
   end
   object mPedAmbientes: TClientDataSet
     Active = True
@@ -12171,8 +12175,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID_Pedido'
     Params = <>
     StoreDefs = True
-    Left = 1185
-    Top = 145
+    Left = 969
+    Top = 225
     Data = {
       2C0000009619E0BD0100000018000000010000000000030000002C000949445F
       50656469646F04000100000000000000}
@@ -12187,21 +12191,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 816
-    Top = 376
+    Left = 768
+    Top = 360
   end
   object dspLocal_Estoque: TDataSetProvider
     DataSet = sdsLocal_Estoque
-    Left = 851
-    Top = 376
+    Left = 795
+    Top = 360
   end
   object cdsLocal_Estoque: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspLocal_Estoque'
-    Left = 891
-    Top = 376
+    Left = 819
+    Top = 360
     object cdsLocal_EstoqueID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -12249,8 +12253,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsLocal_Estoque: TDataSource
     DataSet = cdsLocal_Estoque
-    Left = 931
-    Top = 376
+    Left = 843
+    Top = 360
   end
   object mLoteControle: TClientDataSet
     Active = True
@@ -12260,8 +12264,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MasterSource = dsPedido
     PacketRecords = 0
     Params = <>
-    Left = 264
-    Top = 8
+    Left = 936
+    Top = 384
     Data = {
       720000009619E0BD01000000180000000400000000000300000072000949445F
       50656469646F04000100000000000B4974656D5F50656469646F040001000000
@@ -12283,16 +12287,16 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsmLoteConrole: TDataSource
     DataSet = mLoteControle
-    Left = 296
-    Top = 8
+    Left = 958
+    Top = 384
   end
   object mItensAlt: TClientDataSet
     Active = True
     Aggregates = <>
     IndexFieldNames = 'ID_Produto;ID_Cor;Tamanho'
     Params = <>
-    Left = 328
-    Top = 8
+    Left = 1144
+    Top = 273
     Data = {
       640000009619E0BD01000000180000000400000000000300000064000A49445F
       50726F6475746F04000100000000000649445F436F7204000100000000000754
@@ -12331,8 +12335,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 225
-    Top = 376
+    Left = 217
+    Top = 345
     object sdsNotaFiscal_ItensAuxID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -12361,16 +12365,16 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSet = sdsNotaFiscal_ItensAux
     Constraints = False
     UpdateMode = upWhereKeyOnly
-    Left = 257
-    Top = 376
+    Left = 241
+    Top = 345
   end
   object cdsNotaFiscal_ItensAux: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     ProviderName = 'dspNotaFiscal_ItensAux'
-    Left = 289
-    Top = 376
+    Left = 265
+    Top = 345
     object cdsNotaFiscal_ItensAuxID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -12402,21 +12406,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 385
-    Top = 596
+    Left = 417
+    Top = 380
   end
   object dspEnqIPI: TDataSetProvider
     DataSet = sdsEnqIPI
-    Left = 417
-    Top = 596
+    Left = 441
+    Top = 380
   end
   object cdsEnqIPI: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspEnqIPI'
-    Left = 457
-    Top = 596
+    Left = 465
+    Top = 380
     object cdsEnqIPIID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -12437,8 +12441,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsEnqIPI: TDataSource
     DataSet = cdsEnqIPI
-    Left = 497
-    Top = 596
+    Left = 489
+    Top = 380
   end
   object qIcmsPartilha: TSQLQuery
     MaxBlobSize = -1
@@ -12453,8 +12457,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM TAB_PARTILHA_ICMS T'
       'WHERE T.ANO = :ANO')
     SQLConnection = dmDatabase.scoDados
-    Left = 544
-    Top = 360
+    Left = 1216
+    Top = 3
     object qIcmsPartilhaANO: TIntegerField
       FieldName = 'ANO'
       Required = True
@@ -12471,8 +12475,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_EST'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 256
-    Top = 576
+    Left = 1096
+    Top = 93
     object qParametros_EstID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -12505,8 +12509,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_COM'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 288
-    Top = 576
+    Left = 1048
+    Top = 93
     object qParametros_ComID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -12525,8 +12529,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_IMP'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 320
-    Top = 576
+    Left = 1072
+    Top = 93
     object qParametros_ImpID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -12585,8 +12589,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_NFE'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 224
-    Top = 624
+    Left = 1000
+    Top = 93
     object qParametros_NFeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -12792,21 +12796,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 1097
-    Top = 642
+    Left = 937
+    Top = 546
   end
   object dspEstoqueLoteAux: TDataSetProvider
     DataSet = sdsEstoqueLoteAux
-    Left = 1129
-    Top = 641
+    Left = 961
+    Top = 545
   end
   object cdsEstoqueLoteAux: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'DTMOVIMENTO;NUM_LOTE_CONTROLE'
     Params = <>
     ProviderName = 'dspEstoqueLoteAux'
-    Left = 1161
-    Top = 641
+    Left = 985
+    Top = 545
     object cdsEstoqueLoteAuxDTMOVIMENTO: TDateField
       FieldName = 'DTMOVIMENTO'
     end
@@ -12825,8 +12829,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_FIN'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 224
-    Top = 576
+    Left = 1024
+    Top = 93
     object qParametros_FinCONTROLAR_BANCO_REM_DEP: TStringField
       FieldName = 'CONTROLAR_BANCO_REM_DEP'
       FixedChar = True
@@ -12882,8 +12886,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'SELECT *'
       'FROM PARAMETROS_PED')
     SQLConnection = dmDatabase.scoDados
-    Left = 545
-    Top = 292
+    Left = 1145
+    Top = 46
     object qParametros_PedCONTROLAR_FILIAL_NA_COPIA_NOTA: TStringField
       FieldName = 'CONTROLAR_FILIAL_NA_COPIA_NOTA'
       FixedChar = True
@@ -12950,8 +12954,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 206
-    Top = 96
+    Left = 219
+    Top = 105
     object sdsNotaFiscal_TamID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -12989,7 +12993,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     OnNewRecord = cdsNotaFiscal_TamNewRecord
     Left = 246
-    Top = 96
+    Top = 105
     object cdsNotaFiscal_TamID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -13023,8 +13027,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Tam: TDataSource
     DataSet = cdsNotaFiscal_Tam
-    Left = 286
-    Top = 96
+    Left = 270
+    Top = 105
   end
   object sdsPedido_Tam: TSQLDataSet
     NoMetadata = True
@@ -13061,13 +13065,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 225
-    Top = 181
+    Left = 217
+    Top = 150
   end
   object dspPedido_Tam: TDataSetProvider
     DataSet = sdsPedido_Tam
-    Left = 257
-    Top = 181
+    Left = 241
+    Top = 150
   end
   object cdsPedido_Tam: TClientDataSet
     Aggregates = <>
@@ -13075,8 +13079,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspPedido_Tam'
     OnCalcFields = cdsPedido_TamCalcFields
-    Left = 289
-    Top = 181
+    Left = 265
+    Top = 150
     object cdsPedido_TamID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -13248,8 +13252,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsPedido_Tam: TDataSource
     DataSet = cdsPedido_Tam
-    Left = 321
-    Top = 181
+    Left = 289
+    Top = 150
   end
   object qParametros_Prod: TSQLQuery
     MaxBlobSize = -1
@@ -13258,8 +13262,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'SELECT *'
       'FROM PARAMETROS_PROD')
     SQLConnection = dmDatabase.scoDados
-    Left = 760
-    Top = 208
+    Left = 1192
+    Top = 3
     object qParametros_ProdUSA_PRODUTO_FILIAL: TStringField
       FieldName = 'USA_PRODUTO_FILIAL'
       FixedChar = True
@@ -13304,8 +13308,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_GERAL'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 760
-    Top = 263
+    Left = 1120
+    Top = 93
     object qParametros_GeralUSAR_PESSOA_FILIAL: TStringField
       FieldName = 'USAR_PESSOA_FILIAL'
       FixedChar = True
@@ -13366,8 +13370,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 288
-    Top = 624
+    Left = 1059
+    Top = 331
     Data = {
       8C0000009619E0BD0100000018000000050000000000030000008C0004495445
       4D04000100000000000A5245464552454E434941010049000000010005574944
@@ -13394,8 +13398,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsmEtiquetas: TDataSource
     DataSet = mEtiquetas
-    Left = 320
-    Top = 624
+    Left = 1080
+    Top = 331
   end
   object frxReport1: TfrxReport
     Version = '5.6.8'
@@ -13409,8 +13413,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     ReportOptions.LastChange = 43412.645099317130000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
-    Left = 376
-    Top = 640
+    Left = 1080
+    Top = 496
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'mEiquetas'
@@ -13423,8 +13427,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'ID=ID')
     DataSource = dsmEtiquetas
     BCDToCurrency = False
-    Left = 408
-    Top = 640
+    Left = 1120
+    Top = 496
   end
   object qParametros_Usuario: TSQLQuery
     MaxBlobSize = -1
@@ -13439,8 +13443,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_USUARIO'
       'WHERE USUARIO = :USUARIO')
     SQLConnection = dmDatabase.scoDados
-    Left = 976
-    Top = 16
+    Left = 944
+    Top = 3
     object qParametros_UsuarioID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -13476,8 +13480,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 368
-    Top = 128
+    Left = 416
+    Top = 8
     object sdsHist_SenhaID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -13526,15 +13530,15 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dspHist_Senha: TDataSetProvider
     DataSet = sdsHist_Senha
     UpdateMode = upWhereKeyOnly
-    Left = 408
-    Top = 128
+    Left = 440
+    Top = 8
   end
   object cdsHist_Senha: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspHist_Senha'
-    Left = 448
-    Top = 128
+    Left = 464
+    Top = 8
     object cdsHist_SenhaID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -13583,7 +13587,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dsHist_Senha: TDataSource
     DataSet = cdsHist_Senha
     Left = 488
-    Top = 128
+    Top = 8
   end
   object mSenha: TClientDataSet
     Active = True
@@ -13616,8 +13620,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 536
-    Top = 128
+    Left = 1064
+    Top = 224
     Data = {
       9E0000009619E0BD0100000018000000050000000000030000009E000553656E
       68610100490000000100055749445448020002000A00044974656D0400010000
@@ -13653,8 +13657,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_OC'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 760
-    Top = 319
+    Left = 1144
+    Top = 93
     object qParametros_OCPERMITIR_ENT_MAIOR: TStringField
       FieldName = 'PERMITIR_ENT_MAIOR'
       FixedChar = True
@@ -13710,8 +13714,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'INSC_SUFRAMA_CLIENTE=INSC_SUFRAMA_CLIENTE')
     DataSource = dsNotaFiscal_Consulta
     BCDToCurrency = False
-    Left = 440
-    Top = 640
+    Left = 1152
+    Top = 496
   end
   object qParametros_NTE: TSQLQuery
     MaxBlobSize = -1
@@ -13721,8 +13725,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_NTE'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 760
-    Top = 447
+    Left = 1168
+    Top = 93
     object qParametros_NTEID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -13793,8 +13797,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 544
-    Top = 552
+    Left = 1032
+    Top = 224
     Data = {
       770000009619E0BD01000000180000000500000000000300000077000B49445F
       4D6174657269616C04000100000000000549445F4F430400010000000000064E
@@ -13843,8 +13847,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '    AND TIPO_REG = '#39'NTS'#39
       '    AND NUMNOTA < :NUM_NOTA_RAMIRO')
     SQLConnection = dmDatabase.scoDados
-    Left = 288
-    Top = 144
+    Left = 1245
+    Top = 94
     object qProximaNotaRamiroNUMNOTA: TIntegerField
       FieldName = 'NUMNOTA'
     end
@@ -13867,8 +13871,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID_Pedido'
     Params = <>
     StoreDefs = True
-    Left = 992
-    Top = 279
+    Left = 1000
+    Top = 223
     Data = {
       2C0000009619E0BD0100000018000000010000000000030000002C000949445F
       50656469646F04000100000000000000}
@@ -13933,8 +13937,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '-VLR_MULTA=VLR_MULTA')
     DataSet = cdsDuplicata
     BCDToCurrency = False
-    Left = 472
-    Top = 640
+    Left = 1184
+    Top = 496
   end
   object frxDBNota: TfrxDBDataset
     UserName = 'frxDBNota'
@@ -13980,8 +13984,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '-UF_CLIENTE=UF_CLIENTE')
     DataSet = cdsNotaFiscal_Consulta
     BCDToCurrency = False
-    Left = 504
-    Top = 640
+    Left = 1120
+    Top = 544
   end
   object frxDBFilial: TfrxDBDataset
     UserName = 'frxDBFilial'
@@ -14043,8 +14047,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '-NUM_NOTA_RAMIRO=NUM_NOTA_RAMIRO')
     DataSet = cdsFilial
     BCDToCurrency = False
-    Left = 536
-    Top = 640
+    Left = 1152
+    Top = 544
   end
   object qParametros_Custo: TSQLQuery
     MaxBlobSize = -1
@@ -14054,8 +14058,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FROM PARAMETROS_CUSTO'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 752
-    Top = 504
+    Left = 1168
+    Top = 3
     object qParametros_CustoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14165,8 +14169,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 64
-    Top = 269
+    Left = 32
+    Top = 278
     object sdsNotaFiscal_CustoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -14200,8 +14204,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Custo
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 104
-    Top = 269
+    Left = 56
+    Top = 278
     object cdsNotaFiscal_CustoID: TIntegerField
       Alignment = taCenter
       FieldName = 'ID'
@@ -14239,8 +14243,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Custo: TDataSource
     DataSet = cdsNotaFiscal_Custo
-    Left = 136
-    Top = 269
+    Left = 80
+    Top = 278
   end
   object sdsNotaFiscal_Copia: TSQLDataSet
     NoMetadata = True
@@ -14264,8 +14268,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 64
-    Top = 648
+    Left = 416
+    Top = 568
     object sdsNotaFiscal_CopiaID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -14287,8 +14291,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Aggregates = <>
     DataSetField = cdsNotaFiscal_ItenssdsNotaFiscal_Copia
     Params = <>
-    Left = 120
-    Top = 648
+    Left = 440
+    Top = 568
     object cdsNotaFiscal_CopiaID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -14308,16 +14312,16 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsNotaFiscal_Copia: TDataSource
     DataSet = cdsNotaFiscal_Copia
-    Left = 168
-    Top = 648
+    Left = 464
+    Top = 568
   end
   object mRecNFAux: TClientDataSet
     Active = True
     Aggregates = <>
     IndexFieldNames = 'ID_RecNF'
     Params = <>
-    Left = 1000
-    Top = 376
+    Left = 1128
+    Top = 224
     Data = {
       2B0000009619E0BD0100000018000000010000000000030000002B000849445F
       5265634E4604000100000000000000}
@@ -14344,8 +14348,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'where (i.id_pedido = :id_pedido)'
       '  and (i.item_pedido = :item_pedido)')
     SQLConnection = dmDatabase.scoDados
-    Left = 312
-    Top = 56
+    Left = 1245
+    Top = 5
     object qPreFatCONTADOR: TIntegerField
       FieldName = 'CONTADOR'
       Required = True
@@ -14390,13 +14394,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 609
-    Top = 640
+    Left = 601
+    Top = 600
   end
   object dspImpNota: TDataSetProvider
     DataSet = sdsImpNota
-    Left = 641
-    Top = 640
+    Left = 625
+    Top = 600
   end
   object cdsImpNota: TClientDataSet
     Aggregates = <>
@@ -14404,8 +14408,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspImpNota'
     OnCalcFields = cdsNotaFiscal_ConsultaCalcFields
-    Left = 681
-    Top = 640
+    Left = 649
+    Top = 600
     object cdsImpNotaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14645,8 +14649,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsImpNota: TDataSource
     DataSet = cdsImpNota
-    Left = 721
-    Top = 640
+    Left = 673
+    Top = 600
   end
   object frxImpNota: TfrxDBDataset
     UserName = 'frxImpNota'
@@ -14715,8 +14719,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'UF_CLI=UF_CLI')
     DataSet = cdsImpNota
     BCDToCurrency = False
-    Left = 560
-    Top = 640
+    Left = 1184
+    Top = 544
   end
   object sdsProduto_Comb: TSQLDataSet
     NoMetadata = True
@@ -14737,8 +14741,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 833
-    Top = 649
+    Left = 929
+    Top = 601
     object sdsProduto_CombID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14791,15 +14795,15 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspProduto_Comb: TDataSetProvider
     DataSet = sdsProduto_Comb
-    Left = 865
-    Top = 649
+    Left = 953
+    Top = 601
   end
   object cdsProduto_Comb: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto_Comb'
-    Left = 905
-    Top = 649
+    Left = 977
+    Top = 601
     object cdsProduto_CombID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14852,8 +14856,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsProduto_Comb: TDataSource
     DataSet = cdsProduto_Comb
-    Left = 945
-    Top = 649
+    Left = 1001
+    Top = 601
   end
   object mProdAux: TClientDataSet
     Active = True
@@ -14873,8 +14877,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID_Produto'
     Params = <>
     StoreDefs = True
-    Left = 768
-    Top = 376
+    Left = 936
+    Top = 224
     Data = {
       430000009619E0BD01000000180000000100000000000300000043000A49445F
       50726F6475746F040001000000000001000D44454641554C545F4F5244455202
@@ -14915,8 +14919,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       ''
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 768
-    Top = 600
+    Left = 944
+    Top = 138
     object qNTEProdImpID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14983,8 +14987,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 1016
-    Top = 520
+    Left = 768
+    Top = 544
     object sdsProduto_ImpID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -15026,16 +15030,16 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object dspProduto_Imp: TDataSetProvider
     DataSet = sdsProduto_Imp
     UpdateMode = upWhereKeyOnly
-    Left = 1048
-    Top = 520
+    Left = 792
+    Top = 544
   end
   object cdsProduto_Imp: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspProduto_Imp'
-    Left = 1080
-    Top = 520
+    Left = 816
+    Top = 544
     object cdsProduto_ImpID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -15076,8 +15080,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dsProduto_Imp: TDataSource
     DataSet = cdsProduto_Imp
-    Left = 1112
-    Top = 520
+    Left = 840
+    Top = 544
   end
   object qProdST: TSQLQuery
     MaxBlobSize = -1
@@ -15093,8 +15097,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'where m.id_produto = :id_produto'
       'order by m.dtemissao desc')
     SQLConnection = dmDatabase.scoDados
-    Left = 784
-    Top = 560
+    Left = 1192
+    Top = 94
     object qProdSTDTEMISSAO: TDateField
       FieldName = 'DTEMISSAO'
     end

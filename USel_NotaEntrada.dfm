@@ -1,6 +1,6 @@
 object frmSel_NotaEntrada: TfrmSel_NotaEntrada
-  Left = 110
-  Top = 69
+  Left = 70
+  Top = 68
   Width = 1210
   Height = 630
   BorderIcons = [biSystemMenu]
@@ -22,7 +22,7 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1202
+    Width = 1194
     Height = 57
     Align = alTop
     Color = clMoneyGreen
@@ -191,8 +191,8 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
   end
   object Panel2: TPanel
     Left = 0
-    Top = 558
-    Width = 1202
+    Top = 550
+    Width = 1194
     Height = 41
     Align = alBottom
     Color = 8404992
@@ -293,7 +293,7 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
   object gbxConsumo: TRzGroupBox
     Left = 0
     Top = 57
-    Width = 1202
+    Width = 1194
     Height = 137
     Align = alTop
     BorderInner = fsGroove
@@ -310,7 +310,7 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
     object SMDBGrid2: TSMDBGrid
       Left = 5
       Top = 18
-      Width = 1192
+      Width = 1184
       Height = 114
       Align = alClient
       Ctl3D = False
@@ -409,8 +409,8 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
   object RzGroupBox2: TRzGroupBox
     Left = 0
     Top = 215
-    Width = 1202
-    Height = 343
+    Width = 1194
+    Height = 335
     Align = alClient
     Caption = ' Notas Pendentes do Cliente '
     Color = 8454016
@@ -419,13 +419,14 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
     object SMDBGrid1: TSMDBGrid
       Left = 1
       Top = 14
-      Width = 1200
-      Height = 328
+      Width = 1192
+      Height = 320
       Align = alClient
       Ctl3D = False
       DataSource = DMCadNotaFiscal.dsNotaEntrada
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       ParentCtl3D = False
+      PopupMenu = PopupMenu1
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -591,7 +592,6 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Data Emiss'#227'o'
-          Width = 64
           Visible = True
         end
         item
@@ -601,7 +601,6 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Data Entrada'
-          Width = 64
           Visible = True
         end
         item
@@ -638,7 +637,6 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
           ReadOnly = True
           Title.Alignment = taCenter
           Title.Caption = 'Nome Cliente'
-          Width = 64
           Visible = True
         end
         item
@@ -655,7 +653,6 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
           FieldName = 'NOME_CLIENTETRIANG'
           Title.Alignment = taCenter
           Title.Caption = 'Cliente Triangular'
-          Width = 64
           Visible = True
         end>
     end
@@ -663,7 +660,7 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
   object Panel3: TPanel
     Left = 0
     Top = 194
-    Width = 1202
+    Width = 1194
     Height = 21
     Align = alTop
     Color = clSilver
@@ -751,6 +748,14 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
       Font.Style = [fsBold]
       ParentFont = False
       Visible = False
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 560
+    Top = 343
+    object Copiarqtdependentepdevoluo1: TMenuItem
+      Caption = 'Copiar qtde pendente p/devolu'#231#227'o'
+      OnClick = Copiarqtdependentepdevoluo1Click
     end
   end
 end

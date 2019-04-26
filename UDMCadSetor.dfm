@@ -409,6 +409,11 @@ object DmCadSetor: TDmCadSetor
       FixedChar = True
       Size = 1
     end
+    object sdsProcessoMATERIAL_KG: TStringField
+      FieldName = 'MATERIAL_KG'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspProcesso: TDataSetProvider
     DataSet = sdsProcesso
@@ -534,6 +539,11 @@ object DmCadSetor: TDmCadSetor
     end
     object cdsProcessoCONTROLE_MAQUINA: TStringField
       FieldName = 'CONTROLE_MAQUINA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProcessoMATERIAL_KG: TStringField
+      FieldName = 'MATERIAL_KG'
       FixedChar = True
       Size = 1
     end
