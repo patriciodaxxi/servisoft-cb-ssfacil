@@ -1899,19 +1899,15 @@ object DMConsFinanceiro: TDMConsFinanceiro
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43579.697293761570000000
+    ReportOptions.LastChange = 43581.364611979170000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
-      'var      '
-      
-        '  cSaldoCentroCusto : Currency;                                 ' +
-        '                                 '
+      'var'
+      '  cSaldoCentroCusto : Currency;'
       'procedure GroupHeader1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
       '  cSaldoCentroCusto := 0;'
-      
-        '  cSaldoCentroCusto := <frxCCustoOrcamento."VLR_CONTRATO">;     ' +
-        '                     '
+      '  cSaldoCentroCusto := <frxCCustoOrcamento."VLR_CONTRATO">;'
       'end;'
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
@@ -1919,13 +1915,11 @@ object DMConsFinanceiro: TDMConsFinanceiro
       '  if <frxCCustoOrcamento."VLR_ENTRADA"> <> 0 then'
       
         '    cSaldoCentroCusto := cSaldoCentroCusto + <frxCCustoOrcamento' +
-        '."VLR_ENTRADA">;                                                ' +
-        '                                '
+        '."VLR_ENTRADA">;'
       '  if <frxCCustoOrcamento."VLR_SAIDA"> <> 0 then'
       
         '    cSaldoCentroCusto := cSaldoCentroCusto - <frxCCustoOrcamento' +
-        '."VLR_SAIDA">;                                                  ' +
-        '                              '
+        '."VLR_SAIDA">;'
       'end;'
       ''
       'begin'
@@ -1968,7 +1962,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Top = 2.779530000000000000
           Width = 94.488250000000000000
           Height = 11.338590000000000000
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%2.2m'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2013,7 +2007,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Top = 3.779530000000000000
           Width = 94.488250000000000000
           Height = 11.338590000000000000
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%2.2m'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2216,7 +2210,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Memo.UTF8 = (
             
               '[frxCCustoOrcamento."CODIGO_GRUPO"] - [frxCCustoOrcamento."NOME_' +
-              'GRUPO"] - Valor Contrado: [frxCCustoOrcamento."VLR_CONTRATO"]')
+              'GRUPO"] - Valor Contrado:    [frxCCustoOrcamento."VLR_CONTRATO"]')
           ParentFont = False
           Formats = <
             item
@@ -2224,6 +2218,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
             item
             end
             item
+              FormatStr = '%2.2m'
+              Kind = fkNumeric
             end>
         end
       end
@@ -2251,7 +2247,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Top = 6.000000000000000000
           Width = 158.740260000000000000
           Height = 11.338590000000000000
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%2.2m'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2268,7 +2264,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Top = 6.000000000000000000
           Width = 139.842610000000000000
           Height = 11.338590000000000000
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%2.2m'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2299,7 +2295,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Top = 23.118120000000000000
           Width = 94.488250000000000000
           Height = 11.338590000000000000
-          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.FormatStr = '%2.2m'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack

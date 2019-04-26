@@ -8,7 +8,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, RxLookup, StdCtrls, UDMCadNotaFiscal, Buttons, Grids,
   DBGrids, SMDBGrid, DB, UCadNotaFiscal_Itens, RzPanel, Mask, ToolEdit,
-  CurrEdit, UCadNotaEntrada_Itens;
+  CurrEdit, UCadNotaEntrada_Itens, Menus;
 
 type
   TfrmSel_NotaEntrada = class(TForm)
@@ -38,6 +38,8 @@ type
     Label10: TLabel;
     Label11: TLabel;
     CurrencyEdit1: TCurrencyEdit;
+    PopupMenu1: TPopupMenu;
+    Copiarqtdependentepdevoluo1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -52,6 +54,7 @@ type
       Shift: TShiftState);
     procedure RxDBLookupCombo2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure Copiarqtdependentepdevoluo1Click(Sender: TObject);
   private
     { Private declarations }
     procedure prc_Consultar_NotaEntrada(ID_Nota : Integer = 0 ; Item_Nota : Integer =  0);
@@ -1090,6 +1093,22 @@ begin
     if vCodProduto_Pos > 0 then
       RxDBLookupCombo2.KeyValue := vCodProduto_Pos;
     FreeAndNil(frmSel_Produto);
+  end;
+end;
+
+procedure TfrmSel_NotaEntrada.Copiarqtdependentepdevoluo1Click(
+  Sender: TObject);
+begin
+  if not (fDMCadNotaFiscal.cdsNotaEntrada.IsEmpty) then
+  begin
+    fDMCadNotaFiscal.cdsNotaEntrada.First;
+    while not fDMCadNotaFiscal.cdsNotaEntrada.Eof  do
+    begin
+      fDMCadNotaFiscal.cdsNotaEntrada.Edit;
+      fDMCadNotaFiscal.cdsNotaEntradaQTD_ADEVOLVER.AsFloat := fDMCadNotaFiscal.cdsNotaEntradaQTDRESTANTE.AsFloat;
+      fDMCadNotaFiscal.cdsNotaEntrada.Post;      
+      fDMCadNotaFiscal.cdsNotaEntrada.Next;
+    end;
   end;
 end;
 
