@@ -1,6 +1,6 @@
 object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
-  Left = 96
-  Top = 57
+  Left = 107
+  Top = 78
   Width = 1169
   Height = 533
   Caption = 'frmConsCtaOrcamento_Fin'
@@ -70,7 +70,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Ctl3D = False
       NumGlyphs = 2
       ParentCtl3D = False
-      TabOrder = 0
+      TabOrder = 3
     end
     object DateEdit2: TDateEdit
       Left = 443
@@ -80,7 +80,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Ctl3D = False
       NumGlyphs = 2
       ParentCtl3D = False
-      TabOrder = 1
+      TabOrder = 4
     end
     object NxComboBox2: TNxComboBox
       Left = 151
@@ -90,7 +90,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Cursor = crArrow
       Alignment = taRightJustify
       Color = clSilver
-      TabOrder = 2
+      TabOrder = 5
       Text = 'Data Vencimento:'
       ReadOnly = True
       HideFocus = False
@@ -112,7 +112,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       LookupDisplay = 'NOME_INTERNO'
       LookupSource = DMConsFinanceiro.dsFilial
       ParentCtl3D = False
-      TabOrder = 3
+      TabOrder = 1
     end
     object ComboBox2: TComboBox
       Left = 266
@@ -127,7 +127,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       ItemHeight = 13
       ItemIndex = 1
       ParentCtl3D = False
-      TabOrder = 4
+      TabOrder = 6
       Text = 'Anal'#237'tica'
       Visible = False
       Items.Strings = (
@@ -147,7 +147,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       ItemHeight = 13
       ItemIndex = 2
       ParentCtl3D = False
-      TabOrder = 5
+      TabOrder = 2
       Text = 'Todos'
       Items.Strings = (
         'Pagos'
@@ -155,7 +155,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
         'Todos')
     end
     object btnConsultar: TNxButton
-      Left = 265
+      Left = 266
       Top = 105
       Width = 182
       Height = 30
@@ -222,7 +222,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 8
       Transparent = True
       OnClick = btnConsultarClick
     end
@@ -294,7 +294,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
         FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 9
       Transparent = True
       OnClick = btnImprimirClick
     end
@@ -305,7 +305,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Height = 135
       Align = alLeft
       Caption = ' Imprimir Detalhado '
-      TabOrder = 8
+      TabOrder = 0
       object CheckBox1: TCheckBox
         Left = 8
         Top = 24
@@ -343,7 +343,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       LookupDisplay = 'DESCRICAO;CODIGO'
       LookupSource = DMConsFinanceiro.dsCentroCusto
       ParentCtl3D = False
-      TabOrder = 9
+      TabOrder = 7
     end
   end
   object StaticText1: TStaticText
@@ -698,19 +698,21 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
               Expanded = False
               FieldName = 'NOME_GRUPO'
               Title.Alignment = taCenter
-              Width = 298
+              Width = 268
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CONTA_ORCAMENTO'
               Title.Alignment = taCenter
+              Width = 90
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'NOME_ORCAMENTO'
               Title.Alignment = taCenter
+              Width = 234
               Visible = True
             end
             item

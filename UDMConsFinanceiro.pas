@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, StrUtils,
-  frxClass, frxDBSet;
+  frxClass, frxDBSet, frxExportPDF;
 
 type
   TDMConsFinanceiro = class(TDataModule)
@@ -329,6 +329,14 @@ type
     cdsCCustoOrcamentoID_CONTA_ORCAMENTO: TIntegerField;
     cdsCCustoOrcamentoNOME_ORCAMENTO: TStringField;
     cdsCCustoOrcamentoVLR_CONTRATO: TFloatField;
+    qResumoCentro_Custo: TSQLQuery;
+    frxResumoCentro_Custo: TfrxDBDataset;
+    qResumoCentro_CustoVLR_ENTRADA: TFloatField;
+    qResumoCentro_CustoVLR_SAIDA: TFloatField;
+    qResumoCentro_CustoCODIGO_GRUPO: TStringField;
+    qResumoCentro_CustoNOME_GRUPO: TStringField;
+    qResumoCentro_CustoVLR_CONTRATO: TFloatField;
+    frxPDFExport1: TfrxPDFExport;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConta_OrcNewRecord(DataSet: TDataSet);
     procedure mDespesaNewRecord(DataSet: TDataSet);
