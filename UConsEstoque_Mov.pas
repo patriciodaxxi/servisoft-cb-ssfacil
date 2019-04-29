@@ -140,6 +140,8 @@ type
     procedure prc_Chamar_Sel_Pessoa(Tipo: String);
   public
     { Public declarations }
+    vID_Cor_Loc : Integer;
+
   end;
 
 var
@@ -163,6 +165,7 @@ end;
 procedure TfrmConsEstoque_Mov.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  vID_Cor_Loc := 0;
   prc_Grava_Grid(SMDBGrid1, Name, fDMConsEstoque.qParametros_GeralENDGRIDS.AsString);
   fDMConsEstoque.cdsProduto.Filtered := False;
   Action := Cafree;
@@ -206,7 +209,10 @@ begin
   if vControleExterno then
   begin
     RadioGroup2.ItemIndex := 4;
-    RadioGroup1.ItemIndex := 0;
+    if vID_Cor_Loc > 0 then
+      RadioGroup1.ItemIndex := 2
+    else
+      RadioGroup1.ItemIndex := 0;
     btnConsultar.Click;
   end;
 end;
@@ -396,6 +402,9 @@ begin
     vComando := vComando + ' AND EM.ID_LOCAL_ESTOQUE = ' + IntToStr(rxdbLocalEstoque.KeyValue);
   if (CurrencyEdit1.AsInteger > 0) and (RzPageControl1.ActivePage = TS_Reserva) then
     vComando := vComando + ' AND EM.NUM_ORDEM = ' + IntToStr(CurrencyEdit1.AsInteger);
+  if vID_Cor_Loc > 0 then
+    vComando := vComando + ' AND EM.ID_COR = ' + IntToStr(vID_Cor_Loc)
+  else
   if ckSemCor.Checked then
     vComando := vComando + ' AND EM.ID_COR = 0 ';
 end;

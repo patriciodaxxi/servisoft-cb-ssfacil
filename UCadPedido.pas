@@ -357,6 +357,7 @@ type
     Label85: TLabel;
     DBEdit27: TDBEdit;
     Personalizado1: TMenuItem;
+    RtuloComEmbalagemRolo1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -475,6 +476,7 @@ type
     procedure btnConsTempoClick(Sender: TObject);
     procedure EtiquetaA4Seleciona1Click(Sender: TObject);
     procedure aloPorProcesso1Click(Sender: TObject);
+    procedure RtuloComEmbalagemRolo1Click(Sender: TObject);
   private
     { Private declarations }
     fLista : TStringList;
@@ -514,7 +516,7 @@ type
     procedure prc_Limpar_Edit_Consulta;
     procedure prc_Posiciona_Imp;
     procedure prc_Monta_Etiqueta_Nav;
-    procedure prc_Monta_Etiqueta_Calcado(Tipo: String); //D= DOS   A=A4 em windows
+    procedure prc_Monta_Etiqueta_Calcado(Tipo: String ; Qtd_Emb : Real = 0); //D= DOS   A=A4 em windows
     procedure prc_Gravar_mEtiqueta_Nav(Tamanho: String);
     procedure prc_Imprimir_Etiqueta;
     procedure prc_Gravar_Pedido_Excel;
@@ -2331,14 +2333,14 @@ begin
     exit;
 
   prc_Posiciona_Imp;
-  prc_Monta_Etiqueta_Calcado('D');
+  prc_Monta_Etiqueta_Calcado('D',0);
   fDMCadPedido.mEtiqueta_Nav.IndexFieldNames := 'Referencia;Nome_Produto;Tamanho';
   prc_Imprimir_Etiqueta;
 
   MessageDlg('Etiquetas impressas!', mtInformation, [mbOk], 0);
 end;
 
-procedure TfrmCadPedido.prc_Monta_Etiqueta_Calcado(Tipo: String); //D= DOS   A=A4 em windows
+procedure TfrmCadPedido.prc_Monta_Etiqueta_Calcado(Tipo: String ; Qtd_Emb : Real); //D= DOS   A=A4 em windows
 var
   i, I2: Integer;
   vQtdDiv: Integer;
@@ -2391,6 +2393,16 @@ begin
         continue;
       end;
     end;
+    //29/04/2019
+    if (Tipo = 'A') and (Qtd_Emb > 0) then
+    begin
+      if fDMCadPedido.cdsPedidoImp_ItensQTD_EMBALAGEM_PROD.AsInteger <= 0 then
+      begin
+        fDMCadPedido.cdsPedidoImp_Itens.Next;
+        continue;
+      end;
+    end;
+    //********************
 
     if Tipo = 'AE' then
     begin
@@ -2407,17 +2419,22 @@ begin
       //if fDMCadPedido.cdsPedidoImp_ItensQTD.AsInteger mod vQtdPac > 0 then
       //  vQtdDiv := vQtdDiv + 1;
 
+      if (Tipo = 'A') and (Qtd_Emb > 0) then
+        vQtdPac := fDMCadPedido.cdsPedidoImp_ItensQTD_EMBALAGEM_PROD.AsInteger
+      else
       if (Tipo = 'A') and (StrToFloat(FormatFloat('0.000',fDMCadPedido.cdsPedidoImp_ItensQTD_POR_ROTULO_PROD.AsFloat)) > 0) then
         vQtdPac := fDMCadPedido.cdsPedidoImp_ItensQTD_POR_ROTULO_PROD.AsInteger
       else
       if (Tipo = 'A') then
         vQtdPac := vQtdPac_Orig;
+
       vQtdAux2 := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat / vQtdPac;
       vQtdDiv := Trunc(vQtdAux2);
       if (vQtdAux2 - Trunc(vQtdAux2)) > 0 then
         vQtdDiv := vQtdDiv + 1;
 
     end;
+    
     if (Tipo <> 'A') and (Tipo <> 'AE') then
       vQtdDiv := Trunc(vQtdAux);
     for i := 1 to vQtdDiv do
@@ -4319,6 +4336,30 @@ begin
     end;
     fDMCadPedido.qFilial_Relatorio_Menu.Next
   end;
+end;
+
+procedure TfrmCadPedido.RtuloComEmbalagemRolo1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
+    exit;
+
+  prc_Posiciona_Imp;
+
+  prc_Monta_Etiqueta_Calcado('A',1);
+
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Fazer.fr3';
+    
+  if FileExists(vArq) then
+    fDMCadPedido.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadPedido.frxReport1.ShowReport;
+
 end;
 
 end.

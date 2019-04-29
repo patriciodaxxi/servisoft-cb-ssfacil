@@ -6781,7 +6781,7 @@ object frmCadPedido: TfrmCadPedido
     Top = 262
   end
   object PopupMenu1: TPopupMenu
-    Left = 1001
+    Left = 1000
     Top = 94
     object Pedido1: TMenuItem
       Caption = 'Pedido'
@@ -6859,6 +6859,10 @@ object frmCadPedido: TfrmCadPedido
       object Pictograma1: TMenuItem
         Caption = 'Pictograma'
         OnClick = Pictograma1Click
+      end
+      object RtuloComEmbalagemRolo1: TMenuItem
+        Caption = 'R'#243'tulo Com Embalagem (Textil)'
+        OnClick = RtuloComEmbalagemRolo1Click
       end
     end
     object N1: TMenuItem

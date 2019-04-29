@@ -312,10 +312,13 @@ begin
     ceIDProduto.AsInteger := vId;
     ffrmConsEstoque_Mov   := TfrmConsEstoque_Mov.Create(self);
     vControleExterno      := True;
-    ffrmConsEstoque_Mov.RxDBLookupCombo1.KeyValue := RxDBLookupCombo1.KeyValue;
+    if Trim(RxDBLookupCombo1.Text) <> '' then
+      ffrmConsEstoque_Mov.RxDBLookupCombo1.KeyValue := RxDBLookupCombo1.KeyValue;
     ffrmConsEstoque_Mov.ceIDProduto.AsInteger := ceIDProduto.AsInteger;
     ffrmConsEstoque_Mov.edtRef.Text := edtRef.Text;
     ffrmConsEstoque_Mov.WindowState := wsMaximized;
+    ffrmConsEstoque_Mov.vID_Cor_Loc := fDMConsEstoque.cdsEstoque_AtualID_COR.AsInteger;
+    ffrmConsEstoque_Mov.RadioGroup1.ItemIndex := 2;
     ffrmConsEstoque_Mov.ShowModal;
     ceIDProduto.Clear;
     FreeAndNil(frmConsEstoque_Mov);
