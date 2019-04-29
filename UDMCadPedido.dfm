@@ -3,7 +3,7 @@ object DMCadPedido: TDMCadPedido
   OnCreate = DataModuleCreate
   Left = 65531
   Top = 8
-  Height = 706
+  Height = 691
   Width = 1386
   object sdsPedido: TSQLDataSet
     NoMetadata = True
@@ -7943,10 +7943,6 @@ object DMCadPedido: TDMCadPedido
         Size = 60
       end
       item
-        Name = 'Qtd'
-        DataType = ftInteger
-      end
-      item
         Name = 'Pedido_Cliente'
         DataType = ftString
         Size = 20
@@ -7983,6 +7979,10 @@ object DMCadPedido: TDMCadPedido
         Name = 'Unidade'
         DataType = ftString
         Size = 12
+      end
+      item
+        Name = 'Qtd'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     IndexFieldNames = 'Nome_Etiqueta;Tamanho'
@@ -7998,14 +7998,14 @@ object DMCadPedido: TDMCadPedido
       0100490000000100055749445448020002000A000A5265666572656E63696101
       004900000001000557494454480200020014000C4E6F6D655F50726F6475746F
       01004900000001000557494454480200020064000C4E6F6D655F436C69656E74
-      650100490000000100055749445448020002003C000351746404000100000000
-      000E50656469646F5F436C69656E746501004900000001000557494454480200
-      020014000C46616E74617369615F436C69010049000000010005574944544802
-      0002002800094474456D697373616F04000600000000000C50726F645F436C69
-      656E74650100490000000100055749445448020002001400054E756D4F530100
-      490000000100055749445448020002001E0008456E63657261646F0100490000
-      000100055749445448020002000A00084974656D5F5065640400010000000000
-      07556E69646164650100490000000100055749445448020002000C000000}
+      650100490000000100055749445448020002003C000E50656469646F5F436C69
+      656E746501004900000001000557494454480200020014000C46616E74617369
+      615F436C690100490000000100055749445448020002002800094474456D6973
+      73616F04000600000000000C50726F645F436C69656E74650100490000000100
+      055749445448020002001400054E756D4F530100490000000100055749445448
+      020002001E0008456E63657261646F0100490000000100055749445448020002
+      000A00084974656D5F506564040001000000000007556E696461646501004900
+      00000100055749445448020002000C000351746408000400000000000000}
     object mEtiqueta_NavNome_Empresa: TStringField
       FieldName = 'Nome_Empresa'
       Size = 15
@@ -8032,9 +8032,6 @@ object DMCadPedido: TDMCadPedido
     object mEtiqueta_NavNome_Cliente: TStringField
       FieldName = 'Nome_Cliente'
       Size = 60
-    end
-    object mEtiqueta_NavQtd: TIntegerField
-      FieldName = 'Qtd'
     end
     object mEtiqueta_NavPedido_Cliente: TStringField
       FieldName = 'Pedido_Cliente'
@@ -8063,6 +8060,9 @@ object DMCadPedido: TDMCadPedido
     object mEtiqueta_NavUnidade: TStringField
       FieldName = 'Unidade'
       Size = 12
+    end
+    object mEtiqueta_NavQtd: TFloatField
+      FieldName = 'Qtd'
     end
   end
   object dsmEtiqueta_Nav: TDataSource
@@ -10920,7 +10920,7 @@ object DMCadPedido: TDMCadPedido
       'NOME_ACABAMENTO=NOME_ACABAMENTO')
     DataSource = dsPedidoImp_Itens
     BCDToCurrency = False
-    Left = 905
+    Left = 906
     Top = 452
   end
   object frxRichObject1: TfrxRichObject
@@ -13913,7 +13913,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmCarimbo
     BCDToCurrency = False
     Left = 1000
-    Top = 448
+    Top = 447
   end
   object sdsPedidoImp_Carimbo: TSQLDataSet
     NoMetadata = True
@@ -13959,7 +13959,6 @@ object DMCadPedido: TDMCadPedido
       'Referencia=Referencia'
       'Nome_Produto=Nome_Produto'
       'Nome_Cliente=Nome_Cliente'
-      'Qtd=Qtd'
       'Pedido_Cliente=Pedido_Cliente'
       'Fantasia_Cli=Fantasia_Cli'
       'DtEmissao=DtEmissao'
@@ -13967,7 +13966,8 @@ object DMCadPedido: TDMCadPedido
       'NumOS=NumOS'
       'Encerado=Encerado'
       'Item_Ped=Item_Ped'
-      'Unidade=Unidade')
+      'Unidade=Unidade'
+      'Qtd=Qtd')
     DataSource = dsmEtiqueta_Nav
     BCDToCurrency = False
     Left = 912

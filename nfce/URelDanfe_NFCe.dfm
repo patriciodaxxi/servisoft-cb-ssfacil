@@ -874,7 +874,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel30: TRLLabel
             Left = 29
-            Top = 63
+            Top = 51
             Width = 93
             Height = 12
             Alignment = taRightJustify
@@ -958,7 +958,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel7: TRLLabel
             Left = 229
-            Top = 63
+            Top = 51
             Width = 37
             Height = 12
             Alignment = taRightJustify
@@ -972,7 +972,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel15: TRLLabel
             Left = 68
-            Top = 51
+            Top = 63
             Width = 54
             Height = 12
             Alignment = taRightJustify
@@ -986,7 +986,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel16: TRLLabel
             Left = 245
-            Top = 51
+            Top = 63
             Width = 21
             Height = 12
             Alignment = taRightJustify

@@ -1384,7 +1384,6 @@ type
     mRotulos_SGradeComplemento_End: TStringField;
     mRotulos_SGradeQtd: TFloatField;
     mEtiqueta_NavNome_Cliente: TStringField;
-    mEtiqueta_NavQtd: TIntegerField;
     mEtiqueta_NavPedido_Cliente: TStringField;
     cdsParametrosIMP_MEIA_FOLHA_PED: TStringField;
     cdsTab_NCMUSAR_MVA_UF_DESTINO: TStringField;
@@ -3439,6 +3438,7 @@ type
     sdsPedidoID_PEDWEB: TIntegerField;
     cdsPedidoID_PEDWEB: TIntegerField;
     cdsTriCCustoEMAIL_COMRAS: TStringField;
+    mEtiqueta_NavQtd: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
