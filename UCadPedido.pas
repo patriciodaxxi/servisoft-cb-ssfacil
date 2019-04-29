@@ -2349,6 +2349,7 @@ var
   ffrmImpEtiq_Emb: TfrmImpEtiq_Emb;
   vFloat : Real;
   vQtdAux2 : Real;
+  vQtdPac_Orig : Integer;
 
 begin
   vTexto := '1';
@@ -2375,6 +2376,7 @@ begin
   else
     vQtdDiv := 1;
   vQtdPac := vQtdDiv;
+  vQtdPac_Orig := vQtdPac;
 
   fDMCadPedido.mEtiqueta_Nav.EmptyDataSet;
   fDMCadPedido.cdsPedidoImp_Itens.First;
@@ -2405,6 +2407,11 @@ begin
       //if fDMCadPedido.cdsPedidoImp_ItensQTD.AsInteger mod vQtdPac > 0 then
       //  vQtdDiv := vQtdDiv + 1;
 
+      if (Tipo = 'A') and (StrToFloat(FormatFloat('0.000',fDMCadPedido.cdsPedidoImp_ItensQTD_POR_ROTULO_PROD.AsFloat)) > 0) then
+        vQtdPac := fDMCadPedido.cdsPedidoImp_ItensQTD_POR_ROTULO_PROD.AsInteger
+      else
+      if (Tipo = 'A') then
+        vQtdPac := vQtdPac_Orig;
       vQtdAux2 := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat / vQtdPac;
       vQtdDiv := Trunc(vQtdAux2);
       if (vQtdAux2 - Trunc(vQtdAux2)) > 0 then
@@ -2457,6 +2464,7 @@ begin
         fDMCadPedido.mEtiqueta_NavFantasia_Cli.AsString   := fDMCadPedido.cdsPedidoImpFANTASIA_CLI.AsString;
         fDMCadPedido.mEtiqueta_NavPedido_Cliente.AsString := fDMCadPedido.cdsPedidoImpPEDIDO_CLIENTE.AsString;
       end;
+
       if vQtdAux > vQtdPac then
         fDMCadPedido.mEtiqueta_NavQtd.AsFloat := Trunc(vQtdPac)
       else
@@ -2465,6 +2473,20 @@ begin
       vQtdAux := vQtdAux - vQtdPac;
       if vQtdAux <= 0 then
         vQtdDiv := i;
+
+      if (Trim(fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString) <> '') and
+         (fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString <> fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString) and
+         (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat)) > 0) then
+      begin
+        fDMCadPedido.mEtiqueta_NavQtd2.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadPedido.mEtiqueta_NavQtd.AsFloat * fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat));
+        fDMCadPedido.mEtiqueta_NavUnidade_Prod.AsString := fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString;
+      end
+      else
+      begin
+        fDMCadPedido.mEtiqueta_NavQtd2.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.mEtiqueta_NavQtd.AsFloat));
+        fDMCadPedido.mEtiqueta_NavUnidade_Prod.AsString := fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString;
+      end;
+
       if fDMCadPedido.mEtiqueta_Nav.State in [dsEdit,dsInsert] then
         fDMCadPedido.mEtiqueta_Nav.Post;
     end;

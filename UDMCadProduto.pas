@@ -1933,6 +1933,8 @@ type
     cdsProduto_ConsumoNOME_POSICAO: TStringField;
     sdsProduto_Comb_MatNOME_POSICAO: TStringField;
     cdsProduto_Comb_MatNOME_POSICAO: TStringField;
+    sdsProdutoQTD_POR_ROTULO: TFloatField;
+    cdsProdutoQTD_POR_ROTULO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

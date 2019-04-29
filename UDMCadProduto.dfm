@@ -13,7 +13,6 @@ object dmCadProduto: TdmCadProduto
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 50
-    Top = 1
     object sdsProdutoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -470,6 +469,9 @@ object dmCadProduto: TdmCadProduto
     object sdsProdutoNOME_MODELO: TStringField
       FieldName = 'NOME_MODELO'
       Size = 100
+    end
+    object sdsProdutoQTD_POR_ROTULO: TFloatField
+      FieldName = 'QTD_POR_ROTULO'
     end
   end
   object dspProduto: TDataSetProvider
@@ -997,6 +999,9 @@ object dmCadProduto: TdmCadProduto
     object cdsProdutoNOME_MODELO: TStringField
       FieldName = 'NOME_MODELO'
       Size = 100
+    end
+    object cdsProdutoQTD_POR_ROTULO: TFloatField
+      FieldName = 'QTD_POR_ROTULO'
     end
   end
   object dsProduto: TDataSource

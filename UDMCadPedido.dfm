@@ -4777,19 +4777,19 @@ object DMCadPedido: TDMCadPedido
       'RO.LOCALIZACAO'#13#10'  ELSE NULL'#13#10'  END LOCALIZACAO,'#13#10'case '#13#10'  WHEN P' +
       'I.TIPO_OS = '#39'OC'#39' THEN PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'OP'#39' THEN ' +
       'PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'RE'#39' THEN PI.TIPO_OS'#13#10'  ELSE '#39#39#13 +
-      #10'  END DESC_TIPO_OS'#13#10#13#10'FROM PEDIDO_ITEM PI'#13#10'LEFT JOIN PRODUTO PR' +
-      'O ON (PI.ID_PRODUTO = PRO.ID)'#13#10'LEFT JOIN MARCA ON (PRO.ID_MARCA ' +
-      '= MARCA.ID)'#13#10'LEFT JOIN PEDIDO_ITEM_TIPO PT ON (PI.ID = PT.ID AND' +
-      ' PI.ITEM = PT.ITEM)'#13#10'LEFT JOIN TAB_NCM NCM ON (PRO.ID_NCM = NCM.' +
-      'ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JO' +
-      'IN PRODUTO_TAM PTAM ON (PI.id_produto = PTAM.id AND PI.tamanho =' +
-      ' PTAM.tamanho)'#13#10'LEFT JOIN PESSOA ATE ON (PI.id_atelier = ATE.COD' +
-      'IGO )'#13#10'LEFT JOIN PRODUTO_LOTE PLOTE ON (PI.ID_PRODUTO = PLOTE.ID' +
-      ' AND PI.NUM_LOTE_CONTROLE = PLOTE.NUM_LOTE_CONTROLE)'#13#10'LEFT JOIN ' +
-      'TIPO_MATERIAL TMAT ON (PT.ID_TIPO_MATERIAL = TMAT.ID)'#13#10'LEFT JOIN' +
-      ' MATRIZ_PRECO MP ON MP.ID = PT.ID_ACABAMENTO'#13#10'WHERE PI.ID = :ID'#13 +
-      #10'AND ((PI.TIPO_ACESSORIO = '#39'N'#39') OR (PI.TIPO_ACESSORIO IS NULL))'#13 +
-      #10' AND (PI.QTD > 0)'
+      #10'  END DESC_TIPO_OS, PRO.QTD_POR_ROTULO QTD_POR_ROTULO_PROD'#13#10#13#10'F' +
+      'ROM PEDIDO_ITEM PI'#13#10'LEFT JOIN PRODUTO PRO ON (PI.ID_PRODUTO = PR' +
+      'O.ID)'#13#10'LEFT JOIN MARCA ON (PRO.ID_MARCA = MARCA.ID)'#13#10'LEFT JOIN P' +
+      'EDIDO_ITEM_TIPO PT ON (PI.ID = PT.ID AND PI.ITEM = PT.ITEM)'#13#10'LEF' +
+      'T JOIN TAB_NCM NCM ON (PRO.ID_NCM = NCM.ID)'#13#10'LEFT JOIN COMBINACA' +
+      'O COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JOIN PRODUTO_TAM PTAM ON (' +
+      'PI.id_produto = PTAM.id AND PI.tamanho = PTAM.tamanho)'#13#10'LEFT JOI' +
+      'N PESSOA ATE ON (PI.id_atelier = ATE.CODIGO )'#13#10'LEFT JOIN PRODUTO' +
+      '_LOTE PLOTE ON (PI.ID_PRODUTO = PLOTE.ID AND PI.NUM_LOTE_CONTROL' +
+      'E = PLOTE.NUM_LOTE_CONTROLE)'#13#10'LEFT JOIN TIPO_MATERIAL TMAT ON (P' +
+      'T.ID_TIPO_MATERIAL = TMAT.ID)'#13#10'LEFT JOIN MATRIZ_PRECO MP ON MP.I' +
+      'D = PT.ID_ACABAMENTO'#13#10'WHERE PI.ID = :ID'#13#10'AND ((PI.TIPO_ACESSORIO' +
+      ' = '#39'N'#39') OR (PI.TIPO_ACESSORIO IS NULL))'#13#10' AND (PI.QTD > 0)'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -5377,6 +5377,9 @@ object DMCadPedido: TDMCadPedido
     object cdsPedidoImp_ItensNOME_ACABAMENTO: TStringField
       FieldName = 'NOME_ACABAMENTO'
       Size = 30
+    end
+    object cdsPedidoImp_ItensQTD_POR_ROTULO_PROD: TFloatField
+      FieldName = 'QTD_POR_ROTULO_PROD'
     end
   end
   object dsPedidoImp_Itens: TDataSource
@@ -7080,7 +7083,7 @@ object DMCadPedido: TDMCadPedido
     ProviderName = 'dspPedidoImp_Tam'
     OnNewRecord = cdsPedido_ItensNewRecord
     Left = 344
-    Top = 342
+    Top = 341
     object cdsPedidoImp_TamID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7983,6 +7986,15 @@ object DMCadPedido: TDMCadPedido
       item
         Name = 'Qtd'
         DataType = ftFloat
+      end
+      item
+        Name = 'Unidade_Prod'
+        DataType = ftString
+        Size = 6
+      end
+      item
+        Name = 'Qtd2'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     IndexFieldNames = 'Nome_Etiqueta;Tamanho'
@@ -7991,7 +8003,7 @@ object DMCadPedido: TDMCadPedido
     Left = 816
     Top = 311
     Data = {
-      DA0100009619E0BD010000001800000010000000000003000000DA010C4E6F6D
+      080200009619E0BD01000000180000001200000000000300000008020C4E6F6D
       655F456D70726573610100490000000100055749445448020002000F0004466F
       6E650100490000000100055749445448020002000C000D4E6F6D655F45746971
       7565746101004900000001000557494454480200020019000754616D616E686F
@@ -8005,7 +8017,9 @@ object DMCadPedido: TDMCadPedido
       055749445448020002001400054E756D4F530100490000000100055749445448
       020002001E0008456E63657261646F0100490000000100055749445448020002
       000A00084974656D5F506564040001000000000007556E696461646501004900
-      00000100055749445448020002000C000351746408000400000000000000}
+      00000100055749445448020002000C000351746408000400000000000C556E69
+      646164655F50726F640100490000000100055749445448020002000600045174
+      643208000400000000000000}
     object mEtiqueta_NavNome_Empresa: TStringField
       FieldName = 'Nome_Empresa'
       Size = 15
@@ -8063,6 +8077,13 @@ object DMCadPedido: TDMCadPedido
     end
     object mEtiqueta_NavQtd: TFloatField
       FieldName = 'Qtd'
+    end
+    object mEtiqueta_NavUnidade_Prod: TStringField
+      FieldName = 'Unidade_Prod'
+      Size = 6
+    end
+    object mEtiqueta_NavQtd2: TFloatField
+      FieldName = 'Qtd2'
     end
   end
   object dsmEtiqueta_Nav: TDataSource
@@ -10512,15 +10533,15 @@ object DMCadPedido: TDMCadPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 42321.628830243100000000
+    ReportOptions.CreateDate = 41928.578144409700000000
+    ReportOptions.LastChange = 43584.563469895830000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
     OnPreview = frxReport1Preview
     OnReportPrint = 'frxReportOnReportPrint'
     Left = 823
-    Top = 407
+    Top = 406
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxPedidoImp'
@@ -13967,7 +13988,9 @@ object DMCadPedido: TDMCadPedido
       'Encerado=Encerado'
       'Item_Ped=Item_Ped'
       'Unidade=Unidade'
-      'Qtd=Qtd')
+      'Qtd=Qtd'
+      'Unidade_Prod=Unidade_Prod'
+      'Qtd2=Qtd2')
     DataSource = dsmEtiqueta_Nav
     BCDToCurrency = False
     Left = 912

@@ -3439,6 +3439,9 @@ type
     cdsPedidoID_PEDWEB: TIntegerField;
     cdsTriCCustoEMAIL_COMRAS: TStringField;
     mEtiqueta_NavQtd: TFloatField;
+    mEtiqueta_NavUnidade_Prod: TStringField;
+    mEtiqueta_NavQtd2: TFloatField;
+    cdsPedidoImp_ItensQTD_POR_ROTULO_PROD: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
