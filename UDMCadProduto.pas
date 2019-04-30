@@ -2799,7 +2799,7 @@ begin
     begin
       if fnc_ProdutoForn_Duplicatado(cdsProduto_FornID_FORNECEDOR.AsInteger,cdsProduto_FornCOD_MATERIAL_FORN.AsString,cdsProduto_FornCOD_COR_FORN.AsString,cdsProduto_FornTAMANHO_CLIENTE.AsString) then
       begin
-        vMsgErro := vMsgErro + #13 + '*** Produto ' + cdsProduto_FornCOD_MATERIAL_FORN.AsString + ' já cadastrado no ID do produto ' + IntToStr(vID_Produto_Forn);
+        vMsgErro := vMsgErro + #13 + '*** Produto  ' + cdsProduto_FornCOD_MATERIAL_FORN.AsString + ' do Fornecedor já cadastrado no ID do produto ' + IntToStr(vID_Produto_Forn);
         if trim(cdsProduto_FornCOD_COR_FORN.AsString) <> '' then
           vMsgErro := vMsgErro + #13 + '     Cor ' + cdsProduto_FornCOD_COR_FORN.AsString;
         if trim(cdsProduto_FornTAMANHO_CLIENTE.AsString) <> '' then
