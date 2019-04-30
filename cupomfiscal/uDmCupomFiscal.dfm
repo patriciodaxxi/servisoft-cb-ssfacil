@@ -6498,8 +6498,8 @@ object dmCupomFiscal: TdmCupomFiscal
     IndexFieldNames = 'ID_Pedido'
     Params = <>
     StoreDefs = True
-    Left = 969
-    Top = 272
+    Left = 953
+    Top = 216
     Data = {
       490000009619E0BD01000000180000000200000000000300000049000949445F
       50656469646F0400010000000000084F42535F4E6F7461010049000000010005
@@ -6658,7 +6658,7 @@ object dmCupomFiscal: TdmCupomFiscal
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCupom_Cons_Parc'
-    Left = 907
+    Left = 899
     Top = 216
     object cdsCupom_Cons_ParcVALOR: TFloatField
       FieldName = 'VALOR'
@@ -6776,8 +6776,8 @@ object dmCupomFiscal: TdmCupomFiscal
       'FROM CUPOMFISCAL C'
       'WHERE C.id = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 872
-    Top = 312
+    Left = 840
+    Top = 328
     object qVerID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6918,8 +6918,8 @@ object dmCupomFiscal: TdmCupomFiscal
       'SELECT ENDGRIDS'
       'FROM PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 824
-    Top = 296
+    Left = 792
+    Top = 328
     object qParametros_GeralENDGRIDS: TStringField
       FieldName = 'ENDGRIDS'
       Size = 250
@@ -7138,5 +7138,52 @@ object dmCupomFiscal: TdmCupomFiscal
     object qNCM_UFPERC_RED_MVA_CLI_SIMPLES: TFloatField
       FieldName = 'PERC_RED_MVA_CLI_SIMPLES'
     end
+  end
+  object sdsTotais: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT NOME, SUM(TOTAL) TOTAL'#13#10'FROM TOTAIS_FORMA_PGTO'#13#10'WHERE DAT' +
+      'A BETWEEN :D1 AND :D2'#13#10'GROUP BY NOME'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'D1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'D2'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 800
+    Top = 272
+  end
+  object dspTotais: TDataSetProvider
+    DataSet = sdsTotais
+    Left = 840
+    Top = 272
+  end
+  object cdsTotais: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTotais'
+    Left = 880
+    Top = 272
+    object cdsTotaisNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsTotaisTOTAL: TFloatField
+      FieldName = 'TOTAL'
+      DisplayFormat = '#,###,##0.00'
+    end
+  end
+  object dsTotais: TDataSource
+    DataSet = cdsTotais
+    Left = 920
+    Top = 272
   end
 end

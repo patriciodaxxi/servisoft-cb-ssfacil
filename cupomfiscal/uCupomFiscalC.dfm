@@ -1,8 +1,8 @@
 object fCupomFiscalC: TfCupomFiscalC
-  Left = 18
+  Left = 17
   Top = 0
   Width = 1296
-  Height = 746
+  Height = 717
   Caption = 'fCupomFiscalC'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,7 +22,7 @@ object fCupomFiscalC: TfCupomFiscalC
     Left = 0
     Top = 167
     Width = 1288
-    Height = 417
+    Height = 305
     Align = alClient
     Ctl3D = False
     DataSource = dmCupomFiscal.dsCupom_Cons
@@ -866,7 +866,7 @@ object fCupomFiscalC: TfCupomFiscalC
   end
   object Panel1: TPanel
     Left = 0
-    Top = 652
+    Top = 472
     Width = 1288
     Height = 26
     Align = alBottom
@@ -1238,43 +1238,29 @@ object fCupomFiscalC: TfCupomFiscalC
   end
   object Panel2: TPanel
     Left = 0
-    Top = 678
+    Top = 566
     Width = 1288
-    Height = 37
+    Height = 120
     Align = alBottom
     TabOrder = 5
-    object Label7: TLabel
-      Left = 148
-      Top = 18
-      Width = 84
-      Height = 13
-      Caption = 'Total de Dinheiro:'
-    end
     object Label8: TLabel
-      Left = 616
-      Top = 18
+      Left = 124
+      Top = 82
       Width = 59
       Height = 13
       Caption = 'Valor M'#233'dio:'
     end
     object Label10: TLabel
-      Left = 2
-      Top = 18
+      Left = 130
+      Top = 42
       Width = 53
       Height = 13
       Caption = 'Comandas:'
     end
-    object Label11: TLabel
-      Left = 410
-      Top = 18
-      Width = 34
-      Height = 13
-      Caption = 'Outros:'
-    end
-    object ceDin: TCurrencyEdit
-      Left = 234
-      Top = 5
-      Width = 161
+    object ceVM: TCurrencyEdit
+      Left = 186
+      Top = 69
+      Width = 121
       Height = 26
       AutoSize = False
       Font.Charset = DEFAULT_CHARSET
@@ -1285,24 +1271,10 @@ object fCupomFiscalC: TfCupomFiscalC
       ParentFont = False
       TabOrder = 0
     end
-    object ceVM: TCurrencyEdit
-      Left = 680
-      Top = 5
-      Width = 121
-      Height = 26
-      AutoSize = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-    end
     object ceQtd: TCurrencyEdit
-      Left = 58
-      Top = 5
-      Width = 81
+      Left = 186
+      Top = 29
+      Width = 119
       Height = 26
       AutoSize = False
       DecimalPlaces = 0
@@ -1313,26 +1285,68 @@ object fCupomFiscalC: TfCupomFiscalC
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
     end
-    object ceOut: TCurrencyEdit
-      Left = 448
-      Top = 5
-      Width = 161
-      Height = 26
-      AutoSize = False
+    object SMDBGrid5: TSMDBGrid
+      Left = 472
+      Top = 1
+      Width = 815
+      Height = 118
+      Align = alRight
+      Ctl3D = False
+      DataSource = dmCupomFiscal.dsTotais
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -19
+      Font.Height = -13
       Font.Name = 'Verdana'
       Font.Style = []
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      ParentCtl3D = False
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -13
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      Flat = True
+      BandsFont.Charset = DEFAULT_CHARSET
+      BandsFont.Color = clWindowText
+      BandsFont.Height = -11
+      BandsFont.Name = 'MS Sans Serif'
+      BandsFont.Style = []
+      Groupings = <>
+      GridStyle.Style = gsCustom
+      GridStyle.OddColor = clWindow
+      GridStyle.EvenColor = clWindow
+      TitleHeight.PixelCount = 24
+      FooterColor = clBtnFace
+      ExOptions = [eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+      RegistryKey = 'Software\Scalabium'
+      RegistrySection = 'SMDBGrid'
+      WidthOfIndicator = 11
+      DefaultRowHeight = 20
+      ScrollBars = ssHorizontal
+      ColCount = 3
+      RowCount = 2
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Title.Caption = 'FORMA DE PAGAMENTO'
+          Width = 308
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TOTAL'
+          Visible = True
+        end>
     end
   end
   object pnlCliente: TPanel
     Left = 0
-    Top = 584
+    Top = 498
     Width = 1288
     Height = 68
     Align = alBottom

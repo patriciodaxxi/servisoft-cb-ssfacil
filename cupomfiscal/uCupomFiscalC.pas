@@ -45,14 +45,10 @@ type
     Imprimir_Off_Line: TMenuItem;
     Enviarnomtodoantigo1: TMenuItem;
     Panel2: TPanel;
-    ceDin: TCurrencyEdit;
     ceVM: TCurrencyEdit;
-    Label7: TLabel;
     Label8: TLabel;
     Label10: TLabel;
     ceQtd: TCurrencyEdit;
-    Label11: TLabel;
-    ceOut: TCurrencyEdit;
     Shape5: TShape;
     Label12: TLabel;
     ComboBox1: TComboBox;
@@ -91,6 +87,7 @@ type
     Label21: TLabel;
     DBMemo3: TDBMemo;
     ckMsg: TCheckBox;
+    SMDBGrid5: TSMDBGrid;
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
@@ -366,48 +363,22 @@ begin
 
   if Panel2.Visible then
   begin
-    SMDBGrid1.DisableScroll;
-    while not fDmCupomFiscal.cdsCupom_Cons.Eof do
-    begin
-      if fDmCupomFiscal.cdsCupom_ConsCANCELADO.AsString = 'S' then
-      begin
-        fDmCupomFiscal.cdsCupom_Cons.Next;
-        Continue;
-      end;
-      fDmCupomFiscal.cdsCupom_Cons_Parc.Close;
-      fDmCupomFiscal.sdsCupom_Cons_Parc.ParamByName('ID').AsInteger := fDmCupomFiscal.cdsCupom_ConsID.AsInteger;
-      fDmCupomFiscal.cdsCupom_Cons_Parc.Open;
-      if not fDmCupomFiscal.cdsCupom_Cons_Parc.IsEmpty then
-      begin
-        fDmCupomFiscal.cdsCupom_Cons_Parc.First;
-        while not fDmCupomFiscal.cdsCupom_Cons_Parc.Eof do
-        begin
-          if fDmCupomFiscal.cdsCupom_Cons_ParcDINHEIRO.AsString = 'S' then
-            vDin := vDin + fDmCupomFiscal.cdsCupom_Cons_ParcVALOR.AsCurrency
-          else
-            vOut := vOut + fDmCupomFiscal.cdsCupom_Cons_ParcVALOR.AsCurrency;
-          fDmCupomFiscal.cdsCupom_Cons_Parc.Next;
-        end;
-      end
-      else
-      begin
-        if fDmCupomFiscal.cdsCupom_ConsDINHEIRO.AsString = 'S' then
-          vDin := vDin + fDmCupomFiscal.cdsCupom_ConsVLR_TOTAL.AsCurrency
-        else
-          vOut := vOut + fDmCupomFiscal.cdsCupom_ConsVLR_TOTAL.AsCurrency;
-      end;
-      vTotal := vTotal + fDmCupomFiscal.cdsCupom_ConsVLR_TOTAL.AsCurrency;
-      //14/06/2016
-      //Inc(vQtd);
-      vQtd := vQtd + fDmCupomFiscal.cdsCupom_ConsQTD_PESSOA.AsInteger;
-      fDmCupomFiscal.cdsCupom_Cons.Next;
-    end;
+    vTotal := 0;
+    fDmCupomFiscal.cdsTotais.Close;
+    fDmCupomFiscal.sdsTotais.ParamByName('D1').AsDate := DateEdit1.Date;
+    fDmCupomFiscal.sdsTotais.ParamByName('D2').AsDate := DateEdit2.Date;
+    fDmCupomFiscal.cdsTotais.Open;
+    vQtd := fDmCupomFiscal.cdsCupom_Cons.RecordCount;
     if vQtd > 0 then
     begin
+      fDmCupomFiscal.cdsTotais.First;
+      while not fDmCupomFiscal.cdsTotais.Eof do
+      begin
+        vTotal := vTotal + fDmCupomFiscal.cdsTotaisTOTAL.AsCurrency;
+        fDmCupomFiscal.cdsTotais.Next;
+      end;
       ceQtd.Value := vQtd;
       ceVM.Value  := vTotal / vQtd;
-      ceDin.Value := vDin;
-      ceOut.Value := vOut;
     end;
     SMDBGrid1.EnableScroll;
   end;

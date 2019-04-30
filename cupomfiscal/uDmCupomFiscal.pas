@@ -1528,6 +1528,12 @@ type
     cdsProdutoPERC_REDUCAOICMS: TFloatField;
     sdsCupom_ItensPERC_BASE_RED_EFET: TFloatField;
     cdsCupom_ItensPERC_BASE_RED_EFET: TFloatField;
+    sdsTotais: TSQLDataSet;
+    dspTotais: TDataSetProvider;
+    cdsTotais: TClientDataSet;
+    dsTotais: TDataSource;
+    cdsTotaisNOME: TStringField;
+    cdsTotaisTOTAL: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);
