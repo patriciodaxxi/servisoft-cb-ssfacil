@@ -778,6 +778,10 @@ type
     btnAjustarProcesso: TBitBtn;
     Label250: TLabel;
     Edit13: TEdit;
+    Label251: TLabel;
+    DBEdit160: TDBEdit;
+    Label252: TLabel;
+    DBEdit161: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

@@ -216,6 +216,7 @@ type
     procedure DBEdit2Exit(Sender: TObject);
     procedure DBEdit2Enter(Sender: TObject);
     procedure DBEdit5Exit(Sender: TObject);
+    procedure pnlCorExit(Sender: TObject);
   private
     { Private declarations }
     ffrmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto;
@@ -1515,6 +1516,8 @@ begin
   prc_Abrir_Combinacao;
   if (vID_Produto_Ant <> fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger) or (trim(fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString) = '') then
     fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := RxDBLookupCombo2.Text;
+  if fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger > 0 then
+    prc_Estoque(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
 end;
 
 procedure TfrmCadPedido_Itens.SpeedButton8Click(Sender: TObject);
@@ -2716,6 +2719,12 @@ begin
   vVlrAux := StrToFloat(FormatFloat('0.0000',vVlrAux / vIPIAux));
   fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000',vVlrAux));
   prc_Calcular_VlrItens;
+end;
+
+procedure TfrmCadPedido_Itens.pnlCorExit(Sender: TObject);
+begin
+  if fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger > 0 then
+    prc_Estoque(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
 end;
 
 end.

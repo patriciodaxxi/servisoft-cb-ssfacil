@@ -67,6 +67,7 @@ type
     procedure prc_Consultar_CCusto;
     procedure prc_Gravar_mConta_Orc_CCusto;
     procedure prc_Consultar_CCusto_Orcamento;
+    procedure prc_Consultar_Resumo_CCusto;
   public
     { Public declarations }
 
@@ -111,6 +112,22 @@ begin
     MessageDlg('*** Conta de orçamento de Receita não informada nos parametros (Contas de Orçamento)!', mtInformation, [mbOk], 0);
     exit;
   end;
+  if (RzPageControl1.ActivePage = ts_Centro_Orcamento) then
+  begin
+    if (comboCentroCusto.KeyValue = 0) or (comboCentroCusto.KeyValue = null) then
+    begin
+      MessageDlg('*** Informe o centro de custo!', mtInformation, [mbOk], 0);
+      comboCentroCusto.SetFocus;
+      exit;
+    end;
+    if (RxDBLookupCombo1.KeyValue = 0) or (RxDBLookupCombo1.KeyValue = null) then
+    begin
+      MessageDlg('*** Informe a filial!', mtInformation, [mbOk], 0);
+      RxDBLookupCombo1.SetFocus;
+      exit;
+    end;
+  end;
+
   fDMConsFinanceiro.mConta_Orc.EmptyDataSet;
   fDMConsFinanceiro.mContas_Orc_CCusto.EmptyDataSet;
 
@@ -132,7 +149,10 @@ begin
     fDMConsFinanceiro.mContas_Orc_CCusto.IndexFieldNames := 'TIPO_ES;CODIGO';
   end
   else
+  begin
     prc_Consultar_CCusto_Orcamento;
+    prc_Consultar_Resumo_CCusto;
+  end;
 
 
   Label6.Caption := FormatFloat('###,###,###,###,##0.00', fDMConsFinanceiro.vTotal_Rec);
@@ -377,6 +397,8 @@ begin
     end;
     fDMConsFinanceiro.vDataIni := FormatDateTime('DD/MM/YYYY',DateEdit1.Date);
     fDMConsFinanceiro.vDataFim := FormatDateTime('DD/MM/YYYY',DateEdit2.Date);
+    fDMConsFinanceiro.frxReport1.variables['DataInicial'] := QuotedStr(FormatDateTime('DD/MM/YYYY',(DateEdit1.Date - 1)));
+
     fDMConsFinanceiro.frxReport1.ShowReport;
     SMDBGrid3.EnableScroll;
   end;
@@ -695,15 +717,36 @@ begin
 end;
 
 procedure TfrmConsCtaOrcamento_Fin.prc_Consultar_CCusto_Orcamento;
+var
+  vComandoAux, vComandoAux2, vComando : String;
+  i : Integer;
 begin
   fDMConsFinanceiro.cdsCCustoOrcamento.Close;
+  vComando := '';
+  i := PosEx('GROUP', fDMConsFinanceiro.ctCCustoOrcamento, 0);
+  vComandoAux := copy(fDMConsFinanceiro.ctCCustoOrcamento, i, Length(fDMConsFinanceiro.ctCCustoOrcamento) - i + 1);
+  vComandoAux2 := copy(fDMConsFinanceiro.ctCCustoOrcamento, 1, i - 1);
+  case ComboBox1.ItemIndex of
+    0: vComando := vComando + ' AND DD.VLR_PAGO > 0 ';
+    1: vComando := vComando + ' AND DD.VLR_RESTANTE > 0 ';
+  end;
+  fDMConsFinanceiro.sdsCCustoOrcamento.CommandText := vComandoAux2 + vComando + vComandoAux;
   fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('DTFINAL').AsDate := DateEdit2.Date;
   if (comboCentroCusto.KeyValue > 0) or (comboCentroCusto.KeyValue <> null) then
     fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('ID_CENTROCUSTO').AsInteger := comboCentroCusto.KeyValue
   else
     fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('ID_CENTROCUSTO').AsInteger := 0;
+  fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMConsFinanceiro.cdsCCustoOrcamento.open;
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.prc_Consultar_Resumo_CCusto;
+begin
+  fDMConsFinanceiro.qResumoCentro_Custo.Close;
+  fDMConsFinanceiro.qResumoCentro_Custo.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
+  fDMConsFinanceiro.qResumoCentro_Custo.ParamByName('ID_CENTROCUSTO').AsInteger := comboCentroCusto.KeyValue;
+  fDMConsFinanceiro.qResumoCentro_Custo.open;
 end;
 
 end.

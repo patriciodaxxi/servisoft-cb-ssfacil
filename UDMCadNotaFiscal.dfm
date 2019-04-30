@@ -3,7 +3,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   OnCreate = DataModuleCreate
   Left = 4
   Height = 712
-  Width = 1296
+  Width = 1353
   object sdsNotaFiscal: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -10262,7 +10262,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       item
         Name = 'CNPJ'
         DataType = ftString
-        Size = 14
+        Size = 18
       end
       item
         Name = 'UF_TERCEIRO'
@@ -10286,7 +10286,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       0002003C00125449504F5F5649415F5452414E534F5254450400010000000000
       09564C525F4146524D4D08000400000000000F5449504F5F494E5445524D4544
       494F040001000000000004434E504A0100490000000100055749445448020002
-      000E000B55465F544552434549524F0100490000000100055749445448020002
+      0012000B55465F544552434549524F0100490000000100055749445448020002
       0002000000}
     object mAux_ImpID: TIntegerField
       FieldName = 'ID'
@@ -10334,7 +10334,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object mAux_ImpCNPJ: TStringField
       FieldName = 'CNPJ'
-      Size = 14
+      Size = 18
     end
     object mAux_ImpUF_TERCEIRO: TStringField
       FieldName = 'UF_TERCEIRO'

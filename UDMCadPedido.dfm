@@ -3,7 +3,7 @@ object DMCadPedido: TDMCadPedido
   OnCreate = DataModuleCreate
   Left = 65531
   Top = 8
-  Height = 706
+  Height = 691
   Width = 1386
   object sdsPedido: TSQLDataSet
     NoMetadata = True
@@ -4777,19 +4777,20 @@ object DMCadPedido: TDMCadPedido
       'RO.LOCALIZACAO'#13#10'  ELSE NULL'#13#10'  END LOCALIZACAO,'#13#10'case '#13#10'  WHEN P' +
       'I.TIPO_OS = '#39'OC'#39' THEN PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'OP'#39' THEN ' +
       'PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'RE'#39' THEN PI.TIPO_OS'#13#10'  ELSE '#39#39#13 +
-      #10'  END DESC_TIPO_OS'#13#10#13#10'FROM PEDIDO_ITEM PI'#13#10'LEFT JOIN PRODUTO PR' +
-      'O ON (PI.ID_PRODUTO = PRO.ID)'#13#10'LEFT JOIN MARCA ON (PRO.ID_MARCA ' +
-      '= MARCA.ID)'#13#10'LEFT JOIN PEDIDO_ITEM_TIPO PT ON (PI.ID = PT.ID AND' +
-      ' PI.ITEM = PT.ITEM)'#13#10'LEFT JOIN TAB_NCM NCM ON (PRO.ID_NCM = NCM.' +
-      'ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JO' +
-      'IN PRODUTO_TAM PTAM ON (PI.id_produto = PTAM.id AND PI.tamanho =' +
-      ' PTAM.tamanho)'#13#10'LEFT JOIN PESSOA ATE ON (PI.id_atelier = ATE.COD' +
-      'IGO )'#13#10'LEFT JOIN PRODUTO_LOTE PLOTE ON (PI.ID_PRODUTO = PLOTE.ID' +
-      ' AND PI.NUM_LOTE_CONTROLE = PLOTE.NUM_LOTE_CONTROLE)'#13#10'LEFT JOIN ' +
-      'TIPO_MATERIAL TMAT ON (PT.ID_TIPO_MATERIAL = TMAT.ID)'#13#10'LEFT JOIN' +
-      ' MATRIZ_PRECO MP ON MP.ID = PT.ID_ACABAMENTO'#13#10'WHERE PI.ID = :ID'#13 +
-      #10'AND ((PI.TIPO_ACESSORIO = '#39'N'#39') OR (PI.TIPO_ACESSORIO IS NULL))'#13 +
-      #10' AND (PI.QTD > 0)'
+      #10'  END DESC_TIPO_OS, PRO.QTD_POR_ROTULO QTD_POR_ROTULO_PROD, PRO' +
+      '.QTD_EMBALAGEM QTD_EMBALAGEM_PROD'#13#10#13#10'FROM PEDIDO_ITEM PI'#13#10'LEFT J' +
+      'OIN PRODUTO PRO ON (PI.ID_PRODUTO = PRO.ID)'#13#10'LEFT JOIN MARCA ON ' +
+      '(PRO.ID_MARCA = MARCA.ID)'#13#10'LEFT JOIN PEDIDO_ITEM_TIPO PT ON (PI.' +
+      'ID = PT.ID AND PI.ITEM = PT.ITEM)'#13#10'LEFT JOIN TAB_NCM NCM ON (PRO' +
+      '.ID_NCM = NCM.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.ID_COR = COM' +
+      'B.ID)'#13#10'LEFT JOIN PRODUTO_TAM PTAM ON (PI.id_produto = PTAM.id AN' +
+      'D PI.tamanho = PTAM.tamanho)'#13#10'LEFT JOIN PESSOA ATE ON (PI.id_ate' +
+      'lier = ATE.CODIGO )'#13#10'LEFT JOIN PRODUTO_LOTE PLOTE ON (PI.ID_PROD' +
+      'UTO = PLOTE.ID AND PI.NUM_LOTE_CONTROLE = PLOTE.NUM_LOTE_CONTROL' +
+      'E)'#13#10'LEFT JOIN TIPO_MATERIAL TMAT ON (PT.ID_TIPO_MATERIAL = TMAT.' +
+      'ID)'#13#10'LEFT JOIN MATRIZ_PRECO MP ON MP.ID = PT.ID_ACABAMENTO'#13#10'WHER' +
+      'E PI.ID = :ID'#13#10'AND ((PI.TIPO_ACESSORIO = '#39'N'#39') OR (PI.TIPO_ACESSO' +
+      'RIO IS NULL))'#13#10' AND (PI.QTD > 0)'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -5377,6 +5378,12 @@ object DMCadPedido: TDMCadPedido
     object cdsPedidoImp_ItensNOME_ACABAMENTO: TStringField
       FieldName = 'NOME_ACABAMENTO'
       Size = 30
+    end
+    object cdsPedidoImp_ItensQTD_POR_ROTULO_PROD: TFloatField
+      FieldName = 'QTD_POR_ROTULO_PROD'
+    end
+    object cdsPedidoImp_ItensQTD_EMBALAGEM_PROD: TFloatField
+      FieldName = 'QTD_EMBALAGEM_PROD'
     end
   end
   object dsPedidoImp_Itens: TDataSource
@@ -7080,7 +7087,7 @@ object DMCadPedido: TDMCadPedido
     ProviderName = 'dspPedidoImp_Tam'
     OnNewRecord = cdsPedido_ItensNewRecord
     Left = 344
-    Top = 342
+    Top = 341
     object cdsPedidoImp_TamID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7943,10 +7950,6 @@ object DMCadPedido: TDMCadPedido
         Size = 60
       end
       item
-        Name = 'Qtd'
-        DataType = ftInteger
-      end
-      item
         Name = 'Pedido_Cliente'
         DataType = ftString
         Size = 20
@@ -7983,6 +7986,19 @@ object DMCadPedido: TDMCadPedido
         Name = 'Unidade'
         DataType = ftString
         Size = 12
+      end
+      item
+        Name = 'Qtd'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Unidade_Prod'
+        DataType = ftString
+        Size = 6
+      end
+      item
+        Name = 'Qtd2'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     IndexFieldNames = 'Nome_Etiqueta;Tamanho'
@@ -7991,21 +8007,23 @@ object DMCadPedido: TDMCadPedido
     Left = 816
     Top = 311
     Data = {
-      DA0100009619E0BD010000001800000010000000000003000000DA010C4E6F6D
+      080200009619E0BD01000000180000001200000000000300000008020C4E6F6D
       655F456D70726573610100490000000100055749445448020002000F0004466F
       6E650100490000000100055749445448020002000C000D4E6F6D655F45746971
       7565746101004900000001000557494454480200020019000754616D616E686F
       0100490000000100055749445448020002000A000A5265666572656E63696101
       004900000001000557494454480200020014000C4E6F6D655F50726F6475746F
       01004900000001000557494454480200020064000C4E6F6D655F436C69656E74
-      650100490000000100055749445448020002003C000351746404000100000000
-      000E50656469646F5F436C69656E746501004900000001000557494454480200
-      020014000C46616E74617369615F436C69010049000000010005574944544802
-      0002002800094474456D697373616F04000600000000000C50726F645F436C69
-      656E74650100490000000100055749445448020002001400054E756D4F530100
-      490000000100055749445448020002001E0008456E63657261646F0100490000
-      000100055749445448020002000A00084974656D5F5065640400010000000000
-      07556E69646164650100490000000100055749445448020002000C000000}
+      650100490000000100055749445448020002003C000E50656469646F5F436C69
+      656E746501004900000001000557494454480200020014000C46616E74617369
+      615F436C690100490000000100055749445448020002002800094474456D6973
+      73616F04000600000000000C50726F645F436C69656E74650100490000000100
+      055749445448020002001400054E756D4F530100490000000100055749445448
+      020002001E0008456E63657261646F0100490000000100055749445448020002
+      000A00084974656D5F506564040001000000000007556E696461646501004900
+      00000100055749445448020002000C000351746408000400000000000C556E69
+      646164655F50726F640100490000000100055749445448020002000600045174
+      643208000400000000000000}
     object mEtiqueta_NavNome_Empresa: TStringField
       FieldName = 'Nome_Empresa'
       Size = 15
@@ -8032,9 +8050,6 @@ object DMCadPedido: TDMCadPedido
     object mEtiqueta_NavNome_Cliente: TStringField
       FieldName = 'Nome_Cliente'
       Size = 60
-    end
-    object mEtiqueta_NavQtd: TIntegerField
-      FieldName = 'Qtd'
     end
     object mEtiqueta_NavPedido_Cliente: TStringField
       FieldName = 'Pedido_Cliente'
@@ -8063,6 +8078,16 @@ object DMCadPedido: TDMCadPedido
     object mEtiqueta_NavUnidade: TStringField
       FieldName = 'Unidade'
       Size = 12
+    end
+    object mEtiqueta_NavQtd: TFloatField
+      FieldName = 'Qtd'
+    end
+    object mEtiqueta_NavUnidade_Prod: TStringField
+      FieldName = 'Unidade_Prod'
+      Size = 6
+    end
+    object mEtiqueta_NavQtd2: TFloatField
+      FieldName = 'Qtd2'
     end
   end
   object dsmEtiqueta_Nav: TDataSource
@@ -10512,15 +10537,15 @@ object DMCadPedido: TDMCadPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 42321.628830243100000000
+    ReportOptions.CreateDate = 41928.578144409700000000
+    ReportOptions.LastChange = 43584.687173912040000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
     OnPreview = frxReport1Preview
     OnReportPrint = 'frxReportOnReportPrint'
     Left = 823
-    Top = 407
+    Top = 406
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxPedidoImp'
@@ -10920,7 +10945,7 @@ object DMCadPedido: TDMCadPedido
       'NOME_ACABAMENTO=NOME_ACABAMENTO')
     DataSource = dsPedidoImp_Itens
     BCDToCurrency = False
-    Left = 905
+    Left = 906
     Top = 452
   end
   object frxRichObject1: TfrxRichObject
@@ -13913,7 +13938,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmCarimbo
     BCDToCurrency = False
     Left = 1000
-    Top = 448
+    Top = 447
   end
   object sdsPedidoImp_Carimbo: TSQLDataSet
     NoMetadata = True
@@ -13959,7 +13984,6 @@ object DMCadPedido: TDMCadPedido
       'Referencia=Referencia'
       'Nome_Produto=Nome_Produto'
       'Nome_Cliente=Nome_Cliente'
-      'Qtd=Qtd'
       'Pedido_Cliente=Pedido_Cliente'
       'Fantasia_Cli=Fantasia_Cli'
       'DtEmissao=DtEmissao'
@@ -13967,7 +13991,10 @@ object DMCadPedido: TDMCadPedido
       'NumOS=NumOS'
       'Encerado=Encerado'
       'Item_Ped=Item_Ped'
-      'Unidade=Unidade')
+      'Unidade=Unidade'
+      'Qtd=Qtd'
+      'Unidade_Prod=Unidade_Prod'
+      'Qtd2=Qtd2')
     DataSource = dsmEtiqueta_Nav
     BCDToCurrency = False
     Left = 912

@@ -1946,6 +1946,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     Align = alTop
     Color = clMoneyGreen
     TabOrder = 4
+    OnExit = pnlCorExit
     object Label31: TLabel
       Left = 27
       Top = 11
