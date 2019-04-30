@@ -1548,6 +1548,7 @@ var
   vNaoContDupl: Boolean;
   vAuxLim: Real;
   vObsGNRE: WideString;
+  vAuxTriang : Boolean;
 begin
   fDMCadNotaFiscal.mVerReserva.EmptyDataSet;
 
@@ -1862,7 +1863,18 @@ begin
     if vIDAux > 0 then
       fDMCadNotaFiscal.prc_Localizar(vIDAux);
     if (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTETRIANG.AsInteger > 0) then
-      prc_Gravar_Triangular;
+    begin
+      vAuxTriang := True;
+      if (fDMCadNotaFiscal.cdsNotaFiscalID_OPERACAO_NOTA.AsInteger > 0) and
+         (fDMCadNotaFiscal.cdsOperacao_NotaID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalID_OPERACAO_NOTA.AsInteger) then
+      begin
+        if fDMCadNotaFiscal.cdsOperacao_Nota.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscalID_OPERACAO_NOTA.AsInteger,[loCaseInsensitive]) then
+          if fDMCadNotaFiscal.cdsOperacao_NotaMOSTRAR_CLI_TRIANG2.AsString = 'S' then
+            vAuxTriang := False;
+      end;
+      if vAuxTriang then
+        prc_Gravar_Triangular;
+    end;
 
   //29/11/2016  aqui
   //except
@@ -3454,7 +3466,10 @@ begin
                        ' WHERE ID = ' + fDMCadNotaFiscal.cdsNotaFiscalID_NOTACOPIADA.AsString;
     sds.ExecSQL();
     exit;
-  end;
+  end
+ else
+ if (fDMCadNotaFiscal.cdsCFOPCOPIARNOTATRIANGULAR.AsString <> 'S')   then
+    exit;
 
   try
     vTriangular_Copiar := True;

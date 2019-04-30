@@ -539,8 +539,11 @@ begin
   cdsCFOP.Close;
   sdsCFOP.CommandText := ctCommand;
   if ID <> 0 then
+  begin
     sdsCFOP.CommandText := sdsCFOP.CommandText
-                         + ' WHERE ID = ' + IntToStr(ID);
+                         + ' WHERE ID = :ID ';
+    sdsCFOP.ParamByName('ID').AsInteger := ID;
+  end;
   cdsCFOP.Open;
 end;
 

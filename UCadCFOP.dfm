@@ -150,6 +150,7 @@ object frmCadCFOP: TfrmCadCFOP
           item
             Expanded = False
             FieldName = 'NOME_INTERNO'
+            Width = 64
             Visible = True
           end>
       end

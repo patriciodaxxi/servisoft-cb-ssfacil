@@ -12,7 +12,7 @@ object DMCadCFOP: TDMCadCFOP
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 88
+    Left = 87
     Top = 32
     object sdsCFOPID: TIntegerField
       FieldName = 'ID'
@@ -258,7 +258,7 @@ object DMCadCFOP: TDMCadCFOP
     DataSet = sdsCFOP
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspCFOPUpdateError
-    Left = 160
+    Left = 161
     Top = 32
   end
   object cdsCFOP: TClientDataSet
@@ -861,7 +861,7 @@ object DMCadCFOP: TDMCadCFOP
     OnCalcFields = cdsCFOP_VariacaoCalcFields
     OnNewRecord = cdsCFOP_VariacaoNewRecord
     Left = 168
-    Top = 168
+    Top = 172
     object cdsCFOP_VariacaoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1022,21 +1022,25 @@ object DMCadCFOP: TDMCadCFOP
     object cdsCFOP_VariacaoclDesc_Tipo_Consumidor: TStringField
       FieldKind = fkCalculated
       FieldName = 'clDesc_Tipo_Consumidor'
+      ProviderFlags = []
       Calculated = True
     end
     object cdsCFOP_VariacaoclDesc_Tipo_Empresa: TStringField
       FieldKind = fkCalculated
       FieldName = 'clDesc_Tipo_Empresa'
+      ProviderFlags = []
       Calculated = True
     end
     object cdsCFOP_VariacaoclDesc_Tipo_Cliente: TStringField
       FieldKind = fkCalculated
       FieldName = 'clDesc_Tipo_Cliente'
+      ProviderFlags = []
       Calculated = True
     end
     object cdsCFOP_VariacaoclDesc_Pessoa_Cliente: TStringField
       FieldKind = fkCalculated
       FieldName = 'clDesc_Pessoa_Cliente'
+      ProviderFlags = []
       Size = 15
       Calculated = True
     end
