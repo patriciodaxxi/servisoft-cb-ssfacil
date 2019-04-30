@@ -22,8 +22,8 @@ object frmAjuste_Contrato: TfrmAjuste_Contrato
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 923
-    Height = 665
+    Width = 931
+    Height = 672
     ActivePage = TS_Contratos
     ActivePageDefault = TS_Contratos
     Align = alClient
@@ -40,8 +40,8 @@ object frmAjuste_Contrato: TfrmAjuste_Contrato
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 142
-        Width = 919
-        Height = 500
+        Width = 927
+        Height = 507
         Align = alClient
         BorderStyle = bsNone
         Ctl3D = False
@@ -176,7 +176,7 @@ object frmAjuste_Contrato: TfrmAjuste_Contrato
       object pnlPesquisa: TPanel
         Left = 0
         Top = 0
-        Width = 919
+        Width = 927
         Height = 55
         Align = alTop
         Color = clSilver
@@ -312,7 +312,7 @@ object frmAjuste_Contrato: TfrmAjuste_Contrato
       object Panel11: TPanel
         Left = 0
         Top = 55
-        Width = 919
+        Width = 927
         Height = 87
         Align = alTop
         Color = clSilver
@@ -445,8 +445,8 @@ object frmAjuste_Contrato: TfrmAjuste_Contrato
       object SMDBGrid2: TSMDBGrid
         Left = 0
         Top = 41
-        Width = 919
-        Height = 601
+        Width = 927
+        Height = 608
         Align = alClient
         BorderStyle = bsNone
         Ctl3D = False
@@ -538,7 +538,7 @@ object frmAjuste_Contrato: TfrmAjuste_Contrato
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 919
+        Width = 927
         Height = 41
         Align = alTop
         Color = clSilver
