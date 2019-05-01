@@ -2938,7 +2938,7 @@ object frmConsPedido: TfrmConsPedido
         Top = 0
         Width = 1013
         Height = 365
-        ActivePage = TS_RefComb_DtEntrega
+        ActivePage = TS_ClienteDtEntrega
         ActivePageDefault = TS_RefComb_Acum
         Align = alClient
         BackgroundColor = clBtnFace
@@ -2953,7 +2953,7 @@ object frmConsPedido: TfrmConsPedido
         ParentColor = False
         ParentFont = False
         TabColors.Unselected = clGray
-        TabIndex = 1
+        TabIndex = 2
         TabOrder = 0
         TextColors.Unselected = 5197647
         FixedDimension = 19
