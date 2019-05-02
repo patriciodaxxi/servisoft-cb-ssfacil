@@ -25,7 +25,7 @@ object frmCadCor: TfrmCadCor
     Top = 0
     Width = 755
     Height = 431
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadCor: TfrmCadCor
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -798,7 +798,7 @@ object frmCadCor: TfrmCadCor
     GroupName = 'Cor'
     UserControl = fMenu.UserControl1
     NotAllowed = naDisabled
-    Left = 561
+    Left = 560
     Top = 231
   end
 end

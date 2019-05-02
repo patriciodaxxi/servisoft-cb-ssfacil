@@ -414,6 +414,11 @@ object DmCadSetor: TDmCadSetor
       FixedChar = True
       Size = 1
     end
+    object sdsProcessoUSA_CARGA: TStringField
+      FieldName = 'USA_CARGA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspProcesso: TDataSetProvider
     DataSet = sdsProcesso
@@ -544,6 +549,11 @@ object DmCadSetor: TDmCadSetor
     end
     object cdsProcessoMATERIAL_KG: TStringField
       FieldName = 'MATERIAL_KG'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProcessoUSA_CARGA: TStringField
+      FieldName = 'USA_CARGA'
       FixedChar = True
       Size = 1
     end
