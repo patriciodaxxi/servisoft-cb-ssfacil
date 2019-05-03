@@ -865,6 +865,7 @@ begin
     btnAjustarICMS.Visible := not(btnAjustarICMS.Visible);
     SMDBGrid1.Columns.Items[14].Visible := not(SMDBGrid1.Columns.Items[14].Visible);
     SMDBGrid1.Columns.Items[15].Visible := not(SMDBGrid1.Columns.Items[15].Visible);
+    SMDBGrid1.Columns.Items[11].Visible := not(SMDBGrid1.Columns.Items[11].Visible);
   end;
 end;
 
