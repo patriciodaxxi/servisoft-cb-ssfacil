@@ -393,6 +393,8 @@ begin
     exit;
   end;
 
+  fDMCadPedido.prc_Situacao_Orc(vIDAux);
+
   TS_Consulta.TabEnabled    := True;
   prc_Habilitar_CamposNota;
   
