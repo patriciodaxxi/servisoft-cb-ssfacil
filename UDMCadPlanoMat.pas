@@ -133,6 +133,7 @@ type
     frxMailExport1: TfrxMailExport;
     frxRichObject1: TfrxRichObject;
     frxConsMaterial: TfrxDBDataset;
+    frxConsTing: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

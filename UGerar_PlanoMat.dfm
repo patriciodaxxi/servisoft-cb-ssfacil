@@ -33,9 +33,9 @@ object frmGerar_PlanoMat: TfrmGerar_PlanoMat
         Top = 94
         Width = 916
         Height = 371
-        ActivePage = TS_Processo
+        ActivePage = TS_Tingimento
         Align = alClient
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 0
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -85,6 +85,7 @@ object frmGerar_PlanoMat: TfrmGerar_PlanoMat
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo'
                 Title.Color = 12189625
+                Width = 94
                 Visible = True
               end
               item
@@ -115,7 +116,6 @@ object frmGerar_PlanoMat: TfrmGerar_PlanoMat
                 Visible = True
               end
               item
-                Alignment = taCenter
                 Expanded = False
                 FieldName = 'NOME_MATERIAL'
                 Title.Alignment = taCenter
@@ -146,6 +146,7 @@ object frmGerar_PlanoMat: TfrmGerar_PlanoMat
                 Alignment = taCenter
                 Expanded = False
                 FieldName = 'ID'
+                Title.Alignment = taCenter
                 Title.Color = 12189625
                 Visible = True
               end

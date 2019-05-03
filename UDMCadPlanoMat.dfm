@@ -42,7 +42,7 @@ object DMCadPlanoMat: TDMCadPlanoMat
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspPlanoMat'
-    Left = 161
+    Left = 163
     Top = 15
     object cdsPlanoMatID: TIntegerField
       FieldName = 'ID'
@@ -619,7 +619,7 @@ object DMCadPlanoMat: TDMCadPlanoMat
       #13#10'  ELSE '#39#39#13#10'  END DESC_TIPO_PRODUCAO'#13#10'FROM PLANOMAT_ITENS I'#13#10'IN' +
       'NER JOIN PLANOMAT P'#13#10'ON I.ID = P.ID'#13#10'INNER JOIN PRODUTO MAT'#13#10'ON ' +
       'I.ID_MATERIAL = MAT.ID'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON I.ID_COR =' +
-      ' COMB.ID'#13#10'WHERE I.tipo_producao <> '#39'G'#39#13#10#13#10
+      ' COMB.ID'#13#10'WHERE I.tipo_producao = '#39'G'#39#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -712,12 +712,12 @@ object DMCadPlanoMat: TDMCadPlanoMat
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42841.867818298600000000
-    ReportOptions.LastChange = 43587.803270810180000000
+    ReportOptions.LastChange = 43588.395312974540000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
     Left = 742
-    Top = 78
+    Top = 77
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -784,5 +784,28 @@ object DMCadPlanoMat: TDMCadPlanoMat
     BCDToCurrency = False
     Left = 747
     Top = 133
+  end
+  object frxConsTing: TfrxDBDataset
+    UserName = 'frxConsTing'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'ITEM=ITEM'
+      'ID_MATERIAL=ID_MATERIAL'
+      'ID_COR=ID_COR'
+      'TAMANHO=TAMANHO'
+      'QTD_CONSUMO=QTD_CONSUMO'
+      'TIPO_PRODUCAO=TIPO_PRODUCAO'
+      'TINGIMENTO=TINGIMENTO'
+      'CRU=CRU'
+      'NOME_MATERIAL=NOME_MATERIAL'
+      'NOME_COR=NOME_COR'
+      'DESC_TIPO_PRODUCAO=DESC_TIPO_PRODUCAO'
+      'NUM_PLANO=NUM_PLANO'
+      'DATA=DATA')
+    DataSource = dsConsTing
+    BCDToCurrency = False
+    Left = 797
+    Top = 130
   end
 end

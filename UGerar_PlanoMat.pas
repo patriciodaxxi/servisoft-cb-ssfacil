@@ -285,13 +285,13 @@ end;
 procedure TfrmGerar_PlanoMat.prc_ConsMaterial;
 begin
   prc_Condicao;
-  if CurrencyEdit1.AsInteger <= 0 then
-  begin
+  //if CurrencyEdit1.AsInteger <= 0 then
+  //begin
     case ComboBox1.ItemIndex of
       1 : vComando := vComando + ' AND I.TIPO_PRODUCAO = ' + QuotedStr('T');
       2 : vComando := vComando + ' AND I.TIPO_PRODUCAO = ' + QuotedStr('E');
     end;
-  end;
+  //end;
   fDMCadPlanoMat.cdsConsMaterial.Close;
   fDMCadPlanoMat.sdsConsMaterial.CommandText := fDMCadPlanoMat.ctConsMaterial + vComando;
   fDMCadPlanoMat.cdsConsMaterial.Open;
@@ -334,7 +334,7 @@ begin
   else
     fDMCadPlanoMat.frxReport1.variables['Processo']    := QuotedStr('TINGIMENTO');
   fDMCadPlanoMat.frxReport1.variables['ImpOpcao']    := QuotedStr(vOpcaoImp);
-  fDMCadPlanoMat.frxReport1.variables['OpcaoTitulo'] := QuotedStr('PLANO MATERIAL ' + CurrencyEdit1.Text);
+  fDMCadPlanoMat.frxReport1.variables['OpcaoTitulo'] := QuotedStr('PLANO MATERIAL Nº ' + CurrencyEdit1.Text);
   fDMCadPlanoMat.frxReport1.ShowReport;
 end;
 
