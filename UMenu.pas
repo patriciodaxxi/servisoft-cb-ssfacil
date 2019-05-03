@@ -351,6 +351,7 @@ type
     PedidoWeb1: TMenuItem;
     ConsultaProdutosST1: TMenuItem;
     ConfiguraoCertificado1: TMenuItem;
+    GerarPlanodeMateriais1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -600,6 +601,7 @@ type
     procedure PedidoWeb1Click(Sender: TObject);
     procedure ConsultaProdutosST1Click(Sender: TObject);
     procedure ConfiguraoCertificado1Click(Sender: TObject);
+    procedure GerarPlanodeMateriais1Click(Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -660,7 +662,7 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina,
   UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida,
   UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas,
-  uProdutoAtualizaPreco, uCadMovProdST, UAjusteEstoqueOP_Res, UCadPedWeb, UConsProdSTRet, UCadFilial_Certificado;
+  uProdutoAtualizaPreco, uCadMovProdST, UAjusteEstoqueOP_Res, UCadPedWeb, UConsProdSTRet, UCadFilial_Certificado, UDMCadPlanoMat, UGerar_PlanoMat;
 
 {$R *.dfm}
 
@@ -2147,6 +2149,11 @@ end;
 procedure TfMenu.ConfiguraoCertificado1Click(Sender: TObject);
 begin
   OpenForm(TfrmCadFilial_Certificado,wsMaximized);
+end;
+
+procedure TfMenu.GerarPlanodeMateriais1Click(Sender: TObject);
+begin
+  OpenForm(TfrmGerar_PlanoMat,wsMaximized);
 end;
 
 initialization

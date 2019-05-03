@@ -653,6 +653,10 @@ object fMenu: TfMenu
       object N39: TMenuItem
         Caption = '-'
       end
+      object GerarPlanodeMateriais1: TMenuItem
+        Caption = 'Gerar Plano de Materiais'
+        OnClick = GerarPlanodeMateriais1Click
+      end
       object NecessidadedeComprasNovo1: TMenuItem
         Caption = 'Necessidade de Compras - Novo'
         OnClick = NecessidadedeComprasNovo1Click
@@ -4176,6 +4180,12 @@ object fMenu: TfMenu
         CompName = 'btnRecalcular_Mat'
         Caption = 'Recalcular'
         GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmGerar_PlanoMat'
+        CompName = 'btnGerar_Plano'
+        Caption = 'Gerar Plano Material'
+        GroupName = 'Gerar Plano Material'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True
@@ -4443,7 +4453,7 @@ object fMenu: TfMenu
     XPStyleSet.ColorsChanged = False
     XPStyle = False
     WindowsPosition = poMainFormCenter
-    Left = 648
+    Left = 647
     Top = 312
   end
   object ActionList1: TActionList

@@ -280,10 +280,10 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
     Top = 131
     Width = 926
     Height = 386
-    ActivePage = TS_Estoque
+    ActivePage = TS_DeTerceiros
     ActivePageDefault = TS_Estoque
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     OnChange = RzPageControl1Change
     FixedDimension = 19

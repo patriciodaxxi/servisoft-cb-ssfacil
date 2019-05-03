@@ -788,7 +788,9 @@ uses
   UCadFilial_Certificado in 'UCadFilial_Certificado.pas' {frmCadFilial_Certificado},
   UDMCadFilial_Certificado in 'UDMCadFilial_Certificado.pas' {DMFilial_Certificado: TDataModule},
   udmNFSe in 'EnvioAcbr\udmNFSe.pas' {dmNFSe: TDataModule},
-  uEnvio_NFSe_Acbr in 'EnvioAcbr\UEnvio_NFSe_Acbr.pas';
+  uEnvio_NFSe_Acbr in 'EnvioAcbr\UEnvio_NFSe_Acbr.pas',
+  UDMCadPlanoMat in 'UDMCadPlanoMat.pas' {DMCadPlanoMat: TDataModule},
+  UGerar_PlanoMat in 'UGerar_PlanoMat.pas' {frmGerar_PlanoMat};
 
 {$R *.res}
 
