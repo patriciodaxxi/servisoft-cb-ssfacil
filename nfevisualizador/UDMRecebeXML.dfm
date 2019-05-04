@@ -1858,7 +1858,7 @@ object DMRecebeXML: TDMRecebeXML
     Aggregates = <>
     DataSetField = cdsDeclaracaoImportacaoadi
     Params = <>
-    Left = 544
+    Left = 545
     Top = 424
     object cdsAdicoesnAdicao: TIntegerField
       FieldName = 'nAdicao'
@@ -2404,6 +2404,11 @@ object DMRecebeXML: TDMRecebeXML
       item
         Name = 'Num_Nota_NTE'
         DataType = ftInteger
+      end
+      item
+        Name = 'Sped_Tipo'
+        DataType = ftString
+        Size = 2
       end>
     IndexDefs = <
       item
@@ -2420,7 +2425,7 @@ object DMRecebeXML: TDMRecebeXML
     Left = 465
     Top = 488
     Data = {
-      A20B00009619E0BD010000001800000076000000000003000000A20B04497465
+      C00B00009619E0BD010000001800000077000000000003000000C00B04497465
       6D04000100000000000A436F6450726F6475746F010049000000010005574944
       5448020002003C0011436F6450726F6475746F496E7465726E6F040001000000
       000006436F64436F72040001000000000008436F644772616465040001000000
@@ -2512,8 +2517,9 @@ object DMRecebeXML: TDMRecebeXML
       4566657408000400000000000E506572635F49434D535F456665740800040000
       0000000D566C725F49434D535F456665740800040000000000084974656D5F4E
       544504000100000000000649445F4E544504000100000000000C4E756D5F4E6F
-      74615F4E5445040001000000000001000D44454641554C545F4F524445520200
-      820000000000}
+      74615F4E5445040001000000000009537065645F5469706F0100490000000100
+      05574944544802000200020001000D44454641554C545F4F5244455202008200
+      00000000}
     object mItensNotaItem: TIntegerField
       FieldName = 'Item'
     end
@@ -2958,6 +2964,10 @@ object DMRecebeXML: TDMRecebeXML
     object mItensNotaNum_Nota_NTE: TIntegerField
       FieldName = 'Num_Nota_NTE'
     end
+    object mItensNotaSped_Tipo: TStringField
+      FieldName = 'Sped_Tipo'
+      Size = 2
+    end
   end
   object dsmItensNota: TDataSource
     DataSet = mItensNota
@@ -3138,6 +3148,10 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'COD_BARRA2'
       Size = 14
     end
+    object sdsProdutoSPED_TIPO_ITEM: TStringField
+      FieldName = 'SPED_TIPO_ITEM'
+      Size = 2
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -3317,6 +3331,10 @@ object DMRecebeXML: TDMRecebeXML
     object cdsProdutoCOD_BARRA2: TStringField
       FieldName = 'COD_BARRA2'
       Size = 14
+    end
+    object cdsProdutoSPED_TIPO_ITEM: TStringField
+      FieldName = 'SPED_TIPO_ITEM'
+      Size = 2
     end
   end
   object dsProduto: TDataSource

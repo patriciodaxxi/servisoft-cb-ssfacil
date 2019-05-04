@@ -2841,12 +2841,28 @@ object frmRecebeXML: TfrmRecebeXML
               Caption = 'Base ST Ret:'
             end
             object Label144: TLabel
-              Left = 403
+              Left = 402
               Top = 104
               Width = 58
               Height = 13
               Alignment = taRightJustify
               Caption = 'Vlr. ST Ret.:'
+            end
+            object Label146: TLabel
+              Left = 404
+              Top = 129
+              Width = 56
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Tipo SPED:'
+            end
+            object Label147: TLabel
+              Left = 737
+              Top = 128
+              Width = 57
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Posse Prod:'
             end
             object RxDBLookupCombo2: TRxDBLookupCombo
               Left = 80
@@ -3132,6 +3148,64 @@ object frmRecebeXML: TfrmRecebeXML
               TabOrder = 21
               ValueChecked = 'S'
               ValueUnchecked = 'N'
+            end
+            object RxDBComboBox3: TRxDBComboBox
+              Left = 463
+              Top = 121
+              Width = 257
+              Height = 21
+              Style = csDropDownList
+              Ctl3D = False
+              DataField = 'Sped_Tipo'
+              DataSource = DMRecebeXML.dsmItensNota
+              EnableValues = True
+              ItemHeight = 13
+              Items.Strings = (
+                '00 - Mercadoria para Revenda'
+                '01- Mat'#233'ria-Prima'
+                '02- Embalagem'
+                '03 - Produto em Processo'
+                '04 - Produto Acabado'
+                '05 - SubProduto'
+                '06 - Produto Intermedi'#225'rio'
+                '07 - Material de Uso e Consumo'
+                '08 - Ativo Imobilizado'
+                '09 - Servi'#231'os'
+                '10 - Outros Insumos'
+                '99 - Outras')
+              ParentCtl3D = False
+              TabOrder = 22
+              Values.Strings = (
+                '00'
+                '01'
+                '02'
+                '03'
+                '04'
+                '05'
+                '06'
+                '07'
+                '08'
+                '09'
+                '10'
+                '99')
+            end
+            object RxDBComboBox4: TRxDBComboBox
+              Left = 797
+              Top = 121
+              Width = 91
+              Height = 21
+              Style = csDropDownList
+              DataField = 'Posse_Material'
+              DataSource = DMRecebeXML.dsmItensNota
+              EnableValues = True
+              ItemHeight = 13
+              Items.Strings = (
+                'Empresa'
+                'Terceiro')
+              TabOrder = 23
+              Values.Strings = (
+                'E'
+                'T')
             end
           end
           object TabSheet9: TTabSheet
@@ -4882,8 +4956,8 @@ object frmRecebeXML: TfrmRecebeXML
       Visible = False
     end
     object Label64: TLabel
-      Left = 556
-      Top = 42
+      Left = 580
+      Top = 34
       Width = 50
       Height = 13
       Alignment = taRightJustify
@@ -4910,8 +4984,8 @@ object frmRecebeXML: TfrmRecebeXML
       Caption = 'Usar Config. da Nat.'#13#10'Interna para o ICMS'
     end
     object Label71: TLabel
-      Left = 295
-      Top = 44
+      Left = 278
+      Top = 42
       Width = 93
       Height = 13
       Alignment = taRightJustify
@@ -4933,8 +5007,8 @@ object frmRecebeXML: TfrmRecebeXML
       Visible = False
     end
     object Label91: TLabel
-      Left = 303
-      Top = 88
+      Left = 287
+      Top = 109
       Width = 85
       Height = 13
       Alignment = taRightJustify
@@ -4942,8 +5016,8 @@ object frmRecebeXML: TfrmRecebeXML
       Visible = False
     end
     object SpeedButton1: TSpeedButton
-      Left = 706
-      Top = 79
+      Left = 690
+      Top = 100
       Width = 23
       Height = 22
       Hint = 'Atualiza tabela de cliente'
@@ -4993,8 +5067,8 @@ object frmRecebeXML: TfrmRecebeXML
       OnClick = SpeedButton1Click
     end
     object Label114: TLabel
-      Left = 365
-      Top = 109
+      Left = 349
+      Top = 130
       Width = 23
       Height = 13
       Alignment = taRightJustify
@@ -5002,14 +5076,14 @@ object frmRecebeXML: TfrmRecebeXML
       Visible = False
     end
     object Label116: TLabel
-      Left = 282
-      Top = 66
+      Left = 266
+      Top = 87
       Width = 106
       Height = 13
       Caption = 'Finalidade (Aquisi'#231#227'o):'
     end
     object Label119: TLabel
-      Left = 713
+      Left = 718
       Top = 108
       Width = 71
       Height = 13
@@ -5023,7 +5097,7 @@ object frmRecebeXML: TfrmRecebeXML
       ParentFont = False
     end
     object Label122: TLabel
-      Left = 745
+      Left = 750
       Top = 86
       Width = 117
       Height = 13
@@ -5031,10 +5105,10 @@ object frmRecebeXML: TfrmRecebeXML
       Caption = 'Gravar o Emitente como:'
     end
     object SpeedButton2: TSpeedButton
-      Left = 536
-      Top = 57
+      Left = 520
+      Top = 81
       Width = 89
-      Height = 22
+      Height = 21
       Caption = 'Copiar para Itens'
       OnClick = SpeedButton2Click
     end
@@ -5046,15 +5120,23 @@ object frmRecebeXML: TfrmRecebeXML
       Caption = 'Ref.Seq. Inicial:'
     end
     object Label133: TLabel
-      Left = 324
-      Top = 131
+      Left = 732
+      Top = 129
       Width = 64
       Height = 13
       Alignment = taRightJustify
       Caption = 'ID Opera'#231#227'o:'
     end
+    object Label145: TLabel
+      Left = 319
+      Top = 64
+      Width = 52
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Tipo Sped:'
+    end
     object DBEdit34: TDBEdit
-      Left = 610
+      Left = 634
       Top = 29
       Width = 184
       Height = 25
@@ -5070,7 +5152,7 @@ object frmRecebeXML: TfrmRecebeXML
       ParentCtl3D = False
       ParentFont = False
       ReadOnly = True
-      TabOrder = 0
+      TabOrder = 19
     end
     object DateEdit1: TDateEdit
       Left = 152
@@ -5079,14 +5161,14 @@ object frmRecebeXML: TfrmRecebeXML
       Height = 21
       NumGlyphs = 2
       StartOfWeek = Sun
-      TabOrder = 1
+      TabOrder = 2
     end
     object CheckBox1: TCheckBox
       Left = 240
       Top = 64
       Width = 17
       Height = 17
-      TabOrder = 2
+      TabOrder = 3
     end
     object btnAbrirXML: TBitBtn
       Left = 5
@@ -5100,7 +5182,7 @@ object frmRecebeXML: TfrmRecebeXML
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 0
       OnClick = btnAbrirXMLClick
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
@@ -5142,7 +5224,7 @@ object frmRecebeXML: TfrmRecebeXML
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 20
       OnClick = btnGravarNFeClick
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
@@ -5184,7 +5266,7 @@ object frmRecebeXML: TfrmRecebeXML
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 21
       OnClick = BitBtn3Click
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
@@ -5215,8 +5297,8 @@ object frmRecebeXML: TfrmRecebeXML
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
     object ComboBox1: TComboBox
-      Left = 391
-      Top = 36
+      Left = 374
+      Top = 34
       Width = 145
       Height = 21
       Style = csDropDownList
@@ -5237,7 +5319,7 @@ object frmRecebeXML: TfrmRecebeXML
       Style = csDropDownList
       ItemHeight = 13
       ItemIndex = 1
-      TabOrder = 8
+      TabOrder = 1
       Text = 'Entrada'
       Items.Strings = (
         'Sa'#237'da'
@@ -5250,12 +5332,12 @@ object frmRecebeXML: TfrmRecebeXML
       Height = 21
       AutoSize = False
       DisplayFormat = '0.00'
-      TabOrder = 9
+      TabOrder = 16
       Visible = False
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
-      Left = 391
-      Top = 80
+      Left = 375
+      Top = 101
       Width = 313
       Height = 21
       DropDownCount = 8
@@ -5263,31 +5345,31 @@ object frmRecebeXML: TfrmRecebeXML
       LookupField = 'CODIGO'
       LookupDisplay = 'NOME;CNPJ_CPF'
       LookupSource = DMRecebeXML.dsCliente
-      TabOrder = 10
+      TabOrder = 9
       Visible = False
       OnKeyDown = RxDBLookupCombo1KeyDown
     end
     object RxDBLookupCombo6: TRxDBLookupCombo
-      Left = 391
-      Top = 101
+      Left = 375
+      Top = 122
       Width = 313
       Height = 21
       DropDownCount = 8
       LookupField = 'ID'
       LookupDisplay = 'NOME'
       LookupSource = DMRecebeXML.dsFilial
-      TabOrder = 11
+      TabOrder = 10
       Visible = False
     end
     object cbFinalidade: TComboBox
-      Left = 391
-      Top = 58
+      Left = 375
+      Top = 79
       Width = 145
       Height = 21
       Style = csDropDownList
       ItemHeight = 13
       ItemIndex = 4
-      TabOrder = 7
+      TabOrder = 8
       Text = 'Outros'
       Items.Strings = (
         'Consumo'
@@ -5298,7 +5380,7 @@ object frmRecebeXML: TfrmRecebeXML
         '')
     end
     object rxdbLocalEstoque: TRxDBLookupCombo
-      Left = 788
+      Left = 793
       Top = 100
       Width = 220
       Height = 21
@@ -5312,11 +5394,11 @@ object frmRecebeXML: TfrmRecebeXML
       LookupDisplay = 'NOME;COD_LOCAL'
       LookupSource = DMRecebeXML.dsLocal_Estoque
       ParentFont = False
-      TabOrder = 12
+      TabOrder = 14
       OnExit = rxdbLocalEstoqueExit
     end
     object ComboBox3: TComboBox
-      Left = 863
+      Left = 868
       Top = 78
       Width = 145
       Height = 21
@@ -5336,7 +5418,7 @@ object frmRecebeXML: TfrmRecebeXML
       Height = 17
       Anchors = [akTop, akRight]
       Caption = 'Ajustar Pre'#231'o Compra'
-      TabOrder = 14
+      TabOrder = 17
       Visible = False
     end
     object ckAtualizaCusto2: TCheckBox
@@ -5346,25 +5428,25 @@ object frmRecebeXML: TfrmRecebeXML
       Height = 17
       Anchors = [akTop, akRight]
       Caption = 'Ajustar Pre'#231'o Custo Total'
-      TabOrder = 15
+      TabOrder = 18
       Visible = False
     end
     object ckUsaNome: TCheckBox
-      Left = 152
+      Left = 144
       Top = 107
-      Width = 145
+      Width = 118
       Height = 17
       Caption = 'Usa Nome da Nota'
-      TabOrder = 16
+      TabOrder = 5
       Visible = False
     end
     object ckAssociar: TCheckBox
-      Left = 152
+      Left = 144
       Top = 91
-      Width = 145
+      Width = 118
       Height = 17
       Caption = 'Associar Produtos'
-      TabOrder = 17
+      TabOrder = 4
     end
     object CurrencyEdit2: TCurrencyEdit
       Left = 722
@@ -5376,7 +5458,7 @@ object frmRecebeXML: TfrmRecebeXML
       DecimalPlaces = 0
       DisplayFormat = '0'
       ParentCtl3D = False
-      TabOrder = 18
+      TabOrder = 11
       OnKeyDown = CurrencyEdit2KeyDown
     end
     object NxButton1: TNxButton
@@ -5439,19 +5521,110 @@ object frmRecebeXML: TfrmRecebeXML
         FFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFF1E4F5DCBBE1C792CAB86FB9B76AB0C78DC0E4C8E0FFFFFFFFFFFFFFFFFF
         FFFFFFF2F2F2FFFFFFFFFFFFF2F2F2000000}
-      TabOrder = 19
+      TabOrder = 12
       OnClick = NxButton1Click
     end
     object RxDBLookupCombo9: TRxDBLookupCombo
-      Left = 391
-      Top = 123
-      Width = 313
+      Left = 794
+      Top = 121
+      Width = 220
       Height = 21
       DropDownCount = 8
       LookupField = 'ID'
       LookupDisplay = 'NOME'
       LookupSource = DMRecebeXML.dsOperacao_Nota
-      TabOrder = 20
+      TabOrder = 15
+    end
+    object cbTipoSped: TComboBox
+      Left = 374
+      Top = 56
+      Width = 217
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      TabOrder = 7
+      OnChange = ComboBox1Change
+      Items.Strings = (
+        '00 - Mercadoria para Revenda'
+        '01- Mat'#233'ria-Prima'
+        '02- Embalagem'
+        '03 - Produto em Processo'
+        '04 - Produto Acabado'
+        '05 - SubProduto'
+        '06 - Produto Intermedi'#225'rio'
+        '07 - Material de Uso e Consumo'
+        '08 - Ativo Imobilizado'
+        '09 - Servi'#231'os'
+        '10 - Outros Insumos'
+        '99 - Outras')
+    end
+    object NxButton2: TNxButton
+      Left = 588
+      Top = 51
+      Width = 32
+      Height = 29
+      Hint = 'Grava a op'#231#227'o escolhida nos itens abaixo'
+      Glyph.Data = {
+        AE060000424DAE06000000000000360000002800000017000000170000000100
+        18000000000078060000130B0000130B00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD9BED7B786B5A064A1955795965B
+        95AB84AAD5C8D4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
+        0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB571AA801171831376902787
+        9B3B9BA451A6AA5DAEA25DA89C68A45B215C8E6B8EFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFDEBAD9880C728E177D9B
+        3193A54CA4A550A4A44DA2A34BA2A24BA1A448A2A247A1C37CC6AC84B6480E48
+        D1C6D2FFFFFFFFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFCA90C18602
+        719524899E3898A249A1A147A0A0449DA1469FA1469FA1469FA1469FA1459F9E
+        409BA747A0CB91CF5D2A61B39CB2FFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFF
+        D8AED2860072962489983092A1449CA0419A9F4199AA55A59E3D989F419BA041
+        99A0419AA0419BA0419B9F3F9A9E3996C57EC65A285FCFC1CFFFFFFFFFFFFF00
+        0000FFFFFFFFFFFF8A06779421849127899E3C959D3E949D3D949B3691D8BECF
+        9D3D949E3B949D3D949D3D949D3D949D3D949D3D949C3B93972D8DC88ECC480E
+        4AFFFFFFFFFFFF000000FFFFFFB15FA790197D8B2782942E899E37919D36919D
+        36919C34909A308DFFFFFF9220859D35919D36919D35909D36919D35919F3692
+        942C8994338BA97FB48F6A8DFFFFFF000000FFFFFF8D0D7B88277F81277F9A31
+        8C9B318D9B318D9A318D9B318D962588C896C2FFFFFF9421859B318D9B318D9B
+        318D9B318D9B318D9D318D7D1E79AF69B25C225FFFFFFF000000D8B2D38D187E
+        7721787B237B9B2A8A9629889629889629889629889628888F1880FDFFFEA23F
+        95922184962988962988962988962988992A8A80237D741B76995F9FD8CBD800
+        0000C07AB6821F7B5E195F731C6E991F83941D80941D80941D80941E80931E81
+        8E137ABF7BB2F5FDF48F127B941F829621839521839521839821857C1E735C15
+        5C8C4292AF89AF000000B35DAB701B6C390D3E74206AA139949F4098A1439BA1
+        429A9F3C96972B878E157786046DF1F2ECD8BECF8B087094217D94227D94227D
+        982380781C6A3D0C3F7B357D9E659E000000B76CB9701B6F7821739A3F97A751
+        A7A44EA4A44EA4A34EA49E419DFFFFFFFFFFFFFEFFFFEFEFE9F4FFF0BD81AA90
+        15719621789521779921797618634D134F8828869B5F9C000000C38AC87E227C
+        8A257D963A90A54FA5A44DA3A34CA2A44CA29E429EC997C9FFFFFFFEFCFEC693
+        C7CA99C9C9A1C89C378D9B368D9E398FA042979B3D958C27808C2182A670A800
+        0000D8B4DE8132838F237F95348CA54FA5A34CA2A34CA2A34CA2A34BA29D409C
+        FFFFFFFFFFFFB873B69B3B9A9F449EA44EA4A44FA5A44FA4A650A697388F8E26
+        7F891D7EBD90BB000000ECDDF3975B9F861D77942A84A755AAA44FA5A44FA5A4
+        4FA5A550A59E429FD6B0D6FFFFFFFDFEFD9C3F9DA44EA5A54FA5A54FA5A44FA5
+        A654AA942D87912782831277E0CADE000000FFFFFFC899D96D1764962083A855
+        ADA95AB1A959B0A959B0A959B1A857AFA859B0FFFFFFFFFFFFD0A5D4A34EAAA9
+        59B1A959B0AA5AB1A959B0932080952285831674FFFFFF000000FFFFFFE7D0F6
+        8C5B958C1678A03E9CB16EC2AE67BCAE67BCAE67BCAE67BCA658B5E5D1EAFFFF
+        FFFFFFFFAC64BCAE65BBAE67BCB16DC2A0429F9622868C147ABC7FB3FFFFFF00
+        0000FFFFFFFFFFFFDCBCF16322639A2284B472C9B778CEB576CBB576CBB576CB
+        B472CAFFFFFFF9F3FAF8F1F9FFFFFFB26FC9B678CDB575CB962783931F828B12
+        78FFFFFFFFFFFF000000FFFFFFFFFFFFF7F0FCD0B0E35E1459A1328FC291E7BD
+        8AE1BC88DFBD88DFBC88DFBA84DDB57AD9B67ADAB781DBBC8AE0C192E99F3A92
+        962483870171E6CDE3FFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFF4EBFCCFB0
+        E364216095308ACDA2F7CAA1F4C599EFC598EEC598EEC598EEC599EEC8A1F3CB
+        A3F4A04299921E7D860072D5ACD0FFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFDCBDF18958936B1E63B785C5E3CDFEE3CDFEE1CCFDE3CF
+        FEE4D0FFC291D39130838911768B0D7BE5CAE1FFFFFFFFFFFFFFFFFFFFFFFF00
+        0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9D4F5CA99DA9150977A307B
+        8F49909951999443918218778108718E127DBF7AB6FFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFF1E4F5DCBBE1C792CAB86FB9B76AB0C78DC0E4C8E0FFFFFFFFFFFFFFFFFF
+        FFFFFFF2F2F2FFFFFFFFFFFFF2F2F2000000}
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 22
+      TabStop = False
+      Transparent = True
+      OnClick = NxButton2Click
     end
   end
   object OpenDialog1: TOpenDialog
