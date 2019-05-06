@@ -233,7 +233,9 @@ begin
     begin
       //15/09/2016
       //vVlrBase      := cdsNotaFiscalVLR_DUPLICATA.AsFloat
-      if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
+      //06/05/2019 foi incluído o OR
+      if (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or
+         (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') then
         vVlrBase := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat
       else
         vVlrBase := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat;
@@ -242,7 +244,8 @@ begin
     begin
       //15/09/2016
       //vVlrBase      := StrToFloat(FormatFloat('0.00',(cdsNotaFiscalVLR_DUPLICATA.AsFloat * cdsParametrosPERC_COMISSAO_PAGA_NOTA.AsFloat) / 100));
-      if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
+      if (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+        or (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') then
         vVlrBase := StrToFloat(FormatFloat('0.00', (fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat * fDMCadNotaFiscal.cdsParametrosPERC_COMISSAO_PAGA_NOTA.AsFloat) / 100))
       else
         vVlrBase := StrToFloat(FormatFloat('0.00', (fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat * fDMCadNotaFiscal.cdsParametrosPERC_COMISSAO_PAGA_NOTA.AsFloat) / 100));

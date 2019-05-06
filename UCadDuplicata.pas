@@ -601,7 +601,8 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'VLR_TOTALPAGO') then
       SMDBGrid1.Columns[i].Visible := (fDMCadDuplicata.qParametrosMOSTRAR_TOTAL_ACUMULADO_DUP.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'PERC_BASE_COMISSAO') then
-      SMDBGrid1.Columns[i].Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S'));
+      SMDBGrid1.Columns[i].Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S')
+      and ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')));
     if (SMDBGrid1.Columns[i].FieldName = 'APROVADO') then
       SMDBGrid1.Columns[i].Visible := (fDMCadDuplicata.qParametros_FinUSA_APROVA_DUP.AsString = 'S');
   end;
@@ -677,8 +678,10 @@ begin
   end
   else
     RadioGroup2.Enabled := True;
-  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
-  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
+  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                   or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')) and (gbxVendedor.Visible));
+  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                   or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')) and (gbxVendedor.Visible));
   pnlTotal.Visible := (fDMCadDuplicata.qParametros_FinMOSTRAR_VLR_ROD_DUP.AsString = 'S');
   DBCheckBox8.Visible := (fDMCadDuplicata.qParametros_FinUSA_REGIME_CAIXA_DUP.AsString = 'S');
   ckImpNossoNumero.Visible := (fDMCadDuplicata.qParametros_FinIMP_NOSSO_NUMERO.AsString = 'S');
@@ -975,8 +978,12 @@ begin
       end;
   end;
   gbxVendedor.Visible := ((fDMCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (RxDBComboBox11.ItemIndex = 0));
-  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
-  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
+  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and
+                       ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')) and (gbxVendedor.Visible));
+  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and
+                       ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')) and (gbxVendedor.Visible));
 end;
 
 procedure TfrmCadDuplicata.RxDBLookupCombo3Enter(Sender: TObject);
@@ -1738,8 +1745,12 @@ begin
   dbedtComissao.Visible := ((fDMCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'E'));
   SpeedButton5.Visible  := rxdbVendedor.Visible;}
   gbxVendedor.Visible := ((fDMCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'E'));
-  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
-  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
+  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and
+                       ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')) and (gbxVendedor.Visible));
+  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and
+                       ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')) and (gbxVendedor.Visible));
 end;
 
 procedure TfrmCadDuplicata.RadioGroup2Click(Sender: TObject);

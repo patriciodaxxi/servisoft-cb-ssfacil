@@ -1,8 +1,8 @@
 object DMCadPedido: TDMCadPedido
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 65529
-  Top = 8
+  Left = 65530
+  Top = 11
   Height = 691
   Width = 1380
   object sdsPedido: TSQLDataSet
@@ -8002,6 +8002,11 @@ object DMCadPedido: TDMCadPedido
       item
         Name = 'Qtd2'
         DataType = ftFloat
+      end
+      item
+        Name = 'Nome_Cor'
+        DataType = ftString
+        Size = 40
       end>
     IndexDefs = <>
     IndexFieldNames = 'Nome_Etiqueta;Tamanho'
@@ -8010,7 +8015,7 @@ object DMCadPedido: TDMCadPedido
     Left = 1008
     Top = 383
     Data = {
-      080200009619E0BD01000000180000001200000000000300000008020C4E6F6D
+      250200009619E0BD01000000180000001300000000000300000025020C4E6F6D
       655F456D70726573610100490000000100055749445448020002000F0004466F
       6E650100490000000100055749445448020002000C000D4E6F6D655F45746971
       7565746101004900000001000557494454480200020019000754616D616E686F
@@ -8026,7 +8031,8 @@ object DMCadPedido: TDMCadPedido
       000A00084974656D5F506564040001000000000007556E696461646501004900
       00000100055749445448020002000C000351746408000400000000000C556E69
       646164655F50726F640100490000000100055749445448020002000600045174
-      643208000400000000000000}
+      64320800040000000000084E6F6D655F436F7201004900000001000557494454
+      480200020028000000}
     object mEtiqueta_NavNome_Empresa: TStringField
       FieldName = 'Nome_Empresa'
       Size = 15
@@ -8091,6 +8097,10 @@ object DMCadPedido: TDMCadPedido
     end
     object mEtiqueta_NavQtd2: TFloatField
       FieldName = 'Qtd2'
+    end
+    object mEtiqueta_NavNome_Cor: TStringField
+      FieldName = 'Nome_Cor'
+      Size = 40
     end
   end
   object dsmEtiqueta_Nav: TDataSource
@@ -10541,7 +10551,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42543.386929861100000000
-    ReportOptions.LastChange = 43588.376603611110000000
+    ReportOptions.LastChange = 43591.721249259260000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint

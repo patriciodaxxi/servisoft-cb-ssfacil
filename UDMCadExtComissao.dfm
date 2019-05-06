@@ -1343,6 +1343,11 @@ object DMCadExtComissao: TDMCadExtComissao
       FixedChar = True
       Size = 1
     end
+    object qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField
+      FieldName = 'COMISSAO_DESCONTAR_PIS'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qDupAux: TSQLQuery
     MaxBlobSize = -1
