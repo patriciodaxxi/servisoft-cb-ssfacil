@@ -20,24 +20,34 @@ object frmCadSetor_Proc: TfrmCadSetor_Proc
   TextHeight = 13
   object Label1: TLabel
     Left = 42
-    Top = 32
+    Top = 24
     Width = 47
     Height = 13
+    Alignment = taRightJustify
     Caption = 'Processo:'
   end
   object Label2: TLabel
     Left = 62
-    Top = 56
+    Top = 48
     Width = 27
     Height = 13
+    Alignment = taRightJustify
     Caption = 'Valor:'
+  end
+  object Label3: TLabel
+    Left = 46
+    Top = 72
+    Width = 43
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Unidade:'
   end
   object RxDBLookupCombo1: TRxDBLookupCombo
     Left = 91
-    Top = 24
+    Top = 16
     Width = 361
     Height = 21
-    DropDownCount = 8
+    DropDownCount = 15
     DataField = 'ID_PROCESSO'
     DataSource = DmCadSetor.dsSetor_Proc
     LookupField = 'ID'
@@ -47,7 +57,7 @@ object frmCadSetor_Proc: TfrmCadSetor_Proc
   end
   object DBEdit1: TDBEdit
     Left = 91
-    Top = 48
+    Top = 40
     Width = 121
     Height = 21
     DataField = 'VLR_HORA'
@@ -61,7 +71,7 @@ object frmCadSetor_Proc: TfrmCadSetor_Proc
     Height = 34
     Align = alBottom
     Color = 8404992
-    TabOrder = 2
+    TabOrder = 3
     object BitBtn4: TBitBtn
       Left = 281
       Top = 5
@@ -92,5 +102,18 @@ object frmCadSetor_Proc: TfrmCadSetor_Proc
       TabOrder = 0
       OnClick = BitBtn1Click
     end
+  end
+  object RxDBLookupCombo2: TRxDBLookupCombo
+    Left = 91
+    Top = 64
+    Width = 122
+    Height = 21
+    DropDownCount = 15
+    DataField = 'UNIDADE'
+    DataSource = DmCadSetor.dsSetor_Proc
+    LookupField = 'UNIDADE'
+    LookupDisplay = 'UNIDADE'
+    LookupSource = DmCadSetor.dsUnidade
+    TabOrder = 2
   end
 end

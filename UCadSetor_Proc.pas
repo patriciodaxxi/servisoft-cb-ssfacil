@@ -3,9 +3,8 @@ unit UCadSetor_Proc;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, UDMCadSetor, RxLookup, StdCtrls, Mask, DBCtrls, Buttons,
-  ExtCtrls;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMCadSetor, RxLookup, StdCtrls, Mask,
+  DBCtrls, Buttons, ExtCtrls;
 
 type
   TfrmCadSetor_Proc = class(TForm)
@@ -16,6 +15,8 @@ type
     Panel3: TPanel;
     BitBtn4: TBitBtn;
     BitBtn1: TBitBtn;
+    Label3: TLabel;
+    RxDBLookupCombo2: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
@@ -51,6 +52,7 @@ end;
 
 procedure TfrmCadSetor_Proc.BitBtn4Click(Sender: TObject);
 begin
+  fdmCadSetor.cdsSetor_Proc.Cancel;
   Close;
 end;
 
