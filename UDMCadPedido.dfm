@@ -1,10 +1,10 @@
 object DMCadPedido: TDMCadPedido
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 65528
-  Top = 65528
-  Height = 744
-  Width = 1382
+  Left = 65529
+  Top = 8
+  Height = 691
+  Width = 1380
   object sdsPedido: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -5391,7 +5391,7 @@ object DMCadPedido: TDMCadPedido
   end
   object dsPedidoImp_Itens: TDataSource
     DataSet = cdsPedidoImp_Itens
-    Left = 264
+    Left = 272
     Top = 418
   end
   object dspPedidoImp_Itens: TDataSetProvider
@@ -5939,7 +5939,7 @@ object DMCadPedido: TDMCadPedido
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 1186
-    Top = 71
+    Top = 63
   end
   object sdsFuncionario: TSQLDataSet
     NoMetadata = True
@@ -10540,15 +10540,15 @@ object DMCadPedido: TDMCadPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43584.687173912040000000
+    ReportOptions.CreateDate = 42543.386929861100000000
+    ReportOptions.LastChange = 43588.376603611110000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
     OnPreview = frxReport1Preview
     OnReportPrint = 'frxReportOnReportPrint'
     Left = 1159
-    Top = 126
+    Top = 110
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxPedidoImp'
@@ -10738,7 +10738,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp
     BCDToCurrency = False
     Left = 1289
-    Top = 306
+    Top = 292
   end
   object frxDBDataset2: TfrxDBDataset
     UserName = 'frxPedidoImp_Cli'
@@ -10746,7 +10746,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp_Cli
     BCDToCurrency = False
     Left = 1264
-    Top = 307
+    Top = 293
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -10770,7 +10770,7 @@ object DMCadPedido: TDMCadPedido
     PrintScaling = False
     PdfA = False
     Left = 1231
-    Top = 127
+    Top = 111
   end
   object frxMailExport1: TfrxMailExport
     UseFileCache = True
@@ -10785,7 +10785,7 @@ object DMCadPedido: TDMCadPedido
     UseMAPI = SMTP
     MAPISendFlag = 0
     Left = 1200
-    Top = 127
+    Top = 111
   end
   object frxDBDataset3: TfrxDBDataset
     UserName = 'frxPedidoImp_Itens'
@@ -10948,12 +10948,12 @@ object DMCadPedido: TDMCadPedido
       'NOME_ACABAMENTO=NOME_ACABAMENTO')
     DataSource = dsPedidoImp_Itens
     BCDToCurrency = False
-    Left = 1234
-    Top = 308
+    Left = 1233
+    Top = 293
   end
   object frxRichObject1: TfrxRichObject
     Left = 1264
-    Top = 127
+    Top = 111
   end
   object sdsPedidoServico: TSQLDataSet
     NoMetadata = True
@@ -11379,7 +11379,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoServicoImp
     BCDToCurrency = False
     Left = 1202
-    Top = 308
+    Top = 293
   end
   object sdsContaOrcamento: TSQLDataSet
     NoMetadata = True
@@ -11836,7 +11836,7 @@ object DMCadPedido: TDMCadPedido
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 1161
-    Top = 29
+    Top = 21
   end
   object dspVidro: TDataSetProvider
     DataSet = sdsVidro
@@ -12701,7 +12701,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp_Tipo
     BCDToCurrency = False
     Left = 1176
-    Top = 309
+    Top = 293
   end
   object frxDBDataset6: TfrxDBDataset
     UserName = 'frxPedidoImp_Ace'
@@ -12720,7 +12720,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp_Ace
     BCDToCurrency = False
     Left = 1151
-    Top = 309
+    Top = 293
   end
   object frxDBDataset7: TfrxDBDataset
     UserName = 'frxPedidoImp_Rol'
@@ -12740,7 +12740,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp_Rol
     BCDToCurrency = False
     Left = 1288
-    Top = 261
+    Top = 245
   end
   object qProduto_Matriz: TSQLQuery
     MaxBlobSize = -1
@@ -13814,7 +13814,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp_Tam
     BCDToCurrency = False
     Left = 1264
-    Top = 261
+    Top = 245
   end
   object mEmbalagem: TClientDataSet
     Active = True
@@ -13892,7 +13892,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmEmbalegem
     BCDToCurrency = False
     Left = 1233
-    Top = 262
+    Top = 246
   end
   object mCarimbo: TClientDataSet
     Active = True
@@ -13941,7 +13941,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmCarimbo
     BCDToCurrency = False
     Left = 1208
-    Top = 263
+    Top = 247
   end
   object sdsPedidoImp_Carimbo: TSQLDataSet
     NoMetadata = True
@@ -14001,7 +14001,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmEtiqueta_Nav
     BCDToCurrency = False
     Left = 1182
-    Top = 262
+    Top = 246
   end
   object qFilial_Rel: TSQLQuery
     MaxBlobSize = -1
@@ -14079,7 +14079,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmRotulos
     BCDToCurrency = False
     Left = 1153
-    Top = 263
+    Top = 247
   end
   object frxDBDataset13: TfrxDBDataset
     UserName = 'frxmRotulos_Prod'
@@ -14116,7 +14116,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmRotulos_Prod
     BCDToCurrency = False
     Left = 1296
-    Top = 222
+    Top = 206
   end
   object frxDBDataset14: TfrxDBDataset
     UserName = 'frxmRotulos_Tam'
@@ -14130,7 +14130,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmRotulos_Tam
     BCDToCurrency = False
     Left = 1272
-    Top = 222
+    Top = 206
   end
   object frxDBDataset15: TfrxDBDataset
     UserName = 'frxmItensImp'
@@ -14170,7 +14170,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmItensImp
     BCDToCurrency = False
     Left = 1244
-    Top = 220
+    Top = 204
   end
   object frxDBDataset16: TfrxDBDataset
     UserName = 'frxmItensImp_Tam'
@@ -14184,7 +14184,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmItensImp_Tam
     BCDToCurrency = False
     Left = 1216
-    Top = 220
+    Top = 204
   end
   object sdsPedido_Itens2: TSQLDataSet
     NoMetadata = True
@@ -14194,7 +14194,7 @@ object DMCadPedido: TDMCadPedido
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 1189
-    Top = 29
+    Top = 21
     object sdsPedido_Itens2ID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14488,7 +14488,7 @@ object DMCadPedido: TDMCadPedido
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 1218
-    Top = 28
+    Top = 20
   end
   object sdsLocal_Estoque: TSQLDataSet
     NoMetadata = True
@@ -14941,7 +14941,7 @@ object DMCadPedido: TDMCadPedido
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 1160
-    Top = 378
+    Top = 383
     object sdsMetas_AcumID_VENDEDOR: TIntegerField
       FieldName = 'ID_VENDEDOR'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -14976,7 +14976,7 @@ object DMCadPedido: TDMCadPedido
     Params = <>
     ProviderName = 'dspMetas_Acum'
     Left = 1184
-    Top = 378
+    Top = 383
     object cdsMetas_AcumID_VENDEDOR: TIntegerField
       FieldName = 'ID_VENDEDOR'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -15510,7 +15510,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmRotulos2
     BCDToCurrency = False
     Left = 1184
-    Top = 220
+    Top = 204
   end
   object mAuxImp: TClientDataSet
     Active = True
@@ -15593,7 +15593,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmAuxImp
     BCDToCurrency = False
     Left = 1152
-    Top = 220
+    Top = 204
   end
   object sdsConsumo: TSQLDataSet
     CommandText = 
@@ -15781,7 +15781,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmConsumo_Mat
     BCDToCurrency = False
     Left = 1294
-    Top = 172
+    Top = 156
   end
   object sdsPedido_Cancelado: TSQLDataSet
     NoMetadata = True
@@ -16120,7 +16120,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmItensImp_Rot
     BCDToCurrency = False
     Left = 1270
-    Top = 172
+    Top = 156
   end
   object qParametros_OC: TSQLQuery
     MaxBlobSize = -1
@@ -16180,7 +16180,7 @@ object DMCadPedido: TDMCadPedido
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 1217
-    Top = 70
+    Top = 62
   end
   object qParametros_Prod: TSQLQuery
     MaxBlobSize = -1
@@ -16315,7 +16315,7 @@ object DMCadPedido: TDMCadPedido
     Params = <>
     StoreDefs = True
     Left = 1232
-    Top = 376
+    Top = 381
     Data = {
       9E0000009619E0BD0100000018000000050000000000030000009E000553656E
       68610100490000000100055749445448020002000A00044974656D0400010000
@@ -17223,7 +17223,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmImpPed
     BCDToCurrency = False
     Left = 1242
-    Top = 172
+    Top = 156
   end
   object qEtiqImp: TSQLQuery
     MaxBlobSize = -1
@@ -17361,7 +17361,7 @@ object DMCadPedido: TDMCadPedido
     DataSet = cdsDuplicata
     BCDToCurrency = False
     Left = 1213
-    Top = 171
+    Top = 155
   end
   object sdsTipo_Material: TSQLDataSet
     NoMetadata = True
@@ -17628,7 +17628,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsConsumo_Comb
     BCDToCurrency = False
     Left = 1184
-    Top = 172
+    Top = 156
   end
   object sdsprc_Atualiza_OS_Fat: TSQLDataSet
     CommandText = 'PRC_ATUALIZA_OS_FAT'
@@ -17642,7 +17642,7 @@ object DMCadPedido: TDMCadPedido
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 1160
-    Top = 71
+    Top = 63
   end
   object qPedOS: TSQLQuery
     MaxBlobSize = -1
@@ -18044,6 +18044,6 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsTriCCusto
     BCDToCurrency = False
     Left = 1152
-    Top = 172
+    Top = 156
   end
 end
