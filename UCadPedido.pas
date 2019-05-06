@@ -2444,6 +2444,7 @@ begin
       fDMCadPedido.mEtiqueta_Nav.Insert;
       fDMCadPedido.mEtiqueta_NavReferencia.AsString   := fDMCadPedido.cdsPedidoImp_ItensREFERENCIA.AsString;
       fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString;
+      fDMCadPedido.mEtiqueta_NavNome_Cor.AsString := fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString;
       fDMCadPedido.mEtiqueta_NavItem_Ped.AsInteger    := fDMCadPedido.cdsPedidoImp_ItensITEM.AsInteger;
       if (fDMCadPedido.cdsPedidoImpIMP_COR_CLIENTE.AsString = 'S') and (fDMCadPedido.cdsPedidoImp_ItensID_COR.AsInteger > 0) and
          (fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.AsString <> '') then
