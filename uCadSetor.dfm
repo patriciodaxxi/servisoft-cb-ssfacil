@@ -25,7 +25,7 @@ object frmCadSetor: TfrmCadSetor
     Top = 0
     Width = 849
     Height = 539
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -33,7 +33,7 @@ object frmCadSetor: TfrmCadSetor
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -126,6 +126,7 @@ object frmCadSetor: TfrmCadSetor
             FieldName = 'ORDEM_ORC'
             Title.Alignment = taCenter
             Title.Caption = 'Ordem Consulta'
+            Width = 64
             Visible = True
           end
           item

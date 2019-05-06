@@ -632,6 +632,7 @@ object DmCadSetor: TDmCadSetor
     end
   end
   object cdsSetor_Proc: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsSetorsdsSetor_Proc
     IndexFieldNames = 'ID;ITEM'
@@ -655,6 +656,7 @@ object DmCadSetor: TDmCadSetor
     end
     object cdsSetor_ProcVLR_HORA: TFloatField
       FieldName = 'VLR_HORA'
+      DisplayFormat = '0.00'
     end
     object cdsSetor_ProcclNome_Processo: TStringField
       FieldKind = fkCalculated
