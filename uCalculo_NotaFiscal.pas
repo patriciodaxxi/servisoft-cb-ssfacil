@@ -764,6 +764,14 @@ begin
                                                 fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsFloat -
                                                 fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat)); //21/01/2019
       end;
+      //Incluido para descontar da base das comissões PIS/COFINS 06/05/2019
+      if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S' then
+      begin                                                                
+        vBaseComissao := StrToFloat(FormatFloat('0.00',vBaseComissao - fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_PIS.AsFloat -
+                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_COFINS.AsFloat));
+      end;
+      //************************
+
       //fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',vBaseComissao));
       //*********************
     end;
@@ -938,6 +946,13 @@ begin
       fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST.AsFloat
                                                                - fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat
                                                                - fDMCadNotaFiscal.cdsNotaFiscalVLR_FCP_ST.AsFloat; //21/01/2019
+    //06/05/2019
+    if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S' then
+      fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat
+                                                               - fDMCadNotaFiscal.cdsNotaFiscalVLR_PIS.AsFloat
+                                                               - fDMCadNotaFiscal.cdsNotaFiscalVLR_COFINS.AsFloat;
+    //*********************
+
   end;
   //*****************
 end;
@@ -2414,7 +2429,9 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_Parc.Delete;
 
   vPerc_Base_Com := StrToFloat(FormatFloat('0.00',100));
-  if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
+  //06/05/2019 foi incluído o OR
+  if (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or
+     (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') then
   begin
     if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat)) > 0 then
       vPerc_Base_Com := StrToFloat(FormatFloat('0.00000',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat / fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat) * 100));

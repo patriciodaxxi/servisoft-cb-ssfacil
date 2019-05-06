@@ -3058,6 +3058,7 @@ type
     qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField;
     qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField;
     qParametros_NFeUSA_CLIENTE_FAT_FIL: TStringField;
+    qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

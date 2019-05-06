@@ -384,7 +384,7 @@ begin
         if (fDMCadNotaFiscal.cdsNotaFiscalTIPO_PRAZO.AsString = 'V') then
         begin
           vPercAux := StrToFloat(FormatFloat('0.00',100));
-          if (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') then
+          if (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') then
           begin
             if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat)) > 0 then
               vPercAux := StrToFloat(FormatFloat('0.00000',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat / fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat) * 100));
@@ -703,10 +703,15 @@ begin
   NxDatePicker2.Date := Date;
   btnConsultarClick(Sender);
 
-  Label99.Visible     := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S'));
-  DBEdit59.Visible    := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S'));
+  Label99.Visible     := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and
+                          ((fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or 
+                           (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')));
+  DBEdit59.Visible    := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and
+                         ((fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or
+                           (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')));
 
   pnlLocalEstoque.Visible := (fDMCadNotaFiscal.cdsParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
+  
 end;
 
 procedure TfrmCadRecNF.prc_Consultar(ID: Integer);
