@@ -1889,7 +1889,7 @@ end;
 
 procedure TfrmCadDuplicata.NxButton2Click(Sender: TObject);
 begin
-  if DMCadDuplicata.cdsDuplicataVLR_PARCELA.AsCurrency = 0 then
+  if fDMCadDuplicata.cdsDuplicataVLR_PARCELA.AsCurrency = 0 then
   begin
     ShowMessage('Informe o valor da parcela!');
     DBEdit4.SetFocus;
