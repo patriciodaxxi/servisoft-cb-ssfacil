@@ -3443,6 +3443,7 @@ type
     mEtiqueta_NavQtd2: TFloatField;
     cdsPedidoImp_ItensQTD_POR_ROTULO_PROD: TFloatField;
     cdsPedidoImp_ItensQTD_EMBALAGEM_PROD: TFloatField;
+    frxEtiqueta: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

@@ -6860,6 +6860,10 @@ object frmCadPedido: TfrmCadPedido
         Caption = 'Etiqueta Por Item do Pedido (Tal'#227'o)'
         OnClick = EtiquetaPorItemdoPedido1Click
       end
+      object EtiquetaA4ItensPersonalizado1: TMenuItem
+        Caption = 'Etiqueta (A4) Itens Personalizado'
+        OnClick = EtiquetaA4ItensPersonalizado1Click
+      end
     end
     object EtiquetaRtulo1: TMenuItem
       Caption = 'Etiqueta R'#243'tulo'

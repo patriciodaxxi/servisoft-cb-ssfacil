@@ -358,6 +358,7 @@ type
     DBEdit27: TDBEdit;
     Personalizado1: TMenuItem;
     RtuloComEmbalagemRolo1: TMenuItem;
+    EtiquetaA4ItensPersonalizado1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -477,6 +478,7 @@ type
     procedure EtiquetaA4Seleciona1Click(Sender: TObject);
     procedure aloPorProcesso1Click(Sender: TObject);
     procedure RtuloComEmbalagemRolo1Click(Sender: TObject);
+    procedure EtiquetaA4ItensPersonalizado1Click(Sender: TObject);
   private
     { Private declarations }
     fLista : TStringList;
@@ -522,7 +524,7 @@ type
     procedure prc_Gravar_Pedido_Excel;
     procedure prc_Opcao_Consumidor;
     procedure prc_Opcao_Prazo;
-    procedure prc_Abre_Filial_Menu(Empresa : Integer; Tipo : Integer);    
+    procedure prc_Abre_Filial_Menu(Empresa : Integer; Tipo : Integer);
 
     function fnc_senha(Opcao_Senha, Campo_Senha, Tipo, Desc1, Desc2, Desc3: String ; Item: Integer): Boolean;
 
@@ -2518,7 +2520,7 @@ var
   i: Integer;
   F: TextFile;
   vTexto: String;
-  vArq: string;      
+  vArq: string;
 Const
   cINegrito = #27#71;
   cFNegrito = #27#72;
@@ -4349,7 +4351,7 @@ begin
 
   prc_Monta_Etiqueta_Calcado('A',1);
 
-  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Fazer.fr3';
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Etiq_Rotulo_Embalagem.fr3';
     
   if FileExists(vArq) then
     fDMCadPedido.frxReport1.Report.LoadFromFile(vArq)
@@ -4360,6 +4362,28 @@ begin
   end;
   fDMCadPedido.frxReport1.ShowReport;
 
+end;
+
+procedure TfrmCadPedido.EtiquetaA4ItensPersonalizado1Click(
+  Sender: TObject);
+var
+  vArq : String;
+begin
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
+    exit;
+
+  prc_Posiciona_Imp;
+  prc_Monta_Etiqueta_Calcado('AE');
+
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Etiqueta_Itens_ACJoias.fr3';
+  if FileExists(vArq) then
+  begin
+    fDMCadPedido.frxReport1.Report.LoadFromFile(vArq);
+    fDMCadPedido.frxReport1.ShowReport;
+  end
+  else
+    ShowMessage('Relatorio não localizado! ' + vArq);
+//  FreeAndNil(frmCadPedido);
 end;
 
 end.

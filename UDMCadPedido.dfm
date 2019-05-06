@@ -1,8 +1,8 @@
 object DMCadPedido: TDMCadPedido
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 65529
-  Top = 8
+  Left = 65530
+  Top = 11
   Height = 691
   Width = 1380
   object sdsPedido: TSQLDataSet
@@ -10541,7 +10541,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42543.386929861100000000
-    ReportOptions.LastChange = 43588.376603611110000000
+    ReportOptions.LastChange = 43591.623143877320000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -18045,5 +18045,32 @@ object DMCadPedido: TDMCadPedido
     BCDToCurrency = False
     Left = 1152
     Top = 156
+  end
+  object frxEtiqueta: TfrxDBDataset
+    UserName = 'frxEtiqueta'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'Nome_Empresa=Nome_Empresa'
+      'Fone=Fone'
+      'Nome_Etiqueta=Nome_Etiqueta'
+      'Tamanho=Tamanho'
+      'Referencia=Referencia'
+      'Nome_Produto=Nome_Produto'
+      'Nome_Cliente=Nome_Cliente'
+      'Pedido_Cliente=Pedido_Cliente'
+      'Fantasia_Cli=Fantasia_Cli'
+      'DtEmissao=DtEmissao'
+      'Prod_Cliente=Prod_Cliente'
+      'NumOS=NumOS'
+      'Encerado=Encerado'
+      'Item_Ped=Item_Ped'
+      'Unidade=Unidade'
+      'Qtd=Qtd'
+      'Unidade_Prod=Unidade_Prod'
+      'Qtd2=Qtd2')
+    DataSource = dsmEtiqueta_Nav
+    BCDToCurrency = False
+    Left = 1316
+    Top = 293
   end
 end
