@@ -23,8 +23,8 @@ object frmCadDuplicata: TfrmCadDuplicata
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1054
-    Height = 637
+    Width = 1046
+    Height = 629
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -42,8 +42,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 218
-        Width = 1050
-        Height = 363
+        Width = 1042
+        Height = 355
         Align = alClient
         Ctl3D = False
         DataSource = DMCadDuplicata.dsDuplicata_Consulta
@@ -133,6 +133,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'DTFINANCEIRO'
             Title.Caption = 'Data Financeira'
+            Width = 64
             Visible = True
           end
           item
@@ -215,6 +216,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'VLR_RESTANTE'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Pendente'
+            Width = 64
             Visible = True
           end
           item
@@ -236,6 +238,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'VLR_DESPESAS'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Despesas'
+            Width = 64
             Visible = True
           end
           item
@@ -266,6 +269,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'PERC_BASE_COMISSAO'
             Title.Alignment = taCenter
             Title.Caption = '% Base Comiss'#227'o'
+            Width = 64
             Visible = True
           end
           item
@@ -273,6 +277,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'VLR_DEVOLUCAO'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Devolu'#231#227'o'
+            Width = 64
             Visible = True
           end
           item
@@ -280,6 +285,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'VLR_DESCONTO'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Desconto'
+            Width = 64
             Visible = True
           end
           item
@@ -297,6 +303,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'TIPO_LANCAMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Lan'#231'amento'
+            Width = 64
             Visible = True
           end
           item
@@ -305,6 +312,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'TRANSFERENCIA_ICMS'
             Title.Alignment = taCenter
             Title.Caption = 'Transf. ICMS'
+            Width = 64
             Visible = True
           end
           item
@@ -318,6 +326,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'NOME_BANCO'
             Title.Caption = 'Banco'
+            Width = 64
             Visible = True
           end
           item
@@ -379,6 +388,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'TITULO_CARTORIO'
             Title.Alignment = taCenter
             Title.Caption = 'Em Cart'#243'rio'
+            Width = 64
             Visible = True
           end
           item
@@ -387,6 +397,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FieldName = 'PROTESTADO'
             Title.Alignment = taCenter
             Title.Caption = 'Protestado'
+            Width = 64
             Visible = True
           end
           item
@@ -401,7 +412,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1050
+        Width = 1042
         Height = 30
         Align = alTop
         Color = 8404992
@@ -731,7 +742,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1050
+        Width = 1042
         Height = 158
         Align = alTop
         Color = clSilver
@@ -1367,8 +1378,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       end
       object pnlTotal: TPanel
         Left = 0
-        Top = 581
-        Width = 1050
+        Top = 573
+        Width = 1042
         Height = 33
         Align = alBottom
         Color = clSilver
@@ -1521,7 +1532,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel5: TPanel
         Left = 0
         Top = 188
-        Width = 1050
+        Width = 1042
         Height = 30
         Align = alTop
         Color = 16770764
@@ -1789,7 +1800,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1050
+        Width = 1042
         Height = 30
         Align = alTop
         Color = 8404992
@@ -2036,7 +2047,7 @@ object frmCadDuplicata: TfrmCadDuplicata
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 1050
+        Width = 1042
         Height = 396
         Align = alTop
         Enabled = False
@@ -2076,7 +2087,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 1048
+          Width = 1040
           Height = 27
           Align = alTop
           Color = clSilver
@@ -2185,7 +2196,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         object Panel6: TPanel
           Left = 1
           Top = 55
-          Width = 1048
+          Width = 1040
           Height = 340
           Align = alBottom
           BevelOuter = bvNone
@@ -3930,8 +3941,8 @@ object frmCadDuplicata: TfrmCadDuplicata
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 426
-        Width = 1050
-        Height = 188
+        Width = 1042
+        Height = 180
         ActivePage = TS_Historico
         ActivePageDefault = TS_Historico
         Align = alClient
@@ -3943,8 +3954,8 @@ object frmCadDuplicata: TfrmCadDuplicata
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 1046
-            Height = 165
+            Width = 1038
+            Height = 157
             Align = alClient
             Ctl3D = False
             DataSource = DMCadDuplicata.dsDuplicata_Hist
@@ -4026,24 +4037,28 @@ object frmCadDuplicata: TfrmCadDuplicata
                 Expanded = False
                 FieldName = 'VLR_PAGAMENTO'
                 Title.Color = 16777170
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_JUROSPAGOS'
                 Title.Color = 16777170
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_DESCONTOS'
                 Title.Color = 16777170
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_DESPESAS'
                 Title.Color = 16777170
+                Width = 64
                 Visible = True
               end
               item
@@ -4057,12 +4072,14 @@ object frmCadDuplicata: TfrmCadDuplicata
                 Expanded = False
                 FieldName = 'VLR_DEVOLUCAO'
                 Title.Color = 16777170
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_JUROSCALCULADO'
                 Title.Color = 16777170
+                Width = 64
                 Visible = True
               end
               item
@@ -4112,8 +4129,8 @@ object frmCadDuplicata: TfrmCadDuplicata
           object SMDBGrid3: TSMDBGrid
             Left = 114
             Top = 0
-            Width = 932
-            Height = 165
+            Width = 924
+            Height = 157
             Align = alClient
             Ctl3D = False
             DataSource = DMCadDuplicata.dsDuplicata_CCusto
@@ -4199,7 +4216,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             Left = 0
             Top = 0
             Width = 114
-            Height = 165
+            Height = 157
             Align = alLeft
             Color = clSilver
             TabOrder = 1
@@ -4306,8 +4323,8 @@ object frmCadDuplicata: TfrmCadDuplicata
   end
   object stat1: TStatusBar
     Left = 0
-    Top = 637
-    Width = 1054
+    Top = 629
+    Width = 1046
     Height = 19
     Panels = <
       item
