@@ -3223,9 +3223,13 @@ end;
 procedure TdmCadProduto.prc_Inserir_ProdCombMat;
 var
   vItemAux: Integer;
+  vIndice : String;
 begin
+  vIndice := cdsProduto_Comb_Mat.IndexFieldNames;
+  cdsProduto_Comb_Mat.IndexFieldNames := 'ID;ITEM';
   cdsProduto_Comb_Mat.Last;
   vItemAux := cdsProduto_Comb_MatITEM_MAT.AsInteger;
+  cdsProduto_Comb_Mat.IndexFieldNames := vIndice;
 
   cdsProduto_Comb_Mat.Insert;
   cdsProduto_Comb_MatID.AsInteger       := cdsProduto_CombID.AsInteger;

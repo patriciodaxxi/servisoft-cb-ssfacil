@@ -280,11 +280,13 @@ begin
   if uAltProd.fnc_Custo(fDMCadProduto.cdsProdutoID.AsInteger,fDMCadProduto) then
     exit;
 
+  SMDBGrid2.DisableScroll;
   fDMCadProduto.prc_Inserir_ProdCombMat;
   ffrmCadProduto_Comb_Mat := TfrmCadProduto_Comb_Mat.Create(self);
   ffrmCadProduto_Comb_Mat.fDMCadProduto := fDMCadProduto;
   ffrmCadProduto_Comb_Mat.ShowModal;
   FreeAndNil(ffrmCadProduto_Comb_Mat);
+  SMDBGrid2.EnableScroll;
 end;
 
 procedure TfrmCadProduto_Comb.btnAlterar_ItensClick(Sender: TObject);
