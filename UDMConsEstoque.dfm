@@ -4177,4 +4177,93 @@ object DMConsEstoque: TDMConsEstoque
     Left = 848
     Top = 552
   end
+  object qAltPreco: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'IDP'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT MAX(DT_ALT_PRECOCUSTO) ALT_CUSTO'
+      'FROM PRODUTO'
+      'WHERE ID = :IDP')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1008
+    Top = 80
+    object qAltPrecoALT_CUSTO: TDateField
+      FieldName = 'ALT_CUSTO'
+    end
+  end
+  object sdsCompras: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT EM.DTMOVIMENTO, EM.NUMNOTA, P.NOME FORNECEDOR, C.NOME NOM' +
+      'E_COR, EM.QTD, EM.VLR_UNITARIO, EM.VLR_FRETE, EM.VLR_DESCONTO, E' +
+      'M.ID'#13#10'FROM ESTOQUE_MOV EM'#13#10'LEFT JOIN PESSOA P ON (EM.ID_PESSOA =' +
+      ' P.CODIGO)'#13#10'LEFT JOIN COR C ON (EM.ID_COR = C.ID)'#13#10'WHERE ID_PROD' +
+      'UTO = :IDP'#13#10'AND TIPO_ES = '#39'E'#39
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'IDP'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 296
+    Top = 514
+  end
+  object dspCompras: TDataSetProvider
+    DataSet = sdsCompras
+    Left = 328
+    Top = 514
+  end
+  object cdsCompras: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCompras'
+    Left = 360
+    Top = 514
+    object cdsComprasDTMOVIMENTO: TDateField
+      FieldName = 'DTMOVIMENTO'
+    end
+    object cdsComprasNUMNOTA: TIntegerField
+      FieldName = 'NUMNOTA'
+    end
+    object cdsComprasFORNECEDOR: TStringField
+      FieldName = 'FORNECEDOR'
+      Size = 60
+    end
+    object cdsComprasNOME_COR: TStringField
+      FieldName = 'NOME_COR'
+      Size = 45
+    end
+    object cdsComprasQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsComprasVLR_UNITARIO: TFloatField
+      FieldName = 'VLR_UNITARIO'
+      DisplayFormat = '0.00'
+    end
+    object cdsComprasVLR_FRETE: TFloatField
+      FieldName = 'VLR_FRETE'
+      DisplayFormat = '0.00'
+    end
+    object cdsComprasVLR_DESCONTO: TFloatField
+      FieldName = 'VLR_DESCONTO'
+      DisplayFormat = '0.00'
+    end
+    object cdsComprasID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+  end
+  object dsCompras: TDataSource
+    DataSet = cdsCompras
+    Left = 392
+    Top = 514
+  end
 end

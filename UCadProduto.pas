@@ -1098,9 +1098,8 @@ implementation
 
 uses rsDBUtils, uUtilPadrao, URelProduto, URelProduto_Grupo, USel_Grupo, USel_Plano_Contas, DmdDatabase, UCadProduto_Processo,
   USel_EnqIPI, USel_CodCest, VarUtils, UCadProduto_Serie, UCadProduto_Cad_Ant, UCadProcesso_Grupo, USel_ContaOrc, USel_Produto,
-  uCopiar_Comb_Agrupado, UCadProduto_GradeNum, UCadProduto_Lote, USel_Produto_Lote, UCadProduto_Larg,
-  UAltProd, UCadProduto_GradeRefTam, USel_Maquina,
-  UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu, UCadProduto_ST;
+  uCopiar_Comb_Agrupado, UCadProduto_GradeNum, UCadProduto_Lote, USel_Produto_Lote, UCadProduto_Larg, UCadProduto_GradeRefTam,
+  USel_Maquina, UAltProd, UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu, UCadProduto_ST, uConsProduto_Compras;
 
 {$R *.dfm}
 
@@ -4508,6 +4507,13 @@ begin
     ffrmConsEstoque_Mov.ShowModal;
     FreeAndNil(frmConsEstoque_Mov);
     ceID.Clear;
+  end;
+  if (Key = Vk_F8) and not(fDMCadProduto.cdsProduto_Consulta.IsEmpty) then
+  begin
+    frmConsProduto_Compras := TfrmConsProduto_Compras.Create(Self);
+    frmConsProduto_Compras.vIdProd := fDMCadProduto.cdsProduto_ConsultaID.AsInteger;
+    frmConsProduto_Compras.ShowModal;
+    FreeAndNil(frmConsProduto_Compras);
   end;
 end;
 
