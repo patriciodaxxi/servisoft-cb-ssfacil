@@ -3621,7 +3621,7 @@ begin
     sds.ParamByName('UNIDADE').AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE.AsString;
     SDS.Open;
   end;
-  if (sds.FieldByName('tipo_conversor').AsString = 'L') or (sds.FieldByName('tipo_conversor').AsString = 'P') then
+  if (sds.FieldByName('tipo_conversor').AsString = 'L') or (sds.FieldByName('tipo_conversor').AsString = 'B') then
   begin
     prc_Calcular_Peso(fDMCadNotaFiscal);
     if (sds.FieldByName('tipo_conversor').AsString = 'L') then

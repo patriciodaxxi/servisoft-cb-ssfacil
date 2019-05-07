@@ -6926,4 +6926,24 @@ object DMCadNotaServico: TDMCadNotaServico
       Required = True
     end
   end
+  object qParametros_Com: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT P.comissao_descontar, P.comissao_descontar_pis'
+      'FROM parametros_com P')
+    SQLConnection = dmDatabase.scoDados
+    Left = 840
+    Top = 582
+    object qParametros_ComCOMISSAO_DESCONTAR: TStringField
+      FieldName = 'COMISSAO_DESCONTAR'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField
+      FieldName = 'COMISSAO_DESCONTAR_PIS'
+      FixedChar = True
+      Size = 1
+    end
+  end
 end

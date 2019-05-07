@@ -641,6 +641,9 @@ type
     function fnc_Movimento: Boolean;
     function fnc_Duplicata_Enviada_Banco : String; //R= Remessa   N=Nosso Numero
     procedure prc_Excluir_Grade(vItemOrig: Integer);
+
+    procedure prc_Regravar_Comissao;
+
   public
     { Public declarations }
     vTipo_Reg: String; //NTS = Nota Fiscal   NTE = Nota Entrada
@@ -4543,6 +4546,7 @@ begin
           fDMCadNotaFiscal.cdsNotaFiscal_Parc.Next;
         end;
         prc_ReGravar_DuplicataAux(vPerc_Base_Com);
+        prc_Regravar_Comissao;
         fDMCadNotaFiscal.cdsNotaFiscal.ApplyUpdates(0);
       end;
     end;
@@ -5399,6 +5403,35 @@ begin
   end;
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filtered := False;
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filter   := '';
+end;
+
+procedure TfrmCadNotaFiscal.prc_Regravar_Comissao;
+var
+  sds: TSQLDataSet;
+  vAux : Real;
+begin
+  if fDMCadNotaFiscal.cdsVendedorCODIGO.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger then
+    fDMCadNotaFiscal.cdsVendedor.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger,[loCaseInsensitive]);
+  if fDMCadNotaFiscal.cdsVendedorTIPO_COMISSAO.AsString <> 'N' then
+    exit;
+
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'UPDATE EXTCOMISSAO E SET E.base_comissao = :BASE_COMISSAO, E.VLR_COMISSAO = :VLR_COMISSAO '
+                       + ' WHERE E.ID_NOTA = :ID_NOTA ';
+    sds.ParamByName('ID_NOTA').AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger;
+    sds.ParamByName('BASE_COMISSAO').AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat;
+    vAux := StrToFloat(FormatFloat('0.00',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat
+                                                * fDMCadNotaFiscal.cdsNotaFiscalPERC_COMISSAO.AsFloat) / 100));
+    sds.ParamByName('VLR_COMISSAO').AsFloat  := StrToFloat(FormatFloat('0.00',vAux));
+    sds.ExecSQL();
+
+  finally
+    FreeAndNil(sds);
+  end;
 end;
 
 end.
