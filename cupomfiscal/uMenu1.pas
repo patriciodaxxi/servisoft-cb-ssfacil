@@ -31,6 +31,8 @@ type
     lblCheque_Valor: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormActivate(Sender: TObject);
