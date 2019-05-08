@@ -711,8 +711,7 @@ var
 implementation
 
 uses
-  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa,
-  USel_ContaOrc, USel_EnqIPI, USel_Atividade, UVendedor_Config;
+  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa, USel_ContaOrc, USel_EnqIPI, USel_Atividade, UVendedor_Config;
 
 {$R *.dfm}
 
