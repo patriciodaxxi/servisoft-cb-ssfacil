@@ -1935,6 +1935,8 @@ type
     cdsProduto_Comb_MatNOME_POSICAO: TStringField;
     sdsProdutoQTD_POR_ROTULO: TFloatField;
     cdsProdutoQTD_POR_ROTULO: TFloatField;
+    sdsProdutoPERC_ICMS_NFCE: TFloatField;
+    cdsProdutoPERC_ICMS_NFCE: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

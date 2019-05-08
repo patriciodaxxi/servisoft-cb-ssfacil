@@ -1841,8 +1841,8 @@ object dmCupomFiscal: TdmCupomFiscal
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto'
-    Left = 312
-    Top = 104
+    Left = 311
+    Top = 103
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1973,6 +1973,12 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsProdutoPERC_REDUCAOICMS: TFloatField
       FieldName = 'PERC_REDUCAOICMS'
+    end
+    object cdsProdutoID_CSTICMS_BRED: TIntegerField
+      FieldName = 'ID_CSTICMS_BRED'
+    end
+    object cdsProdutoPERC_ICMS_NFCE: TFloatField
+      FieldName = 'PERC_ICMS_NFCE'
     end
   end
   object dsProduto: TDataSource

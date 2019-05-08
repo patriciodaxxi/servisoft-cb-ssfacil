@@ -1534,6 +1534,8 @@ type
     dsTotais: TDataSource;
     cdsTotaisNOME: TStringField;
     cdsTotaisTOTAL: TFloatField;
+    cdsProdutoID_CSTICMS_BRED: TIntegerField;
+    cdsProdutoPERC_ICMS_NFCE: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);
@@ -2757,7 +2759,7 @@ begin
   vTipo_Pis    := qVariacaoTIPO_PIS.AsString;
   if cdsTab_NCMID.AsInteger <> vID_NCM then
     cdsTab_NCM.Locate('ID',vID_NCM,[loCaseInsensitive]);
-  if cdsTab_NCMID_CFOP.AsInteger > 0 then
+  if (cdsTab_NCMID_CFOP.AsInteger > 0) and (cdsProdutoID_CFOP_NFCE.AsInteger <= 0) then
     vID_CFOP := cdsTab_NCMID_CFOP.AsInteger;
 
   if cdsTab_NCMID_PIS.AsInteger > 0 then
@@ -2789,14 +2791,26 @@ begin
     if StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
       vPerc_ICMS := StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat));
 
-
-
     //07/12/2018  
     if cdsProdutoID_CSTICMS.AsInteger > 0 then
     begin
-      vID_CSTICMS := cdsTab_NCMID_CST_ICMS.AsInteger;
+      vID_CSTICMS := cdsProdutoID_CSTICMS.AsInteger;
       cdsTab_CSTICMS.Locate('ID',vID_CSTICMS,[loCaseInsensitive]);
-    end;
+      if StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
+        vPerc_ICMS := StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat));
+    end
+    else
+    if cdsProdutoID_CSTICMS_BRED.AsInteger > 0 then
+    begin
+      vID_CSTICMS    := cdsProdutoID_CSTICMS_BRED.AsInteger;
+      vPerc_TribICMS := cdsProdutoPERC_REDUCAOICMS.AsFloat;
+      if StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
+        vPerc_ICMS := StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat))
+      else
+      if StrToFloat(FormatFloat('0.000',cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
+        vPerc_ICMS := StrToFloat(FormatFloat('0.000',cdsTab_NCMPERC_ICMS.AsFloat));
+    end
+    else
     if (cdsTab_NCMID_CST_ICMS.AsInteger > 0) and (cdsProdutoID_CSTICMS.AsInteger <= 0) then
     begin
       vID_CSTICMS    := cdsTab_NCMID_CST_ICMS.AsInteger;

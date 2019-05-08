@@ -473,6 +473,9 @@ object dmCadProduto: TdmCadProduto
     object sdsProdutoQTD_POR_ROTULO: TFloatField
       FieldName = 'QTD_POR_ROTULO'
     end
+    object sdsProdutoPERC_ICMS_NFCE: TFloatField
+      FieldName = 'PERC_ICMS_NFCE'
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -1002,6 +1005,9 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsProdutoQTD_POR_ROTULO: TFloatField
       FieldName = 'QTD_POR_ROTULO'
+    end
+    object cdsProdutoPERC_ICMS_NFCE: TFloatField
+      FieldName = 'PERC_ICMS_NFCE'
     end
   end
   object dsProduto: TDataSource
