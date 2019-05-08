@@ -10551,7 +10551,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42543.386929861100000000
-    ReportOptions.LastChange = 43591.721249259260000000
+    ReportOptions.LastChange = 43593.377745266200000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -14007,7 +14007,8 @@ object DMCadPedido: TDMCadPedido
       'Unidade=Unidade'
       'Qtd=Qtd'
       'Unidade_Prod=Unidade_Prod'
-      'Qtd2=Qtd2')
+      'Qtd2=Qtd2'
+      'Nome_Cor=Nome_Cor')
     DataSource = dsmEtiqueta_Nav
     BCDToCurrency = False
     Left = 1182
