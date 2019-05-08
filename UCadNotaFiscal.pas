@@ -5449,6 +5449,11 @@ end;
 function TfrmCadNotaFiscal.fnc_Opcao_Vendedor_Desc(ID: Integer): Boolean;
 begin
   Result := False;
+  if (ID <= 0) and (fDMCadNotaFiscal.qParametros_ComUSA_CONFIG_IND.AsString = 'S') then
+  begin
+    Result := True;
+    exit;
+  end;
   if trim(fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString) <> 'S' then
     exit;
   if (fDMCadNotaFiscal.qParametros_ComUSA_CONFIG_IND.AsString = 'S') and (uUtilPadrao.fnc_Vendedor_Desc_Com(ID)) then

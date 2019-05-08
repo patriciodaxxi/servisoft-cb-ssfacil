@@ -1049,6 +1049,8 @@ begin
     fDMCadPessoa.cdsPessoa_Fil.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_RefP.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_RefC.ApplyUpdates(0);
+    if (fDMCadPessoa.cdsVendedor_Config.Active) then
+      fDMCadPessoa.cdsVendedor_Config.ApplyUpdates(0);
     if fDMCadPessoa.cdsPessoa_Fisica.State in [dsEdit, dsInsert] then
     begin
       fDMCadPessoa.cdsPessoa_Fisica.Post;

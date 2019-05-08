@@ -1268,6 +1268,7 @@ type
     procedure cdsPessoa_FilAfterInsert(DataSet: TDataSet);
     procedure cdsPessoa_FilBeforeInsert(DataSet: TDataSet);
     procedure cdsPessoa_FilAfterPost(DataSet: TDataSet);
+    procedure cdsVendedor_ConfigNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
     vID_CidadePes: Integer;
@@ -1492,6 +1493,7 @@ begin
   cdsPessoa_Fil.Open;
   qParametros_CTA_ORC.Open;
   qParametros_Ped.Open;
+  qParametros_Com.Open;
   if qParametrosUSA_SERVICO.AsString = 'S' then
   begin
     prc_Abrir_Servico;
@@ -2126,6 +2128,16 @@ procedure TDMCadPessoa.cdsPessoa_FilAfterPost(DataSet: TDataSet);
 begin
   if cdsPessoa_FilFILIAL.AsInteger <= 0 then
     cdsPessoa_Fil.Delete;
+end;
+
+procedure TDMCadPessoa.cdsVendedor_ConfigNewRecord(DataSet: TDataSet);
+begin
+  cdsVendedor_ConfigDESC_FRETE.AsString  := 'N';
+  cdsVendedor_ConfigDESC_IPI.AsString    := 'N';
+  cdsVendedor_ConfigDESC_ST.AsString     := 'N';
+  cdsVendedor_ConfigDESC_PIS.AsString    := 'N';
+  cdsVendedor_ConfigDESC_COFINS.AsString := 'N';
+  cdsVendedor_ConfigDESC_ISSQN.AsString  := 'N';
 end;
 
 end.

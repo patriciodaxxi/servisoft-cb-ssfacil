@@ -3700,7 +3700,7 @@ begin
     end;
     if (sds.FieldByName('desc_issqn').AsString = 'S') then
     begin
-      if cdsNotaServicoISS_RETIDO.AsString = '2' then
+      if cdsNotaServicoISS_RETIDO.AsString = '1' then
         vVlrAux := vVlrAux + cdsNotaServicoVLR_ISS_RETIDO.AsFloat
       else
         vVlrAux := vVlrAux + cdsNotaServicoVLR_ISS.AsFloat;

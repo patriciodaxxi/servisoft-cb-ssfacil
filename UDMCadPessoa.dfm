@@ -6713,9 +6713,7 @@ object DMCadPessoa: TDMCadPessoa
     Params = <>
     ProviderName = 'dspVendedor_Config'
     StoreDefs = True
-    BeforeInsert = cdsPessoa_TipoMatBeforeInsert
-    AfterInsert = cdsPessoa_TipoMatAfterInsert
-    AfterPost = cdsPessoa_TipoMatAfterPost
+    OnNewRecord = cdsVendedor_ConfigNewRecord
     Left = 109
     Top = 474
     object cdsVendedor_ConfigCODIGO: TIntegerField
