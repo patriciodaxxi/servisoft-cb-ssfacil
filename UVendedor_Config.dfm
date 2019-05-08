@@ -70,8 +70,8 @@ object frmVendedor_Config: TfrmVendedor_Config
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
     end
     object DBCheckBox2: TDBCheckBox
       Left = 58
@@ -88,8 +88,8 @@ object frmVendedor_Config: TfrmVendedor_Config
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
     end
     object DBCheckBox3: TDBCheckBox
       Left = 58
@@ -106,8 +106,8 @@ object frmVendedor_Config: TfrmVendedor_Config
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
     end
     object DBCheckBox4: TDBCheckBox
       Left = 58
@@ -124,8 +124,8 @@ object frmVendedor_Config: TfrmVendedor_Config
       Font.Style = []
       ParentFont = False
       TabOrder = 3
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
     end
     object DBCheckBox5: TDBCheckBox
       Left = 58
@@ -142,8 +142,8 @@ object frmVendedor_Config: TfrmVendedor_Config
       Font.Style = []
       ParentFont = False
       TabOrder = 4
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
     end
     object DBCheckBox6: TDBCheckBox
       Left = 58
@@ -160,8 +160,8 @@ object frmVendedor_Config: TfrmVendedor_Config
       Font.Style = []
       ParentFont = False
       TabOrder = 5
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
     end
   end
 end

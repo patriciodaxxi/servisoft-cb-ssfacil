@@ -79,7 +79,7 @@ procedure TfrmVendedor_Config.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
   CanClose := True;
-  if fDMCadPessoa.cdsPessoa.State in [dsEdit, dsInsert] then
+  if fDMCadPessoa.cdsVendedor_Config.State in [dsEdit, dsInsert] then
   begin
     if MessageDlg('Cancelar a digitação?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
       CanClose := False
