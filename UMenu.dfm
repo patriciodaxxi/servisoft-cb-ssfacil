@@ -3660,24 +3660,6 @@ object fMenu: TfMenu
         GroupName = 'PedidosLoja'
       end
       item
-        FormName = 'frmCadPessoa'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Pessoa'
-      end
-      item
-        FormName = 'frmCadPessoa'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Pessoa'
-      end
-      item
-        FormName = 'frmCadPessoa'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Pessoa'
-      end
-      item
         FormName = 'frmConsEstoque'
         CompName = 'ckPrecoCusto'
         Caption = 'Mostrar Pre'#231'o Custo'
@@ -4186,6 +4168,24 @@ object fMenu: TfMenu
         CompName = 'btnGerar_Plano'
         Caption = 'Gerar Plano Material'
         GroupName = 'Gerar Plano Material'
+      end
+      item
+        FormName = 'frmCadPessoa'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Pessoa'
+      end
+      item
+        FormName = 'frmCadPessoa'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Pessoa'
+      end
+      item
+        FormName = 'frmCadPessoa'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Pessoa'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

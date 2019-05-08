@@ -791,7 +791,8 @@ uses
   uEnvio_NFSe_Acbr in 'EnvioAcbr\UEnvio_NFSe_Acbr.pas',
   UDMCadPlanoMat in 'UDMCadPlanoMat.pas' {DMCadPlanoMat: TDataModule},
   UGerar_PlanoMat in 'UGerar_PlanoMat.pas' {frmGerar_PlanoMat},
-  uConsProduto_Compras in 'uConsProduto_Compras.pas' {frmConsProduto_Compras};
+  uConsProduto_Compras in 'uConsProduto_Compras.pas' {frmConsProduto_Compras},
+  UVendedor_Config in 'UVendedor_Config.pas' {frmVendedor_Config};
 
 {$R *.res}
 

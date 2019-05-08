@@ -560,6 +560,7 @@ type
     SMDBGrid9: TSMDBGrid;
     pnlPessoa_Fil: TPanel;
     btnCopiar_Fil: TNxButton;
+    btnConfDescontos: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -670,6 +671,7 @@ type
     procedure DBEdit1Exit(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure btnCopiar_FilClick(Sender: TObject);
+    procedure btnConfDescontosClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -710,7 +712,7 @@ implementation
 
 uses
   UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa,
-  USel_ContaOrc, USel_EnqIPI, USel_Atividade;
+  USel_ContaOrc, USel_EnqIPI, USel_Atividade, UVendedor_Config;
 
 {$R *.dfm}
 
@@ -833,6 +835,8 @@ begin
   Label194.Visible := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
   DBEdit108.Visible := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
   DBCheckBox32.Visible := (fDMCadPessoa.qParametros_NFeIMP_NOMEPROD_CLIENTE.AsString = 'S');
+  btnConfDescontos.Visible := ((fDMCadPessoa.qParametros_UsuarioLIBERA_CONFIG_VENDEDOR.AsString = 'S')
+                              and (fDMCadPessoa.qParametros_ComUSA_CONFIG_IND.AsString = 'S'));
 end;
 
 procedure TfrmCadPessoa.btnInserirClick(Sender: TObject);
@@ -2551,6 +2555,14 @@ begin
   pnlDados_Conta.Enabled         := not(pnlDados_Conta.Enabled);
   for i := 1 to SMDBGrid7.ColCount - 2 do
     SMDBGrid7.Columns[i].readonly := not(SMDBGrid7.Columns[i].readonly)
+end;
+
+procedure TfrmCadPessoa.btnConfDescontosClick(Sender: TObject);
+begin
+  frmVendedor_Config := TfrmVendedor_Config.Create(self);
+  frmVendedor_Config.fDMCadPessoa := fDMCadPessoa;
+  frmVendedor_Config.ShowModal;
+  FreeAndNil(frmVendedor_Config);
 end;
 
 end.

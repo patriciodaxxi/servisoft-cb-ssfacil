@@ -6541,7 +6541,7 @@ object DMCadPessoa: TDMCadPessoa
       'FROM parametros_cta_orc P')
     SQLConnection = dmDatabase.scoDados
     Left = 1024
-    Top = 271
+    Top = 273
     object qParametros_CTA_ORCUSA_SINTETICA: TStringField
       FieldName = 'USA_SINTETICA'
       FixedChar = True
@@ -6657,6 +6657,194 @@ object DMCadPessoa: TDMCadPessoa
     end
     object sdsPessoa_FilFILIAL: TIntegerField
       FieldName = 'FILIAL'
+    end
+  end
+  object dsVendedor_Config: TDataSource
+    DataSet = cdsVendedor_Config
+    Left = 144
+    Top = 474
+  end
+  object cdsVendedor_Config: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'CODIGO'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'DESC_FRETE'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'DESC_IPI'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'DESC_ST'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'DESC_PIS'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'DESC_COFINS'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'DESC_ISSQN'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
+      end>
+    IndexDefs = <>
+    IndexFieldNames = 'CODIGO'
+    Params = <>
+    ProviderName = 'dspVendedor_Config'
+    StoreDefs = True
+    BeforeInsert = cdsPessoa_TipoMatBeforeInsert
+    AfterInsert = cdsPessoa_TipoMatAfterInsert
+    AfterPost = cdsPessoa_TipoMatAfterPost
+    Left = 109
+    Top = 474
+    object cdsVendedor_ConfigCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsVendedor_ConfigDESC_FRETE: TStringField
+      FieldName = 'DESC_FRETE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsVendedor_ConfigDESC_IPI: TStringField
+      FieldName = 'DESC_IPI'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsVendedor_ConfigDESC_ST: TStringField
+      FieldName = 'DESC_ST'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsVendedor_ConfigDESC_PIS: TStringField
+      FieldName = 'DESC_PIS'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsVendedor_ConfigDESC_COFINS: TStringField
+      FieldName = 'DESC_COFINS'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsVendedor_ConfigDESC_ISSQN: TStringField
+      FieldName = 'DESC_ISSQN'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dspVendedor_Config: TDataSetProvider
+    DataSet = sdsVendedor_Config
+    UpdateMode = upWhereKeyOnly
+    Left = 80
+    Top = 474
+  end
+  object sdsVendedor_Config: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM VENDEDOR_CONFIG'#13#10'WHERE CODIGO = :CODIGO'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 48
+    Top = 474
+    object sdsVendedor_ConfigCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsVendedor_ConfigDESC_FRETE: TStringField
+      FieldName = 'DESC_FRETE'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsVendedor_ConfigDESC_IPI: TStringField
+      FieldName = 'DESC_IPI'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsVendedor_ConfigDESC_ST: TStringField
+      FieldName = 'DESC_ST'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsVendedor_ConfigDESC_PIS: TStringField
+      FieldName = 'DESC_PIS'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsVendedor_ConfigDESC_COFINS: TStringField
+      FieldName = 'DESC_COFINS'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsVendedor_ConfigDESC_ISSQN: TStringField
+      FieldName = 'DESC_ISSQN'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object qParametros_Usuario: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftString
+        Name = 'USUARIO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT U.libera_config_vendedor'
+      'FROM parametros_usuario U'
+      'WHERE U.USUARIO = :USUARIO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1024
+    Top = 318
+    object qParametros_UsuarioLIBERA_CONFIG_VENDEDOR: TStringField
+      FieldName = 'LIBERA_CONFIG_VENDEDOR'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object qParametros_Com: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT P.usa_config_ind'
+      'FROM PARAMETROS_COM P'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1056
+    Top = 318
+    object qParametros_ComUSA_CONFIG_IND: TStringField
+      FieldName = 'USA_CONFIG_IND'
+      FixedChar = True
+      Size = 1
     end
   end
 end

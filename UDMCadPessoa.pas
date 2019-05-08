@@ -1207,6 +1207,28 @@ type
     cdsPessoa_FilITEM: TIntegerField;
     cdsPessoa_FilFILIAL: TIntegerField;
     cdsPessoa_FillkNome_Filial: TStringField;
+    dsVendedor_Config: TDataSource;
+    cdsVendedor_Config: TClientDataSet;
+    dspVendedor_Config: TDataSetProvider;
+    sdsVendedor_Config: TSQLDataSet;
+    sdsVendedor_ConfigCODIGO: TIntegerField;
+    sdsVendedor_ConfigDESC_FRETE: TStringField;
+    sdsVendedor_ConfigDESC_IPI: TStringField;
+    sdsVendedor_ConfigDESC_ST: TStringField;
+    sdsVendedor_ConfigDESC_PIS: TStringField;
+    sdsVendedor_ConfigDESC_COFINS: TStringField;
+    sdsVendedor_ConfigDESC_ISSQN: TStringField;
+    cdsVendedor_ConfigCODIGO: TIntegerField;
+    cdsVendedor_ConfigDESC_FRETE: TStringField;
+    cdsVendedor_ConfigDESC_IPI: TStringField;
+    cdsVendedor_ConfigDESC_ST: TStringField;
+    cdsVendedor_ConfigDESC_PIS: TStringField;
+    cdsVendedor_ConfigDESC_COFINS: TStringField;
+    cdsVendedor_ConfigDESC_ISSQN: TStringField;
+    qParametros_Usuario: TSQLQuery;
+    qParametros_Com: TSQLQuery;
+    qParametros_UsuarioLIBERA_CONFIG_VENDEDOR: TStringField;
+    qParametros_ComUSA_CONFIG_IND: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
@@ -1507,6 +1529,10 @@ begin
     end;
   end;
   //***********************
+
+  qParametros_Usuario.Close;
+  qParametros_Usuario.ParamByName('USUARIO').AsString := vUsuario;
+  qParametros_Usuario.Open;
 end;
 
 procedure TDMCadPessoa.cdsPessoaNewRecord(DataSet: TDataSet);
