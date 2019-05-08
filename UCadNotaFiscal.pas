@@ -636,6 +636,7 @@ type
     function fnc_Controla_Est(Tipo: String; Qtd: Real): Integer; //Tipo I=Lendo Tabela Itens   T=Lendo tabela de tamanhos
 
     function fnc_senha(Opcao_Senha, Campo_Senha, Tipo, Desc1, Desc2, Desc3: String; Item: Integer; Vlr_Limite: Real): Boolean;
+    function fnc_Opcao_Vendedor_Desc(ID : Integer) : Boolean;
 
     function fnc_Duplicata: Boolean;
     function fnc_Movimento: Boolean;
@@ -643,6 +644,7 @@ type
     procedure prc_Excluir_Grade(vItemOrig: Integer);
 
     procedure prc_Regravar_Comissao;
+
 
   public
     { Public declarations }
@@ -851,8 +853,8 @@ begin
         if (fDMCadNotaFiscal.cdsNotaFiscalTIPO_PRAZO.AsString = 'V') then
         begin
           vPercAux := StrToFloat(FormatFloat('0.00',100));
-          //06/05/2019 foi incluido o COMISSAO_DESCONTAR_PIS
-          if (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') then
+          //08/05/2019
+          if fnc_Opcao_Vendedor_Desc(fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger) then
           begin
             if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat)) > 0 then
               vPercAux := StrToFloat(FormatFloat('0.00000',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat / fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat) * 100));
@@ -1310,10 +1312,10 @@ begin
   btnConsultarClick(Sender);
 
   gbxVendedor.Visible := (fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S');
-  Label99.Visible     := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and ((fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
-                         or (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')));
-  DBEdit59.Visible    := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and ((fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
-                         or (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')));  
+
+  Label99.Visible  := fnc_Opcao_Vendedor_Desc(fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger);
+  DBEdit59.Visible := Label99.Visible;
+    
   //Label71.Visible     := (fDMCadNotaFiscal.cdsParametrosUSA_LIMITE_CREDITO.AsString = 'S');
   if fDMCadNotaFiscal.cdsParametrosUSA_LIMITE_CREDITO.AsString = 'S' then
     StaticText1.Caption := 'Duplo Clique para Consultar    F3 Consultar Limite de Crédito';
@@ -3089,6 +3091,11 @@ begin
   rxdbCondicaoPgto.ReadOnly   := (fDMCadNotaFiscal.cdsNotaFiscalNOTIFICACAO.AsInteger = 1);
   btnAlterar_CondPgto.Visible := (fDMCadNotaFiscal.cdsNotaFiscalNOTIFICACAO.AsInteger = 1);
   //****************
+  if fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger > 0 then
+  begin
+    Label99.Visible  := fnc_Opcao_Vendedor_Desc(fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger);
+    DBEdit59.Visible := Label99.Visible;
+  end;
 end;
 
 procedure TfrmCadNotaFiscal.Panel4Enter(Sender: TObject);
@@ -4241,9 +4248,7 @@ begin
   for i := 1 to SMDBGrid_Dupl2.ColCount - 2 do
   begin
     if (SMDBGrid_Dupl2.Columns[i].FieldName = 'PERC_BASE_COMISSAO')  then
-      SMDBGrid_Dupl2.Columns[i].Visible := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and
-                                           ((fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
-                                            or (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')));
+      SMDBGrid_Dupl2.Columns[i].Visible := fnc_Opcao_Vendedor_Desc(fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger);
   end;
 end;
 
@@ -4511,6 +4516,7 @@ end;
 procedure TfrmCadNotaFiscal.BitBtn3Click(Sender: TObject);
 var
   vPerc_Base_Com: Real;
+  vVlrBaseAux : Real;
 begin
   //vUsuario := 'Ajust.Base Com.';
   fDMCadNotaFiscal.cdsNotaFiscal_Consulta.First;
@@ -4524,16 +4530,22 @@ begin
       begin
         fDMCadNotaFiscal.cdsNotaFiscal.Edit;
         fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat;
-        if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
+        //08/05/2019
+        {if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
           fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat
                                                                    - fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST.AsFloat
-                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_FCP_ST.AsFloat 
+                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_FCP_ST.AsFloat
                                                                    - fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat;
         //06/05/2019
         if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S' then
           fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_PIS.AsFloat
-                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_COFINS.AsFloat;
+                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_COFINS.AsFloat;}
         //*********
+
+        vVlrBaseAux := StrToFloat(FormatFloat('0.00',fnc_Calcula_Desc_Vendedor(fDMCadNotaFiscal)));
+        if StrToFloat(FormatFloat('0.00',vVlrBaseAux)) > 0 then
+          fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - vVlrBaseAux));
+        //****************
 
         fDMCadNotaFiscal.cdsNotaFiscal.Post;
         vPerc_Base_Com := StrToFloat(FormatFloat('0.00000',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat / fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat) * 100));
@@ -5432,6 +5444,19 @@ begin
   finally
     FreeAndNil(sds);
   end;
+end;
+
+function TfrmCadNotaFiscal.fnc_Opcao_Vendedor_Desc(ID: Integer): Boolean;
+begin
+  Result := False;
+  if trim(fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString) <> 'S' then
+    exit;
+  if (fDMCadNotaFiscal.qParametros_ComUSA_CONFIG_IND.AsString = 'S') and (uUtilPadrao.fnc_Vendedor_Desc_Com(ID)) then
+    Result := True
+  else
+  if (fDMCadNotaFiscal.qParametros_ComUSA_CONFIG_IND.AsString = 'N')
+     and ((fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')) then
+    Result := True;
 end;
 
 end.

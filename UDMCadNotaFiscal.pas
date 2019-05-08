@@ -2298,8 +2298,6 @@ type
     sdsNotaFiscal_ItensPERC_ICMS_INTER: TFloatField;
     cdsNotaFiscal_ItensPERC_ICMS_INTER: TFloatField;
     qParametros_Com: TSQLQuery;
-    qParametros_ComID: TIntegerField;
-    qParametros_ComCOMISSAO_DESCONTAR: TStringField;
     sdsNotaFiscalVLR_BASE_COMISSAO: TFloatField;
     cdsNotaFiscalVLR_BASE_COMISSAO: TFloatField;
     sdsNotaFiscal_ParcPERC_BASE_COMISSAO: TFloatField;
@@ -3058,7 +3056,10 @@ type
     qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField;
     qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField;
     qParametros_NFeUSA_CLIENTE_FAT_FIL: TStringField;
+    qParametros_ComID: TIntegerField;
+    qParametros_ComCOMISSAO_DESCONTAR: TStringField;
     qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField;
+    qParametros_ComUSA_CONFIG_IND: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
