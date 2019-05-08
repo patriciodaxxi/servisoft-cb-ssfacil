@@ -815,7 +815,10 @@ begin
       begin
         vPrecoAux := 0;
         if StrToFloat(FormatFloat('0.000000',vPreco_Pos)) > 0 then
-          vPrecoAux := StrToFloat(FormatFloat('0.000000',vPreco_Pos))
+        begin
+          vPrecoAux := StrToFloat(FormatFloat('0.000000',vPreco_Pos));
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat := vPrecoAux;
+        end
         else
         begin
           if fDMCadNotaFiscal.cdsParametrospRODUTO_PRECO_POR_FINALIDADE.AsString = 'S' then
