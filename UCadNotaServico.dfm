@@ -159,7 +159,6 @@ object frmCadNotaServico: TfrmCadNotaServico
             FieldName = 'SERIE_SUBSTITUIDO'
             Title.Alignment = taCenter
             Title.Caption = 'S'#233'rie Substitu'#237'do'
-            Width = 64
             Visible = True
           end
           item
@@ -227,7 +226,6 @@ object frmCadNotaServico: TfrmCadNotaServico
           item
             Expanded = False
             FieldName = 'NOME_PROVEDOR'
-            Width = 64
             Visible = True
           end
           item
@@ -2679,10 +2677,10 @@ object frmCadNotaServico: TfrmCadNotaServico
         Top = 149
         Width = 989
         Height = 493
-        ActivePage = TabSheet1
+        ActivePage = TabSheet2
         ActivePageDefault = TabSheet1
         Align = alClient
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 1
         FixedDimension = 19
         object TabSheet1: TRzTabSheet
@@ -4089,7 +4087,6 @@ object frmCadNotaServico: TfrmCadNotaServico
                     FieldName = 'lkNome_Conta'
                     Title.Alignment = taCenter
                     Title.Caption = 'Nome Conta'
-                    Width = 64
                     Visible = True
                   end
                   item

@@ -1,7 +1,7 @@
 object frmConsProduto_Compras: TfrmConsProduto_Compras
-  Left = 292
+  Left = 54
   Top = 116
-  Width = 928
+  Width = 1166
   Height = 480
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'frmConsProduto_Compras'
@@ -20,7 +20,7 @@ object frmConsProduto_Compras: TfrmConsProduto_Compras
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 920
+    Width = 1158
     Height = 41
     Align = alTop
     TabOrder = 0
@@ -49,7 +49,7 @@ object frmConsProduto_Compras: TfrmConsProduto_Compras
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 41
-    Width = 920
+    Width = 1158
     Height = 408
     Align = alClient
     DataSource = DMConsEstoque.dsCompras
@@ -78,7 +78,7 @@ object frmConsProduto_Compras: TfrmConsProduto_Compras
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 10
+    ColCount = 12
     RowCount = 2
     Columns = <
       item
@@ -95,6 +95,20 @@ object frmConsProduto_Compras: TfrmConsProduto_Compras
       item
         Expanded = False
         FieldName = 'FORNECEDOR'
+        Width = 200
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'COD_MATERIAL_FORN'
+        Title.Caption = 'C'#211'D. FORNECEDOR'
+        Width = 150
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME_MATERIAL_FORN'
+        Title.Caption = 'NOME FORNECEDOR'
         Width = 200
         Visible = True
       end

@@ -4488,11 +4488,13 @@ object DMCadDuplicata: TDMCadDuplicata
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT *'
-      'FROM PARAMETROS_COM'
-      '')
+      
+        'SELECT P.ID, P.comissao_descontar, P.comissao_descontar_pis, coa' +
+        'lesce(P.usa_config_ind,'#39'N'#39') usa_config_ind'
+      'FROM PARAMETROS_COM P'
+      'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 1016
+    Left = 1018
     Top = 24
     object qParametros_ComID: TIntegerField
       FieldName = 'ID'
@@ -4505,6 +4507,11 @@ object DMCadDuplicata: TDMCadDuplicata
     end
     object qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField
       FieldName = 'COMISSAO_DESCONTAR_PIS'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ComUSA_CONFIG_IND: TStringField
+      FieldName = 'USA_CONFIG_IND'
       FixedChar = True
       Size = 1
     end

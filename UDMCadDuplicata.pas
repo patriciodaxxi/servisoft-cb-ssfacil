@@ -780,8 +780,6 @@ type
     cdsDuplicataPERC_BASE_COMISSAO: TFloatField;
     cdsDuplicata_ConsultaPERC_BASE_COMISSAO: TFloatField;
     qParametros_Com: TSQLQuery;
-    qParametros_ComID: TIntegerField;
-    qParametros_ComCOMISSAO_DESCONTAR: TStringField;
     mLeItau: TClientDataSet;
     mLeItauID: TIntegerField;
     mLeItauNumDuplicata: TStringField;
@@ -1109,7 +1107,10 @@ type
     qParametros_FinID_CONTABIL_OPE_BAIXA: TIntegerField;
     qOrcCCusto: TSQLQuery;
     qOrcCCustoPERCENTUAL: TFloatField;
+    qParametros_ComID: TIntegerField;
+    qParametros_ComCOMISSAO_DESCONTAR: TStringField;
     qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField;
+    qParametros_ComUSA_CONFIG_IND: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
@@ -1785,8 +1786,10 @@ begin
       vBaseAux := StrToFloat(FormatFloat('0.00',cdsDuplicata_HistVLR_PAGAMENTO.AsFloat * cdsDuplicataPERC_COMISSAO_PAGAR_NOTA.AsFloat / 100))
     else
       vBaseAux := StrToFloat(FormatFloat('0.00',cdsDuplicata_HistVLR_PAGAMENTO.AsFloat));
-    if (qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') then
-    begin
+    //08/05/2019
+    if ((qParametros_ComUSA_CONFIG_IND.AsString = 'N') and ((qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')))
+      or ((qParametros_ComUSA_CONFIG_IND.AsString = 'S') and (uUtilPadrao.fnc_Vendedor_Desc_Com(cdsDuplicataID_VENDEDOR.AsInteger))) then
+    begin       
       if (StrToFloat(FormatFloat('0.00',cdsDuplicataPERC_BASE_COMISSAO.AsFloat)) > 0) and (StrToFloat(FormatFloat('0.00',cdsDuplicataPERC_BASE_COMISSAO.AsFloat)) < 100) then
         vBaseAux := StrToFloat(FormatFloat('0.00',vBaseAux * cdsDuplicataPERC_BASE_COMISSAO.AsFloat / 100));
     end;

@@ -6,8 +6,6 @@ uses
   Classes, SysUtils, Dialogs, Variants, Forms, ShellApi, Windows, StrUtils, SqlExpr, DmdDatabase, DBClient, Controls, SMDBGrid,
   DB, UEscolhe_Filial, Printers, Messages, DmdDatabase_NFeBD;
 
-
-
   function Monta_Numero(Campo: String; Tamanho: Integer): String;
   function TirarAcento(texto: string): string;
   function TirarAcento_Arq(texto: string): string;
@@ -86,6 +84,8 @@ uses
   function fnc_Cliente_Fil_Fat(ID_Cliente , ID_Filial  : Integer) : Boolean;
 
   function fnc_CNPJCFP_FilialNFeConfig : String;
+
+  function fnc_Vendedor_Desc_Com(ID : Integer) : Boolean;
 
   //procedure prc_Enviar_Email_Proc(MSG: String);
 
@@ -2076,6 +2076,33 @@ begin
     FreeAndNil(dmDatabase_NFeBD);
   end;
 
+end;
+
+function fnc_Vendedor_Desc_Com(ID : Integer) : Boolean; //08/05/2019
+var
+  sds: TSQLDataSet;
+begin
+  Result   := False;
+  if ID <= 0 then
+    exit;
+
+  sds      := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.Close;
+    sds.CommandText   := ' SELECT V.desc_frete, V.desc_ipi, V.desc_st, V.desc_pis, V.desc_cofins, V.desc_issqn '
+                       + ' FROM VENDEDOR_CONFIG V WHERE V.CODIGO = :CODIGO ';
+    sds.ParamByName('CODIGO').AsInteger := ID;
+    sds.Open;
+    if (sds.FieldByName('desc_frete').AsString = 'S') or (sds.FieldByName('desc_ipi').AsString = 'S') or (sds.FieldByName('desc_st').AsString = 'S')
+      or (sds.FieldByName('desc_pis').AsString = 'S') or (sds.FieldByName('desc_cofins').AsString = 'S') or (sds.FieldByName('desc_issqn').AsString = 'S') then
+      Result := True;
+  finally
+    FreeAndNil(sds);
+  end;
+  
 end;
 
 end.

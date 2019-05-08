@@ -3736,7 +3736,10 @@ begin
   cdsProduto_Comb_MatID_MATERIAL.AsInteger := cdsProduto_ConsumoID_MATERIAL.AsInteger;
   cdsProduto_Comb_MatID_COR.Clear;
   if cdsProduto_ConsumoID_POSICAO.AsInteger > 0 then
-    cdsProduto_Comb_MatID_POSICAO.AsInteger := cdsProduto_ConsumoID_POSICAO.AsInteger;
+  begin
+    cdsProduto_Comb_MatID_POSICAO.AsInteger  := cdsProduto_ConsumoID_POSICAO.AsInteger;
+    cdsProduto_Comb_MatNOME_POSICAO.AsString := cdsProduto_ConsumoNOME_POSICAO.AsString;
+  end;
   if cdsProduto_ConsumoID_SETOR.AsInteger > 0 then
     cdsProduto_Comb_MatID_SETOR.AsInteger := cdsProduto_ConsumoID_SETOR.AsInteger;
   //cdsProduto_Comb_MatNOME_COR_COMBINACAO.AsString := cdsProduto_ mCombinacaoAuxNome_Cor.AsString;

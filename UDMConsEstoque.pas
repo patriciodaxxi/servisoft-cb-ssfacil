@@ -674,6 +674,8 @@ type
     cdsComprasVLR_DESCONTO: TFloatField;
     cdsComprasID: TIntegerField;
     cdsComprasFORNECEDOR: TStringField;
+    cdsComprasCOD_MATERIAL_FORN: TStringField;
+    cdsComprasNOME_MATERIAL_FORN: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
