@@ -2357,7 +2357,7 @@ var
 
 begin
   vTexto := '1';
-  if Tipo = 'A' then
+  if (Tipo = 'A') and (Qtd_Emb <> 1) then
     vTexto := InputBox('','Informar a Quantidade por Pacote', '72')
   else
   if Tipo = 'AE' then //Por Embalagem no produto tipo 'O'
