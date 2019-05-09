@@ -2509,8 +2509,10 @@ begin
       end
       else
       begin
-        fDMCadPedido.mEtiqueta_NavQtd2.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.mEtiqueta_NavQtd.AsFloat));
-        fDMCadPedido.mEtiqueta_NavUnidade_Prod.AsString := fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString;
+        //fDMCadPedido.mEtiqueta_NavQtd2.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.mEtiqueta_NavQtd.AsFloat));
+        //fDMCadPedido.mEtiqueta_NavUnidade_Prod.AsString := fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString;
+        fDMCadPedido.mEtiqueta_NavQtd2.AsInteger := 0;
+        fDMCadPedido.mEtiqueta_NavUnidade_Prod.Clear;
       end;
 
       if fDMCadPedido.mEtiqueta_Nav.State in [dsEdit,dsInsert] then
