@@ -3444,6 +3444,12 @@ type
     cdsPedidoImp_ItensQTD_POR_ROTULO_PROD: TFloatField;
     cdsPedidoImp_ItensQTD_EMBALAGEM_PROD: TFloatField;
     mEtiqueta_NavNome_Cor: TStringField;
+    qParametros_PedUSA_FABRICA: TStringField;
+    sdsPedido_ItensFABRICA: TStringField;
+    cdsPedido_ItensFABRICA: TStringField;
+    cdsPedidoImp_ItensFABRICA: TStringField;
+    mEtiqueta_NavMedida: TStringField;
+    cdsPedidoImp_ItensMEDIDA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

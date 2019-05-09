@@ -151,6 +151,8 @@ type
     dbckDiferenca_ICMS: TDBCheckBox;
     Label23: TLabel;
     DBEdit6: TDBEdit;
+    Label24: TLabel;
+    DBEdit8: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -500,6 +502,8 @@ begin
   //22/10/2018
   dbckDiferenca_ICMS.Visible := ((copy(fDMCadPedido.cdsPedido_ItensCODCFOP.AsString,1,1) = '6') and (fDMCadPedido.cdsCFOPSUBSTITUICAO_TRIB.AsString <> 'S'));
 
+  Label24.Visible := (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S');
+  DBEdit8.Visible := (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S');
 end;
 
 procedure TfrmCadPedido_Itens.Panel2Enter(Sender: TObject);

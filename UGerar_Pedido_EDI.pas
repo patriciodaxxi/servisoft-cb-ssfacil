@@ -574,7 +574,8 @@ begin
   fDMCadPedido.cdsPedido_ItensFATURADO.AsString     := 'N';
   fDMCadPedido.cdsPedido_ItensCOD_PRODUTO_CLIENTE.AsString := fDMGerar_EDI.mAuxiliarCodProdCli.AsString;
   fDMCadPedido.cdsPedido_ItensUNIDADE.AsString      := fDMGerar_EDI.mAuxiliarUnidade.AsString;
-
+  fDMCadPedido.cdsPedido_ItensFABRICA.AsString      := fDMGerar_EDI.mAuxiliarFabrica.AsString;
+  
   //03/08/2018
   if ((fDMCadPedido.cdsPedido_ItensUNIDADE.AsString = 'PAR') or (fDMCadPedido.cdsPedido_ItensUNIDADE.AsString = 'PR') or (fDMCadPedido.cdsPedido_ItensUNIDADE.AsString = 'PRS'))
     and (fDMCadPedido.cdsProdutoUNIDADE.AsString = 'PARES') then

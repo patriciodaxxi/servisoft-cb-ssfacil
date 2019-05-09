@@ -422,7 +422,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
     Top = 283
     Width = 1087
     Height = 253
-    ActivePage = TabSheet1
+    ActivePage = RzTabSheet1
     ActivePageDefault = RzTabSheet1
     Align = alBottom
     BackgroundColor = clSilver
@@ -430,7 +430,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 2
     FixedDimension = 19
     object RzTabSheet1: TRzTabSheet

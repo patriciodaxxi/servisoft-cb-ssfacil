@@ -864,6 +864,8 @@ begin
       if (SMDBGrid2.Columns[i].FieldName = 'TAMANHO') then
         SMDBGrid2.Columns[i].Visible := False;
     end;
+    if (SMDBGrid2.Columns[i].FieldName = 'FABRICA') then
+      SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S');
     if (lblNaoMostrarPreco.Visible) then
     begin
       vTexto := SMDBGrid2.Columns[i].FieldName;
@@ -2444,6 +2446,7 @@ begin
       fDMCadPedido.mEtiqueta_Nav.Insert;
       fDMCadPedido.mEtiqueta_NavReferencia.AsString   := fDMCadPedido.cdsPedidoImp_ItensREFERENCIA.AsString;
       fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString;
+      fDMCadPedido.mEtiqueta_NavMedida.AsString       := fDMCadPedido.cdsPedidoImp_ItensMEDIDA.AsString;
       fDMCadPedido.mEtiqueta_NavNome_Cor.AsString := fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString;
       fDMCadPedido.mEtiqueta_NavItem_Ped.AsInteger    := fDMCadPedido.cdsPedidoImp_ItensITEM.AsInteger;
       if (fDMCadPedido.cdsPedidoImpIMP_COR_CLIENTE.AsString = 'S') and (fDMCadPedido.cdsPedidoImp_ItensID_COR.AsInteger > 0) and
@@ -2459,6 +2462,9 @@ begin
         fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.mEtiqueta_NavNome_Produto.AsString + ' ' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString;
       fDMCadPedido.mEtiqueta_NavTamanho.AsString      := fDMCadPedido.cdsPedidoImp_ItensTAMANHO.AsString;
       fDMCadPedido.mEtiqueta_NavNumOS.AsString        := fDMCadPedido.cdsPedidoImp_ItensNUMOS.AsString;
+      //08/05/2019  incluido a fábrica
+      if (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S') and (trim(fDMCadPedido.cdsPedidoImp_ItensFABRICA.AsString) <> '') then
+        fDMCadPedido.mEtiqueta_NavNumOS.AsString := fDMCadPedido.cdsPedidoImp_ItensFABRICA.AsString + '-' + fDMCadPedido.mEtiqueta_NavNumOS.AsString;
       fDMCadPedido.mEtiqueta_NavUnidade.AsString      := fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString;
       if fDMCadPedido.cdsPedidoImp_ItensENCERADO.AsString = 'S' then
       begin
