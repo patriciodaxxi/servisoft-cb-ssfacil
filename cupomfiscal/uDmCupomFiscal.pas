@@ -1554,6 +1554,7 @@ type
     ctCondPgto, ctProduto: String;
     ctCupomFiscal_ProdPrincipal: String;
     ctPedido, ctDuplicata: String;
+    ctTotais: string;
     vPgtoEditado: Boolean;
     vSacolaSelecionada: Boolean;
     vVlrEntrada, vSomaParcelas, vSomaOriginal: Currency;
@@ -1758,6 +1759,7 @@ begin
   ctqIBPT       := qIBPT.SQL.Text;
   ctProduto     := sdsProduto.CommandText;
   ctDuplicata   := sdsDuplicata.CommandText;
+  ctTotais      := sdsTotais.CommandText;
 
   cdsFilial.Open;
   cdsTipoCobranca.Open;

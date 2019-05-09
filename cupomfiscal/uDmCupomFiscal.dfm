@@ -7150,16 +7150,16 @@ object dmCupomFiscal: TdmCupomFiscal
     GetMetadata = False
     CommandText = 
       'SELECT NOME, SUM(TOTAL) TOTAL'#13#10'FROM TOTAIS_FORMA_PGTO'#13#10'WHERE DAT' +
-      'A BETWEEN :D1 AND :D2'#13#10'GROUP BY NOME'
+      'A BETWEEN :D1 AND :D2'#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'D1'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'D2'
         ParamType = ptInput
       end>

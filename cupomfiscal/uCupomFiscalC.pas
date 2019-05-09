@@ -88,6 +88,8 @@ type
     DBMemo3: TDBMemo;
     ckMsg: TCheckBox;
     SMDBGrid5: TSMDBGrid;
+    Label7: TLabel;
+    ceTotal: TCurrencyEdit;
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
@@ -310,6 +312,7 @@ var
   vTotal, vDin, vOut: Currency;
   vQtd: Word;
   vComando: String;
+  vTipo: String;
 begin
   vTotal := 0;
   vQtd   := 0;
@@ -365,6 +368,21 @@ begin
   begin
     vTotal := 0;
     fDmCupomFiscal.cdsTotais.Close;
+    fDmCupomFiscal.sdsTotais.CommandText := fDmCupomFiscal.ctTotais;
+    if RxDBLookupCombo1.Text <> '[Todos]' then
+      fDmCupomFiscal.sdsTotais.CommandText := fDmCupomFiscal.sdsTotais.CommandText + ' AND TERMINAL = ' + RxDBLookupCombo1.Value;
+    if ComboBox1.ItemIndex > 0 then
+    begin
+      case ComboBox1.ItemIndex of
+        1: vTipo := 'CNF';
+        2: vTipo := 'NFC';
+        3: vTipo := 'PED';
+        4: vTipo := 'ORC';
+        5: vTipo := 'COM';
+      end;
+      fDmCupomFiscal.sdsTotais.CommandText := fDmCupomFiscal.sdsTotais.CommandText + ' AND TIPO = ' + QuotedStr(vTipo);
+    end;
+    fDmCupomFiscal.sdsTotais.CommandText := fDmCupomFiscal.sdsTotais.CommandText + ' GROUP BY NOME';
     fDmCupomFiscal.sdsTotais.ParamByName('D1').AsDate := DateEdit1.Date;
     fDmCupomFiscal.sdsTotais.ParamByName('D2').AsDate := DateEdit2.Date;
     fDmCupomFiscal.cdsTotais.Open;
@@ -377,6 +395,7 @@ begin
         vTotal := vTotal + fDmCupomFiscal.cdsTotaisTOTAL.AsCurrency;
         fDmCupomFiscal.cdsTotais.Next;
       end;
+      ceTotal.Value := vTotal;
       ceQtd.Value := vQtd;
       ceVM.Value  := vTotal / vQtd;
     end;
