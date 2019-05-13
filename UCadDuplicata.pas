@@ -256,6 +256,7 @@ type
     btnExcluir_CCusto: TNxButton;
     btnRecalcular_CCusto: TNxButton;
     CheckBox2: TCheckBox;
+    ICMS1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -345,6 +346,7 @@ type
     procedure btnIndividualClick(Sender: TObject);
     procedure btnExcluir_CCustoClick(Sender: TObject);
     procedure btnRecalcular_CCustoClick(Sender: TObject);
+    procedure ICMS1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -2717,7 +2719,7 @@ begin
     fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
   else
   begin
-    ShowMessage('Relatorio não localizado! ' + vArq);
+    ShowMessage('Relatório não localizado! ' + vArq);
     Exit;
   end;
   if NxDatePicker3.Date > 1 then
@@ -3145,6 +3147,30 @@ begin
     fDMCadDuplicata.cdsDuplicata_CCusto.Next;
   end;
   
+end;
+
+procedure TfrmCadDuplicata.ICMS1Click(Sender: TObject);
+var
+  vArq: string;
+  vIndice_Ant: string;
+begin
+  vIndice_Ant := fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames;
+  fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'NOME_PESSOA;DTVENCIMENTO';
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Transf_ICMS.fr3';
+  if FileExists(vArq) then
+    fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  if NxDatePicker3.Date > 1 then
+    fDMCadDuplicata.vDataIni := NxDatePicker3.Date
+  else
+    fDMCadDuplicata.vDataIni := 36526;
+  fDMCadDuplicata.vDataFim := NxDatePicker4.Date;
+  fDMCadDuplicata.frxReport1.ShowReport;
+  fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := vIndice_Ant;
 end;
 
 end.

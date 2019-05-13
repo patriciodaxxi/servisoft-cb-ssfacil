@@ -3,9 +3,8 @@ unit UConsFat;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, NxCollection,
-  StdCtrls, NxEdit, RxLookup, RzLstBox, RzChkLst, Grids, DBGrids, SMDBGrid, UDMConsFat, ExtCtrls,
-  ComObj, DB, DateUtils, RzTabs;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, NxCollection, StdCtrls, NxEdit, RxLookup,
+  RzLstBox, RzChkLst, Grids, DBGrids, SMDBGrid, UDMConsFat, ExtCtrls, ComObj, DB, DateUtils, RzTabs;
 
 type
   TfrmConsFat = class(TForm)
