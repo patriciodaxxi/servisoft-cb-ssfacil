@@ -1780,7 +1780,7 @@ begin
     pnl_Eng_Processo.Visible := False;
 
   Label118.Visible    := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
-  StaticText1.Caption := 'Duplo clique para consultar     F3 Consultar Cadastro Anterior';
+  StaticText1.Caption := 'Duplo clique para alterar  |  F3 Consultar Cadastro Anterior  |  F6 Histórico  |  F8 Compras';
   if fDMCadProduto.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
     StaticText1.Caption := StaticText1.Caption + '   F4 Consulta Lotes';
 
