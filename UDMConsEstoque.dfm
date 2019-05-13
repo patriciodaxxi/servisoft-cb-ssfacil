@@ -72,22 +72,22 @@ object DMConsEstoque: TDMConsEstoque
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'TIPO_REG'
         ParamType = ptInput
       end>
@@ -102,6 +102,7 @@ object DMConsEstoque: TDMConsEstoque
     Top = 7
   end
   object cdsEstoque: TClientDataSet
+    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEstoque'
@@ -4206,11 +4207,12 @@ object DMConsEstoque: TDMConsEstoque
       'E_MOV EM'#13#10'LEFT JOIN PESSOA P ON (EM.ID_PESSOA = P.CODIGO)'#13#10'LEFT ' +
       'JOIN COR C ON (EM.ID_COR = C.ID)'#13#10'LEFT JOIN PRODUTO_FORN PF ON (' +
       'EM.ID_PRODUTO = PF.ID AND EM.ID_PESSOA = PF.ID_FORNECEDOR)'#13#10'WHER' +
-      'E ID_PRODUTO = :IDP'#13#10'AND TIPO_ES = '#39'E'#39#13#10'AND TIPO_MOV = '#39'NTE'#39
+      'E ID_PRODUTO = :IDP'#13#10'AND TIPO_ES = '#39'E'#39#13#10'AND TIPO_MOV = '#39'NTE'#39#13#10'OR' +
+      'DER BY EM.DTMOVIMENTO DESC'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'IDP'
         ParamType = ptInput
       end>
