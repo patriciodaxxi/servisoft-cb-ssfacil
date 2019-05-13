@@ -41,15 +41,15 @@ procedure TfrmConsProduto_Compras.FormShow(Sender: TObject);
 begin
   fDMConsEstoque := TDMConsEstoque.Create(Self);
 
+  fDMConsEstoque.cdsCompras.Close;
+  fDMConsEstoque.sdsCompras.ParamByName('IDP').AsInteger := vIdProd;
+  fDMConsEstoque.cdsCompras.Open;
+
   fDMConsEstoque.qAltPreco.Close;
   fDMConsEstoque.qAltPreco.ParamByName('IDP').AsInteger := vIdProd;
   fDMConsEstoque.qAltPreco.Open;
   lblUltPreco.Caption := fDMConsEstoque.qAltPrecoALT_CUSTO.AsString;
   fDMConsEstoque.qAltPreco.Close;
-
-  fDMConsEstoque.cdsCompras.Close;
-  fDMConsEstoque.sdsCompras.ParamByName('IDP').AsInteger := vIdProd;
-  fDMConsEstoque.cdsCompras.Open;
 end;
 
 end.

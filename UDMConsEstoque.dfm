@@ -4210,7 +4210,7 @@ object DMConsEstoque: TDMConsEstoque
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'IDP'
         ParamType = ptInput
       end>
