@@ -1,6 +1,6 @@
 object frmConsHist_Chapa: TfrmConsHist_Chapa
-  Left = 140
-  Top = 70
+  Left = 284
+  Top = 60
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmConsHist_Chapa'
@@ -271,13 +271,17 @@ object frmConsHist_Chapa: TfrmConsHist_Chapa
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT TP.vlr_kg, TP.comprimento, TP.largura, TP.altura,'#13#10'TP.qtd' +
-      ', TP.vlr_unitario, TP.vlr_total, TP.vlr_dobra, TP.complemento_no' +
-      'me,'#13#10'TP.peso, PED.dtemissao, PED.id_cliente, CLI.NOME NOME_CLIEN' +
-      'TE, PED.num_pedido,'#13#10'PED.tipo_reg, tp.id id_pedido, tp.item item' +
-      '_pedido'#13#10'FROM pedido_item_tipo tp'#13#10'LEFT JOIN PEDIDO PED'#13#10'ON TP.I' +
-      'D = PED.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON PED.ID_CLIENTE = CLI.codig' +
-      'o'#13#10'WHERE TP.tipo_orcamento = '#39'C'#39#13#10'  AND PED.tipo_reg = '#39'P'#39
+      'select TP.VLR_KG, TP.COMPRIMENTO, TP.LARGURA, TP.ALTURA, TP.QTD,' +
+      ' TP.VLR_UNITARIO, TP.VLR_TOTAL, TP.VLR_DOBRA,'#13#10'       TP.COMPLEM' +
+      'ENTO_NOME, TP.PESO, PED.DTEMISSAO, PED.ID_CLIENTE, CLI.NOME NOME' +
+      '_CLIENTE, PED.NUM_PEDIDO, PED.TIPO_REG,'#13#10'       PED.ID ID_PEDIDO' +
+      ', PEDI.ITEM ITEM_PEDIDO, PEDI.QTD QTDE_ITEM, PEDI.VLR_UNITARIO V' +
+      'LR_UNITARIO_ITEM,'#13#10'       PEDI.VLR_TOTAL VLR_TOTAL_ITEM, PEDI.NO' +
+      'MEPRODUTO'#13#10'from PEDIDO PED'#13#10'inner join PEDIDO_ITEM PEDI on PEDI.' +
+      'ID = PED.ID'#13#10'left join PEDIDO_ITEM_TIPO TP on TP.ID = PED.ID'#13#10'le' +
+      'ft join PESSOA CLI on PED.ID_CLIENTE = CLI.CODIGO'#13#10'where (TP.TIP' +
+      'O_ORCAMENTO = '#39'C'#39' or TP.TIPO_ORCAMENTO is null) and'#13#10'      PED.T' +
+      'IPO_REG = '#39'P'#39'   '
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -347,6 +351,19 @@ object frmConsHist_Chapa: TfrmConsHist_Chapa
     object cdsChapaITEM_PEDIDO: TIntegerField
       FieldName = 'ITEM_PEDIDO'
       Required = True
+    end
+    object cdsChapaQTDE_ITEM: TFloatField
+      FieldName = 'QTDE_ITEM'
+    end
+    object cdsChapaVLR_UNITARIO_ITEM: TFloatField
+      FieldName = 'VLR_UNITARIO_ITEM'
+    end
+    object cdsChapaVLR_TOTAL_ITEM: TFloatField
+      FieldName = 'VLR_TOTAL_ITEM'
+    end
+    object cdsChapaNOMEPRODUTO: TStringField
+      FieldName = 'NOMEPRODUTO'
+      Size = 100
     end
   end
   object dspChapa: TDataSetProvider

@@ -47,6 +47,10 @@ type
     btnCopiar: TBitBtn;
     cdsChapaID_PEDIDO: TIntegerField;
     cdsChapaITEM_PEDIDO: TIntegerField;
+    cdsChapaQTDE_ITEM: TFloatField;
+    cdsChapaVLR_UNITARIO_ITEM: TFloatField;
+    cdsChapaVLR_TOTAL_ITEM: TFloatField;
+    cdsChapaNOMEPRODUTO: TStringField;
     procedure btnConsultarClick(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);

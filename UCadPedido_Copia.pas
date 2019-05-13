@@ -225,7 +225,8 @@ begin
       fDMCadPedido.prc_Inserir_Itens;
       for i := 0 to ( fDMCopiaPedido.cdsPedido_Itens.FieldCount - 1) do
       begin
-        if (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'sdsPedido_Item_Tipo') then
+        if (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'sdsPedido_Item_Tipo') and
+           (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'ITEM') then
           fDMCadPedido.cdsPedido_Itens.FieldByName(fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido_Itens.Fields[i].Value;
       end;
       fDMCadPedido.cdsPedido_ItensQTD_CANCELADO.AsInteger := 0;
