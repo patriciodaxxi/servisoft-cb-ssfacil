@@ -789,7 +789,11 @@ begin
 
   fDmCupomFiscal.vVlrEntrada  := 0;
   fDmCupomFiscal.vDataEntrada := fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime;
-  vQtdParcelas := fDmCupomFiscal.cdsCondPgtoQTD_PARCELA.AsInteger;
+  if (fDmCupomFiscal.cdsCondPgtoTIPO.AsString = 'P') and
+     (fDmCupomFiscal.cdsCondPgtoTIPO_CONDICAO.AsString = 'V') then
+    vQtdParcelas := fDmCupomFiscal.cdsCondPgto_Dia.RecordCount 
+  else
+    vQtdParcelas := fDmCupomFiscal.cdsCondPgtoQTD_PARCELA.AsInteger;
   if fDmCupomFiscal.cdsCondPgtoENTRADA.AsString = 'S' then
   begin
     fDmCupomFiscal.cdsCupom_Parc.Insert;

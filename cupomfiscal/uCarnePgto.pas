@@ -540,7 +540,7 @@ begin
   if vVlrPago = -1 then
     Exit;
   
-  vVias := '1';
+  vVias := '2';
   if not InputQuery('Informe qtd. de vias:','Vias:',vVias) then
     Exit;
 

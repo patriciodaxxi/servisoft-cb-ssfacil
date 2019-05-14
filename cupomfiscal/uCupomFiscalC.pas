@@ -824,12 +824,12 @@ procedure TfCupomFiscalC.SMDBGrid1GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
   AFont.Color := clWindowText;
-  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
-  begin
-    AFont.Color := $00404080;
-    AFont.Style := [fsBold]; 
-  end
-  else
+//  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
+//  begin
+//    AFont.Color := $00404080;
+//    AFont.Style := [fsBold];
+//  end
+//  else
   if ((fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S') and
      (fDmCupomFiscal.cdsCupom_ConsID_TIPOCOBRANCA.IsNull)) then
     AFont.Color := clBlue;
@@ -926,7 +926,7 @@ begin
   if not(fDmCupomFiscal.vCancelar) then
     prc_Posiciona_CupomFiscal(fDmCupomFiscal.cdsCupom_ConsID.AsInteger);
 
-  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
+{  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
   begin
     prc_Posiciona_CupomFiscal(fDmCupomFiscal.cdsCupom_ConsID.AsInteger);
     if not fDmCupomFiscal.cdsCupomFiscal.IsEmpty then
@@ -940,7 +940,7 @@ begin
     end;
     Exit;
   end;
-
+}
   if (fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'NFC') and (fDmCupomFiscal.cdsCupomFiscalNUMCUPOM.AsInteger > 0) and
      (trim(fDmCupomFiscal.cdsCupomFiscalNFECHAVEACESSO.AsString) <> '') and (fDmCupomFiscal.cdsCupom_ConsNFEAMBIENTE.AsString = '1')  then
   begin
@@ -1418,12 +1418,12 @@ end;
 
 procedure TfCupomFiscalC.prc_scroll(DataSet: TDataSet);
 begin
-  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
+{  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
   begin
     btnCancelar.Caption := 'Excluir';
     btnCancelar.Enabled := True;
   end
-  else
+  else}
   begin
     btnCancelar.Caption := 'Cancelar';
     if fDmCupomFiscal.cdsParametrosUSA_NFCE.AsString = 'S' then
@@ -1469,7 +1469,7 @@ begin
     Exit;
   end;
 
-  if MessageDlg('Deseja realmente cancelar este Cupom Fiscal (NFCe) ?',mtWarning,[mbOK,mbNO],0) = mrNo then
+  if MessageDlg('Deseja realmente cancelar este Cupom Fiscal (NFCe)?',mtWarning,[mbOK,mbNO],0) = mrNo then
     Exit;
   if MessageDlg('                                  ATENÇÃO'
                   +#13#13+

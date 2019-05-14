@@ -1101,7 +1101,6 @@ type
     cdsCupomParametrosIMPRIME_NUM_NFISCAL: TStringField;
     sdsCupomFiscalID_FECHAMENTO: TIntegerField;
     cdsCupomFiscalID_FECHAMENTO: TIntegerField;
-    cdsCupom_ConsCONTADOR_ITENS: TIntegerField;
     cdsCupom_ConsID_FECHAMENTO: TIntegerField;
     SQLQuery1: TSQLQuery;
     cdsCupom_ConsDTFECHAMENTO: TDateField;

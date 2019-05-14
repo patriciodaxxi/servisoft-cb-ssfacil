@@ -1157,12 +1157,11 @@ object dmCupomFiscal: TdmCupomFiscal
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT CF.*, TC.DINHEIRO, TC.NOME NOME_TIPOCOBRANCA,'#13#10'(SELECT CO' +
-      'UNT(1) CONTADOR_ITENS'#13#10'  FROM CUPOMFISCAL_ITENS CI'#13#10'  WHERE CI.I' +
-      'D = CF.ID),'#13#10'(SELECT FE.DTFECHAMENTO'#13#10'  FROM FECHAMENTO FE'#13#10'  WH' +
-      'ERE CF.ID_FECHAMENTO = FE.ID), P.NOME VENDEDOR'#13#10'FROM CUPOMFISCAL' +
-      ' CF'#13#10'LEFT JOIN TIPOCOBRANCA TC ON (CF.ID_TIPOCOBRANCA = TC.ID)'#13#10 +
-      'LEFT JOIN PESSOA P ON (CF.ID_VENDEDOR = P.CODIGO)'
+      'SELECT CF.*, TC.DINHEIRO, TC.NOME NOME_TIPOCOBRANCA,'#13#10'(SELECT FE' +
+      '.DTFECHAMENTO'#13#10'  FROM FECHAMENTO FE'#13#10'  WHERE CF.ID_FECHAMENTO = ' +
+      'FE.ID), P.NOME VENDEDOR'#13#10'FROM CUPOMFISCAL CF'#13#10'LEFT JOIN TIPOCOBR' +
+      'ANCA TC ON (CF.ID_TIPOCOBRANCA = TC.ID)'#13#10'LEFT JOIN PESSOA P ON (' +
+      'CF.ID_VENDEDOR = P.CODIGO)'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1275,9 +1274,6 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupom_ConsQTD_PESSOA: TIntegerField
       FieldName = 'QTD_PESSOA'
-    end
-    object cdsCupom_ConsCONTADOR_ITENS: TIntegerField
-      FieldName = 'CONTADOR_ITENS'
     end
     object cdsCupom_ConsID_FECHAMENTO: TIntegerField
       FieldName = 'ID_FECHAMENTO'

@@ -1,7 +1,7 @@
 object fCupomFiscalC: TfCupomFiscalC
   Left = 17
   Top = 0
-  Width = 1296
+  Width = 1280
   Height = 717
   Caption = 'fCupomFiscalC'
   Color = clBtnFace
@@ -21,7 +21,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 167
-    Width = 1288
+    Width = 1272
     Height = 317
     Align = alClient
     Ctl3D = False
@@ -239,7 +239,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object Panel11: TPanel
     Left = 0
     Top = 0
-    Width = 1288
+    Width = 1272
     Height = 30
     Align = alTop
     Color = 7300393
@@ -552,7 +552,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object pnlPesquisa: TPanel
     Left = 0
     Top = 30
-    Width = 1288
+    Width = 1272
     Height = 106
     Align = alTop
     Color = 3683329
@@ -867,7 +867,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object Panel1: TPanel
     Left = 0
     Top = 484
-    Width = 1288
+    Width = 1272
     Height = 26
     Align = alBottom
     TabOrder = 3
@@ -983,7 +983,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object pnlEnvio_Novo: TPanel
     Left = 0
     Top = 136
-    Width = 1288
+    Width = 1272
     Height = 31
     Align = alTop
     Color = 7300393
@@ -1239,13 +1239,13 @@ object fCupomFiscalC: TfCupomFiscalC
   object Panel2: TPanel
     Left = 0
     Top = 566
-    Width = 1288
+    Width = 1272
     Height = 120
     Align = alBottom
     Color = 3683329
     TabOrder = 5
     object Label8: TLabel
-      Left = 108
+      Left = 28
       Top = 90
       Width = 71
       Height = 13
@@ -1258,7 +1258,7 @@ object fCupomFiscalC: TfCupomFiscalC
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 114
+      Left = 34
       Top = 58
       Width = 66
       Height = 13
@@ -1271,7 +1271,7 @@ object fCupomFiscalC: TfCupomFiscalC
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 86
+      Left = 6
       Top = 26
       Width = 95
       Height = 13
@@ -1284,7 +1284,7 @@ object fCupomFiscalC: TfCupomFiscalC
       ParentFont = False
     end
     object ceVM: TCurrencyEdit
-      Left = 186
+      Left = 106
       Top = 77
       Width = 232
       Height = 26
@@ -1298,7 +1298,7 @@ object fCupomFiscalC: TfCupomFiscalC
       TabOrder = 2
     end
     object ceQtd: TCurrencyEdit
-      Left = 186
+      Left = 106
       Top = 45
       Width = 232
       Height = 26
@@ -1314,9 +1314,9 @@ object fCupomFiscalC: TfCupomFiscalC
       TabOrder = 1
     end
     object SMDBGrid5: TSMDBGrid
-      Left = 472
+      Left = 809
       Top = 1
-      Width = 815
+      Width = 462
       Height = 118
       Align = alRight
       BorderStyle = bsNone
@@ -1374,7 +1374,7 @@ object fCupomFiscalC: TfCupomFiscalC
         end>
     end
     object ceTotal: TCurrencyEdit
-      Left = 186
+      Left = 106
       Top = 13
       Width = 232
       Height = 26
@@ -1392,7 +1392,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object pnlCliente: TPanel
     Left = 0
     Top = 510
-    Width = 1288
+    Width = 1272
     Height = 56
     Align = alBottom
     Color = 7300393
