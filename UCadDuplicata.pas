@@ -3064,9 +3064,9 @@ begin
   vSelCentroCusto := '';
   frmSel_CentroCusto := TfrmSel_CentroCusto.Create(Self);
   frmSel_CentroCusto.Panel2.Visible := True;
-  if fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger > 0 then
-    frmSel_CentroCusto.RxDBLookupCombo9.KeyValue := fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger
-  else
+//  if fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger > 0 then
+//    frmSel_CentroCusto.RxDBLookupCombo9.KeyValue := fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger
+//  else
     frmSel_CentroCusto.RxDBLookupCombo9.ClearValue;
   frmSel_CentroCusto.ShowModal;
   FreeAndNil(frmSel_CentroCusto);

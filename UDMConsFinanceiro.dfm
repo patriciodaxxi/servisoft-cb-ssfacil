@@ -2486,28 +2486,31 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'D1.VLR_PARCELA)'#13#10'            from DUPLICATA DD1'#13#10'            lef' +
       't join DUPLICATA_CCUSTO DDCC1 on DD1.ID = DDCC1.ID'#13#10'            ' +
       'where DD1.ID = DD.ID and'#13#10'                  DD1.TIPO_ES = '#39'E'#39' an' +
-      'd DD1.FILIAL = :FILIAL'#13#10'            group by DD1.VLR_PARCELA)) V' +
-      'LR_ENTRADA, sum((select iif(sum(DDCC1.VALOR) > 0, sum(DDCC1.VALO' +
-      'R), DD1.VLR_PARCELA)'#13#10'                                          ' +
-      '               from DUPLICATA DD1'#13#10'                             ' +
-      '                            left join DUPLICATA_CCUSTO DDCC1 on ' +
-      'DD1.ID = DDCC1.ID'#13#10'                                             ' +
-      '            where DD1.ID = DD.ID and'#13#10'                          ' +
-      '                                     DD1.TIPO_ES = '#39'S'#39' and DD1.F' +
-      'ILIAL = :FILIAL'#13#10'                                               ' +
-      '          group by DD1.VLR_PARCELA)) VLR_SAIDA, CC.CODIGO CODIGO' +
-      '_GRUPO,'#13#10'       CC1.CODIGO CODIGO_GRUPO_SUP, CC.DESCRICAO NOME_G' +
-      'RUPO, CO.CODIGO CONTA_ORCAMENTO, DD.ID_CONTA_ORCAMENTO,'#13#10'       ' +
-      'CO.DESCRICAO NOME_ORCAMENTO, CC.VLR_CONTRATO'#13#10'from DUPLICATA DD'#13 +
-      #10'left join DUPLICATA_CCUSTO DDCC on DD.ID = DDCC.ID'#13#10'left join C' +
-      'ENTROCUSTO CC on CC.ID = DDCC.ID_CENTROCUSTO'#13#10'left join CENTROCU' +
-      'STO CC1 on CC1.ID = CC.SUPERIOR'#13#10'left join CONTA_ORCAMENTO CO on' +
-      ' CO.ID = DD.ID_CONTA_ORCAMENTO'#13#10'where DD.DTVENCIMENTO between :D' +
-      'TINICIAL and :DTFINAL and'#13#10'      ((:ID_CENTROCUSTO = 0) or (DDCC' +
-      '.ID_CENTROCUSTO = :ID_CENTROCUSTO)) and'#13#10'      DDCC.ID_CENTROCUS' +
-      'TO > 0 and DD.FILIAL = :FILIAL'#13#10'GROUP by CC.CODIGO, CC1.CODIGO, ' +
-      'CC.DESCRICAO, CO.CODIGO, DD.ID_CONTA_ORCAMENTO, CO.DESCRICAO, CC' +
-      '.VLR_CONTRATO'#13#10'order by CC.CODIGO, CO.CODIGO  '
+      'd DD1.FILIAL = :FILIAL and'#13#10'                  DDCC1.ID_CENTROCUS' +
+      'TO = :ID_CENTROCUSTO'#13#10'            group by DD1.VLR_PARCELA)) VLR' +
+      '_ENTRADA, sum((select iif(sum(DDCC1.VALOR) > 0, sum(DDCC1.VALOR)' +
+      ', DD1.VLR_PARCELA)'#13#10'                                            ' +
+      '             from DUPLICATA DD1'#13#10'                               ' +
+      '                          left join DUPLICATA_CCUSTO DDCC1 on DD' +
+      '1.ID = DDCC1.ID'#13#10'                                               ' +
+      '          where DD1.ID = DD.ID and'#13#10'                            ' +
+      '                                   DD1.TIPO_ES = '#39'S'#39' and DD1.FIL' +
+      'IAL = :FILIAL and'#13#10'                                             ' +
+      '                  DDCC1.ID_CENTROCUSTO = :ID_CENTROCUSTO'#13#10'      ' +
+      '                                                   group by DD1.' +
+      'VLR_PARCELA)) VLR_SAIDA, CC.CODIGO CODIGO_GRUPO,'#13#10'       CC1.COD' +
+      'IGO CODIGO_GRUPO_SUP, CC.DESCRICAO NOME_GRUPO, CO.CODIGO CONTA_O' +
+      'RCAMENTO, DD.ID_CONTA_ORCAMENTO,'#13#10'       CO.DESCRICAO NOME_ORCAM' +
+      'ENTO, CC.VLR_CONTRATO'#13#10'from DUPLICATA DD'#13#10'left join DUPLICATA_CC' +
+      'USTO DDCC on DD.ID = DDCC.ID'#13#10'left join CENTROCUSTO CC on CC.ID ' +
+      '= DDCC.ID_CENTROCUSTO'#13#10'left join CENTROCUSTO CC1 on CC1.ID = CC.' +
+      'SUPERIOR'#13#10'left join CONTA_ORCAMENTO CO on CO.ID = DD.ID_CONTA_OR' +
+      'CAMENTO'#13#10'where DD.DTVENCIMENTO between :DTINICIAL and :DTFINAL a' +
+      'nd'#13#10'      ((:ID_CENTROCUSTO = 0) or (DDCC.ID_CENTROCUSTO = :ID_C' +
+      'ENTROCUSTO)) and'#13#10'      DDCC.ID_CENTROCUSTO > 0 and DD.FILIAL = ' +
+      ':FILIAL'#13#10'GROUP by CC.CODIGO, CC1.CODIGO, CC.DESCRICAO, CO.CODIGO' +
+      ', DD.ID_CONTA_ORCAMENTO, CO.DESCRICAO, CC.VLR_CONTRATO'#13#10'order by' +
+      ' CC.CODIGO, CO.CODIGO  '
     MaxBlobSize = -1
     Params = <
       item
@@ -2517,7 +2520,17 @@ object DMConsFinanceiro: TDMConsFinanceiro
       end
       item
         DataType = ftInteger
+        Name = 'ID_CENTROCUSTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
         Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_CENTROCUSTO'
         ParamType = ptInput
       end
       item
@@ -2526,7 +2539,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftDate
         Name = 'DTFINAL'
         ParamType = ptInput
       end
