@@ -1099,10 +1099,12 @@ begin
     fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
                                                    ' AND PED.ID = ' + IntToStr(ID)
   else
-  begin
+  if cePedInterno.AsInteger > 0 then
     if cePedInterno.AsInteger > 0 then
       fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
-                                                     ' AND PED.NUM_PEDIDO = ' + cePedInterno.Text;
+                                                     ' AND PED.NUM_PEDIDO = ' + cePedInterno.Text
+  else
+  begin
     if not(RxDBLookupCombo1.Text = '') then
       fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
                                                      ' AND PED.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
@@ -2449,6 +2451,28 @@ begin
       fDMCadPedido.mEtiqueta_NavMedida.AsString       := fDMCadPedido.cdsPedidoImp_ItensMEDIDA.AsString;
       fDMCadPedido.mEtiqueta_NavNome_Cor.AsString := fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString;
       fDMCadPedido.mEtiqueta_NavItem_Ped.AsInteger    := fDMCadPedido.cdsPedidoImp_ItensITEM.AsInteger;
+      if fDMCadPedido.cdsPedidoImpIMP_ETIQUETA_ROT.AsString = 'C' then
+      begin
+        fDMCadPedido.qProduto_Cli.SQL.Text := fDMCadPedido.ctqProduto_Cli;
+        if not (fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.IsNull) then
+          fDMCadPedido.qProduto_Cli.SQL.Text := fDMCadPedido.ctqProduto_Cli + ' AND PF.COD_COR_FORN = ' + QuotedStr(fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.AsString);
+        fDMCadPedido.qProduto_Cli.ParamByName('COD_MATERIAL_FORN').AsString := fDMCadPedido.cdsPedidoImp_ItensCOD_PRODUTO_CLIENTE.AsString;
+        fDMCadPedido.qProduto_Cli.ParamByName('ID_FORNECEDOR').AsInteger    := fDMCadPedido.cdsPedidoImpID_CLIENTE.AsInteger;
+        fDMCadPedido.qProduto_Cli.Open;
+        if not fDMCadPedido.qProduto_Cli.IsEmpty then
+          fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.qProduto_CliNOME_MATERIAL_FORN.AsString + ' (' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString + ')'
+        else
+        begin
+          fDMCadPedido.qProdForn2.Close;
+          fDMCadPedido.qProdForn2.ParamByName('ID').AsInteger            := fDMCadPedido.cdsPedidoImp_ItensID_PRODUTO.AsInteger;
+          fDMCadPedido.qProdForn2.ParamByName('ID_FORNECEDOR').AsInteger := fDMCadPedido.cdsPedidoImpID_CLIENTE.AsInteger;
+          fDMCadPedido.qProdForn2.ParamByName('ID_COR').AsInteger        := fDMCadPedido.cdsPedidoImp_ItensID_COR.AsInteger;
+          fDMCadPedido.qProdForn2.Open;
+          if not fDMCadPedido.qProdForn2.IsEmpty then
+            fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.qProdForn2NOME_MATERIAL_FORN.AsString + ' (' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString + ')';
+        end;
+      end
+      else
       if (fDMCadPedido.cdsPedidoImpIMP_COR_CLIENTE.AsString = 'S') and (fDMCadPedido.cdsPedidoImp_ItensID_COR.AsInteger > 0) and
          (fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.AsString <> '') then
       begin

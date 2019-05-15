@@ -193,6 +193,16 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       Caption = 'Cliente Exporta'#231#227'o'
       TabOrder = 5
     end
+    object btnAjustar_ProdCli: TBitBtn
+      Left = 885
+      Top = 38
+      Width = 131
+      Height = 25
+      Caption = 'Ajustar Nome Prod Cli'
+      TabOrder = 6
+      Visible = False
+      OnClick = btnAjustar_ProdCliClick
+    end
   end
   object gbxVendedor: TRzGroupBox
     Left = 0
@@ -253,7 +263,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       WidthOfIndicator = 11
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
-      ColCount = 25
+      ColCount = 26
       RowCount = 2
       Columns = <
         item
@@ -396,6 +406,14 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
         item
           Expanded = False
           FieldName = 'CNPJCliente'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ID_Produto'
+          Title.Alignment = taCenter
+          Title.Caption = 'ID Prod. Interno'
+          Width = 68
           Visible = True
         end>
     end

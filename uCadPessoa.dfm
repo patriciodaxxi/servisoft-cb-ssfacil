@@ -5914,6 +5914,13 @@ object frmCadPessoa: TfrmCadPessoa
             Alignment = taRightJustify
             Caption = 'Caixinha:'
           end
+          object Label196: TLabel
+            Left = 449
+            Top = 500
+            Width = 99
+            Height = 13
+            Caption = 'Imp. Etiqueta R'#243'tulo:'
+          end
           object RxDBLookupCombo4: TRxDBLookupCombo
             Left = 130
             Top = 6
@@ -6487,9 +6494,10 @@ object frmCadPessoa: TfrmCadPessoa
             TabOrder = 23
           end
           object RzGroupBox2: TRzGroupBox
-            Left = 440
-            Top = 394
+            Left = 450
+            Top = 396
             Width = 233
+            Height = 73
             Caption = 'Imprimir na DANFE'
             FlatColor = clBlack
             TabOrder = 34
@@ -6651,8 +6659,26 @@ object frmCadPessoa: TfrmCadPessoa
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
+          object RxDBComboBox18: TRxDBComboBox
+            Left = 550
+            Top = 492
+            Width = 165
+            Height = 21
+            Style = csDropDownList
+            DataField = 'IMP_ETIQUETA_ROT'
+            DataSource = DMCadPessoa.dsPessoa
+            EnableValues = True
+            ItemHeight = 13
+            Items.Strings = (
+              'N=Produto Interno'
+              'C=Nome do Produto Cliente')
+            TabOrder = 39
+            Values.Strings = (
+              'N'
+              'C')
+          end
           object DBCheckBox32: TDBCheckBox
-            Left = 721
+            Left = 720
             Top = 483
             Width = 265
             Height = 17
@@ -6665,7 +6691,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 39
+            TabOrder = 40
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end

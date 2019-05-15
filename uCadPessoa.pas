@@ -535,7 +535,6 @@ type
     Label194: TLabel;
     DBEdit108: TDBEdit;
     DBCheckBox31: TDBCheckBox;
-    DBCheckBox32: TDBCheckBox;
     RzPageControl3: TRzPageControl;
     ts_Contatos: TRzTabSheet;
     ts_Vendedor: TRzTabSheet;
@@ -561,6 +560,9 @@ type
     pnlPessoa_Fil: TPanel;
     btnCopiar_Fil: TNxButton;
     btnConfDescontos: TNxButton;
+    Label196: TLabel;
+    RxDBComboBox18: TRxDBComboBox;
+    DBCheckBox32: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);

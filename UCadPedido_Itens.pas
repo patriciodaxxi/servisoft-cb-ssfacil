@@ -2505,6 +2505,7 @@ function TfrmCadPedido_Itens.fnc_Verificar_Cod_Prod_Cli: Boolean;
 begin
   Result := False;
   fDMCadPedido.qProduto_Cli.Close;
+  fDMCadPedido.qProduto_Cli.SQL.Text := fDMCadPedido.ctqProduto_Cli;
   fDMCadPedido.qProduto_Cli.ParamByName('COD_MATERIAL_FORN').AsString := Edit2.Text;
   fDMCadPedido.qProduto_Cli.ParamByName('ID_FORNECEDOR').AsInteger    := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger;
   fDMCadPedido.qProduto_Cli.Open;

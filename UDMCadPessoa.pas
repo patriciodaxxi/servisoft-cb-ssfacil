@@ -1229,6 +1229,8 @@ type
     qParametros_Com: TSQLQuery;
     qParametros_UsuarioLIBERA_CONFIG_VENDEDOR: TStringField;
     qParametros_ComUSA_CONFIG_IND: TStringField;
+    sdsPessoaIMP_ETIQUETA_ROT: TStringField;
+    cdsPessoaIMP_ETIQUETA_ROT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

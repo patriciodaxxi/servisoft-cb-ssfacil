@@ -604,6 +604,11 @@ object DMCadPessoa: TDMCadPessoa
     object sdsPessoaDESC_MAXIMO: TFloatField
       FieldName = 'DESC_MAXIMO'
     end
+    object sdsPessoaIMP_ETIQUETA_ROT: TStringField
+      FieldName = 'IMP_ETIQUETA_ROT'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
@@ -1256,6 +1261,11 @@ object DMCadPessoa: TDMCadPessoa
     object cdsPessoaDESC_MAXIMO: TFloatField
       FieldName = 'DESC_MAXIMO'
       DisplayFormat = '##0.00'
+    end
+    object cdsPessoaIMP_ETIQUETA_ROT: TStringField
+      FieldName = 'IMP_ETIQUETA_ROT'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsPessoa: TDataSource

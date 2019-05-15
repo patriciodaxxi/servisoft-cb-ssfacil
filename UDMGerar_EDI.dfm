@@ -519,6 +519,11 @@ object DMGerar_EDI: TDMGerar_EDI
       FieldName = 'INSC_SUFRAMA'
       Size = 9
     end
+    object qClienteIMP_ETIQUETA_ROT: TStringField
+      FieldName = 'IMP_ETIQUETA_ROT'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qFilial: TSQLQuery
     MaxBlobSize = -1
@@ -2088,6 +2093,21 @@ object DMGerar_EDI: TDMGerar_EDI
     object qVerCOD_PRODUTO_CLIENTE: TStringField
       FieldName = 'COD_PRODUTO_CLIENTE'
       Size = 15
+    end
+  end
+  object qParametros_Ped: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT GRAVA_PROD_CLI_EDI'
+      'FROM PARAMETROS_PED')
+    SQLConnection = dmDatabase.scoDados
+    Left = 247
+    Top = 47
+    object qParametros_PedGRAVA_PROD_CLI_EDI: TStringField
+      FieldName = 'GRAVA_PROD_CLI_EDI'
+      FixedChar = True
+      Size = 1
     end
   end
 end

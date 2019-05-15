@@ -429,6 +429,9 @@ type
     mAuxiliarNomeCorCli: TStringField;
     qEDI_ConfigCOD_COR_INI: TIntegerField;
     qEDI_ConfigCOD_COR_TAM: TIntegerField;
+    qClienteIMP_ETIQUETA_ROT: TStringField;
+    qParametros_Ped: TSQLQuery;
+    qParametros_PedGRAVA_PROD_CLI_EDI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mAuxiliarNewRecord(DataSet: TDataSet);
   private
@@ -454,6 +457,7 @@ begin
   qParametros.Open;
   qParametros_Geral.Close;
   qParametros_Geral.Open;
+  qParametros_Ped.Open;
   ctqProduto_Forn := qProduto_Forn.SQL.Text;
 end;
 

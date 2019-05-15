@@ -33,6 +33,7 @@ type
     Panel1: TPanel;
     BitBtn1: TBitBtn;
     ckExportacao: TCheckBox;
+    btnAjustar_ProdCli: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FilenameEdit1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -43,6 +44,7 @@ type
       Shift: TShiftState);
     procedure SMDBGrid3DblClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure btnAjustar_ProdCliClick(Sender: TObject);
   private
     { Private declarations }
     fDMGerar_EDI: TDMGerar_EDI;
@@ -79,7 +81,7 @@ var
 implementation
 
 uses rsDBUtils, UCadPedido_Itens, DmdDatabase, UDMUtil, uUtilPadrao, uCalculo_Pedido,
-  uGrava_Pedido;
+  uGrava_Pedido, UDMCadProduto;
 
 {$R *.dfm}
 
@@ -711,7 +713,10 @@ procedure TfrmGerar_Pedido_EDI.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if (Key = Vk_Return) and (trim(FilenameEdit1.Text) <> '') then
-    prc_Le_EDI;
+    prc_Le_EDI
+  else
+  if (Shift = [ssCtrl]) and (Key = 87) then //CTRL W
+    btnAjustar_ProdCli.Visible := not(btnAjustar_ProdCli.Visible);
 end;
 
 procedure TfrmGerar_Pedido_EDI.SMDBGrid3DblClick(Sender: TObject);
@@ -900,6 +905,48 @@ begin
   end;
   SMDBGrid3.EnableScroll;
   ShowMessage('Verificado!');
+end;
+
+procedure TfrmGerar_Pedido_EDI.btnAjustar_ProdCliClick(Sender: TObject);
+var
+  fDMCadProduto: TDMCadProduto;
+  vUsuarioAnt : String;
+begin
+  vUsuarioAnt := vUsuario;
+  vUsuario    := 'ConvGerarEDI';
+  fDMCadProduto := TDMCadProduto.Create(Self);
+  try
+    fDMGerar_EDI.mAuxiliar.First;
+    while not fDMGerar_EDI.mAuxiliar.Eof do
+    begin
+      fDMGerar_EDI.qProduto_Forn.Close;
+      fDMGerar_EDI.qProduto_Forn.SQL.Text := fDMGerar_EDI.ctqProduto_Forn;
+      fDMGerar_EDI.qProduto_Forn.ParamByName('ID_FORNECEDOR').AsInteger    := fDMGerar_EDI.qClienteCodigo.AsInteger;
+      fDMGerar_EDI.qProduto_Forn.ParamByName('COD_MATERIAL_FORN').AsString := fDMGerar_EDI.mAuxiliarCodProdCli.AsString;
+      fDMGerar_EDI.qProduto_Forn.ParamByName('COD_COR_FORN').AsString      := fDMGerar_EDI.mAuxiliarCodCorCli.AsString;
+      fDMGerar_EDI.qProduto_Forn.ParamByName('TAMANHO_CLIENTE').AsString   := fDMGerar_EDI.mAuxiliarTamnanho.AsString;
+      fDMGerar_EDI.qProduto_Forn.Open;
+
+      if fDMGerar_EDI.qProduto_Forn.IsEmpty then
+        ShowMessage('Produto Cliente não encontrado ' + fDMGerar_EDI.mAuxiliarCodProdCli.AsString + '  Cor: ' + fDMGerar_EDI.mAuxiliarCodCorCli.AsString)
+      else
+      begin
+        fDMCadProduto.prc_Localizar(fDMGerar_EDI.qProduto_FornID.AsInteger);
+        if fDMCadProduto.cdsProduto_Forn.Locate('ITEM',fDMGerar_EDI.qProduto_FornITEM.AsInteger,([Locaseinsensitive])) then
+        begin
+          fDMCadProduto.cdsProduto_Forn.Edit;
+          fDMCadProduto.cdsProduto_FornNOME_MATERIAL_FORN.AsString := fDMGerar_EDI.mAuxiliarNomeProduto.AsString;
+          fDMCadProduto.cdsProduto_Forn.Post;
+          fDMCadProduto.cdsProduto_Forn.ApplyUpdates(0);
+        end;
+      end;
+
+      fDMGerar_EDI.mAuxiliar.Next;
+    end;
+  finally
+    FreeAndNil(fDMCadProduto);
+    vUsuario := vUsuarioAnt;
+  end;
 end;
 
 end.
