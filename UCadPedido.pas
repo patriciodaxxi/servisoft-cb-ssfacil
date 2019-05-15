@@ -1100,9 +1100,7 @@ begin
                                                    ' AND PED.ID = ' + IntToStr(ID)
   else
   if cePedInterno.AsInteger > 0 then
-    if cePedInterno.AsInteger > 0 then
-      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
-                                                     ' AND PED.NUM_PEDIDO = ' + cePedInterno.Text
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.NUM_PEDIDO = ' + cePedInterno.Text
   else
   begin
     if not(RxDBLookupCombo1.Text = '') then
