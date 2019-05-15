@@ -133,7 +133,10 @@ begin
 
     ffrmCadProduto_Forn.RxDBLookupCombo2.KeyValue            := fDMGerar_EDI.mAuxiliarID_Cliente.AsInteger;
     fDMCadProduto.cdsProduto_FornID_FORNECEDOR.AsInteger     := fDMGerar_EDI.mAuxiliarID_Cliente.AsInteger;
-    fDMCadProduto.cdsProduto_FornNOME_MATERIAL_FORN.AsString := fDMCadProduto.cdsProdutoNOME.AsString;
+    if (fDMGerar_EDI.qClienteIMP_ETIQUETA_ROT.AsString = 'C') or (fDMGerar_EDI.qParametros_PedGRAVA_PROD_CLI_EDI.AsString = 'S') then
+      fDMCadProduto.cdsProduto_FornNOME_MATERIAL_FORN.AsString := fDMGerar_EDI.mAuxiliarNomeProduto.AsString
+    else
+      fDMCadProduto.cdsProduto_FornNOME_MATERIAL_FORN.AsString := fDMCadProduto.cdsProdutoNOME.AsString;
     fDMCadProduto.cdsProduto_FornCOD_MATERIAL_FORN.AsString  := TrimLeft(Edit1.Text);
     fDMCadProduto.cdsProduto_FornPRECO_CUSTO.AsFloat         := fDMGerar_EDI.mAuxiliarVlrUnitario.AsFloat;
     if CurrencyEdit2.AsInteger > 0 then

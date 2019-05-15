@@ -3450,6 +3450,10 @@ type
     cdsPedidoImp_ItensFABRICA: TStringField;
     mEtiqueta_NavMedida: TStringField;
     cdsPedidoImp_ItensMEDIDA: TStringField;
+    cdsClienteIMP_ETIQUETA_ROT: TStringField;
+    cdsPedidoImpIMP_ETIQUETA_ROT: TStringField;
+    qProduto_CliNOME_MATERIAL_FORN: TStringField;
+    qProdForn2NOME_MATERIAL_FORN: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3496,6 +3500,7 @@ type
     ctServico: String;
     ctCliente, ctCFOP: String;
     ctqProximoPedido: String;
+    ctqProduto_Cli : String;
     vAliqIcms: Real;
     vSiglaUF: String;
     vID_CFOP, vID_Variacao: Integer;
@@ -3623,6 +3628,7 @@ begin
   ctServico    := sdsServico.CommandText;
   ctDuplicata  := sdsDuplicata.CommandText;
   ctHistSenha  := sdsHist_Senha.CommandText;
+  ctqProduto_Cli := qProduto_Cli.SQL.Text;
   vID_Variacao := 0;
   cdsParametros.Close;
   cdsFilial.Close;

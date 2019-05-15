@@ -4004,28 +4004,28 @@ object DMCadPedido: TDMCadPedido
       'SOA, CLI.IMP_COR_CLIENTE, CAST(PED.DDD AS VARCHAR(02)) DDD_PEDID' +
       'O, PED.FONE FONE_PEDIDO,'#13#10'       CLI.OBS_AVISO, CLI.MOSTRAR_AVIS' +
       'O, ATE.CNPJ_CPF CNPJ_CPF_ATELIER, ATE.PESSOA PESSOA_ATELIER, CLI' +
-      '.NOME_CONTATO,'#13#10'       CASE'#13#10'         WHEN PED.ID_CLIENTE = (SEL' +
-      'ECT PA2.ID_CLIENTE_CONSUMIDOR'#13#10'                                F' +
-      'ROM PARAMETROS PA2) THEN PED.NOME_CONSUMIDOR'#13#10'         ELSE PED.' +
-      'NOME_CLIENTE'#13#10'       END NOME_CLIENTE2,'#13#10'       CASE'#13#10'         W' +
-      'HEN PED.TIPO_FRETE = '#39'1'#39' THEN '#39'1 Emitente'#39#13#10'         WHEN PED.TI' +
-      'PO_FRETE = '#39'2'#39' THEN '#39' 2 Destinat'#225'rio'#39#13#10'         WHEN PED.TIPO_FR' +
-      'ETE = '#39'3'#39' THEN '#39' 3 Terceiros'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'4' +
-      #39' THEN '#39' 4 Transporte Pr'#243'prio por conta do Remetente'#39#13#10'         ' +
-      'WHEN PED.TIPO_FRETE = '#39'5'#39' THEN '#39' 5 Transporte Pr'#243'prio por conta ' +
-      'do Destinat'#225'rio'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'9'#39' THEN '#39' 9 Se' +
-      'm Frete'#39#13#10'       END DESC_TIPO_FRETE'#13#10#13#10'FROM PEDIDO PED'#13#10'LEFT JO' +
-      'IN PESSOA CLI ON PED.ID_CLIENTE = CLI.CODIGO'#13#10'INNER JOIN FILIAL ' +
-      'FIL ON (PED.FILIAL = FIL.ID)'#13#10'LEFT JOIN PESSOA TRA ON (PED.ID_TR' +
-      'ANSPORTADORA = TRA.CODIGO)'#13#10'LEFT JOIN PESSOA RED ON (PED.ID_REDE' +
-      'SPACHO = RED.CODIGO)'#13#10'LEFT JOIN CONDPGTO COND ON (PED.ID_CONDPGT' +
-      'O = COND.ID)'#13#10'LEFT JOIN PESSOA VEND ON (PED.ID_VENDEDOR = VEND.C' +
-      'ODIGO)'#13#10'LEFT JOIN FUNCIONARIO FUN ON (PED.ID_FUNCIONARIO = FUN.C' +
-      'ODIGO)'#13#10'LEFT JOIN MAPA_COMPRAS MAPA ON (PED.ID_MAPA = MAPA.ID)'#13#10 +
-      'LEFT JOIN PESSOA ATE ON (PED.ID_ATELIER = ATE.CODIGO)'#13#10'LEFT JOIN' +
-      ' OPERACAO_NOTA OPN ON (PED.ID_OPERACAO_NOTA = OPN.ID)'#13#10'LEFT JOIN' +
-      ' GRUPO_PESSOA GP ON PED.ID_GRUPO_PESSOA = GP.ID'#13#10'WHERE PED.ID = ' +
-      ':ID'#13#10#13#10
+      '.NOME_CONTATO,'#13#10'       CLI.IMP_ETIQUETA_ROT,'#13#10'       CASE'#13#10'     ' +
+      '    WHEN PED.ID_CLIENTE = (SELECT PA2.ID_CLIENTE_CONSUMIDOR'#13#10'   ' +
+      '                             FROM PARAMETROS PA2) THEN PED.NOME_' +
+      'CONSUMIDOR'#13#10'         ELSE PED.NOME_CLIENTE'#13#10'       END NOME_CLIE' +
+      'NTE2,'#13#10'       CASE'#13#10'         WHEN PED.TIPO_FRETE = '#39'1'#39' THEN '#39'1 E' +
+      'mitente'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'2'#39' THEN '#39' 2 Destinat'#225'r' +
+      'io'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'3'#39' THEN '#39' 3 Terceiros'#39#13#10'   ' +
+      '      WHEN PED.TIPO_FRETE = '#39'4'#39' THEN '#39' 4 Transporte Pr'#243'prio por ' +
+      'conta do Remetente'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'5'#39' THEN '#39' 5' +
+      ' Transporte Pr'#243'prio por conta do Destinat'#225'rio'#39#13#10'         WHEN PE' +
+      'D.TIPO_FRETE = '#39'9'#39' THEN '#39' 9 Sem Frete'#39#13#10'       END DESC_TIPO_FRE' +
+      'TE'#13#10#13#10'FROM PEDIDO PED'#13#10'LEFT JOIN PESSOA CLI ON PED.ID_CLIENTE = ' +
+      'CLI.CODIGO'#13#10'INNER JOIN FILIAL FIL ON (PED.FILIAL = FIL.ID)'#13#10'LEFT' +
+      ' JOIN PESSOA TRA ON (PED.ID_TRANSPORTADORA = TRA.CODIGO)'#13#10'LEFT J' +
+      'OIN PESSOA RED ON (PED.ID_REDESPACHO = RED.CODIGO)'#13#10'LEFT JOIN CO' +
+      'NDPGTO COND ON (PED.ID_CONDPGTO = COND.ID)'#13#10'LEFT JOIN PESSOA VEN' +
+      'D ON (PED.ID_VENDEDOR = VEND.CODIGO)'#13#10'LEFT JOIN FUNCIONARIO FUN ' +
+      'ON (PED.ID_FUNCIONARIO = FUN.CODIGO)'#13#10'LEFT JOIN MAPA_COMPRAS MAP' +
+      'A ON (PED.ID_MAPA = MAPA.ID)'#13#10'LEFT JOIN PESSOA ATE ON (PED.ID_AT' +
+      'ELIER = ATE.CODIGO)'#13#10'LEFT JOIN OPERACAO_NOTA OPN ON (PED.ID_OPER' +
+      'ACAO_NOTA = OPN.ID)'#13#10'LEFT JOIN GRUPO_PESSOA GP ON PED.ID_GRUPO_P' +
+      'ESSOA = GP.ID'#13#10'WHERE PED.ID = :ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -4741,6 +4741,11 @@ object DMCadPedido: TDMCadPedido
     object cdsPedidoImpCOMPL_END_FILIAL: TStringField
       FieldName = 'COMPL_END_FILIAL'
       Size = 60
+    end
+    object cdsPedidoImpIMP_ETIQUETA_ROT: TStringField
+      FieldName = 'IMP_ETIQUETA_ROT'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsPedidoImp: TDataSource
@@ -9237,7 +9242,8 @@ object DMCadPedido: TDMCadPedido
       'S.VLR_LIMITE_COMPRA, PES.TIPO_CONSUMIDOR, PES.TIPO_CONTRIBUINTE,' +
       ' USUARIO_LOG,'#13#10'       PES.INSC_SUFRAMA, PES.DDDCELULAR, PES.CELU' +
       'LAR, PES.ID_GRUPO, PES.IMP_COR_CLIENTE,'#13#10'       PES.MOSTRAR_AVIS' +
-      'O,PES.OBS_AVISO, IPI_PAGO_FILIAL'#13#10'from PESSOA PES'#13#10
+      'O,PES.OBS_AVISO, IPI_PAGO_FILIAL,'#13#10'PES.IMP_ETIQUETA_ROT'#13#10'from PE' +
+      'SSOA PES'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -9381,6 +9387,11 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsClienteIPI_PAGO_FILIAL: TStringField
       FieldName = 'IPI_PAGO_FILIAL'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsClienteIMP_ETIQUETA_ROT: TStringField
+      FieldName = 'IMP_ETIQUETA_ROT'
       FixedChar = True
       Size = 1
     end
@@ -17002,7 +17013,9 @@ object DMCadPedido: TDMCadPedido
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'select PF.id, PF.cod_material_forn, PF.id_fornecedor'
+      
+        'select PF.id, PF.cod_material_forn, PF.id_fornecedor, PF.NOME_MA' +
+        'TERIAL_FORN'
       'from produto_forn PF'
       'WHERE PF.cod_material_forn = :COD_MATERIAL_FORN'
       '  AND PF.ID_FORNECEDOR = :ID_FORNECEDOR')
@@ -17019,6 +17032,10 @@ object DMCadPedido: TDMCadPedido
     end
     object qProduto_CliID_FORNECEDOR: TIntegerField
       FieldName = 'ID_FORNECEDOR'
+    end
+    object qProduto_CliNOME_MATERIAL_FORN: TStringField
+      FieldName = 'NOME_MATERIAL_FORN'
+      Size = 100
     end
   end
   object qParametros_Lote: TSQLQuery
@@ -17329,6 +17346,10 @@ object DMCadPedido: TDMCadPedido
     object qProdForn2COD_MATERIAL_FORN: TStringField
       FieldName = 'COD_MATERIAL_FORN'
       Size = 60
+    end
+    object qProdForn2NOME_MATERIAL_FORN: TStringField
+      FieldName = 'NOME_MATERIAL_FORN'
+      Size = 100
     end
   end
   object qParametros: TSQLQuery

@@ -20,10 +20,10 @@ object frmGerar_PlanoMat: TfrmGerar_PlanoMat
     Top = 0
     Width = 920
     Height = 488
-    ActivePage = TS_ConsMaterial
+    ActivePage = TS_Gerar
     ActivePageDefault = TS_ConsMaterial
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_ConsMaterial: TRzTabSheet

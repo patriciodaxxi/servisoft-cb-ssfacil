@@ -1398,7 +1398,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
         TabOrder = 7
       end
       object DBEdit23: TDBEdit
-        Left = 61
+        Left = 62
         Top = 10
         Width = 85
         Height = 19
