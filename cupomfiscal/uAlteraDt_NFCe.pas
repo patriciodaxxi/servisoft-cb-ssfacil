@@ -3,9 +3,8 @@ unit uAlteraDt_NFCe;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, uDmCupomFiscal, ExtCtrls, RzPanel, StdCtrls, Mask, DBCtrls,
-  NxCollection, ToolEdit, NxEdit;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, uDmCupomFiscal, ExtCtrls, RzPanel, Mask,
+  StdCtrls, DBCtrls, NxCollection, ToolEdit, NxEdit;
 
 type
   TfrmAlteraDt_NFCe = class(TForm)
@@ -31,7 +30,6 @@ type
   public
     { Public declarations }
     fDmCupomFiscal: TDmCupomFiscal;
-
   end;
 
 var

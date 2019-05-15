@@ -171,11 +171,11 @@ type
 
     vNomeArquivo, vNomeArqPdf: String;
     vPessoaTransp: String;
-    vGerar_Chave_Antiga : String;
+    vGerar_Chave_Antiga: String;
 
     procedure Gera_NFCe;
     procedure prc_Configura_Tela;//21/11/2013
-    procedure Gera_Chave(Contingencia: Boolean ; Sincrono : Boolean); //Síncrono é o modelo novo que não precisa buscar status
+    procedure Gera_Chave(Contingencia: Boolean ; Sincrono: Boolean); //Síncrono é o modelo novo que não precisa buscar status
 
     property DMCupomFiscal: TDMCupomFiscal read fDMCupomFiscal write fDMCupomFiscal;
 
@@ -556,7 +556,7 @@ begin
     ShowMessage('Fora do ar');
 end;
 
-procedure TfNFCe.Gera_Chave(Contingencia: Boolean ; Sincrono : Boolean); //Síncrono é o modelo novo que não precisa buscar status
+procedure TfNFCe.Gera_Chave(Contingencia: Boolean ; Sincrono: Boolean); //Síncrono é o modelo novo que não precisa buscar status
 var
   ChaveNfe: string;
   vSerieAux: String;
@@ -1422,18 +1422,18 @@ begin
         vGerar_Chave_Antiga := '';
         btBuscarStatusClick(sender);
       end
-{      else
+      else
       begin
-        if MessageDlg(vMSGNFCe + #13 + #13 + #13 + '*** Deseja reenviar o cupom?' ,mtConfirmation,[mbYes,mbNo],0) = mrYes then
+{        if MessageDlg(vMSGNFCe + #13 + #13 + #13 + '*** Deseja reenviar o cupom?' ,mtConfirmation,[mbYes,mbNo],0) = mrYes then
         begin
           if vIDAux <> fDMCupomFiscal.cdsCupomFiscalID.AsInteger then
             fDMCupomFiscal.prcLocalizar(vIDAux);
           FreeAndNil(oNFeStream);
           FreeAndNil(oNfe);
           btEnviarNovoClick(Sender);
-        end;
+        end;}
         flag := True;
-      end}
+      end
     end
     else
       flag := True;
@@ -1904,7 +1904,7 @@ end;
 
 procedure TfNFCe.prc_Abrir_CBarra;
 var
- vTam : String;
+ vTam: String;
 begin
   vTam := '';
   if trim(fDMCupomFiscal.cdsCupom_ItensTAMANHO.AsString) <> '' then
@@ -1918,8 +1918,8 @@ end;
 
 procedure TfNFCe.prc_Abrir_qProduto_Forn;
 var
-  vComando : String;
-  vTam : String;
+  vComando: String;
+  vTam: String;
 begin
   vTam := '';
   if (fDMCupomFiscal.cdsCupom_ItensTAMANHO.AsString) <> '' then
@@ -1950,8 +1950,8 @@ var
   Flag: Boolean;
   vCont: Integer;
 
-  vNumProtocolo : String;
-  CodigoErro : Integer;
+  vNumProtocolo: String;
+  CodigoErro: Integer;
 begin
   CodigoErro := 0;
   fDMNFCe.vDialogoImpressora := fDMCupomFiscal.cdsCupomParametrosEXIBIR_DIALOGO_IMPRESSORA.AsString = 'S';
@@ -2109,18 +2109,18 @@ begin
         vGerar_Chave_Antiga := '';
         btBuscarStatusClick(sender);
       end
-{      else
+      else
       begin
-        if MessageDlg(vMSGNFCe + #13 + #13 + #13 + '*** Deseja reenviar o cupom?' ,mtConfirmation,[mbYes,mbNo],0) = mrYes then
+{        if MessageDlg(vMSGNFCe + #13 + #13 + #13 + '*** Deseja reenviar o cupom?' ,mtConfirmation,[mbYes,mbNo],0) = mrYes then
         begin
           if vIDAux <> fDMCupomFiscal.cdsCupomFiscalID.AsInteger then
             fDMCupomFiscal.prcLocalizar(vIDAux);
           FreeAndNil(oNFeStream);
           FreeAndNil(oNfe);
           btEnviarSincronoClick(Sender);
-        end;
+        end;}
         flag := True;
-      end}
+      end;
     end
     else
       flag := True;
