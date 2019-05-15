@@ -1422,7 +1422,7 @@ begin
         vGerar_Chave_Antiga := '';
         btBuscarStatusClick(sender);
       end
-      else
+{      else
       begin
         if MessageDlg(vMSGNFCe + #13 + #13 + #13 + '*** Deseja reenviar o cupom?' ,mtConfirmation,[mbYes,mbNo],0) = mrYes then
         begin
@@ -1433,7 +1433,7 @@ begin
           btEnviarNovoClick(Sender);
         end;
         flag := True;
-      end
+      end}
     end
     else
       flag := True;
@@ -2110,7 +2110,7 @@ begin
         btBuscarStatusClick(sender);
       end
       else
-      begin
+{      begin
         if MessageDlg(vMSGNFCe + #13 + #13 + #13 + '*** Deseja reenviar o cupom?' ,mtConfirmation,[mbYes,mbNo],0) = mrYes then
         begin
           if vIDAux <> fDMCupomFiscal.cdsCupomFiscalID.AsInteger then
@@ -2120,7 +2120,7 @@ begin
           btEnviarSincronoClick(Sender);
         end;
         flag := True;
-      end
+      end}
     end
     else
       flag := True;
