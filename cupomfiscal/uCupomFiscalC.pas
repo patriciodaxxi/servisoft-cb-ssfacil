@@ -1361,8 +1361,8 @@ begin
         frmAlteraDt_NFCe.ShowModal;
         FreeAndNil(frmAlteraDt_NFCe);}
         fDmCupomFiscal.cdsCupomFiscal.Edit;
-        fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime := NxDatePicker1.Date;
-        fDmCupomFiscal.cdsCupomFiscalHREMISSAO.AsDateTime := NxTimePicker1.Time;
+        fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime := Date;
+        fDmCupomFiscal.cdsCupomFiscalHREMISSAO.AsDateTime := Now;
         fDmCupomFiscal.cdsCupomFiscal.Post;
         fDmCupomFiscal.cdsCupomFiscal.ApplyUpdates(0);
       end;
