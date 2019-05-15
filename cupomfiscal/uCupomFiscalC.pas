@@ -1356,10 +1356,15 @@ begin
       end;
       if vAlt then
       begin
-        frmAlteraDt_NFCe := TfrmAlteraDt_NFCe.Create(self);
+{        frmAlteraDt_NFCe := TfrmAlteraDt_NFCe.Create(self);
         frmAlteraDt_NFCe.fDmCupomFiscal := fDmCupomFiscal;
         frmAlteraDt_NFCe.ShowModal;
-        FreeAndNil(frmAlteraDt_NFCe);
+        FreeAndNil(frmAlteraDt_NFCe);}
+        fDmCupomFiscal.cdsCupomFiscal.Edit;
+        fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime := Date;
+        fDmCupomFiscal.cdsCupomFiscalHREMISSAO.AsDateTime := Now;
+        fDmCupomFiscal.cdsCupomFiscal.Post;
+        fDmCupomFiscal.cdsCupomFiscal.ApplyUpdates(0);
       end;
     end;
     //******************************

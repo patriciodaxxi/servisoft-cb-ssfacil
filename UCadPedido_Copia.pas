@@ -247,7 +247,7 @@ begin
         fDMCadPedido.cdsPedido_Item_TipoITEM.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
         for i := 0 to ( fDMCopiaPedido.cdsPedido_Item_Tipo.FieldCount - 1) do
         begin
-          if (fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName <> 'ID') then
+          if (fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName <> 'ITEM') then
             fDMCadPedido.cdsPedido_Item_Tipo.FieldByName(fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].Value;
         end;
         fDMCadPedido.cdsPedido_Item_Tipo.Post;
