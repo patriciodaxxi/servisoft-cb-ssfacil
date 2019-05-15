@@ -2573,7 +2573,7 @@ begin
     if (fDMCadPedido.qParametros_PedUSA_UNIDADE_VENDA.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensUNIDADE.AsString <> fDMCadPedido.cdsPedido_ItensUNIDADE_PROD.AsString) then
       fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsFloat := StrToFloat(FormatFloat('0.0000',fnc_Retorna_Qtd_UConv(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,
                                                                    fDMCadPedido.cdsPedido_ItensUNIDADE.AsString)));
-    if fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsInteger <= 0 then
+    if fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsFloat <= 0 then
       fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsInteger := 1;
   end;
 end;
