@@ -272,16 +272,22 @@ object frmConsHist_Chapa: TfrmConsHist_Chapa
     GetMetadata = False
     CommandText = 
       'select TP.VLR_KG, TP.COMPRIMENTO, TP.LARGURA, TP.ALTURA, TP.QTD,' +
-      ' TP.VLR_UNITARIO, TP.VLR_TOTAL, TP.VLR_DOBRA,'#13#10'       TP.COMPLEM' +
-      'ENTO_NOME, TP.PESO, PED.DTEMISSAO, PED.ID_CLIENTE, CLI.NOME NOME' +
-      '_CLIENTE, PED.NUM_PEDIDO, PED.TIPO_REG,'#13#10'       PED.ID ID_PEDIDO' +
-      ', PEDI.ITEM ITEM_PEDIDO, PEDI.QTD QTDE_ITEM, PEDI.VLR_UNITARIO V' +
-      'LR_UNITARIO_ITEM,'#13#10'       PEDI.VLR_TOTAL VLR_TOTAL_ITEM, PEDI.NO' +
-      'MEPRODUTO'#13#10'from PEDIDO PED'#13#10'inner join PEDIDO_ITEM PEDI on PEDI.' +
-      'ID = PED.ID'#13#10'left join PEDIDO_ITEM_TIPO TP on TP.ID = PED.ID'#13#10'le' +
-      'ft join PESSOA CLI on PED.ID_CLIENTE = CLI.CODIGO'#13#10'where (TP.TIP' +
-      'O_ORCAMENTO = '#39'C'#39' or TP.TIPO_ORCAMENTO is null) and'#13#10'      PED.T' +
-      'IPO_REG = '#39'P'#39'   '
+      #13#10'       case'#13#10'         when TP.VLR_UNITARIO is null then PEDI.V' +
+      'LR_UNITARIO'#13#10'         else TP.VLR_UNITARIO'#13#10'       end VLR_UNITA' +
+      'RIO,'#13#10'       case'#13#10'         when TP.VLR_TOTAL is null then PEDI.' +
+      'VLR_TOTAL'#13#10'         else TP.VLR_TOTAL'#13#10'       end VLR_TOTAL,'#13#10'  ' +
+      '     TP.VLR_DOBRA,'#13#10'       case'#13#10'         when TP.COMPLEMENTO_NO' +
+      'ME is null then PEDI.NOMEPRODUTO'#13#10'         else TP.COMPLEMENTO_N' +
+      'OME'#13#10'       end COMPLEMENTO_NOME,'#13#10'       TP.PESO, PED.DTEMISSAO' +
+      ', PED.ID_CLIENTE, CLI.NOME NOME_CLIENTE, PED.NUM_PEDIDO, PED.TIP' +
+      'O_REG, PED.ID ID_PEDIDO,'#13#10'       PEDI.ITEM ITEM_PEDIDO, PEDI.QTD' +
+      ' QTDE_ITEM, PEDI.VLR_UNITARIO VLR_UNITARIO_ITEM, PEDI.VLR_TOTAL ' +
+      'VLR_TOTAL_ITEM,'#13#10'       PEDI.NOMEPRODUTO'#13#10'from PEDIDO PED'#13#10'inner' +
+      ' join PEDIDO_ITEM PEDI on PEDI.ID = PED.ID'#13#10'left join PEDIDO_ITE' +
+      'M_TIPO TP on TP.ID = PEDI.ID and TP.ITEM = PEDI.ITEM'#13#10'left join ' +
+      'PESSOA CLI on PED.ID_CLIENTE = CLI.CODIGO'#13#10'where (TP.TIPO_ORCAME' +
+      'NTO = '#39'C'#39' or TP.TIPO_ORCAMENTO is null) and'#13#10'      PED.TIPO_REG ' +
+      '= '#39'P'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
