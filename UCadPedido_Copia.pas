@@ -229,6 +229,7 @@ begin
            (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'ITEM') then
           fDMCadPedido.cdsPedido_Itens.FieldByName(fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido_Itens.Fields[i].Value;
       end;
+      fDMCadPedido.cdsPedido_ItensDTENTREGA.Clear;
       fDMCadPedido.cdsPedido_ItensQTD_CANCELADO.AsInteger := 0;
       fDMCadPedido.cdsPedido_ItensQTD_FATURADO.AsInteger  := 0;
       fDMCadPedido.cdsPedido_ItensQTD_FUT.AsInteger       := 0;
