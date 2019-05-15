@@ -1362,7 +1362,7 @@ begin
         FreeAndNil(frmAlteraDt_NFCe);}
         fDmCupomFiscal.cdsCupomFiscal.Edit;
         fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime := Date;
-        fDmCupomFiscal.cdsCupomFiscalHREMISSAO.AsDateTime := Now;
+        fDmCupomFiscal.cdsCupomFiscalHREMISSAO.AsString := FormatDateTime('HH:nn:ss',Now);
         fDmCupomFiscal.cdsCupomFiscal.Post;
         fDmCupomFiscal.cdsCupomFiscal.ApplyUpdates(0);
       end;

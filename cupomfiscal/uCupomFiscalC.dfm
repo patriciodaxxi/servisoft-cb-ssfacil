@@ -207,7 +207,7 @@ object fCupomFiscalC: TfCupomFiscalC
         Title.Font.Height = -11
         Title.Font.Name = 'Verdana'
         Title.Font.Style = [fsBold]
-        Width = 60
+        Width = 68
         Visible = True
       end
       item
