@@ -22,14 +22,14 @@ object frmSel_Produto: TfrmSel_Produto
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 0
+    Top = 25
     Width = 1053
-    Height = 72
+    Height = 71
     Align = alTop
     Color = 16768959
     Ctl3D = True
     ParentCtl3D = False
-    TabOrder = 0
+    TabOrder = 1
     object Label1: TLabel
       Left = 248
       Top = 12
@@ -40,14 +40,14 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object Label2: TLabel
       Left = 65
-      Top = 12
+      Top = 10
       Width = 24
       Height = 13
       Caption = 'Tipo:'
     end
     object Label3: TLabel
       Left = 288
-      Top = 33
+      Top = 32
       Width = 30
       Height = 13
       Alignment = taRightJustify
@@ -55,22 +55,22 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object Label4: TLabel
       Left = 36
-      Top = 34
+      Top = 32
       Width = 53
       Height = 13
       Caption = 'C'#243'd. Barra:'
     end
     object Label5: TLabel
       Left = 456
-      Top = 34
+      Top = 33
       Width = 35
       Height = 13
       Caption = 'Cliente:'
       Visible = False
     end
     object Label6: TLabel
-      Left = 468
-      Top = 56
+      Left = 67
+      Top = 54
       Width = 23
       Height = 13
       Caption = 'Filial:'
@@ -102,7 +102,7 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object ComboBox1: TComboBox
       Left = 92
-      Top = 4
+      Top = 2
       Width = 145
       Height = 21
       Style = csDropDownList
@@ -119,39 +119,39 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object Edit2: TEdit
       Left = 320
-      Top = 26
+      Top = 25
       Width = 129
       Height = 21
       CharCase = ecUpperCase
-      TabOrder = 3
-      OnKeyDown = Edit1KeyDown
+      TabOrder = 2
+      OnKeyDown = Edit2KeyDown
     end
     object Edit3: TEdit
       Left = 92
-      Top = 26
+      Top = 24
       Width = 144
       Height = 21
       TabStop = False
       CharCase = ecUpperCase
-      TabOrder = 2
+      TabOrder = 4
       OnKeyDown = Edit3KeyDown
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
-      Left = 493
-      Top = 26
+      Left = 494
+      Top = 25
       Width = 345
       Height = 21
       DropDownCount = 8
       LookupField = 'CODIGO'
       LookupDisplay = 'NOME'
       LookupSource = dsCliente
-      TabOrder = 4
+      TabOrder = 3
       Visible = False
       OnKeyDown = RxDBLookupCombo1KeyDown
     end
     object BitBtn2: TBitBtn
       Left = 840
-      Top = 22
+      Top = 21
       Width = 35
       Height = 28
       TabOrder = 6
@@ -216,14 +216,14 @@ object frmSel_Produto: TfrmSel_Produto
         A29CF5F6EEFFFFFDFFFFFFFEFFFFFDFEFCFCFBFEFFFEFCFBFFFF}
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
-      Left = 493
-      Top = 48
-      Width = 345
+      Left = 92
+      Top = 47
+      Width = 146
       Height = 21
       DropDownCount = 8
-      LookupField = 'CODIGO'
-      LookupDisplay = 'NOME'
-      LookupSource = dsCliente
+      LookupField = 'ID'
+      LookupDisplay = 'NOME_INTERNO'
+      LookupSource = dsFilial
       TabOrder = 7
       Visible = False
       OnKeyDown = RxDBLookupCombo1KeyDown
@@ -231,16 +231,16 @@ object frmSel_Produto: TfrmSel_Produto
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
-    Top = 72
+    Top = 96
     Width = 1053
-    Height = 217
+    Height = 193
     Align = alClient
     Ctl3D = False
     DataSource = dsProduto
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
     ParentCtl3D = False
     ReadOnly = True
-    TabOrder = 1
+    TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -267,7 +267,7 @@ object frmSel_Produto: TfrmSel_Produto
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 14
+    ColCount = 15
     RowCount = 2
     Columns = <
       item
@@ -280,10 +280,18 @@ object frmSel_Produto: TfrmSel_Produto
       end
       item
         Expanded = False
+        FieldName = 'NOME_MARCA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Marca'
+        Width = 231
+        Visible = True
+      end
+      item
+        Expanded = False
         FieldName = 'NOME'
         Title.Alignment = taCenter
         Title.Caption = 'Nome'
-        Width = 350
+        Width = 333
         Visible = True
       end
       item
@@ -395,7 +403,7 @@ object frmSel_Produto: TfrmSel_Produto
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 3
   end
   object gbxPedido: TRzGroupBox
     Left = 0
@@ -417,7 +425,7 @@ object frmSel_Produto: TfrmSel_Produto
     Font.Style = []
     ParentCtl3D = False
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 4
     VisualStyle = vsGradient
     object SMDBGrid2: TSMDBGrid
       Left = 5
@@ -687,7 +695,7 @@ object frmSel_Produto: TfrmSel_Produto
     Align = alBottom
     UseDockManager = False
     ParentBackground = False
-    TabOrder = 4
+    TabOrder = 5
   end
   object DBMemo1: TDBMemo
     Left = 0
@@ -697,7 +705,33 @@ object frmSel_Produto: TfrmSel_Produto
     Align = alBottom
     DataField = 'OBS'
     DataSource = dsProduto
-    TabOrder = 5
+    TabOrder = 6
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 0
+    Width = 1053
+    Height = 25
+    Align = alTop
+    Color = 16768959
+    TabOrder = 0
+    object Label7: TLabel
+      Left = 286
+      Top = 10
+      Width = 33
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Marca:'
+    end
+    object Edit4: TEdit
+      Left = 321
+      Top = 2
+      Width = 306
+      Height = 21
+      CharCase = ecUpperCase
+      TabOrder = 0
+      OnKeyDown = Edit4KeyDown
+    end
   end
   object sdsProduto: TSQLDataSet
     NoMetadata = True
@@ -710,9 +744,10 @@ object frmSel_Produto: TfrmSel_Produto
       'QUE_ATUAL EST'#13#10'  WHERE EST.FILIAL = :FILIAL AND EST.ID_PRODUTO =' +
       ' PRO.ID) QTD,'#13#10'(SELECT cast(sum(E2.QTD) AS Float) QTDGERAL'#13#10'  FR' +
       'OM ESTOQUE_ATUAL E2 '#13#10'  WHERE E2.ID_PRODUTO = PRO.ID) QTDGERAL,'#13 +
-      #10'  CAST(0 AS FLOAT) AS PRECO_PROMOCAO, PRO.OBS'#13#10'FROM PRODUTO PRO' +
-      #13#10'LEFT JOIN PRODUTO_VEICULO PV ON (PRO.ID = PV.ID)'#13#10'LEFT JOIN VT' +
-      'AB_PRECO VT ON PRO.ID = VT.ID_PRODUTO'#13#10
+      #10'  CAST(0 AS FLOAT) AS PRECO_PROMOCAO, PRO.OBS, M.NOME NOME_MARC' +
+      'A'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO_VEICULO PV ON (PRO.ID = P' +
+      'V.ID)'#13#10'LEFT JOIN VTAB_PRECO VT ON PRO.ID = VT.ID_PRODUTO'#13#10'LEFT J' +
+      'OIN MARCA M ON PRO.id_marca = M.ID'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -721,7 +756,7 @@ object frmSel_Produto: TfrmSel_Produto
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 224
+    Left = 222
     Top = 208
     object sdsProdutoID: TIntegerField
       FieldName = 'ID'
@@ -785,6 +820,10 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object sdsProdutoQTDGERAL: TFloatField
       FieldName = 'QTDGERAL'
+    end
+    object sdsProdutoNOME_MARCA: TStringField
+      FieldName = 'NOME_MARCA'
+      Size = 40
     end
   end
   object cdsProduto: TClientDataSet
@@ -859,6 +898,10 @@ object frmSel_Produto: TfrmSel_Produto
     object cdsProdutoQTDGERAL: TFloatField
       FieldName = 'QTDGERAL'
     end
+    object cdsProdutoNOME_MARCA: TStringField
+      FieldName = 'NOME_MARCA'
+      Size = 40
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -890,7 +933,7 @@ object frmSel_Produto: TfrmSel_Produto
     SQL.Strings = (
       
         'SELECT P.EMPRESA_VEICULO, P.USA_COD_BARRAS, P.USA_PRODUTO_CLIENT' +
-        'E,'
+        'E, MOSTRAR_MARCAR_PROD,'
       
         '(SELECT PP.USA_PRODUTO_FILIAL FROM PARAMETROS_PROD PP WHERE PP.I' +
         'D = 1),'
@@ -923,6 +966,11 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object qParametrosUSA_TABELA_PRECO: TStringField
       FieldName = 'USA_TABELA_PRECO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametrosMOSTRAR_MARCAR_PROD: TStringField
+      FieldName = 'MOSTRAR_MARCAR_PROD'
       FixedChar = True
       Size = 1
     end
@@ -1071,8 +1119,9 @@ object frmSel_Produto: TfrmSel_Produto
       '  EST.ID_PRODUTO = PRO.ID) QTD,'#13#10'(SELECT cast(sum(E2.QTD) AS Flo' +
       'at) QTDGERAL FROM ESTOQUE_ATUAL E2'#13#10'                    WHERE E2' +
       '.ID_PRODUTO = PRO.ID) QTDGERAL,'#13#10'                   /**/ cast(0 ' +
-      'as Float) AS PRECO_PROMOCAO'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO' +
-      '_VEICULO PV'#13#10'ON PRO.ID = PV.ID'#13#10#13#10
+      'as Float) AS PRECO_PROMOCAO, M.NOME NOME_MARCA'#13#10'FROM PRODUTO PRO' +
+      #13#10'LEFT JOIN PRODUTO_VEICULO PV'#13#10'ON PRO.ID = PV.ID'#13#10'LEFT JOIN MAR' +
+      'CA M ON PRO.ID_MARCA = M.ID'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -1145,6 +1194,10 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object sdsProdAuxQTDGERAL: TFloatField
       FieldName = 'QTDGERAL'
+    end
+    object sdsProdAuxNOME_MARCA: TStringField
+      FieldName = 'NOME_MARCA'
+      Size = 40
     end
   end
   object qParametros_Prod: TSQLQuery
