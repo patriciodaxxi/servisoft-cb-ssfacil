@@ -619,7 +619,7 @@ object DMConsNotas: TDMConsNotas
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43500.689950381900000000
-    ReportOptions.LastChange = 43512.735830798600000000
+    ReportOptions.LastChange = 43601.599119201390000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -872,10 +872,10 @@ object DMConsNotas: TDMConsNotas
       'CMSSUBST, V.ID_COR,'#13#10'   COMB.NOME NOME_COR, v.beneficiamento, v.' +
       'faturamento, v.maoobra, V.codcfop, v.vlr_frete, V.vlr_icms, V.vl' +
       'r_ipi,'#13#10'   lpad(V.num_nota,9,0 ) || lpad(V.serie,3,0) || lpad(V.' +
-      'id_pessoa,6,0) Agrupa_Nota ,'#13#10'case'#13#10'  when v.tipo_reg = '#39'NTE'#39' th' +
-      'en v.dtentradasaida'#13#10'  else v.dtemissao'#13#10'  end DATA'#13#10'from vconsn' +
-      'otas V'#13#10'left join COMBINACAO COMB on (V.ID_COR = COMB.ID)'#13#10#13#10#13#10#13 +
-      #10#13#10#13#10
+      'id_pessoa,6,0) Agrupa_Nota , V.id_pessoa ID_CLIENTE,'#13#10'case'#13#10'  wh' +
+      'en v.tipo_reg = '#39'NTE'#39' then v.dtentradasaida'#13#10'  else v.dtemissao'#13 +
+      #10'  end DATA'#13#10'from vconsnotas V'#13#10'left join COMBINACAO COMB on (V.' +
+      'ID_COR = COMB.ID)'#13#10#13#10#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1012,6 +1012,9 @@ object DMConsNotas: TDMConsNotas
       FieldName = 'AGRUPA_NOTA'
       Size = 18
     end
+    object cdsProduto_DetID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
   end
   object dsProduto_Det: TDataSource
     DataSet = cdsProduto_Det
@@ -1052,7 +1055,8 @@ object DMConsNotas: TDMConsNotas
       'VLR_ICMS=VLR_ICMS'
       'DATA=DATA'
       'VLR_IPI=VLR_IPI'
-      'AGRUPA_NOTA=AGRUPA_NOTA')
+      'AGRUPA_NOTA=AGRUPA_NOTA'
+      'ID_CLIENTE=ID_CLIENTE')
     DataSource = dsProduto_Det
     BCDToCurrency = False
     Left = 784

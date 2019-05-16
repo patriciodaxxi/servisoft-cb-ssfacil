@@ -188,6 +188,7 @@ type
     cdsProduto_DetDATA: TDateField;
     cdsProduto_DetVLR_IPI: TFloatField;
     cdsProduto_DetAGRUPA_NOTA: TStringField;
+    cdsProduto_DetID_CLIENTE: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscal_CliUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

@@ -79,6 +79,7 @@ type
     procedure SMDBGrid6TitleClick(Column: TColumn);
     procedure Imprimir1Click(Sender: TObject);
     procedure Excel1Click(Sender: TObject);
+    procedure SMDBGrid19TitleClick(Column: TColumn);
   private
     { Private declarations }
     fDMConsNotas: TDMConsNotas;
@@ -616,6 +617,18 @@ begin
         Grid.Columns[i].Title.Caption := 'Vlr. Faturamento';
     end;
   end;
+end;
+
+procedure TfrmConsNotas.SMDBGrid19TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMConsNotas.cdsProduto_Det.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid19.Columns.Count - 1 do
+    if not (SMDBGrid19.Columns.Items[I] = Column) then
+      SMDBGrid19.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.
