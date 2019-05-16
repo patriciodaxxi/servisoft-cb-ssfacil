@@ -192,6 +192,8 @@ type
     cdsUnidadeNOME: TStringField;
     dsUnidade: TDataSource;
     dspUnidade: TDataSetProvider;
+    sdsProcessoGERAR_ESTOQUE_TING: TStringField;
+    cdsProcessoGERAR_ESTOQUE_TING: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

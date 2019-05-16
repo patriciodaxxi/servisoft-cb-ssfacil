@@ -424,6 +424,11 @@ object DmCadSetor: TDmCadSetor
       FieldName = 'UNIDADE'
       Size = 6
     end
+    object sdsProcessoGERAR_ESTOQUE_TING: TStringField
+      FieldName = 'GERAR_ESTOQUE_TING'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspProcesso: TDataSetProvider
     DataSet = sdsProcesso
@@ -565,6 +570,11 @@ object DmCadSetor: TDmCadSetor
     object cdsProcessoUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Size = 6
+    end
+    object cdsProcessoGERAR_ESTOQUE_TING: TStringField
+      FieldName = 'GERAR_ESTOQUE_TING'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsProcesso: TDataSource

@@ -1123,6 +1123,18 @@ object frmCadProcesso: TfrmCadProcesso
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
+        object DBCheckBox12: TDBCheckBox
+          Left = 376
+          Top = 246
+          Width = 281
+          Height = 17
+          Caption = 'Gerar Materiais Para o Tingimento (Controle)'
+          DataField = 'GERAR_ESTOQUE_TING'
+          DataSource = DmCadSetor.dsProcesso
+          TabOrder = 20
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
       end
     end
   end
