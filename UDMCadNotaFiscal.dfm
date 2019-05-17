@@ -12786,6 +12786,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeUSA_CST_ICMS_NTE: TStringField
+      FieldName = 'USA_CST_ICMS_NTE'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoqueLoteAux: TSQLDataSet
     NoMetadata = True
