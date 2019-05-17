@@ -118,12 +118,12 @@ begin
   end;
   if (RzPageControl1.ActivePage = ts_Centro_Orcamento) then
   begin
-    if (comboCentroCusto.KeyValue = 0) or (comboCentroCusto.KeyValue = null) then
-    begin
-      MessageDlg('*** Informe o centro de custo!', mtInformation, [mbOk], 0);
-      comboCentroCusto.SetFocus;
-      exit;
-    end;
+//    if (comboCentroCusto.KeyValue = 0) or (comboCentroCusto.KeyValue = null) then
+//    begin
+//      MessageDlg('*** Informe o centro de custo!', mtInformation, [mbOk], 0);
+//      comboCentroCusto.SetFocus;
+//      exit;
+//    end;
     if (RxDBLookupCombo1.KeyValue = 0) or (RxDBLookupCombo1.KeyValue = null) then
     begin
       MessageDlg('*** Informe a filial!', mtInformation, [mbOk], 0);
@@ -757,24 +757,19 @@ procedure TfrmConsCtaOrcamento_Fin.prc_Consultar_Resumo_CCusto;
 begin
   fDMConsFinanceiro.qResumoCentro_Custo.Close;
   fDMConsFinanceiro.qResumoCentro_Custo.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
-  fDMConsFinanceiro.qResumoCentro_Custo.ParamByName('ID_CENTROCUSTO').AsInteger := comboCentroCusto.KeyValue;
+  if comboCentroCusto.KeyValue <> null then
+    fDMConsFinanceiro.qResumoCentro_Custo.ParamByName('ID_CENTROCUSTO').AsInteger := comboCentroCusto.KeyValue;
   fDMConsFinanceiro.qResumoCentro_Custo.open;
 end;
 
 procedure TfrmConsCtaOrcamento_Fin.prc_Carrega_Combo;
 begin
-  if RzPageControl1.ActivePage = ts_Centro_Orcamento then
-  begin
-    NxComboBox2.Items.Clear;
-    NxComboBox2.Items.Add('Data Pagamento');
-    NxComboBox2.Items.Add('Data Vencimento');
-  end
+  NxComboBox2.Items.Clear;
+  if SQLLocate('PARAMETROS_FIN','ID','CONTROLA_CONTRATO_CCUSTO','1') = 'S' then
+    NxComboBox2.Items.Add('Data Pagamento')
   else
-  begin
-    NxComboBox2.Items.Clear;
     NxComboBox2.Items.Add('Data Emissão');
-    NxComboBox2.Items.Add('Data Vencimento');
-  end;
+  NxComboBox2.Items.Add('Data Vencimento');
   NxComboBox2.Text := 'Data Vencimento';
   NxComboBox2.ItemIndex := 1;
 end;
