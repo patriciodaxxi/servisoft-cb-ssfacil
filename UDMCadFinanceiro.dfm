@@ -2207,13 +2207,18 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT EXIGIR_CONTA_ORC_DUP'
+      'SELECT EXIGIR_CONTA_ORC_DUP, CONTROLA_CONTRATO_CCUSTO'
       'FROM PARAMETROS_FIN')
     SQLConnection = dmDatabase.scoDados
     Left = 800
     Top = 32
     object qParametros_FinEXIGIR_CONTA_ORC_DUP: TStringField
       FieldName = 'EXIGIR_CONTA_ORC_DUP'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_FinCONTROLA_CONTRATO_CCUSTO: TStringField
+      FieldName = 'CONTROLA_CONTRATO_CCUSTO'
       FixedChar = True
       Size = 1
     end

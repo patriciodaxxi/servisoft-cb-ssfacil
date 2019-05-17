@@ -1276,7 +1276,7 @@ begin
             planilha.Cells[linha, colunaP].NumberFormat := AnsiString('dd/mm/aaaa');
             planilha.cells[linha, colunaP] := valorCampo;
           except
-            vDados.DataSet.Next;
+//            vDados.DataSet.Next;
           end;
         end;
       end

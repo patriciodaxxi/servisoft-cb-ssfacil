@@ -1,6 +1,6 @@
 object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
-  Left = 107
-  Top = 78
+  Left = 286
+  Top = 65
   Width = 1169
   Height = 533
   Caption = 'frmConsCtaOrcamento_Fin'
@@ -366,10 +366,11 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
     Top = 137
     Width = 1153
     Height = 340
-    ActivePage = ts_Centro_Orcamento
+    ActivePage = TS_Resumido
     Align = alClient
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 2
+    OnChange = RzPageControl1Change
     FixedDimension = 19
     object TS_Resumido: TRzTabSheet
       Caption = 'Resumido'

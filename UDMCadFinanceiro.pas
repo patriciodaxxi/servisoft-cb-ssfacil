@@ -369,6 +369,7 @@ type
     mReciboFilial_Email: TStringField;
     mReciboFinanceiro_VlrExtenso: TStringField;
     mReciboFilial_CNPJ: TStringField;
+    qParametros_FinCONTROLA_CONTRATO_CCUSTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspFinanceiroUpdateError(Sender: TObject; DataSet: TCustomClientDataSet; E: EUpdateError; UpdateKind: TUpdateKind; var Response: TResolverResponse);
     procedure cdsFinanceiroBeforePost(DataSet: TDataSet);
