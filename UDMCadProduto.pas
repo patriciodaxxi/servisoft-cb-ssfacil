@@ -1937,6 +1937,19 @@ type
     cdsProdutoQTD_POR_ROTULO: TFloatField;
     sdsProdutoPERC_ICMS_NFCE: TFloatField;
     cdsProdutoPERC_ICMS_NFCE: TFloatField;
+    sdsProduto_CA: TSQLDataSet;
+    dspProduto_CA: TDataSetProvider;
+    cdsProduto_CA: TClientDataSet;
+    dsProduto_CA: TDataSource;
+    sdsProduto_CAID: TIntegerField;
+    sdsProduto_CAITEM: TIntegerField;
+    sdsProduto_CANUM_CA: TStringField;
+    sdsProduto_CADATA: TDateField;
+    cdsProduto_CAID: TIntegerField;
+    cdsProduto_CAITEM: TIntegerField;
+    cdsProduto_CANUM_CA: TStringField;
+    cdsProduto_CADATA: TDateField;
+    qParametros_ProdUSA_CA_HIST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2026,6 +2039,7 @@ type
     procedure prc_Inserir_ProdComissao;
     procedure prc_Inserir_ProdComissao_Vend;
     procedure prc_Inserir_ProdLote;
+    procedure prc_Inserir_ProdCA;
     procedure prc_Inserir_ProdCarimbo;
     procedure prc_Inserir_ProdGradeNum;
     procedure prc_Abrir_Material;
@@ -2042,6 +2056,7 @@ type
     procedure prc_Abrir_Comissao(ID: Integer);
     procedure prc_Abrir_Comissao_Vend(ID: Integer);
     procedure prc_Abrir_Produto_Lote(ID: Integer);
+    procedure prc_Abrir_Produto_CA(ID: Integer);
     procedure prc_Abrir_CBarra(ID: Integer);
 
     procedure prc_Abrir_Produto_Comb(ID: Integer);
@@ -2121,6 +2136,8 @@ begin
   end;
   if qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
     prc_Abrir_Produto_Lote(cdsProdutoID.AsInteger);
+  if qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+    prc_Abrir_Produto_CA(cdsProdutoID.AsInteger);
   if qParametrosID_LOCAL_ESTOQUE_PROD.AsInteger > 0 then
     cdsProdutoID_LOCAL_ESTOQUE_PROD.AsInteger := qParametrosID_LOCAL_ESTOQUE_PROD.AsInteger;
   if (qParametrosUSA_CARIMBO.AsString = 'S') and (cdsProdutoTIPO_REG.AsString = 'P') then
@@ -3768,6 +3785,24 @@ procedure TdmCadProduto.dspProduto_CombGetTableName(Sender: TObject;
 begin
   if DataSet.Name = 'sdsProduto_Comb_Mat' then
     TableName := 'PRODUTO_COMB_MAT';
+end;
+
+procedure TdmCadProduto.prc_Inserir_ProdCA;
+var
+  vItemAux: Integer;
+begin
+  cdsProduto_CA.Last;
+  vItemAux := cdsProduto_CAITEM.AsInteger;
+  cdsProduto_CA.Insert;
+  cdsProduto_CAID.AsInteger   := cdsProdutoID.AsInteger;
+  cdsProduto_CAITEM.AsInteger := vItemAux + 1;
+end;
+
+procedure TdmCadProduto.prc_Abrir_Produto_CA(ID: Integer);
+begin
+  cdsProduto_CA.Close;
+  sdsProduto_CA.ParamByName('ID').AsInteger := ID;
+  cdsProduto_CA.Open;
 end;
 
 end.

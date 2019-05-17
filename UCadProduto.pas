@@ -784,6 +784,7 @@ type
     DBEdit161: TDBEdit;
     Label253: TLabel;
     DBEdit162: TDBEdit;
+    btnCA: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -989,6 +990,7 @@ type
     procedure ListacomCdigodeBarras1Click(Sender: TObject);
     procedure btnAtualizar_ProcClick(Sender: TObject);
     procedure btnAjustarProcessoClick(Sender: TObject);
+    procedure btnCAClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1101,7 +1103,8 @@ implementation
 uses rsDBUtils, uUtilPadrao, URelProduto, URelProduto_Grupo, USel_Grupo, USel_Plano_Contas, DmdDatabase, UCadProduto_Processo,
   USel_EnqIPI, USel_CodCest, VarUtils, UCadProduto_Serie, UCadProduto_Cad_Ant, UCadProcesso_Grupo, USel_ContaOrc, USel_Produto,
   uCopiar_Comb_Agrupado, UCadProduto_GradeNum, UCadProduto_Lote, USel_Produto_Lote, UCadProduto_Larg, UCadProduto_GradeRefTam,
-  USel_Maquina, UAltProd, UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu, UCadProduto_ST, uConsProduto_Compras;
+  USel_Maquina, UAltProd, UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu, UCadProduto_ST, uConsProduto_Compras,
+  UCadProduto_CA;
 
 {$R *.dfm}
 
@@ -1435,6 +1438,9 @@ begin
 
     if fDMCadProduto.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
       fDMCadProduto.cdsProduto_Lote.ApplyUpdates(0);
+
+    if fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+      fDMCadProduto.cdsProduto_CA.ApplyUpdates(0);
 
     if (fDMCadProduto.qParametrosUSA_COD_BARRAS_PROPRIO.AsString = 'S') and (fDMCadProduto.qParametros_ProdINF_CBARRA_MANUAL.AsString = 'S') then
       fDMCadProduto.cdsCBarra2.ApplyUpdates(0);
@@ -1849,6 +1855,11 @@ begin
 
   if fDMCadProduto.qFilial_STRetCONTADOR.AsInteger > 0 then
     StaticText1.Caption := StaticText1.Caption + '  | F7 ST Entrada ';
+
+  DBEdit158.ReadOnly := (fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S');
+  if fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+    DBEdit158.Color := clBtnFace;
+  btnCA.Visible := (fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S');
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
@@ -2508,6 +2519,8 @@ begin
   end;
   if fDMCadProduto.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
     fDMCadProduto.prc_Abrir_Produto_Lote(fDMCadProduto.cdsProdutoID.AsInteger);
+  if fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+    fDMCadProduto.prc_Abrir_Produto_CA(fDMCadProduto.cdsProdutoID.AsInteger);
   if (fDMCadProduto.qParametrosUSA_COD_BARRAS_PROPRIO.AsString = 'S') and (fDMCadProduto.qParametros_ProdINF_CBARRA_MANUAL.AsString = 'S') then
     fDMCadProduto.prc_Abrir_CBarra(fDMCadProduto.cdsProdutoID.AsInteger);
 
@@ -2517,6 +2530,10 @@ begin
   //27/02/2017
   if (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N')  then
     fDMCadProduto.prc_Abrir_Produto_Processo(fDMCadProduto.cdsProdutoID.AsInteger);
+
+  if (fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString <> 'N')  then
+    fDMCadProduto.prc_Abrir_Produto_CA(fDMCadProduto.cdsProdutoID.AsInteger);
+
   if fDMCadProduto.cdsProdutoID_MATERIAL_CRU.AsInteger > 0 then
     prc_Mostra_Material_Cru
   else
@@ -3296,6 +3313,8 @@ begin
     if fDMCadProduto.qParametrosUSA_CARIMBO.AsString = 'S' then
       fDMCadProduto.prc_Abrir_Produto_Carimbo(fDMCadProduto.cdsProdutoID.AsInteger);
   end;
+  if fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+    fDMCadProduto.prc_Abrir_Produto_CA(fDMCadProduto.cdsProdutoID.AsInteger);
   prc_Combinacao;
   DBCheckBox17.Visible := (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'P');
   TS_Ativo.TabVisible  := (RxDBComboBox7.ItemIndex = 4);
@@ -6015,6 +6034,14 @@ begin
     fDMCadProduto.cdsPosicao_Proc.Next;
   end;
 
+end;
+
+procedure TfrmCadProduto.btnCAClick(Sender: TObject);
+begin
+  frmCadProduto_CA := TfrmCadProduto_CA.Create(self);
+  frmCadProduto_CA.fDMCadProduto := fDMCadProduto;
+  frmCadProduto_CA.ShowModal;
+  FreeAndNil(frmCadProduto_CA);
 end;
 
 end.

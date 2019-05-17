@@ -792,7 +792,8 @@ uses
   UDMCadPlanoMat in 'UDMCadPlanoMat.pas' {DMCadPlanoMat: TDataModule},
   UGerar_PlanoMat in 'UGerar_PlanoMat.pas' {frmGerar_PlanoMat},
   uConsProduto_Compras in 'uConsProduto_Compras.pas' {frmConsProduto_Compras},
-  UVendedor_Config in 'UVendedor_Config.pas' {frmVendedor_Config};
+  UVendedor_Config in 'UVendedor_Config.pas' {frmVendedor_Config},
+  UCadProduto_CA in 'UCadProduto_CA.pas' {frmCadProduto_CA};
 
 {$R *.res}
 
