@@ -1,6 +1,6 @@
 object frmSel_Pessoa: TfrmSel_Pessoa
-  Left = 61
-  Top = 173
+  Left = 142
+  Top = 156
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Selecionar Pessoa'

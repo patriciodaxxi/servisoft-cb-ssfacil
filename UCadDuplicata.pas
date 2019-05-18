@@ -1861,6 +1861,7 @@ begin
       //frmSel_Pessoa.vTipo_Pessoa := 'F';
       frmSel_Pessoa.vTipo_Pessoa := 'FT';
     frmSel_Pessoa.ShowModal;
+    FreeAndNil(frmSel_Pessoa);
     fDMCadDuplicata.cdsDuplicataID_PESSOA.AsInteger := vCodPessoa_Pos;
     RxDBLookupCombo3.SetFocus;
   end;
@@ -2313,14 +2314,15 @@ begin
     if trim(RxDBLookupCombo2.Text) <> '' then
       vCodPessoa_Pos := RxDBLookupCombo2.KeyValue;
     frmSel_Pessoa := TfrmSel_Pessoa.Create(Self);
-    if fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'E' then
-      frmSel_Pessoa.vTipo_Pessoa := 'C'
-    else
-      frmSel_Pessoa.vTipo_Pessoa := 'FT';
+    frmSel_Pessoa.vTipo_Pessoa := '';
+    case RadioGroup2.ItemIndex of
+      0 : frmSel_Pessoa.vTipo_Pessoa := 'C';
+      1 : frmSel_Pessoa.vTipo_Pessoa := 'FT';
+    end;
     frmSel_Pessoa.ShowModal;
     if vCodPessoa_Pos > 0 then
       RxDBLookupCombo2.KeyValue := vCodPessoa_Pos;
-    RxDBLookupCombo3.SetFocus;
+    RxDBLookupCombo2.SetFocus;
   end;
 end;
 
