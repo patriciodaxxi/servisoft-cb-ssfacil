@@ -25,7 +25,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     Top = 0
     Width = 684
     Height = 478
-    ActivePage = TS_Vidro
+    ActivePage = TS_Chapas
     ActivePageDefault = TS_Chapas
     Align = alClient
     BackgroundColor = 8404992
@@ -33,7 +33,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     UseColoredTabs = True
     ParentBackgroundColor = False
     ShowShadow = False
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 0
     TextColors.DisabledShadow = clActiveCaption
     TextColors.Selected = 8404992
@@ -164,6 +164,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         DataSource = DMCadPedido.dsPedido_Item_Tipo
         TabOrder = 2
         OnExit = DBEdit2Exit
+        OnKeyDown = DBEdit2KeyDown
       end
       object DBEdit3: TDBEdit
         Left = 112
@@ -174,6 +175,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         DataSource = DMCadPedido.dsPedido_Item_Tipo
         TabOrder = 3
         OnExit = DBEdit2Exit
+        OnKeyDown = DBEdit3KeyDown
       end
       object DBEdit4: TDBEdit
         Left = 112
@@ -184,6 +186,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         DataSource = DMCadPedido.dsPedido_Item_Tipo
         TabOrder = 4
         OnExit = DBEdit2Exit
+        OnKeyDown = DBEdit4KeyDown
       end
       object DBEdit5: TDBEdit
         Left = 112

@@ -86,6 +86,7 @@ uses
   function fnc_CNPJCFP_FilialNFeConfig : String;
 
   function fnc_Vendedor_Desc_Com(ID : Integer) : Boolean;
+  function fnc_Somar_Edit(Valores: string): Double;
 
   //procedure prc_Enviar_Email_Proc(MSG: String);
 
@@ -2103,6 +2104,33 @@ begin
     FreeAndNil(sds);
   end;
   
+end;
+
+function fnc_Somar_Edit(Valores: string): Double;
+var
+  vValorCalculo: array[1..10] of real;
+  i, i2: Integer;
+  x: string;
+  soma : real;
+begin
+  i := 0;
+  repeat
+    inc(i);
+    i2 := pos('+', Valores);
+    if (i2 = 0) then
+    begin
+      i2 := Length(Valores) + 1;
+    end;
+    x := Copy(Valores, 1, i2 - 1);
+    Delete(Valores, 1, i2);
+    vValorCalculo[i] := strtofloat(x);
+  until Valores = '';
+  soma := 0;
+  for i := 1 to 10 do
+  begin
+    soma := soma + vValorCalculo[i];
+  end;
+  Result := soma;
 end;
 
 end.

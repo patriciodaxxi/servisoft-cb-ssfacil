@@ -170,6 +170,12 @@ type
     procedure DBEdit6Exit(Sender: TObject);
     procedure DBEdit15Exit(Sender: TObject);
     procedure DBEdit22Exit(Sender: TObject);
+    procedure DBEdit2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBEdit3KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBEdit4KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     vItemMat: Integer;
@@ -183,6 +189,7 @@ type
     vVlr_Furacao: Real;
     vVlr_Calculado: Real;
     vID_Chapa_Ant : Integer;
+    Calcular_Edit : Boolean;
 
     procedure prc_Calcular_Peso_PC_Chapa;
     procedure prc_Calcular_Peso_PC_Redondo;
@@ -231,6 +238,7 @@ begin
   Label48.Visible  := (fDMCadPedido.cdsParametrosTIPO_REL_PEDIDO.AsString = 'S2');
   DBEdit41.Visible := (fDMCadPedido.cdsParametrosTIPO_REL_PEDIDO.AsString = 'S2');
   DBEdit6.ReadOnly := ((fDMCadPedido.cdsParametrosTIPO_REL_PEDIDO.AsString <> 'S2') or (fDMCadPedido.cdsParametrosTIPO_REL_PEDIDO.IsNull));
+  Calcular_Edit := SQLLocate('PARAMETROS_PED','ID','CALCULA_EDIT','1') = 'S';
 end;
 
 procedure TfrmCadPedido_TipoItem.FormKeyDown(Sender: TObject; var Key: Word;
@@ -859,6 +867,45 @@ begin
       fDMCadPedido.cdsPedido_Item_TipoLARGURA_CORTE.AsFloat := (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat + vMedida_Corte);
     if fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat > 0 then
       fDMCadPedido.cdsPedido_Item_TipoALTURA_CORTE.AsFloat := (fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat + vMedida_Corte);
+  end;
+end;
+
+procedure TfrmCadPedido_TipoItem.DBEdit2KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if Calcular_Edit then
+  begin
+    if (Key in [VK_RETURN]) then
+    begin
+      DBEdit2.Text := FloatToStr(fnc_Somar_Edit(DBEdit2.Text));
+      Perform(WM_nextdlgctl,0,0);
+    end;
+  end;
+end;
+
+procedure TfrmCadPedido_TipoItem.DBEdit3KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if Calcular_Edit then
+  begin
+    if (Key in [VK_RETURN]) then
+    begin
+      DBEdit3.Text := FloatToStr(fnc_Somar_Edit(DBEdit3.Text));
+      Perform(WM_nextdlgctl,0,0);
+    end;
+  end;
+end;
+
+procedure TfrmCadPedido_TipoItem.DBEdit4KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if Calcular_Edit then
+  begin
+    if (Key in [VK_RETURN]) then
+    begin
+      DBEdit3.Text := FloatToStr(fnc_Somar_Edit(DBEdit3.Text));
+      Perform(WM_nextdlgctl,0,0);
+    end;
   end;
 end;
 
