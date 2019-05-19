@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, RLReport, RLRichText, DB, DBTables, RLBarcode, jpeg, UDMCadPedido, UDMRel;
+  Dialogs, RLReport, RLRichText, DB, DBTables, RLBarcode, jpeg, UDMCadPedido, UDMRel,
+  RLFilters, RLPDFFilter;
 
 type
   TfRelPedido_JW = class(TForm)
@@ -129,6 +130,7 @@ type
     RLDraw4: TRLDraw;
     RLLabel39: TRLLabel;
     RLDBText43: TRLDBText;
+    RLPDFFilter1: TRLPDFFilter;
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand7BeforePrint(Sender: TObject; var PrintIt: Boolean);

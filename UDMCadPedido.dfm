@@ -1567,7 +1567,6 @@ object DMCadPedido: TDMCadPedido
     Top = 322
   end
   object cdsTipoCobranca: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -1644,7 +1643,6 @@ object DMCadPedido: TDMCadPedido
     Top = 367
   end
   object cdsContas: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>

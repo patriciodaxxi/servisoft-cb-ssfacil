@@ -359,6 +359,7 @@ type
     Personalizado1: TMenuItem;
     RtuloComEmbalagemRolo1: TMenuItem;
     EtiquetaA4ItensPersonalizado1: TMenuItem;
+    SalvarPedido1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -479,6 +480,7 @@ type
     procedure aloPorProcesso1Click(Sender: TObject);
     procedure RtuloComEmbalagemRolo1Click(Sender: TObject);
     procedure EtiquetaA4ItensPersonalizado1Click(Sender: TObject);
+    procedure SalvarPedido1Click(Sender: TObject);
   private
     { Private declarations }
     fLista : TStringList;
@@ -4415,6 +4417,36 @@ begin
   else
     ShowMessage('Relatorio não localizado! ' + vArq);
 //  FreeAndNil(frmCadPedido);
+end;
+
+procedure TfrmCadPedido.SalvarPedido1Click(Sender: TObject);
+var
+  vCaminhoArquivo : String;
+begin
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
+    exit;
+  vCaminhoArquivo := SQLLocate('PARAMETROS_PED','ID','END_PDF_PEDIDO','1');
+  if vCaminhoArquivo = '' then
+  begin
+    ShowMessage('Caminho do arquivo não definido nos parâmetros');
+    Exit;
+  end;
+  prc_Posiciona_Pedido;
+  prc_Posiciona_Imp;
+
+  if fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S' then
+  begin
+    fRelPedido_JW              := TfRelPedido_JW.Create(Self);
+    fRelPedido_JW.vImp_Foto    := ckImpFoto.Checked;
+    fRelPedido_JW.vImpPreco    := ckImpPreco.Checked;
+    fRelPedido_JW.vImp_Peso    := ckImpPeso.Checked;
+    fRelPedido_JW.fDMCadPedido := fDMCadPedido;
+    fRelPedido_JW.RLPDFFilter1.FileName := vCaminhoArquivo + '\Pedido_' + fDMCadPedido.cdsPedidoImpPEDIDO_CLIENTE.AsString + '.pdf';
+    fRelPedido_JW.RLReport1.SaveToFile(vCaminhoArquivo + '\Pedido_' + fDMCadPedido.cdsPedidoImpPEDIDO_CLIENTE.AsString + '.pdf');
+    fRelPedido_JW.RLReport1.Prepare;
+    ShowMessage('Arquivo Gerado com Sucesso');
+    FreeAndNil(fRelPedido_JW);
+  end
 end;
 
 end.

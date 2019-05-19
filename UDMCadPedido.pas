@@ -4,7 +4,8 @@ interface
 
 uses
   SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, DBXpress, Variants, RLPreviewForm, LogTypes, Dialogs, Math,
-  frxExportMail, frxClass, frxExportPDF, frxDBSet, frxRich, UDMEstoque, Forms;
+  frxExportMail, frxClass, frxExportPDF, frxDBSet, frxRich, UDMEstoque, Forms,
+  RLFilters, RLPDFFilter;
 
 type
   TDMCadPedido = class(TDataModule)
