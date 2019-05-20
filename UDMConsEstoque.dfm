@@ -1,8 +1,8 @@
 object DMConsEstoque: TDMConsEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 120
-  Top = 23
+  Left = 357
+  Top = 29
   Height = 699
   Width = 1224
   object sdsEstoque: TSQLDataSet
@@ -230,7 +230,7 @@ object DMConsEstoque: TDMConsEstoque
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 88
+    Left = 89
     Top = 103
   end
   object dspFilial: TDataSetProvider
@@ -267,22 +267,31 @@ object DMConsEstoque: TDMConsEstoque
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'select EM.*, PES.NOME NOMEPESSOA, PRO.NOME NOMEPRODUTO, PRO.REFE' +
-      'RENCIA, PES.CNPJ_CPF, CFOP.CODCFOP, GR.NOME NOME_GRUPO,'#13#10'       ' +
-      'COMB.NOME NOME_COR, LEST.NOME NOME_LOCAL, LEST.COD_LOCAL, PRO.PR' +
-      'ECO_CUSTO, CC.DESCRICAO NOME_CENTROCUSTO,'#13#10'       GR.CODIGO CODI' +
-      'GO_GRUPO, DI.MOTIVO, CC.CODIGO CODIGO_CCUSTO, CC1.CODIGO CODIGO_' +
-      'SUPERIOR, CC1.DESCRICAO DESC_SUPERIOR,'#13#10'       (EM.VLR_UNITARIO ' +
-      '* EM.QTD2) VLR_TOTAL'#13#10'from ESTOQUE_MOV EM'#13#10'inner join PRODUTO PR' +
-      'O on (EM.ID_PRODUTO = PRO.ID)'#13#10'left join PESSOA PES on (EM.ID_PE' +
-      'SSOA = PES.CODIGO)'#13#10'left join TAB_CFOP CFOP on (EM.ID_CFOP = CFO' +
-      'P.ID)'#13#10'left join GRUPO GR on (PRO.ID_GRUPO = GR.ID)'#13#10'left join C' +
-      'OMBINACAO COMB on (EM.ID_COR = COMB.ID)'#13#10'left join LOCAL_ESTOQUE' +
-      ' LEST on (EM.ID_LOCAL_ESTOQUE = LEST.ID)'#13#10'left join CENTROCUSTO ' +
-      'CC on EM.ID_CENTROCUSTO = CC.ID'#13#10'left join DOCESTOQUE_ITENS DI o' +
-      'n DI.ID_MOVESTOQUE = EM.ID'#13#10'left join CENTROCUSTO CC1 on CC1.ID ' +
-      '= CC.SUPERIOR'#13#10'where PRO.INATIVO = '#39'N'#39' and'#13#10'      PRO.ESTOQUE = ' +
-      #39'S'#39
+      'select EM.id,'#13#10'em.filial, em.id_produto, em.id_cor, em.dtmovimen' +
+      'to, em.tipo_es, em.tipo_mov,'#13#10'em.numnota, em.id_pessoa, em.vlr_u' +
+      'nitario, em.qtd, em.perc_icms, em.perc_ipi,'#13#10'em.vlr_desconto, em' +
+      '.unidade, em.qtd2, em.tamanho, em.perc_tributacao,'#13#10'em.vlr_frete' +
+      ', em.id_cfop, em.id_nota, em.serie, em.unidade_orig, em.vlr_unit' +
+      'arioorig,'#13#10'em.qtd_orig, em.vlr_descontoorig, em.mercado, em.id_c' +
+      'entrocusto,'#13#10'em.qtd_ent, em.qtd_sai, em.teste, em.id_cupom, em.i' +
+      'd_local_estoque, em.num_lote_controle,'#13#10'em.gerar_custo, em.preco' +
+      '_custo_total, em.vlr_ajuste_custo, em.id_operacao, em.ref_prod_f' +
+      'ornecedor,'#13#10'PES.NOME NOMEPESSOA, PRO.NOME NOMEPRODUTO, PRO.REFER' +
+      'ENCIA, PES.CNPJ_CPF, CFOP.CODCFOP, GR.NOME NOME_GRUPO,'#13#10'        ' +
+      ' COMB.NOME NOME_COR, LEST.NOME NOME_LOCAL, LEST.COD_LOCAL, PRO.P' +
+      'RECO_CUSTO,'#13#10'       CC.DESCRICAO NOME_CENTROCUSTO,   GR.CODIGO C' +
+      'ODIGO_GRUPO, DI.MOTIVO, CC.CODIGO CODIGO_CCUSTO,'#13#10'       CC1.COD' +
+      'IGO CODIGO_SUPERIOR, CC1.DESCRICAO DESC_SUPERIOR,  (EM.VLR_UNITA' +
+      'RIO * EM.QTD2) VLR_TOTAL  '#13#10'from ESTOQUE_MOV EM  '#13#10'inner join PR' +
+      'ODUTO PRO on (EM.ID_PRODUTO = PRO.ID)'#13#10'left join PESSOA PES on (' +
+      'EM.ID_PESSOA = PES.CODIGO)  '#13#10'left join TAB_CFOP CFOP on (EM.ID_' +
+      'CFOP = CFOP.ID)  '#13#10'left join GRUPO GR on (PRO.ID_GRUPO = GR.ID) ' +
+      ' '#13#10'left join COMBINACAO COMB on (EM.ID_COR = COMB.ID)  '#13#10'left jo' +
+      'in LOCAL_ESTOQUE LEST on (EM.ID_LOCAL_ESTOQUE = LEST.ID)  '#13#10'left' +
+      ' join CENTROCUSTO CC on EM.ID_CENTROCUSTO = CC.ID  '#13#10'left join D' +
+      'OCESTOQUE_ITENS DI on DI.ID_MOVESTOQUE = EM.ID  '#13#10'left join CENT' +
+      'ROCUSTO CC1 on CC1.ID = CC.SUPERIOR  '#13#10'where PRO.INATIVO = '#39'N'#39' a' +
+      'nd'#13#10'        PRO.ESTOQUE = '#39'S'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -293,194 +302,6 @@ object DMConsEstoque: TDMConsEstoque
     DataSet = sdsEstoque_Mov
     Left = 120
     Top = 151
-  end
-  object cdsEstoque_Mov: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspEstoque_Mov'
-    Left = 152
-    Top = 151
-    object cdsEstoque_MovID: TIntegerField
-      FieldName = 'ID'
-      Required = True
-    end
-    object cdsEstoque_MovFILIAL: TIntegerField
-      FieldName = 'FILIAL'
-    end
-    object cdsEstoque_MovID_PRODUTO: TIntegerField
-      FieldName = 'ID_PRODUTO'
-    end
-    object cdsEstoque_MovID_COR: TIntegerField
-      FieldName = 'ID_COR'
-    end
-    object cdsEstoque_MovDTMOVIMENTO: TDateField
-      FieldName = 'DTMOVIMENTO'
-    end
-    object cdsEstoque_MovTIPO_ES: TStringField
-      FieldName = 'TIPO_ES'
-      FixedChar = True
-      Size = 1
-    end
-    object cdsEstoque_MovTIPO_MOV: TStringField
-      FieldName = 'TIPO_MOV'
-      Size = 5
-    end
-    object cdsEstoque_MovNUMNOTA: TIntegerField
-      FieldName = 'NUMNOTA'
-    end
-    object cdsEstoque_MovID_PESSOA: TIntegerField
-      FieldName = 'ID_PESSOA'
-    end
-    object cdsEstoque_MovVLR_UNITARIO: TFloatField
-      FieldName = 'VLR_UNITARIO'
-      DisplayFormat = '###,###,##0.00###'
-    end
-    object cdsEstoque_MovQTD: TFloatField
-      FieldName = 'QTD'
-      DisplayFormat = '###,###,##0.#####'
-    end
-    object cdsEstoque_MovPERC_ICMS: TFloatField
-      FieldName = 'PERC_ICMS'
-    end
-    object cdsEstoque_MovPERC_IPI: TFloatField
-      FieldName = 'PERC_IPI'
-    end
-    object cdsEstoque_MovVLR_DESCONTO: TFloatField
-      FieldName = 'VLR_DESCONTO'
-    end
-    object cdsEstoque_MovUNIDADE: TStringField
-      FieldName = 'UNIDADE'
-      Size = 6
-    end
-    object cdsEstoque_MovQTD2: TFloatField
-      FieldName = 'QTD2'
-    end
-    object cdsEstoque_MovTAMANHO: TStringField
-      FieldName = 'TAMANHO'
-      Size = 10
-    end
-    object cdsEstoque_MovPERC_TRIBUTACAO: TFloatField
-      FieldName = 'PERC_TRIBUTACAO'
-    end
-    object cdsEstoque_MovVLR_FRETE: TFloatField
-      FieldName = 'VLR_FRETE'
-    end
-    object cdsEstoque_MovID_CFOP: TIntegerField
-      FieldName = 'ID_CFOP'
-    end
-    object cdsEstoque_MovID_NOTA: TIntegerField
-      FieldName = 'ID_NOTA'
-    end
-    object cdsEstoque_MovSERIE: TStringField
-      FieldName = 'SERIE'
-      Size = 3
-    end
-    object cdsEstoque_MovUNIDADE_ORIG: TStringField
-      FieldName = 'UNIDADE_ORIG'
-      Size = 6
-    end
-    object cdsEstoque_MovVLR_UNITARIOORIG: TFloatField
-      FieldName = 'VLR_UNITARIOORIG'
-    end
-    object cdsEstoque_MovQTD_ORIG: TFloatField
-      FieldName = 'QTD_ORIG'
-    end
-    object cdsEstoque_MovVLR_DESCONTOORIG: TFloatField
-      FieldName = 'VLR_DESCONTOORIG'
-    end
-    object cdsEstoque_MovMERCADO: TStringField
-      FieldName = 'MERCADO'
-      Size = 1
-    end
-    object cdsEstoque_MovNOMEPESSOA: TStringField
-      FieldName = 'NOMEPESSOA'
-      Size = 60
-    end
-    object cdsEstoque_MovNOMEPRODUTO: TStringField
-      FieldName = 'NOMEPRODUTO'
-      Size = 65
-    end
-    object cdsEstoque_MovREFERENCIA: TStringField
-      FieldName = 'REFERENCIA'
-    end
-    object cdsEstoque_MovQTD_ENT: TFloatField
-      FieldName = 'QTD_ENT'
-    end
-    object cdsEstoque_MovQTD_SAI: TFloatField
-      FieldName = 'QTD_SAI'
-    end
-    object cdsEstoque_MovCNPJ_CPF: TStringField
-      FieldName = 'CNPJ_CPF'
-      Size = 18
-    end
-    object cdsEstoque_MovCODCFOP: TStringField
-      FieldName = 'CODCFOP'
-      Size = 5
-    end
-    object cdsEstoque_MovNOME_GRUPO: TStringField
-      FieldName = 'NOME_GRUPO'
-      Size = 40
-    end
-    object cdsEstoque_MovNOME_COR: TStringField
-      FieldName = 'NOME_COR'
-      Size = 60
-    end
-    object cdsEstoque_MovID_LOCAL_ESTOQUE: TIntegerField
-      FieldName = 'ID_LOCAL_ESTOQUE'
-    end
-    object cdsEstoque_MovNOME_LOCAL: TStringField
-      FieldName = 'NOME_LOCAL'
-      Size = 60
-    end
-    object cdsEstoque_MovCOD_LOCAL: TIntegerField
-      FieldName = 'COD_LOCAL'
-    end
-    object cdsEstoque_MovNUM_LOTE_CONTROLE: TStringField
-      FieldName = 'NUM_LOTE_CONTROLE'
-    end
-    object cdsEstoque_MovGERAR_CUSTO: TStringField
-      FieldName = 'GERAR_CUSTO'
-      FixedChar = True
-      Size = 1
-    end
-    object cdsEstoque_MovPRECO_CUSTO: TFloatField
-      FieldName = 'PRECO_CUSTO'
-      DisplayFormat = '0.00###'
-    end
-    object cdsEstoque_MovPRECO_CUSTO_TOTAL: TFloatField
-      FieldName = 'PRECO_CUSTO_TOTAL'
-      DisplayFormat = '0.000##'
-    end
-    object cdsEstoque_MovID_CENTROCUSTO: TIntegerField
-      FieldName = 'ID_CENTROCUSTO'
-    end
-    object cdsEstoque_MovNOME_CENTROCUSTO: TStringField
-      FieldName = 'NOME_CENTROCUSTO'
-      Size = 50
-    end
-    object cdsEstoque_MovVLR_TOTAL: TFloatField
-      FieldName = 'VLR_TOTAL'
-    end
-    object cdsEstoque_MovCODIGO_GRUPO: TStringField
-      FieldName = 'CODIGO_GRUPO'
-    end
-    object cdsEstoque_MovMOTIVO: TStringField
-      FieldName = 'MOTIVO'
-      Size = 100
-    end
-    object cdsEstoque_MovCODIGO_CCUSTO: TStringField
-      FieldName = 'CODIGO_CCUSTO'
-    end
-    object cdsEstoque_MovCODIGO_SUPERIOR: TStringField
-      FieldName = 'CODIGO_SUPERIOR'
-    end
-    object cdsEstoque_MovDESC_SUPERIOR: TStringField
-      FieldName = 'DESC_SUPERIOR'
-      Size = 50
-    end
-    object cdsEstoque_MovREF_PROD_FORNECEDOR: TStringField
-      FieldName = 'REF_PROD_FORNECEDOR'
-    end
   end
   object dsEstoque_Mov: TDataSource
     DataSet = cdsEstoque_Mov
@@ -4277,5 +4098,201 @@ object DMConsEstoque: TDMConsEstoque
     DataSet = cdsCompras
     Left = 392
     Top = 514
+  end
+  object cdsEstoque_Mov: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspEstoque_Mov'
+    Left = 149
+    Top = 151
+    object cdsEstoque_MovID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsEstoque_MovFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+    object cdsEstoque_MovID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsEstoque_MovID_COR: TIntegerField
+      FieldName = 'ID_COR'
+    end
+    object cdsEstoque_MovDTMOVIMENTO: TDateField
+      FieldName = 'DTMOVIMENTO'
+    end
+    object cdsEstoque_MovTIPO_ES: TStringField
+      FieldName = 'TIPO_ES'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsEstoque_MovTIPO_MOV: TStringField
+      FieldName = 'TIPO_MOV'
+      Size = 5
+    end
+    object cdsEstoque_MovNUMNOTA: TIntegerField
+      FieldName = 'NUMNOTA'
+    end
+    object cdsEstoque_MovID_PESSOA: TIntegerField
+      FieldName = 'ID_PESSOA'
+    end
+    object cdsEstoque_MovVLR_UNITARIO: TFloatField
+      FieldName = 'VLR_UNITARIO'
+    end
+    object cdsEstoque_MovQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsEstoque_MovPERC_ICMS: TFloatField
+      FieldName = 'PERC_ICMS'
+    end
+    object cdsEstoque_MovPERC_IPI: TFloatField
+      FieldName = 'PERC_IPI'
+    end
+    object cdsEstoque_MovVLR_DESCONTO: TFloatField
+      FieldName = 'VLR_DESCONTO'
+    end
+    object cdsEstoque_MovUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object cdsEstoque_MovQTD2: TFloatField
+      FieldName = 'QTD2'
+    end
+    object cdsEstoque_MovTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+    object cdsEstoque_MovPERC_TRIBUTACAO: TFloatField
+      FieldName = 'PERC_TRIBUTACAO'
+    end
+    object cdsEstoque_MovVLR_FRETE: TFloatField
+      FieldName = 'VLR_FRETE'
+    end
+    object cdsEstoque_MovID_CFOP: TIntegerField
+      FieldName = 'ID_CFOP'
+    end
+    object cdsEstoque_MovID_NOTA: TIntegerField
+      FieldName = 'ID_NOTA'
+    end
+    object cdsEstoque_MovSERIE: TStringField
+      FieldName = 'SERIE'
+      Size = 3
+    end
+    object cdsEstoque_MovUNIDADE_ORIG: TStringField
+      FieldName = 'UNIDADE_ORIG'
+      Size = 6
+    end
+    object cdsEstoque_MovVLR_UNITARIOORIG: TFloatField
+      FieldName = 'VLR_UNITARIOORIG'
+    end
+    object cdsEstoque_MovQTD_ORIG: TFloatField
+      FieldName = 'QTD_ORIG'
+    end
+    object cdsEstoque_MovVLR_DESCONTOORIG: TFloatField
+      FieldName = 'VLR_DESCONTOORIG'
+    end
+    object cdsEstoque_MovMERCADO: TStringField
+      FieldName = 'MERCADO'
+      Size = 1
+    end
+    object cdsEstoque_MovID_CENTROCUSTO: TIntegerField
+      FieldName = 'ID_CENTROCUSTO'
+    end
+    object cdsEstoque_MovQTD_ENT: TFloatField
+      FieldName = 'QTD_ENT'
+    end
+    object cdsEstoque_MovQTD_SAI: TFloatField
+      FieldName = 'QTD_SAI'
+    end
+    object cdsEstoque_MovTESTE: TStringField
+      FieldName = 'TESTE'
+      Size = 10
+    end
+    object cdsEstoque_MovID_CUPOM: TIntegerField
+      FieldName = 'ID_CUPOM'
+    end
+    object cdsEstoque_MovID_LOCAL_ESTOQUE: TIntegerField
+      FieldName = 'ID_LOCAL_ESTOQUE'
+    end
+    object cdsEstoque_MovNUM_LOTE_CONTROLE: TStringField
+      FieldName = 'NUM_LOTE_CONTROLE'
+    end
+    object cdsEstoque_MovGERAR_CUSTO: TStringField
+      FieldName = 'GERAR_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsEstoque_MovPRECO_CUSTO_TOTAL: TFloatField
+      FieldName = 'PRECO_CUSTO_TOTAL'
+    end
+    object cdsEstoque_MovVLR_AJUSTE_CUSTO: TFloatField
+      FieldName = 'VLR_AJUSTE_CUSTO'
+    end
+    object cdsEstoque_MovID_OPERACAO: TIntegerField
+      FieldName = 'ID_OPERACAO'
+    end
+    object cdsEstoque_MovREF_PROD_FORNECEDOR: TStringField
+      FieldName = 'REF_PROD_FORNECEDOR'
+    end
+    object cdsEstoque_MovNOMEPESSOA: TStringField
+      FieldName = 'NOMEPESSOA'
+      Size = 60
+    end
+    object cdsEstoque_MovNOMEPRODUTO: TStringField
+      FieldName = 'NOMEPRODUTO'
+      Size = 100
+    end
+    object cdsEstoque_MovREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsEstoque_MovCNPJ_CPF: TStringField
+      FieldName = 'CNPJ_CPF'
+    end
+    object cdsEstoque_MovCODCFOP: TStringField
+      FieldName = 'CODCFOP'
+      Size = 5
+    end
+    object cdsEstoque_MovNOME_GRUPO: TStringField
+      FieldName = 'NOME_GRUPO'
+      Size = 40
+    end
+    object cdsEstoque_MovNOME_COR: TStringField
+      FieldName = 'NOME_COR'
+      Size = 60
+    end
+    object cdsEstoque_MovNOME_LOCAL: TStringField
+      FieldName = 'NOME_LOCAL'
+      Size = 60
+    end
+    object cdsEstoque_MovCOD_LOCAL: TIntegerField
+      FieldName = 'COD_LOCAL'
+    end
+    object cdsEstoque_MovPRECO_CUSTO: TFloatField
+      FieldName = 'PRECO_CUSTO'
+    end
+    object cdsEstoque_MovNOME_CENTROCUSTO: TStringField
+      FieldName = 'NOME_CENTROCUSTO'
+      Size = 50
+    end
+    object cdsEstoque_MovCODIGO_GRUPO: TStringField
+      FieldName = 'CODIGO_GRUPO'
+    end
+    object cdsEstoque_MovMOTIVO: TStringField
+      FieldName = 'MOTIVO'
+      Size = 100
+    end
+    object cdsEstoque_MovCODIGO_CCUSTO: TStringField
+      FieldName = 'CODIGO_CCUSTO'
+    end
+    object cdsEstoque_MovCODIGO_SUPERIOR: TStringField
+      FieldName = 'CODIGO_SUPERIOR'
+    end
+    object cdsEstoque_MovDESC_SUPERIOR: TStringField
+      FieldName = 'DESC_SUPERIOR'
+      Size = 50
+    end
+    object cdsEstoque_MovVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+    end
   end
 end
