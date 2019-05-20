@@ -134,6 +134,7 @@ begin
     fDMCadPedido.cdsPedido_ItensQTD_PECA.AsInteger      := 0;
     fDMCadPedido.cdsPedido_ItensQTD_PRODUZIDA.AsInteger := 0;
     fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat    := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
+    fDMCadPedido.cdsPedido_ItensID_MOVESTOQUE.AsInteger := 0;
     if CheckBox1.Checked then
       fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime := DateEdit1.Date;
     fDMCadPedido.cdsPedido_Itens.Post;

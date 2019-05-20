@@ -243,7 +243,19 @@ begin
   if fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger <> fDMCadNotaFiscal.cdsFilialID.AsInteger then
     fDMCadNotaFiscal.cdsFilial.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger,[loCaseInsensitive]);
 
-  fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString   := 'S';
+  //20/05/2019  Vai controlar o estoque pelo Parâmetros
+  //fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString   := 'S';
+  if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE_PED.AsInteger > 0 then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N'
+  else
+  begin
+    if (fDMCadNotaFiscal.cdsParametrosTIPO_ESTOQUE.AsString = 'B') or (fDMCadNotaFiscal.cdsParametrosTIPO_ESTOQUE.AsString = 'P') then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N'
+    else
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'S';
+  end;
+  if fDMCadNotaFiscal.cdsProdutoESTOQUE.AsString = 'N' then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
   fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_DUPLICATA.AsString := 'S';
 
   if (fDMCadNotaFiscal.vState_Item = 'I') or (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsInsert]) then
