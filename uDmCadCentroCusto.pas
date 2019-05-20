@@ -181,6 +181,9 @@ begin
     vMsgCentroCusto := '*** Nome não informado!';
   if (trim(cdsCentroCustoCODIGO.AsString) = '') then
     vMsgCentroCusto := vMsgCentroCusto + #13 + '*** Código do Centro de Custo não informado!';
+  if SQLLocate('CENTROCUSTO','CODIGO','CODIGO',cdsCentroCustoCODIGO.AsString) = cdsCentroCustoCODIGO.AsString then
+    vMsgCentroCusto := vMsgCentroCusto + #13 + '*** Código do Centro de Custo já existe!';
+
   if vMsgCentroCusto <> '' then
     exit;
   i := pos('.',cdsCentroCustoCODIGO.AsString);

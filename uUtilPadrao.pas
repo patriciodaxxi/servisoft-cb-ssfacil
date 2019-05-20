@@ -1708,7 +1708,7 @@ begin
     MyQuery.Close;
     MyQuery.SQL.Clear ;
     MyQuery.SQL.Add('select ' + CampoRetorno + ' from ' + Tabela) ;
-    MyQuery.SQL.Add('where  ' + CampoProcura + ' = ' + ValorFind) ;
+    MyQuery.SQL.Add('where  ' + CampoProcura + ' = ' + QuotedStr(ValorFind));
     MyQuery.Open ;
     if not MyQuery.EOF then
       SQLLocate := MyQuery.FieldByName(CampoRetorno).AsString
