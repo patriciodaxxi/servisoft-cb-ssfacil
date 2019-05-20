@@ -167,6 +167,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         DataField = 'ID_PRODUTO'
         DataSource = DMCadPedido.dsPedido_Itens
         TabOrder = 0
+        OnEnter = DBEdit15Enter
         OnKeyDown = DBEdit15KeyDown
       end
     end
