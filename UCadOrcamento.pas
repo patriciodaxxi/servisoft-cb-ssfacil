@@ -208,6 +208,7 @@ type
     DBEdit29: TDBEdit;
     Label44: TLabel;
     DBEdit30: TDBEdit;
+    SalvarOramento1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -272,6 +273,7 @@ type
     procedure SpeedButton8Click(Sender: TObject);
     procedure pnlObservacaoEnter(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
+    procedure SalvarOramento1Click(Sender: TObject);
   private
     { Private declarations }
     vVlrFreteAnt: Real;
@@ -1730,6 +1732,36 @@ begin
   else
   begin
     ShowMessage('Relatório não definido no cadastro da empresa (filial)!');
+  end;
+end;
+
+procedure TfrmCadOrcamento.SalvarOramento1Click(Sender: TObject);
+var
+  vCaminhoArquivo : String;
+begin
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
+    exit;
+
+  prc_Posiciona_Imp;
+  vCaminhoArquivo := SQLLocate('PARAMETROS_PED','ID','END_PDF_PEDIDO','1');
+  if vCaminhoArquivo = '' then
+  begin
+    ShowMessage('Caminho do arquivo não definido nos parâmetros');
+    Exit;
+  end;
+
+  if fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S' then
+  begin
+    fRelOrcamento_JW              := TfRelOrcamento_JW.Create(Self);
+    fRelOrcamento_JW.vImp_Foto    := ckImpFoto.Checked;
+    fRelOrcamento_JW.vImp_Peso    := ckImpPeso.Checked;
+    fRelOrcamento_JW.fDMCadPedido := fDMCadPedido;
+    fRelOrcamento_JW.RLPDFFilter1.FileName := vCaminhoArquivo + '\Orçamento_' + fDMCadPedido.cdsPedidoImpNUM_ORCAMENTO.AsString + '.pdf';
+    fRelOrcamento_JW.RLReport1.SaveToFile(vCaminhoArquivo + '\Orçamento_' + fDMCadPedido.cdsPedidoImpNUM_ORCAMENTO.AsString + '.pdf');
+    fRelOrcamento_JW.RLReport1.Prepare;
+    ShowMessage('Arquivo Gerado com Sucesso');
+    fRelOrcamento_JW.RLReport1.Free;
+    FreeAndNil(fRelOrcamento_JW);
   end;
 end;
 

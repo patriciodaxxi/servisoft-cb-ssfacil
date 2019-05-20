@@ -4005,7 +4005,9 @@ begin
     vSituacao := 'A'
   else
   if (qSituacao_OrcNAO_APROVADO.AsInteger > 0) AND (qSituacao_OrcPENDENTE.AsInteger <= 0) then
-    vSituacao := 'N';
+    vSituacao := 'N'
+  else
+    vSituacao := 'P';
 
   sds := TSQLDataSet.Create(nil);
   sds.SQLConnection := dmDatabase.scoDados;

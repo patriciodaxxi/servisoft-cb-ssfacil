@@ -1551,4 +1551,9 @@ object fRelOrcamento_JW: TfRelOrcamento_JW
       end
     end
   end
+  object RLPDFFilter1: TRLPDFFilter
+    DisplayName = 'Documento PDF'
+    Left = 874
+    Top = 130
+  end
 end

@@ -4441,8 +4441,8 @@ begin
     fRelPedido_JW.vImpPreco    := ckImpPreco.Checked;
     fRelPedido_JW.vImp_Peso    := ckImpPeso.Checked;
     fRelPedido_JW.fDMCadPedido := fDMCadPedido;
-    fRelPedido_JW.RLPDFFilter1.FileName := vCaminhoArquivo + '\Pedido_' + fDMCadPedido.cdsPedidoImpPEDIDO_CLIENTE.AsString + '.pdf';
-    fRelPedido_JW.RLReport1.SaveToFile(vCaminhoArquivo + '\Pedido_' + fDMCadPedido.cdsPedidoImpPEDIDO_CLIENTE.AsString + '.pdf');
+    fRelPedido_JW.RLPDFFilter1.FileName := vCaminhoArquivo + '\Pedido_' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString + '.pdf';
+    fRelPedido_JW.RLReport1.SaveToFile(vCaminhoArquivo + '\Pedido_' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString + '.pdf');
     fRelPedido_JW.RLReport1.Prepare;
     ShowMessage('Arquivo Gerado com Sucesso');
     FreeAndNil(fRelPedido_JW);
