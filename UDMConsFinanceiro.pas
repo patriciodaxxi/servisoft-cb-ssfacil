@@ -346,7 +346,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    ctConsulta_Conta_Orc, ctConsulta_Conta_Orc_Dt, ctConsulta_Conta_Orc_CCusto, ctCCustoOrcamento : String;
+    ctConsulta_Conta_Orc, ctConsulta_Conta_Orc_Dt, ctConsulta_Conta_Orc_CCus, ctCCustoOrcamento : String;
     ctDespesa : String;
     ctOC_Pendente : String;
     ctDuplicata_Det : String;
@@ -382,9 +382,9 @@ uses DmdDatabase;
 procedure TDMConsFinanceiro.DataModuleCreate(Sender: TObject);
 begin
   cdsFilial.Open;
-  ctConsulta_Conta_Orc    := sdsConsulta_Conta_Orc.CommandText;
-  ctConsulta_Conta_Orc_CCusto := sdsConsulta_Conta_Orc_CCus.CommandText;
-  ctConsulta_Conta_Orc_Dt := sdsConsulta_Conta_Orc_Dt.CommandText;
+  ctConsulta_Conta_Orc      := sdsConsulta_Conta_Orc.CommandText;
+  ctConsulta_Conta_Orc_CCus := sdsConsulta_Conta_Orc_CCus.CommandText;
+  ctConsulta_Conta_Orc_Dt  := sdsConsulta_Conta_Orc_Dt.CommandText;
   ctCCustoOrcamento       := sdsCCustoOrcamento.CommandText;
   ctDespesa               := sdsDespesa.CommandText;
   ctOC_Pendente           := sdsOC_Pendente.CommandText;

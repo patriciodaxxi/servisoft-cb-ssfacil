@@ -1,8 +1,7 @@
 object DMConsFinanceiro: TDMConsFinanceiro
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 577
-  Top = 29
+  Left = 239
   Height = 653
   Width = 874
   object sdsFilial: TSQLDataSet
@@ -1670,10 +1669,9 @@ object DMConsFinanceiro: TDMConsFinanceiro
       '.ID_CONTA_ORCAMENTO = ORC.ID'#13#10'left join DUPLICATA_CCUSTO DCCUS o' +
       'n DCCUS.ID = DUP.ID and (DCCUS.VALOR > 0)'#13#10'left join CENTROCUSTO' +
       ' CC on CC.ID = DCCUS.ID_CENTROCUSTO'#13#10'where DUP.TIPO_MOV <> '#39'H'#39' a' +
-      'nd'#13#10'      DUP.FILIAL = 1 and'#13#10'      DUP.DTVENCIMENTO between '#39'01' +
-      '/01/2019'#39' and '#39'03/31/2019'#39#13#10'GROUP BY DUP.TIPO_ES, ORC.DESCRICAO,' +
-      ' ORC.CODIGO, DUP.ID_CONTA_ORCAMENTO, ORC.SUPERIOR, ORC.NIVEL,'#13#10' ' +
-      '        DCCUS.ID_CENTROCUSTO, CC.DESCRICAO, CC.CODIGO, CC.NIVEL'
+      'nd'#13#10'      DUP.FILIAL = 1'#13#10'GROUP BY DUP.TIPO_ES, ORC.DESCRICAO, O' +
+      'RC.CODIGO, DUP.ID_CONTA_ORCAMENTO, ORC.SUPERIOR, ORC.NIVEL,'#13#10'   ' +
+      '      DCCUS.ID_CENTROCUSTO, CC.DESCRICAO, CC.CODIGO, CC.NIVEL'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

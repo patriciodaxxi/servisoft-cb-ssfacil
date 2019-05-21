@@ -155,6 +155,8 @@ begin
 
   cdsFinanceiroTIPO_ES.AsString   := vTipo_ES;
   cdsFinanceiroID_CONTA.AsInteger := vID_Conta;
+  if cdsFinanceiroID_CONTA.AsInteger <= 0 then
+    cdsFinanceiroID_CONTA.Clear;
   if vTerminal <= 0 then
     cdsFinanceiroID_TERMINAL.Clear
   else

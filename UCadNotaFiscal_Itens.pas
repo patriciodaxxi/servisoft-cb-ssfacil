@@ -596,7 +596,7 @@ begin
   else
   begin
     //13/01/2018  Foi incluido essa alteração para a RGB que esta fazendo baixa do estoque pela conferência do pedido (Cód. Barra)
-    if fDMCadNotaFiscal.cdsParametrosTIPO_ESTOQUE.AsString = 'B' then
+    if (fDMCadNotaFiscal.cdsParametrosTIPO_ESTOQUE.AsString = 'B') or (fDMCadNotaFiscal.cdsParametrosTIPO_ESTOQUE.AsString = 'P') then
       fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N'
     else
       fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fDMCadNotaFiscal.cdsCFOPGERAR_ESTOQUE.AsString;

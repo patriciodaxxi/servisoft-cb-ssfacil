@@ -1,6 +1,6 @@
 object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
-  Left = 286
-  Top = 65
+  Left = 131
+  Top = 50
   Width = 1169
   Height = 533
   Caption = 'frmConsCtaOrcamento_Fin'
@@ -18,7 +18,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1153
+    Width = 1161
     Height = 137
     Align = alTop
     Color = clSilver
@@ -348,8 +348,8 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   end
   object StaticText1: TStaticText
     Left = 0
-    Top = 477
-    Width = 1153
+    Top = 485
+    Width = 1161
     Height = 17
     Align = alBottom
     Caption = 'Duplo Clique para detalhar'
@@ -364,11 +364,11 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 137
-    Width = 1153
-    Height = 340
-    ActivePage = TS_Resumido
+    Width = 1161
+    Height = 348
+    ActivePage = ts_CentroCusto
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -377,8 +377,8 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 1149
-        Height = 290
+        Width = 1157
+        Height = 298
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFinanceiro.dsmConta_Orc
@@ -459,8 +459,8 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       end
       object Panel2: TPanel
         Left = 0
-        Top = 290
-        Width = 1149
+        Top = 298
+        Width = 1157
         Height = 27
         Align = alBottom
         TabOrder = 1
@@ -552,8 +552,8 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object SMDBGrid2: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 1149
-        Height = 317
+        Width = 1157
+        Height = 325
         Align = alClient
         DataSource = DMConsFinanceiro.dsmContas_Orc_CCusto
         Font.Charset = DEFAULT_CHARSET
@@ -650,15 +650,15 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 1149
-        Height = 317
+        Width = 1157
+        Height = 325
         Align = alClient
         TabOrder = 0
         object SMDBGrid3: TSMDBGrid
           Left = 1
           Top = 1
-          Width = 1147
-          Height = 315
+          Width = 1155
+          Height = 323
           Align = alClient
           DataSource = DMConsFinanceiro.dsCCustoOrcamento
           Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]

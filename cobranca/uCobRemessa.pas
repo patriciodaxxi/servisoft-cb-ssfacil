@@ -921,8 +921,17 @@ begin
     //DataMoraJuros     := null;
     DataDesconto := 0;
     DataAbatimento := 0;
-    DataProtesto := fDmCob_Eletronica.cdsDuplicataDTVENCIMENTO.AsDateTime + fDmCob_Eletronica.cdsContasDIAS_PROTESTO.AsInteger;
-    QtdDiaProtesto := fDmCob_Eletronica.cdsContasDIAS_PROTESTO.AsInteger;
+
+    if SQLLocate('PESSOA','CODIGO','GERAR_PROTESTO',fDmCob_Eletronica.cdsDuplicataID_PESSOA.AsString) = 'N' then
+    begin
+      DataProtesto := fDmCob_Eletronica.cdsDuplicataDTVENCIMENTO.AsDateTime;
+      QtdDiaProtesto := 0;
+    end
+    else
+    begin
+      DataProtesto := fDmCob_Eletronica.cdsDuplicataDTVENCIMENTO.AsDateTime + fDmCob_Eletronica.cdsContasDIAS_PROTESTO.AsInteger;
+      QtdDiaProtesto := fDmCob_Eletronica.cdsContasDIAS_PROTESTO.AsInteger;
+    end;
 
     vTipoProtesto := fDmCob_Eletronica.fnc_busca_tipo_instrucao(fDmCob_Eletronica.cdsContasID_BANCO.AsInteger,
                                                                 fDmCob_Eletronica.cdsContasID_INSTRUCAO1.AsInteger,
@@ -965,6 +974,12 @@ begin
       else
         Instrucao2 := padL(trim(fDmCob_Eletronica.cdsCob_Tipo_CadastroCODIGO.AsString), 2, '0');
     end;
+
+    //20/05/2019 - Gera sem instrução quando tiver Gerar_Protesto "N" no Cadastro Cliente - Bradesco (outros bancos controlam de outra maneira o protesto)
+    if SQLLocate('PESSOA','CODIGO','GERAR_PROTESTO',fDmCob_Eletronica.cdsDuplicataID_PESSOA.AsString) = 'N' then
+      if ACBrBoleto1.Banco.Numero = 237 then
+        Instrucao1 := '00';
+
     //05/12/2014
     if (fDmCob_Eletronica.cdsContasTIPO_IMPRESSAO.AsString = 'C') or (fDmCob_Eletronica.cdsContasCOD_BANCO.AsString <> '748') then
       Parcela := fDmCob_Eletronica.cdsDuplicataPARCELA.AsInteger

@@ -132,13 +132,11 @@ begin
     end;
   end;
 
-  fDMConsFinanceiro.mConta_Orc.EmptyDataSet;
-  fDMConsFinanceiro.mContas_Orc_CCusto.EmptyDataSet;
-
   fDMConsFinanceiro.vTotal_Desp := 0;
   fDMConsFinanceiro.vTotal_Rec := 0;
   if RzPageControl1.ActivePage = TS_Resumido then
   begin
+    fDMConsFinanceiro.mConta_Orc.EmptyDataSet;
     prc_Consultar;
     prc_Le_Consulta;
     //prc_Le_Pedido_Pend;
@@ -146,8 +144,10 @@ begin
     fDMConsFinanceiro.mConta_Orc.IndexFieldNames := 'TIPO_ES;CODIGO';
   end
   else
-  if RzPageControl1.ActivePage = TS_Resumido then
+  //if RzPageControl1.ActivePage = TS_Resumido then
+  if RzPageControl1.ActivePage = ts_CentroCusto then
   begin
+    fDMConsFinanceiro.mContas_Orc_CCusto.EmptyDataSet;
     prc_Consultar_CCusto;
     prc_Le_Consulta_CCusto;
     fDMConsFinanceiro.mContas_Orc_CCusto.IndexFieldNames := 'TIPO_ES;CODIGO';
@@ -157,8 +157,6 @@ begin
     prc_Consultar_CCusto_Orcamento;
     prc_Consultar_Resumo_CCusto;
   end;
-
-
   Label6.Caption := FormatFloat('###,###,###,###,##0.00', fDMConsFinanceiro.vTotal_Rec);
   Label8.Caption := FormatFloat('###,###,###,###,##0.00', fDMConsFinanceiro.vTotal_Desp);
   vAux := StrToFloat(FormatFloat('0.00', fDMConsFinanceiro.vTotal_Rec - fDMConsFinanceiro.vTotal_Desp));
@@ -186,7 +184,7 @@ begin
   if RxDBLookupCombo1.Text <> '' then
     vComando := vComando + ' AND DUP.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
   if NxComboBox2.ItemIndex = 0 then
-    vComando := vComando + ' AND DUP.DTEMISSAO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date))
+    vComando := vComando + ' AND DUP.DTULTPAGAMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date))
   else if NxComboBox2.ItemIndex = 1 then
     vComando := vComando + ' AND DUP.DTVENCIMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date));
 
@@ -642,15 +640,15 @@ var
   i: Integer;
 begin
   fDMConsFinanceiro.cdsConsulta_Conta_Orc_CCus.Close;
-  i := PosEx('GROUP', fDMConsFinanceiro.ctConsulta_Conta_Orc_CCusto, 0);
-  vComandoAux := copy(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCusto, i, Length(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCusto) - i + 1);
-  vComandoAux2 := copy(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCusto, 1, i - 1);
+  i := PosEx('GROUP', fDMConsFinanceiro.ctConsulta_Conta_Orc_CCus, 0);
+  vComandoAux := copy(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCus, i, Length(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCus) - i + 1);
+  vComandoAux2 := copy(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCus, 1, i - 1);
 
   //vComando := ' WHERE 0 = 0 ';
   if RxDBLookupCombo1.Text <> '' then
     vComando := vComando + ' AND DUP.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
   if NxComboBox2.ItemIndex = 0 then
-    vComando := vComando + ' AND DUP.DTEMISSAO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date))
+    vComando := vComando + ' AND DUP.DTULTPAGAMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date))
   else if NxComboBox2.ItemIndex = 1 then
     vComando := vComando + ' AND DUP.DTVENCIMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date));
 
@@ -730,7 +728,7 @@ var
   i : Integer;
 begin
   fDMConsFinanceiro.cdsCCustoOrcamento.Close;
-  i := PosEx('GROUP', fDMConsFinanceiro.ctCCustoOrcamento, 0);
+  i := PosEx('GROUP', UpperCase( fDMConsFinanceiro.ctCCustoOrcamento), 0);
   vComandoAux := copy(fDMConsFinanceiro.ctCCustoOrcamento, i, Length(fDMConsFinanceiro.ctCCustoOrcamento) - i + 1);
   vComandoAux2 := copy(fDMConsFinanceiro.ctCCustoOrcamento, 1, i - 1);
   vComando := '';

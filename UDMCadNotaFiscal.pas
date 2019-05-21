@@ -3797,6 +3797,8 @@ begin
   //Tirado no dia 30/07/2013 pois o valor de entrada vai ser gravado na tabela NOTAFISCAL_PARC como parcela = 0
   //if (cdsNotaFiscalTIPO_REG.AsString = 'NTS') and (StrToFloat(formatFloat('0.00',cdsNotaFiscalVLR_ENTRADA.AsFloat)) > 0) and (cdsNotaFiscalID_CONTA.AsInteger <= 0) then
   //  vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Nota possui valor de entrada, precisa informar a conta/banco para lançamento no financeiro!';
+  if (cdsNotaFiscalTIPO_PRAZO.AsString = 'V') and (cdsNotaFiscalID_CONTA.AsInteger <= 0) then
+    vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Nota é a Vista , precisa informar a conta/banco para lançamento no financeiro!';
   if (cdsNotaFiscalTIPO_REG.AsString = 'NTS') and (cdsNotaFiscalTIPO_PRAZO.AsString = 'V') and (cdsNotaFiscalID_CONTA.AsInteger <= 0) then
     vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Nota é A Vista, precisa informar a conta/banco para lançamento no financeiro!';
   if trim(cdsFilialSERIENORMAL.AsString) = '' then

@@ -609,6 +609,11 @@ object DMCadPessoa: TDMCadPessoa
       FixedChar = True
       Size = 1
     end
+    object sdsPessoaGERAR_PROTESTO: TStringField
+      FieldName = 'GERAR_PROTESTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
@@ -1264,6 +1269,11 @@ object DMCadPessoa: TDMCadPessoa
     end
     object cdsPessoaIMP_ETIQUETA_ROT: TStringField
       FieldName = 'IMP_ETIQUETA_ROT'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPessoaGERAR_PROTESTO: TStringField
+      FieldName = 'GERAR_PROTESTO'
       FixedChar = True
       Size = 1
     end

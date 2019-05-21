@@ -1231,6 +1231,8 @@ type
     qParametros_ComUSA_CONFIG_IND: TStringField;
     sdsPessoaIMP_ETIQUETA_ROT: TStringField;
     cdsPessoaIMP_ETIQUETA_ROT: TStringField;
+    sdsPessoaGERAR_PROTESTO: TStringField;
+    cdsPessoaGERAR_PROTESTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
