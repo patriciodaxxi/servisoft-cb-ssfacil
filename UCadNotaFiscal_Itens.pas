@@ -192,6 +192,10 @@ type
     DBEdit40: TDBEdit;
     Label65: TLabel;
     DBEdit36: TDBEdit;
+    lblContaOrc: TLabel;
+    RxDBlkContaOrc: TRxDBLookupCombo;
+    RxDBlkCCusto: TRxDBLookupCombo;
+    lblCCusto: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
@@ -507,6 +511,12 @@ begin
     DBEdit5.ReadOnly := ((fDMCadNotaFiscal.qParametros_UsuarioALT_PRECO_PED.AsString <> 'S') and (fDMCadNotaFiscal.qParametros_UsuarioALT_PRECO_PED.AsString <> 'C'));
   //************
   pnlNomeProduto.Visible := (fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString = 'S');
+
+  //21/05/2019
+  lblContaOrc.Visible      := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
+  RxDBlkContaOrc.Visible   := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
+  lblCCusto.Visible        := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
+  RxDBlkCCusto.Visible     := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
 end;
 
 procedure TfrmCadNotaFiscal_Itens.prc_Buscar_Imposto(Auxiliar, Nome: String);

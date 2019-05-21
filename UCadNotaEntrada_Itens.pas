@@ -45,8 +45,8 @@ type
     Label11: TLabel;
     Label13: TLabel;
     Label14: TLabel;
-    Label9: TLabel;
-    Label15: TLabel;
+    lblContaOrc: TLabel;
+    lblCCusto: TLabel;
     Label16: TLabel;
     Label17: TLabel;
     lblTamanho: TLabel;
@@ -62,8 +62,8 @@ type
     RxDBLookupCombo5: TRxDBLookupCombo;
     DBEdit7: TDBEdit;
     DBEdit8: TDBEdit;
-    RxDBLookupCombo6: TRxDBLookupCombo;
-    RxDBLookupCombo7: TRxDBLookupCombo;
+    RxDBlkContaOrc: TRxDBLookupCombo;
+    RxDBlkCCusto: TRxDBLookupCombo;
     DBMemo1: TDBMemo;
     btnGrade: TNxButton;
     dblcTamanho: TRxDBLookupCombo;
@@ -225,10 +225,10 @@ begin
   Panel4.Visible   := (fDMCadNotaFiscal.qParametros_NTEMOSTRAR_FINALIDADE.AsString = 'S');
   if Panel4.Visible then
     Panel4.TabOrder := 1;
-  Label9.Visible           := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
-  RxDBLookupCombo6.Visible := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
-  Label15.Visible          := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
-  RxDBLookupCombo7.Visible := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
+  lblContaOrc.Visible      := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
+  RxDBlkContaOrc.Visible   := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
+  lblCCusto.Visible        := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
+  RxDBlkCCusto.Visible     := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
 end;
 
 procedure TfrmCadNotaEntrada_Itens.Panel2Enter(Sender: TObject);

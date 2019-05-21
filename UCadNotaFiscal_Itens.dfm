@@ -1,8 +1,8 @@
 object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
   Left = 273
-  Top = 75
+  Top = 60
   Width = 800
-  Height = 640
+  Height = 655
   BorderIcons = [biSystemMenu]
   Caption = 'Cadastro dos Itens da Nota'
   Color = clBtnFace
@@ -22,7 +22,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 575
+    Top = 590
     Width = 792
     Height = 34
     Align = alBottom
@@ -479,7 +479,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     Left = 0
     Top = 172
     Width = 792
-    Height = 403
+    Height = 418
     ActivePage = TabSheet1
     ActivePageDefault = TabSheet1
     Align = alClient
@@ -502,7 +502,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Left = 0
         Top = 22
         Width = 788
-        Height = 358
+        Height = 373
         Align = alClient
         BevelOuter = bvNone
         Caption = 'Panel6'
@@ -558,7 +558,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         end
         object Label2: TLabel
           Left = 6
-          Top = 321
+          Top = 345
           Width = 306
           Height = 26
           Caption = 
@@ -582,7 +582,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         end
         object Label39: TLabel
           Left = 99
-          Top = 228
+          Top = 208
           Width = 33
           Height = 13
           Alignment = taRightJustify
@@ -590,7 +590,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         end
         object Label40: TLabel
           Left = 315
-          Top = 228
+          Top = 208
           Width = 82
           Height = 13
           Alignment = taRightJustify
@@ -598,7 +598,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         end
         object Label42: TLabel
           Left = 7
-          Top = 272
+          Top = 296
           Width = 125
           Height = 13
           Alignment = taRightJustify
@@ -607,7 +607,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         end
         object Label43: TLabel
           Left = 47
-          Top = 294
+          Top = 318
           Width = 85
           Height = 13
           Alignment = taRightJustify
@@ -616,7 +616,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         end
         object Label57: TLabel
           Left = 51
-          Top = 250
+          Top = 230
           Width = 81
           Height = 13
           Alignment = taRightJustify
@@ -625,11 +625,27 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         end
         object Label64: TLabel
           Left = 323
-          Top = 250
+          Top = 230
           Width = 74
           Height = 13
           Alignment = taRightJustify
           Caption = 'N'#186' Lote Cliente:'
+        end
+        object lblContaOrc: TLabel
+          Left = 28
+          Top = 252
+          Width = 101
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Conta de Or'#231'amento:'
+        end
+        object lblCCusto: TLabel
+          Left = 50
+          Top = 273
+          Width = 79
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Centro de Custo:'
         end
         object DBEdit2: TDBEdit
           Left = 133
@@ -694,7 +710,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
           Left = 133
           Top = 111
           Width = 379
-          Height = 107
+          Height = 89
           Ctl3D = True
           DataField = 'OBS_COMPLEMENTAR'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
@@ -723,7 +739,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
           Font.Style = []
           ParentCtl3D = False
           ParentFont = False
-          TabOrder = 8
+          TabOrder = 16
           VisualStyle = vsGradient
           OnExit = gbxVendedorExit
           object Label3: TLabel
@@ -1217,53 +1233,53 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         end
         object DBEdit18: TDBEdit
           Left = 133
-          Top = 220
+          Top = 200
           Width = 115
           Height = 21
           Ctl3D = True
           DataField = 'NUMERO_OC'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           ParentCtl3D = False
-          TabOrder = 9
+          TabOrder = 8
         end
         object DBEdit19: TDBEdit
           Left = 398
-          Top = 220
+          Top = 200
           Width = 115
           Height = 21
           Ctl3D = True
           DataField = 'NUMERO_OS'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           ParentCtl3D = False
-          TabOrder = 10
+          TabOrder = 9
         end
         object DBEdit21: TDBEdit
           Left = 133
-          Top = 264
+          Top = 288
           Width = 380
           Height = 21
           Ctl3D = True
           DataField = 'NUM_FCI'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           ParentCtl3D = False
-          TabOrder = 11
+          TabOrder = 14
           Visible = False
         end
         object DBEdit22: TDBEdit
           Left = 133
-          Top = 286
+          Top = 310
           Width = 84
           Height = 21
           Ctl3D = True
           DataField = 'PERC_USADO_FCI'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           ParentCtl3D = False
-          TabOrder = 12
+          TabOrder = 15
           Visible = False
         end
         object DBEdit32: TDBEdit
           Left = 133
-          Top = 242
+          Top = 222
           Width = 180
           Height = 21
           CharCase = ecUpperCase
@@ -1271,19 +1287,47 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
           DataField = 'NUM_LOTE_CONTROLE'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           ParentCtl3D = False
-          TabOrder = 13
+          TabOrder = 10
           Visible = False
         end
         object DBEdit35: TDBEdit
           Left = 398
-          Top = 242
+          Top = 222
           Width = 115
           Height = 21
           Ctl3D = True
           DataField = 'NUM_TALAO'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           ParentCtl3D = False
-          TabOrder = 14
+          TabOrder = 11
+        end
+        object RxDBlkContaOrc: TRxDBLookupCombo
+          Left = 133
+          Top = 244
+          Width = 380
+          Height = 21
+          DropDownCount = 8
+          DropDownWidth = 550
+          DataField = 'CONTA_ORCAMENTO_ID'
+          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+          LookupField = 'ID'
+          LookupDisplay = 'DESCRICAO'
+          LookupSource = DMCadNotaFiscal.dsContaOrcamento
+          TabOrder = 12
+        end
+        object RxDBlkCCusto: TRxDBLookupCombo
+          Left = 133
+          Top = 266
+          Width = 380
+          Height = 21
+          DropDownCount = 8
+          DropDownWidth = 550
+          DataField = 'CENTRO_CUSTO_ID'
+          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+          LookupField = 'ID'
+          LookupDisplay = 'DESCRICAO'
+          LookupSource = DMCadNotaFiscal.dsCentroCusto
+          TabOrder = 13
         end
       end
       object pnlNomeProduto: TPanel
@@ -1323,7 +1367,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
       Caption = 'Impostos'
       DesignSize = (
         788
-        380)
+        395)
       object Label16: TLabel
         Left = 35
         Top = 23
@@ -2407,7 +2451,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Left = 0
         Top = 37
         Width = 788
-        Height = 343
+        Height = 358
         Align = alClient
         Ctl3D = False
         DataSource = DMCadNotaFiscal.dsNotaFiscal_DrawBack
