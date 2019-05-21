@@ -2207,7 +2207,9 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT EXIGIR_CONTA_ORC_DUP, CONTROLA_CONTRATO_CCUSTO'
+      
+        'SELECT EXIGIR_CONTA_ORC_DUP, CONTROLA_CONTRATO_CCUSTO, CAIXA_VIR' +
+        'A_NOITE'
       'FROM PARAMETROS_FIN')
     SQLConnection = dmDatabase.scoDados
     Left = 800
@@ -2219,6 +2221,11 @@ object DMCadFinanceiro: TDMCadFinanceiro
     end
     object qParametros_FinCONTROLA_CONTRATO_CCUSTO: TStringField
       FieldName = 'CONTROLA_CONTRATO_CCUSTO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_FinCAIXA_VIRA_NOITE: TStringField
+      FieldName = 'CAIXA_VIRA_NOITE'
       FixedChar = True
       Size = 1
     end
@@ -2409,5 +2416,25 @@ object DMCadFinanceiro: TDMCadFinanceiro
     BCDToCurrency = False
     Left = 800
     Top = 460
+  end
+  object qCaixaAberto: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'D1'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT TIPO_FECHAMENTO FROM FECHAMENTO WHERE DATA = :D1'
+      'ORDER BY ID DESC')
+    SQLConnection = dmDatabase.scoDados
+    Left = 656
+    Top = 128
+    object qCaixaAbertoTIPO_FECHAMENTO: TStringField
+      FieldName = 'TIPO_FECHAMENTO'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

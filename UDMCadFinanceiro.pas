@@ -370,6 +370,9 @@ type
     mReciboFinanceiro_VlrExtenso: TStringField;
     mReciboFilial_CNPJ: TStringField;
     qParametros_FinCONTROLA_CONTRATO_CCUSTO: TStringField;
+    qParametros_FinCAIXA_VIRA_NOITE: TStringField;
+    qCaixaAberto: TSQLQuery;
+    qCaixaAbertoTIPO_FECHAMENTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspFinanceiroUpdateError(Sender: TObject; DataSet: TCustomClientDataSet; E: EUpdateError; UpdateKind: TUpdateKind; var Response: TResolverResponse);
     procedure cdsFinanceiroBeforePost(DataSet: TDataSet);
