@@ -25,7 +25,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     Top = 0
     Width = 684
     Height = 478
-    ActivePage = TS_Chapas
+    ActivePage = TS_Porta
     ActivePageDefault = TS_Chapas
     Align = alClient
     BackgroundColor = 8404992
@@ -33,7 +33,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     UseColoredTabs = True
     ParentBackgroundColor = False
     ShowShadow = False
-    TabIndex = 0
+    TabIndex = 4
     TabOrder = 0
     TextColors.DisabledShadow = clActiveCaption
     TextColors.Selected = 8404992
@@ -752,7 +752,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Height = 21
         DataField = 'QTD'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 5
+        TabOrder = 6
         OnExit = DBEdit31Exit
       end
       object DBEdit32: TDBEdit
@@ -762,7 +762,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Height = 21
         DataField = 'VLR_UNITARIO'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 6
+        TabOrder = 7
       end
       object DBEdit33: TDBEdit
         Left = 104
@@ -771,7 +771,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Height = 21
         DataField = 'VLR_TOTAL'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 7
+        TabOrder = 8
       end
       object DBEdit28: TDBEdit
         Left = 104
@@ -791,7 +791,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Caption = 'Medidas'
         Color = clMoneyGreen
         FlatColor = clRed
-        TabOrder = 8
+        TabOrder = 5
         object Label49: TLabel
           Left = 20
           Top = 55
@@ -966,7 +966,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Height = 21
         DataField = 'QTD'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 3
+        TabOrder = 4
         OnExit = DBEdit36Exit
       end
       object DBEdit37: TDBEdit
@@ -976,7 +976,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Height = 21
         DataField = 'VLR_UNITARIO'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 4
+        TabOrder = 5
       end
       object DBEdit38: TDBEdit
         Left = 104
@@ -985,7 +985,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Height = 21
         DataField = 'VLR_TOTAL'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 5
+        TabOrder = 6
       end
       object RzGroupBox2: TRzGroupBox
         Left = 37
@@ -995,7 +995,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Caption = 'Medidas'
         Color = clMoneyGreen
         FlatColor = clRed
-        TabOrder = 6
+        TabOrder = 3
         object Label51: TLabel
           Left = 7
           Top = 61
