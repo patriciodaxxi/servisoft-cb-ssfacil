@@ -2508,63 +2508,63 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'ID_CONTA_ORCAMENTO'#13#10'where DD.DTVENCIMENTO between :DTINICIAL and' +
       ' :DTFINAL and'#13#10'      ((:ID_CENTROCUSTO = 0) or (DDCC.ID_CENTROCU' +
       'STO = :ID_CENTROCUSTO)) and'#13#10'      DDCC.ID_CENTROCUSTO > 0 and'#13#10 +
-      '      DD.FILIAL = :FILIAL'#13#10'group by CC.CODIGO, CC1.CODIGO, CC.DE' +
+      '      DD.FILIAL = :FILIAL'#13#10'GROUP by CC.CODIGO, CC1.CODIGO, CC.DE' +
       'SCRICAO, CO.CODIGO, DD.ID_CONTA_ORCAMENTO, CO.DESCRICAO, CC.VLR_' +
       'CONTRATO'#13#10'order by CC.CODIGO, CO.CODIGO'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID_CENTROCUSTO'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID_CENTROCUSTO'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID_CENTROCUSTO'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID_CENTROCUSTO'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'DTINICIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'DTFINAL'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID_CENTROCUSTO'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID_CENTROCUSTO'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end>

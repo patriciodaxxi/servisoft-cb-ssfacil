@@ -733,8 +733,9 @@ begin
   vComandoAux2 := copy(fDMConsFinanceiro.ctCCustoOrcamento, 1, i - 1);
   vComando := '';
   case EnumDataRelatorio(NxComboBox2.ItemIndex) of
-    tpDataEmissao    : vComandoAux2 := StringReplace(vComandoAux2,'DTVENCIMENTO','DTEMISSAO',[rfReplaceAll]);
-    tpDataPagamento : vComandoAux2 := StringReplace(vComandoAux2,'DTVENCIMENTO','DTULTPAGAMENTO',[rfReplaceAll]);
+    tpDataEmissao    : vComandoAux := StringReplace(vComandoAux,'DTVENCIMENTO','DTEMISSAO',[rfReplaceAll]);
+    tpDataVencimento : vComandoAux := StringReplace(vComandoAux,'DTVENCIMENTO','DTVENCIMENTO',[rfReplaceAll]);
+    tpDataPagamento  : vComandoAux := StringReplace(vComandoAux,'DTVENCIMENTO','DTULTPAGAMENTO',[rfReplaceAll]);
   end;
   case ComboBox1.ItemIndex of
     0: vComando := vComando + ' AND DD.VLR_PAGO > 0 ';
