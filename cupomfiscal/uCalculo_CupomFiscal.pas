@@ -466,7 +466,7 @@ begin
   end;
   fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat := 0;
   if StrToFloat(FormatFloat('0.0000',vPerc_Red)) > 0 then
-    fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat := StrToFloat(FormatFloat('0.0000',100 - vPerc_Red));
+    fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat := StrToFloat(FormatFloat('0.0000',vPerc_Red));
 
   fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat := vPerc_Interno;
 

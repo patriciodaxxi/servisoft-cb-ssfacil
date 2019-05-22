@@ -4228,7 +4228,7 @@ begin
   end;
   fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_BASE_RED_EFET.AsFloat := 0;
   if StrToFloat(FormatFloat('0.0000',vPerc_Red)) > 0 then
-    fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_BASE_RED_EFET.AsFloat := StrToFloat(FormatFloat('0.0000',100 - vPerc_Red));
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_BASE_RED_EFET.AsFloat := StrToFloat(FormatFloat('0.0000',vPerc_Red));
 
   fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_EFET.AsFloat := vPerc_Interno;
 
