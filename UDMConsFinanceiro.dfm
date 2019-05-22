@@ -1897,7 +1897,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43600.803400983800000000
+    ReportOptions.LastChange = 43607.774353657410000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'var'
@@ -2136,7 +2136,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 377.953000000000000000
+        Top = 411.968770000000000000
         Width = 718.110700000000000000
       end
       object ColumnHeader1: TfrxColumnHeader
@@ -2247,7 +2247,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       end
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
-        Height = 64.252010000000000000
+        Height = 52.913420000000000000
         Top = 253.228510000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'GroupFooter1OnBeforePrint'
@@ -2345,6 +2345,60 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Color = clBlack
           Frame.ShadowColor = clWhite
           Diagonal = True
+        end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 328.819110000000000000
+        Width = 718.110700000000000000
+        object Memo15: TfrxMemoView
+          Left = 98.267780000000000000
+          Top = 3.779530000000000000
+          Width = 68.031540000000000000
+          Height = 11.338590000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Memo.UTF8 = (
+            'Total Geral:')
+          ParentFont = False
+        end
+        object SysMemo3: TfrxSysMemoView
+          Left = 445.252320000000000000
+          Top = 3.779530000000000000
+          Width = 94.488250000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[SUM(<frxCCustoOrcamento."VLR_ENTRADA">,MasterData1)]')
+          ParentFont = False
+        end
+        object SysMemo4: TfrxSysMemoView
+          Left = 600.945270000000000000
+          Top = 3.779530000000000000
+          Width = 94.488250000000000000
+          Height = 15.118120000000000000
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[SUM(<frxCCustoOrcamento."VLR_SAIDA">,MasterData1)]')
+          ParentFont = False
         end
       end
     end
