@@ -8,7 +8,7 @@ uses
   UDMConsFinanceiro, StrUtils, Grids, DBGrids, SMDBGrid, DB, RzTabs, ComCtrls,
   RzListVw, RzTreeVw, RzLstBox;
 
-type EnumDataRelatorio = (tpDataEmissao,tpDataVencimento);
+type EnumDataRelatorio = (tpDataEmissao,tpDataVencimento,tpDataPagamento);
 
 type
   TfrmConsCtaOrcamento_Fin = class(TForm)
@@ -733,8 +733,8 @@ begin
   vComandoAux2 := copy(fDMConsFinanceiro.ctCCustoOrcamento, 1, i - 1);
   vComando := '';
   case EnumDataRelatorio(NxComboBox2.ItemIndex) of
-    tpDataEmissao    : vComandoAux2 := StringReplace(vComandoAux2,'DTVENCIMENTO','DTULTPAGAMENTO',[rfReplaceAll]);
-    tpDataVencimento : vComandoAux2 := StringReplace(vComandoAux2,'DTEMISSAO','DTVENCIMENTO',[rfReplaceAll]);
+    tpDataEmissao    : vComandoAux2 := StringReplace(vComandoAux2,'DTVENCIMENTO','DTEMISSAO',[rfReplaceAll]);
+    tpDataPagamento : vComandoAux2 := StringReplace(vComandoAux2,'DTVENCIMENTO','DTULTPAGAMENTO',[rfReplaceAll]);
   end;
   case ComboBox1.ItemIndex of
     0: vComando := vComando + ' AND DD.VLR_PAGO > 0 ';
@@ -762,19 +762,19 @@ end;
 
 procedure TfrmConsCtaOrcamento_Fin.prc_Carrega_Combo;
 begin
-  NxComboBox2.Items.Clear;
-  if SQLLocate('PARAMETROS_FIN','ID','CONTROLA_CONTRATO_CCUSTO','1') = 'S' then
-    NxComboBox2.Items.Add('Data Pagamento')
-  else
-    NxComboBox2.Items.Add('Data Emissão');
-  NxComboBox2.Items.Add('Data Vencimento');
-  NxComboBox2.Text := 'Data Vencimento';
-  NxComboBox2.ItemIndex := 1;
+//  NxComboBox2.Items.Clear;
+//  if SQLLocate('PARAMETROS_FIN','ID','CONTROLA_CONTRATO_CCUSTO','1') = 'S' then
+//    NxComboBox2.Items.Add('Data Pagamento')
+//  else
+//    NxComboBox2.Items.Add('Data Emissão');
+//  NxComboBox2.Items.Add('Data Vencimento');
+//  NxComboBox2.Text := 'Data Vencimento';
+//  NxComboBox2.ItemIndex := 1;
 end;
 
 procedure TfrmConsCtaOrcamento_Fin.RzPageControl1Change(Sender: TObject);
 begin
-  prc_Carrega_Combo;
+//  prc_Carrega_Combo;
 end;
 
 end.
