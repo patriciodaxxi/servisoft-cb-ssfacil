@@ -4170,7 +4170,6 @@ var
 begin
   if fDMCadNotaFiscal.cdsNotaFiscalTIPO_REG.AsString = 'NTE' then
     exit;
-
   fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat      := 0;
   fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat      := 0;
 
@@ -4190,14 +4189,25 @@ begin
   //Busca o %
   vPerc_Interno := 0;
   vPerc_Red     := 0;
+  if fDMCadNotaFiscal.cdsProdutoID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger then
+    fDMCadNotaFiscal.cdsProduto.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
+  if StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0 then
+    vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCadNotaFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat));
   prc_Abrir_qProduto_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_Produto.AsInteger,fDMCadNotaFiscal.cdsFilialUF.AsString);
   if not(fDMCadNotaFiscal.qProduto_UF.IsEmpty) and (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat)) > 0) then
   begin
     vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat));
-    if fDMCadNotaFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat > 0 then
-      vPerc_Red := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat));
+    if ((fDMCadNotaFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat > 0) and (fDMCadNotaFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat < 100)) then
+      vPerc_Red := StrToFloat(FormatFloat('0.00',100 - fDMCadNotaFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat));
   end;
-
+  if (StrToFloat(FormatFloat('0.0000',vPerc_Red)) <= 0) then
+  begin
+    if fDMCadNotaFiscal.cdsTab_NCMID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger then
+      fDMCadNotaFiscal.cdsTab_NCM.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,[loCaseInsensitive]);
+    if (StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) > 0) and
+       (StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) < 100) then
+      vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCadNotaFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat));
+  end;
   if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0  then
   begin
     prc_Abrir_qNCM_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,fDMCadNotaFiscal.cdsFilialUF.AsString,'A');
@@ -4215,20 +4225,6 @@ begin
       fDMCadNotaFiscal.cdsUF.Locate('UF',fDMCadNotaFiscal.cdsFilialUF.AsString,[loCaseInsensitive]);
       vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsUFPERC_ICMS_INTERNO.AsFloat));
     end;
-  end;
-  if StrToFloat(FormatFloat('0.0000',vPerc_Red)) <= 0 then
-  begin
-    if fDMCadNotaFiscal.cdsTab_NCMID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger then
-      fDMCadNotaFiscal.cdsTab_NCM.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,[loCaseInsensitive]);
-    if StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) > 0 then
-      vPerc_Red := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat));
-  end;
-  if (StrToFloat(FormatFloat('0.0000',vPerc_Red)) <= 0) then
-  begin
-    if fDMCadNotaFiscal.cdsProdutoID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger then
-      fDMCadNotaFiscal.cdsProduto.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
-    if StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0 then
-      vPerc_Red := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat));
   end;
   fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_BASE_RED_EFET.AsFloat := 0;
   if StrToFloat(FormatFloat('0.0000',vPerc_Red)) > 0 then

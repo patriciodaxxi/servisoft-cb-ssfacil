@@ -423,12 +423,25 @@ begin
   //Busca o %
   vPerc_Interno := 0;
   vPerc_Red     := 0;
+  if fDMCupomFiscal.cdsProdutoID.AsInteger <> fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger then
+    fDMCupomFiscal.cdsProduto.Locate('ID',fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
+  if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0 then
+    vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat));
   prc_Abrir_qProduto_UF(fDMCupomFiscal,fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,fDMCupomFiscal.cdsFilialUF.AsString);
   if not(fDMCupomFiscal.qProduto_UF.IsEmpty) and (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat)) > 0) then
   begin
     vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat));
-    if StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat)) > 0 then
-      vPerc_Red := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat));
+    if (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat)) > 0)
+      and (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat)) < 100) then
+      vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat));
+  end;
+  if (StrToFloat(FormatFloat('0.0000',vPerc_Red)) <= 0) then
+  begin
+    if fDMCupomFiscal.cdsTab_NCMID.AsInteger <> fDMCupomFiscal.cdsCupom_ItensID_NCM.AsInteger then
+      fDMCupomFiscal.cdsTab_NCM.Locate('ID',fDMCupomFiscal.cdsCupom_ItensID_NCM.AsString,[loCaseInsensitive]);
+    if ((StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) > 0)
+       and (StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) < 100)) then
+      vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCupomFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat));
   end;
 
   if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0  then
@@ -437,25 +450,12 @@ begin
     if StrToFloat(FormatFloat('0.000',fDMCupomFiscal.qNCM_UFPERC_ICMS_INTERNO.AsFloat)) > 0 then
       vPerc_Interno := fDMCupomFiscal.qNCM_UFPERC_ICMS_INTERNO.AsFloat;
   end;
-  if (StrToFloat(FormatFloat('0.0000',vPerc_Red)) <= 0) then
-  begin
-    if fDMCupomFiscal.cdsProdutoID.AsInteger <> fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger then
-      fDMCupomFiscal.cdsProduto.Locate('ID',fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
-    if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0 then
-      vPerc_Red := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat));
-  end;
   if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0 then
   begin
     if fDMCupomFiscal.cdsTab_NCMID.AsInteger <> fDMCupomFiscal.cdsCupom_ItensID_NCM.AsInteger then
       fDMCupomFiscal.cdsTab_NCM.Locate('ID',fDMCupomFiscal.cdsCupom_ItensID_NCM.AsString,[loCaseInsensitive]);
     if StrToFloat(FormatFloat('0.000',fDMCupomFiscal.cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
-    begin
-      vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsTab_NCMPERC_ICMS.AsFloat));
-      if (StrToFloat(FormatFloat('0.0000',vPerc_Red)) <= 0) and
-         ((StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) > 0)
-             or (StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) < 100)) then
-        vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCupomFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat));
-    end
+      vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsTab_NCMPERC_ICMS.AsFloat))
     else
     begin
       fDMCupomFiscal.qUF.Close;
