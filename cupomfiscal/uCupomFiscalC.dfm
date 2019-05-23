@@ -833,7 +833,7 @@ object fCupomFiscalC: TfCupomFiscalC
       Left = 616
       Top = 35
       Width = 75
-      Height = 25
+      Height = 27
       Caption = 'Recalcular'
       TabOrder = 10
       Visible = False

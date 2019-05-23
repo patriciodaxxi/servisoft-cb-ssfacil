@@ -2762,6 +2762,8 @@ begin
     cdsTab_NCM.Locate('ID',vID_NCM,[loCaseInsensitive]);
   if (cdsTab_NCMID_CFOP.AsInteger > 0) and (cdsProdutoID_CFOP_NFCE.AsInteger <= 0) then
     vID_CFOP := cdsTab_NCMID_CFOP.AsInteger;
+  if (vID_CFOP > 0) and (vID_CFOP <> cdsCFOPID.AsInteger) then
+    cdsCFOP.Locate('ID',vID_CFOP,[loCaseInsensitive]);
 
   if cdsTab_NCMID_PIS.AsInteger > 0 then
   begin
@@ -2789,9 +2791,8 @@ begin
 
   if cdsFilialSIMPLES.AsString <> 'S' then
   begin
-    if StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
+    if (StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat)) > 0) then
       vPerc_ICMS := StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat));
-
     //07/12/2018  
     if cdsProdutoID_CSTICMS.AsInteger > 0 then
     begin
@@ -2816,6 +2817,13 @@ begin
     begin
       vID_CSTICMS    := cdsTab_NCMID_CST_ICMS.AsInteger;
       vPerc_TribICMS := cdsTab_NCMPERC_BASE_ICMS.AsFloat;
+    end;
+    if cdsTab_CSTICMSID.AsInteger <> vID_CSTICMS then
+      cdsTab_CSTICMS.Locate('ID',vID_CSTICMS,[loCaseInsensitive]);
+    if (StrToFloat(FormatFloat('0.0000',cdsTab_CSTICMSPERCENTUAL.AsFloat)) <= 0) or (trim(cdsCFOPGERAR_ICMS.AsString) <> 'S') then
+    begin
+      vPerc_ICMS     := 0;
+      vPerc_TribICMS := 0;
     end;
     if StrToFloat(FormatFloat('0.0000',vPerc_TribICMS)) <= 0 then
       vPerc_ICMS := 0;
