@@ -4173,8 +4173,8 @@ begin
   fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat      := 0;
   fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat      := 0;
 
-  if (fDMCadNotaFiscal.cdsCFOPENVIAR_BASE_ST.AsString <> 'S') then
-    exit;
+  //if (fDMCadNotaFiscal.cdsCFOPENVIAR_BASE_ST.AsString <> 'S') then
+  //  exit;
   if (fDMCadNotaFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
     exit;
   if  ((fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_CST.AsString <> '60') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_CST.AsString <> '500')) then
