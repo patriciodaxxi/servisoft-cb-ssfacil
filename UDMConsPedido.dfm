@@ -1131,21 +1131,22 @@ object DMConsPedido: TDMConsPedido
       'select V.ID_CLIENTE, V.ID, V.PEDIDO_CLIENTE, V.DTEMISSAO, V.NUM_' +
       'PEDIDO, V.ID_VENDEDOR, V.FILIAL, V.NOME_FILIAL,'#13#10'       V.NOME_F' +
       'ILIAL_INT, V.NOME_CLIENTE, V.CLIENTE_ESTOQUE, V.NOME_VENDEDOR, V' +
-      '.FANTASIA, V.DTENTREGA_ITEM,'#13#10'       V.DTENTREGA_PED, V.APROVADO' +
-      '_PED, V.DTAPROVACAO, V.DTFATURA, V.DTEXPEDICAO, V.NOME_PRODUTO_P' +
-      'ROPOSTA,'#13#10'       V.ID_TRANSPORTADORA, TRA.NOME NOME_TRANSPORTADO' +
-      'RA, V.UF, V.CIDADE, sum(V.VLR_TOTAL) VLR_TOTAL, sum(V.QTD) QTD,'#13 +
-      #10'       sum(V.QTD_FATURADO) QTD_FATURADO, sum(V.QTD_RESTANTE) QT' +
-      'D_RESTANTE, sum(V.QTD_CANCELADO) QTD_CANCELADO,'#13#10'       sum(V.VL' +
-      'R_RESTANTE) VLR_RESTANTE, sum(V.VLR_FATURADO) VLR_FATURADO, sum(' +
-      'V.VLR_CANCELADO) VLR_CANCELADO'#13#10'from VPEDIDO_ITEM V'#13#10'left join P' +
-      'ESSOA TRA on V.ID_TRANSPORTADORA = TRA.CODIGO'#13#10'group by V.ID_CLI' +
-      'ENTE, V.ID, V.PEDIDO_CLIENTE, V.DTEMISSAO, V.NUM_PEDIDO, V.ID_VE' +
-      'NDEDOR, V.FILIAL, V.NOME_FILIAL, V.NOME_FILIAL_INT, V.NOME_CLIEN' +
-      'TE, V.CLIENTE_ESTOQUE, V.NOME_VENDEDOR, V.FANTASIA, V.DTENTREGA_' +
-      'ITEM, V.DTENTREGA_PED, V.APROVADO_PED, V.DTAPROVACAO, V.DTFATURA' +
-      ', V.DTEXPEDICAO, V.NOME_PRODUTO_PROPOSTA, V.ID_TRANSPORTADORA, T' +
-      'RA.NOME, V.UF, V.CIDADE'
+      '.DTENTREGA_ITEM,'#13#10'       V.DTENTREGA_PED, V.APROVADO_PED, V.DTAP' +
+      'ROVACAO, V.DTFATURA, V.DTEXPEDICAO, V.NOME_PRODUTO_PROPOSTA,'#13#10'  ' +
+      '     V.ID_TRANSPORTADORA, TRA.NOME NOME_TRANSPORTADORA, V.UF, V.' +
+      'CIDADE, sum(V.VLR_TOTAL) VLR_TOTAL, sum(V.QTD) QTD,'#13#10'       sum(' +
+      'V.QTD_FATURADO) QTD_FATURADO, sum(V.QTD_RESTANTE) QTD_RESTANTE, ' +
+      'sum(V.QTD_CANCELADO) QTD_CANCELADO,'#13#10'       sum(V.VLR_RESTANTE) ' +
+      'VLR_RESTANTE, sum(V.VLR_FATURADO) VLR_FATURADO, sum(V.VLR_CANCEL' +
+      'ADO) VLR_CANCELADO,'#13#10'CASE'#13#10'  WHEN coalesce(V.fantasia,'#39#39') = '#39#39' T' +
+      'HEN V.nome_cliente'#13#10'  ELSE V.fantasia'#13#10'  END FANTASIA'#13#10'from VPED' +
+      'IDO_ITEM V'#13#10'left join PESSOA TRA on V.ID_TRANSPORTADORA = TRA.CO' +
+      'DIGO'#13#10'group by V.ID_CLIENTE, V.ID, V.PEDIDO_CLIENTE, V.DTEMISSAO' +
+      ', V.NUM_PEDIDO, V.ID_VENDEDOR, V.FILIAL, V.NOME_FILIAL,'#13#10'V.NOME_' +
+      'FILIAL_INT, V.NOME_CLIENTE, V.CLIENTE_ESTOQUE, V.NOME_VENDEDOR, ' +
+      'V.FANTASIA, V.DTENTREGA_ITEM, V.DTENTREGA_PED,'#13#10'V.APROVADO_PED, ' +
+      'V.DTAPROVACAO, V.DTFATURA, V.DTEXPEDICAO, V.NOME_PRODUTO_PROPOST' +
+      'A, V.ID_TRANSPORTADORA, TRA.NOME,'#13#10'V.UF, V.CIDADE'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1917,8 +1918,9 @@ object DMConsPedido: TDMConsPedido
       ' SUM(V.qtd_peca) qtd_peca,  SUM(V.vlr_total) vlr_total,'#13#10'SUM(V.v' +
       'lr_restante) vlr_restante, SUM(V.vlr_faturado) vlr_faturado,'#13#10' S' +
       'UM(V.vlr_cancelado) vlr_cancelado, V.id_cliente, V.nome_cliente,' +
-      ' V.FANTASIA'#13#10'FROM vpedido_item V'#13#10#13#10'GROUP BY V.id_cliente, V.id_' +
-      'cliente, V.nome_cliente, V.FANTASIA'#13#10
+      #13#10'CASE'#13#10'  WHEN coalesce(V.fantasia,'#39#39') = '#39#39' THEN V.nome_cliente'#13 +
+      #10'  ELSE V.fantasia'#13#10'  END FANTASIA'#13#10#13#10'FROM vpedido_item V'#13#10#13#10'GRO' +
+      'UP BY V.id_cliente, V.id_cliente, V.nome_cliente, V.FANTASIA'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
