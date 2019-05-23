@@ -134,7 +134,7 @@ begin
 
   fDMConsFinanceiro.vTotal_Desp := 0;
   fDMConsFinanceiro.vTotal_Rec := 0;
-  if RzPageControl1.ActivePage = TS_Resumido then
+   if RzPageControl1.ActivePage = TS_Resumido then
   begin
     fDMConsFinanceiro.mConta_Orc.EmptyDataSet;
     prc_Consultar;
@@ -738,8 +738,8 @@ begin
     tpDataPagamento  : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTULTPAGAMENTO',[rfReplaceAll]);
   end;
   case ComboBox1.ItemIndex of
-    0: vComando := vComando + ' AND DD.VLR_PAGO > 0 ';
-    1: vComando := vComando + ' AND DD.VLR_RESTANTE > 0 ';
+    0: vComando := vComando + ' AND VD.VALOR_PAGO > 0 ';
+    1: vComando := vComando + ' AND VD.VALOR_RESTANTE > 0 ';
   end;
   fDMConsFinanceiro.sdsCCustoOrcamento.CommandText := vComandoAux2 + vComando + vComandoAux;
   fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
