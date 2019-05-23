@@ -4264,7 +4264,8 @@ end;
 procedure TfrmCadNotaFiscal.SMDBGrid2GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
-  if (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'CSI') or (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'CST') then
+  if (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'CSI') or (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'CST')
+    or (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'STA') then
     AFont.Color := clRed;
 end;
 

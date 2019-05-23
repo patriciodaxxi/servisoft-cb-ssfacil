@@ -333,6 +333,7 @@ type
     function fnc_EstoqueItenxAux: Real;
 
     function fnc_Busca_Preco_Orig: Real;
+    function fnc_Verifica_ST_Ant: Boolean;
 
   public
     { Public declarations }
@@ -1383,8 +1384,11 @@ begin
     if (fDMCadNotaFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
       if not fnc_Verifica_SubstTributaria then
         exit;
-
-    
+    //23/05/2019
+    if (fDMCadNotaFiscal.cdsCFOPENVIAR_BASE_ST.AsString = 'S') and (fDMCadNotaFiscal.cdsFilialUSA_ENVIO_ST_RET.AsString = 'S') then
+      if not fnc_Verifica_ST_Ant then
+        exit;
+    //**********************
 
     //Esse if foi incluido no dia   26/05/2016  para controlar se gravou na tabela de tamanhos
     if (fDMCadNotaFiscal.qParametros_NFeGRAVAR_TAB_TAMANHO.AsString = 'S') then
@@ -2753,6 +2757,28 @@ begin
     else
     if fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsEdit,dsInsert] then
       fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString := 'CST';
+  end;
+end;
+
+function TfrmCadNotaFiscal_Itens.fnc_Verifica_ST_Ant: Boolean;
+begin
+  //23/05/2019
+  //Controla se foi gravado o valor anterior da ST
+  Result := True;
+  if (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat)) <= 0) then
+  begin
+    if (vNotaSelecionada) or (vPedidoSelecionado) or (Tag = 99) or (vValeSelecionado) or (vOSSelecionada) or (vSacolaSelecionada) or (vPedAmbiente) or
+      (vRecNFSelecionado)then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString := 'STA'
+    else
+    if MessageDlg('Item não foi destacado o valor da ST Cobrada Anteriormente!' + #13
+                 + 'CFOP ' + fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString + ' está marcada para enviar a ST Anterior , mas o sistema não encontrou a ST Anterior!' + #13 + #13
+                 + 'Motivo: Verifique se na nota de entrada veio a ST Anterior ou se foi feito o MOV. ST Anterior' + #13
+                 + ' Confirmar assim a gravação do item?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+      Result := False
+    else
+    if fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsEdit,dsInsert] then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString := 'STA';
   end;
 end;
 
