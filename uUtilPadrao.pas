@@ -30,7 +30,7 @@ uses
   function fnc_Calcula_DigitoEAN13(Seq_Maxima, Sequencia: Integer; Cod_Principal: String): Integer;
   function fnc_Busca_Estoque2(Filial, ID_PRODUTO, ID_Cor: Integer; Tamanho: String; ID_Local: Integer; ID_Estoque: Integer = 0): Real;
   function fnc_Verificar_Local(Usa_Local_Estoque: String): Integer;
-  function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor: Integer ; Filial : Integer = 1): Real;
+  function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor: Integer ; Filial: Integer = 1): Real;
   function fnc_HorarioVerao: Boolean;
   
   function fnc_Buscar_Comissao_Prod(ID_Produto, ID_Cliente, ID_Vendedor: Integer): Real;
@@ -44,7 +44,7 @@ uses
   function fnc_Retorna_Qtd_UConv(ID_Produto: Integer; Unidade_Conv: String): Real;
 
   function fnc_Regra_Empresa_CFOP(Pessoa_Cliente, Zona_Franca, Subst_Tributaria, Tipo_Produto, Tipo_Empresa, Tipo_Cliente, UF_Cliente: String;
-                                  ID_Operacao: Integer; Finalidade: String ; Cabecalho : Boolean = False): Integer;
+                                  ID_Operacao: Integer; Finalidade: String ; Cabecalho: Boolean = False): Integer;
   function fnc_Regra_Empresa_Triangular(Pessoa_Cliente, Tipo_Empresa, Tipo_Cliente, UF_Cliente: String; ID_Operacao: Integer): Integer;
 
   function fnc_Existe_Prod_Lote(ID: Integer): Boolean;
@@ -58,9 +58,9 @@ uses
   function fnc_Busca_Nome_Filial: String;
   procedure prc_Preencher_Excel(planilha: Variant; vDados: TDataSource);
   procedure prc_Preencher_Excel2(planilha: Variant;  vDados: TDataSource; Grid :TSMDBGrid);
-  function fnc_Max_Codigo(Tabela,Campo : String):Integer;
+  function fnc_Max_Codigo(Tabela,Campo: String):Integer;
 
-  function fnc_Ajusta_DtVencimento(Dia_Vecto,Dia1,Dia2,QDias_MPag : Integer ; DtVecto : TDateTime)  : TDateTime;
+  function fnc_Ajusta_DtVencimento(Dia_Vecto,Dia1,Dia2,QDias_MPag: Integer ; DtVecto: TDateTime) : TDateTime;
 
   function fnc_Busca_CodProduto_Cliente(ID_Produto, ID_Fornecedor, ID_Cor: Integer; Tamanho, Tamanho_Cli: String): String;
   function fnc_Busca_Tam_Material(ID_Produto: Integer; Tamanho: String): String; // aqui pesquisa pelo Produto_Gradenum
@@ -70,22 +70,22 @@ uses
 
   function fnc_Converte_Horas(Hora: Real): Real;
   function fnc_Converte_Min_Dec(Hora: Real): Real;
-  //function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real) : String;
-  function fnc_Diferenca_Horas2(Inicio, Fim : TTime) : Real;
-  function fnc_Calcula_Intervalo(HrInicial,HrFinal : TTime) : Real;
+  //function fnc_Soma_Data_Hora(Data: TDateTime ; Hora1: TTime ; Hora2, Total_HoraDia: Real): String;
+  function fnc_Diferenca_Horas2(Inicio, Fim: TTime): Real;
+  function fnc_Calcula_Intervalo(HrInicial,HrFinal: TTime): Real;
 
-  procedure prc_Soma_Data_Hora_Res(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real);
+  procedure prc_Soma_Data_Hora_Res(Data: TDateTime ; Hora1: TTime ; Hora2, Total_HoraDia: Real);
 
   function CharEspeciais(Texto:String):String;
-  function  SQLLocate(Tabela, CampoProcura, CampoRetorno, ValorFind : string) : string ;
+  function  SQLLocate(Tabela, CampoProcura, CampoRetorno, ValorFind: string): string ;
 
-  function fnc_Estoque_Tipo_Mat(ID_Produto : Integer ; Tipo_ES : string): string;  //E= Entrada  S= Saida
+  function fnc_Estoque_Tipo_Mat(ID_Produto: Integer ; Tipo_ES: string): string;  //E= Entrada  S= Saida
 
-  function fnc_Cliente_Fil_Fat(ID_Cliente , ID_Filial  : Integer) : Boolean;
+  function fnc_Cliente_Fil_Fat(ID_Cliente , ID_Filial : Integer): Boolean;
 
-  function fnc_CNPJCFP_FilialNFeConfig : String;
+  function fnc_CNPJCFP_FilialNFeConfig: String;
 
-  function fnc_Vendedor_Desc_Com(ID : Integer) : Boolean;
+  function fnc_Vendedor_Desc_Com(ID: Integer): Boolean;
   function fnc_Somar_Edit(Valores: string): Double;
 
   //procedure prc_Enviar_Email_Proc(MSG: String);
@@ -156,11 +156,11 @@ var
   vExcluir_Cupom: Boolean = False;
   vTipo_Dig_Cupom: String;
   vCodCombinacao_Pos: Integer;
-  vCodCor_Pos : Integer;
+  vCodCor_Pos: Integer;
   vNumOrd_Pos: Integer;
-  vNumRemessa_Pos : String;
+  vNumRemessa_Pos: String;
   vImpCliente_RF: String; //R= Imprime Razão Social   F= Imprime Fantasia
-  vImpPreco_Etiqueta : Boolean;
+  vImpPreco_Etiqueta: Boolean;
   viD_EnqIPI_Pos: Integer;
   vID_Ponto_Pos: Integer;
   vCodCest_Pos: String;
@@ -181,19 +181,19 @@ var
   vID_Plano_Contabil: Integer;
   vNUM_Ordem_Sel: String;
   vID_Cor_Pos: Integer;
-  vNum_Pedido_Vend : Integer;
-  vNum_Orc_Sel : Integer;
-  vProcesso_Parcial : String; //E=Encerrar    G=Gerar Novo registro no Baixa_Processo     C=Cancelar e retornar
-  vItem_Ped_Pos : Integer;
-  vCodBarra_Pos : String;
-  vTipo_Etiqueta : String; //ROT=Rotulo
-  vTamanho_Pos : String;
-  vSelPesquisa : String;
-  vSelCentroCusto : String;
-  vDiaAdicional : Integer;
-  vDtHora_Res : String;
-  vPrimeira_Hora : TTime;
-  vPrimeira_Data : TDate;
+  vNum_Pedido_Vend: Integer;
+  vNum_Orc_Sel: Integer;
+  vProcesso_Parcial: String; //E=Encerrar    G=Gerar Novo registro no Baixa_Processo     C=Cancelar e retornar
+  vItem_Ped_Pos: Integer;
+  vCodBarra_Pos: String;
+  vTipo_Etiqueta: String; //ROT=Rotulo
+  vTamanho_Pos: String;
+  vSelPesquisa: String;
+  vSelCentroCusto: String;
+  vDiaAdicional: Integer;
+  vDtHora_Res: String;
+  vPrimeira_Hora: TTime;
+  vPrimeira_Data: TDate;
 
 implementation
 
@@ -836,7 +836,7 @@ begin
     MessageDlg('*** Não existe um local do estoque marcado como principal!' , mtInformation, [mbOk], 0);
 end;
 
-function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor: Integer ; Filial : Integer = 1): Real;
+function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor: Integer ; Filial: Integer = 1): Real;
 var
   sds: TSQLDataSet;
 begin
@@ -1118,7 +1118,7 @@ begin
 end;
 
 function fnc_Regra_Empresa_CFOP(Pessoa_Cliente, Zona_Franca, Subst_Tributaria, Tipo_Produto,
-Tipo_Empresa, Tipo_Cliente, UF_Cliente: String; ID_Operacao: Integer; Finalidade: String ; Cabecalho : Boolean = False): Integer;
+Tipo_Empresa, Tipo_Cliente, UF_Cliente: String; ID_Operacao: Integer; Finalidade: String ; Cabecalho: Boolean = False): Integer;
 var
   sds: TSQLDataSet;
 begin
@@ -1552,9 +1552,9 @@ begin
   end;
 end;
 
-function fnc_Max_Codigo(Tabela,Campo : String):Integer;
+function fnc_Max_Codigo(Tabela,Campo: String):Integer;
 var
-  sds : TSQLDataSet;
+  sds: TSQLDataSet;
 begin
   Result := 0;
   sds := TSQLDataSet.Create(nil);
@@ -1593,9 +1593,9 @@ begin
 
 end;
 
-function fnc_Ajusta_DtVencimento(Dia_Vecto,Dia1,Dia2,QDias_MPag : Integer ; DtVecto : TDateTime)  : TDateTime;
+function fnc_Ajusta_DtVencimento(Dia_Vecto,Dia1,Dia2,QDias_MPag: Integer ; DtVecto: TDateTime) : TDateTime;
 var
-  vAux : Integer;
+  vAux: Integer;
 begin
   Result := DtVecto;
   if ((Dia_Vecto <> Dia1) and (Dia_Vecto <> Dia2)) then
@@ -1673,7 +1673,7 @@ begin
   end;
 end;
 
-function fnc_Estoque_Tipo_Mat(ID_Produto : Integer ; Tipo_ES : string): string; //E= Entrada  S= Saida
+function fnc_Estoque_Tipo_Mat(ID_Produto: Integer ; Tipo_ES: string): string; //E= Entrada  S= Saida
 var
   sds: TSQLDataSet;
 begin
@@ -1697,9 +1697,9 @@ begin
   end;
 end;
 
-function SQLLocate(Tabela, CampoProcura, CampoRetorno, ValorFind : string) : string ;
+function SQLLocate(Tabela, CampoProcura, CampoRetorno, ValorFind: string): string ;
 var
-  MyQuery : TSQLQuery;
+  MyQuery: TSQLQuery;
 begin
   if ValorFind <> '' then
   begin
@@ -1722,7 +1722,7 @@ end ;
 
 function fnc_Converte_Min_Dec(Hora: Real): Real; //Converte de Decimal para Minutos 
 var
-  vAux : Real;
+  vAux: Real;
 begin
   Result := 0;
   //vAux := Frac vTempo - Trunc(vTempo);
@@ -1736,19 +1736,19 @@ begin
 
 end;
 
-{function fnc_Soma_Data_Hora(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real) : String;
+{function fnc_Soma_Data_Hora(Data: TDateTime ; Hora1: TTime ; Hora2, Total_HoraDia: Real): String;
 var
-  vAux : Real;
-  vTexto : String;
-  vDia : Integer;
-  vHora : Real;
-  vAux2 : Real;
-  i, i2 : Integer;
-  vMin : Real;
-  vSeg, vMil : real;
-  vH, vM, vS, vMS : Word;
-  vDtAux : TDateTime;
-  vTempo : Real;
+  vAux: Real;
+  vTexto: String;
+  vDia: Integer;
+  vHora: Real;
+  vAux2: Real;
+  i, i2: Integer;
+  vMin: Real;
+  vSeg, vMil: real;
+  vH, vM, vS, vMS: Word;
+  vDtAux: TDateTime;
+  vTempo: Real;
 begin
   if StrToFloat(FormatFloat('0.000',Total_HoraDia)) <= 0 then
     Total_HoraDia := StrToFloat(FormatFloat('0.00',24));
@@ -1837,7 +1837,7 @@ begin
   Result := DateToStr(Data) + 'H' + FormatFloat('00.00',vAux);
 end;}
 
-function fnc_Cliente_Fil_Fat(ID_Cliente , ID_Filial  : Integer) : Boolean;
+function fnc_Cliente_Fil_Fat(ID_Cliente , ID_Filial : Integer): Boolean;
 var
   sds: TSQLDataSet;
 begin
@@ -1858,12 +1858,12 @@ begin
   end;
 end;
 
-function fnc_Calcula_Intervalo(HrInicial,HrFinal : TTime) : Real;
+function fnc_Calcula_Intervalo(HrInicial,HrFinal: TTime): Real;
 var
   sds: TSQLDataSet;
-  vTempo : Real;
-  vTexto : string;
-  vHR1,VHR2 : TTime;
+  vTempo: Real;
+  vTexto: string;
+  vHR1,VHR2: TTime;
 begin
   Result := 0;
   vDiaAdicional := 0;
@@ -1897,11 +1897,11 @@ begin
   Result := vTempo;
 end;
 
-function fnc_Diferenca_Horas2(Inicio, Fim : TTime) : Real;
+function fnc_Diferenca_Horas2(Inicio, Fim: TTime): Real;
 var
-  FIni,FFim : TDateTime;
-  vTexto : String;
-  vAux : Real;
+  FIni,FFim: TDateTime;
+  vTexto: String;
+  vAux: Real;
 begin
   Fini := Inicio;
   FFim := Fim;
@@ -1915,24 +1915,24 @@ begin
   Result := StrToFloat(vTexto);
 end;
 
-procedure prc_Soma_Data_Hora_Res(Data : TDateTime ; Hora1 : TTime ; Hora2, Total_HoraDia : Real);
+procedure prc_Soma_Data_Hora_Res(Data: TDateTime ; Hora1: TTime ; Hora2, Total_HoraDia: Real);
 var
-  vAux : Real;
-  vTexto : String;
-  vDia : Integer;
-  vHora : Real;
-  vAux2 : Real;
-  vMin : Real;
-  vSeg, vMil : real;
-  vH, vM, vS, vMS : Word;
-  vDtAux : TDateTime;
-  vTempo : Real;
-  vFlag : Boolean;
+  vAux: Real;
+  vTexto: String;
+  vDia: Integer;
+  vHora: Real;
+  vAux2: Real;
+  vMin: Real;
+  vSeg, vMil: real;
+  vH, vM, vS, vMS: Word;
+  vDtAux: TDateTime;
+  vTempo: Real;
+  vFlag: Boolean;
 
   procedure calcula;
   var
-    i : Integer;
-    i2 : Integer;
+    i: Integer;
+    i2: Integer;
   begin
     vAux2 := Hora2 / Total_HoraDia;
     vDia  := Trunc(vAux2);
@@ -2029,11 +2029,11 @@ begin
 
 end;
 
-function fnc_CNPJCFP_FilialNFeConfig : String;
+function fnc_CNPJCFP_FilialNFeConfig: String;
 var
   sds: TSQLDataSet;
-  sds2 : TSQLDataSet;
-  vCNPJAux : String;
+  sds2: TSQLDataSet;
+  vCNPJAux: String;
 begin
   dmDatabase_NFeBD := TdmDatabase_NFeBD.Create(dmDatabase_NFeBD);
 
@@ -2079,7 +2079,7 @@ begin
 
 end;
 
-function fnc_Vendedor_Desc_Com(ID : Integer) : Boolean; //08/05/2019
+function fnc_Vendedor_Desc_Com(ID: Integer): Boolean; //08/05/2019
 var
   sds: TSQLDataSet;
 begin
@@ -2102,8 +2102,7 @@ begin
       Result := True;
   finally
     FreeAndNil(sds);
-  end;
-  
+  end;                   
 end;
 
 function fnc_Somar_Edit(Valores: string): Double;
@@ -2111,7 +2110,7 @@ var
   vValorCalculo: array[1..10] of real;
   i, i2: Integer;
   x: string;
-  soma : real;
+  soma: real;
 begin
   i := 0;
   repeat

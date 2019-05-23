@@ -3,8 +3,7 @@ unit uDmCadCentroCusto;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, LogTypes,
-  frxClass, frxDBSet;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, LogTypes, frxClass, frxDBSet;
 
 type
   TdmCadCentroCusto = class(TDataModule)
@@ -126,18 +125,18 @@ type
 
   public
     { Public declarations }
-    vMsgCentroCusto : String;
-    ctCommand : String;
-    ctConsulta : String;
-    ctCidade : String;
+    vMsgCentroCusto: String;
+    ctCommand: String;
+    ctConsulta: String;
+    ctCidade: String;
+    vIdAnt: Integer;
 
-    procedure prc_Localizar(ID : Integer); //-1 = Inclusão
+    procedure prc_Localizar(ID: Integer); //-1 = Inclusão
     procedure prc_Inserir;
     procedure prc_Gravar;
     procedure prc_Excluir;
 
     procedure prc_Abrir_Cidade(UF: String);
-
   end;
 
 var
@@ -153,7 +152,7 @@ uses DmdDatabase, LogProvider, uUtilPadrao;
 
 procedure TdmCadCentroCusto.prc_Inserir;
 var
-  vAux : Integer;
+  vAux: Integer;
 begin
   if not cdsCentroCusto.Active then
     prc_Localizar(-1);
@@ -161,6 +160,7 @@ begin
 
   cdsCentroCusto.Insert;
   cdsCentroCustoID.AsInteger := vAux;
+  vIdAnt := 0;
 end;
 
 procedure TdmCadCentroCusto.prc_Excluir;
@@ -174,15 +174,17 @@ end;
 
 procedure TdmCadCentroCusto.prc_Gravar;
 var
-  i : Integer;
+  i: Integer;
 begin
   vMsgCentroCusto := '';
   if trim(cdsCentroCustoDESCRICAO.AsString) = '' then
     vMsgCentroCusto := '*** Nome não informado!';
   if (trim(cdsCentroCustoCODIGO.AsString) = '') then
     vMsgCentroCusto := vMsgCentroCusto + #13 + '*** Código do Centro de Custo não informado!';
-  if SQLLocate('CENTROCUSTO','CODIGO','CODIGO',cdsCentroCustoCODIGO.AsString) = cdsCentroCustoCODIGO.AsString then
-    vMsgCentroCusto := vMsgCentroCusto + #13 + '*** Código do Centro de Custo já existe!';
+
+  if vIdAnt = 0 then
+    if SQLLocate('CENTROCUSTO','CODIGO','CODIGO',cdsCentroCustoCODIGO.AsString) = cdsCentroCustoCODIGO.AsString then
+      vMsgCentroCusto := vMsgCentroCusto + #13 + '*** Código do Centro de Custo já existe!';
 
   if vMsgCentroCusto <> '' then
     exit;
@@ -195,13 +197,13 @@ begin
   cdsCentroCusto.ApplyUpdates(0);
 end;
 
-procedure TdmCadCentroCusto.prc_Localizar(ID : Integer);
+procedure TdmCadCentroCusto.prc_Localizar(ID: Integer);
 begin
   cdsCentroCusto.Close;
   sdsCentroCusto.CommandText := ctCommand;
   if ID <> 0 then
-    sdsCentroCusto.CommandText := sdsCentroCusto.CommandText
-                         + ' WHERE ID = ' + IntToStr(ID);
+    sdsCentroCusto.CommandText := sdsCentroCusto.CommandText +
+                                  ' WHERE ID = ' + IntToStr(ID);
   cdsCentroCusto.Open;
 end;
 

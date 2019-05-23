@@ -309,6 +309,8 @@ object dmCadCentroCusto: TdmCadCentroCusto
     end
   end
   object sdsConsulta: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 
       'SELECT B.*, case'#13#10'   WHEN NIVEL = 1 THEN B.DESCRICAO'#13#10'   WHEN NI' +
       'VEL = 2 THEN LPAD('#39' '#39', NIVEL, '#39' '#39')||B.DESCRICAO'#13#10'   WHEN NIVEL >' +

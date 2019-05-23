@@ -383,10 +383,10 @@ object frmConsPedido: TfrmConsPedido
   end
   object RzPageControl1: TRzPageControl
     Left = 0
-    Top = 193
+    Top = 188
     Width = 1017
-    Height = 388
-    ActivePage = TS_RefComb
+    Height = 393
+    ActivePage = TS_Item
     ActivePageDefault = TS_Item
     Align = alClient
     Color = 16755027
@@ -399,7 +399,7 @@ object frmConsPedido: TfrmConsPedido
     ParentColor = False
     ParentFont = False
     TabColors.Unselected = clGray
-    TabIndex = 7
+    TabIndex = 0
     TabOrder = 1
     TextColors.Unselected = 5197647
     OnChanging = RzPageControl1Changing
@@ -417,7 +417,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 37
         Width = 1013
-        Height = 328
+        Height = 333
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Item
@@ -852,7 +852,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 25
         Width = 1013
-        Height = 340
+        Height = 345
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido
@@ -1253,7 +1253,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 365
+        Height = 370
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Ref
@@ -1752,7 +1752,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 365
+        Height = 370
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Ref_Acum
@@ -2012,7 +2012,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 365
+        Height = 370
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Cli
@@ -2272,7 +2272,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 365
+        Height = 370
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Comb
@@ -2550,7 +2550,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 28
         Width = 1013
-        Height = 337
+        Height = 342
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Ref2
@@ -2937,8 +2937,8 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 365
-        ActivePage = TS_ClienteDtEntrega
+        Height = 370
+        ActivePage = TS_RefComb_Acum
         ActivePageDefault = TS_RefComb_Acum
         Align = alClient
         BackgroundColor = clBtnFace
@@ -2953,7 +2953,7 @@ object frmConsPedido: TfrmConsPedido
         ParentColor = False
         ParentFont = False
         TabColors.Unselected = clGray
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 0
         TextColors.Unselected = 5197647
         FixedDimension = 19
@@ -2964,7 +2964,7 @@ object frmConsPedido: TfrmConsPedido
             Left = 0
             Top = 0
             Width = 1009
-            Height = 342
+            Height = 347
             Align = alClient
             Ctl3D = False
             DataSource = DMConsPedido.dsPedido_RefComb
@@ -3223,7 +3223,7 @@ object frmConsPedido: TfrmConsPedido
             Left = 0
             Top = 0
             Width = 1009
-            Height = 342
+            Height = 347
             Align = alClient
             Ctl3D = False
             DataSource = DMConsPedido.dsPedido_RefComb_DtEntrega
@@ -3499,7 +3499,7 @@ object frmConsPedido: TfrmConsPedido
             Left = 0
             Top = 0
             Width = 1009
-            Height = 342
+            Height = 347
             Align = alClient
             Ctl3D = False
             DataSource = DMConsPedido.dsPedido_RefComb_DtECliente
@@ -3793,7 +3793,7 @@ object frmConsPedido: TfrmConsPedido
     Left = 0
     Top = 158
     Width = 1017
-    Height = 35
+    Height = 30
     Align = alTop
     Color = clSilver
     TabOrder = 2
@@ -3898,10 +3898,11 @@ object frmConsPedido: TfrmConsPedido
       ParentFont = False
     end
     object btnConsultar: TNxButton
-      Left = 9
-      Top = 2
+      Left = 1
+      Top = 1
       Width = 170
-      Height = 30
+      Height = 28
+      Align = alLeft
       Caption = 'Efetuar Pesquisa'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -3970,10 +3971,11 @@ object frmConsPedido: TfrmConsPedido
       OnClick = btnConsultarClick
     end
     object btnImprimir: TNxButton
-      Left = 181
-      Top = 2
+      Left = 171
+      Top = 1
       Width = 170
-      Height = 30
+      Height = 28
+      Align = alLeft
       Caption = 'Imprimir'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
