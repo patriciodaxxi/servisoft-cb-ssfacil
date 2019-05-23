@@ -61,7 +61,7 @@ object DMConsPedido: TDMConsPedido
     Params = <>
     ProviderName = 'dspPedido_Item'
     Left = 120
-    Top = 10
+    Top = 11
     object cdsPedido_ItemID_CLIENTE: TIntegerField
       FieldName = 'ID_CLIENTE'
     end
@@ -1314,29 +1314,31 @@ object DMConsPedido: TDMConsPedido
       'IDO, PES.NOME, NI.REFERENCIA, NI.NOME_PRODUTO, NI.VLR_UNITARIO, ' +
       'NI.VLR_DESCONTO, NI.VLR_DESCONTORATEIO,'#13#10'       NI.VLR_TOTAL, NI' +
       '.QTD, pi.DTENTREGA, pi.QTD QTD_PEDIDO, pi.QTD_FATURADO, pi.QTD_R' +
-      'ESTANTE, NP.ITEM_PEDIDO,'#13#10'       NP.NUM_PEDIDO, NT.FILIAL, PES.F' +
-      'ANTASIA, PES.NOME NOME_CLIENTE,'#13#10'       ((pi.VLR_UNITARIO - pi.V' +
-      'LR_DESCONTO) * pi.QTD_RESTANTE) VLR_RESTANTE,'#13#10'       ((pi.VLR_U' +
-      'NITARIO - pi.VLR_DESCONTO) * pi.QTD_FATURADO) VLR_FATURADO,'#13#10'   ' +
-      '    ((pi.VLR_UNITARIO - pi.VLR_DESCONTO) * pi.QTD_CANCELADO) VLR' +
-      '_CANCELADO, COMB.NOME NOME_COR_COMBINACAO,'#13#10'       CFOP.CODCFOP,' +
-      ' PED.DTEMISSAO DTEMISSAO_PED,'#13#10'CASE'#13#10'  WHEN PROD.tipo_producao =' +
-      ' '#39'T'#39' THEN '#39'Tran'#231'adeira'#39#13#10'  WHEN PROD.tipo_producao = '#39'E'#39' THEN '#39'T' +
-      'ear'#39#13#10'  end Desc_Tipo_Producao,'#13#10'CASE'#13#10'  WHEN NT.SERIE = '#39'RNF'#39' t' +
-      'hen '#39'REC'#39#13#10'  ELSE '#39'NF'#39#13#10'  end DESC_NOTA, NI.unidade, PROD.unidad' +
-      'e UNIDADE_PRODUTO,'#13#10'  ni.id_produto, uconv.qtd qtd_conversor ,'#13#10 +
-      'case'#13#10'  when coalesce(uconv.qtd,0) > 0 then coalesce(PROD.pesobr' +
-      'uto,0) * coalesce(NI.qtd,0) * uconv.qtd'#13#10'  else coalesce(PROD.pe' +
-      'sobruto,0) * coalesce(NI.qtd,0)'#13#10'  end PESOBRUTO'#13#10'from NOTAFISCA' +
-      'L_PED NP'#13#10'inner join NOTAFISCAL NT on (NP.ID = NT.ID)'#13#10'inner joi' +
-      'n NOTAFISCAL_ITENS NI on (NP.ID = NI.ID and NP.ITEM = NI.ITEM)'#13#10 +
-      'inner join PEDIDO PED on (NP.ID_PEDIDO = PED.ID)'#13#10'inner join PED' +
-      'IDO_ITEM pi on (NP.ID_PEDIDO = pi.ID and NP.ITEM_PEDIDO = pi.ITE' +
-      'M)'#13#10'inner join PESSOA PES on (PED.ID_CLIENTE = PES.CODIGO)'#13#10'left' +
-      ' join COMBINACAO COMB on pi.ID_COR = COMB.ID  '#13#10'LEFT JOIN TAB_CF' +
-      'OP CFOP ON (NI.ID_CFOP = CFOP.ID)'#13#10'left join PRODUTO PROD on NI.' +
-      'ID_PRODUTO = PROD.ID  '#13#10'left join unidade_conv uconv'#13#10'on prod.un' +
-      'idade = uconv.unidade'#13#10'and ni.unidade = uconv.unidade_conv'#13#10
+      'ESTANTE, NP.ITEM_PEDIDO,'#13#10'       NP.NUM_PEDIDO, NT.FILIAL, PES.N' +
+      'OME NOME_CLIENTE,'#13#10'       ((pi.VLR_UNITARIO - pi.VLR_DESCONTO) *' +
+      ' pi.QTD_RESTANTE) VLR_RESTANTE,'#13#10'       ((pi.VLR_UNITARIO - pi.V' +
+      'LR_DESCONTO) * pi.QTD_FATURADO) VLR_FATURADO,'#13#10'       ((pi.VLR_U' +
+      'NITARIO - pi.VLR_DESCONTO) * pi.QTD_CANCELADO) VLR_CANCELADO, CO' +
+      'MB.NOME NOME_COR_COMBINACAO,'#13#10'       CFOP.CODCFOP, PED.DTEMISSAO' +
+      ' DTEMISSAO_PED,'#13#10'CASE'#13#10'  WHEN PROD.tipo_producao = '#39'T'#39' THEN '#39'Tra' +
+      'n'#231'adeira'#39#13#10'  WHEN PROD.tipo_producao = '#39'E'#39' THEN '#39'Tear'#39#13#10'  end De' +
+      'sc_Tipo_Producao,'#13#10'CASE'#13#10'  WHEN NT.SERIE = '#39'RNF'#39' then '#39'REC'#39#13#10'  E' +
+      'LSE '#39'NF'#39#13#10'  end DESC_NOTA, NI.unidade, PROD.unidade UNIDADE_PROD' +
+      'UTO,'#13#10'  ni.id_produto, uconv.qtd qtd_conversor ,'#13#10'case'#13#10'  when c' +
+      'oalesce(uconv.qtd,0) > 0 then coalesce(PROD.pesobruto,0) * coale' +
+      'sce(NI.qtd,0) * uconv.qtd'#13#10'  else coalesce(PROD.pesobruto,0) * c' +
+      'oalesce(NI.qtd,0)'#13#10'  end PESOBRUTO,'#13#10'case'#13#10'  when coalesce(PES.F' +
+      'ANTASIA,'#39#39') = '#39#39' then pes.nome'#13#10'  else PES.FANTASIA'#13#10'  end FANTA' +
+      'SIA'#13#10'from NOTAFISCAL_PED NP'#13#10'inner join NOTAFISCAL NT on (NP.ID ' +
+      '= NT.ID)'#13#10'inner join NOTAFISCAL_ITENS NI on (NP.ID = NI.ID and N' +
+      'P.ITEM = NI.ITEM)'#13#10'inner join PEDIDO PED on (NP.ID_PEDIDO = PED.' +
+      'ID)'#13#10'inner join PEDIDO_ITEM pi on (NP.ID_PEDIDO = pi.ID and NP.I' +
+      'TEM_PEDIDO = pi.ITEM)'#13#10'inner join PESSOA PES on (PED.ID_CLIENTE ' +
+      '= PES.CODIGO)'#13#10'left join COMBINACAO COMB on pi.ID_COR = COMB.ID ' +
+      ' '#13#10'LEFT JOIN TAB_CFOP CFOP ON (NI.ID_CFOP = CFOP.ID)'#13#10'left join ' +
+      'PRODUTO PROD on NI.ID_PRODUTO = PROD.ID  '#13#10'left join unidade_con' +
+      'v uconv'#13#10'on prod.unidade = uconv.unidade'#13#10'and ni.unidade = uconv' +
+      '.unidade_conv'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
