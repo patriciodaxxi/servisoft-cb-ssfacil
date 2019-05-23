@@ -1897,37 +1897,39 @@ object DMConsFinanceiro: TDMConsFinanceiro
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43581.591901898150000000
+    ReportOptions.LastChange = 43607.774353657410000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'var'
       '  cSaldoCentroCusto : Currency;'
-      
-        '  cSaldoContrato : Currency;                                    ' +
-        '                        '
+      '  cSaldoContrato : Currency;'
+      '  cTotalEntrada : Currency;'
       'procedure GroupHeader1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
       '  cSaldoCentroCusto := 0;'
-      
-        '  cSaldoContrato := 0;                                          ' +
-        '    '
+      '  cSaldoContrato := 0;'
+      '  cTotalEntrada := 0;'
       '  cSaldoCentroCusto := <frxCCustoOrcamento."VLR_CONTRATO">;'
       'end;'
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
       '  if <frxCCustoOrcamento."VLR_ENTRADA"> <> 0 then'
+      '  begin'
       
         '    cSaldoCentroCusto := cSaldoCentroCusto - <frxCCustoOrcamento' +
         '."VLR_ENTRADA">;'
+      
+        '    cTotalEntrada := cTotalEntrada + <frxCCustoOrcamento."VLR_EN' +
+        'TRADA">;'
+      '  end;'
       'end;'
       ''
       'procedure GroupFooter1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
       
-        '  cSaldoContrato := <frxCCustoOrcamento."VLR_CONTRATO"> - cSaldo' +
-        'CentroCusto;                                                    ' +
-        '                                     '
+        '  cSaldoContrato := <frxCCustoOrcamento."VLR_CONTRATO"> - (cTota' +
+        'lEntrada + <frxResumoCentro_Custo."VLR_ENTRADA">);'
       'end;'
       ''
       'begin'
@@ -2134,7 +2136,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 468.661720000000000000
+        Top = 411.968770000000000000
         Width = 718.110700000000000000
       end
       object ColumnHeader1: TfrxColumnHeader
@@ -2230,7 +2232,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Memo.UTF8 = (
             
               '[frxCCustoOrcamento."CODIGO_GRUPO"] - [frxCCustoOrcamento."NOME_' +
-              'GRUPO"] - Valor Contrado:    [frxCCustoOrcamento."VLR_CONTRATO"]')
+              'GRUPO"] ')
           ParentFont = False
           Formats = <
             item
@@ -2245,7 +2247,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       end
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
-        Height = 154.960730000000000000
+        Height = 52.913420000000000000
         Top = 253.228510000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'GroupFooter1OnBeforePrint'
@@ -2344,111 +2346,58 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Frame.ShadowColor = clWhite
           Diagonal = True
         end
+      end
+      object Footer1: TfrxFooter
+        FillType = ftBrush
+        Height = 22.677180000000000000
+        Top = 328.819110000000000000
+        Width = 718.110700000000000000
         object Memo15: TfrxMemoView
-          Left = 22.677180000000000000
-          Top = 64.252010000000000000
+          Left = 98.267780000000000000
+          Top = 3.779530000000000000
           Width = 68.031540000000000000
-          Height = 18.897650000000000000
+          Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -9
           Font.Name = 'Arial'
-          Font.Style = [fsBold, fsUnderline]
+          Font.Style = [fsBold]
           Memo.UTF8 = (
-            'Resumo')
+            'Total Geral:')
           ParentFont = False
         end
-        object Memo16: TfrxMemoView
-          Left = 22.677180000000000000
-          Top = 90.708720000000000000
-          Width = 268.346630000000000000
-          Height = 18.897650000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            'Total de Entrada at'#195#169': [DataInicial]')
-          ParentFont = False
-        end
-        object Memo17: TfrxMemoView
-          Left = 22.677180000000000000
-          Top = 127.165430000000000000
-          Width = 117.165430000000000000
-          Height = 18.897650000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            'Saldo do Contrato:')
-          ParentFont = False
-        end
-        object Memo18: TfrxMemoView
-          Left = 328.086890000000000000
-          Top = 90.708720000000000000
-          Width = 211.653680000000000000
-          Height = 18.897650000000000000
+        object SysMemo3: TfrxSysMemoView
+          Left = 445.252320000000000000
+          Top = 3.779530000000000000
+          Width = 94.488250000000000000
+          Height = 15.118120000000000000
           DisplayFormat.FormatStr = '%2.2m'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8 = (
-            '[frxResumoCentro_Custo."VLR_ENTRADA"]')
+            '[SUM(<frxCCustoOrcamento."VLR_ENTRADA">,MasterData1)]')
           ParentFont = False
         end
-        object Memo19: TfrxMemoView
-          Left = 328.086890000000000000
-          Top = 127.165430000000000000
-          Width = 211.653680000000000000
-          Height = 18.897650000000000000
+        object SysMemo4: TfrxSysMemoView
+          Left = 600.945270000000000000
+          Top = 3.779530000000000000
+          Width = 94.488250000000000000
+          Height = 15.118120000000000000
           DisplayFormat.FormatStr = '%2.2m'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8 = (
-            '[cSaldoContrato]')
-          ParentFont = False
-        end
-        object Memo20: TfrxMemoView
-          Left = 22.677180000000000000
-          Top = 109.606370000000000000
-          Width = 268.346630000000000000
-          Height = 18.897650000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          Memo.UTF8 = (
-            'Valor do Contrato:')
-          ParentFont = False
-        end
-        object Memo21: TfrxMemoView
-          Left = 328.086890000000000000
-          Top = 109.606370000000000000
-          Width = 211.653680000000000000
-          Height = 18.897650000000000000
-          DisplayFormat.FormatStr = '%2.2m'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8 = (
-            '[frxCCustoOrcamento."VLR_CONTRATO"]')
+            '[SUM(<frxCCustoOrcamento."VLR_SAIDA">,MasterData1)]')
           ParentFont = False
         end
       end
@@ -2480,91 +2429,39 @@ object DMConsFinanceiro: TDMConsFinanceiro
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'select sum((select iif(sum(DDCC1.VALOR) > 0, sum(DDCC1.VALOR), D' +
-      'D1.VLR_PARCELA)'#13#10'            from DUPLICATA DD1'#13#10'            lef' +
-      't join DUPLICATA_CCUSTO DDCC1 on DD1.ID = DDCC1.ID'#13#10'            ' +
-      'where DD1.ID = DD.ID and'#13#10'                  DD1.TIPO_ES = '#39'E'#39' an' +
-      'd'#13#10'                  DD1.FILIAL = :FILIAL and'#13#10'                 ' +
-      ' ((:ID_CENTROCUSTO = 0) or (DDCC.ID_CENTROCUSTO = :ID_CENTROCUST' +
-      'O))'#13#10'            group by DD1.VLR_PARCELA)) VLR_ENTRADA, sum((se' +
-      'lect iif(sum(DDCC1.VALOR) > 0, sum(DDCC1.VALOR), DD1.VLR_PARCELA' +
-      ')'#13#10'                                                         from' +
-      ' DUPLICATA DD1'#13#10'                                                ' +
-      '         left join DUPLICATA_CCUSTO DDCC1 on DD1.ID = DDCC1.ID'#13#10 +
-      '                                                         where D' +
-      'D1.ID = DD.ID and'#13#10'                                             ' +
-      '                  DD1.TIPO_ES = '#39'S'#39' and'#13#10'                       ' +
-      '                                        DD1.FILIAL = :FILIAL and' +
-      #13#10'                                                              ' +
-      ' ((:ID_CENTROCUSTO = 0) or (DDCC.ID_CENTROCUSTO = :ID_CENTROCUST' +
-      'O))'#13#10'                                                         gr' +
-      'oup by DD1.VLR_PARCELA)) VLR_SAIDA, CC.CODIGO CODIGO_GRUPO,'#13#10'   ' +
-      '    CC1.CODIGO CODIGO_GRUPO_SUP, CC.DESCRICAO NOME_GRUPO, CO.COD' +
-      'IGO CONTA_ORCAMENTO, DD.ID_CONTA_ORCAMENTO,'#13#10'       CO.DESCRICAO' +
-      ' NOME_ORCAMENTO, CC.VLR_CONTRATO'#13#10'from DUPLICATA DD'#13#10'left join D' +
-      'UPLICATA_CCUSTO DDCC on DD.ID = DDCC.ID'#13#10'left join CENTROCUSTO C' +
-      'C on CC.ID = DDCC.ID_CENTROCUSTO'#13#10'left join CENTROCUSTO CC1 on C' +
-      'C1.ID = CC.SUPERIOR'#13#10'left join CONTA_ORCAMENTO CO on CO.ID = DD.' +
-      'ID_CONTA_ORCAMENTO'#13#10'where DD.DTVENCIMENTO between :DTINICIAL and' +
-      ' :DTFINAL and'#13#10'      ((:ID_CENTROCUSTO = 0) or (DDCC.ID_CENTROCU' +
-      'STO = :ID_CENTROCUSTO)) and'#13#10'      DDCC.ID_CENTROCUSTO > 0 and'#13#10 +
-      '      DD.FILIAL = :FILIAL'#13#10'GROUP by CC.CODIGO, CC1.CODIGO, CC.DE' +
-      'SCRICAO, CO.CODIGO, DD.ID_CONTA_ORCAMENTO, CO.DESCRICAO, CC.VLR_' +
-      'CONTRATO'#13#10'order by CC.CODIGO, CO.CODIGO'
+      'select sum(VD.VLR_ENTRADA) VLR_ENTRADA, sum(VD.VLR_SAIDA) VLR_SA' +
+      'IDA, VD.CODIGO_GRUPO, VD.CODIGO_GRUPO_SUP,'#13#10'       VD.NOME_GRUPO' +
+      ', VD.CONTA_ORCAMENTO, VD.ID_CONTA_ORCAMENTO, VD.NOME_ORCAMENTO, ' +
+      'VD.VLR_CONTRATO'#13#10'from VDUPLICATA_CENTROCUSTO VD'#13#10'where VD.DTULTP' +
+      'AGAMENTO between :DTINICIAL and :DTFINAL and'#13#10'      ((:ID_CENTRO' +
+      'CUSTO = 0) or (VD.ID_CENTROCUSTO = :ID_CENTROCUSTO)) and'#13#10'      ' +
+      'VD.FILIAL = :FILIAL'#13#10'group by VD.CODIGO_GRUPO, VD.CODIGO_GRUPO_S' +
+      'UP, VD.NOME_GRUPO, VD.CONTA_ORCAMENTO, VD.ID_CONTA_ORCAMENTO, VD' +
+      '.NOME_ORCAMENTO, VD.VLR_CONTRATO'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
-        Name = 'FILIAL'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID_CENTROCUSTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID_CENTROCUSTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'FILIAL'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID_CENTROCUSTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID_CENTROCUSTO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftUnknown
+        DataType = ftDate
         Name = 'DTINICIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftDate
         Name = 'DTFINAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ID_CENTROCUSTO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ID_CENTROCUSTO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end>
@@ -2586,23 +2483,25 @@ object DMConsFinanceiro: TDMConsFinanceiro
     object cdsCCustoOrcamentoVLR_ENTRADA: TFloatField
       DisplayLabel = 'Vlr Entrada'
       FieldName = 'VLR_ENTRADA'
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
     end
     object cdsCCustoOrcamentoVLR_SAIDA: TFloatField
       DisplayLabel = 'Vlr Sa'#237'da'
       FieldName = 'VLR_SAIDA'
-      DisplayFormat = '#,##0.00'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
     end
     object cdsCCustoOrcamentoCODIGO_GRUPO: TStringField
-      DisplayLabel = 'Cod.Grupo'
+      DisplayLabel = 'Centro Custo'
       FieldName = 'CODIGO_GRUPO'
     end
     object cdsCCustoOrcamentoCODIGO_GRUPO_SUP: TStringField
-      DisplayLabel = 'Cod.Sup.Grupo'
+      DisplayLabel = 'Centro Custo Superior'
       FieldName = 'CODIGO_GRUPO_SUP'
     end
     object cdsCCustoOrcamentoNOME_GRUPO: TStringField
-      DisplayLabel = 'Nome Grupo'
+      DisplayLabel = 'Nome Centro Custo'
       FieldName = 'NOME_GRUPO'
       Size = 50
     end
@@ -2611,6 +2510,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       FieldName = 'CONTA_ORCAMENTO'
     end
     object cdsCCustoOrcamentoID_CONTA_ORCAMENTO: TIntegerField
+      DisplayLabel = 'Id Conta Or'#231'amento'
       FieldName = 'ID_CONTA_ORCAMENTO'
     end
     object cdsCCustoOrcamentoNOME_ORCAMENTO: TStringField
@@ -2619,9 +2519,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       Size = 50
     end
     object cdsCCustoOrcamentoVLR_CONTRATO: TFloatField
-      DisplayLabel = 'Vlr Contrato'
       FieldName = 'VLR_CONTRATO'
-      DisplayFormat = '#,##0.00'
     end
   end
   object dsCCustoOrcamento: TDataSource
@@ -2682,7 +2580,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'VLR_CONTRATO=VLR_CONTRATO')
     DataSource = dsCCustoOrcamento
     BCDToCurrency = False
-    Left = 592
+    Left = 584
     Top = 416
   end
   object qResumoCentro_Custo: TSQLQuery
@@ -2765,9 +2663,15 @@ object DMConsFinanceiro: TDMConsFinanceiro
   object frxResumoCentro_Custo: TfrxDBDataset
     UserName = 'frxResumoCentro_Custo'
     CloseDataSource = False
+    FieldAliases.Strings = (
+      'VLR_ENTRADA=VLR_ENTRADA'
+      'VLR_SAIDA=VLR_SAIDA'
+      'CODIGO_GRUPO=CODIGO_GRUPO'
+      'NOME_GRUPO=NOME_GRUPO'
+      'VLR_CONTRATO=VLR_CONTRATO')
     DataSet = qResumoCentro_Custo
     BCDToCurrency = False
-    Left = 632
+    Left = 624
     Top = 416
   end
   object frxPDFExport1: TfrxPDFExport

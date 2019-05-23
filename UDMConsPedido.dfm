@@ -17,33 +17,34 @@ object DMConsPedido: TDMConsPedido
       #13#10'       ITE.DTENTREGA DTENTREGA_ITEM, ITE.QTD, ITE.QTD_FATURADO' +
       ', ITE.QTD_RESTANTE, ITE.QTD_CANCELADO,'#13#10'       VEN.NOME NOME_VEN' +
       'DEDOR, ITE.VLR_UNITARIO, ITE.VLR_DESCONTO, ITE.VLR_TOTAL, ITE.NU' +
-      'MOS, CLI.FANTASIA, PED.NUM_DOC,'#13#10'       ITE.NUM_TALAO, ITE.NOMEP' +
-      'RODUTO NOME_PRODUTO_PED, ITE.QTD_PECA, ITE.QTD_FUT, ITE.ID_COR,'#13 +
-      #10'       COMB.NOME NOME_COR_COMBINACAO, PRO.TIPO_REG, ITE.TAMANHO' +
-      ', GR.NOME NOME_GRUPO, PED.APROVADO_PED, ITE.DTFATURA,'#13#10'       IT' +
-      'E.DTEXPEDICAO, APROV.DATA DTAPROVADO, ITE.UNIDADE, ITE.OBS_ETIQU' +
-      'ETA,'#13#10'       case'#13#10'         when (ITE.COD_PRODUTO_CLIENTE <> '#39#39' ' +
-      'and'#13#10'               ITE.COD_COR_CLIENTE <> '#39#39' and'#13#10'             ' +
-      '  ITE.NOME_COR_CLIENTE <> '#39#39' and'#13#10'               ITE.TAMANHO_CLI' +
-      'ENTE <> '#39#39') then'#13#10'               (ITE.NOME_COR_CLIENTE || '#39' T. '#39 +
-      '||ITE.TAMANHO_CLIENTE|| '#39'('#39'||'#13#10'               ITE.COD_PRODUTO_CL' +
-      'IENTE ||'#39')'#39' || '#39' Cod.Prod: '#39'||'#13#10'               ITE.COD_COR_CLIEN' +
-      'TE)'#13#10'         else'#13#10'               COMB.NOME'#13#10'         end as MO' +
-      'NT_COMBINACAO,'#13#10'       case'#13#10'         when (ITE.QTD > 0) then ((' +
-      'ITE.VLR_TOTAL / ITE.QTD) * ITE.QTD_RESTANTE)'#13#10'         when (ITE' +
-      '.QTD <= 0) then 0'#13#10'       end as VLR_RESTANTE,'#13#10'       case'#13#10'   ' +
-      '      when (ITE.QTD > 0) then ((ITE.VLR_TOTAL / ITE.QTD) * ITE.Q' +
-      'TD_FATURADO)'#13#10'         when (ITE.QTD <= 0) then 0'#13#10'       end as' +
-      ' VLR_FATURADO,'#13#10'       case'#13#10'         when (ITE.QTD > 0) then ((' +
-      'ITE.VLR_TOTAL / ITE.QTD) * ITE.QTD_CANCELADO)'#13#10'         when (IT' +
-      'E.QTD <= 0) then 0'#13#10'       end as VLR_CANCELADO, PRO.TAM_CALC'#13#10'f' +
-      'rom PEDIDO PED'#13#10'inner join PEDIDO_ITEM ITE on PED.ID = ITE.ID'#13#10'i' +
-      'nner join FILIAL FIL on PED.FILIAL = FIL.ID'#13#10'inner join PESSOA C' +
-      'LI on PED.ID_CLIENTE = CLI.CODIGO'#13#10'inner join PRODUTO PRO on ITE' +
-      '.ID_PRODUTO = PRO.ID'#13#10'left join PESSOA VEN on PED.ID_VENDEDOR = ' +
-      'VEN.CODIGO'#13#10'left join COMBINACAO COMB on ITE.ID_COR = COMB.ID'#13#10'l' +
-      'eft join GRUPO GR on PRO.ID_GRUPO = GR.ID'#13#10'left join PEDIDO_APRO' +
-      'V APROV on PED.ID = APROV.ID  '
+      'MOS, PED.NUM_DOC,'#13#10'       ITE.NUM_TALAO, ITE.NOMEPRODUTO NOME_PR' +
+      'ODUTO_PED, ITE.QTD_PECA, ITE.QTD_FUT, ITE.ID_COR,'#13#10'       COMB.N' +
+      'OME NOME_COR_COMBINACAO, PRO.TIPO_REG, ITE.TAMANHO, GR.NOME NOME' +
+      '_GRUPO, PED.APROVADO_PED, ITE.DTFATURA,'#13#10'       ITE.DTEXPEDICAO,' +
+      ' APROV.DATA DTAPROVADO, ITE.UNIDADE, ITE.OBS_ETIQUETA,'#13#10'       c' +
+      'ase'#13#10'         when (ITE.COD_PRODUTO_CLIENTE <> '#39#39' and'#13#10'         ' +
+      '      ITE.COD_COR_CLIENTE <> '#39#39' and'#13#10'               ITE.NOME_COR' +
+      '_CLIENTE <> '#39#39' and'#13#10'               ITE.TAMANHO_CLIENTE <> '#39#39') th' +
+      'en'#13#10'               (ITE.NOME_COR_CLIENTE || '#39' T. '#39'||ITE.TAMANHO_' +
+      'CLIENTE|| '#39'('#39'||'#13#10'               ITE.COD_PRODUTO_CLIENTE ||'#39')'#39' ||' +
+      ' '#39' Cod.Prod: '#39'||'#13#10'               ITE.COD_COR_CLIENTE)'#13#10'         ' +
+      'else'#13#10'               COMB.NOME'#13#10'         end as MONT_COMBINACAO,' +
+      #13#10'       case'#13#10'         when (ITE.QTD > 0) then ((ITE.VLR_TOTAL ' +
+      '/ ITE.QTD) * ITE.QTD_RESTANTE)'#13#10'         when (ITE.QTD <= 0) the' +
+      'n 0'#13#10'       end as VLR_RESTANTE,'#13#10'       case'#13#10'         when (IT' +
+      'E.QTD > 0) then ((ITE.VLR_TOTAL / ITE.QTD) * ITE.QTD_FATURADO)'#13#10 +
+      '         when (ITE.QTD <= 0) then 0'#13#10'       end as VLR_FATURADO,' +
+      #13#10'       case'#13#10'         when (ITE.QTD > 0) then ((ITE.VLR_TOTAL ' +
+      '/ ITE.QTD) * ITE.QTD_CANCELADO)'#13#10'         when (ITE.QTD <= 0) th' +
+      'en 0'#13#10'       end as VLR_CANCELADO, PRO.TAM_CALC,'#13#10'case'#13#10'  when c' +
+      'oalesce(cli.fantasia,'#39#39') = '#39#39' then cli.nome'#13#10'  else cli.fantasia' +
+      #13#10'  end FANTASIA'#13#10#13#10'from PEDIDO PED'#13#10'inner join PEDIDO_ITEM ITE ' +
+      'on PED.ID = ITE.ID'#13#10'inner join FILIAL FIL on PED.FILIAL = FIL.ID' +
+      #13#10'inner join PESSOA CLI on PED.ID_CLIENTE = CLI.CODIGO'#13#10'inner jo' +
+      'in PRODUTO PRO on ITE.ID_PRODUTO = PRO.ID'#13#10'left join PESSOA VEN ' +
+      'on PED.ID_VENDEDOR = VEN.CODIGO'#13#10'left join COMBINACAO COMB on IT' +
+      'E.ID_COR = COMB.ID'#13#10'left join GRUPO GR on PRO.ID_GRUPO = GR.ID'#13#10 +
+      'left join PEDIDO_APROV APROV on PED.ID = APROV.ID  '#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -60,7 +61,7 @@ object DMConsPedido: TDMConsPedido
     Params = <>
     ProviderName = 'dspPedido_Item'
     Left = 120
-    Top = 10
+    Top = 11
     object cdsPedido_ItemID_CLIENTE: TIntegerField
       FieldName = 'ID_CLIENTE'
     end
@@ -1130,21 +1131,22 @@ object DMConsPedido: TDMConsPedido
       'select V.ID_CLIENTE, V.ID, V.PEDIDO_CLIENTE, V.DTEMISSAO, V.NUM_' +
       'PEDIDO, V.ID_VENDEDOR, V.FILIAL, V.NOME_FILIAL,'#13#10'       V.NOME_F' +
       'ILIAL_INT, V.NOME_CLIENTE, V.CLIENTE_ESTOQUE, V.NOME_VENDEDOR, V' +
-      '.FANTASIA, V.DTENTREGA_ITEM,'#13#10'       V.DTENTREGA_PED, V.APROVADO' +
-      '_PED, V.DTAPROVACAO, V.DTFATURA, V.DTEXPEDICAO, V.NOME_PRODUTO_P' +
-      'ROPOSTA,'#13#10'       V.ID_TRANSPORTADORA, TRA.NOME NOME_TRANSPORTADO' +
-      'RA, V.UF, V.CIDADE, sum(V.VLR_TOTAL) VLR_TOTAL, sum(V.QTD) QTD,'#13 +
-      #10'       sum(V.QTD_FATURADO) QTD_FATURADO, sum(V.QTD_RESTANTE) QT' +
-      'D_RESTANTE, sum(V.QTD_CANCELADO) QTD_CANCELADO,'#13#10'       sum(V.VL' +
-      'R_RESTANTE) VLR_RESTANTE, sum(V.VLR_FATURADO) VLR_FATURADO, sum(' +
-      'V.VLR_CANCELADO) VLR_CANCELADO'#13#10'from VPEDIDO_ITEM V'#13#10'left join P' +
-      'ESSOA TRA on V.ID_TRANSPORTADORA = TRA.CODIGO'#13#10'group by V.ID_CLI' +
-      'ENTE, V.ID, V.PEDIDO_CLIENTE, V.DTEMISSAO, V.NUM_PEDIDO, V.ID_VE' +
-      'NDEDOR, V.FILIAL, V.NOME_FILIAL, V.NOME_FILIAL_INT, V.NOME_CLIEN' +
-      'TE, V.CLIENTE_ESTOQUE, V.NOME_VENDEDOR, V.FANTASIA, V.DTENTREGA_' +
-      'ITEM, V.DTENTREGA_PED, V.APROVADO_PED, V.DTAPROVACAO, V.DTFATURA' +
-      ', V.DTEXPEDICAO, V.NOME_PRODUTO_PROPOSTA, V.ID_TRANSPORTADORA, T' +
-      'RA.NOME, V.UF, V.CIDADE'
+      '.DTENTREGA_ITEM,'#13#10'       V.DTENTREGA_PED, V.APROVADO_PED, V.DTAP' +
+      'ROVACAO, V.DTFATURA, V.DTEXPEDICAO, V.NOME_PRODUTO_PROPOSTA,'#13#10'  ' +
+      '     V.ID_TRANSPORTADORA, TRA.NOME NOME_TRANSPORTADORA, V.UF, V.' +
+      'CIDADE, sum(V.VLR_TOTAL) VLR_TOTAL, sum(V.QTD) QTD,'#13#10'       sum(' +
+      'V.QTD_FATURADO) QTD_FATURADO, sum(V.QTD_RESTANTE) QTD_RESTANTE, ' +
+      'sum(V.QTD_CANCELADO) QTD_CANCELADO,'#13#10'       sum(V.VLR_RESTANTE) ' +
+      'VLR_RESTANTE, sum(V.VLR_FATURADO) VLR_FATURADO, sum(V.VLR_CANCEL' +
+      'ADO) VLR_CANCELADO,'#13#10'CASE'#13#10'  WHEN coalesce(V.fantasia,'#39#39') = '#39#39' T' +
+      'HEN V.nome_cliente'#13#10'  ELSE V.fantasia'#13#10'  END FANTASIA'#13#10'from VPED' +
+      'IDO_ITEM V'#13#10'left join PESSOA TRA on V.ID_TRANSPORTADORA = TRA.CO' +
+      'DIGO'#13#10'group by V.ID_CLIENTE, V.ID, V.PEDIDO_CLIENTE, V.DTEMISSAO' +
+      ', V.NUM_PEDIDO, V.ID_VENDEDOR, V.FILIAL, V.NOME_FILIAL,'#13#10'V.NOME_' +
+      'FILIAL_INT, V.NOME_CLIENTE, V.CLIENTE_ESTOQUE, V.NOME_VENDEDOR, ' +
+      'V.FANTASIA, V.DTENTREGA_ITEM, V.DTENTREGA_PED,'#13#10'V.APROVADO_PED, ' +
+      'V.DTAPROVACAO, V.DTFATURA, V.DTEXPEDICAO, V.NOME_PRODUTO_PROPOST' +
+      'A, V.ID_TRANSPORTADORA, TRA.NOME,'#13#10'V.UF, V.CIDADE'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1312,29 +1314,31 @@ object DMConsPedido: TDMConsPedido
       'IDO, PES.NOME, NI.REFERENCIA, NI.NOME_PRODUTO, NI.VLR_UNITARIO, ' +
       'NI.VLR_DESCONTO, NI.VLR_DESCONTORATEIO,'#13#10'       NI.VLR_TOTAL, NI' +
       '.QTD, pi.DTENTREGA, pi.QTD QTD_PEDIDO, pi.QTD_FATURADO, pi.QTD_R' +
-      'ESTANTE, NP.ITEM_PEDIDO,'#13#10'       NP.NUM_PEDIDO, NT.FILIAL, PES.F' +
-      'ANTASIA, PES.NOME NOME_CLIENTE,'#13#10'       ((pi.VLR_UNITARIO - pi.V' +
-      'LR_DESCONTO) * pi.QTD_RESTANTE) VLR_RESTANTE,'#13#10'       ((pi.VLR_U' +
-      'NITARIO - pi.VLR_DESCONTO) * pi.QTD_FATURADO) VLR_FATURADO,'#13#10'   ' +
-      '    ((pi.VLR_UNITARIO - pi.VLR_DESCONTO) * pi.QTD_CANCELADO) VLR' +
-      '_CANCELADO, COMB.NOME NOME_COR_COMBINACAO,'#13#10'       CFOP.CODCFOP,' +
-      ' PED.DTEMISSAO DTEMISSAO_PED,'#13#10'CASE'#13#10'  WHEN PROD.tipo_producao =' +
-      ' '#39'T'#39' THEN '#39'Tran'#231'adeira'#39#13#10'  WHEN PROD.tipo_producao = '#39'E'#39' THEN '#39'T' +
-      'ear'#39#13#10'  end Desc_Tipo_Producao,'#13#10'CASE'#13#10'  WHEN NT.SERIE = '#39'RNF'#39' t' +
-      'hen '#39'REC'#39#13#10'  ELSE '#39'NF'#39#13#10'  end DESC_NOTA, NI.unidade, PROD.unidad' +
-      'e UNIDADE_PRODUTO,'#13#10'  ni.id_produto, uconv.qtd qtd_conversor ,'#13#10 +
-      'case'#13#10'  when coalesce(uconv.qtd,0) > 0 then coalesce(PROD.pesobr' +
-      'uto,0) * coalesce(NI.qtd,0) * uconv.qtd'#13#10'  else coalesce(PROD.pe' +
-      'sobruto,0) * coalesce(NI.qtd,0)'#13#10'  end PESOBRUTO'#13#10'from NOTAFISCA' +
-      'L_PED NP'#13#10'inner join NOTAFISCAL NT on (NP.ID = NT.ID)'#13#10'inner joi' +
-      'n NOTAFISCAL_ITENS NI on (NP.ID = NI.ID and NP.ITEM = NI.ITEM)'#13#10 +
-      'inner join PEDIDO PED on (NP.ID_PEDIDO = PED.ID)'#13#10'inner join PED' +
-      'IDO_ITEM pi on (NP.ID_PEDIDO = pi.ID and NP.ITEM_PEDIDO = pi.ITE' +
-      'M)'#13#10'inner join PESSOA PES on (PED.ID_CLIENTE = PES.CODIGO)'#13#10'left' +
-      ' join COMBINACAO COMB on pi.ID_COR = COMB.ID  '#13#10'LEFT JOIN TAB_CF' +
-      'OP CFOP ON (NI.ID_CFOP = CFOP.ID)'#13#10'left join PRODUTO PROD on NI.' +
-      'ID_PRODUTO = PROD.ID  '#13#10'left join unidade_conv uconv'#13#10'on prod.un' +
-      'idade = uconv.unidade'#13#10'and ni.unidade = uconv.unidade_conv'#13#10
+      'ESTANTE, NP.ITEM_PEDIDO,'#13#10'       NP.NUM_PEDIDO, NT.FILIAL, PES.N' +
+      'OME NOME_CLIENTE,'#13#10'       ((pi.VLR_UNITARIO - pi.VLR_DESCONTO) *' +
+      ' pi.QTD_RESTANTE) VLR_RESTANTE,'#13#10'       ((pi.VLR_UNITARIO - pi.V' +
+      'LR_DESCONTO) * pi.QTD_FATURADO) VLR_FATURADO,'#13#10'       ((pi.VLR_U' +
+      'NITARIO - pi.VLR_DESCONTO) * pi.QTD_CANCELADO) VLR_CANCELADO, CO' +
+      'MB.NOME NOME_COR_COMBINACAO,'#13#10'       CFOP.CODCFOP, PED.DTEMISSAO' +
+      ' DTEMISSAO_PED,'#13#10'CASE'#13#10'  WHEN PROD.tipo_producao = '#39'T'#39' THEN '#39'Tra' +
+      'n'#231'adeira'#39#13#10'  WHEN PROD.tipo_producao = '#39'E'#39' THEN '#39'Tear'#39#13#10'  end De' +
+      'sc_Tipo_Producao,'#13#10'CASE'#13#10'  WHEN NT.SERIE = '#39'RNF'#39' then '#39'REC'#39#13#10'  E' +
+      'LSE '#39'NF'#39#13#10'  end DESC_NOTA, NI.unidade, PROD.unidade UNIDADE_PROD' +
+      'UTO,'#13#10'  ni.id_produto, uconv.qtd qtd_conversor ,'#13#10'case'#13#10'  when c' +
+      'oalesce(uconv.qtd,0) > 0 then coalesce(PROD.pesobruto,0) * coale' +
+      'sce(NI.qtd,0) * uconv.qtd'#13#10'  else coalesce(PROD.pesobruto,0) * c' +
+      'oalesce(NI.qtd,0)'#13#10'  end PESOBRUTO,'#13#10'case'#13#10'  when coalesce(PES.F' +
+      'ANTASIA,'#39#39') = '#39#39' then pes.nome'#13#10'  else PES.FANTASIA'#13#10'  end FANTA' +
+      'SIA'#13#10'from NOTAFISCAL_PED NP'#13#10'inner join NOTAFISCAL NT on (NP.ID ' +
+      '= NT.ID)'#13#10'inner join NOTAFISCAL_ITENS NI on (NP.ID = NI.ID and N' +
+      'P.ITEM = NI.ITEM)'#13#10'inner join PEDIDO PED on (NP.ID_PEDIDO = PED.' +
+      'ID)'#13#10'inner join PEDIDO_ITEM pi on (NP.ID_PEDIDO = pi.ID and NP.I' +
+      'TEM_PEDIDO = pi.ITEM)'#13#10'inner join PESSOA PES on (PED.ID_CLIENTE ' +
+      '= PES.CODIGO)'#13#10'left join COMBINACAO COMB on pi.ID_COR = COMB.ID ' +
+      ' '#13#10'LEFT JOIN TAB_CFOP CFOP ON (NI.ID_CFOP = CFOP.ID)'#13#10'left join ' +
+      'PRODUTO PROD on NI.ID_PRODUTO = PROD.ID  '#13#10'left join unidade_con' +
+      'v uconv'#13#10'on prod.unidade = uconv.unidade'#13#10'and ni.unidade = uconv' +
+      '.unidade_conv'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1670,20 +1674,21 @@ object DMConsPedido: TDMConsPedido
       'V.nome_filial_int,'#13#10' V.nome_cliente, V.nome_produto, V.nome_vend' +
       'edor, v.referencia, v.pedido_cliente,'#13#10' v.dtemissao, v.dtentrega' +
       '_ped, v.dtentrega_item,v.num_pedido, v.numos,'#13#10'V.ID_PRODUTO, V.F' +
-      'ILIAL, V.CLIENTE_ESTOQUE, V.FANTASIA, v.id_cor, V.NOME_COR_COMBI' +
-      'NACAO , V.TIPO_REG,'#13#10'V.DTFATURA, V.DTEXPEDICAO, V.DTAPROVACAO, V' +
-      '.TAM_CALC'#13#10'FROM vpedido_item V'#13#10#13#10#13#10'GROUP BY V.id_cliente, V.id_' +
-      'cliente, V.nome_filial, V.nome_filial_int,'#13#10' V.nome_cliente, V.n' +
-      'ome_produto, V.nome_vendedor, v.referencia, v.pedido_cliente,'#13#10' ' +
-      'v.dtemissao, v.dtentrega_ped, v.dtentrega_item,v.num_pedido, v.n' +
-      'umos,'#13#10' V.ID_PRODUTO, V.FILIAL, V.CLIENTE_ESTOQUE, V.FANTASIA, V' +
-      '.id_cor, V.NOME_COR_COMBINACAO, V.TIPO_REG,'#13#10'V.DTFATURA, V.DTEXP' +
-      'EDICAO, V.DTAPROVACAO, V.TAM_CALC'#13#10
+      'ILIAL, V.CLIENTE_ESTOQUE, v.id_cor, V.NOME_COR_COMBINACAO , V.TI' +
+      'PO_REG,'#13#10'V.DTFATURA, V.DTEXPEDICAO, V.DTAPROVACAO, V.TAM_CALC,'#13#10 +
+      'CASE'#13#10'  WHEN coalesce(V.fantasia,'#39#39') = '#39#39' THEN V.nome_cliente'#13#10' ' +
+      ' ELSE V.fantasia'#13#10'  END FANTASIA'#13#10'FROM vpedido_item V'#13#10'GROUP BY ' +
+      'V.id_cliente, V.id_cliente, V.nome_filial, V.nome_filial_int,'#13#10' ' +
+      'V.nome_cliente, V.nome_produto, V.nome_vendedor, v.referencia, v' +
+      '.pedido_cliente,'#13#10' v.dtemissao, v.dtentrega_ped, v.dtentrega_ite' +
+      'm,v.num_pedido, v.numos,'#13#10' V.ID_PRODUTO, V.FILIAL, V.CLIENTE_EST' +
+      'OQUE, V.FANTASIA, V.id_cor, V.NOME_COR_COMBINACAO, V.TIPO_REG,'#13#10 +
+      'V.DTFATURA, V.DTEXPEDICAO, V.DTAPROVACAO, V.TAM_CALC'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 40
-    Top = 58
+    Top = 57
   end
   object dspPedido_Ref: TDataSetProvider
     DataSet = sdsPedido_Ref
@@ -1915,8 +1920,9 @@ object DMConsPedido: TDMConsPedido
       ' SUM(V.qtd_peca) qtd_peca,  SUM(V.vlr_total) vlr_total,'#13#10'SUM(V.v' +
       'lr_restante) vlr_restante, SUM(V.vlr_faturado) vlr_faturado,'#13#10' S' +
       'UM(V.vlr_cancelado) vlr_cancelado, V.id_cliente, V.nome_cliente,' +
-      ' V.FANTASIA'#13#10'FROM vpedido_item V'#13#10#13#10'GROUP BY V.id_cliente, V.id_' +
-      'cliente, V.nome_cliente, V.FANTASIA'#13#10
+      #13#10'CASE'#13#10'  WHEN coalesce(V.fantasia,'#39#39') = '#39#39' THEN V.nome_cliente'#13 +
+      #10'  ELSE V.fantasia'#13#10'  END FANTASIA'#13#10#13#10'FROM vpedido_item V'#13#10#13#10'GRO' +
+      'UP BY V.id_cliente, V.id_cliente, V.nome_cliente, V.FANTASIA'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

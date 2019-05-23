@@ -728,14 +728,14 @@ var
   i : Integer;
 begin
   fDMConsFinanceiro.cdsCCustoOrcamento.Close;
-  i := PosEx('GROUP', UpperCase( fDMConsFinanceiro.ctCCustoOrcamento), 0);
+  i := PosEx('GROUP', UpperCase(fDMConsFinanceiro.ctCCustoOrcamento), 0);
   vComandoAux := copy(fDMConsFinanceiro.ctCCustoOrcamento, i, Length(fDMConsFinanceiro.ctCCustoOrcamento) - i + 1);
   vComandoAux2 := copy(fDMConsFinanceiro.ctCCustoOrcamento, 1, i - 1);
   vComando := '';
   case EnumDataRelatorio(NxComboBox2.ItemIndex) of
-    tpDataEmissao    : vComandoAux := StringReplace(vComandoAux,'DTVENCIMENTO','DTEMISSAO',[rfReplaceAll]);
-    tpDataVencimento : vComandoAux := StringReplace(vComandoAux,'DTVENCIMENTO','DTVENCIMENTO',[rfReplaceAll]);
-    tpDataPagamento  : vComandoAux := StringReplace(vComandoAux,'DTVENCIMENTO','DTULTPAGAMENTO',[rfReplaceAll]);
+    tpDataEmissao    : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTEMISSAO',[rfReplaceAll]);
+    tpDataVencimento : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTVENCIMENTO',[rfReplaceAll]);
+    tpDataPagamento  : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTULTPAGAMENTO',[rfReplaceAll]);
   end;
   case ComboBox1.ItemIndex of
     0: vComando := vComando + ' AND DD.VLR_PAGO > 0 ';
