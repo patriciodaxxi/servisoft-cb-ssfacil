@@ -54,10 +54,10 @@ object dmDatabase: TdmDatabase
     LoginPrompt = False
     Params.Strings = (
       'DriverName=Interbase'
-      'Database=D:\Fontes\$Servisoft\Bases\SSFacil\AtualizaFDB.fdb'
+      'Database=firebird09-farm51.kinghost.net:/firebird/servisoft1.gdb'
       'RoleName=RoleName'
-      'User_Name=sysdba'
-      'Password=masterkey'
+      'User_Name=servisoft1'
+      'Password=campobom'
       'ServerCharSet='
       'SQLDialect=3'
       'BlobSize=-1'

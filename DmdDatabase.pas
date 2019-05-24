@@ -58,10 +58,9 @@ type
     procedure AtualizaFDB;
     function verificaLiberacao: Boolean;
 
-    function ProximaTabelaLoc(NomeTabela : String) : Integer;
+    function ProximaTabelaLoc(NomeTabela: String): Integer;
 
     procedure prc_UpdateError(Tabela: String; ukTipo: TUpdateKind; Emsg: EUpdateError);
-
   end;
 
 var
@@ -220,8 +219,8 @@ var
   vSQL_Ant: WideString;
   ID, ID2: TTransactionDesc;
   sds: TSQLDataSet;
-  vFlag2 : Integer;
-  vMicroAtual : Boolean;
+  vFlag2: Integer;
+  vMicroAtual: Boolean;
 begin
    // verifica se alguém está atualizando
   {sds := TSQLDataSet.Create(nil);
@@ -342,8 +341,8 @@ end;
 function TdmDatabase.verificaLiberacao: Boolean;
 var
   vData: String;
-  vAux : String;
-  vMsgLib : WideString;
+  vAux: String;
+  vMsgLib: WideString;
 begin
   Result := True;
 
@@ -406,9 +405,9 @@ procedure TdmDatabase.DataModuleCreate(Sender: TObject);
 var
   Config: TIniFile;
   dtLiberado: TDateTime;
-  dtUltimo_Acesso : TDateTime;
-  vTexto : String;
-  vFoneAux : String;
+  dtUltimo_Acesso: TDateTime;
+  vTexto: String;
+  vFoneAux: String;
 begin
   scoDados.Connected     := False;
   scoLiberacao.Connected := False;
@@ -543,6 +542,7 @@ begin
       end;
 //////////////////VERIFICA E ATUALIZA FDB
     try
+      //24/05/2019  Esta fixo no dmddatabase, pois esta pegando no kinghost
       scoAtualiza.Params.Values['DRIVERNAME'] := 'INTERBASE';
       scoAtualiza.Params.Values['SQLDIALECT'] := '3';
       scoAtualiza.Params.Values['DATABASE']   := Config.ReadString('FDBUpdate', 'DATABASE', '');
