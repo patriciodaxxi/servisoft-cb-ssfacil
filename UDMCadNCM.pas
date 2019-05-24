@@ -281,6 +281,7 @@ type
     sdsNCM_UFPERC_RED_MVA_CLI_SIMPLES: TFloatField;
     cdsNCM_UFPERC_RED_MVA_CLI_GERAL: TFloatField;
     cdsNCM_UFPERC_RED_MVA_CLI_SIMPLES: TFloatField;
+    cdsNCM_ConsultaCONTADOR: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNCMUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

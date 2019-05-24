@@ -24,7 +24,7 @@ object frmCadNCM: TfrmCadNCM
     Top = 0
     Width = 950
     Height = 527
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadNCM: TfrmCadNCM
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RZPageControl1Change
     FixedDimension = 19
@@ -76,7 +76,7 @@ object frmCadNCM: TfrmCadNCM
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 12
+        ColCount = 13
         RowCount = 2
         Columns = <
           item
@@ -130,7 +130,6 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'GERAR_ST'
             Title.Alignment = taCenter
             Title.Caption = 'Gerar ST'
-            Width = 64
             Visible = True
           end
           item
@@ -146,7 +145,6 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'CALCULA_FCP'
             Title.Alignment = taCenter
             Title.Caption = 'C'#225'lcula FCP'
-            Width = 64
             Visible = True
           end
           item
@@ -161,7 +159,14 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'COD_IPI'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. IPI'
-            Width = 64
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CONTADOR'
+            Title.Alignment = taCenter
+            Title.Caption = 'Usado Em Produtos'
+            Width = 57
             Visible = True
           end>
       end
@@ -583,31 +588,45 @@ object frmCadNCM: TfrmCadNCM
         end
         object Shape1: TShape
           Left = 592
-          Top = 34
+          Top = 35
           Width = 27
           Height = 15
           Brush.Color = clYellow
         end
         object Label18: TLabel
           Left = 624
-          Top = 35
+          Top = 36
           Width = 102
           Height = 13
           Caption = 'NCM sem C'#243'd. CEST'
         end
         object Shape2: TShape
           Left = 592
-          Top = 14
+          Top = 3
           Width = 27
           Height = 15
           Brush.Color = 5483007
         end
         object Label27: TLabel
           Left = 624
-          Top = 16
+          Top = 5
           Width = 66
           Height = 13
           Caption = 'IBPT Vencido'
+        end
+        object Shape3: TShape
+          Left = 592
+          Top = 19
+          Width = 27
+          Height = 15
+          Brush.Color = 12171775
+        end
+        object Label40: TLabel
+          Left = 624
+          Top = 21
+          Width = 152
+          Height = 13
+          Caption = 'IBPT Vencido (NCM n'#227'o usado)'
         end
         object edtNCM: TEdit
           Left = 38
@@ -700,8 +719,8 @@ object frmCadNCM: TfrmCadNCM
           OnClick = btnConsultarClick
         end
         object BitBtn1: TBitBtn
-          Left = 704
-          Top = 8
+          Left = 826
+          Top = 6
           Width = 113
           Height = 25
           Caption = 'Atualiza CEST'
@@ -1328,10 +1347,10 @@ object frmCadNCM: TfrmCadNCM
         Top = 202
         Width = 946
         Height = 302
-        ActivePage = TS_Geral
+        ActivePage = TS_SubTrib
         ActivePageDefault = TS_SubTrib
         Align = alClient
-        TabIndex = 3
+        TabIndex = 0
         TabOrder = 2
         TextColors.Selected = clBlue
         FixedDimension = 19
