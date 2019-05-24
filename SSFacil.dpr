@@ -793,7 +793,8 @@ uses
   UGerar_PlanoMat in 'UGerar_PlanoMat.pas' {frmGerar_PlanoMat},
   uConsProduto_Compras in 'uConsProduto_Compras.pas' {frmConsProduto_Compras},
   UVendedor_Config in 'UVendedor_Config.pas' {frmVendedor_Config},
-  UCadProduto_CA in 'UCadProduto_CA.pas' {frmCadProduto_CA};
+  UCadProduto_CA in 'UCadProduto_CA.pas' {frmCadProduto_CA},
+  UConsEstRed in 'UConsEstRed.pas' {frmConsEstRed};
 
 {$R *.res}
 
