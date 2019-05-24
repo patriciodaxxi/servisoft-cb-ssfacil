@@ -1897,7 +1897,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43607.774353657410000000
+    ReportOptions.LastChange = 43609.445011736110000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'var'
@@ -1914,15 +1914,12 @@ object DMConsFinanceiro: TDMConsFinanceiro
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
-      '  if <frxCCustoOrcamento."VLR_ENTRADA"> <> 0 then'
-      '  begin'
       
-        '    cSaldoCentroCusto := cSaldoCentroCusto - <frxCCustoOrcamento' +
-        '."VLR_ENTRADA">;'
+        '  cSaldoCentroCusto := cSaldoCentroCusto + <frxCCustoOrcamento."' +
+        'VLR_ENTRADA"> - <frxCCustoOrcamento."VLR_SAIDA">;'
       
-        '    cTotalEntrada := cTotalEntrada + <frxCCustoOrcamento."VLR_EN' +
-        'TRADA">;'
-      '  end;'
+        '  cTotalEntrada := cTotalEntrada + <frxCCustoOrcamento."VLR_ENTR' +
+        'ADA">;'
       'end;'
       ''
       'procedure GroupFooter1OnBeforePrint(Sender: TfrxComponent);'
@@ -2173,9 +2170,9 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Memo12: TfrxMemoView
-          Left = 456.590910000000000000
+          Left = 426.354670000000000000
           Top = 3.779530000000000000
-          Width = 83.149660000000000000
+          Width = 113.385900000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
