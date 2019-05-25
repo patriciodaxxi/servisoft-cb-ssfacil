@@ -794,7 +794,8 @@ uses
   uConsProduto_Compras in 'uConsProduto_Compras.pas' {frmConsProduto_Compras},
   UVendedor_Config in 'UVendedor_Config.pas' {frmVendedor_Config},
   UCadProduto_CA in 'UCadProduto_CA.pas' {frmCadProduto_CA},
-  UConsEstRed in 'UConsEstRed.pas' {frmConsEstRed};
+  UConsEstRed in 'UConsEstRed.pas' {frmConsEstRed},
+  UCadNotaFiscal_Alt_CCusto in 'UCadNotaFiscal_Alt_CCusto.pas' {frmCadNotaFiscal_Alt_CCusto};
 
 {$R *.res}
 

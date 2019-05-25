@@ -263,6 +263,10 @@ type
     procedure DBEdit34Enter(Sender: TObject);
     procedure RxDBLookupCombo14Enter(Sender: TObject);
     procedure RxDBLookupCombo14Exit(Sender: TObject);
+    procedure RxDBlkCCustoKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure RxDBlkContaOrcKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     ffrmCadProduto: TfrmCadProduto;
@@ -365,7 +369,7 @@ var
 implementation
 
 uses rsDBUtils, USel_Produto, uUtilPadrao, UMenu, uCalculo_NotaFiscal, USel_TabPreco, USel_Unidade, UDMUtil, DmdDatabase,
-  USel_EnqIPI;
+  USel_EnqIPI, USel_CentroCusto, USel_ContaOrc;
 
 {$R *.dfm}
 
@@ -3291,6 +3295,38 @@ begin
   begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat          := StrToFloat(FormatFloat('0.0000',0));
     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO_TRIB.AsFloat := StrToFloat(FormatFloat('0.0000000000',0));
+  end;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.RxDBlkCCustoKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    if RxDBlkCCusto.Text <> '' then
+      vID_Centro_Custo := RxDBlkCCusto.KeyValue;
+    frmSel_CentroCusto := TfrmSel_CentroCusto.Create(Self);
+    frmSel_CentroCusto.ShowModal;
+    if vID_Centro_Custo > 0 then
+      RxDBlkCCusto.KeyValue := vID_Centro_Custo;
+  end;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.RxDBlkContaOrcKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    if RxDBlkContaOrc.Text <> '' then
+      vID_ContaOrcamento_Pos := RxDBlkContaOrc.KeyValue;
+    frmSel_ContaOrc := TfrmSel_ContaOrc.Create(Self);
+    if fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString = 'S' then
+      frmSel_ContaOrc.ComboBox2.ItemIndex := 0
+    else
+      frmSel_ContaOrc.ComboBox2.ItemIndex := 1;
+    frmSel_ContaOrc.ShowModal;
+    if vID_ContaOrcamento_Pos > 0 then
+      RxDBlkContaOrc.KeyValue:= vID_ContaOrcamento_Pos;
   end;
 end;
 

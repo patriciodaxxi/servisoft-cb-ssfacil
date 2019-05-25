@@ -417,6 +417,7 @@ type
     DBEdit76: TDBEdit;
     DBEdit77: TDBEdit;
     DBEdit78: TDBEdit;
+    Label118: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -659,7 +660,8 @@ implementation
 
 uses DmdDatabase, rsDBUtils, uUtilPadrao, USel_Pessoa, URecebeXML, uCalculo_NotaFiscal, uNFeComandos, USel_ContaOrc, uUtilCliente,
   uUtilCobranca, DmdDatabase_NFeBD, UDMAprovacao_Ped, UConsPessoa_Fin, UConsPedido_Senha, uGrava_NotaFiscal, UCadNotaFiscal_Custo,
-  UMenu, Math, UDMEtiqueta, USel_PreFat, uMenu1, USel_RecNF, uXMLSuframa;
+  UMenu, Math, UDMEtiqueta, USel_PreFat, uMenu1, USel_RecNF, uXMLSuframa,
+  UCadNotaFiscal_Alt_CCusto;
 
 {$R *.dfm}
 
@@ -1292,6 +1294,7 @@ end;
 procedure TfrmCadNotaFiscal.FormShow(Sender: TObject);
 var
   vData: TDateTime;
+  vTexto2 : String;
 begin
   fDMCadNotaFiscal := TDMCadNotaFiscal.Create(Self);
   fDMEstoque       := TDMEstoque.Create(Self);
@@ -1351,7 +1354,24 @@ begin
 
   PrFaturamento1.Visible := (fDMCadNotaFiscal.qParametros_NFeUSA_PREFAT.AsString = 'S');
 
-  btnCopiarRecNF.Visible := (fDMCadNotaFiscal.qParametros_NFeCOPIAR_RECNF.AsString = 'S'); 
+  btnCopiarRecNF.Visible := (fDMCadNotaFiscal.qParametros_NFeCOPIAR_RECNF.AsString = 'S');
+
+  vTexto2 := '';
+  if (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S') then
+    vTexto2 := 'Alt.C.Custo';
+  if (fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S') then
+  begin
+    if vTexto2 = '' then
+      vTexto2 := 'Alt.C.Orçamento'
+    else
+      vTexto2 := '/C.Orçamento'
+  end;
+  if vTexto2 <> '' then
+  begin
+    vTexto2 := 'F8 ' + vTexto2;
+    Label118.Caption := vTexto2;
+    Label118.Visible := True;
+  end;
 end;
 
 procedure TfrmCadNotaFiscal.prc_Consultar(ID: Integer);
@@ -2918,6 +2938,18 @@ begin
     ffrmConsNotaFiscal_NDevol.fDMCadNotaFiscal := fDMCadNotaFiscal;
     ffrmConsNotaFiscal_NDevol.ShowModal;
     FreeAndNil(ffrmConsNotaFiscal_NDevol);
+  end
+  else
+  if (Key = Vk_F8) and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Active) and not(fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert]) then
+  begin
+    if (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S') or
+       ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S')) then
+    begin
+      frmCadNotaFiscal_Alt_CCusto := TfrmCadNotaFiscal_Alt_CCusto.Create(self);
+      frmCadNotaFiscal_Alt_CCusto.fDMCadNotaFiscal := fDMCadNotaFiscal;
+      frmCadNotaFiscal_Alt_CCusto.ShowModal;
+      FreeAndNil(frmCadNotaFiscal_Alt_CCusto);
+    end;
   end;
   if (Key = Vk_F9) and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Active) and (fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger > 0) then
   begin

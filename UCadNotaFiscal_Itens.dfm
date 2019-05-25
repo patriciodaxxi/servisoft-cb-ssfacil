@@ -1314,6 +1314,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
           LookupDisplay = 'DESCRICAO'
           LookupSource = DMCadNotaFiscal.dsContaOrcamento
           TabOrder = 12
+          OnKeyDown = RxDBlkContaOrcKeyDown
         end
         object RxDBlkCCusto: TRxDBLookupCombo
           Left = 133
@@ -1328,6 +1329,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
           LookupDisplay = 'DESCRICAO'
           LookupSource = DMCadNotaFiscal.dsCentroCusto
           TabOrder = 13
+          OnKeyDown = RxDBlkCCustoKeyDown
         end
       end
       object pnlNomeProduto: TPanel
