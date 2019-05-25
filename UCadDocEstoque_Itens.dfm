@@ -609,4 +609,13 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
     DataSource = DMCadDocEstoque.dsDocEstoque_Itens
     TabOrder = 10
   end
+  object ckPermiteCor: TCheckBox
+    Left = 555
+    Top = 227
+    Width = 144
+    Height = 17
+    Caption = 'Permitir sem a cor'
+    TabOrder = 13
+    Visible = False
+  end
 end

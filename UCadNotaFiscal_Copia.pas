@@ -207,7 +207,8 @@ begin
   end;
   fDMCadNotaFiscal.cdsNotaFiscalDADOS_ADICIONAIS.Clear;
   fDMCadNotaFiscal.cdsNotaFiscalCANCELADA.AsString   := 'N';
-
+  if (RadioGroup1.ItemIndex = 1) and (fDMCopiarNota.cdsNotaFiscalTIPO_NOTA.AsString = 'S') then
+    fDMCadNotaFiscal.cdsNotaFiscalID_NOTAORIGINAL_ENT.AsInteger := fDMCopiarNota.cdsNotaFiscalID.AsInteger;
 
   //if not ckIgual.Checked then
   if RadioGroup1.ItemIndex <> 3 then

@@ -260,6 +260,7 @@ procedure TfrmConsEstoque_Mov.prc_Le_cdsEstoque_Mov(Gerar_CC : Boolean);
 var
   vQtdEntrada, vQtdSaida, vSaldo: Real;
 begin
+  SMDBGrid1.DisableScroll;
   vQtdEntrada := 0;
   vQtdSaida   := 0;
   fDMConsEstoque.mEstoque_CentroCusto.close;
@@ -1226,6 +1227,7 @@ end;
 
 procedure TfrmConsEstoque_Mov.NxButton1Click(Sender: TObject);
 begin
+
   prc_Le_cdsEstoque_Mov(False);
 end;
 

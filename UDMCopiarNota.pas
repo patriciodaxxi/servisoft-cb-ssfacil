@@ -832,6 +832,8 @@ type
     cdsNotaFiscal_ItensGRAVOU_TAB_TAMANHO: TStringField;
     sdsNotaFiscalQTD_TOTAL_PRODUTOS: TFloatField;
     cdsNotaFiscalQTD_TOTAL_PRODUTOS: TFloatField;
+    sdsNotaFiscalID_PREFAT: TIntegerField;
+    cdsNotaFiscalID_PREFAT: TIntegerField;
   private
     { Private declarations }
 

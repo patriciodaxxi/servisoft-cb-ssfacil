@@ -577,6 +577,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object sdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField
       FieldName = 'VLR_ICMSSUBST_RET'
     end
+    object sdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField
+      FieldName = 'ID_NOTAORIGINAL_ENT'
+    end
   end
   object dspNotaFiscal: TDataSetProvider
     DataSet = sdsNotaFiscal
@@ -1230,6 +1233,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField
       FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object cdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField
+      FieldName = 'ID_NOTAORIGINAL_ENT'
     end
   end
   object dsNotaFiscal: TDataSource

@@ -554,6 +554,7 @@ type
     vVlrAdiantamento_Ant: Real;
     vID_CFOP_Ant: Integer;
     vFinalidade_Ant: String;
+    vPreFat : Boolean;
 
     fDMCadNotaFiscal: TDMCadNotaFiscal;
     //fDMCadExtComissao: TDMCadExtComissao;
@@ -1238,6 +1239,9 @@ begin
   if fDMCadNotaFiscal.cdsParametrosUSA_VALE.AsString = 'S' then
     fDMCadNotaFiscal.mValeAux.EmptyDataSet;
   fDMCadNotaFiscal.mRecNFAux.EmptyDataSet;
+  fDMCadNotaFiscal.cdsFilial.Last;
+  if (vPreFat) and (vFilial > 0) then
+  else
   if fDMCadNotaFiscal.cdsFilial.RecordCount > 1 then
   begin
     ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
@@ -1245,18 +1249,14 @@ begin
     FreeAndNil(ffrmEscolhe_Filial);
   end
   else
-  begin
-    fDMCadNotaFiscal.cdsFilial.Last;
     vFilial      := fDMCadNotaFiscal.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadNotaFiscal.cdsFilialNOME.AsString;
-  end;
   if vFilial <= 0 then
   begin
     ShowMessage('Filial não informada!');
     exit;
   end;
-
   fDMCadNotaFiscal.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
+  vFilial_Nome := fDMCadNotaFiscal.cdsFilialNOME.AsString;
 
   fDMCadNotaFiscal.prc_Inserir(vTipo_Reg);
   lblNome_Filial.Caption := vFilial_Nome;
@@ -1286,6 +1286,7 @@ begin
   DBEdit36.ReadOnly := True;
   DBEdit37.ReadOnly := True;
   DBEdit38.ReadOnly := True;
+  vPreFat := False;
 end;
 
 procedure TfrmCadNotaFiscal.FormShow(Sender: TObject);
@@ -1423,6 +1424,7 @@ begin
   ckTotalDup.Visible := False;
   ckEnviarComErro.Checked := False;
   ckEnviarComErro.Visible := False;
+  vPreFat := False;
 end;
 
 procedure TfrmCadNotaFiscal.SMDBGrid1DblClick(Sender: TObject);
@@ -1896,6 +1898,7 @@ begin
   ckTotalDup.Visible := False;
   ckEnviarComErro.Checked := False;
   ckEnviarComErro.Visible := False;
+  vPreFat := False;
 end;
 
 procedure TfrmCadNotaFiscal.FormDestroy(Sender: TObject);
@@ -5079,7 +5082,11 @@ begin
     exit;
   end;
 
+  vFilial := fDMPreFat.cdsPreFatFILIAL.AsInteger;
+  vPreFat := True;
   btnInserirClick(Self);
+  vPreFat := False;
+
   fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger := fDMPreFat.cdsPreFatID_CLIENTE.AsInteger;
   RxDBLookupCombo3Exit(Sender);
   vID_Cliente_Ant := 0;

@@ -17,7 +17,7 @@ object DMCopiarNota: TDMCopiarNota
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 128
-    Top = 5
+    Top = 6
     object sdsNotaFiscalID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -492,6 +492,9 @@ object DMCopiarNota: TDMCopiarNota
     end
     object sdsNotaFiscalQTD_TOTAL_PRODUTOS: TFloatField
       FieldName = 'QTD_TOTAL_PRODUTOS'
+    end
+    object sdsNotaFiscalID_PREFAT: TIntegerField
+      FieldName = 'ID_PREFAT'
     end
   end
   object dspNotaFiscal: TDataSetProvider
@@ -1034,6 +1037,9 @@ object DMCopiarNota: TDMCopiarNota
     end
     object cdsNotaFiscalQTD_TOTAL_PRODUTOS: TFloatField
       FieldName = 'QTD_TOTAL_PRODUTOS'
+    end
+    object cdsNotaFiscalID_PREFAT: TIntegerField
+      FieldName = 'ID_PREFAT'
     end
   end
   object dsNotaFiscal: TDataSource
