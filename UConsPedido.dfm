@@ -402,7 +402,7 @@ object frmConsPedido: TfrmConsPedido
     Top = 188
     Width = 1017
     Height = 393
-    ActivePage = TS_Item
+    ActivePage = TS_Pedido
     ActivePageDefault = TS_Item
     Align = alClient
     Color = 16755027
@@ -415,7 +415,7 @@ object frmConsPedido: TfrmConsPedido
     ParentColor = False
     ParentFont = False
     TabColors.Unselected = clGray
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     TextColors.Unselected = 5197647
     OnChanging = RzPageControl1Changing
@@ -922,6 +922,7 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
+            Width = 64
             Visible = True
           end
           item
@@ -932,7 +933,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
