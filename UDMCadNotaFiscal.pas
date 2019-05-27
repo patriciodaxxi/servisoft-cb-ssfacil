@@ -3961,6 +3961,10 @@ begin
       vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Ano do vencimento inválido!';
     if cdsNotaFiscalDTEMISSAO.AsDateTime > cdsNotaFiscal_ParcDTVENCIMENTO.AsDateTime then
       vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Data de vencimento menor que a data de emissão!';
+    if (cdsNotaFiscalTIPO_REG.AsString = 'NTE') and (cdsNotaFiscalDTSAIDAENTRADA.AsDateTime > cdsNotaFiscal_ParcDTVENCIMENTO.AsDateTime) then
+      vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Data de vencimento menor que a data de entrada!';
+    if (StrToFloat(FormatFloat('0.00',cdsNotaFiscal_ParcVLR_VENCIMENTO.AsFloat)) <= 0) then
+      vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Valor Parcela esta zerado na nota, favor verificar!!';
     vVlrAux := StrToFloat(FormatFloat('0.00',vVlrAux + cdsNotaFiscal_ParcVLR_VENCIMENTO.AsFloat));
     cdsNotaFiscal_Parc.Next;
   end;

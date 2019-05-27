@@ -4186,6 +4186,9 @@ begin
   if (fDMCadNotaFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString = 'C') and (fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger <> 1) then
     exit;
 
+  if fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger <> fDMCadNotaFiscal.cdsClienteCODIGO.AsInteger then
+    fDMCadNotaFiscal.cdsCliente.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,[loCaseInsensitive]);
+
   //Busca o %
   vPerc_Interno := 0;
   vPerc_Red     := 0;

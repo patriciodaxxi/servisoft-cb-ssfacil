@@ -3687,6 +3687,18 @@ begin
     if (vID_Local_Estoque <= 0) and (fDMRecebeXML.qParametrosUSA_LOCAL_ESTOQUE.AsString <> 'S') then
       vID_Local_Estoque := 1;
   end;
+  //27/05/2019
+  fDMRecebeXML.mParc.First;
+  while not fDMRecebeXML.mParc.Eof do
+  begin
+    if (DateEdit1.Date > fDMRecebeXML.mParcDtVencimento.AsDateTime) then
+      vErro := vErro + #13 + '*** Data de vencimento menor que a data de entrada!';
+    if (StrToFloat(FormatFloat('0.00',fDMRecebeXML.mParcVlrVencimento.AsFloat)) <= 0) then
+      vErro := vErro + #13 + '*** Valor Parcela esta zerado na nota, favor verificar!!';
+    fDMRecebeXML.mParc.Next;
+  end;
+  //*************
+
   if vID_Local_Estoque <= 0 then
     vErro := '*** Local do Estoque não informado!';
   if Trim(vErro) = '' then
