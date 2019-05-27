@@ -4208,6 +4208,10 @@ begin
        (StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) < 100) then
       vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCadNotaFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat));
   end;
+  if ((fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString = '1') or (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString = '2') or (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString = '3')
+    or (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString = '8'))
+    and ((fDMCadNotaFiscal.cdsClienteUF.AsString <> fDMCadNotaFiscal.cdsFilialUF.AsString) and (fDMCadNotaFiscal.cdsClienteUF.AsString <> 'EX')) then
+    vPerc_Interno := StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.cdsFilialPERC_LISTA_CAMEX.AsFloat));
   if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0  then
   begin
     prc_Abrir_qNCM_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,fDMCadNotaFiscal.cdsFilialUF.AsString,'A');
