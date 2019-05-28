@@ -4241,7 +4241,8 @@ begin
       //if ((fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'M') or (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'P')) and not(fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.isNull) then
       if ((fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'M')) and not(fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.isNull) then
         texto2 := fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString;
-      if (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'P') and (fDMNFe.qParametrosIMP_REFERENCIANANOTA.AsString = 'S') and (fDMCadNotaFiscal.cdsParametrosIMP_NFE_REF_PROD.AsString <> 'R')  then
+      if ((fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'P') or (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'S'))
+        and (fDMNFe.qParametrosIMP_REFERENCIANANOTA.AsString = 'S') and (fDMCadNotaFiscal.cdsParametrosIMP_NFE_REF_PROD.AsString <> 'R')  then
       begin
         if trim(texto2) <> '' then
           texto2 := texto2 + ' ';

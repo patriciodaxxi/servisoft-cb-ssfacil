@@ -352,7 +352,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
       end
       object RxDBLookupCombo4: TRxDBLookupCombo
         Left = 147
-        Top = 25
+        Top = 26
         Width = 173
         Height = 21
         DropDownCount = 15
