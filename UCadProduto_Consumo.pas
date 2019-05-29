@@ -198,13 +198,31 @@ begin
   fDMCadProduto.cdsProduto_ConsumoNOME_POSICAO.AsString := RxDBLookupCombo4.Text;
   fDMCadProduto.cdsProduto_ConsumoNOME_SETOR.AsString   := RxDBLookupCombo5.Text;
 
+  if RxDBLookupCombo1.KeyValue <> fDMCadProduto.cdsMaterialID.AsInteger then
+    fDMCadProduto.cdsMaterial.Locate('ID',RxDBLookupCombo1.KeyValue,([Locaseinsensitive]));
+
+  //29/05/2019  
+  if fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S' then
+  begin
+    if (fDMCadProduto.cdsMaterialID_MATERIAL_CRU.AsInteger > 0) and (fDMCadProduto.cdsProduto_ConsumoTINGIMENTO.AsString <> 'S') then
+    begin
+      if MessageDlg('Material com informação de Fio na Cor, mas NÃO esta marcado para tingimento, confirmar assim mesmo? ',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+        exit;
+    end;
+    if (fDMCadProduto.cdsMaterialID_MATERIAL_CRU.AsInteger <= 0) and (fDMCadProduto.cdsProduto_ConsumoTINGIMENTO.AsString = 'S') then
+    begin
+      if MessageDlg('Material sem informação de Fio na Cor, mas ESTA marcado para tingimento, confirmar assim mesmo? ',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+        exit;
+    end;
+  end;
+  //*****************
+
   if fnc_Erro then
     exit;
 
   vFlagErro := False;
 
   try
-    fDMCadProduto.cdsMaterial.Locate('ID',RxDBLookupCombo1.KeyValue,([Locaseinsensitive]));
     fDMCadProduto.cdsProduto_ConsumoNOMEMATERIAL.AsString := RxDBLookupCombo2.Text;
     fDMCadProduto.cdsProduto_ConsumoREFERENCIA.AsString   := RxDBLookupCombo1.Text;
     if fDMCadProduto.qParametros_ProdOPCAO_PRECO_CONSUMO.AsString = 'C' then
@@ -409,20 +427,29 @@ begin
       Exit;
     end;
     fDMCadProduto.cdsProduto_ConsumoUNIDADE.AsString := fDMCadProduto.cdsMaterialUNIDADE.AsString;
-
+    if fDMCadProduto.cdsMaterialID_MATERIAL_CRU.AsInteger > 0 then
+      fDMCadProduto.cdsProduto_ConsumoTINGIMENTO.AsString := 'S';
   end;
 end;
 
 procedure TfrmCadProduto_Consumo.RxDBLookupCombo1Exit(Sender: TObject);
 begin
   if fDMCadProduto.cdsMaterial.Locate('ID',fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger,([Locaseinsensitive])) then
+  begin
     fDMCadProduto.cdsProduto_ConsumoUNIDADE.AsString := fDMCadProduto.cdsMaterialUNIDADE.AsString;
+    if fDMCadProduto.cdsMaterialID_MATERIAL_CRU.AsInteger > 0 then
+      fDMCadProduto.cdsProduto_ConsumoTINGIMENTO.AsString := 'S';
+  end;
 end;
 
 procedure TfrmCadProduto_Consumo.RxDBLookupCombo2Exit(Sender: TObject);
 begin
   if fDMCadProduto.cdsMaterial.Locate('ID',fDMCadProduto.cdsProduto_ConsumoID_MATERIAL.AsInteger,([Locaseinsensitive])) then
+  begin
     fDMCadProduto.cdsProduto_ConsumoUNIDADE.AsString := fDMCadProduto.cdsMaterialUNIDADE.AsString;
+    if fDMCadProduto.cdsMaterialID_MATERIAL_CRU.AsInteger > 0 then
+      fDMCadProduto.cdsProduto_ConsumoTINGIMENTO.AsString := 'S';
+  end;
 end;
 
 procedure TfrmCadProduto_Consumo.prc_Atualiza_Comb;

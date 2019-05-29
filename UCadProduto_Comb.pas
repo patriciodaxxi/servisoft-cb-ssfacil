@@ -152,6 +152,8 @@ begin
       SMDBGrid2.Columns[i].Visible := False;
     if (fDMCadProduto.qParametrosUSA_SETOR_CONSUMO.AsString <> 'S') and (SMDBGrid2.Columns[i].FieldName = 'clSetor') then
       SMDBGrid2.Columns[i].Visible := False;
+    if (trim(fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString) <> 'S') and (vTexto = 'TINGIMENTO') then
+      SMDBGrid2.Columns[i].Visible := False;
   end;
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin

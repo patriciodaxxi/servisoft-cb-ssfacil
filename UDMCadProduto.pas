@@ -1950,6 +1950,7 @@ type
     cdsProduto_CANUM_CA: TStringField;
     cdsProduto_CADATA: TDateField;
     qParametros_ProdUSA_CA_HIST: TStringField;
+    cdsMaterialID_MATERIAL_CRU: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2339,6 +2340,20 @@ begin
       end;
     end;
   end;
+  if ((cdsProdutoTIPO_REG.AsString = 'P') or (cdsProdutoTIPO_REG.AsString = 'S')) and (qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
+  begin
+    sds  := TSQLDataSet.Create(nil);
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText := 'SELECT COUNT(1) CONTADOR FROM PRODUTO_CONSUMO P WHERE P.ID = :ID AND P.tingimento = ' + QuotedStr('S');
+    sds.ParamByName('ID').AsInteger := cdsProdutoID.AsInteger;
+    sds.Open;
+    if sds.ParamByName('CONTADOR').AsInteger > 0 then
+      cdsProdutoSEPARA_COR.AsString := 'S';
+    FreeAndNil(sds);
+  end;
+
  // Foi tirado no dia 25/09 e colocado na trigger TRG_Produto
 {  if (cdsProdutoTIPO_REG.AsString = 'P') and (qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
   begin
