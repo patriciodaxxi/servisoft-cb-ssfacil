@@ -2635,7 +2635,7 @@ begin
   if vTipoAux = '' then
     vTipoAux := 'A';
   cdsMaterial.Close;
-  sdsMaterial.CommandText := 'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_TOTAL, USA_COR ' +
+  sdsMaterial.CommandText := 'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_TOTAL, USA_COR, ID_MATERIAL_CRU ' +
                              'FROM PRODUTO ' +
                              'WHERE INATIVO = ' + QuotedStr('N');
   if vTipoAux <> 'A' then

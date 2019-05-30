@@ -1670,7 +1670,7 @@ object dmCadProduto: TdmCadProduto
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspMaterial'
-    Left = 792
+    Left = 791
     Top = 220
     object cdsMaterialID: TIntegerField
       FieldName = 'ID'
