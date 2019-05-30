@@ -4268,11 +4268,27 @@ begin
           end
           else
           begin
-            if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'B') and (trim(vNomeProduto) = '') then
-              vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString
-            else
-            if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'C') and (trim(vNomeProduto) = '') then
-              vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString;
+            //30/05/2019 para impressão dos produtos do Ramarim.
+            vNomeProduto := '';
+            if fDMCadNotaFiscal.cdsClienteIMP_ETIQUETA_ROT.AsString = 'C' then
+            begin
+              fDMCadNotaFiscal.qProduto_Forn.Close;
+              fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID').AsInteger            := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
+              fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID_FORNECEDOR').AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
+              fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID_COR').AsInteger        := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger;
+              fDMCadNotaFiscal.qProduto_Forn.Open;
+              if not fDMCadNotaFiscal.qProduto_Forn.IsEmpty then
+                vNomeProduto := fDMCadNotaFiscal.qProduto_FornNOME_MATERIAL_FORN.AsString + ' (' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_COR_COMBINACAO.AsString + ')'
+            end;
+            //************************
+            if trim(vNomeProduto) <> '' then
+            begin
+              if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'B') and (trim(vNomeProduto) = '') then
+                vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString
+              else
+              if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'C') and (trim(vNomeProduto) = '') then
+                vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString;
+            end;
           end;
         end
         else

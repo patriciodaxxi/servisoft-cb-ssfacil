@@ -3063,6 +3063,7 @@ type
     qParametros_NFeUSA_CST_ICMS_NTE: TStringField;
     sdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField;
     cdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField;
+    cdsClienteIMP_ETIQUETA_ROT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
