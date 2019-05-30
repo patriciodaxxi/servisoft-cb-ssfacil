@@ -16,6 +16,7 @@ object DMCadTab_Preco: TDMCadTab_Preco
     Top = 32
     object sdsTab_PrecoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsTab_PrecoNOME: TStringField
@@ -48,6 +49,7 @@ object DMCadTab_Preco: TDMCadTab_Preco
   end
   object dspTab_Preco: TDataSetProvider
     DataSet = sdsTab_Preco
+    UpdateMode = upWhereKeyOnly
     OnUpdateError = dspTab_PrecoUpdateError
     Left = 160
     Top = 32
@@ -63,6 +65,7 @@ object DMCadTab_Preco: TDMCadTab_Preco
     Top = 32
     object cdsTab_PrecoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTab_PrecoNOME: TStringField
@@ -114,29 +117,30 @@ object DMCadTab_Preco: TDMCadTab_Preco
     CommandText = 
       'SELECT TAB.*, PRO.NOME NOMEPRODUTO, PRO.REFERENCIA, PRO.PRECO_CU' +
       'STO,'#13#10'PES.NOME NOME_FORNECEDOR, MR.NOME NOME_MARCA, PES.FANTASIA' +
-      ', COMB.nome NOME_COR'#13#10'FROM TAB_PRECO_ITENS TAB'#13#10'INNER JOIN PRODU' +
-      'TO PRO'#13#10'ON TAB.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN PESSOA PES ON (PRO' +
-      '.id_fornecedor = PES.CODIGO)'#13#10'LEFT JOIN MARCA MR ON (PRO.id_marc' +
-      'a = MR.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (TAB.id_cor = COMB.id)'#13 +
-      #10#13#10'WHERE TAB.ID = :ID'#13#10
+      ', COMB.nome NOME_COR'#13#10'FROM TAB_PRECO_ITENS TAB'#13#10'LEFT JOIN PRODUT' +
+      'O PRO'#13#10'ON TAB.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN PESSOA PES ON (PRO.' +
+      'id_fornecedor = PES.CODIGO)'#13#10'LEFT JOIN MARCA MR ON (PRO.id_marca' +
+      ' = MR.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (TAB.id_cor = COMB.id)'#13#10 +
+      #13#10'WHERE TAB.ID = :ID'#13#10
     DataSource = dsTab_Preco_Mestre
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID'
         ParamType = ptInput
-        Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
     Top = 168
     object sdsTab_Preco_ItensID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsTab_Preco_ItensITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsTab_Preco_ItensID_PRODUTO: TIntegerField
@@ -192,11 +196,13 @@ object DMCadTab_Preco: TDMCadTab_Preco
     Top = 168
     object cdsTab_Preco_ItensID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTab_Preco_ItensITEM: TIntegerField
       DisplayLabel = 'Item'
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTab_Preco_ItensID_PRODUTO: TIntegerField
