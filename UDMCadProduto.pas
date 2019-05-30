@@ -2349,7 +2349,7 @@ begin
     sds.CommandText := 'SELECT COUNT(1) CONTADOR FROM PRODUTO_CONSUMO P WHERE P.ID = :ID AND P.tingimento = ' + QuotedStr('S');
     sds.ParamByName('ID').AsInteger := cdsProdutoID.AsInteger;
     sds.Open;
-    if sds.ParamByName('CONTADOR').AsInteger > 0 then
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
       cdsProdutoSEPARA_COR.AsString := 'S';
     FreeAndNil(sds);
   end;
