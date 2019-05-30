@@ -2913,6 +2913,11 @@ object dmCupomFiscal: TdmCupomFiscal
       FieldName = 'SENHA_CANCELAR_CUPOM'
       Size = 10
     end
+    object sdsCupomParametrosANIVERSARIO_PERIODO: TStringField
+      FieldName = 'ANIVERSARIO_PERIODO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCupomParametros: TDataSetProvider
     DataSet = sdsCupomParametros
@@ -3179,6 +3184,11 @@ object dmCupomFiscal: TdmCupomFiscal
     object cdsCupomParametrosSENHA_CANCELAR_CUPOM: TStringField
       FieldName = 'SENHA_CANCELAR_CUPOM'
       Size = 10
+    end
+    object cdsCupomParametrosANIVERSARIO_PERIODO: TStringField
+      FieldName = 'ANIVERSARIO_PERIODO'
+      FixedChar = True
+      Size = 1
     end
   end
   object sdsSitTribCF: TSQLDataSet

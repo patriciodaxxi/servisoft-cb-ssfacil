@@ -65,6 +65,8 @@ type
     cdsSequencialNUMREGISTRO: TIntegerField;
     sdsCupomParametrosEXIBIR_DIALOGO_IMPRESSORA: TStringField;
     cdsCupomParametrosEXIBIR_DIALOGO_IMPRESSORA: TStringField;
+    sdsCupomParametrosANIVERSARIO_PERIODO: TStringField;
+    cdsCupomParametrosANIVERSARIO_PERIODO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
