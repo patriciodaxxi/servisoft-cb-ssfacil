@@ -2349,7 +2349,7 @@ begin
     sds.CommandText := 'SELECT COUNT(1) CONTADOR FROM PRODUTO_CONSUMO P WHERE P.ID = :ID AND P.tingimento = ' + QuotedStr('S');
     sds.ParamByName('ID').AsInteger := cdsProdutoID.AsInteger;
     sds.Open;
-    if sds.ParamByName('CONTADOR').AsInteger > 0 then
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
       cdsProdutoSEPARA_COR.AsString := 'S';
     FreeAndNil(sds);
   end;
@@ -2635,7 +2635,7 @@ begin
   if vTipoAux = '' then
     vTipoAux := 'A';
   cdsMaterial.Close;
-  sdsMaterial.CommandText := 'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_TOTAL, USA_COR ' +
+  sdsMaterial.CommandText := 'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_TOTAL, USA_COR, ID_MATERIAL_CRU ' +
                              'FROM PRODUTO ' +
                              'WHERE INATIVO = ' + QuotedStr('N');
   if vTipoAux <> 'A' then
