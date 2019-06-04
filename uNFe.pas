@@ -4280,7 +4280,11 @@ begin
               fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID_COR').AsInteger        := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger;
               fDMCadNotaFiscal.qProduto_Forn.Open;
               if not fDMCadNotaFiscal.qProduto_Forn.IsEmpty then
-                vNomeProduto := fDMCadNotaFiscal.qProduto_FornNOME_MATERIAL_FORN.AsString + ' (' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_COR_COMBINACAO.AsString + ')'
+              begin
+                //vNomeProduto := fDMCadNotaFiscal.qProduto_FornNOME_MATERIAL_FORN.AsString + ' (' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_COR_COMBINACAO.AsString + ')'
+                vNomeProduto := fDMCadNotaFiscal.qProduto_FornNOME_MATERIAL_FORN.AsString;
+                texto2       := '';
+              end;
             end;
             //************************
             if trim(vNomeProduto) <> '' then
