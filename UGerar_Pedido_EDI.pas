@@ -68,6 +68,8 @@ type
     procedure prc_Copiar_Arquivo;
     procedure MoverArquivo(Origem, Destino,Arquivo: String);
 
+    procedure prc_Le_XML;
+
     procedure prc_Posicionar_Regra_Empresa(ID_Operacao: Integer; Finalidade: String);
 
     function fnc_Verifica_Cliente: Boolean;
@@ -273,6 +275,15 @@ begin
   fDMGerar_EDI.mAuxiliar.EmptyDataSet;
   fDMGerar_EDI.mNaoGerado.EmptyDataSet;
   fDMGerar_EDI.mGerado.EmptyDataSet;
+
+  //Wirth   04/06/2019
+  if UpperCase(ExtractFileExt(vEnd_Arquivo)) = 'XML' then
+  begin
+    prc_Le_XML;
+    exit;
+  end;
+  //******************
+
   try
     AssignFile(F,vEnd_Arquivo);
     Reset(F);
@@ -947,6 +958,13 @@ begin
     FreeAndNil(fDMCadProduto);
     vUsuario := vUsuarioAnt;
   end;
+end;
+
+procedure TfrmGerar_Pedido_EDI.prc_Le_XML;
+begin
+  
+
+
 end;
 
 end.
