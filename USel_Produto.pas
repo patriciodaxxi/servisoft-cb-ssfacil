@@ -287,6 +287,7 @@ begin
   begin
     vCodProduto_Pos    := cdsProdutoID.AsInteger;
     vReferencia_Pos    := cdsProdutoREFERENCIA.AsString;
+    vNome_Pos          := cdsProdutoNOME.AsString;
     vUnidade_Pos       := cdsProdutoUNIDADE.AsString;
     vUsa_Cor_Pos       := cdsProdutoUSA_COR.AsString;
     vUsa_Preco_Cor_Pos := cdsProdutoUSA_PRECO_COR.AsString;
@@ -309,6 +310,7 @@ procedure TfrmSel_Produto.SMDBGrid1DblClick(Sender: TObject);
 begin
   vCodProduto_Pos    := cdsProdutoID.AsInteger;
   vReferencia_Pos    := cdsProdutoREFERENCIA.AsString;
+  vNome_Pos          := cdsProdutoNOME.AsString;
   vUnidade_Pos       := cdsProdutoUNIDADE.AsString;
   vUsa_Cor_Pos       := cdsProdutoUSA_COR.AsString;
   vUsa_Preco_Cor_Pos := cdsProdutoUSA_PRECO_COR.AsString;
@@ -467,6 +469,9 @@ begin
   end;
   if qParametrosMOSTRAR_MARCAR_PROD.AsString <> 'S' then
     Panel3.Visible := False;
+
+  if trim(Edit1.Text) <> '' then
+    prc_Consultar;
 end;
 
 procedure TfrmSel_Produto.SMDBGrid1TitleClick(Column: TColumn);

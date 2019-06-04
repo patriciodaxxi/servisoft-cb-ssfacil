@@ -299,7 +299,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       end
       object DBEdit15: TDBEdit
         Left = 138
-        Top = 3
+        Top = 2
         Width = 121
         Height = 19
         Ctl3D = False

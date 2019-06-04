@@ -1233,6 +1233,41 @@ type
     cdsPessoaIMP_ETIQUETA_ROT: TStringField;
     sdsPessoaGERAR_PROTESTO: TStringField;
     cdsPessoaGERAR_PROTESTO: TStringField;
+    dsPessoa_Animal: TDataSource;
+    cdsPessoa_Animal: TClientDataSet;
+    dspPessoa_Animal: TDataSetProvider;
+    sdsPessoa_Animal: TSQLDataSet;
+    sdsPessoa_AnimalCODIGO: TIntegerField;
+    sdsPessoa_AnimalITEM: TIntegerField;
+    sdsPessoa_AnimalNOME: TStringField;
+    sdsPessoa_AnimalID_RACA: TIntegerField;
+    sdsPessoa_AnimalDTCADASTRO: TDateField;
+    sdsPessoa_AnimalID_REMEDIO_PULGA: TIntegerField;
+    sdsPessoa_AnimalID_RACAO: TIntegerField;
+    sdsPessoa_AnimalOBS: TMemoField;
+    cdsPessoa_AnimalCODIGO: TIntegerField;
+    cdsPessoa_AnimalITEM: TIntegerField;
+    cdsPessoa_AnimalNOME: TStringField;
+    cdsPessoa_AnimalID_RACA: TIntegerField;
+    cdsPessoa_AnimalDTCADASTRO: TDateField;
+    cdsPessoa_AnimalID_REMEDIO_PULGA: TIntegerField;
+    cdsPessoa_AnimalID_RACAO: TIntegerField;
+    cdsPessoa_AnimalOBS: TMemoField;
+    sdsRaca: TSQLDataSet;
+    dspRaca: TDataSetProvider;
+    cdsRaca: TClientDataSet;
+    dsRaca: TDataSource;
+    qParametros_GeralEMPRESA_PET: TStringField;
+    qProd: TSQLQuery;
+    qProdID: TIntegerField;
+    qProdNOME: TStringField;
+    qProdREFERENCIA: TStringField;
+    cdsRacaID: TIntegerField;
+    cdsRacaNOME: TStringField;
+    cdsRacaID_TIPO_ANIMAL: TIntegerField;
+    cdsPessoa_AnimalclNome_Raca: TStringField;
+    cdsPessoa_AnimalclNome_RemedioPulga: TStringField;
+    cdsPessoa_AnimalclNome_Racao: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
@@ -1273,6 +1308,8 @@ type
     procedure cdsPessoa_FilBeforeInsert(DataSet: TDataSet);
     procedure cdsPessoa_FilAfterPost(DataSet: TDataSet);
     procedure cdsVendedor_ConfigNewRecord(DataSet: TDataSet);
+    procedure cdsPessoa_AnimalNewRecord(DataSet: TDataSet);
+    procedure cdsPessoa_AnimalCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     vID_CidadePes: Integer;
@@ -1508,6 +1545,8 @@ begin
     cdsEDI_Config.Open;
   if qParametros_GeralINF_USUARIO_VEND.AsString = 'S' then
     cdsUsuario.Open;
+  if qParametros_GeralEMPRESA_PET.AsString = 'S' then
+    cdsRaca.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
@@ -2142,6 +2181,34 @@ begin
   cdsVendedor_ConfigDESC_PIS.AsString    := 'N';
   cdsVendedor_ConfigDESC_COFINS.AsString := 'N';
   cdsVendedor_ConfigDESC_ISSQN.AsString  := 'N';
+end;
+
+procedure TDMCadPessoa.cdsPessoa_AnimalNewRecord(DataSet: TDataSet);
+begin
+  cdsPessoa_AnimalDTCADASTRO.AsDateTime := Date;
+end;
+
+procedure TDMCadPessoa.cdsPessoa_AnimalCalcFields(DataSet: TDataSet);
+begin
+  if cdsPessoa_AnimalID_RACA.AsInteger > 0 then
+  begin
+    cdsRaca.Locate('ID',cdsPessoa_AnimalID_RACA.AsInteger,([Locaseinsensitive]));
+    cdsPessoa_AnimalclNome_Raca.AsString := cdsRacaNOME.AsString;
+  end;
+  if cdsPessoa_AnimalID_RACAO.AsInteger > 0 then
+  begin
+    qProd.Close;
+    qProd.ParamByName('ID').AsInteger := cdsPessoa_AnimalID_RACAO.AsInteger;
+    qProd.Open;
+    cdsPessoa_AnimalclNome_Racao.AsString := qProdNOME.AsString;
+  end;
+  if cdsPessoa_AnimalID_REMEDIO_PULGA.AsInteger > 0 then
+  begin
+    qProd.Close;
+    qProd.ParamByName('ID').AsInteger := cdsPessoa_AnimalID_REMEDIO_PULGA.AsInteger;
+    qProd.Open;
+    cdsPessoa_AnimalclNome_RemedioPulga.AsString := qProdNOME.AsString;
+  end;
 end;
 
 end.

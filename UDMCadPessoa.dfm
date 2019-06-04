@@ -1861,7 +1861,7 @@ object DMCadPessoa: TDMCadPessoa
       'FROM PARAMETROS'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 1024
+    Left = 1025
     Top = 31
     object qParametrosID: TIntegerField
       FieldName = 'ID'
@@ -5340,6 +5340,11 @@ object DMCadPessoa: TDMCadPessoa
       FixedChar = True
       Size = 1
     end
+    object qParametros_GeralEMPRESA_PET: TStringField
+      FieldName = 'EMPRESA_PET'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsGrupo_Pessoa: TSQLDataSet
     NoMetadata = True
@@ -6360,7 +6365,7 @@ object DMCadPessoa: TDMCadPessoa
     Params = <>
     ProviderName = 'dspPessoa_Vend'
     StoreDefs = True
-    Left = 112
+    Left = 113
     Top = 381
     object cdsPessoa_VendCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -6863,6 +6868,230 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'USA_CONFIG_IND'
       FixedChar = True
       Size = 1
+    end
+  end
+  object dsPessoa_Animal: TDataSource
+    DataSet = cdsPessoa_Animal
+    Left = 145
+    Top = 518
+  end
+  object cdsPessoa_Animal: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'CODIGO'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ITEM'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NOME'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'ID_RACA'
+        DataType = ftInteger
+      end
+      item
+        Name = 'DTCADASTRO'
+        DataType = ftDate
+      end
+      item
+        Name = 'ID_REMEDIO_PULGA'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_RACAO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'OBS'
+        DataType = ftMemo
+        Size = 1
+      end>
+    IndexDefs = <>
+    IndexFieldNames = 'CODIGO;ITEM'
+    Params = <>
+    ProviderName = 'dspPessoa_Animal'
+    StoreDefs = True
+    OnCalcFields = cdsPessoa_AnimalCalcFields
+    OnNewRecord = cdsPessoa_AnimalNewRecord
+    Left = 114
+    Top = 519
+    object cdsPessoa_AnimalCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPessoa_AnimalITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPessoa_AnimalNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsPessoa_AnimalID_RACA: TIntegerField
+      FieldName = 'ID_RACA'
+    end
+    object cdsPessoa_AnimalDTCADASTRO: TDateField
+      FieldName = 'DTCADASTRO'
+    end
+    object cdsPessoa_AnimalID_REMEDIO_PULGA: TIntegerField
+      FieldName = 'ID_REMEDIO_PULGA'
+    end
+    object cdsPessoa_AnimalID_RACAO: TIntegerField
+      FieldName = 'ID_RACAO'
+    end
+    object cdsPessoa_AnimalOBS: TMemoField
+      FieldName = 'OBS'
+      BlobType = ftMemo
+      Size = 1
+    end
+    object cdsPessoa_AnimalclNome_Raca: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clNome_Raca'
+      ProviderFlags = []
+      Size = 60
+      Calculated = True
+    end
+    object cdsPessoa_AnimalclNome_RemedioPulga: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clNome_RemedioPulga'
+      ProviderFlags = []
+      Size = 60
+      Calculated = True
+    end
+    object cdsPessoa_AnimalclNome_Racao: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clNome_Racao'
+      ProviderFlags = []
+      Size = 60
+      Calculated = True
+    end
+  end
+  object dspPessoa_Animal: TDataSetProvider
+    DataSet = sdsPessoa_Animal
+    UpdateMode = upWhereKeyOnly
+    Left = 80
+    Top = 518
+  end
+  object sdsPessoa_Animal: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM PESSOA_ANIMAL'#13#10'WHERE CODIGO = :CODIGO'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 48
+    Top = 518
+    object sdsPessoa_AnimalCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPessoa_AnimalITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPessoa_AnimalNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object sdsPessoa_AnimalID_RACA: TIntegerField
+      FieldName = 'ID_RACA'
+    end
+    object sdsPessoa_AnimalDTCADASTRO: TDateField
+      FieldName = 'DTCADASTRO'
+    end
+    object sdsPessoa_AnimalID_REMEDIO_PULGA: TIntegerField
+      FieldName = 'ID_REMEDIO_PULGA'
+    end
+    object sdsPessoa_AnimalID_RACAO: TIntegerField
+      FieldName = 'ID_RACAO'
+    end
+    object sdsPessoa_AnimalOBS: TMemoField
+      FieldName = 'OBS'
+      BlobType = ftMemo
+      Size = 1
+    end
+  end
+  object sdsRaca: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM RACA'#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 250
+    Top = 542
+  end
+  object dspRaca: TDataSetProvider
+    DataSet = sdsRaca
+    Left = 282
+    Top = 542
+  end
+  object cdsRaca: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspRaca'
+    Left = 314
+    Top = 542
+    object cdsRacaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsRacaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsRacaID_TIPO_ANIMAL: TIntegerField
+      FieldName = 'ID_TIPO_ANIMAL'
+    end
+  end
+  object dsRaca: TDataSource
+    DataSet = cdsRaca
+    Left = 346
+    Top = 542
+  end
+  object qProd: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT ID, NOME, REFERENCIA'
+      'FROM PRODUTO'
+      'WHERE ID = :ID')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1027
+    Top = 364
+    object qProdID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qProdNOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object qProdREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
     end
   end
 end

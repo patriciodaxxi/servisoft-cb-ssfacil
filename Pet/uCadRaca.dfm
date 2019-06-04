@@ -1,9 +1,10 @@
-object frmCadGrupo: TfrmCadGrupo
-  Left = 300
-  Top = 159
-  Width = 689
-  Height = 462
-  Caption = 'Cadastro de Grupos'
+object frmCadRaca: TfrmCadRaca
+  Left = 267
+  Top = 56
+  Width = 763
+  Height = 586
+  BorderIcons = [biSystemMenu, biMaximize]
+  Caption = 'Ra'#231'a de Animal'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,7 +15,6 @@ object frmCadGrupo: TfrmCadGrupo
   OldCreateOrder = False
   Position = poDefault
   OnClose = FormClose
-  OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
@@ -22,46 +22,40 @@ object frmCadGrupo: TfrmCadGrupo
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 681
-    Height = 431
+    Width = 755
+    Height = 555
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
-    BackgroundColor = clSilver
+    BackgroundColor = 16752448
     BoldCurrentTab = True
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
     TabIndex = 1
     TabOrder = 0
+    OnChange = RzPageControl1Change
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
       Caption = 'Consulta'
       object SMDBGrid1: TSMDBGrid
         Left = 0
-        Top = 63
-        Width = 677
-        Height = 328
+        Top = 88
+        Width = 751
+        Height = 427
         Align = alClient
         Ctl3D = False
-        DataSource = DMCadGrupo.dsGrupo
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = 6974058
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        DataSource = DMCadRaca.dsConsulta
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         ParentCtl3D = False
-        ParentFont = False
         ReadOnly = True
-        TabOrder = 2
+        TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
         OnDblClick = SMDBGrid1DblClick
-        OnTitleClick = SMDBGrid1TitleClick
         Flat = True
         BandsFont.Charset = DEFAULT_CHARSET
         BandsFont.Color = clWindowText
@@ -75,56 +69,58 @@ object frmCadGrupo: TfrmCadGrupo
         TitleHeight.PixelCount = 24
         FooterColor = clBtnFace
         ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
-        OnGetCellParams = SMDBGrid1GetCellParams
         RegistryKey = 'Software\Scalabium'
         RegistrySection = 'SMDBGrid'
         WidthOfIndicator = 11
-        DefaultRowHeight = 16
+        DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 3
         RowCount = 2
         Columns = <
           item
+            Alignment = taCenter
             Expanded = False
-            FieldName = 'CODIGO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Courier New'
-            Font.Style = []
+            FieldName = 'ID'
             Title.Alignment = taCenter
-            Title.Caption = 'C'#243'digo'
-            Width = 155
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'NOME_AUX'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Courier New'
-            Font.Style = []
+            FieldName = 'NOME'
             Title.Alignment = taCenter
-            Title.Caption = 'Nome'
-            Width = 361
+            Title.Caption = 'Nome Ra'#231'a'
+            Width = 326
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'ID_TIPO_ANIMAL'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID Esp'#233'cie'
+            Width = 50
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME_TIPO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Esp'#233'cie'
             Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 677
-        Height = 30
+        Width = 751
+        Height = 32
         Align = alTop
         Color = clSilver
         TabOrder = 0
         object btnInserir: TNxButton
-          Left = 1
+          Left = 3
           Top = 1
-          Width = 150
-          Height = 28
-          Align = alLeft
+          Width = 153
+          Height = 30
           Caption = 'Inserir'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -195,11 +191,10 @@ object frmCadGrupo: TfrmCadGrupo
           OnClick = btnInserirClick
         end
         object btnExcluir: TNxButton
-          Left = 151
+          Left = 155
           Top = 1
-          Width = 150
-          Height = 28
-          Align = alLeft
+          Width = 153
+          Height = 30
           Caption = 'Excluir'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -269,157 +264,11 @@ object frmCadGrupo: TfrmCadGrupo
           Transparent = True
           OnClick = btnExcluirClick
         end
-        object btnPesquisar: TNxButton
-          Left = 451
-          Top = 1
-          Width = 150
-          Height = 28
-          Align = alLeft
-          Caption = 'Pesquisar'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          Glyph.Data = {
-            AE060000424DAE06000000000000360000002800000017000000170000000100
-            1800000000007806000000000000000000000000000000000000FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFE5E7EAC4C7CB706D6748433723160A1D11031E16
-            114B413D746C6AC4C8CDE8EAECFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
-            0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF72707837251D3C2100734408975E0E
-            A96D17A86D18A367178A530A69380136190034251E79797FFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFEDEDEE35383D532D01A36D14A9
-            7317A56B189C5F129459118F571192580C905A12935C16975C138551133E1A00
-            3A3A3EF0F1F2FFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFFE7E6EA241E1F7450
-            08BB7F1CA56A16975F0E8F570E8F56118447017E40008F560991561192541395
-            580C945B0D9E5F175E2F02292120E9EAECFFFFFFFFFFFF000000FFFFFFFFFFFF
-            2D2F347F560FBB821FA36B17965915965B119B5F0F804600A78C64D3C1A47F4D
-            13975D0F985C13985D139A5D1292590E975A14633608323236FFFFFFFFFFFF00
-            0000FFFFFF5E5A65604307BE881FAB7113985F0F9D6111996315915B07B0813F
-            FFFFFFFFFFFFF4F1E4824A009565129465129D64109D6514945B0C9C5C154823
-            00656469FFFFFF000000DADDE036230DB68422B27A17A369119D67129F6814A0
-            68149A620EA17125FFFFFFFFFFFFDAC8B0955300A169139E6A11A36717A06817
-            9F681392560F8C571229160EDEDFE2000000A0A0A45D3C00C38919B07715A36B
-            17A46F14A66F13A16F16A77014A1640D8D621A7C613D915F0CAA700DA96E15A9
-            6D14A46C18A46F10A570169E61129A5E0D3F1D00A0A2A6000000665E589A6E14
-            B88520AB7514A57119AA7315A87313A97414AB7313966009DCCFB2FDFEF2A585
-            4BA76B07A9751AA66F1BA67218AB7414AE7319A77214935A13754304635A5600
-            00003A3426C28E20B5851FAD7614A97818AE7616AE7915B07816A97212A67726
-            FFFFFFFFFFFFE3DDC87C4600996506B27A14AD7814AC7817B07617AD7A17945C
-            11985D10332923000000221A07D39B24C38619AD7D18AF7D19B67C1AB27B1DAE
-            7C1CB47811B17E23FFFFFFFDFFFFFFFFFFFFFFFFC0AE89A46A08B57C19B27D1A
-            B37D17B17E1D9A5F0DA667171B1203000000261D0BD59E27BF881CB1801BB382
-            18BA811DB7801DB98218BA7E0EAC7B0DDCCCAAF1F1E2FFFFFFFCFFFFFFFFFFBD
-            A25EAC750FBA821BB98318BB811E955E12A46B18211405000000241A07D89D28
-            BE8B1DB9851CB98917BB841CBA881CA3730FAF8640A57213B37B0DA9740CD4C4
-            95FFFFFFFFFFFFEFEBCBA46C08BA861EBF871DB7811C99600FAA6B181A100400
-            0000342921BF891CC5931CC1891FC08D1BC18D1BAE7708E5DBB2FFFFFFEFEEE3
-            A87C1EAA7005C5AF80FFFFFFFFFFFFF2EFD3A47802BE8C1DC88C23AA7715A266
-            0F995E11362C260000005D55578E6311CA991FC38C20C08D1FC4911BAE760BF6
-            F3C9FFFFFFFFFFFFEBE9DCDBD2BBFDFFF7FCFCFFFFFFFFE0D29AAE7C07C7901D
-            C48D22A16C0EA76C1376430A5E5A57000000A09FA63C2200D29B2AC3911DBD8E
-            1EC8931FC08E17C49B42FFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFFFFF8FAE5B4
-            881FCD9218C89924A97515A46A14A96F19371800A2A3A6000000DBE1E31C0D03
-            AC7215CE9F23BD911DC68E1ECA9621C2900FC3A340DCD3ACF2EEE1FBF8E9EFEA
-            D9D8C797BE9528CC9518CB9924B47C1CA26A13AD731A975C0E240F09DEE0E300
-            0000FFFFFF60626A441F00C98D1FCC9B1EC28F20C18F1BC99820CB971BC6951A
-            C79A28C99B2FCA9924C89515D09F21C19021AC7917A57118AE771DB07116491B
-            00625F69FFFFFF000000FFFEFFFFFFFF303036633000BC861AC99721C68F22C1
-            8B1DBF8D1AC2901AC7941DC9941EC7931BC08B1EB27B17AC7815AD7C13AE7E16
-            A76F0E5B30002C3036FFFFFFFEFFFF000000FBFEF9FFFFFFE8E9EC1E1F206331
-            00BF8312C5911DC79322BF911DBC8B1AB9881AB8841BB48519B27D18B57E1CBB
-            811DB57B18AE72145E3400221E1DE8E7EBFFFFFFFCFDFD000000FBFDFDFEFFFC
-            FFFFFFEDEFF239373D4624009C6900B88110C8901CC9911BC48C1ABE891BC387
-            1CBA861BB78814B47B089A620844210035383DF0EFF3FFFFFFFEFFFBFFFFFE00
-            0000FEFBFFFFFDFCFFFFFCFFFFFFFFFFFF74767E3626213D2500845200B57900
-            D59B09DBA612D79D0FB47D0082540045260037271F72747CFFFFFFFFFFFFF7FD
-            FEFEFBFEFCFFFD000000FCFEF8FEFEFDFBFDFFFAFEFBFFFFFCFFFFFFE6E9EDC0
-            C3C7726F6C4C473F291D0D271D0325200D4F473B766E6BBEC1C8E8E9EDFFFFFF
-            FFFEFFFAFEF9FEFCFBFFFDFEFDFEFE000000}
-          GlyphSpacing = 5
-          ParentFont = False
-          TabOrder = 2
-          Transparent = True
-          OnClick = btnPesquisarClick
-        end
-        object btnImprimir: TNxButton
-          Left = 301
-          Top = 1
-          Width = 150
-          Height = 28
-          Align = alLeft
-          Caption = 'Imprimir'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          Glyph.Data = {
-            AE060000424DAE06000000000000360000002800000017000000170000000100
-            1800000000007806000000000000000000000000000000000000FCFFFFFFFEFE
-            FCFFFCF9FEFEF9FCFDFFFCFFF3FAFBF3FAFAF3FAFAF2FAFAF3FAFAF4F9FAF4F9
-            FAF2FAFAF2FAFAF4F9FAF5FAFAFDFBFEFFFFFEFFFFFFFFFFFFFFFFFFFFFFFF00
-            0000FEFFFEFEFEFEFBFFFDFCFDFEFFFFFFD5EAF0489FC55DB4D15EB4D157B3D2
-            5BB3D05BB4D458B2D359B3D25AB3D45DB1D352A8C3AFDDEAFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF000000FEFFFDFEFDFEFCFFFCFFFDFEFFFFFFB5E2EA4AB8D0A1
-            FAFC9EF1F597F1F69DF1F59AF1F699F1F69EF1F598F1F4A0F6FB58C7D98DCFE8
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000FAFFFEFEFDFEFCFFFDFFFEFEFFFF
-            FEB8E1EC53C0D899E8E97EBCC083BECA8CBEC189BCC582BCC785BEC282BAB899
-            E0E667D1E08CCEE6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000FCFEFEFFFDFE
-            FFFFFFFFFFFFFFFFFFC1E6F147BFDA84E1E860ADB05FAFB862B1B45AB1B559B1
-            B659B1B54EA8AE70D9E25ED0E28FCFE9FFFFFFFFFFFFFFFFFFFFFFFFFDFFFF00
-            0000FAFEFEFFFFFFDCDAD9D5D2D2E0D9D6AABFCD41C3DD8AF5FD8BDEE591E4EA
-            92DFEA8FE0E78CE1E697DFEA8FDDEA8AF3FB4FD4E48FC6D5E1D8D5D5D3D2DBD9
-            D9FDFDFDFDFFFF000000FFFFFFB5B1B371635E806E6B503A2F0E3B4C69E7FF6E
-            E2F660C9D361CCD95FC7D65FC8D661C8D761CBD55DC7CD6BDFF069EEFF114764
-            45322C776C666E6460AEAAA9FFFFFF000000FDFDFC827A78CFBFB9E9DDD66F5B
-            52324448396F7A4373754974744574734674754B73764B727545757544747549
-            6F75426D793646505F5049DDCDCAD1C1BE827B78FCFCFB000000FCFCFB87817D
-            CCC0BADEDCD4D2C2BCAD9A9CAB9697AF9895AF9794AC9794A79994AC9693AD99
-            8FAD9893A79897A89A92AC9B90AE9E98C1B7B2E8DBD9CFC0BD897F7CFBFBFA00
-            0000FCFCFB8B807ED3C7C3E6E6E2EAE4E4F2ECECF6EEEBF3EEEEF7EEEEF7EEEF
-            F0EFEEF5EFF0F4EFEEF7EEF0F5EDF2EFF1EFF1EFEEF2ECEEEBE6EAEAE4E3D3C8
-            C4887F7DFCFBFB000000FCFCFC89817FDBCECEF7F2F2F7F0F4EBEAE7E4E3DEDF
-            E3E1E4E1E2E3E0DFDDE1DFE2E0DFE1E0E0E1E0DEE5E0DDE4DDDCE0DDDDECE8E7
-            F2F2F3F5F3F1DAD2D188827DFBFCFB000000FCFDFC8B8282DFD3D4FFFDFFE8EC
-            EB7D797665605E68626165605F635E5D635D5B625C5C605A595F59595C58575B
-            5655585453676362E9E8EAFFFDFDE1D4D189837EFAFCFC000000FCFDFD8B8482
-            DED6D5FFFFFFC2C4C3514B4A322F2D3735353835353735353734343735353633
-            333836353835343836353431304C4746AFB0B0FFFFFFE4D4DB8C8485FCFCFC00
-            0000FCFCFD8F8986DCD5D1FFFFFFC6C5C4554F4D2F2E2D383838383838373838
-            37383838373837393737383737393738373733302F4C4747B7B1B2FFFFFFDED6
-            D0898884FCFBFD000000FBFCFC928C89D4CAC5DAD4D0BDBAB8605C5A2C2D2D25
-            28282B2E2E313434333737343737363838363737353838363838343131514C4C
-            ADA1AE7F70C2CEC2CA938B8BFAFBFC000000FFFFFF999490B7A9A2BEAFADAAA0
-            A084807FA6A6A58182825C5C5C46474739383835363635333332323231333332
-            32322F2D2D534C4FA1A19760AB80BAB8AA9A9290FCFFFF000000FFFFFFC6C1BE
-            94817DC4AFACA39A98868784C9CACAB9BABBBABBBCB4B5B5A9AAAB9D9E9F9093
-            938A87888482827A7B7C7F7F7E6D6669918D8195A67B847F79C1BEBFFFFFFF00
-            0000FFFFFEFEFFFFB2A9A99F9494989895796C6EA69694A49593A1918EA0908C
-            9B8D899A8C899889879987849686809882808C7C7C6359588E8B8BA4999EAEA9
-            ACFFFFFFFFFFFF000000FEFCFEFCFEFFFFFFFFFFFFFFFFFFFF98AFC059919F6A
-            9FA5689CA2689CA165989D679BA065989D5E999A56999D5E959F498295A2ABB4
-            FFFFFFFFFFFFFFFFFFFEFFFFFFFFFF000000FDFDFDFCFDFEFEFEFCFAFDFDFFFF
-            FF90D3EC50CEE37FF9FF7DF4FF7EF5FF7DF4FF7DF5FF7CF5FF7FF8FC7FF6FF89
-            FAFF3DBBD5C8EAF1FFFFFFFDFDFDFEFFFFFDFEFEFFFFFF000000FBFEFEFAFDFE
-            FDFFFCFCFDFEFFFFFF88C9E457CCDF8DFAFE89F4FC89F5FB89F6FB8AF6FC86F4
-            FC8DF5FC8DF5FC91FBFF39B8D0B5E1EBFFFFFFFCFFFFFCFFFFFFFEFEFFFFFF00
-            0000FDFEFFFFFDFFFEFFFDFFFDFEFFFFFFA7DBE44AA8C558B6D059B5CE5AB5CD
-            59B5CD5AB5CF55B5CF5DB4D059B1D356B5D246A5C3D4ECF0FFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFF000000FEFDFFFDFDFFF7FFFFFCFEFBFFFDFEF8FEFEF1F9FAEF
-            F8F9F0F8F9F0F8FAF0F8FAF0F8F9F0F8F9F0F8FAEEF8FAF0F7FAF3FAFAFCFDFF
-            FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
-          GlyphSpacing = 5
-          ParentFont = False
-          TabOrder = 3
-          Transparent = True
-          OnClick = btnImprimirClick
-        end
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 391
-        Width = 677
+        Top = 515
+        Width = 751
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -430,42 +279,45 @@ object frmCadGrupo: TfrmCadGrupo
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 2
       end
-      object pnlPesquisa: TPanel
+      object Panel3: TPanel
         Left = 0
-        Top = 30
-        Width = 677
-        Height = 33
+        Top = 32
+        Width = 751
+        Height = 56
         Align = alTop
-        TabOrder = 1
-        Visible = False
+        Color = clSilver
+        TabOrder = 3
         object Label6: TLabel
-          Left = 8
+          Left = 11
           Top = 16
-          Width = 31
+          Width = 60
           Height = 13
-          Caption = 'Nome:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'MS Sans Serif'
-          Font.Style = []
-          ParentFont = False
+          Alignment = taRightJustify
+          Caption = 'Nome Ra'#231'a:'
         end
-        object edtNome: TEdit
-          Left = 42
+        object Label23: TLabel
+          Left = 16
+          Top = 39
+          Width = 55
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Nome Tipo:'
+        end
+        object Edit4: TEdit
+          Left = 74
           Top = 8
-          Width = 323
+          Width = 335
           Height = 21
           CharCase = ecUpperCase
           TabOrder = 0
-          OnKeyDown = edtNomeKeyDown
+          OnKeyDown = Edit4KeyDown
         end
         object btnConsultar: TNxButton
-          Left = 368
-          Top = 2
-          Width = 177
+          Left = 410
+          Top = 24
+          Width = 174
           Height = 30
           Caption = 'Efetuar Pesquisa'
           Font.Charset = DEFAULT_CHARSET
@@ -530,9 +382,18 @@ object frmCadGrupo: TfrmCadGrupo
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 2
           Transparent = True
           OnClick = btnConsultarClick
+        end
+        object Edit1: TEdit
+          Left = 74
+          Top = 31
+          Width = 335
+          Height = 21
+          CharCase = ecUpperCase
+          TabOrder = 1
+          OnKeyDown = Edit4KeyDown
         end
       end
     end
@@ -541,17 +402,16 @@ object frmCadGrupo: TfrmCadGrupo
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 677
-        Height = 30
+        Width = 751
+        Height = 35
         Align = alTop
         Color = 8404992
         TabOrder = 1
         object btnAlterar: TNxButton
-          Left = 1
-          Top = 1
+          Left = 4
+          Top = 3
           Width = 153
-          Height = 28
-          Align = alLeft
+          Height = 30
           Caption = 'Alterar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -620,11 +480,10 @@ object frmCadGrupo: TfrmCadGrupo
           OnClick = btnAlterarClick
         end
         object btnConfirmar: TNxButton
-          Left = 154
-          Top = 1
+          Left = 156
+          Top = 3
           Width = 153
-          Height = 28
-          Align = alLeft
+          Height = 30
           Caption = 'Confirmar'
           Enabled = False
           Font.Charset = DEFAULT_CHARSET
@@ -694,11 +553,10 @@ object frmCadGrupo: TfrmCadGrupo
           OnClick = btnConfirmarClick
         end
         object btnCancelar: TNxButton
-          Left = 307
-          Top = 1
+          Left = 308
+          Top = 3
           Width = 153
-          Height = 28
-          Align = alLeft
+          Height = 30
           Caption = 'Cancelar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -769,156 +627,48 @@ object frmCadGrupo: TfrmCadGrupo
       end
       object pnlCadastro: TPanel
         Left = 0
-        Top = 30
-        Width = 677
-        Height = 378
+        Top = 35
+        Width = 751
+        Height = 497
         Align = alClient
         Enabled = False
         TabOrder = 0
-        object Label8: TLabel
-          Left = 412
-          Top = 19
-          Width = 14
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'ID:'
-        end
-        object Label2: TLabel
-          Left = 63
+        object Label1: TLabel
+          Left = 62
           Top = 24
           Width = 31
           Height = 13
           Alignment = taRightJustify
           Caption = 'Nome:'
         end
-        object Label1: TLabel
-          Left = 57
-          Top = 68
-          Width = 36
+        object Label8: TLabel
+          Left = 407
+          Top = 24
+          Width = 14
           Height = 13
           Alignment = taRightJustify
-          Caption = 'C'#243'digo:'
-        end
-        object Label38: TLabel
-          Left = 69
-          Top = 90
-          Width = 24
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Tipo:'
+          Caption = 'ID:'
         end
         object Label3: TLabel
-          Left = 51
-          Top = 46
-          Width = 42
+          Left = 22
+          Top = 48
+          Width = 71
           Height = 13
           Alignment = taRightJustify
-          Caption = 'Superior:'
+          Caption = 'Esp'#233'cie (Tipo):'
         end
-        object Label4: TLabel
-          Left = 72
-          Top = 312
-          Width = 29
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'N'#237'vel:'
-          Visible = False
-        end
-        object RxSpinButton1: TRxSpinButton
-          Left = 218
-          Top = 304
-          Width = 20
-          Height = 20
-          Visible = False
-          DownGlyph.Data = {
-            56000000424D56000000000000003E0000002800000006000000060000000100
-            010000000000180000000000000000000000020000000200000000000000FFFF
-            FF00CC0000008400000000000000CC000000CC000000CC000000}
-          UpGlyph.Data = {
-            56000000424D56000000000000003E0000002800000006000000060000000100
-            010000000000180000000000000000000000020000000200000000000000FFFF
-            FF00CC000000CC000000CC0000000000000084000000CC000000}
-          FocusControl = DBEdit3
-          OnBottomClick = RxSpinButton1BottomClick
-          OnTopClick = RxSpinButton1TopClick
-        end
-        object Label5: TLabel
-          Left = 29
-          Top = 112
-          Width = 64
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Tipo Produto:'
-        end
-        object Label9: TLabel
-          Left = 50
-          Top = 134
-          Width = 43
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Unidade:'
-        end
-        object SpeedButton5: TSpeedButton
-          Left = 214
-          Top = 125
+        object SpeedButton1: TSpeedButton
+          Left = 378
+          Top = 40
           Width = 23
           Height = 22
-          Hint = 'Atualiza tabela Unidade'
-          Glyph.Data = {
-            E6040000424DE604000000000000360000002800000014000000140000000100
-            180000000000B0040000C40E0000C40E00000000000000000000FFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFCFDF9FAFBF2
-            F1F1EEEEEEEBEBEBE9EAECE4E8E9E2E4E7E3E4E6E4E6E7E6E9EAEBECF0F2F4F7
-            F2F6F5F7F6F6FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFF1EBE9D0C5BADBDEE2C9CC
-            CEC1C3C4B6B0AEB1A397AA876AA6764FA87044AC754BB39174C7BCB3D5D6DBE5
-            E7E8EFEFEEFDFDFDFFFFFFFFFFFFFFFFFFEBE5DC9F6B46DBDBDEC9C8CAB9A796
-            B68861C18451D29861CD9460CE945CCC9258C58346B26E36C09E83E3E1E3EFF1
-            F2FBFBFBFFFFFFFFFFFFFFFFFFF5F0EEBC8A63C3A48CC3A58CC68F61CF9B68C8
-            9565CA9361CD9364C18951BF864FC18853C6884FB8763BCEB3A1F7FCFFFEFEFE
-            FFFFFFFFFFFFFFFFFFF7F3EFBD916CD5B493D6AD8BD8AA84CB9668CB9664BA85
-            53BA8A61C6A281BF926DBB814EC08F67B47437BE8C5EEDE6DFFFFFFFFFFFFFFF
-            FFFFFFFFFFF6F2EEB98F69E3C2A3DDB99AE0BF9CCA9C72BD9473E2CFC0E5D9D0
-            F1EEECEFE7E3E1CAB1DCC3AACFB193A96B33E4D1BFFFFFFFFFFFFFFFFFFFFFFF
-            FFF7F2EFBA9069DFBB9BDEBD9DC79F7BD8C4B1F1EDEAFFFFFFFFFFFFFFFFFFFF
-            FFFFF7F3EEEAD6C4FEFEFEB58560D7BDA9FFFFFFFFFFFFFFFFFFFFFFFFF7F3EF
-            BD946CDFBC9CD9B996D8B694C8AE97F6F6F6FFFFFFFEFFFFFFFEFFFFFFFFFBF9
-            F7F4EBE5FFFFFFC1A287D9C5B5FFFFFFFFFFFFFFFFFFFFFFFFF5EEEAB07E53E0
-            BD9FDCB793E2BE9FCE9E73D0B499FCFAF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFE2D6CBEBE3DCFFFFFFFFFFFFFFFFFFFFFFFFF9F9F5BEA994C2A797BFA1
-            92BB9E8CB99C89B39983F7F5F2FFFFFFAB7957BB967BB79676B89778B89777B9
-            997EECE3DCFFFFFFFFFFFFFFFFFFFFFFFFF5F0E8CAB09BFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFC9B7A7D3A679DBB088D9AA84DCAD87C7986EE9DB
-            CDFFFFFFFFFFFFFFFFFFFFFFFFE6D8CEB67B50E8D0BCDFC7B7F3EFEBFFFFFFFE
-            FFFEFEFFFEFFFFFFFFFFFFBA9F8CD6A57DCF9B6ECD9B6CBF9164E9DDD2FFFFFF
-            FFFFFFFFFFFFFFFFFFEDE4DCA86B3BBF865CC29776EAE2DBFFFFFFFFFFFFFFFF
-            FFFDFFFFDED0C4D4B8A3C79B71D1A478CD9E70BF9265E8DDD0FFFFFFFFFFFFFF
-            FFFFFFFFFFF9F5F2BD8F6DBC8A639D5F2DB58968E0D2C8E7DCD3DAC8B8DECBBA
-            C09A77D4A882D0A479D2A478D3A77CBF8E64E8DBCFFFFFFFFFFFFFFFFFFFFFFF
-            FFF7F5F2CAAB93E5CCB7CCA788C29471CDAC8ED9BDA3CAA98AD7B094E8CEB2DB
-            BEA1DDB995C99D76C0946FC39168EADACFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF
-            E1D2C6C5A284F6E3D0F0DCC9E6CEB7E6CCB5E5CBB6E7CCB5E5CCB2E3C2A4C299
-            78CFB9A6D2BEADB58257E7D5C6FFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFDFEFEDA
-            C9BBBA9675D4B193EDD1B8EED3BCECCEB6D1AF8EBE916DC2A386EEE6E2F9F8F6
-            FFFFFFBD9A80DBC9BAFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEFFFFFFFDFEFEF6F2
-            EFD9C8BDBFA38CC3A388B99D83CFBEACFAF6F4F7F4F2FFFFFFFFFFFFFFFFFFF8
-            F7F5F8F7F4FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEFFFFFFFFFFFFFFFF
-            FFFEFEFFFFFFFFFFFFFF}
-          Margin = 0
-          OnClick = SpeedButton5Click
-        end
-        object Label10: TLabel
-          Left = 66
-          Top = 156
-          Width = 27
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'NCM:'
+          Hint = 'Abrir tela NCM'
+          Caption = '...'
+          OnClick = SpeedButton1Click
         end
         object SpeedButton7: TSpeedButton
-          Left = 214
-          Top = 147
+          Left = 401
+          Top = 40
           Width = 23
           Height = 22
           Hint = 'Atualiza tabela NCM'
@@ -966,180 +716,50 @@ object frmCadGrupo: TfrmCadGrupo
           Margin = 0
           OnClick = SpeedButton7Click
         end
-        object Label7: TLabel
-          Left = 29
-          Top = 178
-          Width = 64
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Tipo Produto:'
+        object DBEdit3: TDBEdit
+          Left = 96
+          Top = 16
+          Width = 281
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'NOME'
+          DataSource = DMCadRaca.dsRaca
+          TabOrder = 0
         end
         object DBEdit4: TDBEdit
-          Left = 428
-          Top = 11
-          Width = 113
+          Left = 424
+          Top = 16
+          Width = 100
           Height = 21
           TabStop = False
           CharCase = ecUpperCase
           Color = clSilver
           DataField = 'ID'
-          DataSource = DMCadGrupo.dsGrupo
+          DataSource = DMCadRaca.dsRaca
           ReadOnly = True
-          TabOrder = 5
-        end
-        object DBEdit1: TDBEdit
-          Left = 96
-          Top = 16
-          Width = 297
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'NOME'
-          DataSource = DMCadGrupo.dsGrupo
-          TabOrder = 0
-        end
-        object DBEdit2: TDBEdit
-          Left = 96
-          Top = 60
-          Width = 145
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'CODIGO'
-          DataSource = DMCadGrupo.dsGrupo
-          TabOrder = 3
-          OnEnter = DBEdit2Enter
-          OnExit = DBEdit2Exit
-        end
-        object RxDBComboBox2: TRxDBComboBox
-          Left = 96
-          Top = 82
-          Width = 145
-          Height = 21
-          Style = csDropDownList
-          DataField = 'TIPO'
-          DataSource = DMCadGrupo.dsGrupo
-          EnableValues = True
-          ItemHeight = 13
-          Items.Strings = (
-            'ANAL'#205'TICA'
-            'SINT'#201'TICA')
-          TabOrder = 4
-          Values.Strings = (
-            'A'
-            'S')
+          TabOrder = 2
         end
         object RxDBLookupCombo1: TRxDBLookupCombo
           Left = 96
-          Top = 38
-          Width = 297
+          Top = 41
+          Width = 281
           Height = 21
           DropDownCount = 15
-          DataField = 'SUPERIOR'
-          DataSource = DMCadGrupo.dsGrupo
+          DataField = 'ID_TIPO_ANIMAL'
+          DataSource = DMCadRaca.dsRaca
           LookupField = 'ID'
           LookupDisplay = 'NOME'
-          LookupSource = DMCadGrupo.dsSuperior
-          TabOrder = 2
-          OnChange = RxDBLookupCombo1Change
-          OnExit = RxDBLookupCombo1Exit
-        end
-        object DBEdit3: TDBEdit
-          Left = 104
-          Top = 304
-          Width = 113
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'NIVEL'
-          DataSource = DMCadGrupo.dsGrupo
+          LookupSource = DMCadRaca.dsTipo_Animal
           TabOrder = 1
-          Visible = False
-        end
-        object RxDBComboBox1: TRxDBComboBox
-          Left = 96
-          Top = 104
-          Width = 297
-          Height = 21
-          Style = csDropDownList
-          DataField = 'TIPO_PROD'
-          DataSource = DMCadGrupo.dsGrupo
-          EnableValues = True
-          ItemHeight = 13
-          Items.Strings = (
-            'Porta'
-            'Vidro'
-            'Perfil'
-            'Trilhos/Divisores/Puxadores'
-            'Roldanas/Acess'#243'rios'
-            'Outros')
-          TabOrder = 6
-          Values.Strings = (
-            'P'
-            'V'
-            'R'
-            'T'
-            'A'
-            'O')
-        end
-        object RxDBLookupCombo2: TRxDBLookupCombo
-          Left = 96
-          Top = 126
-          Width = 119
-          Height = 21
-          DropDownCount = 8
-          DropDownWidth = 500
-          DataField = 'UNIDADE'
-          DataSource = DMCadGrupo.dsGrupo
-          LookupField = 'UNIDADE'
-          LookupDisplay = 'UNIDADE;NOME'
-          LookupSource = DMCadGrupo.dsUnidade
-          TabOrder = 7
-        end
-        object RxDBLookupCombo3: TRxDBLookupCombo
-          Left = 96
-          Top = 148
-          Width = 119
-          Height = 21
-          DropDownCount = 8
-          DropDownWidth = 500
-          DataField = 'ID_NCM'
-          DataSource = DMCadGrupo.dsGrupo
-          LookupField = 'ID'
-          LookupDisplay = 'NCM;NOME'
-          LookupSource = DMCadGrupo.dsNCM
-          TabOrder = 8
-        end
-        object RxDBComboBox3: TRxDBComboBox
-          Left = 96
-          Top = 170
-          Width = 297
-          Height = 21
-          Style = csDropDownList
-          DataField = 'TIPO_PROD'
-          DataSource = DMCadGrupo.dsGrupo
-          EnableValues = True
-          ItemHeight = 13
-          Items.Strings = (
-            'Bolsa'
-            'Carteira')
-          TabOrder = 9
-          Values.Strings = (
-            '1'
-            '2')
         end
       end
     end
   end
   object UCControls1: TUCControls
-    GroupName = 'Grupo'
+    GroupName = 'Ra'#231'a'
     UserControl = fMenu.UserControl1
     NotAllowed = naDisabled
-    Left = 689
-    Top = 16
-  end
-  object UCControls2: TUCControls
-    GroupName = 'Grupos'
-    UserControl = fMenu.UserControl1
-    NotAllowed = naDisabled
-    Left = 465
-    Top = 140
+    Left = 617
+    Top = 156
   end
 end

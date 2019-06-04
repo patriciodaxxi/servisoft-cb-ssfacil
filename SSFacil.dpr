@@ -795,7 +795,13 @@ uses
   UVendedor_Config in 'UVendedor_Config.pas' {frmVendedor_Config},
   UCadProduto_CA in 'UCadProduto_CA.pas' {frmCadProduto_CA},
   UConsEstRed in 'UConsEstRed.pas' {frmConsEstRed},
-  UCadNotaFiscal_Alt_CCusto in 'UCadNotaFiscal_Alt_CCusto.pas' {frmCadNotaFiscal_Alt_CCusto};
+  UCadNotaFiscal_Alt_CCusto in 'UCadNotaFiscal_Alt_CCusto.pas' {frmCadNotaFiscal_Alt_CCusto},
+  UDMCadRaca in 'Pet\UDMCadRaca.pas' {DMCadRaca: TDataModule},
+  uCadRaca in 'Pet\uCadRaca.pas' {frmCadRaca},
+  UDMCadTipo_Animal in 'Pet\UDMCadTipo_Animal.pas' {DMCadTipo_Animal: TDataModule},
+  uCadTipo_Animal in 'Pet\uCadTipo_Animal.pas' {frmCadTipo_Animal},
+  UCadPessoa_Animal in 'UCadPessoa_Animal.pas' {frmCadPessoa_Animal},
+  USel_PessoaPet in 'USel_PessoaPet.pas' {frmSel_PessoaPet};
 
 {$R *.res}
 

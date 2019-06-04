@@ -65,6 +65,9 @@ type
     cdsNCMNCM: TStringField;
     cdsNCMNOME: TStringField;
     dsNCM: TDataSource;
+    qParametros_Geral: TSQLQuery;
+    qParametros_GeralEMPRESA_PET: TStringField;
+    qParametros_GeralEMPRESA_CALCADOS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspGrupoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -164,6 +167,7 @@ begin
   cdsSuperior.Open;
   qParametros.Open;
   qParametros_Prod.Open;
+  qParametros_Geral.Open;
   cdsUnidade.Open;
   cdsNCM.Open;
   //*** Logs Implantado na versão .353
