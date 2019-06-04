@@ -5,7 +5,11 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Mask, ToolEdit, ExtCtrls,
   Grids, DBGrids, SMDBGrid, RzTabs, RzPanel, UDMGerar_EDI, NxCollection, UDMCadPedido, SqlExpr, dbXPress, DB, StrUtils,
-  UGerar_Pedido_EDI_Cons, DateUtils, RxLookup, Buttons;
+  UGerar_Pedido_EDI_Cons, DateUtils, RxLookup, Buttons, Provider;
+
+
+  //, Provider, SqlExpr, xmldom, Xmlxform, Messages, dialogs, LogTypes, Variants;
+
 
 type
   TfrmGerar_Pedido_EDI = class(TForm)
@@ -34,6 +38,10 @@ type
     BitBtn1: TBitBtn;
     ckExportacao: TCheckBox;
     btnAjustar_ProdCli: TBitBtn;
+    Label4: TLabel;
+    Shape2: TShape;
+    Shape3: TShape;
+    Label6: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FilenameEdit1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -56,8 +64,10 @@ type
     vErro: Boolean;
     vID_Variacao: Integer;
     vEnd_Arquivo: String;
+    vItem_Rem : Integer;
 
     procedure prc_Gravar_mAuxiliar;
+    procedure prc_Gravar_mAuxiliar_XML;
     procedure prc_Le_EDI;
     procedure prc_Gerar_mAuxiliar;
     procedure prc_Gravar_NaoGerado(Motivo: String);
@@ -72,7 +82,7 @@ type
 
     procedure prc_Posicionar_Regra_Empresa(ID_Operacao: Integer; Finalidade: String);
 
-    function fnc_Verifica_Cliente: Boolean;
+    function fnc_Verifica_Cliente(CNPJ_Cliente : String): Boolean;
   public
     { Public declarations }
   end;
@@ -219,6 +229,7 @@ begin
     begin
       prc_Gravar_NaoGerado('Produto / tamanho não encontrado');
       fDMGerar_EDI.mAuxiliarErro.AsBoolean := True;
+      fDMGerar_EDI.mAuxiliarErro_Prod_Nao_Lanc.AsBoolean := True;
       vErro := True;
     end
     else
@@ -227,6 +238,7 @@ begin
       begin
         prc_Gravar_NaoGerado('Produto não encontrado na base, favor verificar se não esta cadastrado como Material ou Inativo!');
         fDMGerar_EDI.mAuxiliarErro.AsBoolean := True;
+        fDMGerar_EDI.mAuxiliarErro_Prod_Nao_Lanc.AsBoolean := True;
         vErro := True;
       end;
     end;
@@ -242,6 +254,7 @@ begin
   begin
     prc_Gravar_NaoGerado('Número OC ' + fDMGerar_EDI.mAuxiliarNumOC.AsString + ' já está no pedido ' + fDMGerar_EDI.qVerifica_PedidoNUM_PEDIDO.AsString);
     fDMGerar_EDI.mAuxiliarErro.AsBoolean := True;
+    fDMGerar_EDI.mAuxiliarErro_Ped_Lancado.AsBoolean := True;
     vErro := True;
   end;
   fDMGerar_EDI.qFilial.Close;
@@ -293,7 +306,7 @@ begin
       Registro := TirarAcento(Registro);
       //03/02/2014 foi alterado porque estava repetindo o mesmo cnpj para todos os pedidos
       //if (vCNPJ_Cliente = '') and not(fnc_Verifica_Cliente) then
-      if not(fnc_Verifica_Cliente) then
+      if not(fnc_Verifica_Cliente('')) then
       begin
         vErro := True;
         break;
@@ -307,14 +320,19 @@ begin
     RzPageControl2.ActivePage := ts_Erro;
 end;
 
-function TfrmGerar_Pedido_EDI.fnc_Verifica_Cliente: Boolean;
+function TfrmGerar_Pedido_EDI.fnc_Verifica_Cliente(CNPJ_Cliente : String): Boolean;
 begin
   Result := False;
-  vCNPJ_Cliente := copy(Registro,1,14);
-  if ckExportacao.Checked then
-    vCNPJ_Cliente := Monta_Texto(vCNPJ_Cliente,0)
+  if trim(CNPJ_Cliente) = '' then
+  begin
+    vCNPJ_Cliente := copy(Registro,1,14);
+    if ckExportacao.Checked then
+      vCNPJ_Cliente := Monta_Texto(vCNPJ_Cliente,0)
+    else
+      vCNPJ_Cliente := copy(vCNPJ_Cliente,1,2) + '.' + copy(vCNPJ_Cliente,3,3) + '.' +  copy(vCNPJ_Cliente,6,3) + '/' +  copy(vCNPJ_Cliente,9,4) + '-' +  copy(vCNPJ_Cliente,13,2);
+  end
   else
-    vCNPJ_Cliente := copy(vCNPJ_Cliente,1,2) + '.' + copy(vCNPJ_Cliente,3,3) + '.' +  copy(vCNPJ_Cliente,6,3) + '/' +  copy(vCNPJ_Cliente,9,4) + '-' +  copy(vCNPJ_Cliente,13,2);
+    vCNPJ_Cliente := CNPJ_Cliente;
   fDMGerar_EDI.qCliente.Close;
   fDMGerar_EDI.qCliente.ParamByName('CNPJ_CPF').AsString := vCNPJ_Cliente;
   fDMGerar_EDI.qCliente.Open;
@@ -713,10 +731,22 @@ end;
 procedure TfrmGerar_Pedido_EDI.SMDBGrid3GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
-  if fDMGerar_EDI.mAuxiliarErro.AsBoolean then
+  if (fDMGerar_EDI.mAuxiliarErro.AsBoolean) and (fDMGerar_EDI.mAuxiliarErro_Prod_Nao_Lanc.AsBoolean) then
   begin
     Background  := clRed;
     AFont.Color := clWhite;
+  end
+  else
+  if (fDMGerar_EDI.mAuxiliarErro.AsBoolean) and (fDMGerar_EDI.mAuxiliarErro_Ped_Lancado.AsBoolean) then
+  begin
+    Background  := clYellow;
+    AFont.Color := clBlack;
+  end
+  else
+  if (fDMGerar_EDI.mAuxiliarErro.AsBoolean) then
+  begin
+    Background  := $004080FF;
+    AFont.Color := clBlack;
   end;
 end;
 
@@ -962,9 +992,151 @@ end;
 
 procedure TfrmGerar_Pedido_EDI.prc_Le_XML;
 begin
-  
+  fDMGerar_EDI.XMLTransformProvider1.XMLDataFile := vEnd_Arquivo;   
 
+  fDMGerar_EDI.mCab_OC.First;
+  vCNPJ_Cliente := fDMGerar_EDI.mCab_OCcnpj.AsString;
+  if not(fnc_Verifica_Cliente(vCNPJ_Cliente)) then
+    exit; 
+  fDMGerar_EDI.mOC.First;
+  while not fDMGerar_EDI.mOC.Eof do
+  begin
+    vItem_Rem := 0;
+    fDMGerar_EDI.mRemessa.First;
+    while not fDMGerar_EDI.mRemessa.Eof do
+    begin
+      prc_Gravar_mAuxiliar_XML;
 
+      fDMGerar_EDI.mRemessa.Next;
+    end;
+    fDMGerar_EDI.mOC.Next;
+  end;
+
+end;
+
+procedure TfrmGerar_Pedido_EDI.prc_Gravar_mAuxiliar_XML;
+var
+  vAux: Integer;
+  vTexto: String;
+  vTexto2 : String;
+  i : Integer;
+begin
+  //04/06/2019
+  vItem_Rem := vItem_Rem + 1;
+  fDMGerar_EDI.mAuxiliar.Insert;
+  fDMGerar_EDI.mAuxiliarCNPJCliente.AsString := vCNPJ_Cliente;
+  fDMGerar_EDI.mAuxiliarID_Cliente.AsInteger := fDMGerar_EDI.qClienteCODIGO.AsInteger;
+  fDMGerar_EDI.mAuxiliarNumOC.AsString       := fDMGerar_EDI.mOCnumero.AsString;
+  fDMGerar_EDI.mAuxiliarItem.AsInteger       := vItem_Rem;
+  fDMGerar_EDI.mAuxiliarPlano.AsString       := fDMGerar_EDI.mRemessaremessa.AsString;
+      
+  fDMGerar_EDI.mAuxiliarDtEmissao.AsString         := fDMGerar_EDI.mOCemissao.AsString;
+  fDMGerar_EDI.mAuxiliarDtEmissao.AsString         := copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,7,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,5,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,1,4);
+  fDMGerar_EDI.mAuxiliarTipoOperacao.AsString      := fDMGerar_EDI.mOCfuncao.AsString;
+  fDMGerar_EDI.mAuxiliarDtEntrega.AsString         := fDMGerar_EDI.mRemessadata.AsString;
+  fDMGerar_EDI.mAuxiliarDtEntrega.AsString         := copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,7,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,5,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,1,4);
+  fDMGerar_EDI.mAuxiliarLocalEntrega.AsString      := fDMGerar_EDI.mRemessadescricao.AsString;
+  fDMGerar_EDI.mAuxiliarFabrica.AsString           := fDMGerar_EDI.mRemessacodigo.AsString;
+  fDMGerar_EDI.mAuxiliarCodProdCli.AsString        := fDMGerar_EDI.mOCcodigo2.AsString;
+  fDMGerar_EDI.mAuxiliarQuantidade.AsString        := Replace(FormatFloat('0.0000',fDMGerar_EDI.mRemessaqtde.AsFloat),'.',',');
+  fDMGerar_EDI.mAuxiliarUnidade.AsString           := fDMGerar_EDI.mOCunidade.AsString;
+  fDMGerar_EDI.mAuxiliarPercTransferencia.AsString := Replace(FormatFloat('0.0000',fDMGerar_EDI.mOCtransferenciaicms.AsFloat),'.',',');
+  fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := Replace(FormatFloat('0.0000',fDMGerar_EDI.mOCprecounitario.AsFloat),'.',',');
+  fDMGerar_EDI.mAuxiliarCondPgto.AsString          := fDMGerar_EDI.mOCprazo.AsString;
+  fDMGerar_EDI.mAuxiliarDrawback.AsString          := fDMGerar_EDI.mOCregimedrawback.AsString;
+  fDMGerar_EDI.mAuxiliarPlano2.AsString            := fDMGerar_EDI.mRemessaremessa.AsString;
+  fDMGerar_EDI.mAuxiliarNomeProduto.AsString       := fDMGerar_EDI.mOCdescricao.AsString;
+  fDMGerar_EDI.mAuxiliarCNPJFornecedor.AsString    := fDMGerar_EDI.mOCcnpj.AsString;
+  fDMGerar_EDI.mAuxiliarReservado.AsString         := '';
+  fDMGerar_EDI.mAuxiliarTamnanho.AsString          := '';
+  fDMGerar_EDI.mAuxiliarItem_Cliente.AsInteger     := fDMGerar_EDI.mAuxiliarItem.AsInteger;
+  fDMGerar_EDI.mAuxiliarCodCorCli.AsString         := '';
+  fDMGerar_EDI.qProduto_Forn.Close;
+  fDMGerar_EDI.qProduto_Forn.SQL.Text := fDMGerar_EDI.ctqProduto_Forn;
+  fDMGerar_EDI.qProduto_Forn.ParamByName('ID_FORNECEDOR').AsInteger    := fDMGerar_EDI.qClienteCodigo.AsInteger;
+  fDMGerar_EDI.qProduto_Forn.ParamByName('COD_MATERIAL_FORN').AsString := fDMGerar_EDI.mAuxiliarCodProdCli.AsString;
+  fDMGerar_EDI.qProduto_Forn.ParamByName('COD_COR_FORN').AsString      := fDMGerar_EDI.mAuxiliarCodCorCli.AsString;
+  fDMGerar_EDI.qProduto_Forn.ParamByName('TAMANHO_CLIENTE').AsString   := fDMGerar_EDI.mAuxiliarTamnanho.AsString;
+  fDMGerar_EDI.qProduto_Forn.Open;
+  if not fDMGerar_EDI.qProduto_Forn.IsEmpty then
+  begin
+    fDMGerar_EDI.mAuxiliarID_Produto.AsInteger := fDMGerar_EDI.qProduto_FornID.AsInteger;
+    fDMGerar_EDI.mAuxiliarTamanho_Int.AsString := fDMGerar_EDI.qProduto_FornTAMANHO.AsString;
+    fDMGerar_EDI.mAuxiliarID_Cor.AsInteger     := fDMGerar_EDI.qProduto_FornID_COR.AsInteger;
+  end;
+  vTexto := Monta_Numero(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,0);
+  if Length(trim(vTexto)) <> 8 then
+  begin
+    prc_Gravar_NaoGerado('Problema na data de entrega');
+    fDMGerar_EDI.mAuxiliarErro.AsBoolean := True;
+    vErro := True;
+  end;
+  if not fDMGerar_EDI.mAuxiliarErro.AsBoolean then
+  begin
+    vTexto := Monta_Numero(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,0);
+    if Length(trim(vTexto)) <> 8 then
+    begin
+      prc_Gravar_NaoGerado('Problema na data de emissão');
+      fDMGerar_EDI.mAuxiliarErro.AsBoolean := True;
+      vErro := True;
+    end;
+  end;
+  if not fDMGerar_EDI.mAuxiliarErro.AsBoolean then
+  begin
+    if fDMGerar_EDI.mAuxiliarDtEntrega.AsDateTime < fDMGerar_EDI.mAuxiliarDtEmissao.AsDateTime then
+    begin
+      prc_Gravar_NaoGerado('Data de entrega menor que a data de emissão');
+      fDMGerar_EDI.mAuxiliarErro.AsBoolean := True;
+      vErro := True;
+    end;
+  end;
+  if not fDMGerar_EDI.mAuxiliarErro.AsBoolean then
+  begin
+    if fDMGerar_EDI.mAuxiliarID_Produto.AsInteger <= 0 then
+    begin
+      prc_Gravar_NaoGerado('Produto / tamanho não encontrado');
+      fDMGerar_EDI.mAuxiliarErro.AsBoolean               := True;
+      fDMGerar_EDI.mAuxiliarErro_Prod_Nao_Lanc.AsBoolean := True;
+      vErro := True;
+    end
+    else
+    begin
+      if (fDMGerar_EDI.qProduto_FornINATIVO.AsString = 'S') or ((fDMGerar_EDI.qProduto_FornTIPO_REG.AsString <> 'P') and (fDMGerar_EDI.qProduto_FornTIPO_REG.AsString <> 'S')) then
+      begin
+        prc_Gravar_NaoGerado('Produto não encontrado na base, favor verificar se não esta cadastrado como Material ou Inativo!');
+        fDMGerar_EDI.mAuxiliarErro.AsBoolean               := True;
+        fDMGerar_EDI.mAuxiliarErro_Prod_Nao_Lanc.AsBoolean := True;
+        vErro := True;
+      end;
+    end;
+  end;
+  if fDMGerar_EDI.qProduto_FornID_COR.AsInteger > 0 then
+    fDMGerar_EDI.mAuxiliarID_Cor.AsInteger := fDMGerar_EDI.qProduto_FornID_COR.AsInteger;
+
+  fDMGerar_EDI.qVerifica_Pedido.Close;
+  fDMGerar_EDI.qVerifica_Pedido.ParamByName('ID_CLIENTE').AsInteger    := fDMGerar_EDI.mAuxiliarID_Cliente.AsInteger;
+  fDMGerar_EDI.qVerifica_Pedido.ParamByName('PEDIDO_CLIENTE').AsString := fDMGerar_EDI.mAuxiliarNumOC.AsString;
+  fDMGerar_EDI.qVerifica_Pedido.Open;
+  if not fDMGerar_EDI.qVerifica_Pedido.IsEmpty then
+  begin
+    prc_Gravar_NaoGerado('Número OC ' + fDMGerar_EDI.mAuxiliarNumOC.AsString + ' já está no pedido ' + fDMGerar_EDI.qVerifica_PedidoNUM_PEDIDO.AsString);
+    fDMGerar_EDI.mAuxiliarErro.AsBoolean             := True;
+    fDMGerar_EDI.mAuxiliarErro_Ped_Lancado.AsBoolean := True;
+    vErro := True;
+  end;
+  fDMGerar_EDI.qFilial.Close;
+  fDMGerar_EDI.qFilial.ParamByName('CNPJ_CPF').AsString := fDMGerar_EDI.mAuxiliarCNPJFornecedor.AsString;
+  fDMGerar_EDI.qFilial.Open;
+  if not fDMGerar_EDI.qFilial.IsEmpty then
+    fDMGerar_EDI.mAuxiliarFilial.AsInteger := fDMGerar_EDI.qFilialID.AsInteger
+  else
+  if fDMGerar_EDI.qFilial.IsEmpty then
+  begin
+    prc_Gravar_NaoGerado('Pedido não pertence a esta empresa');
+    fDMGerar_EDI.mAuxiliarErro.AsBoolean := True;
+    vErro := True;
+  end;
+  fDMGerar_EDI.mAuxiliar.Post;
 end;
 
 end.
