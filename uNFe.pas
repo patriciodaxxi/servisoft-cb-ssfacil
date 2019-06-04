@@ -4257,6 +4257,8 @@ begin
           fDMNFe.qPedido_Item.ParamByName('ID').AsInteger   := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger;
           fDMNFe.qPedido_Item.ParamByName('ITEM').AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_PEDIDO.AsInteger;
           fDMNFe.qPedido_Item.Open;
+          if trim(fDMNFe.qPedido_ItemCOD_PRODUTO_CLIENTE.AsString) <> '' then
+            vCodProdutoNfe := fDMNFe.qPedido_ItemCOD_PRODUTO_CLIENTE.AsString;
           if (trim(fDMNFe.qPedido_ItemCOD_COR_CLIENTE.AsString) <> '') then
           begin
             if trim(fDMNFe.qPedido_ItemCOD_PRODUTO_CLIENTE.AsString) <> '' then
@@ -4289,6 +4291,8 @@ begin
               if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'C') and (trim(vNomeProduto) = '') then
                 vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString;
             end;
+            if trim(fDMCadNotaFiscal.qProduto_FornCOD_MATERIAL_FORN.AsString) <> '' then
+              vCodProdutoNfe := fDMCadNotaFiscal.qProduto_FornCOD_MATERIAL_FORN.AsString;
           end;
         end
         else
