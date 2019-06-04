@@ -290,7 +290,7 @@ begin
   fDMGerar_EDI.mGerado.EmptyDataSet;
 
   //Wirth   04/06/2019
-  if UpperCase(ExtractFileExt(vEnd_Arquivo)) = 'XML' then
+  if UpperCase(ExtractFileExt(vEnd_Arquivo)) = '.XML' then
   begin
     prc_Le_XML;
     exit;
@@ -992,7 +992,9 @@ end;
 
 procedure TfrmGerar_Pedido_EDI.prc_Le_XML;
 begin
-  fDMGerar_EDI.XMLTransformProvider1.XMLDataFile := vEnd_Arquivo;   
+  fDMGerar_EDI.XMLTransformProvider1.XMLDataFile := vEnd_Arquivo;
+
+  fDMGerar_EDI.mCab_OC.Active := True;
 
   fDMGerar_EDI.mCab_OC.First;
   vCNPJ_Cliente := fDMGerar_EDI.mCab_OCcnpj.AsString;
@@ -1012,6 +1014,8 @@ begin
     fDMGerar_EDI.mOC.Next;
   end;
 
+  if vErro then
+    RzPageControl2.ActivePage := ts_Erro;
 end;
 
 procedure TfrmGerar_Pedido_EDI.prc_Gravar_mAuxiliar_XML;
@@ -1031,17 +1035,20 @@ begin
   fDMGerar_EDI.mAuxiliarPlano.AsString       := fDMGerar_EDI.mRemessaremessa.AsString;
       
   fDMGerar_EDI.mAuxiliarDtEmissao.AsString         := fDMGerar_EDI.mOCemissao.AsString;
-  fDMGerar_EDI.mAuxiliarDtEmissao.AsString         := copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,7,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,5,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,1,4);
+  fDMGerar_EDI.mAuxiliarDtEmissao.AsString         := copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,9,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,6,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,1,4);
   fDMGerar_EDI.mAuxiliarTipoOperacao.AsString      := fDMGerar_EDI.mOCfuncao.AsString;
   fDMGerar_EDI.mAuxiliarDtEntrega.AsString         := fDMGerar_EDI.mRemessadata.AsString;
-  fDMGerar_EDI.mAuxiliarDtEntrega.AsString         := copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,7,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,5,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,1,4);
+  fDMGerar_EDI.mAuxiliarDtEntrega.AsString         := copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,9,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,6,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,1,4);
   fDMGerar_EDI.mAuxiliarLocalEntrega.AsString      := fDMGerar_EDI.mRemessadescricao.AsString;
   fDMGerar_EDI.mAuxiliarFabrica.AsString           := fDMGerar_EDI.mRemessacodigo.AsString;
   fDMGerar_EDI.mAuxiliarCodProdCli.AsString        := fDMGerar_EDI.mOCcodigo2.AsString;
-  fDMGerar_EDI.mAuxiliarQuantidade.AsString        := Replace(FormatFloat('0.0000',fDMGerar_EDI.mRemessaqtde.AsFloat),'.',',');
+  //fDMGerar_EDI.mAuxiliarQuantidade.AsString        := Replace(FormatFloat('0.0000',fDMGerar_EDI.mRemessaqtde.AsFloat),'.',',');
+  fDMGerar_EDI.mAuxiliarQuantidade.AsString        := Replace(fDMGerar_EDI.mRemessaqtde.AsString,'.',',');
   fDMGerar_EDI.mAuxiliarUnidade.AsString           := fDMGerar_EDI.mOCunidade.AsString;
-  fDMGerar_EDI.mAuxiliarPercTransferencia.AsString := Replace(FormatFloat('0.0000',fDMGerar_EDI.mOCtransferenciaicms.AsFloat),'.',',');
-  fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := Replace(FormatFloat('0.0000',fDMGerar_EDI.mOCprecounitario.AsFloat),'.',',');
+  //fDMGerar_EDI.mAuxiliarPercTransferencia.AsString := Replace(FormatFloat('0.0000',fDMGerar_EDI.mOCtransferenciaicms.AsFloat),'.',',');
+  fDMGerar_EDI.mAuxiliarPercTransferencia.AsString := Replace(fDMGerar_EDI.mOCtransferenciaicms.AsString,'.',',');
+  //fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := Replace(FormatFloat('0.0000',fDMGerar_EDI.mOCprecounitario.AsFloat),'.',',');
+  fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := Replace(fDMGerar_EDI.mOCprecounitario.AsString,'.',',');
   fDMGerar_EDI.mAuxiliarCondPgto.AsString          := fDMGerar_EDI.mOCprazo.AsString;
   fDMGerar_EDI.mAuxiliarDrawback.AsString          := fDMGerar_EDI.mOCregimedrawback.AsString;
   fDMGerar_EDI.mAuxiliarPlano2.AsString            := fDMGerar_EDI.mRemessaremessa.AsString;
