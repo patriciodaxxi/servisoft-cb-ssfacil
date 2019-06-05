@@ -801,7 +801,10 @@ uses
   UDMCadTipo_Animal in 'Pet\UDMCadTipo_Animal.pas' {DMCadTipo_Animal: TDataModule},
   uCadTipo_Animal in 'Pet\uCadTipo_Animal.pas' {frmCadTipo_Animal},
   UCadPessoa_Animal in 'UCadPessoa_Animal.pas' {frmCadPessoa_Animal},
-  USel_PessoaPet in 'USel_PessoaPet.pas' {frmSel_PessoaPet};
+  USel_PessoaPet in 'USel_PessoaPet.pas' {frmSel_PessoaPet},
+  UMontaPed_TipoItem in 'UMontaPed_TipoItem.pas' {frmMontaPed_TipoItem},
+  uConsProdutoPedido in 'uConsProdutoPedido.pas' {frmConsultaProduto},
+  uMostraPDF in 'uMostraPDF.pas' {frmMostraPDF};
 
 {$R *.res}
 
