@@ -679,6 +679,12 @@ end;
 
 procedure TfrmCadNotaEntrada.btnConfirmarClick(Sender: TObject);
 begin
+  if (fDMCadNotaFiscal.cdsNotaFiscalID_CONTA.AsInteger <= 0) and (fDMCadNotaFiscal.cdsNotaFiscalTIPO_PRAZO.AsString = 'V') then
+  begin
+    if MessageDlg('Nota a Vista e sem conta para lançamento, confirma gravação sem lançamento financeiro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+      exit;
+  end;
+
   fDMCadNotaFiscal.mPedidoAux.EmptyDataSet;
   fDMCadNotaFiscal.cdsNotaFiscalTIPO_REG.AsString        := vTipo_Reg;
   fDMCadNotaFiscal.cdsNotaFiscalQTDTOTAL_ITENS.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_Itens.RecordCount;

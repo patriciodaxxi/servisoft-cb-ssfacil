@@ -24,7 +24,7 @@ object frmCadTabPreco: TfrmCadTabPreco
     Top = 0
     Width = 942
     Height = 572
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadTabPreco: TfrmCadTabPreco
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -348,7 +348,7 @@ object frmCadTabPreco: TfrmCadTabPreco
         object btnExcluir: TNxButton
           Left = 158
           Top = 2
-          Width = 153
+          Width = 149
           Height = 30
           Caption = 'Excluir'
           Font.Charset = DEFAULT_CHARSET
@@ -1281,8 +1281,8 @@ object frmCadTabPreco: TfrmCadTabPreco
           object DBMemo1: TDBMemo
             Left = 0
             Top = 0
-            Width = 926
-            Height = 406
+            Width = 934
+            Height = 413
             Align = alClient
             DataField = 'OBS'
             DataSource = DMCadTab_Preco.dsTab_Preco

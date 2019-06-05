@@ -124,6 +124,11 @@ object dmParametros: TdmParametros
       FixedChar = True
       Size = 1
     end
+    object sdsCupomParametrosANIVERSARIO_PERIODO: TStringField
+      FieldName = 'ANIVERSARIO_PERIODO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCupomParametros: TDataSetProvider
     DataSet = sdsCupomParametros
@@ -187,6 +192,11 @@ object dmParametros: TdmParametros
     end
     object cdsCupomParametrosEXIBIR_DIALOGO_IMPRESSORA: TStringField
       FieldName = 'EXIBIR_DIALOGO_IMPRESSORA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCupomParametrosANIVERSARIO_PERIODO: TStringField
+      FieldName = 'ANIVERSARIO_PERIODO'
       FixedChar = True
       Size = 1
     end

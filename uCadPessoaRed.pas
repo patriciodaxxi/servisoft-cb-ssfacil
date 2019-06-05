@@ -7,7 +7,8 @@ uses
   RxDBComb, RxLookup, db, Mask, Grids, DateUtils, DBGrids, SMDBGrid, Buttons, ExtCtrls, UCBase, uDmCadPessoa, RzDBChk, 
   UNFe_ConsultaCadastro, RzPanel, ToolEdit, RXDBCtrl, UConsPessoa_Fat, UConsPessoa_Fin, UCadPessoa_Servico, RzLstBox,
   UCadPessoa_Servico_Int, NxCollection, RzRadChk, dbXPress, SqlExpr, ComCtrls, UConsCNPJ_ACBR, UConsCPF_ACBR, ACBrBase,
-  ACBrSocket, RzChkLst, ACBrConsultaCPF, UConsPessoa_Prod, Menus, ComObj;
+  ACBrSocket, RzChkLst, ACBrConsultaCPF, UConsPessoa_Prod, Menus, ComObj,
+  CurrEdit;
 
 type
   TfrmCadPessoaRed = class(TForm)
@@ -293,6 +294,15 @@ type
     RxDBComboBox8: TRxDBComboBox;
     Label12: TLabel;
     RxDBLookupCombo3: TRxDBLookupCombo;
+    TS_Animal: TRzTabSheet;
+    SMDBGrid3: TSMDBGrid;
+    Panel4: TPanel;
+    btnInserir_Animal: TNxButton;
+    btnAlterar_Animal: TNxButton;
+    btnExcluir_Animal: TNxButton;
+    btnConsulta_Pet: TNxButton;
+    Label14: TLabel;
+    CurrencyEdit1: TCurrencyEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -358,6 +368,12 @@ type
     procedure Excel1Click(Sender: TObject);
     procedure TS_Dados_PessoaisEnter(Sender: TObject);
     procedure Panel3Enter(Sender: TObject);
+    procedure btnInserir_AnimalClick(Sender: TObject);
+    procedure btnAlterar_AnimalClick(Sender: TObject);
+    procedure btnExcluir_AnimalClick(Sender: TObject);
+    procedure btnConsulta_PetClick(Sender: TObject);
+    procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -383,6 +399,7 @@ type
     procedure prc_Le_cdsPessoa_Consulta(Tipo : Integer);
     procedure prc_Habilta_TS;
     procedure prc_Opcao_Pessoa;
+    procedure prc_Habilita;
   public
     { Public declarations }
   end;
@@ -393,7 +410,8 @@ var
 implementation
 
 uses
-  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa, USel_ContaOrc, USel_EnqIPI, USel_Atividade;
+  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa, USel_ContaOrc, USel_EnqIPI, USel_Atividade,
+  UCadPessoa_Animal, USel_PessoaPet;
 
 {$R *.dfm}
 
@@ -428,8 +446,9 @@ begin
   else if fMenu.vTipoPessoa = 'A' then
     ComboBox1.ItemIndex := 8;
   fDMCadPessoa.cdsCidade.IndexFieldNames := 'NOME';
-  DBEdit47.Visible := (fDMCadPessoa.qParametrosUSA_LIMITE_CREDITO.AsString = 'S');
-
+  DBEdit47.Visible        := (fDMCadPessoa.qParametrosUSA_LIMITE_CREDITO.AsString = 'S');
+  TS_Animal.TabVisible    := (fDMCadPessoa.qParametros_GeralEMPRESA_PET.AsString = 'S');
+  btnConsulta_Pet.Visible := (fDMCadPessoa.qParametros_GeralEMPRESA_PET.AsString = 'S');
 end;
 
 procedure TfrmCadPessoaRed.btnInserirClick(Sender: TObject);
@@ -444,7 +463,7 @@ var
 begin
   if not (fDMCadPessoa.cdsPessoa_Consulta.Active) or (fDMCadPessoa.cdsPessoa_Consulta.IsEmpty) or (fDMCadPessoa.cdsPessoa_ConsultaCODIGO.AsInteger <= 0) then
     exit;
-  if fDMCadPessoa.cdsPessoaCODIGO.AsInteger = 99999 then
+  if fDMCadPessoa.cdsPessoa_ConsultaCODIGO.AsInteger = 99999 then
   begin
     MessageDlg('*** Este registro não pode ser excluído, é usado para Consumidor Final!', mtError, [mbOk], 0);
     exit;
@@ -469,22 +488,24 @@ end;
 
 procedure TfrmCadPessoaRed.btnConsultarClick(Sender: TObject);
 begin
-  prc_Consultar;
+  if CurrencyEdit1.AsInteger > 0 then
+    prc_Consultar(CurrencyEdit1.AsInteger)
+  else
+    prc_Consultar;
 end;
 
 procedure TfrmCadPessoaRed.btnAlterarClick(Sender: TObject);
 var
   i: Integer;
 begin
-  if (fDMCadPessoa.cdsPessoa.IsEmpty) or not (fDMCadPessoa.cdsPessoa.Active) or (fDMCadPessoa.cdsPessoaCODIGO.AsInteger < 1) then
+  if (fDMCadPessoa.cdsPessoa_Consulta.IsEmpty) or not (fDMCadPessoa.cdsPessoa_Consulta.Active) or (fDMCadPessoa.cdsPessoa_ConsultaCODIGO.AsInteger < 1) then
+    exit;
+  prc_Posiciona_Pessoa;
+
+  if (fDMCadPessoa.cdsPessoa.IsEmpty) or (fDMCadPessoa.cdsPessoaCODIGO.AsInteger < 1) then
     exit;
   fDMCadPessoa.cdsPessoa.Edit;
-  TS_Consulta.TabEnabled := False;
-  prc_Habilta_TS;
-  btnAlterar.Enabled := False;
-  btnConfirmar.Enabled := True;
-  TS_Pessoa_Dados.Enabled := True;
-  SMDBGrid6.readonly := False;
+  prc_Habilita;
 end;
 
 procedure TfrmCadPessoaRed.btnConfirmarClick(Sender: TObject);
@@ -511,14 +532,8 @@ begin
 
   fDMCadPessoa.prc_Abrir_Cidade('');
 
-  TS_Consulta.TabEnabled := True;
+  prc_Habilita;
   RzPageControl1.ActivePage := TS_Consulta;
-  btnConfirmar.Enabled := False;
-  btnAlterar.Enabled := True;
-  prc_Habilta_TS;
-
-  TS_Pessoa_Dados.Enabled := False;
-  SMDBGrid6.readonly := True;
 end;
 
 procedure TfrmCadPessoaRed.prc_Consultar(ID: Integer = 0);
@@ -667,18 +682,16 @@ begin
       fDMCadPessoa.cdsPessoa_Fiscal.Delete;
       fDMCadPessoa.cdsPessoa_Fiscal.ApplyUpdates(0);
     end;
+    
+    if fDMCadPessoa.qParametros_GeralEMPRESA_PET.AsString = 'S' then
+      fDMCadPessoa.cdsPessoa_Animal.ApplyUpdates(0);
 
     dmDatabase.scoDados.Commit(ID);
 
     vCodPessoa_Pos := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
 
-    TS_Consulta.TabEnabled := not (TS_Consulta.TabEnabled);
-    prc_Habilta_TS;
+    prc_Habilita;
     RzPageControl1.ActivePage := TS_Consulta;
-    TS_Pessoa_Dados.Enabled   := False;
-    btnConfirmar.Enabled := False;
-    btnAlterar.Enabled := True;
-    SMDBGrid6.readonly := True;
 
     if (not (fDMCadPessoa.cdsPessoa_Consulta.Active)) or (not fDMCadPessoa.cdsPessoa_Consulta.Locate('CODIGO', vCodAux, ([Locaseinsensitive]))) then
       prc_Consultar(vCodAux);
@@ -720,13 +733,12 @@ begin
     Exit;
 
   RzPageControl1.ActivePage := TS_Cadastro;
-  RzPageControl3.ActivePage := TS_Contatos;
-  TS_Consulta.TabEnabled    := False;
-  btnAlterar.Enabled        := False;
-  btnConfirmar.Enabled      := True;
-  TS_Pessoa_Dados.Enabled   := True;
-  SMDBGrid6.ReadOnly        := False;
-  prc_Habilta_TS;
+  if fDMCadPessoa.qParametros_GeralEMPRESA_PET.AsString = 'S' then
+    RzPageControl3.ActivePage := TS_Animal
+  else
+    RzPageControl3.ActivePage := TS_Contatos;
+  prc_Habilita;
+
   fDMCadPessoa.cdsPessoaPESSOA.AsString := 'F';
   fDMCadPessoa.cdsPessoaUF.AsString     := fDMCadPessoa.cdsFilialUF.AsString;
   RxDBComboBox1Exit(nil);
@@ -752,6 +764,9 @@ begin
       DBCheckBox3Exit(Sender);
     end;
     prc_Opcao_Pessoa;
+
+    if fDMCadPessoa.qParametros_GeralEMPRESA_PET.AsString = 'S' then
+      RzPageControl3.ActivePage := TS_Animal;
   end;
 end;
 
@@ -768,8 +783,6 @@ end;
 procedure TfrmCadPessoaRed.SMDBGrid1DblClick(Sender: TObject);
 begin
   RzPageControl1.ActivePage := TS_Cadastro;
-  if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J' then
-    RzPageControl3.ActivePage := TS_Contatos;
 end;
 
 procedure TfrmCadPessoaRed.RxDBLookupCombo2Exit(Sender: TObject);
@@ -1163,6 +1176,10 @@ begin
   fDMCadPessoa.cdsPessoa_RefC.Close;
   fDMCadPessoa.sdsPessoa_RefC.ParamByName('CODIGO').AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
   fDMCadPessoa.cdsPessoa_RefC.Open;
+
+  fDMCadPessoa.cdsPessoa_Animal.Close;
+  fDMCadPessoa.sdsPessoa_Animal.ParamByName('CODIGO').AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
+  fDMCadPessoa.cdsPessoa_Animal.Open;
 end;
 
 procedure TfrmCadPessoaRed.DBMemo1KeyPress(Sender: TObject; var Key: Char);
@@ -1658,6 +1675,9 @@ begin
   TS_Endereco.TabVisible            := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J') or (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'E')); 
   Label20.Visible                   := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J') or (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'E'));
   DBEdit18.Visible                  := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J') or (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'E'));
+  if fDMCadPessoa.qParametros_GeralEMPRESA_PET.AsString = 'S' then
+    RzPageControl3.ActivePage := TS_Animal
+  else
   if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J' then
     RzPageControl3.ActivePage := TS_Contatos
   else
@@ -1676,6 +1696,79 @@ begin
       fDMCadPessoa.cdsPessoa_FisicaCODIGO.AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
     end;
   end;
+end;
+
+procedure TfrmCadPessoaRed.prc_Habilita;
+begin
+  prc_Habilta_TS;
+  TS_Consulta.TabEnabled  := not(TS_Consulta.TabEnabled);
+  btnAlterar.Enabled      := not(btnAlterar.Enabled );
+  btnConfirmar.Enabled    := not(btnConfirmar.Enabled);
+  TS_Pessoa_Dados.Enabled := not(TS_Pessoa_Dados.Enabled);
+  SMDBGrid6.readonly      := not(SMDBGrid6.readonly);
+
+  btnInserir_Animal.Enabled := not(btnInserir_Animal.Enabled);
+  btnAlterar_Animal.Enabled := not(btnAlterar_Animal.Enabled);
+  btnExcluir_Animal.Enabled := not(btnExcluir_Animal.Enabled);
+end;
+
+procedure TfrmCadPessoaRed.btnInserir_AnimalClick(Sender: TObject);
+var
+  vItemAux : Integer;
+begin
+  fDMCadPessoa.cdsPessoa_Animal.Last;
+  vItemAux := fDMCadPessoa.cdsPessoa_AnimalITEM.AsInteger;
+
+  fDMCadPessoa.cdsPessoa_Animal.Insert;
+  fDMCadPessoa.cdsPessoa_AnimalCODIGO.AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
+  fDMCadPessoa.cdsPessoa_AnimalITEM.AsInteger   := vItemAux + 1;
+
+  frmCadPessoa_Animal := TfrmCadPessoa_Animal.Create(self);
+  frmCadPessoa_Animal.fDMCadPessoa := fDMCadPessoa;
+  frmCadPessoa_Animal.ShowModal;
+  FreeAndNil(frmCadPessoa_Animal);
+end;
+
+procedure TfrmCadPessoaRed.btnAlterar_AnimalClick(Sender: TObject);
+begin
+  if fDMCadPessoa.cdsPessoa_Animal.IsEmpty then
+    exit;
+
+  fDMCadPessoa.cdsPessoa_Animal.Edit;
+
+  frmCadPessoa_Animal := TfrmCadPessoa_Animal.Create(self);
+  frmCadPessoa_Animal.fDMCadPessoa := fDMCadPessoa;
+  frmCadPessoa_Animal.ShowModal;
+  FreeAndNil(frmCadPessoa_Animal);
+end;
+
+procedure TfrmCadPessoaRed.btnExcluir_AnimalClick(Sender: TObject);
+begin
+  if fDMCadPessoa.cdsPessoa_Animal.IsEmpty then
+    exit;
+  if MessageDlg('Deseja excluir este registro ?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    exit;
+  fDMCadPessoa.cdsPessoa_Animal.Delete;
+end;
+
+procedure TfrmCadPessoaRed.btnConsulta_PetClick(Sender: TObject);
+begin
+  vCodPessoa_Pos := 0;
+  frmSel_PessoaPet := TfrmSel_PessoaPet.Create(self);
+  frmSel_PessoaPet.ShowModal;
+  FreeAndNil(frmSel_PessoaPet);
+  if vCodPessoa_Pos > 0 then
+  begin
+    CurrencyEdit1.AsInteger := vCodPessoa_Pos;
+    CurrencyEdit1.SetFocus;
+  end;
+end;
+
+procedure TfrmCadPessoaRed.CurrencyEdit1KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if Key = Vk_Return then
+    btnConsultarClick(Sender);
 end;
 
 end.

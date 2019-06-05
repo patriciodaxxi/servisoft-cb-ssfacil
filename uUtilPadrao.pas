@@ -257,7 +257,7 @@ begin
   //Texto := Trim(AnsiUpperCase(Texto));
   for i := 1 to Length(texto) do
   begin
-    if Pos(Texto[i],' 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`~''"!@#$%^&*()_-+=|/\{}[]:;,.<>') = 0 then
+    if Pos(Texto[i],' 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`~''"!@#$%^&*()_-+=|/\{}[]:;,.<>øØ') = 0 then
     begin
       case Texto[i] of
         'Á', 'À', 'Â', 'Ä', 'Ã': Texto[i] := 'A';
@@ -274,6 +274,8 @@ begin
         'ç': Texto[i] := 'c';
         'Ñ': Texto[i] := 'N';
         'ñ': Texto[i] := 'n';
+        'ø': Texto[i] := 'ø';
+        'Ø': Texto[i] := 'Ø';
       else
         Texto[i] := ' ';
       end;

@@ -248,6 +248,7 @@ procedure TDMCadTab_Preco.prc_Excluir;
 begin
   if not(cdsTab_Preco.Active) or (cdsTab_Preco.IsEmpty) then
     exit;
+
   cdsTab_Preco_Itens.First;
   while not cdsTab_Preco_Itens.Eof do
     cdsTab_Preco_Itens.Delete;

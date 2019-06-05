@@ -494,6 +494,20 @@ object fMenu: TfMenu
         Caption = 'Agenda'
         OnClick = Agenda1Click
       end
+      object N55: TMenuItem
+        Caption = '-'
+      end
+      object Animal1: TMenuItem
+        Caption = 'Pet'
+        object Raa1: TMenuItem
+          Caption = 'Ra'#231'a'
+          OnClick = Raa1Click
+        end
+        object EspcieAnimalTipo1: TMenuItem
+          Caption = 'Esp'#233'cie Animal (Tipo)'
+          OnClick = EspcieAnimalTipo1Click
+        end
+      end
     end
     object Estoque1: TMenuItem
       Caption = 'Estoque'
@@ -4186,6 +4200,42 @@ object fMenu: TfMenu
         CompName = 'btnAlterar'
         Caption = 'Alterar'
         GroupName = 'Pessoa'
+      end
+      item
+        FormName = 'frmCadRaca'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Ra'#231'a'
+      end
+      item
+        FormName = 'frmCadRaca'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Ra'#231'a'
+      end
+      item
+        FormName = 'frmCadRaca'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Ra'#231'a'
+      end
+      item
+        FormName = 'frmCadTipo_Animal'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Esp'#233'cie Animal (Tipo)'
+      end
+      item
+        FormName = 'frmCadTipo_Animal'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Esp'#233'cie Animal (Tipo)'
+      end
+      item
+        FormName = 'frmCadTipo_Animal'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Esp'#233'cie Animal (Tipo)'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

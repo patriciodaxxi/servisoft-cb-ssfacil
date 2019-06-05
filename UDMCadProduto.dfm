@@ -4,7 +4,6 @@ object dmCadProduto: TdmCadProduto
   Left = 41
   Top = 9
   Height = 714
-  VerticalOffset = 22
   Width = 1288
   object sdsProduto: TSQLDataSet
     NoMetadata = True
@@ -1653,13 +1652,13 @@ object dmCadProduto: TdmCadProduto
     GetMetadata = False
     CommandText = 
       'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_T' +
-      'OTAL, USA_COR'#13#10'FROM PRODUTO'#13#10'WHERE ((TIPO_REG = '#39'M'#39') OR (TIPO_RE' +
-      'G = '#39'S'#39'))'#13#10'      AND  INATIVO = '#39'N'#39#13#10
+      'OTAL, USA_COR, ID_MATERIAL_CRU'#13#10'FROM PRODUTO'#13#10'WHERE ((TIPO_REG =' +
+      ' '#39'M'#39') OR (TIPO_REG = '#39'S'#39'))'#13#10'      AND  INATIVO = '#39'N'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 728
-    Top = 220
+    Left = 729
+    Top = 221
   end
   object dspMaterial: TDataSetProvider
     DataSet = sdsMaterial
@@ -1671,7 +1670,7 @@ object dmCadProduto: TdmCadProduto
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspMaterial'
-    Left = 792
+    Left = 791
     Top = 220
     object cdsMaterialID: TIntegerField
       FieldName = 'ID'
@@ -1698,6 +1697,9 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'USA_COR'
       FixedChar = True
       Size = 1
+    end
+    object cdsMaterialID_MATERIAL_CRU: TIntegerField
+      FieldName = 'ID_MATERIAL_CRU'
     end
   end
   object dsMaterial: TDataSource

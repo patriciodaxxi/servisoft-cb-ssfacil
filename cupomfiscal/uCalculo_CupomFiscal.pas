@@ -103,8 +103,8 @@ begin
                                                               //     + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
   fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency +
                                                                      fDMCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
-                                                                     fDMCupomFiscal.cdsCupom_ItensQTD.AsCurrency));
-                                                              //     + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
+                                                                     fDMCupomFiscal.cdsCupom_ItensQTD.AsCurrency -
+                                                                     fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat));
 
   //26/02/2019
   prc_Calcular_ST_Ret(fDMCupomFiscal);

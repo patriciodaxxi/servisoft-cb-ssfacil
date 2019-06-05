@@ -2501,7 +2501,22 @@ begin
           fDMCadPedido.qProdForn2.ParamByName('ID_COR').AsInteger        := fDMCadPedido.cdsPedidoImp_ItensID_COR.AsInteger;
           fDMCadPedido.qProdForn2.Open;
           if not fDMCadPedido.qProdForn2.IsEmpty then
-            fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.qProdForn2NOME_MATERIAL_FORN.AsString + ' (' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString + ')';
+            fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.qProdForn2NOME_MATERIAL_FORN.AsString + ' (' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString + ')'
+          else
+          //29/05/2019
+          begin
+            vTexto := '';
+            if trim(fDMCadPedido.cdsPedidoImp_ItensNOME_COR_CLIENTE.AsString) <> '' then
+              vTexto := fDMCadPedido.cdsPedidoImp_ItensNOME_COR_CLIENTE.AsString;
+            if trim(fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.AsString) <> '' then
+              vTexto := vTexto + '(Cod.Cor:' + fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.AsString + ')';
+            if trim(fDMCadPedido.cdsPedidoImp_ItensCOD_PRODUTO_CLIENTE.AsString) <> '' then
+              vTexto := vTexto + '(Cod.Cli:' + fDMCadPedido.cdsPedidoImp_ItensCOD_PRODUTO_CLIENTE.AsString + ')';
+            fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString + ' ' + vTexto;
+            if (trim(fDMCadPedido.cdsPedidoImp_ItensNOME_COR_CLIENTE.AsString) = '') and (trim(fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString) <> '') then
+              fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.mEtiqueta_NavNome_Produto.AsString + ' ' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString;
+          end;
+          //**************
         end;
       end
       else
@@ -3796,7 +3811,7 @@ end;
 procedure TfrmCadPedido.prc_scroll2(DataSet: TDataSet);
 begin
   PedidoSaldo1.Enabled := (fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'P');
-  btnExcluir.Enabled   := ((fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'N') or (fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'N'));
+  btnExcluir.Enabled   := (fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'N');
 end;
 
 procedure TfrmCadPedido.prc_Controle_Imp(Tipo_Imp: String);

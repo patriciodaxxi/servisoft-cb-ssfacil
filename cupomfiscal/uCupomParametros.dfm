@@ -81,7 +81,7 @@ object fCupomParametros: TfCupomParametros
     Top = 35
     Width = 873
     Height = 566
-    ActivePage = TabSheet1
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -1275,6 +1275,14 @@ object fCupomParametros: TfCupomParametros
           Alignment = taRightJustify
           Caption = 'ID do cliente Consumidor:'
         end
+        object Label73: TLabel
+          Left = 113
+          Top = 172
+          Width = 131
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Aniversariantes do Per'#237'odo:'
+        end
         object RxDBComboBox6: TRxDBComboBox
           Left = 246
           Top = 9
@@ -1393,6 +1401,26 @@ object fCupomParametros: TfCupomParametros
           DataField = 'ID_CLIENTE_CONSUMIDOR'
           DataSource = dmCupomFiscal.dsParametros
           TabOrder = 6
+        end
+        object RxDBComboBox43: TRxDBComboBox
+          Left = 246
+          Top = 164
+          Width = 187
+          Height = 21
+          Style = csDropDownList
+          DataField = 'ANIVERSARIO_PERIODO'
+          DataSource = dmCupomFiscal.dsCupomParametros
+          EnableValues = True
+          ItemHeight = 13
+          Items.Strings = (
+            'N'#195'O'
+            'DO DIA'
+            'DA SEMANA')
+          TabOrder = 7
+          Values.Strings = (
+            'N'
+            'D'
+            'S')
         end
       end
       object GroupBox3: TGroupBox
@@ -1959,7 +1987,6 @@ object fCupomParametros: TfCupomParametros
             item
               Expanded = False
               FieldName = 'NUMREGISTRO'
-              Width = 64
               Visible = True
             end>
         end

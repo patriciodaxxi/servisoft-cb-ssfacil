@@ -161,6 +161,17 @@ begin
   Label5.Visible        := (fDMCadGrupo.qParametrosEMPRESA_AMBIENTES.AsString = 'S');
   RxDBComboBox1.Visible := (fDMCadGrupo.qParametrosEMPRESA_AMBIENTES.AsString = 'S');
 
+  RxDBComboBox3.Clear;
+  if (fDMCadGrupo.qParametros_GeralEMPRESA_PET.AsString = 'S') then
+  begin
+    RxDBComboBox3.Items.Add('Remédio');
+    RxDBComboBox3.Items.Add('Ração');
+  end
+  else
+  begin
+    RxDBComboBox3.Items.Add('Bolsa');
+    RxDBComboBox3.Items.Add('Carteira');
+  end;
   Label7.Visible        := not(fDMCadGrupo.qParametrosEMPRESA_AMBIENTES.AsString = 'S');
   RxDBComboBox3.Visible := not(fDMCadGrupo.qParametrosEMPRESA_AMBIENTES.AsString = 'S');
 end;

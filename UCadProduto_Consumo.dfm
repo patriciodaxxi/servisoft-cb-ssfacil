@@ -77,7 +77,7 @@ object frmCadProduto_Consumo: TfrmCadProduto_Consumo
       Caption = 'Qtd. Consumo:'
     end
     object Label10: TLabel
-      Left = 52
+      Left = 51
       Top = 47
       Width = 97
       Height = 13

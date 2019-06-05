@@ -275,7 +275,14 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := 0
   else
   if fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S' then
+  begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := fDMCadNotaFiscal.cdsUFPERC_ICMS.AsFloat;
+    //28/05/2019
+    uCalculo_NotaFiscal.prc_Abrir_qProduto_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsClienteUF.AsString);
+    if StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.qProduto_UFPERC_ICMS.AsFloat)) > 0 then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := fDMCadNotaFiscal.qProduto_UFPERC_ICMS.AsFloat;
+    //*******************
+  end;
 
   if (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsInsert]) or (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant) then
   begin

@@ -352,6 +352,10 @@ type
     ConsultaProdutosST1: TMenuItem;
     ConfiguraoCertificado1: TMenuItem;
     GerarPlanodeMateriais1: TMenuItem;
+    N55: TMenuItem;
+    Animal1: TMenuItem;
+    Raa1: TMenuItem;
+    EspcieAnimalTipo1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -602,6 +606,8 @@ type
     procedure ConsultaProdutosST1Click(Sender: TObject);
     procedure ConfiguraoCertificado1Click(Sender: TObject);
     procedure GerarPlanodeMateriais1Click(Sender: TObject);
+    procedure Raa1Click(Sender: TObject);
+    procedure EspcieAnimalTipo1Click(Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -662,7 +668,8 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina,
   UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida,
   UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas,
-  uProdutoAtualizaPreco, uCadMovProdST, UAjusteEstoqueOP_Res, UCadPedWeb, UConsProdSTRet, UCadFilial_Certificado, UDMCadPlanoMat, UGerar_PlanoMat;
+  uProdutoAtualizaPreco, uCadMovProdST, UAjusteEstoqueOP_Res, UCadPedWeb, UConsProdSTRet, UCadFilial_Certificado, UDMCadPlanoMat, UGerar_PlanoMat,
+  uCadRaca, uCadTipo_Animal;
 
 {$R *.dfm}
 
@@ -2154,6 +2161,16 @@ end;
 procedure TfMenu.GerarPlanodeMateriais1Click(Sender: TObject);
 begin
   OpenForm(TfrmGerar_PlanoMat,wsMaximized);
+end;
+
+procedure TfMenu.Raa1Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadRaca,wsMaximized);
+end;
+
+procedure TfMenu.EspcieAnimalTipo1Click(Sender: TObject);
+begin
+  OpenForm(TfrmCadTipo_Animal,wsMaximized);
 end;
 
 initialization

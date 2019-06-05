@@ -133,6 +133,22 @@ var
   vQtd: Real;
   vAux: String;
 begin
+  //29/05/2019
+  if fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S' then
+  begin
+    if (fDMCadProduto.cdsMaterialID_MATERIAL_CRU.AsInteger > 0) and (fDMCadProduto.cdsProduto_Comb_MatTINGIMENTO.AsString <> 'S') then
+    begin
+      if MessageDlg('Material com informação de Fio na Cor, mas NÃO esta marcado para tingimento, confirmar assim mesmo? ',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+        exit;
+    end;
+    if (fDMCadProduto.cdsMaterialID_MATERIAL_CRU.AsInteger <= 0) and (fDMCadProduto.cdsProduto_Comb_MatTINGIMENTO.AsString = 'S') then
+    begin
+      if MessageDlg('Material sem informação de Fio na Cor, mas ESTA marcado para tingimento, confirmar assim mesmo? ',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+        exit;
+    end;
+  end;
+  //*****************
+
   if fnc_Erro then
     exit;
 
@@ -313,6 +329,11 @@ begin
     fDMCadProduto.cdsProduto_Comb_MatIMP_TALAO.AsString  := 'N';
     fDMCadProduto.cdsProduto_Comb_MatTINGIMENTO.AsString := 'N';
   end;
+  
+  //29/05/2019
+  if fDMCadProduto.cdsMaterialID_MATERIAL_CRU.AsInteger > 0 then
+    fDMCadProduto.cdsProduto_Comb_MatTINGIMENTO.AsString := 'S';
+  //*****************
 end;
 
 procedure TfrmCadProduto_Comb_Mat.Panel1Enter(Sender: TObject);

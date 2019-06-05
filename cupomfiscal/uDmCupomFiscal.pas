@@ -1535,6 +1535,8 @@ type
     cdsTotaisTOTAL: TFloatField;
     cdsProdutoID_CSTICMS_BRED: TIntegerField;
     cdsProdutoPERC_ICMS_NFCE: TFloatField;
+    sdsCupomParametrosANIVERSARIO_PERIODO: TStringField;
+    cdsCupomParametrosANIVERSARIO_PERIODO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);

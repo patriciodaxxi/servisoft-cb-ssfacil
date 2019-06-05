@@ -417,7 +417,7 @@ begin
   //scoAtualiza.LoadParamsOnConnect  := True;
   scoDados.KeepConnection     := True;
   scoLiberacao.KeepConnection := True;
-  scoAtualiza.KeepConnection  := True;
+// juca 28/05/19  scoAtualiza.KeepConnection  := True;
   vTexto := Fnc_ArquivoConfiguracao;
   if not FileExists(Fnc_ArquivoConfiguracao) then
   begin
@@ -428,7 +428,7 @@ begin
   Config := TIniFile.Create(Fnc_ArquivoConfiguracao);
   scoDados.LoadParamsFromIniFile(Fnc_ArquivoConfiguracao);
   scoLiberacao.LoadParamsFromIniFile(Fnc_ArquivoConfiguracao);
-  scoAtualiza.LoadParamsFromIniFile(Fnc_ArquivoConfiguracao);
+// juca 28/05/19  scoAtualiza.LoadParamsFromIniFile(Fnc_ArquivoConfiguracao);
 
   try
 //////////////////CONECTA AO BANCO DE DADOS DA APLICAÇÃO
@@ -541,7 +541,8 @@ begin
         end;
       end;
 //////////////////VERIFICA E ATUALIZA FDB
-    try
+// juca 28/05/19
+    {try
       //24/05/2019  Esta fixo no dmddatabase, pois esta pegando no kinghost
       scoAtualiza.Params.Values['DRIVERNAME'] := 'INTERBASE';
       scoAtualiza.Params.Values['SQLDIALECT'] := '3';
@@ -559,13 +560,14 @@ begin
                                'Banco de Dados: '  + scoAtualiza.Params.Values['Database'] + #13 +
                                'Usuário: '         + scoAtualiza.Params.Values['User_Name']);
       end;
-    end;
+    end;}
 
   finally
-    FreeAndNil(Config);        
+    FreeAndNil(Config);
   end;
 
-  AtualizaFDB;
+// juca 28/05/19  AtualizaFDB;
+
 end;
 
 function TdmDatabase.ProximaTabelaLoc(NomeTabela: String): Integer;
@@ -596,8 +598,7 @@ begin
       iSeq := sds.FieldByName('FLAG').AsInteger;
 
       if (iSeq = 0) and (sds.IsEmpty) then
-        scoDados.ExecuteDirect('INSERT INTO TABELALOC(TABELA,FLAG) VALUES(''' + NomeTabela +
-                              ''', ''' + IntToStr(0) + ''' )');
+        scoDados.ExecuteDirect('INSERT INTO TABELALOC(TABELA,FLAG) VALUES(''' + NomeTabela + ''', ''' + IntToStr(0) + ''' )');
       scoDados.Commit(ID);
     except
       scoDados.Rollback(ID);

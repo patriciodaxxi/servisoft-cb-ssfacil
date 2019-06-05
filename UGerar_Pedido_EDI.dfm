@@ -42,18 +42,18 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       Caption = 'Finalidade:'
     end
     object Shape1: TShape
-      Left = 720
-      Top = 29
+      Left = 704
+      Top = 13
       Width = 28
       Height = 15
       Brush.Color = clRed
     end
     object Label2: TLabel
-      Left = 752
-      Top = 32
-      Width = 43
+      Left = 736
+      Top = 16
+      Width = 155
       Height = 13
-      Caption = 'Com Erro'
+      Caption = 'Com Erro (Prod. n'#227'o encontrado)'
     end
     object Label3: TLabel
       Left = 21
@@ -62,6 +62,34 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       Height = 13
       Alignment = taRightJustify
       Caption = 'Opera'#231#227'o de Venda:'
+    end
+    object Label4: TLabel
+      Left = 736
+      Top = 30
+      Width = 137
+      Height = 13
+      Caption = 'Com Erro (Pedido j'#225' lan'#231'ado)'
+    end
+    object Shape2: TShape
+      Left = 704
+      Top = 27
+      Width = 28
+      Height = 15
+      Brush.Color = clYellow
+    end
+    object Shape3: TShape
+      Left = 704
+      Top = 41
+      Width = 28
+      Height = 15
+      Brush.Color = 4227327
+    end
+    object Label6: TLabel
+      Left = 736
+      Top = 44
+      Width = 58
+      Height = 13
+      Caption = 'Outros Erros'
     end
     object FilenameEdit1: TFilenameEdit
       Left = 122
@@ -194,8 +222,8 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       TabOrder = 5
     end
     object btnAjustar_ProdCli: TBitBtn
-      Left = 885
-      Top = 38
+      Left = 922
+      Top = 36
       Width = 131
       Height = 25
       Caption = 'Ajustar Nome Prod Cli'
@@ -440,7 +468,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
     Top = 283
     Width = 1087
     Height = 253
-    ActivePage = RzTabSheet1
+    ActivePage = ts_Erro
     ActivePageDefault = RzTabSheet1
     Align = alBottom
     BackgroundColor = clSilver
@@ -448,7 +476,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     FixedDimension = 19
     object RzTabSheet1: TRzTabSheet
