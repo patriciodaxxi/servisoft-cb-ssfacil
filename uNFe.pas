@@ -505,6 +505,12 @@ begin
                                  , 'ssfacil'
                                  , fDMNFe.qFilial_EmailSMTP_SENHA.AsString );
 
+      if trim(fDMNFe.qFilial_EmailREMETENTE_EMAIL.AsString) = '' then
+      begin
+        MessageDlg('*** Esta acessando o email da Filial, mas não foi informado!', mtInformation, [mbOk], 0);
+        exit;
+      end;
+
       EnviarEmail2(Trim(fnc_LocalServidorNFe),
                    texto,
                    fDMNFe.qFilial_EmailREMETENTE_EMAIL.AsString,
