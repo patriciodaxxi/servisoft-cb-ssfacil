@@ -16,6 +16,7 @@ object frmSel_Produto: TfrmSel_Produto
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnCreate = FormCreate
   OnKeyDown = Fdmcad
   OnShow = FormShow
   PixelsPerInch = 96

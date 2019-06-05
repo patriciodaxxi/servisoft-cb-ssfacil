@@ -111,7 +111,7 @@ uses
     ABase  -> Número da base utilizada para gerar o serial
     AChave -> Chave utilizada para gerar o serial
   }
-
+  procedure addLog(Erro: string; Arquivo: string = '');
 
 var
   vCodProduto_Pos: Integer;
@@ -2130,6 +2130,32 @@ begin
     soma := soma + vValorCalculo[i];
   end;
   Result := soma;
+end;
+
+procedure addLog(Erro: string; Arquivo: string = '');
+begin
+  try
+    if FileExists(ExtractFilePath(Application.ExeName) + 'log.txt') then
+      with TStringList.Create do
+      try
+
+        if Arquivo = '' then
+          Arquivo := ExtractFilePath(Application.ExeName)+'LogErro_' + FormatDateTime('yyyymmdd', now) + '.txt';
+
+        //Arquivo := CaminhoPrograma + Arquivo;
+
+        if FileExists(arquivo) then
+          LoadFromFile(arquivo);
+
+        Add(DateTimeToStr(now) + ' - ' + erro + #13);
+
+        SaveToFile(arquivo);
+
+      finally
+        Free;
+      end;
+  except
+  end;
 end;
 
 end.

@@ -1,6 +1,6 @@
 object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
-  Left = 356
-  Top = 118
+  Left = -1086
+  Top = 190
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmCadPedido_TipoItem'
@@ -25,7 +25,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     Top = 0
     Width = 684
     Height = 478
-    ActivePage = TS_Porta
+    ActivePage = TS_Chapas
     ActivePageDefault = TS_Chapas
     Align = alClient
     BackgroundColor = 8404992
@@ -33,7 +33,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     UseColoredTabs = True
     ParentBackgroundColor = False
     ShowShadow = False
-    TabIndex = 4
+    TabIndex = 0
     TabOrder = 0
     TextColors.DisabledShadow = clActiveCaption
     TextColors.Selected = 8404992

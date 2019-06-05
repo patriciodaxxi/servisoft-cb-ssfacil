@@ -1567,6 +1567,7 @@ object DMCadPedido: TDMCadPedido
     Top = 322
   end
   object cdsTipoCobranca: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -1643,6 +1644,7 @@ object DMCadPedido: TDMCadPedido
     Top = 367
   end
   object cdsContas: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -4785,26 +4787,27 @@ object DMCadPedido: TDMCadPedido
       'onto_Calc,'#13#10'(pro.pesobruto * pi.qtd_caixa) peso_varejo, PT.ID_MA' +
       'TERIAL,'#13#10'PT.ID_TIPO_MATERIAL, TMAT.NOME NOME_TIPO_MATERIAL, PT.E' +
       'SPESSURA, PT.DENSIDADE, PT.ALTURA_CORTE, PT.LARGURA_CORTE,MP.NOM' +
-      'E NOME_ACABAMENTO,'#13#10#13#10'CASE'#13#10'  WHEN (PLOTE.LOCALIZACAO IS NOT NUL' +
-      'L) AND (PLOTE.LOCALIZACAO <> '#39#39') THEN PLOTE.LOCALIZACAO'#13#10'  WHEN ' +
-      '(PRO.LOCALIZACAO IS NOT NULL) AND (PRO.LOCALIZACAO <> '#39#39') THEN P' +
-      'RO.LOCALIZACAO'#13#10'  ELSE NULL'#13#10'  END LOCALIZACAO,'#13#10'case '#13#10'  WHEN P' +
-      'I.TIPO_OS = '#39'OC'#39' THEN PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'OP'#39' THEN ' +
-      'PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'RE'#39' THEN PI.TIPO_OS'#13#10'  ELSE '#39#39#13 +
-      #10'  END DESC_TIPO_OS, PRO.QTD_POR_ROTULO QTD_POR_ROTULO_PROD, PRO' +
-      '.QTD_EMBALAGEM QTD_EMBALAGEM_PROD, PRO.MEDIDA'#13#10#13#10'FROM PEDIDO_ITE' +
-      'M PI'#13#10'LEFT JOIN PRODUTO PRO ON (PI.ID_PRODUTO = PRO.ID)'#13#10'LEFT JO' +
-      'IN MARCA ON (PRO.ID_MARCA = MARCA.ID)'#13#10'LEFT JOIN PEDIDO_ITEM_TIP' +
-      'O PT ON (PI.ID = PT.ID AND PI.ITEM = PT.ITEM)'#13#10'LEFT JOIN TAB_NCM' +
-      ' NCM ON (PRO.ID_NCM = NCM.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.' +
-      'ID_COR = COMB.ID)'#13#10'LEFT JOIN PRODUTO_TAM PTAM ON (PI.id_produto ' +
-      '= PTAM.id AND PI.tamanho = PTAM.tamanho)'#13#10'LEFT JOIN PESSOA ATE O' +
-      'N (PI.id_atelier = ATE.CODIGO )'#13#10'LEFT JOIN PRODUTO_LOTE PLOTE ON' +
-      ' (PI.ID_PRODUTO = PLOTE.ID AND PI.NUM_LOTE_CONTROLE = PLOTE.NUM_' +
-      'LOTE_CONTROLE)'#13#10'LEFT JOIN TIPO_MATERIAL TMAT ON (PT.ID_TIPO_MATE' +
-      'RIAL = TMAT.ID)'#13#10'LEFT JOIN MATRIZ_PRECO MP ON MP.ID = PT.ID_ACAB' +
-      'AMENTO'#13#10'WHERE PI.ID = :ID'#13#10'AND ((PI.TIPO_ACESSORIO = '#39'N'#39') OR (PI' +
-      '.TIPO_ACESSORIO IS NULL))'#13#10' AND (PI.QTD > 0)'#13#10#13#10
+      'E NOME_ACABAMENTO,'#13#10'PT.CAMINHO_ARQUIVO_PDF,'#13#10#13#10'CASE'#13#10'  WHEN (PLO' +
+      'TE.LOCALIZACAO IS NOT NULL) AND (PLOTE.LOCALIZACAO <> '#39#39') THEN P' +
+      'LOTE.LOCALIZACAO'#13#10'  WHEN (PRO.LOCALIZACAO IS NOT NULL) AND (PRO.' +
+      'LOCALIZACAO <> '#39#39') THEN PRO.LOCALIZACAO'#13#10'  ELSE NULL'#13#10'  END LOCA' +
+      'LIZACAO,'#13#10'case '#13#10'  WHEN PI.TIPO_OS = '#39'OC'#39' THEN PI.TIPO_OS'#13#10'  WHE' +
+      'N PI.TIPO_OS = '#39'OP'#39' THEN PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'RE'#39' TH' +
+      'EN PI.TIPO_OS'#13#10'  ELSE '#39#39#13#10'  END DESC_TIPO_OS, PRO.QTD_POR_ROTULO' +
+      ' QTD_POR_ROTULO_PROD, PRO.QTD_EMBALAGEM QTD_EMBALAGEM_PROD, PRO.' +
+      'MEDIDA'#13#10#13#10'FROM PEDIDO_ITEM PI'#13#10'LEFT JOIN PRODUTO PRO ON (PI.ID_P' +
+      'RODUTO = PRO.ID)'#13#10'LEFT JOIN MARCA ON (PRO.ID_MARCA = MARCA.ID)'#13#10 +
+      'LEFT JOIN PEDIDO_ITEM_TIPO PT ON (PI.ID = PT.ID AND PI.ITEM = PT' +
+      '.ITEM)'#13#10'LEFT JOIN TAB_NCM NCM ON (PRO.ID_NCM = NCM.ID)'#13#10'LEFT JOI' +
+      'N COMBINACAO COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JOIN PRODUTO_TA' +
+      'M PTAM ON (PI.id_produto = PTAM.id AND PI.tamanho = PTAM.tamanho' +
+      ')'#13#10'LEFT JOIN PESSOA ATE ON (PI.id_atelier = ATE.CODIGO )'#13#10'LEFT J' +
+      'OIN PRODUTO_LOTE PLOTE ON (PI.ID_PRODUTO = PLOTE.ID AND PI.NUM_L' +
+      'OTE_CONTROLE = PLOTE.NUM_LOTE_CONTROLE)'#13#10'LEFT JOIN TIPO_MATERIAL' +
+      ' TMAT ON (PT.ID_TIPO_MATERIAL = TMAT.ID)'#13#10'LEFT JOIN MATRIZ_PRECO' +
+      ' MP ON MP.ID = PT.ID_ACABAMENTO'#13#10'WHERE PI.ID = :ID'#13#10'AND ((PI.TIP' +
+      'O_ACESSORIO = '#39'N'#39') OR (PI.TIPO_ACESSORIO IS NULL))'#13#10' AND (PI.QTD' +
+      ' > 0)'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -5405,6 +5408,10 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsPedidoImp_ItensMEDIDA: TStringField
       FieldName = 'MEDIDA'
+    end
+    object cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF: TStringField
+      FieldName = 'CAMINHO_ARQUIVO_PDF'
+      Size = 150
     end
   end
   object dsPedidoImp_Itens: TDataSource
@@ -9958,6 +9965,10 @@ object DMCadPedido: TDMCadPedido
     object sdsPedido_Item_TipoLARGURA_CORTE: TFloatField
       FieldName = 'LARGURA_CORTE'
     end
+    object sdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField
+      FieldName = 'CAMINHO_ARQUIVO_PDF'
+      Size = 150
+    end
   end
   object cdsPedido_Item_Tipo: TClientDataSet
     Aggregates = <>
@@ -10142,6 +10153,10 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsPedido_Item_TipoLARGURA_CORTE: TFloatField
       FieldName = 'LARGURA_CORTE'
+    end
+    object cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField
+      FieldName = 'CAMINHO_ARQUIVO_PDF'
+      Size = 150
     end
   end
   object dsPedido_Item_Tipo: TDataSource
@@ -10583,8 +10598,8 @@ object DMCadPedido: TDMCadPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42543.386929861100000000
-    ReportOptions.LastChange = 43593.971948969910000000
+    ReportOptions.CreateDate = 42052.436473541700000000
+    ReportOptions.LastChange = 43620.727710312500000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -10832,6 +10847,8 @@ object DMCadPedido: TDMCadPedido
   end
   object frxDBDataset3: TfrxDBDataset
     UserName = 'frxPedidoImp_Itens'
+    OnFirst = frxDBDataset3First
+    OnNext = frxDBDataset3Next
     CloseDataSource = True
     FieldAliases.Strings = (
       'ID=ID'
@@ -10988,7 +11005,12 @@ object DMCadPedido: TDMCadPedido
       'ALTURA_CORTE=ALTURA_CORTE'
       'LARGURA_CORTE=LARGURA_CORTE'
       'COD_BARRAS=COD_BARRAS'
-      'NOME_ACABAMENTO=NOME_ACABAMENTO')
+      'NOME_ACABAMENTO=NOME_ACABAMENTO'
+      'QTD_POR_ROTULO_PROD=QTD_POR_ROTULO_PROD'
+      'QTD_EMBALAGEM_PROD=QTD_EMBALAGEM_PROD'
+      'FABRICA=FABRICA'
+      'MEDIDA=MEDIDA'
+      'CAMINHO_ARQUIVO_PDF=CAMINHO_ARQUIVO_PDF')
     DataSource = dsPedidoImp_Itens
     BCDToCurrency = False
     Left = 1233

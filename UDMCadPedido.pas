@@ -3455,6 +3455,9 @@ type
     cdsPedidoImpIMP_ETIQUETA_ROT: TStringField;
     qProduto_CliNOME_MATERIAL_FORN: TStringField;
     qProdForn2NOME_MATERIAL_FORN: TStringField;
+    sdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField;
+    cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField;
+    cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3486,6 +3489,8 @@ type
     procedure cdsPedido_ItensCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
     procedure cdsPedidoImp_ItensCalcFields(DataSet: TDataSet);
+    procedure frxDBDataset3First(Sender: TObject);
+    procedure frxDBDataset3Next(Sender: TObject);
   private
     { Private declarations }
     vItem_Desc: Integer;
@@ -4711,6 +4716,18 @@ begin
   if ID > 0 then
     sdsCliente.CommandText := sdsCliente.CommandText + ' AND CODIGO = ' + inttostr(ID);
   cdsCliente.Open;
+end;
+
+procedure TDMCadPedido.frxDBDataset3First(Sender: TObject);
+begin
+  if frxReport1.FindComponent('Picture1')<> nil then
+    TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
+end;
+
+procedure TDMCadPedido.frxDBDataset3Next(Sender: TObject);
+begin
+  if frxReport1.FindComponent('Picture1')<> nil then
+    TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
 end;
 
 end.

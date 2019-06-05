@@ -8,7 +8,7 @@ uses
   UCadPedido_Itens, UCadPedido_Desconto, UEscolhe_Filial, UCBase, RzPanel, UCadTabPreco, Math, UCadPedido_Cancelamento,
   DateUtils, dbXPress, NxCollection, Menus, Variants, USel_TabPreco, ULeExcel, NxEdit, VarUtils, UEtiq_Individual, Provider,
   UCadPedido_Ace, UGerar_Rotulos, UGerar_Rotulos_Color, DBClient, UCadPedido_Itens_Copia, UConsOrdProd_Ped, UConsHist_Chapa,
-  UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed,classe.validaemail, frxExportPDF, frxExportMail;
+  UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed,classe.validaemail, frxExportPDF, frxExportMail, UMontaPed_TipoItem;
 
 type
   TfrmCadPedido = class(TForm)
@@ -500,6 +500,7 @@ type
     ffrmGerar_Rotulos_Color: TfrmGerar_Rotulos_Color;
     ffrmConsHist_Chapa: TfrmConsHist_Chapa;
     ffrmCadObs_Aux: TfrmCadObs_Aux;
+    ffrmMontaPed_TipoItem : TfrmMontaPed_TipoItem;
 
     vID_ClienteAnt: Integer;
     vVlrFrete_Ant: Real;
@@ -825,13 +826,19 @@ var
 begin
   vTipo_Pedido     := 'P';
   vInclusao_Edicao := '';
+  addLog('Inicio Cria DMCADEPDIDO','Tempo_Execucao.txt');
   fDMCadPedido := TDMCadPedido.Create(Self);
+  addLog('Fim Cria DMCADEPDIDO','Tempo_Execucao.txt');
   oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
+  addLog('Inicio Limpa consulta','Tempo_Execucao.txt');
   prc_Limpar_Edit_Consulta;
+  addLog('Fim Limpa consulta','Tempo_Execucao.txt');
 
   fDMCadPedido.vID_CFOP     := 0;
   fDMCadPedido.vID_Variacao := 0;
+  addLog('Inicio abrir Cliente','Tempo_Execucao.txt');
   fDMCadPedido.prc_Abrir_cdsCliente;
+  addLog('Fim abrir Cliente','Tempo_Execucao.txt');
   gbxVendedor.Visible := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
   Label21.Visible     := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P');
   DBDateEdit2.Visible := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P');
@@ -842,7 +849,9 @@ begin
 
   if vNum_Pedido_Pos > 0 then
   begin
+    addLog('Inicio cdsPedido_Consulta','Tempo_Execucao.txt');
     prc_Consultar(vNum_Pedido_Pos);
+    addLog('Fim cdsPedido_Consulta','Tempo_Execucao.txt');
     RzPageControl1.ActivePage := TS_Cadastro;
   end
   else
@@ -854,7 +863,9 @@ begin
     end
     else
       NxDatePicker1.Clear;
+    addLog('Inicio Consultar Click','Tempo_Execucao.txt');
     btnConsultarClick(Sender);
+    addLog('Fim Consultar Click','Tempo_Execucao.txt');
   end;
   NxDatePicker2.Date := Date;
   vNum_Pedido_Pos := 0;
@@ -1084,7 +1095,12 @@ begin
   btnConsTempo.Visible := (fDMCadPedido.qParametros_GeralUSA_TIPO_MATERIAL.AsString = 'S');
   DBCheckBox5.Visible  := (fDMCadPedido.qParametros_FinUSA_NGR.AsString = 'S');
   DBCheckBox6.Visible  := (fDMCadPedido.qParametros_PedUSA_AMOSTRA.AsString = 'S');
+  addLog('Inicio Monta Menu','Tempo_Execucao.txt');
+
   prc_Abre_Filial_Menu(1,2);
+  addLog('Fim Monta Menu','Tempo_Execucao.txt');
+
+  addLog('Finaliza','Tempo_Execucao.txt');
 
 end;
 
@@ -1957,6 +1973,22 @@ begin
     ffrmCadPedido_Copia.prc_Le_Aux;
     FreeAndNil(ffrmConsHist_Chapa);
     FreeAndNil(ffrmCadPedido_Copia);
+    btnCalcular_ValoresClick(Sender);
+  end
+  else
+  // 26/05/2019
+  if (Key = Vk_F6) and (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) and (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
+  begin
+    if fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger <= 0 then
+    begin
+      MessageDlg('Informe o Cliente',mtWarning,mbOKCancel,0);
+      RxDBLookupCombo3.SetFocus;
+      Exit;
+    end;
+    ffrmMontaPed_TipoItem := TfrmMontaPed_TipoItem.Create(self);
+    ffrmMontaPed_TipoItem.fDMCadPedido := fDMCadPedido;
+    ffrmMontaPed_TipoItem.ShowModal;
+    FreeAndNil(ffrmMontaPed_TipoItem);
     btnCalcular_ValoresClick(Sender);
   end
   else

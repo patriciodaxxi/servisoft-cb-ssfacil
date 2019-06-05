@@ -151,6 +151,7 @@ type
       Shift: TShiftState);
     procedure Edit2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     procedure prc_Consultar;
@@ -362,8 +363,6 @@ var
 begin
   if Tag = 1 then
     oDBUtils.SetDataSourceProperties(Self, fDMSel_Produto);
-  ctProdutoLocal := sdsProduto.CommandText;
-  ctProdAux      := sdsProdAux.CommandText;
   qFilial.Close;
   qFilial.Open;
   qParametros.Close;
@@ -662,6 +661,12 @@ begin
     if not cdsProduto.IsEmpty then
       SMDBGrid1.SetFocus;
   end;
+end;
+
+procedure TfrmSel_Produto.FormCreate(Sender: TObject);
+begin
+  ctProdutoLocal := sdsProduto.CommandText;
+  ctProdAux      := sdsProdAux.CommandText;
 end;
 
 end.

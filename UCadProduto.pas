@@ -785,6 +785,8 @@ type
     Label253: TLabel;
     DBEdit162: TDBEdit;
     btnCA: TNxButton;
+    lblEspessura: TLabel;
+    dedtEspessura: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1584,6 +1586,8 @@ begin
   label12.Enabled  := not(label12.Enabled);
   label24.Enabled  := not(label24.Enabled);
   Label114.Enabled := (Label4.Enabled);
+  lblEspessura.Visible := SQLLocate('PARAMETROS','ID','EMPRESA_SUCATA','1') = 'S';
+  dedtEspessura.Visible := SQLLocate('PARAMETROS','ID','EMPRESA_SUCATA','1') = 'S';
 
   TS_Engenharia.TabVisible := (fDMCadProduto.qParametrosUSA_CONSUMO.AsString = 'S');
   TS_Grade.TabVisible      := (fDMCadProduto.qParametrosUSA_GRADE.AsString = 'S');

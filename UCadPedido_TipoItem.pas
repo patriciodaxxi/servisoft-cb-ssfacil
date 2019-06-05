@@ -260,7 +260,7 @@ begin
   //vAux := fDMCadPedido.cdsPedido_Item_TipoCOMPRIMENTO.AsFloat * fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat
   //      * fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat * 8;
   vAux := (fDMCadPedido.cdsPedido_Item_TipoCOMPRIMENTO.AsFloat + 10) * (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat + 10)
-        * fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat * 8;
+        * fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat * 8; 
   if StrToFloat(FormatFloat('0.0000000',vAux)) > 0 then
     vAux := StrToFloat(FormatFloat('0.0000000',vAux / 1000000));
   fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat := StrToFloat(FormatFloat('0.0000000',vAux));
