@@ -79,57 +79,57 @@ begin
   if vTipo_Pesquisa = 'S' then
   begin
     if RzCheckList1.ItemChecked[1] then
-      vSelPesquisa := '00';
+      vSelPesquisa := QuotedStr('00');
     if (RzCheckList1.ItemChecked[2]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '01'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('01')
     else
     if (RzCheckList1.ItemChecked[2]) then
-      vSelPesquisa := '01';
+      vSelPesquisa := QuotedStr('01');
     if (RzCheckList1.ItemChecked[3]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '02'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('02')
     else
     if (RzCheckList1.ItemChecked[3]) then
-      vSelPesquisa := '02';
+      vSelPesquisa := QuotedStr('02');
     if (RzCheckList1.ItemChecked[4]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '03'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('03')
     else
     if (RzCheckList1.ItemChecked[4]) then
-      vSelPesquisa := '03';
+      vSelPesquisa := QuotedStr('03');
     if (RzCheckList1.ItemChecked[5]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '04'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('04')
     else
     if (RzCheckList1.ItemChecked[5]) then
-      vSelPesquisa := '04';
+      vSelPesquisa := QuotedStr('04');
     if (RzCheckList1.ItemChecked[6]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '05'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('05')
     else
     if (RzCheckList1.ItemChecked[6]) then
-      vSelPesquisa := '05';
+      vSelPesquisa := QuotedStr('05');
     if (RzCheckList1.ItemChecked[7]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '06'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('06')
     else
     if (RzCheckList1.ItemChecked[7]) then
-      vSelPesquisa := '06';
+      vSelPesquisa := QuotedStr('06');
     if (RzCheckList1.ItemChecked[8]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '07'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('07')
     else
     if (RzCheckList1.ItemChecked[8]) then
-      vSelPesquisa := '07';
+      vSelPesquisa := QuotedStr('07');
     if (RzCheckList1.ItemChecked[9]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '08'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('08')
     else
     if (RzCheckList1.ItemChecked[9]) then
-      vSelPesquisa := '08';
+      vSelPesquisa := QuotedStr('08');
     if (RzCheckList1.ItemChecked[10]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '10'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('10')
     else
     if (RzCheckList1.ItemChecked[10]) then
-      vSelPesquisa := '10';
+      vSelPesquisa := QuotedStr('10');
     if (RzCheckList1.ItemChecked[11]) and (vSelPesquisa <> '') then
-      vSelPesquisa := vSelPesquisa + ',' + '99'
+      vSelPesquisa := vSelPesquisa + ',' + QuotedStr('99')
     else
     if (RzCheckList1.ItemChecked[11]) then
-      vSelPesquisa := '99';
+      vSelPesquisa := QuotedStr('99');
   end;
 
   if vSelPesquisa = '' then
