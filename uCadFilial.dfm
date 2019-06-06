@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_NotaServico
+        ActivePage = TS_Parametros
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 3
+        TabIndex = 2
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -5280,7 +5280,7 @@ object frmCadFilial: TfrmCadFilial
             object gbxCustoVenda: TRzGroupBox
               Left = 25
               Top = 15
-              Width = 542
+              Width = 550
               Height = 226
               Anchors = [akLeft, akTop, akRight]
               BorderColor = clNavy
@@ -5456,7 +5456,7 @@ object frmCadFilial: TfrmCadFilial
             object RzGroupBox3: TRzGroupBox
               Left = 257
               Top = 15
-              Width = 542
+              Width = 550
               Height = 226
               Anchors = [akLeft, akTop, akRight]
               BorderColor = clNavy

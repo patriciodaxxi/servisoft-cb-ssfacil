@@ -4538,7 +4538,6 @@ begin
       TfrxMemoView(frxReport1.FindComponent('Qtd_S'+vCompl2+IntToStr(i))).Visible   := True;
     end;
   end;
-
 end;
 
 procedure TDMCadPedido.frxDBDataset1First(Sender: TObject);
@@ -4719,14 +4718,16 @@ end;
 
 procedure TDMCadPedido.frxDBDataset3First(Sender: TObject);
 begin
-  if frxReport1.FindComponent('Picture1')<> nil then
-    TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
+  //06/06/2019 Ver com o Russimar
+  //if frxReport1.FindComponent('Picture1')<> nil then
+  //  TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
 end;
 
 procedure TDMCadPedido.frxDBDataset3Next(Sender: TObject);
 begin
-  if frxReport1.FindComponent('Picture1')<> nil then
-    TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
+  //06/06/2019 Ver com o Russimar
+    //if frxReport1.FindComponent('Picture1')<> nil then
+ //   TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
 end;
 
 end.
