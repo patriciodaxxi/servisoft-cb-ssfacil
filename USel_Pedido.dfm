@@ -505,7 +505,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Imp. N'#186' OC na Nota'
-        Width = 64
         Visible = True
       end
       item
@@ -529,7 +528,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Item no Cliente'
-        Width = 64
         Visible = True
       end>
   end
@@ -569,7 +567,7 @@ object frmSel_Pedido: TfrmSel_Pedido
     end
     object btnImportar: TNxButton
       Left = 4
-      Top = 4
+      Top = 3
       Width = 214
       Height = 30
       Caption = 'Copiar Selecionados'

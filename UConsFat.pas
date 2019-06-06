@@ -254,7 +254,10 @@ begin
     vComando := vComando + ' SUM(VLR_FRETE) VLR_FRETE, SUM(VLR_ICMS_UF_REMET) VLR_ICMS_UF_REMET, SUM(VLR_ICMS_UF_DEST) VLR_ICMS_UF_DEST,';
     vComando := vComando + ' SUM(VLR_DESCONTO) VLR_DESCONTO, SUM(VLR_COFINS) VLR_COFINS, SUM(VLR_PIS) VLR_PIS,';
     vComando := vComando + ' SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA, SUM(VLR_CSLL_VENDA) VLR_CSLL_VENDA,';
-    vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE)) VLR_TOTAL_BRU';
+    if chkAcrescimo.ItemChecked[1] then
+      vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE) + SUM(V.VLR_DESCONTO)) VLR_TOTAL_BRU'
+    else
+      vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE)) VLR_TOTAL_BRU';
     vComandoAux := ' FROM VFAT_ACUM V ';
     for i := 1 to 8 do
       vTexto[i] := '';
@@ -286,6 +289,9 @@ begin
       vTexto2 := vTexto2 + vTexto[i];
     if trim(vTexto2) <> '' then
       vComando := vComando + ', (' + vTexto2 + ') VLR_TOTAL_LIQ ';
+    vComando := vComando + ', sum(coalesce(v.base_fcp_st,0)) BASE_FCP_ST, sum(coalesce(v.base_icms_fcp,0)) base_icms_fcp, '
+              + 'sum(coalesce(v.base_icms_fcp_dest,0)) base_icms_fcp_dest, sum(coalesce(v.vlr_icms_fcp_dest,0)) vlr_icms_fcp_dest, '
+              + 'sum(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp, sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st ';
     vComando := vComando + vComandoAux;
     fDMConsFat.cdsConsCliente.Close;
     fDMConsFat.sdsConsCliente.CommandText := vComando + ' WHERE 0 = 0 ';
@@ -335,7 +341,10 @@ begin
     vComando := vComando + ' SUM(VLR_FRETE) VLR_FRETE, SUM(VLR_ICMS_UF_REMET) VLR_ICMS_UF_REMET, SUM(VLR_ICMS_UF_DEST) VLR_ICMS_UF_DEST,';
     vComando := vComando + ' SUM(VLR_DESCONTO) VLR_DESCONTO, SUM(VLR_COFINS) VLR_COFINS, SUM(VLR_PIS) VLR_PIS,';
     vComando := vComando + ' SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA, SUM(VLR_CSLL_VENDA) VLR_CSLL_VENDA,';
-    vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE)) VLR_TOTAL_BRU';
+    if chkAcrescimo.ItemChecked[1] then
+      vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE) + SUM(V.VLR_DESCONTO)) VLR_TOTAL_BRU'
+    else
+      vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE)) VLR_TOTAL_BRU';
     vComandoAux := ' FROM VFAT_ACUM V ';
     for i := 1 to 8 do
       vTexto[i] := '';
@@ -367,6 +376,9 @@ begin
       vTexto2 := vTexto2 + vTexto[i];
     if trim(vTexto2) <> '' then
       vComando := vComando + ', (' + vTexto2 + ') VLR_TOTAL_LIQ ';
+    vComando := vComando + ', sum(coalesce(v.base_fcp_st,0)) BASE_FCP_ST, sum(coalesce(v.base_icms_fcp,0)) base_icms_fcp, '
+              + 'sum(coalesce(v.base_icms_fcp_dest,0)) base_icms_fcp_dest, sum(coalesce(v.vlr_icms_fcp_dest,0)) vlr_icms_fcp_dest, '
+              + 'sum(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp, sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st ';
     vComando := vComando + vComandoAux;
     fDMConsFat.cdsConsData.Close;
     fDMConsFat.sdsConsData.CommandText := vComando + ' WHERE 0 = 0 ';

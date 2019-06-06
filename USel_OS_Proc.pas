@@ -26,9 +26,6 @@ type
     dsOS: TDataSource;
     cdsOSID: TIntegerField;
     cdsOSITEM: TIntegerField;
-    cdsOSQTD: TIntegerField;
-    cdsOSQTD_FATURADO: TIntegerField;
-    cdsOSQTD_RESTANTE: TIntegerField;
     cdsOSID_PRODUTO: TIntegerField;
     cdsOSNOME_PRODUTO: TStringField;
     cdsOSUNIDADE: TStringField;
@@ -41,6 +38,9 @@ type
     cdsOSREFERENCIA: TStringField;
     cdsOSVLR_TOTAL: TFloatField;
     cdsOSNUM_NOTA: TIntegerField;
+    cdsOSQTD: TFloatField;
+    cdsOSQTD_FATURADO: TFloatField;
+    cdsOSQTD_RESTANTE: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -167,15 +167,15 @@ begin
     fDMCadPedido.cdsPedido_ItensID_NCM.AsInteger := cdsOSID_NCM.AsInteger;
       
   fDMCadPedido.cdsPedido_ItensUNIDADE.AsString     := cdsOSUNIDADE.AsString;
-  fDMCadPedido.cdsPedido_ItensQTD.AsInteger        := cdsOSQTD_RESTANTE.AsInteger;
-  fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000',cdsOSVLR_TOTAL.AsFloat / cdsOSQTD_RESTANTE.AsInteger));
+  fDMCadPedido.cdsPedido_ItensQTD.AsFloat          := StrToFloat(FormatFloat('0.0000',cdsOSQTD_RESTANTE.AsFloat));
+  fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000',cdsOSVLR_TOTAL.AsFloat / cdsOSQTD_RESTANTE.AsFloat));
   vVlrAux := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat * fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat / 100));
   fDMCadPedido.cdsPedido_ItensVLR_IPI.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
   fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString     := cdsOSNOME_PRODUTO.AsString;
   fDMCadPedido.cdsPedido_ItensREFERENCIA.AsString      := cdsOSREFERENCIA.AsString;
   fDMCadPedido.cdsPedido_ItensID_MOVESTOQUE.AsInteger  := 0;
   fDMCadPedido.cdsPedido_ItensPERC_COMISSAO.AsFloat     := 0;
-  fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsInteger     := fDMCadPedido.cdsPedido_ItensQTD.AsInteger;
+  fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat     := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat));
   fDMCadPedido.cdsPedido_ItensNUMOS.AsString             := '';
   fDMCadPedido.cdsPedido_ItensNUM_OS_SERV.AsInteger      := cdsOSNUM_OS.AsInteger;
   fDMCadPedido.cdsPedido_ItensID_OS_SERV.AsInteger        := cdsOSID.AsInteger;
@@ -192,7 +192,7 @@ begin
   if vFlag then
   begin
     cdsOS.Edit;
-    cdsOSQTD_FATURADO.AsInteger := cdsOSQTD_FATURADO.AsInteger + cdsOSQTD_RESTANTE.AsInteger;
+    cdsOSQTD_FATURADO.AsFloat   := StrToFloat(FormatFloat('0.0000',cdsOSQTD_FATURADO.AsFloat + cdsOSQTD_RESTANTE.AsFloat));
     cdsOSQTD_RESTANTE.AsInteger := 0;
     cdsOS.Post;
   end;

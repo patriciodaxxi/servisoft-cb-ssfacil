@@ -107,6 +107,8 @@ type
     TS_Produto_Det_Geral: TRzTabSheet;
     SMDBGrid5: TSMDBGrid;
     SMDBGrid19: TSMDBGrid;
+    chkDesconto: TCheckBox;
+    Label13: TLabel;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -132,6 +134,8 @@ type
     procedure Imprimir1Click(Sender: TObject);
     procedure Excel1Click(Sender: TObject);
     procedure SMDBGrid8TitleClick(Column: TColumn);
+    procedure RxDBLookupCombo2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMConsFaturamento: TDMConsFaturamento;
@@ -197,7 +201,7 @@ implementation
 
 uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, URelFat_Cli, URelFat_CliProd, URelFat_Prod, URelFat_DT, StrUtils,
   URelFat_Produto_Det, URelFat_Nota, URelFat_UF, URelFat_Cupom,
-  URelFat_ReciboNF;
+  URelFat_ReciboNF, USel_Pessoa;
 
 {$R *.dfm}
 
@@ -299,6 +303,10 @@ begin
     vDesc := vDesc + ' - V.VLR_IPI';
   if (CheckBox5.Checked) and (fDMConsFaturamento.qParametros_NFeMOSTRAR_VLR_FRETE_CONS.AsString = 'S') then
     vDesc := vDesc + ' - V.VLR_FRETE';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
 
   fDMConsFaturamento.cdsNotaFiscal_Cli.Close;
 //  fDMConsFaturamento.cdsNotaFiscal_Cli.IndexFieldNames := '';
@@ -450,28 +458,43 @@ procedure TfrmConsFaturamento.prc_Consultar_Faturamento;
 var
   vComandoAux: String;
   vDescData: String;
+  vDesc : String;
+  vDesc2 : String;
 begin
-  vComandoAux := '';
   if NxComboBox2.ItemIndex = 0 then
     vDescData := 'DTEMISSAO'
   else
     vDescData := 'DTENTRADASAIDA';
-  {if fMenu.vTipo_Reg_Cons_Fat = 'NTE' then
-    vDescData := 'DTENTRADASAIDA'
-  else
-    vDescData := 'DTEMISSAO';}
+  vDesc := 'MOV.VLR_TOTAL';
+  if chkDesconto.Checked then
+    vDesc := vDesc + ' + MOV.VLR_DESCONTO';
+  vDesc2 := 'MOV.VLR_DUPLICATA - MOV.VLR_LIQUIDO_NFSE';
+  if chkDesconto.Checked then
+    vDesc2 := '(' + vDesc2 + ') + MOV.VLR_DESCONTO';
+
   fDMConsFaturamento.qFaturamento.Close;
-  fDMConsFaturamento.qFaturamento.SQL.Text := fDMConsFaturamento.ctFaturamento
-                                              + ' AND TIPO_ES = ' + QuotedStr(fDMConsFaturamento.vTipo_Nota);
+  vComandoAux := 'select sum(' + vDesc + ' ) VLR_TOTAL, sum(MOV.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE,'
+               + 'sum(' + vDesc2 + ') VLR_VENDAS, sum(MOV.VLR_DUPLICATA - MOV.VLR_ICMSSUBST) VLR_DUPLICATA_ST,'
+               + 'sum(MOV.VLR_ICMSSUBST) VLR_ICMSSUBST, sum(MOV.VLR_FRETE) VLR_FRETE, sum(MOV.VLR_IPI) VLR_IPI '
+               + 'from MOVIMENTO MOV '
+               + 'left join TAB_CFOP CF on CF.ID = MOV.ID_CFOP '
+               + 'where MOV.CANCELADO = ' + QuotedStr('N')
+               + ' and MOV.DENEGADA = ' + QuotedStr('N')
+               + ' and ((MOV.TIPO_REG = ' + QuotedStr('CFI') + ') or ((MOV.TIPO_REG = ' + QuotedStr('NTS') + ' or MOV.TIPO_REG = ' + QuotedStr('NTE') + ')'
+               + ' and CF.FATURAMENTO = ' + QuotedStr('S') + ') or (MOV.TIPO_REG = ' + QuotedStr('NSE')
+               + ' and MOV.VLR_LIQUIDO_NFSE > 0) or (MOV.TIPO_REG = ' + QuotedStr('RNF') + '))'
+               + ' AND TIPO_ES = ' + QuotedStr(fDMConsFaturamento.vTipo_Nota);
+
   if fMenu.vTipo_Reg_Cons_Fat = 'NTE' then
     vComandoAux := vComandoAux + ' AND TIPO_REG = ' + QuotedStr(fMenu.vTipo_Reg_Cons_Fat);
 
   if RxDBLookupCombo1.Text <> '' then
-    fDMConsFaturamento.qFaturamento.SQL.Add(' AND FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue));
+    vComandoAux := vComandoAux + ' AND FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
   vComandoAux := vComandoAux + ' AND ' + vDescData + ' BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date))
                              + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.date));
-  fDMConsFaturamento.qFaturamento.SQL.Add(vComandoAux);
+  fDMConsFaturamento.qFaturamento.SQL.Text := vComandoAux;
   fDMConsFaturamento.qFaturamento.Open;
+  
   ceVlrFaturamento.Value := StrToFloat(FormatFloat('0.00',fDMConsFaturamento.qFaturamentoVLR_TOTAL.AsFloat));
   if fMenu.vTipo_Reg_Cons_Fat = 'NTE' then
     ceVlrFaturamento.Value := StrToFloat(FormatFloat('0.00',ceVlrFaturamento.Value + fDMConsFaturamento.qFaturamentoVLR_IPI.AsFloat));
@@ -486,6 +509,7 @@ begin
   if fMenu.vTipo_Reg_Cons_Fat = 'NTE' then
     fDMConsFaturamento.vVlrFaturamento := StrToFloat(FormatFloat('0.00',fDMConsFaturamento.vVlrFaturamento + fDMConsFaturamento.qFaturamentoVLR_IPI.AsFloat));
 
+  //fDMConsFaturamento.qFaturamento.SQL.Text := fDMConsFaturamento.ctFaturamento
   //Somar os fretes      foi ajustado em 05/07/2017, pois estava calculando notas de entrada e saida junto
   {fDMConsFaturamento.qFrete.Active := False;
   fDMConsFaturamento.qFrete.ParamByName('D1').AsDate := DateEdit1.date;
@@ -649,6 +673,11 @@ begin
     vDesc := vDesc + ' - V.VLR_IPI';
   if (CheckBox5.Checked) and (fDMConsFaturamento.qParametros_NFeMOSTRAR_VLR_FRETE_CONS.AsString = 'S') then
     vDesc := vDesc + ' - V.VLR_FRETE';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
+
 
   fDMConsFaturamento.cdsNotaFiscal_CliProd.Close;
   fDMConsFaturamento.cdsNotaFiscal_CliProd.IndexFieldNames := '';
@@ -702,6 +731,10 @@ begin
     vDesc := vDesc + ' - V.VLR_IPI';
   if (CheckBox5.Checked) and (fDMConsFaturamento.qParametros_NFeMOSTRAR_VLR_FRETE_CONS.AsString = 'S') then
     vDesc := vDesc + ' - V.VLR_FRETE';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
 
   fDMConsFaturamento.cdsNotaFiscal_Prod.Close;
   fDMConsFaturamento.cdsNotaFiscal_Prod.IndexFieldNames := '';
@@ -744,6 +777,11 @@ begin
   //if CheckBox5.Checked then
   if (CheckBox5.Checked) and (fDMConsFaturamento.qParametros_NFeMOSTRAR_VLR_FRETE_CONS.AsString = 'S') then
     vDesc := vDesc + ' - V.VLR_FRETE';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
+
 
   fDMConsFaturamento.cdsNotaFiscal_DT.Close;
   fDMConsFaturamento.cdsNotaFiscal_DT.IndexFieldNames := '';
@@ -929,6 +967,10 @@ begin
   //if CheckBox5.Checked then
   if (CheckBox5.Checked) and (fDMConsFaturamento.qParametros_NFeMOSTRAR_VLR_FRETE_CONS.AsString = 'S') then
     vDesc := vDesc + ' - V.VLR_FRETE';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
 
   fDMConsFaturamento.cdsProduto_Det.Close;
   fDMConsFaturamento.cdsProduto_Det.IndexFieldNames := '';
@@ -1028,6 +1070,10 @@ begin
   //if CheckBox5.Checked then
   if (CheckBox5.Checked) and (fDMConsFaturamento.qParametros_NFeMOSTRAR_VLR_FRETE_CONS.AsString = 'S') then
     vDesc := vDesc + ' - V.VLR_FRETE';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
 
   fDMConsFaturamento.cdsNotaFiscal_UF.Close;
   fDMConsFaturamento.cdsNotaFiscal_UF.IndexFieldNames := '';
@@ -1305,6 +1351,10 @@ begin
     vDesc := 'V.VLR_TOTAL - V.VLR_ICMSSUBST'
   else
     vDesc := 'V.VLR_TOTAL';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
 
   fDMConsFaturamento.cdsNotaFiscal_Cli_UF.Close;
   fDMConsFaturamento.cdsNotaFiscal_Cli_UF.IndexFieldNames := '';
@@ -1368,6 +1418,10 @@ begin
     vDesc := 'V.VLR_TOTAL - MOV.VLR_ICMSSUBST'
   else
     vDesc := 'V.VLR_TOTAL';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
 
   fDMConsFaturamento.cdsNotaFiscal_Cli_Cid.Close;
   fDMConsFaturamento.cdsNotaFiscal_Cli_Cid.IndexFieldNames := '';
@@ -1435,6 +1489,10 @@ begin
   //if CheckBox5.Checked then
   if (CheckBox5.Checked) and (fDMConsFaturamento.qParametros_NFeMOSTRAR_VLR_FRETE_CONS.AsString = 'S') then
     vDesc := vDesc + ' - V.VLR_FRETE';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
 
   fDMConsFaturamento.cdsProduto_UF.Close;
   fDMConsFaturamento.cdsProduto_UF.IndexFieldNames := '';
@@ -1572,6 +1630,10 @@ begin
   //if CheckBox5.Checked then
   if (CheckBox5.Checked) and (fDMConsFaturamento.qParametros_NFeMOSTRAR_VLR_FRETE_CONS.AsString = 'S') then
     vDesc := vDesc + ' - V.VLR_FRETE';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
 
   fDMConsFaturamento.cdsGrupo_UF.Close;
   fDMConsFaturamento.cdsGrupo_UF.IndexFieldNames := '';
@@ -1813,9 +1875,13 @@ var
   vDesc : string;
 begin
   if CheckBox2.Checked then
-    vDesc := 'V.VLR_TOTAL - MOV.VLR_ICMSSUBST'
+    vDesc := 'V.VLR_TOTAL -V.VLR_ICMSSUBST'
   else
     vDesc := 'V.VLR_TOTAL';
+  //05/06/2019
+  if chkDesconto.Checked then
+    vDesc := '(' + vDesc + ') + V.VLR_DESCONTO';
+  //*************************
 
   fDMConsFaturamento.cdsNotaFiscal_Cli_Cid_Det.Close;
   fDMConsFaturamento.cdsNotaFiscal_Cli_Cid_Det.IndexFieldNames := '';
@@ -1866,6 +1932,26 @@ begin
   fDMConsFaturamento.cdsProduto_Det_Geral.IndexFieldNames := '';
   fDMConsFaturamento.sdsProduto_Det_Geral.CommandText     := fDMConsFaturamento.ctProduto_Det_Geral + vComando;
   fDMConsFaturamento.cdsProduto_Det_Geral.Open;
+end;
+
+procedure TfrmConsFaturamento.RxDBLookupCombo2KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    if RxDBLookupCombo2.Text <> '' then
+      vCodPessoa_Pos := RxDBLookupCombo2.KeyValue;
+    frmSel_Pessoa := TfrmSel_Pessoa.Create(Self);
+    if fMenu.vTipo_Reg_Cons_Fat = 'NTS' then
+      frmSel_Pessoa.vTipo_Pessoa := 'C'
+    else
+      frmSel_Pessoa.vTipo_Pessoa := 'FT';
+    frmSel_Pessoa.ShowModal;
+    FreeAndNil(frmSel_Pessoa);
+    if vCodPessoa_Pos > 0 then
+      RxDBLookupCombo2.KeyValue := vCodPessoa_Pos;
+    RxDBLookupCombo2.SetFocus;
+  end;
 end;
 
 end.

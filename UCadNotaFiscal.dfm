@@ -7994,7 +7994,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
   end
   object PopupMenu2: TPopupMenu
     Left = 609
-    Top = 101
+    Top = 100
     object PrFaturamento1: TMenuItem
       Caption = 'Pr'#233' Faturamento'
       OnClick = PrFaturamento1Click

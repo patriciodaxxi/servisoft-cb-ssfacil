@@ -508,7 +508,7 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
       item
         Name = 'CaminhoArquivo'
         DataType = ftString
-        Size = 100
+        Size = 150
       end
       item
         Name = 'NomeArquivo'
@@ -583,7 +583,7 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
     Top = 328
     Data = {
       6C0100009619E0BD01000000180000000F0000000000030000006C010E43616D
-      696E686F4172717569766F01004900000001000557494454480200020064000B
+      696E686F4172717569766F01004900000001000557494454480200020096000B
       4E6F6D654172717569766F01004900000001000557494454480200020028000F
       457874656E73616F4172717569766F0100490000000100055749445448020002
       000A000B436F6D7072696D656E746F0800040000000000074C61726775726108
@@ -595,9 +595,9 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
       00000D4661746F725F43616C63756C6F080004000000000001000D4445464155
       4C545F4F524445520200820000000000}
     object mArquivoImportadoCaminhoArquivo: TStringField
-      DisplayWidth = 75
+      DisplayWidth = 150
       FieldName = 'CaminhoArquivo'
-      Size = 100
+      Size = 150
     end
     object mArquivoImportadoNomeArquivo: TStringField
       DisplayWidth = 40

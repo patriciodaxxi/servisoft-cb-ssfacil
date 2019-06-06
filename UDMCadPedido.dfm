@@ -11900,8 +11900,8 @@ object DMCadPedido: TDMCadPedido
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1161
-    Top = 21
+    Left = 1160
+    Top = 29
   end
   object dspVidro: TDataSetProvider
     DataSet = sdsVidro
