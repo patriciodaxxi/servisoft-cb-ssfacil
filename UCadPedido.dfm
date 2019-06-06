@@ -111,6 +111,7 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'APROVADO_PED'
             Title.Alignment = taCenter
             Title.Caption = 'Aprovado'
+            Width = 64
             Visible = True
           end
           item
@@ -151,7 +152,6 @@ object frmCadPedido: TfrmCadPedido
             Expanded = False
             FieldName = 'DTEMISSAO'
             Title.Alignment = taCenter
-            Width = 64
             Visible = True
           end
           item
