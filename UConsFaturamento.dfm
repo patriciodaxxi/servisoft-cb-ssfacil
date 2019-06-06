@@ -66,6 +66,19 @@ object frmConsFaturamento: TfrmConsFaturamento
       Alignment = taRightJustify
       Caption = 'Imprimir Cliente:'
     end
+    object Label13: TLabel
+      Left = 399
+      Top = 6
+      Width = 80
+      Height = 13
+      Caption = 'F2 Cons. Pessoa'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 103
       Top = 21
@@ -92,6 +105,7 @@ object frmConsFaturamento: TfrmConsFaturamento
       ParentCtl3D = False
       TabOrder = 3
       OnEnter = RxDBLookupCombo2Enter
+      OnKeyDown = RxDBLookupCombo2KeyDown
     end
     object RxDBLookupCombo3: TRxDBLookupCombo
       Left = 223
@@ -326,13 +340,21 @@ object frmConsFaturamento: TfrmConsFaturamento
         'Fantasia'
         'Raz'#227'o Social')
     end
+    object chkDesconto: TCheckBox
+      Left = 834
+      Top = 60
+      Width = 159
+      Height = 17
+      Caption = 'Somar Descontos'
+      TabOrder = 10
+    end
   end
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 104
     Width = 1010
     Height = 381
-    ActivePage = TS_Produto_Det
+    ActivePage = TS_Cliente
     ActivePageDefault = TS_Cliente
     Align = alClient
     BackgroundColor = clGray
@@ -345,7 +367,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 5
+    TabIndex = 0
     TabOrder = 2
     TextColors.Selected = clBlue
     FixedDimension = 19
@@ -1529,10 +1551,10 @@ object frmConsFaturamento: TfrmConsFaturamento
         Top = 0
         Width = 1006
         Height = 358
-        ActivePage = TS_Produto_Det_Geral
+        ActivePage = TS_PRODUTO_DET_Fat
         ActivePageDefault = TS_PRODUTO_DET_Fat
         Align = alClient
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 0
         FixedDimension = 19
         object TS_PRODUTO_DET_Fat: TRzTabSheet
@@ -1675,6 +1697,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               item
                 Expanded = False
                 FieldName = 'DTENTRADASAIDA'
+                Width = 64
                 Visible = True
               end
               item
@@ -1812,6 +1835,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'UNIDADE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
+                Width = 64
                 Visible = True
               end
               item
@@ -1868,6 +1892,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'DTENTRADASAIDA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Dt. Entrada / Sa'#237'da'
+                Width = 64
                 Visible = True
               end
               item
@@ -2894,7 +2919,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     end
     object CheckBox4: TCheckBox
       Left = 442
-      Top = 2
+      Top = 1
       Width = 97
       Height = 17
       Caption = 'Total sem IPI'
@@ -2910,15 +2935,15 @@ object frmConsFaturamento: TfrmConsFaturamento
     end
     object CheckBox6: TCheckBox
       Left = 650
-      Top = 2
+      Top = 3
       Width = 159
       Height = 17
       Caption = 'Total sem Devolu'#231#245'es'
       TabOrder = 4
     end
     object chkCupomEnv: TCheckBox
-      Left = 788
-      Top = 1
+      Left = 786
+      Top = 0
       Width = 159
       Height = 17
       Caption = 'Somente Cupons Enviados'
@@ -3095,8 +3120,8 @@ object frmConsFaturamento: TfrmConsFaturamento
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 848
-    Top = 48
+    Left = 823
+    Top = 17
     object Imprimir1: TMenuItem
       Caption = 'Imprimir'
       OnClick = Imprimir1Click

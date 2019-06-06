@@ -2544,42 +2544,6 @@ object fMenu: TfMenu
         GroupName = 'Contabilista'
       end
       item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnBuscarProduto'
-        Caption = 'Buscar Produtos Para a Tabela de Pre'#231'o'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnAplicar'
-        Caption = 'Aplicar'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnExportar'
-        Caption = 'Exportar'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
         FormName = 'frmCadObs_Lei'
         CompName = 'btnExcluir'
         Caption = 'Excluir'
@@ -4236,6 +4200,48 @@ object fMenu: TfMenu
         CompName = 'btnAlterar'
         Caption = 'Alterar'
         GroupName = 'Esp'#233'cie Animal (Tipo)'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnBuscarProduto'
+        Caption = 'Buscar Produtos Para a Tabela de Pre'#231'o'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnAplicar'
+        Caption = 'Aplicar'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnExportar'
+        Caption = 'Exportar'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'pnlExcluirSel'
+        Caption = 'Excluir Selecionados'
+        GroupName = 'Tabela Pre'#231'o'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True
