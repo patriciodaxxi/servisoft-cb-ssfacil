@@ -704,7 +704,10 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_IPI.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
   end;
   //07/11/2018 foi incluido a opção Alterar_Nome_prod
-  if (fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S') or (fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString = 'S') then
+  if (fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S') or ((fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString = 'S') and (vTipo = 'NTS'))  then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString     := fDMCadNotaFiscal.cdsPedidoNOME_PRODUTO_PED.AsString
+  else
+  if ((fDMCadNotaFiscal.qParametros_PedPERMITE_ALT_NOMEPROD.AsString = 'S') and (vTipo = 'RNF'))  then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString     := fDMCadNotaFiscal.cdsPedidoNOME_PRODUTO_PED.AsString
   else
     fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString     := fDMCadNotaFiscal.cdsPedidoNOMEPRODUTO.AsString;

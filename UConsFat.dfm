@@ -845,9 +845,9 @@ object frmConsFat: TfrmConsFat
       Top = 1
       Width = 1030
       Height = 512
-      ActivePage = ts_Geral
+      ActivePage = ts_Cliente
       Align = alClient
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       FixedDimension = 19
       object ts_Geral: TRzTabSheet
@@ -1160,7 +1160,7 @@ object frmConsFat: TfrmConsFat
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 23
+          ColCount = 24
           RowCount = 2
           Columns = <
             item
@@ -1192,6 +1192,14 @@ object frmConsFat: TfrmConsFat
               Expanded = False
               FieldName = 'VLR_TOTAL'
               Title.Caption = 'Valor Total'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VLR_TOTAL_BRU'
+              Title.Alignment = taCenter
+              Title.Caption = 'Vlr. Bruto'
+              Width = 77
               Visible = True
             end
             item
@@ -1381,6 +1389,12 @@ object frmConsFat: TfrmConsFat
             end
             item
               Expanded = False
+              FieldName = 'VLR_TOTAL_BRU'
+              Title.Caption = 'Valor Bruto'
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'VLR_ICMSSUBST'
               Title.Caption = 'Valor ICMS ST'
               Width = 81
@@ -1415,13 +1429,13 @@ object frmConsFat: TfrmConsFat
               Expanded = False
               FieldName = 'VLR_DESCONTO'
               Title.Caption = 'Valor Desconto'
-              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VLR_COFINS'
               Title.Caption = 'Valor COFINS'
+              Width = 64
               Visible = True
             end
             item
@@ -1451,15 +1465,10 @@ object frmConsFat: TfrmConsFat
             end
             item
               Expanded = False
-              FieldName = 'VLR_TOTAL_BRU'
-              Title.Caption = 'Valor Bruto'
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'VLR_ICMS_FCP_DEST'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. ICMS FCP Dest'
+              Width = 64
               Visible = True
             end
             item

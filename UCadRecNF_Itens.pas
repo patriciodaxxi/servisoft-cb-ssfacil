@@ -376,7 +376,9 @@ begin
   if fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'N' then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
 
-  if ((fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString <> 'S') and (trim(fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString) <> 'S'))
+  //05/06/2019  
+  //if ((fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString <> 'S') and (trim(fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString) <> 'S'))
+  if ((fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString <> 'S') and (trim(fDMCadNotaFiscal.qParametros_PedPERMITE_ALT_NOMEPROD.AsString) <> 'S'))
      or (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString) = '') then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsProdutoNOME.AsString;
   fDMCadNotaFiscal.cdsNotaFiscal_ItensREFERENCIA.AsString   := fDMCadNotaFiscal.cdsProdutoREFERENCIA.AsString;
