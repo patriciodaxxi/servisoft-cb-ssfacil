@@ -216,7 +216,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure prc_Monta_Etiqueta_Calcado(Tipo: String ; ID : Integer); //D= DOS   A=A4 em windows
+    procedure prc_Monta_Etiqueta_Calcado(Tipo: String; ID: Integer); //D= DOS   A=A4 em windows
 
   end;
 
@@ -231,7 +231,7 @@ uses DmdDatabase, uUtilPadrao;
 
 { TDMEtiqueta }
 
-procedure TDMEtiqueta.prc_Monta_Etiqueta_Calcado(Tipo: String ; ID : Integer); //D= DOS   A=A4 em windows
+procedure TDMEtiqueta.prc_Monta_Etiqueta_Calcado(Tipo: String; ID: Integer); //D= DOS   A=A4 em windows
 var
   i: Integer;
   vQtdDiv: Integer;
@@ -241,7 +241,7 @@ var
 begin
   vTexto := '1';
   if Tipo = 'A' then
-    vTexto := InputBox('','Informar a Quantidade por Pacote', '72');
+    vTexto := InputBox('','Informar a Quantidade por Pacote','72');  // padrão era 72
   vTexto := Monta_Numero(vTexto,0);
   if trim(vTexto) <> '' then
     vQtdDiv := StrToInt(vTexto)

@@ -5055,13 +5055,23 @@ var
   vArq: String;
   fDMEtiqueta: TDMEtiqueta;
 begin
-  if not(fDMCadNotaFiscal.cdsNotaFiscal_Consulta.Active) or (fDMCadNotaFiscal.cdsNotaFiscal_Consulta.IsEmpty) or (fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID.AsInteger <= 0) then
+  if not(fDMCadNotaFiscal.cdsNotaFiscal_Consulta.Active) or (fDMCadNotaFiscal.cdsNotaFiscal_Consulta.IsEmpty) or
+        (fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID.AsInteger <= 0) then
     exit;
 
   fDMEtiqueta := TDMEtiqueta.Create(Self);
 
+  fDMCadNotaFiscal.qFilial_Relatorios.Close;
+  fDMCadNotaFiscal.qFilial_Relatorios.ParamByName('I1').AsInteger      := fDMCadNotaFiscal.cdsNotaFiscal_ConsultaFILIAL.AsInteger;
+  fDMCadNotaFiscal.qFilial_Relatorios.ParamByName('TIPO').AsInteger    := 7;
+  fDMCadNotaFiscal.qFilial_Relatorios.ParamByName('POSICAO').AsInteger := 1;
+  fDMCadNotaFiscal.qFilial_Relatorios.Open;
+  if trim(fDMCadNotaFiscal.qFilial_RelatoriosCAMINHO.AsString) <> '' then
+    vArq := fDMCadNotaFiscal.qFilial_RelatoriosCAMINHO.AsString
+  else
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\SulTextil_Etiq_Nota.fr3';
+
   fDMEtiqueta.prc_Monta_Etiqueta_Calcado('A',fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID.AsInteger);
-  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\SulTextil_Etiq_Nota.fr3';
   if FileExists(vArq) then
     fDMEtiqueta.frxReport1.Report.LoadFromFile(vArq)
   else

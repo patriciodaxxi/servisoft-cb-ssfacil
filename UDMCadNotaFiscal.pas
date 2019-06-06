@@ -3,8 +3,7 @@ unit UDMCadNotaFiscal;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, dbXPress, Math, Messages, Dialogs, LogTypes, Variants,
-  frxClass, frxDBSet;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, dbXPress, Math, Messages, Dialogs, LogTypes, Variants, frxClass, frxDBSet;
 
 type
   TDMCadNotaFiscal = class(TDataModule)
@@ -3064,6 +3063,10 @@ type
     sdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField;
     cdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField;
     cdsClienteIMP_ETIQUETA_ROT: TStringField;
+    qFilial_Relatorios: TSQLQuery;
+    qFilial_RelatoriosTIPO: TSmallintField;
+    qFilial_RelatoriosCAMINHO: TStringField;
+    qFilial_RelatoriosPOSICAO: TSmallintField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

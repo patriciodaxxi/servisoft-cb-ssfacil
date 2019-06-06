@@ -776,13 +776,13 @@ object DMEtiqueta: TDMEtiqueta
       's, i.num_pedido, i.cod_produto_forn, i.cod_barra,'#13#10'I2.cod_produt' +
       'o_cliente, I2.cod_cor_cliente, I2.nome_cor_cliente, I2.tamanho_c' +
       'liente,'#13#10'C.NOME NOME_COR, I2.ENCERADO'#13#10'FROM NOTAFISCAL_ITENS I'#13#10 +
-      'INNER JOIN COMBINACAO C'#13#10'ON I.ID_COR = C.ID'#13#10'LEFT JOIN PEDIDO_IT' +
-      'EM I2'#13#10'ON I.ID_PEDIDO = I2.ID'#13#10'AND I.ITEM_PEDIDO = I2.ITEM'#13#10'WHER' +
-      'E I.ID = :ID'#13#10#13#10#13#10
+      'INNER JOIN COMBINACAO C ON (I.ID_COR = C.ID)'#13#10'LEFT JOIN PEDIDO_I' +
+      'TEM I2 ON (I.ID_PEDIDO = I2.ID AND I.ITEM_PEDIDO = I2.ITEM)'#13#10'WHE' +
+      'RE I.ID = :ID'#13#10'AND (I.ID_CFOP <> 6 AND I.ID_CFOP <> 57)'
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID'
         ParamType = ptInput
       end>
@@ -931,13 +931,14 @@ object DMEtiqueta: TDMEtiqueta
     Tag = 1
     Version = '5.6.8'
     DotMatrixReport = False
+    EngineOptions.PrintIfEmpty = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43217.639927083340000000
+    ReportOptions.LastChange = 43621.754122627320000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'

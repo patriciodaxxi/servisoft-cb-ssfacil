@@ -15150,4 +15150,42 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'PERC_ST'
     end
   end
+  object qFilial_Relatorios: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'I1'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'POSICAO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT F.tipo, F.caminho, F.posicao'
+      'FROM FILIAL_RELATORIOS F'
+      'WHERE F.ID = :I1'
+      ' AND F.tipo = :TIPO'
+      ' AND F.posicao = :POSICAO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1032
+    Top = 138
+    object qFilial_RelatoriosTIPO: TSmallintField
+      FieldName = 'TIPO'
+    end
+    object qFilial_RelatoriosCAMINHO: TStringField
+      FieldName = 'CAMINHO'
+      Size = 150
+    end
+    object qFilial_RelatoriosPOSICAO: TSmallintField
+      FieldName = 'POSICAO'
+    end
+  end
 end
