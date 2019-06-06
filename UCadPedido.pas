@@ -3811,7 +3811,7 @@ end;
 procedure TfrmCadPedido.prc_scroll2(DataSet: TDataSet);
 begin
   PedidoSaldo1.Enabled := (fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'P');
-  btnExcluir.Enabled   := (fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'N');
+  btnExcluir.Enabled   := ((fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'N') or (fDMCadPedido.cdsPedido_ConsultaFATURADO.IsNull))
 end;
 
 procedure TfrmCadPedido.prc_Controle_Imp(Tipo_Imp: String);

@@ -4826,7 +4826,6 @@ object DMCadPedido: TDMCadPedido
     ProviderName = 'dspPedidoImp_Itens'
     AfterScroll = cdsPedidoImp_ItensAfterScroll
     OnCalcFields = cdsPedidoImp_ItensCalcFields
-    OnNewRecord = cdsPedido_ItensNewRecord
     Left = 248
     Top = 417
     object cdsPedidoImp_ItensID: TIntegerField
@@ -10598,8 +10597,8 @@ object DMCadPedido: TDMCadPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43620.727710312500000000
+    ReportOptions.CreateDate = 41928.578144409700000000
+    ReportOptions.LastChange = 43594.474541921300000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint

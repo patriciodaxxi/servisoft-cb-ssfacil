@@ -606,12 +606,21 @@ begin
   fDMCadPedido.cdsPedido_ItensCOD_PRODUTO_CLIENTE.AsString := fDMGerar_EDI.mAuxiliarCodProdCli.AsString;
   fDMCadPedido.cdsPedido_ItensUNIDADE.AsString      := fDMGerar_EDI.mAuxiliarUnidade.AsString;
   fDMCadPedido.cdsPedido_ItensFABRICA.AsString      := fDMGerar_EDI.mAuxiliarFabrica.AsString;
+  fDMCadPedido.cdsPedido_ItensUNIDADE_PROD.AsString := fDMCadPedido.cdsProdutoUNIDADE.AsString;
   
   //03/08/2018
   if ((fDMCadPedido.cdsPedido_ItensUNIDADE.AsString = 'PAR') or (fDMCadPedido.cdsPedido_ItensUNIDADE.AsString = 'PR') or (fDMCadPedido.cdsPedido_ItensUNIDADE.AsString = 'PRS'))
     and (fDMCadPedido.cdsProdutoUNIDADE.AsString = 'PARES') then
     fDMCadPedido.cdsPedido_ItensUNIDADE.AsString := fDMCadPedido.cdsProdutoUNIDADE.AsString;
   //*******
+
+  //06/06/2019
+  if (fDMCadPedido.qParametros_PedUSA_UNIDADE_VENDA.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensUNIDADE.AsString <> fDMCadPedido.cdsPedido_ItensUNIDADE_PROD.AsString) then
+    fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsFloat := StrToFloat(FormatFloat('0.0000',fnc_Retorna_Qtd_UConv(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,
+                                                                 fDMCadPedido.cdsPedido_ItensUNIDADE.AsString)));
+  if fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsFloat <= 0 then
+    fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsInteger := 1;
+  //*********************
 
   if trim(fDMGerar_EDI.mAuxiliarPlano.AsString) <> '' then
     fDMCadPedido.cdsPedido_ItensNUMOS.AsString := fDMGerar_EDI.mAuxiliarPlano.AsString
