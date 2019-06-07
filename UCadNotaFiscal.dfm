@@ -1967,7 +1967,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             Left = 168
             Top = 7
             Width = 94
-            Height = 19
+            Height = 20
             TabStop = False
             BevelOuter = bvNone
             Color = clSilver
@@ -1988,7 +1988,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             Left = 33
             Top = 7
             Width = 72
-            Height = 19
+            Height = 20
             TabStop = False
             BevelOuter = bvNone
             Color = clSilver
