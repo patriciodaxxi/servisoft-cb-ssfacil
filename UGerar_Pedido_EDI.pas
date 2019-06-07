@@ -123,6 +123,7 @@ begin
   FilenameEdit1.InitialDir := fDMGerar_EDI.qParametros_GeralEND_ARQ_EDI.AsString;
   fDMGerar_EDI.prc_Abre_Operacao;
   RxDBLookupCombo1.KeyValue := fDMGerar_EDI.qParametrosID_OPERACAO_VENDA.AsInteger;
+  CheckBox1.Checked         := (fDMGerar_EDI.qParametros_PedEDI_USAR_PRECO_TAB.AsString <> 'S');
 end;
 
 procedure TfrmGerar_Pedido_EDI.prc_Gravar_mAuxiliar;

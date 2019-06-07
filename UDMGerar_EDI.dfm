@@ -2114,13 +2114,18 @@ object DMGerar_EDI: TDMGerar_EDI
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT GRAVA_PROD_CLI_EDI'
+      'SELECT GRAVA_PROD_CLI_EDI, EDI_USAR_PRECO_TAB'
       'FROM PARAMETROS_PED')
     SQLConnection = dmDatabase.scoDados
     Left = 247
     Top = 47
     object qParametros_PedGRAVA_PROD_CLI_EDI: TStringField
       FieldName = 'GRAVA_PROD_CLI_EDI'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedEDI_USAR_PRECO_TAB: TStringField
+      FieldName = 'EDI_USAR_PRECO_TAB'
       FixedChar = True
       Size = 1
     end
