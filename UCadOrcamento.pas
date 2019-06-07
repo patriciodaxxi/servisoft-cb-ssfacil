@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, DB, SqlExpr,
   DBGrids, ExtCtrls, StdCtrls, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, UCadOrcamento_Itens, UEscolhe_Filial,
   UCBase, Menus, NxEdit, NxCollection, UDMRel, UCadOrcamento_Aprov, Variants, Mask, RzTabs, RzPanel, UCadPedido_Desconto, ComObj,
-  UCadPedido_Ace, uCadObs_Aux, UCadPedido_ItensRed, UCadOrcamento_NaoAprovado, classe.validaemail, frxExportPDF, frxExportMail;
+  UCadPedido_Ace, uCadObs_Aux, UCadPedido_ItensRed, UCadOrcamento_NaoAprovado, classe.validaemail, frxExportPDF, frxExportMail,
+  UMontaPed_TipoItem;
 
 type
   TfrmCadOrcamento = class(TForm)
@@ -288,6 +289,8 @@ type
     ffrmCadPedido_Ace: TfrmCadPedido_Ace;
     ffrmCadPedido_ItensRed: TfrmCadPedido_ItensRed;
     ffrmCadObs_Aux: TfrmCadObs_Aux;
+    ffrmMontaPed_TipoItem : TfrmMontaPed_TipoItem;
+
     procedure ItemClick(Sender:TObject);
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
@@ -1528,6 +1531,20 @@ begin
     ffrmCadPedido_Copia.prc_Le_Aux;
     FreeAndNil(ffrmConsHist_Chapa);
     FreeAndNil(ffrmCadPedido_Copia);
+    btnCalcular_ValoresClick(Sender);
+  end;
+  if (Key = Vk_F6) and (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) and (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
+  begin
+    if fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger <= 0 then
+    begin
+      MessageDlg('Informe o Cliente',mtWarning,mbOKCancel,0);
+      RxDBLookupCombo3.SetFocus;
+      Exit;
+    end;
+    ffrmMontaPed_TipoItem := TfrmMontaPed_TipoItem.Create(self);
+    ffrmMontaPed_TipoItem.fDMCadPedido := fDMCadPedido;
+    ffrmMontaPed_TipoItem.ShowModal;
+    FreeAndNil(ffrmMontaPed_TipoItem);
     btnCalcular_ValoresClick(Sender);
   end;
   if (Shift = [ssCtrl]) and (Key = 87) then

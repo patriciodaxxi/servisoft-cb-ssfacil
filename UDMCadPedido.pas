@@ -4718,16 +4718,14 @@ end;
 
 procedure TDMCadPedido.frxDBDataset3First(Sender: TObject);
 begin
-  //06/06/2019 Ver com o Russimar
-  if (frxReport1.FindComponent('Picture1')<> nil) and (cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
-    TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
+  if (frxReport1.FindComponent('Foto_PDF')<> nil) and (cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
+    TfrxPictureView(frxReport1.FindComponent('Foto_PDF')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
 end;
 
 procedure TDMCadPedido.frxDBDataset3Next(Sender: TObject);
 begin
-  //06/06/2019 Ver com o Russimar
-    //if frxReport1.FindComponent('Picture1')<> nil then
- //   TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
+  if (frxReport1.FindComponent('Foto_PDF')<> nil) and (cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
+    TfrxPictureView(frxReport1.FindComponent('Foto_PDF')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
 end;
 
 end.
