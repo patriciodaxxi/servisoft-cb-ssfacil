@@ -661,7 +661,7 @@ implementation
 uses DmdDatabase, rsDBUtils, uUtilPadrao, USel_Pessoa, URecebeXML, uCalculo_NotaFiscal, uNFeComandos, USel_ContaOrc, uUtilCliente,
   uUtilCobranca, DmdDatabase_NFeBD, UDMAprovacao_Ped, UConsPessoa_Fin, UConsPedido_Senha, uGrava_NotaFiscal, UCadNotaFiscal_Custo,
   UMenu, Math, UDMEtiqueta, USel_PreFat, uMenu1, USel_RecNF, uXMLSuframa,
-  UCadNotaFiscal_Alt_CCusto;
+  UCadNotaFiscal_Alt_CCusto, UConsClienteOBS;
 
 {$R *.dfm}
 
@@ -3174,7 +3174,20 @@ begin
       ffrmConsLimite_Credito.vCodCliente_Lim := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
     ffrmConsLimite_Credito.ShowModal;
     FreeAndNil(ffrmConsLimite_Credito);
+  end
+  else
+  //07/06/2019
+  if (Key = Vk_F4) then
+  begin
+    frmConsClienteOBS := TfrmConsClienteOBS.Create(self);
+    if RzPageControl1.ActivePage = TS_Cadastro then
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger
+    else
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID_CLIENTE.AsInteger;
+    frmConsClienteOBS.ShowModal;
+    FreeAndNil(frmConsClienteOBS);
   end;
+
 end;
 
 procedure TfrmCadNotaFiscal.btnCopiarNotaClick(Sender: TObject);

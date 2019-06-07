@@ -282,7 +282,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         BorderStyle = sbsSunken
         Caption = 
           'Duplo clique para consultar            F3-Consulta Reprovado    ' +
-          '       F9 = Aprovar/Reprovar Or'#231'amento'
+          '      F4-Cons.Obs Cliente        F9 = Aprovar/Reprovar Or'#231'amento'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clMaroon
         Font.Height = -11

@@ -25,7 +25,7 @@ object frmCadPedido: TfrmCadPedido
     Top = 0
     Width = 1097
     Height = 679
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadPedido: TfrmCadPedido
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -6633,11 +6633,24 @@ object frmCadPedido: TfrmCadPedido
           ParentFont = False
         end
         object Label61: TLabel
-          Left = 713
+          Left = 881
           Top = 8
           Width = 91
           Height = 13
           Caption = 'F5 Cons. Chapa'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMaroon
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label86: TLabel
+          Left = 729
+          Top = 7
+          Width = 116
+          Height = 13
+          Caption = 'F4 Cons.Obs Cliente'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -11

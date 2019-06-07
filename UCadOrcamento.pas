@@ -327,7 +327,7 @@ implementation
 
 uses DateUtils, DmdDatabase, rsDBUtils, uUtilPadrao, uRelOrcamento, USel_Pessoa, URelPedido_Tam, URelPedido_Tam2, uUtilCliente,
   uRelOrcamento_JW, UCadOrcamento_Servicos, uCalculo_Pedido, UCadPedido_Custo, UCadPedido_Copia, UConsHist_Chapa,
-  uGrava_Pedido;
+  uGrava_Pedido, UConsClienteOBS;
 
 {$R *.dfm}
 
@@ -1551,6 +1551,18 @@ begin
   begin
     btnLimparOrc.Visible := not(btnLimparOrc.Visible);
   end;
+  //07/06/2019
+  if (Key = Vk_F4) then
+  begin
+    frmConsClienteOBS := TfrmConsClienteOBS.Create(self);
+    if RzPageControl1.ActivePage = TS_Cadastro then
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger
+    else
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedido_ConsultaID_CLIENTE.AsInteger;
+    frmConsClienteOBS.ShowModal;
+    FreeAndNil(frmConsClienteOBS);
+  end;
+
 end;
 
 procedure TfrmCadOrcamento.Excel1Click(Sender: TObject);
