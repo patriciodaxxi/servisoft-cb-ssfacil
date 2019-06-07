@@ -732,7 +732,7 @@ begin
   end;
   //*************
 
-  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
     exit;
 
 ////////////// testa se produto é filtrado por cliente

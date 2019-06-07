@@ -283,7 +283,7 @@ begin
     end;
   end;
 
-  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
     exit;
 
   prc_Excluir_Registro;
