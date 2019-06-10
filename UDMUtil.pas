@@ -3,7 +3,7 @@ unit UDMUtil;
 interface
 
 uses
-  SysUtils, Classes, SqlExpr, FMTBcd, DB, DBClient, Provider;
+  SysUtils, Classes, SqlExpr, FMTBcd, DB, DBClient, Provider, Dialogs;
 
 type
   TDMUtil = class(TDataModule)
@@ -25,6 +25,7 @@ type
     qParametros_Prod: TSQLQuery;
     qParametros_ProdUSA_TAB_PRECO_ENC: TStringField;
     qParametros_ProdUSA_TAB_PRECO_ENG: TStringField;
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -112,10 +113,19 @@ begin
       else
         Result := sds.FieldByName('VLR_VENDA').AsFloat;
     end;
+    if (StrToFloat(FormatFloat('0.0000',Result)) <= 0) and ((Encerado = 'S') or (Encerado = 'G')) then
+      MessageDlg('*** Não foi informado o Preço Encerado/Engomado!', mtWarning, [mbOk], 0)
 
   finally
     FreeAndNil(sds);
   end;
+end;
+
+procedure TDMUtil.DataModuleCreate(Sender: TObject);
+begin
+  qParametros.Open;
+  qParametros_Prod.Open;
+  qParametros_Usuario.Open;
 end;
 
 end.

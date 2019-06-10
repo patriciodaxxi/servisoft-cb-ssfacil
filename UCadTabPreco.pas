@@ -369,7 +369,7 @@ begin
   btnInserir_Itens.Enabled := not(btnInserir_Itens.Enabled);
   btnAlterar_Itens.Enabled := not(btnAlterar_Itens.Enabled);
   btnExcluir_Itens.Enabled := not(btnExcluir_Itens.Enabled);
-  btnBuscarProduto.Enabled := not(btnBuscarProduto.Enabled);
+//  btnBuscarProduto.Enabled := not(btnBuscarProduto.Enabled);
   btnAplicar.Enabled       := not(btnAplicar.Enabled);
 
   btnConsPrecoProd.Enabled       := not(btnConsPrecoProd.Enabled);

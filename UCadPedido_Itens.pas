@@ -813,21 +813,31 @@ begin
     vPrecoAux := StrToFloat(FormatFloat('0.00000',vPreco_Pos))
   else
   //24/05/2018  IF para informar se usa ou não a tabela de preço no pedido
-  if (fDMCadPedido.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger > 0) then
+  if ((fDMCadPedido.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger > 0)) or (fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0) then
   begin
-    if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,fDMCadPedido.cdsPedido_ItensENCERADO.AsString)
+    DMUtil := TDMUtil.Create(Self);
+    if (fDMCadPedido.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger > 0) then
+    begin
+      if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
+        vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,fDMCadPedido.cdsPedido_ItensENCERADO.AsString)
+      else
+        vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,fDMCadPedido.cdsPedido_ItensENCERADO.AsString);
+    end
     else
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,fDMCadPedido.cdsPedido_ItensENCERADO.AsString);
+    if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0 then  //23/05/2017  Foi alterado para buscar por Cor
+    begin
+      if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
+        vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,fDMCadPedido.cdsPedido_ItensENCERADO.AsString)
+      else
+        vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,fDMCadPedido.cdsPedido_ItensENCERADO.AsString);
+    end;
+    FreeAndNil(DMUtil);
   end
   else
-  if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0 then  //23/05/2017  Foi alterado para buscar por Cor
-  begin
-    if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,fDMCadPedido.cdsPedido_ItensENCERADO.AsString)
-    else
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,fDMCadPedido.cdsPedido_ItensENCERADO.AsString);
-  end;
+  if ((fDMCadPedido.cdsPedido_ItensENCERADO.AsString = 'S') and (fDMCadPedido.qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S'))
+    or ((fDMCadPedido.cdsPedido_ItensENCERADO.AsString = 'G') and (fDMCadPedido.qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S')) then
+    MessageDlg('*** Não foi informado a tabela de Preço no Cliente ou no Pedido!' + #13 + '    Opção quando Encerado ou Engomado.' , mtWarning, [mbOk], 0);
+
   if StrToFloat(FormatFloat('0.0000',vPrecoAux)) > 0 then
     fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.000000',vPrecoAux))
   else

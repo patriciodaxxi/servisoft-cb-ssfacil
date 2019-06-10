@@ -196,6 +196,11 @@ type
     cdsTab_Preco_ItensVLR_VENDA2: TFloatField;
     qParametros_ProdUSA_TAB_PRECO_ENC: TStringField;
     qParametros_ProdUSA_TAB_PRECO_ENG: TStringField;
+    cdsTab_Preco_ConsultaVLR_VENDA1: TFloatField;
+    cdsTab_Preco_ConsultaVLR_VENDA2: TFloatField;
+    qTab: TSQLQuery;
+    qTabID: TIntegerField;
+    qTabNOME: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsTab_Preco_ItensNewRecord(DataSet: TDataSet);
     procedure dspTab_PrecoUpdateError(Sender: TObject;

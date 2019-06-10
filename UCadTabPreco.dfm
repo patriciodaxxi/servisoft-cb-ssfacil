@@ -1,6 +1,6 @@
 object frmCadTabPreco: TfrmCadTabPreco
-  Left = 258
-  Top = 60
+  Left = 252
+  Top = 71
   Width = 950
   Height = 603
   Caption = 'Tabela de Pre'#231'o'
@@ -24,7 +24,7 @@ object frmCadTabPreco: TfrmCadTabPreco
     Top = 0
     Width = 942
     Height = 572
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadTabPreco: TfrmCadTabPreco
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -930,6 +930,7 @@ object frmCadTabPreco: TfrmCadTabPreco
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Encerado'
                 Title.Color = clYellow
+                Width = 64
                 Visible = True
               end
               item
@@ -938,6 +939,7 @@ object frmCadTabPreco: TfrmCadTabPreco
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Engomado'
                 Title.Color = clYellow
+                Width = 64
                 Visible = True
               end
               item
@@ -978,7 +980,6 @@ object frmCadTabPreco: TfrmCadTabPreco
               Width = 207
               Height = 25
               Caption = 'Buscar Produtos Para a Tabela de Pre'#231'o'
-              Enabled = False
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlue
               Font.Height = -11

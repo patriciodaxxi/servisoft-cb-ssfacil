@@ -1,5 +1,6 @@
 object DMUtil: TDMUtil
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Left = 319
   Top = 214
   Height = 408

@@ -45,12 +45,14 @@ type
     procedure Personalizado1Click(Sender: TObject);
     procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure CurrencyEdit1Exit(Sender: TObject);
   private
     { Private declarations }
     fDMCadTab_Preco: TDMCadTab_Preco;
     ColunaOrdenada: String;
 
     procedure prc_Consultar;
+    function fnc_Busca_Nome : String;
 
   public
     { Public declarations }
@@ -72,27 +74,24 @@ begin
   vQtdAux := 0;
   fDMCadTab_Preco.cdsTab_Preco_Consulta.Close;
   fDMCadTab_Preco.cdsTab_Preco_Consulta.IndexFieldNames := 'NOME;REFERENCIA';
+    fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.ctTabPreco_Consulta + ' WHERE (0 = 0) ';
   if CurrencyEdit1.AsInteger > 0 then
     fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.ctTabPreco_Consulta + ' WHERE TAB.ID = ' + IntToStr(CurrencyEdit1.AsInteger)
   else
-  begin
-    fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.ctTabPreco_Consulta + ' WHERE (0 = 0) ';
-    if trim(Edit3.Text) <> '' then
-      fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText
-                                             + ' AND TAB.NOME LIKE ' + QuotedStr('%'+Edit3.Text+'%');
-    if trim(Edit2.Text) <> '' then
-      fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText
-                                             + ' AND PRO.NOME LIKE ' + QuotedStr('%'+Edit2.Text+'%');
-    if trim(Edit1.Text) <> '' then
-      fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText
-                                             + ' AND PRO.REFERENCIA LIKE ' + QuotedStr('%'+Edit1.Text+'%');
-    if RxDBLookupCombo2.Text <> '' then
-      fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText
-                                                         + ' AND GRUPO.ID = ' + IntToStr(RxDBLookupCombo2.KeyValue);
-    if RxDBLookupCombo4.Text <> '' then
-      fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText
-                                                         + ' AND MARCA.ID = ' + IntToStr(RxDBLookupCombo4.KeyValue);
-  end;
+  if trim(Edit3.Text) <> '' then
+    fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText + ' AND TAB.NOME LIKE ' + QuotedStr('%'+Edit3.Text+'%');
+  if trim(Edit2.Text) <> '' then
+    fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText
+                                           + ' AND PRO.NOME LIKE ' + QuotedStr('%'+Edit2.Text+'%');
+  if trim(Edit1.Text) <> '' then
+    fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText
+                                           + ' AND PRO.REFERENCIA LIKE ' + QuotedStr('%'+Edit1.Text+'%');
+  if RxDBLookupCombo2.Text <> '' then
+    fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText
+                                                       + ' AND GRUPO.ID = ' + IntToStr(RxDBLookupCombo2.KeyValue);
+  if RxDBLookupCombo4.Text <> '' then
+    fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText := fDMCadTab_Preco.sdsTab_Preco_Consulta.CommandText
+                                                       + ' AND MARCA.ID = ' + IntToStr(RxDBLookupCombo4.KeyValue);
   fDMCadTab_Preco.cdsTab_Preco_Consulta.Open;
 end;
 
@@ -193,7 +192,7 @@ var
   i: Integer;
 begin
   if (CurrencyEdit1.AsInteger <= 0) and (trim(RxDBLookupCombo2.Text) = '') and (trim(RxDBLookupCombo4.Text) = '')
-    and (trim(Edit1.Text) = '') and (trim(Edit2.Text) = '') then
+    and (trim(Edit1.Text) = '') and (trim(Edit2.Text) = '')  and (trim(Edit3.Text) = '') then
   begin
     ShowMessage('É óbrigatório escolher uma opção de filtro!');
     Exit;
@@ -207,7 +206,8 @@ procedure TfrmConsTabPreco.Personalizado1Click(Sender: TObject);
 var
   vArq: String;
 begin
-  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Vinco_TabPreco.fr3';
+  //vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Vinco_TabPreco.fr3';
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\SLTextil_TabPreco.fr3';
   if FileExists(vArq) then
     fDMCadTab_Preco.frxReport1.Report.LoadFromFile(vArq)
   else
@@ -222,7 +222,33 @@ procedure TfrmConsTabPreco.CurrencyEdit1KeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   if (Key = VK_RETURN) and (CurrencyEdit1.AsInteger > 0) then
-    prc_Consultar;
+  begin
+    Edit3.Text := fnc_Busca_Nome;
+    if trim(Edit3.Text) <> '' then
+      prc_Consultar;
+  end;
+end;
+
+function TfrmConsTabPreco.fnc_Busca_Nome: String;
+begin
+  Result := '';
+  fDMCadTab_Preco.qTab.Close;
+  fDMCadTab_Preco.qTab.ParamByName('ID').AsInteger := CurrencyEdit1.AsInteger;
+  fDMCadTab_Preco.qTab.Open;
+  if trim(fDMCadTab_Preco.qTabNOME.AsString) <> '' then
+    Result := fDMCadTab_Preco.qTabNOME.AsString
+  else
+    MessageDlg('*** Tabela não encontrada com esse código!', mtInformation, [mbOk], 0);
+end;
+
+procedure TfrmConsTabPreco.CurrencyEdit1Exit(Sender: TObject);
+begin
+  if CurrencyEdit1.AsInteger > 0 then
+  begin
+    Edit3.Text := fnc_Busca_Nome;
+    if trim(Edit3.Text) = '' then
+      CurrencyEdit1.SetFocus;
+  end;
 end;
 
 end.
