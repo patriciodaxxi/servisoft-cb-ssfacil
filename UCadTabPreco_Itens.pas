@@ -28,6 +28,10 @@ type
     Label31: TLabel;
     RxDBLookupCombo3: TRxDBLookupCombo;
     edtRef2: TEdit;
+    Label1: TLabel;
+    CurrencyEdit3: TCurrencyEdit;
+    Label4: TLabel;
+    CurrencyEdit4: TCurrencyEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -107,6 +111,11 @@ begin
     CurrencyEdit2.SetFocus;
   end;
   edtRef2.Visible := (fDMCadTab_Preco.qParametros_ProdUSA_REF2.AsString = 'S');
+
+  label1.Visible        := (fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S');
+  CurrencyEdit3.Visible := (fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S');
+  label4.Visible        := (fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S');
+  CurrencyEdit4.Visible := (fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S');
 end;
 
 procedure TfrmCadTabPreco_Itens.prc_Move_Dados_Itens;

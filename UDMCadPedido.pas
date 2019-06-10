@@ -3457,6 +3457,8 @@ type
     sdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField;
     cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField;
     cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF: TStringField;
+    qParametros_ProdUSA_TAB_PRECO_ENC: TStringField;
+    qParametros_ProdUSA_TAB_PRECO_ENG: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

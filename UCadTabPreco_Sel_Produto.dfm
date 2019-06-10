@@ -71,7 +71,7 @@ object frmCadTabPreco_Sel_Produto: TfrmCadTabPreco_Sel_Produto
     end
     object BitBtn1: TBitBtn
       Left = 505
-      Top = 4
+      Top = 3
       Width = 347
       Height = 25
       Caption = 'Transferir Produtos selecionados para a tabela de Pre'#231'o'

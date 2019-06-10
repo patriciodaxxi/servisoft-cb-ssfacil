@@ -283,7 +283,7 @@ begin
           else
           begin
             if fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger > 0 then
-              vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger);
+              vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,0,'N');
             if StrToFloat(FormatFloat('0.000000',vPrecoAux)) > 0 then
               fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000000000',vPrecoAux))
             else

@@ -21,7 +21,7 @@ object frmCadPedidoSimples_Itens: TfrmCadPedidoSimples_Itens
   object Panel1: TPanel
     Left = 0
     Top = 35
-    Width = 749
+    Width = 757
     Height = 86
     Align = alTop
     Color = clMoneyGreen
@@ -29,7 +29,7 @@ object frmCadPedidoSimples_Itens: TfrmCadPedidoSimples_Itens
     object Panel4: TPanel
       Left = 1
       Top = 1
-      Width = 747
+      Width = 755
       Height = 80
       Align = alTop
       BevelOuter = bvNone
@@ -184,8 +184,8 @@ object frmCadPedidoSimples_Itens: TfrmCadPedidoSimples_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 397
-    Width = 749
+    Top = 404
+    Width = 757
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -224,7 +224,7 @@ object frmCadPedidoSimples_Itens: TfrmCadPedidoSimples_Itens
   object Panel2: TPanel
     Left = 0
     Top = 121
-    Width = 749
+    Width = 757
     Height = 136
     Align = alTop
     Color = clMoneyGreen
@@ -387,7 +387,7 @@ object frmCadPedidoSimples_Itens: TfrmCadPedidoSimples_Itens
   object pnlCod_Barras: TPanel
     Left = 0
     Top = 0
-    Width = 749
+    Width = 757
     Height = 35
     Align = alTop
     Color = clMoneyGreen
@@ -411,8 +411,8 @@ object frmCadPedidoSimples_Itens: TfrmCadPedidoSimples_Itens
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 257
-    Width = 749
-    Height = 140
+    Width = 757
+    Height = 147
     ActivePage = TabSheet1
     Align = alClient
     TabIndex = 0
@@ -424,8 +424,8 @@ object frmCadPedidoSimples_Itens: TfrmCadPedidoSimples_Itens
       object DBMemo2: TDBMemo
         Left = 0
         Top = 0
-        Width = 745
-        Height = 117
+        Width = 753
+        Height = 124
         Align = alClient
         DataField = 'OBS'
         DataSource = DMCadPedido.dsPedido_Itens

@@ -22,7 +22,7 @@ object frmCadPedido_ItensRed: TfrmCadPedido_ItensRed
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 765
+    Width = 773
     Height = 108
     Align = alTop
     Color = clMoneyGreen
@@ -128,7 +128,7 @@ object frmCadPedido_ItensRed: TfrmCadPedido_ItensRed
     object pnlTipo1: TPanel
       Left = 1
       Top = 1
-      Width = 763
+      Width = 771
       Height = 42
       Align = alTop
       BevelOuter = bvNone
@@ -306,8 +306,8 @@ object frmCadPedido_ItensRed: TfrmCadPedido_ItensRed
   end
   object Panel3: TPanel
     Left = 0
-    Top = 579
-    Width = 765
+    Top = 587
+    Width = 773
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -346,8 +346,8 @@ object frmCadPedido_ItensRed: TfrmCadPedido_ItensRed
   object Panel2: TPanel
     Left = 0
     Top = 137
-    Width = 765
-    Height = 442
+    Width = 773
+    Height = 450
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 2
@@ -438,8 +438,8 @@ object frmCadPedido_ItensRed: TfrmCadPedido_ItensRed
     end
     object RzPageControl1: TRzPageControl
       Left = 1
-      Top = 295
-      Width = 762
+      Top = 303
+      Width = 771
       Height = 146
       ActivePage = TabSheet1
       ActivePageDefault = TabSheet1
@@ -508,10 +508,10 @@ object frmCadPedido_ItensRed: TfrmCadPedido_ItensRed
       end
     end
     object gbxVendedor: TRzGroupBox
-      Left = 561
+      Left = 570
       Top = 1
       Width = 202
-      Height = 294
+      Height = 302
       Align = alRight
       BorderColor = clNavy
       BorderInner = fsButtonUp
@@ -946,7 +946,7 @@ object frmCadPedido_ItensRed: TfrmCadPedido_ItensRed
   object pnlMaterial: TPanel
     Left = 0
     Top = 108
-    Width = 765
+    Width = 773
     Height = 29
     Align = alTop
     Color = clMoneyGreen

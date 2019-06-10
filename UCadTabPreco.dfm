@@ -864,7 +864,7 @@ object frmCadTabPreco: TfrmCadTabPreco
             WidthOfIndicator = 27
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 11
+            ColCount = 13
             RowCount = 2
             Columns = <
               item
@@ -922,6 +922,22 @@ object frmCadTabPreco: TfrmCadTabPreco
                 ReadOnly = True
                 Title.Color = clYellow
                 Width = 103
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_VENDA1'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Encerado'
+                Title.Color = clYellow
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_VENDA2'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Engomado'
+                Title.Color = clYellow
                 Visible = True
               end
               item

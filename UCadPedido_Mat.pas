@@ -126,7 +126,7 @@ begin
     vPrecoAux := 0;
     fDMCadPedido.cdsMaterial.Locate('ID',RxDBLookupCombo1.KeyValue,[loCaseInsensitive]);
     if (btnAlterar.Tag <> 1) and (fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0) then
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,RxDBLookupCombo1.KeyValue);
+      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,RxDBLookupCombo1.KeyValue,0,'N');
     if StrToFloat(FormatFloat('0.00000',vPrecoAux)) <= 0 then
       vPrecoAux := fDMCadPedido.cdsMaterialPRECO_VENDA.AsFloat;
     //CurrencyEdit2.Value := fDMCadPedido.cdsMaterialPRECO_VENDA.AsFloat;

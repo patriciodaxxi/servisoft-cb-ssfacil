@@ -126,9 +126,10 @@ object DMCadTab_Preco: TDMCadTab_Preco
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ID'
         ParamType = ptInput
+        Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
@@ -184,6 +185,12 @@ object DMCadTab_Preco: TDMCadTab_Preco
       FieldName = 'NOME_COR'
       ProviderFlags = []
       Size = 60
+    end
+    object sdsTab_Preco_ItensVLR_VENDA1: TFloatField
+      FieldName = 'VLR_VENDA1'
+    end
+    object sdsTab_Preco_ItensVLR_VENDA2: TFloatField
+      FieldName = 'VLR_VENDA2'
     end
   end
   object cdsTab_Preco_Itens: TClientDataSet
@@ -256,6 +263,12 @@ object DMCadTab_Preco: TDMCadTab_Preco
       FieldName = 'NOME_COR'
       ProviderFlags = []
       Size = 60
+    end
+    object cdsTab_Preco_ItensVLR_VENDA1: TFloatField
+      FieldName = 'VLR_VENDA1'
+    end
+    object cdsTab_Preco_ItensVLR_VENDA2: TFloatField
+      FieldName = 'VLR_VENDA2'
     end
   end
   object dsTab_Preco_Itens: TDataSource
@@ -868,6 +881,16 @@ object DMCadTab_Preco: TDMCadTab_Preco
     end
     object qParametros_ProdUSA_REF2: TStringField
       FieldName = 'USA_REF2'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_TAB_PRECO_ENC: TStringField
+      FieldName = 'USA_TAB_PRECO_ENC'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_TAB_PRECO_ENG: TStringField
+      FieldName = 'USA_TAB_PRECO_ENG'
       FixedChar = True
       Size = 1
     end

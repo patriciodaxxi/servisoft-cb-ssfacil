@@ -96,4 +96,25 @@ object DMUtil: TDMUtil
       Size = 1
     end
   end
+  object qParametros_Prod: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT P.USA_TAB_PRECO_ENC, P.USA_TAB_PRECO_ENG'
+      'FROM PARAMETROS_PROD P'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 400
+    Top = 113
+    object qParametros_ProdUSA_TAB_PRECO_ENC: TStringField
+      FieldName = 'USA_TAB_PRECO_ENC'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_TAB_PRECO_ENG: TStringField
+      FieldName = 'USA_TAB_PRECO_ENG'
+      FixedChar = True
+      Size = 1
+    end
+  end
 end

@@ -22,11 +22,14 @@ type
     qParametrosEMPRESA_LIVRARIA: TStringField;
     qParametros_Usuario: TSQLQuery;
     qParametros_UsuarioUTILIZA_PESSOA_REDUZIDO: TStringField;
+    qParametros_Prod: TSQLQuery;
+    qParametros_ProdUSA_TAB_PRECO_ENC: TStringField;
+    qParametros_ProdUSA_TAB_PRECO_ENG: TStringField;
   private
     { Private declarations }
   public
     { Public declarations }
-    function fnc_Buscar_Preco(ID_Tabela, ID_Produto: Integer ; ID_Cor : Integer  = 0): Real;
+    function fnc_Buscar_Preco(ID_Tabela, ID_Produto, ID_Cor: Integer; Encerado : String): Real;
     function fnc_Buscar_Nome_TabPreco(ID_Tabela: Integer): String;
   end;
 
@@ -64,20 +67,22 @@ begin
   end;
 end;
 
-function TDMUtil.fnc_Buscar_Preco(ID_Tabela, ID_Produto: Integer ; ID_Cor : Integer  = 0): Real;
+function TDMUtil.fnc_Buscar_Preco(ID_Tabela, ID_Produto, ID_Cor: Integer; Encerado : String): Real;
 var
   sds: TSQLDataSet;                        
   iSeq: Integer;
   ct : String;
 begin
   Result := 0;
+  if ID_Cor <= 0 then
+    ID_Cor := 0;
   sds := TSQLDataSet.Create(nil);
   try
     sds.SQLConnection := dmDatabase.scoDados;
     sds.NoMetadata    := True;
     sds.GetMetadata   := False;
 
-    ct := ' SELECT VLR_VENDA FROM TAB_PRECO_ITENS '
+    ct := ' SELECT VLR_VENDA, VLR_VENDA1, VLR_VENDA2 FROM TAB_PRECO_ITENS '
           + ' WHERE ID = ' + IntToStr(ID_Tabela)
           + '   AND ID_PRODUTO = ' + IntToStr(ID_Produto);
 
@@ -86,13 +91,26 @@ begin
     if (ID_Cor > 0) then
       sds.CommandText := sds.CommandText + ' AND ID_COR = ' + IntToStr(ID_Cor);
     sds.Open;
-    Result := sds.FieldByName('VLR_VENDA').AsFloat;
+
+    if (qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S') and (Encerado = 'S') then
+      Result := sds.FieldByName('VLR_VENDA1').AsFloat
+    else
+    if (qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S') and (Encerado = 'G') then
+      Result := sds.FieldByName('VLR_VENDA2').AsFloat
+    else
+      Result := sds.FieldByName('VLR_VENDA').AsFloat;
     if (StrToFloat(FormatFloat('0.000000',Result)) <= 0) and (ID_Cor > 0) then
     begin
       sds.Close;
       sds.CommandText := ct + ' AND ID_COR = 0 ';
       sds.Open;
-      Result := sds.FieldByName('VLR_VENDA').AsFloat;
+      if (qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S') and (Encerado = 'S') then
+        Result := sds.FieldByName('VLR_VENDA1').AsFloat
+      else
+      if (qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S') and (Encerado = 'G') then
+        Result := sds.FieldByName('VLR_VENDA2').AsFloat
+      else
+        Result := sds.FieldByName('VLR_VENDA').AsFloat;
     end;
 
   finally

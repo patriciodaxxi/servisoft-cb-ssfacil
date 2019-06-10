@@ -22,7 +22,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object Panel1: TPanel
     Left = 0
     Top = 23
-    Width = 765
+    Width = 773
     Height = 108
     Align = alTop
     Color = clMoneyGreen
@@ -101,14 +101,14 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       OnClick = SpeedButton5Click
     end
     object Shape1: TShape
-      Left = 633
+      Left = 649
       Top = 69
       Width = 113
       Height = 36
       Brush.Color = clMoneyGreen
     end
     object Label30: TLabel
-      Left = 644
+      Left = 660
       Top = 70
       Width = 86
       Height = 16
@@ -121,7 +121,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       ParentFont = False
     end
     object lblEstoque: TLabel
-      Left = 636
+      Left = 652
       Top = 89
       Width = 101
       Height = 13
@@ -163,7 +163,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     object pnlTipo1: TPanel
       Left = 1
       Top = 1
-      Width = 763
+      Width = 771
       Height = 42
       Align = alTop
       BevelOuter = bvNone
@@ -344,7 +344,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     object pnlNomeProduto: TPanel
       Left = 1
       Top = 43
-      Width = 763
+      Width = 771
       Height = 20
       Align = alTop
       BevelOuter = bvNone
@@ -371,11 +371,29 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
         OnExit = DBEdit5Exit
       end
     end
+    object dbrdgEncerado: TDBRadioGroup
+      Left = 415
+      Top = 63
+      Width = 221
+      Height = 40
+      Columns = 3
+      DataField = 'ENCERADO'
+      DataSource = DMCadPedido.dsPedido_Itens
+      Items.Strings = (
+        'Encerado'
+        'Engomado'
+        'Nenhum')
+      TabOrder = 4
+      Values.Strings = (
+        'S'
+        'G'
+        'N')
+    end
   end
   object Panel3: TPanel
     Left = 0
-    Top = 623
-    Width = 765
+    Top = 631
+    Width = 773
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -414,8 +432,8 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object Panel2: TPanel
     Left = 0
     Top = 217
-    Width = 765
-    Height = 406
+    Width = 773
+    Height = 414
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 5
@@ -572,8 +590,8 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object RzPageControl1: TRzPageControl
       Left = 1
-      Top = 259
-      Width = 763
+      Top = 267
+      Width = 771
       Height = 146
       ActivePage = TabSheet1
       ActivePageDefault = TabSheet1
@@ -1119,10 +1137,10 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       OnClick = btnGradeClick
     end
     object gbxVendedor: TRzGroupBox
-      Left = 560
+      Left = 568
       Top = 1
       Width = 204
-      Height = 258
+      Height = 266
       Align = alRight
       BorderColor = clNavy
       BorderInner = fsButtonUp
@@ -1680,24 +1698,6 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
         OnExit = dbedtVlrProdExit
       end
     end
-    object dbrdgEncerado: TDBRadioGroup
-      Left = 112
-      Top = 211
-      Width = 275
-      Height = 40
-      Columns = 3
-      DataField = 'ENCERADO'
-      DataSource = DMCadPedido.dsPedido_Itens
-      Items.Strings = (
-        'Encerado'
-        'Engomado'
-        'Nenhum')
-      TabOrder = 16
-      Values.Strings = (
-        'S'
-        'G'
-        'N')
-    end
     object DBEdit24: TDBEdit
       Left = 111
       Top = 191
@@ -1708,7 +1708,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       DataField = 'OBS_ETIQUETA'
       DataSource = DMCadPedido.dsPedido_Itens
       ParentCtl3D = False
-      TabOrder = 17
+      TabOrder = 16
     end
     object dbedtVlrTotal: TDBEdit
       Left = 111
@@ -1720,7 +1720,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       DataSource = DMCadPedido.dsPedido_Itens
       ParentCtl3D = False
       ReadOnly = True
-      TabOrder = 18
+      TabOrder = 17
     end
     object dbedtVlrUnitario: TDBEdit
       Left = 111
@@ -1751,7 +1751,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 19
+      TabOrder = 18
       Transparent = True
       OnClick = btnProdClienteClick
     end
@@ -1783,7 +1783,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object pnlCod_Barras: TPanel
     Left = 0
     Top = 0
-    Width = 765
+    Width = 773
     Height = 23
     Align = alTop
     Color = clMoneyGreen
@@ -1839,7 +1839,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object pnlMaterial: TPanel
     Left = 0
     Top = 131
-    Width = 765
+    Width = 773
     Height = 29
     Align = alTop
     Color = clMoneyGreen
@@ -1890,7 +1890,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object pnlTipoOrcamento: TPanel
     Left = 0
     Top = 160
-    Width = 765
+    Width = 773
     Height = 30
     Align = alTop
     Color = clMoneyGreen
@@ -1962,7 +1962,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object pnlCor: TPanel
     Left = 0
     Top = 190
-    Width = 765
+    Width = 773
     Height = 27
     Align = alTop
     Color = clMoneyGreen

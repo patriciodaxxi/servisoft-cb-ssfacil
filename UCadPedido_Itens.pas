@@ -138,7 +138,6 @@ type
     DBEdit21: TDBEdit;
     Label47: TLabel;
     DBEdit22: TDBEdit;
-    dbrdgEncerado: TDBRadioGroup;
     Label48: TLabel;
     DBEdit24: TDBEdit;
     dbedtVlrTotal: TDBEdit;
@@ -153,6 +152,7 @@ type
     DBEdit6: TDBEdit;
     Label24: TLabel;
     DBEdit8: TDBEdit;
+    dbrdgEncerado: TDBRadioGroup;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -816,17 +816,17 @@ begin
   if (fDMCadPedido.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger > 0) then
   begin
     if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger)
+      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,fDMCadPedido.cdsPedido_ItensENCERADO.AsString)
     else
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0);
+      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,fDMCadPedido.cdsPedido_ItensENCERADO.AsString);
   end
   else
   if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0 then  //23/05/2017  Foi alterado para buscar por Cor
   begin
     if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger)
+      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,fDMCadPedido.cdsPedido_ItensENCERADO.AsString)
     else
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0);
+      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,fDMCadPedido.cdsPedido_ItensENCERADO.AsString);
   end;
   if StrToFloat(FormatFloat('0.0000',vPrecoAux)) > 0 then
     fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.000000',vPrecoAux))

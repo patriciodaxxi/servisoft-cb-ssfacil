@@ -190,6 +190,12 @@ type
     cdsPrecoProdNOME_MARCA: TStringField;
     cdsPrecoProdFANTASIA: TStringField;
     cdsPrecoProdNOME_COR: TStringField;
+    sdsTab_Preco_ItensVLR_VENDA1: TFloatField;
+    sdsTab_Preco_ItensVLR_VENDA2: TFloatField;
+    cdsTab_Preco_ItensVLR_VENDA1: TFloatField;
+    cdsTab_Preco_ItensVLR_VENDA2: TFloatField;
+    qParametros_ProdUSA_TAB_PRECO_ENC: TStringField;
+    qParametros_ProdUSA_TAB_PRECO_ENG: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsTab_Preco_ItensNewRecord(DataSet: TDataSet);
     procedure dspTab_PrecoUpdateError(Sender: TObject;
@@ -389,7 +395,9 @@ end;
 
 procedure TDMCadTab_Preco.cdsTab_Preco_ItensNewRecord(DataSet: TDataSet);
 begin
-  cdsTab_Preco_ItensVLR_VENDA.AsFloat := 0;
+  cdsTab_Preco_ItensVLR_VENDA.AsFloat  := 0;
+  cdsTab_Preco_ItensVLR_VENDA1.AsFloat := 0;
+  cdsTab_Preco_ItensVLR_VENDA2.AsFloat := 0;
 end;
 
 procedure TDMCadTab_Preco.dspTab_PrecoUpdateError(Sender: TObject;

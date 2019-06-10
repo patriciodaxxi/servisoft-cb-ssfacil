@@ -697,7 +697,7 @@ begin
     vPrecoAux := StrToFloat(FormatFloat('0.00000',vPreco_Pos))
   else
   if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0 then
-    vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger);
+    vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,'N');
   if StrToFloat(FormatFloat('0.0000',vPrecoAux)) > 0 then
     fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.000000',vPrecoAux))
   else
