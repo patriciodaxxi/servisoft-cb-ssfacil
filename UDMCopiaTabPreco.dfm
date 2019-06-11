@@ -129,6 +129,12 @@ object DMCopiaTabPreco: TDMCopiaTabPreco
     object sdsTab_Preco_ItensID_COR: TIntegerField
       FieldName = 'ID_COR'
     end
+    object sdsTab_Preco_ItensVLR_VENDA1: TFloatField
+      FieldName = 'VLR_VENDA1'
+    end
+    object sdsTab_Preco_ItensVLR_VENDA2: TFloatField
+      FieldName = 'VLR_VENDA2'
+    end
   end
   object cdsTab_Preco_Itens: TClientDataSet
     Aggregates = <>
@@ -152,6 +158,12 @@ object DMCopiaTabPreco: TDMCopiaTabPreco
     end
     object cdsTab_Preco_ItensID_COR: TIntegerField
       FieldName = 'ID_COR'
+    end
+    object cdsTab_Preco_ItensVLR_VENDA1: TFloatField
+      FieldName = 'VLR_VENDA1'
+    end
+    object cdsTab_Preco_ItensVLR_VENDA2: TFloatField
+      FieldName = 'VLR_VENDA2'
     end
   end
   object dsTab_Preco_Itens: TDataSource
