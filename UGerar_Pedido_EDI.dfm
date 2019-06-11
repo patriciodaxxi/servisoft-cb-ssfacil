@@ -101,7 +101,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       OnChange = FilenameEdit1Change
     end
     object btnGravar_Pedido: TNxButton
-      Left = 518
+      Left = 519
       Top = 22
       Width = 147
       Height = 44
