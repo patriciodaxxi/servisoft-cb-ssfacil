@@ -654,6 +654,8 @@ type
     cdsFilial_CertificadosAGUARDARCONSULTARETORNO: TIntegerField;
     cdsFilial_CertificadosCONSULTARLOTEAPOSENVIO: TStringField;
     cdsFilial_CertificadosINTERVALOTENTATIVAS: TIntegerField;
+    sdsFilialENVIO_NFSE: TStringField;
+    cdsFilialENVIO_NFSE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);

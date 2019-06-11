@@ -1,6 +1,6 @@
 object frmCadFilial: TfrmCadFilial
-  Left = 188
-  Top = 37
+  Left = 280
+  Top = 35
   Width = 1102
   Height = 629
   Caption = 'Cadastro de Filial (Empresa)'
@@ -22,8 +22,8 @@ object frmCadFilial: TfrmCadFilial
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1094
-    Height = 598
+    Width = 1086
+    Height = 590
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -41,8 +41,8 @@ object frmCadFilial: TfrmCadFilial
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 65
-        Width = 1090
-        Height = 493
+        Width = 1082
+        Height = 485
         Align = alClient
         Ctl3D = True
         DataSource = DMCadFilial.dsFilial
@@ -127,7 +127,7 @@ object frmCadFilial: TfrmCadFilial
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1090
+        Width = 1082
         Height = 31
         Align = alTop
         Color = clSilver
@@ -358,8 +358,8 @@ object frmCadFilial: TfrmCadFilial
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 558
-        Width = 1090
+        Top = 550
+        Width = 1082
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -375,7 +375,7 @@ object frmCadFilial: TfrmCadFilial
       object pnlPesquisa: TPanel
         Left = 0
         Top = 31
-        Width = 1090
+        Width = 1082
         Height = 34
         Align = alTop
         Color = clSilver
@@ -476,7 +476,7 @@ object frmCadFilial: TfrmCadFilial
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1090
+        Width = 1082
         Height = 31
         Align = alTop
         Color = 8404992
@@ -705,12 +705,12 @@ object frmCadFilial: TfrmCadFilial
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 31
-        Width = 1090
-        Height = 544
-        ActivePage = TS_Parametros
+        Width = 1082
+        Height = 536
+        ActivePage = TS_NotaServico
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 2
+        TabIndex = 3
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -2602,9 +2602,10 @@ object frmCadFilial: TfrmCadFilial
           object DBCheckBox24: TDBCheckBox
             Left = 384
             Top = 386
-            Width = 97
+            Width = 161
             Height = 17
             Caption = 'Enviar NFSe pelo ACBR'
+            DataSource = DMCadFilial.dsFilial
             TabOrder = 25
             ValueChecked = 'True'
             ValueUnchecked = 'False'
@@ -2822,7 +2823,7 @@ object frmCadFilial: TfrmCadFilial
           object pnlRel: TPanel
             Left = 0
             Top = 0
-            Width = 1086
+            Width = 1078
             Height = 30
             Align = alTop
             Color = clSilver
@@ -3134,8 +3135,8 @@ object frmCadFilial: TfrmCadFilial
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 30
-            Width = 1086
-            Height = 491
+            Width = 1078
+            Height = 483
             Align = alClient
             DataSource = DMCadFilial.dsFilialRelatorios
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -3221,7 +3222,7 @@ object frmCadFilial: TfrmCadFilial
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 1086
+            Width = 1078
             Height = 33
             Align = alTop
             Color = clSilver
@@ -3455,8 +3456,8 @@ object frmCadFilial: TfrmCadFilial
           object SMDBGrid3: TSMDBGrid
             Left = 0
             Top = 33
-            Width = 1086
-            Height = 488
+            Width = 1078
+            Height = 480
             Align = alClient
             Ctl3D = False
             DataSource = DMCadFilial.dsFilial_Email
@@ -3546,8 +3547,8 @@ object frmCadFilial: TfrmCadFilial
           object pnlContabil: TPanel
             Left = 0
             Top = 0
-            Width = 1086
-            Height = 521
+            Width = 1078
+            Height = 513
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -3775,7 +3776,7 @@ object frmCadFilial: TfrmCadFilial
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 1086
+            Width = 1078
             Height = 33
             Align = alTop
             Color = clSilver
@@ -4009,8 +4010,8 @@ object frmCadFilial: TfrmCadFilial
           object SMDBGrid4: TSMDBGrid
             Left = 0
             Top = 33
-            Width = 1086
-            Height = 488
+            Width = 1078
+            Height = 480
             Align = alClient
             Ctl3D = False
             DataSource = DMCadFilial.dsFilial_Download
@@ -4069,15 +4070,15 @@ object frmCadFilial: TfrmCadFilial
           object pnlConfig_Danfe_NFe: TPanel
             Left = 0
             Top = 0
-            Width = 1086
-            Height = 487
+            Width = 1078
+            Height = 479
             Align = alClient
             Enabled = False
             TabOrder = 0
             object gbxCertificado: TRzGroupBox
               Left = 1
               Top = 1
-              Width = 1084
+              Width = 1076
               Height = 76
               Align = alTop
               BorderColor = clNavy
@@ -4182,8 +4183,8 @@ object frmCadFilial: TfrmCadFilial
             object RzGroupBox1: TRzGroupBox
               Left = 1
               Top = 77
-              Width = 1084
-              Height = 409
+              Width = 1076
+              Height = 401
               Align = alClient
               BorderColor = clNavy
               BorderInner = fsButtonUp
@@ -4591,8 +4592,8 @@ object frmCadFilial: TfrmCadFilial
           end
           object Panel5: TPanel
             Left = 0
-            Top = 487
-            Width = 1086
+            Top = 479
+            Width = 1078
             Height = 34
             Align = alBottom
             Color = 8404992
@@ -4822,8 +4823,8 @@ object frmCadFilial: TfrmCadFilial
           object SMDBGrid5: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 1086
-            Height = 521
+            Width = 1078
+            Height = 513
             Align = alClient
             Ctl3D = False
             DataSource = DMCadFilial.dsFILIAL_CBarra
@@ -5141,8 +5142,8 @@ object frmCadFilial: TfrmCadFilial
           object pnlMDFe: TPanel
             Left = 0
             Top = 0
-            Width = 1086
-            Height = 521
+            Width = 1078
+            Height = 513
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -5275,8 +5276,8 @@ object frmCadFilial: TfrmCadFilial
             Enabled = False
             TabOrder = 0
             DesignSize = (
-              1086
-              521)
+              1078
+              513)
             object gbxCustoVenda: TRzGroupBox
               Left = 25
               Top = 15

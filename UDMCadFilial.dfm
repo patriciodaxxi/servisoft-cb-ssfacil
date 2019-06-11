@@ -406,6 +406,11 @@ object DMCadFilial: TDMCadFilial
       FixedChar = True
       Size = 1
     end
+    object sdsFilialENVIO_NFSE: TStringField
+      FieldName = 'ENVIO_NFSE'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
@@ -838,6 +843,11 @@ object DMCadFilial: TDMCadFilial
     end
     object cdsFilialCALCULAR_ICMS_EFET: TStringField
       FieldName = 'CALCULAR_ICMS_EFET'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilialENVIO_NFSE: TStringField
+      FieldName = 'ENVIO_NFSE'
       FixedChar = True
       Size = 1
     end
