@@ -203,7 +203,10 @@ begin
         fDMCadPedido.cdsPedido_Item_TipoFATOR_CALCULO.AsFloat := mArquivoImportadoFator_Calculo.AsFloat;
         fDMCadPedido.cdsPedido_Item_TipoTIPO_ORCAMENTO.AsString := 'C';
         fDMCadPedido.cdsPedido_Item_TipoDESCRICAO_TIPO.AsString := 'CHAPA';
-        fDMCadPedido.cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF.AsString := StringReplace(mArquivoImportadoCaminhoArquivo.AsString, 'DWG', 'PDF', [rfReplaceAll]);
+        fDMCadPedido.cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF.AsString := mArquivoImportadoCaminhoArquivo.AsString;
+
+        fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString + ' ' + fDMCadPedido.cdsPedido_Item_TipoCOMPLEMENTO_NOME.AsString;
+
         fDMCadPedido.cdsPedido_Item_Tipo.Post;
         fdmCadPedido.cdsPedido_Itens.Post;
       end;
@@ -246,7 +249,7 @@ var
   TempNome, Extensao: string;
 begin
   mArquivoImportado.EmptyDataSet;
-  Extensao := '*.DWG';
+  Extensao := '*.PDF';
   Ret := FindFirst(Diretorio + '\' + Extensao, faAnyFile, F);
   try
     while Ret = 0 do
@@ -291,7 +294,8 @@ procedure TfrmMontaPed_TipoItem.SpeedButton2Click(Sender: TObject);
 var
   vCaminhoPDF: string;
 begin
-  vCaminhoPDF := StringReplace(mArquivoImportadoCaminhoArquivo.AsString, 'DWG', 'PDF', [rfReplaceAll]);
+//  vCaminhoPDF := StringReplace(mArquivoImportadoCaminhoArquivo.AsString, 'DWG', 'PDF', [rfReplaceAll]);
+  vCaminhoPDF := mArquivoImportadoCaminhoArquivo.AsString;
   if FileExists(vCaminhoPDF) then
     prc_OpenPDF(vCaminhoPDF);
 end;
@@ -482,7 +486,8 @@ begin
   //Para abrir esse form tem que ter os diretórios fonts e lib no diretório da aplicação
   ffrmMostraPDF := TfrmMostraPDF.Create(Self);
   try
-    vCaminhoPDF := StringReplace(mArquivoImportadoCaminhoArquivo.AsString, 'DWG', 'PDF', [rfReplaceAll]);
+//    vCaminhoPDF := StringReplace(mArquivoImportadoCaminhoArquivo.AsString, 'DWG', 'PDF', [rfReplaceAll]);
+    vCaminhoPDF := mArquivoImportadoCaminhoArquivo.AsString;
     ffrmMostraPDF.vCaminhoPDF := vCaminhoPDF;
     ffrmMostraPDF.edtCaminhoPDF.Text := vCaminhoPDF;
     ffrmMostraPDF.ShowModal;
