@@ -13369,6 +13369,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_GeralENDGRIDS: TStringField
+      FieldName = 'ENDGRIDS'
+      Size = 250
+    end
   end
   object mEtiquetas: TClientDataSet
     Active = True

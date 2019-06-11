@@ -481,6 +481,7 @@ type
     dsmRemessa: TDataSource;
     mAuxiliarErro_Prod_Nao_Lanc: TBooleanField;
     mAuxiliarErro_Ped_Lancado: TBooleanField;
+    qParametros_PedEDI_USAR_PRECO_TAB: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mAuxiliarNewRecord(DataSet: TDataSet);
   private

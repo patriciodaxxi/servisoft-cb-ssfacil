@@ -139,10 +139,14 @@ begin
     //fDMCadDuplicata.sdsPagto.CommandText := fDMCadDuplicata.sdsPagto.CommandText
     //                                                   + ' AND ((DUP.ID_CONTA_BOLETO = ' + IntToStr(RxDBLookupCombo7.KeyValue) + ')'
     //                                                   + '  OR (DUP.ID_CONTA = ' + IntToStr(RxDBLookupCombo7.KeyValue) + '))';
-    fDMCadDuplicata.sdsPagto.CommandText := fDMCadDuplicata.sdsPagto.CommandText + ' AND (DUP.ID_CONTA = ' + IntToStr(RxDBLookupCombo7.KeyValue) + ')';
+    //10/06/2019 Foi alterado para buscar do histórico
+    //fDMCadDuplicata.sdsPagto.CommandText := fDMCadDuplicata.sdsPagto.CommandText + ' AND (DUP.ID_CONTA = ' + IntToStr(RxDBLookupCombo7.KeyValue) + ')';
+    fDMCadDuplicata.sdsPagto.CommandText := fDMCadDuplicata.sdsPagto.CommandText + ' AND (HIST.ID_CONTA = ' + IntToStr(RxDBLookupCombo7.KeyValue) + ')';
+  //10/06/2019 Foi alterado para buscar do histórico
+  //if RxDBLookupCombo8.Text <> '' then
+    //fDMCadDuplicata.sdsPagto.CommandText := fDMCadDuplicata.sdsPagto.CommandText + ' AND DUP.ID_TIPOCOBRANCA = ' + IntToStr(RxDBLookupCombo8.KeyValue);
   if RxDBLookupCombo8.Text <> '' then
-    fDMCadDuplicata.sdsPagto.CommandText := fDMCadDuplicata.sdsPagto.CommandText
-                                                       + ' AND DUP.ID_TIPOCOBRANCA = ' + IntToStr(RxDBLookupCombo8.KeyValue);
+    fDMCadDuplicata.sdsPagto.CommandText := fDMCadDuplicata.sdsPagto.CommandText + ' AND HIST.ID_FORMA_PAGAMENTO = ' + IntToStr(RxDBLookupCombo8.KeyValue);
   if RxDBLookupCombo2.Text <> '' then
     fDMCadDuplicata.sdsPagto.CommandText := fDMCadDuplicata.sdsPagto.CommandText
                                                        + ' AND DUP.ID_PESSOA = ' + IntToStr(RxDBLookupCombo2.KeyValue);
@@ -306,7 +310,7 @@ var
   vTexto: string;
 begin
   Screen.Cursor := crHourGlass;
-  DMCadDuplicata.cdsPagto.First;
+  fDMCadDuplicata.cdsPagto.First;
 
   planilha := CreateoleObject('Excel.Application');
   planilha.WorkBooks.add(1);
@@ -338,18 +342,18 @@ begin
   i2 := 0;
 //  arrumar aqui
 
-  for coluna := 1 to DMCadDuplicata.cdsPagto.FieldCount do
+  for coluna := 1 to fDMCadDuplicata.cdsPagto.FieldCount do
   begin
-    if (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'NUMDUPLICATA') or
-       (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'PARCELA') or
-       (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'DTVENCIMENTO') or
-       (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'DTEMISSAO') or
-       (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'VLR_PARCELA') or
-       (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'clDias_Atraso') or
-       (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'NOME_PESSOA') then
+    if (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'NUMDUPLICATA') or
+       (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'PARCELA') or
+       (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'DTVENCIMENTO') or
+       (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'DTEMISSAO') or
+       (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'VLR_PARCELA') or
+       (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'clDias_Atraso') or
+       (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'NOME_PESSOA') then
     begin
       ColunaP := ColunaP + 1;
-      valorcampo := DMCadDuplicata.cdsPagto.Fields[coluna - 1].DisplayLabel;
+      valorcampo := fDMCadDuplicata.cdsPagto.Fields[coluna - 1].DisplayLabel;
       planilha.cells[Linha, colunaP] := valorCampo;
       planilha.cells[Linha, colunaP].font.bold := True; // Negrito
       planilha.cells[Linha, colunaP].Interior.Color := clRed;
@@ -358,28 +362,28 @@ begin
     end;
   end;
 
-  DMCadDuplicata.cdsPagto.First;
-  while not DMCadDuplicata.cdsPagto.Eof do
+  fDMCadDuplicata.cdsPagto.First;
+  while not fDMCadDuplicata.cdsPagto.Eof do
   begin
     linha := Linha + 1;
     ColunaP := 0;
-    for coluna := 1 to DMCadDuplicata.cdsPagto.FieldCount do
+    for coluna := 1 to fDMCadDuplicata.cdsPagto.FieldCount do
     begin
-      if (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'NUMDUPLICATA') or
-      (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'PARCELA') or
-      (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'DTVENCIMENTO') or
-      (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'DTEMISSAO') or
-      (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'VLR_PARCELA') or
-      (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'clDias_Atraso') or
-      (DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'NOME_PESSOA') then
+      if (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'NUMDUPLICATA') or
+      (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'PARCELA') or
+      (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'DTVENCIMENTO') or
+      (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'DTEMISSAO') or
+      (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'VLR_PARCELA') or
+      (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'clDias_Atraso') or
+      (fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName = 'NOME_PESSOA') then
       begin
         ColunaP := ColunaP + 1;
-        vTexto := DMCadDuplicata.cdsPagto.Fields[coluna - 1].AsString;
+        vTexto := fDMCadDuplicata.cdsPagto.Fields[coluna - 1].AsString;
         if trim(vTexto) <> '' then
-          valorcampo := DMCadDuplicata.cdsPagto.Fields[coluna - 1].Value
+          valorcampo := fDMCadDuplicata.cdsPagto.Fields[coluna - 1].Value
         else
           valorcampo := '';
-        vTexto := DMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName;
+        vTexto := fDMCadDuplicata.cdsPagto.Fields[coluna - 1].FieldName;
         if (copy(vTexto, 1, 4) = 'VLR_') then
         begin
           if trim(valorcampo) = '' then
@@ -391,16 +395,16 @@ begin
         begin
           //if (copy(vTexto,1,2) = 'DT') then
           //  planilha.Range['C1'].VerticalAlignmen := 3;
-          vTexto := DMCadDuplicata.cdsPagto.Fields[coluna - 1].AsString;
+          vTexto := fDMCadDuplicata.cdsPagto.Fields[coluna - 1].AsString;
           if trim(vTexto) <> '' then
-            planilha.cells[linha, colunaP] := DMCadDuplicata.cdsPagto.Fields[coluna - 1].Value
+            planilha.cells[linha, colunaP] := fDMCadDuplicata.cdsPagto.Fields[coluna - 1].Value
           else
             planilha.cells[linha, colunaP] := '';
         end;
         planilha.cells[linha, colunaP].font.size := 11; // Tamanho da Fonte
       end;
     end;
-    DMCadDuplicata.cdsPagto.Next;
+    fDMCadDuplicata.cdsPagto.Next;
   end;
 end;
 

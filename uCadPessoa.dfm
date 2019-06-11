@@ -1351,7 +1351,7 @@ object frmCadPessoa: TfrmCadPessoa
         Top = 30
         Width = 1079
         Height = 627
-        ActivePage = TS_Pessoa_Financeiro
+        ActivePage = TabSheet1
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1359,7 +1359,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 3
+        TabIndex = 7
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19
@@ -7581,8 +7581,8 @@ object frmCadPessoa: TfrmCadPessoa
           object DBMemo3: TDBMemo
             Left = 0
             Top = 0
-            Width = 1007
-            Height = 554
+            Width = 1075
+            Height = 604
             Align = alClient
             DataField = 'OBS'
             DataSource = DMCadPessoa.dsPessoa

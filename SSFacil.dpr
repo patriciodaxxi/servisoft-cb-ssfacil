@@ -804,7 +804,8 @@ uses
   USel_PessoaPet in 'USel_PessoaPet.pas' {frmSel_PessoaPet},
   UMontaPed_TipoItem in 'UMontaPed_TipoItem.pas' {frmMontaPed_TipoItem},
   uConsProdutoPedido in 'uConsProdutoPedido.pas' {frmConsultaProduto},
-  uMostraPDF in 'uMostraPDF.pas' {frmMostraPDF};
+  uMostraPDF in 'uMostraPDF.pas' {frmMostraPDF},
+  UConsClienteOBS in 'UConsClienteOBS.pas' {frmConsClienteOBS};
 
 {$R *.res}
 

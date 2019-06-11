@@ -28,7 +28,7 @@ object frmConsTabPreco: TfrmConsTabPreco
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 906
+    Width = 914
     Height = 102
     Align = alTop
     Color = clSilver
@@ -290,6 +290,7 @@ object frmConsTabPreco: TfrmConsTabPreco
       DecimalPlaces = 0
       DisplayFormat = '0'
       TabOrder = 0
+      OnExit = CurrencyEdit1Exit
       OnKeyDown = CurrencyEdit1KeyDown
     end
     object Edit3: TEdit
@@ -304,8 +305,8 @@ object frmConsTabPreco: TfrmConsTabPreco
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 102
-    Width = 906
-    Height = 415
+    Width = 914
+    Height = 423
     Align = alClient
     Ctl3D = False
     DataSource = DMCadTab_Preco.dsTab_Preco_Consulta
@@ -387,6 +388,7 @@ object frmConsTabPreco: TfrmConsTabPreco
         Expanded = False
         FieldName = 'FANTASIA'
         Title.Caption = 'Fantasia'
+        Width = 64
         Visible = True
       end
       item
@@ -398,6 +400,7 @@ object frmConsTabPreco: TfrmConsTabPreco
       item
         Expanded = False
         FieldName = 'DTCADASTRO'
+        Width = 64
         Visible = True
       end
       item

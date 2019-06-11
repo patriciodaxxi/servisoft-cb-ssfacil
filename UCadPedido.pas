@@ -360,6 +360,7 @@ type
     RtuloComEmbalagemRolo1: TMenuItem;
     EtiquetaA4ItensPersonalizado1: TMenuItem;
     SalvarPedido1: TMenuItem;
+    Label86: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -555,7 +556,8 @@ uses DmdDatabase, rsDBUtils, uUtilPadrao, uRelPedido, uRelPedido_SulTextil, uRel
   URelPedido_Tam, URelEtiqueta_Nav, URelPedido_Tam2, URelPedido_JW, URelEtiqueta, uUtilCliente, uCalculo_Pedido, UCadPedido_Copia,
   UConsPedido_Nota, UDMConsPedido, UInformar_DtExpedicao, UInformar_Processo_Ped, UConsPedido_Senha, USel_Produto, UCadPedido_Cupom,
   UDMPedidoImp, USel_OS_Proc, UCadPedido_ItensCli, UTalaoPed,
-  UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido;
+  UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido,
+  UConsClienteOBS;
 
 {$R *.dfm}
 
@@ -610,7 +612,7 @@ begin
     Exit;
   end;
 
-  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
     Exit;
 
   if fDMCadPedido.fnc_Existe_Fat(fDMCadPedido.cdsPedidoID.AsInteger) > 0 then
@@ -1040,7 +1042,7 @@ begin
   if fDMCadPedido.qParametros_PedUSA_DTEXPEDICAO.AsString = 'S' then
     StaticText1.Caption := 'Duplo clique para consultar       F3 Tabela de Preço    F4-Inf. Data Expedição    F6 Cons. Notas'
   else
-    StaticText1.Caption := 'Duplo clique para consultar       F3 Tabela de Preço    F6 Cons. Notas';
+    StaticText1.Caption := 'Duplo clique para consultar       F3 Tabela de Preço    F4-Cons.Obs Cliente   F6 Cons. Notas';
   StaticText1.Caption := StaticText1.Caption + vStatic_Processo;
 
   Label63.Visible           := (fDMCadPedido.qParametros_PedMOSTRAR_TERCEIRO.AsString = 'P');
@@ -1974,6 +1976,18 @@ begin
     FreeAndNil(ffrmConsHist_Chapa);
     FreeAndNil(ffrmCadPedido_Copia);
     btnCalcular_ValoresClick(Sender);
+  end
+  else
+  //07/06/2019
+  if (Key = Vk_F4) and (fDMCadPedido.qParametros_PedUSA_DTEXPEDICAO.AsString <> 'S') then
+  begin
+    frmConsClienteOBS := TfrmConsClienteOBS.Create(self);
+    if RzPageControl1.ActivePage = TS_Cadastro then
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger
+    else
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedido_ConsultaID_CLIENTE.AsInteger;
+    frmConsClienteOBS.ShowModal;
+    FreeAndNil(frmConsClienteOBS);
   end
   else
   // 26/05/2019
@@ -3570,7 +3584,7 @@ begin
     FreeAndNil(fDMConsPedido);
   end
   else
-  if (Key = Vk_F4) and not(fDMCadPedido.cdsPedido_Consulta.IsEmpty) then
+  if (Key = Vk_F4) and not(fDMCadPedido.cdsPedido_Consulta.IsEmpty) and (fDMCadPedido.qParametros_PedUSA_DTEXPEDICAO.AsString = 'S') then
   begin
     if not(lblInfDtExpedicao.Visible) or not(lblInfDtExpedicao.Enabled) then
       MessageDlg('*** Usuário não autorizado!', mtError, [mbOk], 0)

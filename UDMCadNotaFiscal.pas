@@ -3067,6 +3067,7 @@ type
     qFilial_RelatoriosTIPO: TSmallintField;
     qFilial_RelatoriosCAMINHO: TStringField;
     qFilial_RelatoriosPOSICAO: TSmallintField;
+    qParametros_GeralENDGRIDS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

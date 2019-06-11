@@ -16260,8 +16260,8 @@ object DMCadPedido: TDMCadPedido
       'SELECT *'
       'FROM PARAMETROS_PROD')
     SQLConnection = dmDatabase.scoDados
-    Left = 1184
-    Top = 586
+    Left = 1183
+    Top = 585
     object qParametros_ProdUSA_PRODUTO_FILIAL: TStringField
       FieldName = 'USA_PRODUTO_FILIAL'
       FixedChar = True
@@ -16310,6 +16310,16 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField
       FieldName = 'MATERIAL_FORNECEDOR_OC'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_TAB_PRECO_ENC: TStringField
+      FieldName = 'USA_TAB_PRECO_ENC'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_TAB_PRECO_ENG: TStringField
+      FieldName = 'USA_TAB_PRECO_ENG'
       FixedChar = True
       Size = 1
     end

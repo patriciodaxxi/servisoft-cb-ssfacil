@@ -346,6 +346,8 @@ begin
   ffrmCadTabPreco_Itens.RxDBLookupCombo4.KeyValue := fDMCadTab_Preco.cdsTab_Preco_ItensID_PRODUTO.AsInteger;
   ffrmCadTabPreco_Itens.CurrencyEdit1.Value       := fDMCadTab_Preco.cdsTab_Preco_ItensPRECO_CUSTO.AsFloat;
   ffrmCadTabPreco_Itens.CurrencyEdit2.Value       := fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA.AsFloat;
+  ffrmCadTabPreco_Itens.CurrencyEdit3.Value       := fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA1.AsFloat;
+  ffrmCadTabPreco_Itens.CurrencyEdit4.Value       := fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA2.AsFloat;
   ffrmCadTabPreco_Itens.ShowModal;
 
   FreeAndNil(ffrmCadTabPreco_Itens);
@@ -367,7 +369,7 @@ begin
   btnInserir_Itens.Enabled := not(btnInserir_Itens.Enabled);
   btnAlterar_Itens.Enabled := not(btnAlterar_Itens.Enabled);
   btnExcluir_Itens.Enabled := not(btnExcluir_Itens.Enabled);
-  btnBuscarProduto.Enabled := not(btnBuscarProduto.Enabled);
+//  btnBuscarProduto.Enabled := not(btnBuscarProduto.Enabled);
   btnAplicar.Enabled       := not(btnAplicar.Enabled);
 
   btnConsPrecoProd.Enabled       := not(btnConsPrecoProd.Enabled);
@@ -375,10 +377,14 @@ begin
 
   for i := 1 to SMDBGrid2.ColCount - 2 do
   begin
-    if SMDBGrid2.Columns[i].FieldName = 'VLR_VENDA' then
+    if copy(SMDBGrid2.Columns[i].FieldName,1,9) = 'VLR_VENDA' then
       SMDBGrid2.Columns[i].ReadOnly := not(SMDBGrid2.Columns[i].ReadOnly);
     if SMDBGrid2.Columns[i].FieldName = 'NOME_COR' then
       SMDBGrid2.Columns[i].Visible := (fDMCadTab_Preco.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S');
+    if SMDBGrid2.Columns[i].FieldName = 'VLR_VENDA1' then
+      SMDBGrid2.Columns[i].Visible := fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S';
+    if SMDBGrid2.Columns[i].FieldName = 'VLR_VENDA2' then
+      SMDBGrid2.Columns[i].Visible := fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S';
   end;
 end;
 
@@ -406,7 +412,8 @@ end;
 procedure TfrmCadTabPreco.SMDBGrid2GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
-  if (Field = fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA) then
+  if (Field = fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA) or (Field = fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA1)
+    or (Field = fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA2) then
   begin
     Background  := clYellow;
     AFont.Style := [fsBold];
@@ -448,6 +455,7 @@ begin
         vAux := StrToFloat(FormatFloat('0.000',vPreco * CurrencyEdit1.Value / 100));
         if ComboBox2.ItemIndex = 1 then
           vAux := StrToFloat(FormatFloat('0.00',vAux * -1));
+          
         fDMCadTab_Preco.cdsTab_Preco_Itens.Edit;
         case ComboBox1.ItemIndex of
           0: fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadTab_Preco.cdsTab_Preco_ItensPRECO_CUSTO.AsFloat + vAux));

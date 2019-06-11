@@ -866,7 +866,7 @@ begin
   if fDMCadPessoa.cdsPessoa.IsEmpty then
     exit;
 
-  if MessageDlg('Deseja excluir este registro ' + fDMCadPessoa.cdsPessoa_ConsultaNOME.AsString + '?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+  if MessageDlg('Deseja excluir este registro ' + fDMCadPessoa.cdsPessoa_ConsultaNOME.AsString + '?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
     exit;
 
   vCodAux := fDMCadPessoa.cdsPessoa_Consulta.RecNo;

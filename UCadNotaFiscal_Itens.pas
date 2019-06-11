@@ -851,17 +851,17 @@ begin
             if (fDMCadNotaFiscal.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger > 0) then
             begin
               if (fDMCadNotaFiscal.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger)
+                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,'N')
               else
-                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,0);
+                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,0,'N');
             end
             else
             if fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger > 0 then
             begin
               if (fDMCadNotaFiscal.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger)
+                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,'N')
               else
-                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,0)
+                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,0,'N')
             end;
             if StrToFloat(FormatFloat('0.000000',vPrecoAux)) > 0 then
               fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000000000',vPrecoAux))

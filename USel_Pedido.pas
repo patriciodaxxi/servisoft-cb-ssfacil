@@ -95,6 +95,8 @@ uses rsDBUtils, uUtilPadrao, StrUtils, DmdDatabase, UInformar_Lote_Controle,
 procedure TfrmSel_Pedido.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  if vTipo <> 'VAL' then
+    prc_Grava_Grid(SMDBGrid1, Name, fDMCadNotaFiscal.qParametros_GeralENDGRIDS.AsString);
   Action := Cafree;
 end;
 
@@ -133,7 +135,6 @@ begin
         SMDBGrid1.Columns[i].FieldName     := 'NOMECLIENTE';
         SMDBGrid1.Columns[i].Title.Caption := 'Nome Cliente';
       end;
-
       if (SMDBGrid1.Columns[i].FieldName = 'NOME_CONSUMIDOR') then
         SMDBGrid1.Columns[i].Visible := (fDmCadVale.qParametros_GeralEMPRESA_VAREJO.AsString = 'S');
       if (SMDBGrid1.Columns[i].FieldName = 'NOMEPRODUTO') and (fDmCadVale.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S') then
@@ -146,6 +147,8 @@ begin
   else //vTipo = 'NTS' or 'RNF'
   begin
     oDBUtils.SetDataSourceProperties(Self,fDMCadNotaFiscal);
+    prc_le_Grid(SMDBGrid1, Name, fDMCadNotaFiscal.qParametros_GeralENDGRIDS.AsString);
+
     SMDBGrid1.DataSource := fDMCadNotaFiscal.dsPedido;
     SMDBGrid6.DataSource := fDMCadNotaFiscal.dsPedido_Tipo;
     SMDBGrid2.Visible    := (fDMCadNotaFiscal.cdsParametrosUSA_LOTE_CONTROLE.AsString = 'S');
@@ -193,11 +196,15 @@ begin
 
         if (SMDBGrid1.Columns[i].FieldName = 'NOME_CONSUMIDOR') then
           SMDBGrid1.Columns[i].Visible := (fDMCadNotaFiscal.qParametros_GeralEMPRESA_VAREJO.AsString = 'S');
-        if (SMDBGrid1.Columns[i].FieldName = 'NOMEPRODUTO') and (fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S') then
+        if (SMDBGrid1.Columns[i].FieldName = 'NOMEPRODUTO') and ((fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S')
+                                                            or (fDMCadNotaFiscal.qParametros_PedPERMITE_ALT_NOMEPROD.AsString = 'S')) then
         begin
           SMDBGrid1.Columns[i].FieldName     := 'NOME_PRODUTO_PED';
           SMDBGrid1.Columns[i].Title.Caption := 'Nome Produto';
-        end;
+        end
+        else
+        if (SMDBGrid1.Columns[i].FieldName = 'NOME_PRODUTO_PED') then
+          SMDBGrid1.Columns[i].FieldName     := 'NOMEPRODUTO';
       end;
     end;
     Shape3.Visible := (fDMCadNotaFiscal.cdsParametrosUSA_PEDIDO_FUT.AsString = 'S');
@@ -205,6 +212,7 @@ begin
   end;
   Label5.Visible := SMDBGrid2.Visible;
   Label7.Visible := SMDBGrid2.Visible;
+
 end;
 
 procedure TfrmSel_Pedido.prc_Consultar_Pedido(Tipo: String; ID: Integer = 0; Item_Pedido: Integer = 0);

@@ -123,6 +123,7 @@ begin
   FilenameEdit1.InitialDir := fDMGerar_EDI.qParametros_GeralEND_ARQ_EDI.AsString;
   fDMGerar_EDI.prc_Abre_Operacao;
   RxDBLookupCombo1.KeyValue := fDMGerar_EDI.qParametrosID_OPERACAO_VENDA.AsInteger;
+  CheckBox1.Checked         := (fDMGerar_EDI.qParametros_PedEDI_USAR_PRECO_TAB.AsString <> 'S');
 end;
 
 procedure TfrmGerar_Pedido_EDI.prc_Gravar_mAuxiliar;
@@ -696,7 +697,7 @@ begin
     vPrecoAux := StrToFloat(FormatFloat('0.00000',vPreco_Pos))
   else
   if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0 then
-    vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger);
+    vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,'N');
   if StrToFloat(FormatFloat('0.0000',vPrecoAux)) > 0 then
     fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.000000',vPrecoAux))
   else

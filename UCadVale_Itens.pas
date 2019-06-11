@@ -227,7 +227,7 @@ begin
   begin
     vPrecoAux := 0;
     if fDmCadVale.cdsPessoaID_TAB_PRECO.AsInteger > 0 then
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDmCadVale.cdsPessoaID_TAB_PRECO.AsInteger,fDmCadVale.cdsProdutoID.AsInteger);
+      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDmCadVale.cdsPessoaID_TAB_PRECO.AsInteger,fDmCadVale.cdsProdutoID.AsInteger,0,'N');
     if StrToFloat(FormatFloat('0.000000',vPrecoAux)) > 0 then
       fDmCadVale.cdsValeItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.000000',vPrecoAux))
     else
