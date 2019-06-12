@@ -10289,6 +10289,13 @@ object DMCadPedido: TDMCadPedido
     object cdsOrcamento_Item_TipoVLR_DOBRA: TFloatField
       FieldName = 'VLR_DOBRA'
     end
+    object cdsOrcamento_Item_TipoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
+    object cdsOrcamento_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField
+      FieldName = 'CAMINHO_ARQUIVO_PDF'
+      Size = 150
+    end
   end
   object dsOrcamento_Item_Tipo: TDataSource
     DataSet = cdsOrcamento_Item_Tipo
