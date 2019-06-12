@@ -213,6 +213,7 @@ end;
 procedure TfrmCadOrcamento_Itens.FormShow(Sender: TObject);
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
+  fDMCadPedido.prc_Abrir_Produto;
   //Tamanhos
   if fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S' then
   begin

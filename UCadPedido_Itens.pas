@@ -320,8 +320,7 @@ var
   vCODCFOP_Aux: String;
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
-  if not fDMCadPedido.cdsproduto.active then
-    fDMCadPedido.prc_Abrir_Produto;
+  fDMCadPedido.prc_Abrir_Produto;
   vPreco_Pos := 0;
   //Tamanhos
   if fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S' then
