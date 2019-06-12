@@ -24,7 +24,7 @@ object frmCadTabPreco: TfrmCadTabPreco
     Top = 0
     Width = 942
     Height = 572
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadTabPreco: TfrmCadTabPreco
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -927,17 +927,21 @@ object frmCadTabPreco: TfrmCadTabPreco
               item
                 Expanded = False
                 FieldName = 'VLR_VENDA1'
+                ReadOnly = True
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Encerado'
                 Title.Color = clYellow
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_VENDA2'
+                ReadOnly = True
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Engomado'
                 Title.Color = clYellow
+                Width = 64
                 Visible = True
               end
               item
