@@ -40,6 +40,10 @@ type
     cdsTab_Preco_ItensVLR_VENDA: TFloatField;
     cdsTab_Preco_ItensID_COR: TIntegerField;
     cdsTab_PrecosdsTab_Preco_Itens: TDataSetField;
+    sdsTab_Preco_ItensVLR_VENDA1: TFloatField;
+    sdsTab_Preco_ItensVLR_VENDA2: TFloatField;
+    cdsTab_Preco_ItensVLR_VENDA1: TFloatField;
+    cdsTab_Preco_ItensVLR_VENDA2: TFloatField;
   private
     { Private declarations }
   public
