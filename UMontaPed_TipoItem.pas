@@ -377,6 +377,7 @@ begin
      (fnc_Buscar_Estoque(mArquivoImportadoCodigo_Produto.AsInteger, fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger,0) <= 0) then
   begin
     Background  := clGreen;
+    AFont.Color := clWhite;
   end;
 end;
 

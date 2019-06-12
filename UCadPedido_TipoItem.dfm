@@ -1,6 +1,6 @@
 object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
-  Left = -1086
-  Top = 190
+  Left = 54
+  Top = 124
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmCadPedido_TipoItem'
@@ -182,7 +182,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Top = 70
         Width = 100
         Height = 21
-        DataField = 'ALTURA'
+        DataField = 'ESPESSURA'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
         TabOrder = 4
         OnExit = DBEdit2Exit
