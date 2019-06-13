@@ -389,6 +389,7 @@ type
     procedure prc_Mostra_Aprov;
     procedure prc_Monta_Saldo;
     procedure prc_Habilitar;
+    procedure prc_Monta_Opcao_Cab;
 
     procedure prc_Gravar_Dup_CCusto(ID : String);
 
@@ -1538,6 +1539,7 @@ begin
 
   if ckImpNossoNumero.Checked then
   begin
+    prc_Monta_Opcao_Cab;
     fRelPagarReceber3 := TfRelPagarReceber3.Create(Self);
     fRelPagarReceber3.vTipo_ES := 'A';
     case RadioGroup2.ItemIndex of
@@ -2362,21 +2364,15 @@ procedure TfrmCadDuplicata.prc_Monta_Cab(Extrato: Boolean);
 begin
   vOpcaoImp := 'Opções: ';
   case RadioGroup2.ItemIndex of
-    0:
-      vOpcaoImp := vOpcaoImp + '(Entrada)';
-    1:
-      vOpcaoImp := vOpcaoImp + '(Saida)';
+    0: vOpcaoImp := vOpcaoImp + '(Entrada)';
+    1: vOpcaoImp := vOpcaoImp + '(Saida)';
   end;
 
   case RadioGroup1.ItemIndex of
-    0:
-      vOpcaoImp := vOpcaoImp + ' - (Em aberto)';
-    1:
-      vOpcaoImp := vOpcaoImp + ' - (Quitado)';
-    2:
-      vOpcaoImp := vOpcaoImp + ' - (Descontado)';
+    0: vOpcaoImp := vOpcaoImp + ' - (Em aberto)';
+    1: vOpcaoImp := vOpcaoImp + ' - (Quitado)';
+    2: vOpcaoImp := vOpcaoImp + ' - (Descontado)';
   end;
-
 
   if (trim(NxDatePicker1.Text) <> '') and (trim(NxDatePicker2.Text) <> '') then
   //if (NxDatePicker1.Date > 10) and (NxDatePicker2.Date > 10) then
@@ -2930,6 +2926,7 @@ begin
   end;
   SMDBGrid1.DisableScroll;
   vIndice := fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames;
+  prc_Monta_Cab(True);
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'NOME_PESSOA;ID_PESSOA';
   vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Extrato_Cliente_Fornecedor.fr3';
   if FileExists(vArq) then
@@ -2940,14 +2937,12 @@ begin
     Exit;
   end;
   case RadioGroup2.ItemIndex of
-    0:
-      vTipo_Relatorio := 'Extrato Cliente';
-    1:
-      vTipo_Relatorio := 'Extrato Fornecedor';
-    2:
-      vTipo_Relatorio := 'Extrato Cliente/Fornecedor';
+    0: vTipo_Relatorio := 'Extrato Cliente';
+    1: vTipo_Relatorio := 'Extrato Fornecedor';
+    2: vTipo_Relatorio := 'Extrato Cliente/Fornecedor';
   end;
-  fDMCadDuplicata.frxReport1.variables['TIPO'] := QuotedStr(vTipo_Relatorio);
+  fDMCadDuplicata.frxReport1.variables['TIPO']     := QuotedStr(vTipo_Relatorio);
+  fDMCadDuplicata.frxReport1.variables['ImpOpcao'] := QuotedStr(vOpcaoImp);
   fDMCadDuplicata.frxReport1.ShowReport;
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := vIndice;
   SMDBGrid1.EnableScroll;
@@ -3173,6 +3168,11 @@ begin
   fDMCadDuplicata.vDataFim := NxDatePicker4.Date;
   fDMCadDuplicata.frxReport1.ShowReport;
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := vIndice_Ant;
+end;
+
+procedure TfrmCadDuplicata.prc_Monta_Opcao_Cab;
+begin
+
 end;
 
 end.
