@@ -42,6 +42,7 @@ type
     Shape2: TShape;
     Shape3: TShape;
     Label6: TLabel;
+    btnExcluirItem: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FilenameEdit1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -53,6 +54,7 @@ type
     procedure SMDBGrid3DblClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure btnAjustar_ProdCliClick(Sender: TObject);
+    procedure btnExcluirItemClick(Sender: TObject);
   private
     { Private declarations }
     fDMGerar_EDI: TDMGerar_EDI;
@@ -768,7 +770,10 @@ begin
     prc_Le_EDI
   else
   if (Shift = [ssCtrl]) and (Key = 87) then //CTRL W
+  begin
     btnAjustar_ProdCli.Visible := not(btnAjustar_ProdCli.Visible);
+    btnExcluirItem.Visible     := not(btnExcluirItem.Visible);
+  end;
 end;
 
 procedure TfrmGerar_Pedido_EDI.SMDBGrid3DblClick(Sender: TObject);
@@ -1155,6 +1160,17 @@ begin
     vErro := True;
   end;
   fDMGerar_EDI.mAuxiliar.Post;
+end;
+
+procedure TfrmGerar_Pedido_EDI.btnExcluirItemClick(Sender: TObject);
+begin
+  if MessageDlg('Deseja excluir o item selecionado?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
+    Exit;
+  if fDMGerar_EDI.mNaoGerado.Locate('Pedido;Item',VarArrayOf([fDMGerar_EDI.mAuxiliarNumOC.AsString,fDMGerar_EDI.mAuxiliarItem.AsInteger]),[locaseinsensitive]) then
+    fDMGerar_EDI.mNaoGerado.Delete;
+  fDMGerar_EDI.mAuxiliar.Delete;
+  if fDMGerar_EDI.mNaoGerado.RecordCount <= 0 then
+    vErro := False;
 end;
 
 end.

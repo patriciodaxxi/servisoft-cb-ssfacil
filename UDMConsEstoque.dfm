@@ -3205,13 +3205,14 @@ object DMConsEstoque: TDMConsEstoque
       'select aux.*,'#13#10'PRO.NOME NOME_PRODUTO, PRO.REFERENCIA,'#13#10'COMB.NOME' +
       ' NOME_COMBINACAO, PRO.localizacao,'#13#10'PRO.qtd_estoque_min, PRO.UNI' +
       'DADE, PRO.ID_NCM, NCM.NCM, NCM.NOME NOME_NCM'#13#10'from ('#13#10'select ea.' +
-      'id_produto, ea.filial, sum(ea.qtd) qtd, ea.id_cor, ea.tamanho,'#13#10 +
-      'ea.id_local_estoque, sum(ea.qtd_reserva) qtd_reserva'#13#10'from vesto' +
-      'que_atual ea'#13#10'group by ea.id_produto, ea.filial, ea.id_cor, ea.t' +
-      'amanho,'#13#10'ea.id_local_estoque'#13#10') aux'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON ' +
-      'AUX.id_produto = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON AUX.ID_CO' +
-      'R = COMB.ID'#13#10'LEFT JOIN TAB_NCM NCM'#13#10'ON PRO.ID_NCM = NCM.ID'#13#10'WHER' +
-      'E PRO.ESTOQUE = '#39'S'#39#13#10'   AND PRO.INATIVO = '#39'N'#39#13#10#13#10
+      'id_produto, cast(sum(ea.qtd) as double precision) qtd, ea.id_cor' +
+      ', ea.tamanho,'#13#10'ea.id_local_estoque, cast(sum(ea.qtd_reserva) as ' +
+      'double precision) qtd_reserva'#13#10'from vestoque_atual ea'#13#10'group by ' +
+      'ea.id_produto, ea.filial, ea.id_cor, ea.tamanho,'#13#10'ea.id_local_es' +
+      'toque'#13#10') aux'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON AUX.id_produto = PRO.ID' +
+      #13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON AUX.ID_COR = COMB.ID'#13#10'LEFT JOIN ' +
+      'TAB_NCM NCM'#13#10'ON PRO.ID_NCM = NCM.ID'#13#10'WHERE PRO.ESTOQUE = '#39'S'#39#13#10'  ' +
+      ' AND PRO.INATIVO = '#39'N'#39#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3231,12 +3232,6 @@ object DMConsEstoque: TDMConsEstoque
     OnCalcFields = cdsEstoqueCalcFields
     Left = 152
     Top = 55
-    object cdsEstoque_AtualQTD: TFMTBCDField
-      FieldName = 'QTD'
-      DisplayFormat = '###,###,##0.00##'
-      Precision = 15
-      Size = 6
-    end
     object cdsEstoque_AtualID_COR: TIntegerField
       FieldName = 'ID_COR'
       Required = True
@@ -3265,14 +3260,6 @@ object DMConsEstoque: TDMConsEstoque
       FieldName = 'LOCALIZACAO'
       Size = 30
     end
-    object cdsEstoque_AtualQTD_RESERVA: TFloatField
-      FieldName = 'QTD_RESERVA'
-      DisplayFormat = '###,###,##0.00##'
-    end
-    object cdsEstoque_AtualQTD_ESTOQUE_MIN: TFloatField
-      FieldName = 'QTD_ESTOQUE_MIN'
-      DisplayFormat = '#'
-    end
     object cdsEstoque_AtualUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Size = 6
@@ -3290,6 +3277,18 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoque_AtualID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
+    end
+    object cdsEstoque_AtualQTD: TFloatField
+      FieldName = 'QTD'
+      DisplayFormat = '0.00##'
+    end
+    object cdsEstoque_AtualQTD_RESERVA: TFloatField
+      FieldName = 'QTD_RESERVA'
+      DisplayFormat = '0.00##'
+    end
+    object cdsEstoque_AtualQTD_ESTOQUE_MIN: TFloatField
+      FieldName = 'QTD_ESTOQUE_MIN'
+      DisplayFormat = '0.00##'
     end
   end
   object dsEstoque_Atual: TDataSource

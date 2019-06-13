@@ -3674,138 +3674,6 @@ object fMenu: TfMenu
         GroupName = 'Recibo NF'
       end
       item
-        FormName = 'frmCadPedido'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'Label3'
-        Caption = 'Opera'#231#227'o:'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'RxDBLookupCombo10'
-        Caption = 'Opera'#231#227'o'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'Label20'
-        Caption = 'Finalidade:'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'rxcbFinalidade'
-        Caption = 'Finalidade'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'Etiqueta1'
-        Caption = 'Etiqueta Navalha'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'ckImpPreco'
-        Caption = 'Imprimir Pre'#231'o'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'lblNaoMostrarPreco'
-        Caption = 'N'#227'o Mostrar Pre'#231'o'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'Etiqueta2'
-        Caption = 'Etiqueta'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'btnImportarXML'
-        Caption = 'Importar'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'EtiquetaA41'
-        Caption = 'Etiqueta (A4)'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'EtiquetaCaixaIndividual1'
-        Caption = 'Etiqueta Caixa Individual'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'btnFilial'
-        Caption = 'Alterar Filial'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'lblInfDtExpedicao'
-        Caption = 'Inf. Data Expedi'#231#227'o'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'PedidoProduo1'
-        Caption = 'Pedido Produ'#231#227'o'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'RomaneioParaExpedio1'
-        Caption = 'Romaneio Para Expedi'#231#227'o'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'PedidoProduoTerceiro1'
-        Caption = 'Pedido Produ'#231#227'o Terceiro'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'EtiquetaPorItemdoPedido1'
-        Caption = 'Etiqueta Por Item do Pedido'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'PedidoProduo2'
-        Caption = 'Pedido Produ'#231#227'o'
-        GroupName = 'Pedidos'
-      end
-      item
-        FormName = 'frmCadPedido'
-        CompName = 'aloPorPedido1'
-        Caption = 'Tal'#227'o Por Pedido'
-        GroupName = 'Pedidos'
-      end
-      item
         FormName = 'frmCadContaOrc'
         CompName = 'btnAlterar'
         Caption = 'Alterar'
@@ -4242,6 +4110,144 @@ object fMenu: TfMenu
         CompName = 'pnlExcluirSel'
         Caption = 'Excluir Selecionados'
         GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'Label3'
+        Caption = 'Opera'#231#227'o:'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'RxDBLookupCombo10'
+        Caption = 'Opera'#231#227'o'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'Label20'
+        Caption = 'Finalidade:'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'rxcbFinalidade'
+        Caption = 'Finalidade'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'Etiqueta1'
+        Caption = 'Etiqueta Navalha'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'ckImpPreco'
+        Caption = 'Imprimir Pre'#231'o'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'lblNaoMostrarPreco'
+        Caption = 'N'#227'o Mostrar Pre'#231'o'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'Etiqueta2'
+        Caption = 'Etiqueta'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'btnImportarXML'
+        Caption = 'Importar'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'EtiquetaA41'
+        Caption = 'Etiqueta (A4)'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'EtiquetaCaixaIndividual1'
+        Caption = 'Etiqueta Caixa Individual'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'btnFilial'
+        Caption = 'Alterar Filial'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'lblInfDtExpedicao'
+        Caption = 'Inf. Data Expedi'#231#227'o'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'PedidoProduo1'
+        Caption = 'Pedido Produ'#231#227'o'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'RomaneioParaExpedio1'
+        Caption = 'Romaneio Para Expedi'#231#227'o'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'PedidoProduoTerceiro1'
+        Caption = 'Pedido Produ'#231#227'o Terceiro'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'EtiquetaPorItemdoPedido1'
+        Caption = 'Etiqueta Por Item do Pedido'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'PedidoProduo2'
+        Caption = 'Pedido Produ'#231#227'o'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'aloPorPedido1'
+        Caption = 'Tal'#227'o Por Pedido'
+        GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadPedido'
+        CompName = 'Matricial80Colunas1'
+        Caption = 'Matricial 80 Colunas'
+        GroupName = 'Pedidos'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

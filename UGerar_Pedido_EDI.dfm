@@ -231,6 +231,15 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       Visible = False
       OnClick = btnAjustar_ProdCliClick
     end
+    object btnExcluirItem: TNxButton
+      Left = 920
+      Top = 9
+      Width = 136
+      Caption = 'Excluir Item Selecionado'
+      TabOrder = 7
+      Visible = False
+      OnClick = btnExcluirItemClick
+    end
   end
   object gbxVendedor: TRzGroupBox
     Left = 0
@@ -468,7 +477,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
     Top = 283
     Width = 1087
     Height = 253
-    ActivePage = RzTabSheet1
+    ActivePage = ts_Erro
     ActivePageDefault = RzTabSheet1
     Align = alBottom
     BackgroundColor = clSilver
@@ -476,7 +485,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 2
     FixedDimension = 19
     object RzTabSheet1: TRzTabSheet

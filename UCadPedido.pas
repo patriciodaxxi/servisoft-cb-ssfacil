@@ -361,6 +361,7 @@ type
     EtiquetaA4ItensPersonalizado1: TMenuItem;
     SalvarPedido1: TMenuItem;
     Label86: TLabel;
+    Matricial80Colunas1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -482,6 +483,7 @@ type
     procedure RtuloComEmbalagemRolo1Click(Sender: TObject);
     procedure EtiquetaA4ItensPersonalizado1Click(Sender: TObject);
     procedure SalvarPedido1Click(Sender: TObject);
+    procedure Matricial80Colunas1Click(Sender: TObject);
   private
     { Private declarations }
     fLista : TStringList;
@@ -557,7 +559,7 @@ uses DmdDatabase, rsDBUtils, uUtilPadrao, uRelPedido, uRelPedido_SulTextil, uRel
   UConsPedido_Nota, UDMConsPedido, UInformar_DtExpedicao, UInformar_Processo_Ped, UConsPedido_Senha, USel_Produto, UCadPedido_Cupom,
   UDMPedidoImp, USel_OS_Proc, UCadPedido_ItensCli, UTalaoPed,
   UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido,
-  UConsClienteOBS;
+  UConsClienteOBS, uImprimir;
 
 {$R *.dfm}
 
@@ -4508,6 +4510,82 @@ begin
     ShowMessage('Arquivo Gerado com Sucesso');
     FreeAndNil(fRelPedido_JW);
   end
+end;
+
+procedure TfrmCadPedido.Matricial80Colunas1Click(Sender: TObject);
+var
+  vTexto1 : String;
+  vTexto2 : String;
+begin
+  fDMCadPedido.cdsParametros.Close;
+  fDMCadPedido.cdsParametros.Open;
+  if trim(fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString) = '' then
+  begin
+    MessageDlg('*** Caminho da impressora Matricial não informado nos Parâmetros!', mtInformation, [mbOk], 0);
+    Exit;
+  end;
+
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) then
+    exit;
+
+  prc_Posiciona_Imp;
+
+  uImprimir.vPagMatricial := 0;
+  uImprimir.prc_Cabecalho_Mat(fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  vTexto1 := 'No.Pedido: ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(29,vTexto1,'D',' ');
+  vTexto2 := 'Data: ' + DateToStr(Date) + TimeToStr(Now);
+  vTexto2 := uImprimir.fnc_Monta_Tamanho(55,vTexto2,'D',' ');
+  vTexto1 := vTexto1 + vTexto2 + 'Pag: ' + IntToStr(uImprimir.vPagMatricial);
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+  vTexto1 := 'Vendedor: ' + fDMCadPedido.cdsPedidoImpNOME_VENDEDOR.AsString;
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  uImprimir.prc_Detalhe_Mat(' Cliente: ' + fDMCadPedido.cdsPedidoImpNOME_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat('Endereco: ' + fDMCadPedido.cdsPedidoImpEND_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Bairro: ' + fDMCadPedido.cdsPedidoImpBAIRRO_CLIENTE.AsString,'D',' ') + ' Cep: ' + fDMCadPedido.cdsPedidoImpCEP_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Cidade: ' + fDMCadPedido.cdsPedidoImpCIDADE_CLIENTE.AsString,'D',' ') + '  UF: ' + fDMCadPedido.cdsPedidoImpUF.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'CNPJ/CPF: ' + fDMCadPedido.cdsPedidoImpCNPJ_CPF_CLIENTE.AsString,'D',' ') + 'Fone: ' + fDMCadPedido.cdsPedidoImpDDD_CLIENTE.AsString + ' ' + fDMCadPedido.cdsPedidoImpFONE_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat(' ');
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  uImprimir.prc_Detalhe_Mat('    Qtde Unid.  Codigo Produto                                                 Marca                     Preco %Desc          Total');
+  fDMCadPedido.cdsPedidoImp_Itens.First;
+  while not fDMCadPedido.cdsPedidoImp_Itens.Eof do
+  begin
+    vTexto1 := uImprimir.fnc_Monta_Tamanho(8,FormatFloat('#,##0.00',fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat),'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(6,fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString,'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(6,fDMCadPedido.cdsPedidoImp_ItensID_PRODUTO.AsString,'D',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(55,Copy(fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString,1,55),'D',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(20,Copy(fDMCadPedido.cdsPedidoImp_ItensNOME_MARCA.AsString,1,20),'D',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(10,FormatFloat('###,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat) ,'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(5,FormatFloat('#0.00',fDMCadPedido.cdsPedidoImp_ItensPERC_DESCONTO.AsFloat) ,'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_TOTAL.AsFloat) ,'E',' ');
+    uImprimir.prc_Detalhe_Mat(vTexto1);
+
+    fDMCadPedido.cdsPedidoImp_Itens.Next;
+  end;
+
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(115,'Total Produto: (+)','E',' ') + '  '
+           + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_ITENS.AsFloat),'E',' ');
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(115,'Vlr. Desconto: (-)','E',' ') + '  '
+           + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_DESCONTO.AsFloat),'E',' ');
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(115,'Total Pedido: (=)','E',' ') + '  '
+           + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_TOTAL.AsFloat),'E',' ');
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  uImprimir.prc_Rodape_Mat;
 end;
 
 end.
