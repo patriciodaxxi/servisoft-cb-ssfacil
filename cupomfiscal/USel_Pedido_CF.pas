@@ -99,6 +99,9 @@ begin
   SMDBGrid1.DisableScroll;
   fDMCupomFiscal.cdsPedido.Close;
   fDMCupomFiscal.sdsPedido.CommandText := fDMCupomFiscal.ctPedido;
+  if DateEdit1.Date > 0 then
+    fDMCupomFiscal.sdsPedido.CommandText := fDMCupomFiscal.sdsPedido.CommandText + ' AND DTEMISSAO >= ' +
+                                            QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.Date));
   if ID > 0 then
   begin
     fDMCupomFiscal.sdsPedido.CommandText := fDMCupomFiscal.sdsPedido.CommandText + ' AND PE.ID = ' + IntToStr(ID) +

@@ -251,6 +251,7 @@ object frmSel_Pedido_CF: TfrmSel_Pedido_CF
         FieldName = 'NOME_CONSUMIDOR'
         Title.Alignment = taCenter
         Title.Caption = 'Consumidor'
+        Width = 64
         Visible = True
       end
       item
@@ -382,6 +383,7 @@ object frmSel_Pedido_CF: TfrmSel_Pedido_CF
         Expanded = False
         FieldName = 'CNPJ_CPF'
         ReadOnly = True
+        Width = 64
         Visible = True
       end
       item
@@ -404,6 +406,7 @@ object frmSel_Pedido_CF: TfrmSel_Pedido_CF
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Imp. N'#186' OC na Nota'
+        Width = 64
         Visible = True
       end
       item
@@ -420,6 +423,7 @@ object frmSel_Pedido_CF: TfrmSel_Pedido_CF
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Item no Cliente'
+        Width = 64
         Visible = True
       end
       item
