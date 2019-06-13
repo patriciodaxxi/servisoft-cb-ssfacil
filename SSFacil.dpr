@@ -805,7 +805,8 @@ uses
   UMontaPed_TipoItem in 'UMontaPed_TipoItem.pas' {frmMontaPed_TipoItem},
   uConsProdutoPedido in 'uConsProdutoPedido.pas' {frmConsultaProduto},
   uMostraPDF in 'uMostraPDF.pas' {frmMostraPDF},
-  UConsClienteOBS in 'UConsClienteOBS.pas' {frmConsClienteOBS};
+  UConsClienteOBS in 'UConsClienteOBS.pas' {frmConsClienteOBS},
+  uImprimir in 'uImprimir.pas';
 
 {$R *.res}
 

@@ -486,7 +486,6 @@ type
     dspEstoque_Atual: TDataSetProvider;
     cdsEstoque_Atual: TClientDataSet;
     dsEstoque_Atual: TDataSource;
-    cdsEstoque_AtualQTD: TFMTBCDField;
     cdsEstoque_AtualID_COR: TIntegerField;
     cdsEstoque_AtualTAMANHO: TStringField;
     cdsEstoque_AtualID_LOCAL_ESTOQUE: TIntegerField;
@@ -494,8 +493,6 @@ type
     cdsEstoque_AtualREFERENCIA: TStringField;
     cdsEstoque_AtualNOME_COMBINACAO: TStringField;
     cdsEstoque_AtualLOCALIZACAO: TStringField;
-    cdsEstoque_AtualQTD_RESERVA: TFloatField;
-    cdsEstoque_AtualQTD_ESTOQUE_MIN: TFloatField;
     sdsEstoque_De_Terc: TSQLDataSet;
     dspEstoque_De_Terc: TDataSetProvider;
     cdsEstoque_De_Terc: TClientDataSet;
@@ -680,6 +677,9 @@ type
     cdsEstoque_MovCODIGO_SUPERIOR: TStringField;
     cdsEstoque_MovDESC_SUPERIOR: TStringField;
     cdsEstoque_MovVLR_TOTAL: TFloatField;
+    cdsEstoque_AtualQTD: TFloatField;
+    cdsEstoque_AtualQTD_RESERVA: TFloatField;
+    cdsEstoque_AtualQTD_ESTOQUE_MIN: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
