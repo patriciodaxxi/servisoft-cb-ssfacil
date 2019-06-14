@@ -1188,38 +1188,48 @@ object DMCadDuplicata: TDMCadDuplicata
       FieldName = 'ID_NOTA'
     end
     object cdsDuplicata_ConsultaNUMDUPLICATA: TStringField
+      DisplayLabel = 'N'#186' Duplicata'
       FieldName = 'NUMDUPLICATA'
     end
     object cdsDuplicata_ConsultaPARCELA: TIntegerField
+      DisplayLabel = 'Parcela'
       FieldName = 'PARCELA'
     end
     object cdsDuplicata_ConsultaNUMNOTA: TIntegerField
+      DisplayLabel = 'N'#186' Nota'
       FieldName = 'NUMNOTA'
     end
     object cdsDuplicata_ConsultaSERIE: TStringField
+      DisplayLabel = 'S'#233'rie'
       FieldName = 'SERIE'
       Size = 3
     end
     object cdsDuplicata_ConsultaDTVENCIMENTO: TDateField
+      DisplayLabel = 'Dt. Vencimento'
       FieldName = 'DTVENCIMENTO'
     end
     object cdsDuplicata_ConsultaVLR_PARCELA: TFloatField
+      DisplayLabel = 'Vlr. Parcela'
       FieldName = 'VLR_PARCELA'
       DisplayFormat = '###,###,##0.00'
     end
     object cdsDuplicata_ConsultaVLR_RESTANTE: TFloatField
+      DisplayLabel = 'Vlr. Pendente'
       FieldName = 'VLR_RESTANTE'
       DisplayFormat = '###,###,##0.00'
     end
     object cdsDuplicata_ConsultaVLR_PAGO: TFloatField
+      DisplayLabel = 'Vlr. Pago'
       FieldName = 'VLR_PAGO'
       DisplayFormat = '###,###,##0.00'
     end
     object cdsDuplicata_ConsultaVLR_DEVOLUCAO: TFloatField
+      DisplayLabel = 'Vlr. Devolu'#231#227'o'
       FieldName = 'VLR_DEVOLUCAO'
       DisplayFormat = '###,###,##0.00'
     end
     object cdsDuplicata_ConsultaVLR_DESPESAS: TFloatField
+      DisplayLabel = 'Vlr. Despesas'
       FieldName = 'VLR_DESPESAS'
       DisplayFormat = '###,###,##0.00'
     end
@@ -1240,6 +1250,7 @@ object DMCadDuplicata: TDMCadDuplicata
       DisplayFormat = '0.00'
     end
     object cdsDuplicata_ConsultaDTULTPAGAMENTO: TDateField
+      DisplayLabel = 'Dt. Pagamento'
       FieldName = 'DTULTPAGAMENTO'
     end
     object cdsDuplicata_ConsultaID_PESSOA: TIntegerField
@@ -1267,6 +1278,7 @@ object DMCadDuplicata: TDMCadDuplicata
       FieldName = 'DTRECEBIMENTO_TITULO'
     end
     object cdsDuplicata_ConsultaDTEMISSAO: TDateField
+      DisplayLabel = 'Dt. Emiss'#227'o'
       FieldName = 'DTEMISSAO'
     end
     object cdsDuplicata_ConsultaPAGO_CARTORIO: TStringField
@@ -1308,6 +1320,7 @@ object DMCadDuplicata: TDMCadDuplicata
       Size = 1
     end
     object cdsDuplicata_ConsultaNOME_PESSOA: TStringField
+      DisplayLabel = 'Nome Pessoa'
       FieldName = 'NOME_PESSOA'
       Size = 60
     end
@@ -1448,6 +1461,7 @@ object DMCadDuplicata: TDMCadDuplicata
       Calculated = True
     end
     object cdsDuplicata_ConsultaclDias_Atraso: TIntegerField
+      DisplayLabel = 'Dias Atraso'
       FieldKind = fkCalculated
       FieldName = 'clDias_Atraso'
       Calculated = True

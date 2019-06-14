@@ -2279,6 +2279,7 @@ type
     mItensNotaSped_Tipo: TStringField;
     sdsProdutoSPED_TIPO_ITEM: TStringField;
     cdsProdutoSPED_TIPO_ITEM: TStringField;
+    cdsPag: TClientDataSet;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

@@ -2569,7 +2569,14 @@ begin
   i2 := 0;
   for coluna := 1 to fDMCadDuplicata.cdsDuplicata_Consulta.FieldCount do
   begin
-    if (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NUMDUPLICATA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'PARCELA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTVENCIMENTO') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTEMISSAO') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_PARCELA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'clDias_Atraso') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NOME_PESSOA') then
+    if (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NUMDUPLICATA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'PARCELA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTVENCIMENTO')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTEMISSAO')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_PARCELA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'clDias_Atraso')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NOME_PESSOA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_RESTANTE') then
     begin
       ColunaP := ColunaP + 1;
       valorcampo := fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].DisplayLabel;
@@ -2588,7 +2595,14 @@ begin
     ColunaP := 0;
     for coluna := 1 to fDMCadDuplicata.cdsDuplicata_Consulta.FieldCount do
     begin
-      if (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NUMDUPLICATA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'PARCELA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTVENCIMENTO') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTEMISSAO') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_PARCELA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'clDias_Atraso') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NOME_PESSOA') then
+      if (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NUMDUPLICATA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'PARCELA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTVENCIMENTO')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTEMISSAO')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_PARCELA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'clDias_Atraso')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NOME_PESSOA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_RESTANTE') then
       begin
         ColunaP := ColunaP + 1;
         vTexto := fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].AsString;

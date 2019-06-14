@@ -163,8 +163,8 @@ object DMRecebeXML: TDMRecebeXML
   object XMLTransformProvider1: TXMLTransformProvider
     TransformRead.TransformationFile = 'C:\Delphi7\SSFacil\EXE\nfe_v2.00_ToDp.xtr'
     XMLDataFile = 
-      'C:\A\Ciex\NFe_01_S001_019000_43170793480192000161550010000190001' +
-      '482503669.xml'
+      'C:\A\201902\NFe_01_S002_000002_431902889796950001465500200000000' +
+      '21603916441.xml'
     CacheData = True
     Left = 408
     Top = 288
@@ -174,7 +174,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'XMLTransformProvider1'
     Left = 416
-    Top = 320
+    Top = 319
     object cdsCabecalhoversao: TStringField
       FieldName = 'versao'
       Required = True
@@ -7734,7 +7734,6 @@ object DMRecebeXML: TDMRecebeXML
   end
   object cdsNotaFiscal_Ref: TClientDataSet
     Aggregates = <>
-    DataSetField = cdsNotaFiscalsdsNotaFiscal_Ref
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     Left = 160
@@ -10004,5 +10003,12 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsNotaFiscal_Itens
     Left = 48
     Top = 400
+  end
+  object cdsPag: TClientDataSet
+    Aggregates = <>
+    DataSetField = cdsNotaFiscalsdsNotaFiscal_Ref
+    Params = <>
+    Left = 555
+    Top = 480
   end
 end

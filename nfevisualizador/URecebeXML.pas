@@ -865,7 +865,6 @@ begin
     fDMRecebeXML.cdsDetalhe.Next;
   end;
 
-
   fDMRecebeXML.cdsParcelas.First;
   while not fDMRecebeXML.cdsParcelas.Eof do
   begin
