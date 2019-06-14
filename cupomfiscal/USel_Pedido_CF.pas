@@ -117,9 +117,9 @@ begin
   begin
     fDMCupomFiscal.cdsPedido.Edit;
     if fDMCupomFiscal.cdsParametrosCONTROLAR_PEDIDO_LIBERACAO.AsString = 'S' then
-      fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat := StrToFloat(FormatFloat('0.00000',fDMCupomFiscal.cdsPedidoclQtd_Restante.AsFloat))
+      fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsString := (FormatFloat('0.00000',fDMCupomFiscal.cdsPedidoclQtd_Restante.AsFloat))
     else
-      fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat := StrToFloat(FormatFloat('0.00000',fDMCupomFiscal.cdsPedidoQTD_RESTANTE.AsFloat));
+      fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsString := (FormatFloat('0.00000',fDMCupomFiscal.cdsPedidoQTD_RESTANTE.AsFloat));
     fDMCupomFiscal.cdsPedido.Post;
     fDMCupomFiscal.cdsPedido.Next;
   end;
@@ -378,9 +378,9 @@ begin
     fDMCupomFiscal.cdsPedidoQTD_FUT.AsFloat := StrToFloat(FormatFloat('0.000000',fDMCupomFiscal.cdsPedidoQTD_FUT.AsFloat + fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat))
   else
   begin
-    fDMCupomFiscal.cdsPedidoQTD_FATURADO.AsFloat := StrToFloat(FormatFloat('0.000000',fDMCupomFiscal.cdsPedidoQTD_FATURADO.AsFloat + fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat));
-    fDMCupomFiscal.cdsPedidoQTD_RESTANTE.AsFloat := StrToFloat(FormatFloat('0.000000',fDMCupomFiscal.cdsPedidoQTD_RESTANTE.AsFloat - fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat));
-    fDMCupomFiscal.cdsPedidoQTD_LIBERADA.AsFloat := StrToFloat(FormatFloat('0.000000',fDMCupomFiscal.cdsPedidoQTD_LIBERADA.AsFloat - fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat));
+    fDMCupomFiscal.cdsPedidoQTD_FATURADO.AsString := (FormatFloat('0.000000',fDMCupomFiscal.cdsPedidoQTD_FATURADO.AsFloat + fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat));
+    fDMCupomFiscal.cdsPedidoQTD_RESTANTE.AsString := (FormatFloat('0.000000',fDMCupomFiscal.cdsPedidoQTD_RESTANTE.AsFloat - fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat));
+    fDMCupomFiscal.cdsPedidoQTD_LIBERADA.AsString := (FormatFloat('0.000000',fDMCupomFiscal.cdsPedidoQTD_LIBERADA.AsFloat - fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat));
   end;
   fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat := 0;
   fDMCupomFiscal.cdsPedido.Post;
