@@ -1,6 +1,6 @@
 object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
-  Left = 120
-  Top = 104
+  Left = 262
+  Top = 24
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmMontaPed_TipoItem'
@@ -393,8 +393,6 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
-      OnColExit = SMDBGrid1ColExit
-      OnKeyDown = SMDBGrid1KeyDown
       OnTitleClick = SMDBGrid1TitleClick
       Flat = True
       BandsFont.Charset = DEFAULT_CHARSET
@@ -409,7 +407,6 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
       TitleHeight.PixelCount = 24
       FooterColor = clBtnFace
       ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
-      OnGetCellParams = SMDBGrid1GetCellParams
       RegistryKey = 'Software\Scalabium'
       RegistrySection = 'SMDBGrid'
       WidthOfIndicator = 27
@@ -575,7 +572,7 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
       item
         Name = 'CHANGEINDEX'
       end>
-    IndexFieldNames = 'NOMEARQUIVO'
+    IndexFieldNames = 'NOMEARQUIVO;Codigo_Produto'
     Params = <>
     StoreDefs = True
     OnNewRecord = mArquivoImportadoNewRecord
@@ -613,7 +610,6 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
       DisplayLabel = 'Comprimento (mm)'
       DisplayWidth = 17
       FieldName = 'Comprimento'
-      OnChange = mArquivoImportadoComprimentoChange
       DisplayFormat = '##0.00'
       EditFormat = '##0.00'
     end
@@ -621,7 +617,6 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
       DisplayLabel = 'Largura (mm)'
       DisplayWidth = 12
       FieldName = 'Largura'
-      OnChange = mArquivoImportadoLarguraChange
       DisplayFormat = '##0.00'
       EditFormat = '##0.00'
     end
@@ -672,7 +667,6 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
       DisplayLabel = 'Preco (KG)'
       DisplayWidth = 12
       FieldName = 'PrecoKG'
-      OnChange = mArquivoImportadoPrecoKGChange
       DisplayFormat = '#0.00'
       EditFormat = '#0.00'
     end

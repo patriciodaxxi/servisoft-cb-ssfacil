@@ -46,7 +46,6 @@ type
     pnlItens: TPanel;
     SMDBGrid1: TSMDBGrid;
     btnAbrirPDF: TSpeedButton;
-    procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -56,13 +55,7 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure mArquivoImportadoEspessuraChange(Sender: TField);
     procedure mArquivoImportadoNewRecord(DataSet: TDataSet);
-    procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
-      AFont: TFont; var Background: TColor; Highlight: Boolean);
-    procedure mArquivoImportadoLarguraChange(Sender: TField);
-    procedure mArquivoImportadoComprimentoChange(Sender: TField);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure SMDBGrid1ColExit(Sender: TObject);
-    procedure mArquivoImportadoPrecoKGChange(Sender: TField);
     procedure mArquivoImportadoQtdeChange(Sender: TField);
     procedure mArquivoImportadoVlr_DobraChange(Sender: TField);
     procedure FormShow(Sender: TObject);
@@ -97,15 +90,6 @@ uses
   DmdDatabase, uUtilPadrao, uCalculo_Pedido;
 
 {$R *.dfm}
-
-procedure TfrmMontaPed_TipoItem.SMDBGrid1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-
-//  if Key = Vk_Return then
-//  begin
-//    Close;
-//  end;
-end;
 
 procedure TfrmMontaPed_TipoItem.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -357,7 +341,7 @@ begin
   finally
     mArquivoImportado.EnableControls;
   end;
-  prc_Calcular_Peso_PC_Chapa;  
+  prc_Calcular_Peso_PC_Chapa;
 end;
 
 procedure TfrmMontaPed_TipoItem.mArquivoImportadoNewRecord(
@@ -366,59 +350,37 @@ begin
   mArquivoImportadoCodigo_Produto.AsInteger := 0;
 end;
 
-procedure TfrmMontaPed_TipoItem.SMDBGrid1GetCellParams(Sender: TObject;
-  Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
-begin
-  if (mArquivoImportadoEspessura.AsFloat > 0) and (mArquivoImportadoCodigo_Produto.AsInteger = 0) then
-  begin
-    Background  := clRed;
-  end;
-  if (mArquivoImportadoEspessura.AsFloat > 0) and (mArquivoImportadoCodigo_Produto.AsInteger > 0) and
-     (fnc_Buscar_Estoque(mArquivoImportadoCodigo_Produto.AsInteger, fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger,0) <= 0) then
-  begin
-    Background  := clGreen;
-    AFont.Color := clWhite;
-  end;
-end;
-
 procedure TfrmMontaPed_TipoItem.prc_Calcular_Peso_PC_Chapa;
 var
   vAux : Real;
 begin
-  vAux := (mArquivoImportadoComprimento.AsFloat + 10) * (mArquivoImportadoLargura.AsFloat + 10)
-        * mArquivoImportadoEspessura.AsFloat * 8;
-//        * mArquivoImportadoAltura.AsFloat * 8; ver com o Cleomar o campo altura ou espessura
-  if StrToFloat(FormatFloat('0.0000000',vAux)) > 0 then
-  begin
-    vAux := StrToFloat(FormatFloat('0.0000000',vAux / 1000000));
-    mArquivoImportado.Edit;
-    mArquivoImportadoPeso.AsFloat := StrToFloat(FormatFloat('0.0000000',vAux));
-    mArquivoImportado.Post;
+  mArquivoImportado.DisableControls;
+  try
+    vAux := (mArquivoImportadoComprimento.AsFloat + 10) * (mArquivoImportadoLargura.AsFloat + 10)
+          * mArquivoImportadoEspessura.AsFloat * 8;
+  //        * mArquivoImportadoAltura.AsFloat * 8; ver com o Cleomar o campo altura ou espessura
+    if StrToFloat(FormatFloat('0.0000000',vAux)) > 0 then
+    begin
+      vAux := StrToFloat(FormatFloat('0.0000000',vAux / 1000000));
+      mArquivoImportado.Edit;
+      mArquivoImportadoPeso.AsFloat := StrToFloat(FormatFloat('0.0000000',vAux));
+      mArquivoImportado.Post;
+    end;
+    if (StrToFloat(FormatFloat('0.000',mArquivoImportadoFator_Calculo.AsFloat)) > 0) and (StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat)) > 0) then
+    begin
+      mArquivoImportado.Edit;
+      mArquivoImportadoPeso.AsFloat := StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat +((mArquivoImportadoPeso.AsFloat * mArquivoImportadoFator_Calculo.AsFloat) / 100)));
+      mArquivoImportado.Post;
+    end;
+    if StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat)) > 0 then
+    begin
+      mArquivoImportado.Edit;
+      mArquivoImportadoVlr_Unitario.AsFloat := StrToFloat(FormatFloat('0.00',mArquivoImportadoPeso.AsFloat * mArquivoImportadoPrecoKG.AsFloat));
+      mArquivoImportado.Post;
+    end;
+  finally
+    mArquivoImportado.EnableControls;
   end;
-  if (StrToFloat(FormatFloat('0.000',mArquivoImportadoFator_Calculo.AsFloat)) > 0) and (StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat)) > 0) then
-  begin
-    mArquivoImportado.Edit;
-    mArquivoImportadoPeso.AsFloat := StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat +((mArquivoImportadoPeso.AsFloat * mArquivoImportadoFator_Calculo.AsFloat) / 100)));
-    mArquivoImportado.Post;
-  end;
-  if StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat)) > 0 then
-  begin
-    mArquivoImportado.Edit;
-    mArquivoImportadoVlr_Unitario.AsFloat := StrToFloat(FormatFloat('0.00',mArquivoImportadoPeso.AsFloat * mArquivoImportadoPrecoKG.AsFloat));
-    mArquivoImportado.Post;
-  end;
-end;
-
-procedure TfrmMontaPed_TipoItem.mArquivoImportadoLarguraChange(
-  Sender: TField);
-begin
-  prc_Calcular_Peso_PC_Chapa;
-end;
-
-procedure TfrmMontaPed_TipoItem.mArquivoImportadoComprimentoChange(
-  Sender: TField);
-begin
-  prc_Calcular_Peso_PC_Chapa;
 end;
 
 procedure TfrmMontaPed_TipoItem.FormKeyPress(Sender: TObject;
@@ -433,18 +395,6 @@ begin
     SMDBGrid1.SelectedIndex := 1;
     mArquivoImportado.Next;
   end;
-end;
-
-procedure TfrmMontaPed_TipoItem.SMDBGrid1ColExit(Sender: TObject);
-begin
-//  if (SMDBGrid1.SelectedField.AsString <> '') and (SMDBGrid1.Columns[SMDBGrid1.SelectedIndex].FieldName = 'Comprimento') then
-//    SMDBGrid1.SelectedField.Value := fnc_Somar_Edit(SMDBGrid1.SelectedField.AsString);
-end;
-
-procedure TfrmMontaPed_TipoItem.mArquivoImportadoPrecoKGChange(
-  Sender: TField);
-begin
-  prc_Calcular_Peso_PC_Chapa;
 end;
 
 procedure TfrmMontaPed_TipoItem.prc_Calcular_VlrTotal;
@@ -466,6 +416,7 @@ end;
 procedure TfrmMontaPed_TipoItem.mArquivoImportadoQtdeChange(
   Sender: TField);
 begin
+  prc_Calcular_Peso_PC_Chapa;
   prc_Calcular_VlrTotal;
 end;
 
