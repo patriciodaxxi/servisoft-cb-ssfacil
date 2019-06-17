@@ -399,6 +399,23 @@ begin
       ceQtd.Value := vQtd;
       ceVM.Value  := vTotal / vQtd;
     end;
+    if (ComboBox1.ItemIndex = 3) or (ComboBox1.ItemIndex = 4) then
+    begin
+      vQtd := fDmCupomFiscal.cdsCupom_Cons.RecordCount;
+      if vQtd > 0 then
+      begin
+        fDmCupomFiscal.cdsCupom_Cons.First;
+        while not fDmCupomFiscal.cdsCupom_Cons.Eof do
+        begin
+          vTotal := vTotal + fDmCupomFiscal.cdsCupom_ConsVLR_TOTAL.AsCurrency;
+          fDmCupomFiscal.cdsCupom_Cons.Next;
+        end;
+        ceTotal.Value := vTotal;
+        ceQtd.Value := vQtd;
+        ceVM.Value  := vTotal / vQtd;
+      end;
+    end;
+
     SMDBGrid1.EnableScroll;
   end;
 end;
