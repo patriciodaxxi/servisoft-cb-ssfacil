@@ -478,14 +478,14 @@ object DMCadOrdemServico: TDMCadOrdemServico
   object dspOrdemServico_Consulta: TDataSetProvider
     DataSet = sdsOrdemServico_Consulta
     OnUpdateError = dspOrdemServicoUpdateError
-    Left = 304
+    Left = 296
     Top = 8
   end
   object cdsOrdemServico_Consulta: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspOrdemServico_Consulta'
-    Left = 336
+    Left = 328
     Top = 8
     object cdsOrdemServico_ConsultaID: TIntegerField
       FieldName = 'ID'
@@ -574,7 +574,7 @@ object DMCadOrdemServico: TDMCadOrdemServico
   end
   object dsOrdemServico_Consulta: TDataSource
     DataSet = cdsOrdemServico_Consulta
-    Left = 376
+    Left = 364
     Top = 8
   end
   object sdsCliente: TSQLDataSet
@@ -2845,7 +2845,7 @@ object DMCadOrdemServico: TDMCadOrdemServico
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41864.668858622700000000
-    ReportOptions.LastChange = 43424.426620578710000000
+    ReportOptions.LastChange = 43634.418612395840000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnPreview = frxReport1Preview
@@ -8063,5 +8063,37 @@ object DMCadOrdemServico: TDMCadOrdemServico
     BCDToCurrency = False
     Left = 409
     Top = 587
+  end
+  object frxOsCons: TfrxDBDataset
+    UserName = 'frxOsCons'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'NUM_OS=NUM_OS'
+      'DTEMISSAO=DTEMISSAO'
+      'HREMISSAO=HREMISSAO'
+      'ID_CLIENTE=ID_CLIENTE'
+      'DTENTREGA=DTENTREGA'
+      'HRENTREGA=HRENTREGA'
+      'NUM_NOTA=NUM_NOTA'
+      'SERIE_NOTA=SERIE_NOTA'
+      'NUM_OC=NUM_OC'
+      'ID_FUNCIONARIO=ID_FUNCIONARIO'
+      'ENTREGUE=ENTREGUE'
+      'CONCLUIDO=CONCLUIDO'
+      'DTCONCLUIDO=DTCONCLUIDO'
+      'FILIAL=FILIAL'
+      'NOME_CLIENTE=NOME_CLIENTE'
+      'SOLICITANTE_NOME=SOLICITANTE_NOME'
+      'FATURADO=FATURADO'
+      'VLR_RESTANTE=VLR_RESTANTE'
+      'VLR_TOTAL=VLR_TOTAL'
+      'VLR_ENTRADA=VLR_ENTRADA'
+      'STATUS=STATUS'
+      'DESC_STATUS=DESC_STATUS')
+    DataSet = cdsOrdemServico_Consulta
+    BCDToCurrency = False
+    Left = 399
+    Top = 8
   end
 end
