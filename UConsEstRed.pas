@@ -36,6 +36,8 @@ type
     qProdutoID: TIntegerField;
     qProdutoREFERENCIA: TStringField;
     qProdutoNOME: TStringField;
+    cdsConsEstQTD_RESERVA: TFloatField;
+    cdsConsEstclSaldo: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
@@ -50,6 +52,7 @@ type
       Shift: TShiftState);
     procedure Edit3KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure cdsConsEstCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     ctConsEst : String;
@@ -179,6 +182,11 @@ procedure TfrmConsEstRed.Edit3KeyDown(Sender: TObject; var Key: Word;
 begin
   if Key = Vk_Return then
     btnConsultarClick(Sender);
+end;
+
+procedure TfrmConsEstRed.cdsConsEstCalcFields(DataSet: TDataSet);
+begin
+  cdsConsEstclSaldo.AsFloat := StrToFloat(FormatFloat('0.0000',cdsConsEstQTD.AsFloat - cdsConsEstQTD_RESERVA.AsFloat));
 end;
 
 end.

@@ -157,7 +157,7 @@ object frmConsEstRed: TfrmConsEstRed
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 8
+    ColCount = 10
     RowCount = 2
     Columns = <
       item
@@ -233,6 +233,33 @@ object frmConsEstRed: TfrmConsEstRed
       end
       item
         Expanded = False
+        FieldName = 'QTD_RESERVA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Qtd. Reserva'
+        Title.Color = 10813256
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Verdana'
+        Title.Font.Style = []
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'clSaldo'
+        Title.Alignment = taCenter
+        Title.Caption = 'Saldo'
+        Title.Color = 10813256
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -12
+        Title.Font.Name = 'Verdana'
+        Title.Font.Style = []
+        Width = 86
+        Visible = True
+      end
+      item
+        Expanded = False
         FieldName = 'TAMANHO'
         Title.Alignment = taCenter
         Title.Caption = 'Tam.'
@@ -265,14 +292,17 @@ object frmConsEstRed: TfrmConsEstRed
     CommandText = 
       'SELECT E.id_produto, E.id_cor, E.tamanho, '#13#10'cast(sum(E.QTD) AS F' +
       'loat) QTD, P.NOME NOME_PRODUTO, P.REFERENCIA,'#13#10'C.NOME NOME_COMBI' +
-      'NACAO,'#13#10'case'#13#10'  when p.tipo_reg = '#39'P'#39' then '#39'Produto'#39#13#10'  when p.t' +
-      'ipo_reg = '#39'M'#39' then '#39'Material'#39#13#10'  when p.tipo_reg = '#39'C'#39' then '#39'Mat' +
-      '.Consumo'#39#13#10'  when p.tipo_reg = '#39'S'#39' then '#39'Semi Acabado'#39#13#10'  when p' +
-      '.tipo_reg = '#39'I'#39' then '#39'Imobilizado'#39#13#10'  else '#39#39#13#10'  end DESC_TIPO'#13#10 +
-      'FROM ESTOQUE_ATUAL E'#13#10'INNER JOIN PRODUTO P'#13#10'ON E.ID_PRODUTO = P.' +
-      'id'#13#10'LEFT JOIN COMBINACAO C'#13#10'ON E.ID_COR = C.ID'#13#10'GROUP BY E.id_pr' +
-      'oduto, E.id_cor, E.tamanho, E.num_lote_controle, P.NOME ,'#13#10'P.REF' +
-      'ERENCIA, C.NOME, P.TIPO_REG'#13#10#13#10#13#10#13#10#13#10
+      'NACAO, SUM(coalesce(R.qtd,0)) QTD_RESERVA,'#13#10'case'#13#10'  when p.tipo_' +
+      'reg = '#39'P'#39' then '#39'Produto'#39#13#10'  when p.tipo_reg = '#39'M'#39' then '#39'Material' +
+      #39#13#10'  when p.tipo_reg = '#39'C'#39' then '#39'Mat.Consumo'#39#13#10'  when p.tipo_reg' +
+      ' = '#39'S'#39' then '#39'Semi Acabado'#39#13#10'  when p.tipo_reg = '#39'I'#39' then '#39'Imobil' +
+      'izado'#39#13#10'  else '#39#39#13#10'  end DESC_TIPO'#13#10'FROM ESTOQUE_ATUAL E'#13#10'INNER ' +
+      'JOIN PRODUTO P'#13#10'ON E.ID_PRODUTO = P.id'#13#10'LEFT JOIN COMBINACAO C'#13#10 +
+      'ON E.ID_COR = C.ID'#13#10'LEFT JOIN ESTOQUE_RES R'#13#10'ON E.FILIAL = R.fil' +
+      'ial'#13#10'AND E.id_produto = R.ID_PRODUTO'#13#10'AND E.id_cor = R.ID_COR'#13#10'A' +
+      'ND E.tamanho = R.TAMANHO'#13#10'GROUP BY E.id_produto, E.id_cor, E.tam' +
+      'anho, E.num_lote_controle, P.NOME ,'#13#10'P.REFERENCIA, C.NOME, P.TIP' +
+      'O_REG'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -288,6 +318,7 @@ object frmConsEstRed: TfrmConsEstRed
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsEst'
+    OnCalcFields = cdsConsEstCalcFields
     Left = 269
     Top = 162
     object cdsConsEstID_PRODUTO: TIntegerField
@@ -323,6 +354,16 @@ object frmConsEstRed: TfrmConsEstRed
       Required = True
       FixedChar = True
       Size = 12
+    end
+    object cdsConsEstQTD_RESERVA: TFloatField
+      FieldName = 'QTD_RESERVA'
+      DisplayFormat = '0.000##'
+    end
+    object cdsConsEstclSaldo: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'clSaldo'
+      DisplayFormat = '0.000##'
+      Calculated = True
     end
   end
   object dsConsEst: TDataSource
