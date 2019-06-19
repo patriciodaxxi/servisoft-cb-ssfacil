@@ -21,7 +21,7 @@ type
     cdsVersaoSCRIPT: TBlobField;
     sqVersaoAtual: TSQLQuery;
     sqVersaoAtualVERSAO_BANCO: TIntegerField;
-    scoLiberacao: TSQLConnection;
+    scoLiberacao: TSQLConnection;                                                  
     sqEmpresa: TSQLQuery;                                                                
     sqDataLiberacao: TSQLQuery;
     sqEmpresaCNPJ_CPF: TStringField;

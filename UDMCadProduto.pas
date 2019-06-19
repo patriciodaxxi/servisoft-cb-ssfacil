@@ -1951,6 +1951,10 @@ type
     cdsProduto_CADATA: TDateField;
     qParametros_ProdUSA_CA_HIST: TStringField;
     cdsMaterialID_MATERIAL_CRU: TIntegerField;
+    sdsProdutoTIPO_ALGODAO: TStringField;
+    cdsProdutoTIPO_ALGODAO: TStringField;
+    cdsProduto_ConsultaTIPO_MAT: TStringField;
+    cdsProduto_ConsultaTIPO_ALGODAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2776,11 +2780,18 @@ begin
       sds.Open;
       if (sds.FieldByName('CONTADOR').AsInteger > 0) then
         vMsgErro := '*** Esse produto não pode ser inativado, possui Pedido(s) em aberto!';
+
     finally
       FreeAndNil(sds);
     end;
   end;
 
+  //19/06/2019 Controlar se o tipo do algodão é Cru ou na Cor
+  if (cdsProdutoTIPO_REG.AsString = 'S') and (qParametros_LoteLOTE_TEXTIL.AsString = 'S') and
+     (cdsProdutoTIPO_MAT.AsString = 'A') and 
+     (cdsProdutoTIPO_ALGODAO.AsString <> 'C') and (cdsProdutoTIPO_ALGODAO.AsString <> 'N') then
+    vMsgErro := vMsgErro + #13 + '*** Tipo do Fio não foi informado!';
+  //************************
   if trim(cdsProdutoNOME.AsString) = '' then
     vMsgErro := vMsgErro + #13 + '*** Nome não informado!';
   if trim(cdsProdutoUNIDADE.AsString) = '' then
@@ -2902,6 +2913,11 @@ begin
   finally
     FreeAndNil(sds);
   end;
+
+  //18/06/2019
+  if (qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (cdsProdutoTIPO_REG.AsString = 'S') and
+     ((cdsProdutoTIPO_MAT.AsString = 'A') and (cdsProdutoTIPO_ALGODAO.AsString <> 'C') and (cdsProdutoTIPO_ALGODAO.AsString <> 'N')) then
+    vMsgErro := vMsgErro + #13 + '*** Tipo do Fio não informado quando o Produto é Algodão (Cru ou na Cor)!';
 
   if vMsgErro <> '' then
     exit;
