@@ -21,7 +21,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 739
+    Width = 747
     Height = 159
     Align = alTop
     Color = clMoneyGreen
@@ -154,7 +154,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
     object pnlTipo2: TPanel
       Left = 1
       Top = 60
-      Width = 737
+      Width = 745
       Height = 45
       Align = alTop
       BevelOuter = bvNone
@@ -291,7 +291,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
     object pnlTipo1: TPanel
       Left = 1
       Top = 1
-      Width = 737
+      Width = 745
       Height = 38
       Align = alTop
       BevelOuter = bvNone
@@ -430,7 +430,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
     object Panel4: TPanel
       Left = 1
       Top = 39
-      Width = 737
+      Width = 745
       Height = 21
       Align = alTop
       BevelOuter = bvNone
@@ -459,14 +459,14 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 551
-    Width = 739
+    Top = 559
+    Width = 747
     Height = 34
     Align = alBottom
     Color = 8404992
     TabOrder = 4
     object BitBtn4: TBitBtn
-      Left = 377
+      Left = 374
       Top = 5
       Width = 98
       Height = 25
@@ -481,7 +481,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
       OnClick = BitBtn4Click
     end
     object BitBtn1: TBitBtn
-      Left = 278
+      Left = 275
       Top = 5
       Width = 93
       Height = 25
@@ -499,8 +499,8 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   object Panel2: TPanel
     Left = 0
     Top = 223
-    Width = 739
-    Height = 328
+    Width = 747
+    Height = 336
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 3
@@ -634,8 +634,8 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
     end
     object RzPageControl1: TRzPageControl
       Left = 1
-      Top = 163
-      Width = 737
+      Top = 171
+      Width = 745
       Height = 164
       ActivePage = TabSheet1
       ActivePageDefault = TabSheet1
@@ -755,10 +755,10 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
       end
     end
     object gbxVendedor: TRzGroupBox
-      Left = 551
+      Left = 559
       Top = 1
       Width = 187
-      Height = 162
+      Height = 170
       Align = alRight
       BorderColor = clNavy
       BorderInner = fsButtonUp
@@ -1132,7 +1132,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   object pnlMaterial: TPanel
     Left = 0
     Top = 159
-    Width = 739
+    Width = 747
     Height = 32
     Align = alTop
     Color = clMoneyGreen
@@ -1162,7 +1162,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   object pnlTipoOrcamento: TPanel
     Left = 0
     Top = 191
-    Width = 739
+    Width = 747
     Height = 32
     Align = alTop
     Color = clMoneyGreen

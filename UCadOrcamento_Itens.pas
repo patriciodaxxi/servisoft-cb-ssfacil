@@ -163,8 +163,8 @@ type
     vQtd_Material: Integer;
     vState: String;
     vID_Produto_Ant: Integer;
-    vVlrDesc_Ant : Real;
-    vVlrProd_Ant : Real;
+    vVlrDesc_Ant: Real;
+    vVlrProd_Ant: Real;
     vQtd_Prod_Ant: Real;
 
     procedure prc_Buscar_Imposto(Auxiliar, Nome: String);
@@ -180,7 +180,7 @@ type
 
     function fnc_Verificar_Produto(CodProduto: Integer): Boolean;
     function fnc_Verifica_SubstTributaria: Boolean;
-    function fnc_Estoque_OK(ID_Produto, ID_Cor: Integer ; Tamanho: String ; Qtd: Real): Boolean;
+    function fnc_Estoque_OK(ID_Produto, ID_Cor: Integer; Tamanho: String; Qtd: Real): Boolean;
 
   public
     { Public declarations }
@@ -195,8 +195,7 @@ var
 
 implementation
 
-uses rsDBUtils, USel_Produto, uUtilPadrao, UDMUtil, USel_Unidade,
-  uCalculo_Pedido, USenha;
+uses rsDBUtils, USel_Produto, uUtilPadrao, UDMUtil, USel_Unidade, uCalculo_Pedido, USenha;
 
 {$R *.dfm}
 
@@ -291,11 +290,6 @@ begin
   gbxDesconto.Visible := (fDMCadPedido.qParametros_PedUSA_DESC_VAREJO.AsString = 'S');
   if fDMCadPedido.qParametros_PedUSA_DESC_VAREJO.AsString = 'S' then
     BitBtn3.Caption := 'Impostos';
-  //04/04/2018
-  {if fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger <= 0 then
-    DBEdit1.Visible := False
-  else
-    DBEdit1.Visible := (fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger = fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger);}
   Panel4.Visible := (((fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger = fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger)
                       and (fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger > 0)) or (fDMCadPedido.qParametros_PedPERMITE_ALT_NOMEPROD.AsString = 'S'));
 end;
@@ -620,7 +614,7 @@ procedure TfrmCadOrcamento_Itens.BitBtn1Click(Sender: TObject);
 var
   vFlagErro: Boolean;
   vEditar: Boolean;
-  vAux : Real;
+  vAux: Real;
   vQtdAux: Real;
 begin
   if fnc_Erro then
@@ -660,12 +654,18 @@ begin
     if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat)) > 0 then
       fDMCadPedido.cdsPedidoTIPO_DESCONTO.AsString := 'I';
     //15/02/2017
-    if (fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger > 0) and (fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger = fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger) then
+    if (fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger > 0) and
+       (fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger = fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger) then
     else
     begin
       if trim(fDMCadPedido.qParametros_PedPERMITE_ALT_NOMEPROD.AsString) <> 'S' then
         if (trim(fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString) = '')  then
-          fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString;
+          fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString
+        else
+        begin
+          if vCodProdutoAnt <> fDMCadPedido.cdsProdutoID.AsInteger then
+            fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString
+        end;
       if (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') and (fDMCadPedido.cdsPedido_Item_Tipo.RecordCount > 0) then
         fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString + ' ' + fDMCadPedido.cdsPedido_Item_TipoCOMPLEMENTO_NOME.AsString;
     end;
@@ -679,7 +679,7 @@ begin
       fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime := fDMCadPedido.cdsPedidoDTENTREGA.AsDateTime;
     fDMCadPedido.cdsPedido_ItensNCM.AsString := fDMCadPedido.cdsTab_NCMNCM.AsString;
 
-    fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat  := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
+    fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
 
     if fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger <= 0 then                                          
     begin
@@ -782,8 +782,8 @@ end;
 function TfrmCadOrcamento_Itens.fnc_Erro: Boolean;
 var
   vMsgErro: String;
-  vAux : Real;
-  vVlrTotalAux : Real;
+  vAux: Real;
+  vVlrTotalAux: Real;
 begin
   //Verificação de erros para não deixar gravar o item
   Result   := True;
@@ -887,11 +887,6 @@ begin
   if trim(RxDBLookupCombo8.Text) <> '' then
     vQtdAux := fnc_Buscar_Estoque(RxDBLookupCombo8.KeyValue,vID_LocalAux,0);
   lblEstoque.Caption := FormatFloat('0.####',vQtdAux);
-  //04/04/2018
-  {if RxDBLookupCombo4.Text = '' then
-    DBEdit1.Visible := False
-  else
-    DBEdit1.Visible := (RxDBLookupCombo4.KeyValue = fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger);}
   Panel4.Visible := (((fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger = fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger)
                       and (fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger > 0)) or (fDMCadPedido.qParametros_PedPERMITE_ALT_NOMEPROD.AsString = 'S'));
 end;
@@ -1165,7 +1160,6 @@ begin
     end;
   end;
 end;
-
 
 procedure TfrmCadOrcamento_Itens.RxDBLookupCombo8Exit(Sender: TObject);
 begin
@@ -1483,7 +1477,7 @@ end;
 
 procedure TfrmCadOrcamento_Itens.dbedtPercDescExit(Sender: TObject);
 var
-  vAux : Real;
+  vAux: Real;
 begin
   if (fDMCadPedido.qParametros_ProdUSA_DESC_MAXIMO.AsString = 'S') and
      (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat)) > StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoPERC_DESC_MAX.AsFloat))) then
@@ -1508,7 +1502,7 @@ end;
 
 procedure TfrmCadOrcamento_Itens.dbedtVlrDescExit(Sender: TObject);
 var
-  vAux : Real;
+  vAux: Real;
 begin
   if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat)) <> StrToFloat(FormatFloat('0.00',vVlrDesc_Ant)) then
   begin
@@ -1533,7 +1527,7 @@ end;
 
 procedure TfrmCadOrcamento_Itens.dbedtVlrProdExit(Sender: TObject);
 var
-  vAux, vAux2 : Real;
+  vAux, vAux2: Real;
 begin
   if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat)) <> StrToFloat(FormatFloat('0.00',vVlrProd_Ant)) then
   begin
