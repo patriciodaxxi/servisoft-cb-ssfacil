@@ -815,7 +815,8 @@ begin
   //24/05/2018  IF para informar se usa ou não a tabela de preço no pedido
   if ((fDMCadPedido.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger > 0)) or (fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0) then
   begin
-    DMUtil := TDMUtil.Create(Self);
+    //19/06/2019
+    //DMUtil := TDMUtil.Create(Self);
     if (fDMCadPedido.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger > 0) then
     begin
       if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
@@ -831,7 +832,8 @@ begin
       else
         vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,fDMCadPedido.cdsPedido_ItensENCERADO.AsString);
     end;
-    FreeAndNil(DMUtil);
+    //19/06/2019
+    //FreeAndNil(DMUtil);
   end
   else
   if ((fDMCadPedido.cdsPedido_ItensENCERADO.AsString = 'S') and (fDMCadPedido.qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S'))
