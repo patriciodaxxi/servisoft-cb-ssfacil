@@ -69,10 +69,7 @@ begin
   end;
 
   if (fDMCupomFiscal.cdsCupomFiscalTIPO_DESCONTO.AsString = 'N') and (GeraDupl = 'S') then
-  begin
-    vVlrAux := StrToCurr(FormatCurr('0.00',vVlrTotalItem));
-    vVlrDescontoItem := StrToCurr(FormatCurr('0.00',fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat));
-  end
+   vVlrDescontoItem := StrToCurr(FormatCurr('0.00',fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat))
   else
   if (fDMCupomFiscal.cdsCupomFiscalTIPO_DESCONTO.AsString <> 'N') and (StrToCurr(FormatFloat('0.000',PercDescontoItem)) > 0) then
     vVlrDescontoItem := StrToCurr(FormatCurr('0.00',vVlrTotalItem * PercDescontoItem / 100))
@@ -98,14 +95,14 @@ begin
   //Cálculo tributos federais, estaduais, e municipais cfe. disposto na lei 12.741/12
   prc_Calcular_Tributos_Transparencia(fDMCupomFiscal);
 
-  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency +
-                                                                     fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
-                                                              //     + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
-  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency +
-                                                                     fDMCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
-                                                                     fDMCupomFiscal.cdsCupom_ItensQTD.AsCurrency -
-                                                                     fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat));
+  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency  := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency +
+                                                                   fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
 
+  if (StrToCurr(FormatCurr('0.0000',Qtd)) > 0) and (StrToCurr(FormatCurr('0.0000000000',fDMCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency)) > 0) then
+    vVlrTotalItem := StrToCurr(FormatCurr('0.00',Qtd * fDMCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency));
+
+  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsString := FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency +
+                                                                    vVlrTotalItem - fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat);
   //26/02/2019
   prc_Calcular_ST_Ret(fDMCupomFiscal);
   prc_Calcular_ICMS_Efet(fDMCupomFiscal);
