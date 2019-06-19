@@ -787,6 +787,8 @@ type
     btnCA: TNxButton;
     lblEspessura: TLabel;
     dedtEspessura: TDBEdit;
+    RxDBComboBox12: TRxDBComboBox;
+    Label254: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -993,6 +995,7 @@ type
     procedure btnAtualizar_ProcClick(Sender: TObject);
     procedure btnAjustarProcessoClick(Sender: TObject);
     procedure btnCAClick(Sender: TObject);
+    procedure RxDBComboBox10Change(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -2367,6 +2370,11 @@ var
 begin
   if RzPageControl1.ActivePage = TS_Cadastro then
   begin
+    if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) or
+          (fDMCadProduto.cdsProduto_ConsultaID.AsInteger <= 0) then
+      exit;
+
+    prc_Posiciona_Produto;
     vEstoqueLoteTotal := 0;
     prc_Consultar_Estoque_Lote(fDMCadProduto.cdsProduto_ConsultaID.AsInteger);
     if (fDMCadProduto.cdsProduto_Consulta.Active) and not(fDMCadProduto.cdsProduto_Consulta.IsEmpty) then
@@ -2382,7 +2390,6 @@ begin
       TS_Cartonagem.TabVisible   := (fDMCadProduto.qParametrosEMPRESA_CARTONAGEM.AsString = 'S');
       TS_Ativo.TabVisible        := ((fDMCadProduto.qParametrosUSA_SPED.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaSPED_TIPO_ITEM.AsString = '08')) ;
       RZPageControl3.ActivePage  := TS_Fiscal;
-      TS_Balanca.TabVisible      := (fDMCadProduto.cdsProdutoUSA_NA_BALANCA.AsString = 'S');
       //Cleomar 18/12/2018
       //TS_Maquina.TabVisible      := (fDMCadProduto.qParametros_ProdUSA_MAQUINA.AsString = 'S');
       //TS_Ficha_Textil.TabVisible := (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
@@ -2397,6 +2404,10 @@ begin
       else
       if TS_Ficha_Tear.TabVisible then
         RzPageControl6.ActivePage := TS_Ficha_Tear;
+
+      Label254.Visible       := (fDMCadProduto.cdsProdutoTIPO_MAT.AsString = 'A');
+      RxDBComboBox12.Visible := (fDMCadProduto.cdsProdutoTIPO_MAT.AsString = 'A');
+
     end;
     DBEdit1Change(Sender);
     edtCod_EnqIPI.Clear;
@@ -2416,7 +2427,7 @@ begin
       if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) or
             (fDMCadProduto.cdsProduto_ConsultaID.AsInteger <= 0) then
         exit;
-      prc_Posiciona_Produto;
+      TS_Balanca.TabVisible      := (fDMCadProduto.cdsProdutoUSA_NA_BALANCA.AsString = 'S');
       if btnRecalcular_Mat.Enabled then
         ceVlr_Total_Mat.Value := fDMCadProduto.fnc_Calcular_Mat;
       RZPageControl3.ActivePage := TS_Fiscal;
@@ -6046,6 +6057,12 @@ begin
   frmCadProduto_CA.fDMCadProduto := fDMCadProduto;
   frmCadProduto_CA.ShowModal;
   FreeAndNil(frmCadProduto_CA);
+end;
+
+procedure TfrmCadProduto.RxDBComboBox10Change(Sender: TObject);
+begin
+  Label254.Visible       := (RxDBComboBox10.ItemIndex = 0);
+  RxDBComboBox12.Visible := (RxDBComboBox10.ItemIndex = 0);
 end;
 
 end.

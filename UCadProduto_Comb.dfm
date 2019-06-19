@@ -777,6 +777,7 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'ID_MATERIAL'
         Title.Alignment = taCenter
@@ -813,6 +814,7 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'UNIDADE'
         Title.Alignment = taCenter
@@ -822,6 +824,7 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'IMP_TALAO'
         Title.Alignment = taCenter
