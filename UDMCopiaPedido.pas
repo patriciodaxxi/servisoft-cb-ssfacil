@@ -456,6 +456,8 @@ type
     cdsPedido_ItensDIFERENCA_ICMS: TStringField;
     cdsPedido_ItensCAIXINHA: TStringField;
     cdsPedido_ItensBASE_IPI: TFloatField;
+    sdsPedido_Item_TipoESPESSURA: TFloatField;
+    cdsPedido_Item_TipoESPESSURA: TFloatField;
     procedure dspPedidoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
       UpdateKind: TUpdateKind; var Response: TResolverResponse);

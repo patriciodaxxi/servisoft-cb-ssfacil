@@ -51,6 +51,7 @@ type
     cdsChapaVLR_UNITARIO_ITEM: TFloatField;
     cdsChapaVLR_TOTAL_ITEM: TFloatField;
     cdsChapaNOMEPRODUTO: TStringField;
+    cdsChapaESPESSURA: TFloatField;
     procedure btnConsultarClick(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);

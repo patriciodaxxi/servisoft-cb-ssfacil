@@ -1520,6 +1520,9 @@ object DMCopiaPedido: TDMCopiaPedido
     object sdsPedido_Item_TipoID_CHAPA: TIntegerField
       FieldName = 'ID_CHAPA'
     end
+    object sdsPedido_Item_TipoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
   end
   object cdsPedido_Item_Tipo: TClientDataSet
     Aggregates = <>
@@ -1613,6 +1616,9 @@ object DMCopiaPedido: TDMCopiaPedido
     end
     object cdsPedido_Item_TipoID_CHAPA: TIntegerField
       FieldName = 'ID_CHAPA'
+    end
+    object cdsPedido_Item_TipoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
     end
   end
   object dsPedido_Item_Tipo: TDataSource
