@@ -1063,6 +1063,7 @@ object DMCadPedido: TDMCadPedido
   object cdsPedido_Consulta: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
+    PacketRecords = 30
     Params = <>
     ProviderName = 'dspPedido_Consulta'
     Left = 248

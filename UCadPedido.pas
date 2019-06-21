@@ -849,6 +849,9 @@ begin
   //lblTabPreco.Visible  := (fDMCadPedido.cdsParametrosUSA_TAB_PRECO.AsString = 'S');
   //lblTabPreco.Caption  := '';
 
+  if (lblNaoMostrarPreco.Visible) or (fDMCadPedido.qParametros_UsuarioMOSTRAR_TOTAL_PEDIDO.AsString <> 'S') then
+    pnlTotal.Visible := False;
+
   btnTab_Preco.Visible := (fDMCadPedido.cdsParametrosUSA_TAB_PRECO.AsString = 'S') ;
 
   if vNum_Pedido_Pos > 0 then
@@ -871,6 +874,7 @@ begin
     btnConsultarClick(Sender);
     addLog('Fim Consultar Click','Tempo_Execucao.txt');
   end;
+
   NxDatePicker2.Date := Date;
   vNum_Pedido_Pos := 0;
 
@@ -1027,8 +1031,6 @@ begin
   //gbxVlr_Adiantado.Visible := (fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S');
   Label64.Visible := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
   Label65.Visible := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
-  if (lblNaoMostrarPreco.Visible) or (fDMCadPedido.qParametros_UsuarioMOSTRAR_TOTAL_PEDIDO.AsString <> 'S') then
-    pnlTotal.Visible := False;
   Label56.Visible       := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
   NxDatePicker3.Visible := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
   Label60.Visible       := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
@@ -3627,6 +3629,8 @@ procedure TfrmCadPedido.btnRecalcularClick(Sender: TObject);
 var
   vTotal, vPendente: Real;
 begin
+  if not pnlTotal.Visible then
+    exit;
   SMDBGrid1.DisableScroll;
   vTotal    := 0;
   vPendente := 0;
