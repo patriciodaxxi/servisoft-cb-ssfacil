@@ -1,6 +1,6 @@
 object frmCadFilial: TfrmCadFilial
-  Left = 280
-  Top = 35
+  Left = 111
+  Top = 36
   Width = 1102
   Height = 629
   Caption = 'Cadastro de Filial (Empresa)'
@@ -2607,8 +2607,8 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'Enviar NFSe pelo ACBR'
             DataSource = DMCadFilial.dsFilial
             TabOrder = 25
-            ValueChecked = 'True'
-            ValueUnchecked = 'False'
+            ValueChecked = 'A'
+            ValueUnchecked = 'N'
           end
         end
         object TS_SPED: TRzTabSheet
