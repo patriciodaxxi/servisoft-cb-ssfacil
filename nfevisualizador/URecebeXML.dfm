@@ -1,6 +1,6 @@
 object frmRecebeXML: TfrmRecebeXML
-  Left = 178
-  Top = 37
+  Left = 127
+  Top = 0
   Width = 1053
   Height = 706
   BorderWidth = 5

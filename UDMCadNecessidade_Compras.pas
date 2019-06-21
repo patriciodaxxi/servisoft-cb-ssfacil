@@ -408,6 +408,7 @@ type
     cdsLote_MatPRECO_CUSTO_COR: TFloatField;
     sdsLoteNOME_MODELO: TStringField;
     cdsLoteNOME_MODELO: TStringField;
+    qParametros_LoteGERAR_SETOR_MAT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNecessidade_ComprasUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

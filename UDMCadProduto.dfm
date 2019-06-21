@@ -4858,7 +4858,7 @@ object dmCadProduto: TdmCadProduto
   object cdsProduto_Comb_Mat: TClientDataSet
     Aggregates = <>
     DataSetField = cdsProduto_CombsdsProduto_Comb_Mat
-    IndexFieldNames = 'ID;ID_SETOR;ID_POSICAO'
+    IndexFieldNames = 'ID;ITEM;ITEM_MAT'
     Params = <>
     BeforePost = cdsProduto_Comb_MatBeforePost
     OnCalcFields = cdsProduto_Comb_MatCalcFields

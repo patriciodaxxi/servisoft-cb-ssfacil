@@ -686,7 +686,7 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
         WidthOfIndicator = 13
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 28
+        ColCount = 29
         RowCount = 2
         Columns = <
           item
@@ -927,6 +927,13 @@ object frmGerar_Necessidade_Compras: TfrmGerar_Necessidade_Compras
             Expanded = False
             FieldName = 'ID_Cor'
             ReadOnly = True
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome_Setor'
+            Title.Alignment = taCenter
+            Title.Caption = 'Setor'
             Visible = True
           end>
       end
