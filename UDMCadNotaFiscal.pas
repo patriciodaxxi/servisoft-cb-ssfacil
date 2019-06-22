@@ -3068,6 +3068,9 @@ type
     qFilial_RelatoriosCAMINHO: TStringField;
     qFilial_RelatoriosPOSICAO: TSmallintField;
     qParametros_GeralENDGRIDS: TStringField;
+    qParametros_Lote: TSQLQuery;
+    qParametros_LoteOPCAO_ESTOQUE_SEMI: TStringField;
+    qParametros_LoteLOTE_TEXTIL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
@@ -3532,6 +3535,7 @@ begin
   qParametros_OC.Open;
   qParametros_NTE.Open;
   qParametros_Custo.Open;
+  qParametros_Lote.Open;
 
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;

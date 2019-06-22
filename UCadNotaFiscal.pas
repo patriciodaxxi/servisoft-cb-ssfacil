@@ -2330,7 +2330,8 @@ end;
 
 procedure TfrmCadNotaFiscal.RxDBLookupCombo3Enter(Sender: TObject);
 begin
-  fDMCadNotaFiscal.cdsCliente.IndexFieldNames := 'NOME';
+  if fDMCadNotaFiscal.cdsCliente.IndexFieldNames <> 'NOME' then
+    fDMCadNotaFiscal.cdsCliente.IndexFieldNames := 'NOME';
   StaticText2.Visible := True;
   RxDBLookupCombo3.Tag := 0;
   if RxDBLookupCombo3.Text <> '' then

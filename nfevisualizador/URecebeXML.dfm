@@ -24,7 +24,7 @@ object frmRecebeXML: TfrmRecebeXML
     Top = 146
     Width = 1035
     Height = 519
-    ActivePage = tsDuplicatasDeducoes
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -4299,55 +4299,46 @@ object frmRecebeXML: TfrmRecebeXML
           item
             Expanded = False
             FieldName = 'Id'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'tpAmb'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'verAplic'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'chNFe'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'dhRecbto'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nProt'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'digVal'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'cStat'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'xMotivo'
-            Width = 64
             Visible = True
           end>
       end

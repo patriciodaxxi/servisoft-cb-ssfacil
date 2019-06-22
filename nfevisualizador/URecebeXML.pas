@@ -602,7 +602,9 @@ begin
       fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
       fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+
       
+
       prc_Monta_Grupo('N');
       prc_Monta_ContaOrc('N');
     end
@@ -719,6 +721,12 @@ begin
         fDMRecebeXML.mItensNotaItem_Unidade.AsInteger := fDMRecebeXML.cdsProduto_FornITEM_UNIDADE.AsInteger;
     end;
     fDMRecebeXML.mItensNotaQtdPacoteInterno.AsFloat := StrToFloat(FormatFloat('0.0000',fDMRecebeXML.mItensNotaQtdPacote.AsFloat));
+
+    //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+    if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') and
+       (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+      fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+    //***************************
   end;
 end;
 
@@ -1295,6 +1303,16 @@ begin
   end;
   //***************
 
+  //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+  if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and ((fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0))then
+  begin
+    if (fDMRecebeXML.cdsProdutoID.AsInteger <> fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger) then
+      fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger, ([LocaseInsensitive]));
+    if (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') and (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+      fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+  end;
+  //***************************
+
   fDMRecebeXML.mItensNota.Post;
 end;
 
@@ -1601,6 +1619,15 @@ begin
         fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
         fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
         fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+
+        //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+        if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and ((fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0))then
+        begin
+          if (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') and (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+            fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+        end;
+        //***************************
+
         prc_Monta_Grupo('N');
         prc_Monta_ContaOrc('N');
       end;
@@ -1960,6 +1987,15 @@ begin
         fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
         fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
         fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+
+        //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+        if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and ((fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0))then
+        begin
+          if (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') and (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+            fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+        end;
+        //***************************
+
         prc_Monta_Grupo('N');
         prc_Monta_ContaOrc('N');
         fDMRecebeXML.mItensNota.Post;
@@ -2209,7 +2245,11 @@ begin
     fDMRecebeXML.cdsProdutoUSA_CLIQ.AsString := 'N';
   //***************
   fDMRecebeXML.cdsProdutoESTOQUE.AsString := 'S';
-  if fDMRecebeXML.mItensNotaGerar_Estoque.AsString <> 'S' then
+  //22/06/2019
+  if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') then
+    fDMRecebeXML.cdsProdutoESTOQUE.AsString := 'S'
+  else
+  if (fDMRecebeXML.mItensNotaGerar_Estoque.AsString <> 'S') then
     fDMRecebeXML.cdsProdutoESTOQUE.AsString := 'N';
     
   fDMRecebeXML.cdsProduto.Post;
@@ -4102,6 +4142,15 @@ begin
     end
   end;
   //***************
+  //22/06/2019
+  if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0) and
+    (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+  begin
+    fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger, ([LocaseInsensitive]));
+    if (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') then
+      fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+  end;
+  //*****************
 end;
 
 procedure TfrmRecebeXML.prc_Ajuste_Prod_Pela_OC(PeloXML: Boolean);

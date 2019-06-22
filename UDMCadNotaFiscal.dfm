@@ -15192,4 +15192,24 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'POSICAO'
     end
   end
+  object qParametros_Lote: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select l.opcao_estoque_semi, l.lote_textil'
+      'from parametros_lote l')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1079
+    Top = 146
+    object qParametros_LoteOPCAO_ESTOQUE_SEMI: TStringField
+      FieldName = 'OPCAO_ESTOQUE_SEMI'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_LoteLOTE_TEXTIL: TStringField
+      FieldName = 'LOTE_TEXTIL'
+      FixedChar = True
+      Size = 1
+    end
+  end
 end

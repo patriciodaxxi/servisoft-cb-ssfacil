@@ -329,6 +329,12 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fnc_Estoque_Tipo_Mat(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,'E');
   //***************
 
+  //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+  if (fDMCadNotaFiscal.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'S') and
+     (fDMCadNotaFiscal.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
+  //***************************
+
 end;
 
 procedure TfrmCadNotaEntrada_Itens.DBEdit2Exit(Sender: TObject);

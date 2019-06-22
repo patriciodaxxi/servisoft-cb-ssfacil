@@ -267,6 +267,7 @@ type
       Shift: TShiftState);
     procedure RxDBlkContaOrcKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure RxDBLookupCombo4Exit(Sender: TObject);
   private
     { Private declarations }
     ffrmCadProduto: TfrmCadProduto;
@@ -1142,6 +1143,11 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fnc_Estoque_Tipo_Mat(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString);
   //***************
 
+  //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+  if (fDMCadNotaFiscal.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'S') and
+     (fDMCadNotaFiscal.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
+  //***************************
 end;
 
 procedure TfrmCadNotaFiscal_Itens.DBEdit2Exit(Sender: TObject);
@@ -1839,7 +1845,8 @@ end;
 
 procedure TfrmCadNotaFiscal_Itens.RxDBLookupCombo4Enter(Sender: TObject);
 begin
-  fDMCadNotaFiscal.cdsProduto.IndexFieldNames := 'REFERENCIA';
+  if fDMCadNotaFiscal.cdsProduto.IndexFieldNames <> 'REFERENCIA' then
+    fDMCadNotaFiscal.cdsProduto.IndexFieldNames := 'REFERENCIA';
   prc_Mover_Finalidade;
 end;
 
@@ -3327,6 +3334,17 @@ begin
     frmSel_ContaOrc.ShowModal;
     if vID_ContaOrcamento_Pos > 0 then
       RxDBlkContaOrc.KeyValue:= vID_ContaOrcamento_Pos;
+  end;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.RxDBLookupCombo4Exit(Sender: TObject);
+begin
+  if trim(RxDBLookupCombo4.Text) <> '' then
+  begin
+    if rxdbOperacao.Visible then
+      rxdbOperacao.SetFocus
+    else
+      RxDBLookupCombo1.SetFocus;
   end;
 end;
 

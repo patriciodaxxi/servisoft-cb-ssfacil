@@ -365,6 +365,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         TabOrder = 1
         OnChange = RxDBLookupCombo4Change
         OnEnter = RxDBLookupCombo4Enter
+        OnExit = RxDBLookupCombo4Exit
         OnKeyDown = RxDBLookupCombo4KeyDown
       end
       object rxdbOperacao: TRxDBLookupCombo
