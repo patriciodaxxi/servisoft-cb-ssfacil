@@ -5353,7 +5353,7 @@ object dmCadProduto: TdmCadProduto
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 208
+    Left = 207
     Top = 233
     object sdsProduto_AtelierID: TIntegerField
       FieldName = 'ID'
@@ -6454,6 +6454,7 @@ object dmCadProduto: TdmCadProduto
     end
     object sdsProduto_Comissao_VendNOME: TStringField
       FieldName = 'NOME'
+      ProviderFlags = []
       Size = 60
     end
   end
@@ -6469,8 +6470,8 @@ object dmCadProduto: TdmCadProduto
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     ProviderName = 'dspProduto_Comissao_Vend'
-    Left = 272
-    Top = 317
+    Left = 275
+    Top = 316
     object cdsProduto_Comissao_VendID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -6489,6 +6490,7 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsProduto_Comissao_VendNOME: TStringField
       FieldName = 'NOME'
+      ProviderFlags = []
       Size = 60
     end
   end

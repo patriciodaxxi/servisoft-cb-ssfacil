@@ -65,6 +65,7 @@ begin
     exit;
   vFlagErro := False;
   try
+    fDMCadProduto.cdsProduto_Comissao_VendNOME.AsString := RxDBLookupCombo2.Text;
     fDMCadProduto.cdsProduto_Comissao_Vend.Post;
   except
     on E: exception do
@@ -89,7 +90,6 @@ begin
   if StrToFloat(FormatFloat('0.00', fDMCadProduto.cdsProduto_Comissao_VendPERC_COMISSAO.AsFloat)) <= 0 then
     vMsgErro := vMsgErro + #13 + '*** % Comissão não informada!';
 
-  fDMCadProduto.cdsProduto_Comissao_Vend.Locate('ID_VENDEDOR',RxDBLookupCombo2.Value,([Locaseinsensitive]));
   if vMsgErro <> '' then
   begin
     MessageDlg(vMsgErro, mtError, [mbOk], 0);
