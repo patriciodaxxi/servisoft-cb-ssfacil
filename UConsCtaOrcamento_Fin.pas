@@ -155,7 +155,7 @@ begin
   else
   begin
     prc_Consultar_CCusto_Orcamento;
-    prc_Consultar_Resumo_CCusto;
+//    prc_Consultar_Resumo_CCusto;
   end;
   Label6.Caption := FormatFloat('###,###,###,###,##0.00', fDMConsFinanceiro.vTotal_Rec);
   Label8.Caption := FormatFloat('###,###,###,###,##0.00', fDMConsFinanceiro.vTotal_Desp);
@@ -739,7 +739,7 @@ begin
   case EnumDataRelatorio(NxComboBox2.ItemIndex) of
     tpDataEmissao    : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTEMISSAO',[rfReplaceAll]);
     tpDataVencimento : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTVENCIMENTO',[rfReplaceAll]);
-    tpDataPagamento  : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTULTPAGAMENTO',[rfReplaceAll]);
+    tpDataPagamento  : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTPAGAMENTO',[rfReplaceAll]);
   end;
   case ComboBox1.ItemIndex of
     0: vComando := vComando + ' AND VD.VALOR_PAGO > 0 ';
@@ -752,6 +752,7 @@ begin
     fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('ID_CENTROCUSTO').AsInteger := comboCentroCusto.KeyValue
   else
     fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('ID_CENTROCUSTO').AsInteger := 0;
+  fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('TIPO_HISTORICO').AsString := 'PAG';
   fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMConsFinanceiro.cdsCCustoOrcamento.open;
 end;

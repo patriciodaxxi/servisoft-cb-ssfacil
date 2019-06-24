@@ -2432,9 +2432,10 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'VD.VLR_CONTRATO'#13#10'from VDUPLICATA_CENTROCUSTO VD'#13#10'where VD.DTULTP' +
       'AGAMENTO between :DTINICIAL and :DTFINAL and'#13#10'      ((:ID_CENTRO' +
       'CUSTO = 0) or (VD.ID_CENTROCUSTO = :ID_CENTROCUSTO)) and'#13#10'      ' +
-      'VD.FILIAL = :FILIAL'#13#10'group by VD.CODIGO_GRUPO, VD.CODIGO_GRUPO_S' +
-      'UP, VD.NOME_GRUPO, VD.CONTA_ORCAMENTO, VD.ID_CONTA_ORCAMENTO, VD' +
-      '.NOME_ORCAMENTO, VD.VLR_CONTRATO'
+      'VD.FILIAL = :FILIAL AND (VD.TIPO_HISTORICO = :TIPO_HISTORICO)'#13#10'g' +
+      'roup by VD.CODIGO_GRUPO, VD.CODIGO_GRUPO_SUP, VD.NOME_GRUPO, VD.' +
+      'CONTA_ORCAMENTO, VD.ID_CONTA_ORCAMENTO, VD.NOME_ORCAMENTO, VD.VL' +
+      'R_CONTRATO'
     MaxBlobSize = -1
     Params = <
       item
@@ -2460,6 +2461,11 @@ object DMConsFinanceiro: TDMConsFinanceiro
       item
         DataType = ftInteger
         Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'TIPO_HISTORICO'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
