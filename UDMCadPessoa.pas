@@ -1746,14 +1746,12 @@ begin
     vMsgPessoa := vMsgPessoa + #13 + '*** ID não informado!';
   if trim(cdsPessoaNOME.AsString) = '' then
     vMsgPessoa := vMsgPessoa + #13 + '*** Nome não informado!';
-    
-  if ((cdsPessoaTP_CLIENTE.AsString = 'N')  or (cdsPessoaTP_CLIENTE.AsString = '')) and
-     ((cdsPessoaTP_FORNECEDOR.AsString = 'N') or (cdsPessoaTP_FORNECEDOR.AsString = '')) and
-     ((cdsPessoaTP_TRANSPORTADORA.AsString = 'N') or (cdsPessoaTP_TRANSPORTADORA.AsString = '')) and
-     ((cdsPessoaTP_VENDEDOR.AsString = 'N') or (cdsPessoaTP_VENDEDOR.AsString = '')) and
-     ((cdsPessoaTP_ATELIER.AsString = 'N')  or (cdsPessoaTP_ATELIER.AsString = '')) and
-     ((cdsPessoaTP_ALUNO.AsString = 'N')    or (cdsPessoaTP_ALUNO.AsString = '')) and
-     ((cdsPessoaTP_FUNCIONARIO.AsString = 'N')    or (cdsPessoaTP_FUNCIONARIO.AsString = '')) then
+
+  if (trim(cdsPessoaTP_CLIENTE.AsString) <> 'S') and (trim(cdsPessoaTP_FORNECEDOR.AsString) <> 'S') and
+     (trim(cdsPessoaTP_VENDEDOR.AsString) <> 'S') and (trim(cdsPessoaTP_TRANSPORTADORA.AsString) <> 'S') and
+     (trim(cdsPessoaTP_ATELIER.AsString) <> 'S') and (trim(cdsPessoaTP_ALUNO.AsString) <> 'S') and
+     (trim(cdsPessoaTP_FUNCIONARIO.AsString) <> 'S') and (trim(cdsPessoaTP_PREPOSTO.AsString) <> 'S') and
+     (trim(cdsPessoaTP_EXPORTACAO.AsString) <> 'S') then
     vMsgPessoa := vMsgPessoa + #13 + '*** Não foi selecionado um Tipo de Pessoa!';
   if ((cdsPessoaTP_CLIENTE.AsString = 'S') or (cdsPessoaTP_ALUNO.AsString = 'S')) and (cdsPessoaCLIENTE_ESTOQUE.AsString <> 'S') and (cdsPessoaCODIGO.AsInteger <> 99999)
     and (cdsPessoaCODIGO.AsInteger <> qParametrosID_CLIENTE_CONSUMIDOR.AsInteger) then

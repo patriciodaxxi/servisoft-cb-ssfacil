@@ -1585,6 +1585,13 @@ begin
   if not(fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert]) then
     fDMCadNotaFiscal.cdsNotaFiscal.Edit;
 
+  if fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString = 'E' then
+  begin
+    fDMCadNotaFiscal.cdsNotaFiscalUFEMBEXPORTACAO.Clear;
+    fDMCadNotaFiscal.cdsNotaFiscalLOCALEMBEXPORTACAO.Clear;
+    fDMCadNotaFiscal.cdsNotaFiscalLOCALDESPEXPORTACAO.Clear;
+  end;
+
   if (trim(fDMCadNotaFiscal.cdsNotaFiscalNFEDENEGADA.AsString) = '') or (fDMCadNotaFiscal.cdsNotaFiscalNFEDENEGADA.IsNull) then
     fDMCadNotaFiscal.cdsNotaFiscalNFEDENEGADA.AsString := 'N';
   if (fDMCadNotaFiscal.cdsNotaFiscalID_LOCAL_ESTOQUE.AsInteger <= 0) and (fDMCadNotaFiscal.cdsParametrosUSA_LOCAL_ESTOQUE.AsString <> 'S') then
