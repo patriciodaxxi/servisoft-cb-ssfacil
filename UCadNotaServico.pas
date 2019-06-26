@@ -342,6 +342,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
+    vEnvioACBR : Boolean;
     vTipoNotaAnt: String;
     vID_Cliente_Ant: Integer;
     vID_Natureza_Ant: Integer;
@@ -809,6 +810,7 @@ begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadNotaServico);
   fDMMovimento := TDMMovimento.Create(Self);
   fDMCadNotaServico.prc_Abrir_cdsCliente('S');
+  vEnvioACBR := fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A';
 
   vFilial_Sel := 0;
   vData := EncodeDate(YearOf(Date),MonthOf(Date),01);
@@ -1990,7 +1992,7 @@ var
   vFlag: Boolean;
   vTexto: String;
   dtUltimo_Acesso: TDateTime;
-  vEnvioACBR : Boolean;
+  vIDAnt : Integer;
 begin
   if not(fDMCadNotaServico.cdsNotaServico_Consulta.Active) and (fDMCadNotaServico.cdsNotaServico_ConsultaID.AsInteger <= 0) then
     exit;
@@ -2010,13 +2012,14 @@ begin
     MessageDlg('*** Filial sem inscrição municipal!', mtError, [mbOk], 0);
     exit;
   end;
+  vIDAnt := 0;
 
-  if fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A' then
+  if vEnvioACBR then
   begin
-    vEnvioACBR := (fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A');
     fDMNFSe    := TdmNFSe.Create(Self);
     fDMNFSe.fDMCadNotaServico := fDMCadNotaServico;
     fDMNFSe.ConfigurarComponente;
+    vIDAnt := fDMCadNotaServico.cdsNotaServico_ConsultaID.AsInteger;
   end;
 
   //31/05/2017
@@ -2042,6 +2045,7 @@ begin
       begin
         if (fnc_Existe_Nota) then
         begin
+//        prc_Posiciona_NotaFiscal;
           if fDMCadNotaServico.cdsFilialID.AsInteger <> fDMCadNotaServico.cdsNotaServico_ConsultaFILIAL.AsInteger then
             fDMCadNotaServico.cdsFilial.Locate('ID',fDMCadNotaServico.cdsNotaServico_ConsultaFILIAL.AsInteger,[loCaseInsensitive]);
 
@@ -2058,9 +2062,9 @@ begin
             vProtocolo_Ret := fDMCadNotaServico.cdsNotaServico_ConsultaPROTOCOLO.AsString;
 
           //25/03/2019
-          if fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A' then
+          if vEnvioACBR then
           begin
-//            fDMNFSe.fDMCadNotaServico := fDMCadNotaServico;
+//          fDMNFSe.fDMCadNotaServico := fDMCadNotaServico;
             fDMNFSe.prc_Abrir_NotaServico_Comunicacao(fDMCadNotaServico.cdsNotaServicoID.AsInteger);
             fdmNFSe.Enviar_Nfse;
           end
@@ -2110,7 +2114,7 @@ begin
 
     if vNumLoteAnt = -99 then
       raise Exception.Create('*** Foram selecionados lotes diferentes para a mesma remessa, selecione novamente e faça o envio!');
-    if Trim(fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString) <> 'A' then
+    if not (vEnvioACBR) then
     begin
       if trim(vProtocolo_Ret) <> '' then
       begin
@@ -2199,7 +2203,7 @@ begin
 
     //mmoNFSeRetorno.Lines.LoadFromStream(cXMLStream);
   finally
-    if Trim(fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString) <> 'A' then
+    if not (vEnvioACBR) then
     begin
       if vProcesso < 1 then
       begin
@@ -2213,7 +2217,11 @@ begin
     FreeAndNil(cTXTStream);
     FreeAndNil(cTXT);
     if vEnvioACBR then
+    begin
       FreeAndNil(fDMNFSe);
+      prc_Consultar(0);
+      fDMCadNotaServico.cdsNotaServico_Consulta.Locate('ID',vIDAnt,[loCaseInsensitive]);
+    end;
   end;
 end;
 
@@ -2494,7 +2502,7 @@ begin
   if fDMCadNotaServico.cdsFilialID.AsInteger <> vFilial_Sel then
     fDMCadNotaServico.cdsFilial.Locate('ID',vFilial_Sel,[loCaseInsensitive]);
 
-  if Trim(fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString) = 'A' then
+  if vEnvioACBR then
   begin
     MessageDlg('*** Opção não liberada para a Cidade ' + fDMCadNotaServico.cdsFilialCIDADE.AsString  +#13+
                '    Opção não usada para ACBR!',  mtInformation, [mbOk], 0);
@@ -2919,7 +2927,7 @@ begin
     exit;
   end;
   fDMCadNotaServico.prc_Abrir_Natureza;
-  if (Trim(fDMCadNotaServico.cdsNotaServico_ConsultaENVIO_NFSE.AsString) = 'A') and (fDMCadNotaServico.cdsCidadePERMITE_CANCELAMENTO.AsString <> 'S') then
+  if (vEnvioACBR) and (fDMCadNotaServico.cdsCidadePERMITE_CANCELAMENTO.AsString <> 'S') then
   begin
     MessageDlg('*** Opção não liberada para a Cidade ' + fDMCadNotaServico.cdsNotaServico_ConsultaCIDADE.AsString  +#13+
                '    Opção não usada para ACBR!',  mtInformation, [mbOk], 0);
@@ -2963,7 +2971,7 @@ begin
   FreeAndNil(ffrmCadNotaServico_Canc);
 
   //Cancelamento pelo acbr
-  if fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A' then
+  if vEnvioACBR then
   begin
     fDMCadNotaServico.cdsNotaServico_Imp.Close;
     fDMCadNotaServico.sdsNotaServico_Imp.CommandText := fDMCadNotaServico.ctNotaServico_Imp + ' WHERE NS.ID = ' +
@@ -3313,7 +3321,7 @@ begin
     fDMCadNotaServico.cdsFilial.Locate('ID',fDMCadNotaServico.cdsNotaServico_ImpFILIAL.AsInteger,[loCaseInsensitive]);
 
   //Impressão pelo acbr
-  if fDMCadNotaServico.cdsFilialENVIO_NFSE.AsString = 'A' then
+  if vEnvioACBR then
   begin
     fDMNFSe    := TdmNFSe.Create(Self);
     try
@@ -3467,7 +3475,7 @@ procedure TfrmCadNotaServico.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if (Key = Vk_F9) and (fDMCadNotaServico.cdsParametrosIMPRESSAO_MATRICIAL.AsString <> 'S') then
   begin
-    if Trim(fDMCadNotaServico.cdsNotaServico_ConsultaENVIO_NFSE.AsString) = 'A' then
+    if vEnvioACBR then
       exit;
 
     gbxLote_Protocolo.Visible := not(gbxLote_Protocolo.Visible);
@@ -4327,11 +4335,25 @@ var
 begin
   if not(fDMCadNotaServico.cdsNotaServico_Consulta.Active) or (fDMCadNotaServico.cdsNotaServico_Consulta.IsEmpty) then
     exit;
-  if Trim(fDMCadNotaServico.cdsNotaServico_ConsultaENVIO_NFSE.AsString) = 'A' then
+  if vEnvioACBR then
   begin
-    MessageDlg('*** Opção não liberada para a Cidade ' + fDMCadNotaServico.cdsNotaServico_ConsultaCIDADE.AsString  +#13+
-               '    Opção não usada para ACBR!',  mtInformation, [mbOk], 0);
-    exit;
+    fDMNFSe    := TdmNFSe.Create(Self);
+    try
+      fDMCadNotaServico.cdsNotaServico_Imp.Close;
+      fDMCadNotaServico.sdsNotaServico_Imp.CommandText := fDMCadNotaServico.ctNotaServico_Imp + ' WHERE NS.ID = ' +
+                                                          IntToStr(fDMCadNotaServico.cdsNotaServico_ConsultaID.AsInteger);
+      fDMCadNotaServico.cdsNotaServico_Imp.Open;
+      fDMCadNotaServico.cdsNotaServico_Imp_Itens.Close;
+      fDMCadNotaServico.sdsNotaServico_Imp_Itens.ParamByName('ID').AsInteger := fDMCadNotaServico.cdsNotaServico_ConsultaID.AsInteger;
+      fDMCadNotaServico.cdsNotaServico_Imp_Itens.Open;
+      fDMNFSe.fDMCadNotaServico := fDMCadNotaServico;
+      fDMNFSe.ConfigurarComponente;
+      fDMNFSe.prc_Abrir_NotaServico_Comunicacao(fDMCadNotaServico.cdsNotaServico_ImpID.AsInteger);
+      fdmNFSe.ConsultaNfse;
+    finally
+      FreeAndNil(fDMNFSe);
+    end;
+    Abort;
   end;
 
   if (fDMCadNotaServico.cdsNotaServico_ConsultaNUMRPS.AsInteger <= 0) and (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM')
