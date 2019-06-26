@@ -2374,11 +2374,17 @@ begin
           (fDMCadProduto.cdsProduto_ConsultaID.AsInteger <= 0) then
       exit;
 
-    prc_Posiciona_Produto;
     vEstoqueLoteTotal := 0;
-    prc_Consultar_Estoque_Lote(fDMCadProduto.cdsProduto_ConsultaID.AsInteger);
-    if (fDMCadProduto.cdsProduto_Consulta.Active) and not(fDMCadProduto.cdsProduto_Consulta.IsEmpty) then
-      Label73.Caption := FormatFloat('###,###,##0.####',fDMCadProduto.cdsProduto_ConsultaQTD_ESTOQUE.AsFloat);
+    if not (fDMCadProduto.cdsProduto.State in [dsedit,dsinsert]) then
+    begin
+      prc_Posiciona_Produto;
+      if (fDMCadProduto.cdsProduto.Active) and not(fDMCadProduto.cdsProduto.IsEmpty) then
+        Label73.Caption := FormatFloat('###,###,##0.####',fDMCadProduto.cdsProduto_consultaQTD_ESTOQUE.AsFloat);
+    end
+    else
+      Label73.Caption := FormatFloat('###,###,##0.####',0);
+
+    prc_Consultar_Estoque_Lote(fDMCadProduto.cdsProdutoID.AsInteger);
     if (vEstoqueLoteTotal > 0) then
       Label73.Caption := FormatFloat('###,###,##0.####',vEstoqueLoteTotal);
     RzPageControl2.ActivePage := TabSheet1;
@@ -2388,13 +2394,8 @@ begin
       TS_PCP.TabVisible          := ((fDMCadProduto.qParametrosEMPRESA_INJETADO.AsString = 'S') or (fDMCadProduto.qParametrosEMPRESA_CARTONAGEM.AsString = 'S'));
       TS_Injetados.TabVisible    := (fDMCadProduto.qParametrosEMPRESA_INJETADO.AsString = 'S');
       TS_Cartonagem.TabVisible   := (fDMCadProduto.qParametrosEMPRESA_CARTONAGEM.AsString = 'S');
-      TS_Ativo.TabVisible        := ((fDMCadProduto.qParametrosUSA_SPED.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaSPED_TIPO_ITEM.AsString = '08')) ;
+      TS_Ativo.TabVisible        := ((fDMCadProduto.qParametrosUSA_SPED.AsString = 'S') and (fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString = '08')) ;
       RZPageControl3.ActivePage  := TS_Fiscal;
-      //Cleomar 18/12/2018
-      //TS_Maquina.TabVisible      := (fDMCadProduto.qParametros_ProdUSA_MAQUINA.AsString = 'S');
-      //TS_Ficha_Textil.TabVisible := (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
-      //TS_Ficha_Tear.TabVisible        := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaTIPO_PRODUCAO.AsString = 'E'));
-      //TS_Ficha_Trancadeira.TabVisible := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaTIPO_PRODUCAO.AsString = 'T'));
       TS_Maquina.TabVisible           := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
       TS_Ficha_Textil.TabVisible      := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
       TS_Ficha_Tear.TabVisible        := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
@@ -2414,9 +2415,9 @@ begin
     prc_Abrir_EnqIPI(fDMCadProduto.cdsProdutoID_ENQIPI.AsInteger);
     edtCod_EnqIPI.Text := fDMCadProduto.qEnqIPICODIGO.AsString;
 
-    lblDescLargura.Caption := FormatFloat('0.000#',fDMCadProduto.cdsProduto_ConsultaLARGURA.AsFloat) + ' x '
-                            + FormatFloat('0.000#',fDMCadProduto.cdsProduto_ConsultaALTURA.AsFloat) + ' x '
-                            + FormatFloat('0.0000',fDMCadProduto.cdsProduto_ConsultaESPESSURA.AsFloat);
+    lblDescLargura.Caption := FormatFloat('0.000#',fDMCadProduto.cdsProdutoLARGURA.AsFloat) + ' x '
+                            + FormatFloat('0.000#',fDMCadProduto.cdsProdutoALTURA.AsFloat) + ' x '
+                            + FormatFloat('0.0000',fDMCadProduto.cdsProdutoESPESSURA.AsFloat);
   end
   else
     fDMCadProduto.cdsProduto_Serie.Close;
@@ -2424,7 +2425,7 @@ begin
   begin
     if RzPageControl1.ActivePage = TS_Cadastro then
     begin
-      if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) or
+      if not(fDMCadProduto.cdsProduto_consulta.Active) or (fDMCadProduto.cdsProduto_consulta.IsEmpty) or
             (fDMCadProduto.cdsProduto_ConsultaID.AsInteger <= 0) then
         exit;
       TS_Balanca.TabVisible      := (fDMCadProduto.cdsProdutoUSA_NA_BALANCA.AsString = 'S');
