@@ -44,7 +44,7 @@ object frmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat
     end
     object BitBtn1: TBitBtn
       Left = 241
-      Top = 5
+      Top = 4
       Width = 98
       Height = 25
       Caption = '&Confirmar'

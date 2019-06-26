@@ -136,7 +136,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
       TabOrder = 7
     end
     object btnConsultar: TNxButton
-      Left = 754
+      Left = 753
       Top = 40
       Width = 161
       Height = 30
@@ -547,6 +547,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'DTMOVIMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Movimento'
+            Width = 64
             Visible = True
           end
           item
@@ -613,6 +614,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'PRECO_CUSTO_TOTAL'
             Title.Alignment = taCenter
             Title.Caption = 'Pre'#231'o Custo Total'
+            Width = 64
             Visible = True
           end
           item
@@ -621,6 +623,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'NUM_LOTE_CONTROLE'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Lote Controle'
+            Width = 64
             Visible = True
           end
           item
@@ -646,6 +649,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             Expanded = False
             FieldName = 'VLR_DESCONTO'
             Title.Caption = 'Vlr. Desconto'
+            Width = 64
             Visible = True
           end
           item
@@ -659,6 +663,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'SERIE'
             Title.Alignment = taCenter
             Title.Caption = 'S'#233'rie Nota'
+            Width = 64
             Visible = True
           end
           item
@@ -672,6 +677,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'UNIDADE_ORIG'
             Title.Alignment = taCenter
             Title.Caption = 'Unid. da Nota'
+            Width = 64
             Visible = True
           end
           item
@@ -679,6 +685,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'QTD_ORIG'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. da Nota'
+            Width = 64
             Visible = True
           end
           item
@@ -686,6 +693,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'VLR_UNITARIOORIG'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Unit'#225'rio da Nota'
+            Width = 64
             Visible = True
           end
           item
@@ -709,6 +717,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'ID_PRODUTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Produto'
+            Width = 64
             Visible = True
           end
           item
@@ -811,6 +820,14 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
           ParentFont = False
+        end
+        object NxButton1: TNxButton
+          Left = 662
+          Top = 11
+          Width = 75
+          Caption = 'Calcular'
+          TabOrder = 0
+          OnClick = NxButton1Click
         end
       end
       object Panel2: TPanel
@@ -1251,6 +1268,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
             FieldName = 'REFERENCIA'
             Title.Alignment = taCenter
             Title.Caption = 'Refer'#234'ncia'
+            Width = 64
             Visible = True
           end
           item

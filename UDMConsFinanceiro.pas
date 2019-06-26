@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, StrUtils,
-  frxClass, frxDBSet;
+  frxClass, frxDBSet, frxExportPDF;
 
 type
   TDMConsFinanceiro = class(TDataModule)
@@ -312,13 +312,6 @@ type
     dspCCustoOrcamento: TDataSetProvider;
     cdsCCustoOrcamento: TClientDataSet;
     dsCCustoOrcamento: TDataSource;
-    cdsCCustoOrcamentoVLR_PARCELA: TFloatField;
-    cdsCCustoOrcamentoCODIGO_GRUPO: TStringField;
-    cdsCCustoOrcamentoCODIGO_GRUPO_SUP: TStringField;
-    cdsCCustoOrcamentoNOME_GRUPO: TStringField;
-    cdsCCustoOrcamentoCONTA_ORCAMENTO: TStringField;
-    cdsCCustoOrcamentoID_CONTA_ORCAMENTO: TIntegerField;
-    cdsCCustoOrcamentoNOME_ORCAMENTO: TStringField;
     sdsCentroCusto: TSQLDataSet;
     dspCentroCusto: TDataSetProvider;
     cdsCentroCusto: TClientDataSet;
@@ -327,6 +320,23 @@ type
     cdsCentroCustoCODIGO: TStringField;
     cdsCentroCustoDESCRICAO: TStringField;
     frxCCustoOrcamento: TfrxDBDataset;
+    qResumoCentro_Custo: TSQLQuery;
+    frxResumoCentro_Custo: TfrxDBDataset;
+    qResumoCentro_CustoVLR_ENTRADA: TFloatField;
+    qResumoCentro_CustoVLR_SAIDA: TFloatField;
+    qResumoCentro_CustoCODIGO_GRUPO: TStringField;
+    qResumoCentro_CustoNOME_GRUPO: TStringField;
+    qResumoCentro_CustoVLR_CONTRATO: TFloatField;
+    frxPDFExport1: TfrxPDFExport;
+    cdsCCustoOrcamentoVLR_ENTRADA: TFloatField;
+    cdsCCustoOrcamentoVLR_SAIDA: TFloatField;
+    cdsCCustoOrcamentoCODIGO_GRUPO: TStringField;
+    cdsCCustoOrcamentoCODIGO_GRUPO_SUP: TStringField;
+    cdsCCustoOrcamentoNOME_GRUPO: TStringField;
+    cdsCCustoOrcamentoCONTA_ORCAMENTO: TStringField;
+    cdsCCustoOrcamentoID_CONTA_ORCAMENTO: TIntegerField;
+    cdsCCustoOrcamentoNOME_ORCAMENTO: TStringField;
+    cdsCCustoOrcamentoVLR_CONTRATO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConta_OrcNewRecord(DataSet: TDataSet);
     procedure mDespesaNewRecord(DataSet: TDataSet);
@@ -336,7 +346,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-    ctConsulta_Conta_Orc, ctConsulta_Conta_Orc_Dt, ctConsulta_Conta_Orc_CCusto, ctCCustoOrcamento : String;
+    ctConsulta_Conta_Orc, ctConsulta_Conta_Orc_Dt, ctConsulta_Conta_Orc_CCus, ctCCustoOrcamento : String;
     ctDespesa : String;
     ctOC_Pendente : String;
     ctDuplicata_Det : String;
@@ -372,9 +382,9 @@ uses DmdDatabase;
 procedure TDMConsFinanceiro.DataModuleCreate(Sender: TObject);
 begin
   cdsFilial.Open;
-  ctConsulta_Conta_Orc    := sdsConsulta_Conta_Orc.CommandText;
-  ctConsulta_Conta_Orc_CCusto := sdsConsulta_Conta_Orc_CCus.CommandText;
-  ctConsulta_Conta_Orc_Dt := sdsConsulta_Conta_Orc_Dt.CommandText;
+  ctConsulta_Conta_Orc      := sdsConsulta_Conta_Orc.CommandText;
+  ctConsulta_Conta_Orc_CCus := sdsConsulta_Conta_Orc_CCus.CommandText;
+  ctConsulta_Conta_Orc_Dt  := sdsConsulta_Conta_Orc_Dt.CommandText;
   ctCCustoOrcamento       := sdsCCustoOrcamento.CommandText;
   ctDespesa               := sdsDespesa.CommandText;
   ctOC_Pendente           := sdsOC_Pendente.CommandText;

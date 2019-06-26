@@ -364,6 +364,13 @@ type
     Label144: TLabel;
     DBEdit92: TDBEdit;
     DBCheckBox11: TDBCheckBox;
+    Label145: TLabel;
+    cbTipoSped: TComboBox;
+    NxButton2: TNxButton;
+    Label146: TLabel;
+    RxDBComboBox3: TRxDBComboBox;
+    Label147: TLabel;
+    RxDBComboBox4: TRxDBComboBox;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -406,6 +413,7 @@ type
     procedure DBEdit82KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEdit82Exit(Sender: TObject);
+    procedure NxButton2Click(Sender: TObject);
   private
     { Private declarations }
     vCodCidade: Integer;
@@ -512,6 +520,7 @@ type
     function fnc_Proxima_Ref : Integer;
     procedure prc_Gerar_Ref;
     procedure prc_Gravar_Produto_Imp;
+    procedure prc_Gravar_Tipo_Sped_Prod;
 
   public
     { Public declarations }
@@ -592,6 +601,10 @@ begin
         fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
       fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
+      fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+
+      
+
       prc_Monta_Grupo('N');
       prc_Monta_ContaOrc('N');
     end
@@ -621,6 +634,7 @@ begin
       if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
         fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
+      fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
       prc_Monta_Grupo('N');
       prc_Monta_ContaOrc('N');
     end;
@@ -707,6 +721,12 @@ begin
         fDMRecebeXML.mItensNotaItem_Unidade.AsInteger := fDMRecebeXML.cdsProduto_FornITEM_UNIDADE.AsInteger;
     end;
     fDMRecebeXML.mItensNotaQtdPacoteInterno.AsFloat := StrToFloat(FormatFloat('0.0000',fDMRecebeXML.mItensNotaQtdPacote.AsFloat));
+
+    //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+    if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') and
+       (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+      fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+    //***************************
   end;
 end;
 
@@ -734,6 +754,7 @@ begin
     ComboBox1.ItemIndex := 0
   else
     ComboBox1.ItemIndex := 1;
+  ComboBox1Change(Sender);  
   //ckAtualizaPreco.Checked  := (fDMRecebeXML.qParametrosATUALIZAR_PRECO.AsString = 'S');
   //ckAtualizaCusto.Checked  := (fDMRecebeXML.qParametros_NTEATUALIZAR_CUSTO.AsString = 'S');
   Label109.Visible         := (fDMRecebeXML.qParametrosUSA_CUPOM_FISCAL.AsString = 'S');
@@ -851,7 +872,6 @@ begin
 
     fDMRecebeXML.cdsDetalhe.Next;
   end;
-
 
   fDMRecebeXML.cdsParcelas.First;
   while not fDMRecebeXML.cdsParcelas.Eof do
@@ -1283,6 +1303,16 @@ begin
   end;
   //***************
 
+  //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+  if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and ((fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0))then
+  begin
+    if (fDMRecebeXML.cdsProdutoID.AsInteger <> fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger) then
+      fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger, ([LocaseInsensitive]));
+    if (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') and (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+      fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+  end;
+  //***************************
+
   fDMRecebeXML.mItensNota.Post;
 end;
 
@@ -1588,6 +1618,16 @@ begin
           fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
         fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
         fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
+        fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+
+        //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+        if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and ((fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0))then
+        begin
+          if (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') and (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+            fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+        end;
+        //***************************
+
         prc_Monta_Grupo('N');
         prc_Monta_ContaOrc('N');
       end;
@@ -1946,6 +1986,16 @@ begin
           fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
         fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
         fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
+        fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+
+        //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+        if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and ((fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0))then
+        begin
+          if (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') and (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+            fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+        end;
+        //***************************
+
         prc_Monta_Grupo('N');
         prc_Monta_ContaOrc('N');
         fDMRecebeXML.mItensNota.Post;
@@ -1990,6 +2040,8 @@ begin
         fDMRecebeXML.cdsProduto.Edit;
       if fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString <> fDMRecebeXML.mItensNotaPosse_Material.AsString then
         fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString := fDMRecebeXML.mItensNotaPosse_Material.AsString;
+      if (fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString <> fDMRecebeXML.mItensNotaSped_Tipo.AsString) and (Trim(fDMRecebeXML.mItensNotaSped_Tipo.AsString) <> '') then
+        fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
 
       if fDMRecebeXML.mItensNotaGerar_CLiquido.AsBoolean then
         fDMRecebeXML.cdsProdutoUSA_CLIQ.AsString := 'S'
@@ -2095,6 +2147,9 @@ begin
     2: fDMRecebeXML.cdsProdutoTIPO_REG.AsString := 'C';
     3: fDMRecebeXML.cdsProdutoTIPO_REG.AsString := 'I';
   end;
+  //04/05/2019
+  prc_Gravar_Tipo_Sped_Prod;
+
   if (fDMRecebeXML.qParametros_RecXMLUSA_REF_SEQUENCIAL.AsString = 'S') and (trim(fDMRecebeXML.mItensNotaReferencia_Int.AsString) <> '') then
   begin
     fDMRecebeXML.cdsProdutoREFERENCIA.AsString      := fDMRecebeXML.mItensNotaReferencia_Int.AsString;
@@ -2175,6 +2230,7 @@ begin
   if fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger > 0 then
     fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger := fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger;
   fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString := fDMRecebeXML.mItensNotaPosse_Material.AsString;
+  fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
 
   //26/01/2017
   if fDMRecebeXML.qParametros_RecXMLMOSTRAR_VLR_VENDA.AsString = 'S' then
@@ -2189,7 +2245,11 @@ begin
     fDMRecebeXML.cdsProdutoUSA_CLIQ.AsString := 'N';
   //***************
   fDMRecebeXML.cdsProdutoESTOQUE.AsString := 'S';
-  if fDMRecebeXML.mItensNotaGerar_Estoque.AsString <> 'S' then
+  //22/06/2019
+  if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') then
+    fDMRecebeXML.cdsProdutoESTOQUE.AsString := 'S'
+  else
+  if (fDMRecebeXML.mItensNotaGerar_Estoque.AsString <> 'S') then
     fDMRecebeXML.cdsProdutoESTOQUE.AsString := 'N';
     
   fDMRecebeXML.cdsProduto.Post;
@@ -2205,7 +2265,9 @@ begin
     fDMRecebeXML.mItensNotaID_Grupo.Clear;
   if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
     fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
-  fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;      
+  fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
+  fDMRecebeXML.mItensNotaSped_Tipo.AsString := fDMRecebeXML. cdsProdutoSPED_TIPO_ITEM.AsString;
+
   prc_Monta_Grupo('N');
   prc_Monta_ContaOrc('N');
   //*************
@@ -3664,6 +3726,18 @@ begin
     if (vID_Local_Estoque <= 0) and (fDMRecebeXML.qParametrosUSA_LOCAL_ESTOQUE.AsString <> 'S') then
       vID_Local_Estoque := 1;
   end;
+  //27/05/2019
+  fDMRecebeXML.mParc.First;
+  while not fDMRecebeXML.mParc.Eof do
+  begin
+    if (DateEdit1.Date > fDMRecebeXML.mParcDtVencimento.AsDateTime) then
+      vErro := vErro + #13 + '*** Data de vencimento menor que a data de entrada!';
+    if (StrToFloat(FormatFloat('0.00',fDMRecebeXML.mParcVlrVencimento.AsFloat)) <= 0) then
+      vErro := vErro + #13 + '*** Valor Parcela esta zerado na nota, favor verificar!!';
+    fDMRecebeXML.mParc.Next;
+  end;
+  //*************
+
   if vID_Local_Estoque <= 0 then
     vErro := '*** Local do Estoque não informado!';
   if Trim(vErro) = '' then
@@ -4068,6 +4142,15 @@ begin
     end
   end;
   //***************
+  //22/06/2019
+  if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0) and
+    (fDMRecebeXML.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+  begin
+    fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger, ([LocaseInsensitive]));
+    if (fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'S') then
+      fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
+  end;
+  //*****************
 end;
 
 procedure TfrmRecebeXML.prc_Ajuste_Prod_Pela_OC(PeloXML: Boolean);
@@ -4110,6 +4193,7 @@ begin
       if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
         fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
+      fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
     end;
   end;
   fDMRecebeXML.mItensNota.Post;
@@ -4150,6 +4234,12 @@ begin
       if MessageDlg('Deseja buscar a próxima Sequencia da Referência?', mtConfirmation,[mbOk,mbNo],0)=mrYes then
         CurrencyEdit2.AsInteger := fnc_Proxima_Ref;
     end;
+  end;
+  case ComboBox1.ItemIndex of
+    0 : cbTipoSped.ItemIndex := 4;
+    1 : cbTipoSped.ItemIndex := 1;
+    2 : cbTipoSped.ItemIndex := 7;
+    3 : cbTipoSped.ItemIndex := 8;
   end;
 end;
 
@@ -4390,6 +4480,7 @@ begin
       if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
         fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
+      fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
     end;
   end;
   fDMRecebeXML.mItensNota.Post;
@@ -4427,6 +4518,44 @@ begin
   fDMRecebeXML.cdsNotaFiscal_NDevolvidaMODELO.AsString             := '';
   fDMRecebeXML.cdsNotaFiscal_NDevolvida.Post;
   //fDMRecebeXML.cdsNotaFiscal_NDevolvida.ApplyUpdates(0);
+end;
+
+procedure TfrmRecebeXML.NxButton2Click(Sender: TObject);
+begin
+  if cbTipoSped.ItemIndex < 0 then
+    exit;
+  SMDBGrid1.DisableScroll;
+  fDMRecebeXML.mItensNota.First;
+  while not fDMRecebeXML.mItensNota.Eof do
+  begin
+    fDMRecebeXML.mItensNota.Edit;
+    fDMRecebeXML.mItensNotaSped_Tipo.AsString := Copy(cbTipoSped.Text,1,2);
+    fDMRecebeXML.mItensNota.Post;
+    fDMRecebeXML.mItensNota.Next;
+  end;
+  SMDBGrid1.EnableScroll;
+end;
+
+procedure TfrmRecebeXML.prc_Gravar_Tipo_Sped_Prod;
+begin
+  if (trim(fDMRecebeXML.mItensNotaSped_Tipo.AsString) = '') and (cbTipoSped.ItemIndex < 0) then
+  begin
+    if fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'P' then
+      fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := '04'
+    else
+    if fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'M' then
+      fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := '01'
+    else
+    if fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'C' then
+      fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := '07'
+    else
+    if fDMRecebeXML.cdsProdutoTIPO_REG.AsString = 'I' then
+      fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := '08';
+  end;
+  if (trim(fDMRecebeXML.mItensNotaSped_Tipo.AsString) = '') and (cbTipoSped.ItemIndex >= 0) then
+    fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := Copy(cbTipoSped.Text,1,2)
+  else
+    fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
 end;
 
 end.

@@ -535,7 +535,6 @@ type
     Label194: TLabel;
     DBEdit108: TDBEdit;
     DBCheckBox31: TDBCheckBox;
-    DBCheckBox32: TDBCheckBox;
     RzPageControl3: TRzPageControl;
     ts_Contatos: TRzTabSheet;
     ts_Vendedor: TRzTabSheet;
@@ -560,6 +559,11 @@ type
     SMDBGrid9: TSMDBGrid;
     pnlPessoa_Fil: TPanel;
     btnCopiar_Fil: TNxButton;
+    btnConfDescontos: TNxButton;
+    Label196: TLabel;
+    RxDBComboBox18: TRxDBComboBox;
+    DBCheckBox32: TDBCheckBox;
+    DBCheckBox5: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -670,6 +674,7 @@ type
     procedure DBEdit1Exit(Sender: TObject);
     procedure DBEdit7Exit(Sender: TObject);
     procedure btnCopiar_FilClick(Sender: TObject);
+    procedure btnConfDescontosClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -709,8 +714,7 @@ var
 implementation
 
 uses
-  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa,
-  USel_ContaOrc, USel_EnqIPI, USel_Atividade;
+  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa, USel_ContaOrc, USel_EnqIPI, USel_Atividade, UVendedor_Config;
 
 {$R *.dfm}
 
@@ -833,6 +837,8 @@ begin
   Label194.Visible := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
   DBEdit108.Visible := (fDMCadPessoa.qParametros_PedUSA_CAIXINHA.AsString = 'S');
   DBCheckBox32.Visible := (fDMCadPessoa.qParametros_NFeIMP_NOMEPROD_CLIENTE.AsString = 'S');
+  btnConfDescontos.Visible := ((fDMCadPessoa.qParametros_UsuarioLIBERA_CONFIG_VENDEDOR.AsString = 'S')
+                              and (fDMCadPessoa.qParametros_ComUSA_CONFIG_IND.AsString = 'S'));
 end;
 
 procedure TfrmCadPessoa.btnInserirClick(Sender: TObject);
@@ -860,7 +866,7 @@ begin
   if fDMCadPessoa.cdsPessoa.IsEmpty then
     exit;
 
-  if MessageDlg('Deseja excluir este registro ' + fDMCadPessoa.cdsPessoa_ConsultaNOME.AsString + '?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+  if MessageDlg('Deseja excluir este registro ' + fDMCadPessoa.cdsPessoa_ConsultaNOME.AsString + '?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes then
     exit;
 
   vCodAux := fDMCadPessoa.cdsPessoa_Consulta.RecNo;
@@ -1045,6 +1051,8 @@ begin
     fDMCadPessoa.cdsPessoa_Fil.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_RefP.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_RefC.ApplyUpdates(0);
+    if (fDMCadPessoa.cdsVendedor_Config.Active) then
+      fDMCadPessoa.cdsVendedor_Config.ApplyUpdates(0);
     if fDMCadPessoa.cdsPessoa_Fisica.State in [dsEdit, dsInsert] then
     begin
       fDMCadPessoa.cdsPessoa_Fisica.Post;
@@ -1125,6 +1133,7 @@ begin
 
   RzPageControl1.ActivePage := TS_Cadastro;
   prc_Habilitar;
+  RxDBComboBox1.SetFocus;
 end;
 
 procedure TfrmCadPessoa.RzPageControl1Change(Sender: TObject);
@@ -2550,6 +2559,14 @@ begin
   pnlDados_Conta.Enabled         := not(pnlDados_Conta.Enabled);
   for i := 1 to SMDBGrid7.ColCount - 2 do
     SMDBGrid7.Columns[i].readonly := not(SMDBGrid7.Columns[i].readonly)
+end;
+
+procedure TfrmCadPessoa.btnConfDescontosClick(Sender: TObject);
+begin
+  frmVendedor_Config := TfrmVendedor_Config.Create(self);
+  frmVendedor_Config.fDMCadPessoa := fDMCadPessoa;
+  frmVendedor_Config.ShowModal;
+  FreeAndNil(frmVendedor_Config);
 end;
 
 end.

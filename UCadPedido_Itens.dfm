@@ -1,6 +1,6 @@
 object frmCadPedido_Itens: TfrmCadPedido_Itens
-  Left = 282
-  Top = 27
+  Left = 228
+  Top = 34
   Width = 781
   Height = 696
   BorderIcons = [biSystemMenu]
@@ -101,14 +101,14 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       OnClick = SpeedButton5Click
     end
     object Shape1: TShape
-      Left = 633
+      Left = 649
       Top = 69
       Width = 113
       Height = 36
       Brush.Color = clMoneyGreen
     end
     object Label30: TLabel
-      Left = 644
+      Left = 660
       Top = 70
       Width = 86
       Height = 16
@@ -121,7 +121,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       ParentFont = False
     end
     object lblEstoque: TLabel
-      Left = 636
+      Left = 652
       Top = 89
       Width = 101
       Height = 13
@@ -299,7 +299,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       end
       object DBEdit15: TDBEdit
         Left = 138
-        Top = 3
+        Top = 2
         Width = 121
         Height = 19
         Ctl3D = False
@@ -370,6 +370,24 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
         TabOrder = 0
         OnExit = DBEdit5Exit
       end
+    end
+    object dbrdgEncerado: TDBRadioGroup
+      Left = 415
+      Top = 63
+      Width = 221
+      Height = 40
+      Columns = 3
+      DataField = 'ENCERADO'
+      DataSource = DMCadPedido.dsPedido_Itens
+      Items.Strings = (
+        'Encerado'
+        'Engomado'
+        'Nenhum')
+      TabOrder = 4
+      Values.Strings = (
+        'S'
+        'G'
+        'N')
     end
   end
   object Panel3: TPanel
@@ -471,7 +489,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object Label25: TLabel
       Left = 69
-      Top = 123
+      Top = 141
       Width = 41
       Height = 13
       Alignment = taRightJustify
@@ -495,7 +513,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object Label33: TLabel
       Left = 68
-      Top = 161
+      Top = 179
       Width = 42
       Height = 13
       Alignment = taRightJustify
@@ -509,7 +527,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object Label48: TLabel
       Left = 43
-      Top = 179
+      Top = 197
       Width = 67
       Height = 13
       Alignment = taRightJustify
@@ -517,11 +535,19 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object Label23: TLabel
       Left = 67
-      Top = 141
+      Top = 159
       Width = 43
       Height = 13
       Alignment = taRightJustify
       Caption = 'Caixinha:'
+    end
+    object Label24: TLabel
+      Left = 72
+      Top = 123
+      Width = 38
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'F'#225'brica:'
     end
     object dbedtQtd: TDBEdit
       Left = 111
@@ -571,7 +597,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       ActivePageDefault = TabSheet1
       Align = alBottom
       TabIndex = 0
-      TabOrder = 12
+      TabOrder = 13
       FixedDimension = 19
       object TabSheet1: TRzTabSheet
         Color = clMoneyGreen
@@ -1049,7 +1075,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      TabOrder = 13
+      TabOrder = 14
       TabStop = False
       OnClick = btnTab_PrecoClick
       Glyph.Data = {
@@ -1129,7 +1155,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       Font.Style = []
       ParentCtl3D = False
       ParentFont = False
-      TabOrder = 14
+      TabOrder = 15
       VisualStyle = vsGradient
       object Label5: TLabel
         Left = 20
@@ -1390,7 +1416,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
         TabOrder = 7
       end
       object DBEdit23: TDBEdit
-        Left = 61
+        Left = 62
         Top = 10
         Width = 85
         Height = 19
@@ -1511,7 +1537,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object DBEdit9: TDBEdit
       Left = 111
-      Top = 117
+      Top = 135
       Width = 435
       Height = 19
       CharCase = ecUpperCase
@@ -1519,7 +1545,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       DataField = 'CARIMBO'
       DataSource = DMCadPedido.dsPedido_Itens
       ParentCtl3D = False
-      TabOrder = 9
+      TabOrder = 10
     end
     object DBDateEdit4: TDBDateEdit
       Left = 111
@@ -1543,11 +1569,11 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       DataField = 'NUM_TALAO'
       DataSource = DMCadPedido.dsPedido_Itens
       ParentCtl3D = False
-      TabOrder = 8
+      TabOrder = 9
     end
     object RxDBLookupCombo9: TRxDBLookupCombo
       Left = 111
-      Top = 153
+      Top = 171
       Width = 435
       Height = 21
       DropDownCount = 15
@@ -1565,7 +1591,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       LookupSource = DMCadPedido.dsAtelier
       ParentCtl3D = False
       ParentFont = False
-      TabOrder = 11
+      TabOrder = 12
     end
     object gbxDesconto: TRzGroupBox
       Left = 362
@@ -1672,26 +1698,9 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
         OnExit = dbedtVlrProdExit
       end
     end
-    object dbrdgEncerado: TDBRadioGroup
-      Left = 112
-      Top = 193
-      Width = 131
-      Height = 65
-      DataField = 'ENCERADO'
-      DataSource = DMCadPedido.dsPedido_Itens
-      Items.Strings = (
-        'Encerado'
-        'Engomado'
-        'Nenhum')
-      TabOrder = 15
-      Values.Strings = (
-        'S'
-        'G'
-        'N')
-    end
     object DBEdit24: TDBEdit
       Left = 111
-      Top = 173
+      Top = 191
       Width = 435
       Height = 19
       CharCase = ecUpperCase
@@ -1726,8 +1735,8 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       OnExit = dbedtVlrUnitarioExit
     end
     object btnProdCliente: TNxButton
-      Left = 247
-      Top = 198
+      Left = 413
+      Top = 216
       Width = 131
       Height = 25
       Caption = 'Produto Cliente'
@@ -1748,7 +1757,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object DBEdit6: TDBEdit
       Left = 111
-      Top = 135
+      Top = 153
       Width = 435
       Height = 19
       CharCase = ecUpperCase
@@ -1756,7 +1765,19 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       DataField = 'CAIXINHA'
       DataSource = DMCadPedido.dsPedido_Itens
       ParentCtl3D = False
-      TabOrder = 10
+      TabOrder = 11
+    end
+    object DBEdit8: TDBEdit
+      Left = 111
+      Top = 117
+      Width = 115
+      Height = 19
+      CharCase = ecUpperCase
+      Ctl3D = False
+      DataField = 'FABRICA'
+      DataSource = DMCadPedido.dsPedido_Itens
+      ParentCtl3D = False
+      TabOrder = 8
     end
   end
   object pnlCod_Barras: TPanel
@@ -1946,6 +1967,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     Align = alTop
     Color = clMoneyGreen
     TabOrder = 4
+    OnExit = pnlCorExit
     object Label31: TLabel
       Left = 27
       Top = 11

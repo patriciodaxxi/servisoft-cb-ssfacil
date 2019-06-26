@@ -1,6 +1,6 @@
 object frmSel_NotaEntrada: TfrmSel_NotaEntrada
-  Left = 110
-  Top = 69
+  Left = 70
+  Top = 68
   Width = 1210
   Height = 630
   BorderIcons = [biSystemMenu]
@@ -426,6 +426,7 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
       DataSource = DMCadNotaFiscal.dsNotaEntrada
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       ParentCtl3D = False
+      PopupMenu = PopupMenu1
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -751,6 +752,14 @@ object frmSel_NotaEntrada: TfrmSel_NotaEntrada
       Font.Style = [fsBold]
       ParentFont = False
       Visible = False
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 560
+    Top = 343
+    object Copiarqtdependentepdevoluo1: TMenuItem
+      Caption = 'Copiar qtde pendente p/devolu'#231#227'o'
+      OnClick = Copiarqtdependentepdevoluo1Click
     end
   end
 end

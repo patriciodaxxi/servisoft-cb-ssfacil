@@ -1,9 +1,9 @@
 object DMGerar_EDI: TDMGerar_EDI
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 275
-  Top = 154
-  Height = 497
+  Left = 239
+  Top = 46
+  Height = 626
   Width = 831
   object qParametros: TSQLQuery
     MaxBlobSize = -1
@@ -183,7 +183,7 @@ object DMGerar_EDI: TDMGerar_EDI
       item
         Name = 'Unidade'
         DataType = ftString
-        Size = 3
+        Size = 6
       end
       item
         Name = 'PercTransferencia'
@@ -268,6 +268,14 @@ object DMGerar_EDI: TDMGerar_EDI
         Name = 'NomeCorCli'
         DataType = ftString
         Size = 100
+      end
+      item
+        Name = 'Erro_Prod_Nao_Lanc'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'Erro_Ped_Lancado'
+        DataType = ftBoolean
       end>
     IndexDefs = <
       item
@@ -283,7 +291,7 @@ object DMGerar_EDI: TDMGerar_EDI
     Left = 384
     Top = 32
     Data = {
-      610300009619E0BD01000000180000001E00000000000300000061030B434E50
+      950300009619E0BD01000000180000002000000000000300000095030B434E50
       4A436C69656E74650100490000000100055749445448020002001200054E756D
       4F430100490000000100055749445448020002000A00044974656D0400010000
       00000005506C616E6F0100490000000100055749445448020002000A00094474
@@ -294,7 +302,7 @@ object DMGerar_EDI: TDMGerar_EDI
       69636101004900000001000557494454480200020004000A436F6450726F6443
       6C690100490000000100055749445448020002000F000A5175616E7469646164
       650100490000000100055749445448020002000A0007556E6964616465010049
-      000000010005574944544802000200030011506572635472616E73666572656E
+      000000010005574944544802000200060011506572635472616E73666572656E
       63696101004900000001000557494454480200020005000B566C72556E697461
       72696F0100490000000100055749445448020002000F0008436F6E645067746F
       0100490000000100055749445448020002000F0008447261776261636B010049
@@ -309,8 +317,9 @@ object DMGerar_EDI: TDMGerar_EDI
       6C69616C04000100000000000C4974656D5F436C69656E746504000100000000
       000649445F436F72040001000000000009436F64436F72436C69010049000000
       0100055749445448020002000A000A4E6F6D65436F72436C6901004900000001
-      0005574944544802000200640001000D44454641554C545F4F52444552020082
-      0000000000}
+      00055749445448020002006400124572726F5F50726F645F4E616F5F4C616E63
+      0200030000000000104572726F5F5065645F4C616E6361646F02000300000000
+      0001000D44454641554C545F4F524445520200820000000000}
     object mAuxiliarCNPJCliente: TStringField
       FieldName = 'CNPJCliente'
       Size = 18
@@ -424,6 +433,12 @@ object DMGerar_EDI: TDMGerar_EDI
       FieldName = 'NomeCorCli'
       Size = 100
     end
+    object mAuxiliarErro_Prod_Nao_Lanc: TBooleanField
+      FieldName = 'Erro_Prod_Nao_Lanc'
+    end
+    object mAuxiliarErro_Ped_Lancado: TBooleanField
+      FieldName = 'Erro_Ped_Lancado'
+    end
   end
   object dsmAuxiliar: TDataSource
     DataSet = mAuxiliar
@@ -518,6 +533,11 @@ object DMGerar_EDI: TDMGerar_EDI
     object qClienteINSC_SUFRAMA: TStringField
       FieldName = 'INSC_SUFRAMA'
       Size = 9
+    end
+    object qClienteIMP_ETIQUETA_ROT: TStringField
+      FieldName = 'IMP_ETIQUETA_ROT'
+      FixedChar = True
+      Size = 1
     end
   end
   object qFilial: TSQLQuery
@@ -2089,5 +2109,223 @@ object DMGerar_EDI: TDMGerar_EDI
       FieldName = 'COD_PRODUTO_CLIENTE'
       Size = 15
     end
+  end
+  object qParametros_Ped: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT GRAVA_PROD_CLI_EDI, EDI_USAR_PRECO_TAB'
+      'FROM PARAMETROS_PED')
+    SQLConnection = dmDatabase.scoDados
+    Left = 247
+    Top = 47
+    object qParametros_PedGRAVA_PROD_CLI_EDI: TStringField
+      FieldName = 'GRAVA_PROD_CLI_EDI'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedEDI_USAR_PRECO_TAB: TStringField
+      FieldName = 'EDI_USAR_PRECO_TAB'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object XMLTransformProvider1: TXMLTransformProvider
+    TransformRead.TransformationFile = 'C:\Delphi7\SSFacil\EXE\OcToDp_Wirth.xtr'
+    XMLDataFile = 'C:\Users\cleomar\Desktop\PH Textil\Wirth\oc.xml'
+    Left = 311
+    Top = 425
+  end
+  object mCab_OC: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'XMLTransformProvider1'
+    Left = 308
+    Top = 484
+    object mCab_OCcodigo: TStringField
+      FieldName = 'codigo'
+      Size = 5
+    end
+    object mCab_OCdescricao: TStringField
+      FieldName = 'descricao'
+      Size = 71
+    end
+    object mCab_OCnome: TStringField
+      FieldName = 'nome'
+      Size = 14
+    end
+    object mCab_OCcnpj: TStringField
+      FieldName = 'cnpj'
+      Size = 18
+    end
+    object mCab_OCie: TStringField
+      FieldName = 'ie'
+      Size = 11
+    end
+    object mCab_OClogradouro: TStringField
+      FieldName = 'logradouro'
+      Size = 15
+    end
+    object mCab_OCnumero: TStringField
+      FieldName = 'numero'
+      Size = 3
+    end
+    object mCab_OCbairro: TStringField
+      FieldName = 'bairro'
+      Size = 12
+    end
+    object mCab_OCmunicipio: TStringField
+      FieldName = 'municipio'
+      Size = 11
+    end
+    object mCab_OCuf: TStringField
+      FieldName = 'uf'
+      Size = 2
+    end
+    object mCab_OCcep: TStringField
+      FieldName = 'cep'
+      Size = 10
+    end
+    object mCab_OCtelefone: TStringField
+      FieldName = 'telefone'
+      Size = 14
+    end
+    object mCab_OCfax: TStringField
+      FieldName = 'fax'
+      Size = 14
+    end
+    object mCab_OCoc: TDataSetField
+      FieldName = 'oc'
+      UnNamed = True
+    end
+  end
+  object dsmCab_OC: TDataSource
+    DataSet = mCab_OC
+    Left = 351
+    Top = 482
+  end
+  object mOC: TClientDataSet
+    Aggregates = <>
+    DataSetField = mCab_OCoc
+    Params = <>
+    Left = 326
+    Top = 533
+    object mOCnumero: TStringField
+      FieldName = 'numero'
+      Size = 6
+    end
+    object mOCfuncao: TStringField
+      FieldName = 'funcao'
+      Size = 8
+    end
+    object mOCemissao: TStringField
+      FieldName = 'emissao'
+      Size = 10
+    end
+    object mOCprazo: TStringField
+      FieldName = 'prazo'
+      Size = 2
+    end
+    object mOCpercentual: TStringField
+      FieldName = 'percentual'
+      Size = 3
+    end
+    object mOCtransferenciaicms: TStringField
+      FieldName = 'transferenciaicms'
+      Size = 1
+    end
+    object mOCregimedrawback: TStringField
+      FieldName = 'regimedrawback'
+      Size = 1
+    end
+    object mOCobs: TMemoField
+      FieldName = 'obs'
+      BlobType = ftMemo
+    end
+    object mOCcodigo1: TStringField
+      FieldName = 'codigo1'
+      Size = 5
+    end
+    object mOCnome: TStringField
+      FieldName = 'nome'
+      Size = 14
+    end
+    object mOCcnpj: TStringField
+      FieldName = 'cnpj'
+      Size = 18
+    end
+    object mOCsequencia: TStringField
+      FieldName = 'sequencia'
+      Size = 1
+    end
+    object mOCcodigo2: TStringField
+      FieldName = 'codigo2'
+      Size = 15
+    end
+    object mOCdescricao: TStringField
+      FieldName = 'descricao'
+      Size = 71
+    end
+    object mOCqtde: TStringField
+      FieldName = 'qtde'
+      Size = 7
+    end
+    object mOCunidade: TStringField
+      FieldName = 'unidade'
+      Size = 2
+    end
+    object mOCprecounitario: TStringField
+      FieldName = 'precounitario'
+      Size = 6
+    end
+    object mOCentrega: TDataSetField
+      FieldName = 'entrega'
+      UnNamed = True
+    end
+  end
+  object dsmOC: TDataSource
+    DataSet = mOC
+    Left = 375
+    Top = 531
+  end
+  object mRemessa: TClientDataSet
+    Aggregates = <>
+    DataSetField = mOCentrega
+    Params = <>
+    Left = 415
+    Top = 479
+    object mRemessaremessa: TStringField
+      FieldName = 'remessa'
+      Size = 6
+    end
+    object mRemessamapacompra: TStringField
+      FieldName = 'mapacompra'
+      Size = 5
+    end
+    object mRemessadata: TStringField
+      FieldName = 'data'
+      Size = 10
+    end
+    object mRemessaqtde: TStringField
+      FieldName = 'qtde'
+      Size = 7
+    end
+    object mRemessacodigo: TStringField
+      FieldName = 'codigo'
+      Size = 5
+    end
+    object mRemessadescricao: TStringField
+      FieldName = 'descricao'
+      Size = 71
+    end
+    object mRemessalargura: TStringField
+      FieldName = 'largura'
+      Size = 4
+    end
+  end
+  object dsmRemessa: TDataSource
+    DataSet = mRemessa
+    Left = 451
+    Top = 476
   end
 end

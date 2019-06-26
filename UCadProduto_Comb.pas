@@ -152,6 +152,8 @@ begin
       SMDBGrid2.Columns[i].Visible := False;
     if (fDMCadProduto.qParametrosUSA_SETOR_CONSUMO.AsString <> 'S') and (SMDBGrid2.Columns[i].FieldName = 'clSetor') then
       SMDBGrid2.Columns[i].Visible := False;
+    if (trim(fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString) <> 'S') and (vTexto = 'TINGIMENTO') then
+      SMDBGrid2.Columns[i].Visible := False;
   end;
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin
@@ -280,11 +282,13 @@ begin
   if uAltProd.fnc_Custo(fDMCadProduto.cdsProdutoID.AsInteger,fDMCadProduto) then
     exit;
 
+  SMDBGrid2.DisableScroll;
   fDMCadProduto.prc_Inserir_ProdCombMat;
   ffrmCadProduto_Comb_Mat := TfrmCadProduto_Comb_Mat.Create(self);
   ffrmCadProduto_Comb_Mat.fDMCadProduto := fDMCadProduto;
   ffrmCadProduto_Comb_Mat.ShowModal;
   FreeAndNil(ffrmCadProduto_Comb_Mat);
+  SMDBGrid2.EnableScroll;
 end;
 
 procedure TfrmCadProduto_Comb.btnAlterar_ItensClick(Sender: TObject);

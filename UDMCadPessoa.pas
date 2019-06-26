@@ -1207,6 +1207,67 @@ type
     cdsPessoa_FilITEM: TIntegerField;
     cdsPessoa_FilFILIAL: TIntegerField;
     cdsPessoa_FillkNome_Filial: TStringField;
+    dsVendedor_Config: TDataSource;
+    cdsVendedor_Config: TClientDataSet;
+    dspVendedor_Config: TDataSetProvider;
+    sdsVendedor_Config: TSQLDataSet;
+    sdsVendedor_ConfigCODIGO: TIntegerField;
+    sdsVendedor_ConfigDESC_FRETE: TStringField;
+    sdsVendedor_ConfigDESC_IPI: TStringField;
+    sdsVendedor_ConfigDESC_ST: TStringField;
+    sdsVendedor_ConfigDESC_PIS: TStringField;
+    sdsVendedor_ConfigDESC_COFINS: TStringField;
+    sdsVendedor_ConfigDESC_ISSQN: TStringField;
+    cdsVendedor_ConfigCODIGO: TIntegerField;
+    cdsVendedor_ConfigDESC_FRETE: TStringField;
+    cdsVendedor_ConfigDESC_IPI: TStringField;
+    cdsVendedor_ConfigDESC_ST: TStringField;
+    cdsVendedor_ConfigDESC_PIS: TStringField;
+    cdsVendedor_ConfigDESC_COFINS: TStringField;
+    cdsVendedor_ConfigDESC_ISSQN: TStringField;
+    qParametros_Usuario: TSQLQuery;
+    qParametros_Com: TSQLQuery;
+    qParametros_UsuarioLIBERA_CONFIG_VENDEDOR: TStringField;
+    qParametros_ComUSA_CONFIG_IND: TStringField;
+    sdsPessoaIMP_ETIQUETA_ROT: TStringField;
+    cdsPessoaIMP_ETIQUETA_ROT: TStringField;
+    sdsPessoaGERAR_PROTESTO: TStringField;
+    cdsPessoaGERAR_PROTESTO: TStringField;
+    dsPessoa_Animal: TDataSource;
+    cdsPessoa_Animal: TClientDataSet;
+    dspPessoa_Animal: TDataSetProvider;
+    sdsPessoa_Animal: TSQLDataSet;
+    sdsPessoa_AnimalCODIGO: TIntegerField;
+    sdsPessoa_AnimalITEM: TIntegerField;
+    sdsPessoa_AnimalNOME: TStringField;
+    sdsPessoa_AnimalID_RACA: TIntegerField;
+    sdsPessoa_AnimalDTCADASTRO: TDateField;
+    sdsPessoa_AnimalID_REMEDIO_PULGA: TIntegerField;
+    sdsPessoa_AnimalID_RACAO: TIntegerField;
+    sdsPessoa_AnimalOBS: TMemoField;
+    cdsPessoa_AnimalCODIGO: TIntegerField;
+    cdsPessoa_AnimalITEM: TIntegerField;
+    cdsPessoa_AnimalNOME: TStringField;
+    cdsPessoa_AnimalID_RACA: TIntegerField;
+    cdsPessoa_AnimalDTCADASTRO: TDateField;
+    cdsPessoa_AnimalID_REMEDIO_PULGA: TIntegerField;
+    cdsPessoa_AnimalID_RACAO: TIntegerField;
+    cdsPessoa_AnimalOBS: TMemoField;
+    sdsRaca: TSQLDataSet;
+    dspRaca: TDataSetProvider;
+    cdsRaca: TClientDataSet;
+    dsRaca: TDataSource;
+    qParametros_GeralEMPRESA_PET: TStringField;
+    qProd: TSQLQuery;
+    qProdID: TIntegerField;
+    qProdNOME: TStringField;
+    qProdREFERENCIA: TStringField;
+    cdsRacaID: TIntegerField;
+    cdsRacaNOME: TStringField;
+    cdsRacaID_TIPO_ANIMAL: TIntegerField;
+    cdsPessoa_AnimalclNome_Raca: TStringField;
+    cdsPessoa_AnimalclNome_RemedioPulga: TStringField;
+    cdsPessoa_AnimalclNome_Racao: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
@@ -1246,6 +1307,9 @@ type
     procedure cdsPessoa_FilAfterInsert(DataSet: TDataSet);
     procedure cdsPessoa_FilBeforeInsert(DataSet: TDataSet);
     procedure cdsPessoa_FilAfterPost(DataSet: TDataSet);
+    procedure cdsVendedor_ConfigNewRecord(DataSet: TDataSet);
+    procedure cdsPessoa_AnimalNewRecord(DataSet: TDataSet);
+    procedure cdsPessoa_AnimalCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     vID_CidadePes: Integer;
@@ -1470,6 +1534,7 @@ begin
   cdsPessoa_Fil.Open;
   qParametros_CTA_ORC.Open;
   qParametros_Ped.Open;
+  qParametros_Com.Open;
   if qParametrosUSA_SERVICO.AsString = 'S' then
   begin
     prc_Abrir_Servico;
@@ -1480,6 +1545,8 @@ begin
     cdsEDI_Config.Open;
   if qParametros_GeralINF_USUARIO_VEND.AsString = 'S' then
     cdsUsuario.Open;
+  if qParametros_GeralEMPRESA_PET.AsString = 'S' then
+    cdsRaca.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
@@ -1507,6 +1574,10 @@ begin
     end;
   end;
   //***********************
+
+  qParametros_Usuario.Close;
+  qParametros_Usuario.ParamByName('USUARIO').AsString := vUsuario;
+  qParametros_Usuario.Open;
 end;
 
 procedure TDMCadPessoa.cdsPessoaNewRecord(DataSet: TDataSet);
@@ -1611,6 +1682,10 @@ begin
     for i := 1 to vQtd - Length(cdsPessoaINSCR_EST.AsString) do
       cdsPessoaINSCR_EST.AsString := '0' + cdsPessoaINSCR_EST.AsString;
   end;
+  if cdsPessoaPESSOA.AsString = 'J' then
+    cdsPessoaTIPO_CONTRIBUINTE.AsString := '1'
+  else
+    cdsPessoaTIPO_CONTRIBUINTE.AsString := '9';
 end;
 
 procedure TDMCadPessoa.prc_Gravar_Cidade;
@@ -1671,14 +1746,12 @@ begin
     vMsgPessoa := vMsgPessoa + #13 + '*** ID não informado!';
   if trim(cdsPessoaNOME.AsString) = '' then
     vMsgPessoa := vMsgPessoa + #13 + '*** Nome não informado!';
-    
-  if ((cdsPessoaTP_CLIENTE.AsString = 'N')  or (cdsPessoaTP_CLIENTE.AsString = '')) and
-     ((cdsPessoaTP_FORNECEDOR.AsString = 'N') or (cdsPessoaTP_FORNECEDOR.AsString = '')) and
-     ((cdsPessoaTP_TRANSPORTADORA.AsString = 'N') or (cdsPessoaTP_TRANSPORTADORA.AsString = '')) and
-     ((cdsPessoaTP_VENDEDOR.AsString = 'N') or (cdsPessoaTP_VENDEDOR.AsString = '')) and
-     ((cdsPessoaTP_ATELIER.AsString = 'N')  or (cdsPessoaTP_ATELIER.AsString = '')) and
-     ((cdsPessoaTP_ALUNO.AsString = 'N')    or (cdsPessoaTP_ALUNO.AsString = '')) and
-     ((cdsPessoaTP_FUNCIONARIO.AsString = 'N')    or (cdsPessoaTP_FUNCIONARIO.AsString = '')) then
+
+  if (trim(cdsPessoaTP_CLIENTE.AsString) <> 'S') and (trim(cdsPessoaTP_FORNECEDOR.AsString) <> 'S') and
+     (trim(cdsPessoaTP_VENDEDOR.AsString) <> 'S') and (trim(cdsPessoaTP_TRANSPORTADORA.AsString) <> 'S') and
+     (trim(cdsPessoaTP_ATELIER.AsString) <> 'S') and (trim(cdsPessoaTP_ALUNO.AsString) <> 'S') and
+     (trim(cdsPessoaTP_FUNCIONARIO.AsString) <> 'S') and (trim(cdsPessoaTP_PREPOSTO.AsString) <> 'S') and
+     (trim(cdsPessoaTP_EXPORTACAO.AsString) <> 'S') then
     vMsgPessoa := vMsgPessoa + #13 + '*** Não foi selecionado um Tipo de Pessoa!';
   if ((cdsPessoaTP_CLIENTE.AsString = 'S') or (cdsPessoaTP_ALUNO.AsString = 'S')) and (cdsPessoaCLIENTE_ESTOQUE.AsString <> 'S') and (cdsPessoaCODIGO.AsInteger <> 99999)
     and (cdsPessoaCODIGO.AsInteger <> qParametrosID_CLIENTE_CONSUMIDOR.AsInteger) then
@@ -2096,6 +2169,44 @@ procedure TDMCadPessoa.cdsPessoa_FilAfterPost(DataSet: TDataSet);
 begin
   if cdsPessoa_FilFILIAL.AsInteger <= 0 then
     cdsPessoa_Fil.Delete;
+end;
+
+procedure TDMCadPessoa.cdsVendedor_ConfigNewRecord(DataSet: TDataSet);
+begin
+  cdsVendedor_ConfigDESC_FRETE.AsString  := 'N';
+  cdsVendedor_ConfigDESC_IPI.AsString    := 'N';
+  cdsVendedor_ConfigDESC_ST.AsString     := 'N';
+  cdsVendedor_ConfigDESC_PIS.AsString    := 'N';
+  cdsVendedor_ConfigDESC_COFINS.AsString := 'N';
+  cdsVendedor_ConfigDESC_ISSQN.AsString  := 'N';
+end;
+
+procedure TDMCadPessoa.cdsPessoa_AnimalNewRecord(DataSet: TDataSet);
+begin
+  cdsPessoa_AnimalDTCADASTRO.AsDateTime := Date;
+end;
+
+procedure TDMCadPessoa.cdsPessoa_AnimalCalcFields(DataSet: TDataSet);
+begin
+  if cdsPessoa_AnimalID_RACA.AsInteger > 0 then
+  begin
+    cdsRaca.Locate('ID',cdsPessoa_AnimalID_RACA.AsInteger,([Locaseinsensitive]));
+    cdsPessoa_AnimalclNome_Raca.AsString := cdsRacaNOME.AsString;
+  end;
+  if cdsPessoa_AnimalID_RACAO.AsInteger > 0 then
+  begin
+    qProd.Close;
+    qProd.ParamByName('ID').AsInteger := cdsPessoa_AnimalID_RACAO.AsInteger;
+    qProd.Open;
+    cdsPessoa_AnimalclNome_Racao.AsString := qProdNOME.AsString;
+  end;
+  if cdsPessoa_AnimalID_REMEDIO_PULGA.AsInteger > 0 then
+  begin
+    qProd.Close;
+    qProd.ParamByName('ID').AsInteger := cdsPessoa_AnimalID_REMEDIO_PULGA.AsInteger;
+    qProd.Open;
+    cdsPessoa_AnimalclNome_RemedioPulga.AsString := qProdNOME.AsString;
+  end;
 end;
 
 end.

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMConsPedido, ExtCtrls, StdCtrls, Mask,
   ToolEdit, CurrEdit, RxLookup, NxCollection, Grids, DBGrids, SMDBGrid, RzTabs, Menus, UDMCadCBarra_Int, DBCtrls, RxDBComb,
-  UCBase, SqlExpr;
+  UCBase, SqlExpr, Math;
 
 type
   TfrmEtiq_Individual = class(TForm)
@@ -339,6 +339,13 @@ begin
                                                          fDMConsPedido.mEtiq_IndividualTamanho.AsString;
 
     fDMConsPedido.mEtiq_IndividualCaminhoFoto.AsString := fDMConsPedido.cdsProdutoFOTO.AsString;
+
+      //////abaixo, etiqueta Hypnotize - valor da parcela
+    fDMConsPedido.mEtiq_IndividualParcela2X.AsCurrency := StrToFloat(FormatFloat('0.00',fDMConsPedido.cdsProdutoPRECO_VENDA.AsCurrency /
+                                                                               ((1 - power((1 + 2.99 /100), (-1 * 2)))/(2.99 / 100))));
+    fDMConsPedido.mEtiq_IndividualParcela3X.AsCurrency := StrToFloat(FormatFloat('0.00',fDMConsPedido.cdsProdutoPRECO_VENDA.AsCurrency /
+                                                                               ((1 - power((1 + 2.99 /100), (-1 * 3)))/(2.99 / 100))));
+
     fDMConsPedido.mEtiq_Individual.Post;
   end;
 end;

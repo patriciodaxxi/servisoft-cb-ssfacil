@@ -745,7 +745,7 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 10
+    ColCount = 11
     RowCount = 2
     Columns = <
       item
@@ -777,6 +777,7 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'ID_MATERIAL'
         Title.Alignment = taCenter
@@ -813,6 +814,7 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'UNIDADE'
         Title.Alignment = taCenter
@@ -822,10 +824,20 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'IMP_TALAO'
         Title.Alignment = taCenter
         Title.Caption = 'Imp. Tal'#227'o'
+        Title.Color = 16777134
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'TINGIMENTO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Tingimento'
         Title.Color = 16777134
         Visible = True
       end>

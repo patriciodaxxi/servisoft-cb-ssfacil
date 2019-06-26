@@ -113,6 +113,7 @@ type
     SMDBGrid9: TSMDBGrid;
     TS_ClienteDtEntrega: TRzTabSheet;
     SMDBGrid10: TSMDBGrid;
+    RadioGroup1: TRadioGroup;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -220,7 +221,13 @@ var
 begin
   fDMConsPedido.cdsPedido_Item.Close;
   fDMConsPedido.cdsPedido_Item.IndexFieldNames := '';
-  fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.ctPedido_Item + ' WHERE PED.TIPO_REG = ' + QuotedStr('P');
+
+  case RadioGroup1.ItemIndex of
+    0: fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.ctPedido_Item + ' WHERE PED.TIPO_REG = ' + QuotedStr('P');
+    1: fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.ctPedido_Item + ' WHERE PED.TIPO_REG = ' + QuotedStr('O');
+    2: fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.ctPedido_Item + ' WHERE 1 = 1';
+  end;
+
   if (fDMConsPedido.qParametrosUSA_APROVACAO_PED.AsString = 'S') and not(ckAprovado.Checked) then
     fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.sdsPedido_Item.CommandText + ' AND PED.APROVADO_PED = ' + QuotedStr('A');
   vComando := '';
@@ -556,7 +563,12 @@ begin
   vComandoAux := copy(fDMConsPedido.ctPedido,i,Length(fDMConsPedido.ctPedido) - i + 1);
   vComando    := copy(fDMConsPedido.ctPedido,1,i-1);
 
-  vComando := vComando + ' WHERE V.TIPO_REG = ' + QuotedStr('P');
+  case RadioGroup1.ItemIndex of
+    0: vComando := vComando + ' WHERE V.TIPO_REG = ' + QuotedStr('P');
+    1: vComando := vComando + ' WHERE V.TIPO_REG = ' + QuotedStr('O');
+    2: vComando := vComando + ' WHERE 1 = 1';
+  end;
+
   if (fDMConsPedido.qParametrosUSA_APROVACAO_PED.AsString = 'S') and not(ckAprovado.Checked) then
     vComando := vComando + ' AND V.APROVADO_PED = ' + QuotedStr('A');
 
@@ -759,7 +771,12 @@ procedure TfrmConsPedido.prc_Monta_Condicao;
 var
   vOpcaoDtEntrega: String;
 begin
-  vComando := vComando + ' WHERE V.TIPO_REG = ' + QuotedStr('P');
+  case RadioGroup1.ItemIndex of
+    0: vComando := vComando + ' WHERE V.TIPO_REG = ' + QuotedStr('P');
+    1: vComando := vComando + ' WHERE V.TIPO_REG = ' + QuotedStr('O');
+    2: vComando := vComando + ' WHERE 1 = 1';
+  end;
+
   if fDMConsPedido.qParametrosUSA_APROVACAO_PED.AsString = 'S' then
     vComando := vComando + ' AND V.APROVADO_PED = ' + QuotedStr('A');
 

@@ -137,6 +137,8 @@ type
     CurrencyEdit8: TCurrencyEdit;
     Label39: TLabel;
     CurrencyEdit9: TCurrencyEdit;
+    Shape3: TShape;
+    Label40: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -842,9 +844,12 @@ procedure TfrmCadNCM.SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
   AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
   if (fDMCadNCM.qParametrosTIPO_LEI_TRANSPARENCIA.AsString = 'I') and (fDMCadNCM.cdsNCM_ConsultaIBPT_INATIVO.AsString = 'N') and
-     (fDMCadNCM.cdsNCM_ConsultaDT_IBPTFIM.AsDateTime < Date)  then
+     (fDMCadNCM.cdsNCM_ConsultaDT_IBPTFIM.AsDateTime < Date) then
   begin
-    Background  := $0053A9FF;
+    if fDMCadNCM.cdsNCM_ConsultaCONTADOR.AsInteger > 0 then
+      Background  := $0053A9FF
+    else
+      Background  := $00B9B9FF;
     AFont.Color := clBlack;
   end
   else

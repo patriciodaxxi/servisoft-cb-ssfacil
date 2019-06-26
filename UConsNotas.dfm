@@ -435,6 +435,7 @@ object frmConsNotas: TfrmConsNotas
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
+        OnTitleClick = SMDBGrid19TitleClick
         Flat = True
         BandsFont.Charset = DEFAULT_CHARSET
         BandsFont.Color = clWindowText
@@ -636,7 +637,7 @@ object frmConsNotas: TfrmConsNotas
         end
         object ComboBox1: TComboBox
           Left = 73
-          Top = 5
+          Top = 4
           Width = 145
           Height = 21
           Style = csDropDownList

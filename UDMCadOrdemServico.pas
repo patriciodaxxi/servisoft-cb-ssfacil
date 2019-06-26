@@ -1575,6 +1575,7 @@ type
     cdsConsultaMat2TIPO_APROV: TStringField;
     frxConsultaMat2: TfrxDBDataset;
     cdsOSImpQTD_ITENS: TIntegerField;
+    frxOsCons: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspOrdemServicoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

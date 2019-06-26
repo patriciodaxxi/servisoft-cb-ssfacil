@@ -44,6 +44,7 @@ type
     Produto1: TMenuItem;
     ckImpAgrupado: TCheckBox;
     ckImpInventario: TCheckBox;
+    Label10: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -87,7 +88,8 @@ var
 
 implementation
 
-uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, URelInventario, USel_Grupo, USel_Produto;
+uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, URelInventario, USel_Grupo, USel_Produto,
+  uConsProduto_Compras;
 
 {$R *.dfm}
 
@@ -432,6 +434,13 @@ begin
 //    fDMConsEstoque.cdsEstoque.IndexFieldNames := 'ID';
 //    fDMConsEstoque.cdsEstoque.FindKey([vId]);
     FreeAndNil(frmConsEstoque_Mov);
+  end;
+  if (Key = Vk_F8) and not(fDMConsEstoque.cdsEstoque.IsEmpty) then
+  begin
+    frmConsProduto_Compras := TfrmConsProduto_Compras.Create(Self);
+    frmConsProduto_Compras.vIdProd := fDMConsEstoque.cdsEstoqueID.AsInteger;
+    frmConsProduto_Compras.ShowModal;
+    FreeAndNil(frmConsProduto_Compras);
   end;
 end;
 

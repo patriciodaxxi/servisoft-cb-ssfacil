@@ -3,14 +3,12 @@ unit uMenu1;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, jpeg, ExtCtrls, StdCtrls, IniFiles,
-  DateUtils, SqlExpr, UCBase;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, jpeg, ExtCtrls, StdCtrls, IniFiles, Mask,
+  DB, DateUtils, SqlExpr, UCBase, FMTBcd, DBClient, Provider, Grids, DBGrids, SMDBGrid, ToolEdit, strUtils;
 
 type
   TfMenu1 = class(TForm)
     Panel2: TPanel;
-    Panel1: TPanel;
-    Label8: TLabel;
     Panel3: TPanel;
     Label6: TLabel;
     Panel5: TPanel;
@@ -21,19 +19,30 @@ type
     Panel7: TPanel;
     Image1: TImage;
     lbDatabase: TLabel;
-    Panel4: TPanel;
-    lblCPagar: TLabel;
-    Label5: TLabel;
-    lblCPagar_Valor: TLabel;
-    lblCReceber: TLabel;
-    lblCReceber_Valor: TLabel;
-    lblCheque: TLabel;
-    lblCheque_Valor: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
+    Panel1: TPanel;
+    Panel4: TPanel;
+    sdsAniversariante: TSQLDataSet;
+    SMDBGrid1: TSMDBGrid;
+    dspAniversariante: TDataSetProvider;
+    cdsAniversariante: TClientDataSet;
+    dsAniversariante: TDataSource;
+    cdsAniversarianteDT_NASCIMENTO: TDateField;
+    cdsAniversarianteNOME: TStringField;
+    cdsAniversarianteTELEFONE1: TStringField;
+    cdsAniversarianteTELEFONE2: TStringField;
+    DateEdit1: TDateEdit;
+    DateEdit2: TDateEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure DateEdit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DateEdit2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     procedure prc_Verifica_Certificado;
@@ -41,7 +50,10 @@ type
     procedure Le_Ini;
   public
     { Public declarations }
+    vAnivPeriodo: string;
     procedure prc_Verifica_Nota_Dupl(Tipo: String);
+    function fnc_ExibeAniversarios: String;
+    procedure prc_Aniversarios(vDtIni, vDtFin: TDateTime);
   end;
 
 var
@@ -72,6 +84,16 @@ begin
   vVersao := fMenu.GetBuildInfoAsString;
   if vVersao <> '0.0.0.0' then
     lbDatabase.Caption := 'Versão ' + vVersao + ' - ' + lbDatabase.Caption;
+
+  case AnsiIndexStr(fnc_ExibeAniversarios,['N','D','S']) of
+    0: Panel1.Visible := False;
+    1: begin
+         DateEdit1.Date := Date;
+         DateEdit2.Date := Date;
+         prc_Aniversarios(Date,Date);
+       end;
+    2: prc_Aniversarios(0,0);
+  end;
 end;
 
 procedure TfMenu1.Le_Ini;
@@ -207,6 +229,65 @@ end;
 procedure TfMenu1.FormActivate(Sender: TObject);
 begin
   fMenu1.WindowState := wsMaximized;
+end;
+
+procedure TfMenu1.prc_Aniversarios(vDtIni, vDtFin: TDateTime);
+begin
+  if vDtIni < 10 then
+  begin
+    if (DayOfTheWeek(Date) = 1) then
+    begin
+      DateEdit2.Date := Date;
+      DateEdit1.Date := Date + 6;
+    end
+    else
+    begin
+//      DateEdit1.Date := Date - (DayOfTheWeek(Date) - 1);
+      DateEdit1.Date := Date - (DayOfTheWeek(Date));
+      DateEdit2.Date := DateEdit1.Date + 6;
+    end;
+  end;
+
+  cdsAniversariante.Open;
+  cdsAniversariante.Filtered := False;
+  cdsAniversariante.Filter   := 'DT_NASCIMENTO >= ''' + FormatDateTime('DD/MM/YYYY',DateEdit1.Date) +
+                                ''' AND DT_NASCIMENTO <= ''' + FormatDateTime('DD/MM/YYYY',DateEdit2.Date) + '''';
+  cdsAniversariante.Filtered := True;
+  cdsAniversariante.Open;
+end;
+
+procedure TfMenu1.DateEdit1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = vk_Return then
+    prc_Aniversarios(DateEdit1.Date,DateEdit2.Date);
+end;
+
+procedure TfMenu1.DateEdit2KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = vk_Return then
+    prc_Aniversarios(DateEdit1.Date,DateEdit2.Date);
+end;
+
+function TfMenu1.fnc_ExibeAniversarios: String;
+var
+  sds: TSQLDataSet;
+  vDiasAux: Integer;
+begin
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+
+    sds.CommandText := 'SELECT ANIVERSARIO_PERIODO FROM CUPOMFISCAL_PARAMETROS';
+    sds.Open;
+    Result := sds.FieldByName('ANIVERSARIO_PERIODO').AsString;
+    sds.Close;
+  finally
+    FreeAndNil(sds);
+  end;
 end;
 
 end.

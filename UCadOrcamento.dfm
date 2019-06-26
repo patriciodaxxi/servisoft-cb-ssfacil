@@ -282,7 +282,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         BorderStyle = sbsSunken
         Caption = 
           'Duplo clique para consultar            F3-Consulta Reprovado    ' +
-          '       F9 = Aprovar/Reprovar Or'#231'amento'
+          '      F4-Cons.Obs Cliente        F9 = Aprovar/Reprovar Or'#231'amento'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clMaroon
         Font.Height = -11
@@ -667,7 +667,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 12
+        ColCount = 13
         RowCount = 2
         Columns = <
           item
@@ -740,11 +740,19 @@ object frmCadOrcamento: TfrmCadOrcamento
             FieldName = 'NOME_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Vendedor'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ID'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'USUARIO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Usu'#225'rio'
             Visible = True
           end>
       end
@@ -1881,6 +1889,7 @@ object frmCadOrcamento: TfrmCadOrcamento
               item
                 Expanded = False
                 FieldName = 'REFERENCIA'
+                Width = 64
                 Visible = True
               end
               item
@@ -1975,6 +1984,7 @@ object frmCadOrcamento: TfrmCadOrcamento
                 FieldName = 'GRAVACAO_COM_ERRO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Com Notifica'#231#227'o'
+                Width = 64
                 Visible = True
               end>
           end
@@ -2551,7 +2561,7 @@ object frmCadOrcamento: TfrmCadOrcamento
                 end
                 item
                   Expanded = False
-                  FieldName = 'ALTURA'
+                  FieldName = 'ESPESSURA'
                   Title.Alignment = taCenter
                   Title.Caption = '# (mm)'
                   Title.Color = 16764831
@@ -3182,6 +3192,7 @@ object frmCadOrcamento: TfrmCadOrcamento
               item
                 Expanded = False
                 FieldName = 'VLR_TOTAL'
+                Width = 64
                 Visible = True
               end>
           end
@@ -4496,7 +4507,7 @@ object frmCadOrcamento: TfrmCadOrcamento
     Top = 182
   end
   object PopupMenu1: TPopupMenu
-    Left = 320
+    Left = 321
     Top = 6
     object Normal1: TMenuItem
       Caption = 'Or'#231'amento'
@@ -4512,6 +4523,10 @@ object frmCadOrcamento: TfrmCadOrcamento
     end
     object Personalizado1: TMenuItem
       Caption = 'Personalizado'
+    end
+    object SalvarOramento1: TMenuItem
+      Caption = 'Salvar Or'#231'amento'
+      OnClick = SalvarOramento1Click
     end
     object N1: TMenuItem
       Caption = '-'

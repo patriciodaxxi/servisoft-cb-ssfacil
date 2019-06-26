@@ -3,8 +3,8 @@ unit UDMCadPedido;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, DBXpress, Variants, RLPreviewForm, LogTypes, Dialogs, Math,
-  frxExportMail, frxClass, frxExportPDF, frxDBSet, frxRich, UDMEstoque, Forms;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, DBXpress, Variants, RLPreviewForm, LogTypes, Dialogs, Math, Forms, 
+  frxExportMail, frxClass, frxExportPDF, frxDBSet, frxRich, UDMEstoque, RLFilters, RLPDFFilter;
 
 type
   TDMCadPedido = class(TDataModule)
@@ -1384,7 +1384,6 @@ type
     mRotulos_SGradeComplemento_End: TStringField;
     mRotulos_SGradeQtd: TFloatField;
     mEtiqueta_NavNome_Cliente: TStringField;
-    mEtiqueta_NavQtd: TIntegerField;
     mEtiqueta_NavPedido_Cliente: TStringField;
     cdsParametrosIMP_MEIA_FOLHA_PED: TStringField;
     cdsTab_NCMUSAR_MVA_UF_DESTINO: TStringField;
@@ -3439,6 +3438,29 @@ type
     sdsPedidoID_PEDWEB: TIntegerField;
     cdsPedidoID_PEDWEB: TIntegerField;
     cdsTriCCustoEMAIL_COMRAS: TStringField;
+    mEtiqueta_NavQtd: TFloatField;
+    mEtiqueta_NavUnidade_Prod: TStringField;
+    mEtiqueta_NavQtd2: TFloatField;
+    cdsPedidoImp_ItensQTD_POR_ROTULO_PROD: TFloatField;
+    cdsPedidoImp_ItensQTD_EMBALAGEM_PROD: TFloatField;
+    mEtiqueta_NavNome_Cor: TStringField;
+    qParametros_PedUSA_FABRICA: TStringField;
+    sdsPedido_ItensFABRICA: TStringField;
+    cdsPedido_ItensFABRICA: TStringField;
+    cdsPedidoImp_ItensFABRICA: TStringField;
+    mEtiqueta_NavMedida: TStringField;
+    cdsPedidoImp_ItensMEDIDA: TStringField;
+    cdsClienteIMP_ETIQUETA_ROT: TStringField;
+    cdsPedidoImpIMP_ETIQUETA_ROT: TStringField;
+    qProduto_CliNOME_MATERIAL_FORN: TStringField;
+    qProdForn2NOME_MATERIAL_FORN: TStringField;
+    sdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField;
+    cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField;
+    cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF: TStringField;
+    qParametros_ProdUSA_TAB_PRECO_ENC: TStringField;
+    qParametros_ProdUSA_TAB_PRECO_ENG: TStringField;
+    cdsOrcamento_Item_TipoESPESSURA: TFloatField;
+    cdsOrcamento_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3470,6 +3492,8 @@ type
     procedure cdsPedido_ItensCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
     procedure cdsPedidoImp_ItensCalcFields(DataSet: TDataSet);
+    procedure frxDBDataset3First(Sender: TObject);
+    procedure frxDBDataset3Next(Sender: TObject);
   private
     { Private declarations }
     vItem_Desc: Integer;
@@ -3485,6 +3509,7 @@ type
     ctServico: String;
     ctCliente, ctCFOP: String;
     ctqProximoPedido: String;
+    ctqProduto_Cli : String;
     vAliqIcms: Real;
     vSiglaUF: String;
     vID_CFOP, vID_Variacao: Integer;
@@ -3612,6 +3637,7 @@ begin
   ctServico    := sdsServico.CommandText;
   ctDuplicata  := sdsDuplicata.CommandText;
   ctHistSenha  := sdsHist_Senha.CommandText;
+  ctqProduto_Cli := qProduto_Cli.SQL.Text;
   vID_Variacao := 0;
   cdsParametros.Close;
   cdsFilial.Close;
@@ -3987,7 +4013,9 @@ begin
     vSituacao := 'A'
   else
   if (qSituacao_OrcNAO_APROVADO.AsInteger > 0) AND (qSituacao_OrcPENDENTE.AsInteger <= 0) then
-    vSituacao := 'N';
+    vSituacao := 'N'
+  else
+    vSituacao := 'P';
 
   sds := TSQLDataSet.Create(nil);
   sds.SQLConnection := dmDatabase.scoDados;
@@ -4514,7 +4542,6 @@ begin
       TfrxMemoView(frxReport1.FindComponent('Qtd_S'+vCompl2+IntToStr(i))).Visible   := True;
     end;
   end;
-
 end;
 
 procedure TDMCadPedido.frxDBDataset1First(Sender: TObject);
@@ -4691,6 +4718,18 @@ begin
   if ID > 0 then
     sdsCliente.CommandText := sdsCliente.CommandText + ' AND CODIGO = ' + inttostr(ID);
   cdsCliente.Open;
+end;
+
+procedure TDMCadPedido.frxDBDataset3First(Sender: TObject);
+begin
+  if (frxReport1.FindComponent('Foto_PDF')<> nil) and (cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
+    TfrxPictureView(frxReport1.FindComponent('Foto_PDF')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
+end;
+
+procedure TDMCadPedido.frxDBDataset3Next(Sender: TObject);
+begin
+  if (frxReport1.FindComponent('Foto_PDF')<> nil) and (cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
+    TfrxPictureView(frxReport1.FindComponent('Foto_PDF')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
 end;
 
 end.

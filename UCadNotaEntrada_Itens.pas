@@ -45,8 +45,8 @@ type
     Label11: TLabel;
     Label13: TLabel;
     Label14: TLabel;
-    Label9: TLabel;
-    Label15: TLabel;
+    lblContaOrc: TLabel;
+    lblCCusto: TLabel;
     Label16: TLabel;
     Label17: TLabel;
     lblTamanho: TLabel;
@@ -62,8 +62,8 @@ type
     RxDBLookupCombo5: TRxDBLookupCombo;
     DBEdit7: TDBEdit;
     DBEdit8: TDBEdit;
-    RxDBLookupCombo6: TRxDBLookupCombo;
-    RxDBLookupCombo7: TRxDBLookupCombo;
+    RxDBlkContaOrc: TRxDBLookupCombo;
+    RxDBlkCCusto: TRxDBLookupCombo;
     DBMemo1: TDBMemo;
     btnGrade: TNxButton;
     dblcTamanho: TRxDBLookupCombo;
@@ -225,10 +225,10 @@ begin
   Panel4.Visible   := (fDMCadNotaFiscal.qParametros_NTEMOSTRAR_FINALIDADE.AsString = 'S');
   if Panel4.Visible then
     Panel4.TabOrder := 1;
-  Label9.Visible           := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
-  RxDBLookupCombo6.Visible := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
-  Label15.Visible          := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
-  RxDBLookupCombo7.Visible := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
+  lblContaOrc.Visible      := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
+  RxDBlkContaOrc.Visible   := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
+  lblCCusto.Visible        := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
+  RxDBlkCCusto.Visible     := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
 end;
 
 procedure TfrmCadNotaEntrada_Itens.Panel2Enter(Sender: TObject);
@@ -275,7 +275,14 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := 0
   else
   if fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S' then
+  begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := fDMCadNotaFiscal.cdsUFPERC_ICMS.AsFloat;
+    //28/05/2019
+    uCalculo_NotaFiscal.prc_Abrir_qProduto_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsClienteUF.AsString);
+    if StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.qProduto_UFPERC_ICMS.AsFloat)) > 0 then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := fDMCadNotaFiscal.qProduto_UFPERC_ICMS.AsFloat;
+    //*******************
+  end;
 
   if (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsInsert]) or (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant) then
   begin
@@ -321,6 +328,12 @@ begin
     and (fDMCadNotaFiscal.cdsCFOPGERAR_ESTOQUE.AsString = 'S') then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fnc_Estoque_Tipo_Mat(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,'E');
   //***************
+
+  //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+  if (fDMCadNotaFiscal.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'S') and
+     (fDMCadNotaFiscal.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
+  //***************************
 
 end;
 

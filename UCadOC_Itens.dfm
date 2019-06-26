@@ -167,6 +167,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         DataField = 'ID_PRODUTO'
         DataSource = DMCadPedido.dsPedido_Itens
         TabOrder = 0
+        OnEnter = DBEdit15Enter
         OnKeyDown = DBEdit15KeyDown
       end
     end
@@ -590,8 +591,8 @@ object frmCadOC_Itens: TfrmCadOC_Itens
       DataField = 'ATUALIZA_PRECO_CUSTO'
       DataSource = DMCadPedido.dsPedido_Itens
       TabOrder = 5
-      ValueChecked = 'True'
-      ValueUnchecked = 'False'
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
     end
   end
   object pnlCod_Barras: TPanel

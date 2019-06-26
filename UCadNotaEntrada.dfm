@@ -25,7 +25,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     Top = 0
     Width = 941
     Height = 679
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1399,7 +1399,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
         Top = 188
         Width = 937
         Height = 436
-        ActivePage = RzTabSheet1
+        ActivePage = ts_Duplicata
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -1407,7 +1407,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 2
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet

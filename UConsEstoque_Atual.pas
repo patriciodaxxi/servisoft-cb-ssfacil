@@ -109,8 +109,8 @@ begin
   vComando := 'select aux.*, PRO.NOME NOME_PRODUTO, PRO.REFERENCIA, COMB.NOME NOME_COMBINACAO, PRO.localizacao, '
             + ' PRO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM, NCM.NCM, NCM.NOME NOME_NCM '
             + ' from ( '
-            + ' select ea.id_produto, sum(ea.qtd) qtd, ea.id_cor, ea.tamanho, '
-            + ' ea.id_local_estoque, sum(ea.qtd_reserva) qtd_reserva '
+            + ' select ea.id_produto, cast(sum(ea.qtd) as double precision) qtd, ea.id_cor, ea.tamanho, '
+            + ' ea.id_local_estoque, cast(sum(ea.qtd_reserva) as double precision) qtd_reserva '
             + ' from vestoque_atual ea ';
   if RxDBLookupCombo1.Text <> '' then
     vComando := vComando + ' where ea.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
@@ -312,10 +312,13 @@ begin
     ceIDProduto.AsInteger := vId;
     ffrmConsEstoque_Mov   := TfrmConsEstoque_Mov.Create(self);
     vControleExterno      := True;
-    ffrmConsEstoque_Mov.RxDBLookupCombo1.KeyValue := RxDBLookupCombo1.KeyValue;
+    if Trim(RxDBLookupCombo1.Text) <> '' then
+      ffrmConsEstoque_Mov.RxDBLookupCombo1.KeyValue := RxDBLookupCombo1.KeyValue;
     ffrmConsEstoque_Mov.ceIDProduto.AsInteger := ceIDProduto.AsInteger;
     ffrmConsEstoque_Mov.edtRef.Text := edtRef.Text;
     ffrmConsEstoque_Mov.WindowState := wsMaximized;
+    ffrmConsEstoque_Mov.vID_Cor_Loc := fDMConsEstoque.cdsEstoque_AtualID_COR.AsInteger;
+    ffrmConsEstoque_Mov.RadioGroup1.ItemIndex := 2;
     ffrmConsEstoque_Mov.ShowModal;
     ceIDProduto.Clear;
     FreeAndNil(frmConsEstoque_Mov);

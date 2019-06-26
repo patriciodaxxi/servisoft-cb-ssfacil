@@ -174,6 +174,33 @@ type
     cdsTab_PrecoNGR: TStringField;
     qParametros_FinUSA_NGR: TStringField;
     qParametros_FinARREDONDA_PRECO_TAB: TStringField;
+    sdsPrecoProd: TSQLDataSet;
+    cdsPrecoProd: TClientDataSet;
+    dsPrecoProd: TDataSource;
+    dspPrecoProd: TDataSetProvider;
+    cdsPrecoProdID: TIntegerField;
+    cdsPrecoProdITEM: TIntegerField;
+    cdsPrecoProdID_PRODUTO: TIntegerField;
+    cdsPrecoProdVLR_VENDA: TFloatField;
+    cdsPrecoProdID_COR: TIntegerField;
+    cdsPrecoProdNOMEPRODUTO: TStringField;
+    cdsPrecoProdREFERENCIA: TStringField;
+    cdsPrecoProdPRECO_CUSTO: TFloatField;
+    cdsPrecoProdNOME_FORNECEDOR: TStringField;
+    cdsPrecoProdNOME_MARCA: TStringField;
+    cdsPrecoProdFANTASIA: TStringField;
+    cdsPrecoProdNOME_COR: TStringField;
+    sdsTab_Preco_ItensVLR_VENDA1: TFloatField;
+    sdsTab_Preco_ItensVLR_VENDA2: TFloatField;
+    cdsTab_Preco_ItensVLR_VENDA1: TFloatField;
+    cdsTab_Preco_ItensVLR_VENDA2: TFloatField;
+    qParametros_ProdUSA_TAB_PRECO_ENC: TStringField;
+    qParametros_ProdUSA_TAB_PRECO_ENG: TStringField;
+    cdsTab_Preco_ConsultaVLR_VENDA1: TFloatField;
+    cdsTab_Preco_ConsultaVLR_VENDA2: TFloatField;
+    qTab: TSQLQuery;
+    qTabID: TIntegerField;
+    qTabNOME: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsTab_Preco_ItensNewRecord(DataSet: TDataSet);
     procedure dspTab_PrecoUpdateError(Sender: TObject;
@@ -248,6 +275,7 @@ procedure TDMCadTab_Preco.prc_Excluir;
 begin
   if not(cdsTab_Preco.Active) or (cdsTab_Preco.IsEmpty) then
     exit;
+
   cdsTab_Preco_Itens.First;
   while not cdsTab_Preco_Itens.Eof do
     cdsTab_Preco_Itens.Delete;
@@ -372,7 +400,9 @@ end;
 
 procedure TDMCadTab_Preco.cdsTab_Preco_ItensNewRecord(DataSet: TDataSet);
 begin
-  cdsTab_Preco_ItensVLR_VENDA.AsFloat := 0;
+  cdsTab_Preco_ItensVLR_VENDA.AsFloat  := 0;
+  cdsTab_Preco_ItensVLR_VENDA1.AsFloat := 0;
+  cdsTab_Preco_ItensVLR_VENDA2.AsFloat := 0;
 end;
 
 procedure TDMCadTab_Preco.dspTab_PrecoUpdateError(Sender: TObject;

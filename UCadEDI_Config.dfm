@@ -961,7 +961,8 @@ object frmCadEDI_Config: TfrmCadEDI_Config
             'West Coast'
             'Dass'
             'Outros'
-            'Ramarim')
+            'Ramarim'
+            'Wirth XML')
           ParentCtl3D = False
           TabOrder = 1
           Values.Strings = (
@@ -970,7 +971,8 @@ object frmCadEDI_Config: TfrmCadEDI_Config
             'WEST_COAST'
             'DASS'
             'OUTRO'
-            'RAMARIM')
+            'RAMARIM'
+            'WIRTHXML')
           OnChange = RxDBComboBox2Change
           OnExit = RxDBComboBox2Exit
         end

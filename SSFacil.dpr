@@ -786,7 +786,27 @@ uses
   UConsMatPed in 'UConsMatPed.pas' {frmConsMatPed},
   UCadTipoCobranca_Itens in 'UCadTipoCobranca_Itens.pas' {frmCadTipoCobranca_Itens},
   UCadFilial_Certificado in 'UCadFilial_Certificado.pas' {frmCadFilial_Certificado},
-  UDMCadFilial_Certificado in 'UDMCadFilial_Certificado.pas' {DMFilial_Certificado: TDataModule};
+  UDMCadFilial_Certificado in 'UDMCadFilial_Certificado.pas' {DMFilial_Certificado: TDataModule},
+  udmNFSe in 'EnvioAcbr\udmNFSe.pas' {dmNFSe: TDataModule},
+  uEnvio_NFSe_Acbr in 'EnvioAcbr\UEnvio_NFSe_Acbr.pas',
+  UDMCadPlanoMat in 'UDMCadPlanoMat.pas' {DMCadPlanoMat: TDataModule},
+  UGerar_PlanoMat in 'UGerar_PlanoMat.pas' {frmGerar_PlanoMat},
+  uConsProduto_Compras in 'uConsProduto_Compras.pas' {frmConsProduto_Compras},
+  UVendedor_Config in 'UVendedor_Config.pas' {frmVendedor_Config},
+  UCadProduto_CA in 'UCadProduto_CA.pas' {frmCadProduto_CA},
+  UConsEstRed in 'UConsEstRed.pas' {frmConsEstRed},
+  UCadNotaFiscal_Alt_CCusto in 'UCadNotaFiscal_Alt_CCusto.pas' {frmCadNotaFiscal_Alt_CCusto},
+  UDMCadRaca in 'Pet\UDMCadRaca.pas' {DMCadRaca: TDataModule},
+  uCadRaca in 'Pet\uCadRaca.pas' {frmCadRaca},
+  UDMCadTipo_Animal in 'Pet\UDMCadTipo_Animal.pas' {DMCadTipo_Animal: TDataModule},
+  uCadTipo_Animal in 'Pet\uCadTipo_Animal.pas' {frmCadTipo_Animal},
+  UCadPessoa_Animal in 'UCadPessoa_Animal.pas' {frmCadPessoa_Animal},
+  USel_PessoaPet in 'USel_PessoaPet.pas' {frmSel_PessoaPet},
+  UMontaPed_TipoItem in 'UMontaPed_TipoItem.pas' {frmMontaPed_TipoItem},
+  uConsProdutoPedido in 'uConsProdutoPedido.pas' {frmConsultaProduto},
+  uMostraPDF in 'uMostraPDF.pas' {frmMostraPDF},
+  UConsClienteOBS in 'UConsClienteOBS.pas' {frmConsClienteOBS},
+  uImprimir in 'uImprimir.pas';
 
 {$R *.res}
 

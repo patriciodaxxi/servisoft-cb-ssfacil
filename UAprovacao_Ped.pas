@@ -87,6 +87,7 @@ type
     procedure prc_Consultar;
     procedure prc_Le_mPedido(Tipo: String);
     procedure prc_Gravar_Pedido_Aprov(ID_Pedido: Integer; Tipo: String);
+    procedure prc_Gravar_PedWeb(ID : Integer);
     procedure prc_Opcoes;
   public
     { Public declarations }
@@ -272,12 +273,21 @@ begin
 end;
 
 procedure TfrmAprovacao_Ped.prc_Le_mPedido(Tipo: String);
+Var
+  vPedWeb : Integer;
 begin
   fDMAprovacao_Ped.mPedidoAux.First;
   while not fDMAprovacao_Ped.mPedidoAux.Eof do
   begin
     if (SMDBGrid2.SelectedRows.CurrentRowSelected) then
+    begin
       prc_Gravar_Pedido_Aprov(fDMAprovacao_Ped.mPedidoAuxID_Pedido.AsInteger,Tipo);
+      if SQLLocate('PEDIDO','ID','ID_PEDWEB',fDMAprovacao_Ped.mPedidoAuxID_Pedido.AsString) <> EmptyStr then
+      begin
+        vPedWeb := StrToInt(SQLLocate('PEDIDO','ID','ID_PEDWEB',fDMAprovacao_Ped.mPedidoAuxID_Pedido.AsString));
+        prc_Gravar_PedWeb(vPedWeb);
+      end;
+    end;
     fDMAprovacao_Ped.mPedidoAux.Next;
   end;
 end;
@@ -603,11 +613,8 @@ begin
       fDMAprovacao_Ped.prc_Localiza_PedWeb(fDMAprovacao_Ped.cdsConsultaPedWebID.AsInteger);
       prc_Inserir_Registro_Web;
       prc_Gravar_Registro_Web;
-
-      // Grava Aprovação na tabela PEDWEB
       fDMAprovacao_Ped.cdsPedWeb.Edit;
       fDMAprovacao_Ped.cdsPedWebGERADO.AsString := 'S';
-      fDMAprovacao_Ped.cdsPedWebDATA_APROVADO.AsDateTime := Date;
       fDMAprovacao_Ped.cdsPedWeb.Post;
       fDMAprovacao_Ped.cdsPedWeb.ApplyUpdates(0);
       fDMAprovacao_Ped.cdsConsultaPedWeb.Next;
@@ -697,6 +704,16 @@ begin
   fdmcadpedido.cdsPedidoID_PEDWEB.AsInteger   := fDMAprovacao_Ped.cdsConsultaPedWebID.AsInteger;
   fdmCadPedido.cdsPedidoID_CONDPGTO.AsInteger := fDMAprovacao_Ped.cdsConsultaPedWebCOND_PAGAMENTO.AsInteger;
   fdmCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P';
+end;
+
+procedure TfrmAprovacao_Ped.prc_Gravar_PedWeb(ID: Integer);
+begin
+  // Grava Data Aprovação na tabela PEDWEB
+  fDMAprovacao_Ped.prc_Localiza_PedWeb(ID);
+  fDMAprovacao_Ped.cdsPedWeb.Edit;
+  fDMAprovacao_Ped.cdsPedWebDATA_APROVADO.AsDateTime := Date;
+  fDMAprovacao_Ped.cdsPedWeb.Post;
+  fDMAprovacao_Ped.cdsPedWeb.ApplyUpdates(0);
 end;
 
 end.

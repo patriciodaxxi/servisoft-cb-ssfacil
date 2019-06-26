@@ -38,7 +38,7 @@ uses
 var
   EnviNfe: IXMLTEnviNFe;
   NfeXML: IXMLTNFe;
-  DetXML : IXMLDet;
+  DetXML: IXMLDet;
   RefNfeXML: IXMLNFref;
   TranspXML: IXMLTransp;
   TransportaXML: IXMLTransporta;
@@ -87,7 +87,7 @@ begin
 
   EnviNfe := NewenviNFe;
   NfeXML  := EnviNfe.NFe.Add;
-                     
+
   prc_Monta_Cabecalho(fDMCupomFiscal,fDMNFCe);
 
   fDMCupomFiscal.qUF.Close;
@@ -892,7 +892,7 @@ begin
 {* A  Dados da Nota Fiscal Eletrônica}
   //NfeXML.InfNFe.Versao := fDMNFCe.qParametrosVERSAONFE.AsString;
   if (trim(fDMNFCe.qParametros_NFeVERSAONFCE.AsString) = '') or (fDMNFCe.qParametros_NFeVERSAONFCE.IsNull) then
-    NfeXML.InfNFe.Versao := '3.10'
+    NfeXML.InfNFe.Versao := '4.00'
   else
     NfeXML.InfNFe.Versao := fDMNFCe.qParametros_NFeVERSAONFCE.AsString;
   //NfeXML.InfNFe.Versao := fDMNFCe.qParametros_NFeVERSAONFCE.AsString;
@@ -1009,40 +1009,46 @@ begin
   if (fDMCupomFiscal.cdsCupomFiscalID_CLIENTE.AsInteger <> fDMCupomFiscal.cdsParametrosID_CLIENTE_CONSUMIDOR.AsInteger)
      and (fDMCupomFiscal.cdsCupomFiscalID_CLIENTE.AsInteger > 0) then
   begin
-    fDMNFCe.Posiciona_CidadeUF(fDMCupomFiscal.cdsPessoaID_CIDADE.AsInteger,fDMCupomFiscal.cdsPessoaID_PAIS.AsInteger);
-    if fDMCupomFiscal.cdsPessoaPESSOA.AsString = 'E' then
-      NfeXML.InfNFe.Dest.IdEstrangeiro := Monta_Texto(fDMCupomFiscal.cdsPessoaCNPJ_CPF.AsString,0)
+    if (fDMCupomFiscal.cdsPessoaCNPJ_CPF.AsString = '000.000.000-00') then
+    begin
+    end
     else
-    if fDMCupomFiscal.cdsPessoaPESSOA.AsString = 'J' then
-      NfeXML.InfNFe.Dest.CNPJ := Monta_Texto(fDMCupomFiscal.cdsPessoaCNPJ_CPF.AsString,14)
-    else
-    if fDMCupomFiscal.cdsPessoaPESSOA.AsString = 'F' then
-      NfeXML.InfNFe.Dest.CPF := Monta_Texto(fDMCupomFiscal.cdsPessoaCNPJ_CPF.AsString,11);
-    if vTipo_Ambiente_NFe = '2' then
-      NfeXML.InfNFe.Dest.XNome := 'NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL'
-    else
-      NfeXML.InfNFe.Dest.XNome := TirarAcento(fDMCupomFiscal.cdsPessoaNOME.AsString);
-    NfeXML.InfNFe.Dest.EnderDest.XLgr := TirarAcento(fDMCupomFiscal.cdsPessoaENDERECO.AsString);
-    NfeXML.InfNFe.Dest.EnderDest.Nro  := fDMCupomFiscal.cdsPessoaNUM_END.AsString;
-    if trim(fDMCupomFiscal.cdsPessoaCOMPLEMENTO_END.AsString) <> '' then
-      NfeXML.InfNFe.Dest.EnderDest.XCpl := TirarAcento(fDMCupomFiscal.cdsPessoaCOMPLEMENTO_END.AsString);
-    NfeXML.InfNFe.Dest.EnderDest.XBairro := TirarAcento(fDMCupomFiscal.cdsPessoaBAIRRO.AsString);
-    NfeXML.InfNFe.Dest.EnderDest.CMun := fDMNFCe.qCidadeCODMUNICIPIO.AsString;
-    NfeXML.InfNFe.Dest.EnderDest.XMun := TirarAcento(fDMNFCe.qCidadeNOME.AsString);
-    NfeXML.InfNFe.Dest.EnderDest.UF   := fDMNFCe.qUFUF.AsString;
-    NfeXML.InfNFe.Dest.EnderDest.CEP  := Monta_Texto(fDMCupomFiscal.cdsPessoaCEP.AsString,8);
-    NfeXML.InfNFe.Dest.EnderDest.CPais := fDMNFCe.qPaisCODPAIS.AsString;
-    NfeXML.InfNFe.Dest.EnderDest.XPais := TirarAcento(fDMNFCe.qPaisNOME.AsString);
-    Texto2 := Monta_Texto(fDMCupomFiscal.cdsPessoaTELEFONE1.AsString,0);
-    if trim(Texto2) <> '' then
-      NfeXML.InfNFe.Dest.EnderDest.Fone := fDMCupomFiscal.cdsPessoaDDDFONE1.AsString + Monta_Texto(fDMCupomFiscal.cdsPessoaTELEFONE1.AsString,0);
-     NfeXML.InfNFe.Dest.IndIEDest := '9';
-    if (trim(fDMCupomFiscal.cdsPessoaINSC_SUFRAMA.AsString) <> '') and not(fDMCupomFiscal.cdsPessoaINSC_SUFRAMA.IsNull) then
-      NfeXML.InfNFe.Dest.ISUF := Monta_Texto(fDMCupomFiscal.cdsPessoaINSC_SUFRAMA.AsString,0);
-    if (trim(fDMCupomFiscal.cdsPessoaINSC_MUNICIPAL.AsString) <> '') and not(fDMCupomFiscal.cdsPessoaINSC_MUNICIPAL.IsNull) then
-      NfeXML.InfNFe.Dest.IM := Monta_Texto(fDMCupomFiscal.cdsPessoaINSC_MUNICIPAL.AsString,0);
-    if trim(fDMCupomFiscal.cdsPessoaEMAIL_NFE.AsString) <> '' then
-      NfeXML.InfNFe.Dest.Email := Copy(fDMCupomFiscal.cdsPessoaEMAIL_NFE.AsString,1,60);
+    begin
+      fDMNFCe.Posiciona_CidadeUF(fDMCupomFiscal.cdsPessoaID_CIDADE.AsInteger,fDMCupomFiscal.cdsPessoaID_PAIS.AsInteger);
+      if fDMCupomFiscal.cdsPessoaPESSOA.AsString = 'E' then
+        NfeXML.InfNFe.Dest.IdEstrangeiro := Monta_Texto(fDMCupomFiscal.cdsPessoaCNPJ_CPF.AsString,0)
+      else
+      if fDMCupomFiscal.cdsPessoaPESSOA.AsString = 'J' then
+        NfeXML.InfNFe.Dest.CNPJ := Monta_Texto(fDMCupomFiscal.cdsPessoaCNPJ_CPF.AsString,14)
+      else
+      if fDMCupomFiscal.cdsPessoaPESSOA.AsString = 'F' then
+        NfeXML.InfNFe.Dest.CPF := Monta_Texto(fDMCupomFiscal.cdsPessoaCNPJ_CPF.AsString,11);
+      if vTipo_Ambiente_NFe = '2' then
+        NfeXML.InfNFe.Dest.XNome := 'NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL'
+      else
+        NfeXML.InfNFe.Dest.XNome := TirarAcento(fDMCupomFiscal.cdsPessoaNOME.AsString);
+      NfeXML.InfNFe.Dest.EnderDest.XLgr := TirarAcento(fDMCupomFiscal.cdsPessoaENDERECO.AsString);
+      NfeXML.InfNFe.Dest.EnderDest.Nro  := fDMCupomFiscal.cdsPessoaNUM_END.AsString;
+      if trim(fDMCupomFiscal.cdsPessoaCOMPLEMENTO_END.AsString) <> '' then
+        NfeXML.InfNFe.Dest.EnderDest.XCpl := TirarAcento(fDMCupomFiscal.cdsPessoaCOMPLEMENTO_END.AsString);
+      NfeXML.InfNFe.Dest.EnderDest.XBairro := TirarAcento(fDMCupomFiscal.cdsPessoaBAIRRO.AsString);
+      NfeXML.InfNFe.Dest.EnderDest.CMun := fDMNFCe.qCidadeCODMUNICIPIO.AsString;
+      NfeXML.InfNFe.Dest.EnderDest.XMun := TirarAcento(fDMNFCe.qCidadeNOME.AsString);
+      NfeXML.InfNFe.Dest.EnderDest.UF   := fDMNFCe.qUFUF.AsString;
+      NfeXML.InfNFe.Dest.EnderDest.CEP  := Monta_Texto(fDMCupomFiscal.cdsPessoaCEP.AsString,8);
+      NfeXML.InfNFe.Dest.EnderDest.CPais := fDMNFCe.qPaisCODPAIS.AsString;
+      NfeXML.InfNFe.Dest.EnderDest.XPais := TirarAcento(fDMNFCe.qPaisNOME.AsString);
+      Texto2 := Monta_Texto(fDMCupomFiscal.cdsPessoaTELEFONE1.AsString,0);
+      if trim(Texto2) <> '' then
+        NfeXML.InfNFe.Dest.EnderDest.Fone := fDMCupomFiscal.cdsPessoaDDDFONE1.AsString + Monta_Texto(fDMCupomFiscal.cdsPessoaTELEFONE1.AsString,0);
+       NfeXML.InfNFe.Dest.IndIEDest := '9';
+      if (trim(fDMCupomFiscal.cdsPessoaINSC_SUFRAMA.AsString) <> '') and not(fDMCupomFiscal.cdsPessoaINSC_SUFRAMA.IsNull) then
+        NfeXML.InfNFe.Dest.ISUF := Monta_Texto(fDMCupomFiscal.cdsPessoaINSC_SUFRAMA.AsString,0);
+      if (trim(fDMCupomFiscal.cdsPessoaINSC_MUNICIPAL.AsString) <> '') and not(fDMCupomFiscal.cdsPessoaINSC_MUNICIPAL.IsNull) then
+        NfeXML.InfNFe.Dest.IM := Monta_Texto(fDMCupomFiscal.cdsPessoaINSC_MUNICIPAL.AsString,0);
+      if trim(fDMCupomFiscal.cdsPessoaEMAIL_NFE.AsString) <> '' then
+        NfeXML.InfNFe.Dest.Email := Copy(fDMCupomFiscal.cdsPessoaEMAIL_NFE.AsString,1,60);
+    end;
   end
   else
   begin

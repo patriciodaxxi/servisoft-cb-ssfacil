@@ -8,6 +8,8 @@ uses
   UDMConsFinanceiro, StrUtils, Grids, DBGrids, SMDBGrid, DB, RzTabs, ComCtrls,
   RzListVw, RzTreeVw, RzLstBox;
 
+type EnumDataRelatorio = (tpDataEmissao,tpDataVencimento,tpDataPagamento);
+
 type
   TfrmConsCtaOrcamento_Fin = class(TForm)
     Panel1: TPanel;
@@ -51,6 +53,7 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure SMDBGrid1DblClick(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure RzPageControl1Change(Sender: TObject);
   private
     { Private declarations }
     fDMConsFinanceiro: TDMConsFinanceiro;
@@ -67,6 +70,8 @@ type
     procedure prc_Consultar_CCusto;
     procedure prc_Gravar_mConta_Orc_CCusto;
     procedure prc_Consultar_CCusto_Orcamento;
+    procedure prc_Consultar_Resumo_CCusto;
+    procedure prc_Carrega_Combo;
   public
     { Public declarations }
 
@@ -111,13 +116,27 @@ begin
     MessageDlg('*** Conta de orçamento de Receita não informada nos parametros (Contas de Orçamento)!', mtInformation, [mbOk], 0);
     exit;
   end;
-  fDMConsFinanceiro.mConta_Orc.EmptyDataSet;
-  fDMConsFinanceiro.mContas_Orc_CCusto.EmptyDataSet;
+  if (RzPageControl1.ActivePage = ts_Centro_Orcamento) then
+  begin
+//    if (comboCentroCusto.KeyValue = 0) or (comboCentroCusto.KeyValue = null) then
+//    begin
+//      MessageDlg('*** Informe o centro de custo!', mtInformation, [mbOk], 0);
+//      comboCentroCusto.SetFocus;
+//      exit;
+//    end;
+    if (RxDBLookupCombo1.KeyValue = 0) or (RxDBLookupCombo1.KeyValue = null) then
+    begin
+      MessageDlg('*** Informe a filial!', mtInformation, [mbOk], 0);
+      RxDBLookupCombo1.SetFocus;
+      exit;
+    end;
+  end;
 
   fDMConsFinanceiro.vTotal_Desp := 0;
   fDMConsFinanceiro.vTotal_Rec := 0;
-  if RzPageControl1.ActivePage = TS_Resumido then
+   if RzPageControl1.ActivePage = TS_Resumido then
   begin
+    fDMConsFinanceiro.mConta_Orc.EmptyDataSet;
     prc_Consultar;
     prc_Le_Consulta;
     //prc_Le_Pedido_Pend;
@@ -125,16 +144,19 @@ begin
     fDMConsFinanceiro.mConta_Orc.IndexFieldNames := 'TIPO_ES;CODIGO';
   end
   else
-  if RzPageControl1.ActivePage = TS_Resumido then
+  //if RzPageControl1.ActivePage = TS_Resumido then
+  if RzPageControl1.ActivePage = ts_CentroCusto then
   begin
+    fDMConsFinanceiro.mContas_Orc_CCusto.EmptyDataSet;
     prc_Consultar_CCusto;
     prc_Le_Consulta_CCusto;
     fDMConsFinanceiro.mContas_Orc_CCusto.IndexFieldNames := 'TIPO_ES;CODIGO';
   end
   else
+  begin
     prc_Consultar_CCusto_Orcamento;
-
-
+//    prc_Consultar_Resumo_CCusto;
+  end;
   Label6.Caption := FormatFloat('###,###,###,###,##0.00', fDMConsFinanceiro.vTotal_Rec);
   Label8.Caption := FormatFloat('###,###,###,###,##0.00', fDMConsFinanceiro.vTotal_Desp);
   vAux := StrToFloat(FormatFloat('0.00', fDMConsFinanceiro.vTotal_Rec - fDMConsFinanceiro.vTotal_Desp));
@@ -162,9 +184,13 @@ begin
   if RxDBLookupCombo1.Text <> '' then
     vComando := vComando + ' AND DUP.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
   if NxComboBox2.ItemIndex = 0 then
-    vComando := vComando + ' AND DUP.DTEMISSAO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date))
-  else if NxComboBox2.ItemIndex = 1 then
-    vComando := vComando + ' AND DUP.DTVENCIMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date));
+    vComando := vComando + ' AND DUP.DTULTPAGAMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date))
+  else
+  if NxComboBox2.ItemIndex = 1 then
+    vComando := vComando + ' AND DUP.DTVENCIMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date))
+  else
+  if NxComboBox2.ItemIndex = 2 then
+    vComando := vComando + ' AND DUP.DTULTPAGAMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date));
 
   case ComboBox1.ItemIndex of
     0:
@@ -186,6 +212,7 @@ begin
   fDMConsFinanceiro.qParametros_Cta_Orc.Open;
   fDMConsFinanceiro.cdsCentroCusto.Close;
   fDMConsFinanceiro.cdsCentroCusto.Open;
+  prc_Carrega_Combo;  
 end;
 
 procedure TfrmConsCtaOrcamento_Fin.prc_Le_Consulta;
@@ -367,7 +394,10 @@ begin
     end;
     SMDBGrid3.DisableScroll;
     fDMConsFinanceiro.cdsCCustoOrcamento.First;
-    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Orcamento_CentroCusto2.fr3';
+    if SQLLocate('PARAMETROS_FIN','ID','CONTROLA_CONTRATO_CCUSTO','1') = 'S' then
+      vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Orcamento_CentroCusto2.fr3'
+    else
+      vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Orcamento_CentroCusto2_bellbraz.fr3';
     if FileExists(vArq) then
       fDMConsFinanceiro.frxReport1.Report.LoadFromFile(vArq)
     else
@@ -377,6 +407,8 @@ begin
     end;
     fDMConsFinanceiro.vDataIni := FormatDateTime('DD/MM/YYYY',DateEdit1.Date);
     fDMConsFinanceiro.vDataFim := FormatDateTime('DD/MM/YYYY',DateEdit2.Date);
+    fDMConsFinanceiro.frxReport1.variables['DataInicial'] := QuotedStr(FormatDateTime('DD/MM/YYYY',(DateEdit1.Date - 1)));
+
     fDMConsFinanceiro.frxReport1.ShowReport;
     SMDBGrid3.EnableScroll;
   end;
@@ -612,15 +644,15 @@ var
   i: Integer;
 begin
   fDMConsFinanceiro.cdsConsulta_Conta_Orc_CCus.Close;
-  i := PosEx('GROUP', fDMConsFinanceiro.ctConsulta_Conta_Orc_CCusto, 0);
-  vComandoAux := copy(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCusto, i, Length(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCusto) - i + 1);
-  vComandoAux2 := copy(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCusto, 1, i - 1);
+  i := PosEx('GROUP', fDMConsFinanceiro.ctConsulta_Conta_Orc_CCus, 0);
+  vComandoAux := copy(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCus, i, Length(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCus) - i + 1);
+  vComandoAux2 := copy(fDMConsFinanceiro.ctConsulta_Conta_Orc_CCus, 1, i - 1);
 
   //vComando := ' WHERE 0 = 0 ';
   if RxDBLookupCombo1.Text <> '' then
     vComando := vComando + ' AND DUP.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
   if NxComboBox2.ItemIndex = 0 then
-    vComando := vComando + ' AND DUP.DTEMISSAO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date))
+    vComando := vComando + ' AND DUP.DTULTPAGAMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date))
   else if NxComboBox2.ItemIndex = 1 then
     vComando := vComando + ' AND DUP.DTVENCIMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.Date)) + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.Date));
 
@@ -695,15 +727,60 @@ begin
 end;
 
 procedure TfrmConsCtaOrcamento_Fin.prc_Consultar_CCusto_Orcamento;
+var
+  vComandoAux, vComandoAux2, vComando, vdata : String;
+  i : Integer;
 begin
   fDMConsFinanceiro.cdsCCustoOrcamento.Close;
+  i := PosEx('GROUP', UpperCase(fDMConsFinanceiro.ctCCustoOrcamento), 0);
+  vComandoAux := copy(fDMConsFinanceiro.ctCCustoOrcamento, i, Length(fDMConsFinanceiro.ctCCustoOrcamento) - i + 1);
+  vComandoAux2 := copy(fDMConsFinanceiro.ctCCustoOrcamento, 1, i - 1);
+  vComando := '';
+  case EnumDataRelatorio(NxComboBox2.ItemIndex) of
+    tpDataEmissao    : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTEMISSAO',[rfReplaceAll]);
+    tpDataVencimento : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTVENCIMENTO',[rfReplaceAll]);
+    tpDataPagamento  : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTPAGAMENTO',[rfReplaceAll]);
+  end;
+  case ComboBox1.ItemIndex of
+    0: vComando := vComando + ' AND VD.VALOR_PAGO > 0 ';
+    1: vComando := vComando + ' AND VD.VALOR_RESTANTE > 0 ';
+  end;
+  fDMConsFinanceiro.sdsCCustoOrcamento.CommandText := vComandoAux2 + vComando + vComandoAux;
   fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('DTFINAL').AsDate := DateEdit2.Date;
   if (comboCentroCusto.KeyValue > 0) or (comboCentroCusto.KeyValue <> null) then
     fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('ID_CENTROCUSTO').AsInteger := comboCentroCusto.KeyValue
   else
     fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('ID_CENTROCUSTO').AsInteger := 0;
+  fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('TIPO_HISTORICO').AsString := 'PAG';
+  fDMConsFinanceiro.sdsCCustoOrcamento.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMConsFinanceiro.cdsCCustoOrcamento.open;
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.prc_Consultar_Resumo_CCusto;
+begin
+  fDMConsFinanceiro.qResumoCentro_Custo.Close;
+  fDMConsFinanceiro.qResumoCentro_Custo.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
+  if comboCentroCusto.KeyValue <> null then
+    fDMConsFinanceiro.qResumoCentro_Custo.ParamByName('ID_CENTROCUSTO').AsInteger := comboCentroCusto.KeyValue;
+  fDMConsFinanceiro.qResumoCentro_Custo.open;
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.prc_Carrega_Combo;
+begin
+//  NxComboBox2.Items.Clear;
+//  if SQLLocate('PARAMETROS_FIN','ID','CONTROLA_CONTRATO_CCUSTO','1') = 'S' then
+//    NxComboBox2.Items.Add('Data Pagamento')
+//  else
+//    NxComboBox2.Items.Add('Data Emissão');
+//  NxComboBox2.Items.Add('Data Vencimento');
+//  NxComboBox2.Text := 'Data Vencimento';
+//  NxComboBox2.ItemIndex := 1;
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.RzPageControl1Change(Sender: TObject);
+begin
+//  prc_Carrega_Combo;
 end;
 
 end.

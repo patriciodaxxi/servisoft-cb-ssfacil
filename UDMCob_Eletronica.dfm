@@ -409,7 +409,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
   object dspDuplicata: TDataSetProvider
     DataSet = sdsDuplicata
     UpdateMode = upWhereKeyOnly
-    Left = 96
+    Left = 72
     Top = 8
   end
   object cdsDuplicata: TClientDataSet
@@ -417,7 +417,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspDuplicata'
-    Left = 160
+    Left = 104
     Top = 8
     object cdsDuplicataID: TIntegerField
       FieldName = 'ID'
@@ -786,7 +786,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsDuplicata: TDataSource
     DataSet = cdsDuplicata
-    Left = 216
+    Left = 136
     Top = 8
   end
   object sdsContas_Calculo: TSQLDataSet
@@ -813,8 +813,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 72
+    Left = 40
+    Top = 288
     object sdsContas_CalculoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -839,16 +839,16 @@ object DMCob_Eletronica: TDMCob_Eletronica
   object dspContas_calculo: TDataSetProvider
     DataSet = sdsContas_Calculo
     UpdateMode = upWhereKeyOnly
-    Left = 584
-    Top = 72
+    Left = 72
+    Top = 288
   end
   object cdsContas_calculo: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspContas_calculo'
-    Left = 648
-    Top = 72
+    Left = 104
+    Top = 288
     object cdsContas_calculoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -872,8 +872,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsContas_calculo: TDataSource
     DataSet = cdsContas_calculo
-    Left = 704
-    Top = 72
+    Left = 136
+    Top = 288
   end
   object sdsContas: TSQLDataSet
     NoMetadata = True
@@ -899,8 +899,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 24
+    Left = 40
+    Top = 240
     object sdsContasID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1205,16 +1205,16 @@ object DMCob_Eletronica: TDMCob_Eletronica
   object dspContas: TDataSetProvider
     DataSet = sdsContas
     UpdateMode = upWhereKeyOnly
-    Left = 584
-    Top = 24
+    Left = 72
+    Top = 240
   end
   object cdsContas: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspContas'
-    Left = 648
-    Top = 24
+    Left = 104
+    Top = 240
     object cdsContasID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1532,8 +1532,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsContas: TDataSource
     DataSet = cdsContas
-    Left = 704
-    Top = 24
+    Left = 136
+    Top = 240
   end
   object qFilial: TSQLQuery
     MaxBlobSize = -1
@@ -1548,8 +1548,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'FROM FILIAL'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 344
-    Top = 186
+    Left = 792
+    Top = 28
     object qFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1732,8 +1732,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 128
+    Left = 40
+    Top = 344
     object sdsCob_Tipo_CadastroID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1777,16 +1777,16 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dspCob_Tipo_Cadastro: TDataSetProvider
     DataSet = sdsCob_Tipo_Cadastro
-    Left = 584
-    Top = 128
+    Left = 72
+    Top = 344
   end
   object cdsCob_Tipo_Cadastro: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCob_Tipo_Cadastro'
-    Left = 648
-    Top = 128
+    Left = 104
+    Top = 344
     object cdsCob_Tipo_CadastroID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1830,8 +1830,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsCob_Tipo_Cadastro: TDataSource
     DataSet = cdsCob_Tipo_Cadastro
-    Left = 704
-    Top = 128
+    Left = 136
+    Top = 344
   end
   object qParametros: TSQLQuery
     MaxBlobSize = -1
@@ -1840,8 +1840,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'SELECT ID_BANCO_REMESSA, LOCALSERVIDORNFE'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 272
-    Top = 128
+    Left = 952
+    Top = 72
     object qParametrosID_BANCO_REMESSA: TIntegerField
       FieldName = 'ID_BANCO_REMESSA'
     end
@@ -1857,21 +1857,21 @@ object DMCob_Eletronica: TDMCob_Eletronica
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 296
+    Left = 248
+    Top = 16
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 584
-    Top = 296
+    Left = 280
+    Top = 16
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 648
-    Top = 296
+    Left = 312
+    Top = 16
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1930,8 +1930,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 704
-    Top = 296
+    Left = 344
+    Top = 16
   end
   object mRetorno: TClientDataSet
     Active = True
@@ -2149,8 +2149,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
     Params = <>
     StoreDefs = True
     OnNewRecord = mRetornoNewRecord
-    Left = 192
-    Top = 328
+    Left = 992
+    Top = 168
     Data = {
       0B0500009619E0BD01000000180000002C0000000000030000000B050B436F64
       4361727465697261010049000000010005574944544802000200030010436F64
@@ -2366,8 +2366,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsmRetorno: TDataSource
     DataSet = mRetorno
-    Left = 216
-    Top = 328
+    Left = 1016
+    Top = 168
   end
   object qContas_Retorno: TSQLQuery
     MaxBlobSize = -1
@@ -2382,8 +2382,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'FROM CONTAS_RETORNO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 344
-    Top = 244
+    Left = 832
+    Top = 28
     object qContas_RetornoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2523,8 +2523,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 184
+    Left = 40
+    Top = 400
     object sdsRet_CadastroID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2555,16 +2555,16 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dspRet_Cadastro: TDataSetProvider
     DataSet = sdsRet_Cadastro
-    Left = 584
-    Top = 184
+    Left = 72
+    Top = 400
   end
   object cdsRet_Cadastro: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspRet_Cadastro'
-    Left = 648
-    Top = 184
+    Left = 104
+    Top = 400
     object cdsRet_CadastroID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2595,8 +2595,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsRet_Cadastro: TDataSource
     DataSet = cdsRet_Cadastro
-    Left = 704
-    Top = 184
+    Left = 136
+    Top = 400
   end
   object qRet_Erro: TSQLQuery
     MaxBlobSize = -1
@@ -2623,8 +2623,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       '   AND TIPO_REG = :TIPO_REG'
       '   AND ID_BANCO = :ID_BANCO')
     SQLConnection = dmDatabase.scoDados
-    Left = 344
-    Top = 302
+    Left = 952
+    Top = 28
     object qRet_ErroID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2666,8 +2666,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'FROM RET_TABELA_REJ'
       'WHERE CODIGO = :CODIGO')
     SQLConnection = dmDatabase.scoDados
-    Left = 344
-    Top = 360
+    Left = 992
+    Top = 28
     object qRet_TabelaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2696,8 +2696,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'ON DUP.ID_PESSOA = CLI.CODIGO'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 272
-    Top = 184
+    Left = 912
+    Top = 28
     object qDuplicataID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2875,8 +2875,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 64
-    Top = 280
+    Left = 896
+    Top = 216
     Data = {
       E80200009619E0BD01000000180000001A000000000003000000E8020B4E6F73
       736F4E756D65726F0100490000000100055749445448020002001400074E756D
@@ -3003,8 +3003,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsmBoleto: TDataSource
     DataSet = mBoleto
-    Left = 104
-    Top = 280
+    Left = 936
+    Top = 216
   end
   object sdsDuplicata_Hist: TSQLDataSet
     NoMetadata = True
@@ -3106,7 +3106,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dspDuplicata_Hist: TDataSetProvider
     DataSet = sdsDuplicata_Hist
-    Left = 96
+    Left = 72
     Top = 64
   end
   object cdsDuplicata_Hist: TClientDataSet
@@ -3114,7 +3114,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     ProviderName = 'dspDuplicata_Hist'
-    Left = 160
+    Left = 104
     Top = 64
     object cdsDuplicata_HistID: TIntegerField
       FieldName = 'ID'
@@ -3202,7 +3202,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsDuplicata_Hist: TDataSource
     DataSet = cdsDuplicata_Hist
-    Left = 216
+    Left = 136
     Top = 64
   end
   object sdsVendedor: TSQLDataSet
@@ -3214,21 +3214,21 @@ object DMCob_Eletronica: TDMCob_Eletronica
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 240
+    Left = 40
+    Top = 456
   end
   object dspVendedor: TDataSetProvider
     DataSet = sdsVendedor
-    Left = 584
-    Top = 240
+    Left = 72
+    Top = 456
   end
   object cdsVendedor: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspVendedor'
-    Left = 648
-    Top = 240
+    Left = 104
+    Top = 456
     object cdsVendedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -3248,8 +3248,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsVendedor: TDataSource
     DataSet = cdsVendedor
-    Left = 704
-    Top = 240
+    Left = 136
+    Top = 456
   end
   object sdsCobCarteira: TSQLDataSet
     NoMetadata = True
@@ -3263,21 +3263,21 @@ object DMCob_Eletronica: TDMCob_Eletronica
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 352
+    Left = 248
+    Top = 72
   end
   object dspCobCarteira: TDataSetProvider
     DataSet = sdsCobCarteira
-    Left = 584
-    Top = 352
+    Left = 280
+    Top = 72
   end
   object cdsCobCarteira: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCobCarteira'
-    Left = 648
-    Top = 352
+    Left = 312
+    Top = 72
     object cdsCobCarteiraID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3310,8 +3310,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsCobCarteira: TDataSource
     DataSet = cdsCobCarteira
-    Left = 704
-    Top = 352
+    Left = 344
+    Top = 72
   end
   object sdsEspecie: TSQLDataSet
     NoMetadata = True
@@ -3320,21 +3320,21 @@ object DMCob_Eletronica: TDMCob_Eletronica
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 408
+    Left = 248
+    Top = 128
   end
   object dspEspecie: TDataSetProvider
     DataSet = sdsEspecie
-    Left = 584
-    Top = 408
+    Left = 280
+    Top = 128
   end
   object cdsEspecie: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspEspecie'
-    Left = 648
-    Top = 408
+    Left = 312
+    Top = 128
     object cdsEspecieID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3365,8 +3365,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsEspecie: TDataSource
     DataSet = cdsEspecie
-    Left = 704
-    Top = 408
+    Left = 344
+    Top = 128
   end
   object qFilial_Email: TSQLQuery
     MaxBlobSize = -1
@@ -3394,8 +3394,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'WHERE FE.ID = :ID'
       '   AND FE.TIPO_REG = 3')
     SQLConnection = dmDatabase.scoDados
-    Left = 344
-    Top = 424
+    Left = 992
+    Top = 72
     object qFilial_EmailID_FILIAL: TIntegerField
       FieldName = 'ID_FILIAL'
       Required = True
@@ -3673,21 +3673,21 @@ object DMCob_Eletronica: TDMCob_Eletronica
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 872
-    Top = 224
+    Left = 264
+    Top = 232
   end
   object dspTitulos_atr: TDataSetProvider
     DataSet = sdsTitulos_atr
-    Left = 920
-    Top = 224
+    Left = 296
+    Top = 232
   end
   object cdsTitulos_atr: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID_PESSOA;NUMDUPLICATA;PARCELA'
     Params = <>
     ProviderName = 'dspTitulos_atr'
-    Left = 968
-    Top = 224
+    Left = 328
+    Top = 232
     object cdsTitulos_atrID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4073,7 +4073,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 40
-    Top = 416
+    Top = 184
     object sdsParametros_FinID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4094,16 +4094,16 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dspParametros_Fin: TDataSetProvider
     DataSet = sdsParametros_Fin
-    Left = 96
-    Top = 416
+    Left = 72
+    Top = 184
   end
   object cdsParametros_Fin: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspParametros_Fin'
-    Left = 160
-    Top = 416
+    Left = 104
+    Top = 184
     object cdsParametros_FinID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4124,8 +4124,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsParametros_Fin: TDataSource
     DataSet = cdsParametros_Fin
-    Left = 216
-    Top = 416
+    Left = 136
+    Top = 184
   end
   object qContratoParcela: TSQLQuery
     MaxBlobSize = -1
@@ -4142,8 +4142,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       '            FROM OS'
       '            WHERE OS.ID = :ID)')
     SQLConnection = dmDatabase.scoDados
-    Left = 408
-    Top = 128
+    Left = 872
+    Top = 72
     object qContratoParcelaQTD_PARCELA: TIntegerField
       FieldName = 'QTD_PARCELA'
     end
@@ -4155,21 +4155,21 @@ object DMCob_Eletronica: TDMCob_Eletronica
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 856
-    Top = 40
+    Left = 256
+    Top = 184
   end
   object dspGrupo_Pessoa: TDataSetProvider
     DataSet = sdsGrupo_Pessoa
-    Left = 912
-    Top = 40
+    Left = 288
+    Top = 184
   end
   object cdsGrupo_Pessoa: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspGrupo_Pessoa'
-    Left = 976
-    Top = 40
+    Left = 320
+    Top = 184
     object cdsGrupo_PessoaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4181,8 +4181,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsGrupo_Pessoa: TDataSource
     DataSet = cdsGrupo_Pessoa
-    Left = 1032
-    Top = 40
+    Left = 352
+    Top = 184
   end
   object qParametros_Ser: TSQLQuery
     MaxBlobSize = -1
@@ -4191,8 +4191,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'SELECT P.gerar_duplicata_contrato'
       'FROM parametros_ser P')
     SQLConnection = dmDatabase.scoDados
-    Left = 408
-    Top = 192
+    Left = 912
+    Top = 72
     object qParametros_SerGERAR_DUPLICATA_CONTRATO: TStringField
       FieldName = 'GERAR_DUPLICATA_CONTRATO'
       FixedChar = True
@@ -4224,7 +4224,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
       '  AND D.ID_PESSOA = :ID_PESSOA'
       '  AND D.DTEMISSAO = :DTEMISSAO')
     SQLConnection = dmDatabase.scoDados
-    Left = 408
+    Left = 832
     Top = 72
     object qQtdParcelasCONTADOR: TIntegerField
       FieldName = 'CONTADOR'
@@ -4279,8 +4279,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 1032
-    Top = 304
+    Left = 992
+    Top = 216
     Data = {
       F50000009619E0BD010000001800000009000000000003000000F50002494404
       00010000000000044E6F6D650100490000000100055749445448020002003C00
@@ -4326,8 +4326,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsmVendedor: TDataSource
     DataSet = mVendedor
-    Left = 1080
-    Top = 304
+    Left = 1024
+    Top = 216
   end
   object mVendedor_Tit: TClientDataSet
     Active = True
@@ -4381,8 +4381,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
     PacketRecords = 0
     Params = <>
     StoreDefs = True
-    Left = 1040
-    Top = 376
+    Left = 992
+    Top = 280
     Data = {
       D80000009619E0BD010000001800000008000000000003000000D8000B49445F
       56656E6465646F7204000100000000000A4E756D5F546974756C6F0100490000
@@ -4420,8 +4420,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsmVendedor_Tit: TDataSource
     DataSet = mVendedor_Tit
-    Left = 1088
-    Top = 376
+    Left = 1024
+    Top = 280
   end
   object qParametros_Fin: TSQLQuery
     MaxBlobSize = -1
@@ -4430,7 +4430,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'SELECT *'
       'FROM PARAMETROS_FIN')
     SQLConnection = dmDatabase.scoDados
-    Left = 328
+    Left = 792
     Top = 72
     object qParametros_FinID: TIntegerField
       FieldName = 'ID'
@@ -4481,8 +4481,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'WHERE CS.ID = :ID'
       '  AND CS.FILIAL = :FILIAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 816
-    Top = 104
+    Left = 1034
+    Top = 27
     object qContas_SacadoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4549,8 +4549,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
         'SELECT COUNT(NUMDUPLICATA) NAO_ENVIADO FROM DUPLICATA DUP WHERE ' +
         '0=0')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 112
+    Left = 1034
+    Top = 74
     object qConsultaNaoEnviadoNAO_ENVIADO: TIntegerField
       FieldName = 'NAO_ENVIADO'
       Required = True
@@ -4647,7 +4647,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
   object dspDuplicata_Cob: TDataSetProvider
     DataSet = sdsDuplicata_Cob
     UpdateMode = upWhereKeyOnly
-    Left = 96
+    Left = 72
     Top = 126
   end
   object cdsDuplicata_Cob: TClientDataSet
@@ -4655,7 +4655,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     ProviderName = 'dspDuplicata_Cob'
-    Left = 160
+    Left = 104
     Top = 128
     object cdsDuplicata_CobID: TIntegerField
       FieldName = 'ID'
@@ -4698,7 +4698,7 @@ object DMCob_Eletronica: TDMCob_Eletronica
   end
   object dsDuplicata_Cob: TDataSource
     DataSet = cdsDuplicata_Cob
-    Left = 216
+    Left = 136
     Top = 128
   end
   object qParametros_Geral: TSQLQuery
@@ -4708,8 +4708,8 @@ object DMCob_Eletronica: TDMCob_Eletronica
       'select MOSTRAR_COD_CONTABIL from'
       'PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 408
-    Top = 248
+    Left = 872
+    Top = 28
     object qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField
       FieldName = 'MOSTRAR_COD_CONTABIL'
       FixedChar = True

@@ -628,7 +628,13 @@ end;
 procedure TfrmGerar_Necessidade_Compras.prc_Gravar_NumOC_Mapa;
 var
   sds: TSQLDataSet;
+  vID_SetorAux : Integer;
 begin
+  if fDMCadNecessidade_Compras.qParametros_LoteGERAR_SETOR_MAT.AsString = 'S' then
+    vID_SetorAux := fDMCadNecessidade_Compras.mMaterialID_Setor.AsInteger
+  else
+    vID_SetorAux := 0;
+
   sds := TSQLDataSet.Create(nil);
   try
     sds.SQLConnection := dmDatabase.scoDados;
@@ -651,7 +657,8 @@ begin
                     + '   AND ID_MATERIAL = ' + fDMCadNecessidade_Compras.mMaterialID_Material.AsString
                     + '   AND ID_COR = ' + fDMCadNecessidade_Compras.mMaterialID_Cor.AsString
                     + '   AND TAMANHO = ' + QuotedStr(fDMCadNecessidade_Compras.mMaterialTamanho.AsString)
-                    + '   AND CARIMBOAUX = ' + QuotedStr(fDMCadNecessidade_Compras.mMaterialCarimbo_Aux.AsString);
+                    + '   AND CARIMBOAUX = ' + QuotedStr(fDMCadNecessidade_Compras.mMaterialCarimbo_Aux.AsString)
+                    + '   AND coalesce(ID_SETOR,0) = ' + IntToStr(vID_SetorAux);
     sds.ParamByName('QTD_OC').AsFloat := StrToFloat(FormatFloat('0.0000', fDMCadNecessidade_Compras.mMaterialQtd_Para_OC.AsFloat));
     sds.ParamByName('QTD_RESERVA').AsFloat := StrToFloat(FormatFloat('0.0000', fDMCadNecessidade_Compras.mMaterialQtd_Reserva.AsFloat));
     sds.ParamByName('QTD_OC_ORIGINAL').AsFloat := StrToFloat(FormatFloat('0.0000', fDMCadNecessidade_Compras.mMaterialQtd_OC_Original.AsFloat));

@@ -3,9 +3,9 @@ unit udmNFSe;
 interface
 
 uses
-  SysUtils, Classes, ACBrNFSeDANFSeClass, ACBrNFSeDANFSeRLClass, ACBrBase,
-  ACBrDFe, ACBrNFSe, DBTables, pcnConversao, Forms, DB, RxQuery, pnfsConversao, DateUtils, dialogs,
-  ACBrIntegrador, ACBrMail, ACBrDFeReport, FMTBcd, SqlExpr, UDMCadNotaServico;
+  SysUtils, Classes,
+  DBTables, pcnConversao, Forms, DB, RxQuery, DateUtils, dialogs,
+  FMTBcd, SqlExpr, UDMCadNotaServico;
 
 type
   TdmNFSe = class(TDataModule)
@@ -60,7 +60,7 @@ implementation
 
 //uses UnitLibrary, DataModulo, pnfsNFSe;
 
-uses pnfsNFSe, DmdDatabase, uUtilPadrao, ACBrNFSeWebServices;
+uses DmdDatabase, uUtilPadrao;
 
 {$R *.dfm}
 

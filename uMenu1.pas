@@ -296,7 +296,9 @@ begin
                      + 'AND IBPT.ex = ' + QuotedStr('')
                      + 'WHERE ((N.ibpt_inativo = ' +QuotedStr('N') + ') or (N.ibpt_inativo IS NULL)) ' 
                      + '  AND ((N.inativo = ' +QuotedStr('N') + ') or (N.inativo IS NULL)) '
-                     + '  AND ((IBPT.DT_FINAL < :DATA) or (IBPT.DT_FINAL IS NULL)) ';
+                    // + '  AND ((IBPT.DT_FINAL < :DATA) or (IBPT.DT_FINAL IS NULL)) '  //24/05/2019
+                     + '  AND ((IBPT.DT_FINAL < :DATA) and (IBPT.DT_FINAL IS not NULL)) '
+                     + ' AND (SELECT COUNT(1) FROM PRODUTO P WHERE P.ID_NCM = N.ID AND P.INATIVO = ' + QuotedStr('N') + ') > 0 ';
    sds.ParamByName('DATA').AsDate := Date;
    sds.Open;
    Panel8.Visible := (sds.FieldByName('CONTADOR').AsInteger > 0);

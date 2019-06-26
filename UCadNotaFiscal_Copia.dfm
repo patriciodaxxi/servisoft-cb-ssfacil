@@ -1,6 +1,6 @@
 object frmCadNotaFiscal_Copia: TfrmCadNotaFiscal_Copia
-  Left = 207
-  Top = 146
+  Left = 269
+  Top = 223
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Copiar Nota'

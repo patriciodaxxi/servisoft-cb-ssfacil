@@ -335,6 +335,7 @@ type
     sdsPrc_Atualiza_Comissao: TSQLDataSet;
     cdsConsultaOBS_PEDIDO: TStringField;
     qParametros_ComMOSTRAR_PED: TStringField;
+    qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsExtComissaoNewRecord(DataSet: TDataSet);
     procedure mExtComissao_RedNewRecord(DataSet: TDataSet);
@@ -712,10 +713,19 @@ begin
         mExtComissao_Red.Post;
       end;
     end;}
-    if qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
-      vAux := StrToFloat(FormatFloat('0.00',0))
-    else
-      vAux := StrToFloat(FormatFloat('0.00',cdsPrevisao_PedVLR_FRETE_CALCULADO.AsFloat + cdsPrevisao_PedVLR_ICMSSUBST_CALCULADO.AsFloat + cdsPrevisao_PedVLR_IPI_CALCULADO.AsFloat));
+    vAux := StrToFloat(FormatFloat('0.00',0));
+    //06/05/2019
+    //if (qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') then
+    //  vAux := StrToFloat(FormatFloat('0.00',0))
+    //else
+    //begin
+     if (Trim(qParametros_ComCOMISSAO_DESCONTAR.AsString) <> 'S') then
+       vAux := StrToFloat(FormatFloat('0.00',cdsPrevisao_PedVLR_FRETE_CALCULADO.AsFloat + cdsPrevisao_PedVLR_ICMSSUBST_CALCULADO.AsFloat + cdsPrevisao_PedVLR_IPI_CALCULADO.AsFloat));
+     //é PRECISO INCLUIR O Pis e Cofins no Pedido
+     //if (Trim(qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString) <> 'S') then
+     //  vAux := StrToFloat(FormatFloat('0.00',cdsPrevisao_PedVLR_sFRETE_CALCULADO.AsFloat + cdsPrevisao_PedVLR_ICMSSUBST_CALCULADO.AsFloat + cdsPrevisao_PedVLR_IPI_CALCULADO.AsFloat));
+
+    //end;
     //prc_Gravar_mExtComissao_Red_Prev('P',cdsPrevisao_PedID_VENDEDOR.AsInteger,cdsPrevisao_PedVLR_CALCULADO.AsFloat,cdsPrevisao_PedPERC_COMISSAO.AsFloat,vAux);
     prc_Gravar_mPrevPedido;
     vID_Ant := cdsPrevisao_PedID_VENDEDOR.AsInteger;
@@ -902,6 +912,7 @@ begin
   if mPrevPedido.Locate('ID_Pedido',cdsPrevisao_PedID.AsInteger,[loCaseInsensitive]) then
   begin
     mPrevPedido.Edit;
+    //aqui colocar o Pis e Cofins
     if qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
       vBase := StrToFloat(FormatFloat('0.00',cdsPrevisao_PedVLR_CALCULADO.AsFloat))
     else

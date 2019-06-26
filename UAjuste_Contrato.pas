@@ -276,18 +276,17 @@ begin
 
     fDMCadOS.cdsOS_Servico_Int.Edit;
     fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat := StrToFloat(FormatFloat('0.00',vVlrNovo));
-    fDMCadOS.cdsOS_Servico_IntVLR_TOTAL.AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat
-                                                   * fDMCadOS.cdsOS_Servico_IntQTD.AsFloat));
+    fDMCadOS.cdsOS_Servico_IntVLR_TOTAL.AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat *
+                                                     fDMCadOS.cdsOS_Servico_IntQTD.AsFloat));
     fDMCadOS.cdsOS_Servico_Int.Post;
 
     fDMCadOS.cdsOS.Edit;
     fDMCadOS.cdsOSVLR_SERVICO.AsFloat := (fDMCadOS.cdsOSVLR_SERVICO.AsFloat - vVlrTotalAnt) + fDMCadOS.cdsOS_Servico_IntVLR_TOTAL.AsFloat;
     fDMCadOS.cdsOSVLR_TOTAL.AsFloat   := (fDMCadOS.cdsOSVLR_TOTAL.AsFloat - vVlrTotalAnt) + fDMCadOS.cdsOS_Servico_IntVLR_TOTAL.AsFloat;
     fDMCadOS.cdsOSDTAJUSTE.AsDateTime := Date;
-    fDMCadOS.cdsOS.Post;
 
     fDMCadOS.cdsOS_Servico_Hist.Last;
-    vItemAux := fDMCadOS.cdsOS_Servico_HistITEM.AsInteger;
+    vItemAux := fDMCadOS.cdsOS_Servico_HistITEM_HIST.AsInteger;
     fDMCadOS.cdsOS_Servico_Hist.Insert;
     fDMCadOS.cdsOS_Servico_HistID.AsInteger   := fDMCadOS.cdsOSID.AsInteger;
     fDMCadOS.cdsOS_Servico_HistITEM.AsInteger := fDMCadOS.cdsOS_Servico_IntITEM.AsInteger;
@@ -303,6 +302,7 @@ begin
 
     fDMCadOS.cdsOS_Servico_Int.Next;
   end;
+  fDMCadOS.cdsOS.Post;
   fDMCadOS.cdsOS.ApplyUpdates(0);
 end;
 

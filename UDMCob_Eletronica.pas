@@ -1020,6 +1020,8 @@ begin
   qParametros_Ser.Open;
   qParametros_Fin.Close;
   qParametros_Fin.Open;
+  qParametros_Geral.Close;
+  qParametros_Geral.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
@@ -1491,8 +1493,8 @@ begin
       cdsDuplicataPROTESTADO.AsString := 'S';
     if trim(vAceite) <> '' then
       cdsDuplicataACEITE.AsString := vAceite;
-//    if qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S' then
-//      cdsDuplicataID_CONTABIL_OPE_BAIXA.AsInteger := qParametros_FinID_CONTABIL_OPE_BAIXA.AsInteger;
+    if qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S' then
+      cdsDuplicataID_CONTABIL_OPE_BAIXA.AsInteger := qParametros_FinID_CONTABIL_OPE_BAIXA.AsInteger;
 
     cdsDuplicata.Post;
     cdsDuplicata.ApplyUpdates(0);

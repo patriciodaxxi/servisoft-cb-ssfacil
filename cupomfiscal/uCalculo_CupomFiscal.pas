@@ -69,10 +69,7 @@ begin
   end;
 
   if (fDMCupomFiscal.cdsCupomFiscalTIPO_DESCONTO.AsString = 'N') and (GeraDupl = 'S') then
-  begin
-    vVlrAux := StrToCurr(FormatCurr('0.00',vVlrTotalItem));
-    vVlrDescontoItem := StrToCurr(FormatCurr('0.00',fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat));
-  end
+   vVlrDescontoItem := StrToCurr(FormatCurr('0.00',fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat))
   else
   if (fDMCupomFiscal.cdsCupomFiscalTIPO_DESCONTO.AsString <> 'N') and (StrToCurr(FormatFloat('0.000',PercDescontoItem)) > 0) then
     vVlrDescontoItem := StrToCurr(FormatCurr('0.00',vVlrTotalItem * PercDescontoItem / 100))
@@ -98,13 +95,14 @@ begin
   //Cálculo tributos federais, estaduais, e municipais cfe. disposto na lei 12.741/12
   prc_Calcular_Tributos_Transparencia(fDMCupomFiscal);
 
-  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency +
-                                                                     fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
-                                                              //     + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
-  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency +
-                                                                     fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency));
-                                                              //     + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
+  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency  := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency +
+                                                                   fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
 
+  if (StrToCurr(FormatCurr('0.0000',Qtd)) > 0) and (StrToCurr(FormatCurr('0.0000000000',fDMCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency)) > 0) then
+    vVlrTotalItem := StrToCurr(FormatCurr('0.00',Qtd * fDMCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency));
+
+  fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsString := FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency +
+                                                                    vVlrTotalItem - fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat);
   //26/02/2019
   prc_Calcular_ST_Ret(fDMCupomFiscal);
   prc_Calcular_ICMS_Efet(fDMCupomFiscal);
@@ -264,6 +262,7 @@ begin
     end;
 
     fDMCupomFiscal.cdsCupom_Itens.Edit;
+//    fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat := vAux;
 
     fDmCupomFiscal.vID_CFOP     := fDmCupomFiscal.cdsCupom_ItensID_CFOP.AsInteger;
     fDmCupomFiscal.vID_Variacao := fDmCupomFiscal.cdsCupom_ItensID_VARIACAO.AsInteger;
@@ -412,8 +411,8 @@ begin
     exit;
   if (fDMCupomFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
     exit;
-  if fDMCupomFiscal.cdsFilialUSA_ENVIO_ST_RET.AsString <> 'S' then
-    exit;
+  //if fDMCupomFiscal.cdsFilialUSA_ENVIO_ST_RET.AsString <> 'S' then
+  //  exit;
 
   if (fDMCupomFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString = 'N') or (Trim(fDMCupomFiscal.cdsFilialCALCULAR_ICMS_EFET.AsString) = '')  then
     exit;
@@ -421,12 +420,25 @@ begin
   //Busca o %
   vPerc_Interno := 0;
   vPerc_Red     := 0;
+  if fDMCupomFiscal.cdsProdutoID.AsInteger <> fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger then
+    fDMCupomFiscal.cdsProduto.Locate('ID',fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
+  if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0 then
+    vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat));
   prc_Abrir_qProduto_UF(fDMCupomFiscal,fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,fDMCupomFiscal.cdsFilialUF.AsString);
   if not(fDMCupomFiscal.qProduto_UF.IsEmpty) and (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat)) > 0) then
   begin
     vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_ICMS_INTERNO.AsFloat));
-    if StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat)) > 0 then
-      vPerc_Red := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat));
+    if (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat)) > 0)
+      and (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat)) < 100) then
+      vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCupomFiscal.qProduto_UFPERC_REDUCAO_ICMS.AsFloat));
+  end;
+  if (StrToFloat(FormatFloat('0.0000',vPerc_Red)) <= 0) then
+  begin
+    if fDMCupomFiscal.cdsTab_NCMID.AsInteger <> fDMCupomFiscal.cdsCupom_ItensID_NCM.AsInteger then
+      fDMCupomFiscal.cdsTab_NCM.Locate('ID',fDMCupomFiscal.cdsCupom_ItensID_NCM.AsString,[loCaseInsensitive]);
+    if ((StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) > 0)
+       and (StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) < 100)) then
+      vPerc_Red := StrToFloat(FormatFloat('0.0000',100 - fDMCupomFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat));
   end;
 
   if StrToFloat(FormatFloat('0.00',vPerc_Interno)) <= 0  then
@@ -449,16 +461,9 @@ begin
       vPerc_Interno := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.qUFPERC_ICMS_INTERNO.AsFloat));
     end;
   end;
-  if (StrToFloat(FormatFloat('0.0000',vPerc_Red)) <= 0) then
-  begin
-    if fDMCupomFiscal.cdsProdutoID.AsInteger <> fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger then
-      fDMCupomFiscal.cdsProduto.Locate('ID',fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
-    if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0 then
-      vPerc_Red := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsProdutoPERC_REDUCAOICMS.AsFloat));
-  end;
   fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat := 0;
   if StrToFloat(FormatFloat('0.0000',vPerc_Red)) > 0 then
-    fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat := StrToFloat(FormatFloat('0.0000',100 - vPerc_Red));
+    fDMCupomFiscal.cdsCupom_ItensPERC_BASE_RED_EFET.AsFloat := StrToFloat(FormatFloat('0.0000',vPerc_Red));
 
   fDMCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat := vPerc_Interno;
 

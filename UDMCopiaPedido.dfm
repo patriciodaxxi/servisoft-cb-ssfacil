@@ -895,6 +895,81 @@ object DMCopiaPedido: TDMCopiaPedido
       FieldName = 'NCM'
       Size = 10
     end
+    object sdsPedido_ItensPERC_ICMS_FCP: TFloatField
+      FieldName = 'PERC_ICMS_FCP'
+    end
+    object sdsPedido_ItensPERC_ICMS_UF_DEST: TFloatField
+      FieldName = 'PERC_ICMS_UF_DEST'
+    end
+    object sdsPedido_ItensPERC_ICMS_PARTILHA: TFloatField
+      FieldName = 'PERC_ICMS_PARTILHA'
+    end
+    object sdsPedido_ItensVLR_ICMS_FCP: TFloatField
+      FieldName = 'VLR_ICMS_FCP'
+    end
+    object sdsPedido_ItensVLR_ICMS_UF_DEST: TFloatField
+      FieldName = 'VLR_ICMS_UF_DEST'
+    end
+    object sdsPedido_ItensVLR_ICMS_UF_REMET: TFloatField
+      FieldName = 'VLR_ICMS_UF_REMET'
+    end
+    object sdsPedido_ItensPERC_ICMS_INTER: TFloatField
+      FieldName = 'PERC_ICMS_INTER'
+    end
+    object sdsPedido_ItensENCERADO: TStringField
+      FieldName = 'ENCERADO'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsPedido_ItensUNIDADE_PROD: TStringField
+      FieldName = 'UNIDADE_PROD'
+      Size = 6
+    end
+    object sdsPedido_ItensCONV_UNIDADE: TFloatField
+      FieldName = 'CONV_UNIDADE'
+    end
+    object sdsPedido_ItensOBS_ETIQUETA: TStringField
+      FieldName = 'OBS_ETIQUETA'
+      Size = 30
+    end
+    object sdsPedido_ItensCOD_COR_CLIENTE: TStringField
+      FieldName = 'COD_COR_CLIENTE'
+      Size = 10
+    end
+    object sdsPedido_ItensNOME_COR_CLIENTE: TStringField
+      FieldName = 'NOME_COR_CLIENTE'
+      Size = 100
+    end
+    object sdsPedido_ItensTAMANHO_CLIENTE: TStringField
+      FieldName = 'TAMANHO_CLIENTE'
+      Size = 10
+    end
+    object sdsPedido_ItensFOTO: TStringField
+      FieldName = 'FOTO'
+      Size = 250
+    end
+    object sdsPedido_ItensVLR_UNITARIO_REAL: TFloatField
+      FieldName = 'VLR_UNITARIO_REAL'
+    end
+    object sdsPedido_ItensFATOR_CALCULO_REAL: TFloatField
+      FieldName = 'FATOR_CALCULO_REAL'
+    end
+    object sdsPedido_ItensTIPO_OS: TStringField
+      FieldName = 'TIPO_OS'
+      Size = 2
+    end
+    object sdsPedido_ItensDIFERENCA_ICMS: TStringField
+      FieldName = 'DIFERENCA_ICMS'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsPedido_ItensCAIXINHA: TStringField
+      FieldName = 'CAIXINHA'
+      Size = 30
+    end
+    object sdsPedido_ItensBASE_IPI: TFloatField
+      FieldName = 'BASE_IPI'
+    end
   end
   object cdsPedido_Itens: TClientDataSet
     Aggregates = <>
@@ -1197,6 +1272,81 @@ object DMCopiaPedido: TDMCopiaPedido
     object cdsPedido_ItenssdsPedido_Item_Tipo: TDataSetField
       FieldName = 'sdsPedido_Item_Tipo'
     end
+    object cdsPedido_ItensPERC_ICMS_FCP: TFloatField
+      FieldName = 'PERC_ICMS_FCP'
+    end
+    object cdsPedido_ItensPERC_ICMS_UF_DEST: TFloatField
+      FieldName = 'PERC_ICMS_UF_DEST'
+    end
+    object cdsPedido_ItensPERC_ICMS_PARTILHA: TFloatField
+      FieldName = 'PERC_ICMS_PARTILHA'
+    end
+    object cdsPedido_ItensVLR_ICMS_FCP: TFloatField
+      FieldName = 'VLR_ICMS_FCP'
+    end
+    object cdsPedido_ItensVLR_ICMS_UF_DEST: TFloatField
+      FieldName = 'VLR_ICMS_UF_DEST'
+    end
+    object cdsPedido_ItensVLR_ICMS_UF_REMET: TFloatField
+      FieldName = 'VLR_ICMS_UF_REMET'
+    end
+    object cdsPedido_ItensPERC_ICMS_INTER: TFloatField
+      FieldName = 'PERC_ICMS_INTER'
+    end
+    object cdsPedido_ItensENCERADO: TStringField
+      FieldName = 'ENCERADO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPedido_ItensUNIDADE_PROD: TStringField
+      FieldName = 'UNIDADE_PROD'
+      Size = 6
+    end
+    object cdsPedido_ItensCONV_UNIDADE: TFloatField
+      FieldName = 'CONV_UNIDADE'
+    end
+    object cdsPedido_ItensOBS_ETIQUETA: TStringField
+      FieldName = 'OBS_ETIQUETA'
+      Size = 30
+    end
+    object cdsPedido_ItensCOD_COR_CLIENTE: TStringField
+      FieldName = 'COD_COR_CLIENTE'
+      Size = 10
+    end
+    object cdsPedido_ItensNOME_COR_CLIENTE: TStringField
+      FieldName = 'NOME_COR_CLIENTE'
+      Size = 100
+    end
+    object cdsPedido_ItensTAMANHO_CLIENTE: TStringField
+      FieldName = 'TAMANHO_CLIENTE'
+      Size = 10
+    end
+    object cdsPedido_ItensFOTO: TStringField
+      FieldName = 'FOTO'
+      Size = 250
+    end
+    object cdsPedido_ItensVLR_UNITARIO_REAL: TFloatField
+      FieldName = 'VLR_UNITARIO_REAL'
+    end
+    object cdsPedido_ItensFATOR_CALCULO_REAL: TFloatField
+      FieldName = 'FATOR_CALCULO_REAL'
+    end
+    object cdsPedido_ItensTIPO_OS: TStringField
+      FieldName = 'TIPO_OS'
+      Size = 2
+    end
+    object cdsPedido_ItensDIFERENCA_ICMS: TStringField
+      FieldName = 'DIFERENCA_ICMS'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPedido_ItensCAIXINHA: TStringField
+      FieldName = 'CAIXINHA'
+      Size = 30
+    end
+    object cdsPedido_ItensBASE_IPI: TFloatField
+      FieldName = 'BASE_IPI'
+    end
   end
   object dsPedido_Itens: TDataSource
     DataSet = cdsPedido_Itens
@@ -1370,6 +1520,9 @@ object DMCopiaPedido: TDMCopiaPedido
     object sdsPedido_Item_TipoID_CHAPA: TIntegerField
       FieldName = 'ID_CHAPA'
     end
+    object sdsPedido_Item_TipoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
   end
   object cdsPedido_Item_Tipo: TClientDataSet
     Aggregates = <>
@@ -1463,6 +1616,9 @@ object DMCopiaPedido: TDMCopiaPedido
     end
     object cdsPedido_Item_TipoID_CHAPA: TIntegerField
       FieldName = 'ID_CHAPA'
+    end
+    object cdsPedido_Item_TipoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
     end
   end
   object dsPedido_Item_Tipo: TDataSource

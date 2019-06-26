@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, DB, SqlExpr,
   DBGrids, ExtCtrls, StdCtrls, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, UCadOrcamento_Itens, UEscolhe_Filial,
   UCBase, Menus, NxEdit, NxCollection, UDMRel, UCadOrcamento_Aprov, Variants, Mask, RzTabs, RzPanel, UCadPedido_Desconto, ComObj,
-  UCadPedido_Ace, uCadObs_Aux, UCadPedido_ItensRed, UCadOrcamento_NaoAprovado, classe.validaemail, frxExportPDF, frxExportMail;
+  UCadPedido_Ace, uCadObs_Aux, UCadPedido_ItensRed, UCadOrcamento_NaoAprovado, classe.validaemail, frxExportPDF, frxExportMail,
+  UMontaPed_TipoItem;
 
 type
   TfrmCadOrcamento = class(TForm)
@@ -208,6 +209,7 @@ type
     DBEdit29: TDBEdit;
     Label44: TLabel;
     DBEdit30: TDBEdit;
+    SalvarOramento1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -272,6 +274,7 @@ type
     procedure SpeedButton8Click(Sender: TObject);
     procedure pnlObservacaoEnter(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
+    procedure SalvarOramento1Click(Sender: TObject);
   private
     { Private declarations }
     vVlrFreteAnt: Real;
@@ -286,6 +289,8 @@ type
     ffrmCadPedido_Ace: TfrmCadPedido_Ace;
     ffrmCadPedido_ItensRed: TfrmCadPedido_ItensRed;
     ffrmCadObs_Aux: TfrmCadObs_Aux;
+    ffrmMontaPed_TipoItem : TfrmMontaPed_TipoItem;
+
     procedure ItemClick(Sender:TObject);
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
@@ -322,7 +327,7 @@ implementation
 
 uses DateUtils, DmdDatabase, rsDBUtils, uUtilPadrao, uRelOrcamento, USel_Pessoa, URelPedido_Tam, URelPedido_Tam2, uUtilCliente,
   uRelOrcamento_JW, UCadOrcamento_Servicos, uCalculo_Pedido, UCadPedido_Custo, UCadPedido_Copia, UConsHist_Chapa,
-  uGrava_Pedido;
+  uGrava_Pedido, UConsClienteOBS;
 
 {$R *.dfm}
 
@@ -364,7 +369,7 @@ begin
     MessageDlg(vMSGAux, mtInformation, [mbOk], 0);
     exit;
   end;
-  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
     exit;
   prc_Excluir_Registro;
   btnConsultarClick(Sender);
@@ -392,6 +397,8 @@ begin
     MessageDlg(fDMCadPedido.vMSGErro, mtError, [mbOk], 0);
     exit;
   end;
+
+  fDMCadPedido.prc_Situacao_Orc(vIDAux);
 
   TS_Consulta.TabEnabled    := True;
   prc_Habilitar_CamposNota;
@@ -1526,10 +1533,36 @@ begin
     FreeAndNil(ffrmCadPedido_Copia);
     btnCalcular_ValoresClick(Sender);
   end;
+  if (Key = Vk_F6) and (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) and (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
+  begin
+    if fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger <= 0 then
+    begin
+      MessageDlg('Informe o Cliente',mtWarning,mbOKCancel,0);
+      RxDBLookupCombo3.SetFocus;
+      Exit;
+    end;
+    ffrmMontaPed_TipoItem := TfrmMontaPed_TipoItem.Create(self);
+    ffrmMontaPed_TipoItem.fDMCadPedido := fDMCadPedido;
+    ffrmMontaPed_TipoItem.ShowModal;
+    FreeAndNil(ffrmMontaPed_TipoItem);
+    btnCalcular_ValoresClick(Sender);
+  end;
   if (Shift = [ssCtrl]) and (Key = 87) then
   begin
     btnLimparOrc.Visible := not(btnLimparOrc.Visible);
   end;
+  //07/06/2019
+  if (Key = Vk_F4) then
+  begin
+    frmConsClienteOBS := TfrmConsClienteOBS.Create(self);
+    if RzPageControl1.ActivePage = TS_Cadastro then
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger
+    else
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedido_ConsultaID_CLIENTE.AsInteger;
+    frmConsClienteOBS.ShowModal;
+    FreeAndNil(frmConsClienteOBS);
+  end;
+
 end;
 
 procedure TfrmCadOrcamento.Excel1Click(Sender: TObject);
@@ -1728,6 +1761,36 @@ begin
   else
   begin
     ShowMessage('Relatório não definido no cadastro da empresa (filial)!');
+  end;
+end;
+
+procedure TfrmCadOrcamento.SalvarOramento1Click(Sender: TObject);
+var
+  vCaminhoArquivo : String;
+begin
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
+    exit;
+
+  prc_Posiciona_Imp;
+  vCaminhoArquivo := SQLLocate('PARAMETROS_PED','ID','END_PDF_PEDIDO','1');
+  if vCaminhoArquivo = '' then
+  begin
+    ShowMessage('Caminho do arquivo não definido nos parâmetros');
+    Exit;
+  end;
+
+  if fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S' then
+  begin
+    fRelOrcamento_JW              := TfRelOrcamento_JW.Create(Self);
+    fRelOrcamento_JW.vImp_Foto    := ckImpFoto.Checked;
+    fRelOrcamento_JW.vImp_Peso    := ckImpPeso.Checked;
+    fRelOrcamento_JW.fDMCadPedido := fDMCadPedido;
+    fRelOrcamento_JW.RLPDFFilter1.FileName := vCaminhoArquivo + '\Orçamento_' + fDMCadPedido.cdsPedidoImpNUM_ORCAMENTO.AsString + '.pdf';
+    fRelOrcamento_JW.RLReport1.SaveToFile(vCaminhoArquivo + '\Orçamento_' + fDMCadPedido.cdsPedidoImpNUM_ORCAMENTO.AsString + '.pdf');
+    fRelOrcamento_JW.RLReport1.Prepare;
+    ShowMessage('Arquivo Gerado com Sucesso');
+    fRelOrcamento_JW.RLReport1.Free;
+    FreeAndNil(fRelOrcamento_JW);
   end;
 end;
 

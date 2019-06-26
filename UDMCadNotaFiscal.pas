@@ -3,8 +3,7 @@ unit UDMCadNotaFiscal;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, dbXPress, Math, Messages, Dialogs, LogTypes, Variants,
-  frxClass, frxDBSet;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, dbXPress, Math, Messages, Dialogs, LogTypes, Variants, frxClass, frxDBSet;
 
 type
   TDMCadNotaFiscal = class(TDataModule)
@@ -2298,8 +2297,6 @@ type
     sdsNotaFiscal_ItensPERC_ICMS_INTER: TFloatField;
     cdsNotaFiscal_ItensPERC_ICMS_INTER: TFloatField;
     qParametros_Com: TSQLQuery;
-    qParametros_ComID: TIntegerField;
-    qParametros_ComCOMISSAO_DESCONTAR: TStringField;
     sdsNotaFiscalVLR_BASE_COMISSAO: TFloatField;
     cdsNotaFiscalVLR_BASE_COMISSAO: TFloatField;
     sdsNotaFiscal_ParcPERC_BASE_COMISSAO: TFloatField;
@@ -3058,6 +3055,22 @@ type
     qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField;
     qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField;
     qParametros_NFeUSA_CLIENTE_FAT_FIL: TStringField;
+    qParametros_ComID: TIntegerField;
+    qParametros_ComCOMISSAO_DESCONTAR: TStringField;
+    qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField;
+    qParametros_ComUSA_CONFIG_IND: TStringField;
+    qParametros_NFeUSA_CST_ICMS_NTE: TStringField;
+    sdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField;
+    cdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField;
+    cdsClienteIMP_ETIQUETA_ROT: TStringField;
+    qFilial_Relatorios: TSQLQuery;
+    qFilial_RelatoriosTIPO: TSmallintField;
+    qFilial_RelatoriosCAMINHO: TStringField;
+    qFilial_RelatoriosPOSICAO: TSmallintField;
+    qParametros_GeralENDGRIDS: TStringField;
+    qParametros_Lote: TSQLQuery;
+    qParametros_LoteOPCAO_ESTOQUE_SEMI: TStringField;
+    qParametros_LoteLOTE_TEXTIL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
@@ -3522,6 +3535,7 @@ begin
   qParametros_OC.Open;
   qParametros_NTE.Open;
   qParametros_Custo.Open;
+  qParametros_Lote.Open;
 
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
@@ -3794,6 +3808,8 @@ begin
   //Tirado no dia 30/07/2013 pois o valor de entrada vai ser gravado na tabela NOTAFISCAL_PARC como parcela = 0
   //if (cdsNotaFiscalTIPO_REG.AsString = 'NTS') and (StrToFloat(formatFloat('0.00',cdsNotaFiscalVLR_ENTRADA.AsFloat)) > 0) and (cdsNotaFiscalID_CONTA.AsInteger <= 0) then
   //  vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Nota possui valor de entrada, precisa informar a conta/banco para lançamento no financeiro!';
+  //if (cdsNotaFiscalTIPO_PRAZO.AsString = 'V') and (cdsNotaFiscalID_CONTA.AsInteger <= 0) then
+  //  vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Nota é a Vista , precisa informar a conta/banco para lançamento no financeiro!';
   if (cdsNotaFiscalTIPO_REG.AsString = 'NTS') and (cdsNotaFiscalTIPO_PRAZO.AsString = 'V') and (cdsNotaFiscalID_CONTA.AsInteger <= 0) then
     vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Nota é A Vista, precisa informar a conta/banco para lançamento no financeiro!';
   if trim(cdsFilialSERIENORMAL.AsString) = '' then
@@ -3954,6 +3970,10 @@ begin
       vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Ano do vencimento inválido!';
     if cdsNotaFiscalDTEMISSAO.AsDateTime > cdsNotaFiscal_ParcDTVENCIMENTO.AsDateTime then
       vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Data de vencimento menor que a data de emissão!';
+    if (cdsNotaFiscalTIPO_REG.AsString = 'NTE') and (cdsNotaFiscalDTSAIDAENTRADA.AsDateTime > cdsNotaFiscal_ParcDTVENCIMENTO.AsDateTime) then
+      vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Data de vencimento menor que a data de entrada!';
+    if (StrToFloat(FormatFloat('0.00',cdsNotaFiscal_ParcVLR_VENCIMENTO.AsFloat)) <= 0) then
+      vMSGNotaFiscal := vMSGNotaFiscal + #13 + '*** Valor Parcela esta zerado na nota, favor verificar!!';
     vVlrAux := StrToFloat(FormatFloat('0.00',vVlrAux + cdsNotaFiscal_ParcVLR_VENCIMENTO.AsFloat));
     cdsNotaFiscal_Parc.Next;
   end;

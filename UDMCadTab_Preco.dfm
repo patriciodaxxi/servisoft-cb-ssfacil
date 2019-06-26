@@ -16,6 +16,7 @@ object DMCadTab_Preco: TDMCadTab_Preco
     Top = 32
     object sdsTab_PrecoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsTab_PrecoNOME: TStringField
@@ -48,6 +49,7 @@ object DMCadTab_Preco: TDMCadTab_Preco
   end
   object dspTab_Preco: TDataSetProvider
     DataSet = sdsTab_Preco
+    UpdateMode = upWhereKeyOnly
     OnUpdateError = dspTab_PrecoUpdateError
     Left = 160
     Top = 32
@@ -59,10 +61,11 @@ object DMCadTab_Preco: TDMCadTab_Preco
     ProviderName = 'dspTab_Preco'
     BeforePost = cdsTab_PrecoBeforePost
     OnNewRecord = cdsTab_PrecoNewRecord
-    Left = 224
+    Left = 225
     Top = 32
     object cdsTab_PrecoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTab_PrecoNOME: TStringField
@@ -114,11 +117,11 @@ object DMCadTab_Preco: TDMCadTab_Preco
     CommandText = 
       'SELECT TAB.*, PRO.NOME NOMEPRODUTO, PRO.REFERENCIA, PRO.PRECO_CU' +
       'STO,'#13#10'PES.NOME NOME_FORNECEDOR, MR.NOME NOME_MARCA, PES.FANTASIA' +
-      ', COMB.nome NOME_COR'#13#10'FROM TAB_PRECO_ITENS TAB'#13#10'INNER JOIN PRODU' +
-      'TO PRO'#13#10'ON TAB.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN PESSOA PES ON (PRO' +
-      '.id_fornecedor = PES.CODIGO)'#13#10'LEFT JOIN MARCA MR ON (PRO.id_marc' +
-      'a = MR.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (TAB.id_cor = COMB.id)'#13 +
-      #10#13#10'WHERE TAB.ID = :ID'#13#10
+      ', COMB.nome NOME_COR'#13#10'FROM TAB_PRECO_ITENS TAB'#13#10'LEFT JOIN PRODUT' +
+      'O PRO'#13#10'ON TAB.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN PESSOA PES ON (PRO.' +
+      'id_fornecedor = PES.CODIGO)'#13#10'LEFT JOIN MARCA MR ON (PRO.id_marca' +
+      ' = MR.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (TAB.id_cor = COMB.id)'#13#10 +
+      #13#10'WHERE TAB.ID = :ID'#13#10
     DataSource = dsTab_Preco_Mestre
     MaxBlobSize = -1
     Params = <
@@ -133,10 +136,12 @@ object DMCadTab_Preco: TDMCadTab_Preco
     Top = 168
     object sdsTab_Preco_ItensID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsTab_Preco_ItensITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsTab_Preco_ItensID_PRODUTO: TIntegerField
@@ -181,6 +186,12 @@ object DMCadTab_Preco: TDMCadTab_Preco
       ProviderFlags = []
       Size = 60
     end
+    object sdsTab_Preco_ItensVLR_VENDA1: TFloatField
+      FieldName = 'VLR_VENDA1'
+    end
+    object sdsTab_Preco_ItensVLR_VENDA2: TFloatField
+      FieldName = 'VLR_VENDA2'
+    end
   end
   object cdsTab_Preco_Itens: TClientDataSet
     Aggregates = <>
@@ -192,11 +203,13 @@ object DMCadTab_Preco: TDMCadTab_Preco
     Top = 168
     object cdsTab_Preco_ItensID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTab_Preco_ItensITEM: TIntegerField
       DisplayLabel = 'Item'
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTab_Preco_ItensID_PRODUTO: TIntegerField
@@ -250,6 +263,12 @@ object DMCadTab_Preco: TDMCadTab_Preco
       FieldName = 'NOME_COR'
       ProviderFlags = []
       Size = 60
+    end
+    object cdsTab_Preco_ItensVLR_VENDA1: TFloatField
+      FieldName = 'VLR_VENDA1'
+    end
+    object cdsTab_Preco_ItensVLR_VENDA2: TFloatField
+      FieldName = 'VLR_VENDA2'
     end
   end
   object dsTab_Preco_Itens: TDataSource
@@ -401,8 +420,8 @@ object DMCadTab_Preco: TDMCadTab_Preco
   end
   object dsProduto: TDataSource
     DataSet = cdsProduto
-    Left = 496
-    Top = 264
+    Left = 495
+    Top = 263
   end
   object sdsTab_Preco_Consulta: TSQLDataSet
     NoMetadata = True
@@ -412,13 +431,13 @@ object DMCadTab_Preco: TDMCadTab_Preco
       'EPRODUTO, PRO.REFERENCIA, PRO.PRECO_CUSTO,'#13#10' MARCA.NOME NOMEMARC' +
       'A, GRUPO.NOME NOMEGRUPO, SUBGRUPO.NOME NOMESUBGRUPO,'#13#10' PES.NOME ' +
       'NOME_FORNECEDOR, PES.FANTASIA, CB.nome NOME_COR, PRO.nome ||'#39' '#39' ' +
-      '|| CB.nome NOME_Produto_Cor'#13#10'FROM TAB_PRECO TAB'#13#10'INNER JOIN TAB_' +
-      'PRECO_ITENS TI'#13#10'ON TAB.ID = TI.ID'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON TI' +
-      '.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN MARCA'#13#10'ON PRO.ID_MARCA = MARCA.I' +
-      'D'#13#10'LEFT JOIN GRUPO'#13#10'ON PRO.ID_GRUPO = GRUPO.ID'#13#10'LEFT JOIN SUBGRU' +
-      'PO'#13#10'ON PRO.ID_SUBGRUPO = SUBGRUPO.ID'#13#10'LEFT JOIN PESSOA PES'#13#10'ON P' +
-      'RO.ID_FORNECEDOR = PES.CODIGO'#13#10'LEFT JOIN combinacao CB'#13#10'ON TI.id' +
-      '_cor = CB.id'
+      '|| coalesce(CB.nome,'#39#39') NOME_Produto_Cor,'#13#10' TI.vlr_venda1, TI.vl' +
+      'r_venda2'#13#10'FROM TAB_PRECO TAB'#13#10'INNER JOIN TAB_PRECO_ITENS TI'#13#10'ON ' +
+      'TAB.ID = TI.ID'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON TI.ID_PRODUTO = PRO.I' +
+      'D'#13#10'LEFT JOIN MARCA'#13#10'ON PRO.ID_MARCA = MARCA.ID'#13#10'LEFT JOIN GRUPO'#13 +
+      #10'ON PRO.ID_GRUPO = GRUPO.ID'#13#10'LEFT JOIN SUBGRUPO'#13#10'ON PRO.ID_SUBGR' +
+      'UPO = SUBGRUPO.ID'#13#10'LEFT JOIN PESSOA PES'#13#10'ON PRO.ID_FORNECEDOR = ' +
+      'PES.CODIGO'#13#10'LEFT JOIN combinacao CB'#13#10'ON TI.id_cor = CB.id'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -514,6 +533,12 @@ object DMCadTab_Preco: TDMCadTab_Preco
     object cdsTab_Preco_ConsultaNOME_PRODUTO_COR: TStringField
       FieldName = 'NOME_PRODUTO_COR'
       Size = 161
+    end
+    object cdsTab_Preco_ConsultaVLR_VENDA1: TFloatField
+      FieldName = 'VLR_VENDA1'
+    end
+    object cdsTab_Preco_ConsultaVLR_VENDA2: TFloatField
+      FieldName = 'VLR_VENDA2'
     end
   end
   object dsTab_Preco_Consulta: TDataSource
@@ -746,6 +771,7 @@ object DMCadTab_Preco: TDMCadTab_Preco
     end
   end
   object frxReport1: TfrxReport
+    Tag = 1
     Version = '5.6.8'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -754,11 +780,12 @@ object DMCadTab_Preco: TDMCadTab_Preco
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42249.619220289400000000
-    ReportOptions.LastChange = 42311.709713043980000000
+    ReportOptions.LastChange = 43626.749469178240000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
-    Left = 608
-    Top = 411
+    OnReportPrint = 'frxReportOnReportPrint'
+    Left = 614
+    Top = 396
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'Filial'
@@ -769,8 +796,8 @@ object DMCadTab_Preco: TDMCadTab_Preco
       'NOME_INTERNO=NOME_INTERNO')
     DataSet = cdsFilial
     BCDToCurrency = False
-    Left = 704
-    Top = 411
+    Left = 710
+    Top = 393
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -793,8 +820,8 @@ object DMCadTab_Preco: TDMCadTab_Preco
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 752
-    Top = 411
+    Left = 758
+    Top = 393
   end
   object frxDBDataset2: TfrxDBDataset
     UserName = 'TabPrecoCons'
@@ -814,12 +841,16 @@ object DMCadTab_Preco: TDMCadTab_Preco
       'NOMEGRUPO=NOMEGRUPO'
       'NOMESUBGRUPO=NOMESUBGRUPO'
       'NOME_FORNECEDOR=NOME_FORNECEDOR'
-      'FANTASIA=FANTASIA')
+      'FANTASIA=FANTASIA'
+      'NOME_COR=NOME_COR'
+      'NOME_PRODUTO_COR=NOME_PRODUTO_COR'
+      'VLR_VENDA1=VLR_VENDA1'
+      'VLR_VENDA2=VLR_VENDA2')
     OpenDataSource = False
     DataSource = dsTab_Preco_Consulta
     BCDToCurrency = False
-    Left = 656
-    Top = 411
+    Left = 661
+    Top = 393
   end
   object qParametros_Fin: TSQLQuery
     MaxBlobSize = -1
@@ -862,6 +893,16 @@ object DMCadTab_Preco: TDMCadTab_Preco
     end
     object qParametros_ProdUSA_REF2: TStringField
       FieldName = 'USA_REF2'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_TAB_PRECO_ENC: TStringField
+      FieldName = 'USA_TAB_PRECO_ENC'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_TAB_PRECO_ENG: TStringField
+      FieldName = 'USA_TAB_PRECO_ENG'
       FixedChar = True
       Size = 1
     end
@@ -930,6 +971,125 @@ object DMCadTab_Preco: TDMCadTab_Preco
     Top = 256
     object qUltimo_RegistroMAX: TIntegerField
       FieldName = 'MAX'
+    end
+  end
+  object sdsPrecoProd: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT TAB.*, PRO.NOME NOMEPRODUTO, PRO.REFERENCIA, PRO.PRECO_CU' +
+      'STO,'#13#10'PES.NOME NOME_FORNECEDOR, MR.NOME NOME_MARCA, PES.FANTASIA' +
+      ', COMB.nome NOME_COR'#13#10'FROM TAB_PRECO_ITENS TAB'#13#10'LEFT JOIN PRODUT' +
+      'O PRO'#13#10'ON TAB.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN PESSOA PES ON (PRO.' +
+      'id_fornecedor = PES.CODIGO)'#13#10'LEFT JOIN MARCA MR ON (PRO.id_marca' +
+      ' = MR.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (TAB.id_cor = COMB.id)'#13#10 +
+      #13#10'WHERE TAB.ID = :ID'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 64
+    Top = 272
+  end
+  object cdsPrecoProd: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID;ITEM'
+    Params = <>
+    ProviderName = 'dspPrecoProd'
+    OnNewRecord = cdsTab_Preco_ItensNewRecord
+    Left = 169
+    Top = 275
+    object cdsPrecoProdID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPrecoProdITEM: TIntegerField
+      DisplayLabel = 'Item'
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsPrecoProdID_PRODUTO: TIntegerField
+      DisplayLabel = 'ID Produto'
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsPrecoProdVLR_VENDA: TFloatField
+      DisplayLabel = 'Vlr. Venda'
+      FieldName = 'VLR_VENDA'
+    end
+    object cdsPrecoProdID_COR: TIntegerField
+      DisplayLabel = 'ID Cor'
+      FieldName = 'ID_COR'
+    end
+    object cdsPrecoProdNOMEPRODUTO: TStringField
+      DisplayLabel = 'Nome Produto'
+      FieldName = 'NOMEPRODUTO'
+      Size = 100
+    end
+    object cdsPrecoProdREFERENCIA: TStringField
+      DisplayLabel = 'Refer'#234'ncia'
+      FieldName = 'REFERENCIA'
+    end
+    object cdsPrecoProdPRECO_CUSTO: TFloatField
+      DisplayLabel = 'Pre'#231'o Custo'
+      FieldName = 'PRECO_CUSTO'
+    end
+    object cdsPrecoProdNOME_FORNECEDOR: TStringField
+      DisplayLabel = 'Nome Fornecedor'
+      FieldName = 'NOME_FORNECEDOR'
+      Size = 60
+    end
+    object cdsPrecoProdNOME_MARCA: TStringField
+      DisplayLabel = 'Nome Marca'
+      FieldName = 'NOME_MARCA'
+      Size = 40
+    end
+    object cdsPrecoProdFANTASIA: TStringField
+      DisplayLabel = 'Fantasia'
+      FieldName = 'FANTASIA'
+      Size = 30
+    end
+    object cdsPrecoProdNOME_COR: TStringField
+      DisplayLabel = 'Nome Cor'
+      FieldName = 'NOME_COR'
+      Size = 60
+    end
+  end
+  object dsPrecoProd: TDataSource
+    DataSet = cdsPrecoProd
+    Left = 234
+    Top = 278
+  end
+  object dspPrecoProd: TDataSetProvider
+    DataSet = sdsPrecoProd
+    Left = 121
+    Top = 275
+  end
+  object qTab: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select ID, NOME'
+      'from TAB_PRECO  '
+      'WHERE ID = :ID')
+    SQLConnection = dmDatabase.scoDados
+    Left = 828
+    Top = 347
+    object qTabID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qTabNOME: TStringField
+      FieldName = 'NOME'
+      Size = 70
     end
   end
 end

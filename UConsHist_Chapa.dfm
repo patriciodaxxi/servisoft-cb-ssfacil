@@ -1,5 +1,5 @@
 object frmConsHist_Chapa: TfrmConsHist_Chapa
-  Left = 140
+  Left = 311
   Top = 70
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
@@ -170,7 +170,7 @@ object frmConsHist_Chapa: TfrmConsHist_Chapa
       end
       item
         Expanded = False
-        FieldName = 'ALTURA'
+        FieldName = 'ESPESSURA'
         Title.Alignment = taCenter
         Title.Caption = 'Espessura (mm)'
         Visible = True
@@ -271,13 +271,23 @@ object frmConsHist_Chapa: TfrmConsHist_Chapa
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT TP.vlr_kg, TP.comprimento, TP.largura, TP.altura,'#13#10'TP.qtd' +
-      ', TP.vlr_unitario, TP.vlr_total, TP.vlr_dobra, TP.complemento_no' +
-      'me,'#13#10'TP.peso, PED.dtemissao, PED.id_cliente, CLI.NOME NOME_CLIEN' +
-      'TE, PED.num_pedido,'#13#10'PED.tipo_reg, tp.id id_pedido, tp.item item' +
-      '_pedido'#13#10'FROM pedido_item_tipo tp'#13#10'LEFT JOIN PEDIDO PED'#13#10'ON TP.I' +
-      'D = PED.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON PED.ID_CLIENTE = CLI.codig' +
-      'o'#13#10'WHERE TP.tipo_orcamento = '#39'C'#39#13#10'  AND PED.tipo_reg = '#39'P'#39
+      'select TP.VLR_KG, TP.COMPRIMENTO, TP.LARGURA, TP.ALTURA, TP.ESPE' +
+      'SSURA, TP.QTD,'#13#10'       case'#13#10'         when TP.VLR_UNITARIO is nu' +
+      'll then PEDI.VLR_UNITARIO'#13#10'         else TP.VLR_UNITARIO'#13#10'      ' +
+      ' end VLR_UNITARIO,'#13#10'       case'#13#10'         when TP.VLR_TOTAL is n' +
+      'ull then PEDI.VLR_TOTAL'#13#10'         else TP.VLR_TOTAL'#13#10'       end ' +
+      'VLR_TOTAL,'#13#10'       TP.VLR_DOBRA,'#13#10'       case'#13#10'         when TP.' +
+      'COMPLEMENTO_NOME is null then PEDI.NOMEPRODUTO'#13#10'         else TP' +
+      '.COMPLEMENTO_NOME'#13#10'       end COMPLEMENTO_NOME,'#13#10'       TP.PESO,' +
+      ' PED.DTEMISSAO, PED.ID_CLIENTE, CLI.NOME NOME_CLIENTE, PED.NUM_P' +
+      'EDIDO, PED.TIPO_REG, PED.ID ID_PEDIDO,'#13#10'       PEDI.ITEM ITEM_PE' +
+      'DIDO, PEDI.QTD QTDE_ITEM, PEDI.VLR_UNITARIO VLR_UNITARIO_ITEM, P' +
+      'EDI.VLR_TOTAL VLR_TOTAL_ITEM,'#13#10'       PEDI.NOMEPRODUTO'#13#10'from PED' +
+      'IDO PED'#13#10'inner join PEDIDO_ITEM PEDI on PEDI.ID = PED.ID'#13#10'left j' +
+      'oin PEDIDO_ITEM_TIPO TP on TP.ID = PEDI.ID and TP.ITEM = PEDI.IT' +
+      'EM'#13#10'left join PESSOA CLI on PED.ID_CLIENTE = CLI.CODIGO'#13#10'where (' +
+      'TP.TIPO_ORCAMENTO = '#39'C'#39' or TP.TIPO_ORCAMENTO is null) and'#13#10'     ' +
+      ' PED.TIPO_REG = '#39'P'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -347,6 +357,22 @@ object frmConsHist_Chapa: TfrmConsHist_Chapa
     object cdsChapaITEM_PEDIDO: TIntegerField
       FieldName = 'ITEM_PEDIDO'
       Required = True
+    end
+    object cdsChapaQTDE_ITEM: TFloatField
+      FieldName = 'QTDE_ITEM'
+    end
+    object cdsChapaVLR_UNITARIO_ITEM: TFloatField
+      FieldName = 'VLR_UNITARIO_ITEM'
+    end
+    object cdsChapaVLR_TOTAL_ITEM: TFloatField
+      FieldName = 'VLR_TOTAL_ITEM'
+    end
+    object cdsChapaNOMEPRODUTO: TStringField
+      FieldName = 'NOMEPRODUTO'
+      Size = 100
+    end
+    object cdsChapaESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
     end
   end
   object dspChapa: TDataSetProvider

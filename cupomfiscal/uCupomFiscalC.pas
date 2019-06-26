@@ -45,14 +45,10 @@ type
     Imprimir_Off_Line: TMenuItem;
     Enviarnomtodoantigo1: TMenuItem;
     Panel2: TPanel;
-    ceDin: TCurrencyEdit;
     ceVM: TCurrencyEdit;
-    Label7: TLabel;
     Label8: TLabel;
     Label10: TLabel;
     ceQtd: TCurrencyEdit;
-    Label11: TLabel;
-    ceOut: TCurrencyEdit;
     Shape5: TShape;
     Label12: TLabel;
     ComboBox1: TComboBox;
@@ -91,6 +87,9 @@ type
     Label21: TLabel;
     DBMemo3: TDBMemo;
     ckMsg: TCheckBox;
+    SMDBGrid5: TSMDBGrid;
+    Label7: TLabel;
+    ceTotal: TCurrencyEdit;
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
@@ -313,6 +312,7 @@ var
   vTotal, vDin, vOut: Currency;
   vQtd: Word;
   vComando: String;
+  vTipo: String;
 begin
   vTotal := 0;
   vQtd   := 0;
@@ -366,49 +366,56 @@ begin
 
   if Panel2.Visible then
   begin
-    SMDBGrid1.DisableScroll;
-    while not fDmCupomFiscal.cdsCupom_Cons.Eof do
+    vTotal := 0;
+    fDmCupomFiscal.cdsTotais.Close;
+    fDmCupomFiscal.sdsTotais.CommandText := fDmCupomFiscal.ctTotais;
+    if RxDBLookupCombo1.Text <> '[Todos]' then
+      fDmCupomFiscal.sdsTotais.CommandText := fDmCupomFiscal.sdsTotais.CommandText + ' AND TERMINAL = ' + RxDBLookupCombo1.Value;
+    if ComboBox1.ItemIndex > 0 then
     begin
-      if fDmCupomFiscal.cdsCupom_ConsCANCELADO.AsString = 'S' then
-      begin
-        fDmCupomFiscal.cdsCupom_Cons.Next;
-        Continue;
+      case ComboBox1.ItemIndex of
+        1: vTipo := 'CNF';
+        2: vTipo := 'NFC';
+        3: vTipo := 'PED';
+        4: vTipo := 'ORC';
+        5: vTipo := 'COM';
       end;
-      fDmCupomFiscal.cdsCupom_Cons_Parc.Close;
-      fDmCupomFiscal.sdsCupom_Cons_Parc.ParamByName('ID').AsInteger := fDmCupomFiscal.cdsCupom_ConsID.AsInteger;
-      fDmCupomFiscal.cdsCupom_Cons_Parc.Open;
-      if not fDmCupomFiscal.cdsCupom_Cons_Parc.IsEmpty then
-      begin
-        fDmCupomFiscal.cdsCupom_Cons_Parc.First;
-        while not fDmCupomFiscal.cdsCupom_Cons_Parc.Eof do
-        begin
-          if fDmCupomFiscal.cdsCupom_Cons_ParcDINHEIRO.AsString = 'S' then
-            vDin := vDin + fDmCupomFiscal.cdsCupom_Cons_ParcVALOR.AsCurrency
-          else
-            vOut := vOut + fDmCupomFiscal.cdsCupom_Cons_ParcVALOR.AsCurrency;
-          fDmCupomFiscal.cdsCupom_Cons_Parc.Next;
-        end;
-      end
-      else
-      begin
-        if fDmCupomFiscal.cdsCupom_ConsDINHEIRO.AsString = 'S' then
-          vDin := vDin + fDmCupomFiscal.cdsCupom_ConsVLR_TOTAL.AsCurrency
-        else
-          vOut := vOut + fDmCupomFiscal.cdsCupom_ConsVLR_TOTAL.AsCurrency;
-      end;
-      vTotal := vTotal + fDmCupomFiscal.cdsCupom_ConsVLR_TOTAL.AsCurrency;
-      //14/06/2016
-      //Inc(vQtd);
-      vQtd := vQtd + fDmCupomFiscal.cdsCupom_ConsQTD_PESSOA.AsInteger;
-      fDmCupomFiscal.cdsCupom_Cons.Next;
+      fDmCupomFiscal.sdsTotais.CommandText := fDmCupomFiscal.sdsTotais.CommandText + ' AND TIPO = ' + QuotedStr(vTipo);
     end;
+    fDmCupomFiscal.sdsTotais.CommandText := fDmCupomFiscal.sdsTotais.CommandText + ' GROUP BY NOME';
+    fDmCupomFiscal.sdsTotais.ParamByName('D1').AsDate := DateEdit1.Date;
+    fDmCupomFiscal.sdsTotais.ParamByName('D2').AsDate := DateEdit2.Date;
+    fDmCupomFiscal.cdsTotais.Open;
+    vQtd := fDmCupomFiscal.cdsCupom_Cons.RecordCount;
     if vQtd > 0 then
     begin
+      fDmCupomFiscal.cdsTotais.First;
+      while not fDmCupomFiscal.cdsTotais.Eof do
+      begin
+        vTotal := vTotal + fDmCupomFiscal.cdsTotaisTOTAL.AsCurrency;
+        fDmCupomFiscal.cdsTotais.Next;
+      end;
+      ceTotal.Value := vTotal;
       ceQtd.Value := vQtd;
       ceVM.Value  := vTotal / vQtd;
-      ceDin.Value := vDin;
-      ceOut.Value := vOut;
     end;
+    if (ComboBox1.ItemIndex = 3) or (ComboBox1.ItemIndex = 4) then
+    begin
+      vQtd := fDmCupomFiscal.cdsCupom_Cons.RecordCount;
+      if vQtd > 0 then
+      begin
+        fDmCupomFiscal.cdsCupom_Cons.First;
+        while not fDmCupomFiscal.cdsCupom_Cons.Eof do
+        begin
+          vTotal := vTotal + fDmCupomFiscal.cdsCupom_ConsVLR_TOTAL.AsCurrency;
+          fDmCupomFiscal.cdsCupom_Cons.Next;
+        end;
+        ceTotal.Value := vTotal;
+        ceQtd.Value := vQtd;
+        ceVM.Value  := vTotal / vQtd;
+      end;
+    end;
+
     SMDBGrid1.EnableScroll;
   end;
 end;
@@ -834,12 +841,12 @@ procedure TfCupomFiscalC.SMDBGrid1GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
   AFont.Color := clWindowText;
-  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
-  begin
-    AFont.Color := $00404080;
-    AFont.Style := [fsBold]; 
-  end
-  else
+//  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
+//  begin
+//    AFont.Color := $00404080;
+//    AFont.Style := [fsBold];
+//  end
+//  else
   if ((fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S') and
      (fDmCupomFiscal.cdsCupom_ConsID_TIPOCOBRANCA.IsNull)) then
     AFont.Color := clBlue;
@@ -894,6 +901,7 @@ begin
     btnAjustarICMS.Visible := not(btnAjustarICMS.Visible);
     SMDBGrid1.Columns.Items[14].Visible := not(SMDBGrid1.Columns.Items[14].Visible);
     SMDBGrid1.Columns.Items[15].Visible := not(SMDBGrid1.Columns.Items[15].Visible);
+    SMDBGrid1.Columns.Items[11].Visible := not(SMDBGrid1.Columns.Items[11].Visible);
   end;
 end;
 
@@ -935,7 +943,7 @@ begin
   if not(fDmCupomFiscal.vCancelar) then
     prc_Posiciona_CupomFiscal(fDmCupomFiscal.cdsCupom_ConsID.AsInteger);
 
-  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
+{  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
   begin
     prc_Posiciona_CupomFiscal(fDmCupomFiscal.cdsCupom_ConsID.AsInteger);
     if not fDmCupomFiscal.cdsCupomFiscal.IsEmpty then
@@ -949,7 +957,7 @@ begin
     end;
     Exit;
   end;
-
+}
   if (fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'NFC') and (fDmCupomFiscal.cdsCupomFiscalNUMCUPOM.AsInteger > 0) and
      (trim(fDmCupomFiscal.cdsCupomFiscalNFECHAVEACESSO.AsString) <> '') and (fDmCupomFiscal.cdsCupom_ConsNFEAMBIENTE.AsString = '1')  then
   begin
@@ -1365,10 +1373,15 @@ begin
       end;
       if vAlt then
       begin
-        frmAlteraDt_NFCe := TfrmAlteraDt_NFCe.Create(self);
+{        frmAlteraDt_NFCe := TfrmAlteraDt_NFCe.Create(self);
         frmAlteraDt_NFCe.fDmCupomFiscal := fDmCupomFiscal;
         frmAlteraDt_NFCe.ShowModal;
-        FreeAndNil(frmAlteraDt_NFCe);
+        FreeAndNil(frmAlteraDt_NFCe);}
+        fDmCupomFiscal.cdsCupomFiscal.Edit;
+        fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime := Date;
+        fDmCupomFiscal.cdsCupomFiscalHREMISSAO.AsString := FormatDateTime('HH:nn:ss',Now);
+        fDmCupomFiscal.cdsCupomFiscal.Post;
+        fDmCupomFiscal.cdsCupomFiscal.ApplyUpdates(0);
       end;
     end;
     //******************************
@@ -1427,12 +1440,12 @@ end;
 
 procedure TfCupomFiscalC.prc_scroll(DataSet: TDataSet);
 begin
-  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
+{  if fDmCupomFiscal.cdsCupom_ConsCONTADOR_ITENS.AsInteger <= 0 then
   begin
     btnCancelar.Caption := 'Excluir';
     btnCancelar.Enabled := True;
   end
-  else
+  else}
   begin
     btnCancelar.Caption := 'Cancelar';
     if fDmCupomFiscal.cdsParametrosUSA_NFCE.AsString = 'S' then
@@ -1478,7 +1491,7 @@ begin
     Exit;
   end;
 
-  if MessageDlg('Deseja realmente cancelar este Cupom Fiscal (NFCe) ?',mtWarning,[mbOK,mbNO],0) = mrNo then
+  if MessageDlg('Deseja realmente cancelar este Cupom Fiscal (NFCe)?',mtWarning,[mbOK,mbNO],0) = mrNo then
     Exit;
   if MessageDlg('                                  ATENÇÃO'
                   +#13#13+

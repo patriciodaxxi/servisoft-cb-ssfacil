@@ -134,6 +134,7 @@ begin
     fDMCadPedido.cdsPedido_ItensQTD_PECA.AsInteger      := 0;
     fDMCadPedido.cdsPedido_ItensQTD_PRODUZIDA.AsInteger := 0;
     fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat    := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
+    fDMCadPedido.cdsPedido_ItensID_MOVESTOQUE.AsInteger := 0;
     if CheckBox1.Checked then
       fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime := DateEdit1.Date;
     fDMCadPedido.cdsPedido_Itens.Post;
@@ -225,9 +226,11 @@ begin
       fDMCadPedido.prc_Inserir_Itens;
       for i := 0 to ( fDMCopiaPedido.cdsPedido_Itens.FieldCount - 1) do
       begin
-        if (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'sdsPedido_Item_Tipo') then
+        if (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'sdsPedido_Item_Tipo') and
+           (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'ITEM') then
           fDMCadPedido.cdsPedido_Itens.FieldByName(fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido_Itens.Fields[i].Value;
       end;
+      fDMCadPedido.cdsPedido_ItensDTENTREGA.Clear;
       fDMCadPedido.cdsPedido_ItensQTD_CANCELADO.AsInteger := 0;
       fDMCadPedido.cdsPedido_ItensQTD_FATURADO.AsInteger  := 0;
       fDMCadPedido.cdsPedido_ItensQTD_FUT.AsInteger       := 0;
@@ -246,7 +249,7 @@ begin
         fDMCadPedido.cdsPedido_Item_TipoITEM.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
         for i := 0 to ( fDMCopiaPedido.cdsPedido_Item_Tipo.FieldCount - 1) do
         begin
-          if (fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName <> 'ID') then
+          if (fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName <> 'ITEM') then
             fDMCadPedido.cdsPedido_Item_Tipo.FieldByName(fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].Value;
         end;
         fDMCadPedido.cdsPedido_Item_Tipo.Post;

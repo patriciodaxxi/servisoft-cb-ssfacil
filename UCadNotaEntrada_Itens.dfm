@@ -464,7 +464,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
           Alignment = taRightJustify
           Caption = 'Vlr.Desconto:'
         end
-        object Label9: TLabel
+        object lblContaOrc: TLabel
           Left = 8
           Top = 211
           Width = 101
@@ -472,9 +472,9 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
           Alignment = taRightJustify
           Caption = 'Conta de Or'#231'amento:'
         end
-        object Label15: TLabel
+        object lblCCusto: TLabel
           Left = 30
-          Top = 233
+          Top = 232
           Width = 79
           Height = 13
           Alignment = taRightJustify
@@ -634,7 +634,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
           TabOrder = 9
           OnExit = DBEdit8Exit
         end
-        object RxDBLookupCombo6: TRxDBLookupCombo
+        object RxDBlkContaOrc: TRxDBLookupCombo
           Left = 112
           Top = 203
           Width = 300
@@ -648,7 +648,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
           LookupSource = DMCadNotaFiscal.dsContaOrcamento
           TabOrder = 11
         end
-        object RxDBLookupCombo7: TRxDBLookupCombo
+        object RxDBlkCCusto: TRxDBLookupCombo
           Left = 112
           Top = 225
           Width = 300

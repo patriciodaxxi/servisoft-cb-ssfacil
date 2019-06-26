@@ -20,7 +20,7 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1100
+    Width = 1108
     Height = 40
     Align = alTop
     Color = clMoneyGreen
@@ -161,8 +161,8 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
   end
   object Panel2: TPanel
     Left = 0
-    Top = 473
-    Width = 1100
+    Top = 480
+    Width = 1108
     Height = 37
     Align = alBottom
     Color = 8404992
@@ -245,8 +245,8 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 40
-    Width = 1100
-    Height = 433
+    Width = 1108
+    Height = 440
     Align = alClient
     Ctl3D = False
     DataSource = dsOS
@@ -386,12 +386,12 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ID_CLIENTE'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end>
@@ -417,15 +417,6 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
     object cdsOSITEM: TIntegerField
       FieldName = 'ITEM'
       Required = True
-    end
-    object cdsOSQTD: TIntegerField
-      FieldName = 'QTD'
-    end
-    object cdsOSQTD_FATURADO: TIntegerField
-      FieldName = 'QTD_FATURADO'
-    end
-    object cdsOSQTD_RESTANTE: TIntegerField
-      FieldName = 'QTD_RESTANTE'
     end
     object cdsOSID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
@@ -467,6 +458,15 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
     end
     object cdsOSNUM_NOTA: TIntegerField
       FieldName = 'NUM_NOTA'
+    end
+    object cdsOSQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsOSQTD_FATURADO: TFloatField
+      FieldName = 'QTD_FATURADO'
+    end
+    object cdsOSQTD_RESTANTE: TFloatField
+      FieldName = 'QTD_RESTANTE'
     end
   end
   object dsOS: TDataSource

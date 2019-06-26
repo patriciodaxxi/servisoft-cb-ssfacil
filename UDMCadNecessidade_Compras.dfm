@@ -1769,13 +1769,13 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     SQL.Strings = (
       
         'SELECT P.lote_textil, P.id_cor_cru, COMB.nome NOME_COR, USA_NECE' +
-        'SSIDADE_IF, LOTE_CALCADO_NOVO'
+        'SSIDADE_IF, LOTE_CALCADO_NOVO, GERAR_SETOR_MAT'
       'FROM PARAMETROS_LOTE P'
       'LEFT JOIN COMBINACAO COMB'
       'ON P.id_cor_cru = COMB.id')
     SQLConnection = dmDatabase.scoDados
-    Left = 632
-    Top = 32
+    Left = 633
+    Top = 31
     object qParametros_LoteLOTE_TEXTIL: TStringField
       FieldName = 'LOTE_TEXTIL'
       FixedChar = True
@@ -1794,6 +1794,11 @@ object DMCadNecessidade_Compras: TDMCadNecessidade_Compras
     end
     object qParametros_LoteLOTE_CALCADO_NOVO: TStringField
       FieldName = 'LOTE_CALCADO_NOVO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_LoteGERAR_SETOR_MAT: TStringField
+      FieldName = 'GERAR_SETOR_MAT'
       FixedChar = True
       Size = 1
     end

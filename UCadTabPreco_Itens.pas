@@ -28,6 +28,10 @@ type
     Label31: TLabel;
     RxDBLookupCombo3: TRxDBLookupCombo;
     edtRef2: TEdit;
+    Label1: TLabel;
+    CurrencyEdit3: TCurrencyEdit;
+    Label4: TLabel;
+    CurrencyEdit4: TCurrencyEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -107,6 +111,11 @@ begin
     CurrencyEdit2.SetFocus;
   end;
   edtRef2.Visible := (fDMCadTab_Preco.qParametros_ProdUSA_REF2.AsString = 'S');
+
+  label1.Visible        := (fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S');
+  CurrencyEdit3.Visible := (fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S');
+  label4.Visible        := (fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S');
+  CurrencyEdit4.Visible := (fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S');
 end;
 
 procedure TfrmCadTabPreco_Itens.prc_Move_Dados_Itens;
@@ -128,7 +137,8 @@ begin
 
   CurrencyEdit1.Value := fDMCadTab_Preco.cdsProdutoPRECO_CUSTO.AsFloat;
   CurrencyEdit2.Value := fDMCadTab_Preco.cdsProdutoPRECO_VENDA.AsFloat;
-
+  CurrencyEdit3.Value := 0;
+  CurrencyEdit4.Value := 0;
 end;
 
 procedure TfrmCadTabPreco_Itens.BitBtn1Click(Sender: TObject);
@@ -168,6 +178,8 @@ begin
     fDMCadTab_Preco.cdsTab_Preco_ItensREFERENCIA.AsString  := fDMCadTab_Preco.cdsProdutoREFERENCIA.AsString;
     fDMCadTab_Preco.cdsTab_Preco_ItensPRECO_CUSTO.AsFloat  := CurrencyEdit1.Value;
     fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA.AsFloat    := CurrencyEdit2.Value;
+    fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA1.AsFloat   := CurrencyEdit3.Value;
+    fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA2.AsFloat   := CurrencyEdit4.Value;
     if (trim(RxDBLookupCombo3.Text) <> '') and (fDMCadTab_Preco.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
     begin
       fDMCadTab_Preco.cdsTab_Preco_ItensID_COR.AsFloat    := RxDBLookupCombo3.KeyValue;
@@ -212,7 +224,7 @@ begin
     vMsgErro := vMsgErro + #13 + '*** Produto não informado!';
   if (fDMCadTab_Preco.cdsProdutoUSA_PRECO_COR.AsString = 'S') and (trim(RxDBLookupCombo3.Text) = '') then
     vMsgErro := vMsgErro + #13 + '*** Cor não informada!';
-  if CurrencyEdit2.Value <= 0 then
+  if (CurrencyEdit2.Value <= 0) and (CurrencyEdit3.Value <= 0) and (CurrencyEdit4.Value <= 0) then
     vMsgErro := vMsgErro + #13 + '*** Preço não informado!';
   if (trim(RxDBLookupCombo4.Text) <> '') and (vStatus <> 'A')  then
   begin
@@ -306,6 +318,8 @@ begin
   RxDBLookupCombo4.ClearValue;
   CurrencyEdit1.Value := 0;
   CurrencyEdit2.Value := 0;
+  CurrencyEdit3.Value := 0;
+  CurrencyEdit4.Value := 0;
 end;
 
 procedure TfrmCadTabPreco_Itens.prc_Abrir_Combinacao;
@@ -331,6 +345,8 @@ begin
     begin
       CurrencyEdit1.Value := fDMCadTab_Preco.cdsCombinacaoPRECO_CUSTO.AsFloat;
       CurrencyEdit2.Value := fDMCadTab_Preco.cdsCombinacaoPRECO_VENDA.AsFloat;
+      CurrencyEdit3.Value := 0;
+      CurrencyEdit4.Value := 0;
     end;
   end;
 end;

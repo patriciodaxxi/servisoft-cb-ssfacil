@@ -48,13 +48,24 @@ begin
   sds.CommandText   := sds.CommandText + ' where FILIAL_EMAIL.ID = ' + IntToStr(Filial);
   sds.CommandText   := sds.CommandText + ' and FILIAL_EMAIL.TIPO_REG = ' + QuotedStr(Tipo);
   sds.Open;
-  senha := Descriptografar(sds.FieldByName('Base').AsInteger
-                                 , 'ssfacil'
-                                 , sds.FieldByName('SMTP_SENHA').AsString );
-  host  := sds.FieldByName('SMTP_CLIENTE').AsString;
-  porta := sds.FieldByName('SMTP_PORTA').AsInteger;
-  email := sds.FieldByName('REMETENTE_EMAIL').AsString;
-  usuario := sds.FieldByName('SMTP_USUARIO').AsString;
+  if sds.IsEmpty then
+  begin
+    senha   := '1';
+    host    := '1';
+    porta   := 1;
+    email   := '1';
+    usuario := '1';
+  end
+  else
+  begin
+    senha := Descriptografar(sds.FieldByName('Base').AsInteger
+                                   , 'ssfacil'
+                                   , sds.FieldByName('SMTP_SENHA').AsString );
+    host  := sds.FieldByName('SMTP_CLIENTE').AsString;
+    porta := sds.FieldByName('SMTP_PORTA').AsInteger;
+    email := sds.FieldByName('REMETENTE_EMAIL').AsString;
+    usuario := sds.FieldByName('SMTP_USUARIO').AsString;
+  end
 end;
 
 function TValidaEmail.getEmail: string;

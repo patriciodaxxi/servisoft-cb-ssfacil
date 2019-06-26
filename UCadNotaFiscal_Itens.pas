@@ -192,6 +192,10 @@ type
     DBEdit40: TDBEdit;
     Label65: TLabel;
     DBEdit36: TDBEdit;
+    lblContaOrc: TLabel;
+    RxDBlkContaOrc: TRxDBLookupCombo;
+    RxDBlkCCusto: TRxDBLookupCombo;
+    lblCCusto: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
@@ -259,6 +263,11 @@ type
     procedure DBEdit34Enter(Sender: TObject);
     procedure RxDBLookupCombo14Enter(Sender: TObject);
     procedure RxDBLookupCombo14Exit(Sender: TObject);
+    procedure RxDBlkCCustoKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure RxDBlkContaOrcKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure RxDBLookupCombo4Exit(Sender: TObject);
   private
     { Private declarations }
     ffrmCadProduto: TfrmCadProduto;
@@ -329,6 +338,7 @@ type
     function fnc_EstoqueItenxAux: Real;
 
     function fnc_Busca_Preco_Orig: Real;
+    function fnc_Verifica_ST_Ant: Boolean;
 
   public
     { Public declarations }
@@ -360,7 +370,7 @@ var
 implementation
 
 uses rsDBUtils, USel_Produto, uUtilPadrao, UMenu, uCalculo_NotaFiscal, USel_TabPreco, USel_Unidade, UDMUtil, DmdDatabase,
-  USel_EnqIPI;
+  USel_EnqIPI, USel_CentroCusto, USel_ContaOrc;
 
 {$R *.dfm}
 
@@ -507,6 +517,12 @@ begin
     DBEdit5.ReadOnly := ((fDMCadNotaFiscal.qParametros_UsuarioALT_PRECO_PED.AsString <> 'S') and (fDMCadNotaFiscal.qParametros_UsuarioALT_PRECO_PED.AsString <> 'C'));
   //************
   pnlNomeProduto.Visible := (fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString = 'S');
+
+  //21/05/2019
+  lblContaOrc.Visible      := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
+  RxDBlkContaOrc.Visible   := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
+  lblCCusto.Visible        := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
+  RxDBlkCCusto.Visible     := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
 end;
 
 procedure TfrmCadNotaFiscal_Itens.prc_Buscar_Imposto(Auxiliar, Nome: String);
@@ -596,7 +612,7 @@ begin
   else
   begin
     //13/01/2018  Foi incluido essa alteração para a RGB que esta fazendo baixa do estoque pela conferência do pedido (Cód. Barra)
-    if fDMCadNotaFiscal.cdsParametrosTIPO_ESTOQUE.AsString = 'B' then
+    if (fDMCadNotaFiscal.cdsParametrosTIPO_ESTOQUE.AsString = 'B') or (fDMCadNotaFiscal.cdsParametrosTIPO_ESTOQUE.AsString = 'P') then
       fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N'
     else
       fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fDMCadNotaFiscal.cdsCFOPGERAR_ESTOQUE.AsString;
@@ -815,7 +831,10 @@ begin
       begin
         vPrecoAux := 0;
         if StrToFloat(FormatFloat('0.000000',vPreco_Pos)) > 0 then
-          vPrecoAux := StrToFloat(FormatFloat('0.000000',vPreco_Pos))
+        begin
+          vPrecoAux := StrToFloat(FormatFloat('0.000000',vPreco_Pos));
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat := vPrecoAux;
+        end
         else
         begin
           if fDMCadNotaFiscal.cdsParametrospRODUTO_PRECO_POR_FINALIDADE.AsString = 'S' then
@@ -833,17 +852,17 @@ begin
             if (fDMCadNotaFiscal.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger > 0) then
             begin
               if (fDMCadNotaFiscal.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger)
+                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,'N')
               else
-                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,0);
+                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsNotaFiscalID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,0,'N');
             end
             else
             if fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger > 0 then
             begin
               if (fDMCadNotaFiscal.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger)
+                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,'N')
               else
-                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,0)
+                vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadNotaFiscal.cdsClienteID_TAB_PRECO.AsInteger,fDMCadNotaFiscal.cdsProdutoID.AsInteger,0,'N')
             end;
             if StrToFloat(FormatFloat('0.000000',vPrecoAux)) > 0 then
               fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000000000',vPrecoAux))
@@ -1124,6 +1143,11 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fnc_Estoque_Tipo_Mat(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString);
   //***************
 
+  //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
+  if (fDMCadNotaFiscal.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'S') and
+     (fDMCadNotaFiscal.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
+  //***************************
 end;
 
 procedure TfrmCadNotaFiscal_Itens.DBEdit2Exit(Sender: TObject);
@@ -1370,8 +1394,11 @@ begin
     if (fDMCadNotaFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
       if not fnc_Verifica_SubstTributaria then
         exit;
-
-    
+    //23/05/2019
+    if (fDMCadNotaFiscal.cdsCFOPENVIAR_BASE_ST.AsString = 'S') and (fDMCadNotaFiscal.cdsFilialUSA_ENVIO_ST_RET.AsString = 'S') then
+      if not fnc_Verifica_ST_Ant then
+        exit;
+    //**********************
 
     //Esse if foi incluido no dia   26/05/2016  para controlar se gravou na tabela de tamanhos
     if (fDMCadNotaFiscal.qParametros_NFeGRAVAR_TAB_TAMANHO.AsString = 'S') then
@@ -1818,7 +1845,8 @@ end;
 
 procedure TfrmCadNotaFiscal_Itens.RxDBLookupCombo4Enter(Sender: TObject);
 begin
-  fDMCadNotaFiscal.cdsProduto.IndexFieldNames := 'REFERENCIA';
+  if fDMCadNotaFiscal.cdsProduto.IndexFieldNames <> 'REFERENCIA' then
+    fDMCadNotaFiscal.cdsProduto.IndexFieldNames := 'REFERENCIA';
   prc_Mover_Finalidade;
 end;
 
@@ -2743,6 +2771,28 @@ begin
   end;
 end;
 
+function TfrmCadNotaFiscal_Itens.fnc_Verifica_ST_Ant: Boolean;
+begin
+  //23/05/2019
+  //Controla se foi gravado o valor anterior da ST
+  Result := True;
+  if (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat)) <= 0) then
+  begin
+    if (vNotaSelecionada) or (vPedidoSelecionado) or (Tag = 99) or (vValeSelecionado) or (vOSSelecionada) or (vSacolaSelecionada) or (vPedAmbiente) or
+      (vRecNFSelecionado)then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString := 'STA'
+    else
+    if MessageDlg('Item não foi destacado o valor da ST Cobrada Anteriormente!' + #13
+                 + 'CFOP ' + fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString + ' está marcada para enviar a ST Anterior , mas o sistema não encontrou a ST Anterior!' + #13 + #13
+                 + 'Motivo: Verifique se na nota de entrada veio a ST Anterior ou se foi feito o MOV. ST Anterior' + #13
+                 + ' Confirmar assim a gravação do item?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+      Result := False
+    else
+    if fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsEdit,dsInsert] then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString := 'STA';
+  end;
+end;
+
 procedure TfrmCadNotaFiscal_Itens.RxDBLookupCombo6Exit(Sender: TObject);
 begin
   if RxDBLookupCombo6.Text <> '' then
@@ -3252,6 +3302,49 @@ begin
   begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_TRIB.AsFloat          := StrToFloat(FormatFloat('0.0000',0));
     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO_TRIB.AsFloat := StrToFloat(FormatFloat('0.0000000000',0));
+  end;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.RxDBlkCCustoKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    if RxDBlkCCusto.Text <> '' then
+      vID_Centro_Custo := RxDBlkCCusto.KeyValue;
+    frmSel_CentroCusto := TfrmSel_CentroCusto.Create(Self);
+    frmSel_CentroCusto.ShowModal;
+    if vID_Centro_Custo > 0 then
+      RxDBlkCCusto.KeyValue := vID_Centro_Custo;
+  end;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.RxDBlkContaOrcKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    if RxDBlkContaOrc.Text <> '' then
+      vID_ContaOrcamento_Pos := RxDBlkContaOrc.KeyValue;
+    frmSel_ContaOrc := TfrmSel_ContaOrc.Create(Self);
+    if fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString = 'S' then
+      frmSel_ContaOrc.ComboBox2.ItemIndex := 0
+    else
+      frmSel_ContaOrc.ComboBox2.ItemIndex := 1;
+    frmSel_ContaOrc.ShowModal;
+    if vID_ContaOrcamento_Pos > 0 then
+      RxDBlkContaOrc.KeyValue:= vID_ContaOrcamento_Pos;
+  end;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.RxDBLookupCombo4Exit(Sender: TObject);
+begin
+  if trim(RxDBLookupCombo4.Text) <> '' then
+  begin
+    if rxdbOperacao.Visible then
+      rxdbOperacao.SetFocus
+    else
+      RxDBLookupCombo1.SetFocus;
   end;
 end;
 

@@ -1,8 +1,8 @@
 object DMCadFinanceiro: TDMCadFinanceiro
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 248
-  Top = 43
+  Left = 229
+  Top = 78
   Height = 631
   Width = 981
   object sdsContas: TSQLDataSet
@@ -12,21 +12,21 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 200
+    Left = 224
+    Top = 168
   end
   object dspContas: TDataSetProvider
     DataSet = sdsContas
-    Left = 560
-    Top = 200
+    Left = 256
+    Top = 168
   end
   object cdsContas: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspContas'
-    Left = 600
-    Top = 200
+    Left = 288
+    Top = 168
     object cdsContasID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -38,8 +38,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsContas: TDataSource
     DataSet = cdsContas
-    Left = 640
-    Top = 200
+    Left = 320
+    Top = 168
   end
   object sdsFilial: TSQLDataSet
     NoMetadata = True
@@ -48,21 +48,21 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 512
-    Top = 272
+    Left = 224
+    Top = 368
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 544
-    Top = 272
+    Left = 256
+    Top = 368
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 584
-    Top = 272
+    Left = 288
+    Top = 368
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -215,8 +215,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 624
-    Top = 272
+    Left = 320
+    Top = 368
   end
   object qParametros: TSQLQuery
     MaxBlobSize = -1
@@ -225,8 +225,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'SELECT *'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 416
-    Top = 192
+    Left = 776
+    Top = 32
     object qParametrosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -413,7 +413,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
     Params = <>
     ProviderName = 'dspFinanceiro'
     BeforePost = cdsFinanceiroBeforePost
-    Left = 104
+    Left = 96
     Top = 24
     object cdsFinanceiroID: TIntegerField
       FieldName = 'ID'
@@ -500,7 +500,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsFinanceiro: TDataSource
     DataSet = cdsFinanceiro
-    Left = 144
+    Left = 128
     Top = 24
   end
   object sdsSaldo: TSQLDataSet
@@ -513,20 +513,20 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 488
-    Top = 32
+    Left = 224
+    Top = 24
   end
   object dspSaldo: TDataSetProvider
     DataSet = sdsSaldo
-    Left = 520
-    Top = 32
+    Left = 256
+    Top = 24
   end
   object cdsSaldo: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspSaldo'
-    Left = 560
-    Top = 32
+    Left = 288
+    Top = 24
     object cdsSaldoID: TIntegerField
       DisplayLabel = 'ID Conta'
       FieldName = 'ID'
@@ -555,8 +555,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsSaldo: TDataSource
     DataSet = cdsSaldo
-    Left = 600
-    Top = 32
+    Left = 320
+    Top = 24
   end
   object sdsTipoCobranca: TSQLDataSet
     NoMetadata = True
@@ -565,21 +565,21 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 528
-    Top = 152
+    Left = 224
+    Top = 120
   end
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
-    Left = 560
-    Top = 152
+    Left = 256
+    Top = 120
   end
   object cdsTipoCobranca: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspTipoCobranca'
-    Left = 600
-    Top = 152
+    Left = 288
+    Top = 120
     object cdsTipoCobrancaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -629,8 +629,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsTipoCobranca: TDataSource
     DataSet = cdsTipoCobranca
-    Left = 640
-    Top = 152
+    Left = 320
+    Top = 120
   end
   object qSaldoMov: TSQLQuery
     MaxBlobSize = -1
@@ -650,8 +650,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'WHERE F.DTMOVIMENTO < :DTMOVIMENTO'
       'GROUP BY F.ID_CONTA, sc.vlr_saldo')
     SQLConnection = dmDatabase.scoDados
-    Left = 40
-    Top = 296
+    Left = 728
+    Top = 32
     object qSaldoMovID_CONTA: TIntegerField
       FieldName = 'ID_CONTA'
     end
@@ -675,21 +675,21 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 248
-    Top = 24
+    Left = 32
+    Top = 416
   end
   object dspFinanceiro_Consulta: TDataSetProvider
     DataSet = sdsFinanceiro_Consulta
     OnUpdateError = dspFinanceiroUpdateError
-    Left = 280
-    Top = 24
+    Left = 64
+    Top = 416
   end
   object cdsFinanceiro_Consulta: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFinanceiro_Consulta'
-    Left = 320
-    Top = 24
+    Left = 96
+    Top = 416
     object cdsFinanceiro_ConsultaID: TIntegerField
       Alignment = taCenter
       FieldName = 'ID'
@@ -786,8 +786,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsFinanceiro_Consulta: TDataSource
     DataSet = cdsFinanceiro_Consulta
-    Left = 360
-    Top = 24
+    Left = 128
+    Top = 416
   end
   object sdsSaldo_FPgto: TSQLDataSet
     NoMetadata = True
@@ -801,20 +801,20 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 488
-    Top = 79
+    Left = 224
+    Top = 71
   end
   object dspSaldo_FPgto: TDataSetProvider
     DataSet = sdsSaldo_FPgto
-    Left = 520
-    Top = 79
+    Left = 256
+    Top = 71
   end
   object cdsSaldo_FPgto: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspSaldo_FPgto'
-    Left = 560
-    Top = 79
+    Left = 288
+    Top = 71
     object cdsSaldo_FPgtoVLR_ENTRADA: TFloatField
       DisplayLabel = 'Vlr. Entrada'
       FieldName = 'VLR_ENTRADA'
@@ -843,15 +843,15 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsSaldo_FPgto: TDataSource
     DataSet = cdsSaldo_FPgto
-    Left = 600
-    Top = 79
+    Left = 320
+    Top = 71
   end
   object mSaldo_Conta: TClientDataSet
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 40
-    Top = 352
+    Left = 456
+    Top = 24
     Data = {
       820000009619E0BD01000000180000000500000000000300000082000849445F
       436F6E746104000100000000000A4E6F6D655F436F6E74610100490000000100
@@ -880,15 +880,15 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsmSaldo_Conta: TDataSource
     DataSet = mSaldo_Conta
-    Left = 96
-    Top = 352
+    Left = 488
+    Top = 24
   end
   object mSaldo_FPgto: TClientDataSet
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 40
-    Top = 400
+    Left = 456
+    Top = 72
     Data = {
       940000009619E0BD01000000180000000500000000000300000094001149445F
       466F726D61506167616D656E746F0400010000000000134E6F6D655F466F726D
@@ -914,8 +914,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsmSaldo_FPagto: TDataSource
     DataSet = mSaldo_FPgto
-    Left = 104
-    Top = 400
+    Left = 488
+    Top = 72
   end
   object sdsFechamento: TSQLDataSet
     NoMetadata = True
@@ -946,20 +946,20 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 520
-    Top = 344
+    Left = 224
+    Top = 216
   end
   object dspFechamento: TDataSetProvider
     DataSet = sdsFechamento
-    Left = 560
-    Top = 344
+    Left = 256
+    Top = 216
   end
   object cdsFechamento: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFechamento'
-    Left = 608
-    Top = 344
+    Left = 288
+    Top = 216
     object cdsFechamentoID_CONTA: TIntegerField
       FieldName = 'ID_CONTA'
     end
@@ -983,8 +983,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsFechamento: TDataSource
     DataSet = cdsFechamento
-    Left = 648
-    Top = 344
+    Left = 320
+    Top = 216
   end
   object mFaturamento: TClientDataSet
     Active = True
@@ -1014,8 +1014,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
     IndexFieldNames = 'Codigo'
     Params = <>
     StoreDefs = True
-    Left = 32
-    Top = 456
+    Left = 456
+    Top = 120
     Data = {
       630000009619E0BD010000001800000003000000000003000000630006436F64
       69676F0100490000000100055749445448020002000A00044E6F6D6501004900
@@ -1036,8 +1036,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsmFaturamento: TDataSource
     DataSet = mFaturamento
-    Left = 112
-    Top = 456
+    Left = 488
+    Top = 120
   end
   object sdsMovimento: TSQLDataSet
     NoMetadata = True
@@ -1068,20 +1068,20 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 24
-    Top = 520
+    Left = 32
+    Top = 272
   end
   object dspMovimento: TDataSetProvider
     DataSet = sdsMovimento
     Left = 64
-    Top = 520
+    Top = 272
   end
   object cdsMovimento: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspMovimento'
-    Left = 112
-    Top = 520
+    Left = 96
+    Top = 272
     object cdsMovimentoTIPO_ES: TStringField
       FieldName = 'TIPO_ES'
       FixedChar = True
@@ -1105,8 +1105,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsMovimento: TDataSource
     DataSet = cdsMovimento
-    Left = 152
-    Top = 520
+    Left = 128
+    Top = 272
   end
   object qUltFechamento: TSQLQuery
     MaxBlobSize = -1
@@ -1128,8 +1128,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       '  AND ID_CONTA = :ID_CONTA'
       '  AND FILIAL = :FILIAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 344
-    Top = 152
+    Left = 752
+    Top = 32
     object qUltFechamentoDATA: TDateField
       FieldName = 'DATA'
     end
@@ -1160,8 +1160,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       '         AND AV.DTBOM_PARA > :DATA) VLR_AVENCER'
       'From RDB$DATABASE')
     SQLConnection = dmDatabase.scoDados
-    Left = 408
-    Top = 472
+    Left = 680
+    Top = 32
     object qChequesVLR_VENCIDO: TFloatField
       FieldName = 'VLR_VENCIDO'
     end
@@ -1182,21 +1182,21 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 729
-    Top = 16
+    Left = 225
+    Top = 416
   end
   object dspContaOrcamento: TDataSetProvider
     DataSet = sdsContaOrcamento
-    Left = 761
-    Top = 16
+    Left = 257
+    Top = 416
   end
   object cdsContaOrcamento: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'DESCRICAO'
     Params = <>
     ProviderName = 'dspContaOrcamento'
-    Left = 801
-    Top = 16
+    Left = 289
+    Top = 416
     object cdsContaOrcamentoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1220,8 +1220,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsContaOrcamento: TDataSource
     DataSet = cdsContaOrcamento
-    Left = 841
-    Top = 16
+    Left = 321
+    Top = 416
   end
   object sdsPedido_Emi: TSQLDataSet
     NoMetadata = True
@@ -1253,14 +1253,14 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dspPedido_Emi: TDataSetProvider
     DataSet = sdsPedido_Emi
-    Left = 72
+    Left = 64
     Top = 72
   end
   object cdsPedido_Emi: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPedido_Emi'
-    Left = 120
+    Left = 96
     Top = 72
     object cdsPedido_EmiVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
@@ -1269,7 +1269,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsPedido_Emi: TDataSource
     DataSet = cdsPedido_Emi
-    Left = 160
+    Left = 128
     Top = 72
   end
   object sdsPedido_Pend: TSQLDataSet
@@ -1317,14 +1317,14 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dspPedido_Pend: TDataSetProvider
     DataSet = sdsPedido_Pend
-    Left = 72
+    Left = 64
     Top = 122
   end
   object cdsPedido_Pend: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPedido_Pend'
-    Left = 120
+    Left = 96
     Top = 122
     object cdsPedido_PendVLR_RESTANTE: TFloatField
       FieldName = 'VLR_RESTANTE'
@@ -1335,7 +1335,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsPedido_Pend: TDataSource
     DataSet = cdsPedido_Pend
-    Left = 160
+    Left = 128
     Top = 122
   end
   object sdsOrcamento: TSQLDataSet
@@ -1374,14 +1374,14 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dspOrcamento: TDataSetProvider
     DataSet = sdsOrcamento
-    Left = 72
+    Left = 64
     Top = 170
   end
   object cdsOrcamento: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspOrcamento'
-    Left = 120
+    Left = 96
     Top = 170
     object cdsOrcamentoQTD_ORCAMENTO: TIntegerField
       FieldName = 'QTD_ORCAMENTO'
@@ -1399,7 +1399,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsOrcamento: TDataSource
     DataSet = cdsOrcamento
-    Left = 160
+    Left = 128
     Top = 170
   end
   object sdsVale: TSQLDataSet
@@ -1451,14 +1451,14 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dspVale: TDataSetProvider
     DataSet = sdsVale
-    Left = 72
+    Left = 64
     Top = 218
   end
   object cdsVale: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspVale'
-    Left = 120
+    Left = 96
     Top = 218
     object cdsValeVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
@@ -1469,7 +1469,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsVale: TDataSource
     DataSet = cdsVale
-    Left = 160
+    Left = 128
     Top = 218
   end
   object sdsDuplicata: TSQLDataSet
@@ -1498,21 +1498,21 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 520
-    Top = 400
+    Left = 224
+    Top = 272
   end
   object dspDuplicata: TDataSetProvider
     DataSet = sdsDuplicata
-    Left = 560
-    Top = 400
+    Left = 256
+    Top = 272
   end
   object cdsDuplicata: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspDuplicata'
     OnCalcFields = cdsDuplicataCalcFields
-    Left = 608
-    Top = 400
+    Left = 288
+    Top = 272
     object cdsDuplicataVLR_RESTANTE: TFloatField
       FieldName = 'VLR_RESTANTE'
       DisplayFormat = '###,###,##0.00'
@@ -1535,8 +1535,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsDuplicata: TDataSource
     DataSet = cdsDuplicata
-    Left = 648
-    Top = 400
+    Left = 320
+    Top = 272
   end
   object qNotaFiscal_Canc: TSQLQuery
     MaxBlobSize = -1
@@ -1565,8 +1565,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       '  AND N.CANCELADA = '#39'S'#39
       '  AND N.TIPO_REG = '#39'NTS'#39)
     SQLConnection = dmDatabase.scoDados
-    Left = 808
-    Top = 272
+    Left = 720
+    Top = 80
     object qNotaFiscal_CancCONTADOR: TIntegerField
       FieldName = 'CONTADOR'
       Required = True
@@ -1601,8 +1601,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       '  AND N.TIPO_REG = '#39'NTS'#39
       '  and NFE.TIPO = '#39'CCE'#39)
     SQLConnection = dmDatabase.scoDados
-    Left = 808
-    Top = 336
+    Left = 752
+    Top = 80
     object qNotaFiscal_CCECONTADOR: TIntegerField
       FieldName = 'CONTADOR'
       Required = True
@@ -1612,8 +1612,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 784
-    Top = 440
+    Left = 456
+    Top = 168
     Data = {
       250000009619E0BD010000001800000001000000000003000000250002494404
       000100000000000000}
@@ -1623,8 +1623,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsmImp: TDataSource
     DataSet = mImp
-    Left = 816
-    Top = 440
+    Left = 488
+    Top = 168
   end
   object qNotaFiscal_Ped: TSQLQuery
     MaxBlobSize = -1
@@ -1647,8 +1647,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       ''
       'GROUP BY PED.DTEMISSAO')
     SQLConnection = dmDatabase.scoDados
-    Left = 728
-    Top = 152
+    Left = 656
+    Top = 80
     object qNotaFiscal_PedDTEMISSAO: TDateField
       FieldName = 'DTEMISSAO'
     end
@@ -1670,8 +1670,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'WHERE NI.ID = :ID'
       '  AND NI.ID_VALE IS NOT NULL')
     SQLConnection = dmDatabase.scoDados
-    Left = 728
-    Top = 192
+    Left = 688
+    Top = 80
     object qNotaFiscal_ValeVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
     end
@@ -1683,21 +1683,21 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 520
-    Top = 448
+    Left = 224
+    Top = 320
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
-    Left = 560
-    Top = 448
+    Left = 256
+    Top = 320
   end
   object cdsPessoa: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPessoa'
     OnCalcFields = cdsDuplicataCalcFields
-    Left = 608
-    Top = 448
+    Left = 288
+    Top = 320
     object cdsPessoaCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -1712,8 +1712,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsPessoa: TDataSource
     DataSet = cdsPessoa
-    Left = 648
-    Top = 448
+    Left = 320
+    Top = 320
   end
   object sdsFinAgrupado: TSQLDataSet
     NoMetadata = True
@@ -1761,22 +1761,22 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 248
-    Top = 72
+    Left = 32
+    Top = 464
   end
   object dspFinAgrupado: TDataSetProvider
     DataSet = sdsFinAgrupado
     OnUpdateError = dspFinanceiroUpdateError
-    Left = 280
-    Top = 72
+    Left = 64
+    Top = 464
   end
   object cdsFinAgrupado: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFinAgrupado'
     OnCalcFields = cdsFinAgrupadoCalcFields
-    Left = 320
-    Top = 72
+    Left = 96
+    Top = 464
     object cdsFinAgrupadoDTMOVIMENTO: TDateField
       FieldName = 'DTMOVIMENTO'
     end
@@ -1805,8 +1805,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsFinAgrupado: TDataSource
     DataSet = cdsFinAgrupado
-    Left = 360
-    Top = 72
+    Left = 128
+    Top = 464
   end
   object frxReport1: TfrxReport
     Tag = 1
@@ -1817,14 +1817,14 @@ object DMCadFinanceiro: TDMCadFinanceiro
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43399.644061967600000000
-    ReportOptions.LastChange = 43402.369452349540000000
+    ReportOptions.CreateDate = 42992.427233402800000000
+    ReportOptions.LastChange = 43588.431551643520000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 520
-    Top = 504
+    Left = 704
+    Top = 408
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -1847,8 +1847,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 560
-    Top = 504
+    Left = 744
+    Top = 408
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxFinAgrupado'
@@ -1862,8 +1862,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'FLAG=FLAG')
     DataSet = cdsFinAgrupado
     BCDToCurrency = False
-    Left = 368
-    Top = 472
+    Left = 767
+    Top = 459
   end
   object mDupAuxiliar: TClientDataSet
     Active = True
@@ -1898,8 +1898,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
     IndexFieldNames = 'TIPO_ES;TIPO_MOV'
     Params = <>
     StoreDefs = True
-    Left = 768
-    Top = 512
+    Left = 456
+    Top = 224
     Data = {
       7A0000009619E0BD0100000018000000040000000000030000007A0007546970
       6F5F45530100490000000100055749445448020002000100085469706F5F4D6F
@@ -1924,8 +1924,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsmDupAuxiliar: TDataSource
     DataSet = mDupAuxiliar
-    Left = 824
-    Top = 512
+    Left = 488
+    Top = 224
   end
   object sdsOC_Emi: TSQLDataSet
     NoMetadata = True
@@ -1952,28 +1952,28 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 256
-    Top = 280
+    Left = 32
+    Top = 320
   end
   object dspOC_Emi: TDataSetProvider
     DataSet = sdsOC_Emi
-    Left = 296
-    Top = 280
+    Left = 64
+    Top = 320
   end
   object cdsOC_Emi: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspOC_Emi'
-    Left = 344
-    Top = 280
+    Left = 96
+    Top = 320
     object cdsOC_EmiVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
     end
   end
   object dsOC_Emi: TDataSource
     DataSet = cdsOC_Emi
-    Left = 384
-    Top = 280
+    Left = 128
+    Top = 320
   end
   object qParametros_Geral: TSQLQuery
     MaxBlobSize = -1
@@ -1982,8 +1982,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'SELECT EMPRESA_VAREJO'
       'FROM PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 384
-    Top = 376
+    Left = 704
+    Top = 32
     object qParametros_GeralEMPRESA_VAREJO: TStringField
       FieldName = 'EMPRESA_VAREJO'
       FixedChar = True
@@ -2018,8 +2018,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       '      FILIAL = :FIL'
       'group by FIN.DTMOVIMENTO, FIN.ID, COB.NOME')
     SQLConnection = dmDatabase.scoDados
-    Left = 256
-    Top = 400
+    Left = 784
+    Top = 80
     object qConsulta_DataDTMOVIMENTO: TDateField
       FieldName = 'DTMOVIMENTO'
     end
@@ -2054,8 +2054,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'SALDO=SALDO')
     DataSource = dsMovimentoData
     BCDToCurrency = False
-    Left = 280
-    Top = 472
+    Left = 703
+    Top = 459
   end
   object sdsMovimentoData: TSQLDataSet
     NoMetadata = True
@@ -2087,8 +2087,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 200
-    Top = 336
+    Left = 32
+    Top = 368
     object sdsMovimentoDataDTMOVIMENTO: TDateField
       FieldName = 'DTMOVIMENTO'
     end
@@ -2120,15 +2120,15 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dspMovimentoData: TDataSetProvider
     DataSet = sdsMovimentoData
-    Left = 232
-    Top = 336
+    Left = 64
+    Top = 368
   end
   object cdsMovimentoData: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspMovimentoData'
-    Left = 264
-    Top = 336
+    Left = 96
+    Top = 368
     object cdsMovimentoDataDTMOVIMENTO: TDateField
       FieldName = 'DTMOVIMENTO'
     end
@@ -2160,8 +2160,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsMovimentoData: TDataSource
     DataSet = cdsMovimentoData
-    Left = 288
-    Top = 336
+    Left = 128
+    Top = 368
   end
   object frxSaldoMov: TfrxDBDataset
     UserName = 'frxSaldoMov'
@@ -2172,8 +2172,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'SALDO_INICIAL=SALDO_INICIAL')
     DataSet = qSaldoMovData
     BCDToCurrency = False
-    Left = 320
-    Top = 472
+    Left = 735
+    Top = 459
   end
   object qSaldoMovData: TSQLQuery
     MaxBlobSize = -1
@@ -2191,8 +2191,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'inner join SALDO_CONTA SC on F.ID_CONTA = SC.ID_CONTA'
       'where F.DTMOVIMENTO < :DTMOVIMENTO')
     SQLConnection = dmDatabase.scoDados
-    Left = 264
-    Top = 536
+    Left = 656
+    Top = 32
     object qSaldoMovDataVLR_ENTRADA: TFloatField
       FieldName = 'VLR_ENTRADA'
     end
@@ -2207,13 +2207,25 @@ object DMCadFinanceiro: TDMCadFinanceiro
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT EXIGIR_CONTA_ORC_DUP'
+      
+        'SELECT EXIGIR_CONTA_ORC_DUP, CONTROLA_CONTRATO_CCUSTO, CAIXA_VIR' +
+        'A_NOITE'
       'FROM PARAMETROS_FIN')
     SQLConnection = dmDatabase.scoDados
-    Left = 312
-    Top = 216
+    Left = 800
+    Top = 32
     object qParametros_FinEXIGIR_CONTA_ORC_DUP: TStringField
       FieldName = 'EXIGIR_CONTA_ORC_DUP'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_FinCONTROLA_CONTRATO_CCUSTO: TStringField
+      FieldName = 'CONTROLA_CONTRATO_CCUSTO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_FinCAIXA_VIRA_NOITE: TStringField
+      FieldName = 'CAIXA_VIRA_NOITE'
       FixedChar = True
       Size = 1
     end
@@ -2298,8 +2310,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 728
-    Top = 80
+    Left = 456
+    Top = 272
     Data = {
       0C0200009619E0BD01000000180000000F0000000000030000000C020646696C
       69616C0100490000000100055749445448020002001E000A46696C69616C5F45
@@ -2378,8 +2390,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsmRecibo: TDataSource
     DataSet = mRecibo
-    Left = 760
-    Top = 80
+    Left = 488
+    Top = 272
   end
   object frxRecibo: TfrxDBDataset
     UserName = 'frxRecibo'
@@ -2402,7 +2414,27 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'Filial_CNPJ=Filial_CNPJ')
     DataSet = mRecibo
     BCDToCurrency = False
-    Left = 792
-    Top = 80
+    Left = 800
+    Top = 460
+  end
+  object qCaixaAberto: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'D1'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT TIPO_FECHAMENTO FROM FECHAMENTO WHERE DATA = :D1'
+      'ORDER BY ID DESC')
+    SQLConnection = dmDatabase.scoDados
+    Left = 656
+    Top = 128
+    object qCaixaAbertoTIPO_FECHAMENTO: TStringField
+      FieldName = 'TIPO_FECHAMENTO'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

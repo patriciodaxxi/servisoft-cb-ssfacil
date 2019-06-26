@@ -1,7 +1,7 @@
 object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
-  Left = 289
-  Top = 65
-  Width = 1009
+  Left = 131
+  Top = 50
+  Width = 1169
   Height = 533
   Caption = 'frmConsCtaOrcamento_Fin'
   Color = clBtnFace
@@ -18,7 +18,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 993
+    Width = 1153
     Height = 137
     Align = alTop
     Color = clSilver
@@ -70,7 +70,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Ctl3D = False
       NumGlyphs = 2
       ParentCtl3D = False
-      TabOrder = 0
+      TabOrder = 3
     end
     object DateEdit2: TDateEdit
       Left = 443
@@ -80,7 +80,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Ctl3D = False
       NumGlyphs = 2
       ParentCtl3D = False
-      TabOrder = 1
+      TabOrder = 4
     end
     object NxComboBox2: TNxComboBox
       Left = 151
@@ -90,7 +90,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Cursor = crArrow
       Alignment = taRightJustify
       Color = clSilver
-      TabOrder = 2
+      TabOrder = 5
       Text = 'Data Vencimento:'
       ReadOnly = True
       HideFocus = False
@@ -99,7 +99,8 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       ItemIndex = 1
       Items.Strings = (
         'Data Emiss'#227'o:'
-        'Data Vencimento:')
+        'Data Vencimento:'
+        'Data Pagamento:')
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 266
@@ -112,7 +113,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       LookupDisplay = 'NOME_INTERNO'
       LookupSource = DMConsFinanceiro.dsFilial
       ParentCtl3D = False
-      TabOrder = 3
+      TabOrder = 1
     end
     object ComboBox2: TComboBox
       Left = 266
@@ -127,7 +128,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       ItemHeight = 13
       ItemIndex = 1
       ParentCtl3D = False
-      TabOrder = 4
+      TabOrder = 6
       Text = 'Anal'#237'tica'
       Visible = False
       Items.Strings = (
@@ -147,7 +148,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       ItemHeight = 13
       ItemIndex = 2
       ParentCtl3D = False
-      TabOrder = 5
+      TabOrder = 2
       Text = 'Todos'
       Items.Strings = (
         'Pagos'
@@ -155,7 +156,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
         'Todos')
     end
     object btnConsultar: TNxButton
-      Left = 265
+      Left = 266
       Top = 105
       Width = 182
       Height = 30
@@ -222,7 +223,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 8
       Transparent = True
       OnClick = btnConsultarClick
     end
@@ -294,7 +295,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
         FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 7
+      TabOrder = 9
       Transparent = True
       OnClick = btnImprimirClick
     end
@@ -305,7 +306,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       Height = 135
       Align = alLeft
       Caption = ' Imprimir Detalhado '
-      TabOrder = 8
+      TabOrder = 0
       object CheckBox1: TCheckBox
         Left = 8
         Top = 24
@@ -343,13 +344,13 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       LookupDisplay = 'DESCRICAO;CODIGO'
       LookupSource = DMConsFinanceiro.dsCentroCusto
       ParentCtl3D = False
-      TabOrder = 9
+      TabOrder = 7
     end
   end
   object StaticText1: TStaticText
     Left = 0
     Top = 477
-    Width = 993
+    Width = 1153
     Height = 17
     Align = alBottom
     Caption = 'Duplo Clique para detalhar'
@@ -364,19 +365,20 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 137
-    Width = 993
+    Width = 1153
     Height = 340
-    ActivePage = TS_Resumido
+    ActivePage = ts_Centro_Orcamento
     Align = alClient
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 2
+    OnChange = RzPageControl1Change
     FixedDimension = 19
     object TS_Resumido: TRzTabSheet
       Caption = 'Resumido'
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 989
+        Width = 1149
         Height = 290
         Align = alClient
         Ctl3D = False
@@ -459,7 +461,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object Panel2: TPanel
         Left = 0
         Top = 290
-        Width = 989
+        Width = 1149
         Height = 27
         Align = alBottom
         TabOrder = 1
@@ -551,7 +553,7 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object SMDBGrid2: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 989
+        Width = 1149
         Height = 317
         Align = alClient
         DataSource = DMConsFinanceiro.dsmContas_Orc_CCusto
@@ -649,14 +651,14 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 989
+        Width = 1149
         Height = 317
         Align = alClient
         TabOrder = 0
         object SMDBGrid3: TSMDBGrid
           Left = 1
           Top = 1
-          Width = 987
+          Width = 1147
           Height = 315
           Align = alClient
           DataSource = DMConsFinanceiro.dsCCustoOrcamento
@@ -691,35 +693,42 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
             item
               Expanded = False
               FieldName = 'CODIGO_GRUPO'
-              Width = 91
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CODIGO_GRUPO_SUP'
-              Width = 103
+              Title.Alignment = taCenter
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'NOME_GRUPO'
-              Width = 272
+              Title.Alignment = taCenter
+              Width = 268
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CONTA_ORCAMENTO'
+              Title.Alignment = taCenter
+              Width = 90
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'NOME_ORCAMENTO'
+              Title.Alignment = taCenter
+              Width = 234
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'VLR_PARCELA'
-              Width = 79
+              FieldName = 'VLR_ENTRADA'
+              Title.Alignment = taCenter
+              Width = 77
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VLR_SAIDA'
+              Title.Alignment = taCenter
+              Width = 73
               Visible = True
             end>
         end

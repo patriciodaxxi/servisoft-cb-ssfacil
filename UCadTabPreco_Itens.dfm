@@ -2,7 +2,7 @@ object frmCadTabPreco_Itens: TfrmCadTabPreco_Itens
   Left = 227
   Top = 225
   Width = 742
-  Height = 196
+  Height = 234
   Caption = 'Cadastro dos produtos na tabela de pre'#231'o'
   Color = clMoneyGreen
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object frmCadTabPreco_Itens: TfrmCadTabPreco_Itens
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 131
+    Top = 169
     Width = 734
     Height = 34
     Align = alBottom
@@ -220,7 +220,7 @@ object frmCadTabPreco_Itens: TfrmCadTabPreco_Itens
     Left = 0
     Top = 73
     Width = 734
-    Height = 58
+    Height = 96
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 2
@@ -239,6 +239,22 @@ object frmCadTabPreco_Itens: TfrmCadTabPreco_Itens
       Height = 13
       Alignment = taRightJustify
       Caption = 'Pre'#231'o Venda:'
+    end
+    object Label1: TLabel
+      Left = 25
+      Top = 57
+      Width = 114
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Pre'#231'o Venda Encerado:'
+    end
+    object Label4: TLabel
+      Left = 20
+      Top = 80
+      Width = 119
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Pre'#231'o Venda Engomado:'
     end
     object CurrencyEdit1: TCurrencyEdit
       Left = 140
@@ -262,6 +278,26 @@ object frmCadTabPreco_Itens: TfrmCadTabPreco_Itens
       DecimalPlaces = 6
       DisplayFormat = '0.00####'
       TabOrder = 1
+    end
+    object CurrencyEdit3: TCurrencyEdit
+      Left = 140
+      Top = 49
+      Width = 121
+      Height = 21
+      AutoSize = False
+      DecimalPlaces = 6
+      DisplayFormat = '0.00####'
+      TabOrder = 2
+    end
+    object CurrencyEdit4: TCurrencyEdit
+      Left = 140
+      Top = 71
+      Width = 121
+      Height = 21
+      AutoSize = False
+      DecimalPlaces = 6
+      DisplayFormat = '0.00####'
+      TabOrder = 3
     end
   end
 end

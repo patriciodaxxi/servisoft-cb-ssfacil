@@ -82,6 +82,7 @@ type
     procedure btnGradeClick(Sender: TObject);
     procedure RxDBLookupCombo4Exit(Sender: TObject);
     procedure RxDBLookupCombo2Exit(Sender: TObject);
+    procedure DBEdit15Enter(Sender: TObject);
   private
     { Private declarations }
     ffrmCadProduto: TfrmCadProduto;
@@ -523,6 +524,7 @@ begin
   else
   if (Key = Vk_F2) then
   begin
+    SpeedButton4Click(Sender);
     vCodProduto_Pos := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
     frmSel_Produto := TfrmSel_Produto.Create(Self);
     frmSel_Produto.ShowModal;
@@ -587,6 +589,7 @@ procedure TfrmCadOC_Itens.DBEdit15KeyDown(Sender: TObject;
 begin
   if (Key = Vk_Return) and (Trim(DBEdit15.Text) <> '') then
   begin
+    SpeedButton4Click(Sender);
     if not fnc_Verificar_Produto then
       MessageDlg('*** Código do produto não encontrado!', mtError, [mbOk], 0)
     else
@@ -908,6 +911,11 @@ begin
   finally
     FreeAndNil(sds);
   end;
+end;
+
+procedure TfrmCadOC_Itens.DBEdit15Enter(Sender: TObject);
+begin
+  SpeedButton4Click(Sender);
 end;
 
 end.

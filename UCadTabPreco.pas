@@ -32,7 +32,6 @@ type
     btnBuscarProduto: TBitBtn;
     CurrencyEdit1: TCurrencyEdit;
     btnAplicar: TBitBtn;
-    UCControls1: TUCControls;
     ComboBox1: TComboBox;
     ComboBox2: TComboBox;
     btnInserir: TNxButton;
@@ -64,6 +63,12 @@ type
     lblID: TLabel;
     btnCopiarLista: TNxButton;
     DBCheckBox2: TDBCheckBox;
+    TabSheet2: TRzTabSheet;
+    pnlExcluirSel: TPanel;
+    btnExcluirSelecionados: TNxButton;
+    SMDBGrid3: TSMDBGrid;
+    UCControls1: TUCControls;
+    btnConsPrecoProd: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -91,6 +96,9 @@ type
       Shift: TShiftState);
     procedure DBCheckBox1Click(Sender: TObject);
     procedure btnCopiarListaClick(Sender: TObject);
+    procedure btnExcluirSelecionadosClick(Sender: TObject);
+    procedure btnConsPrecoProdClick(Sender: TObject);
+    procedure SMDBGrid3TitleClick(Column: TColumn);
   private
     { Private declarations }
     fDMCadTab_Preco: TDMCadTab_Preco;
@@ -198,6 +206,8 @@ begin
   prc_Habilitar_CamposNota;
 
   RzPageControl1.ActivePage := TS_Cadastro;
+
+  fDMCadTab_Preco.cdsPrecoProd.Close;
 end;
 
 procedure TfrmCadTabPreco.FormShow(Sender: TObject);
@@ -287,6 +297,8 @@ begin
 
   fDMCadTab_Preco.cdsTab_Preco.Edit;
   prc_Habilitar_CamposNota;
+
+  fDMCadTab_Preco.cdsPrecoProd.Close;
 end;
 
 procedure TfrmCadTabPreco.btnConfirmarClick(Sender: TObject);
@@ -304,7 +316,7 @@ begin
   if not(fDMCadTab_Preco.cdsTab_Preco_Itens.Active) and (fDMCadTab_Preco.cdsTab_Preco_Itens.IsEmpty) or (fDMCadTab_Preco.cdsTab_Preco_ItensITEM.AsInteger < 1) then
     exit;
 
-  if MessageDlg('Deseja excluir o item selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja excluir o Produto Selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
 
   fDMCadTab_Preco.prc_Excluir_Item;
@@ -334,6 +346,8 @@ begin
   ffrmCadTabPreco_Itens.RxDBLookupCombo4.KeyValue := fDMCadTab_Preco.cdsTab_Preco_ItensID_PRODUTO.AsInteger;
   ffrmCadTabPreco_Itens.CurrencyEdit1.Value       := fDMCadTab_Preco.cdsTab_Preco_ItensPRECO_CUSTO.AsFloat;
   ffrmCadTabPreco_Itens.CurrencyEdit2.Value       := fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA.AsFloat;
+  ffrmCadTabPreco_Itens.CurrencyEdit3.Value       := fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA1.AsFloat;
+  ffrmCadTabPreco_Itens.CurrencyEdit4.Value       := fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA2.AsFloat;
   ffrmCadTabPreco_Itens.ShowModal;
 
   FreeAndNil(ffrmCadTabPreco_Itens);
@@ -346,17 +360,31 @@ begin
   TS_Consulta.TabEnabled := not(TS_Consulta.TabEnabled);
 
   pnlItem.Enabled        := not(pnlItem.Enabled);
+  pnlExcluirSel.Enabled  := not(pnlExcluirSel.Enabled);
   btnConfirmar.Enabled   := not(btnConfirmar.Enabled);
   btnAlterar.Enabled     := not(btnAlterar.Enabled);
   pnlCliente.Enabled     := not(pnlCliente.Enabled);
   DBMemo1.ReadOnly       := not(DBMemo1.ReadOnly);
 
+  btnInserir_Itens.Enabled := not(btnInserir_Itens.Enabled);
+  btnAlterar_Itens.Enabled := not(btnAlterar_Itens.Enabled);
+  btnExcluir_Itens.Enabled := not(btnExcluir_Itens.Enabled);
+//  btnBuscarProduto.Enabled := not(btnBuscarProduto.Enabled);
+  btnAplicar.Enabled       := not(btnAplicar.Enabled);
+
+  btnConsPrecoProd.Enabled       := not(btnConsPrecoProd.Enabled);
+  btnExcluirSelecionados.Enabled := not(btnExcluirSelecionados.Enabled);
+
   for i := 1 to SMDBGrid2.ColCount - 2 do
   begin
-    if SMDBGrid2.Columns[i].FieldName = 'VLR_VENDA' then
+    if copy(SMDBGrid2.Columns[i].FieldName,1,9) = 'VLR_VENDA' then
       SMDBGrid2.Columns[i].ReadOnly := not(SMDBGrid2.Columns[i].ReadOnly);
     if SMDBGrid2.Columns[i].FieldName = 'NOME_COR' then
       SMDBGrid2.Columns[i].Visible := (fDMCadTab_Preco.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S');
+    if SMDBGrid2.Columns[i].FieldName = 'VLR_VENDA1' then
+      SMDBGrid2.Columns[i].Visible := fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S';
+    if SMDBGrid2.Columns[i].FieldName = 'VLR_VENDA2' then
+      SMDBGrid2.Columns[i].Visible := fDMCadTab_Preco.qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S';
   end;
 end;
 
@@ -378,12 +406,14 @@ begin
   ffrmCadTabPreco_Sel_Produto := TfrmCadTabPreco_Sel_Produto.Create(self);
   ffrmCadTabPreco_Sel_Produto.fDMCadTab_Preco := fDMCadTab_Preco;
   ffrmCadTabPreco_Sel_Produto.ShowModal;
+  FreeAndNil(ffrmCadTabPreco_Sel_Produto);
 end;
 
 procedure TfrmCadTabPreco.SMDBGrid2GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
-  if (Field = fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA) then
+  if (Field = fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA) or (Field = fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA1)
+    or (Field = fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA2) then
   begin
     Background  := clYellow;
     AFont.Style := [fsBold];
@@ -425,6 +455,7 @@ begin
         vAux := StrToFloat(FormatFloat('0.000',vPreco * CurrencyEdit1.Value / 100));
         if ComboBox2.ItemIndex = 1 then
           vAux := StrToFloat(FormatFloat('0.00',vAux * -1));
+          
         fDMCadTab_Preco.cdsTab_Preco_Itens.Edit;
         case ComboBox1.ItemIndex of
           0: fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadTab_Preco.cdsTab_Preco_ItensPRECO_CUSTO.AsFloat + vAux));
@@ -553,6 +584,53 @@ begin
     btnAlterarClick(Sender);
   end;
   fDMCadTab_Preco.Tag := 0;
+end;
+
+procedure TfrmCadTabPreco.btnExcluirSelecionadosClick(Sender: TObject);
+begin
+  if not(fDMCadTab_Preco.cdsPrecoProd.Active) and (fDMCadTab_Preco.cdsPrecoProd.IsEmpty) or (fDMCadTab_Preco.cdsPrecoProdITEM.AsInteger < 1) then
+    exit;
+
+  if MessageDlg('Deseja excluir os Produtos Selecionados?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+
+  SMDBGrid3.DisableScroll;
+  fDMCadTab_Preco.cdsPrecoProd.First;
+  while not fDMCadTab_Preco.cdsPrecoProd.Eof do
+  begin
+    if SMDBGrid3.SelectedRows.CurrentRowSelected then
+    begin
+      if fDMCadTab_Preco.cdsTab_Preco_Itens.Locate('ITEM',fDMCadTab_Preco.cdsPrecoProdITEM.AsInteger,([Locaseinsensitive])) then
+        fDMCadTab_Preco.prc_Excluir_Item;
+    end;
+    fDMCadTab_Preco.cdsPrecoProd.Next;
+  end;
+  fDMCadTab_Preco.cdsTab_Preco_Itens.ApplyUpdates(0);
+
+  fDMCadTab_Preco.prc_Localizar(fDMCadTab_Preco.cdsTab_PrecoID.AsInteger);
+
+  btnConsPrecoProdClick(Sender);
+  SMDBGrid3.EnableScroll;
+end;
+
+procedure TfrmCadTabPreco.btnConsPrecoProdClick(Sender: TObject);
+begin
+  fDMCadTab_Preco.cdsPrecoProd.Close;
+  fDMCadTab_Preco.sdsPrecoProd.ParamByName('ID').AsInteger := fDMCadTab_Preco.cdsTab_PrecoID.AsInteger;
+  fDMCadTab_Preco.cdsPrecoProd.Open;
+end;
+
+procedure TfrmCadTabPreco.SMDBGrid3TitleClick(Column: TColumn);
+var
+  i: Integer;
+  ColunaOrdenada: String;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMCadTab_Preco.cdsPrecoProd.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid3.Columns.Count - 1 do
+    if not (SMDBGrid3.Columns.Items[I] = Column) then
+      SMDBGrid3.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.

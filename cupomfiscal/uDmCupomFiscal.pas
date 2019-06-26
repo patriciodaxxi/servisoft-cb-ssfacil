@@ -1101,7 +1101,6 @@ type
     cdsCupomParametrosIMPRIME_NUM_NFISCAL: TStringField;
     sdsCupomFiscalID_FECHAMENTO: TIntegerField;
     cdsCupomFiscalID_FECHAMENTO: TIntegerField;
-    cdsCupom_ConsCONTADOR_ITENS: TIntegerField;
     cdsCupom_ConsID_FECHAMENTO: TIntegerField;
     SQLQuery1: TSQLQuery;
     cdsCupom_ConsDTFECHAMENTO: TDateField;
@@ -1528,6 +1527,16 @@ type
     cdsProdutoPERC_REDUCAOICMS: TFloatField;
     sdsCupom_ItensPERC_BASE_RED_EFET: TFloatField;
     cdsCupom_ItensPERC_BASE_RED_EFET: TFloatField;
+    sdsTotais: TSQLDataSet;
+    dspTotais: TDataSetProvider;
+    cdsTotais: TClientDataSet;
+    dsTotais: TDataSource;
+    cdsTotaisNOME: TStringField;
+    cdsTotaisTOTAL: TFloatField;
+    cdsProdutoID_CSTICMS_BRED: TIntegerField;
+    cdsProdutoPERC_ICMS_NFCE: TFloatField;
+    sdsCupomParametrosANIVERSARIO_PERIODO: TStringField;
+    cdsCupomParametrosANIVERSARIO_PERIODO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);
@@ -1546,6 +1555,7 @@ type
     ctCondPgto, ctProduto: String;
     ctCupomFiscal_ProdPrincipal: String;
     ctPedido, ctDuplicata: String;
+    ctTotais: string;
     vPgtoEditado: Boolean;
     vSacolaSelecionada: Boolean;
     vVlrEntrada, vSomaParcelas, vSomaOriginal: Currency;
@@ -1750,6 +1760,7 @@ begin
   ctqIBPT       := qIBPT.SQL.Text;
   ctProduto     := sdsProduto.CommandText;
   ctDuplicata   := sdsDuplicata.CommandText;
+  ctTotais      := sdsTotais.CommandText;
 
   cdsFilial.Open;
   cdsTipoCobranca.Open;
@@ -2751,8 +2762,10 @@ begin
   vTipo_Pis    := qVariacaoTIPO_PIS.AsString;
   if cdsTab_NCMID.AsInteger <> vID_NCM then
     cdsTab_NCM.Locate('ID',vID_NCM,[loCaseInsensitive]);
-  if cdsTab_NCMID_CFOP.AsInteger > 0 then
+  if (cdsTab_NCMID_CFOP.AsInteger > 0) and (cdsProdutoID_CFOP_NFCE.AsInteger <= 0) then
     vID_CFOP := cdsTab_NCMID_CFOP.AsInteger;
+  if (vID_CFOP > 0) and (vID_CFOP <> cdsCFOPID.AsInteger) then
+    cdsCFOP.Locate('ID',vID_CFOP,[loCaseInsensitive]);
 
   if cdsTab_NCMID_PIS.AsInteger > 0 then
   begin
@@ -2780,21 +2793,39 @@ begin
 
   if cdsFilialSIMPLES.AsString <> 'S' then
   begin
-    if StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
+    if (StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat)) > 0) then
       vPerc_ICMS := StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat));
-
-
-
     //07/12/2018  
     if cdsProdutoID_CSTICMS.AsInteger > 0 then
     begin
-      vID_CSTICMS := cdsTab_NCMID_CST_ICMS.AsInteger;
+      vID_CSTICMS := cdsProdutoID_CSTICMS.AsInteger;
       cdsTab_CSTICMS.Locate('ID',vID_CSTICMS,[loCaseInsensitive]);
-    end;
+      if StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
+        vPerc_ICMS := StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat));
+    end
+    else
+    if cdsProdutoID_CSTICMS_BRED.AsInteger > 0 then
+    begin
+      vID_CSTICMS    := cdsProdutoID_CSTICMS_BRED.AsInteger;
+      vPerc_TribICMS := cdsProdutoPERC_REDUCAOICMS.AsFloat;
+      if StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
+        vPerc_ICMS := StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat))
+      else
+      if StrToFloat(FormatFloat('0.000',cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
+        vPerc_ICMS := StrToFloat(FormatFloat('0.000',cdsTab_NCMPERC_ICMS.AsFloat));
+    end
+    else
     if (cdsTab_NCMID_CST_ICMS.AsInteger > 0) and (cdsProdutoID_CSTICMS.AsInteger <= 0) then
     begin
       vID_CSTICMS    := cdsTab_NCMID_CST_ICMS.AsInteger;
       vPerc_TribICMS := cdsTab_NCMPERC_BASE_ICMS.AsFloat;
+    end;
+    if cdsTab_CSTICMSID.AsInteger <> vID_CSTICMS then
+      cdsTab_CSTICMS.Locate('ID',vID_CSTICMS,[loCaseInsensitive]);
+    if (StrToFloat(FormatFloat('0.0000',cdsTab_CSTICMSPERCENTUAL.AsFloat)) <= 0) or (trim(cdsCFOPGERAR_ICMS.AsString) <> 'S') then
+    begin
+      vPerc_ICMS     := 0;
+      vPerc_TribICMS := 0;
     end;
     if StrToFloat(FormatFloat('0.0000',vPerc_TribICMS)) <= 0 then
       vPerc_ICMS := 0;

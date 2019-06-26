@@ -3,7 +3,8 @@ unit UDMGerar_EDI;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, xmldom,
+  Xmlxform;
 
 type
   TDMGerar_EDI = class(TDataModule)
@@ -429,6 +430,58 @@ type
     mAuxiliarNomeCorCli: TStringField;
     qEDI_ConfigCOD_COR_INI: TIntegerField;
     qEDI_ConfigCOD_COR_TAM: TIntegerField;
+    qClienteIMP_ETIQUETA_ROT: TStringField;
+    qParametros_Ped: TSQLQuery;
+    qParametros_PedGRAVA_PROD_CLI_EDI: TStringField;
+    XMLTransformProvider1: TXMLTransformProvider;
+    mCab_OC: TClientDataSet;
+    dsmCab_OC: TDataSource;
+    mOC: TClientDataSet;
+    dsmOC: TDataSource;
+    mCab_OCcodigo: TStringField;
+    mCab_OCdescricao: TStringField;
+    mCab_OCnome: TStringField;
+    mCab_OCcnpj: TStringField;
+    mCab_OCie: TStringField;
+    mCab_OClogradouro: TStringField;
+    mCab_OCnumero: TStringField;
+    mCab_OCbairro: TStringField;
+    mCab_OCmunicipio: TStringField;
+    mCab_OCuf: TStringField;
+    mCab_OCcep: TStringField;
+    mCab_OCtelefone: TStringField;
+    mCab_OCfax: TStringField;
+    mCab_OCoc: TDataSetField;
+    mOCnumero: TStringField;
+    mOCfuncao: TStringField;
+    mOCemissao: TStringField;
+    mOCprazo: TStringField;
+    mOCpercentual: TStringField;
+    mOCtransferenciaicms: TStringField;
+    mOCregimedrawback: TStringField;
+    mOCobs: TMemoField;
+    mOCcodigo1: TStringField;
+    mOCnome: TStringField;
+    mOCcnpj: TStringField;
+    mOCsequencia: TStringField;
+    mOCcodigo2: TStringField;
+    mOCdescricao: TStringField;
+    mOCqtde: TStringField;
+    mOCunidade: TStringField;
+    mOCprecounitario: TStringField;
+    mOCentrega: TDataSetField;
+    mRemessa: TClientDataSet;
+    mRemessaremessa: TStringField;
+    mRemessamapacompra: TStringField;
+    mRemessadata: TStringField;
+    mRemessaqtde: TStringField;
+    mRemessacodigo: TStringField;
+    mRemessadescricao: TStringField;
+    mRemessalargura: TStringField;
+    dsmRemessa: TDataSource;
+    mAuxiliarErro_Prod_Nao_Lanc: TBooleanField;
+    mAuxiliarErro_Ped_Lancado: TBooleanField;
+    qParametros_PedEDI_USAR_PRECO_TAB: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mAuxiliarNewRecord(DataSet: TDataSet);
   private
@@ -444,16 +497,19 @@ var
 
 implementation
 
-uses DmdDatabase;
+uses DmdDatabase, Forms;
 
 {$R *.dfm}
 
 procedure TDMGerar_EDI.DataModuleCreate(Sender: TObject);
 begin
+  XMLTransformProvider1.TransformRead.TransformationFile := ExtractFilePath(Application.ExeName) + 'OcToDp_Wirth.xtr';
+
   qParametros.Close;
   qParametros.Open;
   qParametros_Geral.Close;
   qParametros_Geral.Open;
+  qParametros_Ped.Open;
   ctqProduto_Forn := qProduto_Forn.SQL.Text;
 end;
 
@@ -462,6 +518,9 @@ begin
   mAuxiliarErro.AsBoolean      := False;
   mAuxiliarCodCorCli.AsString  := '';
   mAuxiliarNomeCorCli.AsString := '';
+  mAuxiliarTamnanho.AsString   := '';
+  mAuxiliarErro_Ped_Lancado.AsBoolean   := False;
+  mAuxiliarErro_Prod_Nao_Lanc.AsBoolean := False;
 end;
 
 procedure TDMGerar_EDI.prc_Abre_Operacao;

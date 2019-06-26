@@ -74,6 +74,7 @@ type
     edtNome_Pessoa: TEdit;
     ceIDPessoa: TCurrencyEdit;
     ckSemCor: TCheckBox;
+    NxButton1: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -109,6 +110,7 @@ type
     procedure edtNome_PessoaExit(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure NxButton1Click(Sender: TObject);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -116,7 +118,7 @@ type
     vComando: String;
 
     procedure prc_Consultar;
-    procedure prc_Le_cdsEstoque_Mov;
+    procedure prc_Le_cdsEstoque_Mov(Gerar_CC : Boolean);
     procedure prc_Le_cdsEstoque_Mov_Res;
     procedure prc_Consultar_Acum;
     procedure prc_Consultar_Local;
@@ -140,6 +142,8 @@ type
     procedure prc_Chamar_Sel_Pessoa(Tipo: String);
   public
     { Public declarations }
+    vID_Cor_Loc : Integer;
+
   end;
 
 var
@@ -149,7 +153,8 @@ var
 implementation
 
 uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoqueMov_Prod, URelEstoqueMov_Prod2, URelEstoqueMov_Acum, USel_Produto,
-  USel_Pessoa, Math, USel_Grupo, UCadEstoque_Mov_Res, UAltEstoque_Mov;
+  USel_Pessoa, Math, USel_Grupo, UCadEstoque_Mov_Res, UAltEstoque_Mov,
+  DateUtils;
 
 {$R *.dfm}
 
@@ -158,11 +163,14 @@ begin
   fDMConsEstoque.cdsEstoque_Mov.Close;
   fDMConsEstoque.sdsEstoque_Mov.CommandText := fDMConsEstoque.ctEstoque_Mov + vComando;
   fDMConsEstoque.cdsEstoque_Mov.Open;
+   //fdmConsEstoque.ClientDataSet1.Close;
+   //fdmConsEstoque.ClientDataSet1.Open;
 end;
 
 procedure TfrmConsEstoque_Mov.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  vID_Cor_Loc := 0;
   prc_Grava_Grid(SMDBGrid1, Name, fDMConsEstoque.qParametros_GeralENDGRIDS.AsString);
   fDMConsEstoque.cdsProduto.Filtered := False;
   Action := Cafree;
@@ -171,7 +179,14 @@ end;
 procedure TfrmConsEstoque_Mov.FormShow(Sender: TObject);
 var
   i: Integer;
+  vDia, vMes, vAno : Word;
+  vData : TDateTime;
 begin
+  vData := Date;
+  vData := IncDay(vData,-20);
+  vData := EncodeDate(YearOf(vData),MonthOf(vData),01);
+  DateEdit1.Date := vData;
+
   fDMConsEstoque := TDMConsEstoque.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMConsEstoque);
   prc_le_Grid(SMDBGrid1, Name, fDMConsEstoque.qParametros_GeralENDGRIDS.AsString);
@@ -206,7 +221,10 @@ begin
   if vControleExterno then
   begin
     RadioGroup2.ItemIndex := 4;
-    RadioGroup1.ItemIndex := 0;
+    if vID_Cor_Loc > 0 then
+      RadioGroup1.ItemIndex := 2
+    else
+      RadioGroup1.ItemIndex := 0;
     btnConsultar.Click;
   end;
 end;
@@ -238,12 +256,16 @@ begin
   TS_Reserva.TabVisible := ((RadioGroup2.ItemIndex = 1) and (fDMConsEstoque.qParametros_EstUSA_RESERVA.AsString = 'S'));
 end;
 
-procedure TfrmConsEstoque_Mov.prc_Le_cdsEstoque_Mov;
+procedure TfrmConsEstoque_Mov.prc_Le_cdsEstoque_Mov(Gerar_CC : Boolean);
 var
   vQtdEntrada, vQtdSaida, vSaldo: Real;
 begin
+  SMDBGrid1.DisableScroll;
   vQtdEntrada := 0;
   vQtdSaida   := 0;
+  fDMConsEstoque.mEstoque_CentroCusto.close;
+  fDMConsEstoque.mEstoque_CentroCusto.CreateDataSet;
+  fDMConsEstoque.mEstoque_CentroCusto.EmptyDataSet;
 
   fDMConsEstoque.cdsEstoque_Mov.First;
   while not fDMConsEstoque.cdsEstoque_Mov.Eof do
@@ -252,6 +274,27 @@ begin
       vQtdEntrada := vQtdEntrada + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat
     else
       vQtdSaida := vQtdSaida + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat;
+    if Gerar_CC then
+    begin
+      if fDMConsEstoque.cdsEstoque_MovTIPO_ES.AsString = 'S' then
+      begin
+       if not(fDMConsEstoque.mEstoque_CentroCusto.Locate('Id_Produto',fDMConsEstoque.cdsEstoque_MovID_PRODUTO.AsInteger,[loCaseInsensitive])) then
+         fDMConsEstoque.mEstoque_CentroCusto.Insert
+       else
+         fDMConsEstoque.mEstoque_CentroCusto.Edit;
+        fDMConsEstoque.mEstoque_CentroCustoId_Produto.AsInteger        := fDMConsEstoque.cdsEstoque_MovID_PRODUTO.AsInteger;
+        fDMConsEstoque.mEstoque_CentroCustoNome_Produto.AsString       := fDMConsEstoque.cdsEstoque_MovNOMEPRODUTO.AsString;
+        fDMConsEstoque.mEstoque_CentroCustoCodigo_Grupo.AsString       := fDMConsEstoque.cdsEstoque_MovCODIGO_GRUPO.AsString;
+        fDMConsEstoque.mEstoque_CentroCustoNome_Grupo.AsString         := fDMConsEstoque.cdsEstoque_MovNOME_GRUPO.AsString;
+        fDMConsEstoque.mEstoque_CentroCustoCodigo_CentroCusto.AsString := fDMConsEstoque.cdsEstoque_MovCODIGO_CCUSTO.AsString;
+        fDMConsEstoque.mEstoque_CentroCustoNome_CentroCusto.AsString   := fDMConsEstoque.cdsEstoque_MovNOME_CENTROCUSTO.AsString;
+        fDMConsEstoque.mEstoque_CentroCustoCodigo_Superior.AsString    := fDMConsEstoque.cdsEstoque_MovCODIGO_SUPERIOR.AsString;
+        fDMConsEstoque.mEstoque_CentroCustoNome_Superior.AsString      := fDMConsEstoque.cdsEstoque_MovDESC_SUPERIOR.AsString;
+        fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat                := fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat;
+        fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat            := fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat + (fDMConsEstoque.cdsEstoque_MovVLR_UNITARIO.AsFloat * fDMConsEstoque.cdsEstoque_MovQTD.AsFloat) ;
+        fDMConsEstoque.mEstoque_CentroCusto.Post;
+      end;
+    end;
     fDMConsEstoque.cdsEstoque_Mov.Next;
   end;
 
@@ -259,18 +302,26 @@ begin
   lblEntrada.Caption := FormatFloat('###,###,##0.0000',vQtdEntrada);
   lblSaida.Caption   := FormatFloat('###,###,##0.0000',vQtdSaida);
   lblSaldo.Caption   := FormatFloat('###,###,##0.0000',vSaldo);
-
   SMDBGrid1.EnableScroll;
 end;
 
 procedure TfrmConsEstoque_Mov.btnConsultarClick(Sender: TObject);
 begin
   SMDBGrid1.DisableScroll;
+  if (trim(edtRef.Text) = '') and (ceIDProduto.AsInteger <= 0) and
+     (ceIDPessoa.AsInteger <= 0) and (trim(edtNome_Pessoa.Text) = '') and
+     (trim(rxdbGrupo.Text) = '') and (DateEdit1.Date <= 10) and (DateEdit2.Date <= 10) and
+     (CurrencyEdit1.AsInteger <= 0) then
+  begin
+    MessageDlg('*** Favor informar algum filtro!', mtError, [mbOk], 0);
+    exit;
+  end;
+
   prc_Condicao;
   if RzPageControl1.ActivePage = TS_Produto_Det then
   begin
     prc_Consultar;
-    prc_Le_cdsEstoque_Mov;
+    //prc_Le_cdsEstoque_Mov;
   end
   else
   if RzPageControl1.ActivePage = TS_Produto_Acum then
@@ -376,6 +427,9 @@ begin
     vComando := vComando + ' AND EM.ID_LOCAL_ESTOQUE = ' + IntToStr(rxdbLocalEstoque.KeyValue);
   if (CurrencyEdit1.AsInteger > 0) and (RzPageControl1.ActivePage = TS_Reserva) then
     vComando := vComando + ' AND EM.NUM_ORDEM = ' + IntToStr(CurrencyEdit1.AsInteger);
+  if vID_Cor_Loc > 0 then
+    vComando := vComando + ' AND EM.ID_COR = ' + IntToStr(vID_Cor_Loc)
+  else
   if ckSemCor.Checked then
     vComando := vComando + ' AND EM.ID_COR = 0 ';
 end;
@@ -439,13 +493,16 @@ begin
   case ComboBox1.ItemIndex of
     0: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPRODUTO;TAMANHO;NOME_COR;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NOMEPESSOA;NUMNOTA';
     1: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPESSOA;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
-    3: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'CODIGO_CCUSTO;CODIGO_GRUPO;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
+//    3: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'CODIGO_CCUSTO;CODIGO_GRUPO;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
+    3: fDMConsEstoque.mEstoque_CentroCusto.IndexFieldNames := 'Codigo_CentroCusto;Codigo_Grupo;Nome_Produto';
   end;
   if (ckEstruturado.Checked) and (ComboBox1.ItemIndex < 2) then
     fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOME_GRUPO;'+fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames;
   SMDBGrid1.DisableScroll;
   if ComboBox1.ItemIndex = 3 then
   begin
+    //20/05/2019
+    prc_Le_cdsEstoque_Mov(True);
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Estoque_CCusto.fr3';
     if FileExists(vArq) then
       fDMConsEstoque.frxReport1.Report.LoadFromFile(vArq)
@@ -1166,6 +1223,12 @@ begin
     AFont.Color := clMaroon
   else
     AFont.Color := clBlue;
+end;
+
+procedure TfrmConsEstoque_Mov.NxButton1Click(Sender: TObject);
+begin
+
+  prc_Le_cdsEstoque_Mov(False);
 end;
 
 end.

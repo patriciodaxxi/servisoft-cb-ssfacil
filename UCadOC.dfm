@@ -25,7 +25,7 @@ object frmCadOC: TfrmCadOC
     Top = 0
     Width = 1030
     Height = 690
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOC: TfrmCadOC
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1889,9 +1889,9 @@ object frmCadOC: TfrmCadOC
           Caption = 'Itens'
           object SMDBGrid2: TSMDBGrid
             Left = 0
-            Top = 34
+            Top = 32
             Width = 1022
-            Height = 248
+            Height = 250
             Align = alClient
             DataSource = DMCadPedido.dsPedido_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -2045,7 +2045,7 @@ object frmCadOC: TfrmCadOC
             Left = 0
             Top = 0
             Width = 1022
-            Height = 34
+            Height = 32
             Align = alTop
             Color = clSilver
             Ctl3D = True
@@ -2053,10 +2053,11 @@ object frmCadOC: TfrmCadOC
             ParentCtl3D = False
             TabOrder = 0
             object btnInserir_Itens: TNxButton
-              Left = 4
-              Top = 3
+              Left = 1
+              Top = 1
               Width = 149
               Height = 30
+              Align = alLeft
               Caption = 'Inserir Produto'
               Enabled = False
               Font.Charset = DEFAULT_CHARSET
@@ -2128,10 +2129,11 @@ object frmCadOC: TfrmCadOC
               OnClick = btnInserir_ItensClick
             end
             object btnAlterar_Itens: TNxButton
-              Left = 155
-              Top = 3
+              Left = 150
+              Top = 1
               Width = 152
               Height = 30
+              Align = alLeft
               Caption = 'Alterar Produto'
               Enabled = False
               Font.Charset = DEFAULT_CHARSET
@@ -2201,10 +2203,11 @@ object frmCadOC: TfrmCadOC
               OnClick = btnAlterar_ItensClick
             end
             object btnExcluir_Itens: TNxButton
-              Left = 306
-              Top = 3
+              Left = 302
+              Top = 1
               Width = 152
               Height = 30
+              Align = alLeft
               Caption = 'Excluir Produto'
               Enabled = False
               Font.Charset = DEFAULT_CHARSET

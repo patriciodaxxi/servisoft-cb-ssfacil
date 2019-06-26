@@ -8,7 +8,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, RxLookup, StdCtrls, UDMCadNotaFiscal, Buttons, Grids,
   DBGrids, SMDBGrid, DB, UCadNotaFiscal_Itens, RzPanel, Mask, ToolEdit,
-  CurrEdit, UCadNotaEntrada_Itens;
+  CurrEdit, UCadNotaEntrada_Itens, Menus;
 
 type
   TfrmSel_NotaEntrada = class(TForm)
@@ -38,6 +38,8 @@ type
     Label10: TLabel;
     Label11: TLabel;
     CurrencyEdit1: TCurrencyEdit;
+    PopupMenu1: TPopupMenu;
+    Copiarqtdependentepdevoluo1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -52,6 +54,7 @@ type
       Shift: TShiftState);
     procedure RxDBLookupCombo2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure Copiarqtdependentepdevoluo1Click(Sender: TObject);
   private
     { Private declarations }
     procedure prc_Consultar_NotaEntrada(ID_Nota : Integer = 0 ; Item_Nota : Integer =  0);
@@ -386,10 +389,14 @@ begin
     //***************
 
     //23/01/2018
-    if fDMCadNotaFiscal.cdsFilialID_REGIME_TRIB.AsInteger = fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger then
+    //17/05/2019 foi incluido o if do parãmetros
+    if fDMCadNotaFiscal.qParametros_NFeUSA_CST_ICMS_NTE.AsString = 'S' then
     begin
-      if fDMCadNotaFiscal.cdsNotaEntradaID_CSTICMS.AsInteger > 0 then
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger := fDMCadNotaFiscal.cdsNotaEntradaID_CSTICMS.AsInteger;
+      if fDMCadNotaFiscal.cdsFilialID_REGIME_TRIB.AsInteger = fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger then
+      begin
+        if fDMCadNotaFiscal.cdsNotaEntradaID_CSTICMS.AsInteger > 0 then
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger := fDMCadNotaFiscal.cdsNotaEntradaID_CSTICMS.AsInteger;
+      end;
     end;
     //**************************
 
@@ -403,15 +410,19 @@ begin
         fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaEntradaPERC_ICMS.AsFloat));
     end;
     //Quando o emitente e o destinatário são do Regime Geral
-    if (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString <> 'S') and (fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger > 0) then
+    //17/05/2019 foi incluido o if do parãmetros
+    if fDMCadNotaFiscal.qParametros_NFeUSA_CST_ICMS_NTE.AsString = 'S' then
     begin
-       fDMCadNotaFiscal.qRegime_Trib.Close;
-       fDMCadNotaFiscal.qRegime_Trib.ParamByName('ID').AsInteger := fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger;
-       fDMCadNotaFiscal.qRegime_Trib.Open;
-       if fDMCadNotaFiscal.qRegime_TribCODIGO.AsInteger >= 3 then
-       begin
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger := fDMCadNotaFiscal.cdsNotaEntradaID_CSTICMS.AsInteger;
-       end;
+      if (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString <> 'S') and (fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger > 0) then
+      begin
+        fDMCadNotaFiscal.qRegime_Trib.Close;
+        fDMCadNotaFiscal.qRegime_Trib.ParamByName('ID').AsInteger := fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger;
+        fDMCadNotaFiscal.qRegime_Trib.Open;
+        if fDMCadNotaFiscal.qRegime_TribCODIGO.AsInteger >= 3 then
+        begin
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger := fDMCadNotaFiscal.cdsNotaEntradaID_CSTICMS.AsInteger;
+         end;
+      end;
     end;
     //**************
 
@@ -1090,6 +1101,22 @@ begin
     if vCodProduto_Pos > 0 then
       RxDBLookupCombo2.KeyValue := vCodProduto_Pos;
     FreeAndNil(frmSel_Produto);
+  end;
+end;
+
+procedure TfrmSel_NotaEntrada.Copiarqtdependentepdevoluo1Click(
+  Sender: TObject);
+begin
+  if not (fDMCadNotaFiscal.cdsNotaEntrada.IsEmpty) then
+  begin
+    fDMCadNotaFiscal.cdsNotaEntrada.First;
+    while not fDMCadNotaFiscal.cdsNotaEntrada.Eof  do
+    begin
+      fDMCadNotaFiscal.cdsNotaEntrada.Edit;
+      fDMCadNotaFiscal.cdsNotaEntradaQTD_ADEVOLVER.AsFloat := fDMCadNotaFiscal.cdsNotaEntradaQTDRESTANTE.AsFloat;
+      fDMCadNotaFiscal.cdsNotaEntrada.Post;      
+      fDMCadNotaFiscal.cdsNotaEntrada.Next;
+    end;
   end;
 end;
 

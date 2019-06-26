@@ -89,7 +89,7 @@ object frmCadCor: TfrmCadCor
             FieldName = 'NOME'
             Title.Alignment = taCenter
             Title.Caption = 'Nome'
-            Width = 297
+            Width = 466
             Visible = True
           end>
       end
@@ -798,7 +798,7 @@ object frmCadCor: TfrmCadCor
     GroupName = 'Cor'
     UserControl = fMenu.UserControl1
     NotAllowed = naDisabled
-    Left = 561
+    Left = 560
     Top = 231
   end
 end

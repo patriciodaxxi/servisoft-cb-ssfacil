@@ -1,6 +1,6 @@
 object fMenu1: TfMenu1
-  Left = 156
-  Top = 14
+  Left = 93
+  Top = 20
   Width = 928
   Height = 630
   BorderIcons = []
@@ -42,7 +42,7 @@ object fMenu1: TfMenu1
     Left = 0
     Top = 0
     Width = 920
-    Height = 417
+    Height = 521
     Align = alClient
     TabOrder = 0
     object Label2: TLabel
@@ -52,7 +52,7 @@ object fMenu1: TfMenu1
       Height = 30
       Caption = 'M'#243'dulo Varejo SSF'#225'cil'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 7300393
+      Font.Color = 12615680
       Font.Height = -27
       Font.Name = 'Courier New'
       Font.Style = []
@@ -65,49 +65,48 @@ object fMenu1: TfMenu1
       Height = 93
       Caption = 'SSCupomFiscal'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = 3683329
+      Font.Color = 12615680
       Font.Height = -80
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Panel1: TPanel
-      Left = 1
-      Top = 376
-      Width = 918
-      Height = 40
-      Align = alBottom
-      Color = 12615680
-      TabOrder = 0
-      Visible = False
-      object Label8: TLabel
-        Left = 1
-        Top = 1
-        Width = 916
-        Height = 38
-        Align = alClient
-        Alignment = taCenter
-        AutoSize = False
-        Caption = #218'ltima Remessa Gerada: 24/02/2016'
-        Color = 12615680
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -20
-        Font.Name = 'Courier New'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Visible = False
-      end
+    object Label7: TLabel
+      Left = 10
+      Top = 10
+      Width = 607
+      Height = 93
+      Caption = 'SSCupomFiscal'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -80
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+    object Label9: TLabel
+      Left = 9
+      Top = 97
+      Width = 336
+      Height = 30
+      Caption = 'M'#243'dulo Varejo SSF'#225'cil'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -27
+      Font.Name = 'Courier New'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
     end
     object Panel3: TPanel
       Left = 1
-      Top = 336
+      Top = 480
       Width = 918
       Height = 40
       Align = alBottom
       Color = 8404992
-      TabOrder = 1
+      TabOrder = 0
       Visible = False
       object Label6: TLabel
         Left = 1
@@ -130,12 +129,12 @@ object fMenu1: TfMenu1
     end
     object Panel5: TPanel
       Left = 1
-      Top = 296
+      Top = 440
       Width = 918
       Height = 40
       Align = alBottom
       Color = 33023
-      TabOrder = 2
+      TabOrder = 1
       Visible = False
       object Label1: TLabel
         Left = 1
@@ -159,12 +158,12 @@ object fMenu1: TfMenu1
     end
     object Panel6: TPanel
       Left = 1
-      Top = 256
+      Top = 400
       Width = 918
       Height = 40
       Align = alBottom
       Color = 4079359
-      TabOrder = 3
+      TabOrder = 2
       Visible = False
       object Label4: TLabel
         Left = 1
@@ -184,6 +183,109 @@ object fMenu1: TfMenu1
         ParentColor = False
         ParentFont = False
         Visible = False
+      end
+    end
+    object Panel1: TPanel
+      Left = 1
+      Top = 217
+      Width = 918
+      Height = 183
+      Align = alBottom
+      TabOrder = 3
+      object Panel4: TPanel
+        Left = 1
+        Top = 1
+        Width = 916
+        Height = 22
+        Align = alTop
+        Caption = 'Aniversariantes do Per'#237'odo'
+        TabOrder = 0
+        DesignSize = (
+          916
+          22)
+        object DateEdit1: TDateEdit
+          Left = 544
+          Top = 1
+          Width = 121
+          Height = 21
+          Anchors = [akTop, akRight]
+          NumGlyphs = 2
+          TabOrder = 0
+          OnKeyDown = DateEdit1KeyDown
+        end
+        object DateEdit2: TDateEdit
+          Left = 667
+          Top = 1
+          Width = 121
+          Height = 21
+          Anchors = [akTop, akRight]
+          NumGlyphs = 2
+          TabOrder = 1
+          OnKeyDown = DateEdit2KeyDown
+        end
+      end
+      object SMDBGrid1: TSMDBGrid
+        Left = 1
+        Top = 23
+        Width = 916
+        Height = 159
+        Align = alClient
+        DataSource = dsAniversariante
+        Options = [dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        Flat = False
+        BandsFont.Charset = DEFAULT_CHARSET
+        BandsFont.Color = clWindowText
+        BandsFont.Height = -11
+        BandsFont.Name = 'MS Sans Serif'
+        BandsFont.Style = []
+        Groupings = <>
+        GridStyle.Style = gsCustom
+        GridStyle.OddColor = clWindow
+        GridStyle.EvenColor = clWindow
+        TitleHeight.PixelCount = 24
+        FooterColor = clBtnFace
+        ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+        RegistryKey = 'Software\Scalabium'
+        RegistrySection = 'SMDBGrid'
+        WidthOfIndicator = 11
+        DefaultRowHeight = 17
+        ScrollBars = ssHorizontal
+        ColCount = 4
+        RowCount = 1
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'DT_NASCIMENTO'
+            Title.Caption = 'Data'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME'
+            Title.Caption = 'Nome'
+            Width = 300
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TELEFONE1'
+            Title.Caption = 'Fone1'
+            Width = 110
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TELEFONE2'
+            Title.Caption = 'Fone2'
+            Width = 110
+            Visible = True
+          end>
       end
     end
   end
@@ -337,140 +439,59 @@ object fMenu1: TfMenu1
         BDBBB44B737523042593247CDEC28B8EC7FFD9}
     end
   end
-  object Panel4: TPanel
-    Left = 0
-    Top = 417
-    Width = 920
-    Height = 104
-    Align = alBottom
-    Color = 16777109
-    TabOrder = 2
-    Visible = False
-    object lblCPagar: TLabel
-      Left = 41
-      Top = 31
-      Width = 80
-      Height = 20
-      Alignment = taRightJustify
-      Caption = 'A Pagar:'
-      Color = 16777109
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -17
-      Font.Name = 'Courier New'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Visible = False
-    end
-    object Label5: TLabel
-      Left = 56
-      Top = 6
-      Width = 168
-      Height = 23
-      Alignment = taRightJustify
-      Caption = 'Hoje (Valores)'
-      Color = 16777109
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -20
-      Font.Name = 'Courier New'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Visible = False
-    end
-    object lblCPagar_Valor: TLabel
-      Left = 182
-      Top = 31
-      Width = 70
-      Height = 20
-      Alignment = taRightJustify
-      Caption = 'R$ 0,00'
-      Color = 16777109
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -17
-      Font.Name = 'Courier New'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Visible = False
-    end
-    object lblCReceber: TLabel
-      Left = 21
-      Top = 54
-      Width = 100
-      Height = 20
-      Alignment = taRightJustify
-      Caption = 'A Receber:'
-      Color = 16777109
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -17
-      Font.Name = 'Courier New'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Visible = False
-    end
-    object lblCReceber_Valor: TLabel
-      Left = 182
-      Top = 54
-      Width = 70
-      Height = 20
-      Alignment = taRightJustify
-      Caption = 'R$ 0,00'
-      Color = 16777109
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -17
-      Font.Name = 'Courier New'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Visible = False
-    end
-    object lblCheque: TLabel
-      Left = 51
-      Top = 77
-      Width = 70
-      Height = 20
-      Alignment = taRightJustify
-      Caption = 'Cheque:'
-      Color = 16777109
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -17
-      Font.Name = 'Courier New'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Visible = False
-    end
-    object lblCheque_Valor: TLabel
-      Left = 182
-      Top = 77
-      Width = 70
-      Height = 20
-      Alignment = taRightJustify
-      Caption = 'R$ 0,00'
-      Color = 16777109
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -17
-      Font.Name = 'Courier New'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Visible = False
-    end
-  end
   object UCControls1: TUCControls
     GroupName = 'Menu'
     UserControl = fMenu.UserControl1
     NotAllowed = naInvisible
     Left = 296
     Top = 544
+  end
+  object sdsAniversariante: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT CAST(EXTRACT(MONTH FROM PF.DTNASCIMENTO) || '#39'/'#39' ||'#13#10'     ' +
+      '       EXTRACT(DAY FROM PF.DTNASCIMENTO) || '#39'/'#39' ||'#13#10'            ' +
+      'EXTRACT(YEAR FROM CURRENT_DATE) AS DATE) DT_NASCIMENTO,'#13#10'       ' +
+      '     P.NOME, P.TELEFONE1, P.TELEFONE2'#13#10'FROM PESSOA P'#13#10'INNER JOIN' +
+      ' PESSOA_FISICA PF ON P.CODIGO = PF.CODIGO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 742
+    Top = 337
+  end
+  object dspAniversariante: TDataSetProvider
+    DataSet = sdsAniversariante
+    Left = 774
+    Top = 337
+  end
+  object cdsAniversariante: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'DT_NASCIMENTO'
+    Params = <>
+    ProviderName = 'dspAniversariante'
+    Left = 806
+    Top = 337
+    object cdsAniversarianteDT_NASCIMENTO: TDateField
+      FieldName = 'DT_NASCIMENTO'
+    end
+    object cdsAniversarianteNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsAniversarianteTELEFONE1: TStringField
+      FieldName = 'TELEFONE1'
+      Size = 15
+    end
+    object cdsAniversarianteTELEFONE2: TStringField
+      FieldName = 'TELEFONE2'
+      Size = 15
+    end
+  end
+  object dsAniversariante: TDataSource
+    DataSet = cdsAniversariante
+    Left = 838
+    Top = 337
   end
 end

@@ -23,9 +23,9 @@ object frmCadFinanceiro: TfrmCadFinanceiro
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 896
-    Height = 662
-    ActivePage = TS_Consulta
+    Width = 904
+    Height = 670
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -42,8 +42,8 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 151
-        Width = 892
-        Height = 471
+        Width = 900
+        Height = 479
         Align = alClient
         Ctl3D = False
         DataSource = DMCadFinanceiro.dsFinanceiro_Consulta
@@ -129,21 +129,25 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           item
             Expanded = False
             FieldName = 'USUARIO'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'DTUSUARIO'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ID_MOVDUPLICATA'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ITEM_MOVDUPLICATA'
+            Width = 64
             Visible = True
           end
           item
@@ -164,7 +168,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 892
+        Width = 900
         Height = 30
         Align = alTop
         Color = clSilver
@@ -469,8 +473,8 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 622
-        Width = 892
+        Top = 630
+        Width = 900
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -486,7 +490,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 892
+        Width = 900
         Height = 121
         Align = alTop
         TabOrder = 0
@@ -899,7 +903,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 892
+        Width = 900
         Height = 35
         Align = alTop
         Color = 8404992
@@ -1125,14 +1129,14 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 892
-        Height = 604
+        Width = 900
+        Height = 612
         Align = alClient
         Enabled = False
         TabOrder = 0
         DesignSize = (
-          892
-          604)
+          900
+          612)
         object Label1: TLabel
           Left = 64
           Top = 48
@@ -1397,7 +1401,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 890
+          Width = 898
           Height = 31
           Align = alTop
           Color = clSilver
@@ -1630,8 +1634,8 @@ object frmCadFinanceiro: TfrmCadFinanceiro
   end
   object StaticText2: TStaticText
     Left = 0
-    Top = 662
-    Width = 896
+    Top = 670
+    Width = 904
     Height = 17
     Align = alBottom
     Caption = 'F2 Consultar'

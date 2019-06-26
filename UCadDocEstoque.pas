@@ -107,6 +107,8 @@ type
     procedure EtiquetaEstoque1Click(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure SMDBGrid2TitleClick(Column: TColumn);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     vTipo_Reg: String;
@@ -147,7 +149,8 @@ var
 
 implementation
 
-uses DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, URelDocEstoque;
+uses DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, URelDocEstoque,
+  UConsEstRed;
 
 {$R *.dfm}
 
@@ -778,6 +781,17 @@ begin
   for i := 0 to SMDBGrid2.Columns.Count - 1 do
     if not (SMDBGrid2.Columns.Items[I] = Column) then
       SMDBGrid2.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmCadDocEstoque.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F5) then
+  begin
+    frmConsEstRed := TfrmConsEstRed.Create(Self);
+    frmConsEstRed.ShowModal;
+    FreeAndNil(frmConsEstRed);
+  end;
 end;
 
 end.

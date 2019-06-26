@@ -51,6 +51,7 @@ type
     DBText1: TDBText;
     Label9: TLabel;
     DBEdit4: TDBEdit;
+    ckPermiteCor: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
@@ -361,11 +362,15 @@ begin
       vMsgErro := vMsgErro + #13 + '*** Campo Nº Lote não pode ser em branco, pois no produto esta cadastrado Lote!';
   end;
 
-  //07/03/2019
-  if (pnlCor.Visible) and (fDMCadDocEstoque.cdsCombinacao.Active) and (fDMCadDocEstoque.cdsDocEstoque_ItensID_COR.AsInteger <= 0) then
+  //25/05/2019
+  if not(ckPermiteCor.Visible) or ((ckPermiteCor.Visible) and not(ckPermiteCor.Checked)) then
   begin
-    if fDMCadDocEstoque.cdsCombinacao.RecordCount > 0 then
-      vMsgErro := vMsgErro + #13 + '*** Produto não informado a COR!';
+    //07/03/2019
+    if (pnlCor.Visible) and (fDMCadDocEstoque.cdsCombinacao.Active) and (fDMCadDocEstoque.cdsDocEstoque_ItensID_COR.AsInteger <= 0) then
+    begin
+      if fDMCadDocEstoque.cdsCombinacao.RecordCount > 0 then
+        vMsgErro := vMsgErro + #13 + '*** Produto não informado a COR!';
+    end;
   end;
   //**********************
 
@@ -437,7 +442,10 @@ begin
   end
   else}
   if (Key = Vk_F7) then
-    BitBtn1Click(Sender);
+    BitBtn1Click(Sender)
+  else
+  if (Shift = [ssCtrl]) and (Key = 87) then
+    ckPermiteCor.Visible := not(ckPermiteCor.Visible);
 end;
 
 procedure TfrmCadDocEstoque_Itens.Panel1Exit(Sender: TObject);

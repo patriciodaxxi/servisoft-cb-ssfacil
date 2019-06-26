@@ -533,19 +533,38 @@ end;
 
 function TfrmCadFinanceiro.fnc_Fechamento: Boolean;
 begin
+  Result := False;
   fDMCadFinanceiro.qParametros.Close;
   fDMCadFinanceiro.qParametros.Open;
-  Result := False;
-  fDMCadFinanceiro.qUltFechamento.Close;
-  fDMCadFinanceiro.qUltFechamento.ParamByName('ID_CONTA').AsInteger := fDMCadFinanceiro.cdsFinanceiroID_CONTA.AsInteger;
-  fDMCadFinanceiro.qUltFechamento.ParamByName('FILIAL').AsInteger   := fDMCadFinanceiro.cdsFinanceiroFILIAL.AsInteger;
-  fDMCadFinanceiro.qUltFechamento.Open;
-  if not(fDMCadFinanceiro.qUltFechamento.IsEmpty) and
-    (fDMCadFinanceiro.cdsFinanceiroDTMOVIMENTO.AsDateTime <
-     fDMCadFinanceiro.qUltFechamentoDATA.AsDateTime) then
+
+  fDMCadFinanceiro.qParametros_Fin.Close;
+  fDMCadFinanceiro.qParametros_Fin.Open;
+
+  if fDMCadFinanceiro.qParametros_FinCAIXA_VIRA_NOITE.AsString = 'S' then
   begin
-    MessageDlg('*** Processo não pode ser concluído pois data está fechada!', mtError, [mbOk], 0);
-    Result := True;
+    Result := False;
+    fDMCadFinanceiro.qUltFechamento.Close;
+    fDMCadFinanceiro.qUltFechamento.ParamByName('ID_CONTA').AsInteger := fDMCadFinanceiro.cdsFinanceiroID_CONTA.AsInteger;
+    fDMCadFinanceiro.qUltFechamento.ParamByName('FILIAL').AsInteger   := fDMCadFinanceiro.cdsFinanceiroFILIAL.AsInteger;
+    fDMCadFinanceiro.qUltFechamento.Open;
+    if not(fDMCadFinanceiro.qUltFechamento.IsEmpty) and
+      (fDMCadFinanceiro.cdsFinanceiroDTMOVIMENTO.AsDateTime <
+       fDMCadFinanceiro.qUltFechamentoDATA.AsDateTime) then
+    begin
+      MessageDlg('*** Processo não pode ser concluído pois data está fechada!', mtError, [mbOk], 0);
+      Result := True;
+    end;
+  end
+  else
+  begin
+    fDMCadFinanceiro.qCaixaAberto.Close;
+    fDMCadFinanceiro.qCaixaAberto.ParamByName('D1').AsDate := fDMCadFinanceiro.cdsFinanceiroDTMOVIMENTO.AsDateTime;
+    fDMCadFinanceiro.qCaixaAberto.Open;
+    if (not fDMCadFinanceiro.qCaixaAberto.IsEmpty) and (fDMCadFinanceiro.qCaixaAbertoTIPO_FECHAMENTO.AsString <> 'N') then
+    begin
+      MessageDlg('*** Processo não pode ser concluído pois data está fechada!', mtError, [mbOk], 0);
+      Result := True;
+    end;
   end;
 end;
 

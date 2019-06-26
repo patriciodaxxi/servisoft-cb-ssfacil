@@ -120,6 +120,13 @@ type
     cdsProdutoQTDGERAL: TFloatField;
     sdsProdAuxQTD: TFloatField;
     sdsProdAuxQTDGERAL: TFloatField;
+    sdsProdutoNOME_MARCA: TStringField;
+    cdsProdutoNOME_MARCA: TStringField;
+    sdsProdAuxNOME_MARCA: TStringField;
+    Panel3: TPanel;
+    Label7: TLabel;
+    Edit4: TEdit;
+    qParametrosMOSTRAR_MARCAR_PROD: TStringField;
     procedure BitBtn1Click(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -140,6 +147,11 @@ type
       Shift: TShiftState);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
+    procedure Edit4KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Edit2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     procedure prc_Consultar;
@@ -237,7 +249,14 @@ begin
     if qParametros_ProdCONS_PROD_USA_PERC.AsString = 'S' then
       sdsProduto.CommandText := sdsProduto.CommandText + ' AND PRO.NOME LIKE ' + QuotedStr(Edit1.Text+'%')
     else
-    sdsProduto.CommandText := sdsProduto.CommandText + ' AND PRO.NOME LIKE ' + QuotedStr('%'+Edit1.Text+'%');
+      sdsProduto.CommandText := sdsProduto.CommandText + ' AND PRO.NOME LIKE ' + QuotedStr('%'+Edit1.Text+'%');
+  end;
+  if trim(Edit4.Text) <> '' then
+  begin
+    if qParametros_ProdCONS_PROD_USA_PERC.AsString = 'S' then
+      sdsProduto.CommandText := sdsProduto.CommandText + ' AND M.NOME LIKE ' + QuotedStr(Edit4.Text+'%')
+    else
+      sdsProduto.CommandText := sdsProduto.CommandText + ' AND M.NOME LIKE ' + QuotedStr('%'+Edit4.Text+'%');
   end;
   if (qParametros_ProdUSA_REF2.AsString = 'S') and (trim(Edit2.Text) <> '') then
     sdsProduto.CommandText := sdsProduto.CommandText + ' AND PRO.REF2 LIKE ' + QuotedStr(Edit2.Text+'%')
@@ -269,6 +288,7 @@ begin
   begin
     vCodProduto_Pos    := cdsProdutoID.AsInteger;
     vReferencia_Pos    := cdsProdutoREFERENCIA.AsString;
+    vNome_Pos          := cdsProdutoNOME.AsString;
     vUnidade_Pos       := cdsProdutoUNIDADE.AsString;
     vUsa_Cor_Pos       := cdsProdutoUSA_COR.AsString;
     vUsa_Preco_Cor_Pos := cdsProdutoUSA_PRECO_COR.AsString;
@@ -291,6 +311,7 @@ procedure TfrmSel_Produto.SMDBGrid1DblClick(Sender: TObject);
 begin
   vCodProduto_Pos    := cdsProdutoID.AsInteger;
   vReferencia_Pos    := cdsProdutoREFERENCIA.AsString;
+  vNome_Pos          := cdsProdutoNOME.AsString;
   vUnidade_Pos       := cdsProdutoUNIDADE.AsString;
   vUsa_Cor_Pos       := cdsProdutoUSA_COR.AsString;
   vUsa_Preco_Cor_Pos := cdsProdutoUSA_PRECO_COR.AsString;
@@ -312,7 +333,9 @@ procedure TfrmSel_Produto.Edit1KeyDown(Sender: TObject; var Key: Word; Shift: TS
 begin
   if Key = Vk_Return then
   begin
-    BitBtn1Click(Sender);
+    if (trim(qParametrosMOSTRAR_MARCAR_PROD.AsString) <> 'S') or ((qParametrosMOSTRAR_MARCAR_PROD.AsString = 'S') and (trim(Edit4.Text) = ''))
+      or (trim(Edit1.Text) <> '') then
+      BitBtn1Click(Sender);
     if not cdsProduto.IsEmpty then
       SMDBGrid1.SetFocus;
   end;
@@ -342,8 +365,6 @@ var
 begin
   if Tag = 1 then
     oDBUtils.SetDataSourceProperties(Self, fDMSel_Produto);
-  ctProdutoLocal := sdsProduto.CommandText;
-  ctProdAux      := sdsProdAux.CommandText;
   qFilial.Close;
   qFilial.Open;
   qParametros.Close;
@@ -377,6 +398,8 @@ begin
         if SMDBGrid1.Columns[i].FieldName = 'QTDGERAL' then
           SMDBGrid1.Columns[i].Visible := False;
       end;
+      if (trim(qParametrosMOSTRAR_MARCAR_PROD.AsString) <> 'S') and (SMDBGrid1.Columns[i].FieldName = 'NOME_MARCA') then
+        SMDBGrid1.Columns[i].Visible := False;
       if (qParametrosEMPRESA_VEICULO.AsString <> 'S') and (SMDBGrid1.Columns[i].FieldName = 'PLACA') then
         SMDBGrid1.Columns[i].Visible := False;
 
@@ -443,6 +466,11 @@ begin
     if trim(Edit2.Text) <> '' then
       prc_Consultar;
   end;
+  if qParametrosMOSTRAR_MARCAR_PROD.AsString <> 'S' then
+    Panel3.Visible := False;
+
+  if trim(Edit1.Text) <> '' then
+    prc_Consultar;
 end;
 
 procedure TfrmSel_Produto.SMDBGrid1TitleClick(Column: TColumn);
@@ -616,6 +644,34 @@ begin
     frmSel_Produto_Lote.ShowModal;
   end;
   FreeAndNil(frmSel_Produto_Lote);
+end;
+
+procedure TfrmSel_Produto.Edit4KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = Vk_Return then
+  begin
+    if trim(Edit4.Text) <> '' then
+      BitBtn1Click(Sender);
+    Edit1.SetFocus;
+  end;
+end;
+
+procedure TfrmSel_Produto.Edit2KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = Vk_Return then
+  begin
+    BitBtn1Click(Sender);
+    if not cdsProduto.IsEmpty then
+      SMDBGrid1.SetFocus;
+  end;
+end;
+
+procedure TfrmSel_Produto.FormCreate(Sender: TObject);
+begin
+  ctProdutoLocal := sdsProduto.CommandText;
+  ctProdAux      := sdsProdAux.CommandText;
 end;
 
 end.

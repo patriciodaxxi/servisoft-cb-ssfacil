@@ -42,18 +42,18 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       Caption = 'Finalidade:'
     end
     object Shape1: TShape
-      Left = 720
-      Top = 29
+      Left = 704
+      Top = 13
       Width = 28
       Height = 15
       Brush.Color = clRed
     end
     object Label2: TLabel
-      Left = 752
-      Top = 32
-      Width = 43
+      Left = 736
+      Top = 16
+      Width = 155
       Height = 13
-      Caption = 'Com Erro'
+      Caption = 'Com Erro (Prod. n'#227'o encontrado)'
     end
     object Label3: TLabel
       Left = 21
@@ -62,6 +62,34 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       Height = 13
       Alignment = taRightJustify
       Caption = 'Opera'#231#227'o de Venda:'
+    end
+    object Label4: TLabel
+      Left = 736
+      Top = 30
+      Width = 137
+      Height = 13
+      Caption = 'Com Erro (Pedido j'#225' lan'#231'ado)'
+    end
+    object Shape2: TShape
+      Left = 704
+      Top = 27
+      Width = 28
+      Height = 15
+      Brush.Color = clYellow
+    end
+    object Shape3: TShape
+      Left = 704
+      Top = 41
+      Width = 28
+      Height = 15
+      Brush.Color = 4227327
+    end
+    object Label6: TLabel
+      Left = 736
+      Top = 44
+      Width = 58
+      Height = 13
+      Caption = 'Outros Erros'
     end
     object FilenameEdit1: TFilenameEdit
       Left = 122
@@ -73,7 +101,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       OnChange = FilenameEdit1Change
     end
     object btnGravar_Pedido: TNxButton
-      Left = 518
+      Left = 519
       Top = 22
       Width = 147
       Height = 44
@@ -193,6 +221,25 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       Caption = 'Cliente Exporta'#231#227'o'
       TabOrder = 5
     end
+    object btnAjustar_ProdCli: TBitBtn
+      Left = 922
+      Top = 36
+      Width = 131
+      Height = 25
+      Caption = 'Ajustar Nome Prod Cli'
+      TabOrder = 6
+      Visible = False
+      OnClick = btnAjustar_ProdCliClick
+    end
+    object btnExcluirItem: TNxButton
+      Left = 920
+      Top = 9
+      Width = 136
+      Caption = 'Excluir Item Selecionado'
+      TabOrder = 7
+      Visible = False
+      OnClick = btnExcluirItemClick
+    end
   end
   object gbxVendedor: TRzGroupBox
     Left = 0
@@ -253,7 +300,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
       WidthOfIndicator = 11
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
-      ColCount = 25
+      ColCount = 26
       RowCount = 2
       Columns = <
         item
@@ -397,6 +444,14 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
           Expanded = False
           FieldName = 'CNPJCliente'
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ID_Produto'
+          Title.Alignment = taCenter
+          Title.Caption = 'ID Prod. Interno'
+          Width = 68
+          Visible = True
         end>
     end
     object StaticText1: TStaticText
@@ -422,7 +477,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
     Top = 283
     Width = 1087
     Height = 253
-    ActivePage = TabSheet1
+    ActivePage = ts_Erro
     ActivePageDefault = RzTabSheet1
     Align = alBottom
     BackgroundColor = clSilver
@@ -430,7 +485,7 @@ object frmGerar_Pedido_EDI: TfrmGerar_Pedido_EDI
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 2
     FixedDimension = 19
     object RzTabSheet1: TRzTabSheet

@@ -417,6 +417,7 @@ type
     DBEdit76: TDBEdit;
     DBEdit77: TDBEdit;
     DBEdit78: TDBEdit;
+    Label118: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -554,6 +555,7 @@ type
     vVlrAdiantamento_Ant: Real;
     vID_CFOP_Ant: Integer;
     vFinalidade_Ant: String;
+    vPreFat : Boolean;
 
     fDMCadNotaFiscal: TDMCadNotaFiscal;
     //fDMCadExtComissao: TDMCadExtComissao;
@@ -636,11 +638,16 @@ type
     function fnc_Controla_Est(Tipo: String; Qtd: Real): Integer; //Tipo I=Lendo Tabela Itens   T=Lendo tabela de tamanhos
 
     function fnc_senha(Opcao_Senha, Campo_Senha, Tipo, Desc1, Desc2, Desc3: String; Item: Integer; Vlr_Limite: Real): Boolean;
+    function fnc_Opcao_Vendedor_Desc(ID : Integer) : Boolean;
 
     function fnc_Duplicata: Boolean;
     function fnc_Movimento: Boolean;
     function fnc_Duplicata_Enviada_Banco : String; //R= Remessa   N=Nosso Numero
     procedure prc_Excluir_Grade(vItemOrig: Integer);
+
+    procedure prc_Regravar_Comissao;
+
+
   public
     { Public declarations }
     vTipo_Reg: String; //NTS = Nota Fiscal   NTE = Nota Entrada
@@ -653,7 +660,8 @@ implementation
 
 uses DmdDatabase, rsDBUtils, uUtilPadrao, USel_Pessoa, URecebeXML, uCalculo_NotaFiscal, uNFeComandos, USel_ContaOrc, uUtilCliente,
   uUtilCobranca, DmdDatabase_NFeBD, UDMAprovacao_Ped, UConsPessoa_Fin, UConsPedido_Senha, uGrava_NotaFiscal, UCadNotaFiscal_Custo,
-  UMenu, Math, UDMEtiqueta, USel_PreFat, uMenu1, USel_RecNF, uXMLSuframa;
+  UMenu, Math, UDMEtiqueta, USel_PreFat, uMenu1, USel_RecNF, uXMLSuframa,
+  UCadNotaFiscal_Alt_CCusto, UConsClienteOBS;
 
 {$R *.dfm}
 
@@ -724,7 +732,7 @@ begin
   end;
   //*************
 
-  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
     exit;
 
 ////////////// testa se produto é filtrado por cliente
@@ -848,7 +856,8 @@ begin
         if (fDMCadNotaFiscal.cdsNotaFiscalTIPO_PRAZO.AsString = 'V') then
         begin
           vPercAux := StrToFloat(FormatFloat('0.00',100));
-          if (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') then
+          //08/05/2019
+          if fnc_Opcao_Vendedor_Desc(fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger) then
           begin
             if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat)) > 0 then
               vPercAux := StrToFloat(FormatFloat('0.00000',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat / fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat) * 100));
@@ -1232,6 +1241,9 @@ begin
   if fDMCadNotaFiscal.cdsParametrosUSA_VALE.AsString = 'S' then
     fDMCadNotaFiscal.mValeAux.EmptyDataSet;
   fDMCadNotaFiscal.mRecNFAux.EmptyDataSet;
+  fDMCadNotaFiscal.cdsFilial.Last;
+  if (vPreFat) and (vFilial > 0) then
+  else
   if fDMCadNotaFiscal.cdsFilial.RecordCount > 1 then
   begin
     ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
@@ -1239,18 +1251,14 @@ begin
     FreeAndNil(ffrmEscolhe_Filial);
   end
   else
-  begin
-    fDMCadNotaFiscal.cdsFilial.Last;
     vFilial      := fDMCadNotaFiscal.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadNotaFiscal.cdsFilialNOME.AsString;
-  end;
   if vFilial <= 0 then
   begin
     ShowMessage('Filial não informada!');
     exit;
   end;
-
   fDMCadNotaFiscal.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
+  vFilial_Nome := fDMCadNotaFiscal.cdsFilialNOME.AsString;
 
   fDMCadNotaFiscal.prc_Inserir(vTipo_Reg);
   lblNome_Filial.Caption := vFilial_Nome;
@@ -1280,11 +1288,13 @@ begin
   DBEdit36.ReadOnly := True;
   DBEdit37.ReadOnly := True;
   DBEdit38.ReadOnly := True;
+  vPreFat := False;
 end;
 
 procedure TfrmCadNotaFiscal.FormShow(Sender: TObject);
 var
   vData: TDateTime;
+  vTexto2 : String;
 begin
   fDMCadNotaFiscal := TDMCadNotaFiscal.Create(Self);
   fDMEstoque       := TDMEstoque.Create(Self);
@@ -1306,8 +1316,10 @@ begin
   btnConsultarClick(Sender);
 
   gbxVendedor.Visible := (fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S');
-  Label99.Visible     := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S'));
-  DBEdit59.Visible    := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S'));
+
+  Label99.Visible  := fnc_Opcao_Vendedor_Desc(fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger);
+  DBEdit59.Visible := Label99.Visible;
+    
   //Label71.Visible     := (fDMCadNotaFiscal.cdsParametrosUSA_LIMITE_CREDITO.AsString = 'S');
   if fDMCadNotaFiscal.cdsParametrosUSA_LIMITE_CREDITO.AsString = 'S' then
     StaticText1.Caption := 'Duplo Clique para Consultar    F3 Consultar Limite de Crédito';
@@ -1342,7 +1354,24 @@ begin
 
   PrFaturamento1.Visible := (fDMCadNotaFiscal.qParametros_NFeUSA_PREFAT.AsString = 'S');
 
-  btnCopiarRecNF.Visible := (fDMCadNotaFiscal.qParametros_NFeCOPIAR_RECNF.AsString = 'S'); 
+  btnCopiarRecNF.Visible := (fDMCadNotaFiscal.qParametros_NFeCOPIAR_RECNF.AsString = 'S');
+
+  vTexto2 := '';
+  if (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S') then
+    vTexto2 := 'Alt.C.Custo';
+  if (fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S') then
+  begin
+    if vTexto2 = '' then
+      vTexto2 := 'Alt.C.Orçamento'
+    else
+      vTexto2 := '/C.Orçamento'
+  end;
+  if vTexto2 <> '' then
+  begin
+    vTexto2 := 'F8 ' + vTexto2;
+    Label118.Caption := vTexto2;
+    Label118.Visible := True;
+  end;
 end;
 
 procedure TfrmCadNotaFiscal.prc_Consultar(ID: Integer);
@@ -1415,6 +1444,7 @@ begin
   ckTotalDup.Visible := False;
   ckEnviarComErro.Checked := False;
   ckEnviarComErro.Visible := False;
+  vPreFat := False;
 end;
 
 procedure TfrmCadNotaFiscal.SMDBGrid1DblClick(Sender: TObject);
@@ -1548,11 +1578,19 @@ var
   vNaoContDupl: Boolean;
   vAuxLim: Real;
   vObsGNRE: WideString;
+  vAuxTriang : Boolean;
 begin
   fDMCadNotaFiscal.mVerReserva.EmptyDataSet;
 
   if not(fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert]) then
     fDMCadNotaFiscal.cdsNotaFiscal.Edit;
+
+  if fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString = 'E' then
+  begin
+    fDMCadNotaFiscal.cdsNotaFiscalUFEMBEXPORTACAO.Clear;
+    fDMCadNotaFiscal.cdsNotaFiscalLOCALEMBEXPORTACAO.Clear;
+    fDMCadNotaFiscal.cdsNotaFiscalLOCALDESPEXPORTACAO.Clear;
+  end;
 
   if (trim(fDMCadNotaFiscal.cdsNotaFiscalNFEDENEGADA.AsString) = '') or (fDMCadNotaFiscal.cdsNotaFiscalNFEDENEGADA.IsNull) then
     fDMCadNotaFiscal.cdsNotaFiscalNFEDENEGADA.AsString := 'N';
@@ -1862,7 +1900,18 @@ begin
     if vIDAux > 0 then
       fDMCadNotaFiscal.prc_Localizar(vIDAux);
     if (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTETRIANG.AsInteger > 0) then
-      prc_Gravar_Triangular;
+    begin
+      vAuxTriang := True;
+      if (fDMCadNotaFiscal.cdsNotaFiscalID_OPERACAO_NOTA.AsInteger > 0) and
+         (fDMCadNotaFiscal.cdsOperacao_NotaID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalID_OPERACAO_NOTA.AsInteger) then
+      begin
+        if fDMCadNotaFiscal.cdsOperacao_Nota.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscalID_OPERACAO_NOTA.AsInteger,[loCaseInsensitive]) then
+          if fDMCadNotaFiscal.cdsOperacao_NotaMOSTRAR_CLI_TRIANG2.AsString = 'S' then
+            vAuxTriang := False;
+      end;
+      if vAuxTriang then
+        prc_Gravar_Triangular;
+    end;
 
   //29/11/2016  aqui
   //except
@@ -1876,6 +1925,7 @@ begin
   ckTotalDup.Visible := False;
   ckEnviarComErro.Checked := False;
   ckEnviarComErro.Visible := False;
+  vPreFat := False;
 end;
 
 procedure TfrmCadNotaFiscal.FormDestroy(Sender: TObject);
@@ -2287,7 +2337,8 @@ end;
 
 procedure TfrmCadNotaFiscal.RxDBLookupCombo3Enter(Sender: TObject);
 begin
-  fDMCadNotaFiscal.cdsCliente.IndexFieldNames := 'NOME';
+  if fDMCadNotaFiscal.cdsCliente.IndexFieldNames <> 'NOME' then
+    fDMCadNotaFiscal.cdsCliente.IndexFieldNames := 'NOME';
   StaticText2.Visible := True;
   RxDBLookupCombo3.Tag := 0;
   if RxDBLookupCombo3.Text <> '' then
@@ -2802,7 +2853,8 @@ begin
                                                              fDMCadNotaFiscal.cdsNotaFiscalNUMNOTA.AsInteger,
                                                              fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger,
-                                                             fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger,0,
+                                                             fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger,
+                                                             fDMCadNotaFiscal.cdsNotaFiscal_ItensCENTRO_CUSTO_ID.AsInteger,
                                                              fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString,'NTS',
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE.AsString,
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE.AsString,
@@ -2894,6 +2946,18 @@ begin
     ffrmConsNotaFiscal_NDevol.fDMCadNotaFiscal := fDMCadNotaFiscal;
     ffrmConsNotaFiscal_NDevol.ShowModal;
     FreeAndNil(ffrmConsNotaFiscal_NDevol);
+  end
+  else
+  if (Key = Vk_F8) and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Active) and not(fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert]) then
+  begin
+    if (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S') or
+       ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S')) then
+    begin
+      frmCadNotaFiscal_Alt_CCusto := TfrmCadNotaFiscal_Alt_CCusto.Create(self);
+      frmCadNotaFiscal_Alt_CCusto.fDMCadNotaFiscal := fDMCadNotaFiscal;
+      frmCadNotaFiscal_Alt_CCusto.ShowModal;
+      FreeAndNil(frmCadNotaFiscal_Alt_CCusto);
+    end;
   end;
   if (Key = Vk_F9) and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.Active) and (fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger > 0) then
   begin
@@ -3071,6 +3135,11 @@ begin
   rxdbCondicaoPgto.ReadOnly   := (fDMCadNotaFiscal.cdsNotaFiscalNOTIFICACAO.AsInteger = 1);
   btnAlterar_CondPgto.Visible := (fDMCadNotaFiscal.cdsNotaFiscalNOTIFICACAO.AsInteger = 1);
   //****************
+  if fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger > 0 then
+  begin
+    Label99.Visible  := fnc_Opcao_Vendedor_Desc(fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger);
+    DBEdit59.Visible := Label99.Visible;
+  end;
 end;
 
 procedure TfrmCadNotaFiscal.Panel4Enter(Sender: TObject);
@@ -3113,7 +3182,20 @@ begin
       ffrmConsLimite_Credito.vCodCliente_Lim := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
     ffrmConsLimite_Credito.ShowModal;
     FreeAndNil(ffrmConsLimite_Credito);
+  end
+  else
+  //07/06/2019
+  if (Key = Vk_F4) then
+  begin
+    frmConsClienteOBS := TfrmConsClienteOBS.Create(self);
+    if RzPageControl1.ActivePage = TS_Cadastro then
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger
+    else
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID_CLIENTE.AsInteger;
+    frmConsClienteOBS.ShowModal;
+    FreeAndNil(frmConsClienteOBS);
   end;
+
 end;
 
 procedure TfrmCadNotaFiscal.btnCopiarNotaClick(Sender: TObject);
@@ -3454,7 +3536,10 @@ begin
                        ' WHERE ID = ' + fDMCadNotaFiscal.cdsNotaFiscalID_NOTACOPIADA.AsString;
     sds.ExecSQL();
     exit;
-  end;
+  end
+ else
+ if (fDMCadNotaFiscal.cdsCFOPCOPIARNOTATRIANGULAR.AsString <> 'S')   then
+    exit;
 
   try
     vTriangular_Copiar := True;
@@ -4220,8 +4305,7 @@ begin
   for i := 1 to SMDBGrid_Dupl2.ColCount - 2 do
   begin
     if (SMDBGrid_Dupl2.Columns[i].FieldName = 'PERC_BASE_COMISSAO')  then
-      SMDBGrid_Dupl2.Columns[i].Visible := ((fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S') and
-                                           (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S'));
+      SMDBGrid_Dupl2.Columns[i].Visible := fnc_Opcao_Vendedor_Desc(fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger);
   end;
 end;
 
@@ -4236,7 +4320,8 @@ end;
 procedure TfrmCadNotaFiscal.SMDBGrid2GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
-  if (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'CSI') or (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'CST') then
+  if (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'CSI') or (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'CST')
+    or (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVACAO_COM_ERRO.AsString = 'STA') then
     AFont.Color := clRed;
 end;
 
@@ -4489,6 +4574,7 @@ end;
 procedure TfrmCadNotaFiscal.BitBtn3Click(Sender: TObject);
 var
   vPerc_Base_Com: Real;
+  vVlrBaseAux : Real;
 begin
   //vUsuario := 'Ajust.Base Com.';
   fDMCadNotaFiscal.cdsNotaFiscal_Consulta.First;
@@ -4502,9 +4588,23 @@ begin
       begin
         fDMCadNotaFiscal.cdsNotaFiscal.Edit;
         fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat;
-        if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
-          fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST.AsFloat
+        //08/05/2019
+        {if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
+          fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat
+                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST.AsFloat
+                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_FCP_ST.AsFloat
                                                                    - fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat;
+        //06/05/2019
+        if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S' then
+          fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_PIS.AsFloat
+                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_COFINS.AsFloat;}
+        //*********
+
+        vVlrBaseAux := StrToFloat(FormatFloat('0.00',fnc_Calcula_Desc_Vendedor(fDMCadNotaFiscal)));
+        if StrToFloat(FormatFloat('0.00',vVlrBaseAux)) > 0 then
+          fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - vVlrBaseAux));
+        //****************
+
         fDMCadNotaFiscal.cdsNotaFiscal.Post;
         vPerc_Base_Com := StrToFloat(FormatFloat('0.00000',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat / fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat) * 100));
         fDMCadNotaFiscal.cdsNotaFiscal_Parc.First;
@@ -4516,6 +4616,7 @@ begin
           fDMCadNotaFiscal.cdsNotaFiscal_Parc.Next;
         end;
         prc_ReGravar_DuplicataAux(vPerc_Base_Com);
+        prc_Regravar_Comissao;
         fDMCadNotaFiscal.cdsNotaFiscal.ApplyUpdates(0);
       end;
     end;
@@ -4656,7 +4757,8 @@ begin
                                           fDMCadNotaFiscal.cdsNotaFiscalNUMNOTA.AsInteger,
                                           fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,
                                           fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger,
-                                          fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger,0,
+                                          fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger,
+                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensCENTRO_CUSTO_ID.AsInteger,
                                           fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString,'NTS',
                                           vUnidade,
                                           vUnidade,
@@ -4974,13 +5076,23 @@ var
   vArq: String;
   fDMEtiqueta: TDMEtiqueta;
 begin
-  if not(fDMCadNotaFiscal.cdsNotaFiscal_Consulta.Active) or (fDMCadNotaFiscal.cdsNotaFiscal_Consulta.IsEmpty) or (fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID.AsInteger <= 0) then
+  if not(fDMCadNotaFiscal.cdsNotaFiscal_Consulta.Active) or (fDMCadNotaFiscal.cdsNotaFiscal_Consulta.IsEmpty) or
+        (fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID.AsInteger <= 0) then
     exit;
 
   fDMEtiqueta := TDMEtiqueta.Create(Self);
 
+  fDMCadNotaFiscal.qFilial_Relatorios.Close;
+  fDMCadNotaFiscal.qFilial_Relatorios.ParamByName('I1').AsInteger      := fDMCadNotaFiscal.cdsNotaFiscal_ConsultaFILIAL.AsInteger;
+  fDMCadNotaFiscal.qFilial_Relatorios.ParamByName('TIPO').AsInteger    := 7;
+  fDMCadNotaFiscal.qFilial_Relatorios.ParamByName('POSICAO').AsInteger := 1;
+  fDMCadNotaFiscal.qFilial_Relatorios.Open;
+  if trim(fDMCadNotaFiscal.qFilial_RelatoriosCAMINHO.AsString) <> '' then
+    vArq := fDMCadNotaFiscal.qFilial_RelatoriosCAMINHO.AsString
+  else
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\SulTextil_Etiq_Nota.fr3';
+
   fDMEtiqueta.prc_Monta_Etiqueta_Calcado('A',fDMCadNotaFiscal.cdsNotaFiscal_ConsultaID.AsInteger);
-  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\SulTextil_Etiq_Nota.fr3';
   if FileExists(vArq) then
     fDMEtiqueta.frxReport1.Report.LoadFromFile(vArq)
   else
@@ -5033,7 +5145,11 @@ begin
     exit;
   end;
 
+  vFilial := fDMPreFat.cdsPreFatFILIAL.AsInteger;
+  vPreFat := True;
   btnInserirClick(Self);
+  vPreFat := False;
+
   fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger := fDMPreFat.cdsPreFatID_CLIENTE.AsInteger;
   RxDBLookupCombo3Exit(Sender);
   vID_Cliente_Ant := 0;
@@ -5372,6 +5488,53 @@ begin
   end;
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filtered := False;
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filter   := '';
+end;
+
+procedure TfrmCadNotaFiscal.prc_Regravar_Comissao;
+var
+  sds: TSQLDataSet;
+  vAux : Real;
+begin
+  if fDMCadNotaFiscal.cdsVendedorCODIGO.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger then
+    fDMCadNotaFiscal.cdsVendedor.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger,[loCaseInsensitive]);
+  if fDMCadNotaFiscal.cdsVendedorTIPO_COMISSAO.AsString <> 'N' then
+    exit;
+
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'UPDATE EXTCOMISSAO E SET E.base_comissao = :BASE_COMISSAO, E.VLR_COMISSAO = :VLR_COMISSAO '
+                       + ' WHERE E.ID_NOTA = :ID_NOTA ';
+    sds.ParamByName('ID_NOTA').AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger;
+    sds.ParamByName('BASE_COMISSAO').AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat;
+    vAux := StrToFloat(FormatFloat('0.00',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat
+                                                * fDMCadNotaFiscal.cdsNotaFiscalPERC_COMISSAO.AsFloat) / 100));
+    sds.ParamByName('VLR_COMISSAO').AsFloat  := StrToFloat(FormatFloat('0.00',vAux));
+    sds.ExecSQL();
+
+  finally
+    FreeAndNil(sds);
+  end;
+end;
+
+function TfrmCadNotaFiscal.fnc_Opcao_Vendedor_Desc(ID: Integer): Boolean;
+begin
+  Result := False;
+  if (ID <= 0) and (fDMCadNotaFiscal.qParametros_ComUSA_CONFIG_IND.AsString = 'S') then
+  begin
+    Result := True;
+    exit;
+  end;
+  if trim(fDMCadNotaFiscal.cdsParametrosUSA_VENDEDOR.AsString) <> 'S' then
+    exit;
+  if (fDMCadNotaFiscal.qParametros_ComUSA_CONFIG_IND.AsString = 'S') and (uUtilPadrao.fnc_Vendedor_Desc_Com(ID)) then
+    Result := True
+  else
+  if (fDMCadNotaFiscal.qParametros_ComUSA_CONFIG_IND.AsString = 'N')
+     and ((fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')) then
+    Result := True;
 end;
 
 end.

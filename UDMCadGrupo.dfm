@@ -198,7 +198,7 @@ object DMCadGrupo: TDMCadGrupo
       'SELECT EMPRESA_AMBIENTES'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 400
+    Left = 399
     Top = 48
     object qParametrosEMPRESA_AMBIENTES: TStringField
       FieldName = 'EMPRESA_AMBIENTES'
@@ -298,5 +298,25 @@ object DMCadGrupo: TDMCadGrupo
     DataSet = cdsNCM
     Left = 544
     Top = 259
+  end
+  object qParametros_Geral: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT EMPRESA_PET,  EMPRESA_CALCADOS'
+      'FROM PARAMETROS_GERAL')
+    SQLConnection = dmDatabase.scoDados
+    Left = 510
+    Top = 47
+    object qParametros_GeralEMPRESA_PET: TStringField
+      FieldName = 'EMPRESA_PET'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_GeralEMPRESA_CALCADOS: TStringField
+      FieldName = 'EMPRESA_CALCADOS'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

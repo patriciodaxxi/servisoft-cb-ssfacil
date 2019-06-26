@@ -505,6 +505,12 @@ begin
                                  , 'ssfacil'
                                  , fDMNFe.qFilial_EmailSMTP_SENHA.AsString );
 
+      if trim(fDMNFe.qFilial_EmailREMETENTE_EMAIL.AsString) = '' then
+      begin
+        MessageDlg('*** Esta acessando o email da Filial, mas não foi informado!', mtInformation, [mbOk], 0);
+        exit;
+      end;
+
       EnviarEmail2(Trim(fnc_LocalServidorNFe),
                    texto,
                    fDMNFe.qFilial_EmailREMETENTE_EMAIL.AsString,
@@ -4241,7 +4247,8 @@ begin
       //if ((fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'M') or (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'P')) and not(fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.isNull) then
       if ((fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'M')) and not(fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.isNull) then
         texto2 := fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString;
-      if (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'P') and (fDMNFe.qParametrosIMP_REFERENCIANANOTA.AsString = 'S') and (fDMCadNotaFiscal.cdsParametrosIMP_NFE_REF_PROD.AsString <> 'R')  then
+      if ((fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'P') or (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString = 'S'))
+        and (fDMNFe.qParametrosIMP_REFERENCIANANOTA.AsString = 'S') and (fDMCadNotaFiscal.cdsParametrosIMP_NFE_REF_PROD.AsString <> 'R')  then
       begin
         if trim(texto2) <> '' then
           texto2 := texto2 + ' ';
@@ -4256,6 +4263,8 @@ begin
           fDMNFe.qPedido_Item.ParamByName('ID').AsInteger   := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger;
           fDMNFe.qPedido_Item.ParamByName('ITEM').AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_PEDIDO.AsInteger;
           fDMNFe.qPedido_Item.Open;
+          if trim(fDMNFe.qPedido_ItemCOD_PRODUTO_CLIENTE.AsString) <> '' then
+            vCodProdutoNfe := fDMNFe.qPedido_ItemCOD_PRODUTO_CLIENTE.AsString;
           if (trim(fDMNFe.qPedido_ItemCOD_COR_CLIENTE.AsString) <> '') then
           begin
             if trim(fDMNFe.qPedido_ItemCOD_PRODUTO_CLIENTE.AsString) <> '' then
@@ -4267,11 +4276,33 @@ begin
           end
           else
           begin
-            if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'B') and (trim(vNomeProduto) = '') then
-              vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString
-            else
-            if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'C') and (trim(vNomeProduto) = '') then
-              vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString;
+            //30/05/2019 para impressão dos produtos do Ramarim.
+            vNomeProduto := '';
+            if fDMCadNotaFiscal.cdsClienteIMP_ETIQUETA_ROT.AsString = 'C' then
+            begin
+              fDMCadNotaFiscal.qProduto_Forn.Close;
+              fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID').AsInteger            := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
+              fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID_FORNECEDOR').AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
+              fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID_COR').AsInteger        := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger;
+              fDMCadNotaFiscal.qProduto_Forn.Open;
+              if not fDMCadNotaFiscal.qProduto_Forn.IsEmpty then
+              begin
+                //vNomeProduto := fDMCadNotaFiscal.qProduto_FornNOME_MATERIAL_FORN.AsString + ' (' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_COR_COMBINACAO.AsString + ')'
+                vNomeProduto := fDMCadNotaFiscal.qProduto_FornNOME_MATERIAL_FORN.AsString;
+                texto2       := '';
+              end;
+            end;
+            //************************
+            if trim(vNomeProduto) <> '' then
+            begin
+              if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'B') and (trim(vNomeProduto) = '') then
+                vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString
+              else
+              if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'C') and (trim(vNomeProduto) = '') then
+                vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString;
+            end;
+            if trim(fDMCadNotaFiscal.qProduto_FornCOD_MATERIAL_FORN.AsString) <> '' then
+              vCodProdutoNfe := fDMCadNotaFiscal.qProduto_FornCOD_MATERIAL_FORN.AsString;
           end;
         end
         else

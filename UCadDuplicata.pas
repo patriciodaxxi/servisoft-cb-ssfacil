@@ -5,9 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadDuplicata, DBGrids,
   ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, RXDBCtrl, RzChkLst, RzPanel,
-  UEscolhe_Filial, URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus,
+  UEscolhe_Filial, URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, 
   NxCollection, StrUtils, DateUtils, UCadDuplicata_Gerar, UDMCadCheque, UCadDuplicata_Alt, UCadDuplicata_EscTipo, RzLstBox,
-  UCadDuplicata_Total, ComObj, UCadDuplicata_LeItau, SqlExpr, ComCtrls;
+  UCadDuplicata_Total, UCadDuplicata_LeItau, SqlExpr, ComCtrls;
 
 type
   TEnumMostraNossoNumero = (tpTodos,tpSim, tpNao);
@@ -256,6 +256,7 @@ type
     btnExcluir_CCusto: TNxButton;
     btnRecalcular_CCusto: TNxButton;
     CheckBox2: TCheckBox;
+    ICMS1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -345,6 +346,7 @@ type
     procedure btnIndividualClick(Sender: TObject);
     procedure btnExcluir_CCustoClick(Sender: TObject);
     procedure btnRecalcular_CCustoClick(Sender: TObject);
+    procedure ICMS1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -387,6 +389,7 @@ type
     procedure prc_Mostra_Aprov;
     procedure prc_Monta_Saldo;
     procedure prc_Habilitar;
+    procedure prc_Monta_Opcao_Cab;
 
     procedure prc_Gravar_Dup_CCusto(ID : String);
 
@@ -601,7 +604,9 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'VLR_TOTALPAGO') then
       SMDBGrid1.Columns[i].Visible := (fDMCadDuplicata.qParametrosMOSTRAR_TOTAL_ACUMULADO_DUP.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'PERC_BASE_COMISSAO') then
-      SMDBGrid1.Columns[i].Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S'));
+      SMDBGrid1.Columns[i].Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S')
+          and ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')
+            or (fDMCadDuplicata.qParametros_ComUSA_CONFIG_IND.AsString = 'S')));
     if (SMDBGrid1.Columns[i].FieldName = 'APROVADO') then
       SMDBGrid1.Columns[i].Visible := (fDMCadDuplicata.qParametros_FinUSA_APROVA_DUP.AsString = 'S');
   end;
@@ -677,8 +682,12 @@ begin
   end
   else
     RadioGroup2.Enabled := True;
-  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
-  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
+  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                   or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') or (fDMCadDuplicata.qParametros_ComUSA_CONFIG_IND.AsString = 'S'))
+                   and (gbxVendedor.Visible));
+  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                   or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') or (fDMCadDuplicata.qParametros_ComUSA_CONFIG_IND.AsString = 'S'))
+                   and (gbxVendedor.Visible));
   pnlTotal.Visible := (fDMCadDuplicata.qParametros_FinMOSTRAR_VLR_ROD_DUP.AsString = 'S');
   DBCheckBox8.Visible := (fDMCadDuplicata.qParametros_FinUSA_REGIME_CAIXA_DUP.AsString = 'S');
   ckImpNossoNumero.Visible := (fDMCadDuplicata.qParametros_FinIMP_NOSSO_NUMERO.AsString = 'S');
@@ -975,8 +984,12 @@ begin
       end;
   end;
   gbxVendedor.Visible := ((fDMCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (RxDBComboBox11.ItemIndex = 0));
-  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
-  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
+  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComUSA_CONFIG_IND.AsString = 'S')) and (gbxVendedor.Visible));
+  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComUSA_CONFIG_IND.AsString = 'S')) and (gbxVendedor.Visible));
 end;
 
 procedure TfrmCadDuplicata.RxDBLookupCombo3Enter(Sender: TObject);
@@ -1517,7 +1530,7 @@ end;
 procedure TfrmCadDuplicata.prc_Imp_Detalhada(vLista: Boolean; Tipo_Lista: string); //S Simples D Detalhada
 begin
   if Tipo_Lista <> 'S' then
-    fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO;TIPO_ES;TIPO_MOV';
+    fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO;TIPO_ES;TIPO_MOV;NOME_PESSOA';
   fDMCadDuplicata.qTotalAtraso.Close;
   if NxDatePicker3.Date > 0 then
     prc_Montar_TotalAtraso;
@@ -1526,6 +1539,7 @@ begin
 
   if ckImpNossoNumero.Checked then
   begin
+    prc_Monta_Opcao_Cab;
     fRelPagarReceber3 := TfRelPagarReceber3.Create(Self);
     fRelPagarReceber3.vTipo_ES := 'A';
     case RadioGroup2.ItemIndex of
@@ -1738,8 +1752,14 @@ begin
   dbedtComissao.Visible := ((fDMCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'E'));
   SpeedButton5.Visible  := rxdbVendedor.Visible;}
   gbxVendedor.Visible := ((fDMCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'E'));
-  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
-  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') and (gbxVendedor.Visible));
+  Label42.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and
+                       ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComUSA_CONFIG_IND.AsString = 'S')) and (gbxVendedor.Visible));
+  DBEdit22.Visible := ((fdmCadDuplicata.qParametrosUSA_VENDEDOR.AsString = 'S') and
+                       ((fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')
+                         or (fDMCadDuplicata.qParametros_ComUSA_CONFIG_IND.AsString = 'S')) and (gbxVendedor.Visible));
 end;
 
 procedure TfrmCadDuplicata.RadioGroup2Click(Sender: TObject);
@@ -1843,6 +1863,7 @@ begin
       //frmSel_Pessoa.vTipo_Pessoa := 'F';
       frmSel_Pessoa.vTipo_Pessoa := 'FT';
     frmSel_Pessoa.ShowModal;
+    FreeAndNil(frmSel_Pessoa);
     fDMCadDuplicata.cdsDuplicataID_PESSOA.AsInteger := vCodPessoa_Pos;
     RxDBLookupCombo3.SetFocus;
   end;
@@ -1889,6 +1910,12 @@ end;
 
 procedure TfrmCadDuplicata.NxButton2Click(Sender: TObject);
 begin
+  if fDMCadDuplicata.cdsDuplicataVLR_PARCELA.AsCurrency = 0 then
+  begin
+    ShowMessage('Informe o valor da parcela!');
+    DBEdit4.SetFocus;
+    Exit;
+  end;
   ffrmCadDuplicata_Gerar := TfrmCadDuplicata_Gerar.Create(self);
   ffrmCadDuplicata_Gerar.fDMCadDuplicata := fDMCadDuplicata;
   ffrmCadDuplicata_Gerar.ShowModal;
@@ -2289,14 +2316,15 @@ begin
     if trim(RxDBLookupCombo2.Text) <> '' then
       vCodPessoa_Pos := RxDBLookupCombo2.KeyValue;
     frmSel_Pessoa := TfrmSel_Pessoa.Create(Self);
-    if fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'E' then
-      frmSel_Pessoa.vTipo_Pessoa := 'C'
-    else
-      frmSel_Pessoa.vTipo_Pessoa := 'FT';
+    frmSel_Pessoa.vTipo_Pessoa := '';
+    case RadioGroup2.ItemIndex of
+      0 : frmSel_Pessoa.vTipo_Pessoa := 'C';
+      1 : frmSel_Pessoa.vTipo_Pessoa := 'FT';
+    end;
     frmSel_Pessoa.ShowModal;
     if vCodPessoa_Pos > 0 then
       RxDBLookupCombo2.KeyValue := vCodPessoa_Pos;
-    RxDBLookupCombo3.SetFocus;
+    RxDBLookupCombo2.SetFocus;
   end;
 end;
 
@@ -2336,21 +2364,15 @@ procedure TfrmCadDuplicata.prc_Monta_Cab(Extrato: Boolean);
 begin
   vOpcaoImp := 'Opções: ';
   case RadioGroup2.ItemIndex of
-    0:
-      vOpcaoImp := vOpcaoImp + '(Entrada)';
-    1:
-      vOpcaoImp := vOpcaoImp + '(Saida)';
+    0: vOpcaoImp := vOpcaoImp + '(Entrada)';
+    1: vOpcaoImp := vOpcaoImp + '(Saida)';
   end;
 
   case RadioGroup1.ItemIndex of
-    0:
-      vOpcaoImp := vOpcaoImp + ' - (Em aberto)';
-    1:
-      vOpcaoImp := vOpcaoImp + ' - (Quitado)';
-    2:
-      vOpcaoImp := vOpcaoImp + ' - (Descontado)';
+    0: vOpcaoImp := vOpcaoImp + ' - (Em aberto)';
+    1: vOpcaoImp := vOpcaoImp + ' - (Quitado)';
+    2: vOpcaoImp := vOpcaoImp + ' - (Descontado)';
   end;
-
 
   if (trim(NxDatePicker1.Text) <> '') and (trim(NxDatePicker2.Text) <> '') then
   //if (NxDatePicker1.Date > 10) and (NxDatePicker2.Date > 10) then
@@ -2547,7 +2569,14 @@ begin
   i2 := 0;
   for coluna := 1 to fDMCadDuplicata.cdsDuplicata_Consulta.FieldCount do
   begin
-    if (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NUMDUPLICATA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'PARCELA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTVENCIMENTO') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTEMISSAO') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_PARCELA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'clDias_Atraso') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NOME_PESSOA') then
+    if (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NUMDUPLICATA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'PARCELA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTVENCIMENTO')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTEMISSAO')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_PARCELA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'clDias_Atraso')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NOME_PESSOA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_RESTANTE') then
     begin
       ColunaP := ColunaP + 1;
       valorcampo := fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].DisplayLabel;
@@ -2566,7 +2595,14 @@ begin
     ColunaP := 0;
     for coluna := 1 to fDMCadDuplicata.cdsDuplicata_Consulta.FieldCount do
     begin
-      if (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NUMDUPLICATA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'PARCELA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTVENCIMENTO') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTEMISSAO') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_PARCELA') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'clDias_Atraso') or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NOME_PESSOA') then
+      if (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NUMDUPLICATA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'PARCELA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTVENCIMENTO')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'DTEMISSAO')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_PARCELA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'clDias_Atraso')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'NOME_PESSOA')
+      or (fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].FieldName = 'VLR_RESTANTE') then
       begin
         ColunaP := ColunaP + 1;
         vTexto := fDMCadDuplicata.cdsDuplicata_Consulta.Fields[coluna - 1].AsString;
@@ -2695,7 +2731,7 @@ begin
     fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
   else
   begin
-    ShowMessage('Relatorio não localizado! ' + vArq);
+    ShowMessage('Relatório não localizado! ' + vArq);
     Exit;
   end;
   if NxDatePicker3.Date > 1 then
@@ -2904,6 +2940,7 @@ begin
   end;
   SMDBGrid1.DisableScroll;
   vIndice := fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames;
+  prc_Monta_Cab(True);
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'NOME_PESSOA;ID_PESSOA';
   vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Extrato_Cliente_Fornecedor.fr3';
   if FileExists(vArq) then
@@ -2914,14 +2951,12 @@ begin
     Exit;
   end;
   case RadioGroup2.ItemIndex of
-    0:
-      vTipo_Relatorio := 'Extrato Cliente';
-    1:
-      vTipo_Relatorio := 'Extrato Fornecedor';
-    2:
-      vTipo_Relatorio := 'Extrato Cliente/Fornecedor';
+    0: vTipo_Relatorio := 'Extrato Cliente';
+    1: vTipo_Relatorio := 'Extrato Fornecedor';
+    2: vTipo_Relatorio := 'Extrato Cliente/Fornecedor';
   end;
-  fDMCadDuplicata.frxReport1.variables['TIPO'] := QuotedStr(vTipo_Relatorio);
+  fDMCadDuplicata.frxReport1.variables['TIPO']     := QuotedStr(vTipo_Relatorio);
+  fDMCadDuplicata.frxReport1.variables['ImpOpcao'] := QuotedStr(vOpcaoImp);
   fDMCadDuplicata.frxReport1.ShowReport;
   fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := vIndice;
   SMDBGrid1.EnableScroll;
@@ -3040,9 +3075,9 @@ begin
   vSelCentroCusto := '';
   frmSel_CentroCusto := TfrmSel_CentroCusto.Create(Self);
   frmSel_CentroCusto.Panel2.Visible := True;
-  if fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger > 0 then
-    frmSel_CentroCusto.RxDBLookupCombo9.KeyValue := fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger
-  else
+//  if fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger > 0 then
+//    frmSel_CentroCusto.RxDBLookupCombo9.KeyValue := fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger
+//  else
     frmSel_CentroCusto.RxDBLookupCombo9.ClearValue;
   frmSel_CentroCusto.ShowModal;
   FreeAndNil(frmSel_CentroCusto);
@@ -3123,6 +3158,35 @@ begin
     fDMCadDuplicata.cdsDuplicata_CCusto.Next;
   end;
   
+end;
+
+procedure TfrmCadDuplicata.ICMS1Click(Sender: TObject);
+var
+  vArq: string;
+  vIndice_Ant: string;
+begin
+  vIndice_Ant := fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames;
+  fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'NOME_PESSOA;DTVENCIMENTO';
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Transf_ICMS.fr3';
+  if FileExists(vArq) then
+    fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  if NxDatePicker3.Date > 1 then
+    fDMCadDuplicata.vDataIni := NxDatePicker3.Date
+  else
+    fDMCadDuplicata.vDataIni := 36526;
+  fDMCadDuplicata.vDataFim := NxDatePicker4.Date;
+  fDMCadDuplicata.frxReport1.ShowReport;
+  fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := vIndice_Ant;
+end;
+
+procedure TfrmCadDuplicata.prc_Monta_Opcao_Cab;
+begin
+
 end;
 
 end.

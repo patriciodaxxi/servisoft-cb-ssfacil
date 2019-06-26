@@ -973,7 +973,7 @@ object fRelPedido_JW: TfRelPedido_JW
           Left = 0
           Top = 48
           Width = 1071
-          Height = 44
+          Height = 45
           AutoSize = True
           BeforePrint = RLBand2BeforePrint
           object RLDBText21: TRLDBText
@@ -1181,7 +1181,7 @@ object fRelPedido_JW: TfRelPedido_JW
         end
         object RLBand4: TRLBand
           Left = 0
-          Top = 110
+          Top = 111
           Width = 1071
           Height = 54
           BandType = btSummary
@@ -1354,7 +1354,7 @@ object fRelPedido_JW: TfRelPedido_JW
         end
         object RLBand5: TRLBand
           Left = 0
-          Top = 92
+          Top = 93
           Width = 1071
           Height = 18
           BeforePrint = RLBand5BeforePrint
@@ -1608,5 +1608,10 @@ object fRelPedido_JW: TfRelPedido_JW
         end
       end
     end
+  end
+  object RLPDFFilter1: TRLPDFFilter
+    DisplayName = 'Documento PDF'
+    Left = 842
+    Top = 82
   end
 end

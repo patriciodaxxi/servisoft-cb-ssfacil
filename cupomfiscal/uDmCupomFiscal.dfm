@@ -1157,12 +1157,11 @@ object dmCupomFiscal: TdmCupomFiscal
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT CF.*, TC.DINHEIRO, TC.NOME NOME_TIPOCOBRANCA,'#13#10'(SELECT CO' +
-      'UNT(1) CONTADOR_ITENS'#13#10'  FROM CUPOMFISCAL_ITENS CI'#13#10'  WHERE CI.I' +
-      'D = CF.ID),'#13#10'(SELECT FE.DTFECHAMENTO'#13#10'  FROM FECHAMENTO FE'#13#10'  WH' +
-      'ERE CF.ID_FECHAMENTO = FE.ID), P.NOME VENDEDOR'#13#10'FROM CUPOMFISCAL' +
-      ' CF'#13#10'LEFT JOIN TIPOCOBRANCA TC ON (CF.ID_TIPOCOBRANCA = TC.ID)'#13#10 +
-      'LEFT JOIN PESSOA P ON (CF.ID_VENDEDOR = P.CODIGO)'
+      'SELECT CF.*, TC.DINHEIRO, TC.NOME NOME_TIPOCOBRANCA,'#13#10'(SELECT FE' +
+      '.DTFECHAMENTO'#13#10'  FROM FECHAMENTO FE'#13#10'  WHERE CF.ID_FECHAMENTO = ' +
+      'FE.ID), P.NOME VENDEDOR'#13#10'FROM CUPOMFISCAL CF'#13#10'LEFT JOIN TIPOCOBR' +
+      'ANCA TC ON (CF.ID_TIPOCOBRANCA = TC.ID)'#13#10'LEFT JOIN PESSOA P ON (' +
+      'CF.ID_VENDEDOR = P.CODIGO)'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1275,9 +1274,6 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupom_ConsQTD_PESSOA: TIntegerField
       FieldName = 'QTD_PESSOA'
-    end
-    object cdsCupom_ConsCONTADOR_ITENS: TIntegerField
-      FieldName = 'CONTADOR_ITENS'
     end
     object cdsCupom_ConsID_FECHAMENTO: TIntegerField
       FieldName = 'ID_FECHAMENTO'
@@ -1841,8 +1837,8 @@ object dmCupomFiscal: TdmCupomFiscal
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto'
-    Left = 312
-    Top = 104
+    Left = 311
+    Top = 103
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1973,6 +1969,12 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsProdutoPERC_REDUCAOICMS: TFloatField
       FieldName = 'PERC_REDUCAOICMS'
+    end
+    object cdsProdutoID_CSTICMS_BRED: TIntegerField
+      FieldName = 'ID_CSTICMS_BRED'
+    end
+    object cdsProdutoPERC_ICMS_NFCE: TFloatField
+      FieldName = 'PERC_ICMS_NFCE'
     end
   end
   object dsProduto: TDataSource
@@ -2911,6 +2913,11 @@ object dmCupomFiscal: TdmCupomFiscal
       FieldName = 'SENHA_CANCELAR_CUPOM'
       Size = 10
     end
+    object sdsCupomParametrosANIVERSARIO_PERIODO: TStringField
+      FieldName = 'ANIVERSARIO_PERIODO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCupomParametros: TDataSetProvider
     DataSet = sdsCupomParametros
@@ -3177,6 +3184,11 @@ object dmCupomFiscal: TdmCupomFiscal
     object cdsCupomParametrosSENHA_CANCELAR_CUPOM: TStringField
       FieldName = 'SENHA_CANCELAR_CUPOM'
       Size = 10
+    end
+    object cdsCupomParametrosANIVERSARIO_PERIODO: TStringField
+      FieldName = 'ANIVERSARIO_PERIODO'
+      FixedChar = True
+      Size = 1
     end
   end
   object sdsSitTribCF: TSQLDataSet
@@ -6498,8 +6510,8 @@ object dmCupomFiscal: TdmCupomFiscal
     IndexFieldNames = 'ID_Pedido'
     Params = <>
     StoreDefs = True
-    Left = 969
-    Top = 272
+    Left = 953
+    Top = 216
     Data = {
       490000009619E0BD01000000180000000200000000000300000049000949445F
       50656469646F0400010000000000084F42535F4E6F7461010049000000010005
@@ -6658,7 +6670,7 @@ object dmCupomFiscal: TdmCupomFiscal
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCupom_Cons_Parc'
-    Left = 907
+    Left = 899
     Top = 216
     object cdsCupom_Cons_ParcVALOR: TFloatField
       FieldName = 'VALOR'
@@ -6776,8 +6788,8 @@ object dmCupomFiscal: TdmCupomFiscal
       'FROM CUPOMFISCAL C'
       'WHERE C.id = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 872
-    Top = 312
+    Left = 840
+    Top = 328
     object qVerID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6918,8 +6930,8 @@ object dmCupomFiscal: TdmCupomFiscal
       'SELECT ENDGRIDS'
       'FROM PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 824
-    Top = 296
+    Left = 792
+    Top = 328
     object qParametros_GeralENDGRIDS: TStringField
       FieldName = 'ENDGRIDS'
       Size = 250
@@ -7138,5 +7150,52 @@ object dmCupomFiscal: TdmCupomFiscal
     object qNCM_UFPERC_RED_MVA_CLI_SIMPLES: TFloatField
       FieldName = 'PERC_RED_MVA_CLI_SIMPLES'
     end
+  end
+  object sdsTotais: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT NOME, SUM(TOTAL) TOTAL'#13#10'FROM TOTAIS_FORMA_PGTO'#13#10'WHERE DAT' +
+      'A BETWEEN :D1 AND :D2'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'D1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'D2'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 800
+    Top = 272
+  end
+  object dspTotais: TDataSetProvider
+    DataSet = sdsTotais
+    Left = 840
+    Top = 272
+  end
+  object cdsTotais: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTotais'
+    Left = 880
+    Top = 272
+    object cdsTotaisNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object cdsTotaisTOTAL: TFloatField
+      FieldName = 'TOTAL'
+      DisplayFormat = '#,###,##0.00'
+    end
+  end
+  object dsTotais: TDataSource
+    DataSet = cdsTotais
+    Left = 920
+    Top = 272
   end
 end

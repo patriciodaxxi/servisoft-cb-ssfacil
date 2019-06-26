@@ -8,7 +8,7 @@ uses
   UCadPedido_Itens, UCadPedido_Desconto, UEscolhe_Filial, UCBase, RzPanel, UCadTabPreco, Math, UCadPedido_Cancelamento,
   DateUtils, dbXPress, NxCollection, Menus, Variants, USel_TabPreco, ULeExcel, NxEdit, VarUtils, UEtiq_Individual, Provider,
   UCadPedido_Ace, UGerar_Rotulos, UGerar_Rotulos_Color, DBClient, UCadPedido_Itens_Copia, UConsOrdProd_Ped, UConsHist_Chapa,
-  UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed,classe.validaemail, frxExportPDF, frxExportMail;
+  UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed,classe.validaemail, frxExportPDF, frxExportMail, UMontaPed_TipoItem;
 
 type
   TfrmCadPedido = class(TForm)
@@ -357,6 +357,11 @@ type
     Label85: TLabel;
     DBEdit27: TDBEdit;
     Personalizado1: TMenuItem;
+    RtuloComEmbalagemRolo1: TMenuItem;
+    EtiquetaA4ItensPersonalizado1: TMenuItem;
+    SalvarPedido1: TMenuItem;
+    Label86: TLabel;
+    Matricial80Colunas1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -475,9 +480,12 @@ type
     procedure btnConsTempoClick(Sender: TObject);
     procedure EtiquetaA4Seleciona1Click(Sender: TObject);
     procedure aloPorProcesso1Click(Sender: TObject);
+    procedure RtuloComEmbalagemRolo1Click(Sender: TObject);
+    procedure EtiquetaA4ItensPersonalizado1Click(Sender: TObject);
+    procedure SalvarPedido1Click(Sender: TObject);
+    procedure Matricial80Colunas1Click(Sender: TObject);
   private
     { Private declarations }
-    vRetirada: String;
     fLista : TStringList;
     fDMCadPedido: TDMCadPedido;
     fDMSel_Produto: TDMSel_Produto;
@@ -495,6 +503,7 @@ type
     ffrmGerar_Rotulos_Color: TfrmGerar_Rotulos_Color;
     ffrmConsHist_Chapa: TfrmConsHist_Chapa;
     ffrmCadObs_Aux: TfrmCadObs_Aux;
+    ffrmMontaPed_TipoItem : TfrmMontaPed_TipoItem;
 
     vID_ClienteAnt: Integer;
     vVlrFrete_Ant: Real;
@@ -515,13 +524,13 @@ type
     procedure prc_Limpar_Edit_Consulta;
     procedure prc_Posiciona_Imp;
     procedure prc_Monta_Etiqueta_Nav;
-    procedure prc_Monta_Etiqueta_Calcado(Tipo: String); //D= DOS   A=A4 em windows
+    procedure prc_Monta_Etiqueta_Calcado(Tipo: String ; Qtd_Emb : Real = 0); //D= DOS   A=A4 em windows
     procedure prc_Gravar_mEtiqueta_Nav(Tamanho: String);
     procedure prc_Imprimir_Etiqueta;
     procedure prc_Gravar_Pedido_Excel;
     procedure prc_Opcao_Consumidor;
     procedure prc_Opcao_Prazo;
-    procedure prc_Abre_Filial_Menu(Empresa : Integer; Tipo : Integer);    
+    procedure prc_Abre_Filial_Menu(Empresa : Integer; Tipo : Integer);
 
     function fnc_senha(Opcao_Senha, Campo_Senha, Tipo, Desc1, Desc2, Desc3: String ; Item: Integer): Boolean;
 
@@ -549,7 +558,8 @@ uses DmdDatabase, rsDBUtils, uUtilPadrao, uRelPedido, uRelPedido_SulTextil, uRel
   URelPedido_Tam, URelEtiqueta_Nav, URelPedido_Tam2, URelPedido_JW, URelEtiqueta, uUtilCliente, uCalculo_Pedido, UCadPedido_Copia,
   UConsPedido_Nota, UDMConsPedido, UInformar_DtExpedicao, UInformar_Processo_Ped, UConsPedido_Senha, USel_Produto, UCadPedido_Cupom,
   UDMPedidoImp, USel_OS_Proc, UCadPedido_ItensCli, UTalaoPed,
-  UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido;
+  UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido,
+  UConsClienteOBS, uImprimir;
 
 {$R *.dfm}
 
@@ -604,7 +614,7 @@ begin
     Exit;
   end;
 
-  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
     Exit;
 
   if fDMCadPedido.fnc_Existe_Fat(fDMCadPedido.cdsPedidoID.AsInteger) > 0 then
@@ -632,9 +642,7 @@ procedure TfrmCadPedido.prc_Gravar_Registro;
 var
   vIDAux: Integer;
   vAux: Real;
-  ffrmSenha: TfrmSenha;
   vID_LocalAux: Integer;
-  vItemAux: Integer;
 begin
   //Alerta valores em atraso 11/05/2015
   if (fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger <= 0) and (fDMCadPedido.cdsParametrosUSA_LOCAL_ESTOQUE.AsString <> 'S') then
@@ -822,24 +830,35 @@ var
 begin
   vTipo_Pedido     := 'P';
   vInclusao_Edicao := '';
+  addLog('Inicio Cria DMCADEPDIDO','Tempo_Execucao.txt');
   fDMCadPedido := TDMCadPedido.Create(Self);
+  addLog('Fim Cria DMCADEPDIDO','Tempo_Execucao.txt');
   oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
+  addLog('Inicio Limpa consulta','Tempo_Execucao.txt');
   prc_Limpar_Edit_Consulta;
+  addLog('Fim Limpa consulta','Tempo_Execucao.txt');
 
   fDMCadPedido.vID_CFOP     := 0;
   fDMCadPedido.vID_Variacao := 0;
+  addLog('Inicio abrir Cliente','Tempo_Execucao.txt');
   fDMCadPedido.prc_Abrir_cdsCliente;
+  addLog('Fim abrir Cliente','Tempo_Execucao.txt');
   gbxVendedor.Visible := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
   Label21.Visible     := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P');
   DBDateEdit2.Visible := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P');
   //lblTabPreco.Visible  := (fDMCadPedido.cdsParametrosUSA_TAB_PRECO.AsString = 'S');
   //lblTabPreco.Caption  := '';
 
+  if (lblNaoMostrarPreco.Visible) or (fDMCadPedido.qParametros_UsuarioMOSTRAR_TOTAL_PEDIDO.AsString <> 'S') then
+    pnlTotal.Visible := False;
+
   btnTab_Preco.Visible := (fDMCadPedido.cdsParametrosUSA_TAB_PRECO.AsString = 'S') ;
 
   if vNum_Pedido_Pos > 0 then
   begin
+    addLog('Inicio cdsPedido_Consulta','Tempo_Execucao.txt');
     prc_Consultar(vNum_Pedido_Pos);
+    addLog('Fim cdsPedido_Consulta','Tempo_Execucao.txt');
     RzPageControl1.ActivePage := TS_Cadastro;
   end
   else
@@ -851,8 +870,11 @@ begin
     end
     else
       NxDatePicker1.Clear;
+    addLog('Inicio Consultar Click','Tempo_Execucao.txt');
     btnConsultarClick(Sender);
+    addLog('Fim Consultar Click','Tempo_Execucao.txt');
   end;
+
   NxDatePicker2.Date := Date;
   vNum_Pedido_Pos := 0;
 
@@ -863,6 +885,8 @@ begin
       if (SMDBGrid2.Columns[i].FieldName = 'TAMANHO') then
         SMDBGrid2.Columns[i].Visible := False;
     end;
+    if (SMDBGrid2.Columns[i].FieldName = 'FABRICA') then
+      SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S');
     if (lblNaoMostrarPreco.Visible) then
     begin
       vTexto := SMDBGrid2.Columns[i].FieldName;
@@ -1007,8 +1031,6 @@ begin
   //gbxVlr_Adiantado.Visible := (fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S');
   Label64.Visible := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
   Label65.Visible := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
-  if (lblNaoMostrarPreco.Visible) or (fDMCadPedido.qParametros_UsuarioMOSTRAR_TOTAL_PEDIDO.AsString <> 'S') then
-    pnlTotal.Visible := False;
   Label56.Visible       := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
   NxDatePicker3.Visible := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
   Label60.Visible       := (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S');
@@ -1024,7 +1046,7 @@ begin
   if fDMCadPedido.qParametros_PedUSA_DTEXPEDICAO.AsString = 'S' then
     StaticText1.Caption := 'Duplo clique para consultar       F3 Tabela de Preço    F4-Inf. Data Expedição    F6 Cons. Notas'
   else
-    StaticText1.Caption := 'Duplo clique para consultar       F3 Tabela de Preço    F6 Cons. Notas';
+    StaticText1.Caption := 'Duplo clique para consultar       F3 Tabela de Preço    F4-Cons.Obs Cliente   F6 Cons. Notas';
   StaticText1.Caption := StaticText1.Caption + vStatic_Processo;
 
   Label63.Visible           := (fDMCadPedido.qParametros_PedMOSTRAR_TERCEIRO.AsString = 'P');
@@ -1079,7 +1101,12 @@ begin
   btnConsTempo.Visible := (fDMCadPedido.qParametros_GeralUSA_TIPO_MATERIAL.AsString = 'S');
   DBCheckBox5.Visible  := (fDMCadPedido.qParametros_FinUSA_NGR.AsString = 'S');
   DBCheckBox6.Visible  := (fDMCadPedido.qParametros_PedUSA_AMOSTRA.AsString = 'S');
+  addLog('Inicio Monta Menu','Tempo_Execucao.txt');
+
   prc_Abre_Filial_Menu(1,2);
+  addLog('Fim Monta Menu','Tempo_Execucao.txt');
+
+  addLog('Finaliza','Tempo_Execucao.txt');
 
 end;
 
@@ -1096,10 +1123,10 @@ begin
     fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
                                                    ' AND PED.ID = ' + IntToStr(ID)
   else
+  if cePedInterno.AsInteger > 0 then
+      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.NUM_PEDIDO = ' + cePedInterno.Text
+  else
   begin
-    if cePedInterno.AsInteger > 0 then
-      fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
-                                                     ' AND PED.NUM_PEDIDO = ' + cePedInterno.Text;
     if not(RxDBLookupCombo1.Text = '') then
       fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText +
                                                      ' AND PED.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
@@ -1355,9 +1382,6 @@ begin
 end;
 
 procedure TfrmCadPedido.btnInserir_ItensClick(Sender: TObject);
-var
-  i: Integer;
-  vTexto1: String;
 begin
   if fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger <= 0 then
   begin
@@ -1445,9 +1469,7 @@ procedure TfrmCadPedido.btnAlterar_ItensClick(Sender: TObject);
 var
   vMSGAux: String;
   vItemAux: Integer;
-  vID_ProdutoAux: Integer; //
   vID_CorAux: Integer; //
-  vTamanhoAux: String; //
   vPrecoAux: Real; //
   vPerc_IpiAux, vPerc_ICMSAux: Real;
   vCarimboAux, vCaixinhaAux: String;
@@ -1960,6 +1982,34 @@ begin
     btnCalcular_ValoresClick(Sender);
   end
   else
+  //07/06/2019
+  if (Key = Vk_F4) and (fDMCadPedido.qParametros_PedUSA_DTEXPEDICAO.AsString <> 'S') then
+  begin
+    frmConsClienteOBS := TfrmConsClienteOBS.Create(self);
+    if RzPageControl1.ActivePage = TS_Cadastro then
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger
+    else
+      frmConsClienteOBS.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedido_ConsultaID_CLIENTE.AsInteger;
+    frmConsClienteOBS.ShowModal;
+    FreeAndNil(frmConsClienteOBS);
+  end
+  else
+  // 26/05/2019
+  if (Key = Vk_F6) and (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) and (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
+  begin
+    if fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger <= 0 then
+    begin
+      MessageDlg('Informe o Cliente',mtWarning,mbOKCancel,0);
+      RxDBLookupCombo3.SetFocus;
+      Exit;
+    end;
+    ffrmMontaPed_TipoItem := TfrmMontaPed_TipoItem.Create(self);
+    ffrmMontaPed_TipoItem.fDMCadPedido := fDMCadPedido;
+    ffrmMontaPed_TipoItem.ShowModal;
+    FreeAndNil(ffrmMontaPed_TipoItem);
+    btnCalcular_ValoresClick(Sender);
+  end
+  else
   //09/01/2017
   if (Key = Vk_F8) and (fDMCadPedido.qParametros_GeralEMPRESA_VAREJO.AsString = 'S') then
   begin
@@ -2339,26 +2389,29 @@ begin
     exit;
 
   prc_Posiciona_Imp;
-  prc_Monta_Etiqueta_Calcado('D');
+  prc_Monta_Etiqueta_Calcado('D',0);
   fDMCadPedido.mEtiqueta_Nav.IndexFieldNames := 'Referencia;Nome_Produto;Tamanho';
   prc_Imprimir_Etiqueta;
 
   MessageDlg('Etiquetas impressas!', mtInformation, [mbOk], 0);
 end;
 
-procedure TfrmCadPedido.prc_Monta_Etiqueta_Calcado(Tipo: String); //D= DOS   A=A4 em windows
+procedure TfrmCadPedido.prc_Monta_Etiqueta_Calcado(Tipo: String ; Qtd_Emb : Real); //D= DOS   A=A4 em windows
 var
-  i: Integer;
+  i, I2: Integer;
   vQtdDiv: Integer;
   vTexto: String;
-  vQtdAux: Integer;
+  vQtdAux: Real;
   vQtdPac: Integer;
   fDMPedidoImp: TDMPedidoImp;
   ffrmImpEtiq_Emb: TfrmImpEtiq_Emb;
+  vFloat : Real;
+  vQtdAux2 : Real;
+  vQtdPac_Orig : Integer;
 
 begin
   vTexto := '1';
-  if Tipo = 'A' then
+  if (Tipo = 'A') and (Qtd_Emb <> 1) then
     vTexto := InputBox('','Informar a Quantidade por Pacote', '72')
   else
   if Tipo = 'AE' then //Por Embalagem no produto tipo 'O'
@@ -2381,10 +2434,8 @@ begin
   else
     vQtdDiv := 1;
   vQtdPac := vQtdDiv;
-  vQtdAux := fDMCadPedido.cdsPedidoImp_ItensQTD.AsInteger div vQtdDiv;
-  if fDMCadPedido.cdsPedidoImp_ItensQTD.AsInteger mod vQtdDiv > 0 then
-    vQtdAux := vQtdAux + 1;
-  vQtdDiv := vQtdAux;
+  vQtdPac_Orig := vQtdPac;
+
   fDMCadPedido.mEtiqueta_Nav.EmptyDataSet;
   fDMCadPedido.cdsPedidoImp_Itens.First;
   while not fDMCadPedido.cdsPedidoImp_Itens.Eof do
@@ -2398,6 +2449,16 @@ begin
         continue;
       end;
     end;
+    //29/04/2019
+    if (Tipo = 'A') and (Qtd_Emb > 0) then
+    begin
+      if fDMCadPedido.cdsPedidoImp_ItensQTD_EMBALAGEM_PROD.AsInteger <= 0 then
+      begin
+        fDMCadPedido.cdsPedidoImp_Itens.Next;
+        continue;
+      end;
+    end;
+    //********************
 
     if Tipo = 'AE' then
     begin
@@ -2406,22 +2467,77 @@ begin
         vQtdPac := 1;
     end;
 
-    vQtdAux := fDMCadPedido.cdsPedidoImp_ItensQTD.AsInteger;
+    vQtdAux := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat;
     if (Tipo = 'A') or (Tipo = 'AE') then
     begin
-      vQtdDiv := fDMCadPedido.cdsPedidoImp_ItensQTD.AsInteger div vQtdPac;
-      if fDMCadPedido.cdsPedidoImp_ItensQTD.AsInteger mod vQtdPac > 0 then
-        vQtdDiv := vQtdDiv + 1;
-    end;
+      // 27/04/2019
+      //vQtdDiv := fDMCadPedido.cdsPedidoImp_ItensQTD.AsInteger div vQtdPac;
+      //if fDMCadPedido.cdsPedidoImp_ItensQTD.AsInteger mod vQtdPac > 0 then
+      //  vQtdDiv := vQtdDiv + 1;
 
+      if (Tipo = 'A') and (Qtd_Emb > 0) then
+        vQtdPac := fDMCadPedido.cdsPedidoImp_ItensQTD_EMBALAGEM_PROD.AsInteger
+      else
+      if (Tipo = 'A') and (StrToFloat(FormatFloat('0.000',fDMCadPedido.cdsPedidoImp_ItensQTD_POR_ROTULO_PROD.AsFloat)) > 0) then
+        vQtdPac := fDMCadPedido.cdsPedidoImp_ItensQTD_POR_ROTULO_PROD.AsInteger
+      else
+      if (Tipo = 'A') then
+        vQtdPac := vQtdPac_Orig;
+
+      vQtdAux2 := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat / vQtdPac;
+      vQtdDiv := Trunc(vQtdAux2);
+      if (vQtdAux2 - Trunc(vQtdAux2)) > 0 then
+        vQtdDiv := vQtdDiv + 1;
+
+    end;
+    
     if (Tipo <> 'A') and (Tipo <> 'AE') then
-      vQtdDiv := vQtdAux;
+      vQtdDiv := Trunc(vQtdAux);
     for i := 1 to vQtdDiv do
     begin
       fDMCadPedido.mEtiqueta_Nav.Insert;
       fDMCadPedido.mEtiqueta_NavReferencia.AsString   := fDMCadPedido.cdsPedidoImp_ItensREFERENCIA.AsString;
       fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString;
+      fDMCadPedido.mEtiqueta_NavMedida.AsString       := fDMCadPedido.cdsPedidoImp_ItensMEDIDA.AsString;
+      fDMCadPedido.mEtiqueta_NavNome_Cor.AsString := fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString;
       fDMCadPedido.mEtiqueta_NavItem_Ped.AsInteger    := fDMCadPedido.cdsPedidoImp_ItensITEM.AsInteger;
+      if fDMCadPedido.cdsPedidoImpIMP_ETIQUETA_ROT.AsString = 'C' then
+      begin
+        fDMCadPedido.qProduto_Cli.SQL.Text := fDMCadPedido.ctqProduto_Cli;
+        if not (fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.IsNull) then
+          fDMCadPedido.qProduto_Cli.SQL.Text := fDMCadPedido.ctqProduto_Cli + ' AND PF.COD_COR_FORN = ' + QuotedStr(fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.AsString);
+        fDMCadPedido.qProduto_Cli.ParamByName('COD_MATERIAL_FORN').AsString := fDMCadPedido.cdsPedidoImp_ItensCOD_PRODUTO_CLIENTE.AsString;
+        fDMCadPedido.qProduto_Cli.ParamByName('ID_FORNECEDOR').AsInteger    := fDMCadPedido.cdsPedidoImpID_CLIENTE.AsInteger;
+        fDMCadPedido.qProduto_Cli.Open;
+        if not fDMCadPedido.qProduto_Cli.IsEmpty then
+          fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.qProduto_CliNOME_MATERIAL_FORN.AsString + ' (' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString + ')'
+        else
+        begin
+          fDMCadPedido.qProdForn2.Close;
+          fDMCadPedido.qProdForn2.ParamByName('ID').AsInteger            := fDMCadPedido.cdsPedidoImp_ItensID_PRODUTO.AsInteger;
+          fDMCadPedido.qProdForn2.ParamByName('ID_FORNECEDOR').AsInteger := fDMCadPedido.cdsPedidoImpID_CLIENTE.AsInteger;
+          fDMCadPedido.qProdForn2.ParamByName('ID_COR').AsInteger        := fDMCadPedido.cdsPedidoImp_ItensID_COR.AsInteger;
+          fDMCadPedido.qProdForn2.Open;
+          if not fDMCadPedido.qProdForn2.IsEmpty then
+            fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.qProdForn2NOME_MATERIAL_FORN.AsString + ' (' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString + ')'
+          else
+          //29/05/2019
+          begin
+            vTexto := '';
+            if trim(fDMCadPedido.cdsPedidoImp_ItensNOME_COR_CLIENTE.AsString) <> '' then
+              vTexto := fDMCadPedido.cdsPedidoImp_ItensNOME_COR_CLIENTE.AsString;
+            if trim(fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.AsString) <> '' then
+              vTexto := vTexto + '(Cod.Cor:' + fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.AsString + ')';
+            if trim(fDMCadPedido.cdsPedidoImp_ItensCOD_PRODUTO_CLIENTE.AsString) <> '' then
+              vTexto := vTexto + '(Cod.Cli:' + fDMCadPedido.cdsPedidoImp_ItensCOD_PRODUTO_CLIENTE.AsString + ')';
+            fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString + ' ' + vTexto;
+            if (trim(fDMCadPedido.cdsPedidoImp_ItensNOME_COR_CLIENTE.AsString) = '') and (trim(fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString) <> '') then
+              fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.mEtiqueta_NavNome_Produto.AsString + ' ' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString;
+          end;
+          //**************
+        end;
+      end
+      else
       if (fDMCadPedido.cdsPedidoImpIMP_COR_CLIENTE.AsString = 'S') and (fDMCadPedido.cdsPedidoImp_ItensID_COR.AsInteger > 0) and
          (fDMCadPedido.cdsPedidoImp_ItensCOD_COR_CLIENTE.AsString <> '') then
       begin
@@ -2435,6 +2551,9 @@ begin
         fDMCadPedido.mEtiqueta_NavNome_Produto.AsString := fDMCadPedido.mEtiqueta_NavNome_Produto.AsString + ' ' + fDMCadPedido.cdsPedidoImp_ItensNOME_COR_COMBINACAO.AsString;
       fDMCadPedido.mEtiqueta_NavTamanho.AsString      := fDMCadPedido.cdsPedidoImp_ItensTAMANHO.AsString;
       fDMCadPedido.mEtiqueta_NavNumOS.AsString        := fDMCadPedido.cdsPedidoImp_ItensNUMOS.AsString;
+      //08/05/2019  incluido a fábrica
+      if (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S') and (trim(fDMCadPedido.cdsPedidoImp_ItensFABRICA.AsString) <> '') then
+        fDMCadPedido.mEtiqueta_NavNumOS.AsString := fDMCadPedido.cdsPedidoImp_ItensFABRICA.AsString + '-' + fDMCadPedido.mEtiqueta_NavNumOS.AsString;
       fDMCadPedido.mEtiqueta_NavUnidade.AsString      := fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString;
       if fDMCadPedido.cdsPedidoImp_ItensENCERADO.AsString = 'S' then
       begin
@@ -2459,15 +2578,32 @@ begin
         fDMCadPedido.mEtiqueta_NavNome_Cliente.AsString   := fDMCadPedido.cdsPedidoImpNOME_CLI.AsString;
         fDMCadPedido.mEtiqueta_NavFantasia_Cli.AsString   := fDMCadPedido.cdsPedidoImpFANTASIA_CLI.AsString;
         fDMCadPedido.mEtiqueta_NavPedido_Cliente.AsString := fDMCadPedido.cdsPedidoImpPEDIDO_CLIENTE.AsString;
-        if vQtdAux > vQtdPac then
-          fDMCadPedido.mEtiqueta_NavQtd.AsInteger := vQtdPac
-        else
-          fDMCadPedido.mEtiqueta_NavQtd.AsInteger := vQtdAux;
-        //fDMCadPedido.mEtiqueta_Nav.Post;
-        vQtdAux := vQtdAux - vQtdPac;
-        if vQtdAux <= 0 then
-          vQtdDiv := i;
       end;
+
+      if vQtdAux > vQtdPac then
+        fDMCadPedido.mEtiqueta_NavQtd.AsFloat := Trunc(vQtdPac)
+      else
+        fDMCadPedido.mEtiqueta_NavQtd.AsFloat := vQtdAux;
+      //fDMCadPedido.mEtiqueta_Nav.Post;
+      vQtdAux := vQtdAux - vQtdPac;
+      if vQtdAux <= 0 then
+        vQtdDiv := i;
+
+      if (Trim(fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString) <> '') and
+         (fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString <> fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString) and
+         (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat)) > 0) then
+      begin
+        fDMCadPedido.mEtiqueta_NavQtd2.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadPedido.mEtiqueta_NavQtd.AsFloat * fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat));
+        fDMCadPedido.mEtiqueta_NavUnidade_Prod.AsString := fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString;
+      end
+      else
+      begin
+        //fDMCadPedido.mEtiqueta_NavQtd2.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.mEtiqueta_NavQtd.AsFloat));
+        //fDMCadPedido.mEtiqueta_NavUnidade_Prod.AsString := fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString;
+        fDMCadPedido.mEtiqueta_NavQtd2.AsInteger := 0;
+        fDMCadPedido.mEtiqueta_NavUnidade_Prod.Clear;
+      end;
+
       if fDMCadPedido.mEtiqueta_Nav.State in [dsEdit,dsInsert] then
         fDMCadPedido.mEtiqueta_Nav.Post;
     end;
@@ -2482,7 +2618,7 @@ var
   i: Integer;
   F: TextFile;
   vTexto: String;
-  vArq: string;      
+  vArq: string;
 Const
   cINegrito = #27#71;
   cFNegrito = #27#72;
@@ -3452,7 +3588,7 @@ begin
     FreeAndNil(fDMConsPedido);
   end
   else
-  if (Key = Vk_F4) and not(fDMCadPedido.cdsPedido_Consulta.IsEmpty) then
+  if (Key = Vk_F4) and not(fDMCadPedido.cdsPedido_Consulta.IsEmpty) and (fDMCadPedido.qParametros_PedUSA_DTEXPEDICAO.AsString = 'S') then
   begin
     if not(lblInfDtExpedicao.Visible) or not(lblInfDtExpedicao.Enabled) then
       MessageDlg('*** Usuário não autorizado!', mtError, [mbOk], 0)
@@ -3493,6 +3629,8 @@ procedure TfrmCadPedido.btnRecalcularClick(Sender: TObject);
 var
   vTotal, vPendente: Real;
 begin
+  if not pnlTotal.Visible then
+    exit;
   SMDBGrid1.DisableScroll;
   vTotal    := 0;
   vPendente := 0;
@@ -3693,7 +3831,7 @@ end;
 procedure TfrmCadPedido.prc_scroll2(DataSet: TDataSet);
 begin
   PedidoSaldo1.Enabled := (fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'P');
-  btnExcluir.Enabled   := ((fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'N') or (fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'N'));
+  btnExcluir.Enabled   := ((fDMCadPedido.cdsPedido_ConsultaFATURADO.AsString = 'N') or (fDMCadPedido.cdsPedido_ConsultaFATURADO.IsNull))
 end;
 
 procedure TfrmCadPedido.prc_Controle_Imp(Tipo_Imp: String);
@@ -4300,6 +4438,158 @@ begin
     end;
     fDMCadPedido.qFilial_Relatorio_Menu.Next
   end;
+end;
+
+procedure TfrmCadPedido.RtuloComEmbalagemRolo1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
+    exit;
+
+  prc_Posiciona_Imp;
+
+  prc_Monta_Etiqueta_Calcado('A',1);
+
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Etiq_Rotulo_Embalagem.fr3';
+    
+  if FileExists(vArq) then
+    fDMCadPedido.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadPedido.frxReport1.ShowReport;
+
+end;
+
+procedure TfrmCadPedido.EtiquetaA4ItensPersonalizado1Click(
+  Sender: TObject);
+var
+  vArq : String;
+begin
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
+    exit;
+
+  prc_Posiciona_Imp;
+  prc_Monta_Etiqueta_Calcado('AE');
+
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Etiqueta_Itens_ACJoias.fr3';
+  if FileExists(vArq) then
+  begin
+    fDMCadPedido.frxReport1.Report.LoadFromFile(vArq);
+    fDMCadPedido.frxReport1.ShowReport;
+  end
+  else
+    ShowMessage('Relatorio não localizado! ' + vArq);
+//  FreeAndNil(frmCadPedido);
+end;
+
+procedure TfrmCadPedido.SalvarPedido1Click(Sender: TObject);
+var
+  vCaminhoArquivo : String;
+begin
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
+    exit;
+  vCaminhoArquivo := SQLLocate('PARAMETROS_PED','ID','END_PDF_PEDIDO','1');
+  if vCaminhoArquivo = '' then
+  begin
+    ShowMessage('Caminho do arquivo não definido nos parâmetros');
+    Exit;
+  end;
+  prc_Posiciona_Pedido;
+  prc_Posiciona_Imp;
+
+  if fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S' then
+  begin
+    fRelPedido_JW              := TfRelPedido_JW.Create(Self);
+    fRelPedido_JW.vImp_Foto    := ckImpFoto.Checked;
+    fRelPedido_JW.vImpPreco    := ckImpPreco.Checked;
+    fRelPedido_JW.vImp_Peso    := ckImpPeso.Checked;
+    fRelPedido_JW.fDMCadPedido := fDMCadPedido;
+    fRelPedido_JW.RLPDFFilter1.FileName := vCaminhoArquivo + '\Pedido_' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString + '.pdf';
+    fRelPedido_JW.RLReport1.SaveToFile(vCaminhoArquivo + '\Pedido_' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString + '.pdf');
+    fRelPedido_JW.RLReport1.Prepare;
+    ShowMessage('Arquivo Gerado com Sucesso');
+    FreeAndNil(fRelPedido_JW);
+  end
+end;
+
+procedure TfrmCadPedido.Matricial80Colunas1Click(Sender: TObject);
+var
+  vTexto1 : String;
+  vTexto2 : String;
+begin
+  fDMCadPedido.cdsParametros.Close;
+  fDMCadPedido.cdsParametros.Open;
+  if trim(fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString) = '' then
+  begin
+    MessageDlg('*** Caminho da impressora Matricial não informado nos Parâmetros!', mtInformation, [mbOk], 0);
+    Exit;
+  end;
+
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) then
+    exit;
+
+  prc_Posiciona_Imp;
+
+  uImprimir.vPagMatricial := 0;
+  uImprimir.prc_Cabecalho_Mat(fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  vTexto1 := 'No.Pedido: ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(29,vTexto1,'D',' ');
+  vTexto2 := 'Data: ' + DateToStr(Date) + TimeToStr(Now);
+  vTexto2 := uImprimir.fnc_Monta_Tamanho(55,vTexto2,'D',' ');
+  vTexto1 := vTexto1 + vTexto2 + 'Pag: ' + IntToStr(uImprimir.vPagMatricial);
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+  vTexto1 := 'Vendedor: ' + fDMCadPedido.cdsPedidoImpNOME_VENDEDOR.AsString;
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  uImprimir.prc_Detalhe_Mat(' Cliente: ' + fDMCadPedido.cdsPedidoImpNOME_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat('Endereco: ' + fDMCadPedido.cdsPedidoImpEND_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Bairro: ' + fDMCadPedido.cdsPedidoImpBAIRRO_CLIENTE.AsString,'D',' ') + ' Cep: ' + fDMCadPedido.cdsPedidoImpCEP_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Cidade: ' + fDMCadPedido.cdsPedidoImpCIDADE_CLIENTE.AsString,'D',' ') + '  UF: ' + fDMCadPedido.cdsPedidoImpUF.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'CNPJ/CPF: ' + fDMCadPedido.cdsPedidoImpCNPJ_CPF_CLIENTE.AsString,'D',' ') + 'Fone: ' + fDMCadPedido.cdsPedidoImpDDD_CLIENTE.AsString + ' ' + fDMCadPedido.cdsPedidoImpFONE_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat(' ');
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  uImprimir.prc_Detalhe_Mat('    Qtde Unid.  Codigo Produto                                                 Marca                     Preco %Desc          Total');
+  fDMCadPedido.cdsPedidoImp_Itens.First;
+  while not fDMCadPedido.cdsPedidoImp_Itens.Eof do
+  begin
+    vTexto1 := uImprimir.fnc_Monta_Tamanho(8,FormatFloat('#,##0.00',fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat),'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(6,fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString,'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(6,fDMCadPedido.cdsPedidoImp_ItensID_PRODUTO.AsString,'D',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(55,Copy(fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString,1,55),'D',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(20,Copy(fDMCadPedido.cdsPedidoImp_ItensNOME_MARCA.AsString,1,20),'D',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(10,FormatFloat('###,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat) ,'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(5,FormatFloat('#0.00',fDMCadPedido.cdsPedidoImp_ItensPERC_DESCONTO.AsFloat) ,'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_TOTAL.AsFloat) ,'E',' ');
+    uImprimir.prc_Detalhe_Mat(vTexto1);
+
+    fDMCadPedido.cdsPedidoImp_Itens.Next;
+  end;
+
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(115,'Total Produto: (+)','E',' ') + '  '
+           + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_ITENS.AsFloat),'E',' ');
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(115,'Vlr. Desconto: (-)','E',' ') + '  '
+           + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_DESCONTO.AsFloat),'E',' ');
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(115,'Total Pedido: (=)','E',' ') + '  '
+           + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_TOTAL.AsFloat),'E',' ');
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+
+  uImprimir.prc_Rodape_Mat;
 end;
 
 end.

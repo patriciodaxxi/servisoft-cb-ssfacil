@@ -1445,6 +1445,11 @@ type
     cdsNotaServico_ConsultaENVIO_NFSE: TStringField;
     cdsNotaServico_ConsultaCIDADE: TStringField;
     cdsCidadePERMITE_CANCELAMENTO: TStringField;
+    qParametros_Com: TSQLQuery;
+    qParametros_ComCOMISSAO_DESCONTAR: TStringField;
+    qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField;
+    qParametros_ComID: TIntegerField;
+    qParametros_ComUSA_CONFIG_IND: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaServicoNewRecord(DataSet: TDataSet);
     procedure cdsNotaServicoBeforePost(DataSet: TDataSet);
@@ -1466,6 +1471,9 @@ type
     procedure prc_Gravar_NotaServico_Parc(Parcela: Integer; Data: TDateTime; Valor: Real; Dia1, Dia2 : Integer);
     procedure prc_Gravar_Financeiro(Tipo: String);
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
+
+    function fnc_Calcula_Desc_Vendedor : Real;
+
   public
     { Public declarations }
     vMSGNotaServico: String;
@@ -1816,6 +1824,7 @@ begin
   qParametros_Ped.Open;
   qParametros_Geral.Open;
   qParametros_Fin.Open;
+  qParametros_Com.Open;
 
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
@@ -2039,6 +2048,9 @@ procedure TDMCadNotaServico.Gravar_Duplicata(Tipo, TransfICMS: String; Parcela: 
                                                  //Prazo = ENT=Entrada  AVI=Avista
 var
   vAux: Integer;
+  vPerc_Base_Com : Real;
+  vVlr_Base : Real;
+  vVlrBaseAux : Real;  
 begin
   if not cdsDuplicata.Active then
     Abrir_cdsDuplicata(0);
@@ -2072,6 +2084,18 @@ begin
   cdsDuplicataVLR_COMISSAO.AsFloat        := StrToFloat(FormatFloat('0.00',0));
   cdsDuplicataPERC_COMISSAO.AsFloat       := StrToFloat(FormatFloat('0.00',0));
   cdsDuplicataPERC_BASE_COMISSAO.AsFloat  := StrToFloat(FormatFloat('0.00',100));
+  //06/05/2019 Comissão descontando o PIS
+  //08/05/2019
+  vVlrBaseAux := StrToFloat(FormatFloat('0.00',fnc_Calcula_Desc_Vendedor));
+  if StrToFloat(FormatFloat('0.00',vVlrBaseAux)) > 0 then
+  //if (qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S') and (StrToFloat(FormatFloat('0.00',cdsNotaServicoVLR_PIS_CALC.AsFloat)) > 0) then
+  begin
+    vVlr_Base := StrToFloat(FormatFloat('0.00',cdsNotaServicoVLR_DUPLICATA.AsFloat - vVlrBaseAux));
+    vPerc_Base_Com := StrToFloat(FormatFloat('0.00000',(vVlr_Base  / cdsNotaServicoVLR_DUPLICATA.AsFloat) * 100));
+    cdsDuplicataPERC_BASE_COMISSAO.AsFloat  := StrToFloat(FormatFloat('0.00',vPerc_Base_Com));
+  end;
+  //************
+
   if (cdsNotaServicoID_VENDEDOR.AsInteger > 0) and (StrToFloat(FormatFloat('0.00',cdsNotaServicoPERC_COMISSAO.AsFloat)) > 0) then
   begin
     cdsDuplicataID_VENDEDOR.AsInteger := cdsNotaServicoID_VENDEDOR.AsInteger;
@@ -3266,6 +3290,7 @@ var
   vItem_Hist: Integer;
   vID_NotaAux: Integer;
   vParcela: Integer;
+  vVlrBaseAux : Real;
 begin
   if (StrToCurr(FormatCurr('0.00',cdsNotaServicoPERC_COMISSAO.AsFloat)) <= 0) and (StrToCurr(FormatCurr('0.00',cdsNotaServicoVLR_DUPLICATA.AsFloat)) > 0) then
     exit;
@@ -3299,6 +3324,14 @@ begin
 
   fDMCadExtComissao := TDMCadExtComissao.Create(Self);
 
+  //06/05/2019
+  vVlrBaseAux := StrToFloat(FormatFloat('0.00',fnc_Calcula_Desc_Vendedor));
+  //if fDMCadExtComissao.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S' then
+  if StrToFloat(FormatFloat('0.00',vVlrBaseAux)) > 0 then
+    //vVlrBase := vVlrBase - StrToFloat(FormatFloat('0.00',cdsNotaServicoVLR_COFINS_CALC.AsFloat - cdsNotaServicoVLR_PIS_CALC.AsFloat));
+    vVlrBase := vVlrBase - StrToFloat(FormatFloat('0.00',vVlrBaseAux));
+  //**************
+
   try
     vAux := fDMCadExtComissao.fnc_Mover_Comissao('ENT',cdsNotaServicoSERIE.AsString,'',0,cdsNotaServicoDTEMISSAO_CAD.AsDateTime,
                                                    cdsNotaServicoFILIAL.AsInteger,cdsNotaServicoID_VENDEDOR.AsInteger,
@@ -3307,12 +3340,10 @@ begin
                                                    cdsNotaServicoID.AsInteger,0,
                                                    StrToCurr(FormatCurr('0.00',vVlrBase)),0,
                                                    StrToCurr(FormatCurr('0.00',cdsNotaServicoPERC_COMISSAO.AsFloat)),0,0);
-  except
-    raise;
-
+  finally
+    FreeAndNil(fDMCadExtComissao);
   end;
 
-  FreeAndNil(fDMCadExtComissao);
 end;
 
 {function TDMCadNotaServico.fnc_Busca_IBPT(Codigo_NBS: String): Real;
@@ -3610,6 +3641,74 @@ procedure TDMCadNotaServico.cdsDuplicataNewRecord(DataSet: TDataSet);
 begin
   cdsDuplicataNGR.AsString      := 'N';
   cdsDuplicataAPROVADO.AsString := 'S';
+end;
+
+function TDMCadNotaServico.fnc_Calcula_Desc_Vendedor: Real;
+var
+  sds: TSQLDataSet;
+  vVlrAux : Real;
+begin
+  Result  := 0;
+  vVlrAux := 0;
+  if cdsNotaServicoID_VENDEDOR.AsInteger <= 0 then
+    exit;
+  if qParametros_ComUSA_CONFIG_IND.AsString = 'N' then
+  begin
+    //if qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
+    // vVlrAux := .cdsNotaFiscalVLR_ICMSSUBST.AsFloat + .cdsNotaFiscalVLR_FCP_ST.AsFloat
+    //          + .cdsNotaFiscalVLR_IPI.AsFloat + .cdsNotaFiscalVLR_FRETE.AsFloat;
+    if qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S' then
+    begin
+      if cdsNotaServicoRETEM_PISCOFINS.AsString = 'S' then
+        vVlrAux := cdsNotaServicoVLR_PIS.AsFloat + cdsNotaServicoVLR_COFINS.AsFloat
+      else
+        vVlrAux := cdsNotaServicoVLR_PIS_CALC.AsFloat + cdsNotaServicoVLR_COFINS_CALC.AsFloat;
+    end;
+    Result := StrToFloat(FormatFloat('0.00',vVlrAux));
+    exit;
+  end;
+
+  sds      := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.Close;
+    sds.CommandText   := ' SELECT V.desc_frete, V.desc_ipi, V.desc_st, V.desc_pis, V.desc_cofins, V.desc_issqn '
+                       + ' FROM VENDEDOR_CONFIG V WHERE V.CODIGO = :CODIGO ';
+    sds.ParamByName('CODIGO').AsInteger := cdsNotaServicoID_VENDEDOR.AsInteger;
+    sds.Open;
+    //if (sds.FieldByName('desc_frete').AsString = 'S') then
+    //  vVlrAux := vVlrAux + .cdsNotaFiscalVLR_FRETE.AsFloat;
+    //if (sds.FieldByName('desc_ipi').AsString = 'S') then
+    //  vVlrAux := vVlrAux + .cdsNotaFiscalVLR_IPI.AsFloat;
+    //if (sds.FieldByName('desc_st').AsString = 'S') then
+    //  vVlrAux := vVlrAux + .cdsNotaFiscalVLR_ICMSSUBST.AsFloat + .cdsNotaFiscalVLR_FCP_ST.AsFloat;
+    if (sds.FieldByName('desc_pis').AsString = 'S') then
+    begin
+      if cdsNotaServicoRETEM_PISCOFINS.AsString = 'S' then
+        vVlrAux := vVlrAux + cdsNotaServicoVLR_PIS.AsFloat
+      else
+        vVlrAux := vVlrAux + cdsNotaServicoVLR_PIS_CALC.AsFloat;
+    end;
+    if (sds.FieldByName('desc_cofins').AsString = 'S') then
+    begin
+      if cdsNotaServicoRETEM_PISCOFINS.AsString = 'S' then
+        vVlrAux := vVlrAux + cdsNotaServicoVLR_COFINS.AsFloat
+      else
+        vVlrAux := vVlrAux + cdsNotaServicoVLR_COFINS_CALC.AsFloat;
+    end;
+    if (sds.FieldByName('desc_issqn').AsString = 'S') then
+    begin
+      if cdsNotaServicoISS_RETIDO.AsString = '1' then
+        vVlrAux := vVlrAux + cdsNotaServicoVLR_ISS_RETIDO.AsFloat
+      else
+        vVlrAux := vVlrAux + cdsNotaServicoVLR_ISS.AsFloat;
+    end;
+    Result := StrToFloat(FormatFloat('0.00',vVlrAux));
+  finally
+    FreeAndNil(sds);
+  end;
 end;
 
 end.

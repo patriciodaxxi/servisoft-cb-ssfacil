@@ -138,7 +138,6 @@ type
     DBEdit21: TDBEdit;
     Label47: TLabel;
     DBEdit22: TDBEdit;
-    dbrdgEncerado: TDBRadioGroup;
     Label48: TLabel;
     DBEdit24: TDBEdit;
     dbedtVlrTotal: TDBEdit;
@@ -151,6 +150,9 @@ type
     dbckDiferenca_ICMS: TDBCheckBox;
     Label23: TLabel;
     DBEdit6: TDBEdit;
+    Label24: TLabel;
+    DBEdit8: TDBEdit;
+    dbrdgEncerado: TDBRadioGroup;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -216,6 +218,7 @@ type
     procedure DBEdit2Exit(Sender: TObject);
     procedure DBEdit2Enter(Sender: TObject);
     procedure DBEdit5Exit(Sender: TObject);
+    procedure pnlCorExit(Sender: TObject);
   private
     { Private declarations }
     ffrmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto;
@@ -317,7 +320,7 @@ var
   vCODCFOP_Aux: String;
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
-
+  fDMCadPedido.prc_Abrir_Produto;
   vPreco_Pos := 0;
   //Tamanhos
   if fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S' then
@@ -499,6 +502,8 @@ begin
   //22/10/2018
   dbckDiferenca_ICMS.Visible := ((copy(fDMCadPedido.cdsPedido_ItensCODCFOP.AsString,1,1) = '6') and (fDMCadPedido.cdsCFOPSUBSTITUICAO_TRIB.AsString <> 'S'));
 
+  Label24.Visible := (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S');
+  DBEdit8.Visible := (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S');
 end;
 
 procedure TfrmCadPedido_Itens.Panel2Enter(Sender: TObject);
@@ -808,21 +813,33 @@ begin
     vPrecoAux := StrToFloat(FormatFloat('0.00000',vPreco_Pos))
   else
   //24/05/2018  IF para informar se usa ou não a tabela de preço no pedido
-  if (fDMCadPedido.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger > 0) then
+  if ((fDMCadPedido.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger > 0)) or (fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0) then
   begin
-    if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger)
+    //19/06/2019
+    //DMUtil := TDMUtil.Create(Self);
+    if (fDMCadPedido.qParametros_PedUSA_TAB_PRECO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger > 0) then
+    begin
+      if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
+        vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,fDMCadPedido.cdsPedido_ItensENCERADO.AsString)
+      else
+        vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,fDMCadPedido.cdsPedido_ItensENCERADO.AsString);
+    end
     else
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsPedidoID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0);
+    if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0 then  //23/05/2017  Foi alterado para buscar por Cor
+    begin
+      if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
+        vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,fDMCadPedido.cdsPedido_ItensENCERADO.AsString)
+      else
+        vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,fDMCadPedido.cdsPedido_ItensENCERADO.AsString);
+    end;
+    //19/06/2019
+    //FreeAndNil(DMUtil);
   end
   else
-  if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0 then  //23/05/2017  Foi alterado para buscar por Cor
-  begin
-    if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,fDMCadPedido.cdsPedido_ItensID_COR.AsInteger)
-    else
-      vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0);
-  end;
+  if ((fDMCadPedido.cdsPedido_ItensENCERADO.AsString = 'S') and (fDMCadPedido.qParametros_ProdUSA_TAB_PRECO_ENC.AsString = 'S'))
+    or ((fDMCadPedido.cdsPedido_ItensENCERADO.AsString = 'G') and (fDMCadPedido.qParametros_ProdUSA_TAB_PRECO_ENG.AsString = 'S')) then
+    MessageDlg('*** Não foi informado a tabela de Preço no Cliente ou no Pedido!' + #13 + '    Opção quando Encerado ou Engomado.' , mtWarning, [mbOk], 0);
+
   if StrToFloat(FormatFloat('0.0000',vPrecoAux)) > 0 then
     fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.000000',vPrecoAux))
   else
@@ -1515,6 +1532,8 @@ begin
   prc_Abrir_Combinacao;
   if (vID_Produto_Ant <> fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger) or (trim(fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString) = '') then
     fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := RxDBLookupCombo2.Text;
+  if fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger > 0 then
+    prc_Estoque(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
 end;
 
 procedure TfrmCadPedido_Itens.SpeedButton8Click(Sender: TObject);
@@ -2498,6 +2517,7 @@ function TfrmCadPedido_Itens.fnc_Verificar_Cod_Prod_Cli: Boolean;
 begin
   Result := False;
   fDMCadPedido.qProduto_Cli.Close;
+  fDMCadPedido.qProduto_Cli.SQL.Text := fDMCadPedido.ctqProduto_Cli;
   fDMCadPedido.qProduto_Cli.ParamByName('COD_MATERIAL_FORN').AsString := Edit2.Text;
   fDMCadPedido.qProduto_Cli.ParamByName('ID_FORNECEDOR').AsInteger    := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger;
   fDMCadPedido.qProduto_Cli.Open;
@@ -2565,7 +2585,7 @@ begin
     if (fDMCadPedido.qParametros_PedUSA_UNIDADE_VENDA.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensUNIDADE.AsString <> fDMCadPedido.cdsPedido_ItensUNIDADE_PROD.AsString) then
       fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsFloat := StrToFloat(FormatFloat('0.0000',fnc_Retorna_Qtd_UConv(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,
                                                                    fDMCadPedido.cdsPedido_ItensUNIDADE.AsString)));
-    if fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsInteger <= 0 then
+    if fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsFloat <= 0 then
       fDMCadPedido.cdsPedido_ItensCONV_UNIDADE.AsInteger := 1;
   end;
 end;
@@ -2716,6 +2736,12 @@ begin
   vVlrAux := StrToFloat(FormatFloat('0.0000',vVlrAux / vIPIAux));
   fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.0000',vVlrAux));
   prc_Calcular_VlrItens;
+end;
+
+procedure TfrmCadPedido_Itens.pnlCorExit(Sender: TObject);
+begin
+  if fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger > 0 then
+    prc_Estoque(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
 end;
 
 end.

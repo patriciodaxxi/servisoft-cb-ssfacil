@@ -178,6 +178,22 @@ type
     cdsSetorPrincipalNOME: TStringField;
     sdsProcessoCONTROLE_MAQUINA: TStringField;
     cdsProcessoCONTROLE_MAQUINA: TStringField;
+    sdsProcessoMATERIAL_KG: TStringField;
+    cdsProcessoMATERIAL_KG: TStringField;
+    sdsProcessoUSA_CARGA: TStringField;
+    cdsProcessoUSA_CARGA: TStringField;
+    sdsProcessoUNIDADE: TStringField;
+    cdsProcessoUNIDADE: TStringField;
+    sdsSetor_ProcUNIDADE: TStringField;
+    cdsSetor_ProcUNIDADE: TStringField;
+    sdsUnidade: TSQLDataSet;
+    cdsUnidade: TClientDataSet;
+    cdsUnidadeUNIDADE: TStringField;
+    cdsUnidadeNOME: TStringField;
+    dsUnidade: TDataSource;
+    dspUnidade: TDataSetProvider;
+    sdsProcessoGERAR_ESTOQUE_TING: TStringField;
+    cdsProcessoGERAR_ESTOQUE_TING: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -288,6 +304,7 @@ begin
   qParametros_Lote.Open;
   qParametros_Geral.Open;
   cdsPosicao.Open;
+  cdsUnidade.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do

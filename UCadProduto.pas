@@ -778,6 +778,17 @@ type
     btnAjustarProcesso: TBitBtn;
     Label250: TLabel;
     Edit13: TEdit;
+    Label251: TLabel;
+    DBEdit160: TDBEdit;
+    Label252: TLabel;
+    DBEdit161: TDBEdit;
+    Label253: TLabel;
+    DBEdit162: TDBEdit;
+    btnCA: TNxButton;
+    lblEspessura: TLabel;
+    dedtEspessura: TDBEdit;
+    RxDBComboBox12: TRxDBComboBox;
+    Label254: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -983,6 +994,8 @@ type
     procedure ListacomCdigodeBarras1Click(Sender: TObject);
     procedure btnAtualizar_ProcClick(Sender: TObject);
     procedure btnAjustarProcessoClick(Sender: TObject);
+    procedure btnCAClick(Sender: TObject);
+    procedure RxDBComboBox10Change(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1094,9 +1107,9 @@ implementation
 
 uses rsDBUtils, uUtilPadrao, URelProduto, URelProduto_Grupo, USel_Grupo, USel_Plano_Contas, DmdDatabase, UCadProduto_Processo,
   USel_EnqIPI, USel_CodCest, VarUtils, UCadProduto_Serie, UCadProduto_Cad_Ant, UCadProcesso_Grupo, USel_ContaOrc, USel_Produto,
-  uCopiar_Comb_Agrupado, UCadProduto_GradeNum, UCadProduto_Lote, USel_Produto_Lote, UCadProduto_Larg,
-  UAltProd, UCadProduto_GradeRefTam, USel_Maquina,
-  UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu, UCadProduto_ST;
+  uCopiar_Comb_Agrupado, UCadProduto_GradeNum, UCadProduto_Lote, USel_Produto_Lote, UCadProduto_Larg, UCadProduto_GradeRefTam,
+  USel_Maquina, UAltProd, UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu, UCadProduto_ST, uConsProduto_Compras,
+  UCadProduto_CA;
 
 {$R *.dfm}
 
@@ -1431,6 +1444,9 @@ begin
     if fDMCadProduto.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
       fDMCadProduto.cdsProduto_Lote.ApplyUpdates(0);
 
+    if fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+      fDMCadProduto.cdsProduto_CA.ApplyUpdates(0);
+
     if (fDMCadProduto.qParametrosUSA_COD_BARRAS_PROPRIO.AsString = 'S') and (fDMCadProduto.qParametros_ProdINF_CBARRA_MANUAL.AsString = 'S') then
       fDMCadProduto.cdsCBarra2.ApplyUpdates(0);
 
@@ -1573,6 +1589,8 @@ begin
   label12.Enabled  := not(label12.Enabled);
   label24.Enabled  := not(label24.Enabled);
   Label114.Enabled := (Label4.Enabled);
+  lblEspessura.Visible := SQLLocate('PARAMETROS','ID','EMPRESA_SUCATA','1') = 'S';
+  dedtEspessura.Visible := SQLLocate('PARAMETROS','ID','EMPRESA_SUCATA','1') = 'S';
 
   TS_Engenharia.TabVisible := (fDMCadProduto.qParametrosUSA_CONSUMO.AsString = 'S');
   TS_Grade.TabVisible      := (fDMCadProduto.qParametrosUSA_GRADE.AsString = 'S');
@@ -1775,7 +1793,7 @@ begin
     pnl_Eng_Processo.Visible := False;
 
   Label118.Visible    := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
-  StaticText1.Caption := 'Duplo clique para consultar     F3 Consultar Cadastro Anterior';
+  StaticText1.Caption := 'Duplo clique para alterar  |  F3 Consultar Cadastro Anterior  |  F6 Histórico  |  F8 Compras';
   if fDMCadProduto.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
     StaticText1.Caption := StaticText1.Caption + '   F4 Consulta Lotes';
 
@@ -1844,6 +1862,11 @@ begin
 
   if fDMCadProduto.qFilial_STRetCONTADOR.AsInteger > 0 then
     StaticText1.Caption := StaticText1.Caption + '  | F7 ST Entrada ';
+
+  DBEdit158.ReadOnly := (fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S');
+  if fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+    DBEdit158.Color := clBtnFace;
+  btnCA.Visible := (fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S');
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
@@ -2347,10 +2370,21 @@ var
 begin
   if RzPageControl1.ActivePage = TS_Cadastro then
   begin
+    if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) or
+          (fDMCadProduto.cdsProduto_ConsultaID.AsInteger <= 0) then
+      exit;
+
     vEstoqueLoteTotal := 0;
-    prc_Consultar_Estoque_Lote(fDMCadProduto.cdsProduto_ConsultaID.AsInteger);
-    if (fDMCadProduto.cdsProduto_Consulta.Active) and not(fDMCadProduto.cdsProduto_Consulta.IsEmpty) then
-      Label73.Caption := FormatFloat('###,###,##0.####',fDMCadProduto.cdsProduto_ConsultaQTD_ESTOQUE.AsFloat);
+    if not (fDMCadProduto.cdsProduto.State in [dsedit,dsinsert]) then
+    begin
+      prc_Posiciona_Produto;
+      if (fDMCadProduto.cdsProduto.Active) and not(fDMCadProduto.cdsProduto.IsEmpty) then
+        Label73.Caption := FormatFloat('###,###,##0.####',fDMCadProduto.cdsProduto_consultaQTD_ESTOQUE.AsFloat);
+    end
+    else
+      Label73.Caption := FormatFloat('###,###,##0.####',0);
+
+    prc_Consultar_Estoque_Lote(fDMCadProduto.cdsProdutoID.AsInteger);
     if (vEstoqueLoteTotal > 0) then
       Label73.Caption := FormatFloat('###,###,##0.####',vEstoqueLoteTotal);
     RzPageControl2.ActivePage := TabSheet1;
@@ -2360,14 +2394,8 @@ begin
       TS_PCP.TabVisible          := ((fDMCadProduto.qParametrosEMPRESA_INJETADO.AsString = 'S') or (fDMCadProduto.qParametrosEMPRESA_CARTONAGEM.AsString = 'S'));
       TS_Injetados.TabVisible    := (fDMCadProduto.qParametrosEMPRESA_INJETADO.AsString = 'S');
       TS_Cartonagem.TabVisible   := (fDMCadProduto.qParametrosEMPRESA_CARTONAGEM.AsString = 'S');
-      TS_Ativo.TabVisible        := ((fDMCadProduto.qParametrosUSA_SPED.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaSPED_TIPO_ITEM.AsString = '08')) ;
+      TS_Ativo.TabVisible        := ((fDMCadProduto.qParametrosUSA_SPED.AsString = 'S') and (fDMCadProduto.cdsProdutoSPED_TIPO_ITEM.AsString = '08')) ;
       RZPageControl3.ActivePage  := TS_Fiscal;
-      TS_Balanca.TabVisible      := (fDMCadProduto.cdsProdutoUSA_NA_BALANCA.AsString = 'S');
-      //Cleomar 18/12/2018
-      //TS_Maquina.TabVisible      := (fDMCadProduto.qParametros_ProdUSA_MAQUINA.AsString = 'S');
-      //TS_Ficha_Textil.TabVisible := (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
-      //TS_Ficha_Tear.TabVisible        := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaTIPO_PRODUCAO.AsString = 'E'));
-      //TS_Ficha_Trancadeira.TabVisible := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProduto_ConsultaTIPO_PRODUCAO.AsString = 'T'));
       TS_Maquina.TabVisible           := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
       TS_Ficha_Textil.TabVisible      := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
       TS_Ficha_Tear.TabVisible        := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
@@ -2377,15 +2405,19 @@ begin
       else
       if TS_Ficha_Tear.TabVisible then
         RzPageControl6.ActivePage := TS_Ficha_Tear;
+
+      Label254.Visible       := (fDMCadProduto.cdsProdutoTIPO_MAT.AsString = 'A');
+      RxDBComboBox12.Visible := (fDMCadProduto.cdsProdutoTIPO_MAT.AsString = 'A');
+
     end;
     DBEdit1Change(Sender);
     edtCod_EnqIPI.Clear;
     prc_Abrir_EnqIPI(fDMCadProduto.cdsProdutoID_ENQIPI.AsInteger);
     edtCod_EnqIPI.Text := fDMCadProduto.qEnqIPICODIGO.AsString;
 
-    lblDescLargura.Caption := FormatFloat('0.000#',fDMCadProduto.cdsProduto_ConsultaLARGURA.AsFloat) + ' x '
-                            + FormatFloat('0.000#',fDMCadProduto.cdsProduto_ConsultaALTURA.AsFloat) + ' x '
-                            + FormatFloat('0.0000',fDMCadProduto.cdsProduto_ConsultaESPESSURA.AsFloat);
+    lblDescLargura.Caption := FormatFloat('0.000#',fDMCadProduto.cdsProdutoLARGURA.AsFloat) + ' x '
+                            + FormatFloat('0.000#',fDMCadProduto.cdsProdutoALTURA.AsFloat) + ' x '
+                            + FormatFloat('0.0000',fDMCadProduto.cdsProdutoESPESSURA.AsFloat);
   end
   else
     fDMCadProduto.cdsProduto_Serie.Close;
@@ -2393,10 +2425,10 @@ begin
   begin
     if RzPageControl1.ActivePage = TS_Cadastro then
     begin
-      if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) or
+      if not(fDMCadProduto.cdsProduto_consulta.Active) or (fDMCadProduto.cdsProduto_consulta.IsEmpty) or
             (fDMCadProduto.cdsProduto_ConsultaID.AsInteger <= 0) then
         exit;
-      prc_Posiciona_Produto;
+      TS_Balanca.TabVisible      := (fDMCadProduto.cdsProdutoUSA_NA_BALANCA.AsString = 'S');
       if btnRecalcular_Mat.Enabled then
         ceVlr_Total_Mat.Value := fDMCadProduto.fnc_Calcular_Mat;
       RZPageControl3.ActivePage := TS_Fiscal;
@@ -2503,6 +2535,8 @@ begin
   end;
   if fDMCadProduto.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
     fDMCadProduto.prc_Abrir_Produto_Lote(fDMCadProduto.cdsProdutoID.AsInteger);
+  if fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+    fDMCadProduto.prc_Abrir_Produto_CA(fDMCadProduto.cdsProdutoID.AsInteger);
   if (fDMCadProduto.qParametrosUSA_COD_BARRAS_PROPRIO.AsString = 'S') and (fDMCadProduto.qParametros_ProdINF_CBARRA_MANUAL.AsString = 'S') then
     fDMCadProduto.prc_Abrir_CBarra(fDMCadProduto.cdsProdutoID.AsInteger);
 
@@ -2512,6 +2546,10 @@ begin
   //27/02/2017
   if (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N')  then
     fDMCadProduto.prc_Abrir_Produto_Processo(fDMCadProduto.cdsProdutoID.AsInteger);
+
+  if (fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString <> 'N')  then
+    fDMCadProduto.prc_Abrir_Produto_CA(fDMCadProduto.cdsProdutoID.AsInteger);
+
   if fDMCadProduto.cdsProdutoID_MATERIAL_CRU.AsInteger > 0 then
     prc_Mostra_Material_Cru
   else
@@ -3291,6 +3329,8 @@ begin
     if fDMCadProduto.qParametrosUSA_CARIMBO.AsString = 'S' then
       fDMCadProduto.prc_Abrir_Produto_Carimbo(fDMCadProduto.cdsProdutoID.AsInteger);
   end;
+  if fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+    fDMCadProduto.prc_Abrir_Produto_CA(fDMCadProduto.cdsProdutoID.AsInteger);
   prc_Combinacao;
   DBCheckBox17.Visible := (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'P');
   TS_Ativo.TabVisible  := (RxDBComboBox7.ItemIndex = 4);
@@ -4504,6 +4544,13 @@ begin
     ffrmConsEstoque_Mov.ShowModal;
     FreeAndNil(frmConsEstoque_Mov);
     ceID.Clear;
+  end;
+  if (Key = Vk_F8) and not(fDMCadProduto.cdsProduto_Consulta.IsEmpty) then
+  begin
+    frmConsProduto_Compras := TfrmConsProduto_Compras.Create(Self);
+    frmConsProduto_Compras.vIdProd := fDMCadProduto.cdsProduto_ConsultaID.AsInteger;
+    frmConsProduto_Compras.ShowModal;
+    FreeAndNil(frmConsProduto_Compras);
   end;
 end;
 
@@ -6003,6 +6050,20 @@ begin
     fDMCadProduto.cdsPosicao_Proc.Next;
   end;
 
+end;
+
+procedure TfrmCadProduto.btnCAClick(Sender: TObject);
+begin
+  frmCadProduto_CA := TfrmCadProduto_CA.Create(self);
+  frmCadProduto_CA.fDMCadProduto := fDMCadProduto;
+  frmCadProduto_CA.ShowModal;
+  FreeAndNil(frmCadProduto_CA);
+end;
+
+procedure TfrmCadProduto.RxDBComboBox10Change(Sender: TObject);
+begin
+  Label254.Visible       := (RxDBComboBox10.ItemIndex = 0);
+  RxDBComboBox12.Visible := (RxDBComboBox10.ItemIndex = 0);
 end;
 
 end.

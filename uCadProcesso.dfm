@@ -138,7 +138,11 @@ object frmCadProcesso: TfrmCadProcesso
             Visible = True
           end
           item
+            Alignment = taCenter
             Expanded = False
+            FieldName = 'ESTOQUE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Estoque'
             Visible = True
           end>
       end
@@ -778,7 +782,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object Label9: TLabel
           Left = 16
-          Top = 312
+          Top = 360
           Width = 243
           Height = 13
           Alignment = taRightJustify
@@ -786,7 +790,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object Label10: TLabel
           Left = 7
-          Top = 335
+          Top = 383
           Width = 252
           Height = 13
           Alignment = taRightJustify
@@ -833,7 +837,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object RzGroupBox1: TRzGroupBox
           Left = 128
-          Top = 226
+          Top = 274
           Width = 451
           Height = 65
           BorderColor = clNavy
@@ -1013,7 +1017,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object RxDBLookupCombo1: TRxDBLookupCombo
           Left = 263
-          Top = 305
+          Top = 353
           Width = 329
           Height = 21
           DropDownCount = 8
@@ -1026,7 +1030,7 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object RxDBLookupCombo2: TRxDBLookupCombo
           Left = 263
-          Top = 328
+          Top = 376
           Width = 329
           Height = 21
           DropDownCount = 8
@@ -1089,13 +1093,49 @@ object frmCadProcesso: TfrmCadProcesso
         end
         object DBCheckBox9: TDBCheckBox
           Left = 376
-          Top = 192
+          Top = 191
           Width = 281
           Height = 17
           Caption = 'Controle Por M'#225'quina'
           DataField = 'CONTROLE_MAQUINA'
           DataSource = DmCadSetor.dsProcesso
           TabOrder = 17
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object DBCheckBox10: TDBCheckBox
+          Left = 376
+          Top = 211
+          Width = 281
+          Height = 17
+          Caption = 'Consultar Material Por KG'
+          DataField = 'MATERIAL_KG'
+          DataSource = DmCadSetor.dsProcesso
+          TabOrder = 18
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object DBCheckBox11: TDBCheckBox
+          Left = 376
+          Top = 230
+          Width = 281
+          Height = 17
+          Caption = 'Usa Carga'
+          DataField = 'USA_CARGA'
+          DataSource = DmCadSetor.dsProcesso
+          TabOrder = 19
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object DBCheckBox12: TDBCheckBox
+          Left = 376
+          Top = 246
+          Width = 281
+          Height = 17
+          Caption = 'Gerar Materiais Para o Tingimento (Controle)'
+          DataField = 'GERAR_ESTOQUE_TING'
+          DataSource = DmCadSetor.dsProcesso
+          TabOrder = 20
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end

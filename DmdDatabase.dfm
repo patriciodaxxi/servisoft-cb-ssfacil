@@ -30,8 +30,8 @@ object dmDatabase: TdmDatabase
       'Interbase TransIsolation=ReadCommited'
       'Trim Char=False')
     VendorLib = 'gds32.dll'
-    Left = 38
-    Top = 24
+    Left = 47
+    Top = 13
   end
   object Decoder64: TIdDecoderMIME
     FillChar = '='
@@ -54,10 +54,10 @@ object dmDatabase: TdmDatabase
     LoginPrompt = False
     Params.Strings = (
       'DriverName=Interbase'
-      'Database=D:\Fontes\$Servisoft\Bases\SSFacil\AtualizaFDB.fdb'
+      'Database=firebird09-farm51.kinghost.net:/firebird/servisoft1.gdb'
       'RoleName=RoleName'
-      'User_Name=sysdba'
-      'Password=masterkey'
+      'User_Name=servisoft1'
+      'Password=campobom'
       'ServerCharSet='
       'SQLDialect=3'
       'BlobSize=-1'

@@ -207,7 +207,7 @@ object frmIBPT_Atualiza: TfrmIBPT_Atualiza
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 6
+    ColCount = 7
     RowCount = 2
     Columns = <
       item
@@ -224,6 +224,7 @@ object frmIBPT_Atualiza: TfrmIBPT_Atualiza
         Title.Alignment = taCenter
         Title.Caption = 'IBPT'
         Title.Color = 16777181
+        Width = 60
         Visible = True
       end
       item
@@ -250,6 +251,15 @@ object frmIBPT_Atualiza: TfrmIBPT_Atualiza
         Title.Caption = 'Nome'
         Title.Color = 16777181
         Width = 400
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CONTADOR'
+        Title.Alignment = taCenter
+        Title.Caption = 'Usado Em Produtos'
+        Title.Color = 16777181
+        Width = 63
         Visible = True
       end>
   end

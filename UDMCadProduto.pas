@@ -1933,6 +1933,28 @@ type
     cdsProduto_ConsumoNOME_POSICAO: TStringField;
     sdsProduto_Comb_MatNOME_POSICAO: TStringField;
     cdsProduto_Comb_MatNOME_POSICAO: TStringField;
+    sdsProdutoQTD_POR_ROTULO: TFloatField;
+    cdsProdutoQTD_POR_ROTULO: TFloatField;
+    sdsProdutoPERC_ICMS_NFCE: TFloatField;
+    cdsProdutoPERC_ICMS_NFCE: TFloatField;
+    sdsProduto_CA: TSQLDataSet;
+    dspProduto_CA: TDataSetProvider;
+    cdsProduto_CA: TClientDataSet;
+    dsProduto_CA: TDataSource;
+    sdsProduto_CAID: TIntegerField;
+    sdsProduto_CAITEM: TIntegerField;
+    sdsProduto_CANUM_CA: TStringField;
+    sdsProduto_CADATA: TDateField;
+    cdsProduto_CAID: TIntegerField;
+    cdsProduto_CAITEM: TIntegerField;
+    cdsProduto_CANUM_CA: TStringField;
+    cdsProduto_CADATA: TDateField;
+    qParametros_ProdUSA_CA_HIST: TStringField;
+    cdsMaterialID_MATERIAL_CRU: TIntegerField;
+    sdsProdutoTIPO_ALGODAO: TStringField;
+    cdsProdutoTIPO_ALGODAO: TStringField;
+    cdsProduto_ConsultaTIPO_MAT: TStringField;
+    cdsProduto_ConsultaTIPO_ALGODAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2022,6 +2044,7 @@ type
     procedure prc_Inserir_ProdComissao;
     procedure prc_Inserir_ProdComissao_Vend;
     procedure prc_Inserir_ProdLote;
+    procedure prc_Inserir_ProdCA;
     procedure prc_Inserir_ProdCarimbo;
     procedure prc_Inserir_ProdGradeNum;
     procedure prc_Abrir_Material;
@@ -2038,6 +2061,7 @@ type
     procedure prc_Abrir_Comissao(ID: Integer);
     procedure prc_Abrir_Comissao_Vend(ID: Integer);
     procedure prc_Abrir_Produto_Lote(ID: Integer);
+    procedure prc_Abrir_Produto_CA(ID: Integer);
     procedure prc_Abrir_CBarra(ID: Integer);
 
     procedure prc_Abrir_Produto_Comb(ID: Integer);
@@ -2117,6 +2141,8 @@ begin
   end;
   if qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
     prc_Abrir_Produto_Lote(cdsProdutoID.AsInteger);
+  if qParametros_ProdUSA_CA_HIST.AsString = 'S' then
+    prc_Abrir_Produto_CA(cdsProdutoID.AsInteger);
   if qParametrosID_LOCAL_ESTOQUE_PROD.AsInteger > 0 then
     cdsProdutoID_LOCAL_ESTOQUE_PROD.AsInteger := qParametrosID_LOCAL_ESTOQUE_PROD.AsInteger;
   if (qParametrosUSA_CARIMBO.AsString = 'S') and (cdsProdutoTIPO_REG.AsString = 'P') then
@@ -2168,6 +2194,7 @@ begin
       cdsProduto_GradeNum.First;
       while not cdsProduto_GradeNum.Eof do
         cdsProduto_GradeNum.Delete;
+      cdsProduto_GradeNum.ApplyUpdates(0);
     end;
     if cdsProduto_Comb.Active then
     begin
@@ -2178,6 +2205,7 @@ begin
         while not cdsProduto_Comb_Mat.Eof do
           cdsProduto_Comb_Mat.Delete;
         cdsProduto_Comb.Delete;
+        cdsProduto_Comb.ApplyUpdates(0);
       end;
     end;
     if cdsProduto_Cor.Active then
@@ -2185,6 +2213,7 @@ begin
       cdsProduto_Cor.First;
       while not cdsProduto_Cor.Eof do
         cdsProduto_Cor.Delete;
+      cdsProduto_Cor.ApplyUpdates(0);
     end;
     if cdsProduto_Carimbo.Active then
     begin
@@ -2205,12 +2234,14 @@ begin
       cdsProduto_Emb.First;
       while not cdsProduto_Emb.Eof do
         cdsProduto_Emb.Delete;
+      cdsProduto_Emb.ApplyUpdates(0);
     end;
     if cdsProduto_Atelier.Active then
     begin
       cdsProduto_Atelier.First;
       while not cdsProduto_Atelier.Eof do
         cdsProduto_Atelier.Delete;
+      cdsProduto_Atelier.ApplyUpdates(0);
     end;
     if cdsProduto_Maq.Active then
     begin
@@ -2224,6 +2255,7 @@ begin
       cdsProduto_MatTam.First;
       while not cdsProduto_MatTam.Eof do
         cdsProduto_MatTam.Delete;
+      cdsProduto_MatTam.ApplyUpdates(0);
     end;
     if (qParametrosEMPRESA_LIVRARIA.AsString = 'S') then
     begin
@@ -2231,6 +2263,7 @@ begin
         prc_Abrir_Produto_Livro(cdsProdutoID.AsInteger);
       if not cdsProduto_Livro.IsEmpty then
         cdsProduto_Livro.Delete;
+      cdsProduto_Livro.ApplyUpdates(0);
     end;
     //26/10/2017  Para a Renovar
     if qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
@@ -2311,6 +2344,20 @@ begin
       end;
     end;
   end;
+  if ((cdsProdutoTIPO_REG.AsString = 'P') or (cdsProdutoTIPO_REG.AsString = 'S')) and (qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
+  begin
+    sds  := TSQLDataSet.Create(nil);
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText := 'SELECT COUNT(1) CONTADOR FROM PRODUTO_CONSUMO P WHERE P.ID = :ID AND P.tingimento = ' + QuotedStr('S');
+    sds.ParamByName('ID').AsInteger := cdsProdutoID.AsInteger;
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      cdsProdutoSEPARA_COR.AsString := 'S';
+    FreeAndNil(sds);
+  end;
+
  // Foi tirado no dia 25/09 e colocado na trigger TRG_Produto
 {  if (cdsProdutoTIPO_REG.AsString = 'P') and (qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
   begin
@@ -2387,6 +2434,8 @@ begin
   cdsProduto_Consumo_Tam.Open;
   cdsProduto_Consumo_Proc.Open;
   cdsProduto_Forn.Open;
+  cdsProduto_Forn.Last;
+  cdsProduto_Forn.First;
   cdsProduto_Tam.Open;
   cdsProduto_Consumo.Last;
   cdsProduto_Consumo.First;
@@ -2590,7 +2639,7 @@ begin
   if vTipoAux = '' then
     vTipoAux := 'A';
   cdsMaterial.Close;
-  sdsMaterial.CommandText := 'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_TOTAL, USA_COR ' +
+  sdsMaterial.CommandText := 'SELECT ID, NOME, UNIDADE, REFERENCIA, PRECO_CUSTO, PRECO_CUSTO_TOTAL, USA_COR, ID_MATERIAL_CRU ' +
                              'FROM PRODUTO ' +
                              'WHERE INATIVO = ' + QuotedStr('N');
   if vTipoAux <> 'A' then
@@ -2731,11 +2780,18 @@ begin
       sds.Open;
       if (sds.FieldByName('CONTADOR').AsInteger > 0) then
         vMsgErro := '*** Esse produto não pode ser inativado, possui Pedido(s) em aberto!';
+
     finally
       FreeAndNil(sds);
     end;
   end;
 
+  //19/06/2019 Controlar se o tipo do algodão é Cru ou na Cor
+  if (cdsProdutoTIPO_REG.AsString = 'S') and (qParametros_LoteLOTE_TEXTIL.AsString = 'S') and
+     (cdsProdutoTIPO_MAT.AsString = 'A') and 
+     (cdsProdutoTIPO_ALGODAO.AsString <> 'C') and (cdsProdutoTIPO_ALGODAO.AsString <> 'N') then
+    vMsgErro := vMsgErro + #13 + '*** Tipo do Fio não foi informado!';
+  //************************
   if trim(cdsProdutoNOME.AsString) = '' then
     vMsgErro := vMsgErro + #13 + '*** Nome não informado!';
   if trim(cdsProdutoUNIDADE.AsString) = '' then
@@ -2788,7 +2844,7 @@ begin
     begin
       if fnc_ProdutoForn_Duplicatado(cdsProduto_FornID_FORNECEDOR.AsInteger,cdsProduto_FornCOD_MATERIAL_FORN.AsString,cdsProduto_FornCOD_COR_FORN.AsString,cdsProduto_FornTAMANHO_CLIENTE.AsString) then
       begin
-        vMsgErro := vMsgErro + #13 + '*** Produto ' + cdsProduto_FornCOD_MATERIAL_FORN.AsString + ' já cadastrado no ID do produto ' + IntToStr(vID_Produto_Forn);
+        vMsgErro := vMsgErro + #13 + '*** Produto  ' + cdsProduto_FornCOD_MATERIAL_FORN.AsString + ' do Fornecedor já cadastrado no ID do produto ' + IntToStr(vID_Produto_Forn);
         if trim(cdsProduto_FornCOD_COR_FORN.AsString) <> '' then
           vMsgErro := vMsgErro + #13 + '     Cor ' + cdsProduto_FornCOD_COR_FORN.AsString;
         if trim(cdsProduto_FornTAMANHO_CLIENTE.AsString) <> '' then
@@ -2857,6 +2913,11 @@ begin
   finally
     FreeAndNil(sds);
   end;
+
+  //18/06/2019
+  if (qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (cdsProdutoTIPO_REG.AsString = 'S') and
+     ((cdsProdutoTIPO_MAT.AsString = 'A') and (cdsProdutoTIPO_ALGODAO.AsString <> 'C') and (cdsProdutoTIPO_ALGODAO.AsString <> 'N')) then
+    vMsgErro := vMsgErro + #13 + '*** Tipo do Fio não informado quando o Produto é Algodão (Cru ou na Cor)!';
 
   if vMsgErro <> '' then
     exit;
@@ -3212,9 +3273,13 @@ end;
 procedure TdmCadProduto.prc_Inserir_ProdCombMat;
 var
   vItemAux: Integer;
+  vIndice : String;
 begin
+  vIndice := cdsProduto_Comb_Mat.IndexFieldNames;
+  cdsProduto_Comb_Mat.IndexFieldNames := 'ID;ITEM';
   cdsProduto_Comb_Mat.Last;
   vItemAux := cdsProduto_Comb_MatITEM_MAT.AsInteger;
+  cdsProduto_Comb_Mat.IndexFieldNames := vIndice;
 
   cdsProduto_Comb_Mat.Insert;
   cdsProduto_Comb_MatID.AsInteger       := cdsProduto_CombID.AsInteger;
@@ -3721,7 +3786,10 @@ begin
   cdsProduto_Comb_MatID_MATERIAL.AsInteger := cdsProduto_ConsumoID_MATERIAL.AsInteger;
   cdsProduto_Comb_MatID_COR.Clear;
   if cdsProduto_ConsumoID_POSICAO.AsInteger > 0 then
-    cdsProduto_Comb_MatID_POSICAO.AsInteger := cdsProduto_ConsumoID_POSICAO.AsInteger;
+  begin
+    cdsProduto_Comb_MatID_POSICAO.AsInteger  := cdsProduto_ConsumoID_POSICAO.AsInteger;
+    cdsProduto_Comb_MatNOME_POSICAO.AsString := cdsProduto_ConsumoNOME_POSICAO.AsString;
+  end;
   if cdsProduto_ConsumoID_SETOR.AsInteger > 0 then
     cdsProduto_Comb_MatID_SETOR.AsInteger := cdsProduto_ConsumoID_SETOR.AsInteger;
   //cdsProduto_Comb_MatNOME_COR_COMBINACAO.AsString := cdsProduto_ mCombinacaoAuxNome_Cor.AsString;
@@ -3748,6 +3816,24 @@ procedure TdmCadProduto.dspProduto_CombGetTableName(Sender: TObject;
 begin
   if DataSet.Name = 'sdsProduto_Comb_Mat' then
     TableName := 'PRODUTO_COMB_MAT';
+end;
+
+procedure TdmCadProduto.prc_Inserir_ProdCA;
+var
+  vItemAux: Integer;
+begin
+  cdsProduto_CA.Last;
+  vItemAux := cdsProduto_CAITEM.AsInteger;
+  cdsProduto_CA.Insert;
+  cdsProduto_CAID.AsInteger   := cdsProdutoID.AsInteger;
+  cdsProduto_CAITEM.AsInteger := vItemAux + 1;
+end;
+
+procedure TdmCadProduto.prc_Abrir_Produto_CA(ID: Integer);
+begin
+  cdsProduto_CA.Close;
+  sdsProduto_CA.ParamByName('ID').AsInteger := ID;
+  cdsProduto_CA.Open;
 end;
 
 end.

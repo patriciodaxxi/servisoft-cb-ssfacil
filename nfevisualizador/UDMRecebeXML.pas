@@ -2276,6 +2276,13 @@ type
     cdsNotaFiscal_ItensPERC_FCP_ST: TFloatField;
     cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST: TFloatField;
     cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField;
+    mItensNotaSped_Tipo: TStringField;
+    sdsProdutoSPED_TIPO_ITEM: TStringField;
+    cdsProdutoSPED_TIPO_ITEM: TStringField;
+    cdsPag: TClientDataSet;
+    qParametros_Lote: TSQLQuery;
+    qParametros_LoteOPCAO_ESTOQUE_SEMI: TStringField;
+    qParametros_LoteLOTE_TEXTIL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2409,6 +2416,7 @@ begin
   cdsContas.Open;
   cdsTipoCobranca.Open;
   cdsTamanho.Open;
+  qParametros_Lote.Open;
   if not mParc.Active then
     mParc.CreateDataSet;
 

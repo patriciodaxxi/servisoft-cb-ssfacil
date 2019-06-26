@@ -714,10 +714,12 @@ object DMCadNCM: TDMCadNCM
     GetMetadata = False
     CommandText = 
       'SELECT N.*, I.cod_ipi, IBPT.codigo NCM_IBPT , IBPT.dt_final DT_I' +
-      'BPTFIM,'#13#10'case'#13#10'  WHEN IBPT.CODIGO IS NULL THEN '#39'SEM IBPT'#39#13#10'  els' +
-      'e '#39#39#13#10'  END ACHOU_IBPT'#13#10#13#10'FROM TAB_NCM N'#13#10'LEFT JOIN tab_cstipi I' +
-      #13#10'ON N.id_cstipi = I.ID'#13#10'LEFT JOIN tab_ibpt IBPT'#13#10'ON N.ncm = IBP' +
-      'T.codigo'#13#10'AND IBPT.ex = '#39#39#13#10
+      'BPTFIM,'#13#10'case'#13#10'  WHEN IBPT.CODIGO IS NULL THEN '#39'SEM IBPT'#39#13#10'  WHE' +
+      'N ibpt.dt_inicio is null THEN '#39'SEM IBPT'#39#13#10'  else '#39#39#13#10'  END ACHOU' +
+      '_IBPT,'#13#10'(SELECT COUNT(1) CONTADOR FROM PRODUTO P WHERE P.ID_NCM ' +
+      '= N.ID) CONTADOR'#13#10#13#10'FROM TAB_NCM N'#13#10'LEFT JOIN tab_cstipi I'#13#10'ON N' +
+      '.id_cstipi = I.ID'#13#10'LEFT JOIN tab_ibpt IBPT'#13#10'ON N.ncm = IBPT.codi' +
+      'go'#13#10'AND IBPT.ex = '#39#39#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -811,6 +813,9 @@ object DMCadNCM: TDMCadNCM
     object cdsNCM_ConsultaNCM_IBPT: TStringField
       FieldName = 'NCM_IBPT'
       Size = 10
+    end
+    object cdsNCM_ConsultaCONTADOR: TIntegerField
+      FieldName = 'CONTADOR'
     end
   end
   object dsNCM_Consulta: TDataSource

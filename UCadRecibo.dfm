@@ -1,6 +1,6 @@
 object frmCadRecibo: TfrmCadRecibo
-  Left = 220
-  Top = 9
+  Left = 195
+  Top = 0
   Width = 916
   Height = 718
   Caption = 'Recibo'
@@ -23,7 +23,7 @@ object frmCadRecibo: TfrmCadRecibo
     Top = 0
     Width = 908
     Height = 687
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -31,7 +31,7 @@ object frmCadRecibo: TfrmCadRecibo
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19

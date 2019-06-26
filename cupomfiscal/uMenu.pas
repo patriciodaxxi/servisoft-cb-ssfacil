@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, Menus, ImgList, ComCtrls, jpeg,
-  ToolWin, StdCtrls, uDmParametros, DB,  ShellAPI, StrUtils, IniFiles, Buttons, UCBase, UCDBXConn, SpeedBar, RLConsts,
-  TypInfo, uDmCadFechamento, uDmEstoque, SqlExpr;
+  ToolWin, StdCtrls, uDmParametros, DB,  ShellAPI, StrUtils, IniFiles, Buttons, UCBase, UCDBXConn, SpeedBar, RLConsts, TypInfo,
+  uDmCadFechamento, uDmEstoque, SqlExpr;
 
 type
   TfMenu = class(TForm)

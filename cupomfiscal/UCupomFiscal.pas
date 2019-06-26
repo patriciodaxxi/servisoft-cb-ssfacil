@@ -1011,7 +1011,11 @@ begin
       if fDmCupomFiscal.vID_Cofins > 0 then
         fDmCupomFiscal.cdsCupom_ItensID_COFINS.AsInteger := fDmCupomFiscal.vID_Cofins;
       if fDmCupomFiscal.vID_CSTICMS > 0 then
+      begin
         fDmCupomFiscal.cdsCupom_ItensID_CSTICMS.AsInteger := fDmCupomFiscal.vID_CSTICMS;
+
+
+      end;
       //Tirado o CST IPI  08/07/2016
       //if fDmCupomFiscal.vID_CSTIPI > 0 then
       //  fDmCupomFiscal.cdsCupom_ItensID_CSTIPI.AsInteger := fDmCupomFiscal.vID_CSTIPI;

@@ -80,6 +80,7 @@ object DmCadSetor: TDmCadSetor
     Top = 32
   end
   object cdsSetor: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -310,8 +311,8 @@ object DmCadSetor: TDmCadSetor
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 112
-    Top = 355
+    Left = 80
+    Top = 331
     object sdsProcessoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -409,14 +410,33 @@ object DmCadSetor: TDmCadSetor
       FixedChar = True
       Size = 1
     end
+    object sdsProcessoMATERIAL_KG: TStringField
+      FieldName = 'MATERIAL_KG'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsProcessoUSA_CARGA: TStringField
+      FieldName = 'USA_CARGA'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsProcessoUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object sdsProcessoGERAR_ESTOQUE_TING: TStringField
+      FieldName = 'GERAR_ESTOQUE_TING'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspProcesso: TDataSetProvider
     DataSet = sdsProcesso
     Options = [poCascadeUpdates]
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProcessoUpdateError
-    Left = 144
-    Top = 355
+    Left = 112
+    Top = 331
   end
   object cdsProcesso: TClientDataSet
     Aggregates = <>
@@ -425,8 +445,8 @@ object DmCadSetor: TDmCadSetor
     ProviderName = 'dspProcesso'
     OnCalcFields = cdsProcessoCalcFields
     OnNewRecord = cdsProcessoNewRecord
-    Left = 176
-    Top = 355
+    Left = 144
+    Top = 331
     object cdsProcessoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -537,11 +557,30 @@ object DmCadSetor: TDmCadSetor
       FixedChar = True
       Size = 1
     end
+    object cdsProcessoMATERIAL_KG: TStringField
+      FieldName = 'MATERIAL_KG'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProcessoUSA_CARGA: TStringField
+      FieldName = 'USA_CARGA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProcessoUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object cdsProcessoGERAR_ESTOQUE_TING: TStringField
+      FieldName = 'GERAR_ESTOQUE_TING'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsProcesso: TDataSource
     DataSet = cdsProcesso
-    Left = 208
-    Top = 355
+    Left = 176
+    Top = 331
   end
   object qParametros_Ser: TSQLQuery
     MaxBlobSize = -1
@@ -597,8 +636,13 @@ object DmCadSetor: TDmCadSetor
     object sdsSetor_ProcVLR_HORA: TFloatField
       FieldName = 'VLR_HORA'
     end
+    object sdsSetor_ProcUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
   end
   object cdsSetor_Proc: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsSetorsdsSetor_Proc
     IndexFieldNames = 'ID;ITEM'
@@ -622,12 +666,17 @@ object DmCadSetor: TDmCadSetor
     end
     object cdsSetor_ProcVLR_HORA: TFloatField
       FieldName = 'VLR_HORA'
+      DisplayFormat = '0.00'
     end
     object cdsSetor_ProcclNome_Processo: TStringField
       FieldKind = fkCalculated
       FieldName = 'clNome_Processo'
       Size = 60
       Calculated = True
+    end
+    object cdsSetor_ProcUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
     end
   end
   object dsSetor_Proc: TDataSource
@@ -856,16 +905,16 @@ object DmCadSetor: TDmCadSetor
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 112
-    Top = 403
+    Left = 80
+    Top = 379
   end
   object dspSetorPrincipal: TDataSetProvider
     DataSet = sdsSetorPrincipal
     Options = [poCascadeUpdates]
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProcessoUpdateError
-    Left = 144
-    Top = 403
+    Left = 112
+    Top = 379
   end
   object cdsSetorPrincipal: TClientDataSet
     Aggregates = <>
@@ -874,8 +923,8 @@ object DmCadSetor: TDmCadSetor
     ProviderName = 'dspSetorPrincipal'
     OnCalcFields = cdsProcessoCalcFields
     OnNewRecord = cdsProcessoNewRecord
-    Left = 176
-    Top = 403
+    Left = 144
+    Top = 379
     object cdsSetorPrincipalID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -886,7 +935,44 @@ object DmCadSetor: TDmCadSetor
   end
   object dsSetorPrincipal: TDataSource
     DataSet = cdsSetorPrincipal
-    Left = 208
-    Top = 403
+    Left = 176
+    Top = 379
+  end
+  object sdsUnidade: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT UNIDADE, NOME FROM UNIDADE'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 80
+    Top = 432
+  end
+  object cdsUnidade: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'UNIDADE'
+    Params = <>
+    ProviderName = 'dspUnidade'
+    Left = 144
+    Top = 432
+    object cdsUnidadeUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Required = True
+      Size = 6
+    end
+    object cdsUnidadeNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+  end
+  object dsUnidade: TDataSource
+    DataSet = cdsUnidade
+    Left = 176
+    Top = 432
+  end
+  object dspUnidade: TDataSetProvider
+    DataSet = sdsUnidade
+    Left = 112
+    Top = 432
   end
 end

@@ -1,8 +1,8 @@
 object fCupomFiscalC: TfCupomFiscalC
-  Left = 18
+  Left = 17
   Top = 0
-  Width = 1296
-  Height = 746
+  Width = 1280
+  Height = 717
   Caption = 'fCupomFiscalC'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,8 +21,8 @@ object fCupomFiscalC: TfCupomFiscalC
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 167
-    Width = 1288
-    Height = 417
+    Width = 1272
+    Height = 317
     Align = alClient
     Ctl3D = False
     DataSource = dmCupomFiscal.dsCupom_Cons
@@ -207,7 +207,7 @@ object fCupomFiscalC: TfCupomFiscalC
         Title.Font.Height = -11
         Title.Font.Name = 'Verdana'
         Title.Font.Style = [fsBold]
-        Width = 60
+        Width = 68
         Visible = True
       end
       item
@@ -239,7 +239,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object Panel11: TPanel
     Left = 0
     Top = 0
-    Width = 1288
+    Width = 1272
     Height = 30
     Align = alTop
     Color = 7300393
@@ -552,7 +552,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object pnlPesquisa: TPanel
     Left = 0
     Top = 30
-    Width = 1288
+    Width = 1272
     Height = 106
     Align = alTop
     Color = 3683329
@@ -833,7 +833,7 @@ object fCupomFiscalC: TfCupomFiscalC
       Left = 616
       Top = 35
       Width = 75
-      Height = 25
+      Height = 27
       Caption = 'Recalcular'
       TabOrder = 10
       Visible = False
@@ -866,8 +866,8 @@ object fCupomFiscalC: TfCupomFiscalC
   end
   object Panel1: TPanel
     Left = 0
-    Top = 652
-    Width = 1288
+    Top = 484
+    Width = 1272
     Height = 26
     Align = alBottom
     TabOrder = 3
@@ -983,7 +983,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object pnlEnvio_Novo: TPanel
     Left = 0
     Top = 136
-    Width = 1288
+    Width = 1272
     Height = 31
     Align = alTop
     Color = 7300393
@@ -1238,57 +1238,55 @@ object fCupomFiscalC: TfCupomFiscalC
   end
   object Panel2: TPanel
     Left = 0
-    Top = 678
-    Width = 1288
-    Height = 37
+    Top = 566
+    Width = 1272
+    Height = 120
     Align = alBottom
+    Color = 3683329
     TabOrder = 5
-    object Label7: TLabel
-      Left = 148
-      Top = 18
-      Width = 84
-      Height = 13
-      Caption = 'Total de Dinheiro:'
-    end
     object Label8: TLabel
-      Left = 616
-      Top = 18
-      Width = 59
+      Left = 28
+      Top = 90
+      Width = 71
       Height = 13
       Caption = 'Valor M'#233'dio:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
     end
     object Label10: TLabel
-      Left = 2
-      Top = 18
-      Width = 53
+      Left = 34
+      Top = 58
+      Width = 66
       Height = 13
       Caption = 'Comandas:'
-    end
-    object Label11: TLabel
-      Left = 410
-      Top = 18
-      Width = 34
-      Height = 13
-      Caption = 'Outros:'
-    end
-    object ceDin: TCurrencyEdit
-      Left = 234
-      Top = 5
-      Width = 161
-      Height = 26
-      AutoSize = False
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
+      Font.Color = clWhite
+      Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 0
+    end
+    object Label7: TLabel
+      Left = 6
+      Top = 26
+      Width = 95
+      Height = 13
+      Caption = 'Total de Vendas:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
     end
     object ceVM: TCurrencyEdit
-      Left = 680
-      Top = 5
-      Width = 121
+      Left = 106
+      Top = 77
+      Width = 232
       Height = 26
       AutoSize = False
       Font.Charset = DEFAULT_CHARSET
@@ -1297,12 +1295,12 @@ object fCupomFiscalC: TfCupomFiscalC
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 1
+      TabOrder = 2
     end
     object ceQtd: TCurrencyEdit
-      Left = 58
-      Top = 5
-      Width = 81
+      Left = 106
+      Top = 45
+      Width = 232
       Height = 26
       AutoSize = False
       DecimalPlaces = 0
@@ -1313,34 +1311,95 @@ object fCupomFiscalC: TfCupomFiscalC
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
     end
-    object ceOut: TCurrencyEdit
-      Left = 448
-      Top = 5
-      Width = 161
+    object SMDBGrid5: TSMDBGrid
+      Left = 809
+      Top = 1
+      Width = 462
+      Height = 118
+      Align = alRight
+      BorderStyle = bsNone
+      Color = 12633514
+      Ctl3D = False
+      DataSource = dmCupomFiscal.dsTotais
+      FixedColor = 3683329
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Style = []
+      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 3
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWhite
+      TitleFont.Height = -13
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      Flat = True
+      BandsFont.Charset = DEFAULT_CHARSET
+      BandsFont.Color = clWindowText
+      BandsFont.Height = -11
+      BandsFont.Name = 'MS Sans Serif'
+      BandsFont.Style = []
+      Groupings = <>
+      GridStyle.Style = gsCustom
+      GridStyle.OddColor = clWindow
+      GridStyle.EvenColor = clWindow
+      TitleHeight.PixelCount = 24
+      FooterColor = clBtnFace
+      ExOptions = [eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+      RegistryKey = 'Software\Scalabium'
+      RegistrySection = 'SMDBGrid'
+      WidthOfIndicator = 11
+      DefaultRowHeight = 20
+      ScrollBars = ssHorizontal
+      ColCount = 2
+      RowCount = 2
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Title.Caption = 'FORMA DE PAGAMENTO'
+          Width = 308
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TOTAL'
+          Width = 134
+          Visible = True
+        end>
+    end
+    object ceTotal: TCurrencyEdit
+      Left = 106
+      Top = 13
+      Width = 232
       Height = 26
       AutoSize = False
+      DecimalPlaces = 0
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -19
       Font.Name = 'Verdana'
       Font.Style = []
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 0
     end
   end
   object pnlCliente: TPanel
     Left = 0
-    Top = 584
-    Width = 1288
-    Height = 68
+    Top = 510
+    Width = 1272
+    Height = 56
     Align = alBottom
     Color = 7300393
     TabOrder = 6
     object Label16: TLabel
       Left = 26
-      Top = 16
+      Top = 12
       Width = 35
       Height = 13
       Alignment = taRightJustify
@@ -1354,7 +1413,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object Label17: TLabel
       Left = 16
-      Top = 40
+      Top = 36
       Width = 45
       Height = 13
       Alignment = taRightJustify
@@ -1368,7 +1427,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object Label18: TLabel
       Left = 316
-      Top = 16
+      Top = 12
       Width = 49
       Height = 13
       Alignment = taRightJustify
@@ -1382,7 +1441,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object Label19: TLabel
       Left = 604
-      Top = 16
+      Top = 12
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -1396,7 +1455,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object Label21: TLabel
       Left = 606
-      Top = 40
+      Top = 36
       Width = 23
       Height = 13
       Alignment = taRightJustify
@@ -1410,7 +1469,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object DBEdit1: TDBEdit
       Left = 64
-      Top = 8
+      Top = 4
       Width = 241
       Height = 21
       DataField = 'CLIENTE_NOME'
@@ -1420,7 +1479,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object DBEdit2: TDBEdit
       Left = 64
-      Top = 32
+      Top = 28
       Width = 241
       Height = 21
       DataField = 'CLIENTE_FONE'
@@ -1430,7 +1489,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object DBMemo1: TDBMemo
       Left = 368
-      Top = 8
+      Top = 4
       Width = 229
       Height = 47
       DataField = 'CLIENTE_ENDERECO'
@@ -1440,7 +1499,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object DBMemo2: TDBMemo
       Left = 632
-      Top = 8
+      Top = 4
       Width = 297
       Height = 21
       DataField = 'CLIENTE_OBS'
@@ -1450,7 +1509,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object DBMemo3: TDBMemo
       Left = 632
-      Top = 32
+      Top = 28
       Width = 297
       Height = 21
       DataField = 'CPF'

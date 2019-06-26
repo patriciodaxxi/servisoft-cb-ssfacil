@@ -73,6 +73,7 @@ begin
 
   vFlagErro := False;
   try
+    fDMCadProduto.cdsProduto_ComissaoNOME.AsString := RxDBLookupCombo2.Text;
     fDMCadProduto.cdsProduto_Comissao.Post;
   except
     on E: exception do

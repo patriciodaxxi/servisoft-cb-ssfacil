@@ -3,8 +3,8 @@ unit uCadCentroCusto;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadCentroCusto,
-  UCBase, RxLookup, StdCtrls, RxDBComb, Mask, DBCtrls, RXSpin, ExtCtrls, db, DBGrids, RzTabs, NxCollection, ToolEdit, RXDBCtrl,
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadCentroCusto, Mask,
+  UCBase, RxLookup, StdCtrls, RxDBComb, DBCtrls, RXSpin, ExtCtrls, db, DBGrids, RzTabs, NxCollection, ToolEdit, RXDBCtrl,
   CurrEdit, RzPanel;
 
 type
@@ -138,7 +138,7 @@ end;
 
 procedure TfrmCadCentroCusto.prc_Gravar_Registro;
 var
-  vIDAux : Integer;
+  vIDAux: Integer;
 begin
   vIDAux := fDMCadCentroCusto.cdsCentroCustoID.AsInteger;
   fDMCadCentroCusto.prc_Gravar;
@@ -225,6 +225,8 @@ begin
   if (fDMCadCentroCusto.cdsCentroCusto.IsEmpty) or not(fDMCadCentroCusto.cdsCentroCusto.Active) or
      (fDMCadCentroCusto.cdsCentroCustoID.AsInteger < 1) then
     Exit;
+
+  fDMCadCentroCusto.vIdAnt := fDMCadCentroCusto.cdsCentroCustoID.AsInteger;
 
   fDMCadCentroCusto.cdsCentroCusto.Edit;
   prc_Habilita;
@@ -371,7 +373,7 @@ end;
 
 procedure TfrmCadCentroCusto.btnImprimirClick(Sender: TObject);
 var
-  vArq : String;
+  vArq: String;
 begin
   if not (fDMCadCentroCusto.cdsConsulta.Active) or (fDMCadCentroCusto.cdsConsulta.IsEmpty) or (fDMCadCentroCusto.cdsConsultaID.AsInteger <= 0) then
     exit;
@@ -401,7 +403,7 @@ end;
 
 procedure TfrmCadCentroCusto.DBEdit10Exit(Sender: TObject);
 var
-  vTexto : String;
+  vTexto: String;
 begin
   vTexto := Monta_Numero(DBEdit10.Text,0);
   if not ValidaCNPJ(DBEdit10.Text) then
