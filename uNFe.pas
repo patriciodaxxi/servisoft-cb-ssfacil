@@ -4500,7 +4500,8 @@ begin
             vTextoTriang := vTextoTriang + Texto2;
           fDMCadNotaFiscal.cdsNotaFiscal_NDevolvida.Next;
         end;
-        vTextoDetNFe  := vTextoDetNFe + '(Notas Dev.:' + texto2 + ') ';
+        if trim(vTextoTriang) = '' then
+          vTextoDetNFe  := vTextoDetNFe + '(Notas Dev.:' + texto2 + ') ';
         if vTextoTriang <> '' then
           vTextoDetNFe := vTextoDetNFe + vTextoTriang + ' de ' + vNomeTriang + '] ';
       end;
