@@ -1,6 +1,6 @@
 object frmCadNotaServico: TfrmCadNotaServico
-  Left = 200
-  Top = 55
+  Left = 346
+  Top = 119
   Width = 1001
   Height = 715
   Caption = 'Nota Servi'#231'o'
