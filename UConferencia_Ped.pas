@@ -125,7 +125,8 @@ begin
     fDMConferencia.cdsPedido_Item.ApplyUpdates(0);
     prc_Verifica_Pedido_Conf;
 
-    fDMAprovacao_Ped.prc_Gravar_Pedido_Processo(fDMConferencia.cdsPedidoEMAIL_COMPRAS.AsString,fDMConferencia.cdsPedidoID.AsInteger,0,'E','','',Date);
+    if fDMConferencia.cdsPedidoCONFERIDO.AsString = 'S' then
+      fDMAprovacao_Ped.prc_Gravar_Pedido_Processo(fDMConferencia.cdsPedidoEMAIL_COMPRAS.AsString,fDMConferencia.cdsPedidoID.AsInteger,0,'E','','',Date);
 
     dmDatabase.scoDados.Commit(ID);
   except

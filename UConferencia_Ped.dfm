@@ -408,6 +408,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = []
+          Width = 64
           Visible = True
         end>
     end
