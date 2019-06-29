@@ -21,9 +21,9 @@ object frmCadPessoa: TfrmCadPessoa
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1075
-    Height = 672
-    ActivePage = TS_Cadastro
+    Width = 1083
+    Height = 680
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -35,7 +35,7 @@ object frmCadPessoa: TfrmCadPessoa
     Font.Style = []
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -50,7 +50,7 @@ object frmCadPessoa: TfrmCadPessoa
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1071
+        Width = 1079
         Height = 93
         Align = alTop
         Color = clSilver
@@ -135,6 +135,34 @@ object frmCadPessoa: TfrmCadPessoa
           Height = 13
           Alignment = taRightJustify
           Caption = 'Filial:'
+        end
+        object Label198: TLabel
+          Left = 404
+          Top = 12
+          Width = 49
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Vendedor:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label199: TLabel
+          Left = 389
+          Top = 34
+          Width = 64
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Vend.Interno:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
         end
         object Edit4: TEdit
           Left = 50
@@ -251,12 +279,12 @@ object frmCadPessoa: TfrmCadPessoa
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 8
           Transparent = True
           OnClick = btnConsultarClick
         end
         object RzCheckList1: TRzCheckList
-          Left = 576
+          Left = 696
           Top = 3
           Width = 121
           Height = 68
@@ -303,7 +331,7 @@ object frmCadPessoa: TfrmCadPessoa
           ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
-          TabOrder = 6
+          TabOrder = 9
         end
         object DateEdit1: TDateEdit
           Left = 95
@@ -358,7 +386,7 @@ object frmCadPessoa: TfrmCadPessoa
             'Todos')
         end
         object RzCheckList2: TRzCheckList
-          Left = 700
+          Left = 820
           Top = 3
           Width = 121
           Height = 68
@@ -393,7 +421,7 @@ object frmCadPessoa: TfrmCadPessoa
           ItemHeight = 13
           ParentCtl3D = False
           ParentFont = False
-          TabOrder = 7
+          TabOrder = 10
         end
         object rxdbFilial: TRxDBLookupCombo
           Left = 95
@@ -405,13 +433,47 @@ object frmCadPessoa: TfrmCadPessoa
           LookupField = 'ID'
           LookupDisplay = 'NOME'
           LookupSource = DMCadPessoa.dsFilial
-          TabOrder = 8
+          TabOrder = 5
+        end
+        object Edit1: TEdit
+          Left = 453
+          Top = 4
+          Width = 191
+          Height = 21
+          CharCase = ecUpperCase
+          Ctl3D = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          TabOrder = 6
+          OnKeyDown = Edit4KeyDown
+        end
+        object Edit2: TEdit
+          Left = 453
+          Top = 26
+          Width = 191
+          Height = 21
+          CharCase = ecUpperCase
+          Ctl3D = True
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          TabOrder = 7
+          OnKeyDown = Edit4KeyDown
         end
       end
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1071
+        Width = 1079
         Height = 30
         Align = alTop
         Color = clSilver
@@ -722,8 +784,8 @@ object frmCadPessoa: TfrmCadPessoa
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 632
-        Width = 1071
+        Top = 640
+        Width = 1079
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -744,8 +806,8 @@ object frmCadPessoa: TfrmCadPessoa
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 123
-        Width = 1071
-        Height = 509
+        Width = 1079
+        Height = 517
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPessoa.dsPessoa_Consulta
@@ -780,7 +842,7 @@ object frmCadPessoa: TfrmCadPessoa
         WidthOfIndicator = 23
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 41
+        ColCount = 42
         RowCount = 2
         Columns = <
           item
@@ -1031,6 +1093,14 @@ object frmCadPessoa: TfrmCadPessoa
           end
           item
             Expanded = False
+            FieldName = 'NOME_VENDEDOR_INT'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nome Vendedor Interno'
+            Width = 265
+            Visible = True
+          end
+          item
+            Expanded = False
             FieldName = 'NOME_GRUPO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Grupo'
@@ -1120,7 +1190,7 @@ object frmCadPessoa: TfrmCadPessoa
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1071
+        Width = 1079
         Height = 30
         Align = alTop
         Color = 8404992
@@ -1349,9 +1419,9 @@ object frmCadPessoa: TfrmCadPessoa
       object RZPageControlDados: TRzPageControl
         Left = 0
         Top = 30
-        Width = 1071
-        Height = 619
-        ActivePage = TS_Pessoa_Dados
+        Width = 1079
+        Height = 627
+        ActivePage = TS_Pessoa_Financeiro
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1359,7 +1429,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19
@@ -1375,8 +1445,8 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel9: TPanel
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 604
             Align = alClient
             TabOrder = 0
             object Label1: TLabel
@@ -2389,12 +2459,12 @@ object frmCadPessoa: TfrmCadPessoa
             end
             object RzPageControl3: TRzPageControl
               Left = 1
-              Top = 406
-              Width = 1065
+              Top = 414
+              Width = 1073
               Height = 189
-              ActivePage = ts_Contatos
+              ActivePage = ts_Vendedor
               Align = alBottom
-              TabIndex = 0
+              TabIndex = 1
               TabOrder = 43
               FixedDimension = 19
               object ts_Contatos: TRzTabSheet
@@ -2402,14 +2472,14 @@ object frmCadPessoa: TfrmCadPessoa
                 object Panel8: TPanel
                   Left = 0
                   Top = 0
-                  Width = 1061
+                  Width = 1069
                   Height = 166
                   Align = alClient
                   TabOrder = 0
                   object Panel13: TPanel
                     Left = 1
                     Top = 1
-                    Width = 1059
+                    Width = 1067
                     Height = 38
                     Align = alTop
                     Caption = 'CONTATOS'
@@ -2425,7 +2495,7 @@ object frmCadPessoa: TfrmCadPessoa
                   object SMDBGrid2: TSMDBGrid
                     Left = 1
                     Top = 39
-                    Width = 1059
+                    Width = 1067
                     Height = 126
                     Align = alClient
                     Ctl3D = False
@@ -2511,7 +2581,7 @@ object frmCadPessoa: TfrmCadPessoa
                 object pnlVendedor: TPanel
                   Left = 0
                   Top = 0
-                  Width = 1061
+                  Width = 1069
                   Height = 166
                   Align = alClient
                   TabOrder = 0
@@ -2746,7 +2816,7 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlPessoaFisica: TPanel
             Left = 0
             Top = 0
-            Width = 1067
+            Width = 1075
             Height = 244
             Align = alTop
             Enabled = False
@@ -2754,7 +2824,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox4: TRzGroupBox
               Left = 1
               Top = 36
-              Width = 1065
+              Width = 1073
               Height = 139
               Align = alTop
               BorderWidth = 1
@@ -3171,7 +3241,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel10: TPanel
               Left = 1
               Top = 1
-              Width = 1065
+              Width = 1073
               Height = 26
               Align = alTop
               TabOrder = 1
@@ -3215,7 +3285,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel11: TPanel
               Left = 1
               Top = 238
-              Width = 1065
+              Width = 1073
               Height = 8
               Align = alTop
               BevelOuter = bvNone
@@ -3224,7 +3294,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel12: TPanel
               Left = 1
               Top = 27
-              Width = 1065
+              Width = 1073
               Height = 9
               Align = alTop
               BevelOuter = bvNone
@@ -3233,7 +3303,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox7: TRzGroupBox
               Left = 1
               Top = 175
-              Width = 1065
+              Width = 1073
               Height = 63
               Align = alTop
               Caption = ' Outras informa'#231#245'es '
@@ -3332,8 +3402,8 @@ object frmCadPessoa: TfrmCadPessoa
           object RzPageControl2: TRzPageControl
             Left = 0
             Top = 244
-            Width = 1067
-            Height = 352
+            Width = 1075
+            Height = 360
             ActivePage = TS_Dados_Profissionais
             ActivePageDefault = TS_Dados_Profissionais
             Align = alClient
@@ -3352,8 +3422,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Profissionais: TPanel
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -3704,8 +3774,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlConjuge: TPanel
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -4070,8 +4140,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Conta: TPanel
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -4199,8 +4269,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid3: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Dep
@@ -4275,8 +4345,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid4: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefP
@@ -4366,8 +4436,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid5: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefC
@@ -4436,8 +4506,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid6: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Aut
@@ -4508,7 +4578,7 @@ object frmCadPessoa: TfrmCadPessoa
           object GroupBox2: TGroupBox
             Left = 0
             Top = 243
-            Width = 1067
+            Width = 1075
             Height = 140
             Align = alTop
             Caption = ' Dados Cobran'#231'a '
@@ -4847,7 +4917,7 @@ object frmCadPessoa: TfrmCadPessoa
           object GroupBox3: TGroupBox
             Left = 0
             Top = 75
-            Width = 1067
+            Width = 1075
             Height = 168
             Align = alTop
             Caption = ' Dados Entrega '
@@ -5265,7 +5335,7 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 1067
+            Width = 1075
             Height = 75
             Align = alTop
             TabOrder = 0
@@ -5393,7 +5463,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label28: TLabel
             Left = 54
-            Top = 35
+            Top = 56
             Width = 73
             Height = 13
             Alignment = taRightJustify
@@ -5401,7 +5471,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label29: TLabel
             Left = 42
-            Top = 56
+            Top = 77
             Width = 85
             Height = 13
             Alignment = taRightJustify
@@ -5409,7 +5479,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label30: TLabel
             Left = 44
-            Top = 77
+            Top = 98
             Width = 83
             Height = 13
             Alignment = taRightJustify
@@ -5417,7 +5487,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object SpeedButton2: TSpeedButton
             Left = 394
-            Top = 48
+            Top = 69
             Width = 23
             Height = 21
             Hint = 'Atualiza tabela Condi'#231#227'o de Pagamento'
@@ -5467,7 +5537,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object SpeedButton3: TSpeedButton
             Left = 394
-            Top = 69
+            Top = 90
             Width = 23
             Height = 21
             Hint = 'Atualiza tabela Bancos'
@@ -5517,7 +5587,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object SpeedButton5: TSpeedButton
             Left = 394
-            Top = 27
+            Top = 48
             Width = 23
             Height = 21
             Hint = 'Atualiza tabela Tipo de Cobran'#231'a'
@@ -5617,7 +5687,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label25: TLabel
             Left = 60
-            Top = 121
+            Top = 142
             Width = 67
             Height = 13
             Alignment = taRightJustify
@@ -5625,7 +5695,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object SpeedButton7: TSpeedButton
             Left = 394
-            Top = 113
+            Top = 134
             Width = 23
             Height = 21
             Hint = 'Atualiza tabela Bancos'
@@ -5675,7 +5745,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label56: TLabel
             Left = 47
-            Top = 185
+            Top = 206
             Width = 80
             Height = 13
             Alignment = taRightJustify
@@ -5683,7 +5753,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label69: TLabel
             Left = 43
-            Top = 206
+            Top = 227
             Width = 84
             Height = 13
             Alignment = taRightJustify
@@ -5691,7 +5761,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label70: TLabel
             Left = 55
-            Top = 227
+            Top = 248
             Width = 72
             Height = 13
             Alignment = taRightJustify
@@ -5699,7 +5769,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label84: TLabel
             Left = 106
-            Top = 164
+            Top = 185
             Width = 21
             Height = 13
             Alignment = taRightJustify
@@ -5707,7 +5777,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label87: TLabel
             Left = 420
-            Top = 164
+            Top = 185
             Width = 84
             Height = 13
             Alignment = taRightJustify
@@ -5715,7 +5785,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label93: TLabel
             Left = 455
-            Top = 296
+            Top = 317
             Width = 41
             Height = 13
             Alignment = taRightJustify
@@ -5723,7 +5793,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label107: TLabel
             Left = 597
-            Top = 164
+            Top = 185
             Width = 92
             Height = 13
             Alignment = taRightJustify
@@ -5731,7 +5801,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label133: TLabel
             Left = 95
-            Top = 142
+            Top = 163
             Width = 32
             Height = 13
             Alignment = taRightJustify
@@ -5739,7 +5809,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object SpeedButton9: TSpeedButton
             Left = 394
-            Top = 134
+            Top = 155
             Width = 23
             Height = 21
             Hint = 'Atualiza tabela Bancos'
@@ -5789,7 +5859,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label153: TLabel
             Left = 501
-            Top = 273
+            Top = 294
             Width = 286
             Height = 13
             Caption = 'Carimbo Preenchido vai aparecer no campo MARCA da NFe'
@@ -5802,7 +5872,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label157: TLabel
             Left = 58
-            Top = 248
+            Top = 269
             Width = 70
             Height = 13
             Alignment = taRightJustify
@@ -5810,7 +5880,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label158: TLabel
             Left = 417
-            Top = 248
+            Top = 269
             Width = 71
             Height = 13
             Alignment = taRightJustify
@@ -5818,7 +5888,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label159: TLabel
             Left = 599
-            Top = 248
+            Top = 269
             Width = 73
             Height = 13
             Alignment = taRightJustify
@@ -5826,7 +5896,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label160: TLabel
             Left = 27
-            Top = 269
+            Top = 290
             Width = 101
             Height = 13
             Alignment = taRightJustify
@@ -5834,7 +5904,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label161: TLabel
             Left = 5
-            Top = 290
+            Top = 311
             Width = 123
             Height = 13
             Alignment = taRightJustify
@@ -5842,7 +5912,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label183: TLabel
             Left = 53
-            Top = 311
+            Top = 332
             Width = 75
             Height = 13
             Alignment = taRightJustify
@@ -5850,7 +5920,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object lblCarteira: TLabel
             Left = 91
-            Top = 99
+            Top = 120
             Width = 36
             Height = 13
             Alignment = taRightJustify
@@ -5858,7 +5928,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object SpeedButton10: TSpeedButton
             Left = 394
-            Top = 91
+            Top = 112
             Width = 23
             Height = 21
             Hint = 'Atualiza tabela Carteira'
@@ -5908,7 +5978,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label187: TLabel
             Left = 99
-            Top = 347
+            Top = 368
             Width = 29
             Height = 13
             Alignment = taRightJustify
@@ -5916,14 +5986,14 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label192: TLabel
             Left = 47
-            Top = 369
+            Top = 390
             Width = 80
             Height = 13
             Caption = 'Melhor dia Pgto.:'
           end
           object Label194: TLabel
             Left = 453
-            Top = 317
+            Top = 338
             Width = 43
             Height = 13
             Alignment = taRightJustify
@@ -5931,10 +6001,18 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object Label196: TLabel
             Left = 449
-            Top = 500
+            Top = 529
             Width = 99
             Height = 13
             Caption = 'Imp. Etiqueta R'#243'tulo:'
+          end
+          object Label197: TLabel
+            Left = 42
+            Top = 35
+            Width = 85
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Vendedor Interno:'
           end
           object RxDBLookupCombo4: TRxDBLookupCombo
             Left = 130
@@ -5961,7 +6039,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object RxDBLookupCombo5: TRxDBLookupCombo
             Left = 130
-            Top = 27
+            Top = 48
             Width = 265
             Height = 21
             DropDownCount = 8
@@ -5970,11 +6048,11 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsTipoCobranca
-            TabOrder = 2
+            TabOrder = 3
           end
           object RxDBLookupCombo6: TRxDBLookupCombo
             Left = 130
-            Top = 48
+            Top = 69
             Width = 265
             Height = 21
             DropDownCount = 8
@@ -5983,11 +6061,11 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsCondPgto
-            TabOrder = 3
+            TabOrder = 4
           end
           object RxDBLookupCombo7: TRxDBLookupCombo
             Left = 130
-            Top = 69
+            Top = 90
             Width = 265
             Height = 21
             DropDownCount = 8
@@ -5996,12 +6074,12 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsContas
-            TabOrder = 4
+            TabOrder = 5
             OnChange = RxDBLookupCombo7Change
           end
           object RxDBLookupCombo15: TRxDBLookupCombo
             Left = 182
-            Top = 113
+            Top = 134
             Width = 213
             Height = 21
             DropDownCount = 8
@@ -6010,26 +6088,26 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsTab_Preco
-            TabOrder = 7
+            TabOrder = 8
           end
           object DBEdit23: TDBEdit
             Left = 130
-            Top = 177
+            Top = 198
             Width = 640
             Height = 21
             CharCase = ecLowerCase
             DataField = 'EMAIL_PGTO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 12
+            TabOrder = 13
           end
           object gbxConta_Orcamento: TRzGroupBox
             Left = 28
-            Top = 395
+            Top = 424
             Width = 405
             Height = 144
             Caption = 'Conta de Or'#231'amento por Tipo de Pessoa'
             FlatColor = clBlack
-            TabOrder = 26
+            TabOrder = 28
             OnEnter = gbxConta_OrcamentoEnter
             OnExit = gbxConta_OrcamentoExit
             object Label64: TLabel
@@ -6185,26 +6263,26 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object DBEdit42: TDBEdit
             Left = 130
-            Top = 198
+            Top = 219
             Width = 640
             Height = 21
             DataField = 'CONTATO_COMPRAS'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 13
+            TabOrder = 14
           end
           object DBEdit43: TDBEdit
             Left = 130
-            Top = 219
+            Top = 240
             Width = 640
             Height = 21
             CharCase = ecLowerCase
             DataField = 'EMAIL_COMPRAS'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 14
+            TabOrder = 15
           end
           object DBCheckBox13: TDBCheckBox
             Left = 720
-            Top = 369
+            Top = 398
             Width = 153
             Height = 17
             Caption = 'Usa Transfer'#234'ncia ICMS'
@@ -6216,13 +6294,13 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 27
+            TabOrder = 29
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBCheckBox14: TDBCheckBox
             Left = 720
-            Top = 387
+            Top = 416
             Width = 225
             Height = 17
             Caption = 'Cliente Estoque (Pedido sem Faturamento)'
@@ -6234,13 +6312,13 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 28
+            TabOrder = 30
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBCheckBox15: TDBCheckBox
             Left = 720
-            Top = 403
+            Top = 432
             Width = 249
             Height = 17
             Caption = 'Agrupa Tamanhos na Emiss'#227'o da Nota Fiscal'
@@ -6252,13 +6330,13 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 29
+            TabOrder = 31
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object RxDBLookupCombo27: TRxDBLookupCombo
             Left = 130
-            Top = 156
+            Top = 177
             Width = 265
             Height = 21
             DropDownCount = 8
@@ -6267,12 +6345,12 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsEDI_Config
-            TabOrder = 9
+            TabOrder = 10
             OnChange = RxDBLookupCombo27Change
           end
           object DBCheckBox6: TDBCheckBox
             Left = 720
-            Top = 419
+            Top = 448
             Width = 145
             Height = 17
             Caption = 'Cobrar Taxa Banc'#225'ria'
@@ -6284,43 +6362,43 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 30
+            TabOrder = 32
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBEdit47: TDBEdit
             Left = 507
-            Top = 156
+            Top = 177
             Width = 78
             Height = 21
             CharCase = ecLowerCase
             DataField = 'VLR_LIMITE_CREDITO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 10
+            TabOrder = 11
           end
           object DBEdit51: TDBEdit
             Left = 499
-            Top = 288
+            Top = 309
             Width = 214
             Height = 21
             CharCase = ecUpperCase
             DataField = 'CARIMBO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 21
+            TabOrder = 22
           end
           object DBEdit48: TDBEdit
             Left = 692
-            Top = 156
+            Top = 177
             Width = 78
             Height = 21
             CharCase = ecLowerCase
             DataField = 'VLR_LIMITE_COMPRA'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 11
+            TabOrder = 12
           end
           object RxDBLookupCombo35: TRxDBLookupCombo
             Left = 130
-            Top = 134
+            Top = 155
             Width = 265
             Height = 21
             DropDownCount = 8
@@ -6329,62 +6407,62 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsGrupo_Pessoa
-            TabOrder = 8
+            TabOrder = 9
           end
           object DBDateEdit12: TDBDateEdit
             Left = 130
-            Top = 240
+            Top = 261
             Width = 119
             Height = 21
             DataField = 'DTNOTA'
             DataSource = DMCadPessoa.dsPessoa
             ReadOnly = True
             NumGlyphs = 2
-            TabOrder = 15
+            TabOrder = 16
           end
           object DBEdit21: TDBEdit
             Left = 491
-            Top = 240
+            Top = 261
             Width = 94
             Height = 21
             CharCase = ecLowerCase
             DataField = 'VLR_ULT_FATURAMENTO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 16
+            TabOrder = 17
           end
           object DBEdit82: TDBEdit
             Left = 675
-            Top = 240
+            Top = 261
             Width = 94
             Height = 21
             CharCase = ecLowerCase
             DataField = 'QTD_ULT_FATURAMENTO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 17
+            TabOrder = 18
           end
           object DBEdit83: TDBEdit
-            Left = 131
-            Top = 261
+            Left = 130
+            Top = 282
             Width = 119
             Height = 21
             CharCase = ecUpperCase
             DataField = 'COD_CONTABIL_CLIENTE'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 18
+            TabOrder = 19
           end
           object DBEdit84: TDBEdit
-            Left = 131
-            Top = 282
+            Left = 130
+            Top = 303
             Width = 119
             Height = 21
             CharCase = ecUpperCase
             DataField = 'COD_CONTABIL_FORNECEDOR'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 19
+            TabOrder = 20
           end
           object RxDBComboBox15: TRxDBComboBox
-            Left = 131
-            Top = 303
+            Left = 130
+            Top = 324
             Width = 119
             Height = 21
             Style = csDropDownList
@@ -6396,7 +6474,7 @@ object frmCadPessoa: TfrmCadPessoa
               'Liberado'
               'Restrito'
               'Bloqueado')
-            TabOrder = 20
+            TabOrder = 21
             Values.Strings = (
               'L'
               'R'
@@ -6404,7 +6482,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object RxDBLookupCombo42: TRxDBLookupCombo
             Left = 130
-            Top = 91
+            Top = 112
             Width = 265
             Height = 21
             DropDownCount = 8
@@ -6413,11 +6491,11 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsCarteira
-            TabOrder = 5
+            TabOrder = 6
           end
           object DBCheckBox24: TDBCheckBox
             Left = 720
-            Top = 435
+            Top = 464
             Width = 89
             Height = 17
             Caption = 'Protestar'
@@ -6429,13 +6507,13 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 31
+            TabOrder = 33
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBCheckBox25: TDBCheckBox
             Left = 720
-            Top = 451
+            Top = 480
             Width = 265
             Height = 17
             Caption = 'Controlar o Custo L'#237'quido na Entrada'
@@ -6447,13 +6525,13 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 32
+            TabOrder = 34
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBCheckBox26: TDBCheckBox
             Left = 720
-            Top = 467
+            Top = 496
             Width = 265
             Height = 17
             Caption = 'Usar a OC/Item que vem no XML do fornecedor'
@@ -6465,24 +6543,24 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 33
+            TabOrder = 35
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBEdit102: TDBEdit
             Left = 130
-            Top = 113
+            Top = 134
             Width = 50
             Height = 21
             CharCase = ecUpperCase
             DataField = 'ID_TAB_PRECO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 6
+            TabOrder = 7
             OnExit = DBEdit102Exit
           end
           object DBCheckBox28: TDBCheckBox
-            Left = 131
-            Top = 323
+            Left = 130
+            Top = 344
             Width = 265
             Height = 17
             Caption = 'Mostrar o Aviso no cadastro do Pedido'
@@ -6494,28 +6572,28 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 22
+            TabOrder = 24
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBEdit103: TDBEdit
-            Left = 131
-            Top = 339
+            Left = 130
+            Top = 360
             Width = 646
             Height = 21
             CharCase = ecUpperCase
             DataField = 'OBS_AVISO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 23
+            TabOrder = 25
           end
           object RzGroupBox2: TRzGroupBox
             Left = 450
-            Top = 396
+            Top = 425
             Width = 233
             Height = 73
             Caption = 'Imprimir na DANFE'
             FlatColor = clBlack
-            TabOrder = 34
+            TabOrder = 36
             object DBCheckBox27: TDBCheckBox
               Left = 24
               Top = 24
@@ -6548,8 +6626,8 @@ object frmCadPessoa: TfrmCadPessoa
             end
           end
           object RxDBComboBox16: TRxDBComboBox
-            Left = 131
-            Top = 361
+            Left = 130
+            Top = 382
             Width = 146
             Height = 21
             Style = csDropDownList
@@ -6570,7 +6648,7 @@ object frmCadPessoa: TfrmCadPessoa
             ParentCtl3D = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 24
+            TabOrder = 26
             Values.Strings = (
               '1'
               '2'
@@ -6582,7 +6660,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object RxDBComboBox17: TRxDBComboBox
             Left = 281
-            Top = 361
+            Top = 382
             Width = 149
             Height = 21
             Style = csDropDownList
@@ -6600,7 +6678,7 @@ object frmCadPessoa: TfrmCadPessoa
               'Sexta-Feira'
               'S'#225'bado')
             ParentCtl3D = False
-            TabOrder = 25
+            TabOrder = 27
             Values.Strings = (
               '1'
               '2'
@@ -6612,7 +6690,7 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object DBCheckBox29: TDBCheckBox
             Left = 696
-            Top = 99
+            Top = 120
             Width = 177
             Height = 17
             Caption = 'Associar Produto no Rec. XML'
@@ -6624,13 +6702,13 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 35
+            TabOrder = 37
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBCheckBox30: TDBCheckBox
             Left = 696
-            Top = 83
+            Top = 104
             Width = 281
             Height = 17
             Caption = 'Baixar Etiq. Somente no Pr'#233' Faturamento'
@@ -6642,23 +6720,23 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 36
+            TabOrder = 38
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBEdit108: TDBEdit
             Left = 499
-            Top = 309
+            Top = 330
             Width = 214
             Height = 21
             CharCase = ecUpperCase
             DataField = 'CAIXINHA'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 37
+            TabOrder = 23
           end
           object DBCheckBox31: TDBCheckBox
             Left = 696
-            Top = 34
+            Top = 55
             Width = 153
             Height = 17
             Caption = 'IPI Pago Pela Empresa'
@@ -6670,13 +6748,13 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 38
+            TabOrder = 39
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object RxDBComboBox18: TRxDBComboBox
             Left = 550
-            Top = 492
+            Top = 521
             Width = 165
             Height = 21
             Style = csDropDownList
@@ -6687,14 +6765,14 @@ object frmCadPessoa: TfrmCadPessoa
             Items.Strings = (
               'N=Produto Interno'
               'C=Nome do Produto Cliente')
-            TabOrder = 39
+            TabOrder = 40
             Values.Strings = (
               'N'
               'C')
           end
           object DBCheckBox32: TDBCheckBox
             Left = 720
-            Top = 483
+            Top = 512
             Width = 265
             Height = 17
             Caption = 'Imprimir o nome do Produto do Cliente na NFe'
@@ -6706,13 +6784,13 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 40
+            TabOrder = 41
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
           object DBCheckBox5: TDBCheckBox
             Left = 696
-            Top = 114
+            Top = 135
             Width = 177
             Height = 17
             Caption = 'Protestar'
@@ -6724,9 +6802,22 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 41
+            TabOrder = 42
             ValueChecked = 'S'
             ValueUnchecked = 'N'
+          end
+          object RxDBLookupCombo45: TRxDBLookupCombo
+            Left = 130
+            Top = 27
+            Width = 265
+            Height = 21
+            DropDownCount = 8
+            DataField = 'ID_VENDEDOR_INT'
+            DataSource = DMCadPessoa.dsPessoa
+            LookupField = 'CODIGO'
+            LookupDisplay = 'NOME'
+            LookupSource = DMCadPessoa.dsVendedor
+            TabOrder = 2
           end
         end
         object TS_RegrasFiscais: TRzTabSheet
@@ -6734,8 +6825,8 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 604
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -6743,7 +6834,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel6: TPanel
               Left = 1
               Top = 394
-              Width = 1065
+              Width = 1073
               Height = 16
               Align = alTop
               Color = clGray
@@ -6752,7 +6843,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox1: TRzDBCheckBox
               Left = 1
               Top = 290
-              Width = 1065
+              Width = 1073
               Height = 17
               DataField = 'IPI_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -6772,7 +6863,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxIPI: TRzGroupBox
               Left = 1
               Top = 307
-              Width = 1065
+              Width = 1073
               Height = 87
               Align = alTop
               BorderColor = clBlue
@@ -6787,7 +6878,7 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 4
               Visible = False
               DesignSize = (
-                1065
+                1073
                 87)
               object Label71: TLabel
                 Left = 16
@@ -6902,7 +6993,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel7: TPanel
               Left = 1
               Top = 274
-              Width = 1065
+              Width = 1073
               Height = 16
               Align = alTop
               Color = clGray
@@ -6911,7 +7002,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxSuframa: TRzGroupBox
               Left = 1
               Top = 137
-              Width = 1065
+              Width = 1073
               Height = 137
               Align = alTop
               BorderColor = clBlue
@@ -6925,7 +7016,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 3
               DesignSize = (
-                1065
+                1073
                 137)
               object Label91: TLabel
                 Left = 3
@@ -7147,7 +7238,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox2: TRzDBCheckBox
               Left = 1
               Top = 410
-              Width = 1065
+              Width = 1073
               Height = 17
               DataField = 'PIS_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -7167,7 +7258,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel5: TPanel
               Left = 1
               Top = 427
-              Width = 1065
+              Width = 1073
               Height = 93
               Align = alTop
               BevelOuter = bvNone
@@ -7175,7 +7266,7 @@ object frmCadPessoa: TfrmCadPessoa
               object gbxPIS: TRzGroupBox
                 Left = 0
                 Top = 0
-                Width = 1065
+                Width = 1073
                 Height = 93
                 Align = alClient
                 BorderColor = clBlue
@@ -7190,7 +7281,7 @@ object frmCadPessoa: TfrmCadPessoa
                 TabOrder = 0
                 Visible = False
                 DesignSize = (
-                  1065
+                  1073
                   93)
                 object Label75: TLabel
                   Left = 16
@@ -7295,7 +7386,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxDadosAdic: TRzGroupBox
               Left = 1
               Top = 53
-              Width = 1065
+              Width = 1073
               Height = 52
               Align = alTop
               BorderColor = clBlue
@@ -7309,7 +7400,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 1
               DesignSize = (
-                1065
+                1073
                 52)
               object Label99: TLabel
                 Left = 16
@@ -7335,7 +7426,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox1: TRzGroupBox
               Left = 1
               Top = 105
-              Width = 1065
+              Width = 1073
               Height = 32
               Align = alTop
               BorderColor = clBlue
@@ -7389,7 +7480,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox5: TRzGroupBox
               Left = 1
               Top = 1
-              Width = 1065
+              Width = 1073
               Height = 52
               Align = alTop
               BorderColor = clBlue
@@ -7451,8 +7542,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid9: TSMDBGrid
             Left = 0
             Top = 28
-            Width = 1067
-            Height = 568
+            Width = 1075
+            Height = 576
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_Fil
@@ -7516,7 +7607,7 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlPessoa_Fil: TPanel
             Left = 0
             Top = 0
-            Width = 1067
+            Width = 1075
             Height = 28
             Align = alTop
             Color = clSilver
@@ -7596,8 +7687,8 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlServico: TPanel
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 604
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -8001,8 +8092,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid7: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 604
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_Ativ
@@ -8076,8 +8167,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid8: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 604
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_TipoMat
@@ -8155,8 +8246,8 @@ object frmCadPessoa: TfrmCadPessoa
   end
   object StaticText2: TStaticText
     Left = 0
-    Top = 672
-    Width = 1075
+    Top = 680
+    Width = 1083
     Height = 17
     Align = alBottom
     Caption = 'F2 Consultar'

@@ -15,8 +15,8 @@ object dmDatabase: TdmDatabase
     Params.Strings = (
       'DriverName=Interbase'
       
-        'Database=localhost:D:\Fontes\$Servisoft\Bases\SSFacil\SSFACIL.fd' +
-        'b'
+        'Database=LOCALHOST:D:\Fontes\$Servisoft\Bases\SSFacil\Supercrom.' +
+        'FDB'
       'RoleName=RoleName'
       'User_Name=sysdba'
       'Password=masterkey'

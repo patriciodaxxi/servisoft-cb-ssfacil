@@ -86,7 +86,7 @@ object frmCadPedido: TfrmCadPedido
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 27
+        ColCount = 28
         RowCount = 2
         Columns = <
           item
@@ -94,7 +94,6 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'AMOSTRA'
             Title.Alignment = taCenter
             Title.Caption = 'Amostra'
-            Width = 64
             Visible = True
           end
           item
@@ -111,7 +110,6 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'APROVADO_PED'
             Title.Alignment = taCenter
             Title.Caption = 'Aprovado'
-            Width = 64
             Visible = True
           end
           item
@@ -144,7 +142,6 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'PEDIDO_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Pedido Cliente (OC)'
-            Width = 64
             Visible = True
           end
           item
@@ -159,7 +156,6 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'DTENTREGA'
             Title.Alignment = taCenter
             Title.Caption = 'Data Entrega'
-            Width = 64
             Visible = True
           end
           item
@@ -215,7 +211,6 @@ object frmCadPedido: TfrmCadPedido
             Expanded = False
             FieldName = 'QTD'
             Title.Caption = 'Qtd. Produtos'
-            Width = 64
             Visible = True
           end
           item
@@ -224,7 +219,6 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'FATURADO'
             Title.Alignment = taCenter
             Title.Caption = 'Faturado'
-            Width = 64
             Visible = True
           end
           item
@@ -255,7 +249,6 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'DTAPROVADO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Aprovado'
-            Width = 64
             Visible = True
           end
           item
@@ -271,7 +264,6 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'USUARIO'
             Title.Alignment = taCenter
             Title.Caption = 'Usu'#225'rio'
-            Width = 64
             Visible = True
           end
           item
@@ -284,10 +276,17 @@ object frmCadPedido: TfrmCadPedido
           end
           item
             Expanded = False
+            FieldName = 'NOME_VENDEDOR_INT'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vendedor Interno'
+            Width = 196
+            Visible = True
+          end
+          item
+            Expanded = False
             FieldName = 'IMPRESSO'
             Title.Alignment = taCenter
             Title.Caption = 'Impresso'
-            Width = 64
             Visible = True
           end>
       end
@@ -665,7 +664,7 @@ object frmCadPedido: TfrmCadPedido
           TodayCaption = 'Hoje'
         end
         object BitBtn1: TBitBtn
-          Left = 712
+          Left = 880
           Top = 96
           Width = 121
           Height = 25
@@ -2412,7 +2411,7 @@ object frmCadPedido: TfrmCadPedido
         Top = 190
         Width = 1093
         Height = 397
-        ActivePage = RzTabSheet1
+        ActivePage = RzTabSheet2
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -2420,7 +2419,7 @@ object frmCadPedido: TfrmCadPedido
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -2561,7 +2560,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'ENCERADO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Encerado'
-                Width = 64
                 Visible = True
               end
               item
@@ -2619,7 +2617,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'VLR_DESCONTO_CALC'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Desconto'
-                Width = 64
                 Visible = True
               end
               item
@@ -2666,7 +2663,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'QTD_CANCELADO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Qtd. Cancelada'
-                Width = 64
                 Visible = True
               end
               item
@@ -2683,13 +2679,11 @@ object frmCadPedido: TfrmCadPedido
               item
                 Expanded = False
                 FieldName = 'COD_CST'
-                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'COD_IPI'
-                Width = 64
                 Visible = True
               end
               item
@@ -2697,7 +2691,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'QTD_PRODUZIDA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Qtd. Produzida'
-                Width = 64
                 Visible = True
               end
               item
@@ -2705,7 +2698,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'CARIMBO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Carimbo'
-                Width = 64
                 Visible = True
               end
               item
@@ -2713,7 +2705,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'CAIXINHA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Caixinha'
-                Width = 64
                 Visible = True
               end
               item
@@ -2761,7 +2752,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'DTCONFERENCIA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Dt. Confer'#234'ncia'
-                Width = 64
                 Visible = True
               end
               item
@@ -2769,7 +2759,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'HRCONFERENCIA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Hr. Confer'#234'ncia'
-                Width = 64
                 Visible = True
               end
               item
@@ -2777,7 +2766,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'USUARIO_CONF'
                 Title.Alignment = taCenter
                 Title.Caption = 'Usu'#225'rio Confer'#234'ncia'
-                Width = 64
                 Visible = True
               end
               item
@@ -2786,7 +2774,6 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'TAMANHO_CLIENTE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Tam. No Cliente'
-                Width = 64
                 Visible = True
               end
               item
@@ -2795,14 +2782,12 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'COD_COR_CLIENTE'
                 Title.Alignment = taCenter
                 Title.Caption = 'C'#243'd. Cor Cliente'
-                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'COD_PRODUTO_CLIENTE'
                 Title.Alignment = taCenter
-                Width = 64
                 Visible = True
               end
               item
@@ -4349,9 +4334,9 @@ object frmCadPedido: TfrmCadPedido
             end
             object gbxDuplicata: TRzGroupBox
               Left = 482
-              Top = 76
+              Top = 73
               Width = 588
-              Height = 271
+              Height = 274
               Anchors = [akLeft, akTop, akRight]
               BorderColor = clMaroon
               BorderInner = fsButtonUp
@@ -4566,9 +4551,9 @@ object frmCadPedido: TfrmCadPedido
               end
               object SMDBGrid_Dupl2: TSMDBGrid
                 Left = 6
-                Top = 136
+                Top = 135
                 Width = 576
-                Height = 129
+                Height = 133
                 Align = alBottom
                 Ctl3D = False
                 DataSource = DMCadPedido.dsPedido_Parc
@@ -4971,9 +4956,9 @@ object frmCadPedido: TfrmCadPedido
             end
             object gbxVendedor: TRzGroupBox
               Left = 481
-              Top = 7
-              Width = 449
-              Height = 65
+              Top = 3
+              Width = 584
+              Height = 67
               BorderColor = clNavy
               BorderInner = fsButtonUp
               BorderOuter = fsBump
@@ -4992,15 +4977,15 @@ object frmCadPedido: TfrmCadPedido
               object pnlVendedor: TPanel
                 Left = 5
                 Top = 18
-                Width = 439
-                Height = 42
+                Width = 574
+                Height = 44
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
                 TabOrder = 0
                 object Label7: TLabel
-                  Left = 13
-                  Top = 8
+                  Left = 18
+                  Top = 10
                   Width = 49
                   Height = 13
                   Alignment = taRightJustify
@@ -5013,8 +4998,8 @@ object frmCadPedido: TfrmCadPedido
                   ParentFont = False
                 end
                 object SpeedButton3: TSpeedButton
-                  Left = 357
-                  Top = -3
+                  Left = 362
+                  Top = 1
                   Width = 23
                   Height = 22
                   Hint = 'Atualiza tabela de cliente'
@@ -5063,8 +5048,8 @@ object frmCadPedido: TfrmCadPedido
                   OnClick = SpeedButton3Click
                 end
                 object Label8: TLabel
-                  Left = 3
-                  Top = 30
+                  Left = 390
+                  Top = 10
                   Width = 59
                   Height = 13
                   Alignment = taRightJustify
@@ -5076,9 +5061,23 @@ object frmCadPedido: TfrmCadPedido
                   Font.Style = []
                   ParentFont = False
                 end
+                object Label87: TLabel
+                  Left = 3
+                  Top = 31
+                  Width = 64
+                  Height = 13
+                  Alignment = taRightJustify
+                  Caption = 'Vend.Interno:'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
+                end
                 object RxDBLookupCombo6: TRxDBLookupCombo
-                  Left = 65
-                  Top = 0
+                  Left = 70
+                  Top = 2
                   Width = 291
                   Height = 21
                   DropDownCount = 15
@@ -5099,9 +5098,9 @@ object frmCadPedido: TfrmCadPedido
                   OnExit = RxDBLookupCombo6Exit
                 end
                 object DBEdit2: TDBEdit
-                  Left = 65
-                  Top = 22
-                  Width = 89
+                  Left = 451
+                  Top = 1
+                  Width = 84
                   Height = 21
                   DataField = 'PERC_COMISSAO'
                   DataSource = DMCadPedido.dsPedido
@@ -5112,6 +5111,27 @@ object frmCadPedido: TfrmCadPedido
                   Font.Style = []
                   ParentFont = False
                   TabOrder = 1
+                end
+                object RxDBLookupCombo14: TRxDBLookupCombo
+                  Left = 70
+                  Top = 23
+                  Width = 291
+                  Height = 21
+                  DropDownCount = 15
+                  DropDownWidth = 500
+                  DataField = 'ID_VENDEDOR_INT'
+                  DataSource = DMCadPedido.dsPedido
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  LookupField = 'CODIGO'
+                  LookupDisplay = 'NOME'
+                  LookupSource = DMCadPedido.dsVendedor
+                  ParentFont = False
+                  TabOrder = 2
+                  OnEnter = RxDBLookupCombo6Enter
                 end
               end
             end

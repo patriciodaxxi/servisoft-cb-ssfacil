@@ -362,6 +362,8 @@ type
     SalvarPedido1: TMenuItem;
     Label86: TLabel;
     Matricial80Colunas1: TMenuItem;
+    Label87: TLabel;
+    RxDBLookupCombo14: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -843,7 +845,11 @@ begin
   addLog('Inicio abrir Cliente','Tempo_Execucao.txt');
   fDMCadPedido.prc_Abrir_cdsCliente;
   addLog('Fim abrir Cliente','Tempo_Execucao.txt');
-  gbxVendedor.Visible := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
+
+  gbxVendedor.Visible           := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
+  Label87.Visible               := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+  RxDBLookupCombo14.Visible     := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+
   Label21.Visible     := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P');
   DBDateEdit2.Visible := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P');
   //lblTabPreco.Visible  := (fDMCadPedido.cdsParametrosUSA_TAB_PRECO.AsString = 'S');
@@ -933,6 +939,8 @@ begin
     end;
     if SMDBGrid1.Columns[i].FieldName = 'NOME_VENDEDOR' then
       SMDBGrid1.Columns[i].Visible := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
+    if SMDBGrid1.Columns[i].FieldName = 'NOME_VENDEDOR_INT' then
+      SMDBGrid1.Columns[i].Visible := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
     if SMDBGrid1.Columns[i].FieldName = 'NUM_DOC' then
     begin
       SMDBGrid1.Columns[i].Visible := ((fDMCadPedido.cdsParametrosEMPRESA_NAVALHA.AsString = 'S') or (fDMCadPedido.qParametros_PedUSA_NUM_TALAO.AsString = 'P'));
@@ -1605,6 +1613,10 @@ begin
   fDMCadPedido.cdsPedidoPERC_COMISSAO.AsFloat := 0;
   if fDMCadPedido.qParametros_PedUSAR_VEND_USUARIO.AsString <> 'S' then
     fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR.AsInteger;
+  //29/06/2019
+  if fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S' then
+    fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
+  //****************
   if fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger > 0 then
   begin
     fDMCadPedido.cdsVendedor.Locate('CODIGO',fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger,[loCaseInsensitive]);
@@ -2036,7 +2048,8 @@ end;
 
 procedure TfrmCadPedido.RxDBLookupCombo6Enter(Sender: TObject);
 begin
-  fDMCadPedido.cdsVendedor.IndexFieldNames := 'NOME';
+  if fDMCadPedido.cdsVendedor.IndexFieldNames <> 'NOME' then
+    fDMCadPedido.cdsVendedor.IndexFieldNames := 'NOME';
 end;
 
 procedure TfrmCadPedido.RxDBLookupCombo10Change(Sender: TObject);

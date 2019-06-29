@@ -417,6 +417,9 @@ object DMCadPedido: TDMCadPedido
     object sdsPedidoID_PEDWEB: TIntegerField
       FieldName = 'ID_PEDWEB'
     end
+    object sdsPedidoID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
+    end
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
@@ -883,6 +886,9 @@ object DMCadPedido: TDMCadPedido
     object cdsPedidoID_PEDWEB: TIntegerField
       FieldName = 'ID_PEDWEB'
     end
+    object cdsPedidoID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
+    end
   end
   object dsPedido: TDataSource
     DataSet = cdsPedido
@@ -1023,32 +1029,33 @@ object DMCadPedido: TDMCadPedido
       'IO, PED.VLR_DUPLICATA, PED.QTD_LIBERADA, PED.QTD_CONFERIDO, PED.' +
       'DTRECEBIMENTO, NUM_ORDPROD,'#13#10'       PED.CONFERIDO, PED.SELECIONA' +
       'DO, PED.IMPRESSO, VEND.NOME NOME_VENDEDOR, OPN.NOME NOME_OPERACA' +
-      'O,'#13#10'       PED.FINANCEIRO_CONF, PED.AMOSTRA, CLI.CNPJ_CPF,'#13#10'    ' +
-      '   case(select max(PP.ITEM)'#13#10'            from PEDIDO_PROCESSO PP' +
-      #13#10'            where PP.ID = PED.ID)'#13#10'         when '#39'1'#39' then '#39'Cad' +
-      'astro'#39#13#10'         when '#39'5'#39' then '#39'Lib.Expedi'#231#227'o'#39#13#10'         when '#39'1' +
-      '0'#39' then '#39'Faturado'#39#13#10'         when '#39'15'#39' then '#39'Lib.Transporte'#39#13#10'  ' +
-      '     end DESCRICAO_STATUS,'#13#10'       (select'#13#10'               case'#13 +
-      #10'                 when sum(TOT_PED) = 0 then '#39'N'#39#13#10'              ' +
-      '   when sum(TOT_PED) >= sum(TOT_ITENS) then '#39'S'#39#13#10'               ' +
-      '  else '#39'P'#39#13#10'               end'#13#10'        from (select count(1) TO' +
-      'T_ITENS, 0 TOT_PED'#13#10'              from PEDIDO_ITEM PIT'#13#10'        ' +
-      '      where PIT.ID = PED.ID'#13#10'              union all'#13#10'          ' +
-      '    select 0 TOT_ITENS, count(1) TOT_PED'#13#10'              from (se' +
-      'lect ID_PEDIDO, ITEM_PEDIDO'#13#10'                    from LOTE_PED L' +
-      'PD'#13#10'                    where LPD.ID_PEDIDO = PED.ID'#13#10'          ' +
-      '          group by ID_PEDIDO, ITEM_PEDIDO))) GEROU_PRODUCAO,'#13#10'  ' +
-      '     (select count(1) CONT_TALAO'#13#10'        from TALAO_PED TP'#13#10'   ' +
-      '     where TP.ID_PEDIDO = PED.ID) CONT_TALAO,'#13#10'       (select co' +
-      'unt(1) CONT_TALAO2'#13#10'        from LOTE_PED_CALC LPC'#13#10'        wher' +
-      'e LPC.ID_PEDIDO = PED.ID) CONT_TALAO2,'#13#10'       (select coalesce(' +
-      'sum(PRECO_CUSTO * QTD), 0)'#13#10'        from PEDIDO_ITEM'#13#10'        wh' +
-      'ere ID = PED.ID) VALOR_CUSTO'#13#10#13#10'from PEDIDO PED'#13#10'left join PESSO' +
-      'A CLI on PED.ID_CLIENTE = CLI.CODIGO'#13#10'left join PESSOA TRA on PE' +
-      'D.ID_TRANSPORTADORA = TRA.CODIGO'#13#10'left join PEDIDO_APROV AP on P' +
-      'ED.ID = AP.ID'#13#10'left join PESSOA VEND on PED.ID_VENDEDOR = VEND.C' +
-      'ODIGO'#13#10'left join OPERACAO_NOTA OPN on PED.ID_OPERACAO_NOTA = OPN' +
-      '.ID  '#13#10#13#10
+      'O,'#13#10'       PED.FINANCEIRO_CONF, PED.AMOSTRA, CLI.CNPJ_CPF, PED.I' +
+      'D_VENDEDOR_INT, VEND2.NOME NOME_VENDEDOR_INT,'#13#10'       case(selec' +
+      't max(PP.ITEM)'#13#10'            from PEDIDO_PROCESSO PP'#13#10'           ' +
+      ' where PP.ID = PED.ID)'#13#10'         when '#39'1'#39' then '#39'Cadastro'#39#13#10'     ' +
+      '    when '#39'5'#39' then '#39'Lib.Expedi'#231#227'o'#39#13#10'         when '#39'10'#39' then '#39'Fatu' +
+      'rado'#39#13#10'         when '#39'15'#39' then '#39'Lib.Transporte'#39#13#10'       end DESC' +
+      'RICAO_STATUS,'#13#10'       (select'#13#10'               case'#13#10'            ' +
+      '     when sum(TOT_PED) = 0 then '#39'N'#39#13#10'                 when sum(T' +
+      'OT_PED) >= sum(TOT_ITENS) then '#39'S'#39#13#10'                 else '#39'P'#39#13#10' ' +
+      '              end'#13#10'        from (select count(1) TOT_ITENS, 0 TO' +
+      'T_PED'#13#10'              from PEDIDO_ITEM PIT'#13#10'              where P' +
+      'IT.ID = PED.ID'#13#10'              union all'#13#10'              select 0 ' +
+      'TOT_ITENS, count(1) TOT_PED'#13#10'              from (select ID_PEDID' +
+      'O, ITEM_PEDIDO'#13#10'                    from LOTE_PED LPD'#13#10'         ' +
+      '           where LPD.ID_PEDIDO = PED.ID'#13#10'                    gro' +
+      'up by ID_PEDIDO, ITEM_PEDIDO))) GEROU_PRODUCAO,'#13#10'       (select ' +
+      'count(1) CONT_TALAO'#13#10'        from TALAO_PED TP'#13#10'        where TP' +
+      '.ID_PEDIDO = PED.ID) CONT_TALAO,'#13#10'       (select count(1) CONT_T' +
+      'ALAO2'#13#10'        from LOTE_PED_CALC LPC'#13#10'        where LPC.ID_PEDI' +
+      'DO = PED.ID) CONT_TALAO2,'#13#10'       (select coalesce(sum(PRECO_CUS' +
+      'TO * QTD), 0)'#13#10'        from PEDIDO_ITEM'#13#10'        where ID = PED.' +
+      'ID) VALOR_CUSTO'#13#10#13#10'from PEDIDO PED'#13#10'left join PESSOA CLI on PED.' +
+      'ID_CLIENTE = CLI.CODIGO'#13#10'left join PESSOA TRA on PED.ID_TRANSPOR' +
+      'TADORA = TRA.CODIGO'#13#10'left join PEDIDO_APROV AP on PED.ID = AP.ID' +
+      #13#10'left join PESSOA VEND on PED.ID_VENDEDOR = VEND.CODIGO'#13#10'left j' +
+      'oin OPERACAO_NOTA OPN on PED.ID_OPERACAO_NOTA = OPN.ID  '#13#10'LEFT J' +
+      'OIN PESSOA VEND2 ON PED.ID_VENDEDOR_INT = VEND2.CODIGO'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1270,6 +1277,13 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsPedido_ConsultaCNPJ_CPF: TStringField
       FieldName = 'CNPJ_CPF'
+    end
+    object cdsPedido_ConsultaID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
+    end
+    object cdsPedido_ConsultaNOME_VENDEDOR_INT: TStringField
+      FieldName = 'NOME_VENDEDOR_INT'
+      Size = 60
     end
   end
   object dsPedido_Consulta: TDataSource
@@ -9247,8 +9261,8 @@ object DMCadPedido: TDMCadPedido
       'S.VLR_LIMITE_COMPRA, PES.TIPO_CONSUMIDOR, PES.TIPO_CONTRIBUINTE,' +
       ' USUARIO_LOG,'#13#10'       PES.INSC_SUFRAMA, PES.DDDCELULAR, PES.CELU' +
       'LAR, PES.ID_GRUPO, PES.IMP_COR_CLIENTE,'#13#10'       PES.MOSTRAR_AVIS' +
-      'O,PES.OBS_AVISO, IPI_PAGO_FILIAL,'#13#10'PES.IMP_ETIQUETA_ROT'#13#10'from PE' +
-      'SSOA PES'#13#10
+      'O,PES.OBS_AVISO, IPI_PAGO_FILIAL,  PES.IMP_ETIQUETA_ROT,  PES.ID' +
+      '_VENDEDOR_INT'#13#10'from PESSOA PES'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -9399,6 +9413,9 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'IMP_ETIQUETA_ROT'
       FixedChar = True
       Size = 1
+    end
+    object cdsClienteID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
     end
   end
   object dsCliente: TDataSource
@@ -16368,6 +16385,11 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_GeralUSA_TIPO_MATERIAL: TStringField
       FieldName = 'USA_TIPO_MATERIAL'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_GeralUSA_VENDEDOR_INT: TStringField
+      FieldName = 'USA_VENDEDOR_INT'
       FixedChar = True
       Size = 1
     end

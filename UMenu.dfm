@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 627
+    Height = 635
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -4070,48 +4070,6 @@ object fMenu: TfMenu
         GroupName = 'Esp'#233'cie Animal (Tipo)'
       end
       item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnBuscarProduto'
-        Caption = 'Buscar Produtos Para a Tabela de Pre'#231'o'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnAplicar'
-        Caption = 'Aplicar'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnExportar'
-        Caption = 'Exportar'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
-        FormName = 'frmCadTabPreco'
-        CompName = 'pnlExcluirSel'
-        Caption = 'Excluir Selecionados'
-        GroupName = 'Tabela Pre'#231'o'
-      end
-      item
         FormName = 'frmCadPedido'
         CompName = 'btnInserir'
         Caption = 'Inserir'
@@ -4248,6 +4206,48 @@ object fMenu: TfMenu
         CompName = 'Matricial80Colunas1'
         Caption = 'Matricial 80 Colunas'
         GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnBuscarProduto'
+        Caption = 'Buscar Produtos Para a Tabela de Pre'#231'o'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnAplicar'
+        Caption = 'Aplicar Ajuste'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnExportar'
+        Caption = 'Exportar'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'pnlExcluirSel'
+        Caption = 'Excluir Selecionados'
+        GroupName = 'Tabela Pre'#231'o'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

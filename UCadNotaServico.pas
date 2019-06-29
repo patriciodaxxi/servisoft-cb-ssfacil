@@ -4349,7 +4349,7 @@ begin
       fDMNFSe.fDMCadNotaServico := fDMCadNotaServico;
       fDMNFSe.ConfigurarComponente;
       fDMNFSe.prc_Abrir_NotaServico_Comunicacao(fDMCadNotaServico.cdsNotaServico_ImpID.AsInteger);
-      fdmNFSe.ConsultaNfse;
+      //fdmNFSe.ConsultaNfse;
     finally
       FreeAndNil(fDMNFSe);
     end;

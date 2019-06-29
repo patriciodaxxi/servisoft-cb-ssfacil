@@ -210,6 +210,8 @@ type
     Label44: TLabel;
     DBEdit30: TDBEdit;
     SalvarOramento1: TMenuItem;
+    Label45: TLabel;
+    RxDBLookupCombo8: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -455,7 +457,6 @@ begin
       fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger := fDMCadPedido.qUsuarioCODIGO.AsInteger;
   end;
 
-
   fDMCadPedido.cdsPedidoID_REGIMETRIB.AsInteger := fDMCadPedido.cdsFilialID_REGIME_TRIB.AsInteger;
   fDMCadPedido.cdsPedidoSIMPLES_FILIAL.AsString := fDMCadPedido.cdsFilialSIMPLES.AsString;
 
@@ -495,6 +496,8 @@ begin
     vTexto := SMDBGrid1.Columns[i].FieldName;
     if vTexto = 'NOME_CONSUMIDOR' then
       SMDBGrid1.Columns[i].Visible := (fDMCadPedido.cdsParametrosID_CLIENTE_CONSUMIDOR.AsInteger > 0);
+    if vTexto = 'NOME_VENDEDOR_INT' then
+      SMDBGrid1.Columns[i].Visible := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
   end;
 
   for i := 1 to SMDBGrid2.ColCount - 2 do
@@ -517,6 +520,8 @@ begin
   RxDBLookupCombo6.Visible := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
   Label30.Visible          := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
   DBEdit17.Visible         := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
+  Label45.Visible          := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+  RxDBLookupCombo8.Visible := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
 
   btnLucratividade.Visible := (fDMCadPedido.qParametros_PedINF_LUCRATIVIDADE.AsString = 'S');
   Label32.Visible          := (fDMCadPedido.qParametros_PedUSA_EMAIL_NO_PED.AsString = 'S');
@@ -1024,6 +1029,8 @@ begin
     fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger  := fDMCadPedido.cdsClienteID_CONDPGTO.AsInteger;
   if fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger > 0 then
     fDMCadPedido.vSiglaUF := fDMCadPedido.cdsClienteUF.AsString;
+  if (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S') and (fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger > 0) then
+    fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
 end;
 
 procedure TfrmCadOrcamento.DBEdit1Enter(Sender: TObject);
