@@ -1976,7 +1976,10 @@ begin
     ffrmConsHist_Chapa.fDMCopiaPedido := ffrmCadPedido_Copia.fDMCopiaPedido;
     ffrmConsHist_Chapa.vID_Cliente := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger;
     ffrmConsHist_Chapa.ShowModal;
+    ffrmCadPedido_Copia.vPercentualAcrescimo := StrToFloat(ffrmConsHist_Chapa.edtReajuste.Text);
+    ffrmCadPedido_Copia.vFatorMultiplicador := StrToFloat(ffrmConsHist_Chapa.edtMultiplicador.Text);
     ffrmCadPedido_Copia.prc_Le_Aux;
+
     FreeAndNil(ffrmConsHist_Chapa);
     FreeAndNil(ffrmCadPedido_Copia);
     btnCalcular_ValoresClick(Sender);

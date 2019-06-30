@@ -1,6 +1,6 @@
 object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
-  Left = 262
-  Top = 24
+  Left = 144
+  Top = 19
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmMontaPed_TipoItem'

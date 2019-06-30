@@ -87,7 +87,7 @@ var
 implementation
 
 uses
-  DmdDatabase, uUtilPadrao, uCalculo_Pedido;
+  DmdDatabase, uUtilPadrao, uCalculo_Pedido, classe.CalcularPeso;
 
 {$R *.dfm}
 
@@ -352,34 +352,25 @@ end;
 
 procedure TfrmMontaPed_TipoItem.prc_Calcular_Peso_PC_Chapa;
 var
-  vAux : Real;
+  vCalcular : TCalcluar_Peso;
 begin
   mArquivoImportado.DisableControls;
+  vCalcular := TCalcluar_Peso.Create;
   try
-    vAux := (mArquivoImportadoComprimento.AsFloat + 10) * (mArquivoImportadoLargura.AsFloat + 10)
-          * mArquivoImportadoEspessura.AsFloat * 8;
-  //        * mArquivoImportadoAltura.AsFloat * 8; ver com o Cleomar o campo altura ou espessura
-    if StrToFloat(FormatFloat('0.0000000',vAux)) > 0 then
-    begin
-      vAux := StrToFloat(FormatFloat('0.0000000',vAux / 1000000));
-      mArquivoImportado.Edit;
-      mArquivoImportadoPeso.AsFloat := StrToFloat(FormatFloat('0.0000000',vAux));
-      mArquivoImportado.Post;
-    end;
-    if (StrToFloat(FormatFloat('0.000',mArquivoImportadoFator_Calculo.AsFloat)) > 0) and (StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat)) > 0) then
-    begin
-      mArquivoImportado.Edit;
-      mArquivoImportadoPeso.AsFloat := StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat +((mArquivoImportadoPeso.AsFloat * mArquivoImportadoFator_Calculo.AsFloat) / 100)));
-      mArquivoImportado.Post;
-    end;
-    if StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat)) > 0 then
-    begin
-      mArquivoImportado.Edit;
-      mArquivoImportadoVlr_Unitario.AsFloat := StrToFloat(FormatFloat('0.00',mArquivoImportadoPeso.AsFloat * mArquivoImportadoPrecoKG.AsFloat));
-      mArquivoImportado.Post;
-    end;
+    vCalcular.Espessura   :=  mArquivoImportadoEspessura.AsFloat;
+    vCalcular.Largura     :=  mArquivoImportadoLargura.AsFloat;
+    vCalcular.Comprimento :=  mArquivoImportadoComprimento.AsFloat;
+    vCalcular.FatorCalculo := mArquivoImportadoFator_Calculo.AsFloat;
+    vCalcular.CalcularPeso;
+    mArquivoImportado.Edit;
+    mArquivoImportadoPeso.AsFloat := vCalcular.Peso;
+    mArquivoImportadoVlr_Unitario.AsFloat := vCalcular.ValorUnitario;
+    mArquivoImportado.Post;
   finally
-    mArquivoImportado.EnableControls;
+    begin
+      vCalcular.Free;
+      mArquivoImportado.EnableControls;
+    end;
   end;
 end;
 
@@ -398,19 +389,24 @@ begin
 end;
 
 procedure TfrmMontaPed_TipoItem.prc_Calcular_VlrTotal;
+var
+  vCalcular : TCalcluar_Peso;
 begin
-  if StrToFloat(FormatFloat('0.0000000',mArquivoImportadoPeso.AsFloat)) > 0 then
-  begin
+  vCalcular := TCalcluar_Peso.Create;
+  try
+    vCalcular.ValorDobra := mArquivoImportadoVlr_Dobra.AsFloat;
+    vCalcular.PrecoKG := mArquivoImportadoPrecoKG.AsFloat;
+    vCalcular.Peso := mArquivoImportadoPeso.AsFloat;
+    vCalcular.Quantidade := mArquivoImportadoQtde.AsFloat;
+    vCalcular.CalcularVlrUnitario;
+    vCalcular.CalcularVlrTotal;
     mArquivoImportado.Edit;
-    mArquivoImportadoVlr_Unitario.AsFloat := StrToFloat(FormatFloat('0.00',mArquivoImportadoVlr_Dobra.AsFloat + (mArquivoImportadoPeso.AsFloat * mArquivoImportadoPrecoKG.AsFloat)));
+    mArquivoImportadoVlr_Unitario.AsFloat := vCalcular.ValorUnitario;
+    mArquivoImportadoVlr_Total.AsFloat := vCalcular.ValorTotal;
     mArquivoImportado.Post;
-  end;
-  if (mArquivoImportadoVlr_Unitario.AsFloat > 0) and (mArquivoImportadoQtde.AsFloat > 0) then
-  begin
-    mArquivoImportado.Edit;
-    mArquivoImportadoVlr_Total.AsFloat := StrToFloat(FormatFloat('0.00',mArquivoImportadoVlr_Unitario.AsFloat * mArquivoImportadoQtde.AsFloat));
-    mArquivoImportado.Post;
-  end;
+  finally
+    vCalcular.Free;
+  end
 end;
 
 procedure TfrmMontaPed_TipoItem.mArquivoImportadoQtdeChange(

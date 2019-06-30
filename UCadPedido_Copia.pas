@@ -38,6 +38,8 @@ type
     fDMCopiaPedido: TDMCopiaPedido;
     fDMCadPedido: TDMCadPedido;
     vNum_Pedido : Integer;
+    vFatorMultiplicador : Real;
+    vPercentualAcrescimo : Real;
 
     procedure prc_Le_Aux;
 
@@ -48,7 +50,7 @@ var
 
 implementation
 
-uses DB, uUtilPadrao, uGrava_Pedido;
+uses DB, uUtilPadrao, uGrava_Pedido, classe.CalcularPeso;
 
 {$R *.dfm}
 
@@ -213,6 +215,7 @@ var
   vID_Ant : Integer;
   vItem_Aux : Integer;
   i : Integer;
+  vCalcular : TCalcluar_Peso;
 begin
   vID_Ant := 0;
   fDMCopiaPedido.mAux.First;
@@ -231,6 +234,9 @@ begin
           fDMCadPedido.cdsPedido_Itens.FieldByName(fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido_Itens.Fields[i].Value;
       end;
       fDMCadPedido.cdsPedido_ItensDTENTREGA.Clear;
+      fDMCadPedido.cdsPedido_ItensQTD.AsFloat := vFatorMultiplicador * fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
+      fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat + (fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat * (vFatorMultiplicador / 100));
+      fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat := fDMCadPedido.cdsPedido_ItensQTD.AsFloat * fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat;
       fDMCadPedido.cdsPedido_ItensQTD_CANCELADO.AsInteger := 0;
       fDMCadPedido.cdsPedido_ItensQTD_FATURADO.AsInteger  := 0;
       fDMCadPedido.cdsPedido_ItensQTD_FUT.AsInteger       := 0;
@@ -252,6 +258,32 @@ begin
           if (fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName <> 'ITEM') then
             fDMCadPedido.cdsPedido_Item_Tipo.FieldByName(fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido_Item_Tipo.Fields[i].Value;
         end;
+
+        fDMCadPedido.cdsPedido_Item_TipoQTD.AsFloat := fDMCadPedido.cdsPedido_Item_TipoQTD.AsFloat * vFatorMultiplicador;
+        fDMCadPedido.cdsPedido_Item_TipoVLR_KG.AsFloat := fDMCadPedido.cdsPedido_Item_TipoVLR_KG.AsFloat + (fDMCadPedido.cdsPedido_Item_TipoVLR_KG.AsFloat * (vPercentualAcrescimo / 100));
+        vCalcular := TCalcluar_Peso.Create;
+        try
+          vCalcular.Espessura    := fDMCadPedido.cdsPedido_Item_TipoESPESSURA.AsFloat;
+          vCalcular.Largura      := fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat;
+          vCalcular.Comprimento  := fDMCadPedido.cdsPedido_Item_TipoCOMPRIMENTO.AsFloat;
+          vCalcular.FatorCalculo := fDMCadPedido.cdsPedido_Item_TipoFATOR_CALCULO.AsFloat;
+          vCalcular.CalcularPeso;
+          fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat := vCalcular.Peso;
+
+          vCalcular.ValorDobra   := fDMCadPedido.cdsPedido_Item_TipoVLR_DOBRA.AsFloat;
+          vCalcular.PrecoKG      := fDMCadPedido.cdsPedido_Item_TipoVLR_KG.AsFloat;
+          vCalcular.Quantidade   := fDMCadPedido.cdsPedido_Item_TipoQTD.AsFloat;
+
+          vCalcular.CalcularVlrUnitario;
+          vCalcular.CalcularVlrTotal;
+          fDMCadPedido.cdsPedido_Item_TipoVLR_UNITARIO.AsFloat := vCalcular.ValorUnitario;
+
+          fDMCadPedido.cdsPedido_Item_TipoVLR_TOTAL.AsFloat    := vCalcular.ValorTotal;
+
+        finally
+          vCalcular.Free;
+        end;
+
         fDMCadPedido.cdsPedido_Item_Tipo.Post;
         fDMCopiaPedido.cdsPedido_Item_Tipo.Next;
       end;

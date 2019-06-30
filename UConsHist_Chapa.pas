@@ -52,6 +52,10 @@ type
     cdsChapaVLR_TOTAL_ITEM: TFloatField;
     cdsChapaNOMEPRODUTO: TStringField;
     cdsChapaESPESSURA: TFloatField;
+    Label3: TLabel;
+    edtReajuste: TEdit;
+    Label4: TLabel;
+    edtMultiplicador: TEdit;
     procedure btnConsultarClick(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -189,6 +193,10 @@ begin
     end;
     cdsChapa.Next;
   end;
+  if edtMultiplicador.Text = '' then
+    edtMultiplicador.Text := '1';
+  if edtReajuste.Text = '' then
+    edtReajuste.Text := '0';
   Close;
 end;
 

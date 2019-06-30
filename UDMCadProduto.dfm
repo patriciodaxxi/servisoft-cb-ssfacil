@@ -8092,13 +8092,18 @@ object dmCadProduto: TdmCadProduto
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT * FROM VFICHA_TECNICA3'#13#10'WHERE ID = :ID '#13#10'ORDER BY ID_SETO' +
-      'R'
+      'SELECT * FROM VFICHA_TECNICA'#13#10'WHERE ID = :ID AND ITEM = :ITEM'#13#10'O' +
+      'RDER BY ID_SETOR'
     MaxBlobSize = -1
     Params = <
       item
         DataType = ftInteger
         Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
