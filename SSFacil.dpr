@@ -806,7 +806,8 @@ uses
   uConsProdutoPedido in 'uConsProdutoPedido.pas' {frmConsultaProduto},
   uMostraPDF in 'uMostraPDF.pas' {frmMostraPDF},
   UConsClienteOBS in 'UConsClienteOBS.pas' {frmConsClienteOBS},
-  uImprimir in 'uImprimir.pas';
+  uImprimir in 'uImprimir.pas',
+  classe.CalcularPeso in 'Classes\classe.CalcularPeso.pas';
 
 {$R *.res}
 
