@@ -667,7 +667,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 13
+        ColCount = 14
         RowCount = 2
         Columns = <
           item
@@ -740,7 +740,15 @@ object frmCadOrcamento: TfrmCadOrcamento
             FieldName = 'NOME_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Vendedor'
-            Width = 64
+            Width = 328
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME_VENDEDOR_INT'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nome Vendedor Interno'
+            Width = 179
             Visible = True
           end
           item
@@ -1057,7 +1065,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         Left = 0
         Top = 32
         Width = 1004
-        Height = 160
+        Height = 179
         Align = alTop
         Enabled = False
         TabOrder = 0
@@ -1065,13 +1073,13 @@ object frmCadOrcamento: TfrmCadOrcamento
           Left = 1
           Top = 32
           Width = 1002
-          Height = 127
+          Height = 146
           Align = alClient
           TabOrder = 0
           OnEnter = pnlClienteEnter
           DesignSize = (
             1002
-            127)
+            146)
           object Label18: TLabel
             Left = 24
             Top = 10
@@ -1308,7 +1316,7 @@ object frmCadOrcamento: TfrmCadOrcamento
           end
           object Label17: TLabel
             Left = 466
-            Top = 109
+            Top = 129
             Width = 58
             Height = 13
             Alignment = taRightJustify
@@ -1322,7 +1330,7 @@ object frmCadOrcamento: TfrmCadOrcamento
           end
           object Label19: TLabel
             Left = -1
-            Top = 107
+            Top = 127
             Width = 81
             Height = 13
             Alignment = taRightJustify
@@ -1395,6 +1403,20 @@ object frmCadOrcamento: TfrmCadOrcamento
             Height = 13
             Alignment = taRightJustify
             Caption = 'Dt.Validade:'
+          end
+          object Label45: TLabel
+            Left = 16
+            Top = 109
+            Width = 64
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Vendedor Int:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
           end
           object DBDateEdit1: TDBDateEdit
             Left = 81
@@ -1520,7 +1542,7 @@ object frmCadOrcamento: TfrmCadOrcamento
           end
           object RxDBLookupCombo4: TRxDBLookupCombo
             Left = 525
-            Top = 101
+            Top = 121
             Width = 251
             Height = 21
             DropDownCount = 15
@@ -1538,11 +1560,11 @@ object frmCadOrcamento: TfrmCadOrcamento
             LookupSource = DMCadPedido.dsFuncionario
             ParentCtl3D = False
             ParentFont = False
-            TabOrder = 17
+            TabOrder = 18
           end
           object DBEdit3: TDBEdit
             Left = 81
-            Top = 101
+            Top = 121
             Width = 381
             Height = 19
             Hint = 'Quando produto da proposta n'#227'o cadastrado'
@@ -1553,7 +1575,7 @@ object frmCadOrcamento: TfrmCadOrcamento
             ParentCtl3D = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 16
+            TabOrder = 17
             OnEnter = DBEdit1Enter
           end
           object DBDateEdit2: TDBDateEdit
@@ -1668,6 +1690,28 @@ object frmCadOrcamento: TfrmCadOrcamento
             ParentCtl3D = False
             TabOrder = 12
             StartOfWeek = Sun
+          end
+          object RxDBLookupCombo8: TRxDBLookupCombo
+            Left = 81
+            Top = 101
+            Width = 268
+            Height = 21
+            DropDownCount = 15
+            DropDownWidth = 500
+            Ctl3D = False
+            DataField = 'ID_VENDEDOR_INT'
+            DataSource = DMCadPedido.dsPedido
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            LookupField = 'CODIGO'
+            LookupDisplay = 'NOME'
+            LookupSource = DMCadPedido.dsVendedor
+            ParentCtl3D = False
+            ParentFont = False
+            TabOrder = 16
           end
         end
         object pnlNota: TPanel
@@ -1815,9 +1859,9 @@ object frmCadOrcamento: TfrmCadOrcamento
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 192
+        Top = 211
         Width = 1004
-        Height = 409
+        Height = 390
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -1835,7 +1879,7 @@ object frmCadOrcamento: TfrmCadOrcamento
             Left = 0
             Top = 30
             Width = 1000
-            Height = 62
+            Height = 60
             Align = alClient
             DataSource = DMCadPedido.dsPedido_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1889,7 +1933,6 @@ object frmCadOrcamento: TfrmCadOrcamento
               item
                 Expanded = False
                 FieldName = 'REFERENCIA'
-                Width = 64
                 Visible = True
               end
               item
@@ -1984,7 +2027,6 @@ object frmCadOrcamento: TfrmCadOrcamento
                 FieldName = 'GRAVACAO_COM_ERRO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Com Notifica'#231#227'o'
-                Width = 64
                 Visible = True
               end>
           end
@@ -2248,9 +2290,9 @@ object frmCadOrcamento: TfrmCadOrcamento
           end
           object pnlMaterial: TPanel
             Left = 0
-            Top = 281
+            Top = 279
             Width = 1000
-            Height = 105
+            Height = 88
             Align = alBottom
             Caption = 'pnlMaterial'
             TabOrder = 2
@@ -2258,7 +2300,7 @@ object frmCadOrcamento: TfrmCadOrcamento
               Left = 819
               Top = 1
               Width = 180
-              Height = 103
+              Height = 86
               Align = alRight
               Ctl3D = False
               DataSource = DMCadPedido.dsPedido_Etiqueta
@@ -2310,7 +2352,7 @@ object frmCadOrcamento: TfrmCadOrcamento
               Left = 1
               Top = 1
               Width = 796
-              Height = 103
+              Height = 86
               Align = alLeft
               Anchors = [akLeft, akTop, akRight, akBottom]
               Ctl3D = False
@@ -2437,7 +2479,7 @@ object frmCadOrcamento: TfrmCadOrcamento
           end
           object pnlTipoItem: TPanel
             Left = 0
-            Top = 210
+            Top = 208
             Width = 1000
             Height = 71
             Align = alBottom
@@ -2615,7 +2657,7 @@ object frmCadOrcamento: TfrmCadOrcamento
           end
           object pnlVidro: TPanel
             Left = 0
-            Top = 151
+            Top = 149
             Width = 1000
             Height = 59
             Align = alBottom
@@ -2751,7 +2793,7 @@ object frmCadOrcamento: TfrmCadOrcamento
           end
           object pnlPorta: TPanel
             Left = 0
-            Top = 92
+            Top = 90
             Width = 1000
             Height = 59
             Align = alBottom
@@ -3130,7 +3172,7 @@ object frmCadOrcamento: TfrmCadOrcamento
             Left = 0
             Top = 30
             Width = 1000
-            Height = 267
+            Height = 248
             Align = alClient
             DataSource = DMCadPedido.dsPedidoServico
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -3192,13 +3234,12 @@ object frmCadOrcamento: TfrmCadOrcamento
               item
                 Expanded = False
                 FieldName = 'VLR_TOTAL'
-                Width = 64
                 Visible = True
               end>
           end
           object DBMemo2: TDBMemo
             Left = 0
-            Top = 297
+            Top = 278
             Width = 1000
             Height = 89
             Align = alBottom
@@ -3213,14 +3254,14 @@ object frmCadOrcamento: TfrmCadOrcamento
             Left = 0
             Top = 0
             Width = 1000
-            Height = 386
+            Height = 367
             Align = alClient
             TabOrder = 0
             object RzGroupBox1: TRzGroupBox
               Left = 1
               Top = 67
               Width = 998
-              Height = 318
+              Height = 299
               Align = alClient
               BorderColor = clLime
               BorderInner = fsButtonUp
@@ -3364,7 +3405,7 @@ object frmCadOrcamento: TfrmCadOrcamento
           Enabled = False
           DesignSize = (
             1000
-            386)
+            367)
           object Label27: TLabel
             Left = 351
             Top = 46
@@ -4032,7 +4073,7 @@ object frmCadOrcamento: TfrmCadOrcamento
             Left = 0
             Top = 30
             Width = 1000
-            Height = 356
+            Height = 337
             Align = alClient
             DataSource = DMCadPedido.dsPedido_Ace
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -4360,7 +4401,7 @@ object frmCadOrcamento: TfrmCadOrcamento
             Left = 0
             Top = 30
             Width = 1000
-            Height = 356
+            Height = 337
             Align = alClient
             DataSource = DMCadPedido.dsPedido_Rol
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]

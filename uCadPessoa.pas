@@ -564,6 +564,12 @@ type
     RxDBComboBox18: TRxDBComboBox;
     DBCheckBox32: TDBCheckBox;
     DBCheckBox5: TDBCheckBox;
+    Label197: TLabel;
+    RxDBLookupCombo45: TRxDBLookupCombo;
+    Label198: TLabel;
+    Edit1: TEdit;
+    Label199: TLabel;
+    Edit2: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -796,6 +802,10 @@ begin
       SMDBGrid1.Columns[i].Visible := (fDMCadPessoa.qParametrosEMPRESA_CONTABIL.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'COD_VENDEDOR') then
       SMDBGrid1.Columns[i].Visible := (fDMCadPessoa.qParametros_GeralUSA_COD_VENDEDOR.AsString = 'S');
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_VENDEDOR') or (SMDBGrid1.Columns[i].FieldName = 'PERC_COMISSAO_VEND') then
+      SMDBGrid1.Columns[i].Visible := (fDMCadPessoa.qParametrosUSA_VENDEDOR.AsString = 'S');
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_VENDEDOR_INT') then
+      SMDBGrid1.Columns[i].Visible := (fDMCadPessoa.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
   end;
   DBCheckBox16.Visible := (fDMCadPessoa.qParametrosCADASTRA_ORGAO_PUBLICO.AsString = 'S');
   Label92.Visible := (fDMCadPessoa.qParametrosEMPRESA_CONTABIL.AsString = 'S');
@@ -839,6 +849,18 @@ begin
   DBCheckBox32.Visible := (fDMCadPessoa.qParametros_NFeIMP_NOMEPROD_CLIENTE.AsString = 'S');
   btnConfDescontos.Visible := ((fDMCadPessoa.qParametros_UsuarioLIBERA_CONFIG_VENDEDOR.AsString = 'S')
                               and (fDMCadPessoa.qParametros_ComUSA_CONFIG_IND.AsString = 'S'));
+
+  Label26.Visible          := (fDMCadPessoa.qParametrosUSA_VENDEDOR.AsString = 'S');
+  RxDBLookupCombo4.Visible := (fDMCadPessoa.qParametrosUSA_VENDEDOR.AsString = 'S');
+  SpeedButton6.Visible     := (fDMCadPessoa.qParametrosUSA_VENDEDOR.AsString = 'S');
+  Label27.Visible          := (fDMCadPessoa.qParametrosUSA_VENDEDOR.AsString = 'S');
+  DBEdit24.Visible         := (fDMCadPessoa.qParametrosUSA_VENDEDOR.AsString = 'S');
+  Label198.Visible         := (fDMCadPessoa.qParametrosUSA_VENDEDOR.AsString = 'S');
+  Edit1.Visible            := (fDMCadPessoa.qParametrosUSA_VENDEDOR.AsString = 'S');
+  Label197.Visible          := (fDMCadPessoa.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+  RxDBLookupCombo45.Visible := (fDMCadPessoa.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+  Label199.Visible         := (fDMCadPessoa.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+  Edit2.Visible            := (fDMCadPessoa.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
 end;
 
 procedure TfrmCadPessoa.btnInserirClick(Sender: TObject);
@@ -961,6 +983,10 @@ begin
       fDMCadPessoa.sdsPessoa_Consulta.CommandText := fDMCadPessoa.sdsPessoa_Consulta.CommandText + ' AND P.DTCADASTRO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit1.date));
     if DateEdit2.Date > 10 then
       fDMCadPessoa.sdsPessoa_Consulta.CommandText := fDMCadPessoa.sdsPessoa_Consulta.CommandText + ' AND P.DTCADASTRO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY', DateEdit2.date));
+    if Trim(Edit1.Text) <> '' then
+      fDMCadPessoa.sdsPessoa_Consulta.CommandText := fDMCadPessoa.sdsPessoa_Consulta.CommandText + ' AND (VEND.NOME LIKE ' + QuotedStr('%' + Edit1.Text + '%') + ')';
+    if Trim(Edit2.Text) <> '' then
+      fDMCadPessoa.sdsPessoa_Consulta.CommandText := fDMCadPessoa.sdsPessoa_Consulta.CommandText + ' AND (VEND2.NOME LIKE ' + QuotedStr('%' + Edit2.Text + '%') + ')';
   end;
   fDMCadPessoa.cdsPessoa_Consulta.Open;
   SMDBGrid1.EnableScroll;

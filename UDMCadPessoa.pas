@@ -1268,6 +1268,12 @@ type
     cdsPessoa_AnimalclNome_Raca: TStringField;
     cdsPessoa_AnimalclNome_RemedioPulga: TStringField;
     cdsPessoa_AnimalclNome_Racao: TStringField;
+    sdsPessoaID_VENDEDOR_INT: TIntegerField;
+    cdsPessoaID_VENDEDOR_INT: TIntegerField;
+    qParametros_GeralUSA_VENDEDOR_INT: TStringField;
+    cdsPessoa_ConsultaID_VENDEDOR_INT: TIntegerField;
+    cdsPessoa_ConsultaNOME_VENDEDOR_INT: TStringField;
+    qParametrosUSA_VENDEDOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

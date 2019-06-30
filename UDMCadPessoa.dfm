@@ -614,6 +614,9 @@ object DMCadPessoa: TDMCadPessoa
       FixedChar = True
       Size = 1
     end
+    object sdsPessoaID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
+    end
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
@@ -1276,6 +1279,9 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'GERAR_PROTESTO'
       FixedChar = True
       Size = 1
+    end
+    object cdsPessoaID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
     end
   end
   object dsPessoa: TDataSource
@@ -2031,6 +2037,11 @@ object DMCadPessoa: TDMCadPessoa
     end
     object qParametrosTIPO_COMISSAO_PROD: TStringField
       FieldName = 'TIPO_COMISSAO_PROD'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametrosUSA_VENDEDOR: TStringField
+      FieldName = 'USA_VENDEDOR'
       FixedChar = True
       Size = 1
     end
@@ -3209,34 +3220,36 @@ object DMCadPessoa: TDMCadPessoa
       'MENTO,'#13#10' P.QTD_ULT_FATURAMENTO, PF.DTNASCIMENTO, P.MAE_NOME, P.P' +
       'AI_NOME, PF.CONJUGE_NOME, PF.CONJUGE_CPF, PF.CONJUGE_DTNASCIMENT' +
       'O,'#13#10' PF.NUM_CART_TRAB, PF.NOME_EMP, PF.ENDERECO_EMP, PF.FONE_EMP' +
-      ', PF.DTADMISSAO_EMP, PF.VLR_SALARIO_BRUTO_EMP, PF.CARGO_EMP,'#13#10'CA' +
-      'SE'#13#10'  WHEN P.TP_CLIENTE = '#39'S'#39' THEN (SELECT CO.CODIGO FROM conta_' +
-      'orcamento CO  WHERE CO.ID = P.CLIENTE_CONTA_ID)'#13#10'  WHEN P.TP_FOR' +
-      'NECEDOR = '#39'S'#39' THEN (SELECT CO.CODIGO FROM conta_orcamento CO  WH' +
-      'ERE CO.ID = P.FORNECEDOR_CONTA_ID)'#13#10'  WHEN P.TP_TRANSPORTADORA =' +
-      ' '#39'S'#39' THEN (SELECT CO.CODIGO FROM conta_orcamento CO  WHERE CO.ID' +
-      ' = P.TRANSPORTADORA_CONTA_ID)'#13#10'  WHEN P.TP_VENDEDOR = '#39'S'#39' THEN (' +
-      'SELECT CO.CODIGO FROM conta_orcamento CO  WHERE CO.ID = P.VENDED' +
-      'OR_CONTA_ID)'#13#10'  END COD_CONTA_ORCAMENTO, CCLI.codigo COD_ORC_CLI' +
-      ', CCLI.descricao NOME_ORC_CLI,'#13#10'  CFORN.codigo COD_ORC_FORN, CFO' +
-      'RN.DESCRICAO NOME_ORC_FORN,'#13#10'  CTRA.CODIGO COD_ORC_TRANSP, CTRA.' +
-      'DESCRICAO NOME_ORC_TRANSP,'#13#10'  CVEND.CODIGO COD_ORC_VEND, CVEND.D' +
-      'ESCRICAO NOME_ORC_VEND, PV.COD_VENDEDOR,'#13#10'case'#13#10'  when p.tipo_co' +
-      'nsumidor = 0 then '#39'Normal'#39#13#10'  when p.tipo_consumidor = 1 then '#39'F' +
-      'inal'#39#13#10'  end Desc_Tipo_Consumidor,'#13#10'case'#13#10'  when p.tipo_contribu' +
-      'inte = 1 then '#39'Contribuinte'#39#13#10'  when p.tipo_contribuinte = 2 the' +
-      'n '#39'Isento'#39#13#10'  when p.tipo_contribuinte = 9 then '#39'N'#227'o Contrib.'#39#13#10 +
-      '  end Desc_Tipo_Contribuinte, RT.NOME NOME_REGIME, RT.codigo COD' +
-      '_REGIME'#13#10'FROM PESSOA P'#13#10'LEFT JOIN CONDPGTO COND ON (P.ID_CONDPGT' +
-      'O = COND.ID)'#13#10'LEFT JOIN PESSOA VEND ON (P.ID_VENDEDOR = VEND.COD' +
-      'IGO)'#13#10'LEFT JOIN GRUPO_PESSOA GP ON (P.ID_GRUPO = GP.ID)'#13#10'LEFT JO' +
-      'IN PESSOA_FISICA PF ON (P.CODIGO = PF.CODIGO)'#13#10'LEFT JOIN CONTA_O' +
-      'RCAMENTO CCLI ON (P.CLIENTE_CONTA_ID = CCLI.ID)'#13#10'LEFT JOIN CONTA' +
-      '_ORCAMENTO CFORN ON (P.FORNECEDOR_CONTA_ID = CFORN.ID)'#13#10'LEFT JOI' +
-      'N CONTA_ORCAMENTO CTRA ON (P.TRANSPORTADORA_CONTA_ID = CTRA.ID)'#13 +
-      #10'LEFT JOIN CONTA_ORCAMENTO CVEND ON (P.VENDEDOR_CONTA_ID = CVEND' +
-      '.ID)'#13#10'LEFT JOIN PESSOA_VEND PV ON P.CODIGO = PV.CODIGO'#13#10'LEFT JOI' +
-      'N regime_trib RT ON P.id_regime_trib = RT.id'#13#10#13#10#13#10#13#10#13#10#13#10#13#10#13#10
+      ', PF.DTADMISSAO_EMP, PF.VLR_SALARIO_BRUTO_EMP,'#13#10' PF.CARGO_EMP, p' +
+      '.ID_VENDEDOR_INT, VEND2.NOME NOME_VENDEDOR_INT,'#13#10'CASE'#13#10'  WHEN P.' +
+      'TP_CLIENTE = '#39'S'#39' THEN (SELECT CO.CODIGO FROM conta_orcamento CO ' +
+      ' WHERE CO.ID = P.CLIENTE_CONTA_ID)'#13#10'  WHEN P.TP_FORNECEDOR = '#39'S'#39 +
+      ' THEN (SELECT CO.CODIGO FROM conta_orcamento CO  WHERE CO.ID = P' +
+      '.FORNECEDOR_CONTA_ID)'#13#10'  WHEN P.TP_TRANSPORTADORA = '#39'S'#39' THEN (SE' +
+      'LECT CO.CODIGO FROM conta_orcamento CO  WHERE CO.ID = P.TRANSPOR' +
+      'TADORA_CONTA_ID)'#13#10'  WHEN P.TP_VENDEDOR = '#39'S'#39' THEN (SELECT CO.COD' +
+      'IGO FROM conta_orcamento CO  WHERE CO.ID = P.VENDEDOR_CONTA_ID)'#13 +
+      #10'  END COD_CONTA_ORCAMENTO, CCLI.codigo COD_ORC_CLI, CCLI.descri' +
+      'cao NOME_ORC_CLI,'#13#10'  CFORN.codigo COD_ORC_FORN, CFORN.DESCRICAO ' +
+      'NOME_ORC_FORN,'#13#10'  CTRA.CODIGO COD_ORC_TRANSP, CTRA.DESCRICAO NOM' +
+      'E_ORC_TRANSP,'#13#10'  CVEND.CODIGO COD_ORC_VEND, CVEND.DESCRICAO NOME' +
+      '_ORC_VEND, PV.COD_VENDEDOR,'#13#10'case'#13#10'  when p.tipo_consumidor = 0 ' +
+      'then '#39'Normal'#39#13#10'  when p.tipo_consumidor = 1 then '#39'Final'#39#13#10'  end ' +
+      'Desc_Tipo_Consumidor,'#13#10'case'#13#10'  when p.tipo_contribuinte = 1 then' +
+      ' '#39'Contribuinte'#39#13#10'  when p.tipo_contribuinte = 2 then '#39'Isento'#39#13#10' ' +
+      ' when p.tipo_contribuinte = 9 then '#39'N'#227'o Contrib.'#39#13#10'  end Desc_Ti' +
+      'po_Contribuinte, RT.NOME NOME_REGIME, RT.codigo COD_REGIME'#13#10'FROM' +
+      ' PESSOA P'#13#10'LEFT JOIN CONDPGTO COND ON (P.ID_CONDPGTO = COND.ID)'#13 +
+      #10'LEFT JOIN PESSOA VEND ON (P.ID_VENDEDOR = VEND.CODIGO)'#13#10'LEFT JO' +
+      'IN GRUPO_PESSOA GP ON (P.ID_GRUPO = GP.ID)'#13#10'LEFT JOIN PESSOA_FIS' +
+      'ICA PF ON (P.CODIGO = PF.CODIGO)'#13#10'LEFT JOIN CONTA_ORCAMENTO CCLI' +
+      ' ON (P.CLIENTE_CONTA_ID = CCLI.ID)'#13#10'LEFT JOIN CONTA_ORCAMENTO CF' +
+      'ORN ON (P.FORNECEDOR_CONTA_ID = CFORN.ID)'#13#10'LEFT JOIN CONTA_ORCAM' +
+      'ENTO CTRA ON (P.TRANSPORTADORA_CONTA_ID = CTRA.ID)'#13#10'LEFT JOIN CO' +
+      'NTA_ORCAMENTO CVEND ON (P.VENDEDOR_CONTA_ID = CVEND.ID)'#13#10'LEFT JO' +
+      'IN PESSOA_VEND PV ON P.CODIGO = PV.CODIGO'#13#10'LEFT JOIN regime_trib' +
+      ' RT ON P.id_regime_trib = RT.id'#13#10'LEFT JOIN PESSOA VEND2 ON P.ID_' +
+      'VENDEDOR_INT = VEND2.CODIGO'#13#10#13#10#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3908,6 +3921,13 @@ object DMCadPessoa: TDMCadPessoa
     end
     object cdsPessoa_ConsultaCOD_REGIME: TIntegerField
       FieldName = 'COD_REGIME'
+    end
+    object cdsPessoa_ConsultaID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
+    end
+    object cdsPessoa_ConsultaNOME_VENDEDOR_INT: TStringField
+      FieldName = 'NOME_VENDEDOR_INT'
+      Size = 60
     end
   end
   object dsPessoa_Consulta: TDataSource
@@ -5342,6 +5362,11 @@ object DMCadPessoa: TDMCadPessoa
     end
     object qParametros_GeralEMPRESA_PET: TStringField
       FieldName = 'EMPRESA_PET'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_GeralUSA_VENDEDOR_INT: TStringField
+      FieldName = 'USA_VENDEDOR_INT'
       FixedChar = True
       Size = 1
     end

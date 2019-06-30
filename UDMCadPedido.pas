@@ -3461,6 +3461,12 @@ type
     qParametros_ProdUSA_TAB_PRECO_ENG: TStringField;
     cdsOrcamento_Item_TipoESPESSURA: TFloatField;
     cdsOrcamento_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField;
+    sdsPedidoID_VENDEDOR_INT: TIntegerField;
+    cdsPedidoID_VENDEDOR_INT: TIntegerField;
+    cdsClienteID_VENDEDOR_INT: TIntegerField;
+    cdsPedido_ConsultaID_VENDEDOR_INT: TIntegerField;
+    cdsPedido_ConsultaNOME_VENDEDOR_INT: TStringField;
+    qParametros_GeralUSA_VENDEDOR_INT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
