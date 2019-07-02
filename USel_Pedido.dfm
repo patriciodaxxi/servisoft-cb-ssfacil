@@ -284,7 +284,7 @@ object frmSel_Pedido: TfrmSel_Pedido
     WidthOfIndicator = 27
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 31
+    ColCount = 33
     RowCount = 2
     Columns = <
       item
@@ -440,6 +440,22 @@ object frmSel_Pedido: TfrmSel_Pedido
         Visible = True
       end
       item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'NUM_OS_SERVICO'
+        Title.Alignment = taRightJustify
+        Title.Caption = 'N'#186' OS Servi'#231'o'
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'DTEMISSAO_OS'
+        Title.Alignment = taCenter
+        Title.Caption = 'Data OS'
+        Visible = True
+      end
+      item
         Expanded = False
         FieldName = 'NOME_COR'
         ReadOnly = True
@@ -505,7 +521,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Imp. N'#186' OC na Nota'
-        Width = 64
         Visible = True
       end
       item
@@ -529,7 +544,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Item no Cliente'
-        Width = 64
         Visible = True
       end>
   end

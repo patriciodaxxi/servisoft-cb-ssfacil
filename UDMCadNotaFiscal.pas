@@ -3071,6 +3071,8 @@ type
     qParametros_Lote: TSQLQuery;
     qParametros_LoteOPCAO_ESTOQUE_SEMI: TStringField;
     qParametros_LoteLOTE_TEXTIL: TStringField;
+    cdsPedidoDTEMISSAO_OS: TDateField;
+    cdsPedidoNUM_OS_SERVICO: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
