@@ -412,6 +412,7 @@ type
     sdsDocEstoqueNUM_PEDIDO: TIntegerField;
     cdsDocEstoqueNUM_PEDIDO: TIntegerField;
     qParametros_EstREQ_NUM_PED: TStringField;
+    qParametrosUSA_COD_BARRAS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspDocEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
