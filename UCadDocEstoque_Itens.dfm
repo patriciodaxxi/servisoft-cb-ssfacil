@@ -4,7 +4,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro dos Itens do Ajuste do Estoque'
-  ClientHeight = 301
+  ClientHeight = 322
   ClientWidth = 735
   Color = clMoneyGreen
   Font.Charset = DEFAULT_CHARSET
@@ -22,7 +22,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   TextHeight = 13
   object Label3: TLabel
     Left = 94
-    Top = 90
+    Top = 116
     Width = 43
     Height = 13
     Alignment = taRightJustify
@@ -30,7 +30,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Label4: TLabel
     Left = 79
-    Top = 113
+    Top = 139
     Width = 58
     Height = 13
     Alignment = taRightJustify
@@ -38,7 +38,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Label7: TLabel
     Left = 83
-    Top = 135
+    Top = 161
     Width = 54
     Height = 13
     Alignment = taRightJustify
@@ -46,7 +46,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object SpeedButton2: TSpeedButton
     Left = 253
-    Top = 81
+    Top = 107
     Width = 23
     Height = 22
     Hint = 'Abre a tela de Unidades'
@@ -55,7 +55,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object SpeedButton6: TSpeedButton
     Left = 276
-    Top = 81
+    Top = 107
     Width = 23
     Height = 22
     Hint = 'Atualiza tabela Unidade'
@@ -105,7 +105,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Label1: TLabel
     Left = 102
-    Top = 157
+    Top = 183
     Width = 35
     Height = 13
     Alignment = taRightJustify
@@ -113,14 +113,14 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Shape1: TShape
     Left = 616
-    Top = 93
+    Top = 119
     Width = 113
     Height = 36
     Brush.Color = clMoneyGreen
   end
   object Label30: TLabel
     Left = 636
-    Top = 96
+    Top = 122
     Width = 86
     Height = 16
     Caption = 'Qtd.Estoque'
@@ -133,7 +133,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object lblEstoque: TLabel
     Left = 624
-    Top = 113
+    Top = 139
     Width = 97
     Height = 13
     Alignment = taRightJustify
@@ -148,7 +148,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Label2: TLabel
     Left = 57
-    Top = 178
+    Top = 204
     Width = 79
     Height = 13
     Alignment = taRightJustify
@@ -156,7 +156,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object SpeedButton3: TSpeedButton
     Left = 560
-    Top = 171
+    Top = 197
     Width = 23
     Height = 22
     Hint = 'Abre a tela de Centro de Custo'
@@ -165,7 +165,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object SpeedButton5: TSpeedButton
     Left = 584
-    Top = 171
+    Top = 197
     Width = 23
     Height = 22
     Hint = 'Atualiza tabela Centro de Custo'
@@ -215,7 +215,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object lblTamanho: TLabel
     Left = 261
-    Top = 107
+    Top = 133
     Width = 48
     Height = 13
     Alignment = taRightJustify
@@ -224,7 +224,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Label6: TLabel
     Left = 56
-    Top = 201
+    Top = 227
     Width = 81
     Height = 13
     Alignment = taRightJustify
@@ -232,7 +232,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Label8: TLabel
     Left = 384
-    Top = 133
+    Top = 159
     Width = 57
     Height = 13
     Alignment = taRightJustify
@@ -240,7 +240,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object DBText1: TDBText
     Left = 446
-    Top = 133
+    Top = 159
     Width = 81
     Height = 14
     DataField = 'PRECO_CUSTO_TOTAL'
@@ -248,7 +248,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Label9: TLabel
     Left = 77
-    Top = 224
+    Top = 250
     Width = 60
     Height = 13
     Alignment = taRightJustify
@@ -256,12 +256,12 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 267
+    Top = 288
     Width = 735
     Height = 34
     Align = alBottom
     Color = 8404992
-    TabOrder = 11
+    TabOrder = 12
     object BitBtn4: TBitBtn
       Left = 366
       Top = 5
@@ -295,13 +295,13 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object Panel1: TPanel
     Left = 0
-    Top = 0
+    Top = 26
     Width = 735
     Height = 57
     Align = alTop
     BevelOuter = bvNone
     Color = clMoneyGreen
-    TabOrder = 0
+    TabOrder = 1
     OnExit = Panel1Exit
     object SpeedButton1: TSpeedButton
       Left = 639
@@ -441,7 +441,7 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object RxDBLookupCombo3: TRxDBLookupCombo
     Left = 138
-    Top = 82
+    Top = 108
     Width = 115
     Height = 21
     DropDownCount = 8
@@ -450,41 +450,41 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
     LookupField = 'UNIDADE'
     LookupDisplay = 'UNIDADE'
     LookupSource = DMCadDocEstoque.dsUnidade
-    TabOrder = 2
+    TabOrder = 3
   end
   object DBEdit2: TDBEdit
     Left = 138
-    Top = 105
+    Top = 131
     Width = 115
     Height = 21
     DataField = 'QTD'
     DataSource = DMCadDocEstoque.dsDocEstoque_Itens
-    TabOrder = 3
+    TabOrder = 4
     OnExit = DBEdit2Exit
   end
   object DBEdit5: TDBEdit
     Left = 138
-    Top = 127
+    Top = 153
     Width = 115
     Height = 21
     DataField = 'VLR_UNITARIO'
     DataSource = DMCadDocEstoque.dsDocEstoque_Itens
-    TabOrder = 6
+    TabOrder = 7
     OnExit = DBEdit5Exit
   end
   object DBEdit1: TDBEdit
     Left = 138
-    Top = 149
+    Top = 175
     Width = 587
     Height = 21
     DataField = 'MOTIVO'
     DataSource = DMCadDocEstoque.dsDocEstoque_Itens
-    TabOrder = 7
+    TabOrder = 8
     OnExit = DBEdit5Exit
   end
   object RxDBLookupCombo1: TRxDBLookupCombo
     Left = 138
-    Top = 171
+    Top = 197
     Width = 423
     Height = 21
     DropDownCount = 15
@@ -494,12 +494,12 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
     LookupField = 'ID'
     LookupDisplay = 'DESCRICAO'
     LookupSource = DMCadDocEstoque.dsCentroCusto
-    TabOrder = 8
+    TabOrder = 9
     OnEnter = RxDBLookupCombo4Enter
   end
   object btnGrade: TNxButton
     Left = 255
-    Top = 103
+    Top = 129
     Width = 142
     Height = 25
     Hint = 'Abre a tela de tamanhos'
@@ -522,14 +522,14 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
     ParentFont = False
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 4
+    TabOrder = 5
     Transparent = True
     Visible = False
     OnClick = btnGradeClick
   end
   object dblcTamanho: TRxDBLookupCombo
     Left = 307
-    Top = 104
+    Top = 130
     Width = 115
     Height = 21
     DropDownCount = 8
@@ -540,18 +540,18 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
     LookupDisplay = 'TAMANHO'
     LookupSource = DMInformar_Tam.dsProduto_Tam
     ParentCtl3D = False
-    TabOrder = 5
+    TabOrder = 6
     Visible = False
   end
   object pnlCor: TPanel
     Left = 0
-    Top = 57
+    Top = 83
     Width = 735
     Height = 24
     Align = alTop
     BevelOuter = bvNone
     Color = clMoneyGreen
-    TabOrder = 1
+    TabOrder = 2
     object Label5: TLabel
       Left = 87
       Top = 9
@@ -577,45 +577,69 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
   end
   object DBEdit3: TDBEdit
     Left = 138
-    Top = 193
+    Top = 219
     Width = 247
     Height = 21
     CharCase = ecUpperCase
     DataField = 'NUM_LOTE_CONTROLE'
     DataSource = DMCadDocEstoque.dsDocEstoque_Itens
-    TabOrder = 9
+    TabOrder = 10
     OnExit = DBEdit3Exit
     OnKeyDown = DBEdit3KeyDown
   end
   object DBCheckBox1: TDBCheckBox
     Left = 140
-    Top = 241
+    Top = 267
     Width = 221
     Height = 17
     Caption = 'Gerar Custo M'#233'dio do Estoque'
     DataField = 'GERAR_CUSTO'
     DataSource = DMCadDocEstoque.dsDocEstoque_Itens
-    TabOrder = 12
+    TabOrder = 13
     ValueChecked = 'S'
     ValueUnchecked = 'N'
   end
   object DBEdit4: TDBEdit
     Left = 138
-    Top = 216
+    Top = 242
     Width = 247
     Height = 21
     CharCase = ecUpperCase
     DataField = 'LOCALIZACAO'
     DataSource = DMCadDocEstoque.dsDocEstoque_Itens
-    TabOrder = 10
+    TabOrder = 11
   end
   object ckPermiteCor: TCheckBox
     Left = 555
-    Top = 227
+    Top = 253
     Width = 144
     Height = 17
     Caption = 'Permitir sem a cor'
-    TabOrder = 13
+    TabOrder = 14
     Visible = False
+  end
+  object pnlCod_Barras: TPanel
+    Left = 0
+    Top = 0
+    Width = 735
+    Height = 26
+    Align = alTop
+    Color = clMoneyGreen
+    TabOrder = 0
+    object Label11: TLabel
+      Left = 59
+      Top = 10
+      Width = 84
+      Height = 13
+      Caption = 'C'#243'digo de Barras:'
+    end
+    object Edit1: TEdit
+      Left = 147
+      Top = 2
+      Width = 153
+      Height = 21
+      TabOrder = 0
+      OnKeyDown = Edit1KeyDown
+    end
   end
 end

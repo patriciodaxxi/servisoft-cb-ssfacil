@@ -23,7 +23,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
     Top = 0
     Width = 1090
     Height = 647
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -35,7 +35,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
     Font.Style = []
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -2633,15 +2633,149 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               OnEnter = RxDBLookupCombo2Enter
               OnExit = RxDBLookupCombo2Exit
             end
+            object GroupBox1: TGroupBox
+              Left = 94
+              Top = 261
+              Width = 629
+              Height = 51
+              Caption = ' Op'#231#227'o (Tipo Pessoa) '
+              TabOrder = 23
+              object DBCheckBox2: TDBCheckBox
+                Left = 8
+                Top = 15
+                Width = 97
+                Height = 15
+                Caption = 'Cliente'
+                DataField = 'TP_CLIENTE'
+                DataSource = DMCadPessoa.dsPessoa
+                TabOrder = 0
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object DBCheckBox3: TDBCheckBox
+                Left = 272
+                Top = 15
+                Width = 97
+                Height = 15
+                Caption = 'Fornecedor'
+                DataField = 'TP_FORNECEDOR'
+                DataSource = DMCadPessoa.dsPessoa
+                TabOrder = 1
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object DBCheckBox4: TDBCheckBox
+                Left = 8
+                Top = 32
+                Width = 97
+                Height = 15
+                Caption = 'Transportadora'
+                DataField = 'TP_TRANSPORTADORA'
+                DataSource = DMCadPessoa.dsPessoa
+                TabOrder = 2
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object chkRepresentante: TDBCheckBox
+                Left = 152
+                Top = 15
+                Width = 89
+                Height = 15
+                Caption = 'Representante'
+                DataField = 'TP_VENDEDOR'
+                DataSource = DMCadPessoa.dsPessoa
+                TabOrder = 3
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object ckAtelier: TDBCheckBox
+                Left = 416
+                Top = 15
+                Width = 89
+                Height = 15
+                Caption = 'Terceirizados'
+                DataField = 'TP_ATELIER'
+                DataSource = DMCadPessoa.dsPessoa
+                TabOrder = 4
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object ckAluno: TDBCheckBox
+                Left = 152
+                Top = 32
+                Width = 49
+                Height = 15
+                Caption = 'Aluno'
+                DataField = 'TP_ALUNO'
+                DataSource = DMCadPessoa.dsPessoa
+                TabOrder = 5
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object DBCheckBox16: TDBCheckBox
+                Left = 272
+                Top = 32
+                Width = 94
+                Height = 15
+                Caption = 'Org'#227'o P'#250'blico'
+                DataField = 'ORGAO_PUBLICO'
+                DataSource = DMCadPessoa.dsPessoa
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+                TabOrder = 6
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object DBCheckBox17: TDBCheckBox
+                Left = 536
+                Top = 15
+                Width = 89
+                Height = 15
+                Caption = 'Exporta'#231#227'o'
+                DataField = 'TP_EXPORTACAO'
+                DataSource = DMCadPessoa.dsPessoa
+                TabOrder = 7
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object DBCheckBox18: TDBCheckBox
+                Left = 416
+                Top = 32
+                Width = 89
+                Height = 15
+                Caption = 'Preposto'
+                DataField = 'TP_PREPOSTO'
+                DataSource = DMCadPessoa.dsPessoa
+                TabOrder = 8
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object DBCheckBox22: TDBCheckBox
+                Left = 536
+                Top = 32
+                Width = 89
+                Height = 15
+                Caption = 'Funcion'#225'rio'
+                DataField = 'TP_FUNCIONARIO'
+                DataSource = DMCadPessoa.dsPessoa
+                TabOrder = 9
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+            end
           end
           object RzPageControl3: TRzPageControl
             Left = 0
             Top = 336
             Width = 1082
             Height = 209
-            ActivePage = TS_Animal
+            ActivePage = TS_Conjuge
             Align = alBottom
-            TabIndex = 1
+            TabIndex = 5
             TabOrder = 1
             FixedDimension = 19
             object TS_Contatos: TRzTabSheet

@@ -52,6 +52,9 @@ type
     Label9: TLabel;
     DBEdit4: TDBEdit;
     ckPermiteCor: TCheckBox;
+    pnlCod_Barras: TPanel;
+    Label11: TLabel;
+    Edit1: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
@@ -77,6 +80,8 @@ type
     procedure DBEdit3Exit(Sender: TObject);
     procedure edtIDProdutoKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure Edit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     ffrmCadProduto: TfrmCadProduto;
@@ -97,6 +102,7 @@ type
     procedure prc_Mostrar_Cor(ID: Integer);
     function fnc_Estoque_OK(ID_Produto, ID_Cor: Integer; Tamanho: String; Qtd: Real): Boolean;
     function fnc_Verifica_Lote(ID_Produto : Integer) : Boolean;
+    function fnc_Verificar_Cod_Barras: Boolean;
 
   public
     { Public declarations }
@@ -177,6 +183,8 @@ begin
 
   Label9.Visible  := fDMCadDocEstoque.qParametros_EstUSA_LOCALIZACAO_LOTE.AsString = 'S';
   DBEdit4.Visible := fDMCadDocEstoque.qParametros_EstUSA_LOCALIZACAO_LOTE.AsString = 'S';
+
+  pnlCod_Barras.Visible := (fDMCadDocEstoque.qParametrosUSA_COD_BARRAS.AsString = 'S');
 end;
 
 procedure TfrmCadDocEstoque_Itens.prc_Move_Dados_Itens;
@@ -324,7 +332,11 @@ begin
       Close
     else
     begin
+      Edit1.Clear;
       fDMCadDocEstoque.prc_Inserir_Itens;
+      if pnlCod_Barras.Visible then
+        Edit1.SetFocus
+      else
       if edtIDProduto.Visible then
         edtIDProduto.SetFocus
       else
@@ -718,6 +730,35 @@ begin
     if (trim(vCod) <> '') and (pnlCor.Visible) then
       RxDBLookupCombo5.SetFocus;
   end;
+end;
+
+procedure TfrmCadDocEstoque_Itens.Edit1KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_Return) and (Trim(Edit1.Text) <> '') then
+  begin
+    if not fnc_Verificar_Cod_Barras then
+    begin
+      MessageDlg('*** Código de Barras não encontrado!', mtError, [mbOk], 0);
+      Edit1.SetFocus;
+    end
+    else
+    begin
+      fDMCadDocEstoque.cdsDocEstoque_ItensID_PRODUTO.AsInteger := fDMCadDocEstoque.cdsProdutoID.AsInteger;
+      Panel1Exit(Sender);
+      if pnlCor.Visible then
+        RxDBLookupCombo5.SetFocus
+      else
+        RxDBLookupCombo3.SetFocus;
+    end;
+  end;
+end;
+
+function TfrmCadDocEstoque_Itens.fnc_Verificar_Cod_Barras: Boolean;
+begin
+  Result := False;
+  if fDMCadDocEstoque.cdsProduto.Locate('COD_BARRA',Edit1.Text,[loCaseInsensitive]) then
+    Result := True;
 end;
 
 end.

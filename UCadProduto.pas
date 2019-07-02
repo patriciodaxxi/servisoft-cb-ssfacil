@@ -789,6 +789,7 @@ type
     dedtEspessura: TDBEdit;
     RxDBComboBox12: TRxDBComboBox;
     Label254: TLabel;
+    btnAltRefEstruturada: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -996,6 +997,7 @@ type
     procedure btnAjustarProcessoClick(Sender: TObject);
     procedure btnCAClick(Sender: TObject);
     procedure RxDBComboBox10Change(Sender: TObject);
+    procedure btnAltRefEstruturadaClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1867,6 +1869,7 @@ begin
   if fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S' then
     DBEdit158.Color := clBtnFace;
   btnCA.Visible := (fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S');
+  btnAltRefEstruturada.Visible := (fDMCadProduto.qParametros_ProdALT_REF_ESTRUTURADA.AsString = 'S');
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
@@ -6064,6 +6067,21 @@ procedure TfrmCadProduto.RxDBComboBox10Change(Sender: TObject);
 begin
   Label254.Visible       := (RxDBComboBox10.ItemIndex = 0);
   RxDBComboBox12.Visible := (RxDBComboBox10.ItemIndex = 0);
+end;
+
+procedure TfrmCadProduto.btnAltRefEstruturadaClick(Sender: TObject);
+begin
+  if fDMCadProduto.cdsProdutoID_GRUPO.AsInteger <= 0 then
+  begin
+    MessageDlg('*** Estrutura não informada!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+  if fDMCadProduto.qParametros_ProdGERAR_REF_GRUPO.AsString <> 'S' then
+  begin
+    MessageDlg('*** Referência não esta marcada como estruturada!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+  prc_Gerar_Ref_Estruturada;
 end;
 
 end.

@@ -1955,6 +1955,7 @@ type
     cdsProdutoTIPO_ALGODAO: TStringField;
     cdsProduto_ConsultaTIPO_MAT: TStringField;
     cdsProduto_ConsultaTIPO_ALGODAO: TStringField;
+    qParametros_ProdALT_REF_ESTRUTURADA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

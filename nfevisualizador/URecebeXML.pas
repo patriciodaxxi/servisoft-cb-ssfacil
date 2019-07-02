@@ -250,7 +250,6 @@ type
     ckAtualizaCusto2: TCheckBox;
     Label61: TLabel;
     BitBtn2: TBitBtn;
-    BitBtn4: TBitBtn;
     BitBtn1: TBitBtn;
     PageControl1: TPageControl;
     TabSheet8: TTabSheet;
@@ -371,6 +370,8 @@ type
     RxDBComboBox3: TRxDBComboBox;
     Label147: TLabel;
     RxDBComboBox4: TRxDBComboBox;
+    BitBtn4: TBitBtn;
+    btnAjustarUnidade: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -414,6 +415,7 @@ type
       Shift: TShiftState);
     procedure DBEdit82Exit(Sender: TObject);
     procedure NxButton2Click(Sender: TObject);
+    procedure btnAjustarUnidadeClick(Sender: TObject);
   private
     { Private declarations }
     vCodCidade: Integer;
@@ -3514,12 +3516,12 @@ begin
   if fDMRecebeXML.mItensNotaItem.AsInteger <= 0 then
     exit;
 
-   //Tirado dia 27/04/2016
-  //if fDMRecebeXML.mItensNotaUnidade.AsString = fDMRecebeXML.mItensNotaUnidadeInterno.AsString then
-  //  fDMRecebeXML.mItensNotaQtdPacote.AsInteger := 0;
-
   if fDMRecebeXML.mItensNota.State in [dsEdit] then
+  begin
     fDMRecebeXML.mItensNota.Post;
+    Gravar_Unidade;
+  end;
+
 end;
 
 procedure TfrmRecebeXML.Gravar_Movimento;
@@ -4214,7 +4216,11 @@ procedure TfrmRecebeXML.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if (Shift = [ssCtrl]) and (Key = 87) then //CTRL W
+  begin
     ckUsaNome.Visible := not(ckUsaNome.Visible);
+    BitBtn4.Visible   := not(BitBtn4.Visible);
+    btnAjustarUnidade.Visible := not(btnAjustarUnidade.Visible);
+  end;
 end;
 
 procedure TfrmRecebeXML.BitBtn5Click(Sender: TObject);
@@ -4556,6 +4562,37 @@ begin
     fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := Copy(cbTipoSped.Text,1,2)
   else
     fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
+end;
+
+procedure TfrmRecebeXML.btnAjustarUnidadeClick(Sender: TObject);
+var
+  vUnidAux : String;
+  vUnidInt : String;
+  vQtdConv : Real;
+  vConvUnid : Boolean;
+begin
+  vUnidAux := InputBox('Trocar a Unidade','Informar a Unidade que que Veio no XML', '');
+  if trim(vUnidAux) = '' then
+    exit;
+
+  vUnidInt  := fDMRecebeXML.mItensNotaUnidadeInterno.AsString;
+  vQtdConv  := fDMRecebeXML.mItensNotaQtdPacote.AsFloat;
+  vConvUnid := fDMRecebeXML.mItensNotaConverter_Unid_Medida.AsBoolean;
+  fDMRecebeXML.mItensNota.First;
+  while not fDMRecebeXML.mItensNota.Eof do
+  begin
+    if (fDMRecebeXML.mItensNotaUnidadeInterno.AsString = vUnidAux) and (fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger <= 0) then
+    begin
+      fDMRecebeXML.mItensNota.Edit;
+      fDMRecebeXML.mItensNotaUnidadeInterno.AsString := vUnidInt;
+      fDMRecebeXML.mItensNotaQtdPacote.AsFloat       := vQtdConv;
+      fDMRecebeXML.mItensNotaConverter_Unid_Medida.AsBoolean := vConvUnid;
+      fDMRecebeXML.mItensNota.Post;
+    end;
+    fDMRecebeXML.mItensNota.Next;
+  end;
+  btnAjustarUnidade.Visible := False;
+  ShowMessage('Convertido');
 end;
 
 end.

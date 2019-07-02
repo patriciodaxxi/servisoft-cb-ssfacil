@@ -3525,8 +3525,8 @@ object dmCadProduto: TdmCadProduto
     IndexFieldNames = 'ID;ITEM;TAMANHO'
     Params = <>
     ProviderName = 'dspConsumo_Imp_Tam'
-    Left = 640
-    Top = 96
+    Left = 641
+    Top = 95
     object cdsConsumo_Imp_TamID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6869,6 +6869,11 @@ object dmCadProduto: TdmCadProduto
     end
     object qParametros_ProdUSA_CA_HIST: TStringField
       FieldName = 'USA_CA_HIST'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdALT_REF_ESTRUTURADA: TStringField
+      FieldName = 'ALT_REF_ESTRUTURADA'
       FixedChar = True
       Size = 1
     end

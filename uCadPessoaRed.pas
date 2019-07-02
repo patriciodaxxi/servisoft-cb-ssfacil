@@ -303,6 +303,17 @@ type
     btnConsulta_Pet: TNxButton;
     Label14: TLabel;
     CurrencyEdit1: TCurrencyEdit;
+    GroupBox1: TGroupBox;
+    DBCheckBox2: TDBCheckBox;
+    DBCheckBox3: TDBCheckBox;
+    DBCheckBox4: TDBCheckBox;
+    chkRepresentante: TDBCheckBox;
+    ckAtelier: TDBCheckBox;
+    ckAluno: TDBCheckBox;
+    DBCheckBox16: TDBCheckBox;
+    DBCheckBox17: TDBCheckBox;
+    DBCheckBox18: TDBCheckBox;
+    DBCheckBox22: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);

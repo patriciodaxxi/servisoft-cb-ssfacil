@@ -1273,6 +1273,11 @@ object DMCadDocEstoque: TDMCadDocEstoque
       FieldName = 'SENHA_LIBERA_ESTOQUE'
       Size = 10
     end
+    object qParametrosUSA_COD_BARRAS: TStringField
+      FieldName = 'USA_COD_BARRAS'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsFuncionario: TSQLDataSet
     NoMetadata = True
