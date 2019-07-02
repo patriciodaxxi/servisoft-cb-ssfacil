@@ -539,7 +539,7 @@ begin
 {* W  Total da NF-e }
 
 //Letra W - Totais - Grupo de Valores Totais referentes ao ICMS
-  vVlrOutrasDespAcess := 0;
+  vVlrOutrasDespAcess := fDMCupomFiscal.cdsCupomFiscalVLR_OUTROS.AsCurrency;
 
   NfeXML.InfNFe.Total.ICMSTot.VBC        := Replace(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalBASE_ICMS.AsFloat),',','.');
   NfeXML.InfNFe.Total.ICMSTot.VICMS      := Replace(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_ICMS.AsFloat),',','.');
@@ -573,7 +573,7 @@ begin
 
   NfeXML.InfNFe.Total.ICMSTot.VPIS       := Replace(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PIS.AsFloat ),',','.');
   NfeXML.InfNFe.Total.ICMSTot.VCOFINS    := Replace(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_COFINS.AsFloat),',','.');
-  NfeXML.InfNFe.Total.ICMSTot.VOutro     := Replace(FormatFloat('0.00',vVlrOutrasDespAcess),',','.');
+  NfeXML.InfNFe.Total.ICMSTot.VOutro    := Replace(FormatFloat('0.00',vVlrOutrasDespAcess),',','.');
   vAux := fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat;
   NfeXML.InfNFe.Total.ICMSTot.VNF        := Replace(FormatFloat('0.00',vAux),',','.');
   NfeXML.InfNFe.Total.ICMSTot.VTotTrib   := Replace(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO.AsFloat),',','.');

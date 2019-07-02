@@ -595,6 +595,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             ReadOnly = True
             TabOrder = 4
             Visible = False
+            OnKeyDown = CurrencyEdit2KeyDown
           end
         end
         object Panel6: TPanel
