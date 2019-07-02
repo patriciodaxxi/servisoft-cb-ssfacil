@@ -1513,17 +1513,6 @@ object frmRecebeXML: TfrmRecebeXML
           Visible = False
           OnClick = BitBtn2Click
         end
-        object BitBtn4: TBitBtn
-          Left = 865
-          Top = 433
-          Width = 123
-          Height = 25
-          Anchors = [akTop, akRight]
-          Caption = 'Gravar Produtos'
-          TabOrder = 20
-          Visible = False
-          OnClick = BitBtn4Click
-        end
         object BitBtn1: TBitBtn
           Left = 865
           Top = 459
@@ -1531,7 +1520,7 @@ object frmRecebeXML: TfrmRecebeXML
           Height = 25
           Anchors = [akTop, akRight]
           Caption = 'Mostrar Dados Originais'
-          TabOrder = 21
+          TabOrder = 20
           Visible = False
           OnClick = BitBtn1Click
         end
@@ -1999,7 +1988,7 @@ object frmRecebeXML: TfrmRecebeXML
         Left = 0
         Top = 0
         Width = 1027
-        Height = 479
+        Height = 491
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0
@@ -2655,13 +2644,24 @@ object frmRecebeXML: TfrmRecebeXML
             Font.Style = [fsBold]
             ParentFont = False
           end
+          object BitBtn4: TBitBtn
+            Left = 438
+            Top = 37
+            Width = 123
+            Height = 25
+            Anchors = [akTop, akRight]
+            Caption = 'Gravar Produtos'
+            TabOrder = 0
+            Visible = False
+            OnClick = BitBtn4Click
+          end
         end
         object PageControl1: TPageControl
           Left = 1
           Top = 270
           Width = 1025
           Height = 153
-          ActivePage = TabSheet8
+          ActivePage = TabSheet9
           Align = alBottom
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -4299,46 +4299,55 @@ object frmRecebeXML: TfrmRecebeXML
           item
             Expanded = False
             FieldName = 'Id'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'tpAmb'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'verAplic'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'chNFe'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'dhRecbto'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nProt'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'digVal'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'cStat'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'xMotivo'
+            Width = 64
             Visible = True
           end>
       end

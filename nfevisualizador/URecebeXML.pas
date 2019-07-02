@@ -250,7 +250,6 @@ type
     ckAtualizaCusto2: TCheckBox;
     Label61: TLabel;
     BitBtn2: TBitBtn;
-    BitBtn4: TBitBtn;
     BitBtn1: TBitBtn;
     PageControl1: TPageControl;
     TabSheet8: TTabSheet;
@@ -371,6 +370,7 @@ type
     RxDBComboBox3: TRxDBComboBox;
     Label147: TLabel;
     RxDBComboBox4: TRxDBComboBox;
+    BitBtn4: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -3514,12 +3514,12 @@ begin
   if fDMRecebeXML.mItensNotaItem.AsInteger <= 0 then
     exit;
 
-   //Tirado dia 27/04/2016
-  //if fDMRecebeXML.mItensNotaUnidade.AsString = fDMRecebeXML.mItensNotaUnidadeInterno.AsString then
-  //  fDMRecebeXML.mItensNotaQtdPacote.AsInteger := 0;
-
   if fDMRecebeXML.mItensNota.State in [dsEdit] then
+  begin
     fDMRecebeXML.mItensNota.Post;
+    Gravar_Unidade;
+  end;
+
 end;
 
 procedure TfrmRecebeXML.Gravar_Movimento;
@@ -4214,7 +4214,10 @@ procedure TfrmRecebeXML.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if (Shift = [ssCtrl]) and (Key = 87) then //CTRL W
+  begin
     ckUsaNome.Visible := not(ckUsaNome.Visible);
+    BitBtn4.Visible   := not(BitBtn4.Visible);
+  end;
 end;
 
 procedure TfrmRecebeXML.BitBtn5Click(Sender: TObject);
