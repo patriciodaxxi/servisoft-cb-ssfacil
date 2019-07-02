@@ -15,8 +15,8 @@ object dmDatabase: TdmDatabase
     Params.Strings = (
       'DriverName=Interbase'
       
-        'Database=LOCALHOST:D:\Fontes\$Servisoft\Bases\SSFacil\Supercrom.' +
-        'FDB'
+        'Database=LOCALHOST:D:\Fontes\$Servisoft\Bases\SSFacil\SSFacil.FD' +
+        'B'
       'RoleName=RoleName'
       'User_Name=sysdba'
       'Password=masterkey'
@@ -30,7 +30,7 @@ object dmDatabase: TdmDatabase
       'Interbase TransIsolation=ReadCommited'
       'Trim Char=False')
     VendorLib = 'gds32.dll'
-    Left = 47
+    Left = 48
     Top = 13
   end
   object Decoder64: TIdDecoderMIME
