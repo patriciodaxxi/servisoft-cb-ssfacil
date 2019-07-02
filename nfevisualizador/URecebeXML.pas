@@ -371,6 +371,7 @@ type
     Label147: TLabel;
     RxDBComboBox4: TRxDBComboBox;
     BitBtn4: TBitBtn;
+    btnAjustarUnidade: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -414,6 +415,7 @@ type
       Shift: TShiftState);
     procedure DBEdit82Exit(Sender: TObject);
     procedure NxButton2Click(Sender: TObject);
+    procedure btnAjustarUnidadeClick(Sender: TObject);
   private
     { Private declarations }
     vCodCidade: Integer;
@@ -4217,6 +4219,7 @@ begin
   begin
     ckUsaNome.Visible := not(ckUsaNome.Visible);
     BitBtn4.Visible   := not(BitBtn4.Visible);
+    btnAjustarUnidade.Visible := not(btnAjustarUnidade.Visible);
   end;
 end;
 
@@ -4559,6 +4562,37 @@ begin
     fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := Copy(cbTipoSped.Text,1,2)
   else
     fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
+end;
+
+procedure TfrmRecebeXML.btnAjustarUnidadeClick(Sender: TObject);
+var
+  vUnidAux : String;
+  vUnidInt : String;
+  vQtdConv : Real;
+  vConvUnid : Boolean;
+begin
+  vUnidAux := InputBox('Trocar a Unidade','Informar a Unidade que que Veio no XML', '');
+  if trim(vUnidAux) = '' then
+    exit;
+
+  vUnidInt  := fDMRecebeXML.mItensNotaUnidadeInterno.AsString;
+  vQtdConv  := fDMRecebeXML.mItensNotaQtdPacote.AsFloat;
+  vConvUnid := fDMRecebeXML.mItensNotaConverter_Unid_Medida.AsBoolean;
+  fDMRecebeXML.mItensNota.First;
+  while not fDMRecebeXML.mItensNota.Eof do
+  begin
+    if (fDMRecebeXML.mItensNotaUnidadeInterno.AsString = vUnidAux) and (fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger <= 0) then
+    begin
+      fDMRecebeXML.mItensNota.Edit;
+      fDMRecebeXML.mItensNotaUnidadeInterno.AsString := vUnidInt;
+      fDMRecebeXML.mItensNotaQtdPacote.AsFloat       := vQtdConv;
+      fDMRecebeXML.mItensNotaConverter_Unid_Medida.AsBoolean := vConvUnid;
+      fDMRecebeXML.mItensNota.Post;
+    end;
+    fDMRecebeXML.mItensNota.Next;
+  end;
+  btnAjustarUnidade.Visible := False;
+  ShowMessage('Convertido');
 end;
 
 end.

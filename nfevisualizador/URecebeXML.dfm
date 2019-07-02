@@ -3398,7 +3398,7 @@ object frmRecebeXML: TfrmRecebeXML
               TabOrder = 2
             end
             object DBCheckBox1: TDBCheckBox
-              Left = 400
+              Left = 401
               Top = 20
               Width = 145
               Height = 17
@@ -3672,6 +3672,16 @@ object frmRecebeXML: TfrmRecebeXML
               ParentCtl3D = False
               TabOrder = 19
               OnEnter = RxDBLookupCombo4Enter
+            end
+            object btnAjustarUnidade: TBitBtn
+              Left = 567
+              Top = 41
+              Width = 162
+              Height = 25
+              Caption = 'Ajustar as Unidades'
+              TabOrder = 20
+              Visible = False
+              OnClick = btnAjustarUnidadeClick
             end
           end
           object TS_Calculo: TTabSheet
