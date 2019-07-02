@@ -23,7 +23,7 @@ type
     sdsCupomFiscalVLR_ICMS: TFloatField;
     sdsCupomFiscalVLR_PRODUTOS: TFloatField;
     sdsCupomFiscalVLR_DESCONTO: TFloatField;
-    sdsCupomFiscalVLR_TOTAL: TFloatField;
+    sdsCupomFiscalVLR_TOTAL: TFloatField;                   
     sdsCupomFiscalCANCELADO: TStringField;
     sdsCupomFiscalVLR_RECEBIDO: TFloatField;
     sdsCupomFiscalVLR_TROCO: TFloatField;
@@ -1537,6 +1537,12 @@ type
     cdsProdutoPERC_ICMS_NFCE: TFloatField;
     sdsCupomParametrosANIVERSARIO_PERIODO: TStringField;
     cdsCupomParametrosANIVERSARIO_PERIODO: TStringField;
+    cdsTipoCobrancaTAXA: TFloatField;
+    cdsTipoCobrancaTAXA_TIPO: TStringField;
+    sdsCupom_ItensVLR_JUROS: TFloatField;
+    cdsCupom_ItensVLR_JUROS: TFloatField;
+    sdsCupomFiscalVLR_OUTROS: TFloatField;
+    cdsCupomFiscalVLR_OUTROS: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);

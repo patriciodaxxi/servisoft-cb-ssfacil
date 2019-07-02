@@ -1143,7 +1143,7 @@ begin
       fDMNFCe.mItensNFeVlrCofins.AsFloat          := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlrCofins.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_COFINS.AsFloat));
       fDMNFCe.mItensNFeVlrFrete.AsFloat           := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlrFrete.AsFloat + 0));
       fDMNFCe.mItensNFeVlrSeguro.AsFloat          := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlrSeguro.AsFloat + 0));
-      fDMNFCe.mItensNFeVlrOutrasDespesas.AsFloat  := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlrOutrasDespesas.AsFloat + 0));
+      fDMNFCe.mItensNFeVlrOutrasDespesas.AsFloat  := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlrOutrasDespesas.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_JUROS.AsCurrency));
       fDMNFCe.mItensNFeVlrDesconto.AsFloat        := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeVlrDesconto.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsFloat));
       fDMNFCe.mItensNFeBaseICMS.AsFloat           := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeBaseICMS.AsFloat + fDMCupomFiscal.cdsCupom_ItensBASE_ICMS.AsFloat));
       fDMNFCe.mItensNFeIcmsBaseSubst.AsFloat      := StrToFloat(FormatFloat('0.00',fDMNFCe.mItensNFeIcmsBaseSubst.AsFloat + 0));
