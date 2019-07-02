@@ -132,13 +132,22 @@ begin
 end;
 
 procedure TfrmCadGrupo.prc_Inserir_Registro;
+var
+  vSuperior : String;
 begin
+  vSuperior := '';
+  if fDMCadGrupo.cdsGrupo.Active then
+    vSuperior := fDMCadGrupo.cdsGrupoSUPERIOR.AsString;
+
   fDMCadGrupo.prc_Inserir;
 
   if fDMCadGrupo.cdsGrupo.State in [dsBrowse] then
     exit;
 
   RzPageControl1.ActivePage := TS_Cadastro;
+
+  if trim(vSuperior) <> '' then
+    fDMCadGrupo.cdsGrupoSUPERIOR.AsString := vSuperior;
 
   fDMCadGrupo.cdsSuperior.Close;
   fDMCadGrupo.cdsSuperior.Open;
