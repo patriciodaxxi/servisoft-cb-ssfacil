@@ -653,12 +653,14 @@ end;
 
 procedure TfrmCadRecNF_Itens.SpeedButton4Click(Sender: TObject);
 begin
-  //02/06/2016  incluido a filial
+  //03/07/2019 ajustado para filstrar por tabela de preço
   fDMCadNotaFiscal.cdsProduto.Close;
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False)
   else
     fDMCadNotaFiscal.cdsProduto.Open;
+  //****************
 end;
 
 procedure TfrmCadRecNF_Itens.SpeedButton2Click(Sender: TObject);

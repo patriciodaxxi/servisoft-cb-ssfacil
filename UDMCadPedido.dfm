@@ -16286,7 +16286,7 @@ object DMCadPedido: TDMCadPedido
       'FROM PARAMETROS_PROD')
     SQLConnection = dmDatabase.scoDados
     Left = 1183
-    Top = 585
+    Top = 584
     object qParametros_ProdUSA_PRODUTO_FILIAL: TStringField
       FieldName = 'USA_PRODUTO_FILIAL'
       FixedChar = True

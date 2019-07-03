@@ -1145,11 +1145,11 @@ begin
   fDMCadNotaFiscal.prc_Inserir_Itens;
   fDMCadNotaFiscal.vState_Item := 'I';
 
-////////////// testa se produto é filtrado por cliente
-  //02/06/2016  incluido a filial
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente;
-/////////////////////////////////////
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
 
   ffrmCadRecNF_Itens := TfrmCadRecNF_Itens.Create(self);
   ffrmCadRecNF_Itens.fDMCadNotaFiscal       := fDMCadNotaFiscal;
@@ -1193,8 +1193,11 @@ begin
       if fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger > 0 then
         if (fDMCadNotaFiscal.qParametros_GeralUSAR_PESSOA_FILIAL.AsString = 'S') then
           fDMCadNotaFiscal.prc_Abrir_cdsCliente(vTipo_Reg,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger);
-      if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-        fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente;
+      //03/07/2019 ajustado para filstrar por tabela de preço
+      if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+        (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+        fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+      //****************
 
       Label3.Visible  := (fDMCadNotaFiscal.cdsNotaFiscalCANCELADA.AsString = 'S');
       DBText2.Visible := (fDMCadNotaFiscal.cdsNotaFiscalCANCELADA.AsString = 'S');
@@ -1229,12 +1232,12 @@ begin
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Edit;
   fDMCadNotaFiscal.vState_Item := 'E';
 
-////////////// testa se produto é filtrado por cliente
-  //02/06/2016  incluido a filial
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente;
-/////////////////////////////////////
-
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
+  
   ffrmCadRecNF_Itens := TfrmCadRecNF_Itens.Create(self);
 
   ffrmCadRecNF_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;

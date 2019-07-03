@@ -5152,12 +5152,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'ECO_CUSTO_TOTAL'#13#10',PERC_MARGEMLUCRO'#13#10',PERC_DESC_MAX'#13#10',SPED_TIPO_I' +
       'TEM'#13#10',ID_CSTICMS_BRED'#13#10',USA_PRECO_COR'#13#10',TAMANHO'#13#10',COD_BARRA2'#13#10',Q' +
       'TD_EMBALAGEM'#13#10',ID_MARCA'#13#10',UNIDADE2'#13#10',ID_CSTICMS'#13#10',P.NOME_MODELO'#13 +
-      #10'FROM PRODUTO P'#13#10'WHERE INATIVO = '#39'N'#39#13#10
+      #10'FROM PRODUTO P'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 601
-    Top = 406
+    Top = 405
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -13333,6 +13333,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object qParametros_ProdMATERIAL_FORNECEDOR_OC: TStringField
       FieldName = 'MATERIAL_FORNECEDOR_OC'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdMOSTRA_PROD_TPRECO: TStringField
+      FieldName = 'MOSTRA_PROD_TPRECO'
       FixedChar = True
       Size = 1
     end
