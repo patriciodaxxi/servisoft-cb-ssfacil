@@ -156,7 +156,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'NUMDUPLICATA'
             Title.Alignment = taCenter
-            Title.Caption = 'N'#186' Duplicata'
             Width = 81
             Visible = True
           end
@@ -165,7 +164,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'PARCELA'
             Title.Alignment = taCenter
-            Title.Caption = 'Parcela'
             Width = 42
             Visible = True
           end
@@ -174,7 +172,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'NUMNOTA'
             Title.Alignment = taCenter
-            Title.Caption = 'N'#186' Nota'
             Visible = True
           end
           item
@@ -182,7 +179,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'SERIE'
             Title.Alignment = taCenter
-            Title.Caption = 'S'#233'rie'
             Width = 34
             Visible = True
           end
@@ -199,7 +195,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'VLR_PARCELA'
             Title.Alignment = taCenter
-            Title.Caption = 'Vlr. Parcela'
             Visible = True
           end
           item
@@ -215,7 +210,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'VLR_RESTANTE'
             Title.Alignment = taCenter
-            Title.Caption = 'Vlr. Pendente'
             Width = 64
             Visible = True
           end
@@ -223,7 +217,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'VLR_PAGO'
             Title.Alignment = taCenter
-            Title.Caption = 'Vlr. Pago'
             Visible = True
           end
           item
@@ -237,7 +230,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'VLR_DESPESAS'
             Title.Alignment = taCenter
-            Title.Caption = 'Vlr. Despesas'
             Width = 64
             Visible = True
           end
@@ -276,7 +268,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             Expanded = False
             FieldName = 'VLR_DEVOLUCAO'
             Title.Alignment = taCenter
-            Title.Caption = 'Vlr. Devolu'#231#227'o'
             Width = 64
             Visible = True
           end
@@ -1002,7 +993,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           LookupDisplay = 'NOME_INTERNO'
           LookupSource = DMCadDuplicata.dsFilial
           ParentCtl3D = False
-          TabOrder = 11
+          TabOrder = 3
         end
         object RxDBLookupCombo2: TRxDBLookupCombo
           Left = 317
@@ -1015,7 +1006,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           LookupDisplay = 'NOME'
           LookupSource = DMCadDuplicata.dsPessoa
           ParentCtl3D = False
-          TabOrder = 3
+          TabOrder = 4
           OnEnter = RxDBLookupCombo2Enter
           OnExit = RxDBLookupCombo2Exit
           OnKeyDown = RxDBLookupCombo2KeyDown
@@ -1048,7 +1039,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           LookupDisplay = 'NOME'
           LookupSource = DMCadDuplicata.dsContas
           ParentCtl3D = False
-          TabOrder = 6
+          TabOrder = 9
         end
         object RxDBLookupCombo8: TRxDBLookupCombo
           Left = 317
@@ -1061,7 +1052,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           LookupDisplay = 'NOME'
           LookupSource = DMCadDuplicata.dsTipoCobranca
           ParentCtl3D = False
-          TabOrder = 7
+          TabOrder = 10
         end
         object btnConsultar: TNxButton
           Left = 559
@@ -1131,7 +1122,7 @@ object frmCadDuplicata: TfrmCadDuplicata
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 12
+          TabOrder = 16
           Transparent = True
           OnClick = btnConsultarClick
         end
@@ -1140,7 +1131,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Top = 45
           Width = 89
           Height = 21
-          TabOrder = 4
+          TabOrder = 5
           Text = '22/05/2013'
           HideFocus = False
           Date = 41416.000000000000000000
@@ -1152,7 +1143,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Top = 45
           Width = 89
           Height = 21
-          TabOrder = 9
+          TabOrder = 6
           Text = '22/05/2013'
           HideFocus = False
           Date = 41416.000000000000000000
@@ -1164,7 +1155,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Top = 66
           Width = 89
           Height = 21
-          TabOrder = 5
+          TabOrder = 7
           Text = '22/05/2013'
           HideFocus = False
           Date = 41416.000000000000000000
@@ -1176,7 +1167,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Top = 66
           Width = 89
           Height = 21
-          TabOrder = 10
+          TabOrder = 8
           Text = '22/05/2013'
           HideFocus = False
           Date = 41416.000000000000000000
@@ -1251,7 +1242,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Width = 129
           Height = 21
           Cursor = crArrow
-          TabOrder = 13
+          TabOrder = 12
           ReadOnly = True
           HideFocus = False
           Style = dsDropDownList
@@ -1285,7 +1276,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           LookupDisplay = 'NOME'
           LookupSource = DMCadDuplicata.dsVendedor
           ParentCtl3D = False
-          TabOrder = 8
+          TabOrder = 11
         end
         object ckImpNossoNumero: TCheckBox
           Left = 739
@@ -1302,7 +1293,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Width = 129
           Height = 21
           Cursor = crArrow
-          TabOrder = 14
+          TabOrder = 13
           Text = 'Ambos'
           ReadOnly = True
           HideFocus = False
@@ -1321,7 +1312,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Width = 129
           Height = 21
           Cursor = crArrow
-          TabOrder = 15
+          TabOrder = 14
           Text = 'Ambos'
           ReadOnly = True
           HideFocus = False
@@ -1347,7 +1338,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Width = 129
           Height = 21
           Cursor = crArrow
-          TabOrder = 16
+          TabOrder = 15
           Text = 'Todos'
           ReadOnly = True
           HideFocus = False

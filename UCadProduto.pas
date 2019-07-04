@@ -790,6 +790,17 @@ type
     RxDBComboBox12: TRxDBComboBox;
     Label254: TLabel;
     btnAltRefEstruturada: TSpeedButton;
+    TS_Corrugado: TRzTabSheet;
+    NxPanel5: TNxPanel;
+    Label255: TLabel;
+    btnConfirmar_Corrugado: TNxButton;
+    btnExcluir_Corrugado: TNxButton;
+    btnAlterar_Corrugado: TNxButton;
+    SMDBGrid18: TSMDBGrid;
+    Label256: TLabel;
+    CurrencyEdit3: TCurrencyEdit;
+    CurrencyEdit4: TCurrencyEdit;
+    lblCorrugado: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -976,7 +987,6 @@ type
     procedure btnAlterar_MaqClick(Sender: TObject);
     procedure btnExcluir_MaqClick(Sender: TObject);
     procedure btnSelecionar_MaqClick(Sender: TObject);
-    procedure pnlTempoMaquinaEnter(Sender: TObject);
     procedure btnDigita_DPClick(Sender: TObject);
     procedure SMDBGrid17Exit(Sender: TObject);
     procedure btnAjustarPesoClick(Sender: TObject);
@@ -998,6 +1008,12 @@ type
     procedure btnCAClick(Sender: TObject);
     procedure RxDBComboBox10Change(Sender: TObject);
     procedure btnAltRefEstruturadaClick(Sender: TObject);
+    procedure btnConfirmar_CorrugadoClick(Sender: TObject);
+    procedure btnExcluir_CorrugadoClick(Sender: TObject);
+    procedure btnAlterar_CorrugadoClick(Sender: TObject);
+    procedure CurrencyEdit4KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure CurrencyEdit4Exit(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1030,6 +1046,7 @@ type
     vID_Semi_Ant: Integer;
     vUser_Exclui: Boolean;
     vEstoqueLoteTotal: Double;
+    vItem_Corrugado : Integer;
 
     //*** 16/06/2016  usado para gravar a tabela Produto_Cad_Ant
     vNome_Cad_Ant, vReferencia_Cad_Ant: String;
@@ -1483,6 +1500,9 @@ begin
     if (fDMCadProduto.qParametros_ProdUSA_TAM_REFER_GRADE.AsString = 'S') then
       fDMCadProduto.cdsProduto_MatTam.ApplyUpdates(0);
 
+    if (fDMCadProduto.qParametros_ProdUSA_CORRUGADO.AsString = 'S') and (fDMCadProduto.cdsProduto_Corrugado.Active) then
+      fDMCadProduto.cdsProduto_Corrugado.ApplyUpdates(0);
+
     //16/06/2016
     if (vAltera_Nome) and ((trim(vNome_Cad_Ant) <> '') or (trim(vReferencia_Cad_Ant) <> '')) then
     begin
@@ -1554,6 +1574,7 @@ begin
   vReferencia_Cad_Ant := '';
   vAltera_Nome        := False;
   vID_Semi_Ant        := 0;
+  vItem_Corrugado     := 0;
 
   RzPageControl1.ActivePage := TS_Cadastro;
   DBEdit2.ReadOnly := False;
@@ -1652,6 +1673,8 @@ begin
 
   Label102.Visible          := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
   RxDBLookupCombo14.Visible := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
+  SpeedButton17.Visible     := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
+  SpeedButton18.Visible     := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
 
   RxDbCliente.Visible := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
   Label111.Visible    := (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadProduto.qParametrosUSA_PRODUTO_CLIENTE.AsString = 'G');
@@ -1870,6 +1893,8 @@ begin
     DBEdit158.Color := clBtnFace;
   btnCA.Visible := (fDMCadProduto.qParametros_ProdUSA_CA_HIST.AsString = 'S');
   btnAltRefEstruturada.Visible := (fDMCadProduto.qParametros_ProdALT_REF_ESTRUTURADA.AsString = 'S');
+
+  TS_Corrugado.TabVisible := (fDMCadProduto.qParametros_ProdUSA_CORRUGADO.AsString = 'S');
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
@@ -2064,10 +2089,13 @@ begin
 
   RxDBComboBox7.Enabled := True;
 
-  vID_Semi_Ant := 0;
+  vID_Semi_Ant    := 0;
+  vItem_Corrugado := 0;
   prc_Habilita;
   if fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S' then
     vID_Semi_Ant := fnc_Busca_Semi;
+
+
 
   RzPageControl2Change(Sender);
 end;
@@ -2316,6 +2344,8 @@ begin
   RxDBLookupCombo16.Visible := (((RxDBComboBox7.ItemIndex = 0) or (RxDBComboBox7.ItemIndex = 5)) and ((fDMCadProduto.qParametrosMOSTRAR_LINHA_PROD.AsString = 'S') or (fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S')));
   SpeedButton12.Visible     := (((RxDBComboBox7.ItemIndex = 0) or (RxDBComboBox7.ItemIndex = 5)) and ((fDMCadProduto.qParametrosMOSTRAR_LINHA_PROD.AsString = 'S') or (fDMCadProduto.qParametros_ProdUSA_CONSTRUCAO.AsString = 'S')));
   DBCheckBox6.Visible       := (RxDBComboBox7.ItemIndex = 1);
+  TS_Corrugado.TabVisible   := ((fDMCadProduto.qParametros_ProdUSA_CORRUGADO.AsString = 'S') and (RxDBComboBox7.ItemIndex = 1));
+
   if (fDMCadProduto.qParametrosUSA_PRODUTO_LOCALIZACAO.AsString = 'N') or (RxDBComboBox7.ItemIndex = 2) or (RxDBComboBox7.ItemIndex = 4) then
   begin
     Label16.Visible  := False;
@@ -2403,6 +2433,8 @@ begin
       TS_Ficha_Textil.TabVisible      := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
       TS_Ficha_Tear.TabVisible        := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
       TS_Ficha_Trancadeira.TabVisible := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
+      TS_Corrugado.TabVisible         := ((fDMCadProduto.qParametros_ProdUSA_CORRUGADO.AsString = 'S') and (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M'));
+
       if TS_Ficha_Trancadeira.TabVisible then
         RzPageControl6.ActivePage := TS_Ficha_Trancadeira
       else
@@ -2437,6 +2469,10 @@ begin
       RZPageControl3.ActivePage := TS_Fiscal;
       prc_Mostrar_Foto;
       prc_Mostra_Forma(fDMCadProduto.cdsProdutoID_FORMA.AsInteger);
+
+      if fDMCadProduto.qParametros_ProdUSA_CORRUGADO.AsString = 'S' then
+        fDMCadProduto.prc_Abrir_Corrugado(fDMCadProduto.cdsProdutoID.AsInteger);
+
       //07/01/2017
       if fDMCadProduto.qParametros_GeralEMPRESA_VAREJO.AsString = 'S' then
       begin
@@ -2451,9 +2487,7 @@ begin
     end;
   end;
   if RzPageControl1.ActivePage = TS_Cadastro then
-  begin
     TS_Engenharia.TabVisible := ((fDMCadProduto.qParametrosUSA_CONSUMO.AsString = 'S') and ((fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'P') or (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'S')));
-  end;
   btnGradeRef.Visible  := fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M';
 
   RxDBComboBox7Change(Sender);
@@ -3050,7 +3084,6 @@ begin
   pnlFicha_Textil.Enabled      := not(pnlFicha_Textil.Enabled);
   pnlFicha_Trancadeira.Enabled := not(pnlFicha_Trancadeira.Enabled);
 
-  //pnlDesenho_Passamento.Enabled := not(pnlDesenho_Passamento.Enabled);
   pnlDigitaDP.Enabled         := not(pnlDigitaDP.Enabled);
 
   Label118.Enabled           := not(Label118.Enabled);
@@ -3063,9 +3096,12 @@ begin
   btnCBarra2.Enabled         := not(btnCBarra2.Enabled);
   DBEdit59.ReadOnly          := not(DBEdit59.ReadOnly);
   RzGroupBox1.Enabled        := not(RzGroupBox1.Enabled);
-  //btnAjuda_TipoMat.Enabled   := not(btnAjuda_TipoMat.Enabled);
   Panel11.Enabled            := not(Panel11.Enabled);
-  //SMDBGrid2.ReadOnly         := not(SMDBGrid2.ReadOnly);
+
+  btnConfirmar_Corrugado.Enabled := not(btnConfirmar_Corrugado.Enabled);
+  btnAlterar_Corrugado.Enabled   := not(btnAlterar_Corrugado.Enabled);
+  btnExcluir_Corrugado.Enabled   := not(btnExcluir_Corrugado.Enabled);
+  
   for i := 1 to SMDBGrid2.ColCount - 2 do
   begin
     vTexto := SMDBGrid2.Columns[i].FieldName;
@@ -5260,7 +5296,13 @@ end;
 procedure TfrmCadProduto.RzPageControl3Change(Sender: TObject);
 begin
   if (RzPageControl3.ActivePage = TS_CBarra) then
-    fDMCadProduto.prc_Abrir_CBarra(fDMCadProduto.cdsProdutoID.AsInteger);
+    fDMCadProduto.prc_Abrir_CBarra(fDMCadProduto.cdsProdutoID.AsInteger)
+  else
+  if (RzPageControl3.ActivePage = TS_Corrugado) then
+  begin
+    if (not(fDMCadProduto.cdsProduto_Corrugado.Active)) or (fDMCadProduto.cdsProduto_CorrugadoID.AsInteger <> fDMCadProduto.cdsProdutoID.AsInteger) then
+      fDMCadProduto.prc_Abrir_Corrugado(fDMCadProduto.cdsProdutoID.AsInteger);
+  end;
 end;
 
 procedure TfrmCadProduto.SMDBGrid1ChangeSelection(Sender: TObject);
@@ -5351,53 +5393,6 @@ begin
     FreeAndNil(sds);
   end;
 end;
-
-{function TfrmCadProduto.fnc_Custo(ID: Integer; Combinacao: Boolean = False): Boolean;
-var
-  ffrmSenha: TfrmSenha;
-begin
-  if (trim(fDMCadProduto.qParametros_ProdSENHA_PROD_CUSTO.AsString) = '') or (fDMCadProduto.qParametros_ProdSENHA_PROD_CUSTO.IsNull) then
-  begin
-    Result := False;
-    exit;
-  end;
-  fDMCadProduto.vMSGAltProd := '';
-  Result  := True;
-  fDMCadProduto.qCustoNV.Close;
-  fDMCadProduto.qCustoNV.ParamByName('ID_PRODUTO').AsInteger := ID;
-  fDMCadProduto.qCustoNV.Open;
-  if fDMCadProduto.qCustoNVCONTADOR.AsInteger <= 0 then
-  begin
-    //Result := False;
-    fDMCadProduto.qCustoNV.Close;
-    //exit;
-  end
-  else
-    fDMCadProduto.vMSGAltProd := fDMCadProduto.vMSGAltProd + #13 + '*** Existe Cálculo do Custo já lançado!';
-
-  fDMCadProduto.qTalaoAux.Close;
-  fDMCadProduto.qTalaoAux.ParamByName('ID_PRODUTO').AsInteger := ID;
-  fDMCadProduto.qTalaoAux.Open;
-  if fDMCadProduto.qTalaoAuxCONTADOR.AsInteger > 0 then
-    fDMCadProduto.vMSGAltProd := fDMCadProduto.vMSGAltProd + #13 + '*** Existe Lote/Talão em aberto!';
-
-  if (trim(fDMCadProduto.vMSGAltProd) <> '') and not(Combinacao) then
-    MessageDlg(fDMCadProduto.vMSGAltProd + #13 + #13 , mtInformation, [mbOk], 0);
-
-  ffrmSenha := TfrmSenha.Create(self);
-  ffrmSenha.Label2.Caption := '';
-  ffrmSenha.Label3.Caption := 'Informe a senha para alterar';
-  ffrmSenha.Label4.Caption := '';
-  ffrmSenha.vControlaSenha := True;
-  ffrmSenha.vSenha_Param := fDMCadProduto.qParametros_ProdSENHA_PROD_CUSTO.AsString;
-  ffrmSenha.ShowModal;
-  FreeAndNil(ffrmSenha);
-  if vSenha <>  fDMCadProduto.qParametros_ProdSENHA_PROD_CUSTO.AsString then
-    MessageDlg('*** Senha incorreta!', mtError, [mbOk], 0)
-  else
-    Result := False;
-  fDMCadProduto.qCustoNV.Close;
-end;}
 
 procedure TfrmCadProduto.btnAjustarObsMatClick(Sender: TObject);
 var
@@ -5572,25 +5567,6 @@ begin
   ffrmSel_Maquina.fDMCadProduto := fDMCadProduto;
   ffrmSel_Maquina.ShowModal;
   FreeAndNil(ffrmSel_Maquina);
-end;
-
-procedure TfrmCadProduto.pnlTempoMaquinaEnter(Sender: TObject);
-begin
-  {if not(fDMCadProduto.cdsProduto_Pcp.Active) or not(fDMCadProduto.cdsProduto_Pcp.State in [dsEdit, dsInsert])
-    or (fDMCadProduto.cdsProduto_PcpID.AsInteger <> fDMCadProduto.cdsProdutoID.AsInteger) then
-  begin
-    fDMCadProduto.prc_Abrir_PCP(fDMCadProduto.cdsProdutoID.AsInteger);
-    if (fDMCadProduto.cdsProduto.State in [dsEdit, dsInsert]) then
-    begin
-      if fDMCadProduto.cdsProduto_Pcp.IsEmpty then
-      begin
-        fDMCadProduto.cdsProduto_Pcp.Insert;
-        fDMCadProduto.cdsProduto_PcpID.AsInteger := fDMCadProduto.cdsProdutoID.AsInteger;
-      end
-      else
-        fDMCadProduto.cdsProduto_Pcp.Edit;
-    end;
-  end;}
 end;
 
 procedure TfrmCadProduto.prc_Controle_Ficha_Textil;
@@ -6082,6 +6058,118 @@ begin
     exit;
   end;
   prc_Gerar_Ref_Estruturada;
+end;
+
+procedure TfrmCadProduto.btnConfirmar_CorrugadoClick(Sender: TObject);
+var
+  vMSGAux : String;
+begin
+  vMSGAux := '';
+  if CurrencyEdit4.AsInteger <= 0 then
+    vMSGAux := vMSGAux + #13 + '*** Material Corrugado não informado!';
+  if CurrencyEdit3.Value <= 0 then
+    vMSGAux := vMSGAux + #13 + '*** Qtd. Embalagem não informada!';
+  if CurrencyEdit4.AsInteger > 0 then
+  begin
+    if (fDMCadProduto.cdsProduto_Corrugado.Locate('ID',CurrencyEdit4.AsInteger,([Locaseinsensitive]))) and
+       (vItem_Corrugado <> fDMCadProduto.cdsProduto_CorrugadoITEM.AsInteger) then
+      vMSGAux := vMSGAux + #13 + '*** Produto já informado!';
+  end;
+  if CurrencyEdit3.Value > 0 then
+  begin
+    if (fDMCadProduto.cdsProduto_Corrugado.Locate('QTD_EMB',CurrencyEdit3.Value,([Locaseinsensitive]))) and
+       (vItem_Corrugado <> fDMCadProduto.cdsProduto_CorrugadoITEM.AsInteger) then
+      vMSGAux := vMSGAux + #13 + '*** Qtd já lançada!';
+  end;
+  if trim(vMSGAux) <> '' then
+  begin
+    MessageDlg(vMSGAux, mtError, [mbOk], 0);
+    exit;
+  end;
+
+  if vItem_Corrugado > 0 then
+  begin
+    if (fDMCadProduto.cdsProduto_Corrugado.Locate('ITEM',vItem_Corrugado,([Locaseinsensitive]))) then
+      fDMCadProduto.cdsProduto_Corrugado.Edit
+    else
+      fDMCadProduto.cdsProduto_Corrugado.Insert;
+  end
+  else
+  begin
+    fDMCadProduto.cdsProduto_Corrugado.Last;
+    vItem_Corrugado := fDMCadProduto.cdsProduto_CorrugadoITEM.AsInteger;
+    vItem_Corrugado := vItem_Corrugado + 1;
+    fDMCadProduto.cdsProduto_Corrugado.Insert;
+  end;
+
+  if fDMCadProduto.cdsProduto_Corrugado.State in [dsInsert] then
+  begin
+    fDMCadProduto.cdsProduto_CorrugadoID.AsInteger   := fDMCadProduto.cdsProdutoID.AsInteger;
+    fDMCadProduto.cdsProduto_CorrugadoITEM.AsInteger := vItem_Corrugado;
+  end;
+  fDMCadProduto.cdsProduto_CorrugadoID_MATERIAL.AsInteger  := CurrencyEdit4.AsInteger;
+  fDMCadProduto.cdsProduto_CorrugadoQTD_EMB.AsFloat        := CurrencyEdit3.Value;
+  fDMCadProduto.cdsProduto_CorrugadoNOME_MATERIAL.AsString := lblCorrugado.Caption;
+  fDMCadProduto.cdsProduto_Corrugado.Post;
+
+  CurrencyEdit4.Clear;
+  CurrencyEdit3.Clear;
+  vItem_Corrugado      := 0;
+  lblCorrugado.Caption := '';
+  CurrencyEdit4.SetFocus;
+end;
+
+procedure TfrmCadProduto.btnExcluir_CorrugadoClick(Sender: TObject);
+begin
+  if fDMCadProduto.cdsProduto_CorrugadoITEM.AsInteger <= 0 then
+    exit;
+  if MessageDlg('Deseja excluir o Corrugado selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+    fDMCadProduto.cdsProduto_Corrugado.Delete;
+end;
+
+procedure TfrmCadProduto.btnAlterar_CorrugadoClick(Sender: TObject);
+begin
+  if fDMCadProduto.cdsProduto_CorrugadoITEM.AsInteger <= 0 then
+    exit;
+  if MessageDlg('Deseja alterar o Corrugado selecionado?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
+    exit;
+  CurrencyEdit4.AsInteger    := fDMCadProduto.cdsProduto_CorrugadoID_MATERIAL.AsInteger;
+  CurrencyEdit3.Value        := fDMCadProduto.cdsProduto_CorrugadoQTD_EMB.AsFloat;
+  vItem_Corrugado            := fDMCadProduto.cdsProduto_CorrugadoITEM.AsInteger;
+  lblCorrugado.Caption       := fDMCadProduto.cdsProduto_CorrugadoNOME_MATERIAL.AsString;
+  CurrencyEdit4.SetFocus;
+end;
+
+procedure TfrmCadProduto.CurrencyEdit4KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    vCodProduto_Pos := CurrencyEdit4.AsInteger;
+    frmSel_Produto := TfrmSel_Produto.Create(Self);
+    frmSel_Produto.vTipo_Prod := 'M';
+    frmSel_Produto.ShowModal;
+    FreeAndNil(frmSel_Produto);
+    if vCodProduto_Pos > 0 then
+      CurrencyEdit4.AsInteger := vCodProduto_Pos;
+  end;
+end;
+
+procedure TfrmCadProduto.CurrencyEdit4Exit(Sender: TObject);
+var
+  vNomeAux : String;
+begin
+  lblCorrugado.Caption := '';
+  if CurrencyEdit4.AsInteger > 0 then
+  begin
+    vNomeAux := fDMCadProduto.fnc_Verifica_Corrugado(CurrencyEdit4.AsInteger);
+    lblCorrugado.Caption := vNomeAux;
+    if trim(vNomeAux) = '' then
+    begin
+      MessageDlg('*** Corrugado não encontrado!', mtError, [mbOk], 0);
+      CurrencyEdit4.SetFocus;
+    end;
+  end;
 end;
 
 end.

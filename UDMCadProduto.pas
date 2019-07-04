@@ -1956,6 +1956,21 @@ type
     cdsProduto_ConsultaTIPO_MAT: TStringField;
     cdsProduto_ConsultaTIPO_ALGODAO: TStringField;
     qParametros_ProdALT_REF_ESTRUTURADA: TStringField;
+    sdsProduto_Corrugado: TSQLDataSet;
+    sdsProduto_CorrugadoID: TIntegerField;
+    sdsProduto_CorrugadoITEM: TIntegerField;
+    sdsProduto_CorrugadoQTD_EMB: TFloatField;
+    sdsProduto_CorrugadoID_MATERIAL: TIntegerField;
+    dspProduto_Corrugado: TDataSetProvider;
+    cdsProduto_Corrugado: TClientDataSet;
+    cdsProduto_CorrugadoID: TIntegerField;
+    cdsProduto_CorrugadoITEM: TIntegerField;
+    cdsProduto_CorrugadoQTD_EMB: TFloatField;
+    cdsProduto_CorrugadoID_MATERIAL: TIntegerField;
+    dsProduto_Corrugado: TDataSource;
+    sdsProduto_CorrugadoNOME_MATERIAL: TStringField;
+    cdsProduto_CorrugadoNOME_MATERIAL: TStringField;
+    qParametros_ProdUSA_CORRUGADO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2054,6 +2069,7 @@ type
     procedure prc_Abrir_Processo;
     procedure prc_Abrir_Ativo(ID: Integer);
     procedure prc_Abrir_PCP(ID: Integer);
+    procedure prc_Abrir_Corrugado(ID: Integer);
     procedure prc_Abrir_Ficha_Textil(ID: Integer);
     procedure prc_Abrir_Ficha_Tranc(ID: Integer);
     procedure prc_Abrir_Ficha_Textil_DP(ID: Integer);
@@ -2081,6 +2097,8 @@ type
     procedure prc_Inserir_Produto_Consumo_Proc;
 
     procedure prc_Gravar_Comb_Mat_Consumo;
+
+    function fnc_Verifica_Corrugado(ID : Integer) : String;
 
     function fnc_Calcular_Mat: Real;
 
@@ -3835,6 +3853,32 @@ begin
   cdsProduto_CA.Close;
   sdsProduto_CA.ParamByName('ID').AsInteger := ID;
   cdsProduto_CA.Open;
+end;
+
+function TdmCadProduto.fnc_Verifica_Corrugado(ID: Integer): String;
+var
+  sds: TSQLDataSet;
+begin
+  Result := '';
+  sds    := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT ID, NOME FROM PRODUTO WHERE ID = :ID ';
+    sds.ParamByName('ID').AsInteger := ID;
+    sds.Open;
+    Result := sds.FieldByName('NOME').AsString;
+  finally
+    FreeAndNil(sds);
+  end;
+end;
+
+procedure TdmCadProduto.prc_Abrir_Corrugado(ID: Integer);
+begin
+  cdsProduto_Corrugado.Close;
+  sdsProduto_Corrugado.ParamByName('ID').AsInteger := ID;
+  cdsProduto_Corrugado.Open;
 end;
 
 end.

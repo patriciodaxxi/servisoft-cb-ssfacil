@@ -1,11 +1,11 @@
 object frmSel_Produto: TfrmSel_Produto
-  Left = 0
-  Top = 80
+  Left = 80
+  Top = 69
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmSel_Produto'
   ClientHeight = 540
-  ClientWidth = 760
+  ClientWidth = 1033
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,7 +24,7 @@ object frmSel_Produto: TfrmSel_Produto
   object Panel1: TPanel
     Left = 0
     Top = 25
-    Width = 760
+    Width = 1033
     Height = 71
     Align = alTop
     Color = 16768959
@@ -233,7 +233,7 @@ object frmSel_Produto: TfrmSel_Produto
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 96
-    Width = 760
+    Width = 1033
     Height = 193
     Align = alClient
     Ctl3D = False
@@ -391,7 +391,7 @@ object frmSel_Produto: TfrmSel_Produto
   object StaticText1: TStaticText
     Left = 0
     Top = 523
-    Width = 760
+    Width = 1033
     Height = 17
     Align = alBottom
     BorderStyle = sbsSingle
@@ -409,7 +409,7 @@ object frmSel_Produto: TfrmSel_Produto
   object gbxPedido: TRzGroupBox
     Left = 0
     Top = 384
-    Width = 760
+    Width = 1033
     Height = 139
     Align = alBottom
     BorderColor = clNavy
@@ -431,7 +431,7 @@ object frmSel_Produto: TfrmSel_Produto
     object SMDBGrid2: TSMDBGrid
       Left = 5
       Top = 18
-      Width = 590
+      Width = 863
       Height = 116
       Align = alClient
       Ctl3D = False
@@ -534,7 +534,7 @@ object frmSel_Produto: TfrmSel_Produto
         end>
     end
     object Panel2: TPanel
-      Left = 595
+      Left = 868
       Top = 18
       Width = 160
       Height = 116
@@ -691,7 +691,7 @@ object frmSel_Produto: TfrmSel_Produto
   object NxPanel1: TNxPanel
     Left = 0
     Top = 289
-    Width = 760
+    Width = 1033
     Height = 16
     Align = alBottom
     UseDockManager = False
@@ -701,7 +701,7 @@ object frmSel_Produto: TfrmSel_Produto
   object DBMemo1: TDBMemo
     Left = 0
     Top = 305
-    Width = 760
+    Width = 1033
     Height = 79
     Align = alBottom
     DataField = 'OBS'
@@ -711,7 +711,7 @@ object frmSel_Produto: TfrmSel_Produto
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 760
+    Width = 1033
     Height = 25
     Align = alTop
     Color = 16768959

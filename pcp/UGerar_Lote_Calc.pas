@@ -159,7 +159,6 @@ type
     procedure SMDBGrid3GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure btnImpTalao_AuxClick(Sender: TObject);
-    procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure SMDBGrid3TitleClick(Column: TColumn);
     procedure btnConsultar_Pedidos_OrdClick(Sender: TObject);
     procedure btnAtualizar_MatClick(Sender: TObject);
@@ -191,6 +190,7 @@ type
     vItem_Mat: Integer;
     vQtd_Produto: Real;
     vQtd_Selecionada: Real;
+    vQtd_Corrugado : Integer;
 
     procedure prc_Consultar;
     procedure prc_Consultar_Ped;
@@ -214,7 +214,7 @@ type
 
     procedure prc_Gerar_Materiais(Tipo : String); //L=Lote  T=Talão
     procedure prc_Abrir_Lote_Mat(Num_Ordem: Integer);
-    procedure prc_Gravar_Lote_Mat(Num_Ordem, ID_Material, ID_Cor, ID_Fornecedor: Integer ; Carimbo, Tamanho: String ; Qtd_Consumo, Qtd_Produto: Real);
+    procedure prc_Gravar_Lote_Mat(Num_Ordem, ID_Material, ID_Cor, ID_Fornecedor: Integer ; Carimbo, Tamanho, Corrugado: String ; Qtd_Consumo, Qtd_Produto: Real);
     procedure prc_Consultar_Pedido_Ord;
     function fnc_Ordem_Producao_OC: Boolean;
     procedure prc_Atualizar_Material;
@@ -230,6 +230,10 @@ type
 
     procedure prc_Le_cdsPendente(ID : Integer);
     procedure prc_Embalagem;
+
+    procedure prc_Gerar_Corrugado;
+
+    function fnc_Calc_Corrugado(Qtd_Prod, Qtd_Emb : Integer) : Integer;
 
   public
     { Public declarations }
@@ -392,9 +396,6 @@ begin
   else
   if not(ckAgrupar.Checked)  then
     fDMCadLote.prc_Inserir
-  //if not(ckAgrupar_Pedido.Checked) and not(fDMCadLote.cdsLote.Locate('ID_PRODUTO;DTENTREGA;CARIMBO;ID_COMBINACAO',VarArrayOf([fDMCadLote.cdsPendenteID_PRODUTO.AsInteger,vData,vCarimboAux,vID_CombinacaoAux]),[locaseinsensitive])) then
-  //  fDMCadLote.prc_Inserir
-  //else
   else
   if fDMCadLote.qParametros_LoteLOTE_POR_PEDIDO.AsString = 'S' then
   begin
@@ -620,16 +621,6 @@ end;
 
 procedure TfrmGerar_Lote_Calc.Lote1Click(Sender: TObject);
 begin
-  {prc_Limpar_Auxiliar;
-  fDMCadLote.qParametros.Close;
-  fDMCadLote.qParametros.Open;
-  fDMCadLote.cdsConsulta_Lote.First;
-  while not fDMCadLote.cdsConsulta_Lote.Eof do
-  begin
-    if (SMDBGrid2.SelectedRows.CurrentRowSelected) then
-      fDMCadLote.prc_Gravar_mLote('L');
-    fDMCadLote.cdsConsulta_Lote.Next;
-  end;}
   prc_Le_mLote;
   fDMCadLote.mMaterial.First;
   while not fDMCadLote.mMaterial.Eof do
@@ -689,14 +680,6 @@ var
   i: Integer;
   ColunaOrdenada: String;
 begin
-{  fDMCadLote.cdsConsulta_Lote.IndexFieldNames := Column.FieldName;
-  ColunaOrdenada := Column.FieldName;
-  fDMCadLote.mLote.IndexFieldNames := Column.FieldName;
-  Column.Title.Color := clBtnShadow;
-  for i := 0 to SMDBGrid2.Columns.Count - 1 do
-    if not (SMDBGrid2.Columns.Items[I] = Column) then
-      SMDBGrid2.Columns.Items[I].Title.Color := clBtnFace;}
-
   ColunaOrdenada := Column.FieldName;
   fDMCadLote.mLote.IndexFieldNames := Column.FieldName;
   Column.Title.Color := clBtnShadow;
@@ -710,6 +693,7 @@ procedure TfrmGerar_Lote_Calc.btnConfirmarClick(Sender: TObject);
 var
   ID: TTransactionDesc;
   sds: TSQLDataSet;
+  vGravou : Boolean;
 begin
   if MessageDlg('Gerar Lote/Talões?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
@@ -734,6 +718,7 @@ begin
 
   SMDBGrid1.DisableScroll;
 
+  vGravou   := False;
   vNumLote  := 0;
   vNumOrdem := 0;
   fDMCadLote.mAuxiliar_Talao.EmptyDataSet;
@@ -785,16 +770,6 @@ begin
             prc_Gerar_Talao_Proc;
           prc_Gerar_Materiais('L');
         end;
-        //else
-        //begin
-        //  fDMCadLote.cdsTalao.First;
-        //  while not fDMCadLote.cdsTalao.Eof do
-        //  begin
-        //    prc_Gerar_Materiais('T');
-        //    fDMCadLote.cdsTalao.Next;
-        //  end;
-        //end;
-
         fDMCadLote.cdsLote.Edit;
         fDMCadLote.cdsLoteQTD_TALOES.AsInteger := fDMCadLote.cdsTalao.RecordCount;
         fDMCadLote.cdsLote.Post;
@@ -815,46 +790,25 @@ begin
         fDMCadLote.cdsLote.Next;
       end;
 
-      //13/03/2017 SulTextil
-      {if fDMCadLote.qParametros_LoteLOTE_POR_PEDIDO.AsString = 'S' then
-      begin
-        fDMCadLote.cdsLote_Mat.First;
-        while not fDMCadLote.cdsLote_Mat.Eof do
-        begin
-          fDMCadLote.qMaterial.Close;
-          fDMCadLote.qMaterial.ParamByName('ID').AsInteger := fDMCadLote.cdsLote_MatID_MATERIAL.AsInteger;
-          fDMCadLote.qMaterial.Open;
-          if fDMCadLote.qMaterialTIPO_REG.AsString = 'S' then
-          begin
-            if fDMCadLote.cdsLoteTIPO_LOTE.AsString <> 'S' then
-              prc_Gravar_Lote_Semi;
-          end;
-          prc_Gerar_Talao_Semi;
-          fDMCadLote.cdsLote_Mat.Next;
-        end;
-      end;}
-      //*********************
-
+      //if colocado 03/07/2019 pois a Gercla não vai gerar a embalagem neste bloco abaixo
       //29/08/2018
-      fDMCadLote.mProdAux.First;
-      while not fDMCadLote.mProdAux.Eof do
+      if trim(fDMCadLote.qParametros_ProdUSA_CORRUGADO.AsString) <> 'S' then
       begin
-        prc_Embalagem;
-        fDMCadLote.mProdAux.Next;
+        fDMCadLote.mProdAux.First;
+        while not fDMCadLote.mProdAux.Eof do
+        begin
+          prc_Embalagem;
+          fDMCadLote.mProdAux.Next;
+        end;
+        if fDMCadLote.mProdAux.RecordCount > 0 then
+          fDMCadLote.cdsLote_Mat.ApplyUpdates(0);
       end;
-      if fDMCadLote.mProdAux.RecordCount > 0 then
-        fDMCadLote.cdsLote_Mat.ApplyUpdates(0);
 
       //*******************
 
       fDMCadLote.cdsLote.ApplyUpdates(0);
-      MessageDlg('*** Lotes/Talões Gerados!', mtInformation, [mbok], 0);
       dmDatabase.scoDados.Commit(ID);
-      prc_Limpar_Var;
-      CurrencyEdit3.AsInteger := vNumOrdem;
-      //btnConsultar_PedidosClick(Sender);
-      RzPageControl2.ActivePage := TS_Consulta;
-      btnConsultarClick(Sender);
+      vGravou := True;
     end
     else
     begin
@@ -867,7 +821,20 @@ begin
     raise;
   end;
 
+  if vGravou then
+  begin
+    //Gravar Embalagem   Gercla   03/07/2019
+    if fDMCadLote.qParametros_ProdUSA_CORRUGADO.AsString = 'S' then
+      prc_Gerar_Corrugado;
+    //******************
 
+    MessageDlg('*** Lotes/Talões Gerados!', mtConfirmation, [mbok], 0);
+
+    prc_Limpar_Var;
+    CurrencyEdit3.AsInteger   := vNumOrdem;
+    RzPageControl2.ActivePage := TS_Consulta;
+    btnConsultarClick(Sender);
+  end;
 
   FreeAndNil(sds);
   SMDBGrid1.EnableScroll;
@@ -970,7 +937,6 @@ end;
 
 procedure TfrmGerar_Lote_Calc.FolhaResumo1Click(Sender: TObject);
 begin
-  //prc_Limpar_Auxiliar;
   fDMCadLote.mMaterial.First;
   while not fDMCadLote.mMaterial.Eof do
   begin
@@ -985,22 +951,7 @@ begin
   fDMCadLote.qParametros.Close;
   fDMCadLote.qParametros.Open;
   prc_Le_mLote;
-  {fDMCadLote.cdsConsulta_Lote.First;
-  while not fDMCadLote.cdsConsulta_Lote.Eof do
-  begin
-    if (SMDBGrid2.SelectedRows.CurrentRowSelected) then
-      fDMCadLote.prc_Gravar_mLote('L');
-    fDMCadLote.cdsConsulta_Lote.Next;
-  end;
-  fDMCadLote.mMaterial.First;
-  while not fDMCadLote.mMaterial.Eof do
-  begin
-    fDMCadLote.mMaterial_Tam.First;
-    while not fDMCadLote.mMaterial_Tam.Eof do
-      fDMCadLote.mMaterial_Tam.Delete;
-    fDMCadLote.mMaterial.Delete;
-  end;}
-  fRelLote_Res            := TfRelLote_Res.Create(Self);       
+  fRelLote_Res            := TfRelLote_Res.Create(Self);
   fRelLote_Res.Tag        := 1;
   fRelLote_Res.fDMCadLote := fDMCadLote;
   fRelLote_Res.RLReport1.PreviewModal;
@@ -1149,45 +1100,6 @@ begin
         prc_Gravar_mTalaoAux(fDMCadLote.mGerarAuxQtd.AsInteger,1);
       fDMCadLote.mGerarAux.Next;
     end;
-
-    {fDMCadLote.cdsTalao.First;
-    while not fDMCadLote.cdsTalao.Eof do
-    begin
-      if (fDMCadLote.qProduto_AtelierLIMITE_POR_TALAO.AsString = 'S') and (fDMCadLote.qProduto_AtelierQTD_LIMITE_POR_TALAO.AsInteger > 0) then
-      begin
-        vQtdPares    := fDMCadLote.cdsTalaoQTD.AsInteger;
-        vContadorAux := fDMCadLote.mLoteAux.RecordCount;
-        fDMCadLote.mLoteAux.First;
-        while not fDMCadLote.mLoteAux.Eof do
-        begin
-        //aqui ver  04/06/2015
-          vContadorAux := vContadorAux - 1;
-          vAux2 := StrToCurr(FormatCurr('0',fDMCadLote.cdsTalaoQTD.AsFloat * fDMCadLote.mLoteAuxPercentual.AsFloat / 100));
-          if StrToCurr(FormatCurr('0',vAux2)) > vQtdPares then
-            vAux2 := vQtdPares
-          else
-          if vContadorAux <= 0 then
-            vAux2 := vQtdPares;
-          if (fDMCadLote.mLoteAuxQtdAux.AsInteger + vAux2) > fDMCadLote.mLoteAuxQtd.AsInteger then
-            vAux2 := fDMCadLote.mLoteAuxQtd.AsInteger - fDMCadLote.mLoteAuxQtdAux.AsInteger;
-          if vaux2 > 0 then
-          begin
-            fDMCadLote.mLoteAux.Edit;
-            fDMCadLote.mLoteAuxQtdAux.AsInteger := StrToInt(FormatFloat('0',fDMCadLote.mLoteAuxQtdAux.AsInteger + vAux2));
-            fDMCadLote.mLoteAux.Post;
-            prc_Gravar_mTalaoAux(vAux2,fDMCadLote.mLoteAuxID.AsInteger);
-            vQtdPares := StrToInt(FormatCurr('0',vQtdPares - vAux2));
-            if vQtdPares <= 0 then
-              fDMCadLote.mLoteAux.Last;
-          end;
-          fDMCadLote.mLoteAux.Next;
-        end;
-      end
-      else
-        prc_Gravar_mTalaoAux(fDMCadLote.cdsTalaoQTD.AsInteger,1);
-      fDMCadLote.cdsTalao.Next;
-    end;}
-
 
     fDMCadLote.mLoteAux.First;
     while not fDMCadLote.mLoteAux.Eof do
@@ -1372,19 +1284,6 @@ begin
   VDBGrid2.DataSource  := fDMCadLote.dsConsulta_Talao_Aux_Tam;
 end;
 
-procedure TfrmGerar_Lote_Calc.SMDBGrid1TitleClick(Column: TColumn);
-//var
-//  i: Integer;
-//  ColunaOrdenada: String;
-begin
-  {ColunaOrdenada := Column.FieldName;
-  fDMCadLote.cdsPendente.IndexFieldNames := Column.FieldName;
-  Column.Title.Color := clBtnShadow;
-  for i := 0 to SMDBGrid2.Columns.Count - 1 do
-    if not (SMDBGrid2.Columns.Items[I] = Column) then
-      SMDBGrid2.Columns.Items[I].Title.Color := clBtnFace;}
-end;
-
 procedure TfrmGerar_Lote_Calc.SMDBGrid3TitleClick(Column: TColumn);
 var
   i: Integer;
@@ -1469,13 +1368,13 @@ begin
         if StrToFloat(FormatFloat('0.000',vQtd_Produto)) > 0 then
           vQtd_Produto := fDMCadLote.cdsTalaoQTD.AsFloat;
 
-        prc_Gravar_Lote_Mat(fDMCadLote.cdsLoteNUM_ORDEM.AsInteger,fDMCadLote.cdsConsumoID_MATERIAL.AsInteger,vID_Cor,fDMCadLote.cdsConsumoID_FORNECEDOR.AsInteger,vCarimbo,vTamanho,vQtdAux,fDMCadLote.cdsTalaoQTD.AsFloat);
+        prc_Gravar_Lote_Mat(fDMCadLote.cdsLoteNUM_ORDEM.AsInteger,fDMCadLote.cdsConsumoID_MATERIAL.AsInteger,vID_Cor,fDMCadLote.cdsConsumoID_FORNECEDOR.AsInteger,vCarimbo,vTamanho,'N',vQtdAux,fDMCadLote.cdsTalaoQTD.AsFloat);
 
         fDMCadLote.cdsTalao.Next;
       end;
     end
     else
-      prc_Gravar_Lote_Mat(fDMCadLote.cdsLoteNUM_ORDEM.AsInteger,fDMCadLote.cdsConsumoID_MATERIAL.AsInteger,vID_Cor,fDMCadLote.cdsConsumoID_FORNECEDOR.AsInteger,vCarimbo,vTamanho,vQtdAux,fDMCadLote.cdsLoteQTD.AsFloat);
+      prc_Gravar_Lote_Mat(fDMCadLote.cdsLoteNUM_ORDEM.AsInteger,fDMCadLote.cdsConsumoID_MATERIAL.AsInteger,vID_Cor,fDMCadLote.cdsConsumoID_FORNECEDOR.AsInteger,vCarimbo,vTamanho,'N',vQtdAux,fDMCadLote.cdsLoteQTD.AsFloat);
 
     vID_CorAnt      := fDMCadLote.cdsConsumoID_COR_MAT.AsInteger;
     vID_MaterialAnt := fDMCadLote.cdsConsumoID_MATERIAL.AsInteger;
@@ -1483,8 +1382,6 @@ begin
   end;
 
   //Gerar Embalagens 29/08/2018
-
-
 
   //******************
 
@@ -1498,13 +1395,12 @@ begin
   fDMCadLote.cdsLote_Mat.Open;
 end;
 
-procedure TfrmGerar_Lote_Calc.prc_Gravar_Lote_Mat(Num_Ordem, ID_Material,
-  ID_Cor, ID_Fornecedor: Integer; Carimbo, Tamanho: String; Qtd_Consumo,
+procedure TfrmGerar_Lote_Calc.prc_Gravar_Lote_Mat(Num_Ordem, ID_Material, ID_Cor, ID_Fornecedor: Integer; Carimbo, Tamanho, Corrugado: String; Qtd_Consumo,
   Qtd_Produto: Real);
 var
   vCarimboAux: String;
   vStatus : String;
-  vTamAux : String;  
+  vTamAux : String;
 begin
   vCarimboAux := '';
   if trim(Carimbo) <> '' then
@@ -1551,9 +1447,14 @@ begin
     fDMCadLote.cdsLote_MatQtd_OC_Fat.AsFloat      := 0;
     fDMCadLote.cdsLote_MatGerado.AsString         := 'N';
   end;
-  Qtd_Consumo := StrToFloat(FormatFloat('0.0000',Qtd_Consumo * Qtd_Produto));
+  if trim(Corrugado) <> 'S' then
+  begin
+    Qtd_Consumo := StrToFloat(FormatFloat('0.0000',Qtd_Consumo * Qtd_Produto));
+    fDMCadLote.cdsLote_MatQTD_PRODUTO.AsFloat := fDMCadLote.cdsLote_MatQTD_PRODUTO.AsFloat + vQtd_Produto;
+  end
+  else
+    fDMCadLote.cdsLote_MatQTD_PRODUTO.AsFloat := fDMCadLote.cdsLote_MatQTD_PRODUTO.AsFloat + Qtd_Produto;
   fDMCadLote.cdsLote_MatQTD_CONSUMO.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadLote.cdsLote_MatQTD_CONSUMO.AsFloat + Qtd_Consumo));
-  fDMCadLote.cdsLote_MatQTD_PRODUTO.AsFloat := fDMCadLote.cdsLote_MatQTD_PRODUTO.AsFloat + vQtd_Produto;
   fDMCadLote.cdsLote_Mat.Post;
 end;
 
@@ -2130,28 +2031,17 @@ begin
   fDMCadLote.cdsPendente.First;
   while not fDMCadLote.cdsPendente.Eof do
   begin
-    //if (SMDBGrid1.SelectedRows.CurrentRowSelected) then
     if (fDMCadLote.cdsPendenteSELECIONADO.AsString = 'S') or (ID > 0) then
     begin
       if fDMCadLote.cdsProdutoID.AsInteger <> fDMCadLote.cdsPendenteID_PRODUTO.AsInteger then
         fDMCadLote.cdsProduto.Locate('ID',fDMCadLote.cdsPendenteID_PRODUTO.AsInteger,[loCaseInsensitive]);
       prc_Gerar_Lote;
-      //O IF foi incluido 23/02/2017  para gerar os talões da SulTextil
-      //if ID <= 0 then
-      //begin
-        if fDMCadLote.qParametrosGERAR_TALAO_AUXILIAR.AsString = 'P' then
-        begin
-          prc_Gravar_mPedTalao;
-          //prc_Gerar_Talao_Proc;
-        end
-        else
-          prc_Gerar_Talao;
-      //end
-      //else
-      //begin
-      //  prc_Gravar_mPedTalao;
-      //  prc_Gerar_Talao2;  //SulTextil
-      //end;
+      if fDMCadLote.qParametrosGERAR_TALAO_AUXILIAR.AsString = 'P' then
+      begin
+        prc_Gravar_mPedTalao;
+      end
+      else
+        prc_Gerar_Talao;
     end;
     vNumPedido := fDMCadLote.cdsPendenteNUM_PEDIDO.AsInteger;
     fDMCadLote.cdsPendente.Next;
@@ -2182,7 +2072,7 @@ begin
                         fDMCadLote.cdsEmbalagemID_MATERIAL.AsInteger,
                         fDMCadLote.cdsEmbalagemID_COR_MAT.AsInteger,
                         fDMCadLote.cdsEmbalagemID_FORNECEDOR.AsInteger,
-                        '','',vQtdAux,fDMCadLote.mProdAuxQtd.AsFloat);
+                        '','','N',vQtdAux,fDMCadLote.mProdAuxQtd.AsFloat);
 
     fDMCadLote.cdsEmbalagem.Next;
   end;
@@ -2208,8 +2098,112 @@ begin
   fDMCadLote.mLote.Filtered := True;
   fDMCadLote.frxReport1.ShowReport;
   fDMCadLote.mLote.Filtered := false;
+end;
 
+procedure TfrmGerar_Lote_Calc.prc_Gerar_Corrugado;
+var
+  sds: TSQLDataSet;
+  sds2: TSQLDataSet;
+  vQtd : Real;
+  vQtdAux : Integer;
+  vQtdResto : Integer;
+  vCont : Integer;
+begin
+  sds  := TSQLDataSet.Create(nil);
+  sds2 := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
 
+    sds2.SQLConnection := dmDatabase.scoDados;
+    sds2.NoMetadata    := True;
+    sds2.GetMetadata   := False;
+
+    sds.CommandText   := 'select aux.*, MAT.NOME NOME_MATERIAL, MAT.unidade, MAT.id_fornecedor '
+                       + 'from (SELECT SUM(L.qtd) QTD, PE.id_material, PE.qtd_emb FROM LOTE l '
+                       + '       INNER JOIN PRODUTO P ON L.ID_PRODUTO = P.ID '
+                       + '       INNER JOIN PRODUTO_EMB PE ON P.id = PE.id'
+                       + '       WHERE L.num_ordem = :NUM_ORDEM'
+                       + '         AND PE.TIPO_EMB = ' + QuotedStr('C')
+                       + '       GROUP BY PE.id_material, PE.qtd_emb) aux'
+                       + ' inner join produto mat on aux.id_material = mat.id ';
+    SDS.ParamByName('NUM_ORDEM').AsInteger := vNumOrdem;
+    sds.Open;
+
+    sds.First;
+    while not sds.Eof do
+    begin
+      vQtdResto := fnc_Calc_Corrugado(sds.FieldByName('QTD').AsInteger,sds.FieldByName('QTD_EMB').AsInteger);
+      if (vQtd_Corrugado > 0) and (vQtdResto <= 0) then
+        prc_Gravar_Lote_Mat(vNumOrdem,sds.FieldByName('ID_MATERIAL').AsInteger,0,sds.FieldByName('ID_FORNECEDOR').AsInteger,'','','S',vQtd_Corrugado,sds.FieldByName('QTD').AsFloat);
+
+      if vQtdResto > 0 then
+      begin
+        sds2.Close;
+        sds2.CommandText := 'SELECT PG.*, MAT.NOME NOME_MATERIAL, MAT.id_fornecedor, MAT.unidade, '
+                          + '(select count(1) CONTADOR FROM PRODUTO_CORRUGADO PG2 WHERE PG2.ID = :ID) CONTADOR '
+                          + 'FROM PRODUTO_CORRUGADO PG '
+                          + 'LEFT JOIN PRODUTO MAT ON PG.id_material = MAT.ID '
+                          + 'WHERE PG.ID = :ID '
+                          + 'order by PG.QTD_EMB DESC ';
+        sds2.ParamByName('ID').AsInteger := sds.FieldByName('ID_MATERIAL').AsInteger;
+        sds2.Open;
+        if sds2.IsEmpty then
+        begin
+          vQtd_Corrugado := vQtd_Corrugado + 1;
+          prc_Gravar_Lote_Mat(vNumOrdem,sds.FieldByName('ID_MATERIAL').AsInteger,0,sds.FieldByName('ID_FORNECEDOR').AsInteger,'','','S',vQtd_Corrugado,sds.FieldByName('QTD').AsFloat);
+        end
+        else
+        begin
+          if vQtd_Corrugado > 0 then
+            prc_Gravar_Lote_Mat(vNumOrdem,sds.FieldByName('ID_MATERIAL').AsInteger,0,sds.FieldByName('ID_FORNECEDOR').AsInteger,'','','S',vQtd_Corrugado,sds.FieldByName('QTD').AsFloat - vQtdResto);
+          sds2.First;
+          vCont := sds2.FieldByName('CONTADOR').AsInteger;
+          while not sds2.Eof do
+          begin
+            vCont     := vCont - 1;
+            vQtd      := vQtdResto;
+            vQtdResto := fnc_Calc_Corrugado(vQtdResto,sds2.FieldByName('QTD_EMB').AsInteger);
+            if (vCont <= 0) then
+            begin
+              if vQtdResto > 0 then
+                vQtd_Corrugado := vQtd_Corrugado + 1;
+              vQtdResto := 0;
+            end
+            else
+            if vQtd_Corrugado > 0 then
+              vQtd := vQtd - vQtdResto;
+
+            if vQtd_Corrugado > 0 then
+              prc_Gravar_Lote_Mat(vNumOrdem,sds2.FieldByName('ID_MATERIAL').AsInteger,0,sds2.FieldByName('ID_FORNECEDOR').AsInteger,'','','S',vQtd_Corrugado,vQtd);
+
+            sds2.Next;
+          end;
+        end;
+
+      end;
+
+      sds.Next;
+    end;
+
+    fDMCadLote.cdsLote_Mat.ApplyUpdates(0);
+
+  finally
+    FreeAndNil(sds);
+    FreeAndNil(sds2);
+  end;
+
+end;
+
+function TfrmGerar_Lote_Calc.fnc_Calc_Corrugado(Qtd_Prod,Qtd_Emb: Integer): Integer;
+var
+  vQtdAux : Integer;  
+begin
+  vQtdAux := qtd_Prod div qtd_emb;
+  vQtd_Corrugado := vQtdAux;
+  vQtdAux := Qtd_Prod - (vQtdAux * qtd_emb);
+  Result := vQtdAux;
 end;
 
 end.
