@@ -28,6 +28,7 @@ procedure prc_Gravar_Produto_Imp(fDMCadNotaFiscal: TDMCadNotaFiscal ; DtEmissao 
 Base_ICMSSubstRet, Vlr_ICMSSubst_Ret, Base_Icms_Efet, Vlr_Icms_Efet,Base_IcmsSubst, Vlr_IcmsSubst, Qtd, Qtd_Pacote : Real ; Unidade : String );
 procedure Prc_Excluir_Produto_Imp(fDMCadNotaFiscal: TDMCadNotaFiscal ; Data : TDateTime);
 
+function fnc_Busca_Vend_Int_Ped(ID_Ped : Integer) : Integer;
 
 {unction fnc_Verifica_Nota_Ramiro(fDMCadNotaFiscal: TDMCadNotaFiscal; nNota: Integer): Boolean;}
 
@@ -749,6 +750,25 @@ begin
     fDMCadNotaFiscal.mProdAux.Next;
   end;}
 
+end;
+
+function fnc_Busca_Vend_Int_Ped(ID_Ped : Integer) : Integer;
+var
+  sds: TSQLDataSet;
+begin
+  Result := 0;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'select P.id_vendedor_int from PEDIDO P WHERE P.ID = :ID ';
+    sds.ParamByName('ID').AsInteger := ID_Ped;
+    sds.Open;
+    Result := sds.FieldByName('id_vendedor_int').AsInteger;
+  finally
+    FreeAndNil(sds);
+  end;
 end;
 
 end.

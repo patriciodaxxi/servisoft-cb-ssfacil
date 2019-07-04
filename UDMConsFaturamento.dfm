@@ -2615,4 +2615,20 @@ object DMConsFaturamento: TDMConsFaturamento
     Left = 976
     Top = 453
   end
+  object qParametros_Geral: TSQLQuery
+    NoMetaData = False
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_VENDEDOR_INT'
+      'FROM PARAMETROS_GERAL')
+    SQLConnection = dmDatabase.scoDados
+    Left = 740
+    Top = 315
+    object qParametros_GeralUSA_VENDEDOR_INT: TStringField
+      FieldName = 'USA_VENDEDOR_INT'
+      FixedChar = True
+      Size = 1
+    end
+  end
 end

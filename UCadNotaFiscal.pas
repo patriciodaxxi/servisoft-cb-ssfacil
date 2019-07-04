@@ -778,6 +778,8 @@ var
   vObsGNRE: WideString;
   vMSGUnidExp : String;
   vPrazoAux : String;
+  vID_Vendedor_Int : Integer;
+  vID_Ped_Ant : Integer;
 begin
   fDMCadNotaFiscal.mPedidoAux.EmptyDataSet;
   vIDAux := fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger;
@@ -876,6 +878,7 @@ begin
       vVersao := '';
       vIBPT_Chave := '';
       fDMCadNotaFiscal.vPerc_Comissao_Rateio := 0;
+      vID_Ped_Ant := 0;
       fDMCadNotaFiscal.cdsNotaFiscal_Itens.First;
       while not fDMCadNotaFiscal.cdsNotaFiscal_Itens.Eof do
       begin
@@ -955,6 +958,14 @@ begin
         if (fDMCadNotaFiscal.cdsProduto.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,[loCaseInsensitive])) and
            (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString <> 'N') then
         begin
+          //04/07/2019
+          if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger <= 0) then
+            vID_Vendedor_Int := 0
+          else
+          if (vID_Ped_Ant <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger) then
+            vID_Vendedor_Int := uGrava_NotaFiscal.fnc_Busca_Vend_Int_Ped(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger);
+          //***************
+
           vID_Mov := fDMMovimento.fnc_Gravar_Movimento(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger,
                                                        fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger,
@@ -1011,8 +1022,8 @@ begin
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
-                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
-
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,
+                                                       vID_Vendedor_Int);
         end;
         if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger <> vID_Estoque) or
            (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov) then
@@ -1066,6 +1077,8 @@ begin
         if fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString = 'E' then
           uCalculo_NotaFiscal.Atualiza_Preco2(fDMCadNotaFiscal);
         //*****************************
+
+        vID_Ped_Ant := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger;
 
         fDMCadNotaFiscal.cdsNotaFiscal_Itens.Next;
       end;

@@ -1817,7 +1817,8 @@ begin
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
-                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
+                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,
+                                               0);
 
 end;
 

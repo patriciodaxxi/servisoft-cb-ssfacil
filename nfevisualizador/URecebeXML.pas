@@ -3583,7 +3583,8 @@ begin
                                                fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
                                                fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
                                                fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
-                                               fDMRecebeXML.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
+                                               fDMRecebeXML.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,
+                                               0);
 
 end;
 

@@ -297,6 +297,9 @@ object DMMovimento: TDMMovimento
     object sdsMovimentoVLR_FCP_ST: TFloatField
       FieldName = 'VLR_FCP_ST'
     end
+    object sdsMovimentoID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
+    end
   end
   object dspMovimento: TDataSetProvider
     DataSet = sdsMovimento
@@ -590,6 +593,9 @@ object DMMovimento: TDMMovimento
     end
     object cdsMovimentoVLR_FCP_ST: TFloatField
       FieldName = 'VLR_FCP_ST'
+    end
+    object cdsMovimentoID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
     end
   end
   object dsMovimento: TDataSource

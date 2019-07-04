@@ -23,7 +23,7 @@ object frmCadRecibo: TfrmCadRecibo
     Top = 0
     Width = 908
     Height = 687
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -31,7 +31,7 @@ object frmCadRecibo: TfrmCadRecibo
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -2312,7 +2312,6 @@ object frmCadRecibo: TfrmCadRecibo
                   FieldName = 'lkNome_Conta'
                   Title.Alignment = taCenter
                   Title.Caption = 'Nome Conta'
-                  Width = 64
                   Visible = True
                 end
                 item

@@ -198,6 +198,8 @@ type
     cdsMovimentoVLR_ICMS_FCP_DEST: TFloatField;
     cdsMovimentoVLR_ICMS_FCP: TFloatField;
     cdsMovimentoVLR_FCP_ST: TFloatField;
+    sdsMovimentoID_VENDEDOR_INT: TIntegerField;
+    cdsMovimentoID_VENDEDOR_INT: TIntegerField;
     procedure cdsMovimentoReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
@@ -216,7 +218,8 @@ type
                                   Tamanho, Tipo_Condicao: String; ID_CondPgto,ID_Recibo, ID_Vendedor, ID_Cor: Integer; Perc_Comissao,
                                   Vlr_Icms_UF_Remet, Vlr_Icms_UF_Dest: Real;
                                   Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String;
-                                  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST: Real): Integer;
+                                  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST: Real ;
+                                  ID_Vendedor_Int : Integer): Integer;
 
     procedure prc_ImprimeVendasCupomW;//WriteLn
     procedure prc_ImprimeVendasCupomC(cAvanco: Word);//Canvas
@@ -265,7 +268,8 @@ function TDMMovimento.fnc_Gravar_Movimento(ID_Mov, Filial, Item,
   DtEmissao, DtEntradaSaida: TDateTime; Tamanho, Tipo_Condicao: String;
   ID_CondPgto, ID_Recibo, ID_Vendedor, ID_Cor: Integer; Perc_Comissao, Vlr_Icms_UF_Remet, Vlr_Icms_UF_Dest: Real;
   Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String ;
-  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST: Real): Integer;
+  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST: Real;
+  ID_Vendedor_Int : Integer): Integer;
 var
   vAux: Integer;
 begin
@@ -446,6 +450,10 @@ begin
     cdsMovimentoVLR_ICMS_FCP.AsFloat       := VLR_ICMS_FCP;
     cdsMovimentoVLR_FCP_ST.AsFloat         := VLR_FCP_ST;
     //********************
+
+    //04/07/2019
+    if ID_Vendedor_Int > 0 then
+      cdsMovimentoID_VENDEDOR_INT.AsInteger := ID_Vendedor_Int;
 
     cdsMovimento.Post;
     cdsMovimento.ApplyUpdates(0);

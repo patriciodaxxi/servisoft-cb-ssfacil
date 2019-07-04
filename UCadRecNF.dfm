@@ -24,7 +24,7 @@ object frmCadRecNF: TfrmCadRecNF
     Top = 0
     Width = 946
     Height = 670
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadRecNF: TfrmCadRecNF
     ParentBackgroundColor = False
     ParentColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
