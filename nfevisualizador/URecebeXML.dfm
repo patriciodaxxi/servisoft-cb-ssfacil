@@ -1,7 +1,7 @@
 object frmRecebeXML: TfrmRecebeXML
-  Left = 127
-  Top = 0
-  Width = 1053
+  Left = 147
+  Top = 2
+  Width = 1124
   Height = 706
   BorderWidth = 5
   Caption = 'Recebe XML NFe'
@@ -22,8 +22,8 @@ object frmRecebeXML: TfrmRecebeXML
   object pcDados: TPageControl
     Left = 0
     Top = 146
-    Width = 1035
-    Height = 519
+    Width = 1098
+    Height = 511
     ActivePage = TabSheet4
     Align = alClient
     TabOrder = 0
@@ -882,14 +882,14 @@ object frmRecebeXML: TfrmRecebeXML
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 1027
-        Height = 491
+        Width = 1090
+        Height = 483
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0
         DesignSize = (
-          1027
-          491)
+          1090
+          483)
         object Label29: TLabel
           Left = 18
           Top = 29
@@ -1138,7 +1138,7 @@ object frmRecebeXML: TfrmRecebeXML
           ParentFont = False
         end
         object Label61: TLabel
-          Left = 841
+          Left = 858
           Top = 389
           Width = 132
           Height = 13
@@ -1502,7 +1502,7 @@ object frmRecebeXML: TfrmRecebeXML
           TabOrder = 18
         end
         object BitBtn2: TBitBtn
-          Left = 865
+          Left = 882
           Top = 407
           Width = 123
           Height = 25
@@ -1514,7 +1514,7 @@ object frmRecebeXML: TfrmRecebeXML
           OnClick = BitBtn2Click
         end
         object BitBtn4: TBitBtn
-          Left = 865
+          Left = 882
           Top = 433
           Width = 123
           Height = 25
@@ -1525,7 +1525,7 @@ object frmRecebeXML: TfrmRecebeXML
           OnClick = BitBtn4Click
         end
         object BitBtn1: TBitBtn
-          Left = 865
+          Left = 882
           Top = 459
           Width = 123
           Height = 25
@@ -2229,16 +2229,16 @@ object frmRecebeXML: TfrmRecebeXML
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 1027
-        Height = 491
+        Width = 1090
+        Height = 483
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0
         object SMDBGrid1: TSMDBGrid
           Left = 1
           Top = 1
-          Width = 1025
-          Height = 269
+          Width = 1088
+          Height = 261
           Align = alClient
           Ctl3D = False
           DataSource = DMRecebeXML.dsmItensNota
@@ -2551,17 +2551,17 @@ object frmRecebeXML: TfrmRecebeXML
         end
         object Panel7: TPanel
           Left = 1
-          Top = 423
-          Width = 1025
+          Top = 415
+          Width = 1088
           Height = 67
           Align = alBottom
           Color = clSilver
           TabOrder = 1
           DesignSize = (
-            1025
+            1088
             67)
           object Shape1: TShape
-            Left = 736
+            Left = 817
             Top = 17
             Width = 25
             Height = 16
@@ -2569,7 +2569,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clRed
           end
           object Label67: TLabel
-            Left = 764
+            Left = 845
             Top = 20
             Width = 115
             Height = 13
@@ -2577,7 +2577,7 @@ object frmRecebeXML: TfrmRecebeXML
             Caption = 'Produto n'#227'o encontrado'
           end
           object Shape2: TShape
-            Left = 563
+            Left = 644
             Top = 9
             Width = 25
             Height = 16
@@ -2585,7 +2585,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clYellow
           end
           object Shape3: TShape
-            Left = 563
+            Left = 644
             Top = 39
             Width = 25
             Height = 16
@@ -2593,7 +2593,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clAqua
           end
           object Label68: TLabel
-            Left = 592
+            Left = 673
             Top = 43
             Width = 86
             Height = 13
@@ -2601,7 +2601,7 @@ object frmRecebeXML: TfrmRecebeXML
             Caption = 'Unidade Diferente'
           end
           object Shape4: TShape
-            Left = 736
+            Left = 817
             Top = 32
             Width = 25
             Height = 16
@@ -2609,7 +2609,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clGray
           end
           object Label90: TLabel
-            Left = 764
+            Left = 845
             Top = 35
             Width = 109
             Height = 13
@@ -2617,7 +2617,7 @@ object frmRecebeXML: TfrmRecebeXML
             Caption = 'CFOP N'#227'o Encontrada'
           end
           object Label76: TLabel
-            Left = 591
+            Left = 672
             Top = 12
             Width = 124
             Height = 13
@@ -2625,7 +2625,7 @@ object frmRecebeXML: TfrmRecebeXML
             Caption = 'N'#227'o possui n'#250'mero na OC'
           end
           object Shape5: TShape
-            Left = 563
+            Left = 644
             Top = 24
             Width = 25
             Height = 16
@@ -2633,7 +2633,7 @@ object frmRecebeXML: TfrmRecebeXML
             Brush.Color = clMaroon
           end
           object Label118: TLabel
-            Left = 591
+            Left = 672
             Top = 27
             Width = 72
             Height = 13
@@ -2658,8 +2658,8 @@ object frmRecebeXML: TfrmRecebeXML
         end
         object PageControl1: TPageControl
           Left = 1
-          Top = 270
-          Width = 1025
+          Top = 262
+          Width = 1088
           Height = 153
           ActivePage = TabSheet8
           Align = alBottom
@@ -3218,7 +3218,7 @@ object frmRecebeXML: TfrmRecebeXML
             ImageIndex = 1
             ParentFont = False
             DesignSize = (
-              977
+              1040
               145)
             object Label106: TLabel
               Left = 57
@@ -3489,7 +3489,7 @@ object frmRecebeXML: TfrmRecebeXML
               TabOrder = 12
             end
             object ckAtualizaRef: TCheckBox
-              Left = 580
+              Left = 661
               Top = 20
               Width = 125
               Height = 17
@@ -3928,14 +3928,14 @@ object frmRecebeXML: TfrmRecebeXML
       object Panel10: TPanel
         Left = 0
         Top = 0
-        Width = 1017
-        Height = 481
+        Width = 1080
+        Height = 473
         Align = alClient
         TabOrder = 0
         object Panel11: TPanel
           Left = 1
           Top = 1
-          Width = 1015
+          Width = 1078
           Height = 41
           Align = alTop
           TabOrder = 0
@@ -4157,8 +4157,8 @@ object frmRecebeXML: TfrmRecebeXML
         object SMDBGrid2: TSMDBGrid
           Left = 1
           Top = 42
-          Width = 1015
-          Height = 438
+          Width = 1078
+          Height = 430
           Align = alClient
           Ctl3D = False
           DataSource = DMRecebeXML.dsmParc
@@ -4299,46 +4299,55 @@ object frmRecebeXML: TfrmRecebeXML
           item
             Expanded = False
             FieldName = 'Id'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'tpAmb'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'verAplic'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'chNFe'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'dhRecbto'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nProt'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'digVal'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'cStat'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'xMotivo'
+            Width = 64
             Visible = True
           end>
       end
@@ -4919,14 +4928,14 @@ object frmRecebeXML: TfrmRecebeXML
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1035
+    Width = 1098
     Height = 146
     Align = alTop
     BevelOuter = bvNone
     Color = clMoneyGreen
     TabOrder = 1
     DesignSize = (
-      1035
+      1098
       146)
     object Label4: TLabel
       Left = 269
@@ -5403,7 +5412,7 @@ object frmRecebeXML: TfrmRecebeXML
         'Cliente')
     end
     object ckAtualizaPreco2: TCheckBox
-      Left = 872
+      Left = 953
       Top = 38
       Width = 147
       Height = 17
@@ -5413,7 +5422,7 @@ object frmRecebeXML: TfrmRecebeXML
       Visible = False
     end
     object ckAtualizaCusto2: TCheckBox
-      Left = 872
+      Left = 953
       Top = 54
       Width = 147
       Height = 17

@@ -357,7 +357,7 @@ begin
                                              mMaterialQtd.AsFloat,
                                              mMaterialPreco_Custo.AsFloat,
                                              0,0,'',mMaterialID_Cor.AsInteger,Num_Lote,'N',
-                                             mMaterialPreco_Custo_Total.AsFloat,0);  //14/01/2019  o campo id_operação , não esta tendo controle na materia prima
+                                             mMaterialPreco_Custo_Total.AsFloat,0,0,0,0);  //14/01/2019  o campo id_operação , não esta tendo controle na materia prima
   cdsNotaFiscal_MP.Edit;
   cdsNotaFiscal_MPID_MOVESTOQUE.AsInteger := vID_Estoque;
 

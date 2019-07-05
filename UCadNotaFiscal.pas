@@ -1011,7 +1011,10 @@ begin
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
-                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensCOMPRIMENTO.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensLARGURA.AsFloat,
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensESPESSURA.AsFloat);
 
         end;
         if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger <> vID_Estoque) or
@@ -2874,6 +2877,9 @@ begin
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,
                                                              vGeraCusto,uCalculo_NotaFiscal.vVlrCusto_Total,
+                                                             fDMCadNotaFiscal.cdsNotaFiscal_ItensCOMPRIMENTO.AsFloat,
+                                                             fDMCadNotaFiscal.cdsNotaFiscal_ItensLARGURA.AsFloat,
+                                                             fDMCadNotaFiscal.cdsNotaFiscal_ItensESPESSURA.AsFloat,
                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger); //14/01/2019 incluída a operação
 
                 fDMCadNotaFiscal.cdsNotaFiscal_Itens.Edit;
@@ -4782,6 +4788,9 @@ begin
                                           fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
                                           fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,vGeraCusto,
                                           fDMCadNotaFiscal.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,
+                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensCOMPRIMENTO.AsFloat,
+                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensLARGURA.AsFloat,
+                                          fDMCadNotaFiscal.cdsNotaFiscal_ItensESPESSURA.AsFloat,
                                           fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger);
 end;
 

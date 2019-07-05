@@ -475,7 +475,7 @@ begin
                                                          0,0,'',
                                                          fDMCadPedido.cdsPedido_ItensID_COR.AsInteger,
                                                          fDMCadPedido.cdsPedido_ItensNUM_LOTE_CONTROLE.AsString,'N',
-                                                         vVlrAux,
+                                                         vVlrAux,0,0,0,
                                                          fDMCadPedido.cdsPedidoID_OPERACAO_NOTA.AsInteger);
           end;
           if fDMCadPedido.cdsPedido_ItensID_MOVESTOQUE.AsInteger <> vID_Estoque then

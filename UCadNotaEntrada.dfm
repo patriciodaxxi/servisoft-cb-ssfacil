@@ -23,9 +23,9 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 941
-    Height = 679
-    ActivePage = TS_Cadastro
+    Width = 933
+    Height = 671
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -42,8 +42,8 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 129
-        Width = 937
-        Height = 510
+        Width = 929
+        Height = 502
         Align = alClient
         Ctl3D = False
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Consulta
@@ -191,7 +191,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
       object pnlPesquisa: TPanel
         Left = 0
         Top = 31
-        Width = 937
+        Width = 929
         Height = 98
         Align = alTop
         Color = clSilver
@@ -407,8 +407,8 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 639
-        Width = 937
+        Top = 631
+        Width = 929
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -424,7 +424,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 937
+        Width = 929
         Height = 31
         Align = alTop
         Color = 8404992
@@ -733,7 +733,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 937
+        Width = 929
         Height = 31
         Align = alTop
         Color = 8404992
@@ -980,7 +980,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
       object pnlCadastro: TPanel
         Left = 0
         Top = 31
-        Width = 937
+        Width = 929
         Height = 157
         Align = alTop
         Enabled = False
@@ -988,7 +988,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 935
+          Width = 927
           Height = 29
           Align = alTop
           Color = clSilver
@@ -1039,7 +1039,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
         object pnlCliente: TPanel
           Left = 1
           Top = 30
-          Width = 935
+          Width = 927
           Height = 93
           Align = alClient
           TabOrder = 1
@@ -1354,7 +1354,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
         object Panel3: TPanel
           Left = 1
           Top = 123
-          Width = 935
+          Width = 927
           Height = 33
           Align = alBottom
           TabOrder = 2
@@ -1397,9 +1397,9 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 188
-        Width = 937
-        Height = 436
-        ActivePage = ts_Duplicata
+        Width = 929
+        Height = 428
+        ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -1407,7 +1407,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -1415,8 +1415,8 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 57
-            Width = 933
-            Height = 356
+            Width = 925
+            Height = 348
             Align = alClient
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1697,7 +1697,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           object pnlItem: TPanel
             Left = 0
             Top = 26
-            Width = 933
+            Width = 925
             Height = 31
             Align = alTop
             Color = clSilver
@@ -1933,7 +1933,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           object pnlLocalEstoque: TPanel
             Left = 0
             Top = 0
-            Width = 933
+            Width = 925
             Height = 26
             Align = alTop
             TabOrder = 0
@@ -1986,8 +1986,8 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           Caption = 'Valores'
           Enabled = False
           DesignSize = (
-            933
-            413)
+            925
+            405)
           object Label27: TLabel
             Left = 303
             Top = 46
@@ -2055,7 +2055,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           object pnlValores: TPanel
             Left = 0
             Top = 0
-            Width = 933
+            Width = 925
             Height = 32
             Align = alTop
             Color = clSilver
@@ -2382,7 +2382,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           object pnlDuplicata: TPanel
             Left = 0
             Top = 0
-            Width = 933
+            Width = 925
             Height = 76
             Align = alTop
             Color = clSilver
@@ -2584,8 +2584,8 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           object SMDBGrid_Dupl: TSMDBGrid
             Left = 0
             Top = 76
-            Width = 933
-            Height = 337
+            Width = 925
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Parc
@@ -2669,7 +2669,7 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           object Panel8: TPanel
             Left = 0
             Top = 0
-            Width = 933
+            Width = 925
             Height = 199
             Align = alTop
             TabOrder = 0
@@ -2803,16 +2803,16 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
           object GroupBox5: TGroupBox
             Left = 0
             Top = 199
-            Width = 933
-            Height = 214
+            Width = 925
+            Height = 206
             Align = alClient
             Caption = ' Eventos '
             TabOrder = 1
             object SMDBGrid3: TSMDBGrid
               Left = 2
               Top = 15
-              Width = 929
-              Height = 197
+              Width = 921
+              Height = 189
               Align = alClient
               Ctl3D = False
               DataSource = DMCadNotaFiscal.dsNotaFiscal_NFe
@@ -2906,8 +2906,8 @@ object frmCadNotaEntrada: TfrmCadNotaEntrada
       end
       object Panel10: TPanel
         Left = 0
-        Top = 624
-        Width = 937
+        Top = 616
+        Width = 929
         Height = 32
         Align = alBottom
         Color = clSilver

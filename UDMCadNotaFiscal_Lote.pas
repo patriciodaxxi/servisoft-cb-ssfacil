@@ -251,7 +251,7 @@ begin
                                              0,
                                              mMaterialQtd.AsFloat,
                                              mMaterialPreco_Custo.AsFloat,
-                                             0,0,'',0,'','N',0,
+                                             0,0,'',0,'','N',0,0,0,0,
                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger);
   cdsNotaFiscal_MP.Edit;
   cdsNotaFiscal_MPID_MOVESTOQUE.AsInteger := vID_Estoque;

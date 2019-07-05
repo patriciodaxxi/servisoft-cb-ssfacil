@@ -99,6 +99,12 @@ type
     cdsEstoque_MovUNIDADE: TStringField;
     sdsEstoque_MovID_OPERACAO: TIntegerField;
     cdsEstoque_MovID_OPERACAO: TIntegerField;
+    sdsEstoque_MovLARGURA: TFloatField;
+    sdsEstoque_MovCOMPRIMENTO: TFloatField;
+    sdsEstoque_MovESPESSURA: TFloatField;
+    cdsEstoque_MovLARGURA: TFloatField;
+    cdsEstoque_MovCOMPRIMENTO: TFloatField;
+    cdsEstoque_MovESPESSURA: TFloatField;
     procedure cdsEstoque_MovReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
@@ -117,7 +123,8 @@ type
                        //Vlr_Unitario_Orig,Vlr_Desconto_Orig: Real; Qtd_Pacote: Real = 0; Unidade_Interna: String = '' ;
                        //ID_COR: Integer = 0): Integer;
                        Vlr_Unitario_Orig,Vlr_Desconto_Orig: Real; Qtd_Pacote: Real; Unidade_Interna: String;
-                       ID_COR: Integer; Num_Lote_Controle, Gerar_Custo: String; Preco_Custo_Total: Real; ID_Operacao: Integer): Integer;
+                       ID_COR: Integer; Num_Lote_Controle, Gerar_Custo: String; Preco_Custo_Total, Comprimento, Largura, Espessura: Real;
+                       ID_Operacao: Integer): Integer;
 
     function fnc_Buscar_Estoque(CodProduto: Integer; ID_Local_Estoque: Integer; ID_Cor: Integer): Real;
 
@@ -186,7 +193,7 @@ function TDMEstoque.fnc_Gravar_Estoque(ID_Estoque, ID_Filial, ID_Local_Estoque, 
   Unidade_Orig, Serie, Tamanho: String; Data: TDateTime; Vlr_Unitario, Qtd,
   Perc_ICMS, Perc_IPI, Vlr_Desconto, Perc_Trib, Vlr_Frete, Qtd_Orig,
   Vlr_Unitario_Orig, Vlr_Desconto_Orig: Real; Qtd_Pacote: Real;
-  Unidade_Interna: String; ID_COR: Integer; Num_Lote_Controle, Gerar_Custo: String; Preco_Custo_Total: Real ;
+  Unidade_Interna: String; ID_COR: Integer; Num_Lote_Controle, Gerar_Custo: String; Preco_Custo_Total, Comprimento, Largura, Espessura: Real;
   ID_Operacao: Integer): Integer;
 var
   vAux: Integer;
@@ -292,6 +299,10 @@ begin
       else
         cdsEstoque_MovGERAR_CUSTO.AsString := 'N';
     end;
+
+    cdsEstoque_MovComprimento.AsFloat := Comprimento;
+    cdsEstoque_MovLargura.AsFloat     := Largura;
+    cdsEstoque_MovEspessura.AsFloat   := Espessura;
 
     //14/01/2019 Vai gravar a operação para controle do estoque em terceiro e de terceiro
     if ID_Operacao <= 0 then

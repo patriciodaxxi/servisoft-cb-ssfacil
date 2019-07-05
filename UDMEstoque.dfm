@@ -133,6 +133,15 @@ object DMEstoque: TDMEstoque
     object sdsEstoque_MovID_OPERACAO: TIntegerField
       FieldName = 'ID_OPERACAO'
     end
+    object sdsEstoque_MovLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object sdsEstoque_MovCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object sdsEstoque_MovESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
   end
   object dspEstoque_Mov: TDataSetProvider
     DataSet = sdsEstoque_Mov
@@ -261,6 +270,15 @@ object DMEstoque: TDMEstoque
     end
     object cdsEstoque_MovID_OPERACAO: TIntegerField
       FieldName = 'ID_OPERACAO'
+    end
+    object cdsEstoque_MovLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object cdsEstoque_MovCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object cdsEstoque_MovESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
     end
   end
   object dsEstoque_Mov: TDataSource

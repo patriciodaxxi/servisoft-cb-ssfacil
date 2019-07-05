@@ -573,7 +573,7 @@ begin
                                                    fDMCadInventario.cdsInventario_ItensVLR_UNITARIO.AsFloat,
                                                    0,0,'',fDMCadInventario.cdsInventario_ItensID_COR.AsInteger,'',
                                                    vGerar_Custo,
-                                                   fDMCadInventario.cdsInventario_ItensVLR_UNITARIO.AsFloat,0);
+                                                   fDMCadInventario.cdsInventario_ItensVLR_UNITARIO.AsFloat,0,0,0,0,);
       fDMCadInventario.cdsInventario_Itens.Edit;
       fDMCadInventario.cdsInventario_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
       fDMCadInventario.cdsInventario_ItensQTD_AJUSTE.AsFloat      := vQtd;

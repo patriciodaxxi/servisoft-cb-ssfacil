@@ -1,8 +1,8 @@
 object DMRecebeXML: TDMRecebeXML
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 65524
-  Top = 38
+  Left = 12
+  Top = 23
   Height = 744
   Width = 1382
   object sdsCFOP: TSQLDataSet
@@ -12,12 +12,12 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 416
+    Left = 360
     Top = 7
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
-    Left = 456
+    Left = 392
     Top = 7
   end
   object cdsCFOP: TClientDataSet
@@ -25,7 +25,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'CODCFOP'
     Params = <>
     ProviderName = 'dspCFOP'
-    Left = 496
+    Left = 432
     Top = 7
     object cdsCFOPID: TIntegerField
       FieldName = 'ID'
@@ -157,7 +157,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsCFOP: TDataSource
     DataSet = cdsCFOP
-    Left = 544
+    Left = 472
     Top = 7
   end
   object XMLTransformProvider1: TXMLTransformProvider
@@ -166,15 +166,15 @@ object DMRecebeXML: TDMRecebeXML
       'C:\A\201902\NFe_01_S002_000002_431902889796950001465500200000000' +
       '21603916441.xml'
     CacheData = True
-    Left = 408
-    Top = 288
+    Left = 664
+    Top = 616
   end
   object cdsCabecalho: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'XMLTransformProvider1'
-    Left = 416
-    Top = 319
+    Left = 832
+    Top = 327
     object cdsCabecalhoversao: TStringField
       FieldName = 'versao'
       Required = True
@@ -815,15 +815,15 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsCabecalho: TDataSource
     DataSet = cdsCabecalho
-    Left = 440
-    Top = 320
+    Left = 856
+    Top = 328
   end
   object cdsNFeRef: TClientDataSet
     Aggregates = <>
     DataSetField = cdsCabecalhoNFref
     Params = <>
-    Left = 670
-    Top = 424
+    Left = 830
+    Top = 280
     object cdsNFeRefrefNFe: TIntegerField
       FieldName = 'refNFe'
     end
@@ -893,8 +893,8 @@ object DMRecebeXML: TDMRecebeXML
     Aggregates = <>
     DataSetField = cdsCabecalhoprotNFe
     Params = <>
-    Left = 760
-    Top = 424
+    Left = 928
+    Top = 280
     object cdsNFeProtocoloversao: TStringField
       FieldName = 'versao'
       Required = True
@@ -939,25 +939,25 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsNFeProtocolo: TDataSource
     DataSet = cdsNFeProtocolo
-    Left = 792
-    Top = 424
+    Left = 960
+    Top = 280
   end
   object dsNFeRef: TDataSource
     DataSet = cdsNFeRef
-    Left = 696
-    Top = 424
+    Left = 856
+    Top = 280
   end
   object dsParcelas: TDataSource
     DataSet = cdsParcelas
-    Left = 560
-    Top = 368
+    Left = 952
+    Top = 376
   end
   object cdsParcelas: TClientDataSet
     Aggregates = <>
     DataSetField = cdsCabecalhodup
     Params = <>
-    Left = 536
-    Top = 368
+    Left = 928
+    Top = 376
     object cdsParcelasnDup: TStringField
       FieldName = 'nDup'
       Size = 60
@@ -974,8 +974,8 @@ object DMRecebeXML: TDMRecebeXML
     Aggregates = <>
     DataSetField = cdsCabecalhodet
     Params = <>
-    Left = 456
-    Top = 368
+    Left = 832
+    Top = 376
     object cdsDetalhenItem: TIntegerField
       FieldName = 'nItem'
       Required = True
@@ -1813,14 +1813,14 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsDetalhe: TDataSource
     DataSet = cdsDetalhe
-    Left = 480
-    Top = 368
+    Left = 856
+    Top = 376
   end
   object cdsDeclaracaoImportacao: TClientDataSet
     Aggregates = <>
     DataSetField = cdsDetalheDI
     Params = <>
-    Left = 448
+    Left = 832
     Top = 424
     object cdsDeclaracaoImportacaonDI: TStringField
       FieldName = 'nDI'
@@ -1851,14 +1851,14 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsDeclaracaoImportacao: TDataSource
     DataSet = cdsDeclaracaoImportacao
-    Left = 480
+    Left = 864
     Top = 424
   end
   object cdsAdicoes: TClientDataSet
     Aggregates = <>
     DataSetField = cdsDeclaracaoImportacaoadi
     Params = <>
-    Left = 545
+    Left = 929
     Top = 424
     object cdsAdicoesnAdicao: TIntegerField
       FieldName = 'nAdicao'
@@ -1876,7 +1876,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsAdicoes: TDataSource
     DataSet = cdsAdicoes
-    Left = 584
+    Left = 960
     Top = 424
   end
   object mItensNota: TClientDataSet
@@ -2409,6 +2409,10 @@ object DMRecebeXML: TDMRecebeXML
         Name = 'Sped_Tipo'
         DataType = ftString
         Size = 2
+      end
+      item
+        Name = 'PossuiRateio'
+        DataType = ftBoolean
       end>
     IndexDefs = <
       item
@@ -2422,10 +2426,10 @@ object DMRecebeXML: TDMRecebeXML
     StoreDefs = True
     BeforePost = mItensNotaBeforePost
     OnNewRecord = mItensNotaNewRecord
-    Left = 465
-    Top = 488
+    Left = 921
+    Top = 232
     Data = {
-      C00B00009619E0BD010000001800000077000000000003000000C00B04497465
+      D50B00009619E0BD010000001800000078000000000003000000D50B04497465
       6D04000100000000000A436F6450726F6475746F010049000000010005574944
       5448020002003C0011436F6450726F6475746F496E7465726E6F040001000000
       000006436F64436F72040001000000000008436F644772616465040001000000
@@ -2518,8 +2522,8 @@ object DMRecebeXML: TDMRecebeXML
       0000000D566C725F49434D535F456665740800040000000000084974656D5F4E
       544504000100000000000649445F4E544504000100000000000C4E756D5F4E6F
       74615F4E5445040001000000000009537065645F5469706F0100490000000100
-      05574944544802000200020001000D44454641554C545F4F5244455202008200
-      00000000}
+      0557494454480200020002000C506F7373756952617465696F02000300000000
+      0001000D44454641554C545F4F524445520200820000000000}
     object mItensNotaItem: TIntegerField
       FieldName = 'Item'
     end
@@ -2968,11 +2972,14 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'Sped_Tipo'
       Size = 2
     end
+    object mItensNotaPossuiRateio: TBooleanField
+      FieldName = 'PossuiRateio'
+    end
   end
   object dsmItensNota: TDataSource
     DataSet = mItensNota
-    Left = 496
-    Top = 488
+    Left = 952
+    Top = 232
   end
   object sdsProduto: TSQLDataSet
     NoMetadata = True
@@ -3157,7 +3164,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsProduto
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProdutoUpdateError
-    Left = 168
+    Left = 144
     Top = 16
   end
   object cdsProduto: TClientDataSet
@@ -3165,7 +3172,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspProduto'
-    Left = 232
+    Left = 192
     Top = 16
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
@@ -3339,7 +3346,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsProduto: TDataSource
     DataSet = cdsProduto
-    Left = 304
+    Left = 232
     Top = 16
   end
   object qCFOP: TSQLQuery
@@ -3361,7 +3368,7 @@ object DMRecebeXML: TDMRecebeXML
       'WHERE CODCFOP = :CODCFOP'
       '      AND TIPO_EMPRESA = :TIPO_EMPRESA')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
+    Left = 824
     Top = 24
     object qCFOPID: TIntegerField
       FieldName = 'ID'
@@ -3489,8 +3496,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM PARAMETROS'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 80
+    Left = 856
+    Top = 24
     object qParametrosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3697,6 +3704,11 @@ object DMRecebeXML: TDMRecebeXML
       FixedChar = True
       Size = 1
     end
+    object qParametrosEMPRESA_SUCATA: TStringField
+      FieldName = 'EMPRESA_SUCATA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsCidade: TSQLDataSet
     NoMetadata = True
@@ -3705,7 +3717,7 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
+    Left = 96
     Top = 64
     object sdsCidadeID: TIntegerField
       FieldName = 'ID'
@@ -3727,7 +3739,7 @@ object DMRecebeXML: TDMRecebeXML
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
     OnUpdateError = dspCidadeUpdateError
-    Left = 176
+    Left = 144
     Top = 64
   end
   object cdsCidade: TClientDataSet
@@ -3735,7 +3747,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspCidade'
-    Left = 240
+    Left = 192
     Top = 64
     object cdsCidadeID: TIntegerField
       FieldName = 'ID'
@@ -3756,7 +3768,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsCidade: TDataSource
     DataSet = cdsCidade
-    Left = 312
+    Left = 232
     Top = 64
   end
   object sdsPais: TSQLDataSet
@@ -3766,7 +3778,7 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
+    Left = 96
     Top = 120
     object sdsPaisID: TIntegerField
       FieldName = 'ID'
@@ -3784,7 +3796,7 @@ object DMRecebeXML: TDMRecebeXML
   object dspPais: TDataSetProvider
     DataSet = sdsPais
     OnUpdateError = dspPaisUpdateError
-    Left = 176
+    Left = 144
     Top = 120
   end
   object cdsPais: TClientDataSet
@@ -3792,7 +3804,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspPais'
-    Left = 240
+    Left = 192
     Top = 120
     object cdsPaisID: TIntegerField
       FieldName = 'ID'
@@ -3809,7 +3821,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsPais: TDataSource
     DataSet = cdsPais
-    Left = 312
+    Left = 232
     Top = 120
   end
   object sdsFornecedor: TSQLDataSet
@@ -3819,7 +3831,7 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
+    Left = 96
     Top = 168
     object sdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -4157,7 +4169,7 @@ object DMRecebeXML: TDMRecebeXML
   object dspFornecedor: TDataSetProvider
     DataSet = sdsFornecedor
     OnUpdateError = dspFornecedorUpdateError
-    Left = 176
+    Left = 144
     Top = 168
   end
   object cdsFornecedor: TClientDataSet
@@ -4165,7 +4177,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspFornecedor'
     OnNewRecord = cdsFornecedorNewRecord
-    Left = 240
+    Left = 192
     Top = 168
     object cdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -4502,7 +4514,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsFornecedor: TDataSource
     DataSet = cdsFornecedor
-    Left = 312
+    Left = 232
     Top = 168
   end
   object sdsProduto_Forn: TSQLDataSet
@@ -4514,7 +4526,7 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
+    Left = 96
     Top = 213
     object sdsProduto_FornID: TIntegerField
       FieldName = 'ID'
@@ -4589,7 +4601,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsProduto_Forn
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProduto_FornUpdateError
-    Left = 176
+    Left = 144
     Top = 213
   end
   object cdsProduto_Forn: TClientDataSet
@@ -4598,7 +4610,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspProduto_Forn'
     BeforePost = cdsProduto_FornBeforePost
-    Left = 240
+    Left = 192
     Top = 213
     object cdsProduto_FornID: TIntegerField
       FieldName = 'ID'
@@ -4671,7 +4683,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsProduto_Forn: TDataSource
     DataSet = cdsProduto_Forn
-    Left = 312
+    Left = 232
     Top = 213
   end
   object sdsNotaFiscal: TSQLDataSet
@@ -5049,7 +5061,7 @@ object DMRecebeXML: TDMRecebeXML
   object dspNotaFiscal: TDataSetProvider
     DataSet = sdsNotaFiscal
     OnUpdateError = dspNotaFiscalUpdateError
-    Left = 168
+    Left = 136
     Top = 332
   end
   object cdsNotaFiscal: TClientDataSet
@@ -5057,7 +5069,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspNotaFiscal'
-    Left = 232
+    Left = 176
     Top = 332
     object cdsNotaFiscalFILIAL: TIntegerField
       FieldName = 'FILIAL'
@@ -5467,13 +5479,13 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsNotaFiscal: TDataSource
     DataSet = cdsNotaFiscal
-    Left = 304
+    Left = 216
     Top = 332
   end
   object dsNotaFiscal_Mestre: TDataSource
     DataSet = sdsNotaFiscal
-    Left = 40
-    Top = 360
+    Left = 256
+    Top = 344
   end
   object sdsNotaFiscal_Itens: TSQLDataSet
     NoMetadata = True
@@ -5842,6 +5854,15 @@ object DMRecebeXML: TDMRecebeXML
     object sdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField
       FieldName = 'BASE_ICMS_FCP_DEST'
     end
+    object sdsNotaFiscal_ItensLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object sdsNotaFiscal_ItensCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object sdsNotaFiscal_ItensESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -5850,7 +5871,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     BeforePost = cdsNotaFiscal_ItensBeforePost
     OnNewRecord = cdsNotaFiscal_ItensNewRecord
-    Left = 152
+    Left = 136
     Top = 383
     object cdsNotaFiscal_ItensID: TIntegerField
       FieldName = 'ID'
@@ -6206,10 +6227,19 @@ object DMRecebeXML: TDMRecebeXML
     object cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField
       FieldName = 'BASE_ICMS_FCP_DEST'
     end
+    object cdsNotaFiscal_ItensLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object cdsNotaFiscal_ItensESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
   end
   object dsNotaFiscal_Itens: TDataSource
     DataSet = cdsNotaFiscal_Itens
-    Left = 224
+    Left = 176
     Top = 383
   end
   object sdsEstoque_Mov: TSQLDataSet
@@ -6224,7 +6254,7 @@ object DMRecebeXML: TDMRecebeXML
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 424
+    Left = 360
     Top = 52
     object sdsEstoque_MovID: TIntegerField
       FieldName = 'ID'
@@ -6328,7 +6358,7 @@ object DMRecebeXML: TDMRecebeXML
   object dspEstoque_Mov: TDataSetProvider
     DataSet = sdsEstoque_Mov
     OnUpdateError = dspEstoque_MovUpdateError
-    Left = 464
+    Left = 392
     Top = 52
   end
   object cdsEstoque_Mov: TClientDataSet
@@ -6336,7 +6366,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspEstoque_Mov'
-    Left = 504
+    Left = 432
     Top = 52
     object cdsEstoque_MovID: TIntegerField
       FieldName = 'ID'
@@ -6439,7 +6469,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsEstoque_Mov: TDataSource
     DataSet = cdsEstoque_Mov
-    Left = 552
+    Left = 472
     Top = 52
   end
   object sdsTab_CSTICMS: TSQLDataSet
@@ -6449,12 +6479,12 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 472
+    Left = 360
     Top = 95
   end
   object dspTab_CSTICMS: TDataSetProvider
     DataSet = sdsTab_CSTICMS
-    Left = 504
+    Left = 392
     Top = 95
   end
   object cdsTab_CSTICMS: TClientDataSet
@@ -6462,7 +6492,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_CSTICMS'
-    Left = 544
+    Left = 432
     Top = 95
     object cdsTab_CSTICMSID: TIntegerField
       FieldName = 'ID'
@@ -6492,7 +6522,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsTab_CSTICMS: TDataSource
     DataSet = cdsTab_CSTICMS
-    Left = 584
+    Left = 472
     Top = 95
   end
   object qUnidade: TSQLQuery
@@ -6508,8 +6538,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM UNIDADE'
       'WHERE '#9'UNIDADE = :UNIDADE')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 144
+    Left = 888
+    Top = 24
     object qUnidadeUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Required = True
@@ -6536,8 +6566,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM FILIAL'
       'WHERE '#9'CNPJ_CPF = :CNPJ_CPF')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 200
+    Left = 952
+    Top = 24
     object qFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -6713,7 +6743,7 @@ object DMRecebeXML: TDMRecebeXML
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 464
+    Left = 360
     Top = 141
     object sdsNCMID: TIntegerField
       FieldName = 'ID'
@@ -6743,7 +6773,7 @@ object DMRecebeXML: TDMRecebeXML
   object dspNCM: TDataSetProvider
     DataSet = sdsNCM
     OnUpdateError = dspNCMUpdateError
-    Left = 496
+    Left = 392
     Top = 141
   end
   object cdsNCM: TClientDataSet
@@ -6752,7 +6782,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspNCM'
     OnNewRecord = cdsNCMNewRecord
-    Left = 536
+    Left = 432
     Top = 141
     object cdsNCMID: TIntegerField
       FieldName = 'ID'
@@ -6781,7 +6811,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsNCM: TDataSource
     DataSet = cdsNCM
-    Left = 576
+    Left = 472
     Top = 141
   end
   object sdsUnidade: TSQLDataSet
@@ -6796,8 +6826,8 @@ object DMRecebeXML: TDMRecebeXML
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 696
-    Top = 258
+    Left = 360
+    Top = 418
     object sdsUnidadeUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Required = True
@@ -6813,16 +6843,16 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dspUnidade: TDataSetProvider
     DataSet = sdsUnidade
-    Left = 728
-    Top = 258
+    Left = 392
+    Top = 418
   end
   object cdsUnidade: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'UNIDADE'
     Params = <>
     ProviderName = 'dspUnidade'
-    Left = 768
-    Top = 256
+    Left = 432
+    Top = 416
     object cdsUnidadeUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Required = True
@@ -6838,8 +6868,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsUnidade: TDataSource
     DataSet = cdsUnidade
-    Left = 808
-    Top = 258
+    Left = 472
+    Top = 418
   end
   object sdsDuplicata: TSQLDataSet
     NoMetadata = True
@@ -6848,8 +6878,8 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 680
-    Top = 488
+    Left = 360
+    Top = 472
     object sdsDuplicataID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7034,8 +7064,8 @@ object DMRecebeXML: TDMRecebeXML
   object dspDuplicata: TDataSetProvider
     DataSet = sdsDuplicata
     OnUpdateError = dspDuplicataUpdateError
-    Left = 720
-    Top = 488
+    Left = 392
+    Top = 472
   end
   object cdsDuplicata: TClientDataSet
     Aggregates = <>
@@ -7043,8 +7073,8 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspDuplicata'
     OnNewRecord = cdsDuplicataNewRecord
-    Left = 768
-    Top = 488
+    Left = 432
+    Top = 472
     object cdsDuplicataID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7231,8 +7261,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsDuplicata_Mestre: TDataSource
     DataSet = sdsDuplicata
-    Left = 632
-    Top = 528
+    Left = 472
+    Top = 496
   end
   object sdsDuplicata_Hist: TSQLDataSet
     NoMetadata = True
@@ -7248,8 +7278,8 @@ object DMRecebeXML: TDMRecebeXML
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 680
-    Top = 576
+    Left = 352
+    Top = 528
     object sdsDuplicata_HistID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7321,8 +7351,8 @@ object DMRecebeXML: TDMRecebeXML
     DataSetField = cdsDuplicatasdsDuplicata_Hist
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 752
-    Top = 576
+    Left = 424
+    Top = 528
     object cdsDuplicata_HistID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7431,7 +7461,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Parc
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 184
+    Left = 136
     Top = 479
     object cdsNotaFiscal_ParcID: TIntegerField
       FieldName = 'ID'
@@ -7462,8 +7492,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM FILIAL'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 264
+    Left = 1016
+    Top = 24
     object qFilial2ID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7494,8 +7524,8 @@ object DMRecebeXML: TDMRecebeXML
       ''
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 320
+    Left = 824
+    Top = 72
     object qDeParaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7544,21 +7574,21 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 424
-    Top = 562
+    Left = 360
+    Top = 322
   end
   object dspTab_CSTIPI: TDataSetProvider
     DataSet = sdsTab_CSTIPI
-    Left = 456
-    Top = 562
+    Left = 392
+    Top = 322
   end
   object cdsTab_CSTIPI: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_CSTIPI'
-    Left = 496
-    Top = 562
+    Left = 432
+    Top = 322
     object cdsTab_CSTIPIID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7579,8 +7609,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsTab_CSTIPI: TDataSource
     DataSet = cdsTab_CSTIPI
-    Left = 536
-    Top = 562
+    Left = 472
+    Top = 322
   end
   object qCofins: TSQLQuery
     MaxBlobSize = -1
@@ -7596,8 +7626,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM TAB_COFINS'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 408
+    Left = 928
+    Top = 72
     object qCofinsID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7630,8 +7660,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM TAB_PIS'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 464
+    Left = 960
+    Top = 72
     object qPisID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7664,7 +7694,7 @@ object DMRecebeXML: TDMRecebeXML
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
+    Left = 96
     Top = 525
     object sdsNotaFiscal_RefID: TIntegerField
       FieldName = 'ID'
@@ -7736,7 +7766,7 @@ object DMRecebeXML: TDMRecebeXML
     Aggregates = <>
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 160
+    Left = 136
     Top = 525
     object cdsNotaFiscal_RefID: TIntegerField
       FieldName = 'ID'
@@ -7829,7 +7859,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsNotaFiscal_Ref: TDataSource
     DataSet = cdsNotaFiscal_Ref
-    Left = 232
+    Left = 176
     Top = 525
   end
   object sdsOC: TSQLDataSet
@@ -7851,21 +7881,21 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 705
-    Top = 24
+    Left = 353
+    Top = 576
   end
   object dspOC: TDataSetProvider
     DataSet = sdsOC
-    Left = 745
-    Top = 24
+    Left = 393
+    Top = 576
   end
   object cdsOC: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOMEFORNECEDOR;NUM_PEDIDO'
     Params = <>
     ProviderName = 'dspOC'
-    Left = 785
-    Top = 24
+    Left = 433
+    Top = 576
     object cdsOCID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7990,8 +8020,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsOC: TDataSource
     DataSet = cdsOC
-    Left = 817
-    Top = 24
+    Left = 465
+    Top = 576
   end
   object sdsPrc_Atualiza_Status_Ped: TSQLDataSet
     CommandText = 'PRC_ATUALIZA_STATUS_PED'
@@ -8004,16 +8034,16 @@ object DMRecebeXML: TDMRecebeXML
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 776
-    Top = 160
+    Left = 664
+    Top = 560
   end
   object mPedidoAux: TClientDataSet
     Active = True
     Aggregates = <>
     IndexFieldNames = 'ID_Pedido'
     Params = <>
-    Left = 776
-    Top = 112
+    Left = 984
+    Top = 584
     Data = {
       2C0000009619E0BD0100000018000000010000000000030000002C000949445F
       50656469646F04000100000000000000}
@@ -8026,8 +8056,8 @@ object DMRecebeXML: TDMRecebeXML
     Aggregates = <>
     Params = <>
     OnNewRecord = mNotaNewRecord
-    Left = 1032
-    Top = 88
+    Left = 824
+    Top = 232
     Data = {
       500500009619E0BD010000001800000034000000000003000000500506566572
       73616F0100490000000100055749445448020002001E0009496E664E46655F49
@@ -8257,8 +8287,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsmNota: TDataSource
     DataSet = mNota
-    Left = 1056
-    Top = 88
+    Left = 856
+    Top = 232
   end
   object qProduto_Uni: TSQLQuery
     MaxBlobSize = -1
@@ -8282,8 +8312,8 @@ object DMRecebeXML: TDMRecebeXML
       'WHERE PU.ID = :ID'
       '  AND PU.ITEM_UNIDADE = :ITEM_UNIDADE')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 520
+    Left = 992
+    Top = 72
     object qProduto_UniUNIDADE_CONV: TStringField
       FieldName = 'UNIDADE_CONV'
       Size = 6
@@ -8303,21 +8333,21 @@ object DMRecebeXML: TDMRecebeXML
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 696
-    Top = 304
+    Left = 592
+    Top = 432
   end
   object dspUnidade_Conv: TDataSetProvider
     DataSet = sdsUnidade_Conv
-    Left = 744
-    Top = 304
+    Left = 632
+    Top = 432
   end
   object cdsUnidade_Conv: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'UNIDADE;ITEM'
     Params = <>
     ProviderName = 'dspUnidade_Conv'
-    Left = 784
-    Top = 304
+    Left = 672
+    Top = 432
     object cdsUnidade_ConvUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Required = True
@@ -8349,8 +8379,8 @@ object DMRecebeXML: TDMRecebeXML
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 696
-    Top = 360
+    Left = 592
+    Top = 320
     object sdsProduto_UniID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8373,16 +8403,16 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dspProduto_Uni: TDataSetProvider
     DataSet = sdsProduto_Uni
-    Left = 744
-    Top = 360
+    Left = 632
+    Top = 320
   end
   object cdsProduto_Uni: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     ProviderName = 'dspProduto_Uni'
-    Left = 784
-    Top = 360
+    Left = 664
+    Top = 320
     object cdsProduto_UniID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8428,8 +8458,8 @@ object DMRecebeXML: TDMRecebeXML
       '      AND UNIDADE_CONV = :UNIDADE_CONV'
       '      AND QTD = :QTD')
     SQLConnection = dmDatabase.scoDados
-    Left = 936
-    Top = 568
+    Left = 824
+    Top = 120
     object qUnidade_ConvUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Required = True
@@ -8457,21 +8487,21 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1024
-    Top = 194
+    Left = 592
+    Top = 106
   end
   object dspUnidade2: TDataSetProvider
     DataSet = sdsUnidade2
-    Left = 1056
-    Top = 194
+    Left = 624
+    Top = 106
   end
   object cdsUnidade2: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'UNIDADE'
     Params = <>
     ProviderName = 'dspUnidade2'
-    Left = 1096
-    Top = 192
+    Left = 656
+    Top = 106
     object cdsUnidade2UNIDADE: TStringField
       FieldName = 'UNIDADE'
       Required = True
@@ -8487,8 +8517,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsUnidade2: TDataSource
     DataSet = cdsUnidade2
-    Left = 1136
-    Top = 194
+    Left = 688
+    Top = 106
   end
   object sdsSitTrib_CF: TSQLDataSet
     NoMetadata = True
@@ -8497,21 +8527,21 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 696
-    Top = 208
+    Left = 360
+    Top = 368
   end
   object dspSitTrib_CF: TDataSetProvider
     DataSet = sdsSitTrib_CF
-    Left = 728
-    Top = 208
+    Left = 392
+    Top = 368
   end
   object cdsSitTrib_CF: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspSitTrib_CF'
-    Left = 760
-    Top = 208
+    Left = 432
+    Top = 368
     object cdsSitTrib_CFID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8526,8 +8556,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsSitTrib_CF: TDataSource
     DataSet = cdsSitTrib_CF
-    Left = 792
-    Top = 208
+    Left = 472
+    Top = 368
   end
   object qProduto_Uni2: TSQLQuery
     MaxBlobSize = -1
@@ -8551,8 +8581,8 @@ object DMRecebeXML: TDMRecebeXML
       'WHERE PU.ID = :ID'
       '  AND UC.UNIDADE_CONV = :UNIDADE_CONV')
     SQLConnection = dmDatabase.scoDados
-    Left = 1032
-    Top = 488
+    Left = 856
+    Top = 120
     object qProduto_Uni2UNIDADE_CONV: TStringField
       FieldName = 'UNIDADE_CONV'
       Size = 6
@@ -8566,16 +8596,16 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsCliente: TDataSource
     DataSet = cdsCliente
-    Left = 1137
-    Top = 256
+    Left = 689
+    Top = 160
   end
   object cdsCliente: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCliente'
-    Left = 1097
-    Top = 256
+    Left = 657
+    Top = 160
     object cdsClienteCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -8590,8 +8620,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dspCliente: TDataSetProvider
     DataSet = sdsCliente
-    Left = 1057
-    Top = 256
+    Left = 625
+    Top = 160
   end
   object sdsCliente: TSQLDataSet
     NoMetadata = True
@@ -8602,21 +8632,21 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1025
-    Top = 256
+    Left = 593
+    Top = 160
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 1137
-    Top = 320
+    Left = 694
+    Top = 208
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 1097
-    Top = 320
+    Left = 660
+    Top = 208
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8641,8 +8671,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 1057
-    Top = 320
+    Left = 625
+    Top = 208
   end
   object sdsFilial: TSQLDataSet
     NoMetadata = True
@@ -8653,8 +8683,8 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1024
-    Top = 320
+    Left = 592
+    Top = 208
   end
   object sdsCombinacao: TSQLDataSet
     NoMetadata = True
@@ -8675,21 +8705,21 @@ object DMRecebeXML: TDMRecebeXML
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 1016
-    Top = 376
+    Left = 595
+    Top = 264
   end
   object dspCombinacao: TDataSetProvider
     DataSet = sdsCombinacao
-    Left = 1048
-    Top = 376
+    Left = 627
+    Top = 264
   end
   object cdsCombinacao: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCombinacao'
-    Left = 1080
-    Top = 376
+    Left = 659
+    Top = 263
     object cdsCombinacaoID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
       Required = True
@@ -8709,8 +8739,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsCombinacao: TDataSource
     DataSet = cdsCombinacao
-    Left = 1120
-    Top = 376
+    Left = 693
+    Top = 263
   end
   object qProdutoInativo: TSQLQuery
     MaxBlobSize = -1
@@ -8725,8 +8755,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM PRODUTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1032
-    Top = 552
+    Left = 920
+    Top = 120
     object qProdutoInativoINATIVO: TStringField
       FieldName = 'INATIVO'
       FixedChar = True
@@ -8744,21 +8774,21 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1016
-    Top = 433
+    Left = 592
+    Top = 377
   end
   object dspLocal_Estoque: TDataSetProvider
     DataSet = sdsLocal_Estoque
-    Left = 1051
-    Top = 433
+    Left = 627
+    Top = 377
   end
   object cdsLocal_Estoque: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspLocal_Estoque'
-    Left = 1091
-    Top = 433
+    Left = 667
+    Top = 377
     object cdsLocal_EstoqueID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8806,8 +8836,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsLocal_Estoque: TDataSource
     DataSet = cdsLocal_Estoque
-    Left = 1131
-    Top = 433
+    Left = 707
+    Top = 377
   end
   object qNCM: TSQLQuery
     MaxBlobSize = -1
@@ -8822,8 +8852,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM TAB_NCM'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 864
-    Top = 544
+    Left = 952
+    Top = 168
     object qNCMNCM: TStringField
       FieldName = 'NCM'
       Size = 10
@@ -8837,8 +8867,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM PARAMETROS_GERAL'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 336
-    Top = 455
+    Left = 824
+    Top = 167
     object qParametros_GeralUSAR_PESSOA_FILIAL: TStringField
       FieldName = 'USAR_PESSOA_FILIAL'
       FixedChar = True
@@ -8861,8 +8891,8 @@ object DMRecebeXML: TDMRecebeXML
       'SELECT *'
       'FROM PARAMETROS_PROD')
     SQLConnection = dmDatabase.scoDados
-    Left = 336
-    Top = 400
+    Left = 952
+    Top = 120
     object qParametros_ProdUSA_PRODUTO_FILIAL: TStringField
       FieldName = 'USA_PRODUTO_FILIAL'
       FixedChar = True
@@ -8890,8 +8920,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM PARAMETROS_RECXML'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 336
-    Top = 511
+    Left = 1016
+    Top = 119
     object qParametros_RecXMLID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8949,8 +8979,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM PARAMETROS_OC'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 816
-    Top = 80
+    Left = 920
+    Top = 168
     object qParametros_OCID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -8969,8 +8999,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM PARAMETROS_NTE'
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
-    Left = 336
-    Top = 567
+    Left = 984
+    Top = 119
     object qParametros_NTEID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9014,8 +9044,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM GRUPO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 872
-    Top = 223
+    Left = 984
+    Top = 23
     object qGrupoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9041,8 +9071,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM COMBINACAO C'
       'WHERE C.id = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1112
-    Top = 552
+    Left = 888
+    Top = 120
     object qCorID: TFMTBCDField
       FieldName = 'ID'
       Required = True
@@ -9062,8 +9092,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM PARAMETROS_CUSTO'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 880
-    Top = 335
+    Left = 856
+    Top = 71
     object qParametros_CustoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9173,8 +9203,8 @@ object DMRecebeXML: TDMRecebeXML
       'WHERE P.TIPO_REG = :TIPO_REG'
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 688
-    Top = 88
+    Left = 888
+    Top = 168
     object qRefSeqREFERENCIA_SEQ: TIntegerField
       FieldName = 'REFERENCIA_SEQ'
     end
@@ -9186,14 +9216,14 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1032
-    Top = 18
+    Left = 592
+    Top = 10
   end
   object dspOperacao_Nota: TDataSetProvider
     DataSet = sdsOperacao_Nota
     OnUpdateError = dspNCMUpdateError
-    Left = 1064
-    Top = 18
+    Left = 624
+    Top = 10
   end
   object cdsOperacao_Nota: TClientDataSet
     Aggregates = <>
@@ -9201,8 +9231,8 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     ProviderName = 'dspOperacao_Nota'
     OnNewRecord = cdsNCMNewRecord
-    Left = 1104
-    Top = 18
+    Left = 656
+    Top = 10
     object cdsOperacao_NotaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9252,8 +9282,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsOperacao_Nota: TDataSource
     DataSet = cdsOperacao_Nota
-    Left = 1144
-    Top = 18
+    Left = 688
+    Top = 10
   end
   object mParc: TClientDataSet
     Aggregates = <>
@@ -9293,8 +9323,8 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'DtVencimento'
     Params = <>
     StoreDefs = True
-    Left = 568
-    Top = 320
+    Left = 928
+    Top = 328
     object mParcParcela: TIntegerField
       FieldName = 'Parcela'
     end
@@ -9337,8 +9367,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsmParc: TDataSource
     DataSet = mParc
-    Left = 600
-    Top = 320
+    Left = 960
+    Top = 328
   end
   object sdsContas: TSQLDataSet
     NoMetadata = True
@@ -9347,22 +9377,21 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 464
+    Left = 360
     Top = 186
   end
   object dspContas: TDataSetProvider
     DataSet = sdsContas
     OnUpdateError = dspNCMUpdateError
-    Left = 496
+    Left = 392
     Top = 186
   end
   object cdsContas: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspContas'
-    Left = 536
+    Left = 432
     Top = 186
     object cdsContasID: TIntegerField
       FieldName = 'ID'
@@ -9375,7 +9404,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsContas: TDataSource
     DataSet = cdsContas
-    Left = 576
+    Left = 472
     Top = 186
   end
   object sdsTipoCobranca: TSQLDataSet
@@ -9385,22 +9414,21 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 464
+    Left = 360
     Top = 231
   end
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
     OnUpdateError = dspNCMUpdateError
-    Left = 496
+    Left = 392
     Top = 231
   end
   object cdsTipoCobranca: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspTipoCobranca'
-    Left = 536
+    Left = 432
     Top = 231
     object cdsTipoCobrancaID: TIntegerField
       FieldName = 'ID'
@@ -9413,7 +9441,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsTipoCobranca: TDataSource
     DataSet = cdsTipoCobranca
-    Left = 576
+    Left = 472
     Top = 231
   end
   object qConta_Orcamento: TSQLQuery
@@ -9429,8 +9457,8 @@ object DMRecebeXML: TDMRecebeXML
       'FROM CONTA_ORCAMENTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 866
-    Top = 433
+    Left = 1026
+    Top = 73
     object qConta_OrcamentoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9455,20 +9483,20 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 1032
-    Top = 143
+    Left = 592
+    Top = 55
   end
   object dspTamanho: TDataSetProvider
     DataSet = sdsTamanho
-    Left = 1072
-    Top = 144
+    Left = 624
+    Top = 56
   end
   object cdsTamanho: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspTamanho'
-    Left = 1112
-    Top = 144
+    Left = 656
+    Top = 56
     object cdsTamanhoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9480,8 +9508,8 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsTamanho: TDataSource
     DataSet = cdsTamanho
-    Left = 1144
-    Top = 144
+    Left = 688
+    Top = 56
   end
   object sdsProduto_Imp: TSQLDataSet
     NoMetadata = True
@@ -9495,7 +9523,7 @@ object DMRecebeXML: TDMRecebeXML
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 104
+    Left = 96
     Top = 261
     object sdsProduto_ImpID: TIntegerField
       FieldName = 'ID'
@@ -9539,7 +9567,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSet = sdsProduto_Imp
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProduto_FornUpdateError
-    Left = 176
+    Left = 144
     Top = 261
   end
   object cdsProduto_Imp: TClientDataSet
@@ -9547,7 +9575,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspProduto_Imp'
-    Left = 240
+    Left = 192
     Top = 261
     object cdsProduto_ImpID: TIntegerField
       FieldName = 'ID'
@@ -9589,7 +9617,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsProduto_Imp: TDataSource
     DataSet = cdsProduto_Imp
-    Left = 312
+    Left = 232
     Top = 261
   end
   object qParametros_Est: TSQLQuery
@@ -9602,8 +9630,8 @@ object DMRecebeXML: TDMRecebeXML
       ' '
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 872
-    Top = 136
+    Left = 920
+    Top = 24
     object qParametros_EstUSA_ESTOQUE_TIPO_MAT: TStringField
       FieldName = 'USA_ESTOQUE_TIPO_MAT'
       Size = 1
@@ -9635,12 +9663,12 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 472
+    Left = 360
     Top = 273
   end
   object dspNotaEntrada: TDataSetProvider
     DataSet = sdsNotaEntrada
-    Left = 504
+    Left = 392
     Top = 273
   end
   object cdsNotaEntrada: TClientDataSet
@@ -9648,7 +9676,7 @@ object DMRecebeXML: TDMRecebeXML
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspNotaEntrada'
-    Left = 544
+    Left = 432
     Top = 273
     object cdsNotaEntradaSERIE: TStringField
       FieldName = 'SERIE'
@@ -9795,7 +9823,7 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsNotaEntrada: TDataSource
     DataSet = cdsNotaEntrada
-    Left = 584
+    Left = 472
     Top = 273
   end
   object qDevol: TSQLQuery
@@ -9820,8 +9848,8 @@ object DMRecebeXML: TDMRecebeXML
       'where I.ID = :ID and'
       '      I.ITEM = :ITEM   ')
     SQLConnection = dmDatabase.scoDados
-    Left = 408
-    Top = 144
+    Left = 856
+    Top = 168
     object qDevolID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -9879,7 +9907,7 @@ object DMRecebeXML: TDMRecebeXML
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 123
+    Left = 99
     Top = 434
     object sdsNotaFiscal_NDevolvidaID: TIntegerField
       FieldName = 'ID'
@@ -9939,7 +9967,7 @@ object DMRecebeXML: TDMRecebeXML
     DataSetField = cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida
     IndexFieldNames = 'ID;ITEM;ITEM_NDEV'
     Params = <>
-    Left = 171
+    Left = 139
     Top = 434
     object cdsNotaFiscal_NDevolvidaID: TIntegerField
       FieldName = 'ID'
@@ -9996,20 +10024,20 @@ object DMRecebeXML: TDMRecebeXML
   end
   object dsNotaFiscal_NDevolvida: TDataSource
     DataSet = cdsNotaFiscal_NDevolvida
-    Left = 211
+    Left = 179
     Top = 434
   end
   object dsNotaFiscal_Itens_Mestre: TDataSource
     DataSet = sdsNotaFiscal_Itens
-    Left = 48
-    Top = 400
+    Left = 224
+    Top = 392
   end
   object cdsPag: TClientDataSet
     Aggregates = <>
     DataSetField = cdsNotaFiscalsdsNotaFiscal_Ref
     Params = <>
-    Left = 555
-    Top = 480
+    Left = 939
+    Top = 584
   end
   object qParametros_Lote: TSQLQuery
     MaxBlobSize = -1
@@ -10018,8 +10046,8 @@ object DMRecebeXML: TDMRecebeXML
       'select l.opcao_estoque_semi, l.lote_textil'
       'from parametros_lote l')
     SQLConnection = dmDatabase.scoDados
-    Left = 1138
-    Top = 95
+    Left = 890
+    Top = 71
     object qParametros_LoteOPCAO_ESTOQUE_SEMI: TStringField
       FieldName = 'OPCAO_ESTOQUE_SEMI'
       FixedChar = True
@@ -10029,6 +10057,163 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'LOTE_TEXTIL'
       FixedChar = True
       Size = 1
+    end
+  end
+  object mRateioItens: TClientDataSet
+    Active = True
+    Aggregates = <>
+    AggregatesActive = True
+    FieldDefs = <
+      item
+        Name = 'Item'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Item_Rateio'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Comprimento'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Largura'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Espessura'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Quantidade'
+        DataType = ftFloat
+      end>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end>
+    Params = <>
+    StoreDefs = True
+    BeforePost = mRateioItensBeforePost
+    OnCalcFields = mRateioItensCalcFields
+    Left = 832
+    Top = 480
+    Data = {
+      9A0000009619E0BD0100000018000000060000000000030000009A0004497465
+      6D04000100000000000B4974656D5F52617465696F04000100000000000B436F
+      6D7072696D656E746F0800040000000000074C61726775726108000400000000
+      000945737065737375726108000400000000000A5175616E7469646164650800
+      04000000000001000D44454641554C545F4F524445520200820000000000}
+    object mRateioItensItem: TIntegerField
+      FieldName = 'Item'
+    end
+    object mRateioItensItem_Rateio: TIntegerField
+      FieldName = 'Item_Rateio'
+    end
+    object mRateioItensComprimento: TFloatField
+      FieldName = 'Comprimento'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
+    end
+    object mRateioItensLargura: TFloatField
+      FieldName = 'Largura'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
+    end
+    object mRateioItensEspessura: TFloatField
+      FieldName = 'Espessura'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
+    end
+    object mRateioItensQuantidade: TFloatField
+      FieldName = 'Quantidade'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
+    end
+    object mRateioItensQtde_Total: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'Qtde_Total'
+      DisplayFormat = '##0.0000'
+      EditFormat = '##0.0000'
+      Calculated = True
+    end
+    object mRateioItensSomaQtde: TAggregateField
+      FieldName = 'SomaQtde'
+      Active = True
+      DisplayFormat = '##0.00'
+      Expression = 'SUM(Quantidade)'
+    end
+  end
+  object dsmRateioItens: TDataSource
+    DataSet = mRateioItens
+    Left = 864
+    Top = 480
+  end
+  object mRateioGeral: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Item'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Item_Rateio'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Comprimento'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Largura'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Espessura'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Quantidade'
+        DataType = ftFloat
+      end>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end>
+    Params = <>
+    StoreDefs = True
+    Left = 832
+    Top = 528
+    Data = {
+      9A0000009619E0BD0100000018000000060000000000030000009A0004497465
+      6D04000100000000000B4974656D5F52617465696F04000100000000000B436F
+      6D7072696D656E746F0800040000000000074C61726775726108000400000000
+      000945737065737375726108000400000000000A5175616E7469646164650800
+      04000000000001000D44454641554C545F4F524445520200820000000000}
+    object mRateioGeralItem: TIntegerField
+      FieldName = 'Item'
+    end
+    object mRateioGeralItem_Rateio: TIntegerField
+      FieldName = 'Item_Rateio'
+    end
+    object mRateioGeralComprimento: TFloatField
+      FieldName = 'Comprimento'
+    end
+    object mRateioGeralLargura: TFloatField
+      FieldName = 'Largura'
+    end
+    object mRateioGeralEspessura: TFloatField
+      FieldName = 'Espessura'
+    end
+    object mRateioGeralQuantidade: TFloatField
+      FieldName = 'Quantidade'
     end
   end
 end

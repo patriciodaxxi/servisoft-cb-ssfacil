@@ -218,7 +218,7 @@ begin
                                                      fDMCadDocEstoque.cdsDocEstoque_ItensVLR_UNITARIO.AsFloat,
                                                      0,0,'',
                                                      fDMCadDocEstoque.cdsDocEstoque_ItensID_COR.AsInteger,
-                                                     '','N',0,0);
+                                                     '','N',0,0,0,0,0);
         fDMCadDocEstoque.cdsDocEstoque_Itens.Edit;
         fDMCadDocEstoque.cdsDocEstoque_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
         fDMCadDocEstoque.cdsDocEstoque_Itens.Post;

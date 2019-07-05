@@ -1,13 +1,13 @@
 unit uRecebeXML;
 
 interface
-                      
+
 uses
   inifiles, Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, xmldom, Grids, DBGrids, DB,
   Xmlxform, ExtCtrls, StdCtrls, ComCtrls, Mask, DBCtrls, RXDBCtrl, SMDBGrid, Buttons, DBTables, ToolEdit, RxLookup, DBXpress,
   UDMRecebeXML, UCBase, URecebeXML_ConsItens, USel_Produto, URecebeXML_AlteraItem, URecebeXML_ConsOC, ShellApi, NxCollection,
   StrUtils, StdConvs, DateUtils, UDMEstoque, UDMMovimento, CurrEdit, RxDBComb, UDMCadProduto_Lote, uRecebeXML_Duplicatas,
-  URecebeXML_ConsNota;
+  URecebeXML_ConsNota, uRateioItens, DBClient;
 
 type
   TfrmRecebeXML = class(TForm)
@@ -440,6 +440,7 @@ type
     ffrmRecebeXML_AlteraItem: TfrmRecebeXML_AlteraItem;
     ffrmRecebeXML_ConsOC: TfrmRecebeXML_ConsOC;
     ffrmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota;
+    ffrmRateio_Itens : TfrmRateio_Itens;
 
     fDMEstoque: TDMEstoque;
     fDMMovimento: TDMMovimento;
@@ -475,7 +476,7 @@ type
     procedure Gravar_MaterialFornecedor;
     procedure Gravar_NotaEntrada;
     procedure Gravar_NotaEntradaParc;
-    procedure Gravar_NotaEntradaItens;
+    procedure Gravar_NotaEntradaItens(Tipo : String); //R - Rateio   N - Normal
     procedure Gravar_Estoque;
     procedure Gravar_Movimento;
     procedure Grava_Produto_Lote; //28/10/2017
@@ -521,6 +522,7 @@ type
     procedure prc_Gerar_Ref;
     procedure prc_Gravar_Produto_Imp;
     procedure prc_Gravar_Tipo_Sped_Prod;
+    procedure prc_Gravar_Rateio;
 
   public
     { Public declarations }
@@ -1666,6 +1668,44 @@ begin
     begin
       prc_Ajuste_Prod_Pela_Nota(False);
     end;
+  end
+  else
+  if (Key = Vk_F6) and not(fDMRecebeXML.mItensNota.IsEmpty) and (fDMRecebeXML.qParametrosEMPRESA_SUCATA.AsString = 'S')  then
+  begin
+    ffrmRateio_Itens := TfrmRateio_Itens.Create(Self);
+    try
+      ffrmRateio_Itens.fDMRecebeXML := fDMRecebeXML;
+      fDMRecebeXML.mRateioItens.EmptyDataSet;
+      fDMRecebeXML.mRateioGeral.First;
+      while not fDMRecebeXML.mRateioGeral.Eof do
+      begin
+        if fDMRecebeXML.mRateioGeralItem.AsInteger = fDMRecebeXML.mItensNotaItem.AsInteger then
+        begin
+          fDMRecebeXML.mRateioItens.Insert;
+          fDMRecebeXML.mRateioItensItem.AsInteger := fDMRecebeXML.mRateioGeralItem.AsInteger;
+          fDMRecebeXML.mRateioItensItem_Rateio.AsInteger := fDMRecebeXML.mRateioGeralItem_Rateio.AsInteger;
+          fDMRecebeXML.mRateioItensComprimento.AsFloat := fDMRecebeXML.mRateioGeralComprimento.AsFloat;
+          fDMRecebeXML.mRateioItensLargura.AsFloat := fDMRecebeXML.mRateioGeralLargura.AsFloat;
+          fDMRecebeXML.mRateioItensEspessura.AsFloat := fDMRecebeXML.mRateioGeralEspessura.AsFloat;
+          fDMRecebeXML.mRateioItensQuantidade.AsFloat := fDMRecebeXML.mRateioGeralQuantidade.AsFloat;
+          fDMRecebeXML.Ultimo_Item := fDMRecebeXML.mRateioGeralItem_Rateio.AsInteger;
+          fDMRecebeXML.mRateioItens.Post;
+        end;
+        fDMRecebeXML.mRateioGeral.Next;
+      end;
+      ffrmRateio_Itens.Qtde_Item := fDMRecebeXML.mItensNotaQtd.AsFloat;
+      ffrmRateio_Itens.lblNome.Caption := fDMRecebeXML.mItensNotaReferencia_Int.AsString;
+      ffrmRateio_Itens.lblQtde.Caption := FormatFloat('0.0000',fDMRecebeXML.mItensNotaQtd.AsFloat);
+      ffrmRateio_Itens.ShowModal;
+      if ffrmRateio_Itens.ModalResult = mrOK then
+      begin
+        fDMRecebeXML.mItensNota.Edit;
+        fDMRecebeXML.mItensNotaPossuiRateio.AsBoolean := True;
+        fDMRecebeXML.mItensNota.Post;
+      end;
+    finally
+      FreeAndNil(ffrmRateio_Itens);
+    end;
   end;
 end;
 
@@ -2432,7 +2472,7 @@ begin
   end;
 end;
 
-procedure TfrmRecebeXML.Gravar_NotaEntradaItens;
+procedure TfrmRecebeXML.Gravar_NotaEntradaItens(Tipo : String);
 begin
   vItem := vItem + 1;
 
@@ -2447,12 +2487,24 @@ begin
     else
       fDMRecebeXML.cdsNotaFiscal_ItensID_OPERACAO_NOTA.Clear;
     //******************
+    if Tipo = 'R' then
+    begin
+      fDMRecebeXML.cdsNotaFiscal_ItensLARGURA.AsFloat       := fDMRecebeXML.mRateioGeralLargura.AsFloat;
+      fDMRecebeXML.cdsNotaFiscal_ItensCOMPRIMENTO.AsFloat   := fDMRecebeXML.mRateioGeralComprimento.AsFloat;
+      fDMRecebeXML.cdsNotaFiscal_ItensESPESSURA.AsFloat     := fDMRecebeXML.mRateioGeralEspessura.AsFloat;
+      fDMRecebeXML.cdsNotaFiscal_ItensQTD.AsFloat           := fDMRecebeXML.mRateioGeralQuantidade.AsFloat;
+      fDMRecebeXML.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMRecebeXML.mRateioGeralQuantidade.AsFloat;
+      fDMRecebeXML.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat     := fDMRecebeXML.mItensNotaVlrUnitario.AsFloat * fDMRecebeXML.mRateioGeralQuantidade.AsFloat;
+    end
+    else
+    begin
+      fDMRecebeXML.cdsNotaFiscal_ItensQTD.AsFloat           := fDMRecebeXML.mItensNotaQtd.AsFloat;
+      fDMRecebeXML.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMRecebeXML.mItensNotaQtd.AsFloat;
+      fDMRecebeXML.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat     := fDMRecebeXML.mItensNotaVlrTotal.AsFloat;
+    end;
 
     fDMRecebeXML.cdsNotaFiscal_ItensID_NCM.AsInteger      := fDMRecebeXML.mItensNotaID_NCM.AsInteger;
-    fDMRecebeXML.cdsNotaFiscal_ItensQTD.AsFloat           := fDMRecebeXML.mItensNotaQtd.AsFloat;
-    fDMRecebeXML.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMRecebeXML.mItensNotaQtd.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat  := fDMRecebeXML.mItensNotaVlrUnitario.AsFloat;
-    fDMRecebeXML.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat     := fDMRecebeXML.mItensNotaVlrTotal.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensPERC_ICMS.AsFloat     := fDMRecebeXML.mItensNotaAliqIcms.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensPERC_IPI.AsFloat      := fDMRecebeXML.mItensNotaAliqIPI.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensPERC_DESCONTO.AsFloat := 0;
@@ -2527,7 +2579,7 @@ begin
     if trim(fDMRecebeXML.cdsNotaFiscal_ItensTAMANHO.AsString) = '' then
       fDMRecebeXML.cdsNotaFiscal_ItensTAMANHO.AsString := '';
     fDMRecebeXML.cdsNotaFiscal_ItensQTDDEVOLVIDA.AsFloat  := 0;
-    fDMRecebeXML.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMRecebeXML.mItensNotaQtd.AsFloat;
+//    fDMRecebeXML.cdsNotaFiscal_ItensQTDRESTANTE.AsFloat   := fDMRecebeXML.mItensNotaQtd.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensVLR_FRETE.AsFloat     := fDMRecebeXML.mItensNotaVlrFrete.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensORIGEM_PROD.AsString  := fDMRecebeXML.mItensNotaOrigem.AsString;
     fDMRecebeXML.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat    := fDMRecebeXML.mItensNotaQtdPacote.AsFloat;
@@ -2654,6 +2706,9 @@ begin
                                                fDMRecebeXML.cdsNotaFiscal_ItensID_COR.AsInteger,
                                                fDMRecebeXML.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,'S',
                                                fDMRecebeXML.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat,
+                                               fDMRecebeXML.cdsNotaFiscal_ItensComprimento.AsFloat,
+                                               fDMRecebeXML.cdsNotaFiscal_ItensLargura.AsFloat,
+                                               fDMRecebeXML.cdsNotaFiscal_ItensEspessura.AsFloat,
                                                fDMRecebeXML.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger);
 
   lbStatusEstoque.Color   := clMoneyGreen;
@@ -3008,46 +3063,55 @@ begin
         Verificar_Produto;
         vID_Estoque := 0;
         vID_Mov     := 0;
-        Gravar_NotaEntradaItens;
-        if not(vImportar_NotaSaida) then
+
+        //vefica se precisa fazer o rateio nos itens
+        if fDMRecebeXML.mItensNotaPossuiRateio.AsBoolean then
         begin
-          //16/07/2018
-          //if fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString = 'S' then
-          if fDMRecebeXML.mItensNotaGerar_Estoque.AsString = 'S' then
-            Gravar_Estoque;
-          //19/03/2019
-          if fDMRecebeXML.mItensNotaNum_Nota_NTE.AsInteger > 0 then
-            Gravar_NDevolvida;
-          //**************
-        end;
-        if not(vImportar_NotaSaida) then
-          Gravar_Movimento;
-        //28/10/2017
-        if (fDMRecebeXML.qParametros_ProdUSA_LOTE_PROD.AsString = 'S') and (trim(fDMRecebeXML.mItensNotaNum_Lote_Controle.AsString) <> '') then
+          prc_Gravar_Rateio;
+        end
+        else
         begin
-          if fDMRecebeXML.cdsProdutoID.AsInteger <> fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger then
-            fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger, ([LocaseInsensitive]));
+          Gravar_NotaEntradaItens('N');
+          if not(vImportar_NotaSaida) then
+          begin
+            //16/07/2018
+            //if fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString = 'S' then
+            if fDMRecebeXML.mItensNotaGerar_Estoque.AsString = 'S' then
+              Gravar_Estoque;
+            //19/03/2019
+            if fDMRecebeXML.mItensNotaNum_Nota_NTE.AsInteger > 0 then
+              Gravar_NDevolvida;
+            //**************
+          end;
+          if not(vImportar_NotaSaida) then
+            Gravar_Movimento;
+          //28/10/2017
+          if (fDMRecebeXML.qParametros_ProdUSA_LOTE_PROD.AsString = 'S') and (trim(fDMRecebeXML.mItensNotaNum_Lote_Controle.AsString) <> '') then
+          begin
+            if fDMRecebeXML.cdsProdutoID.AsInteger <> fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger then
+              fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger, ([LocaseInsensitive]));
 
-          vVlrAux := fnc_Montar_PrecoCompra(fDMRecebeXML.mItensNotaUnidadeInterno.AsString);
-          if fDMRecebeXML.qParametros_ProdOPCAO_APLICAR_MARGEM.AsString <> 'C' then
-            fDMCadProduto_Lote.prc_Gravar(fDMRecebeXML.cdsProdutoID.AsInteger,fDMRecebeXML.mItensNotaNum_Lote_Controle.AsString,
-                                           fDMRecebeXML.cdsProdutoPRECO_CUSTO.AsFloat,fDMRecebeXML.cdsProdutoPRECO_VENDA.AsFloat,fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat)
-          else
-            fDMCadProduto_Lote.prc_Gravar(fDMRecebeXML.cdsProdutoID.AsInteger,fDMRecebeXML.mItensNotaNum_Lote_Controle.AsString,
-                                           fDMRecebeXML.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat,fDMRecebeXML.cdsProdutoPRECO_VENDA.AsFloat,fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat);
+            vVlrAux := fnc_Montar_PrecoCompra(fDMRecebeXML.mItensNotaUnidadeInterno.AsString);
+            if fDMRecebeXML.qParametros_ProdOPCAO_APLICAR_MARGEM.AsString <> 'C' then
+              fDMCadProduto_Lote.prc_Gravar(fDMRecebeXML.cdsProdutoID.AsInteger,fDMRecebeXML.mItensNotaNum_Lote_Controle.AsString,
+                                             fDMRecebeXML.cdsProdutoPRECO_CUSTO.AsFloat,fDMRecebeXML.cdsProdutoPRECO_VENDA.AsFloat,fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat)
+            else
+              fDMCadProduto_Lote.prc_Gravar(fDMRecebeXML.cdsProdutoID.AsInteger,fDMRecebeXML.mItensNotaNum_Lote_Controle.AsString,
+                                             fDMRecebeXML.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat,fDMRecebeXML.cdsProdutoPRECO_VENDA.AsFloat,fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat);
+          end;
+          //******************
+
+          //24/02/2019
+          prc_Gravar_Produto_Imp;
+          //******************
+
+          fDMRecebeXML.cdsNotaFiscal_Itens.Edit;
+          fDMRecebeXML.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
+          fDMRecebeXML.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger  := vID_Mov;
+          fDMRecebeXML.cdsNotaFiscal_Itens.Post;
+
         end;
-        //******************
-
-        //24/02/2019
-        prc_Gravar_Produto_Imp;
-        //******************
-
-        fDMRecebeXML.cdsNotaFiscal_Itens.Edit;
-        fDMRecebeXML.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
-        fDMRecebeXML.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger  := vID_Mov;
-        fDMRecebeXML.cdsNotaFiscal_Itens.Post;
         fDMRecebeXML.mItensNota.Next;
-
       end;
     end;
 
@@ -3108,6 +3172,9 @@ begin
   fDMRecebeXML.cdsUnidade2.Open;
   fDMRecebeXML.qParametros.Close;
   fDMRecebeXML.qParametros.Open;
+  fDMRecebeXML.mRateioItens.EmptyDataSet;
+  fDMRecebeXML.mRateioGeral.EmptyDataSet;
+  fDMRecebeXML.Ultimo_Item := 0;
   Label109.Visible         := (fDMRecebeXML.qParametrosUSA_CUPOM_FISCAL.AsString = 'S');
   RxDBLookupCombo5.Visible := (fDMRecebeXML.qParametrosUSA_CUPOM_FISCAL.AsString = 'S');
   Label4.Visible := False;
@@ -3581,7 +3648,10 @@ begin
                                                fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
                                                fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
                                                fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
-                                               fDMRecebeXML.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
+                                               fDMRecebeXML.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,
+                                               fDMRecebeXML.cdsNotaFiscal_ItensCOMPRIMENTO.AsFloat,
+                                               fDMRecebeXML.cdsNotaFiscal_ItensLARGURA.AsFloat,
+                                               fDMRecebeXML.cdsNotaFiscal_ItensESPESSURA.AsFloat);
 
 end;
 
@@ -4556,6 +4626,65 @@ begin
     fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := Copy(cbTipoSped.Text,1,2)
   else
     fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
+end;
+
+procedure TfrmRecebeXML.prc_Gravar_Rateio;
+var
+  vVlrAux : Real;
+begin
+
+  fDMRecebeXML.mRateioGeral.Filtered := False;
+  fDMRecebeXML.mRateioGeral.Filter := 'Item = ' + fDMRecebeXML.mItensNotaItem.AsString;
+  fDMRecebeXML.mRateioGeral.Filtered := True;
+
+  fDMRecebeXML.mRateioGeral.First;
+  while not fDMRecebeXML.mRateioGeral.Eof do
+  begin
+    Gravar_NotaEntradaItens('R');
+    if not(vImportar_NotaSaida) then
+    begin
+      //16/07/2018
+      //if fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString = 'S' then
+      if fDMRecebeXML.mItensNotaGerar_Estoque.AsString = 'S' then
+        Gravar_Estoque;
+      //19/03/2019
+      if fDMRecebeXML.mItensNotaNum_Nota_NTE.AsInteger > 0 then
+        Gravar_NDevolvida;
+      //**************
+    end;
+    if not(vImportar_NotaSaida) then
+      Gravar_Movimento;
+    //28/10/2017
+    if (fDMRecebeXML.qParametros_ProdUSA_LOTE_PROD.AsString = 'S') and (trim(fDMRecebeXML.mItensNotaNum_Lote_Controle.AsString) <> '') then
+    begin
+      if fDMRecebeXML.cdsProdutoID.AsInteger <> fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger then
+        fDMRecebeXML.cdsProduto.Locate('ID',fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger, ([LocaseInsensitive]));
+
+      vVlrAux := fnc_Montar_PrecoCompra(fDMRecebeXML.mItensNotaUnidadeInterno.AsString);
+      if fDMRecebeXML.qParametros_ProdOPCAO_APLICAR_MARGEM.AsString <> 'C' then
+        fDMCadProduto_Lote.prc_Gravar(fDMRecebeXML.cdsProdutoID.AsInteger,fDMRecebeXML.mItensNotaNum_Lote_Controle.AsString,
+                                       fDMRecebeXML.cdsProdutoPRECO_CUSTO.AsFloat,fDMRecebeXML.cdsProdutoPRECO_VENDA.AsFloat,fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat)
+      else
+        fDMCadProduto_Lote.prc_Gravar(fDMRecebeXML.cdsProdutoID.AsInteger,fDMRecebeXML.mItensNotaNum_Lote_Controle.AsString,
+                                       fDMRecebeXML.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat,fDMRecebeXML.cdsProdutoPRECO_VENDA.AsFloat,fDMRecebeXML.cdsProdutoPERC_MARGEMLUCRO.AsFloat);
+    end;
+    //******************
+
+    //24/02/2019
+    prc_Gravar_Produto_Imp;
+    //******************
+
+    fDMRecebeXML.cdsNotaFiscal_Itens.Edit;
+    fDMRecebeXML.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
+    fDMRecebeXML.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger  := vID_Mov;
+    fDMRecebeXML.cdsNotaFiscal_Itens.Post;
+
+
+    fDMRecebeXML.mRateioGeral.Next;
+  end;
+
+
+
 end;
 
 end.

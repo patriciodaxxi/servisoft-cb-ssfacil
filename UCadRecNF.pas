@@ -516,7 +516,7 @@ begin
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
-                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,0,0,0);
         end;
         if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger <> vID_Estoque) or
            (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov) then
@@ -1788,7 +1788,7 @@ begin
                                                vVlrAux,
                                                vDescAux,fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat,'',
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
-                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,'N',0,0); 
+                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,'N',0,0,0,0,0); 
 
 end;
 

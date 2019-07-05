@@ -20,8 +20,8 @@ object frmCadPedido_Cancelamento: TfrmCadPedido_Cancelamento
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 210
-    Width = 776
+    Top = 202
+    Width = 768
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -75,8 +75,8 @@ object frmCadPedido_Cancelamento: TfrmCadPedido_Cancelamento
   object Panel1: TPanel
     Left = 0
     Top = 111
-    Width = 776
-    Height = 99
+    Width = 768
+    Height = 91
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 0
@@ -135,7 +135,7 @@ object frmCadPedido_Cancelamento: TfrmCadPedido_Cancelamento
   object Panel4: TPanel
     Left = 0
     Top = 41
-    Width = 776
+    Width = 768
     Height = 70
     Align = alTop
     Color = clSilver
@@ -273,7 +273,7 @@ object frmCadPedido_Cancelamento: TfrmCadPedido_Cancelamento
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 776
+    Width = 768
     Height = 41
     Align = alTop
     Color = clSilver
@@ -294,8 +294,8 @@ object frmCadPedido_Cancelamento: TfrmCadPedido_Cancelamento
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
-    Top = 244
-    Width = 776
+    Top = 236
+    Width = 768
     Height = 157
     Align = alBottom
     DataSource = DMCadPedido.dsPedido_Cancelado

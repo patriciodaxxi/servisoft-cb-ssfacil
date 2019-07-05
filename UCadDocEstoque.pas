@@ -646,7 +646,7 @@ begin
                                           fDMCadDocEstoque.cdsDocEstoque_ItensID_COR.AsInteger,
                                           fDMCadDocEstoque.cdsDocEstoque_ItensNUM_LOTE_CONTROLE.AsString,
                                           fDMCadDocEstoque.cdsDocEstoque_ItensGERAR_CUSTO.AsString,
-                                          fDMCadDocEstoque.cdsDocEstoque_ItensPRECO_CUSTO_TOTAL.AsFloat,
+                                          fDMCadDocEstoque.cdsDocEstoque_ItensPRECO_CUSTO_TOTAL.AsFloat,0,0,0,
                                           0);
 end;
 

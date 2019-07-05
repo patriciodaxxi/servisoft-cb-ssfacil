@@ -1,6 +1,6 @@
 object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
-  Left = 359
-  Top = 89
+  Left = 292
+  Top = 53
   Width = 721
   Height = 612
   Caption = 'Cadastro dos Itens da Nota'
@@ -21,7 +21,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 713
+    Width = 705
     Height = 71
     Align = alTop
     Color = clMoneyGreen
@@ -240,8 +240,8 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 547
-    Width = 713
+    Top = 539
+    Width = 705
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -280,7 +280,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object pnlCombinacao: TPanel
     Left = 0
     Top = 119
-    Width = 713
+    Width = 705
     Height = 26
     Align = alTop
     Color = clMoneyGreen
@@ -312,7 +312,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object Panel4: TPanel
     Left = 0
     Top = 71
-    Width = 713
+    Width = 705
     Height = 48
     Align = alTop
     Color = clMoneyGreen
@@ -373,8 +373,8 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 145
-    Width = 713
-    Height = 402
+    Width = 705
+    Height = 394
     ActivePage = TS_Itens
     ActivePageDefault = TS_Itens
     Align = alClient
@@ -386,8 +386,8 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 709
-        Height = 379
+        Width = 701
+        Height = 371
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0
@@ -758,6 +758,74 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
           DataField = 'NUM_LOTE_CONTROLE'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           TabOrder = 13
+        end
+        object gbxDimensoes: TGroupBox
+          Left = 232
+          Top = 49
+          Width = 201
+          Height = 109
+          Caption = 'Dimens'#245'es'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 17
+          object Label9: TLabel
+            Left = 5
+            Top = 34
+            Width = 64
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Comprimento:'
+          end
+          object Label15: TLabel
+            Left = 30
+            Top = 57
+            Width = 39
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Largura:'
+          end
+          object Label36: TLabel
+            Left = 17
+            Top = 84
+            Width = 52
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Espessura:'
+          end
+          object DBEdit27: TDBEdit
+            Left = 78
+            Top = 24
+            Width = 115
+            Height = 21
+            DataField = 'COMPRIMENTO'
+            DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+            TabOrder = 0
+            OnExit = DBEdit5Exit
+          end
+          object DBEdit28: TDBEdit
+            Left = 78
+            Top = 49
+            Width = 115
+            Height = 21
+            DataField = 'LARGURA'
+            DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+            TabOrder = 1
+            OnExit = DBEdit5Exit
+          end
+          object DBEdit29: TDBEdit
+            Left = 78
+            Top = 74
+            Width = 115
+            Height = 21
+            DataField = 'ESPESSURA'
+            DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+            TabOrder = 2
+            OnExit = DBEdit5Exit
+          end
         end
       end
     end

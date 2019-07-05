@@ -104,6 +104,13 @@ type
     DBEdit24: TDBEdit;
     DBEdit25: TDBEdit;
     DBEdit26: TDBEdit;
+    gbxDimensoes: TGroupBox;
+    Label9: TLabel;
+    DBEdit27: TDBEdit;
+    Label15: TLabel;
+    DBEdit28: TDBEdit;
+    Label36: TLabel;
+    DBEdit29: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -188,7 +195,7 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID_CFOP.AsInteger;
 
   Label17.Visible := (fDMCadNotaFiscal.cdsParametrosGRAVAR_INF_ADICIONAIS_NTE.AsString = 'S');
-
+  gbxDimensoes.Visible := SQLLocate('PARAMETROS','ID','EMPRESA_SUCATA','1') = 'S';
   //Tamanhos
   if fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S' then
   begin

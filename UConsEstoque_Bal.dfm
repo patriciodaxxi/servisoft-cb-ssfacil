@@ -523,6 +523,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
             FieldName = 'TIPO_REG'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Cadastro'
+            Width = 64
             Visible = True
           end>
       end

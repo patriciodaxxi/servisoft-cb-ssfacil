@@ -2283,6 +2283,31 @@ type
     qParametros_Lote: TSQLQuery;
     qParametros_LoteOPCAO_ESTOQUE_SEMI: TStringField;
     qParametros_LoteLOTE_TEXTIL: TStringField;
+    mRateioItens: TClientDataSet;
+    mRateioItensItem: TIntegerField;
+    mRateioItensItem_Rateio: TIntegerField;
+    mRateioItensComprimento: TFloatField;
+    mRateioItensLargura: TFloatField;
+    mRateioItensEspessura: TFloatField;
+    mRateioItensQuantidade: TFloatField;
+    dsmRateioItens: TDataSource;
+    mRateioGeral: TClientDataSet;
+    mRateioGeralItem: TIntegerField;
+    mRateioGeralItem_Rateio: TIntegerField;
+    mRateioGeralComprimento: TFloatField;
+    mRateioGeralLargura: TFloatField;
+    mRateioGeralEspessura: TFloatField;
+    mRateioGeralQuantidade: TFloatField;
+    mRateioItensSomaQtde: TAggregateField;
+    mRateioItensQtde_Total: TFloatField;
+    qParametrosEMPRESA_SUCATA: TStringField;
+    mItensNotaPossuiRateio: TBooleanField;
+    sdsNotaFiscal_ItensLARGURA: TFloatField;
+    sdsNotaFiscal_ItensCOMPRIMENTO: TFloatField;
+    sdsNotaFiscal_ItensESPESSURA: TFloatField;
+    cdsNotaFiscal_ItensLARGURA: TFloatField;
+    cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField;
+    cdsNotaFiscal_ItensESPESSURA: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2320,6 +2345,8 @@ type
     procedure mItensNotaBeforePost(DataSet: TDataSet);
     procedure cdsProduto_FornBeforePost(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
+    procedure mRateioItensBeforePost(DataSet: TDataSet);
+    procedure mRateioItensCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
@@ -2338,6 +2365,7 @@ type
     vProduto_Inativo: String;
     vGerar_CLiq: String;
     vAtualizaCusto: String;
+    Ultimo_Item : Integer;
 
     procedure prc_Abrir_Produto(ID: Integer);
     procedure prc_Abrir_Estoque_Mov(ID: Integer);
@@ -2360,7 +2388,8 @@ type
     procedure prc_Move_Dados_Da_Nota;
 
     function fnc_Verifica_Produto_Forn(ID_Produto, ID_Fornecedor: Integer; Cod_Produto_Forn, Tamanho: String): Boolean;
-    function fnc_Proximo_Item_Forn(ID_Produto: Integer): Integer; 
+    function fnc_Proximo_Item_Forn(ID_Produto: Integer): Integer;
+    function fnc_Ultimo_Item_Rateio(Item : Integer) : Integer;
   end;
 
 var
@@ -2895,6 +2924,7 @@ begin
   mItensNotaGerar_Estoque.AsString        := 'S';
   mItensNotaPosse_Material.AsString       := 'E';
   mItensNotaTamanho.AsString              := '';
+  mItensNotaPossuiRateio.AsBoolean        := False;
 end;
 
 procedure TDMRecebeXML.prc_Abrir_Combinacao(ID_Produto: Integer);
@@ -3020,6 +3050,29 @@ begin
   vUsa_Preco_Cor_Pos := cdsNotaEntradaUSA_PRECO_COR.AsString;
   vID_Cor_Pos        := cdsNotaEntradaID_COR.AsInteger;
   vTamanho_Pos       := cdsNotaEntradaTAMANHO.AsString;
+end;
+
+function TDMRecebeXML.fnc_Ultimo_Item_Rateio(Item: Integer): Integer;
+var
+  vItem : Integer;
+begin
+  vItem := 0;
+  mRateioItens.Last;
+  vItem := mRateioItensItem.AsInteger + 1;
+  Result := vItem;
+end;
+
+procedure TDMRecebeXML.mRateioItensBeforePost(DataSet: TDataSet);
+begin
+  mRateioItensItem.AsInteger := mItensNotaItem.AsInteger;
+  inc(Ultimo_Item);
+  mRateioItensItem_Rateio.AsInteger := Ultimo_Item;
+end;
+
+procedure TDMRecebeXML.mRateioItensCalcFields(DataSet: TDataSet);
+begin
+  if mRateioItensQuantidade.AsFloat > 0 then
+    mRateioItensQtde_Total.AsFloat := mRateioItensQtde_Total.AsFloat + mRateioItensQuantidade.AsFloat;
 end;
 
 end.

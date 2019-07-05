@@ -1756,7 +1756,7 @@ begin
                                                vlrDesconto,fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat,'',
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger,
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString,vGerarCusto,
-                                               uCalculo_NotaFiscal.vVlrCusto_Total,
+                                               uCalculo_NotaFiscal.vVlrCusto_Total,0,0,0,
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OPERACAO_NOTA.AsInteger); //14/01/2019
 
 end;
@@ -1817,7 +1817,7 @@ begin
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
                                                fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
-                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat);
+                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,0,0,0);
 
 end;
 

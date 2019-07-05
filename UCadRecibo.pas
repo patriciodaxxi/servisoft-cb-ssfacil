@@ -362,7 +362,7 @@ begin
                                                      fDMCadRecibo.cdsReciboID.AsInteger,
                                                      fDMCadRecibo.cdsReciboID_VENDEDOR.AsInteger,0,
                                                      fDMCadRecibo.cdsReciboPERC_COMISSAO.AsFloat,0,0,1,0,'N',
-                                                     0,0,0,0,0,0);
+                                                     0,0,0,0,0,0,0,0,0);
 
 
         if vID_Mov <> fDMCadRecibo.cdsReciboID_MOVIMENTO.AsInteger then

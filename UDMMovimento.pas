@@ -198,6 +198,12 @@ type
     cdsMovimentoVLR_ICMS_FCP_DEST: TFloatField;
     cdsMovimentoVLR_ICMS_FCP: TFloatField;
     cdsMovimentoVLR_FCP_ST: TFloatField;
+    sdsMovimentoLARGURA: TFloatField;
+    sdsMovimentoCOMPRIMENTO: TFloatField;
+    sdsMovimentoESPESSURA: TFloatField;
+    cdsMovimentoLARGURA: TFloatField;
+    cdsMovimentoCOMPRIMENTO: TFloatField;
+    cdsMovimentoESPESSURA: TFloatField;
     procedure cdsMovimentoReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
@@ -216,7 +222,8 @@ type
                                   Tamanho, Tipo_Condicao: String; ID_CondPgto,ID_Recibo, ID_Vendedor, ID_Cor: Integer; Perc_Comissao,
                                   Vlr_Icms_UF_Remet, Vlr_Icms_UF_Dest: Real;
                                   Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String;
-                                  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST: Real): Integer;
+                                  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST,
+                                  Comprimento, Largura, Espessura: Real): Integer;
 
     procedure prc_ImprimeVendasCupomW;//WriteLn
     procedure prc_ImprimeVendasCupomC(cAvanco: Word);//Canvas
@@ -265,7 +272,8 @@ function TDMMovimento.fnc_Gravar_Movimento(ID_Mov, Filial, Item,
   DtEmissao, DtEntradaSaida: TDateTime; Tamanho, Tipo_Condicao: String;
   ID_CondPgto, ID_Recibo, ID_Vendedor, ID_Cor: Integer; Perc_Comissao, Vlr_Icms_UF_Remet, Vlr_Icms_UF_Dest: Real;
   Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String ;
-  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST: Real): Integer;
+  BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST,
+  Comprimento, Largura, Espessura: Real): Integer;
 var
   vAux: Integer;
 begin
@@ -372,6 +380,7 @@ begin
     cdsMovimentoVLR_CSRF.AsFloat           := StrToFloat(FormatFloat('0.00',Vlr_CSRF));
     cdsMovimentoVLR_LIQUIDO_NFSE.AsFloat   := StrToFloat(FormatFloat('0.00',Vlr_Liquido_NFSe));
     cdsMovimentoVLR_CUPOMFISCAL.AsFloat    := StrToFloat(FormatFloat('0.00',Vlr_CupomFiscal));
+
     //23/01/2018
     cdsMovimentoPRECO_CUSTO_TOTAL.AsFloat  := StrToFloat(FormatFloat('0.00000',Preco_Custo_Total));
     //**************
@@ -445,6 +454,11 @@ begin
     cdsMovimentoVLR_ICMS_FCP_DEST.AsFloat  := VLR_ICMS_FCP_DEST;
     cdsMovimentoVLR_ICMS_FCP.AsFloat       := VLR_ICMS_FCP;
     cdsMovimentoVLR_FCP_ST.AsFloat         := VLR_FCP_ST;
+
+    cdsMovimentoCOMPRIMENTO.AsFloat        := StrToFloat(FormatFloat('0.00',Comprimento));
+    cdsMovimentoLARGURA.AsFloat            := StrToFloat(FormatFloat('0.00',Largura));
+    cdsMovimentoESPESSURA.AsFloat          := StrToFloat(FormatFloat('0.00',Espessura));
+
     //********************
 
     cdsMovimento.Post;

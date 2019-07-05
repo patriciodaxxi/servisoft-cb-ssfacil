@@ -3073,6 +3073,12 @@ type
     qParametros_LoteLOTE_TEXTIL: TStringField;
     cdsPedidoDTEMISSAO_OS: TDateField;
     cdsPedidoNUM_OS_SERVICO: TIntegerField;
+    sdsNotaFiscal_ItensLARGURA: TFloatField;
+    sdsNotaFiscal_ItensCOMPRIMENTO: TFloatField;
+    sdsNotaFiscal_ItensESPESSURA: TFloatField;
+    cdsNotaFiscal_ItensLARGURA: TFloatField;
+    cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField;
+    cdsNotaFiscal_ItensESPESSURA: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

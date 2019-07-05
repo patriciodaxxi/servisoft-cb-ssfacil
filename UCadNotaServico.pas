@@ -677,7 +677,7 @@ begin
                                                      fDMCadNotaServico.cdsNotaServicoID_VENDEDOR.AsInteger,0,
                                                      fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0,1,0,
                                                      fDMCadNotaServico.cdsNotaServicoRETEM_PISCOFINS.AsString,
-                                                     0,0,0,0,0,0);
+                                                     0,0,0,0,0,0,0,0,0);
 
       end;
 
@@ -4724,7 +4724,7 @@ begin
                                                fDMCadNotaServico.cdsNotaServicoID_VENDEDOR.AsInteger,0,
                                                fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0,1,0,
                                                fDMCadNotaServico.cdsNotaServicoRETEM_PISCOFINS.AsString,
-                                               0,0,0,0,0,0);
+                                               0,0,0,0,0,0,0,0,0);
 end;
 
 procedure TfrmCadNotaServico.prc_Le_fCds;

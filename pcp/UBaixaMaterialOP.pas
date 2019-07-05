@@ -157,7 +157,7 @@ begin
                                                        fDMBaixaMaterial.cdsLoteMatPRECO_VENDA.AsFloat,
                                                        0,0,fDMBaixaMaterial.cdsLoteMatUNIDADE.AsString,
                                                        fDMBaixaMaterial.cdsLoteMatID_COR.AsInteger,
-                                                       '','N',0,0);
+                                                       '','N',0,0,0,0,0);
         if (StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatQTD_RESERVA.AsFloat)) > 0) then
         begin
           vID_Estoque_Res := fDMEstoque_Res.fnc_Gravar_Estoque_Res(0,fDMBaixaMaterial.cdsLoteMatFILIAL.AsInteger,

@@ -25,7 +25,6 @@ type
     function GetMontaDescricaoImpressao: string;
     function GetNotaCancelada: Boolean;
     procedure ImprimirNfse;
-    procedure ConsultaNfse;
 
     procedure SetID_NOTA(Value: Integer);
     procedure GravarCancelamento;
@@ -44,6 +43,7 @@ type
     function fnc_monta_discriminacao : String;
     procedure ConfigurarComponente;
     procedure Cancelar_Nfse;
+    procedure ConsultaNfse;
 
     procedure TestarCertificado;
     class procedure Gerar(pID_NOTA: Integer);

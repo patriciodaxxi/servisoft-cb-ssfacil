@@ -8,7 +8,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object sdsNotaFiscal: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM NOTAFISCAL'#13#10#13#10#13#10
+    CommandText = 'SELECT *'#13#10'FROM NOTAFISCAL'#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1871,6 +1871,15 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object sdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
       FieldName = 'VLR_ICMS_EFET'
     end
+    object sdsNotaFiscal_ItensLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object sdsNotaFiscal_ItensCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object sdsNotaFiscal_ItensESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -2555,6 +2564,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
       FieldName = 'VLR_ICMS_EFET'
+    end
+    object cdsNotaFiscal_ItensLARGURA: TFloatField
+      FieldName = 'LARGURA'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
+    end
+    object cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
+    end
+    object cdsNotaFiscal_ItensESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+      DisplayFormat = '##0.00'
+      EditFormat = '##0.00'
     end
   end
   object dsNotaFiscal_Itens: TDataSource

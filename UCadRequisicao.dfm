@@ -22,9 +22,9 @@ object frmCadRequisicao: TfrmCadRequisicao
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 937
-    Height = 572
-    ActivePage = TS_Cadastro
+    Width = 929
+    Height = 564
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadRequisicao: TfrmCadRequisicao
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -41,8 +41,8 @@ object frmCadRequisicao: TfrmCadRequisicao
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 84
-        Width = 933
-        Height = 448
+        Width = 925
+        Height = 440
         Align = alClient
         Ctl3D = False
         DataSource = DMCadDocEstoque.dsDocEstoque_Consulta
@@ -112,7 +112,7 @@ object frmCadRequisicao: TfrmCadRequisicao
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 933
+        Width = 925
         Height = 52
         Align = alTop
         Color = clSilver
@@ -241,8 +241,8 @@ object frmCadRequisicao: TfrmCadRequisicao
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 532
-        Width = 933
+        Top = 524
+        Width = 925
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -260,7 +260,7 @@ object frmCadRequisicao: TfrmCadRequisicao
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 933
+        Width = 925
         Height = 32
         Align = alTop
         Color = clSilver
@@ -564,7 +564,7 @@ object frmCadRequisicao: TfrmCadRequisicao
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 933
+        Width = 925
         Height = 34
         Align = alTop
         Color = 8404992
@@ -790,7 +790,7 @@ object frmCadRequisicao: TfrmCadRequisicao
       object pnlCadastro: TPanel
         Left = 0
         Top = 34
-        Width = 933
+        Width = 925
         Height = 197
         Align = alTop
         Enabled = False
@@ -798,7 +798,7 @@ object frmCadRequisicao: TfrmCadRequisicao
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 931
+          Width = 923
           Height = 31
           Align = alTop
           Color = clSilver
@@ -850,7 +850,7 @@ object frmCadRequisicao: TfrmCadRequisicao
         object pnlCliente: TPanel
           Left = 1
           Top = 32
-          Width = 931
+          Width = 923
           Height = 164
           Align = alClient
           TabOrder = 1
@@ -1084,8 +1084,8 @@ object frmCadRequisicao: TfrmCadRequisicao
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 231
-        Width = 933
-        Height = 318
+        Width = 925
+        Height = 310
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -1102,8 +1102,8 @@ object frmCadRequisicao: TfrmCadRequisicao
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 59
-            Width = 929
-            Height = 236
+            Width = 921
+            Height = 228
             Align = alClient
             DataSource = DMCadDocEstoque.dsDocEstoque_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1232,7 +1232,7 @@ object frmCadRequisicao: TfrmCadRequisicao
           object pnlItem: TPanel
             Left = 0
             Top = 26
-            Width = 929
+            Width = 921
             Height = 33
             Align = alTop
             Color = clSilver
@@ -1462,7 +1462,7 @@ object frmCadRequisicao: TfrmCadRequisicao
           object pnlLocalEstoque: TPanel
             Left = 0
             Top = 0
-            Width = 929
+            Width = 921
             Height = 26
             Align = alTop
             Enabled = False

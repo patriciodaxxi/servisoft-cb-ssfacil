@@ -283,7 +283,7 @@ begin
                                                      //fDmCadVale.cdsValeItensQTD.AsFloat,  11/09/2015
                                                      vQtdAux,
                                                      //fDmCadVale.cdsValeItensVLR_UNITARIO.AsFloat,0); 11/09/2015
-                                                     vVlrAux,0,0,'',0,'','N',vVlrAux,0); //ver aqui sobre Lote Controle  04/11/2015
+                                                     vVlrAux,0,0,'',0,'','N',vVlrAux,0,0,0,0); //ver aqui sobre Lote Controle  04/11/2015
                                                      //aqui a cor ainda é com ZERO 
       end
       else

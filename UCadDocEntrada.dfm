@@ -21,8 +21,8 @@ object frmCadDocEntrada: TfrmCadDocEntrada
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 993
-    Height = 665
+    Width = 985
+    Height = 657
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -40,8 +40,8 @@ object frmCadDocEntrada: TfrmCadDocEntrada
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 119
-        Width = 989
-        Height = 506
+        Width = 981
+        Height = 498
         Align = alClient
         BorderStyle = bsNone
         Ctl3D = False
@@ -99,7 +99,6 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             FieldName = 'NUMNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Documento'
-            Width = 64
             Visible = True
           end
           item
@@ -153,14 +152,13 @@ object frmCadDocEntrada: TfrmCadDocEntrada
             FieldName = 'ID_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
-            Width = 64
             Visible = True
           end>
       end
       object pnlPesquisa: TPanel
         Left = 0
         Top = 33
-        Width = 989
+        Width = 981
         Height = 86
         Align = alTop
         Color = clSilver
@@ -360,8 +358,8 @@ object frmCadDocEntrada: TfrmCadDocEntrada
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 625
-        Width = 989
+        Top = 617
+        Width = 981
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -377,7 +375,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 989
+        Width = 981
         Height = 33
         Align = alTop
         Color = clSilver
@@ -612,7 +610,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 989
+        Width = 981
         Height = 33
         Align = alTop
         Color = 8404992
@@ -841,15 +839,15 @@ object frmCadDocEntrada: TfrmCadDocEntrada
       object pnlCadastro: TPanel
         Left = 0
         Top = 33
-        Width = 989
-        Height = 609
+        Width = 981
+        Height = 601
         Align = alClient
         Enabled = False
         TabOrder = 0
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 987
+          Width = 979
           Height = 26
           Align = alTop
           Color = clSilver
@@ -903,7 +901,7 @@ object frmCadDocEntrada: TfrmCadDocEntrada
         object pnlCliente: TPanel
           Left = 1
           Top = 27
-          Width = 987
+          Width = 979
           Height = 94
           Align = alTop
           BevelInner = bvLowered
@@ -1170,13 +1168,13 @@ object frmCadDocEntrada: TfrmCadDocEntrada
         object Panel7: TPanel
           Left = 1
           Top = 121
-          Width = 987
-          Height = 487
+          Width = 979
+          Height = 479
           Align = alClient
           TabOrder = 1
           DesignSize = (
-            987
-            487)
+            979
+            479)
           object RzGroupBox2: TRzGroupBox
             Left = 10
             Top = 6
@@ -2082,7 +2080,6 @@ object frmCadDocEntrada: TfrmCadDocEntrada
                   FieldName = 'lkNome_Conta'
                   Title.Alignment = taCenter
                   Title.Caption = 'Nome Conta'
-                  Width = 64
                   Visible = True
                 end
                 item
@@ -2369,8 +2366,8 @@ object frmCadDocEntrada: TfrmCadDocEntrada
   end
   object stat1: TStatusBar
     Left = 0
-    Top = 665
-    Width = 993
+    Top = 657
+    Width = 985
     Height = 19
     Panels = <
       item

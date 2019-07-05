@@ -604,7 +604,7 @@ begin
                                                fDMConsEstoque.cdsBalancoUNIDADE.AsString,
                                                vID_Cor,
                                                '',
-                                               'N',0,0); //14/01/2019 incluída a operação
+                                               'N',0,0,0,0,0); //14/01/2019 incluída a operação
   MessageDlg('*** Gravou a Quantidade no Estoque!', mtConfirmation, [mbOk], 0);
 end;
 

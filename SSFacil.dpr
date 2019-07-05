@@ -807,7 +807,8 @@ uses
   uMostraPDF in 'uMostraPDF.pas' {frmMostraPDF},
   UConsClienteOBS in 'UConsClienteOBS.pas' {frmConsClienteOBS},
   uImprimir in 'uImprimir.pas',
-  classe.CalcularPeso in 'Classes\classe.CalcularPeso.pas';
+  classe.CalcularPeso in 'Classes\classe.CalcularPeso.pas',
+  uRateioItens in 'uRateioItens.pas' {frmRateio_Itens};
 
 {$R *.res}
 

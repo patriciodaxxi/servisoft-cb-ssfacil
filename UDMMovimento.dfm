@@ -297,6 +297,15 @@ object DMMovimento: TDMMovimento
     object sdsMovimentoVLR_FCP_ST: TFloatField
       FieldName = 'VLR_FCP_ST'
     end
+    object sdsMovimentoLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object sdsMovimentoCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object sdsMovimentoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
   end
   object dspMovimento: TDataSetProvider
     DataSet = sdsMovimento
@@ -590,6 +599,15 @@ object DMMovimento: TDMMovimento
     end
     object cdsMovimentoVLR_FCP_ST: TFloatField
       FieldName = 'VLR_FCP_ST'
+    end
+    object cdsMovimentoLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object cdsMovimentoCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object cdsMovimentoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
     end
   end
   object dsMovimento: TDataSource
