@@ -817,8 +817,6 @@ var
   vTexto : String;
   vComando : String;
 begin
-  //+ ' WHERE L.NUM_ORDEM in (' + CurrencyEdit2.Text+',' +CurrencyEdit1.Text + ')';
-  //(:NUM_ORDEM,:NUM_ORDEM2)
   SMDBGrid1.DisableScroll;
   fDMCadNecessidade_Compras.cdsLote_Mat.Close;
   fDMCadNecessidade_Compras.sdsLote_Mat.CommandText := fDMCadNecessidade_Compras.ctLote_Mat;

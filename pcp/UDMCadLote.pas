@@ -620,14 +620,6 @@ type
     dspPendente_Ped: TDataSetProvider;
     cdsPendente_Ped: TClientDataSet;
     dsPendente_Ped: TDataSource;
-    sdsPendente_PedNUM_PEDIDO: TIntegerField;
-    sdsPendente_PedPEDIDO_CLIENTE: TStringField;
-    sdsPendente_PedID_CLIENTE: TIntegerField;
-    sdsPendente_PedDTEMISSAO: TDateField;
-    sdsPendente_PedID: TIntegerField;
-    sdsPendente_PedFILIAL: TIntegerField;
-    sdsPendente_PedNOME_CLIENTE: TStringField;
-    sdsPendente_PedFANTASIA: TStringField;
     cdsPendente_PedNUM_PEDIDO: TIntegerField;
     cdsPendente_PedPEDIDO_CLIENTE: TStringField;
     cdsPendente_PedID_CLIENTE: TIntegerField;
@@ -636,7 +628,6 @@ type
     cdsPendente_PedFILIAL: TIntegerField;
     cdsPendente_PedNOME_CLIENTE: TStringField;
     cdsPendente_PedFANTASIA: TStringField;
-    sdsPendente_PedSELECIONADO: TStringField;
     cdsPendente_PedSELECIONADO: TStringField;
     sdsTalaoITEM_PEDIDO: TIntegerField;
     sdsTalaoID_PEDIDO: TIntegerField;
@@ -779,6 +770,8 @@ type
     cdsPendenteOBS_LOTE: TMemoField;
     mLoteOBS: TMemoField;
     cdsConsulta_LoteOBS_LOTE: TMemoField;
+    qParametros_Prod: TSQLQuery;
+    qParametros_ProdUSA_CORRUGADO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspLoteUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -897,6 +890,7 @@ begin
   qParametros_Lote.Open;
   qParametros_Geral.Open;
   qParametros_Ped.Open;
+  qParametros_Prod.Open;
 
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do

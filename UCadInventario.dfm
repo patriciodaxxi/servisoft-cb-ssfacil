@@ -1251,13 +1251,6 @@ object frmCadInventario: TfrmCadInventario
               Transparent = True
               OnClick = btnExcluir_ProdClick
             end
-            object NxButton1: TNxButton
-              Left = 368
-              Top = 8
-              Width = 145
-              Caption = 'Produtos Pelo Estoque'
-              TabOrder = 2
-            end
           end
           object SMDBGrid2: TSMDBGrid
             Left = 0

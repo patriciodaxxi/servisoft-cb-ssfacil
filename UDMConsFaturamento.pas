@@ -450,6 +450,8 @@ type
     cdsProduto_Det_GeralMAOOBRA: TStringField;
     cdsProduto_Det_GeralCODCFOP: TStringField;
     cdsProduto_Det_GeralVLR_FRETE: TFloatField;
+    qParametros_Geral: TSQLQuery;
+    qParametros_GeralUSA_VENDEDOR_INT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscal_CliCalcFields(DataSet: TDataSet);
     procedure dspNotaFiscal_CliUpdateError(Sender: TObject;
@@ -512,6 +514,7 @@ begin
   cdsProduto.Open;
   qParametros.Open;
   qParametros_NFe.Open;
+  qParametros_Geral.Open;
 end;
 
 procedure TDMConsFaturamento.cdsNotaFiscal_CliCalcFields(

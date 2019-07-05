@@ -1,6 +1,6 @@
 object frmGerar_Lote_Calc: TfrmGerar_Lote_Calc
-  Left = 251
-  Top = 37
+  Left = 234
+  Top = 49
   Width = 928
   Height = 569
   Caption = 'frmGerar_Lote_Calc'
@@ -21,7 +21,7 @@ object frmGerar_Lote_Calc: TfrmGerar_Lote_Calc
     Top = 0
     Width = 920
     Height = 538
-    ActivePage = TS_Gerar
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -29,7 +29,7 @@ object frmGerar_Lote_Calc: TfrmGerar_Lote_Calc
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl2Change
     FixedDimension = 19
@@ -1084,7 +1084,7 @@ object frmGerar_Lote_Calc: TfrmGerar_Lote_Calc
             Left = 388
             Top = 20
             Width = 217
-            Height = 19
+            Height = 22
             CharCase = ecUpperCase
             Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
@@ -1493,7 +1493,6 @@ object frmGerar_Lote_Calc: TfrmGerar_Lote_Calc
               TitleFont.Height = -11
               TitleFont.Name = 'MS Sans Serif'
               TitleFont.Style = [fsBold]
-              OnTitleClick = SMDBGrid1TitleClick
               Flat = True
               BandsFont.Charset = DEFAULT_CHARSET
               BandsFont.Color = clWindowText

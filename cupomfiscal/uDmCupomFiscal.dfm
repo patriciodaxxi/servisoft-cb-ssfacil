@@ -274,6 +274,9 @@ object dmCupomFiscal: TdmCupomFiscal
     object sdsCupomFiscalVLR_ICMS_EFET: TFloatField
       FieldName = 'VLR_ICMS_EFET'
     end
+    object sdsCupomFiscalVLR_OUTROS: TFloatField
+      FieldName = 'VLR_OUTROS'
+    end
   end
   object dspCupomFiscal: TDataSetProvider
     DataSet = sdsCupomFiscal
@@ -563,6 +566,9 @@ object dmCupomFiscal: TdmCupomFiscal
     object cdsCupomFiscalVLR_ICMS_EFET: TFloatField
       FieldName = 'VLR_ICMS_EFET'
     end
+    object cdsCupomFiscalVLR_OUTROS: TFloatField
+      FieldName = 'VLR_OUTROS'
+    end
   end
   object dsCupomFiscal: TDataSource
     DataSet = cdsCupomFiscal
@@ -813,6 +819,9 @@ object dmCupomFiscal: TdmCupomFiscal
     object sdsCupom_ItensPERC_BASE_RED_EFET: TFloatField
       FieldName = 'PERC_BASE_RED_EFET'
     end
+    object sdsCupom_ItensVLR_JUROS: TFloatField
+      FieldName = 'VLR_JUROS'
+    end
   end
   object cdsCupom_Itens: TClientDataSet
     Aggregates = <>
@@ -1048,6 +1057,9 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupom_ItensPERC_BASE_RED_EFET: TFloatField
       FieldName = 'PERC_BASE_RED_EFET'
+    end
+    object cdsCupom_ItensVLR_JUROS: TFloatField
+      FieldName = 'VLR_JUROS'
     end
   end
   object dsCupom_Itens: TDataSource
@@ -2643,6 +2655,14 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsTipoCobrancaPERC_JUROS: TFloatField
       FieldName = 'PERC_JUROS'
+    end
+    object cdsTipoCobrancaTAXA: TFloatField
+      FieldName = 'TAXA'
+    end
+    object cdsTipoCobrancaTAXA_TIPO: TStringField
+      FieldName = 'TAXA_TIPO'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsTipoCobranca: TDataSource

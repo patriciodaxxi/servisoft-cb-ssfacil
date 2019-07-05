@@ -1,11 +1,11 @@
 object frmSel_Produto: TfrmSel_Produto
-  Left = 107
-  Top = 79
+  Left = 80
+  Top = 69
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmSel_Produto'
   ClientHeight = 540
-  ClientWidth = 1053
+  ClientWidth = 1033
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,7 +24,7 @@ object frmSel_Produto: TfrmSel_Produto
   object Panel1: TPanel
     Left = 0
     Top = 25
-    Width = 1053
+    Width = 1033
     Height = 71
     Align = alTop
     Color = 16768959
@@ -32,7 +32,7 @@ object frmSel_Produto: TfrmSel_Produto
     ParentCtl3D = False
     TabOrder = 1
     object Label1: TLabel
-      Left = 248
+      Left = 247
       Top = 12
       Width = 71
       Height = 13
@@ -47,8 +47,8 @@ object frmSel_Produto: TfrmSel_Produto
       Caption = 'Tipo:'
     end
     object Label3: TLabel
-      Left = 288
-      Top = 32
+      Left = 287
+      Top = 31
       Width = 30
       Height = 13
       Alignment = taRightJustify
@@ -79,7 +79,7 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object Edit1: TEdit
       Left = 320
-      Top = 4
+      Top = 2
       Width = 393
       Height = 21
       CharCase = ecUpperCase
@@ -120,7 +120,7 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object Edit2: TEdit
       Left = 320
-      Top = 25
+      Top = 24
       Width = 129
       Height = 21
       CharCase = ecUpperCase
@@ -139,7 +139,7 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 494
-      Top = 25
+      Top = 24
       Width = 345
       Height = 21
       DropDownCount = 8
@@ -233,7 +233,7 @@ object frmSel_Produto: TfrmSel_Produto
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 96
-    Width = 1053
+    Width = 1033
     Height = 193
     Align = alClient
     Ctl3D = False
@@ -391,7 +391,7 @@ object frmSel_Produto: TfrmSel_Produto
   object StaticText1: TStaticText
     Left = 0
     Top = 523
-    Width = 1053
+    Width = 1033
     Height = 17
     Align = alBottom
     BorderStyle = sbsSingle
@@ -409,7 +409,7 @@ object frmSel_Produto: TfrmSel_Produto
   object gbxPedido: TRzGroupBox
     Left = 0
     Top = 384
-    Width = 1053
+    Width = 1033
     Height = 139
     Align = alBottom
     BorderColor = clNavy
@@ -431,7 +431,7 @@ object frmSel_Produto: TfrmSel_Produto
     object SMDBGrid2: TSMDBGrid
       Left = 5
       Top = 18
-      Width = 883
+      Width = 863
       Height = 116
       Align = alClient
       Ctl3D = False
@@ -534,7 +534,7 @@ object frmSel_Produto: TfrmSel_Produto
         end>
     end
     object Panel2: TPanel
-      Left = 888
+      Left = 868
       Top = 18
       Width = 160
       Height = 116
@@ -691,7 +691,7 @@ object frmSel_Produto: TfrmSel_Produto
   object NxPanel1: TNxPanel
     Left = 0
     Top = 289
-    Width = 1053
+    Width = 1033
     Height = 16
     Align = alBottom
     UseDockManager = False
@@ -701,7 +701,7 @@ object frmSel_Produto: TfrmSel_Produto
   object DBMemo1: TDBMemo
     Left = 0
     Top = 305
-    Width = 1053
+    Width = 1033
     Height = 79
     Align = alBottom
     DataField = 'OBS'
@@ -711,13 +711,13 @@ object frmSel_Produto: TfrmSel_Produto
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 1053
+    Width = 1033
     Height = 25
     Align = alTop
     Color = 16768959
     TabOrder = 0
     object Label7: TLabel
-      Left = 286
+      Left = 285
       Top = 10
       Width = 33
       Height = 13
@@ -725,7 +725,7 @@ object frmSel_Produto: TfrmSel_Produto
       Caption = 'Marca:'
     end
     object Edit4: TEdit
-      Left = 321
+      Left = 320
       Top = 2
       Width = 306
       Height = 21
@@ -878,15 +878,19 @@ object frmSel_Produto: TfrmSel_Produto
     object cdsProdutoPRECO_PROMOCAO: TFloatField
       FieldName = 'PRECO_PROMOCAO'
       Required = True
+      DisplayFormat = '0.00'
     end
     object cdsProdutoVLR_VENDA1: TFloatField
       FieldName = 'VLR_VENDA1'
+      DisplayFormat = '0.00'
     end
     object cdsProdutoVLR_VENDA2: TFloatField
       FieldName = 'VLR_VENDA2'
+      DisplayFormat = '0.00'
     end
     object cdsProdutoVLR_VENDA3: TFloatField
       FieldName = 'VLR_VENDA3'
+      DisplayFormat = '0.00'
     end
     object cdsProdutoOBS: TMemoField
       FieldName = 'OBS'
@@ -895,9 +899,11 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object cdsProdutoQTD: TFloatField
       FieldName = 'QTD'
+      DisplayFormat = '0.000'
     end
     object cdsProdutoQTDGERAL: TFloatField
       FieldName = 'QTDGERAL'
+      DisplayFormat = '0.000'
     end
     object cdsProdutoNOME_MARCA: TStringField
       FieldName = 'NOME_MARCA'

@@ -588,8 +588,7 @@ begin
                                                      fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat,
                                                      fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat,
                                                      fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat,
-                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,0,0,0);
-
+                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,0,0,0,0);
         if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov then
         begin
           fDMCadNotaFiscal.cdsNotaFiscal_Itens.Edit;
@@ -734,7 +733,7 @@ begin
                                                    fDMCadNotaServico.cdsNotaServicoID_VENDEDOR.AsInteger,0,
                                                    fDMCadNotaServico.cdsNotaServicoPERC_COMISSAO.AsFloat,0,0, cTerminal,0,
                                                    fDMCadNotaServico.cdsNotaServicoRETEM_PISCOFINS.AsString,
-                                                   0,0,0,0,0,0,0,0,0);
+                                                   0,0,0,0,0,0,0,0,0,0);
 
       if vID_Mov <> fDMCadNotaServico.cdsNotaServicoID_MOVIMENTO.AsInteger then
       begin
@@ -895,7 +894,7 @@ begin
                                                      cdsCupomFiscalID_VENDEDOR.AsInteger,0,
                                                      cdsCupomFiscalPERC_VENDEDOR.AsFloat,0,0,
                                                      cdsCupomFiscalTERMINAL_ID.AsInteger,0,'N',
-                                                     0,0,0,0,0,0,0,0,0);
+                                                     0,0,0,0,0,0,0,0,0,0);
       end;
       if (cdsCupomFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov) then
       begin
@@ -994,7 +993,7 @@ begin
                                                    fDMCadRecibo.cdsReciboID.AsInteger,
                                                    fDMCadRecibo.cdsReciboID_VENDEDOR.AsInteger,0,
                                                    fDMCadRecibo.cdsReciboPERC_COMISSAO.AsFloat,0,0, cTerminal,0,'N',
-                                                   0,0,0,0,0,0,0,0,0);
+                                                   0,0,0,0,0,0,0,0,0,0);
 
       if vID_Mov <> fDMCadRecibo.cdsReciboID_MOVIMENTO.AsInteger then
       begin

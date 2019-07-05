@@ -1,6 +1,5 @@
 object frmCadPedido: TfrmCadPedido
   Left = 127
-  Top = 16
   Top = 0
   Width = 1105
   Height = 710
@@ -26,7 +25,7 @@ object frmCadPedido: TfrmCadPedido
     Top = 0
     Width = 1097
     Height = 679
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -35,7 +34,7 @@ object frmCadPedido: TfrmCadPedido
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19

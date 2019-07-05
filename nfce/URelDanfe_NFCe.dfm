@@ -3,6 +3,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
   Top = 23
   Width = 733
   Height = 674
+  VertScrollBar.Position = 380
   Caption = 'fRelDanfe_NFCe'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,9 +18,9 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
   TextHeight = 13
   object RLReport1: TRLReport
     Left = 8
-    Top = 8
+    Top = -372
     Width = 302
-    Height = 1512
+    Height = 3780
     DataSource = DMNFCe.dsCupomFiscal
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
@@ -31,7 +32,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
     Margins.RightMargin = 4.200000000000000000
     PageSetup.PaperSize = fpCustom
     PageSetup.PaperWidth = 80.000000000000000000
-    PageSetup.PaperHeight = 400.000000000000000000
+    PageSetup.PaperHeight = 1000.000000000000000000
     PrintDialog = False
     RecordRange = rrCurrentOnly
     BeforePrint = RLReport1BeforePrint

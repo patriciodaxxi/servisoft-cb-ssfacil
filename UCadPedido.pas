@@ -1644,10 +1644,6 @@ begin
     vID_Aux := fnc_Primeiro_Pedido(fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger);
     if vID_Aux = 1 then
       MessageDlg('*** Cliente possui menos de 4 pedidos!'  +#13 + #13 + vOBS_Primeiro_Pedido , mtInformation, [mbOk], 0);
-    //Conforme Michelle passou para Luciane 13/04/2016
-    //else
-    //if vID_Aux = 2 then
-    //  MessageDlg('*** Cliente possui títulos em atraso, e possui menos de 10 pedidos!'  +#13 + #13 + vOBS_Primeiro_Pedido , mtInformation, [mbOk], 0);
   end;
   if vID_Aux > 0 then
   begin

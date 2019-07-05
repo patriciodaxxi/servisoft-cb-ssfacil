@@ -204,6 +204,7 @@ type
     cdsMovimentoLARGURA: TFloatField;
     cdsMovimentoCOMPRIMENTO: TFloatField;
     cdsMovimentoESPESSURA: TFloatField;
+    sdsMovimentoID_VENDEDOR_INT: TIntegerField;
     procedure cdsMovimentoReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
@@ -223,7 +224,8 @@ type
                                   Vlr_Icms_UF_Remet, Vlr_Icms_UF_Dest: Real;
                                   Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String;
                                   BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST,
-                                  Comprimento, Largura, Espessura: Real): Integer;
+                                  Comprimento, Largura, Espessura: Real;
+                                  ID_Vendedor : Integer): Integer;
 
     procedure prc_ImprimeVendasCupomW;//WriteLn
     procedure prc_ImprimeVendasCupomC(cAvanco: Word);//Canvas
@@ -273,7 +275,8 @@ function TDMMovimento.fnc_Gravar_Movimento(ID_Mov, Filial, Item,
   ID_CondPgto, ID_Recibo, ID_Vendedor, ID_Cor: Integer; Perc_Comissao, Vlr_Icms_UF_Remet, Vlr_Icms_UF_Dest: Real;
   Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String ;
   BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST,
-  Comprimento, Largura, Espessura: Real): Integer;
+  Comprimento, Largura, Espessura: Real;
+  ID_Vendedor_Int : Integer): Integer;
 var
   vAux: Integer;
 begin
@@ -460,6 +463,10 @@ begin
     cdsMovimentoESPESSURA.AsFloat          := StrToFloat(FormatFloat('0.00',Espessura));
 
     //********************
+
+    //04/07/2019
+    if ID_Vendedor_Int > 0 then
+      cdsMovimentoID_VENDEDOR_INT.AsInteger := ID_Vendedor_Int;
 
     cdsMovimento.Post;
     cdsMovimento.ApplyUpdates(0);

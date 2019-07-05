@@ -778,6 +778,8 @@ var
   vObsGNRE: WideString;
   vMSGUnidExp : String;
   vPrazoAux : String;
+  vID_Vendedor_Int : Integer;
+  vID_Ped_Ant : Integer;
 begin
   fDMCadNotaFiscal.mPedidoAux.EmptyDataSet;
   vIDAux := fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger;
@@ -876,6 +878,7 @@ begin
       vVersao := '';
       vIBPT_Chave := '';
       fDMCadNotaFiscal.vPerc_Comissao_Rateio := 0;
+      vID_Ped_Ant := 0;
       fDMCadNotaFiscal.cdsNotaFiscal_Itens.First;
       while not fDMCadNotaFiscal.cdsNotaFiscal_Itens.Eof do
       begin
@@ -955,6 +958,14 @@ begin
         if (fDMCadNotaFiscal.cdsProduto.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,[loCaseInsensitive])) and
            (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString <> 'N') then
         begin
+          //04/07/2019
+          if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger <= 0) then
+            vID_Vendedor_Int := 0
+          else
+          if (vID_Ped_Ant <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger) then
+            vID_Vendedor_Int := uGrava_NotaFiscal.fnc_Busca_Vend_Int_Ped(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger);
+          //***************
+
           vID_Mov := fDMMovimento.fnc_Gravar_Movimento(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger,
                                                        fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger,
@@ -1014,8 +1025,8 @@ begin
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensCOMPRIMENTO.AsFloat,
                                                        fDMCadNotaFiscal.cdsNotaFiscal_ItensLARGURA.AsFloat,
-                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensESPESSURA.AsFloat);
-
+                                                       fDMCadNotaFiscal.cdsNotaFiscal_ItensESPESSURA.AsFloat,
+                                                       vID_Vendedor_Int);
         end;
         if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger <> vID_Estoque) or
            (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger <> vID_Mov) then
@@ -1069,6 +1080,8 @@ begin
         if fDMCadNotaFiscal.cdsNotaFiscalTIPO_NOTA.AsString = 'E' then
           uCalculo_NotaFiscal.Atualiza_Preco2(fDMCadNotaFiscal);
         //*****************************
+
+        vID_Ped_Ant := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger;
 
         fDMCadNotaFiscal.cdsNotaFiscal_Itens.Next;
       end;
@@ -2088,11 +2101,11 @@ begin
   fDMCadNotaFiscal.prc_Inserir_Itens;
   fDMCadNotaFiscal.vState_Item := 'I';
 
-////////////// testa se produto é filtrado por cliente
-  //02/06/2016  incluido a filial
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente;
-/////////////////////////////////////
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
 
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);
   ffrmCadNotaFiscal_Itens.fDMCadNotaFiscal       := fDMCadNotaFiscal;
@@ -2154,11 +2167,12 @@ begin
       if fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger > 0 then
         if (fDMCadNotaFiscal.qParametros_GeralUSAR_PESSOA_FILIAL.AsString = 'S') then
           fDMCadNotaFiscal.prc_Abrir_cdsCliente(vTipo_Reg,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger);
-////////////// testa se produto é filtrado por cliente
-      //02/06/2016  incluido a filial
-      if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-        fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente;
-/////////////////////////////////////
+
+      //03/07/2019 ajustado para filstrar por tabela de preço
+      if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+         (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+        fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+      //****************
     end;
   end;
 end;
@@ -2190,11 +2204,11 @@ begin
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Edit;
   fDMCadNotaFiscal.vState_Item := 'E';
 
-////////////// testa se produto é filtrado por cliente
-  //02/06/2016  incluido a filial
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente;
-/////////////////////////////////////
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
 
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);
   ffrmCadNotaFiscal_Itens.vBaseIcms_Cre := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS.AsFloat));
@@ -2625,11 +2639,11 @@ begin
     MessageDlg('*** Cliente não informado!', mtError, [mbOk], 0);
     Exit;
   end;
-  fDMCadNotaFiscal.cdsProduto.Close;
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente
-  else
-    fDMCadNotaFiscal.cdsProduto.Open;
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
 
   fDMCadNotaFiscal.vID_CFOP := 0;
   prc_Posicionar_Cliente;
@@ -3752,11 +3766,11 @@ begin
   end;
   vTipo_Config_Email := 1;
   prc_Posiciona_NotaFiscal;
-////////////// testa se produto é filtrado por cliente
-  //02/06/2016  incluido a filial
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente;
-/////////////////////////////////////
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+
   if (fDMCadNotaFiscal.cdsNotaFiscal.IsEmpty) or (fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger < 1) then
   begin
     MessageDlg('*** Não existe nota selecionada!', mtError, [mbOk], 0);
@@ -3948,11 +3962,11 @@ begin
   fDMCadNotaFiscal.cdsCliente.Open;
   fDMCadNotaFiscal.cdsCliente.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,[loCaseInsensitive]);
 
-////////////// testa se produto é filtrado por cliente
-  //02/06/2016  incluido a filial
-  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') then
-    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente;
-/////////////////////////////////////
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
 
   if (fDMCadNotaFiscal.cdsNotaFiscal.IsEmpty) or (fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger < 1) then
   begin
@@ -4080,7 +4094,7 @@ procedure TfrmCadNotaFiscal.XT1Click(Sender: TObject);
 begin
   fDMCadNotaFiscal.vID_Nota_Imp := 0;
   fDMCadNotaFiscal.cdsProduto.Close;
-  fDMCadNotaFiscal.sdsProduto.CommandText := fDMCadNotaFiscal.ctProduto;
+  fDMCadNotaFiscal.sdsProduto.CommandText := fDMCadNotaFiscal.ctProduto + ' WHERE INATIVO = ' + QuotedStr('N');
   fDMCadNotaFiscal.cdsProduto.Open;
 
   ffrmImportar_TXT       := TfrmImportar_TXT.Create(self);

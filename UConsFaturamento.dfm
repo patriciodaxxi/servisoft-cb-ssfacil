@@ -21,7 +21,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     Left = 0
     Top = 0
     Width = 1010
-    Height = 83
+    Height = 89
     Align = alTop
     BevelOuter = bvNone
     Color = clSilver
@@ -59,7 +59,7 @@ object frmConsFaturamento: TfrmConsFaturamento
       Caption = 'Final:'
     end
     object Label18: TLabel
-      Left = 489
+      Left = 497
       Top = 29
       Width = 73
       Height = 13
@@ -180,7 +180,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     end
     object btnConsultar: TNxButton
       Left = 481
-      Top = 53
+      Top = 59
       Width = 170
       Height = 30
       Caption = 'Efetuar Pesquisa'
@@ -252,7 +252,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     end
     object btnImprimir: TNxButton
       Left = 650
-      Top = 53
+      Top = 59
       Width = 170
       Height = 30
       Caption = 'Imprimir'
@@ -324,7 +324,7 @@ object frmConsFaturamento: TfrmConsFaturamento
       Transparent = True
     end
     object cbImpCliente: TNxComboBox
-      Left = 564
+      Left = 572
       Top = 21
       Width = 230
       Height = 21
@@ -351,9 +351,9 @@ object frmConsFaturamento: TfrmConsFaturamento
   end
   object RzPageControl1: TRzPageControl
     Left = 0
-    Top = 104
+    Top = 110
     Width = 1010
-    Height = 381
+    Height = 375
     ActivePage = TS_Cliente
     ActivePageDefault = TS_Cliente
     Align = alClient
@@ -377,7 +377,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1006
-        Height = 358
+        Height = 352
         ActivePage = TS_Cliente_Acum
         ActivePageDefault = TS_Cliente_Acum
         Align = alClient
@@ -402,7 +402,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 335
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli
@@ -500,7 +500,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 335
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli_UF
@@ -612,7 +612,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 335
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli_Cid
@@ -732,7 +732,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 335
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli_Cid_Det
@@ -872,7 +872,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 25
         Width = 1006
-        Height = 333
+        Height = 327
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal_CliProd
@@ -1021,7 +1021,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1006
-        Height = 358
+        Height = 352
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal_Prod
@@ -1119,7 +1119,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1006
-        Height = 358
+        Height = 352
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal_DT
@@ -1211,7 +1211,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1006
-        Height = 358
+        Height = 352
         ActivePage = TS_UF_Acumulado
         ActivePageDefault = TS_UF_Acumulado
         Align = alClient
@@ -1224,7 +1224,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 335
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_UF
@@ -1315,7 +1315,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 335
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsProduto_UF
@@ -1440,7 +1440,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 335
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsGrupo_UF
@@ -1550,7 +1550,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1006
-        Height = 358
+        Height = 352
         ActivePage = TS_PRODUTO_DET_Fat
         ActivePageDefault = TS_PRODUTO_DET_Fat
         Align = alClient
@@ -1563,7 +1563,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 335
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsProduto_Det
@@ -1720,7 +1720,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 335
+            Height = 329
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsProduto_Det_Geral
@@ -1920,7 +1920,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1006
-        Height = 358
+        Height = 352
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal
@@ -2073,7 +2073,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1006
-        Height = 358
+        Height = 352
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsCupomFiscal
@@ -2168,7 +2168,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1006
-        Height = 358
+        Height = 352
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsReciboNF
@@ -2259,7 +2259,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 25
         Width = 1006
-        Height = 333
+        Height = 327
         ActivePage = TS_Vendedor_Acum
         ActivePageDefault = TS_Vendedor_Acum
         Align = alClient
@@ -2284,7 +2284,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 310
+            Height = 304
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Vend
@@ -2391,7 +2391,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 310
+            Height = 304
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_VendCli
@@ -2507,7 +2507,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 310
+            Height = 304
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_VendProd
@@ -2624,7 +2624,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1002
-            Height = 310
+            Height = 304
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsVendCliProd
@@ -2875,7 +2875,7 @@ object frmConsFaturamento: TfrmConsFaturamento
   end
   object Panel4: TPanel
     Left = 0
-    Top = 83
+    Top = 89
     Width = 1010
     Height = 21
     Align = alTop
@@ -2884,7 +2884,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     TabOrder = 1
     object Label10: TLabel
       Left = 34
-      Top = 5
+      Top = 6
       Width = 68
       Height = 13
       Alignment = taRightJustify
@@ -2892,7 +2892,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     end
     object NxComboBox1: TNxComboBox
       Left = 103
-      Top = -1
+      Top = 0
       Width = 230
       Height = 21
       Cursor = crArrow

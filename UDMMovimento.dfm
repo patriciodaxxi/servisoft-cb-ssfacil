@@ -305,6 +305,8 @@ object DMMovimento: TDMMovimento
     end
     object sdsMovimentoESPESSURA: TFloatField
       FieldName = 'ESPESSURA'
+    object sdsMovimentoID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
     end
   end
   object dspMovimento: TDataSetProvider
@@ -608,6 +610,8 @@ object DMMovimento: TDMMovimento
     end
     object cdsMovimentoESPESSURA: TFloatField
       FieldName = 'ESPESSURA'
+    object cdsMovimentoID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
     end
   end
   object dsMovimento: TDataSource

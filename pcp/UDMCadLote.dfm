@@ -1354,7 +1354,7 @@ object DMCadLote: TDMCadLote
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 464
-    Top = 256
+    Top = 255
   end
   object dspBusca_Ped: TDataSetProvider
     DataSet = sdsBusca_Ped
@@ -3288,7 +3288,7 @@ object DMCadLote: TDMCadLote
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 464
+    Left = 462
     Top = 368
   end
   object dspPedido_Ord: TDataSetProvider
@@ -3592,38 +3592,6 @@ object DMCadLote: TDMCadLote
     SQLConnection = dmDatabase.scoDados
     Left = 456
     Top = 80
-    object sdsPendente_PedNUM_PEDIDO: TIntegerField
-      FieldName = 'NUM_PEDIDO'
-    end
-    object sdsPendente_PedPEDIDO_CLIENTE: TStringField
-      FieldName = 'PEDIDO_CLIENTE'
-    end
-    object sdsPendente_PedID_CLIENTE: TIntegerField
-      FieldName = 'ID_CLIENTE'
-    end
-    object sdsPendente_PedDTEMISSAO: TDateField
-      FieldName = 'DTEMISSAO'
-    end
-    object sdsPendente_PedID: TIntegerField
-      FieldName = 'ID'
-      Required = True
-    end
-    object sdsPendente_PedFILIAL: TIntegerField
-      FieldName = 'FILIAL'
-    end
-    object sdsPendente_PedNOME_CLIENTE: TStringField
-      FieldName = 'NOME_CLIENTE'
-      Size = 60
-    end
-    object sdsPendente_PedFANTASIA: TStringField
-      FieldName = 'FANTASIA'
-      Size = 30
-    end
-    object sdsPendente_PedSELECIONADO: TStringField
-      FieldName = 'SELECIONADO'
-      FixedChar = True
-      Size = 1
-    end
   end
   object dspPendente_Ped: TDataSetProvider
     DataSet = sdsPendente_Ped
@@ -4142,8 +4110,8 @@ object DMCadLote: TDMCadLote
       ''
       'end.')
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 864
-    Top = 456
+    Left = 819
+    Top = 422
     Datasets = <
       item
         DataSet = frxLote
@@ -4655,8 +4623,8 @@ object DMCadLote: TDMCadLote
       'OBS=OBS')
     DataSet = mLote
     BCDToCurrency = False
-    Left = 864
-    Top = 520
+    Left = 819
+    Top = 486
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -4679,7 +4647,22 @@ object DMCadLote: TDMCadLote
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 920
-    Top = 456
+    Left = 875
+    Top = 422
+  end
+  object qParametros_Prod: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_CORRUGADO'
+      'FROM PARAMETROS_PROD')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1015
+    Top = 463
+    object qParametros_ProdUSA_CORRUGADO: TStringField
+      FieldName = 'USA_CORRUGADO'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

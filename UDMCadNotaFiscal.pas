@@ -3006,32 +3006,6 @@ type
     qNTEProdImpPERC_ICMSSUBST_INTERNO: TFloatField;
     qNTEProdImpDATA: TDateField;
     qNTEProdImpBASE_ST_ORIG: TFloatField;
-    sdsProduto_Imp: TSQLDataSet;
-    sdsProduto_ImpID: TIntegerField;
-    sdsProduto_ImpBASE_ST: TFloatField;
-    sdsProduto_ImpVLR_ST: TFloatField;
-    sdsProduto_ImpPERC_ST: TFloatField;
-    sdsProduto_ImpDATA: TDateField;
-    sdsProduto_ImpQTD_ORIGINAL: TFloatField;
-    sdsProduto_ImpUNIDADE_ORIG: TStringField;
-    sdsProduto_ImpTIPO_REG: TStringField;
-    sdsProduto_ImpBASE_ST_ORIG: TFloatField;
-    sdsProduto_ImpVLR_ST_ORIG: TFloatField;
-    sdsProduto_ImpQTD_PACOTE: TFloatField;
-    dspProduto_Imp: TDataSetProvider;
-    cdsProduto_Imp: TClientDataSet;
-    cdsProduto_ImpID: TIntegerField;
-    cdsProduto_ImpBASE_ST: TFloatField;
-    cdsProduto_ImpVLR_ST: TFloatField;
-    cdsProduto_ImpPERC_ST: TFloatField;
-    cdsProduto_ImpDATA: TDateField;
-    cdsProduto_ImpQTD_ORIGINAL: TFloatField;
-    cdsProduto_ImpUNIDADE_ORIG: TStringField;
-    cdsProduto_ImpTIPO_REG: TStringField;
-    cdsProduto_ImpBASE_ST_ORIG: TFloatField;
-    cdsProduto_ImpVLR_ST_ORIG: TFloatField;
-    cdsProduto_ImpQTD_PACOTE: TFloatField;
-    dsProduto_Imp: TDataSource;
     qNTEProdImpUNIDADE: TStringField;
     sdsNotaFiscalVLR_BASE_EFET: TFloatField;
     sdsNotaFiscalVLR_ICMS_EFET: TFloatField;
@@ -3079,6 +3053,7 @@ type
     cdsNotaFiscal_ItensLARGURA: TFloatField;
     cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField;
     cdsNotaFiscal_ItensESPESSURA: TFloatField;
+    qParametros_ProdMOSTRA_PROD_TPRECO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
@@ -4942,12 +4917,25 @@ begin
 end;
 
 procedure TDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(Somente_Filial: Boolean = False);
+var
+  vComando : String;
 begin
   cdsProduto.Close;
-  if (cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') and not(Somente_Filial) then
-    sdsProduto.CommandText := ctProduto + ' AND ID_CLIENTE = ' + cdsNotaFiscalID_CLIENTE.AsString;
-  if qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S' then
-    sdsProduto.CommandText := ctProduto + ' AND FILIAL = ' + cdsNotaFiscalFILIAL.AsString;
+  if qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S' then
+  begin
+    vComando := ' LEFT JOIN tab_preco_itens I ON P.ID = I.ID_PRODUTO '
+              + ' WHERE INATIVO = ' + QuotedStr('N')
+              + ' AND I.ID = ' + IntToStr(cdsClienteID_TAB_PRECO.AsInteger);
+    sdsProduto.CommandText := ctProduto + vComando;
+  end
+  else
+  begin
+    sdsProduto.CommandText := ctProduto + ' WHERE INATIVO = ' + QuotedStr('N');
+    if (cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') and not(Somente_Filial) then
+      sdsProduto.CommandText := sdsProduto.CommandText + ' AND ID_CLIENTE = ' + cdsNotaFiscalID_CLIENTE.AsString;
+    if qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S' then
+      sdsProduto.CommandText := sdsProduto.CommandText + ' AND FILIAL = ' + cdsNotaFiscalFILIAL.AsString;
+  end;
   cdsProduto.Open;
 end;
 
