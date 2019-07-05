@@ -3102,8 +3102,6 @@ begin
           end;
           //******************
 
-          prc_Gravar_Produto_Imp;
-
           fDMRecebeXML.cdsNotaFiscal_Itens.Edit;
           fDMRecebeXML.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
           fDMRecebeXML.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger  := vID_Mov;
@@ -3651,8 +3649,7 @@ begin
                                                fDMRecebeXML.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat,
                                                fDMRecebeXML.cdsNotaFiscal_ItensCOMPRIMENTO.AsFloat,
                                                fDMRecebeXML.cdsNotaFiscal_ItensLARGURA.AsFloat,
-                                               fDMRecebeXML.cdsNotaFiscal_ItensESPESSURA.AsFloat);
-                                               0);
+                                               fDMRecebeXML.cdsNotaFiscal_ItensESPESSURA.AsFloat,0);
 end;
 
 procedure TfrmRecebeXML.DBEdit70Exit(Sender: TObject);
@@ -4609,7 +4606,7 @@ begin
     //******************
 
     //24/02/2019
-    prc_Gravar_Produto_Imp;
+//    prc_Gravar_Produto_Imp;
     //******************
 
     fDMRecebeXML.cdsNotaFiscal_Itens.Edit;
@@ -4620,6 +4617,7 @@ begin
 
     fDMRecebeXML.mRateioGeral.Next;
   end;
+end;
 
 procedure TfrmRecebeXML.btnAjustarUnidadeClick(Sender: TObject);
 var

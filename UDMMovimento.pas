@@ -205,6 +205,7 @@ type
     cdsMovimentoCOMPRIMENTO: TFloatField;
     cdsMovimentoESPESSURA: TFloatField;
     sdsMovimentoID_VENDEDOR_INT: TIntegerField;
+    cdsMovimentoID_VENDEDOR_INT: TIntegerField;
     procedure cdsMovimentoReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
@@ -225,7 +226,7 @@ type
                                   Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String;
                                   BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST,
                                   Comprimento, Largura, Espessura: Real;
-                                  ID_Vendedor : Integer): Integer;
+                                  ID_Vendedor_Int : Integer): Integer;
 
     procedure prc_ImprimeVendasCupomW;//WriteLn
     procedure prc_ImprimeVendasCupomC(cAvanco: Word);//Canvas
