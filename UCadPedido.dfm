@@ -2411,7 +2411,7 @@ object frmCadPedido: TfrmCadPedido
         Top = 190
         Width = 1093
         Height = 397
-        ActivePage = RzTabSheet2
+        ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -2419,7 +2419,7 @@ object frmCadPedido: TfrmCadPedido
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -3061,7 +3061,7 @@ object frmCadPedido: TfrmCadPedido
               OnClick = btnAltDtEntregaClick
             end
             object btnCopiarOS: TBitBtn
-              Left = 720
+              Left = 719
               Top = 4
               Width = 89
               Height = 25

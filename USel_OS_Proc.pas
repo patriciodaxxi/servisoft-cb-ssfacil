@@ -41,6 +41,9 @@ type
     cdsOSQTD: TFloatField;
     cdsOSQTD_FATURADO: TFloatField;
     cdsOSQTD_RESTANTE: TFloatField;
+    cdsOSDTRECEBIMENTO: TDateField;
+    cdsOSDT_AGENDA: TDateField;
+    cdsOSDTEMISSAO: TDateField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;

@@ -277,7 +277,7 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
     WidthOfIndicator = 27
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 12
+    ColCount = 15
     RowCount = 2
     Columns = <
       item
@@ -286,7 +286,16 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
         FieldName = 'NUM_OS'
         Title.Alignment = taCenter
         Title.Caption = 'N'#186' OS'
-        Width = 78
+        Width = 70
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'DTRECEBIMENTO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Dt. Recebimento'
+        Width = 72
         Visible = True
       end
       item
@@ -327,7 +336,7 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
         FieldName = 'NOME_PRODUTO'
         Title.Alignment = taCenter
         Title.Caption = 'Nome Produto'
-        Width = 343
+        Width = 329
         Visible = True
       end
       item
@@ -353,7 +362,23 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
         FieldName = 'NOME'
         Title.Alignment = taCenter
         Title.Caption = 'Nome Cliente'
-        Width = 216
+        Width = 155
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'DTEMISSAO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Data OS'
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'DT_AGENDA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Dt. Previs'#227'o Final OS'
         Visible = True
       end
       item
@@ -378,11 +403,12 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
       'SELECT I.id, I.item, i.qtd, i.qtd_faturado, i.qtd_restante , I.i' +
       'd_produto, I.nome_produto,'#13#10'P.unidade, P.id_ncm, CAB.id_cliente,' +
       ' i.referencia,'#13#10'CLI.nome, CLI.cnpj_cpf, CAB.produzido, cab.num_o' +
-      's, i.vlr_total, cab.num_nota'#13#10'FROM ORDEMSERVICO_ITENS I'#13#10'INNER J' +
-      'OIN ORDEMSERVICO CAB'#13#10'ON I.id = CAB.id'#13#10'INNER JOIN PRODUTO P'#13#10'ON' +
-      ' I.ID_PRODUTO = P.id'#13#10'INNER JOIN PESSOA CLI'#13#10'ON CAB.id_cliente =' +
-      ' CLI.codigo'#13#10'WHERE CAB.id_cliente = :ID_CLIENTE'#13#10'  AND CAB.FILIA' +
-      'L = :FILIAL'#13#10'  AND I.qtd_restante > 0'#13#10
+      's, i.vlr_total, cab.num_nota,'#13#10'CAB.dtrecebimento, CAB.dt_agenda,' +
+      ' CAB.dtemissao'#13#10'FROM ORDEMSERVICO_ITENS I'#13#10'INNER JOIN ORDEMSERVI' +
+      'CO CAB'#13#10'ON I.id = CAB.id'#13#10'INNER JOIN PRODUTO P'#13#10'ON I.ID_PRODUTO ' +
+      '= P.id'#13#10'INNER JOIN PESSOA CLI'#13#10'ON CAB.id_cliente = CLI.codigo'#13#10'W' +
+      'HERE CAB.id_cliente = :ID_CLIENTE'#13#10'  AND CAB.FILIAL = :FILIAL'#13#10' ' +
+      ' AND I.qtd_restante > 0'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -397,7 +423,7 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 400
-    Top = 192
+    Top = 191
   end
   object dspOS: TDataSetProvider
     DataSet = sdsOS
@@ -467,6 +493,15 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
     end
     object cdsOSQTD_RESTANTE: TFloatField
       FieldName = 'QTD_RESTANTE'
+    end
+    object cdsOSDTRECEBIMENTO: TDateField
+      FieldName = 'DTRECEBIMENTO'
+    end
+    object cdsOSDT_AGENDA: TDateField
+      FieldName = 'DT_AGENDA'
+    end
+    object cdsOSDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
     end
   end
   object dsOS: TDataSource

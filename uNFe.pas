@@ -4301,7 +4301,8 @@ begin
               if (fDMCadNotaFiscal.cdsParametrosINFORMAR_COR_PROD.AsString = 'C') and (trim(vNomeProduto) = '') then
                 vNomeProduto := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNome_Cor_Combinacao.AsString;
             end;
-            if trim(fDMCadNotaFiscal.qProduto_FornCOD_MATERIAL_FORN.AsString) <> '' then
+            //05/07/2019 tirado pq na nota 18500 deu erro na SLTextil aqui
+            if (trim(fDMCadNotaFiscal.qProduto_FornCOD_MATERIAL_FORN.AsString) <> '') then
               vCodProdutoNfe := fDMCadNotaFiscal.qProduto_FornCOD_MATERIAL_FORN.AsString;
           end;
         end

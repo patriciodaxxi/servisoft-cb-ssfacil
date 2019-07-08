@@ -3054,6 +3054,8 @@ type
     cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField;
     cdsNotaFiscal_ItensESPESSURA: TFloatField;
     qParametros_ProdMOSTRA_PROD_TPRECO: TStringField;
+    cdsPedidoDTRECEBIMENTO: TDateField;
+    cdsPedidoDT_AGENDA: TDateField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
