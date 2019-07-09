@@ -488,7 +488,7 @@ type
     procedure Matricial80Colunas1Click(Sender: TObject);
   private
     { Private declarations }
-    fLista : TStringList;
+    fLista: TStringList;
     fDMCadPedido: TDMCadPedido;
     fDMSel_Produto: TDMSel_Produto;
     ffrmCadPedido_Itens: TfrmCadPedido_Itens;
@@ -505,7 +505,7 @@ type
     ffrmGerar_Rotulos_Color: TfrmGerar_Rotulos_Color;
     ffrmConsHist_Chapa: TfrmConsHist_Chapa;
     ffrmCadObs_Aux: TfrmCadObs_Aux;
-    ffrmMontaPed_TipoItem : TfrmMontaPed_TipoItem;
+    ffrmMontaPed_TipoItem: TfrmMontaPed_TipoItem;
 
     vID_ClienteAnt: Integer;
     vVlrFrete_Ant: Real;
@@ -526,13 +526,13 @@ type
     procedure prc_Limpar_Edit_Consulta;
     procedure prc_Posiciona_Imp;
     procedure prc_Monta_Etiqueta_Nav;
-    procedure prc_Monta_Etiqueta_Calcado(Tipo: String ; Qtd_Emb : Real = 0); //D= DOS   A=A4 em windows
+    procedure prc_Monta_Etiqueta_Calcado(Tipo: String ; Qtd_Emb: Real = 0); //D= DOS   A=A4 em windows
     procedure prc_Gravar_mEtiqueta_Nav(Tamanho: String);
     procedure prc_Imprimir_Etiqueta;
     procedure prc_Gravar_Pedido_Excel;
     procedure prc_Opcao_Consumidor;
     procedure prc_Opcao_Prazo;
-    procedure prc_Abre_Filial_Menu(Empresa : Integer; Tipo : Integer);
+    procedure prc_Abre_Filial_Menu(Empresa: Integer; Tipo: Integer);
 
     function fnc_senha(Opcao_Senha, Campo_Senha, Tipo, Desc1, Desc2, Desc3: String ; Item: Integer): Boolean;
 
@@ -544,8 +544,8 @@ type
 
     procedure prc_Gravar_Carrinho;
     function fnc_Lote: Boolean;
-    function fnc_Existe_Baixa(ID, Item : Integer) : Boolean;
-
+    function fnc_Existe_Baixa(ID, Item: Integer): Boolean;
+    procedure prc_Excluir_Grade(vItemOrig: Integer);
   public
     { Public declarations }
     vQtd_Caixa: Integer;
@@ -556,12 +556,11 @@ var
 
 implementation
 
-uses DmdDatabase, rsDBUtils, uUtilPadrao, uRelPedido, uRelPedido_SulTextil, uRelPedido2, USel_Pessoa, UDMUtil, USenha,
+uses DmdDatabase, rsDBUtils, uUtilPadrao, uRelPedido, uRelPedido_SulTextil, uRelPedido2, USel_Pessoa, UDMUtil, USenha, UTalaoPed,
   URelPedido_Tam, URelEtiqueta_Nav, URelPedido_Tam2, URelPedido_JW, URelEtiqueta, uUtilCliente, uCalculo_Pedido, UCadPedido_Copia,
   UConsPedido_Nota, UDMConsPedido, UInformar_DtExpedicao, UInformar_Processo_Ped, UConsPedido_Senha, USel_Produto, UCadPedido_Cupom,
-  UDMPedidoImp, USel_OS_Proc, UCadPedido_ItensCli, UTalaoPed,
-  UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido,
-  UConsClienteOBS, uImprimir;
+  UDMPedidoImp, USel_OS_Proc, UCadPedido_ItensCli, UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido, UConsClienteOBS,
+  uImprimir;
 
 {$R *.dfm}
 
@@ -1367,12 +1366,11 @@ begin
   begin
     if fnc_Existe_Baixa(fDMCadPedido.cdsPedidoID.AsInteger,fDMCadPedido.cdsPedido_ItensITEM.AsInteger) then
     begin
-      MessageDlg('*** Item não pode ser excluido, possui liberação para faturamento!',mtError, [mbOk], 0);
+      MessageDlg('*** Item não pode ser excluído, possui liberação para faturamento!',mtError, [mbOk], 0);
       exit;
     end;
   end;
-  //*******************
-
+  //*******************  
 
   if MessageDlg('Deseja excluir o item selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     Exit;
@@ -1381,7 +1379,16 @@ begin
     if not fnc_senha('ROT','SENHA_PEDIDO','R','','Rótulo já impresso','',0) then
       exit;
 
-  uGrava_Pedido.prc_Excluir_Item_Ped(fDMCadPedido);
+  if (fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger > 0) then
+  begin
+    if MessageDlg('O item selecionado faz parte de uma grade, deseja excluir toda a grade?',mtConfirmation,[mbNo,mbOk],0) = mrOk then
+    begin
+      ShowMessage('Este item pode estar fracionado em vários talões, exclua manualmente os demais itens!');
+      prc_Excluir_Grade(fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger);
+    end;
+  end
+  else
+    uGrava_Pedido.prc_Excluir_Item_Ped(fDMCadPedido);
 
   if fDMCadPedido.cdsPedido_Itens.RecordCount < 1 then
     fDMCadPedido.cdsPedidoVLR_DESCONTO.AsFloat  := 0;
@@ -2408,7 +2415,7 @@ begin
   MessageDlg('Etiquetas impressas!', mtInformation, [mbOk], 0);
 end;
 
-procedure TfrmCadPedido.prc_Monta_Etiqueta_Calcado(Tipo: String ; Qtd_Emb : Real); //D= DOS   A=A4 em windows
+procedure TfrmCadPedido.prc_Monta_Etiqueta_Calcado(Tipo: String ; Qtd_Emb: Real); //D= DOS   A=A4 em windows
 var
   i, I2: Integer;
   vQtdDiv: Integer;
@@ -2417,9 +2424,9 @@ var
   vQtdPac: Integer;
   fDMPedidoImp: TDMPedidoImp;
   ffrmImpEtiq_Emb: TfrmImpEtiq_Emb;
-  vFloat : Real;
-  vQtdAux2 : Real;
-  vQtdPac_Orig : Integer;
+  vFloat: Real;
+  vQtdAux2: Real;
+  vQtdPac_Orig: Integer;
 
 begin
   vTexto := '1';
@@ -2706,8 +2713,8 @@ end;
 procedure TfrmCadPedido.prc_Gravar_Pedido_Excel;
 var
   vTexto: String;
-  vID_VariacaoAux : Integer;
-  vID_CFOPAnt : Integer;
+  vID_VariacaoAux: Integer;
+  vID_CFOPAnt: Integer;
 begin
   fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger := fDMCadPedido.vID_Cliente;
   fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime := Date;
@@ -3189,7 +3196,7 @@ var
   vID_CorAux: Integer;
   vIndice: String;
   vAux: Integer;
-  vOrdRef : String;
+  vOrdRef: String;
 begin
   vIndice := fDMCadPedido.cdsPedidoImp_Itens.IndexFieldNames;
   fDMCadPedido.vMSGErro := '';
@@ -4385,10 +4392,10 @@ end;
 
 procedure TfrmCadPedido.ItemClick(Sender: TObject);
 var
-  vArq, x : String;
-  email : TValidaEmail;
-  enviar : TfrxMailExport;
-  pdf : TfrxPDFExport;
+  vArq, x: String;
+  email: TValidaEmail;
+  enviar: TfrxMailExport;
+  pdf: TfrxPDFExport;
 begin
   x := StringReplace(TMenuItem(Sender).Caption,'&','',[rfReplaceAll]);
   fDMCadPedido.qFilial_Relatorio_Menu.Locate('DESCRICAO',x,[loCaseInsensitive]);
@@ -4425,8 +4432,8 @@ end;
 
 procedure TfrmCadPedido.prc_Abre_Filial_Menu(Empresa, Tipo: Integer);
 var
-  i : integer;
-  item : TMenuItem;
+  i: integer;
+  item: TMenuItem;
 begin
   fLista := TStringList.Create;
   i := 0;
@@ -4479,7 +4486,7 @@ end;
 procedure TfrmCadPedido.EtiquetaA4ItensPersonalizado1Click(
   Sender: TObject);
 var
-  vArq : String;
+  vArq: String;
 begin
   if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
     exit;
@@ -4500,7 +4507,7 @@ end;
 
 procedure TfrmCadPedido.SalvarPedido1Click(Sender: TObject);
 var
-  vCaminhoArquivo : String;
+  vCaminhoArquivo: String;
 begin
   if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
     exit;
@@ -4530,8 +4537,8 @@ end;
 
 procedure TfrmCadPedido.Matricial80Colunas1Click(Sender: TObject);
 var
-  vTexto1 : String;
-  vTexto2 : String;
+  vTexto1: String;
+  vTexto2: String;
 begin
   fDMCadPedido.cdsParametros.Close;
   fDMCadPedido.cdsParametros.Open;
@@ -4602,6 +4609,18 @@ begin
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
 
   uImprimir.prc_Rodape_Mat;
+end;
+
+procedure TfrmCadPedido.prc_Excluir_Grade(vItemOrig: Integer);
+begin
+  fDMCadPedido.cdsPedido_Itens.Filtered := False;
+  fDMCadPedido.cdsPedido_Itens.Filter   := 'ITEM_ORIGINAL = ''' + IntToStr(vItemOrig) + '''';
+  fDMCadPedido.cdsPedido_Itens.Filtered := True;
+  while not fDMCadPedido.cdsPedido_Itens.Eof do
+  begin
+    uGrava_Pedido.prc_Excluir_Item_Ped(fDMCadPedido);
+  end;
+  fDMCadPedido.cdsPedido_Itens.Filtered := False;
 end;
 
 end.

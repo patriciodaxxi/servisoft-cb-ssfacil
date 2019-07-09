@@ -20,7 +20,7 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 968
+    Width = 976
     Height = 33
     Align = alTop
     Color = clSilver
@@ -29,8 +29,8 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 89
-    Width = 968
-    Height = 354
+    Width = 976
+    Height = 362
     Hint = 'Click bot'#227'o direto para selecionar todos'
     Align = alClient
     Ctl3D = False
@@ -161,7 +161,7 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
   object Panel2: TPanel
     Left = 0
     Top = 33
-    Width = 968
+    Width = 976
     Height = 56
     Align = alTop
     Color = clSilver
@@ -269,8 +269,8 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
   end
   object gbxDuplicata: TRzGroupBox
     Left = 0
-    Top = 443
-    Width = 968
+    Top = 451
+    Width = 976
     Height = 114
     Align = alBottom
     BorderColor = clMaroon
@@ -316,7 +316,7 @@ object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
     object Memo1: TMemo
       Left = 6
       Top = 45
-      Width = 956
+      Width = 964
       Height = 63
       Align = alBottom
       Ctl3D = False

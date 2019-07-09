@@ -636,8 +636,6 @@ begin
     fDMCadPedido.cdsPedido_Material.Delete;
   end;
   fDMCadPedido.cdsPedido_Itens.Delete;
-
-
 end;
 
 procedure Excluir_Duplicata_Ped(ID: Integer);

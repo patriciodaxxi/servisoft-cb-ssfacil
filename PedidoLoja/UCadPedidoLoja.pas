@@ -425,7 +425,6 @@ var
   vAux: Real;
   ffrmSenha: TfrmSenha;
   vID_LocalAux: Integer;
-  vItemAux: Integer;
   vAprazo_Avista: String;
 begin
   //Alerta valores em atraso 11/05/2015
@@ -2810,7 +2809,6 @@ end;
 procedure TfrmCadPedidoLoja.Analtico1Click(Sender: TObject);
 var
   vArq: String;
-  i: Integer;
 begin
   fDMPedidoImp := TDMPedidoImp.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMPedidoImp);
