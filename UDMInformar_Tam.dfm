@@ -1026,15 +1026,27 @@ object DMInformar_Tam: TDMInformar_Tam
         Name = 'Fabrica'
         DataType = ftString
         Size = 10
+      end
+      item
+        Name = 'Largura'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Comprimento'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Espessura'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     Params = <>
     StoreDefs = True
     OnNewRecord = mItensNewRecord
-    Left = 88
+    Left = 87
     Top = 200
     Data = {
-      EA1400009619E0BD0100000018000000D3000000000003000000EA140A49445F
+      201500009619E0BD0100000018000000D600000000000300000020150A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
       010005574944544802000200140007556E696461646501004900000001000557
       494454480200020006000351746408000400000000000749445F43464F500400
@@ -1201,7 +1213,9 @@ object DMInformar_Tam: TDMInformar_Tam
       080004000000000016504552435F424153455F49434D53535542545F52454408
       0004000000000014415455414C495A415F505245434F5F435553544F01004900
       0000010005574944544802000200010007466162726963610100490000000100
-      055749445448020002000A000000}
+      055749445448020002000A00074C61726775726108000400000000000B436F6D
+      7072696D656E746F080004000000000009457370657373757261080004000000
+      00000000}
     object mItensID_Produto: TIntegerField
       FieldName = 'ID_Produto'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2013,6 +2027,15 @@ object DMInformar_Tam: TDMInformar_Tam
     object mItensFabrica: TStringField
       FieldName = 'Fabrica'
       Size = 10
+    end
+    object mItensLargura: TFloatField
+      FieldName = 'Largura'
+    end
+    object mItensComprimento: TFloatField
+      FieldName = 'Comprimento'
+    end
+    object mItensEspessura: TFloatField
+      FieldName = 'Espessura'
     end
   end
   object mPedido_Cli: TClientDataSet

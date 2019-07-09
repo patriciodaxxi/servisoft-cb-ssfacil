@@ -606,8 +606,6 @@ begin
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
       fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
 
-      
-
       prc_Monta_Grupo('N');
       prc_Monta_ContaOrc('N');
     end
@@ -2271,8 +2269,9 @@ begin
   if fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger > 0 then
     fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger := fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger;
   fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString := fDMRecebeXML.mItensNotaPosse_Material.AsString;
-  fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
-
+  if trim(fDMRecebeXML.mItensNotaSped_Tipo.AsString) <> '' then
+    fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
+    
   //26/01/2017
   if fDMRecebeXML.qParametros_RecXMLMOSTRAR_VLR_VENDA.AsString = 'S' then
   begin
@@ -2307,7 +2306,7 @@ begin
   if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
     fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
   fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
-  fDMRecebeXML.mItensNotaSped_Tipo.AsString := fDMRecebeXML. cdsProdutoSPED_TIPO_ITEM.AsString;
+  fDMRecebeXML.mItensNotaSped_Tipo.AsString := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
 
   prc_Monta_Grupo('N');
   prc_Monta_ContaOrc('N');
