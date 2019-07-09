@@ -94,6 +94,7 @@ end;
 procedure TfrmGerar_Lote_AuxEst.SMDBGrid2DblClick(Sender: TObject);
 var
   VQtd : Real;
+  vAux : Real;
 begin
   if MessageDlg('Usar o Lote de Controle: ' + fDMCadLote.cdsSaldoEstNUM_LOTE_CONTROLE.AsString ,mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
@@ -108,6 +109,16 @@ begin
   fDMCadLote.mAuxLoteQtd_Estoque_Usa.AsFloat := StrToFloat(FormatFloat('0.0000',vQtd));
   fDMCadLote.mAuxLoteNum_Lote_Controle.AsString := fDMCadLote.cdsSaldoEstNUM_LOTE_CONTROLE.AsString;
   fDMCadLote.mAuxLoteUsa_Estoque.AsString    := 'S';
+
+  if (fDMCadLote.cdsProdutoTIPO_PRODUCAO.AsString = 'T') and (Tipo = 'S') then
+  begin
+    if StrToFloat(FormatFloat('0.000',fDMCadLote.cdsProdutoMETROS_CARGA.AsFloat)) > 0 then
+    begin
+      fDMCadLote.mAuxLoteMetros_Carga.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadLote.cdsProdutoMETROS_CARGA.AsFloat));
+      fDMCadLote.mAuxLoteCarga.AsFloat        := StrToFloat(FormatFloat('0.00',fDMCadLote.mAuxLoteQtd.AsFloat / fDMCadLote.cdsProdutoMETROS_CARGA.AsFloat));
+    end;
+  end;
+
   fDMCadLote.mAuxLote.Post;
   Close;
 end;
