@@ -3105,15 +3105,12 @@ begin
           fDMRecebeXML.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
           fDMRecebeXML.cdsNotaFiscal_ItensID_MOVIMENTO.AsInteger  := vID_Mov;
           fDMRecebeXML.cdsNotaFiscal_Itens.Post;
-        fDMRecebeXML.mItensNota.Next;
-
         end;
         fDMRecebeXML.mItensNota.Next;
       end;
     end;
 
     fDMRecebeXML.cdsNotaFiscal.ApplyUpdates(0);
-
 
     pcDados.ActivePage := TabSheet5;
 

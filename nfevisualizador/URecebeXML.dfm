@@ -1138,7 +1138,7 @@ object frmRecebeXML: TfrmRecebeXML
           ParentFont = False
         end
         object Label61: TLabel
-          Left = 866
+          Left = 874
           Top = 389
           Width = 132
           Height = 13
@@ -1502,7 +1502,7 @@ object frmRecebeXML: TfrmRecebeXML
           TabOrder = 18
         end
         object BitBtn2: TBitBtn
-          Left = 890
+          Left = 898
           Top = 407
           Width = 123
           Height = 25
@@ -1514,7 +1514,7 @@ object frmRecebeXML: TfrmRecebeXML
           OnClick = BitBtn2Click
         end
         object BitBtn1: TBitBtn
-          Left = 890
+          Left = 898
           Top = 459
           Width = 123
           Height = 25
