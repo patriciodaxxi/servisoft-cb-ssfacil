@@ -291,21 +291,15 @@ object DMEstoque: TDMEstoque
     Params = <
       item
         DataType = ftInteger
-        Name = 'FILIAL'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
         Name = 'ID_PRODUTO'
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT QTD'
+      'SELECT sum(QTD) QTD'
       'FROM ESTOQUE_ATUAL'
-      'WHERE FILIAL = :FILIAL'
-      '      AND ID_PRODUTO = :ID_PRODUTO')
+      'WHERE ID_PRODUTO = :ID_PRODUTO')
     SQLConnection = dmDatabase.scoDados
-    Left = 224
+    Left = 225
     Top = 184
     object qEstoqueQTD: TFMTBCDField
       FieldName = 'QTD'
@@ -422,5 +416,21 @@ object DMEstoque: TDMEstoque
     DataSet = cdsFilial
     Left = 250
     Top = 78
+  end
+  object qParametros_Est: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_ESTOQUE_GERAL_CAD'
+      'FROM PARAMETROS_EST P'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 358
+    Top = 48
+    object qParametros_EstUSA_ESTOQUE_GERAL_CAD: TStringField
+      FieldName = 'USA_ESTOQUE_GERAL_CAD'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

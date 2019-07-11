@@ -622,10 +622,10 @@ var
   vCodAux: Integer;
 begin
   fDMCadPessoa.prc_Abrir_Cidade('');
-  fDMCadPessoa.cdsPessoaID_REGIME_TRIB.AsInteger := 1;
-  fDMCadPessoa.cdsPessoaTIPO_CONSUMIDOR.AsString := '1';
-  fDMCadPessoa.cdsPessoaTIPO_ICMS.AsString := 'N';
-  fDMCadPessoa.cdsPessoaTP_CLIENTE.AsString := 'S';
+  //fDMCadPessoa.cdsPessoaID_REGIME_TRIB.AsInteger := 1;
+  //fDMCadPessoa.cdsPessoaTIPO_CONSUMIDOR.AsString := '1';
+  //fDMCadPessoa.cdsPessoaTIPO_ICMS.AsString := 'N';
+  //fDMCadPessoa.cdsPessoaTP_CLIENTE.AsString := 'S';
   if fDMCadPessoa.fnc_Erro_Registro then
   begin
     MessageDlg(fDMCadPessoa.vMsgPessoa, mtError, [mbOk], 0);
@@ -752,6 +752,11 @@ begin
 
   fDMCadPessoa.cdsPessoaPESSOA.AsString := 'F';
   fDMCadPessoa.cdsPessoaUF.AsString     := fDMCadPessoa.cdsFilialUF.AsString;
+
+  fDMCadPessoa.cdsPessoaID_REGIME_TRIB.AsInteger := 1;
+  fDMCadPessoa.cdsPessoaTIPO_CONSUMIDOR.AsString := '1';
+  fDMCadPessoa.cdsPessoaTIPO_ICMS.AsString := 'N';
+
   RxDBComboBox1Exit(nil);
   DBEdit6.SetFocus;
 end;

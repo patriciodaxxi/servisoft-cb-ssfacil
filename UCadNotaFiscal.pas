@@ -5478,7 +5478,7 @@ end;
 procedure TfrmCadNotaFiscal.prc_Excluir_Grade(vItemOrig: Integer);
 begin
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filtered := False;
-  fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filter := 'ITEM_ORIGINAL = ''' + IntToStr(vItemOrig) + '''';
+  fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filter   := 'ITEM_ORIGINAL = ''' + IntToStr(vItemOrig) + '''';
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.Filtered := True;
   fDMCadNotaFiscal.cdsNotaFiscal_Itens.First;
   while not fDMCadNotaFiscal.cdsNotaFiscal_Itens.IsEmpty do

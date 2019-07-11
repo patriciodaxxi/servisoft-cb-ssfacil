@@ -7904,14 +7904,14 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'd_grade, PE.VLR_FRETE, PE.OBS_NOTA,'#13#10'PE.id_cliente_triangular, P' +
       'E.perc_icms_frete, PI.nomeproduto NOME_PRODUTO_PED, PE.NGR, PE.I' +
       'D_TAB_PRECO, PI.TIPO_OS,'#13#10'PF.desc_suframa_pis_cofins, PF.desc_su' +
-      'frama_icms, O.DTEMISSAO DTEMISSAO_OS, O.NUM_OS NUM_OS_SERVICO'#13#10'F' +
-      'ROM PEDIDO PE'#13#10'INNER JOIN PEDIDO_ITEM PI ON (PE.ID = PI.ID)'#13#10'INN' +
-      'ER JOIN PESSOA CLI ON (PE.ID_CLIENTE = CLI.CODIGO)'#13#10'INNER JOIN P' +
-      'RODUTO PRO ON (PI.ID_PRODUTO = PRO.ID)'#13#10'LEFT JOIN COMBINACAO COM' +
-      'B ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JOIN GRUPO GR ON PRO.id_grupo =' +
-      ' GR.id'#13#10'left join pessoa_fiscal PF ON PE.ID_CLIENTE = PF.codigo'#13 +
-      #10'LEFT JOIN ORDEMSERVICO O ON PI.ID_OS_SERV = O.ID'#13#10'WHERE PI.qtd_' +
-      'restante > 0'#13#10
+      'frama_icms, O.DTEMISSAO DTEMISSAO_OS, O.NUM_OS NUM_OS_SERVICO,'#13#10 +
+      'O.dtrecebimento, O.dt_agenda'#13#10'FROM PEDIDO PE'#13#10'INNER JOIN PEDIDO_' +
+      'ITEM PI ON (PE.ID = PI.ID)'#13#10'INNER JOIN PESSOA CLI ON (PE.ID_CLIE' +
+      'NTE = CLI.CODIGO)'#13#10'INNER JOIN PRODUTO PRO ON (PI.ID_PRODUTO = PR' +
+      'O.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT ' +
+      'JOIN GRUPO GR ON PRO.id_grupo = GR.id'#13#10'left join pessoa_fiscal P' +
+      'F ON PE.ID_CLIENTE = PF.codigo'#13#10'LEFT JOIN ORDEMSERVICO O ON PI.I' +
+      'D_OS_SERV = O.ID'#13#10'WHERE PI.qtd_restante > 0'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -7929,8 +7929,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspPedido'
     OnCalcFields = cdsPedidoCalcFields
-    Left = 465
-    Top = 199
+    Left = 466
+    Top = 198
     object cdsPedidoID: TIntegerField
       Alignment = taCenter
       DisplayLabel = 'ID Pedido'
@@ -8245,6 +8245,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsPedidoNUM_OS_SERVICO: TIntegerField
       FieldName = 'NUM_OS_SERVICO'
+    end
+    object cdsPedidoDTRECEBIMENTO: TDateField
+      FieldName = 'DTRECEBIMENTO'
+    end
+    object cdsPedidoDT_AGENDA: TDateField
+      FieldName = 'DT_AGENDA'
     end
   end
   object dsPedido: TDataSource

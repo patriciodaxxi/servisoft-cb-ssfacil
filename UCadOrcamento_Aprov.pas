@@ -226,7 +226,6 @@ end;
 procedure TfrmCadOrcamento_Aprov.prc_Gravar_Pedido;
 var
   vID_Aux: Integer;
-  x, i: integer;
   vID_LocalAux: Integer;
 begin
   UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);

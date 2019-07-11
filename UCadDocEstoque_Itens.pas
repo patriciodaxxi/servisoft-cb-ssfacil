@@ -474,7 +474,8 @@ begin
     vidLocal := fDMCadDocEstoque.cdsDocEstoqueID_LOCAL_ESTOQUE.AsInteger;
   vQtdAux := 0;
   if trim(RxDBLookupCombo4.Text) <> '' then
-    vQtdAux := fDMEstoque.fnc_Buscar_Estoque(RxDBLookupCombo4.KeyValue,vidLocal,0);
+    //vQtdAux := fDMEstoque.fnc_Buscar_Estoque_DM(RxDBLookupCombo4.KeyValue,vidLocal,0);  10/07/2019
+    vQtdAux := fnc_Buscar_Estoque(RxDBLookupCombo4.KeyValue,vidLocal,0,fDMCadDocEstoque.cdsDocEstoqueFILIAL.AsInteger);
   lblEstoque.Caption := FormatFloat('0.####',vQtdAux);
   vIDAux := 0;
   if RxDBLookupCombo4.Text <> '' then
@@ -645,7 +646,9 @@ begin
     vidLocal := fDMCadDocEstoque.cdsDocEstoqueID_LOCAL_ESTOQUE.AsInteger;
 
   if trim(RxDBLookupCombo5.Text) <> '' then
-    vQtdAux := fDMEstoque.fnc_Buscar_Estoque(RxDBLookupCombo4.KeyValue,vidLocal,RxDBLookupCombo5.KeyValue);
+    //vQtdAux := fDMEstoque.fnc_Buscar_Estoque(RxDBLookupCombo4.KeyValue,vidLocal,RxDBLookupCombo5.KeyValue); 10/07/2019
+    vQtdAux := fnc_Buscar_Estoque(RxDBLookupCombo4.KeyValue,vidLocal,RxDBLookupCombo5.KeyValue,fDMCadDocEstoque.cdsDocEstoqueFILIAL.AsInteger);
+
   lblEstoque.Caption := FormatFloat('0.####',vQtdAux);
 end;
 

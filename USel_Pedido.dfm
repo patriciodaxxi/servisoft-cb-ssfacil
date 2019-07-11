@@ -284,7 +284,7 @@ object frmSel_Pedido: TfrmSel_Pedido
     WidthOfIndicator = 27
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 33
+    ColCount = 35
     RowCount = 2
     Columns = <
       item
@@ -453,6 +453,22 @@ object frmSel_Pedido: TfrmSel_Pedido
         FieldName = 'DTEMISSAO_OS'
         Title.Alignment = taCenter
         Title.Caption = 'Data OS'
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'DTRECEBIMENTO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Dt. Recebimento OS'
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'DT_AGENDA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Dt. Previs'#227'o Final OS'
         Visible = True
       end
       item

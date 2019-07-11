@@ -142,7 +142,8 @@ begin
         SMDBGrid1.Columns[i].FieldName     := 'NOME_PRODUTO_PED';
         SMDBGrid1.Columns[i].Title.Caption := 'Nome Produto';
       end;
-      if ((SMDBGrid1.Columns[i].FieldName = 'NUM_OS_SERVICO') or (SMDBGrid1.Columns[i].FieldName = 'DTEMISSAO_OS'))
+      if ((SMDBGrid1.Columns[i].FieldName = 'NUM_OS_SERVICO') or (SMDBGrid1.Columns[i].FieldName = 'DTEMISSAO_OS')
+          or (SMDBGrid1.Columns[i].FieldName = 'DT_AGENDA') or (SMDBGrid1.Columns[i].FieldName = 'DTRECEBIMENTO'))
         and (trim(fDmCadVale.qParametros_PedUSA_OPERACAO_SERV.AsString) <> 'S') then
         SMDBGrid1.Columns[i].Visible := False;
     end;

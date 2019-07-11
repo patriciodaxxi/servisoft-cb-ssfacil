@@ -244,10 +244,8 @@ type
     vID_Produto_Ant: Integer;
     vID_Terceiro_Ant: Integer;
     vDtEntrega_Ant: TDateTime;
-    vVlrDesc_Ant: Real;
     vVlrProd_Ant: Real;
     vPreco_Ori: Real;
-    vID_Servico_Ant: Integer;
     vUnidade_Ant: String;
 
     vVlrTotal_Ant: Real;
@@ -1041,7 +1039,6 @@ procedure TfrmCadPedido_Itens.BitBtn1Click(Sender: TObject);
 var
   vFlagErro: Boolean;
   vEditar: Boolean;
-  vDataSet: TDataSet;
   vCarimbo: String;
   vCaixinha: String;
   vQtdAux: Real;
@@ -1049,7 +1046,7 @@ begin
   if fnc_Erro then
     exit;
   if (fDMCadPedido.cdsParametrosUSA_LOTE.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensGERAR_LOTE.AsString <> 'S') then
-    if MessageDlg('Item não esta marcado para gerar lote, confirma assim mesmo?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    if MessageDlg('Item não está marcado para gerar lote, confirma assim mesmo?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
       exit;
 
   if fDMCadPedido.cdsPedido_ItensTIPO_SERVICO.AsString <> 'S' then
@@ -1076,7 +1073,8 @@ begin
   else
     vEditar := False;
 
-  if ((fDMCadPedido.cdsParametrosCONTROLAR_ESTOQUE_SAIDA.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensGERAR_ESTOQUE.AsString = 'S')) or (fDMCadPedido.qParametros_EstVERIFICA_ESTOQUE_ENT_PEDIDO.AsString = 'S') then
+  if ((fDMCadPedido.cdsParametrosCONTROLAR_ESTOQUE_SAIDA.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensGERAR_ESTOQUE.AsString = 'S')) or
+     (fDMCadPedido.qParametros_EstVERIFICA_ESTOQUE_ENT_PEDIDO.AsString = 'S') then
   begin
     if (fDMCadPedido.cdsProdutoUSA_GRADE.AsString <> 'S') or
        ((vEditar) and (StrToFloat(FormatFloat('0.0000',vQtd_Prod_Ant)) <> StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat))))  then
@@ -1442,8 +1440,6 @@ end;
 
 procedure TfrmCadPedido_Itens.FormKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
-var
-  vQtdAux: Real;  
 begin
   if (Key = Vk_F10) then
     BitBtn4Click(Sender)
@@ -1467,7 +1463,6 @@ begin
     end;
     RxDBLookupCombo4Change(Sender);
   end;
-
 end;
 
 procedure TfrmCadPedido_Itens.RxDBLookupCombo1Enter(Sender: TObject);
@@ -1498,7 +1493,6 @@ end;
 procedure TfrmCadPedido_Itens.pnlTipo1Exit(Sender: TObject);
 var
   vFinalidadeAux: String;
-  vID_VariacaoAux: Integer;
 begin
   vFinalidadeAux := fDMCadPedido.cdsPedidoFINALIDADE.AsString;
   if trim(vFinalidadeAux) = '' then
@@ -1654,7 +1648,6 @@ procedure TfrmCadPedido_Itens.prc_Gravar_Tam;
 var
   x, y: Integer;
   vItemAux,
-  vCont,
   vQtdAux,
   vOriginal,
   vQtdTalao,
@@ -1664,6 +1657,9 @@ var
   vQtdUsar: Integer;
 begin
   // 05/01/2019 Lotus
+  x := 0;
+  y := 0;
+
   if (fDMCadPedido.qParametros_PedINF_QTD_TALAO.AsString = 'S') and (fDMInformar_Tam.vQtd_Por_Talao > 0) then
   begin
     vQtdAux := Round(fDMInformar_Tam.vQtd_Grade);
@@ -1671,7 +1667,6 @@ begin
     if vQtdAux mod fDMInformar_Tam.vQtd_Por_Talao > 0 then
       vQtdAux := vQtdAux + 1;
     fDMInformar_Tam.mItens.EmptyDataSet;
-    x := 0;
     while x < vQtdAux do
     begin
       inc(x);
@@ -1740,7 +1735,6 @@ begin
     end;
 
     fDMInformar_Tam.mItens.First;
-    x := 0;
     vOriginal := 0;
     inc(vItemOriginal);
     while not fDMInformar_Tam.mItens.Eof do
@@ -1805,14 +1799,11 @@ begin
     exit;
   end;
 
-
   //*****************
 
-  vCont := 0;
   fDMInformar_Tam.mItens.First;
   while not fDMInformar_Tam.mItens.Eof do
   begin
-    vCont := vCont + 1;
     fDMInformar_Tam.mItens_Mat.First;
     fDMInformar_Tam.mTamanho.First;
     while not fDMInformar_Tam.mTamanho.Eof do
@@ -2536,11 +2527,10 @@ var
   vQtdAux: Real;
   vID_Cor: Integer;
 begin
-  vQtdAux := 0;
   vID_Cor := 0;
   if trim(RxDBLookupCombo3.Text) <> '' then
     vID_Cor := RxDBLookupCombo3.KeyValue;
-  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger,vID_Cor);
+  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger,vID_Cor,fDMCadPedido.cdsPedidoFILIAL.AsInteger);
   lblEstoque.Caption := FormatFloat('0.####',vQtdAux);
 end;
 

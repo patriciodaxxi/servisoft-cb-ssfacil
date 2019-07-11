@@ -425,7 +425,6 @@ var
   vAux: Real;
   ffrmSenha: TfrmSenha;
   vID_LocalAux: Integer;
-  vItemAux: Integer;
   vAprazo_Avista: String;
 begin
   //Alerta valores em atraso 11/05/2015
@@ -2698,7 +2697,7 @@ var
   vQtdAux: Real;
 begin
   vQtdAux := 0;
-  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger,0);
+  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger,0,fDMCadPedido.cdsPedidoFILIAL.AsInteger);
   ceEstoque.Value := StrToFloat(FormatFloat('0.####',vQtdAux));
 end;
 
@@ -2810,7 +2809,6 @@ end;
 procedure TfrmCadPedidoLoja.Analtico1Click(Sender: TObject);
 var
   vArq: String;
-  i: Integer;
 begin
   fDMPedidoImp := TDMPedidoImp.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMPedidoImp);

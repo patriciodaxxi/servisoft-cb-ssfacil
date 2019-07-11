@@ -2227,7 +2227,13 @@ begin
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CALCULAR_ST')   and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'COMPLEMENTO_PROD') and
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PRECO_CUSTO')   and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_MARGEM') and
              (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'PERC_MARGEM2')  and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'OBS_ETIQUETA') and
-             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'OBSMATERIAL')  then
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'OBSMATERIAL')   and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ENCERADO')  and
+
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'ATUALIZA_PRECO_CUSTO')   and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Fabrica')  and
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Item_Tam')   and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'UNIDADE_PROD')  and
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'Caixinha')   and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'TIPO_OS')  and
+             (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'CONV_UNIDADE') and (fDMInformar_Tam.mItens.Fields[x].FieldName <> 'QTD_SOBRA_OC') then
+
             fDMCadNotaFiscal.cdsNotaFiscal_Itens.FieldByName(fDMInformar_Tam.mItens.Fields[x].FieldName).AsVariant := fDMInformar_Tam.mItens.Fields[x].Value;
         except
         end;
@@ -3252,7 +3258,7 @@ begin
   vID_Cor := 0;
   if trim(RxDBLookupCombo14.Text) <> '' then
     vID_Cor := RxDBLookupCombo14.KeyValue;
-  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadNotaFiscal.cdsNotaFiscalID_LOCAL_ESTOQUE.AsInteger,vID_Cor);
+  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadNotaFiscal.cdsNotaFiscalID_LOCAL_ESTOQUE.AsInteger,vID_Cor,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger);
   lblEstoque.Caption := FormatFloat('0.####',vQtdAux);
 end;
 
