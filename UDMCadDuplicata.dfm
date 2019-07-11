@@ -3430,8 +3430,8 @@ object DMCadDuplicata: TDMCadDuplicata
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43489.600541307900000000
-    ReportOptions.LastChange = 43595.702934247680000000
+    ReportOptions.CreateDate = 43399.644061967600000000
+    ReportOptions.LastChange = 43657.479058761570000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint

@@ -25,7 +25,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
     Top = 0
     Width = 904
     Height = 670
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1672,7 +1672,14 @@ object frmCadFinanceiro: TfrmCadFinanceiro
     end
     object Recibo1: TMenuItem
       Caption = 'Recibo'
-      OnClick = Recibo1Click
+      object Recebimento1: TMenuItem
+        Caption = 'Recebimento'
+        OnClick = Recebimento1Click
+      end
+      object Pagamento1: TMenuItem
+        Caption = 'Pagamento'
+        OnClick = Pagamento1Click
+      end
     end
   end
   object ValorPorExtenso1: TValorPorExtenso

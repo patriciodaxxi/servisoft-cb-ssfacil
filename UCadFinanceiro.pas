@@ -99,6 +99,8 @@ type
     lblChequeVencido: TLabel;
     Label31: TLabel;
     lblSaldoGeral: TLabel;
+    Recebimento1: TMenuItem;
+    Pagamento1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -134,7 +136,8 @@ type
       Shift: TShiftState);
     procedure RxDBLookupCombo7Enter(Sender: TObject);
     procedure MovimentopData1Click(Sender: TObject);
-    procedure Recibo1Click(Sender: TObject);
+    procedure Recebimento1Click(Sender: TObject);
+    procedure Pagamento1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadFinanceiro: TDMCadFinanceiro;
@@ -709,12 +712,6 @@ end;
 
 procedure TfrmCadFinanceiro.prc_Imp_Recibo;
 begin
-end;
-
-procedure TfrmCadFinanceiro.Recibo1Click(Sender: TObject);
-var
-  vArq: String;
-begin
   fDMCadFinanceiro.mRecibo.EmptyDataSet;
 
   fDMCadFinanceiro.prc_Localizar(fDMCadFinanceiro.cdsFinanceiro_ConsultaID.AsInteger);
@@ -747,9 +744,31 @@ begin
   fDMCadFinanceiro.mReciboFinanceiro_Valor.AsFloat       := StrToFloat(FormatFloat('#,###,##0.00',fDMCadFinanceiro.cdsFinanceiro_ConsultaVLR_MOVIMENTO.AsFloat));
   ValorPorExtenso1.Valor := fDMCadFinanceiro.cdsFinanceiro_ConsultaVLR_MOVIMENTO.AsFloat;
   fDMCadFinanceiro.mReciboFinanceiro_VlrExtenso.AsString := ValorPorExtenso1.Texto;
-  fDMCadFinanceiro.mRecibo.Post;
+  fDMCadFinanceiro.mRecibo.Post;               
+end;
 
+procedure TfrmCadFinanceiro.Recebimento1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  prc_Imp_Recibo;
   vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Recibo_Financeiro.fr3';
+  if FileExists(vArq) then
+    fDMCadFinanceiro.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatorio não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadFinanceiro.frxReport1.ShowReport;
+end;
+
+procedure TfrmCadFinanceiro.Pagamento1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  prc_Imp_Recibo;
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Recibo_Financeiro_Pag.fr3';
   if FileExists(vArq) then
     fDMCadFinanceiro.frxReport1.Report.LoadFromFile(vArq)
   else
