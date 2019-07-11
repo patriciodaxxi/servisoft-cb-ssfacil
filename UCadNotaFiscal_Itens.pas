@@ -196,6 +196,13 @@ type
     RxDBlkContaOrc: TRxDBLookupCombo;
     RxDBlkCCusto: TRxDBLookupCombo;
     lblCCusto: TLabel;
+    gbxDimensoes: TGroupBox;
+    Label66: TLabel;
+    Label67: TLabel;
+    Label68: TLabel;
+    DBEdit37: TDBEdit;
+    DBEdit38: TDBEdit;
+    DBEdit39: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
@@ -507,6 +514,8 @@ begin
 
   Label56.Visible  := (fDMCadNotaFiscal.cdsParametrosEMPRESA_SUCATA.AsString = 'S');
   DBEdit31.Visible := (fDMCadNotaFiscal.cdsParametrosEMPRESA_SUCATA.AsString = 'S');
+  gbxDimensoes.Visible := (fDMCadNotaFiscal.cdsParametrosEMPRESA_SUCATA.AsString = 'S');
+
   Label57.Visible  := (fDMCadNotaFiscal.cdsParametrosUSA_LOTE_CONTROLE.AsString = 'S');
   DBEdit32.Visible := (fDMCadNotaFiscal.cdsParametrosUSA_LOTE_CONTROLE.AsString = 'S');
   Label58.Visible  := (fDMCadNotaFiscal.cdsParametrosTIPO_COMISSAO_PROD.AsString = 'I');

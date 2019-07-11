@@ -3056,6 +3056,10 @@ type
     qParametros_ProdMOSTRA_PROD_TPRECO: TStringField;
     cdsPedidoDTRECEBIMENTO: TDateField;
     cdsPedidoDT_AGENDA: TDateField;
+    cdsPedidoCOMPRIMENTO: TFloatField;
+    cdsPedidoLARGURA: TFloatField;
+    cdsPedidoESPESSURA: TFloatField;
+    cdsPedido_TipoESPESSURA: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

@@ -1,10 +1,10 @@
 object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
-  Left = 289
-  Top = 176
+  Left = 373
+  Top = 239
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Cadastro dos Itens do Ajuste do Estoque'
-  ClientHeight = 322
+  ClientHeight = 383
   ClientWidth = 735
   Color = clMoneyGreen
   Font.Charset = DEFAULT_CHARSET
@@ -254,9 +254,33 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
     Alignment = taRightJustify
     Caption = 'Localiza'#231#227'o:'
   end
+  object Label66: TLabel
+    Left = 73
+    Top = 296
+    Width = 64
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Comprimento:'
+  end
+  object Label67: TLabel
+    Left = 243
+    Top = 296
+    Width = 39
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Largura:'
+  end
+  object Label68: TLabel
+    Left = 393
+    Top = 298
+    Width = 52
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Espessura:'
+  end
   object Panel3: TPanel
     Left = 0
-    Top = 288
+    Top = 349
     Width = 735
     Height = 34
     Align = alBottom
@@ -641,5 +665,35 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
       TabOrder = 0
       OnKeyDown = Edit1KeyDown
     end
+  end
+  object DBEdit37: TDBEdit
+    Left = 138
+    Top = 288
+    Width = 87
+    Height = 21
+    DataField = 'COMPRIMENTO'
+    DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+    TabOrder = 15
+    OnExit = DBEdit5Exit
+  end
+  object DBEdit38: TDBEdit
+    Left = 283
+    Top = 288
+    Width = 91
+    Height = 21
+    DataField = 'LARGURA'
+    DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+    TabOrder = 16
+    OnExit = DBEdit5Exit
+  end
+  object DBEdit39: TDBEdit
+    Left = 448
+    Top = 290
+    Width = 89
+    Height = 21
+    DataField = 'ESPESSURA'
+    DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+    TabOrder = 17
+    OnExit = DBEdit5Exit
   end
 end

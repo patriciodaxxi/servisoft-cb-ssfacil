@@ -25,7 +25,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
     Top = 0
     Width = 929
     Height = 630
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -963,6 +963,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
               item
                 Expanded = False
                 FieldName = 'ID_MOVESTOQUE'
+                Width = 64
                 Visible = True
               end
               item
@@ -993,7 +994,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
             object btnInserir_Itens: TNxButton
               Left = 1
               Top = 1
-              Width = 152
+              Width = 148
               Height = 28
               Align = alLeft
               Caption = 'Inserir Produto'
@@ -1066,7 +1067,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
               OnClick = btnInserir_ItensClick
             end
             object btnAlterar_Itens: TNxButton
-              Left = 153
+              Left = 149
               Top = 1
               Width = 152
               Height = 28
@@ -1139,7 +1140,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
               OnClick = btnAlterar_ItensClick
             end
             object btnExcluir_Itens: TNxButton
-              Left = 305
+              Left = 301
               Top = 1
               Width = 152
               Height = 28

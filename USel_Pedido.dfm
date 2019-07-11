@@ -1,6 +1,6 @@
 object frmSel_Pedido: TfrmSel_Pedido
-  Left = 125
-  Top = 44
+  Left = 271
+  Top = 33
   Width = 1116
   Height = 664
   BorderIcons = [biSystemMenu]
@@ -19,16 +19,16 @@ object frmSel_Pedido: TfrmSel_Pedido
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter
-    Left = 888
+    Left = 880
     Top = 52
     Width = 8
-    Height = 479
+    Height = 471
     Align = alRight
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1108
+    Width = 1100
     Height = 52
     Align = alTop
     Color = clMoneyGreen
@@ -250,8 +250,8 @@ object frmSel_Pedido: TfrmSel_Pedido
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 52
-    Width = 888
-    Height = 479
+    Width = 880
+    Height = 471
     Align = alClient
     Ctl3D = False
     DataSource = DMCadNotaFiscal.dsPedido
@@ -565,8 +565,8 @@ object frmSel_Pedido: TfrmSel_Pedido
   end
   object Panel2: TPanel
     Left = 0
-    Top = 596
-    Width = 1108
+    Top = 588
+    Width = 1100
     Height = 37
     Align = alBottom
     Color = 8404992
@@ -689,8 +689,8 @@ object frmSel_Pedido: TfrmSel_Pedido
   end
   object SMDBGrid6: TSMDBGrid
     Left = 0
-    Top = 531
-    Width = 1108
+    Top = 523
+    Width = 1100
     Height = 65
     Align = alBottom
     Ctl3D = False
@@ -728,7 +728,7 @@ object frmSel_Pedido: TfrmSel_Pedido
     WidthOfIndicator = 11
     DefaultRowHeight = 16
     ScrollBars = ssHorizontal
-    ColCount = 15
+    ColCount = 16
     RowCount = 2
     Columns = <
       item
@@ -805,6 +805,13 @@ object frmSel_Pedido: TfrmSel_Pedido
       end
       item
         Expanded = False
+        FieldName = 'ESPESSURA'
+        Title.Caption = '# (mm)'
+        Title.Color = 16764831
+        Visible = True
+      end
+      item
+        Expanded = False
         FieldName = 'ALTURA'
         Title.Alignment = taCenter
         Title.Caption = '# (mm)'
@@ -857,10 +864,10 @@ object frmSel_Pedido: TfrmSel_Pedido
       end>
   end
   object SMDBGrid2: TSMDBGrid
-    Left = 896
+    Left = 888
     Top = 52
     Width = 212
-    Height = 479
+    Height = 471
     TabStop = False
     Align = alRight
     Ctl3D = False

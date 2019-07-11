@@ -55,6 +55,12 @@ type
     pnlCod_Barras: TPanel;
     Label11: TLabel;
     Edit1: TEdit;
+    Label66: TLabel;
+    Label67: TLabel;
+    Label68: TLabel;
+    DBEdit37: TDBEdit;
+    DBEdit38: TDBEdit;
+    DBEdit39: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);

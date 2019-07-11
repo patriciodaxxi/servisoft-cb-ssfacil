@@ -7884,34 +7884,37 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT PE.ID, PE.PEDIDO_CLIENTE, PE.id_cliente, PE.DTEMISSAO, PI' +
-      '.id_produto, PI.id_cfop, PE.NUM_PEDIDO,'#13#10'PI.vlr_unitario, PI.qtd' +
-      ', PI.qtd_faturado, PI.qtd_restante, PI.qtd_afaturar, PI.ID_NCM I' +
-      'D_NCM_PED,'#13#10'PI.REFERENCIA, PI.ITEM_CLIENTE,'#13#10'CLI.nome NOMECLIENT' +
-      'E, PRO.REFERENCIA REFERENCIA_PRO, PRO.NOME NOMEPRODUTO, CLI.cnpj' +
-      '_cpf,'#13#10'PI.dtentrega, PI.item, PI.VLR_DESCONTO, PRO.ID_NCM, PI.UN' +
-      'IDADE, PI.PERC_IPI, PI.OBS_COMPLEMENTAR,'#13#10'PI.NUMOS, PE.TIPO_FRET' +
-      'E, PE.ID_CONDPGTO, PE.IMP_OC_NOTA, PI.ID_VARIACAO, PI.QTD_LIBERA' +
-      'DA,'#13#10'PI.QTD_PRODUZIDA, PE.TIPO_REG, PI.TAMANHO, PE.ID_TRANSPORTA' +
-      'DORA, PE.NUM_DOC,'#13#10'PI.NUM_TALAO, PI.VLR_DESCONTORATEIO, PI.QTD_P' +
-      'ECA, PI.QTD_FUT, PI.ID_COR, COMB.nome NOME_COR,'#13#10'PI.ID_MOVESTOQU' +
-      'E, PI.TIPO_ACESSORIO, PI.QTD_LANCAR_ESTOQUE,'#13#10'GR.nome NOME_GRUPO' +
-      ', PE.NOME_CONSUMIDOR, PE.VLR_ADIANTAMENTO, PI.PERC_COMISSAO PERC' +
-      '_COMISSAO_ITEM,'#13#10'PE.PERC_COMISSAO, PI.NUM_LOTE_CONTROLE,'#13#10'PE.ID_' +
-      'TIPO_COBRANCA, PE.ID_CONTA, PE.LOCALENTREGA, PRO.LANCA_LOTE_CONT' +
-      'ROLE, PI.COPIAR_SELECIONADO, PE.NOTIFICACAO, PE.ID_VENDEDOR, PE.' +
-      'VLR_ENTRADA,'#13#10'PE.GERA_ENTRADA_NO_PEDIDO, PI.ITEM_ORIGINAL, PRO.i' +
-      'd_grade, PE.VLR_FRETE, PE.OBS_NOTA,'#13#10'PE.id_cliente_triangular, P' +
-      'E.perc_icms_frete, PI.nomeproduto NOME_PRODUTO_PED, PE.NGR, PE.I' +
-      'D_TAB_PRECO, PI.TIPO_OS,'#13#10'PF.desc_suframa_pis_cofins, PF.desc_su' +
-      'frama_icms, O.DTEMISSAO DTEMISSAO_OS, O.NUM_OS NUM_OS_SERVICO,'#13#10 +
-      'O.dtrecebimento, O.dt_agenda'#13#10'FROM PEDIDO PE'#13#10'INNER JOIN PEDIDO_' +
-      'ITEM PI ON (PE.ID = PI.ID)'#13#10'INNER JOIN PESSOA CLI ON (PE.ID_CLIE' +
-      'NTE = CLI.CODIGO)'#13#10'INNER JOIN PRODUTO PRO ON (PI.ID_PRODUTO = PR' +
-      'O.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT ' +
-      'JOIN GRUPO GR ON PRO.id_grupo = GR.id'#13#10'left join pessoa_fiscal P' +
-      'F ON PE.ID_CLIENTE = PF.codigo'#13#10'LEFT JOIN ORDEMSERVICO O ON PI.I' +
-      'D_OS_SERV = O.ID'#13#10'WHERE PI.qtd_restante > 0'#13#10#13#10
+      'select PE.ID, PE.PEDIDO_CLIENTE, PE.ID_CLIENTE, PE.DTEMISSAO, pi' +
+      '.ID_PRODUTO, pi.ID_CFOP, PE.NUM_PEDIDO, pi.VLR_UNITARIO,'#13#10'      ' +
+      ' pi.QTD, pi.QTD_FATURADO, pi.QTD_RESTANTE, pi.QTD_AFATURAR, pi.I' +
+      'D_NCM ID_NCM_PED, pi.REFERENCIA, pi.ITEM_CLIENTE,'#13#10'       CLI.NO' +
+      'ME NOMECLIENTE, PRO.REFERENCIA REFERENCIA_PRO, PRO.NOME NOMEPROD' +
+      'UTO, CLI.CNPJ_CPF, pi.DTENTREGA, pi.ITEM,'#13#10'       pi.VLR_DESCONT' +
+      'O, PRO.ID_NCM, pi.UNIDADE, pi.PERC_IPI, pi.OBS_COMPLEMENTAR, pi.' +
+      'NUMOS, PE.TIPO_FRETE,'#13#10'       PE.ID_CONDPGTO, PE.IMP_OC_NOTA, pi' +
+      '.ID_VARIACAO, pi.QTD_LIBERADA, pi.QTD_PRODUZIDA, PE.TIPO_REG, pi' +
+      '.TAMANHO,'#13#10'       PE.ID_TRANSPORTADORA, PE.NUM_DOC, pi.NUM_TALAO' +
+      ', pi.VLR_DESCONTORATEIO, pi.QTD_PECA, pi.QTD_FUT, pi.ID_COR,'#13#10'  ' +
+      '     COMB.NOME NOME_COR, pi.ID_MOVESTOQUE, pi.TIPO_ACESSORIO, pi' +
+      '.QTD_LANCAR_ESTOQUE, GR.NOME NOME_GRUPO,'#13#10'       PE.NOME_CONSUMI' +
+      'DOR, PE.VLR_ADIANTAMENTO, pi.PERC_COMISSAO PERC_COMISSAO_ITEM, P' +
+      'E.PERC_COMISSAO,'#13#10'       pi.NUM_LOTE_CONTROLE, PE.ID_TIPO_COBRAN' +
+      'CA, PE.ID_CONTA, PE.LOCALENTREGA, PRO.LANCA_LOTE_CONTROLE,'#13#10'    ' +
+      '   pi.COPIAR_SELECIONADO, PE.NOTIFICACAO, PE.ID_VENDEDOR, PE.VLR' +
+      '_ENTRADA, PE.GERA_ENTRADA_NO_PEDIDO,'#13#10'       pi.ITEM_ORIGINAL, P' +
+      'RO.ID_GRADE, PE.VLR_FRETE, PE.OBS_NOTA, PE.ID_CLIENTE_TRIANGULAR' +
+      ', PE.PERC_ICMS_FRETE,'#13#10'       pi.NOMEPRODUTO NOME_PRODUTO_PED, P' +
+      'E.NGR, PE.ID_TAB_PRECO, pi.TIPO_OS, PF.DESC_SUFRAMA_PIS_COFINS,'#13 +
+      #10'       PF.DESC_SUFRAMA_ICMS, O.DTEMISSAO DTEMISSAO_OS, O.NUM_OS' +
+      ' NUM_OS_SERVICO, O.DTRECEBIMENTO, O.DT_AGENDA,'#13#10'       PIT.COMPR' +
+      'IMENTO, PIT.LARGURA, PIT.ESPESSURA'#13#10'from PEDIDO PE'#13#10'inner join P' +
+      'EDIDO_ITEM pi on (PE.ID = pi.ID)'#13#10'inner join PESSOA CLI on (PE.I' +
+      'D_CLIENTE = CLI.CODIGO)'#13#10'inner join PRODUTO PRO on (pi.ID_PRODUT' +
+      'O = PRO.ID)'#13#10'left join COMBINACAO COMB on (pi.ID_COR = COMB.ID)'#13 +
+      #10'left join GRUPO GR on PRO.ID_GRUPO = GR.ID'#13#10'left join PESSOA_FI' +
+      'SCAL PF on PE.ID_CLIENTE = PF.CODIGO'#13#10'left join ORDEMSERVICO O o' +
+      'n pi.ID_OS_SERV = O.ID'#13#10'left join PEDIDO_ITEM_TIPO PIT ON PI.ID ' +
+      '= PIT.ID AND PI.ITEM = PIT.ITEM'#13#10'where pi.QTD_RESTANTE > 0'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -8251,6 +8254,15 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsPedidoDT_AGENDA: TDateField
       FieldName = 'DT_AGENDA'
+    end
+    object cdsPedidoCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object cdsPedidoLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object cdsPedidoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
     end
   end
   object dsPedido: TDataSource
@@ -11267,6 +11279,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsPedido_TipoQTD_FUROS: TIntegerField
       FieldName = 'QTD_FUROS'
+    end
+    object cdsPedido_TipoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
     end
   end
   object dsPedido_Tipo: TDataSource

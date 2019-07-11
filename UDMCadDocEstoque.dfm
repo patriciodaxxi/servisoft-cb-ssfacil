@@ -255,6 +255,15 @@ object DMCadDocEstoque: TDMCadDocEstoque
       FieldName = 'LOCALIZACAO'
       Size = 30
     end
+    object sdsDocEstoque_ItensLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object sdsDocEstoque_ItensCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object sdsDocEstoque_ItensESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
   end
   object cdsDocEstoque_Itens: TClientDataSet
     Aggregates = <>
@@ -373,6 +382,15 @@ object DMCadDocEstoque: TDMCadDocEstoque
     object cdsDocEstoque_ItensLOCALIZACAO: TStringField
       FieldName = 'LOCALIZACAO'
       Size = 30
+    end
+    object cdsDocEstoque_ItensLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object cdsDocEstoque_ItensCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object cdsDocEstoque_ItensESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
     end
   end
   object dsDocEstoque_Itens: TDataSource

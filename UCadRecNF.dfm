@@ -24,7 +24,7 @@ object frmCadRecNF: TfrmCadRecNF
     Top = 0
     Width = 938
     Height = 662
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448

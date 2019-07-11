@@ -652,6 +652,9 @@ begin
         fDMCadNotaFiscal.vID_Variacao                             := fnc_Buscar_Regra_CFOP(fDMCadNotaFiscal, fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger);
       end;
     end;
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensCOMPRIMENTO.AsFloat     := fDMCadNotaFiscal.cdsPedidoCOMPRIMENTO.AsFloat;
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensLARGURA.AsFloat         := fDMCadNotaFiscal.cdsPedidoLARGURA.AsFloat;
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensESPESSURA.AsFloat       := fDMCadNotaFiscal.cdsPedidoESPESSURA.AsFloat;
 
     if vTipo_RegPed = 'C' then
       ffrmCadNotaEntrada_Itens.prc_Move_Dados_Itens

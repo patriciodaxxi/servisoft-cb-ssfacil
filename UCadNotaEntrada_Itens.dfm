@@ -790,7 +790,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
           end
           object Label36: TLabel
             Left = 17
-            Top = 84
+            Top = 82
             Width = 52
             Height = 13
             Alignment = taRightJustify

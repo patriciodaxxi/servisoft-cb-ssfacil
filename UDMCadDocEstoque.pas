@@ -413,6 +413,12 @@ type
     cdsDocEstoqueNUM_PEDIDO: TIntegerField;
     qParametros_EstREQ_NUM_PED: TStringField;
     qParametrosUSA_COD_BARRAS: TStringField;
+    sdsDocEstoque_ItensLARGURA: TFloatField;
+    sdsDocEstoque_ItensCOMPRIMENTO: TFloatField;
+    sdsDocEstoque_ItensESPESSURA: TFloatField;
+    cdsDocEstoque_ItensLARGURA: TFloatField;
+    cdsDocEstoque_ItensCOMPRIMENTO: TFloatField;
+    cdsDocEstoque_ItensESPESSURA: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspDocEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
