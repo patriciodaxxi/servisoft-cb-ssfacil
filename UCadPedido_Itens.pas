@@ -2530,7 +2530,7 @@ begin
   vID_Cor := 0;
   if trim(RxDBLookupCombo3.Text) <> '' then
     vID_Cor := RxDBLookupCombo3.KeyValue;
-  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger,vID_Cor);
+  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger,vID_Cor,fDMCadPedido.cdsPedidoFILIAL.AsInteger);
   lblEstoque.Caption := FormatFloat('0.####',vQtdAux);
 end;
 

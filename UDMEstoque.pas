@@ -105,6 +105,8 @@ type
     cdsEstoque_MovLARGURA: TFloatField;
     cdsEstoque_MovCOMPRIMENTO: TFloatField;
     cdsEstoque_MovESPESSURA: TFloatField;
+    qParametros_Est: TSQLQuery;
+    qParametros_EstUSA_ESTOQUE_GERAL_CAD: TStringField;
     procedure cdsEstoque_MovReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
@@ -126,7 +128,8 @@ type
                        ID_COR: Integer; Num_Lote_Controle, Gerar_Custo: String; Preco_Custo_Total, Comprimento, Largura, Espessura: Real;
                        ID_Operacao: Integer): Integer;
 
-    function fnc_Buscar_Estoque(CodProduto: Integer; ID_Local_Estoque: Integer; ID_Cor: Integer): Real;
+    //Tirado 10/07/2019  esta usando a do uUtilPadrao
+    //function fnc_Buscar_Estoque_DM(CodProduto: Integer; ID_Local_Estoque: Integer; ID_Cor: Integer): Real;
 
     procedure prc_Excluir_EstoqueMov(ID: Integer);
     procedure prc_Abrir_Estoque_Mov(ID: Integer);
@@ -165,8 +168,11 @@ uses DmdDatabase, uUtilPadrao, LogProvider;
 
 { TDMEstoque }
 
-function TDMEstoque.fnc_Buscar_Estoque(CodProduto: Integer; ID_Local_Estoque: Integer; ID_Cor: Integer): Real;
+//Tirado 10/07/2019  esta usando a do uUtilPadrao
+{function TDMEstoque.fnc_Buscar_Estoque_DM(CodProduto: Integer; ID_Local_Estoque: Integer; ID_Cor: Integer): Real;
 begin
+  qParametros_Est.Close;
+  qParametros_Est.Open;
   qEstoque.Close;
   qEstoque.SQL.Text := ctqEstoque;
   if ID_Local_Estoque > 0 then
@@ -181,12 +187,16 @@ begin
     qEstoque.SQL.Text := qEstoque.SQL.Text + ' AND ID_COR = :ID_COR ';
     qEstoque.ParamByName('ID_COR').AsInteger := ID_Cor;
   end;
-  qestoque.ParamByName('FILIAL').AsInteger     := vFilial;
+  if trim(qParametros_EstUSA_ESTOQUE_GERAL_CAD.AsString) <> 'S' then
+  begin
+    qEstoque.SQL.Text := qEstoque.SQL.Text + ' AND FILIAL = :FILIAL ';
+    qEstoque.ParamByName('FILIAL').AsInteger := vFilial;
+  end;
   qEstoque.ParamByName('ID_PRODUTO').AsInteger := CodProduto;
   qEstoque.Open;
   Result := StrToFloat(FormatFloat('0.0000',qEstoqueQTD.AsFloat));
   qEstoque.Close;
-end;
+end;}
 
 function TDMEstoque.fnc_Gravar_Estoque(ID_Estoque, ID_Filial, ID_Local_Estoque, ID_Produto,
   NumDoc, ID_Pessoa, ID_CFOP, ID_Nota, ID_CentroCusto: Integer; Tipo_ES, Tipo_Mov, Unidade,
