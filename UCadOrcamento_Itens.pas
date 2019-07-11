@@ -882,10 +882,10 @@ begin
   vID_LocalAux := fnc_Verificar_Local(fDMCadPedido.cdsParametrosUSA_LOCAL_ESTOQUE.AsString);
   vQtdAux := 0;
   if trim(RxDBLookupCombo4.Text) <> '' then
-    vQtdAux := fnc_Buscar_Estoque(RxDBLookupCombo4.KeyValue,vID_LocalAux,0)
+    vQtdAux := fnc_Buscar_Estoque(RxDBLookupCombo4.KeyValue,vID_LocalAux,0,fDMCadPedido.cdsPedidoFILIAL.AsInteger)
   else
   if trim(RxDBLookupCombo8.Text) <> '' then
-    vQtdAux := fnc_Buscar_Estoque(RxDBLookupCombo8.KeyValue,vID_LocalAux,0);
+    vQtdAux := fnc_Buscar_Estoque(RxDBLookupCombo8.KeyValue,vID_LocalAux,0, fDMCadPedido.cdsPedidoFILIAL.AsInteger);
   lblEstoque.Caption := FormatFloat('0.####',vQtdAux);
   Panel4.Visible := (((fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger = fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger)
                       and (fDMCadPedido.qParametros_ProdID_PRODUTO_GENERICO.AsInteger > 0)) or (fDMCadPedido.qParametros_PedPERMITE_ALT_NOMEPROD.AsString = 'S'));

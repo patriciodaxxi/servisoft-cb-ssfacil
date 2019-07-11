@@ -1,11 +1,11 @@
 object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
-  Left = 144
-  Top = 19
+  Left = 198
+  Top = 3
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmMontaPed_TipoItem'
   ClientHeight = 660
-  ClientWidth = 1065
+  ClientWidth = 1067
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,7 +24,7 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1065
+    Width = 1067
     Height = 83
     Align = alTop
     Color = 16777134
@@ -293,7 +293,7 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
   object StaticText1: TStaticText
     Left = 0
     Top = 643
-    Width = 1065
+    Width = 1067
     Height = 17
     Align = alBottom
     BorderStyle = sbsSingle
@@ -309,7 +309,7 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
   object Panel2: TPanel
     Left = 0
     Top = 602
-    Width = 1065
+    Width = 1067
     Height = 41
     Align = alBottom
     Color = 16777134
@@ -373,14 +373,14 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
   object pnlItens: TPanel
     Left = 0
     Top = 83
-    Width = 1065
+    Width = 1067
     Height = 519
     Align = alClient
     TabOrder = 3
     object SMDBGrid1: TSMDBGrid
       Left = 1
       Top = 1
-      Width = 1063
+      Width = 1065
       Height = 517
       Align = alClient
       Ctl3D = False

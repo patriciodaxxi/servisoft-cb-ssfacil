@@ -1,6 +1,6 @@
 object fRelOrcamento_JW: TfRelOrcamento_JW
-  Left = 21
-  Top = 46
+  Left = 25
+  Top = 20
   Width = 1317
   Height = 666
   Caption = 'Relat'#243'rio Or'#231'amento'

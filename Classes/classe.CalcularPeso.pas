@@ -51,6 +51,7 @@ begin
   begin
     Peso := Peso + ((Peso * FFatorCalculo) / 100);
   end;
+  Result := Peso;
 end;
 
 function TCalcluar_Peso.CalcularVlrTotal : Real;

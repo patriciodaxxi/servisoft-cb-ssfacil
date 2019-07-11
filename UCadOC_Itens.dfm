@@ -21,7 +21,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   object Panel1: TPanel
     Left = 0
     Top = 35
-    Width = 757
+    Width = 749
     Height = 52
     Align = alTop
     Color = clMoneyGreen
@@ -29,7 +29,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
     object Panel4: TPanel
       Left = 1
       Top = 1
-      Width = 755
+      Width = 747
       Height = 48
       Align = alTop
       BevelOuter = bvNone
@@ -174,8 +174,8 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 507
-    Width = 757
+    Top = 499
+    Width = 749
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -214,8 +214,8 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   object Panel2: TPanel
     Left = 0
     Top = 111
-    Width = 757
-    Height = 396
+    Width = 749
+    Height = 388
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 3
@@ -598,7 +598,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   object pnlCod_Barras: TPanel
     Left = 0
     Top = 0
-    Width = 757
+    Width = 749
     Height = 35
     Align = alTop
     Color = clMoneyGreen
@@ -622,7 +622,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   object pnlCor: TPanel
     Left = 0
     Top = 87
-    Width = 757
+    Width = 749
     Height = 24
     Align = alTop
     Color = clMoneyGreen
