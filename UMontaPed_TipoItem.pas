@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, StdCtrls, Buttons, Grids, DBGrids, SMDBGrid, FMTBcd, DB,
   Provider, DBClient, SqlExpr, RxLookup, Mask, ToolEdit, CurrEdit,
   UDMCopiaPedido, ShellAPI, Menus, uConsProdutoPedido, UCadPedido_Itens, uDMCadPedido,
-  uSel_Produto, uMostraPDF;
+  uSel_Produto, uMostraPDF, classe.ControlePedidoProjeto, classe.Controle, classe.ConexaoBD;
 
 type
   EnumTipo = (tpChapa, tpInox, tpAluminio);
@@ -69,9 +69,11 @@ type
     procedure ListarArquivos(Diretorio: string);
     procedure prc_Calcular_Peso_PC_Chapa;
     procedure prc_Calcular_VlrTotal;
-
+    procedure prc_Desabilita_Controles;
+    procedure prc_Habilita_Controles;
     function fnc_Buscar_Produto(MM : Real; Tipo : String): Integer;
     function NomeArquivoSemExtensao(Texto: string): string;
+
   public
     { Public declarations }
     fDMCadPedido : TDMCadPedido;
@@ -118,6 +120,8 @@ end;
 procedure TfrmMontaPed_TipoItem.btnCopiarClick(Sender: TObject);
 var
   vID_CFOPAnt : Integer;
+  vControlePedidoProjeto : TPedidoControle;
+  vControle : TControle;
 begin
   mArquivoImportado.First;
   if mArquivoImportado.IsEmpty then
@@ -193,6 +197,30 @@ begin
 
         fDMCadPedido.cdsPedido_Item_Tipo.Post;
         fdmCadPedido.cdsPedido_Itens.Post;
+
+        vControle := TControle.Create;
+
+        vControlePedidoProjeto := TPedidoControle.create(vControle);
+        try
+          vControlePedidoProjeto.NomeProjeto  := mArquivoImportadoNomeArquivo.AsString;
+          vControlePedidoProjeto.ID_Pessoa    := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger;
+          vControlePedidoProjeto.PRECO_KG     := mArquivoImportadoPrecoKG.AsFloat;
+          vControlePedidoProjeto.PESO         := mArquivoImportadoPeso.AsFloat;
+          vControlePedidoProjeto.VLR_DOBRA    := mArquivoImportadoVlr_Dobra.AsFloat;
+          vControlePedidoProjeto.VLR_UNITARIO := mArquivoImportadoVlr_Unitario.AsFloat;
+          vControlePedidoProjeto.COMPRIMENTO  := mArquivoImportadoComprimento.AsFloat;
+          vControlePedidoProjeto.LARGURA      := mArquivoImportadoLargura.AsFloat;
+          vControlePedidoProjeto.ESPESSURA    := mArquivoImportadoEspessura.AsFloat;
+          vControlePedidoProjeto.ID_PRODUTO   := mArquivoImportadoCodigo_Produto.AsInteger;
+          if not vControlePedidoProjeto.InserePedidoProjeto then
+            MessageDlg('Erro ao gravar o projeto',mtInformation,[mbOK],0);
+        finally
+          begin
+            vControlePedidoProjeto.Free;
+            vControle.Free;
+          end;
+        end;
+
       end;
       mArquivoImportado.Next;
     end;
@@ -201,24 +229,6 @@ begin
   end;
   ShowMessage('Itens importados com sucesso!');
   Close;
-
-
-
-//  fDMCopiaPedido.mAux.EmptyDataSet;
-//  cdsChapa.First;
-//  while not cdsChapa.Eof do
-//  begin
-//    if (SMDBGrid1.SelectedRows.CurrentRowSelected) then
-//    begin
-//      fDMCopiaPedido.mAux.Insert;
-//      fDMCopiaPedido.mAuxID_Pedido.AsInteger   := cdsChapaID_PEDIDO.AsInteger;
-//      fDMCopiaPedido.mAuxNum_Pedido.AsInteger  := cdsChapaNUM_PEDIDO.AsInteger;
-//      fDMCopiaPedido.mAuxItem_Pedido.AsInteger := cdsChapaITEM_PEDIDO.AsInteger;
-//      fDMCopiaPedido.mAux.Post;
-//    end;
-//    cdsChapa.Next;
-//  end;
-//  Close;
 end;
 
 procedure TfrmMontaPed_TipoItem.SpeedButton1Click(Sender: TObject);
@@ -231,8 +241,15 @@ var
   F: TSearchRec;
   Ret, i: Integer;
   TempNome, Extensao: string;
+  vControlePedidoProjeto : TPedidoControle;
+  vControle : TControle;
+  vCalcularPeso : TCalcluar_Peso;
 begin
+  vControle := TControle.Create;
+  vControlePedidoProjeto := TPedidoControle.create(vControle);
+  vCalcularPeso := TCalcluar_Peso.Create;
   mArquivoImportado.EmptyDataSet;
+  prc_Desabilita_Controles;
   Extensao := '*.PDF';
   Ret := FindFirst(Diretorio + '\' + Extensao, faAnyFile, F);
   try
@@ -243,12 +260,37 @@ begin
       i := Pos('.', F.Name);
       mArquivoImportadoNomeArquivo.AsString := NomeArquivoSemExtensao(F.Name);
       mArquivoImportadoExtensaoArquivo.AsString := ExtractFileExt(F.Name);
+
+      vControlePedidoProjeto.PesquisaPedidoProjeto(mArquivoImportadoNomeArquivo.AsString);
+      if vControlePedidoProjeto.ESPESSURA > 0 then
+      begin
+        mArquivoImportadoComprimento.AsFloat := vControlePedidoProjeto.COMPRIMENTO;
+        mArquivoImportadoLargura.AsFloat     := vControlePedidoProjeto.LARGURA;
+        mArquivoImportadoEspessura.AsFloat   := vControlePedidoProjeto.ESPESSURA;
+        mArquivoImportadoCodigo_Produto.AsInteger := vControlePedidoProjeto.ID_PRODUTO;
+        mArquivoImportadoPeso.AsFloat := vControlePedidoProjeto.PESO;
+        mArquivoImportadoVlr_Unitario.AsFloat := vControlePedidoProjeto.VLR_UNITARIO;
+        mArquivoImportadoVlr_Dobra.AsFloat := vControlePedidoProjeto.VLR_DOBRA;
+        mArquivoImportadoPrecoKG.AsFloat := vControlePedidoProjeto.PRECO_KG;
+
+        vCalcularPeso.Comprimento := vControlePedidoProjeto.COMPRIMENTO;
+        vCalcularPeso.Largura := vControlePedidoProjeto.LARGURA;
+        vCalcularPeso.Espessura := vControlePedidoProjeto.ESPESSURA;
+
+        mArquivoImportadoPeso.AsFloat := vCalcularPeso.CalcularPeso;
+      end;
       mArquivoImportado.Post;
       Ret := FindNext(F);
     end;
   finally
-    mArquivoImportado.First;
-    FindClose(F);
+    begin
+      mArquivoImportado.First;
+      FindClose(F);
+      vControlePedidoProjeto.Free;
+      vControle.Free;
+      vCalcularPeso.Free;
+      prc_habilita_Controles;
+    end;
   end;
 end;
 
@@ -357,13 +399,12 @@ begin
   mArquivoImportado.DisableControls;
   vCalcular := TCalcluar_Peso.Create;
   try
-    vCalcular.Espessura   :=  mArquivoImportadoEspessura.AsFloat;
-    vCalcular.Largura     :=  mArquivoImportadoLargura.AsFloat;
-    vCalcular.Comprimento :=  mArquivoImportadoComprimento.AsFloat;
+    vCalcular.Espessura    := mArquivoImportadoEspessura.AsFloat;
+    vCalcular.Largura      := mArquivoImportadoLargura.AsFloat;
+    vCalcular.Comprimento  := mArquivoImportadoComprimento.AsFloat;
     vCalcular.FatorCalculo := mArquivoImportadoFator_Calculo.AsFloat;
-    vCalcular.CalcularPeso;
     mArquivoImportado.Edit;
-    mArquivoImportadoPeso.AsFloat := vCalcular.Peso;
+    mArquivoImportadoPeso.AsFloat := vCalcular.CalcularPeso;
     mArquivoImportadoVlr_Unitario.AsFloat := vCalcular.ValorUnitario;
     mArquivoImportado.Post;
   finally
@@ -449,6 +490,21 @@ procedure TfrmMontaPed_TipoItem.mArquivoImportadoVlr_UnitarioChange(
   Sender: TField);
 begin
   mArquivoImportadoVlr_Total.AsFloat := StrToFloat(FormatFloat('0.00',(mArquivoImportadoVlr_Unitario.AsFloat * mArquivoImportadoQtde.AsFloat)));
+end;
+
+procedure TfrmMontaPed_TipoItem.prc_Desabilita_Controles;
+begin
+  mArquivoImportadoEspessura.OnChange := nil;
+  mArquivoImportadoVlr_Unitario.OnChange := nil;
+  mArquivoImportadoVlr_Dobra.OnChange := nil;
+
+end;
+
+procedure TfrmMontaPed_TipoItem.prc_Habilita_Controles;
+begin
+  mArquivoImportadoEspessura.OnChange := mArquivoImportadoEspessuraChange;
+  mArquivoImportadoVlr_Unitario.OnChange := mArquivoImportadoVlr_UnitarioChange;
+  mArquivoImportadoVlr_Dobra.OnChange := mArquivoImportadoVlr_DobraChange;
 end;
 
 end.
