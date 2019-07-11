@@ -2127,12 +2127,12 @@ begin
     sds2.GetMetadata   := False;
 
     sds.CommandText   := 'select aux.*, MAT.NOME NOME_MATERIAL, MAT.unidade, MAT.id_fornecedor '
-                       + 'from (SELECT SUM(L.qtd) QTD, PE.id_material, PE.qtd_emb FROM LOTE l '
+                       + 'from (SELECT SUM(L.qtd) QTD, PE.id_material, PE.qtd_emb, L.id_combinacao FROM LOTE l '
                        + '       INNER JOIN PRODUTO P ON L.ID_PRODUTO = P.ID '
                        + '       INNER JOIN PRODUTO_EMB PE ON P.id = PE.id'
                        + '       WHERE L.num_ordem = :NUM_ORDEM'
                        + '         AND PE.TIPO_EMB = ' + QuotedStr('C')
-                       + '       GROUP BY PE.id_material, PE.qtd_emb) aux'
+                       + '       GROUP BY PE.id_material, PE.qtd_emb, l.id_combinacao) aux'
                        + ' inner join produto mat on aux.id_material = mat.id ';
     SDS.ParamByName('NUM_ORDEM').AsInteger := vNumOrdem;
     sds.Open;

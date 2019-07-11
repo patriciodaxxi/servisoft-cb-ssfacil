@@ -77,7 +77,7 @@ object frmCadOC: TfrmCadOC
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 13
+        ColCount = 14
         RowCount = 2
         Columns = <
           item
@@ -102,7 +102,16 @@ object frmCadOC: TfrmCadOC
             Expanded = False
             FieldName = 'DTEMISSAO'
             Title.Alignment = taCenter
-            Width = 78
+            Width = 86
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'DTENTREGA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Data Entrega'
+            Width = 77
             Visible = True
           end
           item
