@@ -2165,26 +2165,31 @@ begin
           if vQtd_Corrugado > 0 then
             prc_Gravar_Lote_Mat(vNumOrdem,sds.FieldByName('ID_MATERIAL').AsInteger,0,sds.FieldByName('ID_FORNECEDOR').AsInteger,'','','S',vQtd_Corrugado,sds.FieldByName('QTD').AsFloat - vQtdResto);
           sds2.First;
-          vCont := sds2.FieldByName('CONTADOR').AsInteger;
-          while not sds2.Eof do
+          if (vQtdResto > sds2.FieldByName('QTD_EMB').AsInteger) and (vQtdResto <= sds.FieldByName('QTD_EMB').AsInteger) then
+            prc_Gravar_Lote_Mat(vNumOrdem,sds.FieldByName('ID_MATERIAL').AsInteger,0,sds.FieldByName('ID_FORNECEDOR').AsInteger,'','','S',1,vQtdResto)
+          else
           begin
-            vCont     := vCont - 1;
-            vQtd      := vQtdResto;
-            vQtdResto := fnc_Calc_Corrugado(vQtdResto,sds2.FieldByName('QTD_EMB').AsInteger);
-            if (vCont <= 0) then
+            vCont := sds2.FieldByName('CONTADOR').AsInteger;
+            while not sds2.Eof do
             begin
-              if vQtdResto > 0 then
-                vQtd_Corrugado := vQtd_Corrugado + 1;
-              vQtdResto := 0;
-            end
-            else
-            if vQtd_Corrugado > 0 then
-              vQtd := vQtd - vQtdResto;
+              vCont     := vCont - 1;
+              vQtd      := vQtdResto;
+              vQtdResto := fnc_Calc_Corrugado(vQtdResto,sds2.FieldByName('QTD_EMB').AsInteger);
+              if (vCont <= 0) then
+              begin
+                if vQtdResto > 0 then
+                  vQtd_Corrugado := vQtd_Corrugado + 1;
+                vQtdResto := 0;
+              end
+              else
+              if vQtd_Corrugado > 0 then
+                vQtd := vQtd - vQtdResto;
 
-            if vQtd_Corrugado > 0 then
-              prc_Gravar_Lote_Mat(vNumOrdem,sds2.FieldByName('ID_MATERIAL').AsInteger,0,sds2.FieldByName('ID_FORNECEDOR').AsInteger,'','','S',vQtd_Corrugado,vQtd);
+              if vQtd_Corrugado > 0 then
+                prc_Gravar_Lote_Mat(vNumOrdem,sds2.FieldByName('ID_MATERIAL').AsInteger,0,sds2.FieldByName('ID_FORNECEDOR').AsInteger,'','','S',vQtd_Corrugado,vQtd);
 
-            sds2.Next;
+              sds2.Next;
+            end;
           end;
         end;
 
