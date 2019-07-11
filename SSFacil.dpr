@@ -808,7 +808,10 @@ uses
   UConsClienteOBS in 'UConsClienteOBS.pas' {frmConsClienteOBS},
   uImprimir in 'uImprimir.pas',
   classe.CalcularPeso in 'Classes\classe.CalcularPeso.pas',
-  uRateioItens in 'uRateioItens.pas' {frmRateio_Itens};
+  uRateioItens in 'uRateioItens.pas' {frmRateio_Itens},
+  classe.ConexaoBD in 'Classes\classe.ConexaoBD.pas',
+  classe.Controle in 'Classes\classe.Controle.pas',
+  classe.ControlePedidoProjeto in 'Classes\classe.ControlePedidoProjeto.pas';
 
 {$R *.res}
 

@@ -1948,7 +1948,8 @@ object DMCadDocEstoque: TDMCadDocEstoque
     SQL.Strings = (
       
         'SELECT P.USA_LOCALIZACAO_LOTE, CONTROLA_DOC_CLIFORN, P.REQ_ENTRE' +
-        'GUE_POR, P.REQ_NUM_LOTE, P.REQ_NUM_PED'
+        'GUE_POR, P.REQ_NUM_LOTE, '
+      'P.REQ_NUM_PED'
       'FROM PARAMETROS_EST P'
       '')
     SQLConnection = dmDatabase.scoDados

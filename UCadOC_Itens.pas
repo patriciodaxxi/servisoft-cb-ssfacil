@@ -888,7 +888,7 @@ begin
   if trim(RxDBLookupCombo5.Text) <> '' then
     vID_Cor := RxDBLookupCombo5.KeyValue;
   vID_LocalAux := fnc_Verificar_Local(fDMCadPedido.cdsParametrosUSA_LOCAL_ESTOQUE.AsString);
-  vQtdAux := fnc_Buscar_Estoque(ID_Produto,vID_LocalAux,vID_Cor);
+  vQtdAux := fnc_Buscar_Estoque(ID_Produto,vID_LocalAux,vID_Cor,fDMCadPedido.cdsPedidoFILIAL.AsInteger);
   lblEstoque.Caption := FormatFloat('0.####',vQtdAux);
 end;
 

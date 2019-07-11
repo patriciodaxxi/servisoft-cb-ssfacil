@@ -792,7 +792,7 @@ begin
 
       //if colocado 03/07/2019 pois a Gercla não vai gerar a embalagem neste bloco abaixo
       //29/08/2018
-      if trim(fDMCadLote.qParametros_ProdUSA_CORRUGADO.AsString) <> 'S' then
+      //if trim(fDMCadLote.qParametros_ProdUSA_CORRUGADO.AsString) <> 'S' then
       begin
         fDMCadLote.mProdAux.First;
         while not fDMCadLote.mProdAux.Eof do
@@ -2058,6 +2058,12 @@ begin
   fDMCadLote.cdsEmbalagem.First;
   while not fDMCadLote.cdsEmbalagem.Eof do
   begin
+    if (trim(fDMCadLote.qParametros_ProdUSA_CORRUGADO.AsString) = 'S') and (fDMCadLote.cdsEmbalagemTIPO_EMB.AsString = 'C') then
+    begin
+      fDMCadLote.cdsEmbalagem.Next;
+      continue;
+    end;
+
     if fDMCadLote.cdsEmbalagemTIPO_EMB.AsString = 'X' then
       vQtdAux := fDMCadLote.cdsEmbalagemQTD_CONSUMO.AsFloat
     else

@@ -1196,7 +1196,7 @@ begin
   vID_Cor := 0;
   if trim(RxDBLookupCombo14.Text) <> '' then
     vID_Cor := RxDBLookupCombo14.KeyValue;
-  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadNotaFiscal.cdsNotaFiscalID_LOCAL_ESTOQUE.AsInteger,vID_Cor);
+  vQtdAux := fnc_Buscar_Estoque(ID_Produto,fDMCadNotaFiscal.cdsNotaFiscalID_LOCAL_ESTOQUE.AsInteger,vID_Cor,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger);
   lblEstoque.Caption := FormatFloat('0.####',vQtdAux);
 end;
 

@@ -30,7 +30,7 @@ uses
   function fnc_Calcula_DigitoEAN13(Seq_Maxima, Sequencia: Integer; Cod_Principal: String): Integer;
   function fnc_Busca_Estoque2(Filial, ID_PRODUTO, ID_Cor: Integer; Tamanho: String; ID_Local: Integer; ID_Estoque: Integer = 0): Real;
   function fnc_Verificar_Local(Usa_Local_Estoque: String): Integer;
-  function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor: Integer ; Filial: Integer = 1): Real;
+  function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor, Filial: Integer): Real;
   function fnc_HorarioVerao: Boolean;
   
   function fnc_Buscar_Comissao_Prod(ID_Produto, ID_Cliente, ID_Vendedor: Integer): Real;
@@ -838,17 +838,27 @@ begin
     MessageDlg('*** Não existe um local do estoque marcado como principal!' , mtInformation, [mbOk], 0);
 end;
 
-function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor: Integer ; Filial: Integer = 1): Real;
+function fnc_Buscar_Estoque(CodProduto, ID_Local_Estoque, ID_Cor, Filial: Integer): Real;
 var
-  sds: TSQLDataSet;
+  sds, sds2: TSQLDataSet;
 begin
   Result := StrToFloat(FormatFloat('0.0000',0));
   sds := TSQLDataSet.Create(nil);
   sds.SQLConnection := dmDatabase.scoDados;
   sds.NoMetadata    := True;
   sds.GetMetadata   := False;
+
+  sds2 := TSQLDataSet.Create(nil);
+  sds2.SQLConnection := dmDatabase.scoDados;
+  sds2.NoMetadata    := True;
+  sds2.GetMetadata   := False;
   try
-    if Filial = 0 then
+    sds2.Close;
+    sds2.CommandText := 'select USA_ESTOQUE_GERAL_CAD from parametros_est ';
+    sds2.Open;
+    if sds2.FieldByName('USA_ESTOQUE_GERAL_CAD').AsString = 'S' then
+      Filial := 0;
+    if (Filial = 0) then
       sds.CommandText := 'SELECT sum(QTD) QTD FROM ESTOQUE_ATUAL WHERE '
     else
       sds.CommandText := 'SELECT QTD FROM ESTOQUE_ATUAL WHERE FILIAL = :FILIAL AND ';
@@ -870,6 +880,7 @@ begin
     Result := StrToFloat(FormatFloat('0.0000',sds.FieldByName('QTD').AsFloat));
   finally
     FreeAndNil(sds);
+    FreeAndNil(sds2);
   end;
 end;
 

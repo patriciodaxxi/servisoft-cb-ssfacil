@@ -263,7 +263,7 @@ begin
   begin
     vTexto := 'Comprimento (mm): ' + fDMCadPedido.cdsPedidoImp_ItensCOMPRIMENTO.AsString;
     vTexto := vTexto + '  -  Largura (mm): ' + fDMCadPedido.cdsPedidoImp_ItensLARGURA.AsString;
-    vTexto := vTexto + '  - Espessura (mm): ' + fDMCadPedido.cdsPedidoImp_ItensALTURA.AsString;
+    vTexto := vTexto + '  - Espessura (mm): ' + fDMCadPedido.cdsPedidoImp_ItensESPESSURA.AsString;
   end
   else
   if fDMCadPedido.cdsPedidoImp_ItensTIPO_ORCAMENTO_1.AsString = 'R' then

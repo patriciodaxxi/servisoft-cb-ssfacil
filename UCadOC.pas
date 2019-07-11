@@ -595,7 +595,8 @@ begin
       fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.NUM_ORDPROD = ' + IntToStr(ceNumOrdProd.AsInteger);
 
     case cbxOpcao.ItemIndex of
-      0: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND COALESCE(PED.FATURADO,''N'') <> ' + QuotedStr('S');
+      0: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND COALESCE(PED.FATURADO,''N'') <> ' + QuotedStr('S')
+                                                      + ' AND PED.QTD > 0 ';
       1: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.FATURADO = ' + QuotedStr('S');
     end;
 
