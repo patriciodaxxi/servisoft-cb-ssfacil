@@ -1009,6 +1009,8 @@ type
     sdsDuplicataAPROVADO: TStringField;
     cdsDuplicataNGR: TStringField;
     cdsDuplicataAPROVADO: TStringField;
+    sdsOSNOME: TStringField;
+    cdsOSNOME: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspOSUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

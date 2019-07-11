@@ -3,10 +3,9 @@ unit UConsCtaOrcamento_Fin;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, NxEdit, StdCtrls, Mask, ToolEdit, RxLookup, NxCollection,
-  UDMConsFinanceiro, StrUtils, Grids, DBGrids, SMDBGrid, DB, RzTabs, ComCtrls,
-  RzListVw, RzTreeVw, RzLstBox;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, NxEdit, StdCtrls, ToolEdit,
+  Mask, RxLookup, NxCollection, UDMConsFinanceiro, StrUtils, Grids, DBGrids, SMDBGrid, DB, RzTabs, ComCtrls, RzListVw, RzTreeVw,
+  RzLstBox;
 
 type EnumDataRelatorio = (tpDataEmissao,tpDataVencimento,tpDataPagamento);
 
@@ -108,12 +107,12 @@ begin
   end;
   if fDMConsFinanceiro.qParametros_Cta_OrcID_CONTA_ORC_DESPESA.AsInteger <= 0 then
   begin
-    MessageDlg('*** Conta de orçamento de Despesa não informada nos parametros (Contas de Orçamento)!', mtInformation, [mbOk], 0);
+    MessageDlg('*** Conta de orçamento de Despesa não informada nos parâmetros (Contas de Orçamento)!', mtInformation, [mbOk], 0);
     exit;
   end;
   if fDMConsFinanceiro.qParametros_Cta_OrcID_CONTA_ORC_RECEITA.AsInteger <= 0 then
   begin
-    MessageDlg('*** Conta de orçamento de Receita não informada nos parametros (Contas de Orçamento)!', mtInformation, [mbOk], 0);
+    MessageDlg('*** Conta de orçamento de Receita não informada nos parâmetros (Contas de Orçamento)!', mtInformation, [mbOk], 0);
     exit;
   end;
   if (RzPageControl1.ActivePage = ts_Centro_Orcamento) then
@@ -728,8 +727,8 @@ end;
 
 procedure TfrmConsCtaOrcamento_Fin.prc_Consultar_CCusto_Orcamento;
 var
-  vComandoAux, vComandoAux2, vComando, vdata : String;
-  i : Integer;
+  vComandoAux, vComandoAux2, vComando, vdata: String;
+  i: Integer;
 begin
   fDMConsFinanceiro.cdsCCustoOrcamento.Close;
   i := PosEx('GROUP', UpperCase(fDMConsFinanceiro.ctCCustoOrcamento), 0);
@@ -737,9 +736,9 @@ begin
   vComandoAux2 := copy(fDMConsFinanceiro.ctCCustoOrcamento, 1, i - 1);
   vComando := '';
   case EnumDataRelatorio(NxComboBox2.ItemIndex) of
-    tpDataEmissao    : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTEMISSAO',[rfReplaceAll]);
-    tpDataVencimento : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTVENCIMENTO',[rfReplaceAll]);
-    tpDataPagamento  : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTPAGAMENTO',[rfReplaceAll]);
+    tpDataEmissao   : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTEMISSAO',[rfReplaceAll]);
+    tpDataVencimento: vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTVENCIMENTO',[rfReplaceAll]);
+    tpDataPagamento : vComandoAux2 := StringReplace(vComandoAux2,'DTULTPAGAMENTO','DTPAGAMENTO',[rfReplaceAll]);
   end;
   case ComboBox1.ItemIndex of
     0: vComando := vComando + ' AND VD.VALOR_PAGO > 0 ';

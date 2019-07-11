@@ -1168,7 +1168,8 @@ begin
                                                      ' AND AP.DATA <= ' +
                                                      QuotedStr(FormatDateTime('MM/DD/YYYY',NxDatePicker4.date));
     case cbxOpcao.ItemIndex of
-      0: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.FATURADO <> ' + QuotedStr('S');
+      0: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.FATURADO <> ' + QuotedStr('S')
+                                                      + ' AND PED.QTD > 0 ';  
       1: fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.FATURADO = ' + QuotedStr('S');
     end;
   end;

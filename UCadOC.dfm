@@ -25,7 +25,7 @@ object frmCadOC: TfrmCadOC
     Top = 0
     Width = 1030
     Height = 690
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOC: TfrmCadOC
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -77,7 +77,7 @@ object frmCadOC: TfrmCadOC
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 13
+        ColCount = 14
         RowCount = 2
         Columns = <
           item
@@ -102,7 +102,16 @@ object frmCadOC: TfrmCadOC
             Expanded = False
             FieldName = 'DTEMISSAO'
             Title.Alignment = taCenter
-            Width = 78
+            Width = 86
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'DTENTREGA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Data Entrega'
+            Width = 77
             Visible = True
           end
           item
@@ -437,7 +446,7 @@ object frmCadOC: TfrmCadOC
         end
         object cbxOpcao: TComboBox
           Left = 102
-          Top = 68
+          Top = 67
           Width = 145
           Height = 21
           BevelKind = bkSoft

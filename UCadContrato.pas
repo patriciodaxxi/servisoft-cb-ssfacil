@@ -137,6 +137,7 @@ type
     SMDBGrid4: TSMDBGrid;
     TS_Ajustes: TRzTabSheet;
     SMDBGrid5: TSMDBGrid;
+    NxButton1: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -175,6 +176,7 @@ type
       Shift: TShiftState);
     procedure btnInserirMatClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure NxButton1Click(Sender: TObject);
   private
     { Private declarations }
     vTipoNotaAnt: String;
@@ -949,6 +951,29 @@ begin
 
   Label34.Visible          := (fDMCadOS.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM');
   RxDBLookupCombo5.Visible := (fDMCadOS.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM');
+end;
+
+procedure TfrmCadContrato.NxButton1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  fDMCadOS.cdsOS.Close;
+  fDMCadOS.cdsOS.Filter   := 'DTENCERRAMENTO IS NULL';
+  fDMCadOS.cdsOS.Filtered := True;
+  fDMCadOS.cdsOS.Open;
+
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Contratos_Lista.fr3';
+  if FileExists(vArq) then
+    fDMCadOS.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadOS.frxReport1.ShowReport;
+  fDMCadOS.cdsOS.Close;
+  fDMCadOS.cdsOS.Filter   := '';
+  fDMCadOS.cdsOS.Filtered := False;
 end;
 
 end.
