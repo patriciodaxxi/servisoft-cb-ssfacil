@@ -8,7 +8,10 @@ object DMCadOS: TDMCadOS
   object sdsOS: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM OS'
+    Active = True
+    CommandText = 
+      'SELECT OS.*, P.NOME'#13#10'FROM OS'#13#10'INNER JOIN PESSOA P ON (OS.ID_CLIE' +
+      'NTE = P.CODIGO)'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -212,6 +215,11 @@ object DMCadOS: TDMCadOS
     end
     object sdsOSDTAJUSTE: TDateField
       FieldName = 'DTAJUSTE'
+    end
+    object sdsOSNOME: TStringField
+      FieldName = 'NOME'
+      ProviderFlags = []
+      Size = 60
     end
   end
   object dspOS: TDataSetProvider
@@ -438,6 +446,11 @@ object DMCadOS: TDMCadOS
     end
     object cdsOSDTAJUSTE: TDateField
       FieldName = 'DTAJUSTE'
+    end
+    object cdsOSNOME: TStringField
+      FieldName = 'NOME'
+      ProviderFlags = []
+      Size = 60
     end
   end
   object dsOS: TDataSource
@@ -1219,16 +1232,15 @@ object DMCadOS: TDMCadOS
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT S.*, P.NOME NOME_VENDEDOR'#13#10'FROM OS_SERVICO_INT S'#13#10'LEFT JO' +
-      'IN PESSOA P'#13#10'ON S.ID_VENDEDOR = P.CODIGO'#13#10'WHERE S.ID = :ID'
+      'SELECT SI.*, P.NOME NOME_VENDEDOR'#13#10'FROM OS_SERVICO_INT SI'#13#10'LEFT ' +
+      'JOIN PESSOA P ON (SI.ID_VENDEDOR = P.CODIGO)'#13#10'WHERE SI.ID = :ID'
     DataSource = dsOS_Mestre
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID'
         ParamType = ptInput
-        Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 64
@@ -2697,7 +2709,7 @@ object DMCadOS: TDMCadOS
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42054.579274733800000000
-    ReportOptions.LastChange = 42054.661281759260000000
+    ReportOptions.LastChange = 43656.734378240740000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     Left = 856
@@ -3331,16 +3343,79 @@ object DMCadOS: TDMCadOS
   object frxDBDataset2: TfrxDBDataset
     UserName = 'OS_IMP'
     CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'TIPO_REG=TIPO_REG'
+      'ID_CLIENTE=ID_CLIENTE'
+      'DTEMISSAO=DTEMISSAO'
+      'VLR_PRODUTO=VLR_PRODUTO'
+      'VLR_SERVICO=VLR_SERVICO'
+      'VLR_TOTAL=VLR_TOTAL'
+      'ID_SERVICO=ID_SERVICO'
+      'ID_SERVICO_INT=ID_SERVICO_INT'
+      'PERC_INSS=PERC_INSS'
+      'PERC_ISS=PERC_ISS'
+      'PERC_IR=PERC_IR'
+      'RETEM_INSS=RETEM_INSS'
+      'RETEM_ISS=RETEM_ISS'
+      'RETEM_IR=RETEM_IR'
+      'DTCONTRATO_INI=DTCONTRATO_INI'
+      'DTCONTRATO_FIN=DTCONTRATO_FIN'
+      'DTPREVISTA_REN=DTPREVISTA_REN'
+      'DTRENOVACAO=DTRENOVACAO'
+      'DTPRAZO_ENT=DTPRAZO_ENT'
+      'DTENTREGA=DTENTREGA'
+      'PERC_RENOVACAO=PERC_RENOVACAO'
+      'NUM_OS=NUM_OS'
+      'OBS=OBS'
+      'FILIAL=FILIAL'
+      'DISCRIMINACAO=DISCRIMINACAO'
+      'ID_ATIVIDADE_CID=ID_ATIVIDADE_CID'
+      'CNAE=CNAE'
+      'DIA_VENCIMENTO=DIA_VENCIMENTO'
+      'ID_CONTA=ID_CONTA'
+      'ID_TIPO_COBRANCA=ID_TIPO_COBRANCA'
+      'sdsOS_Servico_Int=sdsOS_Servico_Int'
+      'DTVENCIMENTO_CERTIFICADO=DTVENCIMENTO_CERTIFICADO'
+      'PERIODO_CERTIFICADO=PERIODO_CERTIFICADO'
+      'TIPO_CERTIFICADO=TIPO_CERTIFICADO'
+      'NUM_CONTRATO=NUM_CONTRATO'
+      'MOTIVO_ENCERRAMENTO=MOTIVO_ENCERRAMENTO'
+      'ID_NATUREZA=ID_NATUREZA'
+      'RETEM_CSLL=RETEM_CSLL'
+      'RETEM_PISCOFINS=RETEM_PISCOFINS'
+      'ID_CONDPGTO=ID_CONDPGTO'
+      'DTENCERRAMENTO=DTENCERRAMENTO'
+      'ID_TECNICO=ID_TECNICO'
+      'GARANTIA=GARANTIA'
+      'HREMISSAO=HREMISSAO'
+      'HRENTREGA=HRENTREGA'
+      'NUM_NOTA=NUM_NOTA'
+      'SERIE_NOTA=SERIE_NOTA'
+      'COMARCA=COMARCA'
+      'NOME_SINDICO=NOME_SINDICO'
+      'CPF_SINDICO=CPF_SINDICO'
+      'sdsOS_Parc=sdsOS_Parc'
+      'ID_VENDEDOR=ID_VENDEDOR'
+      'PERC_COMISSAO=PERC_COMISSAO'
+      'OPCAO_VENCIMENTO_MREF=OPCAO_VENCIMENTO_MREF'
+      'ID_CONTA_ORCAMENTO=ID_CONTA_ORCAMENTO'
+      'sdsOS_Material=sdsOS_Material'
+      'ANO_CONTRATO=ANO_CONTRATO'
+      'DTAJUSTE=DTAJUSTE'
+      'NOME=NOME')
+    DataSource = dsOS
     BCDToCurrency = False
-    Left = 912
-    Top = 464
+    Left = 192
+    Top = 24
   end
   object frxDBDataset3: TfrxDBDataset
     UserName = 'OSITEM_IMP'
     CloseDataSource = False
+    DataSource = dsOS_Servico_Int
     BCDToCurrency = False
-    Left = 944
-    Top = 464
+    Left = 192
+    Top = 96
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
