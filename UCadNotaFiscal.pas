@@ -3160,6 +3160,10 @@ begin
     Label99.Visible  := fnc_Opcao_Vendedor_Desc(fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger);
     DBEdit59.Visible := Label99.Visible;
   end;
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+
 end;
 
 procedure TfrmCadNotaFiscal.Panel4Enter(Sender: TObject);
