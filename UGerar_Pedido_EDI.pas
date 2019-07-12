@@ -1008,6 +1008,8 @@ end;
 
 procedure TfrmGerar_Pedido_EDI.prc_Le_XML;
 begin
+  fDMGerar_EDI.mCab_OC.Active := False;
+  
   fDMGerar_EDI.XMLTransformProvider1.XMLDataFile := vEnd_Arquivo;
 
   fDMGerar_EDI.mCab_OC.Active := True;
@@ -1020,12 +1022,17 @@ begin
   while not fDMGerar_EDI.mOC.Eof do
   begin
     vItem_Rem := 0;
-    fDMGerar_EDI.mRemessa.First;
-    while not fDMGerar_EDI.mRemessa.Eof do
+    fDMGerar_EDI.mOCItens.First;
+    while not fDMGerar_EDI.mOCItens.Eof do
     begin
-      prc_Gravar_mAuxiliar_XML;
+      fDMGerar_EDI.mRemessa.First;
+      while not fDMGerar_EDI.mRemessa.Eof do
+      begin
+        prc_Gravar_mAuxiliar_XML;
 
-      fDMGerar_EDI.mRemessa.Next;
+        fDMGerar_EDI.mRemessa.Next;
+      end;
+      fDMGerar_EDI.mOCItens.Next;
     end;
     fDMGerar_EDI.mOC.Next;
   end;
@@ -1049,7 +1056,7 @@ begin
   fDMGerar_EDI.mAuxiliarNumOC.AsString       := fDMGerar_EDI.mOCnumero.AsString;
   fDMGerar_EDI.mAuxiliarItem.AsInteger       := vItem_Rem;
   fDMGerar_EDI.mAuxiliarPlano.AsString       := fDMGerar_EDI.mRemessaremessa.AsString;
-      
+
   fDMGerar_EDI.mAuxiliarDtEmissao.AsString         := fDMGerar_EDI.mOCemissao.AsString;
   fDMGerar_EDI.mAuxiliarDtEmissao.AsString         := copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,9,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,6,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEmissao.AsString,1,4);
   fDMGerar_EDI.mAuxiliarTipoOperacao.AsString      := fDMGerar_EDI.mOCfuncao.AsString;
@@ -1057,18 +1064,21 @@ begin
   fDMGerar_EDI.mAuxiliarDtEntrega.AsString         := copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,9,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,6,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,1,4);
   fDMGerar_EDI.mAuxiliarLocalEntrega.AsString      := fDMGerar_EDI.mRemessadescricao.AsString;
   fDMGerar_EDI.mAuxiliarFabrica.AsString           := fDMGerar_EDI.mRemessacodigo.AsString;
-  fDMGerar_EDI.mAuxiliarCodProdCli.AsString        := fDMGerar_EDI.mOCcodigo2.AsString;
+  //fDMGerar_EDI.mAuxiliarCodProdCli.AsString        := fDMGerar_EDI.mOCcodigo2.AsString;
+  fDMGerar_EDI.mAuxiliarCodProdCli.AsString        := fDMGerar_EDI.mOCItenscodigo.AsString;
   //fDMGerar_EDI.mAuxiliarQuantidade.AsString        := Replace(FormatFloat('0.0000',fDMGerar_EDI.mRemessaqtde.AsFloat),'.',',');
   fDMGerar_EDI.mAuxiliarQuantidade.AsString        := Replace(fDMGerar_EDI.mRemessaqtde.AsString,'.',',');
-  fDMGerar_EDI.mAuxiliarUnidade.AsString           := fDMGerar_EDI.mOCunidade.AsString;
+  //fDMGerar_EDI.mAuxiliarUnidade.AsString           := fDMGerar_EDI.mOCunidade.AsString;
+  fDMGerar_EDI.mAuxiliarUnidade.AsString           := fDMGerar_EDI.mOCItensunidade.AsString;
   //fDMGerar_EDI.mAuxiliarPercTransferencia.AsString := Replace(FormatFloat('0.0000',fDMGerar_EDI.mOCtransferenciaicms.AsFloat),'.',',');
   fDMGerar_EDI.mAuxiliarPercTransferencia.AsString := Replace(fDMGerar_EDI.mOCtransferenciaicms.AsString,'.',',');
   //fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := Replace(FormatFloat('0.0000',fDMGerar_EDI.mOCprecounitario.AsFloat),'.',',');
-  fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := Replace(fDMGerar_EDI.mOCprecounitario.AsString,'.',',');
+  //fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := Replace(fDMGerar_EDI.mOCprecounitario.AsString,'.',',');
+  fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := Replace(fDMGerar_EDI.mOCItensprecounitario.AsString,'.',',');
   fDMGerar_EDI.mAuxiliarCondPgto.AsString          := fDMGerar_EDI.mOCprazo.AsString;
   fDMGerar_EDI.mAuxiliarDrawback.AsString          := fDMGerar_EDI.mOCregimedrawback.AsString;
   fDMGerar_EDI.mAuxiliarPlano2.AsString            := fDMGerar_EDI.mRemessaremessa.AsString;
-  fDMGerar_EDI.mAuxiliarNomeProduto.AsString       := fDMGerar_EDI.mOCdescricao.AsString;
+  fDMGerar_EDI.mAuxiliarNomeProduto.AsString       := fDMGerar_EDI.mOCItensdescricao.AsString;
   fDMGerar_EDI.mAuxiliarCNPJFornecedor.AsString    := fDMGerar_EDI.mOCcnpj.AsString;
   fDMGerar_EDI.mAuxiliarReservado.AsString         := '';
   fDMGerar_EDI.mAuxiliarTamnanho.AsString          := '';

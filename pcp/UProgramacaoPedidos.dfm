@@ -1,6 +1,6 @@
 object frmProgamacaoPedidos: TfrmProgamacaoPedidos
-  Left = 279
-  Top = 163
+  Left = 199
+  Top = 140
   Width = 1008
   Height = 500
   BorderWidth = 10
@@ -23,8 +23,8 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
   object pagProgramacao: TRzPageControl
     Left = 0
     Top = 34
-    Width = 972
-    Height = 407
+    Width = 980
+    Height = 415
     ActivePage = tabProgramacao
     Align = alClient
     TabIndex = 0
@@ -35,8 +35,8 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
       object ScrollBox1: TScrollBox
         Left = 0
         Top = 0
-        Width = 968
-        Height = 384
+        Width = 976
+        Height = 392
         HorzScrollBar.Visible = False
         Align = alClient
         BevelOuter = bvSpace
@@ -47,7 +47,7 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
         object pnlProgramacao: TPanel
           Left = 0
           Top = 0
-          Width = 956
+          Width = 964
           Height = 25
           Align = alTop
           AutoSize = True
@@ -56,7 +56,7 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 956
+            Width = 964
             Height = 25
             Align = alTop
             BevelOuter = bvNone
@@ -429,8 +429,8 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
         end
         object Panel1: TPanel
           Left = 0
-          Top = 324
-          Width = 956
+          Top = 332
+          Width = 964
           Height = 48
           Align = alBottom
           Color = 16768443
@@ -548,8 +548,8 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
       object DBChart1: TDBChart
         Left = 0
         Top = 0
-        Width = 968
-        Height = 385
+        Width = 976
+        Height = 392
         AllowZoom = False
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
@@ -632,7 +632,7 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
   object RzPanel1: TRzPanel
     Left = 0
     Top = 0
-    Width = 972
+    Width = 980
     Height = 34
     Align = alTop
     BorderOuter = fsNone

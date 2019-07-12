@@ -2132,7 +2132,7 @@ object DMGerar_EDI: TDMGerar_EDI
   end
   object XMLTransformProvider1: TXMLTransformProvider
     TransformRead.TransformationFile = 'C:\Delphi7\SSFacil\EXE\OcToDp_Wirth.xtr'
-    XMLDataFile = 'C:\Users\cleomar\Desktop\PH Textil\Wirth\oc.xml'
+    XMLDataFile = 'C:\A\PH\ocWirthNovo.xml'
     Left = 311
     Top = 425
   end
@@ -2141,7 +2141,7 @@ object DMGerar_EDI: TDMGerar_EDI
     Params = <>
     ProviderName = 'XMLTransformProvider1'
     Left = 308
-    Top = 484
+    Top = 485
     object mCab_OCcodigo: TStringField
       FieldName = 'codigo'
       Size = 5
@@ -2208,11 +2208,11 @@ object DMGerar_EDI: TDMGerar_EDI
     Aggregates = <>
     DataSetField = mCab_OCoc
     Params = <>
-    Left = 326
-    Top = 533
+    Left = 325
+    Top = 530
     object mOCnumero: TStringField
       FieldName = 'numero'
-      Size = 6
+      Size = 15
     end
     object mOCfuncao: TStringField
       FieldName = 'funcao'
@@ -2224,11 +2224,11 @@ object DMGerar_EDI: TDMGerar_EDI
     end
     object mOCprazo: TStringField
       FieldName = 'prazo'
-      Size = 2
+      Size = 10
     end
     object mOCpercentual: TStringField
       FieldName = 'percentual'
-      Size = 3
+      Size = 5
     end
     object mOCtransferenciaicms: TStringField
       FieldName = 'transferenciaicms'
@@ -2242,44 +2242,20 @@ object DMGerar_EDI: TDMGerar_EDI
       FieldName = 'obs'
       BlobType = ftMemo
     end
-    object mOCcodigo1: TStringField
-      FieldName = 'codigo1'
-      Size = 5
+    object mOCcodigo: TStringField
+      FieldName = 'codigo'
+      Size = 15
     end
     object mOCnome: TStringField
       FieldName = 'nome'
-      Size = 14
+      Size = 70
     end
     object mOCcnpj: TStringField
       FieldName = 'cnpj'
       Size = 18
     end
-    object mOCsequencia: TStringField
-      FieldName = 'sequencia'
-      Size = 1
-    end
-    object mOCcodigo2: TStringField
-      FieldName = 'codigo2'
-      Size = 15
-    end
-    object mOCdescricao: TStringField
-      FieldName = 'descricao'
-      Size = 71
-    end
-    object mOCqtde: TStringField
-      FieldName = 'qtde'
-      Size = 7
-    end
-    object mOCunidade: TStringField
-      FieldName = 'unidade'
-      Size = 2
-    end
-    object mOCprecounitario: TStringField
-      FieldName = 'precounitario'
-      Size = 6
-    end
-    object mOCentrega: TDataSetField
-      FieldName = 'entrega'
+    object mOCitem: TDataSetField
+      FieldName = 'item'
       UnNamed = True
     end
   end
@@ -2290,17 +2266,17 @@ object DMGerar_EDI: TDMGerar_EDI
   end
   object mRemessa: TClientDataSet
     Aggregates = <>
-    DataSetField = mOCentrega
+    DataSetField = mOCItensentrega
     Params = <>
     Left = 415
     Top = 479
     object mRemessaremessa: TStringField
       FieldName = 'remessa'
-      Size = 6
+      Size = 10
     end
     object mRemessamapacompra: TStringField
       FieldName = 'mapacompra'
-      Size = 5
+      Size = 10
     end
     object mRemessadata: TStringField
       FieldName = 'data'
@@ -2308,11 +2284,12 @@ object DMGerar_EDI: TDMGerar_EDI
     end
     object mRemessaqtde: TStringField
       FieldName = 'qtde'
-      Size = 7
+      Size = 9
     end
     object mRemessacodigo: TStringField
+      DisplayWidth = 15
       FieldName = 'codigo'
-      Size = 5
+      Size = 15
     end
     object mRemessadescricao: TStringField
       FieldName = 'descricao'
@@ -2327,5 +2304,40 @@ object DMGerar_EDI: TDMGerar_EDI
     DataSet = mRemessa
     Left = 451
     Top = 476
+  end
+  object mOCItens: TClientDataSet
+    Aggregates = <>
+    DataSetField = mOCitem
+    Params = <>
+    Left = 420
+    Top = 435
+    object mOCItenssequencia: TStringField
+      FieldName = 'sequencia'
+      Size = 1
+    end
+    object mOCItenscodigo: TStringField
+      FieldName = 'codigo'
+      Size = 15
+    end
+    object mOCItensdescricao: TStringField
+      FieldName = 'descricao'
+      Size = 71
+    end
+    object mOCItensqtde: TStringField
+      FieldName = 'qtde'
+      Size = 9
+    end
+    object mOCItensunidade: TStringField
+      FieldName = 'unidade'
+      Size = 6
+    end
+    object mOCItensprecounitario: TStringField
+      FieldName = 'precounitario'
+      Size = 12
+    end
+    object mOCItensentrega: TDataSetField
+      FieldName = 'entrega'
+      UnNamed = True
+    end
   end
 end
