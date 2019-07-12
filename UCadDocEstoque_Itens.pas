@@ -55,6 +55,7 @@ type
     pnlCod_Barras: TPanel;
     Label11: TLabel;
     Edit1: TEdit;
+    gbxDimensoes: TGroupBox;
     Label66: TLabel;
     Label67: TLabel;
     Label68: TLabel;
@@ -191,6 +192,7 @@ begin
   DBEdit4.Visible := fDMCadDocEstoque.qParametros_EstUSA_LOCALIZACAO_LOTE.AsString = 'S';
 
   pnlCod_Barras.Visible := (fDMCadDocEstoque.qParametrosUSA_COD_BARRAS.AsString = 'S');
+  gbxDimensoes.Visible := SQLLocate('PARAMETROS','ID','EMPRESA_SUCATA','1') = 'S';
 end;
 
 procedure TfrmCadDocEstoque_Itens.prc_Move_Dados_Itens;
