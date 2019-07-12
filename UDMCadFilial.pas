@@ -656,6 +656,8 @@ type
     cdsFilial_CertificadosINTERVALOTENTATIVAS: TIntegerField;
     sdsFilialENVIO_NFSE: TStringField;
     cdsFilialENVIO_NFSE: TStringField;
+    sdsFilialSPED_SOMA_IPI_CUSTO: TStringField;
+    cdsFilialSPED_SOMA_IPI_CUSTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);

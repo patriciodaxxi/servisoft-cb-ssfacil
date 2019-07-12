@@ -411,6 +411,11 @@ object DMCadFilial: TDMCadFilial
       FixedChar = True
       Size = 1
     end
+    object sdsFilialSPED_SOMA_IPI_CUSTO: TStringField
+      FieldName = 'SPED_SOMA_IPI_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
@@ -427,7 +432,7 @@ object DMCadFilial: TDMCadFilial
     BeforePost = cdsFilialBeforePost
     OnNewRecord = cdsFilialNewRecord
     Left = 136
-    Top = 31
+    Top = 32
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -848,6 +853,11 @@ object DMCadFilial: TDMCadFilial
     end
     object cdsFilialENVIO_NFSE: TStringField
       FieldName = 'ENVIO_NFSE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilialSPED_SOMA_IPI_CUSTO: TStringField
+      FieldName = 'SPED_SOMA_IPI_CUSTO'
       FixedChar = True
       Size = 1
     end
