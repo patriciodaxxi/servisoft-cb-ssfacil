@@ -186,6 +186,7 @@ type
     Label38: TLabel;
     Shape7: TShape;
     Label39: TLabel;
+    dbchkEncomenda: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -1994,6 +1995,20 @@ begin
       fDMCadPedido.cdsPedido_ItensNUM_LOTE_CONTROLE.AsString := '';
   end;
   Label28.Caption := '';
+  if (dbchkEncomenda.Checked) and (fDMCadPedido.cdsPedido_ItensNUM_LOTE_CONTROLE.AsString <> '') then
+  begin
+    if MessageDlg('Quando for encomenda, não pode haver indicação de lote, deseja apagar o nº do lote?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+    begin
+      edtLote.Text := '';
+      fDMCadPedido.cdsPedido_ItensNUM_LOTE_CONTROLE.AsString := ''
+    end
+    else
+    begin
+      dbchkEncomenda.Checked := False;
+      fDMCadPedido.cdsPedido_ItensENCOMENDA.AsString := 'N';
+    end;
+  end;
+
 end;
 
 procedure TfrmCadPedidoLoja.prc_Habilita_Itens;

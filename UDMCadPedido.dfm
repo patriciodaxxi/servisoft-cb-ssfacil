@@ -8,7 +8,7 @@ object DMCadPedido: TDMCadPedido
   object sdsPedido: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM PEDIDO'#13#10#13#10#13#10#13#10#13#10
+    CommandText = 'SELECT *'#13#10'FROM PEDIDO'#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3274,6 +3274,11 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'FABRICA'
       Size = 10
     end
+    object sdsPedido_ItensENCOMENDA: TStringField
+      FieldName = 'ENCOMENDA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsPedido_Itens: TClientDataSet
     Aggregates = <>
@@ -3900,6 +3905,11 @@ object DMCadPedido: TDMCadPedido
     object cdsPedido_ItensFABRICA: TStringField
       FieldName = 'FABRICA'
       Size = 10
+    end
+    object cdsPedido_ItensENCOMENDA: TStringField
+      FieldName = 'ENCOMENDA'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsPedido_Itens: TDataSource

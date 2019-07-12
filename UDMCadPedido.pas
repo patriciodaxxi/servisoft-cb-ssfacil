@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, DBXpress, Variants, RLPreviewForm, LogTypes, Dialogs, Math, Forms, 
-  frxExportMail, frxClass, frxExportPDF, frxDBSet, frxRich, UDMEstoque, RLFilters, RLPDFFilter;
+  frxExportMail, frxClass, frxExportPDF, frxDBSet, frxRich, UDMEstoque, RLFilters, RLPDFFilter, Controls;
 
 type
   TDMCadPedido = class(TDataModule)
@@ -3467,6 +3467,8 @@ type
     cdsPedido_ConsultaID_VENDEDOR_INT: TIntegerField;
     cdsPedido_ConsultaNOME_VENDEDOR_INT: TStringField;
     qParametros_GeralUSA_VENDEDOR_INT: TStringField;
+    sdsPedido_ItensENCOMENDA: TStringField;
+    cdsPedido_ItensENCOMENDA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3941,6 +3943,7 @@ begin
   cdsPedido_ItensDIFERENCA_ICMS.AsString       := 'N';
   if cdsParametrosUSA_LOTE.AsString  = 'S' then
     cdsPedido_ItensGERAR_LOTE.AsString         := 'S';
+  cdsPedido_ItensENCOMENDA.AsString            := 'N';
 end;
 
 procedure TDMCadPedido.dspPedidoUpdateError(Sender: TObject; DataSet: TCustomClientDataSet;
