@@ -157,6 +157,16 @@ type
     qParametros_Est: TSQLQuery;
     qParametros_EstINVENTARIO_ESTMOV: TStringField;
     cdsProdutoQTD: TFloatField;
+    qProdutoID: TIntegerField;
+    qProdutoPRECO_CUSTO: TFloatField;
+    qProdutoTIPO_REG: TStringField;
+    qProd2: TSQLQuery;
+    qProd2NOME: TStringField;
+    qProd2REFERENCIA: TStringField;
+    qProd2UNIDADE: TStringField;
+    qProd2ID: TIntegerField;
+    qProd2PRECO_CUSTO: TFloatField;
+    qProd2TIPO_REG: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsInventarioNewRecord(DataSet: TDataSet);
     procedure dspInventarioUpdateError(Sender: TObject;

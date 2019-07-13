@@ -588,7 +588,7 @@ object DMCadInventario: TDMCadInventario
         'ZERADA, USA_LOCAL_ESTOQUE'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 384
+    Left = 383
     Top = 176
     object qParametrosINFORMAR_COR_MATERIAL: TStringField
       FieldName = 'INFORMAR_COR_MATERIAL'
@@ -692,11 +692,11 @@ object DMCadInventario: TDMCadInventario
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT NOME, REFERENCIA, UNIDADE'
+      'SELECT NOME, REFERENCIA, UNIDADE, ID, PRECO_CUSTO, TIPO_REG'
       'FROM PRODUTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 296
+    Left = 298
     Top = 312
     object qProdutoNOME: TStringField
       FieldName = 'NOME'
@@ -708,6 +708,18 @@ object DMCadInventario: TDMCadInventario
     object qProdutoUNIDADE: TStringField
       FieldName = 'UNIDADE'
       Size = 6
+    end
+    object qProdutoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qProdutoPRECO_CUSTO: TFloatField
+      FieldName = 'PRECO_CUSTO'
+    end
+    object qProdutoTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      FixedChar = True
+      Size = 1
     end
   end
   object qCombinacao: TSQLQuery
@@ -803,6 +815,45 @@ object DMCadInventario: TDMCadInventario
     Top = 224
     object qParametros_EstINVENTARIO_ESTMOV: TStringField
       FieldName = 'INVENTARIO_ESTMOV'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object qProd2: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT NOME, REFERENCIA, UNIDADE, ID, PRECO_CUSTO, TIPO_REG'
+      'FROM PRODUTO'
+      'WHERE ID = :ID')
+    SQLConnection = dmDatabase.scoDados
+    Left = 367
+    Top = 422
+    object qProd2NOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object qProd2REFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object qProd2UNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object qProd2ID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qProd2PRECO_CUSTO: TFloatField
+      FieldName = 'PRECO_CUSTO'
+    end
+    object qProd2TIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
       FixedChar = True
       Size = 1
     end
