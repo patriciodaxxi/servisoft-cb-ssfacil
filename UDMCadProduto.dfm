@@ -1960,12 +1960,13 @@ object dmCadProduto: TdmCadProduto
     GetMetadata = False
     CommandText = 
       'SELECT G.ID, G.NOME, G.TIPO, G.CODIGO, G.NIVEL, G.SUPERIOR, G.CO' +
-      'D_PRINCIPAL, G.TIPO_PROD , G.UNIDADE, G.ID_NCM, '#13#10'CASE NIVEL'#13#10'  ' +
-      '         WHEN 5 THEN '#39'          '#39' ||  NOME'#13#10'           WHEN 4 TH' +
-      'EN '#39'        '#39' ||  NOME'#13#10'           WHEN 3 THEN '#39'      '#39' ||  NOME' +
-      #13#10'           WHEN 2 THEN '#39'    '#39' ||  NOME'#13#10'           WHEN 1 THEN' +
-      ' NOME'#13#10'           ELSE G.NOME'#13#10'           END AS NOME_AUX'#13#10'FROM ' +
-      'GRUPO G'#13#10
+      'D_PRINCIPAL, G.TIPO_PROD , G.UNIDADE, G.ID_NCM, '#13#10'CASE G.NIVEL'#13#10 +
+      '           WHEN 5 THEN '#39'          '#39' ||  G.NOME'#13#10'           WHEN ' +
+      '4 THEN '#39'        '#39' ||  G.NOME'#13#10'           WHEN 3 THEN '#39'      '#39' ||' +
+      '  G.NOME'#13#10'           WHEN 2 THEN '#39'    '#39' ||  G.NOME'#13#10'           W' +
+      'HEN 1 THEN G.NOME'#13#10'           ELSE G.NOME'#13#10'           END AS NOM' +
+      'E_AUX, SUP.NOME NOME_SUPERIOR'#13#10'FROM GRUPO G'#13#10'LEFT JOIN GRUPO SUP' +
+      ' '#13#10'ON G.SUPERIOR = SUP.ID'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -2015,6 +2016,10 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsGrupoID_NCM: TIntegerField
       FieldName = 'ID_NCM'
+    end
+    object cdsGrupoNOME_SUPERIOR: TStringField
+      FieldName = 'NOME_SUPERIOR'
+      Size = 40
     end
   end
   object dsGrupo: TDataSource

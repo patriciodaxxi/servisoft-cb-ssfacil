@@ -1945,6 +1945,7 @@ type
     sdsProduto_CorrugadoNOME_MATERIAL: TStringField;
     cdsProduto_CorrugadoNOME_MATERIAL: TStringField;
     qParametros_ProdUSA_CORRUGADO: TStringField;
+    cdsGrupoNOME_SUPERIOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

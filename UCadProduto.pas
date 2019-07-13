@@ -801,6 +801,7 @@ type
     CurrencyEdit3: TCurrencyEdit;
     CurrencyEdit4: TCurrencyEdit;
     lblCorrugado: TLabel;
+    lblEstrutura: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1014,6 +1015,7 @@ type
     procedure CurrencyEdit4KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure CurrencyEdit4Exit(Sender: TObject);
+    procedure RxDBLookupCombo5Change(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -2453,6 +2455,14 @@ begin
     lblDescLargura.Caption := FormatFloat('0.000#',fDMCadProduto.cdsProdutoLARGURA.AsFloat) + ' x '
                             + FormatFloat('0.000#',fDMCadProduto.cdsProdutoALTURA.AsFloat) + ' x '
                             + FormatFloat('0.0000',fDMCadProduto.cdsProdutoESPESSURA.AsFloat);
+
+    if fDMCadProduto.cdsProdutoID_GRUPO.AsInteger > 0 then
+    begin
+      fDMCadProduto.cdsGrupo.Locate('ID',fDMCadProduto.cdsProdutoID_GRUPO.AsInteger,([Locaseinsensitive]));
+      lblEstrutura.Caption := fDMCadProduto.cdsGrupoNOME_SUPERIOR.AsString;
+    end
+    else
+      lblEstrutura.Caption := '';
   end
   else
     fDMCadProduto.cdsProduto_Serie.Close;
@@ -3307,6 +3317,13 @@ begin
   prc_Verifica_Grupo;
   if (vID_Grupo_Ant <> fDMCadProduto.cdsProdutoID_GRUPO.AsInteger) and (fDMCadProduto.cdsProdutoID_GRUPO.AsInteger > 0) then
     prc_Gerar_Ref_Estruturada;
+  if RxDBLookupCombo5.Text <> '' then
+  begin
+    fDMCadProduto.cdsGrupo.Locate('ID',RxDBLookupCombo5.KeyValue,([Locaseinsensitive]));
+    lblEstrutura.Caption := fDMCadProduto.cdsGrupoNOME_SUPERIOR.AsString;
+  end
+  else
+    lblEstrutura.Caption := '';
 end;
 
 procedure TfrmCadProduto.rxdbGrupoExit(Sender: TObject);
@@ -6170,6 +6187,14 @@ begin
       CurrencyEdit4.SetFocus;
     end;
   end;
+end;
+
+procedure TfrmCadProduto.RxDBLookupCombo5Change(Sender: TObject);
+begin
+  if RxDBLookupCombo5.Text <> '' then
+    lblEstrutura.Caption := fDMCadProduto.cdsGrupoNOME_SUPERIOR.AsString
+  else
+    lblEstrutura.Caption := '';
 end;
 
 end.
