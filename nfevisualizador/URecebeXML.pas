@@ -863,12 +863,6 @@ begin
 end;
 
 procedure TfrmRecebeXML.Le_cdsDetalhe;
-var
-  vDup : Real;
-  vTexto, vAux, vAux2 : String;
-  Node_Tpag : IXMLNode;
-  vDtEmissao : TDateTime;
-  dia, mes, ano: Word;
 begin
   fDMRecebeXML.mItensNota.EmptyDataSet;
   fDMRecebeXML.mParc.EmptyDataSet;
@@ -887,31 +881,6 @@ begin
     prc_Grava_mParc;
 
     fDMRecebeXML.cdsParcelas.Next;
-  end;
-  if fDMRecebeXML.cdsParcelas.IsEmpty then
-  begin
-    vDup := 0;
-    XMLDocument1.LoadFromFile(OpenDialog1.FileName);
-    XMLDocument1.Active;
-    Node_Tpag := XMLDocument1.DocumentElement;
-    vTexto := Node_Tpag.ChildNodes['NFe'].ChildNodes['infNFe'].ChildNodes['pag'].ChildNodes['detPag'].ChildNodes['vPag'].NodeValue;
-    if vTexto <> '' then
-      vDup := StrToFloat(Replace(vTexto,'.',','));
-    fDMRecebeXML.mParc.Insert;
-    vAux  := copy(fDMRecebeXML.cdsCabecalhoide_dhemi.AsString,1,10);
-    vAux2 := copy(vAux,1,4);
-    ano   := StrToInt(vAux2);
-    vAux2 := copy(vAux,6,2);
-    mes   := StrToInt(vAux2);
-    vAux2 := copy(vAux,9,2);
-    dia   := StrToInt(vAux2);
-    vDtEmissao := EncodeDate(ano,mes,dia);
-    fDMRecebeXML.mParcNumDuplicata.AsString   := '1';
-    fDMRecebeXML.mParcDtVencimento.AsDateTime := vDtEmissao;
-    fDMRecebeXML.mParcVlrVencimento.AsFloat   := vDup;
-    fDMRecebeXML.mParcID_Conta.Clear;
-    fDMRecebeXML.mParcID_TipoCobranca.Clear;
-    fDMRecebeXML.mParc.Post;
   end;
 
 end;
@@ -2404,6 +2373,10 @@ procedure TfrmRecebeXML.Gravar_NotaEntrada;
 var
   vNumSeq: Integer;
   vExisteAux: Boolean;
+  vDup : Real;
+  vTexto : String;
+  Node_Tpag : IXMLNode;
+  vDtEmissao : TDateTime;
 begin
   vID_Nota := 0;
   vGravar := False;
@@ -2438,7 +2411,30 @@ begin
       fDMRecebeXML.cdsNotaFiscalTIPO_REG.AsString := 'NTS';
     end;
     fDMRecebeXML.cdsNotaFiscalID_CLIENTE.AsInteger := vCodFornecedor;
-    if (fDMRecebeXML.cdsParcelas.IsEmpty) or (vImportar_NotaSaida) then
+
+    if fDMRecebeXML.mParc.IsEmpty then
+    begin
+      vDup := 0;
+      XMLDocument1.LoadFromFile(OpenDialog1.FileName);
+      XMLDocument1.Active;
+      Node_Tpag := XMLDocument1.DocumentElement;
+      vTexto := Node_Tpag.ChildNodes['NFe'].ChildNodes['infNFe'].ChildNodes['pag'].ChildNodes['detPag'].ChildNodes['vPag'].NodeValue;
+      if vTexto <> '' then
+      begin
+        vDup := StrToFloat(Replace(vTexto,'.',','));
+        fDMRecebeXML.mParc.Insert;
+        vDtEmissao := DateEdit1.Date;
+        fDMRecebeXML.mParcNumDuplicata.AsString   := '1';
+        fDMRecebeXML.mParcDtVencimento.AsDateTime := vDtEmissao;
+        fDMRecebeXML.mParcVlrVencimento.AsFloat   := vDup;
+        fDMRecebeXML.mParcID_Conta.Clear;
+        fDMRecebeXML.mParcID_TipoCobranca.Clear;
+        fDMRecebeXML.mParc.Post;
+      end;
+    end;
+
+//    if (fDMRecebeXML.cdsParcelas.IsEmpty) or (vImportar_NotaSaida) then
+    if (fDMRecebeXML.mParc.IsEmpty) or (vImportar_NotaSaida) then
       fDMRecebeXML.cdsNotaFiscalTIPO_PRAZO.AsString := 'N'
     else
       fDMRecebeXML.cdsNotaFiscalTIPO_PRAZO.AsString := 'P';
