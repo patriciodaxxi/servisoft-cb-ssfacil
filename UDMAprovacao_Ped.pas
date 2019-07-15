@@ -238,21 +238,6 @@ type
     sdsPedWebPRAZO_PEDIDO: TStringField;
     dspPedWeb: TDataSetProvider;
     cdsPedWeb: TClientDataSet;
-    cdsPedWebID: TIntegerField;
-    cdsPedWebID_USUARIO: TIntegerField;
-    cdsPedWebID_PESSOA: TIntegerField;
-    cdsPedWebHORA_EMISSAO: TStringField;
-    cdsPedWebID_FORMA_PAGAMENTO: TIntegerField;
-    cdsPedWebVLR_DESCONTO: TFMTBCDField;
-    cdsPedWebTIPO_OPERACAO: TIntegerField;
-    cdsPedWebCOND_PAGAMENTO: TIntegerField;
-    cdsPedWebGERADO: TStringField;
-    cdsPedWebVLR_TOTAL: TFMTBCDField;
-    cdsPedWebOBS: TStringField;
-    cdsPedWebsdsPedWeb_Item: TDataSetField;
-    cdsPedWebDATA_APROVADO: TDateField;
-    cdsPedWebDATA_EMISSAO: TDateField;
-    cdsPedWebPRAZO_PEDIDO: TStringField;
     dsPedWeb: TDataSource;
     dsMestre: TDataSource;
     sdsPedWeb_Item: TSQLDataSet;
@@ -272,6 +257,71 @@ type
     cdsPedWeb_ItemVLR_TOTAL: TFloatField;
     cdsPedWeb_ItemOBS: TStringField;
     dsPedWeb_Item: TDataSource;
+    qParametros_PedUSA_APROVACAO_ITEM: TStringField;
+    sdsPedido_Item: TSQLDataSet;
+    dspPedido_Item: TDataSetProvider;
+    cdsPedido_Item: TClientDataSet;
+    dsPedido_Item: TDataSource;
+    sdsPedido_ItemID: TIntegerField;
+    sdsPedido_ItemITEM: TIntegerField;
+    sdsPedido_ItemAPROVADO_ITEM: TStringField;
+    cdsPedido_ItemID: TIntegerField;
+    cdsPedido_ItemITEM: TIntegerField;
+    cdsPedido_ItemAPROVADO_ITEM: TStringField;
+    sdsPedido_Item_Aprov: TSQLDataSet;
+    dspPedido_Item_Aprov: TDataSetProvider;
+    cdsPedido_Item_Aprov: TClientDataSet;
+    dsPedido_Item_Aprov: TDataSource;
+    sdsPedido_Item_AprovID: TIntegerField;
+    sdsPedido_Item_AprovITEM: TIntegerField;
+    sdsPedido_Item_AprovITEM_APROV: TIntegerField;
+    sdsPedido_Item_AprovDATA: TIntegerField;
+    sdsPedido_Item_AprovUSUARIO: TStringField;
+    sdsPedido_Item_AprovDTUSUARIO: TDateField;
+    sdsPedido_Item_AprovHRUSUARIO: TTimeField;
+    sdsPedido_Item_AprovID_FUNCIONARIO: TIntegerField;
+    cdsPedWebID: TIntegerField;
+    cdsPedWebID_USUARIO: TIntegerField;
+    cdsPedWebID_PESSOA: TIntegerField;
+    cdsPedWebHORA_EMISSAO: TStringField;
+    cdsPedWebID_FORMA_PAGAMENTO: TIntegerField;
+    cdsPedWebVLR_DESCONTO: TFMTBCDField;
+    cdsPedWebTIPO_OPERACAO: TIntegerField;
+    cdsPedWebCOND_PAGAMENTO: TIntegerField;
+    cdsPedWebGERADO: TStringField;
+    cdsPedWebVLR_TOTAL: TFMTBCDField;
+    cdsPedWebOBS: TStringField;
+    cdsPedWebDATA_APROVADO: TDateField;
+    cdsPedWebDATA_EMISSAO: TDateField;
+    cdsPedWebPRAZO_PEDIDO: TStringField;
+    cdsPedWebsdsPedWeb_Item: TDataSetField;
+    cdsPedido_Item_AprovID: TIntegerField;
+    cdsPedido_Item_AprovITEM: TIntegerField;
+    cdsPedido_Item_AprovITEM_APROV: TIntegerField;
+    cdsPedido_Item_AprovDATA: TIntegerField;
+    cdsPedido_Item_AprovUSUARIO: TStringField;
+    cdsPedido_Item_AprovDTUSUARIO: TDateField;
+    cdsPedido_Item_AprovHRUSUARIO: TTimeField;
+    cdsPedido_Item_AprovID_FUNCIONARIO: TIntegerField;
+    sdsPedido_ItemID_PRODUTO: TIntegerField;
+    sdsPedido_ItemREFERENCIA: TStringField;
+    sdsPedido_ItemNOMEPRODUTO: TStringField;
+    cdsPedido_ItemID_PRODUTO: TIntegerField;
+    cdsPedido_ItemREFERENCIA: TStringField;
+    cdsPedido_ItemNOMEPRODUTO: TStringField;
+    sdsPedido_Item_AprovNOME_FUNCIONARIO: TStringField;
+    cdsPedido_Item_AprovNOME_FUNCIONARIO: TStringField;
+    sdsPedido_ItemCANCELADO: TStringField;
+    cdsPedido_ItemCANCELADO: TStringField;
+    sdsPedido_Item_AprovAPROVADO: TStringField;
+    cdsPedido_Item_AprovAPROVADO: TStringField;
+    qFuncionario: TSQLQuery;
+    qFuncionarioCODIGO: TIntegerField;
+    qFuncionarioNOME: TStringField;
+    qFuncionarioUSUARIO_LOG: TStringField;
+    sdsPedido_Item_AprovMOTIVO_NAO_APROV: TStringField;
+    cdsPedido_Item_AprovMOTIVO_NAO_APROV: TStringField;
+    sdsPrc_Atualiza_Aprov_Ped: TSQLDataSet;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedido_ProcessoNewRecord(DataSet: TDataSet);
   private
@@ -290,6 +340,8 @@ type
     procedure prc_Saldo_SMS;
     procedure prc_Consultar_PedWeb;
     procedure prc_Localiza_PedWeb(ID : Integer);
+
+    function fnc_Verifica_Aprov(ID, Item : Integer; Tipo : String): Boolean;
 
   end;
 
@@ -316,7 +368,7 @@ var
   Origem, Destino: string;
   vIndices: string;
   aIndices: array of string;
-begin  
+begin
   ctAprovacao_Ped   := sdsAprovacao_Ped.CommandText;
   ctPedido_Pend     := sdsPedido_Pend.CommandText;
   ctCliente_Pend    := sdsCliente_Pend.CommandText;
@@ -799,6 +851,32 @@ begin
   cdsPedWeb.Open;
   cdsPedWeb_Item.Close;
   cdsPedWeb_Item.Open;
+end;
+
+function TDMAprovacao_Ped.fnc_Verifica_Aprov(ID, Item: Integer; Tipo : String): Boolean;
+var
+  sds: TSQLDataSet;
+  vDif : String;
+begin
+  vDif := '<>';
+  if Tipo = '1' then
+    vDif := '=';
+  Result := False;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText := 'SELECT COUNT(1) CONTADOR FROM PEDIDO_ITEM_APROV I WHERE I.ID = :ID AND I.ITEM = :ITEM '
+                     + ' AND coalesce(I.aprovado,''N'') ' + vDif + QuotedStr(Tipo);
+    sds.ParamByName('ID').AsInteger   := ID;
+    sds.ParamByName('ITEM').AsInteger := ITEM;
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := True;
+  finally
+    FreeAndNil(sds);
+  end;
 end;
 
 end.

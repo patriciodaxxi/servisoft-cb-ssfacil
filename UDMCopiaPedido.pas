@@ -458,6 +458,8 @@ type
     cdsPedido_ItensBASE_IPI: TFloatField;
     sdsPedido_Item_TipoESPESSURA: TFloatField;
     cdsPedido_Item_TipoESPESSURA: TFloatField;
+    sdsPedido_ItensAPROVADO_ITEM: TStringField;
+    cdsPedido_ItensAPROVADO_ITEM: TStringField;
     procedure dspPedidoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
       UpdateKind: TUpdateKind; var Response: TResolverResponse);

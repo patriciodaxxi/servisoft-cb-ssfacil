@@ -3518,6 +3518,10 @@ begin
     RzPageControl1.ActivePage := TS_Cadastro;
     btnAlterarClick(Sender);
   end;
+  //15/07/2019
+  if fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S' then
+    fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P';
+
   fDMCadPedido.Tag := 0;
 end;
 

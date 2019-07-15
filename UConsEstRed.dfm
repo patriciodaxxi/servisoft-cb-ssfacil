@@ -5,7 +5,7 @@ object frmConsEstRed: TfrmConsEstRed
   BorderStyle = bsSingle
   Caption = 'Estoque'
   ClientHeight = 525
-  ClientWidth = 978
+  ClientWidth = 996
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object frmConsEstRed: TfrmConsEstRed
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 978
+    Width = 996
     Height = 82
     Align = alTop
     Color = clSilver
@@ -124,7 +124,7 @@ object frmConsEstRed: TfrmConsEstRed
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 82
-    Width = 978
+    Width = 996
     Height = 443
     Align = alClient
     Ctl3D = False
@@ -157,7 +157,7 @@ object frmConsEstRed: TfrmConsEstRed
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 10
+    ColCount = 11
     RowCount = 2
     Columns = <
       item
@@ -172,7 +172,7 @@ object frmConsEstRed: TfrmConsEstRed
         Title.Font.Height = -12
         Title.Font.Name = 'Verdana'
         Title.Font.Style = []
-        Width = 81
+        Width = 62
         Visible = True
       end
       item
@@ -214,7 +214,7 @@ object frmConsEstRed: TfrmConsEstRed
         Title.Font.Height = -12
         Title.Font.Name = 'Verdana'
         Title.Font.Style = []
-        Width = 172
+        Width = 194
         Visible = True
       end
       item
@@ -229,6 +229,14 @@ object frmConsEstRed: TfrmConsEstRed
         Title.Font.Name = 'Verdana'
         Title.Font.Style = []
         Width = 109
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'LOCALIZACAO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Localiza'#231#227'o'
+        Title.Color = 10813256
         Visible = True
       end
       item
@@ -292,17 +300,17 @@ object frmConsEstRed: TfrmConsEstRed
     CommandText = 
       'SELECT E.id_produto, E.id_cor, E.tamanho, '#13#10'cast(sum(E.QTD) AS F' +
       'loat) QTD, P.NOME NOME_PRODUTO, P.REFERENCIA,'#13#10'C.NOME NOME_COMBI' +
-      'NACAO, SUM(coalesce(R.qtd,0)) QTD_RESERVA,'#13#10'case'#13#10'  when p.tipo_' +
-      'reg = '#39'P'#39' then '#39'Produto'#39#13#10'  when p.tipo_reg = '#39'M'#39' then '#39'Material' +
-      #39#13#10'  when p.tipo_reg = '#39'C'#39' then '#39'Mat.Consumo'#39#13#10'  when p.tipo_reg' +
-      ' = '#39'S'#39' then '#39'Semi Acabado'#39#13#10'  when p.tipo_reg = '#39'I'#39' then '#39'Imobil' +
-      'izado'#39#13#10'  else '#39#39#13#10'  end DESC_TIPO'#13#10'FROM ESTOQUE_ATUAL E'#13#10'INNER ' +
-      'JOIN PRODUTO P'#13#10'ON E.ID_PRODUTO = P.id'#13#10'LEFT JOIN COMBINACAO C'#13#10 +
-      'ON E.ID_COR = C.ID'#13#10'LEFT JOIN ESTOQUE_RES R'#13#10'ON E.FILIAL = R.fil' +
-      'ial'#13#10'AND E.id_produto = R.ID_PRODUTO'#13#10'AND E.id_cor = R.ID_COR'#13#10'A' +
-      'ND E.tamanho = R.TAMANHO'#13#10'GROUP BY E.id_produto, E.id_cor, E.tam' +
-      'anho, E.num_lote_controle, P.NOME ,'#13#10'P.REFERENCIA, C.NOME, P.TIP' +
-      'O_REG'#13#10#13#10
+      'NACAO, SUM(coalesce(R.qtd,0)) QTD_RESERVA, p.localizacao,'#13#10'case'#13 +
+      #10'  when p.tipo_reg = '#39'P'#39' then '#39'Produto'#39#13#10'  when p.tipo_reg = '#39'M'#39 +
+      ' then '#39'Material'#39#13#10'  when p.tipo_reg = '#39'C'#39' then '#39'Mat.Consumo'#39#13#10'  ' +
+      'when p.tipo_reg = '#39'S'#39' then '#39'Semi Acabado'#39#13#10'  when p.tipo_reg = '#39 +
+      'I'#39' then '#39'Imobilizado'#39#13#10'  else '#39#39#13#10'  end DESC_TIPO'#13#10'FROM ESTOQUE_' +
+      'ATUAL E'#13#10'INNER JOIN PRODUTO P'#13#10'ON E.ID_PRODUTO = P.id'#13#10'LEFT JOIN' +
+      ' COMBINACAO C'#13#10'ON E.ID_COR = C.ID'#13#10'LEFT JOIN ESTOQUE_RES R'#13#10'ON E' +
+      '.FILIAL = R.filial'#13#10'AND E.id_produto = R.ID_PRODUTO'#13#10'AND E.id_co' +
+      'r = R.ID_COR'#13#10'AND E.tamanho = R.TAMANHO'#13#10'GROUP BY E.id_produto, ' +
+      'E.id_cor, E.tamanho, E.num_lote_controle, P.NOME ,'#13#10'P.REFERENCIA' +
+      ', C.NOME, P.TIPO_REG, p.localizacao'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -364,6 +372,10 @@ object frmConsEstRed: TfrmConsEstRed
       FieldName = 'clSaldo'
       DisplayFormat = '0.000##'
       Calculated = True
+    end
+    object cdsConsEstLOCALIZACAO: TStringField
+      FieldName = 'LOCALIZACAO'
+      Size = 30
     end
   end
   object dsConsEst: TDataSource

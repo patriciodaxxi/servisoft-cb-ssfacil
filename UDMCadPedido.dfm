@@ -3279,6 +3279,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object sdsPedido_ItensAPROVADO_ITEM: TStringField
+      FieldName = 'APROVADO_ITEM'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsPedido_Itens: TClientDataSet
     Aggregates = <>
@@ -3908,6 +3913,11 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsPedido_ItensENCOMENDA: TStringField
       FieldName = 'ENCOMENDA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPedido_ItensAPROVADO_ITEM: TStringField
+      FieldName = 'APROVADO_ITEM'
       FixedChar = True
       Size = 1
     end

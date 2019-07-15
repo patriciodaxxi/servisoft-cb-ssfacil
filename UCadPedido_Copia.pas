@@ -139,6 +139,11 @@ begin
     fDMCadPedido.cdsPedido_ItensID_MOVESTOQUE.AsInteger := 0;
     if CheckBox1.Checked then
       fDMCadPedido.cdsPedido_ItensDTENTREGA.AsDateTime := DateEdit1.Date;
+    if (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') and (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S') then
+      fDMCadPedido.cdsPedido_ItensAPROVADO_ITEM.AsString := 'P'
+    else
+    if (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'C') and (fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') then
+      fDMCadPedido.cdsPedido_ItensAPROVADO_ITEM.AsString := 'P';
     fDMCadPedido.cdsPedido_Itens.Post;
 
     //26/09/2016

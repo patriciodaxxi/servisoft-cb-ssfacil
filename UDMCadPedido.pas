@@ -3469,6 +3469,8 @@ type
     qParametros_GeralUSA_VENDEDOR_INT: TStringField;
     sdsPedido_ItensENCOMENDA: TStringField;
     cdsPedido_ItensENCOMENDA: TStringField;
+    sdsPedido_ItensAPROVADO_ITEM: TStringField;
+    cdsPedido_ItensAPROVADO_ITEM: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3944,6 +3946,7 @@ begin
   if cdsParametrosUSA_LOTE.AsString  = 'S' then
     cdsPedido_ItensGERAR_LOTE.AsString         := 'S';
   cdsPedido_ItensENCOMENDA.AsString            := 'N';
+  cdsPedido_ItensAPROVADO_ITEM.AsString        := 'P';
 end;
 
 procedure TDMCadPedido.dspPedidoUpdateError(Sender: TObject; DataSet: TCustomClientDataSet;

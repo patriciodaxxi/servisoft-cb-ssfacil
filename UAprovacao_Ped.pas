@@ -18,8 +18,8 @@ type
     btnAprovarClientes: TNxButton;
     btnNaoAprovarClientes: TNxButton;
     Panel3: TPanel;
-    NxButton3: TNxButton;
-    NxButton4: TNxButton;
+    btnAprovar_Ped: TNxButton;
+    btnNaoAprovar_Ped: TNxButton;
     btnConsultar: TNxButton;
     Panel4: TPanel;
     Label1: TLabel;
@@ -55,13 +55,14 @@ type
     btnPedidoApp: TNxButton;
     lblPedidoWeb: TLabel;
     ProgressBar1: TProgressBar;
+    btnAprovar_Item: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnAprovarClientesClick(Sender: TObject);
-    procedure NxButton3Click(Sender: TObject);
+    procedure btnAprovar_PedClick(Sender: TObject);
     procedure btnNaoAprovarClientesClick(Sender: TObject);
-    procedure NxButton4Click(Sender: TObject);
+    procedure btnNaoAprovar_PedClick(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure ComboBox1Click(Sender: TObject);
@@ -72,6 +73,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnPedidoAppClick(Sender: TObject);
+    procedure btnAprovar_ItemClick(Sender: TObject);
   private
     { Private declarations }
     fDMAprovacao_Ped: TDMAprovacao_Ped;
@@ -98,7 +100,8 @@ var
 
 implementation
 
-uses rsDBUtils, uUtilPadrao, DmdDatabase, UConsPessoa_Fin, uGrava_Pedido, uCalculo_Pedido;
+uses rsDBUtils, uUtilPadrao, DmdDatabase, UConsPessoa_Fin, uGrava_Pedido, uCalculo_Pedido,
+  UAprovacao_Ped_Item;
 
 {$R *.dfm}
 
@@ -251,6 +254,10 @@ begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
   fDMAprovacao_Ped.qParametros_Geral.Open;
   btnPedidoApp.Visible := fDMAprovacao_Ped.qParametros_GeralFILIAL_PADRAO_PEDWEB.AsInteger > 0;
+
+  btnAprovar_Item.Visible   := (fDMAprovacao_Ped.qParametros_PedUSA_APROVACAO_ITEM.AsString = 'S');
+  btnAprovar_Ped.Visible    := (trim(fDMAprovacao_Ped.qParametros_PedUSA_APROVACAO_ITEM.AsString) <> 'S');
+  btnNaoAprovar_Ped.Visible := (trim(fDMAprovacao_Ped.qParametros_PedUSA_APROVACAO_ITEM.AsString) <> 'S');
 end;
 
 procedure TfrmAprovacao_Ped.btnAprovarClientesClick(Sender: TObject);
@@ -353,7 +360,7 @@ begin
   FreeAndNil(sds);
 end;
 
-procedure TfrmAprovacao_Ped.NxButton3Click(Sender: TObject);
+procedure TfrmAprovacao_Ped.btnAprovar_PedClick(Sender: TObject);
 begin
   if MessageDlg('Deseja confirmar a aprovação?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     Exit;
@@ -391,7 +398,7 @@ begin
   btnConsultarClick(Sender);
 end;
 
-procedure TfrmAprovacao_Ped.NxButton4Click(Sender: TObject);
+procedure TfrmAprovacao_Ped.btnNaoAprovar_PedClick(Sender: TObject);
 begin
   if MessageDlg('Não Aprovar os pedidos selecionados?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     Exit;
@@ -714,6 +721,26 @@ begin
   fDMAprovacao_Ped.cdsPedWebDATA_APROVADO.AsDateTime := Date;
   fDMAprovacao_Ped.cdsPedWeb.Post;
   fDMAprovacao_Ped.cdsPedWeb.ApplyUpdates(0);
+end;
+
+procedure TfrmAprovacao_Ped.btnAprovar_ItemClick(Sender: TObject);
+begin
+  if fDMAprovacao_Ped.mPedidoAux.RecordCount <= 0 then
+  begin
+    MessageDlg('*** Não existe Pedido para Aprovar!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+  fDMAprovacao_Ped.qFuncionario.Close;
+  fDMAprovacao_Ped.qFuncionario.Open;
+  fDMAprovacao_Ped.qFuncionario.Close;
+  fDMAprovacao_Ped.qFuncionario.FieldByName('USUARIO_LOG').AsString := vUsuario;
+  fDMAprovacao_Ped.qFuncionario.Open;
+
+  frmAprovacao_Ped_Item := TfrmAprovacao_Ped_Item.Create(self);
+  frmAprovacao_Ped_Item.fDMAprovacao_Ped := fDMAprovacao_Ped;
+  frmAprovacao_Ped_Item.ShowModal;
+  FreeAndNil(frmAprovacao_Ped_Item);
+
 end;
 
 end.

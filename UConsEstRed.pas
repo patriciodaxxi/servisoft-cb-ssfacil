@@ -38,6 +38,7 @@ type
     qProdutoNOME: TStringField;
     cdsConsEstQTD_RESERVA: TFloatField;
     cdsConsEstclSaldo: TFloatField;
+    cdsConsEstLOCALIZACAO: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);

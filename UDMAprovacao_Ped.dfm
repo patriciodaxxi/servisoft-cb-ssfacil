@@ -3,7 +3,7 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
   OnCreate = DataModuleCreate
   Left = 310
   Top = 82
-  Height = 560
+  Height = 582
   Width = 941
   object sdsAprovacao_Ped: TSQLDataSet
     NoMetadata = True
@@ -657,8 +657,8 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 72
-    Top = 152
+    Left = 110
+    Top = 336
     object sdsPedido_ProcessoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -698,8 +698,8 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
   object dspPedido_Processo: TDataSetProvider
     DataSet = sdsPedido_Processo
     UpdateMode = upWhereKeyOnly
-    Left = 101
-    Top = 152
+    Left = 139
+    Top = 336
   end
   object cdsPedido_Processo: TClientDataSet
     Aggregates = <>
@@ -707,8 +707,8 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     Params = <>
     ProviderName = 'dspPedido_Processo'
     OnNewRecord = cdsPedido_ProcessoNewRecord
-    Left = 133
-    Top = 152
+    Left = 171
+    Top = 335
     object cdsPedido_ProcessoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -747,8 +747,8 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
   end
   object dsPedido_Processo: TDataSource
     DataSet = cdsPedido_Processo
-    Left = 169
-    Top = 152
+    Left = 207
+    Top = 336
   end
   object sdsConsulta_Processo: TSQLDataSet
     NoMetadata = True
@@ -937,6 +937,11 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     end
     object qParametros_PedENVIA_SMS: TStringField
       FieldName = 'ENVIA_SMS'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedUSA_APROVACAO_ITEM: TStringField
+      FieldName = 'USA_APROVACAO_ITEM'
       FixedChar = True
       Size = 1
     end
@@ -1258,8 +1263,8 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 72
-    Top = 208
+    Left = 100
+    Top = 381
     object sdsPedWebID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1315,49 +1320,42 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
   end
   object dspPedWeb: TDataSetProvider
     DataSet = sdsPedWeb
-    Left = 98
-    Top = 208
+    Left = 126
+    Top = 381
   end
   object cdsPedWeb: TClientDataSet
     Aggregates = <>
+    IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspPedWeb'
-    Left = 126
-    Top = 208
+    Left = 154
+    Top = 381
     object cdsPedWebID: TIntegerField
       FieldName = 'ID'
       Required = True
     end
     object cdsPedWebID_USUARIO: TIntegerField
-      DisplayLabel = 'Cod Usu'#225'rio'
       FieldName = 'ID_USUARIO'
     end
     object cdsPedWebID_PESSOA: TIntegerField
-      DisplayLabel = 'Cod. Cliente'
       FieldName = 'ID_PESSOA'
     end
     object cdsPedWebHORA_EMISSAO: TStringField
-      DisplayLabel = 'Hora_Emissao'
       FieldName = 'HORA_EMISSAO'
       Size = 10
     end
     object cdsPedWebID_FORMA_PAGAMENTO: TIntegerField
-      DisplayLabel = 'Forma Pagamento'
       FieldName = 'ID_FORMA_PAGAMENTO'
     end
     object cdsPedWebVLR_DESCONTO: TFMTBCDField
-      DisplayLabel = 'Valor Desconto'
       FieldName = 'VLR_DESCONTO'
-      DisplayFormat = '##.#00'
       Precision = 15
       Size = 2
     end
     object cdsPedWebTIPO_OPERACAO: TIntegerField
-      DisplayLabel = 'Tipo Opera'#231#227'o'
       FieldName = 'TIPO_OPERACAO'
     end
     object cdsPedWebCOND_PAGAMENTO: TIntegerField
-      DisplayLabel = 'Condi'#231#227'o pagamento'
       FieldName = 'COND_PAGAMENTO'
     end
     object cdsPedWebGERADO: TStringField
@@ -1366,18 +1364,13 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
       Size = 1
     end
     object cdsPedWebVLR_TOTAL: TFMTBCDField
-      DisplayLabel = 'Valor Total'
       FieldName = 'VLR_TOTAL'
-      DisplayFormat = '##.#00'
       Precision = 15
       Size = 2
     end
     object cdsPedWebOBS: TStringField
       FieldName = 'OBS'
       Size = 150
-    end
-    object cdsPedWebsdsPedWeb_Item: TDataSetField
-      FieldName = 'sdsPedWeb_Item'
     end
     object cdsPedWebDATA_APROVADO: TDateField
       FieldName = 'DATA_APROVADO'
@@ -1386,21 +1379,22 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
       FieldName = 'DATA_EMISSAO'
     end
     object cdsPedWebPRAZO_PEDIDO: TStringField
-      DisplayLabel = 'Prazo Pedido'
-      DisplayWidth = 15
       FieldName = 'PRAZO_PEDIDO'
       Size = 30
+    end
+    object cdsPedWebsdsPedWeb_Item: TDataSetField
+      FieldName = 'sdsPedWeb_Item'
     end
   end
   object dsPedWeb: TDataSource
     DataSet = cdsPedWeb
-    Left = 156
-    Top = 208
+    Left = 184
+    Top = 381
   end
   object dsMestre: TDataSource
     DataSet = sdsPedWeb
-    Left = 72
-    Top = 256
+    Left = 100
+    Top = 429
   end
   object sdsPedWeb_Item: TSQLDataSet
     NoMetadata = True
@@ -1416,8 +1410,8 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 72
-    Top = 304
+    Left = 100
+    Top = 477
     object sdsPedWeb_ItemID_PEDIDO: TIntegerField
       FieldName = 'ID_PEDIDO'
       Required = True
@@ -1445,10 +1439,9 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
   end
   object cdsPedWeb_Item: TClientDataSet
     Aggregates = <>
-    DataSetField = cdsPedWebsdsPedWeb_Item
     Params = <>
-    Left = 104
-    Top = 304
+    Left = 132
+    Top = 477
     object cdsPedWeb_ItemID_PEDIDO: TIntegerField
       DisplayLabel = 'ID Pedido'
       FieldName = 'ID_PEDIDO'
@@ -1485,7 +1478,283 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
   end
   object dsPedWeb_Item: TDataSource
     DataSet = cdsPedWeb_Item
-    Left = 136
-    Top = 304
+    Left = 164
+    Top = 477
+  end
+  object sdsPedido_Item: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT I.ID, I.ITEM, I.APROVADO_ITEM, I.ID_PRODUTO, I.REFERENCIA' +
+      ', I.NOMEPRODUTO, I.CANCELADO'#13#10'FROM PEDIDO_ITEM I'#13#10'WHERE I.ID = :' +
+      'ID'#13#10'  AND I.ITEM = :ITEM'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 66
+    Top = 146
+    object sdsPedido_ItemID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPedido_ItemITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPedido_ItemAPROVADO_ITEM: TStringField
+      FieldName = 'APROVADO_ITEM'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsPedido_ItemID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object sdsPedido_ItemREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object sdsPedido_ItemNOMEPRODUTO: TStringField
+      FieldName = 'NOMEPRODUTO'
+      Size = 100
+    end
+    object sdsPedido_ItemCANCELADO: TStringField
+      FieldName = 'CANCELADO'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dspPedido_Item: TDataSetProvider
+    DataSet = sdsPedido_Item
+    UpdateMode = upWhereKeyOnly
+    Left = 97
+    Top = 146
+  end
+  object cdsPedido_Item: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID;ITEM'
+    Params = <>
+    ProviderName = 'dspPedido_Item'
+    Left = 131
+    Top = 145
+    object cdsPedido_ItemID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPedido_ItemITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPedido_ItemAPROVADO_ITEM: TStringField
+      FieldName = 'APROVADO_ITEM'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPedido_ItemID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsPedido_ItemREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsPedido_ItemNOMEPRODUTO: TStringField
+      FieldName = 'NOMEPRODUTO'
+      Size = 100
+    end
+    object cdsPedido_ItemCANCELADO: TStringField
+      FieldName = 'CANCELADO'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dsPedido_Item: TDataSource
+    DataSet = cdsPedido_Item
+    Left = 162
+    Top = 146
+  end
+  object sdsPedido_Item_Aprov: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT P.*, F.NOME NOME_FUNCIONARIO'#13#10'FROM PEDIDO_ITEM_APROV P'#13#10'L' +
+      'EFT JOIN FUNCIONARIO F'#13#10'ON P.ID_FUNCIONARIO = F.CODIGO'#13#10'WHERE P.' +
+      'ID = :ID'#13#10'  AND P.ITEM = :ITEM'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 68
+    Top = 202
+    object sdsPedido_Item_AprovID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPedido_Item_AprovITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPedido_Item_AprovITEM_APROV: TIntegerField
+      FieldName = 'ITEM_APROV'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPedido_Item_AprovDATA: TIntegerField
+      FieldName = 'DATA'
+    end
+    object sdsPedido_Item_AprovUSUARIO: TStringField
+      FieldName = 'USUARIO'
+      Size = 15
+    end
+    object sdsPedido_Item_AprovDTUSUARIO: TDateField
+      FieldName = 'DTUSUARIO'
+    end
+    object sdsPedido_Item_AprovHRUSUARIO: TTimeField
+      FieldName = 'HRUSUARIO'
+    end
+    object sdsPedido_Item_AprovID_FUNCIONARIO: TIntegerField
+      FieldName = 'ID_FUNCIONARIO'
+    end
+    object sdsPedido_Item_AprovAPROVADO: TStringField
+      FieldName = 'APROVADO'
+      Size = 1
+    end
+    object sdsPedido_Item_AprovMOTIVO_NAO_APROV: TStringField
+      FieldName = 'MOTIVO_NAO_APROV'
+      Size = 250
+    end
+    object sdsPedido_Item_AprovNOME_FUNCIONARIO: TStringField
+      FieldName = 'NOME_FUNCIONARIO'
+      ProviderFlags = []
+      Size = 50
+    end
+  end
+  object dspPedido_Item_Aprov: TDataSetProvider
+    DataSet = sdsPedido_Item_Aprov
+    UpdateMode = upWhereKeyOnly
+    Left = 100
+    Top = 203
+  end
+  object cdsPedido_Item_Aprov: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID;ITEM;ITEM_APROV'
+    Params = <>
+    ProviderName = 'dspPedido_Item_Aprov'
+    Left = 132
+    Top = 201
+    object cdsPedido_Item_AprovID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPedido_Item_AprovITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPedido_Item_AprovITEM_APROV: TIntegerField
+      FieldName = 'ITEM_APROV'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPedido_Item_AprovDATA: TIntegerField
+      FieldName = 'DATA'
+    end
+    object cdsPedido_Item_AprovUSUARIO: TStringField
+      FieldName = 'USUARIO'
+      Size = 15
+    end
+    object cdsPedido_Item_AprovDTUSUARIO: TDateField
+      FieldName = 'DTUSUARIO'
+    end
+    object cdsPedido_Item_AprovHRUSUARIO: TTimeField
+      FieldName = 'HRUSUARIO'
+    end
+    object cdsPedido_Item_AprovID_FUNCIONARIO: TIntegerField
+      FieldName = 'ID_FUNCIONARIO'
+    end
+    object cdsPedido_Item_AprovAPROVADO: TStringField
+      FieldName = 'APROVADO'
+      Size = 1
+    end
+    object cdsPedido_Item_AprovMOTIVO_NAO_APROV: TStringField
+      FieldName = 'MOTIVO_NAO_APROV'
+      Size = 250
+    end
+    object cdsPedido_Item_AprovNOME_FUNCIONARIO: TStringField
+      FieldName = 'NOME_FUNCIONARIO'
+      ProviderFlags = []
+      Size = 50
+    end
+  end
+  object dsPedido_Item_Aprov: TDataSource
+    DataSet = cdsPedido_Item_Aprov
+    Left = 164
+    Top = 203
+  end
+  object qFuncionario: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftString
+        Name = 'USUARIO_LOG'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select f.codigo, f.nome, f.usuario_log'
+      'from funcionario f'
+      'where f.usuario_log = :USUARIO_LOG')
+    SQLConnection = dmDatabase.scoDados
+    Left = 804
+    Top = 72
+    object qFuncionarioCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object qFuncionarioNOME: TStringField
+      FieldName = 'NOME'
+      Size = 50
+    end
+    object qFuncionarioUSUARIO_LOG: TStringField
+      FieldName = 'USUARIO_LOG'
+      Size = 15
+    end
+  end
+  object sdsPrc_Atualiza_Aprov_Ped: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'PRC_ATUALIZA_APROV_PED'
+    CommandType = ctStoredProc
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'P_ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 603
+    Top = 261
   end
 end

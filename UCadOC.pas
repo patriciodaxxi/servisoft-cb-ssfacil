@@ -951,7 +951,7 @@ begin
     AFont.Color := clWhite
   end
   else
-  if (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S') and (fDMCadPedido.cdsPedido_ConsultaAPROVADO_PED.AsString = 'P') then
+  if (fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and (fDMCadPedido.cdsPedido_ConsultaAPROVADO_PED.AsString = 'P') then
   begin
     Background  := $0080FFFF;
     AFont.Color := clBlack;
@@ -1629,6 +1629,10 @@ begin
     RzPageControl1.ActivePage := TS_Cadastro;
     btnAlterarClick(Sender);
   end;
+  //15/07/2019
+  if fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S' then
+    fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P';
+    
   fDMCadPedido.Tag := 0;
 end;
 

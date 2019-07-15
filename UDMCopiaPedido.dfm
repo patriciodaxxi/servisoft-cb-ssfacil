@@ -970,6 +970,11 @@ object DMCopiaPedido: TDMCopiaPedido
     object sdsPedido_ItensBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
     end
+    object sdsPedido_ItensAPROVADO_ITEM: TStringField
+      FieldName = 'APROVADO_ITEM'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsPedido_Itens: TClientDataSet
     Aggregates = <>
@@ -1346,6 +1351,11 @@ object DMCopiaPedido: TDMCopiaPedido
     end
     object cdsPedido_ItensBASE_IPI: TFloatField
       FieldName = 'BASE_IPI'
+    end
+    object cdsPedido_ItensAPROVADO_ITEM: TStringField
+      FieldName = 'APROVADO_ITEM'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsPedido_Itens: TDataSource
