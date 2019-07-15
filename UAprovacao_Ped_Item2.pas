@@ -53,7 +53,6 @@ procedure TfrmAprovacao_Ped_Item2.FormShow(Sender: TObject);
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMAprovacao_Ped);
   lblFuncionario.Caption := fDMAprovacao_Ped.qFuncionarioNOME.AsString;
-  lblUsuario.Caption     := fDMAprovacao_Ped.qFuncionarioUSUARIO_LOG.AsString;
 end;
 
 procedure TfrmAprovacao_Ped_Item2.NxButton1Click(Sender: TObject);
@@ -85,7 +84,6 @@ begin
                '    Para reprovar é preciso excluir a primeira aprovação!', mtError, [mbOk], 0);
     exit;
   end;
-
 
   sds := TSQLDataSet.Create(nil);
   ID.TransactionID  := 1;

@@ -255,9 +255,10 @@ begin
   fDMAprovacao_Ped.qParametros_Geral.Open;
   btnPedidoApp.Visible := fDMAprovacao_Ped.qParametros_GeralFILIAL_PADRAO_PEDWEB.AsInteger > 0;
 
-  btnAprovar_Item.Visible   := (fDMAprovacao_Ped.qParametros_PedUSA_APROVACAO_ITEM.AsString = 'S');
-  btnAprovar_Ped.Visible    := (trim(fDMAprovacao_Ped.qParametros_PedUSA_APROVACAO_ITEM.AsString) <> 'S');
-  btnNaoAprovar_Ped.Visible := (trim(fDMAprovacao_Ped.qParametros_PedUSA_APROVACAO_ITEM.AsString) <> 'S');
+  btnAprovar_Item.Visible   := ((fDMAprovacao_Ped.qParametros_PedUSA_APROVACAO_ITEM.AsString = 'S') and (ComboBox1.ItemIndex = 0))
+                               or ((fDMAprovacao_Ped.qParametros_OCUSA_APROVACAO_ITEM.AsString = 'S') and (ComboBox1.ItemIndex = 1));
+  btnAprovar_Ped.Visible    := not(btnAprovar_Item.Visible);
+  btnNaoAprovar_Ped.Visible := not(btnAprovar_Item.Visible);
 end;
 
 procedure TfrmAprovacao_Ped.btnAprovarClientesClick(Sender: TObject);
@@ -486,6 +487,11 @@ begin
   fDMAprovacao_Ped.cdsCliente_Pend.Close;
   fDMAprovacao_Ped.mPedidoAux.EmptyDataSet;
   prc_Opcoes;
+
+  btnAprovar_Item.Visible   := ((fDMAprovacao_Ped.qParametros_PedUSA_APROVACAO_ITEM.AsString = 'S') and (ComboBox1.ItemIndex = 0))
+                               or ((fDMAprovacao_Ped.qParametros_OCUSA_APROVACAO_ITEM.AsString = 'S') and (ComboBox1.ItemIndex = 1));
+  btnAprovar_Ped.Visible    := not(btnAprovar_Item.Visible);
+  btnNaoAprovar_Ped.Visible := not(btnAprovar_Item.Visible);
 end;
 
 procedure TfrmAprovacao_Ped.prc_Opcoes;
@@ -730,10 +736,15 @@ begin
     MessageDlg('*** Não existe Pedido para Aprovar!', mtInformation, [mbOk], 0);
     exit;
   end;
+
+  fDMAprovacao_Ped.cdsPedido_Item.Close;
+  fDMAprovacao_Ped.sdsPedido_Item.ParamByName('ID').AsInteger := fDMAprovacao_Ped.mPedidoAuxID_Pedido.AsInteger;
+  fDMAprovacao_Ped.cdsPedido_Item.Open;
+
   fDMAprovacao_Ped.qFuncionario.Close;
   fDMAprovacao_Ped.qFuncionario.Open;
   fDMAprovacao_Ped.qFuncionario.Close;
-  fDMAprovacao_Ped.qFuncionario.FieldByName('USUARIO_LOG').AsString := vUsuario;
+  fDMAprovacao_Ped.qFuncionario.ParamByName('USUARIO_LOG').AsString := vUsuario;
   fDMAprovacao_Ped.qFuncionario.Open;
 
   frmAprovacao_Ped_Item := TfrmAprovacao_Ped_Item.Create(self);

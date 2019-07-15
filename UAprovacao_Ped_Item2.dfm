@@ -128,7 +128,7 @@ object frmAprovacao_Ped_Item2: TfrmAprovacao_Ped_Item2
     TabOrder = 3
     object NxButton1: TNxButton
       Left = 206
-      Top = 4
+      Top = 5
       Width = 92
       Height = 26
       Caption = 'Confirmar'

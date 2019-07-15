@@ -84,7 +84,7 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
       WidthOfIndicator = 13
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
-      ColCount = 6
+      ColCount = 7
       RowCount = 2
       Columns = <
         item
@@ -142,6 +142,16 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
           Title.Caption = 'Nome Produto'
           Title.Color = 16763025
           Width = 409
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'QTD'
+          Title.Alignment = taCenter
+          Title.Caption = 'Qtde.'
+          Title.Color = 16763025
+          Width = 100
           Visible = True
         end
         item

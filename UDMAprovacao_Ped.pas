@@ -275,7 +275,6 @@ type
     sdsPedido_Item_AprovID: TIntegerField;
     sdsPedido_Item_AprovITEM: TIntegerField;
     sdsPedido_Item_AprovITEM_APROV: TIntegerField;
-    sdsPedido_Item_AprovDATA: TIntegerField;
     sdsPedido_Item_AprovUSUARIO: TStringField;
     sdsPedido_Item_AprovDTUSUARIO: TDateField;
     sdsPedido_Item_AprovHRUSUARIO: TTimeField;
@@ -298,7 +297,6 @@ type
     cdsPedido_Item_AprovID: TIntegerField;
     cdsPedido_Item_AprovITEM: TIntegerField;
     cdsPedido_Item_AprovITEM_APROV: TIntegerField;
-    cdsPedido_Item_AprovDATA: TIntegerField;
     cdsPedido_Item_AprovUSUARIO: TStringField;
     cdsPedido_Item_AprovDTUSUARIO: TDateField;
     cdsPedido_Item_AprovHRUSUARIO: TTimeField;
@@ -322,6 +320,12 @@ type
     sdsPedido_Item_AprovMOTIVO_NAO_APROV: TStringField;
     cdsPedido_Item_AprovMOTIVO_NAO_APROV: TStringField;
     sdsPrc_Atualiza_Aprov_Ped: TSQLDataSet;
+    qParametros_OC: TSQLQuery;
+    qParametros_OCUSA_APROVACAO_ITEM: TStringField;
+    sdsPedido_Item_AprovDATA: TDateField;
+    cdsPedido_Item_AprovDATA: TDateField;
+    sdsPedido_ItemQTD: TFloatField;
+    cdsPedido_ItemQTD: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedido_ProcessoNewRecord(DataSet: TDataSet);
   private
@@ -376,6 +380,7 @@ begin
   ctCommand         := sdsPedWeb.CommandText;
   qParametros.Open;
   qParametros_Ped.Open;
+  qParametros_OC.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
@@ -858,8 +863,8 @@ var
   sds: TSQLDataSet;
   vDif : String;
 begin
-  vDif := '<>';
-  if Tipo = '1' then
+  //vDif := '<>';
+  //if Tipo = '1' then
     vDif := '=';
   Result := False;
   sds := TSQLDataSet.Create(nil);

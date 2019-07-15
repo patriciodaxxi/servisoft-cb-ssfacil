@@ -45,20 +45,21 @@ var
 
 implementation
 
-uses rsDBUtils, UAprovacao_Ped_Item2;
+uses rsDBUtils, UAprovacao_Ped_Item2, uUtilPadrao;
 
 {$R *.dfm}
 
 procedure TfrmAprovacao_Ped_Item.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  fDMAprovacao_Ped.cdsPedido_Item.AFTERSCROLL := nil;
   Action := Cafree;
 end;
 
 procedure TfrmAprovacao_Ped_Item.FormShow(Sender: TObject);
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMAprovacao_Ped);
-  fDMAprovacao_Ped.cdsPedido_Item_Aprov.AFTERSCROLL := prc_scroll;
+  fDMAprovacao_Ped.cdsPedido_Item.AFTERSCROLL := prc_scroll;
   fDMAprovacao_Ped.cdsPedido_Item.Last;
   fDMAprovacao_Ped.cdsPedido_Item.First;
 end;
@@ -100,6 +101,7 @@ begin
 
   frmAprovacao_Ped_Item2 := TfrmAprovacao_Ped_Item2.Create(self);
   frmAprovacao_Ped_Item2.fDMAprovacao_Ped := fDMAprovacao_Ped;
+  frmAprovacao_Ped_Item2.lblUsuario.Caption := vUsuario;
   frmAprovacao_Ped_Item2.ShowModal;
   FreeAndNil(frmAprovacao_Ped_Item2);
 end;

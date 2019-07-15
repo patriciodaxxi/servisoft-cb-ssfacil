@@ -4,7 +4,7 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
   Left = 310
   Top = 82
   Height = 582
-  Width = 941
+  Width = 988
   object sdsAprovacao_Ped: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -1486,23 +1486,18 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     GetMetadata = False
     CommandText = 
       'SELECT I.ID, I.ITEM, I.APROVADO_ITEM, I.ID_PRODUTO, I.REFERENCIA' +
-      ', I.NOMEPRODUTO, I.CANCELADO'#13#10'FROM PEDIDO_ITEM I'#13#10'WHERE I.ID = :' +
-      'ID'#13#10'  AND I.ITEM = :ITEM'#13#10
+      ', I.NOMEPRODUTO, I.CANCELADO, I.QTD'#13#10'FROM PEDIDO_ITEM I'#13#10'WHERE I' +
+      '.ID = :ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
         DataType = ftInteger
         Name = 'ID'
         ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ITEM'
-        ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 66
-    Top = 146
+    Left = 67
+    Top = 147
     object sdsPedido_ItemID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1532,6 +1527,9 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
       FieldName = 'CANCELADO'
       FixedChar = True
       Size = 1
+    end
+    object sdsPedido_ItemQTD: TFloatField
+      FieldName = 'QTD'
     end
   end
   object dspPedido_Item: TDataSetProvider
@@ -1577,6 +1575,9 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
       FixedChar = True
       Size = 1
     end
+    object cdsPedido_ItemQTD: TFloatField
+      FieldName = 'QTD'
+    end
   end
   object dsPedido_Item: TDataSource
     DataSet = cdsPedido_Item
@@ -1620,9 +1621,6 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object sdsPedido_Item_AprovDATA: TIntegerField
-      FieldName = 'DATA'
-    end
     object sdsPedido_Item_AprovUSUARIO: TStringField
       FieldName = 'USUARIO'
       Size = 15
@@ -1648,6 +1646,9 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
       FieldName = 'NOME_FUNCIONARIO'
       ProviderFlags = []
       Size = 50
+    end
+    object sdsPedido_Item_AprovDATA: TDateField
+      FieldName = 'DATA'
     end
   end
   object dspPedido_Item_Aprov: TDataSetProvider
@@ -1678,9 +1679,6 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object cdsPedido_Item_AprovDATA: TIntegerField
-      FieldName = 'DATA'
-    end
     object cdsPedido_Item_AprovUSUARIO: TStringField
       FieldName = 'USUARIO'
       Size = 15
@@ -1706,6 +1704,9 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
       FieldName = 'NOME_FUNCIONARIO'
       ProviderFlags = []
       Size = 50
+    end
+    object cdsPedido_Item_AprovDATA: TDateField
+      FieldName = 'DATA'
     end
   end
   object dsPedido_Item_Aprov: TDataSource
@@ -1756,5 +1757,20 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     SQLConnection = dmDatabase.scoDados
     Left = 603
     Top = 261
+  end
+  object qParametros_OC: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT P.usa_aprovacao_item'
+      'FROM PARAMETROS_OC P')
+    SQLConnection = dmDatabase.scoDados
+    Left = 834
+    Top = 8
+    object qParametros_OCUSA_APROVACAO_ITEM: TStringField
+      FieldName = 'USA_APROVACAO_ITEM'
+      FixedChar = True
+      Size = 1
+    end
   end
 end
