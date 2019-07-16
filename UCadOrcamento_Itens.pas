@@ -419,9 +419,6 @@ begin
 
   //*********
 
-
-
-
   if fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger > 0 then
   begin
     if vID_ICMS > 0 then
@@ -501,6 +498,10 @@ begin
   //****************
 
   vPrecoAux := 0;
+  //15/07/2019
+  if (fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger <= 0) and (fDMCadPedido.qParametros_FinID_TABPRECO_SEMCAD.AsInteger > 0) then
+    vPrecoAux := DMUtil.fnc_Buscar_Preco(fDMCadPedido.qParametros_FinID_TABPRECO_SEMCAD.AsInteger,fDMCadPedido.cdsProdutoID.AsInteger,0,'N')
+  else
   if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0 then
   begin
     if (fDMCadPedido.qParametros_ProdPRODUTO_PRECO_COR.AsString = 'S') and (fDMCadPedido.cdsProdutoUSA_PRECO_COR.AsString = 'S') then

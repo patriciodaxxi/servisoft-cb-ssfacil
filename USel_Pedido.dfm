@@ -19,16 +19,16 @@ object frmSel_Pedido: TfrmSel_Pedido
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter
-    Left = 880
+    Left = 888
     Top = 52
     Width = 8
-    Height = 471
+    Height = 479
     Align = alRight
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1100
+    Width = 1108
     Height = 52
     Align = alTop
     Color = clMoneyGreen
@@ -250,8 +250,8 @@ object frmSel_Pedido: TfrmSel_Pedido
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 52
-    Width = 880
-    Height = 471
+    Width = 888
+    Height = 479
     Align = alClient
     Ctl3D = False
     DataSource = DMCadNotaFiscal.dsPedido
@@ -565,8 +565,8 @@ object frmSel_Pedido: TfrmSel_Pedido
   end
   object Panel2: TPanel
     Left = 0
-    Top = 588
-    Width = 1100
+    Top = 596
+    Width = 1108
     Height = 37
     Align = alBottom
     Color = 8404992
@@ -689,8 +689,8 @@ object frmSel_Pedido: TfrmSel_Pedido
   end
   object SMDBGrid6: TSMDBGrid
     Left = 0
-    Top = 523
-    Width = 1100
+    Top = 531
+    Width = 1108
     Height = 65
     Align = alBottom
     Ctl3D = False
@@ -864,10 +864,10 @@ object frmSel_Pedido: TfrmSel_Pedido
       end>
   end
   object SMDBGrid2: TSMDBGrid
-    Left = 888
+    Left = 896
     Top = 52
     Width = 212
-    Height = 471
+    Height = 479
     TabStop = False
     Align = alRight
     Ctl3D = False

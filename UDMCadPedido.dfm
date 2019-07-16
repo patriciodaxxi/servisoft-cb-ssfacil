@@ -15168,6 +15168,9 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_FinID_TABPRECO_SEMCAD: TIntegerField
+      FieldName = 'ID_TABPRECO_SEMCAD'
+    end
   end
   object qParametros_NFe: TSQLQuery
     MaxBlobSize = -1

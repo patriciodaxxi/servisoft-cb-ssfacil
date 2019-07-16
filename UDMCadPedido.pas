@@ -3471,6 +3471,7 @@ type
     cdsPedido_ItensENCOMENDA: TStringField;
     sdsPedido_ItensAPROVADO_ITEM: TStringField;
     cdsPedido_ItensAPROVADO_ITEM: TStringField;
+    qParametros_FinID_TABPRECO_SEMCAD: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
