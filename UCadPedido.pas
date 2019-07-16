@@ -3496,6 +3496,14 @@ begin
   if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
     exit;
 
+  //16/07/2019  
+  if fDMCadPedido.cdsPedido_ConsultaCANCELADO.AsString = 'S' then
+  begin
+    MessageDlg('*** Pedido esta cancelado, não pode ser copiado!',mtInformation, [mbOk], 0);
+    exit;
+  end;
+  //******************
+
   fDMCadPedido.mSenha.EmptyDataSet;
   vInclusao_Edicao := '';
   ffrmCadPedido_Copia := TfrmCadPedido_Copia.Create(self);
