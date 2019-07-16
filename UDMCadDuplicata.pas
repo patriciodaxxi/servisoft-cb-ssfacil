@@ -1113,6 +1113,7 @@ type
     qParametros_ComUSA_CONFIG_IND: TStringField;
     cdsDuplicata_ConsultaPERC_TOTAL_NOTA: TFloatField;
     cdsDuplicata_ConsultaVLR_TOTAL_NOTA: TFloatField;
+    frxPagto: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);

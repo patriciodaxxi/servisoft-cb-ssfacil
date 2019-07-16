@@ -397,9 +397,10 @@ object frmConsDuplicata_Pag: TfrmConsDuplicata_Pag
             FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
+          PopupMenu = PopupMenu1
+          ShowArrow = True
           TabOrder = 1
           Transparent = True
-          OnClick = btnImprimirClick
         end
         object NxButton1: TNxButton
           Left = 532
@@ -798,6 +799,18 @@ object frmConsDuplicata_Pag: TfrmConsDuplicata_Pag
           OnClick = btnRecalcularClick
         end
       end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 453
+    Top = 242
+    object PorDatadeLiquidao1: TMenuItem
+      Caption = 'Por Data de Liquida'#231#227'o'
+      OnClick = PorDatadeLiquidao1Click
+    end
+    object PorClienteFornecedor1: TMenuItem
+      Caption = 'Por Cliente/Fornecedor'
+      OnClick = PorClienteFornecedor1Click
     end
   end
 end

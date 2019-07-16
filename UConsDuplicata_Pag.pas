@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadDuplicata, ComObj,
   DBGrids, ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, RXDBCtrl, RzPanel,
-  UEscolhe_Filial, URelDuplicata, UCadDuplicata_Pag, Variants, UCadDuplicata_Pag_Sel,  NxCollection, UCadDuplicata_Gerar, UDMCadCheque;
+  UEscolhe_Filial, URelDuplicata, UCadDuplicata_Pag, Variants, UCadDuplicata_Pag_Sel,  NxCollection, UCadDuplicata_Gerar, UDMCadCheque,
+  Menus;
 
 type
   TfrmConsDuplicata_Pag = class(TForm)
@@ -45,6 +46,9 @@ type
     Label4: TLabel;
     lblMulta: TLabel;
     NxButton1: TNxButton;
+    PopupMenu1: TPopupMenu;
+    PorDatadeLiquidao1: TMenuItem;
+    PorClienteFornecedor1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -56,17 +60,22 @@ type
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure btnRecalcularClick(Sender: TObject);
-    procedure btnImprimirClick(Sender: TObject);
     procedure RxDBLookupCombo4KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure NxButton1Click(Sender: TObject);
+    procedure PorDatadeLiquidao1Click(Sender: TObject);
+    procedure PorClienteFornecedor1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata          : TDMCadDuplicata;
+    vOpcao_Imp : String;
+    vOpcao_ES : String;
 
     procedure prc_Consultar;
     procedure prc_Le_cdsPagto;
     procedure prc_Gerar_Lista_Excel(planilha: Variant);
+    procedure prc_Monta_Cab;
+
   public
     { Public declarations }
     procedure prc_Posiciona_Duplicata;
@@ -260,37 +269,6 @@ begin
   prc_Le_cdsPagto;
 end;
 
-procedure TfrmConsDuplicata_Pag.btnImprimirClick(Sender: TObject);
-begin
-  fDMCadDuplicata.cdsPagto.IndexFieldNames := 'DTLANCAMENTO;TIPO_HISTORICO';
-  vTipo_Config_Email := 3;
-
-  SMDBGrid1.DisableScroll;
-  
-  fRelPagarReceber_Pag := TfRelPagarReceber_Pag.Create(Self);
-  case RadioGroup2.ItemIndex of
-    0 : fRelPagarReceber_Pag.vTipo_ES := 'E';
-    1 : fRelPagarReceber_Pag.vTipo_ES := 'S';
-  end;
-  fRelPagarReceber_Pag.vOpcaoImp  := '';
-  fRelPagarReceber_Pag.vOpcaoImp2 := '';
-  if (DateEdit1.Date > 10) and (DateEdit2.Date > 10) then
-    fRelPagarReceber_Pag.vOpcaoImp := fRelPagarReceber_Pag.vOpcaoImp + '(Pagamento: ' + DateEdit1.Text + ' a ' + DateEdit2.Text + ')'
-  else
-  if (DateEdit1.Date > 10) then
-    fRelPagarReceber_Pag.vOpcaoImp := fRelPagarReceber_Pag.vOpcaoImp + '(Apartir do Pagamento: ' + DateEdit1.Text + ')'
-  else
-  if (DateEdit2.Date > 10) then
-    fRelPagarReceber_Pag.vOpcaoImp := fRelPagarReceber_Pag.vOpcaoImp + '(Até o Pagamento: ' + DateEdit2.Text + ')';
-  if trim(RxDBLookupCombo1.Text) <> '' then
-    fRelPagarReceber_Pag.vOpcaoImp := fRelPagarReceber_Pag.vOpcaoImp + '(Filial: ' + RxDBLookupCombo1.Text + ')';
-  fRelPagarReceber_Pag.fDMCadDuplicata := fDMCadDuplicata;
-  fRelPagarReceber_Pag.RlReport1.PreviewModal;
-  fRelPagarReceber_Pag.RlReport1.Free;
-  FreeAndNil(fRelPagarReceber_Pag);
-  SMDBGrid1.EnableScroll;
-end;           
-
 procedure TfrmConsDuplicata_Pag.RxDBLookupCombo4KeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
@@ -406,6 +384,67 @@ begin
     end;
     fDMCadDuplicata.cdsPagto.Next;
   end;
+end;
+
+procedure TfrmConsDuplicata_Pag.PorDatadeLiquidao1Click(Sender: TObject);
+begin
+  prc_Monta_Cab;
+  fDMCadDuplicata.cdsPagto.IndexFieldNames := 'DTLANCAMENTO;TIPO_HISTORICO';
+  vTipo_Config_Email := 3;
+  SMDBGrid1.DisableScroll;
+  fRelPagarReceber_Pag := TfRelPagarReceber_Pag.Create(Self);
+  case RadioGroup2.ItemIndex of
+    0 : fRelPagarReceber_Pag.vTipo_ES := 'E';
+    1 : fRelPagarReceber_Pag.vTipo_ES := 'S';
+  end;
+  fRelPagarReceber_Pag.vOpcaoImp  := vOpcao_Imp;
+  fRelPagarReceber_Pag.vOpcaoImp2 := '';
+  fRelPagarReceber_Pag.fDMCadDuplicata := fDMCadDuplicata;
+  fRelPagarReceber_Pag.RlReport1.PreviewModal;
+  fRelPagarReceber_Pag.RlReport1.Free;
+  FreeAndNil(fRelPagarReceber_Pag);
+  SMDBGrid1.EnableScroll;
+end;
+
+procedure TfrmConsDuplicata_Pag.prc_Monta_Cab;
+begin
+  vOpcao_ES := 'CONTAS A RECEBER/PAGAR';
+  case RadioGroup2.ItemIndex of
+    0 : vOpcao_ES := 'CONTAS A RECEBER';
+    1 : vOpcao_ES := 'CONTAS A PAGAR';
+  end;
+  vOpcao_Imp  := '';
+  if (DateEdit1.Date > 10) and (DateEdit2.Date > 10) then
+    vOpcao_Imp := vOpcao_Imp + '(Pagamento: ' + DateEdit1.Text + ' a ' + DateEdit2.Text + ')'
+  else
+  if (DateEdit1.Date > 10) then
+    vOpcao_Imp := vOpcao_Imp + '(Apartir do Pagamento: ' + DateEdit1.Text + ')'
+  else
+  if (DateEdit2.Date > 10) then
+    vOpcao_Imp := vOpcao_Imp + '(Até o Pagamento: ' + DateEdit2.Text + ')';
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    vOpcao_Imp := vOpcao_Imp + '(Filial: ' + RxDBLookupCombo1.Text + ')';
+end;
+
+procedure TfrmConsDuplicata_Pag.PorClienteFornecedor1Click(
+  Sender: TObject);
+var
+  vArq : String;  
+begin
+  prc_Monta_Cab;
+  fDMCadDuplicata.cdsPagto.IndexFieldNames := 'NOME_PESSOA;ID_PESSOA;DTLANCAMENTO;TIPO_HISTORICO';
+
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Pagto_Cliente_Fornecedor.fr3';
+  if FileExists(vArq) then
+    fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatorio não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadDuplicata.frxReport1.variables['TIPO']     := QuotedStr(vOpcao_ES);
+  fDMCadDuplicata.frxReport1.variables['ImpOpcao'] := QuotedStr(vOpcao_Imp);
+  fDMCadDuplicata.frxReport1.ShowReport;
 end;
 
 end.
