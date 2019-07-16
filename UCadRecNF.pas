@@ -121,6 +121,8 @@ type
     Label3: TLabel;
     DBText2: TDBText;
     RadioGroup1: TRadioGroup;
+    Label38: TLabel;
+    DBEdit14: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -174,10 +176,13 @@ type
     procedure btnCancelar_RecClick(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure DBEdit14Enter(Sender: TObject);
+    procedure DBEdit14Exit(Sender: TObject);
 
   private
     { Private declarations }
     vID_Cliente_Ant: Integer;
+    vVlrFrete_Ant: Real;
 
     fDMCadNotaFiscal: TDMCadNotaFiscal;
     fDMCadNotaFiscal_MP: TDMCadNotaFiscal_MP;
@@ -2161,6 +2166,17 @@ begin
     Background  := clGreen;
     AFont.Color := clWhite;
   end;
+end;
+
+procedure TfrmCadRecNF.DBEdit14Enter(Sender: TObject);
+begin
+  vVlrFrete_Ant := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat));
+end;
+
+procedure TfrmCadRecNF.DBEdit14Exit(Sender: TObject);
+begin
+  if StrToFloat(FormatFloat('0.00',vVlrFrete_Ant)) <> StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat)) then
+    btnCalcular_ValoresClick(Sender);
 end;
 
 end.

@@ -207,6 +207,8 @@ begin
     cdsFinanceiroID_NOTA_SERVICO.AsInteger := vID_Nota_Servico;
   if vID_Fechamento > 0 then
     cdsFinanceiroID_FECHAMENTO.AsInteger := vID_Fechamento;
+  if cdsFinanceiroID_CONTA.AsInteger <= 0 then
+    cdsFinanceiroID_CONTA.Clear;
   cdsFinanceiro.Post;
   cdsFinanceiro.ApplyUpdates(0);
 end;

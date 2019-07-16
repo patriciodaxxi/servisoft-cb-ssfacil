@@ -170,7 +170,6 @@ object frmCadRecNF: TfrmCadRecNF
             FieldName = 'TIPO_PRAZO'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Prazo'
-            Width = 64
             Visible = True
           end
           item
@@ -206,7 +205,6 @@ object frmCadRecNF: TfrmCadRecNF
             FieldName = 'USUARIO'
             Title.Alignment = taCenter
             Title.Caption = 'Usu'#225'rio'
-            Width = 64
             Visible = True
           end>
       end
@@ -1470,7 +1468,7 @@ object frmCadRecNF: TfrmCadRecNF
         Top = 188
         Width = 942
         Height = 431
-        ActivePage = RzTabSheet1
+        ActivePage = TabSheet2
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -1478,7 +1476,7 @@ object frmCadRecNF: TfrmCadRecNF
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -1974,11 +1972,19 @@ object frmCadRecNF: TfrmCadRecNF
             DataField = 'MOTIVO_CANCELADA'
             DataSource = DMCadNotaFiscal.dsNotaFiscal
           end
+          object Label38: TLabel
+            Left = 3
+            Top = 256
+            Width = 45
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Vlr. Frete:'
+          end
           object RzGroupBox1: TRzGroupBox
             Left = 2
             Top = 8
             Width = 470
-            Height = 261
+            Height = 236
             BorderColor = clLime
             BorderInner = fsButtonUp
             BorderOuter = fsBump
@@ -1998,7 +2004,7 @@ object frmCadRecNF: TfrmCadRecNF
               Left = 5
               Top = 18
               Width = 460
-              Height = 238
+              Height = 213
               Align = alClient
               DataField = 'DADOS_ADICIONAIS'
               DataSource = DMCadNotaFiscal.dsNotaFiscal
@@ -2359,7 +2365,7 @@ object frmCadRecNF: TfrmCadRecNF
               OnChange = rxdbContaChange
             end
             object rxdbConta: TRxDBLookupCombo
-              Left = 113
+              Left = 112
               Top = 55
               Width = 273
               Height = 21
@@ -2635,6 +2641,22 @@ object frmCadRecNF: TfrmCadRecNF
               ReadOnly = True
               TabOrder = 3
             end
+          end
+          object DBEdit14: TDBEdit
+            Left = 49
+            Top = 248
+            Width = 100
+            Height = 19
+            TabStop = False
+            CharCase = ecUpperCase
+            Color = clWhite
+            Ctl3D = False
+            DataField = 'VLR_FRETE'
+            DataSource = DMCadNotaFiscal.dsNotaFiscal
+            ParentCtl3D = False
+            TabOrder = 3
+            OnEnter = DBEdit14Enter
+            OnExit = DBEdit14Exit
           end
         end
       end

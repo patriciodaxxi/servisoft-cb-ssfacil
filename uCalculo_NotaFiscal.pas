@@ -3245,6 +3245,10 @@ begin
 
   if not Repetir then
   begin
+    //16/07/2019
+    vCalcFrete        := fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat;
+    //***********
+
     vVlrDuplicata       := 0;
     vVlrDuplicataOutros := 0;
     vCalcTotalNota      := 0;
@@ -3448,6 +3452,15 @@ begin
     if fDMCadNotaFiscal.cdsNotaFiscal_ItensDIFERENCA_ICMS.AsString = 'S' then
        prc_Calcular_Diferencial_ICMS(fDMCadNotaFiscal);
 
+    //16/07/2019
+    if ((fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_DUPLICATA.AsString = 'S') or (not(vFlagGeraDupl))) and (not(Repetir)) then
+      prc_Calcular_Frete_Novo(fDMCadNotaFiscal);
+    //**************
+
+    if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_FRETE.AsString = 'S' then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat +
+                                                                   fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FRETE.AsFloat;
+
     if fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_DUPLICATA.AsString = 'S' then
     begin
       fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat := StrToCurr(FormatCurr('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat + vVlrTotalItens - vDescontoItem));
@@ -3456,6 +3469,7 @@ begin
 
     fDMCadNotaFiscal.cdsNotaFiscalVLR_NOTA.AsCurrency  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_NOTA.AsCurrency +
                                                           vVlrTotalItens - vDescontoItem));
+
 
     if fDMCadNotaFiscal.cdsNotaFiscalTIPO_DESCONTO.AsString = 'I' then
       fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat + vDescontoItem));
@@ -3491,6 +3505,9 @@ begin
     or (StrToFloat(FormatFloat('0.00',vCalcAduaneira)) > 0)
     or (StrToFloat(FormatFloat('0.00',vCalcVlr_Outros)) > 0) then
     prc_Calcular_Desconto_RNF(fDMCadNotaFiscal, True);
+
+  if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_FRETE.AsString = 'S' then
+    fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat + fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat;
 
   fDMCadNotaFiscal.cdsNotaFiscalVLR_NOTA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_NOTA.AsFloat + fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat
                                        + fDMCadNotaFiscal.cdsNotaFiscalVLR_OUTRASDESP.AsFloat + fDMCadNotaFiscal.cdsNotaFiscalVLR_SEGURO.AsFloat
