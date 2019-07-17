@@ -249,6 +249,7 @@ begin
       fDMCadPedido.cdsPedido_ItensQTD_PECA.AsInteger      := 0;
       fDMCadPedido.cdsPedido_ItensQTD_PRODUZIDA.AsInteger := 0;
       fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat    := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
+      fdmcadpedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger := fdmcadpedido.cdsPedido_ItensITEM.AsInteger;
       fDMCadPedido.cdsPedido_Itens.Post;
 
       //26/09/2016

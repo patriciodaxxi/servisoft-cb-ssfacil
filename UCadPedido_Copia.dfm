@@ -15,6 +15,7 @@ object frmCadPedido_Copia: TfrmCadPedido_Copia
   OldCreateOrder = False
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDblClick = btnCancelarClick
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
