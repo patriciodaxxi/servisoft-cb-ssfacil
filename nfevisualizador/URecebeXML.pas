@@ -863,6 +863,10 @@ begin
 end;
 
 procedure TfrmRecebeXML.Le_cdsDetalhe;
+var
+  vDup : Real;
+  Node_Tpag : IXMLNode;
+  vTexto : String;
 begin
   fDMRecebeXML.mItensNota.EmptyDataSet;
   fDMRecebeXML.mParc.EmptyDataSet;
@@ -881,6 +885,25 @@ begin
     prc_Grava_mParc;
 
     fDMRecebeXML.cdsParcelas.Next;
+  end;
+  if fDMRecebeXML.cdsParcelas.IsEmpty then
+  begin
+    vDup := 0;
+    XMLDocument1.LoadFromFile(OpenDialog1.FileName);
+    XMLDocument1.Active;
+    Node_Tpag := XMLDocument1.DocumentElement;
+    vTexto := Node_Tpag.ChildNodes['NFe'].ChildNodes['infNFe'].ChildNodes['pag'].ChildNodes['detPag'].ChildNodes['vPag'].NodeValue;
+    if vTexto <> '' then
+    begin
+      vDup := StrToFloat(Replace(vTexto,'.',','));
+      fDMRecebeXML.mParc.Insert;
+      fDMRecebeXML.mParcNumDuplicata.AsString   := '1';
+      fDMRecebeXML.mParcDtVencimento.AsDateTime := vDtEmissao;
+      fDMRecebeXML.mParcVlrVencimento.AsFloat   := vDup;
+      fDMRecebeXML.mParcID_Conta.Clear;
+      fDMRecebeXML.mParcID_TipoCobranca.Clear;
+      fDMRecebeXML.mParc.Post;
+    end;
   end;
 
 end;
@@ -2376,7 +2399,6 @@ var
   vDup : Real;
   vTexto : String;
   Node_Tpag : IXMLNode;
-  vDtEmissao : TDateTime;
 begin
   vID_Nota := 0;
   vGravar := False;
@@ -2412,26 +2434,25 @@ begin
     end;
     fDMRecebeXML.cdsNotaFiscalID_CLIENTE.AsInteger := vCodFornecedor;
 
-    if fDMRecebeXML.mParc.IsEmpty then
-    begin
-      vDup := 0;
-      XMLDocument1.LoadFromFile(OpenDialog1.FileName);
-      XMLDocument1.Active;
-      Node_Tpag := XMLDocument1.DocumentElement;
-      vTexto := Node_Tpag.ChildNodes['NFe'].ChildNodes['infNFe'].ChildNodes['pag'].ChildNodes['detPag'].ChildNodes['vPag'].NodeValue;
-      if vTexto <> '' then
-      begin
-        vDup := StrToFloat(Replace(vTexto,'.',','));
-        fDMRecebeXML.mParc.Insert;
-        vDtEmissao := DateEdit1.Date;
-        fDMRecebeXML.mParcNumDuplicata.AsString   := '1';
-        fDMRecebeXML.mParcDtVencimento.AsDateTime := vDtEmissao;
-        fDMRecebeXML.mParcVlrVencimento.AsFloat   := vDup;
-        fDMRecebeXML.mParcID_Conta.Clear;
-        fDMRecebeXML.mParcID_TipoCobranca.Clear;
-        fDMRecebeXML.mParc.Post;
-      end;
-    end;
+//    if fDMRecebeXML.mParc.IsEmpty then
+//    begin
+//      vDup := 0;
+//      XMLDocument1.LoadFromFile(OpenDialog1.FileName);
+//      XMLDocument1.Active;
+//      Node_Tpag := XMLDocument1.DocumentElement;
+//      vTexto := Node_Tpag.ChildNodes['NFe'].ChildNodes['infNFe'].ChildNodes['pag'].ChildNodes['detPag'].ChildNodes['vPag'].NodeValue;
+//      if vTexto <> '' then
+//      begin
+//        vDup := StrToFloat(Replace(vTexto,'.',','));
+//        fDMRecebeXML.mParc.Insert;
+//        fDMRecebeXML.mParcNumDuplicata.AsString   := '1';
+//        fDMRecebeXML.mParcDtVencimento.AsDateTime := DateEdit1.Date;
+//        fDMRecebeXML.mParcVlrVencimento.AsFloat   := vDup;
+//        fDMRecebeXML.mParcID_Conta.Clear;
+//        fDMRecebeXML.mParcID_TipoCobranca.Clear;
+//        fDMRecebeXML.mParc.Post;
+//      end;
+//    end;
 
 //    if (fDMRecebeXML.cdsParcelas.IsEmpty) or (vImportar_NotaSaida) then
     if (fDMRecebeXML.mParc.IsEmpty) or (vImportar_NotaSaida) then
@@ -3821,7 +3842,7 @@ begin
   fDMRecebeXML.mParc.First;
   while not fDMRecebeXML.mParc.Eof do
   begin
-    if (DateEdit1.Date > fDMRecebeXML.mParcDtVencimento.AsDateTime) then
+    if (vDtEmissao > fDMRecebeXML.mParcDtVencimento.AsDateTime) then
       vErro := vErro + #13 + '*** Data de vencimento menor que a data de entrada!';
     if (StrToFloat(FormatFloat('0.00',fDMRecebeXML.mParcVlrVencimento.AsFloat)) <= 0) then
       vErro := vErro + #13 + '*** Valor Parcela esta zerado na nota, favor verificar!!';
