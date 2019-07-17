@@ -22,8 +22,8 @@ object frmRecebeXML: TfrmRecebeXML
   object pcDados: TPageControl
     Left = 0
     Top = 146
-    Width = 1108
-    Height = 521
+    Width = 1098
+    Height = 511
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 0
@@ -33,7 +33,7 @@ object frmRecebeXML: TfrmRecebeXML
       object GroupBox1: TGroupBox
         Left = 0
         Top = 93
-        Width = 1100
+        Width = 1090
         Height = 193
         Align = alTop
         Caption = 'Dados Da NFe'
@@ -475,7 +475,7 @@ object frmRecebeXML: TfrmRecebeXML
       object GroupBox3: TGroupBox
         Left = 0
         Top = 286
-        Width = 1100
+        Width = 1090
         Height = 91
         Align = alTop
         Caption = 'Emitente'
@@ -611,8 +611,8 @@ object frmRecebeXML: TfrmRecebeXML
       object GroupBox2: TGroupBox
         Left = 0
         Top = 377
-        Width = 1100
-        Height = 116
+        Width = 1090
+        Height = 106
         Align = alClient
         Caption = 'Destinat'#225'rio'
         Color = clMoneyGreen
@@ -747,7 +747,7 @@ object frmRecebeXML: TfrmRecebeXML
       object GroupBox4: TGroupBox
         Left = 0
         Top = 0
-        Width = 1100
+        Width = 1090
         Height = 93
         Align = alTop
         Caption = ' Dados de Autoriza'#231#227'o da NFe '
@@ -888,8 +888,8 @@ object frmRecebeXML: TfrmRecebeXML
         Color = clMoneyGreen
         TabOrder = 0
         DesignSize = (
-          1100
-          493)
+          1090
+          483)
         object Label29: TLabel
           Left = 18
           Top = 29
@@ -2218,16 +2218,16 @@ object frmRecebeXML: TfrmRecebeXML
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 1100
-        Height = 493
+        Width = 1090
+        Height = 483
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0
         object SMDBGrid1: TSMDBGrid
           Left = 1
           Top = 1
-          Width = 1098
-          Height = 271
+          Width = 1088
+          Height = 261
           Align = alClient
           Ctl3D = False
           DataSource = DMRecebeXML.dsmItensNota
@@ -2540,14 +2540,14 @@ object frmRecebeXML: TfrmRecebeXML
         end
         object Panel7: TPanel
           Left = 1
-          Top = 425
-          Width = 1098
+          Top = 415
+          Width = 1088
           Height = 67
           Align = alBottom
           Color = clSilver
           TabOrder = 1
           DesignSize = (
-            1098
+            1088
             67)
           object Shape1: TShape
             Left = 827
@@ -2658,8 +2658,8 @@ object frmRecebeXML: TfrmRecebeXML
         end
         object PageControl1: TPageControl
           Left = 1
-          Top = 272
-          Width = 1098
+          Top = 262
+          Width = 1088
           Height = 153
           ActivePage = TabSheet9
           Align = alBottom
@@ -3218,7 +3218,7 @@ object frmRecebeXML: TfrmRecebeXML
             ImageIndex = 1
             ParentFont = False
             DesignSize = (
-              1050
+              1040
               145)
             object Label106: TLabel
               Left = 57
@@ -3938,14 +3938,14 @@ object frmRecebeXML: TfrmRecebeXML
       object Panel10: TPanel
         Left = 0
         Top = 0
-        Width = 1090
-        Height = 483
+        Width = 1080
+        Height = 473
         Align = alClient
         TabOrder = 0
         object Panel11: TPanel
           Left = 1
           Top = 1
-          Width = 1088
+          Width = 1078
           Height = 41
           Align = alTop
           TabOrder = 0
@@ -4167,8 +4167,8 @@ object frmRecebeXML: TfrmRecebeXML
         object SMDBGrid2: TSMDBGrid
           Left = 1
           Top = 42
-          Width = 1088
-          Height = 440
+          Width = 1078
+          Height = 430
           Align = alClient
           Ctl3D = False
           DataSource = DMRecebeXML.dsmParc
@@ -4309,55 +4309,46 @@ object frmRecebeXML: TfrmRecebeXML
           item
             Expanded = False
             FieldName = 'Id'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'tpAmb'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'verAplic'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'chNFe'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'dhRecbto'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'nProt'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'digVal'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'cStat'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'xMotivo'
-            Width = 64
             Visible = True
           end>
       end
@@ -4938,14 +4929,14 @@ object frmRecebeXML: TfrmRecebeXML
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1108
+    Width = 1098
     Height = 146
     Align = alTop
     BevelOuter = bvNone
     Color = clMoneyGreen
     TabOrder = 1
     DesignSize = (
-      1108
+      1098
       146)
     object Label4: TLabel
       Left = 269
