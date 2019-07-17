@@ -1244,8 +1244,10 @@ object DMConsFinanceiro: TDMConsFinanceiro
     CommandText = 
       'select D.numduplicata, D.numnota, D.dtemissao, D.dtvencimento, D' +
       '.vlr_parcela,'#13#10'D.vlr_restante, D.vlr_pago, D.id_pessoa, P.nome N' +
-      'OME_PESSOA, D.ID'#13#10'from duplicata D'#13#10'INNER JOIN PESSOA P'#13#10'ON D.id' +
-      '_pessoa = P.codigo'#13#10
+      'OME_PESSOA, D.ID, DH.DTLANCAMENTO DTPAGAMENTO_PERIODO, DH.VLR_PA' +
+      'GAMENTO VLR_PAGO_PERIODO'#13#10'from duplicata D'#13#10'INNER JOIN PESSOA P ' +
+      'ON D.id_pessoa = P.codigo'#13#10'left join DUPLICATA_HIST DH on D.ID =' +
+      ' DH.ID and DH.TIPO_HISTORICO = '#39'PAG'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1297,6 +1299,16 @@ object DMConsFinanceiro: TDMConsFinanceiro
     object cdsDuplicata_DetID: TIntegerField
       FieldName = 'ID'
       Required = True
+    end
+    object cdsDuplicata_DetDTPAGAMENTO_PERIODO: TDateField
+      DisplayLabel = 'Dt Pagamento Periodo'
+      FieldName = 'DTPAGAMENTO_PERIODO'
+    end
+    object cdsDuplicata_DetVLR_PAGO_PERIODO: TFloatField
+      DisplayLabel = 'Vlr Pagto Per'#237'odo'
+      FieldName = 'VLR_PAGO_PERIODO'
+      DisplayFormat = '#0.00'
+      EditFormat = '#0.00'
     end
   end
   object dsDuplicata_det: TDataSource

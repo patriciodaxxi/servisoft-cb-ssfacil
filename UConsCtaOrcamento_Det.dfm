@@ -1,6 +1,6 @@
 object frmConsCtaOrcamento_Det: TfrmConsCtaOrcamento_Det
-  Left = 256
-  Top = 169
+  Left = 283
+  Top = 164
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmConsCtaOrcamento_Det'
@@ -22,12 +22,12 @@ object frmConsCtaOrcamento_Det: TfrmConsCtaOrcamento_Det
     Top = 0
     Width = 912
     Height = 442
-    ActivePage = TS_Carteira
+    ActivePage = TS_Titulos
     Align = alClient
     BackgroundColor = clNavy
     FlatColor = clNavy
     ParentBackgroundColor = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Titulos: TRzTabSheet
@@ -75,7 +75,7 @@ object frmConsCtaOrcamento_Det: TfrmConsCtaOrcamento_Det
         WidthOfIndicator = 11
         DefaultRowHeight = 18
         ScrollBars = ssHorizontal
-        ColCount = 9
+        ColCount = 11
         RowCount = 2
         Columns = <
           item
@@ -142,6 +142,18 @@ object frmConsCtaOrcamento_Det: TfrmConsCtaOrcamento_Det
             FieldName = 'NOME_PESSOA'
             Title.Alignment = taCenter
             Title.Caption = 'Nome'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DTPAGAMENTO_PERIODO'
+            Title.Alignment = taCenter
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VLR_PAGO_PERIODO'
+            Title.Alignment = taCenter
             Visible = True
           end>
       end

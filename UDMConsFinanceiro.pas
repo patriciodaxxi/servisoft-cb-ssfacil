@@ -337,6 +337,8 @@ type
     cdsCCustoOrcamentoID_CONTA_ORCAMENTO: TIntegerField;
     cdsCCustoOrcamentoNOME_ORCAMENTO: TStringField;
     cdsCCustoOrcamentoVLR_CONTRATO: TFloatField;
+    cdsDuplicata_DetDTPAGAMENTO_PERIODO: TDateField;
+    cdsDuplicata_DetVLR_PAGO_PERIODO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConta_OrcNewRecord(DataSet: TDataSet);
     procedure mDespesaNewRecord(DataSet: TDataSet);
@@ -429,7 +431,12 @@ begin
   else
   if vTipo_Data = 'V' then
     vComandoAux2 := vComandoAux2 + ' AND D.DTVENCIMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtInicial))
+              + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtFinal))
+  else
+  if vTipo_Data = 'P' then
+    vComandoAux2 := vComandoAux2 + ' AND DH.DTLANCAMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtInicial))
               + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtFinal));
+
   if (mConta_OrcID.AsInteger <> 777700) and (mConta_OrcID.AsInteger <> 777800)
      and (mConta_OrcID.AsInteger <> 888100) then
     vComandoAux2 := vComandoAux2 + ' AND D.ID_CONTA_ORCAMENTO = ' + IntToStr(mConta_OrcID.AsInteger)
@@ -452,6 +459,10 @@ begin
   else
   if vTipo_Data = 'V' then
     vComando := vComando + ' AND D.DTVENCIMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtInicial))
+              + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtFinal))
+  else
+  if vTipo_Data = 'P' then
+    vComando := vComando + ' AND Dh.DTLANCAMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtInicial))
               + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtFinal));
   if (mConta_OrcID.AsInteger <> 777700) and (mConta_OrcID.AsInteger <> 777800)
      and (mConta_OrcTipo_ES.AsString <> 'V') and (mConta_OrcTipo_ES.AsString <> 'X') then

@@ -533,6 +533,8 @@ begin
       fDMConsFinanceiro.vTipo_Data := 'E';
     1:
       fDMConsFinanceiro.vTipo_Data := 'V';
+    2:
+      fDMConsFinanceiro.vTipo_Data := 'P';
   end;
   if (fDMConsFinanceiro.mConta_OrcTipo_ES.AsString = 'E') or (fDMConsFinanceiro.mConta_OrcTipo_ES.AsString = 'S') then
   begin
