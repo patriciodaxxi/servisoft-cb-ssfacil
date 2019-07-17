@@ -1966,7 +1966,7 @@ object dmCadProduto: TdmCadProduto
       '  G.NOME'#13#10'           WHEN 2 THEN '#39'    '#39' ||  G.NOME'#13#10'           W' +
       'HEN 1 THEN G.NOME'#13#10'           ELSE G.NOME'#13#10'           END AS NOM' +
       'E_AUX, SUP.NOME NOME_SUPERIOR'#13#10'FROM GRUPO G'#13#10'LEFT JOIN GRUPO SUP' +
-      ' '#13#10'ON G.SUPERIOR = SUP.ID'#13#10
+      ' '#13#10'ON G.SUPERIOR = CAST(SUP.ID as VARCHAR(20))'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

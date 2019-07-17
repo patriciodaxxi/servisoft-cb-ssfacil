@@ -1745,7 +1745,7 @@ var
 begin
   //fDMCadNotaFiscal.vID_Variacao := 0;
   //07/03/2019
-  if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant then
+    if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger := 0;
   ///***********
 
