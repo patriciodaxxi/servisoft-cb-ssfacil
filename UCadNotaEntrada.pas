@@ -1337,7 +1337,7 @@ begin
   fDMCadNotaFiscal.cdsProduto.Close;
   fDMCadNotaFiscal.sdsProduto.CommandText := fDMCadNotaFiscal.ctProduto;
   if (fDMCadNotaFiscal.cdsParametrosNOTA_ENTRADA_MOSTRAR_PROD.AsString = 'M') or (fDMCadNotaFiscal.cdsParametrosNOTA_ENTRADA_MOSTRAR_PROD.AsString = 'P') then
-    fDMCadNotaFiscal.sdsProduto.CommandText := fDMCadNotaFiscal.sdsProduto.CommandText + ' AND ((TIPO_REG = ' + QuotedStr(fDMCadNotaFiscal.cdsParametrosNOTA_ENTRADA_MOSTRAR_PROD.AsString) + ')'
+    fDMCadNotaFiscal.sdsProduto.CommandText := fDMCadNotaFiscal.sdsProduto.CommandText + ' WHERE 0=0 AND ((TIPO_REG = ' + QuotedStr(fDMCadNotaFiscal.cdsParametrosNOTA_ENTRADA_MOSTRAR_PROD.AsString) + ')'
                                              + ' OR (TIPO_REG = ' + QuotedStr('S') + '))';
   fDMCadNotaFiscal.cdsProduto.Open;
 end;

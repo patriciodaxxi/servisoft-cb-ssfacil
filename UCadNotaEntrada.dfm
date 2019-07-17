@@ -1,6 +1,6 @@
 object frmCadNotaEntrada: TfrmCadNotaEntrada
-  Left = 175
-  Top = 22
+  Left = 253
+  Top = 29
   Width = 949
   Height = 710
   Caption = 'Nota Entrada'
