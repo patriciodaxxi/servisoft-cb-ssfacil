@@ -2454,8 +2454,8 @@ begin
 //      end;
 //    end;
 
-    if (fDMRecebeXML.cdsParcelas.IsEmpty) or (vImportar_NotaSaida) then
-//    if (fDMRecebeXML.mParc.IsEmpty) or (vImportar_NotaSaida) then
+//    if (fDMRecebeXML.cdsParcelas.IsEmpty) or (vImportar_NotaSaida) then
+    if (fDMRecebeXML.mParc.IsEmpty) or (vImportar_NotaSaida) then
       fDMRecebeXML.cdsNotaFiscalTIPO_PRAZO.AsString := 'N'
     else
       fDMRecebeXML.cdsNotaFiscalTIPO_PRAZO.AsString := 'P';

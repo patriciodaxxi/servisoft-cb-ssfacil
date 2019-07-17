@@ -24,7 +24,7 @@ object frmRecebeXML: TfrmRecebeXML
     Top = 146
     Width = 1098
     Height = 511
-    ActivePage = TabSheet1
+    ActivePage = tsDuplicatasDeducoes
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet

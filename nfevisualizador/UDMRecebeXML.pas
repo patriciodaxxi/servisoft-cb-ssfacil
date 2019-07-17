@@ -2674,7 +2674,7 @@ begin
 
   cdsDuplicataDTULTPAGAMENTO.Clear;
   cdsDuplicataID_PESSOA.AsInteger     := cdsNotaFiscalID_CLIENTE.AsInteger;
-  if cdsNotaFiscal_ParcID_TIPOCOBRANCA.AsInteger > 0 then
+  if cdsNotaFiscal_ParcID_CONTA.AsInteger > 0 then
     cdsDuplicataID_CONTA.AsInteger := cdsNotaFiscal_ParcID_CONTA.AsInteger;
   if cdsNotaFiscal_ParcID_TIPOCOBRANCA.AsInteger > 0 then
     cdsDuplicataID_TIPOCOBRANCA.AsInteger := cdsNotaFiscal_ParcID_TIPOCOBRANCA.AsInteger;
