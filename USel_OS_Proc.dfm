@@ -400,15 +400,15 @@ object frmSel_OS_Proc: TfrmSel_OS_Proc
   end
   object sdsOS: TSQLDataSet
     CommandText = 
-      'SELECT I.id, I.item, i.qtd, i.qtd_faturado, i.qtd_restante , I.i' +
-      'd_produto, I.nome_produto,'#13#10'P.unidade, P.id_ncm, CAB.id_cliente,' +
-      ' i.referencia,'#13#10'CLI.nome, CLI.cnpj_cpf, CAB.produzido, cab.num_o' +
-      's, i.vlr_total, cab.num_nota,'#13#10'CAB.dtrecebimento, CAB.dt_agenda,' +
-      ' CAB.dtemissao'#13#10'FROM ORDEMSERVICO_ITENS I'#13#10'INNER JOIN ORDEMSERVI' +
-      'CO CAB'#13#10'ON I.id = CAB.id'#13#10'INNER JOIN PRODUTO P'#13#10'ON I.ID_PRODUTO ' +
-      '= P.id'#13#10'INNER JOIN PESSOA CLI'#13#10'ON CAB.id_cliente = CLI.codigo'#13#10'W' +
-      'HERE CAB.id_cliente = :ID_CLIENTE'#13#10'  AND CAB.FILIAL = :FILIAL'#13#10' ' +
-      ' AND I.qtd_restante > 0'#13#10#13#10
+      'SELECT I.id, I.item, i.qtd_nota qtd, i.qtd_faturado, i.qtd_resta' +
+      'nte , I.id_produto, I.nome_produto,'#13#10'P.unidade, P.id_ncm, CAB.id' +
+      '_cliente, i.referencia,'#13#10'CLI.nome, CLI.cnpj_cpf, CAB.produzido, ' +
+      'cab.num_os, i.vlr_total, cab.num_nota,'#13#10'CAB.dtrecebimento, CAB.d' +
+      't_agenda, CAB.dtemissao'#13#10'FROM ORDEMSERVICO_ITENS I'#13#10'INNER JOIN O' +
+      'RDEMSERVICO CAB'#13#10'ON I.id = CAB.id'#13#10'INNER JOIN PRODUTO P'#13#10'ON I.ID' +
+      '_PRODUTO = P.id'#13#10'INNER JOIN PESSOA CLI'#13#10'ON CAB.id_cliente = CLI.' +
+      'codigo'#13#10'WHERE CAB.id_cliente = :ID_CLIENTE'#13#10'  AND CAB.FILIAL = :' +
+      'FILIAL'#13#10'  AND I.qtd_restante > 0'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
