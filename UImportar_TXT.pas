@@ -371,6 +371,43 @@ begin
     fDMImportarXML.mItensNota_Adi.Post;
   end
   else
+  //18/07/2019
+  if (copy(vTipo,1,4) = 'N03|') then
+  begin                                
+    fDMImportarXML.mItensNota.Edit;
+    fDMImportarXML.mItensNotaOrigem.AsString     := fnc_Buscar_Campo;
+    fDMImportarXML.mItensNotaCodSitTrib.AsString := fnc_Buscar_Campo;
+    fDMImportarXML.mItensNotaModICMS.AsString    := fnc_Buscar_Campo;
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    fDMImportarXML.mItensNotaBaseIcms.AsFloat := StrToFloat(FormatFloat('0.00',StrToFloat(vCampo)));
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    if vCampo = '' then vCampo:= '0';
+    fDMImportarXML.mItensNotaAliqIcms.AsFloat := StrToFloat(FormatFloat('0.00',StrToFloat(vCampo)));
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    if vCampo = '' then vCampo:= '0';
+    fDMImportarXML.mItensNotaVlrIcms.AsFloat := StrToFloat(FormatFloat('0.00',StrToFloat(vCampo)));
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    fDMImportarXML.mItensNotaModIcmsST.AsString := fnc_Buscar_Campo;
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    if vCampo = '' then vCampo:= '0';
+    fDMImportarXML.mItensNotaPercMVAST.AsFloat := StrToFloat(FormatFloat('0.00',StrToFloat(vCampo)));
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    if vCampo = '' then vCampo:= '0';
+    fDMImportarXML.mItensNotaPercRedBCST.AsFloat := StrToFloat(FormatFloat('0.00',StrToFloat(vCampo)));
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    if vCampo = '' then vCampo:= '0';
+    fDMImportarXML.mItensNotaBaseCST.AsFloat := StrToFloat(FormatFloat('0.00',StrToFloat(vCampo)));
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    if vCampo = '' then vCampo:= '0';
+    fDMImportarXML.mItensNotaPercIcmsST.AsFloat := StrToFloat(FormatFloat('0.00',StrToFloat(vCampo)));
+    vCampo := Replace(fnc_Buscar_Campo,'.',',');
+    if vCampo = '' then vCampo:= '0';
+    fDMImportarXML.mItensNotaVlrIcmsST.AsFloat := StrToFloat(FormatFloat('0.00',StrToFloat(vCampo)));
+  end
+  else
   if (copy(vTipo,1,4) = 'N02|') or (copy(vTipo,1,4) = 'N04|') then
   begin
     fDMImportarXML.mItensNota.Edit;
