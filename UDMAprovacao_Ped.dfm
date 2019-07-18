@@ -244,6 +244,11 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
         Name = 'Nome_CondPgto'
         DataType = ftString
         Size = 40
+      end
+      item
+        Name = 'OBS'
+        DataType = ftMemo
+        Size = 10
       end>
     IndexDefs = <
       item
@@ -258,17 +263,18 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     PacketRecords = 0
     Params = <>
     StoreDefs = True
-    Left = 584
+    Left = 585
     Top = 72
     Data = {
-      E50000009619E0BD010000001800000008000000000003000000E5000949445F
+      100100009619E0BD01000000180000000900000000000300000010010949445F
       50656469646F04000100000000000A4E756D5F50656469646F04000100000000
       000E50656469646F5F436C69656E746501004900000001000557494454480200
       02001E0009566C725F546F74616C0800040000000000094474456D697373616F
       04000600000000000A49445F436C69656E746504000100000000000B566C725F
       456E747261646108000400000000000D4E6F6D655F436F6E645067746F010049
-      000000010005574944544802000200280001000D44454641554C545F4F524445
-      520200820000000000}
+      0000000100055749445448020002002800034F425304004B0000000200075355
+      42545950450200490005005465787400055749445448020002000A0001000D44
+      454641554C545F4F524445520200820000000000}
     object mPedidoAuxID_Pedido: TIntegerField
       FieldName = 'ID_Pedido'
     end
@@ -297,6 +303,11 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
       FieldName = 'Nome_CondPgto'
       Size = 40
     end
+    object mPedidoAuxOBS: TMemoField
+      FieldName = 'OBS'
+      BlobType = ftMemo
+      Size = 10
+    end
   end
   object dsmPedidoAux: TDataSource
     DataSet = mPedidoAux
@@ -309,8 +320,8 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     CommandText = 
       'SELECT PED.id ID_Pedido,  PED.pedido_cliente, PED.num_pedido, PE' +
       'D.vlr_total, PED.dtemissao, PED.ID_CLIENTE, PED.VLR_ADIANTAMENTO' +
-      ', PED.ID_CONDPGTO'#13#10'FROM PEDIDO PED'#13#10'WHERE PED.aprovado_PED = '#39'P'#39 +
-      #13#10'  AND PED.cancelado = '#39'N'#39#13#10
+      ', PED.ID_CONDPGTO, PED.OBS'#13#10'FROM PEDIDO PED'#13#10'WHERE PED.aprovado_' +
+      'PED = '#39'P'#39#13#10'  AND PED.cancelado = '#39'N'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -352,6 +363,11 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     end
     object cdsPedido_PendID_CONDPGTO: TIntegerField
       FieldName = 'ID_CONDPGTO'
+    end
+    object cdsPedido_PendOBS: TMemoField
+      FieldName = 'OBS'
+      BlobType = ftMemo
+      Size = 1
     end
   end
   object dsPedido_Pend: TDataSource

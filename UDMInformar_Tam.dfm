@@ -1038,6 +1038,16 @@ object DMInformar_Tam: TDMInformar_Tam
       item
         Name = 'Espessura'
         DataType = ftFloat
+      end
+      item
+        Name = 'APROVADO_ITEM'
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'ENCOMENDA'
+        DataType = ftString
+        Size = 1
       end>
     IndexDefs = <>
     Params = <>
@@ -1046,7 +1056,7 @@ object DMInformar_Tam: TDMInformar_Tam
     Left = 87
     Top = 200
     Data = {
-      201500009619E0BD0100000018000000D600000000000300000020150A49445F
+      601500009619E0BD0100000018000000D800000000000300000060150A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
       010005574944544802000200140007556E696461646501004900000001000557
       494454480200020006000351746408000400000000000749445F43464F500400
@@ -1215,7 +1225,9 @@ object DMInformar_Tam: TDMInformar_Tam
       0000010005574944544802000200010007466162726963610100490000000100
       055749445448020002000A00074C61726775726108000400000000000B436F6D
       7072696D656E746F080004000000000009457370657373757261080004000000
-      00000000}
+      00000D4150524F5641444F5F4954454D01004900000001000557494454480200
+      0200010009454E434F4D454E4441010049000000010005574944544802000200
+      01000000}
     object mItensID_Produto: TIntegerField
       FieldName = 'ID_Produto'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2036,6 +2048,14 @@ object DMInformar_Tam: TDMInformar_Tam
     end
     object mItensEspessura: TFloatField
       FieldName = 'Espessura'
+    end
+    object mItensAPROVADO_ITEM: TStringField
+      FieldName = 'APROVADO_ITEM'
+      Size = 1
+    end
+    object mItensENCOMENDA: TStringField
+      FieldName = 'ENCOMENDA'
+      Size = 1
     end
   end
   object mPedido_Cli: TClientDataSet

@@ -326,6 +326,8 @@ type
     cdsPedido_Item_AprovDATA: TDateField;
     sdsPedido_ItemQTD: TFloatField;
     cdsPedido_ItemQTD: TFloatField;
+    mPedidoAuxOBS: TMemoField;
+    cdsPedido_PendOBS: TMemoField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedido_ProcessoNewRecord(DataSet: TDataSet);
   private

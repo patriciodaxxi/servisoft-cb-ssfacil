@@ -320,6 +320,8 @@ type
     mItensLargura: TFloatField;
     mItensComprimento: TFloatField;
     mItensEspessura: TFloatField;
+    mItensAPROVADO_ITEM: TStringField;
+    mItensENCOMENDA: TStringField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private

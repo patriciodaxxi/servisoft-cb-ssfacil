@@ -92,6 +92,8 @@ type
     procedure prc_scroll(DataSet: TDataSet);
     procedure prc_Duplica_Produto_Comb;
     function fnc_Verifica_Duplicidade_Prod_Comb(ID : Integer; Item : Integer) : Boolean;
+    function fnc_Verifica_Comb : Boolean;
+
   public
     { Public declarations }
     fDMCadProduto: TDMCadProduto;     
@@ -351,6 +353,10 @@ begin
     exit;
   if uAltProd.fnc_Custo(fDMCadProduto.cdsProdutoID.AsInteger,fDMCadProduto) then
     exit;
+
+  //18/07/2019
+  RxDBLookupCombo1.ReadOnly := fnc_Verifica_Comb;
+
   vInserir := False;
   prc_Duplica_Produto_Comb;
   fDMCadProduto.cdsProduto_Comb.Edit;
@@ -365,6 +371,12 @@ procedure TfrmCadProduto_Comb.btnExcluirClick(Sender: TObject);
 begin
   if fDMCadProduto.cdsProduto_Comb.IsEmpty then
     exit;
+
+  //18/07/2019  
+  if fnc_Verifica_Comb then
+    exit;
+  //***********
+
   if MessageDlg('Deseja excluir a combinação?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
   if uAltProd.fnc_Custo(fDMCadProduto.cdsProdutoID.AsInteger,fDMCadProduto) then
@@ -710,6 +722,36 @@ procedure TfrmCadProduto_Comb.SMDBGrid1GetCellParams(Sender: TObject;
 begin
   if fDMCadProduto.cdsProduto_CombINATIVO.AsString = 'S' then
     AFont.Color := clRed;
+end;
+
+function TfrmCadProduto_Comb.fnc_Verifica_Comb: Boolean;
+var
+  sds: TSQLDataSet;
+  vContadorAux: Integer;
+begin
+  Result := True;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+
+    sds.CommandText := 'select p.id_cor_combinacao, (select count(1) cont_ped from pedido_item i where i.id_cor = p.id_cor_combinacao and i.id_produto = p.id ), '
+                     + '(select count(1) cont_mov from movimento m where m.id_cor = p.id_cor_combinacao and m.id_produto = p.id) '
+                     + 'from produto_comb p  where P.ID = :ID and P.ID_COR_COMBINACAO = :ID_COR_COMBINACAO ';
+    sds.ParamByName('ID').AsInteger := fDMCadProduto.cdsProduto_CombID.AsInteger;
+    sds.ParamByName('ID_COR_COMBINACAO').AsInteger := fDMCadProduto.cdsProduto_CombID_COR_COMBINACAO.AsInteger;
+    sds.Open;
+    if (sds.FieldByName('CONT_PED').AsInteger <= 0) and (sds.FieldByName('CONT_MOV').AsInteger <= 0) then
+      Result := False;
+
+  finally
+    FreeAndNil(sds);
+  end;
+
+  if Result then
+    MessageDlg('*** Combinação já usada no Pedido/Nota!', mtInformation, [mbOk], 0);
+
 end;
 
 end.

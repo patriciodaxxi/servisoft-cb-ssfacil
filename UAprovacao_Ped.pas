@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Grids, DBGrids,
   SMDBGrid, NxCollection, UDMAprovacao_Ped, Mask, ToolEdit, RzPanel, SqlExpr, dbXPress, DB, CurrEdit, UDMCadPedido,
-  ComCtrls;
+  ComCtrls, DBCtrls;
 
 type
   TfrmAprovacao_Ped = class(TForm)
@@ -56,6 +56,7 @@ type
     lblPedidoWeb: TLabel;
     ProgressBar1: TProgressBar;
     btnAprovar_Item: TNxButton;
+    DBMemo1: TDBMemo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -221,6 +222,7 @@ begin
     fDMAprovacao_Ped.mPedidoAuxVlr_Total.AsFloat       := fDMAprovacao_Ped.cdsPedido_PendVLR_TOTAL.AsFloat;
     fDMAprovacao_Ped.mPedidoAuxDtEmissao.AsDateTime    := fDMAprovacao_Ped.cdsPedido_PendDTEMISSAO.AsDateTime;
     fDMAprovacao_Ped.mPedidoAuxVlr_Entrada.AsFloat     := fDMAprovacao_Ped.cdsPedido_PendVLR_ADIANTAMENTO.AsFloat;
+    fDMAprovacao_Ped.mPedidoAuxOBS.Value               := fDMAprovacao_Ped.cdsPedido_PendOBS.Value;
     if fDMAprovacao_Ped.cdsPedido_PendID_CONDPGTO.AsInteger > 0 then
     begin
       fDMAprovacao_Ped.qCondPgto.Close;

@@ -839,6 +839,7 @@ object frmCadProduto_Comb: TfrmCadProduto_Comb
         Title.Alignment = taCenter
         Title.Caption = 'Tingimento'
         Title.Color = 16777134
+        Width = 64
         Visible = True
       end>
   end

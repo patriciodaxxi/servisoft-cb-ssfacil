@@ -9299,7 +9299,7 @@ object DMCadPedido: TDMCadPedido
     Params = <>
     ProviderName = 'dspCliente'
     Left = 400
-    Top = 10
+    Top = 9
     object cdsClienteCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True

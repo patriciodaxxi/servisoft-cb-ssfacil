@@ -1,6 +1,6 @@
 object frmAprovacao_Ped: TfrmAprovacao_Ped
-  Left = 62
-  Top = 15
+  Left = 58
+  Top = 4
   Width = 1259
   Height = 717
   Caption = 'frmAprovacao_Ped'
@@ -48,7 +48,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
     Left = 0
     Top = 0
     Width = 1251
-    Height = 73
+    Height = 68
     Align = alTop
     Color = clSilver
     TabOrder = 0
@@ -368,9 +368,9 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
   end
   object RzGroupBox2: TRzGroupBox
     Left = 0
-    Top = 73
+    Top = 68
     Width = 1251
-    Height = 366
+    Height = 342
     Align = alClient
     BorderColor = clNavy
     BorderInner = fsButtonUp
@@ -393,7 +393,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
       Left = 5
       Top = 50
       Width = 1241
-      Height = 294
+      Height = 270
       Align = alClient
       Ctl3D = False
       DataSource = DMAprovacao_Ped.dsCliente_Pend
@@ -902,7 +902,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
     end
     object ProgressBar1: TProgressBar
       Left = 5
-      Top = 344
+      Top = 320
       Width = 1241
       Height = 17
       Align = alBottom
@@ -911,9 +911,9 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
   end
   object RzGroupBox1: TRzGroupBox
     Left = 0
-    Top = 439
+    Top = 410
     Width = 1251
-    Height = 247
+    Height = 224
     Align = alBottom
     BorderColor = clBlack
     BorderInner = fsButtonUp
@@ -936,7 +936,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
       Left = 5
       Top = 50
       Width = 998
-      Height = 192
+      Height = 169
       Align = alClient
       Ctl3D = False
       DataSource = DMAprovacao_Ped.dsmPedidoAux
@@ -967,7 +967,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
       WidthOfIndicator = 27
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
-      ColCount = 7
+      ColCount = 8
       RowCount = 2
       Columns = <
         item
@@ -981,7 +981,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = []
-          Width = 104
+          Width = 78
           Visible = True
         end
         item
@@ -1039,7 +1039,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = []
-          Width = 110
+          Width = 92
           Visible = True
         end
         item
@@ -1053,7 +1053,14 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = []
-          Width = 238
+          Width = 222
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'OBS'
+          Title.Caption = 'Obs.'
+          Title.Color = 12713921
           Visible = True
         end>
     end
@@ -1287,7 +1294,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
       Left = 1003
       Top = 50
       Width = 243
-      Height = 192
+      Height = 169
       Align = alRight
       TabOrder = 2
       object Label1: TLabel
@@ -1345,5 +1352,19 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
         ParentFont = False
       end
     end
+  end
+  object DBMemo1: TDBMemo
+    Left = 0
+    Top = 634
+    Width = 1251
+    Height = 52
+    TabStop = False
+    Align = alBottom
+    Color = clSilver
+    DataField = 'OBS'
+    DataSource = DMAprovacao_Ped.dsmPedidoAux
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 3
   end
 end
