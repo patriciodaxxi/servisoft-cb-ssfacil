@@ -641,7 +641,7 @@ end;
 
 procedure TfrmCadNotaEntrada.btnAlterarClick(Sender: TObject);
 begin
-    fDMCadNotaFiscal.cdsPedido.Close;
+  fDMCadNotaFiscal.cdsPedido.Close;
   if (fDMCadNotaFiscal.cdsNotaFiscal.IsEmpty) or not(fDMCadNotaFiscal.cdsNotaFiscal.Active) or (fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger < 1) then
     exit;
 

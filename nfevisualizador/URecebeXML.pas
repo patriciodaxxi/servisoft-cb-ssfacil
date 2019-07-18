@@ -1192,6 +1192,7 @@ begin
     fDMRecebeXML.mItensNotaCodCSTIPI.AsString := fDMRecebeXML.cdsDetalheIPITrib_CST.AsString;
 
 
+
   end;
 
   fDMRecebeXML.mItensNotaAliqIPI.AsFloat      := fDMRecebeXML.cdsDetalhepIPI.AsFloat;
@@ -1199,23 +1200,6 @@ begin
   fDMRecebeXML.mItensNotaVlrDesconto.AsFloat  := fDMRecebeXML.cdsDetalhevDesc.AsFloat;
   fDMRecebeXML.mItensNotaVlrFrete.AsFloat     := fDMRecebeXML.cdsDetalhevFrete.AsFloat;
   fDMRecebeXML.mItensNotaGravarNovo.AsBoolean := False;
-
-  //09/07/2014 - Foi tirado pois agora vai buscar da tabela fornecedor para ver a unidade que este usa,
-  //se não existir na tabela de fornecedor o usuário vai ter que escolher qual unidade é
-  {if (fDMRecebeXML.mItensNotaUnidade.AsString <> fDMRecebeXML.mItensNotaUnidadeInterno.AsString)
-     and (StrToFloat(FormatFloat('0.00000',fDMRecebeXML.mItensNotaQtdPacote.AsFloat)) <= 0)
-     and (fDMRecebeXML.qParametrosUSA_QTDPACOTE_NTE.AsString = 'S') then
-  begin
-    fDMRecebeXML.qUnidade.Close;
-    fDMRecebeXML.qUnidade.ParamByName('UNIDADE').AsString := fDMRecebeXML.mItensNotaUnidade.AsString;
-    fDMRecebeXML.qUnidade.Open;
-    if fDMRecebeXML.qUnidadeCONVERSOR.AsFloat > 0 then
-    begin
-      vQtdAux := StrToFloat(FormatFloat('0.00000',fDMRecebeXML.qUnidadeCONVERSOR.AsFloat * fDMRecebeXML.mItensNotaQtd.AsFloat));
-      fDMRecebeXML.mItensNotaQtdPacote.AsFloat        := StrToFloat(FormatFloat('0.00000',vQtdAux));
-      fDMRecebeXML.mItensNotaConversorUnidade.AsFloat := StrToFloat(FormatFloat('0.00000', fDMRecebeXML.qUnidadeCONVERSOR.AsFloat));
-    end;
-  end;}
 
   if vUsaConfigNatOper2 = 'S' then
     Ajustar_ICMS;
@@ -2467,13 +2451,22 @@ begin
       fDMRecebeXML.cdsNotaFiscalDTSAIDAENTRADA.AsDateTime := DateEdit1.Date;
     end;
     fDMRecebeXML.cdsNotaFiscalVLR_FRETE.AsFloat       := fDMRecebeXML.cdsCabecalhovFrete.AsFloat;
+    if StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscalVLR_FRETE.AsFloat)) > 0 then
+      fDMRecebeXML.cdsNotaFiscalGERARDUPL_FRETE.AsString := 'S';
+
     fDMRecebeXML.cdsNotaFiscalVLR_NOTA.AsFloat        := fDMRecebeXML.cdsCabecalhovNF.AsFloat;
     fDMRecebeXML.cdsNotaFiscalBASE_ICMS.AsFloat       := 0;
     fDMRecebeXML.cdsNotaFiscalVLR_ICMS.AsFloat        := 0;
     fDMRecebeXML.cdsNotaFiscalVLR_IPI.AsFloat         := 0;
     fDMRecebeXML.cdsNotaFiscalID_CFOP.AsInteger       := fDMRecebeXML.mItensNotaCFOPInterno.AsInteger;
     fDMRecebeXML.cdsNotaFiscalVLR_OUTRASDESP.AsFloat  := fDMRecebeXML.cdsCabecalhovOutro.AsFloat;
-    fDMRecebeXML.cdsNotaFiscalVLR_ITENS.AsFloat       := fDMRecebeXML.cdsCabecalhovNF.AsFloat;
+    //18/07/2019
+    //fDMRecebeXML.cdsNotaFiscalVLR_ITENS.AsFloat       := fDMRecebeXML.cdsCabecalhovNF.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_ITENS.AsFloat := fDMRecebeXML.cdsCabecalhovProd.AsFloat;
+    if StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscalVLR_ITENS.AsFloat)) <= 0 then
+      fDMRecebeXML.cdsNotaFiscalVLR_ITENS.AsFloat := fDMRecebeXML.cdsCabecalhovNF.AsFloat;
+    //******************
+
     fDMRecebeXML.cdsNotaFiscalVLR_DESCONTO.AsFloat    := fDMRecebeXML.cdsCabecalhoICMSTot_vDesc.AsFloat;
     if vImportar_NotaSaida then
     begin
@@ -2673,10 +2666,10 @@ begin
     fDMRecebeXML.cdsNotaFiscal_ItensPERC_ISSQN.AsFloat    := StrToFloat(FormatFloat('0.0000',fDMRecebeXML.mItensNotaPerc_ISSQN.AsFloat));
 
     //23/01/2018
-    fDMRecebeXML.cdsNotaFiscal_ItensPERC_COFINS.AsFloat := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaAliqCofins.AsFloat));
-    fDMRecebeXML.cdsNotaFiscal_ItensPERC_PIS.AsFloat    := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaAliqPIS.AsFloat));
-    fDMRecebeXML.cdsNotaFiscal_ItensVLR_COFINS.AsFloat  := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaVlrCofins.AsFloat));
-    fDMRecebeXML.cdsNotaFiscal_ItensVLR_PIS.AsFloat     := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaVlrPis.AsFloat));
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_COFINS.AsFloat       := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaAliqCofins.AsFloat));
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_PIS.AsFloat          := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaAliqPIS.AsFloat));
+    fDMRecebeXML.cdsNotaFiscal_ItensVLR_COFINS.AsFloat        := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaVlrCofins.AsFloat));
+    fDMRecebeXML.cdsNotaFiscal_ItensVLR_PIS.AsFloat           := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaVlrPis.AsFloat));
     fDMRecebeXML.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00000',fDMRecebeXML.mItensNotaPreco_Custo_Total.AsFloat));
     //****************
 
@@ -2702,6 +2695,26 @@ begin
                                                               fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS.AsFloat));
     fDMRecebeXML.cdsNotaFiscalVLR_IPI.AsFloat   := StrToFloat(FormatFloat('0.00',fDMRecebeXML.cdsNotaFiscalVLR_IPI.AsFloat +
                                                               fDMRecebeXML.cdsNotaFiscal_ItensVLR_IPI.AsFloat));
+
+    //18/07/2019
+    fDMRecebeXML.cdsNotaFiscalBASE_ICMSSUBST.AsFloat     := fDMRecebeXML.cdsNotaFiscalBASE_ICMSSUBST.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_ICMSSUBST.AsFloat      := fDMRecebeXML.cdsNotaFiscalVLR_ICMSSUBST.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat := fDMRecebeXML.cdsNotaFiscalBASE_ICMSSUBST_RET.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat  := fDMRecebeXML.cdsNotaFiscalVLR_ICMSSUBST_RET.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_IPI_DEVOL.AsFloat      := fDMRecebeXML.cdsNotaFiscalVLR_IPI_DEVOL.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_IPI_DEVOL.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_BASE_EFET.AsFloat      := fDMRecebeXML.cdsNotaFiscalVLR_BASE_EFET.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_ICMS_EFET.AsFloat      := fDMRecebeXML.cdsNotaFiscalVLR_ICMS_EFET.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_ICMS_UF_DEST.AsFloat   := fDMRecebeXML.cdsNotaFiscalVLR_ICMS_UF_DEST.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_UF_DEST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_ICMS_UF_REMET.AsFloat  := fDMRecebeXML.cdsNotaFiscalVLR_ICMS_UF_REMET.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_UF_REMET.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalBASE_ICMS_FCP.AsFloat      := fDMRecebeXML.cdsNotaFiscalBASE_ICMS_FCP.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMS_FCP.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalBASE_FCP_ST.AsFloat        := fDMRecebeXML.cdsNotaFiscalBASE_FCP_ST.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_FCP_ST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_FCP_ST.AsFloat         := fDMRecebeXML.cdsNotaFiscalVLR_FCP_ST.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_FCP_ST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_ICMS_FCP_DEST.AsFloat  := fDMRecebeXML.cdsNotaFiscalVLR_ICMS_FCP_DEST.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat := fDMRecebeXML.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalBASE_IPI.AsFloat           := fDMRecebeXML.cdsNotaFiscalBASE_IPI.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_IPI.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalBASE_IPI.AsFloat           := fDMRecebeXML.cdsNotaFiscalBASE_IPI.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_IPI.AsFloat;
+    //******************
+
     fDMRecebeXML.cdsNotaFiscal.Post;
     fDMRecebeXML.cdsNotaFiscal_Itens.Last;
 
@@ -2853,6 +2866,9 @@ begin
       Raise Exception.Create('Ocorreu o seguinte erro ao gravar a nota: ' + #13 + e.Message);
     end
   end;
+
+
+
 end;
 
 function TfrmRecebeXML.fnc_NumValido(Const S: String): Integer;
@@ -3001,6 +3017,7 @@ var
   ID: TTransactionDesc;
   vErro: String;
   vVlrAux: Real;
+  vIDAux : Integer;
 begin
   fDMRecebeXML.mPedidoAux.EmptyDataSet;
   if CheckBox1.Checked then
@@ -3066,6 +3083,8 @@ begin
 
   end;
 
+  vIDAux := 0;
+
   ID.TransactionID  := 2;
   ID.IsolationLevel := xilREADCOMMITTED;
   dmDatabase.scoDados.StartTransaction(ID);
@@ -3079,8 +3098,8 @@ begin
 
     vItem := 0;
     Gravar_NotaEntrada;
+    vIDAux := fDMRecebeXML.cdsNotaFiscalID.AsInteger;
 
-    //aqui
     if vImportar_NotaSaida then
       Gravar_NotaFiscal_Ref;
 
@@ -3189,12 +3208,22 @@ begin
   except
     on e: Exception do
     begin
+      vIDAux := 0;
       dmDatabase.scoDados.Rollback(ID);
       vErro      := e.Message;
       Raise Exception.Create('Ocorreu o seguinte erro ao executar: ' + #13 + vErro);
     end
   end;
 
+  if not(vImportar_NotaSaida) and (vIDAux > 0) then
+  begin
+    if not fDMRecebeXML.fnc_Verifica_Dup(vIDAux) then
+    begin
+      lbStatusContasPagar.Caption    := '*** NÃO Gerado o Contas a Pagar';
+      lbStatusContasPagar.Color      := clRed;
+      lbStatusContasPagar.Font.Color := clWhite;
+    end;
+  end;
   if (trim(vErro) = '') and (vImportar_NotaSaida) then
     Close;
 end;
@@ -3211,6 +3240,8 @@ var
   vAux2: String;
   vID_LocalAux: Integer;
 begin
+  lbStatusContasPagar.Font.Color := clBlack;
+  
   fDMRecebeXML.cdsUnidade2.Close;
   fDMRecebeXML.cdsUnidade2.Open;
   fDMRecebeXML.qParametros.Close;

@@ -5057,6 +5057,59 @@ object DMRecebeXML: TDMRecebeXML
     object sdsNotaFiscalID_LOCAL_ESTOQUE: TIntegerField
       FieldName = 'ID_LOCAL_ESTOQUE'
     end
+    object sdsNotaFiscalVLR_ICMSSUBST_PROPRIO: TFloatField
+      FieldName = 'VLR_ICMSSUBST_PROPRIO'
+    end
+    object sdsNotaFiscalBASE_ICMSSUBST_PROPRIO: TFloatField
+      FieldName = 'BASE_ICMSSUBST_PROPRIO'
+    end
+    object sdsNotaFiscalVLR_ICMS_UF_DEST: TFloatField
+      FieldName = 'VLR_ICMS_UF_DEST'
+    end
+    object sdsNotaFiscalVLR_ICMS_UF_REMET: TFloatField
+      FieldName = 'VLR_ICMS_UF_REMET'
+    end
+    object sdsNotaFiscalBASE_ICMS_FCP: TFloatField
+      FieldName = 'BASE_ICMS_FCP'
+    end
+    object sdsNotaFiscalBASE_FCP_ST: TFloatField
+      FieldName = 'BASE_FCP_ST'
+    end
+    object sdsNotaFiscalVLR_FCP_ST: TFloatField
+      FieldName = 'VLR_FCP_ST'
+    end
+    object sdsNotaFiscalPERC_FCP_ST: TFloatField
+      FieldName = 'PERC_FCP_ST'
+    end
+    object sdsNotaFiscalVLR_ICMS_FCP_DEST: TFloatField
+      FieldName = 'VLR_ICMS_FCP_DEST'
+    end
+    object sdsNotaFiscalBASE_ICMS_FCP_DEST: TFloatField
+      FieldName = 'BASE_ICMS_FCP_DEST'
+    end
+    object sdsNotaFiscalSOMAR_FRETE_II: TStringField
+      FieldName = 'SOMAR_FRETE_II'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsNotaFiscalVLR_IPI_DEVOL: TFloatField
+      FieldName = 'VLR_IPI_DEVOL'
+    end
+    object sdsNotaFiscalBASE_IPI: TFloatField
+      FieldName = 'BASE_IPI'
+    end
+    object sdsNotaFiscalVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object sdsNotaFiscalVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
+    end
+    object sdsNotaFiscalBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object sdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
   end
   object dspNotaFiscal: TDataSetProvider
     DataSet = sdsNotaFiscal
@@ -5475,6 +5528,59 @@ object DMRecebeXML: TDMRecebeXML
     end
     object cdsNotaFiscalID_LOCAL_ESTOQUE: TIntegerField
       FieldName = 'ID_LOCAL_ESTOQUE'
+    end
+    object cdsNotaFiscalVLR_ICMSSUBST_PROPRIO: TFloatField
+      FieldName = 'VLR_ICMSSUBST_PROPRIO'
+    end
+    object cdsNotaFiscalBASE_ICMSSUBST_PROPRIO: TFloatField
+      FieldName = 'BASE_ICMSSUBST_PROPRIO'
+    end
+    object cdsNotaFiscalVLR_ICMS_UF_DEST: TFloatField
+      FieldName = 'VLR_ICMS_UF_DEST'
+    end
+    object cdsNotaFiscalVLR_ICMS_UF_REMET: TFloatField
+      FieldName = 'VLR_ICMS_UF_REMET'
+    end
+    object cdsNotaFiscalBASE_ICMS_FCP: TFloatField
+      FieldName = 'BASE_ICMS_FCP'
+    end
+    object cdsNotaFiscalBASE_FCP_ST: TFloatField
+      FieldName = 'BASE_FCP_ST'
+    end
+    object cdsNotaFiscalVLR_FCP_ST: TFloatField
+      FieldName = 'VLR_FCP_ST'
+    end
+    object cdsNotaFiscalPERC_FCP_ST: TFloatField
+      FieldName = 'PERC_FCP_ST'
+    end
+    object cdsNotaFiscalVLR_ICMS_FCP_DEST: TFloatField
+      FieldName = 'VLR_ICMS_FCP_DEST'
+    end
+    object cdsNotaFiscalBASE_ICMS_FCP_DEST: TFloatField
+      FieldName = 'BASE_ICMS_FCP_DEST'
+    end
+    object cdsNotaFiscalSOMAR_FRETE_II: TStringField
+      FieldName = 'SOMAR_FRETE_II'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsNotaFiscalVLR_IPI_DEVOL: TFloatField
+      FieldName = 'VLR_IPI_DEVOL'
+    end
+    object cdsNotaFiscalBASE_IPI: TFloatField
+      FieldName = 'BASE_IPI'
+    end
+    object cdsNotaFiscalVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object cdsNotaFiscalVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
+    end
+    object cdsNotaFiscalBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object cdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
     end
   end
   object dsNotaFiscal: TDataSource

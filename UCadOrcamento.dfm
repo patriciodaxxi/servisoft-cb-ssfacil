@@ -1863,7 +1863,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         Top = 211
         Width = 1004
         Height = 390
-        ActivePage = RzTabSheet1
+        ActivePage = TS_Valores
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -1871,7 +1871,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -3285,8 +3285,8 @@ object frmCadOrcamento: TfrmCadOrcamento
               object DBMemo1: TDBMemo
                 Left = 5
                 Top = 18
-                Width = 980
-                Height = 287
+                Width = 988
+                Height = 276
                 Align = alClient
                 DataField = 'OBS'
                 DataSource = DMCadPedido.dsPedido

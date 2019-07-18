@@ -2282,6 +2282,40 @@ type
     cdsNotaFiscal_ItensLARGURA: TFloatField;
     cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField;
     cdsNotaFiscal_ItensESPESSURA: TFloatField;
+    sdsNotaFiscalVLR_ICMSSUBST_PROPRIO: TFloatField;
+    sdsNotaFiscalBASE_ICMSSUBST_PROPRIO: TFloatField;
+    sdsNotaFiscalVLR_ICMS_UF_DEST: TFloatField;
+    sdsNotaFiscalVLR_ICMS_UF_REMET: TFloatField;
+    sdsNotaFiscalBASE_ICMS_FCP: TFloatField;
+    sdsNotaFiscalBASE_FCP_ST: TFloatField;
+    sdsNotaFiscalVLR_FCP_ST: TFloatField;
+    sdsNotaFiscalPERC_FCP_ST: TFloatField;
+    sdsNotaFiscalVLR_ICMS_FCP_DEST: TFloatField;
+    sdsNotaFiscalBASE_ICMS_FCP_DEST: TFloatField;
+    sdsNotaFiscalSOMAR_FRETE_II: TStringField;
+    sdsNotaFiscalVLR_IPI_DEVOL: TFloatField;
+    sdsNotaFiscalBASE_IPI: TFloatField;
+    sdsNotaFiscalVLR_BASE_EFET: TFloatField;
+    sdsNotaFiscalVLR_ICMS_EFET: TFloatField;
+    sdsNotaFiscalBASE_ICMSSUBST_RET: TFloatField;
+    sdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField;
+    cdsNotaFiscalVLR_ICMSSUBST_PROPRIO: TFloatField;
+    cdsNotaFiscalBASE_ICMSSUBST_PROPRIO: TFloatField;
+    cdsNotaFiscalVLR_ICMS_UF_DEST: TFloatField;
+    cdsNotaFiscalVLR_ICMS_UF_REMET: TFloatField;
+    cdsNotaFiscalBASE_ICMS_FCP: TFloatField;
+    cdsNotaFiscalBASE_FCP_ST: TFloatField;
+    cdsNotaFiscalVLR_FCP_ST: TFloatField;
+    cdsNotaFiscalPERC_FCP_ST: TFloatField;
+    cdsNotaFiscalVLR_ICMS_FCP_DEST: TFloatField;
+    cdsNotaFiscalBASE_ICMS_FCP_DEST: TFloatField;
+    cdsNotaFiscalSOMAR_FRETE_II: TStringField;
+    cdsNotaFiscalVLR_IPI_DEVOL: TFloatField;
+    cdsNotaFiscalBASE_IPI: TFloatField;
+    cdsNotaFiscalVLR_BASE_EFET: TFloatField;
+    cdsNotaFiscalVLR_ICMS_EFET: TFloatField;
+    cdsNotaFiscalBASE_ICMSSUBST_RET: TFloatField;
+    cdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2364,6 +2398,8 @@ type
     function fnc_Verifica_Produto_Forn(ID_Produto, ID_Fornecedor: Integer; Cod_Produto_Forn, Tamanho: String): Boolean;
     function fnc_Proximo_Item_Forn(ID_Produto: Integer): Integer;
     function fnc_Ultimo_Item_Rateio(Item : Integer) : Integer;
+    function fnc_Verifica_Dup(ID_nota : Integer) : Boolean;
+
   end;
 
 var
@@ -3047,6 +3083,26 @@ procedure TDMRecebeXML.mRateioItensCalcFields(DataSet: TDataSet);
 begin
   if mRateioItensQuantidade.AsFloat > 0 then
     mRateioItensQtde_Total.AsFloat := mRateioItensQtde_Total.AsFloat + mRateioItensQuantidade.AsFloat;
+end;
+
+function TDMRecebeXML.fnc_Verifica_Dup(ID_nota: Integer): Boolean;
+var
+  sds: TSQLDataSet;
+begin
+  Result := False;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT COUNT(1) CONTADOR FROM DUPLICATA D  WHERE D.id_nota = :ID_NOTA ';
+    sds.ParamByName('ID_NOTA').AsInteger := ID_nota;
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := True;
+  finally
+    FreeAndNil(sds);
+  end;
 end;
 
 end.
