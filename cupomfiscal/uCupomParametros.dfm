@@ -81,7 +81,7 @@ object fCupomParametros: TfCupomParametros
     Top = 35
     Width = 873
     Height = 566
-    ActivePage = TabSheet4
+    ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
     object TabSheet1: TTabSheet
@@ -686,7 +686,7 @@ object fCupomParametros: TfCupomParametros
             Items.Strings = (
               'SIM'
               'N'#195'O')
-            TabOrder = 1
+            TabOrder = 2
             Values.Strings = (
               'S'
               'N')
@@ -702,7 +702,7 @@ object fCupomParametros: TfCupomParametros
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = dmCupomFiscal.dsCupomTerminal
-            TabOrder = 2
+            TabOrder = 1
           end
           object DirectoryEdit2: TDirectoryEdit
             Left = 214
@@ -731,7 +731,9 @@ object fCupomParametros: TfCupomParametros
             Top = 14
             Width = 187
             Height = 21
-            DropDownCount = 8
+            DropDownCount = 5
+            DisplayEmpty = '[Perguntar em cada venda]'
+            EmptyValue = '0'
             LookupField = 'ID'
             LookupDisplay = 'NOME_INTERNO'
             LookupSource = dmCupomFiscal.dsFilial
@@ -1987,7 +1989,6 @@ object fCupomParametros: TfCupomParametros
             item
               Expanded = False
               FieldName = 'NUMREGISTRO'
-              Width = 64
               Visible = True
             end>
         end

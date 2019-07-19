@@ -79,6 +79,8 @@ type
     btnAlterar_CondPagto: TNxButton;
     btnExcluir_CondPagto: TNxButton;
     SMDBGrid13: TSMDBGrid;
+    Label13: TLabel;
+    RxDBComboBox4: TRxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

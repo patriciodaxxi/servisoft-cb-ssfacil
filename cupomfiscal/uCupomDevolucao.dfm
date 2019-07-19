@@ -25,7 +25,7 @@ object fCupomDevolucao: TfCupomDevolucao
     Top = 0
     Width = 892
     Height = 421
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object fCupomDevolucao: TfCupomDevolucao
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet

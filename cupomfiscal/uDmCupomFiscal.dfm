@@ -2664,6 +2664,11 @@ object dmCupomFiscal: TdmCupomFiscal
       FixedChar = True
       Size = 1
     end
+    object cdsTipoCobrancaJUROS_TIPO: TStringField
+      FieldName = 'JUROS_TIPO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsTipoCobranca: TDataSource
     DataSet = cdsTipoCobranca

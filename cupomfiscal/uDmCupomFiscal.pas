@@ -1543,6 +1543,7 @@ type
     cdsCupom_ItensVLR_JUROS: TFloatField;
     sdsCupomFiscalVLR_OUTROS: TFloatField;
     cdsCupomFiscalVLR_OUTROS: TFloatField;
+    cdsTipoCobrancaJUROS_TIPO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);

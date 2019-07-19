@@ -1,8 +1,8 @@
 object fCupomFiscalPgto: TfCupomFiscalPgto
   Left = 316
-  Top = 15
+  Top = 10
   Width = 822
-  Height = 673
+  Height = 678
   BorderIcons = [biSystemMenu]
   Caption = 'fCupomFiscalPgto - Pagamento'
   Color = clBtnFace
@@ -21,7 +21,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 601
+    Top = 606
     Width = 814
     Height = 41
     Align = alBottom
@@ -87,7 +87,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
     Left = 0
     Top = 0
     Width = 814
-    Height = 601
+    Height = 606
     ActivePage = TabSheet1
     ActivePageDefault = TabSheet1
     Align = alClient
@@ -100,14 +100,14 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         Left = 0
         Top = 0
         Width = 810
-        Height = 578
+        Height = 583
         Align = alClient
         TabOrder = 0
         object Panel3: TPanel
           Left = 1
-          Top = 377
+          Top = 418
           Width = 808
-          Height = 200
+          Height = 164
           Align = alBottom
           Color = 3683329
           TabOrder = 3
@@ -187,85 +187,9 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             ShowHint = True
             OnClick = SpeedButton1Click
           end
-          object Label3: TLabel
-            Left = 97
-            Top = 131
-            Width = 97
-            Height = 23
-            Alignment = taRightJustify
-            Caption = 'Condi'#231#227'o:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -19
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object btnParcelas: TSpeedButton
-            Left = 684
-            Top = 122
-            Width = 31
-            Height = 32
-            Glyph.Data = {
-              AE060000424DAE06000000000000360000002800000017000000170000000100
-              18000000000078060000130B0000130B00000000000000000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD9BED7B786B5A064A1955795965B
-              95AB84AAD5C8D4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
-              0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB571AA801171831376902787
-              9B3B9BA451A6AA5DAEA25DA89C68A45B215C8E6B8EFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFDEBAD9880C728E177D9B
-              3193A54CA4A550A4A44DA2A34BA2A24BA1A448A2A247A1C37CC6AC84B6480E48
-              D1C6D2FFFFFFFFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFCA90C18602
-              719524899E3898A249A1A147A0A0449DA1469FA1469FA1469FA1469FA1459F9E
-              409BA747A0CB91CF5D2A61B39CB2FFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFF
-              D8AED2860072962489983092A1449CA0419A9F4199AA55A59E3D989F419BA041
-              99A0419AA0419BA0419B9F3F9A9E3996C57EC65A285FCFC1CFFFFFFFFFFFFF00
-              0000FFFFFFFFFFFF8A06779421849127899E3C959D3E949D3D949B3691D8BECF
-              9D3D949E3B949D3D949D3D949D3D949D3D949D3D949C3B93972D8DC88ECC480E
-              4AFFFFFFFFFFFF000000FFFFFFB15FA790197D8B2782942E899E37919D36919D
-              36919C34909A308DFFFFFF9220859D35919D36919D35909D36919D35919F3692
-              942C8994338BA97FB48F6A8DFFFFFF000000FFFFFF8D0D7B88277F81277F9A31
-              8C9B318D9B318D9A318D9B318D962588C896C2FFFFFF9421859B318D9B318D9B
-              318D9B318D9B318D9D318D7D1E79AF69B25C225FFFFFFF000000D8B2D38D187E
-              7721787B237B9B2A8A9629889629889629889629889628888F1880FDFFFEA23F
-              95922184962988962988962988962988992A8A80237D741B76995F9FD8CBD800
-              0000C07AB6821F7B5E195F731C6E991F83941D80941D80941D80941E80931E81
-              8E137ABF7BB2F5FDF48F127B941F829621839521839521839821857C1E735C15
-              5C8C4292AF89AF000000B35DAB701B6C390D3E74206AA139949F4098A1439BA1
-              429A9F3C96972B878E157786046DF1F2ECD8BECF8B087094217D94227D94227D
-              982380781C6A3D0C3F7B357D9E659E000000B76CB9701B6F7821739A3F97A751
-              A7A44EA4A44EA4A34EA49E419DFFFFFFFFFFFFFEFFFFEFEFE9F4FFF0BD81AA90
-              15719621789521779921797618634D134F8828869B5F9C000000C38AC87E227C
-              8A257D963A90A54FA5A44DA3A34CA2A44CA29E429EC997C9FFFFFFFEFCFEC693
-              C7CA99C9C9A1C89C378D9B368D9E398FA042979B3D958C27808C2182A670A800
-              0000D8B4DE8132838F237F95348CA54FA5A34CA2A34CA2A34CA2A34BA29D409C
-              FFFFFFFFFFFFB873B69B3B9A9F449EA44EA4A44FA5A44FA4A650A697388F8E26
-              7F891D7EBD90BB000000ECDDF3975B9F861D77942A84A755AAA44FA5A44FA5A4
-              4FA5A550A59E429FD6B0D6FFFFFFFDFEFD9C3F9DA44EA5A54FA5A54FA5A44FA5
-              A654AA942D87912782831277E0CADE000000FFFFFFC899D96D1764962083A855
-              ADA95AB1A959B0A959B0A959B1A857AFA859B0FFFFFFFFFFFFD0A5D4A34EAAA9
-              59B1A959B0AA5AB1A959B0932080952285831674FFFFFF000000FFFFFFE7D0F6
-              8C5B958C1678A03E9CB16EC2AE67BCAE67BCAE67BCAE67BCA658B5E5D1EAFFFF
-              FFFFFFFFAC64BCAE65BBAE67BCB16DC2A0429F9622868C147ABC7FB3FFFFFF00
-              0000FFFFFFFFFFFFDCBCF16322639A2284B472C9B778CEB576CBB576CBB576CB
-              B472CAFFFFFFF9F3FAF8F1F9FFFFFFB26FC9B678CDB575CB962783931F828B12
-              78FFFFFFFFFFFF000000FFFFFFFFFFFFF7F0FCD0B0E35E1459A1328FC291E7BD
-              8AE1BC88DFBD88DFBC88DFBA84DDB57AD9B67ADAB781DBBC8AE0C192E99F3A92
-              962483870171E6CDE3FFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFF4EBFCCFB0
-              E364216095308ACDA2F7CAA1F4C599EFC598EEC598EEC598EEC599EEC8A1F3CB
-              A3F4A04299921E7D860072D5ACD0FFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFDCBDF18958936B1E63B785C5E3CDFEE3CDFEE1CCFDE3CF
-              FEE4D0FFC291D39130838911768B0D7BE5CAE1FFFFFFFFFFFFFFFFFFFFFFFF00
-              0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9D4F5CA99DA9150977A307B
-              8F49909951999443918218778108718E127DBF7AB6FFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFF1E4F5DCBBE1C792CAB86FB9B76AB0C78DC0E4C8E0FFFFFFFFFFFFFFFFFF
-              FFFFFFF2F2F2FFFFFFFFFFFFF2F2F2000000}
-            OnClick = btnParcelasClick
-          end
           object Label6: TLabel
             Left = 141
-            Top = 169
+            Top = 129
             Width = 53
             Height = 23
             Alignment = taRightJustify
@@ -385,31 +309,9 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             OnExit = ComboVendedorExit
             OnKeyDown = ComboVendedorKeyDown
           end
-          object RxDBLookupCombo2: TRxDBLookupCombo
-            Left = 202
-            Top = 122
-            Width = 478
-            Height = 32
-            DropDownCount = 15
-            DataField = 'ID_CONDPGTO'
-            DataSource = dmCupomFiscal.dsCupomFiscal
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = 3683329
-            Font.Height = -19
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
-            LookupField = 'ID'
-            LookupDisplay = 'NOME'
-            LookupSource = dmCupomFiscal.dsCondPgto
-            ParentFont = False
-            TabOrder = 5
-            OnChange = RxDBLookupCombo2Change
-            OnEnter = RxDBLookupCombo2Enter
-            OnKeyDown = RxDBLookupCombo2KeyDown
-          end
           object DBEdit9: TDBEdit
             Left = 202
-            Top = 161
+            Top = 121
             Width = 478
             Height = 31
             CharCase = ecUpperCase
@@ -421,7 +323,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Name = 'Verdana'
             Font.Style = []
             ParentFont = False
-            TabOrder = 6
+            TabOrder = 5
             OnExit = DBEdit9Exit
           end
           object DBEdit6: TDBEdit
@@ -445,7 +347,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           Left = 1
           Top = 1
           Width = 808
-          Height = 86
+          Height = 124
           Align = alTop
           Color = 3683329
           TabOrder = 0
@@ -466,7 +368,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object Label10: TLabel
             Left = 184
-            Top = 56
+            Top = 93
             Width = 58
             Height = 23
             Alignment = taRightJustify
@@ -481,7 +383,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object Label12: TLabel
             Left = 10
-            Top = 65
+            Top = 102
             Width = 118
             Height = 13
             Caption = 'F5 para atualizar campos'
@@ -494,7 +396,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object Label17: TLabel
             Left = 509
-            Top = 55
+            Top = 92
             Width = 114
             Height = 23
             Alignment = taRightJustify
@@ -507,12 +409,88 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             ParentFont = False
             Visible = False
           end
+          object Label3: TLabel
+            Left = 145
+            Top = 54
+            Width = 97
+            Height = 23
+            Alignment = taRightJustify
+            Caption = 'Condi'#231#227'o:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -19
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object btnParcelas: TSpeedButton
+            Left = 732
+            Top = 45
+            Width = 31
+            Height = 32
+            Glyph.Data = {
+              AE060000424DAE06000000000000360000002800000017000000170000000100
+              18000000000078060000130B0000130B00000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD9BED7B786B5A064A1955795965B
+              95AB84AAD5C8D4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
+              0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB571AA801171831376902787
+              9B3B9BA451A6AA5DAEA25DA89C68A45B215C8E6B8EFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFDEBAD9880C728E177D9B
+              3193A54CA4A550A4A44DA2A34BA2A24BA1A448A2A247A1C37CC6AC84B6480E48
+              D1C6D2FFFFFFFFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFCA90C18602
+              719524899E3898A249A1A147A0A0449DA1469FA1469FA1469FA1469FA1459F9E
+              409BA747A0CB91CF5D2A61B39CB2FFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFF
+              D8AED2860072962489983092A1449CA0419A9F4199AA55A59E3D989F419BA041
+              99A0419AA0419BA0419B9F3F9A9E3996C57EC65A285FCFC1CFFFFFFFFFFFFF00
+              0000FFFFFFFFFFFF8A06779421849127899E3C959D3E949D3D949B3691D8BECF
+              9D3D949E3B949D3D949D3D949D3D949D3D949D3D949C3B93972D8DC88ECC480E
+              4AFFFFFFFFFFFF000000FFFFFFB15FA790197D8B2782942E899E37919D36919D
+              36919C34909A308DFFFFFF9220859D35919D36919D35909D36919D35919F3692
+              942C8994338BA97FB48F6A8DFFFFFF000000FFFFFF8D0D7B88277F81277F9A31
+              8C9B318D9B318D9A318D9B318D962588C896C2FFFFFF9421859B318D9B318D9B
+              318D9B318D9B318D9D318D7D1E79AF69B25C225FFFFFFF000000D8B2D38D187E
+              7721787B237B9B2A8A9629889629889629889629889628888F1880FDFFFEA23F
+              95922184962988962988962988962988992A8A80237D741B76995F9FD8CBD800
+              0000C07AB6821F7B5E195F731C6E991F83941D80941D80941D80941E80931E81
+              8E137ABF7BB2F5FDF48F127B941F829621839521839521839821857C1E735C15
+              5C8C4292AF89AF000000B35DAB701B6C390D3E74206AA139949F4098A1439BA1
+              429A9F3C96972B878E157786046DF1F2ECD8BECF8B087094217D94227D94227D
+              982380781C6A3D0C3F7B357D9E659E000000B76CB9701B6F7821739A3F97A751
+              A7A44EA4A44EA4A34EA49E419DFFFFFFFFFFFFFEFFFFEFEFE9F4FFF0BD81AA90
+              15719621789521779921797618634D134F8828869B5F9C000000C38AC87E227C
+              8A257D963A90A54FA5A44DA3A34CA2A44CA29E429EC997C9FFFFFFFEFCFEC693
+              C7CA99C9C9A1C89C378D9B368D9E398FA042979B3D958C27808C2182A670A800
+              0000D8B4DE8132838F237F95348CA54FA5A34CA2A34CA2A34CA2A34BA29D409C
+              FFFFFFFFFFFFB873B69B3B9A9F449EA44EA4A44FA5A44FA4A650A697388F8E26
+              7F891D7EBD90BB000000ECDDF3975B9F861D77942A84A755AAA44FA5A44FA5A4
+              4FA5A550A59E429FD6B0D6FFFFFFFDFEFD9C3F9DA44EA5A54FA5A54FA5A44FA5
+              A654AA942D87912782831277E0CADE000000FFFFFFC899D96D1764962083A855
+              ADA95AB1A959B0A959B0A959B1A857AFA859B0FFFFFFFFFFFFD0A5D4A34EAAA9
+              59B1A959B0AA5AB1A959B0932080952285831674FFFFFF000000FFFFFFE7D0F6
+              8C5B958C1678A03E9CB16EC2AE67BCAE67BCAE67BCAE67BCA658B5E5D1EAFFFF
+              FFFFFFFFAC64BCAE65BBAE67BCB16DC2A0429F9622868C147ABC7FB3FFFFFF00
+              0000FFFFFFFFFFFFDCBCF16322639A2284B472C9B778CEB576CBB576CBB576CB
+              B472CAFFFFFFF9F3FAF8F1F9FFFFFFB26FC9B678CDB575CB962783931F828B12
+              78FFFFFFFFFFFF000000FFFFFFFFFFFFF7F0FCD0B0E35E1459A1328FC291E7BD
+              8AE1BC88DFBD88DFBC88DFBA84DDB57AD9B67ADAB781DBBC8AE0C192E99F3A92
+              962483870171E6CDE3FFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFF4EBFCCFB0
+              E364216095308ACDA2F7CAA1F4C599EFC598EEC598EEC598EEC599EEC8A1F3CB
+              A3F4A04299921E7D860072D5ACD0FFFFFFFFFFFFFFFFFF000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFDCBDF18958936B1E63B785C5E3CDFEE3CDFEE1CCFDE3CF
+              FEE4D0FFC291D39130838911768B0D7BE5CAE1FFFFFFFFFFFFFFFFFFFFFFFF00
+              0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9D4F5CA99DA9150977A307B
+              8F49909951999443918218778108718E127DBF7AB6FFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFF000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFF1E4F5DCBBE1C792CAB86FB9B76AB0C78DC0E4C8E0FFFFFFFFFFFFFFFFFF
+              FFFFFFF2F2F2FFFFFFFFFFFFF2F2F2000000}
+            OnClick = btnParcelasClick
+          end
           object RxDBLookupCombo3: TRxDBLookupCombo
             Left = 326
             Top = 8
             Width = 401
             Height = 32
-            DropDownCount = 15
+            DropDownCount = 6
             DataField = 'ID_TIPOCOBRANCA'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
@@ -531,11 +509,11 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object Edit1: TEdit
             Left = 730
-            Top = 57
+            Top = 94
             Width = 57
             Height = 21
             TabStop = False
-            TabOrder = 3
+            TabOrder = 5
             Visible = False
           end
           object ceFormaPgto: TCurrencyEdit
@@ -558,7 +536,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object cbNFCe: TComboBox
             Left = 250
-            Top = 46
+            Top = 83
             Width = 145
             Height = 32
             Style = csDropDownList
@@ -571,7 +549,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             ItemHeight = 24
             ItemIndex = 0
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 3
             Text = 'SIM'
             Visible = False
             OnKeyDown = cbNFCeKeyDown
@@ -581,7 +559,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object CurrencyEdit2: TCurrencyEdit
             Left = 632
-            Top = 46
+            Top = 83
             Width = 96
             Height = 32
             AutoSize = False
@@ -597,10 +575,32 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Visible = False
             OnKeyDown = CurrencyEdit2KeyDown
           end
+          object RxDBLookupCombo2: TRxDBLookupCombo
+            Left = 250
+            Top = 45
+            Width = 478
+            Height = 32
+            DropDownCount = 15
+            DataField = 'ID_CONDPGTO'
+            DataSource = dmCupomFiscal.dsCupomFiscal
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 3683329
+            Font.Height = -19
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            LookupField = 'ID'
+            LookupDisplay = 'NOME'
+            LookupSource = dmCupomFiscal.dsCondPgto
+            ParentFont = False
+            TabOrder = 2
+            OnChange = RxDBLookupCombo2Change
+            OnEnter = RxDBLookupCombo2Enter
+            OnKeyDown = RxDBLookupCombo2KeyDown
+          end
         end
         object Panel6: TPanel
           Left = 1
-          Top = 87
+          Top = 125
           Width = 808
           Height = 96
           Align = alTop
@@ -711,9 +711,9 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         end
         object Panel7: TPanel
           Left = 1
-          Top = 183
+          Top = 221
           Width = 808
-          Height = 194
+          Height = 197
           Align = alClient
           TabOrder = 2
           OnEnter = Panel7Enter
@@ -939,7 +939,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         Left = 0
         Top = 39
         Width = 810
-        Height = 467
+        Height = 472
         Align = alClient
         Color = 12633514
         DataSource = dmCupomFiscal.dsCupom_Parc
@@ -1016,7 +1016,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
       end
       object Panel8: TPanel
         Left = 0
-        Top = 506
+        Top = 511
         Width = 810
         Height = 72
         Align = alBottom

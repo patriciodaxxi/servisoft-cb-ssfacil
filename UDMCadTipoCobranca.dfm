@@ -155,6 +155,11 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
       FixedChar = True
       Size = 1
     end
+    object sdsTipoCobrancaJUROS_TIPO: TStringField
+      FieldName = 'JUROS_TIPO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
@@ -322,6 +327,11 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     end
     object cdsTipoCobrancasdsTipoCobranca_Itens: TDataSetField
       FieldName = 'sdsTipoCobranca_Itens'
+    end
+    object cdsTipoCobrancaJUROS_TIPO: TStringField
+      FieldName = 'JUROS_TIPO'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsTipoCobranca: TDataSource

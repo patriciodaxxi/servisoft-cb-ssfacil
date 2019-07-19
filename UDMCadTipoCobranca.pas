@@ -93,6 +93,8 @@ type
     cdsCondPagtoID: TIntegerField;
     cdsCondPagtoNOME: TStringField;
     cdsTipoCobranca_ItensNome_CondPagto: TStringField;
+    sdsTipoCobrancaJUROS_TIPO: TStringField;
+    cdsTipoCobrancaJUROS_TIPO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspTipoCobrancaUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

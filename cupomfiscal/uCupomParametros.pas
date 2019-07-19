@@ -376,7 +376,11 @@ begin
          vUsaGaveta := True;                                 
        end;
   end;
-  vFilial   := RxDBLookupCombo8.KeyValue;
+  if RxDBLookupCombo8.KeyValue > 0 then
+    vFilial := RxDBLookupCombo8.KeyValue
+  else
+    vFilial := 0;
+
   vTerminal := RxDBLookupCombo2.KeyValue;
 
 ////////////////////////////////

@@ -274,10 +274,10 @@ function TDMMovimento.fnc_Gravar_Movimento(ID_Mov, Filial, Item,
   Cancelada, Denegada, Unidade, Motivo_CD, Nome_Produto_Serv, Referencia: String;
   DtEmissao, DtEntradaSaida: TDateTime; Tamanho, Tipo_Condicao: String;
   ID_CondPgto, ID_Recibo, ID_Vendedor, ID_Cor: Integer; Perc_Comissao, Vlr_Icms_UF_Remet, Vlr_Icms_UF_Dest: Real;
-  Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String ;
+  Terminal: Integer; Preco_Custo_Total: Real; Retem_PISCOFINS: String;
   BASE_FCP_ST, BASE_ICMS_FCP, BASE_ICMS_FCP_DEST, VLR_ICMS_FCP_DEST,VLR_ICMS_FCP,VLR_FCP_ST,
   Comprimento, Largura, Espessura: Real;
-  ID_Vendedor_Int : Integer): Integer;
+  ID_Vendedor_Int: Integer): Integer;
 var
   vAux: Integer;
 begin

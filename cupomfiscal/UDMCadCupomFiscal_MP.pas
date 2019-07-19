@@ -275,7 +275,7 @@ begin
                                              0,
                                              mMaterialQtd.AsFloat,
                                              mMaterialPreco_Custo.AsFloat,
-                                             0,0,'',0,'','N',0,0);
+                                             0,0,'',0,'','N',0,0,0,0,0);
   cdsCupomFiscal_MP.Edit;
   cdsCupomFiscal_MPID_MOVESTOQUE.AsInteger := vID_Estoque;
   cdsCupomFiscal_MP.Post;

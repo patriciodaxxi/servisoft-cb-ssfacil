@@ -88,6 +88,8 @@ type
     RLDraw1: TRLDraw;
     RLMemo2: TRLMemo;
     RLDBMemo1: TRLDBMemo;
+    RLLabel19: TRLLabel;
+    RLLabel20: TRLLabel;
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -241,6 +243,7 @@ begin
   RLLabel5.Caption := IntToStr(fDmNFCe.mItensNFe.RecordCount);
 
   RLLabel32.Caption := FormatFloat('0.00',fDmNFCe.cdsCupomFiscalVLR_TOTAL.AsFloat);
+  RLLabel20.Caption := FormatFloat('0.00',fDmNFCe.cdsCupomFiscalVLR_OUTROS.AsFloat);
 
   RLLabel36.Caption := FormatFloat('0.00',fDmNFCe.cdsCupomFiscalVLR_TOTAL.AsFloat + vVlr_Desconto_Total);
   RLLabel33.Caption := FormatFloat('0.00',vVlr_Desconto_Total);

@@ -2516,6 +2516,10 @@ object DMNFCe: TDMNFCe
     object cdsCupomFiscalQTD_ITENS: TIntegerField
       FieldName = 'QTD_ITENS'
     end
+    object cdsCupomFiscalVLR_OUTROS: TFloatField
+      FieldName = 'VLR_OUTROS'
+      DisplayFormat = '0.00'
+    end
   end
   object dsCupomFiscal: TDataSource
     DataSet = cdsCupomFiscal

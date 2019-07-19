@@ -359,7 +359,7 @@ begin
                                                              0, 0, 0, 0, 0,
                                                              fDmDevolucao.cdsDevolucaoItensQTD.AsFloat,
                                                              fDmDevolucao.cdsDevolucaoItensVLR_CREDITO.AsFloat,
-                                                             0,0,'',0,'','N',0,0);
+                                                             0,0,'',0,'','N',0,0,0,0,0);
 
     fDmDevolucao.cdsDevolucaoItensID_MOVIMENTO.AsInteger := fDMMovimento.fnc_Gravar_Movimento(fDmDevolucao.cdsDevolucaoItensID_MOVIMENTO.AsInteger,
                                                             fDmDevolucao.cdsDevolucaoFILIAL.AsInteger,
@@ -398,7 +398,7 @@ begin
                                                             0,
                                                             0, //PERC. COMISSAO
                                                             0,0,vTerminal,0,'N',
-                                                            0,0,0,0,0,0);
+                                                            0,0,0,0,0,0,0,0,0,0);
 
     fDmDevolucao.cdsDevolucaoItens.Post;
 

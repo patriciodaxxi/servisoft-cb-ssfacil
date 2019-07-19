@@ -96,7 +96,8 @@ begin
   prc_Calcular_Tributos_Transparencia(fDMCupomFiscal);
 
   fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency  := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency +
-                                                                   fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat));
+                                                                   fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat +
+                                                                   fDMCupomFiscal.cdsCupom_ItensVLR_JUROS.AsCurrency));
 
   if (StrToCurr(FormatCurr('0.0000',Qtd)) > 0) and (StrToCurr(FormatCurr('0.0000000000',fDMCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency)) > 0) then
     vVlrTotalItem := StrToCurr(FormatCurr('0.00',Qtd * fDMCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency));
@@ -190,17 +191,20 @@ begin
   begin
     if (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_FEDERAL.AsFloat)) > 0) then
     begin
-      vAux := StrToCurr(FormatCurr('0.00',(fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat * fDMCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_FEDERAL.AsFloat) / 100));
+      vAux := StrToCurr(FormatCurr('0.00',((fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat + fDMCupomFiscal.cdsCupom_ItensVLR_JUROS.AsFloat) *
+                                           fDMCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_FEDERAL.AsFloat) / 100));
       fDMCupomFiscal.cdsCupom_ItensVLR_TRIBUTO_FEDERAL.AsFloat := StrToFloat(FormatFloat('0.00',vAux));
     end;
     if (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_ESTADUAL.AsFloat)) > 0) then
     begin
-      vAux := StrToCurr(FormatCurr('0.00',(fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat * fDMCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_ESTADUAL.AsFloat) / 100));
+      vAux := StrToCurr(FormatCurr('0.00',((fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat  + fDMCupomFiscal.cdsCupom_ItensVLR_JUROS.AsFloat) *
+                                           fDMCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_ESTADUAL.AsFloat) / 100));
       fDMCupomFiscal.cdsCupom_ItensVLR_TRIBUTO_ESTADUAL.AsFloat := StrToFloat(FormatFloat('0.00',vAux));
     end;
     if (StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_MUNICIPAL.AsFloat)) > 0) then
     begin
-      vAux := StrToCurr(FormatCurr('0.00',(fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat * fDMCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_MUNICIPAL.AsFloat) / 100));
+      vAux := StrToCurr(FormatCurr('0.00',((fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat  + fDMCupomFiscal.cdsCupom_ItensVLR_JUROS.AsFloat) *
+                                           fDMCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_MUNICIPAL.AsFloat) / 100));
       fDMCupomFiscal.cdsCupom_ItensVLR_TRIBUTO_MUNICIPAL.AsFloat := StrToFloat(FormatFloat('0.00',vAux));
     end;
     fDMCupomFiscal.cdsCupom_ItensVLR_TRIBUTO.AsFloat := fDMCupomFiscal.cdsCupom_ItensVLR_TRIBUTO_ESTADUAL.AsFloat
@@ -215,12 +219,15 @@ var
   vVlrDesconto_Ori: Real;
   vVlrTotal: Real;
   vContador: Integer;
+  vVlrJuros: Real;
 begin
   if not(fDMCupomFiscal.cdsCupomFiscal.State in [dsEdit,dsInsert]) then
     fDMCupomFiscal.cdsCupomFiscal.Edit;
   vVlrDesconto     := fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat;
   vVlrDesconto_Ori := fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat;
   vVlrTotal        := fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat;
+  vVlrJuros        := fDMCupomFiscal.cdsCupomFiscalVLR_OUTROS.AsFloat;
+
 
   fDMCupomFiscal.cdsCupomFiscalVLR_COFINS.AsFloat   := 0;
   fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat := 0;
@@ -292,7 +299,7 @@ begin
 
     prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsFloat,
                                          fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat,fDmCupomFiscal.cdsCupom_ItensPERC_DESCONTO.AsFloat,
-                                         fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat,
+                                         fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_JUROS.AsFloat,
                                          'S',StrToFloat(FormatFloat('0.00',vAux)));
     fDMCupomFiscal.cdsCupom_Itens.Post;
     fDMCupomFiscal.cdsCupom_Itens.Next;

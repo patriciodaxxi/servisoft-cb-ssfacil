@@ -3,7 +3,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
   Top = 23
   Width = 733
   Height = 674
-  VertScrollBar.Position = 380
+  VertScrollBar.Position = 293
   Caption = 'fRelDanfe_NFCe'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
   TextHeight = 13
   object RLReport1: TRLReport
     Left = 8
-    Top = -372
+    Top = -285
     Width = 302
     Height = 3780
     DataSource = DMNFCe.dsCupomFiscal
@@ -232,7 +232,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand3: TRLBand
         Left = 0
-        Top = 437
+        Top = 463
         Width = 278
         Height = 32
         BandType = btSummary
@@ -272,7 +272,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand4: TRLBand
         Left = 0
-        Top = 498
+        Top = 524
         Width = 278
         Height = 153
         BandType = btSummary
@@ -319,7 +319,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand5: TRLBand
         Left = 0
-        Top = 469
+        Top = 495
         Width = 278
         Height = 14
         BandType = btSummary
@@ -404,7 +404,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand8: TRLBand
         Left = 0
-        Top = 371
+        Top = 397
         Width = 278
         Height = 66
         BandType = btSummary
@@ -677,7 +677,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
         Left = 0
         Top = 261
         Width = 278
-        Height = 110
+        Height = 136
         Borders.Sides = sdCustom
         Borders.DrawLeft = False
         Borders.DrawTop = False
@@ -817,7 +817,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           Left = 0
           Top = 28
           Width = 278
-          Height = 78
+          Height = 91
           BandType = btSummary
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -833,7 +833,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           BeforePrint = RLBand13BeforePrint
           object RLLabel29: TRLLabel
             Left = 49
-            Top = 27
+            Top = 39
             Width = 73
             Height = 12
             Alignment = taRightJustify
@@ -847,7 +847,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel32: TRLLabel
             Left = 245
-            Top = 39
+            Top = 51
             Width = 21
             Height = 12
             Alignment = taRightJustify
@@ -861,7 +861,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel33: TRLLabel
             Left = 245
-            Top = 27
+            Top = 39
             Width = 21
             Height = 12
             Alignment = taRightJustify
@@ -875,7 +875,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel30: TRLLabel
             Left = 29
-            Top = 51
+            Top = 63
             Width = 93
             Height = 12
             Alignment = taRightJustify
@@ -889,7 +889,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel34: TRLLabel
             Left = 26
-            Top = 39
+            Top = 51
             Width = 96
             Height = 12
             Alignment = taRightJustify
@@ -903,7 +903,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel36: TRLLabel
             Left = 245
-            Top = 15
+            Top = 27
             Width = 21
             Height = 12
             Alignment = taRightJustify
@@ -930,12 +930,12 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
             ParentFont = False
           end
           object RLLabel5: TRLLabel
-            Left = 258
+            Left = 245
             Top = 3
-            Width = 8
+            Width = 21
             Height = 12
             Alignment = taRightJustify
-            Caption = '0'
+            Caption = '0.00'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -9
@@ -945,7 +945,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel6: TRLLabel
             Left = 39
-            Top = 15
+            Top = 27
             Width = 83
             Height = 12
             Alignment = taRightJustify
@@ -959,7 +959,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel7: TRLLabel
             Left = 229
-            Top = 51
+            Top = 63
             Width = 37
             Height = 12
             Alignment = taRightJustify
@@ -973,7 +973,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel15: TRLLabel
             Left = 68
-            Top = 63
+            Top = 75
             Width = 54
             Height = 12
             Alignment = taRightJustify
@@ -987,11 +987,39 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
           end
           object RLLabel16: TRLLabel
             Left = 245
-            Top = 63
+            Top = 75
             Width = 21
             Height = 12
             Alignment = taRightJustify
             Caption = '0,00'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLLabel19: TRLLabel
+            Left = 36
+            Top = 15
+            Width = 86
+            Height = 12
+            Alignment = taRightJustify
+            Caption = 'JUROS / OUTROS:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLLabel20: TRLLabel
+            Left = 245
+            Top = 15
+            Width = 21
+            Height = 12
+            Alignment = taRightJustify
+            Caption = '0.00'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -9
@@ -1086,7 +1114,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand9: TRLBand
         Left = 0
-        Top = 483
+        Top = 509
         Width = 278
         Height = 15
         BandType = btSummary
@@ -1108,7 +1136,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
       end
       object RLBand14: TRLBand
         Left = 0
-        Top = 651
+        Top = 677
         Width = 278
         Height = 29
         BandType = btSummary

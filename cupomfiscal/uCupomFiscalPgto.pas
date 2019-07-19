@@ -52,9 +52,6 @@ type
     btCliente: TSpeedButton;
     Label12: TLabel;
     SpeedButton1: TSpeedButton;
-    Label3: TLabel;
-    RxDBLookupCombo2: TRxDBLookupCombo;
-    btnParcelas: TSpeedButton;
     Label6: TLabel;
     DBEdit9: TDBEdit;
     SpeedButton2: TSpeedButton;
@@ -67,6 +64,9 @@ type
     Panel8: TPanel;
     Label18: TLabel;
     DBEdit10: TDBEdit;
+    Label3: TLabel;
+    RxDBLookupCombo2: TRxDBLookupCombo;
+    btnParcelas: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DBEdit1Exit(Sender: TObject);
@@ -140,7 +140,6 @@ type
     function fncVerificaParc(vTotal: Currency): Boolean;
     procedure prc_EditaTodas(vRestante: Currency; vQtdParc: Word);
     procedure prc_EditaPrimeira(vRestante: Currency; vQtdParc: Word);
-    procedure prc_AtualizaPrecos(vVlrProdutos, vVlrTotal: Currency);
     procedure prc_ControleParcelas(vVlrParcelado, vVlrTxJuros: Real; vQtdParc: Word);
     function fnc_CalulaJuros(vVlrEntrada,vVlrFinanciado,vPercJuros: Real; vParcelas: Word): Real;
     procedure prc_CalculaJuros(vTaxa, vTotal, vItem: Real);
@@ -195,8 +194,16 @@ begin
   begin
     if vTxJuros > 0 then
     begin
-      vVlrParcelas := StrToFloat(FormatFloat('0.00',vVlrParcelado * ((vTxJuros / 100)/ (1 - (Power(1 + (vTxJuros / 100),vQtdParc * -1))))));
-      vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrParcelas * vQtdParc));
+      if fDmCupomFiscal.cdsCupomFiscalVLR_OUTROS.AsCurrency > 0 then
+      begin
+        vVlrParcelas := StrToFloat(FormatFloat('0.00',vVlrParcelado / vQtdParc));
+        vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrParcelas * vQtdParc));
+      end
+      else
+      begin
+        vVlrParcelas := StrToFloat(FormatFloat('0.00',vVlrParcelado * ((vTxJuros / 100)/ (1 - (Power(1 + (vTxJuros / 100),vQtdParc * -1))))));
+        vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrParcelas * vQtdParc));
+      end;
     end
     else
     begin
@@ -830,18 +837,18 @@ begin
   fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_MUNICIPAL.AsFloat := 0;
 //////////////////////////////////////////////
 
-  vVlrParcelado := fDmCupomFiscal.vSomaOriginal - fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency -
+  vVlrParcelado := fDmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency - fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency -
                    fDmCupomFiscal.vVlrEntrada + fDmCupomFiscal.cdsCupomFiscalVLR_OUTROS.AsCurrency;
 
-  prc_ControleParcelas(vVlrParcelado,vPercJuros,vQtdParcelas);
+  prc_ControleParcelas(vVlrParcelado,0,vQtdParcelas);
 
   vVlrTotal    := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.vVlrEntrada + fDmCupomFiscal.vSomaParcelas));
   vVlrProdutos := fDmCupomFiscal.vSomaOriginal;
 
-//  prc_AtualizaPrecos(vVlrProdutos,vVlrTotal);
+  prc_Calcular_Geral(fDmCupomFiscal);
 
 //  fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency;
-  prcCorrigirParc(fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency);
+//  prcCorrigirParc(fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency);
 
   RzPageControl1.ActivePageIndex := 1;
 end;
@@ -1375,29 +1382,6 @@ begin
   end;
 end;
 
-procedure TfCupomFiscalPgto.prc_AtualizaPrecos(vVlrProdutos, vVlrTotal: Currency);
-var
-  vVlrRestante: Real;
-begin
-  vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrTotal));
-  fDmCupomFiscal.cdsCupom_Itens.First;
-  while not fDmCupomFiscal.cdsCupom_Itens.Eof do
-  begin
-    fDmCupomFiscal.cdsCupom_Itens.Edit;
-    if CurrencyEdit2.Value > 0 then
-      fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsCurrency := StrToFloat(FormatFloat('0.000',(fDmCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency *
-                                                              vVlrTotal / vVlrProdutos)));
-
-    prc_Calculo_GeralItem(fDmCupomFiscal,fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,  //aqui
-                                         fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat,fDmCupomFiscal.cdsCupom_ItensPERC_DESCONTO.AsFloat,
-                                         fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,fDmCupomFiscal.cdsCupom_ItensVLR_ACRESCIMO.AsFloat,'S',
-                                         fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTORATEIO.AsCurrency);
-    fDmCupomFiscal.prc_Busca_IBPT;
-    fDmCupomFiscal.cdsCupom_Itens.Post;
-    fDmCupomFiscal.cdsCupom_Itens.Next;
-  end;
-end;
-
 procedure TfCupomFiscalPgto.prc_ControleParcelas(vVlrParcelado, vVlrTxJuros: Real; vQtdParc: Word);
 begin
   fDmCupomFiscal.cdsCupom_Parc.First;
@@ -1486,6 +1470,12 @@ procedure TfCupomFiscalPgto.CurrencyEdit2KeyDown(Sender: TObject;
 var
   vOutros: Currency;
 begin
+  fDmCupomFiscal.cdsCupomFiscalVLR_OUTROS.AsCurrency   := 0;
+  fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := 0;
+  fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsCurrency := 0;
+
+
+
   if CurrencyEdit2.Value > 0 then
   begin
     vOutros := 0;
@@ -1493,10 +1483,27 @@ begin
     while not fDmCupomFiscal.cdsCupom_Itens.Eof do
     begin
       fDmCupomFiscal.cdsCupom_Itens.Edit;
-      fDmCupomFiscal.cdsCupom_ItensVLR_JUROS.AsString := FormatFloat('0.00',fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency *
-                                                         CurrencyEdit2.Value/ 100);
+
+      case fDmCupomFiscal.cdsTipoCobrancaJUROS_TIPO.AsInteger of
+        1: begin
+             fDmCupomFiscal.cdsCupom_ItensVLR_JUROS.AsString := FormatFloat('0.00',fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency *
+                                                                CurrencyEdit2.Value/ 100);
+           end;
+        2: begin
+
+           end;
+        3: begin
+//             fDmCupomFiscal.cdsCupom_ItensVLR_JUROS.AsString := FormatFloat('0.00',vVlrParcelado * ((vPercJuros / 100)/(1 - (Power(1 + (vPercJuros / 100),vQtdParc * -1)))));
+             if fDmCupomFiscal.cdsCondPgtoTIPO.AsString <> 'V' then
+               fDmCupomFiscal.cdsCupom_ItensVLR_JUROS.AsString := FormatFloat('0.00',((fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency *
+                                                                             ((vPercJuros / 100)/(1 - (Power(1 + (vPercJuros / 100),vQtdParcelas * -1))))) *
+                                                                             vQtdParcelas) - fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency);
+           end;
+      end;
       fDmCupomFiscal.cdsCupom_Itens.Post;
       vOutros := vOutros + fDmCupomFiscal.cdsCupom_ItensVLR_JUROS.AsCurrency;
+      fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency +
+                                                           fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency;
       fDmCupomFiscal.cdsCupom_Itens.Next;
     end;
 

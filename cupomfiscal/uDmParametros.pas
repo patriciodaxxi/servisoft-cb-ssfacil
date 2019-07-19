@@ -72,6 +72,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    vEscolheFilial: Boolean;
     procedure Le_Ini;
     procedure SetDefaultPrinter(PrinterName: String);
   end;
@@ -115,7 +116,10 @@ begin
       vTerminal := StrToInt(vTerm);
     vTerm := ini.ReadString('IMPRESSORA','Filial','');
     if trim(vTerm) <> '' then
+    begin
       vFilial := StrToInt(vTerm);
+      vEscolheFilial := (vTerm = '0');
+    end;
 
     vBalanca      := ini.ReadString('BALANCA','Balanca','');
     vPortaBalanca := ini.ReadString('BALANCA','Porta','');
