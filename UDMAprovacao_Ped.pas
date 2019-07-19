@@ -709,13 +709,13 @@ var
 
     Result := 'S';
     //********************************  Api em Delphi do directCall
-    
+
     api := TApiDirectCall.Create;
     try
       api.User := qFilial_SMSLOGIN.AsString;
       api.Password := qFilial_SMSSENHA.Text;
       //ShowMessage( api.sendSms(de_sms.Text, para_sms.Text, sms.Text) );
-      vMSG := 'Joao Wiest (JW Metais) informa que seu pedido ' + qPedido2NUM_PEDIDO.AsString + ' ja esta diponivel para coleta ';
+      vMSG := 'JW Laser informa que seu pedido ' + qPedido2NUM_PEDIDO.AsString + ' ja esta diponivel para coleta ';
       //ShowMessage( api.sendSms(qFilial_SMSFONE_ORIGEM.AsString, qPedido2DDD.AsString + qPedido2FONE.AsString, vMSG) );
       ShowMessage( api.sendSms(qFilial_SMSFONE_ORIGEM.AsString, qPedido2DDD.AsString + vFone, vMSG) );
       Result := 'S';
