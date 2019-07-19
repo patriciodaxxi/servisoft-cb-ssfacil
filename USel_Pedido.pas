@@ -6,7 +6,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, RxLookup, StdCtrls,
   UDMCadNotaFiscal, Buttons, Grids, DBGrids, SMDBGrid, DB, UCadNotaFiscal_Itens, UCadNotaEntrada_Itens, uDmCadVale,
-  NxCollection, uCadVale_Itens, SqlExpr, UCadRecNF_Itens;
+  NxCollection, uCadVale_Itens, SqlExpr, UCadRecNF_Itens, ComCtrls;
 
 type
   TfrmSel_Pedido = class(TForm)
@@ -35,6 +35,7 @@ type
     edtPedido: TEdit;
     Shape5: TShape;
     Label9: TLabel;
+    pgbItens: TProgressBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -745,7 +746,7 @@ begin
     if fDMCadNotaFiscal.cdsPedido_TipoTIPO_ORCAMENTO.AsString = 'C' then
       vTexto := fDMCadNotaFiscal.cdsPedido_TipoCOMPLEMENTO_NOME.AsString + ' (X)mm ' + fDMCadNotaFiscal.cdsPedido_TipoCOMPRIMENTO.AsString
               + ' (Y)mm ' + fDMCadNotaFiscal.cdsPedido_TipoLARGURA.AsString
-              + ' (*)mm ' + fDMCadNotaFiscal.cdsPedido_TipoALTURA.AsString
+              + ' (*)mm ' + fDMCadNotaFiscal.cdsPedido_TipoESPESSURA.AsString
     else
     if fDMCadNotaFiscal.cdsPedido_TipoTIPO_ORCAMENTO.AsString = 'R' then
       vTexto := fDMCadNotaFiscal.cdsPedido_TipoCOMPLEMENTO_NOME.AsString + ' ø ' + fDMCadNotaFiscal.cdsPedido_TipoDIAMETRO.AsString
@@ -1060,7 +1061,7 @@ begin
     if fDmCadVale.cdsPedido_TipoTIPO_ORCAMENTO.AsString = 'C' then
       vTexto := fDmCadVale.cdsPedido_TipoCOMPLEMENTO_NOME.AsString + ' (X)mm ' + fDmCadVale.cdsPedido_TipoCOMPRIMENTO.AsString
               + ' (Y)mm ' + fDmCadVale.cdsPedido_TipoLARGURA.AsString
-              + ' (*)mm ' + fDmCadVale.cdsPedido_TipoALTURA.AsString
+              + ' (*)mm ' + fDmCadVale.cdsPedido_TipoESPESSURA.AsString
     else
     if fDmCadVale.cdsPedido_TipoTIPO_ORCAMENTO.AsString = 'R' then
       vTexto := fDmCadVale.cdsPedido_TipoCOMPLEMENTO_NOME.AsString + ' ø ' + fDmCadVale.cdsPedido_TipoDIAMETRO.AsString
@@ -1213,9 +1214,13 @@ begin
   try
     if fDMCadNotaFiscal.cdsParametrosEMPRESA_AMBIENTES.AsString = 'S' then
       fDMCadNotaFiscal.mPedAmbientes.EmptyDataSet;
+    fDMCadNotaFiscal.cdsPedido.DisableControls;
+    pgbItens.Min := 0;
+    pgbItens.Max := fDMCadNotaFiscal.cdsPedido.RecordCount;
     fDMCadNotaFiscal.cdsPedido.First;
     while not fDMCadNotaFiscal.cdsPedido.Eof do
     begin
+      pgbItens.Position := pgbItens.Position + 1;
       vSel := False;
       if SMDBGrid1.SelectedRows.CurrentRowSelected then
         vSel := True;
@@ -1379,6 +1384,7 @@ begin
       end;
       fDMCadNotaFiscal.cdsPedido.Next;
     end;
+    fDMCadNotaFiscal.cdsPedido.EnableControls;
     //Alluminium 31/07/2015
     {if fDMCadNotaFiscal.cdsParametrosEMPRESA_AMBIENTES.AsString = 'S' then
     begin

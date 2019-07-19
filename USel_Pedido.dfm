@@ -1,6 +1,6 @@
 object frmSel_Pedido: TfrmSel_Pedido
-  Left = 271
-  Top = 33
+  Left = 118
+  Top = 27
   Width = 1116
   Height = 664
   BorderIcons = [biSystemMenu]
@@ -19,16 +19,16 @@ object frmSel_Pedido: TfrmSel_Pedido
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter
-    Left = 888
+    Left = 880
     Top = 52
     Width = 8
-    Height = 479
+    Height = 454
     Align = alRight
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1108
+    Width = 1100
     Height = 52
     Align = alTop
     Color = clMoneyGreen
@@ -250,8 +250,8 @@ object frmSel_Pedido: TfrmSel_Pedido
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 52
-    Width = 888
-    Height = 479
+    Width = 880
+    Height = 454
     Align = alClient
     Ctl3D = False
     DataSource = DMCadNotaFiscal.dsPedido
@@ -461,7 +461,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         FieldName = 'DTRECEBIMENTO'
         Title.Alignment = taCenter
         Title.Caption = 'Dt. Recebimento OS'
-        Width = 64
         Visible = True
       end
       item
@@ -470,7 +469,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         FieldName = 'DT_AGENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Dt. Previs'#227'o Final OS'
-        Width = 64
         Visible = True
       end
       item
@@ -516,7 +514,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         Expanded = False
         FieldName = 'CNPJ_CPF'
         ReadOnly = True
-        Width = 64
         Visible = True
       end
       item
@@ -540,7 +537,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Imp. N'#186' OC na Nota'
-        Width = 64
         Visible = True
       end
       item
@@ -564,14 +560,13 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Item no Cliente'
-        Width = 64
         Visible = True
       end>
   end
   object Panel2: TPanel
     Left = 0
-    Top = 596
-    Width = 1108
+    Top = 588
+    Width = 1100
     Height = 37
     Align = alBottom
     Color = 8404992
@@ -694,8 +689,8 @@ object frmSel_Pedido: TfrmSel_Pedido
   end
   object SMDBGrid6: TSMDBGrid
     Left = 0
-    Top = 531
-    Width = 1108
+    Top = 523
+    Width = 1100
     Height = 65
     Align = alBottom
     Ctl3D = False
@@ -869,10 +864,10 @@ object frmSel_Pedido: TfrmSel_Pedido
       end>
   end
   object SMDBGrid2: TSMDBGrid
-    Left = 896
+    Left = 888
     Top = 52
     Width = 212
-    Height = 479
+    Height = 454
     TabStop = False
     Align = alRight
     Ctl3D = False
@@ -926,5 +921,13 @@ object frmSel_Pedido: TfrmSel_Pedido
         Width = 107
         Visible = True
       end>
+  end
+  object pgbItens: TProgressBar
+    Left = 0
+    Top = 506
+    Width = 1100
+    Height = 17
+    Align = alBottom
+    TabOrder = 5
   end
 end

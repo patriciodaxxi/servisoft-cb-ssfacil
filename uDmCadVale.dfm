@@ -1,8 +1,8 @@
 object DmCadVale: TDmCadVale
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 391
-  Top = 6
+  Left = 174
+  Top = 21
   Height = 685
   Width = 896
   object sdsVale: TSQLDataSet
@@ -2262,6 +2262,9 @@ object DmCadVale: TDmCadVale
     object cdsPedido_TipoDESCRICAO_TIPO: TStringField
       FieldName = 'DESCRICAO_TIPO'
       Size = 12
+    end
+    object cdsPedido_TipoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
     end
   end
   object dsPedido_Tipo: TDataSource
