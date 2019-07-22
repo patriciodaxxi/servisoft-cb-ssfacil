@@ -182,6 +182,10 @@ type
     Label40: TLabel;
     CurrencyEdit1: TCurrencyEdit;
     OC21: TMenuItem;
+    Shape8: TShape;
+    Label41: TLabel;
+    Shape9: TShape;
+    Label42: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -247,6 +251,10 @@ type
     procedure btnDescontoClick(Sender: TObject);
     procedure OrdemdeCompra11Click(Sender: TObject);
     procedure OC21Click(Sender: TObject);
+    procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
 
@@ -293,7 +301,7 @@ implementation
 
 uses DateUtils, DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, uRelOC, uRelOC_Hidro, USel_Pessoa, UDMUtil, USel_ContaOrc, USenha,
   uUtilCliente, uCalculo_Pedido, uCadOC_Item_Qtd, UCadOC_Reserva, UCadPedido_Copia,
-  uGrava_Pedido;
+  uGrava_Pedido, UConsMotivoNaoAprov;
 
 {$R *.dfm}
 
@@ -559,6 +567,14 @@ begin
 
   Label40.Visible       := (fDMCadPedido.qParametros_OCUSA_NUM_DOC.AsString = 'S');
   CurrencyEdit1.Visible := (fDMCadPedido.qParametros_OCUSA_NUM_DOC.AsString = 'S');
+
+  if (fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and (fDMCadPedido.qParametros_OCUSA_APROVACAO_ITEM.AsString = 'S') then
+    StaticText1.Caption := 'Duplo clique para consultar    F4=Motivo Não Aprovado';
+
+  Shape8.Visible  := ((fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and (fDMCadPedido.qParametros_PedUSA_APROVACAO_ITEM.AsString = 'S'));
+  Shape9.Visible  := ((fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and (fDMCadPedido.qParametros_PedUSA_APROVACAO_ITEM.AsString = 'S'));
+  Label41.Visible := ((fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and (fDMCadPedido.qParametros_PedUSA_APROVACAO_ITEM.AsString = 'S'));
+  Label42.Visible := ((fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and (fDMCadPedido.qParametros_PedUSA_APROVACAO_ITEM.AsString = 'S'));
 end;
 
 procedure TfrmCadOC.prc_Consultar(ID: Integer);
@@ -957,7 +973,7 @@ begin
     AFont.Color := clBlack;
   end
   else
-  if (fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S') and (fDMCadPedido.cdsPedido_ConsultaAPROVADO_PED.AsString = 'N') then
+  if (fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and (fDMCadPedido.cdsPedido_ConsultaAPROVADO_PED.AsString = 'N') then
   begin
     Background  := $00AAAAFF;
     AFont.Color := clBlack;
@@ -1028,6 +1044,18 @@ begin
   begin
     Background  := clRed;
     AFont.Color := clWhite;
+  end
+  else
+  if (fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensAPROVADO_ITEM.AsString = 'P') then
+  begin
+    Background  := $0080FFFF;
+    AFont.Color := clBlack;
+  end
+  else
+  if (fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensAPROVADO_ITEM.AsString = 'N') then
+  begin
+    Background  := $00AAAAFF;
+    AFont.Color := clBlack;
   end;
 end;
 
@@ -1690,6 +1718,32 @@ begin
     Exit;
   end;
   fDMCadPedido.frxReport1.ShowReport;
+end;
+
+procedure TfrmCadOC.SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F4) and (fDMCadPedido.cdsPedido_Consulta.Active) then
+  begin
+    frmConsMotivoNaoAprov := TfrmConsMotivoNaoAprov.Create(self);
+    frmConsMotivoNaoAprov.vID_OC_Loc   := fDMCadPedido.cdsPedido_ConsultaID.AsInteger;
+    frmConsMotivoNaoAprov.vItem_OC_Loc := 0;
+    frmConsMotivoNaoAprov.ShowModal;
+    FreeAndNil(frmConsMotivoNaoAprov);
+  end;
+end;
+
+procedure TfrmCadOC.SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F4) and (fDMCadPedido.cdsPedido_ItensITEM.AsInteger > 0) then
+  begin
+    frmConsMotivoNaoAprov := TfrmConsMotivoNaoAprov.Create(self);
+    frmConsMotivoNaoAprov.vID_OC_Loc   := fDMCadPedido.cdsPedido_ItensID.AsInteger;
+    frmConsMotivoNaoAprov.vItem_OC_Loc := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+    frmConsMotivoNaoAprov.ShowModal;
+    FreeAndNil(frmConsMotivoNaoAprov);
+  end;
 end;
 
 end.

@@ -23,9 +23,9 @@ object frmCadDocEstoque: TfrmCadDocEstoque
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 929
-    Height = 630
-    ActivePage = TS_Cadastro
+    Width = 937
+    Height = 638
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -42,8 +42,8 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 102
-        Width = 925
-        Height = 488
+        Width = 933
+        Height = 496
         Align = alClient
         Ctl3D = False
         DataSource = DMCadDocEstoque.dsDocEstoque_Consulta
@@ -128,7 +128,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 925
+        Width = 933
         Height = 72
         Align = alTop
         Color = clSilver
@@ -280,8 +280,8 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 590
-        Width = 925
+        Top = 598
+        Width = 933
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -297,7 +297,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 925
+        Width = 933
         Height = 30
         Align = alTop
         Color = clSilver
@@ -606,7 +606,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 925
+        Width = 933
         Height = 30
         Align = alTop
         Color = 8404992
@@ -835,8 +835,8 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 311
-        Width = 925
-        Height = 296
+        Width = 933
+        Height = 304
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -853,8 +853,8 @@ object frmCadDocEstoque: TfrmCadDocEstoque
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 30
-            Width = 921
-            Height = 243
+            Width = 929
+            Height = 251
             Align = alClient
             DataSource = DMCadDocEstoque.dsDocEstoque_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -963,7 +963,6 @@ object frmCadDocEstoque: TfrmCadDocEstoque
               item
                 Expanded = False
                 FieldName = 'ID_MOVESTOQUE'
-                Width = 64
                 Visible = True
               end
               item
@@ -985,7 +984,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
           object pnlItem: TPanel
             Left = 0
             Top = 0
-            Width = 921
+            Width = 929
             Height = 30
             Align = alTop
             Color = clSilver
@@ -1220,7 +1219,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object pnlObs: TPanel
         Left = 0
         Top = 234
-        Width = 925
+        Width = 933
         Height = 77
         Align = alTop
         Enabled = False
@@ -1248,7 +1247,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object pnlTransferencia: TPanel
         Left = 0
         Top = 162
-        Width = 925
+        Width = 933
         Height = 72
         Align = alTop
         Enabled = False
@@ -1390,7 +1389,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object pnlDocumento: TPanel
         Left = 0
         Top = 88
-        Width = 925
+        Width = 933
         Height = 74
         Align = alTop
         Enabled = False
@@ -1609,7 +1608,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object pnlTipo: TPanel
         Left = 0
         Top = 61
-        Width = 925
+        Width = 933
         Height = 27
         Align = alTop
         Enabled = False
@@ -1648,7 +1647,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
       object pnlNota: TPanel
         Left = 0
         Top = 30
-        Width = 925
+        Width = 933
         Height = 31
         Align = alTop
         Color = clSilver

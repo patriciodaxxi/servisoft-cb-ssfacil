@@ -57,6 +57,7 @@ object frmCadOC: TfrmCadOC
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
         OnDblClick = SMDBGrid1DblClick
+        OnKeyDown = SMDBGrid1KeyDown
         OnTitleClick = SMDBGrid1TitleClick
         Flat = True
         BandsFont.Charset = DEFAULT_CHARSET
@@ -949,7 +950,7 @@ object frmCadOC: TfrmCadOC
         end
         object Shape10: TShape
           Left = 322
-          Top = 5
+          Top = 4
           Width = 30
           Height = 16
           Brush.Color = 8454143
@@ -1883,7 +1884,7 @@ object frmCadOC: TfrmCadOC
         Top = 205
         Width = 1026
         Height = 406
-        ActivePage = RzTabSheet2
+        ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -1891,7 +1892,7 @@ object frmCadOC: TfrmCadOC
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -1911,6 +1912,7 @@ object frmCadOC: TfrmCadOC
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
+            OnKeyDown = SMDBGrid2KeyDown
             Flat = False
             BandsFont.Charset = DEFAULT_CHARSET
             BandsFont.Color = clWindowText
@@ -1985,11 +1987,13 @@ object frmCadOC: TfrmCadOC
                 Expanded = False
                 FieldName = 'QTD_FATURADO'
                 Title.Caption = 'Qtd. Entregue'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_RESTANTE'
+                Width = 64
                 Visible = True
               end
               item
@@ -2024,16 +2028,19 @@ object frmCadOC: TfrmCadOC
                 FieldName = 'VLR_ICMS'
                 Title.Alignment = taCenter
                 Title.Caption = 'Complemento'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD_CANCELADO'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'CANCELADO'
+                Width = 64
                 Visible = True
               end
               item
@@ -3220,6 +3227,46 @@ object frmCadOC: TfrmCadOC
           Width = 42
           Height = 13
           Caption = 'Faturado'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMaroon
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Shape8: TShape
+          Left = 322
+          Top = 4
+          Width = 30
+          Height = 16
+          Brush.Color = 8454143
+        end
+        object Label41: TLabel
+          Left = 354
+          Top = 8
+          Width = 151
+          Height = 13
+          Caption = 'Pedido pendente de Aprova'#231#227'o'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMaroon
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Shape9: TShape
+          Left = 523
+          Top = 5
+          Width = 30
+          Height = 16
+          Brush.Color = 11184895
+        end
+        object Label42: TLabel
+          Left = 554
+          Top = 8
+          Width = 69
+          Height = 13
+          Caption = 'N'#227'o Aprovado'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -11

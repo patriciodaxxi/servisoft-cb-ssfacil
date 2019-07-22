@@ -107,6 +107,17 @@ type
     cdsEstoque_MovESPESSURA: TFloatField;
     qParametros_Est: TSQLQuery;
     qParametros_EstUSA_ESTOQUE_GERAL_CAD: TStringField;
+    sdsEstoque_Local: TSQLDataSet;
+    dspEstoque_Local: TDataSetProvider;
+    sdsEstoque_LocalID_PRODUTO: TIntegerField;
+    sdsEstoque_LocalID_COR: TIntegerField;
+    sdsEstoque_LocalLOCALIZACAO: TStringField;
+    sdsEstoque_LocalQTD: TFloatField;
+    cdsEstoque_Local: TClientDataSet;
+    cdsEstoque_LocalID_PRODUTO: TIntegerField;
+    cdsEstoque_LocalID_COR: TIntegerField;
+    cdsEstoque_LocalLOCALIZACAO: TStringField;
+    cdsEstoque_LocalQTD: TFloatField;
     procedure cdsEstoque_MovReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);
@@ -136,7 +147,9 @@ type
     procedure prc_Imprime_Estoque(vTipo: String);// vTipo = Produto ou Material
 
     procedure prc_Localizar(ID: Integer);
-    
+
+    procedure prc_Gravar_Estoque_Local(ID_Produto, ID_Cor : Integer ; Localizacao, Tipo_ES : String ; Qtd : Real);
+
   end;
 
 var
@@ -474,6 +487,33 @@ begin
   cdsEstoque_Mov.Close;
   sdsEstoque_Mov.ParamByName('ID').AsInteger := ID;
   cdsEstoque_Mov.Open;
+end;
+
+procedure TDMEstoque.prc_Gravar_Estoque_Local(ID_Produto, ID_Cor: Integer;
+  Localizacao, Tipo_ES : String; Qtd: Real);
+begin
+  cdsEstoque_Local.Close;
+  sdsEstoque_Local.ParamByName('ID_PRODUTO').AsInteger := ID_Produto;
+  sdsEstoque_Local.ParamByName('ID_COR').AsInteger     := ID_Cor;
+  sdsEstoque_Local.ParamByName('LOCALIZACAO').AsString := Localizacao;
+  cdsEstoque_Local.Open;
+
+  if not cdsEstoque_Local.IsEmpty then
+    cdsEstoque_Local.Edit
+  else
+  begin
+    cdsEstoque_Local.Insert;
+    cdsEstoque_LocalID_PRODUTO.AsInteger := ID_Produto;
+    cdsEstoque_LocalID_COR.AsInteger     := ID_Cor;
+    cdsEstoque_LocalLOCALIZACAO.AsString := Localizacao;
+    cdsEstoque_LocalQTD.AsFloat          := 0;
+  end;
+  if Tipo_ES = 'E' then
+    cdsEstoque_LocalQTD.AsFloat := StrToFloat(FormatFloat('0.0000',cdsEstoque_LocalQTD.AsFloat + qtd))
+  else
+    cdsEstoque_LocalQTD.AsFloat := StrToFloat(FormatFloat('0.0000',cdsEstoque_LocalQTD.AsFloat - qtd));
+  cdsEstoque_Local.Post;
+  cdsEstoque_Local.ApplyUpdates(0);
 end;
 
 end.

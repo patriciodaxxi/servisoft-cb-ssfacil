@@ -72,7 +72,7 @@ begin
     MessageDlg('*** Data não informada !', mtError, [mbOk], 0);
     exit;
   end;
-  if (RadioGroup1.ItemIndex = 1) and (trim(Edit1.Text) <> '' ) then
+  if (RadioGroup1.ItemIndex = 1) and (trim(Edit1.Text) = '' ) then
   begin
     MessageDlg('*** Motivo não aprovado, não informado!', mtError, [mbOk], 0);
     exit;
@@ -151,7 +151,9 @@ begin
   Edit1.ReadOnly := (RadioGroup1.ItemIndex = 0);
   Edit1.TabStop  := (RadioGroup1.ItemIndex = 1);
   if Edit1.ReadOnly then
-    Edit1.Color := clSilver;
+    Edit1.Color := clSilver
+  else
+    Edit1.Color := clWindow;
 end;
 
 end.

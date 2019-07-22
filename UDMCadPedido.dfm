@@ -15032,6 +15032,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedUSA_APROVACAO_ITEM: TStringField
+      FieldName = 'USA_APROVACAO_ITEM'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 
@@ -16270,6 +16275,11 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_OCUSA_NUM_DOC: TStringField
       FieldName = 'USA_NUM_DOC'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_OCUSA_APROVACAO_ITEM: TStringField
+      FieldName = 'USA_APROVACAO_ITEM'
       FixedChar = True
       Size = 1
     end

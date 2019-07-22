@@ -560,7 +560,7 @@ uses DmdDatabase, rsDBUtils, uUtilPadrao, uRelPedido, uRelPedido_SulTextil, uRel
   URelPedido_Tam, URelEtiqueta_Nav, URelPedido_Tam2, URelPedido_JW, URelEtiqueta, uUtilCliente, uCalculo_Pedido, UCadPedido_Copia,
   UConsPedido_Nota, UDMConsPedido, UInformar_DtExpedicao, UInformar_Processo_Ped, UConsPedido_Senha, USel_Produto, UCadPedido_Cupom,
   UDMPedidoImp, USel_OS_Proc, UCadPedido_ItensCli, UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido, UConsClienteOBS,
-  uImprimir;
+  uImprimir, UConsMotivoNaoAprov;
 
 {$R *.dfm}
 

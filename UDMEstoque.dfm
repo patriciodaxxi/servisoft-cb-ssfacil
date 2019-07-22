@@ -1,10 +1,10 @@
 object DMEstoque: TDMEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 424
-  Top = 280
-  Height = 304
-  Width = 593
+  Left = 325
+  Top = 214
+  Height = 382
+  Width = 750
   object sdsEstoque_Mov: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -431,6 +431,83 @@ object DMEstoque: TDMEstoque
       FieldName = 'USA_ESTOQUE_GERAL_CAD'
       FixedChar = True
       Size = 1
+    end
+  end
+  object sdsEstoque_Local: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT E.*'#13#10'FROM ESTOQUE_LOCAL E'#13#10'WHERE E.ID_PRODUTO = :ID_PRODU' +
+      'TO'#13#10'  AND E.ID_COR = :ID_COR'#13#10'  AND E.LOCALIZACAO = :LOCALIZACAO' +
+      #13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_COR'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'LOCALIZACAO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 486
+    Top = 196
+    object sdsEstoque_LocalID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsEstoque_LocalID_COR: TIntegerField
+      FieldName = 'ID_COR'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsEstoque_LocalLOCALIZACAO: TStringField
+      FieldName = 'LOCALIZACAO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsEstoque_LocalQTD: TFloatField
+      FieldName = 'QTD'
+    end
+  end
+  object dspEstoque_Local: TDataSetProvider
+    DataSet = sdsEstoque_Local
+    UpdateMode = upWhereKeyOnly
+    Left = 531
+    Top = 199
+  end
+  object cdsEstoque_Local: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspEstoque_Local'
+    Left = 586
+    Top = 198
+    object cdsEstoque_LocalID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsEstoque_LocalID_COR: TIntegerField
+      FieldName = 'ID_COR'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsEstoque_LocalLOCALIZACAO: TStringField
+      FieldName = 'LOCALIZACAO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsEstoque_LocalQTD: TFloatField
+      FieldName = 'QTD'
     end
   end
 end
