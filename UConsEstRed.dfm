@@ -1,11 +1,11 @@
 object frmConsEstRed: TfrmConsEstRed
-  Left = 236
-  Top = 108
+  Left = 164
+  Top = 93
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Estoque'
   ClientHeight = 525
-  ClientWidth = 996
+  ClientWidth = 1014
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object frmConsEstRed: TfrmConsEstRed
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 996
+    Width = 1014
     Height = 82
     Align = alTop
     Color = clSilver
@@ -124,7 +124,7 @@ object frmConsEstRed: TfrmConsEstRed
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 82
-    Width = 996
+    Width = 1014
     Height = 443
     Align = alClient
     Ctl3D = False
@@ -381,7 +381,7 @@ object frmConsEstRed: TfrmConsEstRed
   object dsConsEst: TDataSource
     DataSet = cdsConsEst
     Left = 309
-    Top = 159
+    Top = 162
   end
   object qProduto: TSQLQuery
     MaxBlobSize = -1

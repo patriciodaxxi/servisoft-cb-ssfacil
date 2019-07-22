@@ -264,6 +264,11 @@ object DMCadDocEstoque: TDMCadDocEstoque
     object sdsDocEstoque_ItensESPESSURA: TFloatField
       FieldName = 'ESPESSURA'
     end
+    object sdsDocEstoque_ItensTIPO_ES: TStringField
+      FieldName = 'TIPO_ES'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsDocEstoque_Itens: TClientDataSet
     Aggregates = <>
@@ -391,6 +396,11 @@ object DMCadDocEstoque: TDMCadDocEstoque
     end
     object cdsDocEstoque_ItensESPESSURA: TFloatField
       FieldName = 'ESPESSURA'
+    end
+    object cdsDocEstoque_ItensTIPO_ES: TStringField
+      FieldName = 'TIPO_ES'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsDocEstoque_Itens: TDataSource

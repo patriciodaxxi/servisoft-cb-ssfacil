@@ -230,6 +230,8 @@ begin
         vID_Estoque := fnc_Gravar_Estoque(fDMCadDocEstoque.cdsDocEstoqueID_LOCAL_DESTINO.AsInteger,fDMCadDocEstoque.cdsDocEstoque_ItensID_MOVESTOQUE_DESTINO.AsInteger,'E');
         fDMCadDocEstoque.cdsDocEstoque_ItensID_MOVESTOQUE_DESTINO.AsInteger := vID_Estoque;
       end;
+      fDMCadDocEstoque.cdsDocEstoque_ItensTIPO_ES.AsString := fDMCadDocEstoque.cdsDocEstoqueTIPO_ES.AsString;
+
       fDMCadDocEstoque.cdsDocEstoque_Itens.Post;
 
       if (fDMCadDocEstoque.cdsDocEstoqueTIPO_ES.AsString = 'E') and (fDMCadDocEstoque.cdsDocEstoqueTIPO_REG.AsString = 'D') then

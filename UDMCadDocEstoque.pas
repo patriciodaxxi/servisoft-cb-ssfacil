@@ -419,6 +419,8 @@ type
     cdsDocEstoque_ItensLARGURA: TFloatField;
     cdsDocEstoque_ItensCOMPRIMENTO: TFloatField;
     cdsDocEstoque_ItensESPESSURA: TFloatField;
+    sdsDocEstoque_ItensTIPO_ES: TStringField;
+    cdsDocEstoque_ItensTIPO_ES: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspDocEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

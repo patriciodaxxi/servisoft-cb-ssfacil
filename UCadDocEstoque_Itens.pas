@@ -125,7 +125,7 @@ var
 
 implementation
 
-uses rsDBUtils, USel_Produto, uUtilPadrao, USel_Produto_Lote;
+uses rsDBUtils, USel_Produto, uUtilPadrao, USel_Produto_Lote, Math;
 
 {$R *.dfm}
 
@@ -305,6 +305,8 @@ begin
     fDMCadDocEstoque.cdsDocEstoque_ItensREFERENCIA.AsString      := fDMCadDocEstoque.cdsProdutoREFERENCIA.AsString;
     if RxDBLookupCombo5.Text <> '' then
       fDMCadDocEstoque.cdsDocEstoque_ItensNOME_COR_COMBINACAO.AsString := RxDBLookupCombo5.Text;
+
+    fDMCadDocEstoque.cdsDocEstoque_ItensTIPO_ES.AsString := fDMCadDocEstoque.cdsDocEstoqueTIPO_ES.AsString;
 
     //Tamanho aqui
     if fDMCadDocEstoque.cdsProdutoUSA_GRADE.AsString = 'S' then
