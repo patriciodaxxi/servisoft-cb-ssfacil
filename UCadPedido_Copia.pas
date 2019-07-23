@@ -240,7 +240,8 @@ begin
       end;
       fDMCadPedido.cdsPedido_ItensDTENTREGA.Clear;
       fDMCadPedido.cdsPedido_ItensQTD.AsFloat := vFatorMultiplicador * fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
-      fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat + (fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat * (vFatorMultiplicador / 100));
+      if vFatorMultiplicador > 1 then
+        fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat + (fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat * (vFatorMultiplicador / 100));
       fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat := fDMCadPedido.cdsPedido_ItensQTD.AsFloat * fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat;
       fDMCadPedido.cdsPedido_ItensQTD_CANCELADO.AsInteger := 0;
       fDMCadPedido.cdsPedido_ItensQTD_FATURADO.AsInteger  := 0;
