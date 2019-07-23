@@ -1,6 +1,6 @@
 object frmConferencia_Ped: TfrmConferencia_Ped
-  Left = 194
-  Top = 116
+  Left = 195
+  Top = 150
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
   Caption = 'Confer'#234'ncia Simples do Pedido'
@@ -566,7 +566,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
       WidthOfIndicator = 11
       DefaultRowHeight = 16
       ScrollBars = ssHorizontal
-      ColCount = 12
+      ColCount = 13
       RowCount = 2
       Columns = <
         item
@@ -638,6 +638,13 @@ object frmConferencia_Ped: TfrmConferencia_Ped
           Title.Caption = 'Y (mm)'
           Title.Color = 16764831
           Width = 57
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ESPESSURA'
+          Title.Alignment = taCenter
+          Title.Caption = '# (mm)'
           Visible = True
         end
         item
