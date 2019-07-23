@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, NxCollection, StdCtrls, Mask, ToolEdit, CurrEdit, FMTBcd, DB,
-  SqlExpr, Provider, DBClient, DBCtrls, ExtCtrls;
+  SqlExpr, Provider, DBClient, DBCtrls, ExtCtrls, UDMConsClienteOBS, UCBase;
 
 type
   TfrmConsClienteOBS = class(TForm)
@@ -13,38 +13,32 @@ type
     NxLabel1: TNxLabel;
     CurrencyEdit1: TCurrencyEdit;
     NxLabel2: TNxLabel;
-    sdsConsulta: TSQLDataSet;
-    dspConsulta: TDataSetProvider;
-    cdsConsulta: TClientDataSet;
-    dsConsulta: TDataSource;
-    cdsConsultaCODIGO: TIntegerField;
-    cdsConsultaOBS: TMemoField;
-    cdsConsultaOBS_AVISO: TStringField;
-    cdsConsultaID_CONDPGTO: TIntegerField;
-    cdsConsultaNOME_CLIENTE: TStringField;
-    cdsConsultaNOME_CONDPGTO: TStringField;
-    cdsConsultaID_TAB_PRECO: TIntegerField;
-    cdsConsultaNOME_TABPRECO: TStringField;
-    cdsConsultaVLR_ULT_FATURAMENTO: TFloatField;
-    cdsConsultaDTNOTA: TDateField;
-    cdsConsultaDTPEDIDO: TDateField;
-    DBMemo1: TDBMemo;
-    DBMemo2: TDBMemo;
     Panel1: TPanel;
     Label1: TLabel;
     DBText1: TDBText;
     DBText2: TDBText;
     Label2: TLabel;
     Label3: TLabel;
+    btnConfirmar: TNxButton;
+    UCControls1: TUCControls;
+    btnAlterar: TNxButton;
+    Memo1: TMemo;
+    Memo2: TMemo;
     procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure CurrencyEdit1Change(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnConfirmarClick(Sender: TObject);
   private
     { Private declarations }
+    fDMConsClienteOBS: TDMConsClienteOBS;
+
     procedure prc_Abrir_Consulta;
+    procedure prc_Habilita;
 
   public
     { Public declarations }
@@ -55,7 +49,7 @@ var
 
 implementation
 
-uses DmdDatabase, uUtilPadrao, USel_Pessoa;
+uses DmdDatabase, uUtilPadrao, USel_Pessoa, rsDBUtils;
 
 {$R *.dfm}
 
@@ -64,7 +58,7 @@ procedure TfrmConsClienteOBS.CurrencyEdit1KeyDown(Sender: TObject;
 begin
   if Key = Vk_Return then
   begin
-    cdsConsulta.Close;
+    fDMConsClienteOBS.cdsConsulta.Close;
     if CurrencyEdit1.AsInteger > 0 then
       prc_Abrir_Consulta;
   end
@@ -82,19 +76,29 @@ end;
 
 procedure TfrmConsClienteOBS.CurrencyEdit1Change(Sender: TObject);
 begin
-  cdsConsulta.Close;
+  Memo1.Lines.Clear;
+  Memo2.Lines.Clear;
+  btnAlterar.Enabled   := True;
+  btnConfirmar.Enabled := False;
+  Memo1.ReadOnly       := True;
+  Memo2.ReadOnly       := True;
 end;
 
 procedure TfrmConsClienteOBS.prc_Abrir_Consulta;
 begin
-  cdsConsulta.Close;
-  sdsConsulta.ParamByName('CODIGO').AsInteger := CurrencyEdit1.AsInteger;
-  cdsConsulta.Open;
-  NxLabel2.Caption := cdsConsultaNOME_CLIENTE.AsString;
+  fDMConsClienteOBS.cdsConsulta.Close;
+  fDMConsClienteOBS.sdsConsulta.ParamByName('CODIGO').AsInteger := CurrencyEdit1.AsInteger;
+  fDMConsClienteOBS.cdsConsulta.Open;
+  NxLabel2.Caption := fDMConsClienteOBS.cdsConsultaNOME_CLIENTE.AsString;
+  Memo1.Lines.Text := fDMConsClienteOBS.cdsConsultaOBS_AVISO.AsString;
+  Memo2.Lines.Text := fDMConsClienteOBS.cdsConsultaOBS.Value;
 end;
 
 procedure TfrmConsClienteOBS.FormShow(Sender: TObject);
 begin
+  fDMConsClienteOBS := TDMConsClienteOBS.Create(Self);
+  oDBUtils.SetDataSourceProperties(Self, fDMConsClienteOBS);
+
   if CurrencyEdit1.AsInteger > 0 then
     prc_Abrir_Consulta;
 end;
@@ -104,6 +108,49 @@ procedure TfrmConsClienteOBS.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   if Key = 27 then //ESC
     Close;
+end;
+
+procedure TfrmConsClienteOBS.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Action := Cafree;
+end;
+
+procedure TfrmConsClienteOBS.btnAlterarClick(Sender: TObject);
+begin
+  prc_Habilita;
+end;
+
+procedure TfrmConsClienteOBS.prc_Habilita;
+begin
+  Memo1.ReadOnly := not(Memo1.ReadOnly);
+  Memo2.ReadOnly := not(Memo2.ReadOnly);
+  btnConfirmar.Enabled := not(btnConfirmar.Enabled);
+  btnAlterar.Enabled   := not(btnAlterar.Enabled);
+end;
+
+procedure TfrmConsClienteOBS.btnConfirmarClick(Sender: TObject);
+begin
+  if MessageDlg('Deseja confirmar as alterações?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
+    exit;
+
+  fDMConsClienteOBS.cdsPessoa.Close;
+  fDMConsClienteOBS.sdsPessoa.ParamByName('CODIGO').AsInteger := fDMConsClienteOBS.cdsConsultaCODIGO.AsInteger;
+  fDMConsClienteOBS.cdsPessoa.Open;
+  if fDMConsClienteOBS.cdsPessoa.RecordCount <= 0 then
+  begin
+    MessageDlg('*** Cliente não encontrado!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+
+  fDMConsClienteOBS.cdsPessoa.Edit;
+  fDMConsClienteOBS.cdsPessoaOBS.Value          := Memo2.Lines.Text;
+  fDMConsClienteOBS.cdsPessoaOBS_AVISO.AsString := Memo1.Lines.Text;
+  fDMConsClienteOBS.cdsPessoa.Post;
+  fDMConsClienteOBS.cdsPessoa.ApplyUpdates(0);
+
+  prc_Habilita;
+
 end;
 
 end.

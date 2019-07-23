@@ -4248,6 +4248,12 @@ object fMenu: TfMenu
         CompName = 'pnlExcluirSel'
         Caption = 'Excluir Selecionados'
         GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmConsClienteOBS'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Consulta Obs Cliente (Or'#231')'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

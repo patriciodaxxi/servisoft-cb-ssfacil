@@ -963,6 +963,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
               item
                 Expanded = False
                 FieldName = 'ID_MOVESTOQUE'
+                Width = 64
                 Visible = True
               end
               item

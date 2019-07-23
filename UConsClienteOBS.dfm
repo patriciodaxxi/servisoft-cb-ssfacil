@@ -15,6 +15,7 @@ object frmConsClienteOBS: TfrmConsClienteOBS
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
@@ -83,7 +84,7 @@ object frmConsClienteOBS: TfrmConsClienteOBS
       Transparent = True
     end
     object CurrencyEdit1: TCurrencyEdit
-      Left = 65
+      Left = 68
       Top = 6
       Width = 85
       Height = 21
@@ -103,32 +104,6 @@ object frmConsClienteOBS: TfrmConsClienteOBS
       OnKeyDown = CurrencyEdit1KeyDown
     end
   end
-  object DBMemo1: TDBMemo
-    Left = 0
-    Top = 173
-    Width = 920
-    Height = 461
-    Align = alClient
-    Color = 12320767
-    DataField = 'OBS'
-    DataSource = dsConsulta
-    ReadOnly = True
-    ScrollBars = ssVertical
-    TabOrder = 1
-  end
-  object DBMemo2: TDBMemo
-    Left = 0
-    Top = 93
-    Width = 920
-    Height = 80
-    Align = alTop
-    Color = 12320767
-    DataField = 'OBS_AVISO'
-    DataSource = dsConsulta
-    ReadOnly = True
-    ScrollBars = ssVertical
-    TabOrder = 2
-  end
   object Panel1: TPanel
     Left = 0
     Top = 45
@@ -136,7 +111,7 @@ object frmConsClienteOBS: TfrmConsClienteOBS
     Height = 48
     Align = alTop
     Color = 16759413
-    TabOrder = 3
+    TabOrder = 1
     object Label1: TLabel
       Left = 58
       Top = 8
@@ -157,7 +132,7 @@ object frmConsClienteOBS: TfrmConsClienteOBS
       Width = 390
       Height = 15
       DataField = 'NOME_TABPRECO'
-      DataSource = dsConsulta
+      DataSource = DMConsClienteOBS.dsConsulta
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -171,7 +146,7 @@ object frmConsClienteOBS: TfrmConsClienteOBS
       Width = 390
       Height = 15
       DataField = 'NOME_CONDPGTO'
-      DataSource = dsConsulta
+      DataSource = DMConsClienteOBS.dsConsulta
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -193,82 +168,51 @@ object frmConsClienteOBS: TfrmConsClienteOBS
       Font.Style = []
       ParentFont = False
     end
-  end
-  object sdsConsulta: TSQLDataSet
-    GetMetadata = False
-    CommandText = 
-      'SELECT P.CODIGO, P.obs, P.obs_aviso, P.id_condpgto, P.NOME NOME_' +
-      'CLIENTE,'#13#10' COND.NOME NOME_CONDPGTO, P.id_tab_preco, T.NOME NOME_' +
-      'TABPRECO,'#13#10' P.vlr_ult_faturamento, P.dtnota, P.dtpedido'#13#10'FROM PE' +
-      'SSOA P'#13#10'LEFT JOIN condpgto COND'#13#10'ON P.id_condpgto = COND.ID'#13#10'LEF' +
-      'T JOIN tab_preco T'#13#10'ON P.id_tab_preco = T.ID'#13#10'where p.codigo = :' +
-      'CODIGO'#13#10#13#10#13#10
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'CODIGO'
-        ParamType = ptInput
-      end>
-    SQLConnection = dmDatabase.scoDados
-    Left = 131
-    Top = 114
-  end
-  object dspConsulta: TDataSetProvider
-    DataSet = sdsConsulta
-    Left = 168
-    Top = 114
-  end
-  object cdsConsulta: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspConsulta'
-    Left = 211
-    Top = 114
-    object cdsConsultaCODIGO: TIntegerField
-      FieldName = 'CODIGO'
-      Required = True
+    object btnConfirmar: TNxButton
+      Left = 771
+      Top = 23
+      Width = 75
+      Caption = 'Confirmar'
+      Enabled = False
+      TabOrder = 0
+      OnClick = btnConfirmarClick
     end
-    object cdsConsultaOBS: TMemoField
-      FieldName = 'OBS'
-      BlobType = ftMemo
-      Size = 1
-    end
-    object cdsConsultaOBS_AVISO: TStringField
-      FieldName = 'OBS_AVISO'
-      Size = 150
-    end
-    object cdsConsultaID_CONDPGTO: TIntegerField
-      FieldName = 'ID_CONDPGTO'
-    end
-    object cdsConsultaNOME_CLIENTE: TStringField
-      FieldName = 'NOME_CLIENTE'
-      Size = 60
-    end
-    object cdsConsultaNOME_CONDPGTO: TStringField
-      FieldName = 'NOME_CONDPGTO'
-      Size = 40
-    end
-    object cdsConsultaID_TAB_PRECO: TIntegerField
-      FieldName = 'ID_TAB_PRECO'
-    end
-    object cdsConsultaNOME_TABPRECO: TStringField
-      FieldName = 'NOME_TABPRECO'
-      Size = 70
-    end
-    object cdsConsultaVLR_ULT_FATURAMENTO: TFloatField
-      FieldName = 'VLR_ULT_FATURAMENTO'
-    end
-    object cdsConsultaDTNOTA: TDateField
-      FieldName = 'DTNOTA'
-    end
-    object cdsConsultaDTPEDIDO: TDateField
-      FieldName = 'DTPEDIDO'
+    object btnAlterar: TNxButton
+      Left = 698
+      Top = 23
+      Width = 75
+      Caption = 'Alterar'
+      TabOrder = 1
+      OnClick = btnAlterarClick
     end
   end
-  object dsConsulta: TDataSource
-    DataSet = cdsConsulta
-    Left = 245
-    Top = 114
+  object Memo1: TMemo
+    Left = 0
+    Top = 93
+    Width = 920
+    Height = 89
+    Align = alTop
+    Color = 12320767
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 2
+  end
+  object Memo2: TMemo
+    Left = 0
+    Top = 182
+    Width = 920
+    Height = 452
+    Align = alClient
+    Color = 12320767
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 3
+  end
+  object UCControls1: TUCControls
+    GroupName = 'Consulta Obs Cliente (Or'#231')'
+    UserControl = fMenu.UserControl1
+    NotAllowed = naDisabled
+    Left = 560
+    Top = 230
   end
 end

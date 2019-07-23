@@ -814,7 +814,9 @@ uses
   classe.ControlePedidoProjeto in 'Classes\classe.ControlePedidoProjeto.pas',
   UAprovacao_Ped_Item in 'UAprovacao_Ped_Item.pas' {frmAprovacao_Ped_Item},
   UAprovacao_Ped_Item2 in 'UAprovacao_Ped_Item2.pas' {frmAprovacao_Ped_Item2},
-  UConsMotivoNaoAprov in 'UConsMotivoNaoAprov.pas' {frmConsMotivoNaoAprov};
+  UConsMotivoNaoAprov in 'UConsMotivoNaoAprov.pas' {frmConsMotivoNaoAprov},
+  UAltEstLocal in 'UAltEstLocal.pas' {frmAltEstLocal},
+  UDMConsClienteOBS in 'UDMConsClienteOBS.pas' {DMConsClienteOBS: TDataModule};
 
 {$R *.res}
 

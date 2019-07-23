@@ -36,9 +36,17 @@ type
     qProdutoID: TIntegerField;
     qProdutoREFERENCIA: TStringField;
     qProdutoNOME: TStringField;
-    cdsConsEstQTD_RESERVA: TFloatField;
-    cdsConsEstclSaldo: TFloatField;
-    cdsConsEstLOCALIZACAO: TStringField;
+    cdsConsEstQTD_LOCALIZACAO: TFloatField;
+    dspConsLocal: TDataSetProvider;
+    cdsConsLocal: TClientDataSet;
+    dsConsLocal: TDataSource;
+    sdsConsLocal: TSQLDataSet;
+    cdsConsLocalLOCALIZACAO: TStringField;
+    cdsConsLocalQTD: TFloatField;
+    Panel2: TPanel;
+    SMDBGrid2: TSMDBGrid;
+    Panel3: TPanel;
+    NxButton1: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
@@ -53,11 +61,12 @@ type
       Shift: TShiftState);
     procedure Edit3KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure cdsConsEstCalcFields(DataSet: TDataSet);
+    procedure NxButton1Click(Sender: TObject);
   private
     { Private declarations }
     ctConsEst : String;
     procedure prc_Consultar;
+    procedure prc_scroll(DataSet: TDataSet);
     
   public
     { Public declarations }
@@ -68,7 +77,7 @@ var
 
 implementation
 
-uses DmdDatabase, StrUtils;
+uses DmdDatabase, StrUtils, UAltEstLocal;
 
 {$R *.dfm}
 
@@ -88,6 +97,7 @@ end;
 procedure TfrmConsEstRed.btnConsultarClick(Sender: TObject);
 begin
   prc_Consultar;
+  cdsConsEst.Last;
 end;
 
 procedure TfrmConsEstRed.prc_Consultar;
@@ -127,6 +137,7 @@ end;
 procedure TfrmConsEstRed.FormShow(Sender: TObject);
 begin
   ctConsEst := sdsConsEst.CommandText;
+  cdsConsEst.AFTERSCROLL := prc_scroll;
 end;
 
 procedure TfrmConsEstRed.CurrencyEdit1KeyDown(Sender: TObject;
@@ -185,9 +196,40 @@ begin
     btnConsultarClick(Sender);
 end;
 
-procedure TfrmConsEstRed.cdsConsEstCalcFields(DataSet: TDataSet);
+procedure TfrmConsEstRed.prc_scroll(DataSet: TDataSet);
 begin
-  cdsConsEstclSaldo.AsFloat := StrToFloat(FormatFloat('0.0000',cdsConsEstQTD.AsFloat - cdsConsEstQTD_RESERVA.AsFloat));
+  cdsConsLocal.Close;
+  sdsConsLocal.ParamByName('ID_PRODUTO').AsInteger := cdsConsEstID_PRODUTO.AsInteger;
+  sdsConsLocal.ParamByName('ID_COR').AsInteger     := cdsConsEstID_COR.AsInteger;
+  cdsConsLocal.Open;
+end;
+
+procedure TfrmConsEstRed.NxButton1Click(Sender: TObject);
+var
+  vIDProdAux : Integer;
+  vIDCorAux : Integer;
+begin
+  if not(cdsConsEst.Active) or (cdsConsLocal.IsEmpty) then
+    exit;
+  if cdsConsEstID_PRODUTO.AsInteger <= 0 then
+    exit;
+
+  vIDProdAux := cdsConsEstID_PRODUTO.AsInteger;
+  vIDCorAux  := cdsConsEstID_COR.AsInteger;
+
+  frmAltEstLocal := TfrmAltEstLocal.Create(self);
+  frmAltEstLocal.vID_Produto  := cdsConsEstID_PRODUTO.AsInteger;
+  frmAltEstLocal.vID_Cor      := cdsConsEstID_COR.AsInteger;
+  frmAltEstLocal.vLocalizacao := cdsConsLocalLOCALIZACAO.AsString;
+  frmAltEstLocal.vQtd         := StrToFloat(FormatFloat('0.0000',cdsConsLocalQTD.AsFloat));
+  frmAltEstLocal.CurrencyEdit1.Value := StrToFloat(FormatFloat('0.0000',cdsConsLocalQTD.AsFloat));
+  frmAltEstLocal.ShowModal;
+  FreeAndNil(frmAltEstLocal);
+  cdsConsEst.Close;
+  cdsConsEst.Open;
+  cdsConsEst.Locate('ID_PRODUTO;ID_COR',VarArrayOf([vIDProdAux,vIDCorAux]),[locaseinsensitive]);
+  //cdsConsLocal.Close;
+  //cdsConsLocal.Open;
 end;
 
 end.

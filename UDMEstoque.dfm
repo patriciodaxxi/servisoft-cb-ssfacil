@@ -1,8 +1,8 @@
 object DMEstoque: TDMEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 325
-  Top = 214
+  Left = 414
+  Top = 194
   Height = 382
   Width = 750
   object sdsEstoque_Mov: TSQLDataSet
@@ -487,10 +487,11 @@ object DMEstoque: TDMEstoque
   end
   object cdsEstoque_Local: TClientDataSet
     Aggregates = <>
+    IndexFieldNames = 'ID_PRODUTO;ID_COR;LOCALIZACAO'
     Params = <>
     ProviderName = 'dspEstoque_Local'
     Left = 586
-    Top = 198
+    Top = 201
     object cdsEstoque_LocalID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
