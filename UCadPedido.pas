@@ -3499,7 +3499,7 @@ begin
   //16/07/2019  
   if fDMCadPedido.cdsPedido_ConsultaCANCELADO.AsString = 'S' then
   begin
-    MessageDlg('*** Pedido esta cancelado, não pode ser copiado!',mtInformation, [mbOk], 0);
+    MessageDlg('*** Pedido está cancelado. Não pode ser copiado!',mtInformation, [mbOk], 0);
     exit;
   end;
   //******************

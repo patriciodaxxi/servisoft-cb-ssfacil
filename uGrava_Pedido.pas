@@ -757,9 +757,8 @@ var
   sds: TSQLDataSet;
   Flag: Boolean;
   vIDPed: Integer;
-
 begin
-  sds     := TSQLDataSet.Create(nil);
+  sds := TSQLDataSet.Create(nil);
 
   ID.TransactionID  := 5;
   ID.IsolationLevel := xilREADCOMMITTED;

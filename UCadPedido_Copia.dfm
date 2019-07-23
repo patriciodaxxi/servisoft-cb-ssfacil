@@ -25,11 +25,12 @@ object frmCadPedido_Copia: TfrmCadPedido_Copia
     Height = 13
   end
   object Label2: TLabel
-    Left = 16
+    Left = 24
     Top = 21
-    Width = 156
+    Width = 159
     Height = 13
-    Caption = 'N'#186' Pedido Origem da C'#243'pa:'
+    Alignment = taRightJustify
+    Caption = 'N'#186' Pedido Origem da C'#243'pia:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -38,7 +39,7 @@ object frmCadPedido_Copia: TfrmCadPedido_Copia
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 168
+    Left = 184
     Top = 70
     Width = 66
     Height = 13
@@ -46,7 +47,7 @@ object frmCadPedido_Copia: TfrmCadPedido_Copia
     Visible = False
   end
   object CurrencyEdit1: TCurrencyEdit
-    Left = 171
+    Left = 187
     Top = 13
     Width = 97
     Height = 21
@@ -67,7 +68,7 @@ object frmCadPedido_Copia: TfrmCadPedido_Copia
     TabOrder = 0
   end
   object btnCopiar: TBitBtn
-    Left = 132
+    Left = 135
     Top = 102
     Width = 111
     Height = 28
@@ -82,7 +83,7 @@ object frmCadPedido_Copia: TfrmCadPedido_Copia
     OnClick = btnCopiarClick
   end
   object btnCancelar: TBitBtn
-    Left = 244
+    Left = 247
     Top = 102
     Width = 111
     Height = 28
@@ -104,7 +105,7 @@ object frmCadPedido_Copia: TfrmCadPedido_Copia
     TabOrder = 3
   end
   object CheckBox1: TCheckBox
-    Left = 168
+    Left = 184
     Top = 40
     Width = 153
     Height = 17
@@ -113,7 +114,7 @@ object frmCadPedido_Copia: TfrmCadPedido_Copia
     OnClick = CheckBox1Click
   end
   object DateEdit1: TDateEdit
-    Left = 236
+    Left = 252
     Top = 62
     Width = 100
     Height = 21
