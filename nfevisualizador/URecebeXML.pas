@@ -373,6 +373,8 @@ type
     BitBtn4: TBitBtn;
     btnAjustarUnidade: TBitBtn;
     XMLDocument1: TXMLDocument;
+    Shape6: TShape;
+    Label148: TLabel;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -1523,9 +1525,7 @@ begin
       Background := clGray
     else
     if (fDMRecebeXML.mItensNotaUnidade.AsString <> fDMRecebeXML.mItensNotaUnidadeInterno.AsString)
-       //and (StrToFloat(FormatFloat('0.00000',fDMRecebeXML.mItensNotaQtdPacote.AsFloat)) <= 0)
        and (fDMRecebeXML.qParametrosUSA_QTDPACOTE_NTE.AsString = 'S') then
-       //and (fDMRecebeXML.mItensNotaItem_Unidade.AsInteger <> -1) then
       Background := clAqua
     else
     if fDMRecebeXML.mItensNotaInativo_Produto.AsString = 'S' then
@@ -1537,11 +1537,18 @@ begin
     //05/12/2017  Alterado (vai usar a OC que vem do XML)
     //if (Trim(fDMRecebeXML.mItensNotaNumPedido.AsString) = '') or (Trim(fDMRecebeXML.mItensNotaNumPedido.AsString) = '0')
       // or (fDMRecebeXML.mItensNotaItemPedido.AsInteger <= 0)  then
+    //23/07/2019
+    if (fDMRecebeXML.mItensNotaCFOPOriginal.AsString = '5405') and
+       ((StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaBaseCSTRet.AsFloat)) <= 0) or
+        (StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaVlrIcmsCSTRet.AsFloat)) <= 0)) then
+      Background  := $000080FF
+    else
     if fDMRecebeXML.mItensNotaID_Pedido.AsInteger <= 0 then
     begin
       Background  := clYellow;
       AFont.Color := clBlack;
     end;
+
   end;
 end;
 
