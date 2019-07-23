@@ -2089,6 +2089,10 @@ begin
         fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString := fDMRecebeXML.mItensNotaPosse_Material.AsString;
       if (fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString <> fDMRecebeXML.mItensNotaSped_Tipo.AsString) and (Trim(fDMRecebeXML.mItensNotaSped_Tipo.AsString) <> '') then
         fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
+      //23/07/2019
+      if fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0 then
+        fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
+      //****************
 
       if fDMRecebeXML.mItensNotaGerar_CLiquido.AsBoolean then
         fDMRecebeXML.cdsProdutoUSA_CLIQ.AsString := 'S'
@@ -2097,7 +2101,10 @@ begin
       if trim(fDMRecebeXML.cdsProdutoTIPO_VENDA.AsString) = '' then
         fDMRecebeXML.cdsProdutoTIPO_VENDA.AsString := fDMRecebeXML.mItensNotaTipoVenda.AsString;
       if fDMRecebeXML.cdsProduto.State in [dsEdit] then
+      begin
         fDMRecebeXML.cdsProduto.Post;
+        fDMRecebeXML.cdsProduto.ApplyUpdates(0);
+      end;
       if (fDMRecebeXML.qParametros_RecXMLATUALIZAR_CEST.AsString = 'S') and (trim(fDMRecebeXML.mItensNotaCEST.AsString) <> '') and
          (fDMRecebeXML.mItensNotaCEST.AsString <> fDMRecebeXML.mItensNotaCEST_Interno.AsString) then
       begin
@@ -2271,7 +2278,8 @@ begin
       fDMRecebeXML.cdsProdutoTIPO_VENDA.AsString := 'R';
   end;
 
-  fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
+  if fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0 then
+    fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
   if fDMRecebeXML.mItensNotaID_Grupo.AsInteger > 0 then
     fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger := fDMRecebeXML.mItensNotaID_Grupo.AsInteger;
   if fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger > 0 then
