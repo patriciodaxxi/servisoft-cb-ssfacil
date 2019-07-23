@@ -60,7 +60,7 @@ type
     Label14: TLabel;
     DBEdit6: TDBEdit;
     Label17: TLabel;
-    CurrencyEdit2: TCurrencyEdit;
+    ceJuros: TCurrencyEdit;
     Panel8: TPanel;
     Label18: TLabel;
     DBEdit10: TDBEdit;
@@ -127,8 +127,7 @@ type
     procedure ComboVendedorChange(Sender: TObject);
     procedure DBEdit4Click(Sender: TObject);
     procedure CurrencyEdit1Click(Sender: TObject);
-    procedure CurrencyEdit2KeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure ceJurosExit(Sender: TObject);
   private
     { Private declarations }
     vPercJuros, vVlrDesconto_Ant: Real;
@@ -796,6 +795,9 @@ begin
   while not fDmCupomFiscal.cdsCupom_Parc.IsEmpty do
     fDmCupomFiscal.cdsCupom_Parc.Delete;
 
+  if ceJuros.Value > 0 then
+    ceJurosExit(Sender);
+
   fDmCupomFiscal.vVlrEntrada  := 0;
   fDmCupomFiscal.vDataEntrada := fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime;
   if (fDmCupomFiscal.cdsCondPgtoTIPO.AsString = 'P') and
@@ -928,12 +930,12 @@ begin
 
   vPercJuros := 0;
   Label17.Visible       := False;
-  CurrencyEdit2.Visible := False;
+  ceJuros.Visible := False;
   if fDmCupomFiscal.cdsTipoCobrancaPERC_JUROS.AsFloat > 0 then
   begin
     vPercJuros := fDmCupomFiscal.cdsTipoCobrancaPERC_JUROS.AsFloat;
     Label17.Visible       := True;
-    CurrencyEdit2.Visible := True;
+    ceJuros.Visible       := True;
     CurrencyEdit2.Value   := vPercJuros;
 
     Panel6.Visible := False;
@@ -1465,8 +1467,7 @@ begin
   fDmCupomFiscal.cdsCupom_ItensVLR_JUROS.AsCurrency := fDmCupomFiscal.cdsCupom_ItensVLR_JUROS.AsCurrency * (vTaxa / 100);
 end;
 
-procedure TfCupomFiscalPgto.CurrencyEdit2KeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TfCupomFiscalPgto.ceJurosExit(Sender: TObject);
 var
   vOutros: Currency;
 begin
@@ -1511,6 +1512,7 @@ begin
     fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency + vOutros;
     fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency;
   end;
+
 end;
 
 end.

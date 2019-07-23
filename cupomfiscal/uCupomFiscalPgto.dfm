@@ -557,7 +557,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
               'SIM'
               'N'#195'O')
           end
-          object CurrencyEdit2: TCurrencyEdit
+          object ceJuros: TCurrencyEdit
             Left = 632
             Top = 83
             Width = 96
@@ -573,7 +573,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             ReadOnly = True
             TabOrder = 4
             Visible = False
-            OnKeyDown = CurrencyEdit2KeyDown
+            OnExit = ceJurosExit
           end
           object RxDBLookupCombo2: TRxDBLookupCombo
             Left = 250
