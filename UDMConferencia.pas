@@ -346,6 +346,7 @@ type
     mAuxConfTamanho: TStringField;
     qCBarraCorID_COR: TIntegerField;
     qCBarraCorTAMANHO: TStringField;
+    cdsPedido_Item_TipoESPESSURA: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsConferencia_PedCalcFields(DataSet: TDataSet);
     procedure cdsPedido_ItemCalcFields(DataSet: TDataSet);

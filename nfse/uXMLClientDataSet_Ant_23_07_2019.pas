@@ -50,7 +50,9 @@ var
 begin
   cXML := FXML.DataString;
 
-  cXML := AnsiReplaceStr(cXML, 'ISO-8859-1', 'utf-8');
+  //Alterado dia 14/01/2016 conforme Edson, para Tipografia
+  //cXML := AnsiReplaceStr(cXML, 'ISO-8859-1', 'utf-8');
+  cXML := AnsiReplaceStr(cXML, 'utf-8', 'iso-8859-1');
   if (cXML[1] = #239) then
     cXML := Copy(cXML, 4, Length(cXML)-3);
 
@@ -187,40 +189,27 @@ begin
           DecimalSeparator  := sDecimalSeparator;
         end;
       end
+      else if (AFields[I] is TDateTimeField) then
+      begin
+        xdt := TXSDateTime.Create;
+        try
+          xdt.XSToNative(xNode.Text);
+          //aqui 01/09/2018
+          //AFields[I].AsDateTime := xdt.AsDateTime;
+          AFields[I].AsVariant := xdt.AsUTCDateTime;
+        finally
+          FreeAndNil(xdt);
+        end;
+      end
       else if (AFields[I] is TDateField) then
       begin
         f.ShortDateFormat := 'yyyy-mm-dd';
         f.DateSeparator := '-';
         AFields[I].AsDateTime := StrToDateTime(xNode.Text, f);
       end
-      else if (AFields[I] is TDateTimeField) then
-      begin
-        xdt := TXSDateTime.Create;
-        try
-          xdt.XSToNative(xNode.Text);
-          AFields[I].AsDateTime := xdt.AsDateTime;
-        finally
-          FreeAndNil(xdt);
-        end;
-      end
       else if (AFields[I] is TDataSetField) then
       begin
         if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'cobr')) then
-        begin
-          xNode := xNode.ChildNodes[0];
-          sCampo := xNode.NodeName;
-          fd :=  TADTField(TDataSetField(AFields[I]).NestedDataSet.Fields[0]);
-          while (xNode <> nil) and (xNode.NodeName = sCampo) do
-          begin
-            TDataSetField(AFields[I]).NestedDataSet.Append;
-            Processar_Nodes(fd.Fields, xNode, APrefixo);
-            TDataSetField(AFields[I]).NestedDataSet.Append;
-
-            xNode := xNode.NextSibling;
-          end;
-        end
-        else
-        if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'faturas')) then
         begin
           xNode := xNode.ChildNodes[0];
           sCampo := xNode.NodeName;
@@ -323,8 +312,8 @@ begin
         xNode := ABase.AddChild(sCampo);
         Processar_NodesXML(TDataSetField(vField).NestedDataSet.Fields, xNode, APrefixo);
         TDataSetField(AFields[I]).NestedDataSet.Next;
-        if not TDataSetField(AFields[I]).NestedDataSet.Eof then
-	  xNode := ABase.AddChild(sCampo);
+//        if not TDataSetField(AFields[I]).NestedDataSet.Eof then
+//	  xNode := ABase.AddChild(sCampo);
       end;
     end
     else

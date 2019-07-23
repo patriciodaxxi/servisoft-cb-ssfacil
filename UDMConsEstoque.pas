@@ -680,6 +680,12 @@ type
     cdsEstoque_AtualQTD: TFloatField;
     cdsEstoque_AtualQTD_RESERVA: TFloatField;
     cdsEstoque_AtualQTD_ESTOQUE_MIN: TFloatField;
+    SQLConsulta: TSQLQuery;
+    DSSQLConsulta: TDataSource;
+    sdsEstoque2: TSQLDataSet;
+    dspEstoque2: TDataSetProvider;
+    cdsEstoque2: TClientDataSet;
+    dsEstoque2: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
