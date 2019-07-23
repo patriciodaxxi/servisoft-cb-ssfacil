@@ -8,7 +8,6 @@ object DMCadOS: TDMCadOS
   object sdsOS: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    Active = True
     CommandText = 
       'SELECT OS.*, P.NOME'#13#10'FROM OS'#13#10'INNER JOIN PESSOA P ON (OS.ID_CLIE' +
       'NTE = P.CODIGO)'
