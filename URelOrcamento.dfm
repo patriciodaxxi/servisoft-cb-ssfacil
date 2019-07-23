@@ -3,7 +3,7 @@ object fRelOrcamento: TfRelOrcamento
   Top = 63
   Width = 924
   Height = 666
-  VertScrollBar.Position = 326
+  VertScrollBar.Position = 457
   Caption = 'Relat'#243'rio Or'#231'amento'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object fRelOrcamento: TfRelOrcamento
   TextHeight = 13
   object RLReport1: TRLReport
     Left = 56
-    Top = -302
+    Top = -433
     Width = 794
     Height = 1123
     DataSource = DMCadPedido.dsPedidoImp
@@ -1711,7 +1711,7 @@ object fRelOrcamento: TfRelOrcamento
         Top = 631
         Width = 742
         Height = 82
-        BandType = btFooter
+        BandType = btSummary
         Borders.Sides = sdCustom
         Borders.DrawLeft = True
         Borders.DrawTop = True

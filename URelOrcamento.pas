@@ -3,8 +3,8 @@ unit uRelOrcamento;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, RLReport, RLRichText, DB, DBTables, RLBarcode, jpeg, UDMCadPedido, UDMRel;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, RLReport, RLRichText, DBTables, RLBarcode,
+  DB, jpeg, UDMCadPedido, UDMRel;
 
 type
   TfRelOrcamento = class(TForm)
@@ -229,10 +229,10 @@ end;
 procedure TfRelOrcamento.RLBand2BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 var
-  vQtdPed : Real;
-  vTexto : String;
-  vAux, I : Integer;
-  vVlrTotalAux : Real;
+  vQtdPed: Real;
+  vTexto: String;
+  vAux, I: Integer;
+  vVlrTotalAux: Real;
 begin
   vQtdPed := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat;
   vVlrTotalAux := StrToFloat(FormatFloat('0.00',vQtdPed * fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat));

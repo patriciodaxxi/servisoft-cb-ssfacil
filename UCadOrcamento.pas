@@ -282,16 +282,16 @@ type
     vVlrFreteAnt: Real;
     vID_ClienteAnt: Integer;
     fDMCadPedido: TDMCadPedido;
-    fLista : TStringList;
+    fLista: TStringList;
     ffrmCadOrcamento_Itens: TfrmCadOrcamento_Itens;
-    ffrmCadOrcamento_NaoAprovado : TfrmCadOrcamento_NaoAprovado;
+    ffrmCadOrcamento_NaoAprovado: TfrmCadOrcamento_NaoAprovado;
     ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov;
     ffrmCadPedido_Desconto: TfrmCadPedido_Desconto;
     ffrmCadPedido_Ace: TfrmCadPedido_Ace;
     ffrmCadPedido_ItensRed: TfrmCadPedido_ItensRed;
     ffrmCadObs_Aux: TfrmCadObs_Aux;
-    ffrmMontaPed_TipoItem : TfrmMontaPed_TipoItem;
+    ffrmMontaPed_TipoItem: TfrmMontaPed_TipoItem;
 
     procedure ItemClick(Sender:TObject);
     procedure prc_Inserir_Registro;
@@ -315,7 +315,7 @@ type
     //procedure prc_Monta_Itens_Imp;
     procedure prc_scroll(DataSet: TDataSet);
     procedure prc_CriaExcel(vDados: TDataSource);
-    procedure prc_Abre_Filial_Menu(Empresa : Integer; Tipo : Integer);    
+    procedure prc_Abre_Filial_Menu(Empresa: Integer; Tipo: Integer);    
   public
     { Public declarations }
     function fnc_verificar_CFOP(ID: Integer): Boolean;
@@ -1658,8 +1658,8 @@ end;
 
 procedure TfrmCadOrcamento.prc_Abre_Filial_Menu(Empresa, Tipo: Integer);
 var
-  i : integer;
-  item : TMenuItem;
+  i: integer;
+  item: TMenuItem;
 begin
   fLista := TStringList.Create;
   i := 0;
@@ -1687,10 +1687,10 @@ end;
 
 procedure TfrmCadOrcamento.ItemClick(Sender: TObject);
 var
-  vArq, x : String;
-  email : TValidaEmail;
-  enviar : TfrxMailExport;
-  pdf : TfrxPDFExport;
+  vArq, x: String;
+  email: TValidaEmail;
+  enviar: TfrxMailExport;
+  pdf: TfrxPDFExport;
 begin
   prc_Posiciona_Imp;
   fDMCadPedido.cdsPedidoServicoImp.Close;
@@ -1773,7 +1773,7 @@ end;
 
 procedure TfrmCadOrcamento.SalvarOramento1Click(Sender: TObject);
 var
-  vCaminhoArquivo : String;
+  vCaminhoArquivo: String;
 begin
   if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
     exit;

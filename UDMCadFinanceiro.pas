@@ -555,7 +555,11 @@ var
 begin
   vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Recibo_Financeiro.fr3';
   if frxReport1.Report.FileName <> vArq then
-    TfrxMemoView(frxReport1.FindComponent('Memo2')).Text := 'Relatório Financeiro de Caixa' + #13 + 'Período de: ' + vDataIni + ' até: ' + vDataFim;
+  begin
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Recibo_Financeiro_Pag.fr3';
+    if frxReport1.Report.FileName <> vArq then
+      TfrxMemoView(frxReport1.FindComponent('Memo2')).Text := 'Relatório Financeiro de Caixa' + #13 + 'Período de: ' + vDataIni + ' até: ' + vDataFim;
+  end;
 end;
 
 procedure TDMCadFinanceiro.frxMovimentoDataFirst(Sender: TObject);

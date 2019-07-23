@@ -1,6 +1,6 @@
 object frmCadObs_Aux: TfrmCadObs_Aux
-  Left = 134
-  Top = 173
+  Left = 404
+  Top = 171
   Width = 875
   Height = 462
   Caption = 'Cadastro de Observa'#231#227'o Auxiliar'
@@ -21,9 +21,9 @@ object frmCadObs_Aux: TfrmCadObs_Aux
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 859
-    Height = 424
-    ActivePage = TS_Cadastro
+    Width = 867
+    Height = 431
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -31,7 +31,7 @@ object frmCadObs_Aux: TfrmCadObs_Aux
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -39,8 +39,8 @@ object frmCadObs_Aux: TfrmCadObs_Aux
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 68
-        Width = 855
-        Height = 316
+        Width = 863
+        Height = 323
         Align = alClient
         Ctl3D = True
         DataSource = DMCadObs_Aux.dsObs_Aux
@@ -73,7 +73,6 @@ object frmCadObs_Aux: TfrmCadObs_Aux
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 4
         RowCount = 2
         Columns = <
           item
@@ -91,14 +90,21 @@ object frmCadObs_Aux: TfrmCadObs_Aux
           item
             Expanded = False
             FieldName = 'OBS'
-            Width = 481
+            Width = 300
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'OBS_PEDIDO'
+            Title.Caption = 'Observa'#231#227'o Pedido/Or'#231'amento'
+            Width = 300
             Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 855
+        Width = 863
         Height = 32
         Align = alTop
         Color = clSilver
@@ -326,8 +332,8 @@ object frmCadObs_Aux: TfrmCadObs_Aux
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 384
-        Width = 855
+        Top = 391
+        Width = 863
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -343,7 +349,7 @@ object frmCadObs_Aux: TfrmCadObs_Aux
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 855
+        Width = 863
         Height = 36
         Align = alTop
         TabOrder = 3
@@ -442,7 +448,7 @@ object frmCadObs_Aux: TfrmCadObs_Aux
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 855
+        Width = 863
         Height = 35
         Align = alTop
         Color = 8404992
@@ -668,8 +674,8 @@ object frmCadObs_Aux: TfrmCadObs_Aux
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 855
-        Height = 366
+        Width = 863
+        Height = 373
         Align = alClient
         Enabled = False
         TabOrder = 0

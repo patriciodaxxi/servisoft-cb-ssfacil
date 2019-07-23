@@ -1029,10 +1029,10 @@ object frmCadContrato: TfrmCadContrato
         Top = 173
         Width = 927
         Height = 476
-        ActivePage = TabSheet2
+        ActivePage = TabSheet1
         ActivePageDefault = TabSheet1
         Align = alClient
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 0
         FixedDimension = 19
         object TabSheet1: TRzTabSheet
@@ -1612,6 +1612,7 @@ object frmCadContrato: TfrmCadContrato
                     FieldName = 'ID_PRODUTO'
                     Title.Alignment = taCenter
                     Title.Caption = 'C'#243'd. Produto'
+                    Width = 64
                     Visible = True
                   end>
               end
