@@ -212,6 +212,13 @@ type
     SalvarOramento1: TMenuItem;
     Label45: TLabel;
     RxDBLookupCombo8: TRxDBLookupCombo;
+    Panel5: TPanel;
+    NxButton1: TNxButton;
+    NxButton2: TNxButton;
+    NxButton3: TNxButton;
+    NxButton4: TNxButton;
+    btnImportarXML: TNxButton;
+    btnCopiarPedido: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -277,6 +284,7 @@ type
     procedure pnlObservacaoEnter(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure SalvarOramento1Click(Sender: TObject);
+    procedure btnCopiarPedidoClick(Sender: TObject);
   private
     { Private declarations }
     vVlrFreteAnt: Real;
@@ -292,6 +300,7 @@ type
     ffrmCadPedido_ItensRed: TfrmCadPedido_ItensRed;
     ffrmCadObs_Aux: TfrmCadObs_Aux;
     ffrmMontaPed_TipoItem: TfrmMontaPed_TipoItem;
+    vInclusao_Edicao: String; //I=Incluir   E=Editar
 
     procedure ItemClick(Sender:TObject);
     procedure prc_Inserir_Registro;
@@ -1799,6 +1808,43 @@ begin
     fRelOrcamento_JW.RLReport1.Free;
     FreeAndNil(fRelOrcamento_JW);
   end;
+end;
+
+procedure TfrmCadOrcamento.btnCopiarPedidoClick(Sender: TObject);
+var
+  ffrmCadPedido_Copia: TfrmCadPedido_Copia;
+begin
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_ConsultaID.AsInteger <= 0) then
+    exit;
+
+  fDMCadPedido.mSenha.EmptyDataSet;
+  vInclusao_Edicao := '';
+  ffrmCadPedido_Copia := TfrmCadPedido_Copia.Create(self);
+  ffrmCadPedido_Copia.fDMCadPedido := fDMCadPedido;
+  ffrmCadPedido_Copia.vNum_Pedido  := fDMCadPedido.cdsPedido_ConsultaNUM_ORCAMENTO.AsInteger;
+  ffrmCadPedido_Copia.Label2.Caption := 'Orçamento origem da cópia:';
+  ffrmCadPedido_Copia.ShowModal;
+  FreeAndNil(ffrmCadPedido_Copia);
+
+  if (fDMCadPedido.Tag = 1) then
+  begin
+    //02/06/2016  incluido a filial
+    if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+       (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+      uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
+    //****************
+    if (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) then
+      fDMCadPedido.cdsPedido.Post;
+    fDMCadPedido.cdsPedido.Edit;
+    vInclusao_Edicao := 'C';
+    RzPageControl1.ActivePage := TS_Cadastro;
+    btnAlterarClick(Sender);
+  end;
+  //15/07/2019
+  if fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S' then
+    fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P';
+
+  fDMCadPedido.Tag := 0;
 end;
 
 end.

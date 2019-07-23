@@ -3,8 +3,8 @@ unit UCadPedido_Copia;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,   Dialogs, UDMCadPedido, UDMCopiaPedido,
-  StdCtrls, Mask, ToolEdit, CurrEdit, Buttons, ExtCtrls, ComCtrls;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMCadPedido, UDMCopiaPedido, StdCtrls,
+  Mask, ToolEdit, CurrEdit, Buttons, ExtCtrls, ComCtrls;
 
 type
   TfrmCadPedido_Copia = class(TForm)
@@ -27,22 +27,20 @@ type
     { Private declarations }
     vCodCFOP_COP: String;
 
-    procedure prc_Abrir_Pedido(ID_Pedido : Integer);
+    procedure prc_Abrir_Pedido(ID_Pedido: Integer);
 
     procedure prc_Copiar_Pedido;
     procedure prc_Copiar_Pedido_Itens;
     procedure prc_Inicio_Tela;
-
   public
     { Public declarations }
     fDMCopiaPedido: TDMCopiaPedido;
     fDMCadPedido: TDMCadPedido;
-    vNum_Pedido : Integer;
-    vFatorMultiplicador : Real;
-    vPercentualAcrescimo : Real;
+    vNum_Pedido: Integer;
+    vFatorMultiplicador: Real;
+    vPercentualAcrescimo: Real;
 
     procedure prc_Le_Aux;
-
   end;
 
 var
@@ -59,7 +57,7 @@ begin
   Action := Cafree;
 end;
 
-procedure TfrmCadPedido_Copia.prc_Abrir_Pedido(ID_Pedido : Integer);
+procedure TfrmCadPedido_Copia.prc_Abrir_Pedido(ID_Pedido: Integer);
 begin
   fDMCopiaPedido.cdsPedido.Close;
   fDMCopiaPedido.sdsPedido.ParamByName('ID').AsInteger := ID_Pedido;
@@ -106,7 +104,8 @@ begin
   begin
     if (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'DTEMISSAO') and
        (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'NUM_PEDIDO') and (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'PEDIDO_CLIENTE') and
-       (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'GEROU_PRODUCAO') then
+       (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'GEROU_PRODUCAO') and (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'NUM_ORCAMENTO') and
+       (fDMCopiaPedido.cdsPedido.Fields[i].FieldName <> 'APROVADO_ORC') then
       fDMCadPedido.cdsPedido.FieldByName(fDMCopiaPedido.cdsPedido.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido.Fields[i].Value;
   end;
   if CheckBox1.Checked then
@@ -144,6 +143,10 @@ begin
     else
     if (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'C') and (fDMCadPedido.cdsParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') then
       fDMCadPedido.cdsPedido_ItensAPROVADO_ITEM.AsString := 'P';
+    if (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'O') then
+      fDMCadPedido.cdsPedido_ItensAPROVADO_ORC.AsString := 'P';
+    fDMCadPedido.cdsPedido_ItensMOTIVO_NAO_APROV.Clear;
+    fDMCadPedido.cdsPedido_ItensDTAPROVADO_NAO.Clear;
     fDMCadPedido.cdsPedido_Itens.Post;
 
     //26/09/2016
@@ -217,10 +220,10 @@ end;
 
 procedure TfrmCadPedido_Copia.prc_Le_Aux;
 var
-  vID_Ant : Integer;
-  vItem_Aux : Integer;
-  i : Integer;
-  vCalcular : TCalcluar_Peso;
+  vID_Ant: Integer;
+  vItem_Aux: Integer;
+  i: Integer;
+  vCalcular: TCalcluar_Peso;
 begin
   vID_Ant := 0;
   fDMCopiaPedido.mAux.First;
