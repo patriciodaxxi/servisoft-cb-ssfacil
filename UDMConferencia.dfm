@@ -3,8 +3,8 @@ object DMConferencia: TDMConferencia
   OnCreate = DataModuleCreate
   Left = 134
   Top = 49
-  Height = 614
-  Width = 1185
+  Height = 534
+  Width = 974
   object sdsPedido_Item: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -22,8 +22,8 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 40
-    Top = 376
+    Left = 64
+    Top = 232
     object sdsPedido_ItemID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -86,8 +86,8 @@ object DMConferencia: TDMConferencia
   end
   object dspPedido_Item: TDataSetProvider
     DataSet = sdsPedido_Item
-    Left = 88
-    Top = 376
+    Left = 104
+    Top = 232
   end
   object cdsPedido_Item: TClientDataSet
     Aggregates = <>
@@ -95,8 +95,8 @@ object DMConferencia: TDMConferencia
     Params = <>
     ProviderName = 'dspPedido_Item'
     OnCalcFields = cdsPedido_ItemCalcFields
-    Left = 136
-    Top = 376
+    Left = 144
+    Top = 232
     object cdsPedido_ItemID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -167,7 +167,7 @@ object DMConferencia: TDMConferencia
   object dsPedido_Item: TDataSource
     DataSet = cdsPedido_Item
     Left = 184
-    Top = 376
+    Top = 232
   end
   object sdsFilial: TSQLDataSet
     NoMetadata = True
@@ -176,8 +176,8 @@ object DMConferencia: TDMConferencia
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 504
+    Left = 64
+    Top = 352
     object sdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -189,16 +189,16 @@ object DMConferencia: TDMConferencia
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 136
-    Top = 504
+    Left = 104
+    Top = 352
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 176
-    Top = 504
+    Left = 144
+    Top = 352
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -210,8 +210,8 @@ object DMConferencia: TDMConferencia
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 216
-    Top = 504
+    Left = 184
+    Top = 352
   end
   object sdsPrc_Atualiza_Status_Ped: TSQLDataSet
     CommandText = 'PRC_ATUALIZA_STATUS_PED'
@@ -224,16 +224,16 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 688
-    Top = 368
+    Left = 800
+    Top = 168
   end
   object mPedidoAux: TClientDataSet
     Active = True
     Aggregates = <>
     IndexFieldNames = 'ID_Pedido'
     Params = <>
-    Left = 688
-    Top = 472
+    Left = 560
+    Top = 112
     Data = {
       2C0000009619E0BD0100000018000000010000000000030000002C000949445F
       50656469646F04000100000000000000}
@@ -252,8 +252,8 @@ object DMConferencia: TDMConferencia
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 48
-    Top = 328
+    Left = 64
+    Top = 184
     object sdsPedidoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -303,15 +303,15 @@ object DMConferencia: TDMConferencia
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
-    Left = 88
-    Top = 328
+    Left = 104
+    Top = 184
   end
   object cdsPedido: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPedido'
-    Left = 136
-    Top = 328
+    Left = 144
+    Top = 184
     object cdsPedidoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -362,7 +362,7 @@ object DMConferencia: TDMConferencia
   object dsPedido: TDataSource
     DataSet = cdsPedido
     Left = 184
-    Top = 328
+    Top = 184
   end
   object sdsConferencia: TSQLDataSet
     NoMetadata = True
@@ -425,7 +425,7 @@ object DMConferencia: TDMConferencia
   object dspConferencia: TDataSetProvider
     DataSet = sdsConferencia
     UpdateMode = upWhereKeyOnly
-    Left = 120
+    Left = 112
     Top = 8
   end
   object cdsConferencia: TClientDataSet
@@ -433,7 +433,7 @@ object DMConferencia: TDMConferencia
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspConferencia'
-    Left = 168
+    Left = 152
     Top = 8
     object cdsConferenciaID: TIntegerField
       FieldName = 'ID'
@@ -484,13 +484,13 @@ object DMConferencia: TDMConferencia
   end
   object dsConferencia: TDataSource
     DataSet = cdsConferencia
-    Left = 216
+    Left = 192
     Top = 8
   end
   object dsConferencia_Mestre: TDataSource
     DataSet = sdsConferencia
-    Left = 32
-    Top = 48
+    Left = 232
+    Top = 32
   end
   object qConferencia: TSQLQuery
     MaxBlobSize = -1
@@ -506,8 +506,8 @@ object DMConferencia: TDMConferencia
       'WHERE C.encerrado = '#39'N'#39
       '  AND C.usuario = :USUARIO')
     SQLConnection = dmDatabase.scoDados
-    Left = 352
-    Top = 128
+    Left = 720
+    Top = 16
     object qConferenciaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -537,7 +537,7 @@ object DMConferencia: TDMConferencia
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 96
+    Top = 64
     object sdsConferencia_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -576,8 +576,8 @@ object DMConferencia: TDMConferencia
     DataSetField = cdsConferenciasdsConferencia_Itens
     IndexFieldNames = 'ID;ITEM'
     Params = <>
-    Left = 144
-    Top = 96
+    Left = 112
+    Top = 64
     object cdsConferencia_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -616,13 +616,13 @@ object DMConferencia: TDMConferencia
   end
   object dsConferencia_Itens: TDataSource
     DataSet = cdsConferencia_Itens
-    Left = 216
-    Top = 96
+    Left = 152
+    Top = 64
   end
   object dsConferencia_Itens_Mestre: TDataSource
     DataSet = sdsConferencia_Itens
-    Left = 48
-    Top = 144
+    Left = 224
+    Top = 88
   end
   object cdsConferencia_Ped: TClientDataSet
     Aggregates = <>
@@ -630,8 +630,8 @@ object DMConferencia: TDMConferencia
     IndexFieldNames = 'ID;ITEM;ITEM_REG'
     Params = <>
     OnCalcFields = cdsConferencia_PedCalcFields
-    Left = 168
-    Top = 192
+    Left = 112
+    Top = 120
     object cdsConferencia_PedID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -690,8 +690,8 @@ object DMConferencia: TDMConferencia
   end
   object dsConferencia_Ped: TDataSource
     DataSet = cdsConferencia_Ped
-    Left = 232
-    Top = 192
+    Left = 152
+    Top = 120
   end
   object qCBarra: TSQLQuery
     MaxBlobSize = -1
@@ -706,8 +706,8 @@ object DMConferencia: TDMConferencia
       'FROM PRODUTO P'
       'WHERE P.cod_barra = :COD_BARRA')
     SQLConnection = dmDatabase.scoDados
-    Left = 400
-    Top = 344
+    Left = 848
+    Top = 16
     object qCBarraID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -743,8 +743,8 @@ object DMConferencia: TDMConferencia
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 88
-    Top = 192
+    Left = 72
+    Top = 120
     object sdsConferencia_PedID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -806,8 +806,8 @@ object DMConferencia: TDMConferencia
       'ON I.ID_PRODUTO = PROD.ID'
       'WHERE P.ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 352
-    Top = 232
+    Left = 784
+    Top = 16
     object qPedido_VerNUM_PEDIDO: TIntegerField
       FieldName = 'NUM_PEDIDO'
     end
@@ -835,8 +835,8 @@ object DMConferencia: TDMConferencia
     ReportOptions.LastChange = 42759.885930636580000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
-    Left = 952
-    Top = 279
+    Left = 736
+    Top = 255
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -859,8 +859,8 @@ object DMConferencia: TDMConferencia
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 992
-    Top = 279
+    Left = 768
+    Top = 255
   end
   object frxMailExport1: TfrxMailExport
     UseFileCache = True
@@ -874,12 +874,12 @@ object DMConferencia: TDMConferencia
     ConfurmReading = False
     UseMAPI = SMTP
     MAPISendFlag = 0
-    Left = 1032
-    Top = 279
+    Left = 800
+    Top = 255
   end
   object frxRichObject1: TfrxRichObject
-    Left = 1064
-    Top = 279
+    Left = 832
+    Top = 255
   end
   object frxEtiqueta: TfrxDBDataset
     UserName = 'frxEtiqueta'
@@ -898,8 +898,8 @@ object DMConferencia: TDMConferencia
       'USUARIO=USUARIO')
     DataSource = dsEtiqueta
     BCDToCurrency = False
-    Left = 952
-    Top = 327
+    Left = 736
+    Top = 303
   end
   object qQtdProd: TSQLQuery
     MaxBlobSize = -1
@@ -920,8 +920,8 @@ object DMConferencia: TDMConferencia
       'WHERE P.ID = :ID'
       '  AND P.ITEM = :ITEM')
     SQLConnection = dmDatabase.scoDados
-    Left = 488
-    Top = 176
+    Left = 752
+    Top = 16
     object qQtdProdCONTADOR: TIntegerField
       FieldName = 'CONTADOR'
       Required = True
@@ -947,21 +947,21 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 944
-    Top = 232
+    Left = 344
+    Top = 220
   end
   object dspEtiqueta: TDataSetProvider
     DataSet = sdsEtiqueta
-    Left = 984
-    Top = 232
+    Left = 384
+    Top = 220
   end
   object cdsEtiqueta: TClientDataSet
     Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspEtiqueta'
-    Left = 1032
-    Top = 232
+    Left = 422
+    Top = 220
     object cdsEtiquetaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1005,8 +1005,8 @@ object DMConferencia: TDMConferencia
   end
   object dsEtiqueta: TDataSource
     DataSet = cdsEtiqueta
-    Left = 1080
-    Top = 232
+    Left = 462
+    Top = 220
   end
   object sdsQtdPed: TSQLDataSet
     NoMetadata = True
@@ -1023,21 +1023,21 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 24
+    Left = 344
+    Top = 16
   end
   object dspQtdPed: TDataSetProvider
     DataSet = sdsQtdPed
-    Left = 648
-    Top = 24
+    Left = 384
+    Top = 16
   end
   object cdsQtdPed: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID_PEDIDO;ITEM_PEDIDO'
     Params = <>
     ProviderName = 'dspQtdPed'
-    Left = 696
-    Top = 24
+    Left = 422
+    Top = 16
     object cdsQtdPedQTD: TFloatField
       FieldName = 'QTD'
     end
@@ -1050,8 +1050,8 @@ object DMConferencia: TDMConferencia
   end
   object dsQtdPed: TDataSource
     DataSet = cdsQtdPed
-    Left = 744
-    Top = 24
+    Left = 462
+    Top = 16
   end
   object sdsConsulta: TSQLDataSet
     NoMetadata = True
@@ -1060,21 +1060,21 @@ object DMConferencia: TDMConferencia
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 72
+    Left = 344
+    Top = 64
   end
   object dspConsulta: TDataSetProvider
     DataSet = sdsConsulta
-    Left = 648
-    Top = 72
+    Left = 384
+    Top = 64
   end
   object cdsConsulta: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspConsulta'
-    Left = 696
-    Top = 72
+    Left = 422
+    Top = 64
     object cdsConsultaUSUARIO: TStringField
       FieldName = 'USUARIO'
       Size = 15
@@ -1120,8 +1120,8 @@ object DMConferencia: TDMConferencia
   end
   object dsConsulta: TDataSource
     DataSet = cdsConsulta
-    Left = 744
-    Top = 72
+    Left = 462
+    Top = 64
   end
   object sdsConsulta_Itens: TSQLDataSet
     NoMetadata = True
@@ -1135,20 +1135,20 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 120
+    Left = 344
+    Top = 112
   end
   object dspConsulta_Itens: TDataSetProvider
     DataSet = sdsConsulta_Itens
-    Left = 648
-    Top = 120
+    Left = 384
+    Top = 112
   end
   object cdsConsulta_Itens: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsulta_Itens'
-    Left = 696
-    Top = 120
+    Left = 422
+    Top = 112
     object cdsConsulta_ItensID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1182,8 +1182,8 @@ object DMConferencia: TDMConferencia
   end
   object dsConsulta_Itens: TDataSource
     DataSet = cdsConsulta_Itens
-    Left = 744
-    Top = 120
+    Left = 462
+    Top = 112
   end
   object sdsConsulta_Ped: TSQLDataSet
     NoMetadata = True
@@ -1207,20 +1207,20 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 608
-    Top = 176
+    Left = 344
+    Top = 163
   end
   object dspConsulta_Ped: TDataSetProvider
     DataSet = sdsConsulta_Ped
-    Left = 648
-    Top = 176
+    Left = 384
+    Top = 163
   end
   object cdsConsulta_Ped: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsulta_Ped'
-    Left = 696
-    Top = 176
+    Left = 422
+    Top = 163
     object cdsConsulta_PedQTD: TFloatField
       FieldName = 'QTD'
     end
@@ -1254,8 +1254,8 @@ object DMConferencia: TDMConferencia
   end
   object dsConsulta_Ped: TDataSource
     DataSet = cdsConsulta_Ped
-    Left = 744
-    Top = 176
+    Left = 462
+    Top = 163
   end
   object mImpConferencia: TClientDataSet
     Active = True
@@ -1335,8 +1335,8 @@ object DMConferencia: TDMConferencia
     IndexFieldNames = 'ID_Conferencia;Item_Etiqueta'
     Params = <>
     StoreDefs = True
-    Left = 888
-    Top = 424
+    Left = 560
+    Top = 63
     Data = {
       7B0100009619E0BD01000000180000000F0000000000030000007B010E49445F
       436F6E666572656E6369610400010000000000075573756172696F0100490000
@@ -1399,8 +1399,8 @@ object DMConferencia: TDMConferencia
   end
   object dsmImpConferencia: TDataSource
     DataSet = mImpConferencia
-    Left = 920
-    Top = 424
+    Left = 592
+    Top = 63
   end
   object frxImpConferencia: TfrxDBDataset
     UserName = 'frxImpConferencia'
@@ -1423,8 +1423,8 @@ object DMConferencia: TDMConferencia
       'Qtd_Ped=Qtd_Ped')
     DataSource = dsmImpConferencia
     BCDToCurrency = False
-    Left = 1000
-    Top = 327
+    Left = 768
+    Top = 303
   end
   object qParametros_Ped: TSQLQuery
     MaxBlobSize = -1
@@ -1433,8 +1433,8 @@ object DMConferencia: TDMConferencia
       'SELECT CONFERENCIA_SIMPLES'
       'FROM PARAMETROS_PED')
     SQLConnection = dmDatabase.scoDados
-    Left = 456
-    Top = 264
+    Left = 816
+    Top = 16
     object qParametros_PedCONFERENCIA_SIMPLES: TStringField
       FieldName = 'CONFERENCIA_SIMPLES'
       FixedChar = True
@@ -1460,15 +1460,15 @@ object DMConferencia: TDMConferencia
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 384
-    Top = 469
+    Left = 64
+    Top = 413
   end
   object cdsPedido_Item_Tipo: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPedido_Item_Tipo'
-    Left = 472
-    Top = 469
+    Left = 147
+    Top = 413
     object cdsPedido_Item_TipoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1608,16 +1608,19 @@ object DMConferencia: TDMConferencia
     object cdsPedido_Item_TipoID_CHAPA: TIntegerField
       FieldName = 'ID_CHAPA'
     end
+    object cdsPedido_Item_TipoESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
   end
   object dsPedido_Item_Tipo: TDataSource
     DataSet = cdsPedido_Item_Tipo
-    Left = 512
-    Top = 469
+    Left = 186
+    Top = 413
   end
   object dspPedido_Item_Tipo: TDataSetProvider
     DataSet = sdsPedido_Item_Tipo
-    Left = 424
-    Top = 472
+    Left = 104
+    Top = 413
   end
   object mAuxConf: TClientDataSet
     Active = True
@@ -1666,8 +1669,8 @@ object DMConferencia: TDMConferencia
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 768
-    Top = 296
+    Left = 560
+    Top = 15
     Data = {
       E00000009619E0BD010000001800000009000000000003000000E0000949445F
       50656469646F0400010000000000044974656D04000100000000000A49445F50
@@ -1710,8 +1713,8 @@ object DMConferencia: TDMConferencia
   end
   object dsmAuxConf: TDataSource
     DataSet = mAuxConf
-    Left = 800
-    Top = 296
+    Left = 592
+    Top = 15
   end
   object qCombinacao: TSQLQuery
     MaxBlobSize = -1
@@ -1726,8 +1729,8 @@ object DMConferencia: TDMConferencia
       'FROM COMBINACAO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 504
-    Top = 336
+    Left = 880
+    Top = 16
     object qCombinacaoID: TFMTBCDField
       FieldName = 'ID'
       Required = True
@@ -1758,8 +1761,8 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 40
-    Top = 432
+    Left = 64
+    Top = 288
     object sdsPedido_ConfID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1783,16 +1786,16 @@ object DMConferencia: TDMConferencia
   end
   object dspPedido_Conf: TDataSetProvider
     DataSet = sdsPedido_Conf
-    Left = 88
-    Top = 432
+    Left = 104
+    Top = 288
   end
   object cdsPedido_Conf: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID;ITEM;ITEM_CONF'
     Params = <>
     ProviderName = 'dspPedido_Conf'
-    Left = 136
-    Top = 432
+    Left = 144
+    Top = 288
     object cdsPedido_ConfID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1817,7 +1820,7 @@ object DMConferencia: TDMConferencia
   object dsPedido_Conf: TDataSource
     DataSet = cdsPedido_Conf
     Left = 184
-    Top = 432
+    Top = 288
   end
   object qPedidoConf: TSQLQuery
     MaxBlobSize = -1
@@ -1838,8 +1841,8 @@ object DMConferencia: TDMConferencia
       'WHERE ID = :ID'
       '  AND ITEM = :ITEM')
     SQLConnection = dmDatabase.scoDados
-    Left = 632
-    Top = 296
+    Left = 720
+    Top = 72
     object qPedidoConfITEM_CONF: TIntegerField
       FieldName = 'ITEM_CONF'
     end
@@ -1857,8 +1860,8 @@ object DMConferencia: TDMConferencia
       'FROM CBARRA P'
       'WHERE P.cod_barra = :COD_BARRA')
     SQLConnection = dmDatabase.scoDados
-    Left = 560
-    Top = 400
+    Left = 752
+    Top = 72
     object qCBarraCorCOD_BARRA: TStringField
       FieldName = 'COD_BARRA'
       Size = 13
