@@ -3,10 +3,10 @@ unit UCadPedido_Itens;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, UDMCadPedido, StdCtrls,
-  Buttons, RxLookup, DBCtrls, DB, UCadPedido_Itens_Imposto, Mask, RxDBComb, UCadProduto, UCadUnidade, UCadCFOP, ToolEdit,
-  RXDBCtrl, RzTabs, RzPanel, UCadPessoa, UCadTabPreco, NxCollection, UDMInformar_Tam, UInformar_Tam, UCadPedido_Mat,
-  NxEdit, UCadNCM, UCadPedido_TipoItem;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, UDMCadPedido, StdCtrls, NxEdit,
+  Buttons, RxLookup, DBCtrls, DB, UCadPedido_Itens_Imposto, Mask, RxDBComb, UCadProduto, UCadUnidade, UCadCFOP, UCadPedido_Mat,
+  ToolEdit, RXDBCtrl, RzTabs, RzPanel, UCadNCM, UCadTabPreco, NxCollection, UDMInformar_Tam, UInformar_Tam, UCadPedido_TipoItem,
+  UCadPessoa;
 
 type
   TfrmCadPedido_Itens = class(TForm)
@@ -296,9 +296,8 @@ var
 
 implementation
 
-uses rsDBUtils, USel_Produto, uUtilPadrao, UDMUtil, USel_TabPreco, UMenu,
-  USel_Unidade, Math, USenha, uCalculo_Pedido, UCadPedido_Itens_Serv,
-  UCadPedido_ItensCli;
+uses rsDBUtils, USel_Produto, uUtilPadrao, UDMUtil, USel_TabPreco, UMenu, USel_Unidade, Math, USenha, uCalculo_Pedido,
+  UCadPedido_Itens_Serv, UCadPedido_ItensCli;
 
 {$R *.dfm}
 

@@ -1521,7 +1521,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object dblcTamanho: TRxDBLookupCombo
       Left = 278
-      Top = 6
+      Top = 7
       Width = 115
       Height = 21
       DropDownCount = 8
