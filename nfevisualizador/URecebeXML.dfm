@@ -24,7 +24,7 @@ object frmRecebeXML: TfrmRecebeXML
     Top = 146
     Width = 1106
     Height = 519
-    ActivePage = TabSheet5
+    ActivePage = TabSheet4
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -2551,7 +2551,7 @@ object frmRecebeXML: TfrmRecebeXML
             67)
           object Shape1: TShape
             Left = 827
-            Top = 17
+            Top = 9
             Width = 25
             Height = 16
             Anchors = [akTop, akRight]
@@ -2559,7 +2559,7 @@ object frmRecebeXML: TfrmRecebeXML
           end
           object Label67: TLabel
             Left = 855
-            Top = 20
+            Top = 12
             Width = 115
             Height = 13
             Anchors = [akTop, akRight]
@@ -2591,7 +2591,7 @@ object frmRecebeXML: TfrmRecebeXML
           end
           object Shape4: TShape
             Left = 827
-            Top = 32
+            Top = 24
             Width = 25
             Height = 16
             Anchors = [akTop, akRight]
@@ -2599,7 +2599,7 @@ object frmRecebeXML: TfrmRecebeXML
           end
           object Label90: TLabel
             Left = 855
-            Top = 35
+            Top = 27
             Width = 109
             Height = 13
             Anchors = [akTop, akRight]
@@ -2643,6 +2643,22 @@ object frmRecebeXML: TfrmRecebeXML
             Font.Name = 'Arial'
             Font.Style = [fsBold]
             ParentFont = False
+          end
+          object Shape6: TShape
+            Left = 827
+            Top = 40
+            Width = 25
+            Height = 16
+            Anchors = [akTop, akRight]
+            Brush.Color = 33023
+          end
+          object Label148: TLabel
+            Left = 855
+            Top = 43
+            Width = 174
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'CFOP 5405 Sem Base/Vlr ST Retido'
           end
           object BitBtn4: TBitBtn
             Left = 512

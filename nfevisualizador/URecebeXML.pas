@@ -373,6 +373,8 @@ type
     BitBtn4: TBitBtn;
     btnAjustarUnidade: TBitBtn;
     XMLDocument1: TXMLDocument;
+    Shape6: TShape;
+    Label148: TLabel;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -1523,9 +1525,7 @@ begin
       Background := clGray
     else
     if (fDMRecebeXML.mItensNotaUnidade.AsString <> fDMRecebeXML.mItensNotaUnidadeInterno.AsString)
-       //and (StrToFloat(FormatFloat('0.00000',fDMRecebeXML.mItensNotaQtdPacote.AsFloat)) <= 0)
        and (fDMRecebeXML.qParametrosUSA_QTDPACOTE_NTE.AsString = 'S') then
-       //and (fDMRecebeXML.mItensNotaItem_Unidade.AsInteger <> -1) then
       Background := clAqua
     else
     if fDMRecebeXML.mItensNotaInativo_Produto.AsString = 'S' then
@@ -1537,11 +1537,18 @@ begin
     //05/12/2017  Alterado (vai usar a OC que vem do XML)
     //if (Trim(fDMRecebeXML.mItensNotaNumPedido.AsString) = '') or (Trim(fDMRecebeXML.mItensNotaNumPedido.AsString) = '0')
       // or (fDMRecebeXML.mItensNotaItemPedido.AsInteger <= 0)  then
+    //23/07/2019
+    if (fDMRecebeXML.mItensNotaCFOPOriginal.AsString = '5405') and
+       ((StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaBaseCSTRet.AsFloat)) <= 0) or
+        (StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaVlrIcmsCSTRet.AsFloat)) <= 0)) then
+      Background  := $000080FF
+    else
     if fDMRecebeXML.mItensNotaID_Pedido.AsInteger <= 0 then
     begin
       Background  := clYellow;
       AFont.Color := clBlack;
     end;
+
   end;
 end;
 
@@ -2089,6 +2096,10 @@ begin
         fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString := fDMRecebeXML.mItensNotaPosse_Material.AsString;
       if (fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString <> fDMRecebeXML.mItensNotaSped_Tipo.AsString) and (Trim(fDMRecebeXML.mItensNotaSped_Tipo.AsString) <> '') then
         fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
+      //23/07/2019
+      if fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0 then
+        fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
+      //****************
 
       if fDMRecebeXML.mItensNotaGerar_CLiquido.AsBoolean then
         fDMRecebeXML.cdsProdutoUSA_CLIQ.AsString := 'S'
@@ -2097,7 +2108,10 @@ begin
       if trim(fDMRecebeXML.cdsProdutoTIPO_VENDA.AsString) = '' then
         fDMRecebeXML.cdsProdutoTIPO_VENDA.AsString := fDMRecebeXML.mItensNotaTipoVenda.AsString;
       if fDMRecebeXML.cdsProduto.State in [dsEdit] then
+      begin
         fDMRecebeXML.cdsProduto.Post;
+        fDMRecebeXML.cdsProduto.ApplyUpdates(0);
+      end;
       if (fDMRecebeXML.qParametros_RecXMLATUALIZAR_CEST.AsString = 'S') and (trim(fDMRecebeXML.mItensNotaCEST.AsString) <> '') and
          (fDMRecebeXML.mItensNotaCEST.AsString <> fDMRecebeXML.mItensNotaCEST_Interno.AsString) then
       begin
@@ -2271,7 +2285,8 @@ begin
       fDMRecebeXML.cdsProdutoTIPO_VENDA.AsString := 'R';
   end;
 
-  fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
+  if fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0 then
+    fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
   if fDMRecebeXML.mItensNotaID_Grupo.AsInteger > 0 then
     fDMRecebeXML.cdsProdutoID_GRUPO.AsInteger := fDMRecebeXML.mItensNotaID_Grupo.AsInteger;
   if fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger > 0 then
