@@ -9,24 +9,25 @@ object DMFluxoCaixa: TDMFluxoCaixa
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT SUM(DUP.VLR_RESTANTE) VALOR, DUP.ID_CONTA_ORCAMENTO, DUP.' +
-      'DTVENCIMENTO,'#13#10'DUP.TIPO_ES, CAST('#39'DUP'#39' AS VARCHAR(3)) AS TIPO_RE' +
-      'G, ORC.DESCRICAO NOME_ORCAMENTO,'#13#10'DUP.ID_CONTA, CTA.NOME NOME_CO' +
-      'NTA'#13#10'FROM DUPLICATA DUP'#13#10'LEFT JOIN CONTA_ORCAMENTO ORC'#13#10'ON DUP.I' +
-      'D_CONTA_ORCAMENTO = ORC.ID'#13#10'LEFT JOIN CONTAS CTA'#13#10'ON DUP.ID_CONT' +
-      'A = CTA.ID'#13#10'WHERE DUP.VLR_RESTANTE > 0'#13#10'  AND DUP.TIPO_MOV <> '#39'H' +
-      #39#13#10'  AND DUP.DTVENCIMENTO BETWEEN :DTINICIAL AND :DTFINAL'#13#10'GROUP' +
-      ' BY DUP.ID_CONTA_ORCAMENTO, DUP.DTVENCIMENTO, DUP.TIPO_ES, ORC.D' +
-      'ESCRICAO, DUP.ID_CONTA, CTA.NOME'#13#10#13#10'UNION ALL'#13#10#13#10'SELECT SUM(CHE.' +
-      'VALOR) VALOR, CHE.ID_CONTA_ORCAMENTO, CHE.DTBOM_PARA DTVENCIMENT' +
-      'O,'#13#10'CAST('#39'S'#39' AS VARCHAR(1)) AS TIPO_ES, CAST('#39'CHE'#39' AS VARCHAR(3)' +
-      ') AS TIPO_REG, ORC.DESCRICAO NOME_ORCAMENTO,'#13#10'CHE.ID_CONTA, CTA.' +
-      'NOME NOME_CONTA'#13#10'FROM CHEQUE CHE'#13#10'LEFT JOIN CONTA_ORCAMENTO ORC'#13 +
-      #10'ON CHE.ID_CONTA_ORCAMENTO = ORC.ID'#13#10'LEFT JOIN CONTAS CTA'#13#10'ON CH' +
-      'E.ID_CONTA = CTA.ID'#13#10'WHERE CHE.DTCOMPENSADO IS NULL'#13#10'  AND CHE.D' +
-      'TBOM_PARA BETWEEN :DTINICIAL AND :DTFINAL'#13#10'GROUP BY CHE.ID_CONTA' +
-      '_ORCAMENTO, CHE.DTBOM_PARA, ORC.DESCRICAO, CHE.ID_CONTA, CTA.NOM' +
-      'E'
+      'select sum(DUP.VLR_RESTANTE) VALOR, DUP.ID_CONTA_ORCAMENTO, DUP.' +
+      'DTVENCIMENTO, DUP.TIPO_ES,'#13#10'       cast('#39'DUP'#39' as varchar(3)) as ' +
+      'TIPO_REG, ORC.DESCRICAO NOME_ORCAMENTO, DUP.ID_CONTA, CTA.NOME N' +
+      'OME_CONTA'#13#10'from DUPLICATA DUP'#13#10'left join CONTA_ORCAMENTO ORC on ' +
+      'DUP.ID_CONTA_ORCAMENTO = ORC.ID'#13#10'left join CONTAS CTA on DUP.ID_' +
+      'CONTA = CTA.ID'#13#10'where DUP.VLR_RESTANTE > 0 and'#13#10'      DUP.TIPO_M' +
+      'OV <> '#39'H'#39' and'#13#10'      DUP.DTVENCIMENTO between :DTINICIAL and :DT' +
+      'FINAL AND'#13#10'      DUP.FILIAL = :FILIAL'#13#10'group by DUP.ID_CONTA_ORC' +
+      'AMENTO, DUP.DTVENCIMENTO, DUP.TIPO_ES, ORC.DESCRICAO, DUP.ID_CON' +
+      'TA, CTA.NOME'#13#10#13#10'union all'#13#10#13#10'select sum(CHE.VALOR) VALOR, CHE.ID' +
+      '_CONTA_ORCAMENTO, CHE.DTBOM_PARA DTVENCIMENTO, cast('#39'S'#39' as varch' +
+      'ar(1)) as TIPO_ES,'#13#10'       cast('#39'CHE'#39' as varchar(3)) as TIPO_REG' +
+      ', ORC.DESCRICAO NOME_ORCAMENTO, CHE.ID_CONTA, CTA.NOME NOME_CONT' +
+      'A'#13#10'from CHEQUE CHE'#13#10'left join CONTA_ORCAMENTO ORC on CHE.ID_CONT' +
+      'A_ORCAMENTO = ORC.ID'#13#10'left join CONTAS CTA on CHE.ID_CONTA = CTA' +
+      '.ID'#13#10'where CHE.DTCOMPENSADO is null and'#13#10'      CHE.DTBOM_PARA be' +
+      'tween :DTINICIAL and :DTFINAL AND'#13#10'      CHE.FILIAL = :FILIAL'#13#10'g' +
+      'roup by CHE.ID_CONTA_ORCAMENTO, CHE.DTBOM_PARA, ORC.DESCRICAO, C' +
+      'HE.ID_CONTA, CTA.NOME   '
     MaxBlobSize = -1
     Params = <
       item
@@ -40,6 +41,11 @@ object DMFluxoCaixa: TDMFluxoCaixa
         ParamType = ptInput
       end
       item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
         DataType = ftDate
         Name = 'DTINICIAL'
         ParamType = ptInput
@@ -47,6 +53,11 @@ object DMFluxoCaixa: TDMFluxoCaixa
       item
         DataType = ftDate
         Name = 'DTFINAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
@@ -262,8 +273,8 @@ object DMFluxoCaixa: TDMFluxoCaixa
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 96
-    Top = 184
+    Left = 272
+    Top = 32
     Data = {
       7F0200009619E0BD0100000018000000200000000000030000007F021249445F
       436F6E74615F4F7263616D656E746F0400010000000000085469706F5F526567
@@ -416,16 +427,16 @@ object DMFluxoCaixa: TDMFluxoCaixa
   end
   object dsmContaOrc: TDataSource
     DataSet = mContaOrc
-    Left = 136
-    Top = 184
+    Left = 312
+    Top = 32
   end
   object mData: TClientDataSet
     Active = True
     Aggregates = <>
     IndexFieldNames = 'Data'
     Params = <>
-    Left = 280
-    Top = 128
+    Left = 272
+    Top = 80
     Data = {
       360000009619E0BD010000001800000002000000000003000000360004446174
       61040006000000000006496E6469636504000100000000000000}
@@ -438,25 +449,27 @@ object DMFluxoCaixa: TDMFluxoCaixa
   end
   object dsmData: TDataSource
     DataSet = mData
-    Left = 320
-    Top = 128
+    Left = 312
+    Top = 80
   end
   object sdsAtrasado: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT SUM(DUP.VLR_RESTANTE) VALOR, DUP.ID_CONTA_ORCAMENTO, DUP.' +
-      'TIPO_ES, CAST('#39'DUP'#39' AS VARCHAR(3)) AS TIPO_REG, ORC.DESCRICAO NO' +
-      'ME_ORCAMENTO'#13#10'FROM DUPLICATA DUP'#13#10'LEFT JOIN CONTA_ORCAMENTO ORC'#13 +
-      #10'ON DUP.ID_CONTA_ORCAMENTO = ORC.ID'#13#10'WHERE DUP.VLR_RESTANTE > 0'#13 +
-      #10'  AND DUP.TIPO_MOV <> '#39'H'#39#13#10'  AND DUP.DTVENCIMENTO < :DATA'#13#10'GROU' +
-      'P BY DUP.ID_CONTA_ORCAMENTO, DUP.TIPO_ES, ORC.DESCRICAO'#13#10#13#10'UNION' +
-      ' ALL'#13#10#13#10'SELECT SUM(CHE.VALOR) VALOR, CHE.ID_CONTA_ORCAMENTO,'#13#10'CA' +
-      'ST('#39'S'#39' AS VARCHAR(1)) AS TIPO_ES, CAST('#39'CHE'#39' AS VARCHAR(3)) AS T' +
-      'IPO_REG, ORC.DESCRICAO NOME_ORCAMENTO'#13#10'FROM CHEQUE CHE'#13#10'LEFT JOI' +
-      'N CONTA_ORCAMENTO ORC'#13#10'ON CHE.ID_CONTA_ORCAMENTO = ORC.ID'#13#10'WHERE' +
-      ' CHE.DTCOMPENSADO IS NULL'#13#10'  AND CHE.DTBOM_PARA < :DATA'#13#10'GROUP B' +
-      'Y CHE.ID_CONTA_ORCAMENTO, ORC.DESCRICAO '
+      'select sum(DUP.VLR_RESTANTE) VALOR, DUP.ID_CONTA_ORCAMENTO, DUP.' +
+      'TIPO_ES, cast('#39'DUP'#39' as varchar(3)) as TIPO_REG,'#13#10'       ORC.DESC' +
+      'RICAO NOME_ORCAMENTO'#13#10'from DUPLICATA DUP'#13#10'left join CONTA_ORCAME' +
+      'NTO ORC on DUP.ID_CONTA_ORCAMENTO = ORC.ID'#13#10'where DUP.VLR_RESTAN' +
+      'TE > 0 and'#13#10'      DUP.TIPO_MOV <> '#39'H'#39' and'#13#10'      DUP.DTVENCIMENT' +
+      'O < :DATA AND'#13#10'      DUP.FILIAL = :FILIAL'#13#10'group by DUP.ID_CONTA' +
+      '_ORCAMENTO, DUP.TIPO_ES, ORC.DESCRICAO'#13#10#13#10'union all'#13#10#13#10'select su' +
+      'm(CHE.VALOR) VALOR, CHE.ID_CONTA_ORCAMENTO, cast('#39'S'#39' as varchar(' +
+      '1)) as TIPO_ES,'#13#10'       cast('#39'CHE'#39' as varchar(3)) as TIPO_REG, O' +
+      'RC.DESCRICAO NOME_ORCAMENTO'#13#10'from CHEQUE CHE'#13#10'left join CONTA_OR' +
+      'CAMENTO ORC on CHE.ID_CONTA_ORCAMENTO = ORC.ID'#13#10'where CHE.DTCOMP' +
+      'ENSADO is null and'#13#10'      CHE.DTBOM_PARA < :DATA AND'#13#10'      CHE.' +
+      'FILIAL = :FILIAL'#13#10'group by CHE.ID_CONTA_ORCAMENTO, ORC.DESCRICAO' +
+      ' '
     MaxBlobSize = -1
     Params = <
       item
@@ -465,8 +478,18 @@ object DMFluxoCaixa: TDMFluxoCaixa
         ParamType = ptInput
       end
       item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
         DataType = ftDate
         Name = 'DATA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
@@ -525,19 +548,63 @@ object DMFluxoCaixa: TDMFluxoCaixa
   end
   object qSaldo: TSQLQuery
     MaxBlobSize = -1
-    Params = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptUnknown
+      end>
     SQL.Strings = (
-      'SELECT SUM(S.vlr_saldo) VLR_SALDO'
-      'FROM SALDO_CONTA S'
-      'INNER JOIN CONTAS C'
-      'ON S.ID_CONTA = C.ID'
-      'WHERE (C.TIPO_CONTA = '#39'C'#39')'
-      '  or (C.TIPO_CONTA = '#39'B'#39')')
+      'select sum(S.VLR_SALDO) VLR_SALDO'
+      'from SALDO_CONTA S'
+      'inner join CONTAS C on S.ID_CONTA = C.ID'
+      'where (C.TIPO_CONTA = '#39'C'#39') or (C.TIPO_CONTA = '#39'B'#39') and'
+      '      C.FILIAL = :FILIAL ')
     SQLConnection = dmDatabase.scoDados
-    Left = 328
-    Top = 232
+    Left = 280
+    Top = 160
     object qSaldoVLR_SALDO: TFloatField
       FieldName = 'VLR_SALDO'
     end
+  end
+  object sdsFilial: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM FILIAL'#13#10'WHERE INATIVO = '#39'N'#39
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 56
+    Top = 160
+  end
+  object dspFilial: TDataSetProvider
+    DataSet = sdsFilial
+    Left = 88
+    Top = 160
+  end
+  object cdsFilial: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspFilial'
+    Left = 120
+    Top = 160
+    object cdsFilialID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsFilialNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsFilialNOME_INTERNO: TStringField
+      FieldName = 'NOME_INTERNO'
+      Size = 30
+    end
+  end
+  object dsFilial: TDataSource
+    DataSet = cdsFilial
+    Left = 152
+    Top = 160
   end
 end
