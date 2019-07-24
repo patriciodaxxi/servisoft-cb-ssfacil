@@ -1,6 +1,6 @@
 object fMenu: TfMenu
-  Left = 249
-  Top = 0
+  Left = 174
+  Top = 41
   Width = 837
   Height = 686
   Caption = 'Menu'
@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 635
+    Height = 627
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -580,6 +580,10 @@ object fMenu: TfMenu
       object ConsultaEstoquedeTerceiroeEmTerceiro1: TMenuItem
         Caption = 'Consulta Estoque de Terceiro e Em Terceiro'
         OnClick = ConsultaEstoquedeTerceiroeEmTerceiro1Click
+      end
+      object ConsultaEstoqueDimenses1: TMenuItem
+        Caption = 'Consulta Estoque (Dimens'#245'es)'
+        OnClick = ConsultaEstoqueDimenses1Click
       end
       object N49: TMenuItem
         Caption = '-'
