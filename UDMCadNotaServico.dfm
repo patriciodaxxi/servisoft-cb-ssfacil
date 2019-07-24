@@ -3609,25 +3609,28 @@ object DMCadNotaServico: TDMCadNotaServico
       ' RT.NOME NOME_REGIME_TRIBUTACAO, FIL.email EMAIL_FIL_CADASTRO,'#13#10 +
       'CID_TRIB.codmunicipio COD_MUNICIPIO_TRIB, COND.nome NOME_CONDPGT' +
       'O, TCOB.nome NOME_TIPOCOBRANCA, SER.COD_SERVICO_EQUIV,'#13#10'UF.CODUF' +
-      ' CODUF_FIL, UF2.coduf CODUF_CLI'#13#10'FROM NOTASERVICO NS'#13#10'INNER JOIN' +
-      ' PESSOA CLI  ON (NS.ID_CLIENTE = CLI.CODIGO)'#13#10'INNER JOIN SERVICO' +
-      ' SER ON (NS.ID_SERVICO = SER.ID)'#13#10'INNER JOIN FILIAL FIL ON (NS.F' +
-      'ILIAL = FIL.ID)'#13#10'LEFT JOIN UF ON FIL.UF = UF.UF'#13#10'LEFT JOIN UF UF' +
-      '2 ON CLI.UF = UF2.UF'#13#10'LEFT JOIN NFSE_NATUREZA NAT ON (NS.ID_NATU' +
-      'REZA = NAT.ID)'#13#10'LEFT JOIN CIDADE CID ON (CLI.ID_CIDADE = CID.ID)' +
-      #13#10'LEFT JOIN CIDADE CID_FIL ON (FIL.ID_CIDADE = CID_FIL.ID)'#13#10'LEFT' +
-      ' JOIN CIDADE CID_TRIB ON (NS.ID_CIDADE_TRIB = CID_TRIB.ID)'#13#10'LEFT' +
-      ' JOIN CONDPGTO CP ON (NS.ID_CONDPGTO = CP.ID)'#13#10'LEFT JOIN ATIVIDA' +
-      'DE_CID ATI ON (NS.ID_ATIVIDADe_CID = ATI.ID)'#13#10'LEFT JOIN CNAE ON ' +
-      '(NS.CNAE_NFSE = CNAE.CODIGO)'#13#10'LEFT JOIN PAIS ON (PAIS.ID = CLI.I' +
-      'D_PAIS)'#13#10'LEFT JOIN REGIME_TRIB RT ON (FIL.id_regime_trib_nfse = ' +
-      'RT.id)'#13#10'LEFT JOIN condpgto COND ON (NS.id_condpgto = COND.id)'#13#10'L' +
-      'EFT JOIN tipocobranca TCOB ON (NS.id_tipo_cobranca = TCOB.id)'#13#10#13 +
-      #10#13#10
+      ' CODUF_FIL, UF2.coduf CODUF_CLI, FIL.HOMEPAGE HOMEPAGE_FIL, fil.' +
+      'ddd2 DDD2_FIL, FIL.fone1 FONE2_FIL,'#13#10'FIL.dddfax DDDFAX_FIL, FIL.' +
+      'FAX FAX_FIL, RT2.CODIGO COD_REGIME_TRIB_FIL, CLI.dddfone2 DDD2_C' +
+      'LI, CLI.TELEFONE2 FONE2_CLI'#13#10'FROM NOTASERVICO NS'#13#10'INNER JOIN PES' +
+      'SOA CLI  ON (NS.ID_CLIENTE = CLI.CODIGO)'#13#10'INNER JOIN SERVICO SER' +
+      ' ON (NS.ID_SERVICO = SER.ID)'#13#10'INNER JOIN FILIAL FIL ON (NS.FILIA' +
+      'L = FIL.ID)'#13#10'LEFT JOIN UF ON FIL.UF = UF.UF'#13#10'LEFT JOIN UF UF2 ON' +
+      ' CLI.UF = UF2.UF'#13#10'LEFT JOIN NFSE_NATUREZA NAT ON (NS.ID_NATUREZA' +
+      ' = NAT.ID)'#13#10'LEFT JOIN CIDADE CID ON (CLI.ID_CIDADE = CID.ID)'#13#10'LE' +
+      'FT JOIN CIDADE CID_FIL ON (FIL.ID_CIDADE = CID_FIL.ID)'#13#10'LEFT JOI' +
+      'N CIDADE CID_TRIB ON (NS.ID_CIDADE_TRIB = CID_TRIB.ID)'#13#10'LEFT JOI' +
+      'N CONDPGTO CP ON (NS.ID_CONDPGTO = CP.ID)'#13#10'LEFT JOIN ATIVIDADE_C' +
+      'ID ATI ON (NS.ID_ATIVIDADe_CID = ATI.ID)'#13#10'LEFT JOIN CNAE ON (NS.' +
+      'CNAE_NFSE = CNAE.CODIGO)'#13#10'LEFT JOIN PAIS ON (PAIS.ID = CLI.ID_PA' +
+      'IS)'#13#10'LEFT JOIN REGIME_TRIB RT ON (FIL.id_regime_trib_nfse = RT.i' +
+      'd)'#13#10'LEFT JOIN REGIME_TRIB RT2 ON (FIL.id_regime_trib = RT2.id)'#13#10 +
+      'LEFT JOIN condpgto COND ON (NS.id_condpgto = COND.id)'#13#10'LEFT JOIN' +
+      ' tipocobranca TCOB ON (NS.id_tipo_cobranca = TCOB.id)'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 400
+    Left = 399
     Top = 72
   end
   object dspNotaServico_Imp: TDataSetProvider
@@ -4196,6 +4199,34 @@ object DMCadNotaServico: TDMCadNotaServico
     object cdsNotaServico_ImpCODUF_CLI: TStringField
       FieldName = 'CODUF_CLI'
       Size = 2
+    end
+    object cdsNotaServico_ImpHOMEPAGE_FIL: TStringField
+      FieldName = 'HOMEPAGE_FIL'
+      Size = 250
+    end
+    object cdsNotaServico_ImpDDD2_FIL: TIntegerField
+      FieldName = 'DDD2_FIL'
+    end
+    object cdsNotaServico_ImpFONE2_FIL: TStringField
+      FieldName = 'FONE2_FIL'
+      Size = 15
+    end
+    object cdsNotaServico_ImpDDDFAX_FIL: TIntegerField
+      FieldName = 'DDDFAX_FIL'
+    end
+    object cdsNotaServico_ImpFAX_FIL: TStringField
+      FieldName = 'FAX_FIL'
+      Size = 15
+    end
+    object cdsNotaServico_ImpCOD_REGIME_TRIB_FIL: TIntegerField
+      FieldName = 'COD_REGIME_TRIB_FIL'
+    end
+    object cdsNotaServico_ImpDDD2_CLI: TIntegerField
+      FieldName = 'DDD2_CLI'
+    end
+    object cdsNotaServico_ImpFONE2_CLI: TStringField
+      FieldName = 'FONE2_CLI'
+      Size = 15
     end
   end
   object dsNotaServico_Imp: TDataSource
@@ -5553,8 +5584,6 @@ object DMCadNotaServico: TDMCadNotaServico
         DataSetName = 'frxDBDataset1'
       end
       item
-        DataSet = DMCadRecibo.frxmImpNota
-        DataSetName = 'frxmImpNota'
       end
       item
         DataSet = DMCadRecibo.frxDBDataset5
@@ -5621,8 +5650,6 @@ object DMCadNotaServico: TDMCadNotaServico
         Height = 83.149660000000000000
         Top = 177.637910000000000000
         Width = 718.110700000000000000
-        DataSet = DMCadRecibo.frxmImpNota
-        DataSetName = 'frxmImpNota'
         RowCount = 0
         StartNewPage = True
         object Shape2: TfrxShapeView

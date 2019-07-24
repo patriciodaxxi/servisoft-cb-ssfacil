@@ -1450,6 +1450,14 @@ type
     qParametros_ComCOMISSAO_DESCONTAR_PIS: TStringField;
     qParametros_ComID: TIntegerField;
     qParametros_ComUSA_CONFIG_IND: TStringField;
+    cdsNotaServico_ImpHOMEPAGE_FIL: TStringField;
+    cdsNotaServico_ImpDDD2_FIL: TIntegerField;
+    cdsNotaServico_ImpFONE2_FIL: TStringField;
+    cdsNotaServico_ImpDDDFAX_FIL: TIntegerField;
+    cdsNotaServico_ImpFAX_FIL: TStringField;
+    cdsNotaServico_ImpCOD_REGIME_TRIB_FIL: TIntegerField;
+    cdsNotaServico_ImpDDD2_CLI: TIntegerField;
+    cdsNotaServico_ImpFONE2_CLI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaServicoNewRecord(DataSet: TDataSet);
     procedure cdsNotaServicoBeforePost(DataSet: TDataSet);

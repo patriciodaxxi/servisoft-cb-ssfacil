@@ -120,6 +120,7 @@ object frmCadFilial: TfrmCadFilial
             FieldName = 'FONE'
             Title.Alignment = taCenter
             Title.Caption = 'Fone'
+            Width = 64
             Visible = True
           end>
       end
@@ -706,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_SPED
+        ActivePage = TS_Dados
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 4
+        TabIndex = 0
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -797,8 +798,8 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'Fone (DDD/N'#186'):'
           end
           object Label17: TLabel
-            Left = 257
-            Top = 296
+            Left = 302
+            Top = 318
             Width = 70
             Height = 13
             Alignment = taRightJustify
@@ -854,7 +855,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label65: TLabel
             Left = 67
-            Top = 318
+            Top = 338
             Width = 28
             Height = 13
             Alignment = taRightJustify
@@ -862,7 +863,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label66: TLabel
             Left = 36
-            Top = 342
+            Top = 362
             Width = 59
             Height = 13
             Alignment = taRightJustify
@@ -870,7 +871,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label92: TLabel
             Left = 15
-            Top = 366
+            Top = 386
             Width = 80
             Height = 13
             Alignment = taRightJustify
@@ -891,6 +892,14 @@ object frmCadFilial: TfrmCadFilial
             Height = 13
             Alignment = taRightJustify
             Caption = 'N'#186':'
+          end
+          object Label143: TLabel
+            Left = 9
+            Top = 318
+            Width = 86
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Fone 2 (DDD/N'#186'):'
           end
           object DBEdit7: TDBEdit
             Left = 98
@@ -1025,24 +1034,24 @@ object frmCadFilial: TfrmCadFilial
             TabOrder = 18
           end
           object DBEdit13: TDBEdit
-            Left = 330
-            Top = 288
+            Left = 375
+            Top = 310
             Width = 27
             Height = 21
             CharCase = ecUpperCase
             DataField = 'DDDFAX'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 19
+            TabOrder = 21
           end
           object DBEdit14: TDBEdit
-            Left = 358
-            Top = 288
+            Left = 403
+            Top = 310
             Width = 105
             Height = 21
             CharCase = ecUpperCase
             DataField = 'FAX'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 20
+            TabOrder = 22
           end
           object DBEdit9: TDBEdit
             Left = 98
@@ -1135,30 +1144,50 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit42: TDBEdit
             Left = 98
-            Top = 311
+            Top = 331
             Width = 409
             Height = 21
             DataField = 'EMAIL'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 21
+            TabOrder = 23
           end
           object DBEdit43: TDBEdit
             Left = 98
-            Top = 334
+            Top = 354
             Width = 409
             Height = 21
             DataField = 'HOMEPAGE'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 22
+            TabOrder = 24
           end
           object DBEdit59: TDBEdit
             Left = 98
-            Top = 358
+            Top = 378
             Width = 409
             Height = 21
             DataField = 'EMAIL_FINANCEIRO'
             DataSource = DMCadFilial.dsFilial
-            TabOrder = 23
+            TabOrder = 25
+          end
+          object DBEdit92: TDBEdit
+            Left = 98
+            Top = 310
+            Width = 27
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'DDD2'
+            DataSource = DMCadFilial.dsFilial
+            TabOrder = 19
+          end
+          object DBEdit93: TDBEdit
+            Left = 126
+            Top = 310
+            Width = 105
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'FONE1'
+            DataSource = DMCadFilial.dsFilial
+            TabOrder = 20
           end
         end
         object TS_Tributos: TRzTabSheet
@@ -5281,8 +5310,8 @@ object frmCadFilial: TfrmCadFilial
           object pnlCusto: TPanel
             Left = 0
             Top = 0
-            Width = 1078
-            Height = 513
+            Width = 1086
+            Height = 521
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -5292,7 +5321,7 @@ object frmCadFilial: TfrmCadFilial
             object gbxCustoVenda: TRzGroupBox
               Left = 25
               Top = 15
-              Width = 558
+              Width = 566
               Height = 226
               Anchors = [akLeft, akTop, akRight]
               BorderColor = clNavy
@@ -5468,7 +5497,7 @@ object frmCadFilial: TfrmCadFilial
             object RzGroupBox3: TRzGroupBox
               Left = 257
               Top = 15
-              Width = 558
+              Width = 566
               Height = 226
               Anchors = [akLeft, akTop, akRight]
               BorderColor = clNavy
