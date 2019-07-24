@@ -304,7 +304,7 @@ end;
 procedure TfRelOC.RLBand2BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 var
-  vQtdPed: Real;      
+  vQtdPed: Real;
   vTexto: String;
   vAux, I: Integer;
   vVlrTotalAux: Real;
@@ -315,11 +315,11 @@ begin
   if not PrintIt then
     exit;
 
-  if vImpSaldo then
-    vQtdPed := fDMCadPedido.cdsPedidoImp_ItensQTD_RESTANTE.AsFloat
-  else
-    vQtdPed := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat;
-  vVlrTotalAux := StrToFloat(FormatFloat('0.00',vQtdPed * fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat));
+//  if vImpSaldo then
+//    vQtdPed := fDMCadPedido.cdsPedidoImp_ItensQTD_RESTANTE.AsFloat
+//  else
+//    vQtdPed := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat;
+//  vVlrTotalAux := StrToFloat(FormatFloat('0.00',vQtdPed * fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat));
 
   vAux   := 4;
   vTexto := '0.';
@@ -334,7 +334,7 @@ begin
     vNomeAux := vNomeAux + ' TAM. ' + fDMCadPedido.cdsPedidoImp_ItensTAMANHO.AsString;
   RLMemo3.Lines.Text := vNomeAux;
 
-  vVlr_Total := StrToFloat(FormatFloat('0.00',vVlr_Total + vVlrTotalAux));
+//  vVlr_Total := StrToFloat(FormatFloat('0.00',vVlr_Total + vVlrTotalAux));
 end;
 
 procedure TfRelOC.RLBand5BeforePrint(Sender: TObject;
@@ -391,6 +391,9 @@ begin
 end;
 
 procedure TfRelOC.RLBand2AfterPrint(Sender: TObject);
+var
+  vQtdPed : Real;
+  vVlrTotalAux : Real;
 begin
   if vImpSaldo then
   begin
@@ -408,6 +411,14 @@ begin
     vVlr_Duplicata := StrToFloat(FormatFloat('0.00',vVlr_Duplicata + fDMCadPedido.cdsPedidoImp_ItensVLR_DUPLICATA.AsFloat));
     vVlr_Desconto  := StrToFloat(FormatFloat('0.00',vVlr_Desconto + fDMCadPedido.cdsPedidoImp_ItensVLR_DESCONTORATEIO.AsFloat + fDMCadPedido.cdsPedidoImp_ItensVLR_DESCONTO.AsFloat));
   end;
+  if vImpSaldo then
+    vQtdPed := fDMCadPedido.cdsPedidoImp_ItensQTD_RESTANTE.AsFloat
+  else
+    vQtdPed := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat;
+  vVlrTotalAux := StrToFloat(FormatFloat('0.00',vQtdPed * fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat));
+  
+  vVlr_Total := StrToFloat(FormatFloat('0.00',vVlr_Total + vVlrTotalAux));
+
 end;
 
 end.
