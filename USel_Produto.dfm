@@ -30,7 +30,7 @@ object frmSel_Produto: TfrmSel_Produto
     Color = 16768959
     Ctl3D = True
     ParentCtl3D = False
-    TabOrder = 1
+    TabOrder = 0
     object Label1: TLabel
       Left = 247
       Top = 12
@@ -715,7 +715,7 @@ object frmSel_Produto: TfrmSel_Produto
     Height = 25
     Align = alTop
     Color = 16768959
-    TabOrder = 0
+    TabOrder = 1
     object Label7: TLabel
       Left = 285
       Top = 10
