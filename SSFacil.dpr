@@ -816,7 +816,8 @@ uses
   UAprovacao_Ped_Item2 in 'UAprovacao_Ped_Item2.pas' {frmAprovacao_Ped_Item2},
   UConsMotivoNaoAprov in 'UConsMotivoNaoAprov.pas' {frmConsMotivoNaoAprov},
   UAltEstLocal in 'UAltEstLocal.pas' {frmAltEstLocal},
-  UDMConsClienteOBS in 'UDMConsClienteOBS.pas' {DMConsClienteOBS: TDataModule};
+  UDMConsClienteOBS in 'UDMConsClienteOBS.pas' {DMConsClienteOBS: TDataModule},
+  UConsEstoque2 in 'UConsEstoque2.pas' {frmConsEstoque2};
 
 {$R *.res}
 

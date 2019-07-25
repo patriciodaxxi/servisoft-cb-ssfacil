@@ -389,6 +389,9 @@ type
     DBEdit91: TDBEdit;
     DBCheckBox24: TDBCheckBox;
     DBCheckBox25: TDBCheckBox;
+    Label143: TLabel;
+    DBEdit92: TDBEdit;
+    DBEdit93: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

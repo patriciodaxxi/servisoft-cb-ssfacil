@@ -17,21 +17,14 @@ type
     RxDBLookupCombo1: TRxDBLookupCombo;
     RadioGroup1: TRadioGroup;
     RadioGroup2: TRadioGroup;
-    ckPrecoCusto: TCheckBox;
     CheckBox1: TCheckBox;
     btnConsultar: TNxButton;
     Label5: TLabel;
     ceIDProduto: TCurrencyEdit;
     UCControls1: TUCControls;
-    ckPrecoVenda: TCheckBox;
     Label6: TLabel;
     rxdbLocalEstoque: TRxDBLookupCombo;
-    Label8: TLabel;
-    CurrencyEdit1: TCurrencyEdit;
-    CurrencyEdit2: TCurrencyEdit;
-    Label9: TLabel;
-    ckImpAgrupado: TCheckBox;
-    btnImprimir_Est: TNxButton;
+    Imprimir: TNxButton;
     StatusBar1: TStatusBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -48,7 +41,7 @@ type
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Produto1Click(Sender: TObject);
-    procedure btnImprimir_EstClick(Sender: TObject);
+    procedure ImprimirClick(Sender: TObject);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -69,7 +62,7 @@ var
 implementation
 
 uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, USel_Grupo, USel_Produto,
-  uConsProduto_Compras;
+  uConsProduto_Compras, Math;
 
 {$R *.dfm}
 
@@ -79,43 +72,29 @@ var
 begin
   vQtdAux := 0;
   fDMConsEstoque.cdsEstoque2.Close;
-  if CheckBox1.Checked then
-    fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.ctEstoque + ' WHERE (0 = 0) '
+  if RxDBLookupCombo1.KeyValue <> '' then
+    fDMConsEstoque.sdsEstoque2.ParamByName('Filial').AsInteger := RxDBLookupCombo1.KeyValue
   else
-    fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.ctEstoque + ' WHERE (INATIVO = ' + QuotedStr('N') + ')';
-  if ceIDProduto.AsInteger > 0 then
-    fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.ID = ' + ceIDProduto.Text
+    fDMConsEstoque.sdsEstoque2.ParamByName('Filial').AsInteger := 0;
+  if edtRef.Text <> '' then
+    fDMConsEstoque.sdsEstoque2.ParamByName('REFERENCIA').AsString := '%' + trim(edtRef.Text) + '%'
   else
-  begin
-    if trim(edtRef.Text) <> '' then
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.REFERENCIA LIKE ' + QuotedStr('%'+edtRef.Text+'%')
-    else
-    begin
-      case RadioGroup1.ItemIndex of
-        0: fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTD > ' + IntToStr(vQtdAux);
-        1: fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTD < ' + IntToStr(vQtdAux);
-        2: fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND coalesce(AUX.QTD,0) < coalesce(AUX.QTD_ESTOQUE_MIN,0) ';
-      end;
-    end;
-  end;
-  if fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S' then
-  begin
-    if CurrencyEdit1.Value > 0 then
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTDGERAL >= ' + CurrencyEdit1.Text;
-    if CurrencyEdit2.Value > 0 then
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTDGERAL <= ' + CurrencyEdit2.Text;
-  end;
-  if rxdbLocalEstoque.Text <> '' then
-    fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText
-                                          + ' AND ((AUX.ID_LOCAL_ESTOQUE = ' + IntToStr(rxdbLocalEstoque.KeyValue) + ')'
-                                          + ' OR (AUX.ID_LOCAL_ESTOQUE is null))';
-  if RxDBLookupCombo1.Text <> '' then
-    fDMConsEstoque.sdsEstoque.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+    fDMConsEstoque.sdsEstoque2.ParamByName('REFERENCIA').AsString := '%%';
+    
+  if ceIDProduto.Value > 0 then
+    fDMConsEstoque.sdsEstoque2.ParamByName('ID_PRODUTO').AsInteger := ceIDProduto.AsInteger
+  else
+    fDMConsEstoque.sdsEstoque2.ParamByName('ID_PRODUTO').AsInteger := 0;
+  if rxdbLocalEstoque.KeyValue > 0 then
+    fDMConsEstoque.sdsEstoque2.ParamByName('ID_LOCAL_ESTOQUE').AsInteger := rxdbLocalEstoque.KeyValue
+  else
+    fDMConsEstoque.sdsEstoque2.ParamByName('ID_LOCAL_ESTOQUE').AsInteger := 0;
+
   case RadioGroup2.ItemIndex of
-    0: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'P';
-    1: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'M';
-    2: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'C';
-    3: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'S';
+    0: fDMConsEstoque.sdsEstoque2.ParamByName('TIPO_REG').AsString := 'P';
+    1: fDMConsEstoque.sdsEstoque2.ParamByName('TIPO_REG').AsString := 'M';
+    2: fDMConsEstoque.sdsEstoque2.ParamByName('TIPO_REG').AsString := 'C';
+    3: fDMConsEstoque.sdsEstoque2.ParamByName('TIPO_REG').AsString := 'S';
   end;
   fDMConsEstoque.cdsEstoque2.Open;
 end;
@@ -191,25 +170,18 @@ end;
 procedure TfrmConsEstoque2.SMDBGrid1GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
-  if StrToFloat(FormatFloat('0.000000',fDMConsEstoque.cdsEstoque2QTD.AsFloat)) = 0 then
+  if StrToFloat(FormatFloat('0.000000',fDMConsEstoque.cdsEstoque2SALDO.AsFloat)) = 0 then
   begin
     AFont.Color := clRed;
     AFont.Style := [];
   end
   else
-  if StrToFloat(FormatFloat('0.000000',fDMConsEstoque.cdsEstoque2QTD.AsFloat)) < 0 then
+  if StrToFloat(FormatFloat('0.000000',fDMConsEstoque.cdsEstoque2SALDO.AsFloat)) < 0 then
   begin
     AFont.Color := clRed;
     AFont.Style := [fsBold];
   end
   else
-  if StrToFloat(FormatFloat('0.000000',fDMConsEstoque.cdsEstoque2QTD.AsFloat)) <
-     StrToFloat(FormatFloat('0.000000',fDMConsEstoque.cdsEstoque2QTD_ESTOQUE_MIN.AsFloat)) then
-  begin
-    AFont.Color := clMaroon;
-    Background  := clYellow;
-    AFont.Style := [];
-  end;
 end;
 
 procedure TfrmConsEstoque2.btnConsultarClick(Sender: TObject);
@@ -328,58 +300,32 @@ begin
     fRelEstoque                := TfRelEstoque.Create(Self);
     fRelEstoque.fDMConsEstoque := fDMConsEstoque;
     fRelEstoque.vImpQtdGeral   := (fDMConsEstoque.cdsEstoque2.RecordCount > 1);
-    if (ckPrecoCusto.Checked) or (ckPrecoVenda.Checked) then
-    begin
-      fRelEstoque.vPrecoCusto := ckPrecoCusto.Checked;
-      fRelEstoque.vPrecoVenda := ckPrecoVenda.Checked;
-      fRelEstoque.RLReport2.PreviewModal;
-      fRelEstoque.RLReport2.Free;
-      FreeAndNil(fRelEstoque);
-    end
-    else
-    begin
-      fRelEstoque.RLReport1.PreviewModal;
-      fRelEstoque.RLReport1.Free;
-      FreeAndNil(fRelEstoque);
-    end;
   finally
     SMDBGrid1.EnableScroll;
   end;
 
 end;
 
-procedure TfrmConsEstoque2.btnImprimir_EstClick(Sender: TObject);
+procedure TfrmConsEstoque2.ImprimirClick(Sender: TObject);
+var
+  vArq : String;
 begin
-  if not(fDMConsEstoque.cdsEstoque2.Active) or (fDMConsEstoque.cdsEstoque2.IsEmpty) then
+  if not(fDMConsEstoque.cdsEstoque2.Active) then
   begin
-    MessageDlg('*** Efetuar pesquisa antes de imprimir!', mtError, [mbOk], 0);
+    MessageDlg('*** Deve ser feita a consulta primeiro!', mtError, [mbOk], 0);
     exit;
   end;
-
   SMDBGrid1.DisableScroll;
-  try
-    vTipo_Config_Email := 4;
-    prc_Monta_Cab;
-    fRelEstoque                := TfRelEstoque.Create(Self);
-    fRelEstoque.fDMConsEstoque := fDMConsEstoque;
-    fRelEstoque.vImpQtdGeral   := (fDMConsEstoque.cdsEstoque2.RecordCount > 1);
-    if (ckPrecoCusto.Checked) or (ckPrecoVenda.Checked) then
-    begin
-      fRelEstoque.vPrecoCusto := ckPrecoCusto.Checked;
-      fRelEstoque.vPrecoVenda := ckPrecoVenda.Checked;
-      fRelEstoque.RLReport2.PreviewModal;
-      fRelEstoque.RLReport2.Free;
-      FreeAndNil(fRelEstoque);
-    end
-    else
-    begin
-      fRelEstoque.RLReport1.PreviewModal;
-      fRelEstoque.RLReport1.Free;
-      FreeAndNil(fRelEstoque);
-    end;
-  finally
-    SMDBGrid1.EnableScroll;
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Estoque_Dimensoes.fr3';
+  if FileExists(vArq) then
+    fDMConsEstoque.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatorio não localizado! ' + vArq);
+    Exit;
   end;
+  fDMConsEstoque.frxReport1.variables['Opcao_Imp'] := QuotedStr(fDMConsEstoque.vDescOpcao_Rel);
+  fDMConsEstoque.frxReport1.ShowReport;
 
 end;
 

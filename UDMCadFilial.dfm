@@ -3,7 +3,7 @@ object DMCadFilial: TDMCadFilial
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Left = 307
-  Top = 20
+  Top = 19
   Height = 709
   Width = 1045
   object sdsFilial: TSQLDataSet

@@ -96,7 +96,6 @@ begin
   AddADTChield(Def, 'IE', ftString, 15);
   AddADTChield(Def, 'regimeTrib', ftString, 1);
 
-
   AClientDataSet.FieldDefs.Add('TomS', ftADT);
   Def := AClientDataSet.FieldDefs.Find('TomS');
   AddADTChield(Def, 'CPF', ftString, 11);
@@ -221,7 +220,6 @@ begin
   AddADTChield(Def2, 'vISS', ftFloat);
   AddADTChield(Def2, 'vBCSTISS', ftFloat);
   AddADTChield(Def2, 'vSTISS', ftFloat);
-
 
   AClientDataSet.FieldDefs.Add('faturas', ftDataSet);
   Def := AClientDataSet.FieldDefs.Find('faturas');

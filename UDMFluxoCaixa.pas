@@ -79,6 +79,13 @@ type
     cdsAtrasadoNOME_ORCAMENTO: TStringField;
     qSaldo: TSQLQuery;
     qSaldoVLR_SALDO: TFloatField;
+    sdsFilial: TSQLDataSet;
+    dspFilial: TDataSetProvider;
+    cdsFilial: TClientDataSet;
+    cdsFilialID: TIntegerField;
+    cdsFilialNOME: TStringField;
+    cdsFilialNOME_INTERNO: TStringField;
+    dsFilial: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

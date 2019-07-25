@@ -82,61 +82,67 @@ begin
   vCds.Insert;
   //vCds.FieldByName('Id.cNFS-e').AsString := '         '; //ver
   vCds.FieldByName('Id.cNFS-e').AsString := fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString;
-  vCds.FieldByName('Id.natOp').AsString  := 'Prestacao de Servicos';
-  vCds.FieldByName('Id.mod').AsString    := '55';
+  //vCds.FieldByName('Id.natOp').AsString  := 'Prestacao de Servicos'; //24/07/2019
+  //vCds.FieldByName('Id.mod').AsString    := '55'; //24/07/2019
+  vCds.FieldByName('Id.mod').AsString    := '90';
   vCds.FieldByName('Id.serie').AsString := trim(fDMCadNotaServico.cdsNotaServico_ImpSERIE.AsString);
   vCds.FieldByName('Id.nNFS-e').AsString := fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString;
   //DecodeDate(fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime,ano,mes,dia);
   //vAux := FormatFloat('0000',ano) + '-' + FormatFloat('00',mes) + '-' + FormatFloat('00',dia);
   //vCds.FieldByName('Id.dEmi').AsDateTime := StrToDate(FormatDateTime('YYYY-MM-DD',StrToDate(vAux)));
-  vCds.FieldByName('Id.dEmi').AsDateTime := fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime;
-
-  //vCds.FieldByName('Id.hEmi').AsString := ''
+  //vCds.FieldByName('Id.dEmi').AsDateTime := fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime; 24/07/2019
+  vCds.FieldByName('Id.dEmi').AsDateTime := StrToDate(FormatDateTime('YYYY-MM-DD',fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime));
   vCds.FieldByName('Id.hEmi').AsString := FormatDateTime('HH:MM',Now);
-  //vCds.FieldByName('Id.dSaiEnt').AsString := ''
   vCds.FieldByName('Id.tpNF').AsString   := '1';
-  if trim(fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString) <> '' then
-    vCds.FieldByName('Id.cMunFG').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString;
+  //if trim(fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString) <> '' then 24/07/2019
+  //  vCds.FieldByName('Id.cMunFG').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString;  24/07/2019
   //vCds.FieldByName('Id.refNF').AsString := ''
-  //vCds.FieldByName('Id.tpImp').AsString := 'N'; //Ver
-  //vCds.FieldByName('Id.notadebito').AsString := 'N'; //Ver
-  //vCds.FieldByName('Id.notaSub').AsString  := '';
-  //vCds.FieldByName('Id.serieSub').AsString := '';
-  //vCds.FieldByName('Id.descDesconto').AsString := ''; //Ver
-  //vCds.FieldByName('Id.descCondEsp').AsString := ''; //Ver
-  //vCds.FieldByName('Id.numeroArt').AsString := ''; //Ver
-  //vCds.FieldByName('Id.numeroCei').AsString := ''; //Ver
-  //vCds.FieldByName('Id.numeroProj').AsString := ''; //Ver
-  //vCds.FieldByName('Id.numeroMatri').AsString := ''; //Ver
-  vCds.FieldByName('Id.tpEmis').AsString := 'N'; //Ver
-  //vCds.FieldByName('Id.anulada').AsString := 'N'; //O Lucas pediu para trocar de anulada para cancelada
-  vCds.FieldByName('Id.cancelada').AsString := 'N'; //Ver
-  //vCds.FieldByName('Id.canhoto').AsString := 'N'; //Ver
+  vCds.FieldByName('Id.tpImp').AsString := '1'; //24/07/2019
+  vCds.FieldByName('Id.tpEmis').AsString := 'N'; //24/07/2019
+  vCds.FieldByName('Id.cancelada').AsString := 'N'; //24/07/2019
+  //vCds.FieldByName('Id.motCanc').AsString := ''; //24/07/2019
+  //vCds.FieldByName('Id.dataCanc').AsString := ''; //24/07/2019
+  //vCds.FieldByName('Id.notadebito').AsString := ''; //24/07/2019
+  //vCds.FieldByName('Id.notaSub').AsString := ''; //24/07/2019
+  //vCds.FieldByName('Id.canhoto').AsString := ''; //24/07/2019
+  vCds.FieldByName('Id.ambienteEmi').AsString := '1'; //24/07/2019
+  vCds.FieldByName('Id.formaEmi').AsString := '2'; //24/07/2019
+  //vCds.FieldByName('Id.empreitadaGlobal').AsString := '1'; //24/07/2019  verificar
+  vCds.FieldByName('Id.codRPS').AsString := ''; //24/07/2019
+  vCds.FieldByName('Id.rps').AsString := ''; //24/07/2019
+  vCds.FieldByName('Id.serierps').AsString := ''; //24/07/2019
+  //vCds.FieldByName('Id.dataEmissaoRpsPapel').AsString := ''; //24/07/2019
+  vCds.FieldByName('Id.enviarEmail').AsString := 'N'; //24/07/2019
+  vCds.FieldByName('Id.chaveAcessoSubstituida').AsString := ''; //24/07/2019
 
-  //Emitente
-  vCds.FieldByName('emit.CNPJ').AsString  := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCNPJ_CPF_FIL.AsString,14);
-  vCds.FieldByName('emit.xNome').AsString := fDMCadNotaServico.cdsNotaServico_ImpNOME_FIL.AsString;
-  vCds.FieldByName('emit.xFant').AsString := fDMCadNotaServico.cdsNotaServico_ImpFANTASIA_FIL.AsString;
-  vCds.FieldByName('emit.IM').AsString := fDMCadNotaServico.cdsNotaServico_ImpINSCMUNICIPAL_FIL.AsString;
-  vCds.FieldByName('emit.end.xLgr').AsString := fDMCadNotaServico.cdsNotaServico_ImpENDERECO_FIL.AsString;
-  vCds.FieldByName('emit.end.nro').AsString := fDMCadNotaServico.cdsNotaServico_ImpNUM_END_FIL.AsString;
-  vCds.FieldByName('emit.end.xCpl').AsString := fDMCadNotaServico.cdsNotaServico_ImpCOMPLEMENTO_END_FIL.AsString;
-  vCds.FieldByName('emit.end.xBairro').AsString := fDMCadNotaServico.cdsNotaServico_ImpBAIRRO_FIL.AsString;
-  vCds.FieldByName('emit.end.cMun').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_FIL.AsString;
-  vCds.FieldByName('emit.end.xMun').AsString := fDMCadNotaServico.cdsNotaServico_ImpCIDADE_FIL.AsString;
-  vCds.FieldByName('emit.end.UF').AsString := fDMCadNotaServico.cdsNotaServico_ImpUF_FIL.AsString;
-  vCds.FieldByName('emit.end.CEP').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCEP_FIL.AsString,8);
-  vCds.FieldByName('emit.end.cPais').AsString := '1058';
-  vCds.FieldByName('emit.end.xPais').AsString := 'Brasil';
+  //Prestador 
+  vCds.FieldByName('prest.CNPJ').AsString  := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCNPJ_CPF_FIL.AsString,14);
+  vCds.FieldByName('prest.xNome').AsString := fDMCadNotaServico.cdsNotaServico_ImpNOME_FIL.AsString;
+  vCds.FieldByName('prest.xFant').AsString := fDMCadNotaServico.cdsNotaServico_ImpFANTASIA_FIL.AsString;
+  vCds.FieldByName('prest.IM').AsString := fDMCadNotaServico.cdsNotaServico_ImpINSCMUNICIPAL_FIL.AsString;
+  vCds.FieldByName('prest.xEmail').AsString := copy(fDMCadNotaServico.cdsNotaServico_ImpEMAIL_FIL.AsString,1,50);
+  vCds.FieldByName('prest.xSite').AsString := fDMCadNotaServico.cdsNotaServico_ImpHOMEPAGE_FIL.AsString;
+
+  //Endereço Prestador
+  vCds.FieldByName('prest.end.xLgr').AsString := fDMCadNotaServico.cdsNotaServico_ImpENDERECO_FIL.AsString;
+  vCds.FieldByName('prest.end.nro').AsString := fDMCadNotaServico.cdsNotaServico_ImpNUM_END_FIL.AsString;
+  vCds.FieldByName('prest.end.xCpl').AsString := fDMCadNotaServico.cdsNotaServico_ImpCOMPLEMENTO_END_FIL.AsString;
+  vCds.FieldByName('prest.end.xBairro').AsString := fDMCadNotaServico.cdsNotaServico_ImpBAIRRO_FIL.AsString;
+  vCds.FieldByName('prest.end.cMun').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_FIL.AsString;
+  vCds.FieldByName('prest.end.xMun').AsString := fDMCadNotaServico.cdsNotaServico_ImpCIDADE_FIL.AsString;
+  vCds.FieldByName('prest.end.UF').AsString := fDMCadNotaServico.cdsNotaServico_ImpUF_FIL.AsString;
+  vCds.FieldByName('prest.end.CEP').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCEP_FIL.AsString,8);
+  vCds.FieldByName('prest.end.cPais').AsString := '1058';
+  vCds.FieldByName('prest.end.xPais').AsString := 'Brasil';
+
   if trim(fDMCadNotaServico.cdsNotaServico_ImpFONE_FIL.AsString) <> '' then
-    vCds.FieldByName('emit.end.fone').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD_FIL.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE_FIL.AsString,0);
-  if trim(fDMCadNotaServico.cdsNotaServico_ImpINSCR_EST_FIL.AsString) <> '' then
-    vCds.FieldByName('emit.end.IE').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpINSCR_EST_FIL.AsString,0);
-  //vCds.FieldByName('emit.end.IEST').AsString := '';
-  //vCds.FieldByName('emit.end.IMSTS').AsString := '';
-  //vCds.FieldByName('emit.end.ddi').AsString := ''; //Verificar
-  //vCds.FieldByName('emit.end.ddi2').AsString := ''; //Verificar
+    vCds.FieldByName('prest.fone').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD_FIL.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE_FIL.AsString,0);
+  if trim(fDMCadNotaServico.cdsNotaServico_ImpFONE_FIL.AsString) <> '' then
+    vCds.FieldByName('prest.fone2').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD2_FIL.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE2_FIL.AsString,0);
+  vCds.FieldByName('prest.IE').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpINSCR_EST_FIL.AsString,0);
+  vCds.FieldByName('prest.regimeTrib').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCOD_REGIME_TRIB_FIL.AsString,0);
 
+  //Tomador 24/07/2019
   if fDMCadNotaServico.cdsNotaServico_ImpPESSOA_CLI.AsString = 'F' then
     vCds.FieldByName('TomS.CPF').AsString  := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCNPJ_CPF_CLI.AsString,11)
   else
@@ -146,6 +152,8 @@ begin
     vCds.FieldByName('TomS.xNome').AsString := fDMCadNotaServico.cdsNotaServico_ImpNOME_CLIENTE_CONS.AsString
   else
     vCds.FieldByName('TomS.xNome').AsString := fDMCadNotaServico.cdsNotaServico_ImpNOME_CLIENTE.AsString;
+
+
   if trim(fDMCadNotaServico.cdsNotaServico_ImpENDERECO_CLI.AsString) <> '' then
     vCds.FieldByName('TomS.ender.xLgr').AsString := fDMCadNotaServico.cdsNotaServico_ImpENDERECO_CLI.AsString;
   if trim(fDMCadNotaServico.cdsNotaServico_ImpNUM_END_CLI.AsString) <> '' then
@@ -166,23 +174,22 @@ begin
     vCds.FieldByName('TomS.ender.cPais').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCODPAIS_CLI.AsString,0);
   if trim(fDMCadNotaServico.cdsNotaServico_ImpNOME_PAIS_CLI.AsString) <> '' then
     vCds.FieldByName('TomS.ender.xPais').AsString := fDMCadNotaServico.cdsNotaServico_ImpNOME_PAIS_CLI.AsString;
-  vCds.FieldByName('TomS.ender.fone').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD_CLI.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE_CLI.AsString,0);
-  //vCds.FieldByName('TomS.ender.ddi').AsString := '';  Verificar
-  //vCds.FieldByName('TomS.ender.ddi2').AsString := ''; Verificar
-  //vCds.FieldByName('TomS.ender.xEMAIL').AsString := fDMCadNotaServico.cdsNotaServico_ImpEMAIL_CLI.AsString;
+
   vCds.FieldByName('TomS.xEMAIL').AsString := fDMCadNotaServico.cdsNotaServico_ImpEMAIL_CLI.AsString;
   if trim(fDMCadNotaServico.cdsNotaServico_ImpINSC_ESTADUAL_CLI.AsString) <> '' then
-    //vCds.FieldByName('TomS.ender.IE').AsString := fDMCadNotaServico.cdsNotaServico_ImpINSC_ESTADUAL_CLI.AsString;
     vCds.FieldByName('TomS.IE').AsString := fDMCadNotaServico.cdsNotaServico_ImpINSC_ESTADUAL_CLI.AsString;
   if trim(fDMCadNotaServico.cdsNotaServico_ImpINSC_MUNICIPAL_CLI.AsString) <> '' then
-    //vCds.FieldByName('TomS.ender.IM').AsString := fDMCadNotaServico.cdsNotaServico_ImpINSC_MUNICIPAL_CLI.AsString;
-    vCds.FieldByName('TomS.IM').AsString := fDMCadNotaServico.cdsNotaServico_ImpINSC_MUNICIPAL_CLI.AsString;
-  //vCds.FieldByName('TomS.ender.IMSTS').AsString := ''; Verificar
+    vCds.FieldByName('TomS.IM').AsString  := fDMCadNotaServico.cdsNotaServico_ImpINSC_MUNICIPAL_CLI.AsString;
+  vCds.FieldByName('TomS.IME').AsString   := '';
+  vCds.FieldByName('TomS.fone').AsString  := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD_CLI.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE_CLI.AsString,0);
+  vCds.FieldByName('TomS.fone2').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD2_CLI.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE2_CLI.AsString,0);
 
-  if fDMCadNotaServico.cdsNotaServico_ImpID_CIDADE_TRIB.AsInteger > 0 then
-    vCds.FieldByName('TomS.Praca').AsString := fDMCadNotaServico.cdsNotaServico_ImpCIDADE_TRIB.AsString + '-' + fDMCadNotaServico.cdsNotaServico_ImpUF_TRIB.AsString
-  else
-    vCds.FieldByName('TomS.Praca').AsString := fDMCadNotaServico.cdsNotaServico_ImpCIDADE_FIL.AsString + '-' + fDMCadNotaServico.cdsNotaServico_ImpUF_FIL.AsString;
+  //24/07/2019 não vai usar a praça
+  //if fDMCadNotaServico.cdsNotaServico_ImpID_CIDADE_TRIB.AsInteger > 0 then
+    //vCds.FieldByName('TomS.Praca').AsString := fDMCadNotaServico.cdsNotaServico_ImpCIDADE_TRIB.AsString + '-' + fDMCadNotaServico.cdsNotaServico_ImpUF_TRIB.AsString
+  //else
+    //vCds.FieldByName('TomS.Praca').AsString := fDMCadNotaServico.cdsNotaServico_ImpCIDADE_FIL.AsString + '-' + fDMCadNotaServico.cdsNotaServico_ImpUF_FIL.AsString;
+
   fDMCadNotaServico.cdsNotaServico_Imp_Itens.Close;
   fDMCadNotaServico.sdsNotaServico_Imp_Itens.ParamByName('ID').AsInteger := fDMCadNotaServico.cdsNotaServico_ImpID.AsInteger;
   fDMCadNotaServico.cdsNotaServico_Imp_Itens.Open;
@@ -207,17 +214,19 @@ begin
     Det.NestedDataSet.Insert;
     Det.NestedDataSet.fieldbyname('nItem').asstring := fDMCadNotaServico.cdsNotaServico_Imp_ItensITEM.AsString;
 
-    //Det.NestedDataSet.FieldByName('serv.cServ').AsString := fDMCadNotaServico.cdsNotaServico_Imp_ItensID_SERVICO_INT.AsString; //ver aqui
     Det.NestedDataSet.FieldByName('serv.cServ').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCOD_SERVICO.AsString,0);
-
-    Det.NestedDataSet.FieldByName('serv.xServ').AsString := fDMCadNotaServico.cdsNotaServico_Imp_ItensNOME_SERVICO_INT.AsString; //ver aqui
+    Det.NestedDataSet.FieldByName('serv.xServ').AsString := fDMCadNotaServico.cdsNotaServico_Imp_ItensNOME_SERVICO_INT.AsString; 
+    if fDMCadNotaServico.cdsNotaServico_ImpID_CIDADE_TRIB.AsInteger > 0 then
+      Det.NestedDataSet.FieldByName('serv.localTributacao').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString
+    else
+      Det.NestedDataSet.FieldByName('serv.localTributacao').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_FIL.AsString;
+    Det.NestedDataSet.FieldByName('serv.localVerifResServ').AsString := '1';
     Det.NestedDataSet.FieldByName('serv.uTrib').AsString := 'UN';
-    //vAux := Replace(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensQTD.AsFloat),',','.');
-    //Det.NestedDataSet.FieldByName('serv.qTrib').AsString := vAux;
-    Det.NestedDataSet.FieldByName('serv.qTrib').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensQTD.AsFloat));
+    Det.NestedDataSet.FieldByName('serv.qTrib').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensQTD.AsFloat));
     Det.NestedDataSet.FieldByName('serv.vUnit').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_UNITARIO.AsFloat));
     Det.NestedDataSet.FieldByName('serv.vServ').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_TOTAL.AsFloat));
-    //vCds.FieldByName('det.serv.vDesc').AsString := '0'
+    Det.NestedDataSet.FieldByName('serv.vDesc').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_DESCONTO_INC.AsFloat));
+
     if fDMCadNotaServico.cdsNotaServico_Imp_ItensCALCULAR_ISSQN.AsString = 'S' then
     begin
       Det.NestedDataSet.FieldByName('serv.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensBASE_CALCULO.AsFloat));
@@ -230,95 +239,95 @@ begin
       Det.NestedDataSet.FieldByName('serv.pISS').AsFloat   := StrToFloat(FormatFloat('0.00',0));
       Det.NestedDataSet.FieldByName('serv.vISS').AsFloat   := StrToFloat(FormatFloat('0.00',0));
     end;
-    //Det.NestedDataSet.FieldByName('serv.pISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensPERC_ALIQUOTA.AsFloat));
     if fDMCadNotaServico.cdsNotaServico_ImpRETEM_INSS.AsString  = 'S' then
     begin
       Det.NestedDataSet.FieldByName('serv.pRetINSS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_INSS.AsFloat));
       Det.NestedDataSet.FieldByName('serv.vRetINSS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_INSS.AsFloat));
     end;
-    //não preencher se não tiver valor
-    //Det.NestedDataSet.FieldByName('serv.vRed').AsFloat := 0;
-    //ver depois 24/11/2014
+    //Det.NestedDataSet.FieldByName('serv.vRed').AsFloat := StrToFloat(FormatFloat('0.00',0));
+    Det.NestedDataSet.FieldByName('serv.vRed').AsFloat := StrToFloat(FormatFloat('0.00',0));
+    if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_IR.AsFloat)) > 0 then
+    begin
+      Det.NestedDataSet.FieldByName('serv.vBCRetIR').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_TOTAL.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.pRetIRF').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_IR.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.vRetIRF').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_IR.AsFloat));
+    end;
+    if (fDMCadNotaServico.cdsNotaServico_ImpRETEM_PISCOFINS.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_COFINS.AsFloat)) > 0) then
+    begin
+      Det.NestedDataSet.FieldByName('serv.vBCCOFINS').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_TOTAL.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.pRetCOFINS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_COFINS_FIL.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.vRetCOFINS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_COFINS.AsFloat));
+    end;
+    if (fDMCadNotaServico.cdsNotaServico_ImpRETEM_CSLL.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_CSLL.AsFloat)) > 0) then
+    begin
+      Det.NestedDataSet.FieldByName('serv.vBCCSLL').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_TOTAL.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.pRetCSLL').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_CSLL_FIL.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.vRetCSLL').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_CSLL.AsFloat));
+    end;
+    if (fDMCadNotaServico.cdsNotaServico_ImpRETEM_PISCOFINS.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_PIS.AsFloat)) > 0) then
+    begin
+      Det.NestedDataSet.FieldByName('serv.vBCPISPASEP').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_TOTAL.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.pRetPISPASEP').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_PIS_FIL.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.vRetPISPASEP').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_PIS.AsFloat));
+    end;
     if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_TRIBUTO.AsFloat)) > 0 then
       Det.NestedDataSet.FieldByName('serv.totalAproxTribServ').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_TRIBUTO.AsFloat));
+    //Det.NestedDataSet.FieldByName('serv.xPed').AsString := '';
+    //Det.NestedDataSet.FieldByName('serv.nItemPed').AsString := '';
+
+    //Det.NestedDataSet.FieldByName('ISSST.vRedBCST').AsFloat := StrToFloat(FormatFloat('0.00',0));
+    //Det.NestedDataSet.FieldByName('ISSST.vBCST').AsFloat    := StrToFloat(FormatFloat('0.00',0));
+    //Det.NestedDataSet.FieldByName('ISSST.pISSST').AsFloat   := StrToFloat(FormatFloat('0.00',0));
+    //Det.NestedDataSet.FieldByName('ISSST.vISSST').AsFloat   := StrToFloat(FormatFloat('0.00',0));
+
     Det.NestedDataSet.Post;
 
     fDMCadNotaServico.cdsNotaServico_Imp_Itens.Next;
   end;
 
-  //Iss por substituição tributária
-  //vCds.FieldByName('ISSST.pRedBCST').AsString := '0.00';
-  //vCds.FieldByName('ISSST.vRedBCST').AsString := '0.00';
-  //vCds.FieldByName('ISSST.vBCST').AsString    := '0.00';
-  //vCds.FieldByName('ISSST.pISSST').AsString   := '0.00';
-  //vCds.FieldByName('ISSST.vISSST').AsString   := '0.00';
-
-  //vCds.FieldByName('total.vReemb').AsString := '0.00'
-  //vAux := Replace(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_SERVICOS.AsFloat),',','.');
-  vCds.FieldByName('total.vServ').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_SERVICOS.AsFloat));
+  vCds.FieldByName('total.vServ').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_SERVICOS.AsFloat));
+  //vCds.FieldByName('total.vReemb').AsFloat := StrToFloat(FormatFloat('0.00',0));
+  //vCds.FieldByName('total.vRedBCCivil').AsFloat := StrToFloat(FormatFloat('0.00',0));
   if (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_DESCONTO_COND.AsFloat)) > 0) or (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_DESCONTO_INC.AsFloat)) > 0)then
   begin
-    vVlrAux := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_DESCONTO_COND.AsFloat + fDMCadNotaServico.cdsNotaServico_ImpVLR_DESCONTO_INC.AsFloat));
+    vVlrAux := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_DESCONTO_INC.AsFloat));
     vCds.FieldByName('total.vDesc').AsFloat := vVlrAux;
   end;
-  vCds.FieldByName('total.vOutro').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_OUTRAS_DESPESAS.AsFloat));
   vCds.FieldByName('total.vtNF').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TOTAL.AsFloat));
-  vCds.FieldByName('total.vtLiq').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_LIQUIDO_NFSE.AsFloat));
-  //Tirar por enquanto 24/11/2014
+  vCds.FieldByName('total.vtLiq').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_LIQUIDO_NFSE.AsFloat));
   if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO.AsFloat)) > 0 then
     vCds.FieldByName('total.totalAproxTrib').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO.AsFloat));
 
-  //vCds.FieldByName('Ret.xRetIRF').AsString := '';
   if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_IR.AsFloat)) > 0 then
-  begin
-    vCds.FieldByName('total.Ret.pRetIRF').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_IR.AsFloat));
-    vCds.FieldByName('total.Ret.vRetIRF').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_IR.AsFloat));
-  end;
+    vCds.FieldByName('total.Ret.vRetIR').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_IR.AsFloat));
   if (fDMCadNotaServico.cdsNotaServico_ImpRETEM_PISCOFINS.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_PIS.AsFloat)) > 0) then
-  begin
-    //vCds.FieldByName('Ret.xRetLei10833-PIS-PASEP').AsString := '';
-    vCds.FieldByName('total.Ret.pRetLei10833-PIS-PASEP').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_PIS_FIL.AsFloat));
-    vCds.FieldByName('total.Ret.vRetLei10833-PIS-PASEP').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_PIS.AsFloat));
-
-    //vCds.FieldByName('Ret.xRetLei10833-COFINS').AsString := '';
-    vCds.FieldByName('total.Ret.pRetLei10833-COFINS').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_COFINS_FIL.AsFloat));
-    vCds.FieldByName('total.Ret.vRetLei10833-COFINS').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_COFINS.AsFloat));
-  end;
-
-  if (StrToFloat(FormatFloat('0.0000',fDMCadNotaServico.cdsNotaServico_ImpVLR_CSLL.AsFloat)) > 0) then
-  begin
-    //vCds.FieldByName('Ret.xRetLei10833-CSLL').AsString := '';
-    vCds.FieldByName('total.Ret.pRetLei10833-CSLL').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_CSLL_FIL.AsFloat));
-    vCds.FieldByName('total.Ret.vRetLei10833-CSLL').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_CSLL.AsFloat));
-  end;
-
+    vCds.FieldByName('total.Ret.vRetPISPASEP').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_PIS.AsFloat));
+  if (fDMCadNotaServico.cdsNotaServico_ImpRETEM_PISCOFINS.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_PIS.AsFloat)) > 0) then
+    vCds.FieldByName('total.Ret.vRetCOFINS').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_COFINS.AsFloat));
+  if (fDMCadNotaServico.cdsNotaServico_ImpRETEM_CSLL.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_CSLL.AsFloat)) > 0) then
+    vCds.FieldByName('total.Ret.vRetCSLL').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_CSLL.AsFloat));
   if (fDMCadNotaServico.cdsNotaServico_ImpRETEM_INSS.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_INSS.AsFloat)) > 0) then
-  begin
-    //vCds.FieldByName('Ret.xRetINSS').AsString := '';
     vCds.FieldByName('total.Ret.vRetINSS').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_INSS.AsFloat));
-  end;
 
-  vCds.FieldByName('total.fat.nFat').AsString  := fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString;
-  vCds.FieldByName('total.fat.vOrig').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_DUPLICATA.AsFloat));
-  //vCds.FieldByName('fat.vDesc').AsString := '';
-  vCds.FieldByName('total.fat.vLiq').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_DUPLICATA.AsFloat));
+  vCds.FieldByName('total.vtLiqFaturas-CSLL').AsFloat := 0;
+  vCds.FieldByName('total.vtDespesas-CSLL').AsFloat   := 0;
 
-  vCds.FieldByName('total.ISS.vBCISS').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpBASE_CALCULO.AsFloat));
+  vCds.FieldByName('total.ISS.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpBASE_CALCULO.AsFloat));
   if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat)) > 0 then
-    vCds.FieldByName('total.ISS.vISS').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat))
+    vCds.FieldByName('total.ISS.vISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat))
   else
   if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat)) > 0 then
-    vCds.FieldByName('total.ISS.vISS').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat));
+    vCds.FieldByName('total.ISS.vISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat));
+  //vCds.FieldByName('total.ISS.vBCSTISS').AsString := StrToFloat(FormatFloat('0.00',0));
+  //vCds.FieldByName('total.ISS.vSTISS').AsString := StrToFloat(FormatFloat('0.00',0));
 
-  //vCds.FieldByName('ISS.vBCSTISS').AsString := '';
-  //vCds.FieldByName('ISS.vSTISS').AsString   := '';
 
   fDMCadNotaServico.cdsNotaServico_Imp_Parc.Close;
   fDMCadNotaServico.sdsNotaServico_Imp_Parc.ParamByName('ID').AsInteger := fDMCadNotaServico.cdsNotaServico_ImpID.AsInteger;
   fDMCadNotaServico.cdsNotaServico_Imp_Parc.Open;
   fDMCadNotaServico.cdsNotaServico_Imp_Parc.First;
 
-  Cobr := vCds.FieldByName('cobr') as TDataSetField;
+  fat := vCds.FieldByName('faturas') as TDataSetField;
   if fDMCadNotaServico.cdsNotaServico_ImpTIPO_PRAZO.AsString = 'V' then
     prc_Montar_Cobr(fDMCadNotaServico,fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime,fDMCadNotaServico.cdsNotaServico_ImpVLR_DUPLICATA.AsFloat,1)
   else
@@ -429,13 +438,17 @@ procedure prc_Montar_Cobr(fDMCadNotaServico: TDMCadNotaServico; DtVencimento: TD
   //vAux: String;
   //ano,mes,dia: word;
 begin
-  Cobr.NestedDataSet.Insert;
-  Cobr.NestedDataSet.FieldByName('dup.nDup').AsString         := IntToStr(Parcela);
-  Cobr.NestedDataSet.FieldByName('dup.dVenc').AsDateTime := DtVencimento;
-  Cobr.NestedDataSet.FieldByName('dup.vDup').AsFloat     := StrToFloat(FormatFloat('0.00',VlrVencimento));
-  //vCds.FieldByName('cobr.dup.urlBol').AsString  := '';
-  //vCds.FieldByName('cobr.dup.bBol').AsString  := '';
-   Cobr.NestedDataSet.Post;
+  fat.NestedDataSet.Insert;
+  fat.NestedDataSet.FieldByName('fat.nItem').AsInteger  := Parcela;
+  fat.NestedDataSet.FieldByName('fat.nFat').AsString    := fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString;
+  fat.NestedDataSet.FieldByName('fat.dVenc').AsDateTime := DtVencimento;
+  fat.NestedDataSet.FieldByName('fat.vFat').AsFloat     := VlrVencimento;
+  if fDMCadNotaServico.cdsNotaServico_ImpTIPO_PRAZO.AsString = 'V' then
+    fat.NestedDataSet.FieldByName('fat.tipoVencFat').AsString := '3'
+  else
+    fat.NestedDataSet.FieldByName('fat.tipoVencFat').AsString := '1';
+  fat.NestedDataSet.FieldByName('fat.descTipoVencFat').AsString := '';
+  fat.NestedDataSet.Post;
 end;
 
 procedure prc_Inicio(fDMCadNotaServico: TDMCadNotaServico);

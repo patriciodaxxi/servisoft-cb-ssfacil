@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, NxCollection, RzPanel, Grids, DBGrids, SMDBGrid,
   RzTabs, StdCtrls, Mask, ToolEdit, CurrEdit, UDMFluxoCaixa, DB, RzDBGrid,
-  ComObj;
+  ComObj, RxLookup;
 
 type
   TfrmConsFluxoCaixa = class(TForm)
@@ -21,6 +21,8 @@ type
     DateEdit1: TDateEdit;
     SMDBGrid1: TSMDBGrid;
     btnExcel: TNxButton;
+    Label15: TLabel;
+    RxDBLookupCombo1: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -65,7 +67,15 @@ begin
     MessageDlg('*** Data de referência não informada!', mtInformation, [mbOk], 0);
     Exit;
   end;
+  if RxDBLookupCombo1.Text = '' then
+  begin
+    ShowMessage('Filial não informada!');
+    RxDBLookupCombo1.SetFocus;
+    exit;
+  end;
+
   fDMFluxoCaixa.qSaldo.Close;
+  fDMFluxoCaixa.qSaldo.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMFluxoCaixa.qSaldo.Open;
   prc_Monta_mData;
   prc_Consultar;
@@ -86,6 +96,7 @@ begin
   fDMFluxoCaixa.cdsConsulta.Close;
   fDMFluxoCaixa.sdsConsulta.ParamByName('DTINICIAL').AsDate := vDtInicio;
   fDMFluxoCaixa.sdsConsulta.ParamByName('DTFINAL').AsDate   := vDtFinal;
+  fDMFluxoCaixa.sdsConsulta.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMFluxoCaixa.cdsConsulta.Open;
 
   //Consulta dos atrasados
@@ -93,6 +104,7 @@ begin
   begin
     fDMFluxoCaixa.cdsAtrasado.Close;
     fDMFluxoCaixa.sdsAtrasado.ParamByName('DATA').AsDate := vDtInicio;
+    fDMFluxoCaixa.sdsAtrasado.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
     fDMFluxoCaixa.cdsAtrasado.Open;
   end;
 end;
@@ -101,6 +113,8 @@ procedure TfrmConsFluxoCaixa.FormShow(Sender: TObject);
 begin
   fDMFluxoCaixa := TDMFluxoCaixa.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMFluxoCaixa);
+  fDMFluxoCaixa.cdsFilial.Close;
+  fDMFluxoCaixa.cdsFilial.Open;
   DateEdit1.Date := Date;
   vSemana[1] := 'Dom';
   vSemana[2] := 'Seg';

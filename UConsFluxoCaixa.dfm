@@ -1,6 +1,6 @@
 object frmConsFluxoCaixa: TfrmConsFluxoCaixa
-  Left = 236
-  Top = 98
+  Left = 263
+  Top = 96
   Width = 928
   Height = 547
   Caption = 'frmConsFluxoCaixa'
@@ -19,28 +19,35 @@ object frmConsFluxoCaixa: TfrmConsFluxoCaixa
     Left = 0
     Top = 0
     Width = 912
-    Height = 52
+    Height = 69
     Align = alTop
     Color = clSilver
     TabOrder = 0
     object Label1: TLabel
-      Left = 16
-      Top = 12
+      Left = 15
+      Top = 31
       Width = 81
       Height = 13
       Caption = 'Data Refer'#234'ncia:'
     end
     object Label3: TLabel
-      Left = 62
-      Top = 33
+      Left = 61
+      Top = 52
       Width = 35
       Height = 13
       Alignment = taRightJustify
       Caption = 'Op'#231#227'o:'
     end
+    object Label15: TLabel
+      Left = 73
+      Top = 11
+      Width = 23
+      Height = 13
+      Caption = 'Filial:'
+    end
     object btnConsultar: TNxButton
       Left = 379
-      Top = 11
+      Top = 30
       Width = 153
       Height = 30
       Caption = 'Consultar'
@@ -112,7 +119,7 @@ object frmConsFluxoCaixa: TfrmConsFluxoCaixa
     end
     object btnImprimir: TNxButton
       Left = 536
-      Top = 11
+      Top = 30
       Width = 153
       Height = 30
       Caption = 'Imprimir'
@@ -184,7 +191,7 @@ object frmConsFluxoCaixa: TfrmConsFluxoCaixa
     end
     object CheckBox1: TCheckBox
       Left = 232
-      Top = 3
+      Top = 22
       Width = 97
       Height = 17
       Caption = 'Mostrar Pedidos'
@@ -193,7 +200,7 @@ object frmConsFluxoCaixa: TfrmConsFluxoCaixa
     end
     object ckAtrasado: TCheckBox
       Left = 256
-      Top = 28
+      Top = 47
       Width = 118
       Height = 17
       Caption = 'Mostrar atrasados'
@@ -201,7 +208,7 @@ object frmConsFluxoCaixa: TfrmConsFluxoCaixa
     end
     object ComboBox2: TComboBox
       Left = 98
-      Top = 25
+      Top = 44
       Width = 145
       Height = 21
       Style = csDropDownList
@@ -215,7 +222,7 @@ object frmConsFluxoCaixa: TfrmConsFluxoCaixa
     end
     object DateEdit1: TDateEdit
       Left = 98
-      Top = 4
+      Top = 23
       Width = 100
       Height = 21
       NumGlyphs = 2
@@ -223,7 +230,7 @@ object frmConsFluxoCaixa: TfrmConsFluxoCaixa
     end
     object btnExcel: TNxButton
       Left = 694
-      Top = 11
+      Top = 30
       Width = 153
       Height = 30
       Caption = 'Excel'
@@ -238,12 +245,25 @@ object frmConsFluxoCaixa: TfrmConsFluxoCaixa
       Transparent = True
       OnClick = btnExcelClick
     end
+    object RxDBLookupCombo1: TRxDBLookupCombo
+      Left = 98
+      Top = 2
+      Width = 284
+      Height = 22
+      DropDownCount = 8
+      Ctl3D = False
+      LookupField = 'ID'
+      LookupDisplay = 'NOME_INTERNO'
+      LookupSource = DMFluxoCaixa.dsFilial
+      ParentCtl3D = False
+      TabOrder = 7
+    end
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
-    Top = 52
+    Top = 69
     Width = 912
-    Height = 457
+    Height = 439
     Align = alClient
     Ctl3D = False
     DataSource = DMFluxoCaixa.dsmContaOrc

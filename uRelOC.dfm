@@ -1,6 +1,6 @@
 object fRelOC: TfRelOC
-  Left = 47
-  Top = 49
+  Left = 316
+  Top = 12
   Width = 873
   Height = 666
   Caption = 'Relat'#243'rio Or'#231'amento'
@@ -1670,7 +1670,7 @@ object fRelOC: TfRelOC
         Height = 14
         Alignment = taRightJustify
         AutoSize = False
-        Caption = 'Valor Frete:'
+        Caption = 'Valor Total'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11
@@ -1810,7 +1810,7 @@ object fRelOC: TfRelOC
         Height = 14
         Alignment = taRightJustify
         AutoSize = False
-        Caption = 'Valor Frete:'
+        Caption = 'Valor Desconto'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -11

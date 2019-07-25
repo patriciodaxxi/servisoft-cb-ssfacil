@@ -1,10 +1,10 @@
 object frmConsEstoque2: TfrmConsEstoque2
-  Left = 241
-  Top = 93
+  Left = 165
+  Top = 38
   BorderStyle = bsSingle
   Caption = 'Consulta Estoque2'
-  ClientHeight = 518
-  ClientWidth = 926
+  ClientHeight = 579
+  ClientWidth = 1056
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object frmConsEstoque2: TfrmConsEstoque2
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 926
+    Width = 1056
     Height = 106
     Align = alTop
     Color = clSilver
@@ -54,22 +54,6 @@ object frmConsEstoque2: TfrmConsEstoque2
       Height = 13
       Alignment = taRightJustify
       Caption = 'Local Estoque:'
-    end
-    object Label8: TLabel
-      Left = 244
-      Top = 73
-      Width = 50
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Qtd.Inicial:'
-    end
-    object Label9: TLabel
-      Left = 412
-      Top = 73
-      Width = 25
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Final:'
     end
     object edtRef: TEdit
       Left = 296
@@ -104,7 +88,7 @@ object frmConsEstoque2: TfrmConsEstoque2
         'Negativo'
         'M'#237'nimo'
         'Ambos')
-      TabOrder = 11
+      TabOrder = 6
     end
     object RadioGroup2: TRadioGroup
       Left = 97
@@ -119,29 +103,20 @@ object frmConsEstoque2: TfrmConsEstoque2
         'Material'
         'Material Consumo'
         'Semi Acabado')
-      TabOrder = 12
-      OnClick = RadioGroup2Click
-    end
-    object ckPrecoCusto: TCheckBox
-      Left = 665
-      Top = 3
-      Width = 150
-      Height = 17
-      Caption = 'Mostrar Pre'#231'o Custo'
-      TabOrder = 6
+      TabOrder = 7
       OnClick = RadioGroup2Click
     end
     object CheckBox1: TCheckBox
-      Left = 665
-      Top = 35
+      Left = 657
+      Top = 3
       Width = 150
       Height = 17
       Caption = 'Mostrar Produto Inativo'
-      TabOrder = 8
+      TabOrder = 4
       OnClick = RadioGroup2Click
     end
     object btnConsultar: TNxButton
-      Left = 570
+      Left = 296
       Top = 71
       Width = 169
       Height = 30
@@ -208,7 +183,7 @@ object frmConsEstoque2: TfrmConsEstoque2
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 10
+      TabOrder = 5
       Transparent = True
       OnClick = btnConsultarClick
     end
@@ -223,15 +198,6 @@ object frmConsEstoque2: TfrmConsEstoque2
       TabOrder = 2
       OnKeyDown = ceIDProdutoKeyDown
     end
-    object ckPrecoVenda: TCheckBox
-      Left = 665
-      Top = 19
-      Width = 150
-      Height = 17
-      Caption = 'Mostrar Pre'#231'o Venda'
-      TabOrder = 7
-      OnClick = RadioGroup2Click
-    end
     object rxdbLocalEstoque: TRxDBLookupCombo
       Left = 296
       Top = 44
@@ -244,42 +210,12 @@ object frmConsEstoque2: TfrmConsEstoque2
       TabOrder = 3
       OnExit = rxdbLocalEstoqueExit
     end
-    object CurrencyEdit1: TCurrencyEdit
-      Left = 296
-      Top = 65
-      Width = 81
-      Height = 21
-      AutoSize = False
-      DecimalPlaces = 0
-      DisplayFormat = '0'
-      TabOrder = 4
-    end
-    object CurrencyEdit2: TCurrencyEdit
-      Left = 439
-      Top = 65
-      Width = 81
-      Height = 21
-      AutoSize = False
-      DecimalPlaces = 0
-      DisplayFormat = '0'
-      TabOrder = 5
-    end
-    object ckImpAgrupado: TCheckBox
-      Left = 665
-      Top = 52
-      Width = 184
-      Height = 17
-      Caption = 'Imprimir agrupado por estrutura'
-      Enabled = False
-      TabOrder = 9
-      OnClick = RadioGroup2Click
-    end
-    object btnImprimir_Est: TNxButton
-      Left = 746
+    object Imprimir: TNxButton
+      Left = 488
       Top = 71
       Width = 169
       Height = 30
-      Caption = 'Estoque'
+      Caption = 'Imprimir'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -16
@@ -342,19 +278,19 @@ object frmConsEstoque2: TfrmConsEstoque2
         FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 13
+      TabOrder = 8
       Transparent = True
-      OnClick = btnImprimir_EstClick
+      OnClick = ImprimirClick
     end
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 106
-    Width = 926
-    Height = 393
+    Width = 1056
+    Height = 454
     Align = alClient
     Ctl3D = False
-    DataSource = DMConsEstoque.dsEstoque
+    DataSource = DMConsEstoque.dsEstoque2
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -11
@@ -391,176 +327,77 @@ object frmConsEstoque2: TfrmConsEstoque2
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 22
+    ColCount = 11
     RowCount = 2
     Columns = <
       item
         Expanded = False
-        FieldName = 'ID'
+        FieldName = 'ENTRADA'
         Title.Alignment = taCenter
-        Title.Caption = 'ID Produto'
-        Width = 52
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'REFERENCIA'
+        FieldName = 'SAIDA'
         Title.Alignment = taCenter
-        Title.Caption = 'Refer'#234'ncia'
-        Width = 105
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'SALDO'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ESPESSURA'
+        Title.Alignment = taCenter
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'FILIAL'
+        Title.Alignment = taCenter
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'NOMEPRODUTO'
         Title.Alignment = taCenter
-        Title.Caption = 'Nome Produto'
-        Width = 265
+        Width = 382
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'TAMPRODUTO'
+        FieldName = 'ID'
         Title.Alignment = taCenter
-        Title.Caption = 'Tamanho'
+        Width = 54
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'NOME_COR'
+        FieldName = 'REFERENCIA'
         Title.Alignment = taCenter
-        Title.Caption = 'Nome Cor'
-        Width = 160
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NUM_LOTE_CONTROLE'
-        Title.Alignment = taCenter
-        Title.Caption = 'N'#186' Lote'
-        Visible = True
-      end
-      item
-        Alignment = taCenter
-        Expanded = False
-        FieldName = 'COD_LOCAL'
-        Title.Alignment = taCenter
-        Title.Caption = 'C'#243'd. Local'
-        Width = 50
+        Width = 170
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'NOME_LOCAL'
         Title.Alignment = taCenter
-        Title.Caption = 'Local Estoque'
-        Width = 100
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
-        FieldName = 'UNIDADE'
+        FieldName = 'TIPO_REG'
         Title.Alignment = taCenter
-        Title.Caption = 'Unid.'
-        Width = 51
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'QTD'
-        Title.Alignment = taCenter
-        Title.Caption = 'Quantidade'
-        Width = 89
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'QTD_RESERVA'
-        Title.Alignment = taCenter
-        Title.Caption = 'Q. Reserva'
-        Width = 94
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'QTDGERAL'
-        Title.Alignment = taCenter
-        Title.Caption = 'Qtd. Geral (Soma das Empresas)'
-        Width = 113
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'QTD_SALDO_OC'
-        Title.Alignment = taCenter
-        Title.Caption = 'Qtd. OC'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'PRECO_CUSTO'
-        Title.Caption = 'Pre'#231'o Custo'
-        Width = 66
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'PRECO_VENDA'
-        Title.Alignment = taCenter
-        Title.Caption = 'Pre'#231'o Venda'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'LOCALIZACAO'
-        Title.Alignment = taCenter
-        Title.Caption = 'Localiza'#231#227'o'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOMEMARCA'
-        Title.Caption = 'Marca'
-        Width = 184
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOMEGRUPO'
-        Title.Caption = 'Grupo'
-        Width = 150
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'clTotal_Custo'
-        Title.Alignment = taCenter
-        Title.Caption = 'Vlr. Total Custo'
-        Width = 69
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'clTotal_Venda'
-        Title.Alignment = taCenter
-        Title.Caption = 'Vlr. Total Venda'
-        Width = 69
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'QTD_ESTOQUE_MIN'
-        Title.Alignment = taCenter
-        Title.Caption = 'Qtd. M'#237'nimo'
-        Width = 76
         Visible = True
       end>
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 499
-    Width = 926
+    Top = 560
+    Width = 1056
     Height = 19
     Panels = <
       item

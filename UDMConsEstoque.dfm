@@ -1068,8 +1068,8 @@ object DMConsEstoque: TDMConsEstoque
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42032.577038136600000000
-    ReportOptions.LastChange = 43577.694929942130000000
+    ReportOptions.CreateDate = 42052.436473541700000000
+    ReportOptions.LastChange = 43670.456819351850000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -4294,82 +4294,30 @@ object DMConsEstoque: TDMConsEstoque
       FieldName = 'VLR_TOTAL'
     end
   end
-  object SQLConsulta: TSQLQuery
-    MaxBlobSize = -1
-    Params = <>
-    SQLConnection = dmDatabase.scoDados
-    Left = 568
-    Top = 528
-  end
-  object DSSQLConsulta: TDataSource
-    DataSet = SQLConsulta
-    Left = 632
-    Top = 528
-  end
   object sdsEstoque2: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT DISTINCT AUX.*'#13#10'FROM('#13#10'SELECT PRO.ID, PRO.NOME NOMEPRODUT' +
-      'O, PRO.REFERENCIA, PRO.PRECO_CUSTO,'#13#10'PRO.PRECO_VENDA, PRO.ID_MAR' +
-      'CA, PRO.ID_GRUPO, PRO.INATIVO, MARCA.NOME NOMEMARCA,PRO.UNIDADE,' +
-      'PRO.QTD_EMBALAGEM, PRO.QTD_PECA_EMB,'#13#10'COMB.NOME NOME_COR, pc.tip' +
-      'o_reg tipo_reg_comb, pc.id_cor, pc.id_cor_combinacao, PRO.qtd_es' +
-      'toque_min,'#13#10'GRUPO.NOME NOMEGRUPO, EA.id_local_estoque, LEST.nome' +
-      ' NOME_LOCAL, LEST.cod_local, EA.num_lote_controle,'#13#10'case'#13#10'  WHEN' +
-      ' (SELECT COUNT(1) FROM PRODUTO_LOTE PLOTE WHERE PLOTE.ID = PRO.I' +
-      'D AND PLOTE.NUM_LOTE_CONTROLE = EA.NUM_LOTE_CONTROLE) > 0 THEN (' +
-      'SELECT LOCALIZACAO FROM PRODUTO_LOTE PLOTE WHERE PLOTE.ID = PRO.' +
-      'ID AND PLOTE.NUM_LOTE_CONTROLE = EA.NUM_LOTE_CONTROLE)'#13#10'  ELSE P' +
-      'RO.LOCALIZACAO'#13#10'  END LOCALIZACAO,'#13#10'     case'#13#10'        when (PT.' +
-      'TAMANHO is null) then '#39#39#13#10'        WHEN (PT.TAMANHO = '#39#39') THEN '#39'1' +
-      #39#13#10'        WHEN (PT.TAMANHO <> '#39#39') THEN PT.TAMANHO'#13#10'      end as' +
-      ' TAMPRODUTO,'#13#10'  (SELECT EST.QTD FROM ESTOQUE_ATUAL EST'#13#10'      WH' +
-      'ERE EST.FILIAL = :FILIAL'#13#10'        AND EST.ID_PRODUTO = PRO.ID'#13#10' ' +
-      '       AND EST.ID_COR = case'#13#10'                          when (CO' +
-      'MB.ID is null) then '#39'0'#39#13#10'                          ELSE COMB.ID'#13 +
-      #10'                         end'#13#10'        AND EST.TAMANHO ='#13#10'      ' +
-      '     case'#13#10'             when (PT.TAMANHO is null) then '#39#39#13#10'     ' +
-      '        WHEN (PT.TAMANHO = '#39#39') THEN '#39'1'#39#13#10'             WHEN (PT.T' +
-      'AMANHO <> '#39#39') THEN PT.TAMANHO'#13#10'           end'#13#10'       AND EST.ID' +
-      '_LOCAL_ESTOQUE = EA.id_local_estoque'#13#10'       AND EST.num_lote_co' +
-      'ntrole = EA.num_lote_controle'#13#10'           ) QTD,'#13#10#13#10'  (SELECT SU' +
-      'M(E2.QTD) QTDGERAL FROM ESTOQUE_ATUAL E2'#13#10'      WHERE E2.ID_PROD' +
-      'UTO = PRO.ID'#13#10'        AND E2.ID_COR = case'#13#10'                    ' +
-      '     when (COMB.ID is null) then '#39'0'#39#13#10'                         E' +
-      'LSE COMB.ID'#13#10'                        end'#13#10'        AND E2.TAMANHO' +
-      ' ='#13#10'          case'#13#10'             when (PT.TAMANHO is null) then ' +
-      #39#39#13#10'             WHEN (PT.TAMANHO = '#39#39') THEN '#39'1'#39#13#10'             W' +
-      'HEN (PT.TAMANHO <> '#39#39') THEN PT.TAMANHO'#13#10'           end'#13#10'        ' +
-      ') QTDGERAL,'#13#10'  (SELECT ER.QTD FROM ESTOQUE_RES ER'#13#10'      WHERE (' +
-      '(ER.FILIAL = :FILIAL) or ( (select USAR_FILIAL_GERAR_RES from pa' +
-      'rametros_est where id = 1) = '#39'S'#39'))'#13#10'        AND ER.ID_PRODUTO = ' +
-      'PRO.ID'#13#10'        AND ER.ID_COR = case'#13#10'                          ' +
-      'when (COMB.ID is null) then '#39'0'#39#13#10'                          ELSE ' +
-      'COMB.ID'#13#10'                         end'#13#10'        AND ER.TAMANHO ='#13 +
-      #10'           case'#13#10'             when (PT.TAMANHO is null) then '#39#39 +
-      #13#10'             WHEN (PT.TAMANHO = '#39#39') THEN '#39'1'#39#13#10'             WHE' +
-      'N (PT.TAMANHO <> '#39#39') THEN PT.TAMANHO'#13#10'           end'#13#10'          ' +
-      ' ) QTD_RESERVA,'#13#10'   (select sum(v.qtd_saldo) QTD_SALDO_OC'#13#10'     ' +
-      '  from vestoque_oc v'#13#10'       where v.id_produto = PRO.ID'#13#10'      ' +
-      '  and v.id_cor = case'#13#10'                         when (COMB.ID is' +
-      ' null) then '#39'0'#39#13#10'                         ELSE COMB.ID'#13#10'        ' +
-      '                end'#13#10'       AND V.tamanho = case'#13#10'             w' +
-      'hen (PT.TAMANHO is null) then '#39#39#13#10'             WHEN (PT.TAMANHO ' +
-      '= '#39#39') THEN '#39'1'#39#13#10'             WHEN (PT.TAMANHO <> '#39#39') THEN PT.TAM' +
-      'ANHO'#13#10'           end) QTD_SALDO_OC'#13#10#13#10'FROM PRODUTO '#13#10'PRO LEFT JO' +
-      'IN PRODUTO_TAM PT ON PRO.ID = PT.ID'#13#10'LEFT JOIN MARCA ON PRO.ID_M' +
-      'ARCA = MARCA.ID'#13#10'LEFT JOIN GRUPO ON PRO.ID_GRUPO = GRUPO.ID'#13#10'LEF' +
-      'T JOIN PRODUTO_COMB PC ON PRO.ID = PC.ID'#13#10'LEFT JOIN COMBINACAO C' +
-      'OMB ON (PC.ID_COR_COMBINACAO = COMB.id)'#13#10#13#10'LEFT JOIN ESTOQUE_ATU' +
-      'AL EA  ON EA.FILIAL = :FILIAL'#13#10' AND EA.ID_PRODUTO = PRO.ID'#13#10' AND' +
-      ' EA.ID_COR = case'#13#10'     when (EA.id_cor is null) then '#39'0'#39#13#10'     ' +
-      ' ELSE EA.id_cor'#13#10'     end'#13#10'  AND EA.TAMANHO ='#13#10'     case'#13#10'      ' +
-      'when (PT.TAMANHO is null) then '#39#39#13#10'      WHEN (PT.TAMANHO = '#39#39') ' +
-      'THEN '#39'1'#39#13#10'      WHEN (PT.TAMANHO <> '#39#39') THEN PT.TAMANHO'#13#10'     en' +
-      'd'#13#10'LEFT JOIN LOCAL_ESTOQUE LEST ON EA.id_local_estoque = LEST.id' +
-      #13#10'WHERE PRO.ESTOQUE = '#39'S'#39#13#10'  AND PRO.TIPO_REG = :TIPO_REG'#13#10'  AND' +
-      ' PRO.INATIVO = '#39'N'#39#13#10') AUX'
+      'with ESTOQUE'#13#10'as (select PRO.ID, PRO.NOME NOMEPRODUTO, PRO.REFER' +
+      'ENCIA, PRO.PRECO_CUSTO, PRO.PRECO_VENDA, PRO.ID_MARCA, PRO.ID_GR' +
+      'UPO,'#13#10'           PRO.INATIVO, MAR.NOME NOMEMARCA, PRO.UNIDADE, P' +
+      'RO.QTD_EMBALAGEM, PRO.QTD_ESTOQUE_MIN, GRU.NOME NOMEGRUPO,'#13#10'    ' +
+      '       EM.ID_LOCAL_ESTOQUE, LEST.NOME NOME_LOCAL, LEST.COD_LOCAL' +
+      ', EM.ESPESSURA, EM.QTD, EM.QTD_ENT, EM.QTD_SAI,'#13#10'           EM.F' +
+      'ILIAL, EM.DTMOVIMENTO, EM.TIPO_ES, EM.TIPO_MOV, EM.NUMNOTA, PRO.' +
+      'ID ID_PRODUTO, PRO.TIPO_REG'#13#10'    from ESTOQUE_MOV EM'#13#10'    left j' +
+      'oin PRODUTO PRO on PRO.ID = EM.ID_PRODUTO'#13#10'    left join MARCA M' +
+      'AR on MAR.ID = PRO.ID_MARCA'#13#10'    left join GRUPO GRU on GRU.ID =' +
+      ' PRO.ID_GRUPO'#13#10'    left join LOCAL_ESTOQUE LEST on LEST.ID = EM.' +
+      'ID_LOCAL_ESTOQUE'#13#10'    where EM.FILIAL = :FILIAL)'#13#10'select sum(QTD' +
+      '_ENT) ENTRADA, sum(QTD_SAI) SAIDA, sum(QTD_ENT - QTD_SAI) SALDO,' +
+      ' ESPESSURA, FILIAL, NOMEPRODUTO, ID,'#13#10'       REFERENCIA, NOME_LO' +
+      'CAL, TIPO_REG'#13#10'from ESTOQUE'#13#10'where ESPESSURA > 0 and'#13#10'      (FIL' +
+      'IAL = :FILIAL or :FILIAL = 0) and'#13#10'      (ID_LOCAL_ESTOQUE = :ID' +
+      '_LOCAL_ESTOQUE or :ID_LOCAL_ESTOQUE = 0) and'#13#10'      (ID_PRODUTO ' +
+      '= :ID_PRODUTO or :ID_PRODUTO = 0) and'#13#10'      (REFERENCIA like :R' +
+      'EFERENCIA) and'#13#10'      (TIPO_REG = :TIPO_REG)'#13#10'group by ESPESSURA' +
+      ', FILIAL, NOMEPRODUTO, ID, REFERENCIA, NOME_LOCAL, TIPO_REG   '
     MaxBlobSize = -1
     Params = <
       item
@@ -4385,6 +4333,31 @@ object DMConsEstoque: TDMConsEstoque
       item
         DataType = ftInteger
         Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_LOCAL_ESTOQUE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_LOCAL_ESTOQUE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'REFERENCIA'
         ParamType = ptInput
       end
       item
@@ -4409,10 +4382,80 @@ object DMConsEstoque: TDMConsEstoque
     OnCalcFields = cdsEstoqueCalcFields
     Left = 368
     Top = 567
+    object cdsEstoque2ENTRADA: TFloatField
+      DisplayLabel = 'Entrada'
+      FieldName = 'ENTRADA'
+      DisplayFormat = ',0.00'
+      EditFormat = ',0.00'
+    end
+    object cdsEstoque2SAIDA: TFloatField
+      DisplayLabel = 'Sa'#237'da'
+      FieldName = 'SAIDA'
+      DisplayFormat = ',0.00'
+      EditFormat = ',0.00'
+    end
+    object cdsEstoque2SALDO: TFloatField
+      DisplayLabel = 'Saldo'
+      FieldName = 'SALDO'
+      DisplayFormat = ',0.00'
+      EditFormat = ',0.00'
+    end
+    object cdsEstoque2ESPESSURA: TFloatField
+      DisplayLabel = 'Espessura'
+      FieldName = 'ESPESSURA'
+      DisplayFormat = ',0.00'
+      EditFormat = ',0.00'
+    end
+    object cdsEstoque2FILIAL: TIntegerField
+      DisplayLabel = 'Filial'
+      FieldName = 'FILIAL'
+    end
+    object cdsEstoque2NOMEPRODUTO: TStringField
+      DisplayLabel = 'Nome Produto'
+      FieldName = 'NOMEPRODUTO'
+      Size = 100
+    end
+    object cdsEstoque2ID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsEstoque2REFERENCIA: TStringField
+      DisplayLabel = 'Refer'#234'ncia'
+      FieldName = 'REFERENCIA'
+    end
+    object cdsEstoque2NOME_LOCAL: TStringField
+      DisplayLabel = 'Local Estoque'
+      FieldName = 'NOME_LOCAL'
+      Size = 60
+    end
+    object cdsEstoque2TIPO_REG: TStringField
+      DisplayLabel = 'Tipo Registro'
+      FieldName = 'TIPO_REG'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsEstoque2: TDataSource
     DataSet = cdsEstoque2
     Left = 400
     Top = 567
+  end
+  object frxEstoque2: TfrxDBDataset
+    UserName = 'frxEstoque2'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ENTRADA=ENTRADA'
+      'SAIDA=SAIDA'
+      'SALDO=SALDO'
+      'ESPESSURA=ESPESSURA'
+      'FILIAL=FILIAL'
+      'NOMEPRODUTO=NOMEPRODUTO'
+      'ID=ID'
+      'REFERENCIA=REFERENCIA'
+      'NOME_LOCAL=NOME_LOCAL'
+      'TIPO_REG=TIPO_REG')
+    DataSource = dsEstoque2
+    BCDToCurrency = False
+    Left = 896
+    Top = 552
   end
 end
