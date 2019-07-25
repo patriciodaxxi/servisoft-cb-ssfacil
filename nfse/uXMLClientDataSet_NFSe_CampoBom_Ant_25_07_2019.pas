@@ -96,7 +96,6 @@ begin
   AddADTChield(Def, 'IE', ftString, 15);
   AddADTChield(Def, 'regimeTrib', ftString, 1);
 
-
   AClientDataSet.FieldDefs.Add('TomS', ftADT);
   Def := AClientDataSet.FieldDefs.Find('TomS');
   AddADTChield(Def, 'CPF', ftString, 11);
@@ -222,7 +221,6 @@ begin
   AddADTChield(Def2, 'vBCSTISS', ftFloat);
   AddADTChield(Def2, 'vSTISS', ftFloat);
 
-
   AClientDataSet.FieldDefs.Add('faturas', ftDataSet);
   Def := AClientDataSet.FieldDefs.Find('faturas');
   AddADTChield(Def, 'fat', ftADT);
@@ -233,11 +231,6 @@ begin
   AddADTChield(Def2, 'vFat', ftFloat);
   AddADTChield(Def2, 'tipoVencFat', ftString, 1);
   AddADTChield(Def2, 'descTipoVencFat', ftString, 15);
-  
-  AClientDataSet.FieldDefs.Add('infAdic', ftDataSet);
-  Def := AClientDataSet.FieldDefs.Find('infAdic');
-  AddADTChield(Def, 'item', ftString, 256);
-  
   //AddADTChield(Def2, 'vOrig', ftFloat);
   //AddADTChield(Def2, 'vDesc', ftFloat);
   //AddADTChield(Def2, 'vLiq', ftFloat);

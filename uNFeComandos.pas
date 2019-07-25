@@ -1429,7 +1429,7 @@ var
   Codigo: Integer;
 begin
   TCPClient := CriarTCPClient(AServidor, 'Enviando lote... Aguarde...');
-  try
+  try                               
     try
       TCPClient.Connect(1000);
       TCPClient.WriteLn(ACnpj);
