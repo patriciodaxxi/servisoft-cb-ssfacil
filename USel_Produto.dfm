@@ -23,7 +23,7 @@ object frmSel_Produto: TfrmSel_Produto
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 25
+    Top = 0
     Width = 1033
     Height = 71
     Align = alTop
@@ -710,7 +710,7 @@ object frmSel_Produto: TfrmSel_Produto
   end
   object Panel3: TPanel
     Left = 0
-    Top = 0
+    Top = 71
     Width = 1033
     Height = 25
     Align = alTop

@@ -934,9 +934,9 @@ begin
   if fDmCupomFiscal.cdsTipoCobrancaPERC_JUROS.AsFloat > 0 then
   begin
     vPercJuros := fDmCupomFiscal.cdsTipoCobrancaPERC_JUROS.AsFloat;
-    Label17.Visible       := True;
-    ceJuros.Visible       := True;
-    CurrencyEdit2.Value   := vPercJuros;
+    Label17.Visible := True;
+    ceJuros.Visible := True;
+    ceJuros.Value   := vPercJuros;
 
     Panel6.Visible := False;
   end
@@ -944,9 +944,9 @@ begin
   if fDmCupomFiscal.cdsTipoCobrancaTAXA.AsFloat > 0 then
   begin
     vPercJuros := fDmCupomFiscal.cdsTipoCobrancaPERC_JUROS.AsFloat;
-    Label17.Visible       := True;
-    CurrencyEdit2.Visible := True;
-    CurrencyEdit2.Value   := vPercJuros;
+    Label17.Visible := True;
+    ceJuros.Visible := True;
+    ceJuros.Value   := vPercJuros;
 
     Panel6.Visible := False;
   end
@@ -1477,7 +1477,7 @@ begin
 
 
 
-  if CurrencyEdit2.Value > 0 then
+  if ceJuros.Value > 0 then
   begin
     vOutros := 0;
     fDmCupomFiscal.cdsCupom_Itens.First;
@@ -1488,7 +1488,7 @@ begin
       case fDmCupomFiscal.cdsTipoCobrancaJUROS_TIPO.AsInteger of
         1: begin
              fDmCupomFiscal.cdsCupom_ItensVLR_JUROS.AsString := FormatFloat('0.00',fDmCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsCurrency *
-                                                                CurrencyEdit2.Value/ 100);
+                                                                ceJuros.Value/ 100);
            end;
         2: begin
 

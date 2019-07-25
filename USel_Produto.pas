@@ -528,8 +528,12 @@ var
   vItem: Integer;
 begin
   vPreco_Pos := 0;
-  if (qParametros_GeralEMPRESA_VAREJO.AsString <> 'S') and (qParametrosUSA_TABELA_PRECO.AsString <> 'S') then
+  if (qParametrosUSA_TABELA_PRECO.AsString <> 'S') then
     Exit;
+
+  if (qParametros_GeralEMPRESA_VAREJO.AsString <> 'S') then
+    Exit;
+
   if (not(cdsProduto.Active)) or (cdsProdutoID.AsInteger <= 0) then
     Exit;
     
