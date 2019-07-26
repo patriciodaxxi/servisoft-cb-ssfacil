@@ -1455,6 +1455,7 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
   end
   object cdsPedWeb_Item: TClientDataSet
     Aggregates = <>
+    DataSetField = cdsPedWebsdsPedWeb_Item
     Params = <>
     Left = 132
     Top = 477

@@ -666,8 +666,12 @@ begin
     fdmCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := fDMAprovacao_Ped.cdsPedWeb_ItemVLR_UNITARIO.AsFloat;
     fdmCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat    := fDMAprovacao_Ped.cdsPedWeb_ItemVLR_TOTAL.AsFloat;
     fdmCadPedido.cdsPedido_ItensOBS.AsString         := fDMAprovacao_Ped.cdsPedWeb_ItemOBS.AsString;
+    if fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger <= 0 then
+      fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger    := fDMCadPedido.vID_CFOP;
     fdmCadPedido.cdsPedido_ItensUNIDADE.AsString     := SQLLocate('PRODUTO','ID','UNIDADE',fDMAprovacao_Ped.cdsPedWeb_ItemID_PRODUTO.AsString);
     fdmCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := SQLLocate('PRODUTO','ID','NOME',fDMAprovacao_Ped.cdsPedWeb_ItemID_PRODUTO.AsString);
+    fDMCadPedido.cdsPedido_ItensREFERENCIA.AsString  := SQLLocate('PRODUTO','ID','REFERENCIA',fDMAprovacao_Ped.cdsPedWeb_ItemID_PRODUTO.AsString);
+    fDMCadPedido.cdsPedido_ItensID_NCM.AsInteger     := StrToInt(SQLLocate('PRODUTO','ID','ID_NCM',fDMAprovacao_Ped.cdsPedWeb_ItemID_PRODUTO.AsString));
     fDMCadPedido.cdsPedido_Itens.Post;
     fDMCadPedido.cdsPedido_Itens.ApplyUpdates(0);
     fDMAprovacao_Ped.cdsPedWeb_Item.Next;
@@ -699,6 +703,9 @@ begin
   fDMCadPedido.cdsPedidoSIMPLES_FILIAL.AsString := fDMCadPedido.cdsFilialSIMPLES.AsString;
   fDMCadPedido.cdsPedidoID_REGIMETRIB.AsInteger := fDMCadPedido.cdsFilialID_REGIME_TRIB.AsInteger;
   fDMCadPedido.cdsPedidoSIMPLES_FILIAL.AsString := fDMCadPedido.cdsFilialSIMPLES.AsString;
+  fDMCadPedido.cdsPedidoID_OPERACAO_NOTA.AsInteger := fDMCadPedido.cdsParametrosID_OPERACAO_VENDA.AsInteger;
+  fDMCadPedido.cdsPedidoFINALIDADE.AsString     := 'R';
+  uCalculo_Pedido.prc_Posicionar_Regra_Empresa(fDMCadPedido,fDMCadPedido.cdsPedidoID_OPERACAO_NOTA.AsInteger,fDMCadPedido.cdsPedidoFINALIDADE.AsString);
   fDMCadPedido.prc_Abrir_CSTICMS(fDMCadPedido.cdsFilialSIMPLES.AsString);
   fDMCadPedido.cdsPedidoTIPO_ATENDIMENTO.AsInteger := 1;
   fDMCadPedido.prc_Abrir_cdsCFOP('S');

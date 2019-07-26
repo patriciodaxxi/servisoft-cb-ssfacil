@@ -47,7 +47,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1251
+    Width = 1243
     Height = 68
     Align = alTop
     Color = clSilver
@@ -369,8 +369,8 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
   object RzGroupBox2: TRzGroupBox
     Left = 0
     Top = 68
-    Width = 1251
-    Height = 342
+    Width = 1243
+    Height = 334
     Align = alClient
     BorderColor = clNavy
     BorderInner = fsButtonUp
@@ -392,8 +392,8 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
     object SMDBGrid1: TSMDBGrid
       Left = 5
       Top = 50
-      Width = 1241
-      Height = 270
+      Width = 1233
+      Height = 262
       Align = alClient
       Ctl3D = False
       DataSource = DMAprovacao_Ped.dsCliente_Pend
@@ -734,7 +734,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
     object Panel2: TPanel
       Left = 5
       Top = 18
-      Width = 1241
+      Width = 1233
       Height = 32
       Align = alTop
       BevelOuter = bvNone
@@ -902,8 +902,8 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
     end
     object ProgressBar1: TProgressBar
       Left = 5
-      Top = 320
-      Width = 1241
+      Top = 312
+      Width = 1233
       Height = 17
       Align = alBottom
       TabOrder = 2
@@ -911,8 +911,8 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
   end
   object RzGroupBox1: TRzGroupBox
     Left = 0
-    Top = 410
-    Width = 1251
+    Top = 402
+    Width = 1243
     Height = 224
     Align = alBottom
     BorderColor = clBlack
@@ -935,7 +935,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
     object SMDBGrid2: TSMDBGrid
       Left = 5
       Top = 50
-      Width = 998
+      Width = 990
       Height = 169
       Align = alClient
       Ctl3D = False
@@ -1067,7 +1067,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
     object Panel3: TPanel
       Left = 5
       Top = 18
-      Width = 1241
+      Width = 1233
       Height = 32
       Align = alTop
       BevelOuter = bvNone
@@ -1291,7 +1291,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
       end
     end
     object Panel4: TPanel
-      Left = 1003
+      Left = 995
       Top = 50
       Width = 243
       Height = 169
@@ -1355,8 +1355,8 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
   end
   object DBMemo1: TDBMemo
     Left = 0
-    Top = 634
-    Width = 1251
+    Top = 626
+    Width = 1243
     Height = 52
     TabStop = False
     Align = alBottom
