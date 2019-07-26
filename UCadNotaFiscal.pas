@@ -2041,6 +2041,34 @@ begin
     if MessageDlg('O item selecionado faz parte de uma grade, deseja excluir toda a grade?',mtConfirmation,[mbNo,mbOk],0) = mrOk then
     begin
       prc_Excluir_Grade(fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_ORIGINAL.AsInteger);
+    end
+    else
+    begin
+      if (fDMCadNotaFiscal.cdsParametrosUSA_VALE.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger > 0) then
+      begin
+        if not(fDMCadNotaFiscal.mValeAux.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger])) then
+        begin
+          fDMCadNotaFiscal.mValeAux.Insert;
+          fDMCadNotaFiscal.mValeAuxID_Vale.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VALE.AsInteger;
+          fDMCadNotaFiscal.mValeAux.Post;
+        end;
+      end;
+      if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger > 0) and not(fDMCadNotaFiscal.mPedidoAuxExcluir.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger])) then
+      begin
+         fDMCadNotaFiscal.mPedidoAuxExcluir.Insert;
+         fDMCadNotaFiscal.mPedidoAuxExcluirID_pedido.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger;
+         fDMCadNotaFiscal.mPedidoAuxExcluir.Post;
+      end;
+      if not fDMCadNotaFiscal.cdsNotaFiscal_Copia.IsEmpty then
+      begin
+        if not(fDMCadNotaFiscal.mRecNFAux.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_CopiaID_RECNF.AsInteger])) then
+        begin
+          fDMCadNotaFiscal.mRecNFAux.Insert;
+          fDMCadNotaFiscal.mRecNFAuxID_RecNF.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_CopiaID_RECNF.AsInteger;
+          fDMCadNotaFiscal.mRecNFAux.Post;
+        end;
+      end;
+      fDMCadNotaFiscal.prc_Excluir_Item;
     end;
   end
   else
