@@ -490,7 +490,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Top = 8
             Width = 401
             Height = 32
-            DropDownCount = 6
+            DropDownCount = 15
             DataField = 'ID_TIPOCOBRANCA'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET
@@ -580,7 +580,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Top = 45
             Width = 478
             Height = 32
-            DropDownCount = 15
+            DropDownCount = 21
             DataField = 'ID_CONDPGTO'
             DataSource = dmCupomFiscal.dsCupomFiscal
             Font.Charset = DEFAULT_CHARSET

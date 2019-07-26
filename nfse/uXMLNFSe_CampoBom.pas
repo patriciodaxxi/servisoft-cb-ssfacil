@@ -91,9 +91,10 @@ begin
   //vAux := FormatFloat('0000',ano) + '-' + FormatFloat('00',mes) + '-' + FormatFloat('00',dia);
   //vCds.FieldByName('Id.dEmi').AsDateTime := StrToDate(FormatDateTime('YYYY-MM-DD',StrToDate(vAux)));
   //vCds.FieldByName('Id.dEmi').AsDateTime := fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime; 24/07/2019
-  vCds.FieldByName('Id.dEmi').AsDateTime := StrToDate(FormatDateTime('YYYY-MM-DD',fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime));
+  //vCds.FieldByName('Id.dEmi').AsDateTime := StrToDate(FormatDateTime('YYYY-MM-DD',fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime));
+  vCds.FieldByName('Id.dEmi').AsDateTime := fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime;
   vCds.FieldByName('Id.hEmi').AsString := FormatDateTime('HH:MM',Now);
-  vCds.FieldByName('Id.tpNF').AsString   := '1';
+  //vCds.FieldByName('Id.tpNF').AsString   := '1';
   //if trim(fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString) <> '' then 24/07/2019
   //  vCds.FieldByName('Id.cMunFG').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString;  24/07/2019
   //vCds.FieldByName('Id.refNF').AsString := ''
@@ -152,7 +153,6 @@ begin
     vCds.FieldByName('TomS.xNome').AsString := fDMCadNotaServico.cdsNotaServico_ImpNOME_CLIENTE_CONS.AsString
   else
     vCds.FieldByName('TomS.xNome').AsString := fDMCadNotaServico.cdsNotaServico_ImpNOME_CLIENTE.AsString;
-
 
   if trim(fDMCadNotaServico.cdsNotaServico_ImpENDERECO_CLI.AsString) <> '' then
     vCds.FieldByName('TomS.ender.xLgr').AsString := fDMCadNotaServico.cdsNotaServico_ImpENDERECO_CLI.AsString;
@@ -321,7 +321,6 @@ begin
   //vCds.FieldByName('total.ISS.vBCSTISS').AsString := StrToFloat(FormatFloat('0.00',0));
   //vCds.FieldByName('total.ISS.vSTISS').AsString := StrToFloat(FormatFloat('0.00',0));
 
-
   fDMCadNotaServico.cdsNotaServico_Imp_Parc.Close;
   fDMCadNotaServico.sdsNotaServico_Imp_Parc.ParamByName('ID').AsInteger := fDMCadNotaServico.cdsNotaServico_ImpID.AsInteger;
   fDMCadNotaServico.cdsNotaServico_Imp_Parc.Open;
@@ -340,7 +339,7 @@ begin
     end;
   end;
   //Observações
-  obs := vCds.FieldByName('Observacoes') as TDataSetField;
+  obs := vCds.FieldByName('infAdic') as TDataSetField;
   {obs.NestedDataSet.Insert;
   obs.NestedDataSet.FieldByName('xinf').AsString := 'Correspondencia do codigo municipal com o código da Lei Complementar 116/2003:'
                                                   + fDMCadNotaServico.cdsNotaServico_ImpCOD_SERVICO.AsString
@@ -355,12 +354,12 @@ begin
     vFlag := False;
     while not vFlag do
     begin
-      if trim(copy(vTexto1,i,100)) <> '' then
+      if trim(copy(vTexto1,i,256)) <> '' then
       begin
         obs.NestedDataSet.Insert;
-        obs.NestedDataSet.FieldByName('xinf').AsString := copy(vTexto1,i,100);
+        obs.NestedDataSet.FieldByName('item').AsString := copy(vTexto1,i,256);
         obs.NestedDataSet.Post;
-        Delete(vTexto1,i,100);
+        Delete(vTexto1,i,256);
       end;
 //    i := i + 100;
       if trim(vTexto1) = '' then
@@ -370,10 +369,10 @@ begin
     if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO_MUNICIPAL.AsFloat)) > 0 then
     begin
       obs.NestedDataSet.Insert;
-      if trim(obs.NestedDataSet.FieldByName('xinf').AsString) = '' then
-        obs.NestedDataSet.FieldByName('xinf').AsString := 'Vlr.aprox.tributos R$ ' + FormatFloat('###,##0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO_MUNICIPAL.AsFloat)
+      if trim(obs.NestedDataSet.FieldByName('item').AsString) = '' then
+        obs.NestedDataSet.FieldByName('item').AsString := 'Vlr.aprox.tributos R$ ' + FormatFloat('###,##0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO_MUNICIPAL.AsFloat)
       else
-        obs.NestedDataSet.FieldByName('xinf').AsString := obs.NestedDataSet.FieldByName('xinf').AsString + '(Vlr.aprox.tributos R$ ' + FormatFloat('###,##0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO_MUNICIPAL.AsFloat) + ')';
+        obs.NestedDataSet.FieldByName('item').AsString := obs.NestedDataSet.FieldByName('item').AsString + '(Vlr.aprox.tributos R$ ' + FormatFloat('###,##0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO_MUNICIPAL.AsFloat) + ')';
       obs.NestedDataSet.Post;
     end;
 
@@ -392,42 +391,9 @@ begin
     begin
       obs.NestedDataSet.Insert;
       vObsAux := '(' + vObsAux + ')';
-      obs.NestedDataSet.FieldByName('xinf').AsString := obs.NestedDataSet.FieldByName('xinf').AsString + vObsAux;
+      obs.NestedDataSet.FieldByName('item').AsString := obs.NestedDataSet.FieldByName('item').AsString + vObsAux;
       obs.NestedDataSet.Post;
     end;
-
-    //03/09/2018
-    {obs.NestedDataSet.Insert;
-    if trim(fDMCadNotaServico.cdsNotaServico_ImpDISCRIMINACAO.Value) <> '' then
-    begin
-      obs.NestedDataSet.FieldByName('xinf').AsString := copy(fDMCadNotaServico.cdsNotaServico_ImpDISCRIMINACAO.Value,1,100);
-    end;
-
-    if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO_MUNICIPAL.AsFloat)) > 0 then
-    begin
-      //if trim(vCds.FieldByName('Observacoes.xinf').AsString) = '' then
-      if trim(obs.NestedDataSet.FieldByName('xinf').AsString) = '' then
-        obs.NestedDataSet.FieldByName('xinf').AsString := 'Vlr.aprox.tributos R$ ' + FormatFloat('###,##0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO_MUNICIPAL.AsFloat)
-      else
-        obs.NestedDataSet.FieldByName('xinf').AsString := obs.NestedDataSet.FieldByName('xinf').AsString + '(Vlr.aprox.tributos R$ ' + FormatFloat('###,##0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_TRIBUTO_MUNICIPAL.AsFloat) + ')';
-    end;
-
-    vObsAux := '';
-    fDMCadNotaServico.mOSAux.First;
-    while not fDMCadNotaServico.mOSAux.Eof do
-    begin
-      if vObsAux = '' then
-        vObsAux := 'OS: ' + fDMCadNotaServico.mOSAuxID.AsString
-      else
-        vObsAux := vObsAux + ',' + fDMCadNotaServico.mOSAuxID.AsString;
-      fDMCadNotaServico.mOSAux.Next;
-    end;
-    if trim(vObsAux) <> '' then
-    begin
-      vObsAux := '(' + vObsAux + ')';
-      obs.NestedDataSet.FieldByName('xinf').AsString := obs.NestedDataSet.FieldByName('xinf').AsString + vObsAux;
-    end;
-    obs.NestedDataSet.Post;}
   end;
 
   vCds.Post;

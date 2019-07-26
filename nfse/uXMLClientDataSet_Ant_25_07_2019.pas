@@ -222,13 +222,6 @@ begin
         else
         if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'faturas')) then
         begin
-          TDataSetField(AFields[I]).NestedDataSet.Append;
-          TDataSetField(AFields[I]).NestedDataSet.Fields[0].AsString := xNode.Text;
-          TDataSetField(AFields[I]).NestedDataSet.Append;
-        end
-        else
-        if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'infAdic')) then
-        begin
           xNode := xNode.ChildNodes[0];
           sCampo := xNode.NodeName;
           fd :=  TADTField(TDataSetField(AFields[I]).NestedDataSet.Fields[0]);
@@ -328,16 +321,10 @@ begin
       while not TDataSetField(AFields[I]).NestedDataSet.Eof do
       begin
         xNode := ABase.AddChild(sCampo);
-		
-		if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'infAdic')) then
-		  xNode.Text := TDataSetField(vField).NestedDataSet.Fields[0].AsString
-		else
-          Processar_NodesXML(TDataSetField(vField).NestedDataSet.Fields, xNode, APrefixo);
-        
-		TDataSetField(AFields[I]).NestedDataSet.Next;
-		
+        Processar_NodesXML(TDataSetField(vField).NestedDataSet.Fields, xNode, APrefixo);
+        TDataSetField(AFields[I]).NestedDataSet.Next;
         if not TDataSetField(AFields[I]).NestedDataSet.Eof then
-	      xNode := ABase.AddChild(sCampo);
+	  xNode := ABase.AddChild(sCampo);
       end;
     end
     else

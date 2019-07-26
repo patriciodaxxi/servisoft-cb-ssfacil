@@ -1,6 +1,6 @@
 object frmSel_Produto: TfrmSel_Produto
-  Left = 80
-  Top = 69
+  Left = 194
+  Top = 96
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmSel_Produto'
@@ -23,14 +23,14 @@ object frmSel_Produto: TfrmSel_Produto
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 25
+    Top = 0
     Width = 1033
     Height = 71
     Align = alTop
     Color = 16768959
     Ctl3D = True
     ParentCtl3D = False
-    TabOrder = 1
+    TabOrder = 0
     object Label1: TLabel
       Left = 247
       Top = 12
@@ -708,14 +708,14 @@ object frmSel_Produto: TfrmSel_Produto
     DataSource = dsProduto
     TabOrder = 6
   end
-  object Panel3: TPanel
+  object pnlMarca: TPanel
     Left = 0
-    Top = 0
+    Top = 71
     Width = 1033
     Height = 25
     Align = alTop
     Color = 16768959
-    TabOrder = 0
+    TabOrder = 1
     object Label7: TLabel
       Left = 285
       Top = 10
@@ -1213,7 +1213,7 @@ object frmSel_Produto: TfrmSel_Produto
     SQL.Strings = (
       
         'SELECT CONS_PROD_USA_PERC, USA_LOTE_PROD, USA_REF2,MOSTRA_PROD_T' +
-        'PRECO'
+        'PRECO, POSICAO_CONS_MARCA'
       'FROM PARAMETROS_PROD')
     SQLConnection = dmDatabase.scoDados
     Left = 512
@@ -1235,6 +1235,11 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object qParametros_ProdMOSTRA_PROD_TPRECO: TStringField
       FieldName = 'MOSTRA_PROD_TPRECO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdPOSICAO_CONS_MARCA: TStringField
+      FieldName = 'POSICAO_CONS_MARCA'
       FixedChar = True
       Size = 1
     end

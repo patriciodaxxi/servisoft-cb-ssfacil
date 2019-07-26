@@ -123,10 +123,11 @@ type
     sdsProdutoNOME_MARCA: TStringField;
     cdsProdutoNOME_MARCA: TStringField;
     sdsProdAuxNOME_MARCA: TStringField;
-    Panel3: TPanel;
+    pnlMarca: TPanel;
     Label7: TLabel;
     Edit4: TEdit;
     qParametrosMOSTRAR_MARCAR_PROD: TStringField;
+    qParametros_ProdPOSICAO_CONS_MARCA: TStringField;
     procedure BitBtn1Click(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -374,6 +375,19 @@ begin
   qParametros_Geral.Close;
   qParametros_Geral.Open;
   qParametros_Prod.Open;
+  if qParametros_ProdPOSICAO_CONS_MARCA.AsString = '2' then
+  begin
+    pnlMarca.Align := alBottom;
+    pnlMarca.Align := alTop;
+    pnlMarca.TabOrder := 1;
+  end
+  else
+  begin
+    Panel1.Align   := alBottom;
+    Panel1.Align   := alTop;
+    pnlMarca.TabOrder := 0;
+  end;
+
   vMostra_Prom := 'N';
   if qParametros_FinUSA_TABPRECO_PROM.AsString = 'S' then
   begin
@@ -467,7 +481,7 @@ begin
       prc_Consultar;
   end;
   if qParametrosMOSTRAR_MARCAR_PROD.AsString <> 'S' then
-    Panel3.Visible := False;
+    pnlMarca.Visible := False;
 
   if trim(Edit1.Text) <> '' then
     prc_Consultar;
@@ -528,8 +542,12 @@ var
   vItem: Integer;
 begin
   vPreco_Pos := 0;
-  if (qParametros_GeralEMPRESA_VAREJO.AsString <> 'S') and (qParametrosUSA_TABELA_PRECO.AsString <> 'S') then
+  if (qParametrosUSA_TABELA_PRECO.AsString <> 'S') then
     Exit;
+
+  if (qParametros_GeralEMPRESA_VAREJO.AsString <> 'S') then
+    Exit;
+
   if (not(cdsProduto.Active)) or (cdsProdutoID.AsInteger <= 0) then
     Exit;
     
@@ -653,7 +671,8 @@ begin
   begin
     if trim(Edit4.Text) <> '' then
       BitBtn1Click(Sender);
-    Edit1.SetFocus;
+    if pnlMarca.TabOrder = 0 then
+      Edit1.SetFocus;
   end;
 end;
 
