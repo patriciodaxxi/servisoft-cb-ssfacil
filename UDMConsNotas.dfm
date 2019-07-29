@@ -2,10 +2,10 @@ object DMConsNotas: TDMConsNotas
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Left = 139
-  Top = 81
-  Height = 576
-  Width = 1074
+  Left = 266
+  Top = 58
+  Height = 475
+  Width = 809
   object sdsFilial: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -13,21 +13,21 @@ object DMConsNotas: TDMConsNotas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 584
-    Top = 368
+    Left = 288
+    Top = 24
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 616
-    Top = 368
+    Left = 320
+    Top = 24
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 656
-    Top = 368
+    Left = 360
+    Top = 24
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -43,8 +43,8 @@ object DMConsNotas: TDMConsNotas
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 688
-    Top = 368
+    Left = 392
+    Top = 24
   end
   object sdsProduto: TSQLDataSet
     NoMetadata = True
@@ -53,21 +53,21 @@ object DMConsNotas: TDMConsNotas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 584
-    Top = 424
+    Left = 288
+    Top = 80
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
-    Left = 616
-    Top = 424
+    Left = 320
+    Top = 80
   end
   object cdsProduto: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspProduto'
-    Left = 656
-    Top = 424
+    Left = 360
+    Top = 80
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -87,8 +87,8 @@ object DMConsNotas: TDMConsNotas
   end
   object dsProduto: TDataSource
     DataSet = cdsProduto
-    Left = 696
-    Top = 424
+    Left = 400
+    Top = 80
   end
   object sdsCliente: TSQLDataSet
     NoMetadata = True
@@ -99,21 +99,21 @@ object DMConsNotas: TDMConsNotas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 584
-    Top = 472
+    Left = 288
+    Top = 128
   end
   object dspCliente: TDataSetProvider
     DataSet = sdsCliente
-    Left = 616
-    Top = 472
+    Left = 320
+    Top = 128
   end
   object cdsCliente: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCliente'
-    Left = 656
-    Top = 472
+    Left = 360
+    Top = 128
     object cdsClienteCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -129,8 +129,8 @@ object DMConsNotas: TDMConsNotas
   end
   object dsCliente: TDataSource
     DataSet = cdsCliente
-    Left = 696
-    Top = 472
+    Left = 400
+    Top = 128
   end
   object qParametros: TSQLQuery
     MaxBlobSize = -1
@@ -139,8 +139,8 @@ object DMConsNotas: TDMConsNotas
       'SELECT *'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 728
-    Top = 104
+    Left = 504
+    Top = 32
     object qParametrosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -314,8 +314,8 @@ object DMConsNotas: TDMConsNotas
       '        and CF.FATURAMENTO = '#39'S'#39') or (MOV.TIPO_REG = '#39'NSE'#39
       '        and MOV.VLR_LIQUIDO_NFSE > 0) or (MOV.TIPO_REG = '#39'RNF'#39'))')
     SQLConnection = dmDatabase.scoDados
-    Left = 808
-    Top = 104
+    Left = 536
+    Top = 32
     object qFaturamentoVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
     end
@@ -358,21 +358,21 @@ object DMConsNotas: TDMConsNotas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 144
+    Left = 64
+    Top = 88
   end
   object dspNotaFiscal_Prod: TDataSetProvider
     DataSet = sdsNotaFiscal_Prod
     OnUpdateError = dspNotaFiscal_CliUpdateError
-    Left = 144
-    Top = 144
+    Left = 112
+    Top = 88
   end
   object cdsNotaFiscal_Prod: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspNotaFiscal_Prod'
-    Left = 184
-    Top = 144
+    Left = 152
+    Top = 88
     object cdsNotaFiscal_ProdID_PRODUTO: TIntegerField
       DisplayLabel = 'ID Produto'
       FieldName = 'ID_PRODUTO'
@@ -432,8 +432,8 @@ object DMConsNotas: TDMConsNotas
   end
   object dsNotaFiscal_Prod: TDataSource
     DataSet = cdsNotaFiscal_Prod
-    Left = 224
-    Top = 144
+    Left = 192
+    Top = 88
   end
   object sdsNotaFiscal_DT: TSQLDataSet
     NoMetadata = True
@@ -452,22 +452,22 @@ object DMConsNotas: TDMConsNotas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 200
+    Left = 64
+    Top = 144
   end
   object dspNotaFiscal_DT: TDataSetProvider
     DataSet = sdsNotaFiscal_DT
     OnUpdateError = dspNotaFiscal_CliUpdateError
-    Left = 144
-    Top = 200
+    Left = 112
+    Top = 144
   end
   object cdsNotaFiscal_DT: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspNotaFiscal_DT'
     OnCalcFields = cdsNotaFiscal_DTCalcFields
-    Left = 184
-    Top = 200
+    Left = 152
+    Top = 144
     object cdsNotaFiscal_DTDTEMISSAO: TDateField
       DisplayLabel = 'Data Emiss'#227'o'
       FieldName = 'DTEMISSAO'
@@ -505,8 +505,8 @@ object DMConsNotas: TDMConsNotas
   end
   object dsNotaFiscal_DT: TDataSource
     DataSet = cdsNotaFiscal_DT
-    Left = 224
-    Top = 200
+    Left = 192
+    Top = 144
   end
   object sdsNotaFiscal: TSQLDataSet
     NoMetadata = True
@@ -529,21 +529,21 @@ object DMConsNotas: TDMConsNotas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 96
-    Top = 258
+    Left = 64
+    Top = 202
   end
   object dspNotaFiscal: TDataSetProvider
     DataSet = sdsNotaFiscal
     OnUpdateError = dspNotaFiscal_CliUpdateError
-    Left = 144
-    Top = 258
+    Left = 112
+    Top = 202
   end
   object cdsNotaFiscal: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspNotaFiscal'
-    Left = 184
-    Top = 258
+    Left = 152
+    Top = 202
     object cdsNotaFiscalFILIAL: TIntegerField
       FieldName = 'FILIAL'
     end
@@ -606,8 +606,8 @@ object DMConsNotas: TDMConsNotas
   end
   object dsNotaFiscal: TDataSource
     DataSet = cdsNotaFiscal
-    Left = 224
-    Top = 258
+    Left = 192
+    Top = 202
   end
   object frxReport1: TfrxReport
     Tag = 1
@@ -619,12 +619,12 @@ object DMConsNotas: TDMConsNotas
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43500.689950381900000000
-    ReportOptions.LastChange = 43601.599119201390000000
+    ReportOptions.LastChange = 43672.668734560180000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 776
-    Top = 360
+    Left = 480
+    Top = 240
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -647,8 +647,8 @@ object DMConsNotas: TDMConsNotas
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 816
-    Top = 357
+    Left = 520
+    Top = 237
   end
   object frxMailExport1: TfrxMailExport
     UseFileCache = True
@@ -662,12 +662,12 @@ object DMConsNotas: TDMConsNotas
     ConfurmReading = False
     UseMAPI = SMTP
     MAPISendFlag = 0
-    Left = 856
-    Top = 357
+    Left = 560
+    Top = 237
   end
   object frxRichObject1: TfrxRichObject
-    Left = 888
-    Top = 357
+    Left = 592
+    Top = 237
   end
   object qDevolucoes: TSQLQuery
     MaxBlobSize = -1
@@ -691,8 +691,8 @@ object DMConsNotas: TDMConsNotas
       ' AND DTEMISSAO BETWEEN :D1 AND :D2'
       ' AND TIPO_NOTA = '#39'E'#39)
     SQLConnection = dmDatabase.scoDados
-    Left = 920
-    Top = 104
+    Left = 568
+    Top = 32
     object qDevolucoesVLR_NOTA: TFloatField
       FieldName = 'VLR_NOTA'
     end
@@ -709,8 +709,8 @@ object DMConsNotas: TDMConsNotas
     PageBreaks = True
     EmptyLines = True
     SuppressPageHeadersFooters = False
-    Left = 928
-    Top = 358
+    Left = 632
+    Top = 238
   end
   object frxDOCXExport1: TfrxDOCXExport
     UseFileCache = True
@@ -719,8 +719,8 @@ object DMConsNotas: TDMConsNotas
     DataOnly = False
     OpenAfterExport = False
     PictureType = gpPNG
-    Left = 960
-    Top = 358
+    Left = 664
+    Top = 238
   end
   object qParametros_NFe: TSQLQuery
     NoMetaData = False
@@ -730,8 +730,8 @@ object DMConsNotas: TDMConsNotas
       'SELECT *'
       'FROM PARAMETROS_NFE')
     SQLConnection = dmDatabase.scoDados
-    Left = 728
-    Top = 160
+    Left = 600
+    Top = 32
     object qParametros_NFeMOSTRAR_VLR_FRETE_CONS: TStringField
       FieldName = 'MOSTRAR_VLR_FRETE_CONS'
       FixedChar = True
@@ -757,21 +757,21 @@ object DMConsNotas: TDMConsNotas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 376
-    Top = 330
+    Left = 64
+    Top = 258
   end
   object dspReciboNF: TDataSetProvider
     DataSet = sdsReciboNF
     OnUpdateError = dspNotaFiscal_CliUpdateError
-    Left = 424
-    Top = 330
+    Left = 112
+    Top = 258
   end
   object cdsReciboNF: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspReciboNF'
-    Left = 464
-    Top = 330
+    Left = 152
+    Top = 258
     object cdsReciboNFFILIAL: TIntegerField
       FieldName = 'FILIAL'
     end
@@ -814,8 +814,8 @@ object DMConsNotas: TDMConsNotas
   end
   object dsReciboNF: TDataSource
     DataSet = cdsReciboNF
-    Left = 504
-    Top = 330
+    Left = 192
+    Top = 258
   end
   object sdsFornecedor: TSQLDataSet
     NoMetadata = True
@@ -826,21 +826,21 @@ object DMConsNotas: TDMConsNotas
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 368
-    Top = 408
+    Left = 72
+    Top = 320
   end
   object dspFornecedor: TDataSetProvider
     DataSet = sdsFornecedor
-    Left = 400
-    Top = 408
+    Left = 104
+    Top = 320
   end
   object cdsFornecedor: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFornecedor'
-    Left = 440
-    Top = 408
+    Left = 144
+    Top = 320
     object cdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -856,8 +856,8 @@ object DMConsNotas: TDMConsNotas
   end
   object dsFornecedor: TDataSource
     DataSet = cdsFornecedor
-    Left = 480
-    Top = 408
+    Left = 184
+    Top = 320
   end
   object sdsProduto_Det: TSQLDataSet
     NoMetadata = True
@@ -874,8 +874,8 @@ object DMConsNotas: TDMConsNotas
       'r_ipi,'#13#10'   lpad(V.num_nota,9,0 ) || lpad(V.serie,3,0) || lpad(V.' +
       'id_pessoa,6,0) Agrupa_Nota , V.id_pessoa ID_CLIENTE,'#13#10'case'#13#10'  wh' +
       'en v.tipo_reg = '#39'NTE'#39' then v.dtentradasaida'#13#10'  else v.dtemissao'#13 +
-      #10'  end DATA'#13#10'from vconsnotas V'#13#10'left join COMBINACAO COMB on (V.' +
-      'ID_COR = COMB.ID)'#13#10#13#10#13#10#13#10#13#10#13#10
+      #10'  end DATA, V.NOME_PAGTO, V.ID_NOTA'#13#10'from vconsnotas V'#13#10'left jo' +
+      'in COMBINACAO COMB on (V.ID_COR = COMB.ID)'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1015,6 +1015,13 @@ object DMConsNotas: TDMConsNotas
     object cdsProduto_DetID_CLIENTE: TIntegerField
       FieldName = 'ID_CLIENTE'
     end
+    object cdsProduto_DetNOME_PAGTO: TStringField
+      FieldName = 'NOME_PAGTO'
+      Size = 40
+    end
+    object cdsProduto_DetID_NOTA: TIntegerField
+      FieldName = 'ID_NOTA'
+    end
   end
   object dsProduto_Det: TDataSource
     DataSet = cdsProduto_Det
@@ -1023,6 +1030,8 @@ object DMConsNotas: TDMConsNotas
   end
   object frxProduto_Det: TfrxDBDataset
     UserName = 'frxProduto_Det_Geral'
+    OnFirst = frxProduto_DetFirst
+    OnNext = frxProduto_DetNext
     CloseDataSource = False
     FieldAliases.Strings = (
       'VLR_TOTAL=VLR_TOTAL'
@@ -1056,10 +1065,58 @@ object DMConsNotas: TDMConsNotas
       'DATA=DATA'
       'VLR_IPI=VLR_IPI'
       'AGRUPA_NOTA=AGRUPA_NOTA'
-      'ID_CLIENTE=ID_CLIENTE')
+      'ID_CLIENTE=ID_CLIENTE'
+      'NOME_PAGTO=NOME_PAGTO')
+    OnClose = frxProduto_DetClose
     DataSource = dsProduto_Det
     BCDToCurrency = False
-    Left = 784
-    Top = 405
+    Left = 480
+    Top = 285
+  end
+  object qDuplicatas: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_NOTA'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select D.NUMDUPLICATA, D.PARCELA, D.DTVENCIMENTO, D.VLR_PARCELA'
+      'from DUPLICATA D'
+      'where D.ID_NOTA = :ID_NOTA')
+    SQLConnection = dmDatabase.scoDados
+    Left = 504
+    Top = 88
+    object qDuplicatasPARCELA: TIntegerField
+      DisplayLabel = 'Parcela'
+      FieldName = 'PARCELA'
+    end
+    object qDuplicatasDTVENCIMENTO: TDateField
+      DisplayLabel = 'Data Vencimento'
+      FieldName = 'DTVENCIMENTO'
+    end
+    object qDuplicatasVLR_PARCELA: TFloatField
+      DisplayLabel = 'Valor Parcela'
+      FieldName = 'VLR_PARCELA'
+      DisplayFormat = ',0.00'
+      EditFormat = ',0.00'
+    end
+    object qDuplicatasNUMDUPLICATA: TStringField
+      FieldName = 'NUMDUPLICATA'
+    end
+  end
+  object frxDuplicatas: TfrxDBDataset
+    UserName = 'frxDuplicatas'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'PARCELA=PARCELA'
+      'DTVENCIMENTO=DTVENCIMENTO'
+      'VLR_PARCELA=VLR_PARCELA'
+      'NUMDUPLICATA=NUMDUPLICATA')
+    DataSet = qDuplicatas
+    BCDToCurrency = False
+    Left = 520
+    Top = 285
   end
 end
