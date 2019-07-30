@@ -97,10 +97,10 @@ begin
     LabelBkp.Caption := 'Data Último Backup: ' + vData; // + ' ' + vHora;
     if DaysBetween(Date,StrToDate(vData)) > 4 then
     begin
-      LabelBkp.Blinking := True;
+      LabelBkp.Blinking := False;
       LabelBkp.Caption := LabelBkp.Caption + '! Clique aqui!';
-      PanelBkp.Visible := (trim(vData) <> '');
-      LabelBkp.Visible := (trim(vData) <> '');
+      PanelBkp.Visible := True;
+      LabelBkp.Visible := True;
       if DaysBetween(Date,StrToDate(vData)) > 9 then
         LabelBkp.Blinking := True;
     end;
@@ -329,8 +329,8 @@ end;
 
 procedure TfMenu1.LabelBkpClick(Sender: TObject);
 begin
-  prc_ShellExecute('ssBackUp_Solo.exe');
   prc_Verifica_Backup;
+  prc_ShellExecute('ssBackUp_Solo.exe');
 end;
 
 end.

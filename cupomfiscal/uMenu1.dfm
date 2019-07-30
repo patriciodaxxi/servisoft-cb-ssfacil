@@ -99,7 +99,7 @@ object fMenu1: TfMenu1
       ParentFont = False
       Transparent = True
     end
-    object Panel3: TPanel
+    object PanelBkp: TPanel
       Left = 1
       Top = 480
       Width = 918
@@ -108,7 +108,7 @@ object fMenu1: TfMenu1
       Color = 8404992
       TabOrder = 0
       Visible = False
-      object Label6: TLabel
+      object LabelBkp: TLabel
         Left = 1
         Top = 1
         Width = 916
@@ -125,6 +125,7 @@ object fMenu1: TfMenu1
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnClick = LabelBkpClick
       end
     end
     object Panel5: TPanel
