@@ -126,6 +126,7 @@ object fMenu1: TfMenu1
         ParentColor = False
         ParentFont = False
         OnClick = LabelBkpClick
+        OnDblClick = LabelBkpClick
       end
     end
     object Panel5: TPanel
