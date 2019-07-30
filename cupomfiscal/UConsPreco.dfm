@@ -4,7 +4,7 @@ object frmConsPreco: TfrmConsPreco
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmConsPreco'
-  ClientHeight = 130
+  ClientHeight = 156
   ClientWidth = 541
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -24,30 +24,30 @@ object frmConsPreco: TfrmConsPreco
     Left = 0
     Top = 0
     Width = 541
-    Height = 130
+    Height = 156
     Align = alClient
-    Color = clGray
+    Color = 7300393
     TabOrder = 0
     object Label4: TLabel
       Left = 28
       Top = 18
-      Width = 53
+      Width = 72
       Height = 13
       Caption = 'C'#243'd. Barra:'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clWhite
       Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
       ParentFont = False
     end
     object Label1: TLabel
       Left = 12
-      Top = 42
+      Top = 66
       Width = 517
       Height = 24
       AutoSize = False
-      Color = clBlack
+      Color = 3683329
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -16
@@ -58,12 +58,12 @@ object frmConsPreco: TfrmConsPreco
     end
     object Label2: TLabel
       Left = 12
-      Top = 69
+      Top = 93
       Width = 517
       Height = 24
       AutoSize = False
       Caption = 'Pre'#231'o: 0'
-      Color = clBlack
+      Color = 3683329
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -20
@@ -74,12 +74,12 @@ object frmConsPreco: TfrmConsPreco
     end
     object Label3: TLabel
       Left = 12
-      Top = 96
+      Top = 120
       Width = 517
       Height = 24
       AutoSize = False
       Caption = 'Estoque: 0'
-      Color = clBlack
+      Color = 3683329
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
       Font.Height = -20
@@ -88,8 +88,21 @@ object frmConsPreco: TfrmConsPreco
       ParentColor = False
       ParentFont = False
     end
+    object Label5: TLabel
+      Left = 32
+      Top = 40
+      Width = 334
+      Height = 13
+      Caption = 'Digite 0 antes do c'#243'digo para pesquisar por ID. (Ex.: 089)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+    end
     object Edit3: TEdit
-      Left = 84
+      Left = 106
       Top = 10
       Width = 197
       Height = 21
