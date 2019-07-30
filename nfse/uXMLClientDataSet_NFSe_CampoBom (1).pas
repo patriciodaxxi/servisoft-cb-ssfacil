@@ -31,7 +31,7 @@ begin
   AddADTChield(Def, 'dEmi', ftDate);
   AddADTChield(Def, 'hEmi', ftString, 5);
   //AddADTChield(Def, 'dSaiEnt', ftDate);
-  AddADTChield(Def, 'tpNF', ftInteger);
+  //AddADTChield(Def, 'tpNF', ftInteger);
   //AddADTChield(Def, 'cMunFG', ftString, 7);
   AddADTChield(Def, 'refNF', ftString, 39);
   AddADTChield(Def, 'tpImp', ftString, 1);
@@ -212,10 +212,8 @@ begin
   //AddADTChield(Def2, 'vDesc', ftFloat);
   //AddADTChield(Def2, 'vLiq', ftFloat);
 
-  //AddADTChield(Def, 'vtLiqFaturas-CSLL', ftFloat);
-  //AddADTChield(Def, 'vtDespesas-CSLL', ftFloat);
-  AddADTChield(Def, 'vtLiqFaturas', ftFloat);
-  AddADTChield(Def, 'vtDespesas', ftFloat);
+  AddADTChield(Def, 'vtLiqFaturas-CSLL', ftFloat);
+  AddADTChield(Def, 'vtDespesas-CSLL', ftFloat);
 
   AddADTChield(Def, 'ISS', ftADT);
   Def2 := Def.ChildDefs.Find('ISS');

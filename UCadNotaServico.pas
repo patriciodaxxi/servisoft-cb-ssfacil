@@ -2099,8 +2099,6 @@ begin
       end;
       fDMCadNotaServico.cdsNotaServico_Consulta.Next;
     end;
-    if CheckBox1.Checked then
-      cTXTStream.SaveToFile('C:\a\teste2.xml');
 
     if (vFlag) and (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'CAMPO BOM') then
     begin
@@ -2110,6 +2108,8 @@ begin
     begin
       uXMLNFSe_PortoAlegre.prc_Finaliza(fDMCadNotaServico, cTXTStream);
     end;
+    if CheckBox1.Checked then
+      cTXTStream.SaveToFile('C:\a\teste2.xml');
 
     if vNumLoteAnt = -99 then
       raise Exception.Create('*** Foram selecionados lotes diferentes para a mesma remessa, selecione novamente e faça o envio!');
@@ -2127,7 +2127,11 @@ begin
          i := i + 1;
         end;
         if vProcesso_OK then
-          raise Exception.Create('*** Processo de envio e retorno concluído!')
+        begin
+          //raise Exception.Create('*** Processo de envio e retorno concluído!')
+          MessageDlg('*** Processo de envio e retorno concluído!', mtConfirmation, [mbOk], 0);
+          exit;
+        end
         else
           raise Exception.Create('*** Nota já contém um protocolo, mas não está validada ' +#13 +
                                       'Aguarde e tente efetuar consulta mais tarde.' + #13 +

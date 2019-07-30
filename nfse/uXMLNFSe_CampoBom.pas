@@ -81,7 +81,7 @@ begin
 
   vCds.Insert;
   //vCds.FieldByName('Id.cNFS-e').AsString := '         '; //ver
-  vCds.FieldByName('Id.cNFS-e').AsString := fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString;
+  vCds.FieldByName('Id.cNFS-e').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString,9);
   //vCds.FieldByName('Id.natOp').AsString  := 'Prestacao de Servicos'; //24/07/2019
   //vCds.FieldByName('Id.mod').AsString    := '55'; //24/07/2019
   vCds.FieldByName('Id.mod').AsString    := '90';
@@ -94,10 +94,17 @@ begin
   //vCds.FieldByName('Id.dEmi').AsDateTime := StrToDate(FormatDateTime('YYYY-MM-DD',fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime));
   vCds.FieldByName('Id.dEmi').AsDateTime := fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime;
   vCds.FieldByName('Id.hEmi').AsString := FormatDateTime('HH:MM',Now);
-  //vCds.FieldByName('Id.tpNF').AsString   := '1';
+  vCds.FieldByName('Id.tpNF').AsString   := '1';
   //if trim(fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString) <> '' then 24/07/2019
   //  vCds.FieldByName('Id.cMunFG').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString;  24/07/2019
-  //vCds.FieldByName('Id.refNF').AsString := ''
+  vTexto1 := fDMCadNotaServico.cdsNotaServico_ImpCODUF_FIL.AsString  //Cód UF IBFGE
+           + Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCNPJ_CPF_FIL.AsString,14) //CNPJ Prestador
+           + '90' //Modelo da Nota, Padrão 90
+           + fDMCadNotaServico.cdsNotaServico_ImpSERIE.AsString + '00' // Série preencher com Zeros a direita
+           + Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString,9) // Numéro da Nota com Zeros a Esquerda
+           + Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString,9); // Código aleatório, esta pegando o número da nota
+
+  vCds.FieldByName('Id.refNF').AsString := vTexto1;
   vCds.FieldByName('Id.tpImp').AsString := '1'; //24/07/2019
   vCds.FieldByName('Id.tpEmis').AsString := 'N'; //24/07/2019
   vCds.FieldByName('Id.cancelada').AsString := 'N'; //24/07/2019
@@ -215,7 +222,7 @@ begin
     Det.NestedDataSet.fieldbyname('nItem').asstring := fDMCadNotaServico.cdsNotaServico_Imp_ItensITEM.AsString;
 
     Det.NestedDataSet.FieldByName('serv.cServ').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCOD_SERVICO.AsString,0);
-    Det.NestedDataSet.FieldByName('serv.xServ').AsString := fDMCadNotaServico.cdsNotaServico_Imp_ItensNOME_SERVICO_INT.AsString; 
+    Det.NestedDataSet.FieldByName('serv.xServ').AsString := fDMCadNotaServico.cdsNotaServico_Imp_ItensNOME_SERVICO_INT.AsString;
     if fDMCadNotaServico.cdsNotaServico_ImpID_CIDADE_TRIB.AsInteger > 0 then
       Det.NestedDataSet.FieldByName('serv.localTributacao').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString
     else
@@ -309,8 +316,8 @@ begin
   if (fDMCadNotaServico.cdsNotaServico_ImpRETEM_INSS.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_INSS.AsFloat)) > 0) then
     vCds.FieldByName('total.Ret.vRetINSS').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_INSS.AsFloat));
 
-  vCds.FieldByName('total.vtLiqFaturas-CSLL').AsFloat := 0;
-  vCds.FieldByName('total.vtDespesas-CSLL').AsFloat   := 0;
+  vCds.FieldByName('total.vtLiqFaturas').AsFloat := 0;
+  vCds.FieldByName('total.vtDespesas').AsFloat   := 0;
 
   vCds.FieldByName('total.ISS.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpBASE_CALCULO.AsFloat));
   if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat)) > 0 then
@@ -338,6 +345,12 @@ begin
       fDMCadNotaServico.cdsNotaServico_Imp_Parc.Next;
     end;
   end;
+
+  if fDMCadNotaServico.cdsNotaServico_ImpID_CIDADE_TRIB.AsInteger > 0 then
+    vCds.FieldByName('infAdicLT').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_CLI.AsString
+  else
+    vCds.FieldByName('infAdicLT').AsString := fDMCadNotaServico.cdsNotaServico_ImpCODMUNICIPIO_FIL.AsString;
+
   //Observações
   obs := vCds.FieldByName('infAdic') as TDataSetField;
   {obs.NestedDataSet.Insert;

@@ -189,6 +189,14 @@ type
     cdsProduto_DetVLR_IPI: TFloatField;
     cdsProduto_DetAGRUPA_NOTA: TStringField;
     cdsProduto_DetID_CLIENTE: TIntegerField;
+    qDuplicatas: TSQLQuery;
+    qDuplicatasPARCELA: TIntegerField;
+    qDuplicatasDTVENCIMENTO: TDateField;
+    qDuplicatasVLR_PARCELA: TFloatField;
+    frxDuplicatas: TfrxDBDataset;
+    cdsProduto_DetNOME_PAGTO: TStringField;
+    cdsProduto_DetID_NOTA: TIntegerField;
+    qDuplicatasNUMDUPLICATA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscal_CliUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -196,8 +204,12 @@ type
     procedure DataModuleDestroy(Sender: TObject);
     procedure cdsNotaFiscalCalcFields(DataSet: TDataSet);
     procedure cdsNotaFiscal_DTCalcFields(DataSet: TDataSet);
+    procedure frxProduto_DetFirst(Sender: TObject);
+    procedure frxProduto_DetClose(Sender: TObject);
+    procedure frxProduto_DetNext(Sender: TObject);
   private
     { Private declarations }
+    ID_Nota : Integer;
     function fnc_Calcula_Perc_SobreFat(Valor: Real): Real;
   public
     { Public declarations }
@@ -231,6 +243,7 @@ begin
   qParametros.Close;
 
   cdsFilial.Open;
+
   cdsCliente.Open;
   cdsProduto.Open;
   qParametros.Open;
@@ -273,6 +286,42 @@ end;
 procedure TDMConsNotas.cdsNotaFiscal_DTCalcFields(DataSet: TDataSet);
 begin
   cdsNotaFiscal_DTclPerc_SobreFat.AsFloat := fnc_Calcula_Perc_SobreFat(cdsNotaFiscal_DTVLR_TOTAL.AsFloat);
+end;
+
+procedure TDMConsNotas.frxProduto_DetFirst(Sender: TObject);
+begin
+  if ID_Nota <> cdsProduto_DetID_NOTA.AsInteger then
+  begin
+    ID_Nota := cdsProduto_DetID_NOTA.AsInteger;
+  end
+  else
+  begin
+    qDuplicatas.Close;
+    qDuplicatas.ParamByName('ID_NOTA').AsInteger := cdsProduto_DetID_NOTA.AsInteger ;
+    qDuplicatas.Open;
+    ID_Nota := cdsProduto_DetID_NOTA.AsInteger;
+  end;
+end;
+
+procedure TDMConsNotas.frxProduto_DetClose(Sender: TObject);
+begin
+  ID_Nota := 0;
+end;
+
+procedure TDMConsNotas.frxProduto_DetNext(Sender: TObject);
+begin
+  if ID_Nota <> cdsProduto_DetID_NOTA.AsInteger then
+  begin
+    ID_Nota := cdsProduto_DetID_NOTA.AsInteger;
+  end
+  else
+  begin
+    qDuplicatas.Close;
+    qDuplicatas.ParamByName('ID_NOTA').AsInteger := cdsProduto_DetID_NOTA.AsInteger;
+    qDuplicatas.Open;
+    ID_Nota := cdsProduto_DetID_NOTA.AsInteger;
+  end;
+
 end;
 
 end.

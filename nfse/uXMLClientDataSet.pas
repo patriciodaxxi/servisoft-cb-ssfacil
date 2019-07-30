@@ -220,14 +220,14 @@ begin
           end;
         end
         else
-        if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'faturas')) then
+        if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'infAdic')) then
         begin
           TDataSetField(AFields[I]).NestedDataSet.Append;
           TDataSetField(AFields[I]).NestedDataSet.Fields[0].AsString := xNode.Text;
           TDataSetField(AFields[I]).NestedDataSet.Append;
         end
         else
-        if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'infAdic')) then
+        if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'faturas')) then
         begin
           xNode := xNode.ChildNodes[0];
           sCampo := xNode.NodeName;
