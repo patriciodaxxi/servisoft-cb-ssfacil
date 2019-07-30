@@ -110,7 +110,8 @@ begin
   fDMCadLote.mAuxLoteNum_Lote_Controle.AsString := fDMCadLote.cdsSaldoEstNUM_LOTE_CONTROLE.AsString;
   fDMCadLote.mAuxLoteUsa_Estoque.AsString    := 'S';
 
-  if (fDMCadLote.cdsProdutoTIPO_PRODUCAO.AsString = 'T') and (Tipo = 'S') then
+  //if (fDMCadLote.cdsProdutoTIPO_PRODUCAO.AsString = 'T') and (Tipo = 'S') then
+  if (fDMCadLote.cdsProdutoTIPO_PRODUCAO.AsString = 'T') and (fDMCadLote.mAuxLoteTipo_Lote.AsString = 'S') then
   begin
     if StrToFloat(FormatFloat('0.000',fDMCadLote.cdsProdutoMETROS_CARGA.AsFloat)) > 0 then
     begin
