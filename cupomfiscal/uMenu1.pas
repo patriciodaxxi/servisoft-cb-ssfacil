@@ -4,13 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, jpeg, ExtCtrls, StdCtrls, IniFiles, Mask,
-  DB, DateUtils, SqlExpr, UCBase, FMTBcd, DBClient, Provider, Grids, DBGrids, SMDBGrid, ToolEdit, strUtils;
+  DB, DateUtils, SqlExpr, UCBase, FMTBcd, DBClient, Provider, Grids, DBGrids, SMDBGrid, ToolEdit, strUtils,
+  JvLabel, JvBlinkingLabel;
 
 type
   TfMenu1 = class(TForm)
     Panel2: TPanel;
     PanelBkp: TPanel;
-    LabelBkp: TLabel;
     Panel5: TPanel;
     Label1: TLabel;
     Panel6: TPanel;
@@ -36,6 +36,7 @@ type
     cdsAniversarianteTELEFONE2: TStringField;
     DateEdit1: TDateEdit;
     DateEdit2: TDateEdit;
+    LabelBkp: TJvBlinkingLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormActivate(Sender: TObject);

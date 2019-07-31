@@ -108,25 +108,27 @@ object fMenu1: TfMenu1
       Color = 8404992
       TabOrder = 0
       Visible = False
-      object LabelBkp: TLabel
+      object LabelBkp: TJvBlinkingLabel
         Left = 1
         Top = 1
         Width = 916
         Height = 38
         Align = alClient
         Alignment = taCenter
-        AutoSize = False
         Caption = 'Data do '#218'ltimo BackUp: 99/99/9999! Verificar!'
-        Color = 8404992
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWhite
         Font.Height = -20
         Font.Name = 'Courier New'
         Font.Style = [fsBold]
-        ParentColor = False
         ParentFont = False
-        OnClick = LabelBkpClick
-        OnDblClick = LabelBkpClick
+        HotTrackFont.Charset = DEFAULT_CHARSET
+        HotTrackFont.Color = clWindowText
+        HotTrackFont.Height = -11
+        HotTrackFont.Name = 'MS Sans Serif'
+        HotTrackFont.Style = []
+        BlinkingDelay = 1000
+        BlinkingTime = 2000
       end
     end
     object Panel5: TPanel
