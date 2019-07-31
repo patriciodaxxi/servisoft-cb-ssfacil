@@ -274,8 +274,8 @@ begin
   begin
     vField := AFields[I];
     sCampo := APrefixo + vField.FieldName;
-    if (sCampo[Length(sCampo)] in ['0'..'9']) then
-      sCampo := Copy(sCampo, 1, Length(sCampo) - 1);
+    //if (sCampo[Length(sCampo)] in ['0'..'9']) then
+    //  sCampo := Copy(sCampo, 1, Length(sCampo) - 1);
 
     if (vField is TADTField) then
     begin
@@ -329,15 +329,15 @@ begin
       begin
         xNode := ABase.AddChild(sCampo);
 		
-		if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'infAdic')) then
-		  xNode.Text := TDataSetField(vField).NestedDataSet.Fields[0].AsString
-		else
+        if (Self.ClassNameIs('TXMLClientDataset_NFSE_CampoBom') and SameText(sCampo, 'infAdic')) then
+          xNode.Text := TDataSetField(vField).NestedDataSet.Fields[0].AsString
+        else
           Processar_NodesXML(TDataSetField(vField).NestedDataSet.Fields, xNode, APrefixo);
-        
-		TDataSetField(AFields[I]).NestedDataSet.Next;
-		
-        if not TDataSetField(AFields[I]).NestedDataSet.Eof then
-	      xNode := ABase.AddChild(sCampo);
+
+		    TDataSetField(AFields[I]).NestedDataSet.Next;
+
+        //if not TDataSetField(AFields[I]).NestedDataSet.Eof then
+	      //  xNode := ABase.AddChild(sCampo);
       end;
     end
     else
