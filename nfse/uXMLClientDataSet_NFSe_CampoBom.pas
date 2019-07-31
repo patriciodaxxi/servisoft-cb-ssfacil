@@ -131,10 +131,11 @@ begin
   AClientDataSet.FieldDefs.Add('det', ftDataSet);
   Def := AClientDataSet.FieldDefs.Find('det');
   AddADTChield(Def, 'nItem', ftInteger);
+  
   AddADTChield(Def, 'serv', ftADT);
-
   Def2 := Def.ChildDefs.Find('serv');
   AddADTChield(Def2, 'cServ', ftString, 60);
+  AddADTChield(Def2, 'cLCServ', ftString, 4);  
   AddADTChield(Def2, 'xServ', ftString, 120);  
   AddADTChield(Def2, 'localTributacao', ftString, 7);
   AddADTChield(Def2, 'localVerifResServ', ftString, 1);
@@ -146,6 +147,7 @@ begin
   AddADTChield(Def2, 'vBCISS', ftFloat);
   AddADTChield(Def2, 'pISS', ftFloat);
   AddADTChield(Def2, 'vISS', ftFloat);
+  AddADTChield(Def2, 'vBINSS', ftFloat);
   AddADTChield(Def2, 'pRetINSS', ftFloat);
   AddADTChield(Def2, 'vRetINSS', ftFloat);
   AddADTChield(Def2, 'vRed', ftFloat);

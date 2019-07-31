@@ -179,6 +179,7 @@ object frmCadCheque: TfrmCadCheque
             FieldName = 'REC_EMITIDO'
             Title.Alignment = taCenter
             Title.Caption = 'Recebido de / Emitido Para'
+            Width = 64
             Visible = True
           end>
       end

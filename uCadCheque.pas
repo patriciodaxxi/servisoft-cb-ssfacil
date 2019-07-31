@@ -553,6 +553,7 @@ begin
     fDMGravarFinanceiro.vVlr_Movimento      := StrToFloat(FormatFloat('0.00',fDmCadCheque.cdsChequeVALOR.AsFloat));
     vFilial                                 := fDmCadCheque.cdsChequeFILIAL.AsInteger;
     fDmGravarFinanceiro.vID_Conta_Orcamento := fDmCadCheque.cdsChequeID_CONTA_ORCAMENTO.AsInteger;
+    fDMGravarFinanceiro.vFilial_Fin         := fDmCadCheque.cdsChequeFILIAL.AsInteger;
     fDMGravarFinanceiro.prc_Gravar;
     
     dmDatabase.scoDados.Commit(ID);

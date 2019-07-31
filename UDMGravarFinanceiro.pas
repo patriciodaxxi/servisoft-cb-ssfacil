@@ -97,6 +97,7 @@ type
     vID_Nota_Servico: Integer;
     vID_Fechamento: Integer;
     vAutoQuitado: String;
+    vFilial_Fin : Integer;
 
     procedure prc_Localizar(ID: Integer);
     procedure prc_Inserir;
@@ -197,7 +198,11 @@ begin
     cdsFinanceiroID_CONTA_ORCAMENTO.AsInteger := vID_Conta_Orcamento;
   if vID_Cupom > 0 then
     cdsFinanceiroID_CUPOM.AsInteger := vID_Cupom;
-  cdsFinanceiroFILIAL.AsInteger     := vFilial;
+  //31/07/2019
+  if vFilial_Fin > 0 then
+    cdsFinanceiroFILIAL.AsInteger := vFilial_Fin
+  else
+    cdsFinanceiroFILIAL.AsInteger := vFilial;
   cdsFinanceiroDTUSUARIO.AsDateTime := Date;
   cdsFinanceiroHRUSUARIO.AsDateTime := Now;
   if vID_Transferencia > 0 then

@@ -292,8 +292,8 @@ begin
 //    if cdsTransferenciaID_CONTA_ORCAMENTO.AsInteger > 0 then
 //      fDMGravarFinanceiro.vID_Conta_Orcamento := cdsTransferenciaID_CONTA_ORCAMENTO.AsInteger;
     fDMGravarFinanceiro.vID_Transferencia := cdsTransferenciaID.AsInteger;
-
     vFilial := cdsContasFILIAL.AsInteger;
+    fDMGravarFinanceiro.vFilial_Fin       := cdsContasFILIAL.AsInteger;
 
     fDMGravarFinanceiro.prc_Gravar;
   except

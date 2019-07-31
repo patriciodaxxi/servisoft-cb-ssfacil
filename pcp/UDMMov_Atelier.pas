@@ -331,7 +331,8 @@ begin
   fDMGravarFinanceiro.vDtMovimento        := cdsMov_AtelierDT_CADASTRO.AsDateTime;
   fDMGravarFinanceiro.vVlr_Movimento      := StrToFloat(FormatFloat('0.00',cdsMov_AtelierVLR_MOV.AsFloat));
   fDMGravarFinanceiro.vID_Conta_Orcamento := qParametrosID_CONTA_ORC_ATELIER.AsInteger;
-
+  fDMGravarFinanceiro.vFilial_Fin         := cdsMov_AtelierFILIAL.AsInteger;
+  
   fDMGravarFinanceiro.prc_Gravar;
   fDMGravarFinanceiro.vID_MovAtelier := 0;
 
