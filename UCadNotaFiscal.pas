@@ -1475,6 +1475,7 @@ var
   vExcluir: boolean;
   fdmDatabase_NFeBD: TdmDatabase_NFeBD;
 begin
+  vFilial := fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger;
   fDMCadNotaFiscal.mPedidoAuxExcluir.EmptyDataSet;
   ckTotalDup.Checked := False;
   ckTotalDup.Visible := False;

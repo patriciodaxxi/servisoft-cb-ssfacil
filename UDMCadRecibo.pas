@@ -1450,6 +1450,7 @@ begin
   fDMGravarFinanceiro.vDtMovimento        := cdsDuplicata_HistDTLANCAMENTO.AsDateTime;
   fDMGravarFinanceiro.vVlr_Movimento      := StrToFloat(FormatFloat('0.00',cdsDuplicata_HistVLR_PAGAMENTO.AsFloat));
   fDMGravarFinanceiro.vID_Conta_Orcamento := cdsDuplicataID_CONTA_ORCAMENTO.AsInteger;
+  fDMGravarFinanceiro.vFilial_Fin         := cdsDuplicataFILIAL.AsInteger;
 
   fDMGravarFinanceiro.prc_Gravar;
 

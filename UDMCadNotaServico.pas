@@ -2462,6 +2462,7 @@ begin
   fDMGravarFinanceiro.vVlr_Movimento      := StrToCurr(FormatCurr('0.00',cdsDuplicata_HistVLR_PAGAMENTO.AsFloat));
   fDMGravarFinanceiro.vID_Conta_Orcamento := cdsDuplicataID_CONTA_ORCAMENTO.AsInteger;
   fDMGravarFinanceiro.vID_Nota_Servico    := cdsDuplicataID_NOTA_SERVICO.AsInteger;
+  fDMGravarFinanceiro.vFilial_Fin         := cdsDuplicataFILIAL.AsInteger;
 
   fDMGravarFinanceiro.prc_Gravar;
 

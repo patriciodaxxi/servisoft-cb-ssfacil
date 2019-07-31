@@ -410,7 +410,7 @@ object DMMov_Atelier: TDMMov_Atelier
     Top = 296
   end
   object frxReport1: TfrxReport
-    Version = '5.1.1'
+    Version = '5.6.8'
     DotMatrixReport = False
     EngineOptions.PrintIfEmpty = False
     IniFile = '\Software\Fast Reports'
