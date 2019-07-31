@@ -284,6 +284,7 @@ type
     procedure prc_scroll2(DataSet: TDataSet);
 
     procedure prc_Mostrar_Reserva;
+    procedure prc_Atualiza_Aprovacao_OC(ID : Integer);
 
     function fnc_Buscar_Num_Ordem(ID_OC: Integer; Ajuste: Boolean = False): String;
 
@@ -444,6 +445,8 @@ begin
   fDMCadPedido.mSenha.EmptyDataSet;
 
   RzPageControl1.ActivePage := TS_Consulta;
+
+  prc_Atualiza_Aprovacao_OC(vIDAux);
 
   prc_Consultar(vIDAux);
   prc_Posiciona_Pedido;
@@ -1743,6 +1746,23 @@ begin
     frmConsMotivoNaoAprov.vItem_OC_Loc := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
     frmConsMotivoNaoAprov.ShowModal;
     FreeAndNil(frmConsMotivoNaoAprov);
+  end;
+end;
+
+procedure TfrmCadOC.prc_Atualiza_Aprovacao_OC(ID: Integer);
+var
+  sds: TSQLDataSet;
+begin
+  sds := TSQLDataSet.Create(nil);
+
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText := 'EXECUTE procedure prc_atualiza_aprov_ped ' + IntToStr(ID);
+    sds.ExecSQL;
+  finally
+    FreeAndNil(sds);
   end;
 end;
 
