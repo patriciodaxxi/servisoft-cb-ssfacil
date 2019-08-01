@@ -147,7 +147,7 @@ begin
   AddADTChield(Def2, 'vBCISS', ftFloat);
   AddADTChield(Def2, 'pISS', ftFloat);
   AddADTChield(Def2, 'vISS', ftFloat);
-  AddADTChield(Def2, 'vBCINSS', ftFloat);
+  AddADTChield(Def2, 'vBINSS', ftFloat);
   AddADTChield(Def2, 'pRetINSS', ftFloat);
   AddADTChield(Def2, 'vRetINSS', ftFloat);
   AddADTChield(Def2, 'vRed', ftFloat);
@@ -169,6 +169,7 @@ begin
 
   AddADTChield(Def, 'ISSST', ftADT);
   Def2 := Def.ChildDefs.Find('ISSST');
+  //AddADTChield(Def2, 'pRedBCST', ftFloat);
   AddADTChield(Def2, 'vRedBCST', ftFloat);
   AddADTChield(Def2, 'vBCST', ftFloat);
   AddADTChield(Def2, 'pISSST', ftFloat);
@@ -226,9 +227,9 @@ begin
   AddADTChield(Def2, 'vSTISS', ftFloat);
 
 
-  AClientDataSet.FieldDefs.Add('faturas', ftADT);
+  AClientDataSet.FieldDefs.Add('faturas', ftDataSet);
   Def := AClientDataSet.FieldDefs.Find('faturas');
-  AddADTChield(Def, 'fat', ftDataSet);
+  AddADTChield(Def, 'fat', ftADT);
   Def2 := Def.ChildDefs.Find('fat');
   AddADTChield(Def2, 'nItem', ftInteger);
   AddADTChield(Def2, 'nFat', ftString, 60);

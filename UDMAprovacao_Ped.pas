@@ -328,6 +328,10 @@ type
     cdsPedido_ItemQTD: TFloatField;
     mPedidoAuxOBS: TMemoField;
     cdsPedido_PendOBS: TMemoField;
+    sdsPedido_ItemVLR_UNITARIO: TFloatField;
+    sdsPedido_ItemVLR_TOTAL: TFloatField;
+    cdsPedido_ItemVLR_UNITARIO: TFloatField;
+    cdsPedido_ItemVLR_TOTAL: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedido_ProcessoNewRecord(DataSet: TDataSet);
   private
