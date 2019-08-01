@@ -185,8 +185,9 @@ begin
   fDMCadPedido.vMSGErro := '';
   vGravou  := False;
   vVerificaCampos := 0;
-  //if (trim(fDMCadPedido.cdsPedidoPEDIDO_CLIENTE.AsString) = '') and (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') then
-  //  fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Pedido cliente não informado!';
+  if (trim(fDMCadPedido.cdsPedidoPEDIDO_CLIENTE.AsString) = '') and (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P')
+    and (fDMCadPedido.qParametros_PedEXIGE_PEDIDO_CLI.AsString = 'S') then
+    fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Pedido cliente não informado!';
   if (fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger < 1) and (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') then
     fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Cliente não informado!';
   if (fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger < 1) and (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'C') then

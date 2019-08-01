@@ -1,8 +1,7 @@
 object dmCadProduto: TdmCadProduto
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 41
-  Top = 9
+  Left = 324
   Height = 714
   Width = 1288
   object sdsProduto: TSQLDataSet
@@ -12,7 +11,7 @@ object dmCadProduto: TdmCadProduto
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 50
+    Left = 51
     object sdsProdutoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1613,17 +1612,20 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_ConsumoNOME_SETOR: TStringField
       FieldKind = fkCalculated
       FieldName = 'NOME_SETOR'
+      ProviderFlags = []
       Size = 40
       Calculated = True
     end
     object cdsProduto_ConsumoclPreco_Venda: TFloatField
       FieldKind = fkCalculated
       FieldName = 'clPreco_Venda'
+      ProviderFlags = []
       Calculated = True
     end
     object cdsProduto_ConsumoclTIPO_REG: TStringField
       FieldKind = fkCalculated
       FieldName = 'clTIPO_REG'
+      ProviderFlags = []
       Size = 1
       Calculated = True
     end
@@ -1643,6 +1645,7 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_ConsumoclUsa_Processo: TStringField
       FieldKind = fkCalculated
       FieldName = 'clUsa_Processo'
+      ProviderFlags = []
       Size = 1
       Calculated = True
     end
@@ -2397,7 +2400,7 @@ object dmCadProduto: TdmCadProduto
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 50
-    Top = 365
+    Top = 364
     object sdsProduto_VeiculoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2777,8 +2780,8 @@ object dmCadProduto: TdmCadProduto
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 50
-    Top = 190
+    Left = 48
+    Top = 188
     object sdsProduto_Consumo_TamID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3855,7 +3858,7 @@ object dmCadProduto: TdmCadProduto
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspSitTribCf'
-    Left = 640
+    Left = 639
     Top = 552
     object cdsSitTribCfID: TIntegerField
       FieldName = 'ID'
@@ -4955,6 +4958,7 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_Comb_MatclUsa_Cor: TStringField
       FieldKind = fkCalculated
       FieldName = 'clUsa_Cor'
+      ProviderFlags = []
       Size = 1
       Calculated = True
     end
@@ -6069,7 +6073,7 @@ object dmCadProduto: TdmCadProduto
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProcesso'
-    Left = 640
+    Left = 639
     Top = 331
     object cdsProcessoID: TIntegerField
       FieldName = 'ID'
@@ -6661,6 +6665,7 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_CarimboNOME_CLIENTE: TStringField
       FieldKind = fkCalculated
       FieldName = 'NOME_CLIENTE'
+      ProviderFlags = []
       Size = 70
       Calculated = True
     end
@@ -7262,7 +7267,7 @@ object dmCadProduto: TdmCadProduto
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 416
+    Left = 415
     Top = 255
   end
   object dspCSTICMS: TDataSetProvider
@@ -8272,7 +8277,7 @@ object dmCadProduto: TdmCadProduto
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 210
+    Left = 211
     Top = 50
     object sdsProduto_GradeNumID: TIntegerField
       FieldName = 'ID'
