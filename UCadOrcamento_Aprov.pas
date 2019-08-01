@@ -298,6 +298,9 @@ begin
   if vID_LocalAux > 0 then
     fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger := vID_LocalAux;
 
+  if fDMCadPedido.cdsOrcamentoID_VENDEDOR_INT.AsInteger > 0 then
+    fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsOrcamentoID_VENDEDOR_INT.AsInteger;
+
   fDMCadPedido.cdsPedido.Post;
   fDMCadPedido.cdsPedido.Edit;
   

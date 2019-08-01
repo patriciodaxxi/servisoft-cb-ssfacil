@@ -1,6 +1,6 @@
 object frmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov
-  Left = 353
-  Top = 60
+  Left = 194
+  Top = 53
   Width = 984
   Height = 596
   Caption = 'frmCadOrcamento_Aprov'

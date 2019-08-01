@@ -6755,6 +6755,9 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'FONE'
       Size = 10
     end
+    object cdsOrcamentoID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
+    end
   end
   object dsOrcamento: TDataSource
     DataSet = cdsOrcamento
