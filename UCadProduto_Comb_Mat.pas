@@ -4,8 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, UDMCadProduto, StdCtrls,
-  Buttons, RxLookup, DBCtrls, DB, Mask, RxDBComb, ToolEdit, RXDBCtrl, UCadMaterial,
-  RzPanel;
+  Buttons, RxLookup, DBCtrls, DB, Mask, RxDBComb, ToolEdit, RXDBCtrl, UCadMaterial, RzPanel;
 
 type
   TfrmCadProduto_Comb_Mat = class(TForm)
@@ -64,8 +63,8 @@ type
   private
     { Private declarations }
     ffrmCadMaterial: TfrmCadMaterial;
-    vID_MaterialAnt : Integer;
-    vID_PosicaoAnt : Integer;
+    vID_MaterialAnt: Integer;
+    vID_PosicaoAnt: Integer;
 
     function  fnc_Erro: Boolean;
     procedure prc_Abrir_Material_Cor;
@@ -290,7 +289,7 @@ end;
 
 procedure TfrmCadProduto_Comb_Mat.prc_Move_Dados;
 var
-  vExiste : Boolean;
+  vExiste: Boolean;
 begin
   if fDMCadProduto.qParametros_ProdUSA_CONSUMO_COMB.AsString <> 'S' then
     exit;

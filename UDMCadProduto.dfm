@@ -1,7 +1,8 @@
 object dmCadProduto: TdmCadProduto
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 324
+  Left = 41
+  Top = 9
   Height = 714
   Width = 1288
   object sdsProduto: TSQLDataSet
@@ -11,7 +12,7 @@ object dmCadProduto: TdmCadProduto
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 51
+    Left = 50
     object sdsProdutoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1036,6 +1037,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspUnidade: TDataSetProvider
     DataSet = sdsUnidade
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 521
   end
@@ -1076,6 +1078,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspNCM: TDataSetProvider
     DataSet = sdsNCM
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 43
   end
@@ -1088,6 +1091,7 @@ object dmCadProduto: TdmCadProduto
     Top = 43
     object cdsNCMID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsNCMNCM: TStringField
@@ -1116,6 +1120,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspCSTIPI: TDataSetProvider
     DataSet = sdsCSTIPI
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 85
   end
@@ -1128,6 +1133,7 @@ object dmCadProduto: TdmCadProduto
     Top = 85
     object cdsCSTIPIID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCSTIPICOD_IPI: TStringField
@@ -1161,6 +1167,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspOrigem_Prod: TDataSetProvider
     DataSet = sdsOrigem_Prod
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 128
   end
@@ -1422,6 +1429,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspFornecedor: TDataSetProvider
     DataSet = sdsFornecedor
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 172
   end
@@ -1434,6 +1442,7 @@ object dmCadProduto: TdmCadProduto
     Top = 172
     object cdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsFornecedorNOME: TStringField
@@ -1612,20 +1621,17 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_ConsumoNOME_SETOR: TStringField
       FieldKind = fkCalculated
       FieldName = 'NOME_SETOR'
-      ProviderFlags = []
       Size = 40
       Calculated = True
     end
     object cdsProduto_ConsumoclPreco_Venda: TFloatField
       FieldKind = fkCalculated
       FieldName = 'clPreco_Venda'
-      ProviderFlags = []
       Calculated = True
     end
     object cdsProduto_ConsumoclTIPO_REG: TStringField
       FieldKind = fkCalculated
       FieldName = 'clTIPO_REG'
-      ProviderFlags = []
       Size = 1
       Calculated = True
     end
@@ -1645,7 +1651,6 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_ConsumoclUsa_Processo: TStringField
       FieldKind = fkCalculated
       FieldName = 'clUsa_Processo'
-      ProviderFlags = []
       Size = 1
       Calculated = True
     end
@@ -1675,6 +1680,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspMaterial: TDataSetProvider
     DataSet = sdsMaterial
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 220
   end
@@ -1687,6 +1693,7 @@ object dmCadProduto: TdmCadProduto
     Top = 220
     object cdsMaterialID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsMaterialNOME: TStringField
@@ -1978,6 +1985,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspGrupo: TDataSetProvider
     DataSet = sdsGrupo
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 265
   end
@@ -1990,6 +1998,7 @@ object dmCadProduto: TdmCadProduto
     Top = 265
     object cdsGrupoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsGrupoNOME: TStringField
@@ -2042,6 +2051,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspMarca: TDataSetProvider
     DataSet = sdsMarca
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 350
   end
@@ -2053,6 +2063,7 @@ object dmCadProduto: TdmCadProduto
     Top = 350
     object cdsMarcaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsMarcaNOME: TStringField
@@ -2108,6 +2119,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspProduto_Consulta: TDataSetProvider
     DataSet = sdsProduto_Consulta
+    UpdateMode = upWhereKeyOnly
     OnUpdateError = dspProdutoUpdateError
     Left = 466
   end
@@ -2119,6 +2131,7 @@ object dmCadProduto: TdmCadProduto
     Left = 496
     object cdsProduto_ConsultaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsProduto_ConsultaREFERENCIA: TStringField
@@ -2400,7 +2413,7 @@ object dmCadProduto: TdmCadProduto
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 50
-    Top = 364
+    Top = 365
     object sdsProduto_VeiculoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2631,6 +2644,7 @@ object dmCadProduto: TdmCadProduto
     Top = 206
     object sdsGradeID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsGradeNOME: TStringField
@@ -2645,6 +2659,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspGrade: TDataSetProvider
     DataSet = sdsGrade
+    UpdateMode = upWhereKeyOnly
     Left = 608
     Top = 206
   end
@@ -2657,6 +2672,7 @@ object dmCadProduto: TdmCadProduto
     Top = 206
     object cdsGradeID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsGradeNOME: TStringField
@@ -2711,6 +2727,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspPosicao: TDataSetProvider
     DataSet = sdsPosicao
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 391
   end
@@ -2723,6 +2740,7 @@ object dmCadProduto: TdmCadProduto
     Top = 391
     object cdsPosicaoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsPosicaoNOME: TStringField
@@ -2780,8 +2798,8 @@ object dmCadProduto: TdmCadProduto
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 48
-    Top = 188
+    Left = 50
+    Top = 190
     object sdsProduto_Consumo_TamID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2998,6 +3016,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspTipo_Matriz: TDataSetProvider
     DataSet = sdsTipo_Matriz
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 433
   end
@@ -3010,6 +3029,7 @@ object dmCadProduto: TdmCadProduto
     Top = 433
     object cdsTipo_MatrizID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTipo_MatrizNOME: TStringField
@@ -3311,6 +3331,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspCentroCusto: TDataSetProvider
     DataSet = sdsCentroCusto
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 476
   end
@@ -3323,6 +3344,7 @@ object dmCadProduto: TdmCadProduto
     Top = 476
     object cdsCentroCustoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCentroCustoCODIGO: TStringField
@@ -3358,10 +3380,12 @@ object dmCadProduto: TdmCadProduto
     Top = 41
     object sdsConsumo_ImpID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsConsumo_ImpITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsConsumo_ImpID_MATERIAL: TIntegerField
@@ -3486,6 +3510,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspConsumo_Imp: TDataSetProvider
     DataSet = sdsConsumo_Imp
+    UpdateMode = upWhereKeyOnly
     Left = 608
     Top = 41
   end
@@ -3514,10 +3539,12 @@ object dmCadProduto: TdmCadProduto
     Top = 86
     object sdsConsumo_Imp_TamID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsConsumo_Imp_TamITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsConsumo_Imp_TamTAMANHO: TStringField
@@ -3538,10 +3565,12 @@ object dmCadProduto: TdmCadProduto
     Top = 85
     object cdsConsumo_Imp_TamID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsConsumo_Imp_TamITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsConsumo_Imp_TamTAMANHO: TStringField
@@ -3560,6 +3589,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspConsumo_Imp_Tam: TDataSetProvider
     DataSet = sdsConsumo_Imp_Tam
+    UpdateMode = upWhereKeyOnly
     Left = 608
     Top = 86
   end
@@ -3596,6 +3626,7 @@ object dmCadProduto: TdmCadProduto
     Top = 289
     object cdsPlano_ContasID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsPlano_ContasCODIGO: TStringField
@@ -3673,6 +3704,7 @@ object dmCadProduto: TdmCadProduto
     Top = 130
     object cdsAtivoImobID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsAtivoImobNOME: TStringField
@@ -3790,6 +3822,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspUF: TDataSetProvider
     DataSet = sdsUF
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 2
   end
@@ -3858,7 +3891,7 @@ object dmCadProduto: TdmCadProduto
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspSitTribCf'
-    Left = 639
+    Left = 640
     Top = 552
     object cdsSitTribCfID: TIntegerField
       FieldName = 'ID'
@@ -3892,6 +3925,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspCliente: TDataSetProvider
     DataSet = sdsCliente
+    UpdateMode = upWhereKeyOnly
     Left = 608
     Top = 374
   end
@@ -3904,6 +3938,7 @@ object dmCadProduto: TdmCadProduto
     Top = 374
     object cdsClienteCODIGO: TIntegerField
       FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsClienteNOME: TStringField
@@ -4017,6 +4052,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspUnidade_Conv: TDataSetProvider
     DataSet = sdsUnidade_Conv
+    UpdateMode = upWhereKeyOnly
     Left = 608
     Top = 420
   end
@@ -4201,6 +4237,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspCor: TDataSetProvider
     DataSet = sdsCor
+    UpdateMode = upWhereKeyOnly
     Left = 608
     Top = 464
   end
@@ -4213,6 +4250,7 @@ object dmCadProduto: TdmCadProduto
     Top = 464
     object cdsCorID: TFMTBCDField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
       Precision = 15
       Size = 0
@@ -4500,6 +4538,7 @@ object dmCadProduto: TdmCadProduto
     Left = 640
     object cdsMatriz_PrecoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsMatriz_PrecoNOME: TStringField
@@ -4958,7 +4997,6 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_Comb_MatclUsa_Cor: TStringField
       FieldKind = fkCalculated
       FieldName = 'clUsa_Cor'
-      ProviderFlags = []
       Size = 1
       Calculated = True
     end
@@ -4974,6 +5012,8 @@ object dmCadProduto: TdmCadProduto
     Top = 184
   end
   object sdsMaterial_Cor: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 
       'SELECT P.id, P.id_cor_combinacao, C.nome NOME_COR_COMBINACAO'#13#10'FR' +
       'OM PRODUTO_COMB P'#13#10'INNER JOIN combinacao C'#13#10'ON P.id_cor_combinac' +
@@ -4991,6 +5031,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspMaterial_Cor: TDataSetProvider
     DataSet = sdsMaterial_Cor
+    UpdateMode = upWhereKeyOnly
     Left = 240
     Top = 447
   end
@@ -5003,6 +5044,7 @@ object dmCadProduto: TdmCadProduto
     Top = 447
     object cdsMaterial_CorID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsMaterial_CorID_COR_COMBINACAO: TIntegerField
@@ -5010,6 +5052,7 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsMaterial_CorNOME_COR_COMBINACAO: TStringField
       FieldName = 'NOME_COR_COMBINACAO'
+      ProviderFlags = []
       Size = 60
     end
   end
@@ -5144,6 +5187,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspLinha: TDataSetProvider
     DataSet = sdsLinha
+    UpdateMode = upWhereKeyOnly
     Left = 240
     Top = 489
   end
@@ -5156,6 +5200,7 @@ object dmCadProduto: TdmCadProduto
     Top = 489
     object cdsLinhaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsLinhaCODIGO: TStringField
@@ -5312,6 +5357,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspSetor: TDataSetProvider
     DataSet = sdsSetor
+    UpdateMode = upWhereKeyOnly
     Left = 240
     Top = 532
   end
@@ -5324,6 +5370,7 @@ object dmCadProduto: TdmCadProduto
     Top = 532
     object cdsSetorID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsSetorNOME: TStringField
@@ -5453,6 +5500,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspAtelier: TDataSetProvider
     DataSet = sdsAtelier
+    UpdateMode = upWhereKeyOnly
     Left = 240
     Top = 574
   end
@@ -5465,6 +5513,7 @@ object dmCadProduto: TdmCadProduto
     Top = 574
     object cdsAtelierCODIGO: TIntegerField
       FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsAtelierNOME: TStringField
@@ -5549,10 +5598,12 @@ object dmCadProduto: TdmCadProduto
     end
     object sdsCBarra2NOME_FILIAL: TStringField
       FieldName = 'NOME_FILIAL'
+      ProviderFlags = []
       Size = 60
     end
     object sdsCBarra2NOME_INTERNO: TStringField
       FieldName = 'NOME_INTERNO'
+      ProviderFlags = []
       Size = 30
     end
   end
@@ -5600,10 +5651,12 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsCBarra2NOME_FILIAL: TStringField
       FieldName = 'NOME_FILIAL'
+      ProviderFlags = []
       Size = 60
     end
     object cdsCBarra2NOME_INTERNO: TStringField
       FieldName = 'NOME_INTERNO'
+      ProviderFlags = []
       Size = 30
     end
   end
@@ -5738,6 +5791,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
+    UpdateMode = upWhereKeyOnly
     Left = 608
     Top = 507
   end
@@ -5750,6 +5804,7 @@ object dmCadProduto: TdmCadProduto
     Top = 507
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsFilialNOME: TStringField
@@ -5780,6 +5835,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
+    UpdateMode = upWhereKeyOnly
     Left = 466
     Top = 46
   end
@@ -5792,6 +5848,7 @@ object dmCadProduto: TdmCadProduto
     Top = 46
     object cdsCFOPID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCFOPCODCFOP: TStringField
@@ -5824,6 +5881,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspCor_RZ: TDataSetProvider
     DataSet = sdsCor_RZ
+    UpdateMode = upWhereKeyOnly
     Left = 608
     Top = 594
   end
@@ -5970,6 +6028,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspProdutoProcesso: TDataSetProvider
     DataSet = sdsProdutoProcesso
+    UpdateMode = upWhereKeyOnly
     Left = 760
     Top = 307
   end
@@ -5982,10 +6041,12 @@ object dmCadProduto: TdmCadProduto
     Top = 307
     object cdsProdutoProcessoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsProdutoProcessoITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsProdutoProcessoID_PROCESSO: TIntegerField
@@ -6073,10 +6134,11 @@ object dmCadProduto: TdmCadProduto
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProcesso'
-    Left = 639
+    Left = 640
     Top = 331
     object cdsProcessoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsProcessoNOME: TStringField
@@ -6101,6 +6163,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspLocal_Estoque: TDataSetProvider
     DataSet = sdsLocal_Estoque
+    UpdateMode = upWhereKeyOnly
     Left = 940
     Top = 96
   end
@@ -6153,7 +6216,7 @@ object dmCadProduto: TdmCadProduto
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 208
-    Top = 275
+    Top = 280
     object sdsProduto_ComissaoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -6523,6 +6586,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspVendedor: TDataSetProvider
     DataSet = sdsVendedor
+    UpdateMode = upWhereKeyOnly
     Left = 424
     Top = 528
   end
@@ -6535,6 +6599,7 @@ object dmCadProduto: TdmCadProduto
     Top = 528
     object cdsVendedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsVendedorNOME: TStringField
@@ -6665,7 +6730,6 @@ object dmCadProduto: TdmCadProduto
     object cdsProduto_CarimboNOME_CLIENTE: TStringField
       FieldKind = fkCalculated
       FieldName = 'NOME_CLIENTE'
-      ProviderFlags = []
       Size = 70
       Calculated = True
     end
@@ -7267,11 +7331,12 @@ object dmCadProduto: TdmCadProduto
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 415
+    Left = 416
     Top = 255
   end
   object dspCSTICMS: TDataSetProvider
     DataSet = sdsCSTICMS
+    UpdateMode = upWhereKeyOnly
     Left = 448
     Top = 255
   end
@@ -7284,6 +7349,7 @@ object dmCadProduto: TdmCadProduto
     Top = 255
     object cdsCSTICMSID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCSTICMSCOD_CST: TStringField
@@ -7736,6 +7802,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspTab_Preco_Itens: TDataSetProvider
     DataSet = sdsTab_Preco_Itens
+    UpdateMode = upWhereKeyOnly
     Left = 464
     Top = 298
   end
@@ -7902,6 +7969,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspConsumo_Det: TDataSetProvider
     DataSet = sdsConsumo_Det
+    UpdateMode = upWhereKeyOnly
     Left = 448
     Top = 211
   end
@@ -8025,6 +8093,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspProcesso_Grupo: TDataSetProvider
     DataSet = sdsProcesso_Grupo
+    UpdateMode = upWhereKeyOnly
     Left = 448
     Top = 171
   end
@@ -8037,6 +8106,7 @@ object dmCadProduto: TdmCadProduto
     Top = 171
     object cdsProcesso_GrupoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsProcesso_GrupoNOME: TStringField
@@ -8133,6 +8203,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspFichaTecnica: TDataSetProvider
     DataSet = sdsFichaTecnica
+    UpdateMode = upWhereKeyOnly
     Left = 616
     Top = 174
   end
@@ -8144,6 +8215,7 @@ object dmCadProduto: TdmCadProduto
     Top = 174
     object cdsFichaTecnicaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
     object cdsFichaTecnicaNOME_PRODUTO: TStringField
       FieldName = 'NOME_PRODUTO'
@@ -8277,7 +8349,7 @@ object dmCadProduto: TdmCadProduto
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 211
+    Left = 210
     Top = 50
     object sdsProduto_GradeNumID: TIntegerField
       FieldName = 'ID'
@@ -8342,6 +8414,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspTamanho: TDataSetProvider
     DataSet = sdsTamanho
+    UpdateMode = upWhereKeyOnly
     Left = 448
     Top = 344
   end
@@ -8354,6 +8427,7 @@ object dmCadProduto: TdmCadProduto
     Top = 344
     object cdsTamanhoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTamanhoTAMANHO: TStringField
@@ -9825,6 +9899,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspProduto_Tranc: TDataSetProvider
     DataSet = sdsProduto_Tranc
+    UpdateMode = upWhereKeyOnly
     Left = 608
     Top = 640
   end
@@ -10080,6 +10155,8 @@ object dmCadProduto: TdmCadProduto
     Top = 609
   end
   object sdsPosicao_Proc: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 'SELECT *'#13#10'FROM POSICAO_PROC'#13#10'WHERE ID =  :ID'#13#10
     MaxBlobSize = -1
     Params = <
@@ -10094,6 +10171,7 @@ object dmCadProduto: TdmCadProduto
   end
   object dspPosicao_Proc: TDataSetProvider
     DataSet = sdsPosicao_Proc
+    UpdateMode = upWhereKeyOnly
     Left = 1128
     Top = 528
   end
@@ -10217,6 +10295,8 @@ object dmCadProduto: TdmCadProduto
     Top = 607
   end
   object sdsProduto_Corrugado: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 
       'SELECT PG.*, MAT.NOME NOME_MATERIAL'#13#10'FROM PRODUTO_CORRUGADO PG'#13#10 +
       'LEFT JOIN PRODUTO MAT ON PG.id_material = MAT.ID'#13#10'WHERE PG.ID = ' +

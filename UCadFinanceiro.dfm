@@ -25,7 +25,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
     Top = 0
     Width = 904
     Height = 670
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -249,7 +249,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           OnClick = btnInserirClick
         end
         object btnExcluir: TNxButton
-          Left = 154
+          Left = 307
           Top = 1
           Width = 153
           Height = 28
@@ -324,7 +324,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           OnClick = btnExcluirClick
         end
         object btnPesquisar: TNxButton
-          Left = 307
+          Left = 154
           Top = 1
           Width = 153
           Height = 28
@@ -625,7 +625,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           Top = 34
           Width = 234
           Height = 21
-          DropDownCount = 8
+          DropDownCount = 12
           Ctl3D = False
           LookupField = 'ID'
           LookupDisplay = 'NOME'
@@ -760,12 +760,18 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           Top = 54
           Width = 234
           Height = 21
-          DropDownCount = 8
+          DropDownCount = 16
           Ctl3D = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
           LookupField = 'ID'
           LookupDisplay = 'NOME'
           LookupSource = DMCadFinanceiro.dsTipoCobranca
           ParentCtl3D = False
+          ParentFont = False
           TabOrder = 3
         end
         object RzGroupBox2: TRzGroupBox
@@ -904,15 +910,16 @@ object frmCadFinanceiro: TfrmCadFinanceiro
         Left = 0
         Top = 0
         Width = 900
-        Height = 35
+        Height = 30
         Align = alTop
         Color = 8404992
         TabOrder = 1
         object btnAlterar: TNxButton
-          Left = 4
-          Top = 3
+          Left = 1
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 28
+          Align = alLeft
           Caption = 'Alterar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -981,10 +988,11 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           OnClick = btnAlterarClick
         end
         object btnConfirmar: TNxButton
-          Left = 158
-          Top = 3
+          Left = 154
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 28
+          Align = alLeft
           Caption = 'Confirmar'
           Enabled = False
           Font.Charset = DEFAULT_CHARSET
@@ -1054,10 +1062,11 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           OnClick = btnConfirmarClick
         end
         object btnCancelar: TNxButton
-          Left = 312
-          Top = 3
+          Left = 307
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 28
+          Align = alLeft
           Caption = 'Cancelar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -1128,15 +1137,15 @@ object frmCadFinanceiro: TfrmCadFinanceiro
       end
       object pnlCadastro: TPanel
         Left = 0
-        Top = 35
+        Top = 30
         Width = 900
-        Height = 612
+        Height = 617
         Align = alClient
         Enabled = False
         TabOrder = 0
         DesignSize = (
           900
-          612)
+          617)
         object Label1: TLabel
           Left = 64
           Top = 48
@@ -1520,7 +1529,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           Top = 62
           Width = 349
           Height = 21
-          DropDownCount = 8
+          DropDownCount = 10
           Ctl3D = False
           DataField = 'ID_CONTA'
           DataSource = DMCadFinanceiro.dsFinanceiro
@@ -1583,7 +1592,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           Top = 102
           Width = 349
           Height = 21
-          DropDownCount = 8
+          DropDownCount = 16
           Ctl3D = False
           DataField = 'ID_CONTA_ORCAMENTO'
           DataSource = DMCadFinanceiro.dsFinanceiro
@@ -1603,7 +1612,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           Top = 82
           Width = 349
           Height = 21
-          DropDownCount = 8
+          DropDownCount = 16
           Ctl3D = False
           DataField = 'ID_FORMA_PAGAMENTO'
           DataSource = DMCadFinanceiro.dsFinanceiro
@@ -1618,7 +1627,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           Top = 122
           Width = 349
           Height = 21
-          DropDownCount = 15
+          DropDownCount = 16
           Ctl3D = False
           DataField = 'ID_PESSOA'
           DataSource = DMCadFinanceiro.dsFinanceiro
