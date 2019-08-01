@@ -2352,61 +2352,6 @@ begin
     FreeAndNil(sds);
   end;
 
- // Foi tirado no dia 25/09 e colocado na trigger TRG_Produto
-{  if (cdsProdutoTIPO_REG.AsString = 'P') and (qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
-  begin
-
-    sds  := TSQLDataSet.Create(nil);
-    sds.SQLConnection := dmDatabase.scoDados;
-    sds.NoMetadata    := True;
-    sds.GetMetadata   := False;
-    sds.CommandText := 'SELECT FIRST 1 PC.ID_MATERIAL , PC.qtd_consumo, PC.unidade '
-                     + ' FROM PRODUTO_CONSUMO PC '
-                     + ' INNER JOIN PRODUTO MAT '
-                     + ' ON MAT.ID = PC.id_material '
-                     + ' WHERE MAT.tipo_reg = ' + QuotedStr('S')
-                     + ' AND PC.ID = :ID ';
-    sds.ParamByName('ID').AsInteger := cdsProdutoID.AsInteger;
-    sds.Open;
-
-    vIDMat   := sds.FieldByName('ID_MATERIAL').AsInteger;
-    vConsumo := sds.FieldByName('QTD_CONSUMO').AsFloat;
-    vUnid    := sds.FieldByName('UNIDADE').AsString;
-
-    sds.Close;
-    sds.CommandText := 'SELECT COUNT(1) CONTADOR FROM produto_semi ps WHERE ps.id = :ID ';
-    sds.ParamByName('ID').AsInteger := cdsProdutoID.AsInteger;
-    sds.Open;
-
-    if sds.FieldByName('CONTADOR').AsInteger <= 0 then
-    begin
-      sds.Close;
-      sds.CommandText := 'INSERT INTO PRODUTO_SEMI '
-                       + '( ID '
-                       + ',ID_MATERIAL1 '
-                       + ',QTD_CONSUMO1 '
-                       + ',UNIDADE1 '
-                       + ') '
-                       + 'VALUES '
-                       + '(' + cdsProdutoID.AsString
-                       + ',' + IntToStr(vIDMat)
-                       + ',' + Replace(FormatFloat('0.00000',vConsumo),',','.')
-                       + ',' + QuotedStr(vUnid)
-                       + ');';
-      sds.ExecSQL;
-    end
-    else
-    begin
-      sds.Close;
-      sds.CommandText := 'UPDATE PRODUTO_SEMI PS2 SET PS2.id_material1 = ' + IntToStr(vIDMat) + ', PS2.qtd_consumo1 = ' + Replace(FormatFloat('0.00000',vConsumo),',','.')
-                       + ', PS2.unidade1 = ' + QuotedStr(vUnid)
-                       + ' WHERE PS2.ID = ' + cdsProdutoID.AsString;
-      sds.ExecSQL;
-    end;
-
-    FreeAndNil(sds);
-  end;}
-
   cdsProduto.Post;
   cdsProduto.ApplyUpdates(0);
 end;
