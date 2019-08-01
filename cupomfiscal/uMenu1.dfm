@@ -122,6 +122,8 @@ object fMenu1: TfMenu1
         Font.Name = 'Courier New'
         Font.Style = [fsBold]
         ParentFont = False
+        OnClick = LabelBkpClick
+        OnDblClick = LabelBkpClick
         HotTrackFont.Charset = DEFAULT_CHARSET
         HotTrackFont.Color = clWindowText
         HotTrackFont.Height = -11

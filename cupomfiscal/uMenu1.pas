@@ -300,7 +300,7 @@ end;
 
 procedure TfMenu1.LabelBkpClick(Sender: TObject);
 begin
-  prc_Verifica_Backup;
+ prc_Verifica_Backup;
   prc_ShellExecute('ssBackUp_Solo.exe');
 end;
 
