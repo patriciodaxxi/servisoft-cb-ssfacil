@@ -1305,6 +1305,8 @@ begin
   DBEdit37.ReadOnly := True;
   DBEdit38.ReadOnly := True;
   vPreFat := False;
+  fDMCadNotaFiscal.cdsNotaFiscal_Imp_Aux.Close;
+  fDMCadNotaFiscal.cdsNotaFiscal_Imp_Aux.Open;
 end;
 
 procedure TfrmCadNotaFiscal.FormShow(Sender: TObject);

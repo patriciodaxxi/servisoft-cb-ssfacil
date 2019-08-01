@@ -1,6 +1,6 @@
 object frmCadNotaFiscal_Imp_Aux: TfrmCadNotaFiscal_Imp_Aux
-  Left = 160
-  Top = 184
+  Left = 163
+  Top = 132
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Dados da Importa'#231#227'o (Adi'#231#227'o)'

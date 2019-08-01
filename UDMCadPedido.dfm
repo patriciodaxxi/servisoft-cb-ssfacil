@@ -15037,6 +15037,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedEXIGE_PEDIDO_CLI: TStringField
+      FieldName = 'EXIGE_PEDIDO_CLI'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 
