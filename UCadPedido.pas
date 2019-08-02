@@ -8,7 +8,8 @@ uses
   UCadPedido_Itens, UCadPedido_Desconto, UEscolhe_Filial, UCBase, RzPanel, UCadTabPreco, Math, UCadPedido_Cancelamento,
   DateUtils, dbXPress, NxCollection, Menus, Variants, USel_TabPreco, ULeExcel, NxEdit, VarUtils, UEtiq_Individual, Provider,
   UCadPedido_Ace, UGerar_Rotulos, UGerar_Rotulos_Color, DBClient, UCadPedido_Itens_Copia, UConsOrdProd_Ped, UConsHist_Chapa,
-  UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed,classe.validaemail, frxExportPDF, frxExportMail, UMontaPed_TipoItem;
+  UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed,classe.validaemail, frxExportPDF, frxExportMail, UMontaPed_TipoItem,
+  uMostraPDF;
 
 type
   TfrmCadPedido = class(TForm)
@@ -486,6 +487,8 @@ type
     procedure EtiquetaA4ItensPersonalizado1Click(Sender: TObject);
     procedure SalvarPedido1Click(Sender: TObject);
     procedure Matricial80Colunas1Click(Sender: TObject);
+    procedure SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fLista: TStringList;
@@ -510,6 +513,7 @@ type
     vID_ClienteAnt: Integer;
     vVlrFrete_Ant: Real;
     vInclusao_Edicao: String; //I=Incluir   E=Editar
+    ffrmMostraPDF : TfrmMostraPDF;
 
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
@@ -4634,6 +4638,29 @@ begin
     uGrava_Pedido.prc_Excluir_Item_Ped(fDMCadPedido);
   end;
   fDMCadPedido.cdsPedido_Itens.Filtered := False;
+end;
+
+procedure TfrmCadPedido.SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var
+  vCaminhoPDF : String;
+begin
+  //ctrl + P (Imprimir PDF)
+  if (Shift = [ssCtrl]) and (Key = 80) then
+  begin
+    ffrmMostraPDF := TfrmMostraPDF.Create(Self);
+    try
+      if fDMCadPedido.cdsPedido_Item_Tipo.Locate('ID;ITEM',VarArrayOf([fDMCadPedido.cdsPedido_ItensID.AsInteger,fDMCadPedido.cdsPedido_ItensITEM.AsInteger]),[locaseinsensitive]) then
+      begin
+        vCaminhoPDF := fDMCadPedido.cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF.AsString;
+        ffrmMostraPDF.vCaminhoPDF := vCaminhoPDF;
+        ffrmMostraPDF.edtCaminhoPDF.Text := vCaminhoPDF;
+        ffrmMostraPDF.ShowModal;
+      end;
+    finally
+      FreeAndNil(ffrmMostraPDF);
+    end;
+  end;
 end;
 
 end.
