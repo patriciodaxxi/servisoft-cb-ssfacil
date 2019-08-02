@@ -1943,9 +1943,7 @@ begin
        ACBrBAL1.Device.Data      := StrToInt('8');
        ACBrBAL1.Device.Baud      := StrToInt('2400');
        ACBrBAL1.Device.Baud      := StrToInt('2400');
-       ACBrBAL1.Device.Porta     := 'COM2';
-
-
+       ACBrBAL1.Device.Porta     := 'COM2';                  
 
        // Conecta com a balança
        ACBrBAL1.Ativar;

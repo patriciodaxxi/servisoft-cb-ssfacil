@@ -1503,8 +1503,8 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     GetMetadata = False
     CommandText = 
       'SELECT I.ID, I.ITEM, I.APROVADO_ITEM, I.ID_PRODUTO, I.REFERENCIA' +
-      ', I.NOMEPRODUTO, I.CANCELADO, I.QTD'#13#10'FROM PEDIDO_ITEM I'#13#10'WHERE I' +
-      '.ID = :ID'#13#10#13#10
+      ', I.NOMEPRODUTO, I.CANCELADO, I.QTD,'#13#10'I.VLR_UNITARIO, I.VLR_TOTA' +
+      'L'#13#10'FROM PEDIDO_ITEM I'#13#10'WHERE I.ID = :ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -1547,6 +1547,12 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     end
     object sdsPedido_ItemQTD: TFloatField
       FieldName = 'QTD'
+    end
+    object sdsPedido_ItemVLR_UNITARIO: TFloatField
+      FieldName = 'VLR_UNITARIO'
+    end
+    object sdsPedido_ItemVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
     end
   end
   object dspPedido_Item: TDataSetProvider
@@ -1594,6 +1600,12 @@ object DMAprovacao_Ped: TDMAprovacao_Ped
     end
     object cdsPedido_ItemQTD: TFloatField
       FieldName = 'QTD'
+    end
+    object cdsPedido_ItemVLR_UNITARIO: TFloatField
+      FieldName = 'VLR_UNITARIO'
+    end
+    object cdsPedido_ItemVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
     end
   end
   object dsPedido_Item: TDataSource

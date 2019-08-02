@@ -3474,6 +3474,8 @@ type
     qParametros_FinID_TABPRECO_SEMCAD: TIntegerField;
     qParametros_PedUSA_APROVACAO_ITEM: TStringField;
     qParametros_OCUSA_APROVACAO_ITEM: TStringField;
+    qParametros_PedEXIGE_PEDIDO_CLI: TStringField;
+    cdsOrcamentoID_VENDEDOR_INT: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

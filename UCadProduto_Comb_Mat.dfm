@@ -213,7 +213,7 @@ object frmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat
       Top = 76
       Width = 289
       Height = 21
-      DropDownCount = 8
+      DropDownCount = 15
       Ctl3D = False
       DataField = 'ID_POSICAO'
       DataSource = dmCadProduto.dsProduto_Comb_Mat
@@ -344,7 +344,7 @@ object frmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat
         Top = 35
         Width = 329
         Height = 21
-        DropDownCount = 8
+        DropDownCount = 15
         Ctl3D = False
         DataField = 'ID_MATERIAL'
         DataSource = dmCadProduto.dsProduto_Comb_Mat
@@ -360,7 +360,7 @@ object frmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat
         Top = 35
         Width = 152
         Height = 21
-        DropDownCount = 8
+        DropDownCount = 15
         Ctl3D = False
         DataField = 'ID_MATERIAL'
         DataSource = dmCadProduto.dsProduto_Comb_Mat
@@ -505,7 +505,7 @@ object frmCadProduto_Comb_Mat: TfrmCadProduto_Comb_Mat
       Top = 96
       Width = 289
       Height = 21
-      DropDownCount = 8
+      DropDownCount = 15
       Ctl3D = False
       DataField = 'ID_SETOR'
       DataSource = dmCadProduto.dsProduto_Comb_Mat

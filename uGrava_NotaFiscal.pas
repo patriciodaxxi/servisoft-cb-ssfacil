@@ -483,10 +483,12 @@ begin
   fDMGravarFinanceiro.vID_ExtComissao     := 0;
   fDMGravarFinanceiro.vDtMovimento        := fDMCadNotaFiscal.cdsDuplicata_HistDTLANCAMENTO.AsDateTime;
   fDMGravarFinanceiro.vVlr_Movimento      := StrToFloat(FormatFloat('0.00', fDMCadNotaFiscal.cdsDuplicata_HistVLR_PAGAMENTO.AsFloat));
+  fDMGravarFinanceiro.vFilial_Fin         := fDMCadNotaFiscal.cdsDuplicataFILIAL.AsInteger;
   if fDMCadNotaFiscal.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger > 0 then
     fDMGravarFinanceiro.vID_Conta_Orcamento := fDMCadNotaFiscal.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger
   else
     fDMGravarFinanceiro.vID_Conta_Orcamento := 0;
+  fDMGravarFinanceiro.vFilial_Fin         := fDMCadNotaFiscal.cdsDuplicataFILIAL.AsInteger;
 
   fDMGravarFinanceiro.prc_Gravar;
 

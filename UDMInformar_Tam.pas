@@ -322,6 +322,10 @@ type
     mItensEspessura: TFloatField;
     mItensAPROVADO_ITEM: TStringField;
     mItensENCOMENDA: TStringField;
+    mItensDocLARGURA: TFloatField;
+    mItensDocCOMPRIMENTO: TFloatField;
+    mItensDocESPESSURA: TFloatField;
+    mItensDocTIPO_ES: TStringField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private

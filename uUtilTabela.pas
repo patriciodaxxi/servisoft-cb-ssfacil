@@ -11,7 +11,7 @@ var
   FCds: TClientDataSet;
   NFSeCB: TXMLClientDataset;
   Cobr: TDataSetField;
-  fat: TDataSetField;
+  //fat: TDataSetField;
   obs: TDataSetField;
   NFSePoaEnvio: TXMLClientDataset;
   NFSePoaRet: TXMLClientDataset;

@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, jpeg, ExtCtrls, StdCtrls, IniFiles,
-  DateUtils, SqlExpr, UCBase;
+  DateUtils, SqlExpr, UCBase, RXCtrls, NxCollection, JvLabel,
+  JvBlinkingLabel;
 
 type
   TfMenu1 = class(TForm)
@@ -13,8 +14,7 @@ type
     Label3: TLabel;
     Panel1: TPanel;
     Label8: TLabel;
-    Panel3: TPanel;
-    Label6: TLabel;
+    PanelBkp: TPanel;
     Panel5: TPanel;
     Label1: TLabel;
     Panel6: TPanel;
@@ -33,10 +33,12 @@ type
     lblCheque_Valor: TLabel;
     Panel8: TPanel;
     Label7: TLabel;
+    LabelBkp: TJvBlinkingLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure Label7Click(Sender: TObject);
+    procedure LabelBkpClick(Sender: TObject);
   private
     { Private declarations }
     procedure prc_Verifica_Certificado;
@@ -89,13 +91,19 @@ begin
 
   vData := Config.ReadString('BackUp', 'UltData', '');
   vHora := Config.ReadString('BackUp', 'UltHora', '');
-  Panel3.Visible := (trim(vData) <> '');
-  Label6.Visible := (trim(vData) <> '');
+
   if trim(vData) <> '' then
   begin
-    Label6.Caption := 'Data Último Backup: ' + vData + ' ' + vHora;
-    if DaysBetween(Date,StrToDate(vData)) > 1 then
-      Label6.Caption := Label6.Caption + '! Verificar!';
+    LabelBkp.Caption := 'Data Último Backup: ' + vData; // + ' ' + vHora;
+    if DaysBetween(Date,StrToDate(vData)) > 4 then
+    begin
+      LabelBkp.Blinking := False;
+      LabelBkp.Caption := LabelBkp.Caption + '! Clique aqui!';
+      PanelBkp.Visible := True;
+      LabelBkp.Visible := True;
+      if DaysBetween(Date,StrToDate(vData)) > 9 then
+        LabelBkp.Blinking := True;
+    end;
   end;
   FreeAndNil(Config);
 end;
@@ -317,6 +325,12 @@ begin
   frmIBPT_Atualiza.ShowModal;
   FreeAndNil(frmIBPT_Atualiza);
   prc_Verifica_IBPT;
+end;
+
+procedure TfMenu1.LabelBkpClick(Sender: TObject);
+begin
+  prc_Verifica_Backup;
+  prc_ShellExecute('ssBackUp_Solo.exe');
 end;
 
 end.

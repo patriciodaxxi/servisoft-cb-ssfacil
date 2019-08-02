@@ -551,6 +551,7 @@ begin
     rzPageControl1.ActivePageIndex := 0;
     ComboVendedor.SetFocus;
     Exit;
+    
   end
   else
   if (ComboVendedor.Text <> '') and (fDmCupomFiscal.cdsCupomFiscalPERC_VENDEDOR.AsCurrency = 0) then

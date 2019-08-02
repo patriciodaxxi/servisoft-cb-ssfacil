@@ -84,7 +84,7 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
       WidthOfIndicator = 13
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
-      ColCount = 7
+      ColCount = 9
       RowCount = 2
       Columns = <
         item
@@ -99,7 +99,7 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
           Title.Alignment = taCenter
           Title.Caption = 'Item'
           Title.Color = 16763025
-          Width = 39
+          Width = 31
           Visible = True
         end
         item
@@ -114,6 +114,7 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
           Title.Alignment = taCenter
           Title.Caption = 'ID Produto'
           Title.Color = 16763025
+          Width = 52
           Visible = True
         end
         item
@@ -166,7 +167,25 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
           Title.Alignment = taCenter
           Title.Caption = 'Aprovado'
           Title.Color = 16763025
-          Width = 81
+          Width = 70
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VLR_UNITARIO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Vlr. Unit'#225'rio'
+          Title.Color = 16763025
+          Width = 73
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VLR_TOTAL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Vlr. Total'
+          Title.Color = 16763025
+          Width = 72
           Visible = True
         end>
     end
@@ -234,7 +253,7 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
       WidthOfIndicator = 13
       DefaultRowHeight = 16
       ScrollBars = ssHorizontal
-      ColCount = 6
+      ColCount = 8
       RowCount = 2
       Columns = <
         item
@@ -280,6 +299,26 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
           Title.Caption = 'Nome Funcion'#225'rio'
           Title.Color = 9240575
           Width = 384
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DTUSUARIO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Data'
+          Title.Color = 9240575
+          Width = 100
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'HRUSUARIO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Hora'
+          Title.Color = 9240575
+          Width = 85
           Visible = True
         end>
     end

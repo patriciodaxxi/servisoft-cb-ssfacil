@@ -2516,6 +2516,23 @@ object DMInformar_Tam: TDMInformar_Tam
         Name = 'LOCALIZACAO'
         DataType = ftString
         Size = 30
+      end
+      item
+        Name = 'LARGURA'
+        DataType = ftFloat
+      end
+      item
+        Name = 'COMPRIMENTO'
+        DataType = ftFloat
+      end
+      item
+        Name = 'ESPESSURA'
+        DataType = ftFloat
+      end
+      item
+        Name = 'TIPO_ES'
+        DataType = ftString
+        Size = 1
       end>
     IndexDefs = <>
     Params = <>
@@ -2523,7 +2540,7 @@ object DMInformar_Tam: TDMInformar_Tam
     Left = 192
     Top = 296
     Data = {
-      730200009619E0BD01000000180000001700000000000300000073020A49445F
+      C50200009619E0BD01000000180000001B000000000003000000C5020A49445F
       50524F4455544F04000100000000000351544408000400000000000C564C525F
       554E49544152494F080004000000000009564C525F544F54414C080004000000
       000008504552435F4950490800040000000000064D4F5449564F010049000000
@@ -2542,7 +2559,10 @@ object DMInformar_Tam: TDMInformar_Tam
       4F4E54524F4C4501004900000001000557494454480200020014000B47455241
       525F435553544F01004900000001000557494454480200020001001150524543
       4F5F435553544F5F544F54414C08000400000000000B4C4F43414C495A414341
-      4F0100490000000100055749445448020002001E000000}
+      4F0100490000000100055749445448020002001E00074C415247555241080004
+      00000000000B434F4D5052494D454E544F080004000000000009455350455353
+      5552410800040000000000075449504F5F455301004900000001000557494454
+      480200020001000000}
     object mItensDocID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
     end
@@ -2620,6 +2640,19 @@ object DMInformar_Tam: TDMInformar_Tam
     object mItensDocLOCALIZACAO: TStringField
       FieldName = 'LOCALIZACAO'
       Size = 30
+    end
+    object mItensDocLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object mItensDocCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object mItensDocESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
+    object mItensDocTIPO_ES: TStringField
+      FieldName = 'TIPO_ES'
+      Size = 1
     end
   end
   object sdsQtdGrade: TSQLDataSet

@@ -663,6 +663,7 @@ begin
   fDMGravarFinanceiro.vVlr_Movimento      := StrToFloat(FormatFloat('0.00',cdsExtComissaoVLR_COMISSAO.AsFloat));
 //  fDMGravarFinanceiro.vID_Conta_Orcamento := fDMGravarFinanceiro.qParametrosID_CONTA_ORC_COMISSAO.AsInteger;
   fDMGravarFinanceiro.vID_Conta_Orcamento := cdsExtComissaoID_CONTA_ORC.AsInteger;
+  fDMGravarFinanceiro.vFilial_Fin         := cdsExtComissaoFILIAL.AsInteger;
 
   fDMGravarFinanceiro.prc_Gravar;
 

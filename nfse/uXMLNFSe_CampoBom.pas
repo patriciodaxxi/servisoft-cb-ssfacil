@@ -145,7 +145,7 @@ begin
 
   if trim(fDMCadNotaServico.cdsNotaServico_ImpFONE_FIL.AsString) <> '' then
     vCds.FieldByName('prest.fone').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD_FIL.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE_FIL.AsString,0);
-  if trim(fDMCadNotaServico.cdsNotaServico_ImpFONE_FIL.AsString) <> '' then
+  if trim(fDMCadNotaServico.cdsNotaServico_ImpFONE2_FIL.AsString) <> '' then
     vCds.FieldByName('prest.fone2').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD2_FIL.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE2_FIL.AsString,0);
   vCds.FieldByName('prest.IE').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpINSCR_EST_FIL.AsString,0);
   vCds.FieldByName('prest.regimeTrib').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpCOD_REGIME_TRIB_FIL.AsString,0);
@@ -188,8 +188,10 @@ begin
   if trim(fDMCadNotaServico.cdsNotaServico_ImpINSC_MUNICIPAL_CLI.AsString) <> '' then
     vCds.FieldByName('TomS.IM').AsString  := fDMCadNotaServico.cdsNotaServico_ImpINSC_MUNICIPAL_CLI.AsString;
   vCds.FieldByName('TomS.IME').AsString   := '';
-  vCds.FieldByName('TomS.fone').AsString  := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD_CLI.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE_CLI.AsString,0);
-  vCds.FieldByName('TomS.fone2').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD2_CLI.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE2_CLI.AsString,0);
+  if trim(fDMCadNotaServico.cdsNotaServico_ImpFONE_CLI.AsString) <> '' then
+    vCds.FieldByName('TomS.fone').AsString  := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD_CLI.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE_CLI.AsString,0);
+  if trim(fDMCadNotaServico.cdsNotaServico_ImpFONE2_CLI.AsString) <> '' then
+    vCds.FieldByName('TomS.fone2').AsString := Monta_Numero(fDMCadNotaServico.cdsNotaServico_ImpDDD2_CLI.AsString + fDMCadNotaServico.cdsNotaServico_ImpFONE2_CLI.AsString,0);
 
   //24/07/2019 não vai usar a praça
   //if fDMCadNotaServico.cdsNotaServico_ImpID_CIDADE_TRIB.AsInteger > 0 then
@@ -333,7 +335,7 @@ begin
   fDMCadNotaServico.cdsNotaServico_Imp_Parc.Open;
   fDMCadNotaServico.cdsNotaServico_Imp_Parc.First;
 
-  fat := vCds.FieldByName('faturas') as TDataSetField;
+  //fat := vCds.FieldByName('faturas') as TDataSetField;
   if fDMCadNotaServico.cdsNotaServico_ImpTIPO_PRAZO.AsString = 'V' then
     prc_Montar_Cobr(fDMCadNotaServico,fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime,fDMCadNotaServico.cdsNotaServico_ImpVLR_DUPLICATA.AsFloat,1)
   else
@@ -416,17 +418,20 @@ procedure prc_Montar_Cobr(fDMCadNotaServico: TDMCadNotaServico; DtVencimento: TD
 //var
   //vAux: String;
   //ano,mes,dia: word;
+var
+  fat: TDataSetField;
 begin
+  fat := vCds.FieldByName('faturas.fat') as TDataSetField;
   fat.NestedDataSet.Insert;
-  fat.NestedDataSet.FieldByName('fat.nItem').AsInteger  := Parcela;
-  fat.NestedDataSet.FieldByName('fat.nFat').AsString    := fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString;
-  fat.NestedDataSet.FieldByName('fat.dVenc').AsDateTime := DtVencimento;
-  fat.NestedDataSet.FieldByName('fat.vFat').AsFloat     := VlrVencimento;
+  fat.NestedDataSet.FieldByName('nItem').AsInteger  := Parcela;
+  fat.NestedDataSet.FieldByName('nFat').AsString    := fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString;
+  fat.NestedDataSet.FieldByName('dVenc').AsDateTime := DtVencimento;
+  fat.NestedDataSet.FieldByName('vFat').AsFloat     := VlrVencimento;
   if fDMCadNotaServico.cdsNotaServico_ImpTIPO_PRAZO.AsString = 'V' then
-    fat.NestedDataSet.FieldByName('fat.tipoVencFat').AsString := '3'
+    fat.NestedDataSet.FieldByName('tipoVencFat').AsString := '3'
   else
-    fat.NestedDataSet.FieldByName('fat.tipoVencFat').AsString := '1';
-  fat.NestedDataSet.FieldByName('fat.descTipoVencFat').AsString := '';
+    fat.NestedDataSet.FieldByName('tipoVencFat').AsString := '1';
+  fat.NestedDataSet.FieldByName('descTipoVencFat').AsString := '';
   fat.NestedDataSet.Post;
 end;
 

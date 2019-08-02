@@ -31,7 +31,7 @@ begin
   AddADTChield(Def, 'dEmi', ftDate);
   AddADTChield(Def, 'hEmi', ftString, 5);
   //AddADTChield(Def, 'dSaiEnt', ftDate);
-  //AddADTChield(Def, 'tpNF', ftInteger);
+  AddADTChield(Def, 'tpNF', ftInteger);
   //AddADTChield(Def, 'cMunFG', ftString, 7);
   AddADTChield(Def, 'refNF', ftString, 39);
   AddADTChield(Def, 'tpImp', ftString, 1);
@@ -131,10 +131,11 @@ begin
   AClientDataSet.FieldDefs.Add('det', ftDataSet);
   Def := AClientDataSet.FieldDefs.Find('det');
   AddADTChield(Def, 'nItem', ftInteger);
+  
   AddADTChield(Def, 'serv', ftADT);
-
   Def2 := Def.ChildDefs.Find('serv');
   AddADTChield(Def2, 'cServ', ftString, 60);
+  AddADTChield(Def2, 'cLCServ', ftString, 4);  
   AddADTChield(Def2, 'xServ', ftString, 120);  
   AddADTChield(Def2, 'localTributacao', ftString, 7);
   AddADTChield(Def2, 'localVerifResServ', ftString, 1);
@@ -146,6 +147,7 @@ begin
   AddADTChield(Def2, 'vBCISS', ftFloat);
   AddADTChield(Def2, 'pISS', ftFloat);
   AddADTChield(Def2, 'vISS', ftFloat);
+  AddADTChield(Def2, 'vBINSS', ftFloat);
   AddADTChield(Def2, 'pRetINSS', ftFloat);
   AddADTChield(Def2, 'vRetINSS', ftFloat);
   AddADTChield(Def2, 'vRed', ftFloat);
@@ -212,8 +214,10 @@ begin
   //AddADTChield(Def2, 'vDesc', ftFloat);
   //AddADTChield(Def2, 'vLiq', ftFloat);
 
-  AddADTChield(Def, 'vtLiqFaturas-CSLL', ftFloat);
-  AddADTChield(Def, 'vtDespesas-CSLL', ftFloat);
+  //AddADTChield(Def, 'vtLiqFaturas-CSLL', ftFloat);
+  //AddADTChield(Def, 'vtDespesas-CSLL', ftFloat);
+  AddADTChield(Def, 'vtLiqFaturas', ftFloat);
+  AddADTChield(Def, 'vtDespesas', ftFloat);
 
   AddADTChield(Def, 'ISS', ftADT);
   Def2 := Def.ChildDefs.Find('ISS');

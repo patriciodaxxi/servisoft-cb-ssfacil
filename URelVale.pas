@@ -170,7 +170,8 @@ procedure TfRelVale.RLBand1BeforePrint(Sender: TObject;
    var PrintIt: Boolean);
 begin
   rlEndFilial.Caption := fDMCadVale.cdsValeImpENDERECO_FILIAL.AsString + ',' + fDMCadVale.cdsValeImpNUM_END_FILIAL.AsString;
-  rlEndereco.Caption  := fDMCadVale.cdsValeImpENDERECO_CLIENTE.AsString + ', ' + fDMCadVale.cdsValeImpNUM_END_CLIENTE.AsString;
+  rlEndereco.Caption  := fDMCadVale.cdsValeImpENDERECO_CLIENTE.AsString + ', ' + fDMCadVale.cdsValeImpNUM_END_CLIENTE.AsString +
+                         fDMCadVale.cdsValeImpCOMPLEMENTO_END_CLIENTE.AsString;
 
   RLImage1.Picture := nil;
   try

@@ -1572,7 +1572,7 @@ object fRelVale: TfRelVale
           object RLDBText41: TRLDBText
             Left = 459
             Top = 9
-            Width = 90
+            Width = 89
             Height = 14
             DataField = 'VLR_DESCONTO'
             DataSource = DmCadVale.dsValeImp
