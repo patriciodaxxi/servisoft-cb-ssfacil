@@ -1620,6 +1620,18 @@ begin
   TS_Engenharia.TabVisible := (fDMCadProduto.qParametrosUSA_CONSUMO.AsString = 'S');
   TS_Grade.TabVisible      := (fDMCadProduto.qParametrosUSA_GRADE.AsString = 'S');
 
+  TS_Veiculo.TabVisible      := (fDMCadProduto.qParametrosEMPRESA_VEICULO.AsString = 'S');
+  TS_PCP.TabVisible          := ((fDMCadProduto.qParametrosEMPRESA_INJETADO.AsString = 'S') or (fDMCadProduto.qParametrosEMPRESA_CARTONAGEM.AsString = 'S'));
+  TS_Injetados.TabVisible    := (fDMCadProduto.qParametrosEMPRESA_INJETADO.AsString = 'S');
+  TS_Cartonagem.TabVisible   := (fDMCadProduto.qParametrosEMPRESA_CARTONAGEM.AsString = 'S');
+  TS_Ativo.TabVisible        := (fDMCadProduto.qParametrosUSA_SPED.AsString = 'S');
+  TS_Maquina.TabVisible           := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
+  TS_Ficha_Textil.TabVisible      := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
+  TS_Ficha_Tear.TabVisible        := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
+  TS_Ficha_Trancadeira.TabVisible := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
+  TS_Corrugado.TabVisible         := (fDMCadProduto.qParametros_ProdUSA_CORRUGADO.AsString = 'S');
+  TS_Balanca.TabVisible           := False;
+
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin
     if (fDMCadProduto.qParametrosUSA_COD_BARRAS.AsString <> 'S') and (SMDBGrid1.Columns[i].FieldName = 'COD_BARRA') then
@@ -2407,7 +2419,9 @@ begin
   begin
     if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) or
           (fDMCadProduto.cdsProduto_ConsultaID.AsInteger <= 0) then
+    begin
       exit;
+    end;
 
     vEstoqueLoteTotal := 0;
     if not (fDMCadProduto.cdsProduto.State in [dsedit,dsinsert]) then
