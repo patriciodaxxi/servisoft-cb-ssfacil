@@ -817,7 +817,9 @@ uses
   UConsMotivoNaoAprov in 'UConsMotivoNaoAprov.pas' {frmConsMotivoNaoAprov},
   UAltEstLocal in 'UAltEstLocal.pas' {frmAltEstLocal},
   UDMConsClienteOBS in 'UDMConsClienteOBS.pas' {DMConsClienteOBS: TDataModule},
-  UConsEstoque2 in 'UConsEstoque2.pas' {frmConsEstoque2};
+  UConsEstoque2 in 'UConsEstoque2.pas' {frmConsEstoque2},
+  UDMComissaoVend in 'UDMComissaoVend.pas' {DMComissaoVend: TDataModule},
+  UComissaoVend in 'UComissaoVend.pas' {frmComissaoVend};
 
 {$R *.res}
 

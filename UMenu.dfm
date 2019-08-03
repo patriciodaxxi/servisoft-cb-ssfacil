@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 627
+    Height = 635
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -281,6 +281,13 @@ object fMenu: TfMenu
         object ImportarpeloExcel1: TMenuItem
           Caption = 'Importar Produto (Excel)'
           OnClick = ImportarpeloExcel1Click
+        end
+        object N56: TMenuItem
+          Caption = '-'
+        end
+        object ComissodoProdutoPorVendedorCadastro1: TMenuItem
+          Caption = 'Comiss'#227'o do Produto Por Vendedor (Cadastro)'
+          OnClick = ComissodoProdutoPorVendedorCadastro1Click
         end
       end
       object N25: TMenuItem
@@ -4258,6 +4265,30 @@ object fMenu: TfMenu
         CompName = 'btnAlterar'
         Caption = 'Alterar'
         GroupName = 'Consulta Obs Cliente (Or'#231')'
+      end
+      item
+        FormName = 'frmComissaoVend'
+        CompName = 'btnConfirmar'
+        Caption = 'Confirmar Produtos Selecionados No Representante'
+        GroupName = 'Comiss'#227'o Produto Vendedor'
+      end
+      item
+        FormName = 'frmCadAtividade'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Atividade'
+      end
+      item
+        FormName = 'frmCadAtividade'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Atividade'
+      end
+      item
+        FormName = 'frmCadAtividade'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Atividade'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True
