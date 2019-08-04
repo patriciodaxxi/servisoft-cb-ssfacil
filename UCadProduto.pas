@@ -1993,6 +1993,7 @@ begin
       9: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('09');
      10: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('10');
      11: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND SPED_TIPO_ITEM = ' + QuotedStr('99');
+     13: fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.sdsProduto_Consulta.CommandText + ' AND COALESCE(SPED_TIPO_ITEM,' + QuotedStr('') + ') = ' + QuotedStr('');
     end;
 
     //Consulta Veículo
