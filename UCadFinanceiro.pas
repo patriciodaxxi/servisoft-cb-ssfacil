@@ -101,6 +101,8 @@ type
     lblSaldoGeral: TLabel;
     Recebimento1: TMenuItem;
     Pagamento1: TMenuItem;
+    Label30: TLabel;
+    DBEdit5: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

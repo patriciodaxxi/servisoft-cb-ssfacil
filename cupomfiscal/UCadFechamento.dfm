@@ -25,7 +25,7 @@ object frmCadFechamento: TfrmCadFechamento
     Top = 0
     Width = 996
     Height = 661
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadFechamento: TfrmCadFechamento
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1872,6 +1872,20 @@ object frmCadFechamento: TfrmCadFechamento
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
           Font.Height = -19
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label3: TLabel
+          Left = 443
+          Top = 145
+          Width = 47
+          Height = 16
+          Alignment = taRightJustify
+          Caption = '(Bruto)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -13
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
