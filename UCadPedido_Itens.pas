@@ -1209,7 +1209,7 @@ begin
 
     fDMCadPedido.cdsPedido_Itens.Post;
     //foi alterado para ajustar os carimbos e o número de OS dos tamanhos   23/02/2015
-    if vState = 'E' then
+    if (vState = 'E') and (fDMCadPedido.cdsProdutoID_GRADE.AsInteger > 0) and (fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S') then
     begin
       prc_Atualizar_Itens;
     end;

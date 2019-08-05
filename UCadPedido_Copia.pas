@@ -242,7 +242,8 @@ begin
           fDMCadPedido.cdsPedido_Itens.FieldByName(fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido_Itens.Fields[i].Value;
       end;
       fDMCadPedido.cdsPedido_ItensDTENTREGA.Clear;
-      fDMCadPedido.cdsPedido_ItensQTD.AsFloat := vFatorMultiplicador * fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
+      if vFatorMultiplicador > 0 then
+        fDMCadPedido.cdsPedido_ItensQTD.AsFloat := vFatorMultiplicador * fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
       if vFatorMultiplicador > 1 then
         fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat + (fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat * (vFatorMultiplicador / 100));
       fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat := fDMCadPedido.cdsPedido_ItensQTD.AsFloat * fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat;

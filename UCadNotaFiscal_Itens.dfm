@@ -1,6 +1,6 @@
 object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
-  Left = -1192
-  Top = 78
+  Left = 291
+  Top = 27
   Width = 800
   Height = 655
   BorderIcons = [biSystemMenu]

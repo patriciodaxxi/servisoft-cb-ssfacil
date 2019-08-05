@@ -1,8 +1,8 @@
 object fCupomFiscalImposto: TfCupomFiscalImposto
-  Left = 346
-  Top = 203
+  Left = 272
+  Top = 187
   Width = 698
-  Height = 305
+  Height = 310
   BorderIcons = [biSystemMenu]
   Caption = 'fCupomFiscalImposto - Imposto'
   Color = clMoneyGreen
@@ -20,7 +20,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   TextHeight = 13
   object Label17: TLabel
     Left = 26
-    Top = 73
+    Top = 49
     Width = 42
     Height = 13
     Alignment = taRightJustify
@@ -28,7 +28,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label18: TLabel
     Left = 11
-    Top = 95
+    Top = 71
     Width = 57
     Height = 13
     Alignment = taRightJustify
@@ -36,7 +36,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label19: TLabel
     Left = 300
-    Top = 73
+    Top = 49
     Width = 24
     Height = 13
     Alignment = taRightJustify
@@ -44,7 +44,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label20: TLabel
     Left = 300
-    Top = 95
+    Top = 71
     Width = 24
     Height = 13
     Alignment = taRightJustify
@@ -52,7 +52,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label21: TLabel
     Left = 449
-    Top = 73
+    Top = 49
     Width = 11
     Height = 13
     Alignment = taRightJustify
@@ -60,7 +60,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label22: TLabel
     Left = 449
-    Top = 95
+    Top = 71
     Width = 11
     Height = 13
     Alignment = taRightJustify
@@ -68,7 +68,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label26: TLabel
     Left = 15
-    Top = 117
+    Top = 93
     Width = 53
     Height = 13
     Alignment = taRightJustify
@@ -76,7 +76,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label27: TLabel
     Left = 28
-    Top = 139
+    Top = 115
     Width = 40
     Height = 13
     Alignment = taRightJustify
@@ -84,7 +84,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label33: TLabel
     Left = 357
-    Top = 118
+    Top = 94
     Width = 105
     Height = 13
     Alignment = taRightJustify
@@ -92,7 +92,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label1: TLabel
     Left = 28
-    Top = 181
+    Top = 157
     Width = 40
     Height = 13
     Alignment = taRightJustify
@@ -100,15 +100,55 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object Label2: TLabel
     Left = 187
-    Top = 181
+    Top = 157
     Width = 27
     Height = 13
     Alignment = taRightJustify
     Caption = '% IPI:'
   end
+  object Label4: TLabel
+    Left = 12
+    Top = 183
+    Width = 56
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Base ICMS:'
+  end
+  object Label5: TLabel
+    Left = 167
+    Top = 181
+    Width = 47
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Vlr. ICMS:'
+  end
+  object Label6: TLabel
+    Left = 328
+    Top = 158
+    Width = 76
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Base ICMS Ret:'
+  end
+  object Label7: TLabel
+    Left = 499
+    Top = 156
+    Width = 67
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Vlr. ICMS Ret:'
+  end
+  object Label8: TLabel
+    Left = 497
+    Top = 177
+    Width = 69
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Vlr. ICMS Efet.'
+  end
   object Panel1: TPanel
     Left = 0
-    Top = 233
+    Top = 238
     Width = 690
     Height = 41
     Align = alBottom
@@ -152,7 +192,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object RxDBLookupCombo8: TRxDBLookupCombo
     Left = 70
-    Top = 65
+    Top = 41
     Width = 225
     Height = 21
     DropDownCount = 8
@@ -164,7 +204,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object RxDBLookupCombo9: TRxDBLookupCombo
     Left = 70
-    Top = 87
+    Top = 63
     Width = 225
     Height = 21
     DropDownCount = 8
@@ -176,7 +216,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object RxDBLookupCombo11: TRxDBLookupCombo
     Left = 70
-    Top = 109
+    Top = 85
     Width = 225
     Height = 21
     DropDownCount = 8
@@ -188,7 +228,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object RxDBLookupCombo12: TRxDBLookupCombo
     Left = 70
-    Top = 131
+    Top = 107
     Width = 225
     Height = 21
     DropDownCount = 8
@@ -303,7 +343,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object ComboBox1: TComboBox
     Left = 328
-    Top = 65
+    Top = 41
     Width = 97
     Height = 21
     Style = csDropDownList
@@ -315,7 +355,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object ComboBox2: TComboBox
     Left = 328
-    Top = 88
+    Top = 64
     Width = 97
     Height = 21
     Style = csDropDownList
@@ -327,7 +367,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object CurrencyEdit1: TCurrencyEdit
     Left = 70
-    Top = 173
+    Top = 149
     Width = 81
     Height = 21
     AutoSize = False
@@ -337,7 +377,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object CurrencyEdit2: TCurrencyEdit
     Left = 215
-    Top = 173
+    Top = 149
     Width = 81
     Height = 21
     AutoSize = False
@@ -347,7 +387,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object CurrencyEdit3: TCurrencyEdit
     Left = 463
-    Top = 65
+    Top = 41
     Width = 66
     Height = 21
     AutoSize = False
@@ -357,7 +397,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object CurrencyEdit4: TCurrencyEdit
     Left = 463
-    Top = 88
+    Top = 64
     Width = 66
     Height = 21
     AutoSize = False
@@ -367,12 +407,77 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
   end
   object CurrencyEdit5: TCurrencyEdit
     Left = 463
-    Top = 110
+    Top = 86
     Width = 66
     Height = 21
     AutoSize = False
     DecimalPlaces = 3
     DisplayFormat = '0.00#'
     TabOrder = 8
+  end
+  object CurrencyEdit6: TCurrencyEdit
+    Left = 70
+    Top = 175
+    Width = 81
+    Height = 21
+    TabStop = False
+    AutoSize = False
+    Color = clSilver
+    DecimalPlaces = 3
+    DisplayFormat = '0.00#'
+    ReadOnly = True
+    TabOrder = 13
+  end
+  object CurrencyEdit7: TCurrencyEdit
+    Left = 215
+    Top = 172
+    Width = 81
+    Height = 21
+    TabStop = False
+    AutoSize = False
+    Color = clSilver
+    DecimalPlaces = 3
+    DisplayFormat = '0.00#'
+    ReadOnly = True
+    TabOrder = 14
+  end
+  object CurrencyEdit8: TCurrencyEdit
+    Left = 406
+    Top = 150
+    Width = 81
+    Height = 21
+    TabStop = False
+    AutoSize = False
+    Color = clSilver
+    DecimalPlaces = 3
+    DisplayFormat = '0.00#'
+    ReadOnly = True
+    TabOrder = 15
+  end
+  object CurrencyEdit9: TCurrencyEdit
+    Left = 567
+    Top = 147
+    Width = 81
+    Height = 21
+    TabStop = False
+    AutoSize = False
+    Color = clSilver
+    DecimalPlaces = 3
+    DisplayFormat = '0.00#'
+    ReadOnly = True
+    TabOrder = 16
+  end
+  object CurrencyEdit10: TCurrencyEdit
+    Left = 567
+    Top = 169
+    Width = 81
+    Height = 21
+    TabStop = False
+    AutoSize = False
+    Color = clSilver
+    DecimalPlaces = 3
+    DisplayFormat = '0.00#'
+    ReadOnly = True
+    TabOrder = 17
   end
 end

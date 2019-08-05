@@ -328,6 +328,9 @@ type
     procedure prc_Chama_Form_Produto;
     procedure prc_Chama_Form_TabPreco;
 
+    //Verificar 05/08/2019
+    //procedure prc_Buscar_CST_ICMS;
+
     function fnc_Busca_NCM_CST: Integer;
 
     procedure prc_Habilitar_Desoneracao(CodCST_ICMS: String);
@@ -632,6 +635,9 @@ begin
   fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger := fDMCadNotaFiscal.cdsProdutoID_NCM.AsInteger;
   if fDMCadNotaFiscal.cdsTab_NCMID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger then
     fDMCadNotaFiscal.cdsTab_NCM.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,[loCaseInsensitive]);
+
+  //esta sendo feito 05/08/2019  
+  //prc_Busca_CST_ICMS;
 
   //4.00
   if (fDMCadNotaFiscal.cdsTab_NCMTIPO_ESCALA.AsString = 'S') AND (fDMCadNotaFiscal.cdsTab_NCMTIPO_ESCALA.AsString <> 'N') then
