@@ -258,8 +258,8 @@ begin
     if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_IR.AsFloat)) > 0 then
     begin
       Det.NestedDataSet.FieldByName('serv.vBCRetIR').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_TOTAL.AsFloat));
-      Det.NestedDataSet.FieldByName('serv.pRetIRF').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_IR.AsFloat));
-      Det.NestedDataSet.FieldByName('serv.vRetIRF').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_IR.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.pRetIR').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_IR.AsFloat));
+      Det.NestedDataSet.FieldByName('serv.vRetIR').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_IR.AsFloat));
     end;
     if (fDMCadNotaServico.cdsNotaServico_ImpRETEM_PISCOFINS.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_COFINS.AsFloat)) > 0) then
     begin
