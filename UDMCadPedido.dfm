@@ -16291,6 +16291,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_OCPERMITE_ALT_NOMEPROD: TStringField
+      FieldName = 'PERMITE_ALT_NOMEPROD'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsPrc_Atualiza_DtEntrega: TSQLDataSet
     NoMetadata = True

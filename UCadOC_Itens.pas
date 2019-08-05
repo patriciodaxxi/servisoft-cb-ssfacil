@@ -57,6 +57,9 @@ type
     Label9: TLabel;
     RxDBComboBox1: TRxDBComboBox;
     DBCheckBox1: TDBCheckBox;
+    pnlNomeProduto: TPanel;
+    Label22: TLabel;
+    DBEdit1: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -174,6 +177,8 @@ begin
   Label21.Visible       := (fDMCadPedido.cdsParametrosUSA_ID_PRODUTO.AsString = 'S');
   DBEdit15.Visible      := (fDMCadPedido.cdsParametrosUSA_ID_PRODUTO.AsString = 'S');
   btnCliente.Visible    := (fDMCadPedido.cdsParametrosUSA_PROJETO_OC.AsString = 'S');
+  pnlNomeProduto.Visible := (fDMCadPedido.qParametros_OCPERMITE_ALT_NOMEPROD.AsString = 'S');
+
 
   //Tamanho
   if (fDMCadPedido.cdsPedido_Itens.State in [dsEdit]) and (fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S') then
@@ -291,7 +296,7 @@ begin
   if fnc_Erro then
     exit;
 
-   if fDMCadPedido.cdsPedido_Itens.State in [dsEdit] then
+  if fDMCadPedido.cdsPedido_Itens.State in [dsEdit] then
     vEditar := True
   else
     vEditar := False;
@@ -314,9 +319,11 @@ begin
       if not(fDMCadPedido.qProduto_Forn.IsEmpty) and (trim(fDMCadPedido.qProduto_FornNOME_MATERIAL_FORN.AsString) <> '') then
         fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.qProduto_FornNOME_MATERIAL_FORN.AsString
       else
-        fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString;
+        if fDMCadPedido.qParametros_OCPERMITE_ALT_NOMEPROD.AsString <> 'S' then
+          fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString;
     end
     else
+    if fDMCadPedido.qParametros_OCPERMITE_ALT_NOMEPROD.AsString <> 'S' then
       fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString;
     fDMCadPedido.cdsPedido_ItensREFERENCIA.AsString  := fDMCadPedido.cdsProdutoREFERENCIA.AsString;
     fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
@@ -560,6 +567,11 @@ procedure TfrmCadOC_Itens.Panel4Exit(Sender: TObject);
 begin
   fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,[loCaseInsensitive]);
   prc_Abrir_Combinacao(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
+  if vCodProdutoAnt <> fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger then
+  begin
+    if fDMCadPedido.qParametros_OCPERMITE_ALT_NOMEPROD.AsString = 'S' then
+      fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString;
+  end;
 end;
 
 procedure TfrmCadOC_Itens.Edit1KeyDown(Sender: TObject; var Key: Word;

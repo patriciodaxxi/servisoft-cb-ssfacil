@@ -22,7 +22,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
     Left = 0
     Top = 35
     Width = 749
-    Height = 52
+    Height = 71
     Align = alTop
     Color = clMoneyGreen
     TabOrder = 1
@@ -171,6 +171,36 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         OnKeyDown = DBEdit15KeyDown
       end
     end
+    object pnlNomeProduto: TPanel
+      Left = 1
+      Top = 48
+      Width = 747
+      Height = 22
+      Align = alBottom
+      BevelOuter = bvNone
+      Color = clMoneyGreen
+      TabOrder = 1
+      object Label22: TLabel
+        Left = 103
+        Top = 7
+        Width = 31
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Nome:'
+      end
+      object DBEdit1: TDBEdit
+        Left = 138
+        Top = 1
+        Width = 534
+        Height = 19
+        Ctl3D = False
+        DataField = 'NOMEPRODUTO'
+        DataSource = DMCadPedido.dsPedido_Itens
+        ParentCtl3D = False
+        TabOrder = 0
+        OnExit = DBEdit5Exit
+      end
+    end
   end
   object Panel3: TPanel
     Left = 0
@@ -213,9 +243,9 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   end
   object Panel2: TPanel
     Left = 0
-    Top = 111
+    Top = 137
     Width = 749
-    Height = 388
+    Height = 362
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 3
@@ -621,15 +651,15 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   end
   object pnlCor: TPanel
     Left = 0
-    Top = 87
+    Top = 106
     Width = 749
-    Height = 24
+    Height = 31
     Align = alTop
     Color = clMoneyGreen
     TabOrder = 2
     object Label1: TLabel
       Left = 87
-      Top = 9
+      Top = 12
       Width = 50
       Height = 13
       Alignment = taRightJustify
@@ -637,7 +667,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
     end
     object RxDBLookupCombo5: TRxDBLookupCombo
       Left = 138
-      Top = 1
+      Top = 4
       Width = 423
       Height = 21
       DropDownCount = 15
