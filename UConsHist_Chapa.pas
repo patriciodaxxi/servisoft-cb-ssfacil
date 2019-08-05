@@ -180,18 +180,23 @@ end;
 procedure TfrmConsHist_Chapa.btnCopiarClick(Sender: TObject);
 begin
   fDMCopiaPedido.mAux.EmptyDataSet;
-  cdsChapa.First;
-  while not cdsChapa.Eof do
-  begin
-    if (SMDBGrid1.SelectedRows.CurrentRowSelected) then
+  cdsChapa.DisableControls;
+  try
+    cdsChapa.First;
+    while not cdsChapa.Eof do
     begin
-      fDMCopiaPedido.mAux.Insert;
-      fDMCopiaPedido.mAuxID_Pedido.AsInteger   := cdsChapaID_PEDIDO.AsInteger;
-      fDMCopiaPedido.mAuxNum_Pedido.AsInteger  := cdsChapaNUM_PEDIDO.AsInteger;
-      fDMCopiaPedido.mAuxItem_Pedido.AsInteger := cdsChapaITEM_PEDIDO.AsInteger;
-      fDMCopiaPedido.mAux.Post;
+      if (SMDBGrid1.SelectedRows.CurrentRowSelected) then
+      begin
+        fDMCopiaPedido.mAux.Insert;
+        fDMCopiaPedido.mAuxID_Pedido.AsInteger   := cdsChapaID_PEDIDO.AsInteger;
+        fDMCopiaPedido.mAuxNum_Pedido.AsInteger  := cdsChapaNUM_PEDIDO.AsInteger;
+        fDMCopiaPedido.mAuxItem_Pedido.AsInteger := cdsChapaITEM_PEDIDO.AsInteger;
+        fDMCopiaPedido.mAux.Post;
+      end;
+      cdsChapa.Next;
     end;
-    cdsChapa.Next;
+  finally
+    cdsChapa.EnableControls;
   end;
   if edtMultiplicador.Text = '' then
     edtMultiplicador.Text := '1';
