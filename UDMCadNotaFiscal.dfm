@@ -5176,7 +5176,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'ECO_CUSTO_TOTAL'#13#10',PERC_MARGEMLUCRO'#13#10',PERC_DESC_MAX'#13#10',SPED_TIPO_I' +
       'TEM'#13#10',ID_CSTICMS_BRED'#13#10',USA_PRECO_COR'#13#10',TAMANHO'#13#10',COD_BARRA2'#13#10',Q' +
       'TD_EMBALAGEM'#13#10',ID_MARCA'#13#10',UNIDADE2'#13#10',ID_CSTICMS'#13#10',P.NOME_MODELO'#13 +
-      #10'FROM PRODUTO P'#13#10#13#10
+      #10',P.perc_icms_nfce'#13#10'FROM PRODUTO P'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -5194,7 +5194,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspProduto'
     Left = 649
-    Top = 406
+    Top = 405
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5417,6 +5417,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object cdsProdutoNOME_MODELO: TStringField
       FieldName = 'NOME_MODELO'
       Size = 100
+    end
+    object cdsProdutoPERC_ICMS_NFCE: TFloatField
+      FieldName = 'PERC_ICMS_NFCE'
     end
   end
   object dsProduto: TDataSource

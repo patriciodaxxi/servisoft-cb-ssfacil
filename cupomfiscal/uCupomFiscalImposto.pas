@@ -40,6 +40,16 @@ type
     CurrencyEdit4: TCurrencyEdit;
     CurrencyEdit5: TCurrencyEdit;
     brCancelar: TNxButton;
+    Label4: TLabel;
+    CurrencyEdit6: TCurrencyEdit;
+    CurrencyEdit7: TCurrencyEdit;
+    Label5: TLabel;
+    Label6: TLabel;
+    CurrencyEdit8: TCurrencyEdit;
+    Label7: TLabel;
+    CurrencyEdit9: TCurrencyEdit;
+    Label8: TLabel;
+    CurrencyEdit10: TCurrencyEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -104,6 +114,17 @@ begin
   CurrencyEdit5.Value := fDmCupomFiscal.vPerc_TribICMS;
   CurrencyEdit1.Value := fDmCupomFiscal.vPerc_ICMS;
   CurrencyEdit2.Value := fDmCupomFiscal.vPerc_IPI;
+  CurrencyEdit6.Value := fDmCupomFiscal.vBase_ICMS;
+  CurrencyEdit7.Value := fDmCupomFiscal.vVlr_ICMS;
+  CurrencyEdit8.Value := fDmCupomFiscal.vBase_ICMS_Ret;
+  CurrencyEdit9.Value := fDmCupomFiscal.vVlr_ICMS_Ret;
+  CurrencyEdit10.Value := fDmCupomFiscal.vVlr_ICMS_Efet;
+
+  fDmCupomFiscal.vVlr_ICMS      := fDmCupomFiscal.cdsCupom_ItensVLR_ICMS.AsFloat;
+  fDmCupomFiscal.vBase_ICMS     := fDmCupomFiscal.cdsCupom_ItensBASE_ICMS.AsFloat;
+  fDmCupomFiscal.vVlr_ICMS_Ret  := fDmCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat;
+  fDmCupomFiscal.vBase_ICMS_Ret := fDmCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat;
+  fDmCupomFiscal.vVlr_ICMS_Efet := fDmCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat;
 
   btConfirmar.Enabled := (fDmCupomFiscal.cdsCupomFiscalNFECHAVEACESSO.AsString = '') or
                          (fDmCupomFiscal.cdsCupomFiscalNFECHAVEACESSO.IsNull)  

@@ -400,6 +400,9 @@ object DMCadFinanceiro: TDMCadFinanceiro
     object sdsFinanceiroID_TERMINAL: TIntegerField
       FieldName = 'ID_TERMINAL'
     end
+    object sdsFinanceiroID_FECHAMENTO: TIntegerField
+      FieldName = 'ID_FECHAMENTO'
+    end
   end
   object dspFinanceiro: TDataSetProvider
     DataSet = sdsFinanceiro
@@ -496,6 +499,9 @@ object DMCadFinanceiro: TDMCadFinanceiro
     end
     object cdsFinanceiroID_TERMINAL: TIntegerField
       FieldName = 'ID_TERMINAL'
+    end
+    object cdsFinanceiroID_FECHAMENTO: TIntegerField
+      FieldName = 'ID_FECHAMENTO'
     end
   end
   object dsFinanceiro: TDataSource
@@ -782,6 +788,9 @@ object DMCadFinanceiro: TDMCadFinanceiro
     end
     object cdsFinanceiro_ConsultaID_TERMINAL: TIntegerField
       FieldName = 'ID_TERMINAL'
+    end
+    object cdsFinanceiro_ConsultaID_FECHAMENTO: TIntegerField
+      FieldName = 'ID_FECHAMENTO'
     end
   end
   object dsFinanceiro_Consulta: TDataSource
@@ -1817,8 +1826,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43588.431551643520000000
+    ReportOptions.CreateDate = 43399.644061967600000000
+    ReportOptions.LastChange = 43657.479058761600000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint

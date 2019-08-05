@@ -373,6 +373,9 @@ type
     qParametros_FinCAIXA_VIRA_NOITE: TStringField;
     qCaixaAberto: TSQLQuery;
     qCaixaAbertoTIPO_FECHAMENTO: TStringField;
+    sdsFinanceiroID_FECHAMENTO: TIntegerField;
+    cdsFinanceiroID_FECHAMENTO: TIntegerField;
+    cdsFinanceiro_ConsultaID_FECHAMENTO: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspFinanceiroUpdateError(Sender: TObject; DataSet: TCustomClientDataSet; E: EUpdateError; UpdateKind: TUpdateKind; var Response: TResolverResponse);
     procedure cdsFinanceiroBeforePost(DataSet: TDataSet);

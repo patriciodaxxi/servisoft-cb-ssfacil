@@ -328,6 +328,9 @@ type
     procedure prc_Chama_Form_Produto;
     procedure prc_Chama_Form_TabPreco;
 
+    //Verificar 05/08/2019
+    //procedure prc_Buscar_CST_ICMS;
+
     function fnc_Busca_NCM_CST: Integer;
 
     procedure prc_Habilitar_Desoneracao(CodCST_ICMS: String);
@@ -633,6 +636,9 @@ begin
   if fDMCadNotaFiscal.cdsTab_NCMID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger then
     fDMCadNotaFiscal.cdsTab_NCM.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,[loCaseInsensitive]);
 
+  //esta sendo feito 05/08/2019  
+  //prc_Busca_CST_ICMS;
+
   //4.00
   if (fDMCadNotaFiscal.cdsTab_NCMTIPO_ESCALA.AsString = 'S') AND (fDMCadNotaFiscal.cdsTab_NCMTIPO_ESCALA.AsString <> 'N') then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensTIPO_ESCALA.AsString := fDMCadNotaFiscal.cdsTab_NCMTIPO_ESCALA.AsString
@@ -720,7 +726,12 @@ begin
   begin
     //07/12/2018
     if fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger > 0 then
-      vID_ICMS := fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger
+    begin
+      vID_ICMS := fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger;
+      if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
+
+
+    end
     else
     begin
       if fDMCadNotaFiscal.cdsTab_NCMID_CST_ICMS.AsInteger > 0 then
@@ -813,6 +824,8 @@ begin
       else
         fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := fDMCadNotaFiscal.cdsUFPERC_ICMS.AsFloat;
     end;
+    if (fDMCadNotaFiscal.cdsFilialUF.AsString = fDMCadNotaFiscal.cdsClienteUF.AsString) and (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0) then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_ICMS_NFCE.AsFloat));
     //24/07/2019
     //07/12/2018
     //if (StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.cdsTab_CSTICMSPERCENTUAL.AsFloat)) <= 0) and (StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.cdsTab_CSTICMSPERC_DIFERIMENTO.AsFloat)) <= 0) then
