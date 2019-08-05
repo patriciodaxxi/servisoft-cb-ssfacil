@@ -76,7 +76,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
         WidthOfIndicator = 27
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 15
+        ColCount = 16
         RowCount = 2
         Columns = <
           item
@@ -100,7 +100,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           item
             Expanded = False
             FieldName = 'DTMOVIMENTO'
-            Width = 74
+            Width = 65
             Visible = True
           end
           item
@@ -129,25 +129,25 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           item
             Expanded = False
             FieldName = 'USUARIO'
-            Width = 64
+            Width = 53
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'DTUSUARIO'
-            Width = 64
+            Width = 65
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ID_MOVDUPLICATA'
-            Width = 64
+            Width = 55
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ITEM_MOVDUPLICATA'
-            Width = 64
+            Width = 57
             Visible = True
           end
           item
@@ -155,6 +155,7 @@ object frmCadFinanceiro: TfrmCadFinanceiro
             FieldName = 'ID_CHEQUE'
             Title.Alignment = taCenter
             Title.Caption = 'ID Cheque'
+            Width = 55
             Visible = True
           end
           item
@@ -162,6 +163,14 @@ object frmCadFinanceiro: TfrmCadFinanceiro
             FieldName = 'ID_TERMINAL'
             Title.Alignment = taCenter
             Title.Caption = 'Terminal'
+            Width = 55
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_FECHAMENTO'
+            Title.Caption = 'Id. Fecham.'
+            Width = 55
             Visible = True
           end>
       end
@@ -1395,6 +1404,15 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           Alignment = taRightJustify
           Caption = 'Pessoa:'
         end
+        object Label30: TLabel
+          Left = 690
+          Top = 103
+          Width = 79
+          Height = 13
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          Caption = 'ID. Fechamento:'
+        end
         object DBEdit7: TDBEdit
           Left = 140
           Top = 180
@@ -1637,6 +1655,22 @@ object frmCadFinanceiro: TfrmCadFinanceiro
           ParentCtl3D = False
           TabOrder = 4
           OnEnter = RxDBLookupCombo7Enter
+        end
+        object DBEdit5: TDBEdit
+          Left = 772
+          Top = 97
+          Width = 60
+          Height = 19
+          TabStop = False
+          Anchors = [akTop, akRight]
+          CharCase = ecUpperCase
+          Color = clSilver
+          Ctl3D = False
+          DataField = 'ID_FECHAMENTO'
+          DataSource = DMCadFinanceiro.dsFinanceiro
+          ParentCtl3D = False
+          ReadOnly = True
+          TabOrder = 13
         end
       end
     end
