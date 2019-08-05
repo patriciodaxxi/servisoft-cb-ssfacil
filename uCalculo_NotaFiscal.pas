@@ -1625,43 +1625,6 @@ begin
   if fDMCadNotaFiscal.cdsNotaFiscalTIPO_REG.AsString = 'NTE' then
     exit;
   vPerc_PisCofins_Imp := 0;
-  //04/11/2013 Nova lei de cálculo do Pis e Cofins
-  {if copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '3' then
-  begin
-    vIcmsAux := 0;
-    vIPIAux    := 0;
-    vCofinsAux := 0;
-    vPISAux    := 0;
-    vImpAux    := 0;
-    if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat)) > 0 then
-      vIcmsAux := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat / 100));
-    if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat)) > 0 then
-      vIPIAux := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat / 100));
-    if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat)) > 0 then
-      vCofinsAux := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat / 100));
-    if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat)) > 0 then
-      vPISAux := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat / 100));
-    if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IMPORTACAO.AsFloat)) > 0 then
-      vImpAux := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IMPORTACAO.AsFloat / 100));
-    vAux1 := 1 + vIcmsAux * ((vImpAux + vIPIAux * (1 + vImpAux)));
-    vAux2 := (1 - vPISAux - vCofinsAux) * (1 - vIcmsAux);
-    if (StrToFloat(FormatFloat('0.0000000',vAux1)) > 0) and (StrToFloat(FormatFloat('0.0000000',vAux2)) > 0) then
-      vPerc_PisCofins_Imp := vAux1 / vAux2;
-    vAux1 := 0;
-    vAux2 := 0;
-    if (StrToFloat(FormatFloat('0.0000000',vPerc_PisCofins_Imp)) > 0) then
-    begin
-      if (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat)) > 0) then
-        vAux1 := StrToFloat(FormatFloat('0.00',(fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat * vPerc_PisCofins_Imp) * (fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat / 100)));
-      if (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat)) > 0) then
-        vAux2 := StrToFloat(FormatFloat('0.00',(fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat * vPerc_PisCofins_Imp) * (fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat / 100)));
-    end;
-    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_PIS.AsFloat    := StrToFloat(FormatFloat('0.00',vAux1));
-    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_COFINS.AsFloat := StrToFloat(FormatFloat('0.00',vAux2));
-  end
-  else
-  begin}
-  //vBaseAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat));
   vBaseAux := StrToFloat(FormatFloat('0.00',VlrTotal));
   if copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '3' then
   begin

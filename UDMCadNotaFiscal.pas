@@ -3060,6 +3060,7 @@ type
     cdsPedidoLARGURA: TFloatField;
     cdsPedidoESPESSURA: TFloatField;
     cdsPedido_TipoESPESSURA: TFloatField;
+    cdsProdutoPERC_ICMS_NFCE: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

@@ -726,7 +726,12 @@ begin
   begin
     //07/12/2018
     if fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger > 0 then
-      vID_ICMS := fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger
+    begin
+      vID_ICMS := fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger;
+      if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
+
+
+    end
     else
     begin
       if fDMCadNotaFiscal.cdsTab_NCMID_CST_ICMS.AsInteger > 0 then
@@ -819,6 +824,8 @@ begin
       else
         fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := fDMCadNotaFiscal.cdsUFPERC_ICMS.AsFloat;
     end;
+    if (fDMCadNotaFiscal.cdsFilialUF.AsString = fDMCadNotaFiscal.cdsClienteUF.AsString) and (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0) then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_ICMS_NFCE.AsFloat));
     //24/07/2019
     //07/12/2018
     //if (StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.cdsTab_CSTICMSPERCENTUAL.AsFloat)) <= 0) and (StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.cdsTab_CSTICMSPERC_DIFERIMENTO.AsFloat)) <= 0) then
