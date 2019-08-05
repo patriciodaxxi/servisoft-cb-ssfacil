@@ -85,65 +85,68 @@ begin
     exit;
   end;
 
-  sds := TSQLDataSet.Create(nil);
-  ID.TransactionID  := 1;
-  ID.IsolationLevel := xilREADCOMMITTED;
-  dmDatabase.scoDados.StartTransaction(ID);
 
-  try
-
-    fDMAprovacao_Ped.cdsPedido_Item_Aprov.Last;
-    vItem := fDMAprovacao_Ped.cdsPedido_Item_AprovITEM_APROV.AsInteger;
-
-    fDMAprovacao_Ped.cdsPedido_Item_Aprov.Insert;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovID.AsInteger         := fDMAprovacao_Ped.cdsPedido_ItemID.AsInteger;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovITEM.AsInteger       := fDMAprovacao_Ped.cdsPedido_ItemITEM.AsInteger;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovITEM_APROV.AsInteger := vItem + 1;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovDATA.AsDateTime      := DateEdit1.Date;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovUSUARIO.AsString     := lblUsuario.Caption;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovDTUSUARIO.AsDateTime := Date;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovHRUSUARIO.AsDateTime := Now;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovID_FUNCIONARIO.AsInteger := fDMAprovacao_Ped.qFuncionarioCODIGO.AsInteger;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovMOTIVO_NAO_APROV.Clear;
-    if RadioGroup1.ItemIndex = 0 then
-    begin
-      if fDMAprovacao_Ped.fnc_Verifica_Aprov(fDMAprovacao_Ped.cdsPedido_ItemID.AsInteger,fDMAprovacao_Ped.cdsPedido_ItemITEM.AsInteger,'1') then
-        fDMAprovacao_Ped.cdsPedido_Item_AprovAPROVADO.AsString := 'S'
-      else
-        fDMAprovacao_Ped.cdsPedido_Item_AprovAPROVADO.AsString := '1';
-    end
-    else
-    begin
-      fDMAprovacao_Ped.cdsPedido_Item_AprovAPROVADO.AsString         := 'N';
-      fDMAprovacao_Ped.cdsPedido_Item_AprovMOTIVO_NAO_APROV.AsString := Edit1.Text;
-    end;
-    fDMAprovacao_Ped.cdsPedido_Item_AprovNOME_FUNCIONARIO.AsString := lblFuncionario.Caption;
-    vTipo := fDMAprovacao_Ped.cdsPedido_Item_AprovAPROVADO.AsString;
-    fDMAprovacao_Ped.cdsPedido_Item_Aprov.Post;
-    fDMAprovacao_Ped.cdsPedido_Item_Aprov.ApplyUpdates(0);
-
-    fDMAprovacao_Ped.cdsPedido_Item.Edit;
-    fDMAprovacao_Ped.cdsPedido_ItemAPROVADO_ITEM.AsString := vTipo;
-    fDMAprovacao_Ped.cdsPedido_Item.Post;
-    fDMAprovacao_Ped.cdsPedido_Item.ApplyUpdates(0);
-
-    dmDatabase.scoDados.Commit(ID);
-  except
-    dmDatabase.scoDados.Rollback(ID);
-    raise;
-  end;
-  FreeAndNil(sds);
-
-  fDMAprovacao_Ped.sdsPrc_Atualiza_Aprov_Ped.Close;
-  fDMAprovacao_Ped.sdsPrc_Atualiza_Aprov_Ped.ParamByName('P_ID').AsInteger := fDMAprovacao_Ped.mPedidoAuxID_Pedido.AsInteger;
-  fDMAprovacao_Ped.sdsPrc_Atualiza_Aprov_Ped.ExecSQL;
+//  sds := TSQLDataSet.Create(nil);
+//  ID.TransactionID  := 1;
+//  ID.IsolationLevel := xilREADCOMMITTED;
+//  dmDatabase.scoDados.StartTransaction(ID);
+//
+//  try
+//
+//    fDMAprovacao_Ped.cdsPedido_Item_Aprov.Last;
+//    vItem := fDMAprovacao_Ped.cdsPedido_Item_AprovITEM_APROV.AsInteger;
+//
+//    fDMAprovacao_Ped.cdsPedido_Item_Aprov.Insert;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovID.AsInteger         := fDMAprovacao_Ped.cdsPedido_ItemID.AsInteger;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovITEM.AsInteger       := fDMAprovacao_Ped.cdsPedido_ItemITEM.AsInteger;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovITEM_APROV.AsInteger := vItem + 1;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovDATA.AsDateTime      := DateEdit1.Date;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovUSUARIO.AsString     := lblUsuario.Caption;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovDTUSUARIO.AsDateTime := Date;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovHRUSUARIO.AsDateTime := Now;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovID_FUNCIONARIO.AsInteger := fDMAprovacao_Ped.qFuncionarioCODIGO.AsInteger;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovMOTIVO_NAO_APROV.Clear;
+//    if RadioGroup1.ItemIndex = 0 then
+//    begin
+//      if fDMAprovacao_Ped.fnc_Verifica_Aprov(fDMAprovacao_Ped.cdsPedido_ItemID.AsInteger,fDMAprovacao_Ped.cdsPedido_ItemITEM.AsInteger,'1') then
+//        fDMAprovacao_Ped.cdsPedido_Item_AprovAPROVADO.AsString := 'S'
+//      else
+//        fDMAprovacao_Ped.cdsPedido_Item_AprovAPROVADO.AsString := '1';
+//    end
+//    else
+//    begin
+//      fDMAprovacao_Ped.cdsPedido_Item_AprovAPROVADO.AsString         := 'N';
+//      fDMAprovacao_Ped.cdsPedido_Item_AprovMOTIVO_NAO_APROV.AsString := Edit1.Text;
+//    end;
+//    fDMAprovacao_Ped.cdsPedido_Item_AprovNOME_FUNCIONARIO.AsString := lblFuncionario.Caption;
+//    vTipo := fDMAprovacao_Ped.cdsPedido_Item_AprovAPROVADO.AsString;
+//    fDMAprovacao_Ped.cdsPedido_Item_Aprov.Post;
+//    fDMAprovacao_Ped.cdsPedido_Item_Aprov.ApplyUpdates(0);
+//
+//    fDMAprovacao_Ped.cdsPedido_Item.Edit;
+//    fDMAprovacao_Ped.cdsPedido_ItemAPROVADO_ITEM.AsString := vTipo;
+//    fDMAprovacao_Ped.cdsPedido_Item.Post;
+//    fDMAprovacao_Ped.cdsPedido_Item.ApplyUpdates(0);
+//
+//    dmDatabase.scoDados.Commit(ID);
+//  except
+//    dmDatabase.scoDados.Rollback(ID);
+//    raise;
+//  end;
+//  FreeAndNil(sds);
+//
+//  fDMAprovacao_Ped.sdsPrc_Atualiza_Aprov_Ped.Close;
+//  fDMAprovacao_Ped.sdsPrc_Atualiza_Aprov_Ped.ParamByName('P_ID').AsInteger := fDMAprovacao_Ped.mPedidoAuxID_Pedido.AsInteger;
+//  fDMAprovacao_Ped.sdsPrc_Atualiza_Aprov_Ped.ExecSQL;
 
   Close;
+  ModalResult := mrOk;
 end;
 
 procedure TfrmAprovacao_Ped_Item2.NxButton2Click(Sender: TObject);
 begin
   Close;
+  ModalResult := mrCancel;
 end;
 
 procedure TfrmAprovacao_Ped_Item2.RadioGroup1Click(Sender: TObject);

@@ -1,6 +1,6 @@
 object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
-  Left = 211
-  Top = 89
+  Left = 191
+  Top = 58
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmAprovacao_Ped_Item'
@@ -77,7 +77,7 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
       GridStyle.EvenColor = clWindow
       TitleHeight.PixelCount = 24
       FooterColor = clBtnFace
-      ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+      ExOptions = [eoBooleanAsCheckBox, eoCheckBoxSelect, eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
       OnGetCellParams = SMDBGrid2GetCellParams
       RegistryKey = 'Software\Scalabium'
       RegistrySection = 'SMDBGrid'
@@ -335,6 +335,20 @@ object frmAprovacao_Ped_Item: TfrmAprovacao_Ped_Item
       ParentFont = False
       TabOrder = 1
       OnClick = NxButton1Click
+    end
+    object btnAprovarTodos: TNxButton
+      Left = 204
+      Top = 6
+      Width = 188
+      Caption = 'Aprovar Selecionados'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGreen
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnClick = btnAprovarTodosClick
     end
   end
   object Panel1: TPanel
