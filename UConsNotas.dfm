@@ -1,6 +1,6 @@
 object frmConsNotas: TfrmConsNotas
-  Left = 217
-  Top = 40
+  Left = 144
+  Top = 51
   Width = 1018
   Height = 568
   Caption = 'Consulta Notas Gerais'

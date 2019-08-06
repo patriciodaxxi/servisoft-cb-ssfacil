@@ -872,6 +872,7 @@ type
     qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField;
     sdsDuplicataID_CONTABIL_OPE_BAIXA: TIntegerField;
     cdsDuplicataID_CONTABIL_OPE_BAIXA: TIntegerField;
+    qParametros_FinLER_RETORNO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mRetornoNewRecord(DataSet: TDataSet);
     procedure RLPreviewSetup1Send(Sender: TObject);
