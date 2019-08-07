@@ -1654,6 +1654,7 @@ var
   vFLag: Boolean;
   vQtdTotal: Integer;
   vQtdUsar: Integer;
+  vQtdTalao1 : Integer;
 begin
   // 05/01/2019 Lotus
   x := 0;
@@ -1661,9 +1662,9 @@ begin
 
   if (fDMCadPedido.qParametros_PedINF_QTD_TALAO.AsString = 'S') and (fDMInformar_Tam.vQtd_Por_Talao > 0) then
   begin
-    vQtdAux := Round(fDMInformar_Tam.vQtd_Grade);
-    vQtdAux := vQtdAux div fDMInformar_Tam.vQtd_Por_Talao;
-    if vQtdAux mod fDMInformar_Tam.vQtd_Por_Talao > 0 then
+    vQtdTalao1 := Round(fDMInformar_Tam.vQtd_Grade);
+    vQtdAux := vQtdTalao1 div fDMInformar_Tam.vQtd_Por_Talao;
+    if vQtdTalao1 mod fDMInformar_Tam.vQtd_Por_Talao > 0 then
       vQtdAux := vQtdAux + 1;
     fDMInformar_Tam.mItens.EmptyDataSet;
     while x < vQtdAux do
