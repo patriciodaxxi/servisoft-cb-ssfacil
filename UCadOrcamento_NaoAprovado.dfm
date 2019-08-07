@@ -1,6 +1,6 @@
 object frmCadOrcamento_NaoAprovado: TfrmCadOrcamento_NaoAprovado
-  Left = 282
-  Top = 70
+  Left = 260
+  Top = 72
   Width = 1031
   Height = 596
   Caption = 'frmCadOrcamento_NaoAprovado'
@@ -20,7 +20,7 @@ object frmCadOrcamento_NaoAprovado: TfrmCadOrcamento_NaoAprovado
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1015
+    Width = 1023
     Height = 33
     Align = alTop
     Color = clSilver
@@ -29,8 +29,8 @@ object frmCadOrcamento_NaoAprovado: TfrmCadOrcamento_NaoAprovado
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 89
-    Width = 1015
-    Height = 468
+    Width = 1023
+    Height = 368
     Align = alClient
     Ctl3D = False
     DataSource = DMCadPedido.dsmOrcamento_Itens
@@ -142,7 +142,7 @@ object frmCadOrcamento_NaoAprovado: TfrmCadOrcamento_NaoAprovado
   object Panel2: TPanel
     Left = 0
     Top = 33
-    Width = 1015
+    Width = 1023
     Height = 56
     Align = alTop
     Color = clSilver
@@ -192,5 +192,19 @@ object frmCadOrcamento_NaoAprovado: TfrmCadOrcamento_NaoAprovado
       Transparent = True
       OnClick = btnFecharClick
     end
+  end
+  object DBMemo1: TDBMemo
+    Left = 0
+    Top = 457
+    Width = 1023
+    Height = 108
+    TabStop = False
+    Align = alBottom
+    Color = clSilver
+    DataField = 'Motivo_Nao_Aprovado_Memo'
+    DataSource = DMCadPedido.dsmOrcamento_Itens
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 3
   end
 end

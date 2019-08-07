@@ -1581,7 +1581,6 @@ object DMCadPedido: TDMCadPedido
     Top = 322
   end
   object cdsTipoCobranca: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -1658,7 +1657,6 @@ object DMCadPedido: TDMCadPedido
     Top = 367
   end
   object cdsContas: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -6388,6 +6386,11 @@ object DMCadPedido: TDMCadPedido
       item
         Name = 'Data_Nao_Aprov'
         DataType = ftDate
+      end
+      item
+        Name = 'Motivo_Nao_Aprovado_Memo'
+        DataType = ftMemo
+        Size = 2
       end>
     IndexDefs = <
       item
@@ -6404,7 +6407,7 @@ object DMCadPedido: TDMCadPedido
     Left = 1008
     Top = 153
     Data = {
-      100200009619E0BD01000000180000001600000000000300000010020C49445F
+      500200009619E0BD01000000180000001700000000000300000050020C49445F
       4F7263616D656E746F0400010000000000044974656D04000100000000000A49
       445F50726F6475746F04000100000000000C4E6F6D655F50726F6475746F0100
       490000000100055749445448020002003C000351746408000400000000000C56
@@ -6419,7 +6422,9 @@ object DMCadPedido: TDMCadPedido
       5F446573636F6E746F08000400000000000D506572635F436F6D697373616F08
       0004000000000004466F746F010049000000010005574944544802000200FA00
       104D6F7469766F5F4E616F5F4170726F76010049000000010005574944544802
-      00020064000E446174615F4E616F5F4170726F76040006000000000001000D44
+      00020064000E446174615F4E616F5F4170726F760400060000000000184D6F74
+      69766F5F4E616F5F4170726F7661646F5F4D656D6F04004B0000000200075355
+      4254595045020049000500546578740005574944544802000200020001000D44
       454641554C545F4F524445520200820000000000}
     object mOrcamento_ItensID_Orcamento: TIntegerField
       FieldName = 'ID_Orcamento'
@@ -6494,6 +6499,11 @@ object DMCadPedido: TDMCadPedido
     end
     object mOrcamento_ItensData_Nao_Aprov: TDateField
       FieldName = 'Data_Nao_Aprov'
+    end
+    object mOrcamento_ItensMotivo_Nao_Aprovado_Memo: TMemoField
+      FieldName = 'Motivo_Nao_Aprovado_Memo'
+      BlobType = ftMemo
+      Size = 2
     end
   end
   object dsmOrcamento_Itens: TDataSource
