@@ -2430,7 +2430,7 @@ var
   fDMPedidoImp: TDMPedidoImp;
   ffrmImpEtiq_Emb: TfrmImpEtiq_Emb;
   vFloat: Real;
-  vQtdAux2: Real;
+  vQtdAux2, vQtdPacAux: Real;
   vQtdPac_Orig: Integer;
 
 begin
@@ -2486,7 +2486,10 @@ begin
 
     if Tipo = 'AE' then
     begin
+      vQtdPacAux := 0;
       vQtdPac := StrToInt(FormatFloat('0',fDMPedidoImp.cdsPedEmbQTD_EMB.AsInteger));
+      if fDMPedidoImp.cdsPedEmbQTD_EMB.AsFloat > 0 then
+        vQtdPacAux := fDMPedidoImp.cdsPedEmbQTD_EMB.AsFloat;
       if vQtdPac <= 0 then
         vQtdPac := 1;
     end;
@@ -2507,8 +2510,10 @@ begin
       else
       if (Tipo = 'A') then
         vQtdPac := vQtdPac_Orig;
-
-      vQtdAux2 := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat / vQtdPac;
+      if vQtdPacAux > 0 then
+        vQtdAux2 := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat / vQtdPacAux
+      else
+        vQtdAux2 := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat / vQtdPac;
       vQtdDiv := Trunc(vQtdAux2);
       if (vQtdAux2 - Trunc(vQtdAux2)) > 0 then
         vQtdDiv := vQtdDiv + 1;
@@ -2605,11 +2610,20 @@ begin
       end;
 
       if vQtdAux > vQtdPac then
-        fDMCadPedido.mEtiqueta_NavQtd.AsFloat := Trunc(vQtdPac)
+        if vQtdPacAux > 0 then
+          fDMCadPedido.mEtiqueta_NavQtd.AsFloat := vQtdPacAux
+        else
+          fDMCadPedido.mEtiqueta_NavQtd.AsFloat := Trunc(vQtdPac)
       else
-        fDMCadPedido.mEtiqueta_NavQtd.AsFloat := vQtdAux;
+        if vQtdPacAux > 0 then
+          fDMCadPedido.mEtiqueta_NavQtd.AsFloat := vQtdPacAux
+        else
+          fDMCadPedido.mEtiqueta_NavQtd.AsFloat := vQtdAux;
       //fDMCadPedido.mEtiqueta_Nav.Post;
-      vQtdAux := vQtdAux - vQtdPac;
+      if vQtdPacAux > 0 then
+        vQtdAux := vQtdAux - vQtdPacAux
+      else
+        vQtdAux := vQtdAux - vQtdPac;
       if vQtdAux <= 0 then
         vQtdDiv := i;
 

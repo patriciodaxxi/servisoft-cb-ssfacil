@@ -82,7 +82,7 @@ begin
   vMsgErro := '';
   if fDMCadProduto.cdsProduto_EmbID_MATERIAL.AsInteger <= 0 then
     vMsgErro := vMsgErro + #13 + '*** Embalagem não informada!';
-  if (fDMCadProduto.cdsProduto_EmbTIPO_EMB.AsString <> 'C') and (fDMCadProduto.cdsProduto_EmbTIPO_EMB.AsString <> 'X') then
+  if (fDMCadProduto.cdsProduto_EmbTIPO_EMB.AsString = '') then
     vMsgErro := vMsgErro + #13 + '*** Tipo não informado!';
   if vMsgErro <> '' then
   begin
