@@ -3477,6 +3477,7 @@ type
     qParametros_PedEXIGE_PEDIDO_CLI: TStringField;
     cdsOrcamentoID_VENDEDOR_INT: TIntegerField;
     qParametros_OCPERMITE_ALT_NOMEPROD: TStringField;
+    mOrcamento_ItensMotivo_Nao_Aprovado_Memo: TMemoField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

@@ -21,6 +21,7 @@ type
     DBText1: TDBText;
     Label2: TLabel;
     btnFechar: TNxButton;
+    DBMemo1: TDBMemo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -93,6 +94,7 @@ begin
       fDMCadPedido.mOrcamento_ItensFoto.AsString           := fDMCadPedido.cdsOrcamento_ItensFOTO.AsString;
       fDMCadPedido.mOrcamento_ItensData_Nao_Aprov.AsDateTime := fDMCadPedido.cdsOrcamento_ItensDTAPROVADO_NAO.AsDateTime;
       fDMCadPedido.mOrcamento_ItensMotivo_Nao_Aprov.AsString := fDMCadPedido.cdsOrcamento_ItensMOTIVO_NAO_APROV.AsString;
+      fDMCadPedido.mOrcamento_ItensMotivo_Nao_Aprovado_Memo.Value := fDMCadPedido.cdsOrcamento_ItensMOTIVO_NAO_APROV.Value;
       if fDMCadPedido.cdsParametrosEMPRESA_AMBIENTES.AsString = 'S' then
       begin
         fDMCadPedido.qProduto.Close;
