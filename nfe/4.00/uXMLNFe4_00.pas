@@ -247,7 +247,12 @@ begin
   if StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFePercRedICMSSubst.AsFloat)) > 0 then
     DetXML.Imposto.ICMS.ICMS10.PRedBCST := Replace(FormatFloat('0.00',fDMNFe.mItensNFePercRedICMSSubst.AsFloat) ,',','.');
   DetXML.Imposto.ICMS.ICMS10.VBCST    := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsBaseSubst.AsFloat) ,',','.');
-  DetXML.Imposto.ICMS.ICMS10.PICMSST  := Replace(FormatFloat('0.00##',Perc_Interno) ,',','.');
+
+  //07/08/2019 Incluido o if, pois antes estava sempre mandando o %
+  if StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat)) > 0 then
+    DetXML.Imposto.ICMS.ICMS10.PICMSST  := Replace(FormatFloat('0.00##',Perc_Interno) ,',','.')
+  else
+    DetXML.Imposto.ICMS.ICMS10.PICMSST  := Replace(FormatFloat('0.00##',0) ,',','.');
   DetXML.Imposto.ICMS.ICMS10.VICMSST  := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat) ,',','.');
   //4.00
   if StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVLR_FCP_ST.AsFloat)) > 0 then
@@ -292,7 +297,12 @@ begin
   if StrToFloat(FormatFloat('0.00##',fDMNFe.mItensNFePercRedICMSSubst.AsFloat)) > 0 then
     DetXML.Imposto.ICMS.ICMS30.PRedBCST := Replace(FormatFloat('0.00##',fDMNFe.mItensNFePercRedICMSSubst.AsFloat) ,',','.');
   DetXML.Imposto.ICMS.ICMS30.VBCST    := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsBaseSubst.AsFloat) ,',','.');
-  DetXML.Imposto.ICMS.ICMS30.PICMSST  := Replace(FormatFloat('0.00##',Perc_Interno) ,',','.');
+
+  //07/08/2019 Incluido o if, pois antes estava sempre mandando o %
+  if StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat)) > 0 then
+    DetXML.Imposto.ICMS.ICMS30.PICMSST  := Replace(FormatFloat('0.00##',Perc_Interno) ,',','.')
+  else
+    DetXML.Imposto.ICMS.ICMS30.PICMSST  := Replace(FormatFloat('0.00##',0) ,',','.');
   DetXML.Imposto.ICMS.ICMS30.VICMSST  := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat) ,',','.');
   //4.00
   if StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVLR_FCP_ST.AsFloat)) > 0 then
@@ -400,7 +410,12 @@ begin
   if StrToFloat(FormatFloat('0.00##',fDMNFe.mItensNFePercRedICMSSubst.AsFloat)) > 0 then
     DetXML.Imposto.ICMS.ICMS70.PRedBCST := Replace(FormatFloat('0.00##',fDMNFe.mItensNFePercRedICMSSubst.AsFloat) ,',','.');
   DetXML.Imposto.ICMS.ICMS70.VBCST    := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsBaseSubst.AsFloat) ,',','.');
-  DetXML.Imposto.ICMS.ICMS70.PICMSST  := Replace(FormatFloat('0.00##',Perc_Interno) ,',','.');
+
+  //07/08/2019 Incluido o if, pois antes estava sempre mandando o %
+  if StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat)) > 0 then
+    DetXML.Imposto.ICMS.ICMS70.PICMSST  := Replace(FormatFloat('0.00##',Perc_Interno) ,',','.')
+  else
+    DetXML.Imposto.ICMS.ICMS70.PICMSST  := Replace(FormatFloat('0.00##',0) ,',','.');
   DetXML.Imposto.ICMS.ICMS70.VICMSST  := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat) ,',','.');
 
   //4.00
@@ -444,7 +459,11 @@ begin
   if StrToFloat(FormatFloat('0.00##',fDMNFe.mItensNFePercRedICMSSubst.AsFloat)) > 0 then
     DetXML.Imposto.ICMS.ICMS90.PRedBCST := Replace(FormatFloat('0.00##',fDMNFe.mItensNFePercRedICMSSubst.AsFloat),',','.');
   DetXML.Imposto.ICMS.ICMS90.VBCST    := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsBaseSubst.AsFloat),',','.');
-  DetXML.Imposto.ICMS.ICMS90.PICMSST  := Replace(FormatFloat('0.00##',Perc_Interno),',','.');
+  //07/08/2019 Incluido o if, pois antes estava sempre mandando o %
+  if StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat)) > 0 then
+    DetXML.Imposto.ICMS.ICMS90.PICMSST  := Replace(FormatFloat('0.00##',Perc_Interno),',','.')
+  else
+    DetXML.Imposto.ICMS.ICMS90.PICMSST  := Replace(FormatFloat('0.00##',0),',','.');
   DetXML.Imposto.ICMS.ICMS90.VICMSST  := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat),',','.');
   //4.00
   if (StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFePERC_FCP_ST.AsFloat)) > 0) then
@@ -574,7 +593,11 @@ begin
   DetXML.Imposto.ICMS.ICMSSN900.PMVAST      := Replace(FormatFloat('0.00##',fDMNFe.mItensNFeMVA.AsFloat),',','.');
   DetXML.Imposto.ICMS.ICMSSN900.PRedBCST    := Replace(FormatFloat('0.00##',fDMNFe.mItensNFePercRedICMSSubst.AsFloat),',','.');
   DetXML.Imposto.ICMS.ICMSSN900.VBCST       := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsBaseSubst.AsFloat) ,',','.');
-  DetXML.Imposto.ICMS.ICMSSN900.PICMSST     := Replace(FormatFloat('0.00##',Perc_Interno) ,',','.');
+  //07/08/2019 Incluido o if, pois antes estava sempre mandando o %
+  if StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat)) > 0 then
+    DetXML.Imposto.ICMS.ICMSSN900.PICMSST     := Replace(FormatFloat('0.00##',Perc_Interno) ,',','.')
+  else
+    DetXML.Imposto.ICMS.ICMSSN900.PICMSST     := Replace(FormatFloat('0.00##',0) ,',','.');
   DetXML.Imposto.ICMS.ICMSSN900.VICMSST     := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat) ,',','.');
   //4.00
   if (StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFePERC_FCP_ST.AsFloat)) > 0) then
