@@ -36,11 +36,11 @@ type
     ProgressBar1: TProgressBar;
     Shape7: TShape;
     Label8: TLabel;
-    CheckBox1: TCheckBox;
     StaticText1: TStaticText;
     DateEdit1: TDateEdit;
     BitBtn1: TBitBtn;
     stat1: TStatusBar;
+    CheckBox1: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure RxDBLookupCombo3Enter(Sender: TObject);
@@ -95,6 +95,7 @@ var
 begin
   fDmCob_Eletronica := TDmCob_Eletronica.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDmCob_Eletronica);
+  CheckBox1.Checked := (fDmCob_Eletronica.qParametros_FinLER_RETORNO.AsString = 'N');
   if (fDmCob_Eletronica.cdsContas.RecordCount < 2) and (fDmCob_Eletronica.cdsContasID.AsInteger > 0) then
     RxDBLookupCombo3.KeyValue := fDmCob_Eletronica.cdsContasID.AsInteger;
   fDmCob_Eletronica.prc_Abrir_Contas(True);
@@ -107,7 +108,6 @@ begin
   uUtilPadrao.fnc_Busca_Nome_Filial;
   stat1.Panels[0].Text := vUsuario;
   stat1.Panels[1].Text := vFilial_Nome;
-
 end;
 
 procedure TfCobRetorno.RxDBLookupCombo3Enter(Sender: TObject);
@@ -328,7 +328,7 @@ begin
       //19/05/2016
       fDmCob_Eletronica.mRetornoNossoNumero.AsString := NossoNumero;
       if (fDmCob_Eletronica.cdsContasCOD_BANCO.AsString = '748') and (fDmCob_Eletronica.cdsContasACBR_USAR_MONTAR_NOSSONUMERO.AsString = 'S') then
-        fDmCob_Eletronica.mRetornoNossoNumero.AsString := copy(NossoNumero, 1, 2) + '/' + copy(NossoNumero, 3, 6) + '-' + copy(NossoNumero, 9, 1) + '-'
+        fDmCob_Eletronica.mRetornoNossoNumero.AsString := copy(NossoNumero, 1, 2) + '/' + copy(NossoNumero, 3, 6) + '-' + copy(NossoNumero, 9, 1)
       else if (fDmCob_Eletronica.cdsContasCOD_BANCO.AsString = '041') and (fDmCob_Eletronica.cdsContasACBR_USAR_MONTAR_NOSSONUMERO.AsString = 'S') then
         fDmCob_Eletronica.mRetornoNossoNumero.AsString := copy(NossoNumero, 1, Length(NossoNumero) - 2) + '.' + copy(NossoNumero, Length(NossoNumero) - 1, 2);
 
@@ -417,6 +417,8 @@ begin
           fDmCob_Eletronica.mRetornoNomeCliente.AsString := fDmCob_Eletronica.cdsDuplicataNOME_CLIENTE.AsString;
           fDmCob_Eletronica.mRetornoDtVenc.AsString := fDmCob_Eletronica.cdsDuplicataDTVENCIMENTO.AsString;
           fDmCob_Eletronica.mRetornoCodCliente.AsInteger := fDmCob_Eletronica.cdsDuplicataID_PESSOA.AsInteger;
+          fDmCob_Eletronica.mRetornoID_Duplicata.AsInteger := fDmCob_Eletronica.cdsDuplicataID.AsInteger;
+          fDmCob_Eletronica.mRetornoFilial.AsInteger       := fDmCob_Eletronica.cdsDuplicataFILIAL.AsInteger;
         end;
       end
       else if trim(vTexto) <> '' then
@@ -494,11 +496,11 @@ begin
     AFont.Color := clWhite;
   end
   else if (fDMCob_Eletronica.mRetornoTipo_Ret.AsString = 'LIQ') or (fDMCob_Eletronica.mRetornoTipo_Ret.AsString = 'LCA') or (fDMCob_Eletronica.mRetornoTipo_Ret.AsString = 'LNO') then
-    Background := clMoneyGreen
+    Background := $005FFF28
   else if (fDMCob_Eletronica.mRetornoTipo_Ret.AsString = 'PRO') then
     Background := clYellow
   else if (fDMCob_Eletronica.mRetornoAtualizar.AsString = 'S') then
-    Background := $00FFCB97;
+    Background := $00FFFF4A;
 end;
 
 procedure TfCobRetorno.prc_Monta_Ocorrencia;

@@ -21,30 +21,30 @@ object fCobRetorno: TfCobRetorno
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 972
-    Height = 51
+    Width = 980
+    Height = 70
     Align = alTop
     Color = clSilver
     TabOrder = 0
     object Label6: TLabel
-      Left = 67
-      Top = 12
+      Left = 59
+      Top = 10
       Width = 34
       Height = 13
       Alignment = taRightJustify
       Caption = 'Banco:'
     end
     object Label1: TLabel
-      Left = 62
-      Top = 34
+      Left = 54
+      Top = 32
       Width = 39
       Height = 13
       Alignment = taRightJustify
       Caption = 'Arquivo:'
     end
     object RxDBLookupCombo3: TRxDBLookupCombo
-      Left = 104
-      Top = 4
+      Left = 96
+      Top = 2
       Width = 354
       Height = 21
       DropDownCount = 8
@@ -56,8 +56,8 @@ object fCobRetorno: TfCobRetorno
       OnExit = RxDBLookupCombo3Exit
     end
     object FilenameEdit1: TFilenameEdit
-      Left = 104
-      Top = 26
+      Left = 96
+      Top = 24
       Width = 354
       Height = 21
       OnBeforeDialog = FilenameEdit1BeforeDialog
@@ -67,24 +67,24 @@ object fCobRetorno: TfCobRetorno
       OnExit = FilenameEdit1Exit
     end
     object btnLocalizar: TNxButton
-      Left = 459
-      Top = 24
+      Left = 96
+      Top = 46
       Width = 113
       Caption = 'Abrir arquivo'
       TabOrder = 2
       OnClick = btnLocalizarClick
     end
     object NxButton1: TNxButton
-      Left = 572
-      Top = 24
+      Left = 209
+      Top = 46
       Width = 113
       Caption = 'Processar retorno'
       TabOrder = 3
       OnClick = NxButton1Click
     end
     object btnEnviarEmail: TNxButton
-      Left = 798
-      Top = 24
+      Left = 435
+      Top = 46
       Width = 113
       Hint = 'Vai enviar emails dos t'#237'tulos vencidos e a vencer no dia'
       Caption = 'Email Atrasados'
@@ -100,8 +100,8 @@ object fCobRetorno: TfCobRetorno
       OnClick = btnEnviarEmailClick
     end
     object NxButton2: TNxButton
-      Left = 685
-      Top = 24
+      Left = 322
+      Top = 46
       Width = 113
       Hint = 'Imprimir a consulta'
       Caption = 'Imprimir'
@@ -110,18 +110,26 @@ object fCobRetorno: TfCobRetorno
     end
     object ProgressBar1: TProgressBar
       Left = 462
-      Top = 5
+      Top = 22
       Width = 385
       Height = 17
       TabOrder = 6
       Visible = False
     end
+    object CheckBox1: TCheckBox
+      Left = 462
+      Top = 4
+      Width = 185
+      Height = 17
+      Caption = 'Ler o retorno pelo nosso n'#250'mero'
+      TabOrder = 7
+    end
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
-    Top = 51
-    Width = 972
-    Height = 400
+    Top = 70
+    Width = 980
+    Height = 389
     Align = alClient
     Ctl3D = False
     DataSource = DMCob_Eletronica.dsmRetorno
@@ -423,8 +431,8 @@ object fCobRetorno: TfCobRetorno
   end
   object Panel2: TPanel
     Left = 0
-    Top = 468
-    Width = 972
+    Top = 476
+    Width = 980
     Height = 56
     Align = alBottom
     Color = clSilver
@@ -434,7 +442,7 @@ object fCobRetorno: TfCobRetorno
       Top = 5
       Width = 24
       Height = 14
-      Brush.Color = clMoneyGreen
+      Brush.Color = 6291240
     end
     object Label33: TLabel
       Left = 45
@@ -448,7 +456,7 @@ object fCobRetorno: TfCobRetorno
       Top = 18
       Width = 24
       Height = 14
-      Brush.Color = 16763799
+      Brush.Color = 16777034
     end
     object Label2: TLabel
       Left = 45
@@ -527,21 +535,13 @@ object fCobRetorno: TfCobRetorno
       Height = 13
       Caption = 'Verificar os t'#237'tulos'
     end
-    object CheckBox1: TCheckBox
-      Left = 632
-      Top = 16
-      Width = 185
-      Height = 17
-      Caption = 'Ler o retorno pelo nosso n'#250'mero'
-      TabOrder = 0
-    end
     object DateEdit1: TDateEdit
       Left = 824
       Top = 10
       Width = 120
       Height = 21
       NumGlyphs = 2
-      TabOrder = 1
+      TabOrder = 0
       Text = '05/12/2016'
       Visible = False
     end
@@ -551,14 +551,14 @@ object fCobRetorno: TfCobRetorno
       Width = 25
       Height = 25
       Caption = '...'
-      TabOrder = 2
+      TabOrder = 1
       Visible = False
       OnClick = BitBtn1Click
     end
     object stat1: TStatusBar
       Left = 1
       Top = 39
-      Width = 970
+      Width = 978
       Height = 16
       Panels = <
         item
@@ -573,8 +573,8 @@ object fCobRetorno: TfCobRetorno
   end
   object StaticText1: TStaticText
     Left = 0
-    Top = 451
-    Width = 972
+    Top = 459
+    Width = 980
     Height = 17
     Align = alBottom
     BevelKind = bkTile

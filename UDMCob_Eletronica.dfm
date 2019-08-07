@@ -4454,6 +4454,11 @@ object DMCob_Eletronica: TDMCob_Eletronica
     object qParametros_FinID_CONTABIL_OPE_BAIXA: TIntegerField
       FieldName = 'ID_CONTABIL_OPE_BAIXA'
     end
+    object qParametros_FinLER_RETORNO: TStringField
+      FieldName = 'LER_RETORNO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qContas_Sacado: TSQLQuery
     MaxBlobSize = -1
