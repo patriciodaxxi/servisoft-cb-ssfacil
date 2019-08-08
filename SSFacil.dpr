@@ -819,7 +819,8 @@ uses
   UDMConsClienteOBS in 'UDMConsClienteOBS.pas' {DMConsClienteOBS: TDataModule},
   UConsEstoque2 in 'UConsEstoque2.pas' {frmConsEstoque2},
   UDMComissaoVend in 'UDMComissaoVend.pas' {DMComissaoVend: TDataModule},
-  UComissaoVend in 'UComissaoVend.pas' {frmComissaoVend};
+  UComissaoVend in 'UComissaoVend.pas' {frmComissaoVend},
+  UConsProdutoNCM in 'UConsProdutoNCM.pas' {frmConsProdutoNCM};
 
 {$R *.res}
 

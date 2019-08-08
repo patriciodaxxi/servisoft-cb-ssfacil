@@ -1350,10 +1350,10 @@ object frmCadNCM: TfrmCadNCM
         Top = 202
         Width = 946
         Height = 302
-        ActivePage = TS_CST
+        ActivePage = TS_SubTrib
         ActivePageDefault = TS_SubTrib
         Align = alClient
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 2
         TextColors.Selected = clBlue
         FixedDimension = 19

@@ -43,6 +43,8 @@ type
     qParametrosUSA_DESONERACAO: TStringField;
     sdsTab_CSTIcmsCALCULA_FCP: TStringField;
     cdsTab_CSTIcmsCALCULA_FCP: TStringField;
+    sdsTab_CSTIcmsTIPO_ICMS: TStringField;
+    cdsTab_CSTIcmsTIPO_ICMS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspTab_CSTIcmsUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

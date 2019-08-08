@@ -87,6 +87,7 @@ uses
 
   function fnc_Vendedor_Desc_Com(ID: Integer): Boolean;
   function fnc_Somar_Edit(Valores: string): Double;
+  function fnc_Verificar_CFOP_Config(ID_CFOP, ID_CSTICMS: Integer): Boolean;
 
   //procedure prc_Enviar_Email_Proc(MSG: String);
 
@@ -2168,6 +2169,29 @@ begin
         Free;
       end;
   except
+  end;
+end;
+
+function fnc_Verificar_CFOP_Config(ID_CFOP, ID_CSTICMS: Integer): Boolean; //08/05/2019
+var
+  sds: TSQLDataSet;
+begin
+  Result   := False;
+
+  sds      := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.Close;
+    sds.CommandText   := 'SELECT COUNT(1) CONTADOR FROM cfop_config C WHERE C.id_cfop = :ID_CFOP AND C.id_csticms = :ID_CSTICMS ';
+    sds.ParamByName('ID_CFOP').AsInteger    := ID_CFOP;
+    sds.ParamByName('ID_CSTICMS').AsInteger := ID_CSTICMS;
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := True;
+  finally
+    FreeAndNil(sds);
   end;
 end;
 

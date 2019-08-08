@@ -5825,8 +5825,8 @@ object dmCadProduto: TdmCadProduto
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT T.id, T.codcfop, T.nome, T.nome_interno'#13#10'FROM TAB_CFOP T'#13 +
-      #10'WHERE T.USA_NFCE = '#39'S'#39
+      'SELECT T.id, T.codcfop, T.nome, T.nome_interno, T.controlar_conf' +
+      'ig'#13#10'FROM TAB_CFOP T'#13#10'WHERE T.USA_NFCE = '#39'S'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -5862,6 +5862,11 @@ object dmCadProduto: TdmCadProduto
     object cdsCFOPNOME_INTERNO: TStringField
       FieldName = 'NOME_INTERNO'
       Size = 30
+    end
+    object cdsCFOPCONTROLAR_CONFIG: TStringField
+      FieldName = 'CONTROLAR_CONFIG'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsCFOP: TDataSource
@@ -6135,7 +6140,7 @@ object dmCadProduto: TdmCadProduto
     Params = <>
     ProviderName = 'dspProcesso'
     Left = 640
-    Top = 331
+    Top = 330
     object cdsProcessoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -7326,8 +7331,8 @@ object dmCadProduto: TdmCadProduto
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT t.id,  t.cod_cst, t.cod_desoneracao, t.percentual'#13#10'FROM t' +
-      'ab_csticms t'#13#10#13#10
+      'SELECT t.id,  t.cod_cst, t.cod_desoneracao, t.percentual, T.TIPO' +
+      '_ICMS'#13#10'FROM tab_csticms t'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -7361,6 +7366,11 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsCSTICMSPERCENTUAL: TFloatField
       FieldName = 'PERCENTUAL'
+    end
+    object cdsCSTICMSTIPO_ICMS: TStringField
+      FieldName = 'TIPO_ICMS'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsCSTICMS: TDataSource

@@ -54,6 +54,11 @@ object DMCadCSTIcms: TDMCadCSTIcms
       FixedChar = True
       Size = 1
     end
+    object sdsTab_CSTIcmsTIPO_ICMS: TStringField
+      FieldName = 'TIPO_ICMS'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspTab_CSTIcms: TDataSetProvider
     DataSet = sdsTab_CSTIcms
@@ -105,6 +110,11 @@ object DMCadCSTIcms: TDMCadCSTIcms
     end
     object cdsTab_CSTIcmsCALCULA_FCP: TStringField
       FieldName = 'CALCULA_FCP'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsTab_CSTIcmsTIPO_ICMS: TStringField
+      FieldName = 'TIPO_ICMS'
       FixedChar = True
       Size = 1
     end

@@ -150,7 +150,6 @@ object frmCadCFOP: TfrmCadCFOP
           item
             Expanded = False
             FieldName = 'NOME_INTERNO'
-            Width = 64
             Visible = True
           end>
       end
@@ -1797,10 +1796,10 @@ object frmCadCFOP: TfrmCadCFOP
         Top = 318
         Width = 933
         Height = 267
-        ActivePage = TabSheet1
+        ActivePage = TabSheet4
         ActivePageDefault = TabSheet1
         Align = alClient
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 2
         FixedDimension = 19
         object TabSheet1: TRzTabSheet
@@ -2295,6 +2294,22 @@ object frmCadCFOP: TfrmCadCFOP
               LookupDisplay = 'COD_IPI;NOME'
               LookupSource = DMCadCFOP.dsTab_CSTIPI
               TabOrder = 5
+            end
+            object DBCheckBox24: TDBCheckBox
+              Left = 259
+              Top = 31
+              Width = 462
+              Height = 17
+              Caption = 
+                'Controlar pelo CFOP_CONFIG (S'#243' vai aceitar as CST ICMS l'#225' digita' +
+                'das)'
+              Color = clBtnFace
+              DataField = 'CONTROLAR_CONFIG'
+              DataSource = DMCadCFOP.dsCFOP
+              ParentColor = False
+              TabOrder = 6
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
             end
           end
         end

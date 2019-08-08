@@ -796,6 +796,14 @@ object frmCadCSTIcms: TfrmCadCSTIcms
           Alignment = taRightJustify
           Caption = '% de Diferimento (Parcial):'
         end
+        object Label11: TLabel
+          Left = 76
+          Top = 316
+          Width = 53
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Tipo ICMS:'
+        end
         object DBEdit1: TDBEdit
           Left = 132
           Top = 58
@@ -915,6 +923,32 @@ object frmCadCSTIcms: TfrmCadCSTIcms
           TabOrder = 9
           ValueChecked = 'S'
           ValueUnchecked = 'N'
+        end
+        object RxDBComboBox2: TRxDBComboBox
+          Left = 131
+          Top = 308
+          Width = 233
+          Height = 21
+          Style = csDropDownList
+          DataField = 'TIPO_ICMS'
+          DataSource = DMCadCSTIcms.dsTab_CSTIcms
+          EnableValues = True
+          ItemHeight = 13
+          Items.Strings = (
+            ''
+            'S=Com ST'
+            'R=Reducao da Base'
+            'I=Integral'
+            'N=Sem ICM'
+            'D=Diferimento')
+          TabOrder = 10
+          Values.Strings = (
+            ' '
+            'S'
+            'R'
+            'I'
+            'N'
+            'D')
         end
       end
     end

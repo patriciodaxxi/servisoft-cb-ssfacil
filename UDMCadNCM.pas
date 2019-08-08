@@ -282,6 +282,8 @@ type
     cdsNCM_UFPERC_RED_MVA_CLI_GERAL: TFloatField;
     cdsNCM_UFPERC_RED_MVA_CLI_SIMPLES: TFloatField;
     cdsNCM_ConsultaCONTADOR: TIntegerField;
+    cdsCFOP2CONTROLAR_CONFIG: TStringField;
+    cdsTab_CSTICMSTIPO_ICMS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNCMUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -357,6 +359,35 @@ begin
   qVerificar_NCM.Open;
   if not(qVerificar_NCM.IsEmpty) and (qVerificar_NCMID.AsInteger <> cdsNCMID.AsInteger) then
     vMsgErro := vMsgErro + #13 + '*** NCM já cadastrado no ID ' + qVerificar_NCMID.AsString;
+
+  //08/08/2019
+  if (cdsNCMID_CFOP.AsInteger > 0)  then
+  begin
+    if cdsNCMID_CFOP.AsInteger <> cdsCFOP2ID.AsInteger then
+      cdsCFOP2.Locate('ID',cdsNCMID_CFOP.AsInteger,([Locaseinsensitive]));
+    if (cdsCFOP2CONTROLAR_CONFIG.AsString = 'S') then
+      if not uUtilPadrao.fnc_Verificar_CFOP_Config(cdsNCMID_CFOP.AsInteger,cdsNCMID_CST_ICMS.AsInteger) then
+        vMsgErro := vMsgErro + #13 + '*** CFOP não pode usar essa CST!';
+    //if (cdsCFOP2CODCFOP.AsString = '5405') and (StrToFloat(FormatFloat cdsNCMPERC_BASE_ICMS.AsInteger > 0) then
+    //  vMsgErro := vMsgErro + #13 + '*** Essa CFOP não pode ter base reduzida!';
+  end;
+  if cdsNCMID_CST_ICMS.AsInteger > 0 then
+  begin
+    if cdsNCMID_CST_ICMS.AsInteger <> cdsTab_CSTICMSID.AsInteger then
+      cdsTab_CSTICMS.Locate('ID',cdsNCMID_CST_ICMS.AsInteger,([Locaseinsensitive]));
+    if (trim(cdsTab_CSTICMSTIPO_ICMS.AsString) = 'R') and ((StrToFloat(FormatFloat('0.0000',cdsNCMPERC_BASE_ICMS.AsFloat)) = 100) or
+        (StrToFloat(FormatFloat('0.0000',cdsNCMPERC_BASE_ICMS.AsFloat)) = 0)) then
+      vMsgErro := vMsgErro + #13 + '*** % da Base de ICMS não pode ser 0 ou 100%!';
+    if (trim(cdsTab_CSTICMSTIPO_ICMS.AsString) = 'I') and (StrToFloat(FormatFloat('0.0000',cdsNCMPERC_BASE_ICMS.AsFloat)) <> 100) then
+      vMsgErro := vMsgErro + #13 + '*** % da Base de ICMS precisa ser 100%!'
+    else
+    if (trim(cdsTab_CSTICMSTIPO_ICMS.AsString) <> 'R') and ((cdsTab_CSTICMSCOD_CST.AsString <> '60') and (cdsTab_CSTICMSCOD_CST.AsString <> '500'))
+      and ((StrToFloat(FormatFloat('0.0000',cdsNCMPERC_BASE_ICMS.AsFloat)) < 100) and (StrToFloat(FormatFloat('0.0000',cdsNCMPERC_BASE_ICMS.AsFloat)) > 0)) then
+      vMsgErro := vMsgErro + #13 + '*** % da Base de ICMS Reduzida, mas a CST não!';
+  end;
+  //***************
+
+
   if trim(vMsgErro) <> '' then
     exit;
   cdsNCM.Post;

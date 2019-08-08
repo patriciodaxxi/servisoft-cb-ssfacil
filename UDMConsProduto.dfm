@@ -245,4 +245,123 @@ object DMConsProduto: TDMConsProduto
     Left = 216
     Top = 88
   end
+  object sdsProdNCM: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select PRO.ID, PRO.NOME, PRO.REFERENCIA, PRO.UNIDADE, PRO.ID_NCM' +
+      ', PRO.ORIGEM_PROD,'#13#10'       NCM.NCM,'#13#10'       case'#13#10'         when ' +
+      '(PRO.TIPO_REG = '#39'P'#39') then '#39'Produto'#39#13#10'         when (PRO.TIPO_REG' +
+      ' = '#39'M'#39') then '#39'Material'#39#13#10'         when (PRO.TIPO_REG = '#39'N'#39') then' +
+      ' '#39'Outros'#39#13#10'         when (PRO.TIPO_REG = '#39'C'#39') then '#39'Material Con' +
+      'sumo'#39#13#10'         when (PRO.TIPO_REG = '#39'I'#39') then '#39'Imobilizado'#39#13#10'  ' +
+      '       when (PRO.TIPO_REG = '#39'S'#39') then '#39'Semiacabado'#39#13#10'         el' +
+      'se '#39#39#13#10'       end as TIPO_REG_DESCRICAO,'#13#10'CFOP.codcfop CFOP_PROD' +
+      ', CFOP2.codcfop CFOP_NCM, ICMS.cod_cst,'#13#10'ICMSB.cod_cst CST_BRED_' +
+      'PROD, ICMS.cod_cst CST_NCM, PRO.perc_reducaoicms,'#13#10'PRO.perc_icms' +
+      '_nfce, NCM.perc_base_icms PERC_BASE_ICMS_NCM, NCM.perc_icms,'#13#10'G.' +
+      'NOME NOME_GRUPO, PRO.INATIVO'#13#10'from PRODUTO PRO'#13#10'inner join TAB_N' +
+      'CM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left join tab_cfop cfop'#13#10'on pro' +
+      '.id_cfop_nfce = cfop.id'#13#10'left join tab_cfop cfop2'#13#10'on NCM.id_cfo' +
+      'p = cfop2.id'#13#10'LEFT JOIN tab_csticms ICMS'#13#10'ON PRO.id_csticms = IC' +
+      'MS.ID'#13#10'LEFT JOIN tab_csticms ICMSB'#13#10'ON PRO.id_csticms_bred = ICM' +
+      'SB.ID'#13#10'LEFT JOIN tab_csticms ICMS2'#13#10'ON NCM.id_cst_icms = ICMS2.I' +
+      'D'#13#10'LEFT JOIN GRUPO G'#13#10'ON PRO.id_grupo = G.ID'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 263
+    Top = 276
+  end
+  object dspProdNCM: TDataSetProvider
+    DataSet = sdsProdNCM
+    Left = 320
+    Top = 275
+  end
+  object cdsProdNCM: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProdNCM'
+    Left = 376
+    Top = 276
+    object cdsProdNCMID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsProdNCMNOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object cdsProdNCMREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsProdNCMUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object cdsProdNCMID_NCM: TIntegerField
+      FieldName = 'ID_NCM'
+    end
+    object cdsProdNCMORIGEM_PROD: TStringField
+      FieldName = 'ORIGEM_PROD'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsProdNCMNCM: TStringField
+      FieldName = 'NCM'
+      Size = 10
+    end
+    object cdsProdNCMTIPO_REG_DESCRICAO: TStringField
+      FieldName = 'TIPO_REG_DESCRICAO'
+      Required = True
+      FixedChar = True
+      Size = 16
+    end
+    object cdsProdNCMCFOP_PROD: TStringField
+      FieldName = 'CFOP_PROD'
+      Size = 5
+    end
+    object cdsProdNCMCFOP_NCM: TStringField
+      FieldName = 'CFOP_NCM'
+      Size = 5
+    end
+    object cdsProdNCMCOD_CST: TStringField
+      FieldName = 'COD_CST'
+      Size = 3
+    end
+    object cdsProdNCMCST_BRED_PROD: TStringField
+      FieldName = 'CST_BRED_PROD'
+      Size = 3
+    end
+    object cdsProdNCMCST_NCM: TStringField
+      FieldName = 'CST_NCM'
+      Size = 3
+    end
+    object cdsProdNCMPERC_REDUCAOICMS: TFloatField
+      FieldName = 'PERC_REDUCAOICMS'
+    end
+    object cdsProdNCMPERC_ICMS_NFCE: TFloatField
+      FieldName = 'PERC_ICMS_NFCE'
+    end
+    object cdsProdNCMPERC_BASE_ICMS_NCM: TFloatField
+      FieldName = 'PERC_BASE_ICMS_NCM'
+    end
+    object cdsProdNCMPERC_ICMS: TFloatField
+      FieldName = 'PERC_ICMS'
+    end
+    object cdsProdNCMNOME_GRUPO: TStringField
+      FieldName = 'NOME_GRUPO'
+      Size = 40
+    end
+    object cdsProdNCMINATIVO: TStringField
+      FieldName = 'INATIVO'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dsProdNCM: TDataSource
+    DataSet = cdsProdNCM
+    Left = 424
+    Top = 276
+  end
 end
