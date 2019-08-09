@@ -2,8 +2,8 @@ object DMInformar_Tam: TDMInformar_Tam
   OldCreateOrder = False
   Left = 298
   Top = 79
-  Height = 434
-  Width = 883
+  Height = 390
+  Width = 722
   object mTamanho: TClientDataSet
     Active = True
     Aggregates = <>
@@ -28,19 +28,34 @@ object DMInformar_Tam: TDMInformar_Tam
       item
         Name = 'Item_Tam'
         DataType = ftInteger
+      end
+      item
+        Name = 'Qtde_Item'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Qtde_Indice'
+        DataType = ftInteger
       end>
-    IndexDefs = <>
+    IndexDefs = <
+      item
+        Name = 'iQtde_Indice'
+        Fields = 'Qtde_Indice; Tamanho'
+        Options = [ixDescending]
+      end>
     IndexFieldNames = 'Tamanho'
     Params = <>
     StoreDefs = True
     OnNewRecord = mTamanhoNewRecord
-    Left = 88
-    Top = 48
+    Left = 304
+    Top = 160
     Data = {
-      780000009619E0BD01000000180000000500000000000300000078000754616D
+      9E0000009619E0BD0100000018000000070000000000030000009E000754616D
       616E686F0100490000000100055749445448020002000A000351746408000400
       000000000647726176617202000300000000000D5174645F506F725F54616C61
-      6F0400010000000000084974656D5F54616D04000100000000000000}
+      6F0400010000000000084974656D5F54616D040001000000000009517464655F
+      4974656D04000100000000000B517464655F496E646963650400010000000000
+      0000}
     object mTamanhoTamanho: TStringField
       FieldName = 'Tamanho'
       Size = 10
@@ -57,11 +72,17 @@ object DMInformar_Tam: TDMInformar_Tam
     object mTamanhoItem_Tam: TIntegerField
       FieldName = 'Item_Tam'
     end
+    object mTamanhoQtde_Item: TIntegerField
+      FieldName = 'Qtde_Item'
+    end
+    object mTamanhoQtde_Indice: TIntegerField
+      FieldName = 'Qtde_Indice'
+    end
   end
   object dsmTamanho: TDataSource
     DataSet = mTamanho
-    Left = 152
-    Top = 40
+    Left = 344
+    Top = 160
   end
   object sdsProduto_Tam: TSQLDataSet
     NoMetadata = True
@@ -75,8 +96,8 @@ object DMInformar_Tam: TDMInformar_Tam
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 72
-    Top = 120
+    Left = 56
+    Top = 40
     object sdsProduto_TamID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -89,15 +110,15 @@ object DMInformar_Tam: TDMInformar_Tam
   end
   object dspProduto_Tam: TDataSetProvider
     DataSet = sdsProduto_Tam
-    Left = 136
-    Top = 120
+    Left = 88
+    Top = 40
   end
   object cdsProduto_Tam: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto_Tam'
-    Left = 200
-    Top = 120
+    Left = 120
+    Top = 40
     object cdsProduto_TamID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -110,8 +131,8 @@ object DMInformar_Tam: TDMInformar_Tam
   end
   object dsProduto_Tam: TDataSource
     DataSet = cdsProduto_Tam
-    Left = 256
-    Top = 120
+    Left = 152
+    Top = 40
   end
   object mItens: TClientDataSet
     Active = True
@@ -1053,8 +1074,8 @@ object DMInformar_Tam: TDMInformar_Tam
     Params = <>
     StoreDefs = True
     OnNewRecord = mItensNewRecord
-    Left = 87
-    Top = 200
+    Left = 303
+    Top = 40
     Data = {
       601500009619E0BD0100000018000000D800000000000300000060150A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
@@ -2086,8 +2107,8 @@ object DMInformar_Tam: TDMInformar_Tam
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 160
-    Top = 208
+    Left = 344
+    Top = 40
     Data = {
       7A0000009619E0BD0100000018000000050000000000030000007A000E49445F
       43656E74726F437573746F040001000000000003517464080004000000000002
@@ -2184,8 +2205,8 @@ object DMInformar_Tam: TDMInformar_Tam
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 256
-    Top = 192
+    Left = 384
+    Top = 40
     Data = {
       810100009619E0BD01000000180000000F000000000003000000810108497465
       6D5F496D700400010000000000054E756D444901004900000001000557494454
@@ -2298,8 +2319,8 @@ object DMInformar_Tam: TDMInformar_Tam
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 328
-    Top = 240
+    Left = 264
+    Top = 96
     Data = {
       D00000009619E0BD010000001800000009000000000003000000D00008497465
       6D5F496D700400010000000000074974656D5F41440400010000000000094E75
@@ -2376,8 +2397,8 @@ object DMInformar_Tam: TDMInformar_Tam
     IndexFieldNames = 'ITEM_MAT'
     Params = <>
     StoreDefs = True
-    Left = 88
-    Top = 256
+    Left = 344
+    Top = 96
     Data = {
       B60000009619E0BD010000001800000007000000000003000000B6000A49445F
       50524F4455544F04000100000000000B5154445F434F4E53554D4F0800040000
@@ -2537,8 +2558,8 @@ object DMInformar_Tam: TDMInformar_Tam
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 192
-    Top = 296
+    Left = 304
+    Top = 96
     Data = {
       C50200009619E0BD01000000180000001B000000000003000000C5020A49445F
       50524F4455544F04000100000000000351544408000400000000000C564C525F
@@ -2667,20 +2688,20 @@ object DMInformar_Tam: TDMInformar_Tam
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 536
-    Top = 64
+    Left = 56
+    Top = 88
   end
   object dspQtdGrade: TDataSetProvider
     DataSet = sdsQtdGrade
-    Left = 576
-    Top = 64
+    Left = 88
+    Top = 88
   end
   object cdsQtdGrade: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspQtdGrade'
-    Left = 616
-    Top = 64
+    Left = 120
+    Top = 88
     object cdsQtdGradeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2694,8 +2715,8 @@ object DMInformar_Tam: TDMInformar_Tam
   end
   object dsQtdGrade: TDataSource
     DataSet = cdsQtdGrade
-    Left = 648
-    Top = 64
+    Left = 152
+    Top = 88
   end
   object qQtdGrade_Itens: TSQLQuery
     MaxBlobSize = -1
@@ -2710,8 +2731,8 @@ object DMInformar_Tam: TDMInformar_Tam
       'FROM QTDGRADE_ITENS'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 552
-    Top = 152
+    Left = 432
+    Top = 160
     object qQtdGrade_ItensID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2738,8 +2759,8 @@ object DMInformar_Tam: TDMInformar_Tam
       'FROM PRODUTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 552
-    Top = 208
+    Left = 472
+    Top = 160
     object qProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2752,7 +2773,7 @@ object DMInformar_Tam: TDMInformar_Tam
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 296
+    Left = 264
     Top = 40
     Data = {
       620000009619E0BD01000000180000000400000000000300000062000754616D
@@ -2771,6 +2792,58 @@ object DMInformar_Tam: TDMInformar_Tam
     end
     object mTamAuxItem_Tam: TIntegerField
       FieldName = 'Item_Tam'
+    end
+  end
+  object mAuxPedidoGrade: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Qtde'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Tamanho'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'Qtde_Item'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Item'
+        DataType = ftInteger
+      end>
+    IndexDefs = <
+      item
+        Name = 'DEFAULT_ORDER'
+      end
+      item
+        Name = 'CHANGEINDEX'
+      end>
+    IndexFieldNames = 'Tamanho'
+    Params = <>
+    StoreDefs = True
+    Left = 424
+    Top = 96
+    Data = {
+      780000009619E0BD010000001800000004000000000003000000780004517464
+      6504000100000000000754616D616E686F010049000000010005574944544802
+      0002000A0009517464655F4974656D0400010000000000044974656D04000100
+      0000000001000D44454641554C545F4F524445520200820000000000}
+    object mAuxPedidoGradeQtde: TIntegerField
+      FieldName = 'Qtde'
+    end
+    object mAuxPedidoGradeTamanho: TStringField
+      FieldName = 'Tamanho'
+      Size = 10
+    end
+    object mAuxPedidoGradeQtde_Item: TIntegerField
+      FieldName = 'Qtde_Item'
+    end
+    object mAuxPedidoGradeItem: TIntegerField
+      FieldName = 'Item'
     end
   end
 end

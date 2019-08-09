@@ -326,6 +326,13 @@ type
     mItensDocCOMPRIMENTO: TFloatField;
     mItensDocESPESSURA: TFloatField;
     mItensDocTIPO_ES: TStringField;
+    mAuxPedidoGrade: TClientDataSet;
+    mAuxPedidoGradeQtde: TIntegerField;
+    mAuxPedidoGradeTamanho: TStringField;
+    mAuxPedidoGradeQtde_Item: TIntegerField;
+    mTamanhoQtde_Item: TIntegerField;
+    mAuxPedidoGradeItem: TIntegerField;
+    mTamanhoQtde_Indice: TIntegerField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private

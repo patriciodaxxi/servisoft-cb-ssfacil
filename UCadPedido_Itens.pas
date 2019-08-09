@@ -1645,117 +1645,150 @@ end;
 
 procedure TfrmCadPedido_Itens.prc_Gravar_Tam;
 var
-  x, y: Integer;
+  x, y, vCont, vQtdeItemTotal, i, vQtdSubtrai: Integer;
   vItemAux,
   vQtdAux,
   vOriginal,
   vQtdTalao,
   vItemOriginal: Integer;
-  vFLag: Boolean;
+  vFLag, vZerado, vPrimeiro : Boolean;
   vQtdTotal: Integer;
   vQtdUsar: Integer;
-  vQtdTalao1 : Integer;
 begin
   // 05/01/2019 Lotus
   x := 0;
   y := 0;
-
   if (fDMCadPedido.qParametros_PedINF_QTD_TALAO.AsString = 'S') and (fDMInformar_Tam.vQtd_Por_Talao > 0) then
   begin
-    vQtdTalao1 := Round(fDMInformar_Tam.vQtd_Grade);
-    vQtdAux := vQtdTalao1 div fDMInformar_Tam.vQtd_Por_Talao;
-    if vQtdTalao1 mod fDMInformar_Tam.vQtd_Por_Talao > 0 then
+    vPrimeiro := False;
+    vQtdTalao := Round(fDMInformar_Tam.vQtd_Grade);
+    vQtdAux := vQtdTalao div fDMInformar_Tam.vQtd_Por_Talao;
+    if vQtdTalao mod fDMInformar_Tam.vQtd_Por_Talao > 0 then
       vQtdAux := vQtdAux + 1;
-    fDMInformar_Tam.mItens.EmptyDataSet;
-    while x < vQtdAux do
-    begin
-      inc(x);
-      prc_Gravar_mItens2(x);
-    end;
-
-    //11/01/2019
+    vQtdTalao := vQtdAux;
     fDMInformar_Tam.mTamanho.First;
     while not fDMInformar_Tam.mTamanho.Eof do
     begin
       if fDMInformar_Tam.mTamanhoQtd.AsInteger > 0 then
       begin
         fDMInformar_Tam.mTamanho.Edit;
-        fDMInformar_Tam.mTamanhoQtd_Por_Talao.AsInteger := fDMInformar_Tam.mTamanhoQtd.AsInteger div vQtdAux;
-        if fDMInformar_Tam.mTamanhoQtd.AsInteger mod vQtdAux > 0 then
-          fDMInformar_Tam.mTamanhoQtd_Por_Talao.AsInteger := fDMInformar_Tam.mTamanhoQtd_Por_Talao.AsInteger + 1;
+        fDMInformar_Tam.mTamanhoQtd_Por_Talao.AsInteger := fDMInformar_Tam.mTamanhoQtd.AsInteger div vQtdTalao;
+        fDMInformar_Tam.mTamanhoQtde_Indice.AsInteger := fDMInformar_Tam.mTamanhoQtd.AsInteger;
+        fDMInformar_Tam.mTamanhoQtde_Item.AsInteger := fDMInformar_Tam.mTamanhoQtd.AsInteger div vQtdTalao;
+        fDMInformar_Tam.mTamanho.Post;
       end;
       fDMInformar_Tam.mTamanho.Next;
     end;
-    //***********************
 
-    fDMInformar_Tam.mItens.first;
-    while not fDMInformar_Tam.mItens.Eof do
+    for i := 1 to vQtdTalao do
     begin
-        vQtdTotal := 0;
+      vCont := 0;
+      vQtdeItemTotal := 0;
+      fDMInformar_Tam.mItens.EmptyDataSet;      
+      fDMInformar_Tam.mAuxPedidoGrade.EmptyDataSet;
+      while vCont < 2 do
+      begin
+        Inc(vCont);
         fDMInformar_Tam.mTamanho.First;
         while not fDMInformar_Tam.mTamanho.Eof do
         begin
-         if fDMInformar_Tam.mTamanhoQtd.AsInteger > 0 then
-          begin
-            fDMInformar_Tam.mTamAux.Insert;
-            fDMInformar_Tam.mTamAuxTamanho.AsString := fDMInformar_Tam.mTamanhoTamanho.AsString;
-            fDMInformar_Tam.mTamAuxItem_Tam.AsInteger := fDMInformar_Tam.mItensItem_Tam.AsInteger;
-            if fDMInformar_Tam.mTamanhoQtd.AsInteger > fDMInformar_Tam.mTamanhoQtd_Por_Talao.AsInteger then
-              vQtdUsar := fDMInformar_Tam.mTamanhoQtd_Por_Talao.AsInteger
-            else
-              vQtdUsar := fDMInformar_Tam.mTamanhoQtd.AsInteger;
-            if (vQtdTotal + vQtdUsar) > fDMInformar_Tam.vQtd_Por_Talao then
-              vQtdUsar := fDMInformar_Tam.vQtd_Por_Talao - vQtdTotal;
-            fDMInformar_Tam.mTamAuxQtd.AsInteger := vQtdUsar;
-
-            fDMInformar_Tam.mTamAux.Post;
-            fDMInformar_Tam.mTamanho.Edit;
-            fDMInformar_Tam.mTamanhoQtd.AsInteger := StrToInt(FormatFLoat('0',fDMInformar_Tam.mTamanhoQtd.AsInteger - fDMInformar_Tam.mTamAuxQtd.AsInteger));
-            fDMInformar_Tam.mTamanho.Post;
-            if (fDMInformar_Tam.mItens.RecordCount = fDMInformar_Tam.mItens.RecNo) and
-              (fDMInformar_Tam.mTamanhoQtd.AsInteger > 0) then
-            begin
-              fDMInformar_Tam.mTamAux.Edit;
-              fDMInformar_Tam.mTamAuxQtd.AsInteger := fDMInformar_Tam.mTamAuxQtd.AsInteger + fDMInformar_Tam.mTamanhoQtd.AsInteger;
-              fDMInformar_Tam.mTamAux.Post;
-
-              fDMInformar_Tam.mTamanho.Edit;
-              fDMInformar_Tam.mTamanhoQtd.AsInteger := StrToInt(FormatFLoat('0',0));
-              fDMInformar_Tam.mTamanho.Post;
-            end;
-
-
-            vQtdTotal := vQtdTotal + fDMInformar_Tam.mTamAuxQtd.AsInteger;
-          end;
-          if vQtdTotal >= fDMInformar_Tam.vQtd_Por_Talao then
-            fDMInformar_Tam.mTamanho.Last;
+          fDMInformar_Tam.mTamanho.Edit;
+          fDMInformar_Tam.mTamanhoQtde_Indice.AsInteger := fDMInformar_Tam.mTamanhoQtd.AsInteger;
+          fDMInformar_Tam.mTamanho.Post;
           fDMInformar_Tam.mTamanho.Next;
         end;
-      fDMInformar_Tam.mItens.Next;
-    end;
-
-    fDMInformar_Tam.mItens.First;
-    vOriginal := 0;
-    inc(vItemOriginal);
-    while not fDMInformar_Tam.mItens.Eof do
-    begin
-      vFLag := False;
-      fDMInformar_Tam.mTamAux.Filtered := False;
-      fDMInformar_Tam.mTamAux.Filter := ' Item_Tam = ' + IntToStr(fDMInformar_Tam.mItensItem_Tam.AsInteger);
-      fDMInformar_Tam.mTamAux.Filtered := True;
-      fDMInformar_Tam.mTamAux.First;
-      while not fDMInformar_Tam.mTamAux.Eof do
-      begin
-        inc(y);
-        if y = 1 then
+        if vCont = 2 then
         begin
-          vFlag := True;
-          vItemOriginal := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+          fDMInformar_Tam.mTamanho.IndexFieldNames := '';
+          fDMInformar_Tam.mTamanho.IndexName := 'iQtde_Indice';
+        end
+        else
+        begin
+          fDMInformar_Tam.mTamanho.IndexFieldNames := 'Tamanho';
+        end;
+
+        // Gravar qtde por talao dos itens
+        vZerado := True;
+        fDMInformar_Tam.mTamanho.First;
+        while not fDMInformar_Tam.mTamanho.Eof do
+        begin
+          if fDMInformar_Tam.mTamanhoQtd.AsInteger <= 0 then
+          begin
+            fDMInformar_Tam.mTamanho.Next;
+            Continue;
+          end;
+          if vCont > 1 then
+            if fDMInformar_Tam.mAuxPedidoGrade.Locate('Tamanho', fDMInformar_Tam.mTamanhoTamanho.AsString,[loCaseInsensitive]) then
+              fDMInformar_Tam.mAuxPedidoGrade.Edit;
+          if not (fDMInformar_Tam.mAuxPedidoGrade.State in [dsEdit]) then
+          begin
+            fDMInformar_Tam.mAuxPedidoGrade.Insert;
+            fDMInformar_Tam.mAuxPedidoGradeTamanho.AsString := fDMInformar_Tam.mTamanhoTamanho.AsString;
+            fDMInformar_Tam.mAuxPedidoGradeQtde.AsInteger   := 0;
+          end;
+          vQtdSubtrai := 0;
+          if fDMInformar_Tam.mTamanhoQtd.AsInteger > 0 then
+          begin
+            if vCont > 1 then
+            begin
+              vQtdSubtrai := fDMInformar_Tam.mAuxPedidoGradeQtde.AsInteger;
+              fDMInformar_Tam.mAuxPedidoGradeQtde.AsInteger := fDMInformar_Tam.mAuxPedidoGradeQtde.AsInteger + 1;
+            end
+            else
+            begin
+              if fDMInformar_Tam.mTamanhoQtd.AsInteger < fDMInformar_Tam.mTamanhoQtde_Item.AsInteger then
+                fDMInformar_Tam.mAuxPedidoGradeQtde.AsInteger := fDMInformar_Tam.mTamanhoQtd.AsInteger
+              else
+                fDMInformar_Tam.mAuxPedidoGradeQtde.AsInteger := fDMInformar_Tam.mTamanhoQtde_Item.AsInteger;
+            end;
+            vZerado := False;
+          end;
+          vQtdeItemTotal := vQtdeItemTotal + fDMInformar_Tam.mAuxPedidoGradeQtde.AsInteger - vQtdSubtrai;
+
+          if fDMInformar_Tam.mTamanhoQtd.AsInteger > 0 then
+          begin
+            fDMInformar_Tam.mTamanho.Edit;
+            if vCont > 1 then
+              fDMInformar_Tam.mTamanhoQtd.AsInteger  := fDMInformar_Tam.mTamanhoQtd.AsInteger - 1
+            else
+            begin
+              fDMInformar_Tam.mTamanhoQtd.AsInteger  := fDMInformar_Tam.mTamanhoQtd.AsInteger - fDMInformar_Tam.mAuxPedidoGradeQtde.AsInteger;
+            end;
+            fDMInformar_Tam.mTamanho.Post;
+          end;
+          fDMInformar_Tam.mAuxPedidoGrade.Post;
+          fDMInformar_Tam.mTamanho.Next;
+          if (vQtdeItemTotal >= fDMInformar_Tam.vQtd_Por_Talao) and (fDMInformar_Tam.vQtd_Por_Talao > 0) then
+            fDMInformar_Tam.mTamanho.Last;
+        end;
+
+        if not (vZerado) and (vQtdeItemTotal < fDMInformar_Tam.vQtd_Por_Talao) and (vCont = 2) then
+          vCont := 1
+        else
+        begin
+          if vQtdeItemTotal >= fDMInformar_Tam.vQtd_Por_Talao then
+            Inc(vCont);
+          if vZerado then
+            vCont := 2;
+        end;
+      end;
+      fDMInformar_Tam.mAuxPedidoGrade.IndexFieldNames := 'Tamanho';
+      fDMInformar_Tam.mAuxPedidoGrade.First;
+      inc(x);
+      prc_Gravar_mItens2(x);
+      vFLag := False;
+      while not fDMInformar_Tam.mAuxPedidoGrade.Eof do
+      begin
+        if not vPrimeiro then
+        begin
           fDMCadPedido.cdsPedido_Itens.Edit;
-          fDMCadPedido.cdsPedido_ItensQTD.AsFloat := fDMInformar_Tam.mTamAuxQtd.AsFloat;
-          fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat := fDMInformar_Tam.mTamAuxQtd.AsFloat;
-          fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString   := fDMInformar_Tam.mItensNome_Produto_Original.AsString + ' TAM. ' + fDMInformar_Tam.mTamAuxTamanho.AsString;
+          fDMCadPedido.cdsPedido_ItensQTD.AsFloat := fDMInformar_Tam.mAuxPedidoGradeQtde.AsFloat;
+          fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat := fDMInformar_Tam.mAuxPedidoGradeQtde.AsFloat;
+          fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString   := fDMInformar_Tam.mItensNome_Produto_Original.AsString + ' TAM. ' + fDMInformar_Tam.mAuxPedidoGradeTamanho.AsString;
           fDMCadPedido.cdsPedido_Itens.Post;
+          vItemOriginal := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+          vPrimeiro := True;
+          vFLag := True;
         end
         else
         begin
@@ -1773,92 +1806,15 @@ begin
             end;
           end;
           fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger := vItemOriginal;
-
-          {Inc(vOriginal);
-          if  vOriginal = fDMInformar_Tam.mTamAux.RecordCount then
-          begin
-            vOriginal := 0;
-            vItemOriginal := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-            fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger := vItemOriginal;
-          end
-          else
-            fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger := vItemOriginal;}
-
-          fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString   := fDMInformar_Tam.mItensNome_Produto_Original.AsString + ' TAM. ' + fDMInformar_Tam.mTamAuxTamanho.AsString;
-          fDMCadPedido.cdsPedido_ItensQTD.AsFloat          := fDMInformar_Tam.mTamAuxQtd.AsFloat;
-          fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat := fDMInformar_Tam.mTamAuxQtd.AsFloat;
-          fDMCadPedido.cdsPedido_ItensTAMANHO.AsString     := fDMInformar_Tam.mTamAuxTamanho.AsString;
+          fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString    := fDMInformar_Tam.mItensNome_Produto_Original.AsString + ' TAM. ' + fDMInformar_Tam.mAuxPedidoGradeTamanho.AsString;
+          fDMCadPedido.cdsPedido_ItensQTD.AsFloat             := fDMInformar_Tam.mAuxPedidoGradeQtde.AsFloat;
+          fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat    := fDMInformar_Tam.mAuxPedidoGradeQtde.AsFloat;
+          fDMCadPedido.cdsPedido_ItensTAMANHO.AsString        := fDMInformar_Tam.mAuxPedidoGradeTamanho.AsString;
           fDMCadPedido.cdsPedido_Itens.Post;
         end;
-        fDMInformar_Tam.mTamAux.Next;
+        fDMInformar_Tam.mAuxPedidoGrade.Next;
       end;
-      fDMInformar_Tam.mItens.Next;
     end;
-
-    fDMInformar_Tam.mTamAux.RecordCount;
-    exit;
-  end;
-
-  //*****************
-
-  fDMInformar_Tam.mItens.First;
-  while not fDMInformar_Tam.mItens.Eof do
-  begin
-    fDMInformar_Tam.mItens_Mat.First;
-    fDMInformar_Tam.mTamanho.First;
-    while not fDMInformar_Tam.mTamanho.Eof do
-    begin
-      if (fDMInformar_Tam.mTamanhoTamanho.AsString <> fDMInformar_Tam.vTamanho_Ini) and (StrToFloat(FormatFloat('0.00000',fDMInformar_Tam.mTamanhoQtd.AsFloat)) > 0) then
-      begin
-        fDMCadPedido.prc_Inserir_Itens;
-        for x := 0 to (fDMInformar_Tam.mItens.FieldCount - 1) do
-        begin
-          try
-            if (fDMInformar_Tam.mItens.Fields[x].Tag = 0) then
-              fDMCadPedido.cdsPedido_Itens.FieldByName(fDMInformar_Tam.mItens.Fields[x].FieldName).AsVariant := fDMInformar_Tam.mItens.Fields[x].Value;
-          except
-          end;
-        end;
-
-        fDMCadPedido.cdsPedido_ItensITEM_CLIENTE.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-        fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString   := fDMInformar_Tam.mItensNome_Produto_Original.AsString + ' TAM. ' + fDMInformar_Tam.mTamanhoTamanho.AsString;
-        fDMCadPedido.cdsPedido_ItensTAMANHO.AsString       := fDMInformar_Tam.mTamanhoTamanho.AsString;
-        fDMCadPedido.cdsPedido_ItensQTD.AsFloat            := fDMInformar_Tam.mTamanhoQtd.AsFloat;
-        fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat   := fDMInformar_Tam.mTamanhoQtd.AsFloat;
-        fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat   := 0;
-
-        uCalculo_Pedido.prc_Calculo_GeralItem(fDMCadPedido,fDMCadPedido.cdsPedido_ItensQTD.AsFloat,fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat,
-                                               fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat,fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat,
-                                               fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat);
-
-        fDMCadPedido.cdsPedido_Itens.Post;
-
-        if fDMCadPedido.cdsParametrosINFORMA_MAT_PEDIDO.AsString = 'S' then
-        begin
-          vItemAux := 0;
-          fDMInformar_Tam.mItens_Mat.First;
-          while not fDMInformar_Tam.mItens_Mat.Eof do
-          begin
-            vItemAux := vItemAux + 1;
-            fDMCadPedido.cdsPedido_Material.Insert;
-            fDMCadPedido.cdsPedido_MaterialID.AsInteger          := fDMCadPedido.cdsPedido_ItensID.AsInteger;
-            fDMCadPedido.cdsPedido_MaterialITEM.AsInteger        := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-            fDMCadPedido.cdsPedido_MaterialITEM_MAT.AsInteger    := vItemAux;
-            fDMCadPedido.cdsPedido_MaterialID_PRODUTO.AsInteger  := fDMInformar_Tam.mItens_MatID_PRODUTO.AsInteger;
-            fDMCadPedido.cdsPedido_MaterialQTD_CONSUMO.AsFloat   := StrToFloat(FormatFloat('0.00000',fDMInformar_Tam.mItens_MatQTD_CONSUMO.AsFloat));
-            fDMCadPedido.cdsPedido_MaterialVLR_UNITARIO.AsFloat  := StrToFloat(FormatFloat('0.0000',fDMInformar_Tam.mItens_MatVLR_UNITARIO.AsFloat));
-            fDMCadPedido.cdsPedido_MaterialVLR_TOTAL.AsFloat     := StrToFloat(FormatFloat('0.00',fDMInformar_Tam.mItens_MatVLR_TOTAL.AsFloat));
-            fDMCadPedido.cdsPedido_MaterialUNIDADE.AsString      := fDMInformar_Tam.mItens_MatUNIDADE.AsString;
-            fDMCadPedido.cdsPedido_MaterialNOME_PRODUTO.AsString := fDMInformar_Tam.mItens_MatNOME_PRODUTO.AsString;
-            fDMCadPedido.cdsPedido_Material.Post;
-            fDMInformar_Tam.mItens_Mat.Next;
-          end;
-        end;
-      end;
-      fDMInformar_Tam.mTamanho.Next;
-    end;
-
-    fDMInformar_Tam.mItens.Next;
   end;
 end;
 
@@ -2712,6 +2668,8 @@ begin
   fDMInformar_Tam.mItensItem_Tam.AsInteger             := Item;
   fDMInformar_Tam.mItensItem_original.AsInteger        := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
   fDMInformar_Tam.mItensNome_Produto_Original.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString;
+  fDMInformar_Tam.mItensTAMANHO.AsString               := fDMInformar_Tam.mAuxPedidoGradeTamanho.AsString;
+  fDMInformar_Tam.mItensQtd.AsInteger                  := fDMInformar_Tam.mAuxPedidoGradeQtde.AsInteger;
   fDMInformar_Tam.mItens.Post;
 end;
 
