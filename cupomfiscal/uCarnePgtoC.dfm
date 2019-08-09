@@ -99,6 +99,7 @@ object fCarnePgtoC: TfCarnePgtoC
       ShowHint = True
       TabOrder = 1
       Transparent = True
+      OnClick = btnCancelarClick
     end
     object btnImprimir: TNxButton
       Left = 1

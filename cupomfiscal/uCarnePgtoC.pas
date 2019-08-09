@@ -26,6 +26,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnImprimirClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
   private
     { Private declarations }
     fDmPagamento: TDmPagamento;
@@ -49,10 +50,10 @@ begin
 
   if (DateEdit1.Date > 10) then
     fDmPagamento.sdsCarnePagamento.CommandText := fDmPagamento.sdsCarnePagamento.CommandText + ' AND DATA >= ' +
-                                                  FormatDateTime('MM/DD/YYYY',DateEdit1.Date);
+                                                  QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.Date));
   if (DateEdit2.Date > 10) then
     fDmPagamento.sdsCarnePagamento.CommandText := fDmPagamento.sdsCarnePagamento.CommandText + ' AND DATA <= ' +
-                                                  FormatDateTime('MM/DD/YYYY',DateEdit2.Date);
+                                                  QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.Date));
   if Edit1.Text <> '' then
     fDmPagamento.sdsCarnePagamento.CommandText := fDmPagamento.sdsCarnePagamento.CommandText + ' AND NOME LIKE ''%' +
                                                   Edit1.Text + '%''';
@@ -110,6 +111,11 @@ begin
                                   fDmPagamento.cdsCarnePagamentoVLR_TROCO.AsCurrency,
                                   fDmPagamento.cdsCarnePagamentoNOME.AsString,
                                   fDmPagamento.cdsCarnePagamentoDATA.AsDateTime);
+end;
+
+procedure TfCarnePgtoC.btnCancelarClick(Sender: TObject);
+begin
+  ShowMessage('Use o SSFácil, botão Financeiro, para efetuar o estorno!');
 end;
 
 end.

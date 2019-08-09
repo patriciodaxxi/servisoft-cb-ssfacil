@@ -1,5 +1,7 @@
 program SSCupomFiscal;
 
+
+
 uses
   Forms,
   DmdDatabase in '..\DmdDatabase.pas' {dmDatabase: TDataModule},
@@ -87,7 +89,9 @@ uses
   enviNFe_v400 in '..\nfe\4.00\enviNFe_v400.pas',
   uGrava_Erro in '..\uGrava_Erro.pas',
   uBalanca in 'uBalanca.pas',
-  uNFeConsts in '..\uNFeConsts.pas';
+  uNFeConsts in '..\uNFeConsts.pas',
+  UConsProdutoNCM in '..\UConsProdutoNCM.pas' {frmConsProdutoNCM},
+  UDMConsProduto in '..\UDMConsProduto.pas' {DMConsProduto: TDataModule};
 
 {$R *.res}
 
