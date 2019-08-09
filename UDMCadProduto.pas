@@ -1946,6 +1946,8 @@ type
     cdsProduto_CorrugadoNOME_MATERIAL: TStringField;
     qParametros_ProdUSA_CORRUGADO: TStringField;
     cdsGrupoNOME_SUPERIOR: TStringField;
+    cdsCFOPCONTROLAR_CONFIG: TStringField;
+    cdsCSTICMSTIPO_ICMS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2857,6 +2859,41 @@ begin
   if (qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (cdsProdutoTIPO_REG.AsString = 'S') and
      ((cdsProdutoTIPO_MAT.AsString = 'A') and (cdsProdutoTIPO_ALGODAO.AsString <> 'C') and (cdsProdutoTIPO_ALGODAO.AsString <> 'N')) then
     vMsgErro := vMsgErro + #13 + '*** Tipo do Fio não informado quando o Produto é Algodão (Cru ou na Cor)!';
+
+  //08/08/2019
+  if (cdsProdutoID_CSTICMS.AsInteger > 0) and (cdsProdutoID_CSTICMS_BRED.AsInteger > 0) then
+    vMsgErro := vMsgErro + #13 + '*** Não pode informar a CST do ICMS e a CST do ICMS Com Base Reduzida juntas!';
+  if (cdsProdutoID_CFOP_NFCE.AsInteger > 0)  then
+  begin
+    if cdsProdutoID_CFOP_NFCE.AsInteger <> cdsCFOPID.AsInteger then
+      cdsCFOP.Locate('ID',cdsProdutoID_CFOP_NFCE.AsInteger,([Locaseinsensitive]));
+    if (cdsCFOPCONTROLAR_CONFIG.AsString = 'S') then
+      if not uUtilPadrao.fnc_Verificar_CFOP_Config(cdsProdutoID_CFOP_NFCE.AsInteger,cdsProdutoID_CSTICMS.AsInteger) then
+        vMsgErro := vMsgErro + #13 + '*** CFOP não pode usar essa CST!';
+    if (cdsCFOPCODCFOP.AsString = '5405') and (cdsProdutoID_CSTICMS_BRED.AsInteger > 0) then
+      vMsgErro := vMsgErro + #13 + '*** Essa CFOP não pode ter base reduzida!';
+  end;
+  if (StrToFloat(FormatFloat('0.000',cdsProdutoPERC_REDUCAOICMS.AsFloat)) <= 0) and (cdsProdutoID_CSTICMS_BRED.AsInteger > 0) then
+    vMsgErro := vMsgErro + #13 + '*** Quando informado a CST de Redução é obrigatório informar o % da Redução!';
+  //if (StrToFloat(FormatFloat('0.000',cdsProdutoPERC_REDUCAOICMS.AsFloat)) >= 0) and (cdsProdutoID_CSTICMS_BRED.AsInteger <= 0) and
+  //  vMsgErro := vMsgErro + #13 + '*** Quando informado o % de Redução é obrigatório informar a CST!';
+  if cdsProdutoID_CSTICMS_BRED.AsInteger > 0 then
+  begin
+    if cdsProdutoID_CSTICMS_BRED.AsInteger <> cdsCSTICMSID.AsInteger then
+      cdsCSTICMS.Locate('ID',cdsProdutoID_CSTICMS_BRED.AsInteger,([Locaseinsensitive]));
+    if (trim(cdsCSTICMSTIPO_ICMS.AsString) <> 'R') then
+      vMsgErro := vMsgErro + #13 + '*** CST ICMS não é Base Reduzida!';
+  end;
+  if cdsProdutoID_CSTICMS.AsInteger > 0 then
+  begin
+    if cdsProdutoID_CSTICMS.AsInteger <> cdsCSTICMSID.AsInteger then
+      cdsCSTICMS.Locate('ID',cdsProdutoID_CSTICMS.AsInteger,([Locaseinsensitive]));
+    if (trim(cdsCSTICMSTIPO_ICMS.AsString) = 'R') then
+      vMsgErro := vMsgErro + #13 + '*** CST ICMS é Base Reduzida!';
+  end;
+  if (StrToFloat(FormatFloat('0.000',cdsProdutoPERC_REDUCAOICMS.AsFloat)) >= 100) then
+    vMsgErro := vMsgErro + #13 + '*** % De Redução de ICMS é obrigatório ser menor que 100%!';
+  //***************
 
   if vMsgErro <> '' then
     exit;

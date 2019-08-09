@@ -54,6 +54,29 @@ type
     cdsProduto_CustoNOME: TStringField;
     cdsProduto_CustoPRECO_CUSTO_CALC: TFloatField;
     cdsProduto_CustoCONTADOR: TIntegerField;
+    sdsProdNCM: TSQLDataSet;
+    dspProdNCM: TDataSetProvider;
+    cdsProdNCM: TClientDataSet;
+    dsProdNCM: TDataSource;
+    cdsProdNCMID: TIntegerField;
+    cdsProdNCMNOME: TStringField;
+    cdsProdNCMREFERENCIA: TStringField;
+    cdsProdNCMUNIDADE: TStringField;
+    cdsProdNCMID_NCM: TIntegerField;
+    cdsProdNCMORIGEM_PROD: TStringField;
+    cdsProdNCMNCM: TStringField;
+    cdsProdNCMTIPO_REG_DESCRICAO: TStringField;
+    cdsProdNCMCFOP_PROD: TStringField;
+    cdsProdNCMCFOP_NCM: TStringField;
+    cdsProdNCMCOD_CST: TStringField;
+    cdsProdNCMCST_BRED_PROD: TStringField;
+    cdsProdNCMCST_NCM: TStringField;
+    cdsProdNCMPERC_REDUCAOICMS: TFloatField;
+    cdsProdNCMPERC_ICMS_NFCE: TFloatField;
+    cdsProdNCMPERC_BASE_ICMS_NCM: TFloatField;
+    cdsProdNCMPERC_ICMS: TFloatField;
+    cdsProdNCMNOME_GRUPO: TStringField;
+    cdsProdNCMINATIVO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -61,6 +84,7 @@ type
     { Public declarations }
     ctConsulta_Prod : String;
     ctProduto_Custo : String;
+    ctProdNCM : String;
     
     procedure prc_Consulta_Prod(ID_Produto, Tipo_Opcao : Integer ; DtInicial, DtFinal : TDateTime ; ID_Filial : Integer = 0);
 
@@ -108,6 +132,7 @@ procedure TDMConsProduto.DataModuleCreate(Sender: TObject);
 begin
   ctConsulta_Prod := sdsConsulta_Prod.CommandText;
   ctProduto_Custo := sdsProduto_Custo.CommandText;
+  ctProdNCM       := sdsProdNCM.CommandText;
   qParametros.Open;
 end;
 

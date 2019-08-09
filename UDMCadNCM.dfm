@@ -634,7 +634,7 @@ object DMCadNCM: TDMCadNCM
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 497
-    Top = 406
+    Top = 405
   end
   object dspTab_CSTICMS: TDataSetProvider
     DataSet = sdsTab_CSTICMS
@@ -675,6 +675,11 @@ object DMCadNCM: TDMCadNCM
     end
     object cdsTab_CSTICMSCOD_DESONERACAO: TSmallintField
       FieldName = 'COD_DESONERACAO'
+    end
+    object cdsTab_CSTICMSTIPO_ICMS: TStringField
+      FieldName = 'TIPO_ICMS'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsTab_CSTICMS: TDataSource
@@ -1336,6 +1341,11 @@ object DMCadNCM: TDMCadNCM
     object cdsCFOP2NOME: TStringField
       FieldName = 'NOME'
       Size = 50
+    end
+    object cdsCFOP2CONTROLAR_CONFIG: TStringField
+      FieldName = 'CONTROLAR_CONFIG'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsCFOP2: TDataSource

@@ -253,6 +253,11 @@ object DMCadCFOP: TDMCadCFOP
       FixedChar = True
       Size = 1
     end
+    object sdsCFOPCONTROLAR_CONFIG: TStringField
+      FieldName = 'CONTROLAR_CONFIG'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
@@ -518,6 +523,11 @@ object DMCadCFOP: TDMCadCFOP
     end
     object cdsCFOPBENEFICIAMENTO_POSSE: TStringField
       FieldName = 'BENEFICIAMENTO_POSSE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCFOPCONTROLAR_CONFIG: TStringField
+      FieldName = 'CONTROLAR_CONFIG'
       FixedChar = True
       Size = 1
     end

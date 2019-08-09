@@ -1322,6 +1322,7 @@ var
   vIDAux: Integer;
   vChaveNFe: String;
   vAlt: Boolean;
+  vBuscouStatus : Boolean;
 begin
   if vPosicionar then
     prc_Posiciona_CupomFiscal(fDmCupomFiscal.cdsCupom_ConsID.AsInteger);
@@ -1349,6 +1350,7 @@ begin
 
 //Inácio 09/06/17
   vIDAux := fDmCupomFiscal.cdsCupomFiscalID.AsInteger;
+  vBuscouStatus := False;
 
   ffNFCe := TfNFCe.Create(fNFCe);
   ffNfCe.fDMCupomFiscal := fDMCupomFiscal;
@@ -1364,7 +1366,21 @@ begin
       try
         ffNFCe.Button7Click(ffNFCe);
         if trim(ffNFCe.lbNroProtocolo.Caption) <> '' then
+        begin
+          vBuscouStatus := True;
+          if (fDMCupomFiscal.cdsCupomParametrosUSA_MODO_SINCRONO.AsString = 'S') then
+          begin
+            fDMCupomFiscal.cdsCupomFiscal.Edit;
+            fDMCupomFiscal.cdsCupomFiscalNFECHAVEACESSO.AsString := ffNFCe.lbChaveAcesso.Caption;
+            fDMCupomFiscal.cdsCupomFiscalNFEPROTOCOLO.AsString   := ffNFCe.lbNroProtocolo.Caption;
+            fDMCupomFiscal.cdsCupomFiscalNFEAMBIENTE.AsString    := '1';
+            fDMCupomFiscal.cdsCupomFiscal.Post;
+            fDMCupomFiscal.cdsCupomFiscal.ApplyUpdates(0);
+          end
+          else
+            ffNFCe.btBuscarStatusClick(ffNFCe);
           vAlt := False;
+        end;
       except
       end;
       if vAlt then
@@ -1382,25 +1398,27 @@ begin
     end;
     //******************************
 
-    if fDmCupomFiscal.cdsCupomParametrosUSA_MODO_SINCRONO.AsString = 'S' then
-      ffNFCe.btEnviarSincronoClick(ffNFCe)
-    else
-      ffNFCe.btEnviarNovoClick(ffNFCe);
+    if not vBuscouStatus then
+    begin
+      if fDmCupomFiscal.cdsCupomParametrosUSA_MODO_SINCRONO.AsString = 'S' then
+        ffNFCe.btEnviarSincronoClick(ffNFCe)
+      else
+        ffNFCe.btEnviarNovoClick(ffNFCe);
+      //28/12/2016  Incluido para imprimir o documento não fiscal para conferência
+      if (fDmCupomFiscal.cdsCupomParametrosIMPRIME_NFISCAL_CONFERENCIA.AsString = 'S') then
+        prc_ImpConferencia;
+      //***********************
+      fDmCupomFiscal.qVer.Close;
+      fDmCupomFiscal.qVer.ParamByName('ID').AsInteger := vIDAux;
+      fDmCupomFiscal.qVer.Open;
+  //    if (trim(fDmCupomFiscal.qVerNFECHAVEACESSO.AsString) = '') or (fDmCupomFiscal.qVerNFECHAVEACESSO.IsNull) then
+  //      MessageDlg('*** Cupom não enviado, favor verificar na tela de consulta', mtInformation, [mbOk], 0);
+      fDmCupomFiscal.qVer.Close;
+    end;
 
-    //28/12/2016  Incluido para imprimir o documento não fiscal para conferência
-    if (fDmCupomFiscal.cdsCupomParametrosIMPRIME_NFISCAL_CONFERENCIA.AsString = 'S') then
-      prc_ImpConferencia;
-    //***********************
+    if vTipo_Dig_Cupom <> 'I' then
+       btnConsultarClick(Sender);
 
-    fDmCupomFiscal.qVer.Close;
-    fDmCupomFiscal.qVer.ParamByName('ID').AsInteger := vIDAux;
-    fDmCupomFiscal.qVer.Open;
-//    if (trim(fDmCupomFiscal.qVerNFECHAVEACESSO.AsString) = '') or (fDmCupomFiscal.qVerNFECHAVEACESSO.IsNull) then
-//      MessageDlg('*** Cupom não enviado, favor verificar na tela de consulta', mtInformation, [mbOk], 0);
-    fDmCupomFiscal.qVer.Close;
-
-  if vTipo_Dig_Cupom <> 'I' then
-     btnConsultarClick(Sender);
   finally
     FreeAndNil(ffNfCe);
   end                         

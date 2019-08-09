@@ -68,7 +68,7 @@ var
 
 implementation
 
-uses StrUtils;
+uses StrUtils, UConsProdutoNCM;
 
 {$R *.dfm}
 

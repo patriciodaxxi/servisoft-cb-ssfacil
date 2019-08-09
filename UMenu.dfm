@@ -114,7 +114,7 @@ object fMenu: TfMenu
     end
   end
   object MainMenu1: TMainMenu
-    Left = 648
+    Left = 649
     Top = 408
     object Cadastro1: TMenuItem
       Caption = 'Manuten'#231#227'o'
@@ -274,6 +274,10 @@ object fMenu: TfMenu
         object ConsultaProdutoVlrCustoConsumo1: TMenuItem
           Caption = 'Consulta Produto (Vlr. Custo Consumo)'
           OnClick = ConsultaProdutoVlrCustoConsumo1Click
+        end
+        object ConsultaProdutoCFOPNCMCSTICMS1: TMenuItem
+          Caption = 'Consulta Produto (CFOP / NCM / CST ICMS)'
+          OnClick = ConsultaProdutoCFOPNCMCSTICMS1Click
         end
         object N35: TMenuItem
           Caption = '-'
