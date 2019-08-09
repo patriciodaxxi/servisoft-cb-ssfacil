@@ -258,15 +258,15 @@ object DMConsProduto: TDMConsProduto
       '       when (PRO.TIPO_REG = '#39'S'#39') then '#39'Semiacabado'#39#13#10'         el' +
       'se '#39#39#13#10'       end as TIPO_REG_DESCRICAO,'#13#10'CFOP.codcfop CFOP_PROD' +
       ', CFOP2.codcfop CFOP_NCM, ICMS.cod_cst,'#13#10'ICMSB.cod_cst CST_BRED_' +
-      'PROD, ICMS.cod_cst CST_NCM, PRO.perc_reducaoicms,'#13#10'PRO.perc_icms' +
-      '_nfce, NCM.perc_base_icms PERC_BASE_ICMS_NCM, NCM.perc_icms,'#13#10'G.' +
-      'NOME NOME_GRUPO, PRO.INATIVO'#13#10'from PRODUTO PRO'#13#10'inner join TAB_N' +
-      'CM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left join tab_cfop cfop'#13#10'on pro' +
-      '.id_cfop_nfce = cfop.id'#13#10'left join tab_cfop cfop2'#13#10'on NCM.id_cfo' +
-      'p = cfop2.id'#13#10'LEFT JOIN tab_csticms ICMS'#13#10'ON PRO.id_csticms = IC' +
-      'MS.ID'#13#10'LEFT JOIN tab_csticms ICMSB'#13#10'ON PRO.id_csticms_bred = ICM' +
-      'SB.ID'#13#10'LEFT JOIN tab_csticms ICMS2'#13#10'ON NCM.id_cst_icms = ICMS2.I' +
-      'D'#13#10'LEFT JOIN GRUPO G'#13#10'ON PRO.id_grupo = G.ID'#13#10#13#10
+      'PROD, ICMS2.cod_cst CST_NCM, PRO.perc_reducaoicms,'#13#10'PRO.perc_icm' +
+      's_nfce, NCM.perc_base_icms PERC_BASE_ICMS_NCM, NCM.perc_icms,'#13#10'G' +
+      '.NOME NOME_GRUPO, PRO.INATIVO'#13#10'from PRODUTO PRO'#13#10'inner join TAB_' +
+      'NCM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left join tab_cfop cfop'#13#10'on pr' +
+      'o.id_cfop_nfce = cfop.id'#13#10'left join tab_cfop cfop2'#13#10'on NCM.id_cf' +
+      'op = cfop2.id'#13#10'LEFT JOIN tab_csticms ICMS'#13#10'ON PRO.id_csticms = I' +
+      'CMS.ID'#13#10'LEFT JOIN tab_csticms ICMSB'#13#10'ON PRO.id_csticms_bred = IC' +
+      'MSB.ID'#13#10'LEFT JOIN tab_csticms ICMS2'#13#10'ON NCM.id_cst_icms = ICMS2.' +
+      'ID'#13#10'LEFT JOIN GRUPO G'#13#10'ON PRO.id_grupo = G.ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
