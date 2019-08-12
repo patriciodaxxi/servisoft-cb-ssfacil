@@ -131,20 +131,36 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
     Caption = 'Base ICMS Ret:'
   end
   object Label7: TLabel
-    Left = 499
-    Top = 156
+    Left = 338
+    Top = 180
     Width = 67
     Height = 13
     Alignment = taRightJustify
     Caption = 'Vlr. ICMS Ret:'
   end
   object Label8: TLabel
-    Left = 497
+    Left = 505
     Top = 177
     Width = 69
     Height = 13
     Alignment = taRightJustify
     Caption = 'Vlr. ICMS Efet.'
+  end
+  object Label9: TLabel
+    Left = 512
+    Top = 155
+    Width = 62
+    Height = 13
+    Alignment = taRightJustify
+    Caption = '% ICMS Efet:'
+  end
+  object Label10: TLabel
+    Left = 496
+    Top = 133
+    Width = 78
+    Height = 13
+    Alignment = taRightJustify
+    Caption = 'Base ICMS Efet:'
   end
   object Panel1: TPanel
     Left = 0
@@ -455,8 +471,8 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
     TabOrder = 15
   end
   object CurrencyEdit9: TCurrencyEdit
-    Left = 567
-    Top = 147
+    Left = 406
+    Top = 171
     Width = 81
     Height = 21
     TabStop = False
@@ -468,7 +484,7 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
     TabOrder = 16
   end
   object CurrencyEdit10: TCurrencyEdit
-    Left = 567
+    Left = 575
     Top = 169
     Width = 81
     Height = 21
@@ -479,5 +495,31 @@ object fCupomFiscalImposto: TfCupomFiscalImposto
     DisplayFormat = '0.00#'
     ReadOnly = True
     TabOrder = 17
+  end
+  object CurrencyEdit11: TCurrencyEdit
+    Left = 575
+    Top = 147
+    Width = 81
+    Height = 21
+    TabStop = False
+    AutoSize = False
+    Color = clSilver
+    DecimalPlaces = 3
+    DisplayFormat = '0.00#'
+    ReadOnly = True
+    TabOrder = 18
+  end
+  object CurrencyEdit12: TCurrencyEdit
+    Left = 575
+    Top = 125
+    Width = 81
+    Height = 21
+    TabStop = False
+    AutoSize = False
+    Color = clSilver
+    DecimalPlaces = 3
+    DisplayFormat = '0.00#'
+    ReadOnly = True
+    TabOrder = 19
   end
 end

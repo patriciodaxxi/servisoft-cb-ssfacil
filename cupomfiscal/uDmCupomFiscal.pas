@@ -1589,12 +1589,13 @@ type
     vID_NCM: Integer;
     vPerc_ICMS, vPerc_IPI, vPerc_TribICMS : Real;
     vPerc_Trib_Efet, vPerc_ICMS_Efet: Real;
+    vBase_ICMS_Efet : Real;
     vMotivoCancelamento: String;
     vDescricao_Operacao: String;
     vSair_Tela: Boolean;
     vBase_ICMS : Real;
     vVlr_ICMS : Real;
-    vVlr_ICMS_Ret, vBase_ICMS_Ret, vVlr_ICMS_Efet : Real; 
+    vVlr_ICMS_Ret, vBase_ICMS_Ret, vVlr_ICMS_Efet : Real;
 
     vIdCombinacao: Integer;
     vTamanho, vCombinacao: String;
