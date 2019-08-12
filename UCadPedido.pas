@@ -4615,14 +4615,14 @@ begin
   uImprimir.prc_Detalhe_Mat(' ');
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
 
-  uImprimir.prc_Detalhe_Mat('    Qtde Unid.          Referencia   Produto                                   Marca                     Preco %Desc          Total');
+  uImprimir.prc_Detalhe_Mat('    Qtde Unid. Referencia  Produto                                             Marca                     Preco %Desc          Total');
   fDMCadPedido.cdsPedidoImp_Itens.First;
   while not fDMCadPedido.cdsPedidoImp_Itens.Eof do
   begin
     vTexto1 := uImprimir.fnc_Monta_Tamanho(8,FormatFloat('#,##0.00',fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat),'E',' ') + ' ';
     vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(6,fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString,'D',' ') + ' ';
-    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(20,fDMCadPedido.cdsPedidoImp_ItensREFERENCIA.AsString,'D',' ') + ' ';
-    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(41,Copy(fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString,1,41),'D',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(10,Copy(fDMCadPedido.cdsPedidoImp_ItensREFERENCIA.AsString,1,10),'D',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(51,Copy(fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString,1,51),'D',' ') + ' ';
     vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(20,Copy(fDMCadPedido.cdsPedidoImp_ItensNOME_MARCA.AsString,1,20),'D',' ') + ' ';
     vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(10,FormatFloat('###,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat) ,'E',' ') + ' ';
     vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(5,FormatFloat('#0.00',fDMCadPedido.cdsPedidoImp_ItensPERC_DESCONTO.AsFloat) ,'E',' ') + ' ';

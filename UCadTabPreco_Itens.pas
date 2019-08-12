@@ -205,7 +205,10 @@ begin
     else
     begin
       prc_Limpar;
-      RxDBLookupCombo4.SetFocus;
+      if edtRef2.Visible then
+        edtRef2.SetFocus
+      else
+        RxDBLookupCombo4.SetFocus;
     end;
   end;
 
@@ -320,6 +323,7 @@ begin
   CurrencyEdit2.Value := 0;
   CurrencyEdit3.Value := 0;
   CurrencyEdit4.Value := 0;
+  edtRef2.Clear;
 end;
 
 procedure TfrmCadTabPreco_Itens.prc_Abrir_Combinacao;

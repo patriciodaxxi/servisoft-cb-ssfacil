@@ -366,8 +366,6 @@ type
     fDMCadNotaFiscal: TDMCadNotaFiscal;
     fDMInformar_Tam: TDMInformar_Tam;
 
-//    function fnc_Buscar_Regra_CFOP(ID_CFOP: Integer): Integer;
-
     procedure prc_Move_Dados_Itens;
     procedure prc_Mover_Finalidade;
 
@@ -2147,40 +2145,6 @@ begin
   if (Key = #13) or (Key = #10) then
     Key := ' ';
 end;
-
-{function TfrmCadNotaFiscal_Itens.fnc_Buscar_Regra_CFOP(ID_CFOP: Integer): Integer;
-var
-  vTipo_Empresa: String;
-  vTipo_Cliente: String;
-  vUF_ClienteAux: String;
-begin
-  vTipo_Cliente := 'G';
-  if fDMCadNotaFiscal.cdsFilialID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger then
-    fDMCadNotaFiscal.cdsFilial.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger,[loCaseInsensitive]);
-  if fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger > 0 then
-  begin
-    fDMCadNotaFiscal.qRegime_Trib.Close;
-    fDMCadNotaFiscal.qRegime_Trib.ParamByName('ID').AsInteger := fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger;
-    fDMCadNotaFiscal.qRegime_Trib.Open;
-    if fDMCadNotaFiscal.qRegime_TribCODIGO.AsInteger < 3 then
-      vTipo_Cliente := 'S';
-  end;
-  if fDMCadNotaFiscal.cdsFilialSIMPLES.AsString = 'S' then
-    vTipo_Empresa := 'S'
-  else
-    vTipo_Empresa := 'G';
-  fDMCadNotaFiscal.qRegra_CFOP.Close;
-  fDMCadNotaFiscal.qRegra_CFOP.ParamByName('ID').AsInteger              := ID_CFOP;
-  fDMCadNotaFiscal.qRegra_CFOP.ParamByName('TIPO_EMPRESA').AsString     := vTipo_Empresa;
-  fDMCadNotaFiscal.qRegra_CFOP.ParamByName('TIPO_CLIENTE').AsString     := vTipo_Cliente;
-  fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString   := fDMCadNotaFiscal.cdsClientePESSOA.AsString;
-  fDMCadNotaFiscal.qRegra_CFOP.ParamByName('TIPO_CONSUMIDOR').AsInteger := fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger;
-  fDMCadNotaFiscal.qRegra_CFOP.Open;
-  if not fDMCadNotaFiscal.qRegra_CFOP.IsEmpty then
-    Result := fDMCadNotaFiscal.qRegra_CFOPITEM.AsInteger
-  else
-    Result := 0;
-end;}
 
 procedure TfrmCadNotaFiscal_Itens.btnGradeClick(Sender: TObject);
 begin

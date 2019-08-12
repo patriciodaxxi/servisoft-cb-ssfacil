@@ -1305,6 +1305,9 @@ begin
         fDMCadDuplicata.cdsDuplicataID_CONTABIL_OPE_BAIXA.AsInteger := fDMCadDuplicata.vId_Contabil_OP_Baixa;
         fDMCadDuplicata.cdsDuplicataDTULTPAGAMENTO.AsDateTime := fDMCadDuplicata.vDtPgtoSel;
         fDMCadDuplicata.cdsDuplicataVLR_PAGO.AsFloat := StrToFloat(FormatFloat('0.00', fDMCadDuplicata.cdsDuplicataVLR_PAGO.AsFloat + fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat));
+        if trim(fDMCadDuplicata.vHistorico_PagSel) <> '' then
+          vHist := fDMCadDuplicata.vHistorico_PagSel
+        else
         if fDMCadDuplicata.mCheque.IsEmpty then
           vHist := 'PAGAMENTO DE TITULO'
         else
@@ -1716,6 +1719,7 @@ begin
   end;
 
   fDMCadDuplicata.mCheque.EmptyDataSet;
+  fDMCadDuplicata.vHistorico_PagSel := '';
   fDMCadDuplicata.vID_Cheque := 0;
   ffrmCadDuplicata_Pag_Sel := TfrmCadDuplicata_Pag_Sel.Create(self);
   case RadioGroup2.ItemIndex of
@@ -1726,7 +1730,7 @@ begin
   end;
   ffrmCadDuplicata_Pag_Sel.fDMCadDuplicata := fDMCadDuplicata;
   ffrmCadDuplicata_Pag_Sel.ShowModal;
-  FreeAndNil(frmCadDuplicata_Pag_Sel);
+  FreeAndNil(ffrmCadDuplicata_Pag_Sel);
 
   if (fDMCadDuplicata.vDtPgtoSel > 10) and (fDMCadDuplicata.vID_ContaPgtoSel > 0) then
   begin

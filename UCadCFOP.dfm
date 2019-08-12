@@ -150,6 +150,7 @@ object frmCadCFOP: TfrmCadCFOP
           item
             Expanded = False
             FieldName = 'NOME_INTERNO'
+            Width = 64
             Visible = True
           end>
       end
@@ -1796,10 +1797,10 @@ object frmCadCFOP: TfrmCadCFOP
         Top = 318
         Width = 933
         Height = 267
-        ActivePage = TabSheet4
+        ActivePage = TabSheet1
         ActivePageDefault = TabSheet1
         Align = alClient
-        TabIndex = 3
+        TabIndex = 0
         TabOrder = 2
         FixedDimension = 19
         object TabSheet1: TRzTabSheet

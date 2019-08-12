@@ -1,8 +1,8 @@
 object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
   Left = 460
   Top = 231
-  Width = 481
-  Height = 219
+  Width = 674
+  Height = 263
   Caption = 'Pagamento Duplicata'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,8 +20,8 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 154
-    Width = 473
+    Top = 198
+    Width = 666
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -60,8 +60,8 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 473
-    Height = 154
+    Width = 666
+    Height = 198
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 0
@@ -74,14 +74,37 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
       Caption = 'Dt. Pagamento:'
     end
     object Label59: TLabel
-      Left = 66
-      Top = 77
+      Left = 67
+      Top = 79
       Width = 46
       Height = 13
       Alignment = taRightJustify
       Caption = 'Op.Baixa:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label9: TLabel
+      Left = 69
+      Top = 149
+      Width = 44
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Hist'#243'rico:'
+    end
+    object Label2: TLabel
+      Left = 246
+      Top = 164
+      Width = 347
+      Height = 26
+      Caption = 
+        'Informando o hist'#243'rico, o sistema vai gravar o mesmo hist'#243'rico p' +
+        'ara todas '#13#10'as parcelas pagas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
@@ -175,7 +198,7 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 471
+      Width = 664
       Height = 45
       Align = alTop
       BevelOuter = bvNone
@@ -364,6 +387,15 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 2
+    end
+    object Edit1: TEdit
+      Left = 114
+      Top = 141
+      Width = 489
+      Height = 21
+      CharCase = ecUpperCase
+      MaxLength = 70
+      TabOrder = 4
     end
   end
 end

@@ -31,6 +31,9 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     Label59: TLabel;
     RxDBLookupCombo12: TRxDBLookupCombo;
+    Label9: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -118,6 +121,9 @@ begin
     fDMCadDuplicata.vNum_Cheque := ceNumCheque.AsInteger;
     fDMCadDuplicata.vDtCheque   := DateEdit1.Date;
   end;
+  fDMCadDuplicata.vHistorico_PagSel := '';
+  if trim(Edit1.Text) <> '' then
+    fDMCadDuplicata.vHistorico_PagSel := Edit1.Text;
   Close;
 end;
 
