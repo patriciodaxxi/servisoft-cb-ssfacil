@@ -208,6 +208,8 @@ begin
   RzPageControl1.ActivePage := TS_Cadastro;
 
   fDMCadTab_Preco.cdsPrecoProd.Close;
+
+  DBEdit1.SetFocus;
 end;
 
 procedure TfrmCadTabPreco.FormShow(Sender: TObject);
@@ -299,6 +301,7 @@ begin
   prc_Habilitar_CamposNota;
 
   fDMCadTab_Preco.cdsPrecoProd.Close;
+  DBEdit1.SetFocus;
 end;
 
 procedure TfrmCadTabPreco.btnConfirmarClick(Sender: TObject);
