@@ -4,8 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, NxCollection, ExtCtrls, Grids,
-  DBGrids, SMDBGrid, UDMCadFechamento, DB, StdCtrls, Mask, ToolEdit, CurrEdit,
-  DBCtrls;
+  DBGrids, SMDBGrid, UDMCadFechamento, DB, StdCtrls, Mask, ToolEdit, CurrEdit, DBCtrls;
 
 type
   TfrmCadFechamento_Sangria = class(TForm)

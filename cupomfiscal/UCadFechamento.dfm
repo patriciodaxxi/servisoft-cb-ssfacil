@@ -25,7 +25,7 @@ object frmCadFechamento: TfrmCadFechamento
     Top = 0
     Width = 996
     Height = 661
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadFechamento: TfrmCadFechamento
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -136,7 +136,7 @@ object frmCadFechamento: TfrmCadFechamento
         Height = 70
         Align = alTop
         Color = clSilver
-        TabOrder = 0
+        TabOrder = 1
         Visible = False
         object Label12: TLabel
           Left = 69
@@ -313,7 +313,7 @@ object frmCadFechamento: TfrmCadFechamento
         Height = 63
         Align = alTop
         Color = clSilver
-        TabOrder = 1
+        TabOrder = 0
         object btnInserir: TNxButton
           Left = 3
           Top = 3
@@ -389,7 +389,7 @@ object frmCadFechamento: TfrmCadFechamento
           OnClick = btnInserirClick
         end
         object btnExcluir: TNxButton
-          Left = 147
+          Left = 435
           Top = 3
           Width = 145
           Height = 30
@@ -458,12 +458,12 @@ object frmCadFechamento: TfrmCadFechamento
             A29CF5F6EEFFFFFDFFFFFFFEFFFFFDFEFCFCFBFEFFFEFCFBFFFF}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 3
           Transparent = True
           OnClick = btnExcluirClick
         end
         object btnImprimir: TNxButton
-          Left = 291
+          Left = 147
           Top = 3
           Width = 145
           Height = 30
@@ -530,12 +530,12 @@ object frmCadFechamento: TfrmCadFechamento
             FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 1
           Transparent = True
           OnClick = btnImprimirClick
         end
         object btnPesquisar: TNxButton
-          Left = 435
+          Left = 291
           Top = 3
           Width = 145
           Height = 30
@@ -696,7 +696,7 @@ object frmCadFechamento: TfrmCadFechamento
             FFFFFFFFFFFFFFFFFFFF}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 6
+          TabOrder = 5
           Transparent = True
           OnClick = btnSuprimentoClick
         end
@@ -790,7 +790,7 @@ object frmCadFechamento: TfrmCadFechamento
             FFFFFFFFFFFFFFFFFFFF}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 6
           Transparent = True
           OnClick = btnSangriaClick
         end
@@ -1052,7 +1052,7 @@ object frmCadFechamento: TfrmCadFechamento
             C8C86B6B6B9A9A9AEEEEEEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 4
+          TabOrder = 9
           Transparent = True
           OnClick = btnFechamentoClick
         end
@@ -1069,7 +1069,7 @@ object frmCadFechamento: TfrmCadFechamento
           Font.Style = []
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 9
+          TabOrder = 10
           TabStop = False
           Transparent = True
           OnClick = btGavetaClick
@@ -1087,7 +1087,7 @@ object frmCadFechamento: TfrmCadFechamento
           Font.Style = []
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 10
+          TabOrder = 4
           Transparent = True
           Visible = False
           OnClick = btnReabrirClick

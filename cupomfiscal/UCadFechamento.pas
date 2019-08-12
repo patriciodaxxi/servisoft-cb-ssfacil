@@ -621,8 +621,7 @@ begin
   begin
     Background  := clYellow;
     AFont.Color := clBlack;
-  end;
-
+  end;     
 end;
 
 procedure TfrmCadFechamento.SMDBGrid1DblClick(Sender: TObject);

@@ -245,13 +245,12 @@ begin
   begin
     if (DayOfTheWeek(Date) = 1) then
     begin
-      DateEdit2.Date := Date;
-      DateEdit1.Date := Date + 6;
+      DateEdit1.Date := Date;
+      DateEdit2.Date := Date + 6;
     end
     else
     begin
-//      DateEdit1.Date := Date - (DayOfTheWeek(Date) - 1);
-      DateEdit1.Date := Date - (DayOfTheWeek(Date));
+      DateEdit1.Date := Date + 1 - (DayOfTheWeek(Date));
       DateEdit2.Date := DateEdit1.Date + 6;
     end;
   end;
