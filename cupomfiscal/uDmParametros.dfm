@@ -325,7 +325,7 @@ object dmParametros: TdmParametros
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 56
-    Top = 152
+    Top = 216
     object sdsSequencialTABELA: TStringField
       FieldName = 'TABELA'
       Required = True
@@ -342,14 +342,14 @@ object dmParametros: TdmParametros
   object dspSequencial: TDataSetProvider
     DataSet = sdsSequencial
     Left = 88
-    Top = 152
+    Top = 216
   end
   object cdsSequencial: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspSequencial'
     Left = 128
-    Top = 152
+    Top = 216
     object cdsSequencialTABELA: TStringField
       FieldName = 'TABELA'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -368,6 +368,6 @@ object dmParametros: TdmParametros
   object dsSequencial: TDataSource
     DataSet = cdsSequencial
     Left = 176
-    Top = 152
+    Top = 216
   end
 end

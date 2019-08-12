@@ -2715,6 +2715,12 @@ object fMenu: TfMenu
         CompName = 'ckMostrar_Zerados'
         Caption = 'Mostrar Zerados'
         GroupName = 'Cupom'
+      end
+      item
+        FormName = 'fCupomFiscalC'
+        CompName = 'PanelTotais'
+        Caption = 'Mostrar Totais'
+        GroupName = 'Cupom'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

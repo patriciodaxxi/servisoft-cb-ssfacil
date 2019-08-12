@@ -44,7 +44,7 @@ type
     PopupMenu2: TPopupMenu;
     Imprimir_Off_Line: TMenuItem;
     Enviarnomtodoantigo1: TMenuItem;
-    Panel2: TPanel;
+    PanelTotais: TPanel;
     ceVM: TCurrencyEdit;
     Label8: TLabel;
     Label10: TLabel;
@@ -160,8 +160,7 @@ var
 implementation
 
 uses UEscolhe_Filial, uUtilPadrao, UCupomFiscalCli, UCupomFiscal, ACBrECF, uComandaR, uCartao, uCupomFiscalPgtoMulti, uMenu,
-  DmdDatabase, uCalculo_CupomFiscal, UDMCadCupomFiscal_MP, uAlteraDt_NFCe, UDMNFCe,
-  uGrava_Erro, USenha;
+  DmdDatabase, uCalculo_CupomFiscal, UDMCadCupomFiscal_MP, uAlteraDt_NFCe, UDMNFCe, uGrava_Erro, USenha;
 
 {$R *.dfm}
 
@@ -182,7 +181,7 @@ begin
     pnlEnvio_Novo.Visible := False;
     pnlPesquisa.Visible   := False;
     Panel1.Visible        := False;
-    Panel2.Visible        := False;
+    PanelTotais.Visible   := False;
     Panel11.Visible       := False;
     SMDBGrid1.Visible     := False;
   end
@@ -237,8 +236,10 @@ begin
   if fDmCupomFiscal.cdsParametrosIMPRESSORA_FISCAL.AsInteger = 0 then
     ckTeste.Checked := True;
 
-  Panel2.Visible := ((fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S') or
-                    (fDmCupomFiscal.cdsCupomParametrosMOSTRAR_BARRA_TOTAL.AsString = 'S'));
+  PanelTotais.Visible := (((fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S') or
+                         (fDmCupomFiscal.cdsCupomParametrosMOSTRAR_BARRA_TOTAL.AsString = 'S')) and
+                         ((fDmCupomFiscal.qParametros_UsuarioCUPOM_TOTAIS.AsString = 'S') or
+                         (fDmCupomFiscal.qParametros_UsuarioCUPOM_TOTAIS.IsNull)));
 
   if fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S' then
     ComboBox1.ItemIndex := 5
@@ -363,7 +364,7 @@ begin
   fDmCupomFiscal.sdsCupom_Cons.CommandText := ctCupomFiscal + vComando + ' ORDER BY DTEMISSAO DESC, ID DESC';
   fDmCupomFiscal.cdsCupom_Cons.Open;
 
-  if Panel2.Visible then
+  if PanelTotais.Visible then
   begin
     vTotal := 0;
     fDmCupomFiscal.cdsTotais.Close;

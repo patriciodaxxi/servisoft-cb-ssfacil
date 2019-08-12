@@ -1236,7 +1236,7 @@ object fCupomFiscalC: TfCupomFiscalC
       OnClick = btnComandaClick
     end
   end
-  object Panel2: TPanel
+  object PanelTotais: TPanel
     Left = 0
     Top = 566
     Width = 1272

@@ -6665,6 +6665,11 @@ object dmCupomFiscal: TdmCupomFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_UsuarioCUPOM_TOTAIS: TStringField
+      FieldName = 'CUPOM_TOTAIS'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsCupom_Cons_Parc: TSQLDataSet
     NoMetadata = True
