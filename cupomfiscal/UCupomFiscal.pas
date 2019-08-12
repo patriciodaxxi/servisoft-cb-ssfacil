@@ -1895,16 +1895,18 @@ begin
   fCupomFiscalImposto.fDmCupomFiscal := fDmCupomFiscal;
   fDmCupomFiscal.vID_CFOP := fDmCupomFiscal.cdsCupom_ItensID_CFOP.AsInteger;
 
-  fDmCupomFiscal.vID_Pis        := fDmCupomFiscal.cdsCupom_ItensID_PIS.AsInteger;
-  fDmCupomFiscal.vID_Cofins     := fDmCupomFiscal.cdsCupom_ItensID_COFINS.AsInteger;
-  fDmCupomFiscal.vID_CSTICMS    := fDmCupomFiscal.cdsCupom_ItensID_CSTICMS.AsInteger;
-  fDmCupomFiscal.vID_CSTIPI     := fDmCupomFiscal.cdsCupom_ItensID_CSTIPI.AsInteger;
-  fDmCupomFiscal.vVlr_ICMS      := fDmCupomFiscal.cdsCupom_ItensVLR_ICMS.AsFloat;
-  fDmCupomFiscal.vBase_ICMS     := fDmCupomFiscal.cdsCupom_ItensBASE_ICMS.AsFloat;
-  fDmCupomFiscal.vVlr_ICMS_Ret  := fDmCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat;
-  fDmCupomFiscal.vBase_ICMS_Ret := fDmCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat;
-  fDmCupomFiscal.vVlr_ICMS_Efet := fDmCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat;
-  
+  fDmCupomFiscal.vID_Pis         := fDmCupomFiscal.cdsCupom_ItensID_PIS.AsInteger;
+  fDmCupomFiscal.vID_Cofins      := fDmCupomFiscal.cdsCupom_ItensID_COFINS.AsInteger;
+  fDmCupomFiscal.vID_CSTICMS     := fDmCupomFiscal.cdsCupom_ItensID_CSTICMS.AsInteger;
+  fDmCupomFiscal.vID_CSTIPI      := fDmCupomFiscal.cdsCupom_ItensID_CSTIPI.AsInteger;
+  fDmCupomFiscal.vVlr_ICMS       := fDmCupomFiscal.cdsCupom_ItensVLR_ICMS.AsFloat;
+  fDmCupomFiscal.vBase_ICMS      := fDmCupomFiscal.cdsCupom_ItensBASE_ICMS.AsFloat;
+  fDmCupomFiscal.vVlr_ICMS_Ret   := fDmCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat;
+  fDmCupomFiscal.vBase_ICMS_Ret  := fDmCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat;
+  fDmCupomFiscal.vVlr_ICMS_Efet  := fDmCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat;
+  fDmCupomFiscal.vPerc_ICMS_Efet := fDmCupomFiscal.cdsCupom_ItensPERC_ICMS_EFET.AsFloat;
+  fDmCupomFiscal.vBase_ICMS_Efet := fDmCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat;
+
   {if fDmCupomFiscal.vTipo_Pis = 'P' then
     ComboBox1.ItemIndex := 0
   else
@@ -1916,6 +1918,7 @@ begin
   if fDmCupomFiscal.vTipo_Cofins = 'V' then
     ComboBox2.ItemIndex := 1;}
   fCupomFiscalImposto.ShowModal;
+  FreeAndNil(fCupomFiscalImposto);
 end;
 
 procedure TfCupomFiscal.prcPesa;

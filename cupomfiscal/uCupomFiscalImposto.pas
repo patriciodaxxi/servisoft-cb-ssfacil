@@ -50,6 +50,10 @@ type
     CurrencyEdit9: TCurrencyEdit;
     Label8: TLabel;
     CurrencyEdit10: TCurrencyEdit;
+    Label9: TLabel;
+    CurrencyEdit11: TCurrencyEdit;
+    Label10: TLabel;
+    CurrencyEdit12: TCurrencyEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -119,6 +123,8 @@ begin
   CurrencyEdit8.Value := fDmCupomFiscal.vBase_ICMS_Ret;
   CurrencyEdit9.Value := fDmCupomFiscal.vVlr_ICMS_Ret;
   CurrencyEdit10.Value := fDmCupomFiscal.vVlr_ICMS_Efet;
+  CurrencyEdit11.Value := fDmCupomFiscal.vPerc_ICMS_Efet;
+  CurrencyEdit12.Value := fDmCupomFiscal.vBase_ICMS_Efet;
 
   fDmCupomFiscal.vVlr_ICMS      := fDmCupomFiscal.cdsCupom_ItensVLR_ICMS.AsFloat;
   fDmCupomFiscal.vBase_ICMS     := fDmCupomFiscal.cdsCupom_ItensBASE_ICMS.AsFloat;

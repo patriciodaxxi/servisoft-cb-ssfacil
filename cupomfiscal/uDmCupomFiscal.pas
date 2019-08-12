@@ -1589,12 +1589,13 @@ type
     vID_NCM: Integer;
     vPerc_ICMS, vPerc_IPI, vPerc_TribICMS : Real;
     vPerc_Trib_Efet, vPerc_ICMS_Efet: Real;
+    vBase_ICMS_Efet : Real;
     vMotivoCancelamento: String;
     vDescricao_Operacao: String;
     vSair_Tela: Boolean;
     vBase_ICMS : Real;
     vVlr_ICMS : Real;
-    vVlr_ICMS_Ret, vBase_ICMS_Ret, vVlr_ICMS_Efet : Real; 
+    vVlr_ICMS_Ret, vBase_ICMS_Ret, vVlr_ICMS_Efet : Real;
 
     vIdCombinacao: Integer;
     vTamanho, vCombinacao: String;
@@ -2809,18 +2810,19 @@ begin
     //07/12/2018  
     if cdsProdutoID_CSTICMS_BRED.AsInteger > 0 then
     begin
-      vID_CSTICMS    := cdsProdutoID_CSTICMS_BRED.AsInteger;
-      vPerc_TribICMS := cdsProdutoPERC_REDUCAOICMS.AsFloat;
+      vID_CSTICMS     := cdsProdutoID_CSTICMS_BRED.AsInteger;
+      vPerc_TribICMS  := cdsProdutoPERC_REDUCAOICMS.AsFloat;
+      vPerc_Trib_Efet := cdsProdutoPERC_REDUCAOICMS.AsFloat;
       if StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
       begin
         vPerc_ICMS     := StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat));
-        vPerc_TribICMS := StrToFloat(FormatFloat('0.000',cdsProdutoPERC_REDUCAOICMS.AsFloat));
+        //vPerc_TribICMS := StrToFloat(FormatFloat('0.000',cdsProdutoPERC_REDUCAOICMS.AsFloat));
       end
       else
       if StrToFloat(FormatFloat('0.000',cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
       begin
         vPerc_ICMS     := StrToFloat(FormatFloat('0.000',cdsTab_NCMPERC_ICMS.AsFloat));
-        vPerc_TribICMS := StrToFloat(FormatFloat('0.000',cdsTab_NCMPERC_BASE_ICMS.AsFloat));
+        //vPerc_TribICMS := StrToFloat(FormatFloat('0.000',cdsTab_NCMPERC_BASE_ICMS.AsFloat));
       end;
     end
     else
@@ -2834,13 +2836,21 @@ begin
     else
     if (cdsTab_NCMID_CST_ICMS.AsInteger > 0) and (cdsProdutoID_CSTICMS.AsInteger <= 0) then
     begin
-      vID_CSTICMS    := cdsTab_NCMID_CST_ICMS.AsInteger;
-      vPerc_TribICMS := cdsTab_NCMPERC_BASE_ICMS.AsFloat;
+      vID_CSTICMS     := cdsTab_NCMID_CST_ICMS.AsInteger;
+      vPerc_TribICMS  := cdsTab_NCMPERC_BASE_ICMS.AsFloat;
+      vPerc_Trib_Efet := StrToFloat(FormatFloat('0.0000',cdsTab_NCMPERC_BASE_ICMS.AsFloat));
       if StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
         vPerc_ICMS := cdsTab_NCMPERC_ICMS.AsFloat;
     end;
     if cdsTab_CSTICMSID.AsInteger <> vID_CSTICMS then
       cdsTab_CSTICMS.Locate('ID',vID_CSTICMS,[loCaseInsensitive]);
+    if (StrToFloat(FormatFloat('0.0000',cdsTab_CSTICMSPERCENTUAL.AsFloat)) > 0) and (trim(cdsCFOPGERAR_ICMS.AsString) = 'S')
+      and (StrToFloat(FormatFloat('0.0000',vPerc_TribICMS)) <= 0 ) then
+    begin
+      vPerc_TribICMS  := StrToFloat(FormatFloat('0.0000',cdsTab_CSTICMSPERCENTUAL.AsFloat));
+      vPerc_Trib_Efet := StrToFloat(FormatFloat('0.0000',cdsTab_CSTICMSPERCENTUAL.AsFloat));
+    end
+    else
     if (StrToFloat(FormatFloat('0.0000',cdsTab_CSTICMSPERCENTUAL.AsFloat)) <= 0) or (trim(cdsCFOPGERAR_ICMS.AsString) <> 'S') then
     begin
       vPerc_ICMS     := 0;
