@@ -3256,6 +3256,7 @@ var
   vPercAux_Estadual, vPercAux_Federal, vPercAux_Municipal: Real;
   vSerieAux: String;
   i: Integer;
+  vCodAux : Integer;
 begin
   fDMNFe.mDadosAdicionaisNFe.EmptyDataSet;
   fDMNFe.mDadosAdicionaisNFe.Insert;
@@ -3356,7 +3357,7 @@ begin
 
   vObsSimples            := False;
   vObsSimplesPermiteIcms := False;
-  
+
   vTexto := '';
   //valor desoneração
   if (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSDESONERADO.AsFloat)) > 0) and (fDMNFe.qParametrosUSA_DESONERACAO.AsString = 'S') then
@@ -3439,6 +3440,29 @@ begin
     end;
     fDMNFe.mAuxDadosNFe.Next;
   end;
+
+  //13/08/2019   Buscar a Lei do NCM_LEI  
+  if fDMNFe.qParametros_NFeUSA_LEI_NCM.AsString = 'S' then
+  begin
+    vCodAux := 0;
+    fDMNFe.cdsItensNCM.Close;
+    fDMNFe.sdsItensNCM.ParamByName('ID').AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger;
+    fDMNFe.cdsItensNCM.Open;
+    fDMNFe.cdsItensNCM.IndexFieldNames := 'ID_LEI;COMPLEMENTO';
+    fDMNFe.cdsItensNCM.First;
+    while not fDMNFe.cdsItensNCM.Eof do
+    begin
+      if trim(fDMNFe.cdsItensNCMCOMPLEMENTO.AsString) <> '' then
+        vTexto := fDMNFe.cdsItensNCMCOMPLEMENTO.AsString;
+      if vCodAux <> fDMNFe.cdsItensNCMID_LEI.AsInteger then
+        vTexto := fDMNFe.cdsItensNCMOBS.AsString + ', ' + vTexto;
+      if trim(vTexto) <> '' then
+        Grava_DadosAdicionaisNFe('('+vTexto+')',0);
+      vCodAux := fDMNFe.cdsItensNCMID_LEI.AsInteger;
+      fDMNFe.cdsItensNCM.Next;
+    end;
+  end;
+  //********************
 
   //Endereço Cobrança
   if (trim(fDMCadNotaFiscal.cdsClienteENDERECO_PGTO.AsString) <> '') and (fDMNFe.qParametros_NFeIMP_END_COBRANCA.AsString = 'S') then
@@ -3918,7 +3942,8 @@ begin
       Grava_mAuxDadosNFe('SIT',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsString);
     if not fDMNFe.mAuxDadosNFe.Locate('Tipo;Codigo',VarArrayOf(['NAT',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsString]),[locaseinsensitive]) then
       Grava_mAuxDadosNFe('NAT',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsString,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger);
-    if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsInteger > 0 then
+    if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsInteger > 0) and
+       (not(fDMNFe.mAuxDadosNFe.Locate('Tipo;Codigo',VarArrayOf(['NCM',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsInteger]),[locaseinsensitive]))) then
       Grava_mAuxDadosNFe('NCM',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsString,0);
     if fDMCadNotaFiscal.cdsProdutoID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger then
       fDMCadNotaFiscal.cdsProduto.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger]);

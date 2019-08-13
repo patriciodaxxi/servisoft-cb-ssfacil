@@ -4345,7 +4345,9 @@ object DMCadPessoa: TDMCadPessoa
   object sdsTab_CSTICMS: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT ID, PERCENTUAL, COD_CST, NOME'#13#10'FROM TAB_CSTICMS'#13#10
+    CommandText = 
+      'SELECT ID, PERCENTUAL, COD_CST, NOME, perc_diferimento'#13#10'FROM TAB' +
+      '_CSTICMS'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -4363,7 +4365,7 @@ object DMCadPessoa: TDMCadPessoa
     Params = <>
     ProviderName = 'dspTab_CSTICMS'
     Left = 762
-    Top = 358
+    Top = 357
     object cdsTab_CSTICMSID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4378,6 +4380,9 @@ object DMCadPessoa: TDMCadPessoa
     object cdsTab_CSTICMSNOME: TStringField
       FieldName = 'NOME'
       Size = 200
+    end
+    object cdsTab_CSTICMSPERC_DIFERIMENTO: TFloatField
+      FieldName = 'PERC_DIFERIMENTO'
     end
   end
   object dsTab_CSTICMS: TDataSource
@@ -5521,7 +5526,8 @@ object DMCadPessoa: TDMCadPessoa
     SQL.Strings = (
       
         'SELECT ID, USA_OPCAO_IMP_COD_CLI, IMP_NOMEPROD_CLIENTE, USA_CLIE' +
-        'NTE_FAT_FIL'
+        'NTE_FAT_FIL,'
+      'USA_REGRA_CLI_PROD'
       'FROM PARAMETROS_NFE')
     SQLConnection = dmDatabase.scoDados
     Left = 1024
@@ -5542,6 +5548,11 @@ object DMCadPessoa: TDMCadPessoa
     end
     object qParametros_NFeUSA_CLIENTE_FAT_FIL: TStringField
       FieldName = 'USA_CLIENTE_FAT_FIL'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_NFeUSA_REGRA_CLI_PROD: TStringField
+      FieldName = 'USA_REGRA_CLI_PROD'
       FixedChar = True
       Size = 1
     end
@@ -7090,7 +7101,7 @@ object DMCadPessoa: TDMCadPessoa
   object dsRaca: TDataSource
     DataSet = cdsRaca
     Left = 346
-    Top = 542
+    Top = 541
   end
   object qProd: TSQLQuery
     MaxBlobSize = -1
@@ -7117,6 +7128,101 @@ object DMCadPessoa: TDMCadPessoa
     end
     object qProdREFERENCIA: TStringField
       FieldName = 'REFERENCIA'
+    end
+  end
+  object dsPessoa_ProdICMS: TDataSource
+    DataSet = cdsPessoa_ProdICMS
+    Left = 145
+    Top = 566
+  end
+  object cdsPessoa_ProdICMS: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'CODIGO'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ITEM'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_PRODUTO'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_CSTICMS'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
+    IndexFieldNames = 'CODIGO;ITEM'
+    Params = <>
+    ProviderName = 'dspPessoa_ProdICMS'
+    StoreDefs = True
+    OnCalcFields = cdsPessoa_ProdICMSCalcFields
+    Left = 114
+    Top = 567
+    object cdsPessoa_ProdICMSCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPessoa_ProdICMSITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPessoa_ProdICMSID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsPessoa_ProdICMSID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
+    end
+    object cdsPessoa_ProdICMSclCod_CSTICMS: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clCod_CSTICMS'
+      ProviderFlags = []
+      Size = 3
+      Calculated = True
+    end
+  end
+  object dspPessoa_ProdICMS: TDataSetProvider
+    DataSet = sdsPessoa_ProdICMS
+    UpdateMode = upWhereKeyOnly
+    Left = 80
+    Top = 566
+  end
+  object sdsPessoa_ProdICMS: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM PESSOA_PRODICMS'#13#10'WHERE CODIGO = :CODIGO'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 48
+    Top = 566
+    object sdsPessoa_ProdICMSCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPessoa_ProdICMSITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPessoa_ProdICMSID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object sdsPessoa_ProdICMSID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
     end
   end
 end

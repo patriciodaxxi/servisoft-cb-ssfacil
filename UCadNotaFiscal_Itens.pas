@@ -726,8 +726,8 @@ begin
     if fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger > 0 then
     begin
       vID_ICMS := fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger;
-      if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
-
+      //ver aqui 13/08/2019   São José
+      //if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
 
     end
     else
@@ -956,6 +956,21 @@ begin
         fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger := fDMCadNotaFiscal.cdsProdutoID_CSTICMS_BRED.AsInteger;
     end;
   end;
+
+  //13/08/2019
+  if fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S' then
+  begin
+    fDMCadNotaFiscal.qPessoa_ProdICMS.Close;
+    fDMCadNotaFiscal.qPessoa_ProdICMS.ParamByName('CODIGO').AsInteger     := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
+    fDMCadNotaFiscal.qPessoa_ProdICMS.ParamByName('ID_PRODUTO').AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
+    fDMCadNotaFiscal.qPessoa_ProdICMS.Open;
+    if not fDMCadNotaFiscal.qPessoa_ProdICMS.IsEmpty then
+    begin
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger := fDMCadNotaFiscal.qPessoa_ProdICMSID_CSTICMS.AsInteger;
+      vPerc_BRedICMS_NCM := 0;
+    end;
+  end;
+  //*******************
 
   if fDMCadNotaFiscal.cdsTab_CSTIcms.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger,([Locaseinsensitive])) then
   begin

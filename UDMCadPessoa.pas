@@ -1274,6 +1274,21 @@ type
     cdsPessoa_ConsultaID_VENDEDOR_INT: TIntegerField;
     cdsPessoa_ConsultaNOME_VENDEDOR_INT: TStringField;
     qParametrosUSA_VENDEDOR: TStringField;
+    dsPessoa_ProdICMS: TDataSource;
+    cdsPessoa_ProdICMS: TClientDataSet;
+    dspPessoa_ProdICMS: TDataSetProvider;
+    sdsPessoa_ProdICMS: TSQLDataSet;
+    sdsPessoa_ProdICMSCODIGO: TIntegerField;
+    sdsPessoa_ProdICMSITEM: TIntegerField;
+    sdsPessoa_ProdICMSID_PRODUTO: TIntegerField;
+    sdsPessoa_ProdICMSID_CSTICMS: TIntegerField;
+    cdsPessoa_ProdICMSCODIGO: TIntegerField;
+    cdsPessoa_ProdICMSITEM: TIntegerField;
+    cdsPessoa_ProdICMSID_PRODUTO: TIntegerField;
+    cdsPessoa_ProdICMSID_CSTICMS: TIntegerField;
+    cdsPessoa_ProdICMSclCod_CSTICMS: TStringField;
+    qParametros_NFeUSA_REGRA_CLI_PROD: TStringField;
+    cdsTab_CSTICMSPERC_DIFERIMENTO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
@@ -1316,6 +1331,7 @@ type
     procedure cdsVendedor_ConfigNewRecord(DataSet: TDataSet);
     procedure cdsPessoa_AnimalNewRecord(DataSet: TDataSet);
     procedure cdsPessoa_AnimalCalcFields(DataSet: TDataSet);
+    procedure cdsPessoa_ProdICMSCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     vID_CidadePes: Integer;
@@ -2213,6 +2229,13 @@ begin
     qProd.Open;
     cdsPessoa_AnimalclNome_RemedioPulga.AsString := qProdNOME.AsString;
   end;
+end;
+
+procedure TDMCadPessoa.cdsPessoa_ProdICMSCalcFields(DataSet: TDataSet);
+begin
+  if cdsPessoa_ProdICMSID_CSTICMS.AsInteger > 0 then
+    if cdsTab_CSTICMS.Locate('ID',cdsPessoa_ProdICMSID_CSTICMS.AsInteger,([Locaseinsensitive])) then
+      cdsPessoa_ProdICMSclCod_CSTICMS.AsString := cdsTab_CSTICMSCOD_CST.AsString;
 end;
 
 end.

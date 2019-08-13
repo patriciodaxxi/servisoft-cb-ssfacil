@@ -12862,6 +12862,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeUSA_REGRA_CLI_PROD: TStringField
+      FieldName = 'USA_REGRA_CLI_PROD'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoqueLoteAux: TSQLDataSet
     NoMetadata = True
@@ -15172,6 +15177,31 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'LOTE_TEXTIL'
       FixedChar = True
       Size = 1
+    end
+  end
+  object qPessoa_ProdICMS: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUTO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select p.id_csticms'
+      'from pessoa_prodicms p'
+      'WHERE P.CODIGO = :CODIGO'
+      '  and p.ID_PRODUTO = :ID_PRODUTO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1216
+    Top = 146
+    object qPessoa_ProdICMSID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
     end
   end
 end
