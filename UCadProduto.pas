@@ -802,6 +802,7 @@ type
     CurrencyEdit4: TCurrencyEdit;
     lblCorrugado: TLabel;
     lblEstrutura: TLabel;
+    dbckbCalcular_ST: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1016,6 +1017,7 @@ type
       Shift: TShiftState);
     procedure CurrencyEdit4Exit(Sender: TObject);
     procedure RxDBLookupCombo5Change(Sender: TObject);
+    procedure RxDBLookupCombo3Exit(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1909,6 +1911,8 @@ begin
   btnAltRefEstruturada.Visible := (fDMCadProduto.qParametros_ProdALT_REF_ESTRUTURADA.AsString = 'S');
 
   TS_Corrugado.TabVisible := (fDMCadProduto.qParametros_ProdUSA_CORRUGADO.AsString = 'S');
+
+  dbckbCalcular_ST.Visible := (fDMCadProduto.qParametros_ProdCONTROLAR_PROD_ST.AsString = 'S');
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
@@ -2150,7 +2154,7 @@ procedure TfrmCadProduto.SpeedButton1Click(Sender: TObject);
 begin
   ffrmCadNCM := TfrmCadNCM.Create(self);
   ffrmCadNCM.ShowModal;
-
+  ffrmCadNCM.edtNCM.Text := RxDBLookupCombo3.Text;
   FreeAndNil(ffrmCadNCM);
 
   fDMCadProduto.cdsNCM.Close;
@@ -2510,6 +2514,8 @@ begin
       //*******************
       TS_Tingimento.TabVisible := ((fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M'));
     end;
+    //12/08/2019
+    RxDBLookupCombo3Exit(Sender);
   end;
   if RzPageControl1.ActivePage = TS_Cadastro then
     TS_Engenharia.TabVisible := ((fDMCadProduto.qParametrosUSA_CONSUMO.AsString = 'S') and ((fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'P') or (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'S')));
@@ -6210,6 +6216,18 @@ begin
     lblEstrutura.Caption := fDMCadProduto.cdsGrupoNOME_SUPERIOR.AsString
   else
     lblEstrutura.Caption := '';
+end;
+
+procedure TfrmCadProduto.RxDBLookupCombo3Exit(Sender: TObject);
+begin
+  if (RxDBLookupCombo3.Text <> '') then
+  begin
+    if (RxDBLookupCombo3.KeyValue <> fDMCadProduto.cdsNCMID.AsInteger) then
+      fDMCadProduto.cdsNCM.Locate('ID',RxDBLookupCombo3.KeyValue,([Locaseinsensitive]));
+    dbckbCalcular_ST.Visible := ((fDMCadProduto.cdsNCMGERAR_ST.AsString = 'S') and (fDMCadProduto.qParametros_ProdCONTROLAR_PROD_ST.AsString = 'S'));
+  end
+  else
+    dbckbCalcular_ST.Visible := False;
 end;
 
 end.

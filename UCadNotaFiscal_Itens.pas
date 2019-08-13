@@ -1974,7 +1974,6 @@ begin
     end;
     if (fDMCadNotaFiscal.cdsNotaFiscalID_CFOP.AsInteger <= 0) then
       TS_DrawBack.TabVisible := (((copy(RxDBLookupCombo1.Text,1,1) = '3') or (copy(RxDBLookupCombo1.Text,1,1) = '7')));
-
   end;
 end;
 

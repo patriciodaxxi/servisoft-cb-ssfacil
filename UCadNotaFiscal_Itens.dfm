@@ -154,7 +154,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'Varia'#231#227'o CFOP:'
       end
       object RxDBLookupCombo1: TRxDBLookupCombo
-        Left = 148
+        Left = 149
         Top = 4
         Width = 89
         Height = 21
@@ -2351,7 +2351,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'VLR_AFRMM'
               Title.Alignment = taCenter
               Title.Caption = 'Valor AFRMM'
-              Width = 64
               Visible = True
             end
             item
@@ -2360,7 +2359,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'TIPO_INTERMEDIO'
               Title.Alignment = taCenter
               Title.Caption = 'Tipo Interm'#233'dio'
-              Width = 64
               Visible = True
             end
             item
@@ -2369,7 +2367,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'CNPJ'
               Title.Alignment = taCenter
               Title.Caption = 'CNPJ Terceiro'
-              Width = 64
               Visible = True
             end
             item
@@ -2378,7 +2375,6 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'UF_TERCEIRO'
               Title.Alignment = taCenter
               Title.Caption = 'UF Terceiro'
-              Width = 64
               Visible = True
             end>
         end

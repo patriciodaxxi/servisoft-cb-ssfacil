@@ -481,6 +481,11 @@ object dmCadProduto: TdmCadProduto
       FixedChar = True
       Size = 1
     end
+    object sdsProdutoCALCULAR_ST: TStringField
+      FieldName = 'CALCULAR_ST'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -1019,6 +1024,11 @@ object dmCadProduto: TdmCadProduto
       FixedChar = True
       Size = 1
     end
+    object cdsProdutoCALCULAR_ST: TStringField
+      FieldName = 'CALCULAR_ST'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsProduto: TDataSource
     DataSet = cdsProduto
@@ -1101,6 +1111,11 @@ object dmCadProduto: TdmCadProduto
     object cdsNCMNOME: TStringField
       FieldName = 'NOME'
       Size = 250
+    end
+    object cdsNCMGERAR_ST: TStringField
+      FieldName = 'GERAR_ST'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsNCM: TDataSource
@@ -6959,6 +6974,11 @@ object dmCadProduto: TdmCadProduto
     end
     object qParametros_ProdUSA_CORRUGADO: TStringField
       FieldName = 'USA_CORRUGADO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdCONTROLAR_PROD_ST: TStringField
+      FieldName = 'CONTROLAR_PROD_ST'
       FixedChar = True
       Size = 1
     end

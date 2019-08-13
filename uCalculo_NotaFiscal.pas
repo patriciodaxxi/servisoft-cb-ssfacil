@@ -1988,6 +1988,12 @@ begin
   else
     vImportado_Nacional := 'N';
   fDMCadNotaFiscal.cdsTab_NCM.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,([Locaseinsensitive]));
+  
+  //Incluido 13/08/2019  para controlar os produtos que não calculam ST dentro de um NCM que calcula
+  if (fDMCadNotaFiscal.qParametros_ProdCONTROLAR_PROD_ST.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoCALCULAR_ST.AsString = 'N') then
+    exit;
+  //*********************
+
   if (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString = 'S') and (fDMCadNotaFiscal.cdsTab_NCMUSAR_MVA_UF_DESTINO.AsString <> 'S') then
     vUF := fDMCadNotaFiscal.cdsFilialUF.AsString
   else
@@ -3529,7 +3535,12 @@ begin
     if fDMCadNotaFiscal.cdsTab_NCMID.AsInteger <> fDMCadNotaFiscal.cdsProdutoID_NCM.AsInteger then
       fDMCadNotaFiscal.cdsTab_NCM.Locate('ID',fDMCadNotaFiscal.cdsProdutoID_NCM.AsInteger,([Locaseinsensitive]));
     if fDMCadNotaFiscal.cdsTab_NCMGERAR_ST.AsString = 'S' then
-      vSTAux := 'S'
+    begin
+      vSTAux := 'S';
+      //13/08/2019  Foi incluido para controlar o produto
+      if (fDMCadNotaFiscal.qParametros_ProdCONTROLAR_PROD_ST.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoCALCULAR_ST.AsString = 'N') then
+        vSTAux := 'N';
+    end
     else
       vSTAux := 'N';
     if fDMCadNotaFiscal.cdsParametrosUSA_SPED.AsString = 'S' then
@@ -4082,7 +4093,13 @@ begin
   if fDMCadNotaFiscal.cdsClientePESSOA.AsString = 'E' then
     fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString := 'J'
   else
+  begin
+  //Esse if foi incluido dia 12/08/2019 para usar a mesma regra do Pessoa Física quando for não contribuinte ou isento
+  if fDMCadNotaFiscal.cdsClienteTIPO_CONTRIBUINTE.AsString <> '1' then
+    fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString := 'F'
+  else
     fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString := fDMCadNotaFiscal.cdsClientePESSOA.AsString;
+  end;
   fDMCadNotaFiscal.qRegra_CFOP.ParamByName('TIPO_CONSUMIDOR').AsInteger := fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger;
   fDMCadNotaFiscal.qRegra_CFOP.Open;
   if not fDMCadNotaFiscal.qRegra_CFOP.IsEmpty then

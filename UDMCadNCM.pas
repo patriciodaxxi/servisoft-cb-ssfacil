@@ -284,6 +284,28 @@ type
     cdsNCM_ConsultaCONTADOR: TIntegerField;
     cdsCFOP2CONTROLAR_CONFIG: TStringField;
     cdsTab_CSTICMSTIPO_ICMS: TStringField;
+    sdsNCM_Lei: TSQLDataSet;
+    sdsNCM_LeiID: TIntegerField;
+    sdsNCM_LeiITEM: TIntegerField;
+    sdsNCM_LeiID_CFOP: TIntegerField;
+    sdsNCM_LeiID_CST_ICM: TIntegerField;
+    sdsNCM_LeiID_LEI: TIntegerField;
+    sdsNCM_LeiCOMPLEMENTO: TStringField;
+    cdsNCM_LEI: TClientDataSet;
+    cdsNCMsdsNCM_Lei: TDataSetField;
+    cdsNCM_LEIID: TIntegerField;
+    cdsNCM_LEIITEM: TIntegerField;
+    cdsNCM_LEIID_CFOP: TIntegerField;
+    cdsNCM_LEIID_CST_ICM: TIntegerField;
+    cdsNCM_LEIID_LEI: TIntegerField;
+    cdsNCM_LEICOMPLEMENTO: TStringField;
+    dsNCM_Lei: TDataSource;
+    cdsNCM_LEICOD_CST: TStringField;
+    cdsNCM_LEICODCFOP: TStringField;
+    qCFOP: TSQLQuery;
+    qCFOPID: TIntegerField;
+    qCFOPCODCFOP: TStringField;
+    cdsNCM_LEIOBS_LEI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNCMUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -293,6 +315,7 @@ type
     procedure cdsNCM_UFCalcFields(DataSet: TDataSet);
     procedure cdsNCM_CSTCalcFields(DataSet: TDataSet);
     procedure cdsNCM_UniCalcFields(DataSet: TDataSet);
+    procedure cdsNCM_LEICalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
@@ -554,6 +577,31 @@ begin
     qUnidade_Conv.ParamByName('ITEM').AsInteger   := cdsNCM_UniITEM_UNIDADE.AsInteger;
     qUnidade_Conv.Open;
     cdsNCM_UniQtd.AsFloat := StrToFloat(FormatFloat('0.0000',qUnidade_ConvQTD.AsFloat));
+  end;
+end;
+
+procedure TDMCadNCM.cdsNCM_LEICalcFields(DataSet: TDataSet);
+begin
+  if cdsNCM_LEIID_CST_ICM.AsInteger > 0 then
+  begin
+    qCSTICMS.Close;
+    qCSTICMS.ParamByName('ID').AsInteger := cdsNCM_LEIID_CST_ICM.AsInteger;
+    qCSTICMS.Open;
+    cdsNCM_LEICOD_CST.AsString := qCSTICMSCOD_CST.AsString;
+  end;
+  if cdsNCM_LEIID_CFOP.AsInteger > 0 then
+  begin
+    qCFOP.Close;
+    qCFOP.ParamByName('ID').AsInteger := cdsNCM_LEIID_CFOP.AsInteger;
+    qCFOP.Open;
+    cdsNCM_LEICODCFOP.AsString := qCFOPCODCFOP.AsString;
+  end;
+  if cdsNCM_LEIID_LEI.AsInteger > 0 then
+  begin
+    qOBS.Close;
+    qOBS.ParamByName('ID').AsInteger := cdsNCM_LEIID_LEI.AsInteger;
+    qOBS.Open;
+    cdsNCM_LEIOBS_LEI.AsString := qOBSOBS.AsString;
   end;
 end;
 
