@@ -12,6 +12,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
@@ -77,6 +78,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       TabOrder = 0
       OnChange = CurrencyEdit1Change
       OnExit = CurrencyEdit1Exit
+      OnKeyDown = CurrencyEdit1KeyDown
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 217

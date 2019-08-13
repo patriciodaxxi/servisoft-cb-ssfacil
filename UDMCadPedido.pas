@@ -3478,6 +3478,11 @@ type
     cdsOrcamentoID_VENDEDOR_INT: TIntegerField;
     qParametros_OCPERMITE_ALT_NOMEPROD: TStringField;
     mOrcamento_ItensMotivo_Nao_Aprovado_Memo: TMemoField;
+    qPessoa_ProdICMS: TSQLQuery;
+    qPessoa_ProdICMSID_CSTICMS: TIntegerField;
+    qParametros_NFeUSA_REGRA_CLI_PROD: TStringField;
+    qParametros_ProdCONTROLAR_PROD_ST: TStringField;
+    cdsProdutoCALCULAR_ST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

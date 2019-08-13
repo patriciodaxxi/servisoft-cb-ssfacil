@@ -28,6 +28,8 @@ type
     procedure CurrencyEdit1Exit(Sender: TObject);
     procedure CurrencyEdit1Change(Sender: TObject);
     procedure RxDBLookupCombo1Change(Sender: TObject);
+    procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -41,7 +43,7 @@ var
 
 implementation
 
-uses rsDBUtils;
+uses rsDBUtils, uUtilPadrao, USel_Produto;
 
 {$R *.dfm}
 
@@ -69,7 +71,7 @@ begin
     exit;
   end;
   fDMCadPessoa.cdsPessoa_ProdICMS.Last;
-  vItem := fDMCadPessoa.cdsPessoa_ProdICMSID_CSTICMS.AsInteger;
+  vItem := fDMCadPessoa.cdsPessoa_ProdICMSITEM.AsInteger;
 
   fDMCadPessoa.cdsPessoa_ProdICMS.Insert;
   fDMCadPessoa.cdsPessoa_ProdICMSCODIGO.AsInteger     := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
@@ -122,6 +124,19 @@ begin
   Label5.Caption := '% Base: ' + FormatFloat('0.000',fDMCadPessoa.cdsTab_CSTICMSPERCENTUAL.AsFloat);
   if fDMCadPessoa.cdsTab_CSTICMSCOD_CST.AsString = '51' then
     Label5.Caption := Label5.Caption +  '   % Diferimento: ' + FormatFloat('0.000',fDMCadPessoa.cdsTab_CSTICMSPERC_DIFERIMENTO.AsFloat);
+end;
+
+procedure TfrmCadPessoa_ProdICMS.CurrencyEdit1KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    vCodProduto_Pos := CurrencyEdit1.AsInteger;
+    frmSel_Produto  := TfrmSel_Produto.Create(Self);
+    frmSel_Produto.ShowModal;
+    FreeAndNil(frmSel_Produto);
+    CurrencyEdit1.AsInteger := vCodProduto_Pos;
+  end;
 end;
 
 end.
