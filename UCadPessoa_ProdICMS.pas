@@ -24,6 +24,7 @@ type
     Label6: TLabel;
     RxDBLookupCombo2: TRxDBLookupCombo;
     DBMemo1: TDBMemo;
+    CheckBox1: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
@@ -83,6 +84,10 @@ begin
   fDMCadPessoa.cdsPessoa_ProdICMSID_CSTICMS.AsInteger := RxDBLookupCombo1.KeyValue;
   if RxDBLookupCombo2.Text <> '' then
     fDMCadPessoa.cdsPessoa_ProdICMSID_LEI.AsInteger := RxDBLookupCombo2.KeyValue;
+  if CheckBox1.Checked then
+    fDMCadPessoa.cdsPessoa_ProdICMSDRAWBACK.AsString := 'S'
+  else
+    fDMCadPessoa.cdsPessoa_ProdICMSDRAWBACK.AsString := 'N';
   fDMCadPessoa.cdsPessoa_ProdICMS.Post;
 
   CurrencyEdit1.Clear;

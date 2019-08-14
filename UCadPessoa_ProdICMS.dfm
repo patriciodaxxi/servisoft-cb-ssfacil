@@ -23,7 +23,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
     Left = 0
     Top = 0
     Width = 920
-    Height = 69
+    Height = 61
     Align = alTop
     UseDockManager = False
     ParentBackground = False
@@ -37,37 +37,37 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       Transparent = True
     end
     object Label2: TLabel
-      Left = 161
-      Top = 17
+      Left = 10
+      Top = 40
       Width = 53
       Height = 13
       Caption = 'CST ICMS:'
       Transparent = True
     end
     object Label3: TLabel
-      Left = 67
-      Top = 35
+      Left = 146
+      Top = 4
       Width = 55
       Height = 13
       Caption = 'Refer'#234'ncia:'
     end
     object Label4: TLabel
-      Left = 67
-      Top = 52
+      Left = 146
+      Top = 19
       Width = 31
       Height = 13
       Caption = 'Nome:'
     end
     object Label5: TLabel
-      Left = 370
-      Top = 12
+      Left = 219
+      Top = 40
       Width = 8
       Height = 13
       Caption = '%'
     end
     object Label6: TLabel
-      Left = 500
-      Top = 17
+      Left = 395
+      Top = 40
       Width = 17
       Height = 13
       Caption = 'Lei:'
@@ -89,8 +89,8 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       OnKeyDown = CurrencyEdit1KeyDown
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
-      Left = 217
-      Top = 9
+      Left = 66
+      Top = 32
       Width = 145
       Height = 21
       DropDownCount = 8
@@ -103,8 +103,8 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       OnChange = RxDBLookupCombo1Change
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
-      Left = 521
-      Top = 9
+      Left = 415
+      Top = 32
       Width = 274
       Height = 21
       DropDownCount = 8
@@ -116,10 +116,18 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       TabOrder = 2
       OnChange = RxDBLookupCombo1Change
     end
+    object CheckBox1: TCheckBox
+      Left = 720
+      Top = 33
+      Width = 97
+      Height = 17
+      Caption = 'DrawBack'
+      TabOrder = 3
+    end
   end
   object NxPanel2: TNxPanel
     Left = 0
-    Top = 69
+    Top = 61
     Width = 920
     Height = 32
     Align = alTop
@@ -157,9 +165,9 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
   end
   object SMDBGrid9: TSMDBGrid
     Left = 0
-    Top = 101
+    Top = 93
     Width = 920
-    Height = 272
+    Height = 280
     Align = alClient
     Ctl3D = False
     DataSource = DMCadPessoa.dsPessoa_ProdICMS
@@ -191,7 +199,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 7
+    ColCount = 8
     RowCount = 2
     Columns = <
       item
@@ -248,6 +256,16 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
         Title.Caption = 'Nome Lei'
         Title.Color = 16760962
         Width = 226
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'DRAWBACK'
+        Title.Alignment = taCenter
+        Title.Caption = 'DrawBack'
+        Title.Color = 16760962
+        Width = 56
         Visible = True
       end>
   end

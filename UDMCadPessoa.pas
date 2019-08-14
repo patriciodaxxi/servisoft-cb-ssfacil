@@ -1293,6 +1293,8 @@ type
     cdsPessoa_ProdICMSID_LEI: TIntegerField;
     cdsPessoa_ProdICMSclNomeLei: TStringField;
     cdsPessoa_ProdICMSclLei: TStringField;
+    sdsPessoa_ProdICMSDRAWBACK: TStringField;
+    cdsPessoa_ProdICMSDRAWBACK: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

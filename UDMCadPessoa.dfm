@@ -7132,8 +7132,8 @@ object DMCadPessoa: TDMCadPessoa
   end
   object dsPessoa_ProdICMS: TDataSource
     DataSet = cdsPessoa_ProdICMS
-    Left = 143
-    Top = 563
+    Left = 146
+    Top = 566
   end
   object cdsPessoa_ProdICMS: TClientDataSet
     Aggregates = <>
@@ -7159,6 +7159,12 @@ object DMCadPessoa: TDMCadPessoa
       item
         Name = 'ID_LEI'
         DataType = ftInteger
+      end
+      item
+        Name = 'DRAWBACK'
+        Attributes = [faFixed]
+        DataType = ftString
+        Size = 1
       end>
     IndexDefs = <>
     IndexFieldNames = 'CODIGO;ITEM'
@@ -7206,6 +7212,11 @@ object DMCadPessoa: TDMCadPessoa
       Size = 250
       Calculated = True
     end
+    object cdsPessoa_ProdICMSDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspPessoa_ProdICMS: TDataSetProvider
     DataSet = sdsPessoa_ProdICMS
@@ -7245,6 +7256,11 @@ object DMCadPessoa: TDMCadPessoa
     end
     object sdsPessoa_ProdICMSID_LEI: TIntegerField
       FieldName = 'ID_LEI'
+    end
+    object sdsPessoa_ProdICMSDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
+      FixedChar = True
+      Size = 1
     end
   end
 end
