@@ -7132,8 +7132,8 @@ object DMCadPessoa: TDMCadPessoa
   end
   object dsPessoa_ProdICMS: TDataSource
     DataSet = cdsPessoa_ProdICMS
-    Left = 145
-    Top = 566
+    Left = 143
+    Top = 563
   end
   object cdsPessoa_ProdICMS: TClientDataSet
     Aggregates = <>
@@ -7154,6 +7154,10 @@ object DMCadPessoa: TDMCadPessoa
       end
       item
         Name = 'ID_CSTICMS'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_LEI'
         DataType = ftInteger
       end>
     IndexDefs = <>
@@ -7185,6 +7189,21 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'clCod_CSTICMS'
       ProviderFlags = []
       Size = 3
+      Calculated = True
+    end
+    object cdsPessoa_ProdICMSID_LEI: TIntegerField
+      FieldName = 'ID_LEI'
+    end
+    object cdsPessoa_ProdICMSclNomeLei: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clNomeLei'
+      Size = 100
+      Calculated = True
+    end
+    object cdsPessoa_ProdICMSclLei: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clLei'
+      Size = 250
       Calculated = True
     end
   end
@@ -7223,6 +7242,9 @@ object DMCadPessoa: TDMCadPessoa
     end
     object sdsPessoa_ProdICMSID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
+    end
+    object sdsPessoa_ProdICMSID_LEI: TIntegerField
+      FieldName = 'ID_LEI'
     end
   end
 end

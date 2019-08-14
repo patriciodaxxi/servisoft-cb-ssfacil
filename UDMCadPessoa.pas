@@ -1289,6 +1289,10 @@ type
     cdsPessoa_ProdICMSclCod_CSTICMS: TStringField;
     qParametros_NFeUSA_REGRA_CLI_PROD: TStringField;
     cdsTab_CSTICMSPERC_DIFERIMENTO: TFloatField;
+    sdsPessoa_ProdICMSID_LEI: TIntegerField;
+    cdsPessoa_ProdICMSID_LEI: TIntegerField;
+    cdsPessoa_ProdICMSclNomeLei: TStringField;
+    cdsPessoa_ProdICMSclLei: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
@@ -2236,6 +2240,11 @@ begin
   if cdsPessoa_ProdICMSID_CSTICMS.AsInteger > 0 then
     if cdsTab_CSTICMS.Locate('ID',cdsPessoa_ProdICMSID_CSTICMS.AsInteger,([Locaseinsensitive])) then
       cdsPessoa_ProdICMSclCod_CSTICMS.AsString := cdsTab_CSTICMSCOD_CST.AsString;
+  if (cdsPessoa_ProdICMSID_LEI.AsInteger > 0) and (cdsOBS_Lei.Locate('ID',cdsPessoa_ProdICMSID_LEI.AsInteger,([Locaseinsensitive]))) then 
+  begin
+    cdsPessoa_ProdICMSclLei.AsString     := cdsOBS_LeiOBS.AsString;
+    cdsPessoa_ProdICMSclNomeLei.AsString := cdsOBS_LeiNOME.AsString;
+  end;
 end;
 
 end.

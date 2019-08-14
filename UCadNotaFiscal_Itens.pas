@@ -968,6 +968,8 @@ begin
     begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger := fDMCadNotaFiscal.qPessoa_ProdICMSID_CSTICMS.AsInteger;
       vPerc_BRedICMS_NCM := 0;
+      if fDMCadNotaFiscal.qPessoa_ProdICMSID_LEI.AsInteger > 0 then
+        fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsInteger := fDMCadNotaFiscal.qPessoa_ProdICMSID_LEI.AsInteger;
     end;
   end;
   //*******************

@@ -3066,6 +3066,7 @@ type
     qParametros_NFeUSA_REGRA_CLI_PROD: TStringField;
     qPessoa_ProdICMS: TSQLQuery;
     qPessoa_ProdICMSID_CSTICMS: TIntegerField;
+    qPessoa_ProdICMSID_LEI: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

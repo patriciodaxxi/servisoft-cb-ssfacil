@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, NxCollection, StdCtrls, Mask, ToolEdit, CurrEdit, RxLookup, UDMCadPessoa,
-  Grids, DBGrids, SMDBGrid, DB;
+  Grids, DBGrids, SMDBGrid, DB, DBCtrls;
 
 type
   TfrmCadPessoa_ProdICMS = class(TForm)
@@ -21,6 +21,9 @@ type
     btnExcluir: TNxButton;
     Label5: TLabel;
     SMDBGrid9: TSMDBGrid;
+    Label6: TLabel;
+    RxDBLookupCombo2: TRxDBLookupCombo;
+    DBMemo1: TDBMemo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
@@ -78,6 +81,8 @@ begin
   fDMCadPessoa.cdsPessoa_ProdICMSITEM.AsInteger       := vItem + 1;
   fDMCadPessoa.cdsPessoa_ProdICMSID_PRODUTO.AsInteger := CurrencyEdit1.AsInteger;
   fDMCadPessoa.cdsPessoa_ProdICMSID_CSTICMS.AsInteger := RxDBLookupCombo1.KeyValue;
+  if RxDBLookupCombo2.Text <> '' then
+    fDMCadPessoa.cdsPessoa_ProdICMSID_LEI.AsInteger := RxDBLookupCombo2.KeyValue;
   fDMCadPessoa.cdsPessoa_ProdICMS.Post;
 
   CurrencyEdit1.Clear;

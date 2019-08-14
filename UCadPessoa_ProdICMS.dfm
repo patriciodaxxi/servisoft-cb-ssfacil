@@ -38,7 +38,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
     end
     object Label2: TLabel
       Left = 161
-      Top = 15
+      Top = 17
       Width = 53
       Height = 13
       Caption = 'CST ICMS:'
@@ -65,6 +65,14 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       Height = 13
       Caption = '%'
     end
+    object Label6: TLabel
+      Left = 500
+      Top = 17
+      Width = 17
+      Height = 13
+      Caption = 'Lei:'
+      Transparent = True
+    end
     object CurrencyEdit1: TCurrencyEdit
       Left = 66
       Top = 9
@@ -82,7 +90,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 217
-      Top = 8
+      Top = 9
       Width = 145
       Height = 21
       DropDownCount = 8
@@ -92,6 +100,20 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       LookupSource = DMCadPessoa.dsTab_CSTICMS
       ParentCtl3D = False
       TabOrder = 1
+      OnChange = RxDBLookupCombo1Change
+    end
+    object RxDBLookupCombo2: TRxDBLookupCombo
+      Left = 521
+      Top = 9
+      Width = 274
+      Height = 21
+      DropDownCount = 8
+      Ctl3D = False
+      LookupField = 'ID'
+      LookupDisplay = 'NOME'
+      LookupSource = DMCadPessoa.dsOBS_Lei
+      ParentCtl3D = False
+      TabOrder = 2
       OnChange = RxDBLookupCombo1Change
     end
   end
@@ -106,7 +128,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
     TabOrder = 1
     object btnConfirmar: TNxButton
       Left = 73
-      Top = 6
+      Top = 5
       Width = 75
       Caption = 'Confirmar'
       Font.Charset = DEFAULT_CHARSET
@@ -137,7 +159,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
     Left = 0
     Top = 101
     Width = 920
-    Height = 348
+    Height = 272
     Align = alClient
     Ctl3D = False
     DataSource = DMCadPessoa.dsPessoa_ProdICMS
@@ -169,6 +191,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
+    ColCount = 7
     RowCount = 2
     Columns = <
       item
@@ -209,6 +232,38 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
         Title.Color = 16760962
         Width = 73
         Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_LEI'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID Lei'
+        Title.Color = 16760962
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'clNomeLei'
+        Title.Alignment = taCenter
+        Title.Caption = 'Nome Lei'
+        Title.Color = 16760962
+        Width = 226
+        Visible = True
       end>
+  end
+  object DBMemo1: TDBMemo
+    Left = 0
+    Top = 373
+    Width = 920
+    Height = 76
+    Align = alBottom
+    Color = 13290186
+    Ctl3D = False
+    DataField = 'clLei'
+    DataSource = DMCadPessoa.dsPessoa_ProdICMS
+    ParentCtl3D = False
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 3
   end
 end

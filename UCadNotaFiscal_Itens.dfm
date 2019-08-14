@@ -983,6 +983,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
             LookupField = 'ID'
             LookupDisplay = 'NCM'
             LookupSource = DMCadNotaFiscal.dsTab_NCM
+            ReadOnly = True
             TabOrder = 2
             TabStop = False
             OnEnter = RxDBLookupCombo5Enter
@@ -2351,6 +2352,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'VLR_AFRMM'
               Title.Alignment = taCenter
               Title.Caption = 'Valor AFRMM'
+              Width = 64
               Visible = True
             end
             item
@@ -2359,6 +2361,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'TIPO_INTERMEDIO'
               Title.Alignment = taCenter
               Title.Caption = 'Tipo Interm'#233'dio'
+              Width = 64
               Visible = True
             end
             item
@@ -2367,6 +2370,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'CNPJ'
               Title.Alignment = taCenter
               Title.Caption = 'CNPJ Terceiro'
+              Width = 64
               Visible = True
             end
             item
@@ -2375,6 +2379,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
               FieldName = 'UF_TERCEIRO'
               Title.Alignment = taCenter
               Title.Caption = 'UF Terceiro'
+              Width = 64
               Visible = True
             end>
         end

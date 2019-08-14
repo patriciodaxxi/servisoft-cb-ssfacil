@@ -15193,7 +15193,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'select p.id_csticms'
+      'select p.id_csticms, P.ID_LEI'
       'from pessoa_prodicms p'
       'WHERE P.CODIGO = :CODIGO'
       '  and p.ID_PRODUTO = :ID_PRODUTO')
@@ -15202,6 +15202,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 146
     object qPessoa_ProdICMSID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
+    end
+    object qPessoa_ProdICMSID_LEI: TIntegerField
+      FieldName = 'ID_LEI'
     end
   end
 end
