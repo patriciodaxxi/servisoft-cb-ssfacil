@@ -3061,6 +3061,13 @@ type
     cdsPedidoESPESSURA: TFloatField;
     cdsPedido_TipoESPESSURA: TFloatField;
     cdsProdutoPERC_ICMS_NFCE: TFloatField;
+    qParametros_ProdCONTROLAR_PROD_ST: TStringField;
+    cdsProdutoCALCULAR_ST: TStringField;
+    qParametros_NFeUSA_REGRA_CLI_PROD: TStringField;
+    qPessoa_ProdICMS: TSQLQuery;
+    qPessoa_ProdICMSID_CSTICMS: TIntegerField;
+    qPessoa_ProdICMSID_LEI: TIntegerField;
+    cdsCFOPUSA_NAO_CONTR_FISICA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

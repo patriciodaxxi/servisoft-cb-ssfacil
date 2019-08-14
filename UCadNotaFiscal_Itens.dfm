@@ -154,7 +154,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'Varia'#231#227'o CFOP:'
       end
       object RxDBLookupCombo1: TRxDBLookupCombo
-        Left = 148
+        Left = 149
         Top = 4
         Width = 89
         Height = 21
@@ -983,6 +983,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
             LookupField = 'ID'
             LookupDisplay = 'NCM'
             LookupSource = DMCadNotaFiscal.dsTab_NCM
+            ReadOnly = True
             TabOrder = 2
             TabStop = False
             OnEnter = RxDBLookupCombo5Enter

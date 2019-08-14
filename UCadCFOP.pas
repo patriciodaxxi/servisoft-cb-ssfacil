@@ -143,6 +143,7 @@ type
     Label26: TLabel;
     RxDBComboBox4: TRxDBComboBox;
     DBCheckBox24: TDBCheckBox;
+    DBCheckBox25: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

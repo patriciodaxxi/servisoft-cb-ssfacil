@@ -1948,6 +1948,10 @@ type
     cdsGrupoNOME_SUPERIOR: TStringField;
     cdsCFOPCONTROLAR_CONFIG: TStringField;
     cdsCSTICMSTIPO_ICMS: TStringField;
+    sdsProdutoCALCULAR_ST: TStringField;
+    cdsProdutoCALCULAR_ST: TStringField;
+    qParametros_ProdCONTROLAR_PROD_ST: TStringField;
+    cdsNCMGERAR_ST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

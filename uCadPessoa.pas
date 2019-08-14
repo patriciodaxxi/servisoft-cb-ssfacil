@@ -570,6 +570,7 @@ type
     Edit1: TEdit;
     Label199: TLabel;
     Edit2: TEdit;
+    btnFiscalProduto: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -681,6 +682,7 @@ type
     procedure DBEdit7Exit(Sender: TObject);
     procedure btnCopiar_FilClick(Sender: TObject);
     procedure btnConfDescontosClick(Sender: TObject);
+    procedure btnFiscalProdutoClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -720,7 +722,8 @@ var
 implementation
 
 uses
-  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa, USel_ContaOrc, USel_EnqIPI, USel_Atividade, UVendedor_Config;
+  UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa, USel_ContaOrc, USel_EnqIPI, USel_Atividade, UVendedor_Config,
+  UCadPessoa_ProdICMS;
 
 {$R *.dfm}
 
@@ -861,6 +864,8 @@ begin
   RxDBLookupCombo45.Visible := (fDMCadPessoa.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
   Label199.Visible         := (fDMCadPessoa.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
   Edit2.Visible            := (fDMCadPessoa.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+
+  btnFiscalProduto.Visible := (fDMCadPessoa.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S');
 end;
 
 procedure TfrmCadPessoa.btnInserirClick(Sender: TObject);
@@ -1077,6 +1082,10 @@ begin
     fDMCadPessoa.cdsPessoa_Fil.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_RefP.ApplyUpdates(0);
     fDMCadPessoa.cdsPessoa_RefC.ApplyUpdates(0);
+    //13/08/2019
+    if fDMCadPessoa.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S' then
+      fDMCadPessoa.cdsPessoa_ProdICMS.ApplyUpdates(0);
+    //**************
     if (fDMCadPessoa.cdsVendedor_Config.Active) then
       fDMCadPessoa.cdsVendedor_Config.ApplyUpdates(0);
     if fDMCadPessoa.cdsPessoa_Fisica.State in [dsEdit, dsInsert] then
@@ -1633,6 +1642,13 @@ begin
   fDMCadPessoa.cdsPessoa_Fil.Close;
   fDMCadPessoa.sdsPessoa_Fil.ParamByName('CODIGO').AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
   fDMCadPessoa.cdsPessoa_Fil.Open;
+
+  if fDMCadPessoa.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S' then
+  begin
+    fDMCadPessoa.cdsPessoa_ProdICMS.Close;
+    fDMCadPessoa.sdsPessoa_ProdICMS.ParamByName('CODIGO').AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
+    fDMCadPessoa.cdsPessoa_ProdICMS.Open;
+  end;
 end;
 
 procedure TfrmCadPessoa.Panel3Enter(Sender: TObject);
@@ -2593,6 +2609,14 @@ begin
   frmVendedor_Config.fDMCadPessoa := fDMCadPessoa;
   frmVendedor_Config.ShowModal;
   FreeAndNil(frmVendedor_Config);
+end;
+
+procedure TfrmCadPessoa.btnFiscalProdutoClick(Sender: TObject);
+begin
+  frmCadPessoa_ProdICMS := TfrmCadPessoa_ProdICMS.Create(self);
+  frmCadPessoa_ProdICMS.fDMCadPessoa := fDMCadPessoa;
+  frmCadPessoa_ProdICMS.ShowModal;
+  FreeAndNil(frmCadPessoa_ProdICMS);
 end;
 
 end.

@@ -139,6 +139,22 @@ type
     CurrencyEdit9: TCurrencyEdit;
     Shape3: TShape;
     Label40: TLabel;
+    TabSheet1: TRzTabSheet;
+    GroupBox4: TGroupBox;
+    Label41: TLabel;
+    Label42: TLabel;
+    RxDBLookupCombo8: TRxDBLookupCombo;
+    btnInserir_Lei: TNxButton;
+    btnExcluir_Lei: TNxButton;
+    RxDBLookupCombo9: TRxDBLookupCombo;
+    Label43: TLabel;
+    RxDBLookupCombo11: TRxDBLookupCombo;
+    Panel3: TPanel;
+    Label44: TLabel;
+    DBMemo1: TDBMemo;
+    SMDBGrid5: TSMDBGrid;
+    Label45: TLabel;
+    Edit1: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -183,6 +199,8 @@ type
     procedure GroupBox2Enter(Sender: TObject);
     procedure GroupBox2Exit(Sender: TObject);
     procedure GroupBox3Enter(Sender: TObject);
+    procedure btnInserir_LeiClick(Sender: TObject);
+    procedure btnExcluir_LeiClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadNCM: TDMCadNCM;
@@ -202,6 +220,7 @@ type
     
   public
     { Public declarations }
+    
   end;
 
 var
@@ -289,6 +308,8 @@ begin
 
   Shape2.Visible  := (fDMCadNCM.qParametrosTIPO_LEI_TRANSPARENCIA.AsString = 'I');
   Label27.Visible := (fDMCadNCM.qParametrosTIPO_LEI_TRANSPARENCIA.AsString = 'I');
+  if trim(edtNCM.Text) <> '' then
+    btnConsultarClick(Sender);
 end;
 
 procedure TfrmCadNCM.prc_Consultar;
@@ -517,7 +538,7 @@ procedure TfrmCadNCM.btnPesquisarClick(Sender: TObject);
 begin
   pnlPesquisa.Visible := not(pnlPesquisa.Visible);
   if pnlPesquisa.Visible then
-    edtNome.SetFocus
+    edtNCM.SetFocus
   else
     prc_Limpar_Edit_Consulta;
 end;
@@ -577,6 +598,8 @@ begin
   btnGerador_CST.Enabled   := not(btnGerador_CST.Enabled);
   btnInserir_Unid.Enabled  := not(btnInserir_Unid.Enabled);
   btnExcluir_Uni.Enabled   := not(btnExcluir_Uni.Enabled);
+  btnInserir_Lei.Enabled   := not(btnInserir_Lei.Enabled);
+  btnExcluir_Lei.Enabled   := not(btnExcluir_Lei.Enabled);
 end;
 
 procedure TfrmCadNCM.RxDBLookupCombo1Exit(Sender: TObject);
@@ -1003,6 +1026,48 @@ end;
 procedure TfrmCadNCM.GroupBox3Enter(Sender: TObject);
 begin
   fDMCadNCM.prc_Abrir_Unidade_Conv(fDMCadNCM.cdsNCMUNIDADE_TRIB.AsString);
+end;
+
+procedure TfrmCadNCM.btnInserir_LeiClick(Sender: TObject);
+var
+  vItem : Integer;
+begin
+  if (RxDBLookupCombo8.Text = '') or (RxDBLookupCombo9.Text = '') or (RxDBLookupCombo11.Text = '') then
+  begin
+    MessageDlg('*** É obrigatório informar a CFOP, CST ICMS, e a LEI!', mtError, [mbOk], 0);
+    RxDBLookupCombo8.SetFocus;
+    exit;
+  end;
+
+  fDMCadNCM.cdsNCM_LEI.Last;
+  vItem := fDMCadNCM.cdsNCM_LEIITEM.AsInteger;
+
+  fDMCadNCM.cdsNCM_LEI.Insert;
+  fDMCadNCM.cdsNCM_LEIID.AsInteger := fDMCadNCM.cdsNCMID.AsInteger;
+  fDMCadNCM.cdsNCM_LEIITEM.AsInteger := vItem + 1;
+  fDMCadNCM.cdsNCM_LEIID_CFOP.AsInteger := RxDBLookupCombo8.KeyValue;
+  fDMCadNCM.cdsNCM_LEIID_CST_ICM.AsInteger := RxDBLookupCombo9.KeyValue;
+  fDMCadNCM.cdsNCM_LEIID_LEI.AsInteger     := RxDBLookupCombo11.KeyValue;
+  if trim(Edit1.Text) <> '' then
+    fDMCadNCM.cdsNCM_LEICOMPLEMENTO.AsString := Edit1.Text
+  else
+    fDMCadNCM.cdsNCM_LEICOMPLEMENTO.Clear;
+  fDMCadNCM.cdsNCM_LEI.Post;
+
+  RxDBLookupCombo8.ClearValue;
+  RxDBLookupCombo9.ClearValue;
+  RxDBLookupCombo11.ClearValue;
+  Edit1.Clear;
+  RxDBLookupCombo8.SetFocus;
+end;
+
+procedure TfrmCadNCM.btnExcluir_LeiClick(Sender: TObject);
+begin
+  if fDMCadNCM.cdsNCM_LEI.IsEmpty then
+    exit;
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+  fDMCadNCM.cdsNCM_LEI.Delete;
 end;
 
 end.

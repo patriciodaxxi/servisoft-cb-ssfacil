@@ -3,8 +3,8 @@ object DMNFe: TDMNFe
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Left = 182
-  Top = 81
-  Height = 603
+  Top = 37
+  Height = 647
   Width = 1098
   object sdsNFe_Email: TSQLDataSet
     NoMetadata = True
@@ -784,7 +784,7 @@ object DMNFe: TDMNFe
       'FROM PESSOA'
       'WHERE CODIGO = :CODIGO')
     SQLConnection = dmDatabase.scoDados
-    Left = 432
+    Left = 431
     Top = 136
     object qClienteCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -1900,7 +1900,7 @@ object DMNFe: TDMNFe
     BeforePost = mItensNFeBeforePost
     OnNewRecord = mItensNFeNewRecord
     Left = 224
-    Top = 424
+    Top = 423
     Data = {
       1A0A00009619E0BD01000000180000006A0000000000030000001A0A0646696C
       69616C0400010000000000074E756D4E6F74610400010000000000084974656D
@@ -2360,6 +2360,11 @@ object DMNFe: TDMNFe
         Name = 'OBS'
         DataType = ftWideString
         Size = 500
+      end
+      item
+        Name = 'Complemento'
+        DataType = ftString
+        Size = 100
       end>
     IndexDefs = <
       item
@@ -2372,13 +2377,14 @@ object DMNFe: TDMNFe
     Params = <>
     StoreDefs = True
     OnNewRecord = mAuxDadosNFeNewRecord
-    Left = 192
-    Top = 424
+    Left = 191
+    Top = 421
     Data = {
-      900000009619E0BD010000001800000004000000000003000000900004546970
+      B00000009619E0BD010000001800000005000000000003000000B00004546970
       6F010049000000010005574944544802000200030006436F6469676F01004900
       000001000557494454480200020007000B49445F566172696163616F04000100
-      00000000034F425302004A000000010005574944544802000200E80301000D44
+      00000000034F425302004A000000010005574944544802000200E8030B436F6D
+      706C656D656E746F010049000000010005574944544802000200640001000D44
       454641554C545F4F524445520200820000000000}
     object mAuxDadosNFeTipo: TStringField
       FieldName = 'Tipo'
@@ -2394,6 +2400,10 @@ object DMNFe: TDMNFe
     object mAuxDadosNFeOBS: TWideStringField
       FieldName = 'OBS'
       Size = 500
+    end
+    object mAuxDadosNFeComplemento: TStringField
+      FieldName = 'Complemento'
+      Size = 100
     end
   end
   object mDadosAdicionaisNFe: TClientDataSet
@@ -5045,6 +5055,11 @@ object DMNFe: TDMNFe
       FieldName = 'MSG_SIMPLES_COMP'
       Size = 100
     end
+    object qParametros_NFeUSA_LEI_NCM: TStringField
+      FieldName = 'USA_LEI_NCM'
+      FixedChar = True
+      Size = 1
+    end
   end
   object Decoder64: TIdDecoderMIME
     FillChar = '='
@@ -5999,6 +6014,104 @@ object DMNFe: TDMNFe
     object qNFeNotaNRO_NOTA_FISCAL: TIntegerField
       FieldName = 'NRO_NOTA_FISCAL'
       Required = True
+    end
+  end
+  object qNCM_Lei: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_CFOP'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_CST_ICM'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select T.*, L.obs'
+      'from tab_ncm_lei T'
+      'INNER JOIN OBS_LEI L'
+      'ON T.id_lei = L.ID'
+      'WHERE T.ID = :ID'
+      '  AND T.id_cfop = :ID_CFOP'
+      '  AND T.id_cst_icm = :ID_CST_ICM')
+    SQLConnection = dmDatabase.scoDados
+    Left = 531
+    Top = 333
+    object qNCM_LeiID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qNCM_LeiITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object qNCM_LeiID_CFOP: TIntegerField
+      FieldName = 'ID_CFOP'
+    end
+    object qNCM_LeiID_CST_ICM: TIntegerField
+      FieldName = 'ID_CST_ICM'
+    end
+    object qNCM_LeiID_LEI: TIntegerField
+      FieldName = 'ID_LEI'
+    end
+    object qNCM_LeiCOMPLEMENTO: TStringField
+      FieldName = 'COMPLEMENTO'
+      Size = 200
+    end
+    object qNCM_LeiOBS: TStringField
+      FieldName = 'OBS'
+      Size = 250
+    end
+  end
+  object sdsItensNCM: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select distinct L.id_lei, L.complemento, O.obs'#13#10'from notafiscal_' +
+      'itens I'#13#10'INNER JOIN TAB_NCM NCM'#13#10'ON I.ID_NCM = NCM.ID'#13#10'INNER JOI' +
+      'N TAB_NCM_LEI L'#13#10'ON I.ID_NCM = L.ID'#13#10'AND I.ID_CFOP = L.id_cfop'#13#10 +
+      'AND I.id_csticms = L.id_cst_icm'#13#10'INNER JOIN OBS_LEI O'#13#10'ON L.id_l' +
+      'ei = O.ID'#13#10'where i.ID = :ID'#13#10#13#10#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 129
+    Top = 548
+  end
+  object dspItensNCM: TDataSetProvider
+    DataSet = sdsItensNCM
+    Left = 168
+    Top = 549
+  end
+  object cdsItensNCM: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspItensNCM'
+    Left = 208
+    Top = 548
+    object cdsItensNCMID_LEI: TIntegerField
+      FieldName = 'ID_LEI'
+    end
+    object cdsItensNCMCOMPLEMENTO: TStringField
+      FieldName = 'COMPLEMENTO'
+      Size = 200
+    end
+    object cdsItensNCMOBS: TStringField
+      FieldName = 'OBS'
+      Size = 250
     end
   end
 end

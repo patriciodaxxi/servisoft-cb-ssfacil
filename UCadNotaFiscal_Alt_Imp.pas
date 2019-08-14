@@ -197,6 +197,8 @@ type
     DBEdit67: TDBEdit;
     Label83: TLabel;
     DBEdit68: TDBEdit;
+    Label84: TLabel;
+    RxDBLookupCombo4: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);

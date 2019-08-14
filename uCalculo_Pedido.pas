@@ -1318,6 +1318,12 @@ begin
   else
     vID_NCM := fDMCadPedido.cdsProdutoID_NCM.AsInteger;
   fDMCadPedido.cdsTab_NCM.Locate('ID',vID_NCM,([Locaseinsensitive]));
+
+  //Incluido 13/08/2019  para controlar os produtos que não calculam ST dentro de um NCM que calcula
+  if (fDMCadPedido.qParametros_ProdCONTROLAR_PROD_ST.AsString = 'S') and (fDMCadPedido.cdsProdutoCALCULAR_ST.AsString = 'N') then
+    exit;
+  //*********************
+
   if (fDMCadPedido.cdsFilialSIMPLES.AsString = 'S') and (fDMCadPedido.cdsTab_NCMUSAR_MVA_UF_DESTINO.AsString <> 'S') then
     vUF := fDMCadPedido.cdsFilialUF.AsString
   else

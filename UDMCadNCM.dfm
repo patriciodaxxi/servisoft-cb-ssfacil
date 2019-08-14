@@ -312,6 +312,7 @@ object DMCadNCM: TDMCadNCM
     Top = 80
   end
   object cdsNCM: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -423,8 +424,12 @@ object DMCadNCM: TDMCadNCM
       FieldName = 'IBPT_INATIVO'
       Size = 1
     end
+    object cdsNCMsdsNCM_Lei: TDataSetField
+      FieldName = 'sdsNCM_Lei'
+    end
   end
   object cdsNCM_UF: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsNCMsdsNCM_UF
     IndexFieldNames = 'ID;ITEM'
@@ -582,6 +587,7 @@ object DMCadNCM: TDMCadNCM
     end
   end
   object cdsNCM_CST: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsNCMsdsNCM_CST
     IndexFieldNames = 'ID;ITEM'
@@ -1166,6 +1172,7 @@ object DMCadNCM: TDMCadNCM
     end
   end
   object cdsNCM_Uni: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsNCMsdsNCM_Uni
     IndexFieldNames = 'ID;UNIDADE'
@@ -1484,12 +1491,134 @@ object DMCadNCM: TDMCadNCM
       'SELECT TIPO_LEI_TRANSPARENCIA'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 312
-    Top = 328
+    Left = 372
+    Top = 354
     object qParametrosTIPO_LEI_TRANSPARENCIA: TStringField
       FieldName = 'TIPO_LEI_TRANSPARENCIA'
       FixedChar = True
       Size = 1
+    end
+  end
+  object sdsNCM_Lei: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM TAB_NCM_LEI'#13#10'WHERE ID = :ID'
+    DataSource = sdsNCM_Mestre
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Size = 4
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 85
+    Top = 336
+    object sdsNCM_LeiID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsNCM_LeiITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsNCM_LeiID_CFOP: TIntegerField
+      FieldName = 'ID_CFOP'
+    end
+    object sdsNCM_LeiID_CST_ICM: TIntegerField
+      FieldName = 'ID_CST_ICM'
+    end
+    object sdsNCM_LeiID_LEI: TIntegerField
+      FieldName = 'ID_LEI'
+    end
+    object sdsNCM_LeiCOMPLEMENTO: TStringField
+      FieldName = 'COMPLEMENTO'
+      Size = 200
+    end
+  end
+  object cdsNCM_LEI: TClientDataSet
+    Aggregates = <>
+    DataSetField = cdsNCMsdsNCM_Lei
+    IndexFieldNames = 'ID;ITEM'
+    Params = <>
+    OnCalcFields = cdsNCM_LEICalcFields
+    Left = 175
+    Top = 334
+    object cdsNCM_LEIID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsNCM_LEIITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsNCM_LEIID_CFOP: TIntegerField
+      FieldName = 'ID_CFOP'
+    end
+    object cdsNCM_LEIID_CST_ICM: TIntegerField
+      FieldName = 'ID_CST_ICM'
+    end
+    object cdsNCM_LEIID_LEI: TIntegerField
+      FieldName = 'ID_LEI'
+    end
+    object cdsNCM_LEICOMPLEMENTO: TStringField
+      FieldName = 'COMPLEMENTO'
+      Size = 200
+    end
+    object cdsNCM_LEICOD_CST: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'COD_CST'
+      ProviderFlags = []
+      Size = 3
+      Calculated = True
+    end
+    object cdsNCM_LEICODCFOP: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'CODCFOP'
+      ProviderFlags = []
+      Size = 5
+      Calculated = True
+    end
+    object cdsNCM_LEIOBS_LEI: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'OBS_LEI'
+      ProviderFlags = []
+      Size = 250
+      Calculated = True
+    end
+  end
+  object dsNCM_Lei: TDataSource
+    DataSet = cdsNCM_LEI
+    Left = 250
+    Top = 334
+  end
+  object qCFOP: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT ID, CODCFOP'
+      'FROM TAB_CFOP'
+      'WHERE ID = :ID')
+    SQLConnection = dmDatabase.scoDados
+    Left = 796
+    Top = 479
+    object qCFOPID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qCFOPCODCFOP: TStringField
+      FieldName = 'CODCFOP'
+      Size = 5
     end
   end
 end

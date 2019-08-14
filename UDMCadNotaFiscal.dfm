@@ -4199,8 +4199,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'ICMS_DIFERIDO, T.USA_REGRA_ORGAO_PUBLICO, t.id_cofins_simp, t.id' +
       '_pis_simp,'#13#10't.perc_pis_simp, t.perc_cofins_simp, t.tipo_pis_simp' +
       ', t.tipo_cofins_simp,'#13#10'T.NFEFINALIDADE, T.GERAR_CUSTO_MEDIO, T.D' +
-      'EVOLUCAO, t.usa_unidade_trib, T.ALT_NCM_CUSTO, T.ENVIAR_BASE_ST'#13 +
-      #10'FROM TAB_CFOP T'
+      'EVOLUCAO, t.usa_unidade_trib, T.ALT_NCM_CUSTO, '#13#10'T.ENVIAR_BASE_S' +
+      'T, T.USA_NAO_CONTR_FISICA'#13#10'FROM TAB_CFOP T'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -4415,6 +4415,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsCFOPENVIAR_BASE_ST: TStringField
       FieldName = 'ENVIAR_BASE_ST'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCFOPUSA_NAO_CONTR_FISICA: TStringField
+      FieldName = 'USA_NAO_CONTR_FISICA'
       FixedChar = True
       Size = 1
     end
@@ -5161,22 +5166,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT P.ID'#13#10', P.REFERENCIA'#13#10', P.NOME'#13#10', P.UNIDADE'#13#10', P.PESOLIQU' +
-      'IDO'#13#10', P.PESOBRUTO'#13#10', P.INATIVO'#13#10', P.ID_CSTIPI'#13#10', P.PERC_IPI'#13#10', ' +
-      'P.PRECO_CUSTO'#13#10', P.PRECO_VENDA, P.TIPO_REG'#13#10', P.ESTOQUE'#13#10', P.MAT' +
-      'ERIAL_OUTROS'#13#10', P.CA'#13#10', P.COMPLEMENTO'#13#10', P.ID_NCM'#13#10', P.ORIGEM_PR' +
-      'OD'#13#10', P.CODSITCF'#13#10', P.PERC_REDUCAOICMS'#13#10', P.TIPO_VENDA'#13#10', P.COD_' +
-      'BARRA'#13#10', P.PERC_IMPORTACAO'#13#10', P.DT_ALTPRECO'#13#10', P.PERC_REDUCAOICM' +
-      'SSUBST'#13#10', P.USA_GRADE'#13#10', P.ID_GRADE'#13#10', P.USA_PERC_IMP_INTERESTAD' +
-      'UAL'#13#10', P.PERC_PIS'#13#10', P.PERC_COFINS'#13#10', P.PERC_ICMS_IMP'#13#10', P.PERC_' +
-      'IPI_IMP'#13#10',P.NUM_FCI'#13#10',P.NCM_EX, P.ID_CLIENTE'#13#10',PRECO_REVENDA'#13#10',P' +
-      'RECO_INDUSTRIALIZACAO'#13#10',PRECO_CONSUMO'#13#10',ID_CONTA_ORCAMENTO'#13#10',ID_' +
-      'ENQIPI'#13#10',ID_CFOP_NFCE'#13#10',LANCA_LOTE_CONTROLE'#13#10',COD_CEST'#13#10',P.COD_P' +
-      'RODUTO_CLI'#13#10',P.NUM_MS'#13#10',IMP_CONSUMO_NFE'#13#10',DT_ALT_PRECOCUSTO'#13#10',PR' +
-      'ECO_CUSTO_TOTAL'#13#10',PERC_MARGEMLUCRO'#13#10',PERC_DESC_MAX'#13#10',SPED_TIPO_I' +
-      'TEM'#13#10',ID_CSTICMS_BRED'#13#10',USA_PRECO_COR'#13#10',TAMANHO'#13#10',COD_BARRA2'#13#10',Q' +
-      'TD_EMBALAGEM'#13#10',ID_MARCA'#13#10',UNIDADE2'#13#10',ID_CSTICMS'#13#10',P.NOME_MODELO'#13 +
-      #10',P.perc_icms_nfce'#13#10'FROM PRODUTO P'#13#10#13#10
+      'SELECT P.ID, P.REFERENCIA, P.NOME, P.UNIDADE, P.PESOLIQUIDO, P.P' +
+      'ESOBRUTO, P.INATIVO'#13#10', P.ID_CSTIPI, P.PERC_IPI, P.PRECO_CUSTO, P' +
+      '.PRECO_VENDA, P.TIPO_REG, P.ESTOQUE'#13#10', P.MATERIAL_OUTROS, P.CA, ' +
+      'P.COMPLEMENTO, P.ID_NCM, P.ORIGEM_PROD, P.CODSITCF, P.PERC_REDUC' +
+      'AOICMS'#13#10', P.TIPO_VENDA, P.COD_BARRA, P.PERC_IMPORTACAO, P.DT_ALT' +
+      'PRECO, P.PERC_REDUCAOICMSSUBST, P.USA_GRADE'#13#10', P.ID_GRADE, P.USA' +
+      '_PERC_IMP_INTERESTADUAL, P.PERC_PIS, P.PERC_COFINS, P.PERC_ICMS_' +
+      'IMP, P.PERC_IPI_IMP'#13#10',P.NUM_FCI,P.NCM_EX, P.ID_CLIENTE,PRECO_REV' +
+      'ENDA,PRECO_INDUSTRIALIZACAO,PRECO_CONSUMO'#13#10',ID_CONTA_ORCAMENTO,I' +
+      'D_ENQIPI,ID_CFOP_NFCE,LANCA_LOTE_CONTROLE,COD_CEST,P.COD_PRODUTO' +
+      '_CLI'#13#10',P.NUM_MS,IMP_CONSUMO_NFE,DT_ALT_PRECOCUSTO,PRECO_CUSTO_TO' +
+      'TAL,PERC_MARGEMLUCRO'#13#10',PERC_DESC_MAX,SPED_TIPO_ITEM,ID_CSTICMS_B' +
+      'RED,USA_PRECO_COR,TAMANHO,COD_BARRA2,QTD_EMBALAGEM'#13#10',ID_MARCA,UN' +
+      'IDADE2,ID_CSTICMS,P.NOME_MODELO,P.perc_icms_nfce, P.CALCULAR_ST'#13 +
+      #10'FROM PRODUTO P'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -5420,6 +5424,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsProdutoPERC_ICMS_NFCE: TFloatField
       FieldName = 'PERC_ICMS_NFCE'
+    end
+    object cdsProdutoCALCULAR_ST: TStringField
+      FieldName = 'CALCULAR_ST'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsProduto: TDataSource
@@ -12858,6 +12867,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeUSA_REGRA_CLI_PROD: TStringField
+      FieldName = 'USA_REGRA_CLI_PROD'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoqueLoteAux: TSQLDataSet
     NoMetadata = True
@@ -13386,6 +13400,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object qParametros_ProdMOSTRA_PROD_TPRECO: TStringField
       FieldName = 'MOSTRA_PROD_TPRECO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdCONTROLAR_PROD_ST: TStringField
+      FieldName = 'CONTROLAR_PROD_ST'
       FixedChar = True
       Size = 1
     end
@@ -15163,6 +15182,34 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'LOTE_TEXTIL'
       FixedChar = True
       Size = 1
+    end
+  end
+  object qPessoa_ProdICMS: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUTO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select p.id_csticms, P.ID_LEI'
+      'from pessoa_prodicms p'
+      'WHERE P.CODIGO = :CODIGO'
+      '  and p.ID_PRODUTO = :ID_PRODUTO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1216
+    Top = 146
+    object qPessoa_ProdICMSID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
+    end
+    object qPessoa_ProdICMSID_LEI: TIntegerField
+      FieldName = 'ID_LEI'
     end
   end
 end

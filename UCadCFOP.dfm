@@ -150,7 +150,6 @@ object frmCadCFOP: TfrmCadCFOP
           item
             Expanded = False
             FieldName = 'NOME_INTERNO'
-            Width = 64
             Visible = True
           end>
       end
@@ -1186,6 +1185,20 @@ object frmCadCFOP: TfrmCadCFOP
             DataSource = DMCadCFOP.dsCFOP
             ParentCtl3D = False
             TabOrder = 10
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
+          end
+          object DBCheckBox25: TDBCheckBox
+            Left = 162
+            Top = 46
+            Width = 186
+            Height = 17
+            Caption = 'Usar N'#227'o Contrib.Como P.F'#237'sica'
+            Ctl3D = False
+            DataField = 'USA_NAO_CONTR_FISICA'
+            DataSource = DMCadCFOP.dsCFOP
+            ParentCtl3D = False
+            TabOrder = 11
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end

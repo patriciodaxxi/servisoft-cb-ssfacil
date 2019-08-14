@@ -577,6 +577,7 @@ var
   vAux: Real;
   vUsouICM: Boolean;
   vIDAux: Integer;
+  vUsouRegraCli : Boolean;
 begin
   vID_ICMS := 0;
   vID_IPI  := 0;
@@ -753,6 +754,23 @@ begin
   if (StrToFloat(FormatFloat('0.00',vPerc_IPI_Suf)) > 0) and (fDMCadPedido.qPessoa_FiscalID_CST_IPI_SUFRAMA.AsInteger > 0) then
     vID_IPI := fDMCadPedido.qPessoa_FiscalID_CST_IPI_SUFRAMA.AsInteger;
   //******************
+
+  //13/08/2019
+  vUsouRegraCli := False;
+  if fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S' then
+  begin
+    fDMCadPedido.qPessoa_ProdICMS.Close;
+    fDMCadPedido.qPessoa_ProdICMS.ParamByName('CODIGO').AsInteger     := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger;
+    fDMCadPedido.qPessoa_ProdICMS.ParamByName('ID_PRODUTO').AsInteger := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
+    fDMCadPedido.qPessoa_ProdICMS.Open;
+    if not fDMCadPedido.qPessoa_ProdICMS.IsEmpty then
+    begin
+      vID_ICMS := fDMCadPedido.qPessoa_ProdICMSID_CSTICMS.AsInteger;
+      vUsouRegraCli := True;
+    end;
+  end;
+  //*******************
+
   if vID_ICMS > 0 then
     fDMCadPedido.cdsPedido_ItensID_CSTICMS.AsInteger := vID_ICMS;
   if vID_IPI > 0 then
@@ -765,7 +783,10 @@ begin
     fDMCadPedido.cdsPedido_ItensPERC_TRIBICMS.AsFloat := 0;
   if (fDMCadPedido.cdsTab_CSTICMSCOD_CST.AsString <> '00') and (fDMCadPedido.cdsFilialSIMPLES.AsString <> 'S') and
      (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0) then
-    fDMCadPedido.cdsPedido_ItensPERC_TRIBICMS.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoPERC_REDUCAOICMS.AsFloat));
+  begin
+    if not vUsouRegraCli then
+      fDMCadPedido.cdsPedido_ItensPERC_TRIBICMS.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoPERC_REDUCAOICMS.AsFloat));
+  end;
 
   if (fDMCadPedido.cdsFilialSIMPLES.AsString = 'S') or (fDMCadPedido.cdsCFOPGERAR_ICMS.AsString <> 'S') then
     fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat := 0

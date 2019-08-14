@@ -1701,8 +1701,8 @@ object DMCadPedido: TDMCadPedido
       #10', P.PERC_IPI_IMP, P.ID_GRUPO, P.USA_PRECO_COR, P.PERC_COMISSAO,' +
       'P.PICTOGRAMA,P.PERC_DESC_MAX,P.ID_CFOP_NFCE,SPED_TIPO_ITEM,ID_CS' +
       'TICMS_BRED'#13#10',P.PERC_MARGEMLUCRO,P.TAMANHO,P.QTD_EMBALAGEM,P.QTD_' +
-      'PECA_EMB, P.REF2, P.FATOR_CALCULO, P.ID_CSTICMS'#13#10'FROM PRODUTO P'#13 +
-      #10#13#10#13#10
+      'PECA_EMB, P.REF2, P.FATOR_CALCULO, P.ID_CSTICMS, P.CALCULAR_ST'#13#10 +
+      'FROM PRODUTO P'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1892,6 +1892,11 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsProdutoID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
+    end
+    object cdsProdutoCALCULAR_ST: TStringField
+      FieldName = 'CALCULAR_ST'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsProduto: TDataSource
@@ -15244,6 +15249,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeUSA_REGRA_CLI_PROD: TStringField
+      FieldName = 'USA_REGRA_CLI_PROD'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qIcmsPartilha: TSQLQuery
     MaxBlobSize = -1
@@ -16400,6 +16410,11 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_ProdUSA_TAB_PRECO_ENG: TStringField
       FieldName = 'USA_TAB_PRECO_ENG'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdCONTROLAR_PROD_ST: TStringField
+      FieldName = 'CONTROLAR_PROD_ST'
       FixedChar = True
       Size = 1
     end
@@ -17818,7 +17833,7 @@ object DMCadPedido: TDMCadPedido
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 1160
-    Top = 63
+    Top = 64
   end
   object qPedOS: TSQLQuery
     MaxBlobSize = -1
@@ -18221,5 +18236,30 @@ object DMCadPedido: TDMCadPedido
     BCDToCurrency = False
     Left = 1152
     Top = 156
+  end
+  object qPessoa_ProdICMS: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUTO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select p.id_csticms'
+      'from pessoa_prodicms p'
+      'WHERE P.CODIGO = :CODIGO'
+      '  and p.ID_PRODUTO = :ID_PRODUTO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1298
+    Top = 364
+    object qPessoa_ProdICMSID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
+    end
   end
 end

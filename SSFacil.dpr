@@ -820,7 +820,8 @@ uses
   UConsEstoque2 in 'UConsEstoque2.pas' {frmConsEstoque2},
   UDMComissaoVend in 'UDMComissaoVend.pas' {DMComissaoVend: TDataModule},
   UComissaoVend in 'UComissaoVend.pas' {frmComissaoVend},
-  UConsProdutoNCM in 'UConsProdutoNCM.pas' {frmConsProdutoNCM};
+  UConsProdutoNCM in 'UConsProdutoNCM.pas' {frmConsProdutoNCM},
+  UCadPessoa_ProdICMS in 'UCadPessoa_ProdICMS.pas' {frmCadPessoa_ProdICMS};
 
 {$R *.res}
 
