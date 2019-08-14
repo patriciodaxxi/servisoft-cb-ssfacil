@@ -7,7 +7,7 @@ uses
   ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, RXDBCtrl, RzChkLst, RzPanel,
   UEscolhe_Filial, URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, 
   NxCollection, StrUtils, DateUtils, UCadDuplicata_Gerar, UDMCadCheque, UCadDuplicata_Alt, UCadDuplicata_EscTipo, RzLstBox,
-  UCadDuplicata_Total, UCadDuplicata_LeItau, SqlExpr, ComCtrls;
+  UCadDuplicata_Total, UCadDuplicata_LeItau, SqlExpr, ComCtrls, ValorPor;
 
 type
   TEnumMostraNossoNumero = (tpTodos,tpSim, tpNao);
@@ -257,6 +257,11 @@ type
     btnRecalcular_CCusto: TNxButton;
     CheckBox2: TCheckBox;
     ICMS1: TMenuItem;
+    Padro1: TMenuItem;
+    Pagamento1: TMenuItem;
+    Recebimento1: TMenuItem;
+    N2: TMenuItem;
+    ValorPorExtenso1: TValorPorExtenso;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -337,7 +342,6 @@ type
     procedure Aprovar1Click(Sender: TObject);
     procedure DBCheckBox11Exit(Sender: TObject);
     procedure btnCobrancaClick(Sender: TObject);
-    procedure RecibodePagamento1Click(Sender: TObject);
     procedure SaldoClienteFornecedor1Click(Sender: TObject);
     procedure Carn1Click(Sender: TObject);
     procedure RzGroupBox4Enter(Sender: TObject);
@@ -347,6 +351,9 @@ type
     procedure btnExcluir_CCustoClick(Sender: TObject);
     procedure btnRecalcular_CCustoClick(Sender: TObject);
     procedure ICMS1Click(Sender: TObject);
+    procedure Padro1Click(Sender: TObject);
+    procedure Pagamento1Click(Sender: TObject);
+    procedure Recebimento1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -392,7 +399,7 @@ type
     procedure prc_Monta_Opcao_Cab;
 
     procedure prc_Gravar_Dup_CCusto(ID : String);
-
+    procedure prc_Imp_Recibo1;
   public
     { Public declarations }
     procedure prc_Posiciona_Duplicata(ID: Integer);
@@ -2857,16 +2864,6 @@ begin
   FreeAndNil(ffrmCadDuplicata_Cob);
 end;
 
-procedure TfrmCadDuplicata.RecibodePagamento1Click(Sender: TObject);
-begin
-  if RxDBLookupCombo1.Text <> '' then
-    vFilial := RxDBLookupCombo1.KeyValue
-  else
-    vFilial := 0;
-  vTipo_Config_Email := 3;
-  prc_Imp_Recibo;
-end;
-
 procedure TfrmCadDuplicata.prc_Imp_Recibo;
 var
   vNumImpressao: Integer;
@@ -3191,6 +3188,85 @@ end;
 procedure TfrmCadDuplicata.prc_Monta_Opcao_Cab;
 begin
 
+end;
+
+procedure TfrmCadDuplicata.Padro1Click(Sender: TObject);
+begin
+  if RxDBLookupCombo1.Text <> '' then
+    vFilial := RxDBLookupCombo1.KeyValue
+  else
+    vFilial := 0;
+  vTipo_Config_Email := 3;
+  prc_Imp_Recibo;
+end;
+
+procedure TfrmCadDuplicata.Pagamento1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  prc_Imp_Recibo1;
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Recibo_Financeiro_Pag.fr3';
+  if FileExists(vArq) then
+    fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatorio não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadDuplicata.frxReport1.ShowReport;
+end;
+
+procedure TfrmCadDuplicata.Recebimento1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  prc_Imp_Recibo1;
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Recibo_Financeiro.fr3';
+  if FileExists(vArq) then
+    fDMCadDuplicata.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatorio não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadDuplicata.frxReport1.ShowReport;
+end;
+
+procedure TfrmCadDuplicata.prc_Imp_Recibo1;
+begin
+  fDmCadDuplicata.mRecibo.EmptyDataSet;
+
+  fDmCadDuplicata.prc_Localizar(fDmCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
+
+  fDmCadDuplicata.cdsFilial.IndexFieldNames := 'ID';
+  fDmCadDuplicata.cdsFilial.FindKey([fDmCadDuplicata.cdsDuplicataFILIAL.AsInteger]);
+
+  if not fDmCadDuplicata.cdsPessoa.Active then
+    fDmCadDuplicata.cdsPessoa.Active := True;
+  fDmCadDuplicata.cdsPessoa.IndexFieldNames := 'CODIGO';
+  fDmCadDuplicata.cdsPessoa.FindKey([fDmCadDuplicata.cdsDuplicataID_PESSOA.AsInteger]);
+
+  fDmCadDuplicata.mRecibo.Insert;
+  fDmCadDuplicata.mReciboFilial.AsString        := fDmCadDuplicata.cdsFilialNOME.AsString;
+  fDmCadDuplicata.mReciboFilial_CEP.AsString    := fDmCadDuplicata.cdsFilialCEP.AsString;
+  fDmCadDuplicata.mReciboFilial_Cidade.AsString := fDmCadDuplicata.cdsFilialCIDADE.AsString;
+  fDmCadDuplicata.mReciboFilial_End.AsString    := fDmCadDuplicata.cdsFilialENDERECO.AsString + ', ' +
+                                                    fDmCadDuplicata.cdsFilialNUM_END.AsString + ' - ' +
+                                                    fDmCadDuplicata.cdsFilialCOMPLEMENTO_END.AsString;
+  fDmCadDuplicata.mReciboFilial_UF.AsString     := fDmCadDuplicata.cdsFilialUF.AsString;
+  fDmCadDuplicata.mReciboFilial_Email.AsString  := fDmCadDuplicata.cdsFilialEMAIL_NFE.AsString;
+  fDmCadDuplicata.mReciboFilial_Fone.AsString   := fDmCadDuplicata.cdsFilialDDD1.AsString + ' ' +
+                                                    fDmCadDuplicata.cdsFilialFONE.AsString;
+  fDmCadDuplicata.mReciboFilial_CNPJ.AsString   := fDmCadDuplicata.cdsFilialCNPJ_CPF.AsString;
+  fDmCadDuplicata.mReciboPessoa_Nome.AsString   := fDmCadDuplicata.cdsPessoaNOME.AsString;
+  fDmCadDuplicata.mReciboPessoa_Doc.AsString    := fDmCadDuplicata.cdsPessoaCNPJ_CPF.AsString;
+//  fDmCadDuplicata.mReciboFinanceiro_Forma.AsString      := fDmCadDuplicata.cdsDuplicata_ConsultaNOME_FORMAPGTO.AsString;
+  fDmCadDuplicata.mReciboFinanceiro_Data.AsString       := fDmCadDuplicata.cdsDuplicata_ConsultaDTULTPAGAMENTO.AsString;
+//  fDmCadDuplicata.mReciboFinanceiro_Descr.AsString      := fDmCadDuplicata.cdsDuplicata_ConsultaHISTORICO_COMPL.AsString;
+  fDmCadDuplicata.mReciboFinanceiro_Valor.AsString      := FormatFloat('#,###,##0.00',fDmCadDuplicata.cdsDuplicata_ConsultaVLR_PAGO.AsFloat);
+  ValorPorExtenso1.Valor := fDmCadDuplicata.cdsDuplicata_ConsultaVLR_PAGO.AsFloat;
+  fDmCadDuplicata.mReciboFinanceiro_VlrExtenso.AsString := ValorPorExtenso1.Texto;
+  fDmCadDuplicata.mRecibo.Post;
 end;
 
 end.

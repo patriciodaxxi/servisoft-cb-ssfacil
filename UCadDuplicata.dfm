@@ -4342,8 +4342,22 @@ object frmCadDuplicata: TfrmCadDuplicata
       OnClick = Boleto1Click
     end
     object RecibodePagamento1: TMenuItem
-      Caption = 'Recibo de Pagamento'
-      OnClick = RecibodePagamento1Click
+      Caption = 'Recibos'
+      object Padro1: TMenuItem
+        Caption = 'Padr'#227'o'
+        OnClick = Padro1Click
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object Pagamento1: TMenuItem
+        Caption = 'Pagamento'
+        OnClick = Pagamento1Click
+      end
+      object Recebimento1: TMenuItem
+        Caption = 'Recebimento'
+        OnClick = Recebimento1Click
+      end
     end
     object Detalhada1: TMenuItem
       Caption = 'Detalhada'
@@ -4453,5 +4467,13 @@ object frmCadDuplicata: TfrmCadDuplicata
       Caption = 'Aprovar'
       OnClick = Aprovar1Click
     end
+  end
+  object ValorPorExtenso1: TValorPorExtenso
+    MoedaNoSingular = 'Real'
+    MoedaNoPlural = 'Reais'
+    TipoDoTexto = ttMaiuscula
+    Genero = gMasculino
+    Left = 984
+    Top = 104
   end
 end

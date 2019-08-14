@@ -3431,7 +3431,7 @@ object DMCadDuplicata: TDMCadDuplicata
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43399.644061967600000000
-    ReportOptions.LastChange = 43657.479058761570000000
+    ReportOptions.LastChange = 43691.734835370370000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -5459,5 +5459,191 @@ object DMCadDuplicata: TDMCadDuplicata
     BCDToCurrency = False
     Left = 1051
     Top = 520
+  end
+  object dsmRecibo: TDataSource
+    DataSet = mRecibo
+    Left = 728
+    Top = 272
+  end
+  object mRecibo: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Filial'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'Filial_End'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'Filial_Cidade'
+        DataType = ftString
+        Size = 30
+      end
+      item
+        Name = 'Filial_UF'
+        DataType = ftString
+        Size = 2
+      end
+      item
+        Name = 'Filial_CEP'
+        DataType = ftString
+        Size = 9
+      end
+      item
+        Name = 'Pessoa_Nome'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'Pessoa_Doc'
+        DataType = ftString
+        Size = 18
+      end
+      item
+        Name = 'Financeiro_Forma'
+        DataType = ftString
+        Size = 25
+      end
+      item
+        Name = 'Financeiro_Data'
+        DataType = ftDate
+      end
+      item
+        Name = 'Financeiro_Descr'
+        DataType = ftString
+        Size = 200
+      end
+      item
+        Name = 'Filial_Fone'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Filial_Email'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'Financeiro_VlrExtenso'
+        DataType = ftString
+        Size = 150
+      end
+      item
+        Name = 'Filial_CNPJ'
+        DataType = ftString
+        Size = 18
+      end
+      item
+        Name = 'Financeiro_Valor'
+        DataType = ftFloat
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 696
+    Top = 272
+    Data = {
+      F80100009619E0BD01000000180000000F000000000003000000F8010646696C
+      69616C0100490000000100055749445448020002001E000A46696C69616C5F45
+      6E6401004900000001000557494454480200020028000D46696C69616C5F4369
+      646164650100490000000100055749445448020002001E000946696C69616C5F
+      554601004900000001000557494454480200020002000A46696C69616C5F4345
+      5001004900000001000557494454480200020009000B506573736F615F4E6F6D
+      6501004900000001000557494454480200020028000A506573736F615F446F63
+      01004900000001000557494454480200020012001046696E616E636569726F5F
+      466F726D6101004900000001000557494454480200020019000F46696E616E63
+      6569726F5F4461746104000600000000001046696E616E636569726F5F446573
+      6372010049000000010005574944544802000200C8000B46696C69616C5F466F
+      6E6501004900000001000557494454480200020014000C46696C69616C5F456D
+      61696C01004900000001000557494454480200020028001546696E616E636569
+      726F5F566C72457874656E736F01004900000001000557494454480200020096
+      000B46696C69616C5F434E504A01004900000001000557494454480200020012
+      001046696E616E636569726F5F56616C6F7208000400000000000000}
+    object mReciboFilial: TStringField
+      FieldName = 'Filial'
+      Size = 30
+    end
+    object mReciboFilial_End: TStringField
+      FieldName = 'Filial_End'
+      Size = 40
+    end
+    object mReciboFilial_Cidade: TStringField
+      FieldName = 'Filial_Cidade'
+      Size = 30
+    end
+    object mReciboFilial_UF: TStringField
+      FieldName = 'Filial_UF'
+      Size = 2
+    end
+    object mReciboFilial_CEP: TStringField
+      FieldName = 'Filial_CEP'
+      Size = 9
+    end
+    object mReciboPessoa_Nome: TStringField
+      FieldName = 'Pessoa_Nome'
+      Size = 40
+    end
+    object mReciboPessoa_Doc: TStringField
+      FieldName = 'Pessoa_Doc'
+      Size = 18
+    end
+    object mReciboFinanceiro_Forma: TStringField
+      FieldName = 'Financeiro_Forma'
+      Size = 25
+    end
+    object mReciboFinanceiro_Data: TDateField
+      FieldName = 'Financeiro_Data'
+    end
+    object mReciboFinanceiro_Descr: TStringField
+      FieldName = 'Financeiro_Descr'
+      Size = 200
+    end
+    object mReciboFilial_Fone: TStringField
+      FieldName = 'Filial_Fone'
+    end
+    object mReciboFilial_Email: TStringField
+      FieldName = 'Filial_Email'
+      Size = 40
+    end
+    object mReciboFinanceiro_VlrExtenso: TStringField
+      FieldName = 'Financeiro_VlrExtenso'
+      Size = 150
+    end
+    object mReciboFilial_CNPJ: TStringField
+      FieldName = 'Filial_CNPJ'
+      Size = 18
+    end
+    object mReciboFinanceiro_Valor: TFloatField
+      FieldName = 'Financeiro_Valor'
+    end
+  end
+  object frxRecibo: TfrxDBDataset
+    UserName = 'frxRecibo'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'Filial=Filial'
+      'Filial_End=Filial_End'
+      'Filial_Cidade=Filial_Cidade'
+      'Filial_UF=Filial_UF'
+      'Filial_CEP=Filial_CEP'
+      'Pessoa_Nome=Pessoa_Nome'
+      'Pessoa_Doc=Pessoa_Doc'
+      'Financeiro_Forma=Financeiro_Forma'
+      'Financeiro_Data=Financeiro_Data'
+      'Financeiro_Descr=Financeiro_Descr'
+      'Filial_Fone=Filial_Fone'
+      'Filial_Email=Filial_Email'
+      'Financeiro_VlrExtenso=Financeiro_VlrExtenso'
+      'Filial_CNPJ=Filial_CNPJ'
+      'Financeiro_Valor=Financeiro_Valor')
+    DataSet = mRecibo
+    BCDToCurrency = False
+    Left = 760
+    Top = 272
   end
 end

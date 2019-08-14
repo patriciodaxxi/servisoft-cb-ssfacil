@@ -1114,6 +1114,24 @@ type
     cdsDuplicata_ConsultaPERC_TOTAL_NOTA: TFloatField;
     cdsDuplicata_ConsultaVLR_TOTAL_NOTA: TFloatField;
     frxPagto: TfrxDBDataset;
+    dsmRecibo: TDataSource;
+    mRecibo: TClientDataSet;
+    mReciboFilial: TStringField;
+    mReciboFilial_End: TStringField;
+    mReciboFilial_Cidade: TStringField;
+    mReciboFilial_UF: TStringField;
+    mReciboFilial_CEP: TStringField;
+    mReciboPessoa_Nome: TStringField;
+    mReciboPessoa_Doc: TStringField;
+    mReciboFinanceiro_Forma: TStringField;
+    mReciboFinanceiro_Data: TDateField;
+    mReciboFinanceiro_Descr: TStringField;
+    mReciboFilial_Fone: TStringField;
+    mReciboFilial_Email: TStringField;
+    mReciboFinanceiro_VlrExtenso: TStringField;
+    mReciboFilial_CNPJ: TStringField;
+    frxRecibo: TfrxDBDataset;
+    mReciboFinanceiro_Valor: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
@@ -2340,8 +2358,7 @@ begin
 
   finally
     FreeAndNil(sds);
-  end;
-
+  end;                
 end;
 
 end.
