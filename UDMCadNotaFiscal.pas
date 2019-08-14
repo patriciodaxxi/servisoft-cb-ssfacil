@@ -3067,6 +3067,7 @@ type
     qPessoa_ProdICMS: TSQLQuery;
     qPessoa_ProdICMSID_CSTICMS: TIntegerField;
     qPessoa_ProdICMSID_LEI: TIntegerField;
+    cdsCFOPUSA_NAO_CONTR_FISICA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

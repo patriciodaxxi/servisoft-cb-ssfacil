@@ -114,7 +114,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object Label9: TLabel
           Left = 21
-          Top = 557
+          Top = 551
           Width = 95
           Height = 13
           Alignment = taRightJustify
@@ -258,7 +258,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object Label25: TLabel
           Left = 16
-          Top = 535
+          Top = 530
           Width = 100
           Height = 13
           Alignment = taRightJustify
@@ -366,7 +366,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object Label46: TLabel
           Left = 9
-          Top = 469
+          Top = 467
           Width = 105
           Height = 13
           Alignment = taRightJustify
@@ -374,7 +374,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object Label14: TLabel
           Left = 21
-          Top = 492
+          Top = 489
           Width = 93
           Height = 13
           Alignment = taRightJustify
@@ -435,7 +435,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object Label15: TLabel
           Left = 35
-          Top = 513
+          Top = 509
           Width = 81
           Height = 13
           Alignment = taRightJustify
@@ -498,7 +498,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object Label74: TLabel
           Left = 219
-          Top = 469
+          Top = 467
           Width = 82
           Height = 13
           Alignment = taRightJustify
@@ -527,6 +527,14 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           Height = 13
           Alignment = taRightJustify
           Caption = 'Base IPI:'
+        end
+        object Label84: TLabel
+          Left = 10
+          Top = 613
+          Width = 105
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Lei (Dados Adicionais)'
         end
         object DBEdit3: TDBEdit
           Left = 129
@@ -560,9 +568,9 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object DBMemo1: TDBMemo
           Left = 118
-          Top = 549
+          Top = 543
           Width = 491
-          Height = 68
+          Height = 60
           DataField = 'OBS_COMPLEMENTAR'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           MaxLength = 250
@@ -771,7 +779,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object RxDBComboBox3: TRxDBComboBox
           Left = 118
-          Top = 527
+          Top = 522
           Width = 118
           Height = 21
           Style = csDropDownList
@@ -919,7 +927,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object DBEdit28: TDBEdit
           Left = 117
-          Top = 461
+          Top = 459
           Width = 96
           Height = 21
           DataField = 'VLR_ICMSDESONERADO'
@@ -928,7 +936,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object RxDBLookupCombo3: TRxDBLookupCombo
           Left = 117
-          Top = 483
+          Top = 480
           Width = 302
           Height = 21
           DropDownCount = 8
@@ -994,7 +1002,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object DBEdit29: TDBEdit
           Left = 118
-          Top = 505
+          Top = 501
           Width = 301
           Height = 21
           CharCase = ecUpperCase
@@ -1659,7 +1667,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object DBEdit59: TDBEdit
           Left = 303
-          Top = 461
+          Top = 459
           Width = 115
           Height = 21
           Color = clWhite
@@ -1839,6 +1847,19 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
             ParentCtl3D = False
             TabOrder = 4
           end
+        end
+        object RxDBLookupCombo4: TRxDBLookupCombo
+          Left = 118
+          Top = 605
+          Width = 302
+          Height = 21
+          DropDownCount = 8
+          DataField = 'ID_OBS_LEI_NCM'
+          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+          LookupField = 'ID'
+          LookupDisplay = 'NOME'
+          LookupSource = DMCadNotaFiscal.dsObs_Lei
+          TabOrder = 60
         end
       end
     end

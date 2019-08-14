@@ -258,6 +258,11 @@ object DMCadCFOP: TDMCadCFOP
       FixedChar = True
       Size = 1
     end
+    object sdsCFOPUSA_NAO_CONTR_FISICA: TStringField
+      FieldName = 'USA_NAO_CONTR_FISICA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
@@ -528,6 +533,11 @@ object DMCadCFOP: TDMCadCFOP
     end
     object cdsCFOPCONTROLAR_CONFIG: TStringField
       FieldName = 'CONTROLAR_CONFIG'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCFOPUSA_NAO_CONTR_FISICA: TStringField
+      FieldName = 'USA_NAO_CONTR_FISICA'
       FixedChar = True
       Size = 1
     end

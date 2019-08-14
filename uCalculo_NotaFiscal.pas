@@ -4090,17 +4090,21 @@ begin
   fDMCadNotaFiscal.qRegra_CFOP.ParamByName('ID').AsInteger              := ID_CFOP;
   fDMCadNotaFiscal.qRegra_CFOP.ParamByName('TIPO_EMPRESA').AsString     := vTipo_Empresa;
   fDMCadNotaFiscal.qRegra_CFOP.ParamByName('TIPO_CLIENTE').AsString     := vTipo_Cliente;
-  if fDMCadNotaFiscal.cdsClientePESSOA.AsString = 'E' then
-    fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString := 'J'
+
+  //Esse if foi incluido dia 12/08/2019 para usar a mesma regra do Pessoa Física quando for não contribuinte ou isento
+  if (fDMCadNotaFiscal.cdsClienteTIPO_CONTRIBUINTE.AsString <> '1') and (fDMCadNotaFiscal.cdsCFOPUSA_NAO_CONTR_FISICA.AsString = 'S') then
+  begin
+    fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString   := 'F';
+    fDMCadNotaFiscal.qRegra_CFOP.ParamByName('TIPO_CONSUMIDOR').AsInteger := 1;
+  end
   else
   begin
-  //Esse if foi incluido dia 12/08/2019 para usar a mesma regra do Pessoa Física quando for não contribuinte ou isento
-  if fDMCadNotaFiscal.cdsClienteTIPO_CONTRIBUINTE.AsString <> '1' then
-    fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString := 'F'
-  else
-    fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString := fDMCadNotaFiscal.cdsClientePESSOA.AsString;
+    if fDMCadNotaFiscal.cdsClientePESSOA.AsString = 'E' then
+      fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString := 'J'
+    else
+      fDMCadNotaFiscal.qRegra_CFOP.ParamByName('PESSOA_CLIENTE').AsString := fDMCadNotaFiscal.cdsClientePESSOA.AsString;
+    fDMCadNotaFiscal.qRegra_CFOP.ParamByName('TIPO_CONSUMIDOR').AsInteger := fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger;
   end;
-  fDMCadNotaFiscal.qRegra_CFOP.ParamByName('TIPO_CONSUMIDOR').AsInteger := fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger;
   fDMCadNotaFiscal.qRegra_CFOP.Open;
   if not fDMCadNotaFiscal.qRegra_CFOP.IsEmpty then
     Result := fDMCadNotaFiscal.qRegra_CFOPITEM.AsInteger

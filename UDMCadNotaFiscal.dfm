@@ -4199,8 +4199,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'ICMS_DIFERIDO, T.USA_REGRA_ORGAO_PUBLICO, t.id_cofins_simp, t.id' +
       '_pis_simp,'#13#10't.perc_pis_simp, t.perc_cofins_simp, t.tipo_pis_simp' +
       ', t.tipo_cofins_simp,'#13#10'T.NFEFINALIDADE, T.GERAR_CUSTO_MEDIO, T.D' +
-      'EVOLUCAO, t.usa_unidade_trib, T.ALT_NCM_CUSTO, T.ENVIAR_BASE_ST'#13 +
-      #10'FROM TAB_CFOP T'
+      'EVOLUCAO, t.usa_unidade_trib, T.ALT_NCM_CUSTO, '#13#10'T.ENVIAR_BASE_S' +
+      'T, T.USA_NAO_CONTR_FISICA'#13#10'FROM TAB_CFOP T'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -4415,6 +4415,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsCFOPENVIAR_BASE_ST: TStringField
       FieldName = 'ENVIAR_BASE_ST'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCFOPUSA_NAO_CONTR_FISICA: TStringField
+      FieldName = 'USA_NAO_CONTR_FISICA'
       FixedChar = True
       Size = 1
     end

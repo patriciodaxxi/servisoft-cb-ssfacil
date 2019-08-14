@@ -425,6 +425,8 @@ type
     cdsCFOPBENEFICIAMENTO_POSSE: TStringField;
     sdsCFOPCONTROLAR_CONFIG: TStringField;
     cdsCFOPCONTROLAR_CONFIG: TStringField;
+    sdsCFOPUSA_NAO_CONTR_FISICA: TStringField;
+    cdsCFOPUSA_NAO_CONTR_FISICA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsCFOPNewRecord(DataSet: TDataSet);
     procedure dspCFOPUpdateError(Sender: TObject;
