@@ -276,15 +276,7 @@ object frmSel_Produto: TfrmSel_Produto
         FieldName = 'PLACA'
         Title.Alignment = taCenter
         Title.Caption = 'Placa'
-        Width = 71
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'NOME_MARCA'
-        Title.Alignment = taCenter
-        Title.Caption = 'Marca'
-        Width = 231
+        Width = 56
         Visible = True
       end
       item
@@ -304,6 +296,14 @@ object frmSel_Produto: TfrmSel_Produto
         Visible = True
       end
       item
+        Expanded = False
+        FieldName = 'NOME_MARCA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Marca'
+        Width = 195
+        Visible = True
+      end
+      item
         Alignment = taCenter
         Expanded = False
         FieldName = 'UNIDADE'
@@ -317,7 +317,7 @@ object frmSel_Produto: TfrmSel_Produto
         FieldName = 'COD_BARRA'
         Title.Alignment = taCenter
         Title.Caption = 'C'#243'd. Barra'
-        Width = 115
+        Width = 97
         Visible = True
       end
       item

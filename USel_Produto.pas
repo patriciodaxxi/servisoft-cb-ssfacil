@@ -481,8 +481,10 @@ begin
       prc_Consultar;
   end;
   if qParametrosMOSTRAR_MARCAR_PROD.AsString <> 'S' then
+  begin
     pnlMarca.Visible := False;
-
+    SMDBGrid2.Columns.Items[3].Visible := False;
+  end;
   if trim(Edit1.Text) <> '' then
     prc_Consultar;
 end;
