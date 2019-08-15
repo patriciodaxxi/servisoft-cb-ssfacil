@@ -66,7 +66,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       Caption = '%'
     end
     object Label6: TLabel
-      Left = 395
+      Left = 435
       Top = 40
       Width = 17
       Height = 13
@@ -103,7 +103,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       OnChange = RxDBLookupCombo1Change
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
-      Left = 415
+      Left = 455
       Top = 32
       Width = 274
       Height = 21
@@ -117,7 +117,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       OnChange = RxDBLookupCombo1Change
     end
     object CheckBox1: TCheckBox
-      Left = 720
+      Left = 760
       Top = 33
       Width = 97
       Height = 17

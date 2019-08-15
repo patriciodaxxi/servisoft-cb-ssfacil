@@ -2416,6 +2416,7 @@ object DMCadPessoa: TDMCadPessoa
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspPessoa_Fiscal'
+    BeforePost = cdsPessoa_FiscalBeforePost
     OnNewRecord = cdsPessoa_FiscalNewRecord
     Left = 112
     Top = 198
@@ -2506,6 +2507,27 @@ object DMCadPessoa: TDMCadPessoa
     end
     object cdsPessoa_FiscalID_CST_ICMS_SUFRAMA_ST: TIntegerField
       FieldName = 'ID_CST_ICMS_SUFRAMA_ST'
+    end
+    object cdsPessoa_FiscalDRAW_OBS: TStringField
+      FieldName = 'DRAW_OBS'
+      Size = 250
+    end
+    object cdsPessoa_FiscalDRAW_ID_PIS_COFINS: TIntegerField
+      FieldName = 'DRAW_ID_PIS_COFINS'
+    end
+    object cdsPessoa_FiscalDRAW_ID_IPI: TIntegerField
+      FieldName = 'DRAW_ID_IPI'
+    end
+    object cdsPessoa_FiscalDRAW_ENQIPI: TIntegerField
+      FieldName = 'DRAW_ENQIPI'
+    end
+    object cdsPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField
+      FieldName = 'DRAW_PERC_DESCONTO'
+    end
+    object cdsPessoa_FiscalDRAW_POSSUI: TStringField
+      FieldName = 'DRAW_POSSUI'
+      FixedChar = True
+      Size = 1
     end
   end
   object dspPessoa_Fiscal: TDataSetProvider
@@ -2615,6 +2637,27 @@ object DMCadPessoa: TDMCadPessoa
     end
     object sdsPessoa_FiscalID_CST_ICMS_SUFRAMA_ST: TIntegerField
       FieldName = 'ID_CST_ICMS_SUFRAMA_ST'
+    end
+    object sdsPessoa_FiscalDRAW_OBS: TStringField
+      FieldName = 'DRAW_OBS'
+      Size = 250
+    end
+    object sdsPessoa_FiscalDRAW_ID_PIS_COFINS: TIntegerField
+      FieldName = 'DRAW_ID_PIS_COFINS'
+    end
+    object sdsPessoa_FiscalDRAW_ID_IPI: TIntegerField
+      FieldName = 'DRAW_ID_IPI'
+    end
+    object sdsPessoa_FiscalDRAW_ENQIPI: TIntegerField
+      FieldName = 'DRAW_ENQIPI'
+    end
+    object sdsPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField
+      FieldName = 'DRAW_PERC_DESCONTO'
+    end
+    object sdsPessoa_FiscalDRAW_POSSUI: TStringField
+      FieldName = 'DRAW_POSSUI'
+      FixedChar = True
+      Size = 1
     end
   end
   object sdsTab_CSTIPI: TSQLDataSet

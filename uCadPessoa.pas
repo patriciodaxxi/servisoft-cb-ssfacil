@@ -571,6 +571,20 @@ type
     Label199: TLabel;
     Edit2: TEdit;
     btnFiscalProduto: TNxButton;
+    Panel14: TPanel;
+    RzDBCheckBox3: TRzDBCheckBox;
+    gbxDrawback: TRzGroupBox;
+    Label202: TLabel;
+    Label203: TLabel;
+    Label204: TLabel;
+    Label200: TLabel;
+    Label201: TLabel;
+    Label205: TLabel;
+    RxDBLookupCombo46: TRxDBLookupCombo;
+    DBMemo6: TDBMemo;
+    RxDBLookupCombo47: TRxDBLookupCombo;
+    DBEdit111: TDBEdit;
+    edtCod_EnqIPI_DrawBack: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -683,6 +697,9 @@ type
     procedure btnCopiar_FilClick(Sender: TObject);
     procedure btnConfDescontosClick(Sender: TObject);
     procedure btnFiscalProdutoClick(Sender: TObject);
+    procedure RzDBCheckBox3Click(Sender: TObject);
+    procedure edtCod_EnqIPI_DrawBackKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -1587,7 +1604,10 @@ end;
 
 procedure TfrmCadPessoa.RzDBCheckBox2Click(Sender: TObject);
 begin
-  gbxPIS.Visible := RzDBCheckBox2.Checked;
+  if RzDBCheckBox2.Checked then
+    Panel5.Height := 82
+  else
+    Panel5.Height := 0;
 end;
 
 procedure TfrmCadPessoa.prc_Abrir_Pessoas_Outras;
@@ -2032,8 +2052,10 @@ begin
     DBCheckBox19Click(Sender);
     DBCheckBox20Click(Sender);
     DBCheckBox21Click(Sender);
+    RzDBCheckBox2Click(Sender);
     edtCod_EnqIPI.Clear;
     edtCod_EnqIPI_Suframa.Clear;
+    edtCod_EnqIPI_DrawBack.Clear;
     if fDMCadPessoa.cdsPessoa_FiscalID_ENQIPI.AsInteger > 0 then
     begin
       prc_Abrir_EnqIPI(fDMCadPessoa.cdsPessoa_FiscalID_ENQIPI.AsInteger);
@@ -2043,6 +2065,11 @@ begin
     begin
       prc_Abrir_EnqIPI(fDMCadPessoa.cdsPessoa_FiscalID_ENQIPI_SUFRAMA.AsInteger);
       edtCod_EnqIPI_Suframa.Text := fDMCadPessoa.qEnqIPICODIGO.AsString;
+    end;
+    if fDMCadPessoa.cdsPessoa_FiscalDRAW_ENQIPI.AsInteger > 0 then
+    begin
+      prc_Abrir_EnqIPI(fDMCadPessoa.cdsPessoa_FiscalDRAW_ENQIPI.AsInteger);
+      edtCod_EnqIPI_DrawBack.Text := fDMCadPessoa.qEnqIPICODIGO.AsString;
     end;
   end
   else if RZPageControlDados.ActivePage = TS_Servico then
@@ -2617,6 +2644,34 @@ begin
   frmCadPessoa_ProdICMS.fDMCadPessoa := fDMCadPessoa;
   frmCadPessoa_ProdICMS.ShowModal;
   FreeAndNil(frmCadPessoa_ProdICMS);
+end;
+
+procedure TfrmCadPessoa.RzDBCheckBox3Click(Sender: TObject);
+begin
+  gbxDrawback.Visible := RzDBCheckBox3.Checked;
+end;
+
+procedure TfrmCadPessoa.edtCod_EnqIPI_DrawBackKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = 27) then
+  begin
+    fDMCadPessoa.cdsPessoa_FiscalDRAW_ENQIPI.Clear;
+    edtCod_EnqIPI_DrawBack.Clear;
+  end
+  else if (Key = Vk_F2) then
+  begin
+    viD_EnqIPI_Pos := fDMCadPessoa.cdsPessoa_FiscalDRAW_ENQIPI.AsInteger;
+    frmSel_EnqIPI := TfrmSel_EnqIPI.Create(Self);
+    frmSel_EnqIPI.ShowModal;
+    if viD_EnqIPI_Pos > 0 then
+      fDMCadPessoa.cdsPessoa_FiscalDRAW_ENQIPI.AsInteger := viD_EnqIPI_Pos
+    else
+      fDMCadPessoa.cdsPessoa_FiscalDRAW_ENQIPI.Clear;
+    edtCod_EnqIPI_DrawBack.Clear;
+    prc_Abrir_EnqIPI(fDMCadPessoa.cdsPessoa_FiscalDRAW_ENQIPI.AsInteger);
+    edtCod_EnqIPI_DrawBack.Text := fDMCadPessoa.qEnqIPICODIGO.AsString;
+  end;
 end;
 
 end.

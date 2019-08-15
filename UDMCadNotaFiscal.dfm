@@ -1,8 +1,7 @@
 object DMCadNotaFiscal: TDMCadNotaFiscal
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 65534
-  Top = 17
+  Top = 16
   Height = 712
   Width = 1353
   object sdsNotaFiscal: TSQLDataSet

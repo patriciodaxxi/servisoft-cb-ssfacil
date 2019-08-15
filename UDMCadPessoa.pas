@@ -1295,6 +1295,18 @@ type
     cdsPessoa_ProdICMSclLei: TStringField;
     sdsPessoa_ProdICMSDRAWBACK: TStringField;
     cdsPessoa_ProdICMSDRAWBACK: TStringField;
+    sdsPessoa_FiscalDRAW_OBS: TStringField;
+    sdsPessoa_FiscalDRAW_ID_PIS_COFINS: TIntegerField;
+    sdsPessoa_FiscalDRAW_ID_IPI: TIntegerField;
+    sdsPessoa_FiscalDRAW_ENQIPI: TIntegerField;
+    sdsPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField;
+    sdsPessoa_FiscalDRAW_POSSUI: TStringField;
+    cdsPessoa_FiscalDRAW_OBS: TStringField;
+    cdsPessoa_FiscalDRAW_ID_PIS_COFINS: TIntegerField;
+    cdsPessoa_FiscalDRAW_ID_IPI: TIntegerField;
+    cdsPessoa_FiscalDRAW_ENQIPI: TIntegerField;
+    cdsPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField;
+    cdsPessoa_FiscalDRAW_POSSUI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
@@ -1338,6 +1350,7 @@ type
     procedure cdsPessoa_AnimalNewRecord(DataSet: TDataSet);
     procedure cdsPessoa_AnimalCalcFields(DataSet: TDataSet);
     procedure cdsPessoa_ProdICMSCalcFields(DataSet: TDataSet);
+    procedure cdsPessoa_FiscalBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
     vID_CidadePes: Integer;
@@ -2247,6 +2260,12 @@ begin
     cdsPessoa_ProdICMSclLei.AsString     := cdsOBS_LeiOBS.AsString;
     cdsPessoa_ProdICMSclNomeLei.AsString := cdsOBS_LeiNOME.AsString;
   end;
+end;
+
+procedure TDMCadPessoa.cdsPessoa_FiscalBeforePost(DataSet: TDataSet);
+begin
+  if cdsPessoa_FiscalDRAW_ENQIPI.AsInteger <= 0 then
+    cdsPessoa_FiscalDRAW_ENQIPI.Clear;
 end;
 
 end.

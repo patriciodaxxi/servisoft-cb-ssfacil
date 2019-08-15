@@ -1,6 +1,6 @@
 object frmCadPessoa: TfrmCadPessoa
   Left = 137
-  Top = 14
+  Top = 0
   Width = 1091
   Height = 728
   Caption = 'Cadastro de Pessoas'
@@ -1407,7 +1407,7 @@ object frmCadPessoa: TfrmCadPessoa
         Top = 30
         Width = 1079
         Height = 627
-        ActivePage = TS_Pessoa_Dados
+        ActivePage = TS_RegrasFiscais
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1415,7 +1415,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 4
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19
@@ -6818,18 +6818,18 @@ object frmCadPessoa: TfrmCadPessoa
             OnEnter = Panel3Enter
             object Panel6: TPanel
               Left = 1
-              Top = 394
+              Top = 361
               Width = 1073
-              Height = 16
+              Height = 12
               Align = alTop
               Color = clGray
               TabOrder = 6
             end
             object RzDBCheckBox1: TRzDBCheckBox
               Left = 1
-              Top = 290
+              Top = 261
               Width = 1073
-              Height = 17
+              Height = 16
               DataField = 'IPI_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
               ValueChecked = 'S'
@@ -6847,9 +6847,9 @@ object frmCadPessoa: TfrmCadPessoa
             end
             object gbxIPI: TRzGroupBox
               Left = 1
-              Top = 307
+              Top = 277
               Width = 1073
-              Height = 87
+              Height = 84
               Align = alTop
               BorderColor = clBlue
               Caption = ' Dados da Suspens'#227'o '
@@ -6864,7 +6864,7 @@ object frmCadPessoa: TfrmCadPessoa
               Visible = False
               DesignSize = (
                 1073
-                87)
+                84)
               object Label71: TLabel
                 Left = 16
                 Top = 24
@@ -6977,18 +6977,18 @@ object frmCadPessoa: TfrmCadPessoa
             end
             object Panel7: TPanel
               Left = 1
-              Top = 274
+              Top = 249
               Width = 1073
-              Height = 16
+              Height = 12
               Align = alTop
               Color = clGray
               TabOrder = 8
             end
             object gbxSuframa: TRzGroupBox
               Left = 1
-              Top = 137
+              Top = 132
               Width = 1073
-              Height = 137
+              Height = 117
               Align = alTop
               BorderColor = clBlue
               Caption = ' Dados Suframa '
@@ -7002,7 +7002,7 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 3
               DesignSize = (
                 1073
-                137)
+                117)
               object Label91: TLabel
                 Left = 3
                 Top = 16
@@ -7030,7 +7030,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object Label88: TLabel
                 Left = 219
-                Top = 62
+                Top = 60
                 Width = 24
                 Height = 13
                 Alignment = taRightJustify
@@ -7038,7 +7038,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object Label90: TLabel
                 Left = 219
-                Top = 86
+                Top = 81
                 Width = 24
                 Height = 13
                 Alignment = taRightJustify
@@ -7046,7 +7046,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object Label102: TLabel
                 Left = 219
-                Top = 111
+                Top = 102
                 Width = 24
                 Height = 13
                 Alignment = taRightJustify
@@ -7054,7 +7054,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object Label103: TLabel
                 Left = 514
-                Top = 86
+                Top = 83
                 Width = 41
                 Height = 13
                 Alignment = taRightJustify
@@ -7062,7 +7062,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object Label106: TLabel
                 Left = 622
-                Top = 82
+                Top = 79
                 Width = 61
                 Height = 13
                 Alignment = taRightJustify
@@ -7103,7 +7103,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object DBCheckBox19: TDBCheckBox
                 Left = 95
-                Top = 61
+                Top = 59
                 Width = 97
                 Height = 14
                 Caption = 'Desconto ICMS'
@@ -7116,7 +7116,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object DBCheckBox20: TDBCheckBox
                 Left = 95
-                Top = 85
+                Top = 80
                 Width = 121
                 Height = 14
                 Caption = 'Desconto Pis/Cofins'
@@ -7129,7 +7129,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object DBCheckBox21: TDBCheckBox
                 Left = 96
-                Top = 110
+                Top = 101
                 Width = 89
                 Height = 13
                 Caption = 'Desconto IPI'
@@ -7154,7 +7154,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object RxDBLookupCombo28: TRxDBLookupCombo
                 Left = 245
-                Top = 54
+                Top = 52
                 Width = 257
                 Height = 21
                 DropDownCount = 8
@@ -7168,7 +7168,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object RxDBLookupCombo30: TRxDBLookupCombo
                 Left = 245
-                Top = 78
+                Top = 73
                 Width = 257
                 Height = 21
                 DropDownCount = 8
@@ -7182,7 +7182,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object RxDBLookupCombo31: TRxDBLookupCombo
                 Left = 245
-                Top = 103
+                Top = 94
                 Width = 257
                 Height = 21
                 DropDownCount = 8
@@ -7196,7 +7196,7 @@ object frmCadPessoa: TfrmCadPessoa
               end
               object edtCod_EnqIPI_Suframa: TEdit
                 Left = 558
-                Top = 79
+                Top = 76
                 Width = 59
                 Height = 21
                 TabStop = False
@@ -7222,9 +7222,9 @@ object frmCadPessoa: TfrmCadPessoa
             end
             object RzDBCheckBox2: TRzDBCheckBox
               Left = 1
-              Top = 410
+              Top = 373
               Width = 1073
-              Height = 17
+              Height = 16
               DataField = 'PIS_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
               ValueChecked = 'S'
@@ -7242,9 +7242,9 @@ object frmCadPessoa: TfrmCadPessoa
             end
             object Panel5: TPanel
               Left = 1
-              Top = 427
+              Top = 389
               Width = 1073
-              Height = 93
+              Height = 82
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 9
@@ -7252,7 +7252,7 @@ object frmCadPessoa: TfrmCadPessoa
                 Left = 0
                 Top = 0
                 Width = 1073
-                Height = 93
+                Height = 82
                 Align = alClient
                 BorderColor = clBlue
                 Caption = ' Dados da Suspens'#227'o '
@@ -7264,10 +7264,9 @@ object frmCadPessoa: TfrmCadPessoa
                 Font.Style = []
                 ParentFont = False
                 TabOrder = 0
-                Visible = False
                 DesignSize = (
                   1073
-                  93)
+                  82)
                 object Label75: TLabel
                   Left = 16
                   Top = 24
@@ -7284,7 +7283,7 @@ object frmCadPessoa: TfrmCadPessoa
                 end
                 object Label77: TLabel
                   Left = 28
-                  Top = 46
+                  Top = 45
                   Width = 44
                   Height = 13
                   Alignment = taRightJustify
@@ -7292,7 +7291,7 @@ object frmCadPessoa: TfrmCadPessoa
                 end
                 object Label78: TLabel
                   Left = 339
-                  Top = 14
+                  Top = 12
                   Width = 250
                   Height = 13
                   Alignment = taCenter
@@ -7300,7 +7299,7 @@ object frmCadPessoa: TfrmCadPessoa
                 end
                 object Label79: TLabel
                   Left = 6
-                  Top = 68
+                  Top = 66
                   Width = 66
                   Height = 13
                   Alignment = taRightJustify
@@ -7313,7 +7312,9 @@ object frmCadPessoa: TfrmCadPessoa
                   Height = 21
                   DataField = 'PIS_DT_INICIO'
                   DataSource = DMCadPessoa.dsPessoa_Fiscal
+                  Ctl3D = True
                   NumGlyphs = 2
+                  ParentCtl3D = False
                   TabOrder = 0
                 end
                 object DBDateEdit6: TDBDateEdit
@@ -7323,26 +7324,30 @@ object frmCadPessoa: TfrmCadPessoa
                   Height = 21
                   DataField = 'PIS_DT_FINAL'
                   DataSource = DMCadPessoa.dsPessoa_Fiscal
+                  Ctl3D = True
                   NumGlyphs = 2
+                  ParentCtl3D = False
                   TabOrder = 1
                 end
                 object RxDBLookupCombo24: TRxDBLookupCombo
                   Left = 74
-                  Top = 38
+                  Top = 37
                   Width = 257
                   Height = 21
                   DropDownCount = 8
                   DropDownWidth = 500
+                  Ctl3D = True
                   DataField = 'PIS_ID_PIS'
                   DataSource = DMCadPessoa.dsPessoa_Fiscal
                   LookupField = 'ID'
                   LookupDisplay = 'CODIGO;NOME'
                   LookupSource = DMCadPessoa.dsTab_Pis
+                  ParentCtl3D = False
                   TabOrder = 2
                 end
                 object DBMemo2: TDBMemo
                   Left = 341
-                  Top = 29
+                  Top = 27
                   Width = 493
                   Height = 52
                   Anchors = [akLeft, akTop, akRight]
@@ -7354,25 +7359,27 @@ object frmCadPessoa: TfrmCadPessoa
                 end
                 object RxDBLookupCombo25: TRxDBLookupCombo
                   Left = 74
-                  Top = 60
+                  Top = 58
                   Width = 257
                   Height = 21
                   DropDownCount = 8
                   DropDownWidth = 500
+                  Ctl3D = True
                   DataField = 'PIS_ID_COFINS'
                   DataSource = DMCadPessoa.dsPessoa_Fiscal
                   LookupField = 'ID'
                   LookupDisplay = 'CODIGO;NOME'
                   LookupSource = DMCadPessoa.dsTab_Cofins
+                  ParentCtl3D = False
                   TabOrder = 4
                 end
               end
             end
             object gbxDadosAdic: TRzGroupBox
               Left = 1
-              Top = 53
+              Top = 51
               Width = 1073
-              Height = 52
+              Height = 50
               Align = alTop
               BorderColor = clBlue
               Caption = ' Observa'#231#227'o Dados Adicionais da NFe '
@@ -7386,7 +7393,7 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 1
               DesignSize = (
                 1073
-                52)
+                50)
               object Label99: TLabel
                 Left = 16
                 Top = 22
@@ -7410,9 +7417,9 @@ object frmCadPessoa: TfrmCadPessoa
             end
             object RzGroupBox1: TRzGroupBox
               Left = 1
-              Top = 105
+              Top = 101
               Width = 1073
-              Height = 32
+              Height = 31
               Align = alTop
               BorderColor = clBlue
               Caption = ' Substituto Tribut'#225'rio '
@@ -7466,7 +7473,7 @@ object frmCadPessoa: TfrmCadPessoa
               Left = 1
               Top = 1
               Width = 1073
-              Height = 52
+              Height = 50
               Align = alTop
               BorderColor = clBlue
               Caption = ' Informar CST ICMS usado em vendas para o Cliente '
@@ -7514,7 +7521,7 @@ object frmCadPessoa: TfrmCadPessoa
               Left = 352
               Top = 1
               Width = 323
-              Height = 53
+              Height = 51
               Caption = ' Tipo ICMS '
               Columns = 3
               DataField = 'TIPO_ICMS'
@@ -7528,6 +7535,172 @@ object frmCadPessoa: TfrmCadPessoa
                 'N'
                 'R'
                 'D')
+            end
+            object Panel14: TPanel
+              Left = 1
+              Top = 471
+              Width = 1073
+              Height = 12
+              Align = alTop
+              Color = clGray
+              TabOrder = 11
+            end
+            object RzDBCheckBox3: TRzDBCheckBox
+              Left = 1
+              Top = 483
+              Width = 1073
+              Height = 16
+              DataField = 'DRAW_POSSUI'
+              DataSource = DMCadPessoa.dsPessoa_Fiscal
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+              Align = alTop
+              Caption = 
+                'Possui Drawback (Precisa informar neste cliente os produtos que ' +
+                'tem drawback)'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 12
+              OnClick = RzDBCheckBox3Click
+            end
+            object gbxDrawback: TRzGroupBox
+              Left = 1
+              Top = 499
+              Width = 1073
+              Height = 81
+              Align = alTop
+              BorderColor = clBlue
+              Caption = ' Dados DrawBack '
+              FlatColor = clBlue
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlue
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 13
+              Visible = False
+              DesignSize = (
+                1073
+                81)
+              object Label202: TLabel
+                Left = 6
+                Top = 45
+                Width = 88
+                Height = 13
+                Alignment = taRightJustify
+                Caption = 'CST PIS/COFINS:'
+              end
+              object Label203: TLabel
+                Left = 483
+                Top = 12
+                Width = 250
+                Height = 13
+                Alignment = taCenter
+                Caption = 'Observa'#231#227'o  da Nota Fical (vai ser impresso na nota)'
+              end
+              object Label204: TLabel
+                Left = 54
+                Top = 66
+                Width = 40
+                Height = 13
+                Alignment = taRightJustify
+                Caption = 'CST IPI:'
+              end
+              object Label200: TLabel
+                Left = 32
+                Top = 23
+                Width = 60
+                Height = 13
+                Alignment = taRightJustify
+                Caption = '% Desconto:'
+              end
+              object Label201: TLabel
+                Left = 250
+                Top = 21
+                Width = 41
+                Height = 13
+                Alignment = taRightJustify
+                Caption = 'Enq. IPI:'
+              end
+              object Label205: TLabel
+                Left = 358
+                Top = 23
+                Width = 61
+                Height = 13
+                Alignment = taRightJustify
+                Caption = 'F2 Pesquisar'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clMaroon
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
+              end
+              object RxDBLookupCombo46: TRxDBLookupCombo
+                Left = 96
+                Top = 37
+                Width = 257
+                Height = 21
+                DropDownCount = 8
+                DropDownWidth = 500
+                DataField = 'DRAW_ID_PIS_COFINS'
+                DataSource = DMCadPessoa.dsPessoa_Fiscal
+                LookupField = 'ID'
+                LookupDisplay = 'CODIGO;NOME'
+                LookupSource = DMCadPessoa.dsTab_Pis
+                TabOrder = 1
+              end
+              object DBMemo6: TDBMemo
+                Left = 485
+                Top = 27
+                Width = 493
+                Height = 52
+                Anchors = [akLeft, akTop, akRight]
+                DataField = 'DRAW_OBS'
+                DataSource = DMCadPessoa.dsPessoa_Fiscal
+                ScrollBars = ssVertical
+                TabOrder = 4
+                OnKeyPress = DBMemo2KeyPress
+              end
+              object RxDBLookupCombo47: TRxDBLookupCombo
+                Left = 96
+                Top = 58
+                Width = 257
+                Height = 21
+                DropDownCount = 8
+                DropDownWidth = 500
+                DataField = 'DRAW_ID_IPI'
+                DataSource = DMCadPessoa.dsPessoa_Fiscal
+                LookupField = 'ID'
+                LookupDisplay = 'CODIGO;NOME'
+                LookupSource = DMCadPessoa.dsTab_Cofins
+                TabOrder = 2
+              end
+              object DBEdit111: TDBEdit
+                Left = 97
+                Top = 15
+                Width = 65
+                Height = 21
+                DataField = 'DRAW_PERC_DESCONTO'
+                DataSource = DMCadPessoa.dsPessoa_Fiscal
+                TabOrder = 0
+              end
+              object edtCod_EnqIPI_DrawBack: TEdit
+                Left = 293
+                Top = 15
+                Width = 59
+                Height = 21
+                TabStop = False
+                Color = clSilver
+                ReadOnly = True
+                TabOrder = 3
+                OnKeyDown = edtCod_EnqIPI_DrawBackKeyDown
+              end
             end
           end
         end
