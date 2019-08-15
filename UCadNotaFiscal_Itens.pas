@@ -350,6 +350,8 @@ type
     function fnc_Busca_Preco_Orig: Real;
     function fnc_Verifica_ST_Ant: Boolean;
 
+    function fnc_Gerar_IPI(ID : Integer) : Boolean;
+
   public
     { Public declarations }
     vNotaSelecionada: Boolean;
@@ -970,6 +972,29 @@ begin
       vPerc_BRedICMS_NCM := 0;
       if fDMCadNotaFiscal.qPessoa_ProdICMSID_LEI.AsInteger > 0 then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsInteger := fDMCadNotaFiscal.qPessoa_ProdICMSID_LEI.AsInteger;
+      if (fDMCadNotaFiscal.qPessoa_ProdICMSDRAWBACK.AsString = 'S') and (fDMCadNotaFiscal.qPessoa_FiscalDRAW_POSSUI.AsString = 'S') then
+      begin
+        if fDMCadNotaFiscal.qPessoa_FiscalDRAW_ID_IPI.AsInteger > 0 then
+        begin
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTIPI.AsInteger := fDMCadNotaFiscal.qPessoa_FiscalDRAW_ID_IPI.AsInteger;
+          if not fnc_Gerar_IPI(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTIPI.AsInteger) then
+            fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat := 0;
+        end;
+        if fDMCadNotaFiscal.qPessoa_FiscalDRAW_ENQIPI.AsInteger > 0 then
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensID_ENQIPI.AsInteger :=fDMCadNotaFiscal.qPessoa_FiscalDRAW_ENQIPI.AsInteger;
+        if fDMCadNotaFiscal.qPessoa_FiscalDRAW_ID_PIS_COFINS.AsInteger > 0 then
+        begin
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PIS.AsInteger    := fDMCadNotaFiscal.qPessoa_FiscalDRAW_ID_PIS_COFINS.AsInteger;
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COFINS.AsInteger := fDMCadNotaFiscal.qPessoa_FiscalDRAW_ID_PIS_COFINS.AsInteger;
+          if not fnc_Gerar_Cofins then
+          begin
+            fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat := 0;
+            fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat    := 0;
+          end;
+        end;
+        if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qPessoa_FiscalDRAW_PERC_DESCONTO.AsFloat)) > 0 then
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.qPessoa_FiscalDRAW_PERC_DESCONTO.AsFloat));
+      end;
     end;
   end;
   //*******************
@@ -1074,18 +1099,14 @@ begin
   end;
   if (StrToFloat(FormatFloat('0.00',vPerc_IPI_Suf)) > 0) and (fDMCadNotaFiscal.qPessoa_FiscalID_CST_IPI_SUFRAMA.AsInteger > 0) then
   begin
-    if fDMCadNotaFiscal.cdsTab_CSTIPIID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTIPI.AsInteger then
-      fDMCadNotaFiscal.cdsTab_CSTIPI.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTIPI.AsInteger,[loCaseInsensitive]);
-    if fDMCadNotaFiscal.cdsTab_CSTIPIGERAR_IPI.AsString <> 'S' then
+    if not fnc_Gerar_IPI(fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTIPI.AsInteger) then
       fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat := 0;
   end;
   if (StrToFloat(FormatFloat('0.00',vPerc_Cofins_Suf)) > 0) and (fDMCadNotaFiscal.qPessoa_FiscalID_CST_PIS_COFINS_SUFRAMA.AsInteger > 0) then
   begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COFINS.AsInteger := fDMCadNotaFiscal.qPessoa_FiscalID_CST_PIS_COFINS_SUFRAMA.AsInteger;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PIS.AsInteger    := fDMCadNotaFiscal.qPessoa_FiscalID_CST_PIS_COFINS_SUFRAMA.AsInteger;
-    if fDMCadNotaFiscal.cdsTab_CofinsID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COFINS.AsInteger then
-      fDMCadNotaFiscal.cdsTab_Cofins.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COFINS.AsInteger,[loCaseInsensitive]);
-    if fDMCadNotaFiscal.cdsTab_CofinsGERAR.AsString <> 'S' then
+    if not fnc_Gerar_Cofins then
     begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat := 0;
       fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat    := 0;
@@ -3361,6 +3382,15 @@ begin
     else
       RxDBLookupCombo1.SetFocus;
   end;
+end;
+
+function TfrmCadNotaFiscal_Itens.fnc_Gerar_IPI(ID: Integer): Boolean;
+begin
+  Result := False;
+  if fDMCadNotaFiscal.cdsTab_CSTIPIID.AsInteger <> ID then
+    fDMCadNotaFiscal.cdsTab_CSTIPI.Locate('ID',ID,[loCaseInsensitive]);
+  if fDMCadNotaFiscal.cdsTab_CSTIPIGERAR_IPI.AsString = 'S' then
+    Result := True;
 end;
 
 end.

@@ -3068,6 +3068,13 @@ type
     qPessoa_ProdICMSID_CSTICMS: TIntegerField;
     qPessoa_ProdICMSID_LEI: TIntegerField;
     cdsCFOPUSA_NAO_CONTR_FISICA: TStringField;
+    qPessoa_FiscalDRAW_OBS: TStringField;
+    qPessoa_FiscalDRAW_ID_PIS_COFINS: TIntegerField;
+    qPessoa_FiscalDRAW_ID_IPI: TIntegerField;
+    qPessoa_FiscalDRAW_ENQIPI: TIntegerField;
+    qPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField;
+    qPessoa_FiscalDRAW_POSSUI: TStringField;
+    qPessoa_ProdICMSDRAWBACK: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

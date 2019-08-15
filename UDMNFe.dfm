@@ -6114,4 +6114,30 @@ object DMNFe: TDMNFe
       Size = 250
     end
   end
+  object qDrawObs: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT COUNT(1) CONTADOR'
+      'FROM NOTAFISCAL_ITENS I'
+      'INNER JOIN NOTAFISCAL N'
+      'ON I.ID_NTE = N.ID'
+      'INNER JOIN pessoa_prodicms P'
+      'ON N.id_cliente = P.codigo'
+      'AND P.id_produto = I.id_produto'
+      'WHERE I.ID = :ID'
+      '  AND P.drawback = '#39'S'#39)
+    SQLConnection = dmDatabase.scoDados
+    Left = 440
+    Top = 313
+    object qDrawObsCONTADOR: TIntegerField
+      FieldName = 'CONTADOR'
+      Required = True
+    end
+  end
 end

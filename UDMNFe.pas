@@ -1224,6 +1224,8 @@ type
     cdsItensNCMID_LEI: TIntegerField;
     cdsItensNCMCOMPLEMENTO: TStringField;
     cdsItensNCMOBS: TStringField;
+    qDrawObs: TSQLQuery;
+    qDrawObsCONTADOR: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);

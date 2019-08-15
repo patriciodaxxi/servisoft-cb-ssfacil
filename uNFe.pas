@@ -286,6 +286,7 @@ type
     function fnc_Posicionar_Cidade(ID: Integer): Boolean;
 
     function fnc_LocalServidorNFe: String;
+
   public
     { Public declarations }
     fDMCadNotaFiscal: TDMCadNotaFiscal;
@@ -3487,7 +3488,7 @@ begin
   //if vTextoNumNotaNFe <> '' then
   //  Grava_DadosAdicionaisNFe('('+vTextoNumNotaNFe+')',0);
 
-  //IPI e PIS/Cofins do cliente Suspenso
+  //IPI, PIS/Cofins do cliente Suspenso e Drawback  
   fDMCadNotaFiscal.qPessoa_Fiscal.Close;
   fDMCadNotaFiscal.qPessoa_Fiscal.ParamByName('CODIGO').AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
   fDMCadNotaFiscal.qPessoa_Fiscal.Open;
@@ -3518,6 +3519,17 @@ begin
       vTexto := '(' + fDMCadNotaFiscal.qPessoa_FiscalOBS_LEI_DADOS_ADICIONAIS.Value + ')';
       Grava_DadosAdicionaisNFe(vTexto,0);
     end;
+    //14/08/2019
+    if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') and (fDMCadNotaFiscal.qPessoa_FiscalDRAW_POSSUI.AsString = 'S')
+      and (trim(fDMCadNotaFiscal.qPessoa_FiscalDRAW_OBS.AsString) <> '') then
+    begin
+      fDMNFe.qDrawObs.Close;
+      fDMNFe.qDrawObs.ParamByName('ID').AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger;
+      fDMNFe.qDrawObs.Open;
+      if fDMNFe.qDrawObsCONTADOR.AsInteger > 0 then
+        Grava_DadosAdicionaisNFe('('+fDMCadNotaFiscal.qPessoa_FiscalDRAW_OBS.AsString+')',0);
+    end;
+    //*****************
   end;
 
   {if (DM1.tClienteIPISuspenso.AsBoolean) and

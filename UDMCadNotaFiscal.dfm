@@ -9573,6 +9573,27 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object qPessoa_FiscalID_CST_ICMS_SUFRAMA_ST: TIntegerField
       FieldName = 'ID_CST_ICMS_SUFRAMA_ST'
     end
+    object qPessoa_FiscalDRAW_OBS: TStringField
+      FieldName = 'DRAW_OBS'
+      Size = 250
+    end
+    object qPessoa_FiscalDRAW_ID_PIS_COFINS: TIntegerField
+      FieldName = 'DRAW_ID_PIS_COFINS'
+    end
+    object qPessoa_FiscalDRAW_ID_IPI: TIntegerField
+      FieldName = 'DRAW_ID_IPI'
+    end
+    object qPessoa_FiscalDRAW_ENQIPI: TIntegerField
+      FieldName = 'DRAW_ENQIPI'
+    end
+    object qPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField
+      FieldName = 'DRAW_PERC_DESCONTO'
+    end
+    object qPessoa_FiscalDRAW_POSSUI: TStringField
+      FieldName = 'DRAW_POSSUI'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsPessoa_Contato: TSQLDataSet
     NoMetadata = True
@@ -15197,18 +15218,23 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'select p.id_csticms, P.ID_LEI'
+      'select p.id_csticms, P.ID_LEI, DRAWBACK'
       'from pessoa_prodicms p'
       'WHERE P.CODIGO = :CODIGO'
       '  and p.ID_PRODUTO = :ID_PRODUTO')
     SQLConnection = dmDatabase.scoDados
     Left = 1216
-    Top = 146
+    Top = 145
     object qPessoa_ProdICMSID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
     end
     object qPessoa_ProdICMSID_LEI: TIntegerField
       FieldName = 'ID_LEI'
+    end
+    object qPessoa_ProdICMSDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
+      FixedChar = True
+      Size = 1
     end
   end
 end
