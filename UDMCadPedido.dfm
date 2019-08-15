@@ -11348,6 +11348,27 @@ object DMCadPedido: TDMCadPedido
     object qPessoa_FiscalID_CST_ICMS: TIntegerField
       FieldName = 'ID_CST_ICMS'
     end
+    object qPessoa_FiscalDRAW_OBS: TStringField
+      FieldName = 'DRAW_OBS'
+      Size = 250
+    end
+    object qPessoa_FiscalDRAW_ID_PIS_COFINS: TIntegerField
+      FieldName = 'DRAW_ID_PIS_COFINS'
+    end
+    object qPessoa_FiscalDRAW_ID_IPI: TIntegerField
+      FieldName = 'DRAW_ID_IPI'
+    end
+    object qPessoa_FiscalDRAW_ENQIPI: TIntegerField
+      FieldName = 'DRAW_ENQIPI'
+    end
+    object qPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField
+      FieldName = 'DRAW_PERC_DESCONTO'
+    end
+    object qPessoa_FiscalDRAW_POSSUI: TStringField
+      FieldName = 'DRAW_POSSUI'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsmFilial: TDataSource
     DataSet = sdsFilial
@@ -18251,7 +18272,7 @@ object DMCadPedido: TDMCadPedido
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'select p.id_csticms'
+      'select p.id_csticms, DRAWBACK'
       'from pessoa_prodicms p'
       'WHERE P.CODIGO = :CODIGO'
       '  and p.ID_PRODUTO = :ID_PRODUTO')
@@ -18260,6 +18281,11 @@ object DMCadPedido: TDMCadPedido
     Top = 364
     object qPessoa_ProdICMSID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
+    end
+    object qPessoa_ProdICMSDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
+      FixedChar = True
+      Size = 1
     end
   end
 end

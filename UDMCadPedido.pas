@@ -3483,6 +3483,13 @@ type
     qParametros_NFeUSA_REGRA_CLI_PROD: TStringField;
     qParametros_ProdCONTROLAR_PROD_ST: TStringField;
     cdsProdutoCALCULAR_ST: TStringField;
+    qPessoa_ProdICMSDRAWBACK: TStringField;
+    qPessoa_FiscalDRAW_OBS: TStringField;
+    qPessoa_FiscalDRAW_ID_PIS_COFINS: TIntegerField;
+    qPessoa_FiscalDRAW_ID_IPI: TIntegerField;
+    qPessoa_FiscalDRAW_ENQIPI: TIntegerField;
+    qPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField;
+    qPessoa_FiscalDRAW_POSSUI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

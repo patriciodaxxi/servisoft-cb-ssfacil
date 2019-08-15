@@ -767,6 +767,13 @@ begin
     begin
       vID_ICMS := fDMCadPedido.qPessoa_ProdICMSID_CSTICMS.AsInteger;
       vUsouRegraCli := True;
+      if (fDMCadPedido.qPessoa_ProdICMSDRAWBACK.AsString = 'S') and (fDMCadPedido.qPessoa_FiscalDRAW_POSSUI.AsString = 'S') then
+      begin
+        if fDMCadPedido.qPessoa_FiscalDRAW_ID_IPI.AsInteger > 0 then
+          vID_IPI := fDMCadPedido.qPessoa_FiscalDRAW_ID_IPI.AsInteger;
+        if StrToFloat(FormatFloat('0.00',fDMCadPedido.qPessoa_FiscalDRAW_PERC_DESCONTO.AsFloat)) > 0 then
+          fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadPedido.qPessoa_FiscalDRAW_PERC_DESCONTO.AsFloat));
+      end;
     end;
   end;
   //*******************
@@ -777,6 +784,10 @@ begin
     fDMCadPedido.cdsPedido_ItensID_CSTIPI.AsInteger := vID_IPI;
   if (vID_IPI > 0) and (fDMCadPedido.cdsTab_CSTIPIID.AsInteger <> vID_IPI) then
     fDMCadPedido.cdsTab_CSTIPI.Locate('ID',vID_IPI,[loCaseInsensitive]);
+  //15/08/2019
+  if fDMCadPedido.cdsTab_CSTIPIGERAR_IPI.AsString <> 'S' then
+    fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat := 0;
+  //****************
   if fDMCadPedido.cdsTab_CSTICMS.Locate('ID',vID_ICMS,[loCaseInsensitive]) then
     fDMCadPedido.cdsPedido_ItensPERC_TRIBICMS.AsFloat := fDMCadPedido.cdsTab_CSTICMSPERCENTUAL.AsFloat
   else
@@ -817,7 +828,7 @@ begin
   end;
   //25/08/2014
   if ((fDMCadPedido.cdsCFOPGERAR_IPI.AsString = 'S') or (fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger <= 0)) and not(vIPI_Suspenso) and
-    (fDMCadPedido.cdsFilialCALCULAR_IPI.AsString = 'S') then
+    (fDMCadPedido.cdsFilialCALCULAR_IPI.AsString = 'S') and (fDMCadPedido.cdsTab_CSTIPIGERAR_IPI.AsString = 'S') then
   begin
     fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat := fDMCadPedido.cdsProdutoPERC_IPI.AsFloat;
     //28/06/2018
@@ -1014,7 +1025,7 @@ begin
     if (fDMCadPedido.qParametros_NFeSOMAR_IPI_NO_ICM_TC.AsString = '9') then
       fDMCadPedido.cdsPedido_ItensCALCULARICMSSOBREIPI.AsString := 'S'
     else
-      fDMCadPedido.cdsPedido_ItensCALCULARICMSSOBREIPI.AsString := 'N'
+      fDMCadPedido.cdsPedido_ItensCALCULARICMSSOBREIPI.AsString := 'N';
   end
   else
     fDMCadPedido.cdsPedido_ItensCALCULARICMSSOBREIPI.AsString := 'N';
