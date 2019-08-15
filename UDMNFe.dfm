@@ -6126,7 +6126,7 @@ object DMNFe: TDMNFe
       'SELECT COUNT(1) CONTADOR'
       'FROM NOTAFISCAL_ITENS I'
       'INNER JOIN NOTAFISCAL N'
-      'ON I.ID_NTE = N.ID'
+      'ON I.ID = N.ID'
       'INNER JOIN pessoa_prodicms P'
       'ON N.id_cliente = P.codigo'
       'AND P.id_produto = I.id_produto'
