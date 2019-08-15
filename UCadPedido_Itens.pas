@@ -767,6 +767,13 @@ begin
     begin
       vID_ICMS := fDMCadPedido.qPessoa_ProdICMSID_CSTICMS.AsInteger;
       vUsouRegraCli := True;
+      if (fDMCadPedido.qPessoa_ProdICMSDRAWBACK.AsString = 'S') and (fDMCadPedido.qPessoa_FiscalDRAW_POSSUI.AsString = 'S') then
+      begin
+        if fDMCadPedido.qPessoa_FiscalDRAW_ID_IPI.AsInteger > 0 then
+          vID_IPI := fDMCadPedido.qPessoa_FiscalDRAW_ID_IPI.AsInteger;
+        if StrToFloat(FormatFloat('0.00',fDMCadPedido.qPessoa_FiscalDRAW_PERC_DESCONTO.AsFloat)) > 0 then
+          fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadPedido.qPessoa_FiscalDRAW_PERC_DESCONTO.AsFloat));
+      end;
     end;
   end;
   //*******************
@@ -777,6 +784,10 @@ begin
     fDMCadPedido.cdsPedido_ItensID_CSTIPI.AsInteger := vID_IPI;
   if (vID_IPI > 0) and (fDMCadPedido.cdsTab_CSTIPIID.AsInteger <> vID_IPI) then
     fDMCadPedido.cdsTab_CSTIPI.Locate('ID',vID_IPI,[loCaseInsensitive]);
+  //15/08/2019
+  if fDMCadPedido.cdsTab_CSTIPIGERAR_IPI.AsString <> 'S' then
+    fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat := 0;
+  //****************
   if fDMCadPedido.cdsTab_CSTICMS.Locate('ID',vID_ICMS,[loCaseInsensitive]) then
     fDMCadPedido.cdsPedido_ItensPERC_TRIBICMS.AsFloat := fDMCadPedido.cdsTab_CSTICMSPERCENTUAL.AsFloat
   else
@@ -817,7 +828,7 @@ begin
   end;
   //25/08/2014
   if ((fDMCadPedido.cdsCFOPGERAR_IPI.AsString = 'S') or (fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger <= 0)) and not(vIPI_Suspenso) and
-    (fDMCadPedido.cdsFilialCALCULAR_IPI.AsString = 'S') then
+    (fDMCadPedido.cdsFilialCALCULAR_IPI.AsString = 'S') and (fDMCadPedido.cdsTab_CSTIPIGERAR_IPI.AsString = 'S') then
   begin
     fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat := fDMCadPedido.cdsProdutoPERC_IPI.AsFloat;
     //28/06/2018
@@ -1014,7 +1025,7 @@ begin
     if (fDMCadPedido.qParametros_NFeSOMAR_IPI_NO_ICM_TC.AsString = '9') then
       fDMCadPedido.cdsPedido_ItensCALCULARICMSSOBREIPI.AsString := 'S'
     else
-      fDMCadPedido.cdsPedido_ItensCALCULARICMSSOBREIPI.AsString := 'N'
+      fDMCadPedido.cdsPedido_ItensCALCULARICMSSOBREIPI.AsString := 'N';
   end
   else
     fDMCadPedido.cdsPedido_ItensCALCULARICMSSOBREIPI.AsString := 'N';
@@ -1836,7 +1847,70 @@ begin
         fDMInformar_Tam.mAuxPedidoGrade.Next;
       end;
     end;
+    exit;
   end;
+
+  //***************
+  fDMInformar_Tam.mItens.First;
+  while not fDMInformar_Tam.mItens.Eof do
+  begin
+    fDMInformar_Tam.mItens_Mat.First;
+    fDMInformar_Tam.mTamanho.First;
+    while not fDMInformar_Tam.mTamanho.Eof do
+    begin
+      if (fDMInformar_Tam.mTamanhoTamanho.AsString <> fDMInformar_Tam.vTamanho_Ini) and (StrToFloat(FormatFloat('0.00000',fDMInformar_Tam.mTamanhoQtd.AsFloat)) > 0) then
+      begin
+        fDMCadPedido.prc_Inserir_Itens;
+        for x := 0 to (fDMInformar_Tam.mItens.FieldCount - 1) do
+        begin
+          try
+            if (fDMInformar_Tam.mItens.Fields[x].Tag = 0) then
+              fDMCadPedido.cdsPedido_Itens.FieldByName(fDMInformar_Tam.mItens.Fields[x].FieldName).AsVariant := fDMInformar_Tam.mItens.Fields[x].Value;
+          except
+          end;
+        end;
+
+        fDMCadPedido.cdsPedido_ItensITEM_CLIENTE.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+        fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString   := fDMInformar_Tam.mItensNome_Produto_Original.AsString + ' TAM. ' + fDMInformar_Tam.mTamanhoTamanho.AsString;
+        fDMCadPedido.cdsPedido_ItensTAMANHO.AsString       := fDMInformar_Tam.mTamanhoTamanho.AsString;
+        fDMCadPedido.cdsPedido_ItensQTD.AsFloat            := fDMInformar_Tam.mTamanhoQtd.AsFloat;
+        fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat   := fDMInformar_Tam.mTamanhoQtd.AsFloat;
+        fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat   := 0;
+
+        uCalculo_Pedido.prc_Calculo_GeralItem(fDMCadPedido,fDMCadPedido.cdsPedido_ItensQTD.AsFloat,fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat,
+                                               fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat,fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat,
+                                               fDMCadPedido.cdsPedido_ItensVLR_TOTAL.AsFloat);
+
+        fDMCadPedido.cdsPedido_Itens.Post;
+
+        if fDMCadPedido.cdsParametrosINFORMA_MAT_PEDIDO.AsString = 'S' then
+        begin
+          vItemAux := 0;
+          fDMInformar_Tam.mItens_Mat.First;
+          while not fDMInformar_Tam.mItens_Mat.Eof do
+          begin
+            vItemAux := vItemAux + 1;
+            fDMCadPedido.cdsPedido_Material.Insert;
+            fDMCadPedido.cdsPedido_MaterialID.AsInteger          := fDMCadPedido.cdsPedido_ItensID.AsInteger;
+            fDMCadPedido.cdsPedido_MaterialITEM.AsInteger        := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+            fDMCadPedido.cdsPedido_MaterialITEM_MAT.AsInteger    := vItemAux;
+            fDMCadPedido.cdsPedido_MaterialID_PRODUTO.AsInteger  := fDMInformar_Tam.mItens_MatID_PRODUTO.AsInteger;
+            fDMCadPedido.cdsPedido_MaterialQTD_CONSUMO.AsFloat   := StrToFloat(FormatFloat('0.00000',fDMInformar_Tam.mItens_MatQTD_CONSUMO.AsFloat));
+            fDMCadPedido.cdsPedido_MaterialVLR_UNITARIO.AsFloat  := StrToFloat(FormatFloat('0.0000',fDMInformar_Tam.mItens_MatVLR_UNITARIO.AsFloat));
+            fDMCadPedido.cdsPedido_MaterialVLR_TOTAL.AsFloat     := StrToFloat(FormatFloat('0.00',fDMInformar_Tam.mItens_MatVLR_TOTAL.AsFloat));
+            fDMCadPedido.cdsPedido_MaterialUNIDADE.AsString      := fDMInformar_Tam.mItens_MatUNIDADE.AsString;
+            fDMCadPedido.cdsPedido_MaterialNOME_PRODUTO.AsString := fDMInformar_Tam.mItens_MatNOME_PRODUTO.AsString;
+            fDMCadPedido.cdsPedido_Material.Post;
+            fDMInformar_Tam.mItens_Mat.Next;
+          end;
+        end;
+      end;
+      fDMInformar_Tam.mTamanho.Next;
+    end;
+
+    fDMInformar_Tam.mItens.Next;
+  end;
+
 end;
 
 procedure TfrmCadPedido_Itens.prc_Gravar_mItens;

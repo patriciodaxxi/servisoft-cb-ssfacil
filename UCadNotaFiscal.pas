@@ -5232,6 +5232,9 @@ begin
     fDMPreFat.cdsPreFat_Itens.Next;
   end;
   FreeAndNil(fDMPreFat);
+  //15/08/2019
+  btnCalcular_ValoresClick(Sender);
+  //*****************
   btnGerarParcelasClick(Sender);
 end;
 

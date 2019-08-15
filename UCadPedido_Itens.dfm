@@ -1,6 +1,6 @@
 object frmCadPedido_Itens: TfrmCadPedido_Itens
-  Left = 450
-  Top = 61
+  Left = 354
+  Top = 12
   Width = 781
   Height = 696
   BorderIcons = [biSystemMenu]
