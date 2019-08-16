@@ -575,7 +575,7 @@ var
   f: TextFile;
   vTotal: Real;
 begin
-  SetDefaultPrinter(vPorta);
+//  SetDefaultPrinter(vPorta);
   Printer.BeginDoc;
   Printer.Canvas.Font.Name  := 'Lucida Console';
 
@@ -658,7 +658,7 @@ begin
   end;
 
   Printer.EndDoc;
-  SetDefaultPrinter(vImpressora_Padrao);
+//  SetDefaultPrinter(vImpressora_Padrao);
 end;
 
 end.
