@@ -496,6 +496,7 @@ object dmCadProduto: TdmCadProduto
     Top = 1
   end
   object cdsProduto: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -1324,6 +1325,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Forn: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Forn
     IndexFieldNames = 'ID;ITEM'
@@ -1473,10 +1475,7 @@ object dmCadProduto: TdmCadProduto
   object sdsProduto_Consumo: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 
-      'SELECT PRO.*, POS.NOME NOME_POSICAO'#13#10'FROM PRODUTO_CONSUMO PRO'#13#10'L' +
-      'EFT JOIN POSICAO POS ON (PRO.ID_POSICAO = POS.ID)'#13#10'WHERE PRO.ID ' +
-      '= :ID'
+    CommandText = 'SELECT PRO.*'#13#10'FROM PRODUTO_CONSUMO PRO'#13#10'WHERE PRO.ID = :ID'
     DataSource = dsProduto_Mestre
     MaxBlobSize = -1
     Params = <
@@ -1545,11 +1544,11 @@ object dmCadProduto: TdmCadProduto
     end
     object sdsProduto_ConsumoNOME_POSICAO: TStringField
       FieldName = 'NOME_POSICAO'
-      ProviderFlags = []
       Size = 30
     end
   end
   object cdsProduto_Consumo: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Consumo
     IndexFieldNames = 'ID;ID_SETOR;ID_POSICAO'
@@ -1671,7 +1670,6 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsProduto_ConsumoNOME_POSICAO: TStringField
       FieldName = 'NOME_POSICAO'
-      ProviderFlags = []
       Size = 30
     end
   end
@@ -2600,6 +2598,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Tam: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Tam
     IndexFieldNames = 'ID;TAMANHO'
@@ -2836,6 +2835,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Consumo_Tam: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProduto_ConsumosdsProduto_Consumo_Tam
     IndexFieldNames = 'ID;ITEM;TAMANHO'
@@ -3779,6 +3779,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_UF: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_UF
     IndexFieldNames = 'ID;UF'
@@ -4001,6 +4002,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Uni: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Uni
     IndexFieldNames = 'ID;ITEM'
@@ -10074,6 +10076,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Consumo_Proc: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProduto_ConsumosdsProduto_Consumo_Proc
     IndexFieldNames = 'ID;ITEM;ITEM_PROC'
