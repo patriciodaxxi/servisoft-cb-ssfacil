@@ -1903,8 +1903,6 @@ type
     cdsFichaTecnicaQTD_ESTOQUE_MIN: TFloatField;
     cdsFichaTecnicaTIPO: TStringField;
     cdsProduto_ConsultaQTD_ESTOQUE: TFloatField;
-    sdsProduto_ConsumoNOME_POSICAO: TStringField;
-    cdsProduto_ConsumoNOME_POSICAO: TStringField;
     sdsProduto_Comb_MatNOME_POSICAO: TStringField;
     cdsProduto_Comb_MatNOME_POSICAO: TStringField;
     sdsProdutoQTD_POR_ROTULO: TFloatField;
@@ -1952,6 +1950,8 @@ type
     cdsProdutoCALCULAR_ST: TStringField;
     qParametros_ProdCONTROLAR_PROD_ST: TStringField;
     cdsNCMGERAR_ST: TStringField;
+    sdsProduto_ConsumoNOME_POSICAO: TStringField;
+    cdsProduto_ConsumoNOME_POSICAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2636,7 +2636,6 @@ begin
     qSetor.Open;
     cdsProduto_ConsumoNOME_SETOR.AsString := qSetorNOME.AsString;
   end;
-
 end;
 
 function TdmCadProduto.fnc_Calcular_Mat: Real;
@@ -3787,8 +3786,8 @@ end;
 procedure TdmCadProduto.dspProdutoGetTableName(Sender: TObject;
   DataSet: TDataSet; var TableName: String);
 begin
-  if DataSet.Name = 'sdsProduto_Consumo' then
-    TableName := 'PRODUTO_CONSUMO';
+//  if DataSet.Name = 'sdsProduto_Consumo' then
+//    TableName := 'PRODUTO_CONSUMO';
 end;
 
 procedure TdmCadProduto.dspProduto_CombGetTableName(Sender: TObject;

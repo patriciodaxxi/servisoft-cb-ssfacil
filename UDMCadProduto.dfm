@@ -1473,10 +1473,7 @@ object dmCadProduto: TdmCadProduto
   object sdsProduto_Consumo: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 
-      'SELECT PRO.*, POS.NOME NOME_POSICAO'#13#10'FROM PRODUTO_CONSUMO PRO'#13#10'L' +
-      'EFT JOIN POSICAO POS ON (PRO.ID_POSICAO = POS.ID)'#13#10'WHERE PRO.ID ' +
-      '= :ID'
+    CommandText = 'SELECT PRO.*'#13#10'FROM PRODUTO_CONSUMO PRO'#13#10'WHERE PRO.ID = :ID'
     DataSource = dsProduto_Mestre
     MaxBlobSize = -1
     Params = <
@@ -1545,7 +1542,6 @@ object dmCadProduto: TdmCadProduto
     end
     object sdsProduto_ConsumoNOME_POSICAO: TStringField
       FieldName = 'NOME_POSICAO'
-      ProviderFlags = []
       Size = 30
     end
   end
@@ -1671,7 +1667,6 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsProduto_ConsumoNOME_POSICAO: TStringField
       FieldName = 'NOME_POSICAO'
-      ProviderFlags = []
       Size = 30
     end
   end
