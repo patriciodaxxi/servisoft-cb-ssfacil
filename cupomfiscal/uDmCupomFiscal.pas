@@ -2722,7 +2722,10 @@ begin
 end;
 
 procedure TdmCupomFiscal.prc_Mover_CST;
+var
+  vIDCFOPAnt : Integer;
 begin
+  vIDCFOPAnt := vID_CFOP;
   if (vID_CFOP > 0) and (vID_CFOP <> cdsCFOPID.AsInteger) then
     cdsCFOP.Locate('ID',vID_CFOP,[loCaseInsensitive]);
 
@@ -2730,8 +2733,8 @@ begin
   qVariacao.ParamByName('ID').AsInteger   := vID_CFOP;
   qVariacao.ParamByName('ITEM').AsInteger := vID_Variacao;
   qVariacao.Open;
-  if qVariacao.IsEmpty then
-    exit;
+  //if qVariacao.IsEmpty then
+  //  exit;
 
   if qVariacaoID_COFINS.AsInteger > 0 then
     vID_Cofins := qVariacaoID_COFINS.AsInteger;
@@ -2778,6 +2781,15 @@ begin
     vID_CFOP := cdsTab_NCMID_CFOP.AsInteger;
   if (vID_CFOP > 0) and (vID_CFOP <> cdsCFOPID.AsInteger) then
     cdsCFOP.Locate('ID',vID_CFOP,[loCaseInsensitive]);
+
+  if vID_CFOP <> vIDCFOPAnt then
+  begin
+    vID_Variacao := fnc_Buscar_Regra_CFOP(vID_CFOP);
+    qVariacao.Close;
+    qVariacao.ParamByName('ID').AsInteger   := vID_CFOP;
+    qVariacao.ParamByName('ITEM').AsInteger := vID_Variacao;
+    qVariacao.Open;
+  end;
 
   if cdsTab_NCMID_PIS.AsInteger > 0 then
   begin
@@ -2834,6 +2846,12 @@ begin
         vPerc_ICMS := StrToFloat(FormatFloat('0.000',cdsProdutoPERC_ICMS_NFCE.AsFloat));
     end
     else
+    if (cdsProdutoID_CFOP_NFCE.AsInteger > 0) and (cdsProdutoID_CSTICMS.AsInteger <= 0) and
+      (qVariacaoID_CSTICMS.AsInteger > 0) then
+    begin
+      vID_CSTICMS := qVariacaoID_CSTICMS.AsInteger;
+    end
+    else
     if (cdsTab_NCMID_CST_ICMS.AsInteger > 0) and (cdsProdutoID_CSTICMS.AsInteger <= 0) then
     begin
       vID_CSTICMS     := cdsTab_NCMID_CST_ICMS.AsInteger;
@@ -2842,6 +2860,7 @@ begin
       if StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
         vPerc_ICMS := cdsTab_NCMPERC_ICMS.AsFloat;
     end;
+
     if cdsTab_CSTICMSID.AsInteger <> vID_CSTICMS then
       cdsTab_CSTICMS.Locate('ID',vID_CSTICMS,[loCaseInsensitive]);
     if (StrToFloat(FormatFloat('0.0000',cdsTab_CSTICMSPERCENTUAL.AsFloat)) > 0) and (trim(cdsCFOPGERAR_ICMS.AsString) = 'S')
