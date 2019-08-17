@@ -309,7 +309,10 @@ begin
   Shape2.Visible  := (fDMCadNCM.qParametrosTIPO_LEI_TRANSPARENCIA.AsString = 'I');
   Label27.Visible := (fDMCadNCM.qParametrosTIPO_LEI_TRANSPARENCIA.AsString = 'I');
   if trim(edtNCM.Text) <> '' then
+  begin
+    btnPesquisarClick(Sender);
     btnConsultarClick(Sender);
+  end;
 end;
 
 procedure TfrmCadNCM.prc_Consultar;

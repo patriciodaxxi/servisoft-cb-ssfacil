@@ -24,7 +24,7 @@ object frmCadNCM: TfrmCadNCM
     Top = 0
     Width = 950
     Height = 527
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadNCM: TfrmCadNCM
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RZPageControl1Change
     FixedDimension = 19
@@ -1350,10 +1350,10 @@ object frmCadNCM: TfrmCadNCM
         Top = 202
         Width = 946
         Height = 302
-        ActivePage = TabSheet1
+        ActivePage = TS_SubTrib
         ActivePageDefault = TS_SubTrib
         Align = alClient
-        TabIndex = 4
+        TabIndex = 0
         TabOrder = 2
         TextColors.Selected = clBlue
         FixedDimension = 19

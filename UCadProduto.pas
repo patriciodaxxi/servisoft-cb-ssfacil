@@ -2153,8 +2153,8 @@ end;
 procedure TfrmCadProduto.SpeedButton1Click(Sender: TObject);
 begin
   ffrmCadNCM := TfrmCadNCM.Create(self);
-  ffrmCadNCM.ShowModal;
   ffrmCadNCM.edtNCM.Text := RxDBLookupCombo3.Text;
+  ffrmCadNCM.ShowModal;
   FreeAndNil(ffrmCadNCM);
 
   fDMCadProduto.cdsNCM.Close;
