@@ -828,6 +828,10 @@ object DMCadNCM: TDMCadNCM
     object cdsNCM_ConsultaCONTADOR: TIntegerField
       FieldName = 'CONTADOR'
     end
+    object cdsNCM_ConsultaUNIDADE_TRIB: TStringField
+      FieldName = 'UNIDADE_TRIB'
+      Size = 6
+    end
   end
   object dsNCM_Consulta: TDataSource
     DataSet = cdsNCM_Consulta
@@ -1540,6 +1544,7 @@ object DMCadNCM: TDMCadNCM
     end
   end
   object cdsNCM_LEI: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsNCMsdsNCM_Lei
     IndexFieldNames = 'ID;ITEM'

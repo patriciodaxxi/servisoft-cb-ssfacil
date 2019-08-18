@@ -76,7 +76,7 @@ object frmCadNCM: TfrmCadNCM
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 13
+        ColCount = 14
         RowCount = 2
         Columns = <
           item
@@ -170,6 +170,13 @@ object frmCadNCM: TfrmCadNCM
             Title.Alignment = taCenter
             Title.Caption = 'Usado Em Produtos'
             Width = 57
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'UNIDADE_TRIB'
+            Title.Alignment = taCenter
+            Title.Caption = 'Unid. Trib. Exp.'
             Visible = True
           end>
       end
@@ -1350,10 +1357,10 @@ object frmCadNCM: TfrmCadNCM
         Top = 202
         Width = 946
         Height = 302
-        ActivePage = TS_SubTrib
+        ActivePage = TS_Unidade_Conv
         ActivePageDefault = TS_SubTrib
         Align = alClient
-        TabIndex = 0
+        TabIndex = 2
         TabOrder = 2
         TextColors.Selected = clBlue
         FixedDimension = 19
