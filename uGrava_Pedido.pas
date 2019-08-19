@@ -20,6 +20,7 @@ procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido; ID_Cor, Item, Item_Or
                                DtEntrega: TDateTime; Carimbo,Caixinha: String);
 
 function fnc_Existe_OC(fDMCadPedido: TDMCadPedido): Integer;
+function fnc_Verificar_Vendedor_Int(fDMCadPedido: TDMCadPedido ; ID : Integer) : Integer;
 
 implementation
 
@@ -883,6 +884,26 @@ begin
     fDMCadPedido.cdsPedido_Itens.Next;
   end;
 end;
+
+function fnc_Verificar_Vendedor_Int(fDMCadPedido: TDMCadPedido ; ID : Integer) : Integer;
+var
+  sds: TSQLDataSet;
+begin
+  Result := 0;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT P.id_vendedor_int FROM PESSOA P WHERE P.CODIGO = :CODIGO ';
+    sds.ParamByName('CODIGO').AsInteger := ID;
+    sds.Open;
+    Result := sds.FieldByName('id_vendedor_int').AsInteger;
+  finally
+    FreeAndNil(sds);
+  end;
+end;
+
 
 end.
 

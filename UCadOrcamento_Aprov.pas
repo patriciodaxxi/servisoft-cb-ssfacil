@@ -301,6 +301,17 @@ begin
   if fDMCadPedido.cdsOrcamentoID_VENDEDOR_INT.AsInteger > 0 then
     fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsOrcamentoID_VENDEDOR_INT.AsInteger;
 
+  //19/08/2019
+  if (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S') and (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <= 0) then
+  begin
+    if fDMCadPedido.cdsClienteCODIGO.AsInteger <> fDMCadPedido.cdsOrcamentoID_CLIENTE.AsInteger then
+      fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsOrcamentoID_CLIENTE.AsInteger,[loCaseInsensitive]);
+    if (fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger > 0)
+      and (MessageDlg('Orçamento Sem Vendedor Interno.'+#13+#13+ 'Copiar o Vendedor Interno que esta no Cadastro do Cliente para o Pedido?',mtConfirmation,[mbYes,mbNo],0) = mrYes) then
+      fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
+  end;
+  //********************
+
   fDMCadPedido.cdsPedido.Post;
   fDMCadPedido.cdsPedido.Edit;
   

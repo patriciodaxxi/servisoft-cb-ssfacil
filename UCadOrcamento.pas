@@ -219,6 +219,7 @@ type
     NxButton4: TNxButton;
     btnImportarXML: TNxButton;
     btnCopiarPedido: TNxButton;
+    SpeedButton2: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -285,6 +286,7 @@ type
     procedure BitBtn2Click(Sender: TObject);
     procedure SalvarOramento1Click(Sender: TObject);
     procedure btnCopiarPedidoClick(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
   private
     { Private declarations }
     vVlrFreteAnt: Real;
@@ -400,7 +402,24 @@ procedure TfrmCadOrcamento.prc_Gravar_Registro;
 var
   vIDAux: Integer;
   vParcelaAux: Integer;
+  vIDVend : Integer;
 begin
+  //19/08/2019
+  if (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S') then
+  begin
+    vIDVend := uGrava_Pedido.fnc_Verificar_Vendedor_Int(fDMCadPedido,fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger);
+    if (vIDVend > 0) then
+    begin
+      if (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <= 0) and (MessageDlg('Deseja gravar sem o vendedor interno?',mtConfirmation,[mbYes,mbNo],0) <> mrYes) then
+        exit
+      else
+      if (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger > 0) and (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <> vIDVend)
+        and (MessageDlg('Vendedor informado no Orçamento diferente do cadastro do Cliente, confirma assim mesmo?',mtConfirmation,[mbYes,mbNo],0) <> mrYes) then
+        exit;
+    end;
+  end;
+  //********************
+
   uGrava_Pedido.prc_Gravar(fDMCadPedido,'ORC');
   vIDAux := fDMCadPedido.cdsPedidoID.AsInteger;
   if fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert] then
@@ -531,6 +550,7 @@ begin
   DBEdit17.Visible         := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
   Label45.Visible          := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
   RxDBLookupCombo8.Visible := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+  SpeedButton2.Visible     := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
 
   btnLucratividade.Visible := (fDMCadPedido.qParametros_PedINF_LUCRATIVIDADE.AsString = 'S');
   Label32.Visible          := (fDMCadPedido.qParametros_PedUSA_EMAIL_NO_PED.AsString = 'S');
@@ -993,6 +1013,9 @@ begin
     fDMCadPedido.cdsPedidoOBS.AsString := fDMCadPedido.qGrupoPessoaNOME.AsString;
   end;
 
+  if (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S') and (fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger > 0) then
+    fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
+
   if (vID_ClienteAnt = fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger) then //or (fDMCadPedido.cdsPedido.State in [dsEdit])
     exit;
 
@@ -1038,8 +1061,6 @@ begin
     fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger  := fDMCadPedido.cdsClienteID_CONDPGTO.AsInteger;
   if fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger > 0 then
     fDMCadPedido.vSiglaUF := fDMCadPedido.cdsClienteUF.AsString;
-  if (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S') and (fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger > 0) then
-    fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
 end;
 
 procedure TfrmCadOrcamento.DBEdit1Enter(Sender: TObject);
@@ -1845,6 +1866,18 @@ begin
     fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P';
 
   fDMCadPedido.Tag := 0;
+end;
+
+procedure TfrmCadOrcamento.SpeedButton2Click(Sender: TObject);
+begin
+  if (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S') and (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <= 0) then
+  begin
+    fDMCadPedido.cdsCliente.Close;
+    fDMCadPedido.cdsCliente.Open;
+    fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,[loCaseInsensitive]);
+    if fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger > 0 then
+      fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
+  end;
 end;
 
 end.

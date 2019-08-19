@@ -365,6 +365,7 @@ type
     Matricial80Colunas1: TMenuItem;
     Label87: TLabel;
     RxDBLookupCombo14: TRxDBLookupCombo;
+    SpeedButton9: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -489,6 +490,7 @@ type
     procedure Matricial80Colunas1Click(Sender: TObject);
     procedure SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure SpeedButton9Click(Sender: TObject);
   private
     { Private declarations }
     fLista: TStringList;
@@ -852,6 +854,7 @@ begin
   gbxVendedor.Visible           := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
   Label87.Visible               := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
   RxDBLookupCombo14.Visible     := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+  SpeedButton9.Visible          := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
 
   Label21.Visible     := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P');
   DBDateEdit2.Visible := (fDMCadPedido.cdsParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P');
@@ -1283,16 +1286,36 @@ begin
 end;
 
 procedure TfrmCadPedido.btnConfirmarClick(Sender: TObject);
+var
+  vIDVend : Integer;
 begin
   if fDMCadPedido.qParametros_PedUSA_RETIRADA.AsString = 'S' then
   begin
     fDMCadPedido.cdsPedidoNOME_PRODUTO_PROPOSTA.AsString := InputBox('Retirada','Retirada:',fDMCadPedido.cdsPedidoNOME_PRODUTO_PROPOSTA.AsString);
   end;
 
+  //19/08/2019
+  if (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S') then
+  begin
+    vIDVend := uGrava_Pedido.fnc_Verificar_Vendedor_Int(fDMCadPedido,fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger);
+    if (vIDVend > 0) then
+    begin
+      if (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <= 0) and (MessageDlg('Deseja gravar sem o vendedor interno?',mtConfirmation,[mbYes,mbNo],0) <> mrYes) then
+        exit
+      else
+      if (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger > 0) and (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <> vIDVend) 
+        and (MessageDlg('Vendedor informado no Pedido diferente do cadastro do Cliente, confirma assim mesmo?',mtConfirmation,[mbYes,mbNo],0) <> mrYes) then
+        exit;
+    end;
+  end;
+  //********************
+
   if fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger < 1 then
     fDMCadPedido.cdsPedidoPERC_COMISSAO.AsFloat := 0;
+    
   if RxDBLookupCombo3.Text <> '' then
     fDMCadPedido.cdsPedidoNOME_CLIENTE.AsString := RxDBLookupCombo3.Text;
+    
   fDMCadPedido.cdsPedido_Itens.First;
   SMDBGrid2.DisableScroll;
   SMDBGrid2.DataSource := nil;
@@ -4681,6 +4704,18 @@ begin
     finally
       FreeAndNil(ffrmMostraPDF);
     end;
+  end;
+end;
+
+procedure TfrmCadPedido.SpeedButton9Click(Sender: TObject);
+begin
+  if (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <= 0) then
+  begin
+    fDMCadPedido.cdsCliente.Close;
+    fDMCadPedido.cdsCliente.Open;
+    fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,[loCaseInsensitive]);
+    if fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger > 0 then
+      fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
   end;
 end;
 
