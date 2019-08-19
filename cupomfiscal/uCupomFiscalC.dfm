@@ -863,6 +863,21 @@ object fCupomFiscalC: TfCupomFiscalC
       ParentFont = False
       TabOrder = 12
     end
+    object CheckBox1: TCheckBox
+      Left = 865
+      Top = 58
+      Width = 321
+      Height = 17
+      Caption = 'Gravar o Protocolo e Chave (xml baixar manualmente)'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 13
+      Visible = False
+    end
   end
   object Panel1: TPanel
     Left = 0

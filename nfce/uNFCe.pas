@@ -475,6 +475,7 @@ begin
     fDMCupomFiscal.cdsCupomFiscal.Edit;
     fDMCupomFiscal.cdsCupomFiscalNFECHAVEACESSO.AsString := lbChaveAcesso.Caption;
     fDMCupomFiscal.cdsCupomFiscalNFEPROTOCOLO.AsString   := lbNroProtocolo.Caption;
+    fDMCupomFiscal.cdsCupomFiscalNFEAMBIENTE.AsString    := IntToStr(ComboBox2.ItemIndex + 1);
     fDMCupomFiscal.cdsCupomFiscal.Post;
     fDMCupomFiscal.cdsCupomFiscal.ApplyUpdates(0);
     Close;

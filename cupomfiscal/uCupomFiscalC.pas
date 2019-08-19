@@ -90,6 +90,7 @@ type
     SMDBGrid5: TSMDBGrid;
     Label7: TLabel;
     ceTotal: TCurrencyEdit;
+    CheckBox1: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
@@ -903,6 +904,7 @@ begin
     SMDBGrid1.Columns.Items[14].Visible := not(SMDBGrid1.Columns.Items[14].Visible);
     SMDBGrid1.Columns.Items[15].Visible := not(SMDBGrid1.Columns.Items[15].Visible);
     SMDBGrid1.Columns.Items[11].Visible := not(SMDBGrid1.Columns.Items[11].Visible);
+    CheckBox1.Visible := not(CheckBox1.Visible);
   end;
 end;
 
@@ -1358,7 +1360,7 @@ begin
   ffNFCe.prc_Configura_Tela;
   try
     //18/09/2018
-    if fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime <> Date then
+    if (fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime <> Date) or ((CheckBox1.Checked) and (CheckBox1.Visible)) then
     begin
       vAlt := true;
       ffNFCe.vGerar_Chave_Antiga := 'N';
