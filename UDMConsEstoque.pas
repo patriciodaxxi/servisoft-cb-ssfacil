@@ -589,7 +589,7 @@ type
     cdsEstoque_Em_Terc_PesVLR_TOTAL_RESTANTE: TFloatField;
     cdsBalancoREF_NOME_COR: TStringField;
     mEstoque_CentroCusto: TClientDataSet;
-    mdsEstoque_CentroCusto: TDataSource;
+    dsmEstoque_CentroCusto: TDataSource;
     mEstoque_CentroCustoId_Produto: TIntegerField;
     mEstoque_CentroCustoNome_Produto: TStringField;
     mEstoque_CentroCustoCodigo_Grupo: TStringField;

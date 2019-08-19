@@ -1,6 +1,6 @@
 object frmConsEstoque_Mov: TfrmConsEstoque_Mov
-  Left = 221
-  Top = 81
+  Left = 143
+  Top = 173
   BorderStyle = bsSingle
   Caption = 'Consulta Estoque Movimento'
   ClientHeight = 518
@@ -445,7 +445,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
         Left = 0
         Top = 30
         Width = 937
-        Height = 297
+        Height = 143
         Align = alClient
         Ctl3D = False
         DataSource = DMConsEstoque.dsEstoque_Mov
@@ -880,6 +880,81 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
           TabOrder = 2
           Visible = False
         end
+      end
+      object DBGrid1: TDBGrid
+        Left = 0
+        Top = 173
+        Width = 937
+        Height = 154
+        Align = alBottom
+        DataSource = DMConsEstoque.dsmEstoque_CentroCusto
+        TabOrder = 3
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'Id_Produto'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome_Produto'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Codigo_Grupo'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome_Grupo'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'QSai'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Obs'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'QEnt'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VlrTotal'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Codigo_CentroCusto'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome_CentroCusto'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Codigo_Superior'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Nome_Superior'
+            Visible = True
+          end>
       end
     end
     object TS_Produto_Acum: TRzTabSheet

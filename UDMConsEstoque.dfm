@@ -3972,7 +3972,7 @@ object DMConsEstoque: TDMConsEstoque
       Size = 70
     end
   end
-  object mdsEstoque_CentroCusto: TDataSource
+  object dsmEstoque_CentroCusto: TDataSource
     DataSet = mEstoque_CentroCusto
     Left = 752
     Top = 264
@@ -3993,7 +3993,7 @@ object DMConsEstoque: TDMConsEstoque
       'Nome_CentroCusto=Nome_CentroCusto'
       'Codigo_Superior=Codigo_Superior'
       'Nome_Superior=Nome_Superior')
-    DataSource = mdsEstoque_CentroCusto
+    DataSource = dsmEstoque_CentroCusto
     BCDToCurrency = False
     Left = 848
     Top = 552

@@ -75,6 +75,7 @@ type
     ceIDPessoa: TCurrencyEdit;
     ckSemCor: TCheckBox;
     NxButton1: TNxButton;
+    DBGrid1: TDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -278,7 +279,7 @@ begin
     begin
       if fDMConsEstoque.cdsEstoque_MovTIPO_ES.AsString = 'S' then
       begin
-       if not(fDMConsEstoque.mEstoque_CentroCusto.Locate('Id_Produto',fDMConsEstoque.cdsEstoque_MovID_PRODUTO.AsInteger,[loCaseInsensitive])) then
+       if not(fDMConsEstoque.mEstoque_CentroCusto.Locate('Id_Produto; Codigo_CentroCusto',VarArrayOf([fDMConsEstoque.cdsEstoque_MovID_PRODUTO.AsInteger,fDMConsEstoque.cdsEstoque_MovID_CENTROCUSTO.AsInteger]),[loCaseInsensitive])) then
          fDMConsEstoque.mEstoque_CentroCusto.Insert
        else
          fDMConsEstoque.mEstoque_CentroCusto.Edit;
