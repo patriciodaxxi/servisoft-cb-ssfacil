@@ -115,6 +115,10 @@ type
     sdsCentroCustoEMAIL_COMRAS: TStringField;
     cdsCentroCustoCONTATO_COMPRAS: TStringField;
     cdsCentroCustoEMAIL_COMRAS: TStringField;
+    sdsCentroCustoVLR_CONTRATO_SERV: TFloatField;
+    cdsCentroCustoVLR_CONTRATO_SERV: TFloatField;
+    cdsConsultaVLR_CONTRATO: TFloatField;
+    cdsConsultaVLR_CONTRATO_SERV: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCentroCustoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

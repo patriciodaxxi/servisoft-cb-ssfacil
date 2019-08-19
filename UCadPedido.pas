@@ -1744,6 +1744,8 @@ begin
   btnCalcular_Valores.Enabled := not(btnCalcular_Valores.Enabled);
   btnRegravaItens.Enabled     := not(btnRegravaItens.Enabled);
 
+  pnlDadosAdicionais.Enabled  := not(pnlDadosAdicionais.Enabled);
+
   btnConfirmar.Enabled        := not(btnConfirmar.Enabled);
   btnAlterar.Enabled          := not(btnAlterar.Enabled);
 

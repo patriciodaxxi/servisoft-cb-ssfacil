@@ -2310,7 +2310,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         Top = 211
         Width = 1004
         Height = 390
-        ActivePage = RzTabSheet1
+        ActivePage = RzTabSheet2
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -2318,7 +2318,7 @@ object frmCadOrcamento: TfrmCadOrcamento
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 2
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -3737,6 +3737,12 @@ object frmCadOrcamento: TfrmCadOrcamento
                 Align = alClient
                 DataField = 'OBS'
                 DataSource = DMCadPedido.dsPedido
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
+                ParentFont = False
                 ReadOnly = True
                 ScrollBars = ssVertical
                 TabOrder = 0

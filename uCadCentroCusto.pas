@@ -76,6 +76,8 @@ type
     Label22: TLabel;
     DBEdit16: TDBEdit;
     DBEdit18: TDBEdit;
+    Label23: TLabel;
+    DBEdit19: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -172,6 +174,8 @@ begin
 end;
 
 procedure TfrmCadCentroCusto.FormShow(Sender: TObject);
+var
+  i : Integer;
 begin
   fDMCadCentroCusto := TDMCadCentroCusto.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMCadCentroCusto);
@@ -181,6 +185,13 @@ begin
   Edit4.SetFocus;
   fnc_Busca_Nome_Filial;
   gbxEndereco.Visible := (fDMCadCentroCusto.qParametros_FinUSA_END_CCUSTO.AsString = 'S');
+
+  for i := 0 to SMDBGrid1.ColCount - 2 do
+  begin
+    if (SMDBGrid1.Columns[i].FieldName = 'VLR_CONTRATO') or (SMDBGrid1.Columns[i].FieldName = 'VLR_CONTRATO_SERV') then
+      SMDBGrid1.Columns[i].Visible := (fDMCadCentroCusto.qParametros_FinUSA_END_CCUSTO.AsString = 'S');
+  end;
+  
 end;
 
 procedure TfrmCadCentroCusto.prc_Consultar;

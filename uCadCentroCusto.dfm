@@ -24,7 +24,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
     Top = 0
     Width = 755
     Height = 555
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -75,7 +75,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 8
+        ColCount = 10
         RowCount = 2
         Columns = <
           item
@@ -88,7 +88,6 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Expanded = False
             FieldName = 'TIPO'
             Title.Caption = 'Tipo'
-            Width = 64
             Visible = True
           end
           item
@@ -108,19 +107,32 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Expanded = False
             FieldName = 'APROPRIACAO'
             Title.Caption = 'Apropria'#231#227'o'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'SUPERIOR'
             Title.Caption = 'Superior'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ID'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VLR_CONTRATO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. Contrato'
+            Width = 96
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VLR_CONTRATO_SERV'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. Contrato Servi'#231'o'
             Visible = True
           end>
       end
@@ -870,7 +882,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           Left = 98
           Top = 127
           Width = 641
-          Height = 324
+          Height = 353
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -889,7 +901,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           VisualStyle = vsGradient
           object Label7: TLabel
             Left = 65
-            Top = 110
+            Top = 134
             Width = 49
             Height = 13
             Alignment = taRightJustify
@@ -897,7 +909,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label19: TLabel
             Left = 532
-            Top = 106
+            Top = 130
             Width = 15
             Height = 13
             Alignment = taRightJustify
@@ -905,7 +917,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label9: TLabel
             Left = 47
-            Top = 131
+            Top = 155
             Width = 67
             Height = 13
             Alignment = taRightJustify
@@ -913,7 +925,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label10: TLabel
             Left = 525
-            Top = 131
+            Top = 155
             Width = 22
             Height = 13
             Alignment = taRightJustify
@@ -921,7 +933,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label11: TLabel
             Left = 84
-            Top = 152
+            Top = 176
             Width = 30
             Height = 13
             Alignment = taRightJustify
@@ -929,7 +941,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label12: TLabel
             Left = 78
-            Top = 174
+            Top = 198
             Width = 36
             Height = 13
             Alignment = taRightJustify
@@ -937,7 +949,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label13: TLabel
             Left = 97
-            Top = 88
+            Top = 112
             Width = 17
             Height = 13
             Alignment = taRightJustify
@@ -945,7 +957,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label14: TLabel
             Left = 56
-            Top = 13
+            Top = 17
             Width = 58
             Height = 13
             Alignment = taRightJustify
@@ -953,7 +965,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label15: TLabel
             Left = 83
-            Top = 66
+            Top = 90
             Width = 30
             Height = 13
             Alignment = taRightJustify
@@ -961,7 +973,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label16: TLabel
             Left = 37
-            Top = 196
+            Top = 220
             Width = 77
             Height = 13
             Alignment = taRightJustify
@@ -969,7 +981,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label54: TLabel
             Left = 73
-            Top = 238
+            Top = 262
             Width = 40
             Height = 13
             Alignment = taRightJustify
@@ -977,7 +989,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label17: TLabel
             Left = 85
-            Top = 218
+            Top = 242
             Width = 28
             Height = 13
             Alignment = taRightJustify
@@ -985,7 +997,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label18: TLabel
             Left = 53
-            Top = 34
+            Top = 38
             Width = 61
             Height = 13
             Alignment = taRightJustify
@@ -993,14 +1005,14 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label20: TLabel
             Left = 21
-            Top = 263
+            Top = 287
             Width = 192
             Height = 13
             Caption = 'Respons'#225'vel Pelas Compras...................'
           end
           object Label21: TLabel
             Left = 73
-            Top = 307
+            Top = 331
             Width = 40
             Height = 13
             Alignment = taRightJustify
@@ -1008,15 +1020,23 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object Label22: TLabel
             Left = 85
-            Top = 287
+            Top = 311
             Width = 28
             Height = 13
             Alignment = taRightJustify
             Caption = 'Email:'
           end
+          object Label23: TLabel
+            Left = 14
+            Top = 59
+            Width = 100
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Vlr. Contrato Servi'#231'o:'
+          end
           object DBEdit5: TDBEdit
             Left = 115
-            Top = 102
+            Top = 126
             Width = 403
             Height = 21
             CharCase = ecUpperCase
@@ -1024,21 +1044,21 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             DataField = 'ENDERECO'
             DataSource = dmCadCentroCusto.dsCentroCusto
             ParentCtl3D = False
-            TabOrder = 4
+            TabOrder = 5
           end
           object DBEdit6: TDBEdit
             Left = 548
-            Top = 102
+            Top = 126
             Width = 89
             Height = 21
             CharCase = ecUpperCase
             DataField = 'NUM_END'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 5
+            TabOrder = 6
           end
           object DBEdit7: TDBEdit
             Left = 115
-            Top = 123
+            Top = 147
             Width = 403
             Height = 21
             CharCase = ecUpperCase
@@ -1046,21 +1066,21 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             DataField = 'COMPLEMENTO_END'
             DataSource = dmCadCentroCusto.dsCentroCusto
             ParentCtl3D = False
-            TabOrder = 6
+            TabOrder = 7
           end
           object DBEdit17: TDBEdit
             Left = 548
-            Top = 123
+            Top = 147
             Width = 89
             Height = 21
             CharCase = ecUpperCase
             DataField = 'CEP'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 7
+            TabOrder = 8
           end
           object DBEdit8: TDBEdit
             Left = 115
-            Top = 144
+            Top = 168
             Width = 403
             Height = 21
             CharCase = ecUpperCase
@@ -1068,11 +1088,11 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             DataField = 'BAIRRO'
             DataSource = dmCadCentroCusto.dsCentroCusto
             ParentCtl3D = False
-            TabOrder = 8
+            TabOrder = 9
           end
           object RxDBLookupCombo2: TRxDBLookupCombo
             Left = 115
-            Top = 166
+            Top = 190
             Width = 362
             Height = 21
             DropDownCount = 8
@@ -1082,11 +1102,11 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             LookupField = 'ID'
             LookupDisplay = 'NOME;UF'
             LookupSource = dmCadCentroCusto.dsCidade
-            TabOrder = 9
+            TabOrder = 10
           end
           object RxDBLookupCombo3: TRxDBLookupCombo
             Left = 115
-            Top = 80
+            Top = 104
             Width = 58
             Height = 21
             DropDownCount = 8
@@ -1095,7 +1115,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             LookupField = 'UF'
             LookupDisplay = 'UF'
             LookupSource = dmCadCentroCusto.dsUF
-            TabOrder = 3
+            TabOrder = 4
             OnExit = RxDBLookupCombo3Exit
           end
           object DBEdit9: TDBEdit
@@ -1110,55 +1130,55 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object DBEdit10: TDBEdit
             Left = 115
-            Top = 58
+            Top = 82
             Width = 139
             Height = 21
             CharCase = ecUpperCase
             DataField = 'CNPJ'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 2
+            TabOrder = 3
             OnEnter = DBEdit10Enter
             OnExit = DBEdit10Exit
           end
           object DBEdit11: TDBEdit
             Left = 115
-            Top = 188
+            Top = 212
             Width = 41
             Height = 21
             CharCase = ecUpperCase
             DataField = 'DDD'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 10
+            TabOrder = 11
           end
           object DBEdit12: TDBEdit
             Left = 157
-            Top = 188
+            Top = 212
             Width = 100
             Height = 21
             CharCase = ecUpperCase
             DataField = 'FONE'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 11
+            TabOrder = 12
           end
           object DBEdit13: TDBEdit
             Left = 114
-            Top = 231
+            Top = 255
             Width = 395
             Height = 21
             CharCase = ecUpperCase
             DataField = 'CONTATO'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 13
+            TabOrder = 14
           end
           object DBEdit14: TDBEdit
             Left = 114
-            Top = 210
+            Top = 234
             Width = 395
             Height = 21
             CharCase = ecLowerCase
             DataField = 'EMAIL'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 12
+            TabOrder = 13
           end
           object DBEdit15: TDBEdit
             Left = 115
@@ -1172,23 +1192,33 @@ object frmCadCentroCusto: TfrmCadCentroCusto
           end
           object DBEdit16: TDBEdit
             Left = 114
-            Top = 300
+            Top = 324
             Width = 395
             Height = 21
             CharCase = ecUpperCase
             DataField = 'CONTATO_COMPRAS'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 15
+            TabOrder = 16
           end
           object DBEdit18: TDBEdit
             Left = 115
-            Top = 279
+            Top = 303
             Width = 395
             Height = 21
             CharCase = ecLowerCase
             DataField = 'EMAIL_COMRAS'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 14
+            TabOrder = 15
+          end
+          object DBEdit19: TDBEdit
+            Left = 115
+            Top = 51
+            Width = 232
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'VLR_CONTRATO_SERV'
+            DataSource = dmCadCentroCusto.dsCentroCusto
+            TabOrder = 2
           end
         end
       end

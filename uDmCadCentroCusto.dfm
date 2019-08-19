@@ -118,6 +118,9 @@ object dmCadCentroCusto: TdmCadCentroCusto
       FieldName = 'EMAIL_COMRAS'
       Size = 150
     end
+    object sdsCentroCustoVLR_CONTRATO_SERV: TFloatField
+      FieldName = 'VLR_CONTRATO_SERV'
+    end
   end
   object dspCentroCusto: TDataSetProvider
     DataSet = sdsCentroCusto
@@ -130,7 +133,7 @@ object dmCadCentroCusto: TdmCadCentroCusto
     Params = <>
     ProviderName = 'dspCentroCusto'
     Left = 216
-    Top = 24
+    Top = 22
     object cdsCentroCustoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -230,6 +233,9 @@ object dmCadCentroCusto: TdmCadCentroCusto
     object cdsCentroCustoEMAIL_COMRAS: TStringField
       FieldName = 'EMAIL_COMRAS'
       Size = 150
+    end
+    object cdsCentroCustoVLR_CONTRATO_SERV: TFloatField
+      FieldName = 'VLR_CONTRATO_SERV'
     end
   end
   object dsCentroCusto: TDataSource
@@ -369,6 +375,14 @@ object dmCadCentroCusto: TdmCadCentroCusto
     object cdsConsultaNOME_AUX: TStringField
       FieldName = 'NOME_AUX'
       Size = 32765
+    end
+    object cdsConsultaVLR_CONTRATO: TFloatField
+      FieldName = 'VLR_CONTRATO'
+      DisplayFormat = '###,###,##0.00'
+    end
+    object cdsConsultaVLR_CONTRATO_SERV: TFloatField
+      FieldName = 'VLR_CONTRATO_SERV'
+      DisplayFormat = '###,###,##0.00'
     end
   end
   object dsConsulta: TDataSource

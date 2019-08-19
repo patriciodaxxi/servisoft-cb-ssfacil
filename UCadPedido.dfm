@@ -3899,7 +3899,13 @@ object frmCadPedido: TfrmCadPedido
                 Align = alTop
                 DataField = 'OBS'
                 DataSource = DMCadPedido.dsPedido
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = []
                 MaxLength = 378
+                ParentFont = False
                 ReadOnly = True
                 ScrollBars = ssVertical
                 TabOrder = 0
@@ -3970,7 +3976,7 @@ object frmCadPedido: TfrmCadPedido
                 end
                 object BitBtn2: TBitBtn
                   Left = 389
-                  Top = 5
+                  Top = 3
                   Width = 69
                   Height = 21
                   Caption = 'Copiar'
