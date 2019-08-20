@@ -3075,6 +3075,7 @@ type
     qPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField;
     qPessoa_FiscalDRAW_POSSUI: TStringField;
     qPessoa_ProdICMSDRAWBACK: TStringField;
+    qParametros_NFeCOPIA_PEDIDO_REP: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

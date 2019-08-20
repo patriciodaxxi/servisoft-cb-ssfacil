@@ -1,10 +1,9 @@
 object DMCadPedido: TDMCadPedido
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 65530
   Top = 11
   Height = 691
-  Width = 1380
+  Width = 1366
   object sdsPedido: TSQLDataSet
     NoMetadata = True
     GetMetadata = False

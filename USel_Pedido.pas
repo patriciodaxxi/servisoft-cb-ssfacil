@@ -89,7 +89,7 @@ var
 implementation
 
 uses rsDBUtils, uUtilPadrao, StrUtils, DmdDatabase, UInformar_Lote_Controle,
-  UConsEstoque_Lote, uCalculo_NotaFiscal;
+  UConsEstoque_Lote, uCalculo_NotaFiscal, Math;
 
 {$R *.dfm}
 
@@ -1332,6 +1332,10 @@ begin
               begin
                 prc_Gravar_NotaItens(False,0);
               end
+              else
+              //20/08/2019 para a Supercrom repetir o mesmo pedido e item na nota
+              if fDMCadNotaFiscal.qParametros_NFeCOPIA_PEDIDO_REP.AsString = 'S' then
+                prc_Gravar_NotaItens(False,0)
               else
               if not fDMCadNotaFiscal.cdsNotaFiscal_Itens.Locate('Num_Pedido;Item_Pedido',VarArrayOf([fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsInteger,fDMCadNotaFiscal.cdsPedidoITEM.AsInteger]),[locaseinsensitive]) then
                 prc_Gravar_NotaItens(False,0);

@@ -12892,6 +12892,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeCOPIA_PEDIDO_REP: TStringField
+      FieldName = 'COPIA_PEDIDO_REP'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoqueLoteAux: TSQLDataSet
     NoMetadata = True
