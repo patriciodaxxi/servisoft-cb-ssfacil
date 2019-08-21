@@ -2413,6 +2413,21 @@ object DMRecebeXML: TDMRecebeXML
       item
         Name = 'PossuiRateio'
         DataType = ftBoolean
+      end
+      item
+        Name = 'CodCFOPAtual'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'CodCFOPNCM'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'Copiar_CFOP_Prod'
+        DataType = ftString
+        Size = 1
       end>
     IndexDefs = <
       item
@@ -2429,7 +2444,7 @@ object DMRecebeXML: TDMRecebeXML
     Left = 921
     Top = 232
     Data = {
-      D50B00009619E0BD010000001800000078000000000003000000D50B04497465
+      3A0C00009619E0BD01000000180000007B0000000000030000003A0C04497465
       6D04000100000000000A436F6450726F6475746F010049000000010005574944
       5448020002003C0011436F6450726F6475746F496E7465726E6F040001000000
       000006436F64436F72040001000000000008436F644772616465040001000000
@@ -2523,7 +2538,10 @@ object DMRecebeXML: TDMRecebeXML
       544504000100000000000649445F4E544504000100000000000C4E756D5F4E6F
       74615F4E5445040001000000000009537065645F5469706F0100490000000100
       0557494454480200020002000C506F7373756952617465696F02000300000000
-      0001000D44454641554C545F4F524445520200820000000000}
+      000C436F6443464F50417475616C010049000000010005574944544802000200
+      05000A436F6443464F504E434D01004900000001000557494454480200020005
+      0010436F706961725F43464F505F50726F640100490000000100055749445448
+      02000200010001000D44454641554C545F4F524445520200820000000000}
     object mItensNotaItem: TIntegerField
       FieldName = 'Item'
     end
@@ -2974,6 +2992,18 @@ object DMRecebeXML: TDMRecebeXML
     end
     object mItensNotaPossuiRateio: TBooleanField
       FieldName = 'PossuiRateio'
+    end
+    object mItensNotaCodCFOPAtual: TStringField
+      FieldName = 'CodCFOPAtual'
+      Size = 5
+    end
+    object mItensNotaCodCFOPNCM: TStringField
+      FieldName = 'CodCFOPNCM'
+      Size = 5
+    end
+    object mItensNotaCopiar_CFOP_Prod: TStringField
+      FieldName = 'Copiar_CFOP_Prod'
+      Size = 1
     end
   end
   object dsmItensNota: TDataSource

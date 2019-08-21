@@ -2316,6 +2316,9 @@ type
     cdsNotaFiscalVLR_ICMS_EFET: TFloatField;
     cdsNotaFiscalBASE_ICMSSUBST_RET: TFloatField;
     cdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField;
+    mItensNotaCodCFOPAtual: TStringField;
+    mItensNotaCodCFOPNCM: TStringField;
+    mItensNotaCopiar_CFOP_Prod: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

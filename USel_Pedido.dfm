@@ -461,7 +461,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         FieldName = 'DTRECEBIMENTO'
         Title.Alignment = taCenter
         Title.Caption = 'Dt. Recebimento OS'
-        Width = 64
         Visible = True
       end
       item
@@ -470,7 +469,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         FieldName = 'DT_AGENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Dt. Previs'#227'o Final OS'
-        Width = 64
         Visible = True
       end
       item
@@ -516,7 +514,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         Expanded = False
         FieldName = 'CNPJ_CPF'
         ReadOnly = True
-        Width = 64
         Visible = True
       end
       item
@@ -540,7 +537,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Imp. N'#186' OC na Nota'
-        Width = 64
         Visible = True
       end
       item
@@ -564,7 +560,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Item no Cliente'
-        Width = 64
         Visible = True
       end>
   end

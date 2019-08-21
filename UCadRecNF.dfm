@@ -170,6 +170,7 @@ object frmCadRecNF: TfrmCadRecNF
             FieldName = 'TIPO_PRAZO'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Prazo'
+            Width = 64
             Visible = True
           end
           item
@@ -205,6 +206,7 @@ object frmCadRecNF: TfrmCadRecNF
             FieldName = 'USUARIO'
             Title.Alignment = taCenter
             Title.Caption = 'Usu'#225'rio'
+            Width = 64
             Visible = True
           end>
       end
@@ -1468,7 +1470,7 @@ object frmCadRecNF: TfrmCadRecNF
         Top = 188
         Width = 942
         Height = 431
-        ActivePage = TabSheet2
+        ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -1476,7 +1478,7 @@ object frmCadRecNF: TfrmCadRecNF
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet

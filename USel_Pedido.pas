@@ -486,19 +486,6 @@ begin
         else
           fDMCadNotaFiscal.mPedidoAuxVlr_Entrada.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_ENTRADA.AsFloat));
       end;
-      {if ((fDMCadNotaFiscal.cdsParametrosUSA_OBS_PEDIDO_NOTA.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsPedidoOBS_NOTA.AsString) <> '')) then
-      begin
-        if fDMCadNotaFiscal.cdsNotaFiscal_Itens.Locate('ID_PEDIDO',fDMCadNotaFiscal.cdsPedidoID.AsInteger,[loCaseInsensitive]) then
-          vGravaAux := False
-        else
-        begin
-          fDMCadNotaFiscal.mPedidoAuxOBS_Nota.AsString := fDMCadNotaFiscal.cdsPedidoOBS_NOTA.AsString;
-        end;
-      end;}
-      //if not vGravaAux then
-      //  fDMCadNotaFiscal.mPedidoAux.Cancel
-      //else
-      //  fDMCadNotaFiscal.mPedidoAux.Post;
     end;
   end;
   //****************

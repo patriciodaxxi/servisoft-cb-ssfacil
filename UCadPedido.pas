@@ -4267,6 +4267,12 @@ var
   ffrmSel_OS_Proc: TfrmSel_OS_Proc;
   vFinalidadeAux: String;
 begin
+  //02/06/2016  incluido a filial
+  if (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadPedido.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    uCalculo_Pedido.prc_Filtrar_Produto_Cliente(fDMCadPedido,False);
+  //****************
+
   vFinalidadeAux := fDMCadPedido.cdsPedidoFINALIDADE.AsString;
   if trim(vFinalidadeAux) = '' then
     vFinalidadeAux := 'O';

@@ -2734,6 +2734,12 @@ begin
     exit;
   end;
 
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
+
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);
   ffrmCadNotaFiscal_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;
 
@@ -3296,6 +3302,12 @@ begin
   prc_Posicionar_Cliente;
   //*****************
 
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
+
   vFilial      := fDMCadNotaFiscal.cdsFilialID.AsInteger;
   vFilial_Nome := fDMCadNotaFiscal.cdsFilialNOME.AsString;
 
@@ -3619,6 +3631,12 @@ begin
     if trim(fDMCadNotaFiscal.vMSGNotaFiscal) <> '' then
       exit;
   end;
+
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
 
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);
   ffrmCadNotaFiscal_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;
@@ -4412,6 +4430,11 @@ begin
     MessageDlg('*** CFOP não informado!', mtError, [mbOk], 0);
     Exit;
   end;
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
   
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);
   ffrmCadNotaFiscal_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;
@@ -4440,6 +4463,12 @@ begin
     MessageDlg('*** Cliente não informado!', mtError, [mbOk], 0);
     Exit;
   end;
+
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
 
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);
   ffrmCadNotaFiscal_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;
@@ -4485,6 +4514,12 @@ procedure TfrmCadNotaFiscal.btnCopiarSacolaClick(Sender: TObject);
 var
   vItemAux: Integer;
 begin
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
+
   vItemAux := fDMCadNotaFiscal.cdsNotaFiscal_Itens.RecordCount;
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);
   ffrmCadNotaFiscal_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;
@@ -5411,6 +5446,12 @@ begin
     MessageDlg('*** Cliente não informado!', mtError, [mbOk], 0);
     Exit;
   end;
+
+  //03/07/2019 ajustado para filstrar por tabela de preço
+  if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
+     (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
+    fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
+  //****************
 
   vItemAux := fDMCadNotaFiscal.cdsNotaFiscal_Itens.RecordCount;
   ffrmCadNotaFiscal_Itens := TfrmCadNotaFiscal_Itens.Create(self);

@@ -2754,7 +2754,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label121: TLabel
               Left = 200
-              Top = 10
+              Top = 8
               Width = 61
               Height = 13
               Alignment = taRightJustify
