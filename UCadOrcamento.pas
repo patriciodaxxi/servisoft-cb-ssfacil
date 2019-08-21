@@ -489,6 +489,7 @@ begin
   fDMCadPedido.cdsPedidoSIMPLES_FILIAL.AsString := fDMCadPedido.cdsFilialSIMPLES.AsString;
 
   RzPageControl1.ActivePage := TS_Cadastro;
+  TS_Consulta.TabEnabled    := False;
 
   fDMCadPedido.prc_Abrir_cdsCFOP('S');
 end;
