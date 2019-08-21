@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, Grids, DBGrids, SMDBGrid,
-  StdCtrls, Buttons, UDMConsProduto, NxEdit, Mask, ToolEdit, NxCollection, RzPanel;
+  StdCtrls, Buttons, UDMConsProduto, NxEdit, Mask, ToolEdit, NxCollection, RzPanel, DB, ComObj;
 
 type
   TfrmConsProdutoNCM = class(TForm)
@@ -19,15 +19,18 @@ type
     Edit2: TEdit;
     Label3: TLabel;
     Edit3: TEdit;
+    NxButton1: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure btnConsultarClick(Sender: TObject);
+    procedure NxButton1Click(Sender: TObject);
   private
     { Private declarations }
     fDMConsProduto: TDMConsProduto;
 
     procedure prc_Consultar;
+    procedure prc_CriaExcel(vDados: TDataSource; Grid : TSMDBGrid);
 
   public
     { Public declarations }
@@ -38,7 +41,7 @@ var
 
 implementation
 
-uses rsDBUtils, DateUtils;
+uses rsDBUtils, DateUtils, uUtilPadrao;
 
 {$R *.dfm}
 
@@ -96,6 +99,40 @@ begin
   fDMConsProduto.cdsProdNCM.Close;
   fDMConsProduto.sdsProdNCM.CommandText := fDMConsProduto.ctProdNCM + vComando;
   fDMConsProduto.cdsProdNCM.Open;
+end;
+
+procedure TfrmConsProdutoNCM.NxButton1Click(Sender: TObject);
+begin
+  SMDBGrid1.DisableScroll;
+  prc_CriaExcel(SMDBGrid1.DataSource, SMDBGrid1);
+  SMDBGrid1.EnableScroll;
+end;
+
+procedure TfrmConsProdutoNCM.prc_CriaExcel(vDados: TDataSource;
+  Grid: TSMDBGrid);
+var
+  planilha: variant;
+  vTexto: string;
+begin
+  Screen.Cursor := crHourGlass;
+  vDados.DataSet.First;
+
+  planilha := CreateOleObject('Excel.Application');
+  planilha.WorkBooks.add(1);
+  planilha.caption := 'Exportando dados do tela para o Excel';
+  planilha.visible := true;
+
+  prc_Preencher_Excel2(planilha, vDados, Grid);
+
+  planilha.columns.Autofit;
+  vTexto := ExtractFilePath(Application.ExeName);
+
+  vTexto := vTexto + Name + '_ProdutoNCM_' + Grid.Name + '_' +  Monta_Numero(DateToStr(Date), 0);
+  try
+    planilha.ActiveWorkBook.SaveAs(vTexto);
+  finally
+    Screen.Cursor := crDefault;
+  end;
 end;
 
 end.
