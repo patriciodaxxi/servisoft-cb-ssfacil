@@ -339,6 +339,7 @@ type
     cdsCCustoOrcamentoVLR_CONTRATO: TFloatField;
     cdsDuplicata_DetDTPAGAMENTO_PERIODO: TDateField;
     cdsDuplicata_DetVLR_PAGO_PERIODO: TFloatField;
+    cdsCCustoOrcamentoVLR_CONTRATO_SERVICO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConta_OrcNewRecord(DataSet: TDataSet);
     procedure mDespesaNewRecord(DataSet: TDataSet);

@@ -1909,12 +1909,15 @@ object DMConsFinanceiro: TDMConsFinanceiro
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43609.445011736110000000
+    ReportOptions.LastChange = 43698.602463437500000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'var'
       '  cSaldoCentroCusto : Currency;'
       '  cSaldoContrato : Currency;'
+      
+        '  clSaldoContratoServico : Currency;                            ' +
+        '                                                  '
       '  cTotalEntrada : Currency;'
       'procedure GroupHeader1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
@@ -1926,16 +1929,23 @@ object DMConsFinanceiro: TDMConsFinanceiro
       ''
       'procedure MasterData1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
+      '  if <frxCCustoOrcamento."VLR_ENTRADA"> <> 0 then'
+      '  begin'
       
-        '  cSaldoCentroCusto := cSaldoCentroCusto + <frxCCustoOrcamento."' +
-        'VLR_ENTRADA"> - <frxCCustoOrcamento."VLR_SAIDA">;'
+        '    cSaldoCentroCusto := cSaldoCentroCusto - <frxCCustoOrcamento' +
+        '."VLR_ENTRADA">;'
       
-        '  cTotalEntrada := cTotalEntrada + <frxCCustoOrcamento."VLR_ENTR' +
-        'ADA">;'
+        '    cTotalEntrada := cTotalEntrada + <frxCCustoOrcamento."VLR_EN' +
+        'TRADA">;'
+      '  end;'
       'end;'
       ''
       'procedure GroupFooter1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
+      
+        '  clSaldoContratoServico := <frxCCustoOrcamento."VLR_CONTRATO_SE' +
+        'RVICO"> - cTotalEntrada;                                        ' +
+        '                                           '
       
         '  cSaldoContrato := <frxCCustoOrcamento."VLR_CONTRATO"> - (cTota' +
         'lEntrada + <frxResumoCentro_Custo."VLR_ENTRADA">);'
@@ -2145,7 +2155,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 411.968770000000000000
+        Top = 468.661720000000000000
         Width = 718.110700000000000000
       end
       object ColumnHeader1: TfrxColumnHeader
@@ -2182,9 +2192,9 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Memo12: TfrxMemoView
-          Left = 426.354670000000000000
+          Left = 456.590910000000000000
           Top = 3.779530000000000000
-          Width = 113.385900000000000000
+          Width = 83.149660000000000000
           Height = 11.338590000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2231,7 +2241,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
         object Memo13: TfrxMemoView
           Left = 37.795300000000000000
           Top = 3.779530000000000000
-          Width = 608.504330000000000000
+          Width = 668.976810000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2241,7 +2251,9 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Memo.UTF8 = (
             
               '[frxCCustoOrcamento."CODIGO_GRUPO"] - [frxCCustoOrcamento."NOME_' +
-              'GRUPO"] ')
+              'GRUPO"] - Valor Contrado:    [frxCCustoOrcamento."VLR_CONTRATO"]' +
+              ' - Valor Contrato Servi'#195#167'o:  [frxCCustoOrcamento."VLR_CONTRATO_S' +
+              'ERVICO"]')
           ParentFont = False
           Formats = <
             item
@@ -2251,12 +2263,16 @@ object DMConsFinanceiro: TDMConsFinanceiro
             item
               FormatStr = '%2.2m'
               Kind = fkNumeric
+            end
+            item
+              FormatStr = '%2.2m'
+              Kind = fkNumeric
             end>
         end
       end
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
-        Height = 52.913420000000000000
+        Height = 154.960730000000000000
         Top = 253.228510000000000000
         Width = 718.110700000000000000
         OnBeforePrint = 'GroupFooter1OnBeforePrint'
@@ -2355,58 +2371,142 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Frame.ShadowColor = clWhite
           Diagonal = True
         end
-      end
-      object Footer1: TfrxFooter
-        FillType = ftBrush
-        Height = 22.677180000000000000
-        Top = 328.819110000000000000
-        Width = 718.110700000000000000
         object Memo15: TfrxMemoView
-          Left = 98.267780000000000000
-          Top = 3.779530000000000000
+          Left = 22.677180000000000000
+          Top = 41.574830000000000000
           Width = 68.031540000000000000
-          Height = 11.338590000000000000
+          Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -9
+          Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
+          Font.Style = [fsBold, fsUnderline]
           Memo.UTF8 = (
-            'Total Geral:')
+            'Resumo')
           ParentFont = False
         end
-        object SysMemo3: TfrxSysMemoView
-          Left = 445.252320000000000000
-          Top = 3.779530000000000000
-          Width = 94.488250000000000000
-          Height = 15.118120000000000000
+        object Memo16: TfrxMemoView
+          Left = 22.677180000000000000
+          Top = 63.223150000000000000
+          Width = 268.346630000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Total de Entrada at'#195#169': [DataInicial]')
+          ParentFont = False
+        end
+        object Memo17: TfrxMemoView
+          Left = 22.677180000000000000
+          Top = 127.165430000000000000
+          Width = 117.165430000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Saldo do Contrato:')
+          ParentFont = False
+        end
+        object Memo18: TfrxMemoView
+          Left = 328.086890000000000000
+          Top = 63.223150000000000000
+          Width = 211.653680000000000000
+          Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2m'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
+          Font.Style = []
           HAlign = haRight
           Memo.UTF8 = (
-            '[SUM(<frxCCustoOrcamento."VLR_ENTRADA">,MasterData1)]')
+            '[frxResumoCentro_Custo."VLR_ENTRADA"]')
           ParentFont = False
         end
-        object SysMemo4: TfrxSysMemoView
-          Left = 600.945270000000000000
-          Top = 3.779530000000000000
-          Width = 94.488250000000000000
-          Height = 15.118120000000000000
+        object Memo19: TfrxMemoView
+          Left = 328.086890000000000000
+          Top = 127.165430000000000000
+          Width = 211.653680000000000000
+          Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2m'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
+          Font.Style = []
           HAlign = haRight
           Memo.UTF8 = (
-            '[SUM(<frxCCustoOrcamento."VLR_SAIDA">,MasterData1)]')
+            '[cSaldoContrato]')
+          ParentFont = False
+        end
+        object Memo20: TfrxMemoView
+          Left = 22.677180000000000000
+          Top = 105.851336666666700000
+          Width = 268.346630000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Valor do Contrato:')
+          ParentFont = False
+        end
+        object Memo21: TfrxMemoView
+          Left = 328.086890000000000000
+          Top = 105.851336666666700000
+          Width = 211.653680000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[frxCCustoOrcamento."VLR_CONTRATO"]')
+          ParentFont = False
+        end
+        object Memo22: TfrxMemoView
+          Left = 22.677180000000000000
+          Top = 84.537243333333330000
+          Width = 268.346630000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Saldo Contrato Servi'#195#167'o')
+          ParentFont = False
+        end
+        object Memo23: TfrxMemoView
+          Left = 328.086890000000000000
+          Top = 84.537243330000000000
+          Width = 211.653680000000000000
+          Height = 18.897650000000000000
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[clSaldoContratoServico]')
           ParentFont = False
         end
       end
@@ -2441,13 +2541,13 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'select sum(VD.VLR_ENTRADA) VLR_ENTRADA, sum(VD.VLR_SAIDA) VLR_SA' +
       'IDA, VD.CODIGO_GRUPO, VD.CODIGO_GRUPO_SUP,'#13#10'       VD.NOME_GRUPO' +
       ', VD.CONTA_ORCAMENTO, VD.ID_CONTA_ORCAMENTO, VD.NOME_ORCAMENTO, ' +
-      'VD.VLR_CONTRATO'#13#10'from VDUPLICATA_CENTROCUSTO VD'#13#10'where VD.DTULTP' +
-      'AGAMENTO between :DTINICIAL and :DTFINAL and'#13#10'      ((:ID_CENTRO' +
-      'CUSTO = 0) or (VD.ID_CENTROCUSTO = :ID_CENTROCUSTO)) and'#13#10'      ' +
-      'VD.FILIAL = :FILIAL AND (VD.TIPO_HISTORICO = :TIPO_HISTORICO)'#13#10'g' +
-      'roup by VD.CODIGO_GRUPO, VD.CODIGO_GRUPO_SUP, VD.NOME_GRUPO, VD.' +
-      'CONTA_ORCAMENTO, VD.ID_CONTA_ORCAMENTO, VD.NOME_ORCAMENTO, VD.VL' +
-      'R_CONTRATO'
+      'VD.VLR_CONTRATO, VD.VLR_CONTRATO_SERVICO'#13#10'from VDUPLICATA_CENTRO' +
+      'CUSTO VD'#13#10'where VD.DTULTPAGAMENTO between :DTINICIAL and :DTFINA' +
+      'L and'#13#10'      ((:ID_CENTROCUSTO = 0) or (VD.ID_CENTROCUSTO = :ID_' +
+      'CENTROCUSTO)) and'#13#10'      VD.FILIAL = :FILIAL AND (VD.TIPO_HISTOR' +
+      'ICO = :TIPO_HISTORICO)'#13#10'group by VD.CODIGO_GRUPO, VD.CODIGO_GRUP' +
+      'O_SUP, VD.NOME_GRUPO, VD.CONTA_ORCAMENTO, VD.ID_CONTA_ORCAMENTO,' +
+      ' VD.NOME_ORCAMENTO, VD.VLR_CONTRATO, VD.VLR_CONTRATO_SERVICO'
     MaxBlobSize = -1
     Params = <
       item
@@ -2536,6 +2636,9 @@ object DMConsFinanceiro: TDMConsFinanceiro
     object cdsCCustoOrcamentoVLR_CONTRATO: TFloatField
       FieldName = 'VLR_CONTRATO'
     end
+    object cdsCCustoOrcamentoVLR_CONTRATO_SERVICO: TFloatField
+      FieldName = 'VLR_CONTRATO_SERVICO'
+    end
   end
   object dsCCustoOrcamento: TDataSource
     DataSet = cdsCCustoOrcamento
@@ -2592,7 +2695,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'CONTA_ORCAMENTO=CONTA_ORCAMENTO'
       'ID_CONTA_ORCAMENTO=ID_CONTA_ORCAMENTO'
       'NOME_ORCAMENTO=NOME_ORCAMENTO'
-      'VLR_CONTRATO=VLR_CONTRATO')
+      'VLR_CONTRATO=VLR_CONTRATO'
+      'VLR_CONTRATO_SERVICO=VLR_CONTRATO_SERVICO')
     DataSource = dsCCustoOrcamento
     BCDToCurrency = False
     Left = 584
