@@ -3,7 +3,7 @@ unit UDMConsProduto;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, SqlExpr, DBClient, Provider;
+  SysUtils, Classes, FMTBcd, DB, SqlExpr, DBClient, Provider, LogTypes;
 
 type
   TDMConsProduto = class(TDataModule)
@@ -77,14 +77,53 @@ type
     cdsProdNCMPERC_ICMS: TFloatField;
     cdsProdNCMNOME_GRUPO: TStringField;
     cdsProdNCMINATIVO: TStringField;
+    sdsProduto: TSQLDataSet;
+    dspProduto: TDataSetProvider;
+    cdsProduto: TClientDataSet;
+    dsProduto: TDataSource;
+    sdsProdutoID: TIntegerField;
+    sdsProdutoNOME: TStringField;
+    sdsProdutoID_CFOP_NFCE: TIntegerField;
+    sdsProdutoID_CSTICMS: TIntegerField;
+    sdsProdutoID_CSTICMS_BRED: TIntegerField;
+    sdsProdutoPERC_ICMS_NFCE: TFloatField;
+    sdsProdutoPERC_REDUCAOICMS: TFloatField;
+    cdsProdutoID: TIntegerField;
+    cdsProdutoNOME: TStringField;
+    cdsProdutoID_CFOP_NFCE: TIntegerField;
+    cdsProdutoID_CSTICMS: TIntegerField;
+    cdsProdutoID_CSTICMS_BRED: TIntegerField;
+    cdsProdutoPERC_ICMS_NFCE: TFloatField;
+    cdsProdutoPERC_REDUCAOICMS: TFloatField;
+    sdsCFOP: TSQLDataSet;
+    dspCFOP: TDataSetProvider;
+    cdsCFOP: TClientDataSet;
+    cdsCFOPID: TIntegerField;
+    cdsCFOPCODCFOP: TStringField;
+    cdsCFOPNOME: TStringField;
+    cdsCFOPNOME_INTERNO: TStringField;
+    cdsCFOPCONTROLAR_CONFIG: TStringField;
+    dsCFOP: TDataSource;
+    sdsCSTICMS: TSQLDataSet;
+    dspCSTICMS: TDataSetProvider;
+    cdsCSTICMS: TClientDataSet;
+    cdsCSTICMSID: TIntegerField;
+    cdsCSTICMSCOD_CST: TStringField;
+    cdsCSTICMSCOD_DESONERACAO: TSmallintField;
+    cdsCSTICMSPERCENTUAL: TFloatField;
+    cdsCSTICMSTIPO_ICMS: TStringField;
+    dsCSTICMS: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
+    procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
+
   public
     { Public declarations }
     ctConsulta_Prod : String;
     ctProduto_Custo : String;
     ctProdNCM : String;
+    vAltProd : Boolean;
     
     procedure prc_Consulta_Prod(ID_Produto, Tipo_Opcao : Integer ; DtInicial, DtFinal : TDateTime ; ID_Filial : Integer = 0);
 
@@ -95,7 +134,7 @@ var
 
 implementation
 
-uses DmdDatabase;
+uses DmdDatabase, uUtilPadrao, LogProvider;
 
 {$R *.dfm}
 
@@ -129,11 +168,50 @@ begin
 end;
 
 procedure TDMConsProduto.DataModuleCreate(Sender: TObject);
+var
+  i, x: Integer;
+  vIndices: string;
+  aIndices: array of string;
 begin
   ctConsulta_Prod := sdsConsulta_Prod.CommandText;
   ctProduto_Custo := sdsProduto_Custo.CommandText;
   ctProdNCM       := sdsProdNCM.CommandText;
   qParametros.Open;
+  cdsCFOP.Open;
+  cdsCSTICMS.Open;
+  //*** Logs Implantado na versão .353
+  LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
+  for i := 0 to (Self.ComponentCount - 1) do
+  begin
+    if (Self.Components[i] is TClientDataSet) then
+    begin
+      SetLength(aIndices, 0);
+      vIndices := TClientDataSet(Components[i]).IndexFieldNames;
+      while (vIndices <> EmptyStr) do
+      begin
+        SetLength(aIndices, Length(aIndices) + 1);
+        x := Pos(';', vIndices);
+        if (x = 0) then
+        begin
+          aIndices[Length(aIndices) - 1] := vIndices;
+          vIndices := EmptyStr;
+        end
+        else
+        begin
+          aIndices[Length(aIndices) - 1] := Copy(vIndices, 1, x - 1);
+          vIndices := Copy(vIndices, x + 1, MaxInt);
+        end;
+      end;
+      LogProviderList.AddProvider(TClientDataSet(Self.Components[i]), TClientDataSet(Self.Components[i]).Name, aIndices);
+    end;
+  end;
+  //***********************
+end;
+
+procedure TDMConsProduto.DoLogAdditionalValues(ATableName: string;
+  var AValues: TArrayLogData; var UserName: string);
+begin
+  UserName := vUsuario;
 end;
 
 end.

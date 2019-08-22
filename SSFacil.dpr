@@ -822,7 +822,8 @@ uses
   UComissaoVend in 'UComissaoVend.pas' {frmComissaoVend},
   UConsProdutoNCM in 'UConsProdutoNCM.pas' {frmConsProdutoNCM},
   UCadPessoa_ProdICMS in 'UCadPessoa_ProdICMS.pas' {frmCadPessoa_ProdICMS},
-  uRecebeXML_CFOP in 'nfevisualizador\uRecebeXML_CFOP.pas' {frmRecebeXML_CFOP};
+  uRecebeXML_CFOP in 'nfevisualizador\uRecebeXML_CFOP.pas' {frmRecebeXML_CFOP},
+  UAltCFOPProd in 'UAltCFOPProd.pas' {frmAltCFOPProd};
 
 {$R *.res}
 

@@ -2139,11 +2139,16 @@ begin
       if (fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString <> fDMRecebeXML.mItensNotaSped_Tipo.AsString) and (Trim(fDMRecebeXML.mItensNotaSped_Tipo.AsString) <> '') then
         fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
       //23/07/2019      22/08/2019 para controlar se já tem , não deixar copiar
-      if (fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0) and (fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger <= 0) then
-        fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger
+      if (trim(fDMRecebeXML.mItensNotaCodCFOPNCM.AsString) <> '') and (fDMRecebeXML.mItensNotaID_CFOPNCM.AsInteger = fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger) then
       else
-      if (fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0) and (fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString = 'S') then
-        fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
+      begin
+        if (fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0) and (fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger <= 0)
+          and (fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString = 'S') then
+          fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger
+        else
+        if (fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0) and (fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString = 'S') then
+          fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
+      end;
       //****************
 
       if fDMRecebeXML.mItensNotaGerar_CLiquido.AsBoolean then
@@ -2215,6 +2220,7 @@ begin
     fDMRecebeXML.cdsProduto_Forn.Post;
     fDMRecebeXML.cdsProduto_Forn.ApplyUpdates(0);
   end;
+  CheckBox2.Checked := False;
 end;
 
 procedure TfrmRecebeXML.Gravar_Produto;
@@ -4814,13 +4820,16 @@ begin
   fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString := 'N';
   if (trim(fDMRecebeXML.mItensNotaCodCFOP_NFCe.AsString) <> '') then
   begin
-    if (trim(fDMRecebeXML.mItensNotaCodCFOPAtual.AsString) <> '') 
+    if (trim(fDMRecebeXML.mItensNotaCodCFOPAtual.AsString) <> '')
       and (fDMRecebeXML.mItensNotaCodCFOPAtual.AsString <> fDMRecebeXML.mItensNotaCodCFOP_NFCe.AsString) then
       fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString := ''
     else
     if (trim(fDMRecebeXML.mItensNotaCodCFOPNCM.AsString) <> '') and (trim(fDMRecebeXML.mItensNotaCodCFOPAtual.AsString) = '')
       and (fDMRecebeXML.mItensNotaCodCFOPNCM.AsString <> fDMRecebeXML.mItensNotaCodCFOP_NFCe.AsString) then
       fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString := ''
+    else
+    if fDMRecebeXML.mItensNotaCodCFOPNCM.AsString = fDMRecebeXML.mItensNotaCodCFOP_NFCe.AsString then
+      fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString := 'N'
     else
       fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString := 'S';
   end;

@@ -20,11 +20,13 @@ type
     Label3: TLabel;
     Edit3: TEdit;
     NxButton1: TNxButton;
+    StaticText1: TStaticText;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure btnConsultarClick(Sender: TObject);
     procedure NxButton1Click(Sender: TObject);
+    procedure SMDBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
     fDMConsProduto: TDMConsProduto;
@@ -41,7 +43,7 @@ var
 
 implementation
 
-uses rsDBUtils, DateUtils, uUtilPadrao;
+uses rsDBUtils, DateUtils, uUtilPadrao, UAltCFOPProd;
 
 {$R *.dfm}
 
@@ -132,6 +134,26 @@ begin
     planilha.ActiveWorkBook.SaveAs(vTexto);
   finally
     Screen.Cursor := crDefault;
+  end;
+end;
+
+procedure TfrmConsProdutoNCM.SMDBGrid1DblClick(Sender: TObject);
+var
+  vID_Aux : Integer;
+begin
+  if not(fDMConsProduto.cdsProdNCM.Active) or (fDMConsProduto.cdsProdNCM.IsEmpty) then
+    exit;
+  vID_Aux := fDMConsProduto.cdsProdNCMID.AsInteger;
+  fDMConsProduto.vAltProd := False;
+  frmAltCFOPProd := TfrmAltCFOPProd.Create(self);
+  frmAltCFOPProd.vID_Produto_Loc := fDMConsProduto.cdsProdNCMID.AsInteger;
+  frmAltCFOPProd.fDMConsProduto := fDMConsProduto;
+  frmAltCFOPProd.ShowModal;
+  FreeAndNil(frmAltCFOPProd);
+  if fDMConsProduto.vAltProd then
+  begin
+    btnConsultarClick(Sender);
+    fDMConsProduto.cdsProdNCM.Locate('ID',vID_Aux,([Locaseinsensitive]));
   end;
 end;
 

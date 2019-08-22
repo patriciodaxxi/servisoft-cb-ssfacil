@@ -4,7 +4,7 @@ object DMConsProduto: TDMConsProduto
   Left = 408
   Top = 171
   Height = 452
-  Width = 570
+  Width = 653
   object sdsConsulta_Prod: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -363,5 +363,191 @@ object DMConsProduto: TDMConsProduto
     DataSet = cdsProdNCM
     Left = 424
     Top = 276
+  end
+  object sdsProduto: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT P.ID, P.NOME, P.id_cfop_nfce, P.id_csticms, P.id_csticms_' +
+      'bred,'#13#10'P.perc_icms_nfce, P.perc_reducaoicms'#13#10'FROM PRODUTO P'#13#10'WHE' +
+      'RE P.ID = :ID'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 50
+    Top = 184
+    object sdsProdutoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object sdsProdutoNOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object sdsProdutoID_CFOP_NFCE: TIntegerField
+      FieldName = 'ID_CFOP_NFCE'
+    end
+    object sdsProdutoID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
+    end
+    object sdsProdutoID_CSTICMS_BRED: TIntegerField
+      FieldName = 'ID_CSTICMS_BRED'
+    end
+    object sdsProdutoPERC_ICMS_NFCE: TFloatField
+      FieldName = 'PERC_ICMS_NFCE'
+    end
+    object sdsProdutoPERC_REDUCAOICMS: TFloatField
+      FieldName = 'PERC_REDUCAOICMS'
+    end
+  end
+  object dspProduto: TDataSetProvider
+    DataSet = sdsProduto
+    Left = 106
+    Top = 184
+  end
+  object cdsProduto: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'dspProduto'
+    Left = 162
+    Top = 184
+    object cdsProdutoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsProdutoNOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object cdsProdutoID_CFOP_NFCE: TIntegerField
+      FieldName = 'ID_CFOP_NFCE'
+    end
+    object cdsProdutoID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
+    end
+    object cdsProdutoID_CSTICMS_BRED: TIntegerField
+      FieldName = 'ID_CSTICMS_BRED'
+    end
+    object cdsProdutoPERC_ICMS_NFCE: TFloatField
+      FieldName = 'PERC_ICMS_NFCE'
+    end
+    object cdsProdutoPERC_REDUCAOICMS: TFloatField
+      FieldName = 'PERC_REDUCAOICMS'
+    end
+  end
+  object dsProduto: TDataSource
+    DataSet = cdsProduto
+    Left = 210
+    Top = 184
+  end
+  object sdsCFOP: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT T.id, T.codcfop, T.nome, T.nome_interno, T.controlar_conf' +
+      'ig'#13#10'FROM TAB_CFOP T'#13#10'WHERE T.USA_NFCE = '#39'S'#39
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 432
+    Top = 46
+  end
+  object dspCFOP: TDataSetProvider
+    DataSet = sdsCFOP
+    UpdateMode = upWhereKeyOnly
+    Left = 466
+    Top = 46
+  end
+  object cdsCFOP: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'CODCFOP;NOME'
+    Params = <>
+    ProviderName = 'dspCFOP'
+    Left = 498
+    Top = 46
+    object cdsCFOPID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsCFOPCODCFOP: TStringField
+      FieldName = 'CODCFOP'
+      Size = 5
+    end
+    object cdsCFOPNOME: TStringField
+      FieldName = 'NOME'
+      Size = 50
+    end
+    object cdsCFOPNOME_INTERNO: TStringField
+      FieldName = 'NOME_INTERNO'
+      Size = 30
+    end
+    object cdsCFOPCONTROLAR_CONFIG: TStringField
+      FieldName = 'CONTROLAR_CONFIG'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dsCFOP: TDataSource
+    DataSet = cdsCFOP
+    Left = 528
+    Top = 46
+  end
+  object sdsCSTICMS: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT t.id,  t.cod_cst, t.cod_desoneracao, t.percentual, T.TIPO' +
+      '_ICMS'#13#10'FROM tab_csticms t'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 431
+    Top = 102
+  end
+  object dspCSTICMS: TDataSetProvider
+    DataSet = sdsCSTICMS
+    UpdateMode = upWhereKeyOnly
+    Left = 463
+    Top = 103
+  end
+  object cdsCSTICMS: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'COD_CST'
+    Params = <>
+    ProviderName = 'dspCSTICMS'
+    Left = 495
+    Top = 103
+    object cdsCSTICMSID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsCSTICMSCOD_CST: TStringField
+      FieldName = 'COD_CST'
+      Size = 3
+    end
+    object cdsCSTICMSCOD_DESONERACAO: TSmallintField
+      FieldName = 'COD_DESONERACAO'
+    end
+    object cdsCSTICMSPERCENTUAL: TFloatField
+      FieldName = 'PERCENTUAL'
+    end
+    object cdsCSTICMSTIPO_ICMS: TStringField
+      FieldName = 'TIPO_ICMS'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object dsCSTICMS: TDataSource
+    DataSet = cdsCSTICMS
+    Left = 527
+    Top = 103
   end
 end

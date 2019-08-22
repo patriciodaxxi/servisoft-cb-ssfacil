@@ -23,7 +23,7 @@ object frmConsProdutoNCM: TfrmConsProdutoNCM
     Left = 0
     Top = 96
     Width = 1032
-    Height = 399
+    Height = 379
     Align = alClient
     Ctl3D = False
     DataSource = DMConsProduto.dsProdNCM
@@ -36,6 +36,7 @@ object frmConsProdutoNCM: TfrmConsProdutoNCM
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
+    OnDblClick = SMDBGrid1DblClick
     OnTitleClick = SMDBGrid1TitleClick
     Flat = True
     BandsFont.Charset = DEFAULT_CHARSET
@@ -444,5 +445,20 @@ object frmConsProdutoNCM: TfrmConsProdutoNCM
       Transparent = True
       OnClick = NxButton1Click
     end
+  end
+  object StaticText1: TStaticText
+    Left = 0
+    Top = 475
+    Width = 1032
+    Height = 20
+    Align = alBottom
+    Caption = 'Duplo Clique para Alterar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMaroon
+    Font.Height = -13
+    Font.Name = 'Verdana'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 2
   end
 end
