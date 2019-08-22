@@ -375,6 +375,9 @@ type
     XMLDocument1: TXMLDocument;
     Shape6: TShape;
     Label148: TLabel;
+    Shape7: TShape;
+    Label149: TLabel;
+    CheckBox2: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -419,6 +422,7 @@ type
     procedure DBEdit82Exit(Sender: TObject);
     procedure NxButton2Click(Sender: TObject);
     procedure btnAjustarUnidadeClick(Sender: TObject);
+    procedure CheckBox2Click(Sender: TObject);
   private
     { Private declarations }
     vCodCidade: Integer;
@@ -527,6 +531,7 @@ type
     procedure prc_Gerar_Ref;
     procedure prc_Gravar_Tipo_Sped_Prod;
     procedure prc_Gravar_Rateio;
+    procedure prc_Busca_CFOPAtual;
 
   public
     { Public declarations }
@@ -545,7 +550,7 @@ implementation
 
 uses
   DmdDatabase, uUtilPadrao, UMenu, rsDBUtils, uNFeComandos, USel_Pessoa, USel_Grupo, USel_Produto_Cor,
-  USel_ContaOrc;
+  USel_ContaOrc, uRecebeXML_CFOP;
 
 {$R *.dfm}
 
@@ -608,6 +613,8 @@ begin
       fDMRecebeXML.mItensNotaGerar_Estoque.AsString := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
       fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+      //21/08/2019
+      fDMRecebeXML.mItensNotaID_CFOPAtual.AsInteger := fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger;
 
       prc_Monta_Grupo('N');
       prc_Monta_ContaOrc('N');
@@ -639,6 +646,9 @@ begin
         fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
       fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+      //21/08/2019
+      fDMRecebeXML.mItensNotaID_CFOPAtual.AsInteger := fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger;
+
       prc_Monta_Grupo('N');
       prc_Monta_ContaOrc('N');
     end;
@@ -771,13 +781,18 @@ begin
   //Label113.Visible      := (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'S');
   //CurrencyEdit1.Visible := (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'S');
 
-  Label123.Visible := (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'S');
-  DBEdit75.Visible := (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'S');
+  Label123.Visible  := (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'S');
+  DBEdit75.Visible  := (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'S');
+  CheckBox2.Visible := (fDMRecebeXML.qParametrosUSA_NFCE.AsString = 'S');
 
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin
     if (SMDBGrid1.Columns[i].FieldName = 'CodCFOP_NFCe') then
       SMDBGrid1.Columns[i].Visible := (fDMRecebeXML.qParametrosUSA_NFCE.AsString = 'S');
+    if (SMDBGrid1.Columns[i].FieldName = 'Copiar_CFOP_Prod') then
+      SMDBGrid1.Columns[i].Visible := (fDMRecebeXML.qParametrosUSA_NFCE.AsString = 'S');
+    if (SMDBGrid1.Columns[i].FieldName = 'CodCFOPAtual') or (SMDBGrid1.Columns[i].FieldName = 'CodCFOPNCM') then
+      SMDBGrid1.Columns[i].Visible := False;
     if (fDMRecebeXML.qParametrosINFORMAR_COR_MATERIAL.AsString <> 'S') and
        (fDMRecebeXML.qParametrosINFORMAR_COR_PROD.AsString <> 'C') then
     begin
@@ -969,6 +984,8 @@ begin
   //*******************
   fDMRecebeXML.mItensNotaNCM.AsString               := fDMRecebeXML.cdsDetalheNCM.AsString;
   fDMRecebeXML.mItensNotaID_NCM.AsInteger           := fDMRecebeXML.fnc_Abrir_NCM(fDMRecebeXML.cdsDetalheNCM.AsString);
+  fDMRecebeXML.mItensNotaID_CFOPNCM.AsInteger       := fDMRecebeXML.cdsNCMID_CFOP.AsInteger;
+  
   if fDMRecebeXML.mItensNotaID_NCM.AsInteger > 0 then
     fDMRecebeXML.mItensNotaCEST_Interno.AsString := fDMRecebeXML.cdsNCMCOD_CEST.AsString;
   fDMRecebeXML.mItensNotaCEST.AsString              := fDMRecebeXML.cdsDetalheCEST.AsString;
@@ -1193,8 +1210,6 @@ begin
   begin
     fDMRecebeXML.mItensNotaCodCSTIPI.AsString := fDMRecebeXML.cdsDetalheIPITrib_CST.AsString;
 
-
-
   end;
 
   fDMRecebeXML.mItensNotaAliqIPI.AsFloat      := fDMRecebeXML.cdsDetalhepIPI.AsFloat;
@@ -1323,6 +1338,10 @@ begin
       fDMRecebeXML.mItensNotaGerar_Estoque.AsString := 'N';
   end;
   //***************************
+
+  //21/08/2019
+  prc_Busca_CFOPAtual;
+  //********************
 
   fDMRecebeXML.mItensNota.Post;
 end;
@@ -1543,6 +1562,9 @@ begin
         (StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaVlrIcmsCSTRet.AsFloat)) <= 0)) then
       Background  := $000080FF
     else
+    if (fDMRecebeXML.qParametrosUSA_NFCE.AsString = 'S') and (trim(fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString) = '') then
+      Background  := $0080FF00
+    else
     if fDMRecebeXML.mItensNotaID_Pedido.AsInteger <= 0 then
     begin
       Background  := clYellow;
@@ -1636,6 +1658,10 @@ begin
         fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
         fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
 
+        //22/08/2019
+        fDMRecebeXML.mItensNotaID_CFOPAtual.AsInteger := fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger;
+        prc_Busca_CFOPAtual;                         
+
         //22/06/2019  Quando for Textil e o produto for Semi, não é para gerar estoque em qualquer tipo de CFOP na nota
         if (fDMRecebeXML.qParametros_LoteLOTE_TEXTIL.AsString = 'S') and ((fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger > 0))then
         begin
@@ -1720,7 +1746,21 @@ begin
     finally
       FreeAndNil(ffrmRateio_Itens);
     end;
+  end
+  else
+  if (Key = Vk_F7) and not(fDMRecebeXML.mItensNota.IsEmpty) then
+  begin
+    frmRecebeXML_CFOP := TfrmRecebeXML_CFOP.Create(Self);
+    try
+      frmRecebeXML_CFOP.fDMRecebeXML := fDMRecebeXML;
+      frmRecebeXML_CFOP.ShowModal;
+      if fDMRecebeXML.mItensNota.State in [dsEdit] then
+        fDMRecebeXML.mItensNota.Cancel;
+    finally
+      FreeAndNil(frmRecebeXML_CFOP);
+    end;
   end;
+
 end;
 
 procedure TfrmRecebeXML.BitBtn1Click(Sender: TObject);
@@ -2096,8 +2136,11 @@ begin
         fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString := fDMRecebeXML.mItensNotaPosse_Material.AsString;
       if (fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString <> fDMRecebeXML.mItensNotaSped_Tipo.AsString) and (Trim(fDMRecebeXML.mItensNotaSped_Tipo.AsString) <> '') then
         fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString := fDMRecebeXML.mItensNotaSped_Tipo.AsString;
-      //23/07/2019
-      if fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0 then
+      //23/07/2019      22/08/2019 para controlar se já tem , não deixar copiar
+      if (fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0) and (fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger <= 0) then
+        fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger
+      else
+      if (fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger > 0) and (fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString = 'S') then
         fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger := fDMRecebeXML.mItensNotaID_CFOP_NFCe.AsInteger;
       //****************
 
@@ -3984,7 +4027,10 @@ end;
 procedure TfrmRecebeXML.RxDBLookupCombo8Change(Sender: TObject);
 begin
   if fDMRecebeXML.mItensNota.State in [dsEdit] then
+  begin
     fDMRecebeXML.mItensNotaCodCFOP_NFCe.AsString := RxDBLookupCombo8.Text;
+    prc_Busca_CFOPAtual;
+  end;
 end;
 
 function TfrmRecebeXML.fnc_Montar_PrecoCompra(Unidade: String): Real;
@@ -4352,6 +4398,11 @@ begin
         fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
       fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+
+      //22/08/2019
+      fDMRecebeXML.mItensNotaID_CFOPAtual.AsInteger := fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger;
+      prc_Busca_CFOPAtual;
+
     end;
   end;
   fDMRecebeXML.mItensNota.Post;
@@ -4577,6 +4628,11 @@ begin
         fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
       fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
       fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
+
+      //22/08/2019
+      fDMRecebeXML.mItensNotaID_CFOPAtual.AsInteger := fDMRecebeXML.cdsProdutoID_CFOP_NFCE.AsInteger;
+      prc_Busca_CFOPAtual;                         
+
     end;
   end;
   fDMRecebeXML.mItensNota.Post;
@@ -4739,6 +4795,44 @@ begin
   end;
   btnAjustarUnidade.Visible := False;
   ShowMessage('Convertido');
+end;
+
+procedure TfrmRecebeXML.prc_Busca_CFOPAtual;
+begin
+  //21/08/2019
+  fDMRecebeXML.qCFOP2.Close;
+  fDMRecebeXML.qCFOP2.ParamByName('ID').AsInteger := fDMRecebeXML.mItensNotaID_CFOPAtual.AsInteger;
+  fDMRecebeXML.qCFOP2.Open;
+  fDMRecebeXML.mItensNotaCodCFOPAtual.AsString := fDMRecebeXML.qCFOP2CODCFOP.AsString;
+  fDMRecebeXML.qCFOP2.Close;
+  fDMRecebeXML.qCFOP2.ParamByName('ID').AsInteger := fDMRecebeXML.mItensNotaID_CFOPNCM.AsInteger;
+  fDMRecebeXML.qCFOP2.Open;
+  fDMRecebeXML.mItensNotaCodCFOPNCM.AsString := fDMRecebeXML.qCFOP2CODCFOP.AsString;
+
+  fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString := 'N';
+  if (trim(fDMRecebeXML.mItensNotaCodCFOP_NFCe.AsString) <> '') then
+  begin
+    if (trim(fDMRecebeXML.mItensNotaCodCFOPAtual.AsString) <> '') 
+      and (fDMRecebeXML.mItensNotaCodCFOPAtual.AsString <> fDMRecebeXML.mItensNotaCodCFOP_NFCe.AsString) then
+      fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString := ''
+    else
+    if (trim(fDMRecebeXML.mItensNotaCodCFOPNCM.AsString) <> '') and (trim(fDMRecebeXML.mItensNotaCodCFOPAtual.AsString) = '')
+      and (fDMRecebeXML.mItensNotaCodCFOPNCM.AsString <> fDMRecebeXML.mItensNotaCodCFOP_NFCe.AsString) then
+      fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString := ''
+    else
+      fDMRecebeXML.mItensNotaCopiar_CFOP_Prod.AsString := 'S';
+  end;
+end;
+
+procedure TfrmRecebeXML.CheckBox2Click(Sender: TObject);
+var
+  i : Integer;
+begin
+  for i := 1 to SMDBGrid1.ColCount - 2 do
+  begin
+    if (SMDBGrid1.Columns[i].FieldName = 'CodCFOPAtual') or (SMDBGrid1.Columns[i].FieldName = 'CodCFOPNCM') then
+      SMDBGrid1.Columns[i].Visible := CheckBox2.Checked;
+  end;
 end;
 
 end.

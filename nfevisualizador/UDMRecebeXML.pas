@@ -2319,6 +2319,12 @@ type
     mItensNotaCodCFOPAtual: TStringField;
     mItensNotaCodCFOPNCM: TStringField;
     mItensNotaCopiar_CFOP_Prod: TStringField;
+    sdsNCMID_CFOP: TIntegerField;
+    cdsNCMID_CFOP: TIntegerField;
+    mItensNotaID_CFOPNCM: TIntegerField;
+    mItensNotaID_CFOPAtual: TIntegerField;
+    qCFOP2: TSQLQuery;
+    qCFOP2CODCFOP: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -3015,6 +3021,13 @@ begin
     mItensNotaOrigem.AsString := '0';
   if mItensNotaGravar_Adic_Prod.AsString = 's' then
     mItensNotaGravar_Adic_Prod.AsString := 'S';
+  if (mItensNotaCopiar_CFOP_Prod.AsString = 's') or (mItensNotaCopiar_CFOP_Prod.AsString = 'S') then
+    mItensNotaCopiar_CFOP_Prod.AsString := 'S'
+  else
+  if (mItensNotaCopiar_CFOP_Prod.AsString = 'n') or (mItensNotaCopiar_CFOP_Prod.AsString = 'N') then
+    mItensNotaCopiar_CFOP_Prod.AsString := 'N'
+  else
+    mItensNotaCopiar_CFOP_Prod.AsString := '';
 end;
 
 procedure TDMRecebeXML.prc_Move_Dados_Da_OC;

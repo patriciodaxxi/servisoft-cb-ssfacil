@@ -2259,9 +2259,36 @@ object frmRecebeXML: TfrmRecebeXML
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 37
+          ColCount = 40
           RowCount = 2
           Columns = <
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'Copiar_CFOP_Prod'
+              Title.Alignment = taCenter
+              Title.Caption = 'Copiar CFOP Prod.'
+              Width = 34
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'CodCFOPAtual'
+              Title.Alignment = taCenter
+              Title.Caption = 'CFOP Inf. Produto'
+              Width = 60
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'CodCFOPNCM'
+              Title.Alignment = taCenter
+              Title.Caption = 'CFOP Inf. NCM'
+              Width = 49
+              Visible = True
+            end
             item
               Expanded = False
               FieldName = 'Item'
@@ -2630,16 +2657,16 @@ object frmRecebeXML: TfrmRecebeXML
             Caption = 'Produto Inativo'
           end
           object Label48: TLabel
-            Left = 10
-            Top = 11
-            Width = 454
-            Height = 48
+            Left = 6
+            Top = 5
+            Width = 360
+            Height = 57
             Caption = 
-              'F3 - Associar Produto       F5 - Associar Nota'#13#10'F4 - Associar OC' +
-              '               F6 - Rateio Produto'
+              'F3 - Associar Produto       F6 - Rateio Produto'#13#10'F4 - Associar O' +
+              'C               F7 - Ver CFOP '#13#10'F5 - Associar Nota'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clMaroon
-            Font.Height = -21
+            Font.Height = -17
             Font.Name = 'Arial'
             Font.Style = [fsBold]
             ParentFont = False
@@ -2660,9 +2687,25 @@ object frmRecebeXML: TfrmRecebeXML
             Anchors = [akTop, akRight]
             Caption = 'CFOP 5405 Sem Base/Vlr ST Retido'
           end
+          object Shape7: TShape
+            Left = 480
+            Top = 7
+            Width = 25
+            Height = 16
+            Anchors = [akTop, akRight]
+            Brush.Color = 8453888
+          end
+          object Label149: TLabel
+            Left = 508
+            Top = 10
+            Width = 103
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Diverg'#234'ncia de CFOP'
+          end
           object BitBtn4: TBitBtn
-            Left = 512
-            Top = 37
+            Left = 376
+            Top = 35
             Width = 123
             Height = 25
             Anchors = [akTop, akRight]
@@ -2670,6 +2713,16 @@ object frmRecebeXML: TfrmRecebeXML
             TabOrder = 0
             Visible = False
             OnClick = BitBtn4Click
+          end
+          object CheckBox2: TCheckBox
+            Left = 509
+            Top = 25
+            Width = 139
+            Height = 17
+            Anchors = [akTop, akRight]
+            Caption = 'Mostrar CFOP na Grid'
+            TabOrder = 1
+            OnClick = CheckBox2Click
           end
         end
         object PageControl1: TPageControl

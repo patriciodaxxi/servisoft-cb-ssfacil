@@ -821,7 +821,8 @@ uses
   UDMComissaoVend in 'UDMComissaoVend.pas' {DMComissaoVend: TDataModule},
   UComissaoVend in 'UComissaoVend.pas' {frmComissaoVend},
   UConsProdutoNCM in 'UConsProdutoNCM.pas' {frmConsProdutoNCM},
-  UCadPessoa_ProdICMS in 'UCadPessoa_ProdICMS.pas' {frmCadPessoa_ProdICMS};
+  UCadPessoa_ProdICMS in 'UCadPessoa_ProdICMS.pas' {frmCadPessoa_ProdICMS},
+  uRecebeXML_CFOP in 'nfevisualizador\uRecebeXML_CFOP.pas' {frmRecebeXML_CFOP};
 
 {$R *.res}
 

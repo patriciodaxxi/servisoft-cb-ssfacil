@@ -2428,6 +2428,14 @@ object DMRecebeXML: TDMRecebeXML
         Name = 'Copiar_CFOP_Prod'
         DataType = ftString
         Size = 1
+      end
+      item
+        Name = 'ID_CFOPNCM'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_CFOPAtual'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -2444,7 +2452,7 @@ object DMRecebeXML: TDMRecebeXML
     Left = 921
     Top = 232
     Data = {
-      3A0C00009619E0BD01000000180000007B0000000000030000003A0C04497465
+      620C00009619E0BD01000000180000007D000000000003000000620C04497465
       6D04000100000000000A436F6450726F6475746F010049000000010005574944
       5448020002003C0011436F6450726F6475746F496E7465726E6F040001000000
       000006436F64436F72040001000000000008436F644772616465040001000000
@@ -2541,7 +2549,9 @@ object DMRecebeXML: TDMRecebeXML
       000C436F6443464F50417475616C010049000000010005574944544802000200
       05000A436F6443464F504E434D01004900000001000557494454480200020005
       0010436F706961725F43464F505F50726F640100490000000100055749445448
-      02000200010001000D44454641554C545F4F524445520200820000000000}
+      0200020001000A49445F43464F504E434D04000100000000000C49445F43464F
+      50417475616C040001000000000001000D44454641554C545F4F524445520200
+      820000000000}
     object mItensNotaItem: TIntegerField
       FieldName = 'Item'
     end
@@ -3004,6 +3014,12 @@ object DMRecebeXML: TDMRecebeXML
     object mItensNotaCopiar_CFOP_Prod: TStringField
       FieldName = 'Copiar_CFOP_Prod'
       Size = 1
+    end
+    object mItensNotaID_CFOPNCM: TIntegerField
+      FieldName = 'ID_CFOPNCM'
+    end
+    object mItensNotaID_CFOPAtual: TIntegerField
+      FieldName = 'ID_CFOPAtual'
     end
   end
   object dsmItensNota: TDataSource
@@ -6905,6 +6921,9 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'COD_CEST'
       Size = 7
     end
+    object sdsNCMID_CFOP: TIntegerField
+      FieldName = 'ID_CFOP'
+    end
   end
   object dspNCM: TDataSetProvider
     DataSet = sdsNCM
@@ -6943,6 +6962,9 @@ object DMRecebeXML: TDMRecebeXML
     object cdsNCMCOD_CEST: TStringField
       FieldName = 'COD_CEST'
       Size = 7
+    end
+    object cdsNCMID_CFOP: TIntegerField
+      FieldName = 'ID_CFOP'
     end
   end
   object dsNCM: TDataSource
@@ -9057,7 +9079,7 @@ object DMRecebeXML: TDMRecebeXML
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
     Left = 1016
-    Top = 119
+    Top = 120
     object qParametros_RecXMLID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -10350,6 +10372,27 @@ object DMRecebeXML: TDMRecebeXML
     end
     object mRateioGeralQuantidade: TFloatField
       FieldName = 'Quantidade'
+    end
+  end
+  object qCFOP2: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT CODCFOP'
+      'FROM TAB_CFOP'
+      'WHERE ID = :ID'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1053
+    Top = 226
+    object qCFOP2CODCFOP: TStringField
+      FieldName = 'CODCFOP'
+      Size = 5
     end
   end
 end
