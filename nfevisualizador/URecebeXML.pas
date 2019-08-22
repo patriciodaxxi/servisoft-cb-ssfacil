@@ -784,6 +784,8 @@ begin
   Label123.Visible  := (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'S');
   DBEdit75.Visible  := (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'S');
   CheckBox2.Visible := (fDMRecebeXML.qParametrosUSA_NFCE.AsString = 'S');
+  Shape7.Visible    := (fDMRecebeXML.qParametrosUSA_NFCE.AsString = 'S');
+  Label149.Visible  := (fDMRecebeXML.qParametrosUSA_NFCE.AsString = 'S');
 
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin
