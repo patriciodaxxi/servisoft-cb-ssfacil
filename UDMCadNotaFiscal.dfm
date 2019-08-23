@@ -4443,13 +4443,17 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'NTE, NT.USUARIO,'#13#10'CLI.NOME NOMECLIENTE, CFOP.CODCFOP, CLI.FANTAS' +
       'IA, VEND.NOME NOME_VENDEDOR, NT.REC_COPIADO, '#13#10'CLI.cnpj_cpf CNPJ' +
       '_CPF_CLIENTE,  NT.ID_TRANSPORTADORA,  CLI.insc_suframa INSC_SUFR' +
-      'AMA_CLIENTE,'#13#10'OPN.NOME NOME_OPERACAO_NOTA, NT.ID_OPERACAO_NOTA, ' +
-      #13#10'case'#13#10'  WHEN NT.tipo_prazo = '#39'P'#39' then '#39'A PRAZO'#39#13#10'  WHEN NT.tip' +
-      'o_prazo = '#39'V'#39' then '#39'A VISTA'#39#13#10'  else '#39#39#13#10'  end DESCRICAO_PRAZO'#13#10 +
-      'FROM NOTAFISCAL NT'#13#10'INNER JOIN PESSOA CLI'#13#10'  ON NT.ID_CLIENTE = ' +
-      'CLI.CODIGO'#13#10'LEFT JOIN TAB_CFOP CFOP'#13#10'  ON NT.ID_CFOP = CFOP.ID'#13#10 +
-      'LEFT JOIN PESSOA VEND'#13#10'ON NT.id_vendedor = VEND.CODIGO'#13#10'LEFT JOI' +
-      'N OPERACAO_NOTA OPN'#13#10'ON NT.ID_OPERACAO_NOTA = OPN.ID'#13#10#13#10
+      'AMA_CLIENTE,'#13#10'OPN.NOME NOME_OPERACAO_NOTA, NT.ID_OPERACAO_NOTA,'#13 +
+      #10'case'#13#10'  WHEN NT.tipo_prazo = '#39'P'#39' then '#39'A PRAZO'#39#13#10'  WHEN NT.tipo' +
+      '_prazo = '#39'V'#39' then '#39'A VISTA'#39#13#10'  else '#39#39#13#10'  end DESCRICAO_PRAZO, N' +
+      '2.numnota NUMNOTA_DEVOL, N2.serie SERIE_DEVOL, N2.dtemissao DTEM' +
+      'ISSAO_DEVOL'#13#10'FROM NOTAFISCAL NT'#13#10'INNER JOIN PESSOA CLI'#13#10'  ON NT.' +
+      'ID_CLIENTE = CLI.CODIGO'#13#10'LEFT JOIN TAB_CFOP CFOP'#13#10'  ON NT.ID_CFO' +
+      'P = CFOP.ID'#13#10'LEFT JOIN PESSOA VEND'#13#10'ON NT.id_vendedor = VEND.COD' +
+      'IGO'#13#10'LEFT JOIN OPERACAO_NOTA OPN'#13#10'ON NT.ID_OPERACAO_NOTA = OPN.I' +
+      'D'#13#10'left join notafiscal_ref nref'#13#10'on nt.nfechaveacesso = nref.nf' +
+      'echaveacesso_ref'#13#10'left join notafiscal n2'#13#10'on nref.id = n2.id'#13#10#13 +
+      #10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -4648,6 +4652,16 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ConsultaID_OPERACAO_NOTA: TIntegerField
       FieldName = 'ID_OPERACAO_NOTA'
+    end
+    object cdsNotaFiscal_ConsultaNUMNOTA_DEVOL: TIntegerField
+      FieldName = 'NUMNOTA_DEVOL'
+    end
+    object cdsNotaFiscal_ConsultaSERIE_DEVOL: TStringField
+      FieldName = 'SERIE_DEVOL'
+      Size = 3
+    end
+    object cdsNotaFiscal_ConsultaDTEMISSAO_DEVOL: TDateField
+      FieldName = 'DTEMISSAO_DEVOL'
     end
   end
   object dsNotaFiscal_Consulta: TDataSource

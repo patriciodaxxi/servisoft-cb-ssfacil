@@ -344,7 +344,6 @@ type
     DBEdit57: TDBEdit;
     Label98: TLabel;
     DBEdit58: TDBEdit;
-    NxButton1: TNxButton;
     Shape6: TShape;
     Label75: TLabel;
     Label99: TLabel;
@@ -547,6 +546,7 @@ type
     procedure ArquivoSuframa1Click(Sender: TObject);
     procedure DBDateEdit3Change(Sender: TObject);
     procedure ImprimirMinuta1Click(Sender: TObject);
+    procedure SMDBGrid5DblClick(Sender: TObject);
   private
     { Private declarations }
     vTipoNotaAnt: String;
@@ -1402,7 +1402,7 @@ begin
   else
   begin
     fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText +
-                                                           ' WHERE TIPO_REG = ' + QuotedStr(vTipo_Reg);
+                                                           ' WHERE NT.TIPO_REG = ' + QuotedStr(vTipo_Reg);
 
     if CurrencyEdit1.AsInteger > 0 then
       fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText +
@@ -1413,7 +1413,7 @@ begin
                                                              ' AND NT.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
     if Trim(edtSerie.Text) <> '' then
       fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText +
-                                                           ' AND SERIE = ' + QuotedStr(edtSerie.Text);
+                                                           ' AND NT.SERIE = ' + QuotedStr(edtSerie.Text);
 
     if NxDatePicker1.Text <> '' then
       fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText
@@ -2478,7 +2478,10 @@ begin
   begin
     Background  := clGreen;
     AFont.Color := clWhite;
-  end;
+  end
+  else
+  if fDMCadNotaFiscal.cdsNotaFiscal_ConsultaNUMNOTA_DEVOL.AsInteger > 0 then
+    Background  := $00FFFF9D;
 end;
 
 procedure TfrmCadNotaFiscal.rxcbTipo_NotaEnter(Sender: TObject);
@@ -5637,6 +5640,32 @@ begin
   if (fDMCadNotaFiscal.qParametros_ComUSA_CONFIG_IND.AsString = 'N')
      and ((fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S')) then
     Result := True;
+end;
+
+procedure TfrmCadNotaFiscal.SMDBGrid5DblClick(Sender: TObject);
+var
+  sds: TSQLDataSet;
+  vTexto: String;
+begin
+  if not(fDMCadNotaFiscal.cdsNotaFiscal_Ref.Active) or (fDMCadNotaFiscal.cdsNotaFiscal_Ref.IsEmpty) then
+    exit;
+
+  vTexto := '';
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'select n.id, n.numnota, n.dtemissao from notafiscal n where n.NFECHAVEACESSO = :NFECHAVEACESSO ';
+    sds.ParamByName('NFECHAVEACESSO').AsString := fDMCadNotaFiscal.cdsNotaFiscal_RefNFECHAVEACESSO_REF.AsString;
+    sds.Open;
+    vTexto := 'Nº Nota: ' + sds.FieldByName('numnota').AsString + #13
+            + 'Dt.Emissão: ' + sds.FieldByName('dtemissao').AsString;
+  finally
+    FreeAndNil(sds);
+  end;
+
+  MessageDlg(vTexto , mtInformation, [mbOk], 0);
 end;
 
 end.

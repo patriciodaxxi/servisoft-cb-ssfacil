@@ -3076,6 +3076,9 @@ type
     qPessoa_FiscalDRAW_POSSUI: TStringField;
     qPessoa_ProdICMSDRAWBACK: TStringField;
     qParametros_NFeCOPIA_PEDIDO_REP: TStringField;
+    cdsNotaFiscal_ConsultaNUMNOTA_DEVOL: TIntegerField;
+    cdsNotaFiscal_ConsultaSERIE_DEVOL: TStringField;
+    cdsNotaFiscal_ConsultaDTEMISSAO_DEVOL: TDateField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

@@ -191,7 +191,7 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
                 Height = 25
                 AdaptiveColors = False
                 Align = alLeft
-                Caption = 'PROJE'#199#195'O'
+                Caption = 'LOTES'
                 Color = clWhite
                 UseDockManager = False
                 Font.Charset = DEFAULT_CHARSET
@@ -212,7 +212,7 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
                 Height = 25
                 AdaptiveColors = False
                 Align = alLeft
-                Caption = 'REALIZADO'
+                Caption = 'FATURADOS'
                 Color = clWhite
                 UseDockManager = False
                 Font.Charset = DEFAULT_CHARSET
@@ -369,7 +369,7 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
                 Height = 25
                 AdaptiveColors = False
                 Align = alLeft
-                Caption = 'PROJE'#199#195'O'
+                Caption = 'LOTES'
                 Color = clWhite
                 UseDockManager = False
                 Font.Charset = DEFAULT_CHARSET
@@ -390,7 +390,7 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
                 Height = 25
                 AdaptiveColors = False
                 Align = alLeft
-                Caption = 'REALIZADO'
+                Caption = 'FATURADOS'
                 Color = clWhite
                 UseDockManager = False
                 Font.Charset = DEFAULT_CHARSET
@@ -693,41 +693,42 @@ object frmProgamacaoPedidos: TfrmProgamacaoPedidos
       'NER JOIN PRODUTO PROD ON I.id_produto = PROD.ID'#13#10'      WHERE (N2' +
       '.cancelada = '#39'N'#39' and N.cancelada = '#39'N'#39')'#13#10'        AND (N2.nfedene' +
       'gada = '#39'N'#39' AND N.nfedenegada = '#39'N'#39')'#13#10'        AND (N2.tipo_reg = ' +
-      #39'NTS'#39' AND N.tipo_reg = '#39'NTS'#39')'#13#10'        AND (N2.tipo_nota = '#39'E'#39' A' +
-      'ND N.tipo_nota = '#39'E'#39')'#13#10'        AND ((PROD.tipo_reg = '#39'P'#39') or (PR' +
-      'OD.tipo_reg = '#39'S'#39'))'#13#10'        AND N2.nota_estorno = '#39'S'#39#13#10'        ' +
-      '--and 1=2'#13#10'      GROUP BY --I.id_produto,'#13#10'               N2.dte' +
-      'missao'#13#10#13#10'  ),'#13#10'  devolucoes as ('#13#10'    -- DEVOLUCOES'#13#10'    SELECT' +
-      ' --I.id_produto,'#13#10'           N.dtemissao,'#13#10'           SUM(I.qtd ' +
-      '* -1) qtd'#13#10'      FROM NOTAFISCAL N'#13#10'      INNER JOIN NOTAFISCAL_' +
-      'ITENS I ON N.ID = I.ID'#13#10'      INNER JOIN PRODUTO PROD ON I.id_pr' +
-      'oduto = PROD.ID'#13#10'      INNER JOIN TAB_CFOP CFOP ON I.ID_CFOP = C' +
-      'FOP.ID'#13#10'      WHERE N.cancelada = '#39'N'#39#13#10'        AND N.nfedenegada' +
-      ' = '#39'N'#39#13#10'        AND N.tipo_nota = '#39'E'#39#13#10'        AND ((PROD.tipo_r' +
-      'eg = '#39'P'#39') or (PROD.tipo_reg = '#39'S'#39'))'#13#10'        AND CFOP.devolucao ' +
-      '= '#39'S'#39#13#10'      GROUP BY --I.id_produto,'#13#10'               N.dtemissa' +
-      'o'#13#10#13#10'  ),'#13#10'  lotes as ('#13#10'    SELECT PJS.id,'#13#10'           SUM(l.qt' +
-      'd) qtd'#13#10'    FROM PROJECAO_SEMANA PJS'#13#10'    JOIN LOTE l ON l.dtent' +
-      'rega between PJS.data_inicio and PJS.data_fim'#13#10'    GROUP BY PJS.' +
-      'id'#13#10'  ),'#13#10'  programacao as ('#13#10'    SELECT * FROM realizados'#13#10'    ' +
-      'UNION ALL'#13#10'    SELECT * FROM retornadas'#13#10'    UNION ALL'#13#10'    SELE' +
-      'CT * FROM devolucoes'#13#10'  ),'#13#10'  programacao_semana as ('#13#10'    SELEC' +
-      'T PJS.id,'#13#10'           sum(PR.qtd) qtd'#13#10'      FROM PROJECAO_SEMAN' +
-      'A PJS'#13#10'      LEFT OUTER JOIN programacao PR ON PR.dtemissao betw' +
-      'een PJS.data_inicio and PJS.data_fim'#13#10'     GROUP BY PJS.id'#13#10'  )'#13 +
-      #10#13#10'SELECT PJS.id,'#13#10'       PJS.ano,'#13#10'       PJS.mes,'#13#10'       PJS.' +
-      'semana,'#13#10'       PJS.data_inicio,'#13#10'       PJS.data_fim,'#13#10'       P' +
-      'JS.data_embarque,'#13#10'       COALESCE(PJS.previsao, 0) previsao,'#13#10' ' +
-      '      COALESCE(SUM(l.qtd), 0) projetado,'#13#10'       COALESCE(SUM(PR' +
-      '.QTD), 0) realizado,'#13#10'       COALESCE(SUM(PR.QTD), 0) - COALESCE' +
-      '(PJS.previsao, 0) saldo'#13#10'  FROM PROJECAO_SEMANA PJS'#13#10'  LEFT OUTE' +
-      'R JOIN programacao_semana PR ON PR.id = PJS.id --PR.dtemissao be' +
-      'tween PJS.data_inicio and PJS.data_fim'#13#10'  LEFT OUTER JOIN lotes ' +
-      'l ON l.id = PJS.id --l.dtentrega between PJS.data_inicio and PJS' +
-      '.data_fim'#13#10'  WHERE PJS.ano = :ANO --and pjs.id = 64'#13#10'  GROUP BY ' +
-      'PJS.id,'#13#10'           PJS.ano,'#13#10'           PJS.mes,'#13#10'           PJ' +
-      'S.semana,'#13#10'           PJS.data_inicio,'#13#10'           PJS.data_fim,' +
-      #13#10'           PJS.data_embarque,'#13#10'           PJS.previsao'#13#10
+      #39'NTS'#39' AND N.tipo_reg = '#39'NTS'#39')'#13#10'        --AND (N2.tipo_nota = '#39'E'#39 +
+      ' AND N.tipo_nota = '#39'E'#39')  22/08/2019 '#13#10'        AND (N2.tipo_nota ' +
+      '= '#39'E'#39')'#13#10'        AND ((PROD.tipo_reg = '#39'P'#39') or (PROD.tipo_reg = '#39 +
+      'S'#39'))'#13#10'        AND N2.nota_estorno = '#39'S'#39#13#10'        --and 1=2'#13#10'    ' +
+      '  GROUP BY --I.id_produto,'#13#10'               N2.dtemissao'#13#10#13#10'  ),'#13 +
+      #10'  devolucoes as ('#13#10'    -- DEVOLUCOES'#13#10'    SELECT --I.id_produto' +
+      ','#13#10'           N.dtemissao,'#13#10'           SUM(I.qtd * -1) qtd'#13#10'    ' +
+      '  FROM NOTAFISCAL N'#13#10'      INNER JOIN NOTAFISCAL_ITENS I ON N.ID' +
+      ' = I.ID'#13#10'      INNER JOIN PRODUTO PROD ON I.id_produto = PROD.ID' +
+      #13#10'      INNER JOIN TAB_CFOP CFOP ON I.ID_CFOP = CFOP.ID'#13#10'      W' +
+      'HERE N.cancelada = '#39'N'#39#13#10'        AND N.nfedenegada = '#39'N'#39#13#10'       ' +
+      ' AND N.tipo_nota = '#39'E'#39#13#10'        AND ((PROD.tipo_reg = '#39'P'#39') or (P' +
+      'ROD.tipo_reg = '#39'S'#39'))'#13#10'        AND CFOP.devolucao = '#39'S'#39#13#10'      GR' +
+      'OUP BY --I.id_produto,'#13#10'               N.dtemissao'#13#10#13#10'  ),'#13#10'  lo' +
+      'tes as ('#13#10'    SELECT PJS.id,'#13#10'           SUM(l.qtd) qtd'#13#10'    FRO' +
+      'M PROJECAO_SEMANA PJS'#13#10'    JOIN LOTE l ON l.dtentrega between PJ' +
+      'S.data_inicio and PJS.data_fim'#13#10'    GROUP BY PJS.id'#13#10'  ),'#13#10'  pro' +
+      'gramacao as ('#13#10'    SELECT * FROM realizados'#13#10'    UNION ALL'#13#10'    ' +
+      'SELECT * FROM retornadas'#13#10'    UNION ALL'#13#10'    SELECT * FROM devol' +
+      'ucoes'#13#10'  ),'#13#10'  programacao_semana as ('#13#10'    SELECT PJS.id,'#13#10'    ' +
+      '       sum(PR.qtd) qtd'#13#10'      FROM PROJECAO_SEMANA PJS'#13#10'      LE' +
+      'FT OUTER JOIN programacao PR ON PR.dtemissao between PJS.data_in' +
+      'icio and PJS.data_fim'#13#10'     GROUP BY PJS.id'#13#10'  )'#13#10#13#10'SELECT PJS.i' +
+      'd,'#13#10'       PJS.ano,'#13#10'       PJS.mes,'#13#10'       PJS.semana,'#13#10'      ' +
+      ' PJS.data_inicio,'#13#10'       PJS.data_fim,'#13#10'       PJS.data_embarqu' +
+      'e,'#13#10'       COALESCE(PJS.previsao, 0) previsao,'#13#10'       COALESCE(' +
+      'SUM(l.qtd), 0) projetado,'#13#10'       COALESCE(SUM(PR.QTD), 0) reali' +
+      'zado,'#13#10'       COALESCE(SUM(PR.QTD), 0) - COALESCE(PJS.previsao, ' +
+      '0) saldo'#13#10'  FROM PROJECAO_SEMANA PJS'#13#10'  LEFT OUTER JOIN programa' +
+      'cao_semana PR ON PR.id = PJS.id --PR.dtemissao between PJS.data_' +
+      'inicio and PJS.data_fim'#13#10'  LEFT OUTER JOIN lotes l ON l.id = PJS' +
+      '.id --l.dtentrega between PJS.data_inicio and PJS.data_fim'#13#10'  WH' +
+      'ERE PJS.ano = :ANO --and pjs.id = 64'#13#10'  GROUP BY PJS.id,'#13#10'      ' +
+      '     PJS.ano,'#13#10'           PJS.mes,'#13#10'           PJS.semana,'#13#10'    ' +
+      '       PJS.data_inicio,'#13#10'           PJS.data_fim,'#13#10'           PJ' +
+      'S.data_embarque,'#13#10'           PJS.previsao'#13#10
     MaxBlobSize = -1
     Params = <
       item
