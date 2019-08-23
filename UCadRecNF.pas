@@ -746,12 +746,12 @@ begin
   else
   begin
     fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText +
-                                                           ' WHERE TIPO_REG = ' + QuotedStr(vTipo_Reg);
+                                                           ' WHERE NT.TIPO_REG = ' + QuotedStr(vTipo_Reg);
     if not(RxDBLookupCombo1.Text = '') then
       fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText +
                                                              ' AND NT.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
     fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText +
-                                                         ' AND SERIE = ' + QuotedStr('RNF');
+                                                         ' AND NT.SERIE = ' + QuotedStr('RNF');
     if CurrencyEdit1.AsInteger > 0 then
       fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText +
                                                            ' AND NT.NUMNOTA = ' + CurrencyEdit1.Text;

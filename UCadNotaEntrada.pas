@@ -577,7 +577,7 @@ begin
   else
   begin
     fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText +
-                                                             ' WHERE TIPO_REG = ' + QuotedStr(vTipo_Reg);
+                                                             ' WHERE NT.TIPO_REG = ' + QuotedStr(vTipo_Reg);
     if CurrencyEdit1.AsInteger > 0 then
       fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText + ' AND NT.NUMNOTA = ' + CurrencyEdit1.Text
     else
@@ -587,7 +587,7 @@ begin
                                                                ' AND NT.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
       if Trim(edtSerie.Text) <> '' then
         fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText +
-                                                               ' AND SERIE = ' + QuotedStr(edtSerie.Text);
+                                                               ' AND NT.SERIE = ' + QuotedStr(edtSerie.Text);
 
       if DateEdit1.Date > 10 then
         fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText := fDMCadNotaFiscal.sdsNotaFiscal_Consulta.CommandText
