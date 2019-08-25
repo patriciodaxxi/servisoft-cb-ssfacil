@@ -8,7 +8,7 @@ object DMCadCFOP: TDMCadCFOP
   object sdsCFOP: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM TAB_CFOP'#13#10#13#10
+    CommandText = 'SELECT *'#13#10'FROM TAB_CFOP'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -278,7 +278,7 @@ object DMCadCFOP: TDMCadCFOP
     ProviderName = 'dspCFOP'
     OnNewRecord = cdsCFOPNewRecord
     Left = 224
-    Top = 32
+    Top = 31
     object cdsCFOPID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -698,9 +698,9 @@ object DMCadCFOP: TDMCadCFOP
       'OP.tipo_cliente = '#39'S'#39' THEN '#39'Simples'#39#13#10'  end DESC_TIPO_CLIENTE,'#13#10 +
       'CASE'#13#10'  WHEN CFOP.pessoa_cliente = '#39'J'#39' THEN '#39'Jur'#237'dica'#39#13#10'  WHEN C' +
       'FOP.pessoa_cliente = '#39'F'#39' THEN '#39'F'#237'sica'#39#13#10'  end DESC_PESSOA_CLIENT' +
-      'E'#13#10'FROM TAB_CFOP_VARIACAO CFOP'#13#10'FULL JOIN TAB_CSTICMS ICMS'#13#10'ON C' +
-      'FOP.ID_CSTICMS = ICMS.ID'#13#10'FULL JOIN TAB_CSTIPI IPI'#13#10'ON CFOP.ID_C' +
-      'STIPI = IPI.ID'#13#10'FULL JOIN TAB_ENQIPI ENQ'#13#10'ON CFOP.ID_ENQIPI = EN' +
+      'E'#13#10'FROM TAB_CFOP_VARIACAO CFOP'#13#10'LEFT JOIN TAB_CSTICMS ICMS'#13#10'ON C' +
+      'FOP.ID_CSTICMS = ICMS.ID'#13#10'LEFT JOIN TAB_CSTIPI IPI'#13#10'ON CFOP.ID_C' +
+      'STIPI = IPI.ID'#13#10'LEFT JOIN TAB_ENQIPI ENQ'#13#10'ON CFOP.ID_ENQIPI = EN' +
       'Q.ID'#13#10#13#10'WHERE CFOP.ID = :ID'#13#10#13#10
     DataSource = dsCFOP_Mestre
     MaxBlobSize = -1
@@ -849,25 +849,21 @@ object DMCadCFOP: TDMCadCFOP
     end
     object sdsCFOP_VariacaoDESC_TIPO_CONSUMIDOR: TStringField
       FieldName = 'DESC_TIPO_CONSUMIDOR'
-      ProviderFlags = []
       FixedChar = True
       Size = 6
     end
     object sdsCFOP_VariacaoDESC_TIPO_EMPRESA: TStringField
       FieldName = 'DESC_TIPO_EMPRESA'
-      ProviderFlags = []
       FixedChar = True
       Size = 7
     end
     object sdsCFOP_VariacaoDESC_TIPO_CLIENTE: TStringField
       FieldName = 'DESC_TIPO_CLIENTE'
-      ProviderFlags = []
       FixedChar = True
       Size = 7
     end
     object sdsCFOP_VariacaoDESC_PESSOA_CLIENTE: TStringField
       FieldName = 'DESC_PESSOA_CLIENTE'
-      ProviderFlags = []
       FixedChar = True
       Size = 8
     end

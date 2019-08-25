@@ -600,7 +600,7 @@ begin
     fDMCadCFOP.prc_Localizar(-1)
   else
     fDMCadCFOP.prc_Localizar(fDMCadCFOP.cdsCFOP_ConsultaID.AsInteger);
-  fDMCadCFOP.cdsCFOP_Variacao.Close;
+ fDMCadCFOP.cdsCFOP_Variacao.Close;
   fDMCadCFOP.cdsCFOP_Variacao.Open;
 end;
 

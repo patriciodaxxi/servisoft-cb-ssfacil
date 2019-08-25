@@ -25,7 +25,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
     Top = 0
     Width = 946
     Height = 670
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -35,7 +35,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
     ParentBackgroundColor = False
     ParentColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -270,6 +270,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'NUMNOTA_DEVOL'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Nota Feita a Devol.'
+            Width = 64
             Visible = True
           end
           item
@@ -277,6 +278,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'SERIE_DEVOL'
             Title.Alignment = taCenter
             Title.Caption = 'S'#233'rie Devol.'
+            Width = 64
             Visible = True
           end
           item
@@ -285,6 +287,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'DTEMISSAO_DEVOL'
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Emiss'#227'o Devol.'
+            Width = 64
             Visible = True
           end>
       end

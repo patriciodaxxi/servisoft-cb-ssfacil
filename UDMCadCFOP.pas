@@ -260,11 +260,7 @@ type
     qParametros_GeralUSA_TIPO_CONTR_VARIACAO: TStringField;
     sdsCFOP_VariacaoCALCULAR_ST: TStringField;
     cdsCFOP_VariacaoCALCULAR_ST: TStringField;
-    sdsCFOP_VariacaoDESC_TIPO_CONSUMIDOR: TStringField;
     cdsCFOP_VariacaoDESC_TIPO_CONSUMIDOR: TStringField;
-    sdsCFOP_VariacaoDESC_TIPO_EMPRESA: TStringField;
-    sdsCFOP_VariacaoDESC_TIPO_CLIENTE: TStringField;
-    sdsCFOP_VariacaoDESC_PESSOA_CLIENTE: TStringField;
     cdsCFOP_VariacaoDESC_TIPO_EMPRESA: TStringField;
     cdsCFOP_VariacaoDESC_TIPO_CLIENTE: TStringField;
     cdsCFOP_VariacaoDESC_PESSOA_CLIENTE: TStringField;
@@ -427,6 +423,10 @@ type
     cdsCFOPCONTROLAR_CONFIG: TStringField;
     sdsCFOPUSA_NAO_CONTR_FISICA: TStringField;
     cdsCFOPUSA_NAO_CONTR_FISICA: TStringField;
+    sdsCFOP_VariacaoDESC_TIPO_CONSUMIDOR: TStringField;
+    sdsCFOP_VariacaoDESC_TIPO_EMPRESA: TStringField;
+    sdsCFOP_VariacaoDESC_TIPO_CLIENTE: TStringField;
+    sdsCFOP_VariacaoDESC_PESSOA_CLIENTE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsCFOPNewRecord(DataSet: TDataSet);
     procedure dspCFOPUpdateError(Sender: TObject;
