@@ -194,6 +194,14 @@ type
     dspUnidade: TDataSetProvider;
     sdsProcessoGERAR_ESTOQUE_TING: TStringField;
     cdsProcessoGERAR_ESTOQUE_TING: TStringField;
+    sdsSetorTIPO_LEITURA: TStringField;
+    sdsSetorORDEM_ESTEIRA: TIntegerField;
+    sdsSetorAPELIDO: TStringField;
+    sdsSetorESTEIRA_PADRAO: TStringField;
+    cdsSetorTIPO_LEITURA: TStringField;
+    cdsSetorORDEM_ESTEIRA: TIntegerField;
+    cdsSetorAPELIDO: TStringField;
+    cdsSetorESTEIRA_PADRAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -267,6 +275,9 @@ begin
   vMsgSetor := '';
   if trim(cdsSetorNOME.AsString) = '' then
     vMsgSetor := 'Nome não informado!';
+  if (cdsSetorESTEIRA_PADRAO.AsString = 'S') and (cdsSetorTIPO_SETOR.AsString <> 'E') then
+    vMsgSetor := 'Esteira padrão só pode ser marcado se o setor for do tipo Esteira ';
+
   if cdsSetorENCERRA_PROD.AsString = 'S' then
   begin
     prc_Verifica_Setor(cdsSetorID.AsInteger);

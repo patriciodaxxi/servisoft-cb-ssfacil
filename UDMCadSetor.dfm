@@ -72,6 +72,23 @@ object DmCadSetor: TDmCadSetor
     object sdsSetorID_SETOR_PRINCIPAL: TIntegerField
       FieldName = 'ID_SETOR_PRINCIPAL'
     end
+    object sdsSetorTIPO_LEITURA: TStringField
+      FieldName = 'TIPO_LEITURA'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsSetorORDEM_ESTEIRA: TIntegerField
+      FieldName = 'ORDEM_ESTEIRA'
+    end
+    object sdsSetorAPELIDO: TStringField
+      FieldName = 'APELIDO'
+      Size = 6
+    end
+    object sdsSetorESTEIRA_PADRAO: TStringField
+      FieldName = 'ESTEIRA_PADRAO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspSetor: TDataSetProvider
     DataSet = sdsSetor
@@ -80,7 +97,6 @@ object DmCadSetor: TDmCadSetor
     Top = 32
   end
   object cdsSetor: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -148,6 +164,23 @@ object DmCadSetor: TDmCadSetor
     end
     object cdsSetorID_SETOR_PRINCIPAL: TIntegerField
       FieldName = 'ID_SETOR_PRINCIPAL'
+    end
+    object cdsSetorTIPO_LEITURA: TStringField
+      FieldName = 'TIPO_LEITURA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsSetorORDEM_ESTEIRA: TIntegerField
+      FieldName = 'ORDEM_ESTEIRA'
+    end
+    object cdsSetorAPELIDO: TStringField
+      FieldName = 'APELIDO'
+      Size = 6
+    end
+    object cdsSetorESTEIRA_PADRAO: TStringField
+      FieldName = 'ESTEIRA_PADRAO'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsSetor: TDataSource
@@ -642,7 +675,6 @@ object DmCadSetor: TDmCadSetor
     end
   end
   object cdsSetor_Proc: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsSetorsdsSetor_Proc
     IndexFieldNames = 'ID;ITEM'

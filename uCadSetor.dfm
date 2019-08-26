@@ -23,9 +23,9 @@ object frmCadSetor: TfrmCadSetor
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 849
-    Height = 539
-    ActivePage = TS_Consulta
+    Width = 841
+    Height = 531
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -33,7 +33,7 @@ object frmCadSetor: TfrmCadSetor
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -42,8 +42,8 @@ object frmCadSetor: TfrmCadSetor
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 845
-        Height = 432
+        Width = 837
+        Height = 424
         Align = alClient
         Ctl3D = False
         DataSource = DmCadSetor.dsConsulta
@@ -142,7 +142,7 @@ object frmCadSetor: TfrmCadSetor
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 845
+        Width = 837
         Height = 32
         Align = alTop
         Color = clSilver
@@ -370,8 +370,8 @@ object frmCadSetor: TfrmCadSetor
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 499
-        Width = 845
+        Top = 491
+        Width = 837
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -387,7 +387,7 @@ object frmCadSetor: TfrmCadSetor
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 845
+        Width = 837
         Height = 35
         Align = alTop
         Color = clSilver
@@ -487,7 +487,7 @@ object frmCadSetor: TfrmCadSetor
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 845
+        Width = 837
         Height = 35
         Align = alTop
         Color = 8404992
@@ -713,8 +713,8 @@ object frmCadSetor: TfrmCadSetor
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 845
-        Height = 252
+        Width = 837
+        Height = 244
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -736,7 +736,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object Label2: TLabel
           Left = 302
-          Top = 44
+          Top = 80
           Width = 110
           Height = 13
           Alignment = taRightJustify
@@ -745,7 +745,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object Label3: TLabel
           Left = 9
-          Top = 66
+          Top = 102
           Width = 115
           Height = 13
           Alignment = taRightJustify
@@ -753,11 +753,19 @@ object frmCadSetor: TfrmCadSetor
         end
         object Label4: TLabel
           Left = 54
-          Top = 119
+          Top = 155
           Width = 70
           Height = 13
           Alignment = taRightJustify
           Caption = 'Setor principal:'
+        end
+        object Label7: TLabel
+          Left = 86
+          Top = 43
+          Width = 38
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Apelido:'
         end
         object DBEdit1: TDBEdit
           Left = 128
@@ -784,7 +792,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object DBEdit3: TDBEdit
           Left = 416
-          Top = 36
+          Top = 72
           Width = 113
           Height = 21
           CharCase = ecUpperCase
@@ -795,7 +803,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object RzGroupBox1: TRzGroupBox
           Left = 126
-          Top = 140
+          Top = 176
           Width = 451
           Height = 59
           BorderColor = clNavy
@@ -858,7 +866,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object DBCheckBox1: TDBCheckBox
           Left = 128
-          Top = 38
+          Top = 74
           Width = 129
           Height = 17
           Caption = 'Mostrar no Or'#231'amento'
@@ -871,7 +879,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object DBEdit5: TDBEdit
           Left = 128
-          Top = 58
+          Top = 94
           Width = 113
           Height = 21
           CharCase = ecUpperCase
@@ -881,7 +889,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object DBCheckBox4: TDBCheckBox
           Left = 344
-          Top = 60
+          Top = 96
           Width = 185
           Height = 17
           Caption = 'Imprimir no Tal'#227'o'
@@ -893,7 +901,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object DBCheckBox5: TDBCheckBox
           Left = 344
-          Top = 76
+          Top = 112
           Width = 185
           Height = 17
           Caption = 'Entrada autom'#225'tica'
@@ -905,7 +913,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object DBCheckBox6: TDBCheckBox
           Left = 344
-          Top = 92
+          Top = 128
           Width = 185
           Height = 17
           Caption = 'Imprimir no Mapa de Produ'#231#227'o'
@@ -917,7 +925,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object DBCheckBox7: TDBCheckBox
           Left = 512
-          Top = 60
+          Top = 96
           Width = 185
           Height = 17
           Caption = 'Encerra a Produ'#231#227'o'
@@ -929,7 +937,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object DBCheckBox8: TDBCheckBox
           Left = 512
-          Top = 76
+          Top = 112
           Width = 249
           Height = 17
           Caption = 'Ler Somente um vez o C'#243'd.Barra (Entrada/Saida)'
@@ -941,8 +949,8 @@ object frmCadSetor: TfrmCadSetor
         end
         object DBCheckBox9: TDBCheckBox
           Left = 128
-          Top = 84
-          Width = 185
+          Top = 120
+          Width = 81
           Height = 17
           Caption = 'Esteira'
           DataField = 'TIPO_SETOR'
@@ -954,7 +962,7 @@ object frmCadSetor: TfrmCadSetor
         end
         object RxDBLookupCombo1: TRxDBLookupCombo
           Left = 128
-          Top = 111
+          Top = 147
           Width = 281
           Height = 21
           DropDownCount = 15
@@ -966,11 +974,34 @@ object frmCadSetor: TfrmCadSetor
           TabOrder = 10
           OnEnter = RxDBLookupCombo1Enter
         end
+        object DBEdit6: TDBEdit
+          Left = 128
+          Top = 35
+          Width = 281
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'APELIDO'
+          DataSource = DmCadSetor.dsSetor
+          TabOrder = 13
+        end
+        object DBCheckBox10: TDBCheckBox
+          Left = 213
+          Top = 119
+          Width = 108
+          Height = 17
+          Caption = 'Esteira Padr'#227'o'
+          DataField = 'ESTEIRA_PADRAO'
+          DataSource = DmCadSetor.dsSetor
+          TabOrder = 14
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+          OnClick = DBCheckBox9Click
+        end
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 287
-        Width = 845
+        Top = 279
+        Width = 837
         Height = 229
         ActivePage = TS_Processo
         ActivePageDefault = TS_Processo
@@ -983,7 +1014,7 @@ object frmCadSetor: TfrmCadSetor
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 30
-            Width = 841
+            Width = 833
             Height = 176
             Align = alClient
             DataSource = DmCadSetor.dsSetor_Proc
@@ -1058,7 +1089,7 @@ object frmCadSetor: TfrmCadSetor
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 841
+            Width = 833
             Height = 30
             Align = alTop
             Color = clSilver
