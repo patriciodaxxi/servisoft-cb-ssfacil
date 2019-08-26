@@ -35,6 +35,7 @@ type
     RzPageControl1: TRzPageControl;
     TS_Item: TRzTabSheet;
     SMDBGrid1: TSMDBGrid;
+
     TS_Pedido: TRzTabSheet;
     Panel2: TPanel;
     Shape2: TShape;
@@ -326,6 +327,8 @@ begin
     else
     if (SMDBGrid2.Columns[i].FieldName = 'TAM_CALC') then
       SMDBGrid2.Columns[i].Visible := (fDMConsPedido.qParametros_ProdMOSTRAR_TAM_CALC.AsString = 'S');
+    if (SMDBGrid2.Columns[i].FieldName = 'COMPLEMENTO_NOME') then
+      SMDBGrid2.Columns[i].Visible := (fDMConsPedido.qParametrosEMPRESA_SUCATA.AsString = 'S');
   end;
 
   for i := 1 to SMDBGrid4.ColCount - 2 do
@@ -435,6 +438,8 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'NUM_TALAO') then
       SMDBGrid1.Columns[i].Visible := ((fDMConsPedido.qParametrosEMPRESA_NAVALHA.AsString = 'S')or (fDMConsPedido.qParametros_PedUSA_NUM_TALAO.AsString = 'I') or (fDMConsPedido.qParametros_PedUSA_NUM_TALAO.AsString = 'P'));
     if (SMDBGrid1.Columns[i].FieldName = 'QTD_PECA') then
+      SMDBGrid1.Columns[i].Visible := (fDMConsPedido.qParametrosEMPRESA_SUCATA.AsString = 'S');
+    if (SMDBGrid1.Columns[i].FieldName = 'COMPLEMENTO_NOME') then
       SMDBGrid1.Columns[i].Visible := (fDMConsPedido.qParametrosEMPRESA_SUCATA.AsString = 'S');
 
     if (SMDBGrid1.Columns[i].FieldName = 'Descricao') then

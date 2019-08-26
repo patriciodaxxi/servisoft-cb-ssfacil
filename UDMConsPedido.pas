@@ -867,6 +867,7 @@ type
     cdsCliente_Sem_VendaUF: TStringField;
     cdsCliente_Sem_VendaDTEMISSAO: TDateField;
     frxCliente_Sem_Venda: TfrxDBDataset;
+    cdsPedido_RefCOMPLEMENTO_NOME: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConsumoNewRecord(DataSet: TDataSet);
     procedure cdsPedido_MatCalcFields(DataSet: TDataSet);

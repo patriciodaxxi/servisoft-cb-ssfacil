@@ -148,6 +148,9 @@ begin
   end
   else
     vAux := fDMConsPedido.cdsPedido_RefNOME_PRODUTO.AsString;
+  if (fDMConsPedido.qParametrosEMPRESA_SUCATA.AsString = 'S') then
+    RLMemo1.Lines.Add(fDMConsPedido.cdsPedido_RefCOMPLEMENTO_NOME.AsString);
+
 end;
 
 end.

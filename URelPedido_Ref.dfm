@@ -1,6 +1,6 @@
 object fRelPedido_Ref: TfRelPedido_Ref
-  Left = 52
-  Top = 143
+  Left = 279
+  Top = 98
   Width = 1250
   Height = 563
   Caption = 'fRelPedido_Ref'

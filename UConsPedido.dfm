@@ -1,6 +1,6 @@
 object frmConsPedido: TfrmConsPedido
-  Left = 169
-  Top = 36
+  Left = 227
+  Top = 43
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
   Caption = 'Consulta Pedidos'
@@ -402,7 +402,7 @@ object frmConsPedido: TfrmConsPedido
     Top = 188
     Width = 1017
     Height = 393
-    ActivePage = TS_Pedido
+    ActivePage = TS_Ref
     ActivePageDefault = TS_Item
     Align = alClient
     Color = 16755027
@@ -415,7 +415,7 @@ object frmConsPedido: TfrmConsPedido
     ParentColor = False
     ParentFont = False
     TabColors.Unselected = clGray
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 1
     TextColors.Unselected = 5197647
     OnChanging = RzPageControl1Changing
@@ -922,7 +922,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -933,6 +932,7 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
+            Width = 64
             Visible = True
           end
           item
@@ -1273,8 +1273,14 @@ object frmConsPedido: TfrmConsPedido
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Ref
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         ParentCtl3D = False
+        ParentFont = False
         ReadOnly = True
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -1302,7 +1308,7 @@ object frmConsPedido: TfrmConsPedido
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 27
+        ColCount = 28
         RowCount = 2
         Columns = <
           item
@@ -1510,6 +1516,23 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
             Width = 200
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COMPLEMENTO_NOME'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Title.Alignment = taCenter
+            Title.Caption = 'Complemento Nome'
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
             Visible = True
           end
           item

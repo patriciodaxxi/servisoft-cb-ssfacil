@@ -1677,13 +1677,15 @@ object DMConsPedido: TDMConsPedido
       'ILIAL, V.CLIENTE_ESTOQUE, v.id_cor, V.NOME_COR_COMBINACAO , V.TI' +
       'PO_REG,'#13#10'V.DTFATURA, V.DTEXPEDICAO, V.DTAPROVACAO, V.TAM_CALC,'#13#10 +
       'CASE'#13#10'  WHEN coalesce(V.fantasia,'#39#39') = '#39#39' THEN V.nome_cliente'#13#10' ' +
-      ' ELSE V.fantasia'#13#10'  END FANTASIA'#13#10'FROM vpedido_item V'#13#10'GROUP BY ' +
-      'V.id_cliente, V.id_cliente, V.nome_filial, V.nome_filial_int,'#13#10' ' +
-      'V.nome_cliente, V.nome_produto, V.nome_vendedor, v.referencia, v' +
-      '.pedido_cliente,'#13#10' v.dtemissao, v.dtentrega_ped, v.dtentrega_ite' +
-      'm,v.num_pedido, v.numos,'#13#10' V.ID_PRODUTO, V.FILIAL, V.CLIENTE_EST' +
-      'OQUE, V.FANTASIA, V.id_cor, V.NOME_COR_COMBINACAO, V.TIPO_REG,'#13#10 +
-      'V.DTFATURA, V.DTEXPEDICAO, V.DTAPROVACAO, V.TAM_CALC'#13#10
+      ' ELSE V.fantasia'#13#10'  END FANTASIA,'#13#10'  PIT.COMPLEMENTO_NOME'#13#10'FROM ' +
+      'vpedido_item V'#13#10'left join PEDIDO_ITEM_TIPO PIT on PIT.ID = V.ID ' +
+      'and PIT.ITEM = V.ITEM'#13#10'GROUP BY V.id_cliente, V.id_cliente, V.no' +
+      'me_filial, V.nome_filial_int,'#13#10' V.nome_cliente, V.nome_produto, ' +
+      'V.nome_vendedor, v.referencia, v.pedido_cliente,'#13#10' v.dtemissao, ' +
+      'v.dtentrega_ped, v.dtentrega_item,v.num_pedido, v.numos,'#13#10' V.ID_' +
+      'PRODUTO, V.FILIAL, V.CLIENTE_ESTOQUE, V.FANTASIA, V.id_cor, V.NO' +
+      'ME_COR_COMBINACAO, V.TIPO_REG,'#13#10'V.DTFATURA, V.DTEXPEDICAO, V.DTA' +
+      'PROVACAO, V.TAM_CALC, PIT.COMPLEMENTO_NOME'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1823,6 +1825,10 @@ object DMConsPedido: TDMConsPedido
     end
     object cdsPedido_RefTAM_CALC: TFloatField
       FieldName = 'TAM_CALC'
+    end
+    object cdsPedido_RefCOMPLEMENTO_NOME: TStringField
+      FieldName = 'COMPLEMENTO_NOME'
+      Size = 50
     end
   end
   object dsPedido_Ref: TDataSource
