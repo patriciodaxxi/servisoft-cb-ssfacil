@@ -803,6 +803,11 @@ type
     lblCorrugado: TLabel;
     lblEstrutura: TLabel;
     dbckbCalcular_ST: TDBCheckBox;
+    GroupBox8: TGroupBox;
+    DBText9: TDBText;
+    Label257: TLabel;
+    DBText10: TDBText;
+    Label260: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
