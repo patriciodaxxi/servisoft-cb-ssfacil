@@ -8,7 +8,7 @@ uses
   UCadProduto_Forn, UCadProduto_Consumo, RzPanel, NxCollection, DBVGrids, DBGrids, UDMCopiarProduto, SqlExpr, DBAdvGrid, USenha,
   AdvDBLookupComboBox, UCadProduto_UF, UCadProduto_Uni, ComCtrls, RzChkLst, RzLstBox, UCadProduto_Matriz, UCadProduto_Comb,
   UCadProduto_Cor, UCadProduto_Emb, UCadProduto_Atelier, UGerar_CBarra, Menus, UCadProduto_Comissao, UCadProduto_Carimbo, Mask,
-  UCadProduto_Comissao_Vend, uEtiq_Individual, Variants, UConsEstoque_Mov, NxEdit, UCadProduto_Maq;
+  UCadProdutoteam_Comissao_Vend, uEtiq_Individual, Variants, UConsEstoque_Mov, NxEdit, UCadProduto_Maq;
 
 type
   TfrmCadProduto = class(TForm)
@@ -804,6 +804,11 @@ type
     lblEstrutura: TLabel;
     dbckbCalcular_ST: TDBCheckBox;
     NxButton2: TNxButton;
+    GroupBox8: TGroupBox;
+    DBText9: TDBText;
+    Label257: TLabel;
+    DBText10: TDBText;
+    Label260: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
