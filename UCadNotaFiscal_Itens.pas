@@ -1799,7 +1799,7 @@ var
 begin
   //fDMCadNotaFiscal.vID_Variacao := 0;
   //07/03/2019
-    if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant then
+  if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger := 0;
   ///***********
 
@@ -1833,13 +1833,15 @@ begin
   end;
   prc_Abrir_Combinacao;
 
-  if fDMCadNotaFiscal.cdsParametrosGRAVAR_CONSUMO_NOTA.AsString = 'S' then
-  begin
-    if fDMCadNotaFiscal.cdsClienteUF.AsString = fDMCadNotaFiscal.cdsFilialUF.AsString then
+  //27/08/2019
+  //if fDMCadNotaFiscal.cdsParametrosGRAVAR_CONSUMO_NOTA.AsString = 'S' then
+  //begin
+    if (fDMCadNotaFiscal.cdsClienteUF.AsString = fDMCadNotaFiscal.cdsFilialUF.AsString) and (fDMCadNotaFiscal.cdsProdutoID_CFOP_NFCE.AsInteger > 0) then
     begin
-      if (fDMCadNotaFiscal.cdsNotaFiscalID_CFOP.AsInteger <= 0) and (fDMCadNotaFiscal.cdsProdutoID_CFOP_NFCE.AsInteger > 0) then
+      if (fDMCadNotaFiscal.cdsNotaFiscalID_CFOP.AsInteger <= 0) then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger := fDMCadNotaFiscal.cdsProdutoID_CFOP_NFCE.AsInteger
       else
+      if (fDMCadNotaFiscal.cdsProdutoID_CFOP_NFCE.AsInteger > 0) then
       begin
         if fDMCadNotaFiscal.cdsNotaFiscalID_CFOP.AsInteger > 0 then
           fDMCadNotaFiscal.cdsCFOP.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscalID_CFOP.AsInteger,[loCaseInsensitive]);
@@ -1848,7 +1850,7 @@ begin
           fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger := fDMCadNotaFiscal.cdsProdutoID_CFOP_NFCE.AsInteger;
       end;
     end;
-  end;
+  //end;
 end;
 
 procedure TfrmCadNotaFiscal_Itens.Panel1Exit(Sender: TObject);

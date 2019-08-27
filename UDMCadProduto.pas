@@ -2870,9 +2870,12 @@ begin
   begin
     if cdsProdutoID_CFOP_NFCE.AsInteger <> cdsCFOPID.AsInteger then
       cdsCFOP.Locate('ID',cdsProdutoID_CFOP_NFCE.AsInteger,([Locaseinsensitive]));
-    if (cdsCFOPCONTROLAR_CONFIG.AsString = 'S') then
-      if not uUtilPadrao.fnc_Verificar_CFOP_Config(cdsProdutoID_CFOP_NFCE.AsInteger,cdsProdutoID_CSTICMS.AsInteger) then
-        vMsgErro := vMsgErro + #13 + '*** CFOP não pode usar essa CST!';
+    if cdsProdutoID_CSTICMS.AsInteger > 0 then
+    begin
+      if (cdsCFOPCONTROLAR_CONFIG.AsString = 'S') then
+        if not uUtilPadrao.fnc_Verificar_CFOP_Config(cdsProdutoID_CFOP_NFCE.AsInteger,cdsProdutoID_CSTICMS.AsInteger) then
+          vMsgErro := vMsgErro + #13 + '*** CFOP não pode usar essa CST!';
+    end;
     if (cdsCFOPCODCFOP.AsString = '5405') and (cdsProdutoID_CSTICMS_BRED.AsInteger > 0) then
       vMsgErro := vMsgErro + #13 + '*** Essa CFOP não pode ter base reduzida!';
   end;

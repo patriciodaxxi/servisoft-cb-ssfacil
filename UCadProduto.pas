@@ -803,6 +803,7 @@ type
     lblCorrugado: TLabel;
     lblEstrutura: TLabel;
     dbckbCalcular_ST: TDBCheckBox;
+    NxButton2: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1018,6 +1019,7 @@ type
     procedure CurrencyEdit4Exit(Sender: TObject);
     procedure RxDBLookupCombo5Change(Sender: TObject);
     procedure RxDBLookupCombo3Exit(Sender: TObject);
+    procedure NxButton2Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -6228,6 +6230,15 @@ begin
   end
   else
     dbckbCalcular_ST.Visible := False;
+end;
+
+procedure TfrmCadProduto.NxButton2Click(Sender: TObject);
+var
+  vMSGAux: String;
+begin
+  vMSGAux := 'Esse CFOP vai ser usado na NFCe, ' + #13
+           + 'e na NFe quando a venda for interna!';
+  MessageDlg(vMSGAux, mtInformation, [mbOk], 0);
 end;
 
 end.
