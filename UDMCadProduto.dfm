@@ -486,6 +486,9 @@ object dmCadProduto: TdmCadProduto
       FixedChar = True
       Size = 1
     end
+    object sdsProdutoPRECO_CUSTO_ANT: TFloatField
+      FieldName = 'PRECO_CUSTO_ANT'
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -1028,6 +1031,11 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'CALCULAR_ST'
       FixedChar = True
       Size = 1
+    end
+    object cdsProdutoPRECO_CUSTO_ANT: TFloatField
+      FieldName = 'PRECO_CUSTO_ANT'
+      DisplayFormat = ',0.00'
+      EditFormat = ',0.00'
     end
   end
   object dsProduto: TDataSource

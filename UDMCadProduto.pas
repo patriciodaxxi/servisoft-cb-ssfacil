@@ -1952,6 +1952,8 @@ type
     cdsNCMGERAR_ST: TStringField;
     sdsProduto_ConsumoNOME_POSICAO: TStringField;
     cdsProduto_ConsumoNOME_POSICAO: TStringField;
+    sdsProdutoPRECO_CUSTO_ANT: TFloatField;
+    cdsProdutoPRECO_CUSTO_ANT: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
