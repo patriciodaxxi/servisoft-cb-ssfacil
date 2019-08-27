@@ -2298,7 +2298,7 @@ object frmCadPessoa: TfrmCadPessoa
             end
             object RxDBComboBox5: TRxDBComboBox
               Left = 96
-              Top = 28
+              Top = 29
               Width = 124
               Height = 21
               Style = csDropDownList

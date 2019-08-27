@@ -8,7 +8,7 @@ uses
   UCadProduto_Forn, UCadProduto_Consumo, RzPanel, NxCollection, DBVGrids, DBGrids, UDMCopiarProduto, SqlExpr, DBAdvGrid, USenha,
   AdvDBLookupComboBox, UCadProduto_UF, UCadProduto_Uni, ComCtrls, RzChkLst, RzLstBox, UCadProduto_Matriz, UCadProduto_Comb,
   UCadProduto_Cor, UCadProduto_Emb, UCadProduto_Atelier, UGerar_CBarra, Menus, UCadProduto_Comissao, UCadProduto_Carimbo, Mask,
-  UCadProdutoteam_Comissao_Vend, uEtiq_Individual, Variants, UConsEstoque_Mov, NxEdit, UCadProduto_Maq;
+  UCadProduto_Comissao_Vend, uEtiq_Individual, Variants, UConsEstoque_Mov, NxEdit, UCadProduto_Maq;
 
 type
   TfrmCadProduto = class(TForm)

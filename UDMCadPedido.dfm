@@ -10659,13 +10659,13 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43623.469983842600000000
+    ReportOptions.LastChange = 43704.605862685190000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
     OnPreview = frxReport1Preview
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 1159
+    Left = 1160
     Top = 111
   end
   object frxDBDataset1: TfrxDBDataset
