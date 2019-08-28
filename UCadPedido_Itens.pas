@@ -1034,7 +1034,8 @@ begin
   dbckDiferenca_ICMS.Visible := ((copy(fDMCadPedido.cdsPedido_ItensCODCFOP.AsString,1,1) = '6') and (fDMCadPedido.cdsCFOPSUBSTITUICAO_TRIB.AsString <> 'S'));
   if (fDMCadPedido.cdsClienteTIPO_CONTRIBUINTE.AsInteger = 1) and (fDMCadPedido.cdsClienteTIPO_CONSUMIDOR.AsInteger = 1) and
     (fDMCadPedido.cdsPedido_ItensCOD_CST.AsString = '10') and (dbckDiferenca_ICMS.Visible) then
-    fDMCadPedido.cdsPedido_ItensDIFERENCA_ICMS.AsString := 'S'
+    //fDMCadPedido.cdsPedido_ItensDIFERENCA_ICMS.AsString := 'S'   //28/08/2019
+    fDMCadPedido.cdsPedido_ItensDIFERENCA_ICMS.AsString := uUtilPadrao.fnc_UF_Possui_ST(fDMCadPedido.cdsProdutoID_NCM.AsInteger,fDMCadPedido.cdsClienteUF.AsString)
   else
     fDMCadPedido.cdsPedido_ItensDIFERENCA_ICMS.AsString := 'N';
   //****************

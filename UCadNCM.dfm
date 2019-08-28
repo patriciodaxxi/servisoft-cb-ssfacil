@@ -24,7 +24,7 @@ object frmCadNCM: TfrmCadNCM
     Top = 0
     Width = 950
     Height = 527
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadNCM: TfrmCadNCM
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RZPageControl1Change
     FixedDimension = 19
@@ -177,6 +177,7 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'UNIDADE_TRIB'
             Title.Alignment = taCenter
             Title.Caption = 'Unid. Trib. Exp.'
+            Width = 64
             Visible = True
           end>
       end
@@ -1357,10 +1358,10 @@ object frmCadNCM: TfrmCadNCM
         Top = 202
         Width = 946
         Height = 302
-        ActivePage = TS_Unidade_Conv
+        ActivePage = TS_SubTrib
         ActivePageDefault = TS_SubTrib
         Align = alClient
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 2
         TextColors.Selected = clBlue
         FixedDimension = 19

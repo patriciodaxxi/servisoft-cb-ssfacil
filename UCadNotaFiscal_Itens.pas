@@ -1197,7 +1197,8 @@ begin
   //16/10/2018
   if (fDMCadNotaFiscal.cdsClienteTIPO_CONTRIBUINTE.AsInteger = 1) and (fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger = 1) and
     (fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_CST.AsString = '10') and (dbckDiferenca_ICMS.Visible) then
-    fDMCadNotaFiscal.cdsNotaFiscal_ItensDIFERENCA_ICMS.AsString := 'S'
+    //fDMCadNotaFiscal.cdsNotaFiscal_ItensDIFERENCA_ICMS.AsString := 'S'   //28/08/2019
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensDIFERENCA_ICMS.AsString := uUtilPadrao.fnc_UF_Possui_ST(fDMCadNotaFiscal.cdsProdutoID_NCM.AsInteger,fDMCadNotaFiscal.cdsClienteUF.AsString)
   else
     fDMCadNotaFiscal.cdsNotaFiscal_ItensDIFERENCA_ICMS.AsString := 'N';
 

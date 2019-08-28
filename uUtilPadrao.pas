@@ -74,6 +74,8 @@ uses
   function fnc_Diferenca_Horas2(Inicio, Fim: TTime): Real;
   function fnc_Calcula_Intervalo(HrInicial,HrFinal: TTime): Real;
 
+  function fnc_UF_Possui_ST(ID_NCM : Integer ; UF : String) : String;  
+
   procedure prc_Soma_Data_Hora_Res(Data: TDateTime ; Hora1: TTime ; Hora2, Total_HoraDia: Real);
 
   function CharEspeciais(Texto:String):String;
@@ -2190,6 +2192,28 @@ begin
     sds.Open;
     if sds.FieldByName('CONTADOR').AsInteger > 0 then
       Result := True;
+  finally
+    FreeAndNil(sds);
+  end;
+end;
+
+function fnc_UF_Possui_ST(ID_NCM : Integer ; UF : String) : String;
+var
+  sds: TSQLDataSet;
+begin
+  Result   := 'N';
+  sds      := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.Close;
+    sds.CommandText   := 'SELECT COUNT(1) CONTADOR FROM TAB_NCM_UF T WHERE T.ID = :ID AND T.UF = :UF ';
+    sds.ParamByName('ID').AsInteger := ID_NCM;
+    sds.ParamByName('UF').AsString  := UF;
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := 'S'
   finally
     FreeAndNil(sds);
   end;
