@@ -3490,6 +3490,8 @@ type
     qPessoa_FiscalDRAW_ENQIPI: TIntegerField;
     qPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField;
     qPessoa_FiscalDRAW_POSSUI: TStringField;
+    sdsPedido_ItensDRAWBACK: TStringField;
+    cdsPedido_ItensDRAWBACK: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

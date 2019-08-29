@@ -203,6 +203,7 @@ type
     DBEdit37: TDBEdit;
     DBEdit38: TDBEdit;
     DBEdit39: TDBEdit;
+    dbckDraw: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
@@ -535,6 +536,12 @@ begin
   RxDBlkContaOrc.Visible   := ((fDMCadNotaFiscal.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S') and (fDMCadNotaFiscal.qParametros_NTEUSA_CONTA_ORCAMENTO_ITENS.AsString = 'S'));
   lblCCusto.Visible        := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
   RxDBlkCCusto.Visible     := (fDMCadNotaFiscal.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
+
+  //29/08/2019
+  dbckDraw.Visible := (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S');
+  if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') then
+    dbckDraw.Visible := uUtilPadrao.fnc_existe_Drawback(fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger);
+  //*************************
 end;
 
 procedure TfrmCadNotaFiscal_Itens.prc_Buscar_Imposto(Auxiliar, Nome: String);
@@ -960,7 +967,9 @@ begin
   end;
 
   //13/08/2019
-  if fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S' then
+  //if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') then
+  //29/08/2019
+  if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensDRAWBACK.AsString = 'S') then
   begin
     fDMCadNotaFiscal.qPessoa_ProdICMS.Close;
     fDMCadNotaFiscal.qPessoa_ProdICMS.ParamByName('CODIGO').AsInteger     := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
@@ -1852,6 +1861,17 @@ begin
       end;
     end;
   //end;
+
+  //29/08/2019
+  if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant) and (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') then
+  begin
+    dbckDraw.Visible := uUtilPadrao.fnc_existe_Drawback(fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger);
+    if dbckDraw.Visible then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensDRAWBACK.AsString := 'S'
+    else
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensDRAWBACK.AsString := 'N';
+  end;
+  //*************************
 end;
 
 procedure TfrmCadNotaFiscal_Itens.Panel1Exit(Sender: TObject);

@@ -7,7 +7,7 @@ object DMCadPedido: TDMCadPedido
   object sdsPedido: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM PEDIDO'#13#10#13#10#13#10#13#10
+    CommandText = 'SELECT *'#13#10'FROM PEDIDO'#13#10#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1580,6 +1580,7 @@ object DMCadPedido: TDMCadPedido
     Top = 322
   end
   object cdsTipoCobranca: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -1656,6 +1657,7 @@ object DMCadPedido: TDMCadPedido
     Top = 367
   end
   object cdsContas: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -2788,7 +2790,7 @@ object DMCadPedido: TDMCadPedido
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 24
+    Left = 25
     Top = 57
     object sdsPedido_ItensID: TIntegerField
       FieldName = 'ID'
@@ -3283,6 +3285,11 @@ object DMCadPedido: TDMCadPedido
     end
     object sdsPedido_ItensAPROVADO_ITEM: TStringField
       FieldName = 'APROVADO_ITEM'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsPedido_ItensDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
     end
@@ -3920,6 +3927,11 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsPedido_ItensAPROVADO_ITEM: TStringField
       FieldName = 'APROVADO_ITEM'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPedido_ItensDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
     end

@@ -183,6 +183,19 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         TabOrder = 1
         OnExit = RxDBLookupCombo6Exit
       end
+      object dbckDraw: TDBCheckBox
+        Left = 664
+        Top = 6
+        Width = 97
+        Height = 17
+        Caption = 'Drawback'
+        DataField = 'DRAWBACK'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        TabOrder = 2
+        ValueChecked = 'S'
+        ValueUnchecked = 'N'
+        Visible = False
+      end
     end
     object Panel5: TPanel
       Left = 1

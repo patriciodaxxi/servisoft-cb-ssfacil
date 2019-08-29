@@ -4361,6 +4361,8 @@ begin
       if (SMDBGrid2.Columns[i].FieldName = 'NUM_VALE') or (SMDBGrid2.Columns[i].FieldName = 'ITEM_VALE') then
         SMDBGrid2.Columns[i].Visible := False;
     end;
+    if (SMDBGrid2.Columns[i].FieldName = 'DRAWBACK') then
+      SMDBGrid2.Columns[i].Visible := (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S');
     if (fDMCadNotaFiscal.cdsParametrosUSA_LOTE_CONTROLE.AsString <> 'S') and (SMDBGrid2.Columns[i].FieldName = 'NUM_LOTE_CONTROLE') then
       SMDBGrid2.Columns[i].Visible := False;
     if (SMDBGrid2.Columns[i].FieldName = 'NOME_COR_COMBINACAO') then
@@ -5357,6 +5359,10 @@ begin
   if fDMCadNotaFiscal.cdsPedidoID_MOVESTOQUE.AsInteger > 0 then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
   fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE_PED.AsInteger := fDMCadNotaFiscal.cdsPedidoID_MOVESTOQUE.AsInteger;
+
+  //29/08/2019
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensDRAWBACK.AsString := fDMCadNotaFiscal.cdsPedidoDRAWBACK.AsString;
+  //*********************
 
   ffrmCadNotaFiscal_Itens.vNotaSelecionada   := False;
   ffrmCadNotaFiscal_Itens.vPedidoSelecionado := True;

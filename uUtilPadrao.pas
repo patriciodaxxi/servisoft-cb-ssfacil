@@ -91,6 +91,8 @@ uses
   function fnc_Somar_Edit(Valores: string): Double;
   function fnc_Verificar_CFOP_Config(ID_CFOP, ID_CSTICMS: Integer): Boolean;
 
+  function fnc_existe_Drawback(ID_Cliente, ID_Produto : Integer) : Boolean;
+
   //procedure prc_Enviar_Email_Proc(MSG: String);
 
   function Criptografar(ABase: integer; AChave, AValue: string): string;
@@ -2214,6 +2216,29 @@ begin
     sds.Open;
     if sds.FieldByName('CONTADOR').AsInteger > 0 then
       Result := 'S'
+  finally
+    FreeAndNil(sds);
+  end;
+end;
+
+function fnc_existe_Drawback(ID_Cliente, ID_Produto : Integer) : Boolean;
+var
+  sds: TSQLDataSet;
+begin
+  Result   := False;
+  sds      := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.Close;
+    sds.CommandText   := 'SELECT P.DRAW_POSSUI, (SELECT I.DRAWBACK FROM pessoa_prodicms I WHERE I.CODIGO = :CODIGO AND I.ID_PRODUTO = :ID_PRODUTO) '
+                       + ' FROM PESSOA_FISCAL P  WHERE P.codigo = :CODIGO ';
+    sds.ParamByName('CODIGO').AsInteger      := ID_Cliente;
+    sds.ParamByName('ID_PRODUTO').AsInteger  := ID_Produto;
+    sds.Open;
+    if (sds.FieldByName('DRAW_POSSUI').AsString = 'S') and (sds.FieldByName('DRAWBACK').AsString = 'S') then
+      Result := True;
   finally
     FreeAndNil(sds);
   end;
