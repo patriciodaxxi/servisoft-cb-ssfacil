@@ -153,6 +153,7 @@ type
     Label24: TLabel;
     DBEdit8: TDBEdit;
     dbrdgEncerado: TDBRadioGroup;
+    dbckDraw: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);
@@ -501,6 +502,12 @@ begin
 
   Label24.Visible := (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S');
   DBEdit8.Visible := (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S');
+
+  //29/08/2019
+  dbckDraw.Visible := (fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S');
+  if (fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') then
+    dbckDraw.Visible := uUtilPadrao.fnc_existe_Drawback(fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
+  //*************************
 end;
 
 procedure TfrmCadPedido_Itens.Panel2Enter(Sender: TObject);
@@ -757,7 +764,9 @@ begin
 
   //13/08/2019
   vUsouRegraCli := False;
-  if fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S' then
+  //29/08/2019
+  //if fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S' then
+  if (fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensDRAWBACK.AsString = 'S') then
   begin
     fDMCadPedido.qPessoa_ProdICMS.Close;
     fDMCadPedido.qPessoa_ProdICMS.ParamByName('CODIGO').AsInteger     := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger;
@@ -1560,6 +1569,17 @@ begin
     fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := RxDBLookupCombo2.Text;
   if fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger > 0 then
     prc_Estoque(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
+
+  //29/08/2019
+  if (fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger <> vID_Produto_Ant) and (fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') then
+  begin
+    dbckDraw.Visible := uUtilPadrao.fnc_existe_Drawback(fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
+    if dbckDraw.Visible then
+      fDMCadPedido.cdsPedido_ItensDRAWBACK.AsString := 'S'
+    else
+      fDMCadPedido.cdsPedido_ItensDRAWBACK.AsString := 'N';
+  end;
+  //*************************
 end;
 
 procedure TfrmCadPedido_Itens.SpeedButton8Click(Sender: TObject);

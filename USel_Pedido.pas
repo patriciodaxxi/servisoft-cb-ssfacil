@@ -644,6 +644,10 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensLARGURA.AsFloat         := fDMCadNotaFiscal.cdsPedidoLARGURA.AsFloat;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensESPESSURA.AsFloat       := fDMCadNotaFiscal.cdsPedidoESPESSURA.AsFloat;
 
+    //29/08/2019
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensDRAWBACK.AsString := fDMCadNotaFiscal.cdsPedidoDRAWBACK.AsString;
+    //***********************
+
     if vTipo_RegPed = 'C' then
       ffrmCadNotaEntrada_Itens.prc_Move_Dados_Itens
     else

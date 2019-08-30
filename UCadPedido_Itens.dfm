@@ -23,7 +23,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     Left = 0
     Top = 23
     Width = 773
-    Height = 108
+    Height = 110
     Align = alTop
     Color = clMoneyGreen
     TabOrder = 1
@@ -329,7 +329,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     object RxDBLookupCombo6: TRxDBLookupCombo
       Left = 139
       Top = 85
-      Width = 265
+      Width = 257
       Height = 21
       DropDownCount = 8
       Ctl3D = False
@@ -372,11 +372,11 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       end
     end
     object dbrdgEncerado: TDBRadioGroup
-      Left = 415
-      Top = 63
-      Width = 221
-      Height = 40
-      Columns = 3
+      Left = 399
+      Top = 61
+      Width = 150
+      Height = 46
+      Columns = 2
       DataField = 'ENCERADO'
       DataSource = DMCadPedido.dsPedido_Itens
       Items.Strings = (
@@ -388,6 +388,18 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
         'S'
         'G'
         'N')
+    end
+    object dbckDraw: TDBCheckBox
+      Left = 559
+      Top = 78
+      Width = 75
+      Height = 17
+      Caption = 'Drawback'
+      DataField = 'DRAWBACK'
+      DataSource = DMCadPedido.dsPedido_Itens
+      TabOrder = 5
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
     end
   end
   object Panel3: TPanel
@@ -431,9 +443,9 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   end
   object Panel2: TPanel
     Left = 0
-    Top = 217
+    Top = 219
     Width = 773
-    Height = 414
+    Height = 412
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 5
@@ -590,7 +602,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object RzPageControl1: TRzPageControl
       Left = 1
-      Top = 267
+      Top = 265
       Width = 771
       Height = 146
       ActivePage = TabSheet1
@@ -1140,7 +1152,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       Left = 568
       Top = 1
       Width = 204
-      Height = 266
+      Height = 264
       Align = alRight
       BorderColor = clNavy
       BorderInner = fsButtonUp
@@ -1838,7 +1850,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   end
   object pnlMaterial: TPanel
     Left = 0
-    Top = 131
+    Top = 133
     Width = 773
     Height = 29
     Align = alTop
@@ -1889,7 +1901,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   end
   object pnlTipoOrcamento: TPanel
     Left = 0
-    Top = 160
+    Top = 162
     Width = 773
     Height = 30
     Align = alTop
@@ -1961,7 +1973,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   end
   object pnlCor: TPanel
     Left = 0
-    Top = 190
+    Top = 192
     Width = 773
     Height = 27
     Align = alTop

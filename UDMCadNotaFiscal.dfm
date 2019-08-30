@@ -1852,11 +1852,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object sdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField
       FieldName = 'VLR_ICMSSUBST_RET'
     end
-    object sdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
-      FieldName = 'PERC_ICMS_RED'
-    end
     object sdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
       FieldName = 'PERC_BASE_ICMSSUBT_RED'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
+      FieldName = 'PERC_ICMS_RED'
     end
     object sdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField
       FieldName = 'PERC_BASE_RED_EFET'
@@ -1878,6 +1878,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object sdsNotaFiscal_ItensESPESSURA: TFloatField
       FieldName = 'ESPESSURA'
+    end
+    object sdsNotaFiscal_ItensDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
+      FixedChar = True
+      Size = 1
     end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
@@ -2578,6 +2583,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'ESPESSURA'
       DisplayFormat = '##0.00'
       EditFormat = '##0.00'
+    end
+    object cdsNotaFiscal_ItensDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsNotaFiscal_Itens: TDataSource
@@ -7727,7 +7737,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspNotaEntrada'
-    Left = 465
+    Left = 466
     Top = 143
     object cdsNotaEntradaSERIE: TStringField
       FieldName = 'SERIE'
@@ -7932,14 +7942,15 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'E.NGR, PE.ID_TAB_PRECO, pi.TIPO_OS, PF.DESC_SUFRAMA_PIS_COFINS,'#13 +
       #10'       PF.DESC_SUFRAMA_ICMS, O.DTEMISSAO DTEMISSAO_OS, O.NUM_OS' +
       ' NUM_OS_SERVICO, O.DTRECEBIMENTO, O.DT_AGENDA,'#13#10'       PIT.COMPR' +
-      'IMENTO, PIT.LARGURA, PIT.ESPESSURA'#13#10'from PEDIDO PE'#13#10'inner join P' +
-      'EDIDO_ITEM pi on (PE.ID = pi.ID)'#13#10'inner join PESSOA CLI on (PE.I' +
-      'D_CLIENTE = CLI.CODIGO)'#13#10'inner join PRODUTO PRO on (pi.ID_PRODUT' +
-      'O = PRO.ID)'#13#10'left join COMBINACAO COMB on (pi.ID_COR = COMB.ID)'#13 +
-      #10'left join GRUPO GR on PRO.ID_GRUPO = GR.ID'#13#10'left join PESSOA_FI' +
-      'SCAL PF on PE.ID_CLIENTE = PF.CODIGO'#13#10'left join ORDEMSERVICO O o' +
-      'n pi.ID_OS_SERV = O.ID'#13#10'left join PEDIDO_ITEM_TIPO PIT ON PI.ID ' +
-      '= PIT.ID AND PI.ITEM = PIT.ITEM'#13#10'where pi.QTD_RESTANTE > 0'#13#10#13#10#13#10
+      'IMENTO, PIT.LARGURA, PIT.ESPESSURA, PI.DRAWBACK'#13#10'from PEDIDO PE'#13 +
+      #10'inner join PEDIDO_ITEM pi on (PE.ID = pi.ID)'#13#10'inner join PESSOA' +
+      ' CLI on (PE.ID_CLIENTE = CLI.CODIGO)'#13#10'inner join PRODUTO PRO on ' +
+      '(pi.ID_PRODUTO = PRO.ID)'#13#10'left join COMBINACAO COMB on (pi.ID_CO' +
+      'R = COMB.ID)'#13#10'left join GRUPO GR on PRO.ID_GRUPO = GR.ID'#13#10'left j' +
+      'oin PESSOA_FISCAL PF on PE.ID_CLIENTE = PF.CODIGO'#13#10'left join ORD' +
+      'EMSERVICO O on pi.ID_OS_SERV = O.ID'#13#10'left join PEDIDO_ITEM_TIPO ' +
+      'PIT ON PI.ID = PIT.ID AND PI.ITEM = PIT.ITEM'#13#10'where pi.QTD_RESTA' +
+      'NTE > 0'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -8288,6 +8299,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsPedidoESPESSURA: TFloatField
       FieldName = 'ESPESSURA'
+    end
+    object cdsPedidoDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsPedido: TDataSource

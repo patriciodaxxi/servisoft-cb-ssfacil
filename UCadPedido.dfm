@@ -25,7 +25,7 @@ object frmCadPedido: TfrmCadPedido
     Top = 0
     Width = 1097
     Height = 679
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadPedido: TfrmCadPedido
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -2460,7 +2460,7 @@ object frmCadPedido: TfrmCadPedido
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 50
+            ColCount = 51
             RowCount = 2
             Columns = <
               item
@@ -2795,6 +2795,14 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'BASE_IPI'
                 Title.Alignment = taCenter
                 Title.Caption = 'Base IPI'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'DRAWBACK'
+                Title.Alignment = taCenter
+                Title.Caption = 'Drawback'
                 Visible = True
               end>
           end

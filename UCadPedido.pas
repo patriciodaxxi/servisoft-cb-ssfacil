@@ -899,6 +899,8 @@ begin
     end;
     if (SMDBGrid2.Columns[i].FieldName = 'FABRICA') then
       SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_PedUSA_FABRICA.AsString = 'S');
+    if (SMDBGrid2.Columns[i].FieldName = 'DRAWBACK') then
+      SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S');
     if (lblNaoMostrarPreco.Visible) then
     begin
       vTexto := SMDBGrid2.Columns[i].FieldName;

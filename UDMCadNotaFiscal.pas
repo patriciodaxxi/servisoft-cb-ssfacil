@@ -3079,6 +3079,9 @@ type
     cdsNotaFiscal_ConsultaNUMNOTA_DEVOL: TIntegerField;
     cdsNotaFiscal_ConsultaSERIE_DEVOL: TStringField;
     cdsNotaFiscal_ConsultaDTEMISSAO_DEVOL: TDateField;
+    sdsNotaFiscal_ItensDRAWBACK: TStringField;
+    cdsNotaFiscal_ItensDRAWBACK: TStringField;
+    cdsPedidoDRAWBACK: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
