@@ -5622,7 +5622,6 @@ object frmRecebeXML: TfrmRecebeXML
       Style = csDropDownList
       ItemHeight = 13
       TabOrder = 7
-      OnChange = ComboBox1Change
       Items.Strings = (
         '00 - Mercadoria para Revenda'
         '01- Mat'#233'ria-Prima'
