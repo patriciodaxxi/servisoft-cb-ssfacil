@@ -227,7 +227,8 @@ object DMCadNFe_Inutilizacao: TDMCadNFe_Inutilizacao
       'WHERE FILIAL = :FILIAL'
       '   AND SERIE = :SERIE'
       '  AND NUMNOTA >= :NUMNOTAINI'
-      '  AND NUMNOTA <= :NUMNOTAFIN')
+      '  AND NUMNOTA <= :NUMNOTAFIN'
+      '  AND TIPO_NOTA = '#39'S'#39)
     SQLConnection = dmDatabase.scoDados
     Left = 168
     Top = 176
