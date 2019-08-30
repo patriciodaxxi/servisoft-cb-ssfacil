@@ -1120,19 +1120,19 @@ object frmSel_Produto: TfrmSel_Produto
       'SELECT PRO.ID, PRO.NOME, PRO.REFERENCIA, PRO.PRECO_VENDA, PRO.UN' +
       'IDADE,PRO.OBS,'#13#10'PRO.PRECO_CUSTO, PV.PLACA, PRO.COD_BARRA,'#13#10'cast(' +
       '0 as Float) AS VLR_VENDA1, cast(0 as Float) AS VLR_VENDA2, cast(' +
-      '0 as Float) AS VLR_VENDA3,'#13#10'PRO.USA_COR, PRO.USA_PRECO_COR, (SEL' +
-      'ECT cast(sum(EST.QTD) AS Float) QTD FROM ESTOQUE_ATUAL EST'#13#10'    ' +
-      '              WHERE EST.FILIAL = :FILIAL AND'#13#10'                  ' +
-      '  EST.ID_PRODUTO = PRO.ID) QTD,'#13#10'(SELECT cast(sum(E2.QTD) AS Flo' +
-      'at) QTDGERAL FROM ESTOQUE_ATUAL E2'#13#10'                    WHERE E2' +
-      '.ID_PRODUTO = PRO.ID) QTDGERAL,'#13#10'                   /**/ cast(0 ' +
-      'as Float) AS PRECO_PROMOCAO, M.NOME NOME_MARCA'#13#10'FROM PRODUTO PRO' +
-      #13#10'LEFT JOIN PRODUTO_VEICULO PV'#13#10'ON PRO.ID = PV.ID'#13#10'LEFT JOIN MAR' +
-      'CA M ON PRO.ID_MARCA = M.ID'#13#10#13#10#13#10
+      '0 as Float) AS VLR_VENDA3,'#13#10'PRO.USA_COR, PRO.USA_PRECO_COR, M.NO' +
+      'ME NOME_MARCA, (SELECT cast(sum(EST.QTD) AS Float) QTD FROM ESTO' +
+      'QUE_ATUAL EST'#13#10'                  WHERE EST.FILIAL = :FILIAL AND'#13 +
+      #10'                    EST.ID_PRODUTO = PRO.ID) QTD,'#13#10'(SELECT cast' +
+      '(sum(E2.QTD) AS Float) QTDGERAL FROM ESTOQUE_ATUAL E2'#13#10'         ' +
+      '           WHERE E2.ID_PRODUTO = PRO.ID) QTDGERAL,'#13#10'            ' +
+      '       /**/ cast(0 as Float) AS PRECO_PROMOCAO, M.NOME NOME_MARC' +
+      'A'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO_VEICULO PV'#13#10'ON PRO.ID = P' +
+      'V.ID'#13#10'LEFT JOIN MARCA M ON PRO.ID_MARCA = M.ID'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end>
