@@ -91,7 +91,8 @@ uses
   uBalanca in 'uBalanca.pas',
   uNFeConsts in '..\uNFeConsts.pas',
   UConsProdutoNCM in '..\UConsProdutoNCM.pas' {frmConsProdutoNCM},
-  UDMConsProduto in '..\UDMConsProduto.pas' {DMConsProduto: TDataModule};
+  UDMConsProduto in '..\UDMConsProduto.pas' {DMConsProduto: TDataModule},
+  UAltCFOPProd in '..\UAltCFOPProd.pas' {frmAltCFOPProd};
 
 {$R *.res}
 
