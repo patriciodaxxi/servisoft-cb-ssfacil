@@ -552,7 +552,7 @@ type
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
     procedure prc_Abrir_Produto_Consumo(ID_Produto : Integer);
     procedure prc_Abrir_Produto_CMat(ID_Produto, ID_Cor : Integer);
-    procedure prc_Gravar_Baixa_MP(Qtd, Qtd_Consumo : Real ; Tamanho : String ; ID_Cor : Integer);
+    procedure prc_Gravar_Baixa_MP(Qtd, Qtd_Consumo : Real ; Tamanho : String ; ID_Cor, ID_Material : Integer);
     procedure prc_Le_Produto_Consumo(Qtd : Real);
 
   public
@@ -815,11 +815,11 @@ begin
         sdsProduto_Consumo_Tam.ParamByName('TAMANHO').AsString := cdsPedido_PendTAMANHO.AsString;
         cdsProduto_Consumo_Tam.Open;
         if not cdsProduto_Consumo_Tam.IsEmpty then
-          prc_Gravar_Baixa_MP(Qtd,cdsProduto_Consumo_TamQTD_CONSUMO.AsFloat,'',cdsProduto_CMatID_COR_MAT.AsInteger);
+          prc_Gravar_Baixa_MP(Qtd,cdsProduto_Consumo_TamQTD_CONSUMO.AsFloat,'',cdsProduto_CMatID_COR_MAT.AsInteger,cdsProduto_CMatID_MATERIAL.AsInteger);
       end
       else
       begin
-        prc_Gravar_Baixa_MP(Qtd,cdsProduto_CMatQTD_CONSUMO.AsFloat,'',cdsProduto_CMatID_COR_MAT.AsInteger);
+        prc_Gravar_Baixa_MP(Qtd,cdsProduto_CMatQTD_CONSUMO.AsFloat,'',cdsProduto_CMatID_COR_MAT.AsInteger,cdsProduto_CMatID_MATERIAL.AsInteger);
       end;
       cdsProduto_CMat.Next;
     end;
@@ -838,11 +838,11 @@ begin
         sdsProduto_Consumo_Tam.ParamByName('TAMANHO').AsString := cdsPedido_PendTAMANHO.AsString;
         cdsProduto_Consumo_Tam.Open;
         if not cdsProduto_Consumo_Tam.IsEmpty then
-          prc_Gravar_Baixa_MP(Qtd,cdsProduto_Consumo_TamQTD_CONSUMO.AsFloat,'',0);
+          prc_Gravar_Baixa_MP(Qtd,cdsProduto_Consumo_TamQTD_CONSUMO.AsFloat,'',0,cdsProduto_ConsumoID_MATERIAL.AsInteger);
       end
       else
       begin
-        prc_Gravar_Baixa_MP(Qtd,cdsProduto_ConsumoQTD_CONSUMO.AsFloat,'',0);
+        prc_Gravar_Baixa_MP(Qtd,cdsProduto_ConsumoQTD_CONSUMO.AsFloat,'',0,cdsProduto_ConsumoID_MATERIAL.AsInteger);
       end;
       cdsProduto_Consumo.Next;
     end;
@@ -856,7 +856,7 @@ begin
   cdsProduto_Consumo.Open;
 end;
 
-procedure TDMBaixaPedido.prc_Gravar_Baixa_MP(Qtd, Qtd_Consumo : Real ; Tamanho : String ; ID_Cor : Integer);
+procedure TDMBaixaPedido.prc_Gravar_Baixa_MP(Qtd, Qtd_Consumo : Real ; Tamanho : String ; ID_Cor, ID_Material : Integer);
 var
   vItem : Integer;
   vID_Estoque : Integer;
@@ -865,7 +865,7 @@ begin
   vItem := cdsBaixa_Pedido_MPITEM.AsInteger + 1;
 
   qMaterial.Close;
-  qMaterial.ParamByName('ID').AsInteger := cdsProduto_ConsumoID_MATERIAL.AsInteger;
+  qMaterial.ParamByName('ID').AsInteger := ID_Material;
   qMaterial.Open;
 
   cdsBaixa_Pedido_MP.Insert;
@@ -893,8 +893,8 @@ begin
                                              cdsPedido_PendID_CFOP.AsInteger,
                                              cdsPedido_PendID.AsInteger,0,
                                              'S',vTipoDoc,
-                                             cdsProduto_ConsumoUNIDADE.AsString,
-                                             cdsProduto_ConsumoUNIDADE.AsString,
+                                             qMaterialUNIDADE.AsString,
+                                             qMaterialUNIDADE.AsString,
                                              '',
                                              Tamanho,
                                              cdsBaixa_PedidoDTBAIXA.AsDateTime,
