@@ -3512,7 +3512,8 @@ begin
 
   //IR
   cdsNotaServico_ItensVLR_IR.AsFloat := StrToCurr(FormatCurr('0.00',0));
-  if (StrToCurr(FormatCurr('0.00',cdsNotaServicoPERC_IR.AsFloat)) > 0) then
+  if (cdsNotaServico_ItensCALCULAR_IR.AsString <> 'N') and (cdsNotaServico_ItensCALCULAR_IR.AsString <> 'n') and
+     (StrToCurr(FormatCurr('0.00',cdsNotaServicoPERC_IR.AsFloat)) > 0) then
   begin
     vAux2 := StrToCurr(FormatCurr('0.00',vTotalAux * cdsNotaServicoPERC_IR.AsFloat / 100));
     if (cdsClienteORGAO_PUBLICO.AsString <> 'S') and (StrToCurr(FormatCurr('0.00',vAux2)) <= StrToCurr(FormatCurr('0.00',cdsFilialVLR_IR_MINIMO.AsFloat))) then
