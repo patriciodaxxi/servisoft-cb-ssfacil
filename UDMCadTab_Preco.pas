@@ -201,6 +201,8 @@ type
     qTab: TSQLQuery;
     qTabID: TIntegerField;
     qTabNOME: TStringField;
+    sdsTab_Preco_ItensSELECIONADO: TStringField;
+    cdsTab_Preco_ItensSELECIONADO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsTab_Preco_ItensNewRecord(DataSet: TDataSet);
     procedure dspTab_PrecoUpdateError(Sender: TObject;

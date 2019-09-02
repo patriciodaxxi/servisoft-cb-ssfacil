@@ -1061,7 +1061,7 @@ object frmCadTabPreco: TfrmCadTabPreco
             object btnInserir_Itens: TNxButton
               Left = 3
               Top = 16
-              Width = 135
+              Width = 152
               Height = 30
               Caption = 'Inserir Produto'
               Enabled = False
@@ -1134,9 +1134,9 @@ object frmCadTabPreco: TfrmCadTabPreco
               OnClick = btnInserir_ItensClick
             end
             object btnAlterar_Itens: TNxButton
-              Left = 138
+              Left = 155
               Top = 16
-              Width = 146
+              Width = 163
               Height = 30
               Caption = 'Alterar Produto'
               Enabled = False
@@ -1207,9 +1207,9 @@ object frmCadTabPreco: TfrmCadTabPreco
               OnClick = btnAlterar_ItensClick
             end
             object btnExcluir_Itens: TNxButton
-              Left = 283
+              Left = 318
               Top = 16
-              Width = 151
+              Width = 160
               Height = 30
               Caption = 'Excluir Produto'
               Enabled = False

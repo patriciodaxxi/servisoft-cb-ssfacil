@@ -426,7 +426,7 @@ begin
   fat.NestedDataSet.FieldByName('nItem').AsInteger  := Parcela;
   fat.NestedDataSet.FieldByName('nFat').AsString    := fDMCadNotaServico.cdsNotaServico_ImpNUMNOTA.AsString + '/' + IntToStr(Parcela);
   fat.NestedDataSet.FieldByName('dVenc').AsDateTime := DtVencimento;
-  fat.NestedDataSet.FieldByName('vFat').AsFloat     := VlrVencimento;
+  fat.NestedDataSet.FieldByName('vFat').AsFloat     := StrToFloat(FormatFloat('0.00',VlrVencimento));
   if fDMCadNotaServico.cdsNotaServico_ImpTIPO_PRAZO.AsString = 'V' then
     fat.NestedDataSet.FieldByName('tipoVencFat').AsString := '3'
   else

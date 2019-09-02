@@ -192,6 +192,11 @@ object DMCadTab_Preco: TDMCadTab_Preco
     object sdsTab_Preco_ItensVLR_VENDA2: TFloatField
       FieldName = 'VLR_VENDA2'
     end
+    object sdsTab_Preco_ItensSELECIONADO: TStringField
+      FieldName = 'SELECIONADO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsTab_Preco_Itens: TClientDataSet
     Aggregates = <>
@@ -200,7 +205,7 @@ object DMCadTab_Preco: TDMCadTab_Preco
     Params = <>
     OnNewRecord = cdsTab_Preco_ItensNewRecord
     Left = 184
-    Top = 168
+    Top = 167
     object cdsTab_Preco_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -269,6 +274,11 @@ object DMCadTab_Preco: TDMCadTab_Preco
     end
     object cdsTab_Preco_ItensVLR_VENDA2: TFloatField
       FieldName = 'VLR_VENDA2'
+    end
+    object cdsTab_Preco_ItensSELECIONADO: TStringField
+      FieldName = 'SELECIONADO'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsTab_Preco_Itens: TDataSource

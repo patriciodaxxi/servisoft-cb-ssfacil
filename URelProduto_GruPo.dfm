@@ -177,7 +177,7 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
         object RLDBText1: TRLDBText
           Left = 4
           Top = 3
-          Width = 27
+          Width = 30
           Height = 10
           DataField = 'Codigo'
           DataSource = dmCadProduto.dsmGrupo
@@ -185,13 +185,13 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
           Font.Color = clBlack
           Font.Height = -8
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
         end
         object RLDBText8: TRLDBText
           Left = 52
           Top = 2
-          Width = 22
+          Width = 24
           Height = 10
           DataField = 'Nome'
           DataSource = dmCadProduto.dsmGrupo
@@ -199,7 +199,7 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
           Font.Color = clBlack
           Font.Height = -8
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
         end
       end
