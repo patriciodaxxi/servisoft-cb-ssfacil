@@ -333,6 +333,7 @@ type
     mTamanhoQtde_Item: TIntegerField;
     mAuxPedidoGradeItem: TIntegerField;
     mTamanhoQtde_Indice: TIntegerField;
+    mItensDRAWBACK: TStringField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private
