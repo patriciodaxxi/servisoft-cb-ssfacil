@@ -4164,7 +4164,7 @@ begin
   if fDMRecebeXML.qParametros_RecXMLMOSTRAR_VLR_VENDA.AsString = 'S' then
     exit;
 
-  if (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'X') then     //se for X, não atualiza preço de venda  03/09/2019
+  if (fDMRecebeXML.qParametrosUSA_PERC_MARGEM_RECEPCAO.AsString = 'X') then   //se for X, não atualiza preço de venda  03/09/2019
     Exit;
 
   if fDMRecebeXML.qParametros_ProdOPCAO_APLICAR_MARGEM.AsString <> 'C' then
