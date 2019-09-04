@@ -70,6 +70,10 @@ type
     RLLabel26: TRLLabel;
     RLLabel27: TRLLabel;
     RLLabel28: TRLLabel;
+    RLLabel29: TRLLabel;
+    RLDBText14: TRLDBText;
+    RLPanel1: TRLPanel;
+    RLPanel2: TRLPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand3BeforePrint(Sender: TObject; var PrintIt: Boolean);

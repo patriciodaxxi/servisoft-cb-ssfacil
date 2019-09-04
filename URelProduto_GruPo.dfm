@@ -114,7 +114,7 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
         ParentFont = False
       end
       object RLLabel2: TRLLabel
-        Left = 96
+        Left = 72
         Top = 32
         Width = 49
         Height = 12
@@ -128,14 +128,14 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
         Caption = 'Nome'
       end
       object RLLabel4: TRLLabel
-        Left = 416
+        Left = 443
         Top = 32
         Width = 37
         Height = 12
         Caption = 'Unidade'
       end
       object RLLabel6: TRLLabel
-        Left = 468
+        Left = 484
         Top = 32
         Width = 24
         Height = 12
@@ -162,6 +162,13 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
         Height = 12
         Caption = 'Pre'#231'o Venda'
       end
+      object RLLabel29: TRLLabel
+        Left = 15
+        Top = 31
+        Width = 51
+        Height = 12
+        Caption = 'C'#243'digo (ID)'
+      end
     end
     object RLSubDetail1: TRLSubDetail
       Left = 34
@@ -179,10 +186,11 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
         Transparent = False
         BeforePrint = RLBand2BeforePrint
         object RLDBText1: TRLDBText
-          Left = 4
-          Top = 4
-          Width = 40
-          Height = 12
+          Left = 5
+          Top = 0
+          Width = 37
+          Height = 17
+          Align = faLeft
           Color = 13882323
           DataField = 'Codigo'
           DataSource = dmCadProduto.dsmGrupo
@@ -196,12 +204,13 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
           Transparent = False
         end
         object RLDBText8: TRLDBText
-          Left = 52
-          Top = 3
-          Width = 29
-          Height = 12
+          Left = 47
+          Top = 0
+          Width = 78
+          Height = 17
+          Align = faLeft
           Color = 13882323
-          DataField = 'Nome'
+          DataField = 'Nome_Completo'
           DataSource = dmCadProduto.dsmGrupo
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -211,6 +220,20 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
           ParentColor = False
           ParentFont = False
           Transparent = False
+        end
+        object RLPanel1: TRLPanel
+          Left = 0
+          Top = 0
+          Width = 5
+          Height = 17
+          Align = faLeft
+        end
+        object RLPanel2: TRLPanel
+          Left = 42
+          Top = 0
+          Width = 5
+          Height = 17
+          Align = faLeft
         end
       end
       object RLSubDetail2: TRLSubDetail
@@ -226,7 +249,7 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
           Height = 14
           BeforePrint = RLBand3BeforePrint
           object RLDBText2: TRLDBText
-            Left = 101
+            Left = 71
             Top = 2
             Width = 70
             Height = 10
@@ -287,9 +310,9 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
             ParentFont = False
           end
           object RLDBMemo1: TRLDBMemo
-            Left = 172
+            Left = 143
             Top = 2
-            Width = 284
+            Width = 307
             Height = 10
             Behavior = [beSiteExpander]
             DataField = 'Nome_Produto'
@@ -325,6 +348,22 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
             Alignment = taRightJustify
             AutoSize = False
             DataField = 'Preco_Venda'
+            DataSource = dmCadProduto.dsmGrupo_Produto
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -8
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText14: TRLDBText
+            Left = 17
+            Top = 2
+            Width = 44
+            Height = 10
+            Alignment = taCenter
+            AutoSize = False
+            DataField = 'ID_Produto'
             DataSource = dmCadProduto.dsmGrupo_Produto
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack

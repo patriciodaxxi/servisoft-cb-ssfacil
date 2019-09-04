@@ -240,7 +240,13 @@ begin
     begin
       Det.NestedDataSet.FieldByName('serv.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensBASE_CALCULO.AsFloat));
       Det.NestedDataSet.FieldByName('serv.pISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_ALIQUOTA.AsFloat));
-      Det.NestedDataSet.FieldByName('serv.vISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat));
+      //Det.NestedDataSet.FieldByName('serv.vISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat));
+      if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat)) > 0 then
+        Det.NestedDataSet.FieldByName('serv.vISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat))
+      else
+      if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS_RETIDO.AsFloat)) > 0 then
+        Det.NestedDataSet.FieldByName('serv.vISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS_RETIDO.AsFloat));
+
     end
     else
     begin
@@ -401,7 +407,6 @@ begin
         vObsAux := vObsAux + ',' + fDMCadNotaServico.mOSAuxID.AsString;
       fDMCadNotaServico.mOSAux.Next;
     end;
-    
     if trim(vObsAux) <> '' then
     begin
       obs.NestedDataSet.Insert;
@@ -409,6 +414,16 @@ begin
       obs.NestedDataSet.FieldByName('item').AsString := obs.NestedDataSet.FieldByName('item').AsString + vObsAux;
       obs.NestedDataSet.Post;
     end;
+
+    //04/09/2019
+    if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat)) > 0 then
+    begin
+      obs.NestedDataSet.Insert;
+      obs.NestedDataSet.FieldByName('item').AsString := obs.NestedDataSet.FieldByName('item').AsString
+                                                      + '(O recolhimento do ISSQN é de responsabilidade do tomador do serviço)';
+      obs.NestedDataSet.Post;
+    end;
+
   end;
 
   vCds.Post;
