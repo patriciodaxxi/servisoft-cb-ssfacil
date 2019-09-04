@@ -17,8 +17,8 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
   PixelsPerInch = 96
   TextHeight = 13
   object RLReport1: TRLReport
-    Left = 104
-    Top = 16
+    Left = 116
+    Top = 20
     Width = 794
     Height = 1123
     DataSource = dmCadProduto.dsmGrupo
@@ -32,6 +32,7 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
     Margins.RightMargin = 9.000000000000000000
     Margins.BottomMargin = 9.000000000000000000
     ShowProgress = False
+    BeforePrint = RLReport1BeforePrint
     object RLBand1: TRLBand
       Left = 34
       Top = 30
@@ -172,40 +173,49 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
         Left = 0
         Top = 0
         Width = 726
-        Height = 13
+        Height = 17
+        Color = clWhite
+        ParentColor = False
+        Transparent = False
         BeforePrint = RLBand2BeforePrint
         object RLDBText1: TRLDBText
           Left = 4
-          Top = 3
-          Width = 30
-          Height = 10
+          Top = 4
+          Width = 40
+          Height = 12
+          Color = 13882323
           DataField = 'Codigo'
           DataSource = dmCadProduto.dsmGrupo
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -8
+          Font.Height = -9
           Font.Name = 'Arial'
           Font.Style = [fsBold]
+          ParentColor = False
           ParentFont = False
+          Transparent = False
         end
         object RLDBText8: TRLDBText
           Left = 52
-          Top = 2
-          Width = 24
-          Height = 10
+          Top = 3
+          Width = 29
+          Height = 12
+          Color = 13882323
           DataField = 'Nome'
           DataSource = dmCadProduto.dsmGrupo
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -8
+          Font.Height = -9
           Font.Name = 'Arial'
           Font.Style = [fsBold]
+          ParentColor = False
           ParentFont = False
+          Transparent = False
         end
       end
       object RLSubDetail2: TRLSubDetail
         Left = 0
-        Top = 13
+        Top = 17
         Width = 726
         Height = 188
         DataSource = dmCadProduto.dsmGrupo_Produto
@@ -328,27 +338,28 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
           Left = 0
           Top = 107
           Width = 726
-          Height = 14
+          Height = 20
           BandType = btSummary
           BeforePrint = RLBand4BeforePrint
           object RLLabel9: TRLLabel
-            Left = 592
+            Left = 533
             Top = 2
-            Width = 84
-            Height = 10
+            Width = 101
+            Height = 11
             Caption = 'Qtd. de Registros ==>'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -8
+            Font.Height = -9
             Font.Name = 'Arial'
             Font.Style = [fsBold]
             ParentFont = False
           end
           object RLDBResult1: TRLDBResult
-            Left = 680
-            Top = 1
-            Width = 37
+            Left = 638
+            Top = 2
+            Width = 84
             Height = 11
+            Alignment = taRightJustify
             DataField = 'ID_Produto'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
@@ -358,6 +369,84 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
             Info = riCount
             ParentFont = False
             ResetAfterPrint = True
+          end
+          object RLLabel15: TRLLabel
+            Left = 202
+            Top = 3
+            Width = 52
+            Height = 11
+            Caption = 'Vlr. Custo:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object RLLabel16: TRLLabel
+            Left = 258
+            Top = 3
+            Width = 21
+            Height = 11
+            Caption = '0,00'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object RLLabel17: TRLLabel
+            Left = 354
+            Top = 3
+            Width = 53
+            Height = 11
+            Caption = 'Vlr. Venda:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object RLLabel18: TRLLabel
+            Left = 410
+            Top = 3
+            Width = 21
+            Height = 11
+            Caption = '0,00'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object RLLabel19: TRLLabel
+            Left = 50
+            Top = 3
+            Width = 43
+            Height = 11
+            Caption = 'Estoque:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object RLLabel20: TRLLabel
+            Left = 96
+            Top = 3
+            Width = 43
+            Height = 11
+            Caption = 'Estoque:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
           end
         end
         object RLSubDetail3: TRLSubDetail
@@ -512,6 +601,121 @@ object fRelProduto_Grupo: TfRelProduto_Grupo
             end
           end
         end
+      end
+    end
+    object RLBand8: TRLBand
+      Left = 34
+      Top = 337
+      Width = 726
+      Height = 21
+      BandType = btSummary
+      BeforePrint = RLBand8BeforePrint
+      object RLLabel13: TRLLabel
+        Left = 527
+        Top = 4
+        Width = 117
+        Height = 11
+        Alignment = taRightJustify
+        Caption = 'Total Geral Registros ==>'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object RLLabel14: TRLLabel
+        Left = 651
+        Top = 4
+        Width = 71
+        Height = 11
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = '0'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object RLLabel23: TRLLabel
+        Left = 202
+        Top = 3
+        Width = 52
+        Height = 11
+        Caption = 'Vlr. Custo:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object RLLabel24: TRLLabel
+        Left = 258
+        Top = 3
+        Width = 21
+        Height = 11
+        Caption = '0,00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object RLLabel25: TRLLabel
+        Left = 354
+        Top = 3
+        Width = 53
+        Height = 11
+        Caption = 'Vlr. Venda:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object RLLabel26: TRLLabel
+        Left = 410
+        Top = 3
+        Width = 21
+        Height = 11
+        Caption = '0,00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object RLLabel27: TRLLabel
+        Left = 50
+        Top = 3
+        Width = 43
+        Height = 11
+        Caption = 'Estoque:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object RLLabel28: TRLLabel
+        Left = 96
+        Top = 3
+        Width = 43
+        Height = 11
+        Caption = 'Estoque:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
     end
   end

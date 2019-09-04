@@ -1954,6 +1954,8 @@ type
     cdsProduto_ConsumoNOME_POSICAO: TStringField;
     sdsProdutoPRECO_CUSTO_ANT: TFloatField;
     cdsProdutoPRECO_CUSTO_ANT: TFloatField;
+    mGrupoID_Principal: TIntegerField;
+    mGrupo_ProdutoID_Principal: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

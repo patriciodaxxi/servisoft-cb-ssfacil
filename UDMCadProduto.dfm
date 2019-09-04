@@ -508,7 +508,7 @@ object dmCadProduto: TdmCadProduto
     OnNewRecord = cdsProdutoNewRecord
     OnReconcileError = cdsProdutoReconcileError
     Left = 114
-    Top = 1
+    Top = 2
     object cdsProdutoID: TIntegerField
       Alignment = taCenter
       FieldName = 'ID'
@@ -3163,14 +3163,41 @@ object dmCadProduto: TdmCadProduto
   object mGrupo: TClientDataSet
     Active = True
     Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'ID_Grupo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Codigo'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Nome'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'Tipo'
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'ID_Principal'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
     Params = <>
+    StoreDefs = True
     Left = 981
     Top = 5
     Data = {
-      780000009619E0BD01000000180000000400000000000300000078000849445F
+      8D0000009619E0BD0100000018000000050000000000030000008D000849445F
       477275706F040001000000000006436F6469676F010049000000010005574944
       5448020002001400044E6F6D6501004900000001000557494454480200020028
-      00045469706F01004900000001000557494454480200020001000000}
+      00045469706F01004900000001000557494454480200020001000C49445F5072
+      696E636970616C04000100000000000000}
     object mGrupoID_Grupo: TIntegerField
       FieldName = 'ID_Grupo'
     end
@@ -3185,6 +3212,9 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'Tipo'
       Size = 1
     end
+    object mGrupoID_Principal: TIntegerField
+      FieldName = 'ID_Principal'
+    end
   end
   object dsmGrupo: TDataSource
     DataSet = mGrupo
@@ -3194,11 +3224,63 @@ object dmCadProduto: TdmCadProduto
   object mGrupo_Produto: TClientDataSet
     Active = True
     Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'ID_Produto'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ID_Grupo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Cod_Grupo'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Referencia'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'Nome_Produto'
+        DataType = ftString
+        Size = 60
+      end
+      item
+        Name = 'NCM'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'Unidade'
+        DataType = ftString
+        Size = 6
+      end
+      item
+        Name = 'Preco_Custo'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Preco_Venda'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Saldo_Estoque'
+        DataType = ftFloat
+      end
+      item
+        Name = 'ID_Principal'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
     Params = <>
+    StoreDefs = True
     Left = 960
     Top = 53
     Data = {
-      0E0100009619E0BD01000000180000000A0000000000030000000E010A49445F
+      230100009619E0BD01000000180000000B00000000000300000023010A49445F
       50726F6475746F04000100000000000849445F477275706F0400010000000000
       09436F645F477275706F01004900000001000557494454480200020014000A52
       65666572656E63696101004900000001000557494454480200020014000C4E6F
@@ -3206,7 +3288,8 @@ object dmCadProduto: TdmCadProduto
       434D0100490000000100055749445448020002000A0007556E69646164650100
       4900000001000557494454480200020006000B507265636F5F437573746F0800
       0400000000000B507265636F5F56656E646108000400000000000D53616C646F
-      5F4573746F71756508000400000000000000}
+      5F4573746F71756508000400000000000C49445F5072696E636970616C040001
+      00000000000000}
     object mGrupo_ProdutoID_Produto: TIntegerField
       FieldName = 'ID_Produto'
     end
@@ -3239,6 +3322,9 @@ object dmCadProduto: TdmCadProduto
     end
     object mGrupo_ProdutoSaldo_Estoque: TFloatField
       FieldName = 'Saldo_Estoque'
+    end
+    object mGrupo_ProdutoID_Principal: TIntegerField
+      FieldName = 'ID_Principal'
     end
   end
   object dsmGrupo_Produto: TDataSource
@@ -7844,7 +7930,7 @@ object dmCadProduto: TdmCadProduto
     Params = <>
     ProviderName = 'dspTab_Preco_Itens'
     Left = 496
-    Top = 298
+    Top = 297
     object cdsTab_Preco_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]

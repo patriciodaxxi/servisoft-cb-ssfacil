@@ -1053,6 +1053,9 @@ type
     vUser_Exclui: Boolean;
     vEstoqueLoteTotal: Double;
     vItem_Corrugado : Integer;
+    vID_Principal : Integer;
+
+    vPreco_Custo, vPreco_Custo_Total, vPerc_MargemLucro : Real;
 
     //*** 16/06/2016  usado para gravar a tabela Produto_Cad_Ant
     vNome_Cad_Ant, vReferencia_Cad_Ant: String;
@@ -1081,7 +1084,7 @@ type
 
     procedure marcaFibra;
     procedure prc_Verificar_mGrupo(ID_Grupo: Integer);
-    procedure prc_Gravar_mGrupo(ID: Integer; Codigo, Nome: String);
+    procedure prc_Gravar_mGrupo(ID, ID_Principal: Integer; Codigo, Nome: String);
     procedure prc_Gravar_mGrupo_Produto;
 
     procedure prc_Imprimir_Estruturado(Agrupado: Boolean = False);
@@ -1595,6 +1598,10 @@ begin
 
   if (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N')  then
     fDMCadProduto.prc_Abrir_Produto_Processo(fDMCadProduto.cdsProdutoID.AsInteger);
+
+  vPreco_Custo       := 0;
+  vPreco_Custo_Total := 0;
+  vPerc_MargemLucro  := 0;
 end;
 
 procedure TfrmCadProduto.FormShow(Sender: TObject);
@@ -1605,7 +1612,7 @@ begin
   fDMCadProduto := TDMCadProduto.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMCadProduto);
   fDMCadProduto.qParametros_Ped.Open;
-  prc_le_Grid(SMDBGrid1, Name, fDMCadProduto.qParametros_GeralENDGRIDS.AsString);
+  //prc_le_Grid(SMDBGrid1, Name, fDMCadProduto.qParametros_GeralENDGRIDS.AsString);
 
   DBEdit3.Visible  := not(Label4.Enabled);
   DBEdit57.Visible := not(Label4.Enabled);
@@ -2100,6 +2107,10 @@ begin
 
   fDMCadProduto.cdsProduto.Edit;
 
+  vPreco_Custo       := StrToFloat(FormatFloat('0.00000',fDMCadProduto.cdsProdutoPRECO_CUSTO.AsFloat));
+  vPreco_Custo_Total := StrToFloat(FormatFloat('0.00000',fDMCadProduto.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat));
+  vPerc_MargemLucro  := StrToFloat(FormatFloat('0.00',fDMCadProduto.cdsProdutoPERC_MARGEMLUCRO.AsFloat));
+
   vNome_Cad_Ant       := fDMCadProduto.cdsProdutoNOME.AsString;
   vReferencia_Cad_Ant := fDMCadProduto.cdsProdutoREFERENCIA.AsString;
   vAltera_Nome        := False;
@@ -2115,8 +2126,6 @@ begin
   prc_Habilita;
   if fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S' then
     vID_Semi_Ant := fnc_Busca_Semi;
-
-
 
   RzPageControl2Change(Sender);
 end;
@@ -3248,7 +3257,7 @@ var
 begin
   if ID_Grupo <= 0 then
   begin
-    prc_Gravar_mGrupo(0,'','');
+    prc_Gravar_mGrupo(0,vID_Principal,'','');
     exit;
   end;
   sds := TSQLDataSet.Create(nil);
@@ -3256,22 +3265,25 @@ begin
     sds.SQLConnection := dmDatabase.scoDados;
     sds.NoMetadata    := True;
     sds.GetMetadata   := False;
-    sds.CommandText   := 'SELECT G.ID, G.NOME, G.TIPO, G.CODIGO, G.NIVEL, G.SUPERIOR, CASE NIVEL '
-                       + 'WHEN 5 THEN ' + QuotedStr('          ') + ' ||  NOME '
-                       + 'WHEN 4 THEN ' + QuotedStr('        ') + ' ||  NOME '
-                       + 'WHEN 3 THEN ' + QuotedStr('      ') + ' ||  NOME '
-                       + 'WHEN 2 THEN ' + QuotedStr('    ') + '||  NOME '
-                       + 'WHEN 1 THEN NOME '
+    sds.CommandText   := 'SELECT G.ID, G.NOME, G.TIPO, G.CODIGO, G.NIVEL, G.SUPERIOR, CASE G.NIVEL '
+                       + 'WHEN 5 THEN ' + QuotedStr('          ') + ' ||  G.NOME '
+                       + 'WHEN 4 THEN ' + QuotedStr('        ') + ' ||  G.NOME '
+                       + 'WHEN 3 THEN ' + QuotedStr('      ') + ' ||  G.NOME '
+                       + 'WHEN 2 THEN ' + QuotedStr('    ') + '||  G.NOME '
+                       + 'WHEN 1 THEN G.NOME '
                        + 'ELSE G.NOME '
-                       + 'END AS NOME_AUX '
+                       + 'END AS NOME_AUX , S2.NOME || ' + QuotedStr(' - ') + ' || G.NOME  AS NOME_PRINCIPAL '
                        + 'FROM GRUPO G '
+                       + 'LEFT JOIN GRUPO S2 ON G.SUPERIOR = S2.ID '
                        + 'WHERE G.ID = ' + IntToStr(ID_Grupo);
     sds.Open;
     if (sds.FieldByName('Superior').IsNull) or (sds.FieldByName('Superior').AsInteger <= 0) then
       ID_Grupo := 0
     else
       ID_Grupo := sds.FieldByName('Superior').AsInteger;
-    prc_Gravar_mGrupo(sds.FieldByName('ID').AsInteger,sds.FieldByName('Codigo').AsString,sds.FieldByName('Nome_Aux').AsString);
+    //prc_Gravar_mGrupo(sds.FieldByName('ID').AsInteger,ID_Grupo,sds.FieldByName('Codigo').AsString,sds.FieldByName('Nome_Aux').AsString);
+    if sds.FieldByName('TIPO').AsString = 'A' then
+      prc_Gravar_mGrupo(sds.FieldByName('ID').AsInteger,ID_Grupo,sds.FieldByName('Codigo').AsString,sds.FieldByName('NOME_PRINCIPAL').AsString);
   finally
     FreeAndNil(sds);
   end;
@@ -3279,32 +3291,35 @@ begin
     prc_Verificar_mGrupo(ID_Grupo);
 end;
 
-procedure TfrmCadProduto.prc_Gravar_mGrupo(ID: Integer; Codigo,
-  Nome: String);
+procedure TfrmCadProduto.prc_Gravar_mGrupo(ID, ID_Principal: Integer; Codigo, Nome: String);
 begin
   if not fDMCadProduto.mGrupo.FindKey([ID]) then
   begin
     fDMCadProduto.mGrupo.Insert;
-    fDMCadProduto.mGrupoID_Grupo.AsInteger := ID;
-    fDMCadProduto.mGrupoCodigo.AsString    := Codigo;
-    fDMCadProduto.mGrupoNome.AsString      := Nome;
+    fDMCadProduto.mGrupoID_Grupo.AsInteger     := ID;
+    fDMCadProduto.mGrupoCodigo.AsString        := Codigo;
+    fDMCadProduto.mGrupoNome.AsString          := Nome;
+    fDMCadProduto.mGrupoID_Principal.AsInteger := ID_Principal;
     fDMCadProduto.mGrupo.Post;
   end;
+  if ID_Principal > 0 then
+    vID_Principal := ID_Principal;
 end;
 
 procedure TfrmCadProduto.prc_Gravar_mGrupo_Produto;
 begin
   fDMCadProduto.mGrupo_Produto.Insert;
-  fDMCadProduto.mGrupo_ProdutoID_Produto.AsInteger  := fDMCadProduto.cdsProduto_ConsultaID.AsInteger;
-  fDMCadProduto.mGrupo_ProdutoID_Grupo.AsInteger    := fDMCadProduto.cdsProduto_ConsultaID_GRUPO.AsInteger;
-  fDMCadProduto.mGrupo_ProdutoCod_Grupo.AsString    := fDMCadProduto.cdsProduto_ConsultaCOD_GRUPO.AsString;
-  fDMCadProduto.mGrupo_ProdutoReferencia.AsString   := fDMCadProduto.cdsProduto_ConsultaREFERENCIA.AsString;
-  fDMCadProduto.mGrupo_ProdutoNome_Produto.AsString := fDMCadProduto.cdsProduto_ConsultaNOME.AsString;
-  fDMCadProduto.mGrupo_ProdutoNCM.AsString          := fDMCadProduto.cdsProduto_ConsultaNCM.AsString;
-  fDMCadProduto.mGrupo_ProdutoUnidade.AsString      := fDMCadProduto.cdsProduto_ConsultaUNIDADE.AsString;
-  fDMCadProduto.mGrupo_ProdutoPreco_Custo.AsFloat   := StrToFloat(FormatFloat('0.000##',fDMCadProduto.cdsProduto_ConsultaPRECO_CUSTO.AsFloat));
-  fDMCadProduto.mGrupo_ProdutoPreco_Venda.AsFloat   := StrToFloat(FormatFloat('0.000##',fDMCadProduto.cdsProduto_ConsultaPRECO_VENDA.AsFloat));
-  fDMCadProduto.mGrupo_ProdutoSaldo_Estoque.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadProduto.cdsProduto_ConsultaQTD_ESTOQUE.AsFloat));
+  fDMCadProduto.mGrupo_ProdutoID_Produto.AsInteger   := fDMCadProduto.cdsProduto_ConsultaID.AsInteger;
+  fDMCadProduto.mGrupo_ProdutoID_Grupo.AsInteger     := fDMCadProduto.cdsProduto_ConsultaID_GRUPO.AsInteger;
+  fDMCadProduto.mGrupo_ProdutoCod_Grupo.AsString     := fDMCadProduto.cdsProduto_ConsultaCOD_GRUPO.AsString;
+  fDMCadProduto.mGrupo_ProdutoReferencia.AsString    := fDMCadProduto.cdsProduto_ConsultaREFERENCIA.AsString;
+  fDMCadProduto.mGrupo_ProdutoNome_Produto.AsString  := fDMCadProduto.cdsProduto_ConsultaNOME.AsString;
+  fDMCadProduto.mGrupo_ProdutoNCM.AsString           := fDMCadProduto.cdsProduto_ConsultaNCM.AsString;
+  fDMCadProduto.mGrupo_ProdutoUnidade.AsString       := fDMCadProduto.cdsProduto_ConsultaUNIDADE.AsString;
+  fDMCadProduto.mGrupo_ProdutoPreco_Custo.AsFloat    := StrToFloat(FormatFloat('0.000##',fDMCadProduto.cdsProduto_ConsultaPRECO_CUSTO.AsFloat));
+  fDMCadProduto.mGrupo_ProdutoPreco_Venda.AsFloat    := StrToFloat(FormatFloat('0.000##',fDMCadProduto.cdsProduto_ConsultaPRECO_VENDA.AsFloat));
+  fDMCadProduto.mGrupo_ProdutoSaldo_Estoque.AsFloat  := StrToFloat(FormatFloat('0.000',fDMCadProduto.cdsProduto_ConsultaQTD_ESTOQUE.AsFloat));
+  fDMCadProduto.mGrupo_ProdutoID_Principal.AsInteger := vID_Principal;
   fDMCadProduto.mGrupo_Produto.Post;
 end;
 
@@ -3629,6 +3644,8 @@ begin
     ProgressBar1.Position := 0;
     ProgressBar1.Visible  := True;
     vRefAnt := '-1';
+    vID_Principal := 0;
+    fDMCadProduto.mGrupo.IndexFieldNames         := 'ID_Grupo';
     fDMCadProduto.cdsProduto_Consulta.First;
     while not fDMCadProduto.cdsProduto_Consulta.Eof do
     begin
@@ -3646,6 +3663,7 @@ begin
     Screen.Cursor        := crDefault;
     SMDBGrid1.EnableScroll;
   end;
+  fDMCadProduto.mGrupo.IndexFieldNames         := 'Codigo';
   fRelProduto_Grupo               := TfRelProduto_Grupo.Create(Self);
   fRelProduto_Grupo.vImpConsumo   := RzCheckList1.ItemChecked[1];
   fRelProduto_Grupo.vImpPrecoCusto := RzCheckList1.ItemChecked[2];
@@ -4694,6 +4712,16 @@ var
 begin
   if (StrToFloat(FormatFloat('0.00',fDMCadProduto.cdsProdutoPERC_MARGEMLUCRO.AsFloat)) <= 0) then
     exit;
+
+  if (StrToFloat(FormatFloat('0.00000',fDMCadProduto.cdsProdutoPRECO_CUSTO.AsFloat)) = StrToFloat(FormatFloat('0.00000',vPreco_Custo))) and
+     (StrToFloat(FormatFloat('0.00000',fDMCadProduto.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat)) = StrToFloat(FormatFloat('0.00000',vPreco_Custo_Total))) and
+     (StrToFloat(FormatFloat('0.00',fDMCadProduto.cdsProdutoPERC_MARGEMLUCRO.AsFloat)) = StrToFloat(FormatFloat('0.00',vPerc_MargemLucro))) then
+    exit;
+
+  vPreco_Custo       := StrToFloat(FormatFloat('0.00000',fDMCadProduto.cdsProdutoPRECO_CUSTO.AsFloat));
+  vPreco_Custo_Total := StrToFloat(FormatFloat('0.00000',fDMCadProduto.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat));
+  vPerc_MargemLucro  := StrToFloat(FormatFloat('0.00',fDMCadProduto.cdsProdutoPERC_MARGEMLUCRO.AsFloat));
+
   vPreco_Venda_Ant := StrToFloat(FormatFloat('0.0000',fDMCadProduto.cdsProdutoPRECO_VENDA.AsFloat));
   if (fDMCadProduto.qParametros_ProdOPCAO_APLICAR_MARGEM.AsString = 'C') then
   begin

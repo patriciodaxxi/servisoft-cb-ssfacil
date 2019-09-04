@@ -55,6 +55,21 @@ type
     RLDraw2: TRLDraw;
     RLBand7: TRLBand;
     RLDraw3: TRLDraw;
+    RLBand8: TRLBand;
+    RLLabel13: TRLLabel;
+    RLLabel14: TRLLabel;
+    RLLabel15: TRLLabel;
+    RLLabel16: TRLLabel;
+    RLLabel17: TRLLabel;
+    RLLabel18: TRLLabel;
+    RLLabel19: TRLLabel;
+    RLLabel20: TRLLabel;
+    RLLabel23: TRLLabel;
+    RLLabel24: TRLLabel;
+    RLLabel25: TRLLabel;
+    RLLabel26: TRLLabel;
+    RLLabel27: TRLLabel;
+    RLLabel28: TRLLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand3BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -62,12 +77,23 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure RLBand2BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand4BeforePrint(Sender: TObject; var PrintIt: Boolean);
-    procedure RLBand6BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand5BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand6BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand8BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     fDMRel: TDMRel;
-    
+
+    vTotal_Reg : Integer;
+    vTotal_Custo : Real;
+    vTotal_Venda : Real;
+    vTotal_Estoque : Real;
+
+    vVlr_Custo : Real;
+    vVlr_Venda : Real;
+    vQtd_Estoque : Real;
+
   public
     { Public declarations }
     fDMCadProduto: TDMCadProduto;
@@ -96,6 +122,15 @@ procedure TfRelProduto_Grupo.RLBand1BeforePrint(Sender: TObject;
 begin
   RLLabel7.Visible := vImpPrecoCusto;
   RLLabel8.Visible := vImpPreco;
+
+  RLLabel15.Visible := vImpPrecoCusto;
+  RLLabel16.Visible := vImpPrecoCusto;
+  RLLabel17.Visible := vImpPrecoCusto;
+  RLLabel18.Visible := vImpPrecoCusto;
+  RLLabel23.Visible := vImpPrecoCusto;
+  RLLabel24.Visible := vImpPrecoCusto;
+  RLLabel25.Visible := vImpPreco;
+  RLLabel26.Visible := vImpPreco;
 end;
 
 procedure TfRelProduto_Grupo.RLBand3BeforePrint(Sender: TObject;
@@ -108,6 +143,17 @@ begin
   begin
     fDMCadProduto.sdsConsumo_Imp.ParamByName('ID').AsInteger := fDMCadProduto.mGrupo_ProdutoID_Produto.AsInteger;
     fDMCadProduto.cdsConsumo_Imp.Open;
+  end;
+  vTotal_Reg := vTotal_Reg + 1;
+  if StrToFloat(FormatFloat('0.0000',fDMCadProduto.mGrupo_ProdutoSaldo_Estoque.AsFloat)) > 0 then
+  begin
+    vVlr_Custo   := StrToFloat(FormatFloat('0.00',vVlr_Custo + (fDMCadProduto.mGrupo_ProdutoSaldo_Estoque.AsFloat * fDMCadProduto.mGrupo_ProdutoPreco_Custo.AsFloat)));
+    vVlr_Venda   := StrToFloat(FormatFloat('0.00',vVlr_Venda + (fDMCadProduto.mGrupo_ProdutoSaldo_Estoque.AsFloat * fDMCadProduto.mGrupo_ProdutoPreco_Venda.AsFloat)));
+    vQtd_Estoque := StrToFloat(FormatFloat('0.0000',vQtd_Estoque + fDMCadProduto.mGrupo_ProdutoSaldo_Estoque.AsFloat));
+
+    vTotal_Custo   := StrToFloat(FormatFloat('0.00',vTotal_Custo + vVlr_Custo));
+    vTotal_Venda   := StrToFloat(FormatFloat('0.00',vTotal_Venda + vVlr_Venda));
+    vTotal_Estoque := StrToFloat(FormatFloat('0.0000',vTotal_Estoque + vQtd_Estoque));
   end;
 end;
 
@@ -132,7 +178,19 @@ end;
 procedure TfRelProduto_Grupo.RLBand4BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 begin
-  PrintIt := (RLDBResult1.Value <= 0);
+  RLLabel20.Caption := FormatFloat('###,###,##0.00##',vQtd_Estoque);
+  RLLabel16.Caption := FormatFloat('###,###,##0.00',vVlr_Custo);
+  RLLabel18.Caption := FormatFloat('###,###,##0.00',vVlr_Venda);
+
+  vQtd_Estoque := 0;
+  vVlr_Custo   := 0;
+  vVlr_Venda   := 0;
+end;
+
+procedure TfRelProduto_Grupo.RLBand5BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  PrintIt := not(fDMCadProduto.cdsConsumo_Imp.IsEmpty);
 end;
 
 procedure TfRelProduto_Grupo.RLBand6BeforePrint(Sender: TObject;
@@ -147,10 +205,31 @@ begin
   end;
 end;
 
-procedure TfRelProduto_Grupo.RLBand5BeforePrint(Sender: TObject;
+procedure TfRelProduto_Grupo.RLReport1BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 begin
-  PrintIt := not(fDMCadProduto.cdsConsumo_Imp.IsEmpty);
+  vTotal_Reg := 0;
+  vTotal_Custo := 0;
+  vTotal_Venda := 0;
+  vTotal_Estoque := 0;
+
+  vVlr_Custo := 0;
+  vVlr_Venda := 0;
+  vQtd_Estoque := 0;
+end;
+
+procedure TfRelProduto_Grupo.RLBand8BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  RLLabel14.Caption := FormatFloat('###,###,##0',vTotal_Reg);
+  RLLabel28.Caption := FormatFloat('###,###,##0.00##',vTotal_Estoque);
+  RLLabel24.Caption := FormatFloat('###,###,##0.00',vTotal_Custo);
+  RLLabel26.Caption := FormatFloat('###,###,##0.00',vTotal_Venda);
+
+  vTotal_Reg     := 0;
+  vTotal_Estoque := 0;
+  vTotal_Custo   := 0;
+  vTotal_Venda   := 0;
 end;
 
 end.
