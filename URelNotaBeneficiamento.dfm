@@ -1,9 +1,8 @@
 object fRelNotaBeneficiamento: TfRelNotaBeneficiamento
-  Left = 82
-  Top = 154
+  Left = 189
+  Top = 113
   Width = 1221
   Height = 532
-  HorzScrollBar.Position = 763
   Caption = 'fRelNotaBeneficiamento'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +17,7 @@ object fRelNotaBeneficiamento: TfRelNotaBeneficiamento
   PixelsPerInch = 96
   TextHeight = 13
   object RLReport1: TRLReport
-    Left = -739
+    Left = 24
     Top = 16
     Width = 1123
     Height = 794
@@ -276,556 +275,668 @@ object fRelNotaBeneficiamento: TfRelNotaBeneficiamento
       Left = 26
       Top = 95
       Width = 1071
-      Height = 146
+      Height = 307
       DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-      object RLBand2: TRLBand
+      object RLGroup1: TRLGroup
         Left = 0
         Top = 0
         Width = 1071
-        Height = 16
-        BeforePrint = RLBand2BeforePrint
-        object RLDBText2: TRLDBText
-          Left = 292
-          Top = 2
-          Width = 371
-          Height = 11
-          AutoSize = False
-          DataField = 'NOMEPRODUTO'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDBText3: TRLDBText
-          Left = 666
-          Top = 2
-          Width = 85
-          Height = 11
-          Alignment = taRightJustify
-          AutoSize = False
-          DataField = 'QTD'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDraw2: TRLDraw
-          Left = 0
-          Top = 14
-          Width = 1071
-          Height = 2
-          Align = faBottom
-          DrawKind = dkLine
-          Pen.Style = psDot
-          Visible = False
-        end
-        object RLDBText5: TRLDBText
-          Left = 1
-          Top = 2
-          Width = 54
-          Height = 11
-          Alignment = taCenter
-          AutoSize = False
-          DataField = 'NUMNOTA'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDBText1: TRLDBText
-          Left = 56
-          Top = 2
-          Width = 26
-          Height = 11
-          Alignment = taCenter
-          AutoSize = False
-          DataField = 'SERIE'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDBText4: TRLDBText
-          Left = 82
-          Top = 2
-          Width = 18
-          Height = 11
-          Alignment = taCenter
-          AutoSize = False
-          DataField = 'FILIAL'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDBText6: TRLDBText
-          Left = 159
-          Top = 2
-          Width = 34
-          Height = 11
-          Alignment = taCenter
-          AutoSize = False
-          DataField = 'CODCFOP'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDBText7: TRLDBText
-          Left = 193
-          Top = 2
-          Width = 60
-          Height = 11
-          Alignment = taCenter
-          AutoSize = False
-          DataField = 'DTEMISSAO'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDBText8: TRLDBText
-          Left = 838
-          Top = 2
-          Width = 85
-          Height = 11
-          Alignment = taRightJustify
-          AutoSize = False
-          DataField = 'QTDDEVOLVIDA'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDBText9: TRLDBText
-          Left = 752
-          Top = 2
-          Width = 85
-          Height = 11
-          Alignment = taRightJustify
-          AutoSize = False
-          DataField = 'QTDRESTANTE'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDBText10: TRLDBText
-          Left = 924
-          Top = 2
-          Width = 74
-          Height = 11
-          Alignment = taRightJustify
-          AutoSize = False
-          DataField = 'VLR_UNITARIO'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLLabel15: TRLLabel
-          Left = 999
-          Top = 2
-          Width = 70
-          Height = 11
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = '0.00'
-        end
-        object RLDBText11: TRLDBText
-          Left = 100
-          Top = 2
-          Width = 58
-          Height = 11
-          AutoSize = False
-          DataField = 'NOMEFILIAL'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -8
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-        object RLDBText19: TRLDBText
-          Left = 255
-          Top = 2
-          Width = 36
-          Height = 11
-          Alignment = taCenter
-          AutoSize = False
-          DataField = 'ID_PRODUTO'
-          DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -9
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-        end
-      end
-      object RLSubDetail2: TRLSubDetail
-        Left = 0
-        Top = 16
-        Width = 1071
-        Height = 62
-        DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
-        object RLDetailGrid1: TRLDetailGrid
-          Left = 0
-          Top = 17
-          Width = 1071
-          Height = 16
-          ColCount = 3
-          BeforePrint = RLDetailGrid1BeforePrint
-          object RLDBText13: TRLDBText
-            Left = 232
-            Top = 2
-            Width = 89
-            Height = 12
-            Alignment = taRightJustify
-            AutoSize = False
-            DataField = 'QTD'
-            DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -9
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLDBText12: TRLDBText
-            Left = 157
-            Top = 2
-            Width = 56
-            Height = 12
-            DataField = 'DTEMISSAO'
-            DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -9
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLDBText14: TRLDBText
-            Left = 55
-            Top = 2
-            Width = 58
-            Height = 13
-            Alignment = taCenter
-            AutoSize = False
-            DataField = 'NUMNOTA'
-            DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -9
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLDraw3: TRLDraw
-            Left = 351
-            Top = 1
-            Width = 3
-            Height = 15
-            Pen.Style = psDot
-          end
-          object RLDBText15: TRLDBText
-            Left = 119
-            Top = 2
-            Width = 32
-            Height = 13
-            Alignment = taCenter
-            AutoSize = False
-            DataField = 'SERIE'
-            DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -9
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel33: TRLLabel
-            Left = 327
-            Top = 1
-            Width = 19
-            Height = 14
-            Caption = 'E/S'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-        end
-        object RLBand3: TRLBand
+        Height = 129
+        DataFields = 'NOMECLIENTE'
+        object RLBand7: TRLBand
           Left = 0
           Top = 0
           Width = 1071
-          Height = 17
+          Height = 23
           BandType = btHeader
-          BeforePrint = RLBand3BeforePrint
-          object RLDraw9: TRLDraw
-            Left = 24
-            Top = 0
-            Width = 1041
-            Height = 16
-          end
-          object RLLabel3: TRLLabel
-            Left = 55
-            Top = 2
-            Width = 56
+          object RLLabel23: TRLLabel
+            Left = 79
+            Top = 5
+            Width = 53
             Height = 14
-            Caption = 'Nota Fiscal'
+            Caption = 'Terceiro:'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
             Font.Name = 'Arial'
-            Font.Style = []
+            Font.Style = [fsBold]
             ParentFont = False
           end
-          object RLLabel16: TRLLabel
-            Left = 159
-            Top = 2
-            Width = 56
+          object RLDBText20: TRLDBText
+            Left = 134
+            Top = 5
+            Width = 78
             Height = 14
-            Caption = 'Dt.Emiss'#227'o'
+            DataField = 'NOMECLIENTE'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
             Font.Name = 'Arial'
-            Font.Style = []
+            Font.Style = [fsBold]
             ParentFont = False
-          end
-          object RLLabel17: TRLLabel
-            Left = 263
-            Top = 2
-            Width = 58
-            Height = 14
-            Caption = 'Quantidade'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLDraw4: TRLDraw
-            Left = 351
-            Top = 2
-            Width = 3
-            Height = 14
-            Pen.Style = psDot
-          end
-          object RLLabel28: TRLLabel
-            Left = 119
-            Top = 3
-            Width = 28
-            Height = 14
-            Caption = 'S'#233'rie'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel32: TRLLabel
-            Left = 327
-            Top = 1
-            Width = 19
-            Height = 14
-            Caption = 'E/S'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel18: TRLLabel
-            Left = 411
-            Top = 1
-            Width = 56
-            Height = 14
-            Caption = 'Nota Fiscal'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel19: TRLLabel
-            Left = 515
-            Top = 1
-            Width = 56
-            Height = 14
-            Caption = 'Dt.Emiss'#227'o'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel20: TRLLabel
-            Left = 619
-            Top = 1
-            Width = 58
-            Height = 14
-            Caption = 'Quantidade'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel24: TRLLabel
-            Left = 475
-            Top = 1
-            Width = 28
-            Height = 14
-            Caption = 'S'#233'rie'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel26: TRLLabel
-            Left = 683
-            Top = 1
-            Width = 19
-            Height = 14
-            Caption = 'E/S'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel40: TRLLabel
-            Left = 768
-            Top = 1
-            Width = 56
-            Height = 14
-            Caption = 'Nota Fiscal'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel41: TRLLabel
-            Left = 872
-            Top = 1
-            Width = 56
-            Height = 14
-            Caption = 'Dt.Emiss'#227'o'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel42: TRLLabel
-            Left = 976
-            Top = 1
-            Width = 58
-            Height = 14
-            Caption = 'Quantidade'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel44: TRLLabel
-            Left = 832
-            Top = 1
-            Width = 28
-            Height = 14
-            Caption = 'S'#233'rie'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLLabel45: TRLLabel
-            Left = 1040
-            Top = 1
-            Width = 19
-            Height = 14
-            Caption = 'E/S'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-          object RLDraw8: TRLDraw
-            Left = 707
-            Top = 3
-            Width = 3
-            Height = 14
-            Pen.Style = psDot
           end
         end
-        object RLBand6: TRLBand
+        object RLBand2: TRLBand
           Left = 0
-          Top = 33
+          Top = 23
           Width = 1071
-          Height = 15
-          BandType = btFooter
-          BeforePrint = RLBand6BeforePrint
-          object RLDraw5: TRLDraw
+          Height = 16
+          BeforePrint = RLBand2BeforePrint
+          object RLDBText2: TRLDBText
+            Left = 292
+            Top = 2
+            Width = 371
+            Height = 11
+            AutoSize = False
+            DataField = 'NOMEPRODUTO'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText3: TRLDBText
+            Left = 666
+            Top = 2
+            Width = 85
+            Height = 11
+            Alignment = taRightJustify
+            AutoSize = False
+            DataField = 'QTD'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDraw2: TRLDraw
+            Left = 0
+            Top = 14
+            Width = 1071
+            Height = 2
+            Align = faBottom
+            DrawKind = dkLine
+            Pen.Style = psDot
+            Visible = False
+          end
+          object RLDBText5: TRLDBText
+            Left = 1
+            Top = 2
+            Width = 54
+            Height = 11
+            Alignment = taCenter
+            AutoSize = False
+            DataField = 'NUMNOTA'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText1: TRLDBText
+            Left = 56
+            Top = 2
+            Width = 26
+            Height = 11
+            Alignment = taCenter
+            AutoSize = False
+            DataField = 'SERIE'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText4: TRLDBText
+            Left = 82
+            Top = 2
+            Width = 18
+            Height = 11
+            Alignment = taCenter
+            AutoSize = False
+            DataField = 'FILIAL'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText6: TRLDBText
+            Left = 159
+            Top = 2
+            Width = 34
+            Height = 11
+            Alignment = taCenter
+            AutoSize = False
+            DataField = 'CODCFOP'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText7: TRLDBText
+            Left = 193
+            Top = 2
+            Width = 60
+            Height = 11
+            Alignment = taCenter
+            AutoSize = False
+            DataField = 'DTEMISSAO'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText8: TRLDBText
+            Left = 838
+            Top = 2
+            Width = 85
+            Height = 11
+            Alignment = taRightJustify
+            AutoSize = False
+            DataField = 'QTDDEVOLVIDA'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText9: TRLDBText
+            Left = 752
+            Top = 2
+            Width = 85
+            Height = 11
+            Alignment = taRightJustify
+            AutoSize = False
+            DataField = 'QTDRESTANTE'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText10: TRLDBText
+            Left = 924
+            Top = 2
+            Width = 74
+            Height = 11
+            Alignment = taRightJustify
+            AutoSize = False
+            DataField = 'VLR_UNITARIO'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLLabel15: TRLLabel
+            Left = 999
+            Top = 2
+            Width = 70
+            Height = 11
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = '0.00'
+          end
+          object RLDBText11: TRLDBText
+            Left = 100
+            Top = 2
+            Width = 58
+            Height = 11
+            AutoSize = False
+            DataField = 'NOMEFILIAL'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -8
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText19: TRLDBText
+            Left = 255
+            Top = 2
+            Width = 36
+            Height = 11
+            Alignment = taCenter
+            AutoSize = False
+            DataField = 'ID_PRODUTO'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+        end
+        object RLSubDetail2: TRLSubDetail
+          Left = 0
+          Top = 39
+          Width = 1071
+          Height = 62
+          DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
+          object RLDetailGrid1: TRLDetailGrid
+            Left = 0
+            Top = 17
+            Width = 1071
+            Height = 16
+            ColCount = 3
+            BeforePrint = RLDetailGrid1BeforePrint
+            object RLDBText13: TRLDBText
+              Left = 232
+              Top = 2
+              Width = 89
+              Height = 12
+              Alignment = taRightJustify
+              AutoSize = False
+              DataField = 'QTD'
+              DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -9
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLDBText12: TRLDBText
+              Left = 157
+              Top = 2
+              Width = 56
+              Height = 12
+              DataField = 'DTEMISSAO'
+              DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -9
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLDBText14: TRLDBText
+              Left = 55
+              Top = 2
+              Width = 58
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              DataField = 'NUMNOTA'
+              DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -9
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLDraw3: TRLDraw
+              Left = 351
+              Top = 1
+              Width = 3
+              Height = 15
+              Pen.Style = psDot
+            end
+            object RLDBText15: TRLDBText
+              Left = 119
+              Top = 2
+              Width = 32
+              Height = 13
+              Alignment = taCenter
+              AutoSize = False
+              DataField = 'SERIE'
+              DataSource = DMConsNotaBeneficiamento.dsNotaDevolvida
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -9
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel33: TRLLabel
+              Left = 327
+              Top = 1
+              Width = 19
+              Height = 14
+              Caption = 'E/S'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+          end
+          object RLBand3: TRLBand
             Left = 0
             Top = 0
             Width = 1071
-            Height = 3
-            Align = faTop
+            Height = 17
+            BandType = btHeader
+            BeforePrint = RLBand3BeforePrint
+            object RLDraw9: TRLDraw
+              Left = 24
+              Top = 0
+              Width = 1041
+              Height = 16
+            end
+            object RLLabel3: TRLLabel
+              Left = 55
+              Top = 2
+              Width = 56
+              Height = 14
+              Caption = 'Nota Fiscal'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel16: TRLLabel
+              Left = 159
+              Top = 2
+              Width = 56
+              Height = 14
+              Caption = 'Dt.Emiss'#227'o'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel17: TRLLabel
+              Left = 263
+              Top = 2
+              Width = 58
+              Height = 14
+              Caption = 'Quantidade'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLDraw4: TRLDraw
+              Left = 351
+              Top = 2
+              Width = 3
+              Height = 14
+              Pen.Style = psDot
+            end
+            object RLLabel28: TRLLabel
+              Left = 119
+              Top = 3
+              Width = 28
+              Height = 14
+              Caption = 'S'#233'rie'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel32: TRLLabel
+              Left = 327
+              Top = 1
+              Width = 19
+              Height = 14
+              Caption = 'E/S'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel18: TRLLabel
+              Left = 411
+              Top = 1
+              Width = 56
+              Height = 14
+              Caption = 'Nota Fiscal'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel19: TRLLabel
+              Left = 515
+              Top = 1
+              Width = 56
+              Height = 14
+              Caption = 'Dt.Emiss'#227'o'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel20: TRLLabel
+              Left = 619
+              Top = 1
+              Width = 58
+              Height = 14
+              Caption = 'Quantidade'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel24: TRLLabel
+              Left = 475
+              Top = 1
+              Width = 28
+              Height = 14
+              Caption = 'S'#233'rie'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel26: TRLLabel
+              Left = 683
+              Top = 1
+              Width = 19
+              Height = 14
+              Caption = 'E/S'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel40: TRLLabel
+              Left = 768
+              Top = 1
+              Width = 56
+              Height = 14
+              Caption = 'Nota Fiscal'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel41: TRLLabel
+              Left = 872
+              Top = 1
+              Width = 56
+              Height = 14
+              Caption = 'Dt.Emiss'#227'o'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel42: TRLLabel
+              Left = 976
+              Top = 1
+              Width = 58
+              Height = 14
+              Caption = 'Quantidade'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel44: TRLLabel
+              Left = 832
+              Top = 1
+              Width = 28
+              Height = 14
+              Caption = 'S'#233'rie'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLLabel45: TRLLabel
+              Left = 1040
+              Top = 1
+              Width = 19
+              Height = 14
+              Caption = 'E/S'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clBlack
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              ParentFont = False
+            end
+            object RLDraw8: TRLDraw
+              Left = 707
+              Top = 3
+              Width = 3
+              Height = 14
+              Pen.Style = psDot
+            end
+          end
+          object RLBand6: TRLBand
+            Left = 0
+            Top = 33
+            Width = 1071
+            Height = 15
+            BandType = btFooter
+            BeforePrint = RLBand6BeforePrint
+            object RLDraw5: TRLDraw
+              Left = 0
+              Top = 0
+              Width = 1071
+              Height = 3
+              Align = faTop
+              DrawKind = dkLine
+              Pen.Style = psDot
+            end
+          end
+        end
+        object RLBand8: TRLBand
+          Left = 0
+          Top = 101
+          Width = 1071
+          Height = 23
+          BandType = btSummary
+          BeforePrint = RLBand8BeforePrint
+          object RLLabel25: TRLLabel
+            Left = 599
+            Top = 4
+            Width = 48
+            Height = 11
+            Caption = 'Totais ==>'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object RLDBResult1: TRLDBResult
+            Left = 668
+            Top = 3
+            Width = 77
+            Height = 12
+            Alignment = taRightJustify
+            DataField = 'QTD'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            DisplayMask = '###,###,##0.00##'
+            Info = riSum
+          end
+          object RLDBResult2: TRLDBResult
+            Left = 738
+            Top = 3
+            Width = 98
+            Height = 12
+            Alignment = taRightJustify
+            DataField = 'QTDRESTANTE'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            DisplayMask = '###,###,##0.00##'
+            Info = riSum
+          end
+          object RLDBResult3: TRLDBResult
+            Left = 816
+            Top = 3
+            Width = 103
+            Height = 12
+            Alignment = taRightJustify
+            DataField = 'QTDDEVOLVIDA'
+            DataSource = DMConsNotaBeneficiamento.dsNotaEntrada
+            DisplayMask = '###,###,##0.00##'
+            Info = riSum
+          end
+          object RLLabel27: TRLLabel
+            Left = 975
+            Top = 4
+            Width = 94
+            Height = 11
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = '0.00'
+          end
+          object RLDraw10: TRLDraw
+            Left = 598
+            Top = 1
+            Width = 471
+            Height = 2
             DrawKind = dkLine
             Pen.Style = psDot
           end
@@ -834,7 +945,7 @@ object fRelNotaBeneficiamento: TfRelNotaBeneficiamento
     end
   end
   object RLReport2: TRLReport
-    Left = 402
+    Left = 1165
     Top = 16
     Width = 794
     Height = 1123

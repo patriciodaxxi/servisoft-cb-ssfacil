@@ -21,11 +21,6 @@ type
     RLLabel8: TRLLabel;
     RLDraw1: TRLDraw;
     RLSubDetail1: TRLSubDetail;
-    RLBand2: TRLBand;
-    RLDBText2: TRLDBText;
-    RLDBText3: TRLDBText;
-    RLDraw2: TRLDraw;
-    RLDBText5: TRLDBText;
     RLLabel9: TRLLabel;
     RLLabel10: TRLLabel;
     RLLabel11: TRLLabel;
@@ -34,29 +29,7 @@ type
     RLLabel13: TRLLabel;
     RLLabel4: TRLLabel;
     RLLabel5: TRLLabel;
-    RLDBText1: TRLDBText;
-    RLDBText4: TRLDBText;
-    RLDBText6: TRLDBText;
-    RLDBText7: TRLDBText;
-    RLDBText8: TRLDBText;
-    RLDBText9: TRLDBText;
-    RLDBText10: TRLDBText;
     RLLabel14: TRLLabel;
-    RLLabel15: TRLLabel;
-    RLDBText11: TRLDBText;
-    RLSubDetail2: TRLSubDetail;
-    RLDetailGrid1: TRLDetailGrid;
-    RLDBText13: TRLDBText;
-    RLDBText12: TRLDBText;
-    RLDBText14: TRLDBText;
-    RLDraw3: TRLDraw;
-    RLBand3: TRLBand;
-    RLLabel3: TRLLabel;
-    RLLabel16: TRLLabel;
-    RLLabel17: TRLLabel;
-    RLDraw4: TRLDraw;
-    RLLabel28: TRLLabel;
-    RLDBText15: TRLDBText;
     RLLabel29: TRLLabel;
     RLReport2: TRLReport;
     RLSubDetail3: TRLSubDetail;
@@ -80,10 +53,41 @@ type
     RLDBText18: TRLDBText;
     RLDraw6: TRLDraw;
     RLDraw7: TRLDraw;
-    RLLabel32: TRLLabel;
+    RLGroup1: TRLGroup;
+    RLBand7: TRLBand;
+    RLLabel23: TRLLabel;
+    RLDBText20: TRLDBText;
+    RLBand2: TRLBand;
+    RLDBText2: TRLDBText;
+    RLDBText3: TRLDBText;
+    RLDraw2: TRLDraw;
+    RLDBText5: TRLDBText;
+    RLDBText1: TRLDBText;
+    RLDBText4: TRLDBText;
+    RLDBText6: TRLDBText;
+    RLDBText7: TRLDBText;
+    RLDBText8: TRLDBText;
+    RLDBText9: TRLDBText;
+    RLDBText10: TRLDBText;
+    RLLabel15: TRLLabel;
+    RLDBText11: TRLDBText;
+    RLDBText19: TRLDBText;
+    RLSubDetail2: TRLSubDetail;
+    RLDetailGrid1: TRLDetailGrid;
+    RLDBText13: TRLDBText;
+    RLDBText12: TRLDBText;
+    RLDBText14: TRLDBText;
+    RLDraw3: TRLDraw;
+    RLDBText15: TRLDBText;
     RLLabel33: TRLLabel;
-    RLBand6: TRLBand;
-    RLDraw5: TRLDraw;
+    RLBand3: TRLBand;
+    RLDraw9: TRLDraw;
+    RLLabel3: TRLLabel;
+    RLLabel16: TRLLabel;
+    RLLabel17: TRLLabel;
+    RLDraw4: TRLDraw;
+    RLLabel28: TRLLabel;
+    RLLabel32: TRLLabel;
     RLLabel18: TRLLabel;
     RLLabel19: TRLLabel;
     RLLabel20: TRLLabel;
@@ -95,8 +99,15 @@ type
     RLLabel44: TRLLabel;
     RLLabel45: TRLLabel;
     RLDraw8: TRLDraw;
-    RLDraw9: TRLDraw;
-    RLDBText19: TRLDBText;
+    RLBand6: TRLBand;
+    RLDraw5: TRLDraw;
+    RLBand8: TRLBand;
+    RLLabel25: TRLLabel;
+    RLDBResult1: TRLDBResult;
+    RLDBResult2: TRLDBResult;
+    RLDBResult3: TRLDBResult;
+    RLLabel27: TRLLabel;
+    RLDraw10: TRLDraw;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand2BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -109,6 +120,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure RLBand6BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand8BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     fDMRel: TDMRel;
@@ -119,6 +131,8 @@ type
     vOpcaoImp : String;
     vOpcaoForn : String;
     vCab : String;
+    vVlrPendente : Real;
+
   end;
 
 var
@@ -158,13 +172,16 @@ begin
   end;
 
   vVlrAux := StrToFloat(FormatFloat('0.00',fDMConsNotaBeneficiamento.cdsNotaEntradaQTDRESTANTE.AsFloat * fDMConsNotaBeneficiamento.cdsNotaEntradaVLR_UNITARIO.AsFloat));
-  RLLabel5.Caption := FormatFloat('###,###,##0.00',vVlrAux);
+  RLLabel15.Caption := FormatFloat('###,###,##0.00',vVlrAux);
+
+  vVlrPendente := StrToFloat(FormatFloat('0.00',vVlrPendente + vVlrAux));
 end;
 
 procedure TfRelNotaBeneficiamento.RLReport1BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 begin
   oDBUtils.SetDataSourceProperties(Self,fDMConsNotaBeneficiamento);
+  vVlrPendente := 0;
 end;
 
 procedure TfRelNotaBeneficiamento.RLBand3BeforePrint(Sender: TObject;
@@ -212,6 +229,13 @@ procedure TfRelNotaBeneficiamento.RLBand6BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 begin
   PrintIt := vImpNota;
+end;
+
+procedure TfRelNotaBeneficiamento.RLBand8BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  RLLabel27.Caption := FormatFloat('###,###,##0.00',vVlrPendente);
+  vVlrPendente      := 0;
 end;
 
 end.

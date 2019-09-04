@@ -389,6 +389,7 @@ var
 begin
   SMDBGrid1.DisableScroll;
   vTipo_Config_Email := 3;
+  fDMConsNotaBeneficiamento.cdsNotaEntrada.IndexFieldNames := 'NOMECLIENTE;DTEMISSAO';
   fRelNotaBeneficiamento                := TfRelNotaBeneficiamento.Create(Self);
   fRelNotaBeneficiamento.fDMConsNotaBeneficiamento := fDMConsNotaBeneficiamento;
   fRelNotaBeneficiamento.vImpNota   := CheckBox1.Checked;
