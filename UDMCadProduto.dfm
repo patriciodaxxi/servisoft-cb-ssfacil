@@ -3186,6 +3186,11 @@ object dmCadProduto: TdmCadProduto
       item
         Name = 'ID_Principal'
         DataType = ftInteger
+      end
+      item
+        Name = 'Nome_Completo'
+        DataType = ftString
+        Size = 200
       end>
     IndexDefs = <>
     Params = <>
@@ -3193,11 +3198,12 @@ object dmCadProduto: TdmCadProduto
     Left = 981
     Top = 5
     Data = {
-      8D0000009619E0BD0100000018000000050000000000030000008D000849445F
+      AF0000009619E0BD010000001800000006000000000003000000AF000849445F
       477275706F040001000000000006436F6469676F010049000000010005574944
       5448020002001400044E6F6D6501004900000001000557494454480200020028
       00045469706F01004900000001000557494454480200020001000C49445F5072
-      696E636970616C04000100000000000000}
+      696E636970616C04000100000000000D4E6F6D655F436F6D706C65746F010049
+      000000010005574944544802000200C8000000}
     object mGrupoID_Grupo: TIntegerField
       FieldName = 'ID_Grupo'
     end
@@ -3214,6 +3220,10 @@ object dmCadProduto: TdmCadProduto
     end
     object mGrupoID_Principal: TIntegerField
       FieldName = 'ID_Principal'
+    end
+    object mGrupoNome_Completo: TStringField
+      FieldName = 'Nome_Completo'
+      Size = 200
     end
   end
   object dsmGrupo: TDataSource

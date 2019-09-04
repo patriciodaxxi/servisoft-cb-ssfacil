@@ -1956,6 +1956,7 @@ type
     cdsProdutoPRECO_CUSTO_ANT: TFloatField;
     mGrupoID_Principal: TIntegerField;
     mGrupo_ProdutoID_Principal: TIntegerField;
+    mGrupoNome_Completo: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

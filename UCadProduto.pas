@@ -1118,6 +1118,8 @@ type
     function fnc_Busca_Semi: Integer;
     //function fnc_Custo(ID: Integer ; Combinacao: Boolean = False): Boolean;
 
+    function fnc_Monta_Nome_Estrutura(ID : Integer) : String;     
+
     procedure prcExportaCadastroMGV5;
     procedure prcAtualizaPrecoMGV5;
 
@@ -3272,7 +3274,8 @@ begin
                        + 'WHEN 2 THEN ' + QuotedStr('    ') + '||  G.NOME '
                        + 'WHEN 1 THEN G.NOME '
                        + 'ELSE G.NOME '
-                       + 'END AS NOME_AUX , S2.NOME || ' + QuotedStr(' - ') + ' || G.NOME  AS NOME_PRINCIPAL '
+                       //+ 'END AS NOME_AUX , S2.NOME || ' + QuotedStr(' - ') + ' || G.NOME  AS NOME_PRINCIPAL '
+                       + 'END AS NOME_AUX , S2.NOME '
                        + 'FROM GRUPO G '
                        + 'LEFT JOIN GRUPO S2 ON G.SUPERIOR = S2.ID '
                        + 'WHERE G.ID = ' + IntToStr(ID_Grupo);
@@ -3283,7 +3286,7 @@ begin
       ID_Grupo := sds.FieldByName('Superior').AsInteger;
     //prc_Gravar_mGrupo(sds.FieldByName('ID').AsInteger,ID_Grupo,sds.FieldByName('Codigo').AsString,sds.FieldByName('Nome_Aux').AsString);
     if sds.FieldByName('TIPO').AsString = 'A' then
-      prc_Gravar_mGrupo(sds.FieldByName('ID').AsInteger,ID_Grupo,sds.FieldByName('Codigo').AsString,sds.FieldByName('NOME_PRINCIPAL').AsString);
+      prc_Gravar_mGrupo(sds.FieldByName('ID').AsInteger,ID_Grupo,sds.FieldByName('Codigo').AsString,sds.FieldByName('NOME').AsString);
   finally
     FreeAndNil(sds);
   end;
@@ -3292,6 +3295,8 @@ begin
 end;
 
 procedure TfrmCadProduto.prc_Gravar_mGrupo(ID, ID_Principal: Integer; Codigo, Nome: String);
+var
+  sds: TSQLDataSet;
 begin
   if not fDMCadProduto.mGrupo.FindKey([ID]) then
   begin
@@ -3300,7 +3305,11 @@ begin
     fDMCadProduto.mGrupoCodigo.AsString        := Codigo;
     fDMCadProduto.mGrupoNome.AsString          := Nome;
     fDMCadProduto.mGrupoID_Principal.AsInteger := ID_Principal;
+
+    fDMCadProduto.mGrupoNome_Completo.AsString := fnc_Monta_Nome_Estrutura(ID);
+
     fDMCadProduto.mGrupo.Post;
+
   end;
   if ID_Principal > 0 then
     vID_Principal := ID_Principal;
@@ -6267,6 +6276,38 @@ begin
   vMSGAux := 'Esse CFOP vai ser usado na NFCe, ' + #13
            + 'e na NFe quando a venda for interna!';
   MessageDlg(vMSGAux, mtInformation, [mbOk], 0);
+end;
+
+function TfrmCadProduto.fnc_Monta_Nome_Estrutura(ID: Integer): String;
+var
+  sds: TSQLDataSet;
+begin
+  Result := '';
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'with recursive '
+                       + ' GRUPO_REC AS ( '
+                       + '  SELECT G.codigo, cast(nome as varchar(255)) nome, G.SUPERIOR, g.id, G.NOME NOME_FILHO '
+                       + '    FROM GRUPO G'
+                       + '  WHERE G.id = :CODIGO'
+                       + '  UNION ALL'
+                       + '  SELECT FILHO.CODIGO, filho.nome || ' + QuotedStr(' ** ') + ' || pai.nome, filho.superior, filho.id, FILHO.NOME NOME_FILHO'
+                       + '    FROM GRUPO FILHO'
+                       + '    JOIN GRUPO_REC PAI'
+                       + '      ON PAI.superior = FILHO.id'
+                       + '  )'
+                       + ' SELECT FIRST 1 GG.* FROM GRUPO_REC GG'
+                       + ' ORDER BY 1';
+    sds.ParamByName('CODIGO').AsInteger := ID;
+    sds.Open;
+    Result := sds.FieldByName('nome').AsString;
+  finally
+    FreeAndNil(sds);
+  end;
+
 end;
 
 end.

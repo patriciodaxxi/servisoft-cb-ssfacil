@@ -468,6 +468,11 @@ begin
     end;
     RLMemo2.Lines.Add(vTexto1);
     RLMemo2.Lines.Text := RLMemo2.Lines.Text + vDiscriminacao;
+
+    //04/09/2019
+    if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat)) > 0 then
+      RLMemo2.Lines.Add('O recolhimento do ISSQN é de responsabilidade do tomador do serviço.');
+
     RLMemo2.Lines.Text := trim(RLMemo2.Lines.Text);
 
   end;
