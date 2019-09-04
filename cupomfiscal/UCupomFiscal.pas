@@ -168,6 +168,7 @@ type
     vPedidoSelecionado: Boolean;
     vPreco_Ori: Real;
     vGeraIcms: Boolean;
+    vCopiandoComanda: Boolean;
 
     procedure Excluir_Estoque(Filial,NumMov: Integer);
     procedure prc_Move_Itens;
@@ -219,6 +220,8 @@ begin
   oDBUtils.OpenTables(True,Self);
   fDmCupomFiscal.vEncerrado := False;
   vFinaliza := False;
+  vCopiandoComanda := False;
+
 
   if not Assigned(fDmEstoque) then
     fDmEstoque := TDmEstoque.Create(Self);
@@ -388,7 +391,7 @@ begin
     else
       CurrencyEdit2.Value := fDmCupomFiscal.cdsProdutoPRECO_VENDA.AsCurrency;
     //*************
-    if (Length(Edit1.Text) < 5) and
+    if (not vCopiandoComanda) and (Length(Edit1.Text) < 5) and
        ((fDmCupomFiscal.cdsCupomParametrosUSA_BALANCA.AsString = 'S') and
        ((fDmCupomFiscal.cdsProdutoUNIDADE.AsString = 'KG') or
        (fDmCupomFiscal.cdsProdutoUNIDADE.AsString = 'Kg') or
@@ -1751,6 +1754,7 @@ begin
   frmSel_Comanda_CF.WindowState    := wsMaximized;
   frmSel_Comanda_CF.fDmCupomFiscal := fDmCupomFiscal;
   frmSel_Comanda_CF.ShowModal;
+  vCopiandoComanda := False;
 end;
 
 procedure TfCupomFiscal.SMDBGrid2DblClick(Sender: TObject);

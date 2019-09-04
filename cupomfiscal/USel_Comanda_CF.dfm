@@ -20,7 +20,7 @@ object frmSel_Comanda_CF: TfrmSel_Comanda_CF
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 687
+    Width = 695
     Height = 34
     Align = alTop
     Color = clSilver
@@ -199,7 +199,7 @@ object frmSel_Comanda_CF: TfrmSel_Comanda_CF
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 34
-    Width = 687
+    Width = 695
     Height = 127
     TabStop = False
     Align = alTop
@@ -261,8 +261,8 @@ object frmSel_Comanda_CF: TfrmSel_Comanda_CF
   object SMDBGrid2: TSMDBGrid
     Left = 0
     Top = 211
-    Width = 687
-    Height = 330
+    Width = 695
+    Height = 338
     TabStop = False
     Align = alClient
     DataSource = dmCupomFiscal.dsmCupomItens
@@ -335,7 +335,7 @@ object frmSel_Comanda_CF: TfrmSel_Comanda_CF
   object Panel3: TPanel
     Left = 0
     Top = 161
-    Width = 687
+    Width = 695
     Height = 50
     Align = alTop
     Color = clSilver
@@ -357,8 +357,8 @@ object frmSel_Comanda_CF: TfrmSel_Comanda_CF
   end
   object Panel4: TPanel
     Left = 0
-    Top = 541
-    Width = 687
+    Top = 549
+    Width = 695
     Height = 41
     Align = alBottom
     TabOrder = 4

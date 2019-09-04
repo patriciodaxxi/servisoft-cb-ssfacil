@@ -145,6 +145,7 @@ end;
 
 procedure TfrmSel_Comanda_CF.NxButton1Click(Sender: TObject);
 begin
+  vCopiandoComanda := True;
   fDmCupomFiscal.mCupomItens.First;
   while not fDmCupomFiscal.mCupomItens.IsEmpty do
   begin
