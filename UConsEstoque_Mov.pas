@@ -279,7 +279,7 @@ begin
     begin
       if fDMConsEstoque.cdsEstoque_MovTIPO_ES.AsString = 'S' then
       begin
-       if not(fDMConsEstoque.mEstoque_CentroCusto.Locate('Id_Produto; Codigo_CentroCusto',VarArrayOf([fDMConsEstoque.cdsEstoque_MovID_PRODUTO.AsInteger,fDMConsEstoque.cdsEstoque_MovID_CENTROCUSTO.AsInteger]),[loCaseInsensitive])) then
+       if not(fDMConsEstoque.mEstoque_CentroCusto.Locate('Id_Produto; Codigo_CentroCusto',VarArrayOf([fDMConsEstoque.cdsEstoque_MovID_PRODUTO.AsInteger,fDMConsEstoque.cdsEstoque_MovCODIGO_CCUSTO.AsString]),[loCaseInsensitive])) then
          fDMConsEstoque.mEstoque_CentroCusto.Insert
        else
          fDMConsEstoque.mEstoque_CentroCusto.Edit;

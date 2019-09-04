@@ -908,11 +908,13 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
           item
             Expanded = False
             FieldName = 'Codigo_Grupo'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'Nome_Grupo'
+            Width = 64
             Visible = True
           end
           item
@@ -923,6 +925,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
           item
             Expanded = False
             FieldName = 'Obs'
+            Width = 64
             Visible = True
           end
           item
@@ -938,21 +941,25 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
           item
             Expanded = False
             FieldName = 'Codigo_CentroCusto'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'Nome_CentroCusto'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'Codigo_Superior'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'Nome_Superior'
+            Width = 64
             Visible = True
           end>
       end
