@@ -311,12 +311,13 @@ end;
 procedure TfCupomFiscalC.Monta_sqlCupom_Cons(vCartao: Integer; ID: Integer);
 var
   vTotal, vDin, vOut: Currency;
-  vQtd: Word;
+  vQtd, vQtd1: Word;
   vComando: String;
   vTipo: String;
 begin
   vTotal := 0;
   vQtd   := 0;
+  vQtd1  := 0;
   vDin   := 0;
   vOut   := 0;
 
@@ -408,12 +409,22 @@ begin
         fDmCupomFiscal.cdsCupom_Cons.First;
         while not fDmCupomFiscal.cdsCupom_Cons.Eof do
         begin
+          if fDmCupomFiscal.cdsCupomParametrosUSA_QTD_PESSOA.AsString = 'S' then
+            vQtd1 := vQtd1 + fDmCupomFiscal.cdsCupomFiscalQTD_PESSOA.AsInteger;
           vTotal := vTotal + fDmCupomFiscal.cdsCupom_ConsVLR_TOTAL.AsCurrency;
           fDmCupomFiscal.cdsCupom_Cons.Next;
         end;
         ceTotal.Value := vTotal;
-        ceQtd.Value := vQtd;
-        ceVM.Value  := vTotal / vQtd;
+        if fDmCupomFiscal.cdsCupomParametrosUSA_QTD_PESSOA.AsString = 'S' then
+        begin
+          ceQtd.Value := vQtd1;
+          ceVM.Value  := vTotal / vQtd1;
+        end
+        else
+        begin
+          ceQtd.Value := vQtd;
+          ceVM.Value  := vTotal / vQtd;
+        end;
       end;
     end;
 
@@ -1609,6 +1620,7 @@ begin
     ffNfCe.fDMCupomFiscal := fDMCupomFiscal;
     vFilial               := fDmCupomFiscal.cdsCupomFiscalFILIAL.AsInteger;
     ffNFCe.prc_Configura_Tela;
+
     ffNFCe.btDanfeClick(Sender);
   finally
     FreeAndNil(ffNFCe);

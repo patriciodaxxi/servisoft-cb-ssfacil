@@ -1742,7 +1742,8 @@ begin
     //oNFeStream.LoadFromFile(vArqAux);
   end;
 
-  if not CheckBox1.Checked then
+//  if not CheckBox1.Checked then
+  if not fDmCupomFiscal.cdsCupomFiscalNFECHAVEACESSO.IsNull then
   begin
     QRCodeStream := TMemoryStream.Create;
     GerarQRCodeNFCe(trim(fDMNFCe.qParametrosLOCALSERVIDORNFE.AsString),
