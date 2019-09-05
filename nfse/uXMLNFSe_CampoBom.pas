@@ -238,17 +238,22 @@ begin
 
     if fDMCadNotaServico.cdsNotaServico_Imp_ItensCALCULAR_ISSQN.AsString = 'S' then
     begin
-      Det.NestedDataSet.FieldByName('serv.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensBASE_CALCULO.AsFloat));
-      Det.NestedDataSet.FieldByName('serv.pISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_ALIQUOTA.AsFloat));
-      //Det.NestedDataSet.FieldByName('serv.vISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat));
       if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat)) > 0 then
-        Det.NestedDataSet.FieldByName('serv.vISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat))
+      begin
+        Det.NestedDataSet.FieldByName('serv.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensBASE_CALCULO.AsFloat));
+        Det.NestedDataSet.FieldByName('serv.pISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_ALIQUOTA.AsFloat));
+        Det.NestedDataSet.FieldByName('serv.vISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat));
+      end
       else
       if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS_RETIDO.AsFloat)) > 0 then
-        Det.NestedDataSet.FieldByName('serv.vISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS_RETIDO.AsFloat));
-
-    end
-    else
+      begin
+        Det.NestedDataSet.FieldByName('serv.vBCST').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensBASE_CALCULO.AsFloat));
+        Det.NestedDataSet.FieldByName('serv.pISSST').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_ALIQUOTA.AsFloat));
+        Det.NestedDataSet.FieldByName('serv.vISSST').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS_RETIDO.AsFloat));
+      end;
+    end;
+    if (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat)) <= 0) and
+       (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS_RETIDO.AsFloat)) <= 0) then
     begin
       Det.NestedDataSet.FieldByName('serv.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',0));
       Det.NestedDataSet.FieldByName('serv.pISS').AsFloat   := StrToFloat(FormatFloat('0.00',0));
@@ -327,14 +332,17 @@ begin
   vCds.FieldByName('total.vtLiqFaturas').AsFloat := 0;
   vCds.FieldByName('total.vtDespesas').AsFloat   := 0;
 
-  vCds.FieldByName('total.ISS.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpBASE_CALCULO.AsFloat));
   if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat)) > 0 then
-    vCds.FieldByName('total.ISS.vISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat))
+  begin
+    vCds.FieldByName('total.ISS.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpBASE_CALCULO.AsFloat));
+    vCds.FieldByName('total.ISS.vISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat))
+  end
   else
   if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat)) > 0 then
-    vCds.FieldByName('total.ISS.vISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat));
-  //vCds.FieldByName('total.ISS.vBCSTISS').AsString := StrToFloat(FormatFloat('0.00',0));
-  //vCds.FieldByName('total.ISS.vSTISS').AsString := StrToFloat(FormatFloat('0.00',0));
+  begin
+    vCds.FieldByName('total.ISS.vBCSTISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpBASE_CALCULO.AsFloat));
+    vCds.FieldByName('total.ISS.vSTISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat));
+  end;
 
   fDMCadNotaServico.cdsNotaServico_Imp_Parc.Close;
   fDMCadNotaServico.sdsNotaServico_Imp_Parc.ParamByName('ID').AsInteger := fDMCadNotaServico.cdsNotaServico_ImpID.AsInteger;

@@ -823,7 +823,9 @@ uses
   UConsProdutoNCM in 'UConsProdutoNCM.pas' {frmConsProdutoNCM},
   UCadPessoa_ProdICMS in 'UCadPessoa_ProdICMS.pas' {frmCadPessoa_ProdICMS},
   uRecebeXML_CFOP in 'nfevisualizador\uRecebeXML_CFOP.pas' {frmRecebeXML_CFOP},
-  UAltCFOPProd in 'UAltCFOPProd.pas' {frmAltCFOPProd};
+  UAltCFOPProd in 'UAltCFOPProd.pas' {frmAltCFOPProd},
+  UDMCopiaDoc in 'UDMCopiaDoc.pas' {DMCopiaDoc: TDataModule},
+  UCadDocEstoque_Copia in 'UCadDocEstoque_Copia.pas' {frmCadDocEstoque_Copia};
 
 {$R *.res}
 

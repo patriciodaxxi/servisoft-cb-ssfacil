@@ -81,6 +81,7 @@ type
     Nota1: TMenuItem;
     Etiquetas1: TMenuItem;
     EtiquetaEstoque1: TMenuItem;
+    btnCopiarDoc: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -109,6 +110,7 @@ type
     procedure SMDBGrid2TitleClick(Column: TColumn);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btnCopiarDocClick(Sender: TObject);
   private
     { Private declarations }
     vTipo_Reg: String;
@@ -150,7 +152,7 @@ var
 implementation
 
 uses DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, URelDocEstoque,
-  UConsEstRed;
+  UConsEstRed, UCadDocEstoque_Copia;
 
 {$R *.dfm}
 
@@ -252,7 +254,6 @@ begin
     end;
   end;
 
-  //TS_Consulta.TabEnabled := True;
   FreeAndNil(fDMCadProduto_Lote);
   prc_Habilitar_CamposNota;
   pnlTipo.Enabled := False;
@@ -412,7 +413,6 @@ begin
     exit;
 
   fDMCadDocEstoque.cdsDocEstoque.Edit;
-  //TS_Consulta.TabEnabled := False;
   prc_Habilitar_CamposNota;
   pnlTipo.Enabled := False;
 end;
@@ -501,7 +501,6 @@ begin
   btnConfirmar.Enabled        := not(btnConfirmar.Enabled);
   btnAlterar.Enabled          := not(btnAlterar.Enabled);
 
-  //pnlCadastro.Enabled         := not(pnlCadastro.Enabled);
   pnlNota.Enabled          := not(pnlNota.Enabled);
   pnlDocumento.Enabled     := not(pnlDocumento.Enabled);
   pnlTransferencia.Enabled := not(pnlTransferencia.Enabled);
@@ -797,6 +796,30 @@ begin
     frmConsEstRed.ShowModal;
     FreeAndNil(frmConsEstRed);
   end;
+end;
+
+procedure TfrmCadDocEstoque.btnCopiarDocClick(Sender: TObject);
+var
+  ffrmCadDocEstoque_Copia: TfrmCadDocEstoque_Copia;
+begin
+  if not(fDMCadDocEstoque.cdsDocEstoque_Consulta.Active) or (fDMCadDocEstoque.cdsDocEstoque_ConsultaID.AsInteger <= 0) then
+    exit;
+
+  ffrmCadDocEstoque_Copia := TfrmCadDocEstoque_Copia.Create(self);
+  ffrmCadDocEstoque_Copia.fDMCadDocEstoque := fDMCadDocEstoque;
+  ffrmCadDocEstoque_Copia.vID_DocEstoque := fDMCadDocEstoque.cdsDocEstoque_ConsultaID.AsInteger;
+  ffrmCadDocEstoque_Copia.ShowModal;
+  FreeAndNil(ffrmCadDocEstoque_Copia);
+
+  if (fDMCadDocEstoque.Tag = 1) then
+  begin
+    if (fDMCadDocEstoque.cdsDocEstoque.State in [dsEdit,dsInsert]) then
+      fDMCadDocEstoque.cdsDocEstoque.Post;
+    fDMCadDocEstoque.cdsDocEstoque.Edit;
+    RzPageControl1.ActivePage := TS_Cadastro;
+    btnAlterarClick(Sender);
+  end;
+  fDMCadDocEstoque.Tag := 0;
 end;
 
 end.

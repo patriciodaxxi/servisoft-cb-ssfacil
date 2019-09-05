@@ -1407,6 +1407,7 @@ begin
   vCont := 0;
   while not flag do
   begin
+
     vCont := vCont + 1;
     fDmCupomFiscal.qVer.Close;
     fDmCupomFiscal.qVer.ParamByName('ID').AsInteger := vIDAux;
@@ -1425,7 +1426,9 @@ begin
       end
       else
       begin
-{        if MessageDlg(vMSGNFCe + #13 + #13 + #13 + '*** Deseja reenviar o cupom?' ,mtConfirmation,[mbYes,mbNo],0) = mrYes then
+        MessageDlg(vMSGNFCe, mtInformation, [mbOk], 0);
+
+        {if MessageDlg(vMSGNFCe + #13 + #13 + #13 + '*** Deseja reenviar o cupom?' ,mtConfirmation,[mbYes,mbNo],0) = mrYes then
         begin
           if vIDAux <> fDMCupomFiscal.cdsCupomFiscalID.AsInteger then
             fDMCupomFiscal.prcLocalizar(vIDAux);
@@ -1571,7 +1574,10 @@ begin
   end;
 
   if trim(vMSGNFCe) <> '' then
-    MessageDlg(vMSGNFCe, mtInformation, [mbOk], 0)
+  begin
+
+    MessageDlg(vMSGNFCe, mtInformation, [mbOk], 0);
+  end
   else
   begin
     try
@@ -2113,6 +2119,8 @@ begin
       end
       else
       begin
+        MessageDlg(vMSGNFCe, mtInformation, [mbOk], 0);
+
 {        if MessageDlg(vMSGNFCe + #13 + #13 + #13 + '*** Deseja reenviar o cupom?' ,mtConfirmation,[mbYes,mbNo],0) = mrYes then
         begin
           if vIDAux <> fDMCupomFiscal.cdsCupomFiscalID.AsInteger then

@@ -6,12 +6,12 @@ Uses
   UDMConsPedido, SysUtils, Messages, Dialogs, uUtilPadrao;
 
   procedure prc_Etiq_Adesiva_Argox_Ramys(fDMConsPedido: TDMConsPedido);
-  procedure prc_Etiq_Tag_Argox_Ramys(fDMConsPedido: TDMConsPedido);
 
+  procedure prc_Etiq_Tag_Argox_Ramys(fDMConsPedido: TDMConsPedido);
   procedure prc_Etiq_Adesiva_Picotec(fDMConsPedido: TDMConsPedido);
   procedure prc_Etiq_Adesiva_EllaStore(fDMConsPedido: TDMConsPedido; Qtd_Parcela: Integer);
-
   procedure prc_Etiq_Adesiva_Argox_RCStore(fDMConsPedido: TDMConsPedido);
+  procedure prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido: TDMConsPedido);
 
 implementation
 
@@ -419,6 +419,189 @@ begin
 
   CloseFile(F);
 end;
+
+
+//******* Max Modas    05/09/2019
+procedure prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido: TDMConsPedido);
+var
+  F: TextFile;
+  vTexto: String;
+  vCod: array[1..3] of Integer;
+  vNome_Prod: array[1..3] of String;
+  vNome_Fil: array[1..3] of String;
+  vPreco: array[1..3] of Real;
+  i: Integer;
+
+  procedure Imprimir;
+  begin
+    //Cabeçalho
+    if fDMConsPedido.qParametros_EtiqINF_ENTER.AsString = 'S' then
+    begin
+      Writeln(F,'n');
+      Writeln(F,'M0500');
+      Writeln(F,'O'+FormatFloat('0000',fDMConsPedido.qParametros_EtiqOFFSET_BORDA.AsInteger));
+      Writeln(F,'f'+FormatFloat('000',fDMConsPedido.qParametros_EtiqBACKFEED.AsInteger));
+      Writeln(F,'L');
+      Writeln(F,'R0000');
+      if fDMConsPedido.qParametros_EtiqMARGEM.AsInteger > 0 then
+        Writeln(F,'C'+FormatFloat('0000',fDMConsPedido.qParametros_EtiqMARGEM.AsInteger))
+      else
+        Writeln(F,'C0000');
+      Writeln(F,'D11');
+      Writeln(F,'H'+fDMConsPedido.qParametros_EtiqTEMPERATURA.AsString);
+      Writeln(F,'P'+fDMConsPedido.qParametros_EtiqVELOCIDADE.AsString);
+      Writeln(F,'A2');
+    end
+    else
+    begin
+      Write(F,'n');
+      Write(F,'M0500');
+      Write(F,'O'+FormatFloat('0000',fDMConsPedido.qParametros_EtiqOFFSET_BORDA.AsInteger));
+      Write(F,'f'+FormatFloat('000',fDMConsPedido.qParametros_EtiqBACKFEED.AsInteger));
+      Write(F,'L');
+      Write(F,'R0000');
+      if fDMConsPedido.qParametros_EtiqMARGEM.AsInteger > 0 then
+        Write(F,'C'+FormatFloat('0000',fDMConsPedido.qParametros_EtiqMARGEM.AsInteger))
+      else
+        Write(F,'C0000');
+      Write(F,'D11');
+      Write(F,'H'+fDMConsPedido.qParametros_EtiqTEMPERATURA.AsString);
+      Write(F,'P'+fDMConsPedido.qParametros_EtiqVELOCIDADE.AsString);
+      Write(F,'A2');
+    end;
+
+    //Detalhe
+    Writeln(F,'1911A0801460000'+copy(vNome_Fil[1],1,15));
+    Writeln(F,'1911A0601300000'+copy(vNome_Prod[1],1,20));
+    vTexto := copy(vNome_Prod[1],21,Length(vNome_Prod[1])-20);
+    Writeln(F,'1911A0601200000'+copy(vTexto,1,20));
+    Writeln(F,'1911A0601060000REF:'+IntToStr(vCod[1]));
+    if trim(fDMConsPedido.cdsParametros_EtiqNAO_IMP_MSG_TROCA.AsString) = 'S' then
+    begin
+      Writeln(F,'101100000950000');
+      Writeln(F,'101100000890000');
+    end
+    else
+    begin
+      Writeln(F,'101100000950000EM CASO DE TROCA MANTER ESTA');
+      Writeln(F,'101100000890000ETIQUETA AFIXADA NA MERCADORIA');
+    end;
+
+    Writeln(F,'1911A0800740000- - - - - - - - - - - - - - - - - - - - -');
+    Writeln(F,'1911A0600670000'+copy(vNome_Prod[1],1,20));
+    vTexto := copy(vNome_Prod[1],21,Length(vNome_Prod[1])-20);
+    Writeln(F,'1911A0600570000'+copy(vTexto,1,20));
+    Writeln(F,'1911A0600410000R$:');
+    Writeln(F,'121200000360020'+FormatFloat('###,###,##0.00',vPreco[1]));
+    Writeln(F,'1D8302000120018'+IntToStr(vCod[1]));
+    //2
+    Writeln(F,'1911A0801460138'+copy(vNome_Fil[2],1,15));
+    Writeln(F,'1911A0601300138'+copy(vNome_Prod[2],1,20));
+    vTexto := copy(vNome_Prod[2],21,Length(vNome_Prod[2])-20);
+    Writeln(F,'1911A0601200138'+copy(vTexto,1,20));
+    Writeln(F,'1911A0601060138REF:'+IntToStr(vCod[2]));
+    if trim(fDMConsPedido.cdsParametros_EtiqNAO_IMP_MSG_TROCA.AsString) = 'S' then
+    begin
+      Writeln(F,'101100000950138');
+      Writeln(F,'101100000890138');
+    end
+    else
+    begin
+      Writeln(F,'101100000950138EM CASO DE TROCA MANTER ESTA');
+      Writeln(F,'101100000890138ETIQUETA AFIXADA NA MERCADORIA');
+    end;
+    Writeln(F,'1911A0800740138- - - - - - - - - - - - - - - - - - - - -');
+    Writeln(F,'1911A0600670138'+copy(vNome_Prod[2],1,20));
+    vTexto := copy(vNome_Prod[2],21,Length(vNome_Prod[2])-20);
+    Writeln(F,'1911A0600570138'+copy(vTexto,1,20));
+    Writeln(F,'1911A0600410138R$:');
+    Writeln(F,'121200000360158'+FormatFloat('###,###,##0.00',vPreco[2]));
+    Writeln(F,'1D8302000120156'+IntToStr(vCod[2]));
+    //3
+    Writeln(F,'1911A0801460276'+copy(vNome_Fil[3],1,15));
+    Writeln(F,'1911A0601300276'+copy(vNome_Prod[3],1,20));
+    vTexto := copy(vNome_Prod[3],21,Length(vNome_Prod[3])-20);
+    Writeln(F,'1911A0601200276'+copy(vTexto,1,20));
+    Writeln(F,'1911A0601060276REF:'+IntToStr(vCod[3]));
+    if trim(fDMConsPedido.cdsParametros_EtiqNAO_IMP_MSG_TROCA.AsString) = 'S' then
+    begin
+      Writeln(F,'101100000950276');
+      Writeln(F,'101100000890276');
+    end
+    else
+    begin
+      Writeln(F,'101100000950276EM CASO DE TROCA MANTER ESTA');
+      Writeln(F,'101100000890276ETIQUETA AFIXADA NA MERCADORIA');
+    end;
+    Writeln(F,'1911A0800740276- - - - - - - - - - - - - - - - - - - - -');
+    Writeln(F,'1911A0600670276'+copy(vNome_Prod[3],1,20));
+    vTexto := copy(vNome_Prod[3],21,Length(vNome_Prod[3])-20);
+    Writeln(F,'1911A0600570276'+copy(vTexto,1,20));
+    Writeln(F,'1911A0600410276R$:');
+    Writeln(F,'121200000360296'+FormatFloat('###,###,##0.00',vPreco[3]));
+    Writeln(F,'1D8302000120293'+IntToStr(vCod[3]));
+
+    Writeln(F,'Q0001');
+    Writeln(F,'E');
+  end;
+
+  procedure prc_Limpa_Var;
+  var
+    i2: Integer;
+  begin
+    for i2 := 1 to 3 do
+    begin
+      vCod[i2]       := 0;
+      vNome_Prod[i2] := '';
+      vNome_Fil[i2]  := '';
+      vPreco[i2]     := 0;
+    end;
+  end;
+
+begin          
+  fDMConsPedido.qParametros_Etiq.Close;
+  fDMConsPedido.qParametros_Etiq.Open;
+
+  //Cabeçalho
+  if trim(fDMConsPedido.qParametros_EtiqENDERECO.AsString) = '' then
+  begin
+    MessageDlg('*** Endereço da impressora não informado!', mtError, [mbOk], 0);
+    exit;
+  end;
+
+  if trim(fDMConsPedido.cdsFilialNOME_ETIQUETA.AsString) = '' then
+  begin
+    MessageDlg('*** Não foi informado o nome da Empresa que vai na etiqueta!', mtError, [mbOk], 0);
+    exit;
+  end;
+
+  AssignFile(F,fDMConsPedido.qParametros_EtiqENDERECO.AsString);
+  ReWrite(F);
+
+  prc_Limpa_Var;
+
+  i := 0;
+  fDMConsPedido.mEtiq_Individual.First;
+  while not fDMConsPedido.mEtiq_Individual.Eof do
+  begin
+    i := i + 1;
+    if i > 3 then
+    begin
+      Imprimir;
+      prc_Limpa_Var;
+      i := 1;
+    end;
+    vCod[i]       := fDMConsPedido.mEtiq_IndividualID_Produto.AsInteger;
+    vNome_Fil[i]  := fDMConsPedido.cdsFilialNOME_ETIQUETA.AsString;
+    vNome_Prod[i] := fDMConsPedido.mEtiq_IndividualNome_Produto.AsString;
+    vPreco[i]     := fDMConsPedido.mEtiq_IndividualPreco_Produto.AsFloat;
+    fDMConsPedido.mEtiq_Individual.Next;
+  end;
+  if i > 0 then
+    Imprimir;
+  CloseFile(F);
+end;
+//************************ Final Max Modas
 
 procedure prc_Etiq_Adesiva_Picotec(fDMConsPedido: TDMConsPedido);
 var

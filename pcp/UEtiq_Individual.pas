@@ -727,7 +727,11 @@ end;
 procedure TfrmEtiq_Individual.ag1Click(Sender: TObject);
 begin
   SMDBGrid2.DisableScroll;
-  uEtiqueta.prc_Etiq_Tag_Argox_Ramys(fDMConsPedido);
+  //05/09/2019 incluida a MAXMODAS
+  if DMConsPedido.cdsParametros_EtiqTIPO_CLIENTE.AsString = 'MAXMODAS' then
+    uEtiqueta.prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido)
+  else
+    uEtiqueta.prc_Etiq_Tag_Argox_Ramys(fDMConsPedido);
   SMDBGrid2.EnableScroll;
 end;
 

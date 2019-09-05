@@ -3821,30 +3821,6 @@ object fMenu: TfMenu
         GroupName = 'Tipo M'#225'quinas'
       end
       item
-        FormName = 'frmCadDocEstoque'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Documento Estoque'
-      end
-      item
-        FormName = 'frmCadDocEstoque'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Documento Estoque'
-      end
-      item
-        FormName = 'frmCadDocEstoque'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Documento Estoque'
-      end
-      item
-        FormName = 'frmCadDocEstoque'
-        CompName = 'EtiquetaEstoque1'
-        Caption = 'Etiqueta Estoque'
-        GroupName = 'Documento Estoque'
-      end
-      item
         FormName = 'frmCadNotaFiscal'
         CompName = 'btnInserir'
         Caption = 'Inserir'
@@ -4293,6 +4269,36 @@ object fMenu: TfMenu
         CompName = 'btnAlterar'
         Caption = 'Alterar'
         GroupName = 'Atividade'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Documento Estoque'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Documento Estoque'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Documento Estoque'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'EtiquetaEstoque1'
+        Caption = 'Etiqueta Estoque'
+        GroupName = 'Documento Estoque'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'btnCopiarDoc'
+        Caption = 'Copiar Doc.'
+        GroupName = 'Documento Estoque'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

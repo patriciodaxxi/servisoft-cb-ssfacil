@@ -609,7 +609,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
           Caption = 'Quantidade:'
         end
         object NxButton2: TNxButton
-          Left = 677
+          Left = 678
           Top = 84
           Width = 140
           Height = 30
@@ -1406,14 +1406,16 @@ object frmEtiq_Individual: TfrmEtiq_Individual
               'Ramys'
               'RC Store'
               'Ella Store'
-              'Hypnotize')
+              'Hypnotize'
+              'Max Modas')
             TabOrder = 0
             Values.Strings = (
               'PICOTEC'
               'RAMYS'
               'RCSTORE'
               'ELLASTORE'
-              'HYONITIZE')
+              'HYONITIZE'
+              'MAXMODAS')
           end
           object RxDBComboBox161: TRxDBComboBox
             Left = 152
@@ -1569,7 +1571,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
   end
   object PopupMenu1: TPopupMenu
     Left = 721
-    Top = 252
+    Top = 253
     object Modelo11: TMenuItem
       Caption = 'Modelo 1'
       OnClick = Modelo11Click

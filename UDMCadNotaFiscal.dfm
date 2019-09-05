@@ -7955,7 +7955,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 417
-    Top = 199
+    Top = 198
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
@@ -9338,7 +9338,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     Left = 265
-    Top = 53
+    Top = 52
     object cdsNotaFiscal_EventosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -14513,8 +14513,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     SQL.Strings = (
       'select count(1) CONTADOR'
       'from prefat_itens i'
+      'inner join prefat p'
+      'on i.id = p.id'
       'where (i.id_pedido = :id_pedido)'
-      '  and (i.item_pedido = :item_pedido)')
+      '  and (i.item_pedido = :item_pedido)'
+      '  and coalesce(p.faturado,'#39'N'#39') = '#39'N'#39)
     SQLConnection = dmDatabase.scoDados
     Left = 1245
     Top = 5
