@@ -778,6 +778,11 @@ begin
   end;
   //********************
 
+  //06/09/2019
+  //fDMCadPedido.cdsPedido_Consulta.Close;
+  SMDBGrid1.ClearFilter;
+  //******************
+
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'P';
 
   if fDMCadPedido.cdsPedido.State in [dsBrowse] then
@@ -1270,6 +1275,10 @@ begin
       if not fnc_senha('ALT','SENHA_PEDIDO','','','','',0) then
         exit;
   end;
+
+  //06/09/2019
+  SMDBGrid1.ClearFilter;
+  //****************
 
   vInclusao_Edicao   := 'E';
   fDMCadPedido.vID_Cond_Pagto_Ant := fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger;
