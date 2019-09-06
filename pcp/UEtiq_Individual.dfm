@@ -23,10 +23,10 @@ object frmEtiq_Individual: TfrmEtiq_Individual
     Top = 0
     Width = 912
     Height = 447
-    ActivePage = TS_Avulsa
+    ActivePage = TS_ConfImpressora
     ActivePageDefault = TS_Pedido
     Align = alClient
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1571,7 +1571,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
   end
   object PopupMenu1: TPopupMenu
     Left = 721
-    Top = 253
+    Top = 252
     object Modelo11: TMenuItem
       Caption = 'Modelo 1'
       OnClick = Modelo11Click

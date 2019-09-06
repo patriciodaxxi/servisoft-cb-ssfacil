@@ -3927,7 +3927,10 @@ object DMConsEstoque: TDMConsEstoque
   end
   object mEstoque_CentroCusto: TClientDataSet
     Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <>
     Params = <>
+    StoreDefs = True
     Left = 720
     Top = 264
     object mEstoque_CentroCustoId_Produto: TIntegerField
@@ -3970,6 +3973,15 @@ object DMConsEstoque: TDMConsEstoque
     object mEstoque_CentroCustoNome_Superior: TStringField
       FieldName = 'Nome_Superior'
       Size = 70
+    end
+    object mEstoque_CentroCustoVlrEntrada: TFloatField
+      FieldName = 'VlrEntrada'
+    end
+    object mEstoque_CentroCustoQSaldo: TFloatField
+      FieldName = 'QSaldo'
+    end
+    object mEstoque_CentroCustoVlrSaldo: TFloatField
+      FieldName = 'VlrSaldo'
     end
   end
   object dsmEstoque_CentroCusto: TDataSource

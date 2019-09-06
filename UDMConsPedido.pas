@@ -941,6 +941,10 @@ begin
   ctLiberado        := sdsLiberado.CommandText;
   ctConsPedido_Proc := sdsConsPedido_Proc.CommandText;
 
+  cdsParametros_Etiq.Close;
+  sdsParametros_Etiq.ParamByName('ID').AsInteger := 1;
+  cdsParametros_Etiq.Open;
+
   ctPedido_Nota     := sdsPedido_Nota.CommandText;
   ctPedido_Vale     := sdsPedido_Vale.CommandText;
   ctBaixa_Pedido    := sdsBaixa_Pedido.CommandText;

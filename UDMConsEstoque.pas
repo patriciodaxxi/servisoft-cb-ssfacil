@@ -695,6 +695,9 @@ type
     cdsEstoque2NOME_LOCAL: TStringField;
     cdsEstoque2TIPO_REG: TStringField;
     frxEstoque2: TfrxDBDataset;
+    mEstoque_CentroCustoVlrEntrada: TFloatField;
+    mEstoque_CentroCustoQSaldo: TFloatField;
+    mEstoque_CentroCustoVlrSaldo: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

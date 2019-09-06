@@ -779,7 +779,6 @@ begin
   //********************
 
   //06/09/2019
-  //fDMCadPedido.cdsPedido_Consulta.Close;
   SMDBGrid1.ClearFilter;
   //******************
 

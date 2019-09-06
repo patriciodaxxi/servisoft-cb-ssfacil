@@ -293,6 +293,13 @@ begin
         fDMConsEstoque.mEstoque_CentroCustoNome_Superior.AsString      := fDMConsEstoque.cdsEstoque_MovDESC_SUPERIOR.AsString;
         fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat                := fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat;
         fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat            := fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat + (fDMConsEstoque.cdsEstoque_MovVLR_UNITARIO.AsFloat * fDMConsEstoque.cdsEstoque_MovQTD.AsFloat) ;
+        //06/09/2019
+
+
+        //************
+
+
+
         fDMConsEstoque.mEstoque_CentroCusto.Post;
       end;
     end;

@@ -21,7 +21,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   object Panel1: TPanel
     Left = 0
     Top = 35
-    Width = 749
+    Width = 757
     Height = 71
     Align = alTop
     Color = clMoneyGreen
@@ -29,7 +29,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
     object Panel4: TPanel
       Left = 1
       Top = 1
-      Width = 747
+      Width = 755
       Height = 48
       Align = alTop
       BevelOuter = bvNone
@@ -38,14 +38,14 @@ object frmCadOC_Itens: TfrmCadOC_Itens
       OnExit = Panel4Exit
       object Label2: TLabel
         Left = 5
-        Top = 33
-        Width = 131
+        Top = 34
+        Width = 134
         Height = 13
         Alignment = taRightJustify
-        Caption = 'Produo (Refer'#234'ncia/Nome):'
+        Caption = 'Produto (Refer'#234'ncia/Nome):'
       end
       object SpeedButton1: TSpeedButton
-        Left = 674
+        Left = 677
         Top = 24
         Width = 23
         Height = 22
@@ -54,7 +54,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         OnClick = SpeedButton1Click
       end
       object SpeedButton4: TSpeedButton
-        Left = 698
+        Left = 701
         Top = 24
         Width = 23
         Height = 22
@@ -104,7 +104,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         OnClick = SpeedButton4Click
       end
       object Label12: TLabel
-        Left = 314
+        Left = 317
         Top = 11
         Width = 124
         Height = 13
@@ -117,7 +117,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         ParentFont = False
       end
       object Label21: TLabel
-        Left = 81
+        Left = 84
         Top = 11
         Width = 54
         Height = 13
@@ -125,7 +125,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         Caption = 'ID Produto:'
       end
       object RxDBLookupCombo4: TRxDBLookupCombo
-        Left = 138
+        Left = 141
         Top = 25
         Width = 173
         Height = 21
@@ -142,7 +142,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         OnExit = RxDBLookupCombo4Exit
       end
       object RxDBLookupCombo2: TRxDBLookupCombo
-        Left = 310
+        Left = 313
         Top = 25
         Width = 363
         Height = 21
@@ -160,7 +160,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         OnExit = RxDBLookupCombo2Exit
       end
       object DBEdit15: TDBEdit
-        Left = 138
+        Left = 141
         Top = 3
         Width = 173
         Height = 21
@@ -174,14 +174,14 @@ object frmCadOC_Itens: TfrmCadOC_Itens
     object pnlNomeProduto: TPanel
       Left = 1
       Top = 48
-      Width = 747
+      Width = 755
       Height = 22
       Align = alBottom
       BevelOuter = bvNone
       Color = clMoneyGreen
       TabOrder = 1
       object Label22: TLabel
-        Left = 103
+        Left = 106
         Top = 7
         Width = 31
         Height = 13
@@ -189,7 +189,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
         Caption = 'Nome:'
       end
       object DBEdit1: TDBEdit
-        Left = 138
+        Left = 141
         Top = 1
         Width = 534
         Height = 19
@@ -204,8 +204,8 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 499
-    Width = 749
+    Top = 507
+    Width = 757
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -244,8 +244,8 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   object Panel2: TPanel
     Left = 0
     Top = 137
-    Width = 749
-    Height = 362
+    Width = 757
+    Height = 370
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 3
@@ -628,7 +628,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   object pnlCod_Barras: TPanel
     Left = 0
     Top = 0
-    Width = 749
+    Width = 757
     Height = 35
     Align = alTop
     Color = clMoneyGreen
@@ -652,7 +652,7 @@ object frmCadOC_Itens: TfrmCadOC_Itens
   object pnlCor: TPanel
     Left = 0
     Top = 106
-    Width = 749
+    Width = 757
     Height = 31
     Align = alTop
     Color = clMoneyGreen

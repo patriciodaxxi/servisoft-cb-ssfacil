@@ -463,6 +463,10 @@ begin
   //fDMCadPedido.prc_Inserir;
   UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
 
+  //06/09/2019
+  SMDBGrid1.ClearFilter;
+  //******************
+
   lblNome_Filial.Caption := vFilial_Nome;
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'O';
 
@@ -653,6 +657,10 @@ procedure TfrmCadOrcamento.btnAlterarClick(Sender: TObject);
 begin
   if (fDMCadPedido.cdsPedido.IsEmpty) or not(fDMCadPedido.cdsPedido.Active) or (fDMCadPedido.cdsPedidoID.AsInteger < 1) then
     exit;
+
+  //06/09/2019
+  SMDBGrid1.ClearFilter;
+  //******************
 
   fDMCadPedido.cdsPedido.Edit;
   TS_Consulta.TabEnabled := False;
