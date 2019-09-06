@@ -493,7 +493,7 @@ var
     Writeln(F,'1911A0600570000'+copy(vTexto,1,20));
     Writeln(F,'1911A0600410000R$:');
     Writeln(F,'121200000360020'+FormatFloat('###,###,##0.00',vPreco[1]));
-    Writeln(F,'1D8302000120018'+IntToStr(vCod[1]));
+    Writeln(F,'1D8302000020018'+IntToStr(vCod[1]));
     //2
     Writeln(F,'1911A0801460138'+copy(vNome_Fil[2],1,15));
     Writeln(F,'1911A0601300138'+copy(vNome_Prod[2],1,20));
@@ -516,7 +516,7 @@ var
     Writeln(F,'1911A0600570138'+copy(vTexto,1,20));
     Writeln(F,'1911A0600410138R$:');
     Writeln(F,'121200000360158'+FormatFloat('###,###,##0.00',vPreco[2]));
-    Writeln(F,'1D8302000120156'+IntToStr(vCod[2]));
+    Writeln(F,'1D8302000020156'+IntToStr(vCod[2]));
     //3
     Writeln(F,'1911A0801460276'+copy(vNome_Fil[3],1,15));
     Writeln(F,'1911A0601300276'+copy(vNome_Prod[3],1,20));
@@ -539,7 +539,7 @@ var
     Writeln(F,'1911A0600570276'+copy(vTexto,1,20));
     Writeln(F,'1911A0600410276R$:');
     Writeln(F,'121200000360296'+FormatFloat('###,###,##0.00',vPreco[3]));
-    Writeln(F,'1D8302000120293'+IntToStr(vCod[3]));
+    Writeln(F,'1D8302000020293'+IntToStr(vCod[3]));
 
     Writeln(F,'Q0001');
     Writeln(F,'E');
