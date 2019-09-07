@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids, Mask, 
   DBGrids, SMDBGrid, Provider, DBClient, SqlExpr, UDMConsEstoque, RxLookup, UCBase, ToolEdit, RzTabs, RzPanel, FMTBcd, ComObj,
-  NxCollection, StrUtils, CurrEdit, DB;
+  NxCollection, StrUtils, CurrEdit, DB, ComCtrls;
 
 type
   TfrmConsEstoque_Mov = class(TForm)
@@ -76,6 +76,7 @@ type
     ckSemCor: TCheckBox;
     NxButton1: TNxButton;
     DBGrid1: TDBGrid;
+    ProgressBar1: TProgressBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -267,18 +268,24 @@ begin
   fDMConsEstoque.mEstoque_CentroCusto.close;
   fDMConsEstoque.mEstoque_CentroCusto.CreateDataSet;
   fDMConsEstoque.mEstoque_CentroCusto.EmptyDataSet;
+  ProgressBar1.Visible  := True;
+  ProgressBar1.Refresh;
+  ProgressBar1.Max      := fDMConsEstoque.cdsEstoque_Mov.RecordCount;
+  ProgressBar1.Position := 0;
 
   fDMConsEstoque.cdsEstoque_Mov.First;
   while not fDMConsEstoque.cdsEstoque_Mov.Eof do
   begin
+    ProgressBar1.Position := ProgressBar1.Position + 1;
     if fDMConsEstoque.cdsEstoque_MovTIPO_ES.AsString = 'E' then
       vQtdEntrada := vQtdEntrada + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat
     else
       vQtdSaida := vQtdSaida + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat;
     if Gerar_CC then
     begin
-      if fDMConsEstoque.cdsEstoque_MovTIPO_ES.AsString = 'S' then
-      begin
+      //07/09/2019
+      //if fDMConsEstoque.cdsEstoque_MovTIPO_ES.AsString = 'S' then
+      //begin
        if not(fDMConsEstoque.mEstoque_CentroCusto.Locate('Id_Produto; Codigo_CentroCusto',VarArrayOf([fDMConsEstoque.cdsEstoque_MovID_PRODUTO.AsInteger,fDMConsEstoque.cdsEstoque_MovCODIGO_CCUSTO.AsString]),[loCaseInsensitive])) then
          fDMConsEstoque.mEstoque_CentroCusto.Insert
        else
@@ -291,17 +298,22 @@ begin
         fDMConsEstoque.mEstoque_CentroCustoNome_CentroCusto.AsString   := fDMConsEstoque.cdsEstoque_MovNOME_CENTROCUSTO.AsString;
         fDMConsEstoque.mEstoque_CentroCustoCodigo_Superior.AsString    := fDMConsEstoque.cdsEstoque_MovCODIGO_SUPERIOR.AsString;
         fDMConsEstoque.mEstoque_CentroCustoNome_Superior.AsString      := fDMConsEstoque.cdsEstoque_MovDESC_SUPERIOR.AsString;
-        fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat                := fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat;
-        fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat            := fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat + (fDMConsEstoque.cdsEstoque_MovVLR_UNITARIO.AsFloat * fDMConsEstoque.cdsEstoque_MovQTD.AsFloat) ;
         //06/09/2019
-
-
+        if fDMConsEstoque.cdsEstoque_MovTIPO_ES.AsString = 'S' then
+        begin
+          fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat                := fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat;
+          fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat            := fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat + (fDMConsEstoque.cdsEstoque_MovVLR_UNITARIO.AsFloat * fDMConsEstoque.cdsEstoque_MovQTD.AsFloat);
+        end
+        else
+        begin
+          fDMConsEstoque.mEstoque_CentroCustoQEnt.AsFloat                := fDMConsEstoque.mEstoque_CentroCustoQEnt.AsFloat + fDMConsEstoque.cdsEstoque_MovQTD.AsFloat;
+          fDMConsEstoque.mEstoque_CentroCustoVlrEntrada.AsFloat          := fDMConsEstoque.mEstoque_CentroCustoVlrEntrada.AsFloat + (fDMConsEstoque.cdsEstoque_MovVLR_UNITARIO.AsFloat * fDMConsEstoque.cdsEstoque_MovQTD.AsFloat);
+        end;
+        fDMConsEstoque.mEstoque_CentroCustoQSaldo.AsFloat              := fDMConsEstoque.mEstoque_CentroCustoQEnt.AsFloat - fDMConsEstoque.mEstoque_CentroCustoQSai.AsFloat;
+        fDMConsEstoque.mEstoque_CentroCustoVlrSaldo.AsFloat            := fDMConsEstoque.mEstoque_CentroCustoVlrEntrada.AsFloat - fDMConsEstoque.mEstoque_CentroCustoVlrTotal.AsFloat;
         //************
-
-
-
         fDMConsEstoque.mEstoque_CentroCusto.Post;
-      end;
+      //end;
     end;
     fDMConsEstoque.cdsEstoque_Mov.Next;
   end;
@@ -311,6 +323,7 @@ begin
   lblSaida.Caption   := FormatFloat('###,###,##0.0000',vQtdSaida);
   lblSaldo.Caption   := FormatFloat('###,###,##0.0000',vSaldo);
   SMDBGrid1.EnableScroll;
+  ProgressBar1.Visible := False;
 end;
 
 procedure TfrmConsEstoque_Mov.btnConsultarClick(Sender: TObject);
@@ -502,16 +515,19 @@ begin
     0: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPRODUTO;TAMANHO;NOME_COR;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NOMEPESSOA;NUMNOTA';
     1: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOMEPESSOA;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
 //    3: fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'CODIGO_CCUSTO;CODIGO_GRUPO;NOMEPRODUTO;NOME_COR;TAMANHO;DTMOVIMENTO;TIPO_ES;NOME_LOCAL;NUMNOTA';
-    3: fDMConsEstoque.mEstoque_CentroCusto.IndexFieldNames := 'Codigo_CentroCusto;Codigo_Grupo;Nome_Produto';
+    3,4: fDMConsEstoque.mEstoque_CentroCusto.IndexFieldNames := 'Codigo_CentroCusto;Codigo_Grupo;Nome_Produto';
   end;
   if (ckEstruturado.Checked) and (ComboBox1.ItemIndex < 2) then
     fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames := 'NOME_GRUPO;'+fDMConsEstoque.cdsEstoque_Mov.IndexFieldNames;
   SMDBGrid1.DisableScroll;
-  if ComboBox1.ItemIndex = 3 then
+  if (ComboBox1.ItemIndex = 3) or (ComboBox1.ItemIndex = 4) then
   begin
     //20/05/2019
     prc_Le_cdsEstoque_Mov(True);
-    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Estoque_CCusto.fr3';
+    if ComboBox1.ItemIndex = 4 then
+      vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Estoque_CCusto2.fr3'
+    else
+      vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Estoque_CCusto.fr3';
     if FileExists(vArq) then
       fDMConsEstoque.frxReport1.Report.LoadFromFile(vArq)
     else

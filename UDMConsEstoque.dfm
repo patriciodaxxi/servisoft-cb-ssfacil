@@ -1,8 +1,8 @@
 object DMConsEstoque: TDMConsEstoque
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 62
-  Top = 29
+  Left = 50
+  Top = 6
   Height = 699
   Width = 1224
   object sdsEstoque: TSQLDataSet
@@ -1068,13 +1068,13 @@ object DMConsEstoque: TDMConsEstoque
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43670.456819351850000000
+    ReportOptions.CreateDate = 42032.577038136600000000
+    ReportOptions.LastChange = 43715.769750092590000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
     Left = 848
-    Top = 359
+    Top = 358
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -4004,7 +4004,10 @@ object DMConsEstoque: TDMConsEstoque
       'Codigo_CentroCusto=Codigo_CentroCusto'
       'Nome_CentroCusto=Nome_CentroCusto'
       'Codigo_Superior=Codigo_Superior'
-      'Nome_Superior=Nome_Superior')
+      'Nome_Superior=Nome_Superior'
+      'VlrEntrada=VlrEntrada'
+      'QSaldo=QSaldo'
+      'VlrSaldo=VlrSaldo')
     DataSource = dsmEstoque_CentroCusto
     BCDToCurrency = False
     Left = 848
