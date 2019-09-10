@@ -21,8 +21,8 @@ object fCupomFiscalC: TfCupomFiscalC
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 167
-    Width = 1366
-    Height = 336
+    Width = 1358
+    Height = 328
     Align = alClient
     Ctl3D = False
     DataSource = dmCupomFiscal.dsCupom_Cons
@@ -239,7 +239,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object Panel11: TPanel
     Left = 0
     Top = 0
-    Width = 1366
+    Width = 1358
     Height = 30
     Align = alTop
     Color = 7300393
@@ -552,7 +552,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object pnlPesquisa: TPanel
     Left = 0
     Top = 30
-    Width = 1366
+    Width = 1358
     Height = 106
     Align = alTop
     Color = 3683329
@@ -881,8 +881,8 @@ object fCupomFiscalC: TfCupomFiscalC
   end
   object Panel1: TPanel
     Left = 0
-    Top = 503
-    Width = 1366
+    Top = 495
+    Width = 1358
     Height = 26
     Align = alBottom
     TabOrder = 3
@@ -998,7 +998,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object pnlEnvio_Novo: TPanel
     Left = 0
     Top = 136
-    Width = 1366
+    Width = 1358
     Height = 31
     Align = alTop
     Color = 7300393
@@ -1251,167 +1251,14 @@ object fCupomFiscalC: TfCupomFiscalC
       OnClick = btnComandaClick
     end
   end
-  object PanelTotais: TPanel
-    Left = 0
-    Top = 585
-    Width = 1366
-    Height = 120
-    Align = alBottom
-    Color = 3683329
-    TabOrder = 5
-    object Label8: TLabel
-      Left = 28
-      Top = 90
-      Width = 71
-      Height = 13
-      Caption = 'Valor M'#233'dio:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label10: TLabel
-      Left = 34
-      Top = 58
-      Width = 66
-      Height = 13
-      Caption = 'Comandas:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-    end
-    object Label7: TLabel
-      Left = 6
-      Top = 26
-      Width = 95
-      Height = 13
-      Caption = 'Total de Vendas:'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-    end
-    object ceVM: TCurrencyEdit
-      Left = 106
-      Top = 77
-      Width = 232
-      Height = 26
-      AutoSize = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 2
-    end
-    object ceQtd: TCurrencyEdit
-      Left = 106
-      Top = 45
-      Width = 232
-      Height = 26
-      AutoSize = False
-      DecimalPlaces = 0
-      DisplayFormat = '0'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-    end
-    object SMDBGrid5: TSMDBGrid
-      Left = 903
-      Top = 1
-      Width = 462
-      Height = 118
-      Align = alRight
-      BorderStyle = bsNone
-      Color = 12633514
-      Ctl3D = False
-      DataSource = dmCupomFiscal.dsTotais
-      FixedColor = 3683329
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Verdana'
-      Font.Style = []
-      Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-      ParentCtl3D = False
-      ParentFont = False
-      TabOrder = 3
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWhite
-      TitleFont.Height = -13
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      Flat = True
-      BandsFont.Charset = DEFAULT_CHARSET
-      BandsFont.Color = clWindowText
-      BandsFont.Height = -11
-      BandsFont.Name = 'MS Sans Serif'
-      BandsFont.Style = []
-      Groupings = <>
-      GridStyle.Style = gsCustom
-      GridStyle.OddColor = clWindow
-      GridStyle.EvenColor = clWindow
-      TitleHeight.PixelCount = 24
-      FooterColor = clBtnFace
-      ExOptions = [eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
-      RegistryKey = 'Software\Scalabium'
-      RegistrySection = 'SMDBGrid'
-      WidthOfIndicator = 11
-      DefaultRowHeight = 20
-      ScrollBars = ssHorizontal
-      ColCount = 2
-      RowCount = 2
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'NOME'
-          Title.Caption = 'FORMA DE PAGAMENTO'
-          Width = 308
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TOTAL'
-          Width = 134
-          Visible = True
-        end>
-    end
-    object ceTotal: TCurrencyEdit
-      Left = 106
-      Top = 13
-      Width = 232
-      Height = 26
-      AutoSize = False
-      DecimalPlaces = 0
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -19
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-    end
-  end
   object pnlCliente: TPanel
     Left = 0
-    Top = 529
-    Width = 1366
+    Top = 521
+    Width = 1358
     Height = 56
     Align = alBottom
     Color = 7300393
-    TabOrder = 6
+    TabOrder = 5
     object Label16: TLabel
       Left = 26
       Top = 12
@@ -1531,6 +1378,160 @@ object fCupomFiscalC: TfCupomFiscalC
       DataSource = dmCupomFiscal.dsCupom_Cons
       Enabled = False
       TabOrder = 4
+    end
+  end
+  object PanelTotais1: TPanel
+    Left = 0
+    Top = 577
+    Width = 1358
+    Height = 120
+    Align = alBottom
+    Color = 3683329
+    TabOrder = 6
+    object Label11: TLabel
+      Left = 28
+      Top = 90
+      Width = 71
+      Height = 13
+      Caption = 'Valor M'#233'dio:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label22: TLabel
+      Left = 34
+      Top = 58
+      Width = 66
+      Height = 13
+      Caption = 'Comandas:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label23: TLabel
+      Left = 6
+      Top = 26
+      Width = 95
+      Height = 13
+      Caption = 'Total de Vendas:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+    end
+    object ceVM: TCurrencyEdit
+      Left = 106
+      Top = 77
+      Width = 232
+      Height = 26
+      AutoSize = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object ceQtd: TCurrencyEdit
+      Left = 106
+      Top = 45
+      Width = 232
+      Height = 26
+      AutoSize = False
+      DecimalPlaces = 0
+      DisplayFormat = '0'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+    object SMDBGrid2: TSMDBGrid
+      Left = 895
+      Top = 1
+      Width = 462
+      Height = 118
+      Align = alRight
+      BorderStyle = bsNone
+      Color = 12633514
+      Ctl3D = False
+      DataSource = dmCupomFiscal.dsTotais
+      FixedColor = 3683329
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Style = []
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      ParentCtl3D = False
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 3
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWhite
+      TitleFont.Height = -13
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      Flat = True
+      BandsFont.Charset = DEFAULT_CHARSET
+      BandsFont.Color = clWindowText
+      BandsFont.Height = -11
+      BandsFont.Name = 'MS Sans Serif'
+      BandsFont.Style = []
+      Groupings = <>
+      GridStyle.Style = gsCustom
+      GridStyle.OddColor = clWindow
+      GridStyle.EvenColor = clWindow
+      TitleHeight.PixelCount = 24
+      FooterColor = clBtnFace
+      ExOptions = [eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+      RegistryKey = 'Software\Scalabium'
+      RegistrySection = 'SMDBGrid'
+      WidthOfIndicator = 11
+      DefaultRowHeight = 20
+      ScrollBars = ssHorizontal
+      ColCount = 2
+      RowCount = 2
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'NOME'
+          Title.Caption = 'FORMA DE PAGAMENTO'
+          Width = 308
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TOTAL'
+          Width = 134
+          Visible = True
+        end>
+    end
+    object ceTotal: TCurrencyEdit
+      Left = 106
+      Top = 13
+      Width = 232
+      Height = 26
+      AutoSize = False
+      DecimalPlaces = 0
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
     end
   end
   object PopupMenu2: TPopupMenu

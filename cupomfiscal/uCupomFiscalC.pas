@@ -44,11 +44,6 @@ type
     PopupMenu2: TPopupMenu;
     Imprimir_Off_Line: TMenuItem;
     Enviarnomtodoantigo1: TMenuItem;
-    PanelTotais: TPanel;
-    ceVM: TCurrencyEdit;
-    Label8: TLabel;
-    Label10: TLabel;
-    ceQtd: TCurrencyEdit;
     Shape5: TShape;
     Label12: TLabel;
     ComboBox1: TComboBox;
@@ -87,10 +82,15 @@ type
     Label21: TLabel;
     DBMemo3: TDBMemo;
     ckMsg: TCheckBox;
-    SMDBGrid5: TSMDBGrid;
-    Label7: TLabel;
-    ceTotal: TCurrencyEdit;
     CheckBox1: TCheckBox;
+    PanelTotais1: TPanel;
+    Label11: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    ceVM: TCurrencyEdit;
+    ceQtd: TCurrencyEdit;
+    SMDBGrid2: TSMDBGrid;
+    ceTotal: TCurrencyEdit;
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
@@ -182,7 +182,7 @@ begin
     pnlEnvio_Novo.Visible := False;
     pnlPesquisa.Visible   := False;
     Panel1.Visible        := False;
-    PanelTotais.Visible   := False;
+    PanelTotais1.Visible  := False;
     Panel11.Visible       := False;
     SMDBGrid1.Visible     := False;
   end
@@ -237,10 +237,10 @@ begin
   if fDmCupomFiscal.cdsParametrosIMPRESSORA_FISCAL.AsInteger = 0 then
     ckTeste.Checked := True;
 
-  PanelTotais.Visible := (((fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S') or
-                         (fDmCupomFiscal.cdsCupomParametrosMOSTRAR_BARRA_TOTAL.AsString = 'S')) and
-                         ((fDmCupomFiscal.qParametros_UsuarioCUPOM_TOTAIS.AsString = 'S') or
-                         (fDmCupomFiscal.qParametros_UsuarioCUPOM_TOTAIS.IsNull)));
+  PanelTotais1.Visible := (((fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S') or
+                          (fDmCupomFiscal.cdsCupomParametrosMOSTRAR_BARRA_TOTAL.AsString = 'S')) and
+                          ((fDmCupomFiscal.qParametros_UsuarioCUPOM_TOTAIS.AsString = 'S') or
+                          (fDmCupomFiscal.qParametros_UsuarioCUPOM_TOTAIS.IsNull)));
 
   if fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S' then
     ComboBox1.ItemIndex := 5
@@ -366,7 +366,7 @@ begin
   fDmCupomFiscal.sdsCupom_Cons.CommandText := ctCupomFiscal + vComando + ' ORDER BY DTEMISSAO DESC, ID DESC';
   fDmCupomFiscal.cdsCupom_Cons.Open;
 
-  if PanelTotais.Visible then
+  if PanelTotais1.Visible then
   begin
     vTotal := 0;
     fDmCupomFiscal.cdsTotais.Close;
