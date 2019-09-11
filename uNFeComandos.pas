@@ -3,7 +3,7 @@ unit uNFeComandos;
 interface
 
 uses
-  Classes, SysUtils, DBClient, contNrs, ZLibEX;
+  Classes, SysUtils, DBClient, contNrs, ZLibEx;
 
 procedure EnviaNFe(AServidor, ACnpj: string; ANFe: TStream; var ARecibo,
   ANroProtocolo, AChaveAcesso: string; AContingencia, AConvTXT2XML: Boolean;

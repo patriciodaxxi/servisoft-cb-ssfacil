@@ -61,6 +61,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnAbrirPDFClick(Sender: TObject);
     procedure mArquivoImportadoVlr_UnitarioChange(Sender: TField);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     ctChapaLocal: string;
@@ -189,10 +190,12 @@ begin
         fDMCadPedido.cdsPedido_Item_TipoCOMPLEMENTO_NOME.AsString := mArquivoImportadoNomeArquivo.AsString;
         fDMCadPedido.cdsPedido_Item_TipoVLR_DOBRA.AsFloat    := mArquivoImportadoVlr_Dobra.AsFloat;
         fDMCadPedido.cdsPedido_Item_TipoFATOR_CALCULO.AsFloat := mArquivoImportadoFator_Calculo.AsFloat;
+
         fDMCadPedido.cdsPedido_Item_TipoTIPO_ORCAMENTO.AsString := 'C';
         fDMCadPedido.cdsPedido_Item_TipoDESCRICAO_TIPO.AsString := 'CHAPA';
         fDMCadPedido.cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF.AsString := mArquivoImportadoCaminhoArquivo.AsString;
 
+        fDMCadPedido.cdsPedido_ItensQTD_LANCAR_ESTOQUE.AsFloat := StrToFloat(FormatFloat('0.0000',(fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat)));
         fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString + ' ' + fDMCadPedido.cdsPedido_Item_TipoCOMPLEMENTO_NOME.AsString;
 
         fDMCadPedido.cdsPedido_Item_Tipo.Post;
@@ -479,9 +482,9 @@ begin
     vCaminhoPDF := mArquivoImportadoCaminhoArquivo.AsString;
     ffrmMostraPDF.vCaminhoPDF := vCaminhoPDF;
     ffrmMostraPDF.edtCaminhoPDF.Text := vCaminhoPDF;
-    ffrmMostraPDF.ShowModal;
+    ffrmMostraPDF.Show;
   finally
-    FreeAndNil(ffrmMostraPDF);
+//    FreeAndNil(ffrmMostraPDF);
   end;
 end;
 
@@ -505,6 +508,12 @@ begin
   mArquivoImportadoEspessura.OnChange := mArquivoImportadoEspessuraChange;
   mArquivoImportadoVlr_Unitario.OnChange := mArquivoImportadoVlr_UnitarioChange;
   mArquivoImportadoVlr_Dobra.OnChange := mArquivoImportadoVlr_DobraChange;
+end;
+
+procedure TfrmMontaPed_TipoItem.FormDestroy(Sender: TObject);
+begin
+  if Assigned(ffrmMostraPDF) then
+    FreeAndNil(ffrmMostraPDF);
 end;
 
 end.

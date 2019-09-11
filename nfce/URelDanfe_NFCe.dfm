@@ -3,7 +3,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
   Top = 23
   Width = 733
   Height = 674
-  VertScrollBar.Position = 293
+  VertScrollBar.Position = 403
   Caption = 'fRelDanfe_NFCe'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object fRelDanfe_NFCe: TfRelDanfe_NFCe
   TextHeight = 13
   object RLReport1: TRLReport
     Left = 8
-    Top = -285
+    Top = -395
     Width = 302
     Height = 3780
     DataSource = DMNFCe.dsCupomFiscal
