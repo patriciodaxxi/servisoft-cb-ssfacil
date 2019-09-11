@@ -1,6 +1,6 @@
 object frmMostraPDF: TfrmMostraPDF
-  Left = 158
-  Top = 57
+  Left = 140
+  Top = 147
   Width = 1078
   Height = 551
   Caption = 'frmMostraPDF'
@@ -11,7 +11,9 @@ object frmMostraPDF: TfrmMostraPDF
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  WindowState = wsMaximized
   OnClose = FormClose
+  OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13

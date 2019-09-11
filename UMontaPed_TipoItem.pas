@@ -61,6 +61,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnAbrirPDFClick(Sender: TObject);
     procedure mArquivoImportadoVlr_UnitarioChange(Sender: TField);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     ctChapaLocal: string;
@@ -481,9 +482,9 @@ begin
     vCaminhoPDF := mArquivoImportadoCaminhoArquivo.AsString;
     ffrmMostraPDF.vCaminhoPDF := vCaminhoPDF;
     ffrmMostraPDF.edtCaminhoPDF.Text := vCaminhoPDF;
-    ffrmMostraPDF.ShowModal;
+    ffrmMostraPDF.Show;
   finally
-    FreeAndNil(ffrmMostraPDF);
+//    FreeAndNil(ffrmMostraPDF);
   end;
 end;
 
@@ -507,6 +508,12 @@ begin
   mArquivoImportadoEspessura.OnChange := mArquivoImportadoEspessuraChange;
   mArquivoImportadoVlr_Unitario.OnChange := mArquivoImportadoVlr_UnitarioChange;
   mArquivoImportadoVlr_Dobra.OnChange := mArquivoImportadoVlr_DobraChange;
+end;
+
+procedure TfrmMontaPed_TipoItem.FormDestroy(Sender: TObject);
+begin
+  if Assigned(ffrmMostraPDF) then
+    FreeAndNil(ffrmMostraPDF);
 end;
 
 end.
