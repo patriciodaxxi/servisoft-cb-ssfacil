@@ -9,7 +9,7 @@ uses
 type
   TdmDatabase = class(TDataModule)
     scoDados: TSQLConnection;
-    Decoder64: TIdDecoderMIME;
+    Decoder64: TIdDecode.rMIME;
     sdsExec: TSQLDataSet;
     scoAtualiza: TSQLConnection;
     sdsVersao: TSQLDataSet;                                                   

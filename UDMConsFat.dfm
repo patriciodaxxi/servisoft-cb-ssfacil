@@ -10,7 +10,7 @@ object DMConsFat: TDMConsFat
     GetMetadata = False
     CommandText = 
       'SELECT V.*,  (V.VLR_TOTAL + V.VLR_IPI) VLR_TOTAL_BRU,'#13#10'(V.VLR_TO' +
-      'TAL + V.VLR_IPI) VLR_TOTAL_LIQ'#13#10'FROM VFAT_ACUM V'
+      'TAL) VLR_TOTAL_LIQ'#13#10'FROM VFAT_ACUM V'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

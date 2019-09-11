@@ -222,25 +222,24 @@ begin
         vVlr_Devolucao := vVlr_Devolucao + fDMConsFat.cdsFatAcumVLR_TOTAL_LIQ.AsFloat
       else
       begin
-        vVlr_Total := vVlr_Total + fDMConsFat.cdsFatAcumVLR_TOTAL.AsFloat;
-        vVlr_Total_Bru := vVlr_Total_Bru + fDMConsFat.cdsFatAcumVLR_TOTAL_BRU.AsFloat;
-        vVlr_Total_Liq := vVlr_Total_Liq + fDMConsFat.cdsFatAcumVLR_TOTAL_LIQ.AsFloat;
-        vVlr_IPI := vVlr_IPI + fDMConsFat.cdsFatAcumVLR_IPI.AsFloat;
-        vVlr_ST := vVlr_ST + fDMConsFat.cdsFatAcumVLR_ICMSSUBST.AsFloat;
-        vVlr_ICMS := vVlr_ICMS + fDMConsFat.cdsFatAcumVLR_ICMS.AsFloat;
-        vVlr_PIS := vVlr_PIS + fDMConsFat.cdsFatAcumVLR_PIS.AsFloat;
-        vVlr_COFINS := vVlr_COFINS + fDMConsFat.cdsFatAcumVLR_COFINS.AsFloat;
-        vVlr_Desconto := vVlr_Desconto + fDMConsFat.cdsFatAcumVLR_DESCONTO.AsFloat;
+        vVlr_Total        := vVlr_Total + fDMConsFat.cdsFatAcumVLR_TOTAL.AsFloat;
+        vVlr_Total_Bru    := vVlr_Total_Bru + fDMConsFat.cdsFatAcumVLR_TOTAL_BRU.AsFloat;
+        vVlr_Total_Liq    := vVlr_Total_Liq + fDMConsFat.cdsFatAcumVLR_TOTAL_LIQ.AsFloat;
+        vVlr_IPI          := vVlr_IPI + fDMConsFat.cdsFatAcumVLR_IPI.AsFloat;
+        vVlr_ST           := vVlr_ST + fDMConsFat.cdsFatAcumVLR_ICMSSUBST.AsFloat;
+        vVlr_ICMS         := vVlr_ICMS + fDMConsFat.cdsFatAcumVLR_ICMS.AsFloat;
+        vVlr_PIS          := vVlr_PIS + fDMConsFat.cdsFatAcumVLR_PIS.AsFloat;
+        vVlr_COFINS       := vVlr_COFINS + fDMConsFat.cdsFatAcumVLR_COFINS.AsFloat;
+        vVlr_Desconto     := vVlr_Desconto + fDMConsFat.cdsFatAcumVLR_DESCONTO.AsFloat;
         vVlr_ICMS_UF_Dest := vVlr_ICMS_UF_Dest + fDMConsFat.cdsFatAcumVLR_ICMS_UF_DEST.AsFloat;
-        vVlr_CSLL := vVlr_CSLL + fDMConsFat.cdsFatAcumVLR_CSLL_VENDA.AsFloat;
-        vVlr_IR := vVlr_IR + fDMConsFat.cdsFatAcumVLR_IR_VENDA.AsFloat;
-        vVlr_Custo := vVlr_Custo + fDMConsFat.cdsFatAcumVLR_CUSTO.AsFloat;
-        vVlr_Frete := vVlr_Frete + fDMConsFat.cdsFatAcumVLR_FRETE.AsFloat;
+        vVlr_CSLL         := vVlr_CSLL + fDMConsFat.cdsFatAcumVLR_CSLL_VENDA.AsFloat;
+        vVlr_IR           := vVlr_IR + fDMConsFat.cdsFatAcumVLR_IR_VENDA.AsFloat;
+        vVlr_Custo        := vVlr_Custo + fDMConsFat.cdsFatAcumVLR_CUSTO.AsFloat;
+        vVlr_Frete        := vVlr_Frete + fDMConsFat.cdsFatAcumVLR_FRETE.AsFloat;
 
         vVlr_ICMS_FCP := vVlr_ICMS_FCP + fDMConsFat.cdsFatAcumVLR_ICMS_FCP.AsFloat;
         vVlr_FCP_ST   := vVlr_FCP_ST + fDMConsFat.cdsFatAcumVLR_FCP_ST.AsFloat;
         vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsFatAcumVLR_ICMS_FCP_DEST.AsFloat;
-
       end;
       fDMConsFat.cdsFatAcum.Next;
     end;
@@ -425,6 +424,8 @@ begin
   Label24.Caption := FormatFloat('###,###,##0.00', vVlr_Total);
   Label26.Caption := FormatFloat('###,###,##0.00', vVlr_Total_Bru);
   Label28.Caption := FormatFloat('###,###,##0.00', vVlr_Total_Liq);
+
+  Label5.Caption  := FormatFloat('###,###,##0.00', vVlr_Devolucao);
 
   Label32.Caption := FormatFloat('###,###,##0.00', vVlr_IPI);
   Label31.Caption := FormatFloat('###,###,##0.00', vVlr_ST);

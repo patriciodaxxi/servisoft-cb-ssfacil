@@ -825,7 +825,9 @@ uses
   uRecebeXML_CFOP in 'nfevisualizador\uRecebeXML_CFOP.pas' {frmRecebeXML_CFOP},
   UAltCFOPProd in 'UAltCFOPProd.pas' {frmAltCFOPProd},
   UDMCopiaDoc in 'UDMCopiaDoc.pas' {DMCopiaDoc: TDataModule},
-  UCadDocEstoque_Copia in 'UCadDocEstoque_Copia.pas' {frmCadDocEstoque_Copia};
+  UCadDocEstoque_Copia in 'UCadDocEstoque_Copia.pas' {frmCadDocEstoque_Copia},
+  UDMProg_Terc in 'UDMProg_Terc.pas' {DMProg_Terc: TDataModule},
+  UProg_Terc in 'UProg_Terc.pas' {frmProg_Terc};
 
 {$R *.res}
 
