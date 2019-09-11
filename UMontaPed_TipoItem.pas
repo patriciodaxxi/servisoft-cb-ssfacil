@@ -189,10 +189,12 @@ begin
         fDMCadPedido.cdsPedido_Item_TipoCOMPLEMENTO_NOME.AsString := mArquivoImportadoNomeArquivo.AsString;
         fDMCadPedido.cdsPedido_Item_TipoVLR_DOBRA.AsFloat    := mArquivoImportadoVlr_Dobra.AsFloat;
         fDMCadPedido.cdsPedido_Item_TipoFATOR_CALCULO.AsFloat := mArquivoImportadoFator_Calculo.AsFloat;
+
         fDMCadPedido.cdsPedido_Item_TipoTIPO_ORCAMENTO.AsString := 'C';
         fDMCadPedido.cdsPedido_Item_TipoDESCRICAO_TIPO.AsString := 'CHAPA';
         fDMCadPedido.cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF.AsString := mArquivoImportadoCaminhoArquivo.AsString;
 
+        fDMCadPedido.cdsPedido_ItensQTD_LANCAR_ESTOQUE.AsFloat := StrToFloat(FormatFloat('0.0000',(fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat)));
         fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString + ' ' + fDMCadPedido.cdsPedido_Item_TipoCOMPLEMENTO_NOME.AsString;
 
         fDMCadPedido.cdsPedido_Item_Tipo.Post;
