@@ -169,8 +169,8 @@ var
   vIDAux: Integer;
   vGravar_Fin: Boolean;
   vComDesconto: String;
-  vVlrCheque : Real;
-  vVlrAux : Real;
+  vVlrCheque: Real;
+  vVlrAux: Real;
 begin
   if fnc_Erro then
     exit;
@@ -429,7 +429,7 @@ end;
 procedure TfrmCadDuplicata_Pag2.Panel1Exit(Sender: TObject);
 var
   vFlag: Boolean;
-  vFlagProprio : Boolean;
+  vFlagProprio: Boolean;
 begin
   if fDMCadDuplicata.cdsDuplicata.State in [dsEdit] then
   begin
@@ -527,7 +527,7 @@ end;
 procedure TfrmCadDuplicata_Pag2.btnInformarChequeClick(Sender: TObject);
 var
   ffrmCadDuplicata_Cheque: TfrmCadDuplicata_Cheque;
-  vVlrCheque : Real;
+  vVlrCheque: Real;
 begin
   ffrmCadDuplicata_Cheque := TfrmCadDuplicata_Cheque.Create(self);
   ffrmCadDuplicata_Cheque.fDMCadDuplicata := fDMCadDuplicata;
@@ -561,8 +561,8 @@ end;
 procedure TfrmCadDuplicata_Pag2.btnBuscarChequeClick(Sender: TObject);
 var
   ffrmSel_Cheque: TfrmSel_Cheque;
-  vVlrAux : Real;
-  vVlrTotalAux : Real;
+  vVlrAux: Real;
+  vVlrTotalAux: Real;
 begin
   fDMCadDuplicata.mCheque.First;
   if (fDMCadDuplicata.mCheque.RecordCount > 0) and (fDMCadDuplicata.mChequeEmitido_Por.AsString = '1') then
@@ -601,7 +601,7 @@ end;
 
 procedure TfrmCadDuplicata_Pag2.btnAtualizaVlrClick(Sender: TObject);
 var
-  vVlrAux : Real;
+  vVlrAux: Real;
 begin
   fDMCadDuplicata.mCheque.First;
   while not fDMCadDuplicata.mCheque.Eof do
