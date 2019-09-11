@@ -579,7 +579,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label5: TLabel
       Left = 175
-      Top = 53
+      Top = 52
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -845,9 +845,9 @@ object frmConsFat: TfrmConsFat
       Top = 1
       Width = 1030
       Height = 512
-      ActivePage = ts_Cliente
+      ActivePage = ts_Geral
       Align = alClient
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 0
       FixedDimension = 19
       object ts_Geral: TRzTabSheet
@@ -919,7 +919,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'DEVOLUCAO'
               Title.Alignment = taCenter
               Title.Caption = 'Dev.'
-              Width = 64
               Visible = True
             end
             item
@@ -1012,7 +1011,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'VLR_DESCONTO'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. Desconto'
-              Width = 64
               Visible = True
             end
             item
@@ -1042,7 +1040,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'VLR_ICMS_FCP_DEST'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. Icms FCP Dest'
-              Width = 64
               Visible = True
             end
             item
@@ -1050,7 +1047,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'VLR_ICMS_FCP'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. ICMS FCP'
-              Width = 64
               Visible = True
             end
             item
@@ -1065,7 +1061,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'VLR_CUSTO'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. Custo (Compra)'
-              Width = 64
               Visible = True
             end
             item
@@ -1081,7 +1076,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'TIPO_REG'
               Title.Alignment = taCenter
               Title.Caption = 'Tipo Reg'
-              Width = 64
               Visible = True
             end
             item
@@ -1105,7 +1099,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'BASE_FCP_ST'
               Title.Alignment = taCenter
               Title.Caption = 'Base FCP ST'
-              Width = 64
               Visible = True
             end
             item
@@ -1113,7 +1106,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'BASE_ICMS_FCP'
               Title.Alignment = taCenter
               Title.Caption = 'Base Icms FCP'
-              Width = 64
               Visible = True
             end
             item
@@ -1121,7 +1113,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'BASE_ICMS_FCP_DEST'
               Title.Alignment = taCenter
               Title.Caption = 'Base ICMS FCP Dest'
-              Width = 64
               Visible = True
             end>
         end
@@ -1225,21 +1216,18 @@ object frmConsFat: TfrmConsFat
               Expanded = False
               FieldName = 'VLR_ICMS_UF_REMET'
               Title.Caption = 'Valor ICMS UF Rem'
-              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VLR_ICMS_UF_DEST'
               Title.Caption = 'Valor ICMS UF Dest'
-              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VLR_DESCONTO'
               Title.Caption = 'Valor Desconto'
-              Width = 64
               Visible = True
             end
             item
@@ -1264,14 +1252,12 @@ object frmConsFat: TfrmConsFat
               Expanded = False
               FieldName = 'VLR_IR_VENDA'
               Title.Caption = 'Valor IR Venda'
-              Width = 64
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'VLR_CSLL_VENDA'
               Title.Caption = 'Valor CSSL Venda'
-              Width = 64
               Visible = True
             end
             item
@@ -1279,7 +1265,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'VLR_ICMS_FCP_DEST'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. ICMS FCP Dest'
-              Width = 64
               Visible = True
             end
             item
@@ -1287,7 +1272,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'VLR_ICMS_FCP'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. ICMS FCP'
-              Width = 64
               Visible = True
             end
             item
@@ -1295,7 +1279,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'VLR_FCP_ST'
               Title.Alignment = taCenter
               Title.Caption = 'VLR. FCP ST'
-              Width = 64
               Visible = True
             end
             item
@@ -1303,7 +1286,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'BASE_FCP_ST'
               Title.Alignment = taCenter
               Title.Caption = 'Base FCP ST'
-              Width = 64
               Visible = True
             end
             item
@@ -1311,7 +1293,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'BASE_ICMS_FCP'
               Title.Alignment = taCenter
               Title.Caption = 'Base ICMS FCP'
-              Width = 64
               Visible = True
             end
             item
@@ -1319,7 +1300,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'BASE_ICMS_FCP_DEST'
               Title.Alignment = taCenter
               Title.Caption = 'Base ICMS FCP Dest'
-              Width = 64
               Visible = True
             end>
         end
@@ -1435,7 +1415,6 @@ object frmConsFat: TfrmConsFat
               Expanded = False
               FieldName = 'VLR_COFINS'
               Title.Caption = 'Valor COFINS'
-              Width = 64
               Visible = True
             end
             item
@@ -1468,7 +1447,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'VLR_ICMS_FCP_DEST'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. ICMS FCP Dest'
-              Width = 64
               Visible = True
             end
             item
@@ -1476,7 +1454,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'VLR_ICMS_FCP'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. ICMS FCP'
-              Width = 64
               Visible = True
             end
             item
@@ -1491,7 +1468,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'BASE_FCP_ST'
               Title.Alignment = taCenter
               Title.Caption = 'Base FCP ST'
-              Width = 64
               Visible = True
             end
             item
@@ -1499,7 +1475,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'BASE_ICMS_FCP'
               Title.Alignment = taCenter
               Title.Caption = 'Base ICMS FCP'
-              Width = 64
               Visible = True
             end
             item
@@ -1507,7 +1482,6 @@ object frmConsFat: TfrmConsFat
               FieldName = 'BASE_ICMS_FCP_DEST'
               Title.Alignment = taCenter
               Title.Caption = 'Base ICMS FCP Dest'
-              Width = 64
               Visible = True
             end>
         end

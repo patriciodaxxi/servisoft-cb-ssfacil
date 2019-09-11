@@ -30,6 +30,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
     procedure btnPrevClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     procedure CheckState;
@@ -140,6 +141,11 @@ procedure TfrmMostraPDF.btnPrevClick(Sender: TObject);
 begin
   TPDFImage(Image.Picture.Graphic).PreviousPage;
   CheckState;
+end;
+
+procedure TfrmMostraPDF.FormDestroy(Sender: TObject);
+begin
+//  FreeAndNil(Self);
 end;
 
 end.
