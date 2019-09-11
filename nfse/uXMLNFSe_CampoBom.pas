@@ -332,16 +332,16 @@ begin
   vCds.FieldByName('total.vtLiqFaturas').AsFloat := 0;
   vCds.FieldByName('total.vtDespesas').AsFloat   := 0;
 
-  if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat)) > 0 then
-  begin
-    vCds.FieldByName('total.ISS.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpBASE_CALCULO.AsFloat));
-    vCds.FieldByName('total.ISS.vISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat))
-  end
-  else
   if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat)) > 0 then
   begin
     vCds.FieldByName('total.ISS.vBCSTISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpBASE_CALCULO.AsFloat));
     vCds.FieldByName('total.ISS.vSTISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS_RETIDO.AsFloat));
+  end
+  else
+  //if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat)) > 0 then
+  begin
+    vCds.FieldByName('total.ISS.vBCISS').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpBASE_CALCULO.AsFloat));
+    vCds.FieldByName('total.ISS.vISS').AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_ISS.AsFloat))
   end;
 
   fDMCadNotaServico.cdsNotaServico_Imp_Parc.Close;

@@ -72,7 +72,7 @@ var
 
 implementation
 
-uses DmdDatabase, LogProvider;
+uses DmdDatabase, LogProvider, uUtilPadrao;
 
 {$R *.dfm}
 
@@ -90,7 +90,6 @@ var
   vIndices: string;
   aIndices: array of string;
 begin
-  ctCommand := sdsCor.CommandText;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do

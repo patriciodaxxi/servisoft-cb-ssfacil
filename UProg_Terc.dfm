@@ -61,10 +61,8 @@ object frmProg_Terc: TfrmProg_Terc
         TitleHeight.PixelCount = 24
         FooterColor = clBtnFace
         ExOptions = [eoCheckBoxSelect, eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
-        OnGetCellParams = SMDBGrid1GetCellParams
         RegistryKey = 'Software\Scalabium'
         RegistrySection = 'SMDBGrid'
-        OnChangeSelection = SMDBGrid1ChangeSelection
         WidthOfIndicator = 27
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
@@ -298,6 +296,7 @@ object frmProg_Terc: TfrmProg_Terc
             FieldName = 'NOME_COR_COMBINACAO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Cor'
+            Width = 64
             Visible = True
           end>
       end
