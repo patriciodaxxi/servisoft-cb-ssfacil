@@ -1052,10 +1052,10 @@ type
     vID_Semi_Ant: Integer;
     vUser_Exclui: Boolean;
     vEstoqueLoteTotal: Double;
-    vItem_Corrugado : Integer;
-    vID_Principal : Integer;
+    vItem_Corrugado: Integer;
+    vID_Principal: Integer;
 
-    vPreco_Custo, vPreco_Custo_Total, vPerc_MargemLucro : Real;
+    vPreco_Custo, vPreco_Custo_Total, vPerc_MargemLucro: Real;
 
     //*** 16/06/2016  usado para gravar a tabela Produto_Cad_Ant
     vNome_Cad_Ant, vReferencia_Cad_Ant: String;
@@ -1118,7 +1118,7 @@ type
     function fnc_Busca_Semi: Integer;
     //function fnc_Custo(ID: Integer ; Combinacao: Boolean = False): Boolean;
 
-    function fnc_Monta_Nome_Estrutura(ID : Integer) : String;     
+    function fnc_Monta_Nome_Estrutura(ID: Integer): String;     
 
     procedure prcExportaCadastroMGV5;
     procedure prcAtualizaPrecoMGV5;
@@ -4732,21 +4732,25 @@ begin
   vPerc_MargemLucro  := StrToFloat(FormatFloat('0.00',fDMCadProduto.cdsProdutoPERC_MARGEMLUCRO.AsFloat));
 
   vPreco_Venda_Ant := StrToFloat(FormatFloat('0.0000',fDMCadProduto.cdsProdutoPRECO_VENDA.AsFloat));
-  if (fDMCadProduto.qParametros_ProdOPCAO_APLICAR_MARGEM.AsString = 'C') then
+
+  if (fDMCadProduto.qParametros_ProdOPCAO_APLICAR_MARGEM.AsString <> 'X') then
   begin
-    if StrToFloat(formatFloat('0.0000',fDMCadProduto.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat)) <= 0 then
-      exit;
-    fDMCadProduto.cdsProdutoPRECO_VENDA.AsFloat := StrToFloat(FormatFloat('0.00000',(fDMCadProduto.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat *
-                                                              fDMCadProduto.cdsProdutoPERC_MARGEMLUCRO.AsFloat / 100) +
-                                                              fDMCadProduto.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat));
-  end
-  else
-  begin
-    if StrToFloat(formatFloat('0.0000',fDMCadProduto.cdsProdutoPRECO_CUSTO.AsFloat)) <= 0 then
-      exit;
-    fDMCadProduto.cdsProdutoPRECO_VENDA.AsFloat := StrToFloat(FormatFloat('0.00000',(fDMCadProduto.cdsProdutoPRECO_CUSTO.AsFloat *
-                                                              fDMCadProduto.cdsProdutoPERC_MARGEMLUCRO.AsFloat / 100) +
-                                                              fDMCadProduto.cdsProdutoPRECO_CUSTO.AsFloat));
+    if (fDMCadProduto.qParametros_ProdOPCAO_APLICAR_MARGEM.AsString = 'C') then
+    begin
+      if StrToFloat(formatFloat('0.0000',fDMCadProduto.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat)) <= 0 then
+        exit;
+      fDMCadProduto.cdsProdutoPRECO_VENDA.AsFloat := StrToFloat(FormatFloat('0.00000',(fDMCadProduto.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat *
+                                                                fDMCadProduto.cdsProdutoPERC_MARGEMLUCRO.AsFloat / 100) +
+                                                                fDMCadProduto.cdsProdutoPRECO_CUSTO_TOTAL.AsFloat));
+    end
+    else
+    begin
+      if StrToFloat(formatFloat('0.0000',fDMCadProduto.cdsProdutoPRECO_CUSTO.AsFloat)) <= 0 then
+        exit;
+      fDMCadProduto.cdsProdutoPRECO_VENDA.AsFloat := StrToFloat(FormatFloat('0.00000',(fDMCadProduto.cdsProdutoPRECO_CUSTO.AsFloat *
+                                                                fDMCadProduto.cdsProdutoPERC_MARGEMLUCRO.AsFloat / 100) +
+                                                                fDMCadProduto.cdsProdutoPRECO_CUSTO.AsFloat));
+    end;
   end;
   if StrToFloat(FormatFloat('0.0000',fDMCadProduto.cdsProdutoPRECO_VENDA.AsFloat)) <> StrToFloat(FormatFloat('0.0000',vPreco_Venda_Ant)) then
     prc_Atualiza_Preco_Lote;
@@ -6139,7 +6143,7 @@ end;
 
 procedure TfrmCadProduto.btnConfirmar_CorrugadoClick(Sender: TObject);
 var
-  vMSGAux : String;
+  vMSGAux: String;
 begin
   vMSGAux := '';
   if CurrencyEdit4.AsInteger <= 0 then
@@ -6234,7 +6238,7 @@ end;
 
 procedure TfrmCadProduto.CurrencyEdit4Exit(Sender: TObject);
 var
-  vNomeAux : String;
+  vNomeAux: String;
 begin
   lblCorrugado.Caption := '';
   if CurrencyEdit4.AsInteger > 0 then
