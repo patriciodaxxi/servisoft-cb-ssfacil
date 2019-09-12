@@ -1654,7 +1654,7 @@ begin
       SMDBGrid1.Columns[i].Visible := label4.Enabled
     else
     if (SMDBGrid1.Columns[i].FieldName = 'NOME_FORNECEDOR') then
-      SMDBGrid1.Columns[i].Visible := False
+      SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametrosUSA_PRODUTO_FORNECEDOR.AsString <> 'N')
     else
     if (SMDBGrid1.Columns[i].FieldName = 'PRECO_CUSTO_TOTAL') then
       SMDBGrid1.Columns[i].Visible := label4.Enabled
@@ -1932,14 +1932,14 @@ var
 begin
   SMDBGrid1.DisableScroll;
 
-  if fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S' then
+  {if fDMCadProduto.qParametros_LoteLOTE_CALCADO_NOVO.AsString = 'S' then
   begin
     for i := 1 to SMDBGrid1.ColCount - 2 do
     begin
       if (SMDBGrid1.Columns[i].FieldName = 'NOME_FORNECEDOR') then
         SMDBGrid1.Columns[i].Visible := (ComboBox2.ItemIndex = 1);
     end;
-  end;
+  end;}
 
   fDMCadProduto.cdsProduto_Consulta.Close;
   fDMCadProduto.sdsProduto_Consulta.CommandText := fDMCadProduto.ctConsulta;
