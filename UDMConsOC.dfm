@@ -287,7 +287,7 @@ object DMConsOC: TDMConsOC
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 528
+    Left = 490
     Top = 280
   end
   object cdsFilial: TClientDataSet
@@ -295,7 +295,7 @@ object DMConsOC: TDMConsOC
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 592
+    Left = 522
     Top = 280
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
@@ -312,7 +312,7 @@ object DMConsOC: TDMConsOC
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 648
+    Left = 562
     Top = 280
   end
   object sdsProduto: TSQLDataSet
@@ -762,21 +762,21 @@ object DMConsOC: TDMConsOC
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 72
-    Top = 464
+    Left = 75
+    Top = 479
   end
   object dspFuncionario: TDataSetProvider
     DataSet = sdsFuncionario
-    Left = 104
-    Top = 464
+    Left = 107
+    Top = 479
   end
   object cdsFuncionario: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFuncionario'
-    Left = 144
-    Top = 464
+    Left = 147
+    Top = 479
     object cdsFuncionarioCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -788,8 +788,8 @@ object DMConsOC: TDMConsOC
   end
   object dsFuncionario: TDataSource
     DataSet = cdsFuncionario
-    Left = 184
-    Top = 464
+    Left = 187
+    Top = 479
   end
   object sdsOC_Projeto: TSQLDataSet
     NoMetadata = True
@@ -816,7 +816,7 @@ object DMConsOC: TDMConsOC
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 88
+    Left = 89
     Top = 272
   end
   object dspOC_Projeto: TDataSetProvider
@@ -909,5 +909,190 @@ object DMConsOC: TDMConsOC
     DataSet = cdsOC_Projeto
     Left = 304
     Top = 272
+  end
+  object sdsOC_Projeto_Acum: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT PED.id_cliente, PED.ID, PED.dtemissao, PED.NUM_PEDIDO,'#13#10'P' +
+      'ED.filial, FIL.NOME NOME_FILIAL, FIL.nome_interno NOME_FILIAL_IN' +
+      'T,'#13#10'FORN.NOME NOME_FORNECEDOR, FORN.FANTASIA, PED.VLR_TOTAL,'#13#10'FU' +
+      'N.NOME NOME_FUNCIONARIO, CC.DESCRICAO NOME_PROJETO,'#13#10'SUM(((ITE.V' +
+      'LR_UNITARIO - ITE.VLR_DESCONTO) * PCLI.QTD) - ITE.vlr_descontora' +
+      'teio) VLR_PROJETO,'#13#10'PCLI.id_centrocusto, CC.vlr_contrato, CC.num' +
+      '_contrato'#13#10'FROM PEDIDO PED'#13#10'INNER JOIN PEDIDO_ITEM ITE'#13#10'ON PED.I' +
+      'D = ITE.ID'#13#10'INNER JOIN PEDIDO_CLI PCLI'#13#10'ON ITE.ID = PCLI.ID'#13#10'AND' +
+      ' ITE.ITEM = PCLI.ITEM'#13#10'INNER JOIN FILIAL FIL'#13#10'ON PED.FILIAL = FI' +
+      'L.id'#13#10'INNER JOIN PESSOA FORN'#13#10'ON PED.id_cliente = FORN.CODIGO'#13#10'L' +
+      'EFT JOIN FUNCIONARIO FUN'#13#10'ON PED.ID_SOLICITANTE = FUN.CODIGO'#13#10'LE' +
+      'FT JOIN CENTROCUSTO CC'#13#10'ON PCLI.ID_CENTROCUSTO = CC.ID'#13#10'GROUP BY' +
+      ' PED.id_cliente, PED.ID, PED.dtemissao, PED.NUM_PEDIDO,'#13#10'PED.fil' +
+      'ial, FIL.NOME, FIL.nome_interno,'#13#10'FORN.NOME, FORN.FANTASIA, PED.' +
+      'VLR_TOTAL,'#13#10'FUN.NOME, CC.DESCRICAO, PCLI.id_centrocusto,'#13#10'CC.vlr' +
+      '_contrato, CC.num_contrato'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 80
+    Top = 358
+  end
+  object dspOC_Projeto_Acum: TDataSetProvider
+    DataSet = sdsOC_Projeto_Acum
+    Left = 160
+    Top = 357
+  end
+  object dsOC_Projeto_Acum: TDataSource
+    DataSet = cdsOC_Projeto_Acum
+    Left = 296
+    Top = 357
+  end
+  object cdsOC_Projeto_Acum: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspOC_Projeto_Acum'
+    Left = 225
+    Top = 357
+    object cdsOC_Projeto_AcumID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object cdsOC_Projeto_AcumID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsOC_Projeto_AcumDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsOC_Projeto_AcumNUM_PEDIDO: TIntegerField
+      FieldName = 'NUM_PEDIDO'
+    end
+    object cdsOC_Projeto_AcumFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+    object cdsOC_Projeto_AcumNOME_FILIAL: TStringField
+      FieldName = 'NOME_FILIAL'
+      Size = 60
+    end
+    object cdsOC_Projeto_AcumNOME_FILIAL_INT: TStringField
+      FieldName = 'NOME_FILIAL_INT'
+      Size = 30
+    end
+    object cdsOC_Projeto_AcumNOME_FORNECEDOR: TStringField
+      FieldName = 'NOME_FORNECEDOR'
+      Size = 60
+    end
+    object cdsOC_Projeto_AcumFANTASIA: TStringField
+      FieldName = 'FANTASIA'
+      Size = 30
+    end
+    object cdsOC_Projeto_AcumVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+    end
+    object cdsOC_Projeto_AcumNOME_FUNCIONARIO: TStringField
+      FieldName = 'NOME_FUNCIONARIO'
+      Size = 50
+    end
+    object cdsOC_Projeto_AcumNOME_PROJETO: TStringField
+      FieldName = 'NOME_PROJETO'
+      Size = 50
+    end
+    object cdsOC_Projeto_AcumVLR_PROJETO: TFloatField
+      FieldName = 'VLR_PROJETO'
+    end
+    object cdsOC_Projeto_AcumID_CENTROCUSTO: TIntegerField
+      FieldName = 'ID_CENTROCUSTO'
+      Required = True
+    end
+    object cdsOC_Projeto_AcumVLR_CONTRATO: TFloatField
+      FieldName = 'VLR_CONTRATO'
+    end
+    object cdsOC_Projeto_AcumNUM_CONTRATO: TStringField
+      FieldName = 'NUM_CONTRATO'
+      Size = 30
+    end
+  end
+  object frxReport1: TfrxReport
+    Tag = 1
+    Version = '5.6.8'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 42052.436473541700000000
+    ReportOptions.LastChange = 43704.605862685190000000
+    ScriptLanguage = 'PascalScript'
+    StoreInDFM = False
+    OnReportPrint = 'frxReportOnReportPrint'
+    Left = 488
+    Top = 156
+  end
+  object frxMailExport1: TfrxMailExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    ShowExportDialog = True
+    SmtpPort = 25
+    UseIniFile = True
+    TimeOut = 60
+    ConfurmReading = False
+    UseMAPI = SMTP
+    MAPISendFlag = 0
+    Left = 528
+    Top = 156
+  end
+  object frxPDFExport1: TfrxPDFExport
+    UseFileCache = True
+    ShowProgress = True
+    OverwritePrompt = False
+    DataOnly = False
+    PrintOptimized = False
+    Outline = False
+    Background = False
+    HTMLTags = True
+    Quality = 95
+    Transparency = False
+    Author = 'FastReport'
+    Subject = 'FastReport PDF export'
+    ProtectionFlags = [ePrint, eModify, eCopy, eAnnot]
+    HideToolbar = False
+    HideMenubar = False
+    HideWindowUI = False
+    FitWindow = False
+    CenterWindow = False
+    PrintScaling = False
+    PdfA = False
+    Left = 559
+    Top = 156
+  end
+  object frxRichObject1: TfrxRichObject
+    Left = 592
+    Top = 156
+  end
+  object frxOC_Projeto_Acum: TfrxDBDataset
+    UserName = 'frxOC_Projeto_Acum'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID_CLIENTE=ID_CLIENTE'
+      'ID=ID'
+      'DTEMISSAO=DTEMISSAO'
+      'NUM_PEDIDO=NUM_PEDIDO'
+      'FILIAL=FILIAL'
+      'NOME_FILIAL=NOME_FILIAL'
+      'NOME_FILIAL_INT=NOME_FILIAL_INT'
+      'NOME_FORNECEDOR=NOME_FORNECEDOR'
+      'FANTASIA=FANTASIA'
+      'VLR_TOTAL=VLR_TOTAL'
+      'NOME_FUNCIONARIO=NOME_FUNCIONARIO'
+      'NOME_PROJETO=NOME_PROJETO'
+      'VLR_PROJETO=VLR_PROJETO'
+      'ID_CENTROCUSTO=ID_CENTROCUSTO'
+      'VLR_CONTRATO=VLR_CONTRATO'
+      'NUM_CONTRATO=NUM_CONTRATO')
+    DataSource = dsOC_Projeto_Acum
+    BCDToCurrency = False
+    Left = 480
+    Top = 201
   end
 end
