@@ -16,6 +16,7 @@ object DMCadCondPgto: TDMCadCondPgto
     Top = 32
     object sdsCondPgtoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsCondPgtoNOME: TStringField
@@ -66,9 +67,10 @@ object DMCadCondPgto: TDMCadCondPgto
   end
   object dspCondPgto: TDataSetProvider
     DataSet = sdsCondPgto
+    UpdateMode = upWhereKeyOnly
     OnUpdateError = dspCondPgtoUpdateError
-    Left = 192
-    Top = 32
+    Left = 190
+    Top = 31
   end
   object cdsCondPgto: TClientDataSet
     Aggregates = <>
@@ -80,11 +82,13 @@ object DMCadCondPgto: TDMCadCondPgto
     Top = 32
     object cdsCondPgtoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCondPgtoNOME: TStringField
       DisplayLabel = 'Nome'
       FieldName = 'NOME'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Size = 40
     end
     object cdsCondPgtoTIPO: TStringField
@@ -161,10 +165,12 @@ object DMCadCondPgto: TDMCadCondPgto
     Top = 176
     object sdsCondPgto_DiaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsCondPgto_DiaITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsCondPgto_DiaQTDDIAS: TIntegerField
@@ -180,14 +186,16 @@ object DMCadCondPgto: TDMCadCondPgto
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     Left = 208
-    Top = 176
+    Top = 175
     object cdsCondPgto_DiaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCondPgto_DiaITEM: TIntegerField
       DisplayLabel = 'Item'
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsCondPgto_DiaQTDDIAS: TIntegerField
