@@ -1307,6 +1307,12 @@ type
     cdsPessoa_FiscalDRAW_ENQIPI: TIntegerField;
     cdsPessoa_FiscalDRAW_PERC_DESCONTO: TFloatField;
     cdsPessoa_FiscalDRAW_POSSUI: TStringField;
+    qFilial_Rel: TSQLQuery;
+    qFilial_RelID: TIntegerField;
+    qFilial_RelITEM: TIntegerField;
+    qFilial_RelTIPO: TSmallintField;
+    qFilial_RelCAMINHO: TStringField;
+    qFilial_RelPOSICAO: TSmallintField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

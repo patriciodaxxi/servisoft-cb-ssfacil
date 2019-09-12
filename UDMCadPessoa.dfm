@@ -4169,7 +4169,7 @@ object DMCadPessoa: TDMCadPessoa
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42180.708929571800000000
-    ReportOptions.LastChange = 43167.480050347200000000
+    ReportOptions.LastChange = 43720.462883055550000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -7304,6 +7304,52 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
+    end
+  end
+  object qFilial_Rel: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'TIPO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'POSICAO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT *'
+      'FROM FILIAL_RELATORIOS'
+      'WHERE ID = :ID'
+      '      AND TIPO = :TIPO'
+      '      AND POSICAO = :POSICAO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1056
+    Top = 363
+    object qFilial_RelID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qFilial_RelITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object qFilial_RelTIPO: TSmallintField
+      FieldName = 'TIPO'
+    end
+    object qFilial_RelCAMINHO: TStringField
+      FieldName = 'CAMINHO'
+      Size = 150
+    end
+    object qFilial_RelPOSICAO: TSmallintField
+      FieldName = 'POSICAO'
     end
   end
 end

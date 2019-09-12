@@ -3,14 +3,11 @@ unit uCadPessoa;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, RzTabs, StdCtrls, DBCtrls, RzButton, db, RxDBComb, RxLookup, Mask,
-  Grids, DateUtils, DBGrids, SMDBGrid, Buttons, ExtCtrls, UCBase, uDmCadPessoa,
-  RzDBChk, RzRadChk, UNFe_ConsultaCadastro, RzPanel, ToolEdit, RXDBCtrl,
-  UConsPessoa_Fat, UConsPessoa_Fin, UCadPessoa_Servico, RzLstBox, ComObj,
-  UCadPessoa_Servico_Int, NxCollection, dbXPress, SqlExpr, UConsCNPJ_ACBR,
-  UConsCPF_ACBR, ACBrBase, ACBrSocket, Menus, ComCtrls, RzChkLst,
-  ACBrConsultaCPF, UConsPessoa_Prod, CurrEdit, uConsAgenda;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, RzTabs, StdCtrls, DBCtrls, RzButton, db,
+  RxDBComb, RxLookup, Mask, Grids, DateUtils, DBGrids, SMDBGrid, Buttons, ExtCtrls, UCBase, uDmCadPessoa, RzDBChk, RzRadChk,
+  UNFe_ConsultaCadastro, RzPanel, ToolEdit, RXDBCtrl,   UConsPessoa_Fat, UConsPessoa_Fin, UCadPessoa_Servico, RzLstBox, ComObj,
+  UCadPessoa_Servico_Int, NxCollection, dbXPress, SqlExpr, UConsCNPJ_ACBR, UConsCPF_ACBR, ACBrBase, ACBrSocket, Menus, ComCtrls,
+  RzChkLst, ACBrConsultaCPF, UConsPessoa_Prod, CurrEdit, uConsAgenda;
 
 type
   TfrmCadPessoa = class(TForm)
@@ -585,6 +582,7 @@ type
     RxDBLookupCombo47: TRxDBLookupCombo;
     DBEdit111: TDBEdit;
     edtCod_EnqIPI_DrawBack: TEdit;
+    Personalizadonafilial1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -700,6 +698,7 @@ type
     procedure RzDBCheckBox3Click(Sender: TObject);
     procedure edtCod_EnqIPI_DrawBackKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure Personalizadonafilial1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -2581,7 +2580,7 @@ end;
 
 procedure TfrmCadPessoa.btnCopiar_FilClick(Sender: TObject);
 var
-  vItem : Integer;
+  vItem: Integer;
 begin
   fDMCadPessoa.cdsPessoa_Fil.Last;
   vItem := fDMCadPessoa.cdsPessoa_FilITEM.AsInteger;
@@ -2603,7 +2602,7 @@ end;
 
 procedure TfrmCadPessoa.prc_Habilitar;
 var
-  i : Integer;
+  i: Integer;
 begin
   TS_Consulta.TabEnabled       := not(TS_Consulta.TabEnabled);
   btnAlterar.Enabled           := not(btnAlterar.Enabled);
@@ -2671,6 +2670,29 @@ begin
     edtCod_EnqIPI_DrawBack.Clear;
     prc_Abrir_EnqIPI(fDMCadPessoa.cdsPessoa_FiscalDRAW_ENQIPI.AsInteger);
     edtCod_EnqIPI_DrawBack.Text := fDMCadPessoa.qEnqIPICODIGO.AsString;
+  end;
+end;
+
+procedure TfrmCadPessoa.Personalizadonafilial1Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  fDMCadPessoa.qFilial_Rel.Close;
+  fDMCadPessoa.qFilial_Rel.ParamByName('ID').AsInteger      := 1;
+  fDMCadPessoa.qFilial_Rel.ParamByName('TIPO').AsInteger    := 14;
+  fDMCadPessoa.qFilial_Rel.ParamByName('POSICAO').AsInteger := 1;
+  fDMCadPessoa.qFilial_Rel.Open;
+  if trim(fDMCadPessoa.qFilial_RelCAMINHO.AsString) <> '' then
+  begin
+    vArq := fDMCadPessoa.qFilial_RelCAMINHO.AsString;
+    if FileExists(vArq) then
+      fDMCadPessoa.frxReport1.Report.LoadFromFile(vArq)
+    else
+    begin
+      ShowMessage('Relatório não localizado! ' + vArq);
+      Exit;
+    end;
+    fDMCadPessoa.frxReport1.ShowReport;
   end;
 end;
 

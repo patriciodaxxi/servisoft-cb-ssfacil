@@ -70,6 +70,7 @@ type
     procedure SpeedButton8Click(Sender: TObject);
     procedure DBCheckBox1Click(Sender: TObject);
     procedure NxButton1Click(Sender: TObject);
+    procedure rxdbTamanhoEnter(Sender: TObject);
   private
     { Private declarations }
     fDMCadGrade: TDMCadGrade;
@@ -321,6 +322,11 @@ begin
     rxdbTamanho_USA.Value := fDMCadGrade.cdsGrade_ItensTAMANHO_USA.AsString;
     rxdbTamanho_EUR.Value := fDMCadGrade.cdsGrade_ItensTAMANHO_EUR.AsString;
   end;
+end;
+
+procedure TfrmCadGrade.rxdbTamanhoEnter(Sender: TObject);
+begin
+  fDmCadGrade.cdsTamanho.IndexFieldNames := 'TAMANHO';
 end;
 
 end.

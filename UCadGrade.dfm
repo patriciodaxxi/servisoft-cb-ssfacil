@@ -21,9 +21,9 @@ object frmCadGrade: TfrmCadGrade
   object RZPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 691
-    Height = 513
-    ActivePage = TS_Cadastro
+    Width = 683
+    Height = 505
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -31,7 +31,7 @@ object frmCadGrade: TfrmCadGrade
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -39,8 +39,8 @@ object frmCadGrade: TfrmCadGrade
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 80
-        Width = 687
-        Height = 234
+        Width = 679
+        Height = 226
         Align = alClient
         Ctl3D = False
         DataSource = DMCadGrade.dsGrade
@@ -93,7 +93,7 @@ object frmCadGrade: TfrmCadGrade
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 687
+        Width = 679
         Height = 32
         Align = alTop
         Color = clSilver
@@ -321,8 +321,8 @@ object frmCadGrade: TfrmCadGrade
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 473
-        Width = 687
+        Top = 465
+        Width = 679
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -338,7 +338,7 @@ object frmCadGrade: TfrmCadGrade
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 687
+        Width = 679
         Height = 48
         Align = alTop
         Color = clSilver
@@ -435,8 +435,8 @@ object frmCadGrade: TfrmCadGrade
       end
       object RzGroupBox2: TRzGroupBox
         Left = 0
-        Top = 314
-        Width = 687
+        Top = 306
+        Width = 679
         Height = 159
         Align = alBottom
         BorderColor = clNavy
@@ -458,7 +458,7 @@ object frmCadGrade: TfrmCadGrade
         object VDBGrid2: TVDBGrid
           Left = 6
           Top = 19
-          Width = 675
+          Width = 667
           Height = 134
           Align = alClient
           Color = clSilver
@@ -533,7 +533,7 @@ object frmCadGrade: TfrmCadGrade
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 687
+        Width = 679
         Height = 35
         Align = alTop
         Color = 8404992
@@ -759,7 +759,7 @@ object frmCadGrade: TfrmCadGrade
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 687
+        Width = 679
         Height = 158
         Align = alTop
         Enabled = False
@@ -798,7 +798,7 @@ object frmCadGrade: TfrmCadGrade
         object GroupBox1: TGroupBox
           Left = 1
           Top = 84
-          Width = 685
+          Width = 677
           Height = 73
           Align = alBottom
           Caption = ' Tamanhos da grade '
@@ -832,7 +832,7 @@ object frmCadGrade: TfrmCadGrade
               Top = 17
               Width = 144
               Height = 38
-              DropDownCount = 8
+              DropDownCount = 15
               Ctl3D = False
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clMaroon
@@ -845,6 +845,7 @@ object frmCadGrade: TfrmCadGrade
               ParentCtl3D = False
               ParentFont = False
               TabOrder = 0
+              OnEnter = rxdbTamanhoEnter
             end
           end
           object pnlTamanho_USA: TPanel
@@ -1241,7 +1242,7 @@ object frmCadGrade: TfrmCadGrade
       object VDBGrid1: TVDBGrid
         Left = 0
         Top = 193
-        Width = 687
+        Width = 679
         Height = 156
         Align = alTop
         Ctl3D = False

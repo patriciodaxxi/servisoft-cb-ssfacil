@@ -1,7 +1,7 @@
 object frmCadFilialRelatorios: TfrmCadFilialRelatorios
   Left = 416
   Top = 281
-  Width = 656
+  Width = 575
   Height = 226
   Caption = 'frmCadFilialRelatorios'
   Color = clBtnFace
@@ -58,11 +58,11 @@ object frmCadFilialRelatorios: TfrmCadFilialRelatorios
   object Panel1: TPanel
     Left = 0
     Top = 151
-    Width = 640
+    Width = 559
     Height = 36
     Align = alBottom
     Color = 8404992
-    TabOrder = 5
+    TabOrder = 6
     object BitBtn1: TBitBtn
       Left = 194
       Top = 6
@@ -139,6 +139,7 @@ object frmCadFilialRelatorios: TfrmCadFilialRelatorios
     Ctl3D = True
     DataField = 'TIPO'
     DataSource = DMCadFilial.dsFilialRelatorios
+    DropDownCount = 18
     EnableValues = True
     ItemHeight = 13
     Items.Strings = (
@@ -154,7 +155,8 @@ object frmCadFilialRelatorios: TfrmCadFilialRelatorios
       'R'#211'TULO POR GRADE'
       'R'#211'TULO NA NOTA (CORRUGADO)'
       'CONSULTA PEDIDO'
-      'RECIBO NF')
+      'RECIBO NF'
+      'PESSOAS')
     ParentCtl3D = False
     TabOrder = 1
     Values.Strings = (
@@ -170,7 +172,8 @@ object frmCadFilialRelatorios: TfrmCadFilialRelatorios
       '10'
       '11'
       '12'
-      '13')
+      '13'
+      '14')
   end
   object FilenameEdit1: TFilenameEdit
     Left = 104
@@ -233,7 +236,7 @@ object frmCadFilialRelatorios: TfrmCadFilialRelatorios
     Caption = 'Gerar Tamanho'
     DataField = 'GERAR_TAMANHO'
     DataSource = DMCadFilial.dsFilialRelatorios
-    TabOrder = 6
+    TabOrder = 5
     ValueChecked = 'S'
     ValueUnchecked = 'N'
   end
