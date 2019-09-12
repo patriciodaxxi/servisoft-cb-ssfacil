@@ -403,7 +403,6 @@ object frmConsOC: TfrmConsOC
             FieldName = 'REFERENCIA'
             Title.Alignment = taCenter
             Title.Caption = 'Refer'#234'ncia'
-            Width = 64
             Visible = True
           end
           item
@@ -442,7 +441,6 @@ object frmConsOC: TfrmConsOC
             FieldName = 'QTD_FATURADO'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd Entregue'
-            Width = 64
             Visible = True
           end
           item
@@ -450,7 +448,6 @@ object frmConsOC: TfrmConsOC
             FieldName = 'QTD_RESTANTE'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Pendente'
-            Width = 64
             Visible = True
           end
           item
@@ -458,7 +455,6 @@ object frmConsOC: TfrmConsOC
             FieldName = 'QTD_CANCELADO'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Cancelada'
-            Width = 64
             Visible = True
           end
           item
@@ -490,7 +486,6 @@ object frmConsOC: TfrmConsOC
             FieldName = 'ID_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
-            Width = 64
             Visible = True
           end
           item
@@ -840,224 +835,403 @@ object frmConsOC: TfrmConsOC
           TabOrder = 0
         end
       end
-      object SMDBGrid2: TSMDBGrid
+      object RzPageControl2: TRzPageControl
         Left = 0
         Top = 26
         Width = 894
         Height = 397
+        ActivePage = TS_Projeto_Res
+        ActivePageDefault = TS_Projeto_Det
         Align = alClient
-        BorderStyle = bsNone
-        Ctl3D = False
-        DataSource = DMConsOC.dsOC_Projeto
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        ParentCtl3D = False
-        ParentFont = False
-        ReadOnly = True
+        TabIndex = 1
         TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = [fsBold]
-        OnTitleClick = SMDBGrid2TitleClick
-        Flat = True
-        BandsFont.Charset = DEFAULT_CHARSET
-        BandsFont.Color = clWindowText
-        BandsFont.Height = -11
-        BandsFont.Name = 'MS Sans Serif'
-        BandsFont.Style = []
-        Groupings = <>
-        GridStyle.Style = gsCustom
-        GridStyle.OddColor = clWindow
-        GridStyle.EvenColor = clWindow
-        TitleHeight.PixelCount = 24
-        FooterColor = clBtnFace
-        ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
-        OnGetCellParams = SMDBGrid4GetCellParams
-        RegistryKey = 'Software\Scalabium'
-        RegistrySection = 'SMDBGrid'
-        WidthOfIndicator = 11
-        DefaultRowHeight = 17
-        ScrollBars = ssHorizontal
-        ColCount = 15
-        RowCount = 2
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'NOME_PROJETO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Projeto'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 199
-            Visible = True
+        FixedDimension = 19
+        object TS_Projeto_Det: TRzTabSheet
+          Color = 16755027
+          Caption = 'Detalhado'
+          object SMDBGrid2: TSMDBGrid
+            Left = 0
+            Top = 0
+            Width = 890
+            Height = 374
+            Align = alClient
+            BorderStyle = bsNone
+            Ctl3D = False
+            DataSource = DMConsOC.dsOC_Projeto
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = [fsBold]
+            OnTitleClick = SMDBGrid2TitleClick
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 15
+            RowCount = 2
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'NOME_PROJETO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Projeto'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 199
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DTENTREGA_ITEM'
+                Title.Alignment = taCenter
+                Title.Caption = 'Dt. Entrega'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 87
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FILIAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Filial'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 36
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NUM_PEDIDO'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#186' OC'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 78
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DTEMISSAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Dt. Emiss'#227'o'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 69
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'REFERENCIA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Refer'#234'ncia'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 92
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOMEPRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Produto'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 191
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'QTD'
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtd.'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 95
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_PROJETO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Projeto'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_FUNCIONARIO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Solicitante'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_FORNECEDOR'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Fornecedor'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_FILIAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Filial'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_CONTRATO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Contrato'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'NUM_CONTRATO'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#186' Contrato'
+                Visible = True
+              end>
           end
-          item
-            Expanded = False
-            FieldName = 'DTENTREGA_ITEM'
-            Title.Alignment = taCenter
-            Title.Caption = 'Dt. Entrega'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 87
-            Visible = True
+        end
+        object TS_Projeto_Res: TRzTabSheet
+          Color = 16755027
+          Caption = 'Resumido'
+          object SMDBGrid3: TSMDBGrid
+            Left = 0
+            Top = 0
+            Width = 890
+            Height = 374
+            Align = alClient
+            BorderStyle = bsNone
+            Ctl3D = False
+            DataSource = DMConsOC.dsOC_Projeto_Acum
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = [fsBold]
+            OnTitleClick = SMDBGrid3TitleClick
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 11
+            RowCount = 2
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'NOME_PROJETO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Projeto'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 199
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FILIAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Filial'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 36
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NUM_PEDIDO'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#186' OC'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 78
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DTEMISSAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Dt. Emiss'#227'o'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 69
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_PROJETO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Projeto'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_FORNECEDOR'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Fornecedor'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 311
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_FILIAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Filial'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_CONTRATO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Contrato'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'NUM_CONTRATO'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#186' Contrato'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_FUNCIONARIO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Solicitante'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -11
+                Title.Font.Name = 'MS Sans Serif'
+                Title.Font.Style = []
+                Width = 227
+                Visible = True
+              end>
           end
-          item
-            Expanded = False
-            FieldName = 'FILIAL'
-            Title.Alignment = taCenter
-            Title.Caption = 'Filial'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 36
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NUM_PEDIDO'
-            Title.Alignment = taCenter
-            Title.Caption = 'N'#186' OC'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 78
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DTEMISSAO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Dt. Emiss'#227'o'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 69
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'REFERENCIA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Refer'#234'ncia'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 92
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMEPRODUTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Produto'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 191
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'QTD'
-            Title.Alignment = taCenter
-            Title.Caption = 'Qtd.'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 95
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'VLR_PROJETO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Vlr. Projeto'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_FUNCIONARIO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Solicitante'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_FORNECEDOR'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Fornecedor'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 64
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME_FILIAL'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nome Filial'
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = []
-            Width = 64
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'VLR_CONTRATO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Vlr. Contrato'
-            Width = 64
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'NUM_CONTRATO'
-            Title.Alignment = taCenter
-            Title.Caption = 'N'#186' Contrato'
-            Width = 64
-            Visible = True
-          end>
+        end
       end
     end
   end

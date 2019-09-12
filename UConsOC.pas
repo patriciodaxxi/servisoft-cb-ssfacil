@@ -45,7 +45,6 @@ type
     Panel5: TPanel;
     Label11: TLabel;
     RxDBLookupCombo6: TRxDBLookupCombo;
-    SMDBGrid2: TSMDBGrid;
     ckImpSolicitante: TCheckBox;
     Panel3: TPanel;
     BitBtn3: TBitBtn;
@@ -56,6 +55,11 @@ type
     Label50: TLabel;
     Label10: TLabel;
     CurrencyEdit2: TCurrencyEdit;
+    RzPageControl2: TRzPageControl;
+    TS_Projeto_Det: TRzTabSheet;
+    TS_Projeto_Res: TRzTabSheet;
+    SMDBGrid2: TSMDBGrid;
+    SMDBGrid3: TSMDBGrid;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -75,6 +79,7 @@ type
     procedure SMDBGrid4TitleClick(Column: TColumn);
     procedure SMDBGrid2TitleClick(Column: TColumn);
     procedure BitBtn3Click(Sender: TObject);
+    procedure SMDBGrid3TitleClick(Column: TColumn);
   private
     { Private declarations }
     fDMConsOC: TDMConsOC;
@@ -86,6 +91,7 @@ type
     procedure prc_Consultar;
     procedure prc_Consultar_Pedido;
     procedure prc_Consultar_Projeto;
+    procedure prc_Consultar_Projeto_Acum;
 
   public
     { Public declarations }
@@ -110,7 +116,12 @@ begin
     prc_Consultar_Pedido
   else
   if RzPageControl1.ActivePage = TS_Projeto then
-    prc_Consultar_Projeto;
+  begin
+    if RzPageControl2.ActivePage = TS_Projeto_Det then
+      prc_Consultar_Projeto
+    else
+      prc_Consultar_Projeto_Acum;
+  end;
 end;
 
 procedure TfrmConsOC.prc_Consultar;
@@ -241,6 +252,7 @@ end;
 procedure TfrmConsOC.btnImprimirClick(Sender: TObject);
 var
   vOpcaoAux : String;
+  vArq : String;
 begin
   if ckImpSolicitante.Checked then
   begin
@@ -310,8 +322,9 @@ begin
   else
   if RzPageControl1.ActivePage = TS_Projeto then
   begin
-    SMDBGrid2.DisableScroll;
+    if RzPageControl2.ActivePage = TS_Projeto_Det then
     begin
+      SMDBGrid2.DisableScroll;
       fRelOC_Projeto := TfRelOC_Projeto.Create(Self);
       fRelOC_Projeto.fDMConsOC        := fDMConsOC;
       fRelOC_Projeto.vImp_Vlr         := ckMostrarPreco.Checked;
@@ -319,8 +332,24 @@ begin
       fRelOC_Projeto.RLReport1.PreviewModal;
       fRelOC_Projeto.RLReport1.Free;
       FreeAndNil(fRelOC_Projeto);
+      SMDBGrid2.EnableScroll;
+    end
+    else
+    begin
+      fDMConsOC.cdsOC_Projeto_Acum.IndexFieldNames := 'NOME_PROJETO;NUM_PEDIDO';
+      vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\OC_Projeto_Acum.fr3';
+      if FileExists(vArq) then
+        fDMConsOC.frxReport1.Report.LoadFromFile(vArq)
+      else
+      begin
+        ShowMessage('Relatorio não localizado! ' + vArq);
+        Exit;
+      end;
+      SMDBGrid3.DisableScroll;
+      fDMConsOC.frxReport1.variables['Opcao_Imp'] := QuotedStr(vOpcaoAux);
+      fDMConsOC.frxReport1.ShowReport;
+      SMDBGrid3.EnableScroll;
     end;
-    SMDBGrid2.EnableScroll;
   end;
 end;
 
@@ -553,6 +582,68 @@ begin
   finally
     FreeAndNil(fDMConsPedido);
   end;
+end;
+
+procedure TfrmConsOC.prc_Consultar_Projeto_Acum;
+var
+  vComando : String;
+  vOpcaoDtEntrega : String;
+  vComandoAux : String;
+  i : Integer;
+begin
+  fDMConsOC.cdsOC_Projeto_Acum.Close;
+  i := PosEx('GROUP',fDMConsOC.ctOC_Projeto_Acum,0);
+  vComandoAux := copy(fDMConsOC.ctOC_Projeto_Acum,i,Length(fDMConsOC.ctOC_Projeto_Acum) - i + 1);
+  vComando    := copy(fDMConsOC.ctOC_Projeto_Acum,1,i-1);
+
+  vComando := vComando + ' WHERE PED.TIPO_REG = ' + QuotedStr('C');
+  if RxDBLookupCombo1.Text <> '' then
+    vComando := vComando + ' AND PED.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
+  if RxDBLookupCombo2.Text <> '' then
+    vComando := vComando + ' AND PED.ID_CLIENTE = ' + IntToStr(RxDBLookupCombo2.KeyValue);
+  if RxDBLookupCombo3.Text <> '' then
+    vComando := vComando + ' AND ITE.ID_PRODUTO = ' + IntToStr(RxDBLookupCombo3.KeyValue);
+  if RxDBLookupCombo5.Text <> '' then
+    vComando := vComando + ' AND PED.ID_SOLICITANTE = ' + IntToStr(RxDBLookupCombo5.KeyValue);
+  if RxDBLookupCombo6.Text <> '' then
+    vComando := vComando + ' AND PCLI.ID_CENTROCUSTO = ' + IntToStr(RxDBLookupCombo6.KeyValue);
+  if DateEdit1.Date > 10 then
+    vComando := vComando + ' AND PED.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date));
+  if DateEdit2.Date > 10 then
+    vComando := vComando + ' AND PED.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.date));
+  vOpcaoDtEntrega := '';
+  if fDMConsOC.qParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P' then
+    vOpcaoDtEntrega := 'PED.DTENTREGA'
+  else
+    vOpcaoDtEntrega := 'ITE.DTENTREGA';
+  if DateEdit3.Date > 10 then
+    vComando := vComando + ' AND ' + vOpcaoDtEntrega + ' >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit3.date));
+  if DateEdit4.Date > 10 then
+    vComando := vComando + ' AND ' + vOpcaoDtEntrega + ' <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit4.date));
+
+  if CurrencyEdit1.AsInteger > 0 then
+    vComando := vComando + ' AND PED.NUM_PEDIDO = ' + CurrencyEdit1.Text;
+
+  case RadioGroup2.ItemIndex of
+    0 : vComando := vComando + ' AND ITE.QTD_RESTANTE > 0 ';
+    1 : vComando := vComando + ' AND ITE.QTD_FATURADO > 0 ';
+  end;
+
+  fDMConsOC.sdsOC_Projeto_Acum.CommandText := vComando + '  ' + vComandoAux;
+  fDMConsOC.cdsOC_Projeto_Acum.Open;
+  fDMConsOC.cdsOC_Projeto_Acum.IndexFieldNames := 'NOME_PROJETO;NUM_PEDIDO';
+end;
+
+procedure TfrmConsOC.SMDBGrid3TitleClick(Column: TColumn);
+var
+  i : Integer;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMConsOC.cdsOC_Projeto.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid3.Columns.Count - 1 do
+    if not (SMDBGrid3.Columns.Items[I] = Column) then
+      SMDBGrid3.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.

@@ -3,7 +3,8 @@ unit UDMConsOC;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, frxClass,
+  frxDBSet, frxRich, frxExportPDF, frxExportMail;
 
 type
   TDMConsOC = class(TDataModule)
@@ -197,6 +198,31 @@ type
     cdsFilialNOME_INTERNO: TStringField;
     cdsOC_ProjetoVLR_CONTRATO: TFloatField;
     cdsOC_ProjetoNUM_CONTRATO: TStringField;
+    sdsOC_Projeto_Acum: TSQLDataSet;
+    dspOC_Projeto_Acum: TDataSetProvider;
+    dsOC_Projeto_Acum: TDataSource;
+    cdsOC_Projeto_Acum: TClientDataSet;
+    cdsOC_Projeto_AcumID_CLIENTE: TIntegerField;
+    cdsOC_Projeto_AcumID: TIntegerField;
+    cdsOC_Projeto_AcumDTEMISSAO: TDateField;
+    cdsOC_Projeto_AcumNUM_PEDIDO: TIntegerField;
+    cdsOC_Projeto_AcumFILIAL: TIntegerField;
+    cdsOC_Projeto_AcumNOME_FILIAL: TStringField;
+    cdsOC_Projeto_AcumNOME_FILIAL_INT: TStringField;
+    cdsOC_Projeto_AcumNOME_FORNECEDOR: TStringField;
+    cdsOC_Projeto_AcumFANTASIA: TStringField;
+    cdsOC_Projeto_AcumVLR_TOTAL: TFloatField;
+    cdsOC_Projeto_AcumNOME_FUNCIONARIO: TStringField;
+    cdsOC_Projeto_AcumNOME_PROJETO: TStringField;
+    cdsOC_Projeto_AcumVLR_PROJETO: TFloatField;
+    cdsOC_Projeto_AcumID_CENTROCUSTO: TIntegerField;
+    cdsOC_Projeto_AcumVLR_CONTRATO: TFloatField;
+    cdsOC_Projeto_AcumNUM_CONTRATO: TStringField;
+    frxReport1: TfrxReport;
+    frxMailExport1: TfrxMailExport;
+    frxPDFExport1: TfrxPDFExport;
+    frxRichObject1: TfrxRichObject;
+    frxOC_Projeto_Acum: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -206,6 +232,7 @@ type
     ctPedido_Item : String;
     ctPedido : String;
     ctOC_Projeto : String;
+    ctOC_Projeto_Acum : String;
 
   end;
 
@@ -222,9 +249,10 @@ uses DmdDatabase;
 procedure TDMConsOC.DataModuleCreate(Sender: TObject);
 begin
   cdsOC_Item.Close;
-  ctPedido_Item := sdsOC_Item.CommandText;
-  ctPedido      := sdsOC.CommandText;
-  ctOC_Projeto  := sdsOC_Projeto.CommandText;
+  ctPedido_Item     := sdsOC_Item.CommandText;
+  ctPedido          := sdsOC.CommandText;
+  ctOC_Projeto      := sdsOC_Projeto.CommandText;
+  ctOC_Projeto_Acum := sdsOC_Projeto_Acum.CommandText;
   cdsFilial.Open;
   cdsProduto.Open;
   cdsCentroCusto.Open;
