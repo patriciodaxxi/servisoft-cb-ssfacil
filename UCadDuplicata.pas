@@ -3262,7 +3262,7 @@ begin
   fDmCadDuplicata.mReciboPessoa_Doc.AsString    := fDmCadDuplicata.cdsPessoaCNPJ_CPF.AsString;
 //  fDmCadDuplicata.mReciboFinanceiro_Forma.AsString      := fDmCadDuplicata.cdsDuplicata_ConsultaNOME_FORMAPGTO.AsString;
   fDmCadDuplicata.mReciboFinanceiro_Data.AsString       := fDmCadDuplicata.cdsDuplicata_ConsultaDTULTPAGAMENTO.AsString;
-//  fDmCadDuplicata.mReciboFinanceiro_Descr.AsString      := fDmCadDuplicata.cdsDuplicata_ConsultaHISTORICO_COMPL.AsString;
+  fDmCadDuplicata.mReciboFinanceiro_Descr.AsString      := fDmCadDuplicata.cdsDuplicata_ConsultaDESCRICAO.AsString;
   fDmCadDuplicata.mReciboFinanceiro_Valor.AsString      := FormatFloat('#,###,##0.00',fDmCadDuplicata.cdsDuplicata_ConsultaVLR_PAGO.AsFloat);
   ValorPorExtenso1.Valor := fDmCadDuplicata.cdsDuplicata_ConsultaVLR_PAGO.AsFloat;
   fDmCadDuplicata.mReciboFinanceiro_VlrExtenso.AsString := ValorPorExtenso1.Texto;
