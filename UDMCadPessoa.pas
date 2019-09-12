@@ -1313,6 +1313,7 @@ type
     qFilial_RelTIPO: TSmallintField;
     qFilial_RelCAMINHO: TStringField;
     qFilial_RelPOSICAO: TSmallintField;
+    cdsPessoa_ConsultaCELULAR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
