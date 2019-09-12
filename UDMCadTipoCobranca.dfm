@@ -16,6 +16,7 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     Top = 32
     object sdsTipoCobrancaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsTipoCobrancaNOME: TStringField
@@ -163,6 +164,7 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
   end
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
+    UpdateMode = upWhereKeyOnly
     OnUpdateError = dspTipoCobrancaUpdateError
     Left = 87
     Top = 32
@@ -177,6 +179,7 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     Top = 32
     object cdsTipoCobrancaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTipoCobrancaNOME: TStringField
@@ -377,10 +380,12 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     Top = 152
     object sdsTipoCobranca_ItensID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsTipoCobranca_ItensITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsTipoCobranca_ItensID_CONDPAGTO: TIntegerField
@@ -397,10 +402,12 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     Top = 152
     object cdsTipoCobranca_ItensID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTipoCobranca_ItensITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsTipoCobranca_ItensID_CONDPAGTO: TIntegerField
@@ -410,6 +417,7 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     object cdsTipoCobranca_ItensNome_CondPagto: TStringField
       FieldKind = fkCalculated
       FieldName = 'Nome_CondPagto'
+      ProviderFlags = []
       Size = 50
       Calculated = True
     end
