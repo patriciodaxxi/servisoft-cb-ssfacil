@@ -247,9 +247,9 @@ begin
       else
       if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS_RETIDO.AsFloat)) > 0 then
       begin
-        Det.NestedDataSet.FieldByName('serv.vBCST').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensBASE_CALCULO.AsFloat));
-        Det.NestedDataSet.FieldByName('serv.pISSST').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_ALIQUOTA.AsFloat));
-        Det.NestedDataSet.FieldByName('serv.vISSST').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS_RETIDO.AsFloat));
+        Det.NestedDataSet.FieldByName('ISSST.vBCST').AsFloat  := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensBASE_CALCULO.AsFloat));
+        Det.NestedDataSet.FieldByName('ISSST.pISSST').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpPERC_ALIQUOTA.AsFloat));
+        Det.NestedDataSet.FieldByName('ISSST.vISSST').AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS_RETIDO.AsFloat));
       end;
     end;
     if (StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_Imp_ItensVLR_ISS.AsFloat)) <= 0) and
