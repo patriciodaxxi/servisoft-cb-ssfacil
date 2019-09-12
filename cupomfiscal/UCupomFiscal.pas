@@ -353,13 +353,6 @@ begin
   if vFinaliza then //quando código vazio
     Exit;
 
-  if (Trim(Edit1.Text) <> '') and (fDmCupomFiscal.cdsCupomParametrosUSA_COR_TAMANHO.AsString = 'S') then
-  begin
-    Edit3.Clear;
-    prc_CorTamanho;
-    Edit3.Text := Edit1.Text + ' ' + fDmCupomFiscal.vCombinacao + ' ' + RxDBLookupCombo1.Text;
-  end;
-
   if Edit1.Text = '0' then  //cai no campo para procura por nome
   begin
     Edit3.ReadOnly := False;
@@ -516,8 +509,17 @@ begin
     end;
 
     prc_EnterCodigo;
-    if fDmCupomFiscal.cdsCupomParametrosUSA_COR_TAMANHO.AsString = 'S' then
+
+    if (Trim(Edit1.Text) <> '') and (fDmCupomFiscal.cdsCupomParametrosUSA_COR_TAMANHO.AsString = 'S') then
+    begin
+      Edit3.Clear;
       prc_CorTamanho;
+      Edit3.Text         := Edit1.Text + ' ' + fDmCupomFiscal.vCombinacao + ' ' + RxDBLookupCombo1.Text;
+      pnlTamanho.Visible := True;
+    end;              
+
+//    if fDmCupomFiscal.cdsCupomParametrosUSA_COR_TAMANHO.AsString = 'S' then
+//      prc_CorTamanho;
   end;
 end;
 
@@ -875,9 +877,20 @@ begin
   fDmCupomFiscal.cdsProduto.Locate('ID',vID_Produto,[loCaseInsensitive]);
   if (fDmCupomFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and (trim(RxDBLookupCombo1.Text) = '') then
   begin
-    ShowMessage('Tamanho não informado!');
-    RxDBLookupCombo1.SetFocus;
-    Exit;
+//    ShowMessage('Tamanho não informado!');
+
+    if (Trim(Edit1.Text) <> '') and (fDmCupomFiscal.cdsCupomParametrosUSA_COR_TAMANHO.AsString = 'S') then
+    begin
+      Edit3.Clear;
+      prc_CorTamanho;
+      Edit3.Text         := Edit1.Text + ' ' + fDmCupomFiscal.vCombinacao + ' ' + RxDBLookupCombo1.Text;
+      pnlTamanho.Visible := True;
+    end
+    else
+    begin
+      RxDBLookupCombo1.SetFocus;
+      Exit;
+    end;
   end;
   if CurrencyEdit1.Value <= 0 then
   begin
@@ -1878,6 +1891,7 @@ begin
 
   Edit1.Text             := fDmCupomFiscal.cdsProdutoID.AsString;
   RxDBLookupCombo1.Value := fDmCupomFiscal.vTamanho;
+  pnlTamanho.Visible     := True;
 end;
 
 procedure TfCupomFiscal.DBEdit4KeyDown(Sender: TObject; var Key: Word;

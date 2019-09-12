@@ -112,7 +112,7 @@ object fSel_CorTamanho: TfSel_CorTamanho
     Top = 40
     Width = 145
     Height = 23
-    DropDownCount = 8
+    DropDownCount = 15
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
