@@ -1,6 +1,6 @@
 object frmCadPedido: TfrmCadPedido
-  Left = 127
-  Top = 0
+  Left = 279
+  Top = 17
   Width = 1105
   Height = 710
   Caption = 'Pedido de Venda'
@@ -23,8 +23,8 @@ object frmCadPedido: TfrmCadPedido
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1097
-    Height = 679
+    Width = 1089
+    Height = 671
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -50,8 +50,8 @@ object frmCadPedido: TfrmCadPedido
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 156
-        Width = 1093
-        Height = 429
+        Width = 1085
+        Height = 421
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPedido.dsPedido_Consulta
@@ -94,6 +94,7 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'AMOSTRA'
             Title.Alignment = taCenter
             Title.Caption = 'Amostra'
+            Width = 64
             Visible = True
           end
           item
@@ -110,6 +111,7 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'APROVADO_PED'
             Title.Alignment = taCenter
             Title.Caption = 'Aprovado'
+            Width = 64
             Visible = True
           end
           item
@@ -142,6 +144,7 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'PEDIDO_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Pedido Cliente (OC)'
+            Width = 64
             Visible = True
           end
           item
@@ -156,6 +159,7 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'DTENTREGA'
             Title.Alignment = taCenter
             Title.Caption = 'Data Entrega'
+            Width = 64
             Visible = True
           end
           item
@@ -211,6 +215,7 @@ object frmCadPedido: TfrmCadPedido
             Expanded = False
             FieldName = 'QTD'
             Title.Caption = 'Qtd. Produtos'
+            Width = 64
             Visible = True
           end
           item
@@ -219,6 +224,7 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'FATURADO'
             Title.Alignment = taCenter
             Title.Caption = 'Faturado'
+            Width = 64
             Visible = True
           end
           item
@@ -249,6 +255,7 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'DTAPROVADO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Aprovado'
+            Width = 64
             Visible = True
           end
           item
@@ -264,6 +271,7 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'USUARIO'
             Title.Alignment = taCenter
             Title.Caption = 'Usu'#225'rio'
+            Width = 64
             Visible = True
           end
           item
@@ -287,13 +295,14 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'IMPRESSO'
             Title.Alignment = taCenter
             Title.Caption = 'Impresso'
+            Width = 64
             Visible = True
           end>
       end
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1093
+        Width = 1085
         Height = 126
         Align = alTop
         Color = clSilver
@@ -599,7 +608,7 @@ object frmCadPedido: TfrmCadPedido
           TodayCaption = 'Hoje'
         end
         object gbImpressao: TGroupBox
-          Left = 1007
+          Left = 999
           Top = 1
           Width = 85
           Height = 124
@@ -711,8 +720,8 @@ object frmCadPedido: TfrmCadPedido
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 639
-        Width = 1093
+        Top = 631
+        Width = 1085
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -731,7 +740,7 @@ object frmCadPedido: TfrmCadPedido
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 1093
+        Width = 1085
         Height = 30
         Align = alTop
         Color = clSilver
@@ -1128,8 +1137,8 @@ object frmCadPedido: TfrmCadPedido
       end
       object Panel4: TPanel
         Left = 0
-        Top = 615
-        Width = 1093
+        Top = 607
+        Width = 1085
         Height = 24
         Align = alBottom
         Color = clSilver
@@ -1317,8 +1326,8 @@ object frmCadPedido: TfrmCadPedido
       end
       object pnlTotal: TPanel
         Left = 0
-        Top = 585
-        Width = 1093
+        Top = 577
+        Width = 1085
         Height = 30
         Align = alBottom
         Color = clSilver
@@ -1461,7 +1470,7 @@ object frmCadPedido: TfrmCadPedido
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1093
+        Width = 1085
         Height = 30
         Align = alTop
         Color = 8404992
@@ -1785,7 +1794,7 @@ object frmCadPedido: TfrmCadPedido
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 1093
+        Width = 1085
         Height = 137
         Align = alTop
         Enabled = False
@@ -1793,7 +1802,7 @@ object frmCadPedido: TfrmCadPedido
         object Panel3: TPanel
           Left = 1
           Top = 27
-          Width = 1091
+          Width = 1083
           Height = 109
           Align = alClient
           BevelOuter = bvNone
@@ -2300,7 +2309,7 @@ object frmCadPedido: TfrmCadPedido
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 1091
+          Width = 1083
           Height = 26
           Align = alTop
           Color = clSilver
@@ -2409,8 +2418,8 @@ object frmCadPedido: TfrmCadPedido
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 190
-        Width = 1093
-        Height = 397
+        Width = 1085
+        Height = 389
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -2427,8 +2436,8 @@ object frmCadPedido: TfrmCadPedido
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 53
-            Width = 1089
-            Height = 81
+            Width = 1081
+            Height = 73
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPedido.dsPedido_Itens
@@ -2441,6 +2450,7 @@ object frmCadPedido: TfrmCadPedido
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
+            OnKeyDown = SMDBGrid2KeyDown
             Flat = True
             BandsFont.Charset = DEFAULT_CHARSET
             BandsFont.Color = clWindowText
@@ -2560,6 +2570,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'ENCERADO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Encerado'
+                Width = 64
                 Visible = True
               end
               item
@@ -2617,6 +2628,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'VLR_DESCONTO_CALC'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Desconto'
+                Width = 64
                 Visible = True
               end
               item
@@ -2663,6 +2675,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'QTD_CANCELADO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Qtd. Cancelada'
+                Width = 64
                 Visible = True
               end
               item
@@ -2679,11 +2692,13 @@ object frmCadPedido: TfrmCadPedido
               item
                 Expanded = False
                 FieldName = 'COD_CST'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'COD_IPI'
+                Width = 64
                 Visible = True
               end
               item
@@ -2691,6 +2706,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'QTD_PRODUZIDA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Qtd. Produzida'
+                Width = 64
                 Visible = True
               end
               item
@@ -2698,6 +2714,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'CARIMBO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Carimbo'
+                Width = 64
                 Visible = True
               end
               item
@@ -2705,6 +2722,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'CAIXINHA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Caixinha'
+                Width = 64
                 Visible = True
               end
               item
@@ -2752,6 +2770,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'DTCONFERENCIA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Dt. Confer'#234'ncia'
+                Width = 64
                 Visible = True
               end
               item
@@ -2759,6 +2778,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'HRCONFERENCIA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Hr. Confer'#234'ncia'
+                Width = 64
                 Visible = True
               end
               item
@@ -2766,6 +2786,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'USUARIO_CONF'
                 Title.Alignment = taCenter
                 Title.Caption = 'Usu'#225'rio Confer'#234'ncia'
+                Width = 64
                 Visible = True
               end
               item
@@ -2774,6 +2795,7 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'TAMANHO_CLIENTE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Tam. No Cliente'
+                Width = 64
                 Visible = True
               end
               item
@@ -2782,12 +2804,14 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'COD_COR_CLIENTE'
                 Title.Alignment = taCenter
                 Title.Caption = 'C'#243'd. Cor Cliente'
+                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'COD_PRODUTO_CLIENTE'
                 Title.Alignment = taCenter
+                Width = 64
                 Visible = True
               end
               item
@@ -2803,13 +2827,14 @@ object frmCadPedido: TfrmCadPedido
                 FieldName = 'DRAWBACK'
                 Title.Alignment = taCenter
                 Title.Caption = 'Drawback'
+                Width = 64
                 Visible = True
               end>
           end
           object pnlItem: TPanel
             Left = 0
             Top = 23
-            Width = 1089
+            Width = 1081
             Height = 30
             Align = alTop
             Color = clSilver
@@ -3105,14 +3130,14 @@ object frmCadPedido: TfrmCadPedido
           end
           object pnlMaterial: TPanel
             Left = 0
-            Top = 323
-            Width = 1089
+            Top = 315
+            Width = 1081
             Height = 27
             Align = alBottom
             Caption = 'pnlMaterial'
             TabOrder = 2
             object SMDBGrid3: TSMDBGrid
-              Left = 908
+              Left = 900
               Top = 1
               Width = 180
               Height = 25
@@ -3293,8 +3318,8 @@ object frmCadPedido: TfrmCadPedido
           end
           object pnlTipoItem: TPanel
             Left = 0
-            Top = 252
-            Width = 1089
+            Top = 244
+            Width = 1081
             Height = 71
             Align = alBottom
             Caption = 'pnlMaterial'
@@ -3302,7 +3327,7 @@ object frmCadPedido: TfrmCadPedido
             object SMDBGrid6: TSMDBGrid
               Left = 1
               Top = 1
-              Width = 1087
+              Width = 1079
               Height = 69
               Align = alClient
               Ctl3D = False
@@ -3471,8 +3496,8 @@ object frmCadPedido: TfrmCadPedido
           end
           object pnlPorta: TPanel
             Left = 0
-            Top = 193
-            Width = 1089
+            Top = 185
+            Width = 1081
             Height = 59
             Align = alBottom
             TabOrder = 4
@@ -3480,7 +3505,7 @@ object frmCadPedido: TfrmCadPedido
             object SMDBGrid8: TSMDBGrid
               Left = 1
               Top = 1
-              Width = 1087
+              Width = 1079
               Height = 57
               Align = alClient
               Color = 12189625
@@ -3586,8 +3611,8 @@ object frmCadPedido: TfrmCadPedido
           end
           object pnlVidro: TPanel
             Left = 0
-            Top = 134
-            Width = 1089
+            Top = 126
+            Width = 1081
             Height = 59
             Align = alBottom
             Caption = 'pnlMaterial'
@@ -3596,7 +3621,7 @@ object frmCadPedido: TfrmCadPedido
             object SMDBGrid7: TSMDBGrid
               Left = 1
               Top = 1
-              Width = 1087
+              Width = 1079
               Height = 57
               Align = alClient
               Color = 12189625
@@ -3722,8 +3747,8 @@ object frmCadPedido: TfrmCadPedido
           end
           object pnlServico: TPanel
             Left = 0
-            Top = 350
-            Width = 1089
+            Top = 342
+            Width = 1081
             Height = 24
             Align = alBottom
             Color = clSilver
@@ -3755,7 +3780,7 @@ object frmCadPedido: TfrmCadPedido
           object Panel7: TPanel
             Left = 0
             Top = 0
-            Width = 1089
+            Width = 1081
             Height = 23
             Align = alTop
             TabOrder = 7
@@ -3851,13 +3876,13 @@ object frmCadPedido: TfrmCadPedido
           object pnlTransporte_Geral: TPanel
             Left = 0
             Top = 0
-            Width = 1089
-            Height = 374
+            Width = 1081
+            Height = 366
             Align = alClient
             TabOrder = 0
             DesignSize = (
-              1089
-              374)
+              1081
+              366)
             object Label70: TLabel
               Left = 9
               Top = 15
@@ -5239,8 +5264,8 @@ object frmCadPedido: TfrmCadPedido
           Caption = 'Valores'
           Enabled = False
           DesignSize = (
-            1089
-            374)
+            1081
+            366)
           object Label27: TLabel
             Left = 303
             Top = 46
@@ -5292,7 +5317,7 @@ object frmCadPedido: TfrmCadPedido
           object pnlValores: TPanel
             Left = 0
             Top = 0
-            Width = 1089
+            Width = 1081
             Height = 32
             Align = alTop
             Color = clSilver
@@ -5829,7 +5854,7 @@ object frmCadPedido: TfrmCadPedido
           object Panel5: TPanel
             Left = 0
             Top = 0
-            Width = 1089
+            Width = 1081
             Height = 30
             Align = alTop
             Color = clSilver
@@ -6064,8 +6089,8 @@ object frmCadPedido: TfrmCadPedido
           object SMDBGrid9: TSMDBGrid
             Left = 0
             Top = 30
-            Width = 1089
-            Height = 344
+            Width = 1081
+            Height = 336
             Align = alClient
             DataSource = DMCadPedido.dsPedido_Ace
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -6159,7 +6184,7 @@ object frmCadPedido: TfrmCadPedido
           object Panel6: TPanel
             Left = 0
             Top = 0
-            Width = 1089
+            Width = 1081
             Height = 30
             Align = alTop
             Color = clSilver
@@ -6394,8 +6419,8 @@ object frmCadPedido: TfrmCadPedido
           object SMDBGrid10: TSMDBGrid
             Left = 0
             Top = 30
-            Width = 1089
-            Height = 344
+            Width = 1081
+            Height = 336
             Align = alClient
             DataSource = DMCadPedido.dsPedido_Rol
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -6528,8 +6553,8 @@ object frmCadPedido: TfrmCadPedido
       end
       object Panel10: TPanel
         Left = 0
-        Top = 609
-        Width = 1093
+        Top = 601
+        Width = 1085
         Height = 24
         Align = alBottom
         Color = clSilver
@@ -6603,8 +6628,8 @@ object frmCadPedido: TfrmCadPedido
       end
       object Panel12: TPanel
         Left = 0
-        Top = 633
-        Width = 1093
+        Top = 625
+        Width = 1085
         Height = 23
         Align = alBottom
         Color = clSilver
@@ -6790,8 +6815,8 @@ object frmCadPedido: TfrmCadPedido
       end
       object pnlAcessorios: TPanel
         Left = 0
-        Top = 587
-        Width = 1093
+        Top = 579
+        Width = 1085
         Height = 22
         Align = alBottom
         Color = clSilver
@@ -6844,7 +6869,7 @@ object frmCadPedido: TfrmCadPedido
       object Panel2: TPanel
         Left = 0
         Top = 167
-        Width = 1093
+        Width = 1085
         Height = 23
         Align = alTop
         BevelOuter = bvNone
