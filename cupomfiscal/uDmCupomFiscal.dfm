@@ -6831,8 +6831,8 @@ object dmCupomFiscal: TdmCupomFiscal
   end
   object sdsCombinacao: TSQLDataSet
     CommandText = 
-      'SELECT ID, ITEM, NOME'#13#10'FROM PRODUTO_COMB'#13#10'WHERE INATIVO = '#39'N'#39' AN' +
-      'D'#13#10'  ID = :P1'
+      'SELECT ID, ITEM, NOME, ID_COR_COMBINACAO'#13#10'FROM PRODUTO_COMB'#13#10'WHE' +
+      'RE INATIVO = '#39'N'#39' AND'#13#10'  ID = :P1'
     MaxBlobSize = -1
     Params = <
       item
@@ -6866,6 +6866,9 @@ object dmCupomFiscal: TdmCupomFiscal
     object cdsCombinacaoNOME: TStringField
       FieldName = 'NOME'
       Size = 50
+    end
+    object cdsCombinacaoID_COR_COMBINACAO: TIntegerField
+      FieldName = 'ID_COR_COMBINACAO'
     end
   end
   object dsCombinacao: TDataSource

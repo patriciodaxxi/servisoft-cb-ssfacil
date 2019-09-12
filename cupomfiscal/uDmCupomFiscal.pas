@@ -1545,6 +1545,7 @@ type
     cdsCupomFiscalVLR_OUTROS: TFloatField;
     cdsTipoCobrancaJUROS_TIPO: TStringField;
     qParametros_UsuarioCUPOM_TOTAIS: TStringField;
+    cdsCombinacaoID_COR_COMBINACAO: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);

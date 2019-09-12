@@ -1,6 +1,6 @@
 object fSel_CorTamanho: TfSel_CorTamanho
-  Left = 331
-  Top = 218
+  Left = 605
+  Top = 217
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
   Caption = 'fSel_CorTamanho'
@@ -101,7 +101,7 @@ object fSel_CorTamanho: TfSel_CorTamanho
     Font.Height = -13
     Font.Name = 'Arial'
     Font.Style = []
-    LookupField = 'ITEM'
+    LookupField = 'ID_COR_COMBINACAO'
     LookupDisplay = 'NOME'
     LookupSource = dmCupomFiscal.dsCombinacao
     ParentFont = False
