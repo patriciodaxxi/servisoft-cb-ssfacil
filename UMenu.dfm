@@ -717,6 +717,10 @@ object fMenu: TfMenu
       AutoLineReduction = maAutomatic
       Caption = 'Faturamento'
       ImageIndex = 3
+      object LiberarPedidosparaofaturamento1: TMenuItem
+        Caption = 'Liberar Pedidos para o faturamento (Terceiro)'
+        OnClick = LiberarPedidosparaofaturamento1Click
+      end
       object PedidosLiberadosParaFaturamento1: TMenuItem
         Caption = 'Pedidos Liberados Para Faturamento'
         OnClick = PedidosLiberadosParaFaturamento1Click

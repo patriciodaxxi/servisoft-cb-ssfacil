@@ -3,7 +3,8 @@ unit UDMProg_Terc;
 interface
 
 uses
-  SysUtils, Classes, LogTypes, FMTBcd, DB, SqlExpr, Provider, DBClient;
+  SysUtils, Classes, LogTypes, FMTBcd, DB, SqlExpr, Provider, DBClient,
+  frxRich, frxClass, frxDBSet, frxExportPDF, frxExportMail;
 
 type
   TDMProg_Terc = class(TDataModule)
@@ -28,7 +29,6 @@ type
     sdsPedido_Lib: TSQLDataSet;
     dspPedido_Lib: TDataSetProvider;
     cdsPedido_Lib: TClientDataSet;
-    cdsPedido_LibID: TIntegerField;
     cdsPedido_LibNUM_PEDIDO: TIntegerField;
     cdsPedido_LibPEDIDO_CLIENTE: TStringField;
     cdsPedido_LibITEM: TIntegerField;
@@ -36,34 +36,71 @@ type
     cdsPedido_LibREFERENCIA: TStringField;
     cdsPedido_LibNOME_PRODUTO: TStringField;
     cdsPedido_LibQTD: TFloatField;
-    cdsPedido_LibQTD_RESTANTE: TFloatField;
     cdsPedido_LibQTD_FATURADO: TFloatField;
     cdsPedido_LibQTD_LIBERADA: TFloatField;
     cdsPedido_LibNOME_CLIENTE: TStringField;
     dsPedido_Lib: TDataSource;
     sdsProduto_Lib: TSQLDataSet;
-    DataSetProvider1: TDataSetProvider;
-    ClientDataSet1: TClientDataSet;
-    IntegerField1: TIntegerField;
-    IntegerField2: TIntegerField;
-    StringField1: TStringField;
-    IntegerField3: TIntegerField;
-    IntegerField4: TIntegerField;
-    StringField2: TStringField;
-    StringField3: TStringField;
-    FloatField1: TFloatField;
-    FloatField2: TFloatField;
-    FloatField3: TFloatField;
-    FloatField4: TFloatField;
-    StringField4: TStringField;
-    DataSource1: TDataSource;
+    dspProduto_Lib: TDataSetProvider;
+    cdsProduto_Lib: TClientDataSet;
+    dsProduto_Lib: TDataSource;
+    cdsProduto_LibID_PRODUTO: TIntegerField;
+    cdsProduto_LibREFERENCIA: TStringField;
+    cdsProduto_LibNOME_PRODUTO: TStringField;
+    cdsProduto_LibNOME_CLIENTE: TStringField;
+    cdsProduto_LibQTD_LIBERADA: TFloatField;
+    cdsPedido_LibclQtd_Restante: TFloatField;
+    cdsPedido_LibQTD_RESTANTE: TFloatField;
+    cdsPedido_LibDTEMISSAO: TDateField;
+    cdsPedido_LibDTENTREGA: TDateField;
+    sdsPedido_Pend: TSQLDataSet;
+    dspPedido_Pend: TDataSetProvider;
+    cdsPedido_Pend: TClientDataSet;
+    dsPedido_Pend: TDataSource;
+    cdsPedido_PendID: TIntegerField;
+    cdsPedido_PendNUM_PEDIDO: TIntegerField;
+    cdsPedido_PendPEDIDO_CLIENTE: TStringField;
+    cdsPedido_PendITEM: TIntegerField;
+    cdsPedido_PendID_PRODUTO: TIntegerField;
+    cdsPedido_PendREFERENCIA: TStringField;
+    cdsPedido_PendNOME_PRODUTO: TStringField;
+    cdsPedido_PendQTD: TFloatField;
+    cdsPedido_PendQTD_RESTANTE: TFloatField;
+    cdsPedido_PendQTD_FATURADO: TFloatField;
+    cdsPedido_PendQTD_LIBERADA: TFloatField;
+    cdsPedido_PendNOME_CLIENTE: TStringField;
+    cdsPedido_PendDTEMISSAO: TDateField;
+    cdsPedido_PendDTENTREGA: TDateField;
+    cdsPedido_PendQTD_PENDENTE_LIB: TFloatField;
+    cdsPedido_PendagQtd_Total: TAggregateField;
+    sdsPrc_Atualiza_Status_Ped: TSQLDataSet;
+    sdsFilial: TSQLDataSet;
+    sdsFilialID: TIntegerField;
+    sdsFilialNOME: TStringField;
+    dspFilial: TDataSetProvider;
+    cdsFilial: TClientDataSet;
+    cdsFilialID: TIntegerField;
+    cdsFilialNOME: TStringField;
+    dsFilial: TDataSource;
+    cdsPedido_LibID: TIntegerField;
+    frxMailExport1: TfrxMailExport;
+    frxReport1: TfrxReport;
+    frxPDFExport1: TfrxPDFExport;
+    frxPedido_Lib: TfrxDBDataset;
+    frxRichObject1: TfrxRichObject;
+    frxProduto_Lib: TfrxDBDataset;
+    frxPedido_Pend: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
+    procedure cdsPedido_LibCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
   public
     { Public declarations }
+    ctPedido_Lib, ctProduto_Lib, ctPedido_Pend : String;
+
     procedure prc_Localizar(ID: Integer); //-1 = Inclusão
+    procedure prc_Inserir;
 
   end;
 
@@ -90,6 +127,12 @@ var
   vIndices: string;
   aIndices: array of string;
 begin
+  ctPedido_Lib  := sdsPedido_Lib.CommandText;
+  ctProduto_Lib := sdsProduto_Lib.CommandText;
+  ctPedido_Pend := sdsPedido_Pend.CommandText;
+
+  cdsFilial.Open;
+
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
@@ -124,6 +167,26 @@ begin
   cdsProg_Terc.Close;
   sdsProg_Terc.ParamByName('ID').AsInteger := ID;
   cdsProg_Terc.Open;
+end;
+
+procedure TDMProg_Terc.cdsPedido_LibCalcFields(DataSet: TDataSet);
+begin
+  cdsPedido_LibclQtd_Restante.AsFloat := StrToFloat(FormatFloat('0.0000',cdsPedido_LibQTD_RESTANTE.AsFloat - cdsPedido_LibQTD_LIBERADA.AsFloat));
+  if StrToFloat(FormatFloat('0.0000',cdsPedido_LibclQtd_Restante.AsFloat)) <= 0 then
+    cdsPedido_LibclQtd_Restante.AsFloat := StrToFloat(FormatFloat('0.0000',0));
+end;
+
+procedure TDMProg_Terc.prc_Inserir;
+var
+  vAux: Integer;
+begin
+  if not cdsProg_Terc.Active then
+    prc_Localizar(-1);
+  vAux := dmDatabase.ProximaSequencia('PROG_TERC',0);
+
+  cdsProg_Terc.Insert;
+  cdsProg_TercID.AsInteger    := vAux;
+  cdsProg_TercDATA.AsDateTime := Date;
 end;
 
 end.

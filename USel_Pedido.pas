@@ -238,6 +238,7 @@ begin
       fDMCadNotaFiscal.mLoteControle.MasterFields := '';
       fDMCadNotaFiscal.mLoteControle.EmptyDataSet;
     end;
+    
     fDMCadNotaFiscal.cdsPedido.Close;
     fDMCadNotaFiscal.sdsPedido.CommandText := fDMCadNotaFiscal.ctPedido;
     if ((vTipo_RegPed = 'P') and (fDMCadNotaFiscal.cdsParametrosUSA_APROVACAO_PED.AsString = 'S'))
@@ -277,6 +278,15 @@ begin
     if trim(edtPedido.Text) <> '' then
       fDMCadNotaFiscal.sdsPedido.CommandText := fDMCadNotaFiscal.sdsPedido.CommandText +
                                                   ' AND PE.PEDIDO_CLIENTE = ' + QuotedStr(edtPedido.Text);
+
+    //11/09/2019
+    if (vTipo_RegPed = 'P') and (fDMCadNotaFiscal.cdsParametrosCONTROLAR_PEDIDO_LIBERACAO.AsString = 'S') then
+    begin
+      fDMCadNotaFiscal.sdsPedido.CommandText := fDMCadNotaFiscal.sdsPedido.CommandText +
+                                                  ' AND PI.QTD_LIBERADA > 0 ';
+    end;
+    //***************
+
     fDMCadNotaFiscal.cdsPedido.Open;
     fDMCadNotaFiscal.cdsPedido.First;
     //if foi colocado no dia 08/04/2018

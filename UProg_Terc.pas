@@ -5,48 +5,67 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids,
   DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr, UDMProg_Terc, RxLookup, UCBase, Mask, RzPanel, ToolEdit,
-  dbXPress, NxPageControl, RzTabs, NxCollection, NxEdit;
+  dbXPress, NxPageControl, RzTabs, NxCollection, NxEdit, CurrEdit;
 
 type
   TfrmProg_Terc = class(TForm)
     RzPageControl1: TRzPageControl;
-    TS_Liberados: TRzTabSheet;
-    SMDBGrid1: TSMDBGrid;
-    Panel1: TPanel;
-    Label1: TLabel;
+    TS_Produto_Pend: TRzTabSheet;
+    Panel4: TPanel;
     Label2: TLabel;
+    CurrencyEdit1: TCurrencyEdit;
+    Edit2: TEdit;
+    btnConsultar_Pend: TNxButton;
+    NxLabel1: TNxLabel;
+    NxPanel1: TNxPanel;
     Label3: TLabel;
+    CurrencyEdit2: TCurrencyEdit;
+    NxButton3: TNxButton;
+    Label9: TLabel;
+    CurrencyEdit3: TCurrencyEdit;
+    SMDBGrid3: TSMDBGrid;
+    TS_Liberados: TRzTabSheet;
+    RzPageControl2: TRzPageControl;
+    TS_Pedido_Lib: TRzTabSheet;
+    Panel1: TPanel;
     Label5: TLabel;
     Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label11: TLabel;
-    Edit1: TEdit;
-    RxDBLookupCombo1: TRxDBLookupCombo;
-    DateEdit1: TDateEdit;
-    DateEdit2: TDateEdit;
-    DateEdit3: TDateEdit;
-    DateEdit4: TDateEdit;
+    RxDBLookupCombo3: TRxDBLookupCombo;
     btnConsultar: TNxButton;
-    Edit2: TEdit;
-    Panel2: TPanel;
-    Label4: TLabel;
-    DateEdit5: TDateEdit;
-    btnConfBaixa: TNxButton;
-    TabSheet1: TRzTabSheet;
+    Edit5: TEdit;
+    SMDBGrid1: TSMDBGrid;
+    TS_Produto_Lib: TRzTabSheet;
+    SMDBGrid2: TSMDBGrid;
+    btnImprimir: TNxButton;
+    btnImprimir_NaoLib: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure Edit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure btnConfBaixaClick(Sender: TObject);
+    procedure CurrencyEdit1Change(Sender: TObject);
+    procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure btnConsultar_PendClick(Sender: TObject);
+    procedure NxButton3Click(Sender: TObject);
+    procedure CurrencyEdit1Exit(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
+    procedure btnImprimir_NaoLibClick(Sender: TObject);
   private
     { Private declarations }
     fDMProg_Terc: TDMProg_Terc;
     ColunaOrdenada: String;
 
-    procedure prc_Consultar;
+    procedure prc_Consultar_Pend;
+    procedure prc_Consultar_Pedido_Lib;
+    procedure prc_Consultar_Produto_Lib;
+    procedure prc_Gravar_Prog_Terc(Qtd : Real);
+
+    procedure prc_Imprimir_Pedido_Lib;
+    procedure prc_Imprimir_Produto_Lib;
+
+    function fnc_Existe_Produto : String;
 
   public
     { Public declarations }
@@ -61,47 +80,6 @@ uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, USel_Pessoa;
 
 {$R *.dfm}
 
-procedure TfrmProg_Terc.prc_Consultar;
-var
-  vComando: String;
-  vOpcaoDtEntrega: String;
-begin
-  {fDMProg_Terc.cdsPedido_Pend.Close;
-  fDMProg_Terc.sdsPedido_Pend.CommandText := fDMProg_Terc.ctPedido_Pend + ' WHERE 0 = 0 ';
-  vComando := '';
-  if vTipo_Baixa_Ped = 'FAT' then
-    vComando := vComando + ' AND V.CLIENTE_ESTOQUE = ' + QuotedStr('N');
-  if fMenu.vTipo_Reg_Pedido <> 'C' then
-    vComando := vComando + ' AND V.TIPO_REG = ' + QuotedStr('P')
-  else
-    vComando := vComando + ' AND V.TIPO_REG = ' + QuotedStr('C');
-  if RxDBLookupCombo1.Text <> '' then
-    vComando := vComando + ' AND V.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
-  if RxDBLookupCombo2.Text <> '' then
-    vComando := vComando + ' AND V.ID_CLIENTE = ' + IntToStr(RxDBLookupCombo2.KeyValue);
-  if DateEdit1.Date > 10 then
-    vComando := vComando + ' AND V.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date));
-  if DateEdit2.Date > 10 then
-    vComando := vComando + ' AND V.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.date));
-  vOpcaoDtEntrega := '';
-  if fDMProg_Terc.qParametrosOPCAO_DTENTREGAPEDIDO.AsString = 'P' then
-    vOpcaoDtEntrega := 'V.DTENTREGA_PED'
-  else
-    vOpcaoDtEntrega := 'V.DTENTREGA_ITEM';
-  if DateEdit3.Date > 10 then
-    vComando := vComando + ' AND ' + vOpcaoDtEntrega + ' >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit3.date));
-  if DateEdit4.Date > 10 then
-    vComando := vComando + ' AND ' + vOpcaoDtEntrega + ' <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit4.date));
-
-  if trim(Edit1.Text) <> '' then
-    vComando := vComando + ' AND V.PEDIDO_CLIENTE LIKE ' + QuotedStr('%'+Edit1.Text+'%');
-  if vTipo_Baixa_Ped = 'PRO' then
-    vComando := vComando + ' AND ((V.QTD - V.QTD_PRODUZIDA) > 0) ';
-  vComando := vComando + ' AND V.QTD_RESTANTE > 0 ';
-  fDMProg_Terc.sdsPedido_Pend.CommandText := fDMProg_Terc.sdsPedido_Pend.CommandText + vComando;
-  fDMProg_Terc.cdsPedido_Pend.Open;
-  fDMProg_Terc.cdsPedido_Pend.IndexFieldNames := 'PEDIDO_CLIENTE;DTEMISSAO';}
-end;
 
 procedure TfrmProg_Terc.FormClose(Sender: TObject;
   var Action: TCloseAction);
@@ -139,81 +117,226 @@ begin
     btnConsultarClick(Sender);
 end;
 
-procedure TfrmProg_Terc.btnConfBaixaClick(Sender: TObject);
-var
-  vContadorAux: Integer;
-  vEstoque: String;
+procedure TfrmProg_Terc.CurrencyEdit1Change(Sender: TObject);
 begin
-  {if DateEdit5.Date < 10 then
+  Edit2.Clear;
+end;
+
+procedure TfrmProg_Terc.CurrencyEdit1KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = VK_RETURN then
   begin
-    ShowMessage('*** Data da baixa não informada!');
+    if CurrencyEdit1.AsInteger > 0 then
+      Edit2.Text := fnc_Existe_Produto;
+    btnConsultar_PendClick(Sender);
+  end;
+end;
+
+procedure TfrmProg_Terc.btnConsultar_PendClick(Sender: TObject);
+begin
+  prc_Consultar_Pend;
+end;
+
+procedure TfrmProg_Terc.prc_Consultar_Pend;
+begin
+  fDMProg_Terc.cdsPedido_Pend.Close;
+  fDMProg_Terc.sdsPedido_Pend.CommandText := fDMProg_Terc.ctPedido_Pend;
+  if CurrencyEdit1.AsInteger > 0 then
+    fDMProg_Terc.sdsPedido_Pend.CommandText := fDMProg_Terc.sdsPedido_Pend.CommandText + ' AND I.ID_PRODUTO = ' + IntToStr(CurrencyEdit1.AsInteger);
+  fDMProg_Terc.cdsPedido_Pend.Open;
+  fDMProg_Terc.cdsPedido_Pend.IndexFieldNames := 'DTENTREGA;PEDIDO_CLIENTE;ID_PRODUTO;ITEM';
+  CurrencyEdit3.Value := fDMProg_Terc.cdsPedido_PendagQtd_Total.AsVariant;
+  SMDBGrid3.SelectAllClick(SMDBGrid3);
+end;
+
+procedure TfrmProg_Terc.NxButton3Click(Sender: TObject);
+var
+  vQtdOrig : Real;
+  vQtdAux : Real;
+begin
+  if CurrencyEdit2.Value <= 0 then
+  begin
+    MessageDlg('*** Qtd. não informada!',mtError, [mbOk], 0);
+    exit;
+  end;
+  if CurrencyEdit2.Value > CurrencyEdit3.Value then
+  begin
+    MessageDlg('*** Qtd. informada maior que a total!',mtError, [mbOk], 0);
     exit;
   end;
 
-  if ckEstoque.Checked then
-    vEstoque := 'S'
-  else
-    vEstoque := 'N';
+  if not fDMProg_Terc.cdsProg_Terc.Active then
+    fDMProg_Terc.prc_Localizar(-1);
 
-  vContadorAux := 0;
-
-  fDMProg_Terc.fDMEstoque := fDMEstoque;
-  fDMProg_Terc.mPedidoAux.EmptyDataSet;
+  vQtdOrig := CurrencyEdit2.Value;  
   fDMProg_Terc.cdsPedido_Pend.First;
   while not fDMProg_Terc.cdsPedido_Pend.Eof do
   begin
-    if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (StrToFloat(FormatFloat('0.000',fDMProg_Terc.cdsPedido_PendQTD_AFATURAR.AsFloat)) > 0)then
+    if (SMDBGrid3.SelectedRows.CurrentRowSelected) and (StrToFloat(FormatFloat('0.0000',fDMProg_Terc.cdsPedido_PendQTD_PENDENTE_LIB.AsFloat)) > 0)
+      and (StrToFloat(FormatFloat('0.0000',vQtdOrig)) > 0) then
     begin
-      vContadorAux := vContadorAux + 1;
-      //aqui 24/01/2014
-      if vTipo_Baixa_Ped = 'COM' then
-        fDMProg_Terc.prc_Gravar_Baixa('C',vEstoque,'C',DateEdit5.Date)
-      else
-        fDMProg_Terc.prc_Gravar_Baixa('P',vEstoque,'P',DateEdit5.Date);
-      if vTipo_Baixa_Ped <> 'PRO' then
+      if StrToFloat(FormatFloat('0.0000',vQtdOrig)) > 0 then
       begin
-        if not(fDMProg_Terc.mPedidoAux.FindKey([fDMProg_Terc.cdsPedido_PendID.AsInteger])) then
-        begin
-          fDMProg_Terc.mPedidoAux.Insert;
-          fDMProg_Terc.mPedidoAuxID_Pedido.AsInteger := fDMProg_Terc.cdsPedido_PendID.AsInteger;
-          fDMProg_Terc.mPedidoAux.Post;
-        end;
-      end;
+        vQtdAux := fDMProg_Terc.cdsPedido_PendQTD_PENDENTE_LIB.AsFloat;
+        if StrToFloat(FormatFloat('0.0000',fDMProg_Terc.cdsPedido_PendQTD_PENDENTE_LIB.AsFloat)) > StrToFloat(FormatFloat('0.0000',vQtdOrig)) then
+          vQtdAux := StrToFloat(FormatFloat('0.0000',vQtdOrig));
+        prc_Gravar_Prog_Terc(vQtdAux);
 
+        fDMProg_Terc.sdsPrc_Atualiza_Status_Ped.Close;
+        fDMProg_Terc.sdsPrc_Atualiza_Status_Ped.ParamByName('P_ID').AsInteger := fDMProg_Terc.cdsPedido_PendID.AsInteger;
+        fDMProg_Terc.sdsPrc_Atualiza_Status_Ped.ExecSQL;
+
+        vQtdOrig := StrToFloat(FormatFloat('0.0000',vQtdOrig - vQtdAux));
+        if StrToFloat(FormatFloat('0.0000',vQtdOrig)) <= 0 then
+          fDMProg_Terc.cdsPedido_Pend.Last;
+      end;
     end;
     fDMProg_Terc.cdsPedido_Pend.Next;
   end;
 
-  //Atualiza Status do pedido somente quando for faturado ou quando for dado a baixa da ordem de compra do fornecedor
-  if vTipo_Baixa_Ped <> 'PRO' then
-  begin
-    fDMProg_Terc.mPedidoAux.First;
-    while not fDMProg_Terc.mPedidoAux.Eof do
-    begin
-      fDMProg_Terc.sdsPrc_Atualiza_Status_Ped.Close;
-      fDMProg_Terc.sdsPrc_Atualiza_Status_Ped.ParamByName('P_ID').AsInteger := fDMProg_Terc.mPedidoAuxID_Pedido.AsInteger;
-      fDMProg_Terc.sdsPrc_Atualiza_Status_Ped.ExecSQL;
-      fDMProg_Terc.mPedidoAux.Next;
-    end;
+  CurrencyEdit2.Clear;
+  MessageDlg('*** Produto Liberado!',mtConfirmation, [mbOk], 0);
+  CurrencyEdit1.Clear;
+  CurrencyEdit1.SetFocus;
+  Edit2.Clear;
+  fDMProg_Terc.cdsPedido_Pend.Close;
+end;
+
+procedure TfrmProg_Terc.prc_Gravar_Prog_Terc(Qtd: Real);
+begin
+  fDMProg_Terc.prc_Inserir;
+  fDMProg_Terc.cdsProg_TercID_PRODUTO.AsInteger  := fDMProg_Terc.cdsPedido_PendID_PRODUTO.AsInteger;
+  fDMProg_Terc.cdsProg_TercID_COR.AsInteger      := 0;
+  fDMProg_Terc.cdsProg_TercID_PEDIDO.AsInteger   := fDMProg_Terc.cdsPedido_PendID.AsInteger;
+  fDMProg_Terc.cdsProg_TercITEM_PEDIDO.AsInteger := fDMProg_Terc.cdsPedido_PendITEM.AsInteger;
+  fDMProg_Terc.cdsProg_TercQTD.AsFloat           := StrToFloat(FormatFloat('0.0000',Qtd));
+  fDMProg_Terc.cdsProg_Terc.Post;
+  fDMProg_Terc.cdsProg_Terc.ApplyUpdates(0);
+end;
+
+function TfrmProg_Terc.fnc_Existe_Produto: String;
+var
+  sds: TSQLDataSet;
+begin
+  Result   := '';
+  sds      := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.Close;
+    sds.CommandText   := 'SELECT NOME FROM PRODUTO WHERE ID = ' + IntToStr(CurrencyEdit1.AsInteger);
+    sds.Open;
+    Result := sds.FieldByName('NOME').AsString;
+  finally
+    FreeAndNil(sds);
   end;
+end;
 
-  btnConsultarClick(Sender);
-
-  ShowMessage('Total de itens baixados: ' + IntToStr(vContadorAux));
-  DateEdit5.Clear;
-  //ckEstoque.Checked := False;
-  if fMenu.vTipo_Reg_Pedido <> 'C' then
+procedure TfrmProg_Terc.CurrencyEdit1Exit(Sender: TObject);
+begin
+  if CurrencyEdit1.AsInteger <= 0 then
+    exit;
+  Edit2.Text := fnc_Existe_Produto;
+  if trim(Edit2.Text) = '' then
   begin
-    if fDMProg_Terc.qParametros_EstMARCAR_BAIXA_PEDIDO.AsString = 'S' then
-      ckEstoque.Checked := True
-    else
-      ckEstoque.Checked := False;
-  end;}
+    MessageDlg('*** ID do Produto não encontrado!',mtError, [mbOk], 0);
+    CurrencyEdit1.SetFocus;
+    exit;
+  end;
 end;
 
 procedure TfrmProg_Terc.btnConsultarClick(Sender: TObject);
 begin
-  prc_Consultar;
+  if RzPageControl2.ActivePage = TS_Pedido_Lib then
+    prc_Consultar_Pedido_Lib
+  else
+    prc_Consultar_Produto_Lib;
+end;
+
+procedure TfrmProg_Terc.prc_Consultar_Pedido_Lib;
+var
+  vComando: String;
+begin
+  fDMProg_Terc.cdsPedido_Lib.Close;
+  vComando := '';
+  if RxDBLookupCombo3.Text <> '' then
+    vComando := vComando + ' AND P.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
+  if trim(Edit5.Text) <> '' then
+    vComando := vComando + ' AND CLI.NOME LIKE ' + QuotedStr('%'+Edit5.Text+'%');
+  fDMProg_Terc.sdsPedido_Lib.CommandText := fDMProg_Terc.ctPedido_Lib + vComando;
+  fDMProg_Terc.cdsPedido_Lib.Open;
+  fDMProg_Terc.cdsPedido_Lib.IndexFieldNames := 'PEDIDO_CLIENTE;DTEMISSAO;ID_PRODUTO';
+end;
+
+procedure TfrmProg_Terc.prc_Consultar_Produto_Lib;
+var
+  vComando: String;
+begin
+  fDMProg_Terc.cdsProduto_Lib.Close;
+  vComando := '';
+  if RxDBLookupCombo3.Text <> '' then
+    vComando := vComando + ' AND P.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
+  if trim(Edit5.Text) <> '' then
+    vComando := vComando + ' AND CLI.NOME LIKE ' + QuotedStr('%'+Edit5.Text+'%');
+  fDMProg_Terc.sdsProduto_Lib.CommandText := fDMProg_Terc.ctProduto_Lib + vComando;
+  fDMProg_Terc.cdsProduto_Lib.Open;
+  fDMProg_Terc.cdsProduto_Lib.IndexFieldNames := 'ID_PRODUTO;NOME_CLIENTE';
+end;
+
+procedure TfrmProg_Terc.btnImprimirClick(Sender: TObject);
+begin
+  if RzPageControl2.ActivePage = TS_Pedido_Lib then
+    prc_Imprimir_Pedido_Lib
+  else
+    prc_Imprimir_Produto_Lib;
+
+end;
+
+procedure TfrmProg_Terc.prc_Imprimir_Pedido_Lib;
+var
+  vArq: string;
+begin
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Pedidos_Lib.fr3';
+  if FileExists(vArq) then
+    fDMProg_Terc.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMProg_Terc.frxReport1.ShowReport;
+end;
+
+procedure TfrmProg_Terc.prc_Imprimir_Produto_Lib;
+var
+  vArq: string;
+begin
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Produtos_Lib.fr3';
+  if FileExists(vArq) then
+    fDMProg_Terc.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMProg_Terc.frxReport1.ShowReport;
+end;
+
+procedure TfrmProg_Terc.btnImprimir_NaoLibClick(Sender: TObject);
+var
+  vArq: string;
+begin
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Pedidos_NaoLib.fr3';
+  if FileExists(vArq) then
+    fDMProg_Terc.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMProg_Terc.frxReport1.ShowReport;
 end;
 
 end.
