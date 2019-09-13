@@ -783,10 +783,10 @@ begin
           fDMCadLote.mProdAuxID_Produto.AsInteger := fDMCadLote.cdsLoteID_PRODUTO.AsInteger;
           fDMCadLote.mProdAuxQtd.AsInteger        := 0;
         end;
-        fDMCadLote.mProdAuxQtd.AsFloat := fDMCadLote.mProdAuxQtd.AsFloat + fDMCadLote.cdsLoteQTD.AsFloat; 
+        fDMCadLote.mProdAuxQtd.AsFloat := fDMCadLote.mProdAuxQtd.AsFloat + fDMCadLote.cdsLoteQTD.AsFloat;
         fDMCadLote.mProdAux.Post;
         //*****************
-        
+
         fDMCadLote.cdsLote.Next;
       end;
 
@@ -803,7 +803,6 @@ begin
         if fDMCadLote.mProdAux.RecordCount > 0 then
           fDMCadLote.cdsLote_Mat.ApplyUpdates(0);
       end;
-
       //*******************
 
       fDMCadLote.cdsLote.ApplyUpdates(0);
@@ -1535,6 +1534,7 @@ begin
 
     Label8.Visible := True;
     Label8.Refresh;
+    fDMCadLote.mProdAux.EmptyDataSet;
 
     sds.Close;
     sds.CommandText := 'SELECT ID FROM LOTE WHERE NUM_ORDEM = :NUM_ORDEM';
@@ -1545,9 +1545,38 @@ begin
     begin
       fDMCadLote.prc_Localizar(sds.FieldByName('ID').AsInteger);
       if not fDMCadLote.cdsLote.IsEmpty then
+      begin
         prc_Gerar_Materiais('L');
+
+        //Grava produto para montar os materiais da Embalagem   13/09/2019
+        if (fDMCadLote.mProdAux.FindKey([fDMCadLote.cdsLoteID_PRODUTO.AsInteger])) then
+          fDMCadLote.mProdAux.Edit
+        else
+        begin
+          fDMCadLote.mProdAux.Insert;
+          fDMCadLote.mProdAuxID_Produto.AsInteger := fDMCadLote.cdsLoteID_PRODUTO.AsInteger;
+          fDMCadLote.mProdAuxQtd.AsInteger        := 0;
+        end;
+        fDMCadLote.mProdAuxQtd.AsFloat := fDMCadLote.mProdAuxQtd.AsFloat + fDMCadLote.cdsLoteQTD.AsFloat;
+        fDMCadLote.mProdAux.Post;
+        //*****************
+      end;
       sds.Next;
     end;
+
+    vNumOrdem := CurrencyEdit8.AsInteger;
+
+    fDMCadLote.mProdAux.First;
+    while not fDMCadLote.mProdAux.Eof do
+    begin
+      prc_Embalagem;
+      fDMCadLote.mProdAux.Next;
+    end;
+
+    //Gravar Embalagem   Gercla   03/07/2019
+    if fDMCadLote.qParametros_ProdUSA_CORRUGADO.AsString = 'S' then
+      prc_Gerar_Corrugado;
+    //******************
   finally
     FreeAndNil(sds);
   end;
