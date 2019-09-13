@@ -140,7 +140,7 @@ begin
   try
     while not mArquivoImportado.Eof do
     begin
-      if mArquivoImportadoCodigo_Produto.AsInteger > 0 then
+      if mArquivoImportadoQtde.AsFloat > 0 then
       begin
         fDMCadPedido.prc_Inserir_Itens;
         fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger := mArquivoImportadoCodigo_Produto.AsInteger;
