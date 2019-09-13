@@ -3588,7 +3588,9 @@ begin
   end;
   //15/07/2019
   if fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S' then
-    fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P';
+    fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P'
+  else
+    fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'A';
 
   fDMCadPedido.Tag := 0;
 end;

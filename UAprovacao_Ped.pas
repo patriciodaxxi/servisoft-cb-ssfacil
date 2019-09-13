@@ -725,7 +725,10 @@ begin
   fdmCadPedido.cdsPedidoUSUARIO.AsString      := vUsuario;
   fdmcadpedido.cdsPedidoID_PEDWEB.AsInteger   := fDMAprovacao_Ped.cdsConsultaPedWebID.AsInteger;
   fdmCadPedido.cdsPedidoID_CONDPGTO.AsInteger := fDMAprovacao_Ped.cdsConsultaPedWebCOND_PAGAMENTO.AsInteger;
-  fdmCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P';
+  if fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S' then
+    fdmCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P'
+  else
+    fdmCadPedido.cdsPedidoAPROVADO_PED.AsString := 'A';
 end;
 
 procedure TfrmAprovacao_Ped.prc_Gravar_PedWeb(ID: Integer);

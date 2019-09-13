@@ -3903,6 +3903,11 @@ begin
     cdsPedidoID_TRANSPORTADORA.Clear;
   if cdsPedidoID_VENDEDOR.AsInteger <= 0 then
     cdsPedidoID_VENDEDOR.Clear;
+  if ((cdsPedidoTIPO_REG.AsString = 'P') or (cdsPedidoTIPO_REG.AsString = 'O')) and (trim(cdsParametrosUSA_APROVACAO_PED.AsString) <> 'S') then
+    cdsPedidoAPROVADO_PED.AsString := 'A'
+  else
+  if (cdsPedidoTIPO_REG.AsString = 'C') and (trim(cdsParametrosUSA_APROVACAO_OC_FORN.AsString) <> 'S') then
+    cdsPedidoAPROVADO_PED.AsString := 'A';
 end;
 
 procedure TDMCadPedido.prc_Abrir_cdsCliente(Tipo: String);

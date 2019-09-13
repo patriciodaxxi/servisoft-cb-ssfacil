@@ -554,7 +554,7 @@ begin
     if (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') and (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
     begin
     //aqui gravar chapa
-    end;
+    end;        
 
     dmDatabase.scoDados.Commit(ID);
 
