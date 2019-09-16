@@ -528,6 +528,14 @@ begin
     Exit;
   end;
 
+  if (pnlCanalVenda.Visible) and (ComboBox1.ItemIndex < 0) then
+  begin
+    MessageDlg('*** Canal de venda é obrigatório!', mtInformation, [mbOk], 0);
+    ComboBox1.SetFocus;
+    exit;
+  end;
+
+
   if (StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsFloat)) <= 0) then
   begin
     if (StrToFloat(DBEdit1.Text) > 0) then
