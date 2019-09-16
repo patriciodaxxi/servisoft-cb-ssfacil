@@ -5,11 +5,6 @@ interface
 uses
   SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, LogTypes, UDMGravarFinanceiro, Dialogs, dbXPress;
 
-  //SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, dbXPress, UDMCadExtComissao, UDMGravarFinanceiro, xmldom,
-  //Math, Xmlxform, RLFilters, RLPDFFilter, DateUtils, RLHTMLFilter,
-  //RLRichFilter, RLPreviewForm, LogTypes, dialogs;
-
-
 type
   TDMCadTransferencia = class(TDataModule)
     sdsTransferencia: TSQLDataSet;
@@ -87,14 +82,13 @@ type
     dsContabil_Ope: TDataSource;
     qParametros_Geral: TSQLQuery;
     qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField;
-    sdsTransferenciaID_CONTABIL_OPE_ORIG: TIntegerField;
-    sdsTransferenciaID_CONTABIL_OPE_DEST: TIntegerField;
-    cdsTransferenciaID_CONTABIL_OPE_ORIG: TIntegerField;
-    cdsTransferenciaID_CONTABIL_OPE_DEST: TIntegerField;
-    cdsTransferencia_ConsultaID_CONTABIL_OPE_ORIG: TIntegerField;
-    cdsTransferencia_ConsultaID_CONTABIL_OPE_DEST: TIntegerField;
-    cdsTransferencia_ConsultaNOME_CONTABIL_OPE_ORIG: TStringField;
-    cdsTransferencia_ConsultaNOME_CONTABIL_OPE_DEST: TStringField;
+    sdsTransferenciaID_CONTABIL_OPE: TIntegerField;
+    cdsTransferenciaID_CONTABIL_OPE: TIntegerField;
+    cdsTransferencia_ConsultaID_CONTABIL_OPE: TIntegerField;
+    cdsTransferencia_ConsultaNOME_CONTABIL_OPE: TStringField;
+    cdsTransferencia_ConsultaNUMCHEQUE: TIntegerField;
+    qFilial_Contabil: TSQLQuery;
+    qFilial_ContabilID_CONTABIL_OPE_TRANSF: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspTransferenciaUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

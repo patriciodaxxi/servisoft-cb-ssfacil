@@ -402,7 +402,7 @@ object frmConsPedido: TfrmConsPedido
     Top = 188
     Width = 1017
     Height = 393
-    ActivePage = TS_Ref
+    ActivePage = TS_Pedido
     ActivePageDefault = TS_Item
     Align = alClient
     Color = 16755027
@@ -415,7 +415,7 @@ object frmConsPedido: TfrmConsPedido
     ParentColor = False
     ParentFont = False
     TabColors.Unselected = clGray
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 1
     TextColors.Unselected = 5197647
     OnChanging = RzPageControl1Changing
@@ -922,6 +922,7 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
+            Width = 64
             Visible = True
           end
           item
@@ -932,7 +933,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1315,11 +1315,6 @@ object frmConsPedido: TfrmConsPedido
             Alignment = taCenter
             Expanded = False
             FieldName = 'FILIAL'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Filial'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1334,11 +1329,6 @@ object frmConsPedido: TfrmConsPedido
             Alignment = taCenter
             Expanded = False
             FieldName = 'PEDIDO_CLIENTE'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Pedido Cliente (OC)'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1351,11 +1341,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'NUM_PEDIDO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Pedido'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1370,11 +1355,6 @@ object frmConsPedido: TfrmConsPedido
             Alignment = taCenter
             Expanded = False
             FieldName = 'DTEMISSAO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Data Emiss'#227'o'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1403,11 +1383,6 @@ object frmConsPedido: TfrmConsPedido
             Alignment = taCenter
             Expanded = False
             FieldName = 'DTENTREGA_ITEM'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Data Entrega'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1449,11 +1424,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'REFERENCIA'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Refer'#234'ncia'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1467,11 +1437,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'TAM_CALC'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Tam. C'#225'lc.'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1485,11 +1450,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'NOME_COR_COMBINACAO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Cor/Combina'#231#227'o'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1503,11 +1463,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'NOME_PRODUTO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Nome Produto'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1521,11 +1476,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'COMPLEMENTO_NOME'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Complemento Nome'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1533,16 +1483,12 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'QTD_PECA'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Pe'#231'a'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1556,11 +1502,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'QTD'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Pedido'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1573,11 +1514,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'QTD_FATURADO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Qtd Faturada'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1591,11 +1527,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'QTD_RESTANTE'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Pendente'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1609,11 +1540,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'QTD_CANCELADO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Cancelada'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1627,11 +1553,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'NOME_CLIENTE'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Nome Cliente'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1645,11 +1566,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'ID_PRODUTO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'ID Produto'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1662,11 +1578,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'NOME_VENDEDOR'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Nome Vendedor'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1681,11 +1592,6 @@ object frmConsPedido: TfrmConsPedido
             Alignment = taCenter
             Expanded = False
             FieldName = 'ID_CLIENTE'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'ID Cliente'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1698,11 +1604,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'NOME_FILIAL'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'Nome Filial'
             Title.Font.Charset = DEFAULT_CHARSET
@@ -1716,11 +1617,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'VLR_RESTANTE'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Caption = 'Vlr. Pendente'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
@@ -1733,11 +1629,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'VLR_FATURADO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Caption = 'Vlr. Faturado'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
@@ -1750,11 +1641,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'VLR_TOTAL'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Caption = 'Vlr. Total'
             Title.Font.Charset = DEFAULT_CHARSET
             Title.Font.Color = clWindowText
@@ -1767,11 +1653,6 @@ object frmConsPedido: TfrmConsPedido
           item
             Expanded = False
             FieldName = 'NUMOS'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' OS'
             Title.Font.Charset = DEFAULT_CHARSET

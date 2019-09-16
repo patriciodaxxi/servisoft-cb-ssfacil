@@ -2466,7 +2466,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 312
+    Top = 311
     object sdsFilial_ContabilID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2504,6 +2504,9 @@ object DMCadFilial: TDMCadFilial
     end
     object sdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CPA: TIntegerField
       FieldName = 'COD_CONTABIL_TXBANCARIA_CPA'
+    end
+    object sdsFilial_ContabilID_CONTABIL_OPE_TRANSF: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_TRANSF'
     end
   end
   object cdsFilial_Contabil: TClientDataSet
@@ -2550,6 +2553,9 @@ object DMCadFilial: TDMCadFilial
     end
     object cdsFilial_ContabilCOD_CONTABIL_TXBANCARIA_CPA: TIntegerField
       FieldName = 'COD_CONTABIL_TXBANCARIA_CPA'
+    end
+    object cdsFilial_ContabilID_CONTABIL_OPE_TRANSF: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_TRANSF'
     end
   end
   object dsFilial_Contabil: TDataSource

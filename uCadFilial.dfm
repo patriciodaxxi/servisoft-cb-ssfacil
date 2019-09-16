@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_Dados
+        ActivePage = TS_Contabil
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 0
+        TabIndex = 7
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -3680,6 +3680,14 @@ object frmCadFilial: TfrmCadFilial
               Alignment = taRightJustify
               Caption = 'C'#243'd. Cont'#225'bil Taxa Banc'#225'ria(C.Pagar):'
             end
+            object Label144: TLabel
+              Left = 65
+              Top = 220
+              Width = 146
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Opera'#231#227'o Cont. Transfer'#234'ncia:'
+            end
             object DBEdit62: TDBEdit
               Left = 213
               Top = 14
@@ -3711,7 +3719,7 @@ object frmCadFilial: TfrmCadFilial
               DataField = 'NUM_SEQ_LOTE_INTEGRACAO'
               DataSource = DMCadFilial.dsFilial_Contabil
               ParentCtl3D = False
-              TabOrder = 8
+              TabOrder = 11
             end
             object RxDBLookupCombo16: TRxDBLookupCombo
               Left = 213
@@ -3726,7 +3734,7 @@ object frmCadFilial: TfrmCadFilial
               LookupDisplay = 'NOME'
               LookupSource = DMCadFilial.dsContabil_Ope
               ParentCtl3D = False
-              TabOrder = 6
+              TabOrder = 8
             end
             object RxDBLookupCombo17: TRxDBLookupCombo
               Left = 213
@@ -3741,7 +3749,7 @@ object frmCadFilial: TfrmCadFilial
               LookupDisplay = 'NOME'
               LookupSource = DMCadFilial.dsContabil_Ope
               ParentCtl3D = False
-              TabOrder = 7
+              TabOrder = 9
             end
             object DBEdit65: TDBEdit
               Left = 213
@@ -3796,7 +3804,7 @@ object frmCadFilial: TfrmCadFilial
               DataField = 'COD_CONTABIL_TXBANCARIA_CRE'
               DataSource = DMCadFilial.dsFilial_Contabil
               ParentCtl3D = False
-              TabOrder = 9
+              TabOrder = 6
             end
             object DBEdit91: TDBEdit
               Left = 213
@@ -3806,6 +3814,21 @@ object frmCadFilial: TfrmCadFilial
               Ctl3D = False
               DataField = 'COD_CONTABIL_TXBANCARIA_CPA'
               DataSource = DMCadFilial.dsFilial_Contabil
+              ParentCtl3D = False
+              TabOrder = 7
+            end
+            object RxDBLookupCombo18: TRxDBLookupCombo
+              Left = 213
+              Top = 212
+              Width = 317
+              Height = 21
+              DropDownCount = 8
+              Ctl3D = False
+              DataField = 'ID_CONTABIL_OPE_TRANSF'
+              DataSource = DMCadFilial.dsFilial_Contabil
+              LookupField = 'ID'
+              LookupDisplay = 'NOME'
+              LookupSource = DMCadFilial.dsContabil_Ope
               ParentCtl3D = False
               TabOrder = 10
             end

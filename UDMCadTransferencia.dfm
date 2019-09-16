@@ -45,11 +45,8 @@ object DMCadTransferencia: TDMCadTransferencia
     object sdsTransferenciaNUMCHEQUE: TIntegerField
       FieldName = 'NUMCHEQUE'
     end
-    object sdsTransferenciaID_CONTABIL_OPE_ORIG: TIntegerField
-      FieldName = 'ID_CONTABIL_OPE_ORIG'
-    end
-    object sdsTransferenciaID_CONTABIL_OPE_DEST: TIntegerField
-      FieldName = 'ID_CONTABIL_OPE_DEST'
+    object sdsTransferenciaID_CONTABIL_OPE: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE'
     end
   end
   object dspTransferencia: TDataSetProvider
@@ -97,11 +94,8 @@ object DMCadTransferencia: TDMCadTransferencia
     object cdsTransferenciaNUMCHEQUE: TIntegerField
       FieldName = 'NUMCHEQUE'
     end
-    object cdsTransferenciaID_CONTABIL_OPE_ORIG: TIntegerField
-      FieldName = 'ID_CONTABIL_OPE_ORIG'
-    end
-    object cdsTransferenciaID_CONTABIL_OPE_DEST: TIntegerField
-      FieldName = 'ID_CONTABIL_OPE_DEST'
+    object cdsTransferenciaID_CONTABIL_OPE: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE'
     end
   end
   object dsTransferencia: TDataSource
@@ -180,17 +174,15 @@ object DMCadTransferencia: TDMCadTransferencia
     GetMetadata = False
     CommandText = 
       'SELECT T.*, CO.nome NOME_CONTA_ORIGEM, CD.nome NOME_CONTA_DESTIN' +
-      'O,'#13#10'OPE_ORIG.NOME NOME_CONTABIL_OPE_ORIG, OPE_DEST.NOME NOME_CON' +
-      'TABIL_OPE_DEST'#13#10'FROM TRANSFERENCIA T'#13#10'INNER JOIN CONTAS CO'#13#10'ON T' +
-      '.id_conta_ori = CO.id'#13#10'INNER JOIN CONTAS CD'#13#10'ON T.id_conta_dest ' +
-      '= CD.ID'#13#10'LEFT JOIN contabil_ope OPE_ORIG'#13#10'ON T.id_contabil_ope_o' +
-      'rig = OPE_ORIG.id'#13#10'LEFT JOIN contabil_ope OPE_DEST'#13#10'ON T.id_cont' +
-      'abil_ope_dest = OPE_DEST.id'#13#10
+      'O,'#13#10'OPE.NOME NOME_CONTABIL_OPE'#13#10'FROM TRANSFERENCIA T'#13#10'INNER JOIN' +
+      ' CONTAS CO'#13#10'ON T.id_conta_ori = CO.id'#13#10'INNER JOIN CONTAS CD'#13#10'ON ' +
+      'T.id_conta_dest = CD.ID'#13#10'LEFT JOIN contabil_ope OPE'#13#10'ON T.id_con' +
+      'tabil_ope = OPE.id'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 424
-    Top = 24
+    Left = 423
+    Top = 23
   end
   object dspTransferencia_Consulta: TDataSetProvider
     DataSet = sdsTransferencia_Consulta
@@ -204,7 +196,7 @@ object DMCadTransferencia: TDMCadTransferencia
     Params = <>
     ProviderName = 'dspTransferencia_Consulta'
     Left = 560
-    Top = 24
+    Top = 23
     object cdsTransferencia_ConsultaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -236,19 +228,15 @@ object DMCadTransferencia: TDMCadTransferencia
       FieldName = 'NOME_CONTA_DESTINO'
       Size = 30
     end
-    object cdsTransferencia_ConsultaID_CONTABIL_OPE_ORIG: TIntegerField
-      FieldName = 'ID_CONTABIL_OPE_ORIG'
+    object cdsTransferencia_ConsultaID_CONTABIL_OPE: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE'
     end
-    object cdsTransferencia_ConsultaID_CONTABIL_OPE_DEST: TIntegerField
-      FieldName = 'ID_CONTABIL_OPE_DEST'
-    end
-    object cdsTransferencia_ConsultaNOME_CONTABIL_OPE_ORIG: TStringField
-      FieldName = 'NOME_CONTABIL_OPE_ORIG'
+    object cdsTransferencia_ConsultaNOME_CONTABIL_OPE: TStringField
+      FieldName = 'NOME_CONTABIL_OPE'
       Size = 40
     end
-    object cdsTransferencia_ConsultaNOME_CONTABIL_OPE_DEST: TStringField
-      FieldName = 'NOME_CONTABIL_OPE_DEST'
-      Size = 40
+    object cdsTransferencia_ConsultaNUMCHEQUE: TIntegerField
+      FieldName = 'NUMCHEQUE'
     end
   end
   object dsTransferencia_Consulta: TDataSource
@@ -269,8 +257,8 @@ object DMCadTransferencia: TDMCadTransferencia
       'FROM CONTA_ORCAMENTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 624
-    Top = 168
+    Left = 634
+    Top = 166
     object qConta_OrcamentoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -400,6 +388,20 @@ object DMCadTransferencia: TDMCadTransferencia
       FieldName = 'MOSTRAR_COD_CONTABIL'
       FixedChar = True
       Size = 1
+    end
+  end
+  object qFilial_Contabil: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select f.id_contabil_ope_transf'
+      'from filial_contabil f'
+      'where f.id = (select first 1 id from filial where inativo = '#39'N'#39')')
+    SQLConnection = dmDatabase.scoDados
+    Left = 472
+    Top = 93
+    object qFilial_ContabilID_CONTABIL_OPE_TRANSF: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_TRANSF'
     end
   end
 end

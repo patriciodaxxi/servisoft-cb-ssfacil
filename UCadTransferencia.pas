@@ -52,12 +52,9 @@ type
     RxDBLookupCombo3: TRxDBLookupCombo;
     Label11: TLabel;
     DBEdit5: TDBEdit;
-    gbxContabil: TRzGroupBox;
     Label53: TLabel;
-    SpeedButton6: TSpeedButton;
-    Label59: TLabel;
     RxDBLookupCombo11: TRxDBLookupCombo;
-    RxDBLookupCombo12: TRxDBLookupCombo;
+    SpeedButton6: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -103,7 +100,8 @@ var
 
 implementation
 
-uses DmdDatabase, rsDBUtils, UMenu, DateUtils, uUtilPadrao, USel_ContaOrc;
+uses DmdDatabase, rsDBUtils, UMenu, DateUtils, uUtilPadrao, USel_ContaOrc,
+  Math;
 
 {$R *.dfm}
 
@@ -170,6 +168,14 @@ begin
   btnConfirmar.Enabled   := True;
   pnlCadastro.Enabled    := True;
   DBDateEdit1.SetFocus;
+
+  if fDMCadTransferencia.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S' then
+  begin
+    fDMCadTransferencia.qFilial_Contabil.Close;
+    fDMCadTransferencia.qFilial_Contabil.Open;
+    if fDMCadTransferencia.qFilial_ContabilID_CONTABIL_OPE_TRANSF.AsInteger > 0 then
+      fDMCadTransferencia.cdsTransferenciaID_CONTABIL_OPE.AsInteger := fDMCadTransferencia.qFilial_ContabilID_CONTABIL_OPE_TRANSF.AsInteger;
+  end;
 end;
 
 procedure TfrmCadTransferencia.FormShow(Sender: TObject);
@@ -185,10 +191,12 @@ begin
   uUtilPadrao.fnc_Busca_Nome_Filial;
   StatusBar1.Panels[0].Text := vUsuario;
   StatusBar1.Panels[1].Text := vFilial_Nome;
-  gbxContabil.Visible := (fDMCadTransferencia.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S');
+  Label53.Visible           := (fDMCadTransferencia.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S');
+  RxDBLookupCombo11.Visible := (fDMCadTransferencia.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S');
+  SpeedButton6.Visible      := (fDMCadTransferencia.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S');
   for i := 0 to SMDBGrid1.ColCount - 2 do
   begin
-    if (SMDBGrid1.Columns[i].FieldName = 'NOME_CONTABIL_OPE_ORIG') or (SMDBGrid1.Columns[i].FieldName = 'NOME_CONTABIL_OPE_DEST') then
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_CONTABIL_OPE') then
       SMDBGrid1.Columns[i].Visible := (fDMCadTransferencia.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S');
   end;
 end;
