@@ -23,8 +23,8 @@ object frmCadTransferencia: TfrmCadTransferencia
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 862
-    Height = 482
+    Width = 870
+    Height = 490
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -42,8 +42,8 @@ object frmCadTransferencia: TfrmCadTransferencia
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 858
-        Height = 375
+        Width = 866
+        Height = 383
         Align = alClient
         Ctl3D = False
         DataSource = DMCadTransferencia.dsTransferencia_Consulta
@@ -75,7 +75,7 @@ object frmCadTransferencia: TfrmCadTransferencia
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 6
+        ColCount = 8
         RowCount = 2
         Columns = <
           item
@@ -117,12 +117,28 @@ object frmCadTransferencia: TfrmCadTransferencia
             Title.Caption = 'Conta Destino'
             Width = 251
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME_CONTABIL_OPE_ORIG'
+            Title.Alignment = taCenter
+            Title.Caption = 'Op. Contabil Origem'
+            Width = 189
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME_CONTABIL_OPE_DEST'
+            Title.Alignment = taCenter
+            Title.Caption = 'Op. Contabil Destino'
+            Width = 169
+            Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 858
+        Width = 866
         Height = 32
         Align = alTop
         Color = clSilver
@@ -350,8 +366,8 @@ object frmCadTransferencia: TfrmCadTransferencia
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 442
-        Width = 858
+        Top = 450
+        Width = 866
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -367,7 +383,7 @@ object frmCadTransferencia: TfrmCadTransferencia
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 858
+        Width = 866
         Height = 35
         Align = alTop
         Color = clSilver
@@ -492,7 +508,7 @@ object frmCadTransferencia: TfrmCadTransferencia
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 858
+        Width = 866
         Height = 35
         Align = alTop
         Color = 8404992
@@ -718,8 +734,8 @@ object frmCadTransferencia: TfrmCadTransferencia
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 858
-        Height = 424
+        Width = 866
+        Height = 432
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -889,7 +905,7 @@ object frmCadTransferencia: TfrmCadTransferencia
           TabOrder = 1
         end
         object RxDBLookupCombo2: TRxDBLookupCombo
-          Left = 120
+          Left = 121
           Top = 50
           Width = 265
           Height = 21
@@ -902,7 +918,7 @@ object frmCadTransferencia: TfrmCadTransferencia
           TabOrder = 2
         end
         object DBEdit1: TDBEdit
-          Left = 550
+          Left = 549
           Top = 29
           Width = 97
           Height = 21
@@ -966,13 +982,154 @@ object frmCadTransferencia: TfrmCadTransferencia
           DataSource = DMCadTransferencia.dsTransferencia
           TabOrder = 5
         end
+        object gbxContabil: TRzGroupBox
+          Left = 420
+          Top = 78
+          Width = 427
+          Height = 61
+          BorderColor = clNavy
+          BorderInner = fsButtonUp
+          BorderOuter = fsBump
+          Caption = ' Lan'#231'amento Cont'#225'bil '
+          Ctl3D = True
+          FlatColor = clMaroon
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          TabOrder = 11
+          VisualStyle = vsGradient
+          object Label53: TLabel
+            Left = 8
+            Top = 20
+            Width = 56
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Op. Origem:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
+          object SpeedButton6: TSpeedButton
+            Left = 398
+            Top = 12
+            Width = 23
+            Height = 22
+            Hint = 'Atualiza tabela de Vendedor'
+            Glyph.Data = {
+              E6040000424DE604000000000000360000002800000014000000140000000100
+              180000000000B0040000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFCFDF9FAFBF2
+              F1F1EEEEEEEBEBEBE9EAECE4E8E9E2E4E7E3E4E6E4E6E7E6E9EAEBECF0F2F4F7
+              F2F6F5F7F6F6FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFF1EBE9D0C5BADBDEE2C9CC
+              CEC1C3C4B6B0AEB1A397AA876AA6764FA87044AC754BB39174C7BCB3D5D6DBE5
+              E7E8EFEFEEFDFDFDFFFFFFFFFFFFFFFFFFEBE5DC9F6B46DBDBDEC9C8CAB9A796
+              B68861C18451D29861CD9460CE945CCC9258C58346B26E36C09E83E3E1E3EFF1
+              F2FBFBFBFFFFFFFFFFFFFFFFFFF5F0EEBC8A63C3A48CC3A58CC68F61CF9B68C8
+              9565CA9361CD9364C18951BF864FC18853C6884FB8763BCEB3A1F7FCFFFEFEFE
+              FFFFFFFFFFFFFFFFFFF7F3EFBD916CD5B493D6AD8BD8AA84CB9668CB9664BA85
+              53BA8A61C6A281BF926DBB814EC08F67B47437BE8C5EEDE6DFFFFFFFFFFFFFFF
+              FFFFFFFFFFF6F2EEB98F69E3C2A3DDB99AE0BF9CCA9C72BD9473E2CFC0E5D9D0
+              F1EEECEFE7E3E1CAB1DCC3AACFB193A96B33E4D1BFFFFFFFFFFFFFFFFFFFFFFF
+              FFF7F2EFBA9069DFBB9BDEBD9DC79F7BD8C4B1F1EDEAFFFFFFFFFFFFFFFFFFFF
+              FFFFF7F3EEEAD6C4FEFEFEB58560D7BDA9FFFFFFFFFFFFFFFFFFFFFFFFF7F3EF
+              BD946CDFBC9CD9B996D8B694C8AE97F6F6F6FFFFFFFEFFFFFFFEFFFFFFFFFBF9
+              F7F4EBE5FFFFFFC1A287D9C5B5FFFFFFFFFFFFFFFFFFFFFFFFF5EEEAB07E53E0
+              BD9FDCB793E2BE9FCE9E73D0B499FCFAF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFE2D6CBEBE3DCFFFFFFFFFFFFFFFFFFFFFFFFF9F9F5BEA994C2A797BFA1
+              92BB9E8CB99C89B39983F7F5F2FFFFFFAB7957BB967BB79676B89778B89777B9
+              997EECE3DCFFFFFFFFFFFFFFFFFFFFFFFFF5F0E8CAB09BFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFC9B7A7D3A679DBB088D9AA84DCAD87C7986EE9DB
+              CDFFFFFFFFFFFFFFFFFFFFFFFFE6D8CEB67B50E8D0BCDFC7B7F3EFEBFFFFFFFE
+              FFFEFEFFFEFFFFFFFFFFFFBA9F8CD6A57DCF9B6ECD9B6CBF9164E9DDD2FFFFFF
+              FFFFFFFFFFFFFFFFFFEDE4DCA86B3BBF865CC29776EAE2DBFFFFFFFFFFFFFFFF
+              FFFDFFFFDED0C4D4B8A3C79B71D1A478CD9E70BF9265E8DDD0FFFFFFFFFFFFFF
+              FFFFFFFFFFF9F5F2BD8F6DBC8A639D5F2DB58968E0D2C8E7DCD3DAC8B8DECBBA
+              C09A77D4A882D0A479D2A478D3A77CBF8E64E8DBCFFFFFFFFFFFFFFFFFFFFFFF
+              FFF7F5F2CAAB93E5CCB7CCA788C29471CDAC8ED9BDA3CAA98AD7B094E8CEB2DB
+              BEA1DDB995C99D76C0946FC39168EADACFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF
+              E1D2C6C5A284F6E3D0F0DCC9E6CEB7E6CCB5E5CBB6E7CCB5E5CCB2E3C2A4C299
+              78CFB9A6D2BEADB58257E7D5C6FFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFDFEFEDA
+              C9BBBA9675D4B193EDD1B8EED3BCECCEB6D1AF8EBE916DC2A386EEE6E2F9F8F6
+              FFFFFFBD9A80DBC9BAFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEFFFFFFFDFEFEF6F2
+              EFD9C8BDBFA38CC3A388B99D83CFBEACFAF6F4F7F4F2FFFFFFFFFFFFFFFFFFF8
+              F7F5F8F7F4FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+              FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEFFFFFFFFFFFFFFFF
+              FFFEFEFFFFFFFFFFFFFF}
+            Margin = 0
+            OnClick = SpeedButton6Click
+          end
+          object Label59: TLabel
+            Left = 5
+            Top = 41
+            Width = 59
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Op. Destino:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RxDBLookupCombo11: TRxDBLookupCombo
+            Left = 66
+            Top = 13
+            Width = 331
+            Height = 19
+            DropDownCount = 15
+            Ctl3D = False
+            DataField = 'ID_CONTABIL_OPE_ORIG'
+            DataSource = DMCadTransferencia.dsTransferencia
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            LookupField = 'ID'
+            LookupDisplay = 'NOME'
+            LookupSource = DMCadTransferencia.dsContabil_Ope
+            ParentCtl3D = False
+            ParentFont = False
+            TabOrder = 0
+          end
+          object RxDBLookupCombo12: TRxDBLookupCombo
+            Left = 66
+            Top = 31
+            Width = 331
+            Height = 21
+            DropDownCount = 15
+            Ctl3D = False
+            DataField = 'ID_CONTABIL_OPE_DEST'
+            DataSource = DMCadTransferencia.dsTransferencia
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            LookupField = 'ID'
+            LookupDisplay = 'NOME'
+            LookupSource = DMCadTransferencia.dsContabil_Ope
+            ParentCtl3D = False
+            ParentFont = False
+            TabOrder = 1
+          end
+        end
       end
     end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 482
-    Width = 862
+    Top = 490
+    Width = 870
     Height = 19
     Panels = <
       item

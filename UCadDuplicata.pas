@@ -354,6 +354,7 @@ type
     procedure Padro1Click(Sender: TObject);
     procedure Pagamento1Click(Sender: TObject);
     procedure Recebimento1Click(Sender: TObject);
+    procedure SpeedButton6Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -3267,6 +3268,12 @@ begin
   ValorPorExtenso1.Valor := fDmCadDuplicata.cdsDuplicata_ConsultaVLR_PAGO.AsFloat;
   fDmCadDuplicata.mReciboFinanceiro_VlrExtenso.AsString := ValorPorExtenso1.Texto;
   fDmCadDuplicata.mRecibo.Post;
+end;
+
+procedure TfrmCadDuplicata.SpeedButton6Click(Sender: TObject);
+begin
+  fDMCadDuplicata.cdsContabil_Ope.Close;
+  fDMCadDuplicata.cdsContabil_Ope.Open;
 end;
 
 end.

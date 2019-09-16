@@ -79,6 +79,22 @@ type
     cdsTipoCobrancaCARTAODEBITO: TStringField;
     cdsTipoCobrancaDINHEIRO: TStringField;
     cdsTransferenciaNUMCHEQUE: TIntegerField;
+    sdsContabil_Ope: TSQLDataSet;
+    dspContabil_Ope: TDataSetProvider;
+    cdsContabil_Ope: TClientDataSet;
+    cdsContabil_OpeID: TIntegerField;
+    cdsContabil_OpeNOME: TStringField;
+    dsContabil_Ope: TDataSource;
+    qParametros_Geral: TSQLQuery;
+    qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField;
+    sdsTransferenciaID_CONTABIL_OPE_ORIG: TIntegerField;
+    sdsTransferenciaID_CONTABIL_OPE_DEST: TIntegerField;
+    cdsTransferenciaID_CONTABIL_OPE_ORIG: TIntegerField;
+    cdsTransferenciaID_CONTABIL_OPE_DEST: TIntegerField;
+    cdsTransferencia_ConsultaID_CONTABIL_OPE_ORIG: TIntegerField;
+    cdsTransferencia_ConsultaID_CONTABIL_OPE_DEST: TIntegerField;
+    cdsTransferencia_ConsultaNOME_CONTABIL_OPE_ORIG: TStringField;
+    cdsTransferencia_ConsultaNOME_CONTABIL_OPE_DEST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspTransferenciaUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -193,6 +209,9 @@ begin
   ctConsulta := sdsTransferencia_Consulta.CommandText;
   cdsContas.Open;
   cdsTipoCobranca.Open;
+  qParametros_Geral.Open;
+  if qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S' then
+    cdsContabil_Ope.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
