@@ -23,7 +23,7 @@ object fCupomParametros: TfCupomParametros
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 873
+    Width = 865
     Height = 35
     Align = alTop
     Color = 8404992
@@ -79,8 +79,8 @@ object fCupomParametros: TfCupomParametros
   object PageControl1: TPageControl
     Left = 0
     Top = 35
-    Width = 873
-    Height = 566
+    Width = 865
+    Height = 558
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
@@ -89,8 +89,8 @@ object fCupomParametros: TfCupomParametros
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 865
-        Height = 538
+        Width = 857
+        Height = 530
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -802,7 +802,7 @@ object fCupomParametros: TfCupomParametros
         Left = 16
         Top = 0
         Width = 801
-        Height = 257
+        Height = 236
         Caption = 'Financeiro'
         Enabled = False
         TabOrder = 0
@@ -1215,9 +1215,9 @@ object fCupomParametros: TfCupomParametros
       end
       object GroupBox2: TGroupBox
         Left = 16
-        Top = 258
+        Top = 235
         Width = 465
-        Height = 192
+        Height = 214
         Caption = 'Usabilidade'
         Enabled = False
         TabOrder = 1
@@ -1427,9 +1427,9 @@ object fCupomParametros: TfCupomParametros
       end
       object GroupBox3: TGroupBox
         Left = 16
-        Top = 451
+        Top = 448
         Width = 802
-        Height = 85
+        Height = 82
         Caption = 'Restaurante'
         Enabled = False
         TabOrder = 3
@@ -1594,9 +1594,9 @@ object fCupomParametros: TfCupomParametros
       end
       object GroupBox5: TGroupBox
         Left = 486
-        Top = 258
+        Top = 235
         Width = 331
-        Height = 192
+        Height = 214
         Caption = 'Varejo'
         TabOrder = 2
         object Label45: TLabel
@@ -1662,6 +1662,14 @@ object fCupomParametros: TfCupomParametros
           Height = 13
           Alignment = taRightJustify
           Caption = 'Autentica vendedor:'
+        end
+        object Label74: TLabel
+          Left = 13
+          Top = 194
+          Width = 111
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Exige canal de vendas:'
         end
         object RxDBComboBox26: TRxDBComboBox
           Left = 128
@@ -1824,6 +1832,24 @@ object fCupomParametros: TfCupomParametros
           TabStop = False
           OnClick = BitBtn1Click
         end
+        object RxDBComboBox44: TRxDBComboBox
+          Left = 128
+          Top = 186
+          Width = 176
+          Height = 21
+          Style = csDropDownList
+          DataField = 'USA_CANAL_VENDA'
+          DataSource = dmCupomFiscal.dsCupomParametros
+          EnableValues = True
+          ItemHeight = 13
+          Items.Strings = (
+            'N'#195'O'
+            'SIM')
+          TabOrder = 9
+          Values.Strings = (
+            'N'
+            'S')
+        end
       end
     end
     object TabSheet3: TTabSheet
@@ -1832,8 +1858,8 @@ object fCupomParametros: TfCupomParametros
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 865
-        Height = 538
+        Width = 857
+        Height = 530
         Align = alClient
         TabOrder = 0
         object Label15: TLabel
@@ -1989,6 +2015,7 @@ object fCupomParametros: TfCupomParametros
             item
               Expanded = False
               FieldName = 'NUMREGISTRO'
+              Width = 64
               Visible = True
             end>
         end

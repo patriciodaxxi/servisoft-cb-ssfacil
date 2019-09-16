@@ -28,8 +28,6 @@ type
     DBEdit5: TDBEdit;
     DBEdit8: TDBEdit;
     ceCodCliente: TCurrencyEdit;
-    Label11: TLabel;
-    ComboVendedor: TRxDBLookupCombo;
     Panel4: TPanel;
     Label2: TLabel;
     Label10: TLabel;
@@ -67,6 +65,12 @@ type
     Label3: TLabel;
     RxDBLookupCombo2: TRxDBLookupCombo;
     btnParcelas: TSpeedButton;
+    pnlCanalVenda: TPanel;
+    Label19: TLabel;
+    ComboBox1: TComboBox;
+    pnlVendedor: TPanel;
+    Label11: TLabel;
+    ComboVendedor: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DBEdit1Exit(Sender: TObject);
@@ -412,14 +416,15 @@ begin
   Label14.Visible := (fDmCupomFiscal.cdsCupomParametrosUSA_QTD_PESSOA.AsString = 'S');
   DBEdit6.Visible := (fDmCupomFiscal.cdsCupomParametrosUSA_QTD_PESSOA.AsString = 'S');
 
-  ComboVendedor.Visible := fDmCupomFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S';
-  Label11.Visible       := fDmCupomFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S';
+  pnlVendedor.Visible := fDmCupomFiscal.cdsParametrosUSA_VENDEDOR.AsString = 'S';
 
   if (ComboVendedor.Visible) and (vId_Vendedor > 0) and (fDmCupomFiscal.cdsCupomParametrosREPETE_VENDEDOR.AsString = 'S') then
   begin
     ComboVendedor.KeyValue := vId_Vendedor;
     ComboVendedorExit(Sender);
   end;
+
+  PnlCanalVenda.Visible := fDmCupomFiscal.cdsCupomParametrosUSA_CANAL_VENDA.AsString = 'S';
 end;
 
 procedure TfCupomFiscalPgto.RxDBLookupCombo2Enter(Sender: TObject);
@@ -522,6 +527,14 @@ begin
     ceCodCliente.SetFocus;
     Exit;
   end;
+
+  if (pnlCanalVenda.Visible) and (ComboBox1.ItemIndex < 0) then
+  begin
+    MessageDlg('*** Canal de venda é obrigatório!', mtInformation, [mbOk], 0);
+    ComboBox1.SetFocus;
+    exit;
+  end;
+
 
   if (StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsFloat)) <= 0) then
   begin

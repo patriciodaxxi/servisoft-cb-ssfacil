@@ -277,6 +277,9 @@ object dmCupomFiscal: TdmCupomFiscal
     object sdsCupomFiscalVLR_OUTROS: TFloatField
       FieldName = 'VLR_OUTROS'
     end
+    object sdsCupomFiscalID_CANAL_VENDA: TIntegerField
+      FieldName = 'ID_CANAL_VENDA'
+    end
   end
   object dspCupomFiscal: TDataSetProvider
     DataSet = sdsCupomFiscal
@@ -568,6 +571,9 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupomFiscalVLR_OUTROS: TFloatField
       FieldName = 'VLR_OUTROS'
+    end
+    object cdsCupomFiscalID_CANAL_VENDA: TIntegerField
+      FieldName = 'ID_CANAL_VENDA'
     end
   end
   object dsCupomFiscal: TDataSource
@@ -2943,6 +2949,11 @@ object dmCupomFiscal: TdmCupomFiscal
       FixedChar = True
       Size = 1
     end
+    object sdsCupomParametrosUSA_CANAL_VENDA: TStringField
+      FieldName = 'USA_CANAL_VENDA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCupomParametros: TDataSetProvider
     DataSet = sdsCupomParametros
@@ -3212,6 +3223,11 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupomParametrosANIVERSARIO_PERIODO: TStringField
       FieldName = 'ANIVERSARIO_PERIODO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCupomParametrosUSA_CANAL_VENDA: TStringField
+      FieldName = 'USA_CANAL_VENDA'
       FixedChar = True
       Size = 1
     end
