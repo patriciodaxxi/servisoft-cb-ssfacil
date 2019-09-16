@@ -1546,6 +1546,10 @@ type
     cdsTipoCobrancaJUROS_TIPO: TStringField;
     qParametros_UsuarioCUPOM_TOTAIS: TStringField;
     cdsCombinacaoID_COR_COMBINACAO: TIntegerField;
+    sdsCupomFiscalID_CANAL_VENDA: TIntegerField;
+    cdsCupomFiscalID_CANAL_VENDA: TIntegerField;
+    sdsCupomParametrosUSA_CANAL_VENDA: TStringField;
+    cdsCupomParametrosUSA_CANAL_VENDA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);

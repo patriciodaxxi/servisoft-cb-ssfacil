@@ -1,8 +1,8 @@
 object fCupomFiscalPgto: TfCupomFiscalPgto
   Left = 316
-  Top = 10
+  Top = 6
   Width = 822
-  Height = 678
+  Height = 682
   BorderIcons = [biSystemMenu]
   Caption = 'fCupomFiscalPgto - Pagamento'
   Color = clBtnFace
@@ -21,8 +21,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 606
-    Width = 814
+    Top = 602
+    Width = 806
     Height = 41
     Align = alBottom
     TabOrder = 1
@@ -86,8 +86,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 814
-    Height = 606
+    Width = 806
+    Height = 602
     ActivePage = TabSheet1
     ActivePageDefault = TabSheet1
     Align = alClient
@@ -99,21 +99,21 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 810
-        Height = 583
+        Width = 802
+        Height = 579
         Align = alClient
         TabOrder = 0
         object Panel3: TPanel
           Left = 1
-          Top = 418
-          Width = 808
-          Height = 164
+          Top = 390
+          Width = 800
+          Height = 116
           Align = alBottom
           Color = 3683329
           TabOrder = 3
           object Label8: TLabel
             Left = 94
-            Top = 56
+            Top = 14
             Width = 100
             Height = 23
             Alignment = taRightJustify
@@ -127,7 +127,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object Label9: TLabel
             Left = 119
-            Top = 94
+            Top = 52
             Width = 75
             Height = 23
             Alignment = taRightJustify
@@ -139,23 +139,9 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Style = []
             ParentFont = False
           end
-          object Label11: TLabel
-            Left = 95
-            Top = 16
-            Width = 99
-            Height = 23
-            Alignment = taRightJustify
-            Caption = 'Vendedor:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWhite
-            Font.Height = -19
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
           object btCliente: TSpeedButton
             Left = 684
-            Top = 84
+            Top = 44
             Width = 31
             Height = 32
             Hint = 'Consulta de clientes'
@@ -172,7 +158,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object SpeedButton1: TSpeedButton
             Left = 716
-            Top = 84
+            Top = 44
             Width = 31
             Height = 32
             Hint = 'Consulta cr'#233'dito do cliente'
@@ -189,7 +175,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object Label6: TLabel
             Left = 141
-            Top = 129
+            Top = 89
             Width = 53
             Height = 23
             Alignment = taRightJustify
@@ -203,7 +189,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object SpeedButton2: TSpeedButton
             Left = 748
-            Top = 84
+            Top = 44
             Width = 31
             Height = 32
             Hint = 'Informa'#231#245'es do cliente'
@@ -220,7 +206,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object Label14: TLabel
             Left = 493
-            Top = 54
+            Top = 14
             Width = 84
             Height = 23
             Alignment = taRightJustify
@@ -234,7 +220,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           end
           object DBEdit5: TDBEdit
             Left = 202
-            Top = 46
+            Top = 6
             Width = 279
             Height = 31
             DataField = 'CPF'
@@ -245,13 +231,13 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Name = 'Verdana'
             Font.Style = []
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 0
             OnExit = DBEdit5Exit
             OnKeyDown = DBEdit5KeyDown
           end
           object DBEdit8: TDBEdit
             Left = 279
-            Top = 84
+            Top = 44
             Width = 401
             Height = 31
             CharCase = ecUpperCase
@@ -263,12 +249,12 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Name = 'Verdana'
             Font.Style = []
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 3
             OnKeyDown = DBEdit8KeyDown
           end
           object ceCodCliente: TCurrencyEdit
             Left = 202
-            Top = 84
+            Top = 44
             Width = 73
             Height = 31
             AutoSize = False
@@ -280,38 +266,13 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Name = 'Verdana'
             Font.Style = []
             ParentFont = False
-            TabOrder = 3
+            TabOrder = 2
             OnExit = ceCodClienteExit
             OnKeyDown = ceCodClienteKeyDown
           end
-          object ComboVendedor: TRxDBLookupCombo
-            Left = 202
-            Top = 7
-            Width = 477
-            Height = 32
-            DropDownCount = 10
-            Ctl3D = True
-            DataField = 'ID_VENDEDOR'
-            DataSource = dmCupomFiscal.dsCupomFiscal
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = 3683329
-            Font.Height = -19
-            Font.Name = 'Verdana'
-            Font.Style = []
-            LookupField = 'CODIGO'
-            LookupDisplay = 'NOME'
-            LookupSource = dmCupomFiscal.dsVendedor
-            ParentCtl3D = False
-            ParentFont = False
-            TabOrder = 0
-            OnChange = ComboVendedorChange
-            OnEnter = ComboVendedorEnter
-            OnExit = ComboVendedorExit
-            OnKeyDown = ComboVendedorKeyDown
-          end
           object DBEdit9: TDBEdit
             Left = 202
-            Top = 121
+            Top = 81
             Width = 478
             Height = 31
             CharCase = ecUpperCase
@@ -323,12 +284,12 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Name = 'Verdana'
             Font.Style = []
             ParentFont = False
-            TabOrder = 5
+            TabOrder = 4
             OnExit = DBEdit9Exit
           end
           object DBEdit6: TDBEdit
             Left = 583
-            Top = 45
+            Top = 5
             Width = 97
             Height = 32
             DataField = 'QTD_PESSOA'
@@ -339,14 +300,14 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 2
+            TabOrder = 1
             OnKeyDown = DBEdit6KeyDown
           end
         end
         object Panel4: TPanel
           Left = 1
           Top = 1
-          Width = 808
+          Width = 800
           Height = 124
           Align = alTop
           Color = 3683329
@@ -601,7 +562,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         object Panel6: TPanel
           Left = 1
           Top = 125
-          Width = 808
+          Width = 800
           Height = 96
           Align = alTop
           TabOrder = 1
@@ -712,8 +673,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         object Panel7: TPanel
           Left = 1
           Top = 221
-          Width = 808
-          Height = 197
+          Width = 800
+          Height = 169
           Align = alClient
           TabOrder = 2
           OnEnter = Panel7Enter
@@ -821,6 +782,100 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             TabOrder = 2
           end
         end
+        object pnlCanalVenda: TPanel
+          Left = 1
+          Top = 543
+          Width = 800
+          Height = 35
+          Align = alBottom
+          Color = 3683329
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 5
+          object Label19: TLabel
+            Left = 37
+            Top = 11
+            Width = 157
+            Height = 23
+            Alignment = taRightJustify
+            Caption = 'Canal de Venda:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -19
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object ComboBox1: TComboBox
+            Left = 202
+            Top = 2
+            Width = 479
+            Height = 32
+            Style = csDropDownList
+            DropDownCount = 2
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 3683329
+            Font.Height = -19
+            Font.Name = 'MS Sans Serif'
+            Font.Style = []
+            ItemHeight = 24
+            ParentFont = False
+            TabOrder = 0
+            Items.Strings = (
+              'Loja'
+              'Internet')
+          end
+        end
+        object pnlVendedor: TPanel
+          Left = 1
+          Top = 506
+          Width = 800
+          Height = 37
+          Align = alBottom
+          Color = 3683329
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 4
+          object Label11: TLabel
+            Left = 95
+            Top = 12
+            Width = 99
+            Height = 23
+            Alignment = taRightJustify
+            Caption = 'Vendedor:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -19
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object ComboVendedor: TRxDBLookupCombo
+            Left = 202
+            Top = 3
+            Width = 478
+            Height = 32
+            DropDownCount = 10
+            Ctl3D = True
+            DataField = 'ID_VENDEDOR'
+            DataSource = dmCupomFiscal.dsCupomFiscal
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 3683329
+            Font.Height = -19
+            Font.Name = 'Verdana'
+            Font.Style = []
+            LookupField = 'CODIGO'
+            LookupDisplay = 'NOME'
+            LookupSource = dmCupomFiscal.dsVendedor
+            ParentCtl3D = False
+            ParentFont = False
+            TabOrder = 0
+            OnChange = ComboVendedorChange
+            OnEnter = ComboVendedorEnter
+            OnExit = ComboVendedorExit
+            OnKeyDown = ComboVendedorKeyDown
+          end
+        end
       end
     end
     object TabSheet2: TRzTabSheet
@@ -828,7 +883,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 810
+        Width = 802
         Height = 39
         Align = alTop
         TabOrder = 0
@@ -938,8 +993,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 39
-        Width = 810
-        Height = 472
+        Width = 802
+        Height = 468
         Align = alClient
         Color = 12633514
         DataSource = dmCupomFiscal.dsCupom_Parc
@@ -1016,8 +1071,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
       end
       object Panel8: TPanel
         Left = 0
-        Top = 511
-        Width = 810
+        Top = 507
+        Width = 802
         Height = 72
         Align = alBottom
         TabOrder = 2
