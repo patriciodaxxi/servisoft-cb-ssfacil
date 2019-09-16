@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadTransferencia, Mask, 
   UCBase, StdCtrls, RxDBComb, DBCtrls, ExtCtrls, DBGrids, RzTabs, DB, NxCollection, RxLookup, ToolEdit, RXDBCtrl, NxEdit,
-  ComCtrls;
+  ComCtrls, RzPanel;
 
 type
   TfrmCadTransferencia = class(TForm)
@@ -52,6 +52,12 @@ type
     RxDBLookupCombo3: TRxDBLookupCombo;
     Label11: TLabel;
     DBEdit5: TDBEdit;
+    gbxContabil: TRzGroupBox;
+    Label53: TLabel;
+    SpeedButton6: TSpeedButton;
+    Label59: TLabel;
+    RxDBLookupCombo11: TRxDBLookupCombo;
+    RxDBLookupCombo12: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -76,6 +82,7 @@ type
       Shift: TShiftState);
     procedure DBEdit3KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure SpeedButton6Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadTransferencia: TDMCadTransferencia;
@@ -168,6 +175,7 @@ end;
 procedure TfrmCadTransferencia.FormShow(Sender: TObject);
 var
   vData: TDateTime;
+  i: Integer;
 begin
   fDMCadTransferencia := TDMCadTransferencia.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMCadTransferencia);
@@ -177,6 +185,12 @@ begin
   uUtilPadrao.fnc_Busca_Nome_Filial;
   StatusBar1.Panels[0].Text := vUsuario;
   StatusBar1.Panels[1].Text := vFilial_Nome;
+  gbxContabil.Visible := (fDMCadTransferencia.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S');
+  for i := 0 to SMDBGrid1.ColCount - 2 do
+  begin
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_CONTABIL_OPE_ORIG') or (SMDBGrid1.Columns[i].FieldName = 'NOME_CONTABIL_OPE_DEST') then
+      SMDBGrid1.Columns[i].Visible := (fDMCadTransferencia.qParametros_GeralMOSTRAR_COD_CONTABIL.AsString = 'S');
+  end;
 end;
 
 procedure TfrmCadTransferencia.prc_Consultar(ID: Integer = 0);
@@ -400,6 +414,12 @@ begin
       fDMCadTransferencia.cdsTransferenciaID_CONTA_ORC_DESTINO.Clear;
     prc_Abrir_qConta_Orcamento(fDMCadTransferencia.cdsTransferenciaID_CONTA_ORC_DESTINO.AsInteger,2);
   end;
+end;
+
+procedure TfrmCadTransferencia.SpeedButton6Click(Sender: TObject);
+begin
+  fDMCadTransferencia.cdsContabil_Ope.Close;
+  fDMCadTransferencia.cdsContabil_Ope.Open;
 end;
 
 end.

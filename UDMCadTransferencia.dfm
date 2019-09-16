@@ -45,6 +45,12 @@ object DMCadTransferencia: TDMCadTransferencia
     object sdsTransferenciaNUMCHEQUE: TIntegerField
       FieldName = 'NUMCHEQUE'
     end
+    object sdsTransferenciaID_CONTABIL_OPE_ORIG: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_ORIG'
+    end
+    object sdsTransferenciaID_CONTABIL_OPE_DEST: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_DEST'
+    end
   end
   object dspTransferencia: TDataSetProvider
     DataSet = sdsTransferencia
@@ -90,6 +96,12 @@ object DMCadTransferencia: TDMCadTransferencia
     end
     object cdsTransferenciaNUMCHEQUE: TIntegerField
       FieldName = 'NUMCHEQUE'
+    end
+    object cdsTransferenciaID_CONTABIL_OPE_ORIG: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_ORIG'
+    end
+    object cdsTransferenciaID_CONTABIL_OPE_DEST: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_DEST'
     end
   end
   object dsTransferencia: TDataSource
@@ -168,8 +180,12 @@ object DMCadTransferencia: TDMCadTransferencia
     GetMetadata = False
     CommandText = 
       'SELECT T.*, CO.nome NOME_CONTA_ORIGEM, CD.nome NOME_CONTA_DESTIN' +
-      'O'#13#10'FROM TRANSFERENCIA T'#13#10'INNER JOIN CONTAS CO'#13#10'ON T.id_conta_ori' +
-      ' = CO.id'#13#10'INNER JOIN CONTAS CD'#13#10'ON T.id_conta_dest = CD.ID'#13#10
+      'O,'#13#10'OPE_ORIG.NOME NOME_CONTABIL_OPE_ORIG, OPE_DEST.NOME NOME_CON' +
+      'TABIL_OPE_DEST'#13#10'FROM TRANSFERENCIA T'#13#10'INNER JOIN CONTAS CO'#13#10'ON T' +
+      '.id_conta_ori = CO.id'#13#10'INNER JOIN CONTAS CD'#13#10'ON T.id_conta_dest ' +
+      '= CD.ID'#13#10'LEFT JOIN contabil_ope OPE_ORIG'#13#10'ON T.id_contabil_ope_o' +
+      'rig = OPE_ORIG.id'#13#10'LEFT JOIN contabil_ope OPE_DEST'#13#10'ON T.id_cont' +
+      'abil_ope_dest = OPE_DEST.id'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -219,6 +235,20 @@ object DMCadTransferencia: TDMCadTransferencia
     object cdsTransferencia_ConsultaNOME_CONTA_DESTINO: TStringField
       FieldName = 'NOME_CONTA_DESTINO'
       Size = 30
+    end
+    object cdsTransferencia_ConsultaID_CONTABIL_OPE_ORIG: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_ORIG'
+    end
+    object cdsTransferencia_ConsultaID_CONTABIL_OPE_DEST: TIntegerField
+      FieldName = 'ID_CONTABIL_OPE_DEST'
+    end
+    object cdsTransferencia_ConsultaNOME_CONTABIL_OPE_ORIG: TStringField
+      FieldName = 'NOME_CONTABIL_OPE_ORIG'
+      Size = 40
+    end
+    object cdsTransferencia_ConsultaNOME_CONTABIL_OPE_DEST: TStringField
+      FieldName = 'NOME_CONTABIL_OPE_DEST'
+      Size = 40
     end
   end
   object dsTransferencia_Consulta: TDataSource
@@ -320,5 +350,56 @@ object DMCadTransferencia: TDMCadTransferencia
     DataSet = cdsTipoCobranca
     Left = 536
     Top = 240
+  end
+  object sdsContabil_Ope: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT *'#13#10'FROM CONTABIL_OPE'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 424
+    Top = 298
+  end
+  object dspContabil_Ope: TDataSetProvider
+    DataSet = sdsContabil_Ope
+    Left = 456
+    Top = 298
+  end
+  object cdsContabil_Ope: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspContabil_Ope'
+    Left = 488
+    Top = 298
+    object cdsContabil_OpeID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsContabil_OpeNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+  end
+  object dsContabil_Ope: TDataSource
+    DataSet = cdsContabil_Ope
+    Left = 520
+    Top = 298
+  end
+  object qParametros_Geral: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT MOSTRAR_COD_CONTABIL'
+      'FROM PARAMETROS_GERAL')
+    SQLConnection = dmDatabase.scoDados
+    Left = 157
+    Top = 174
+    object qParametros_GeralMOSTRAR_COD_CONTABIL: TStringField
+      FieldName = 'MOSTRAR_COD_CONTABIL'
+      FixedChar = True
+      Size = 1
+    end
   end
 end
