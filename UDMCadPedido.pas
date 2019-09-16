@@ -3492,6 +3492,8 @@ type
     qPessoa_FiscalDRAW_POSSUI: TStringField;
     sdsPedido_ItensDRAWBACK: TStringField;
     cdsPedido_ItensDRAWBACK: TStringField;
+    cdsPedidoImpID_VENDEDOR_INT: TIntegerField;
+    cdsPedidoImpNOME_VENDEDOR_INT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
