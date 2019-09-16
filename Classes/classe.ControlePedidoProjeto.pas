@@ -112,7 +112,7 @@ begin
   begin
     Self.NomeProjeto  := FControle.sqlGeral.FieldByName('Nome_Projeto').AsString;
     Self.Id_Pessoa    := FControle.sqlGeral.FieldByName('Id_Pessoa').Asinteger;
-    Self.Preco_Kg     := FControle.sqlGeral.FieldByName('Peso').AsFloat;
+    Self.Preco_Kg     := FControle.sqlGeral.FieldByName('Preco_KG').AsFloat;
     Self.Vlr_Dobra    := FControle.sqlGeral.FieldByName('Vlr_Dobra').AsFloat;
     Self.Vlr_Unitario := FControle.sqlGeral.FieldByName('Vlr_Unitario').AsFloat;
     Self.Comprimento  := FControle.sqlGeral.FieldByName('Comprimento').AsFloat;
