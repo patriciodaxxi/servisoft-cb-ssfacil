@@ -1215,7 +1215,8 @@ begin
     MessageDlg('*** Caixa já está aberto!', mtInformation, [mbOk], 0);
     exit;
   end;
-  if fDMCadFechamento.cdsFechamento_ConsultaTIPO_FECHAMENTO.AsString = 'E' then
+  if (fDMCadFechamento.cdsFechamento_ConsultaTIPO_FECHAMENTO.AsString = 'E') or
+     (fDMCadFechamento.cdsFechamento_ConsultaTIPO_FECHAMENTO.AsString = 'S') then
   begin
 //    MessageDlg('*** Caixa já encerrado, neste processo não pode ser reaberto!', mtInformation, [mbOk], 0);
       vIDAux := fDMCadFechamento.cdsFechamento_ConsultaID.AsInteger;
