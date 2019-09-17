@@ -4063,17 +4063,18 @@ object DMCadPedido: TDMCadPedido
       'conta do Remetente'#39#13#10'         WHEN PED.TIPO_FRETE = '#39'5'#39' THEN '#39' 5' +
       ' Transporte Pr'#243'prio por conta do Destinat'#225'rio'#39#13#10'         WHEN PE' +
       'D.TIPO_FRETE = '#39'9'#39' THEN '#39' 9 Sem Frete'#39#13#10'       END DESC_TIPO_FRE' +
-      'TE'#13#10#13#10'FROM PEDIDO PED'#13#10'LEFT JOIN PESSOA CLI ON PED.ID_CLIENTE = ' +
-      'CLI.CODIGO'#13#10'INNER JOIN FILIAL FIL ON (PED.FILIAL = FIL.ID)'#13#10'LEFT' +
-      ' JOIN PESSOA TRA ON (PED.ID_TRANSPORTADORA = TRA.CODIGO)'#13#10'LEFT J' +
-      'OIN PESSOA RED ON (PED.ID_REDESPACHO = RED.CODIGO)'#13#10'LEFT JOIN CO' +
-      'NDPGTO COND ON (PED.ID_CONDPGTO = COND.ID)'#13#10'LEFT JOIN PESSOA VEN' +
-      'D ON (PED.ID_VENDEDOR = VEND.CODIGO)'#13#10'LEFT JOIN FUNCIONARIO FUN ' +
-      'ON (PED.ID_FUNCIONARIO = FUN.CODIGO)'#13#10'LEFT JOIN MAPA_COMPRAS MAP' +
-      'A ON (PED.ID_MAPA = MAPA.ID)'#13#10'LEFT JOIN PESSOA ATE ON (PED.ID_AT' +
-      'ELIER = ATE.CODIGO)'#13#10'LEFT JOIN OPERACAO_NOTA OPN ON (PED.ID_OPER' +
-      'ACAO_NOTA = OPN.ID)'#13#10'LEFT JOIN GRUPO_PESSOA GP ON PED.ID_GRUPO_P' +
-      'ESSOA = GP.ID'#13#10'WHERE PED.ID = :ID'#13#10#13#10
+      'TE, vint.nome nome_vendedor_int'#13#10#13#10'FROM PEDIDO PED'#13#10'LEFT JOIN PE' +
+      'SSOA CLI ON PED.ID_CLIENTE = CLI.CODIGO'#13#10'INNER JOIN FILIAL FIL O' +
+      'N (PED.FILIAL = FIL.ID)'#13#10'LEFT JOIN PESSOA TRA ON (PED.ID_TRANSPO' +
+      'RTADORA = TRA.CODIGO)'#13#10'LEFT JOIN PESSOA RED ON (PED.ID_REDESPACH' +
+      'O = RED.CODIGO)'#13#10'LEFT JOIN CONDPGTO COND ON (PED.ID_CONDPGTO = C' +
+      'OND.ID)'#13#10'LEFT JOIN PESSOA VEND ON (PED.ID_VENDEDOR = VEND.CODIGO' +
+      ')'#13#10'LEFT JOIN PESSOA VINT ON (PED.id_vendedor_int = VINT.CODIGO)'#13 +
+      #10'LEFT JOIN FUNCIONARIO FUN ON (PED.ID_FUNCIONARIO = FUN.CODIGO)'#13 +
+      #10'LEFT JOIN MAPA_COMPRAS MAPA ON (PED.ID_MAPA = MAPA.ID)'#13#10'LEFT JO' +
+      'IN PESSOA ATE ON (PED.ID_ATELIER = ATE.CODIGO)'#13#10'LEFT JOIN OPERAC' +
+      'AO_NOTA OPN ON (PED.ID_OPERACAO_NOTA = OPN.ID)'#13#10'LEFT JOIN GRUPO_' +
+      'PESSOA GP ON PED.ID_GRUPO_PESSOA = GP.ID'#13#10'WHERE PED.ID = :ID'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -4794,6 +4795,13 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'IMP_ETIQUETA_ROT'
       FixedChar = True
       Size = 1
+    end
+    object cdsPedidoImpID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
+    end
+    object cdsPedidoImpNOME_VENDEDOR_INT: TStringField
+      FieldName = 'NOME_VENDEDOR_INT'
+      Size = 60
     end
   end
   object dsPedidoImp: TDataSource
@@ -10671,7 +10679,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43704.605862685190000000
+    ReportOptions.LastChange = 43682.601200532400000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -10864,7 +10872,10 @@ object DMCadPedido: TDMCadPedido
       'EMAIL_FIL=EMAIL_FIL'
       'DDDFAX_FIL=DDDFAX_FIL'
       'FAX_FIL=FAX_FIL'
-      'COMPL_END_FILIAL=COMPL_END_FILIAL')
+      'COMPL_END_FILIAL=COMPL_END_FILIAL'
+      'IMP_ETIQUETA_ROT=IMP_ETIQUETA_ROT'
+      'ID_VENDEDOR_INT=ID_VENDEDOR_INT'
+      'NOME_VENDEDOR_INT=NOME_VENDEDOR_INT')
     DataSource = dsPedidoImp
     BCDToCurrency = False
     Left = 1289
@@ -12898,7 +12909,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp_Rol
     BCDToCurrency = False
     Left = 1288
-    Top = 245
+    Top = 244
   end
   object qProduto_Matriz: TSQLQuery
     MaxBlobSize = -1
@@ -13972,7 +13983,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsPedidoImp_Tam
     BCDToCurrency = False
     Left = 1264
-    Top = 245
+    Top = 244
   end
   object mEmbalagem: TClientDataSet
     Active = True
@@ -14344,7 +14355,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsmItensImp_Tam
     BCDToCurrency = False
     Left = 1216
-    Top = 204
+    Top = 203
   end
   object sdsPedido_Itens2: TSQLDataSet
     NoMetadata = True
@@ -17850,7 +17861,7 @@ object DMCadPedido: TDMCadPedido
       'REF_COMB=REF_COMB')
     DataSource = dsConsumo_Comb
     BCDToCurrency = False
-    Left = 1184
+    Left = 1185
     Top = 156
   end
   object sdsprc_Atualiza_OS_Fat: TSQLDataSet
@@ -18266,7 +18277,7 @@ object DMCadPedido: TDMCadPedido
       'CONTATO_COMPRAS=CONTATO_COMPRAS')
     DataSource = dsTriCCusto
     BCDToCurrency = False
-    Left = 1152
+    Left = 1153
     Top = 156
   end
   object qPessoa_ProdICMS: TSQLQuery

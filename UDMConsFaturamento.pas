@@ -452,6 +452,7 @@ type
     cdsProduto_Det_GeralVLR_FRETE: TFloatField;
     qParametros_Geral: TSQLQuery;
     qParametros_GeralUSA_VENDEDOR_INT: TStringField;
+    sdsVendCliProd_Int: TSQLDataSet;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscal_CliCalcFields(DataSet: TDataSet);
     procedure dspNotaFiscal_CliUpdateError(Sender: TObject;
@@ -480,6 +481,7 @@ type
     ctFaturamento: String;
     ctNotaFiscal_VendProd, ctNotaFiscal_VendCli, ctNotaFiscal_Vend: String;
     ctProduto_Det_Geral : String;
+    ctVendCliProd, ctVendCliProd_Int : String;
     vVlrFaturamento, vVlrFrete, vVlrIpi, vVlrDevol, vVlrLiq: Real;
     vDescOpcao_Rel: String;
     vTipo_Reg: String;
@@ -503,6 +505,8 @@ begin
   ctNotaFiscal_VendCli  := sdsNotaFiscal_VendCli.CommandText;
   ctNotaFiscal_Vend     := sdsNotaFiscal_Vend.CommandText;
   ctProduto_Det_Geral   := sdsProduto_Det_Geral.CommandText;
+  ctVendCliProd         := sdsVendCliProd.CommandText;
+  ctVendCliProd_Int     := sdsVendCliProd_Int.CommandText;
 
   cdsFilial.Close;
   cdsCliente.Close;

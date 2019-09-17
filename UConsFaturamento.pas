@@ -109,6 +109,7 @@ type
     SMDBGrid19: TSMDBGrid;
     chkDesconto: TCheckBox;
     Label13: TLabel;
+    chkVendedor_Int: TCheckBox;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -142,6 +143,8 @@ type
     ColunaOrdenada: String;
     vComando: String;
     vOpcaoImp: String;
+    vOpcaoVendedor: String;
+    vOpcaoVendedor_Group: String;
 
     procedure prc_Opcao_Rel_Vendedor;
 
@@ -269,6 +272,13 @@ begin
   else
   if RzPageControl1.ActivePage = TS_Vendedor then
   begin
+    vOpcaoVendedor       := 'V.ID_VENDEDOR, V.NOME_VENDEDOR';
+    vOpcaoVendedor_Group := 'V.ID_VENDEDOR, V.NOME_VENDEDOR';
+    if chkVendedor_Int.Checked then
+    begin
+      vOpcaoVendedor := 'V.ID_VENDEDOR_INT ID_VENDEDOR, V.NOME_VENDEDOR_INT NOME_VENDEDOR';
+      vOpcaoVendedor_Group := 'V.ID_VENDEDOR_INT, V.NOME_VENDEDOR_INT';
+    end;
     fDMConsFaturamento.cdsNotaFiscal_Vend.IndexFieldNames     := '';
     fDMConsFaturamento.cdsNotaFiscal_VendProd.IndexFieldNames := '';
     fDMConsFaturamento.cdsNotaFiscal_VendCli.IndexFieldNames  := '';
@@ -361,7 +371,6 @@ begin
   Label3.Caption     := vTexto2 + ':';
   TS_Cliente.Caption := vTexto2;
 
-
   TS_Cliente_Prod.Caption      := vTexto2 + ' / Produto';
   fDMConsFaturamento.vTipo_Reg := fMenu.vTipo_Reg_Cons_Fat;
   Panel4.Visible := (fMenu.vTipo_Reg_Cons_Fat <> 'NTE');
@@ -382,7 +391,7 @@ begin
   ceDevolucoes.Visible := (fDMConsFaturamento.qParametros_NFeMOSTRAR_VLR_DEVOL_CONS.AsString = 'S');
   chkCupomEnv.Visible  := (fDMConsFaturamento.qParametrosUSA_CUPOM_FISCAL.AsString = 'S');
   //**************
-
+  chkVendedor_Int.Visible := (fDMConsFaturamento.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
 
   prc_Ajustar_Grids(SMDBGrid1);
   prc_Ajustar_Grids(SMDBGrid2);
@@ -1145,25 +1154,17 @@ var
   vDesc: String;
   vComandoAux: String;
 begin
-  {vComandoGroup := '';
-  i := PosEx('GROUP',fDMConsFaturamento.ctNotaFiscal_VendProd,0);
-  if i > 0 then
-  begin
-    vComandoGroup := copy(fDMConsFaturamento.ctNotaFiscal_VendProd,i,(Length(fDMConsFaturamento.ctNotaFiscal_VendProd) - i) + 1);
-    delete(fDMConsFaturamento.ctNotaFiscal_VendProd,i,(Length(fDMConsFaturamento.ctNotaFiscal_VendProd) - i) + 1);
-  end;}
   if CheckBox2.Checked then
     vDesc := ' SUM(V.VLR_VENDAS - V.VLR_ICMSSUBST) VLR_VENDAS '
   else
     vDesc := ' SUM(V.VLR_VENDAS) VLR_VENDAS ';
-  vComandoAux := 'SELECT v.tipo_mov, V.id_produto, V.referencia, V.nome_combinacao, V.id_cor, V.id_vendedor, V.nome_vendedor, V.NOME_ORIGINAL, V.NOME_PRODUTO_SERV, '
-               + ' SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, ' + vDesc + ', SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST '
+  vComandoAux := 'SELECT v.tipo_mov, V.id_produto, V.referencia, V.nome_combinacao, V.id_cor, V.NOME_ORIGINAL, V.NOME_PRODUTO_SERV, '
+               + ' SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, ' + vDesc + ', SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST, '
+               + vOpcaoVendedor
                + 'FROM vfaturamento v '
                + vComando
-               + 'GROUP BY v.tipo_mov, V.id_produto, V.referencia, V.nome_combinacao, V.id_cor, V.id_vendedor, V.nome_vendedor, V.NOME_ORIGINAL, V.NOME_PRODUTO_SERV '
+               + 'GROUP BY v.tipo_mov, V.id_produto, V.referencia, V.nome_combinacao, V.id_cor, V.NOME_ORIGINAL, V.NOME_PRODUTO_SERV, ' + vOpcaoVendedor_Group
                + 'Order BY VLR_DUPLICATA DESC';
-
-  //vComando := fDMConsFaturamento.ctNotaFiscal_VendProd + ' ' + vComando + ' ' + vComandoGroup;
   fDMConsFaturamento.cdsNotaFiscal_VendProd.Close;
   fDMConsFaturamento.sdsNotaFiscal_VendProd.CommandText := vComandoAux;
   fDMConsFaturamento.cdsNotaFiscal_VendProd.Open;
@@ -1176,27 +1177,17 @@ var
   vDesc: String;
   vComandoAux: String;
 begin
-  {vComandoGroup := '';
-  i := PosEx('GROUP',fDMConsFaturamento.ctNotaFiscal_VendCli,0);
-  if i > 0 then
-  begin
-    vComandoGroup := copy(fDMConsFaturamento.ctNotaFiscal_VendCli,i,(Length(fDMConsFaturamento.ctNotaFiscal_VendCli) - i) + 1);
-    delete(fDMConsFaturamento.ctNotaFiscal_VendCli,i,(Length(fDMConsFaturamento.ctNotaFiscal_VendCli) - i) + 1);
-  end;
-  vComando := fDMConsFaturamento.ctNotaFiscal_VendCli + ' ' + vComando + ' ' + vComandoGroup;}
-
   if CheckBox2.Checked then
     vDesc := ' SUM(V.VLR_VENDAS - V.VLR_ICMSSUBST) VLR_VENDAS '
   else
     vDesc := ' SUM(V.VLR_VENDAS) VLR_VENDAS ';
-
-  vComandoAux := 'select v.tipo_mov, V.id_pessoa, V.nome_cliforn, V.id_vendedor, V.nome_vendedor, SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, '
-               + ' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, ' + vDesc + ', SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST '
+  vComandoAux := 'select v.tipo_mov, V.id_pessoa, V.nome_cliforn, SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, '
+               + ' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, ' + vDesc + ', SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST, '
+               + vOpcaoVendedor
                + ' from vfaturamento v '
                + vComando
-               + ' GROUP BY v.tipo_mov, V.id_pessoa, V.nome_cliforn, V.id_vendedor, V.nome_vendedor '
+               + ' GROUP BY v.tipo_mov, V.id_pessoa, V.nome_cliforn, ' + vOpcaoVendedor_Group
                + ' order BY VLR_DUPLICATA desc ';
-
   fDMConsFaturamento.cdsNotaFiscal_VendCli.Close;
   fDMConsFaturamento.sdsNotaFiscal_VendCli.CommandText := vComandoAux;
   fDMConsFaturamento.cdsNotaFiscal_VendCli.Open;
@@ -1209,23 +1200,16 @@ var
   vComandoAux: String;
   vDesc: String;
 begin
-  {vComandoGroup := '';
-  i := PosEx('GROUP',fDMConsFaturamento.ctNotaFiscal_Vend,0);
-  if i > 0 then
-  begin
-    vComandoGroup := copy(fDMConsFaturamento.ctNotaFiscal_Vend,i,(Length(fDMConsFaturamento.ctNotaFiscal_Vend) - i) + 1);
-    delete(fDMConsFaturamento.ctNotaFiscal_Vend,i,(Length(fDMConsFaturamento.ctNotaFiscal_Vend) - i) + 1);
-  end;
-  vComando := fDMConsFaturamento.ctNotaFiscal_Vend + ' ' + vComando + ' ' + vComandoGroup;}
   if CheckBox2.Checked then
     vDesc := ' SUM(V.VLR_VENDAS - V.VLR_ICMSSUBST) VLR_VENDAS '
   else
     vDesc := ' SUM(V.VLR_VENDAS) VLR_VENDAS ';
-  vComandoAux := 'Select v.tipo_mov, V.id_vendedor, V.nome_vendedor, SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, '
-               + ' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, ' + vDesc + ', SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST '
+  vComandoAux := 'Select v.tipo_mov, SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, '
+               + ' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, ' + vDesc + ', SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST, '
+               + vOpcaoVendedor
                + ' from vfaturamento v '
                + vComando
-               + ' GROUP BY v.tipo_mov, V.id_vendedor, V.nome_vendedor '
+               + ' GROUP BY v.tipo_mov, ' + vOpcaoVendedor_Group
                + ' order BY VLR_DUPLICATA desc ';
   fDMConsFaturamento.cdsNotaFiscal_Vend.Close;
   fDMConsFaturamento.sdsNotaFiscal_Vend.CommandText := vComandoAux;
@@ -1778,6 +1762,10 @@ begin
     Exit;
   end;
   fDMConsFaturamento.cdsVendCliProd.Close;
+  if chkVendedor_Int.Checked then
+    fDMConsFaturamento.sdsVendCliProd.CommandText := fDMConsFaturamento.ctVendCliProd_Int
+  else
+    fDMConsFaturamento.sdsVendCliProd.CommandText := fDMConsFaturamento.ctVendCliProd;
   fDmConsFaturamento.sdsVendCliProd.ParamByName('D1').AsDate := DateEdit1.Date;
   fDmConsFaturamento.sdsVendCliProd.ParamByName('D2').AsDate := DateEdit2.Date;
   fDmConsFaturamento.sdsVendCliProd.ParamByName('F1').AsInteger := RxDbLookupCombo1.KeyValue;
