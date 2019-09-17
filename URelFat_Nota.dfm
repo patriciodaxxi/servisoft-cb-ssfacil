@@ -283,7 +283,7 @@ object fRelFat_Nota: TfRelFat_Nota
           Height = 12
           Alignment = taRightJustify
           AutoSize = False
-          DataField = 'VLR_DUPLICATA'
+          DataField = 'VLR_FATURAMENTO'
           DataSource = DMConsFaturamento.dsNotaFiscal
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -490,7 +490,7 @@ object fRelFat_Nota: TfRelFat_Nota
           Height = 12
           Alignment = taRightJustify
           AutoSize = False
-          DataField = 'VLR_DUPLICATA'
+          DataField = 'VLR_FATURAMENTO'
           DataSource = DMConsFaturamento.dsNotaFiscal
           DisplayMask = '###,###,###,##0.00'
           Font.Charset = DEFAULT_CHARSET

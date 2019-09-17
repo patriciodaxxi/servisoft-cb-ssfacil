@@ -1936,16 +1936,18 @@ object DMConsFaturamento: TDMConsFaturamento
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT SUM(VLR_NOTA) VLR_NOTA'
-      'FROM NOTAFISCAL'
-      'WHERE CANCELADA = '#39'N'#39
-      ' AND NFEDENEGADA = '#39'N'#39
-      ' AND NFEFINALIDADE = '#39'4'#39
-      ' AND DTEMISSAO BETWEEN :D1 AND :D2'
-      ' AND TIPO_NOTA = '#39'E'#39)
+      'SELECT SUM(N.VLR_NOTA) VLR_NOTA'
+      'FROM NOTAFISCAL N'
+      'INNER JOIN TAB_CFOP T'
+      'ON N.id_cfop = T.id'
+      'WHERE N.CANCELADA = '#39'N'#39
+      ' AND N.NFEDENEGADA = '#39'N'#39
+      ' AND ((N.NFEFINALIDADE = '#39'4'#39') or (T.devolucao = '#39'S'#39'))'
+      ' AND N.DTEMISSAO BETWEEN :D1 AND :D2'
+      ' AND N.TIPO_NOTA = '#39'E'#39)
     SQLConnection = dmDatabase.scoDados
     Left = 936
-    Top = 216
+    Top = 215
     object qDevolucoesVLR_NOTA: TFloatField
       FieldName = 'VLR_NOTA'
     end

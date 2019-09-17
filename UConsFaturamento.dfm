@@ -3129,7 +3129,7 @@ object frmConsFaturamento: TfrmConsFaturamento
   end
   object PopupMenu1: TPopupMenu
     Left = 823
-    Top = 17
+    Top = 16
     object Imprimir1: TMenuItem
       Caption = 'Imprimir'
       OnClick = Imprimir1Click

@@ -170,6 +170,8 @@ type
     cdsConsDataVLR_ICMS_FCP_DEST: TFloatField;
     cdsConsDataVLR_ICMS_FCP: TFloatField;
     cdsConsDataVLR_FCP_ST: TFloatField;
+    cdsConsClienteDEVOLUCAO: TStringField;
+    cdsConsDataDEVOLUCAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure frxReport1BeforePrint(Sender: TfrxReportComponent);
     procedure cdsComprasServicosCalcFields(DataSet: TDataSet);

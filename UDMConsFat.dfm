@@ -231,7 +231,7 @@ object DMConsFat: TDMConsFat
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43549.478932754630000000
+    ReportOptions.LastChange = 43336.737570104200000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -627,22 +627,22 @@ object DMConsFat: TDMConsFat
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT ID_PESSOA, NOME_CLIFORN, SUM(VLR_DUPLICATA) VLR_DUPLICATA' +
-      ', SUM(VLR_ICMS) VLR_ICMS, SUM(VLR_TOTAL) VLR_TOTAL,'#13#10'       SUM(' +
-      'VLR_ICMSSUBST) VLR_ICMSSUBST, SUM(VLR_IPI) VLR_IPI, SUM(VLR_FRET' +
-      'E) VLR_FRETE,'#13#10'       SUM(VLR_ICMS_UF_REMET) VLR_ICMS_UF_REMET, ' +
-      'SUM(VLR_ICMS_UF_DEST) VLR_ICMS_UF_DEST, SUM(VLR_DESCONTO) VLR_DE' +
-      'SCONTO,'#13#10'       SUM(VLR_COFINS) VLR_COFINS, SUM(VLR_PIS) VLR_PIS' +
-      ', SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA,'#13#10'   ' +
-      '    SUM(VLR_CSLL_VENDA) VLR_CSLL_VENDA,'#13#10'       (SUM(V.VLR_TOTAL' +
-      ') + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE)) VLR_TOTAL_BRU, SUM(V.VLR_' +
-      'DUPLICATA) VLR_TOTAL_LIQ,'#13#10'       sum(coalesce(v.base_fcp_st,0))' +
-      ' BASE_FCP_ST,'#13#10'       sum(coalesce(v.base_icms_fcp,0)) base_icms' +
-      '_fcp,'#13#10'       sum(coalesce(v.base_icms_fcp_dest,0)) base_icms_fc' +
-      'p_dest,'#13#10'       sum(coalesce(v.vlr_icms_fcp_dest,0)) vlr_icms_fc' +
-      'p_dest,'#13#10'       sum(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp,'#13#10' ' +
-      '      sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st'#13#10'FROM VFAT_ACUM V' +
-      #13#10#13#10#13#10#13#10#13#10
+      'SELECT  ID_PESSOA, NOME_CLIFORN, SUM(VLR_DUPLICATA) VLR_DUPLICAT' +
+      'A, SUM(VLR_ICMS) VLR_ICMS, SUM(VLR_TOTAL) VLR_TOTAL,'#13#10'       SUM' +
+      '(VLR_ICMSSUBST) VLR_ICMSSUBST, SUM(VLR_IPI) VLR_IPI, SUM(VLR_FRE' +
+      'TE) VLR_FRETE,'#13#10'       SUM(VLR_ICMS_UF_REMET) VLR_ICMS_UF_REMET,' +
+      ' SUM(VLR_ICMS_UF_DEST) VLR_ICMS_UF_DEST, SUM(VLR_DESCONTO) VLR_D' +
+      'ESCONTO,'#13#10'       SUM(VLR_COFINS) VLR_COFINS, SUM(VLR_PIS) VLR_PI' +
+      'S, SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA,'#13#10'  ' +
+      '     SUM(VLR_CSLL_VENDA) VLR_CSLL_VENDA,'#13#10'       (SUM(V.VLR_TOTA' +
+      'L) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE)) VLR_TOTAL_BRU, SUM(V.VLR' +
+      '_DUPLICATA) VLR_TOTAL_LIQ,'#13#10'       sum(coalesce(v.base_fcp_st,0)' +
+      ') BASE_FCP_ST,'#13#10'       sum(coalesce(v.base_icms_fcp,0)) base_icm' +
+      's_fcp,'#13#10'       sum(coalesce(v.base_icms_fcp_dest,0)) base_icms_f' +
+      'cp_dest,'#13#10'       sum(coalesce(v.vlr_icms_fcp_dest,0)) vlr_icms_f' +
+      'cp_dest,'#13#10'       sum(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp,'#13#10 +
+      '       sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st'#13#10'FROM VFAT_ACUM ' +
+      'V'#13#10#13#10#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -755,6 +755,11 @@ object DMConsFat: TDMConsFat
       FieldName = 'VLR_FCP_ST'
       DisplayFormat = '##0.00'
     end
+    object cdsConsClienteDEVOLUCAO: TStringField
+      FieldName = 'DEVOLUCAO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsConsCliente: TDataSource
     DataSet = cdsConsCliente
@@ -782,7 +787,14 @@ object DMConsFat: TDMConsFat
       'VLR_IR_VENDA=VLR_IR_VENDA'
       'VLR_CSLL_VENDA=VLR_CSLL_VENDA'
       'VLR_TOTAL_BRU=VLR_TOTAL_BRU'
-      'VLR_TOTAL_LIQ=VLR_TOTAL_LIQ')
+      'VLR_TOTAL_LIQ=VLR_TOTAL_LIQ'
+      'BASE_FCP_ST=BASE_FCP_ST'
+      'BASE_ICMS_FCP=BASE_ICMS_FCP'
+      'BASE_ICMS_FCP_DEST=BASE_ICMS_FCP_DEST'
+      'VLR_ICMS_FCP_DEST=VLR_ICMS_FCP_DEST'
+      'VLR_ICMS_FCP=VLR_ICMS_FCP'
+      'VLR_FCP_ST=VLR_FCP_ST'
+      'DEVOLUCAO=DEVOLUCAO')
     DataSource = dsConsCliente
     BCDToCurrency = False
     Left = 89
@@ -916,6 +928,11 @@ object DMConsFat: TDMConsFat
       FieldName = 'VLR_FCP_ST'
       DisplayFormat = '##0.00'
     end
+    object cdsConsDataDEVOLUCAO: TStringField
+      FieldName = 'DEVOLUCAO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsConsData: TDataSource
     DataSet = cdsConsData
@@ -942,7 +959,14 @@ object DMConsFat: TDMConsFat
       'VLR_IR_VENDA=VLR_IR_VENDA'
       'VLR_CSLL_VENDA=VLR_CSLL_VENDA'
       'VLR_TOTAL_BRU=VLR_TOTAL_BRU'
-      'VLR_TOTAL_LIQ=VLR_TOTAL_LIQ')
+      'VLR_TOTAL_LIQ=VLR_TOTAL_LIQ'
+      'BASE_FCP_ST=BASE_FCP_ST'
+      'BASE_ICMS_FCP=BASE_ICMS_FCP'
+      'BASE_ICMS_FCP_DEST=BASE_ICMS_FCP_DEST'
+      'VLR_ICMS_FCP_DEST=VLR_ICMS_FCP_DEST'
+      'VLR_ICMS_FCP=VLR_ICMS_FCP'
+      'VLR_FCP_ST=VLR_FCP_ST'
+      'DEVOLUCAO=DEVOLUCAO')
     DataSource = dsConsData
     BCDToCurrency = False
     Left = 173

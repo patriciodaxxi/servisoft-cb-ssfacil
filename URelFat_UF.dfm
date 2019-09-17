@@ -246,7 +246,7 @@ object fRelFat_UF: TfRelFat_UF
           Height = 10
           Alignment = taRightJustify
           AutoSize = False
-          DataField = 'VLR_DUPLICATA'
+          DataField = 'VLR_TOTAL'
           DataSource = DMConsFaturamento.dsNotaFiscal_UF
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -397,12 +397,12 @@ object fRelFat_UF: TfRelFat_UF
           ParentFont = False
         end
         object RLDBResult1: TRLDBResult
-          Left = 383
+          Left = 394
           Top = 1
-          Width = 81
+          Width = 70
           Height = 10
           Alignment = taRightJustify
-          DataField = 'VLR_DUPLICATA'
+          DataField = 'VLR_TOTAL'
           DataSource = DMConsFaturamento.dsNotaFiscal_UF
           DisplayMask = '###,###,###,##0.00'
           Font.Charset = DEFAULT_CHARSET

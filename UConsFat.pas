@@ -178,21 +178,21 @@ begin
     else
       vTexto[1] := 'V.VLR_TOTAL';
     if not RzCheckList1.ItemChecked[6] then
-      vTexto[1] := vTexto[1] + ' + V.VLR_FRETE';
+      vTexto[1] := vTexto[1] + ' + coalesce(V.VLR_FRETE,0)';
     if RzCheckList1.ItemChecked[2] then
-      vTexto[2] := ' - V.VLR_ICMSSUBST';
+      vTexto[2] := ' - coalesce(V.VLR_ICMSSUBST,0)';
     if RzCheckList1.ItemChecked[3] then
-      vTexto[3] := ' - V.VLR_ICMS';
+      vTexto[3] := ' - coalesce(V.VLR_ICMS,0)';
     if RzCheckList1.ItemChecked[4] then
-      vTexto[4] := ' - V.VLR_PIS';
+      vTexto[4] := ' - coalesce(V.VLR_PIS,0)';
     if RzCheckList1.ItemChecked[5] then
-      vTexto[5] := ' - V.VLR_COFINS';
+      vTexto[5] := ' - coalesce(V.VLR_COFINS,0)';
     if RzCheckList1.ItemChecked[7] then
-      vTexto[6] := ' - V.VLR_ICMS_UF_DEST';
+      vTexto[6] := ' - coalesce(V.VLR_ICMS_UF_DEST,0)';
     if RzCheckList1.ItemChecked[8] then
-      vTexto[7] := ' - V.VLR_IR_VENDA';
+      vTexto[7] := ' - coalesce(V.VLR_IR_VENDA,0)';
     if RzCheckList1.ItemChecked[9] then
-      vTexto[8] := ' - V.VLR_CSLL_VENDA';
+      vTexto[8] := ' - coalesce(V.VLR_CSLL_VENDA,0)';
 
   //if RzCheckList1.ItemChecked[6] then
   //  vTexto[6] := ' - V.VLR_FRETE';
@@ -248,11 +248,11 @@ begin
 
   if RzPageControl1.ActivePage = ts_Cliente then
   begin
-    vComando := 'SELECT ID_PESSOA, NOME_CLIFORN, SUM(VLR_DUPLICATA) VLR_DUPLICATA, SUM(VLR_ICMS) VLR_ICMS,';
+    vComando := 'SELECT DEVOLUCAO, ID_PESSOA, NOME_CLIFORN, SUM(VLR_DUPLICATA) VLR_DUPLICATA, SUM(VLR_ICMS) VLR_ICMS,';
     vComando := vComando + ' SUM(VLR_TOTAL) VLR_TOTAL, SUM(VLR_ICMSSUBST) VLR_ICMSSUBST, SUM(VLR_IPI) VLR_IPI,';
     vComando := vComando + ' SUM(VLR_FRETE) VLR_FRETE, SUM(VLR_ICMS_UF_REMET) VLR_ICMS_UF_REMET, SUM(VLR_ICMS_UF_DEST) VLR_ICMS_UF_DEST,';
     vComando := vComando + ' SUM(VLR_DESCONTO) VLR_DESCONTO, SUM(VLR_COFINS) VLR_COFINS, SUM(VLR_PIS) VLR_PIS,';
-    vComando := vComando + ' SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA, SUM(VLR_CSLL_VENDA) VLR_CSLL_VENDA,';
+    vComando := vComando + ' SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA, SUM(coalesce(VLR_CSLL_VENDA,0)) VLR_CSLL_VENDA,';
     if chkAcrescimo.ItemChecked[1] then
       vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE) + SUM(V.VLR_DESCONTO)) VLR_TOTAL_BRU'
     else
@@ -277,12 +277,10 @@ begin
     if RzCheckList1.ItemChecked[7] then
       vTexto[6] := ' - SUM(V.VLR_ICMS_UF_DEST)';
     if RzCheckList1.ItemChecked[8] then
-      vTexto[7] := ' - SUM(V.VLR_IR_VENDA)';
+      vTexto[7] := ' - SUM(coalesce(V.VLR_IR_VENDA,0))';
     if RzCheckList1.ItemChecked[9] then
-      vTexto[8] := ' - SUM(V.VLR_CSLL_VENDA)';
+      vTexto[8] := ' - SUM(coalesce(V.VLR_CSLL_VENDA,0))';
 
-  //if RzCheckList1.ItemChecked[6] then
-  //  vTexto[6] := ' - V.VLR_FRETE';
     vTexto2 := '';
     for i := 1 to 8 do
       vTexto2 := vTexto2 + vTexto[i];
@@ -302,31 +300,35 @@ begin
       fDMConsFat.sdsConsCliente.CommandText := fDMConsFat.sdsConsCliente.CommandText + ' AND V.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY', NxDatePicker2.date));
     if RxDBLookupCombo2.KeyValue > 0 then
       fDMConsFat.sdsConsCliente.CommandText := fDMConsFat.sdsConsCliente.CommandText + ' AND V.TERMINAL = ' + RxDBLookupCombo2.Value;
-    fDMConsFat.sdsConsCliente.CommandText := fDMConsFat.sdsConsCliente.CommandText + ' GROUP BY ID_PESSOA, NOME_CLIFORN';
+    fDMConsFat.sdsConsCliente.CommandText := fDMConsFat.sdsConsCliente.CommandText + ' GROUP BY ID_PESSOA, NOME_CLIFORN, DEVOLUCAO';
     fDMConsFat.cdsConsCliente.Open;
     SMDBGrid2.DisableScroll;
     fDMConsFat.cdsConsCliente.First;
     while not fDMConsFat.cdsConsCliente.Eof do
     begin
       begin
-        vVlr_Total := vVlr_Total + fDMConsFat.cdsConsClienteVLR_TOTAL.AsFloat;
-        vVlr_Total_Bru := vVlr_Total_Bru + fDMConsFat.cdsConsClienteVLR_TOTAL_BRU.AsFloat;
-        vVlr_Total_Liq := vVlr_Total_Liq + fDMConsFat.cdsConsClienteVLR_TOTAL_LIQ.AsFloat;
-        vVlr_IPI := vVlr_IPI + fDMConsFat.cdsConsClienteVLR_IPI.AsFloat;
-        vVlr_ST := vVlr_ST + fDMConsFat.cdsConsClienteVLR_ICMSSUBST.AsFloat;
-        vVlr_ICMS := vVlr_ICMS + fDMConsFat.cdsConsClienteVLR_ICMS.AsFloat;
-        vVlr_PIS := vVlr_PIS + fDMConsFat.cdsConsClienteVLR_PIS.AsFloat;
-        vVlr_COFINS := vVlr_COFINS + fDMConsFat.cdsConsClienteVLR_COFINS.AsFloat;
-        vVlr_Desconto := vVlr_Desconto + fDMConsFat.cdsConsClienteVLR_DESCONTO.AsFloat;
-        vVlr_ICMS_UF_Dest := vVlr_ICMS_UF_Dest + fDMConsFat.cdsConsClienteVLR_ICMS_UF_DEST.AsFloat;
-        vVlr_CSLL := vVlr_CSLL + fDMConsFat.cdsConsClienteVLR_CSLL_VENDA.AsFloat;
-        vVlr_IR := vVlr_IR + fDMConsFat.cdsConsClienteVLR_IR_VENDA.AsFloat;
-        vVlr_Custo := vVlr_Custo + fDMConsFat.cdsConsClienteVLR_CUSTO.AsFloat;
-        vVlr_Frete := vVlr_Frete + fDMConsFat.cdsConsClienteVLR_FRETE.AsFloat;
-
-        vVlr_ICMS_FCP := vVlr_ICMS_FCP + fDMConsFat.cdsConsClienteVLR_ICMS_FCP.AsFloat;
-        vVlr_FCP_ST   := vVlr_FCP_ST + fDMConsFat.cdsConsClienteVLR_FCP_ST.AsFloat;
-        vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsConsClienteVLR_ICMS_FCP_DEST.AsFloat;
+        if fDMConsFat.cdsConsClienteDEVOLUCAO.AsString = 'S' then
+          vVlr_Devolucao := vVlr_Devolucao + fDMConsFat.cdsConsClienteVLR_TOTAL_LIQ.AsFloat
+        else
+        begin
+          vVlr_Total         := vVlr_Total + fDMConsFat.cdsConsClienteVLR_TOTAL.AsFloat;
+          vVlr_Total_Bru     := vVlr_Total_Bru + fDMConsFat.cdsConsClienteVLR_TOTAL_BRU.AsFloat;
+          vVlr_Total_Liq     := vVlr_Total_Liq + fDMConsFat.cdsConsClienteVLR_TOTAL_LIQ.AsFloat;
+          vVlr_IPI           := vVlr_IPI + fDMConsFat.cdsConsClienteVLR_IPI.AsFloat;
+          vVlr_ST            := vVlr_ST + fDMConsFat.cdsConsClienteVLR_ICMSSUBST.AsFloat;
+          vVlr_ICMS          := vVlr_ICMS + fDMConsFat.cdsConsClienteVLR_ICMS.AsFloat;
+          vVlr_PIS           := vVlr_PIS + fDMConsFat.cdsConsClienteVLR_PIS.AsFloat;
+          vVlr_COFINS        := vVlr_COFINS + fDMConsFat.cdsConsClienteVLR_COFINS.AsFloat;
+          vVlr_Desconto      := vVlr_Desconto + fDMConsFat.cdsConsClienteVLR_DESCONTO.AsFloat;
+          vVlr_ICMS_UF_Dest  := vVlr_ICMS_UF_Dest + fDMConsFat.cdsConsClienteVLR_ICMS_UF_DEST.AsFloat;
+          vVlr_CSLL          := vVlr_CSLL + fDMConsFat.cdsConsClienteVLR_CSLL_VENDA.AsFloat;
+          vVlr_IR            := vVlr_IR + fDMConsFat.cdsConsClienteVLR_IR_VENDA.AsFloat;
+          vVlr_Custo         := vVlr_Custo + fDMConsFat.cdsConsClienteVLR_CUSTO.AsFloat;
+          vVlr_Frete         := vVlr_Frete + fDMConsFat.cdsConsClienteVLR_FRETE.AsFloat;
+          vVlr_ICMS_FCP      := vVlr_ICMS_FCP + fDMConsFat.cdsConsClienteVLR_ICMS_FCP.AsFloat;
+          vVlr_FCP_ST        := vVlr_FCP_ST + fDMConsFat.cdsConsClienteVLR_FCP_ST.AsFloat;
+          vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsConsClienteVLR_ICMS_FCP_DEST.AsFloat;
+        end;
       end;
       fDMConsFat.cdsConsCliente.Next;
     end;
@@ -335,7 +337,7 @@ begin
 
   if RzPageControl1.ActivePage = ts_Data then
   begin
-    vComando := 'SELECT DTEMISSAO, SUM(VLR_DUPLICATA) VLR_DUPLICATA, SUM(VLR_ICMS) VLR_ICMS,';
+    vComando := 'SELECT DEVOLUCAO, DTEMISSAO, SUM(VLR_DUPLICATA) VLR_DUPLICATA, SUM(VLR_ICMS) VLR_ICMS,';
     vComando := vComando + ' SUM(VLR_TOTAL) VLR_TOTAL, SUM(VLR_ICMSSUBST) VLR_ICMSSUBST, SUM(VLR_IPI) VLR_IPI,';
     vComando := vComando + ' SUM(VLR_FRETE) VLR_FRETE, SUM(VLR_ICMS_UF_REMET) VLR_ICMS_UF_REMET, SUM(VLR_ICMS_UF_DEST) VLR_ICMS_UF_DEST,';
     vComando := vComando + ' SUM(VLR_DESCONTO) VLR_DESCONTO, SUM(VLR_COFINS) VLR_COFINS, SUM(VLR_PIS) VLR_PIS,';
@@ -389,31 +391,36 @@ begin
       fDMConsFat.sdsConsData.CommandText := fDMConsFat.sdsConsData.CommandText + ' AND V.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY', NxDatePicker2.date));
     if RxDBLookupCombo2.KeyValue > 0 then
       fDMConsFat.sdsConsData.CommandText := fDMConsFat.sdsConsData.CommandText + ' AND V.TERMINAL = ' + RxDBLookupCombo2.Value;
-    fDMConsFat.sdsConsData.CommandText := fDMConsFat.sdsConsData.CommandText + ' GROUP BY DTEMISSAO';
+    fDMConsFat.sdsConsData.CommandText := fDMConsFat.sdsConsData.CommandText + ' GROUP BY DTEMISSAO, DEVOLUCAO';
     fDMConsFat.cdsConsData.Open;
     SMDBGrid3.DisableScroll;
     fDMConsFat.cdsConsData.First;
     while not fDMConsFat.cdsConsData.Eof do
     begin
       begin
-        vVlr_Total := vVlr_Total + fDMConsFat.cdsConsDataVLR_TOTAL.AsFloat;
-        vVlr_Total_Bru := vVlr_Total_Bru + fDMConsFat.cdsConsDataVLR_TOTAL_BRU.AsFloat;
-        vVlr_Total_Liq := vVlr_Total_Liq + fDMConsFat.cdsConsDataVLR_TOTAL_LIQ.AsFloat;
-        vVlr_IPI := vVlr_IPI + fDMConsFat.cdsConsDataVLR_IPI.AsFloat;
-        vVlr_ST := vVlr_ST + fDMConsFat.cdsConsDataVLR_ICMSSUBST.AsFloat;
-        vVlr_ICMS := vVlr_ICMS + fDMConsFat.cdsConsDataVLR_ICMS.AsFloat;
-        vVlr_PIS := vVlr_PIS + fDMConsFat.cdsConsDataVLR_PIS.AsFloat;
-        vVlr_COFINS := vVlr_COFINS + fDMConsFat.cdsConsDataVLR_COFINS.AsFloat;
-        vVlr_Desconto := vVlr_Desconto + fDMConsFat.cdsConsDataVLR_DESCONTO.AsFloat;
-        vVlr_ICMS_UF_Dest := vVlr_ICMS_UF_Dest + fDMConsFat.cdsConsDataVLR_ICMS_UF_DEST.AsFloat;
-        vVlr_CSLL := vVlr_CSLL + fDMConsFat.cdsConsDataVLR_CSLL_VENDA.AsFloat;
-        vVlr_IR := vVlr_IR + fDMConsFat.cdsConsDataVLR_IR_VENDA.AsFloat;
-        vVlr_Custo := vVlr_Custo + fDMConsFat.cdsConsDataVLR_CUSTO.AsFloat;
-        vVlr_Frete := vVlr_Frete + fDMConsFat.cdsConsDataVLR_FRETE.AsFloat;
+        if fDMConsFat.cdsConsDataDEVOLUCAO.AsString = 'S' then
+          vVlr_Devolucao := vVlr_Devolucao + fDMConsFat.cdsConsDataVLR_TOTAL_LIQ.AsFloat
+        else
+        begin
+          vVlr_Total := vVlr_Total + fDMConsFat.cdsConsDataVLR_TOTAL.AsFloat;
+          vVlr_Total_Bru := vVlr_Total_Bru + fDMConsFat.cdsConsDataVLR_TOTAL_BRU.AsFloat;
+          vVlr_Total_Liq := vVlr_Total_Liq + fDMConsFat.cdsConsDataVLR_TOTAL_LIQ.AsFloat;
+          vVlr_IPI := vVlr_IPI + fDMConsFat.cdsConsDataVLR_IPI.AsFloat;
+          vVlr_ST := vVlr_ST + fDMConsFat.cdsConsDataVLR_ICMSSUBST.AsFloat;
+          vVlr_ICMS := vVlr_ICMS + fDMConsFat.cdsConsDataVLR_ICMS.AsFloat;
+          vVlr_PIS := vVlr_PIS + fDMConsFat.cdsConsDataVLR_PIS.AsFloat;
+          vVlr_COFINS := vVlr_COFINS + fDMConsFat.cdsConsDataVLR_COFINS.AsFloat;
+          vVlr_Desconto := vVlr_Desconto + fDMConsFat.cdsConsDataVLR_DESCONTO.AsFloat;
+          vVlr_ICMS_UF_Dest := vVlr_ICMS_UF_Dest + fDMConsFat.cdsConsDataVLR_ICMS_UF_DEST.AsFloat;
+          vVlr_CSLL := vVlr_CSLL + fDMConsFat.cdsConsDataVLR_CSLL_VENDA.AsFloat;
+          vVlr_IR := vVlr_IR + fDMConsFat.cdsConsDataVLR_IR_VENDA.AsFloat;
+          vVlr_Custo := vVlr_Custo + fDMConsFat.cdsConsDataVLR_CUSTO.AsFloat;
+          vVlr_Frete := vVlr_Frete + fDMConsFat.cdsConsDataVLR_FRETE.AsFloat;
 
-        vVlr_ICMS_FCP := vVlr_ICMS_FCP + fDMConsFat.cdsConsDataVLR_ICMS_FCP.AsFloat;
-        vVlr_FCP_ST   := vVlr_FCP_ST + fDMConsFat.cdsConsDataVLR_FCP_ST.AsFloat;
-        vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsConsDataVLR_ICMS_FCP_DEST.AsFloat;
+          vVlr_ICMS_FCP := vVlr_ICMS_FCP + fDMConsFat.cdsConsDataVLR_ICMS_FCP.AsFloat;
+          vVlr_FCP_ST   := vVlr_FCP_ST + fDMConsFat.cdsConsDataVLR_FCP_ST.AsFloat;
+          vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsConsDataVLR_ICMS_FCP_DEST.AsFloat;
+        end;
 
       end;
       fDMConsFat.cdsConsData.Next;
@@ -457,9 +464,15 @@ begin
   if RzPageControl1.ActivePage = ts_Geral then
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Faturamento.fr3';
   if RzPageControl1.ActivePage = ts_Cliente then
+  begin
+    fDMConsFat.cdsConsCliente.IndexFieldNames := 'DEVOLUCAO;NOME_CLIFORN';
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Faturamento_Cliente.fr3';
+  end;
   if RzPageControl1.ActivePage = ts_Data then
+  begin
+    fDMConsFat.cdsConsData.IndexFieldNames := 'DEVOLUCAO;DTEMISSAO';
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Faturamento_Data.fr3';
+  end;
   if FileExists(vArq) then
     fDMConsFat.frxReport1.Report.LoadFromFile(vArq)
   else

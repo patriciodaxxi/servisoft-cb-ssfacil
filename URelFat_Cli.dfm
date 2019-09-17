@@ -247,7 +247,7 @@ object fRelFat_Cli: TfRelFat_Cli
           Height = 10
           Alignment = taRightJustify
           AutoSize = False
-          DataField = 'VLR_DUPLICATA'
+          DataField = 'VLR_TOTAL'
           DataSource = DMConsFaturamento.dsNotaFiscal_Cli
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -349,7 +349,7 @@ object fRelFat_Cli: TfRelFat_Cli
         Left = 0
         Top = 16
         Width = 742
-        Height = 14
+        Height = 16
         BandType = btSummary
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -398,19 +398,19 @@ object fRelFat_Cli: TfRelFat_Cli
           ParentFont = False
         end
         object RLDBResult1: TRLDBResult
-          Left = 383
+          Left = 391
           Top = 1
-          Width = 81
+          Width = 73
           Height = 10
           Alignment = taRightJustify
-          DataField = 'VLR_DUPLICATA'
+          DataField = 'VLR_TOTAL'
           DataSource = DMConsFaturamento.dsNotaFiscal_Cli
           DisplayMask = '###,###,###,##0.00'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -8
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           Info = riSum
           ParentFont = False
         end
@@ -449,14 +449,14 @@ object fRelFat_Cli: TfRelFat_Cli
           ParentFont = False
         end
         object RLDBResult4: TRLDBResult
-          Left = 664
+          Left = 635
           Top = 1
-          Width = 42
+          Width = 59
           Height = 10
           Alignment = taRightJustify
           DataField = 'QTD'
           DataSource = DMConsFaturamento.dsNotaFiscal_Cli
-          DisplayMask = '0.###'
+          DisplayMask = '000,000,000.###'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -8

@@ -3,7 +3,7 @@ object fRelFat_CliProd: TfRelFat_CliProd
   Top = 167
   Width = 1272
   Height = 528
-  HorzScrollBar.Position = 1239
+  HorzScrollBar.Position = 300
   Caption = 'fRelFat_CliProd'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object fRelFat_CliProd: TfRelFat_CliProd
   PixelsPerInch = 96
   TextHeight = 13
   object RLReport1: TRLReport
-    Left = -1207
+    Left = -268
     Top = 16
     Width = 794
     Height = 1123
@@ -253,7 +253,7 @@ object fRelFat_CliProd: TfRelFat_CliProd
             Height = 12
             Alignment = taRightJustify
             AutoSize = False
-            DataField = 'VLR_DUPLICATA'
+            DataField = 'VLR_TOTAL'
             DataSource = DMConsFaturamento.dsNotaFiscal_CliProd
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
@@ -550,13 +550,13 @@ object fRelFat_CliProd: TfRelFat_CliProd
           ParentFont = False
         end
         object RLDBResult4: TRLDBResult
-          Left = 453
+          Left = 454
           Top = 1
           Width = 130
           Height = 12
           Alignment = taRightJustify
           AutoSize = False
-          DataField = 'VLR_DUPLICATA'
+          DataField = 'VLR_TOTAL'
           DataSource = DMConsFaturamento.dsNotaFiscal_CliProd
           DisplayMask = '###,###,###,##0.00'
           Font.Charset = DEFAULT_CHARSET
@@ -702,7 +702,7 @@ object fRelFat_CliProd: TfRelFat_CliProd
     end
   end
   object RLReport2: TRLReport
-    Left = -399
+    Left = 540
     Top = 11
     Width = 794
     Height = 1123
@@ -1285,7 +1285,7 @@ object fRelFat_CliProd: TfRelFat_CliProd
     end
   end
   object RLReport3: TRLReport
-    Left = 432
+    Left = 1371
     Top = 18
     Width = 1123
     Height = 794
@@ -1529,7 +1529,7 @@ object fRelFat_CliProd: TfRelFat_CliProd
           Height = 12
           Alignment = taRightJustify
           AutoSize = False
-          DataField = 'VLR_DUPLICATA'
+          DataField = 'VLR_TOTAL'
           DataSource = DMConsFaturamento.dsNotaFiscal_CliProd
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1698,7 +1698,7 @@ object fRelFat_CliProd: TfRelFat_CliProd
           Height = 12
           Alignment = taRightJustify
           AutoSize = False
-          DataField = 'VLR_DUPLICATA'
+          DataField = 'VLR_TOTAL'
           DataSource = DMConsFaturamento.dsNotaFiscal_CliProd
           DisplayMask = '###,###,###,##0.00'
           Font.Charset = DEFAULT_CHARSET
