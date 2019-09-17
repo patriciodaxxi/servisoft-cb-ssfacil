@@ -2623,12 +2623,51 @@ object DMConsFaturamento: TDMConsFaturamento
       'SELECT USA_VENDEDOR_INT'
       'FROM PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 740
+    Left = 741
     Top = 315
     object qParametros_GeralUSA_VENDEDOR_INT: TStringField
       FieldName = 'USA_VENDEDOR_INT'
       FixedChar = True
       Size = 1
     end
+  end
+  object sdsVendCliProd_Int: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select V.TIPO_MOV, V.ID_PRODUTO, V.COD_GRUPO, V.REFERENCIA, V.NO' +
+      'ME_COMBINACAO, V.ID_COR, V.NOME_CLIFORN,'#13#10'       V.NOME_PRODUTO_' +
+      'SERV, V.ID_VENDEDOR_INT ID_VENDEDOR, V.NOME_VENDEDOR_INT NOME_VE' +
+      'NDEDOR,'#13#10'       V.NOME_ORIGINAL, V.UF_CLI, V.NUM_NOTA, V.DTEMISS' +
+      'AO,'#13#10'       sum(V.VLR_DUPLICATA) VLR_DUPLICATA, sum(V.QTD) QTD, ' +
+      'sum(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE,'#13#10'       sum(V.VLR_VEND' +
+      'AS) VLR_VENDAS, sum(V.VLR_ICMSSUBST) VLR_ICMSSUBST, sum(V.VLR_IP' +
+      'I) VLR_IPI'#13#10'from VFATURAMENTO V'#13#10'where 0 = 0 and'#13#10'      V.DTEMIS' +
+      'SAO >= :D1 and'#13#10'      V.DTEMISSAO <= :D2 and'#13#10'      (V.FILIAL = ' +
+      ':F1)'#13#10#13#10'group by V.TIPO_MOV, V.ID_PRODUTO, V.COD_GRUPO, V.REFERE' +
+      'NCIA, V.NOME_COMBINACAO, V.ID_COR,'#13#10'V.NOME_CLIFORN, V.NOME_PRODU' +
+      'TO_SERV, V.ID_VENDEDOR_INT, V.NOME_VENDEDOR_INT, V.NOME_ORIGINAL' +
+      ','#13#10'V.UF_CLI, V.NUM_NOTA, V.DTEMISSAO'#13#10'order by VLR_DUPLICATA des' +
+      'c  '
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftDate
+        Name = 'D1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'D2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'F1'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 276
+    Top = 478
   end
 end

@@ -354,7 +354,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     Top = 110
     Width = 1010
     Height = 375
-    ActivePage = TS_Cliente
+    ActivePage = TS_Vendedor
     ActivePageDefault = TS_Cliente
     Align = alClient
     BackgroundColor = clGray
@@ -367,7 +367,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 9
     TabOrder = 2
     TextColors.Selected = clBlue
     FixedDimension = 19
@@ -2684,7 +2684,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               item
                 Expanded = False
                 FieldName = 'COD_GRUPO'
-                Width = 64
+                Width = 83
                 Visible = True
               end
               item
@@ -2764,6 +2764,14 @@ object frmConsFaturamento: TfrmConsFaturamento
           Caption = 'Ordenar por Vendedor'
           TabOrder = 0
           OnClick = CheckBox3Click
+        end
+        object chkVendedor_Int: TCheckBox
+          Left = 235
+          Top = 7
+          Width = 125
+          Height = 17
+          Caption = 'Vendedor Interno'
+          TabOrder = 1
         end
       end
     end
