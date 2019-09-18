@@ -24,13 +24,13 @@ object frmProg_Terc: TfrmProg_Terc
     Top = 0
     Width = 995
     Height = 564
-    ActivePage = TS_Liberados
+    ActivePage = TS_Produto_Pend
     ActivePageDefault = TS_Liberados
     Align = alClient
     BoldCurrentTab = True
     Color = 8453888
     ParentColor = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Liberados: TRzTabSheet
@@ -41,7 +41,7 @@ object frmProg_Terc: TfrmProg_Terc
         Top = 56
         Width = 991
         Height = 485
-        ActivePage = TS_Pedido_Lib
+        ActivePage = TS_Produto_Lib
         ActivePageDefault = TS_Produto_Lib
         Align = alClient
         BoldCurrentTab = True
@@ -49,7 +49,7 @@ object frmProg_Terc: TfrmProg_Terc
         FlatColor = 16744448
         ParentColor = False
         ShowShadow = False
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 0
         UseGradients = False
         FixedDimension = 19
@@ -305,6 +305,7 @@ object frmProg_Terc: TfrmProg_Terc
                 FieldName = 'NOME_CLIENTE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome Cliente'
+                Width = 64
                 Visible = True
               end>
           end
