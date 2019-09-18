@@ -6,6 +6,8 @@ object DMConsDRE: TDMConsDRE
   Height = 416
   Width = 552
   object sdsDRE: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 
       'WITH RECURSIVE'#13#10'   datas (d) AS ('#13#10'     SELECT cast(:DataIni as ' +
       'date) from RDB$DATABASE'#13#10'      UNION ALL'#13#10'     SELECT d+1 FROM d' +
@@ -133,6 +135,8 @@ object DMConsDRE: TDMConsDRE
     Top = 56
   end
   object sdsFilial: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 'SELECT ID, NOME, NOME_INTERNO, CNPJ_CPF'#13#10'FROM FILIAL'
     MaxBlobSize = -1
     Params = <>
