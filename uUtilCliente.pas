@@ -3,8 +3,7 @@ unit uUtilCliente;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, SqlExpr, DmdDatabase, USenha, Messages,
-  Controls, Graphics;
+  Classes, SysUtils, Dialogs, SqlExpr, DmdDatabase, USenha, Messages, Controls, Graphics;
 
   procedure prc_Verifica_Limite(ID_Cliente, ID_Nota: Integer; Vlr_Limite_Credito: Real);
   function fnc_Limite_Credito(ID_Cliente, ID_Nota: Integer; Data: TDateTime): Real;
@@ -50,10 +49,15 @@ begin
       sds_Vale.SQLConnection := dmDatabase.scoDados;
       sds_Vale.NoMetadata    := True;
       sds_Vale.GetMetadata   := False;
-      sds_Vale.CommandText   := 'SELECT V.id, V.num_vale FROM VALE V '
-                              + ' INNER JOIN VALE_ITENS VI  ON V.id = VI.id '
-                              + ' WHERE VI.FATURADO = ' + QuotedStr('N')
-                              + '   AND V.ID_CLIENTE = ' + IntToStr(ID_Cliente);
+      sds_Vale.CommandText   := 'SELECT V.ID, V.NUM_VALE ' +
+                                'FROM VALE V ' +
+                                'INNER JOIN VALE_ITENS VI  ON V.id = VI.id ' +
+                                'WHERE VI.FATURADO = ''N''  AND V.ID_CLIENTE = ' + IntToStr(ID_Cliente) +
+                                'UNION  ' +
+                                'SELECT V.ID, V.NUM_VALE  ' +
+                                'FROM VALE V ' +
+                                'INNER JOIN VALE_SERVICO VS ON V.id = VS.id ' +
+                                'WHERE VS.FATURADO = ''N''  AND V.ID_CLIENTE = ' + IntToStr(ID_Cliente);
       sds_Vale.Open;
       if not sds_Vale.IsEmpty then
         vMSGAlerta := vMSGAlerta + #13 + '*** Existem VALES pendentes para esse cliente!';
@@ -337,6 +341,5 @@ begin
     FreeAndNil(sds);
   end
 end;
-
 
 end.
