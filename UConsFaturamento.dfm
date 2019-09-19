@@ -179,8 +179,8 @@ object frmConsFaturamento: TfrmConsFaturamento
         'Dt. Entrada')
     end
     object btnConsultar: TNxButton
-      Left = 481
-      Top = 59
+      Left = 484
+      Top = 57
       Width = 170
       Height = 30
       Caption = 'Efetuar Pesquisa'
@@ -252,7 +252,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     end
     object btnImprimir: TNxButton
       Left = 650
-      Top = 59
+      Top = 57
       Width = 170
       Height = 30
       Caption = 'Imprimir'
@@ -347,6 +347,14 @@ object frmConsFaturamento: TfrmConsFaturamento
       Height = 17
       Caption = 'Somar Descontos'
       TabOrder = 10
+    end
+    object ckUsarTotal2: TCheckBox
+      Left = 578
+      Top = 2
+      Width = 97
+      Height = 17
+      Caption = 'Usar o Total 2'
+      TabOrder = 11
     end
   end
   object RzPageControl1: TRzPageControl
@@ -2917,7 +2925,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         'Vendas/Servi'#231'os')
     end
     object CheckBox2: TCheckBox
-      Left = 346
+      Left = 347
       Top = 2
       Width = 97
       Height = 17
@@ -3054,7 +3062,7 @@ object frmConsFaturamento: TfrmConsFaturamento
       ParentFont = False
       TabOrder = 0
     end
-    object ceVlrFaturamento_ST: TCurrencyEdit
+    object ceVlrFaturamento_Liq: TCurrencyEdit
       Left = 726
       Top = 2
       Width = 154
@@ -3128,8 +3136,8 @@ object frmConsFaturamento: TfrmConsFaturamento
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 823
-    Top = 16
+    Left = 825
+    Top = 18
     object Imprimir1: TMenuItem
       Caption = 'Imprimir'
       OnClick = Imprimir1Click

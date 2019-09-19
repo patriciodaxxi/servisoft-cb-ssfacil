@@ -453,6 +453,7 @@ type
     qParametros_Geral: TSQLQuery;
     qParametros_GeralUSA_VENDEDOR_INT: TStringField;
     sdsVendCliProd_Int: TSQLDataSet;
+    qFaturamentoVLR_TOTAL_BRUTO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscal_CliCalcFields(DataSet: TDataSet);
     procedure dspNotaFiscal_CliUpdateError(Sender: TObject;

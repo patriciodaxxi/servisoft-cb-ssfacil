@@ -3082,6 +3082,7 @@ type
     sdsNotaFiscal_ItensDRAWBACK: TStringField;
     cdsNotaFiscal_ItensDRAWBACK: TStringField;
     cdsPedidoDRAWBACK: TStringField;
+    cdsNotaFiscal_ConsultaVLR_DESCONTO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

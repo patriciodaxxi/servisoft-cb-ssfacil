@@ -362,7 +362,9 @@ object DMConsFaturamento: TDMConsFaturamento
         ' sum(MOV.VLR_DUPLICATA - MOV.VLR_ICMSSUBST) VLR_DUPLICATA_ST,'
       
         '       sum(MOV.VLR_ICMSSUBST) VLR_ICMSSUBST, sum(MOV.VLR_FRETE) ' +
-        'VLR_FRETE, sum(MOV.VLR_IPI) VLR_IPI'
+        'VLR_FRETE, sum(MOV.VLR_IPI) VLR_IPI,'
+      '       sum(MOV.VLR_TOTAL) VLR_TOTAL_BRUTO'
+      '   '
       'from MOVIMENTO MOV'
       'left join TAB_CFOP CF on CF.ID = MOV.ID_CFOP'
       'where MOV.CANCELADO = '#39'N'#39' and'
@@ -395,6 +397,9 @@ object DMConsFaturamento: TDMConsFaturamento
     end
     object qFaturamentoVLR_IPI: TFloatField
       FieldName = 'VLR_IPI'
+    end
+    object qFaturamentoVLR_TOTAL_BRUTO: TFloatField
+      FieldName = 'VLR_TOTAL_BRUTO'
     end
   end
   object sdsNotaFiscal_CliProd: TSQLDataSet
@@ -1279,7 +1284,7 @@ object DMConsFaturamento: TDMConsFaturamento
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxNotaFiscal_VendProd'
-    CloseDataSource = True
+    CloseDataSource = False
     FieldAliases.Strings = (
       'TIPO_MOV=TIPO_MOV'
       'ID_PRODUTO=ID_PRODUTO'
@@ -1301,6 +1306,7 @@ object DMConsFaturamento: TDMConsFaturamento
     Top = 405
   end
   object frxReport1: TfrxReport
+    Tag = 1
     Version = '5.6.8'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -1309,9 +1315,10 @@ object DMConsFaturamento: TDMConsFaturamento
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42222.414492245400000000
-    ReportOptions.LastChange = 43399.439827881940000000
+    ReportOptions.LastChange = 43397.689898368100000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
+    OnReportPrint = 'frxReportOnReportPrint'
     Left = 776
     Top = 358
   end
@@ -1360,7 +1367,7 @@ object DMConsFaturamento: TDMConsFaturamento
   end
   object frxDBDataset2: TfrxDBDataset
     UserName = 'frxNotaFiscal_VendCli'
-    CloseDataSource = True
+    CloseDataSource = False
     FieldAliases.Strings = (
       'TIPO_MOV=TIPO_MOV'
       'ID_PESSOA=ID_PESSOA'
@@ -1376,11 +1383,11 @@ object DMConsFaturamento: TDMConsFaturamento
     DataSource = dsNotaFiscal_VendCli
     BCDToCurrency = False
     Left = 816
-    Top = 405
+    Top = 404
   end
   object frxDBDataset3: TfrxDBDataset
     UserName = 'frxNotaFiscal_Vend'
-    CloseDataSource = True
+    CloseDataSource = False
     FieldAliases.Strings = (
       'TIPO_MOV=TIPO_MOV'
       'ID_VENDEDOR=ID_VENDEDOR'
@@ -1430,7 +1437,7 @@ object DMConsFaturamento: TDMConsFaturamento
     ProviderName = 'dspNotaFiscal_Cli_UF'
     OnCalcFields = cdsNotaFiscal_Cli_UFCalcFields
     Left = 528
-    Top = 24
+    Top = 23
     object cdsNotaFiscal_Cli_UFID_PESSOA: TIntegerField
       FieldName = 'ID_PESSOA'
     end
@@ -1500,7 +1507,7 @@ object DMConsFaturamento: TDMConsFaturamento
     DataSource = dsNotaFiscal_Cli_UF
     BCDToCurrency = False
     Left = 896
-    Top = 405
+    Top = 404
   end
   object sdsNotaFiscal_Cli_Cid: TSQLDataSet
     NoMetadata = True

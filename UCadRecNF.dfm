@@ -80,7 +80,7 @@ object frmCadRecNF: TfrmCadRecNF
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 17
+        ColCount = 18
         RowCount = 2
         Columns = <
           item
@@ -158,6 +158,14 @@ object frmCadRecNF: TfrmCadRecNF
           end
           item
             Expanded = False
+            FieldName = 'VLR_DESCONTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. Desconto'
+            Width = 77
+            Visible = True
+          end
+          item
+            Expanded = False
             FieldName = 'DESCRICAO_PRAZO'
             Title.Alignment = taCenter
             Title.Caption = 'Descri'#231#227'o Tipo Prazo'
@@ -170,6 +178,7 @@ object frmCadRecNF: TfrmCadRecNF
             FieldName = 'TIPO_PRAZO'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Prazo'
+            Width = 64
             Visible = True
           end
           item
@@ -205,6 +214,7 @@ object frmCadRecNF: TfrmCadRecNF
             FieldName = 'USUARIO'
             Title.Alignment = taCenter
             Title.Caption = 'Usu'#225'rio'
+            Width = 64
             Visible = True
           end>
       end

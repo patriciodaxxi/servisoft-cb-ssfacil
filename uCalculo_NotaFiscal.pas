@@ -1698,6 +1698,7 @@ end;
 procedure prc_Calcular_Frete_Novo(fDMCadNotaFiscal: TDMCadNotaFiscal);
 var
   vAux: Real;
+  vVlrTotal : Real;
 begin
   vContadorOutros := vContadorOutros - 1;
   vAux := 0;
@@ -1706,14 +1707,20 @@ begin
   else
   if StrToFloat(FormatFloat('0.00',vCalcFrete)) > 0 then
   begin
+    //19/09/2019
+    vVlrTotal := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat));
+    if (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat)) <= 0) then
+      vVlrTotal := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat * fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
     if fDMCadNotaFiscal.cdsParametrosARREDONDAR_5.AsString = 'B' then
     begin
-      vAux := StrToCurr(FormatCurr('0.0000',(fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat / vCalcTotalNota) * 100));
+      //vAux := StrToCurr(FormatCurr('0.0000',(fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat / vCalcTotalNota) * 100));
+      vAux := StrToCurr(FormatCurr('0.0000',(vVlrTotal / vCalcTotalNota) * 100));
       vAux := StrToCurr(FormatCurr('0.00',(vCalcFrete * vAux) / 100));
     end
     else
     begin
-      vAux := StrToFloat(FormatFloat('0.0000',(fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat / vCalcTotalNota) * 100));
+      //vAux := StrToFloat(FormatFloat('0.0000',(fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat / vCalcTotalNota) * 100));
+      vAux := StrToFloat(FormatFloat('0.0000',(vVlrTotal / vCalcTotalNota) * 100));
       vAux := StrToFloat(FormatFloat('0.00',(vCalcFrete * vAux) / 100));
     end;
   end;
@@ -3365,6 +3372,9 @@ begin
         begin
           vDescAux := StrToCurr(FormatCurr('0.00000',(vVlrTotalItens / vVlrDuplicata) * 100));
           vDescAux := StrToCurr(FormatCurr('0.00',(vDescAux * fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat) / 100));
+          //19/09/2019
+          if (StrToFloat(FormatFloat('0.00',vVlrTotalItens - vDescAux)) <= 0.02) then
+            vDescAux := vVlrTotalItens; 
           if StrToFloat(FormatFloat('0.00',vDescAux)) > StrToFloat(FormatFloat('0.00',vDesconto)) then
             vDescAux := StrToFloat(FormatFloat('0.00',vDesconto));
         end;
@@ -3405,6 +3415,10 @@ begin
 
     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat := StrToCurr(FormatCurr('0.00',(fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat *
                                               fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_UNITARIO.AsFloat) - vDescAux));
+    //18/09/2019
+    //if StrToCurr(FormatCurr('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat)) <= 0 then
+    //  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TOTAL.AsFloat := 0;
+    //**********************
 
     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_IPI.AsFloat       := 0;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_IPI_DEVOL.AsFloat := 0;
