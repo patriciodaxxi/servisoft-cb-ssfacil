@@ -78,6 +78,8 @@ type
     DBEdit18: TDBEdit;
     Label23: TLabel;
     DBEdit19: TDBEdit;
+    Label24: TLabel;
+    DBEdit20: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);

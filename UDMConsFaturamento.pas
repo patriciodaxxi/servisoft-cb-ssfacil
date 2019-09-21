@@ -159,7 +159,6 @@ type
     cdsNotaFiscal_VendProdID_VENDEDOR: TIntegerField;
     cdsNotaFiscal_VendProdNOME_VENDEDOR: TStringField;
     cdsNotaFiscal_VendProdNOME_ORIGINAL: TStringField;
-    cdsNotaFiscal_VendProdVLR_DUPLICATA: TFloatField;
     cdsNotaFiscal_VendProdQTD: TFloatField;
     cdsNotaFiscal_VendProdVLR_LIQUIDO_NFSE: TFloatField;
     cdsNotaFiscal_VendProdVLR_VENDAS: TFloatField;
@@ -171,10 +170,8 @@ type
     dsNotaFiscal_VendCli: TDataSource;
     cdsNotaFiscal_VendCliTIPO_MOV: TStringField;
     cdsNotaFiscal_VendCliID_PESSOA: TIntegerField;
-    cdsNotaFiscal_VendCliNOME_CLIFORN: TStringField;
     cdsNotaFiscal_VendCliID_VENDEDOR: TIntegerField;
     cdsNotaFiscal_VendCliNOME_VENDEDOR: TStringField;
-    cdsNotaFiscal_VendCliVLR_DUPLICATA: TFloatField;
     cdsNotaFiscal_VendCliQTD: TFloatField;
     cdsNotaFiscal_VendCliVLR_LIQUIDO_NFSE: TFloatField;
     cdsNotaFiscal_VendCliVLR_VENDAS: TFloatField;
@@ -184,10 +181,8 @@ type
     dspNotaFiscal_Vend: TDataSetProvider;
     cdsNotaFiscal_Vend: TClientDataSet;
     dsNotaFiscal_Vend: TDataSource;
-    cdsNotaFiscal_VendTIPO_MOV: TStringField;
     cdsNotaFiscal_VendID_VENDEDOR: TIntegerField;
     cdsNotaFiscal_VendNOME_VENDEDOR: TStringField;
-    cdsNotaFiscal_VendVLR_DUPLICATA: TFloatField;
     cdsNotaFiscal_VendQTD: TFloatField;
     cdsNotaFiscal_VendVLR_LIQUIDO_NFSE: TFloatField;
     cdsNotaFiscal_VendVLR_VENDAS: TFloatField;
@@ -296,17 +291,14 @@ type
     cdsVendCliProdREFERENCIA: TStringField;
     cdsVendCliProdNOME_COMBINACAO: TStringField;
     cdsVendCliProdID_COR: TIntegerField;
-    cdsVendCliProdNOME_CLIFORN: TStringField;
     cdsVendCliProdNOME_PRODUTO_SERV: TStringField;
     cdsVendCliProdID_VENDEDOR: TIntegerField;
     cdsVendCliProdNOME_VENDEDOR: TStringField;
     cdsVendCliProdNOME_ORIGINAL: TStringField;
-    cdsVendCliProdVLR_DUPLICATA: TFloatField;
     cdsVendCliProdQTD: TFloatField;
     cdsVendCliProdVLR_LIQUIDO_NFSE: TFloatField;
     cdsVendCliProdVLR_VENDAS: TFloatField;
     cdsVendCliProdVLR_ICMSSUBST: TFloatField;
-    cdsVendCliProdUF_CLI: TStringField;
     qParametros_NFe: TSQLQuery;
     qParametros_NFeMOSTRAR_VLR_FRETE_CONS: TStringField;
     qParametros_NFeMOSTRAR_VLR_DEVOL_CONS: TStringField;
@@ -454,6 +446,13 @@ type
     qParametros_GeralUSA_VENDEDOR_INT: TStringField;
     sdsVendCliProd_Int: TSQLDataSet;
     qFaturamentoVLR_TOTAL_BRUTO: TFloatField;
+    cdsNotaFiscal_VendProdVLR_TOTAL: TFloatField;
+    cdsNotaFiscal_VendCliNOME_CLIENTE: TStringField;
+    cdsNotaFiscal_VendCliVLR_TOTAL: TFloatField;
+    cdsNotaFiscal_VendVLR_TOTAL: TFloatField;
+    cdsVendCliProdNOME_CLIENTE: TStringField;
+    cdsVendCliProdUF: TStringField;
+    cdsVendCliProdVLR_TOTAL: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscal_CliCalcFields(DataSet: TDataSet);
     procedure dspNotaFiscal_CliUpdateError(Sender: TObject;
@@ -592,19 +591,19 @@ end;
 procedure TDMConsFaturamento.cdsNotaFiscal_VendProdCalcFields(
   DataSet: TDataSet);
 begin
-  cdsNotaFiscal_VendProdclPerc_SobreFat.AsFloat := fnc_Calcula_Perc_SobreFat(cdsNotaFiscal_VendProdVLR_DUPLICATA.AsFloat);
+  cdsNotaFiscal_VendProdclPerc_SobreFat.AsFloat := fnc_Calcula_Perc_SobreFat(cdsNotaFiscal_VendProdVLR_TOTAL.AsFloat);
 end;
 
 procedure TDMConsFaturamento.cdsNotaFiscal_VendCliCalcFields(
   DataSet: TDataSet);
 begin
-  cdsNotaFiscal_VendCliclPerc_SobreFat.AsFloat := fnc_Calcula_Perc_SobreFat(cdsNotaFiscal_VendCliVLR_DUPLICATA.AsFloat);
+  cdsNotaFiscal_VendCliclPerc_SobreFat.AsFloat := fnc_Calcula_Perc_SobreFat(cdsNotaFiscal_VendCliVLR_TOTAL.AsFloat);
 end;
 
 procedure TDMConsFaturamento.cdsNotaFiscal_VendCalcFields(
   DataSet: TDataSet);
 begin
-  cdsNotaFiscal_VendclPerc_SobreFat.AsFloat := fnc_Calcula_Perc_SobreFat(cdsNotaFiscal_VendVLR_DUPLICATA.AsFloat);
+  cdsNotaFiscal_VendclPerc_SobreFat.AsFloat := fnc_Calcula_Perc_SobreFat(cdsNotaFiscal_VendVLR_TOTAL.AsFloat);
 end;
 
 procedure TDMConsFaturamento.cdsNotaFiscal_Cli_UFCalcFields(

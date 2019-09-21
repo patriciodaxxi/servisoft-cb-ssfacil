@@ -138,6 +138,10 @@ type
     procedure SMDBGrid8TitleClick(Column: TColumn);
     procedure RxDBLookupCombo2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure SMDBGrid10TitleClick(Column: TColumn);
+    procedure SMDBGrid9TitleClick(Column: TColumn);
+    procedure SMDBGrid11TitleClick(Column: TColumn);
+    procedure SMDBGrid16TitleClick(Column: TColumn);
   private
     { Private declarations }
     fDMConsFaturamento: TDMConsFaturamento;
@@ -299,7 +303,7 @@ begin
     if CheckBox3.Checked then
     begin
       fDMConsFaturamento.cdsNotaFiscal_VendProd.IndexFieldNames := 'NOME_VENDEDOR;REFERENCIA;NOME_ORIGINAL';
-      fDMConsFaturamento.cdsNotaFiscal_VendCli.IndexFieldNames  := 'NOME_VENDEDOR;NOME_CLIFORN;ID_PESSOA';
+      fDMConsFaturamento.cdsNotaFiscal_VendCli.IndexFieldNames  := 'NOME_VENDEDOR;NOME_CLIENTE;ID_PESSOA';
       fDMConsFaturamento.cdsNotaFiscal_Vend.IndexFieldNames     := 'NOME_VENDEDOR';
     end;
   end;  
@@ -561,6 +565,7 @@ begin
 
   //fDMConsFaturamento.vVlrLiq := StrToFloat(FormatFloat('0.00',fDMConsFaturamento.qFaturamentoVLR_DUPLICATA_ST.AsFloat -
   ceVlrFaturamento_Liq.Value  := fDMConsFaturamento.vVlrLiq;
+  fDMConsFaturamento.vVlrFaturamento := ceVlrFaturamento.Value;
 end;
 
 procedure TfrmConsFaturamento.prc_Monta_Condicao;
@@ -605,7 +610,8 @@ begin
       vComando := vComando + ' AND ' + vDescData + ' <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.date));
   end
   else
-  if RzPageControl1.ActivePage = TS_Vendedor then
+  //20/09/2019
+  {if RzPageControl1.ActivePage = TS_Vendedor then
   begin
     vComando := ' WHERE 0 = 0 ';
     if DateEdit1.Date > 10 then
@@ -630,7 +636,7 @@ begin
       //vComando := vComando + '  AND V.TIPO_REG = ' + QuotedStr('NSE');
       vComando := vComando + ' AND ((V.TIPO_REG = ' + QuotedStr('NSE') + ') OR (V.TIPO_REG = ' + QuotedStr('REC') + '))';
   end
-  else
+  else}
   begin
     vComando := '';
     if RzPageControl1.ActivePage = TS_Produto_Det then
@@ -1159,17 +1165,19 @@ var
   vDesc: String;
   vComandoAux: String;
 begin
-  if CheckBox2.Checked then
+  vDesc := fnc_Monta_SQL_Vlr;
+  {if CheckBox2.Checked then
     vDesc := ' SUM(V.VLR_VENDAS - V.VLR_ICMSSUBST) VLR_VENDAS '
   else
-    vDesc := ' SUM(V.VLR_VENDAS) VLR_VENDAS ';
+    vDesc := ' SUM(V.VLR_VENDAS) VLR_VENDAS ';}
   vComandoAux := 'SELECT v.tipo_mov, V.id_produto, V.referencia, V.nome_combinacao, V.id_cor, V.NOME_ORIGINAL, V.NOME_PRODUTO_SERV, '
-               + ' SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, ' + vDesc + ', SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST, '
-               + vOpcaoVendedor
-               + 'FROM vfaturamento v '
+               + ' SUM (' + vDesc +')' + ' VLR_TOTAL, SUM(v.QTD) QTD, '
+               + ' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST, '
+               + ' SUM(' + vDesc + ' - VLR_LIQUIDO_NFSE) VLR_VENDAS, '
+               + vOpcaoVendedor + ' '
                + vComando
-               + 'GROUP BY v.tipo_mov, V.id_produto, V.referencia, V.nome_combinacao, V.id_cor, V.NOME_ORIGINAL, V.NOME_PRODUTO_SERV, ' + vOpcaoVendedor_Group
-               + 'Order BY VLR_DUPLICATA DESC';
+               + ' GROUP BY v.tipo_mov, V.id_produto, V.referencia, V.nome_combinacao, V.id_cor, V.NOME_ORIGINAL, V.NOME_PRODUTO_SERV, ' + vOpcaoVendedor_Group
+               + ' Order BY VLR_total DESC';
   fDMConsFaturamento.cdsNotaFiscal_VendProd.Close;
   fDMConsFaturamento.sdsNotaFiscal_VendProd.CommandText := vComandoAux;
   fDMConsFaturamento.cdsNotaFiscal_VendProd.Open;
@@ -1182,17 +1190,19 @@ var
   vDesc: String;
   vComandoAux: String;
 begin
-  if CheckBox2.Checked then
+  {if CheckBox2.Checked then
     vDesc := ' SUM(V.VLR_VENDAS - V.VLR_ICMSSUBST) VLR_VENDAS '
   else
-    vDesc := ' SUM(V.VLR_VENDAS) VLR_VENDAS ';
-  vComandoAux := 'select v.tipo_mov, V.id_pessoa, V.nome_cliforn, SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, '
-               + ' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, ' + vDesc + ', SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST, '
-               + vOpcaoVendedor
-               + ' from vfaturamento v '
+    vDesc := ' SUM(V.VLR_VENDAS) VLR_VENDAS ';}
+  vDesc := fnc_Monta_SQL_Vlr;
+  vComandoAux := 'select v.tipo_mov, V.id_pessoa, V.nome_cliente, '
+               + ' SUM (' + vDesc +')' + ' VLR_TOTAL, SUM(v.QTD) QTD, '
+               + ' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST, '
+               + ' SUM(' + vDesc + ' - VLR_LIQUIDO_NFSE) VLR_VENDAS, '
+               + vOpcaoVendedor + ' '
                + vComando
-               + ' GROUP BY v.tipo_mov, V.id_pessoa, V.nome_cliforn, ' + vOpcaoVendedor_Group
-               + ' order BY VLR_DUPLICATA desc ';
+               + ' GROUP BY v.tipo_mov, V.id_pessoa, V.nome_cliente, ' + vOpcaoVendedor_Group
+               + ' order BY VLR_TOTAL desc ';
   fDMConsFaturamento.cdsNotaFiscal_VendCli.Close;
   fDMConsFaturamento.sdsNotaFiscal_VendCli.CommandText := vComandoAux;
   fDMConsFaturamento.cdsNotaFiscal_VendCli.Open;
@@ -1205,17 +1215,27 @@ var
   vComandoAux: String;
   vDesc: String;
 begin
-  if CheckBox2.Checked then
+  vDesc := fnc_Monta_SQL_Vlr;
+  {if CheckBox2.Checked then
     vDesc := ' SUM(V.VLR_VENDAS - V.VLR_ICMSSUBST) VLR_VENDAS '
   else
-    vDesc := ' SUM(V.VLR_VENDAS) VLR_VENDAS ';
-  vComandoAux := 'Select v.tipo_mov, SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, '
+    vDesc := ' SUM(V.VLR_VENDAS) VLR_VENDAS ';}
+  {vComandoAux := 'Select v.tipo_mov, SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD) QTD, '
                + ' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, ' + vDesc + ', SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST, '
                + vOpcaoVendedor
                + ' from vfaturamento v '
                + vComando
                + ' GROUP BY v.tipo_mov, ' + vOpcaoVendedor_Group
-               + ' order BY VLR_DUPLICATA desc ';
+               + ' order BY VLR_DUPLICATA desc ';}
+
+  vComandoAux := 'SELECT '
+               + ' SUM (' + vDesc +')' + ' VLR_TOTAL, SUM(v.QTD) QTD, '
+               + ' SUM(VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE, SUM(' + vDesc + ' - VLR_LIQUIDO_NFSE) VLR_VENDAS, '
+               + ' SUM(VLR_ICMSSUBST) VLR_ICMSSUBST, ' + vOpcaoVendedor;
+  vComandoAux := vComandoAux + ' ' + vComando
+               + ' GROUP by ' + vOpcaoVendedor_Group
+               + ' ORDER BY VLR_TOTAL DESC ';
+
   fDMConsFaturamento.cdsNotaFiscal_Vend.Close;
   fDMConsFaturamento.sdsNotaFiscal_Vend.CommandText := vComandoAux;
   fDMConsFaturamento.cdsNotaFiscal_Vend.Open;
@@ -1252,7 +1272,7 @@ begin
   if CheckBox3.Checked then
   begin
     fDMConsFaturamento.cdsNotaFiscal_VendProd.IndexFieldNames := 'NOME_VENDEDOR;REFERENCIA;NOME_ORIGINAL';
-    fDMConsFaturamento.cdsNotaFiscal_VendCli.IndexFieldNames  := 'NOME_VENDEDOR;NOME_CLIFORN;ID_PESSOA';
+    fDMConsFaturamento.cdsNotaFiscal_VendCli.IndexFieldNames  := 'NOME_VENDEDOR;NOME_CLIENTE;ID_PESSOA';
     fDMConsFaturamento.cdsNotaFiscal_Vend.IndexFieldNames     := 'NOME_VENDEDOR';
   end
   else
@@ -2000,6 +2020,62 @@ begin
   if chkDesconto.Checked then
     Result := '(' + Result + ') + V.VLR_DESCONTO';
   //*************************
+end;
+
+procedure TfrmConsFaturamento.SMDBGrid10TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  if Column.FieldName = 'clPerc_SobreFat' then
+    exit;
+  ColunaOrdenada := Column.FieldName;
+  fDMConsFaturamento.cdsNotaFiscal_Vend.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid10.Columns.Count - 1 do
+    if not (SMDBGrid10.Columns.Items[I] = Column) then
+      SMDBGrid10.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmConsFaturamento.SMDBGrid9TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  if Column.FieldName = 'clPerc_SobreFat' then
+    exit;
+  ColunaOrdenada := Column.FieldName;
+  fDMConsFaturamento.cdsNotaFiscal_VendCli.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid9.Columns.Count - 1 do
+    if not (SMDBGrid9.Columns.Items[I] = Column) then
+      SMDBGrid9.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmConsFaturamento.SMDBGrid11TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  if Column.FieldName = 'clPerc_SobreFat' then
+    exit;
+  ColunaOrdenada := Column.FieldName;
+  fDMConsFaturamento.cdsNotaFiscal_VendProd.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid11.Columns.Count - 1 do
+    if not (SMDBGrid11.Columns.Items[I] = Column) then
+      SMDBGrid11.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmConsFaturamento.SMDBGrid16TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  if Column.FieldName = 'clPerc_SobreFat' then
+    exit;
+  ColunaOrdenada := Column.FieldName;
+  fDMConsFaturamento.cdsVendCliProd.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid16.Columns.Count - 1 do
+    if not (SMDBGrid16.Columns.Items[I] = Column) then
+      SMDBGrid16.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.

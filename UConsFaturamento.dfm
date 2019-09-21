@@ -386,7 +386,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Top = 0
         Width = 1006
         Height = 352
-        ActivePage = TS_Cliente_Acum
+        ActivePage = TS_Cliente_UF
         ActivePageDefault = TS_Cliente_Acum
         Align = alClient
         Color = 16755027
@@ -399,7 +399,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         ParentColor = False
         ParentFont = False
         TabColors.Unselected = clGray
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 0
         TextColors.Unselected = 5197647
         FixedDimension = 19
@@ -1431,7 +1431,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 Expanded = False
                 FieldName = 'clPerc_SobreFat'
                 Title.Caption = '% Sobre Total'
-                Width = 64
                 Visible = True
               end
               item
@@ -1705,7 +1704,6 @@ object frmConsFaturamento: TfrmConsFaturamento
               item
                 Expanded = False
                 FieldName = 'DTENTRADASAIDA'
-                Width = 64
                 Visible = True
               end
               item
@@ -1843,7 +1841,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'UNIDADE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
-                Width = 64
                 Visible = True
               end
               item
@@ -1900,7 +1897,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'DTENTRADASAIDA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Dt. Entrada / Sa'#237'da'
-                Width = 64
                 Visible = True
               end
               item
@@ -2016,7 +2012,6 @@ object frmConsFaturamento: TfrmConsFaturamento
             Expanded = False
             FieldName = 'VLR_FATURAMENTO'
             Title.Caption = 'Vlr. Faturamento'
-            Width = 64
             Visible = True
           end
           item
@@ -2305,6 +2300,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
+            OnTitleClick = SMDBGrid10TitleClick
             Flat = True
             BandsFont.Charset = DEFAULT_CHARSET
             BandsFont.Color = clWindowText
@@ -2344,7 +2340,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               end
               item
                 Expanded = False
-                FieldName = 'VLR_DUPLICATA'
+                FieldName = 'VLR_TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Total'
                 Visible = True
@@ -2412,6 +2408,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
+            OnTitleClick = SMDBGrid9TitleClick
             Flat = True
             BandsFont.Charset = DEFAULT_CHARSET
             BandsFont.Color = clWindowText
@@ -2430,7 +2427,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 11
+            ColCount = 12
             RowCount = 2
             Columns = <
               item
@@ -2451,6 +2448,13 @@ object frmConsFaturamento: TfrmConsFaturamento
               end
               item
                 Expanded = False
+                FieldName = 'TIPO_MOV'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tipo Nota'
+                Visible = True
+              end
+              item
+                Expanded = False
                 FieldName = 'ID_PESSOA'
                 Title.Alignment = taCenter
                 Title.Caption = 'ID Cli/Forn'
@@ -2458,7 +2462,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               end
               item
                 Expanded = False
-                FieldName = 'NOME_CLIFORN'
+                FieldName = 'NOME_CLIENTE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome Cliente/Fornecedor'
                 Width = 250
@@ -2466,7 +2470,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               end
               item
                 Expanded = False
-                FieldName = 'VLR_DUPLICATA'
+                FieldName = 'VLR_TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Total'
                 Visible = True
@@ -2528,6 +2532,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
+            OnTitleClick = SMDBGrid11TitleClick
             Flat = True
             BandsFont.Charset = DEFAULT_CHARSET
             BandsFont.Color = clWindowText
@@ -2546,7 +2551,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 11
+            ColCount = 12
             RowCount = 2
             Columns = <
               item
@@ -2567,6 +2572,13 @@ object frmConsFaturamento: TfrmConsFaturamento
               end
               item
                 Expanded = False
+                FieldName = 'TIPO_MOV'
+                Title.Alignment = taCenter
+                Title.Caption = 'Tipo Nota'
+                Visible = True
+              end
+              item
+                Expanded = False
                 FieldName = 'REFERENCIA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Refer'#234'ncia'
@@ -2582,7 +2594,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               end
               item
                 Expanded = False
-                FieldName = 'VLR_DUPLICATA'
+                FieldName = 'VLR_TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Total'
                 Visible = True
@@ -2620,7 +2632,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'clPerc_SobreFat'
                 Title.Alignment = taCenter
                 Title.Caption = '% Sobre Total'
-                Width = 64
                 Visible = True
               end>
           end
@@ -2645,6 +2656,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
+            OnTitleClick = SMDBGrid16TitleClick
             Flat = True
             BandsFont.Charset = DEFAULT_CHARSET
             BandsFont.Color = clWindowText
@@ -2668,89 +2680,119 @@ object frmConsFaturamento: TfrmConsFaturamento
             Columns = <
               item
                 Expanded = False
-                FieldName = 'NUM_NOTA'
+                FieldName = 'NOME_VENDEDOR'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Vendedor'
+                Width = 141
                 Visible = True
               end
               item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'NUM_NOTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#186' Nota'
+                Visible = True
+              end
+              item
+                Alignment = taCenter
                 Expanded = False
                 FieldName = 'DTEMISSAO'
-                Width = 64
+                Title.Alignment = taCenter
+                Title.Caption = 'Dt. Emiss'#227'o'
                 Visible = True
               end
               item
+                Alignment = taCenter
                 Expanded = False
                 FieldName = 'TIPO_MOV'
-                Width = 64
+                Title.Alignment = taCenter
+                Title.Caption = 'Tipo Nota'
                 Visible = True
               end
               item
+                Alignment = taCenter
                 Expanded = False
                 FieldName = 'ID_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Produto'
                 Width = 86
                 Visible = True
               end
               item
-                Expanded = False
-                FieldName = 'COD_GRUPO'
-                Width = 83
-                Visible = True
-              end
-              item
+                Alignment = taCenter
                 Expanded = False
                 FieldName = 'REFERENCIA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Refer'#234'ncia'
                 Width = 90
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'NOME_CLIFORN'
+                FieldName = 'NOME_PRODUTO_SERV'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Produto / Servi'#231'o'
+                Width = 198
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'COD_GRUPO'
+                Title.Alignment = taCenter
+                Title.Caption = 'C'#243'd. Grupo'
+                Width = 83
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'UF'
+                Title.Alignment = taCenter
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_CLIENTE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Cliente'
                 Width = 185
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'NOME_PRODUTO_SERV'
-                Width = 198
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'NOME_VENDEDOR'
-                Width = 141
+                FieldName = 'VLR_TOTAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Faturamento'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_IPI'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'VLR_DUPLICATA'
-                Width = 64
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. IPI'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'QTD'
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtd.'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_VENDAS'
-                Width = 64
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. Vendas'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'VLR_ICMSSUBST'
-                Width = 64
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'UF_CLI'
-                Width = 64
+                Title.Alignment = taCenter
+                Title.Caption = 'Vlr. ST'
                 Visible = True
               end>
           end

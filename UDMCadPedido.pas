@@ -3494,6 +3494,7 @@ type
     cdsPedido_ItensDRAWBACK: TStringField;
     cdsPedidoImpID_VENDEDOR_INT: TIntegerField;
     cdsPedidoImpNOME_VENDEDOR_INT: TStringField;
+    cdsTriCCustoCEI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

@@ -3370,10 +3370,13 @@ begin
           vDescAux := StrToFloat(FormatFloat('0.00',vDesconto))
         else
         begin
-          vDescAux := StrToCurr(FormatCurr('0.00000',(vVlrTotalItens / vVlrDuplicata) * 100));
+          //if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat)) > StrToFloat(FormatFloat('0.00',vVlrDuplicata)) then
+          //  vDescAux := StrToCurr(FormatCurr('0.00000',(vVlrTotalItens / fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat) * 100))
+          //else
+            vDescAux := StrToCurr(FormatCurr('0.00000',(vVlrTotalItens / vVlrDuplicata) * 100));
           vDescAux := StrToCurr(FormatCurr('0.00',(vDescAux * fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat) / 100));
           //19/09/2019
-          if (StrToFloat(FormatFloat('0.00',vVlrTotalItens - vDescAux)) <= 0.02) then
+          if (StrToFloat(FormatFloat('0.00',vVlrTotalItens - vDescAux)) <= 0.02) and (StrToFloat(FormatFloat('0.00',vVlrTotalItens - vDescAux)) > 0) then
             vDescAux := vVlrTotalItens; 
           if StrToFloat(FormatFloat('0.00',vDescAux)) > StrToFloat(FormatFloat('0.00',vDesconto)) then
             vDescAux := StrToFloat(FormatFloat('0.00',vDesconto));

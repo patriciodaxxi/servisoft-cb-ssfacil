@@ -18036,10 +18036,10 @@ object DMCadPedido: TDMCadPedido
       ' UF_CCUSTO, CC.num_end NUM_END_CCUSTO, CID.NOME CID_CCUSTO, CC.N' +
       'UM_CONTRATO,'#13#10'CC.contato CONTATO_CCUSTO, CC.cnpj CNPJ_CCUSTO,'#13#10'C' +
       'C.email EMAIL_CCUSTO, CC.ddd DDD_CCUSTO , CC.fone FONE_CCUSTO , ' +
-      'CC.email_comras, CC.contato_compras'#13#10'FROM PEDIDO P'#13#10'LEFT JOIN PE' +
-      'SSOA TRI'#13#10'ON P.id_atelier = TRI.CODIGO'#13#10'LEFT JOIN CENTROCUSTO CC' +
-      #13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CC.ID_CIDADE' +
-      ' = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
+      'CC.email_comras, CC.contato_compras, CC.CEI'#13#10'FROM PEDIDO P'#13#10'LEFT' +
+      ' JOIN PESSOA TRI'#13#10'ON P.id_atelier = TRI.CODIGO'#13#10'LEFT JOIN CENTRO' +
+      'CUSTO CC'#13#10'ON P.ID_PROJETO = CC.ID'#13#10'LEFT JOIN CIDADE CID'#13#10'ON CC.I' +
+      'D_CIDADE = CID.ID'#13#10'WHERE P.ID = :ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -18223,6 +18223,10 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'EMAIL_COMRAS'
       Size = 150
     end
+    object cdsTriCCustoCEI: TStringField
+      FieldName = 'CEI'
+      Size = 18
+    end
   end
   object dsTriCCusto: TDataSource
     DataSet = cdsTriCCusto
@@ -18273,8 +18277,9 @@ object DMCadPedido: TDMCadPedido
       'NUM_END_COB=NUM_END_COB'
       'COMPL_TRI_COB=COMPL_TRI_COB'
       'UF_TRI_COB=UF_TRI_COB'
+      'CONTATO_COMPRAS=CONTATO_COMPRAS'
       'EMAIL_COMRAS=EMAIL_COMRAS'
-      'CONTATO_COMPRAS=CONTATO_COMPRAS')
+      'CEI=CEI')
     DataSource = dsTriCCusto
     BCDToCurrency = False
     Left = 1153

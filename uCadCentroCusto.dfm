@@ -88,6 +88,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Expanded = False
             FieldName = 'TIPO'
             Title.Caption = 'Tipo'
+            Width = 64
             Visible = True
           end
           item
@@ -107,12 +108,14 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Expanded = False
             FieldName = 'APROPRIACAO'
             Title.Caption = 'Apropria'#231#227'o'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'SUPERIOR'
             Title.Caption = 'Superior'
+            Width = 64
             Visible = True
           end
           item
@@ -133,6 +136,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             FieldName = 'VLR_CONTRATO_SERV'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Contrato Servi'#231'o'
+            Width = 64
             Visible = True
           end>
       end
@@ -880,7 +884,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
         end
         object gbxEndereco: TRzGroupBox
           Left = 98
-          Top = 127
+          Top = 126
           Width = 641
           Height = 353
           BorderColor = clNavy
@@ -1034,6 +1038,14 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             Alignment = taRightJustify
             Caption = 'Vlr. Contrato Servi'#231'o:'
           end
+          object Label24: TLabel
+            Left = 357
+            Top = 90
+            Width = 20
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'CEI:'
+          end
           object DBEdit5: TDBEdit
             Left = 115
             Top = 126
@@ -1044,7 +1056,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             DataField = 'ENDERECO'
             DataSource = dmCadCentroCusto.dsCentroCusto
             ParentCtl3D = False
-            TabOrder = 5
+            TabOrder = 6
           end
           object DBEdit6: TDBEdit
             Left = 548
@@ -1054,7 +1066,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             CharCase = ecUpperCase
             DataField = 'NUM_END'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 6
+            TabOrder = 7
           end
           object DBEdit7: TDBEdit
             Left = 115
@@ -1066,7 +1078,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             DataField = 'COMPLEMENTO_END'
             DataSource = dmCadCentroCusto.dsCentroCusto
             ParentCtl3D = False
-            TabOrder = 7
+            TabOrder = 8
           end
           object DBEdit17: TDBEdit
             Left = 548
@@ -1076,19 +1088,19 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             CharCase = ecUpperCase
             DataField = 'CEP'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 8
+            TabOrder = 9
           end
           object DBEdit8: TDBEdit
             Left = 115
             Top = 168
-            Width = 403
+            Width = 402
             Height = 21
             CharCase = ecUpperCase
             Ctl3D = True
             DataField = 'BAIRRO'
             DataSource = dmCadCentroCusto.dsCentroCusto
             ParentCtl3D = False
-            TabOrder = 9
+            TabOrder = 10
           end
           object RxDBLookupCombo2: TRxDBLookupCombo
             Left = 115
@@ -1102,7 +1114,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             LookupField = 'ID'
             LookupDisplay = 'NOME;UF'
             LookupSource = dmCadCentroCusto.dsCidade
-            TabOrder = 10
+            TabOrder = 11
           end
           object RxDBLookupCombo3: TRxDBLookupCombo
             Left = 115
@@ -1115,7 +1127,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             LookupField = 'UF'
             LookupDisplay = 'UF'
             LookupSource = dmCadCentroCusto.dsUF
-            TabOrder = 4
+            TabOrder = 5
             OnExit = RxDBLookupCombo3Exit
           end
           object DBEdit9: TDBEdit
@@ -1148,7 +1160,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             CharCase = ecUpperCase
             DataField = 'DDD'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 11
+            TabOrder = 12
           end
           object DBEdit12: TDBEdit
             Left = 157
@@ -1158,7 +1170,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             CharCase = ecUpperCase
             DataField = 'FONE'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 12
+            TabOrder = 13
           end
           object DBEdit13: TDBEdit
             Left = 114
@@ -1168,7 +1180,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             CharCase = ecUpperCase
             DataField = 'CONTATO'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 14
+            TabOrder = 15
           end
           object DBEdit14: TDBEdit
             Left = 114
@@ -1178,7 +1190,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             CharCase = ecLowerCase
             DataField = 'EMAIL'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 13
+            TabOrder = 14
           end
           object DBEdit15: TDBEdit
             Left = 115
@@ -1198,7 +1210,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             CharCase = ecUpperCase
             DataField = 'CONTATO_COMPRAS'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 16
+            TabOrder = 17
           end
           object DBEdit18: TDBEdit
             Left = 115
@@ -1208,7 +1220,7 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             CharCase = ecLowerCase
             DataField = 'EMAIL_COMRAS'
             DataSource = dmCadCentroCusto.dsCentroCusto
-            TabOrder = 15
+            TabOrder = 16
           end
           object DBEdit19: TDBEdit
             Left = 115
@@ -1219,6 +1231,18 @@ object frmCadCentroCusto: TfrmCadCentroCusto
             DataField = 'VLR_CONTRATO_SERV'
             DataSource = dmCadCentroCusto.dsCentroCusto
             TabOrder = 2
+          end
+          object DBEdit20: TDBEdit
+            Left = 379
+            Top = 82
+            Width = 139
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'CEI'
+            DataSource = dmCadCentroCusto.dsCentroCusto
+            TabOrder = 4
+            OnEnter = DBEdit10Enter
+            OnExit = DBEdit10Exit
           end
         end
       end

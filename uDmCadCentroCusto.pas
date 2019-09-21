@@ -119,6 +119,9 @@ type
     cdsCentroCustoVLR_CONTRATO_SERV: TFloatField;
     cdsConsultaVLR_CONTRATO: TFloatField;
     cdsConsultaVLR_CONTRATO_SERV: TFloatField;
+    sdsCentroCustoCEI: TStringField;
+    cdsCentroCustoCEI: TStringField;
+    cdsConsultaCEI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCentroCustoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

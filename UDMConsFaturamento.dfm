@@ -5,7 +5,7 @@ object DMConsFaturamento: TDMConsFaturamento
   Left = 139
   Top = 81
   Height = 576
-  Width = 1074
+  Width = 1150
   object sdsNotaFiscal_Cli: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -1045,17 +1045,16 @@ object DMConsFaturamento: TDMConsFaturamento
     CommandText = 
       'select v.tipo_mov, V.id_produto,'#13#10'V.referencia, V.nome_combinaca' +
       'o, V.id_cor,'#13#10'V.id_vendedor, V.nome_vendedor, V.NOME_ORIGINAL, V' +
-      '.nome_produto_serv,'#13#10'SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.' +
-      'QTD) QTD,'#13#10'SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE,'#13#10'SUM(V.VLR_' +
-      'VENDAS) VLR_VENDAS,'#13#10'SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST'#13#10'from vf' +
-      'aturamento v'#13#10'GROUP BY'#13#10'v.tipo_mov, V.id_produto, V.referencia, ' +
-      'V.nome_combinacao, V.id_cor,'#13#10'V.id_vendedor, V.nome_vendedor, V.' +
-      'NOME_ORIGINAL, V.nome_produto_serv'#13#10'order BY VLR_DUPLICATA desc'#13 +
-      #10
+      '.nome_produto_serv,'#13#10'SUM (v.Vlr_Total) VLR_Total, SUM(v.QTD) QTD' +
+      ','#13#10'SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE,'#13#10'SUM(V.VLR_VENDAS) ' +
+      'VLR_VENDAS,'#13#10'SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST'#13#10'from vConsFatur' +
+      'amento v'#13#10'GROUP BY'#13#10'v.tipo_mov, V.id_produto, V.referencia, V.no' +
+      'me_combinacao, V.id_cor,'#13#10'V.id_vendedor, V.nome_vendedor, V.NOME' +
+      '_ORIGINAL, V.nome_produto_serv'#13#10'order BY VLR_Total desc'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 728
+    Left = 727
     Top = 24
   end
   object dspNotaFiscal_VendProd: TDataSetProvider
@@ -1099,10 +1098,6 @@ object DMConsFaturamento: TDMConsFaturamento
       FieldName = 'NOME_ORIGINAL'
       Size = 100
     end
-    object cdsNotaFiscal_VendProdVLR_DUPLICATA: TFloatField
-      FieldName = 'VLR_DUPLICATA'
-      DisplayFormat = '0.00'
-    end
     object cdsNotaFiscal_VendProdQTD: TFloatField
       FieldName = 'QTD'
     end
@@ -1128,6 +1123,10 @@ object DMConsFaturamento: TDMConsFaturamento
       FieldName = 'NOME_PRODUTO_SERV'
       Size = 100
     end
+    object cdsNotaFiscal_VendProdVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+      DisplayFormat = '0.00'
+    end
   end
   object dsNotaFiscal_VendProd: TDataSource
     DataSet = cdsNotaFiscal_VendProd
@@ -1138,12 +1137,12 @@ object DMConsFaturamento: TDMConsFaturamento
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'select v.tipo_mov, V.id_pessoa, V.nome_cliforn,'#13#10'V.id_vendedor, ' +
-      'V.nome_vendedor,'#13#10'SUM (v.vlr_duplicata) VLR_DUPLICATA, SUM(v.QTD' +
-      ') QTD,'#13#10'SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE,'#13#10'SUM(V.VLR_VEN' +
-      'DAS) VLR_VENDAS,'#13#10'SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST'#13#10'from vfatu' +
-      'ramento v'#13#10'GROUP BY'#13#10'v.tipo_mov, V.id_pessoa, V.nome_cliforn,'#13#10'V' +
-      '.id_vendedor, V.nome_vendedor'#13#10'order BY VLR_DUPLICATA desc'#13#10
+      'select v.tipo_mov, V.id_pessoa, V.nome_cliente,'#13#10'V.id_vendedor, ' +
+      'V.nome_vendedor,'#13#10'SUM (v.vlr_total) VLR_TOTAL, SUM(v.QTD) QTD,'#13#10 +
+      'SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE,'#13#10'SUM(V.VLR_VENDAS) VLR' +
+      '_VENDAS,'#13#10'SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST'#13#10'from vconsfaturame' +
+      'nto v'#13#10'GROUP BY'#13#10'v.tipo_mov, V.id_pessoa, V.nome_cliente,'#13#10'V.id_' +
+      'vendedor, V.nome_vendedor'#13#10'order BY VLR_TOTAL desc'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1170,20 +1169,12 @@ object DMConsFaturamento: TDMConsFaturamento
     object cdsNotaFiscal_VendCliID_PESSOA: TIntegerField
       FieldName = 'ID_PESSOA'
     end
-    object cdsNotaFiscal_VendCliNOME_CLIFORN: TStringField
-      FieldName = 'NOME_CLIFORN'
-      Size = 60
-    end
     object cdsNotaFiscal_VendCliID_VENDEDOR: TIntegerField
       FieldName = 'ID_VENDEDOR'
     end
     object cdsNotaFiscal_VendCliNOME_VENDEDOR: TStringField
       FieldName = 'NOME_VENDEDOR'
       Size = 60
-    end
-    object cdsNotaFiscal_VendCliVLR_DUPLICATA: TFloatField
-      FieldName = 'VLR_DUPLICATA'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_VendCliQTD: TFloatField
       FieldName = 'QTD'
@@ -1206,6 +1197,14 @@ object DMConsFaturamento: TDMConsFaturamento
       DisplayFormat = '0.000'
       Calculated = True
     end
+    object cdsNotaFiscal_VendCliNOME_CLIENTE: TStringField
+      FieldName = 'NOME_CLIENTE'
+      Size = 60
+    end
+    object cdsNotaFiscal_VendCliVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+      DisplayFormat = '0.00'
+    end
   end
   object dsNotaFiscal_VendCli: TDataSource
     DataSet = cdsNotaFiscal_VendCli
@@ -1216,11 +1215,11 @@ object DMConsFaturamento: TDMConsFaturamento
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'select v.tipo_mov, V.id_vendedor, V.nome_vendedor,'#13#10'SUM (v.vlr_d' +
-      'uplicata) VLR_DUPLICATA, SUM(v.QTD) QTD,'#13#10'SUM(V.VLR_LIQUIDO_NFSE' +
-      ') VLR_LIQUIDO_NFSE,'#13#10'SUM(V.VLR_VENDAS) VLR_VENDAS,'#13#10'SUM(V.VLR_IC' +
-      'MSSUBST) VLR_ICMSSUBST'#13#10'from vfaturamento v'#13#10'GROUP BY v.tipo_mov' +
-      ', V.id_vendedor, V.nome_vendedor'#13#10'order BY VLR_DUPLICATA desc'#13#10
+      'select v.tipo_mov, V.id_vendedor, V.nome_vendedor,'#13#10'SUM (v.vlr_t' +
+      'otal) vlr_total, SUM(v.QTD) QTD,'#13#10'SUM(V.VLR_LIQUIDO_NFSE) VLR_LI' +
+      'QUIDO_NFSE,'#13#10'SUM(V.VLR_VENDAS) VLR_VENDAS,'#13#10'SUM(V.VLR_ICMSSUBST)' +
+      ' VLR_ICMSSUBST'#13#10'from vconsfaturamento v'#13#10'GROUP BY v.tipo_mov, V.' +
+      'id_vendedor, V.nome_vendedor'#13#10'order BY vlr_total desc'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1240,20 +1239,12 @@ object DMConsFaturamento: TDMConsFaturamento
     OnCalcFields = cdsNotaFiscal_VendCalcFields
     Left = 872
     Top = 144
-    object cdsNotaFiscal_VendTIPO_MOV: TStringField
-      FieldName = 'TIPO_MOV'
-      Size = 3
-    end
     object cdsNotaFiscal_VendID_VENDEDOR: TIntegerField
       FieldName = 'ID_VENDEDOR'
     end
     object cdsNotaFiscal_VendNOME_VENDEDOR: TStringField
       FieldName = 'NOME_VENDEDOR'
       Size = 60
-    end
-    object cdsNotaFiscal_VendVLR_DUPLICATA: TFloatField
-      FieldName = 'VLR_DUPLICATA'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_VendQTD: TFloatField
       FieldName = 'QTD'
@@ -1276,6 +1267,10 @@ object DMConsFaturamento: TDMConsFaturamento
       DisplayFormat = '0.000'
       Calculated = True
     end
+    object cdsNotaFiscal_VendVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+      DisplayFormat = '0.00'
+    end
   end
   object dsNotaFiscal_Vend: TDataSource
     DataSet = cdsNotaFiscal_Vend
@@ -1294,12 +1289,13 @@ object DMConsFaturamento: TDMConsFaturamento
       'ID_VENDEDOR=ID_VENDEDOR'
       'NOME_VENDEDOR=NOME_VENDEDOR'
       'NOME_ORIGINAL=NOME_ORIGINAL'
-      'VLR_DUPLICATA=VLR_DUPLICATA'
       'QTD=QTD'
       'VLR_LIQUIDO_NFSE=VLR_LIQUIDO_NFSE'
       'VLR_VENDAS=VLR_VENDAS'
       'VLR_ICMSSUBST=VLR_ICMSSUBST'
-      'clPerc_SobreFat=clPerc_SobreFat')
+      'clPerc_SobreFat=clPerc_SobreFat'
+      'NOME_PRODUTO_SERV=NOME_PRODUTO_SERV'
+      'VLR_TOTAL=VLR_TOTAL')
     DataSource = dsNotaFiscal_VendProd
     BCDToCurrency = False
     Left = 776
@@ -1371,15 +1367,15 @@ object DMConsFaturamento: TDMConsFaturamento
     FieldAliases.Strings = (
       'TIPO_MOV=TIPO_MOV'
       'ID_PESSOA=ID_PESSOA'
-      'NOME_CLIFORN=NOME_CLIFORN'
       'ID_VENDEDOR=ID_VENDEDOR'
       'NOME_VENDEDOR=NOME_VENDEDOR'
-      'VLR_DUPLICATA=VLR_DUPLICATA'
       'QTD=QTD'
       'VLR_LIQUIDO_NFSE=VLR_LIQUIDO_NFSE'
       'VLR_VENDAS=VLR_VENDAS'
       'VLR_ICMSSUBST=VLR_ICMSSUBST'
-      'clPerc_SobreFat=clPerc_SobreFat')
+      'clPerc_SobreFat=clPerc_SobreFat'
+      'NOME_CLIENTE=NOME_CLIENTE'
+      'VLR_TOTAL=VLR_TOTAL')
     DataSource = dsNotaFiscal_VendCli
     BCDToCurrency = False
     Left = 816
@@ -1392,12 +1388,12 @@ object DMConsFaturamento: TDMConsFaturamento
       'TIPO_MOV=TIPO_MOV'
       'ID_VENDEDOR=ID_VENDEDOR'
       'NOME_VENDEDOR=NOME_VENDEDOR'
-      'VLR_DUPLICATA=VLR_DUPLICATA'
       'QTD=QTD'
       'VLR_LIQUIDO_NFSE=VLR_LIQUIDO_NFSE'
       'VLR_VENDAS=VLR_VENDAS'
       'VLR_ICMSSUBST=VLR_ICMSSUBST'
-      'clPerc_SobreFat=clPerc_SobreFat')
+      'clPerc_SobreFat=clPerc_SobreFat'
+      'VLR_TOTAL=VLR_TOTAL')
     DataSource = dsNotaFiscal_Vend
     BCDToCurrency = False
     Left = 856
@@ -1989,17 +1985,17 @@ object DMConsFaturamento: TDMConsFaturamento
     GetMetadata = False
     CommandText = 
       'SELECT V.TIPO_MOV, V.ID_PRODUTO, V.COD_GRUPO, V.REFERENCIA, V.NO' +
-      'ME_COMBINACAO, V.ID_COR, V.NOME_CLIFORN, V.NOME_PRODUTO_SERV, V.' +
-      'ID_VENDEDOR,V.NOME_VENDEDOR, V.NOME_ORIGINAL, V.UF_CLI, V.NUM_NO' +
-      'TA, V.DTEMISSAO,'#13#10' SUM (V.VLR_DUPLICATA) VLR_DUPLICATA,'#13#10' SUM(V.' +
-      'QTD) QTD,'#13#10' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE,'#13#10' SUM(V.VL' +
-      'R_VENDAS) VLR_VENDAS ,'#13#10' SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST,'#13#10' S' +
-      'UM(V.VLR_IPI) VLR_IPI'#13#10'FROM VFATURAMENTO V'#13#10'WHERE 0 = 0 AND'#13#10'  V' +
-      '.DTEMISSAO >= :D1 AND'#13#10'  V.DTEMISSAO <= :D2 AND'#13#10'  (V.FILIAL = :' +
-      'F1)'#13#10#13#10'GROUP BY V.TIPO_MOV, V.ID_PRODUTO, V.COD_GRUPO, V.REFEREN' +
-      'CIA, V.NOME_COMBINACAO, V.ID_COR, V.NOME_CLIFORN,  V.NOME_PRODUT' +
-      'O_SERV, V.ID_VENDEDOR, V.NOME_VENDEDOR, V.NOME_ORIGINAL, V.UF_CL' +
-      'I, V.NUM_NOTA, V.DTEMISSAO'#13#10'ORDER BY VLR_DUPLICATA DESC'
+      'ME_COMBINACAO,'#13#10'V.ID_COR, V.nome_cliente, V.NOME_PRODUTO_SERV, V' +
+      '.ID_VENDEDOR,V.NOME_VENDEDOR,'#13#10'V.NOME_ORIGINAL, V.uf, V.NUM_NOTA' +
+      ', V.DTEMISSAO,'#13#10' SUM (V.vlr_total) vlr_total,'#13#10' SUM(V.QTD) QTD,'#13 +
+      #10' SUM(V.VLR_LIQUIDO_NFSE) VLR_LIQUIDO_NFSE,'#13#10' SUM(V.VLR_VENDAS) ' +
+      'VLR_VENDAS ,'#13#10' SUM(V.VLR_ICMSSUBST) VLR_ICMSSUBST,'#13#10' SUM(V.VLR_I' +
+      'PI) VLR_IPI'#13#10'FROM vconsfaturamento V'#13#10'WHERE 0 = 0 AND'#13#10'  V.DTEMI' +
+      'SSAO >= :D1 AND'#13#10'  V.DTEMISSAO <= :D2 AND'#13#10'  (V.FILIAL = :F1)'#13#10#13 +
+      #10'GROUP BY V.TIPO_MOV, V.ID_PRODUTO, V.COD_GRUPO, V.REFERENCIA, V' +
+      '.NOME_COMBINACAO,'#13#10'V.ID_COR, V.nome_cliente,  V.NOME_PRODUTO_SER' +
+      'V, V.ID_VENDEDOR, V.NOME_VENDEDOR,'#13#10'V.NOME_ORIGINAL, V.uf, V.NUM' +
+      '_NOTA, V.DTEMISSAO'#13#10'ORDER BY vlr_total DESC'
     MaxBlobSize = -1
     Params = <
       item
@@ -2050,10 +2046,6 @@ object DMConsFaturamento: TDMConsFaturamento
     object cdsVendCliProdID_COR: TIntegerField
       FieldName = 'ID_COR'
     end
-    object cdsVendCliProdNOME_CLIFORN: TStringField
-      FieldName = 'NOME_CLIFORN'
-      Size = 60
-    end
     object cdsVendCliProdNOME_PRODUTO_SERV: TStringField
       FieldName = 'NOME_PRODUTO_SERV'
       Size = 100
@@ -2068,10 +2060,6 @@ object DMConsFaturamento: TDMConsFaturamento
     object cdsVendCliProdNOME_ORIGINAL: TStringField
       FieldName = 'NOME_ORIGINAL'
       Size = 100
-    end
-    object cdsVendCliProdVLR_DUPLICATA: TFloatField
-      FieldName = 'VLR_DUPLICATA'
-      DisplayFormat = '0.00'
     end
     object cdsVendCliProdQTD: TFloatField
       FieldName = 'QTD'
@@ -2088,11 +2076,6 @@ object DMConsFaturamento: TDMConsFaturamento
       FieldName = 'VLR_ICMSSUBST'
       DisplayFormat = '0.00'
     end
-    object cdsVendCliProdUF_CLI: TStringField
-      FieldName = 'UF_CLI'
-      FixedChar = True
-      Size = 2
-    end
     object cdsVendCliProdCOD_GRUPO: TStringField
       FieldName = 'COD_GRUPO'
     end
@@ -2104,6 +2087,19 @@ object DMConsFaturamento: TDMConsFaturamento
     end
     object cdsVendCliProdVLR_IPI: TFloatField
       FieldName = 'VLR_IPI'
+    end
+    object cdsVendCliProdNOME_CLIENTE: TStringField
+      FieldName = 'NOME_CLIENTE'
+      Size = 60
+    end
+    object cdsVendCliProdUF: TStringField
+      FieldName = 'UF'
+      FixedChar = True
+      Size = 2
+    end
+    object cdsVendCliProdVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+      DisplayFormat = '0.00'
     end
   end
   object dsVendCliProd: TDataSource
