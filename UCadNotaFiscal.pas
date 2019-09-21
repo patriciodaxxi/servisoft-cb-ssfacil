@@ -10,8 +10,7 @@ uses
   UCadNotaFiscal_Canc, USel_NotaEntrada, UCadNotaFiscal_OutrosDados, Menus, dbXPress, DateUtils, UDMMovimento, NxEdit, USenha,
   UCadNotaFiscal_Obs, UConsNotaFiscal_NDevol, UCadNotaFiscal_Copia, UCadNotaFiscal_Alt_Imp, NxCollection, UCadNotaFiscal_Cons,
   UDMCadNotaFiscal_MP, UConsLimite_Credito, UImportar_TXT, UCadNotaFiscal_MObra, USel_Vale, Variants, UCadNotaFiscal_Imp_Aux,
-  UCadNotaFiscal_ST, UEtiq_Rotulo, USel_Sacola, USel_Pedido_Tam, VarUtils, UDMPreFat, NFeFepam,
-  xmldom, XMLIntf, msxmldom, XMLDoc;
+  UCadNotaFiscal_ST, UEtiq_Rotulo, USel_Sacola, USel_Pedido_Tam, VarUtils, UDMPreFat, NFeFepam, xmldom, XMLIntf, msxmldom, XMLDoc;
 
 type
   TfrmCadNotaFiscal = class(TForm)
@@ -3203,7 +3202,6 @@ begin
   if (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_PRODUTO_CLIENTE.AsString = 'G') or
      (fDMCadNotaFiscal.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S') or (fDMCadNotaFiscal.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S') then
     fDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(False);
-
 end;
 
 procedure TfrmCadNotaFiscal.Panel4Enter(Sender: TObject);

@@ -3,11 +3,11 @@ unit UCadNotaServico;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadNotaServico,
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadNotaServico, udmNFSe,
   DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus,
   RXDBCtrl, RzEdit, RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, NxEdit,StrUtils, DateUtils,
   UCadNotaServico_Itens, UCadNotaServico_Canc, ComCtrls, ValorPor, RzDBDTP, RzDTP, UConsFat_Mensal, RzRadChk, UDMMovimento,
-  UCadNotaServico_Obs, uXMLClientDataSet_NFSe_CampoBom, uXMLClientDataSet_NFSe_PortoAlegre, RzDBChk, USel_OS_Servico, Variants, udmNFSe;
+  UCadNotaServico_Obs, uXMLClientDataSet_NFSe_CampoBom, uXMLClientDataSet_NFSe_PortoAlegre, RzDBChk, USel_OS_Servico, Variants;
 
 type
   TfrmCadNotaServico = class(TForm)
@@ -342,7 +342,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
-    vEnvioACBR : Boolean;
+    vEnvioACBR: Boolean;
     vTipoNotaAnt: String;
     vID_Cliente_Ant: Integer;
     vID_Natureza_Ant: Integer;
@@ -358,8 +358,8 @@ type
     vDadosCorpoEmail: WideString;
     vNum_RPS_Ret, vNum_NFSe_Ret: LongInt;
     vChave_NFSe: String;
-    vAliquota_Ant : Real;
-    vISS_Retido_Ant : String;
+    vAliquota_Ant: Real;
+    vISS_Retido_Ant: String;
 
     vDtEmissao_Ret: String;
     vCod_Autencidade_Ret: String;
@@ -550,8 +550,8 @@ var
   //vID_ExtComissao: Integer;
   ID: TTransactionDesc;
   sds: TSQLDataSet;
-  vPerc_Pis, vPerc_Cofins : Real;
-  vVlr_Pis, vVlr_Cofins : Real;
+  vPerc_Pis, vPerc_Cofins: Real;
+  vVlr_Pis, vVlr_Cofins: Real;
 begin
   fDMCadNotaServico.mOSAux.EmptyDataSet;
   fDMCadNotaServico.mPedidoAux.EmptyDataSet;
@@ -1991,7 +1991,7 @@ var
   vFlag: Boolean;
   vTexto: String;
   dtUltimo_Acesso: TDateTime;
-  vIDAnt : Integer;
+  vIDAnt: Integer;
 begin
   if not(fDMCadNotaServico.cdsNotaServico_Consulta.Active) and (fDMCadNotaServico.cdsNotaServico_ConsultaID.AsInteger <= 0) then
     exit;
@@ -3237,6 +3237,10 @@ var
 begin
   if RxDBLookupCombo4.Text <> '' then
     fDMCadNotaServico.cdsNatureza.Locate('ID',RxDBLookupCombo4.KeyValue,[loCaseInsensitive]);
+
+  prc_Verifica_Limite(fDMCadNotaServico.cdsNotaServicoID_CLIENTE.AsInteger,fDMCadNotaServico.cdsNotaServicoID.AsInteger,
+                      fDMCadNotaServico.cdsClienteVLR_LIMITE_CREDITO.AsFloat);
+
   if (RxDBLookupCombo2.Text <> '') and ((fDMCadNotaServico.cdsNotaServico.State in [dsInsert]) or
      (fDMCadNotaServico.cdsNotaServicoID_SERVICO.AsInteger <> vID_Servico_Ant)) then
   begin
@@ -4672,8 +4676,8 @@ end;
 
 function TfrmCadNotaServico.fnc_Gravar_Mov: Integer;
 var
-  vPerc_Pis, vPerc_Cofins : Real;
-  vVlr_Pis, vVlr_Cofins : Real;
+  vPerc_Pis, vPerc_Cofins: Real;
+  vVlr_Pis, vVlr_Cofins: Real;
 begin
   if fDMCadNotaServico.qParametros_SerUSA_CALC_PISCOFINS.AsString = 'S' then
   begin
@@ -4741,9 +4745,9 @@ var
   vSerie_Ret: String;
   vCNPJPref: String;
   vCNPJSis: String;
-  vDtEmissao : TDate;
-  vHora : TTime;
-  vDtEmissaoHora : String;
+  vDtEmissao: TDate;
+  vHora: TTime;
+  vDtEmissaoHora: String;
 begin
   //31/05/2017
   //if ckHomologacao.Checked then
@@ -5458,8 +5462,8 @@ var
   vAnoAux, vMesAux: Integer;
   cTXTDisc: TStringStream;
   StrStream: TStringStream;
-  i : Integer;
-  vTexto : WideString;
+  i: Integer;
+  vTexto: WideString;
 begin
   vFilial_Sel := fDMCadNotaServico.cdsNotaServico_ConsultaFILIAL.AsInteger;
   fDMCadNotaServico.cdsFilial.Locate('ID',vFilial_Sel,[loCaseInsensitive]);
