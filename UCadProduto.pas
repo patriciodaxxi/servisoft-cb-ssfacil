@@ -1604,6 +1604,7 @@ begin
   vPreco_Custo       := 0;
   vPreco_Custo_Total := 0;
   vPerc_MargemLucro  := 0;
+  RxDBComboBox7Change(nil);
 end;
 
 procedure TfrmCadProduto.FormShow(Sender: TObject);
@@ -1798,8 +1799,9 @@ begin
   Label69.Visible           := (fDMCadProduto.qParametrosUSA_CARIMBO.AsString = 'S');
   btnCarimbo.Visible        := (fDMCadProduto.qParametrosUSA_CARIMBO.AsString = 'S');
   DBCheckBox12.Visible      := (fDMCadProduto.qParametrosUSA_CARIMBO.AsString = 'S');
-  Label125.Visible          := (fDMCadProduto.qParametros_NFeUSA_OPCAO_IMP_COD_CLI.AsString = 'S');
-  DBEdit61.Visible          := (fDMCadProduto.qParametros_NFeUSA_OPCAO_IMP_COD_CLI.AsString = 'S');
+  Label125.Visible          := ((fDMCadProduto.qParametros_NFeUSA_OPCAO_IMP_COD_CLI.AsString = 'S') and (fDMCadProduto.qParametros_PedUSA_COD_CLIENTE.AsString = 'S'));
+  DBEdit61.Visible          := ((fDMCadProduto.qParametros_NFeUSA_OPCAO_IMP_COD_CLI.AsString = 'S') and (fDMCadProduto.qParametros_PedUSA_COD_CLIENTE.AsString = 'S'));
+
   Label126.Visible          := (fDMCadProduto.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S');
   rxdbFilial.Visible        := (fDMCadProduto.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S');
   Label127.Visible          := (fDMCadProduto.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S');

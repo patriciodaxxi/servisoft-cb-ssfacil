@@ -1957,6 +1957,7 @@ type
     mGrupoID_Principal: TIntegerField;
     mGrupo_ProdutoID_Principal: TIntegerField;
     mGrupoNome_Completo: TStringField;
+    qParametros_PedUSA_COD_CLIENTE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

@@ -8714,7 +8714,7 @@ object dmCadProduto: TdmCadProduto
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT PEDIDO_LOJA , USA_CAIXINHA'
+      'SELECT PEDIDO_LOJA , USA_CAIXINHA, USA_COD_CLIENTE'
       'FROM PARAMETROS_PED')
     SQLConnection = dmDatabase.scoDados
     Left = 1155
@@ -8726,6 +8726,11 @@ object dmCadProduto: TdmCadProduto
     end
     object qParametros_PedUSA_CAIXINHA: TStringField
       FieldName = 'USA_CAIXINHA'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedUSA_COD_CLIENTE: TStringField
+      FieldName = 'USA_COD_CLIENTE'
       FixedChar = True
       Size = 1
     end
