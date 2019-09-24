@@ -1,6 +1,6 @@
 object fRelCheque: TfRelCheque
-  Left = 92
-  Top = 99
+  Left = 56
+  Top = 83
   Width = 1277
   Height = 573
   Caption = 'fRelCheque'
@@ -207,7 +207,7 @@ object fRelCheque: TfRelCheque
           Top = 0
           Width = 1063
           Height = 19
-          BandType = btHeader
+          BandType = btTitle
           BeforePrint = RLBand2BeforePrint
           object RLLabel8: TRLLabel
             Left = 24
@@ -347,7 +347,7 @@ object fRelCheque: TfRelCheque
           Top = 35
           Width = 1063
           Height = 18
-          BandType = btFooter
+          BandType = btSummary
           BeforePrint = RLBand4BeforePrint
           object RLLabel14: TRLLabel
             Left = 376
@@ -384,7 +384,7 @@ object fRelCheque: TfRelCheque
         Top = 169
         Width = 1063
         Height = 16
-        BandType = btFooter
+        BandType = btSummary
         BeforePrint = RLBand5BeforePrint
         object RLLabel18: TRLLabel
           Left = 351
