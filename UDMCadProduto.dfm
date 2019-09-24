@@ -7081,6 +7081,11 @@ object dmCadProduto: TdmCadProduto
       FixedChar = True
       Size = 1
     end
+    object qParametros_ProdCOPIAR_COMB: TStringField
+      FieldName = 'COPIAR_COMB'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsProduto_Cad_Ant: TSQLDataSet
     NoMetadata = True
@@ -8717,8 +8722,8 @@ object dmCadProduto: TdmCadProduto
       'SELECT PEDIDO_LOJA , USA_CAIXINHA, USA_COD_CLIENTE'
       'FROM PARAMETROS_PED')
     SQLConnection = dmDatabase.scoDados
-    Left = 1155
-    Top = 294
+    Left = 1183
+    Top = 292
     object qParametros_PedPEDIDO_LOJA: TStringField
       FieldName = 'PEDIDO_LOJA'
       FixedChar = True

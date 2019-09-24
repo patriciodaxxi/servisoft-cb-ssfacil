@@ -1016,8 +1016,8 @@ object DMCopiarProduto: TDMCopiarProduto
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 56
-    Top = 430
+    Left = 100
+    Top = 439
     object sdsProduto_CombID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -1122,8 +1122,8 @@ object DMCopiarProduto: TDMCopiarProduto
   end
   object dsProduto_Comb_Mestre: TDataSource
     DataSet = sdsProduto_Comb
-    Left = 88
-    Top = 480
+    Left = 90
+    Top = 481
   end
   object sdsProduto_Comb_Mat: TSQLDataSet
     CommandText = 

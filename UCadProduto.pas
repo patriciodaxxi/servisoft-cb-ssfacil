@@ -2945,6 +2945,42 @@ begin
       fDMCopiarProduto.cdsProduto_Tam.Next;
     end;
 
+    //23/09/2019
+    if fDMCadProduto.qParametros_ProdCOPIAR_COMB.AsString = 'S' then
+    begin
+      fDMCopiarProduto.cdsProduto_Comb.Close;
+      fDMCopiarProduto.sdsProduto_Comb.ParamByName('ID').AsInteger := fDMCopiarProduto.cdsProdutoID.AsInteger;
+      fDMCopiarProduto.cdsProduto_Comb.Open;
+      fDMCopiarProduto.cdsProduto_Comb.First;
+      while not fDMCopiarProduto.cdsProduto_Comb.Eof do
+      begin
+        fDMCadProduto.cdsProduto_Comb.Insert;
+        fDMCadProduto.cdsProduto_CombID.AsInteger := fDMCadProduto.cdsProdutoID.AsInteger;
+        for x := 0 to (fDMCopiarProduto.cdsProduto_Comb.FieldCount - 1) do
+        begin
+          if (fDMCopiarProduto.cdsProduto_Comb.Fields[x].FieldName <> 'ID') then
+            fDMCadProduto.cdsProduto_Comb.FieldByName(fDMCopiarProduto.cdsProduto_Comb.Fields[x].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Comb.Fields[x].Value;
+        end;
+        fDMCadProduto.cdsProduto_Comb.Post;
+        
+        fDMCopiarProduto.cdsProduto_Comb_Mat.Last;
+        fDMCopiarProduto.cdsProduto_Comb_Mat.First;
+        while not fDMCopiarProduto.cdsProduto_Comb_Mat.Eof do
+        begin
+          fDMCadProduto.cdsProduto_Comb_Mat.Insert;
+          fDMCadProduto.cdsProduto_Comb_MatID.AsInteger := fDMCadProduto.cdsProdutoID.AsInteger;
+          if (fDMCopiarProduto.cdsProduto_Comb_Mat.Fields[x].FieldName <> 'ID') then
+            fDMCadProduto.cdsProduto_Comb_Mat.FieldByName(fDMCopiarProduto.cdsProduto_Comb_Mat.Fields[x].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Comb_Mat.Fields[x].Value;
+          fDMCadProduto.cdsProduto_Comb_Mat.Post;
+
+          fDMCopiarProduto.cdsProduto_Comb_Mat.Next;
+        end;
+
+        fDMCopiarProduto.cdsProduto_Comb.Next;
+      end;
+    end;
+    //******************
+
   except
     on e: Exception do
     begin
