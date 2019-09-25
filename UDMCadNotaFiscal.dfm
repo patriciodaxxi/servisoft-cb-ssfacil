@@ -4462,8 +4462,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'FOP'#13#10'  ON NT.ID_CFOP = CFOP.ID'#13#10'LEFT JOIN PESSOA VEND'#13#10'ON NT.id_' +
       'vendedor = VEND.CODIGO'#13#10'LEFT JOIN OPERACAO_NOTA OPN'#13#10'ON NT.ID_OP' +
       'ERACAO_NOTA = OPN.ID'#13#10'left join notafiscal_ref nref'#13#10'on nt.nfech' +
-      'aveacesso = nref.nfechaveacesso_ref'#13#10'left join notafiscal n2'#13#10'on' +
-      ' nref.id = n2.id'#13#10#13#10
+      'aveacesso = nref.nfechaveacesso_ref'#13#10'and (select nn.nfefinalidad' +
+      'e from notafiscal nn where nn.id = nref.id and nn.tipo_nota = '#39'E' +
+      #39') = '#39'4'#39#13#10'left join notafiscal n2'#13#10'on nref.id = n2.id'
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

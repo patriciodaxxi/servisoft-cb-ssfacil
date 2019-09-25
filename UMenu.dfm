@@ -4065,6 +4065,108 @@ object fMenu: TfMenu
         GroupName = 'Esp'#233'cie Animal (Tipo)'
       end
       item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnBuscarProduto'
+        Caption = 'Buscar Produtos Para a Tabela de Pre'#231'o'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnAplicar'
+        Caption = 'Aplicar Ajuste'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'btnExportar'
+        Caption = 'Exportar'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmCadTabPreco'
+        CompName = 'pnlExcluirSel'
+        Caption = 'Excluir Selecionados'
+        GroupName = 'Tabela Pre'#231'o'
+      end
+      item
+        FormName = 'frmConsClienteOBS'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Consulta Obs Cliente (Or'#231')'
+      end
+      item
+        FormName = 'frmComissaoVend'
+        CompName = 'btnConfirmar'
+        Caption = 'Confirmar Produtos Selecionados No Representante'
+        GroupName = 'Comiss'#227'o Produto Vendedor'
+      end
+      item
+        FormName = 'frmCadAtividade'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Atividade'
+      end
+      item
+        FormName = 'frmCadAtividade'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Atividade'
+      end
+      item
+        FormName = 'frmCadAtividade'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Atividade'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Documento Estoque'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Documento Estoque'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Documento Estoque'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'EtiquetaEstoque1'
+        Caption = 'Etiqueta Estoque'
+        GroupName = 'Documento Estoque'
+      end
+      item
+        FormName = 'frmCadDocEstoque'
+        CompName = 'btnCopiarDoc'
+        Caption = 'Copiar Doc.'
+        GroupName = 'Documento Estoque'
+      end
+      item
         FormName = 'frmCadPedido'
         CompName = 'btnInserir'
         Caption = 'Inserir'
@@ -4203,106 +4305,76 @@ object fMenu: TfMenu
         GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Tabela Pre'#231'o'
+        FormName = 'frmCadPedido'
+        CompName = 'Rtulo31'
+        Caption = 'R'#243'tulo 3 (Cadastro Com Embalagem)'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Tabela Pre'#231'o'
+        FormName = 'frmCadPedido'
+        CompName = 'Rtulo11'
+        Caption = 'R'#243'tulo 1'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Tabela Pre'#231'o'
+        FormName = 'frmCadPedido'
+        CompName = 'Rtulo21'
+        Caption = 'R'#243'tulo 2'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnBuscarProduto'
-        Caption = 'Buscar Produtos Para a Tabela de Pre'#231'o'
-        GroupName = 'Tabela Pre'#231'o'
+        FormName = 'frmCadPedido'
+        CompName = 'RtuloPorGrade1'
+        Caption = 'R'#243'tulo Por Grade'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnAplicar'
-        Caption = 'Aplicar Ajuste'
-        GroupName = 'Tabela Pre'#231'o'
+        FormName = 'frmCadPedido'
+        CompName = 'Pictograma1'
+        Caption = 'Pictograma'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadTabPreco'
-        CompName = 'btnExportar'
-        Caption = 'Exportar'
-        GroupName = 'Tabela Pre'#231'o'
+        FormName = 'frmCadPedido'
+        CompName = 'RtuloComEmbalagemRolo1'
+        Caption = 'R'#243'tulo Com Embalagem (Textil)'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadTabPreco'
-        CompName = 'pnlExcluirSel'
-        Caption = 'Excluir Selecionados'
-        GroupName = 'Tabela Pre'#231'o'
+        FormName = 'frmCadPedido'
+        CompName = 'CarndePagamento1'
+        Caption = 'Carn'#234' de Pagamento'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmConsClienteOBS'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Consulta Obs Cliente (Or'#231')'
+        FormName = 'frmCadPedido'
+        CompName = 'EtiquetaIndividual1'
+        Caption = 'Etiqueta Individual'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmComissaoVend'
-        CompName = 'btnConfirmar'
-        Caption = 'Confirmar Produtos Selecionados No Representante'
-        GroupName = 'Comiss'#227'o Produto Vendedor'
+        FormName = 'frmCadPedido'
+        CompName = 'EtiquetaA4Seleciona1'
+        Caption = 'Etiqueta (A4) Seleciona Itens'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadAtividade'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Atividade'
+        FormName = 'frmCadPedido'
+        CompName = 'EtiquetaA4ItensPersonalizado1'
+        Caption = 'Etiqueta (A4) Itens Personalizado'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadAtividade'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Atividade'
+        FormName = 'frmCadPedido'
+        CompName = 'EtiquetaRtulo1'
+        Caption = 'Etiqueta R'#243'tulo'
+        GroupName = 'Pedidos'
       end
       item
-        FormName = 'frmCadAtividade'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Atividade'
-      end
-      item
-        FormName = 'frmCadDocEstoque'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Documento Estoque'
-      end
-      item
-        FormName = 'frmCadDocEstoque'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Documento Estoque'
-      end
-      item
-        FormName = 'frmCadDocEstoque'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Documento Estoque'
-      end
-      item
-        FormName = 'frmCadDocEstoque'
-        CompName = 'EtiquetaEstoque1'
-        Caption = 'Etiqueta Estoque'
-        GroupName = 'Documento Estoque'
-      end
-      item
-        FormName = 'frmCadDocEstoque'
-        CompName = 'btnCopiarDoc'
-        Caption = 'Copiar Doc.'
-        GroupName = 'Documento Estoque'
+        FormName = 'frmCadPedido'
+        CompName = 'aloPorProcesso1'
+        Caption = 'Tal'#227'o Por Processo'
+        GroupName = 'Pedidos'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

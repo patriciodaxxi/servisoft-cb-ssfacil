@@ -5646,4 +5646,55 @@ object DMCadDuplicata: TDMCadDuplicata
     Left = 760
     Top = 272
   end
+  object sdsDupCCusto: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT DC.id_centrocusto, DC.percentual, DC.valor, C.descricao N' +
+      'OME_CCUSTO'#13#10'FROM duplicata_ccusto dc'#13#10'INNER JOIN centrocusto C'#13#10 +
+      'ON DC.id_centrocusto = C.ID'#13#10'WHERE coalesce(DC.percentual,0) > 0' +
+      #13#10'  AND DC.ID = :ID'#13#10#13#10#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 689
+    Top = 395
+  end
+  object dspDupCCusto: TDataSetProvider
+    DataSet = sdsDupCCusto
+    Left = 721
+    Top = 395
+  end
+  object cdsDupCCusto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspDupCCusto'
+    Left = 753
+    Top = 394
+    object cdsDupCCustoID_CENTROCUSTO: TIntegerField
+      FieldName = 'ID_CENTROCUSTO'
+    end
+    object cdsDupCCustoPERCENTUAL: TFloatField
+      FieldName = 'PERCENTUAL'
+      DisplayFormat = '%0.00'
+    end
+    object cdsDupCCustoVALOR: TFloatField
+      FieldName = 'VALOR'
+      DisplayFormat = 'R$###,###,##0.00'
+    end
+    object cdsDupCCustoNOME_CCUSTO: TStringField
+      FieldName = 'NOME_CCUSTO'
+      Size = 50
+    end
+  end
+  object dsDupCCusto: TDataSource
+    DataSet = cdsDupCCusto
+    Left = 784
+    Top = 395
+  end
 end

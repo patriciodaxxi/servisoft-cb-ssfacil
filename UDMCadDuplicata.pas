@@ -1132,6 +1132,14 @@ type
     mReciboFilial_CNPJ: TStringField;
     frxRecibo: TfrxDBDataset;
     mReciboFinanceiro_Valor: TFloatField;
+    sdsDupCCusto: TSQLDataSet;
+    dspDupCCusto: TDataSetProvider;
+    cdsDupCCusto: TClientDataSet;
+    dsDupCCusto: TDataSource;
+    cdsDupCCustoID_CENTROCUSTO: TIntegerField;
+    cdsDupCCustoPERCENTUAL: TFloatField;
+    cdsDupCCustoVALOR: TFloatField;
+    cdsDupCCustoNOME_CCUSTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
@@ -1181,6 +1189,7 @@ type
     vID_Cheque: Integer;
     vTipo_Rel : String;
     vImpObs : Boolean;
+    vImpCCusto : Boolean;
     vHistorico_PagSel : String;
 
     vCReceber_Tot, vCReceber_Pago_Tot, vCReceber_Pend_Tot, vCReceber_Atraso_Tot: Real;

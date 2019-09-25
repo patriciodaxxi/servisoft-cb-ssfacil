@@ -1,7 +1,7 @@
 object fRelPagarReceber2: TfRelPagarReceber2
   Left = 164
   Top = 100
-  Width = 847
+  Width = 1035
   Height = 563
   Caption = 'fRelPagarReceber2'
   Color = clBtnFace
@@ -197,13 +197,13 @@ object fRelPagarReceber2: TfRelPagarReceber2
       Left = 26
       Top = 94
       Width = 742
-      Height = 341
+      Height = 370
       DataSource = DMCadDuplicata.dsDuplicata_Consulta
       object RLGroup1: TRLGroup
         Left = 0
         Top = 0
         Width = 742
-        Height = 136
+        Height = 191
         DataFields = 'DTVENCIMENTO'
         object RLBand2: TRLBand
           Left = 0
@@ -242,7 +242,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
         end
         object RLBand5: TRLBand
           Left = 0
-          Top = 88
+          Top = 134
           Width = 742
           Height = 19
           BandType = btSummary
@@ -332,7 +332,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
           Left = 0
           Top = 18
           Width = 742
-          Height = 70
+          Height = 116
           DataFields = 'DTVENCIMENTO;TIPO_ES;TIPO_MOV'
           object RLBand4: TRLBand
             Left = 0
@@ -511,17 +511,17 @@ object fRelPagarReceber2: TfRelPagarReceber2
             end
             object RLDraw5: TRLDraw
               Left = 0
-              Top = 15
+              Top = 0
               Width = 742
               Height = 1
-              Align = faBottom
+              Align = faTop
               DrawKind = dkLine
               Pen.Style = psDot
             end
           end
           object RLBand3: TRLBand
             Left = 0
-            Top = 49
+            Top = 96
             Width = 742
             Height = 18
             BandType = btSummary
@@ -645,24 +645,6 @@ object fRelPagarReceber2: TfRelPagarReceber2
               Font.Style = []
               ParentFont = False
             end
-            object RLDraw4: TRLDraw
-              Left = 0
-              Top = 16
-              Width = 742
-              Height = 1
-              Align = faBottom
-              DrawKind = dkLine
-              Pen.Style = psDot
-            end
-            object RLDraw6: TRLDraw
-              Left = 0
-              Top = 15
-              Width = 742
-              Height = 1
-              Align = faBottom
-              DrawKind = dkLine
-              Pen.Style = psDot
-            end
             object rlMemoObs: TRLMemo
               Left = 66
               Top = 1
@@ -671,10 +653,66 @@ object fRelPagarReceber2: TfRelPagarReceber2
               Behavior = [beSiteExpander]
             end
           end
+          object RLSubDetail2: TRLSubDetail
+            Left = 0
+            Top = 49
+            Width = 742
+            Height = 47
+            DataSource = DMCadDuplicata.dsDupCCusto
+            object RLDetailGrid1: TRLDetailGrid
+              Left = 0
+              Top = 0
+              Width = 742
+              Height = 16
+              ColCount = 2
+              Completion = ctMaxBands
+              object RLDBText8: TRLDBText
+                Left = 28
+                Top = 2
+                Width = 74
+                Height = 12
+                DataField = 'NOME_CCUSTO'
+                DataSource = DMCadDuplicata.dsDupCCusto
+              end
+              object RLDBText10: TRLDBText
+                Left = 220
+                Top = 2
+                Width = 50
+                Height = 12
+                Alignment = taRightJustify
+                DataField = 'PERCENTUAL'
+                DataSource = DMCadDuplicata.dsDupCCusto
+              end
+              object RLDBText11: TRLDBText
+                Left = 330
+                Top = 1
+                Width = 35
+                Height = 12
+                Alignment = taRightJustify
+                DataField = 'VALOR'
+                DataSource = DMCadDuplicata.dsDupCCusto
+              end
+            end
+            object RLBand14: TRLBand
+              Left = 0
+              Top = 16
+              Width = 742
+              Height = 7
+              BandType = btFooter
+              BeforePrint = RLBand14BeforePrint
+              object RLDraw7: TRLDraw
+                Left = 31
+                Top = 1
+                Width = 707
+                Height = 3
+                DrawKind = dkLine
+              end
+            end
+          end
         end
         object RLBand11: TRLBand
           Left = 0
-          Top = 107
+          Top = 153
           Width = 742
           Height = 19
           BandType = btSummary
@@ -711,7 +749,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
       end
       object RLBand7: TRLBand
         Left = 0
-        Top = 136
+        Top = 191
         Width = 742
         Height = 27
         BandType = btSummary
@@ -830,7 +868,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
       end
       object RLBand8: TRLBand
         Left = 0
-        Top = 163
+        Top = 218
         Width = 742
         Height = 29
         BandType = btSummary
@@ -1043,7 +1081,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
       end
       object RLBand10: TRLBand
         Left = 0
-        Top = 192
+        Top = 247
         Width = 742
         Height = 20
         BandType = btSummary
@@ -1107,7 +1145,7 @@ object fRelPagarReceber2: TfRelPagarReceber2
       end
       object RLBand12: TRLBand
         Left = 0
-        Top = 212
+        Top = 267
         Width = 742
         Height = 20
         BandType = btSummary
