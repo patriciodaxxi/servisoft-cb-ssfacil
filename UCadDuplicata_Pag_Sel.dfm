@@ -393,7 +393,6 @@ object frmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel
       Top = 141
       Width = 489
       Height = 21
-      CharCase = ecUpperCase
       MaxLength = 70
       TabOrder = 4
     end

@@ -20,8 +20,8 @@ object frmCadDuplicata_Pag: TfrmCadDuplicata_Pag
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 392
-    Width = 730
+    Top = 399
+    Width = 738
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -60,8 +60,8 @@ object frmCadDuplicata_Pag: TfrmCadDuplicata_Pag
   object Panel2: TPanel
     Left = 0
     Top = 96
-    Width = 730
-    Height = 296
+    Width = 738
+    Height = 303
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 0
@@ -249,7 +249,6 @@ object frmCadDuplicata_Pag: TfrmCadDuplicata_Pag
       Top = 266
       Width = 489
       Height = 21
-      CharCase = ecUpperCase
       MaxLength = 70
       TabOrder = 10
     end
@@ -281,7 +280,7 @@ object frmCadDuplicata_Pag: TfrmCadDuplicata_Pag
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 728
+      Width = 736
       Height = 46
       Align = alTop
       BevelOuter = bvNone
@@ -579,7 +578,7 @@ object frmCadDuplicata_Pag: TfrmCadDuplicata_Pag
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 730
+    Width = 738
     Height = 96
     Align = alTop
     Color = clSilver
