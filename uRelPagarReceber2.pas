@@ -96,9 +96,14 @@ type
     RLBand13: TRLBand;
     RLLabel46: TRLLabel;
     RLDraw5: TRLDraw;
-    RLDraw4: TRLDraw;
-    RLDraw6: TRLDraw;
     rlMemoObs: TRLMemo;
+    RLSubDetail2: TRLSubDetail;
+    RLDetailGrid1: TRLDetailGrid;
+    RLDBText8: TRLDBText;
+    RLDBText10: TRLDBText;
+    RLDBText11: TRLDBText;
+    RLBand14: TRLBand;
+    RLDraw7: TRLDraw;
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand4BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand3BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -116,6 +121,7 @@ type
     procedure RLBand11BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand12BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand13BeforePrint(Sender: TObject; var PrintIt: Boolean);
+    procedure RLBand14BeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
     fDMRel: TDMRel;
@@ -229,8 +235,15 @@ begin
   end
   else
     RLLabel40.Caption := fDMCadDuplicata.cdsDuplicata_ConsultaCOD_BANCO.AsString;
-  RLDraw5.Enabled := not(fDMCadDuplicata.vImpObs);
-  RLDraw5.Visible := not(fDMCadDuplicata.vImpObs);
+  //24/09/2019
+  if fDMCadDuplicata.vImpCCusto then
+  begin
+    fDMCadDuplicata.cdsDupCCusto.Close;
+    fDMCadDuplicata.sdsDupCCusto.ParamByName('ID').AsInteger := fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger;
+    fDMCadDuplicata.cdsDupCCusto.Open;
+  end;
+  //RLDraw5.Enabled := not(fDMCadDuplicata.vImpObs) and not(fDMCadDuplicata.vImpCCusto);
+  //RLDraw5.Visible := not(fDMCadDuplicata.vImpObs) and not(fDMCadDuplicata.vImpCCusto);
 end;
 
 procedure TfRelPagarReceber2.RLBand3BeforePrint(Sender: TObject;
@@ -450,6 +463,12 @@ begin
     else
       rlMemoObs.Lines.Text := fDMCadDuplicata.cdsDuplicata_ConsultaDESCRICAO2.AsString;
   end;
+end;
+
+procedure TfRelPagarReceber2.RLBand14BeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+begin
+  PrintIt := (fDMCadDuplicata.vImpCCusto) and (fDMCadDuplicata.cdsDupCCusto.Active) and not(fDMCadDuplicata.cdsDupCCusto.IsEmpty);
 end;
 
 end.

@@ -211,7 +211,6 @@ type
     Label59: TLabel;
     RxDBLookupCombo12: TRxDBLookupCombo;
     DBCheckBox8: TDBCheckBox;
-    ckImpNossoNumero: TCheckBox;
     LayoutBorder1: TMenuItem;
     Lista1: TMenuItem;
     DBCheckBox9: TDBCheckBox;
@@ -262,6 +261,8 @@ type
     Recebimento1: TMenuItem;
     N2: TMenuItem;
     ValorPorExtenso1: TValorPorExtenso;
+    ckImpNossoNumero: TCheckBox;
+    ckImpCCusto: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -717,6 +718,7 @@ begin
     RzPageControl2.ActivePage := TS_CCusto
   else
     RzPageControl2.ActivePage := TS_Historico;
+  ckImpCCusto.Visible := (fDMCadDuplicata.qParametros_FinUSA_CCUSTO_DUP.AsString = 'S');    
 end;
 
 procedure TfrmCadDuplicata.prc_Consultar(ID: Integer = 0; ID_FIN: Integer = 0; Num_Duplicata: string = ''; Inserir: Boolean = False);
@@ -1505,7 +1507,8 @@ begin
   else
     vFilial := 0;
   vTipo_Config_Email := 3;
-  fDMCadDuplicata.vImpObs := CheckBox2.Checked;
+  fDMCadDuplicata.vImpObs    := CheckBox2.Checked;
+  fDMCadDuplicata.vImpCCusto := ckImpCCusto.Checked;
   prc_Imp_Detalhada(False, '');
 end;
 
@@ -1542,6 +1545,7 @@ procedure TfrmCadDuplicata.prc_Imp_Detalhada(vLista: Boolean; Tipo_Lista: string
 begin
   if Tipo_Lista <> 'S' then
     fDMCadDuplicata.cdsDuplicata_Consulta.IndexFieldNames := 'DTVENCIMENTO;TIPO_ES;TIPO_MOV;NOME_PESSOA';
+
   fDMCadDuplicata.qTotalAtraso.Close;
   if NxDatePicker3.Date > 0 then
     prc_Montar_TotalAtraso;

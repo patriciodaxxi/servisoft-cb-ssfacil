@@ -792,69 +792,69 @@ object frmCadDuplicata: TfrmCadDuplicata
           Caption = 'Final:'
         end
         object Shape1: TShape
-          Left = 845
+          Left = 861
           Top = 5
           Width = 23
           Height = 14
           Brush.Color = clGreen
         end
         object Label33: TLabel
-          Left = 874
+          Left = 890
           Top = 5
           Width = 37
           Height = 13
           Caption = 'Quitado'
         end
         object Label34: TLabel
-          Left = 874
+          Left = 890
           Top = 18
           Width = 42
           Height = 13
           Caption = 'Atrasado'
         end
         object Shape2: TShape
-          Left = 845
+          Left = 861
           Top = 18
           Width = 23
           Height = 14
           Brush.Color = clRed
         end
         object Shape3: TShape
-          Left = 845
+          Left = 861
           Top = 31
           Width = 23
           Height = 14
         end
         object Label35: TLabel
-          Left = 874
+          Left = 890
           Top = 31
           Width = 46
           Height = 13
           Caption = 'Pendente'
         end
         object Shape4: TShape
-          Left = 845
+          Left = 861
           Top = 44
           Width = 23
           Height = 14
           Brush.Color = clSilver
         end
         object Label47: TLabel
-          Left = 874
+          Left = 890
           Top = 44
           Width = 26
           Height = 13
           Caption = 'ICMS'
         end
         object Shape5: TShape
-          Left = 845
+          Left = 861
           Top = 57
           Width = 23
           Height = 14
           Brush.Color = 8454143
         end
         object Label49: TLabel
-          Left = 874
+          Left = 890
           Top = 57
           Width = 95
           Height = 13
@@ -877,14 +877,14 @@ object frmCadDuplicata: TfrmCadDuplicata
           Caption = 'Tipo Cobran'#231'a:'
         end
         object Shape6: TShape
-          Left = 845
+          Left = 861
           Top = 70
           Width = 23
           Height = 14
           Brush.Color = 16777147
         end
         object Label56: TLabel
-          Left = 874
+          Left = 890
           Top = 70
           Width = 54
           Height = 13
@@ -899,28 +899,28 @@ object frmCadDuplicata: TfrmCadDuplicata
           Caption = 'Op'#231#227'o:'
         end
         object Shape7: TShape
-          Left = 845
+          Left = 861
           Top = 83
           Width = 23
           Height = 14
           Brush.Color = 11053311
         end
         object Label58: TLabel
-          Left = 874
+          Left = 890
           Top = 83
           Width = 57
           Height = 13
           Caption = 'Em Protesto'
         end
         object Shape8: TShape
-          Left = 845
+          Left = 861
           Top = 96
           Width = 23
           Height = 14
           Brush.Color = clBlue
         end
         object Label16: TLabel
-          Left = 874
+          Left = 890
           Top = 96
           Width = 112
           Height = 13
@@ -950,14 +950,14 @@ object frmCadDuplicata: TfrmCadDuplicata
           Caption = 'Aprovado:'
         end
         object Shape9: TShape
-          Left = 845
+          Left = 861
           Top = 109
           Width = 23
           Height = 14
           Brush.Color = 5483007
         end
         object Label64: TLabel
-          Left = 874
+          Left = 890
           Top = 109
           Width = 68
           Height = 13
@@ -1256,12 +1256,12 @@ object frmCadDuplicata: TfrmCadDuplicata
             'Perdido')
         end
         object btnLerItau: TBitBtn
-          Left = 944
+          Left = 960
           Top = 16
           Width = 89
           Height = 25
           Caption = 'Ler titulos Itau'
-          TabOrder = 20
+          TabOrder = 19
           Visible = False
           OnClick = btnLerItauClick
         end
@@ -1277,15 +1277,6 @@ object frmCadDuplicata: TfrmCadDuplicata
           LookupSource = DMCadDuplicata.dsVendedor
           ParentCtl3D = False
           TabOrder = 11
-        end
-        object ckImpNossoNumero: TCheckBox
-          Left = 739
-          Top = 137
-          Width = 140
-          Height = 17
-          Caption = 'Imprimir Nosso N'#250'mero'
-          TabOrder = 19
-          Visible = False
         end
         object cbxNGR: TNxComboBox
           Left = 605
@@ -1326,7 +1317,7 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object CheckBox1: TCheckBox
           Left = 739
-          Top = 105
+          Top = 97
           Width = 97
           Height = 17
           Caption = 'Cancelados'
@@ -1352,19 +1343,37 @@ object frmCadDuplicata: TfrmCadDuplicata
         end
         object chkTotalDia: TCheckBox
           Left = 739
-          Top = 121
+          Top = 112
           Width = 104
           Height = 17
           Caption = 'Imprimir Total Dia'
           TabOrder = 18
         end
         object CheckBox2: TCheckBox
-          Left = 875
-          Top = 135
+          Left = 883
+          Top = 140
           Width = 76
           Height = 17
           Caption = 'Imp. OBS'
+          TabOrder = 20
+        end
+        object ckImpNossoNumero: TCheckBox
+          Left = 739
+          Top = 127
+          Width = 140
+          Height = 17
+          Caption = 'Imprimir Nosso N'#250'mero'
           TabOrder = 21
+          Visible = False
+        end
+        object ckImpCCusto: TCheckBox
+          Left = 740
+          Top = 141
+          Width = 140
+          Height = 17
+          Caption = 'Imprimir C.Custo'
+          TabOrder = 22
+          Visible = False
         end
       end
       object pnlTotal: TPanel
@@ -3934,10 +3943,10 @@ object frmCadDuplicata: TfrmCadDuplicata
         Top = 426
         Width = 1050
         Height = 188
-        ActivePage = TS_Historico
+        ActivePage = TS_CCusto
         ActivePageDefault = TS_Historico
         Align = alClient
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 2
         FixedDimension = 19
         object TS_Historico: TRzTabSheet
