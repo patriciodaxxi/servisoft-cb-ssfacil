@@ -4279,7 +4279,8 @@ begin
   ffrmCadProduto_Cor.fDMCadProduto := fDMCadProduto;
   ffrmCadProduto_Cor.ShowModal;
   FreeAndNil(ffrmCadProduto_Cor);
-  if (fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]) and (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M') and (fDMCadProduto.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
+  if (fDMCadProduto.qParametros_ProdATUALIZAR_CUSTO_POR_COR.AsString = 'S') and (fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]) and
+     (fDMCadProduto.cdsProdutoTIPO_REG.AsString = 'M') and (fDMCadProduto.cdsProdutoUSA_PRECO_COR.AsString = 'S') then
   begin
     vPreco := 0;
     fDMCadProduto.cdsProduto_Cor.First;
