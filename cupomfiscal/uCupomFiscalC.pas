@@ -1191,6 +1191,46 @@ begin
   end
   else
   begin
+    if fDmCupomFiscal.cdsCupomParametrosEXIGE_CAIXA_ABERTO.AsString = 'S' then
+    begin
+      fDmParametros.qCaixaAberto.Close;
+      fDmParametros.qCaixaAberto.ParamByName('T1').AsInteger := vTerminal;
+      fDmParametros.qCaixaAberto.ParamByName('D1').AsDate    := Date;
+      fDmParametros.qCaixaAberto.Open;
+      if fDmParametros.qCaixaAberto.IsEmpty then
+      begin
+        ShowMessage('Não existe caixa aberto para efetuar venda!');
+        fDmParametros.qCaixaAberto.Close;
+        fDmCupomFiscal.vSair_Tela := True;
+        Exit;
+      end
+      else
+      if (fDmParametros.qCaixaAbertoDATA.AsDateTime < Date) then
+      begin
+        if (fDmParametros.qCaixaAbertoDATA2.AsDateTime > fDmParametros.qCaixaAbertoDATA.AsDateTime) then
+        begin
+          MessageDlg('*** Caixa aberto com data: ' + fDmParametros.qCaixaAbertoDATA.AsString +
+                     ', mas já existe caixa com data superior pendente de conferência ou já encerrado!' +
+                     #13 + ' FAVOR VERIFICAR!' , mtInformation, [mbOk], 0);
+          fDmParametros.qCaixaAberto.Close;
+          fDmCupomFiscal.vSair_Tela := True;
+          Exit;
+        end;
+        if fDmCupomFiscal.vID_Fechamento <> fDmParametros.qCaixaAbertoID.AsInteger then
+        begin
+          if (MessageDlg('Caixa aberto com data de ' + fDmParametros.qCaixaAbertoDATA.AsString +
+                         ', usar este mesmo caixa?',mtConfirmation,[mbYes,mbNo],0) = mrNo) then
+          begin
+            fDmParametros.qCaixaAberto.Close;
+            fDmCupomFiscal.vSair_Tela := True;
+            Exit;
+          end
+        end;
+      end;
+      fDmCupomFiscal.vID_Fechamento := fDmParametros.qCaixaAbertoID.AsInteger;
+      fDmParametros.qCaixaAberto.Close;
+    end;
+
     vEdicao := True;
     fDmCupomFiscal.cdsCupomFiscal.Edit;
     vFilial := fDmCupomFiscal.cdsCupomFiscalFILIAL.AsInteger;

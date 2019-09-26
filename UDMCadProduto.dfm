@@ -6249,7 +6249,6 @@ object dmCadProduto: TdmCadProduto
     Top = 331
   end
   object cdsProcesso: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProcesso'
@@ -7083,6 +7082,11 @@ object dmCadProduto: TdmCadProduto
     end
     object qParametros_ProdCOPIAR_COMB: TStringField
       FieldName = 'COPIAR_COMB'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdATUALIZAR_CUSTO_POR_COR: TStringField
+      FieldName = 'ATUALIZAR_CUSTO_POR_COR'
       FixedChar = True
       Size = 1
     end

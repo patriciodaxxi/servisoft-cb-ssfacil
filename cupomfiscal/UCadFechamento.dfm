@@ -23,9 +23,9 @@ object frmCadFechamento: TfrmCadFechamento
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 996
-    Height = 661
-    ActivePage = TS_Consulta
+    Width = 988
+    Height = 653
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadFechamento: TfrmCadFechamento
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -42,8 +42,8 @@ object frmCadFechamento: TfrmCadFechamento
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 133
-        Width = 992
-        Height = 464
+        Width = 984
+        Height = 456
         Align = alClient
         BorderStyle = bsNone
         Ctl3D = False
@@ -132,7 +132,7 @@ object frmCadFechamento: TfrmCadFechamento
       object pnlPesquisa: TPanel
         Left = 0
         Top = 63
-        Width = 992
+        Width = 984
         Height = 70
         Align = alTop
         Color = clSilver
@@ -292,8 +292,8 @@ object frmCadFechamento: TfrmCadFechamento
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 621
-        Width = 992
+        Top = 613
+        Width = 984
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -309,7 +309,7 @@ object frmCadFechamento: TfrmCadFechamento
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 992
+        Width = 984
         Height = 63
         Align = alTop
         Color = clSilver
@@ -1095,8 +1095,8 @@ object frmCadFechamento: TfrmCadFechamento
       end
       object Panel4: TPanel
         Left = 0
-        Top = 597
-        Width = 992
+        Top = 589
+        Width = 984
         Height = 24
         Align = alBottom
         Color = clSilver
@@ -1188,7 +1188,7 @@ object frmCadFechamento: TfrmCadFechamento
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 992
+        Width = 984
         Height = 30
         Align = alTop
         Color = 8404992
@@ -1508,8 +1508,8 @@ object frmCadFechamento: TfrmCadFechamento
       object SMDBGrid5: TSMDBGrid
         Left = 400
         Top = 91
-        Width = 592
-        Height = 230
+        Width = 584
+        Height = 222
         Align = alClient
         Ctl3D = False
         DataSource = DMCadFechamento.dsFechamento_Itens
@@ -1604,7 +1604,7 @@ object frmCadFechamento: TfrmCadFechamento
         Left = 200
         Top = 91
         Width = 200
-        Height = 230
+        Height = 222
         Align = alLeft
         Ctl3D = False
         DataSource = DMCadFechamento.dsFechamento_San
@@ -1659,7 +1659,7 @@ object frmCadFechamento: TfrmCadFechamento
         Left = 0
         Top = 91
         Width = 200
-        Height = 230
+        Height = 222
         Align = alLeft
         Ctl3D = False
         DataSource = DMCadFechamento.dsFechamento_Sup
@@ -1712,8 +1712,8 @@ object frmCadFechamento: TfrmCadFechamento
       end
       object pnlCliente: TPanel
         Left = 0
-        Top = 321
-        Width = 992
+        Top = 313
+        Width = 984
         Height = 317
         Align = alBottom
         BevelInner = bvLowered
@@ -2066,7 +2066,7 @@ object frmCadFechamento: TfrmCadFechamento
       object pnlItem: TPanel
         Left = 0
         Top = 58
-        Width = 992
+        Width = 984
         Height = 33
         Align = alTop
         Ctl3D = True
@@ -2175,7 +2175,7 @@ object frmCadFechamento: TfrmCadFechamento
       object pnlNota: TPanel
         Left = 0
         Top = 30
-        Width = 992
+        Width = 984
         Height = 28
         Align = alTop
         Color = clSilver

@@ -723,7 +723,8 @@ begin
       prc_Inserir_Itens;
       cdsFechamento_ItensID_TIPOCOBRANCA.AsInteger := cdsFinanceiroID_FORMA_PAGAMENTO.AsInteger;
     end;
-    cdsFechamento_ItensVLR_ENTRADA.AsFloat := StrToFloat(FormatFloat('0.00',cdsFinanceiroVLR_ENTRADA.AsFloat));
+    cdsFechamento_ItensVLR_ENTRADA.AsFloat := StrToFloat(FormatFloat('0.00',cdsFechamento_ItensVLR_ENTRADA.AsFloat +
+                                                                            cdsFinanceiroVLR_ENTRADA.AsFloat));
     cdsFechamento_ItensVLR_SAIDA.AsFloat   := StrToFloat(FormatFloat('0.00',cdsFinanceiroVLR_SAIDA.AsFloat));
     cdsFechamento_ItensVLR_SALDO.AsFloat   := StrToFloat(FormatFloat('0.00',cdsFechamento_ItensVLR_ENTRADA.AsFloat -
                                                                             cdsFechamento_ItensVLR_SAIDA.AsFloat));
