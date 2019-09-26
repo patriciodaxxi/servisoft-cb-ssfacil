@@ -421,7 +421,8 @@ begin
     end;
     vId := fDMConsEstoque.cdsEstoqueID.AsInteger;
     vIndexName  := fDMConsEstoque.cdsEstoque.IndexFieldNames;
-    vIndexValue := fDMConsEstoque.cdsEstoque.FieldByName(vIndexName).AsString;
+    //Ver com Russimar 
+    //vIndexValue := fDMConsEstoque.cdsEstoque.FieldByName(vIndexName).AsString;
     ceIDProduto.AsInteger := vId;
     ffrmConsEstoque_Mov   := TfrmConsEstoque_Mov.Create(self);
     vControleExterno      := True;

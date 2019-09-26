@@ -1356,10 +1356,10 @@ object frmCadContaOrc: TfrmCadContaOrc
         Top = 267
         Width = 837
         Height = 261
-        ActivePage = ts_Orc_ValoresAnuais
+        ActivePage = ts_CentroCusto
         ActivePageDefault = ts_CentroCusto
         Align = alBottom
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 2
         FixedDimension = 19
         object ts_CentroCusto: TRzTabSheet

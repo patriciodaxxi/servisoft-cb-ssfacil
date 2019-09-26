@@ -75,7 +75,7 @@ type
     ceIDPessoa: TCurrencyEdit;
     ckSemCor: TCheckBox;
     NxButton1: TNxButton;
-    DBGrid1: TDBGrid;
+    DBGrid11: TDBGrid;
     ProgressBar1: TProgressBar;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -229,6 +229,7 @@ begin
       RadioGroup1.ItemIndex := 0;
     btnConsultar.Click;
   end;
+  DBGrid11.Visible := (fDMConsEstoque.qParametros_NTEUSA_CENTRO_CUSTO.AsString = 'S');
 end;
 
 procedure TfrmConsEstoque_Mov.SMDBGrid1TitleClick(Column: TColumn);
@@ -1251,7 +1252,6 @@ end;
 
 procedure TfrmConsEstoque_Mov.NxButton1Click(Sender: TObject);
 begin
-
   prc_Le_cdsEstoque_Mov(False);
 end;
 

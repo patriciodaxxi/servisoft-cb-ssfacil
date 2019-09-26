@@ -21,7 +21,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 705
+    Width = 713
     Height = 71
     Align = alTop
     Color = clMoneyGreen
@@ -240,8 +240,8 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 539
-    Width = 705
+    Top = 547
+    Width = 713
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -280,7 +280,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object pnlCombinacao: TPanel
     Left = 0
     Top = 119
-    Width = 705
+    Width = 713
     Height = 26
     Align = alTop
     Color = clMoneyGreen
@@ -312,7 +312,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object Panel4: TPanel
     Left = 0
     Top = 71
-    Width = 705
+    Width = 713
     Height = 48
     Align = alTop
     Color = clMoneyGreen
@@ -373,8 +373,8 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 145
-    Width = 705
-    Height = 394
+    Width = 713
+    Height = 402
     ActivePage = TS_Itens
     ActivePageDefault = TS_Itens
     Align = alClient
@@ -386,8 +386,8 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 701
-        Height = 371
+        Width = 709
+        Height = 379
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0
@@ -542,7 +542,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
           Caption = 'N'#186' Lote Controle:'
         end
         object DBEdit2: TDBEdit
-          Left = 112
+          Left = 111
           Top = 27
           Width = 115
           Height = 21

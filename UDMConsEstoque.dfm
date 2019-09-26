@@ -2815,7 +2815,7 @@ object DMConsEstoque: TDMConsEstoque
       '')
     SQLConnection = dmDatabase.scoDados
     Left = 880
-    Top = 80
+    Top = 79
     object qParametros_GeralID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4472,5 +4472,21 @@ object DMConsEstoque: TDMConsEstoque
     BCDToCurrency = False
     Left = 896
     Top = 552
+  end
+  object qParametros_NTE: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_CENTRO_CUSTO'
+      'FROM PARAMETROS_NTE'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 903
+    Top = 187
+    object qParametros_NTEUSA_CENTRO_CUSTO: TStringField
+      FieldName = 'USA_CENTRO_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
 end
