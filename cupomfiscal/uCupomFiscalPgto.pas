@@ -533,8 +533,7 @@ begin
     MessageDlg('*** Canal de venda é obrigatório!', mtInformation, [mbOk], 0);
     ComboBox1.SetFocus;
     exit;
-  end;
-
+  end;                            
 
   if (StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsFloat)) <= 0) then
   begin
@@ -564,7 +563,6 @@ begin
     rzPageControl1.ActivePageIndex := 0;
     ComboVendedor.SetFocus;
     Exit;
-    
   end
   else
   if (ComboVendedor.Text <> '') and (fDmCupomFiscal.cdsCupomFiscalPERC_VENDEDOR.AsCurrency = 0) then
@@ -580,6 +578,9 @@ begin
       Exit;
     end;
   end;
+
+  if fDmCupomFiscal.vID_Fechamento > 0 then
+    fDmCupomFiscal.cdsCupomFiscalID_FECHAMENTO.AsInteger := fDmCupomFiscal.vID_Fechamento;
 
   //******************
   if fDmCupomFiscal.cdsCupom_Parc.IsEmpty then
