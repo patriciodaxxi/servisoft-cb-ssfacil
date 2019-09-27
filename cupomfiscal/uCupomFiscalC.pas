@@ -1262,6 +1262,24 @@ begin
     fDmCupomFiscal.cdsCupomFiscalFINANCEIRO_OK.AsString := vFinanceiroOK;
     fDmCupomFiscal.cdsCupomFiscal.Post;
     fDmCupomFiscal.cdsCupomFiscal.ApplyUpdates(0);
+
+    //enviar cupom originado de comanda em 27/09/2019
+    if (fDmCupomFiscal.cdsParametrosUSA_NFCE.AsString = 'S') and (vIDPosicao > 0) and not(fDmCupomFiscal.vCancelar)  then
+    begin
+      try
+        if fDmCupomFiscal.vEncerrado then
+        begin
+          vPosicionar := False;
+          prc_Posiciona_CupomFiscal(vIDPosicao);
+          if fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'NFC' then
+            btnEnvioClick(fCupomFiscalC);
+        end
+      except
+        on E: Exception do
+          ShowMessage('Não foi possível enviar o CUPOM!' + #13 + E.Message + '! Clique para continuar!');
+      end;
+      vPosicionar := True;
+    end;
   end;
 //*************
 
