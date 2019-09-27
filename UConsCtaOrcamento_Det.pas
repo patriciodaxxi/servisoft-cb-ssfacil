@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, UDMConsFinanceiro, Grids, DBGrids, SMDBGrid, DB, RzTabs;
+  Dialogs, UDMConsFinanceiro, Grids, DBGrids, SMDBGrid, DB, RzTabs,
+  StdCtrls, Mask, DBCtrls, ExtCtrls;
 
 type
   TfrmConsCtaOrcamento_Det = class(TForm)
@@ -15,6 +16,17 @@ type
     SMDBGrid2: TSMDBGrid;
     TS_OC: TRzTabSheet;
     SMDBGrid3: TSMDBGrid;
+    TS_Titulos_CCusto: TRzTabSheet;
+    SMDBGrid4: TSMDBGrid;
+    Panel1: TPanel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    Label3: TLabel;
+    Label4: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);

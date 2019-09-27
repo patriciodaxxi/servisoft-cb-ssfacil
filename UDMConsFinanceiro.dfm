@@ -1909,21 +1909,23 @@ object DMConsFinanceiro: TDMConsFinanceiro
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43698.602463437500000000
+    ReportOptions.LastChange = 43735.093951550920000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'var'
       '  cSaldoCentroCusto : Currency;'
       '  cSaldoContrato : Currency;'
-      
-        '  clSaldoContratoServico : Currency;                            ' +
-        '                                                  '
+      '  clSaldoContratoServico : Currency;'
       '  cTotalEntrada : Currency;'
+      '  cTotalSaida : Currency;'
+      '  cSaldoEnt_Sai : Currency;'
       'procedure GroupHeader1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
       '  cSaldoCentroCusto := 0;'
       '  cSaldoContrato := 0;'
-      '  cTotalEntrada := 0;'
+      '  cTotalEntrada  := 0;'
+      '  cTotalSaida    := 0;'
+      '  cSaldoEnt_Sai  := 0;'
       '  cSaldoCentroCusto := <frxCCustoOrcamento."VLR_CONTRATO">;'
       'end;'
       ''
@@ -1938,17 +1940,20 @@ object DMConsFinanceiro: TDMConsFinanceiro
         '    cTotalEntrada := cTotalEntrada + <frxCCustoOrcamento."VLR_EN' +
         'TRADA">;'
       '  end;'
+      
+        '  cTotalSaida   := cTotalSaida + <frxCCustoOrcamento."VLR_SAIDA"' +
+        '>;'
       'end;'
       ''
       'procedure GroupFooter1OnBeforePrint(Sender: TfrxComponent);'
       'begin'
       
         '  clSaldoContratoServico := <frxCCustoOrcamento."VLR_CONTRATO_SE' +
-        'RVICO"> - cTotalEntrada;                                        ' +
-        '                                           '
+        'RVICO"> - cTotalEntrada;'
       
-        '  cSaldoContrato := <frxCCustoOrcamento."VLR_CONTRATO"> - (cTota' +
-        'lEntrada + <frxResumoCentro_Custo."VLR_ENTRADA">);'
+        '  cSaldoContrato  := <frxCCustoOrcamento."VLR_CONTRATO"> - (cTot' +
+        'alEntrada + <frxResumoCentro_Custo."VLR_ENTRADA">);'
+      '  cSaldoEnt_Sai   := cTotalEntrada - cTotalSaida;'
       'end;'
       ''
       'begin'
@@ -1957,7 +1962,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
     OnBeforePrint = frxReport1BeforePrint
     OnReportPrint = 'frxReportOnReportPrint'
     Left = 512
-    Top = 416
+    Top = 415
     Datasets = <
       item
         DataSet = frxCCustoOrcamento
@@ -1985,21 +1990,21 @@ object DMConsFinanceiro: TDMConsFinanceiro
       PaperWidth = 210.000000000000000000
       PaperHeight = 297.000000000000000000
       PaperSize = 9
-      LeftMargin = 10.000000000000000000
-      RightMargin = 10.000000000000000000
-      TopMargin = 10.000000000000000000
-      BottomMargin = 10.000000000000000000
+      LeftMargin = 8.000000000000000000
+      RightMargin = 8.000000000000000000
+      TopMargin = 8.000000000000000000
+      BottomMargin = 8.000000000000000000
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Height = 18.897650000000000000
-        Top = 211.653680000000000000
-        Width = 718.110700000000000000
+        Top = 200.315090000000000000
+        Width = 733.228820000000000000
         OnBeforePrint = 'MasterData1OnBeforePrint'
         DataSet = frxCCustoOrcamento
         DataSetName = 'frxCCustoOrcamento'
         RowCount = 0
         object Memo5: TfrxMemoView
-          Left = 445.252320000000000000
+          Left = 442.252320000000000000
           Top = 2.779530000000000000
           Width = 94.488250000000000000
           Height = 11.338590000000000000
@@ -2044,7 +2049,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Memo11: TfrxMemoView
-          Left = 600.945270000000000000
+          Left = 587.386210000000000000
           Top = 3.779530000000000000
           Width = 94.488250000000000000
           Height = 11.338590000000000000
@@ -2060,12 +2065,29 @@ object DMConsFinanceiro: TDMConsFinanceiro
             '[frxCCustoOrcamento."VLR_SAIDA"]')
           ParentFont = False
         end
+        object Memo24: TfrxMemoView
+          Left = 684.094930000000000000
+          Top = 3.779530000000000000
+          Width = 45.354360000000000000
+          Height = 11.338590000000000000
+          DisplayFormat.FormatStr = '%2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8 = (
+            '[frxCCustoOrcamento."clPerc_Saida"]%')
+          ParentFont = False
+        end
       end
       object PageHeader1: TfrxPageHeader
         FillType = ftBrush
         Height = 45.714285710000000000
         Top = 18.897650000000000000
-        Width = 718.110700000000000000
+        Width = 733.228820000000000000
         object Memo2: TfrxMemoView
           Left = 196.190476190000000000
           Top = 21.461193560000000000
@@ -2096,9 +2118,9 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Line2: TfrxLineView
-          Left = 4.761904760000000000
+          Left = 0.377952755905512000
           Top = 41.102350000000000000
-          Width = 708.571428570000000000
+          Width = 729.448818897638000000
           Color = clBlack
           Frame.ShadowColor = clWhite
           Frame.Style = fsDot
@@ -2155,14 +2177,14 @@ object DMConsFinanceiro: TDMConsFinanceiro
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
         Height = 30.236240000000000000
-        Top = 468.661720000000000000
-        Width = 718.110700000000000000
+        Top = 449.764070000000000000
+        Width = 733.228820000000000000
       end
       object ColumnHeader1: TfrxColumnHeader
         FillType = ftBrush
         Height = 18.897650000000000000
-        Top = 86.929190000000000000
-        Width = 718.110700000000000000
+        Top = 83.149660000000000000
+        Width = 733.228820000000000000
         object Memo8: TfrxMemoView
           Left = 15.118120000000000000
           Top = 3.779530000000000000
@@ -2192,7 +2214,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Memo12: TfrxMemoView
-          Left = 456.590910000000000000
+          Left = 453.590910000000000000
           Top = 3.779530000000000000
           Width = 83.149660000000000000
           Height = 11.338590000000000000
@@ -2207,16 +2229,16 @@ object DMConsFinanceiro: TDMConsFinanceiro
           ParentFont = False
         end
         object Line1: TfrxLineView
-          Left = 7.559060000000000000
+          Left = 0.377952755905512000
           Top = 17.118120000000000000
-          Width = 708.571428570000000000
+          Width = 729.448818897638000000
           Color = clBlack
           Frame.ShadowColor = clWhite
           Frame.Style = fsDot
           Diagonal = True
         end
         object Memo10: TfrxMemoView
-          Left = 612.283860000000000000
+          Left = 592.386210000000000000
           Top = 3.779530000000000000
           Width = 83.149660000000000000
           Height = 11.338590000000000000
@@ -2234,14 +2256,14 @@ object DMConsFinanceiro: TDMConsFinanceiro
       object GroupHeader1: TfrxGroupHeader
         FillType = ftBrush
         Height = 22.677180000000000000
-        Top = 166.299320000000000000
-        Width = 718.110700000000000000
+        Top = 158.740260000000000000
+        Width = 733.228820000000000000
         OnBeforePrint = 'GroupHeader1OnBeforePrint'
         Condition = 'frxCCustoOrcamento."CODIGO_GRUPO"'
         object Memo13: TfrxMemoView
           Left = 37.795300000000000000
           Top = 3.779530000000000000
-          Width = 668.976810000000000000
+          Width = 585.827150000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -2273,8 +2295,8 @@ object DMConsFinanceiro: TDMConsFinanceiro
       object GroupFooter1: TfrxGroupFooter
         FillType = ftBrush
         Height = 154.960730000000000000
-        Top = 253.228510000000000000
-        Width = 718.110700000000000000
+        Top = 238.110390000000000000
+        Width = 733.228820000000000000
         OnBeforePrint = 'GroupFooter1OnBeforePrint'
         object Memo4: TfrxMemoView
           Left = 98.267780000000000000
@@ -2349,24 +2371,24 @@ object DMConsFinanceiro: TDMConsFinanceiro
           Font.Color = clBlack
           Font.Height = -9
           Font.Name = 'Arial'
-          Font.Style = []
+          Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8 = (
             '[cSaldoCentroCusto]')
           ParentFont = False
         end
         object Line3: TfrxLineView
-          Left = 7.559060000000000000
-          Width = 708.571428570000000000
+          Left = 0.377952760000000000
+          Width = 729.448818900000000000
           Color = clBlack
           Frame.ShadowColor = clWhite
           Frame.Style = fsDot
           Diagonal = True
         end
         object Line4: TfrxLineView
-          Left = 7.559060000000000000
-          Top = 37.795300000000000000
-          Width = 708.571428570000000000
+          Left = 0.377952760000000000
+          Top = 151.181200000000000000
+          Width = 729.448818900000000000
           Color = clBlack
           Frame.ShadowColor = clWhite
           Diagonal = True
@@ -2449,7 +2471,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
         end
         object Memo20: TfrxMemoView
           Left = 22.677180000000000000
-          Top = 105.851336666666700000
+          Top = 105.851336666667000000
           Width = 268.346630000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -2463,7 +2485,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
         end
         object Memo21: TfrxMemoView
           Left = 328.086890000000000000
-          Top = 105.851336666666700000
+          Top = 105.851336666667000000
           Width = 211.653680000000000000
           Height = 18.897650000000000000
           DisplayFormat.FormatStr = '%2.2m'
@@ -2480,7 +2502,7 @@ object DMConsFinanceiro: TDMConsFinanceiro
         end
         object Memo22: TfrxMemoView
           Left = 22.677180000000000000
-          Top = 84.537243333333330000
+          Top = 84.537243333333300000
           Width = 268.346630000000000000
           Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -2507,6 +2529,23 @@ object DMConsFinanceiro: TDMConsFinanceiro
           HAlign = haRight
           Memo.UTF8 = (
             '[clSaldoContratoServico]')
+          ParentFont = False
+        end
+        object Memo25: TfrxMemoView
+          Left = 552.811380000000000000
+          Top = 22.456710000000000000
+          Width = 139.842610000000000000
+          Height = 11.338590000000000000
+          DisplayFormat.FormatStr = '%2.2m'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8 = (
+            'Ent-Sai: [cSaldoEnt_Sai]')
           ParentFont = False
         end
       end
@@ -2538,18 +2577,44 @@ object DMConsFinanceiro: TDMConsFinanceiro
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'select sum(VD.VLR_ENTRADA) VLR_ENTRADA, sum(VD.VLR_SAIDA) VLR_SA' +
-      'IDA, VD.CODIGO_GRUPO, VD.CODIGO_GRUPO_SUP,'#13#10'       VD.NOME_GRUPO' +
-      ', VD.CONTA_ORCAMENTO, VD.ID_CONTA_ORCAMENTO, VD.NOME_ORCAMENTO, ' +
-      'VD.VLR_CONTRATO, VD.VLR_CONTRATO_SERVICO'#13#10'from VDUPLICATA_CENTRO' +
-      'CUSTO VD'#13#10'where VD.DTULTPAGAMENTO between :DTINICIAL and :DTFINA' +
-      'L and'#13#10'      ((:ID_CENTROCUSTO = 0) or (VD.ID_CENTROCUSTO = :ID_' +
-      'CENTROCUSTO)) and'#13#10'      VD.FILIAL = :FILIAL AND (VD.TIPO_HISTOR' +
-      'ICO = :TIPO_HISTORICO)'#13#10'group by VD.CODIGO_GRUPO, VD.CODIGO_GRUP' +
-      'O_SUP, VD.NOME_GRUPO, VD.CONTA_ORCAMENTO, VD.ID_CONTA_ORCAMENTO,' +
-      ' VD.NOME_ORCAMENTO, VD.VLR_CONTRATO, VD.VLR_CONTRATO_SERVICO'
+      'SELECT AUX.*,'#13#10' (select SUM(vd2.vlr_entrada) from vduplicata_cen' +
+      'trocusto vd2'#13#10'  where vd2.id_centrocusto = aux.id_centrocusto'#13#10' ' +
+      '   and VD2.DTULTPAGAMENTO between :DTINICIAL and :DTFINAL and'#13#10' ' +
+      '       VD2.FILIAL = :FILIAL AND VD2.TIPO_HISTORICO = :TIPO_HISTO' +
+      'RICO) VLR_TOTAL_ENTRADA'#13#10#13#10'FROM ('#13#10'select sum(VD.VLR_ENTRADA) VL' +
+      'R_ENTRADA, sum(VD.VLR_SAIDA) VLR_SAIDA, VD.CODIGO_GRUPO, VD.CODI' +
+      'GO_GRUPO_SUP,'#13#10'       VD.NOME_GRUPO, VD.CONTA_ORCAMENTO, VD.ID_C' +
+      'ONTA_ORCAMENTO, VD.NOME_ORCAMENTO,'#13#10'       VD.VLR_CONTRATO, VD.V' +
+      'LR_CONTRATO_SERVICO, vd.id_centrocusto'#13#10'from VDUPLICATA_CENTROCU' +
+      'STO VD'#13#10'where VD.DTULTPAGAMENTO between :DTINICIAL and :DTFINAL ' +
+      'and'#13#10'      ((:ID_CENTROCUSTO = 0) or (VD.ID_CENTROCUSTO = :ID_CE' +
+      'NTROCUSTO)) and'#13#10'      VD.FILIAL = :FILIAL AND (VD.TIPO_HISTORIC' +
+      'O = :TIPO_HISTORICO)'#13#10'group by VD.CODIGO_GRUPO, VD.CODIGO_GRUPO_' +
+      'SUP, VD.NOME_GRUPO, VD.CONTA_ORCAMENTO,'#13#10'VD.ID_CONTA_ORCAMENTO, ' +
+      'VD.NOME_ORCAMENTO, VD.VLR_CONTRATO, VD.VLR_CONTRATO_SERVICO,'#13#10'vd' +
+      '.id_centrocusto) AUX'#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftDate
+        Name = 'DTINICIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DTFINAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'TIPO_HISTORICO'
+        ParamType = ptInput
+      end
       item
         DataType = ftDate
         Name = 'DTINICIAL'
@@ -2591,10 +2656,12 @@ object DMConsFinanceiro: TDMConsFinanceiro
   end
   object cdsCCustoOrcamento: TClientDataSet
     Aggregates = <>
+    AggregatesActive = True
     Params = <>
     ProviderName = 'dspCCustoOrcamento'
-    Left = 328
-    Top = 296
+    OnCalcFields = cdsCCustoOrcamentoCalcFields
+    Left = 330
+    Top = 295
     object cdsCCustoOrcamentoVLR_ENTRADA: TFloatField
       DisplayLabel = 'Vlr Entrada'
       FieldName = 'VLR_ENTRADA'
@@ -2638,6 +2705,17 @@ object DMConsFinanceiro: TDMConsFinanceiro
     end
     object cdsCCustoOrcamentoVLR_CONTRATO_SERVICO: TFloatField
       FieldName = 'VLR_CONTRATO_SERVICO'
+    end
+    object cdsCCustoOrcamentoclPerc_Saida: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'clPerc_Saida'
+      Calculated = True
+    end
+    object cdsCCustoOrcamentoID_CENTROCUSTO: TIntegerField
+      FieldName = 'ID_CENTROCUSTO'
+    end
+    object cdsCCustoOrcamentoVLR_TOTAL_ENTRADA: TFloatField
+      FieldName = 'VLR_TOTAL_ENTRADA'
     end
   end
   object dsCCustoOrcamento: TDataSource
@@ -2696,7 +2774,10 @@ object DMConsFinanceiro: TDMConsFinanceiro
       'ID_CONTA_ORCAMENTO=ID_CONTA_ORCAMENTO'
       'NOME_ORCAMENTO=NOME_ORCAMENTO'
       'VLR_CONTRATO=VLR_CONTRATO'
-      'VLR_CONTRATO_SERVICO=VLR_CONTRATO_SERVICO')
+      'VLR_CONTRATO_SERVICO=VLR_CONTRATO_SERVICO'
+      'clPerc_Saida=clPerc_Saida'
+      'ID_CENTROCUSTO=ID_CENTROCUSTO'
+      'VLR_TOTAL_ENTRADA=VLR_TOTAL_ENTRADA')
     DataSource = dsCCustoOrcamento
     BCDToCurrency = False
     Left = 584
@@ -2816,5 +2897,132 @@ object DMConsFinanceiro: TDMConsFinanceiro
     PdfA = False
     Left = 512
     Top = 472
+  end
+  object sdsDuplicata_CCusto: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select D.numduplicata, D.numnota, D.dtemissao, D.dtvencimento, D' +
+      '.FILIAL, D.vlr_parcela,'#13#10'D.vlr_restante, D.vlr_pago, D.id_pessoa' +
+      ', P.nome NOME_PESSOA, D.ID,'#13#10'D.dtultpagamento, C.descricao NOME_' +
+      'CCUSTO, D.tipo_es, DC.valor VLR_CCUSTO,'#13#10'DC.percentual PERC_CCUS' +
+      'TO,'#13#10'CASE'#13#10'  WHEN D.tipo_es = '#39'E'#39' THEN DC.valor'#13#10'  END VLR_ENTRA' +
+      'DA,'#13#10'CASE'#13#10'  WHEN D.tipo_es = '#39'S'#39' THEN DC.valor'#13#10'  END VLR_SAIDA' +
+      ','#13#10'CASE'#13#10'  WHEN D.tipo_es = '#39'E'#39' THEN D.vlr_parcela'#13#10'  END VLR_EN' +
+      'TRADA_DUP,'#13#10'CASE'#13#10'  WHEN D.tipo_es = '#39'S'#39' THEN D.vlr_parcela'#13#10'  E' +
+      'ND VLR_SAIDA_DUP'#13#10#13#10'from duplicata D'#13#10'INNER JOIN PESSOA P ON D.i' +
+      'd_pessoa = P.codigo'#13#10'INNER join duplicata_ccusto DC on D.ID = DC' +
+      '.ID'#13#10'INNER JOIN centrocusto C ON DC.id_centrocusto = C.ID'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 283
+    Top = 525
+  end
+  object dspDuplicata_CCusto: TDataSetProvider
+    DataSet = sdsDuplicata_CCusto
+    Left = 314
+    Top = 527
+  end
+  object cdsDuplicata_CCusto: TClientDataSet
+    Aggregates = <>
+    AggregatesActive = True
+    Params = <>
+    ProviderName = 'dspDuplicata_CCusto'
+    Left = 346
+    Top = 526
+    object cdsDuplicata_CCustoNUMDUPLICATA: TStringField
+      FieldName = 'NUMDUPLICATA'
+    end
+    object cdsDuplicata_CCustoNUMNOTA: TIntegerField
+      FieldName = 'NUMNOTA'
+    end
+    object cdsDuplicata_CCustoDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsDuplicata_CCustoDTVENCIMENTO: TDateField
+      FieldName = 'DTVENCIMENTO'
+    end
+    object cdsDuplicata_CCustoVLR_PARCELA: TFloatField
+      FieldName = 'VLR_PARCELA'
+    end
+    object cdsDuplicata_CCustoVLR_RESTANTE: TFloatField
+      FieldName = 'VLR_RESTANTE'
+    end
+    object cdsDuplicata_CCustoVLR_PAGO: TFloatField
+      FieldName = 'VLR_PAGO'
+    end
+    object cdsDuplicata_CCustoID_PESSOA: TIntegerField
+      FieldName = 'ID_PESSOA'
+    end
+    object cdsDuplicata_CCustoNOME_PESSOA: TStringField
+      FieldName = 'NOME_PESSOA'
+      Size = 60
+    end
+    object cdsDuplicata_CCustoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsDuplicata_CCustoDTULTPAGAMENTO: TDateField
+      FieldName = 'DTULTPAGAMENTO'
+    end
+    object cdsDuplicata_CCustoNOME_CCUSTO: TStringField
+      FieldName = 'NOME_CCUSTO'
+      Size = 50
+    end
+    object cdsDuplicata_CCustoTIPO_ES: TStringField
+      FieldName = 'TIPO_ES'
+      Size = 1
+    end
+    object cdsDuplicata_CCustoVLR_CCUSTO: TFloatField
+      FieldName = 'VLR_CCUSTO'
+    end
+    object cdsDuplicata_CCustoPERC_CCUSTO: TFloatField
+      FieldName = 'PERC_CCUSTO'
+    end
+    object cdsDuplicata_CCustoFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+    object cdsDuplicata_CCustoVLR_ENTRADA: TFloatField
+      FieldName = 'VLR_ENTRADA'
+    end
+    object cdsDuplicata_CCustoVLR_SAIDA: TFloatField
+      FieldName = 'VLR_SAIDA'
+    end
+    object cdsDuplicata_CCustoVLR_ENTRADA_DUP: TFloatField
+      FieldName = 'VLR_ENTRADA_DUP'
+    end
+    object cdsDuplicata_CCustoVLR_SAIDA_DUP: TFloatField
+      FieldName = 'VLR_SAIDA_DUP'
+    end
+    object cdsDuplicata_CCustoagVlr_Entrada: TAggregateField
+      FieldName = 'agVlr_Entrada'
+      Active = True
+      DisplayFormat = '###,###,##0.00'
+      Expression = 'SUM(VLR_ENTRADA)'
+    end
+    object cdsDuplicata_CCustoagVlr_Saida: TAggregateField
+      FieldName = 'agVlr_Saida'
+      Active = True
+      DisplayFormat = '###,###,##0.00'
+      Expression = 'SUM(VLR_SAIDA)'
+    end
+    object cdsDuplicata_CCustoagVlr_Entrada_Dup: TAggregateField
+      FieldName = 'agVlr_Entrada_Dup'
+      Active = True
+      DisplayFormat = '###,###,##0.00'
+      Expression = 'SUM(VLR_ENTRADA_DUP)'
+    end
+    object cdsDuplicata_CCustoagVlr_Saida_Dup: TAggregateField
+      FieldName = 'agVlr_Saida_Dup'
+      Active = True
+      DisplayFormat = '###,###,##0.00'
+      Expression = 'SUM(VLR_SAIDA_DUP)'
+    end
+  end
+  object dsDuplicata_CCusto: TDataSource
+    DataSet = cdsDuplicata_CCusto
+    Left = 378
+    Top = 527
   end
 end

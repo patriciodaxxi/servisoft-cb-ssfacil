@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, NxEdit, StdCtrls, ToolEdit,
   Mask, RxLookup, NxCollection, UDMConsFinanceiro, StrUtils, Grids, DBGrids, SMDBGrid, DB, RzTabs, ComCtrls, RzListVw, RzTreeVw,
-  RzLstBox;
+  RzLstBox, DBCtrls;
 
 type EnumDataRelatorio = (tpDataEmissao,tpDataVencimento,tpDataPagamento);
 
@@ -53,6 +53,8 @@ type
     procedure SMDBGrid1DblClick(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure RzPageControl1Change(Sender: TObject);
+    procedure SMDBGrid3DblClick(Sender: TObject);
+    procedure SMDBGrid2DblClick(Sender: TObject);
   private
     { Private declarations }
     fDMConsFinanceiro: TDMConsFinanceiro;
@@ -71,6 +73,7 @@ type
     procedure prc_Consultar_CCusto_Orcamento;
     procedure prc_Consultar_Resumo_CCusto;
     procedure prc_Carrega_Combo;
+    procedure prc_duplicata_CCusto(ID_CCusto : Integer);
   public
     { Public declarations }
 
@@ -528,6 +531,7 @@ begin
   ffrmConsCtaOrcamento_Det.fDMConsFinanceiro := fDMConsFinanceiro;
   fDMConsFinanceiro.vDtInicial := DateEdit1.Date;
   fDMConsFinanceiro.vDtFinal := DateEdit2.Date;
+  ffrmConsCtaOrcamento_Det.TS_Titulos_CCusto.TabVisible := False;
   case NxComboBox2.ItemIndex of
     0:
       fDMConsFinanceiro.vTipo_Data := 'E';
@@ -782,6 +786,46 @@ end;
 procedure TfrmConsCtaOrcamento_Fin.RzPageControl1Change(Sender: TObject);
 begin
 //  prc_Carrega_Combo;
+  Label11.Visible          := (RzPageControl1.ActivePage = ts_Centro_Orcamento);
+  comboCentroCusto.Visible := (RzPageControl1.ActivePage = ts_Centro_Orcamento);
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.SMDBGrid3DblClick(Sender: TObject);
+begin
+  prc_duplicata_CCusto(fDMConsFinanceiro.cdsCCustoOrcamentoID_CENTROCUSTO.AsInteger);
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.prc_duplicata_CCusto(ID_CCusto : Integer);
+var
+  ffrmConsCtaOrcamento_Det: TfrmConsCtaOrcamento_Det;
+  vFilAux : Integer;
+begin
+  fDMConsFinanceiro.vDtInicial := DateEdit1.Date;
+  fDMConsFinanceiro.vDtFinal := DateEdit2.Date;
+  case NxComboBox2.ItemIndex of
+    0: fDMConsFinanceiro.vTipo_Data := 'E';
+    1: fDMConsFinanceiro.vTipo_Data := 'V';
+  end;
+  vFilAux := 0;
+  if RxDBLookupCombo1.Text <> '' then
+    vFilAux := RxDBLookupCombo1.KeyValue;
+  fDMConsFinanceiro.prc_Abrir_Duplicata_CCusto(ID_CCusto,vFilAux);
+  ffrmConsCtaOrcamento_Det := TfrmConsCtaOrcamento_Det.Create(self);
+  ffrmConsCtaOrcamento_Det.fDMConsFinanceiro := fDMConsFinanceiro;
+  fDMConsFinanceiro.vDtInicial := DateEdit1.Date;
+  fDMConsFinanceiro.vDtFinal   := DateEdit2.Date;
+  ffrmConsCtaOrcamento_Det.TS_Titulos.TabVisible  := False;
+  ffrmConsCtaOrcamento_Det.TS_Carteira.TabVisible := False;
+  ffrmConsCtaOrcamento_Det.TS_OC.TabVisible       := False;
+  ffrmConsCtaOrcamento_Det.TS_Titulos_CCusto.TabVisible := True;
+  ffrmConsCtaOrcamento_Det.RzPageControl1.ActivePage := ffrmConsCtaOrcamento_Det.TS_Titulos_CCusto;
+  ffrmConsCtaOrcamento_Det.ShowModal;
+  FreeAndNil(ffrmConsCtaOrcamento_Det);
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.SMDBGrid2DblClick(Sender: TObject);
+begin
+  prc_duplicata_CCusto(fDMConsFinanceiro.mContas_Orc_CCustoID_CCusto.AsInteger);
 end;
 
 end.
