@@ -73,7 +73,7 @@ type
     procedure prc_Consultar_CCusto_Orcamento;
     procedure prc_Consultar_Resumo_CCusto;
     procedure prc_Carrega_Combo;
-    procedure prc_duplicata_CCusto(ID_CCusto : Integer);
+    procedure prc_duplicata_CCusto(ID_CCusto, ID_Conta_Orcamento : Integer);
   public
     { Public declarations }
 
@@ -792,10 +792,10 @@ end;
 
 procedure TfrmConsCtaOrcamento_Fin.SMDBGrid3DblClick(Sender: TObject);
 begin
-  prc_duplicata_CCusto(fDMConsFinanceiro.cdsCCustoOrcamentoID_CENTROCUSTO.AsInteger);
+  prc_duplicata_CCusto(fDMConsFinanceiro.cdsCCustoOrcamentoID_CENTROCUSTO.AsInteger,fDMConsFinanceiro.cdsCCustoOrcamentoID_CONTA_ORCAMENTO.AsInteger);
 end;
 
-procedure TfrmConsCtaOrcamento_Fin.prc_duplicata_CCusto(ID_CCusto : Integer);
+procedure TfrmConsCtaOrcamento_Fin.prc_duplicata_CCusto(ID_CCusto, ID_Conta_Orcamento : Integer);
 var
   ffrmConsCtaOrcamento_Det: TfrmConsCtaOrcamento_Det;
   vFilAux : Integer;
@@ -809,7 +809,7 @@ begin
   vFilAux := 0;
   if RxDBLookupCombo1.Text <> '' then
     vFilAux := RxDBLookupCombo1.KeyValue;
-  fDMConsFinanceiro.prc_Abrir_Duplicata_CCusto(ID_CCusto,vFilAux);
+  fDMConsFinanceiro.prc_Abrir_Duplicata_CCusto(ID_CCusto,vFilAux,ID_Conta_Orcamento);
   ffrmConsCtaOrcamento_Det := TfrmConsCtaOrcamento_Det.Create(self);
   ffrmConsCtaOrcamento_Det.fDMConsFinanceiro := fDMConsFinanceiro;
   fDMConsFinanceiro.vDtInicial := DateEdit1.Date;
@@ -825,7 +825,7 @@ end;
 
 procedure TfrmConsCtaOrcamento_Fin.SMDBGrid2DblClick(Sender: TObject);
 begin
-  prc_duplicata_CCusto(fDMConsFinanceiro.mContas_Orc_CCustoID_CCusto.AsInteger);
+  prc_duplicata_CCusto(fDMConsFinanceiro.mContas_Orc_CCustoID_CCusto.AsInteger,fDMConsFinanceiro.mContas_Orc_CCustoID.AsInteger);
 end;
 
 end.

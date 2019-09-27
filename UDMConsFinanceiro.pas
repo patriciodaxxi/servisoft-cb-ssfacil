@@ -400,7 +400,7 @@ type
     procedure prc_Abrir_Duplicata_Cli;
     procedure prc_Abrir_Pedido_Cli;
     procedure prc_Abrir_Pedido_Pend;
-    procedure prc_Abrir_Duplicata_CCusto(ID_CCusto, ID_Filial : Integer);
+    procedure prc_Abrir_Duplicata_CCusto(ID_CCusto, ID_Filial, ID_Conta_Orcamento : Integer);
 
   end;
 
@@ -580,7 +580,7 @@ begin
     cdsCCustoOrcamentoclPerc_Saida.AsFloat := StrToFloat(FormatFloat('0.00',(cdsCCustoOrcamentoVLR_SAIDA.AsFloat / cdsCCustoOrcamentoVLR_TOTAL_ENTRADA.Value) * 100));
 end;
 
-procedure TDMConsFinanceiro.prc_Abrir_Duplicata_CCusto(ID_CCusto, ID_Filial : Integer);
+procedure TDMConsFinanceiro.prc_Abrir_Duplicata_CCusto(ID_CCusto, ID_Filial, ID_Conta_Orcamento : Integer);
 var
   vComando : String;
 begin
@@ -601,6 +601,8 @@ begin
 
   vComando := vComando + ' AND DC.ID_CENTROCUSTO = ' + IntToStr(ID_CCusto);
   vComando := vComando + ' AND DC.VALOR > 0 ';
+  if ID_Conta_Orcamento > 0 then
+    vComando := vComando + ' AND D.ID_CONTA_ORCAMENTO = ' + IntToStr(ID_CONTA_ORCAMENTO);
   sdsDuplicata_CCusto.CommandText := ctDuplicata_CCusto + vComando;
   cdsDuplicata_CCusto.Open;
 end;

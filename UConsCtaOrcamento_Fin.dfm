@@ -369,10 +369,10 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
     Top = 137
     Width = 1161
     Height = 348
-    ActivePage = ts_Centro_Orcamento
+    ActivePage = ts_CentroCusto
     ActivePageDefault = TS_Resumido
     Align = alClient
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 2
     OnChange = RzPageControl1Change
     FixedDimension = 19
