@@ -745,15 +745,15 @@ begin
       if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_FRETE.AsString = 'S' then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat +
                                                                      fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FRETE.AsFloat;
-      if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_OUTROSVALORES.AsString = 'S' then
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat +
-                                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_OUTRASDESPESAS.AsFloat;
-      if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_SEGURO.AsString = 'S' then
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat +
-                                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_SEGURO.AsFloat;
+      //if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_OUTROSVALORES.AsString = 'S' then
+      //  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat +
+       //                                                              fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_OUTRASDESPESAS.AsFloat;
       if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_OUTROSVALORES.AsString = 'S' then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat +
                                                                      fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_OUTROS.AsFloat;
+      if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_SEGURO.AsString = 'S' then
+        fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat +
+                                                                     fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_SEGURO.AsFloat;
       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat +
                                                                    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_IPI.AsFloat +
                                                                    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_IPI_DEVOL.AsFloat;
@@ -853,8 +853,8 @@ begin
 
   if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_FRETE.AsString = 'S' then
     fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat + fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat;
-  if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_OUTROSVALORES.AsString = 'S' then
-    fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat + fDMCadNotaFiscal.cdsNotaFiscalVLR_OUTRASDESP.AsFloat;
+  //if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_OUTROSVALORES.AsString = 'S' then
+  //  fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat + fDMCadNotaFiscal.cdsNotaFiscalVLR_OUTRASDESP.AsFloat;
   if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_SEGURO.AsString = 'S' then
     fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat + fDMCadNotaFiscal.cdsNotaFiscalVLR_SEGURO.AsFloat;
   if fDMCadNotaFiscal.cdsNotaFiscalGERARDUPL_OUTROSVALORES.AsString = 'S' then
