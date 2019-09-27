@@ -24,6 +24,9 @@ function fnc_Calcula_PercComissao(fDMCadNotaFiscal: TDMCadNotaFiscal): Boolean;
 
 procedure prc_Ajustar_ExtComissao(fDMCadNotaFiscal: TDMCadNotaFiscal);
 
+procedure prc_Ajustar_Itens(fDMCadNotaFiscal: TDMCadNotaFiscal; Tipo : String); //AT= Atualiza todos   AI= Somente os que tem o iten de origem igual
+                                                                                //ET= Excluir Todos    EI= Excluir os que tem o item de origem igual
+
 function fnc_Busca_Vend_Int_Ped(ID_Ped : Integer) : Integer;
 
 implementation
@@ -664,6 +667,49 @@ begin
     Result := sds.FieldByName('id_vendedor_int').AsInteger;
   finally
     FreeAndNil(sds);
+  end;
+end;
+
+procedure prc_Ajustar_Itens(fDMCadNotaFiscal: TDMCadNotaFiscal; Tipo : String); //AT= Atualiza todos   AI= Somente os que tem o iten de origem igual
+                                                                                //ET= Excluir Todos    EI= Excluir os que tem o item de origem igual
+var
+  vItemOri : Integer;
+  vItem_Draw : Integer;
+  vNum_Draw : String;
+  vNum_Reg_Exportacao : String;
+  vNum_Chave_Acesso : String;
+begin
+  if fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.RecordCount <= 0 then
+    exit;
+  vItemOri := fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_ORIGINAL.AsInteger;
+  vItem_Draw := 0;
+  vNum_Draw  := fDMCadNotaFiscal.cdsNotaFiscal_DrawBackNUM_DRAWBACK.AsString;
+  vNum_Reg_Exportacao := fDMCadNotaFiscal.cdsNotaFiscal_DrawBackNUM_REG_EXPORTACAO.AsString;
+  vNum_Chave_Acesso   := fDMCadNotaFiscal.cdsNotaFiscal_DrawBackNUM_CHAVE_ACESSO_NFE.AsString;
+  fDMCadNotaFiscal.cdsNotaFiscal_Itens.First;
+  while not fDMCadNotaFiscal.cdsNotaFiscal_Itens.Eof do
+  begin
+    if ((Tipo = 'ET') or ((Tipo = 'EI') and (vItemOri = fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_ORIGINAL.AsInteger)))
+      or ((Tipo = 'AT') or ((Tipo = 'AI') and (vItemOri = fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_ORIGINAL.AsInteger))) then
+    begin
+      fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.First;
+      while not fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.Eof do
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.Delete;
+      fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.First;
+      if (Tipo = 'AT') or ((Tipo = 'AI') and (vItemOri = fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_ORIGINAL.AsInteger)) then
+      begin
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.Insert;
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBackID.AsInteger   := fDMCadNotaFiscal.cdsNotaFiscal_ItensID.AsInteger;
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBackITEM.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger;
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBackITEM_DRAWBACK.AsInteger := 1;
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBackNUM_DRAWBACK.AsString := vNum_Draw;
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBackNUM_REG_EXPORTACAO.AsString   := vNum_Reg_Exportacao;
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBackNUM_CHAVE_ACESSO_NFE.AsString := vNum_Chave_Acesso;
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBackQTD.AsFloat                   := fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat;
+        fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.Post;
+      end;
+    end;
+    fDMCadNotaFiscal.cdsNotaFiscal_Itens.Next;
   end;
 end;
 

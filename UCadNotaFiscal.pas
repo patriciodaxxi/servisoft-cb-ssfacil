@@ -416,6 +416,11 @@ type
     DBEdit77: TDBEdit;
     DBEdit78: TDBEdit;
     Label118: TLabel;
+    PopupMenu4: TPopupMenu;
+    AtualizarDetExportaoDrawBackTodososItens1: TMenuItem;
+    AtualizarDetExportaoDrawBackItensOrigem1: TMenuItem;
+    ExcluirDetExportaoDrawBack1: TMenuItem;
+    ExcluirDetExportaoDrawBackItensdeOrigem1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -546,6 +551,13 @@ type
     procedure DBDateEdit3Change(Sender: TObject);
     procedure ImprimirMinuta1Click(Sender: TObject);
     procedure SMDBGrid5DblClick(Sender: TObject);
+    procedure AtualizarDetExportaoDrawBackTodososItens1Click(
+      Sender: TObject);
+    procedure AtualizarDetExportaoDrawBackItensOrigem1Click(
+      Sender: TObject);
+    procedure ExcluirDetExportaoDrawBack1Click(Sender: TObject);
+    procedure ExcluirDetExportaoDrawBackItensdeOrigem1Click(
+      Sender: TObject);
   private
     { Private declarations }
     vTipoNotaAnt: String;
@@ -2224,6 +2236,8 @@ begin
       exit;
     end;
   end;
+  fDMCadNotaFiscal.vAlt_ExtExport := False;
+
   fDMCadNotaFiscal.cdsTab_NCM.Close;
   fDMCadNotaFiscal.cdsTab_NCM.Open;
   fDMCadNotaFiscal.cdsParametros.Close;
@@ -2450,6 +2464,11 @@ begin
   RxDBComboBox1.Enabled     := not(RxDBComboBox1.Enabled);
 
   Panel2.Enabled            := not(Panel2.Enabled);
+
+  PopupMenu4.Items.Items[0].Enabled := not(PopupMenu4.Items.Items[0].Enabled);
+  PopupMenu4.Items.Items[1].Enabled := not(PopupMenu4.Items.Items[1].Enabled);
+  PopupMenu4.Items.Items[2].Enabled := not(PopupMenu4.Items.Items[2].Enabled);
+  PopupMenu4.Items.Items[3].Enabled := not(PopupMenu4.Items.Items[3].Enabled);
 end;
 
 procedure TfrmCadNotaFiscal.SMDBGrid1GetCellParams(Sender: TObject;
@@ -5670,6 +5689,38 @@ begin
   end;
 
   MessageDlg(vTexto , mtInformation, [mbOk], 0);
+end;
+
+procedure TfrmCadNotaFiscal.AtualizarDetExportaoDrawBackTodososItens1Click(
+  Sender: TObject);
+begin
+  SMDBGrid2.DisableScroll;
+  uGrava_NotaFiscal.prc_Ajustar_Itens(fDMCadNotaFiscal,'AT');
+  SMDBGrid2.EnableScroll;
+end;
+
+procedure TfrmCadNotaFiscal.AtualizarDetExportaoDrawBackItensOrigem1Click(
+  Sender: TObject);
+begin
+  SMDBGrid2.DisableScroll;
+  uGrava_NotaFiscal.prc_Ajustar_Itens(fDMCadNotaFiscal,'AI');
+  SMDBGrid2.EnableScroll;
+end;
+
+procedure TfrmCadNotaFiscal.ExcluirDetExportaoDrawBack1Click(
+  Sender: TObject);
+begin
+  SMDBGrid2.DisableScroll;
+  uGrava_NotaFiscal.prc_Ajustar_Itens(fDMCadNotaFiscal,'ET');
+  SMDBGrid2.EnableScroll;
+end;
+
+procedure TfrmCadNotaFiscal.ExcluirDetExportaoDrawBackItensdeOrigem1Click(
+  Sender: TObject);
+begin
+  SMDBGrid2.DisableScroll;
+  uGrava_NotaFiscal.prc_Ajustar_Itens(fDMCadNotaFiscal,'EI');
+  SMDBGrid2.EnableScroll;
 end;
 
 end.

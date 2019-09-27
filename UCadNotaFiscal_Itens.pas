@@ -1446,11 +1446,6 @@ begin
     if fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_ORIGINAL.AsInteger <= 0 then
       fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_ORIGINAL.AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger;
 
-    //07/08/2018
-    
-
-    //***************
-
     //08/07/2017  Unidade tributável
     if (fDMCadNotaFiscal.cdsCFOPUSA_UNIDADE_TRIB.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE_TRIB.AsString) <> '') then
       prc_Unidade_Trib;
@@ -2893,6 +2888,8 @@ begin
   ffrmCadNotaFiscal_Itens_Drawback.fDMCadNotaFiscal := fDMCadNotaFiscal;
   ffrmCadNotaFiscal_Itens_Drawback.ShowModal;
   FreeAndNil(ffrmCadNotaFiscal_Itens_Drawback);
+
+
 end;
 
 procedure TfrmCadNotaFiscal_Itens.BitBtn9Click(Sender: TObject);
@@ -2902,6 +2899,7 @@ begin
   if MessageDlg('Deseja excluir o registro selecionado',mtWarning,[mbOK,mbNO],0) = mrNO then
     exit;
   fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.Delete;
+  fDMCadNotaFiscal.vAlt_ExtExport := False;
 end;
 
 procedure TfrmCadNotaFiscal_Itens.prc_Habilitar_Desoneracao(CodCST_ICMS: String);

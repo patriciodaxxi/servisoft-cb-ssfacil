@@ -3137,6 +3137,7 @@ type
     vExcluir_Com_Est: Boolean;
     vPerc_Comissao_Rateio: Real;
     vCopia_Igual: Boolean;
+    vAlt_ExtExport : Boolean;
 
     ctCommand, ctConsulta, ctNotaEntrada, ctPedido, ctProduto, ctVale, ctCliente, ctOS, ctNotaFiscal_ProdPrincipal: String;
     ctPedido_Tam: String;
