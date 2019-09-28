@@ -23,7 +23,7 @@ object frmCadUnidade: TfrmCadUnidade
     Top = 0
     Width = 537
     Height = 431
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -31,7 +31,7 @@ object frmCadUnidade: TfrmCadUnidade
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -685,8 +685,8 @@ object frmCadUnidade: TfrmCadUnidade
           Caption = 'Nome:'
         end
         object Label3: TLabel
-          Left = 7
-          Top = 97
+          Left = 4
+          Top = 115
           Width = 80
           Height = 13
           Alignment = taRightJustify
@@ -904,7 +904,7 @@ object frmCadUnidade: TfrmCadUnidade
         object DBCheckBox2: TDBCheckBox
           Left = 88
           Top = 72
-          Width = 361
+          Width = 187
           Height = 17
           Caption = 'Fracion'#225'vel (N'#227'o inteira)'
           DataField = 'FRACIONAVEL'
@@ -914,14 +914,26 @@ object frmCadUnidade: TfrmCadUnidade
           ValueUnchecked = 'N'
         end
         object DBEdit3: TDBEdit
-          Left = 89
-          Top = 89
+          Left = 86
+          Top = 107
           Width = 64
           Height = 21
           CharCase = ecUpperCase
           DataField = 'FATOR_CALCULO'
           DataSource = DMCadUnidade.dsUnidade
           TabOrder = 4
+        end
+        object DBCheckBox3: TDBCheckBox
+          Left = 87
+          Top = 87
+          Width = 187
+          Height = 17
+          Caption = 'Mostrar Grosa no Pedido'
+          DataField = 'MOSTRAR_GROSA'
+          DataSource = DMCadUnidade.dsUnidade
+          TabOrder = 6
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
         end
       end
     end

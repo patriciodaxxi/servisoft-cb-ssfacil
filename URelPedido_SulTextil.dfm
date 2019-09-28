@@ -3,7 +3,7 @@ object fRelPedido_SulTextil: TfRelPedido_SulTextil
   Top = 20
   Width = 887
   Height = 666
-  VertScrollBar.Position = 8
+  VertScrollBar.Position = 117
   Caption = 'Pedido'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object fRelPedido_SulTextil: TfRelPedido_SulTextil
   TextHeight = 13
   object RLReport1: TRLReport
     Left = 48
-    Top = 21
+    Top = -88
     Width = 794
     Height = 1123
     DataSource = DMCadPedido.dsPedidoImp
@@ -2905,7 +2905,7 @@ object fRelPedido_SulTextil: TfRelPedido_SulTextil
             ParentFont = False
           end
           object RLMemo6: TRLMemo
-            Left = 120
+            Left = 121
             Top = 3
             Width = 274
             Height = 12
@@ -2939,15 +2939,14 @@ object fRelPedido_SulTextil: TfRelPedido_SulTextil
           Width = 742
           Height = 12
           BeforePrint = RLBand18BeforePrint
-          object RLDBText61: TRLDBText
-            Left = 395
+          object RLLabel96: TRLLabel
+            Left = 428
             Top = 0
-            Width = 32
+            Width = 45
             Height = 11
-            Alignment = taCenter
+            Alignment = taRightJustify
             AutoSize = False
-            DataField = 'UNIDADE_PROD'
-            DataSource = DMCadPedido.dsPedidoImp_Itens
+            Caption = 'Pre'#231'o'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -9
@@ -2955,10 +2954,10 @@ object fRelPedido_SulTextil: TfRelPedido_SulTextil
             Font.Style = []
             ParentFont = False
           end
-          object RLLabel96: TRLLabel
-            Left = 428
-            Top = 0
-            Width = 45
+          object RLLabel98: TRLLabel
+            Left = 54
+            Top = 1
+            Width = 372
             Height = 11
             Alignment = taRightJustify
             AutoSize = False

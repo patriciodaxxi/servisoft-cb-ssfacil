@@ -40,6 +40,11 @@ object DMCadUnidade: TDMCadUnidade
     object sdsUnidadeFATOR_CALCULO: TFloatField
       FieldName = 'FATOR_CALCULO'
     end
+    object sdsUnidadeMOSTRAR_GROSA: TStringField
+      FieldName = 'MOSTRAR_GROSA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspUnidade: TDataSetProvider
     DataSet = sdsUnidade
@@ -87,6 +92,11 @@ object DMCadUnidade: TDMCadUnidade
     end
     object cdsUnidadeFATOR_CALCULO: TFloatField
       FieldName = 'FATOR_CALCULO'
+    end
+    object cdsUnidadeMOSTRAR_GROSA: TStringField
+      FieldName = 'MOSTRAR_GROSA'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsUnidade: TDataSource

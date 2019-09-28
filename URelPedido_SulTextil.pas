@@ -220,9 +220,9 @@ type
     RLDBText60: TRLDBText;
     RLMemo6: TRLMemo;
     RLBand18: TRLBand;
-    RLDBText61: TRLDBText;
     RLLabel96: TRLLabel;
     RLLabel97: TRLLabel;
+    RLLabel98: TRLLabel;
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand4BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -789,19 +789,44 @@ end;
 procedure TfRelPedido_SulTextil.RLBand18BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 var
-  vQtdAux : Real;  
+  vQtdAux : Real;
+  vQtd2 : Real;
+  vQtdInt : Integer;
 begin
   RLLabel96.Caption := '';
-  PrintIt := (fDMCadPedido.qParametros_PedUSA_UNIDADE_VENDA.AsString = 'S');
+  PrintIt := (fDMCadPedido.qParametros_PedUSA_UNIDADE_VENDA.AsString = 'S') OR
+             (fDMCadPedido.cdsPedidoImp_ItensMOSTRAR_GROSA.AsString = 'S');
   if not PrintIt then
     exit;
   PrintIt := ((trim(fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString) <> '') and
-             (fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString <> fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString));
+             (fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString <> fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString))
+             or (fDMCadPedido.cdsPedidoImp_ItensMOSTRAR_GROSA.AsString = 'S');
   if RLDBText34.DataField = 'QTD_RESTANTE' then
-    vQtdAux := fDMCadPedido.cdsPedidoImp_ItensQTD_RESTANTE.AsFloat * fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat
+    vQtdAux := fDMCadPedido.cdsPedidoImp_ItensQTD_RESTANTE.AsFloat
   else
-    vQtdAux := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat * fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat;
-  RLLabel96.Caption := FormatFloat('0.####',vQtdAux);
+    vQtdAux := fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat;
+  if (trim(fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString) <> '') and
+     (fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString <> fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString) then
+  begin
+    vQtdAux := vQtdAux * fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat;
+    RLLabel98.Caption := fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString;
+    RLLabel96.Caption := FormatFloat('0.####',vQtdAux);
+  end
+  else
+  if (fDMCadPedido.cdsPedidoImp_ItensMOSTRAR_GROSA.AsString = 'S') then
+  begin
+    vQtd2 := StrToFloat(FormatFloat('0.0000',vQtdAux / 72));
+    RLLabel98.Caption := '(Total de Grosa: ' + FormatFloat('0.####',vQtd2) + ')';
+    vQtdInt := Trunc(vQtd2);
+    vQtd2   := StrToFloat(FormatFloat('0.0000',vQtd2 - vQtdInt));
+    if StrToFloat(FormatFloat('0.0000',vQtd2)) > 0 then
+    begin
+      vQtd2 := StrToFloat(FormatFloat('0.0000',vQtd2 * 72));
+      RLLabel98.Caption := RLLabel98.Caption + '       Grosa: ' + IntToStr(vQtdInt) + '  Mais ' + FormatFloat('0',vQtd2) + ' ' + fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString;
+      RLLabel96.Caption := ''; 
+    end;
+  end;
+  
 end;
 
 end.
