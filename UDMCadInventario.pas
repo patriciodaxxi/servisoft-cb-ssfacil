@@ -167,6 +167,7 @@ type
     qProd2ID: TIntegerField;
     qProd2PRECO_CUSTO: TFloatField;
     qProd2TIPO_REG: TStringField;
+    SPBuscarProdInventario: TSQLStoredProc;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsInventarioNewRecord(DataSet: TDataSet);
     procedure dspInventarioUpdateError(Sender: TObject;

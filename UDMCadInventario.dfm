@@ -3,8 +3,8 @@ object DMCadInventario: TDMCadInventario
   OnCreate = DataModuleCreate
   Left = 311
   Top = 84
-  Height = 542
-  Width = 765
+  Height = 573
+  Width = 777
   object sdsInventario: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -857,5 +857,38 @@ object DMCadInventario: TDMCadInventario
       FixedChar = True
       Size = 1
     end
+  end
+  object SPBuscarProdInventario: TSQLStoredProc
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_LOCAL_ESTOQUE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_COR_COMBINACAO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    StoredProcName = 'PRC_BUSCA_PRODUTO_INVETARIO'
+    Left = 644
+    Top = 336
   end
 end
