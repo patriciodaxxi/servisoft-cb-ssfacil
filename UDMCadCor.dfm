@@ -78,4 +78,33 @@ object DMCadCor: TDMCadCor
       Required = True
     end
   end
+  object qVerifica_Nome: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'nome'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select c.id, c.nome'
+      'from cor c'
+      'where c.id <> :id and c.nome = :nome')
+    SQLConnection = dmDatabase.scoDados
+    Left = 192
+    Top = 100
+    object qVerifica_NomeID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qVerifica_NomeNOME: TStringField
+      FieldName = 'NOME'
+      Size = 45
+    end
+  end
 end

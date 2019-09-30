@@ -93,8 +93,6 @@ begin
   fDMCopiarProduto.cdsProduto_Comb.Close;
   fDMCopiarProduto.sdsProduto_Comb.ParamByName('ID').AsInteger := RxDBLookupCombo1.KeyValue;
   fDMCopiarProduto.cdsProduto_Comb.Open;
-  fDMCopiarProduto.cdsProduto_Comb_Mat.Close;
-  fDMCopiarProduto.cdsProduto_Comb_Mat.Open;
 end;
 
 procedure TfrmCopiar_Comb.RxDBLookupCombo1Change(Sender: TObject);
@@ -145,6 +143,11 @@ begin
             fDMCadProduto.cdsProduto_Comb.FieldByName(fDMCopiarProduto.cdsProduto_Comb.Fields[x].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Comb.Fields[x].Value;
         end;
         fDMCadProduto.cdsProduto_Comb.Post;
+
+        fDMCopiarProduto.cdsProduto_Comb_Mat.Close;
+        fDMCopiarProduto.sdsProduto_Comb_Mat.ParamByName('ID').AsInteger   := fDMCopiarProduto.cdsProduto_CombID.AsInteger;
+        fDMCopiarProduto.sdsProduto_Comb_Mat.ParamByName('ITEM').AsInteger := fDMCopiarProduto.cdsProduto_CombITEM.AsInteger;
+        fDMCopiarProduto.cdsProduto_Comb_Mat.Open;
 
         //14/08/2017 para copiar as cores do Semi
         if (ckCopiarSemi.Checked) and (StrToFloat(FormatFloat('0.0000',vQtd_Semi_Loc)) > 0) and (fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S') then

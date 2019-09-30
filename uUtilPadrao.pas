@@ -4,7 +4,7 @@ interface
 
 uses
   Classes, SysUtils, Dialogs, Variants, Forms, ShellApi, Windows, StrUtils, SqlExpr, DmdDatabase, DBClient, Controls, SMDBGrid,
-  DB, UEscolhe_Filial, Printers, Messages, DmdDatabase_NFeBD;
+  DB, UEscolhe_Filial, Printers, Messages, DmdDatabase_NFeBD, StdCtrls, ExtCtrls;
 
   function Monta_Numero(Campo: String; Tamanho: Integer): String;
   function TirarAcento(texto: string): string;
@@ -117,6 +117,7 @@ uses
     AChave -> Chave utilizada para gerar o serial
   }
   procedure addLog(Erro: string; Arquivo: string = '');
+  procedure prc_Form_Aguarde(Form : TForm);
 
 var
   vCodProduto_Pos: Integer;
@@ -2243,5 +2244,42 @@ begin
     FreeAndNil(sds);
   end;
 end;
+
+procedure prc_Form_Aguarde(Form : TForm);
+var
+  MSG: Tlabel;
+  Borda: TShape;
+begin
+  //Form := TForm.Create(Application);
+  Form.BorderStyle := bsNone;
+  Form.Position := poDesktopCenter;
+  Form.Width := 400;
+  Form.Height := 45; // até aqui criamos o form
+
+  Borda := TShape.Create(Application);
+  Borda.Parent := Form;
+  Borda.Align := alClient; // uma borda envolta do form
+
+  MSG := Tlabel.Create(Application);
+  MSG.Parent := Form;
+  MSG.Transparent := true;
+  MSG.AutoSize := False;
+  MSG.Font.Name := 'Verdana';
+  MSG.Font.Size := 25;
+  MSG.Width := 395;
+  MSG.Height := 42;
+  MSG.Caption := '... Aguarde ...';
+  MSG.Alignment := taCenter; // label com a mensagem "Aguarde"
+
+  Form.Show;
+  Form.Update;
+
+  // Aqui você coloca os procedimentos desejados
+  //Sleep(5000);   // exemplo de processamento, aguarda 5 segundos
+
+  //Form.Free; // E finalmente libera a janela
+
+end;
+
 
 end.

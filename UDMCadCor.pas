@@ -19,6 +19,9 @@ type
     cdsCorPANTONE: TStringField;
     qVerifica_Cor: TSQLQuery;
     qVerifica_CorID: TIntegerField;
+    qVerifica_Nome: TSQLQuery;
+    qVerifica_NomeID: TIntegerField;
+    qVerifica_NomeNOME: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -75,9 +78,16 @@ begin
   vMsgCor := '';
   if trim(cdsCorNOME.AsString) = '' then
     vMsgCor := 'Nome não informado!';
+  qVerifica_Nome.Close;
+  qVerifica_Nome.ParamByName('id').AsInteger := cdsCorID.AsInteger;
+  qVerifica_Nome.ParamByName('nome').AsString := cdsCorNOME.AsString;
+  qVerifica_Nome.Open;
+  if not qVerifica_Nome.IsEmpty then
+  begin
+    vMsgCor := 'Nome já existe no ID: ' + qVerifica_NomeID.AsString;
+  end;
   if vMsgCor <> '' then
     exit;
-
   cdsCor.Post;
   cdsCor.ApplyUpdates(0);
 

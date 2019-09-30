@@ -17,7 +17,7 @@ object DMCopiarProduto: TDMCopiarProduto
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 90
-    Top = 24
+    Top = 27
     object sdsProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -118,8 +118,9 @@ object DMCopiarProduto: TDMCopiarProduto
       FieldName = 'PERC_MARGEMLUCRO'
     end
     object sdsProdutoUNIDADE: TStringField
+      DisplayWidth = 6
       FieldName = 'UNIDADE'
-      Size = 3
+      Size = 6
     end
     object sdsProdutoDT_ALTPRECO: TDateField
       FieldName = 'DT_ALTPRECO'
@@ -408,8 +409,9 @@ object DMCopiarProduto: TDMCopiarProduto
       FieldName = 'PERC_MARGEMLUCRO'
     end
     object cdsProdutoUNIDADE: TStringField
+      DisplayWidth = 6
       FieldName = 'UNIDADE'
-      Size = 3
+      Size = 6
     end
     object cdsProdutoDT_ALTPRECO: TDateField
       FieldName = 'DT_ALTPRECO'
@@ -1108,9 +1110,6 @@ object DMCopiarProduto: TDMCopiarProduto
     object cdsProduto_CombPERC_MARGEMLUCRO: TFloatField
       FieldName = 'PERC_MARGEMLUCRO'
     end
-    object cdsProduto_CombsdsProduto_Comb_Mat: TDataSetField
-      FieldName = 'sdsProduto_Comb_Mat'
-    end
     object cdsProduto_CombID_COR_COMBINACAO: TIntegerField
       FieldName = 'ID_COR_COMBINACAO'
     end
@@ -1120,16 +1119,12 @@ object DMCopiarProduto: TDMCopiarProduto
     Left = 208
     Top = 438
   end
-  object dsProduto_Comb_Mestre: TDataSource
-    DataSet = sdsProduto_Comb
-    Left = 90
-    Top = 481
-  end
   object sdsProduto_Comb_Mat: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
     CommandText = 
       'SELECT M.*'#13#10'FROM PRODUTO_COMB_MAT M'#13#10'WHERE M.ID = :ID'#13#10'    AND M' +
       '.ITEM = :ITEM'
-    DataSource = dsProduto_Comb_Mestre
     MaxBlobSize = -1
     Params = <
       item
@@ -1193,10 +1188,10 @@ object DMCopiarProduto: TDMCopiarProduto
   end
   object cdsProduto_Comb_Mat: TClientDataSet
     Aggregates = <>
-    DataSetField = cdsProduto_CombsdsProduto_Comb_Mat
     IndexFieldNames = 'ID;ITEM;ITEM_MAT'
     Params = <>
-    Left = 176
+    ProviderName = 'dspProduto_Comb_Mat'
+    Left = 177
     Top = 520
     object cdsProduto_Comb_MatID: TIntegerField
       FieldName = 'ID'
@@ -1696,5 +1691,10 @@ object DMCopiarProduto: TDMCopiarProduto
     DataSet = cdsProduto_Consumo_Proc
     Left = 600
     Top = 40
+  end
+  object dspProduto_Comb_Mat: TDataSetProvider
+    DataSet = sdsProduto_Comb_Mat
+    Left = 146
+    Top = 519
   end
 end
