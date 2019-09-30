@@ -3939,14 +3939,14 @@ begin
       //10/02/2015
       if (cdsParametrosTIPO_COMISSAO_PROD.AsString = 'I') and (cdsNotaFiscalID_VENDEDOR.AsInteger > 0) and (StrToFloat(FormatFloat('0.00',cdsNotaFiscalVLR_DUPLICATA.AsFloat)) > 0)  then
       begin
-        if StrToFloat(FormatFloat('0.000',cdsNotaFiscal_ItensPERC_COMISSAO.AsFloat)) > 0 then
-          vPercAux := StrToFloat(FormatFloat('0.000',cdsNotaFiscal_ItensPERC_COMISSAO.AsFloat))
+        if StrToFloat(FormatFloat('0.0000',cdsNotaFiscal_ItensPERC_COMISSAO.AsFloat)) > 0 then
+          vPercAux := StrToFloat(FormatFloat('0.0000',cdsNotaFiscal_ItensPERC_COMISSAO.AsFloat))
         else
-          vPercAux := StrToFloat(FormatFloat('0.000',cdsNotaFiscalPERC_COMISSAO.AsFloat));
-        if StrToFloat(FormatFloat('0.000',cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat)) > 0 then
+          vPercAux := StrToFloat(FormatFloat('0.0000',cdsNotaFiscalPERC_COMISSAO.AsFloat));
+        if StrToFloat(FormatFloat('0.0000',cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat)) > 0 then
         begin
-          vVlrAux := StrToFloat(FormatFloat('0.000',(cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat * vPercAux) / 100));
-          vComissaoAux := StrToFloat(FormatFloat('0.000',vComissaoAux + vVlrAux));
+          vVlrAux := StrToFloat(FormatFloat('0.0000',(cdsNotaFiscal_ItensVLR_DUPLICATA.AsFloat * vPercAux) / 100));
+          vComissaoAux := StrToFloat(FormatFloat('0.0000',vComissaoAux + vVlrAux));
         end;
       end;
       cdsNotaFiscal_Itens.Next;
@@ -3954,7 +3954,7 @@ begin
     //10/11/2015
     if (StrToFloat(FormatFloat('0.00',vComissaoAux)) > 0) and (cdsParametrosTIPO_COMISSAO_PROD.AsString = 'I') then
     begin
-      vComissaoAux := StrToFloat(FormatFloat('0.00',vComissaoAux));
+      vComissaoAux := StrToFloat(FormatFloat('0.0000',vComissaoAux));
       vPerc_Comissao_Rateio := StrToFloat(FormatFloat('0.00000',(vComissaoAux / (cdsNotaFiscalVLR_DUPLICATA.AsFloat + cdsNotaFiscalVLR_ADIANTAMENTO.AsFloat)) * 100));
     end
     else
