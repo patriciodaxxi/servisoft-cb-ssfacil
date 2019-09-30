@@ -25,7 +25,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
     Top = 0
     Width = 946
     Height = 670
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -35,7 +35,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
     ParentBackgroundColor = False
     ParentColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -2567,6 +2567,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentCtl3D = False
+            PopupMenu = PopupMenu4
             ReadOnly = True
             TabOrder = 1
             TitleFont.Charset = DEFAULT_CHARSET
@@ -2598,14 +2599,20 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             RowCount = 2
             Columns = <
               item
+                Alignment = taCenter
                 Expanded = False
                 FieldName = 'ITEM'
+                Title.Alignment = taCenter
+                Title.Caption = 'Item'
                 Width = 36
                 Visible = True
               end
               item
+                Alignment = taCenter
                 Expanded = False
                 FieldName = 'ID_PRODUTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Produto'
                 Width = 60
                 Visible = True
               end
@@ -2663,7 +2670,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
               item
                 Expanded = False
                 FieldName = 'UNIDADE'
-                Width = 53
                 Visible = True
               end
               item
@@ -7985,6 +7991,30 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
     object XT1: TMenuItem
       Caption = 'TXT'
       OnClick = XT1Click
+    end
+  end
+  object PopupMenu4: TPopupMenu
+    Left = 380
+    Top = 352
+    object AtualizarDetExportaoDrawBackTodososItens1: TMenuItem
+      Caption = 'Atualizar Det. Exporta'#231#227'o (DrawBack) Todos os Itens'
+      Enabled = False
+      OnClick = AtualizarDetExportaoDrawBackTodososItens1Click
+    end
+    object AtualizarDetExportaoDrawBackItensOrigem1: TMenuItem
+      Caption = 'Atualizar Det. Exporta'#231#227'o (DrawBack) Itens de Origem'
+      Enabled = False
+      OnClick = AtualizarDetExportaoDrawBackItensOrigem1Click
+    end
+    object ExcluirDetExportaoDrawBack1: TMenuItem
+      Caption = 'Excluir Det. Exporta'#231#227'o (DrawBack) Todos os itens'
+      Enabled = False
+      OnClick = ExcluirDetExportaoDrawBack1Click
+    end
+    object ExcluirDetExportaoDrawBackItensdeOrigem1: TMenuItem
+      Caption = 'Excluir Det. Exporta'#231#227'o (DrawBack) Itens de Origem'
+      Enabled = False
+      OnClick = ExcluirDetExportaoDrawBackItensdeOrigem1Click
     end
   end
 end

@@ -1725,8 +1725,6 @@ begin
   cdsCupomFiscalTERMINAL_ID.AsInteger := vTerminal;
   cdsCupomFiscalID_LOCALESTOQUE.AsInteger := vLocalEstoque;
   cdsCupomFiscalNUMCUPOM.AsInteger    := 0;
-  if vID_Fechamento > 0 then
-    cdsCupomFiscalID_FECHAMENTO.AsInteger := vID_Fechamento;
 
   cdsPessoa.IndexFieldNames := 'CODIGO';
   cdsPessoa.FindKey([vClienteID]);

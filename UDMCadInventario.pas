@@ -370,7 +370,9 @@ begin
     begin
       if cdsEstoque_Atual.FindKey([cdsProdutoID.AsInteger,vTam,vCor]) then
       begin
-        cdsProdutoclQtd.AsFloat       := StrToFloat(FormatFloat('0.0000',cdsEstoque_AtualQTD.AsFloat - cdsEstoque_AtualQTD_RESERVA.AsFloat));
+        //26/09/2019  foi tirado
+        //cdsProdutoclQtd.AsFloat       := StrToFloat(FormatFloat('0.0000',cdsEstoque_AtualQTD.AsFloat - cdsEstoque_AtualQTD_RESERVA.AsFloat));
+        cdsProdutoclQtd.AsFloat       := StrToFloat(FormatFloat('0.0000',cdsEstoque_AtualQTD.AsFloat));
         cdsProdutoclQtd_Geral.AsFloat := StrToFloat(FormatFloat('0.0000',cdsEstoque_AtualQTD_GERAL.AsFloat));
       end;
     end;

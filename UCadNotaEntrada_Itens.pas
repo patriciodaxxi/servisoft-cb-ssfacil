@@ -318,8 +318,10 @@ begin
   btnGrade.Visible    := ((fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsInsert]));
   lblTamanho.Visible  := ((fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsEdit]));
   dblcTamanho.Visible := ((fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsEdit]));
-  DBEdit2.ReadOnly := ((fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S')) ;
-  if (fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') then
+  DBEdit2.ReadOnly := ((fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S'))
+                      and (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsInsert]);
+  if (fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and
+     (fDMCadNotaFiscal.cdsNotaFiscal_Itens.State in [dsInsert]) then
     DBEdit2.Color := clSilver
   else
     DBEdit2.Color := clWindow;

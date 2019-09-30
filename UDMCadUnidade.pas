@@ -51,6 +51,8 @@ type
     qVerUnidade: TSQLQuery;
     qVerUnidadeCONTADOR: TIntegerField;
     qVerUnidadeCONTADOR_PROD: TIntegerField;
+    sdsUnidadeMOSTRAR_GROSA: TStringField;
+    cdsUnidadeMOSTRAR_GROSA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspUnidadeUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

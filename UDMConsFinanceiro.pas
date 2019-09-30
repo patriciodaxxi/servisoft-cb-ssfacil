@@ -340,11 +340,43 @@ type
     cdsDuplicata_DetDTPAGAMENTO_PERIODO: TDateField;
     cdsDuplicata_DetVLR_PAGO_PERIODO: TFloatField;
     cdsCCustoOrcamentoVLR_CONTRATO_SERVICO: TFloatField;
+    cdsCCustoOrcamentoclPerc_Saida: TFloatField;
+    cdsCCustoOrcamentoID_CENTROCUSTO: TIntegerField;
+    cdsCCustoOrcamentoVLR_TOTAL_ENTRADA: TFloatField;
+    sdsDuplicata_CCusto: TSQLDataSet;
+    dspDuplicata_CCusto: TDataSetProvider;
+    cdsDuplicata_CCusto: TClientDataSet;
+    dsDuplicata_CCusto: TDataSource;
+    cdsDuplicata_CCustoNUMDUPLICATA: TStringField;
+    cdsDuplicata_CCustoNUMNOTA: TIntegerField;
+    cdsDuplicata_CCustoDTEMISSAO: TDateField;
+    cdsDuplicata_CCustoDTVENCIMENTO: TDateField;
+    cdsDuplicata_CCustoVLR_PARCELA: TFloatField;
+    cdsDuplicata_CCustoVLR_RESTANTE: TFloatField;
+    cdsDuplicata_CCustoVLR_PAGO: TFloatField;
+    cdsDuplicata_CCustoID_PESSOA: TIntegerField;
+    cdsDuplicata_CCustoNOME_PESSOA: TStringField;
+    cdsDuplicata_CCustoID: TIntegerField;
+    cdsDuplicata_CCustoDTULTPAGAMENTO: TDateField;
+    cdsDuplicata_CCustoNOME_CCUSTO: TStringField;
+    cdsDuplicata_CCustoTIPO_ES: TStringField;
+    cdsDuplicata_CCustoVLR_CCUSTO: TFloatField;
+    cdsDuplicata_CCustoPERC_CCUSTO: TFloatField;
+    cdsDuplicata_CCustoFILIAL: TIntegerField;
+    cdsDuplicata_CCustoVLR_ENTRADA: TFloatField;
+    cdsDuplicata_CCustoVLR_SAIDA: TFloatField;
+    cdsDuplicata_CCustoVLR_ENTRADA_DUP: TFloatField;
+    cdsDuplicata_CCustoVLR_SAIDA_DUP: TFloatField;
+    cdsDuplicata_CCustoagVlr_Entrada: TAggregateField;
+    cdsDuplicata_CCustoagVlr_Saida: TAggregateField;
+    cdsDuplicata_CCustoagVlr_Entrada_Dup: TAggregateField;
+    cdsDuplicata_CCustoagVlr_Saida_Dup: TAggregateField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConta_OrcNewRecord(DataSet: TDataSet);
     procedure mDespesaNewRecord(DataSet: TDataSet);
     procedure mContas_Orc_CCustoNewRecord(DataSet: TDataSet);
     procedure frxReport1BeforePrint(Sender: TfrxReportComponent);
+    procedure cdsCCustoOrcamentoCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -353,6 +385,7 @@ type
     ctDespesa : String;
     ctOC_Pendente : String;
     ctDuplicata_Det : String;
+    ctDuplicata_CCusto : sTRING;    
     ctDuplicata_Cli : String;
     ctPedido_Cli : String;
     ctPedido_Pend : String;
@@ -367,6 +400,7 @@ type
     procedure prc_Abrir_Duplicata_Cli;
     procedure prc_Abrir_Pedido_Cli;
     procedure prc_Abrir_Pedido_Pend;
+    procedure prc_Abrir_Duplicata_CCusto(ID_CCusto, ID_Filial, ID_Conta_Orcamento : Integer);
 
   end;
 
@@ -392,6 +426,7 @@ begin
   ctDespesa               := sdsDespesa.CommandText;
   ctOC_Pendente           := sdsOC_Pendente.CommandText;
   ctDuplicata_Det         := sdsDuplicata_Det.CommandText;
+  ctDuplicata_CCusto      := sdsDuplicata_CCusto.CommandText;
   ctDuplicata_Cli         := sdsDuplicata_Cli.CommandText;
   ctPedido_Cli            := sdsPedido_Cli.CommandText;
   ctPedido_Pend           := sdsPedido_Pend.CommandText;
@@ -534,6 +569,42 @@ procedure TDMConsFinanceiro.frxReport1BeforePrint(
   Sender: TfrxReportComponent);
 begin
   TfrxMemoView(frxReport1.FindComponent('Memo2')).Text := 'Período de ' + vDataIni + ' até ' + vDataFim;
+end;
+
+procedure TDMConsFinanceiro.cdsCCustoOrcamentoCalcFields(
+  DataSet: TDataSet);
+begin
+  cdsCCustoOrcamentoclPerc_Saida.AsFloat := StrToFloat(FormatFloat('0.00',0));
+  if (StrToFloat(FormatFloat('0.00',cdsCCustoOrcamentoVLR_TOTAL_ENTRADA.AsFloat)) > 0)
+    and (StrToFloat(FormatFloat('0.00',cdsCCustoOrcamentoVLR_SAIDA.AsFloat)) > 0) then
+    cdsCCustoOrcamentoclPerc_Saida.AsFloat := StrToFloat(FormatFloat('0.00',(cdsCCustoOrcamentoVLR_SAIDA.AsFloat / cdsCCustoOrcamentoVLR_TOTAL_ENTRADA.Value) * 100));
+end;
+
+procedure TDMConsFinanceiro.prc_Abrir_Duplicata_CCusto(ID_CCusto, ID_Filial, ID_Conta_Orcamento : Integer);
+var
+  vComando : String;
+begin
+  cdsDuplicata_CCusto.Close;
+  cdsDuplicata_CCusto.IndexFieldNames := 'DTVENCIMENTO;NOME_PESSOA';
+  //vComando := ' WHERE D.TIPO_ES = ' + QuotedStr(mConta_OrcTipo_ES.AsString);
+  if ID_Filial > 0 then
+    vComando := ' WHERE D.FILIAL = ' + IntToStr(ID_FILIAL)
+  else
+    vComando := ' WHERE 0 = 0 ';
+  if vTipo_Data = 'E' then
+    vComando := vComando + ' AND D.DTEMISSAO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtInicial))
+              + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtFinal))
+  else
+  if vTipo_Data = 'V' then
+    vComando := vComando + ' AND D.DTVENCIMENTO BETWEEN ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtInicial))
+              + ' AND ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDtFinal));
+
+  vComando := vComando + ' AND DC.ID_CENTROCUSTO = ' + IntToStr(ID_CCusto);
+  vComando := vComando + ' AND DC.VALOR > 0 ';
+  if ID_Conta_Orcamento > 0 then
+    vComando := vComando + ' AND D.ID_CONTA_ORCAMENTO = ' + IntToStr(ID_CONTA_ORCAMENTO);
+  sdsDuplicata_CCusto.CommandText := ctDuplicata_CCusto + vComando;
+  cdsDuplicata_CCusto.Open;
 end;
 
 end.

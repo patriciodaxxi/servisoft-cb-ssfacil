@@ -698,6 +698,8 @@ type
     mEstoque_CentroCustoVlrEntrada: TFloatField;
     mEstoque_CentroCustoQSaldo: TFloatField;
     mEstoque_CentroCustoVlrSaldo: TFloatField;
+    qParametros_NTE: TSQLQuery;
+    qParametros_NTEUSA_CENTRO_CUSTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -784,6 +786,7 @@ begin
   qParametros_Usuario.Open;
   qParametros_Prod.Open;
   qParametros_Geral.Open;
+  qParametros_NTE.Open;
   //prc_Abrir_Produto('N');
 end;
 

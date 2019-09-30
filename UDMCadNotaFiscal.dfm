@@ -7,7 +7,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   object sdsNotaFiscal: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM NOTAFISCAL'#13#10#13#10#13#10#13#10
+    CommandText = 'SELECT *'#13#10'FROM NOTAFISCAL'#13#10#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1894,38 +1894,23 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     OnNewRecord = cdsNotaFiscal_ItensNewRecord
     Left = 51
     Top = 51
-    object cdsNotaFiscal_ItensCONTA_ORCAMENTO_ID: TIntegerField
-      FieldName = 'CONTA_ORCAMENTO_ID'
-    end
-    object cdsNotaFiscal_ItensCENTRO_CUSTO_ID: TIntegerField
-      FieldName = 'CENTRO_CUSTO_ID'
-    end
     object cdsNotaFiscal_ItensID: TIntegerField
-      Alignment = taCenter
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsNotaFiscal_ItensITEM: TIntegerField
-      Alignment = taCenter
-      DisplayLabel = 'Item'
       FieldName = 'ITEM'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsNotaFiscal_ItensID_PRODUTO: TIntegerField
-      Alignment = taCenter
-      DisplayLabel = 'C'#243'd. Produto'
       FieldName = 'ID_PRODUTO'
     end
     object cdsNotaFiscal_ItensID_COR: TIntegerField
-      Alignment = taCenter
-      DisplayLabel = 'C'#243'd. Cor'
       FieldName = 'ID_COR'
     end
     object cdsNotaFiscal_ItensTAMANHO: TStringField
-      Alignment = taCenter
-      DisplayLabel = 'Tamanho'
       FieldName = 'TAMANHO'
       Size = 10
     end
@@ -1933,14 +1918,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'ID_NCM'
     end
     object cdsNotaFiscal_ItensUNIDADE: TStringField
-      Alignment = taCenter
-      DisplayLabel = 'Unidade'
       FieldName = 'UNIDADE'
       Size = 6
     end
     object cdsNotaFiscal_ItensQTD: TFloatField
       FieldName = 'QTD'
-      DisplayFormat = '0.0000'
     end
     object cdsNotaFiscal_ItensID_CFOP: TIntegerField
       FieldName = 'ID_CFOP'
@@ -1951,63 +1933,50 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object cdsNotaFiscal_ItensID_CSTIPI: TIntegerField
       FieldName = 'ID_CSTIPI'
     end
-    object cdsNotaFiscal_ItensID_COFINS: TIntegerField
-      FieldName = 'ID_COFINS'
-    end
     object cdsNotaFiscal_ItensID_PIS: TIntegerField
       FieldName = 'ID_PIS'
     end
+    object cdsNotaFiscal_ItensID_COFINS: TIntegerField
+      FieldName = 'ID_COFINS'
+    end
     object cdsNotaFiscal_ItensPERC_ICMS: TFloatField
       FieldName = 'PERC_ICMS'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensPERC_IPI: TFloatField
       FieldName = 'PERC_IPI'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_UNITARIO: TFloatField
       FieldName = 'VLR_UNITARIO'
-      DisplayFormat = '0.000#######'
     end
     object cdsNotaFiscal_ItensVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensPERC_DESCONTO: TFloatField
       FieldName = 'PERC_DESCONTO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_DESCONTO: TFloatField
       FieldName = 'VLR_DESCONTO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensBASE_ICMS: TFloatField
       FieldName = 'BASE_ICMS'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_ICMS: TFloatField
       FieldName = 'VLR_ICMS'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_IPI: TFloatField
       FieldName = 'VLR_IPI'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensPERC_PIS: TFloatField
       FieldName = 'PERC_PIS'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensPERC_COFINS: TFloatField
       FieldName = 'PERC_COFINS'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_PIS: TFloatField
       FieldName = 'VLR_PIS'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_COFINS: TFloatField
       FieldName = 'VLR_COFINS'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensORIGEM_PROD: TStringField
       FieldName = 'ORIGEM_PROD'
@@ -2016,11 +1985,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensBASE_ICMSSIMPLES: TFloatField
       FieldName = 'BASE_ICMSSIMPLES'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_ICMSSIMPLES: TFloatField
       FieldName = 'VLR_ICMSSIMPLES'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensCALCULARICMSSOBREIPI: TStringField
       FieldName = 'CALCULARICMSSOBREIPI'
@@ -2054,15 +2021,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensPERC_COMISSAO: TFloatField
       FieldName = 'PERC_COMISSAO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensQTDRESTANTE: TFloatField
       FieldName = 'QTDRESTANTE'
-      DisplayFormat = '0.0000'
     end
     object cdsNotaFiscal_ItensQTDDEVOLVIDA: TFloatField
       FieldName = 'QTDDEVOLVIDA'
-      DisplayFormat = '0.0000'
     end
     object cdsNotaFiscal_ItensSOMAR_TRANSF_ICMS: TStringField
       FieldName = 'SOMAR_TRANSF_ICMS'
@@ -2080,38 +2044,30 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensVLR_FRETE: TFloatField
       FieldName = 'VLR_FRETE'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_OUTRASDESPESAS: TFloatField
       FieldName = 'VLR_OUTRASDESPESAS'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_SEGURO: TFloatField
       FieldName = 'VLR_SEGURO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_ICMSFRETE: TFloatField
       FieldName = 'VLR_ICMSFRETE'
-      DisplayFormat = '0.00'
-    end
-    object cdsNotaFiscal_ItensBASE_ICMSSUBST: TFloatField
-      FieldName = 'BASE_ICMSSUBST'
-      DisplayFormat = '0.00'
-    end
-    object cdsNotaFiscal_ItensVLR_ICMSSUBST: TFloatField
-      FieldName = 'VLR_ICMSSUBST'
-      DisplayFormat = '0.00'
-    end
-    object cdsNotaFiscal_ItensVLR_IMPORTACAO: TFloatField
-      FieldName = 'VLR_IMPORTACAO'
-      DisplayFormat = '0.00'
-    end
-    object cdsNotaFiscal_ItensVLR_ADUANEIRA: TFloatField
-      FieldName = 'VLR_ADUANEIRA'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_ICMSOUTRASDESPESAS: TFloatField
       FieldName = 'VLR_ICMSOUTRASDESPESAS'
+    end
+    object cdsNotaFiscal_ItensBASE_ICMSSUBST: TFloatField
+      FieldName = 'BASE_ICMSSUBST'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMSSUBST: TFloatField
+      FieldName = 'VLR_ICMSSUBST'
+    end
+    object cdsNotaFiscal_ItensVLR_IMPORTACAO: TFloatField
+      FieldName = 'VLR_IMPORTACAO'
+    end
+    object cdsNotaFiscal_ItensVLR_ADUANEIRA: TFloatField
+      FieldName = 'VLR_ADUANEIRA'
     end
     object cdsNotaFiscal_ItensGERAR_ESTOQUE: TStringField
       FieldName = 'GERAR_ESTOQUE'
@@ -2163,11 +2119,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensQTD_ADEVOLVER: TFloatField
       FieldName = 'QTD_ADEVOLVER'
-      DisplayFormat = '0.0000'
     end
     object cdsNotaFiscal_ItensQTD_PACOTE: TFloatField
       FieldName = 'QTD_PACOTE'
-      DisplayFormat = '0.0000'
     end
     object cdsNotaFiscal_ItensITEM_DEVOL: TStringField
       FieldName = 'ITEM_DEVOL'
@@ -2179,12 +2133,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensID_OPERACAO_NOTA: TIntegerField
       FieldName = 'ID_OPERACAO_NOTA'
-    end
-    object cdsNotaFiscal_ItenssdsNotaFiscal_Ped: TDataSetField
-      FieldName = 'sdsNotaFiscal_Ped'
-    end
-    object cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida: TDataSetField
-      FieldName = 'sdsNotaFiscal_NDevolvida'
     end
     object cdsNotaFiscal_ItensFINALIDADE: TStringField
       FieldName = 'FINALIDADE'
@@ -2214,9 +2162,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'COD_BARRA'
       Size = 14
     end
-    object cdsNotaFiscal_ItenssdsNotaFiscal_Imp: TDataSetField
-      FieldName = 'sdsNotaFiscal_Imp'
-    end
     object cdsNotaFiscal_ItensIMP_OC_NOTA: TStringField
       FieldName = 'IMP_OC_NOTA'
       FixedChar = True
@@ -2233,7 +2178,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensQTD_NOTAATUAL: TFloatField
       FieldName = 'QTD_NOTAATUAL'
-      DisplayFormat = '0.0000'
     end
     object cdsNotaFiscal_ItensVLR_DUPLICATA: TFloatField
       FieldName = 'VLR_DUPLICATA'
@@ -2245,6 +2189,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object cdsNotaFiscal_ItensPERC_IMPORTACAO: TFloatField
       FieldName = 'PERC_IMPORTACAO'
     end
+    object cdsNotaFiscal_ItensCONTA_ORCAMENTO_ID: TIntegerField
+      FieldName = 'CONTA_ORCAMENTO_ID'
+    end
+    object cdsNotaFiscal_ItensCENTRO_CUSTO_ID: TIntegerField
+      FieldName = 'CENTRO_CUSTO_ID'
+    end
     object cdsNotaFiscal_ItensTIPO_REG: TStringField
       FieldName = 'TIPO_REG'
       Size = 3
@@ -2255,11 +2205,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object cdsNotaFiscal_ItensPERC_REDUCAO_ICMSSUBST: TFloatField
       FieldName = 'PERC_REDUCAO_ICMSSUBST'
     end
-    object cdsNotaFiscal_ItensVLR_TRIBUTOS: TFloatField
-      FieldName = 'VLR_TRIBUTOS'
-    end
     object cdsNotaFiscal_ItensID_MOVIMENTO: TIntegerField
       FieldName = 'ID_MOVIMENTO'
+    end
+    object cdsNotaFiscal_ItensVLR_TRIBUTOS: TFloatField
+      FieldName = 'VLR_TRIBUTOS'
     end
     object cdsNotaFiscal_ItensPOSSUI_VALE: TStringField
       FieldName = 'POSSUI_VALE'
@@ -2290,30 +2240,22 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO: TFloatField
       FieldName = 'PERC_ICMSSUBST_INTERNO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_ICMSSUBST_INTERNO: TFloatField
       FieldName = 'VLR_ICMSSUBST_INTERNO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensPERC_ICMSSUBST_PROPRIO: TFloatField
       FieldName = 'PERC_ICMSSUBST_PROPRIO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_ICMSSUBST_PROPRIO: TFloatField
       FieldName = 'VLR_ICMSSUBST_PROPRIO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensBASE_ICMSSUBST_PROPRIO: TFloatField
       FieldName = 'BASE_ICMSSUBST_PROPRIO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensGRAVACAO_COM_ERRO: TStringField
       FieldName = 'GRAVACAO_COM_ERRO'
       Size = 3
-    end
-    object cdsNotaFiscal_ItenssdsNotaFiscal_DrawBack: TDataSetField
-      FieldName = 'sdsNotaFiscal_DrawBack'
     end
     object cdsNotaFiscal_ItensVLR_ICMSDESONERADO: TFloatField
       FieldName = 'VLR_ICMSDESONERADO'
@@ -2323,9 +2265,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensVLR_ICMSOPERACAO: TFloatField
       FieldName = 'VLR_ICMSOPERACAO'
-    end
-    object cdsNotaFiscal_ItenssdsNotaFiscal_Fut: TDataSetField
-      FieldName = 'sdsNotaFiscal_Fut'
     end
     object cdsNotaFiscal_ItensID_PEDIDO_FUT: TIntegerField
       FieldName = 'ID_PEDIDO_FUT'
@@ -2344,9 +2283,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensNUM_OSERVICO: TIntegerField
       FieldName = 'NUM_OSERVICO'
-    end
-    object cdsNotaFiscal_ItenssdsNotaFiscal_OS: TDataSetField
-      FieldName = 'sdsNotaFiscal_OS'
     end
     object cdsNotaFiscal_ItensVERSAO_TRIBUTO: TStringField
       FieldName = 'VERSAO_TRIBUTO'
@@ -2410,27 +2346,21 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensPERC_ICMS_FCP: TFloatField
       FieldName = 'PERC_ICMS_FCP'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensPERC_ICMS_UF_DEST: TFloatField
       FieldName = 'PERC_ICMS_UF_DEST'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensPERC_ICMS_PARTILHA: TFloatField
       FieldName = 'PERC_ICMS_PARTILHA'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_ICMS_FCP: TFloatField
       FieldName = 'VLR_ICMS_FCP'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_ICMS_UF_DEST: TFloatField
       FieldName = 'VLR_ICMS_UF_DEST'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensVLR_ICMS_UF_REMET: TFloatField
       FieldName = 'VLR_ICMS_UF_REMET'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensPERC_ICMS_INTER: TFloatField
       FieldName = 'PERC_ICMS_INTER'
@@ -2442,9 +2372,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensVLR_OUTROS: TFloatField
       FieldName = 'VLR_OUTROS'
-    end
-    object cdsNotaFiscal_ItenssdsNotaFiscal_Tam: TDataSetField
-      FieldName = 'sdsNotaFiscal_Tam'
     end
     object cdsNotaFiscal_ItensID_MOVESTOQUE_PED: TIntegerField
       FieldName = 'ID_MOVESTOQUE_PED'
@@ -2492,11 +2419,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL: TFloatField
       FieldName = 'PRECO_CUSTO_TOTAL'
-      DisplayFormat = '0.000##'
     end
     object cdsNotaFiscal_ItensVLR_AJUSTE_CUSTO: TFloatField
       FieldName = 'VLR_AJUSTE_CUSTO'
-      DisplayFormat = '0.00'
     end
     object cdsNotaFiscal_ItensTIPO_ESCALA: TStringField
       FieldName = 'TIPO_ESCALA'
@@ -2530,9 +2455,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'REC_COPIADO'
       Size = 1
     end
-    object cdsNotaFiscal_ItenssdsNotaFiscal_Copia: TDataSetField
-      FieldName = 'sdsNotaFiscal_Copia'
-    end
     object cdsNotaFiscal_ItensVLR_IPI_DEVOL: TFloatField
       FieldName = 'VLR_IPI_DEVOL'
     end
@@ -2551,11 +2473,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object cdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField
       FieldName = 'VLR_ICMSSUBST_RET'
     end
-    object cdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
-      FieldName = 'PERC_ICMS_RED'
-    end
     object cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
       FieldName = 'PERC_BASE_ICMSSUBT_RED'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
+      FieldName = 'PERC_ICMS_RED'
     end
     object cdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField
       FieldName = 'PERC_BASE_RED_EFET'
@@ -2571,23 +2493,41 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensLARGURA: TFloatField
       FieldName = 'LARGURA'
-      DisplayFormat = '##0.00'
-      EditFormat = '##0.00'
     end
     object cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField
       FieldName = 'COMPRIMENTO'
-      DisplayFormat = '##0.00'
-      EditFormat = '##0.00'
     end
     object cdsNotaFiscal_ItensESPESSURA: TFloatField
       FieldName = 'ESPESSURA'
-      DisplayFormat = '##0.00'
-      EditFormat = '##0.00'
     end
     object cdsNotaFiscal_ItensDRAWBACK: TStringField
       FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
+    end
+    object cdsNotaFiscal_ItenssdsNotaFiscal_Copia: TDataSetField
+      FieldName = 'sdsNotaFiscal_Copia'
+    end
+    object cdsNotaFiscal_ItenssdsNotaFiscal_Tam: TDataSetField
+      FieldName = 'sdsNotaFiscal_Tam'
+    end
+    object cdsNotaFiscal_ItenssdsNotaFiscal_OS: TDataSetField
+      FieldName = 'sdsNotaFiscal_OS'
+    end
+    object cdsNotaFiscal_ItenssdsNotaFiscal_Fut: TDataSetField
+      FieldName = 'sdsNotaFiscal_Fut'
+    end
+    object cdsNotaFiscal_ItenssdsNotaFiscal_DrawBack: TDataSetField
+      FieldName = 'sdsNotaFiscal_DrawBack'
+    end
+    object cdsNotaFiscal_ItenssdsNotaFiscal_Imp: TDataSetField
+      FieldName = 'sdsNotaFiscal_Imp'
+    end
+    object cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida: TDataSetField
+      FieldName = 'sdsNotaFiscal_NDevolvida'
+    end
+    object cdsNotaFiscal_ItenssdsNotaFiscal_Ped: TDataSetField
+      FieldName = 'sdsNotaFiscal_Ped'
     end
   end
   object dsNotaFiscal_Itens: TDataSource
@@ -3131,7 +3071,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID;ITEM'
     Params = <>
     Left = 59
-    Top = 525
+    Top = 524
     object cdsNotaFiscal_RefID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3603,7 +3543,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     DataSetField = cdsNotaFiscal_ItenssdsNotaFiscal_Imp
     IndexFieldNames = 'ID;ITEM;ITEM_IMP'
     Params = <>
-    Left = 51
+    Left = 52
     Top = 184
     object cdsNotaFiscal_ImpID: TIntegerField
       DisplayLabel = 'ID Nota'
@@ -4117,7 +4057,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 601
+    Left = 600
     Top = 132
   end
   object dspTransportadora: TDataSetProvider
@@ -5151,7 +5091,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 601
-    Top = 358
+    Top = 356
   end
   object dspContas: TDataSetProvider
     DataSet = sdsContas
@@ -5212,7 +5152,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 601
+    Left = 602
     Top = 405
   end
   object dspProduto: TDataSetProvider
@@ -7959,7 +7899,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 417
+    Left = 416
     Top = 198
   end
   object dspPedido: TDataSetProvider
@@ -8893,7 +8833,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 203
-    Top = 573
+    Top = 572
   end
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
@@ -11562,8 +11502,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 937
-    Top = 497
+    Left = 939
+    Top = 498
   end
   object dspDesoneracao: TDataSetProvider
     DataSet = sdsDesoneracao
@@ -12233,7 +12173,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 217
+    Left = 216
     Top = 297
     object sdsNotaFiscal_ProdPrincipalID: TIntegerField
       FieldName = 'ID'
@@ -12267,7 +12207,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID;ITEM_ORIGINAL'
     Params = <>
     ProviderName = 'dspNotaFiscal_ProdPrincipal'
-    Left = 265
+    Left = 264
     Top = 297
     object cdsNotaFiscal_ProdPrincipalID: TIntegerField
       FieldName = 'ID'

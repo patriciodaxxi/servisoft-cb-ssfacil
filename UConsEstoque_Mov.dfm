@@ -421,7 +421,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
     Top = 130
     Width = 941
     Height = 388
-    ActivePage = TS_Produto_Det
+    ActivePage = TS_Reserva
     ActivePageDefault = TS_Produto_Det
     Align = alClient
     BackgroundColor = clGray
@@ -434,7 +434,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 3
     TabOrder = 1
     TextColors.Selected = clBlue
     OnChange = RzPageControl1Change
@@ -881,7 +881,7 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
           Visible = False
         end
       end
-      object DBGrid1: TDBGrid
+      object DBGrid11: TDBGrid
         Left = 0
         Top = 173
         Width = 937
@@ -1478,6 +1478,14 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
           ParentFont = False
+        end
+        object NxButton2: TNxButton
+          Left = 662
+          Top = 11
+          Width = 75
+          Caption = 'Calcular'
+          TabOrder = 0
+          OnClick = NxButton2Click
         end
       end
       object Panel4: TPanel

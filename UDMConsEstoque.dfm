@@ -24,71 +24,73 @@ object DMConsEstoque: TDMConsEstoque
       'ECT USA_TAM_INDIVIDUAL FROM PARAMETROS_PROD) = '#39'S'#39' THEN coalesce' +
       '(PRO.tamanho,'#39#39')'#13#10'        when (PT.TAMANHO is null) then '#39#39#13#10'   ' +
       '     WHEN (PT.TAMANHO = '#39#39') THEN '#39'1'#39#13#10'        WHEN (PT.TAMANHO <' +
-      '> '#39#39') THEN PT.TAMANHO'#13#10'      end as TAMPRODUTO,'#13#10'  (SELECT EST.Q' +
-      'TD FROM ESTOQUE_ATUAL EST'#13#10'      WHERE EST.FILIAL = :FILIAL'#13#10'   ' +
-      '     AND EST.ID_PRODUTO = PRO.ID'#13#10'        AND EST.ID_COR = case'#13 +
-      #10'                          when (COMB.ID is null) then '#39'0'#39#13#10'    ' +
-      '                      ELSE COMB.ID'#13#10'                         end' +
-      #13#10'        AND EST.TAMANHO ='#13#10'           case'#13#10'             when ' +
-      '(PT.TAMANHO is null) then '#39#39#13#10'             WHEN (PT.TAMANHO = '#39#39 +
-      ') THEN '#39'1'#39#13#10'             WHEN (PT.TAMANHO <> '#39#39') THEN PT.TAMANHO' +
-      #13#10'           end'#13#10'       AND EST.ID_LOCAL_ESTOQUE = EA.id_local_' +
-      'estoque'#13#10'       AND EST.num_lote_controle = EA.num_lote_controle' +
-      #13#10'           ) QTD,'#13#10#13#10'  (SELECT SUM(E2.QTD) QTDGERAL FROM ESTOQ' +
-      'UE_ATUAL E2'#13#10'      WHERE E2.ID_PRODUTO = PRO.ID'#13#10'        AND E2.' +
-      'ID_COR = case'#13#10'                         when (COMB.ID is null) t' +
-      'hen '#39'0'#39#13#10'                         ELSE COMB.ID'#13#10'                ' +
-      '        end'#13#10'        AND E2.TAMANHO ='#13#10'          case'#13#10'         ' +
-      '    when (PT.TAMANHO is null) then '#39#39#13#10'             WHEN (PT.TAM' +
-      'ANHO = '#39#39') THEN '#39'1'#39#13#10'             WHEN (PT.TAMANHO <> '#39#39') THEN P' +
-      'T.TAMANHO'#13#10'           end'#13#10'        ) QTDGERAL,'#13#10'  (SELECT ER.QTD' +
-      ' FROM ESTOQUE_RES ER'#13#10'      WHERE ((ER.FILIAL = :FILIAL) or ( (s' +
-      'elect USAR_FILIAL_GERAR_RES from parametros_est where id = 1) = ' +
-      #39'S'#39'))'#13#10'        AND ER.ID_PRODUTO = PRO.ID'#13#10'        AND ER.ID_COR' +
-      ' = case'#13#10'                          when (COMB.ID is null) then '#39 +
-      '0'#39#13#10'                          ELSE COMB.ID'#13#10'                    ' +
-      '     end'#13#10'        AND ER.TAMANHO ='#13#10'           case'#13#10'           ' +
-      '  when (PT.TAMANHO is null) then '#39#39#13#10'             WHEN (PT.TAMAN' +
-      'HO = '#39#39') THEN '#39'1'#39#13#10'             WHEN (PT.TAMANHO <> '#39#39') THEN PT.' +
-      'TAMANHO'#13#10'           end'#13#10'           ) QTD_RESERVA,'#13#10'   (select s' +
-      'um(v.qtd_saldo) QTD_SALDO_OC'#13#10'       from vestoque_oc v'#13#10'       ' +
-      'where v.id_produto = PRO.ID'#13#10'        and v.id_cor = case'#13#10'      ' +
-      '                   when (COMB.ID is null) then '#39'0'#39#13#10'            ' +
-      '             ELSE COMB.ID'#13#10'                        end'#13#10'       A' +
-      'ND V.tamanho = case'#13#10'             when (PT.TAMANHO is null) then' +
-      ' '#39#39#13#10'             WHEN (PT.TAMANHO = '#39#39') THEN '#39'1'#39#13#10'             ' +
-      'WHEN (PT.TAMANHO <> '#39#39') THEN PT.TAMANHO'#13#10'           end) QTD_SAL' +
-      'DO_OC'#13#10#13#10'FROM PRODUTO '#13#10'PRO LEFT JOIN PRODUTO_TAM PT ON PRO.ID =' +
-      ' PT.ID'#13#10'LEFT JOIN MARCA ON PRO.ID_MARCA = MARCA.ID'#13#10'LEFT JOIN GR' +
-      'UPO ON PRO.ID_GRUPO = GRUPO.ID'#13#10'LEFT JOIN PRODUTO_COMB PC ON PRO' +
-      '.ID = PC.ID'#13#10'LEFT JOIN COMBINACAO COMB ON (PC.ID_COR_COMBINACAO ' +
-      '= COMB.id)'#13#10#13#10'LEFT JOIN ESTOQUE_ATUAL EA  ON EA.FILIAL = :FILIAL' +
-      #13#10' AND EA.ID_PRODUTO = PRO.ID'#13#10' AND EA.ID_COR = case'#13#10'     when ' +
-      '(EA.id_cor is null) then '#39'0'#39#13#10'      ELSE EA.id_cor'#13#10'     end'#13#10'  ' +
-      'AND EA.TAMANHO ='#13#10'     case'#13#10'      when (PT.TAMANHO is null) the' +
-      'n '#39#39#13#10'      WHEN (PT.TAMANHO = '#39#39') THEN '#39'1'#39#13#10'      WHEN (PT.TAMA' +
-      'NHO <> '#39#39') THEN PT.TAMANHO'#13#10'     end'#13#10'LEFT JOIN LOCAL_ESTOQUE LE' +
-      'ST ON EA.id_local_estoque = LEST.id'#13#10'WHERE PRO.ESTOQUE = '#39'S'#39#13#10'  ' +
-      'AND PRO.TIPO_REG = :TIPO_REG'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10') AUX'#13#10#13#10
+      '> '#39#39') THEN PT.TAMANHO'#13#10'      end as TAMPRODUTO,'#13#10'  coalesce((SEL' +
+      'ECT COALESCE(EST.QTD,0) FROM ESTOQUE_ATUAL EST'#13#10'      WHERE EST.' +
+      'FILIAL = :FILIAL'#13#10'        AND EST.ID_PRODUTO = PRO.ID'#13#10'        A' +
+      'ND EST.ID_COR = case'#13#10'                          when (COMB.ID is' +
+      ' null) then '#39'0'#39#13#10'                          ELSE COMB.ID'#13#10'       ' +
+      '                  end'#13#10'        AND EST.TAMANHO ='#13#10'           cas' +
+      'e'#13#10'             when (PT.TAMANHO is null) then '#39#39#13#10'             ' +
+      'WHEN (PT.TAMANHO = '#39#39') THEN '#39'1'#39#13#10'             WHEN (PT.TAMANHO <' +
+      '> '#39#39') THEN PT.TAMANHO'#13#10'           end'#13#10'       AND EST.ID_LOCAL_E' +
+      'STOQUE = EA.id_local_estoque'#13#10'       AND EST.num_lote_controle =' +
+      ' EA.num_lote_controle'#13#10'           ) ,0) QTD,'#13#10#13#10'  coalesce((SELE' +
+      'CT SUM(COALESCE(E2.QTD,0)) QTDGERAL FROM ESTOQUE_ATUAL E2'#13#10'     ' +
+      ' WHERE E2.ID_PRODUTO = PRO.ID'#13#10'        AND E2.ID_COR = case'#13#10'   ' +
+      '                      when (COMB.ID is null) then '#39'0'#39#13#10'         ' +
+      '                ELSE COMB.ID'#13#10'                        end'#13#10'     ' +
+      '   AND E2.TAMANHO ='#13#10'          case'#13#10'             when (PT.TAMAN' +
+      'HO is null) then '#39#39#13#10'             WHEN (PT.TAMANHO = '#39#39') THEN '#39'1' +
+      #39#13#10'             WHEN (PT.TAMANHO <> '#39#39') THEN PT.TAMANHO'#13#10'       ' +
+      '    end'#13#10'        ),0) QTDGERAL,'#13#10'  coalesce((SELECT COALESCE(ER.' +
+      'QTD,0) FROM ESTOQUE_RES ER'#13#10'      WHERE ((ER.FILIAL = :FILIAL) o' +
+      'r ( (select USAR_FILIAL_GERAR_RES from parametros_est where id =' +
+      ' 1) = '#39'S'#39'))'#13#10'        AND ER.ID_PRODUTO = PRO.ID'#13#10'        AND ER.' +
+      'ID_COR = case'#13#10'                          when (COMB.ID is null) ' +
+      'then '#39'0'#39#13#10'                          ELSE COMB.ID'#13#10'              ' +
+      '           end'#13#10'        AND ER.TAMANHO ='#13#10'           case'#13#10'     ' +
+      '        when (PT.TAMANHO is null) then '#39#39#13#10'             WHEN (PT' +
+      '.TAMANHO = '#39#39') THEN '#39'1'#39#13#10'             WHEN (PT.TAMANHO <> '#39#39') TH' +
+      'EN PT.TAMANHO'#13#10'           end'#13#10'           ),0) QTD_RESERVA,'#13#10'   ' +
+      'coalesce((select sum(COALESCE(v.qtd_saldo,0)) QTD_SALDO_OC'#13#10'    ' +
+      '   from vestoque_oc v'#13#10'       where v.id_produto = PRO.ID'#13#10'     ' +
+      '   and v.id_cor = case'#13#10'                         when (COMB.ID i' +
+      's null) then '#39'0'#39#13#10'                         ELSE COMB.ID'#13#10'       ' +
+      '                 end'#13#10'       AND V.tamanho = case'#13#10'             ' +
+      'when (PT.TAMANHO is null) then '#39#39#13#10'             WHEN (PT.TAMANHO' +
+      ' = '#39#39') THEN '#39'1'#39#13#10'             WHEN (PT.TAMANHO <> '#39#39') THEN PT.TA' +
+      'MANHO'#13#10'           end),0) QTD_SALDO_OC'#13#10#13#10'FROM PRODUTO '#13#10'PRO LEF' +
+      'T JOIN PRODUTO_TAM PT ON PRO.ID = PT.ID'#13#10'LEFT JOIN MARCA ON PRO.' +
+      'ID_MARCA = MARCA.ID'#13#10'LEFT JOIN GRUPO ON PRO.ID_GRUPO = GRUPO.ID'#13 +
+      #10'LEFT JOIN PRODUTO_COMB PC ON PRO.ID = PC.ID'#13#10'LEFT JOIN COMBINAC' +
+      'AO COMB ON (PC.ID_COR_COMBINACAO = COMB.id)'#13#10#13#10'LEFT JOIN ESTOQUE' +
+      '_ATUAL EA  ON EA.FILIAL = :FILIAL'#13#10' AND EA.ID_PRODUTO = PRO.ID'#13#10 +
+      ' AND EA.ID_COR = case'#13#10'     when (EA.id_cor is null) then '#39'0'#39#13#10' ' +
+      '     ELSE EA.id_cor'#13#10'     end'#13#10'  AND EA.TAMANHO ='#13#10'     case'#13#10'  ' +
+      '    when (PT.TAMANHO is null) then '#39#39#13#10'      WHEN (PT.TAMANHO = ' +
+      #39#39') THEN '#39'1'#39#13#10'      WHEN (PT.TAMANHO <> '#39#39') THEN PT.TAMANHO'#13#10'   ' +
+      '  end'#13#10'LEFT JOIN LOCAL_ESTOQUE LEST ON EA.id_local_estoque = LES' +
+      'T.id'#13#10'WHERE PRO.ESTOQUE = '#39'S'#39#13#10'  AND PRO.TIPO_REG = :TIPO_REG'#13#10' ' +
+      ' AND PRO.INATIVO = '#39'N'#39#13#10') AUX'#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftString
+        DataType = ftUnknown
         Name = 'TIPO_REG'
         ParamType = ptInput
       end>
@@ -108,7 +110,7 @@ object DMConsEstoque: TDMConsEstoque
     ProviderName = 'dspEstoque'
     OnCalcFields = cdsEstoqueCalcFields
     Left = 152
-    Top = 6
+    Top = 7
     object cdsEstoqueID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2815,7 +2817,7 @@ object DMConsEstoque: TDMConsEstoque
       '')
     SQLConnection = dmDatabase.scoDados
     Left = 880
-    Top = 80
+    Top = 79
     object qParametros_GeralID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4472,5 +4474,21 @@ object DMConsEstoque: TDMConsEstoque
     BCDToCurrency = False
     Left = 896
     Top = 552
+  end
+  object qParametros_NTE: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_CENTRO_CUSTO'
+      'FROM PARAMETROS_NTE'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 903
+    Top = 187
+    object qParametros_NTEUSA_CENTRO_CUSTO: TStringField
+      FieldName = 'USA_CENTRO_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

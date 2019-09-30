@@ -78,7 +78,10 @@ begin
     exit;
   end;
   if fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.State in [dsEdit,dsInsert] then
+  begin
     fDMCadNotaFiscal.cdsNotaFiscal_DrawBack.Post;
+    fDMCadNotaFiscal.vAlt_ExtExport := True;
+  end;
   Close;
 end;
 

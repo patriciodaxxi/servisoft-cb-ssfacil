@@ -173,6 +173,8 @@ begin
       SMDBGrid1.Columns[i].Visible := (fDMConsEstoque.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'NUM_LOTE_CONTROLE') then
       SMDBGrid1.Columns[i].Visible := (fDMConsEstoque.qParametros_ProdUSA_LOTE_PROD.AsString = 'S');
+    if (SMDBGrid1.Columns[i].FieldName = 'QTDGERAL') then
+      SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S') and (fDMConsEstoque.cdsFilial.RecordCount > 1));
   end;
 
   Label8.Visible        := (fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S');
@@ -421,7 +423,8 @@ begin
     end;
     vId := fDMConsEstoque.cdsEstoqueID.AsInteger;
     vIndexName  := fDMConsEstoque.cdsEstoque.IndexFieldNames;
-    vIndexValue := fDMConsEstoque.cdsEstoque.FieldByName(vIndexName).AsString;
+    //Ver com Russimar 
+    //vIndexValue := fDMConsEstoque.cdsEstoque.FieldByName(vIndexName).AsString;
     ceIDProduto.AsInteger := vId;
     ffrmConsEstoque_Mov   := TfrmConsEstoque_Mov.Create(self);
     vControleExterno      := True;

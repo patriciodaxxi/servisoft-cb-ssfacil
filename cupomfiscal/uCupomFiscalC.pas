@@ -1191,6 +1191,46 @@ begin
   end
   else
   begin
+    if fDmCupomFiscal.cdsCupomParametrosEXIGE_CAIXA_ABERTO.AsString = 'S' then
+    begin
+      fDmParametros.qCaixaAberto.Close;
+      fDmParametros.qCaixaAberto.ParamByName('T1').AsInteger := vTerminal;
+      fDmParametros.qCaixaAberto.ParamByName('D1').AsDate    := Date;
+      fDmParametros.qCaixaAberto.Open;
+      if fDmParametros.qCaixaAberto.IsEmpty then
+      begin
+        ShowMessage('Não existe caixa aberto para efetuar venda!');
+        fDmParametros.qCaixaAberto.Close;
+        fDmCupomFiscal.vSair_Tela := True;
+        Exit;
+      end
+      else
+      if (fDmParametros.qCaixaAbertoDATA.AsDateTime < Date) then
+      begin
+        if (fDmParametros.qCaixaAbertoDATA2.AsDateTime > fDmParametros.qCaixaAbertoDATA.AsDateTime) then
+        begin
+          MessageDlg('*** Caixa aberto com data: ' + fDmParametros.qCaixaAbertoDATA.AsString +
+                     ', mas já existe caixa com data superior pendente de conferência ou já encerrado!' +
+                     #13 + ' FAVOR VERIFICAR!' , mtInformation, [mbOk], 0);
+          fDmParametros.qCaixaAberto.Close;
+          fDmCupomFiscal.vSair_Tela := True;
+          Exit;
+        end;
+        if fDmCupomFiscal.vID_Fechamento <> fDmParametros.qCaixaAbertoID.AsInteger then
+        begin
+          if (MessageDlg('Caixa aberto com data de ' + fDmParametros.qCaixaAbertoDATA.AsString +
+                         ', usar este mesmo caixa?',mtConfirmation,[mbYes,mbNo],0) = mrNo) then
+          begin
+            fDmParametros.qCaixaAberto.Close;
+            fDmCupomFiscal.vSair_Tela := True;
+            Exit;
+          end
+        end;
+      end;
+      fDmCupomFiscal.vID_Fechamento := fDmParametros.qCaixaAbertoID.AsInteger;
+      fDmParametros.qCaixaAberto.Close;
+    end;
+
     vEdicao := True;
     fDmCupomFiscal.cdsCupomFiscal.Edit;
     vFilial := fDmCupomFiscal.cdsCupomFiscalFILIAL.AsInteger;
@@ -1222,6 +1262,24 @@ begin
     fDmCupomFiscal.cdsCupomFiscalFINANCEIRO_OK.AsString := vFinanceiroOK;
     fDmCupomFiscal.cdsCupomFiscal.Post;
     fDmCupomFiscal.cdsCupomFiscal.ApplyUpdates(0);
+
+    //enviar cupom originado de comanda em 27/09/2019
+    if (fDmCupomFiscal.cdsParametrosUSA_NFCE.AsString = 'S') and (vIDPosicao > 0) and not(fDmCupomFiscal.vCancelar)  then
+    begin
+      try
+        if fDmCupomFiscal.vEncerrado then
+        begin
+          vPosicionar := False;
+          prc_Posiciona_CupomFiscal(vIDPosicao);
+          if fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'NFC' then
+            btnEnvioClick(fCupomFiscalC);
+        end
+      except
+        on E: Exception do
+          ShowMessage('Não foi possível enviar o CUPOM!' + #13 + E.Message + '! Clique para continuar!');
+      end;
+      vPosicionar := True;
+    end;
   end;
 //*************
 

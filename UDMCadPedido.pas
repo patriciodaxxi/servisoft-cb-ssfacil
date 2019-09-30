@@ -3495,6 +3495,7 @@ type
     cdsPedidoImpID_VENDEDOR_INT: TIntegerField;
     cdsPedidoImpNOME_VENDEDOR_INT: TStringField;
     cdsTriCCustoCEI: TStringField;
+    cdsPedidoImp_ItensMOSTRAR_GROSA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
