@@ -218,10 +218,8 @@ type
     cdsProduto_CombPRECO_CUSTO: TFloatField;
     cdsProduto_CombPRECO_VENDA: TFloatField;
     cdsProduto_CombPERC_MARGEMLUCRO: TFloatField;
-    cdsProduto_CombsdsProduto_Comb_Mat: TDataSetField;
     cdsProduto_CombID_COR_COMBINACAO: TIntegerField;
     dsProduto_Comb: TDataSource;
-    dsProduto_Comb_Mestre: TDataSource;
     sdsProduto_Comb_Mat: TSQLDataSet;
     sdsProduto_Comb_MatID: TIntegerField;
     sdsProduto_Comb_MatITEM: TIntegerField;
@@ -374,6 +372,7 @@ type
     cdsProdutoNOME_MODELO: TStringField;
     sdsProdutoID_LINHA: TIntegerField;
     cdsProdutoID_LINHA: TIntegerField;
+    dspProduto_Comb_Mat: TDataSetProvider;
     procedure dspProdutoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
       UpdateKind: TUpdateKind; var Response: TResolverResponse);

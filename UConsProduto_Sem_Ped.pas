@@ -16,8 +16,6 @@ type
     btnImprimir: TNxButton;
     Panel2: TPanel;
     Label1: TLabel;
-    Label2: TLabel;
-    DateEdit2: TDateEdit;
     RzPageControl1: TRzPageControl;
     TS_Produto: TRzTabSheet;
     TS_Clientes: TRzTabSheet;
@@ -26,6 +24,8 @@ type
     Panel3: TPanel;
     btnInativar: TNxButton;
     UCControls1: TUCControls;
+    Label2: TLabel;
+    ComboBox1: TComboBox;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -77,7 +77,7 @@ begin
   fDMConsPedido.cdsProduto_Sem_Venda.Close;
   Refresh;
   fDMConsPedido.sdsProduto_Sem_Venda.ParamByName('Data1').AsDate := DateEdit1.Date;
-  fDMConsPedido.sdsProduto_Sem_Venda.ParamByName('Data2').AsDate := DateEdit2.Date;
+  //fDMConsPedido.sdsProduto_Sem_Venda.ParamByName('Data2').AsDate := DateEdit2.Date;
   fDMConsPedido.cdsProduto_Sem_Venda.Open;
 end;
 
@@ -91,6 +91,7 @@ procedure TfrmConsProduto_Sem_Ped.FormShow(Sender: TObject);
 begin
   fDMConsPedido := TDMConsPedido.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMConsPedido);
+  Label5.Caption := 'Data início sem vendas, até ' + DateToStr(Date) + ':';
 end;
 
 procedure TfrmConsProduto_Sem_Ped.SMDBGrid1TitleClick(Column: TColumn);
@@ -125,13 +126,34 @@ begin
 end;
 
 procedure TfrmConsProduto_Sem_Ped.prc_Consultar_Cli;
+var
+  vComando : String;
 begin
   Panel2.Visible := True;
   Panel2.Refresh;
   fDMConsPedido.cdsCliente_Sem_Venda.Close;
   Refresh;
-  fDMConsPedido.sdsCliente_Sem_Venda.ParamByName('Data1').AsDate := DateEdit1.Date;
-  fDMConsPedido.sdsCliente_Sem_Venda.ParamByName('Data2').AsDate := DateEdit2.Date;
+  if ComboBox1.ItemIndex = 0 then
+  begin
+    vComando := 'SELECT V.* FROM vult_pedido_pessoa V '
+              + 'WHERE not exists (select 1 from vpedido_item vP '
+              + '                  where vp.dtemissao >= :DTEMISSAO '
+              + '                    and vp.id_cliente = V.codigo '
+              + '                    and vp.tipo_reg = ''P'')';
+  end
+  else
+  begin
+    vComando := 'SELECT V.* FROM vult_nota_pessoa V '
+              + 'WHERE not exists (select 1 from notafiscal vP '
+              + '                  where vp.dtemissao >= :DTEMISSAO '
+              + '                   and vp.id_cliente = V.codigo '
+              + '                   and vp.tipo_reg = ''NTS'''
+              + '                   and vp.tipo_nota = ''S'''
+              + '                   and vp.cancelada = ''N'''
+              + '                   and vp.nfedenegada = ''N'')';
+  end;
+  fDMConsPedido.sdsCliente_Sem_Venda.CommandText := vComando;
+  fDMConsPedido.sdsCliente_Sem_Venda.ParamByName('DTEMISSAO').AsDate := DateEdit1.Date;
   fDMConsPedido.cdsCliente_Sem_Venda.Open;
 end;
 

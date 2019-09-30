@@ -104,6 +104,16 @@ begin
     MessageDlg(fDMCadCor.vMsgCor, mtError, [mbOk], 0);
     exit;
   end;
+  fDMCadCor.qVerifica_Nome.Close;
+  fDMCadCor.qVerifica_Nome.ParamByName('id').AsInteger := fDMCadCor.cdsCorID.AsInteger;
+  fDMCadCor.qVerifica_Nome.ParamByName('nome').AsString := fDMCadCor.cdsCorNOME.AsString;
+  fDMCadCor.qVerifica_Nome.Open;
+  if not fDMCadCor.qVerifica_Nome.IsEmpty then
+  begin
+    MessageDlg('Nome já existe no ID: ' + fDMCadCor.qVerifica_NomeID.AsString , mtError, [mbOk], 0);
+    exit;
+  end;
+
   TS_Consulta.TabEnabled    := not(TS_Consulta.TabEnabled);
   RzPageControl1.ActivePage := TS_Consulta;
   pnlCadastro.Enabled       := not(pnlCadastro.Enabled);

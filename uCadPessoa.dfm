@@ -1421,7 +1421,7 @@ object frmCadPessoa: TfrmCadPessoa
         Top = 30
         Width = 1079
         Height = 627
-        ActivePage = TS_Pessoa_Dados
+        ActivePage = TS_Pessoa_Financeiro
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1429,7 +1429,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19

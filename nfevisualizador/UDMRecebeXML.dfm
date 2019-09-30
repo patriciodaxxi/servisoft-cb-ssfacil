@@ -1,10 +1,8 @@
 object DMRecebeXML: TDMRecebeXML
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 12
-  Top = 23
-  Height = 744
-  Width = 1382
+  Height = 728
+  Width = 1366
   object sdsCFOP: TSQLDataSet
     NoMetadata = True
     GetMetadata = False

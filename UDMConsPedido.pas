@@ -860,14 +860,15 @@ type
     dspCliente_Sem_Venda: TDataSetProvider;
     cdsCliente_Sem_Venda: TClientDataSet;
     dsCliente_Sem_Venda: TDataSource;
+    frxCliente_Sem_Venda: TfrxDBDataset;
+    cdsPedido_RefCOMPLEMENTO_NOME: TStringField;
     cdsCliente_Sem_VendaCODIGO: TIntegerField;
     cdsCliente_Sem_VendaNOME: TStringField;
     cdsCliente_Sem_VendaCNPJ_CPF: TStringField;
     cdsCliente_Sem_VendaCIDADE: TStringField;
     cdsCliente_Sem_VendaUF: TStringField;
-    cdsCliente_Sem_VendaDTEMISSAO: TDateField;
-    frxCliente_Sem_Venda: TfrxDBDataset;
-    cdsPedido_RefCOMPLEMENTO_NOME: TStringField;
+    cdsCliente_Sem_VendaDTULT_EMISSAO: TDateField;
+    cdsCliente_Sem_VendaVLR_ULT_COMPRA: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConsumoNewRecord(DataSet: TDataSet);
     procedure cdsPedido_MatCalcFields(DataSet: TDataSet);
@@ -902,6 +903,7 @@ type
     ctPedFaturas: String;
     ctTipoMat : String;
     vDataIni, vDataFim : String;
+    ctCliente_Sem_Venda : String;
 
     ctPedido_Nota, ctPedido_Vale, ctBaixa_Pedido, ctPedido_Fut: String;
     ctPedidoTipo : String;
@@ -940,6 +942,7 @@ begin
   ctPedido_Item2    := sdsPedido_Item2.CommandText;
   ctLiberado        := sdsLiberado.CommandText;
   ctConsPedido_Proc := sdsConsPedido_Proc.CommandText;
+  ctCliente_Sem_Venda := sdsCliente_Sem_Venda.CommandText;
 
   cdsParametros_Etiq.Close;
   sdsParametros_Etiq.ParamByName('ID').AsInteger := 1;

@@ -2862,6 +2862,7 @@ end;
 procedure TfrmCadProduto.btnCopiarProdutoClick(Sender: TObject);
 var
   x, x2: Integer;
+  Form : TForm;
 begin
   if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) then
     exit;
@@ -2869,22 +2870,32 @@ begin
   if MessageDlg('Deseja copiar o produto selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
 
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
+   
   fDMCopiarProduto := TDMCopiarProduto.Create(Self);
   fDMCopiarProduto.prc_Localizar(fDMCadProduto.cdsProduto_ConsultaID.AsInteger);
   if fDMCopiarProduto.cdsProduto.IsEmpty then
   begin
     MessageDlg('Produto não encontrado!', mtError, [mbOk], 0);
     FreeAndNil(fDMCopiarProduto);
+    FreeAndNil(Form);
     exit;
   end;
 
   if not fnc_Filial then
+  begin
+    FreeAndNil(Form);
     exit;
+  end;
 
   try
     fDMCadProduto.prc_Inserir;
     if not(fDMCadProduto.cdsProduto.State in [dsEdit,dsInsert]) then
+    begin
+      FreeAndNil(Form);
       exit;
+    end;
 
     for x := 0 to (fDMCopiarProduto.cdsProduto.FieldCount - 1) do
     begin
@@ -2962,15 +2973,21 @@ begin
             fDMCadProduto.cdsProduto_Comb.FieldByName(fDMCopiarProduto.cdsProduto_Comb.Fields[x].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Comb.Fields[x].Value;
         end;
         fDMCadProduto.cdsProduto_Comb.Post;
-        
-        fDMCopiarProduto.cdsProduto_Comb_Mat.Last;
+
+        fDMCopiarProduto.cdsProduto_Comb_Mat.Close;
+        fDMCopiarProduto.sdsProduto_Comb_Mat.ParamByName('ID').AsInteger   := fDMCopiarProduto.cdsProduto_CombID.AsInteger;
+        fDMCopiarProduto.sdsProduto_Comb_Mat.ParamByName('ITEM').AsInteger := fDMCopiarProduto.cdsProduto_CombITEM.AsInteger;
+        fDMCopiarProduto.cdsProduto_Comb_Mat.Open;
         fDMCopiarProduto.cdsProduto_Comb_Mat.First;
         while not fDMCopiarProduto.cdsProduto_Comb_Mat.Eof do
         begin
           fDMCadProduto.cdsProduto_Comb_Mat.Insert;
           fDMCadProduto.cdsProduto_Comb_MatID.AsInteger := fDMCadProduto.cdsProdutoID.AsInteger;
-          if (fDMCopiarProduto.cdsProduto_Comb_Mat.Fields[x].FieldName <> 'ID') then
-            fDMCadProduto.cdsProduto_Comb_Mat.FieldByName(fDMCopiarProduto.cdsProduto_Comb_Mat.Fields[x].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Comb_Mat.Fields[x].Value;
+          for x := 0 to (fDMCopiarProduto.cdsProduto_Comb.FieldCount - 1) do
+          begin
+            if (fDMCopiarProduto.cdsProduto_Comb_Mat.Fields[x].FieldName <> 'ID') then
+              fDMCadProduto.cdsProduto_Comb_Mat.FieldByName(fDMCopiarProduto.cdsProduto_Comb_Mat.Fields[x].FieldName).AsVariant := fDMCopiarProduto.cdsProduto_Comb_Mat.Fields[x].Value;
+          end;
           fDMCadProduto.cdsProduto_Comb_Mat.Post;
 
           fDMCopiarProduto.cdsProduto_Comb_Mat.Next;
@@ -2988,6 +3005,8 @@ begin
     end;
   end;
   FreeAndNil(fDMCopiarProduto);
+
+  FreeAndNil(Form);
 
   RzPageControl1.ActivePage := TS_Cadastro;
   btnAlterarClick(Sender);

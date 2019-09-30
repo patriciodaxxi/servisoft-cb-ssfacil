@@ -28,24 +28,24 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
     Color = clSilver
     TabOrder = 0
     object Label5: TLabel
-      Left = 22
-      Top = 18
-      Width = 112
+      Left = 26
+      Top = 40
+      Width = 190
       Height = 13
       Alignment = taRightJustify
-      Caption = 'Data In'#237'cio sem Venda:'
+      Caption = 'Data In'#237'cio sem venda at'#233' 29/09/2019:'
     end
     object Label2: TLabel
-      Left = 27
-      Top = 40
-      Width = 107
+      Left = 151
+      Top = 16
+      Width = 65
       Height = 13
       Alignment = taRightJustify
-      Caption = 'Data Final sem Venda:'
+      Caption = 'Consultar por:'
     end
     object DateEdit1: TDateEdit
-      Left = 135
-      Top = 10
+      Left = 218
+      Top = 33
       Width = 100
       Height = 21
       Ctl3D = True
@@ -55,8 +55,8 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
       TabOrder = 0
     end
     object btnConsultar: TNxButton
-      Left = 236
-      Top = 24
+      Left = 463
+      Top = 17
       Width = 182
       Height = 30
       Caption = 'Efeturar Pesquisa'
@@ -122,13 +122,13 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
       Transparent = True
       OnClick = btnConsultarClick
     end
     object btnImprimir: TNxButton
-      Left = 417
-      Top = 24
+      Left = 644
+      Top = 17
       Width = 182
       Height = 30
       Caption = 'Imprimir'
@@ -194,20 +194,23 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
       Transparent = True
       OnClick = btnImprimirClick
     end
-    object DateEdit2: TDateEdit
-      Left = 135
-      Top = 32
-      Width = 100
+    object ComboBox1: TComboBox
+      Left = 218
+      Top = 8
+      Width = 145
       Height = 21
-      Ctl3D = True
-      NumGlyphs = 2
-      ParentCtl3D = False
-      StartOfWeek = Sun
-      TabOrder = 1
+      Style = csDropDownList
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 3
+      Text = 'Por Pedidos'
+      Items.Strings = (
+        'Por Pedidos'
+        'Por Notas')
     end
   end
   object Panel2: TPanel
@@ -354,7 +357,7 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         WidthOfIndicator = 27
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 7
+        ColCount = 8
         RowCount = 2
         Columns = <
           item
@@ -369,6 +372,7 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
             Expanded = False
             FieldName = 'NOME'
             Title.Caption = 'Nome'
+            Width = 349
             Visible = True
           end
           item
@@ -383,10 +387,18 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
           item
             Alignment = taCenter
             Expanded = False
-            FieldName = 'DTEMISSAO'
+            FieldName = 'DTULT_EMISSAO'
             Title.Alignment = taCenter
-            Title.Caption = 'Dt. Emiss'#227'o'
+            Title.Caption = 'Dt. '#218'lt. Compra'
             Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VLR_ULT_COMPRA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. Ul.t Compra'
+            Width = 91
             Visible = True
           end
           item
@@ -415,8 +427,8 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         Color = clSilver
         TabOrder = 1
         object btnInativar: TNxButton
-          Left = 112
-          Top = 8
+          Left = 12
+          Top = 7
           Width = 215
           Height = 30
           Caption = 'Inativar os Clientes Selecionados'
