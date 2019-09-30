@@ -869,6 +869,7 @@ type
     cdsCliente_Sem_VendaUF: TStringField;
     cdsCliente_Sem_VendaDTULT_EMISSAO: TDateField;
     cdsCliente_Sem_VendaVLR_ULT_COMPRA: TFloatField;
+    cdsCliente_Sem_VendaTIPO_COMPRA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConsumoNewRecord(DataSet: TDataSet);
     procedure cdsPedido_MatCalcFields(DataSet: TDataSet);

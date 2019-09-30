@@ -14,8 +14,6 @@ type
     DateEdit1: TDateEdit;
     btnConsultar: TNxButton;
     btnImprimir: TNxButton;
-    Panel2: TPanel;
-    Label1: TLabel;
     RzPageControl1: TRzPageControl;
     TS_Produto: TRzTabSheet;
     TS_Clientes: TRzTabSheet;
@@ -55,29 +53,28 @@ uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, StrUtils;
 {$R *.dfm}
 
 procedure TfrmConsProduto_Sem_Ped.btnConsultarClick(Sender: TObject);
+var
+  Form : TForm;
 begin
   if DateEdit1.Date <= 10 then
   begin
     MessageDlg('*** Data de início da verificação não informada!', mtError, [mbOk], 0);
     Exit;
   end;
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
+  
   if RzPageControl1.ActivePage = TS_Produto then
     prc_Consultar
   else
     prc_Consultar_Cli;
-  Panel2.Visible := False;
-  Panel2.Refresh;
-  Refresh;
+  FreeAndNil(Form);
 end;
 
 procedure TfrmConsProduto_Sem_Ped.prc_Consultar;
 begin
-  Panel2.Visible := True;
-  Panel2.Refresh;
   fDMConsPedido.cdsProduto_Sem_Venda.Close;
-  Refresh;
   fDMConsPedido.sdsProduto_Sem_Venda.ParamByName('Data1').AsDate := DateEdit1.Date;
-  //fDMConsPedido.sdsProduto_Sem_Venda.ParamByName('Data2').AsDate := DateEdit2.Date;
   fDMConsPedido.cdsProduto_Sem_Venda.Open;
 end;
 
@@ -122,6 +119,10 @@ begin
     Exit;
   end;
   fDMConsPedido.frxReport1.variables['Opcao_Imp'] := QuotedStr(DateEdit1.Text);
+  if ComboBox1.ItemIndex = 0 then
+    fDMConsPedido.frxReport1.variables['Opcao_Cab'] := QuotedStr('Relatório de Clientes Sem Vendas (Pedidos)   Dt. Inicial:')
+  else
+    fDMConsPedido.frxReport1.variables['Opcao_Cab'] := QuotedStr('Relatório de Clientes Sem Vendas (Notas)   Dt. Inicial:');
   fDMConsPedido.frxReport1.ShowReport;
 end;
 
@@ -129,8 +130,6 @@ procedure TfrmConsProduto_Sem_Ped.prc_Consultar_Cli;
 var
   vComando : String;
 begin
-  Panel2.Visible := True;
-  Panel2.Refresh;
   fDMConsPedido.cdsCliente_Sem_Venda.Close;
   Refresh;
   if ComboBox1.ItemIndex = 0 then

@@ -2540,15 +2540,15 @@ object DMConsPedido: TDMConsPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43339.358172094900000000
-    ReportOptions.LastChange = 43671.636053807870000000
+    ReportOptions.CreateDate = 42455.703776574100000000
+    ReportOptions.LastChange = 43738.674023865740000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
     OnPreview = frxReport1Preview
     OnReportPrint = 'frxReportOnReportPrint'
     Left = 704
-    Top = 360
+    Top = 359
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxmEtiq_Individual'
@@ -5274,7 +5274,7 @@ object DMConsPedido: TDMConsPedido
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 288
-    Top = 624
+    Top = 623
   end
   object dspCliente_Sem_Venda: TDataSetProvider
     DataSet = sdsCliente_Sem_Venda
@@ -5313,6 +5313,11 @@ object DMConsPedido: TDMConsPedido
     object cdsCliente_Sem_VendaVLR_ULT_COMPRA: TFloatField
       FieldName = 'VLR_ULT_COMPRA'
     end
+    object cdsCliente_Sem_VendaTIPO_COMPRA: TStringField
+      FieldName = 'TIPO_COMPRA'
+      FixedChar = True
+      Size = 3
+    end
   end
   object dsCliente_Sem_Venda: TDataSource
     DataSet = cdsCliente_Sem_Venda
@@ -5329,7 +5334,8 @@ object DMConsPedido: TDMConsPedido
       'CIDADE=CIDADE'
       'UF=UF'
       'DTULT_EMISSAO=DTULT_EMISSAO'
-      'VLR_ULT_COMPRA=VLR_ULT_COMPRA')
+      'VLR_ULT_COMPRA=VLR_ULT_COMPRA'
+      'TIPO_COMPRA=TIPO_COMPRA')
     DataSource = dsCliente_Sem_Venda
     BCDToCurrency = False
     Left = 920

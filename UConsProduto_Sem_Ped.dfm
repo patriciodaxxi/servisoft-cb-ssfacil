@@ -127,7 +127,7 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
       OnClick = btnConsultarClick
     end
     object btnImprimir: TNxButton
-      Left = 644
+      Left = 643
       Top = 17
       Width = 182
       Height = 30
@@ -213,37 +213,15 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         'Por Notas')
     end
   end
-  object Panel2: TPanel
+  object RzPageControl1: TRzPageControl
     Left = 0
     Top = 61
     Width = 898
-    Height = 41
-    Align = alTop
-    TabOrder = 1
-    Visible = False
-    object Label1: TLabel
-      Left = 256
-      Top = 8
-      Width = 330
-      Height = 25
-      Caption = '.... Aguarde, Gerando Consulta ....'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlue
-      Font.Height = -20
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-  end
-  object RzPageControl1: TRzPageControl
-    Left = 0
-    Top = 102
-    Width = 898
-    Height = 509
+    Height = 550
     ActivePage = TS_Clientes
     Align = alClient
     TabIndex = 1
-    TabOrder = 2
+    TabOrder = 1
     FixedDimension = 19
     object TS_Produto: TRzTabSheet
       Caption = 'Produtos'
@@ -251,7 +229,7 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         Left = 0
         Top = 0
         Width = 894
-        Height = 486
+        Height = 527
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsProduto_Sem_Venda
@@ -325,7 +303,7 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         Left = 0
         Top = 41
         Width = 894
-        Height = 445
+        Height = 486
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsCliente_Sem_Venda
@@ -357,9 +335,17 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         WidthOfIndicator = 27
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 8
+        ColCount = 9
         RowCount = 2
         Columns = <
+          item
+            Expanded = False
+            FieldName = 'TIPO_COMPRA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo'
+            Width = 40
+            Visible = True
+          end
           item
             Alignment = taCenter
             Expanded = False
