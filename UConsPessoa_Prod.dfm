@@ -1,10 +1,10 @@
 object frmConsPessoa_Prod: TfrmConsPessoa_Prod
   Left = 265
-  Top = 141
+  Top = 114
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Consulta Produto'
-  ClientHeight = 495
+  ClientHeight = 522
   ClientWidth = 866
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,7 +22,7 @@ object frmConsPessoa_Prod: TfrmConsPessoa_Prod
     Left = 0
     Top = 57
     Width = 866
-    Height = 247
+    Height = 274
     Align = alClient
     Ctl3D = False
     DataSource = DMConsPessoa.dsProduto_Mov
@@ -54,7 +54,7 @@ object frmConsPessoa_Prod: TfrmConsPessoa_Prod
     WidthOfIndicator = 11
     DefaultRowHeight = 16
     ScrollBars = ssHorizontal
-    ColCount = 13
+    ColCount = 14
     RowCount = 2
     Columns = <
       item
@@ -63,6 +63,15 @@ object frmConsPessoa_Prod: TfrmConsPessoa_Prod
         FieldName = 'DTEMISSAO'
         Title.Alignment = taCenter
         Title.Caption = 'Dt. Emiss'#227'o'
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'TIPO_ES'
+        Title.Alignment = taCenter
+        Title.Caption = 'Ent / Saida'
+        Width = 32
         Visible = True
       end
       item
@@ -309,7 +318,7 @@ object frmConsPessoa_Prod: TfrmConsPessoa_Prod
   end
   object gbxServico: TRzGroupBox
     Left = 0
-    Top = 304
+    Top = 331
     Width = 866
     Height = 191
     Align = alBottom

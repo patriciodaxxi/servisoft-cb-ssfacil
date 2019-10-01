@@ -23,7 +23,7 @@ object frmCadPessoa: TfrmCadPessoa
     Top = 0
     Width = 1083
     Height = 680
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -35,7 +35,7 @@ object frmCadPessoa: TfrmCadPessoa
     Font.Style = []
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -189,27 +189,27 @@ object frmCadPessoa: TfrmCadPessoa
           BevelInner = bvSpace
           Style = csDropDownList
           Ctl3D = False
+          DropDownCount = 10
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           ItemHeight = 13
-          ItemIndex = 8
           ParentCtl3D = False
           ParentFont = False
+          Sorted = True
           TabOrder = 2
-          Text = 'Todos'
           Items.Strings = (
             'Cliente'
+            'Exporta'#231#227'o'
             'Fornecedor'
-            'Transportadora'
+            'Funcionario'
+            'Preposto'
             'Representante'
             'Terceirizados'
-            'Exporta'#231#227'o'
-            'Preposto'
-            'Funcionario'
-            'Todos')
+            'Todos'
+            'Transportadora')
         end
         object btnConsultar: TNxButton
           Left = 385
@@ -1421,7 +1421,7 @@ object frmCadPessoa: TfrmCadPessoa
         Top = 30
         Width = 1079
         Height = 627
-        ActivePage = TS_Pessoa_Financeiro
+        ActivePage = TS_Pessoa_Dados
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1429,7 +1429,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 3
+        TabIndex = 0
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19

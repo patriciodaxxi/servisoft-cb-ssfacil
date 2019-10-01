@@ -424,15 +424,15 @@ object DMConsPessoa: TDMConsPessoa
       'SELECT M.filial, M.id, M.id_pessoa, M.id_produto, M.vlr_unitario' +
       ', M.vlr_total,'#13#10'M.vlr_desconto, M.vlr_ipi, M.vlr_icms, M.vlr_fre' +
       'te, M.vlr_icmssubst,'#13#10'PES.nome NOME_CLIENTE, PES.cnpj_cpf, PES.c' +
-      'idade, M.nome_produto_serv,'#13#10'M.referencia, M.num_nota, M.serie, ' +
-      'M.tipo_reg, M.dtemissao, m.qtd'#13#10'FROM MOVIMENTO M'#13#10'INNER JOIN PES' +
-      'SOA PES'#13#10'ON M.id_pessoa = PES.codigo'#13#10'WHERE M.cancelado = '#39'N'#39#13#10' ' +
-      '     AND M.DENEGADA = '#39'N'#39
+      'idade, M.nome_produto_serv, M.referencia, M.num_nota, M.serie, M' +
+      '.tipo_reg, M.dtemissao, m.qtd, M.tipo_es'#13#10'FROM MOVIMENTO M'#13#10'INNE' +
+      'R JOIN PESSOA PES'#13#10'ON M.id_pessoa = PES.codigo'#13#10'WHERE M.cancelad' +
+      'o = '#39'N'#39#13#10'      AND M.DENEGADA = '#39'N'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 250
+    Top = 251
   end
   object dspProduto_Mov: TDataSetProvider
     DataSet = sdsProduto_Mov
@@ -520,6 +520,11 @@ object DMConsPessoa: TDMConsPessoa
     end
     object cdsProduto_MovQTD: TFloatField
       FieldName = 'QTD'
+    end
+    object cdsProduto_MovTIPO_ES: TStringField
+      FieldName = 'TIPO_ES'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsProduto_Mov: TDataSource
@@ -850,6 +855,22 @@ object DMConsPessoa: TDMConsPessoa
     end
     object qPessoaVLR_LIMITE_CREDITO: TFloatField
       FieldName = 'VLR_LIMITE_CREDITO'
+    end
+  end
+  object qParametros_Geral: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT MOSTRAR_DOC_HIST'
+      'FROM PARAMETROS_GERAL'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 615
+    Top = 116
+    object qParametros_GeralMOSTRAR_DOC_HIST: TStringField
+      FieldName = 'MOSTRAR_DOC_HIST'
+      FixedChar = True
+      Size = 1
     end
   end
 end

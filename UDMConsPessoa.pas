@@ -172,6 +172,9 @@ type
     qPessoaCODIGO: TIntegerField;
     qPessoaNOME: TStringField;
     qPessoaVLR_LIMITE_CREDITO: TFloatField;
+    qParametros_Geral: TSQLQuery;
+    qParametros_GeralMOSTRAR_DOC_HIST: TStringField;
+    cdsProduto_MovTIPO_ES: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicataCalcFields(DataSet: TDataSet);
   private
@@ -214,6 +217,7 @@ begin
   ctNotaServico := sdsNotaServico.CommandText;
 
   qParametros.Open;
+  qParametros_Geral.Open;
 end;
 
 function TDMConsPessoa.fnc_Calcula_Perc_SobreFat(Valor: Real): Real;
@@ -291,7 +295,35 @@ begin
     vComando :=  vComando + ' AND M.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtInicial));
   if DtFinal > 10 then
     vComando :=  vComando + ' AND M.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtFinal));
+  if qParametros_GeralMOSTRAR_DOC_HIST.AsString = 'S' then
+  begin
+    vComando := vComando + ' UNION '
+              + 'SELECT d.filial, d.id, d.id_pessoa, i.id_produto, i.vlr_unitario, i.vlr_total, '
+              + '0 vlr_desconto, 0 vlr_ipi, 0 vlr_icms, 0 vlr_frete, 0 vlr_icmssubst, '
+              + 'PES.nome NOME_CLIENTE, PES.cnpj_cpf, PES.cidade, PROD.nome nome_produto_serv, '
+              + 'PROD.referencia, D.ID, '''' serie, ''DOC'' tipo_reg, D.dtmovimento dtemissao, I.qtd, '
+              + 'D.tipo_es '
+              + 'FROM docestoque D '
+              + 'INNER JOIN docestoque_itens I '
+              + 'ON D.ID = I.ID '
+              + 'INNER JOIN PESSOA PES '
+              + 'ON d.id_pessoa = PES.codigo '
+              + 'INNER JOIN PRODUTO PROD '
+              + 'ON I.ID_PRODUTO = PROD.ID ';
+
+    if ID_Pessoa > 0 then
+      vComando := vComando + ' AND D.ID_PESSOA = ' + IntToStr(ID_Pessoa);
+    if Tipo_Pessoa = 'C' then
+      vComando := vComando + ' AND (D.TIPO_ES = ' + QuotedStr('S') + ')';
+    if Tipo_Pessoa = 'F' then
+      vComando := vComando + ' AND (D.TIPO_ES = ' + QuotedStr('E') + ')';
+    if DtInicial > 10 then
+      vComando :=  vComando + ' AND D.DTMOVIMENTO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtInicial));
+    if DtFinal > 10 then
+      vComando :=  vComando + ' AND D.DTMOVIMENTO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtFinal));
+  end;
   sdsProduto_Mov.CommandText := ctProduto_Mov + vComando;
+
   cdsProduto_Mov.Open;
   cdsProduto_Mov.IndexFieldNames := 'NOME_PRODUTO_SERV;REFERENCIA;DTEMISSAO';
 end;
