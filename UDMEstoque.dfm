@@ -511,4 +511,55 @@ object DMEstoque: TDMEstoque
       FieldName = 'QTD'
     end
   end
+  object sdsProduto_Tam: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT P.*'#13#10'FROM PRODUTO_TAM P'#13#10'WHERE P.ID = :ID'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 294
+    Top = 284
+  end
+  object dspProduto_Tam: TDataSetProvider
+    DataSet = sdsProduto_Tam
+    Left = 342
+    Top = 284
+  end
+  object cdsProduto_Tam: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProduto_Tam'
+    Left = 395
+    Top = 284
+    object cdsProduto_TamID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsProduto_TamTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Required = True
+      Size = 10
+    end
+    object cdsProduto_TamPESO_LIQUIDO: TFloatField
+      FieldName = 'PESO_LIQUIDO'
+    end
+    object cdsProduto_TamPESO_BRUTO: TFloatField
+      FieldName = 'PESO_BRUTO'
+    end
+    object cdsProduto_TamTAM_MATRIZ: TStringField
+      FieldName = 'TAM_MATRIZ'
+      Size = 10
+    end
+  end
+  object dsProduto_Tam: TDataSource
+    DataSet = cdsProduto_Tam
+    Left = 453
+    Top = 284
+  end
 end

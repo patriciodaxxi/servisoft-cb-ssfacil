@@ -118,6 +118,15 @@ type
     cdsEstoque_LocalID_COR: TIntegerField;
     cdsEstoque_LocalLOCALIZACAO: TStringField;
     cdsEstoque_LocalQTD: TFloatField;
+    sdsProduto_Tam: TSQLDataSet;
+    dspProduto_Tam: TDataSetProvider;
+    cdsProduto_Tam: TClientDataSet;
+    dsProduto_Tam: TDataSource;
+    cdsProduto_TamID: TIntegerField;
+    cdsProduto_TamTAMANHO: TStringField;
+    cdsProduto_TamPESO_LIQUIDO: TFloatField;
+    cdsProduto_TamPESO_BRUTO: TFloatField;
+    cdsProduto_TamTAM_MATRIZ: TStringField;
     procedure cdsEstoque_MovReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);

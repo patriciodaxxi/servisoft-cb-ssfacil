@@ -2,7 +2,7 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
   Left = 325
   Top = 175
   Width = 734
-  Height = 303
+  Height = 326
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSizeToolWin
   Caption = 'frmAltEstoque_Mov'
@@ -20,7 +20,7 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 231
+    Top = 254
     Width = 726
     Height = 41
     Align = alBottom
@@ -175,7 +175,7 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
     Left = 0
     Top = 0
     Width = 726
-    Height = 231
+    Height = 254
     Align = alClient
     Color = 13303754
     TabOrder = 1
@@ -320,6 +320,14 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
       Alignment = taRightJustify
       Caption = 'Qtde (2):'
     end
+    object Label15: TLabel
+      Left = 68
+      Top = 219
+      Width = 48
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Tamanho:'
+    end
     object DBEdit1: TDBEdit
       Left = 118
       Top = 153
@@ -376,6 +384,19 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
       DataSource = DMEstoque.dsEstoque_Mov
       ParentCtl3D = False
       TabOrder = 4
+    end
+    object RxDBLookupCombo1: TRxDBLookupCombo
+      Left = 118
+      Top = 211
+      Width = 145
+      Height = 21
+      DropDownCount = 8
+      DataField = 'TAMANHO'
+      DataSource = DMEstoque.dsEstoque_Mov
+      LookupField = 'TAMANHO'
+      LookupDisplay = 'TAMANHO'
+      LookupSource = DMEstoque.dsProduto_Tam
+      TabOrder = 5
     end
   end
 end
