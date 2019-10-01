@@ -3284,28 +3284,18 @@ object DMConsPedido: TDMConsPedido
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT PRO.id id_produto, PRO.referencia, PRO.nome, MAX(v.dtemis' +
-      'sao) DTEMISSAO'#13#10' FROM PRODUTO PRO'#13#10' left join vpedido_item v'#13#10'  ' +
-      ' on v.id_produto = pro.id'#13#10'WHERE PRO.tipo_reg = '#39'P'#39#13#10'  AND pro.i' +
-      'nativo = '#39'N'#39' '#13#10'  AND not exists (select 1 from vpedido_item vp'#13#10 +
-      '                    where vp.dtemissao >= :Data1'#13#10'              ' +
-      '        and vp.dtemissao <= :Data2'#13#10'                      and vp' +
-      '.id_produto = pro.id'#13#10'                      and vp.tipo_reg = '#39'P' +
-      #39')'#13#10'GROUP BY PRO.id, PRO.referencia, PRO.nome'
+      'SELECT V.*'#13#10'FROM vult_produto_nota V'#13#10'WHERE NOT EXISTS (SELECT 1' +
+      ' FROM vult_produto_nota V2'#13#10'                   WHERE V.ID = V2.I' +
+      'D'#13#10'                    AND V.dtemissao >= :DATA )'#13#10
     MaxBlobSize = -1
     Params = <
       item
         DataType = ftDate
-        Name = 'Data1'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'Data2'
+        Name = 'DATA'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 456
+    Left = 457
     Top = 104
   end
   object dspProduto_Sem_Venda: TDataSetProvider
@@ -3320,10 +3310,6 @@ object DMConsPedido: TDMConsPedido
     ProviderName = 'dspProduto_Sem_Venda'
     Left = 536
     Top = 104
-    object cdsProduto_Sem_VendaID_PRODUTO: TIntegerField
-      FieldName = 'ID_PRODUTO'
-      Required = True
-    end
     object cdsProduto_Sem_VendaREFERENCIA: TStringField
       FieldName = 'REFERENCIA'
     end
@@ -3333,6 +3319,12 @@ object DMConsPedido: TDMConsPedido
     end
     object cdsProduto_Sem_VendaDTEMISSAO: TDateField
       FieldName = 'DTEMISSAO'
+    end
+    object cdsProduto_Sem_VendaID: TIntegerField
+      FieldName = 'ID'
+    end
+    object cdsProduto_Sem_VendaVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
     end
   end
   object dsProduto_Sem_Venda: TDataSource
@@ -3344,10 +3336,11 @@ object DMConsPedido: TDMConsPedido
     UserName = 'frxProduto_Sem_Venda'
     CloseDataSource = False
     FieldAliases.Strings = (
-      'ID_PRODUTO=ID_PRODUTO'
       'REFERENCIA=REFERENCIA'
       'NOME=NOME'
-      'DTEMISSAO=DTEMISSAO')
+      'DTEMISSAO=DTEMISSAO'
+      'ID=ID'
+      'VLR_TOTAL=VLR_TOTAL')
     DataSource = dsProduto_Sem_Venda
     BCDToCurrency = False
     Left = 800
@@ -4170,7 +4163,7 @@ object DMConsPedido: TDMConsPedido
       'Qtd=Qtd')
     DataSource = dsmNota_Ped
     BCDToCurrency = False
-    Left = 752
+    Left = 753
     Top = 456
   end
   object sdsPedidoFaturas: TSQLDataSet
@@ -5261,15 +5254,14 @@ object DMConsPedido: TDMConsPedido
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT V.*'#13#10'FROM vult_pedido_pessoa V'#13#10'  WHERE not exists (selec' +
-      't 1 from vpedido_item vP'#13#10'                    where vp.dtemissao' +
-      ' >= :DTEMISSAO'#13#10'                      and vp.id_cliente = V.codi' +
-      'go'#13#10'                      and vp.tipo_reg = '#39'P'#39')'#13#10
+      'select V.*'#13#10'from vult_pessoa_ped V'#13#10'WHERE not exists (select 1 f' +
+      'rom vult_pessoa_ped v2 where v.codigo = v2.codigo and v2.dtult_e' +
+      'missao >= :data )'#13#10
     MaxBlobSize = -1
     Params = <
       item
         DataType = ftDate
-        Name = 'DTEMISSAO'
+        Name = 'data'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
@@ -5310,13 +5302,13 @@ object DMConsPedido: TDMConsPedido
     object cdsCliente_Sem_VendaDTULT_EMISSAO: TDateField
       FieldName = 'DTULT_EMISSAO'
     end
-    object cdsCliente_Sem_VendaVLR_ULT_COMPRA: TFloatField
-      FieldName = 'VLR_ULT_COMPRA'
-    end
     object cdsCliente_Sem_VendaTIPO_COMPRA: TStringField
       FieldName = 'TIPO_COMPRA'
       FixedChar = True
       Size = 3
+    end
+    object cdsCliente_Sem_VendaVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
     end
   end
   object dsCliente_Sem_Venda: TDataSource
@@ -5334,8 +5326,8 @@ object DMConsPedido: TDMConsPedido
       'CIDADE=CIDADE'
       'UF=UF'
       'DTULT_EMISSAO=DTULT_EMISSAO'
-      'VLR_ULT_COMPRA=VLR_ULT_COMPRA'
-      'TIPO_COMPRA=TIPO_COMPRA')
+      'TIPO_COMPRA=TIPO_COMPRA'
+      'VLR_TOTAL=VLR_TOTAL')
     DataSource = dsCliente_Sem_Venda
     BCDToCurrency = False
     Left = 920

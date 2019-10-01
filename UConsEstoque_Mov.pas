@@ -330,6 +330,8 @@ begin
 end;
 
 procedure TfrmConsEstoque_Mov.btnConsultarClick(Sender: TObject);
+var
+  Form : TForm;
 begin
   SMDBGrid1.DisableScroll;
   if (trim(edtRef.Text) = '') and (ceIDProduto.AsInteger <= 0) and
@@ -341,23 +343,30 @@ begin
     exit;
   end;
 
-  prc_Condicao;
-  if RzPageControl1.ActivePage = TS_Produto_Det then
-  begin
-    prc_Consultar;
-    //prc_Le_cdsEstoque_Mov;
-  end
-  else
-  if RzPageControl1.ActivePage = TS_Produto_Acum then
-    prc_Consultar_Acum
-  else
-  if RzPageControl1.ActivePage = TS_Produto_Local then
-    prc_Consultar_Local
-  else
-  if RzPageControl1.ActivePage = TS_Reserva then
-  begin
-    prc_Consultar_Reserva;
-    prc_Le_cdsEstoque_Mov_Res;
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
+
+  try
+    prc_Condicao;
+    if RzPageControl1.ActivePage = TS_Produto_Det then
+    begin
+      prc_Consultar;
+      //prc_Le_cdsEstoque_Mov;
+    end
+    else
+    if RzPageControl1.ActivePage = TS_Produto_Acum then
+      prc_Consultar_Acum
+    else
+    if RzPageControl1.ActivePage = TS_Produto_Local then
+      prc_Consultar_Local
+    else
+    if RzPageControl1.ActivePage = TS_Reserva then
+    begin
+      prc_Consultar_Reserva;
+      prc_Le_cdsEstoque_Mov_Res;
+    end;
+  finally
+    FreeAndNil(Form);
   end;
   SMDBGrid1.EnableScroll;
 end;

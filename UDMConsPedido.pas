@@ -460,7 +460,6 @@ type
     dspProduto_Sem_Venda: TDataSetProvider;
     cdsProduto_Sem_Venda: TClientDataSet;
     dsProduto_Sem_Venda: TDataSource;
-    cdsProduto_Sem_VendaID_PRODUTO: TIntegerField;
     cdsProduto_Sem_VendaREFERENCIA: TStringField;
     cdsProduto_Sem_VendaNOME: TStringField;
     cdsProduto_Sem_VendaDTEMISSAO: TDateField;
@@ -868,8 +867,10 @@ type
     cdsCliente_Sem_VendaCIDADE: TStringField;
     cdsCliente_Sem_VendaUF: TStringField;
     cdsCliente_Sem_VendaDTULT_EMISSAO: TDateField;
-    cdsCliente_Sem_VendaVLR_ULT_COMPRA: TFloatField;
     cdsCliente_Sem_VendaTIPO_COMPRA: TStringField;
+    cdsProduto_Sem_VendaID: TIntegerField;
+    cdsProduto_Sem_VendaVLR_TOTAL: TFloatField;
+    cdsCliente_Sem_VendaVLR_TOTAL: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConsumoNewRecord(DataSet: TDataSet);
     procedure cdsPedido_MatCalcFields(DataSet: TDataSet);

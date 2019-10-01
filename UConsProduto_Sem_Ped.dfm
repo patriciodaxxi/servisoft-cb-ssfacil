@@ -261,6 +261,7 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
+        ColCount = 6
         RowCount = 2
         Columns = <
           item
@@ -293,6 +294,13 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Ult'#237'mo Pedido'
             Width = 98
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VLR_TOTAL'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. '#218'lt. Pedido'
             Visible = True
           end>
       end
@@ -381,7 +389,7 @@ object frmConsProduto_Sem_Ped: TfrmConsProduto_Sem_Ped
           end
           item
             Expanded = False
-            FieldName = 'VLR_ULT_COMPRA'
+            FieldName = 'VLR_TOTAL'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Ul.t Compra'
             Width = 91

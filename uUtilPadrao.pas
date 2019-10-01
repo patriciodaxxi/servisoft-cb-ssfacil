@@ -2274,10 +2274,7 @@ begin
   Form.Show;
   Form.Update;
 
-  // Aqui você coloca os procedimentos desejados
-  //Sleep(5000);   // exemplo de processamento, aguarda 5 segundos
-
-  //Form.Free; // E finalmente libera a janela
+  //Form.Free; // Vai limpar na origem da chamada
 
 end;
 

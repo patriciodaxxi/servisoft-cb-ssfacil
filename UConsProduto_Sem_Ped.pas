@@ -72,9 +72,27 @@ begin
 end;
 
 procedure TfrmConsProduto_Sem_Ped.prc_Consultar;
+var
+  vComando : String;
 begin
   fDMConsPedido.cdsProduto_Sem_Venda.Close;
-  fDMConsPedido.sdsProduto_Sem_Venda.ParamByName('Data1').AsDate := DateEdit1.Date;
+  Refresh;
+  if ComboBox1.ItemIndex = 0 then
+  begin
+    vComando := 'SELECT V.* FROM vult_produto_ped V '
+              + 'WHERE NOT EXISTS (SELECT 1 FROM vult_produto_ped V2 '
+              + '                   WHERE V.ID = V2.ID '
+              + '                    AND V.dtemissao >= :DATA ) ';
+  end
+  else
+  begin
+    vComando := 'SELECT V.* FROM vult_produto_nota V '
+              + 'WHERE NOT EXISTS (SELECT 1 FROM vult_produto_nota V2 '
+              + '                   WHERE V.ID = V2.ID '
+              + '                    AND V.dtemissao >= :DATA ) ';
+  end;
+  fDMConsPedido.sdsProduto_Sem_Venda.CommandText := vComando;
+  fDMConsPedido.sdsProduto_Sem_Venda.ParamByName('DATA').AsDate := DateEdit1.Date;
   fDMConsPedido.cdsProduto_Sem_Venda.Open;
 end;
 
@@ -106,11 +124,13 @@ end;
 procedure TfrmConsProduto_Sem_Ped.btnImprimirClick(Sender: TObject);
 var
   vArq : String;
+  vNome : String;
 begin
   if RzPageControl1.ActivePage = TS_Produto then
-    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Produto_Sem_Ped.fr3'
+    vNome := 'Produto'
   else
-    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Cliente_Sem_Ped.fr3';
+    vNome := 'Cliente';
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\'+vNome+'_Sem_Ped.fr3';
   if FileExists(vArq) then
     fDMConsPedido.frxReport1.Report.LoadFromFile(vArq)
   else
@@ -120,9 +140,9 @@ begin
   end;
   fDMConsPedido.frxReport1.variables['Opcao_Imp'] := QuotedStr(DateEdit1.Text);
   if ComboBox1.ItemIndex = 0 then
-    fDMConsPedido.frxReport1.variables['Opcao_Cab'] := QuotedStr('Relatório de Clientes Sem Vendas (Pedidos)   Dt. Inicial:')
+    fDMConsPedido.frxReport1.variables['Opcao_Cab'] := QuotedStr('Relatório de ' + vNome +'s Sem Vendas (Pedidos)   Dt. Inicial:')
   else
-    fDMConsPedido.frxReport1.variables['Opcao_Cab'] := QuotedStr('Relatório de Clientes Sem Vendas (Notas)   Dt. Inicial:');
+    fDMConsPedido.frxReport1.variables['Opcao_Cab'] := QuotedStr('Relatório de ' + vNome + 's Sem Vendas (Notas)   Dt. Inicial:');
   fDMConsPedido.frxReport1.ShowReport;
 end;
 
@@ -134,25 +154,16 @@ begin
   Refresh;
   if ComboBox1.ItemIndex = 0 then
   begin
-    vComando := 'SELECT V.* FROM vult_pedido_pessoa V '
-              + 'WHERE not exists (select 1 from vpedido_item vP '
-              + '                  where vp.dtemissao >= :DTEMISSAO '
-              + '                    and vp.id_cliente = V.codigo '
-              + '                    and vp.tipo_reg = ''P'')';
+    vComando := 'select V.* from vult_pessoa_ped V '
+              + 'WHERE not exists (select 1 from vult_pessoa_ped v2 where v.codigo = v2.codigo and v2.dtult_emissao >= :DATA ) ';
   end
   else
   begin
-    vComando := 'SELECT V.* FROM vult_nota_pessoa V '
-              + 'WHERE not exists (select 1 from notafiscal vP '
-              + '                  where vp.dtemissao >= :DTEMISSAO '
-              + '                   and vp.id_cliente = V.codigo '
-              + '                   and vp.tipo_reg = ''NTS'''
-              + '                   and vp.tipo_nota = ''S'''
-              + '                   and vp.cancelada = ''N'''
-              + '                   and vp.nfedenegada = ''N'')';
+    vComando := 'select V.* from vult_pessoa_nota V '
+              + 'WHERE not exists (select 1 from vult_pessoa_nota v2 where v.codigo = v2.codigo and v2.dtult_emissao >= :DATA ) ';
   end;
   fDMConsPedido.sdsCliente_Sem_Venda.CommandText := vComando;
-  fDMConsPedido.sdsCliente_Sem_Venda.ParamByName('DTEMISSAO').AsDate := DateEdit1.Date;
+  fDMConsPedido.sdsCliente_Sem_Venda.ParamByName('DATA').AsDate := DateEdit1.Date;
   fDMConsPedido.cdsCliente_Sem_Venda.Open;
 end;
 
