@@ -92,10 +92,12 @@ type
     sdsDEPara_CFOPCOM_ST: TStringField;
     cdsDEPara_CFOPCOM_ST: TStringField;
     cdsDEPara_CFOP_ConsultaCOM_ST: TStringField;
+    cdsCFOPDEPARA_COM_CST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCFOPUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
       UpdateKind: TUpdateKind; var Response: TResolverResponse);
+    procedure cdsDEPara_CFOPNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
@@ -221,6 +223,11 @@ procedure TDMCadDEPara_CFOP.DoLogAdditionalValues(ATableName: string;
   var AValues: TArrayLogData; var UserName: string);
 begin
   UserName := vUsuario;
+end;
+
+procedure TDMCadDEPara_CFOP.cdsDEPara_CFOPNewRecord(DataSet: TDataSet);
+begin
+  cdsDEPara_CFOPCOM_ST.AsString := 'N';
 end;
 
 end.

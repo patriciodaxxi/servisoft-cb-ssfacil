@@ -78,8 +78,9 @@ object DMCadDEPara_CFOP: TDMCadDEPara_CFOP
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspDEPara_CFOP'
+    OnNewRecord = cdsDEPara_CFOPNewRecord
     Left = 208
-    Top = 32
+    Top = 29
     object cdsDEPara_CFOPID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -160,7 +161,7 @@ object DMCadDEPara_CFOP: TDMCadDEPara_CFOP
     Params = <>
     ProviderName = 'dspCFOP'
     Left = 216
-    Top = 136
+    Top = 135
     object cdsCFOPID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -281,6 +282,11 @@ object DMCadDEPara_CFOP: TDMCadDEPara_CFOP
     object cdsCFOPOBS_CLASSIFICACAO: TMemoField
       FieldName = 'OBS_CLASSIFICACAO'
       BlobType = ftMemo
+      Size = 1
+    end
+    object cdsCFOPDEPARA_COM_CST: TStringField
+      FieldName = 'DEPARA_COM_CST'
+      FixedChar = True
       Size = 1
     end
   end

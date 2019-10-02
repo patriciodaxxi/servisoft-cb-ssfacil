@@ -56,6 +56,7 @@ type
     procedure RzPageControl1Change(Sender: TObject);
     procedure RxDBComboBox1Change(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
+    procedure RxDBLookupCombo1Exit(Sender: TObject);
   private
     { Private declarations }
     fDMCadDEPara_CFOP: TDMCadDEPara_CFOP;
@@ -246,10 +247,14 @@ begin
   begin
     if RzPageControl1.ActivePage = TS_Cadastro then
     begin
+      DBCheckBox1.Visible := False;
+      Label7.Visible      := False;
       if not(fDMCadDEPara_CFOP.cdsDEPara_CFOP_Consulta.Active) or (fDMCadDEPara_CFOP.cdsDEPara_CFOP_Consulta.IsEmpty) or (fDMCadDEPara_CFOP.cdsDEPara_CFOP_ConsultaID.AsInteger <= 0) then
         exit;
       prc_Posiciona_DEPara_CFOP;
-    end;
+      if fDMCadDEPara_CFOP.cdsDEPara_CFOPID.AsInteger > 0 then
+        RxDBLookupCombo1Exit(Sender);
+    end;                                             
   end;
 end;
 
@@ -268,6 +273,14 @@ end;
 procedure TfrmCadDEPara_CFOP.btnPesquisarClick(Sender: TObject);
 begin
   pnlPesquisa.Visible := not(pnlPesquisa.Visible);
+end;
+
+procedure TfrmCadDEPara_CFOP.RxDBLookupCombo1Exit(Sender: TObject);
+begin
+  if (RxDBLookupCombo1.Text <> '') and (RxDBLookupCombo1.KeyValue <> fDMCadDEPara_CFOP.cdsCFOPCODCFOP.AsString) then
+    fDMCadDEPara_CFOP.cdsCFOP.Locate('ID',RxDBLookupCombo1.KeyValue,[loCaseInsensitive]);
+  DBCheckBox1.Visible := (fDMCadDEPara_CFOP.cdsCFOPDEPARA_COM_CST.AsString = 'S') and (RxDBLookupCombo1.Text <> '');
+  Label7.Visible      := (fDMCadDEPara_CFOP.cdsCFOPDEPARA_COM_CST.AsString = 'S') and (RxDBLookupCombo1.Text <> '');  
 end;
 
 end.

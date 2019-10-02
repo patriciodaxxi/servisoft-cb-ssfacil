@@ -24,7 +24,7 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
     Top = 0
     Width = 836
     Height = 582
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -770,6 +770,7 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
           Font.Name = 'MS Sans Serif'
           Font.Style = []
           ParentFont = False
+          Visible = False
         end
         object DBEdit4: TDBEdit
           Left = 692
@@ -797,6 +798,7 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
           LookupDisplay = 'CODCFOP;NOME'
           LookupSource = DMCadDEPara_CFOP.dsCFOP
           TabOrder = 0
+          OnExit = RxDBLookupCombo1Exit
         end
         object RxDBLookupCombo2: TRxDBLookupCombo
           Left = 155
@@ -888,6 +890,7 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
           TabOrder = 7
           ValueChecked = 'S'
           ValueUnchecked = 'N'
+          Visible = False
         end
       end
     end
