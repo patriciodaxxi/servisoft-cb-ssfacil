@@ -361,6 +361,7 @@ type
     ComissodoProdutoPorVendedorCadastro1: TMenuItem;
     ConsultaProdutoCFOPNCMCSTICMS1: TMenuItem;
     LiberarPedidosparaofaturamento1: TMenuItem;
+    PedidoSimples1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
