@@ -131,12 +131,10 @@ object dmDatabase: TdmDatabase
     LoginPrompt = False
     Params.Strings = (
       'DriverName=Interbase'
-      
-        'Database=192.168.0.101:D:\Sistema\$Servisoft\Servisoft\servisoft' +
-        '.fdb'
+      'Database=firebird.servisoft.kinghost.net:/firebird/servisoft.gdb'
       'RoleName=RoleName'
-      'User_Name=sysdba'
-      'Password=masterkey'
+      'User_Name=SERVISOFT'
+      'Password=35977456'
       'ServerCharSet='
       'SQLDialect=3'
       'BlobSize=-1'
@@ -155,8 +153,8 @@ object dmDatabase: TdmDatabase
     Params = <>
     SQL.Strings = (
       
-        'SELECT ID, CNPJ_CPF, LIBERADO_ATE, ULTIMO_ACESSO FROM FILIAL WHE' +
-        'RE PRINCIPAL = '#39'S'#39)
+        'SELECT ID, CNPJ_CPF, LIBERADO_ATE, ULTIMO_ACESSO, FONE, DDD1, CI' +
+        'DADE, NOME  FROM FILIAL WHERE PRINCIPAL = '#39'S'#39)
     SQLConnection = scoDados
     Left = 40
     Top = 248
@@ -175,6 +173,21 @@ object dmDatabase: TdmDatabase
     object sqEmpresaULTIMO_ACESSO: TStringField
       FieldName = 'ULTIMO_ACESSO'
       Size = 18
+    end
+    object sqEmpresaDDD1: TIntegerField
+      FieldName = 'DDD1'
+    end
+    object sqEmpresaCIDADE: TStringField
+      FieldName = 'CIDADE'
+      Size = 40
+    end
+    object sqEmpresaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object sqEmpresaFONE: TStringField
+      FieldName = 'FONE'
+      Size = 15
     end
   end
   object sqDataLiberacao: TSQLQuery
@@ -227,7 +240,7 @@ object dmDatabase: TdmDatabase
         ParamType = ptInput
       end>
     SQLConnection = scoLiberacao
-    Left = 200
+    Left = 248
     Top = 248
     object sdsModuloRemotoID: TIntegerField
       FieldName = 'ID'
@@ -249,14 +262,14 @@ object dmDatabase: TdmDatabase
   end
   object dspModuloRemoto: TDataSetProvider
     DataSet = sdsModuloRemoto
-    Left = 232
+    Left = 280
     Top = 248
   end
   object cdsModuloRemoto: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspModuloRemoto'
-    Left = 264
+    Left = 312
     Top = 248
     object cdsModuloRemotoID: TIntegerField
       FieldName = 'ID'
@@ -287,6 +300,74 @@ object dmDatabase: TdmDatabase
     Top = 304
     object qParametrosID_RESP_SUPORTE: TIntegerField
       FieldName = 'ID_RESP_SUPORTE'
+    end
+  end
+  object sdsLogPessoa: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT * FROM LOG_PESSOA'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = scoLiberacao
+    Left = 248
+    Top = 312
+    object sdsLogPessoaDOCUMENTO: TStringField
+      FieldName = 'DOCUMENTO'
+      Required = True
+      Size = 18
+    end
+    object sdsLogPessoaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+    object sdsLogPessoaFONE: TStringField
+      FieldName = 'FONE'
+      Size = 15
+    end
+    object sdsLogPessoaDTPRIMEIROACESSO: TDateField
+      FieldName = 'DTPRIMEIROACESSO'
+    end
+    object sdsLogPessoaDTULTIMOACESSO: TDateField
+      FieldName = 'DTULTIMOACESSO'
+    end
+    object sdsLogPessoaCIDADE: TStringField
+      FieldName = 'CIDADE'
+      Size = 40
+    end
+  end
+  object dspLogPessoa: TDataSetProvider
+    DataSet = sdsLogPessoa
+    Left = 280
+    Top = 312
+  end
+  object cdsLogPessoa: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspLogPessoa'
+    Left = 312
+    Top = 312
+    object cdsLogPessoaDOCUMENTO: TStringField
+      FieldName = 'DOCUMENTO'
+      Required = True
+      Size = 18
+    end
+    object cdsLogPessoaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+    object cdsLogPessoaFONE: TStringField
+      FieldName = 'FONE'
+      Size = 15
+    end
+    object cdsLogPessoaDTPRIMEIROACESSO: TDateField
+      FieldName = 'DTPRIMEIROACESSO'
+    end
+    object cdsLogPessoaDTULTIMOACESSO: TDateField
+      FieldName = 'DTULTIMOACESSO'
+    end
+    object cdsLogPessoaCIDADE: TStringField
+      FieldName = 'CIDADE'
+      Size = 40
     end
   end
 end

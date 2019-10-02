@@ -45,12 +45,32 @@ type
     sqEmpresaULTIMO_ACESSO: TStringField;
     qParametros: TSQLQuery;
     qParametrosID_RESP_SUPORTE: TIntegerField;
+    sdsLogPessoa: TSQLDataSet;
+    dspLogPessoa: TDataSetProvider;
+    cdsLogPessoa: TClientDataSet;
+    sdsLogPessoaDOCUMENTO: TStringField;
+    sdsLogPessoaNOME: TStringField;
+    sdsLogPessoaFONE: TStringField;
+    sdsLogPessoaDTPRIMEIROACESSO: TDateField;
+    sdsLogPessoaDTULTIMOACESSO: TDateField;
+    sdsLogPessoaCIDADE: TStringField;
+    cdsLogPessoaDOCUMENTO: TStringField;
+    cdsLogPessoaNOME: TStringField;
+    cdsLogPessoaFONE: TStringField;
+    cdsLogPessoaDTPRIMEIROACESSO: TDateField;
+    cdsLogPessoaDTULTIMOACESSO: TDateField;
+    cdsLogPessoaCIDADE: TStringField;
+    sqEmpresaDDD1: TIntegerField;
+    sqEmpresaCIDADE: TStringField;
+    sqEmpresaNOME: TStringField;
+    sqEmpresaFONE: TStringField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
     function Fnc_ArquivoConfiguracao: string;
 
     function Monta_Numero2(Campo: String; Tamanho: Integer): String;
+    procedure prc_Gravar_Log_Pessoa;
 
   public
     function ProximaSequencia(NomeTabela: string; Filial: Integer): Integer;
@@ -408,6 +428,7 @@ var
   dtUltimo_Acesso: TDateTime;
   vTexto: String;
   vFoneAux: String;
+  vDia, vMes, vAno : Word;
 begin
   scoDados.Connected     := False;
   scoLiberacao.Connected := False;
@@ -562,6 +583,22 @@ begin
       end;
     end;}
 
+     //grava os dados dos clientes que estão utilizando o sistema
+      DecodeDate(Date, vAno, vMes, vDia);
+      if (vDia = 02) or (vDia = 10) or (vDia = 20) or (vDia = 28) then
+      begin
+        try
+          scoLiberacao.Params.Values['DRIVERNAME'] := 'INTERBASE';
+          scoLiberacao.Params.Values['SQLDIALECT'] := '3';
+          scoLiberacao.Params.Values['DATABASE']   := Config.ReadString('Liberacao', 'DATABASE', '');
+          scoLiberacao.Params.Values['USER_NAME']  := Config.ReadString('Liberacao', 'USERNAME', '');
+          scoLiberacao.Params.Values['PASSWORD']   := Decoder64.DecodeString(Config.ReadString('Liberacao', 'PASSWORD', ''));
+          scoLiberacao.Connected := True;
+          prc_Gravar_Log_Pessoa;
+        finally
+          scoLiberacao.Connected := False;
+        end;
+      end;
   finally
     FreeAndNil(Config);
   end;
@@ -674,6 +711,33 @@ begin
   for i := 1 to Tamanho - Length(texto2) do
     texto2 := '0' + texto2;
   Result := texto2;
+end;
+
+procedure TdmDatabase.prc_Gravar_Log_Pessoa;
+var
+  vDocumento : string;
+begin
+  cdsLogPessoa.Close;
+  cdsLogPessoa.Open;
+
+  vDocumento := Monta_Numero2(sqEmpresaCNPJ_CPF.AsString,0);
+  if Length(vDocumento) > 11 then
+    vDocumento := copy(vDocumento,1,2) + '.' + copy(vDocumento,3,3) + '.' + copy(vDocumento,6,3) + '/' + copy(vDocumento,9,4) + '-' + copy(vDocumento,13,2)
+  else
+    vDocumento := copy(vDocumento,1,3) + '.' + copy(vDocumento,4,3) + '.' + copy(vDocumento,7,3) + '-' + copy(vDocumento,10,2);
+  if cdsLogPessoa.locate('DOCUMENTO',vDocumento,[loCaseInsensitive]) then
+    cdsLogPessoa.Edit
+  else
+    cdsLogPessoa.Insert;
+  cdsLogPessoaDOCUMENTO.AsString := vDocumento;
+  cdsLogPessoaNOME.AsString := sqEmpresaNOME.AsString;
+  cdsLogPessoaFONE.AsString := '(' + sqEmpresaDDD1.AsString + ') ' + sqEmpresaFONE.AsString;
+  cdsLogPessoaCIDADE.AsString := sqEmpresaCIDADE.AsString;
+  if cdsLogPessoaDTPRIMEIROACESSO.IsNull then
+    cdsLogPessoaDTPRIMEIROACESSO.AsDateTime := Date;
+  cdsLogPessoaDTULTIMOACESSO.AsDateTime := Date;
+  cdsLogPessoa.Post;
+  cdsLogPessoa.ApplyUpdates(0);
 end;
 
 end.
