@@ -9126,6 +9126,11 @@ object DMRecebeXML: TDMRecebeXML
       FixedChar = True
       Size = 1
     end
+    object qParametros_RecXMLPROCURAR_CBARRA_SEM_FORN: TStringField
+      FieldName = 'PROCURAR_CBARRA_SEM_FORN'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros_OC: TSQLQuery
     MaxBlobSize = -1

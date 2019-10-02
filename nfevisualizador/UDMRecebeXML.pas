@@ -2325,6 +2325,7 @@ type
     mItensNotaID_CFOPAtual: TIntegerField;
     qCFOP2: TSQLQuery;
     qCFOP2CODCFOP: TStringField;
+    qParametros_RecXMLPROCURAR_CBARRA_SEM_FORN: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -2382,7 +2383,7 @@ type
     vProduto_Inativo: String;
     vGerar_CLiq: String;
     vAtualizaCusto: String;
-    Ultimo_Item : Integer;
+    Ultimo_Item: Integer;
 
     procedure prc_Abrir_Produto(ID: Integer);
     procedure prc_Abrir_Estoque_Mov(ID: Integer);
@@ -2406,8 +2407,8 @@ type
 
     function fnc_Verifica_Produto_Forn(ID_Produto, ID_Fornecedor: Integer; Cod_Produto_Forn, Tamanho: String): Boolean;
     function fnc_Proximo_Item_Forn(ID_Produto: Integer): Integer;
-    function fnc_Ultimo_Item_Rateio(Item : Integer) : Integer;
-    function fnc_Verifica_Dup(ID_nota : Integer) : Boolean;
+    function fnc_Ultimo_Item_Rateio(Item: Integer): Integer;
+    function fnc_Verifica_Dup(ID_nota: Integer): Boolean;
 
   end;
 
@@ -2552,7 +2553,7 @@ begin
   if (qParametros_RecXMLPROCURAR_POR_CBARRA.AsString = 'S') and (not(Gravar)) then
   begin
     cdsProduto.Close;                //aqui mexer aqui     22/10/2015
-    sdsProduto.CommandText := 'SELECT * FROM PRODUTO WHERE COD_BARRA = ' + QuotedStr(CodProdutoForn);
+    sdsProduto.CommandText := 'SELECT * FROM PRODUTO WHERE COD_BARRA = ' + QuotedStr(CodBarra);
     cdsProduto.Open;
     if not cdsProduto.IsEmpty then
     begin
@@ -2560,12 +2561,15 @@ begin
       vProduto_Inativo := cdsProdutoINATIVO.AsString;
       vGerar_CLiq      := cdsProdutoUSA_CLIQ.AsString;
     end;
-    cdsProduto_Forn.Close;
-    sdsProduto_Forn.CommandText := ctProduto_Forn
-                                 + ' WHERE PF.ID = ' + IntToStr(cdsProdutoID.AsInteger)
-                                 + '   AND PF.COD_MATERIAL_FORN = ' + QuotedStr(CodProdutoForn)
-                                 + '   AND PF.ID_FORNECEDOR = ' + IntToStr(ID_Fornecedor);
-    cdsProduto_Forn.Open;
+    if (qParametros_RecXMLPROCURAR_CBARRA_SEM_FORN.AsString <> 'S') then
+    begin
+      cdsProduto_Forn.Close;
+      sdsProduto_Forn.CommandText := ctProduto_Forn
+                                   + ' WHERE PF.ID = ' + IntToStr(cdsProdutoID.AsInteger)
+                                   + '   AND PF.COD_MATERIAL_FORN = ' + QuotedStr(CodProdutoForn)
+                                   + '   AND PF.ID_FORNECEDOR = ' + IntToStr(ID_Fornecedor);
+      cdsProduto_Forn.Open;
+    end;
   end
   else
   begin
@@ -3080,7 +3084,7 @@ end;
 
 function TDMRecebeXML.fnc_Ultimo_Item_Rateio(Item: Integer): Integer;
 var
-  vItem : Integer;
+  vItem: Integer;
 begin
   vItem := 0;
   mRateioItens.Last;
