@@ -581,11 +581,12 @@ begin
 
   fDMRecebeXML.qCFOP.Close;
   fDMRecebeXML.qCFOP.ParamByName('CODCFOP').AsString      := vCodNatOper;
-  fDMRecebeXML.qCFOP.ParamByName('TIPO_EMPRESA').AsString := vTipo;
+  //02/10/2019
+  //fDMRecebeXML.qCFOP.ParamByName('TIPO_EMPRESA').AsString := vTipo;
   fDMRecebeXML.qCFOP.Open;
   if not fDMRecebeXML.qCFOP.IsEmpty then
-    Result := fDMRecebeXML.qCFOPID.AsInteger
-  else
+    Result := fDMRecebeXML.qCFOPID.AsInteger;
+  {else
   begin
     vTipo := 'A';
     fDMRecebeXML.qCFOP.Close;
@@ -594,7 +595,7 @@ begin
     fDMRecebeXML.qCFOP.Open;
     if not fDMRecebeXML.qCFOP.IsEmpty then
       Result := fDMRecebeXML.qCFOPID.AsInteger
-  end;
+  end;}
 end;
 
 procedure TfrmRecebeXML2.SMDBGrid1GetCellParams(Sender: TObject;

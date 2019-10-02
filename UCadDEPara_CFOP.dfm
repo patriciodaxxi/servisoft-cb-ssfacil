@@ -22,8 +22,8 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 828
-    Height = 575
+    Width = 836
+    Height = 582
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -41,8 +41,8 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 65
-        Width = 824
-        Height = 470
+        Width = 832
+        Height = 477
         Align = alClient
         Ctl3D = True
         DataSource = DMCadDEPara_CFOP.dsDEPara_CFOP_Consulta
@@ -75,7 +75,7 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 8
+        ColCount = 9
         RowCount = 2
         Columns = <
           item
@@ -131,12 +131,19 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
             Title.Caption = 'CFOP Produto NFCe'
             Width = 83
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COM_ST'
+            Title.Alignment = taCenter
+            Title.Caption = 'Com ST'
+            Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 824
+        Width = 832
         Height = 32
         Align = alTop
         Color = clSilver
@@ -364,8 +371,8 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 535
-        Width = 824
+        Top = 542
+        Width = 832
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -381,7 +388,7 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 824
+        Width = 832
         Height = 33
         Align = alTop
         TabOrder = 1
@@ -464,7 +471,7 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 824
+        Width = 832
         Height = 35
         Align = alTop
         Color = 8404992
@@ -690,8 +697,8 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 824
-        Height = 517
+        Width = 832
+        Height = 524
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -750,6 +757,19 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
           Height = 13
           Alignment = taRightJustify
           Caption = 'CFOP Grava'#231#227'o Prod NFCe:'
+        end
+        object Label7: TLabel
+          Left = 462
+          Top = 15
+          Width = 150
+          Height = 13
+          Caption = 'Exemplo: Usado na CFOP 5104'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clMaroon
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
         end
         object DBEdit4: TDBEdit
           Left = 692
@@ -856,6 +876,18 @@ object frmCadDEPara_CFOP: TfrmCadDEPara_CFOP
           LookupDisplay = 'CODCFOP;NOME'
           LookupSource = DMCadDEPara_CFOP.dsCFOP
           TabOrder = 6
+        end
+        object DBCheckBox1: TDBCheckBox
+          Left = 343
+          Top = 14
+          Width = 118
+          Height = 17
+          Caption = 'CST ICMS com ST'
+          DataField = 'COM_ST'
+          DataSource = DMCadDEPara_CFOP.dsDEPara_CFOP
+          TabOrder = 7
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
         end
       end
     end

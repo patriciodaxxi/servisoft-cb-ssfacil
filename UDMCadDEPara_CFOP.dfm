@@ -12,7 +12,7 @@ object DMCadDEPara_CFOP: TDMCadDEPara_CFOP
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 72
+    Left = 70
     Top = 32
     object sdsDEPara_CFOPID: TIntegerField
       FieldName = 'ID'
@@ -60,6 +60,11 @@ object DMCadDEPara_CFOP: TDMCadDEPara_CFOP
     object sdsDEPara_CFOPCOD_CFOP_PROD_NFCE: TStringField
       FieldName = 'COD_CFOP_PROD_NFCE'
       Size = 4
+    end
+    object sdsDEPara_CFOPCOM_ST: TStringField
+      FieldName = 'COM_ST'
+      FixedChar = True
+      Size = 1
     end
   end
   object dspDEPara_CFOP: TDataSetProvider
@@ -121,6 +126,11 @@ object DMCadDEPara_CFOP: TDMCadDEPara_CFOP
     object cdsDEPara_CFOPCOD_CFOP_PROD_NFCE: TStringField
       FieldName = 'COD_CFOP_PROD_NFCE'
       Size = 4
+    end
+    object cdsDEPara_CFOPCOM_ST: TStringField
+      FieldName = 'COM_ST'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsDEPara_CFOP: TDataSource
@@ -368,6 +378,11 @@ object DMCadDEPara_CFOP: TDMCadDEPara_CFOP
     object cdsDEPara_CFOP_ConsultaCOD_CFOP_PROD_NFCE: TStringField
       FieldName = 'COD_CFOP_PROD_NFCE'
       Size = 4
+    end
+    object cdsDEPara_CFOP_ConsultaCOM_ST: TStringField
+      FieldName = 'COM_ST'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsDEPara_CFOP_Consulta: TDataSource

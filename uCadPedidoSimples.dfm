@@ -526,6 +526,7 @@ object frmCadPedidoSimples: TfrmCadPedidoSimples
             Expanded = False
             FieldName = 'DTENTREGA'
             Title.Caption = 'Data Entrega'
+            Width = 64
             Visible = True
           end
           item
@@ -551,6 +552,7 @@ object frmCadPedidoSimples: TfrmCadPedidoSimples
             Expanded = False
             FieldName = 'QTD'
             Title.Caption = 'Qtd. Produtos'
+            Width = 64
             Visible = True
           end
           item

@@ -427,6 +427,8 @@ type
     sdsCFOP_VariacaoDESC_TIPO_EMPRESA: TStringField;
     sdsCFOP_VariacaoDESC_TIPO_CLIENTE: TStringField;
     sdsCFOP_VariacaoDESC_PESSOA_CLIENTE: TStringField;
+    sdsCFOPDEPARA_COM_CST: TStringField;
+    cdsCFOPDEPARA_COM_CST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsCFOPNewRecord(DataSet: TDataSet);
     procedure dspCFOPUpdateError(Sender: TObject;

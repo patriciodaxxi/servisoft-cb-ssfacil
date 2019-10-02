@@ -150,7 +150,6 @@ object frmCadCFOP: TfrmCadCFOP
           item
             Expanded = False
             FieldName = 'NOME_INTERNO'
-            Width = 64
             Visible = True
           end>
       end
@@ -1811,10 +1810,10 @@ object frmCadCFOP: TfrmCadCFOP
         Top = 318
         Width = 933
         Height = 267
-        ActivePage = TabSheet1
+        ActivePage = TabSheet4
         ActivePageDefault = TabSheet1
         Align = alClient
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 2
         FixedDimension = 19
         object TabSheet1: TRzTabSheet
@@ -2323,6 +2322,20 @@ object frmCadCFOP: TfrmCadCFOP
               DataSource = DMCadCFOP.dsCFOP
               ParentColor = False
               TabOrder = 6
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+            end
+            object DBCheckBox26: TDBCheckBox
+              Left = 259
+              Top = 63
+              Width = 462
+              Height = 17
+              Caption = 'Controlar o DE Para pela CST do ICMS (Exemplo CFOP 5104)'
+              Color = clBtnFace
+              DataField = 'DEPARA_COM_CST'
+              DataSource = DMCadCFOP.dsCFOP
+              ParentColor = False
+              TabOrder = 7
               ValueChecked = 'S'
               ValueUnchecked = 'N'
             end

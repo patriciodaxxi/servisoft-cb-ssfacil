@@ -263,6 +263,11 @@ object DMCadCFOP: TDMCadCFOP
       FixedChar = True
       Size = 1
     end
+    object sdsCFOPDEPARA_COM_CST: TStringField
+      FieldName = 'DEPARA_COM_CST'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCFOP: TDataSetProvider
     DataSet = sdsCFOP
@@ -538,6 +543,11 @@ object DMCadCFOP: TDMCadCFOP
     end
     object cdsCFOPUSA_NAO_CONTR_FISICA: TStringField
       FieldName = 'USA_NAO_CONTR_FISICA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCFOPDEPARA_COM_CST: TStringField
+      FieldName = 'DEPARA_COM_CST'
       FixedChar = True
       Size = 1
     end

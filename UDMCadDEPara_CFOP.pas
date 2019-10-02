@@ -89,6 +89,9 @@ type
     cdsDEPara_CFOPCOD_CFOP_PROD_NFCE: TStringField;
     cdsDEPara_CFOP_ConsultaID_CFOP_PROD_NFCE: TIntegerField;
     cdsDEPara_CFOP_ConsultaCOD_CFOP_PROD_NFCE: TStringField;
+    sdsDEPara_CFOPCOM_ST: TStringField;
+    cdsDEPara_CFOPCOM_ST: TStringField;
+    cdsDEPara_CFOP_ConsultaCOM_ST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCFOPUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

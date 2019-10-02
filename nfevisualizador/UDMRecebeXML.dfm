@@ -1,7 +1,8 @@
 object DMRecebeXML: TDMRecebeXML
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 728
+  Top = 142
+  Height = 586
   Width = 1366
   object sdsCFOP: TSQLDataSet
     NoMetadata = True
@@ -3400,17 +3401,11 @@ object DMRecebeXML: TDMRecebeXML
         DataType = ftString
         Name = 'CODCFOP'
         ParamType = ptInput
-      end
-      item
-        DataType = ftString
-        Name = 'TIPO_EMPRESA'
-        ParamType = ptInput
       end>
     SQL.Strings = (
       'SELECT *'
       'FROM TAB_CFOP'
-      'WHERE CODCFOP = :CODCFOP'
-      '      AND TIPO_EMPRESA = :TIPO_EMPRESA')
+      'WHERE CODCFOP = :CODCFOP')
     SQLConnection = dmDatabase.scoDados
     Left = 824
     Top = 24
@@ -3523,6 +3518,11 @@ object DMRecebeXML: TDMRecebeXML
     end
     object qCFOPGERAR_ESTOQUE: TStringField
       FieldName = 'GERAR_ESTOQUE'
+      FixedChar = True
+      Size = 1
+    end
+    object qCFOPDEPARA_COM_CST: TStringField
+      FieldName = 'DEPARA_COM_CST'
       FixedChar = True
       Size = 1
     end
@@ -6669,6 +6669,11 @@ object DMRecebeXML: TDMRecebeXML
       FieldName = 'COD_CST'
       Size = 3
     end
+    object cdsTab_CSTICMSTIPO_ICMS: TStringField
+      FieldName = 'TIPO_ICMS'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsTab_CSTICMS: TDataSource
     DataSet = cdsTab_CSTICMS
@@ -7675,12 +7680,17 @@ object DMRecebeXML: TDMRecebeXML
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT *'
-      'FROM DEPARA_CFOP'
+      
+        'SELECT d.id, d.id_cfop_ent, d.tipo_produto, d.id_cfop_gra, d.cod' +
+        '_cfop_ent,'
+      'd.cod_cfop_gra, d.id_cfop_ped, d.cod_cfop_ped, d.id_sittrib_cf,'
+      'd.cod_sittrib_cf, d.id_cfop_prod_nfce, d.cod_cfop_prod_nfce,'
+      'coalesce(d.com_st,'#39'N'#39') com_st'
+      'FROM DEPARA_CFOP d'
       ''
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 824
+    Left = 822
     Top = 72
     object qDeParaID: TIntegerField
       FieldName = 'ID'
@@ -7721,6 +7731,18 @@ object DMRecebeXML: TDMRecebeXML
     object qDeParaCOD_CFOP_PROD_NFCE: TStringField
       FieldName = 'COD_CFOP_PROD_NFCE'
       Size = 4
+    end
+    object qDeParaID_CFOP_PED: TIntegerField
+      FieldName = 'ID_CFOP_PED'
+    end
+    object qDeParaCOD_CFOP_PED: TStringField
+      FieldName = 'COD_CFOP_PED'
+      Size = 4
+    end
+    object qDeParaCOM_ST: TStringField
+      FieldName = 'COM_ST'
+      FixedChar = True
+      Size = 1
     end
   end
   object sdsTab_CSTIPI: TSQLDataSet

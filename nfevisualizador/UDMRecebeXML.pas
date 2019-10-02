@@ -2326,6 +2326,11 @@ type
     qCFOP2: TSQLQuery;
     qCFOP2CODCFOP: TStringField;
     qParametros_RecXMLPROCURAR_CBARRA_SEM_FORN: TStringField;
+    cdsTab_CSTICMSTIPO_ICMS: TStringField;
+    qCFOPDEPARA_COM_CST: TStringField;
+    qDeParaID_CFOP_PED: TIntegerField;
+    qDeParaCOD_CFOP_PED: TStringField;
+    qDeParaCOM_ST: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
