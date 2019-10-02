@@ -442,19 +442,19 @@ type
     vID_CFOP_NFCe: Integer;
     vCODCFOP_NFCe: String;
     vFilial_Local: Integer;
-    vGerar_Estoque : String;
+    vGerar_Estoque: String;
 
     ffrmRecebeXML_ConsItens: TfrmRecebeXML_ConsItens;
     ffrmSel_Produto: TfrmSel_Produto;
     ffrmRecebeXML_AlteraItem: TfrmRecebeXML_AlteraItem;
     ffrmRecebeXML_ConsOC: TfrmRecebeXML_ConsOC;
     ffrmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota;
-    ffrmRateio_Itens : TfrmRateio_Itens;
+    ffrmRateio_Itens: TfrmRateio_Itens;
 
     fDMEstoque: TDMEstoque;
     fDMMovimento: TDMMovimento;
     fDMCadProduto_Lote: TDMCadProduto_Lote;
-    ffrmRecebeXML_Duplicatas : TfrmRecebeXML_Duplicatas;
+    ffrmRecebeXML_Duplicatas: TfrmRecebeXML_Duplicatas;
 
     procedure Le_cdsDetalhe;
     procedure Grava_mItensNota;
@@ -485,7 +485,7 @@ type
     procedure Gravar_MaterialFornecedor;
     procedure Gravar_NotaEntrada;
     procedure Gravar_NotaEntradaParc;
-    procedure Gravar_NotaEntradaItens(Tipo : String); //R - Rateio   N - Normal
+    procedure Gravar_NotaEntradaItens(Tipo: String); //R - Rateio   N - Normal
     procedure Gravar_Estoque;
     procedure Gravar_Movimento;
     procedure Grava_Produto_Lote; //28/10/2017
@@ -527,7 +527,7 @@ type
     procedure prc_Ajuste_Prod_Pela_OC(PeloXML: Boolean);
     procedure prc_Ajuste_Prod_Pela_Nota(PeloXML: Boolean);
     procedure prc_Abrir_OC;
-    function fnc_Proxima_Ref : Integer;
+    function fnc_Proxima_Ref: Integer;
     procedure prc_Gerar_Ref;
     procedure prc_Gravar_Tipo_Sped_Prod;
     procedure prc_Gravar_Rateio;
@@ -557,7 +557,7 @@ uses
 procedure TfrmRecebeXML.Move_Campos(Campo1,Campo2, Soma: String);
 var
   i: Integer;
-//  vAux : String;
+//  vAux: String;
 begin
   for i:=0 to (fDMRecebeXML.cdsDetalhe.FieldCount-1) do
   begin
@@ -585,7 +585,7 @@ var
   vCNPJAux: String;
   vExisteAux: Boolean;
 begin
-  if vCodFornecedor < 1 then
+  if (vCodFornecedor < 1) and (fDMRecebeXML.qParametros_RecXMLPROCURAR_CBARRA_SEM_FORN.AsString <> 'S') then
     Exit;
   if (fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and not(ckAssociar.Checked) then
     exit;
@@ -621,10 +621,20 @@ begin
     end
     else
     begin
-      fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger := fDMRecebeXML.cdsProduto_FornID.AsInteger;
-      if fDMRecebeXML.mItensNotaUnidade.AsString = fDMRecebeXML.cdsProduto_FornUNIDADE_FORN.AsString then
-        fDMRecebeXML.mItensNotaItem_Unidade.AsInteger := fDMRecebeXML.cdsProduto_FornITEM_UNIDADE.AsInteger;
-      fDMRecebeXML.prc_Abrir_Produto(fDMRecebeXML.cdsProduto_FornID.AsInteger);
+      if (fDMRecebeXML.qParametros_RecXMLPROCURAR_CBARRA_SEM_FORN.AsString <> 'S') then
+      begin
+        fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger := fDMRecebeXML.cdsProduto_FornID.AsInteger;
+        if fDMRecebeXML.mItensNotaUnidade.AsString = fDMRecebeXML.cdsProduto_FornUNIDADE_FORN.AsString then
+          fDMRecebeXML.mItensNotaItem_Unidade.AsInteger := fDMRecebeXML.cdsProduto_FornITEM_UNIDADE.AsInteger;
+        fDMRecebeXML.prc_Abrir_Produto(fDMRecebeXML.cdsProduto_FornID.AsInteger);
+      end
+      else
+      begin
+        fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger := fDMRecebeXML.cdsProdutoID.AsInteger;
+        if fDMRecebeXML.mItensNotaUnidade.AsString = fDMRecebeXML.cdsProdutoUNIDADE.AsString then
+          fDMRecebeXML.mItensNotaItem_Unidade.AsString := fDMRecebeXML.cdsProdutoUNIDADE.AsString;
+        fDMRecebeXML.prc_Abrir_Produto(fDMRecebeXML.cdsProdutoID.AsInteger);
+      end;
       fDMRecebeXML.mItensNotaUsa_Cor.AsString       := fDMRecebeXML.cdsProdutoUSA_COR.AsString;
       fDMRecebeXML.mItensNotaUsa_Preco_Cor.AsString := fDMRecebeXML.cdsProdutoUSA_PRECO_COR.AsString;
       fDMRecebeXML.mItensNotaID_Cor.AsInteger       := fDMRecebeXML.cdsProduto_FornID_COR.AsInteger;
@@ -883,9 +893,9 @@ end;
 
 procedure TfrmRecebeXML.Le_cdsDetalhe;
 var
-  vDup : Real;
-  Node_Tpag : IXMLNode;
-  vTexto : String;
+  vDup: Real;
+  Node_Tpag: IXMLNode;
+  vTexto: String;
 begin
   fDMRecebeXML.mItensNota.EmptyDataSet;
   fDMRecebeXML.mParc.EmptyDataSet;
@@ -2446,9 +2456,9 @@ procedure TfrmRecebeXML.Gravar_NotaEntrada;
 var
   vNumSeq: Integer;
   vExisteAux: Boolean;
-  vDup : Real;
-  vTexto : String;
-  Node_Tpag : IXMLNode;
+  vDup: Real;
+  vTexto: String;
+  Node_Tpag: IXMLNode;
 begin
   vID_Nota := 0;
   vGravar := False;
@@ -2580,7 +2590,7 @@ begin
   end;
 end;
 
-procedure TfrmRecebeXML.Gravar_NotaEntradaItens(Tipo : String);
+procedure TfrmRecebeXML.Gravar_NotaEntradaItens(Tipo: String);
 begin
   vItem := vItem + 1;
 
@@ -3083,7 +3093,7 @@ var
   ID: TTransactionDesc;
   vErro: String;
   vVlrAux: Real;
-  vIDAux : Integer;
+  vIDAux: Integer;
 begin
   fDMRecebeXML.mPedidoAux.EmptyDataSet;
   if CheckBox1.Checked then
@@ -3296,7 +3306,7 @@ end;
 
 procedure TfrmRecebeXML.btnAbrirXMLClick(Sender: TObject);
 var
-  vArquivoAux, vPath, vFile : String;
+  vArquivoAux, vPath, vFile: String;
   vFlag: Boolean;
   i: Integer;
   oNFe: TStrings;
@@ -4460,10 +4470,10 @@ begin
     end;
   end;
   case ComboBox1.ItemIndex of
-    0 : cbTipoSped.ItemIndex := 4;
-    1 : cbTipoSped.ItemIndex := 1;
-    2 : cbTipoSped.ItemIndex := 7;
-    3 : cbTipoSped.ItemIndex := 8;
+    0: cbTipoSped.ItemIndex := 4;
+    1: cbTipoSped.ItemIndex := 1;
+    2: cbTipoSped.ItemIndex := 7;
+    3: cbTipoSped.ItemIndex := 8;
   end;
 end;
 
@@ -4723,7 +4733,7 @@ end;
 
 procedure TfrmRecebeXML.prc_Gravar_Rateio;
 var
-  vVlrAux : Real;
+  vVlrAux: Real;
 begin
 
   fDMRecebeXML.mRateioGeral.Filtered := False;
@@ -4779,10 +4789,10 @@ end;
 
 procedure TfrmRecebeXML.btnAjustarUnidadeClick(Sender: TObject);
 var
-  vUnidAux : String;
-  vUnidInt : String;
-  vQtdConv : Real;
-  vConvUnid : Boolean;
+  vUnidAux: String;
+  vUnidInt: String;
+  vQtdConv: Real;
+  vConvUnid: Boolean;
 begin
   vUnidAux := InputBox('Trocar a Unidade','Informar a Unidade que que Veio no XML', '');
   if trim(vUnidAux) = '' then
@@ -4840,7 +4850,7 @@ end;
 
 procedure TfrmRecebeXML.CheckBox2Click(Sender: TObject);
 var
-  i : Integer;
+  i: Integer;
 begin
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin
