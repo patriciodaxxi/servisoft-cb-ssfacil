@@ -8419,11 +8419,6 @@ object dmCadProduto: TdmCadProduto
     object cdsFichaTecnicaQTD_ESTOQUE_MIN: TFloatField
       FieldName = 'QTD_ESTOQUE_MIN'
     end
-    object cdsFichaTecnicaTIPO: TStringField
-      FieldName = 'TIPO'
-      FixedChar = True
-      Size = 1
-    end
   end
   object dsFichaTecnica: TDataSource
     DataSet = cdsFichaTecnica

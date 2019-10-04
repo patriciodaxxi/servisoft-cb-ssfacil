@@ -1901,7 +1901,6 @@ type
     cdsFichaTecnicaID_POSICAO: TIntegerField;
     cdsFichaTecnicaID_COR_COMBINACAO: TIntegerField;
     cdsFichaTecnicaQTD_ESTOQUE_MIN: TFloatField;
-    cdsFichaTecnicaTIPO: TStringField;
     cdsProduto_ConsultaQTD_ESTOQUE: TFloatField;
     sdsProduto_Comb_MatNOME_POSICAO: TStringField;
     cdsProduto_Comb_MatNOME_POSICAO: TStringField;
