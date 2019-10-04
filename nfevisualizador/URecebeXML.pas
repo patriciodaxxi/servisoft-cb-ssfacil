@@ -635,7 +635,7 @@ begin
       begin
         fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger := fDMRecebeXML.cdsProdutoID.AsInteger;
         if fDMRecebeXML.mItensNotaUnidade.AsString = fDMRecebeXML.cdsProdutoUNIDADE.AsString then
-          fDMRecebeXML.mItensNotaItem_Unidade.AsString := fDMRecebeXML.cdsProdutoUNIDADE.AsString;
+          fDMRecebeXML.mItensNotaItem_Unidade.AsInteger := fDMRecebeXML.cdsProduto_FornITEM_UNIDADE.AsInteger;
         fDMRecebeXML.prc_Abrir_Produto(fDMRecebeXML.cdsProdutoID.AsInteger);
       end;
       fDMRecebeXML.mItensNotaUsa_Cor.AsString       := fDMRecebeXML.cdsProdutoUSA_COR.AsString;
