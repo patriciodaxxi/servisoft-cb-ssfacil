@@ -1959,6 +1959,8 @@ type
     qParametros_PedUSA_COD_CLIENTE: TStringField;
     qParametros_ProdCOPIAR_COMB: TStringField;
     qParametros_ProdATUALIZAR_CUSTO_POR_COR: TStringField;
+    qParametros_ProdUSA_BITOLA: TStringField;
+    cdsProduto_ConsultaMEDIDA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

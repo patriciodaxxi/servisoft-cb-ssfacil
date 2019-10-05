@@ -23,8 +23,8 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1089
-    Height = 671
+    Width = 1097
+    Height = 679
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -50,8 +50,8 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 135
-        Width = 1085
-        Height = 472
+        Width = 1093
+        Height = 480
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPedido.dsPedido_Consulta
@@ -235,7 +235,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1085
+        Width = 1093
         Height = 105
         Align = alTop
         Color = clSilver
@@ -508,8 +508,8 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 631
-        Width = 1085
+        Top = 639
+        Width = 1093
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -527,7 +527,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 1085
+        Width = 1093
         Height = 30
         Align = alTop
         Color = clSilver
@@ -832,8 +832,8 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
       end
       object Panel4: TPanel
         Left = 0
-        Top = 607
-        Width = 1085
+        Top = 615
+        Width = 1093
         Height = 24
         Align = alBottom
         Color = clSilver
@@ -925,7 +925,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1085
+        Width = 1093
         Height = 30
         Align = alTop
         Color = 8404992
@@ -1173,7 +1173,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 1085
+        Width = 1093
         Height = 131
         Align = alTop
         Enabled = False
@@ -1181,13 +1181,13 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
         object Panel3: TPanel
           Left = 1
           Top = 23
-          Width = 1083
+          Width = 1091
           Height = 107
           Align = alClient
           Color = 13041606
           TabOrder = 0
           DesignSize = (
-            1083
+            1091
             107)
           object Label18: TLabel
             Left = 19
@@ -1392,7 +1392,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               OnClick = SpeedButton1Click
             end
             object Label3: TLabel
-              Left = 14
+              Left = 15
               Top = 11
               Width = 50
               Height = 13
@@ -1437,7 +1437,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             end
             object RxDBLookupCombo10: TRxDBLookupCombo
               Left = 67
-              Top = 3
+              Top = 5
               Width = 359
               Height = 21
               DropDownCount = 15
@@ -1604,7 +1604,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 1083
+          Width = 1091
           Height = 22
           Align = alTop
           Color = clSilver
@@ -1686,8 +1686,8 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
       end
       object Panel10: TPanel
         Left = 0
-        Top = 584
-        Width = 1085
+        Top = 592
+        Width = 1093
         Height = 64
         Align = alBottom
         Color = clSilver
@@ -2204,8 +2204,8 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
       object RzGroupBox1: TRzGroupBox
         Left = 0
         Top = 161
-        Width = 1085
-        Height = 423
+        Width = 1093
+        Height = 431
         Align = alClient
         BorderColor = clNavy
         BorderInner = fsButtonUp
@@ -2229,13 +2229,13 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           Left = 5
           Top = 18
           Width = 489
-          Height = 400
+          Height = 408
           Align = alLeft
           Color = 13041663
           TabOrder = 0
           object Label38: TLabel
             Left = 1
-            Top = 218
+            Top = 226
             Width = 487
             Height = 13
             Align = alBottom
@@ -2589,6 +2589,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
                 TabOrder = 1
                 OnEnter = dbedtVlrDescEnter
                 OnExit = dbedtVlrDescExit
+                OnKeyDown = dbedtVlrDescKeyDown
               end
               object dbedtPercDesc: TDBEdit
                 Left = 65
@@ -2611,6 +2612,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
                 ParentFont = False
                 TabOrder = 0
                 OnExit = dbedtPercDescExit
+                OnKeyDown = dbedtPercDescKeyDown
               end
               object dbedtVlrProd: TDBEdit
                 Left = 65
@@ -2723,7 +2725,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           end
           object Panel7: TPanel
             Left = 1
-            Top = 370
+            Top = 378
             Width = 487
             Height = 29
             Align = alBottom
@@ -2820,7 +2822,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           end
           object Panel8: TPanel
             Left = 1
-            Top = 309
+            Top = 317
             Width = 487
             Height = 61
             Align = alBottom
@@ -2901,7 +2903,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           end
           object DBMemo1: TDBMemo
             Left = 1
-            Top = 231
+            Top = 239
             Width = 487
             Height = 78
             Align = alBottom
@@ -2914,8 +2916,8 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
         object SMDBGrid2: TSMDBGrid
           Left = 494
           Top = 18
-          Width = 586
-          Height = 400
+          Width = 594
+          Height = 408
           Align = alClient
           Ctl3D = False
           DataSource = DMCadPedido.dsPedido_Itens
@@ -2947,7 +2949,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 16
+          ColCount = 17
           RowCount = 2
           Columns = <
             item
@@ -3015,6 +3017,14 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               FieldName = 'VLR_UNITARIO'
               Title.Color = 9568255
               Width = 68
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'PERC_DESCONTO'
+              Title.Alignment = taCenter
+              Title.Caption = '% Desc.'
+              Title.Color = 9568255
               Visible = True
             end
             item

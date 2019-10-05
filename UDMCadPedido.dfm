@@ -1965,7 +1965,7 @@ object DMCadPedido: TDMCadPedido
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspParametros'
-    Left = 400
+    Left = 401
     Top = 498
     object cdsParametrosID: TIntegerField
       FieldName = 'ID'
@@ -10569,7 +10569,7 @@ object DMCadPedido: TDMCadPedido
       '     AND TUF.TIPO_PRODUTO = :TIPO_PRODUTO')
     SQLConnection = dmDatabase.scoDados
     Left = 992
-    Top = 439
+    Top = 438
     object qNCM_UFID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -15106,6 +15106,11 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_PedEXIGE_PEDIDO_CLI: TStringField
       FieldName = 'EXIGE_PEDIDO_CLI'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedPEDIDO_COMERCIO: TStringField
+      FieldName = 'PEDIDO_COMERCIO'
       FixedChar = True
       Size = 1
     end

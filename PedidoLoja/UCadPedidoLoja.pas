@@ -278,6 +278,10 @@ type
     procedure edtLoteEnter(Sender: TObject);
     procedure Analtico1Click(Sender: TObject);
     procedure Sintet1Click(Sender: TObject);
+    procedure dbedtPercDescKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure dbedtVlrDescKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMCadPedido: TDMCadPedido;
@@ -569,7 +573,7 @@ begin
   if fDMCadPedido.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S' then
     fDMCadPedido.prc_Abrir_Servico;
 
-  if fDMCadPedido.cdsParametrosID_OPERACAO_VENDA.AsInteger > 0 then
+  if (fDMCadPedido.cdsParametrosID_OPERACAO_VENDA.AsInteger > 0) and (RxDBLookupCombo10.Visible) then
   begin
     fDMCadPedido.cdsPedidoID_OPERACAO_NOTA.AsInteger := fDMCadPedido.cdsParametrosID_OPERACAO_VENDA.AsInteger;
     fDMCadPedido.cdsPedidoFINALIDADE.AsString        := 'C';
@@ -624,6 +628,9 @@ begin
       if (SMDBGrid2.Columns[i].FieldName = 'TAMANHO') then
         SMDBGrid2.Columns[i].Visible := False;
     end;
+    if (SMDBGrid2.Columns[i].FieldName = 'NUM_LOTE_CONTROLE') or (SMDBGrid2.Columns[i].FieldName = 'QTD_CAIXA') then
+      SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+
     if (SMDBGrid2.Columns[i].FieldName = 'CARIMBO') then
       SMDBGrid2.Columns[i].Visible := (fDMCadPedido.cdsParametrosUSA_CARIMBO.AsString = 'S');
     if (SMDBGrid2.Columns[i].FieldName = 'NOME_COR_COMBINACAO') then
@@ -701,6 +708,17 @@ begin
   Label79.Visible  := ((fDMCadPedido.qParametros_PedENVIA_SMS.AsString = 'S') or (fDMCadPedido.qParametros_PedMOSTRAR_FONE.AsString = 'S'));
   DBEdit25.Visible := ((fDMCadPedido.qParametros_PedENVIA_SMS.AsString = 'S') or (fDMCadPedido.qParametros_PedMOSTRAR_FONE.AsString = 'S'));
   DBEdit26.Visible := ((fDMCadPedido.qParametros_PedENVIA_SMS.AsString = 'S') or (fDMCadPedido.qParametros_PedMOSTRAR_FONE.AsString = 'S'));
+
+  //05/10/2019
+  Label27.Visible  := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  edtLote.Visible  := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  Label48.Visible  := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  dbedtQtdCaixa.Visible  := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  RzGroupBox2.Visible    := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  dbchkEncomenda.Visible := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  Label73.Visible        := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  dbedtVlrProd.Visible   := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  //************************
 end;
 
 procedure TfrmCadPedidoLoja.prc_Consultar(ID: Integer);
@@ -2902,6 +2920,35 @@ begin
   begin
     DBMemo1.Visible := True;
     Label38.Visible := True;
+  end;
+end;
+
+procedure TfrmCadPedidoLoja.dbedtPercDescKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = vk_Return then
+  begin
+    if trim(dbedtPercDesc.Text) <> '' then
+    begin
+      if StrToFloat(Monta_Numero(dbedtPercDesc.Text,0)) > 0 then
+        btnConfirmar.SetFocus
+      else
+        dbedtVlrDesc.SetFocus;
+    end
+    else
+      dbedtVlrDesc.SetFocus;
+  end;
+end;
+
+procedure TfrmCadPedidoLoja.dbedtVlrDescKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = vk_Return then
+  begin
+    if dbedtVlrProd.Visible then
+      dbedtVlrProd.SetFocus
+    else
+      btnConfirmar_Itens.SetFocus;
   end;
 end;
 

@@ -2121,15 +2121,16 @@ object dmCadProduto: TdmCadProduto
       '      when (PRO.TIPO_REG = '#39'S'#39') then '#39'Semiacabado'#39#13#10'         els' +
       'e '#39#39#13#10'       end as TIPO_REG_DESCRICAO,'#13#10#13#10'       (select cast(s' +
       'um(E2.QTD) AS Float) QTDGERAL'#13#10'        from ESTOQUE_ATUAL E2'#13#10'  ' +
-      '      where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE, PCUSTO.CONTADOR' +
-      ' CONT_POSSUIPRECO, PRO.DTCAD, LIN.NOME NOME_LINHA, coalesce(NCM.' +
-      'gerar_st,'#39'N'#39') GERAR_ST'#13#10'from PRODUTO PRO'#13#10'left join TAB_NCM NCM ' +
-      'on (PRO.ID_NCM = NCM.ID)'#13#10'left join MARCA on (PRO.ID_MARCA = MAR' +
-      'CA.ID)'#13#10'left join GRUPO on (PRO.ID_GRUPO = GRUPO.ID)'#13#10'left join ' +
-      'PRODUTO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left join PRODUTO_LIVRO ' +
-      'LI on (PRO.ID = LI.ID)  '#13#10'left join PESSOA FORN on pro.id_fornec' +
-      'edor = forn.codigo'#13#10'LEFT JOIN vpossui_pcusto PCUSTO ON PRO.ID = ' +
-      'PCUSTO.ID'#13#10'left join LINHA LIN on (lin.id = pro.id_linha)'#13#10
+      '      where E2.ID_PRODUTO = PRO.ID) QTD_ESTOQUE,'#13#10'PCUSTO.CONTADO' +
+      'R CONT_POSSUIPRECO, PRO.DTCAD, LIN.NOME NOME_LINHA,'#13#10'coalesce(NC' +
+      'M.gerar_st,'#39'N'#39') GERAR_ST, PRO.MEDIDA'#13#10'from PRODUTO PRO'#13#10'left joi' +
+      'n TAB_NCM NCM on (PRO.ID_NCM = NCM.ID)'#13#10'left join MARCA on (PRO.' +
+      'ID_MARCA = MARCA.ID)'#13#10'left join GRUPO on (PRO.ID_GRUPO = GRUPO.I' +
+      'D)'#13#10'left join PRODUTO_VEICULO PV on (PRO.ID = PV.ID)'#13#10'left join ' +
+      'PRODUTO_LIVRO LI on (PRO.ID = LI.ID)  '#13#10'left join PESSOA FORN on' +
+      ' pro.id_fornecedor = forn.codigo'#13#10'LEFT JOIN vpossui_pcusto PCUST' +
+      'O ON PRO.ID = PCUSTO.ID'#13#10'left join LINHA LIN on (lin.id = pro.id' +
+      '_linha)'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -2412,6 +2413,9 @@ object dmCadProduto: TdmCadProduto
       FieldName = 'TIPO_ALGODAO'
       FixedChar = True
       Size = 1
+    end
+    object cdsProduto_ConsultaMEDIDA: TStringField
+      FieldName = 'MEDIDA'
     end
   end
   object dsProduto_Consulta: TDataSource
@@ -4273,7 +4277,7 @@ object dmCadProduto: TdmCadProduto
       '  AND TAMANHO = :TAMANHO')
     SQLConnection = dmDatabase.scoDados
     Left = 903
-    Top = 337
+    Top = 338
     object qGradeMarcarID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7087,6 +7091,11 @@ object dmCadProduto: TdmCadProduto
     end
     object qParametros_ProdATUALIZAR_CUSTO_POR_COR: TStringField
       FieldName = 'ATUALIZAR_CUSTO_POR_COR'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_BITOLA: TStringField
+      FieldName = 'USA_BITOLA'
       FixedChar = True
       Size = 1
     end

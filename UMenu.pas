@@ -1970,9 +1970,9 @@ begin
     sds.SQLConnection := dmDatabase.scoDados;
     sds.NoMetadata    := True;
     sds.GetMetadata   := False;
-    sds.CommandText   := ' SELECT PEDIDO_LOJA FROM PARAMETROS_PED ';
+    sds.CommandText   := ' SELECT PEDIDO_LOJA, PEDIDO_COMERCIO FROM PARAMETROS_PED ';
     sds.Open;
-    if sds.FieldByName('PEDIDO_LOJA').AsString = 'S' then
+    if (sds.FieldByName('PEDIDO_LOJA').AsString = 'S') or (sds.FieldByName('PEDIDO_COMERCIO').AsString = 'S') then
       vPedLoja := True;
   finally
     FreeAndNil(sds);

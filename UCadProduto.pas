@@ -1654,6 +1654,13 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'PRECO_CUSTO') then
       SMDBGrid1.Columns[i].Visible := label4.Enabled
     else
+    if (SMDBGrid1.Columns[i].FieldName = 'MEDIDA') then
+    begin
+      SMDBGrid1.Columns[i].Visible := ((fDMCadProduto.qParametros_ProdUSA_MEDIDA.AsString = 'S') or (fDMCadProduto.qParametros_ProdUSA_BITOLA.AsString = 'S'));
+      if fDMCadProduto.qParametros_ProdUSA_BITOLA.AsString = 'S' then
+        SMDBGrid1.Columns[i].Title.Caption := 'Bitola';
+    end
+    else
     if (SMDBGrid1.Columns[i].FieldName = 'NOME_FORNECEDOR') then
       SMDBGrid1.Columns[i].Visible := (fDMCadProduto.qParametrosUSA_PRODUTO_FORNECEDOR.AsString <> 'N')
     else
@@ -1806,8 +1813,10 @@ begin
   rxdbFilial.Visible        := (fDMCadProduto.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S');
   Label127.Visible          := (fDMCadProduto.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S');
   RxDBLookupCombo19.Visible := (fDMCadProduto.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S');
-  Label129.Visible          := (fDMCadProduto.qParametros_ProdUSA_MEDIDA.AsString = 'S');
-  DBEdit64.Visible          := (fDMCadProduto.qParametros_ProdUSA_MEDIDA.AsString = 'S');
+  Label129.Visible          := (fDMCadProduto.qParametros_ProdUSA_MEDIDA.AsString = 'S') or (fDMCadProduto.qParametros_ProdUSA_BITOLA.AsString = 'S');
+  DBEdit64.Visible          := (fDMCadProduto.qParametros_ProdUSA_MEDIDA.AsString = 'S') or (fDMCadProduto.qParametros_ProdUSA_BITOLA.AsString = 'S');
+  if (fDMCadProduto.qParametros_ProdUSA_BITOLA.AsString = 'S') then
+    Label129.Caption := 'Bitola:';
   Label130.Visible          := (fDMCadProduto.qParametros_ProdUSA_QTD_EMBALAGEM.AsString = 'S');
   DBEdit65.Visible          := (fDMCadProduto.qParametros_ProdUSA_QTD_EMBALAGEM.AsString = 'S');
   Label170.Visible          := (fDMCadProduto.qParametros_ProdUSA_QTD_EMBALAGEM.AsString = 'S');
