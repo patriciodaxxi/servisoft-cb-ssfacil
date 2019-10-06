@@ -43,6 +43,8 @@ type
     procedure btnGerarParcelasClick(Sender: TObject);
     procedure btnExcluirParcelasClick(Sender: TObject);
     procedure DBEdit16Change(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     procedure prc_Opcao_Prazo;
@@ -220,6 +222,13 @@ var
 begin
   vAux := Monta_Numero(DBEdit16.Text,0);
   DBCheckBox4.Visible := ((vAux <> '') and (StrToFloat(vAux) > 0));
+end;
+
+procedure TfrmCadPedidoLoja_Pag.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F10) then
+    btnFecharClick(Sender);
 end;
 
 end.

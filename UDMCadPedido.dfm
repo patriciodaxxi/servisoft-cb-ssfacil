@@ -15114,6 +15114,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedUSA_REF_DIG_PEDLOJA: TStringField
+      FieldName = 'USA_REF_DIG_PEDLOJA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 

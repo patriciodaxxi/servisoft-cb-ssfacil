@@ -7887,15 +7887,15 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'E.NGR, PE.ID_TAB_PRECO, pi.TIPO_OS, PF.DESC_SUFRAMA_PIS_COFINS,'#13 +
       #10'       PF.DESC_SUFRAMA_ICMS, O.DTEMISSAO DTEMISSAO_OS, O.NUM_OS' +
       ' NUM_OS_SERVICO, O.DTRECEBIMENTO, O.DT_AGENDA,'#13#10'       PIT.COMPR' +
-      'IMENTO, PIT.LARGURA, PIT.ESPESSURA, PI.DRAWBACK'#13#10'from PEDIDO PE'#13 +
-      #10'inner join PEDIDO_ITEM pi on (PE.ID = pi.ID)'#13#10'inner join PESSOA' +
-      ' CLI on (PE.ID_CLIENTE = CLI.CODIGO)'#13#10'inner join PRODUTO PRO on ' +
-      '(pi.ID_PRODUTO = PRO.ID)'#13#10'left join COMBINACAO COMB on (pi.ID_CO' +
-      'R = COMB.ID)'#13#10'left join GRUPO GR on PRO.ID_GRUPO = GR.ID'#13#10'left j' +
-      'oin PESSOA_FISCAL PF on PE.ID_CLIENTE = PF.CODIGO'#13#10'left join ORD' +
-      'EMSERVICO O on pi.ID_OS_SERV = O.ID'#13#10'left join PEDIDO_ITEM_TIPO ' +
-      'PIT ON PI.ID = PIT.ID AND PI.ITEM = PIT.ITEM'#13#10'where pi.QTD_RESTA' +
-      'NTE > 0'#13#10#13#10#13#10
+      'IMENTO, PIT.LARGURA, PIT.ESPESSURA, PI.DRAWBACK, PE.TIPO_DESCONT' +
+      'O,'#13#10'       PI.perc_desconto'#13#10'from PEDIDO PE'#13#10'inner join PEDIDO_I' +
+      'TEM pi on (PE.ID = pi.ID)'#13#10'inner join PESSOA CLI on (PE.ID_CLIEN' +
+      'TE = CLI.CODIGO)'#13#10'inner join PRODUTO PRO on (pi.ID_PRODUTO = PRO' +
+      '.ID)'#13#10'left join COMBINACAO COMB on (pi.ID_COR = COMB.ID)'#13#10'left j' +
+      'oin GRUPO GR on PRO.ID_GRUPO = GR.ID'#13#10'left join PESSOA_FISCAL PF' +
+      ' on PE.ID_CLIENTE = PF.CODIGO'#13#10'left join ORDEMSERVICO O on pi.ID' +
+      '_OS_SERV = O.ID'#13#10'left join PEDIDO_ITEM_TIPO PIT ON PI.ID = PIT.I' +
+      'D AND PI.ITEM = PIT.ITEM'#13#10'where pi.QTD_RESTANTE > 0'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -7904,7 +7904,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
-    Left = 441
+    Left = 439
     Top = 199
   end
   object cdsPedido: TClientDataSet
@@ -8249,6 +8249,13 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
+    end
+    object cdsPedidoTIPO_DESCONTO: TStringField
+      FieldName = 'TIPO_DESCONTO'
+      Size = 1
+    end
+    object cdsPedidoPERC_DESCONTO: TFloatField
+      FieldName = 'PERC_DESCONTO'
     end
   end
   object dsPedido: TDataSource
@@ -13027,6 +13034,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object qParametros_PedPERMITE_ALT_NOMEPROD: TStringField
       FieldName = 'PERMITE_ALT_NOMEPROD'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedPEDIDO_COMERCIO: TStringField
+      FieldName = 'PEDIDO_COMERCIO'
       FixedChar = True
       Size = 1
     end

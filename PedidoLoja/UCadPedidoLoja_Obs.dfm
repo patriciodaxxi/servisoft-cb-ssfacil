@@ -12,9 +12,11 @@ object frmCadPedidoLoja_Obs: TfrmCadPedidoLoja_Obs
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -23,7 +25,7 @@ object frmCadPedidoLoja_Obs: TfrmCadPedidoLoja_Obs
     Top = 141
     Width = 101
     Height = 28
-    Caption = 'Fechar'
+    Caption = '(F10) Fechar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -13

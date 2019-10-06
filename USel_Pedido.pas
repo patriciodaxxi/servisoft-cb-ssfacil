@@ -546,7 +546,15 @@ begin
     if Lote then
       fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat + VlrDesconto
     else
-      fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat;
+    begin
+      //06/10/2019
+      if trim(fDMCadNotaFiscal.qParametros_PedPEDIDO_COMERCIO.AsString) <> 'S' then
+        fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat
+      else
+      if (trim(fDMCadNotaFiscal.cdsPedidoTIPO_DESCONTO.AsString) <> 'I') then
+        fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat;
+      //*************
+    end;
   end;
   //*******************
   if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DESCONTO.AsFloat)) > 0 then
@@ -882,6 +890,15 @@ begin
   //05/10/2016
   fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE_PED.AsInteger := fDMCadNotaFiscal.cdsPedidoID_MOVESTOQUE.AsInteger;
   //*************
+
+  //06/10/2019
+  if (fDMCadNotaFiscal.cdsPedidoTIPO_DESCONTO.AsString = 'I') and (fDMCadNotaFiscal.qParametros_PedPEDIDO_COMERCIO.AsString = 'S') then
+  begin
+    fDMCadNotaFiscal.cdsNotaFiscalTIPO_DESCONTO.AsString      := 'I';
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_DESCONTO.AsFloat := fDMCadNotaFiscal.cdsPedidoPERC_DESCONTO.AsFloat;
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_DESCONTO.AsFloat  := fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat; 
+  end;
+  //***********
 
   vQtd_Tam := 0;
   if vTipo_RegPed = 'C' then
@@ -1287,19 +1304,25 @@ begin
           //begin
 
           //09/08/2018 calculando o desconto parcial
-          vVlrAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat));
-          if StrToFloat(FormatFloat('0.00',vVlrAux)) > 0 then
+          vVlrAux := 0;
+          //06/10/2019
+          if ((fDMCadNotaFiscal.qParametros_PedPEDIDO_COMERCIO.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsPedidoTIPO_DESCONTO.AsString) = 'N'))
+            or (trim(fDMCadNotaFiscal.qParametros_PedPEDIDO_COMERCIO.AsString) <> 'S') then
           begin
-            if StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD_AFATURAR.AsFloat)) < StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD.AsFloat)) then
+            vVlrAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat));
+            if StrToFloat(FormatFloat('0.00',vVlrAux)) > 0 then
             begin
-              vVlrAux := StrToFloat(FormatFloat('0.00',(StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD_AFATURAR.AsFloat)) / StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD.AsFloat)))
-                       * vVlrAux));
-              fDMCadNotaFiscal.cdsPedido.Edit;
-              if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat)) > 0 then
-                fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux))
-              else
-                fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
-              fDMCadNotaFiscal.cdsPedido.Post;
+              if StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD_AFATURAR.AsFloat)) < StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD.AsFloat)) then
+              begin
+                vVlrAux := StrToFloat(FormatFloat('0.00',(StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD_AFATURAR.AsFloat)) / StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD.AsFloat)))
+                         * vVlrAux));
+                fDMCadNotaFiscal.cdsPedido.Edit;
+                if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat)) > 0 then
+                  fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux))
+                else
+                  fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.00',vVlrAux));
+                fDMCadNotaFiscal.cdsPedido.Post;
+              end;
             end;
           end;
           //*******************
@@ -1344,7 +1367,14 @@ begin
             else
             begin
               //02/08/2019 foi colocado a linha do desconto, pois estava gerando o desconto integral em todos os lotes
-              vVlrDesc := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat));
+              vVlrDesc := 0;
+              //06/10/2019
+              if trim(fDMCadNotaFiscal.qParametros_PedPEDIDO_COMERCIO.AsString) <> 'S' then
+                vVlrDesc := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat))
+              else
+              if trim(fDMCadNotaFiscal.cdsPedidoTIPO_DESCONTO.AsString) <> 'I' then
+                vVlrDesc := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat));
+              //*************
               vCont    := fDMCadNotaFiscal.mLoteControle.RecordCount;
               fDMCadNotaFiscal.mLoteControle.First;
               while not fDMCadNotaFiscal.mLoteControle.Eof do

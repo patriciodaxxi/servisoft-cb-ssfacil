@@ -187,6 +187,7 @@ type
     Shape7: TShape;
     Label39: TLabel;
     dbchkEncomenda: TDBCheckBox;
+    ImprimirMatricial80Colunas1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -282,6 +283,7 @@ type
       Shift: TShiftState);
     procedure dbedtVlrDescKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure ImprimirMatricial80Colunas1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadPedido: TDMCadPedido;
@@ -363,7 +365,7 @@ uses DmdDatabase, rsDBUtils, uUtilPadrao, uRelPedido, uRelPedido_SulTextil, uRel
   URelPedido_JW, UCadPedidoLoja_Frete, UCadPedidoLoja_Obs,
   UCadPedidoLoja_Difal, UCadPedidoLoja_LocalEst,
   UCadPedidoLoja_Pag, UCadPedido_Custo, USel_Produto_Lote, UOpcaoImp,
-  UConsPedido, uGrava_Pedido;
+  UConsPedido, uGrava_Pedido, uImprimir;
 
 {$R *.dfm}
 
@@ -718,6 +720,8 @@ begin
   dbchkEncomenda.Visible := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
   Label73.Visible        := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
   dbedtVlrProd.Visible   := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  if fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString = 'S' then
+    Label33.Caption := 'Referência:'
   //************************
 end;
 
@@ -861,7 +865,15 @@ begin
 end;
 
 procedure TfrmCadPedidoLoja.btnConfirmarClick(Sender: TObject);
+var
+  Form : TForm;
 begin
+  if fDMCadPedido.cdsPedido_Itens.State in [dsEdit,dsInsert] then
+  begin
+    MessageDlg('*** Item esta em aberto, favor Confirmar ou Cancelar a digitação do item', mtInformation, [mbOk], 0);
+    exit;
+  end;
+  
   if fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger < 1 then
     fDMCadPedido.cdsPedidoPERC_COMISSAO.AsFloat := 0;
   if RxDBLookupCombo3.Text <> '' then
@@ -875,8 +887,13 @@ begin
   else
     fDMCadPedido.cdsPedidoVLR_ADIANTAMENTO.AsFloat := StrToFloat(FormatFloat('0.00',0));
 
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
+
   prc_Gravar_Registro;
   SMDBGrid2.DataSource := fDMCadPedido.dsPedido_Itens;
+
+  FreeAndNil(Form);
 
   SMDBGrid2.EnableScroll;
 end;
@@ -1895,13 +1912,18 @@ procedure TfrmCadPedidoLoja.Edit2Exit(Sender: TObject);
 begin
   if trim(Edit2.Text) = '' then
   begin
-    Edit3.Text;
+    Edit3.Clear;
     exit;
   end;
 
   Edit3.Clear;
-  Edit2.Text := Trim(Edit2.Text);
-  fDMCadPedido.prc_Abrir_ProdutoLoja(StrToInt(Edit2.Text),'','');
+  if trim(fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString) = 'S' then
+    fDMCadPedido.prc_Abrir_ProdutoLoja(0,'',Edit2.Text)
+  else
+  begin
+    Edit2.Text := Trim(Edit2.Text);
+    fDMCadPedido.prc_Abrir_ProdutoLoja(StrToInt(Edit2.Text),'','');
+  end;
   if fDMCadPedido.cdsProduto.IsEmpty then
   begin
     MessageDlg('*** Produto não encontrado!',mtError, [mbOk], 0);
@@ -1962,6 +1984,7 @@ begin
         fDMCadPedido.cdsPedido_ItensQTD.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadPedido.cdsPedido_ItensQTD_CAIXA.AsInteger * ceQtdEmb.Value));
     end;
   end;
+
   prc_Calcular_VlrItens;
 end;
 
@@ -1986,7 +2009,10 @@ procedure TfrmCadPedidoLoja.pnlProdutoExit(Sender: TObject);
 begin
   if (trim(Edit2.Text) <> '')  then
   begin
-    fDMCadPedido.prc_Abrir_ProdutoLoja(StrToInt(Edit2.Text),'','');
+    if fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString = 'S' then
+      fDMCadPedido.prc_Abrir_ProdutoLoja(0,'',Edit2.Text)
+    else
+      fDMCadPedido.prc_Abrir_ProdutoLoja(StrToInt(Edit2.Text),'','');
     if trim(edtLote.Text) = '' then
       prc_Estoque(fDMCadPedido.cdsProdutoID.AsInteger);
     if (btnAlterar_Itens.Tag = 0) and not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit,dsInsert]) then
@@ -2931,7 +2957,7 @@ begin
     if trim(dbedtPercDesc.Text) <> '' then
     begin
       if StrToFloat(Monta_Numero(dbedtPercDesc.Text,0)) > 0 then
-        btnConfirmar.SetFocus
+        btnConfirmar_Itens.SetFocus
       else
         dbedtVlrDesc.SetFocus;
     end
@@ -2950,6 +2976,89 @@ begin
     else
       btnConfirmar_Itens.SetFocus;
   end;
+end;
+
+procedure TfrmCadPedidoLoja.ImprimirMatricial80Colunas1Click(
+  Sender: TObject);
+var
+  vTexto1: String;
+  vTexto2: String;
+begin
+  fDMCadPedido.cdsParametros.Close;
+  fDMCadPedido.cdsParametros.Open;
+  if trim(fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString) = '' then
+  begin
+    MessageDlg('*** Caminho da impressora Matricial não informado nos Parâmetros!', mtInformation, [mbOk], 0);
+    Exit;
+  end;
+
+  if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) then
+    exit;
+
+  prc_Posiciona_Imp;
+
+  uImprimir.vPagMatricial := 0;
+  uImprimir.prc_Cabecalho_Mat(fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
+
+  vTexto1 := 'No.Pedido: ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(29,vTexto1,'D',' ');
+  vTexto2 := 'Data: ' + DateToStr(Date) + '  ' +TimeToStr(Now);
+  vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(55,vTexto2,'D',' ');
+  vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(41,' ','D',' ');
+  vTexto1 := vTexto1 + 'Pag: ' + IntToStr(uImprimir.vPagMatricial);
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
+  vTexto1 := 'Vendedor: ' + fDMCadPedido.cdsPedidoImpNOME_VENDEDOR.AsString;
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
+
+  uImprimir.prc_Detalhe_Mat(' Cliente: ' + fDMCadPedido.cdsPedidoImpNOME_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat('Endereco: ' + fDMCadPedido.cdsPedidoImpEND_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Bairro: ' + fDMCadPedido.cdsPedidoImpBAIRRO_CLIENTE.AsString,'D',' ') + ' Cep: ' + fDMCadPedido.cdsPedidoImpCEP_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Cidade: ' + fDMCadPedido.cdsPedidoImpCIDADE_CLIENTE.AsString,'D',' ') + '  UF: ' + fDMCadPedido.cdsPedidoImpUF.AsString);
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'CNPJ/CPF: ' + fDMCadPedido.cdsPedidoImpCNPJ_CPF_CLIENTE.AsString,'D',' ') + 'Fone: ' + fDMCadPedido.cdsPedidoImpDDD_CLIENTE.AsString + ' ' + fDMCadPedido.cdsPedidoImpFONE_CLIENTE.AsString);
+  uImprimir.prc_Detalhe_Mat(' ');
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
+  uImprimir.prc_Detalhe_Mat('   Qtde  Unid.   Cód. Produto                                           Bitola              Marca           It   Preco %Desc      Total');
+
+  fDMCadPedido.cdsPedidoImp_Itens.First;
+  while not fDMCadPedido.cdsPedidoImp_Itens.Eof do
+  begin
+    vTexto1 := uImprimir.fnc_Monta_Tamanho(7,FormatFloat('###0.00',fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat),'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(6,fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString,'D',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(7,Copy(fDMCadPedido.cdsPedidoImp_ItensREFERENCIA.AsString,1,7),'D',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(50,Copy(fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString,1,50),'D',' ') ;
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(20,Copy(fDMCadPedido.cdsPedidoImp_ItensMEDIDA.AsString,1,20),'D',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(15,Copy(fDMCadPedido.cdsPedidoImp_ItensNOME_MARCA.AsString,1,15),'D',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(3,FormatFloat('###',fDMCadPedido.cdsPedidoImp_ItensITEM.AsFloat),'E',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(8,FormatFloat('#,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat),'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(5,FormatFloat('#0.00',fDMCadPedido.cdsPedidoImp_ItensPERC_DESCONTO.AsFloat) ,'E',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(11,FormatFloat('####,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_TOTAL.AsFloat) ,'E',' ');
+    uImprimir.prc_Detalhe_Mat(vTexto1);
+
+//   Qtde  Unid.   Cód. Produto                                           Bitola              Marca           It   Preco %Desc      Total
+//ZZZZ,ZZ 123456 123456 123456789.123456789.123456789.123456789.123456789 123456789.123456789 123456789.1234 123z.zzz,zz ZZ,ZZ ZZZ.ZZZ,ZZ
+
+    fDMCadPedido.cdsPedidoImp_Itens.Next;
+  end;
+
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
+
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(119,'Total Produto: (+)','E',' ') + '  '
+           + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_ITENS.AsFloat),'E',' ');
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(119,'Vlr. Desconto: (-)','E',' ') + '  '
+           + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_DESCONTO.AsFloat),'E',' ');
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+  vTexto1 := uImprimir.fnc_Monta_Tamanho(119,'Total Pedido: (=)','E',' ') + '  '
+           + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_TOTAL.AsFloat),'E',' ');
+  uImprimir.prc_Detalhe_Mat(vTexto1);
+
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
+
+  uImprimir.prc_Rodape_Mat;
 end;
 
 end.

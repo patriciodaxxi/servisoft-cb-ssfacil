@@ -15,6 +15,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnFecharClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -46,6 +48,13 @@ end;
 procedure TfrmCadPedidoLoja_LocalEst.btnFecharClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrmCadPedidoLoja_LocalEst.FormKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F10) then
+    btnFecharClick(Sender);
 end;
 
 end.
