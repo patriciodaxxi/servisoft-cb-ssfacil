@@ -3360,16 +3360,13 @@ begin
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Romaneio_Expedicao.fr3'
   else
   begin
-    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Pedido_JW_PDF.fr3'
-    //Ver 28/09/2019 Russimar
-    //if fDMCadPedido.cdsFilialRelatorios.Locate('TIPO;POSICAO',VarArrayOf([2,vAux]),([loCaseInsensitive])) then //tipo 2 = Pedido
-//      vArq := fDMCadPedido.cdsFilialRelatoriosCAMINHO.AsString
-    //vArq := fDMCadPedido.qFilial_Relatorio_MenuCAMINHO.AsString
-    //else
-    //begin
-    //ShowMessage('Relatório não definido no cadastro da empresa (filial)!');
-    //  exit;
-    //end;
+//    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Pedido_JW_PDF.fr3'
+    if fDMCadPedido.cdsFilialRelatorios.Locate('TIPO;POSICAO',VarArrayOf([2,vAux]),([loCaseInsensitive])) then //tipo 2 = Pedido
+    begin
+      vArq := fDMCadPedido.cdsFilialRelatoriosCAMINHO.AsString
+      if vArq = '' then
+        vArq := fDMCadPedido.qFilial_Relatorio_MenuCAMINHO.AsString;
+    end;
   end;
   if (FileExists(vArq)) and (trim(vArq) <> '') then
     fDMCadPedido.frxReport1.Report.LoadFromFile(vArq)
