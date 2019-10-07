@@ -95,7 +95,7 @@ object DMConsEstoque: TDMConsEstoque
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 88
+    Left = 89
     Top = 7
   end
   object dspEstoque: TDataSetProvider

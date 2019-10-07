@@ -34,8 +34,6 @@ const
   NFe_IntegracaoContab                  = 0028;
   NFe_EnviarNFSinc                      = 0029;
 
-  //teste 
-
   NFSe_Comandos                         = 1000;
   NFSe_GerarLote                        = 1001;
   NFSe_EnviarLote                       = 1002;
@@ -60,6 +58,7 @@ const
   MDFe_CriarChave                       = 2009;
   MDFe_ConsultarDistribuicaoInteressado = 2010;
   MDFe_ConsultarDistribuicaoNSU         = 2011;
+  MDFe_GerarQRCodeURL                      = 2012;
 
   NFe_Atualizar_Configuracao            = 9996;
   NFe_ErrorEnvioNfe                     = 9997;
