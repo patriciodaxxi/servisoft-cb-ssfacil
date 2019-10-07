@@ -1,9 +1,9 @@
 object frmConsEstoque: TfrmConsEstoque
-  Left = 120
-  Top = 50
+  Left = 186
+  Top = 55
   BorderStyle = bsSingle
   Caption = 'Consulta Estoque'
-  ClientHeight = 518
+  ClientHeight = 507
   ClientWidth = 926
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -319,7 +319,7 @@ object frmConsEstoque: TfrmConsEstoque
     Left = 0
     Top = 160
     Width = 926
-    Height = 358
+    Height = 347
     Align = alClient
     Ctl3D = False
     DataSource = DMConsEstoque.dsEstoque
@@ -438,7 +438,7 @@ object frmConsEstoque: TfrmConsEstoque
         Expanded = False
         FieldName = 'QTD'
         Title.Alignment = taCenter
-        Title.Caption = 'Quantidade'
+        Title.Caption = 'Qtd. F'#237'sica'
         Width = 89
         Visible = True
       end
