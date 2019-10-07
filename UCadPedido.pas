@@ -3363,7 +3363,7 @@ begin
 //    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Pedido_JW_PDF.fr3'
     if fDMCadPedido.cdsFilialRelatorios.Locate('TIPO;POSICAO',VarArrayOf([2,vAux]),([loCaseInsensitive])) then //tipo 2 = Pedido
     begin
-      vArq := fDMCadPedido.cdsFilialRelatoriosCAMINHO.AsString
+      vArq := fDMCadPedido.cdsFilialRelatoriosCAMINHO.AsString;
       if vArq = '' then
         vArq := fDMCadPedido.qFilial_Relatorio_MenuCAMINHO.AsString;
     end;
