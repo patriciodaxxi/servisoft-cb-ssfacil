@@ -731,6 +731,11 @@ begin
   else
     vID := fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger;
 
+  //07/10/2019                                           
+  if uGrava_NotaFiscal.fnc_Existe_Est_Baixado_LoteMat(vID) then
+    fDMCadNotaFiscal.vMSGNotaFiscal := fDMCadNotaFiscal.vMSGNotaFiscal + #13 + '*** Já foi baixado o estoque na Produção (Baixa Material Por OP) ';
+  //******
+    
   fDMCadNotaFiscal.qVerificaNEDevol.Close;
   fDMCadNotaFiscal.qVerificaNEDevol.ParamByName('ID').AsInteger := vID;
   fDMCadNotaFiscal.qVerificaNEDevol.Open;

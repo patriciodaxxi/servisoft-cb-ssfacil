@@ -29,6 +29,8 @@ procedure prc_Ajustar_Itens(fDMCadNotaFiscal: TDMCadNotaFiscal; Tipo : String); 
 
 function fnc_Busca_Vend_Int_Ped(ID_Ped : Integer) : Integer;
 
+function fnc_Existe_Est_Baixado_LoteMat(ID : Integer) : Boolean;  //07/10/2019
+
 implementation
 
 uses
@@ -710,6 +712,29 @@ begin
       end;
     end;
     fDMCadNotaFiscal.cdsNotaFiscal_Itens.Next;
+  end;
+end;
+
+function fnc_Existe_Est_Baixado_LoteMat(ID : Integer) : Boolean; //07/10/2019
+var
+  sds: TSQLDataSet;
+begin
+  Result := False;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata := True;
+    sds.GetMetadata := False;
+    sds.CommandText := 'SELECT COUNT(1) CONTADOR from notafiscal_itens N '
+                     + 'INNER JOIN PEDIDO_ITEM P ON N.id_pedido = P.ID AND N.item_pedido = P.ITEM '
+                     + 'INNER JOIN LOTE_MAT LM ON P.ID = LM.id_oc AND P.ITEM = LM.item_oc '
+                     + 'WHERE N.ID = :ID AND coalesce(LM.qtd_est_baixado,0) > 0 ';
+    sds.ParamByName('ID').AsInteger   := ID;
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := True;
+  finally
+    FreeAndNil(sds);
   end;
 end;
 

@@ -223,9 +223,11 @@ object DMConsEstoque: TDMConsEstoque
     end
     object cdsEstoqueQTD_SUB_SALDO: TFloatField
       FieldName = 'QTD_SUB_SALDO'
+      DisplayFormat = '0.00##'
     end
     object cdsEstoqueQTD_SALDO_FINAL: TFloatField
       FieldName = 'QTD_SALDO_FINAL'
+      DisplayFormat = '0.00##'
     end
   end
   object dsEstoque: TDataSource

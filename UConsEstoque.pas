@@ -184,6 +184,8 @@ begin
       SMDBGrid1.Columns[i].Visible := (fDMConsEstoque.qParametros_ProdUSA_LOTE_PROD.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'QTDGERAL') then
       SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S') and (fDMConsEstoque.cdsFilial.RecordCount > 1));
+    if (SMDBGrid1.Columns[i].FieldName = 'QTD_SUB_SALDO') or (SMDBGrid1.Columns[i].FieldName = 'QTD_SALDO_FINAL') then
+      SMDBGrid1.Columns[i].Visible := (fDMConsEstoque.qParametros_EstUSA_RESERVA.AsString = 'S');
   end;
 
   Label8.Visible        := (fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S');
