@@ -2,7 +2,7 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
   Left = 325
   Top = 175
   Width = 734
-  Height = 326
+  Height = 364
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSizeToolWin
   Caption = 'frmAltEstoque_Mov'
@@ -20,7 +20,7 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 254
+    Top = 292
     Width = 726
     Height = 41
     Align = alBottom
@@ -175,7 +175,7 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
     Left = 0
     Top = 0
     Width = 726
-    Height = 254
+    Height = 292
     Align = alClient
     Color = 13303754
     TabOrder = 1
@@ -328,6 +328,14 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
       Alignment = taRightJustify
       Caption = 'Tamanho:'
     end
+    object Label16: TLabel
+      Left = 96
+      Top = 241
+      Width = 19
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Cor:'
+    end
     object DBEdit1: TDBEdit
       Left = 118
       Top = 153
@@ -391,12 +399,29 @@ object frmAltEstoque_Mov: TfrmAltEstoque_Mov
       Width = 145
       Height = 21
       DropDownCount = 8
+      Ctl3D = False
       DataField = 'TAMANHO'
       DataSource = DMEstoque.dsEstoque_Mov
       LookupField = 'TAMANHO'
       LookupDisplay = 'TAMANHO'
       LookupSource = DMEstoque.dsProduto_Tam
+      ParentCtl3D = False
       TabOrder = 5
+    end
+    object RxDBLookupCombo2: TRxDBLookupCombo
+      Left = 118
+      Top = 233
+      Width = 295
+      Height = 21
+      DropDownCount = 8
+      Ctl3D = False
+      DataField = 'ID_COR'
+      DataSource = DMEstoque.dsEstoque_Mov
+      LookupField = 'ID_COR_COMBINACAO'
+      LookupDisplay = 'NOME_COMBINACAO'
+      LookupSource = DMEstoque.dsProduto_Cor
+      ParentCtl3D = False
+      TabOrder = 6
     end
   end
 end
