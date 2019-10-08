@@ -5137,6 +5137,11 @@ begin
   fDMCadProduto.sdsProduto_Consumo.ParamByName('ID').AsInteger := fDMCadProduto.cdsProdutoID.AsInteger;
   fDMCadProduto.cdsProduto_Consumo.Open;
 
+  fDMCadProduto.cdsFichaTecnica.Close;
+  fDMCadProduto.sdsFichaTecnica.ParamByName('ID').AsInteger   := fDMCadProduto.cdsProduto_ConsultaID.AsInteger;
+  fDMCadProduto.sdsFichaTecnica.ParamByName('ITEM').AsInteger := 1;
+  fDMCadProduto.cdsFichaTecnica.Open;
+
   //vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Ficha_Tecnica_Principal.fr3';
   vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Ficha_Tecnica.fr3';
   if FileExists(vArq) then

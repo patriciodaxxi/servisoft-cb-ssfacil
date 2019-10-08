@@ -675,12 +675,10 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   UCadAgenda, uCadPlano_DRE, UConsFat, UConsDRE, uCarnePgto, UCadAtelier_Fic, UCadPedidoLoja, UProgramacaoPedidos, uCadPessoaRed,
   uCadFuncionario_Res, UConsAniversario, UExcluirPed, UConsLoteMat, UConsProduto_Custo, UConsFrete, UConsMaterial_Nec, UConsPedido_Orc,
   UConsEstoque_Res, UBaixaMaterialOP, uCadTipo_Material, UConsMatPrima, UConsMaterialOP, UConsMaterial_Nec_Rem, uBaixaPedidoProc,
-  uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina,
-  UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual, UBaixaNFDevolvida,
-  UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas,
-  uProdutoAtualizaPreco, uCadMovProdST, UAjusteEstoqueOP_Res, UCadPedWeb, UConsProdSTRet, UCadFilial_Certificado, UDMCadPlanoMat, UGerar_PlanoMat,
-  uCadRaca, uCadTipo_Animal, UConsEstoque2, UComissaoVend, UConsProdutoNCM,
-  UProg_Terc;
+  uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina, UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual,
+  UBaixaNFDevolvida, UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas, uProdutoAtualizaPreco, uCadMovProdST, UCadPedWeb,
+  UConsProdSTRet, UCadFilial_Certificado, UDMCadPlanoMat, UGerar_PlanoMat, UAjusteEstoqueOP_Res, uCadRaca, uCadTipo_Animal,
+  UConsEstoque2, UComissaoVend, UConsProdutoNCM, UProg_Terc;
 
 {$R *.dfm}
 
