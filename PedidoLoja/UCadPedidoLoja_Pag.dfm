@@ -16,6 +16,7 @@ object frmCadPedidoLoja_Pag: TfrmCadPedidoLoja_Pag
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -137,7 +138,7 @@ object frmCadPedidoLoja_Pag: TfrmCadPedidoLoja_Pag
       Top = 5
       Width = 101
       Height = 28
-      Caption = 'Fechar'
+      Caption = '(F10) Fechar'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlue
       Font.Height = -13

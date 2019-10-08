@@ -12,9 +12,11 @@ object frmCadPedidoLoja_Difal: TfrmCadPedidoLoja_Difal
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -35,11 +37,11 @@ object frmCadPedidoLoja_Difal: TfrmCadPedidoLoja_Difal
     Caption = 'Vlr. Desconto:'
   end
   object btnFechar: TNxButton
-    Left = 193
+    Left = 194
     Top = 317
     Width = 101
     Height = 28
-    Caption = 'Fechar'
+    Caption = '(F10) Fechar'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -13

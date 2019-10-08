@@ -700,6 +700,8 @@ type
     mEstoque_CentroCustoVlrSaldo: TFloatField;
     qParametros_NTE: TSQLQuery;
     qParametros_NTEUSA_CENTRO_CUSTO: TStringField;
+    cdsEstoqueQTD_SUB_SALDO: TFloatField;
+    cdsEstoqueQTD_SALDO_FINAL: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

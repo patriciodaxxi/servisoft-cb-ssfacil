@@ -96,52 +96,61 @@ uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, URelInventario, US
 procedure TfrmConsEstoque.prc_Consultar;
 var
   vQtdAux: Integer;
+  Form : TForm;
 begin
-  vQtdAux := 0;
-  fDMConsEstoque.cdsEstoque.Close;
-  if CheckBox1.Checked then
-    fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.ctEstoque + ' WHERE (0 = 0) '
-  else
-    fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.ctEstoque + ' WHERE (INATIVO = ' + QuotedStr('N') + ')';
-  if ceIDProduto.AsInteger > 0 then
-    fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.ID = ' + ceIDProduto.Text
-  else
-  begin
-    if trim(edtRef.Text) <> '' then
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.REFERENCIA LIKE ' + QuotedStr('%'+edtRef.Text+'%')
+
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
+
+  try
+    vQtdAux := 0;
+    fDMConsEstoque.cdsEstoque.Close;
+    if CheckBox1.Checked then
+      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.ctEstoque + ' WHERE (0 = 0) '
+    else
+      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.ctEstoque + ' WHERE (INATIVO = ' + QuotedStr('N') + ')';
+    if ceIDProduto.AsInteger > 0 then
+      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.ID = ' + ceIDProduto.Text
     else
     begin
-      case RadioGroup1.ItemIndex of
-        0: fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTD > ' + IntToStr(vQtdAux);
-        1: fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTD < ' + IntToStr(vQtdAux);
-        2: fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND coalesce(AUX.QTD,0) < coalesce(AUX.QTD_ESTOQUE_MIN,0) ';
+      if trim(edtRef.Text) <> '' then
+        fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.REFERENCIA LIKE ' + QuotedStr('%'+edtRef.Text+'%')
+      else
+      begin
+        case RadioGroup1.ItemIndex of
+          0: fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTD > ' + IntToStr(vQtdAux);
+          1: fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTD < ' + IntToStr(vQtdAux);
+          2: fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND coalesce(AUX.QTD,0) < coalesce(AUX.QTD_ESTOQUE_MIN,0) ';
+        end;
       end;
+      if RxDBLookupCombo2.Text <> '' then
+        fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.ID_MARCA = ' + IntToStr(RxDBLookupCombo2.KeyValue);
+      if rxdbGrupo.Text <> '' then
+        fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.ID_GRUPO = ' + IntToStr(rxdbGrupo.KeyValue);
     end;
-    if RxDBLookupCombo2.Text <> '' then
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.ID_MARCA = ' + IntToStr(RxDBLookupCombo2.KeyValue);
-    if rxdbGrupo.Text <> '' then
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.ID_GRUPO = ' + IntToStr(rxdbGrupo.KeyValue);
+    if fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S' then
+    begin
+      if CurrencyEdit1.Value > 0 then
+        fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTDGERAL >= ' + CurrencyEdit1.Text;
+      if CurrencyEdit2.Value > 0 then
+        fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTDGERAL <= ' + CurrencyEdit2.Text;
+    end;
+    if rxdbLocalEstoque.Text <> '' then
+      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText
+                                            + ' AND ((AUX.ID_LOCAL_ESTOQUE = ' + IntToStr(rxdbLocalEstoque.KeyValue) + ')'
+                                            + ' OR (AUX.ID_LOCAL_ESTOQUE is null))';
+    if RxDBLookupCombo1.Text <> '' then
+      fDMConsEstoque.sdsEstoque.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+    case RadioGroup2.ItemIndex of
+      0: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'P';
+      1: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'M';
+      2: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'C';
+      3: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'S';
+    end;
+    fDMConsEstoque.cdsEstoque.Open;
+  finally
+    FreeAndNil(Form);
   end;
-  if fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S' then
-  begin
-    if CurrencyEdit1.Value > 0 then
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTDGERAL >= ' + CurrencyEdit1.Text;
-    if CurrencyEdit2.Value > 0 then
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.QTDGERAL <= ' + CurrencyEdit2.Text;
-  end;
-  if rxdbLocalEstoque.Text <> '' then
-    fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText
-                                          + ' AND ((AUX.ID_LOCAL_ESTOQUE = ' + IntToStr(rxdbLocalEstoque.KeyValue) + ')'
-                                          + ' OR (AUX.ID_LOCAL_ESTOQUE is null))';
-  if RxDBLookupCombo1.Text <> '' then
-    fDMConsEstoque.sdsEstoque.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
-  case RadioGroup2.ItemIndex of
-    0: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'P';
-    1: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'M';
-    2: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'C';
-    3: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'S';
-  end;
-  fDMConsEstoque.cdsEstoque.Open;
 end;
 
 procedure TfrmConsEstoque.FormClose(Sender: TObject;
@@ -175,6 +184,8 @@ begin
       SMDBGrid1.Columns[i].Visible := (fDMConsEstoque.qParametros_ProdUSA_LOTE_PROD.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'QTDGERAL') then
       SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S') and (fDMConsEstoque.cdsFilial.RecordCount > 1));
+    if (SMDBGrid1.Columns[i].FieldName = 'QTD_SUB_SALDO') or (SMDBGrid1.Columns[i].FieldName = 'QTD_SALDO_FINAL') then
+      SMDBGrid1.Columns[i].Visible := (fDMConsEstoque.qParametros_EstUSA_RESERVA.AsString = 'S');
   end;
 
   Label8.Visible        := (fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S');

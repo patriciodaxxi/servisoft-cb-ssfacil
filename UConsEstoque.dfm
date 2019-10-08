@@ -1,9 +1,9 @@
 object frmConsEstoque: TfrmConsEstoque
-  Left = 120
-  Top = 50
+  Left = 186
+  Top = 55
   BorderStyle = bsSingle
   Caption = 'Consulta Estoque'
-  ClientHeight = 518
+  ClientHeight = 507
   ClientWidth = 926
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -319,7 +319,7 @@ object frmConsEstoque: TfrmConsEstoque
     Left = 0
     Top = 160
     Width = 926
-    Height = 358
+    Height = 347
     Align = alClient
     Ctl3D = False
     DataSource = DMConsEstoque.dsEstoque
@@ -359,7 +359,7 @@ object frmConsEstoque: TfrmConsEstoque
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 22
+    ColCount = 24
     RowCount = 2
     Columns = <
       item
@@ -438,7 +438,7 @@ object frmConsEstoque: TfrmConsEstoque
         Expanded = False
         FieldName = 'QTD'
         Title.Alignment = taCenter
-        Title.Caption = 'Quantidade'
+        Title.Caption = 'Qtd. F'#237'sica'
         Width = 89
         Visible = True
       end
@@ -447,6 +447,25 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'QTD_RESERVA'
         Title.Alignment = taCenter
         Title.Caption = 'Q. Reserva'
+        Width = 94
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'QTD_SUB_SALDO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        Title.Alignment = taCenter
+        Title.Caption = 'Sub Saldo (F'#237'sico - Reserva)'
+        Title.Color = 16777088
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = [fsBold]
         Width = 94
         Visible = True
       end
@@ -462,7 +481,27 @@ object frmConsEstoque: TfrmConsEstoque
         Expanded = False
         FieldName = 'QTD_SALDO_OC'
         Title.Alignment = taCenter
-        Title.Caption = 'Qtd. OC'
+        Title.Caption = 'Qtd. OC (Sobra)'
+        Width = 87
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'QTD_SALDO_FINAL'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        Title.Alignment = taCenter
+        Title.Caption = 'Saldo Estoque (Sub Saldo + Qtd. OC)'
+        Title.Color = 8453888
+        Title.Font.Charset = DEFAULT_CHARSET
+        Title.Font.Color = clWindowText
+        Title.Font.Height = -11
+        Title.Font.Name = 'MS Sans Serif'
+        Title.Font.Style = [fsBold]
+        Width = 87
         Visible = True
       end
       item

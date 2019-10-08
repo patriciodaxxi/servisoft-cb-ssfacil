@@ -12,9 +12,11 @@ object frmCadPedidoLoja_Frete: TfrmCadPedidoLoja_Frete
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -25,12 +27,12 @@ object frmCadPedidoLoja_Frete: TfrmCadPedidoLoja_Frete
     Height = 30
     Align = alBottom
     TabOrder = 1
-    object btnAlterar_Itens: TNxButton
-      Left = 420
+    object btnFechar: TNxButton
+      Left = 383
       Top = 3
-      Width = 108
+      Width = 147
       Height = 24
-      Caption = 'Fechar'
+      Caption = '(F10) Fechar'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -13
@@ -40,7 +42,7 @@ object frmCadPedidoLoja_Frete: TfrmCadPedidoLoja_Frete
       ParentFont = False
       TabOrder = 0
       Transparent = True
-      OnClick = btnAlterar_ItensClick
+      OnClick = btnFecharClick
     end
   end
   object Panel2: TPanel
@@ -107,7 +109,7 @@ object frmCadPedidoLoja_Frete: TfrmCadPedidoLoja_Frete
         'Opera'#231#227'o presencial'
         'NFC-e em opera'#231#227'o com entrega em domic'#237'lio')
       ParentFont = False
-      TabOrder = 0
+      TabOrder = 4
       Values.Strings = (
         '1'
         '4')
@@ -119,7 +121,7 @@ object frmCadPedidoLoja_Frete: TfrmCadPedidoLoja_Frete
       Width = 83
       Height = 25
       Caption = 'Dados Cupom'
-      TabOrder = 1
+      TabOrder = 5
       OnClick = btnDadosCupomClick
     end
     object gbxTransportes: TRzGroupBox
@@ -141,7 +143,7 @@ object frmCadPedidoLoja_Frete: TfrmCadPedidoLoja_Frete
       GradientColorStyle = gcsCustom
       ParentCtl3D = False
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 3
       VisualStyle = vsGradient
       object pnlTransporte: TPanel
         Left = 5
@@ -413,7 +415,7 @@ object frmCadPedidoLoja_Frete: TfrmCadPedidoLoja_Frete
       CharCase = ecUpperCase
       DataField = 'VLR_FRETE'
       DataSource = DMCadPedido.dsPedido
-      TabOrder = 3
+      TabOrder = 0
     end
     object DBEdit22: TDBEdit
       Left = 228
@@ -424,17 +426,17 @@ object frmCadPedidoLoja_Frete: TfrmCadPedidoLoja_Frete
       CharCase = ecUpperCase
       DataField = 'PERC_ICMS_FRETE'
       DataSource = DMCadPedido.dsPedido
-      TabOrder = 4
+      TabOrder = 1
     end
     object DBEdit1: TDBEdit
-      Left = 429
+      Left = 431
       Top = 4
       Width = 100
       Height = 21
       CharCase = ecUpperCase
       DataField = 'VLR_MAO_OBRA'
       DataSource = DMCadPedido.dsPedido
-      TabOrder = 5
+      TabOrder = 2
     end
   end
 end

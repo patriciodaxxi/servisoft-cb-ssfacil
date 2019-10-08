@@ -3496,6 +3496,8 @@ type
     cdsPedidoImpNOME_VENDEDOR_INT: TStringField;
     cdsTriCCustoCEI: TStringField;
     cdsPedidoImp_ItensMOSTRAR_GROSA: TStringField;
+    qParametros_PedPEDIDO_COMERCIO: TStringField;
+    qParametros_PedUSA_REF_DIG_PEDLOJA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

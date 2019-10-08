@@ -10,7 +10,7 @@ uses
 type
   TfrmCadPedidoLoja_Frete = class(TForm)
     Panel1: TPanel;
-    btnAlterar_Itens: TNxButton;
+    btnFechar: TNxButton;
     Panel2: TPanel;
     Label70: TLabel;
     Label38: TLabel;
@@ -40,7 +40,9 @@ type
     procedure btnDadosCupomClick(Sender: TObject);
     procedure RxDBComboBox2Change(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
-    procedure btnAlterar_ItensClick(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -68,6 +70,7 @@ procedure TfrmCadPedidoLoja_Frete.FormShow(Sender: TObject);
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
   Panel2.Enabled := (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]);
+  dbEdit14.Setfocus;
 end;
 
 procedure TfrmCadPedidoLoja_Frete.btnDadosCupomClick(Sender: TObject);
@@ -97,9 +100,16 @@ begin
   fDMCadPedido.cdsTransportadora.Open;
 end;
 
-procedure TfrmCadPedidoLoja_Frete.btnAlterar_ItensClick(Sender: TObject);
+procedure TfrmCadPedidoLoja_Frete.btnFecharClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrmCadPedidoLoja_Frete.FormKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F10) then
+    btnFecharClick(Sender);
 end;
 
 end.

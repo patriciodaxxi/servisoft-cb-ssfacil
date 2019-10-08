@@ -28,7 +28,7 @@ begin
   vPagMatricial := vPagMatricial + 1;
   if vPagMatricial = 1 then
   begin
-    vLinhaMatricial := 99;
+    vLinhaMatricial := 0;
     AssignFile(FArq,Endereco);
     ReWrite(FArq);
     Write(FArq,#15);

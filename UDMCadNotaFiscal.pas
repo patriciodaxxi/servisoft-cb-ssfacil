@@ -3083,6 +3083,9 @@ type
     cdsNotaFiscal_ItenssdsNotaFiscal_Imp: TDataSetField;
     cdsNotaFiscal_ItenssdsNotaFiscal_NDevolvida: TDataSetField;
     cdsNotaFiscal_ItenssdsNotaFiscal_Ped: TDataSetField;
+    cdsPedidoTIPO_DESCONTO: TStringField;
+    cdsPedidoPERC_DESCONTO: TFloatField;
+    qParametros_PedPEDIDO_COMERCIO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

@@ -3360,16 +3360,13 @@ begin
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Romaneio_Expedicao.fr3'
   else
   begin
-    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Pedido_JW_PDF.fr3'
-    //Ver 28/09/2019 Russimar
-    //if fDMCadPedido.cdsFilialRelatorios.Locate('TIPO;POSICAO',VarArrayOf([2,vAux]),([loCaseInsensitive])) then //tipo 2 = Pedido
-//      vArq := fDMCadPedido.cdsFilialRelatoriosCAMINHO.AsString
-    //vArq := fDMCadPedido.qFilial_Relatorio_MenuCAMINHO.AsString
-    //else
-    //begin
-    //ShowMessage('Relatório não definido no cadastro da empresa (filial)!');
-    //  exit;
-    //end;
+//    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Pedido_JW_PDF.fr3'
+    if fDMCadPedido.cdsFilialRelatorios.Locate('TIPO;POSICAO',VarArrayOf([2,vAux]),([loCaseInsensitive])) then //tipo 2 = Pedido
+    begin
+      vArq := fDMCadPedido.cdsFilialRelatoriosCAMINHO.AsString;
+      if vArq = '' then
+        vArq := fDMCadPedido.qFilial_Relatorio_MenuCAMINHO.AsString;
+    end;
   end;
   if (FileExists(vArq)) and (trim(vArq) <> '') then
     fDMCadPedido.frxReport1.Report.LoadFromFile(vArq)
@@ -4638,19 +4635,20 @@ begin
 
   uImprimir.vPagMatricial := 0;
   uImprimir.prc_Cabecalho_Mat(fDMCadPedido.cdsParametrosEND_IMPRESSORA_DOS.AsString);
-  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
 
   vTexto1 := 'No.Pedido: ' + fDMCadPedido.cdsPedidoImpNUM_PEDIDO.AsString;
   vTexto1 := uImprimir.fnc_Monta_Tamanho(29,vTexto1,'D',' ');
-  vTexto2 := 'Data: ' + DateToStr(Date) + TimeToStr(Now);
-  vTexto2 := uImprimir.fnc_Monta_Tamanho(55,vTexto2,'D',' ');
-  vTexto1 := vTexto1 + vTexto2 + 'Pag: ' + IntToStr(uImprimir.vPagMatricial);
+  vTexto2 := 'Data: ' + DateToStr(Date) + '  ' +TimeToStr(Now);
+  vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(55,vTexto2,'D',' ');
+  vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(41,' ','D',' ');
+  vTexto1 := vTexto1 + 'Pag: ' + IntToStr(uImprimir.vPagMatricial);
   uImprimir.prc_Detalhe_Mat(vTexto1);
   
-  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
   vTexto1 := 'Vendedor: ' + fDMCadPedido.cdsPedidoImpNOME_VENDEDOR.AsString;
   uImprimir.prc_Detalhe_Mat(vTexto1);
-  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
 
   uImprimir.prc_Detalhe_Mat(' Cliente: ' + fDMCadPedido.cdsPedidoImpNOME_CLIENTE.AsString);
   uImprimir.prc_Detalhe_Mat('Endereco: ' + fDMCadPedido.cdsPedidoImpEND_CLIENTE.AsString);
@@ -4658,26 +4656,31 @@ begin
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Cidade: ' + fDMCadPedido.cdsPedidoImpCIDADE_CLIENTE.AsString,'D',' ') + '  UF: ' + fDMCadPedido.cdsPedidoImpUF.AsString);
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'CNPJ/CPF: ' + fDMCadPedido.cdsPedidoImpCNPJ_CPF_CLIENTE.AsString,'D',' ') + 'Fone: ' + fDMCadPedido.cdsPedidoImpDDD_CLIENTE.AsString + ' ' + fDMCadPedido.cdsPedidoImpFONE_CLIENTE.AsString);
   uImprimir.prc_Detalhe_Mat(' ');
-  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
+  uImprimir.prc_Detalhe_Mat('   Qtde  Unid.   Cód. Produto                                           Bitola              Marca           It   Preco %Desc      Total');
 
-  uImprimir.prc_Detalhe_Mat('    Qtde Unid. Referencia  Produto                                             Marca                     Preco %Desc          Total');
   fDMCadPedido.cdsPedidoImp_Itens.First;
   while not fDMCadPedido.cdsPedidoImp_Itens.Eof do
   begin
-    vTexto1 := uImprimir.fnc_Monta_Tamanho(8,FormatFloat('#,##0.00',fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat),'E',' ') + ' ';
+    vTexto1 := uImprimir.fnc_Monta_Tamanho(7,FormatFloat('###0.00',fDMCadPedido.cdsPedidoImp_ItensQTD.AsFloat),'E',' ') + ' ';
     vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(6,fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString,'D',' ') + ' ';
-    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(10,Copy(fDMCadPedido.cdsPedidoImp_ItensREFERENCIA.AsString,1,10),'D',' ') + ' ';
-    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(51,Copy(fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString,1,51),'D',' ') + ' ';
-    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(20,Copy(fDMCadPedido.cdsPedidoImp_ItensNOME_MARCA.AsString,1,20),'D',' ') + ' ';
-    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(10,FormatFloat('###,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat) ,'E',' ') + ' ';
-    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(5,FormatFloat('#0.00',fDMCadPedido.cdsPedidoImp_ItensPERC_DESCONTO.AsFloat) ,'E',' ') + ' ';
-    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_TOTAL.AsFloat) ,'E',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(7,Copy(fDMCadPedido.cdsPedidoImp_ItensREFERENCIA.AsString,1,7),'D',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(50,Copy(fDMCadPedido.cdsPedidoImp_ItensNOMEPRODUTO.AsString,1,50),'D',' ') ;
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(20,Copy(fDMCadPedido.cdsPedidoImp_ItensMEDIDA.AsString,1,20),'D',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(15,Copy(fDMCadPedido.cdsPedidoImp_ItensNOME_MARCA.AsString,1,15),'D',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(3,FormatFloat('###',fDMCadPedido.cdsPedidoImp_ItensITEM.AsFloat),'E',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(8,FormatFloat('#,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_UNITARIO.AsFloat),'E',' ') + ' ';
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(5,FormatFloat('#0.00',fDMCadPedido.cdsPedidoImp_ItensPERC_DESCONTO.AsFloat) ,'E',' ');
+    vTexto1 := vTexto1 + uImprimir.fnc_Monta_Tamanho(11,FormatFloat('####,##0.00',fDMCadPedido.cdsPedidoImp_ItensVLR_TOTAL.AsFloat) ,'E',' ');
     uImprimir.prc_Detalhe_Mat(vTexto1);
+
+//   Qtde  Unid.   Cód. Produto                                           Bitola              Marca           It   Preco %Desc      Total
+//ZZZZ,ZZ 123456 123456 123456789.123456789.123456789.123456789.123456789 123456789.123456789 123456789.1234 123z.zzz,zz ZZ,ZZ ZZZ.ZZZ,ZZ
 
     fDMCadPedido.cdsPedidoImp_Itens.Next;
   end;
 
-  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
 
   vTexto1 := uImprimir.fnc_Monta_Tamanho(115,'Total Produto: (+)','E',' ') + '  '
            + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_ITENS.AsFloat),'E',' ');
@@ -4689,7 +4692,7 @@ begin
            + uImprimir.fnc_Monta_Tamanho(14,FormatFloat('###,###,##0.00',fDMCadPedido.cdsPedidoImpVLR_TOTAL.AsFloat),'E',' ');
   uImprimir.prc_Detalhe_Mat(vTexto1);
 
-  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(132,'-','E','-'));
+  uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
 
   uImprimir.prc_Rodape_Mat;
 end;
