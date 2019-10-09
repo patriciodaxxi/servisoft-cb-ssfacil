@@ -130,7 +130,7 @@ var
   vOpcaoDtEntrega : String;
 begin
   fDMConsOC.cdsOC_Item.Close;
-  fDMConsOC.sdsOC_Item.CommandText := fDMConsOC.ctPedido_Item + ' WHERE PED.TIPO_REG = ' + QuotedStr('C');
+  fDMConsOC.sdsOC_Item.CommandText := fDMConsOC.ctPedido_Item + ' WHERE PED.TIPO_REG = ' + QuotedStr('C') + ' AND PED.FATURADO <> ' + QuotedStr('C');
   if (fDMConsOC.qParametrosUSA_APROVACAO_OC_FORN.AsString = 'S') and not(ckAprovado.Checked) then
     fDMConsOC.sdsOC_Item.CommandText := fDMConsOC.sdsOC_Item.CommandText + ' AND PED.APROVADO_PED = ' + QuotedStr('A');
   vComando := '';

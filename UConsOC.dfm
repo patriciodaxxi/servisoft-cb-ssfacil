@@ -289,7 +289,7 @@ object frmConsOC: TfrmConsOC
     Top = 165
     Width = 898
     Height = 446
-    ActivePage = TS_Projeto
+    ActivePage = TS_Item
     ActivePageDefault = TS_Item
     Align = alClient
     Color = 16755027
@@ -302,7 +302,7 @@ object frmConsOC: TfrmConsOC
     ParentColor = False
     ParentFont = False
     TabColors.Unselected = clGray
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 1
     TextColors.Unselected = 5197647
     FixedDimension = 19
@@ -403,6 +403,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'REFERENCIA'
             Title.Alignment = taCenter
             Title.Caption = 'Refer'#234'ncia'
+            Width = 64
             Visible = True
           end
           item
@@ -441,6 +442,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'QTD_FATURADO'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd Entregue'
+            Width = 64
             Visible = True
           end
           item
@@ -448,6 +450,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'QTD_RESTANTE'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Pendente'
+            Width = 64
             Visible = True
           end
           item
@@ -455,6 +458,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'QTD_CANCELADO'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Cancelada'
+            Width = 64
             Visible = True
           end
           item
@@ -486,6 +490,7 @@ object frmConsOC: TfrmConsOC
             FieldName = 'ID_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'ID Fornecedor'
+            Width = 64
             Visible = True
           end
           item
@@ -840,10 +845,10 @@ object frmConsOC: TfrmConsOC
         Top = 26
         Width = 894
         Height = 397
-        ActivePage = TS_Projeto_Res
+        ActivePage = TS_Projeto_Det
         ActivePageDefault = TS_Projeto_Det
         Align = alClient
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 1
         FixedDimension = 19
         object TS_Projeto_Det: TRzTabSheet
@@ -1033,6 +1038,7 @@ object frmConsOC: TfrmConsOC
                 Title.Font.Height = -11
                 Title.Font.Name = 'MS Sans Serif'
                 Title.Font.Style = []
+                Width = 64
                 Visible = True
               end
               item
@@ -1045,6 +1051,7 @@ object frmConsOC: TfrmConsOC
                 Title.Font.Height = -11
                 Title.Font.Name = 'MS Sans Serif'
                 Title.Font.Style = []
+                Width = 64
                 Visible = True
               end
               item
@@ -1052,6 +1059,7 @@ object frmConsOC: TfrmConsOC
                 FieldName = 'VLR_CONTRATO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Contrato'
+                Width = 64
                 Visible = True
               end
               item
@@ -1060,6 +1068,7 @@ object frmConsOC: TfrmConsOC
                 FieldName = 'NUM_CONTRATO'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#186' Contrato'
+                Width = 64
                 Visible = True
               end>
           end
@@ -1207,6 +1216,7 @@ object frmConsOC: TfrmConsOC
                 FieldName = 'VLR_CONTRATO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Contrato'
+                Width = 64
                 Visible = True
               end
               item
@@ -1215,6 +1225,7 @@ object frmConsOC: TfrmConsOC
                 FieldName = 'NUM_CONTRATO'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#186' Contrato'
+                Width = 64
                 Visible = True
               end
               item
