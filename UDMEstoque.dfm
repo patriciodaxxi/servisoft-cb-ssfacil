@@ -3,7 +3,7 @@ object DMEstoque: TDMEstoque
   OnCreate = DataModuleCreate
   Left = 414
   Top = 194
-  Height = 382
+  Height = 449
   Width = 750
   object sdsEstoque_Mov: TSQLDataSet
     NoMetadata = True
@@ -561,5 +561,62 @@ object DMEstoque: TDMEstoque
     DataSet = cdsProduto_Tam
     Left = 453
     Top = 284
+  end
+  object sdsProduto_Cor: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT P.*, COMB.NOME NOME_COMBINACAO'#13#10'FROM PRODUTO_COMB P'#13#10'INNE' +
+      'R JOIN COMBINACAO COMB'#13#10'ON P.id_cor_combinacao = COMB.ID'#13#10'WHERE ' +
+      'P.ID = :ID'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 293
+    Top = 345
+    object sdsProduto_CorID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object sdsProduto_CorID_COR_COMBINACAO: TIntegerField
+      FieldName = 'ID_COR_COMBINACAO'
+    end
+    object sdsProduto_CorNOME_COMBINACAO: TStringField
+      FieldName = 'NOME_COMBINACAO'
+      Size = 60
+    end
+  end
+  object dspProduto_Cor: TDataSetProvider
+    DataSet = sdsProduto_Cor
+    Left = 339
+    Top = 345
+  end
+  object cdsProduto_Cor: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProduto_Cor'
+    Left = 392
+    Top = 345
+    object cdsProduto_CorID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsProduto_CorID_COR_COMBINACAO: TIntegerField
+      FieldName = 'ID_COR_COMBINACAO'
+    end
+    object cdsProduto_CorNOME_COMBINACAO: TStringField
+      FieldName = 'NOME_COMBINACAO'
+      Size = 60
+    end
+  end
+  object dsProduto_Cor: TDataSource
+    DataSet = cdsProduto_Cor
+    Left = 450
+    Top = 344
   end
 end

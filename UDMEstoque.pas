@@ -127,6 +127,16 @@ type
     cdsProduto_TamPESO_LIQUIDO: TFloatField;
     cdsProduto_TamPESO_BRUTO: TFloatField;
     cdsProduto_TamTAM_MATRIZ: TStringField;
+    sdsProduto_Cor: TSQLDataSet;
+    dspProduto_Cor: TDataSetProvider;
+    cdsProduto_Cor: TClientDataSet;
+    dsProduto_Cor: TDataSource;
+    sdsProduto_CorID: TIntegerField;
+    sdsProduto_CorID_COR_COMBINACAO: TIntegerField;
+    sdsProduto_CorNOME_COMBINACAO: TStringField;
+    cdsProduto_CorID: TIntegerField;
+    cdsProduto_CorID_COR_COMBINACAO: TIntegerField;
+    cdsProduto_CorNOME_COMBINACAO: TStringField;
     procedure cdsEstoque_MovReconcileError(DataSet: TCustomClientDataSet;
       E: EReconcileError; UpdateKind: TUpdateKind;
       var Action: TReconcileAction);

@@ -81,7 +81,6 @@ function MDFe_IncluirCondutor(AServidor, ACnpj, AChaveMDFe, ACpf, ANome: WideStr
 function MDFe_ConsultarDistribuicaoInteressado(AServidor, ACnpj, AUf, AUltNSURecebido: string; AXml: TStream): string;
 function MDFe_ConsultarDistribuicaoNSU(AServidor, ACnpj, AUf, ANSU: string; AXml: TStream): string;
 function MDFe_GerarQRCodeURL(AServidor, ACnpj, AURL, AChaveMDFe: string): string;
-procedure MDFe_GerarPDF(AServidor, ACnpj, AMensagem, ARodape: string; AXml, ALogo, APdf: TStream);
 
 //08/10/2009
 procedure SalvarUTF8(AXMLStream: TStream; AArquivo: string);
@@ -2441,38 +2440,6 @@ begin
       if (Codigo = NFe_OK) then
       begin
         Result := TCPClient.ReadLn;
-      end
-      else
-        raise EExceptionMDFe.Create( AnsiReplaceText(TCPClient.ReadLn, #8, sLineBreak) );
-    finally
-      TCPClient.Disconnect;
-    end;
-  finally
-    FreeAndNil(TCPClient);
-  end;
-end;
-
-procedure MDFe_GerarPDF(AServidor, ACnpj, AMensagem, ARodape: string; AXml, ALogo, APdf: TStream);
-var
-  TCPClient: TIdTCPClient;
-  Codigo: Integer;
-begin
-  TCPClient := CriarTCPClient(AServidor, 'Gerando PDF MDFe.. Aguarde...');
-  try
-    try
-      TCPClient.Connect(1000);
-      TCPClient.WriteLn(ACnpj);
-      TCPClient.WriteInteger(Integer(uNFeConsts.MDFe_GerarPDF));
-      TCPClient.WriteLn(AMensagem);
-      TCPClient.WriteLn(ARodape);
-      TCPClient.WriteStream(AXml, True, True);
-      TCPClient.WriteStream(ALogo, True, True);
-
-      Codigo := TCPClient.ReadInteger;
-      if (Codigo = NFe_OK) then
-      begin
-        TMemoryStream(APdf).Clear;
-        TCPClient.ReadStream(APdf);
       end
       else
         raise EExceptionMDFe.Create( AnsiReplaceText(TCPClient.ReadLn, #8, sLineBreak) );

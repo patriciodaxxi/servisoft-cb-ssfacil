@@ -37,6 +37,8 @@ type
     DBEdit4: TDBEdit;
     Label15: TLabel;
     RxDBLookupCombo1: TRxDBLookupCombo;
+    Label16: TLabel;
+    RxDBLookupCombo2: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -87,6 +89,10 @@ begin
   fDMEstoque.cdsProduto_Tam.Close;
   fDMEstoque.sdsProduto_Tam.ParamByName('ID').AsInteger := fDMEstoque.cdsEstoque_MovID_PRODUTO.AsInteger;
   fDMEstoque.cdsProduto_Tam.Open;
+
+  fDMEstoque.cdsProduto_Cor.Close;
+  fDMEstoque.sdsProduto_Cor.ParamByName('ID').AsInteger := fDMEstoque.cdsEstoque_MovID_PRODUTO.AsInteger;
+  fDMEstoque.cdsProduto_Cor.Open;
 end;
 
 procedure TfrmAltEstoque_Mov.btnCancelarClick(Sender: TObject);
@@ -107,6 +113,8 @@ begin
   end;
   if RxDBLookupCombo1.Text = '' then
     fDMEstoque.cdsEstoque_MovTAMANHO.AsString := '';
+  if trim(RxDBLookupCombo2.Text) = '' then
+    fDMEstoque.cdsEstoque_MovID_COR.AsInteger := 0;
   fDMEstoque.cdsEstoque_Mov.Post;
   if (StrToFloat(FormatFloat('0.000000',fDMEstoque.cdsEstoque_MovVLR_UNITARIO.AsFloat)) <> StrToFloat(FormatFloat('0.000000',vVlr_Unitario_Ant))) or
      (fDMEstoque.cdsEstoque_MovGERAR_CUSTO.AsString <> vGerar_Custo_Ant) then

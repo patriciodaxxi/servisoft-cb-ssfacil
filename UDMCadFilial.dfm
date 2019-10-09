@@ -425,6 +425,7 @@ object DMCadFilial: TDMCadFilial
     Top = 32
   end
   object cdsFilial: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -1562,6 +1563,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilialRelatorios: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilialRelatorios
     IndexFieldNames = 'ID;ITEM'
@@ -1644,6 +1646,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Email: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Email
     IndexFieldNames = 'ID;ITEM'
@@ -1790,6 +1793,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Download: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Download
     IndexFieldNames = 'ID;ITEM'
@@ -2221,6 +2225,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFILIAL_CBarra: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFILIAL_CBarra
     IndexFieldNames = 'ID;ITEM'
@@ -2359,6 +2364,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_NFCe: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_NFCe
     IndexFieldNames = 'ID'
@@ -2510,6 +2516,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Contabil: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Contabil
     IndexFieldNames = 'ID'
@@ -2643,6 +2650,10 @@ object DMCadFilial: TDMCadFilial
       FieldName = 'SERIE'
       Size = 3
     end
+    object sdsFilial_MDFeEND_LOG: TStringField
+      FieldName = 'END_LOG'
+      Size = 200
+    end
   end
   object cdsFilial_MDFe: TClientDataSet
     Aggregates = <>
@@ -2650,7 +2661,7 @@ object DMCadFilial: TDMCadFilial
     IndexFieldNames = 'ID'
     Params = <>
     Left = 138
-    Top = 360
+    Top = 359
     object cdsFilial_MDFeID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2679,6 +2690,10 @@ object DMCadFilial: TDMCadFilial
     object cdsFilial_MDFeSERIE: TStringField
       FieldName = 'SERIE'
       Size = 3
+    end
+    object cdsFilial_MDFeEND_LOG: TStringField
+      FieldName = 'END_LOG'
+      Size = 200
     end
   end
   object dsFilial_MDFe: TDataSource
@@ -2761,6 +2776,7 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Custo: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Custo
     IndexFieldNames = 'ID'

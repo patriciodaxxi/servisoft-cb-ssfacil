@@ -394,6 +394,9 @@ type
     DBEdit93: TDBEdit;
     Label144: TLabel;
     RxDBLookupCombo18: TRxDBLookupCombo;
+    Label145: TLabel;
+    DBEdit94: TDBEdit;
+    BitBtn4: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -441,6 +444,7 @@ type
     procedure DBEdit85KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnCopiar_FilialClick(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadFilial: TDMCadFilial;
@@ -456,6 +460,8 @@ type
 
     procedure prc_Abrir_Config_NFe;
     procedure prc_Configurar_Danfe_Aut;
+
+    function fnc_Abrir_OpenPicture : String;
 
   public
     { Public declarations }
@@ -888,8 +894,7 @@ end;
 
 procedure TfrmCadFilial.BitBtn2Click(Sender: TObject);
 begin
-  OpenPictureDialog1.Execute;
-  fDMCadFilial.cdsConfig_NFeDANFE_DADOS_EMISSOR.AsString := OpenPictureDialog1.FileName;
+  fDMCadFilial.cdsConfig_NFeDANFE_DADOS_EMISSOR.AsString := fnc_Abrir_OpenPicture;
 end;
 
 procedure TfrmCadFilial.btnAlterar_Config_NFeClick(Sender: TObject);
@@ -1141,6 +1146,19 @@ begin
   end;
     ShowMessage('Geração efetuado com sucesso!');
 
+end;
+
+function TfrmCadFilial.fnc_Abrir_OpenPicture: String;
+begin
+  OpenPictureDialog1.Execute;
+  result := OpenPictureDialog1.FileName;
+end;
+
+procedure TfrmCadFilial.BitBtn4Click(Sender: TObject);
+begin
+  if (fDMCadFilial.cdsFilial.State in [dsEdit,dsInsert]) and not(fDMCadFilial.cdsFilial_MDFe.State in [dsEdit,dsInsert]) then
+    fDMCadFilial.cdsFilial_MDFe.Edit;
+  fDMCadFilial.cdsFilial_MDFeEND_LOG.AsString := fnc_Abrir_OpenPicture;
 end;
 
 end.

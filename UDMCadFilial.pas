@@ -660,6 +660,8 @@ type
     cdsFilialSPED_SOMA_IPI_CUSTO: TStringField;
     sdsFilial_ContabilID_CONTABIL_OPE_TRANSF: TIntegerField;
     cdsFilial_ContabilID_CONTABIL_OPE_TRANSF: TIntegerField;
+    sdsFilial_MDFeEND_LOG: TStringField;
+    cdsFilial_MDFeEND_LOG: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);
