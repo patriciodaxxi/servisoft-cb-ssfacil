@@ -2457,12 +2457,12 @@ var
   TCPClient: TIdTCPClient;
   Codigo: Integer;
 begin
-  TCPClient := CriarTCPClient(AServidor, 'Gerando MDFe QRCode... Aguarde...');
+  TCPClient := CriarTCPClient(AServidor, 'Gerando PDF MDFe.. Aguarde...');
   try
     try
       TCPClient.Connect(1000);
       TCPClient.WriteLn(ACnpj);
-      TCPClient.WriteInteger(Integer(uNFeConsts.MFDe_GerarPDF));
+      TCPClient.WriteInteger(Integer(uNFeConsts.MDFe_GerarPDF));
       TCPClient.WriteLn(AMensagem);
       TCPClient.WriteLn(ARodape);
       TCPClient.WriteStream(AXml, True, True);

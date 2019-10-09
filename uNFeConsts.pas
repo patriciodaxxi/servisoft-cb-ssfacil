@@ -59,7 +59,7 @@ const
   MDFe_ConsultarDistribuicaoInteressado = 2010;
   MDFe_ConsultarDistribuicaoNSU         = 2011;
   MDFe_GerarQRCodeURL                   = 2012;
-  MFDe_GerarPDF                         = 2013;
+  MDFe_GerarPDF                         = 2013;
 
   NFe_Atualizar_Configuracao            = 9996;
   NFe_ErrorEnvioNfe                     = 9997;
