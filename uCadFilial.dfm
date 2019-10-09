@@ -120,7 +120,6 @@ object frmCadFilial: TfrmCadFilial
             FieldName = 'FONE'
             Title.Alignment = taCenter
             Title.Caption = 'Fone'
-            Width = 64
             Visible = True
           end>
       end
@@ -707,10 +706,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_Contabil
+        ActivePage = TS_MDFe
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 7
+        TabIndex = 13
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -3206,7 +3205,7 @@ object frmCadFilial: TfrmCadFilial
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
             ColCount = 7
-            RowCount = 2
+            RowCount = 3
             Columns = <
               item
                 Alignment = taCenter
@@ -5250,6 +5249,14 @@ object frmCadFilial: TfrmCadFilial
               Alignment = taRightJustify
               Caption = 'S'#233'rie MDFe:'
             end
+            object Label145: TLabel
+              Left = 63
+              Top = 137
+              Width = 59
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Logo MDFe:'
+            end
             object RxDBComboBox20: TRxDBComboBox
               Left = 125
               Top = 45
@@ -5325,6 +5332,39 @@ object frmCadFilial: TfrmCadFilial
               DataField = 'SERIE'
               DataSource = DMCadFilial.dsFilial_MDFe
               TabOrder = 0
+            end
+            object DBEdit94: TDBEdit
+              Left = 125
+              Top = 130
+              Width = 517
+              Height = 21
+              Ctl3D = True
+              DataField = 'END_LOG'
+              DataSource = DMCadFilial.dsFilial_MDFe
+              ParentCtl3D = False
+              TabOrder = 5
+            end
+            object BitBtn4: TBitBtn
+              Left = 643
+              Top = 126
+              Width = 25
+              Height = 23
+              TabOrder = 6
+              OnClick = BitBtn4Click
+              Glyph.Data = {
+                76010000424D7601000000000000760000002800000020000000100000000100
+                04000000000000010000120B0000120B00001000000000000000000000000000
+                800000800000008080008000000080008000808000007F7F7F00BFBFBF000000
+                FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00555555555555
+                55555555FFFFFFFF5555555000000005555555577777777FF555550999999900
+                55555575555555775F55509999999901055557F55555557F75F5001111111101
+                105577FFFFFFFF7FF75F00000000000011057777777777775F755070FFFFFF0F
+                01105777F555557F75F75500FFFFFF0FF0105577F555FF7F57575550FF700008
+                8F0055575FF7777555775555000888888F005555777FFFFFFF77555550000000
+                0F055555577777777F7F555550FFFFFF0F05555557F5FFF57F7F555550F000FF
+                0005555557F777557775555550FFFFFF0555555557F555FF7F55555550FF7000
+                05555555575FF777755555555500055555555555557775555555}
+              NumGlyphs = 2
             end
           end
         end
