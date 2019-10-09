@@ -93,7 +93,6 @@ type
     RLLabel8: TRLLabel;
     RLDBText9: TRLDBText;
     RLBand7: TRLBand;
-    RLDraw3: TRLDraw;
     RLLabel46: TRLLabel;
     RLMemo1: TRLMemo;
     RLDBText16: TRLDBText;

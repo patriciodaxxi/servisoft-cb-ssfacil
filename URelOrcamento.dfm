@@ -1,9 +1,9 @@
 object fRelOrcamento: TfRelOrcamento
-  Left = 236
-  Top = 63
+  Left = 401
+  Top = 54
   Width = 924
   Height = 666
-  VertScrollBar.Position = 457
+  VertScrollBar.Position = 331
   Caption = 'Relat'#243'rio Or'#231'amento'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,8 +18,8 @@ object fRelOrcamento: TfRelOrcamento
   PixelsPerInch = 96
   TextHeight = 13
   object RLReport1: TRLReport
-    Left = 56
-    Top = -433
+    Left = 24
+    Top = -307
     Width = 794
     Height = 1123
     DataSource = DMCadPedido.dsPedidoImp
@@ -39,7 +39,7 @@ object fRelOrcamento: TfRelOrcamento
       Left = 26
       Top = 34
       Width = 742
-      Height = 815
+      Height = 786
       DataSource = DMCadPedido.dsPedidoImp
       object RLBand1: TRLBand
         Left = 0
@@ -1373,15 +1373,13 @@ object fRelOrcamento: TfRelOrcamento
         Width = 742
         Height = 37
         BandType = btSummary
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = True
+        Borders.DrawTop = False
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
         IntegralHeight = False
         BeforePrint = RLBand7BeforePrint
-        object RLDraw3: TRLDraw
-          Left = 0
-          Top = 0
-          Width = 742
-          Height = 37
-          Align = faClient
-        end
         object RLLabel46: TRLLabel
           Left = 7
           Top = 2
@@ -1567,6 +1565,7 @@ object fRelOrcamento: TfRelOrcamento
             AutoSize = False
             DataField = 'VLR_TOTAL'
             DataSource = DMCadPedido.dsPedidoImp_Serv
+            Text = '/'
           end
         end
         object RLBand10: TRLBand
