@@ -36,6 +36,10 @@ type
     Panel3: TPanel;
     NxPanel1: TNxPanel;
     SMDBGrid2: TSMDBGrid;
+    Shape1: TShape;
+    Label1: TLabel;
+    Label2: TLabel;
+    Shape2: TShape;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnPesquisaClick(Sender: TObject);
@@ -108,12 +112,13 @@ var
   sds: TSQLDataSet;
   vID_Estoque, vID_Estoque_Res : Integer;
   vGravou : Boolean;
-
+  vMSGErro : String;
 begin
   fDMEstoque     := TDMEstoque.Create(Self);
   fDMEstoque_Res := TDMEstoque_Res.Create(Self);
   vGravou        := False;
 
+  vMSGErro := '';
   sds := TSQLDataSet.Create(nil);
   ID.TransactionID  := 5;
   ID.IsolationLevel := xilREADCOMMITTED;
@@ -132,46 +137,51 @@ begin
       if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (StrToFloat(FormatFloat('0.00000',fDMBaixaMaterial.cdsLoteMatQTD_CONSUMO.AsFloat)) > 0)
         and (StrToFloat(FormatFloat('0.00000',fDMBaixaMaterial.cdsLoteMatSaldo.AsFloat)) > 0) then
       begin
-        prc_Gravar_Lote_Mat_Est;
-
-        vGravou := True;
-
-        fDMBaixaMaterial.cdsLoteMat.Edit;
-        fDMBaixaMaterial.cdsLoteMatQTD_EST_BAIXADO.AsFloat := StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatQTD_EST_BAIXADO.AsFloat + fDMBaixaMaterial.cdsLoteMatQTD_CONSUMO.AsFloat));
-        fDMBaixaMaterial.cdsLoteMat.Post;
-
-        fDMBaixaMaterial.cdsLoteMatEst.Edit;
-        vID_Estoque := fDMEstoque.fnc_Gravar_Estoque(0,fDMBaixaMaterial.cdsLoteMatFILIAL.AsInteger, 1,
-                                                       fDMBaixaMaterial.cdsLoteMatID_MATERIAL.AsInteger,
-                                                       fDMBaixaMaterial.cdsLoteMatNUM_ORDEM.AsInteger,
-                                                       0,0,0,0, 'S', 'LOT',
-                                                       fDMBaixaMaterial.cdsLoteMatUNIDADE.AsString,
-                                                       fDMBaixaMaterial.cdsLoteMatUNIDADE.AsString,
-                                                       '',
-                                                       fDMBaixaMaterial.cdsLoteMatTAMANHO.AsString,
-                                                       fDMBaixaMaterial.cdsLoteMatEstDTMOVIMENTO.AsDateTime,
-                                                       fDMBaixaMaterial.cdsLoteMatPRECO_VENDA.AsFloat,
-                                                       fDMBaixaMaterial.cdsLoteMatEstQTD.AsFloat,
-                                                       0,0,0,0,0,
-                                                       fDMBaixaMaterial.cdsLoteMatEstQTD.AsFloat,
-                                                       fDMBaixaMaterial.cdsLoteMatPRECO_VENDA.AsFloat,
-                                                       0,0,fDMBaixaMaterial.cdsLoteMatUNIDADE.AsString,
-                                                       fDMBaixaMaterial.cdsLoteMatID_COR.AsInteger,
-                                                       '','N',0,0,0,0,0);
-        if (StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatQTD_RESERVA.AsFloat)) > 0) then
+        if StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatQTD_RESTANTE.AsFloat)) > 0 then
+          vMSGErro := '*** Existe Materiais com Ordens de Compras em aberto!'
+        else
         begin
-          vID_Estoque_Res := fDMEstoque_Res.fnc_Gravar_Estoque_Res(0,fDMBaixaMaterial.cdsLoteMatFILIAL.AsInteger,
+          prc_Gravar_Lote_Mat_Est;
+
+          vGravou := True;
+
+          fDMBaixaMaterial.cdsLoteMat.Edit;
+          fDMBaixaMaterial.cdsLoteMatQTD_EST_BAIXADO.AsFloat := StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatQTD_EST_BAIXADO.AsFloat + fDMBaixaMaterial.cdsLoteMatQTD_CONSUMO.AsFloat));
+          fDMBaixaMaterial.cdsLoteMat.Post;
+
+          fDMBaixaMaterial.cdsLoteMatEst.Edit;
+          vID_Estoque := fDMEstoque.fnc_Gravar_Estoque(0,fDMBaixaMaterial.cdsLoteMatFILIAL.AsInteger, 1,
                                                          fDMBaixaMaterial.cdsLoteMatID_MATERIAL.AsInteger,
-                                                         fDMBaixaMaterial.cdsLoteMatID_COR.AsInteger,
                                                          fDMBaixaMaterial.cdsLoteMatNUM_ORDEM.AsInteger,
+                                                         0,0,0,0, 'S', 'LOT',
+                                                         fDMBaixaMaterial.cdsLoteMatUNIDADE.AsString,
+                                                         fDMBaixaMaterial.cdsLoteMatUNIDADE.AsString,
+                                                         '',
                                                          fDMBaixaMaterial.cdsLoteMatTAMANHO.AsString,
-                                                         'S', 'LOT',
-                                                         fDMBaixaMaterial.cdsLoteMatEstQTD_RES.AsFloat,
-                                                         fDMBaixaMaterial.cdsLoteMatEstDTMOVIMENTO.AsDateTime,'');
-          fDMBaixaMaterial.cdsLoteMatEstID_MOVESTOQUE_RES.AsInteger := vID_Estoque_Res;
+                                                         fDMBaixaMaterial.cdsLoteMatEstDTMOVIMENTO.AsDateTime,
+                                                         fDMBaixaMaterial.cdsLoteMatPRECO_VENDA.AsFloat,
+                                                         fDMBaixaMaterial.cdsLoteMatEstQTD.AsFloat,
+                                                         0,0,0,0,0,
+                                                         fDMBaixaMaterial.cdsLoteMatEstQTD.AsFloat,
+                                                         fDMBaixaMaterial.cdsLoteMatPRECO_VENDA.AsFloat,
+                                                         0,0,fDMBaixaMaterial.cdsLoteMatUNIDADE.AsString,
+                                                         fDMBaixaMaterial.cdsLoteMatID_COR.AsInteger,
+                                                         '','N',0,0,0,0,0);
+          if (StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatQTD_RESERVA.AsFloat)) > 0) then
+          begin
+            vID_Estoque_Res := fDMEstoque_Res.fnc_Gravar_Estoque_Res(0,fDMBaixaMaterial.cdsLoteMatFILIAL.AsInteger,
+                                                           fDMBaixaMaterial.cdsLoteMatID_MATERIAL.AsInteger,
+                                                           fDMBaixaMaterial.cdsLoteMatID_COR.AsInteger,
+                                                           fDMBaixaMaterial.cdsLoteMatNUM_ORDEM.AsInteger,
+                                                           fDMBaixaMaterial.cdsLoteMatTAMANHO.AsString,
+                                                           'S', 'LOT',
+                                                           fDMBaixaMaterial.cdsLoteMatEstQTD_RES.AsFloat,
+                                                           fDMBaixaMaterial.cdsLoteMatEstDTMOVIMENTO.AsDateTime,'');
+            fDMBaixaMaterial.cdsLoteMatEstID_MOVESTOQUE_RES.AsInteger := vID_Estoque_Res;
+          end;
+          fDMBaixaMaterial.cdsLoteMatEstID_MOVESTOQUE.AsInteger     := vID_Estoque;
+          fDMBaixaMaterial.cdsLoteMatEst.Post;
         end;
-        fDMBaixaMaterial.cdsLoteMatEstID_MOVESTOQUE.AsInteger     := vID_Estoque;
-        fDMBaixaMaterial.cdsLoteMatEst.Post;
       end;
       fDMBaixaMaterial.cdsLoteMat.Next;
     end;
@@ -187,6 +197,8 @@ begin
         raise Exception.Create('Erro ao gravar o Estoque: ' + #13 + e.Message);
       end;
   end;
+  if trim(vMSGErro) <> '' then
+    MessageDlg(vMSGErro,mtInformation,[mbOK],0);
   FreeAndNil(sds);
   FreeAndNil(fDMEstoque);
   FreeAndNil(fDMEstoque_Res);
@@ -229,6 +241,18 @@ begin
   if (StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatSaldo.AsFloat)) > 0) and (StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatQTD_EST_BAIXADO.AsFloat)) > 0) then
   begin
     Background  := clAqua;
+    AFont.Color := clBlack;
+  end
+  else
+  if (StrToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsLoteMatQTD_RESTANTE.AsFloat)) > 0) then
+  begin
+    Background  := clYellow;
+    AFont.Color := clBlack;
+  end
+  else
+  if (fDMBaixaMaterial.cdsLoteMatID_OC.AsInteger <= 0) and (fDMBaixaMaterial.cdsLoteMatID_MOVESTOQUE_RES.AsInteger <= 0) then
+  begin
+    Background  := $0051A8FF;
     AFont.Color := clBlack;
   end;
 end;

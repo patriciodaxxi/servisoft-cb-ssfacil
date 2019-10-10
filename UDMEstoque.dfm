@@ -458,8 +458,8 @@ object DMEstoque: TDMEstoque
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 486
-    Top = 196
+    Left = 479
+    Top = 200
     object sdsEstoque_LocalID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]

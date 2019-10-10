@@ -160,6 +160,16 @@ type
     sdsMatResNOME_PRODUTO: TStringField;
     sdsMatResNOME_COMBINACAO: TStringField;
     cdsMatResFILIAL: TIntegerField;
+    sdsLoteMatID_OC: TIntegerField;
+    sdsLoteMatNUM_OC: TIntegerField;
+    sdsLoteMatITEM_OC: TIntegerField;
+    sdsLoteMatQTD_RESTANTE: TFloatField;
+    cdsLoteMatID_OC: TIntegerField;
+    cdsLoteMatNUM_OC: TIntegerField;
+    cdsLoteMatITEM_OC: TIntegerField;
+    cdsLoteMatQTD_RESTANTE: TFloatField;
+    sdsLoteMatID_MOVESTOQUE_RES: TIntegerField;
+    cdsLoteMatID_MOVESTOQUE_RES: TIntegerField;
     procedure cdsLoteMatCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
   private

@@ -333,7 +333,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 11
+        ColCount = 14
         RowCount = 2
         Columns = <
           item
@@ -387,7 +387,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Expanded = False
             FieldName = 'QTD'
             Title.Alignment = taCenter
-            Title.Caption = 'Quantidade'
+            Title.Caption = 'Qtd. F'#237'sica'
             Width = 112
             Visible = True
           end
@@ -397,6 +397,42 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Title.Alignment = taCenter
             Title.Caption = 'Q. Reserva'
             Width = 97
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'QTD_SUB_SALDO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sub Saldo (F'#237'sico - Reserva)'
+            Title.Color = 16777088
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = [fsBold]
+            Width = 105
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'QTD_SALDO_OC'
+            Title.Alignment = taCenter
+            Title.Caption = 'Qtd. OC (Sobra)'
+            Width = 76
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'QTD_SALDO_FINAL'
+            Title.Alignment = taCenter
+            Title.Caption = 'Saldo Estoque (Sub Saldo + Qtd. OC)'
+            Title.Color = 8453888
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = [fsBold]
+            Width = 87
             Visible = True
           end
           item

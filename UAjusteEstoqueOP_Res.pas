@@ -55,6 +55,8 @@ procedure TfrmAjusteEstoqueOP_Res.btnConfBaixaClick(Sender: TObject);
 var
   vID_Estoque_Res : Integer;
   vGravou : Boolean;
+  vES : String;
+  vQtd : Real;
 begin
   fDMEstoque_Res := TDMEstoque_Res.Create(Self);
   vGravou        := False;
@@ -64,13 +66,20 @@ begin
   begin
     if (SMDBGrid1.SelectedRows.CurrentRowSelected) then
     begin
+      vES := 'S';
+      vQtd := strToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsMatResQTD.AsFloat));
+      if strToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsMatResQTD.AsFloat)) < 0 then
+      begin
+        vES := 'E';
+        vQtd := strToFloat(FormatFloat('0.0000',fDMBaixaMaterial.cdsMatResQTD.AsFloat)) * -1;
+      end;
       vID_Estoque_Res := fDMEstoque_Res.fnc_Gravar_Estoque_Res(0,fDMBaixaMaterial.cdsMatResFILIAL.AsInteger,
                                                      fDMBaixaMaterial.cdsMatResID_PRODUTO.AsInteger,
                                                      fDMBaixaMaterial.cdsMatResID_COR.AsInteger,
                                                      fDMBaixaMaterial.cdsMatResNUM_ORDEM.AsInteger,
                                                      fDMBaixaMaterial.cdsMatResTAMANHO.AsString,
-                                                     'S', 'AJU',
-                                                     fDMBaixaMaterial.cdsMatResQTD.AsFloat,
+                                                     vES, 'AJU',
+                                                     vQtd,
                                                      DateEdit1.Date ,'');
     end;
     fDMBaixaMaterial.cdsMatRes.Next;

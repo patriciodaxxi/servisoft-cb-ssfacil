@@ -181,7 +181,7 @@ object frmConsEstoque: TfrmConsEstoque
       OnClick = RadioGroup2Click
     end
     object btnConsultar: TNxButton
-      Left = 658
+      Left = 659
       Top = 78
       Width = 177
       Height = 30
@@ -516,7 +516,6 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'PRECO_VENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Venda'
-        Width = 64
         Visible = True
       end
       item
@@ -524,7 +523,6 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'LOCALIZACAO'
         Title.Alignment = taCenter
         Title.Caption = 'Localiza'#231#227'o'
-        Width = 64
         Visible = True
       end
       item

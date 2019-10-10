@@ -102,53 +102,69 @@ var
   vComandoAux, vComandoAux2: String;
   vComando : String;
   i : Integer;
+  Form : TForm;
 begin
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
   Screen.Cursor := crHourGlass;
-  vQtdAux := 0;
-  fDMConsEstoque.cdsEstoque_Atual.Close;
-  vComando := 'select aux.*, PRO.NOME NOME_PRODUTO, PRO.REFERENCIA, COMB.NOME NOME_COMBINACAO, PRO.localizacao, '
-            + ' PRO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM, NCM.NCM, NCM.NOME NOME_NCM '
-            + ' from ( '
-            + ' select ea.id_produto, cast(sum(ea.qtd) as double precision) qtd, ea.id_cor, ea.tamanho, '
-            + ' ea.id_local_estoque, cast(sum(ea.qtd_reserva) as double precision) qtd_reserva '
-            + ' from vestoque_atual ea ';
-  if RxDBLookupCombo1.Text <> '' then
-    vComando := vComando + ' where ea.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
-  vComando := vComando + ' group by ea.id_produto, ea.id_cor, ea.tamanho, ea.id_local_estoque '
-            + ') aux '
-            + 'INNER JOIN PRODUTO PRO '
-            + 'ON AUX.id_produto = PRO.ID '
-            + ' LEFT JOIN COMBINACAO COMB '
-            + ' ON AUX.ID_COR = COMB.ID '
-            + ' LEFT JOIN TAB_NCM NCM '
-            + ' ON PRO.ID_NCM = NCM.ID '
-            + ' WHERE PRO.ESTOQUE = ' + QuotedStr('S')
-            + '    AND PRO.INATIVO = ' + QuotedStr('N');
 
-  if ceIDProduto.AsInteger > 0 then
-    vComando := vComando + ' AND PRO.ID = ' + ceIDProduto.Text
-  else
-  begin
-    if trim(edtRef.Text) <> '' then
-      vComando := vComando + ' AND PRO.REFERENCIA LIKE ' + QuotedStr('%'+edtRef.Text+'%')
+  try
+    vQtdAux := 0;
+    fDMConsEstoque.cdsEstoque_Atual.Close;
+    vComando := 'select aux.*, PRO.NOME NOME_PRODUTO, PRO.REFERENCIA, '
+              + 'COMB.NOME NOME_COMBINACAO, PRO.localizacao, '
+              + 'PRO.qtd_estoque_min, PRO.UNIDADE, PRO.ID_NCM, NCM.NCM, NCM.NOME NOME_NCM, '
+              + '(AUX.QTD - AUX.QTD_RESERVA) QTD_SUB_SALDO, (AUX.QTD - AUX.QTD_RESERVA + AUX.QTD_SALDO_OC) QTD_SALDO_FINAL '
+              + 'from ( '
+              + 'select ea.id_produto, cast(sum(ea.qtd) as double precision) qtd, ea.id_cor, ea.tamanho, '
+              + 'ea.id_local_estoque, cast(sum(ea.qtd_reserva) as double precision) qtd_reserva, '
+              + 'coalesce((select sum(v.qtd_saldo) '
+              + '          from vestoque_oc v '
+              + '          where v.id_produto = ea.ID_produto '
+              + '          and v.id_cor = ea.ID_COR '
+              + '          AND V.TAMANHO = ea.TAMANHO),0) QTD_SALDO_OC '
+              + 'from vestoque_atual ea ';
+    if RxDBLookupCombo1.Text <> '' then
+      vComando := vComando + ' where ea.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
+    vComando := vComando + ' group by ea.id_produto, ea.id_cor, ea.tamanho, ea.id_local_estoque '
+              + ') aux '
+              + 'INNER JOIN PRODUTO PRO '
+              + 'ON AUX.id_produto = PRO.ID '
+              + ' LEFT JOIN COMBINACAO COMB '
+              + ' ON AUX.ID_COR = COMB.ID '
+              + ' LEFT JOIN TAB_NCM NCM '
+              + ' ON PRO.ID_NCM = NCM.ID '
+              + ' WHERE PRO.ESTOQUE = ' + QuotedStr('S')
+              + '    AND PRO.INATIVO = ' + QuotedStr('N');
+
+    if ceIDProduto.AsInteger > 0 then
+      vComando := vComando + ' AND PRO.ID = ' + ceIDProduto.Text
     else
     begin
-      case RadioGroup2.ItemIndex of
-        0: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('P');
-        1: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('M');
-        2: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('C');
-        3: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('S');
+      if trim(edtRef.Text) <> '' then
+        vComando := vComando + ' AND PRO.REFERENCIA LIKE ' + QuotedStr('%'+edtRef.Text+'%')
+      else
+      begin
+        case RadioGroup2.ItemIndex of
+          0: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('P');
+          1: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('M');
+          2: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('C');
+          3: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('S');
+        end;
       end;
     end;
+    case RadioGroup1.ItemIndex of
+      0: vComando := vComando + ' AND aux.QTD > ' + IntToStr(vQtdAux);
+      1: vComando := vComando + ' AND aux.QTD < ' + IntToStr(vQtdAux);
+      2: vComando := vComando + ' AND coalesce(aux.QTD,0) < coalesce(PRO.QTD_ESTOQUE_MIN,0) ';
+    end;
+    fDMConsEstoque.sdsEstoque_Atual.CommandText := vComando;
+    fDMConsEstoque.cdsEstoque_Atual.Open;
+  finally
+    Screen.Cursor := crDefault;
+    FreeAndNil(Form);
   end;
-  case RadioGroup1.ItemIndex of
-    0: vComando := vComando + ' AND aux.QTD > ' + IntToStr(vQtdAux);
-    1: vComando := vComando + ' AND aux.QTD < ' + IntToStr(vQtdAux);
-    2: vComando := vComando + ' AND coalesce(aux.QTD,0) < coalesce(PRO.QTD_ESTOQUE_MIN,0) ';
-  end;
-  fDMConsEstoque.sdsEstoque_Atual.CommandText := vComando;
-  fDMConsEstoque.cdsEstoque_Atual.Open;
-  Screen.Cursor := crDefault;
+
 end;
 
 procedure TfrmConsEstoque_Atual.FormClose(Sender: TObject;
@@ -174,10 +190,10 @@ var
 begin
   ColunaOrdenada := Column.FieldName;
   fDMConsEstoque.cdsEstoque_Atual.IndexFieldNames := Column.FieldName;
-  Column.Title.Color := clBtnShadow;
-  for i := 0 to SMDBGrid1.Columns.Count - 1 do
-    if not (SMDBGrid1.Columns.Items[I] = Column) then
-      SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
+  //Column.Title.Color := clBtnShadow;
+  //for i := 0 to SMDBGrid1.Columns.Count - 1 do
+  //  if not (SMDBGrid1.Columns.Items[I] = Column) then
+  //    SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 procedure TfrmConsEstoque_Atual.edtRefKeyDown(Sender: TObject; var Key: Word;

@@ -97,7 +97,7 @@ object DMConsEstoque: TDMConsEstoque
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 89
+    Left = 90
     Top = 7
   end
   object dspEstoque: TDataSetProvider
@@ -3216,19 +3216,24 @@ object DMConsEstoque: TDMConsEstoque
     CommandText = 
       'select aux.*,'#13#10'PRO.NOME NOME_PRODUTO, PRO.REFERENCIA,'#13#10'COMB.NOME' +
       ' NOME_COMBINACAO, PRO.localizacao,'#13#10'PRO.qtd_estoque_min, PRO.UNI' +
-      'DADE, PRO.ID_NCM, NCM.NCM, NCM.NOME NOME_NCM'#13#10'from ('#13#10'select ea.' +
-      'id_produto, cast(sum(ea.qtd) as double precision) qtd, ea.id_cor' +
-      ', ea.tamanho,'#13#10'ea.id_local_estoque, cast(sum(ea.qtd_reserva) as ' +
-      'double precision) qtd_reserva'#13#10'from vestoque_atual ea'#13#10'group by ' +
-      'ea.id_produto, ea.filial, ea.id_cor, ea.tamanho,'#13#10'ea.id_local_es' +
-      'toque'#13#10') aux'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON AUX.id_produto = PRO.ID' +
-      #13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON AUX.ID_COR = COMB.ID'#13#10'LEFT JOIN ' +
-      'TAB_NCM NCM'#13#10'ON PRO.ID_NCM = NCM.ID'#13#10'WHERE PRO.ESTOQUE = '#39'S'#39#13#10'  ' +
-      ' AND PRO.INATIVO = '#39'N'#39#13#10#13#10
+      'DADE, PRO.ID_NCM, NCM.NCM, NCM.NOME NOME_NCM,'#13#10'(AUX.QTD - AUX.QT' +
+      'D_RESERVA) QTD_SUB_SALDO, (AUX.QTD - AUX.QTD_RESERVA + AUX.QTD_S' +
+      'ALDO_OC) QTD_SALDO_FINAL'#13#10#13#10'from ('#13#10'select ea.id_produto, cast(s' +
+      'um(ea.qtd) as double precision) qtd, ea.id_cor, ea.tamanho,'#13#10'ea.' +
+      'id_local_estoque, cast(sum(ea.qtd_reserva) as double precision) ' +
+      'qtd_reserva,'#13#10'coalesce((select sum(v.qtd_saldo)'#13#10'          from ' +
+      'vestoque_oc v'#13#10'          where v.id_produto = ea.ID_produto'#13#10'   ' +
+      '       and v.id_cor = ea.ID_COR'#13#10'          AND V.TAMANHO = ea.TA' +
+      'MANHO),0) QTD_SALDO_OC'#13#10#13#10'from vestoque_atual ea'#13#10'group by ea.id' +
+      '_produto, ea.filial, ea.id_cor, ea.tamanho,'#13#10'ea.id_local_estoque' +
+      #13#10') aux'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON AUX.id_produto = PRO.ID'#13#10'LEF' +
+      'T JOIN COMBINACAO COMB'#13#10'ON AUX.ID_COR = COMB.ID'#13#10'LEFT JOIN TAB_N' +
+      'CM NCM'#13#10'ON PRO.ID_NCM = NCM.ID'#13#10'WHERE PRO.ESTOQUE = '#39'S'#39#13#10'   AND ' +
+      'PRO.INATIVO = '#39'N'#39#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 88
+    Left = 90
     Top = 56
   end
   object dspEstoque_Atual: TDataSetProvider
@@ -3301,6 +3306,18 @@ object DMConsEstoque: TDMConsEstoque
     object cdsEstoque_AtualQTD_ESTOQUE_MIN: TFloatField
       FieldName = 'QTD_ESTOQUE_MIN'
       DisplayFormat = '0.00##'
+    end
+    object cdsEstoque_AtualQTD_SALDO_OC: TFloatField
+      FieldName = 'QTD_SALDO_OC'
+      DisplayFormat = '0.000#'
+    end
+    object cdsEstoque_AtualQTD_SUB_SALDO: TFloatField
+      FieldName = 'QTD_SUB_SALDO'
+      DisplayFormat = '0.000#'
+    end
+    object cdsEstoque_AtualQTD_SALDO_FINAL: TFloatField
+      FieldName = 'QTD_SALDO_FINAL'
+      DisplayFormat = '0.000#'
     end
   end
   object dsEstoque_Atual: TDataSource

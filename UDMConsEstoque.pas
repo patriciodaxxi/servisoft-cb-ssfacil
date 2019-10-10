@@ -702,6 +702,9 @@ type
     qParametros_NTEUSA_CENTRO_CUSTO: TStringField;
     cdsEstoqueQTD_SUB_SALDO: TFloatField;
     cdsEstoqueQTD_SALDO_FINAL: TFloatField;
+    cdsEstoque_AtualQTD_SALDO_OC: TFloatField;
+    cdsEstoque_AtualQTD_SUB_SALDO: TFloatField;
+    cdsEstoque_AtualQTD_SALDO_FINAL: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

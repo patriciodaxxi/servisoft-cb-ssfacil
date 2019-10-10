@@ -16,10 +16,12 @@ object DMBaixaMaterial: TDMBaixaMaterial
       'WHERE RES.NUM_ORDEM = :NUM_ORDEM'#13#10'      AND RES.ID_PRODUTO = LOT' +
       '.ID_MATERIAL'#13#10'      AND RES.ID_COR = LOT.ID_COR'#13#10'      AND RES.T' +
       'AMANHO = LOT.TAMANHO) QTD_RESERVA,'#13#10'(SELECT FIRST 1 FILIAL FROM ' +
-      'LOTE LT WHERE LT.NUM_ORDEM = :NUM_ORDEM)'#13#10'FROM LOTE_MAT LOT'#13#10'INN' +
-      'ER JOIN PRODUTO PRO ON LOT.ID_MATERIAL = PRO.ID'#13#10'LEFT JOIN COMBI' +
-      'NACAO COMB ON LOT.ID_COR = COMB.ID'#13#10'WHERE LOT.NUM_ORDEM = :NUM_O' +
-      'RDEM'#13#10#13#10#13#10
+      'LOTE LT WHERE LT.NUM_ORDEM = :NUM_ORDEM),'#13#10'lot.id_oc, lot.num_oc' +
+      ', lot.item_oc, coalesce(OC.qtd_restante,0) QTD_RESTANTE,'#13#10'lot.id' +
+      '_movestoque_res'#13#10'FROM LOTE_MAT LOT'#13#10'INNER JOIN PRODUTO PRO ON LO' +
+      'T.ID_MATERIAL = PRO.ID'#13#10'LEFT JOIN COMBINACAO COMB ON LOT.ID_COR ' +
+      '= COMB.ID'#13#10'left join PEDIDO_ITEM OC'#13#10'ON LOT.id_oc = OC.ID'#13#10'AND L' +
+      'OT.item_oc = OC.ITEM'#13#10'WHERE LOT.NUM_ORDEM = :NUM_ORDEM'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -95,6 +97,25 @@ object DMBaixaMaterial: TDMBaixaMaterial
       FieldName = 'CARIMBOAUX'
       Size = 25
     end
+    object sdsLoteMatID_OC: TIntegerField
+      FieldName = 'ID_OC'
+      ProviderFlags = []
+    end
+    object sdsLoteMatNUM_OC: TIntegerField
+      FieldName = 'NUM_OC'
+      ProviderFlags = []
+    end
+    object sdsLoteMatITEM_OC: TIntegerField
+      FieldName = 'ITEM_OC'
+      ProviderFlags = []
+    end
+    object sdsLoteMatQTD_RESTANTE: TFloatField
+      FieldName = 'QTD_RESTANTE'
+      ProviderFlags = []
+    end
+    object sdsLoteMatID_MOVESTOQUE_RES: TIntegerField
+      FieldName = 'ID_MOVESTOQUE_RES'
+    end
   end
   object dspLoteMat: TDataSetProvider
     DataSet = sdsLoteMat
@@ -112,7 +133,7 @@ object DMBaixaMaterial: TDMBaixaMaterial
     Params = <>
     ProviderName = 'dspLoteMat'
     OnCalcFields = cdsLoteMatCalcFields
-    Left = 216
+    Left = 217
     Top = 24
     object cdsLoteMatNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'
@@ -177,6 +198,25 @@ object DMBaixaMaterial: TDMBaixaMaterial
     object cdsLoteMatCARIMBOAUX: TStringField
       FieldName = 'CARIMBOAUX'
       Size = 25
+    end
+    object cdsLoteMatID_OC: TIntegerField
+      FieldName = 'ID_OC'
+      ProviderFlags = []
+    end
+    object cdsLoteMatNUM_OC: TIntegerField
+      FieldName = 'NUM_OC'
+      ProviderFlags = []
+    end
+    object cdsLoteMatITEM_OC: TIntegerField
+      FieldName = 'ITEM_OC'
+      ProviderFlags = []
+    end
+    object cdsLoteMatQTD_RESTANTE: TFloatField
+      FieldName = 'QTD_RESTANTE'
+      ProviderFlags = []
+    end
+    object cdsLoteMatID_MOVESTOQUE_RES: TIntegerField
+      FieldName = 'ID_MOVESTOQUE_RES'
     end
   end
   object sdsLoteMatEst: TSQLDataSet
@@ -371,7 +411,7 @@ object DMBaixaMaterial: TDMBaixaMaterial
     Aggregates = <>
     Params = <>
     ProviderName = 'dspMaterial_Nec'
-    Left = 784
+    Left = 786
     Top = 16
     object cdsMaterial_NecQPED: TFloatField
       FieldName = 'QPED'
@@ -686,16 +726,19 @@ object DMBaixaMaterial: TDMBaixaMaterial
     CommandText = 
       'select AUX.QTD, AUX.NUM_ORDEM, AUX.ID_PRODUTO, coalesce(AUX.ID_C' +
       'OR,0) ID_COR,'#13#10'coalesce(AUX.TAMANHO,'#39#39') TAMANHO, AUX.FILIAL, P.N' +
-      'OME NOME_PRODUTO, COMB.NOME NOME_COMBINACAO'#13#10'from ('#13#10'select sum(' +
-      'em.qtd2) qtd , em.num_ordem, em.id_produto, em.id_cor, em.tamanh' +
-      'o, em.filial'#13#10'from estoque_mov_res em'#13#10'group by em.num_ordem, em' +
-      '.id_produto, em.id_cor, em.tamanho, em.filial) aux'#13#10'LEFT JOIN PR' +
-      'ODUTO P'#13#10'ON AUX.ID_PRODUTO = P.ID'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON' +
-      ' AUX.ID_COR = COMB.ID'#13#10'where round(aux.qtd,4) > 0'#13#10#13#10
+      'OME NOME_PRODUTO, COMB.NOME NOME_COMBINACAO'#13#10'from'#13#10'(select sum(e' +
+      'm.qtd2) qtd , em.num_ordem, em.id_produto, em.id_cor, em.tamanho' +
+      ', em.filial'#13#10'from estoque_mov_res em'#13#10'inner JOIN LOTE_MAT LM'#13#10'ON' +
+      ' EM.num_ordem = LM.num_ordem'#13#10'AND EM.id_produto = LM.id_material' +
+      #13#10'AND EM.id_cor = LM.id_cor'#13#10'and em.tamanho = lm.tamanho'#13#10'WHERE ' +
+      'coalesce(LM.qtd_est_baixado,0) > 0'#13#10'group by em.num_ordem, em.id' +
+      '_produto, em.id_cor, em.tamanho, em.filial) aux'#13#10'LEFT JOIN PRODU' +
+      'TO P'#13#10'ON AUX.ID_PRODUTO = P.ID'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON AU' +
+      'X.ID_COR = COMB.ID'#13#10'where round(aux.qtd,4) <> 0'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 688
+    Left = 690
     Top = 80
     object sdsMatResQTD: TFloatField
       FieldName = 'QTD'
@@ -738,6 +781,7 @@ object DMBaixaMaterial: TDMBaixaMaterial
     Top = 80
     object cdsMatResQTD: TFloatField
       FieldName = 'QTD'
+      DisplayFormat = '0.000#'
     end
     object cdsMatResNUM_ORDEM: TIntegerField
       FieldName = 'NUM_ORDEM'

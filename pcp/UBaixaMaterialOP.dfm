@@ -18,7 +18,7 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 971
+    Width = 979
     Height = 48
     Align = alTop
     Color = clSilver
@@ -53,7 +53,7 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
       OnKeyDown = edtOrdemProducaoKeyDown
     end
     object btnPesquisa: TBitBtn
-      Left = 349
+      Left = 351
       Top = 14
       Width = 31
       Height = 28
@@ -118,8 +118,8 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 422
-    Width = 971
+    Top = 430
+    Width = 979
     Height = 19
     Panels = <
       item
@@ -138,8 +138,8 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 48
-    Width = 835
-    Height = 336
+    Width = 843
+    Height = 344
     Align = alClient
     Ctl3D = False
     DataSource = DMBaixaMaterial.dsLoteMat
@@ -171,7 +171,7 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
     WidthOfIndicator = 27
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 13
+    ColCount = 15
     RowCount = 2
     Columns = <
       item
@@ -268,25 +268,42 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
         Title.Caption = 'Unidade'
         Width = 61
         Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'NUM_OC'
+        Title.Alignment = taCenter
+        Title.Caption = 'N'#186' OC'
+        Visible = True
+      end
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'QTD_RESTANTE'
+        Title.Alignment = taCenter
+        Title.Caption = 'Qtd. Pendente OC'
+        Width = 64
+        Visible = True
       end>
   end
   object Panel2: TPanel
     Left = 0
-    Top = 384
-    Width = 971
+    Top = 392
+    Width = 979
     Height = 38
     Align = alBottom
     Color = 16769217
     TabOrder = 3
     object Shape3: TShape
-      Left = 589
+      Left = 477
       Top = 9
       Width = 30
       Height = 16
       Brush.Color = clAqua
     end
     object Label14: TLabel
-      Left = 621
+      Left = 509
       Top = 12
       Width = 53
       Height = 13
@@ -299,14 +316,14 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
       ParentFont = False
     end
     object Shape4: TShape
-      Left = 692
+      Left = 580
       Top = 9
       Width = 30
       Height = 16
       Brush.Color = clGreen
     end
     object Label15: TLabel
-      Left = 724
+      Left = 613
       Top = 12
       Width = 42
       Height = 13
@@ -333,6 +350,46 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
       ParentColor = False
       ParentFont = False
     end
+    object Shape1: TShape
+      Left = 668
+      Top = 9
+      Width = 30
+      Height = 16
+      Brush.Color = clYellow
+    end
+    object Label1: TLabel
+      Left = 701
+      Top = 12
+      Width = 65
+      Height = 13
+      Caption = 'OC em aberto'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 815
+      Top = 12
+      Width = 123
+      Height = 13
+      Caption = 'N'#227'o Gerada Necessidade'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Shape2: TShape
+      Left = 782
+      Top = 9
+      Width = 30
+      Height = 16
+      Brush.Color = 5351679
+    end
     object DateEdit1: TDateEdit
       Left = 93
       Top = 10
@@ -350,7 +407,7 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
     end
     object btnConfBaixa: TNxButton
       Left = 194
-      Top = 4
+      Top = 3
       Width = 256
       Height = 30
       Caption = 'Confirmar Selecionados'
@@ -422,10 +479,10 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
     end
   end
   object Panel3: TPanel
-    Left = 835
+    Left = 843
     Top = 48
     Width = 136
-    Height = 336
+    Height = 344
     Align = alRight
     TabOrder = 4
     object NxPanel1: TNxPanel
@@ -450,7 +507,7 @@ object frmBaixa_Material_OP: TfrmBaixa_Material_OP
       Left = 1
       Top = 41
       Width = 134
-      Height = 294
+      Height = 302
       Align = alClient
       Ctl3D = False
       DataSource = DMBaixaMaterial.dsConsPend

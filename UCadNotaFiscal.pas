@@ -5554,6 +5554,8 @@ end;
 
 procedure TfrmCadNotaFiscal.DBDateEdit3Change(Sender: TObject);
 begin
+  if not fDMCadNotaFiscal.cdsNotaFiscal.Active then
+    exit;
   if fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert] then
     btnGerarParcelasClick(Sender);
 end;

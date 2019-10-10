@@ -204,10 +204,10 @@ var
 begin
   ColunaOrdenada := Column.FieldName;
   fDMConsEstoque.cdsEstoque.IndexFieldNames := Column.FieldName;
-  Column.Title.Color := clBtnShadow;
-  for i := 0 to SMDBGrid1.Columns.Count - 1 do
-    if not (SMDBGrid1.Columns.Items[I] = Column) then
-      SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
+  //Column.Title.Color := clBtnShadow;
+  //for i := 0 to SMDBGrid1.Columns.Count - 1 do
+  //  if not (SMDBGrid1.Columns.Items[I] = Column) then
+  //    SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 procedure TfrmConsEstoque.RadioGroup2Click(Sender: TObject);

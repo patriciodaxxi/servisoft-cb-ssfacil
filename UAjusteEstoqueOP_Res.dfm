@@ -49,7 +49,7 @@ object frmAjusteEstoqueOP_Res: TfrmAjusteEstoqueOP_Res
     WidthOfIndicator = 27
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 7
+    ColCount = 8
     RowCount = 2
     Columns = <
       item
@@ -77,7 +77,14 @@ object frmAjusteEstoqueOP_Res: TfrmAjusteEstoqueOP_Res
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Nome Material'
-        Width = 438
+        Width = 380
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_COR'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID Cor'
         Visible = True
       end
       item
