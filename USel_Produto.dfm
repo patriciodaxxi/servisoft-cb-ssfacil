@@ -1140,8 +1140,9 @@ object frmSel_Produto: TfrmSel_Produto
       '(sum(E2.QTD) AS Float) QTDGERAL FROM ESTOQUE_ATUAL E2'#13#10'         ' +
       '           WHERE E2.ID_PRODUTO = PRO.ID) QTDGERAL,'#13#10'            ' +
       '       /**/ cast(0 as Float) AS PRECO_PROMOCAO, M.NOME NOME_MARC' +
-      'A'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO_VEICULO PV'#13#10'ON PRO.ID = P' +
-      'V.ID'#13#10'LEFT JOIN MARCA M ON PRO.ID_MARCA = M.ID'#13#10#13#10#13#10
+      'A,  PRO.MEDIDA'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO_VEICULO PV'#13#10 +
+      'ON PRO.ID = PV.ID'#13#10'LEFT JOIN MARCA M ON PRO.ID_MARCA = M.ID'#13#10#13#10#13 +
+      #10
     MaxBlobSize = -1
     Params = <
       item
