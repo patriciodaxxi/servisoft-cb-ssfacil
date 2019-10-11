@@ -128,6 +128,10 @@ type
     Edit4: TEdit;
     qParametrosMOSTRAR_MARCAR_PROD: TStringField;
     qParametros_ProdPOSICAO_CONS_MARCA: TStringField;
+    sdsProdutoMEDIDA: TStringField;
+    cdsProdutoMEDIDA: TStringField;
+    qParamertros_Ped: TSQLQuery;
+    qParamertros_PedPEDIDO_COMERCIO: TStringField;
     procedure BitBtn1Click(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -375,6 +379,7 @@ begin
   qParametros_Geral.Close;
   qParametros_Geral.Open;
   qParametros_Prod.Open;
+  qParamertros_Ped.Open;
   if qParametros_ProdPOSICAO_CONS_MARCA.AsString = '2' then
   begin
     pnlMarca.Align := alBottom;
@@ -414,6 +419,8 @@ begin
       end;
       if (trim(qParametrosMOSTRAR_MARCAR_PROD.AsString) <> 'S') and (SMDBGrid1.Columns[i].FieldName = 'NOME_MARCA') then
         SMDBGrid1.Columns[i].Visible := False;
+      if (SMDBGrid1.Columns[i].FieldName = 'MEDIDA') then
+        SMDBGrid1.Columns[i].Visible := (qParamertros_PedPEDIDO_COMERCIO.AsString = 'S');
       if (qParametrosEMPRESA_VEICULO.AsString <> 'S') and (SMDBGrid1.Columns[i].FieldName = 'PLACA') then
         SMDBGrid1.Columns[i].Visible := False;
 
@@ -487,6 +494,7 @@ begin
   end;
   if trim(Edit1.Text) <> '' then
     prc_Consultar;
+
 end;
 
 procedure TfrmSel_Produto.SMDBGrid1TitleClick(Column: TColumn);

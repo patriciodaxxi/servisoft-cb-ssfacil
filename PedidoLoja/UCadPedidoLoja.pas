@@ -632,7 +632,8 @@ begin
     end;
     if (SMDBGrid2.Columns[i].FieldName = 'NUM_LOTE_CONTROLE') or (SMDBGrid2.Columns[i].FieldName = 'QTD_CAIXA') then
       SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
-
+    if (SMDBGrid2.Columns[i].FieldName = 'MEDIDA') then
+      SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_PedPEDIDO_COMERCIO.AsString = 'S');
     if (SMDBGrid2.Columns[i].FieldName = 'CARIMBO') then
       SMDBGrid2.Columns[i].Visible := (fDMCadPedido.cdsParametrosUSA_CARIMBO.AsString = 'S');
     if (SMDBGrid2.Columns[i].FieldName = 'NOME_COR_COMBINACAO') then
@@ -2717,8 +2718,15 @@ var
   vAux: String;
 begin
   vAux := Monta_Numero(Edit2.Text,0);
+  vCodProduto_Pos := 0;
+  vReferencia_Pos := '';
   if trim(Edit2.Text) <> '' then
-    vCodProduto_Pos := StrToInt(Edit2.Text);
+  begin
+    if fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString = 'S' then
+      vReferencia_Pos := Edit2.Text
+    else
+      vCodProduto_Pos := StrToInt(Edit2.Text);
+  end;
   vCodPessoa_Pos := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger;
   vNum_Lote_Pos  := edtLote.Text;
   frmSel_Produto := TfrmSel_Produto.Create(Self);
@@ -2728,13 +2736,19 @@ begin
   else
     frmSel_Produto.vTipo_Prod := 'P';
   frmSel_Produto.ShowModal;
+  if (fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString = 'S') and (vReferencia_Pos <> '') then
+  begin
+    Edit2.Text := vReferencia_Pos;
+    fDMCadPedido.prc_Abrir_ProdutoLoja(0,'',Edit2.Text);
+  end
+  else
   if vCodProduto_Pos > 0 then
   begin
     Edit2.Text := IntToStr(vCodProduto_Pos);
     fDMCadPedido.prc_Abrir_ProdutoLoja(StrToInt(Edit2.Text),'','');
-    Edit3.Text := fDMCadPedido.cdsProdutoNOME.AsString;
     edtLote.Text := vNum_Lote_Pos;
   end;
+  Edit3.Text   := fDMCadPedido.cdsProdutoNOME.AsString;
 end;
 
 function TfrmCadPedidoLoja.fnc_Verifica_Lote(ID_Produto: Integer): Boolean;

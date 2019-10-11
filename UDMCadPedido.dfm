@@ -2773,13 +2773,14 @@ object DMCadPedido: TDMCadPedido
     CommandText = 
       'SELECT PI.*, CFOP.CODCFOP,  CSTICMS.COD_CST, CSTIPI.COD_IPI, NCM' +
       '.NCM,'#13#10'COMB.NOME NOME_COR_COMBINACAO, (PI.vlr_desconto + PI.vlr_' +
-      'descontorateio) VLR_DESCONTO_CALC'#13#10'FROM PEDIDO_ITEM PI'#13#10'LEFT JOI' +
-      'N TAB_CFOP CFOP ON (PI.ID_CFOP = CFOP.ID)'#13#10'LEFT JOIN TAB_CSTICMS' +
-      ' CSTICMS ON (PI.ID_CSTICMS = CSTICMS.ID)'#13#10'LEFT JOIN TAB_CSTIPI C' +
-      'STIPI ON (PI.ID_CSTIPI = CSTIPI.ID)'#13#10'LEFT JOIN TAB_NCM NCM ON (P' +
-      'I.ID_NCM = NCM.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.ID_COR = CO' +
-      'MB.ID)'#13#10'WHERE PI.ID = :ID'#13#10' AND ((PI.TIPO_ACESSORIO = '#39'N'#39') OR (P' +
-      'I.TIPO_ACESSORIO IS NULL))'#13#10
+      'descontorateio) VLR_DESCONTO_CALC,'#13#10'PRO.medida MEDIDA'#13#10'FROM PEDI' +
+      'DO_ITEM PI'#13#10'LEFT JOIN TAB_CFOP CFOP ON (PI.ID_CFOP = CFOP.ID)'#13#10'L' +
+      'EFT JOIN TAB_CSTICMS CSTICMS ON (PI.ID_CSTICMS = CSTICMS.ID)'#13#10'LE' +
+      'FT JOIN TAB_CSTIPI CSTIPI ON (PI.ID_CSTIPI = CSTIPI.ID)'#13#10'LEFT JO' +
+      'IN TAB_NCM NCM ON (PI.ID_NCM = NCM.ID)'#13#10'LEFT JOIN COMBINACAO COM' +
+      'B ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JOIN PRODUTO PRO ON (PI.id_prod' +
+      'uto = PRO.ID)'#13#10'WHERE PI.ID = :ID'#13#10' AND ((PI.TIPO_ACESSORIO = '#39'N'#39 +
+      ') OR (PI.TIPO_ACESSORIO IS NULL))'#13#10
     DataSource = dsPedido_Mestre
     MaxBlobSize = -1
     Params = <
@@ -2790,7 +2791,7 @@ object DMCadPedido: TDMCadPedido
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 25
+    Left = 26
     Top = 57
     object sdsPedido_ItensID: TIntegerField
       FieldName = 'ID'
@@ -3292,6 +3293,10 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
+    end
+    object sdsPedido_ItensMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      ProviderFlags = []
     end
   end
   object cdsPedido_Itens: TClientDataSet
@@ -3934,6 +3939,10 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
+    end
+    object cdsPedido_ItensMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      ProviderFlags = []
     end
   end
   object dsPedido_Itens: TDataSource

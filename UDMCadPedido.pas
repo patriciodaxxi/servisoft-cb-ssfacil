@@ -3498,6 +3498,8 @@ type
     cdsPedidoImp_ItensMOSTRAR_GROSA: TStringField;
     qParametros_PedPEDIDO_COMERCIO: TStringField;
     qParametros_PedUSA_REF_DIG_PEDLOJA: TStringField;
+    sdsPedido_ItensMEDIDA: TStringField;
+    cdsPedido_ItensMEDIDA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

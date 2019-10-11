@@ -268,7 +268,7 @@ object frmSel_Produto: TfrmSel_Produto
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 15
+    ColCount = 16
     RowCount = 2
     Columns = <
       item
@@ -293,6 +293,13 @@ object frmSel_Produto: TfrmSel_Produto
         Title.Alignment = taCenter
         Title.Caption = 'Refer'#234'ncia'
         Width = 108
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'MEDIDA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Bitola'
         Visible = True
       end
       item
@@ -746,9 +753,9 @@ object frmSel_Produto: TfrmSel_Produto
       ' PRO.ID) QTD,'#13#10'(SELECT cast(sum(E2.QTD) AS Float) QTDGERAL'#13#10'  FR' +
       'OM ESTOQUE_ATUAL E2 '#13#10'  WHERE E2.ID_PRODUTO = PRO.ID) QTDGERAL,'#13 +
       #10'  CAST(0 AS FLOAT) AS PRECO_PROMOCAO, PRO.OBS, M.NOME NOME_MARC' +
-      'A'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO_VEICULO PV ON (PRO.ID = P' +
-      'V.ID)'#13#10'LEFT JOIN VTAB_PRECO VT ON PRO.ID = VT.ID_PRODUTO'#13#10'LEFT J' +
-      'OIN MARCA M ON PRO.id_marca = M.ID'#13#10
+      'A, PRO.MEDIDA'#13#10'FROM PRODUTO PRO'#13#10'LEFT JOIN PRODUTO_VEICULO PV ON' +
+      ' (PRO.ID = PV.ID)'#13#10'LEFT JOIN VTAB_PRECO VT ON PRO.ID = VT.ID_PRO' +
+      'DUTO'#13#10'LEFT JOIN MARCA M ON PRO.id_marca = M.ID'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -757,7 +764,7 @@ object frmSel_Produto: TfrmSel_Produto
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 222
+    Left = 223
     Top = 208
     object sdsProdutoID: TIntegerField
       FieldName = 'ID'
@@ -826,13 +833,16 @@ object frmSel_Produto: TfrmSel_Produto
       FieldName = 'NOME_MARCA'
       Size = 40
     end
+    object sdsProdutoMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+    end
   end
   object cdsProduto: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME;ID'
     Params = <>
     ProviderName = 'dspProduto'
-    Left = 288
+    Left = 290
     Top = 208
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
@@ -908,6 +918,9 @@ object frmSel_Produto: TfrmSel_Produto
     object cdsProdutoNOME_MARCA: TStringField
       FieldName = 'NOME_MARCA'
       Size = 40
+    end
+    object cdsProdutoMEDIDA: TStringField
+      FieldName = 'MEDIDA'
     end
   end
   object dspProduto: TDataSetProvider
@@ -1240,6 +1253,21 @@ object frmSel_Produto: TfrmSel_Produto
     end
     object qParametros_ProdPOSICAO_CONS_MARCA: TStringField
       FieldName = 'POSICAO_CONS_MARCA'
+      FixedChar = True
+      Size = 1
+    end
+  end
+  object qParamertros_Ped: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT PEDIDO_COMERCIO'
+      'FROM PARAMETROS_PED')
+    SQLConnection = dmDatabase.scoDados
+    Left = 479
+    Top = 331
+    object qParamertros_PedPEDIDO_COMERCIO: TStringField
+      FieldName = 'PEDIDO_COMERCIO'
       FixedChar = True
       Size = 1
     end

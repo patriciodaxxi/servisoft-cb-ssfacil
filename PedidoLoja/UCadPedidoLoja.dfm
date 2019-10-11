@@ -118,7 +118,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'PEDIDO_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Pedido Cliente (OC)'
-            Width = 64
             Visible = True
           end
           item
@@ -164,7 +163,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             Expanded = False
             FieldName = 'QTD'
             Title.Caption = 'Qtd. Produtos'
-            Width = 64
             Visible = True
           end
           item
@@ -173,7 +171,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'FATURADO'
             Title.Alignment = taCenter
             Title.Caption = 'Faturado'
-            Width = 64
             Visible = True
           end
           item
@@ -204,7 +201,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'DTAPROVADO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Aprovado'
-            Width = 64
             Visible = True
           end
           item
@@ -220,7 +216,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'USUARIO'
             Title.Alignment = taCenter
             Title.Caption = 'Usu'#225'rio'
-            Width = 64
             Visible = True
           end
           item
@@ -2401,7 +2396,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               OnKeyDown = Edit2KeyDown
             end
             object Edit3: TEdit
-              Left = 177
+              Left = 178
               Top = 18
               Width = 313
               Height = 19
@@ -2949,7 +2944,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 17
+          ColCount = 18
           RowCount = 2
           Columns = <
             item
@@ -2982,6 +2977,14 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               FieldName = 'NOMEPRODUTO'
               Title.Color = 9568255
               Width = 245
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MEDIDA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Title.Color = 9568255
               Visible = True
             end
             item
@@ -3086,7 +3089,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               FieldName = 'CODCFOP'
               Title.Alignment = taCenter
               Title.Color = 9568255
-              Width = 64
               Visible = True
             end>
         end
