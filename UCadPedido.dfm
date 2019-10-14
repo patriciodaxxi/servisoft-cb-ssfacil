@@ -25,7 +25,7 @@ object frmCadPedido: TfrmCadPedido
     Top = 0
     Width = 1097
     Height = 679
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadPedido: TfrmCadPedido
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -94,6 +94,7 @@ object frmCadPedido: TfrmCadPedido
             FieldName = 'AMOSTRA'
             Title.Alignment = taCenter
             Title.Caption = 'Amostra'
+            Width = 64
             Visible = True
           end
           item
@@ -151,7 +152,6 @@ object frmCadPedido: TfrmCadPedido
             Expanded = False
             FieldName = 'DTEMISSAO'
             Title.Alignment = taCenter
-            Width = 64
             Visible = True
           end
           item
@@ -3068,7 +3068,7 @@ object frmCadPedido: TfrmCadPedido
               OnClick = btnExcluir_ItensClick
             end
             object btnCopiar_Item: TBitBtn
-              Left = 469
+              Left = 601
               Top = 4
               Width = 108
               Height = 25
@@ -3084,7 +3084,7 @@ object frmCadPedido: TfrmCadPedido
               OnClick = btnCopiar_ItemClick
             end
             object btnAltDtEntrega: TBitBtn
-              Left = 592
+              Left = 709
               Top = 5
               Width = 80
               Height = 25
@@ -3094,7 +3094,7 @@ object frmCadPedido: TfrmCadPedido
               OnClick = btnAltDtEntregaClick
             end
             object btnCopiarOS: TBitBtn
-              Left = 719
+              Left = 790
               Top = 4
               Width = 89
               Height = 25
@@ -3110,7 +3110,7 @@ object frmCadPedido: TfrmCadPedido
               OnClick = btnCopiarOSClick
             end
             object btnAltProdCli: TBitBtn
-              Left = 864
+              Left = 887
               Top = 4
               Width = 89
               Height = 25
@@ -3126,6 +3126,15 @@ object frmCadPedido: TfrmCadPedido
               Caption = 'Cons. Tempo'
               TabOrder = 7
               OnClick = btnConsTempoClick
+            end
+            object btnItemProcesso: TNxButton
+              Left = 486
+              Top = 2
+              Width = 97
+              Height = 27
+              Caption = 'Processos'
+              TabOrder = 8
+              OnClick = btnItemProcessoClick
             end
           end
           object pnlMaterial: TPanel
@@ -6930,8 +6939,8 @@ object frmCadPedido: TfrmCadPedido
     GroupName = 'Pedidos'
     UserControl = fMenu.UserControl1
     NotAllowed = naInvisible
-    Left = 730
-    Top = 262
+    Left = 742
+    Top = 334
   end
   object PopupMenu1: TPopupMenu
     Left = 999

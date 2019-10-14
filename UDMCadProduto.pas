@@ -1961,6 +1961,7 @@ type
     qParametros_ProdATUALIZAR_CUSTO_POR_COR: TStringField;
     qParametros_ProdUSA_BITOLA: TStringField;
     cdsProduto_ConsultaMEDIDA: TStringField;
+    qParametros_PedUSA_PROCESSO_SIMPLES: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

@@ -827,7 +827,8 @@ uses
   UDMCopiaDoc in 'UDMCopiaDoc.pas' {DMCopiaDoc: TDataModule},
   UCadDocEstoque_Copia in 'UCadDocEstoque_Copia.pas' {frmCadDocEstoque_Copia},
   UDMProg_Terc in 'UDMProg_Terc.pas' {DMProg_Terc: TDataModule},
-  UProg_Terc in 'UProg_Terc.pas' {frmProg_Terc};
+  UProg_Terc in 'UProg_Terc.pas' {frmProg_Terc},
+  UCadPedido_Item_Proc in 'UCadPedido_Item_Proc.pas' {frmCadPedido_Item_Proc};
 
 {$R *.res}
 

@@ -1335,7 +1335,8 @@ begin
   begin
     prc_Gravar_Unidade(fDMConsPedido.cdsPedido_ItemUNIDADE.AsString,fDMConsPedido.cdsPedido_ItemQTD.AsFloat,fDMConsPedido.cdsPedido_ItemQTD_RESTANTE.AsFloat,fDMConsPedido.cdsPedido_ItemQTD_FATURADO.AsFloat);
     vVlrTotal         := StrToFloat(FormatFloat('0.00',vVlrTotal + fDMConsPedido.cdsPedido_ItemVLR_TOTAL.AsFloat));
-    vVlrRestante      := StrToFloat(FormatFloat('0.00',vVlrRestante + fDMConsPedido.cdsPedido_ItemVLR_RESTANTE.AsFloat));
+    if StrToFloat(FormatFloat('0.00',fDMConsPedido.cdsPedido_ItemVLR_RESTANTE.AsFloat)) > 0 then
+      vVlrRestante      := StrToFloat(FormatFloat('0.00',vVlrRestante + fDMConsPedido.cdsPedido_ItemVLR_RESTANTE.AsFloat));
     vVlrFaturado      := StrToFloat(FormatFloat('0.00',vVlrFaturado + fDMConsPedido.cdsPedido_ItemVLR_FATURADO.AsFloat));
     if (fDMConsPedido.cdsPedido_ItemAPROVADO_PED.AsString = 'P') then
       vVlrPendAprovacao := StrToFloat(FormatFloat('0.00',vVlrPendAprovacao + fDMConsPedido.cdsPedido_ItemVLR_TOTAL.AsFloat));
@@ -1368,9 +1369,10 @@ begin
   fDMConsPedido.cdsPedido.First;
   while not fDMConsPedido.cdsPedido.Eof do
   begin
-    vVlrTotal         := StrToFloat(FormatFloat('0.00',vVlrTotal + fDMConsPedido.cdsPedidoVLR_TOTAL.AsFloat));
-    vVlrRestante      := StrToFloat(FormatFloat('0.00',vVlrRestante + fDMConsPedido.cdsPedidoVLR_RESTANTE.AsFloat));
-    vVlrFaturado      := StrToFloat(FormatFloat('0.00',vVlrFaturado + fDMConsPedido.cdsPedidoVLR_FATURADO.AsFloat));
+    vVlrTotal      := StrToFloat(FormatFloat('0.00',vVlrTotal + fDMConsPedido.cdsPedidoVLR_TOTAL.AsFloat));
+    if StrToFloat(FormatFloat('0.00',fDMConsPedido.cdsPedidoVLR_RESTANTE.AsFloat)) > 0 then
+      vVlrRestante := StrToFloat(FormatFloat('0.00',vVlrRestante + fDMConsPedido.cdsPedidoVLR_RESTANTE.AsFloat));
+    vVlrFaturado   := StrToFloat(FormatFloat('0.00',vVlrFaturado + fDMConsPedido.cdsPedidoVLR_FATURADO.AsFloat));
     if (fDMConsPedido.cdsPedidoAPROVADO_PED.AsString = 'P') then
       vVlrPendAprovacao := StrToFloat(FormatFloat('0.00',vVlrPendAprovacao + fDMConsPedido.cdsPedidoVLR_TOTAL.AsFloat));
     fDMConsPedido.cdsPedido.Next;

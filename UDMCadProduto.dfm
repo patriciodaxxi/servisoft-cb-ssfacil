@@ -4230,7 +4230,7 @@ object dmCadProduto: TdmCadProduto
       'WHERE UNIDADE = :UNIDADE'
       '   AND ITEM = :ITEM')
     SQLConnection = dmDatabase.scoDados
-    Left = 903
+    Left = 904
     Top = 241
     object qUnidade_ConvUNIDADE: TStringField
       FieldName = 'UNIDADE'
@@ -4276,7 +4276,7 @@ object dmCadProduto: TdmCadProduto
       'WHERE ID = :ID'
       '  AND TAMANHO = :TAMANHO')
     SQLConnection = dmDatabase.scoDados
-    Left = 903
+    Left = 904
     Top = 338
     object qGradeMarcarID: TIntegerField
       FieldName = 'ID'
@@ -8727,7 +8727,9 @@ object dmCadProduto: TdmCadProduto
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT PEDIDO_LOJA , USA_CAIXINHA, USA_COD_CLIENTE'
+      
+        'SELECT PEDIDO_LOJA , USA_CAIXINHA, USA_COD_CLIENTE, USA_PROCESSO' +
+        '_SIMPLES'
       'FROM PARAMETROS_PED')
     SQLConnection = dmDatabase.scoDados
     Left = 1183
@@ -8744,6 +8746,11 @@ object dmCadProduto: TdmCadProduto
     end
     object qParametros_PedUSA_COD_CLIENTE: TStringField
       FieldName = 'USA_COD_CLIENTE'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedUSA_PROCESSO_SIMPLES: TStringField
+      FieldName = 'USA_PROCESSO_SIMPLES'
       FixedChar = True
       Size = 1
     end

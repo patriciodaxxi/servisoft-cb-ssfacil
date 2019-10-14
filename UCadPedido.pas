@@ -366,6 +366,7 @@ type
     Label87: TLabel;
     RxDBLookupCombo14: TRxDBLookupCombo;
     SpeedButton9: TSpeedButton;
+    btnItemProcesso: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -491,6 +492,7 @@ type
     procedure SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure SpeedButton9Click(Sender: TObject);
+    procedure btnItemProcessoClick(Sender: TObject);
   private
     { Private declarations }
     fLista: TStringList;
@@ -566,7 +568,7 @@ uses DmdDatabase, rsDBUtils, uUtilPadrao, uRelPedido, uRelPedido_SulTextil, uRel
   URelPedido_Tam, URelEtiqueta_Nav, URelPedido_Tam2, URelPedido_JW, URelEtiqueta, uUtilCliente, uCalculo_Pedido, UCadPedido_Copia,
   UConsPedido_Nota, UDMConsPedido, UInformar_DtExpedicao, UInformar_Processo_Ped, UConsPedido_Senha, USel_Produto, UCadPedido_Cupom,
   UDMPedidoImp, USel_OS_Proc, UCadPedido_ItensCli, UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido, UConsClienteOBS,
-  uImprimir, UConsMotivoNaoAprov;
+  uImprimir, UConsMotivoNaoAprov, UCadPedido_Item_Proc;
 
 {$R *.dfm}
 
@@ -1128,6 +1130,7 @@ begin
 
   addLog('Finaliza','Tempo_Execucao.txt');
 
+  btnItemProcesso.Visible := (fDMCadPedido.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S');
 end;
 
 procedure TfrmCadPedido.prc_Consultar(ID: Integer);
@@ -4742,6 +4745,14 @@ begin
     if fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger > 0 then
       fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
   end;
+end;
+
+procedure TfrmCadPedido.btnItemProcessoClick(Sender: TObject);
+begin
+  frmCadPedido_Item_Proc := TfrmCadPedido_Item_Proc.Create(self);
+  frmCadPedido_Item_Proc.fDMCadPedido := fDMCadPedido;
+  frmCadPedido_Item_Proc.ShowModal;
+  FreeAndNil(frmCadPedido_Item_Proc);
 end;
 
 end.

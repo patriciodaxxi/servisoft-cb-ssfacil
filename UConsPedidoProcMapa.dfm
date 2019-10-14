@@ -443,6 +443,7 @@ object frmConsPedidoProcMapa: TfrmConsPedidoProcMapa
             Title.Alignment = taCenter
             Title.Caption = 'ID Cliente'
             Title.Color = 13631391
+            Width = 64
             Visible = True
           end
           item
@@ -479,6 +480,7 @@ object frmConsPedidoProcMapa: TfrmConsPedidoProcMapa
             Title.Alignment = taCenter
             Title.Caption = 'Quantidade'
             Title.Color = 13631391
+            Width = 64
             Visible = True
           end
           item
@@ -488,6 +490,7 @@ object frmConsPedidoProcMapa: TfrmConsPedidoProcMapa
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Entrega'
             Title.Color = 13631391
+            Width = 64
             Visible = True
           end
           item
@@ -497,6 +500,7 @@ object frmConsPedidoProcMapa: TfrmConsPedidoProcMapa
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Emiss'#227'o'
             Title.Color = 13631391
+            Width = 64
             Visible = True
           end>
       end
@@ -602,6 +606,7 @@ object frmConsPedidoProcMapa: TfrmConsPedidoProcMapa
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Pedido'
             Title.Color = 12910591
+            Width = 64
             Visible = True
           end
           item

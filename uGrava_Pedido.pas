@@ -514,12 +514,22 @@ begin
        fDMCadPedido.prc_Gravar_Telefone(fDMCadPedido.cdsClienteCODIGO.AsInteger,fDMCadPedido.cdsPedidoDDD.AsInteger,fDMCadPedido.cdsPedidoFONE.AsString);
     end;
 
+    //14/10/2019
+    if fDMCadPedido.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S' then
+    begin
+      if fDMCadPedido.cdsPedido_Item_Processo.State in [dsEdit,dsInsert] then
+        fDMCadPedido.cdsPedido_Item_Processo.Post;
+      fDMCadPedido.cdsPedido_Item_Processo.ApplyUpdates(0);
+    end;
+    //******************
+
     fDMCadPedido.cdsPedido.Post;
 
     //11/08/2016
     if (fDMCadPedido.qParametros_GeralGRAVAR_HIST_SENHA.AsString = 'S') and (Tipo = 'ALT') then
       prc_Gravar_cdsHist_Senha(fDMCadPedido);
     //********************
+
 
     fDMCadPedido.cdsPedido.ApplyUpdates(0);
 
