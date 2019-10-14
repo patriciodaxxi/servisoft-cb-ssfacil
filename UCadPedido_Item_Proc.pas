@@ -22,8 +22,6 @@ type
   private
     { Private declarations }
 
-    procedure prc_Abrir_Pedido_Item_Processo;
-
   public
     { Public declarations }
     fDMCadPedido: TDMCadPedido;
@@ -35,13 +33,14 @@ var
 
 implementation
 
-uses rsDBUtils;
+uses rsDBUtils, uGrava_Pedido;
 
 {$R *.dfm}
 
 procedure TfrmCadPedido_Item_Proc.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  fDMCadPedido.cdsPedido_Item_Processo.Filtered := False;
   Action := Cafree;
 end;
 
@@ -52,25 +51,15 @@ begin
   fDMCadPedido.cdsProcesso.Open;
   btnInserir_Itens.Enabled := (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]);
   btnExcluir_Itens.Enabled := (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]);
-  if (not(fDMCadPedido.cdsPedido_Item_Processo.Active)) or
-    (fDMCadPedido.cdsPedido_Item_ProcessoID.AsInteger <> fDMCadPedido.cdsPedidoID.AsInteger) then
-    prc_Abrir_Pedido_Item_Processo;
+  fDMCadPedido.cdsPedido_Item_Processo.Filtered := False;
+  fDMCadPedido.cdsPedido_Item_Processo.Filter   := 'ITEM = ' + IntToStr(fDMCadPedido.cdsPedido_ItensITEM.AsInteger);
+  fDMCadPedido.cdsPedido_Item_Processo.Filtered := True;
 end;
 
 procedure TfrmCadPedido_Item_Proc.btnInserir_ItensClick(Sender: TObject);
-var
-  vItemAux : Integer;
 begin
-  fDMCadPedido.cdsPedido_Item_Processo.Last;
-  vItemAux := fDMCadPedido.cdsPedido_Item_ProcessoITEM_PROCESSO.AsInteger;
-
-  fDMCadPedido.cdsPedido_Item_Processo.Insert;
-  fDMCadPedido.cdsPedido_Item_ProcessoID.AsInteger   := fDMCadPedido.cdsPedido_ItensID.AsInteger;
-  fDMCadPedido.cdsPedido_Item_ProcessoITEM.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-  fDMCadPedido.cdsPedido_Item_ProcessoITEM_PROCESSO.AsInteger := vItemAux + 1;
-  fDMCadPedido.cdsPedido_Item_ProcessoID_PROCESSO.AsInteger   := RxDBLookupCombo1.KeyValue;
-  fDMCadPedido.cdsPedido_Item_ProcessoQTD.AsFloat             := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
-  fDMCadPedido.cdsPedido_Item_Processo.Post;
+  prc_Gravar_Pedido_Item_Processo(fDMCadPedido,fDMCadPedido.cdsPedido_ItensID.AsInteger,fDMCadPedido.cdsPedido_ItensITEM.AsInteger,
+                                  RxDBLookupCombo1.KeyValue,fDMCadPedido.cdsPedido_ItensQTD.AsFloat);
   RxDBLookupCombo1.ClearValue;
   RxDBLookupCombo1.SetFocus;
 end;
@@ -81,14 +70,6 @@ begin
     Exit;
 
   fDMCadPedido.cdsPedido_Item_Processo.Delete;
-end;
-
-procedure TfrmCadPedido_Item_Proc.prc_Abrir_Pedido_Item_Processo;
-begin
-  fDMCadPedido.cdsPedido_Item_Processo.Close;
-  fDMCadPedido.sdsPedido_Item_Processo.ParamByName('ID').AsInteger   := fDMCadPedido.cdsPedido_ItensID.AsInteger;
-  fDMCadPedido.sdsPedido_Item_Processo.ParamByName('ITEM').AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-  fDMCadPedido.cdsPedido_Item_Processo.Open;
 end;
 
 end.

@@ -2,7 +2,7 @@ object DMCopiaPedido: TDMCopiaPedido
   OldCreateOrder = False
   Left = 396
   Top = 200
-  Height = 368
+  Height = 419
   Width = 688
   object sdsPedido: TSQLDataSet
     NoMetadata = True
@@ -1357,6 +1357,9 @@ object DMCopiaPedido: TDMCopiaPedido
       FixedChar = True
       Size = 1
     end
+    object cdsPedido_ItenssdsPedido_Item_Processo: TDataSetField
+      FieldName = 'sdsPedido_Item_Processo'
+    end
   end
   object dsPedido_Itens: TDataSource
     DataSet = cdsPedido_Itens
@@ -1675,5 +1678,102 @@ object DMCopiaPedido: TDMCopiaPedido
     object mAuxNum_Pedido: TIntegerField
       FieldName = 'Num_Pedido'
     end
+  end
+  object sdsPedido_Item_Processo: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT P.*'#13#10'FROM PEDIDO_ITEM_PROCESSO P'#13#10'WHERE P.ID = :ID'#13#10'  AND' +
+      ' P.ITEM = :ITEM'
+    DataSource = dsPedido_Item_Mestre
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Size = 4
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
+        ParamType = ptInput
+        Size = 4
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 112
+    Top = 272
+    object sdsPedido_Item_ProcessoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object sdsPedido_Item_ProcessoITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object sdsPedido_Item_ProcessoITEM_PROCESSO: TIntegerField
+      FieldName = 'ITEM_PROCESSO'
+      Required = True
+    end
+    object sdsPedido_Item_ProcessoID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
+    end
+    object sdsPedido_Item_ProcessoQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object sdsPedido_Item_ProcessoDTENTRADA: TDateField
+      FieldName = 'DTENTRADA'
+    end
+    object sdsPedido_Item_ProcessoHRENTRADA: TTimeField
+      FieldName = 'HRENTRADA'
+    end
+    object sdsPedido_Item_ProcessoDTBAIXA: TDateField
+      FieldName = 'DTBAIXA'
+    end
+    object sdsPedido_Item_ProcessoHRSAIDA: TTimeField
+      FieldName = 'HRSAIDA'
+    end
+  end
+  object cdsPedido_Item_Processo: TClientDataSet
+    Aggregates = <>
+    DataSetField = cdsPedido_ItenssdsPedido_Item_Processo
+    Params = <>
+    Left = 144
+    Top = 272
+    object cdsPedido_Item_ProcessoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPedido_Item_ProcessoITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsPedido_Item_ProcessoITEM_PROCESSO: TIntegerField
+      FieldName = 'ITEM_PROCESSO'
+      Required = True
+    end
+    object cdsPedido_Item_ProcessoID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
+    end
+    object cdsPedido_Item_ProcessoQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsPedido_Item_ProcessoDTENTRADA: TDateField
+      FieldName = 'DTENTRADA'
+    end
+    object cdsPedido_Item_ProcessoHRENTRADA: TTimeField
+      FieldName = 'HRENTRADA'
+    end
+    object cdsPedido_Item_ProcessoDTBAIXA: TDateField
+      FieldName = 'DTBAIXA'
+    end
+    object cdsPedido_Item_ProcessoHRSAIDA: TTimeField
+      FieldName = 'HRSAIDA'
+    end
+  end
+  object dsPedido_Item_Processo: TDataSource
+    DataSet = cdsPedido_Item_Processo
+    Left = 176
+    Top = 272
   end
 end

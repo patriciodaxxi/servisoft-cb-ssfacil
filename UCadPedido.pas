@@ -1226,7 +1226,6 @@ begin
   TS_Consulta.TabEnabled    := True;
   RzPageControl1.ActivePage := TS_Consulta;
   fDMCadPedido.vID_CFOP     := 0;
-
 end;
 
 procedure TfrmCadPedido.SMDBGrid1DblClick(Sender: TObject);
@@ -1316,7 +1315,7 @@ begin
       if (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <= 0) and (MessageDlg('Deseja gravar sem o vendedor interno?',mtConfirmation,[mbYes,mbNo],0) <> mrYes) then
         exit
       else
-      if (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger > 0) and (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <> vIDVend) 
+      if (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger > 0) and (fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger <> vIDVend)
         and (MessageDlg('Vendedor informado no Pedido diferente do cadastro do Cliente, confirma assim mesmo?',mtConfirmation,[mbYes,mbNo],0) <> mrYes) then
         exit;
     end;
@@ -1325,10 +1324,10 @@ begin
 
   if fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger < 1 then
     fDMCadPedido.cdsPedidoPERC_COMISSAO.AsFloat := 0;
-    
+
   if RxDBLookupCombo3.Text <> '' then
     fDMCadPedido.cdsPedidoNOME_CLIENTE.AsString := RxDBLookupCombo3.Text;
-    
+
   fDMCadPedido.cdsPedido_Itens.First;
   SMDBGrid2.DisableScroll;
   SMDBGrid2.DataSource := nil;
@@ -1342,6 +1341,7 @@ begin
   SMDBGrid2.DataSource := fDMCadPedido.dsPedido_Itens;
 
   SMDBGrid2.EnableScroll;
+
 end;
 
 procedure TfrmCadPedido.FormDestroy(Sender: TObject);
@@ -1367,6 +1367,8 @@ begin
   SMDBGrid2.DataSource := fDMCadPedido.dsPedido_Itens;
   if fDMCadPedido.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S' then
     fDMCadPedido.prc_Abrir_Servico;
+  if fDMCadPedido.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S' then
+    uGrava_Pedido.prc_Abrir_Pedido_Item_Processo(fDMCadPedido,fDMCadPedido.cdsPedidoID.AsInteger,0);
 end;
 
 function TfrmCadPedido.fnc_Verifica_Registro: Boolean;
@@ -1518,7 +1520,12 @@ begin
     end;
   end
   else
+  begin
+    if (fDMCadPedido.cdsPedido.State in [dsInsert]) and (RzPageControl1.ActivePage = TS_Cadastro) then
+      uGrava_Pedido.prc_Abrir_Pedido_Item_Processo(fDMCadPedido,fDMCadPedido.cdsPedidoID.AsInteger,0);
     RxDBLookupCombo3Change(Sender);
+  end;
+
 end;
 
 procedure TfrmCadPedido.btnAlterar_ItensClick(Sender: TObject);

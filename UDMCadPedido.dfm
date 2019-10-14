@@ -10577,7 +10577,7 @@ object DMCadPedido: TDMCadPedido
       '     AND TUF.UF = :UF'
       '     AND TUF.TIPO_PRODUTO = :TIPO_PRODUTO')
     SQLConnection = dmDatabase.scoDados
-    Left = 992
+    Left = 991
     Top = 438
     object qNCM_UFID: TIntegerField
       FieldName = 'ID'
@@ -18351,21 +18351,16 @@ object DMCadPedido: TDMCadPedido
     CommandText = 
       'SELECT P.*, PC.NOME NOME_PROCESSO'#13#10'FROM PEDIDO_ITEM_PROCESSO P'#13#10 +
       'left join PROCESSO PC'#13#10'ON P.id_processo = PC.ID'#13#10'WHERE P.ID = :I' +
-      'D'#13#10'  AND P.ITEM = :ITEM'#13#10
+      'D'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ITEM'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 353
+    Left = 352
     Top = 588
     object sdsPedido_Item_ProcessoID: TIntegerField
       FieldName = 'ID'

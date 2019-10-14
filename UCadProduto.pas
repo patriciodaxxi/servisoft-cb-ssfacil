@@ -1845,17 +1845,18 @@ begin
   TS_Pictograma.TabVisible    := (fDMCadProduto.qParametros_ProdUSA_PICTOGRAMA.AsString = 'S');
   Panel11.Visible             := ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString = 'S') and (fDMCadProduto.qParametros_ProdMOSTRAR_FORMA.AsString = 'S'));
   SMDBGrid9.Visible           := ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString <> 'S') and (trim(fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString) <> 'S'))
-                               or ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString = 'S') and (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L'));
+                               or ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString = 'S') and (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L'))
+                               or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S');
   gbxProcesso.Visible         := SMDBGrid9.Visible;
   pnl_Eng_Processo.Visible    := ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString <> 'S') and (fDMCadProduto.qParametros_GeralUSA_CUSTO_PROC_ATE.AsString <> 'A') and
                                  ((fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'S') or (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'C')) or
                                  (fDMCadProduto.qParametros_SerUSA_PROCESSO_OS.AsString = 'S') and (fDMCadProduto.qParametros_LoteLOTE_PROCESSO.AsString = 'S'));
   Label168.Visible            := (fDMCadProduto.qParametros_ProdUSA_TAM_INDIVIDUAL.AsString = 'S');
   DBEdit95.Visible            := (fDMCadProduto.qParametros_ProdUSA_TAM_INDIVIDUAL.AsString = 'S');
-  SMDBGrid16.Visible := ((fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L') or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S'));
+  SMDBGrid16.Visible := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
   if SMDBGrid16.Visible then
     pnl_Eng_Processo.Visible := False;
-  Label118.Visible    := ((fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L') or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S'));
+  Label118.Visible    := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');
   StaticText1.Caption := 'Duplo clique para alterar  |  F3 Consultar Cadastro Anterior  |  F6 Histórico  |  F8 Compras';
   if fDMCadProduto.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
     StaticText1.Caption := StaticText1.Caption + '   F4 Consulta Lotes';

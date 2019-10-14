@@ -225,6 +225,9 @@ var
   i: Integer;
   vCalcular: TCalcluar_Peso;
 begin
+  fDMCadPedido.cdsPedido_Item_Processo.close;
+  fDMCadPedido.sdsPedido_Item_Processo.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_Itens
+
   vID_Ant := 0;
   fDMCopiaPedido.mAux.First;
   while not fDMCopiaPedido.mAux.Eof do
@@ -256,6 +259,14 @@ begin
       fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat    := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
       fdmcadpedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger := fdmcadpedido.cdsPedido_ItensITEM.AsInteger;
       fDMCadPedido.cdsPedido_Itens.Post;
+
+      for i := 0 to ( fDMCopiaPedido.cdsPedido_Item_Processo.FieldCount - 1) do
+      begin
+        if (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'ID') and (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'sdsPedido_Item_Tipo') and
+           (fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName <> 'ITEM') then
+          fDMCadPedido.cdsPedido_Itens.FieldByName(fDMCopiaPedido.cdsPedido_Itens.Fields[i].FieldName).AsVariant := fDMCopiaPedido.cdsPedido_Itens.Fields[i].Value;
+      end;
+
 
       //26/09/2016
       fDMCopiaPedido.cdsPedido_Item_Tipo.First;

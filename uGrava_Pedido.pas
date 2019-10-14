@@ -18,6 +18,10 @@ procedure prc_Gravar_cdsHist_Senha(fDMCadPedido: TDMCadPedido);
 procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
 procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido; ID_Cor, Item, Item_Original: Integer; Preco, Perc_IPI, Perc_ICMS: Real;
                                DtEntrega: TDateTime; Carimbo,Caixinha: String);
+procedure prc_Gerar_Processo(fDMCadPedido: TDMCadPedido ; ID_Pedido, Item_Pedido, ID_Produto: Integer);
+
+procedure prc_Abrir_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID, Item : Integer);
+procedure prc_Gravar_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID,Item,ID_Processo: Integer ; Qtd: Real);
 
 function fnc_Existe_OC(fDMCadPedido: TDMCadPedido): Integer;
 function fnc_Verificar_Vendedor_Int(fDMCadPedido: TDMCadPedido ; ID : Integer) : Integer;
@@ -914,6 +918,59 @@ begin
   end;
 end;
 
+procedure prc_Abrir_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID, Item : Integer);
+begin
+  fDMCadPedido.cdsPedido_Item_Processo.Close;
+  fDMCadPedido.sdsPedido_Item_Processo.ParamByName('ID').AsInteger   := ID;
+  fDMCadPedido.sdsPedido_Item_Processo.ParamByName('ITEM').AsInteger := Item;
+  fDMCadPedido.cdsPedido_Item_Processo.Open;
+end;
+
+procedure prc_Gerar_Processo(fDMCadPedido: TDMCadPedido ; ID_Pedido, Item_Pedido, ID_Produto: Integer);
+var
+  sds: TSQLDataSet;
+  vItem : Integer;
+begin
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'select P.ITEM, P.id_processo from produto_processo P '
+                       + 'where P.ID = :ID '
+                       + 'ORDER BY P.ITEM ';
+    sds.ParamByName('ID').AsInteger := ID_Pedido;
+    sds.Open;
+    vItem := 0;
+    while not sds.Eof do
+    begin
+      vItem := 1;
+      prc_Gravar_Pedido_Item_Processo(fDMCadPedido,ID_Pedido,Item_Pedido,sds.FieldByName('ID_Processo').AsInteger,0);
+      sds.Next;
+    end;
+
+  finally
+    FreeAndNil(sds);
+  end;
+
+end;
+
+procedure prc_Gravar_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID,Item,ID_Processo: Integer ; Qtd: Real);
+var
+  vItemAux : Integer;
+begin
+  fDMCadPedido.cdsPedido_Item_Processo.Last;
+  vItemAux := fDMCadPedido.cdsPedido_Item_ProcessoITEM_PROCESSO.AsInteger;
+
+  fDMCadPedido.cdsPedido_Item_Processo.Insert;
+  fDMCadPedido.cdsPedido_Item_ProcessoID.AsInteger            := ID;
+  fDMCadPedido.cdsPedido_Item_ProcessoITEM.AsInteger          := Item;
+  fDMCadPedido.cdsPedido_Item_ProcessoITEM_PROCESSO.AsInteger := vItemAux + 1;
+  fDMCadPedido.cdsPedido_Item_ProcessoID_PROCESSO.AsInteger   := ID_Processo;
+  fDMCadPedido.cdsPedido_Item_ProcessoQTD.AsFloat             := StrToFloat(FormatFloat('0.0000',Qtd));
+  fDMCadPedido.cdsPedido_Item_Processo.Post;
+end;
 
 end.
+
 

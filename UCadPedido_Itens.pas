@@ -298,7 +298,7 @@ var
 implementation
 
 uses rsDBUtils, USel_Produto, uUtilPadrao, UDMUtil, USel_TabPreco, UMenu, USel_Unidade, Math, USenha, uCalculo_Pedido,
-  UCadPedido_Itens_Serv, UCadPedido_ItensCli;
+  UCadPedido_Itens_Serv, UCadPedido_ItensCli, uGrava_Pedido;
 
 {$R *.dfm}
 
@@ -1250,16 +1250,21 @@ begin
       prc_Calcular_Lucratividade(fDMCadPedido,'V');
 
     fDMCadPedido.cdsPedido_Itens.Post;
+
+    //14/10/2019
+    if (vID_Produto_Ant <> fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger) or not(vEditar) then
+      uGrava_Pedido.prc_Gerar_Processo(fDMCadPedido,fDMCadPedido.cdsPedido_ItensID.AsInteger,fDMCadPedido.cdsPedido_ItensITEM.AsInteger,
+                                       fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
+
     //foi alterado para ajustar os carimbos e o número de OS dos tamanhos   23/02/2015
     if (vState = 'E') and (fDMCadPedido.cdsProdutoID_GRADE.AsInteger > 0) and (fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S') then
-    begin
       prc_Atualizar_Itens;
-    end;
 
     //Tamanho aqui
     if (fDMCadPedido.cdsProdutoUSA_GRADE.AsString = 'S') and (fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S') then
       prc_Gravar_Tam;
 
+    vID_Produto_Ant := 0;  
   except
     on E: exception do
     begin
