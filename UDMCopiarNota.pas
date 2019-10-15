@@ -834,12 +834,78 @@ type
     cdsNotaFiscalQTD_TOTAL_PRODUTOS: TFloatField;
     sdsNotaFiscalID_PREFAT: TIntegerField;
     cdsNotaFiscalID_PREFAT: TIntegerField;
+    sdsNotaFiscal_ItensVLR_OUTROS: TFloatField;
+    sdsNotaFiscal_ItensPERC_ICMS_DESON: TFloatField;
+    sdsNotaFiscal_ItensPERC_PIS_COFINS_SUFRAMA: TFloatField;
+    sdsNotaFiscal_ItensVLR_PIS_COFINS_SUFRAMA: TFloatField;
+    sdsNotaFiscal_ItensPERC_DESC_SUFRAMA: TFloatField;
+    sdsNotaFiscal_ItensVLR_DESC_SUFRAMA: TFloatField;
+    sdsNotaFiscal_ItensVLR_ISSQN: TFloatField;
+    sdsNotaFiscal_ItensQTD_TRIB: TFloatField;
+    sdsNotaFiscal_ItensVLR_UNITARIO_TRIB: TFloatField;
+    sdsNotaFiscal_ItensUNIDADE_TRIB: TStringField;
+    sdsNotaFiscal_ItensBASE_ICMS_FCP: TFloatField;
+    sdsNotaFiscal_ItensBASE_FCP_ST: TFloatField;
+    sdsNotaFiscal_ItensVLR_FCP_ST: TFloatField;
+    sdsNotaFiscal_ItensPERC_FCP_ST: TFloatField;
+    sdsNotaFiscal_ItensVLR_ICMS_FCP_DEST: TFloatField;
+    sdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField;
+    sdsNotaFiscal_ItensPERC_ICMS_SUFRAMA: TFloatField;
+    sdsNotaFiscal_ItensPERC_IPI_SUFRAMA: TFloatField;
+    sdsNotaFiscal_ItensVLR_IPI_DEVOL: TFloatField;
+    sdsNotaFiscal_ItensPERC_DEVOL: TFloatField;
+    sdsNotaFiscal_ItensBASE_IPI: TFloatField;
+    sdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField;
+    sdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField;
+    sdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField;
+    sdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField;
+    sdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField;
+    sdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField;
+    sdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField;
+    sdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField;
+    sdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField;
+    sdsNotaFiscal_ItensLARGURA: TFloatField;
+    sdsNotaFiscal_ItensCOMPRIMENTO: TFloatField;
+    sdsNotaFiscal_ItensESPESSURA: TFloatField;
+    sdsNotaFiscal_ItensDRAWBACK: TStringField;
+    cdsNotaFiscal_ItensVLR_OUTROS: TFloatField;
+    cdsNotaFiscal_ItensPERC_ICMS_DESON: TFloatField;
+    cdsNotaFiscal_ItensPERC_PIS_COFINS_SUFRAMA: TFloatField;
+    cdsNotaFiscal_ItensVLR_PIS_COFINS_SUFRAMA: TFloatField;
+    cdsNotaFiscal_ItensPERC_DESC_SUFRAMA: TFloatField;
+    cdsNotaFiscal_ItensVLR_DESC_SUFRAMA: TFloatField;
+    cdsNotaFiscal_ItensVLR_ISSQN: TFloatField;
+    cdsNotaFiscal_ItensQTD_TRIB: TFloatField;
+    cdsNotaFiscal_ItensVLR_UNITARIO_TRIB: TFloatField;
+    cdsNotaFiscal_ItensUNIDADE_TRIB: TStringField;
+    cdsNotaFiscal_ItensBASE_ICMS_FCP: TFloatField;
+    cdsNotaFiscal_ItensBASE_FCP_ST: TFloatField;
+    cdsNotaFiscal_ItensVLR_FCP_ST: TFloatField;
+    cdsNotaFiscal_ItensPERC_FCP_ST: TFloatField;
+    cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST: TFloatField;
+    cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField;
+    cdsNotaFiscal_ItensPERC_ICMS_SUFRAMA: TFloatField;
+    cdsNotaFiscal_ItensPERC_IPI_SUFRAMA: TFloatField;
+    cdsNotaFiscal_ItensVLR_IPI_DEVOL: TFloatField;
+    cdsNotaFiscal_ItensPERC_DEVOL: TFloatField;
+    cdsNotaFiscal_ItensBASE_IPI: TFloatField;
+    cdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField;
+    cdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField;
+    cdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField;
+    cdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField;
+    cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField;
+    cdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField;
+    cdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField;
+    cdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField;
+    cdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField;
+    cdsNotaFiscal_ItensLARGURA: TFloatField;
+    cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField;
+    cdsNotaFiscal_ItensESPESSURA: TFloatField;
+    cdsNotaFiscal_ItensDRAWBACK: TStringField;
   private
     { Private declarations }
-
   public
     { Public declarations }
-
   end;
 
 var
