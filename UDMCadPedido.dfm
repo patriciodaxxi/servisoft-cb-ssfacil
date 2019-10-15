@@ -7,7 +7,7 @@ object DMCadPedido: TDMCadPedido
   object sdsPedido: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM PEDIDO'#13#10#13#10#13#10#13#10#13#10
+    CommandText = 'SELECT *'#13#10'FROM PEDIDO'#13#10#13#10#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -435,7 +435,7 @@ object DMCadPedido: TDMCadPedido
     BeforePost = cdsPedidoBeforePost
     OnNewRecord = cdsPedidoNewRecord
     Left = 55
-    Top = 8
+    Top = 7
     object cdsPedidoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3944,6 +3944,9 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'MEDIDA'
       ProviderFlags = []
     end
+    object cdsPedido_ItenssdsPedido_Item_Processo: TDataSetField
+      FieldName = 'sdsPedido_Item_Processo'
+    end
   end
   object dsPedido_Itens: TDataSource
     DataSet = cdsPedido_Itens
@@ -6140,7 +6143,7 @@ object DMCadPedido: TDMCadPedido
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 24
+    Left = 25
     Top = 106
     object sdsPedido_CliID: TIntegerField
       FieldName = 'ID'
@@ -18351,17 +18354,25 @@ object DMCadPedido: TDMCadPedido
     CommandText = 
       'SELECT P.*, PC.NOME NOME_PROCESSO'#13#10'FROM PEDIDO_ITEM_PROCESSO P'#13#10 +
       'left join PROCESSO PC'#13#10'ON P.id_processo = PC.ID'#13#10'WHERE P.ID = :I' +
-      'D'#13#10#13#10
+      'D'#13#10'   AND P.ITEM = :ITEM'#13#10#13#10
+    DataSource = dsPedido_Item_Mestre
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ID'
         ParamType = ptInput
+        Size = 4
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
+        ParamType = ptInput
+        Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 352
-    Top = 588
+    Left = 110
+    Top = 110
     object sdsPedido_Item_ProcessoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -18401,19 +18412,13 @@ object DMCadPedido: TDMCadPedido
       Size = 30
     end
   end
-  object dspPedido_Item_Processo: TDataSetProvider
-    DataSet = sdsPedido_Item_Processo
-    UpdateMode = upWhereKeyOnly
-    Left = 381
-    Top = 586
-  end
   object cdsPedido_Item_Processo: TClientDataSet
     Aggregates = <>
+    DataSetField = cdsPedido_ItenssdsPedido_Item_Processo
     IndexFieldNames = 'ID;ITEM;ITEM_PROCESSO'
     Params = <>
-    ProviderName = 'dspPedido_Item_Processo'
-    Left = 416
-    Top = 587
+    Left = 125
+    Top = 110
     object cdsPedido_Item_ProcessoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -18455,8 +18460,8 @@ object DMCadPedido: TDMCadPedido
   end
   object dsPedido_Item_Processo: TDataSource
     DataSet = cdsPedido_Item_Processo
-    Left = 449
-    Top = 590
+    Left = 140
+    Top = 113
   end
   object sdsProcesso: TSQLDataSet
     NoMetadata = True

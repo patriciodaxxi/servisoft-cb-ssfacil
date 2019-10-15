@@ -3510,7 +3510,6 @@ type
     sdsPedido_Item_ProcessoHRENTRADA: TTimeField;
     sdsPedido_Item_ProcessoDTBAIXA: TDateField;
     sdsPedido_Item_ProcessoHRSAIDA: TTimeField;
-    dspPedido_Item_Processo: TDataSetProvider;
     cdsPedido_Item_Processo: TClientDataSet;
     cdsPedido_Item_ProcessoID: TIntegerField;
     cdsPedido_Item_ProcessoITEM: TIntegerField;
@@ -3532,6 +3531,7 @@ type
     sdsPedido_Item_ProcessoNOME_PROCESSO: TStringField;
     cdsPedido_Item_ProcessoNOME_PROCESSO: TStringField;
     qParametros_PedUSA_PROCESSO_SIMPLES: TStringField;
+    cdsPedido_ItenssdsPedido_Item_Processo: TDataSetField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -4784,8 +4784,9 @@ end;
 
 procedure TDMCadPedido.cdsPedidoImp_ItensCalcFields(DataSet: TDataSet);
 begin
-  cdsPedidoImp_ItensCOD_BARRAS.AsString := '2 - ' + FormatFloat('000000',cdsPedidoImpNUM_PEDIDO.AsInteger) + ' / ' + FormatFloat('000',cdsPedidoImp_ItensITEM.AsInteger);
-
+  //14/10/2019 FOI ALTERADO
+  //cdsPedidoImp_ItensCOD_BARRAS.AsString := '2 - ' + FormatFloat('000000',cdsPedidoImpNUM_PEDIDO.AsInteger) + ' / ' + FormatFloat('000',cdsPedidoImp_ItensITEM.AsInteger);
+  cdsPedidoImp_ItensCOD_BARRAS.AsString := '2' + FormatFloat('000000',cdsPedidoImpNUM_PEDIDO.AsInteger) + FormatFloat('000',cdsPedidoImp_ItensITEM.AsInteger);
 end;
 
 procedure TDMCadPedido.prc_Abrir_cdsCliente(ID: Integer);

@@ -1,9 +1,11 @@
 object frmCadPedido_Item_Proc: TfrmCadPedido_Item_Proc
   Left = 401
   Top = 130
-  Width = 530
-  Height = 480
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'frmCadPedido_Item_Proc'
+  ClientHeight = 449
+  ClientWidth = 522
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +13,7 @@ object frmCadPedido_Item_Proc: TfrmCadPedido_Item_Proc
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
@@ -22,6 +25,7 @@ object frmCadPedido_Item_Proc: TfrmCadPedido_Item_Proc
     Height = 50
     Align = alTop
     Color = clSilver
+    Enabled = False
     TabOrder = 0
     object Label1: TLabel
       Left = 91

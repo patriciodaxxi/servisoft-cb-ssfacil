@@ -3,7 +3,7 @@ object DMConferencia: TDMConferencia
   OnCreate = DataModuleCreate
   Left = 134
   Top = 49
-  Height = 534
+  Height = 573
   Width = 974
   object sdsPedido_Item: TSQLDataSet
     NoMetadata = True
@@ -1876,5 +1876,197 @@ object DMConferencia: TDMConferencia
       FieldName = 'TAMANHO'
       Size = 10
     end
+  end
+  object sdsConsPedido_Item_Proc: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT '#39'2'#39' || lpad(p.num_pedido,6,0) || lpad(i.item,3,0) COD_BAR' +
+      'RA ,  p.dtemissao, p.num_pedido, i.item,'#13#10'iproc.id_processo, ipr' +
+      'oc.item_processo, proc.nome nome_processo,'#13#10'iproc.dtentrada, ipr' +
+      'oc.dtbaixa, iproc.hrentrada, iproc.hrsaida, i.qtd, i.qtd_faturad' +
+      'o, i.qtd_restante,'#13#10'i.dtbaixa DTBAIXA_ITEM'#13#10'from pedido p'#13#10'inner' +
+      ' join pedido_item i'#13#10'on p.id = i.id'#13#10'inner join pedido_item_proc' +
+      'esso iproc'#13#10'on i.id = iproc.id'#13#10'and i.item = iproc.item'#13#10'inner j' +
+      'oin processo proc'#13#10'on iproc.id_processo = proc.id'#13#10'where p.tipo_' +
+      'reg = '#39'P'#39#13#10'  AND P.NUM_PEDIDO = :NUM_PEDIDO'#13#10'  AND I.ITEM = :ITE' +
+      'M'#13#10'ORDER BY IPROC.ITEM_PROCESSO'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'NUM_PEDIDO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 389
+    Top = 319
+  end
+  object dspConsPedido_Item_Proc: TDataSetProvider
+    DataSet = sdsConsPedido_Item_Proc
+    Left = 429
+    Top = 319
+  end
+  object cdsConsPedido_Item_Proc: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspConsPedido_Item_Proc'
+    Left = 467
+    Top = 317
+    object cdsConsPedido_Item_ProcCOD_BARRA: TStringField
+      FieldName = 'COD_BARRA'
+      Size = 10
+    end
+    object cdsConsPedido_Item_ProcDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsConsPedido_Item_ProcNUM_PEDIDO: TIntegerField
+      FieldName = 'NUM_PEDIDO'
+    end
+    object cdsConsPedido_Item_ProcITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsConsPedido_Item_ProcID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
+    end
+    object cdsConsPedido_Item_ProcITEM_PROCESSO: TIntegerField
+      FieldName = 'ITEM_PROCESSO'
+      Required = True
+    end
+    object cdsConsPedido_Item_ProcNOME_PROCESSO: TStringField
+      FieldName = 'NOME_PROCESSO'
+      Size = 30
+    end
+    object cdsConsPedido_Item_ProcDTENTRADA: TDateField
+      FieldName = 'DTENTRADA'
+    end
+    object cdsConsPedido_Item_ProcDTBAIXA: TDateField
+      FieldName = 'DTBAIXA'
+    end
+    object cdsConsPedido_Item_ProcHRENTRADA: TTimeField
+      FieldName = 'HRENTRADA'
+    end
+    object cdsConsPedido_Item_ProcHRSAIDA: TTimeField
+      FieldName = 'HRSAIDA'
+    end
+    object cdsConsPedido_Item_ProcQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsConsPedido_Item_ProcQTD_FATURADO: TFloatField
+      FieldName = 'QTD_FATURADO'
+    end
+    object cdsConsPedido_Item_ProcQTD_RESTANTE: TFloatField
+      FieldName = 'QTD_RESTANTE'
+    end
+    object cdsConsPedido_Item_ProcDTBAIXA_ITEM: TDateField
+      FieldName = 'DTBAIXA_ITEM'
+    end
+  end
+  object dsConsPedido_Item_Proc: TDataSource
+    DataSet = cdsConsPedido_Item_Proc
+    Left = 509
+    Top = 319
+  end
+  object SQLDataSet1: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT '#39'2'#39' || lpad(p.num_pedido,6,0) || lpad(i.item,3,0) COD_BAR' +
+      'RA ,  p.dtemissao, p.num_pedido, i.item,'#13#10'iproc.id_processo, ipr' +
+      'oc.item_processo, proc.nome nome_processo,'#13#10'iproc.dtentrada, ipr' +
+      'oc.dtbaixa, iproc.hrentrada, iproc.hrsaida, i.qtd, i.qtd_faturad' +
+      'o, i.qtd_restante,'#13#10'i.dtbaixa DTBAIXA_ITEM'#13#10'from pedido p'#13#10'inner' +
+      ' join pedido_item i'#13#10'on p.id = i.id'#13#10'inner join pedido_item_proc' +
+      'esso iproc'#13#10'on i.id = iproc.id'#13#10'and i.item = iproc.item'#13#10'inner j' +
+      'oin processo proc'#13#10'on iproc.id_processo = proc.id'#13#10'where p.tipo_' +
+      'reg = '#39'P'#39#13#10'  AND P.NUM_PEDIDO = :NUM_PEDIDO'#13#10'  AND I.ITEM = :ITE' +
+      'M'#13#10'ORDER BY IPROC.ITEM_PROCESSO'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'NUM_PEDIDO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 379
+    Top = 437
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = SQLDataSet1
+    Left = 419
+    Top = 437
+  end
+  object ClientDataSet1: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspConsPedido_Item_Proc'
+    Left = 457
+    Top = 435
+    object StringField1: TStringField
+      FieldName = 'COD_BARRA'
+      Size = 10
+    end
+    object DateField1: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'NUM_PEDIDO'
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'ID_PROCESSO'
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'ITEM_PROCESSO'
+      Required = True
+    end
+    object StringField2: TStringField
+      FieldName = 'NOME_PROCESSO'
+      Size = 30
+    end
+    object DateField2: TDateField
+      FieldName = 'DTENTRADA'
+    end
+    object DateField3: TDateField
+      FieldName = 'DTBAIXA'
+    end
+    object TimeField1: TTimeField
+      FieldName = 'HRENTRADA'
+    end
+    object TimeField2: TTimeField
+      FieldName = 'HRSAIDA'
+    end
+    object FloatField1: TFloatField
+      FieldName = 'QTD'
+    end
+    object FloatField2: TFloatField
+      FieldName = 'QTD_FATURADO'
+    end
+    object FloatField3: TFloatField
+      FieldName = 'QTD_RESTANTE'
+    end
+    object DateField4: TDateField
+      FieldName = 'DTBAIXA_ITEM'
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = ClientDataSet1
+    Left = 499
+    Top = 437
   end
 end

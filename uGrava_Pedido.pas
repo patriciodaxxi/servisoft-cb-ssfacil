@@ -18,10 +18,9 @@ procedure prc_Gravar_cdsHist_Senha(fDMCadPedido: TDMCadPedido);
 procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
 procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido; ID_Cor, Item, Item_Original: Integer; Preco, Perc_IPI, Perc_ICMS: Real;
                                DtEntrega: TDateTime; Carimbo,Caixinha: String);
-procedure prc_Gerar_Processo(fDMCadPedido: TDMCadPedido ; ID_Pedido, Item_Pedido, ID_Produto: Integer);
+procedure prc_Gerar_Processo(fDMCadPedido: TDMCadPedido);
 
-procedure prc_Abrir_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID, Item : Integer);
-procedure prc_Gravar_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID,Item,ID_Processo: Integer ; Qtd: Real);
+procedure prc_Gravar_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID_Processo: Integer ; Nome_Processo : String);
 
 function fnc_Existe_OC(fDMCadPedido: TDMCadPedido): Integer;
 function fnc_Verificar_Vendedor_Int(fDMCadPedido: TDMCadPedido ; ID : Integer) : Integer;
@@ -523,7 +522,6 @@ begin
     begin
       if fDMCadPedido.cdsPedido_Item_Processo.State in [dsEdit,dsInsert] then
         fDMCadPedido.cdsPedido_Item_Processo.Post;
-      fDMCadPedido.cdsPedido_Item_Processo.ApplyUpdates(0);
     end;
     //******************
 
@@ -643,6 +641,9 @@ begin
   fDMCadPedido.cdsPedido_Item_Tipo.First;
   while not fDMCadPedido.cdsPedido_Item_Tipo.Eof do
     fDMCadPedido.cdsPedido_Item_Tipo.Delete;
+  fDMCadPedido.cdsPedido_Item_Processo.First;
+  while not fDMCadPedido.cdsPedido_Item_Processo.Eof do
+    fDMCadPedido.cdsPedido_Item_Processo.Delete;
   fDMCadPedido.cdsPedido_Material.First;
   while not fDMCadPedido.cdsPedido_Material.Eof do
   begin
@@ -918,15 +919,7 @@ begin
   end;
 end;
 
-procedure prc_Abrir_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID, Item : Integer);
-begin
-  fDMCadPedido.cdsPedido_Item_Processo.Close;
-  fDMCadPedido.sdsPedido_Item_Processo.ParamByName('ID').AsInteger   := ID;
-  fDMCadPedido.sdsPedido_Item_Processo.ParamByName('ITEM').AsInteger := Item;
-  fDMCadPedido.cdsPedido_Item_Processo.Open;
-end;
-
-procedure prc_Gerar_Processo(fDMCadPedido: TDMCadPedido ; ID_Pedido, Item_Pedido, ID_Produto: Integer);
+procedure prc_Gerar_Processo(fDMCadPedido: TDMCadPedido);
 var
   sds: TSQLDataSet;
   vItem : Integer;
@@ -939,13 +932,13 @@ begin
     sds.CommandText   := 'select P.ITEM, P.id_processo from produto_processo P '
                        + 'where P.ID = :ID '
                        + 'ORDER BY P.ITEM ';
-    sds.ParamByName('ID').AsInteger := ID_Pedido;
+    sds.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
     sds.Open;
     vItem := 0;
     while not sds.Eof do
     begin
       vItem := 1;
-      prc_Gravar_Pedido_Item_Processo(fDMCadPedido,ID_Pedido,Item_Pedido,sds.FieldByName('ID_Processo').AsInteger,0);
+      prc_Gravar_Pedido_Item_Processo(fDMCadPedido,sds.FieldByName('ID_Processo').AsInteger,'');
       sds.Next;
     end;
 
@@ -955,7 +948,7 @@ begin
 
 end;
 
-procedure prc_Gravar_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID,Item,ID_Processo: Integer ; Qtd: Real);
+procedure prc_Gravar_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID_Processo: Integer ; Nome_Processo : String);
 var
   vItemAux : Integer;
 begin
@@ -963,11 +956,12 @@ begin
   vItemAux := fDMCadPedido.cdsPedido_Item_ProcessoITEM_PROCESSO.AsInteger;
 
   fDMCadPedido.cdsPedido_Item_Processo.Insert;
-  fDMCadPedido.cdsPedido_Item_ProcessoID.AsInteger            := ID;
-  fDMCadPedido.cdsPedido_Item_ProcessoITEM.AsInteger          := Item;
+  fDMCadPedido.cdsPedido_Item_ProcessoID.AsInteger            := fDMCadPedido.cdsPedido_ItensID.AsInteger;
+  fDMCadPedido.cdsPedido_Item_ProcessoITEM.AsInteger          := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
   fDMCadPedido.cdsPedido_Item_ProcessoITEM_PROCESSO.AsInteger := vItemAux + 1;
   fDMCadPedido.cdsPedido_Item_ProcessoID_PROCESSO.AsInteger   := ID_Processo;
-  fDMCadPedido.cdsPedido_Item_ProcessoQTD.AsFloat             := StrToFloat(FormatFloat('0.0000',Qtd));
+  fDMCadPedido.cdsPedido_Item_ProcessoQTD.AsFloat             := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat));
+  fDMCadPedido.cdsPedido_Item_ProcessoNOME_PROCESSO.AsString  := Nome_Processo;
   fDMCadPedido.cdsPedido_Item_Processo.Post;
 end;
 

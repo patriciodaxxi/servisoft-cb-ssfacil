@@ -4,7 +4,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
   Caption = 'Confer'#234'ncia Simples do Pedido'
-  ClientHeight = 399
+  ClientHeight = 450
   ClientWidth = 1049
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,9 +19,18 @@ object frmConferencia_Ped: TfrmConferencia_Ped
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object NxSplitter1: TNxSplitter
+    Left = 0
+    Top = 126
+    Width = 1049
+    Height = 13
+    Cursor = crVSplit
+    Align = alTop
+    ResizeStyle = rsLine
+  end
   object Panel3: TPanel
     Left = 0
-    Top = 360
+    Top = 411
     Width = 1049
     Height = 39
     Align = alBottom
@@ -218,9 +227,9 @@ object frmConferencia_Ped: TfrmConferencia_Ped
   end
   object gbxVendedor: TRzGroupBox
     Left = 0
-    Top = 0
+    Top = 139
     Width = 1049
-    Height = 360
+    Height = 272
     Align = alClient
     BorderColor = clNavy
     BorderInner = fsButtonUp
@@ -242,7 +251,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
       Left = 5
       Top = 54
       Width = 1039
-      Height = 234
+      Height = 146
       Align = alClient
       Color = clBtnFace
       Ctl3D = False
@@ -527,7 +536,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
     end
     object SMDBGrid6: TSMDBGrid
       Left = 5
-      Top = 288
+      Top = 200
       Width = 1039
       Height = 67
       Align = alBottom
@@ -672,6 +681,169 @@ object frmConferencia_Ped: TfrmConferencia_Ped
           Title.Caption = 'Peso'
           Title.Color = 16764831
           Width = 60
+          Visible = True
+        end>
+    end
+  end
+  object gbxDuplicata: TRzGroupBox
+    Left = 0
+    Top = 0
+    Width = 1049
+    Height = 126
+    Align = alTop
+    BorderColor = clMaroon
+    BorderInner = fsButtonUp
+    BorderOuter = fsBump
+    BorderWidth = 1
+    Caption = ' C'#243'digo de Barras '
+    Color = 12582847
+    Ctl3D = True
+    FlatColor = clMaroon
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clMaroon
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentCtl3D = False
+    ParentFont = False
+    TabOrder = 2
+    VisualStyle = vsGradient
+    object Label2: TLabel
+      Left = 21
+      Top = 27
+      Width = 93
+      Height = 18
+      Caption = 'C'#243'd. Barra:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -16
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 21
+      Top = 64
+      Width = 6
+      Height = 18
+      Caption = '.'
+      Color = 5504851
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -16
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold, fsItalic]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Edit1: TEdit
+      Left = 119
+      Top = 20
+      Width = 213
+      Height = 26
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -16
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      OnKeyDown = Edit1KeyDown
+    end
+    object SMDBGrid1: TSMDBGrid
+      Left = 412
+      Top = 18
+      Width = 631
+      Height = 102
+      Align = alRight
+      Color = 12582847
+      Ctl3D = False
+      DataSource = DMConferencia.dsConsPedido_Item_Proc
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clMaroon
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      Flat = True
+      BandsFont.Charset = DEFAULT_CHARSET
+      BandsFont.Color = clWindowText
+      BandsFont.Height = -11
+      BandsFont.Name = 'MS Sans Serif'
+      BandsFont.Style = []
+      Groupings = <>
+      GridStyle.Style = gsCustom
+      GridStyle.OddColor = clBtnFace
+      GridStyle.EvenColor = clBtnFace
+      GridStyle.Bands.StartColor = clBtnFace
+      GridStyle.Footer.StartColor = clBtnFace
+      TitleHeight.PixelCount = 24
+      FooterColor = clBtnFace
+      ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoTitleWordWrap]
+      RegistryKey = 'Software\Scalabium'
+      RegistrySection = 'SMDBGrid'
+      WidthOfIndicator = 11
+      DefaultRowHeight = 16
+      ScrollBars = ssHorizontal
+      ColCount = 7
+      RowCount = 2
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'NOME_PROCESSO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Processo'
+          Title.Color = 12582847
+          Width = 192
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DTENTRADA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Dt. Entrada'
+          Title.Color = 12582847
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'HRENTRADA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Hr. Entrada'
+          Title.Color = 12582847
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DTBAIXA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Dt. Baixa'
+          Title.Color = 12582847
+          Width = 69
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'HRSAIDA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Hr. Baixa'
+          Title.Color = 12582847
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'QTD'
+          Title.Alignment = taCenter
+          Title.Caption = 'Qtde.'
+          Title.Color = 12582847
           Visible = True
         end>
     end

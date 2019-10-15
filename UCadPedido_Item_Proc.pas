@@ -40,7 +40,6 @@ uses rsDBUtils, uGrava_Pedido;
 procedure TfrmCadPedido_Item_Proc.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  fDMCadPedido.cdsPedido_Item_Processo.Filtered := False;
   Action := Cafree;
 end;
 
@@ -51,15 +50,18 @@ begin
   fDMCadPedido.cdsProcesso.Open;
   btnInserir_Itens.Enabled := (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]);
   btnExcluir_Itens.Enabled := (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]);
-  fDMCadPedido.cdsPedido_Item_Processo.Filtered := False;
-  fDMCadPedido.cdsPedido_Item_Processo.Filter   := 'ITEM = ' + IntToStr(fDMCadPedido.cdsPedido_ItensITEM.AsInteger);
-  fDMCadPedido.cdsPedido_Item_Processo.Filtered := True;
+  Panel1.Enabled           := (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]);
 end;
 
 procedure TfrmCadPedido_Item_Proc.btnInserir_ItensClick(Sender: TObject);
 begin
-  prc_Gravar_Pedido_Item_Processo(fDMCadPedido,fDMCadPedido.cdsPedido_ItensID.AsInteger,fDMCadPedido.cdsPedido_ItensITEM.AsInteger,
-                                  RxDBLookupCombo1.KeyValue,fDMCadPedido.cdsPedido_ItensQTD.AsFloat);
+  if RxDBLookupCombo1.Text = '' then
+  begin
+    MessageDlg('*** É Obrigado informar o Processo!' , mtError, [mbOk], 0);
+    exit;
+  end;
+
+  prc_Gravar_Pedido_Item_Processo(fDMCadPedido,RxDBLookupCombo1.KeyValue,RxDBLookupCombo1.Text);
   RxDBLookupCombo1.ClearValue;
   RxDBLookupCombo1.SetFocus;
 end;

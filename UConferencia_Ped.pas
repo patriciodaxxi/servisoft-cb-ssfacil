@@ -26,6 +26,12 @@ type
     Label68: TLabel;
     SMDBGrid6: TSMDBGrid;
     btnConsultarSaldoSMS: TNxButton;
+    gbxDuplicata: TRzGroupBox;
+    NxSplitter1: TNxSplitter;
+    Label2: TLabel;
+    Edit1: TEdit;
+    SMDBGrid1: TSMDBGrid;
+    Label3: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
@@ -38,6 +44,8 @@ type
     procedure btnExcluirClick(Sender: TObject);
     procedure CurrencyEdit1Change(Sender: TObject);
     procedure btnConsultarSaldoSMSClick(Sender: TObject);
+    procedure Edit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMConferencia: TDMConferencia;
@@ -46,11 +54,10 @@ type
     vItem_Ped_Sel : Integer;
 
     procedure prc_Abrir_cdsPedido_Item;
-
     procedure prc_Verifica_Pedido_Conf;
-
     procedure prc_scroll(DataSet: TDataSet);
-
+    procedure prc_Baixa_Processo;
+    procedure prc_Abrir_cdsConsPedido_Item_Proc(NumPed,Item : Integer);
 
   public
     { Public declarations }
@@ -317,6 +324,71 @@ begin
   fDMAprovacao_Ped := TDMAprovacao_Ped.Create(Self);
   fDMAprovacao_Ped.prc_Saldo_SMS;
   FreeAndNil(fDMAprovacao_Ped);
+end;
+
+procedure TfrmConferencia_Ped.Edit1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = Vk_Return then
+    prc_Baixa_Processo;
+
+end;
+
+procedure TfrmConferencia_Ped.prc_Baixa_Processo;
+var
+  vNumPed : Integer;
+  vItem : Integer;
+  vBaixado : Boolean;
+  vProcesso : String;
+begin
+  if Length(Edit1.Text) <> 10 then
+  begin
+    MessageDlg('Código de Barras inválido!', mtError, [mbOk], 0);
+    exit;
+  end;
+
+  vNumPed := StrToInt(Copy(Edit1.Text,2,6));
+  vItem   := StrToInt(Copy(Edit1.Text,8,3));
+
+  prc_Abrir_cdsConsPedido_Item_Proc(vNumPed,vItem);
+
+  vProcesso := '';
+  fDMConferencia.cdsConsPedido_Item_Proc.First;
+  while not fDMConferencia.cdsConsPedido_Item_Proc.Eof do
+  begin
+    if fDMConferencia.cdsConsPedido_Item_ProcDTBAIXA.AsDateTime <= 10 then
+    begin
+      vProcesso := fDMConferencia.cdsConsPedido_Item_ProcNOME_PROCESSO.AsString;
+
+
+
+
+
+    end;
+
+
+    fDMConferencia.cdsConsPedido_Item_Proc.Next;
+  end;
+
+  if (trim(vProcesso) = '') and (fDMConferencia.cdsConsPedido_Item_Proc.RecordCount <= 0) then
+    Label3.Caption := 'PEDIDO NÃO ENCONTRADO'
+  else
+  if (trim(vProcesso) = '') then
+    Label3.Caption := 'PEDIDO JÁ BAIXADO'
+  else
+  if (trim(vProcesso) <> '') then
+    Label3.Caption := 'Pedido: ' + IntToStr(vNumPed) + '     Item: ' + IntToStr(vItem) + #13 + #13
+                    + 'Processo: ' + vProcesso
+                    + '      ** Encerrado **      ';
+
+end;
+
+procedure TfrmConferencia_Ped.prc_Abrir_cdsConsPedido_Item_Proc(NumPed,Item: Integer);
+begin
+  fDMConferencia.cdsConsPedido_Item_Proc.Close;
+  fDMConferencia.sdsConsPedido_Item_Proc.ParamByName('NUM_PEDIDO').AsInteger := NumPed;
+  fDMConferencia.sdsConsPedido_Item_Proc.ParamByName('ITEM').AsInteger       := Item;
+  fDMConferencia.cdsConsPedido_Item_Proc.Open;
 end;
 
 end.

@@ -1367,8 +1367,6 @@ begin
   SMDBGrid2.DataSource := fDMCadPedido.dsPedido_Itens;
   if fDMCadPedido.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S' then
     fDMCadPedido.prc_Abrir_Servico;
-  if fDMCadPedido.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S' then
-    uGrava_Pedido.prc_Abrir_Pedido_Item_Processo(fDMCadPedido,fDMCadPedido.cdsPedidoID.AsInteger,0);
 end;
 
 function TfrmCadPedido.fnc_Verifica_Registro: Boolean;
@@ -1521,11 +1519,8 @@ begin
   end
   else
   begin
-    if (fDMCadPedido.cdsPedido.State in [dsInsert]) and (RzPageControl1.ActivePage = TS_Cadastro) then
-      uGrava_Pedido.prc_Abrir_Pedido_Item_Processo(fDMCadPedido,fDMCadPedido.cdsPedidoID.AsInteger,0);
     RxDBLookupCombo3Change(Sender);
   end;
-
 end;
 
 procedure TfrmCadPedido.btnAlterar_ItensClick(Sender: TObject);
@@ -3424,6 +3419,7 @@ var
   //dataSetProvider: TDataSetProvider;
   cdsTemp: TClientDataSet;
   cdsTemp_Tipo: TClientDataSet;
+  cdsTemp_Processo : TClientDataSet;            
   i: Integer;
   vItemAux: Integer;
   vItemPed: Integer;
@@ -3462,11 +3458,13 @@ begin
   vItemAux := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
   fDMCadPedido.cdsPedido_Itens.Locate('ITEM',vItemPed,[loCaseInsensitive]);
 
-  cdsTemp      := TClientDataSet.Create(nil);
-  cdsTemp_Tipo := TClientDataSet.Create(nil);
+  cdsTemp          := TClientDataSet.Create(nil);
+  cdsTemp_Tipo     := TClientDataSet.Create(nil);
+  cdsTemp_Processo := TClientDataSet.Create(nil);
   try
     cdsTemp.CloneCursor(fDMCadPedido.cdsPedido_Itens,False,False);
     cdsTemp_Tipo.CloneCursor(fDMCadPedido.cdsPedido_Item_Tipo,False,False);
+    cdsTemp_Processo.CloneCursor(fDMCadPedido.cdsPedido_Item_Processo,False,False);
     cdsTemp.Filtered := False;
     if fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger > 0 then
       cdsTemp.Filter := 'ITEM_ORIGINAL = ''' + IntToStr(fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger) + ''''
@@ -3497,17 +3495,35 @@ begin
       fDMCadPedido.cdsPedido_ItensCARIMBO.AsString        := fDMCadPedido.vCarimbo_Copia;
       fDMCadPedido.cdsPedido_Itens.Post;
 
+      //14/10/2019
+      cdsTemp_Processo.First;
+      while not cdsTemp_Processo.Eof do
+      begin
+        fDMCadPedido.cdsPedido_Item_Processo.Insert;
+        for i := 0 to ( cdsTemp_Processo.FieldCount - 1) do
+          fDMCadPedido.cdsPedido_Item_Processo.FieldByName(cdsTemp_Processo.Fields[i].FieldName).AsVariant := cdsTemp_Processo.Fields[i].Value;
+        fDMCadPedido.cdsPedido_Item_ProcessoID.AsInteger   := fDMCadPedido.cdsPedido_ItensID.AsInteger;
+        fDMCadPedido.cdsPedido_Item_ProcessoITEM.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
+        fDMCadPedido.cdsPedido_Item_ProcessoQTD.AsFloat    := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
+        fDMCadPedido.cdsPedido_Item_ProcessoDTBAIXA.Clear;
+        fDMCadPedido.cdsPedido_Item_ProcessoDTENTRADA.Clear;
+        fDMCadPedido.cdsPedido_Item_ProcessoHRENTRADA.Clear;
+        fDMCadPedido.cdsPedido_Item_ProcessoHRSAIDA.Clear;
+        fDMCadPedido.cdsPedido_Item_Processo.Post;
+        cdsTemp_Processo.Next;
+      end;
+
       //26/09/2016
       cdsTemp_Tipo.First;
       while not cdsTemp_Tipo.Eof do
       begin
         fDMCadPedido.cdsPedido_Item_Tipo.Insert;
-        fDMCadPedido.cdsPedido_Item_TipoID.AsInteger   := fDMCadPedido.cdsPedido_ItensID.AsInteger;
-        fDMCadPedido.cdsPedido_Item_TipoITEM.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
         for i := 0 to ( cdsTemp_Tipo.FieldCount - 1) do
         begin
           fDMCadPedido.cdsPedido_Item_Tipo.FieldByName(cdsTemp_Tipo.Fields[i].FieldName).AsVariant := cdsTemp_Tipo.Fields[i].Value;
         end;
+        fDMCadPedido.cdsPedido_Item_TipoID.AsInteger   := fDMCadPedido.cdsPedido_ItensID.AsInteger;
+        fDMCadPedido.cdsPedido_Item_TipoITEM.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
         fDMCadPedido.cdsPedido_Item_Tipo.Post;
         cdsTemp_Tipo.Next;
       end;

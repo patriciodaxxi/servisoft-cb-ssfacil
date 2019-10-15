@@ -1253,8 +1253,7 @@ begin
 
     //14/10/2019
     if (vID_Produto_Ant <> fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger) or not(vEditar) then
-      uGrava_Pedido.prc_Gerar_Processo(fDMCadPedido,fDMCadPedido.cdsPedido_ItensID.AsInteger,fDMCadPedido.cdsPedido_ItensITEM.AsInteger,
-                                       fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger);
+      uGrava_Pedido.prc_Gerar_Processo(fDMCadPedido);
 
     //foi alterado para ajustar os carimbos e o número de OS dos tamanhos   23/02/2015
     if (vState = 'E') and (fDMCadPedido.cdsProdutoID_GRADE.AsInteger > 0) and (fDMCadPedido.cdsParametrosUSA_GRADE.AsString = 'S') then
