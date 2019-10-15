@@ -109,8 +109,8 @@ begin
   fDMCadNotaFiscal.cdsParametros.Open;
   if (vID_CliTriangular > 0) and (fDMCadNotaFiscal.cdsParametrosID_OPERACAO_TRIANGULAR.AsInteger <= 0) and (RadioGroup1.ItemIndex = 2) then
   begin
-    MessageDlg('*** Favor verificar que não esta configurado no parametros a Operação Triangular.' + #13 +
-               '    Configurar nas regras de operações e depois informar no parâmetros!', mtError, [mbOk], 0);
+    MessageDlg('*** Favor verificar que não está configurado no parâmetros a Operação Triangular.' + #13 +
+               '    Configurar nas regras de operações e depois informar nos parâmetros!', mtError, [mbOk], 0);
     exit;
   end;
 
@@ -431,8 +431,7 @@ begin
 
     fDMCopiarNota.cdsNotaFiscal_Itens.Next;
 
-  end;
-
+  end;                                                                                  
 end;
 
 procedure TfrmCadNotaFiscal_Copia.prc_Le_cdsNDevolvida;
@@ -691,9 +690,7 @@ begin
     end;
     Panel1Exit(frmCadNotaFiscal_Copia);
     //btnCopiarClick(frmCadNotaFiscal_Copia);
-  end;
-
-
+  end;                
 end;
 
 procedure TfrmCadNotaFiscal_Copia.FormShow(Sender: TObject);
@@ -709,7 +706,7 @@ var
   vCodRegAux: Integer;
   vTipoAux: String;
   vUFClienteAux: String;
-  vTipoEmpresa : String;
+  vTipoEmpresa: String;
 begin
   if vID_CliTriangular > 0 then
     fDMCadNotaFiscal.cdsCliente.Locate('CODIGO',vID_CliTriangular,[loCaseInsensitive]);

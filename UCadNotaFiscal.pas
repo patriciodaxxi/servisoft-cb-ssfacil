@@ -671,8 +671,7 @@ implementation
 
 uses DmdDatabase, rsDBUtils, uUtilPadrao, USel_Pessoa, URecebeXML, uCalculo_NotaFiscal, uNFeComandos, USel_ContaOrc, uUtilCliente,
   uUtilCobranca, DmdDatabase_NFeBD, UDMAprovacao_Ped, UConsPessoa_Fin, UConsPedido_Senha, uGrava_NotaFiscal, UCadNotaFiscal_Custo,
-  UMenu, Math, UDMEtiqueta, USel_PreFat, uMenu1, USel_RecNF, uXMLSuframa,
-  UCadNotaFiscal_Alt_CCusto, UConsClienteOBS;
+  UMenu, Math, UDMEtiqueta, USel_PreFat, uMenu1, USel_RecNF, uXMLSuframa, UCadNotaFiscal_Alt_CCusto, UConsClienteOBS;
 
 {$R *.dfm}
 

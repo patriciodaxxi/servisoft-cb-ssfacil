@@ -1525,6 +1525,111 @@ object DMCopiarNota: TDMCopiarNota
       FixedChar = True
       Size = 1
     end
+    object sdsNotaFiscal_ItensVLR_OUTROS: TFloatField
+      FieldName = 'VLR_OUTROS'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_DESON: TFloatField
+      FieldName = 'PERC_ICMS_DESON'
+    end
+    object sdsNotaFiscal_ItensPERC_PIS_COFINS_SUFRAMA: TFloatField
+      FieldName = 'PERC_PIS_COFINS_SUFRAMA'
+    end
+    object sdsNotaFiscal_ItensVLR_PIS_COFINS_SUFRAMA: TFloatField
+      FieldName = 'VLR_PIS_COFINS_SUFRAMA'
+    end
+    object sdsNotaFiscal_ItensPERC_DESC_SUFRAMA: TFloatField
+      FieldName = 'PERC_DESC_SUFRAMA'
+    end
+    object sdsNotaFiscal_ItensVLR_DESC_SUFRAMA: TFloatField
+      FieldName = 'VLR_DESC_SUFRAMA'
+    end
+    object sdsNotaFiscal_ItensVLR_ISSQN: TFloatField
+      FieldName = 'VLR_ISSQN'
+    end
+    object sdsNotaFiscal_ItensQTD_TRIB: TFloatField
+      FieldName = 'QTD_TRIB'
+    end
+    object sdsNotaFiscal_ItensVLR_UNITARIO_TRIB: TFloatField
+      FieldName = 'VLR_UNITARIO_TRIB'
+    end
+    object sdsNotaFiscal_ItensUNIDADE_TRIB: TStringField
+      FieldName = 'UNIDADE_TRIB'
+      Size = 6
+    end
+    object sdsNotaFiscal_ItensBASE_ICMS_FCP: TFloatField
+      FieldName = 'BASE_ICMS_FCP'
+    end
+    object sdsNotaFiscal_ItensBASE_FCP_ST: TFloatField
+      FieldName = 'BASE_FCP_ST'
+    end
+    object sdsNotaFiscal_ItensVLR_FCP_ST: TFloatField
+      FieldName = 'VLR_FCP_ST'
+    end
+    object sdsNotaFiscal_ItensPERC_FCP_ST: TFloatField
+      FieldName = 'PERC_FCP_ST'
+    end
+    object sdsNotaFiscal_ItensVLR_ICMS_FCP_DEST: TFloatField
+      FieldName = 'VLR_ICMS_FCP_DEST'
+    end
+    object sdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField
+      FieldName = 'BASE_ICMS_FCP_DEST'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_SUFRAMA: TFloatField
+      FieldName = 'PERC_ICMS_SUFRAMA'
+    end
+    object sdsNotaFiscal_ItensPERC_IPI_SUFRAMA: TFloatField
+      FieldName = 'PERC_IPI_SUFRAMA'
+    end
+    object sdsNotaFiscal_ItensVLR_IPI_DEVOL: TFloatField
+      FieldName = 'VLR_IPI_DEVOL'
+    end
+    object sdsNotaFiscal_ItensPERC_DEVOL: TFloatField
+      FieldName = 'PERC_DEVOL'
+    end
+    object sdsNotaFiscal_ItensBASE_IPI: TFloatField
+      FieldName = 'BASE_IPI'
+    end
+    object sdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object sdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMS_RED'
+    end
+    object sdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
+      FieldName = 'PERC_ICMS_RED'
+    end
+    object sdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMSSUBT_RED'
+    end
+    object sdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField
+      FieldName = 'PERC_BASE_RED_EFET'
+    end
+    object sdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField
+      FieldName = 'PERC_ICMS_EFET'
+    end
+    object sdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
+    end
+    object sdsNotaFiscal_ItensLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object sdsNotaFiscal_ItensCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object sdsNotaFiscal_ItensESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
+    object sdsNotaFiscal_ItensDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -2028,6 +2133,111 @@ object DMCopiarNota: TDMCopiarNota
     end
     object cdsNotaFiscal_ItensGRAVOU_TAB_TAMANHO: TStringField
       FieldName = 'GRAVOU_TAB_TAMANHO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsNotaFiscal_ItensVLR_OUTROS: TFloatField
+      FieldName = 'VLR_OUTROS'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_DESON: TFloatField
+      FieldName = 'PERC_ICMS_DESON'
+    end
+    object cdsNotaFiscal_ItensPERC_PIS_COFINS_SUFRAMA: TFloatField
+      FieldName = 'PERC_PIS_COFINS_SUFRAMA'
+    end
+    object cdsNotaFiscal_ItensVLR_PIS_COFINS_SUFRAMA: TFloatField
+      FieldName = 'VLR_PIS_COFINS_SUFRAMA'
+    end
+    object cdsNotaFiscal_ItensPERC_DESC_SUFRAMA: TFloatField
+      FieldName = 'PERC_DESC_SUFRAMA'
+    end
+    object cdsNotaFiscal_ItensVLR_DESC_SUFRAMA: TFloatField
+      FieldName = 'VLR_DESC_SUFRAMA'
+    end
+    object cdsNotaFiscal_ItensVLR_ISSQN: TFloatField
+      FieldName = 'VLR_ISSQN'
+    end
+    object cdsNotaFiscal_ItensQTD_TRIB: TFloatField
+      FieldName = 'QTD_TRIB'
+    end
+    object cdsNotaFiscal_ItensVLR_UNITARIO_TRIB: TFloatField
+      FieldName = 'VLR_UNITARIO_TRIB'
+    end
+    object cdsNotaFiscal_ItensUNIDADE_TRIB: TStringField
+      FieldName = 'UNIDADE_TRIB'
+      Size = 6
+    end
+    object cdsNotaFiscal_ItensBASE_ICMS_FCP: TFloatField
+      FieldName = 'BASE_ICMS_FCP'
+    end
+    object cdsNotaFiscal_ItensBASE_FCP_ST: TFloatField
+      FieldName = 'BASE_FCP_ST'
+    end
+    object cdsNotaFiscal_ItensVLR_FCP_ST: TFloatField
+      FieldName = 'VLR_FCP_ST'
+    end
+    object cdsNotaFiscal_ItensPERC_FCP_ST: TFloatField
+      FieldName = 'PERC_FCP_ST'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST: TFloatField
+      FieldName = 'VLR_ICMS_FCP_DEST'
+    end
+    object cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST: TFloatField
+      FieldName = 'BASE_ICMS_FCP_DEST'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_SUFRAMA: TFloatField
+      FieldName = 'PERC_ICMS_SUFRAMA'
+    end
+    object cdsNotaFiscal_ItensPERC_IPI_SUFRAMA: TFloatField
+      FieldName = 'PERC_IPI_SUFRAMA'
+    end
+    object cdsNotaFiscal_ItensVLR_IPI_DEVOL: TFloatField
+      FieldName = 'VLR_IPI_DEVOL'
+    end
+    object cdsNotaFiscal_ItensPERC_DEVOL: TFloatField
+      FieldName = 'PERC_DEVOL'
+    end
+    object cdsNotaFiscal_ItensBASE_IPI: TFloatField
+      FieldName = 'BASE_IPI'
+    end
+    object cdsNotaFiscal_ItensBASE_ICMSSUBST_RET: TFloatField
+      FieldName = 'BASE_ICMSSUBST_RET'
+    end
+    object cdsNotaFiscal_ItensPERC_BASE_ICMS_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMS_RED'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMSSUBST_RET: TFloatField
+      FieldName = 'VLR_ICMSSUBST_RET'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_RED: TFloatField
+      FieldName = 'PERC_ICMS_RED'
+    end
+    object cdsNotaFiscal_ItensPERC_BASE_ICMSSUBT_RED: TFloatField
+      FieldName = 'PERC_BASE_ICMSSUBT_RED'
+    end
+    object cdsNotaFiscal_ItensPERC_BASE_RED_EFET: TFloatField
+      FieldName = 'PERC_BASE_RED_EFET'
+    end
+    object cdsNotaFiscal_ItensVLR_BASE_EFET: TFloatField
+      FieldName = 'VLR_BASE_EFET'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_EFET: TFloatField
+      FieldName = 'PERC_ICMS_EFET'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMS_EFET: TFloatField
+      FieldName = 'VLR_ICMS_EFET'
+    end
+    object cdsNotaFiscal_ItensLARGURA: TFloatField
+      FieldName = 'LARGURA'
+    end
+    object cdsNotaFiscal_ItensCOMPRIMENTO: TFloatField
+      FieldName = 'COMPRIMENTO'
+    end
+    object cdsNotaFiscal_ItensESPESSURA: TFloatField
+      FieldName = 'ESPESSURA'
+    end
+    object cdsNotaFiscal_ItensDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
     end
