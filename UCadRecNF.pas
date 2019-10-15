@@ -230,7 +230,7 @@ var
 implementation
 
 uses DmdDatabase, rsDBUtils, uUtilPadrao, USel_Pessoa, uCalculo_NotaFiscal, uUtilCliente, uUtilCobranca, UDMAprovacao_Ped,
-  UConsPessoa_Fin, UConsPedido_Senha, UDMRecNF, USel_ContaOrc, USenha, uGrava_NotaFiscal, USel_Vale, UMenu, uUtilCliente,
+  UConsPessoa_Fin, UConsPedido_Senha, UDMRecNF, USel_ContaOrc, USenha, uGrava_NotaFiscal, USel_Vale, UMenu,
   UCadNotaFiscal_Desconto, UCadNotaFiscal_Canc, uMenu1, classe.validaemail;
 
 {$R *.dfm}
