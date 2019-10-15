@@ -35,7 +35,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
     Height = 39
     Align = alBottom
     Color = 13565902
-    TabOrder = 0
+    TabOrder = 1
     object Shape6: TShape
       Left = 836
       Top = 12
@@ -150,7 +150,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
       OnClick = btnConfirmarClick
     end
     object btnExcluir: TNxButton
-      Left = 196
+      Left = 194
       Top = 4
       Width = 173
       Height = 30
@@ -245,7 +245,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
     Font.Style = [fsBold]
     ParentCtl3D = False
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 2
     VisualStyle = vsGradient
     object SMDBGrid2: TSMDBGrid
       Left = 5
@@ -265,6 +265,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = [fsBold]
+      OnDblClick = SMDBGrid2DblClick
       OnKeyDown = SMDBGrid2KeyDown
       Flat = True
       BandsFont.Charset = DEFAULT_CHARSET
@@ -706,7 +707,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
     Font.Style = []
     ParentCtl3D = False
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 0
     VisualStyle = vsGradient
     object Label2: TLabel
       Left = 21
@@ -737,8 +738,8 @@ object frmConferencia_Ped: TfrmConferencia_Ped
       ParentFont = False
     end
     object Edit1: TEdit
-      Left = 119
-      Top = 20
+      Left = 116
+      Top = 16
       Width = 213
       Height = 26
       Font.Charset = DEFAULT_CHARSET
@@ -783,6 +784,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
       TitleHeight.PixelCount = 24
       FooterColor = clBtnFace
       ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoTitleWordWrap]
+      OnGetCellParams = SMDBGrid1GetCellParams
       RegistryKey = 'Software\Scalabium'
       RegistrySection = 'SMDBGrid'
       WidthOfIndicator = 11

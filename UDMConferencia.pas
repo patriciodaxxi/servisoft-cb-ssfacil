@@ -366,28 +366,37 @@ type
     cdsConsPedido_Item_ProcQTD_FATURADO: TFloatField;
     cdsConsPedido_Item_ProcQTD_RESTANTE: TFloatField;
     cdsConsPedido_Item_ProcDTBAIXA_ITEM: TDateField;
-    SQLDataSet1: TSQLDataSet;
-    DataSetProvider1: TDataSetProvider;
-    ClientDataSet1: TClientDataSet;
-    StringField1: TStringField;
-    DateField1: TDateField;
-    IntegerField1: TIntegerField;
-    IntegerField2: TIntegerField;
-    IntegerField3: TIntegerField;
-    IntegerField4: TIntegerField;
-    StringField2: TStringField;
-    DateField2: TDateField;
-    DateField3: TDateField;
-    TimeField1: TTimeField;
-    TimeField2: TTimeField;
-    FloatField1: TFloatField;
-    FloatField2: TFloatField;
-    FloatField3: TFloatField;
-    DateField4: TDateField;
-    DataSource1: TDataSource;
+    sdsPedido_Item_Processo: TSQLDataSet;
+    dspPedido_Item_Processo: TDataSetProvider;
+    cdsPedido_Item_Processo: TClientDataSet;
+    dsPedido_Item_Processo: TDataSource;
+    sdsPedido_Item_ProcessoID: TIntegerField;
+    sdsPedido_Item_ProcessoITEM: TIntegerField;
+    sdsPedido_Item_ProcessoITEM_PROCESSO: TIntegerField;
+    sdsPedido_Item_ProcessoID_PROCESSO: TIntegerField;
+    sdsPedido_Item_ProcessoQTD: TFloatField;
+    sdsPedido_Item_ProcessoDTENTRADA: TDateField;
+    sdsPedido_Item_ProcessoHRENTRADA: TTimeField;
+    sdsPedido_Item_ProcessoDTBAIXA: TDateField;
+    sdsPedido_Item_ProcessoHRSAIDA: TTimeField;
+    cdsPedido_Item_ProcessoID: TIntegerField;
+    cdsPedido_Item_ProcessoITEM: TIntegerField;
+    cdsPedido_Item_ProcessoITEM_PROCESSO: TIntegerField;
+    cdsPedido_Item_ProcessoID_PROCESSO: TIntegerField;
+    cdsPedido_Item_ProcessoQTD: TFloatField;
+    cdsPedido_Item_ProcessoDTENTRADA: TDateField;
+    cdsPedido_Item_ProcessoHRENTRADA: TTimeField;
+    cdsPedido_Item_ProcessoDTBAIXA: TDateField;
+    cdsPedido_Item_ProcessoHRSAIDA: TTimeField;
+    cdsConsPedido_Item_ProcDTCONFERENCIA: TDateField;
+    cdsConsPedido_Item_ProcID_PEDIDO: TIntegerField;
+    qContadorProc: TSQLQuery;
+    qContadorProcCONTADOR: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsConferencia_PedCalcFields(DataSet: TDataSet);
     procedure cdsPedido_ItemCalcFields(DataSet: TDataSet);
+    procedure dspPedido_Item_ProcessoGetTableName(Sender: TObject;
+      DataSet: TDataSet; var TableName: String);
   private
     { Private declarations }
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
@@ -588,6 +597,12 @@ begin
     qCombinacao.Open;
     cdsPedido_ItemclNome_Cor.AsString := qCombinacaoNOME.AsString;
   end;
+end;
+
+procedure TDMConferencia.dspPedido_Item_ProcessoGetTableName(
+  Sender: TObject; DataSet: TDataSet; var TableName: String);
+begin
+  TableName := 'PEDIDO_ITEM_PROCESSO';
 end;
 
 end.

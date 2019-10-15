@@ -1885,12 +1885,13 @@ object DMConferencia: TDMConferencia
       'RA ,  p.dtemissao, p.num_pedido, i.item,'#13#10'iproc.id_processo, ipr' +
       'oc.item_processo, proc.nome nome_processo,'#13#10'iproc.dtentrada, ipr' +
       'oc.dtbaixa, iproc.hrentrada, iproc.hrsaida, i.qtd, i.qtd_faturad' +
-      'o, i.qtd_restante,'#13#10'i.dtbaixa DTBAIXA_ITEM'#13#10'from pedido p'#13#10'inner' +
-      ' join pedido_item i'#13#10'on p.id = i.id'#13#10'inner join pedido_item_proc' +
-      'esso iproc'#13#10'on i.id = iproc.id'#13#10'and i.item = iproc.item'#13#10'inner j' +
-      'oin processo proc'#13#10'on iproc.id_processo = proc.id'#13#10'where p.tipo_' +
-      'reg = '#39'P'#39#13#10'  AND P.NUM_PEDIDO = :NUM_PEDIDO'#13#10'  AND I.ITEM = :ITE' +
-      'M'#13#10'ORDER BY IPROC.ITEM_PROCESSO'#13#10
+      'o, i.qtd_restante,'#13#10'i.dtbaixa DTBAIXA_ITEM, i.dtconferencia, P.I' +
+      'D ID_PEDIDO'#13#10'from pedido p'#13#10'inner join pedido_item i'#13#10'on p.id = ' +
+      'i.id'#13#10'inner join pedido_item_processo iproc'#13#10'on i.id = iproc.id'#13 +
+      #10'and i.item = iproc.item'#13#10'inner join processo proc'#13#10'on iproc.id_' +
+      'processo = proc.id'#13#10'where p.tipo_reg = '#39'P'#39#13#10'  AND P.NUM_PEDIDO =' +
+      ' :NUM_PEDIDO'#13#10'  AND I.ITEM = :ITEM'#13#10'ORDER BY IPROC.ITEM_PROCESSO' +
+      #13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -1904,8 +1905,8 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 389
-    Top = 319
+    Left = 384
+    Top = 318
   end
   object dspConsPedido_Item_Proc: TDataSetProvider
     DataSet = sdsConsPedido_Item_Proc
@@ -1916,8 +1917,8 @@ object DMConferencia: TDMConferencia
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsPedido_Item_Proc'
-    Left = 467
-    Top = 317
+    Left = 465
+    Top = 316
     object cdsConsPedido_Item_ProcCOD_BARRA: TStringField
       FieldName = 'COD_BARRA'
       Size = 10
@@ -1967,31 +1968,138 @@ object DMConferencia: TDMConferencia
     object cdsConsPedido_Item_ProcDTBAIXA_ITEM: TDateField
       FieldName = 'DTBAIXA_ITEM'
     end
+    object cdsConsPedido_Item_ProcDTCONFERENCIA: TDateField
+      FieldName = 'DTCONFERENCIA'
+    end
+    object cdsConsPedido_Item_ProcID_PEDIDO: TIntegerField
+      FieldName = 'ID_PEDIDO'
+      Required = True
+    end
   end
   object dsConsPedido_Item_Proc: TDataSource
     DataSet = cdsConsPedido_Item_Proc
     Left = 509
     Top = 319
   end
-  object SQLDataSet1: TSQLDataSet
+  object sdsPedido_Item_Processo: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT '#39'2'#39' || lpad(p.num_pedido,6,0) || lpad(i.item,3,0) COD_BAR' +
-      'RA ,  p.dtemissao, p.num_pedido, i.item,'#13#10'iproc.id_processo, ipr' +
-      'oc.item_processo, proc.nome nome_processo,'#13#10'iproc.dtentrada, ipr' +
-      'oc.dtbaixa, iproc.hrentrada, iproc.hrsaida, i.qtd, i.qtd_faturad' +
-      'o, i.qtd_restante,'#13#10'i.dtbaixa DTBAIXA_ITEM'#13#10'from pedido p'#13#10'inner' +
-      ' join pedido_item i'#13#10'on p.id = i.id'#13#10'inner join pedido_item_proc' +
-      'esso iproc'#13#10'on i.id = iproc.id'#13#10'and i.item = iproc.item'#13#10'inner j' +
-      'oin processo proc'#13#10'on iproc.id_processo = proc.id'#13#10'where p.tipo_' +
-      'reg = '#39'P'#39#13#10'  AND P.NUM_PEDIDO = :NUM_PEDIDO'#13#10'  AND I.ITEM = :ITE' +
-      'M'#13#10'ORDER BY IPROC.ITEM_PROCESSO'#13#10
+      'SELECT P.*'#13#10'FROM pedido_item_processo P'#13#10'where P.ID = :ID'#13#10'  AND' +
+      ' P.ITEM = :ITEM'#13#10'  AND P.ITEM_PROCESSO = :ITEM_PROCESSO'#13#10
     MaxBlobSize = -1
     Params = <
       item
         DataType = ftInteger
-        Name = 'NUM_PEDIDO'
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM_PROCESSO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 394
+    Top = 387
+    object sdsPedido_Item_ProcessoID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPedido_Item_ProcessoITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPedido_Item_ProcessoITEM_PROCESSO: TIntegerField
+      FieldName = 'ITEM_PROCESSO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsPedido_Item_ProcessoID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
+    end
+    object sdsPedido_Item_ProcessoQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object sdsPedido_Item_ProcessoDTENTRADA: TDateField
+      FieldName = 'DTENTRADA'
+    end
+    object sdsPedido_Item_ProcessoHRENTRADA: TTimeField
+      FieldName = 'HRENTRADA'
+    end
+    object sdsPedido_Item_ProcessoDTBAIXA: TDateField
+      FieldName = 'DTBAIXA'
+    end
+    object sdsPedido_Item_ProcessoHRSAIDA: TTimeField
+      FieldName = 'HRSAIDA'
+    end
+  end
+  object dspPedido_Item_Processo: TDataSetProvider
+    DataSet = sdsPedido_Item_Processo
+    UpdateMode = upWhereKeyOnly
+    OnGetTableName = dspPedido_Item_ProcessoGetTableName
+    Left = 435
+    Top = 387
+  end
+  object cdsPedido_Item_Processo: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID;ITEM;ITEM_PROCESSO'
+    Params = <>
+    ProviderName = 'dspPedido_Item_Processo'
+    Left = 469
+    Top = 383
+    object cdsPedido_Item_ProcessoID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPedido_Item_ProcessoITEM: TIntegerField
+      FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPedido_Item_ProcessoITEM_PROCESSO: TIntegerField
+      FieldName = 'ITEM_PROCESSO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsPedido_Item_ProcessoID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
+    end
+    object cdsPedido_Item_ProcessoQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsPedido_Item_ProcessoDTENTRADA: TDateField
+      FieldName = 'DTENTRADA'
+    end
+    object cdsPedido_Item_ProcessoHRENTRADA: TTimeField
+      FieldName = 'HRENTRADA'
+    end
+    object cdsPedido_Item_ProcessoDTBAIXA: TDateField
+      FieldName = 'DTBAIXA'
+    end
+    object cdsPedido_Item_ProcessoHRSAIDA: TTimeField
+      FieldName = 'HRSAIDA'
+    end
+  end
+  object dsPedido_Item_Processo: TDataSource
+    DataSet = cdsPedido_Item_Processo
+    Left = 514
+    Top = 387
+  end
+  object qContadorProc: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
         ParamType = ptInput
       end
       item
@@ -1999,74 +2107,19 @@ object DMConferencia: TDMConferencia
         Name = 'ITEM'
         ParamType = ptInput
       end>
+    SQL.Strings = (
+      'SELECT COUNT(1) CONTADOR'
+      'FROM pedido_item_processo P'
+      'where P.ID = :ID'
+      '  AND P.ITEM = :ITEM'
+      '  AND P.dtentrada IS NULL'
+      '')
     SQLConnection = dmDatabase.scoDados
-    Left = 379
-    Top = 437
-  end
-  object DataSetProvider1: TDataSetProvider
-    DataSet = SQLDataSet1
-    Left = 419
-    Top = 437
-  end
-  object ClientDataSet1: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspConsPedido_Item_Proc'
-    Left = 457
-    Top = 435
-    object StringField1: TStringField
-      FieldName = 'COD_BARRA'
-      Size = 10
-    end
-    object DateField1: TDateField
-      FieldName = 'DTEMISSAO'
-    end
-    object IntegerField1: TIntegerField
-      FieldName = 'NUM_PEDIDO'
-    end
-    object IntegerField2: TIntegerField
-      FieldName = 'ITEM'
+    Left = 715
+    Top = 398
+    object qContadorProcCONTADOR: TIntegerField
+      FieldName = 'CONTADOR'
       Required = True
     end
-    object IntegerField3: TIntegerField
-      FieldName = 'ID_PROCESSO'
-    end
-    object IntegerField4: TIntegerField
-      FieldName = 'ITEM_PROCESSO'
-      Required = True
-    end
-    object StringField2: TStringField
-      FieldName = 'NOME_PROCESSO'
-      Size = 30
-    end
-    object DateField2: TDateField
-      FieldName = 'DTENTRADA'
-    end
-    object DateField3: TDateField
-      FieldName = 'DTBAIXA'
-    end
-    object TimeField1: TTimeField
-      FieldName = 'HRENTRADA'
-    end
-    object TimeField2: TTimeField
-      FieldName = 'HRSAIDA'
-    end
-    object FloatField1: TFloatField
-      FieldName = 'QTD'
-    end
-    object FloatField2: TFloatField
-      FieldName = 'QTD_FATURADO'
-    end
-    object FloatField3: TFloatField
-      FieldName = 'QTD_RESTANTE'
-    end
-    object DateField4: TDateField
-      FieldName = 'DTBAIXA_ITEM'
-    end
-  end
-  object DataSource1: TDataSource
-    DataSet = ClientDataSet1
-    Left = 499
-    Top = 437
   end
 end
