@@ -230,8 +230,8 @@ var
 implementation
 
 uses DmdDatabase, rsDBUtils, uUtilPadrao, USel_Pessoa, uCalculo_NotaFiscal, uUtilCliente, uUtilCobranca, UDMAprovacao_Ped,
-  UConsPessoa_Fin, UConsPedido_Senha, UDMRecNF, USel_ContaOrc, USenha, uGrava_NotaFiscal, USel_Vale, UMenu, UCadNotaFiscal_Desconto,
-  UCadNotaFiscal_Canc, uMenu1, classe.validaemail;
+  UConsPessoa_Fin, UConsPedido_Senha, UDMRecNF, USel_ContaOrc, USenha, uGrava_NotaFiscal, USel_Vale, UMenu, uUtilCliente,
+  UCadNotaFiscal_Desconto, UCadNotaFiscal_Canc, uMenu1, classe.validaemail;
 
 {$R *.dfm}
 
@@ -1416,6 +1416,7 @@ begin
   StaticText2.Visible := False;
   if fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger <> fDMCadNotaFiscal.cdsClienteCODIGO.AsInteger then
     fDMCadNotaFiscal.cdsCliente.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,[loCaseInsensitive]);
+  prc_Verifica_Limite(fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,fDMCadNotaFiscal.cdsNotaFiscalID.AsInteger,fDMCadNotaFiscal.cdsClienteVLR_LIMITE_CREDITO.AsFloat);
   if (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger <> RxDBLookupCombo3.Tag) then
   begin
     if (trim(fDMCadNotaFiscal.cdsClienteCARIMBO.AsString) <> '') then
