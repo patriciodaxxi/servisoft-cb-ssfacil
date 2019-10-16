@@ -77,6 +77,14 @@ object frmSel_Produto: TfrmSel_Produto
       Caption = 'Filial:'
       Visible = False
     end
+    object Label8: TLabel
+      Left = 288
+      Top = 53
+      Width = 29
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Bitola:'
+    end
     object Edit1: TEdit
       Left = 320
       Top = 2
@@ -98,7 +106,7 @@ object frmSel_Produto: TfrmSel_Produto
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 6
       OnClick = BitBtn1Click
     end
     object ComboBox1: TComboBox
@@ -134,7 +142,7 @@ object frmSel_Produto: TfrmSel_Produto
       Height = 21
       TabStop = False
       CharCase = ecUpperCase
-      TabOrder = 4
+      TabOrder = 5
       OnKeyDown = Edit3KeyDown
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
@@ -155,7 +163,7 @@ object frmSel_Produto: TfrmSel_Produto
       Top = 21
       Width = 35
       Height = 28
-      TabOrder = 6
+      TabOrder = 7
       Visible = False
       OnClick = BitBtn2Click
       Glyph.Data = {
@@ -225,9 +233,18 @@ object frmSel_Produto: TfrmSel_Produto
       LookupField = 'ID'
       LookupDisplay = 'NOME_INTERNO'
       LookupSource = dsFilial
-      TabOrder = 7
+      TabOrder = 8
       Visible = False
       OnKeyDown = RxDBLookupCombo1KeyDown
+    end
+    object Edit5: TEdit
+      Left = 320
+      Top = 46
+      Width = 129
+      Height = 21
+      CharCase = ecUpperCase
+      TabOrder = 4
+      OnKeyDown = Edit5KeyDown
     end
   end
   object SMDBGrid1: TSMDBGrid

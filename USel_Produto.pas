@@ -132,6 +132,8 @@ type
     cdsProdutoMEDIDA: TStringField;
     qParamertros_Ped: TSQLQuery;
     qParamertros_PedPEDIDO_COMERCIO: TStringField;
+    Label8: TLabel;
+    Edit5: TEdit;
     procedure BitBtn1Click(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -157,6 +159,8 @@ type
     procedure Edit2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
+    procedure Edit5KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     procedure prc_Consultar;
@@ -282,6 +286,9 @@ begin
     sdsProduto.CommandText := sdsProduto.CommandText + ' AND PRO.ID_CLIENTE = ' + IntToStr(RxDBLookupCombo1.KeyValue);
   if qParametrosUSA_PRODUTO_FILIAL.AsString = 'S' then
     sdsProduto.CommandText := sdsProduto.CommandText + ' AND PRO.FILIAL = :FILIAL ';
+  if (Edit5.Visible) and (Edit5.Text <> '') then
+    sdsProduto.CommandText := sdsProduto.CommandText + ' AND PRO.MEDIDA LIKE ' + QuotedStr('%'+Edit5.Text+'%');
+  
   sdsProduto.ParamByName('FILIAL').AsInteger := vFilial;
   cdsProduto.Open;
 end;
@@ -338,11 +345,16 @@ procedure TfrmSel_Produto.Edit1KeyDown(Sender: TObject; var Key: Word; Shift: TS
 begin
   if Key = Vk_Return then
   begin
-    if (trim(qParametrosMOSTRAR_MARCAR_PROD.AsString) <> 'S') or ((qParametrosMOSTRAR_MARCAR_PROD.AsString = 'S') and (trim(Edit4.Text) = ''))
-      or (trim(Edit1.Text) <> '') then
-      BitBtn1Click(Sender);
-    if not cdsProduto.IsEmpty then
-      SMDBGrid1.SetFocus;
+    if Edit5.Visible then
+      Edit5.SetFocus
+    else
+    begin
+      if (trim(qParametrosMOSTRAR_MARCAR_PROD.AsString) <> 'S') or ((qParametrosMOSTRAR_MARCAR_PROD.AsString = 'S') and (trim(Edit4.Text) = ''))
+        or (trim(Edit1.Text) <> '') then
+        BitBtn1Click(Sender);
+      if not cdsProduto.IsEmpty then
+        SMDBGrid1.SetFocus;
+    end;
   end;
 end;
 
@@ -494,7 +506,8 @@ begin
   end;
   if trim(Edit1.Text) <> '' then
     prc_Consultar;
-
+  Edit5.Visible  := qParamertros_PedPEDIDO_COMERCIO.AsString = 'S';
+  Label8.Visible := qParamertros_PedPEDIDO_COMERCIO.AsString = 'S';
 end;
 
 procedure TfrmSel_Produto.SMDBGrid1TitleClick(Column: TColumn);
@@ -701,6 +714,17 @@ procedure TfrmSel_Produto.FormCreate(Sender: TObject);
 begin
   ctProdutoLocal := sdsProduto.CommandText;
   ctProdAux      := sdsProdAux.CommandText;
+end;
+
+procedure TfrmSel_Produto.Edit5KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = Vk_Return then
+  begin
+    BitBtn1Click(Sender);
+    if not cdsProduto.IsEmpty then
+      SMDBGrid1.SetFocus;
+  end;
 end;
 
 end.

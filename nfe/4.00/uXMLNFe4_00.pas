@@ -1163,7 +1163,7 @@ begin
       end
       else
       begin
-        Exp.ExportInd.ChNFe   := fDMCadNotaFiscal.cdsNotaFiscal_DrawBackNUM_CHAVE_ACESSO_NFE.AsString;
+        Exp.ExportInd.ChNFe   := Trim(fDMCadNotaFiscal.cdsNotaFiscal_DrawBackNUM_CHAVE_ACESSO_NFE.AsString);
         Exp.ExportInd.QExport := Replace(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_DrawBackQTD.AsFloat),',','.');
       end;
 
