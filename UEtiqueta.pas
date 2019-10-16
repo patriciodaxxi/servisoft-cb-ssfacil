@@ -12,6 +12,7 @@ Uses
   procedure prc_Etiq_Adesiva_EllaStore(fDMConsPedido: TDMConsPedido; Qtd_Parcela: Integer);
   procedure prc_Etiq_Adesiva_Argox_RCStore(fDMConsPedido: TDMConsPedido);
   procedure prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido: TDMConsPedido);
+  procedure prc_Etiq_Tag_BellaVista1(fDmConsPedido: TDmConsPedido);
 
 implementation
 
@@ -1322,6 +1323,85 @@ begin
       Imprimir_Argox
     else
       Imprimir_Honeyweel;
+  end;
+
+  CloseFile(F);
+end;
+
+procedure prc_Etiq_Tag_BellaVista1(fDmConsPedido: TDmConsPedido);
+var
+  F: TextFile;
+  vTexto: String;
+  vId: String;
+  vRef: String;
+  vMarca: String;
+  vPreco: Real;
+  i: Integer;
+
+  procedure Imprimir_Argox;
+  begin
+    //Cabeçalho
+    if fDMConsPedido.qParametros_EtiqINF_ENTER.AsString = 'S' then
+    begin
+      Writeln(F,'n');
+      Writeln(F,'M0500');
+      Writeln(F,'O'+FormatFloat('0000',fDMConsPedido.qParametros_EtiqOFFSET_BORDA.AsInteger));
+      Writeln(F,'V0');
+      Writeln(F,'f'+FormatFloat('000',fDMConsPedido.qParametros_EtiqBACKFEED.AsInteger));
+      Writeln(F,'D');
+      Writeln(F,'L');
+      Writeln(F,'R0003');
+      if fDMConsPedido.qParametros_EtiqMARGEM.AsInteger > 0 then
+        Writeln(F,'C'+FormatFloat('0000',fDMConsPedido.qParametros_EtiqMARGEM.AsInteger))
+      else
+        Writeln(F,'C0007');
+      Writeln(F,'D11');
+      Writeln(F,'H'+fDMConsPedido.qParametros_EtiqTEMPERATURA.AsString);
+      Writeln(F,'P'+fDMConsPedido.qParametros_EtiqVELOCIDADE.AsString);
+      Writeln(F,'A2');
+    end;
+
+    //Detalhe
+    writeln(F,'1911A1000170034COD:');
+    writeln(F,'1911A1000170073' + vId);
+    writeln(F,'1911A1000020034R$' + FormatFloat('###,###,##0.00',vPreco));
+    writeln(F,'1911A1000170175' + vMarca);
+    writeln(F,'1911A0600050171'+ vRef);
+
+    //Encerramento
+    if fDMConsPedido.qParametros_EtiqINF_ENTER.AsString = 'S' then
+    begin
+      Write(F,'Q0001'); //Quantidade de impressão
+      Write(F,'E');
+    end;
+  end;
+
+begin
+  fDMConsPedido.qParametros_Etiq.Close;
+  fDMConsPedido.qParametros_Etiq.Open;
+
+  if trim(fDMConsPedido.qParametros_EtiqENDERECO.AsString) = '' then
+  begin
+    MessageDlg('*** Endereço da impressora não informado!', mtError, [mbOk], 0);
+    exit;
+  end;
+
+  AssignFile(F,fDMConsPedido.qParametros_EtiqENDERECO.AsString);
+  ReWrite(F);
+
+  i := 0;
+  fDMConsPedido.mEtiq_Individual.First;
+  while not fDMConsPedido.mEtiq_Individual.Eof do
+  begin
+    vId    := fDMConsPedido.mEtiq_IndividualID_Produto.AsString;
+    vPreco := fDMConsPedido.mEtiq_IndividualPreco_Produto.AsFloat;
+    vMarca := fDMConsPedido.mEtiq_IndividualMarca.AsString;
+    vRef   := fDMConsPedido.mEtiq_IndividualReferencia.AsString;
+
+    if fDMConsPedido.qParametros_EtiqTIPO_IMPRESSORA.AsString = 'ARGOX' then
+      Imprimir_Argox;
+
+    fDMConsPedido.mEtiq_Individual.Next;
   end;
 
   CloseFile(F);
