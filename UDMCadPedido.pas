@@ -3532,6 +3532,7 @@ type
     cdsPedido_Item_ProcessoNOME_PROCESSO: TStringField;
     qParametros_PedUSA_PROCESSO_SIMPLES: TStringField;
     cdsPedido_ItenssdsPedido_Item_Processo: TDataSetField;
+    qParametros_PedPERC_DESCONTO_PADRAO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

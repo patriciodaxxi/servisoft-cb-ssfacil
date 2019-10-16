@@ -15136,6 +15136,9 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedPERC_DESCONTO_PADRAO: TFloatField
+      FieldName = 'PERC_DESCONTO_PADRAO'
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 

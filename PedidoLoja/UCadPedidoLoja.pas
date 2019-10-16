@@ -722,8 +722,13 @@ begin
   Label73.Visible        := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
   dbedtVlrProd.Visible   := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
   if fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString = 'S' then
-    Label33.Caption := 'Referência:'
+    Label33.Caption := 'Referência:';
   //************************
+
+  //16/10/2019
+  if fDMCadPedido.qParametros_PedPEDIDO_COMERCIO.AsString = 'S' then
+    pnlProduto.Height := 40;
+  //***************
 end;
 
 procedure TfrmCadPedidoLoja.prc_Consultar(ID: Integer);
@@ -975,13 +980,14 @@ procedure TfrmCadPedidoLoja.RzPageControl1Change(Sender: TObject);
 begin
   if not(fDMCadPedido.cdsPedido.State in [dsEdit, dsInsert]) then
   begin
+    fDMCadPedido.qParametros_Ped.Close;
+    fDMCadPedido.qParametros_Ped.Open;
     if RzPageControl1.ActivePage = TS_Cadastro then
     begin
       if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or
             (fDMCadPedido.cdsPedido_ConsultaID.AsInteger = 0) then
         exit;
       prc_Posiciona_Pedido;
-
       if fDMCadPedido.cdsFilialSIMPLES.AsString = 'S' then
         fDMCadPedido.prc_Abrir_CSTICMS('S')
       else
@@ -1036,7 +1042,10 @@ begin
   fDMCadPedido.cdsProduto.Locate('ID',fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
   vItemAux := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
   btnAlterar_Itens.Tag := 1;
-  Edit2.Text := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsString;
+  if fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString = 'S' then
+    Edit2.Text := fDMCadPedido.cdsPedido_ItensREFERENCIA.AsString
+  else
+    Edit2.Text := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsString;
   Edit3.Text := fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString;
   edtLote.Text := fDMCadPedido.cdsPedido_ItensNUM_LOTE_CONTROLE.AsString;
   vCodProdutoAnt := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
@@ -2018,10 +2027,12 @@ begin
       prc_Estoque(fDMCadPedido.cdsProdutoID.AsInteger);
     if (btnAlterar_Itens.Tag = 0) and not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit,dsInsert]) then
     begin
+
       prc_Habilita_Itens;
       prc_Inserir_Item;
       ceQtdEmb.Value := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoQTD_EMBALAGEM.AsFloat));
       ceQtdPeca.Value := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoQTD_PECA_EMB.AsFloat));
+      fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.qParametros_PedPERC_DESCONTO_PADRAO.AsFloat));
     end
     else
     if fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger <> StrToInt(trim(Edit2.Text)) then
