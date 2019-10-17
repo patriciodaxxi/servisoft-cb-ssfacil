@@ -21,12 +21,12 @@ object frmEtiq_Individual: TfrmEtiq_Individual
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 912
-    Height = 447
-    ActivePage = TS_ConfImpressora
+    Width = 904
+    Height = 439
+    ActivePage = TS_Avulsa
     ActivePageDefault = TS_Pedido
     Align = alClient
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -35,8 +35,8 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 107
-        Width = 908
-        Height = 317
+        Width = 900
+        Height = 309
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Item2
@@ -148,7 +148,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 908
+        Width = 900
         Height = 107
         Align = alTop
         Color = clSilver
@@ -587,7 +587,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 908
+        Width = 900
         Height = 122
         Align = alTop
         Color = clSilver
@@ -929,7 +929,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         object Panel3: TPanel
           Left = 1
           Top = 1
-          Width = 906
+          Width = 898
           Height = 69
           Align = alTop
           BevelOuter = bvNone
@@ -1065,8 +1065,8 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object SMDBGrid2: TSMDBGrid
         Left = 0
         Top = 122
-        Width = 908
-        Height = 302
+        Width = 900
+        Height = 294
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsmEtiq_Individual

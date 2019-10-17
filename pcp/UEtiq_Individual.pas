@@ -731,6 +731,9 @@ begin
   if fDMConsPedido.cdsParametros_EtiqTIPO_CLIENTE.AsString = 'MAXMODAS' then
     uEtiqueta.prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido)
   else
+  if fDMConsPedido.cdsParametros_EtiqTIPO_CLIENTE.AsString = 'BELLAVIST1' then
+    uEtiqueta.prc_Etiq_Tag_BellaVista1(fDMConsPedido) //bella vista 1 = Sapiranga
+  else
     uEtiqueta.prc_Etiq_Tag_Argox_Ramys(fDMConsPedido);
   SMDBGrid2.EnableScroll;
 end;
