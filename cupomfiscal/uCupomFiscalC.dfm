@@ -578,6 +578,12 @@ object fCupomFiscalC: TfCupomFiscalC
       Width = 25
       Height = 13
       Caption = 'Final:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
     end
     object Label3: TLabel
       Left = 17
@@ -843,7 +849,7 @@ object fCupomFiscalC: TfCupomFiscalC
       Left = 696
       Top = 35
       Width = 105
-      Height = 25
+      Height = 30
       Caption = 'Ajustar ICMS / PIS'
       TabOrder = 11
       Visible = False
