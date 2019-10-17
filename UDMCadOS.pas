@@ -1011,6 +1011,11 @@ type
     cdsDuplicataAPROVADO: TStringField;
     sdsOSNOME: TStringField;
     cdsOSNOME: TStringField;
+    qParametros_SerID_SERVICO_13: TIntegerField;
+    qParametros_SerVECTO_13: TIntegerField;
+    qTotalServico: TSQLQuery;
+    qTotalServicoVLR_TOTAL: TFloatField;
+    qParametros_SerNOME_SERVICO_INT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspOSUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

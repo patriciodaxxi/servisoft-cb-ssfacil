@@ -754,7 +754,7 @@ object DMCadOS: TDMCadOS
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 328
+    Left = 329
     Top = 118
   end
   object dspServico: TDataSetProvider
@@ -829,7 +829,7 @@ object DMCadOS: TDMCadOS
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspCliente'
-    Left = 392
+    Left = 395
     Top = 64
     object cdsClienteCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -1242,7 +1242,7 @@ object DMCadOS: TDMCadOS
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 64
+    Left = 66
     Top = 96
     object sdsOS_Servico_IntID: TIntegerField
       FieldName = 'ID'
@@ -1537,7 +1537,7 @@ object DMCadOS: TDMCadOS
       'WHERE ID = 1')
     SQLConnection = dmDatabase.scoDados
     Left = 824
-    Top = 312
+    Top = 311
     object qParametrosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3858,8 +3858,10 @@ object DMCadOS: TDMCadOS
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT *'
-      'FROM PARAMETROS_SER'
+      'SELECT P.*, S.NOME NOME_SERVICO_INT'
+      'FROM PARAMETROS_SER P'
+      'LEFT JOIN SERVICO_INT S'
+      'ON P.id_servico_13 = S.ID'
       '')
     SQLConnection = dmDatabase.scoDados
     Left = 576
@@ -3887,6 +3889,16 @@ object DMCadOS: TDMCadOS
       FieldName = 'GERAR_DUPLICATA_CONTRATO'
       FixedChar = True
       Size = 1
+    end
+    object qParametros_SerID_SERVICO_13: TIntegerField
+      FieldName = 'ID_SERVICO_13'
+    end
+    object qParametros_SerVECTO_13: TIntegerField
+      FieldName = 'VECTO_13'
+    end
+    object qParametros_SerNOME_SERVICO_INT: TStringField
+      FieldName = 'NOME_SERVICO_INT'
+      Size = 70
     end
   end
   object mOSAux: TClientDataSet
@@ -4880,6 +4892,25 @@ object DMCadOS: TDMCadOS
     end
     object cdsCondPgto_DiaQTDDIAS: TIntegerField
       FieldName = 'QTDDIAS'
+    end
+  end
+  object qTotalServico: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT SUM(I.vlr_total) VLR_TOTAL'
+      'FROM os_servico_int I'
+      'WHERE I.ID = :ID')
+    SQLConnection = dmDatabase.scoDados
+    Left = 739
+    Top = 274
+    object qTotalServicoVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
     end
   end
 end

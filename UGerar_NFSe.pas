@@ -74,6 +74,12 @@ type
     procedure prc_Gerar_Servico_Extra_Rec;
     procedure prc_Gerar_Servico_Extra_NFSe;
 
+    procedure prc_Gravar_Itens(ID_Servico_Int : Integer);
+
+    procedure prc_Gravar_Rec_Itens(ID_Servico_Int : Integer);
+
+    function fnc_Busca_Valor_13 : Real;
+
   public
     { Public declarations }
   end;
@@ -114,6 +120,12 @@ begin
     MessageDlg('*** Filial não informada!', mtError, [mbOk], 0);
     exit;
   end;
+  if (ComboBox3.ItemIndex >= 12) and (fDMCadOS.qParametros_SerID_SERVICO_13.AsInteger <= 0)
+    and (fDMCadOS.qParametros_SerVECTO_13.AsInteger <= 0) then
+  begin
+    MessageDlg('*** Não foi informado o Serviço e o dia do vencimento do 13º!', mtError, [mbOk], 0);
+    exit;
+  end;
   prc_Consultar;
   prc_Consultar_Mov_Servico;
 end;
@@ -132,13 +144,8 @@ begin
     RxDBLookupCombo1.KeyValue := fDMCadOS.cdsFilialID.AsInteger;
   if fDMCadOS.qParametrosUSA_RECIBO_NFSE.AsString <> 'S' then
     ckRecibo.Checked := False;
-  //23/06/2016    Incluindo o agrupamento no Recibo
-  //ckRecibo.Visible        := ((fDMCadOS.qParametrosUSA_RECIBO_NFSE.AsString = 'S') and (fDMCadOS.qParametros_SerAGRUPA_CONTRATO_NFSE.AsString <> 'S'));
-  //btnGerar_Recibo.Visible := ((fDMCadOS.qParametrosUSA_RECIBO_NFSE.AsString = 'S') and (fDMCadOS.qParametros_SerAGRUPA_CONTRATO_NFSE.AsString <> 'S'));
-  //btnConsumo.Visible      := (fDMCadOS.qParametros_SerAGRUPA_CONTRATO_NFSE.AsString <> 'S');
   ckRecibo.Visible        := (fDMCadOS.qParametrosUSA_RECIBO_NFSE.AsString = 'S');
   btnGerar_Recibo.Visible := (fDMCadOS.qParametrosUSA_RECIBO_NFSE.AsString = 'S');
-  //*******************
   fDMCadNotaServico.cdsCliente.Close;
   fDMCadNotaServico.cdsCliente.Open;
 
@@ -159,78 +166,75 @@ var
   vDataIni, vDataFin: TDateTime;
   vDiaAux: Integer;
   vTab, vTab2 : String;
+  vMesAux : Integer;
+  Form : TForm;
 begin
-  vDiaAux  := DaysInAMonth(ceAno.AsInteger,ComboBox3.ItemIndex + 1);
-  vDataIni := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,01);
-  vDataFin := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,vDiaAux);
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
+  try
+    vMesAux := ComboBox3.ItemIndex + 1;
+    if ComboBox3.ItemIndex >= 12 then
+      vMesAux := 12;
+    vDiaAux  := DaysInAMonth(ceAno.AsInteger,12);
+    vDataIni := EncodeDate(ceAno.AsInteger,12,01);
+    vDataFin := EncodeDate(ceAno.AsInteger,12,vDiaAux);
 
-  fDMCadOS.cdsContrato.Close;
-  vComando := ' WHERE (OS.DTCONTRATO_INI <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDataIni)) + ') AND '
-            + ' ((OS.DTCONTRATO_FIN >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDataFin)) + ') or (OS.DTCONTRATO_FIN IS NULL)) '
-            + ' AND ((OS.DTENCERRAMENTO IS NULL) or (OS.DTENCERRAMENTO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDataFin)) + '))'
-            + ' AND (OS.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue) + ')';
-  case ComboBox1.ItemIndex of
-    0: vOpcaoAux := 'NOT';
-    1: vOpcaoAux := '';
+    fDMCadOS.cdsContrato.Close;
+    vComando := ' WHERE (OS.DTCONTRATO_INI <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDataIni)) + ') AND '
+              + ' ((OS.DTCONTRATO_FIN >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDataFin)) + ') or (OS.DTCONTRATO_FIN IS NULL)) '
+              + ' AND ((OS.DTENCERRAMENTO IS NULL) or (OS.DTENCERRAMENTO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDataFin)) + '))'
+              + ' AND (OS.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue) + ')';
+    case ComboBox1.ItemIndex of
+      0: vOpcaoAux := 'NOT';
+      1: vOpcaoAux := '';
+    end;
+    vTab  := 'NOTASERVICO';
+    vTab2 := 'RECIBO';
+    if fDMCadOS.qParametros_SerAGRUPA_CONTRATO_NFSE.AsString = 'S' then
+    begin
+      vTab  := 'NOTASERVICO_CONTRATO';
+      vTab2 := 'RECIBO_CONTRATO';
+    end;
+    vComando := vComando + ' AND ((' + vOpcaoAux + ' EXISTS( SELECT 1 FROM ' + vTab + ' NS '
+              + ' WHERE NS.NUM_CONTRATO = OS.NUM_CONTRATO '
+              + '   AND NS.ANO_CONTRATO = OS.ANO_CONTRATO '
+              + ' AND NS.ANO_REF = ' + ceAno.Text
+              + ' AND NS.MES_REF = ' + IntToStr(ComboBox3.ItemIndex + 1)
+              + ' AND NS.STATUS_RPS = ' + QuotedStr('1') + ')))';
+    if ckRecibo.Checked then
+    begin
+      if Trim(vOpcaoAux) = '' then
+        vOpcaoAux2 := 'OR'
+      else
+        vOpcaoAux2 := 'AND';
+      vComando := vComando + ' ' + vOpcaoAux2 + ' (' + vOpcaoAux + ' EXISTS( SELECT 1 FROM ' + vTab2 + ' REC ' +
+                               ' WHERE REC.NUM_CONTRATO = OS.NUM_CONTRATO ' +
+                               ' AND REC.ANO_CONTRATO = OS.ANO_CONTRATO ' +
+                               ' AND REC.ANO_REF = ' + ceAno.Text +
+                               ' AND REC.MES_REF = ' + IntToStr(ComboBox3.ItemIndex + 1) + '))';
+    end;
+    fDMCadOS.sdsContrato.CommandText := fDMCadOS.ctContrato + vComando;
+    fDMCadOS.cdsContrato.Open;
+  finally
+    FreeAndNil(Form);
   end;
-  //Foi criada a tabela de NotaServico_Contrato e Recibo_Contrato, para controlar quando se agrupar mais de um contrato
-  //na mesma nota ou recibo   23/02/2016
-  {vComando := vComando + ' AND ((' + vOpcaoAux + ' EXISTS( SELECT 1 FROM NOTASERVICO NS '
-            + ' WHERE NS.NUM_CONTRATO = OS.NUM_CONTRATO '
-            + '   AND NS.ANO_CONTRATO = OS.ANO_CONTRATO '
-            + ' AND NS.ANO_REF = ' + ceAno.Text
-            + ' AND NS.MES_REF = ' + IntToStr(ComboBox3.ItemIndex + 1)
-            + ' AND NS.STATUS_RPS = ' + QuotedStr('1') + '))';
-  if ckRecibo.Checked then
-  begin
-    if Trim(vOpcaoAux) = '' then
-      vOpcaoAux2 := 'OR'
-    else
-      vOpcaoAux2 := 'AND';
-    vComando := vComando + ' ' + vOpcaoAux2 + ' (' + vOpcaoAux + ' EXISTS( SELECT 1 FROM RECIBO REC ' +
-                             ' WHERE REC.NUM_CONTRATO = OS.NUM_CONTRATO ' +
-                             ' AND REC.ANO_CONTRATO = OS.ANO_CONTRATO ' +
-                             ' AND REC.ANO_REF = ' + ceAno.Text +
-                             ' AND REC.MES_REF = ' + IntToStr(ComboBox3.ItemIndex + 1) + '))';
-  end;}
-  vTab  := 'NOTASERVICO';
-  vTab2 := 'RECIBO';
-  if fDMCadOS.qParametros_SerAGRUPA_CONTRATO_NFSE.AsString = 'S' then
-  begin
-    vTab  := 'NOTASERVICO_CONTRATO';
-    vTab2 := 'RECIBO_CONTRATO';
-  end;
-  vComando := vComando + ' AND ((' + vOpcaoAux + ' EXISTS( SELECT 1 FROM ' + vTab + ' NS '
-            + ' WHERE NS.NUM_CONTRATO = OS.NUM_CONTRATO '
-            + '   AND NS.ANO_CONTRATO = OS.ANO_CONTRATO '
-            + ' AND NS.ANO_REF = ' + ceAno.Text
-            + ' AND NS.MES_REF = ' + IntToStr(ComboBox3.ItemIndex + 1)
-            + ' AND NS.STATUS_RPS = ' + QuotedStr('1') + ')))';
-  if ckRecibo.Checked then
-  begin
-    if Trim(vOpcaoAux) = '' then
-      vOpcaoAux2 := 'OR'
-    else
-      vOpcaoAux2 := 'AND';
-    vComando := vComando + ' ' + vOpcaoAux2 + ' (' + vOpcaoAux + ' EXISTS( SELECT 1 FROM ' + vTab2 + ' REC ' +
-                             ' WHERE REC.NUM_CONTRATO = OS.NUM_CONTRATO ' +
-                             ' AND REC.ANO_CONTRATO = OS.ANO_CONTRATO ' +
-                             ' AND REC.ANO_REF = ' + ceAno.Text +
-                             ' AND REC.MES_REF = ' + IntToStr(ComboBox3.ItemIndex + 1) + '))';
-  end;
-  fDMCadOS.sdsContrato.CommandText := fDMCadOS.ctContrato + vComando;
-  fDMCadOS.cdsContrato.Open;
 end;
 
 procedure TfrmGerar_NFSe.btnConfBaixaClick(Sender: TObject);
 var
   vID_Aux : Integer;
+  vID_Servico, vDia_Vecto : Integer;
 begin
-  vFilial := RxDBLookupCombo1.KeyValue;
+  if (ComboBox3.ItemIndex >= 12) and (fDMCadOS.qParametros_SerID_SERVICO_13.AsInteger <= 0)
+    and (fDMCadOS.qParametros_SerVECTO_13.AsInteger <= 0) then
+  begin
+    MessageDlg('*** Não foi informado o Serviço e o dia do vencimento do 13º!', mtError, [mbOk], 0);
+    exit;
+  end;
 
+  vFilial := RxDBLookupCombo1.KeyValue;
   prc_Gravar_mServico_Extra;
   fDMCadOS.mOSAux.EmptyDataSet;
-
 
   vContador_NFSe := 0;
   fDMCadOS.vMSGNotaGerada := '';
@@ -241,17 +245,22 @@ begin
     fDMCadOS.cdsContrato.First;
     while not fDMCadOS.cdsContrato.Eof do
     begin
+      vDia_Vecto := fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger;
+      if ComboBox3.ItemIndex >= 12 then
+        vDia_Vecto := fDMCadOS.qParametros_SerVECTO_13.AsInteger;
       if (SMDBGrid1.SelectedRows.CurrentRowSelected) and
          not(fDMCadOS.fnc_Nota_Gerada(ceAno.AsInteger,ComboBox3.ItemIndex + 1,
          fDMCadOS.cdsContratoNUM_CONTRATO.AsInteger,
          fDMCadOS.cdsContratoANO_CONTRATO.AsInteger))
-         and (fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger > 0) then
+         //and (fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger > 0) then   16/10/2019
+         and (vDia_Vecto > 0) then
       begin
         vID_Aux := fDMCadOS.cdsContratoID.AsInteger;
+
         if fDMCadOS.mOSAux.Locate('ID_Cliente;ID_Servico_Padrao;ID_Vendedor;Perc_Comissao;Dia_Vencimento',
                                VarArrayOf([fDMCadOS.cdsContratoID_CLIENTE.AsInteger,fDMCadOS.cdsContratoID_SERVICO.AsInteger,
                                            fDMCadOS.cdsContratoID_VENDEDOR.AsInteger,StrToFloat(FormatFloat('0.0000',
-                                           fDMCadOS.cdsContratoPERC_COMISSAO.AsFloat)),fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger]),
+                                           fDMCadOS.cdsContratoPERC_COMISSAO.AsFloat)),vDia_Vecto]),
                                            [locaseinsensitive]) then
         begin
           vID_Aux := fDMCadOS.mOSAuxID.AsInteger;
@@ -261,7 +270,7 @@ begin
         fDMCadOS.mOSAuxID_Contrato.AsInteger       := fDMCadOS.cdsContratoID.AsInteger;
         fDMCadOS.mOSAuxID_Cliente.AsInteger        := fDMCadOS.cdsContratoID_CLIENTE.AsInteger;
         fDMCadOS.mOSAuxID_Servico_Padrao.AsInteger := fDMCadOS.cdsContratoID_SERVICO.AsInteger;
-        fDMCadOS.mOSAuxDia_Vencimento.AsInteger    := fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger;
+        fDMCadOS.mOSAuxDia_Vencimento.AsInteger    := vDia_Vecto;
         fDMCadOS.mOSAuxID_Vendedor.AsInteger       := fDMCadOS.cdsContratoID_VENDEDOR.AsInteger;
         fDMCadOS.mOSAuxPerc_Comissao.AsFloat       := StrToFloat(FormatFloat('0.0000',fDMCadOS.cdsContratoPERC_COMISSAO.AsFloat));
         fDMCadOS.mOSAux.Post;
@@ -276,7 +285,6 @@ begin
       prc_Gravar_NFSe_Agr;
   end
   else
-
   if fDMCadOS.qParametros_SerAGRUPA_CONTRATO_NFSE.AsString <> 'S' then
   begin
     fDMCadOS.cdsContrato.First;
@@ -287,20 +295,19 @@ begin
          fDMCadOS.cdsContratoNUM_CONTRATO.AsInteger,
          fDMCadOS.cdsContratoANO_CONTRATO.AsInteger)) then
       begin
-        if (fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger > 0) or
-           ((fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger <= 0) and (fDMCadOS.qParametros_SerTIPO_COBRANCA_NFSE.AsString = 'C')) then
+        vDia_Vecto := fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger;
+        if ComboBox3.ItemIndex >= 12 then
+          vDia_Vecto := fDMCadOS.qParametros_SerVECTO_13.AsInteger;
+        //16/10/2019
+        //if (fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger > 0) or
+        //   ((fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger <= 0) and (fDMCadOS.qParametros_SerTIPO_COBRANCA_NFSE.AsString = 'C')) then
+        if (vDia_Vecto > 0) or
+           ((vDia_Vecto <= 0) and (fDMCadOS.qParametros_SerTIPO_COBRANCA_NFSE.AsString = 'C')) then
           prc_Gravar_NFSe;
       end;
       fDMCadOS.cdsContrato.Next;
     end;
   end;
-
-  {fDMCadOS.cdsEventos.Close;
-  fDMCadOS.sdsEventos.ParamByName('CLI').AsInteger := 1;
-  fDMCadOS.sdsEventos.ParamByName('DT1').AsDateTime := Date;
-  fDMCadOS.sdsEventos.ParamByName('DT2').AsDateTime := Date;
-  fDMCadOS.cdsEventos.Open;}
-
   fDMCadOS_TAux.mServico_Extra.Filtered := False;
 
   if (trim(fDMCadOS.vMSGNotaGerada) <> '') and (trim(fDMCadOS.vMSGAviso) <> '') then
@@ -330,6 +337,7 @@ var
   vFlag: Boolean;
   vDia, vMes, vAno: Integer;
   vGerar_Parc : Boolean;
+  vDia_Vecto : Integer;
 begin
   vVlrExtras := 0;
   fDMCadOS.prc_Localizar(fDMCadOS.cdsContratoID.AsInteger);
@@ -430,44 +438,26 @@ begin
     fDMCadNotaServico.prc_Busca_IBPT(fDMCadNotaServico.cdsServicoCODIGO_NBS.AsString,'G');
 
     fDMCadOS.cdsOS_Servico_Int.First;
-    while not fDMCadOS.cdsOS_Servico_Int.Eof do
+    if ComboBox3.ItemIndex >= 12 then
+      prc_Gravar_Itens(fDMCadOS.qParametros_SerID_SERVICO_13.AsInteger)
+    else
     begin
-      if StrToFloat(FormatFloat('0.0000',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat)) > 0 then
+      while not fDMCadOS.cdsOS_Servico_Int.Eof do
       begin
-        fDMCadNotaServico.prc_Inserir_Itens;
-        fDMCadNotaServico.cdsNotaServico_ItensVLR_UNITARIO.AsFloat        := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat));
-        fDMCadNotaServico.cdsNotaServico_ItensGERAR_DUPLICATA.AsString    := vGerar_Dup;
-        fDMCadNotaServico.cdsNotaServico_ItensID_SERVICO_INT.AsInteger    := fDMCadOS.cdsOS_Servico_IntID_SERVICO_INT.AsInteger;
-        fDMCadNotaServico.cdsNotaServico_ItensNOME_SERVICO_INT.AsString   := fDMCadOS.cdsOS_Servico_IntNOME_SERVICO_INT.AsString;
-        fDMCadNotaServico.cdsNotaServico_ItensSOMAR_DIMINUIR.AsString     := fDMCadOS.cdsOS_Servico_IntSOMAR_DIMINUIR.AsString;
-        fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_INSS.AsString      := fDMCadOS.cdsOS_Servico_IntCALCULAR_INSS.AsString;
-        fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_IR.AsString        := fDMCadOS.cdsOS_Servico_IntCALCULAR_IR.AsString;
-        fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_ISSQN.AsString     := fDMCadOS.cdsOS_Servico_IntCALCULAR_ISSQN.AsString;
-        fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_PISCOFINS.AsString := fDMCadOS.cdsOS_Servico_IntCALCULAR_PISCOFINS.AsString;
-        if StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat)) > 0 then
-          fDMCadNotaServico.cdsNotaServico_ItensQTD.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat));
-        fDMCadNotaServico.cdsNotaServico_ItensVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00',
-                                                                   fDMCadNotaServico.cdsNotaServico_ItensVLR_UNITARIO.AsFloat *
-                                                                   fDMCadNotaServico.cdsNotaServico_ItensQTD.AsFloat));
-        //05/07/2016
-        prc_Conrole_Tributos_NFSe;
-        //04/07/2016
-        fDMCadNotaServico.cdsNotaServico_ItensID_CONTRATO.AsInteger  := fDMCadOS.cdsOSID.AsInteger;
-        fDMCadNotaServico.cdsNotaServico_ItensANO_CONTRATO.AsInteger := fDMCadOS.cdsOSANO_CONTRATO.AsInteger;
-        fDMCadNotaServico.cdsNotaServico_ItensNUM_CONTRATO.AsInteger := fDMCadOS.cdsOSNUM_CONTRATO.AsInteger;
-        //******************
-        fDMCadNotaServico.cdsNotaServico_Itens.Post;
+        if StrToFloat(FormatFloat('0.0000',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat)) > 0 then
+        begin
+          prc_Gravar_Itens(fDMCadOS.cdsOS_Servico_IntID_SERVICO_INT.AsInteger);
+          fDMCadNotaServico.cdsNotaServico_Itens.Post;
+        end;
+        if (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '2') or (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '3') then //quando há cobrança de franquia
+          prc_Calcular_Franquia;
+        fDMCadOS.cdsOS_Servico_Int.Next;
       end;
-
-      if (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '2') or (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '3') then //quando há cobrança de franquia
-        prc_Calcular_Franquia;
-
-      fDMCadOS.cdsOS_Servico_Int.Next;
     end;
 
-    //14/05/2015 Incluido os serviços extras
     //11/07/2016
-    prc_Gerar_Servico_Extra_NFSe;
+    if ComboBox3.ItemIndex < 12 then
+      prc_Gerar_Servico_Extra_NFSe;
     //***********************
 
     if not(fDMCadNotaServico.cdsNotaServico.State in [dsEdit,dsInsert]) then
@@ -477,22 +467,30 @@ begin
     fDMCadNotaServico.prc_Calcular_Impostos;
 
     //Parcelas
-    //11/04/2016 If colocado para respeitar a opção da condição de pagamento quando o dia de vencimento estiver zerado nos contratos
-    if fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > 0 then
+    vDia_Vecto := fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger;
+    if ComboBox3.ItemIndex >= 12 then
+      vDia_Vecto := fDMCadOS.qParametros_SerVECTO_13.AsInteger;
+    //if fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > 0 then
+    if vDia_Vecto > 0 then
     begin
       fDMCadNotaServico.CDSNotaServico_Parc.Insert;
       fDMCadNotaServico.CDSNotaServico_ParcID.AsInteger   := fDMCadNotaServico.cdsNotaServicoID.AsInteger;
       fDMCadNotaServico.CDSNotaServico_ParcITEM.AsInteger := 1;
-      //28/07/2014 = Foi incluida a opção para calcular automatico o vencimento
-      //fDMCadNotaServico.CDSNotaServico_ParcDTVENCIMENTO.AsDateTime := EncodeDate(CurrencyEdit1.AsInteger,ComboBox2.ItemIndex+1,vDia);
-      if fDMCadOS.cdsOSOPCAO_VENCIMENTO_MREF.AsString = 'S' then
+      if (fDMCadOS.cdsOSOPCAO_VENCIMENTO_MREF.AsString = 'S') or (ComboBox3.ItemIndex >= 12) then
       begin
-        vDias_Mes := DaysInAMonth(ceAno.AsInteger,ComboBox3.ItemIndex+1);
-        if fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > vDias_Mes then
+        if ComboBox3.ItemIndex >= 12 then
+          vDias_Mes := 31
+        else
+          vDias_Mes := DaysInAMonth(ceAno.AsInteger,ComboBox3.ItemIndex+1);
+        //if fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > vDias_Mes then
+        if vDia_Vecto > vDias_Mes then
           vDia := vDias_Mes
         else
-          vDia := fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger;
-        fDMCadNotaServico.CDSNotaServico_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,vDia);
+          vDia := vDia_Vecto;
+        if ComboBox3.ItemIndex >= 12 then
+          fDMCadNotaServico.CDSNotaServico_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,12,vDia)
+        else
+          fDMCadNotaServico.CDSNotaServico_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,vDia);
       end
       else
       begin
@@ -536,8 +534,9 @@ begin
         end;
       end;
     end;
-    //aqui testar
-    if (vGerar_Parc) and (fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > 0) then
+
+    //if (vGerar_Parc) and (fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > 0)   then
+    if (vGerar_Parc) and (vDia_Vecto > 0)   then
     begin
       fDMCadNotaServico.CDSNotaServico_ParcVLR_VENCIMENTO.AsFloat := fDMCadNotaServico.cdsNotaServicoVLR_DUPLICATA.AsFloat;
       if fDMCadOS.cdsOSID_TIPO_COBRANCA.AsInteger > 0 then
@@ -574,13 +573,22 @@ end;
 
 procedure TfrmGerar_NFSe.btnGerar_ReciboClick(Sender: TObject);
 var
-  vID_Aux : Integer;
+  vID_Aux    : Integer;
+  vDia_Vecto : Integer;
 begin
+  if (ComboBox3.ItemIndex >= 12) and (fDMCadOS.qParametros_SerID_SERVICO_13.AsInteger <= 0)
+    and (fDMCadOS.qParametros_SerVECTO_13.AsInteger <= 0) then
+  begin
+    MessageDlg('*** Não foi informado o Serviço e o dia do vencimento do 13º!', mtError, [mbOk], 0);
+    exit;
+  end;
+  
   vFilial                 := RxDBLookupCombo1.KeyValue;
   vContador_NFSe          := 0;
   fDMCadOS.vMSGNotaGerada := '';
 
-  prc_Gravar_mServico_Extra;
+  if ComboBox3.ItemIndex < 12 then
+    prc_Gravar_mServico_Extra;
   fDMCadOS.mOSAux.EmptyDataSet;
 
   //23/06/2016   agrupando Contratos no Recibo
@@ -589,17 +597,21 @@ begin
     fDMCadOS.cdsContrato.First;
     while not fDMCadOS.cdsContrato.Eof do
     begin
+      //16/10/2019
+      vDia_Vecto := fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger;
+      if ComboBox3.ItemIndex >= 12 then
+        vDia_Vecto := fDMCadOS.qParametros_SerVECTO_13.AsInteger;
       if (SMDBGrid1.SelectedRows.CurrentRowSelected) and
          not(fDMCadOS.fnc_Recibo_Gerado(ceAno.AsInteger,ComboBox3.ItemIndex + 1))
          //fDMCadOS.cdsContratoNUM_CONTRATO.AsInteger,
          //fDMCadOS.cdsContratoANO_CONTRATO.AsInteger))
-         and (fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger > 0) then
+         and (vDia_Vecto > 0) then
       begin
         vID_Aux := fDMCadOS.cdsContratoID.AsInteger;
         if fDMCadOS.mOSAux.Locate('ID_Cliente;ID_Servico_Padrao;ID_Vendedor;Perc_Comissao;Dia_Vencimento',
                                VarArrayOf([fDMCadOS.cdsContratoID_CLIENTE.AsInteger,fDMCadOS.cdsContratoID_SERVICO.AsInteger,
                                            fDMCadOS.cdsContratoID_VENDEDOR.AsInteger,StrToFloat(FormatFloat('0.0000',
-                                           fDMCadOS.cdsContratoPERC_COMISSAO.AsFloat)),fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger]),
+                                           fDMCadOS.cdsContratoPERC_COMISSAO.AsFloat)),vDia_Vecto]),
                                            [locaseinsensitive]) then
         begin
           vID_Aux := fDMCadOS.mOSAuxID.AsInteger;
@@ -609,7 +621,7 @@ begin
         fDMCadOS.mOSAuxID_Contrato.AsInteger := fDMCadOS.cdsContratoID.AsInteger;
         fDMCadOS.mOSAuxID_Cliente.AsInteger  := fDMCadOS.cdsContratoID_CLIENTE.AsInteger;
         fDMCadOS.mOSAuxID_Servico_Padrao.AsInteger := fDMCadOS.cdsContratoID_SERVICO.AsInteger;
-        fDMCadOS.mOSAuxDia_Vencimento.AsInteger    := fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger;
+        fDMCadOS.mOSAuxDia_Vencimento.AsInteger    := vDia_Vecto;
         fDMCadOS.mOSAuxID_Vendedor.AsInteger       := fDMCadOS.cdsContratoID_VENDEDOR.AsInteger;
         fDMCadOS.mOSAuxPerc_Comissao.AsFloat       := StrToFloat(FormatFloat('0.0000',fDMCadOS.cdsContratoPERC_COMISSAO.AsFloat));
         fDMCadOS.mOSAux.Post;
@@ -630,8 +642,12 @@ begin
       if (SMDBGrid1.SelectedRows.CurrentRowSelected) and
          not(fDMCadOS.fnc_Recibo_Gerado(ceAno.AsInteger,ComboBox3.ItemIndex + 1)) then
       begin
-        if (fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger > 0) or
-           ((fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger <= 0) and (fDMCadOS.qParametros_SerTIPO_COBRANCA_NFSE.AsString = 'C')) then
+        vDia_Vecto := fDMCadOS.cdsContratoDIA_VENCIMENTO.AsInteger;
+        if ComboBox3.ItemIndex >= 12 then
+          vDia_Vecto := fDMCadOS.qParametros_SerVECTO_13.AsInteger;
+
+        if (vDia_Vecto > 0) or
+           ((vDia_Vecto <= 0) and (fDMCadOS.qParametros_SerTIPO_COBRANCA_NFSE.AsString = 'C')) then
           prc_Gravar_Recibo;
       end;
       fDMCadOS.cdsContrato.Next;
@@ -664,6 +680,7 @@ var
   vTexto: String;
   vDtInicioDupl : TDateTime;
   vGerar_Parc : Boolean;
+  vDia_Vecto : Integer;
 begin
   vVlrExtras := 0;
   fDMCadOS.prc_Localizar(fDMCadOS.cdsContratoID.AsInteger);
@@ -731,63 +748,52 @@ begin
     fDMCadRecibo.qProximo_Num.Close;
 
     fDMCadOS.cdsOS_Servico_Int.First;
-    while not fDMCadOS.cdsOS_Servico_Int.Eof do
+    if ComboBox3.ItemIndex >= 12 then
+      prc_Gravar_Rec_Itens(fDMCadOS.qParametros_SerID_SERVICO_13.AsInteger)
+    else
     begin
-      //05/07/2016
-      if (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '2') or (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '3') then //quando há cobrança de franquia
-        prc_Calcular_Franquia;
-      //*********
-      if StrToFloat(FormatFloat('0.0000',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat)) > 0 then //05/07/2016
+      while not fDMCadOS.cdsOS_Servico_Int.Eof do
       begin
-        fDMCadRecibo.prc_Inserir_Itens;
-        fDMCadRecibo.cdsRecibo_ItensID_SERVICO_INT.AsInteger  := fDMCadOS.cdsOS_Servico_IntID_SERVICO_INT.AsInteger;
-        fDMCadRecibo.cdsRecibo_ItensNOME_SERVICO_INT.AsString := fDMCadOS.cdsOS_Servico_IntNOME_SERVICO_INT.AsString;
-        //05/07/2016  foi colocado para cima, para não inserir quando não possuir valor
-        //if (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '2') or (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '3') then //quando há cobrança de franquia
-        //  prc_Calcular_Franquia;
-
-        if StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat)) > 0 then
-          fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat))
-        //30/06/2016
-        else
-          fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat := 0;
-        fDMCadRecibo.cdsRecibo_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat));
-        fDMCadRecibo.cdsRecibo_ItensVLR_TOTAL.AsFloat    := StrToFloat(FormatFloat('0.00',fDMCadRecibo.cdsRecibo_ItensVLR_UNITARIO.AsFloat *
-                                                          fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat));
-
-        fDMCadRecibo.cdsRecibo_ItensGERAR_DUPLICATA.AsString := 'S';
-        //04/07/2016
-        fDMCadRecibo.cdsRecibo_ItensID_CONTRATO.AsInteger  := fDMCadOS.cdsOSID.AsInteger;
-        fDMCadRecibo.cdsRecibo_ItensANO_CONTRATO.AsInteger := fDMCadOS.cdsOSANO_CONTRATO.AsInteger;
-        fDMCadRecibo.cdsRecibo_ItensNUM_CONTRATO.AsInteger := fDMCadOS.cdsOSNUM_CONTRATO.AsInteger;
-        //**************
-        fDMCadRecibo.cdsRecibo_Itens.Post;
+        //05/07/2016
+        if (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '2') or (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '3') then //quando há cobrança de franquia
+          prc_Calcular_Franquia;
+        //*********
+        if StrToFloat(FormatFloat('0.0000',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat)) > 0 then //05/07/2016
+          prc_Gravar_Rec_Itens(fDMCadOS.cdsOS_Servico_IntID_SERVICO_INT.AsInteger);
+        fDMCadOS.cdsOS_Servico_Int.Next;
       end;
-      fDMCadOS.cdsOS_Servico_Int.Next;
     end;
 
-    //14/05/2015 Incluido os serviços extras
-    //11/07/2016
-    prc_Gerar_Servico_Extra_Rec;
-    //********************
+    if ComboBox3.ItemIndex < 12 then
+      prc_Gerar_Servico_Extra_Rec;
 
     if not(fDMCadRecibo.cdsRecibo.State in [dsEdit,dsInsert]) then
       fDMCadRecibo.cdsRecibo.Edit;
 
+    vDia_Vecto := fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger;  
+    if ComboBox3.ItemIndex >= 12 then
+      vDia_Vecto := fDMCadOS.qParametros_SerVECTO_13.AsInteger;  
+
     //Parcelas
-    if fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > 0 then
+    if vDia_Vecto > 0 then
     begin
       fDMCadRecibo.cdsRecibo_Parc.Insert;
       fDMCadRecibo.cdsRecibo_ParcID.AsInteger   := fDMCadRecibo.cdsReciboID.AsInteger;
       fDMCadRecibo.cdsRecibo_ParcITEM.AsInteger := 1;
-      if fDMCadOS.cdsOSOPCAO_VENCIMENTO_MREF.AsString = 'S' then
+      if (fDMCadOS.cdsOSOPCAO_VENCIMENTO_MREF.AsString = 'S') or (ComboBox3.ItemIndex >= 12) then
       begin
-        vDias_Mes := DaysInAMonth(ceAno.AsInteger,ComboBox3.ItemIndex+1);
-        if fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > vDias_Mes then
+        if ComboBox3.ItemIndex >= 12 then
+          vDias_Mes := 31
+        else
+          vDias_Mes := DaysInAMonth(ceAno.AsInteger,ComboBox3.ItemIndex+1);
+        if vDia_Vecto > vDias_Mes then
           vDia := vDias_Mes
         else
-          vDia := fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger;
-        fDMCadRecibo.cdsRecibo_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,vDia);
+          vDia := vDia_Vecto;
+        if ComboBox3.ItemIndex >= 12 then
+          fDMCadRecibo.cdsRecibo_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,12,vDia)
+        else
+          fDMCadRecibo.cdsRecibo_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,vDia);
       end
       else
       begin
@@ -915,7 +921,10 @@ var
   vAno, vMes, vDia: Word;
 begin
   vAnoMes  := ceAno.Text + '/' + IntToStr(Combobox3.ItemIndex + 1);
-  vDataAnt := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex +1,1);
+  if ComboBox3.ItemIndex >= 12 then
+    vDataAnt := EncodeDate(ceAno.AsInteger,12,1)
+  else
+    vDataAnt := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex +1,1);
   vDataAnt := IncMonth(vDataAnt,-1);
   DecodeDate(vDataAnt,vAno,vMes,vDia);
   vAnoMesAnt := IntToStr(vAno) + '/' + IntToStr(vMes);
@@ -1004,8 +1013,6 @@ begin
     fDMCadOS.mOSAux.First;
     while not fDMCadOS.mOSAux.Eof do
     begin
-      //05/12/2016
-      //fDMCadOS.prc_Localizar(fDMCadOS.mOSAuxID_Contrato.AsInteger);
       vInserir := (vIDAux <> fDMCadOS.mOSAuxID.AsInteger);
       if vInserir then
       begin
@@ -1038,18 +1045,25 @@ begin
       fDMCadNotaServico.prc_Calcular_Impostos;
       if not(fDMCadNotaServico.cdsNotaServico.State in [dsEdit,dsInsert]) then
         fDMCadNotaServico.cdsNotaServico.Edit;
+
       fDMCadOS.cdsOS_Servico_Int.First;
-      while not fDMCadOS.cdsOS_Servico_Int.Eof do
+      if ComboBox3.ItemIndex >= 12 then
+        prc_Gravar_NFSe_Itens_Agr
+      else
       begin
-        if (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '2') or (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '3') then //quando há cobrança de franquia
-          prc_Calcular_Franquia;
-        if StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat)) > 0 then
-          prc_Gravar_NFSe_Itens_Agr;
-        fDMCadOS.cdsOS_Servico_Int.Next;
+        while not fDMCadOS.cdsOS_Servico_Int.Eof do
+        begin
+          if ComboBox3.ItemIndex < 12 then
+          begin
+            if (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '2') or (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '3') then //quando há cobrança de franquia
+              prc_Calcular_Franquia;
+          end;
+          if StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat)) > 0 then
+            prc_Gravar_NFSe_Itens_Agr;
+          fDMCadOS.cdsOS_Servico_Int.Next;
+        end;
+        prc_Gerar_Servico_Extra_NFSe;
       end;
-      //11/07/2016
-      prc_Gerar_Servico_Extra_NFSe;
-      //********************
 
       vIDAux := fDMCadOS.mOSAuxID.AsInteger;
       prc_Gravar_NFSe_Contrato_Agr;
@@ -1089,20 +1103,27 @@ begin
   fDMCadNotaServico.prc_Inserir_Itens;
   fDMCadNotaServico.cdsNotaServico_ItensVLR_UNITARIO.AsFloat        := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat));
   fDMCadNotaServico.cdsNotaServico_ItensGERAR_DUPLICATA.AsString    := vGerar_Dup;
-  fDMCadNotaServico.cdsNotaServico_ItensID_SERVICO_INT.AsInteger    := fDMCadOS.cdsOS_Servico_IntID_SERVICO_INT.AsInteger;
-  fDMCadNotaServico.cdsNotaServico_ItensNOME_SERVICO_INT.AsString   := fDMCadOS.cdsOS_Servico_IntNOME_SERVICO_INT.AsString;
+  if ComboBox3.ItemIndex >= 12 then
+  begin
+    fDMCadNotaServico.cdsNotaServico_ItensVLR_UNITARIO.AsFloat      := StrToFloat(FormatFloat('0.00',fnc_Busca_Valor_13));
+    fDMCadNotaServico.cdsNotaServico_ItensID_SERVICO_INT.AsInteger  := fDMCadOS.qParametros_SerID_SERVICO_13.AsInteger;
+    fDMCadNotaServico.cdsNotaServico_ItensNOME_SERVICO_INT.AsString := fDMCadOS.qParametros_SerNOME_SERVICO_INT.AsString;
+  end
+  else
+  begin
+    fDMCadNotaServico.cdsNotaServico_ItensID_SERVICO_INT.AsInteger  := fDMCadOS.cdsOS_Servico_IntID_SERVICO_INT.AsInteger;
+    fDMCadNotaServico.cdsNotaServico_ItensNOME_SERVICO_INT.AsString := fDMCadOS.cdsOS_Servico_IntNOME_SERVICO_INT.AsString;
+  end;
   fDMCadNotaServico.cdsNotaServico_ItensSOMAR_DIMINUIR.AsString     := fDMCadOS.cdsOS_Servico_IntSOMAR_DIMINUIR.AsString;
   fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_INSS.AsString      := fDMCadOS.cdsOS_Servico_IntCALCULAR_INSS.AsString;
   fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_IR.AsString        := fDMCadOS.cdsOS_Servico_IntCALCULAR_IR.AsString;
   fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_ISSQN.AsString     := fDMCadOS.cdsOS_Servico_IntCALCULAR_ISSQN.AsString;
   fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_PISCOFINS.AsString := fDMCadOS.cdsOS_Servico_IntCALCULAR_PISCOFINS.AsString;
-
   if StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat)) > 0 then
     fDMCadNotaServico.cdsNotaServico_ItensQTD.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat));
   fDMCadNotaServico.cdsNotaServico_ItensVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00',
                                                              fDMCadNotaServico.cdsNotaServico_ItensVLR_UNITARIO.AsFloat *
                                                              fDMCadNotaServico.cdsNotaServico_ItensQTD.AsFloat));
-
   if fDMCadNotaServico.cdsServico_IntID.AsInteger <> fDMCadNotaServico.cdsNotaServico_ItensID_SERVICO_INT.AsInteger then
     fDMCadNotaServico.cdsServico_Int.Locate('ID',fDMCadNotaServico.cdsNotaServico_ItensID_SERVICO_INT.AsInteger,[loCaseInsensitive]);
   if fDMCadNotaServico.cdsServicoID.AsInteger <> fDMCadNotaServico.cdsNotaServicoID_SERVICO.AsInteger then
@@ -1225,20 +1246,31 @@ var
   vMes: Integer;
   vAno: Integer;
   vGerar_Parc : Boolean;
+  vDia_Vecto : Integer;
 begin
   fDMCadNotaServico.CDSNotaServico_Parc.Insert;
   fDMCadNotaServico.CDSNotaServico_ParcID.AsInteger   := fDMCadNotaServico.cdsNotaServicoID.AsInteger;
   fDMCadNotaServico.CDSNotaServico_ParcITEM.AsInteger := 1;
 
-  if fDMCadOS.cdsOSOPCAO_VENCIMENTO_MREF.AsString = 'S' then
+  vDia_Vecto := fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger;
+  if ComboBox3.ItemIndex >= 12 then
+    vDia_Vecto := fDMCadOS.qParametros_SerVECTO_13.AsInteger;
+
+  if (fDMCadOS.cdsOSOPCAO_VENCIMENTO_MREF.AsString = 'S') or (ComboBox3.ItemIndex >= 12) then
   begin
-    vDias_Mes := DaysInAMonth(ceAno.AsInteger,ComboBox3.ItemIndex+1);
-    if fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > vDias_Mes then
+    if ComboBox3.ItemIndex >= 12 then
+      vDias_Mes := 31
+    else
+      vDias_Mes := DaysInAMonth(ceAno.AsInteger,ComboBox3.ItemIndex+1);
+    if vDia_Vecto > vDias_Mes then
       vDia := vDias_Mes
     else
-      vDia := fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger;
-    fDMCadNotaServico.CDSNotaServico_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,vDia);
-  end
+      vDia := vDia_Vecto;
+    if ComboBox3.ItemIndex >= 12 then
+      fDMCadNotaServico.CDSNotaServico_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,12,vDia)
+    else
+      fDMCadNotaServico.CDSNotaServico_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,vDia);
+  end   
   else
   begin
     vMes := (ComboBox3.ItemIndex+1) + 1;
@@ -1249,10 +1281,10 @@ begin
       vAno := vAno + 1;
     end;
     vDias_Mes := DaysInAMonth(vAno,vMes);
-    if fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > vDias_Mes then
+    if vDia_Vecto > vDias_Mes then
       vDia := vDias_Mes
     else
-      vDia := fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger;
+      vDia := vDia_Vecto;
     fDMCadNotaServico.CDSNotaServico_ParcDTVENCIMENTO.AsDateTime := EncodeDate(vAno,vMes,vDia);
   end;
 
@@ -1286,7 +1318,7 @@ end;
 procedure TfrmGerar_NFSe.prc_Gravar_NFSe_Contrato_Agr;
 begin
   fDMCadNotaServico.cdsNotaServico_Contrato.Insert;
-  fDMCadNotaServico.cdsNotaServico_ContratoID.AsInteger := fDMCadNotaServico.cdsNotaServicoID.AsInteger;
+  fDMCadNotaServico.cdsNotaServico_ContratoID.AsInteger           := fDMCadNotaServico.cdsNotaServicoID.AsInteger;
   fDMCadNotaServico.cdsNotaServico_ContratoID_CONTRATO.AsInteger  := fDMCadOS.cdsOSID.AsInteger;
   fDMCadNotaServico.cdsNotaServico_ContratoNUM_CONTRATO.AsInteger := fDMCadOS.cdsOSNUM_CONTRATO.AsInteger;
   fDMCadNotaServico.cdsNotaServico_ContratoANO_CONTRATO.AsInteger := fDMCadOS.cdsOSANO_CONTRATO.AsInteger;
@@ -1339,7 +1371,6 @@ begin
           if not(fDMCadRecibo.cdsRecibo.State in [dsEdit,dsInsert]) then
             fDMCadRecibo.cdsRecibo.Edit;
           fDMCadRecibo.prc_Recalcular;
-          //fDMCadNotaServico.prc_Calcular_Impostos;
           prc_Gravar_Recibo_Parc_Agr;
           if fDMCadRecibo.cdsRecibo.State in [dsEdit,dsInsert] then
             fDMCadRecibo.cdsRecibo.Post;
@@ -1358,22 +1389,26 @@ begin
         vContador_NFSe := vContador_NFSe + 1;
       end;
       fDMCadRecibo.prc_Recalcular;
-      //fDMCadNotaServico.prc_Calcular_Impostos;
       if not(fDMCadRecibo.cdsRecibo.State in [dsEdit,dsInsert]) then
         fDMCadRecibo.cdsRecibo.Edit;
       fDMCadOS.cdsOS_Servico_Int.First;
-      while not fDMCadOS.cdsOS_Servico_Int.Eof do
+      if ComboBox3.ItemIndex >= 12 then
+        prc_Gravar_Recibo_Itens_Agr
+      else
       begin
-        //11/07/2016
-        if (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '2') or (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '3') then //quando há cobrança de franquia
-          prc_Calcular_Franquia;
-        if StrToFloat(FormatFloat('0.0000',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat)) > 0 then
-          prc_Gravar_Recibo_Itens_Agr;
-        fDMCadOS.cdsOS_Servico_Int.Next;
+        while not fDMCadOS.cdsOS_Servico_Int.Eof do
+        begin
+          if ComboBox3.ItemIndex < 12 then
+          begin
+            if (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '2') or (fDMCadOS.cdsOS_Servico_IntTIPO_COB.AsString = '3') then //quando há cobrança de franquia
+              prc_Calcular_Franquia;
+          end;
+          if StrToFloat(FormatFloat('0.0000',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat)) > 0 then
+            prc_Gravar_Recibo_Itens_Agr;
+          fDMCadOS.cdsOS_Servico_Int.Next;
+        end;
+        prc_Gerar_Servico_Extra_Rec;
       end;
-      //11/07/2016
-      prc_Gerar_Servico_Extra_Rec;
-      //***************
       vIDAux := fDMCadOS.mOSAuxID.AsInteger;
       prc_Gravar_Recibo_Contrato_Agr;
       fDMCadOS.mOSAux.Next;
@@ -1384,7 +1419,6 @@ begin
       if not(fDMCadRecibo.cdsRecibo.State in [dsEdit,dsInsert]) then
         fDMCadRecibo.cdsRecibo.Edit;
       fDMCadRecibo.prc_Recalcular;
-      //fDMCadNotaServico.prc_Calcular_Impostos;
       prc_Gravar_Recibo_Parc_Agr;
        prc_Monta_OBS_Recibo;
       fDMCadRecibo.cdsRecibo_Parc.First;
@@ -1419,14 +1453,24 @@ begin
   fDMCadRecibo.cdsRecibo_Parc.Insert;
   fDMCadRecibo.cdsRecibo_ParcID.AsInteger := fDMCadRecibo.cdsReciboID.AsInteger;
   fDMCadRecibo.cdsRecibo_ParcITEM.AsInteger := 1;
-  if fDMCadOS.cdsOSOPCAO_VENCIMENTO_MREF.AsString = 'S' then
+  if (fDMCadOS.cdsOSOPCAO_VENCIMENTO_MREF.AsString = 'S') or (ComboBox3.ItemIndex >= 12) then
   begin
-    vDias_Mes := DaysInAMonth(ceAno.AsInteger,ComboBox3.ItemIndex+1);
-    if fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger > vDias_Mes then
-      vDia := vDias_Mes
+    if ComboBox3.ItemIndex >= 12 then
+    begin
+      vDias_Mes := 12;
+      vDia      := fDMCadOS.qParametros_SerVECTO_13.AsInteger;
+    end
     else
-      vDia := fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger;
-    fDMCadRecibo.cdsRecibo_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,vDia);
+    begin
+      vDias_Mes := DaysInAMonth(ceAno.AsInteger,ComboBox3.ItemIndex+1);
+      vDia      := fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger;
+    end;
+    if vDia > vDias_Mes then
+      vDia := vDias_Mes;
+    if ComboBox3.ItemIndex >= 12 then
+      fDMCadRecibo.cdsRecibo_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,12,vDia)
+    else
+      fDMCadRecibo.cdsRecibo_ParcDTVENCIMENTO.AsDateTime := EncodeDate(ceAno.AsInteger,ComboBox3.ItemIndex+1,vDia);
   end
   else
   begin
@@ -1452,7 +1496,6 @@ begin
     begin
       if fDMCadRecibo.cdsCondPgto_Dia.RecordCount > 1 then
       begin
-        //fDMCadRecibo.cdsRecibo fDMCadNotaServico.cdsNotaServicoDTINICIO_DUPLICATA.AsDateTime := fDMCadNotaServico.CDSNotaServico_ParcDTVENCIMENTO.AsDateTime;
         fDMCadRecibo.cdsRecibo_Parc.Cancel;
         if not fDMCadRecibo.fnc_Gerar_Recibo_Parc then
           MessageDlg(fDMCadRecibo.vMsgErroParc, mtError, [mbOk], 0)
@@ -1515,13 +1558,22 @@ end;
 procedure TfrmGerar_NFSe.prc_Gravar_Recibo_Itens_Agr;
 begin
   fDMCadRecibo.prc_Inserir_Itens;
-  fDMCadRecibo.cdsRecibo_ItensVLR_UNITARIO.AsFloat        := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat));
+  if ComboBox3.ItemIndex >= 12 then
+  begin
+    fDMCadRecibo.cdsRecibo_ItensVLR_UNITARIO.AsFloat      := StrToFloat(FormatFloat('0.00',fnc_Busca_Valor_13));
+    fDMCadRecibo.cdsRecibo_ItensID_SERVICO_INT.AsInteger  := fDMCadOS.qParametros_SerID_SERVICO_13.AsInteger;
+    fDMCadRecibo.cdsRecibo_ItensNOME_SERVICO_INT.AsString := fDMCadOS.qParametros_SerNOME_SERVICO_INT.AsString;
+    fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat               := 1;
+  end
+  else
+  begin
+    fDMCadRecibo.cdsRecibo_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat));
+    fDMCadRecibo.cdsRecibo_ItensID_SERVICO_INT.AsInteger    := fDMCadOS.cdsOS_Servico_IntID_SERVICO_INT.AsInteger;
+    fDMCadRecibo.cdsRecibo_ItensNOME_SERVICO_INT.AsString   := fDMCadOS.cdsOS_Servico_IntNOME_SERVICO_INT.AsString;
+    if StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat)) > 0 then
+      fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat));
+  end;
   fDMCadRecibo.cdsRecibo_ItensGERAR_DUPLICATA.AsString    := vGerar_Dup;
-  fDMCadRecibo.cdsRecibo_ItensID_SERVICO_INT.AsInteger    := fDMCadOS.cdsOS_Servico_IntID_SERVICO_INT.AsInteger;
-  fDMCadRecibo.cdsRecibo_ItensNOME_SERVICO_INT.AsString   := fDMCadOS.cdsOS_Servico_IntNOME_SERVICO_INT.AsString;
-
-  if StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat)) > 0 then
-    fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat));
   fDMCadRecibo.cdsRecibo_ItensVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00',
                                                              fDMCadRecibo.cdsRecibo_ItensVLR_UNITARIO.AsFloat *
                                                              fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat));
@@ -1653,8 +1705,6 @@ begin
   fDMCadOS_TAux.mServico_Extra.First;
   while not fDMCadOS_TAux.mServico_Extra.Eof do
   begin
-    //if (fDMCadOS_TAux.mServico_ExtraID_Servico.AsInteger <= 0) and
-    //   (fDMCadOS_TAux.mServico_ExtraID_Servico.AsInteger = fDMCadNotaServico.cdsNotaServicoID_SERVICO.AsInteger) then
     if (fDMCadOS_TAux.mServico_ExtraID_Servico.AsInteger = fDMCadNotaServico.cdsNotaServicoID_SERVICO.AsInteger) then
     begin
       fDMCadNotaServico.prc_Inserir_Itens;
@@ -1682,6 +1732,88 @@ begin
     else
       fDMCadOS_TAux.mServico_Extra.Next;
   end;
+end;
+
+procedure TfrmGerar_NFSe.prc_Gravar_Itens(ID_Servico_Int : Integer);
+var
+  vVlrAux : Real;
+  vNome_Servico_Int : String;
+begin
+  vVlrAux := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat));
+  vNome_Servico_Int := fDMCadOS.cdsOS_Servico_IntNOME_SERVICO_INT.AsString;
+  if ComboBox3.ItemIndex >= 12 then
+  begin
+    vVlrAux := StrToFloat(FormatFloat('0.00',fnc_Busca_Valor_13));
+    vNome_Servico_Int := fDMCadOS.qParametros_SerNOME_SERVICO_INT.AsString;
+  end;
+
+  fDMCadNotaServico.prc_Inserir_Itens;
+  fDMCadNotaServico.cdsNotaServico_ItensVLR_UNITARIO.AsFloat        := StrToFloat(FormatFloat('0.00',vVlrAux));
+  fDMCadNotaServico.cdsNotaServico_ItensGERAR_DUPLICATA.AsString    := vGerar_Dup;
+  fDMCadNotaServico.cdsNotaServico_ItensID_SERVICO_INT.AsInteger    := ID_Servico_Int;
+  fDMCadNotaServico.cdsNotaServico_ItensNOME_SERVICO_INT.AsString   := vNome_Servico_Int;
+  fDMCadNotaServico.cdsNotaServico_ItensSOMAR_DIMINUIR.AsString     := fDMCadOS.cdsOS_Servico_IntSOMAR_DIMINUIR.AsString;
+  fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_INSS.AsString      := fDMCadOS.cdsOS_Servico_IntCALCULAR_INSS.AsString;
+  fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_IR.AsString        := fDMCadOS.cdsOS_Servico_IntCALCULAR_IR.AsString;
+  fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_ISSQN.AsString     := fDMCadOS.cdsOS_Servico_IntCALCULAR_ISSQN.AsString;
+  fDMCadNotaServico.cdsNotaServico_ItensCALCULAR_PISCOFINS.AsString := fDMCadOS.cdsOS_Servico_IntCALCULAR_PISCOFINS.AsString;
+  if ComboBox3.ItemIndex >= 12 then
+    fDMCadNotaServico.cdsNotaServico_ItensQTD.AsFloat := 1
+  else
+  if StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat)) > 0 then
+    fDMCadNotaServico.cdsNotaServico_ItensQTD.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat));
+  fDMCadNotaServico.cdsNotaServico_ItensVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00',
+                                                             fDMCadNotaServico.cdsNotaServico_ItensVLR_UNITARIO.AsFloat *
+                                                             fDMCadNotaServico.cdsNotaServico_ItensQTD.AsFloat));
+  //05/07/2016
+  prc_Conrole_Tributos_NFSe;
+  //04/07/2016
+  fDMCadNotaServico.cdsNotaServico_ItensID_CONTRATO.AsInteger  := fDMCadOS.cdsOSID.AsInteger;
+  fDMCadNotaServico.cdsNotaServico_ItensANO_CONTRATO.AsInteger := fDMCadOS.cdsOSANO_CONTRATO.AsInteger;
+  fDMCadNotaServico.cdsNotaServico_ItensNUM_CONTRATO.AsInteger := fDMCadOS.cdsOSNUM_CONTRATO.AsInteger;
+  //******************
+end;
+
+procedure TfrmGerar_NFSe.prc_Gravar_Rec_Itens(ID_Servico_Int: Integer);
+var
+  vNome_Servico_Int : String;
+begin
+  vNome_Servico_Int := fDMCadOS.cdsOS_Servico_IntNOME_SERVICO_INT.AsString;
+  if ComboBox3.ItemIndex >= 12 then
+    vNome_Servico_Int := fDMCadOS.qParametros_SerNOME_SERVICO_INT.AsString;
+  fDMCadRecibo.prc_Inserir_Itens;
+  fDMCadRecibo.cdsRecibo_ItensID_SERVICO_INT.AsInteger  := ID_Servico_Int;
+  fDMCadRecibo.cdsRecibo_ItensNOME_SERVICO_INT.AsString := vNome_Servico_Int;
+
+  if StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat)) > 0 then
+    fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadOS.cdsOS_Servico_IntQTD.AsFloat))
+  //30/06/2016
+  else
+    fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat := 0;
+  if ComboBox3.ItemIndex >= 12 then
+    fDMCadRecibo.cdsRecibo_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00',fnc_Busca_Valor_13))
+  else
+    fDMCadRecibo.cdsRecibo_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat));
+
+  fDMCadRecibo.cdsRecibo_ItensVLR_TOTAL.AsFloat    := StrToFloat(FormatFloat('0.00',fDMCadRecibo.cdsRecibo_ItensVLR_UNITARIO.AsFloat *
+                                                    fDMCadRecibo.cdsRecibo_ItensQTD.AsFloat));
+
+  fDMCadRecibo.cdsRecibo_ItensGERAR_DUPLICATA.AsString := 'S';
+  //04/07/2016
+  fDMCadRecibo.cdsRecibo_ItensID_CONTRATO.AsInteger  := fDMCadOS.cdsOSID.AsInteger;
+  fDMCadRecibo.cdsRecibo_ItensANO_CONTRATO.AsInteger := fDMCadOS.cdsOSANO_CONTRATO.AsInteger;
+  fDMCadRecibo.cdsRecibo_ItensNUM_CONTRATO.AsInteger := fDMCadOS.cdsOSNUM_CONTRATO.AsInteger;
+  //**************
+  fDMCadRecibo.cdsRecibo_Itens.Post;
+
+end;
+
+function TfrmGerar_NFSe.fnc_Busca_Valor_13: Real;
+begin
+  fDMCadOS.qTotalServico.Close;
+  fDMCadOS.qTotalServico.ParamByName('ID').AsInteger := fDMCadOS.cdsOSID.AsInteger;
+  fDMCadOS.qTotalServico.Open;
+  Result := StrToFloat(FormatFloat('0.00',fDMCadOS.qTotalServicoVLR_TOTAL.AsFloat));
 end;
 
 end.

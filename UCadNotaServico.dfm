@@ -159,7 +159,6 @@ object frmCadNotaServico: TfrmCadNotaServico
             FieldName = 'SERIE_SUBSTITUIDO'
             Title.Alignment = taCenter
             Title.Caption = 'S'#233'rie Substitu'#237'do'
-            Width = 64
             Visible = True
           end
           item
@@ -227,7 +226,6 @@ object frmCadNotaServico: TfrmCadNotaServico
           item
             Expanded = False
             FieldName = 'NOME_PROVEDOR'
-            Width = 64
             Visible = True
           end
           item
@@ -4089,7 +4087,6 @@ object frmCadNotaServico: TfrmCadNotaServico
                     FieldName = 'lkNome_Conta'
                     Title.Alignment = taCenter
                     Title.Caption = 'Nome Conta'
-                    Width = 64
                     Visible = True
                   end
                   item
@@ -4900,7 +4897,8 @@ object frmCadNotaServico: TfrmCadNotaServico
                   'Setembro'
                   'Outubro'
                   'Novembro'
-                  'Dezembro')
+                  'Dezembro'
+                  '13'#186)
                 ParentCtl3D = False
                 ParentFont = False
                 TabOrder = 1
@@ -4916,7 +4914,8 @@ object frmCadNotaServico: TfrmCadNotaServico
                   '9'
                   '10'
                   '11'
-                  '12')
+                  '12'
+                  '13')
               end
               object DBEdit34: TDBEdit
                 Left = 118

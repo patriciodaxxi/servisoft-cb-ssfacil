@@ -24,7 +24,7 @@ object frmCadContrato: TfrmCadContrato
     Top = 0
     Width = 931
     Height = 672
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadContrato: TfrmCadContrato
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1612,7 +1612,6 @@ object frmCadContrato: TfrmCadContrato
                     FieldName = 'ID_PRODUTO'
                     Title.Alignment = taCenter
                     Title.Caption = 'C'#243'd. Produto'
-                    Width = 64
                     Visible = True
                   end>
               end
