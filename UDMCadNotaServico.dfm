@@ -891,7 +891,15 @@ object DMCadNotaServico: TDMCadNotaServico
   object sdsCliente: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM PESSOA'#13#10'WHERE INATIVO = '#39'N'#39#13#10
+    CommandText = 
+      'SELECT CODIGO, NOME, FANTASIA, PESSOA, CNPJ_CPF, ID_CIDADE, UF, ' +
+      'ID_VENDEDOR, ID_CONDPGTO, ID_CONTABOLETO, ID_TIPOCOBRANCA, ID_RE' +
+      'GIME_TRIB, PERC_COMISSAO, TP_CLIENTE, RETEM_ISS, RETEM_CSLL, RET' +
+      'EM_PISCOFINS, RETEM_INSS, ORGAO_PUBLICO, ID_NATUREZA, DIMINUIR_R' +
+      'ETENCAO, PERC_REDUCAO_INSS, ID_SERVICO, ID_SERVICO_INT, VLR_SERV' +
+      'ICO, CLIENTE_CONTA_ID, EMAIL_NFE, EMAIL_NFE2, EMAIL_PGTO, COBRAR' +
+      '_TAXA_BANCO, VLR_LIMITE_CREDITO, MDIA1, MDIA2'#13#10'FROM PESSOA'#13#10'WHER' +
+      'E INATIVO = '#39'N'#39#13#10'AND TP_CLIENTE = '#39'S'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1777,7 +1785,6 @@ object DMCadNotaServico: TDMCadNotaServico
     Top = 271
   end
   object cdsTipoCobranca: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -1854,7 +1861,6 @@ object DMCadNotaServico: TDMCadNotaServico
     Top = 318
   end
   object cdsContas: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
