@@ -358,30 +358,10 @@ begin
   if not fnc_Verifica_Registro then
     Exit;
 
-{  if tbKeyIsDown(VK_CONTROL) then
-  begin
-  end;
-}
   prc_Posiciona_Pedido;
+  
   if fDMCadPedido.cdsPedido.IsEmpty then
     exit;
-  vMsgAux := '';
-  fDMCadPedido.cdsPedido_Itens.First;
-  while not fDMCadPedido.cdsPedido_Itens.Eof do
-  begin
-    if (fDMCadPedido.cdsPedido_ItensAPROVADO_ORC.AsString = 'A') then
-      vMSGAux := vMSGAux + #13 + '*** Item foi Aprovado!';
-    if (fDMCadPedido.cdsPedido_ItensAPROVADO_ORC.AsString = 'N') then
-      vMSGAux := vMSGAux + #13 + '*** Item foi Reprovado!';
-    if trim(vMsgAux) <> '' then
-      fDMCadPedido.cdsPedido_Itens.Last;
-    fDMCadPedido.cdsPedido_Itens.Next;
-  end;
-  if Trim(vMSGAux) <> '' then
-  begin
-    MessageDlg(vMSGAux, mtInformation, [mbOk], 0);
-    exit;
-  end;
   if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
     exit;
   prc_Excluir_Registro;
@@ -701,12 +681,42 @@ begin
 end;
 
 function TfrmCadOrcamento.fnc_Verifica_Registro: Boolean;
+var
+  sds: TSQLDataSet;
+  vMSGAux: String;
 begin
   Result := False;
   if not(fDMCadPedido.cdsPedido_Consulta.Active) or (fDMCadPedido.cdsPedido_Consulta.IsEmpty) or
         (fDMCadPedido.cdsPedido_ConsultaID.AsInteger < 1) then
     Exit;
-  Result := True;
+
+  vMSGAux := '';  
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT COUNT(1) CONTADOR_APROV, '
+                       + '(SELECT COUNT(1) FROM PEDIDO_ITEM I WHERE I.ID = :ID and i.aprovado_orc = ' + QuotedStr('N') + ' ) CONTADOR_NAO_APROV '
+                       + 'FROM PEDIDO_ITEM I WHERE I.ID = :ID and i.aprovado_orc = ' + QuotedStr('A');
+    sds.ParamByName('ID').AsInteger   := fDMCadPedido.cdsPedido_ConsultaID.AsInteger;
+    sds.Open;
+    if sds.FieldByName('CONTADOR_APROV').AsInteger > 0 then
+      vMSGAux := 'Existe itens Aprovados!'
+    else
+    if sds.FieldByName('CONTADOR_NAO_APROV').AsInteger > 0 then
+    begin
+      if MessageDlg('Existe itens não aprovados, deseja excluir o Orçamento?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+        Result := True;
+    end
+    else
+      Result := True;
+    sds.Close;
+  finally
+    FreeAndNil(sds);
+  end;
+  if trim(vMSGAux) <> '' then
+    MessageDlg(vMSGAux, mtInformation, [mbOk], 0);
 end;
 
 procedure TfrmCadOrcamento.btnExcluir_ItensClick(Sender: TObject);
@@ -718,14 +728,15 @@ begin
     MessageDlg('Item do orçamento esta aprovado, não pode ser excluido!', mtError, [mbOk], 0);
     exit;
   end;
-  if fDMCadPedido.cdsPedido_ItensAPROVADO_ORC.AsString = 'A' then
+  if fDMCadPedido.cdsPedido_ItensAPROVADO_ORC.AsString = 'N' then
   begin
-    MessageDlg('Item do orçamento esta reprovado, não pode ser excluido!', mtError, [mbOk], 0);
-    exit;
+    if MessageDlg('Item do orçamento esta reprovado, deseja excluir o item assim mesmo?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
+      exit;
   end;
 
-  if MessageDlg('Deseja excluir o item selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
-    exit;
+  if fDMCadPedido.cdsPedido_ItensAPROVADO_ORC.AsString <> 'N' then
+    if MessageDlg('Deseja excluir o item selecionado?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
+      exit;
 
   uGrava_Pedido.prc_Excluir_Item_Ped(fDMCadPedido);
 
