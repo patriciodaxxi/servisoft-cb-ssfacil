@@ -23,8 +23,8 @@ object fCupomDevolucao: TfCupomDevolucao
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 892
-    Height = 421
+    Width = 884
+    Height = 413
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -41,8 +41,8 @@ object fCupomDevolucao: TfCupomDevolucao
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 888
-        Height = 314
+        Width = 880
+        Height = 306
         Align = alClient
         Ctl3D = True
         DataSource = dmDevolucao.dsDevolucao
@@ -125,7 +125,7 @@ object fCupomDevolucao: TfCupomDevolucao
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 888
+        Width = 880
         Height = 32
         Align = alTop
         Color = clSilver
@@ -429,8 +429,8 @@ object fCupomDevolucao: TfCupomDevolucao
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 381
-        Width = 888
+        Top = 373
+        Width = 880
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -446,7 +446,7 @@ object fCupomDevolucao: TfCupomDevolucao
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 888
+        Width = 880
         Height = 35
         Align = alTop
         TabOrder = 3
@@ -546,7 +546,7 @@ object fCupomDevolucao: TfCupomDevolucao
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 888
+        Width = 880
         Height = 32
         Align = alTop
         Color = 8404992
@@ -775,8 +775,8 @@ object fCupomDevolucao: TfCupomDevolucao
       object pnlCadastro: TPanel
         Left = 0
         Top = 32
-        Width = 888
-        Height = 366
+        Width = 880
+        Height = 358
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -874,8 +874,8 @@ object fCupomDevolucao: TfCupomDevolucao
         object SMDBGrid2: TSMDBGrid
           Left = 1
           Top = 138
-          Width = 886
-          Height = 227
+          Width = 878
+          Height = 219
           TabStop = False
           Align = alBottom
           Anchors = [akLeft, akTop, akRight, akBottom]
@@ -973,7 +973,7 @@ object fCupomDevolucao: TfCupomDevolucao
         object Panel3: TPanel
           Left = 1
           Top = 109
-          Width = 886
+          Width = 878
           Height = 29
           Align = alBottom
           Color = clSilver
