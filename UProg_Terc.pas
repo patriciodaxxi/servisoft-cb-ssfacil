@@ -23,7 +23,6 @@ type
     NxButton3: TNxButton;
     Label9: TLabel;
     CurrencyEdit3: TCurrencyEdit;
-    SMDBGrid3: TSMDBGrid;
     TS_Liberados: TRzTabSheet;
     RzPageControl2: TRzPageControl;
     TS_Pedido_Lib: TRzTabSheet;
@@ -38,9 +37,33 @@ type
     SMDBGrid2: TSMDBGrid;
     btnImprimir: TNxButton;
     btnImprimir_NaoLib: TNxButton;
+    SMDBGrid3: TSMDBGrid;
+    Label1: TLabel;
+    CurrencyEdit4: TCurrencyEdit;
+    Edit1: TEdit;
+    RadioGroup1: TRadioGroup;
+    Label16: TLabel;
+    Edit8: TEdit;
+    Label17: TLabel;
+    Edit10: TEdit;
+    Label18: TLabel;
+    DateEdit3: TDateEdit;
+    Label19: TLabel;
+    DateEdit4: TDateEdit;
+    Label20: TLabel;
+    Label21: TLabel;
+    Edit11: TEdit;
+    CurrencyEdit7: TCurrencyEdit;
+    TS_Pedido_Sit: TRzTabSheet;
+    SMDBGrid4: TSMDBGrid;
+    Panel2: TPanel;
+    Shape3: TShape;
+    Label14: TLabel;
+    Shape4: TShape;
+    Label15: TLabel;
+    SMDBGrid5: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
-    procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure Edit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure CurrencyEdit1Change(Sender: TObject);
@@ -52,6 +75,12 @@ type
     procedure btnConsultarClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnImprimir_NaoLibClick(Sender: TObject);
+    procedure RzPageControl2Change(Sender: TObject);
+    procedure SMDBGrid4TitleClick(Column: TColumn);
+    procedure SMDBGrid2TitleClick(Column: TColumn);
+    procedure SMDBGrid1TitleClick(Column: TColumn);
+    procedure SMDBGrid4GetCellParams(Sender: TObject; Field: TField;
+      AFont: TFont; var Background: TColor; Highlight: Boolean);
   private
     { Private declarations }
     fDMProg_Terc: TDMProg_Terc;
@@ -61,6 +90,11 @@ type
     procedure prc_Consultar_Pedido_Lib;
     procedure prc_Consultar_Produto_Lib;
     procedure prc_Gravar_Prog_Terc(Qtd : Real);
+    procedure prc_Consultar_Sit;
+
+    procedure prc_scroll(DataSet: TDataSet);
+
+    function fnc_Monta_Condicao : String;
 
     procedure prc_Imprimir_Pedido_Lib;
     procedure prc_Imprimir_Produto_Lib;
@@ -76,7 +110,8 @@ var
 
 implementation
 
-uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, USel_Pessoa;
+uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, USel_Pessoa,
+  USel_ProdNaoLib;
 
 {$R *.dfm}
 
@@ -93,21 +128,9 @@ var
   i: Integer;
 begin
   fDMProg_Terc := TDMProg_Terc.Create(Self);
-
   oDBUtils.SetDataSourceProperties(Self, fDMProg_Terc);
-  //fDMProg_Terc.cdsFilial.First;
-  //if (fDMProg_Terc.cdsFilial.RecordCount < 2) and (fDMProg_Terc.cdsFilialID.AsInteger > 0) then
-  //  RxDBLookupCombo1.KeyValue := fDMProg_Terc.cdsFilialID.AsInteger;
-end;
-
-procedure TfrmProg_Terc.SMDBGrid1TitleClick(Column: TColumn);
-var
-  i: Integer;
-begin
-  ColunaOrdenada := Column.FieldName;
-  //fDMProg_Terc.cdsPedido_Pend.IndexFieldNames := Column.FieldName;
-  for i := 0 to SMDBGrid1.Columns.Count - 1 do
-    SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
+  CurrencyEdit1.SetFocus;
+  fDMProg_Terc.cdsPedido_Sit.AFTERSCROLL := prc_scroll;
 end;
 
 procedure TfrmProg_Terc.Edit1KeyDown(Sender: TObject; var Key: Word;
@@ -130,6 +153,23 @@ begin
     if CurrencyEdit1.AsInteger > 0 then
       Edit2.Text := fnc_Existe_Produto;
     btnConsultar_PendClick(Sender);
+    if not fDMProg_Terc.cdsPedido_Pend.IsEmpty then
+      CurrencyEdit2.SetFocus;
+  end
+  else
+  if Key = VK_F2 then
+  begin
+    vCodProduto_Pos := 0;
+    frmSel_ProdNaoLib := TfrmSel_ProdNaoLib.Create(Self);
+    frmSel_ProdNaoLib.fDMProg_Terc := fDMProg_Terc;
+    frmSel_ProdNaoLib.ShowModal;
+    FreeAndNil(frmSel_ProdNaoLib);
+    if vCodProduto_Pos > 0 then
+    begin
+      CurrencyEdit1.AsInteger := vCodProduto_Pos;;
+      CurrencyEdit1.SetFocus;
+      Edit2.Text := fnc_Existe_Produto;
+    end;
   end;
 end;
 
@@ -252,35 +292,25 @@ begin
   if RzPageControl2.ActivePage = TS_Pedido_Lib then
     prc_Consultar_Pedido_Lib
   else
-    prc_Consultar_Produto_Lib;
+  if RzPageControl2.ActivePage = TS_Produto_Lib then
+    prc_Consultar_Produto_Lib
+  else
+  if RzPageControl2.ActivePage = TS_Pedido_Sit then
+    prc_Consultar_Sit;
 end;
 
 procedure TfrmProg_Terc.prc_Consultar_Pedido_Lib;
-var
-  vComando: String;
 begin
   fDMProg_Terc.cdsPedido_Lib.Close;
-  vComando := '';
-  if RxDBLookupCombo3.Text <> '' then
-    vComando := vComando + ' AND P.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
-  if trim(Edit5.Text) <> '' then
-    vComando := vComando + ' AND CLI.NOME LIKE ' + QuotedStr('%'+Edit5.Text+'%');
-  fDMProg_Terc.sdsPedido_Lib.CommandText := fDMProg_Terc.ctPedido_Lib + vComando;
+  fDMProg_Terc.sdsPedido_Lib.CommandText := fDMProg_Terc.ctPedido_Lib + fnc_Monta_Condicao; 
   fDMProg_Terc.cdsPedido_Lib.Open;
   fDMProg_Terc.cdsPedido_Lib.IndexFieldNames := 'PEDIDO_CLIENTE;DTEMISSAO;ID_PRODUTO';
 end;
 
 procedure TfrmProg_Terc.prc_Consultar_Produto_Lib;
-var
-  vComando: String;
 begin
   fDMProg_Terc.cdsProduto_Lib.Close;
-  vComando := '';
-  if RxDBLookupCombo3.Text <> '' then
-    vComando := vComando + ' AND P.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
-  if trim(Edit5.Text) <> '' then
-    vComando := vComando + ' AND CLI.NOME LIKE ' + QuotedStr('%'+Edit5.Text+'%');
-  fDMProg_Terc.sdsProduto_Lib.CommandText := fDMProg_Terc.ctProduto_Lib + vComando;
+  fDMProg_Terc.sdsProduto_Lib.CommandText := fDMProg_Terc.ctProduto_Lib + fnc_Monta_Condicao;
   fDMProg_Terc.cdsProduto_Lib.Open;
   fDMProg_Terc.cdsProduto_Lib.IndexFieldNames := 'ID_PRODUTO;NOME_CLIENTE';
 end;
@@ -291,7 +321,6 @@ begin
     prc_Imprimir_Pedido_Lib
   else
     prc_Imprimir_Produto_Lib;
-
 end;
 
 procedure TfrmProg_Terc.prc_Imprimir_Pedido_Lib;
@@ -337,6 +366,102 @@ begin
     Exit;
   end;
   fDMProg_Terc.frxReport1.ShowReport;
+end;
+
+procedure TfrmProg_Terc.prc_Consultar_Sit;
+var
+  vComando : String;
+begin
+  fDMProg_Terc.cdsPedido_Sit.Close;
+  fDMProg_Terc.sdsPedido_Sit.CommandText := fDMProg_Terc.ctPedido_Sit + fnc_Monta_Condicao;
+  fDMProg_Terc.cdsPedido_Sit.Open;
+  fDMProg_Terc.cdsPedido_Sit.Open;
+end;
+
+function TfrmProg_Terc.fnc_Monta_Condicao: String;
+var
+  vComando : String;
+  vTexto : String;
+begin
+  Result := '';
+  if RxDBLookupCombo3.Text <> '' then
+    vComando := vComando + ' AND P.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
+  if trim(Edit5.Text) <> '' then
+    vComando := vComando + ' AND CLI.NOME LIKE ' + QuotedStr('%'+Edit5.Text+'%');
+  if CurrencyEdit4.AsInteger > 0 then
+    vComando := vComando + ' AND I.ID_PRODUTO =' + IntToStr(CurrencyEdit4.AsInteger);
+  vTexto := '';
+  if trim(Edit1.Text) <> '' then
+    vTexto := trim(Edit1.Text);
+  if trim(Edit8.Text) <> '' then
+    vTexto := vTexto + '%' + trim(Edit8.Text);
+  if trim(Edit10.Text) <> '' then
+    vTexto := vTexto + '%' + trim(Edit10.Text);
+  if trim(vTexto) <> '' then
+    vComando := vComando + ' AND i.nomeproduto like ' + QuotedStr('%'+vTexto+'%');
+  if DateEdit3.Date > 10 then
+    vComando := vComando + ' AND p.dtemissao >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit3.date));
+  if DateEdit4.Date > 10 then
+    vComando := vComando + ' AND p.dtemissao <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit4.date));
+  if CurrencyEdit7.AsInteger > 0 then
+    vComando := vComando + ' AND P.NUM_PEDIDO =  ' + IntToStr(CurrencyEdit7.AsInteger);
+  if trim(Edit11.Text) <> '' then
+    vComando := vComando + ' AND P.PEDIDO_CLIENTE =  ' + QuotedStr(Edit11.Text);
+  if RzPageControl2.ActivePage = TS_Pedido_Sit then
+  begin
+    case RadioGroup1.ItemIndex of
+      0 : vComando := vComando + ' AND I.QTD_RESTANTE > 0 ';
+      1 : vComando := vComando + ' AND I.QTD_FATURADO > 0 ';
+    end;
+  end;
+  Result := vComando;
+end;
+
+procedure TfrmProg_Terc.RzPageControl2Change(Sender: TObject);
+begin
+  RadioGroup1.Visible := (RzPageControl2.ActivePage = TS_Pedido_Sit);
+  btnImprimir.Visible := (RzPageControl2.ActivePage <> TS_Pedido_Sit);
+end;
+
+procedure TfrmProg_Terc.SMDBGrid4TitleClick(Column: TColumn);
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMProg_Terc.cdsPedido_Sit.IndexFieldNames := Column.FieldName;
+end;
+
+procedure TfrmProg_Terc.SMDBGrid2TitleClick(Column: TColumn);
+var
+  i: Integer;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMProg_Terc.cdsProduto_Lib.IndexFieldNames := Column.FieldName;
+end;
+
+procedure TfrmProg_Terc.SMDBGrid1TitleClick(Column: TColumn);
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMProg_Terc.cdsPedido_Lib.IndexFieldNames := Column.FieldName;
+end;
+
+procedure TfrmProg_Terc.SMDBGrid4GetCellParams(Sender: TObject;
+  Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
+begin
+  if (fDMProg_Terc.cdsPedido_SitQTD_RESTANTE.AsFloat > 0) and (fDMProg_Terc.cdsPedido_SitQTD_FATURADO.AsFloat > 0) then
+    Background  := clAqua
+  else
+  if (fDMProg_Terc.cdsPedido_SitQTD_FATURADO.AsFloat > 0) then
+  begin
+    Background  := clGreen;
+    AFont.Color := clWhite;
+  end;
+end;
+
+procedure TfrmProg_Terc.prc_scroll(DataSet: TDataSet);
+begin
+  fDMProg_Terc.cdsNotas_Ped.Close;
+  fDMProg_Terc.sdsNotas_Ped.ParamByName('ID_PEDIDO').AsInteger   := fDMProg_Terc.cdsPedido_SitID.AsInteger;
+  fDMProg_Terc.sdsNotas_Ped.ParamByName('ITEM_PEDIDO').AsInteger := fDMProg_Terc.cdsPedido_SitITEM.AsInteger;
+  fDMProg_Terc.cdsNotas_Ped.Open;
 end;
 
 end.

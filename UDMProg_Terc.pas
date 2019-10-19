@@ -90,6 +90,46 @@ type
     frxRichObject1: TfrxRichObject;
     frxProduto_Lib: TfrxDBDataset;
     frxPedido_Pend: TfrxDBDataset;
+    sdsProdNaoLib: TSQLDataSet;
+    dspProdNaoLib: TDataSetProvider;
+    cdsProdNaoLib: TClientDataSet;
+    dsProdNaoLib: TDataSource;
+    cdsProdNaoLibID_PRODUTO: TIntegerField;
+    cdsProdNaoLibREFERENCIA: TStringField;
+    cdsProdNaoLibNOME_PRODUTO: TStringField;
+    cdsProdNaoLibQTD: TFloatField;
+    cdsProdNaoLibQTD_RESTANTE: TFloatField;
+    cdsProdNaoLibQTD_FATURADO: TFloatField;
+    cdsProdNaoLibQTD_LIBERADA: TFloatField;
+    cdsProdNaoLibQTD_PENDENTE_LIB: TFloatField;
+    sdsPedido_Sit: TSQLDataSet;
+    dspPedido_Sit: TDataSetProvider;
+    cdsPedido_Sit: TClientDataSet;
+    dsPedido_Sit: TDataSource;
+    cdsPedido_SitID_PRODUTO: TIntegerField;
+    cdsPedido_SitREFERENCIA: TStringField;
+    cdsPedido_SitID: TIntegerField;
+    cdsPedido_SitNUM_PEDIDO: TIntegerField;
+    cdsPedido_SitDTEMISSAO: TDateField;
+    cdsPedido_SitNOME_PRODUTO: TStringField;
+    cdsPedido_SitQTD: TFloatField;
+    cdsPedido_SitQTD_RESTANTE: TFloatField;
+    cdsPedido_SitQTD_FATURADO: TFloatField;
+    cdsPedido_SitQTD_LIBERADA: TFloatField;
+    cdsPedido_SitQTD_PENDENTE_LIB: TFloatField;
+    sdsNotas_Ped: TSQLDataSet;
+    dspNotas_Ped: TDataSetProvider;
+    cdsNotas_Ped: TClientDataSet;
+    dsNotas_Ped: TDataSource;
+    cdsNotas_PedID_NOTA: TIntegerField;
+    cdsNotas_PedITEM_NOTA: TIntegerField;
+    cdsNotas_PedQTD: TFloatField;
+    cdsNotas_PedNUMNOTA: TIntegerField;
+    cdsNotas_PedDTEMISSAO: TDateField;
+    cdsNotas_PedSERIE: TStringField;
+    cdsNotas_PedTIPO_NOTA: TStringField;
+    cdsNotas_PedITEM_PEDIDO: TIntegerField;
+    cdsPedido_SitITEM: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedido_LibCalcFields(DataSet: TDataSet);
   private
@@ -98,6 +138,8 @@ type
   public
     { Public declarations }
     ctPedido_Lib, ctProduto_Lib, ctPedido_Pend : String;
+    ctProdNaoLib : String;
+    ctPedido_Sit : String;
 
     procedure prc_Localizar(ID: Integer); //-1 = Inclusão
     procedure prc_Inserir;
@@ -130,6 +172,8 @@ begin
   ctPedido_Lib  := sdsPedido_Lib.CommandText;
   ctProduto_Lib := sdsProduto_Lib.CommandText;
   ctPedido_Pend := sdsPedido_Pend.CommandText;
+  ctProdNaoLib  := sdsProdNaoLib.CommandText;
+  ctPedido_Sit  := sdsPedido_Sit.CommandText;
 
   cdsFilial.Open;
 

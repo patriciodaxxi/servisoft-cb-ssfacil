@@ -25,7 +25,7 @@ object frmProg_Terc: TfrmProg_Terc
     Width = 995
     Height = 564
     ActivePage = TS_Produto_Pend
-    ActivePageDefault = TS_Liberados
+    ActivePageDefault = TS_Produto_Pend
     Align = alClient
     BoldCurrentTab = True
     Color = 8453888
@@ -38,10 +38,10 @@ object frmProg_Terc: TfrmProg_Terc
       Caption = 'Liberados (Por Pedido/Produto)'
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 56
+        Top = 105
         Width = 991
-        Height = 485
-        ActivePage = TS_Produto_Lib
+        Height = 436
+        ActivePage = TS_Pedido_Sit
         ActivePageDefault = TS_Produto_Lib
         Align = alClient
         BoldCurrentTab = True
@@ -49,9 +49,10 @@ object frmProg_Terc: TfrmProg_Terc
         FlatColor = 16744448
         ParentColor = False
         ShowShadow = False
-        TabIndex = 1
+        TabIndex = 2
         TabOrder = 0
         UseGradients = False
+        OnChange = RzPageControl2Change
         FixedDimension = 19
         object TS_Pedido_Lib: TRzTabSheet
           Color = 16777088
@@ -60,7 +61,7 @@ object frmProg_Terc: TfrmProg_Terc
             Left = 0
             Top = 0
             Width = 989
-            Height = 464
+            Height = 415
             Align = alClient
             Ctl3D = False
             DataSource = DMProg_Terc.dsPedido_Lib
@@ -124,11 +125,19 @@ object frmProg_Terc: TfrmProg_Terc
               end
               item
                 Expanded = False
+                FieldName = 'ID_PRODUTO'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Produto'
+                Visible = True
+              end
+              item
+                Expanded = False
                 FieldName = 'REFERENCIA'
                 ReadOnly = True
                 Title.Alignment = taCenter
                 Title.Caption = 'Refer'#234'ncia'
-                Width = 104
+                Width = 100
                 Visible = True
               end
               item
@@ -137,7 +146,7 @@ object frmProg_Terc: TfrmProg_Terc
                 ReadOnly = True
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome Produto'
-                Width = 176
+                Width = 245
                 Visible = True
               end
               item
@@ -208,14 +217,6 @@ object frmProg_Terc: TfrmProg_Terc
                 Visible = True
               end
               item
-                Expanded = False
-                FieldName = 'ID_PRODUTO'
-                ReadOnly = True
-                Title.Alignment = taCenter
-                Title.Caption = 'ID Produto'
-                Visible = True
-              end
-              item
                 Alignment = taCenter
                 Expanded = False
                 FieldName = 'ID'
@@ -233,7 +234,7 @@ object frmProg_Terc: TfrmProg_Terc
             Left = 0
             Top = 0
             Width = 989
-            Height = 464
+            Height = 415
             Align = alClient
             Ctl3D = False
             DataSource = DMProg_Terc.dsProduto_Lib
@@ -245,7 +246,7 @@ object frmProg_Terc: TfrmProg_Terc
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
-            OnTitleClick = SMDBGrid1TitleClick
+            OnTitleClick = SMDBGrid2TitleClick
             Flat = True
             BandsFont.Charset = DEFAULT_CHARSET
             BandsFont.Color = clWindowText
@@ -310,17 +311,360 @@ object frmProg_Terc: TfrmProg_Terc
               end>
           end
         end
+        object TS_Pedido_Sit: TRzTabSheet
+          Color = 16777088
+          Caption = 'Situa'#231#227'o do Pedido'
+          object SMDBGrid4: TSMDBGrid
+            Left = 0
+            Top = 0
+            Width = 989
+            Height = 255
+            Align = alClient
+            Ctl3D = False
+            DataSource = DMProg_Terc.dsPedido_Sit
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+            ParentCtl3D = False
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnTitleClick = SMDBGrid4TitleClick
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoCheckBoxSelect, eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+            OnGetCellParams = SMDBGrid4GetCellParams
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 27
+            DefaultRowHeight = 17
+            ScrollBars = ssHorizontal
+            ColCount = 15
+            RowCount = 2
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'NUM_PEDIDO'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#186' Ped. Interno'
+                Title.Color = 15000804
+                Width = 55
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ITEM'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'Item'
+                Title.Color = 15000804
+                Width = 33
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'PEDIDO_CLIENTE'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'Pedido Cliente (OC)'
+                Title.Color = 15000804
+                Width = 91
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID_PRODUTO'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Produto'
+                Title.Color = 15000804
+                Width = 52
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'REFERENCIA'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'Refer'#234'ncia'
+                Title.Color = 15000804
+                Width = 91
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_PRODUTO'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Produto'
+                Title.Color = 15000804
+                Width = 395
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'QTD'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtd. Pedido'
+                Title.Color = 15000804
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'QTD_FATURADO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtd. J'#225' Faturado'
+                Width = 68
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Color = 13821650
+                Expanded = False
+                FieldName = 'DTENTREGA'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'Data Entrega'
+                Title.Color = 13821650
+                Width = 70
+                Visible = True
+              end
+              item
+                Color = clMoneyGreen
+                Expanded = False
+                FieldName = 'QTD_PENDENTE_LIB'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtd. N'#227'o Liberada'
+                Title.Color = clMoneyGreen
+                Width = 82
+                Visible = True
+              end
+              item
+                Color = clYellow
+                Expanded = False
+                FieldName = 'QTD_LIBERADA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Qtd. J'#225' Liberada'
+                Title.Color = clYellow
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_CLIENTE'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'Nome Cliente'
+                Title.Color = 15000804
+                Width = 200
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'DTEMISSAO'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'Data Emiss'#227'o'
+                Title.Color = 15000804
+                Width = 71
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID'
+                ReadOnly = True
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Pedido'
+                Title.Color = 15000804
+                Visible = True
+              end>
+          end
+          object Panel2: TPanel
+            Left = 0
+            Top = 391
+            Width = 989
+            Height = 24
+            Align = alBottom
+            TabOrder = 1
+            object Shape3: TShape
+              Left = 42
+              Top = 4
+              Width = 30
+              Height = 16
+              Brush.Color = clAqua
+            end
+            object Label14: TLabel
+              Left = 74
+              Top = 7
+              Width = 53
+              Height = 13
+              Caption = 'Fat. Parcial'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+            end
+            object Shape4: TShape
+              Left = 130
+              Top = 4
+              Width = 30
+              Height = 16
+              Brush.Color = clGreen
+            end
+            object Label15: TLabel
+              Left = 165
+              Top = 6
+              Width = 42
+              Height = 13
+              Caption = 'Faturado'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
+            end
+          end
+          object SMDBGrid5: TSMDBGrid
+            Left = 0
+            Top = 255
+            Width = 989
+            Height = 136
+            Align = alBottom
+            Ctl3D = False
+            DataSource = DMProg_Terc.dsNotas_Ped
+            Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentCtl3D = False
+            ReadOnly = True
+            TabOrder = 2
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            Flat = True
+            BandsFont.Charset = DEFAULT_CHARSET
+            BandsFont.Color = clWindowText
+            BandsFont.Height = -11
+            BandsFont.Name = 'MS Sans Serif'
+            BandsFont.Style = []
+            Groupings = <>
+            GridStyle.Style = gsCustom
+            GridStyle.OddColor = clWindow
+            GridStyle.EvenColor = clWindow
+            TitleHeight.PixelCount = 24
+            FooterColor = clBtnFace
+            ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+            RegistryKey = 'Software\Scalabium'
+            RegistrySection = 'SMDBGrid'
+            WidthOfIndicator = 11
+            DefaultRowHeight = 16
+            ScrollBars = ssHorizontal
+            ColCount = 8
+            RowCount = 2
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'SERIE'
+                Title.Alignment = taCenter
+                Title.Caption = 'S'#233'rie'
+                Title.Color = 16744448
+                Width = 34
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'NUMNOTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#186' Nota'
+                Title.Color = 16744448
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ITEM_NOTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Item Nota'
+                Title.Color = 16744448
+                Width = 79
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'QTD'
+                Title.Alignment = taCenter
+                Title.Caption = 'Quantidade'
+                Title.Color = 16744448
+                Width = 91
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'DTEMISSAO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Data Emiss'#227'o'
+                Title.Color = 16744448
+                Width = 94
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'TIPO_NOTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'E/S'
+                Title.Color = 16744448
+                Width = 30
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ITEM_PEDIDO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Item Ped.'
+                Title.Color = 16744448
+                Visible = True
+              end>
+          end
+        end
       end
       object Panel1: TPanel
         Left = 0
         Top = 0
         Width = 991
-        Height = 56
+        Height = 105
         Align = alTop
         Color = clSilver
         TabOrder = 1
         object Label5: TLabel
-          Left = 55
+          Left = 191
           Top = 14
           Width = 23
           Height = 13
@@ -328,15 +672,70 @@ object frmProg_Terc: TfrmProg_Terc
           Caption = 'Filial:'
         end
         object Label6: TLabel
-          Left = 43
+          Left = 179
           Top = 33
           Width = 35
           Height = 13
           Alignment = taRightJustify
           Caption = 'Cliente:'
         end
+        object Label1: TLabel
+          Left = 158
+          Top = 50
+          Width = 54
+          Height = 13
+          Caption = 'ID Produto:'
+        end
+        object Label16: TLabel
+          Left = 195
+          Top = 68
+          Width = 19
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Cor:'
+        end
+        object Label17: TLabel
+          Left = 410
+          Top = 68
+          Width = 48
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Tamanho:'
+        end
+        object Label18: TLabel
+          Left = 144
+          Top = 88
+          Width = 70
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Dt.Emiss'#227'o Ini:'
+        end
+        object Label19: TLabel
+          Left = 317
+          Top = 88
+          Width = 25
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Final:'
+        end
+        object Label20: TLabel
+          Left = 609
+          Top = 12
+          Width = 76
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'N'#186' Ped. Interno:'
+        end
+        object Label21: TLabel
+          Left = 600
+          Top = 32
+          Width = 86
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'N'#186' Pedido Cliente:'
+        end
         object RxDBLookupCombo3: TRxDBLookupCombo
-          Left = 79
+          Left = 215
           Top = 6
           Width = 377
           Height = 21
@@ -349,8 +748,8 @@ object frmProg_Terc: TfrmProg_Terc
           TabOrder = 0
         end
         object btnConsultar: TNxButton
-          Left = 460
-          Top = 14
+          Left = 600
+          Top = 56
           Width = 177
           Height = 30
           Caption = 'Efetuar Pesquisa'
@@ -421,7 +820,7 @@ object frmProg_Terc: TfrmProg_Terc
           OnClick = btnConsultarClick
         end
         object Edit5: TEdit
-          Left = 79
+          Left = 215
           Top = 26
           Width = 377
           Height = 19
@@ -432,8 +831,8 @@ object frmProg_Terc: TfrmProg_Terc
           OnKeyDown = Edit1KeyDown
         end
         object btnImprimir: TNxButton
-          Left = 636
-          Top = 14
+          Left = 768
+          Top = 56
           Width = 177
           Height = 30
           Caption = 'Imprimir'
@@ -499,9 +898,118 @@ object frmProg_Terc: TfrmProg_Terc
             FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 5
           Transparent = True
           OnClick = btnImprimirClick
+        end
+        object CurrencyEdit4: TCurrencyEdit
+          Left = 215
+          Top = 44
+          Width = 82
+          Height = 19
+          AutoSize = False
+          Ctl3D = False
+          DecimalPlaces = 0
+          DisplayFormat = '0'
+          ParentCtl3D = False
+          TabOrder = 3
+          OnChange = CurrencyEdit1Change
+        end
+        object Edit1: TEdit
+          Left = 298
+          Top = 44
+          Width = 294
+          Height = 19
+          TabStop = False
+          CharCase = ecUpperCase
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 4
+        end
+        object RadioGroup1: TRadioGroup
+          Left = 1
+          Top = 1
+          Width = 103
+          Height = 103
+          Align = alLeft
+          Caption = ' Op'#231#227'o '
+          Ctl3D = True
+          ItemIndex = 0
+          Items.Strings = (
+            'Pendente'
+            'Faturado'
+            'Ambos')
+          ParentCtl3D = False
+          TabOrder = 6
+          Visible = False
+        end
+        object Edit8: TEdit
+          Left = 215
+          Top = 62
+          Width = 185
+          Height = 19
+          TabStop = False
+          CharCase = ecUpperCase
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 7
+        end
+        object Edit10: TEdit
+          Left = 458
+          Top = 62
+          Width = 134
+          Height = 19
+          TabStop = False
+          CharCase = ecUpperCase
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 8
+        end
+        object DateEdit3: TDateEdit
+          Left = 215
+          Top = 80
+          Width = 100
+          Height = 21
+          Ctl3D = False
+          NumGlyphs = 2
+          ParentCtl3D = False
+          StartOfWeek = Sun
+          TabOrder = 9
+        end
+        object DateEdit4: TDateEdit
+          Left = 343
+          Top = 80
+          Width = 100
+          Height = 21
+          Ctl3D = False
+          NumGlyphs = 2
+          ParentCtl3D = False
+          StartOfWeek = Sun
+          TabOrder = 10
+        end
+        object Edit11: TEdit
+          Left = 687
+          Top = 26
+          Width = 100
+          Height = 19
+          TabStop = False
+          CharCase = ecUpperCase
+          Ctl3D = False
+          ParentCtl3D = False
+          TabOrder = 11
+        end
+        object CurrencyEdit7: TCurrencyEdit
+          Left = 687
+          Top = 8
+          Width = 100
+          Height = 19
+          AutoSize = False
+          Ctl3D = False
+          DecimalPlaces = 0
+          DisplayFormat = '0'
+          ParentCtl3D = False
+          TabOrder = 12
+          OnChange = CurrencyEdit1Change
         end
       end
     end
@@ -558,8 +1066,8 @@ object frmProg_Terc: TfrmProg_Terc
           OnKeyDown = CurrencyEdit1KeyDown
         end
         object Edit2: TEdit
-          Left = 160
-          Top = 17
+          Left = 159
+          Top = 18
           Width = 467
           Height = 19
           TabStop = False
@@ -590,7 +1098,7 @@ object frmProg_Terc: TfrmProg_Terc
         Left = 0
         Top = 44
         Width = 991
-        Height = 80
+        Height = 82
         Align = alTop
         UseDockManager = False
         ParentBackground = False
@@ -612,9 +1120,9 @@ object frmProg_Terc: TfrmProg_Terc
         object Label9: TLabel
           Left = 621
           Top = 17
-          Width = 158
+          Width = 195
           Height = 16
-          Caption = 'Qtde. Total do Produto:'
+          Caption = 'Qtde. Total do Produto Pend:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -657,7 +1165,7 @@ object frmProg_Terc: TfrmProg_Terc
           OnClick = NxButton3Click
         end
         object CurrencyEdit3: TCurrencyEdit
-          Left = 779
+          Left = 819
           Top = 9
           Width = 97
           Height = 21
@@ -674,9 +1182,9 @@ object frmProg_Terc: TfrmProg_Terc
       end
       object SMDBGrid3: TSMDBGrid
         Left = 0
-        Top = 124
+        Top = 126
         Width = 991
-        Height = 417
+        Height = 415
         Align = alClient
         Ctl3D = False
         DataSource = DMProg_Terc.dsPedido_Pend
@@ -688,7 +1196,6 @@ object frmProg_Terc: TfrmProg_Terc
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
-        OnTitleClick = SMDBGrid1TitleClick
         Flat = True
         BandsFont.Charset = DEFAULT_CHARSET
         BandsFont.Color = clWindowText
@@ -761,7 +1268,7 @@ object frmProg_Terc: TfrmProg_Terc
             Title.Alignment = taCenter
             Title.Caption = 'Nome Produto'
             Title.Color = 15000804
-            Width = 337
+            Width = 395
             Visible = True
           end
           item

@@ -3,7 +3,7 @@ object DMProg_Terc: TDMProg_Terc
   OnCreate = DataModuleCreate
   Left = 382
   Top = 136
-  Height = 439
+  Height = 459
   Width = 892
   object sdsProg_Terc: TSQLDataSet
     NoMetadata = True
@@ -53,7 +53,7 @@ object DMProg_Terc: TDMProg_Terc
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspProg_Terc'
-    Left = 112
+    Left = 113
     Top = 23
     object cdsProg_TercID: TIntegerField
       FieldName = 'ID'
@@ -492,5 +492,228 @@ object DMProg_Terc: TDMProg_Terc
     BCDToCurrency = False
     Left = 732
     Top = 183
+  end
+  object sdsProdNaoLib: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select i.id_produto, i.referencia,'#13#10'i.nomeproduto nome_produto, ' +
+      'sum(i.qtd) qtd, sum(i.qtd_restante) qtd_restante,'#13#10'sum(i.qtd_fat' +
+      'urado) qtd_faturado, sum(i.qtd_liberada) qtd_liberada,'#13#10'sum(case' +
+      #13#10'  when coalesce(i.qtd_liberada,0) < 0 then i.qtd_Restante'#13#10'  e' +
+      'lse (i.qtd_Restante - coalesce(i.qtd_liberada,0))'#13#10'  end) qtd_pe' +
+      'ndente_lib'#13#10'from pedido p'#13#10'inner join pedido_item i'#13#10'on p.id = i' +
+      '.id'#13#10'inner join pessoa cli'#13#10'on p.id_cliente = cli.codigo'#13#10'where ' +
+      'p.tipo_reg = '#39'P'#39#13#10'  and p.cancelado = '#39'N'#39#13#10'  and i.cancelado = '#39 +
+      'N'#39#13#10'  and (coalesce(i.qtd_Restante,0) - coalesce(i.qtd_liberada,' +
+      '0)) > 0'#13#10'  and i.qtd_restante > 0'#13#10'group by i.id_produto, i.refe' +
+      'rencia, i.nomeproduto'#13#10#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 534
+    Top = 285
+  end
+  object dspProdNaoLib: TDataSetProvider
+    DataSet = sdsProdNaoLib
+    Left = 574
+    Top = 281
+  end
+  object cdsProdNaoLib: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID_PRODUTO'
+    Params = <>
+    ProviderName = 'dspProdNaoLib'
+    Left = 614
+    Top = 280
+    object cdsProdNaoLibID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsProdNaoLibREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsProdNaoLibNOME_PRODUTO: TStringField
+      FieldName = 'NOME_PRODUTO'
+      Size = 100
+    end
+    object cdsProdNaoLibQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsProdNaoLibQTD_RESTANTE: TFloatField
+      FieldName = 'QTD_RESTANTE'
+    end
+    object cdsProdNaoLibQTD_FATURADO: TFloatField
+      FieldName = 'QTD_FATURADO'
+    end
+    object cdsProdNaoLibQTD_LIBERADA: TFloatField
+      FieldName = 'QTD_LIBERADA'
+    end
+    object cdsProdNaoLibQTD_PENDENTE_LIB: TFloatField
+      FieldName = 'QTD_PENDENTE_LIB'
+    end
+  end
+  object dsProdNaoLib: TDataSource
+    DataSet = cdsProdNaoLib
+    Left = 654
+    Top = 281
+  end
+  object sdsPedido_Sit: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select i.id_produto, i.referencia, p.id, p.num_pedido, p.dtemiss' +
+      'ao,'#13#10'i.nomeproduto nome_produto, i.qtd, i.qtd_restante,'#13#10'i.qtd_f' +
+      'aturado, i.qtd_liberada,'#13#10'case'#13#10'  when coalesce(i.qtd_liberada,0' +
+      ') < 0 then i.qtd_Restante'#13#10'  else (i.qtd_Restante - coalesce(i.q' +
+      'td_liberada,0))'#13#10'  end qtd_pendente_lib, i.item'#13#10'from pedido p'#13#10 +
+      'inner join pedido_item i'#13#10'on p.id = i.id'#13#10'inner join pessoa cli'#13 +
+      #10'on p.id_cliente = cli.codigo'#13#10'where p.tipo_reg = '#39'P'#39#13#10'  and p.c' +
+      'ancelado = '#39'N'#39#13#10'  and i.cancelado = '#39'N'#39#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 86
+    Top = 335
+  end
+  object dspPedido_Sit: TDataSetProvider
+    DataSet = sdsPedido_Sit
+    Left = 126
+    Top = 335
+  end
+  object cdsPedido_Sit: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspPedido_Sit'
+    Left = 166
+    Top = 335
+    object cdsPedido_SitID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsPedido_SitREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsPedido_SitID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsPedido_SitNUM_PEDIDO: TIntegerField
+      FieldName = 'NUM_PEDIDO'
+    end
+    object cdsPedido_SitDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsPedido_SitNOME_PRODUTO: TStringField
+      FieldName = 'NOME_PRODUTO'
+      Size = 100
+    end
+    object cdsPedido_SitQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsPedido_SitQTD_RESTANTE: TFloatField
+      FieldName = 'QTD_RESTANTE'
+    end
+    object cdsPedido_SitQTD_FATURADO: TFloatField
+      FieldName = 'QTD_FATURADO'
+    end
+    object cdsPedido_SitQTD_LIBERADA: TFloatField
+      FieldName = 'QTD_LIBERADA'
+    end
+    object cdsPedido_SitQTD_PENDENTE_LIB: TFloatField
+      FieldName = 'QTD_PENDENTE_LIB'
+    end
+    object cdsPedido_SitITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+  end
+  object dsPedido_Sit: TDataSource
+    DataSet = cdsPedido_Sit
+    Left = 206
+    Top = 335
+  end
+  object sdsNotas_Ped: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT NP.ID ID_NOTA, NP.ITEM ITEM_NOTA, NP.QTD, NT.NUMNOTA, NT.' +
+      'DTEMISSAO,'#13#10'NT.SERIE, NT.TIPO_NOTA, NP.ITEM_PEDIDO'#13#10'FROM NOTAFIS' +
+      'CAL_PED NP'#13#10'INNER JOIN NOTAFISCAL NT'#13#10'ON NP.ID = NT.ID'#13#10'WHERE NP' +
+      '.ID_PEDIDO = :ID_PEDIDO'#13#10'  AND NP.item_pedido = :ITEM_PEDIDO'#13#10#13#10 +
+      'UNION ALL'#13#10#13#10'SELECT BX.ID ID_NOTA, 1 ITEM_NOTA, BX.qtd, BX.id NU' +
+      'M_NOTA, BX.dtbaixa DTEMISSAO,'#13#10#39'MAN'#39' SERIE, '#39'MANUAL'#39' TIPO_NOTA, ' +
+      'BX.item_pedido'#13#10'FROM BAIXA_PEDIDO BX'#13#10'LEFT JOIN ORDEMSERVICO O'#13#10 +
+      'ON BX.ID_OS = O.ID'#13#10'WHERE BX.ID_PEDIDO = :ID_PEDIDO'#13#10'  AND BX.it' +
+      'em_pedido = :ITEM_PEDIDO'#13#10'  AND BX.tipo_reg = '#39'FAT'#39#13#10#13#10#13#10#13#10#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_PEDIDO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM_PEDIDO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PEDIDO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ITEM_PEDIDO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 363
+    Top = 355
+  end
+  object dspNotas_Ped: TDataSetProvider
+    DataSet = sdsNotas_Ped
+    Left = 402
+    Top = 355
+  end
+  object cdsNotas_Ped: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspNotas_Ped'
+    Left = 441
+    Top = 354
+    object cdsNotas_PedID_NOTA: TIntegerField
+      FieldName = 'ID_NOTA'
+      Required = True
+    end
+    object cdsNotas_PedITEM_NOTA: TIntegerField
+      FieldName = 'ITEM_NOTA'
+      Required = True
+    end
+    object cdsNotas_PedQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsNotas_PedNUMNOTA: TIntegerField
+      FieldName = 'NUMNOTA'
+    end
+    object cdsNotas_PedDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsNotas_PedSERIE: TStringField
+      FieldName = 'SERIE'
+      Size = 3
+    end
+    object cdsNotas_PedTIPO_NOTA: TStringField
+      FieldName = 'TIPO_NOTA'
+      FixedChar = True
+      Size = 6
+    end
+    object cdsNotas_PedITEM_PEDIDO: TIntegerField
+      FieldName = 'ITEM_PEDIDO'
+    end
+  end
+  object dsNotas_Ped: TDataSource
+    DataSet = cdsNotas_Ped
+    Left = 482
+    Top = 355
   end
 end

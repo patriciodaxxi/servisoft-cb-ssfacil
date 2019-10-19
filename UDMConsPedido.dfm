@@ -677,7 +677,7 @@ object DMConsPedido: TDMConsPedido
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 40
+    Left = 41
     Top = 250
   end
   object cdsPedido_Nota: TClientDataSet
