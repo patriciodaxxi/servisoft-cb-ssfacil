@@ -2817,6 +2817,9 @@ begin
   end;
   if (fDMCadNotaFiscal.qParametros_NFeENDERECO_ENTREGA_BRANCO.AsString = 'S') and (fDMCadNotaFiscal.cdsClienteENDERECO_ENT.AsString <> '') then
     fDMCadNotaFiscal.cdsNotaFiscalLOCALENTREGA.Clear;
+
+  if (fDMCadNotaFiscal.cdsClienteMOSTRAR_AVISO.AsString = 'S')and (trim(fDMCadNotaFiscal.cdsClienteOBS_AVISO.AsString) <> '') then
+    MessageDlg('   AVISO  ' + #13 + #13+#13 + fDMCadNotaFiscal.cdsClienteOBS_AVISO.AsString,mtInformation, [mbOk], 0);
 end;
 
 procedure TfrmCadNotaFiscal.RzBitBtn1Click(Sender: TObject);

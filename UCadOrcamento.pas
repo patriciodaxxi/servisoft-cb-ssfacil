@@ -1025,6 +1025,11 @@ begin
   prc_Posicionar_Cliente;
   prc_Verifica_Limite(fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,0,fDMCadPedido.cdsClienteVLR_LIMITE_CREDITO.AsFloat);
 
+  //21/10/2019
+  if (fDMCadPedido.cdsClienteMOSTRAR_AVISO.AsString = 'S')and (trim(fDMCadPedido.cdsClienteOBS_AVISO.AsString) <> '') then
+    MessageDlg('   AVISO  ' + #13 + #13+#13 + fDMCadPedido.cdsClienteOBS_AVISO.AsString,mtInformation, [mbOk], 0);
+  //*******************
+
   if fDMCadPedido.cdsClienteID_GRUPO.AsString <> '' then
   begin
     fDMCadPedido.qGrupoPessoa.Close;

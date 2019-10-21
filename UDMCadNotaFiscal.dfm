@@ -3704,7 +3704,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'S.CARIMBO, PES.PERC_DESC_SUFRAMA, PES.ORGAO_PUBLICO, PES.IMP_COD' +
       '_PRODUTO_CLI,'#13#10'IMP_COR_CLIENTE, PES.MDIA1, PES.MDIA2, PES.insc_s' +
       'uframa, IPI_PAGO_FILIAL, PES.IMP_NOMEPROD_CLIENTE, IMP_ETIQUETA_' +
-      'ROT'#13#10'FROM PESSOA PES'#13#10#13#10
+      'ROT,'#13#10'PES.OBS_AVISO, MOSTRAR_AVISO'#13#10'FROM PESSOA PES'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -3987,6 +3987,15 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsClienteIMP_ETIQUETA_ROT: TStringField
       FieldName = 'IMP_ETIQUETA_ROT'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsClienteOBS_AVISO: TStringField
+      FieldName = 'OBS_AVISO'
+      Size = 150
+    end
+    object cdsClienteMOSTRAR_AVISO: TStringField
+      FieldName = 'MOSTRAR_AVISO'
       FixedChar = True
       Size = 1
     end
