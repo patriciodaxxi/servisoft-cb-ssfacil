@@ -4107,16 +4107,6 @@ begin
       vTextoLote       := '';
       while not fDMNFe.cdsNotaFiscal_MP.Eof do
       begin
-        //if vObs_Engenharia <> '' then
-        //  vObs_Engenharia := vObs_Engenharia + ' ';
-        //vObs_Engenharia := vObs_Engenharia + '(Q:'+FormatFloat('##0.####',fDMNFe.cdsNotaFiscal_MPQTD.AsFloat)
-        //                 + ' L:'+fDMNFe.cdsNotaFiscal_MPNUM_LOTE_CONTROLE.AsString
-        //                 + ' Ref:' + fDMNFe.cdsNotaFiscal_MPREFERENCIA.AsString + ')';
-
-        //07/01/2016  Foi alterado
-        {vObs_Engenharia := vObs_Engenharia + '('+FormatFloat('##0.####',fDMNFe.cdsNotaFiscal_MPQTD.AsFloat)
-                         + ' ' + fDMNFe.cdsNotaFiscal_MPREFERENCIA.AsString
-                         + ' '+fDMNFe.cdsNotaFiscal_MPNUM_LOTE_CONTROLE.AsString;}
         if fDMNFe.cdsNotaFiscal_MPNUM_LOTE_CONTROLE.AsString <> vNumLoteCont_Ant then
         begin
           if (vNumLoteCont_Ant <> '-9') and (trim(fDMNFe.cdsNotaFiscal_MPNUM_LOTE_CONTROLE.AsString) <> '') then
@@ -4130,27 +4120,8 @@ begin
         if vTextoLote <> '' then
           vTextoLote := vTextoLote + ', ' + fDMNFe.cdsNotaFiscal_MPQTD.AsString + ' ' + fDMNFe.cdsNotaFiscal_MPREFERENCIA.AsString;
         //*****************
-
-        //Tirado conforme Ramiro   16/08/2016
-        {if trim(fDMNFe.cdsNotaFiscal_MPNUM_MS.AsString) <> '' then
-        begin
-          if trim(vNum_MS_Ant) <> '' then
-          begin
-            if vNum_MS_Ant <> fDMNFe.cdsNotaFiscal_MPNUM_MS.AsString then
-              vObsAux := vObsAux + '  MS:' + vNum_MS_Ant + ') (IT:' + IntToStr(vItemNFe) + ' Ref:'
-            else
-            if vObsAux <> '' then
-              vObsAux := vObsAux + ', '
-            else
-              vObsAux := vObsAux + '(IT:' + IntToStr(vItemNFe) + ' Ref:';
-            vObsAux := vObsAux + fDMNFe.cdsNotaFiscal_MPREFERENCIA.AsString;
-          end;
-        end;
-        vNum_MS_Ant := fDMNFe.cdsNotaFiscal_MPNUM_MS.AsString;}
         vNumLoteCont_Ant := fDMNFe.cdsNotaFiscal_MPNUM_LOTE_CONTROLE.AsString;
         fDMNFe.cdsNotaFiscal_MP.Next;
-        //if trim(vNum_MS_Ant) = '' then
-        //  vNum_MS_Ant := fDMNFe.cdsNotaFiscal_MPNUM_MS.AsString;
       end;
       if trim(vTextoLote) <> '' then
         vObs_Engenharia := vObs_Engenharia + '(' + vTextoLote + ')';
@@ -4161,34 +4132,6 @@ begin
         vObsAux := vObsAux + '  MS:' + vNum_MS_Ant + ')';
         vObs_MS_Item := vObs_MS_Item + vObsAux;
       end;
-
-      {fDMCadNotaFiscal.cdsProduto_Consumo.IndexFieldNames := 'NUM_MS;REFERENCIA';
-      fDMCadNotaFiscal.cdsProduto_Consumo.Close;
-      fDMCadNotaFiscal.sdsProduto_Consumo.ParamByName('ID').AsInteger := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
-      fDMCadNotaFiscal.cdsProduto_Consumo.Open;
-      fDMCadNotaFiscal.cdsProduto_Consumo.First;
-      vNum_MS_Ant := fDMCadNotaFiscal.cdsProduto_ConsumoNUM_MS.AsString;
-      while not fDMCadNotaFiscal.cdsProduto_Consumo.Eof do
-      begin
-        {if vObs_Engenharia <> '' then
-          vObs_Engenharia := vObs_Engenharia + ', ';
-        vObs_Engenharia := vObs_Engenharia + 'Ref:'+fDMCadNotaFiscal.cdsProduto_ConsumoREFERENCIA.AsString;
-        if trim(fDMCadNotaFiscal.cdsProduto_ConsumoNUM_MS.AsString) <> '' then
-          vObs_Engenharia := vObs_Engenharia + '-MS:' + fDMCadNotaFiscal.cdsProduto_ConsumoNUM_MS.AsString;}
-       { if vNum_MS_Ant <> fDMCadNotaFiscal.cdsProduto_ConsumoNUM_MS.AsString then
-          vObs_Engenharia := vObs_Engenharia + '  MS:' + vNum_MS_Ant + ') (Ref:'
-        else
-        if vObs_Engenharia <> '' then
-          vObs_Engenharia := vObs_Engenharia + ', '
-        else
-          vObs_Engenharia := vObs_Engenharia + '(Ref:';
-        vObs_Engenharia := vObs_Engenharia + fDMCadNotaFiscal.cdsProduto_ConsumoREFERENCIA.AsString;
-
-        vNum_MS_Ant := fDMCadNotaFiscal.cdsProduto_ConsumoNUM_MS.AsString;
-        fDMCadNotaFiscal.cdsProduto_Consumo.Next;
-      end;
-      if vObs_Engenharia <> '' then
-        vObs_Engenharia := vObs_Engenharia + '  MS:' + vNum_MS_Ant + ')';}
     end;
     //******************
     if vExiste_Aux then
@@ -4556,13 +4499,6 @@ begin
 
       if vTextoDetNFe <> '' then
         fDMNFe.mItensNFeInfAdicionais.Value := vTextoDetNFe + ' ';
-      {if Trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString) <> '' then
-      begin
-        if Trim(fDMNFe.mItensNFeInfAdicionais.Value) = '' then
-          fDMNFe.mItensNFeInfAdicionais.Value := fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString
-        else
-          fDMNFe.mItensNFeInfAdicionais.Value := fDMNFe.mItensNFeInfAdicionais.Value + ' (' + fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString + ')';
-      end;}
       Texto1 := '';
       //17/05/2017  SulCromo
       if fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString  = 'S' then

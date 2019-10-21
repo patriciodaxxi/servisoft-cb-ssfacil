@@ -3086,6 +3086,8 @@ type
     cdsPedidoTIPO_DESCONTO: TStringField;
     cdsPedidoPERC_DESCONTO: TFloatField;
     qParametros_PedPEDIDO_COMERCIO: TStringField;
+    cdsClienteOBS_AVISO: TStringField;
+    cdsClienteMOSTRAR_AVISO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

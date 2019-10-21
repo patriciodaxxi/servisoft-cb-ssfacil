@@ -1424,6 +1424,8 @@ begin
     else
       fDMCadNotaFiscal.cdsNotaFiscalMARCA.AsString := fDMCadNotaFiscal.cdsParametrosMARCA_NOTA.AsString;
   end;
+  if (fDMCadNotaFiscal.cdsClienteMOSTRAR_AVISO.AsString = 'S')and (trim(fDMCadNotaFiscal.cdsClienteOBS_AVISO.AsString) <> '') then
+    MessageDlg('   AVISO  ' + #13 + #13+#13 + fDMCadNotaFiscal.cdsClienteOBS_AVISO.AsString,mtInformation, [mbOk], 0);
 end;
 
 procedure TfrmCadRecNF.RxDBLookupCombo3KeyDown(Sender: TObject;
