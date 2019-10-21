@@ -23,10 +23,10 @@ object frmEtiq_Individual: TfrmEtiq_Individual
     Top = 0
     Width = 904
     Height = 439
-    ActivePage = TS_Avulsa
+    ActivePage = TS_Pedido
     ActivePageDefault = TS_Pedido
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1407,7 +1407,8 @@ object frmEtiq_Individual: TfrmEtiq_Individual
               'RC Store'
               'Ella Store'
               'Hypnotize'
-              'Max Modas')
+              'Max Modas'
+              'Bella Vista')
             TabOrder = 0
             Values.Strings = (
               'PICOTEC'
@@ -1415,7 +1416,8 @@ object frmEtiq_Individual: TfrmEtiq_Individual
               'RCSTORE'
               'ELLASTORE'
               'HYONITIZE'
-              'MAXMODAS')
+              'MAXMODAS'
+              'BELLAVIST1')
           end
           object RxDBComboBox161: TRxDBComboBox
             Left = 152

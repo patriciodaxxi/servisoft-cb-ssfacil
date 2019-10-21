@@ -1345,28 +1345,21 @@ var
     begin
       Writeln(F,'n');
       Writeln(F,'M0500');
-      Writeln(F,'O'+FormatFloat('0000',fDMConsPedido.qParametros_EtiqOFFSET_BORDA.AsInteger));
+      Writeln(F,'O0220');
       Writeln(F,'V0');
-      Writeln(F,'f'+FormatFloat('000',fDMConsPedido.qParametros_EtiqBACKFEED.AsInteger));
+      Writeln(F,'f220');
       Writeln(F,'D');
       Writeln(F,'L');
-      Writeln(F,'R0003');
-      if fDMConsPedido.qParametros_EtiqMARGEM.AsInteger > 0 then
-        Writeln(F,'C'+FormatFloat('0000',fDMConsPedido.qParametros_EtiqMARGEM.AsInteger))
-      else
-        Writeln(F,'C0007');
       Writeln(F,'D11');
-      Writeln(F,'H'+fDMConsPedido.qParametros_EtiqTEMPERATURA.AsString);
-      Writeln(F,'P'+fDMConsPedido.qParametros_EtiqVELOCIDADE.AsString);
       Writeln(F,'A2');
     end;
 
     //Detalhe
-    writeln(F,'1911A1000170034COD:');
-    writeln(F,'1911A1000170073' + vId);
-    writeln(F,'1911A1000020034R$' + FormatFloat('###,###,##0.00',vPreco));
-    writeln(F,'1911A1000170175' + vMarca);
-    writeln(F,'1911A0600050171'+ vRef);
+    writeln(F,'1911A1000150024COD:');
+    writeln(F,'1911A1000150063' + vId);
+    writeln(F,'1911A0800010024R$' + ' ' + FormatFloat('###,###,##0.00',vPreco));
+    writeln(F,'1911A1000150142' + vMarca);
+    writeln(F,'1911A0800020142'+ vRef);
 
     //Encerramento
     if fDMConsPedido.qParametros_EtiqINF_ENTER.AsString = 'S' then
