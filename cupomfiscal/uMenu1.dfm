@@ -122,7 +122,6 @@ object fMenu1: TfMenu1
         Font.Name = 'Courier New'
         Font.Style = [fsBold]
         ParentFont = False
-        Visible = False
         OnClick = LabelBkpClick
         OnDblClick = LabelBkpClick
         HotTrackFont.Charset = DEFAULT_CHARSET
@@ -220,10 +219,10 @@ object fMenu1: TfMenu1
         object DateEdit1: TDateEdit
           Left = 616
           Top = 1
-          Width = 121
+          Width = 105
           Height = 21
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
+          Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Courier New'
           Font.Style = [fsBold]
@@ -236,10 +235,10 @@ object fMenu1: TfMenu1
         object DateEdit2: TDateEdit
           Left = 739
           Top = 1
-          Width = 121
+          Width = 102
           Height = 21
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
+          Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Courier New'
           Font.Style = [fsBold]
