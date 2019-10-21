@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, Grids, DBGrids, SMDBGrid, ExtCtrls, UNFCe,
   NxCollection, uDmCupomFiscal, RxLookup, StdCtrls, Mask, ToolEdit, rsDBUtils, dateUtils, db, StrUtils, uDmParametros, Menus, 
-  ACBrDevice, Buttons, CurrEdit, UCupomFiscal_Canc, DBCtrls, UCBase, uDmEstoque, uDmMovimento, dbXPress, SqlExpr;
+  ACBrDevice, Buttons, CurrEdit, UCupomFiscal_Canc, DBCtrls, UCBase, uDmEstoque, uDmMovimento, dbXPress, SqlExpr, uDmMySql;
 
 type
   TfCupomFiscalC = class(TForm)
@@ -128,6 +128,7 @@ type
     { Private declarations }
     fDmCupomFiscal: TDmCupomFiscal;
     fDmEstoque: TDmEstoque;
+    fDmMySql: TDmMySql;
     fDmMovimento: TDmMovimento;
     ffNFCe: TfNFCe;
     ffCupomFiscal_Canc: TfCupomFiscal_Canc;
@@ -2300,6 +2301,17 @@ begin
       fDMCadCupomFiscal_MP.fDMEstoque     := fDMEstoque;
       fDMCadCupomFiscal_MP.prc_Le_Produto_Consumo;
     end;
+
+    case fDmCupomFiscal.cdsCupomFiscalID_CANAL_VENDA.AsInteger of
+      1: begin    //Hypnotize
+           fDmMySql := TDmMySql.Create(Self);
+           fDmMySql.qAtualizaEstoque.ParamByName('E1').AsString  := Copy(fDmCupomFiscal.cdsProdutoCOD_BARRA.AsString,1,4);
+           fDmMySql.qAtualizaEstoque.ParamByName('P1').AsString  := Copy(fDmCupomFiscal.cdsProdutoCOD_BARRA.AsString,5,4);
+           fDmMySql.qAtualizaEstoque.ParamByName('Q1').AsInteger := fDmCupomFiscal.cdsCupom_ItensQTD.asInteger;
+           fDmMySql.qAtualizaEstoque.ExecSQL;
+         end;
+      end;
+
     fDmCupomFiscal.cdsCupom_Itens.Next;
   end;
   SMDBGrid1.EnableScroll;

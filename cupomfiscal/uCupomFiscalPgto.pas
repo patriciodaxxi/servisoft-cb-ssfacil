@@ -67,10 +67,10 @@ type
     btnParcelas: TSpeedButton;
     pnlCanalVenda: TPanel;
     Label19: TLabel;
-    ComboBox1: TComboBox;
     pnlVendedor: TPanel;
     Label11: TLabel;
     ComboVendedor: TRxDBLookupCombo;
+    RxDBComboBox1: TRxDBComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure DBEdit1Exit(Sender: TObject);
@@ -528,10 +528,10 @@ begin
     Exit;
   end;
 
-  if (pnlCanalVenda.Visible) and (ComboBox1.ItemIndex < 0) then
+  if (pnlCanalVenda.Visible) and (RxDBComboBox1.ItemIndex < 0) then
   begin
     MessageDlg('*** Canal de venda é obrigatório!', mtInformation, [mbOk], 0);
-    ComboBox1.SetFocus;
+    RxDBComboBox1.SetFocus;
     exit;
   end;                            
 
@@ -1488,9 +1488,7 @@ var
 begin
   fDmCupomFiscal.cdsCupomFiscalVLR_OUTROS.AsCurrency   := 0;
   fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := 0;
-  fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsCurrency := 0;
-
-
+  fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsCurrency := 0;  
 
   if ceJuros.Value > 0 then
   begin
@@ -1526,8 +1524,7 @@ begin
     fDmCupomFiscal.cdsCupomFiscalVLR_OUTROS.AsCurrency   := vOutros;
     fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency + vOutros;
     fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency;
-  end;
-
+  end;      
 end;
 
 end.

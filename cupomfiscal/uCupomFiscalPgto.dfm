@@ -806,24 +806,30 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Style = []
             ParentFont = False
           end
-          object ComboBox1: TComboBox
+          object RxDBComboBox1: TRxDBComboBox
             Left = 202
-            Top = 2
-            Width = 479
-            Height = 32
+            Top = 3
+            Width = 478
+            Height = 31
             Style = csDropDownList
-            DropDownCount = 2
+            DataField = 'ID_CANAL_VENDA'
+            DataSource = dmCupomFiscal.dsCupomFiscal
+            DropDownCount = 3
+            EnableValues = True
             Font.Charset = DEFAULT_CHARSET
             Font.Color = 3683329
             Font.Height = -19
-            Font.Name = 'MS Sans Serif'
+            Font.Name = 'Verdana'
             Font.Style = []
-            ItemHeight = 24
+            ItemHeight = 23
+            Items.Strings = (
+              'Loja - 1'
+              'Site - 2')
             ParentFont = False
             TabOrder = 0
-            Items.Strings = (
-              'Loja'
-              'Internet')
+            Values.Strings = (
+              '1'
+              '2')
           end
         end
         object pnlVendedor: TPanel

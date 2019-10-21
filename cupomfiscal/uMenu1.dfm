@@ -22,8 +22,8 @@ object fMenu1: TfMenu1
   TextHeight = 13
   object lbDatabase: TLabel
     Left = 0
-    Top = 521
-    Width = 920
+    Top = 513
+    Width = 912
     Height = 14
     Align = alBottom
     Alignment = taRightJustify
@@ -41,8 +41,8 @@ object fMenu1: TfMenu1
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 920
-    Height = 521
+    Width = 912
+    Height = 513
     Align = alClient
     TabOrder = 0
     object Label2: TLabel
@@ -101,8 +101,8 @@ object fMenu1: TfMenu1
     end
     object PanelBkp: TPanel
       Left = 1
-      Top = 480
-      Width = 918
+      Top = 472
+      Width = 910
       Height = 40
       Align = alBottom
       Color = 8404992
@@ -111,7 +111,7 @@ object fMenu1: TfMenu1
       object LabelBkp: TJvBlinkingLabel
         Left = 1
         Top = 1
-        Width = 916
+        Width = 908
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -136,8 +136,8 @@ object fMenu1: TfMenu1
     end
     object Panel5: TPanel
       Left = 1
-      Top = 440
-      Width = 918
+      Top = 432
+      Width = 910
       Height = 40
       Align = alBottom
       Color = 33023
@@ -146,7 +146,7 @@ object fMenu1: TfMenu1
       object Label1: TLabel
         Left = 1
         Top = 1
-        Width = 916
+        Width = 908
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -165,8 +165,8 @@ object fMenu1: TfMenu1
     end
     object Panel6: TPanel
       Left = 1
-      Top = 400
-      Width = 918
+      Top = 392
+      Width = 910
       Height = 40
       Align = alBottom
       Color = 4079359
@@ -175,7 +175,7 @@ object fMenu1: TfMenu1
       object Label4: TLabel
         Left = 1
         Top = 1
-        Width = 916
+        Width = 908
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -194,39 +194,58 @@ object fMenu1: TfMenu1
     end
     object Panel1: TPanel
       Left = 1
-      Top = 217
-      Width = 918
+      Top = 209
+      Width = 910
       Height = 183
       Align = alBottom
       TabOrder = 3
       object Panel4: TPanel
         Left = 1
         Top = 1
-        Width = 916
+        Width = 908
         Height = 22
         Align = alTop
         Caption = 'Aniversariantes do Per'#237'odo'
+        Color = 12615935
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -20
+        Font.Name = 'Courier New'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 0
         DesignSize = (
-          916
+          908
           22)
         object DateEdit1: TDateEdit
-          Left = 544
+          Left = 616
           Top = 1
           Width = 121
           Height = 21
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
           Anchors = [akTop, akRight]
           NumGlyphs = 2
+          ParentFont = False
           TabOrder = 0
           OnKeyDown = DateEdit1KeyDown
         end
         object DateEdit2: TDateEdit
-          Left = 667
+          Left = 739
           Top = 1
           Width = 121
           Height = 21
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
           Anchors = [akTop, akRight]
           NumGlyphs = 2
+          ParentFont = False
           TabOrder = 1
           OnKeyDown = DateEdit2KeyDown
         end
@@ -234,7 +253,7 @@ object fMenu1: TfMenu1
       object SMDBGrid1: TSMDBGrid
         Left = 1
         Top = 23
-        Width = 916
+        Width = 908
         Height = 159
         Align = alClient
         DataSource = dsAniversariante
@@ -299,13 +318,13 @@ object fMenu1: TfMenu1
   end
   object Panel7: TPanel
     Left = 0
-    Top = 535
-    Width = 920
+    Top = 527
+    Width = 912
     Height = 64
     Align = alBottom
     TabOrder = 1
     DesignSize = (
-      920
+      912
       64)
     object Image1: TImage
       Left = 775

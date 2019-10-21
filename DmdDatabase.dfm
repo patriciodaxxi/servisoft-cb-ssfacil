@@ -14,9 +14,7 @@ object dmDatabase: TdmDatabase
     LoginPrompt = False
     Params.Strings = (
       'DriverName=Interbase'
-      
-        'Database=LOCALHOST:D:\Fontes\$Servisoft\Bases\SSFacil\SSFacil.FD' +
-        'B'
+      'Database=I:\Delphi7\SSFacil\Clientes\fb2\Hypnotize.FDB'
       'RoleName=RoleName'
       'User_Name=sysdba'
       'Password=masterkey'
@@ -30,6 +28,7 @@ object dmDatabase: TdmDatabase
       'Interbase TransIsolation=ReadCommited'
       'Trim Char=False')
     VendorLib = 'gds32.dll'
+    Connected = True
     Left = 44
     Top = 13
   end
