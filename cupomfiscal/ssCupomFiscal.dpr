@@ -92,7 +92,8 @@ uses
   uNFeConsts in '..\uNFeConsts.pas',
   UConsProdutoNCM in '..\UConsProdutoNCM.pas' {frmConsProdutoNCM},
   UDMConsProduto in '..\UDMConsProduto.pas' {DMConsProduto: TDataModule},
-  UAltCFOPProd in '..\UAltCFOPProd.pas' {frmAltCFOPProd};
+  UAltCFOPProd in '..\UAltCFOPProd.pas' {frmAltCFOPProd},
+  uDmMySql in 'uDmMySql.pas' {DmMySql: TDataModule};
 
 {$R *.res}
 
