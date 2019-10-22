@@ -334,6 +334,7 @@ type
     mAuxPedidoGradeItem: TIntegerField;
     mTamanhoQtde_Indice: TIntegerField;
     mItensDRAWBACK: TStringField;
+    mItensMEDIDA: TStringField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private
