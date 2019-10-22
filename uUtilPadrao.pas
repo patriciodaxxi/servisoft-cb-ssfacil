@@ -117,7 +117,8 @@ uses
     AChave -> Chave utilizada para gerar o serial
   }
   procedure addLog(Erro: string; Arquivo: string = '');
-  procedure prc_Form_Aguarde(Form : TForm);
+  procedure prc_Form_Aguarde(Form : TForm); overload;
+  procedure prc_Form_Aguarde(Form : TForm; Mensagem : String); overload;
 
 var
   vCodProduto_Pos: Integer;
@@ -150,6 +151,7 @@ var
   vUsuario: String;
   vTerminal: Integer; //terminal PDV Cupom
   vPorta: String;
+  vModeloImpressora : string;
   vLocalEstoque: Integer; //para Cupom fiscal
   vBalanca: String;
   vPortaBalanca: String;
@@ -2245,7 +2247,7 @@ begin
   end;
 end;
 
-procedure prc_Form_Aguarde(Form : TForm);
+procedure prc_Form_Aguarde(Form : TForm); overload;
 var
   MSG: Tlabel;
   Borda: TShape;
@@ -2276,6 +2278,36 @@ begin
 
   //Form.Free; // Vai limpar na origem da chamada
 
+end;
+
+procedure prc_Form_Aguarde(Form : TForm; Mensagem : String); overload;
+var
+  MSG: Tlabel;
+  Borda: TShape;
+begin
+  //Form := TForm.Create(Application);
+  Form.BorderStyle := bsNone;
+  Form.Position := poDesktopCenter;
+  Form.Width := 400;
+  Form.Height := 45;
+
+  Borda := TShape.Create(Application);
+  Borda.Parent := Form;
+  Borda.Align := alClient;
+
+  MSG := Tlabel.Create(Application);
+  MSG.Parent := Form;
+  MSG.Transparent := true;
+  MSG.AutoSize := False;
+  MSG.Font.Name := 'Verdana';
+  MSG.Font.Size := 25;
+  MSG.Width := 395;
+  MSG.Height := 42;
+  MSG.Caption := Mensagem;
+  MSG.Alignment := taCenter;
+
+  Form.Show;
+  Form.Update;
 end;
 
 

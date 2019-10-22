@@ -22,7 +22,7 @@ type
     sqVersaoAtual: TSQLQuery;
     sqVersaoAtualVERSAO_BANCO: TIntegerField;
     scoLiberacao: TSQLConnection;                                                  
-    sqEmpresa: TSQLQuery;                                                                
+    sqEmpresa: TSQLQuery;
     sqDataLiberacao: TSQLQuery;
     sqEmpresaCNPJ_CPF: TStringField;
     sqDataLiberacaoDT_LIBERADO: TStringField;
@@ -73,7 +73,7 @@ type
     procedure prc_Gravar_Log_Pessoa;
 
   public
-    function ProximaSequencia(NomeTabela: string; Filial: Integer): Integer;
+    function ProximaSequencia(NomeTabela: string; Filial: Integer; SerieCupom : String = '0'): Integer;
     function Registro_Max(NomeTabela: string; Campo: String): Integer;
     procedure AtualizaFDB;
     function verificaLiberacao: Boolean;
@@ -100,7 +100,7 @@ begin
   Result := ExtractFilePath(Application.ExeName) + cArquivoConfiguracao;
 end;
 
-function TdmDatabase.ProximaSequencia(NomeTabela: string; Filial: Integer): Integer;
+function TdmDatabase.ProximaSequencia(NomeTabela: string; Filial: Integer; SerieCupom : String = '0'): Integer;
 var
   sds: TSQLDataSet;
   iSeq: Integer;
@@ -120,17 +120,18 @@ begin
       sds.SQLConnection := scoDados;
       sds.NoMetadata  := True;
       sds.GetMetadata := False;
-      sds.CommandText := 'SELECT NUMREGISTRO FROM SEQUENCIAL WHERE TABELA = :TABELA AND FILIAL = :FILIAL';
-      sds.ParamByName('TABELA').AsString := NomeTabela;
-      sds.ParamByName('FILIAL').AsInteger    := Filial;
+      sds.CommandText := 'SELECT NUMREGISTRO FROM SEQUENCIAL WHERE TABELA = :TABELA AND FILIAL = :FILIAL AND SERIE = :SERIE';
+      sds.ParamByName('SERIE').AsInteger  := StrToInt(SerieCupom);
+      sds.ParamByName('TABELA').AsString  := NomeTabela;
+      sds.ParamByName('FILIAL').AsInteger := Filial;
       sds.Open;
 
       //iSeq := sds.FieldByName('NUMREGISTRO').AsInteger + 1;
       iSeq := sds.FieldByName('NUMREGISTRO').AsInteger;
 
       if (iSeq = 0) and (sds.IsEmpty) then
-        scoDados.ExecuteDirect('INSERT INTO SEQUENCIAL(TABELA,FILIAL,NUMREGISTRO) VALUES(''' + NomeTabela +
-                              ''', ''' + IntToStr(Filial) + ''', ''' + IntToStr(0) + ''' )');
+        scoDados.ExecuteDirect('INSERT INTO SEQUENCIAL(TABELA,FILIAL,NUMREGISTRO,SERIE) VALUES(' + QuotedStr(NomeTabela) + ',' +
+                                QuotedStr(IntToStr(Filial)) + ',' + QuotedStr(IntToStr(0)) + ',' + QuotedStr(SerieCupom) + ')');
       scoDados.Commit(ID);
     except
       scoDados.Rollback(ID);
@@ -155,12 +156,14 @@ begin
       sds.CommandText := 'UPDATE SEQUENCIAL SET NUMREGISTRO = (SELECT MAX(COALESCE(NUMREGISTRO,0)) + 1 ' +
                          'FROM SEQUENCIAL ' +
                          'WHERE TABELA = :TABELA' +
-                         ' AND FILIAL = :FILIAL) ' +
+                         ' AND FILIAL = :FILIAL AND SERIE = :SERIE) ' +
                          'WHERE TABELA = :TABELA' +
-                         ' AND FILIAL = :FILIAL';
+                         ' AND FILIAL = :FILIAL AND SERIE = :SERIE';
 
       sds.ParamByName('TABELA').AsString  := NomeTabela;
       sds.ParamByName('FILIAL').AsInteger := Filial;
+      sds.ParamByName('SERIE').AsInteger := StrToInt(SerieCupom);
+
 
       Flag := False;
       while not Flag do
@@ -179,10 +182,13 @@ begin
       sds.CommandText := 'SELECT MAX(COALESCE(NUMREGISTRO,0)) NUMREGISTRO  ' +
                          'FROM SEQUENCIAL ' +
                          'WHERE TABELA = :TABELA ' +
-                         'AND FILIAL = :FILIAL';
+                         'AND FILIAL = :FILIAL ' +
+                         'AND SERIE = :SERIE';
 
       sds.ParamByName('TABELA').AsString  := NomeTabela;
       sds.ParamByName('FILIAL').AsInteger := Filial;
+      sds.ParamByName('SERIE').AsInteger := StrToInt(SerieCupom);
+
       sds.Open;
 
       iSeq := sds.FieldByName('NUMREGISTRO').AsInteger;
