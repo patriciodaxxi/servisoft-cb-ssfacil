@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadOS, RzDTP, DBGrids,
   DB, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus, RXDBCtrl,
   RzEdit, RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, StrUtils, DateUtils, ComCtrls, NxEdit,
-  UCadContrato_Servico_Int, RzDBDTP;
+  UCadContrato_Servico_Int, RzDBDTP, ComObj;
 
 type
   TfrmCadContrato = class(TForm)
@@ -869,7 +869,7 @@ begin
 
   // Cria objeto principal de controle
   //aqui 18/02/2015
-  //WinWord := CreateOleObject('Word.Application');
+  WinWord := CreateOleObject('Word.Application');
 
   //Não Mostra o Word
   WinWord.Visible := False;
