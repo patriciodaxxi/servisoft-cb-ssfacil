@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMConsNotas_ES, ExtCtrls, StdCtrls, Mask,
   ToolEdit, CurrEdit, RxLookup, NxCollection, Grids, DBGrids, SMDBGrid, DB,
-  DBClient;
+  DBClient, Menus;
 
 type
   TfrmMinuta = class(TForm)
@@ -30,14 +30,22 @@ type
     SMDBGrid2: TSMDBGrid;
     Label13: TLabel;
     Edit1: TEdit;
+    PopupMenu1: TPopupMenu;
+    SelecionarTodos1: TMenuItem;
+    DesmarcarTodos1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnEtiquetaClick(Sender: TObject);
-    procedure SMDBGrid1ChangeSelection(Sender: TObject);
+    procedure SelecionarTodos1Click(Sender: TObject);
+    procedure DesmarcarTodos1Click(Sender: TObject);
+    procedure SMDBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
     procedure prc_Consultar;
+
+    procedure prc_Le_Minuta(Tipo : String);
+
   public
     { Public declarations }
     fDMConsNotas_ES: TDMConsNotas_ES;
@@ -115,6 +123,8 @@ begin
       RxDBLookupCombo3.KeyValue := fDMConsNotas_ES.cdsFilialID.AsInteger;
   end;
   Edit1.Text := fDMConsNotas_ES.qParametrosSERIENORMAL.AsString;
+  DateEdit1.Date := Date;
+  DateEdit2.Date := Date;
 end;
 
 procedure TfrmMinuta.btnEtiquetaClick(Sender: TObject);
@@ -137,13 +147,37 @@ begin
   fDMConsNotas_ES.frxReport1.ShowReport;
 end;
 
-procedure TfrmMinuta.SMDBGrid1ChangeSelection(Sender: TObject);
+procedure TfrmMinuta.SelecionarTodos1Click(Sender: TObject);
+begin
+  prc_Le_Minuta('S');
+end;
+
+procedure TfrmMinuta.prc_Le_Minuta(Tipo: String);
+begin
+  SMDBGrid1.DisableScroll;
+  fDMConsNotas_ES.cdsMinuta.First;
+  while not fDMConsNotas_ES.cdsMinuta.Eof do
+  begin
+    fDMConsNotas_ES.cdsMinuta.Edit;
+    fDMConsNotas_ES.cdsMinutaSELECIONADO.AsString := Tipo;
+    fDMConsNotas_ES.cdsMinuta.Post;
+    fDMConsNotas_ES.cdsMinuta.Next;
+  end;
+  SMDBGrid1.EnableScroll;
+end;
+
+procedure TfrmMinuta.DesmarcarTodos1Click(Sender: TObject);
+begin
+  prc_Le_Minuta('');
+end;
+
+procedure TfrmMinuta.SMDBGrid1DblClick(Sender: TObject);
 begin
   fDMConsNotas_ES.cdsMinuta.Edit;
-  if SMDBGrid1.SelectedRows.CurrentRowSelected then
-    fDMConsNotas_ES.cdsMinutaSELECIONADO.AsString := 'S'
+  if (fDMConsNotas_ES.cdsMinutaSELECIONADO.AsString = 'S')  then
+    fDMConsNotas_ES.cdsMinutaSELECIONADO.AsString := ''
   else
-    fDMConsNotas_ES.cdsMinutaSELECIONADO.AsString := 'N';
+    fDMConsNotas_ES.cdsMinutaSELECIONADO.AsString := 'S';
   fDMConsNotas_ES.cdsMinuta.Post;
 end;
 

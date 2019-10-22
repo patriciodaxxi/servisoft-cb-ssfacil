@@ -122,7 +122,7 @@ object frmMinuta: TfrmMinuta
       TabOrder = 3
     end
     object btnConsultar: TNxButton
-      Left = 471
+      Left = 472
       Top = 61
       Width = 166
       Height = 30
@@ -205,8 +205,8 @@ object frmMinuta: TfrmMinuta
       TabOrder = 0
     end
     object btnEtiqueta: TNxButton
-      Left = 637
-      Top = 61
+      Left = 638
+      Top = 60
       Width = 170
       Height = 30
       Caption = 'Minuta'
@@ -312,6 +312,7 @@ object frmMinuta: TfrmMinuta
       DataSource = DMConsNotas_ES.dsMinuta
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       ParentCtl3D = False
+      PopupMenu = PopupMenu1
       ReadOnly = True
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
@@ -319,6 +320,7 @@ object frmMinuta: TfrmMinuta
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
+      OnDblClick = SMDBGrid1DblClick
       Flat = True
       BandsFont.Charset = DEFAULT_CHARSET
       BandsFont.Color = clWindowText
@@ -331,16 +333,30 @@ object frmMinuta: TfrmMinuta
       GridStyle.EvenColor = clWindow
       TitleHeight.PixelCount = 24
       FooterColor = clBtnFace
-      ExOptions = [eoCheckBoxSelect, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+      ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
       RegistryKey = 'Software\Scalabium'
       RegistrySection = 'SMDBGrid'
-      OnChangeSelection = SMDBGrid1ChangeSelection
-      WidthOfIndicator = 27
+      WidthOfIndicator = 13
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
-      ColCount = 14
+      ColCount = 15
       RowCount = 2
       Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'SELECIONADO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Title.Alignment = taCenter
+          Title.Caption = 'Sel.'
+          Title.Color = 16777177
+          Width = 30
+          Visible = True
+        end
         item
           Expanded = False
           FieldName = 'NOME_TRANSPORTADORA'
@@ -495,6 +511,18 @@ object frmMinuta: TfrmMinuta
         ColCount = 2
         RowCount = 2
       end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 430
+    Top = 258
+    object SelecionarTodos1: TMenuItem
+      Caption = 'Marcar Todos'
+      OnClick = SelecionarTodos1Click
+    end
+    object DesmarcarTodos1: TMenuItem
+      Caption = 'Desmarcar Todos'
+      OnClick = DesmarcarTodos1Click
     end
   end
 end
