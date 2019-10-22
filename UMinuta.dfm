@@ -1,7 +1,7 @@
 object frmMinuta: TfrmMinuta
-  Left = 234
+  Left = 178
   Top = 87
-  Width = 981
+  Width = 1037
   Height = 533
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'frmMinuta'
@@ -21,7 +21,7 @@ object frmMinuta: TfrmMinuta
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 965
+    Width = 1029
     Height = 91
     Align = alTop
     Color = clSilver
@@ -122,7 +122,7 @@ object frmMinuta: TfrmMinuta
       TabOrder = 3
     end
     object btnConsultar: TNxButton
-      Left = 471
+      Left = 472
       Top = 61
       Width = 166
       Height = 30
@@ -205,8 +205,8 @@ object frmMinuta: TfrmMinuta
       TabOrder = 0
     end
     object btnEtiqueta: TNxButton
-      Left = 637
-      Top = 61
+      Left = 638
+      Top = 60
       Width = 170
       Height = 30
       Caption = 'Minuta'
@@ -298,20 +298,21 @@ object frmMinuta: TfrmMinuta
   object Panel2: TPanel
     Left = 0
     Top = 91
-    Width = 965
-    Height = 404
+    Width = 1029
+    Height = 411
     Align = alClient
     TabOrder = 1
     object SMDBGrid1: TSMDBGrid
-      Left = 186
+      Left = 128
       Top = 1
-      Width = 778
-      Height = 402
+      Width = 900
+      Height = 409
       Align = alClient
       Ctl3D = False
       DataSource = DMConsNotas_ES.dsMinuta
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       ParentCtl3D = False
+      PopupMenu = PopupMenu1
       ReadOnly = True
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
@@ -319,6 +320,7 @@ object frmMinuta: TfrmMinuta
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
+      OnDblClick = SMDBGrid1DblClick
       Flat = True
       BandsFont.Charset = DEFAULT_CHARSET
       BandsFont.Color = clWindowText
@@ -331,16 +333,30 @@ object frmMinuta: TfrmMinuta
       GridStyle.EvenColor = clWindow
       TitleHeight.PixelCount = 24
       FooterColor = clBtnFace
-      ExOptions = [eoCheckBoxSelect, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+      ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
       RegistryKey = 'Software\Scalabium'
       RegistrySection = 'SMDBGrid'
-      OnChangeSelection = SMDBGrid1ChangeSelection
-      WidthOfIndicator = 27
+      WidthOfIndicator = 13
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
-      ColCount = 13
+      ColCount = 15
       RowCount = 2
       Columns = <
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'SELECIONADO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Title.Alignment = taCenter
+          Title.Caption = 'Sel.'
+          Title.Color = 16777177
+          Width = 30
+          Visible = True
+        end
         item
           Expanded = False
           FieldName = 'NOME_TRANSPORTADORA'
@@ -363,6 +379,15 @@ object frmMinuta: TfrmMinuta
           FieldName = 'NUMNOTA'
           Title.Alignment = taCenter
           Title.Caption = 'N'#186' Nota'
+          Title.Color = 16777177
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DTEMISSAO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Dt. Emiss'#227'o'
           Title.Color = 16777177
           Visible = True
         end
@@ -422,7 +447,7 @@ object frmMinuta: TfrmMinuta
           Title.Alignment = taCenter
           Title.Caption = 'Nome Cliente'
           Title.Color = 16777177
-          Width = 64
+          Width = 94
           Visible = True
         end
         item
@@ -430,7 +455,7 @@ object frmMinuta: TfrmMinuta
           FieldName = 'UF'
           Title.Alignment = taCenter
           Title.Color = 16777177
-          Width = 64
+          Width = 22
           Visible = True
         end
         item
@@ -439,23 +464,23 @@ object frmMinuta: TfrmMinuta
           Title.Alignment = taCenter
           Title.Caption = 'Cidade'
           Title.Color = 16777177
-          Width = 64
+          Width = 92
           Visible = True
         end>
     end
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
-      Width = 185
-      Height = 402
+      Width = 127
+      Height = 409
       Align = alLeft
       Caption = ' Notas Selecionadas  '
       TabOrder = 0
       object SMDBGrid2: TSMDBGrid
         Left = 2
         Top = 15
-        Width = 181
-        Height = 385
+        Width = 123
+        Height = 392
         Align = alClient
         DataSource = DMConsNotas_ES.dsmNotaSel
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -486,6 +511,18 @@ object frmMinuta: TfrmMinuta
         ColCount = 2
         RowCount = 2
       end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 430
+    Top = 258
+    object SelecionarTodos1: TMenuItem
+      Caption = 'Marcar Todos'
+      OnClick = SelecionarTodos1Click
+    end
+    object DesmarcarTodos1: TMenuItem
+      Caption = 'Desmarcar Todos'
+      OnClick = DesmarcarTodos1Click
     end
   end
 end

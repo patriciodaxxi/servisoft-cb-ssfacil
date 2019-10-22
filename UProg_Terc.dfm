@@ -24,13 +24,13 @@ object frmProg_Terc: TfrmProg_Terc
     Top = 0
     Width = 995
     Height = 564
-    ActivePage = TS_Produto_Pend
+    ActivePage = TS_Liberados
     ActivePageDefault = TS_Produto_Pend
     Align = alClient
     BoldCurrentTab = True
     Color = 8453888
     ParentColor = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Liberados: TRzTabSheet
@@ -41,7 +41,7 @@ object frmProg_Terc: TfrmProg_Terc
         Top = 105
         Width = 991
         Height = 436
-        ActivePage = TS_Pedido_Sit
+        ActivePage = TS_Pedido_Lib
         ActivePageDefault = TS_Produto_Lib
         Align = alClient
         BoldCurrentTab = True
@@ -49,7 +49,7 @@ object frmProg_Terc: TfrmProg_Terc
         FlatColor = 16744448
         ParentColor = False
         ShowShadow = False
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 0
         UseGradients = False
         OnChange = RzPageControl2Change
@@ -815,7 +815,7 @@ object frmProg_Terc: TfrmProg_Terc
             FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 10
           Transparent = True
           OnClick = btnConsultarClick
         end
@@ -827,7 +827,7 @@ object frmProg_Terc: TfrmProg_Terc
           CharCase = ecUpperCase
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 2
+          TabOrder = 1
           OnKeyDown = Edit1KeyDown
         end
         object btnImprimir: TNxButton
@@ -898,7 +898,7 @@ object frmProg_Terc: TfrmProg_Terc
             FEFEFEFFFFFFFFFFFFFFFFFFFFFFFF000000}
           GlyphSpacing = 5
           ParentFont = False
-          TabOrder = 5
+          TabOrder = 11
           Transparent = True
           OnClick = btnImprimirClick
         end
@@ -912,7 +912,7 @@ object frmProg_Terc: TfrmProg_Terc
           DecimalPlaces = 0
           DisplayFormat = '0'
           ParentCtl3D = False
-          TabOrder = 3
+          TabOrder = 2
           OnChange = CurrencyEdit1Change
         end
         object Edit1: TEdit
@@ -920,11 +920,11 @@ object frmProg_Terc: TfrmProg_Terc
           Top = 44
           Width = 294
           Height = 19
-          TabStop = False
           CharCase = ecUpperCase
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 4
+          TabOrder = 3
+          OnKeyDown = Edit1KeyDown
         end
         object RadioGroup1: TRadioGroup
           Left = 1
@@ -940,30 +940,30 @@ object frmProg_Terc: TfrmProg_Terc
             'Faturado'
             'Ambos')
           ParentCtl3D = False
-          TabOrder = 6
+          TabOrder = 12
           Visible = False
         end
         object Edit8: TEdit
-          Left = 215
+          Left = 216
           Top = 62
           Width = 185
           Height = 19
-          TabStop = False
           CharCase = ecUpperCase
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 7
+          TabOrder = 4
+          OnKeyDown = Edit8KeyDown
         end
         object Edit10: TEdit
           Left = 458
           Top = 62
           Width = 134
           Height = 19
-          TabStop = False
           CharCase = ecUpperCase
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 8
+          TabOrder = 5
+          OnKeyDown = Edit10KeyDown
         end
         object DateEdit3: TDateEdit
           Left = 215
@@ -974,10 +974,10 @@ object frmProg_Terc: TfrmProg_Terc
           NumGlyphs = 2
           ParentCtl3D = False
           StartOfWeek = Sun
-          TabOrder = 9
+          TabOrder = 6
         end
         object DateEdit4: TDateEdit
-          Left = 343
+          Left = 344
           Top = 80
           Width = 100
           Height = 21
@@ -985,18 +985,17 @@ object frmProg_Terc: TfrmProg_Terc
           NumGlyphs = 2
           ParentCtl3D = False
           StartOfWeek = Sun
-          TabOrder = 10
+          TabOrder = 7
         end
         object Edit11: TEdit
           Left = 687
           Top = 26
           Width = 100
           Height = 19
-          TabStop = False
           CharCase = ecUpperCase
           Ctl3D = False
           ParentCtl3D = False
-          TabOrder = 11
+          TabOrder = 9
         end
         object CurrencyEdit7: TCurrencyEdit
           Left = 687
@@ -1008,7 +1007,7 @@ object frmProg_Terc: TfrmProg_Terc
           DecimalPlaces = 0
           DisplayFormat = '0'
           ParentCtl3D = False
-          TabOrder = 12
+          TabOrder = 8
           OnChange = CurrencyEdit1Change
         end
       end

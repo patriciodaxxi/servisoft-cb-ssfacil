@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids,
   DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr, UDMProg_Terc, RxLookup, UCBase, Mask, RzPanel, ToolEdit,
-  dbXPress, NxPageControl, RzTabs, NxCollection, NxEdit, CurrEdit;
+  dbXPress, NxPageControl, RzTabs, NxCollection, NxEdit, CurrEdit, StrUtils;
 
 type
   TfrmProg_Terc = class(TForm)
@@ -81,6 +81,10 @@ type
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure SMDBGrid4GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure Edit8KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Edit10KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMProg_Terc: TDMProg_Terc;
@@ -308,9 +312,16 @@ begin
 end;
 
 procedure TfrmProg_Terc.prc_Consultar_Produto_Lib;
+var
+  i : Integer;
+  vComando, vComandoAux : String;
 begin
+  i := Posex('group',fDMProg_Terc.ctProduto_Lib);
+  vComando    := copy(fDMProg_Terc.ctProduto_Lib,1,i-1);
+  vComandoAux := copy(fDMProg_Terc.ctProduto_Lib,i,Length(fDMProg_Terc.ctProduto_Lib)-i);
+  vComando    := vComando + fnc_Monta_Condicao + ' ' + vComandoAux; 
   fDMProg_Terc.cdsProduto_Lib.Close;
-  fDMProg_Terc.sdsProduto_Lib.CommandText := fDMProg_Terc.ctProduto_Lib + fnc_Monta_Condicao;
+  fDMProg_Terc.sdsProduto_Lib.CommandText := vComando;
   fDMProg_Terc.cdsProduto_Lib.Open;
   fDMProg_Terc.cdsProduto_Lib.IndexFieldNames := 'ID_PRODUTO;NOME_CLIENTE';
 end;
@@ -383,7 +394,8 @@ var
   vComando : String;
   vTexto : String;
 begin
-  Result := '';
+  Result   := '';
+  vComando := '';
   if RxDBLookupCombo3.Text <> '' then
     vComando := vComando + ' AND P.FILIAL = ' + IntToStr(RxDBLookupCombo3.KeyValue);
   if trim(Edit5.Text) <> '' then
@@ -462,6 +474,20 @@ begin
   fDMProg_Terc.sdsNotas_Ped.ParamByName('ID_PEDIDO').AsInteger   := fDMProg_Terc.cdsPedido_SitID.AsInteger;
   fDMProg_Terc.sdsNotas_Ped.ParamByName('ITEM_PEDIDO').AsInteger := fDMProg_Terc.cdsPedido_SitITEM.AsInteger;
   fDMProg_Terc.cdsNotas_Ped.Open;
+end;
+
+procedure TfrmProg_Terc.Edit8KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = Vk_Return then
+    btnConsultarClick(Sender);
+end;
+
+procedure TfrmProg_Terc.Edit10KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = Vk_Return then
+    btnConsultarClick(Sender);
 end;
 
 end.

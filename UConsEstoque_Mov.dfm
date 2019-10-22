@@ -321,13 +321,14 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
       LookupDisplay = 'NOME_AUX;CODIGO'
       LookupSource = DMConsEstoque.dsGrupo
       TabOrder = 5
+      OnChange = rxdbGrupoChange
       OnDropDown = rxdbGrupoDropDown
       OnKeyDown = rxdbGrupoKeyDowno
     end
     object rxdbLocalEstoque: TRxDBLookupCombo
       Left = 326
       Top = 107
-      Width = 401
+      Width = 236
       Height = 21
       DropDownCount = 15
       LookupField = 'ID'
@@ -408,12 +409,21 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
       OnKeyDown = ceIDPessoaKeyDown
     end
     object ckSemCor: TCheckBox
-      Left = 629
-      Top = 89
-      Width = 97
+      Left = 618
+      Top = 108
+      Width = 79
       Height = 17
       Caption = 'Sem Cor'
       TabOrder = 15
+    end
+    object ckEstrutura: TCheckBox
+      Left = 617
+      Top = 90
+      Width = 120
+      Height = 17
+      Caption = 'Estrutura Completa'
+      TabOrder = 16
+      Visible = False
     end
   end
   object RzPageControl1: TRzPageControl

@@ -3945,6 +3945,7 @@ object DMCadPedido: TDMCadPedido
       ProviderFlags = []
     end
     object cdsPedido_ItenssdsPedido_Item_Processo: TDataSetField
+      Tag = 1
       FieldName = 'sdsPedido_Item_Processo'
     end
   end
