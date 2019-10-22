@@ -1501,8 +1501,8 @@ begin
       fDMCadProduto.cdsProduto_Maq.ApplyUpdates(0);
     end;
 
-    if ((fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N') or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S'))
-      and (fDMCadProduto.cdsProdutoProcesso.Active) then
+    //if ((fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N') or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S'))
+    if (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N') and (fDMCadProduto.cdsProdutoProcesso.Active) then
     begin
       if (fDMCadProduto.cdsProdutoProcesso.State in [dsEdit,dsInsert]) then
         fDMCadProduto.cdsProdutoProcesso.Post;
@@ -1599,7 +1599,8 @@ begin
   RxDBComboBox7.SetFocus;
   lblDescLargura.Caption := '';
 
-  if (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N') or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S')  then
+  //if (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N') or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S')  then
+  if (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString <> 'N') then
     fDMCadProduto.prc_Abrir_Produto_Processo(fDMCadProduto.cdsProdutoID.AsInteger);
 
   vPreco_Custo       := 0;
@@ -1845,13 +1846,13 @@ begin
   TS_Pictograma.TabVisible    := (fDMCadProduto.qParametros_ProdUSA_PICTOGRAMA.AsString = 'S');
   Panel11.Visible             := ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString = 'S') and (fDMCadProduto.qParametros_ProdMOSTRAR_FORMA.AsString = 'S'));
   SMDBGrid9.Visible           := ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString <> 'S') and (trim(fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString) <> 'S'))
-                               or ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString = 'S') and (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L'))
-                               or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S');
+                               or ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString = 'S') and (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L'));
+                               //or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S');
   gbxProcesso.Visible         := SMDBGrid9.Visible;
   pnl_Eng_Processo.Visible    := ((fDMCadProduto.qParametros_GeralEMPRESA_CALCADOS.AsString <> 'S') and (fDMCadProduto.qParametros_GeralUSA_CUSTO_PROC_ATE.AsString <> 'A') and
                                  ((fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'S') or (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'C')) or
-                                 (fDMCadProduto.qParametros_SerUSA_PROCESSO_OS.AsString = 'S') and (fDMCadProduto.qParametros_LoteLOTE_PROCESSO.AsString = 'S'))
-                                 or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S');
+                                 (fDMCadProduto.qParametros_SerUSA_PROCESSO_OS.AsString = 'S') and (fDMCadProduto.qParametros_LoteLOTE_PROCESSO.AsString = 'S'));
+                                 //or (fDMCadProduto.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S');
   Label168.Visible            := (fDMCadProduto.qParametros_ProdUSA_TAM_INDIVIDUAL.AsString = 'S');
   DBEdit95.Visible            := (fDMCadProduto.qParametros_ProdUSA_TAM_INDIVIDUAL.AsString = 'S');
   SMDBGrid16.Visible := (fDMCadProduto.qParametros_LoteTIPO_PROCESSO.AsString = 'L');

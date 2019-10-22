@@ -46,8 +46,8 @@ end;
 procedure TfrmCadPedido_Item_Proc.FormShow(Sender: TObject);
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadPedido);
-  fDMCadPedido.cdsProcesso.Close;
-  fDMCadPedido.cdsProcesso.Open;
+  fDMCadPedido.cdsProcesso_Grupo.Close;
+  fDMCadPedido.cdsProcesso_Grupo.Open;
   btnInserir_Itens.Enabled := (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]);
   btnExcluir_Itens.Enabled := (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]);
   Panel1.Enabled           := (fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]);
@@ -61,7 +61,7 @@ begin
     exit;
   end;
 
-  prc_Gravar_Pedido_Item_Processo(fDMCadPedido,RxDBLookupCombo1.KeyValue,RxDBLookupCombo1.Text);
+  prc_Gravar_Pedido_Item_Processo(fDMCadPedido,RxDBLookupCombo1.KeyValue);
   RxDBLookupCombo1.ClearValue;
   RxDBLookupCombo1.SetFocus;
 end;

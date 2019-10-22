@@ -15140,6 +15140,9 @@ object DMCadPedido: TDMCadPedido
     object qParametros_PedPERC_DESCONTO_PADRAO: TFloatField
       FieldName = 'PERC_DESCONTO_PADRAO'
     end
+    object qParametros_PedID_PROCESSO_GRUPO: TIntegerField
+      FieldName = 'ID_PROCESSO_GRUPO'
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 
@@ -18341,8 +18344,8 @@ object DMCadPedido: TDMCadPedido
       'WHERE P.CODIGO = :CODIGO'
       '  and p.ID_PRODUTO = :ID_PRODUTO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1298
-    Top = 364
+    Left = 1184
+    Top = 339
     object qPessoa_ProdICMSID_CSTICMS: TIntegerField
       FieldName = 'ID_CSTICMS'
     end
@@ -18467,41 +18470,38 @@ object DMCadPedido: TDMCadPedido
     Left = 140
     Top = 113
   end
-  object sdsProcesso: TSQLDataSet
+  object sdsProcesso_Grupo: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT ID, NOME, ORDEM_MAPA'#13#10'FROM PROCESSO'
+    CommandText = 'SELECT P.ID, P.NOME'#13#10'FROM PROCESSO_GRUPO P'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 494
     Top = 589
   end
-  object dspProcesso: TDataSetProvider
-    DataSet = sdsProcesso
+  object dspProcesso_Grupo: TDataSetProvider
+    DataSet = sdsProcesso_Grupo
     Left = 523
     Top = 587
   end
-  object cdsProcesso: TClientDataSet
+  object cdsProcesso_Grupo: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'dspProcesso'
+    ProviderName = 'dspProcesso_Grupo'
     Left = 556
     Top = 589
-    object cdsProcessoID: TIntegerField
+    object cdsProcesso_GrupoID: TIntegerField
       FieldName = 'ID'
       Required = True
     end
-    object cdsProcessoNOME: TStringField
+    object cdsProcesso_GrupoNOME: TStringField
       FieldName = 'NOME'
-      Size = 30
-    end
-    object cdsProcessoORDEM_MAPA: TIntegerField
-      FieldName = 'ORDEM_MAPA'
+      Size = 60
     end
   end
-  object dsProcesso: TDataSource
-    DataSet = cdsProcesso
+  object dsProcesso_Grupo: TDataSource
+    DataSet = cdsProcesso_Grupo
     Left = 591
     Top = 591
   end

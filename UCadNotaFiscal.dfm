@@ -8013,8 +8013,8 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
     end
   end
   object PopupMenu3: TPopupMenu
-    Left = 625
-    Top = 40
+    Left = 827
+    Top = 51
     object XML1: TMenuItem
       Caption = 'XML'
       OnClick = XML1Click

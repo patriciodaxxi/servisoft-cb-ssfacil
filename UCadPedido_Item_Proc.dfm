@@ -30,19 +30,19 @@ object frmCadPedido_Item_Proc: TfrmCadPedido_Item_Proc
     object Label1: TLabel
       Left = 91
       Top = 9
-      Width = 44
+      Width = 76
       Height = 13
-      Caption = 'Processo'
+      Caption = 'Grupo Processo'
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
-      Left = 3
+      Left = 5
       Top = 23
       Width = 305
       Height = 21
       DropDownCount = 8
       LookupField = 'ID'
       LookupDisplay = 'NOME'
-      LookupSource = DMCadPedido.dsProcesso
+      LookupSource = DMCadPedido.dsProcesso_Grupo
       TabOrder = 0
     end
     object btnInserir_Itens: TNxButton
