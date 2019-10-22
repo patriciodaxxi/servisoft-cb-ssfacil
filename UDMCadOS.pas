@@ -1016,6 +1016,7 @@ type
     qTotalServico: TSQLQuery;
     qTotalServicoVLR_TOTAL: TFloatField;
     qParametros_SerNOME_SERVICO_INT: TStringField;
+    cdsFilialARQ_MODELO_CONTRATO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspOSUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

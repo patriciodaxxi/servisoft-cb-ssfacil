@@ -24,7 +24,7 @@ object frmCadFilial: TfrmCadFilial
     Top = 0
     Width = 1086
     Height = 590
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadFilial: TfrmCadFilial
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1082
         Height = 536
-        ActivePage = TS_Dados
+        ActivePage = TS_Parametros
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 0
+        TabIndex = 2
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -3176,7 +3176,7 @@ object frmCadFilial: TfrmCadFilial
             Left = 0
             Top = 30
             Width = 1078
-            Height = 483
+            Height = 442
             Align = alClient
             DataSource = DMCadFilial.dsFilialRelatorios
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -3255,6 +3255,31 @@ object frmCadFilial: TfrmCadFilial
                 Width = 389
                 Visible = True
               end>
+          end
+          object Panel6: TPanel
+            Left = 0
+            Top = 472
+            Width = 1078
+            Height = 41
+            Align = alBottom
+            TabOrder = 2
+            object Label146: TLabel
+              Left = 16
+              Top = 20
+              Width = 103
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Arq. Modelo Contrato:'
+            end
+            object FilenameEdit1: TFilenameEdit
+              Left = 122
+              Top = 12
+              Width = 369
+              Height = 21
+              Filter = 'Relat'#243'rios|*.fr3|All files (*.*)|*.*'
+              NumGlyphs = 1
+              TabOrder = 0
+            end
           end
         end
         object TS_Email: TRzTabSheet

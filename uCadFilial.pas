@@ -397,6 +397,9 @@ type
     Label145: TLabel;
     DBEdit94: TDBEdit;
     BitBtn4: TBitBtn;
+    Panel6: TPanel;
+    Label146: TLabel;
+    FilenameEdit1: TFilenameEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -515,6 +518,8 @@ begin
     fDMCadFilial.cdsFilialCALCULAR_DIFAL.AsString := 'N';
   if fDMCadFilial.cdsFilialCALCULAR_DIFAL.AsString = 'N' then
     fDMCadFilial.cdsFilialDIFAL_GERAR_VALORES.AsString := 'N';
+  if FilenameEdit1.Text <> '' then
+    fDMCadFilial.cdsFilialARQ_MODELO_CONTRATO.AsString := FilenameEdit1.Text;
   fDMCadFilial.prc_Gravar;
   if fDMCadFilial.cdsFilial.State in [dsEdit,dsInsert] then
   begin
@@ -693,6 +698,7 @@ begin
     RzPageControl2.ActivePage := TS_Dados;
     if fDMCadFilial.vNFeConfig_Achou then
       prc_Abrir_Config_NFe;
+    FilenameEdit1.Text := fDMCadFilial.cdsFilialARQ_MODELO_CONTRATO.AsString; 
   end;
 end;
 
