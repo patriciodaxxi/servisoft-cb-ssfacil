@@ -78,6 +78,7 @@ type
     DBGrid11: TDBGrid;
     ProgressBar1: TProgressBar;
     NxButton2: TNxButton;
+    ckEstrutura: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -115,6 +116,7 @@ type
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure NxButton1Click(Sender: TObject);
     procedure NxButton2Click(Sender: TObject);
+    procedure rxdbGrupoChange(Sender: TObject);
   private
     { Private declarations }
     fDMConsEstoque: TDMConsEstoque;
@@ -454,8 +456,6 @@ begin
     0: vComando := vComando + ' AND EM.TIPO_ES = ' + QuotedStr('E');
     1: vComando := vComando + ' AND EM.TIPO_ES = ' + QuotedStr('S');
   end;
-  if rxdbGrupo.Text <> '' then
-    vComando := vComando + ' AND PRO.ID_GRUPO = ' + IntToStr(rxdbGrupo.KeyValue);
   if (rxdbLocalEstoque.Text <> '') and (RzPageControl1.ActivePage <> TS_Reserva) then
     vComando := vComando + ' AND EM.ID_LOCAL_ESTOQUE = ' + IntToStr(rxdbLocalEstoque.KeyValue);
   if (CurrencyEdit1.AsInteger > 0) and (RzPageControl1.ActivePage = TS_Reserva) then
@@ -465,6 +465,14 @@ begin
   else
   if ckSemCor.Checked then
     vComando := vComando + ' AND EM.ID_COR = 0 ';
+  if (rxdbGrupo.Text <> '') and (ckEstrutura.Checked) then
+  begin
+    fDMConsEstoque.cdsGrupo.Locate('ID',rxdbGrupo.KeyValue,[loCaseInsensitive]);
+    vComando := vComando + ' AND GR.CODIGO like ' + QuotedStr(fDMConsEstoque.cdsGrupoCODIGO.AsString+'%');
+  end
+  else
+  if rxdbGrupo.Text <> '' then
+    vComando := vComando + ' AND PRO.ID_GRUPO = ' + IntToStr(rxdbGrupo.KeyValue);
 end;
 
 procedure TfrmConsEstoque_Mov.SMDBGrid2TitleClick(Column: TColumn);
@@ -1269,6 +1277,11 @@ end;
 procedure TfrmConsEstoque_Mov.NxButton2Click(Sender: TObject);
 begin
   prc_Le_cdsEstoque_Mov_Res;
+end;
+
+procedure TfrmConsEstoque_Mov.rxdbGrupoChange(Sender: TObject);
+begin
+  ckEstrutura.Visible := (rxdbGrupo.Text <> '');
 end;
 
 end.
