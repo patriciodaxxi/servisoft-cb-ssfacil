@@ -1,7 +1,7 @@
 object frmMinuta: TfrmMinuta
-  Left = 234
+  Left = 178
   Top = 87
-  Width = 981
+  Width = 1037
   Height = 533
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'frmMinuta'
@@ -21,7 +21,7 @@ object frmMinuta: TfrmMinuta
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 965
+    Width = 1029
     Height = 91
     Align = alTop
     Color = clSilver
@@ -298,15 +298,15 @@ object frmMinuta: TfrmMinuta
   object Panel2: TPanel
     Left = 0
     Top = 91
-    Width = 965
-    Height = 404
+    Width = 1029
+    Height = 411
     Align = alClient
     TabOrder = 1
     object SMDBGrid1: TSMDBGrid
-      Left = 186
+      Left = 128
       Top = 1
-      Width = 778
-      Height = 402
+      Width = 900
+      Height = 409
       Align = alClient
       Ctl3D = False
       DataSource = DMConsNotas_ES.dsMinuta
@@ -338,7 +338,7 @@ object frmMinuta: TfrmMinuta
       WidthOfIndicator = 27
       DefaultRowHeight = 17
       ScrollBars = ssHorizontal
-      ColCount = 13
+      ColCount = 14
       RowCount = 2
       Columns = <
         item
@@ -363,6 +363,15 @@ object frmMinuta: TfrmMinuta
           FieldName = 'NUMNOTA'
           Title.Alignment = taCenter
           Title.Caption = 'N'#186' Nota'
+          Title.Color = 16777177
+          Visible = True
+        end
+        item
+          Alignment = taCenter
+          Expanded = False
+          FieldName = 'DTEMISSAO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Dt. Emiss'#227'o'
           Title.Color = 16777177
           Visible = True
         end
@@ -422,7 +431,7 @@ object frmMinuta: TfrmMinuta
           Title.Alignment = taCenter
           Title.Caption = 'Nome Cliente'
           Title.Color = 16777177
-          Width = 64
+          Width = 94
           Visible = True
         end
         item
@@ -430,7 +439,7 @@ object frmMinuta: TfrmMinuta
           FieldName = 'UF'
           Title.Alignment = taCenter
           Title.Color = 16777177
-          Width = 64
+          Width = 22
           Visible = True
         end
         item
@@ -439,23 +448,23 @@ object frmMinuta: TfrmMinuta
           Title.Alignment = taCenter
           Title.Caption = 'Cidade'
           Title.Color = 16777177
-          Width = 64
+          Width = 92
           Visible = True
         end>
     end
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
-      Width = 185
-      Height = 402
+      Width = 127
+      Height = 409
       Align = alLeft
       Caption = ' Notas Selecionadas  '
       TabOrder = 0
       object SMDBGrid2: TSMDBGrid
         Left = 2
         Top = 15
-        Width = 181
-        Height = 385
+        Width = 123
+        Height = 392
         Align = alClient
         DataSource = DMConsNotas_ES.dsmNotaSel
         Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]

@@ -216,6 +216,7 @@ type
     cdsFilialEMAIL: TStringField;
     mEtiq_RotuloNome_Transp: TStringField;
     cdsNotaFiscal_RotNOME_TRANSP: TStringField;
+    cdsMinutaDTEMISSAO: TDateField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscal_RotCalcFields(DataSet: TDataSet);
   private

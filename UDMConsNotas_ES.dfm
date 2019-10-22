@@ -1,8 +1,8 @@
 object DMConsNotas_ES: TDMConsNotas_ES
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 316
-  Top = 66
+  Left = 259
+  Top = 62
   Height = 628
   Width = 1019
   object sdsFilial: TSQLDataSet
@@ -977,14 +977,14 @@ object DMConsNotas_ES: TDMConsNotas_ES
       'SELECT N.ID, N.ID_CLIENTE, N.id_transportadora, N.qtdvolume, N.q' +
       'tdtotal_itens, N.SERIE, N.NUMNOTA, '#13#10'N.vlr_nota, n.tipo_frete, n' +
       '.pesoliquido, n.pesobruto, CLI.nome NOME_CLIENTE,'#13#10'TRANSP.NOME N' +
-      'OME_TRANSPORTADORA, CLI.UF, CLI.cidade, case'#13#10'   WHEN N.TIPO_FRE' +
-      'TE = '#39'1'#39' THEN '#39'Emitente'#39#13#10'   WHEN N.TIPO_FRETE = '#39'2'#39' THEN '#39'Desti' +
-      'natario'#39#13#10'   WHEN N.TIPO_FRETE = '#39'3'#39' THEN '#39'Terceiros'#39#13#10'   WHEN N' +
-      '.TIPO_FRETE = '#39'9'#39' THEN '#39'Sem Frete'#39#13#10'   ELSE '#39#39#13#10'   END AS TIPO_F' +
-      'RETE_DESC, N.SELECIONADO'#13#10'FROM NOTAFISCAL N'#13#10'INNER JOIN PESSOA C' +
-      'LI ON (N.id_cliente = CLI.codigo)'#13#10'LEFT JOIN PESSOA TRANSP ON (N' +
-      '.id_transportadora = TRANSP.CODIGO)'#13#10'WHERE N.TIPO_REG = '#39'NTS'#39' AN' +
-      'D CANCELADA = '#39'N'#39#13#10
+      'OME_TRANSPORTADORA, CLI.UF, CLI.cidade, N.DTEMISSAO,'#13#10'case'#13#10'   W' +
+      'HEN N.TIPO_FRETE = '#39'1'#39' THEN '#39'Emitente'#39#13#10'   WHEN N.TIPO_FRETE = '#39 +
+      '2'#39' THEN '#39'Destinatario'#39#13#10'   WHEN N.TIPO_FRETE = '#39'3'#39' THEN '#39'Terceir' +
+      'os'#39#13#10'   WHEN N.TIPO_FRETE = '#39'9'#39' THEN '#39'Sem Frete'#39#13#10'   ELSE '#39#39#13#10'  ' +
+      ' END AS TIPO_FRETE_DESC, N.SELECIONADO'#13#10'FROM NOTAFISCAL N'#13#10'INNER' +
+      ' JOIN PESSOA CLI ON (N.id_cliente = CLI.codigo)'#13#10'LEFT JOIN PESSO' +
+      'A TRANSP ON (N.id_transportadora = TRANSP.CODIGO)'#13#10'WHERE N.TIPO_' +
+      'REG = '#39'NTS'#39' AND CANCELADA = '#39'N'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1066,6 +1066,9 @@ object DMConsNotas_ES: TDMConsNotas_ES
       FieldName = 'SELECIONADO'
       FixedChar = True
       Size = 1
+    end
+    object cdsMinutaDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
     end
   end
   object dsMinuta: TDataSource
