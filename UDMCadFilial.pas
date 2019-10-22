@@ -662,6 +662,8 @@ type
     cdsFilial_ContabilID_CONTABIL_OPE_TRANSF: TIntegerField;
     sdsFilial_MDFeEND_LOG: TStringField;
     cdsFilial_MDFeEND_LOG: TStringField;
+    sdsFilialARQ_MODELO_CONTRATO: TStringField;
+    cdsFilialARQ_MODELO_CONTRATO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);

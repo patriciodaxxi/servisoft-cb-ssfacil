@@ -1975,6 +1975,10 @@ object DMCadOS: TDMCadOS
     object cdsFilialPERC_ISS_SIMPLES: TFloatField
       FieldName = 'PERC_ISS_SIMPLES'
     end
+    object cdsFilialARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 200
+    end
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial

@@ -4,9 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadOS, RzDTP, DBGrids,
-  DB, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus, RXDBCtrl,
-  RzEdit, RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, StrUtils, DateUtils, ComCtrls, NxEdit,
-  UCadContrato_Servico_Int, RzDBDTP;
+  DB, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus, RXDBCtrl, RzEdit,
+  RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel,  dbXPress, NxCollection, StrUtils, DateUtils, ComCtrls, NxEdit, RzDBDTP,
+  UCadContrato_Servico_Int, ComObj;
 
 type
   TfrmCadContrato = class(TForm)
@@ -151,19 +151,14 @@ type
     procedure pnlClienteExit(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure edtSerieKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
-    procedure Edit2KeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure edtSerieKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Edit2KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure RxDBLookupCombo3Exit(Sender: TObject);
-    procedure RxDBLookupCombo3KeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure RxDBLookupCombo3KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure Panel4Enter(Sender: TObject);
-    procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
-      AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure SMDBGrid1DblClick(Sender: TObject);
     procedure Panel5Exit(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
@@ -172,34 +167,27 @@ type
     procedure btnAlterar_ItensClick(Sender: TObject);
     procedure btnExcluir_ItensClick(Sender: TObject);
     procedure SpeedButton5Click(Sender: TObject);
-    procedure RxDBLookupCombo10KeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure RxDBLookupCombo10KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnInserirMatClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure NxButton1Click(Sender: TObject);
   private
     { Private declarations }
-    vTipoNotaAnt: String;
+    vTipoNotaAnt: string;
     vID_Cliente_Ant: Integer;
-
     fDMCadOS: TDMCadOS;
     ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadContrato_Servico_Int: TfrmCadContrato_Servico_Int;
-
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
     procedure prc_Gravar_Registro;
     procedure prc_Consultar(ID: Integer);
     procedure prc_Imprimir_Fast;
-
     procedure prc_Posiciona_OS;
     procedure prc_Posicionar_Cliente;
-
     procedure prc_Habilitar_Campos;
-
     function fnc_Verifica_Registro: Boolean;
     function fnc_Cancelar: Boolean;
-
     procedure prc_Limpar_Edit_Consulta;
     procedure prc_Opcao_Habilita;
   public
@@ -211,12 +199,13 @@ var
 
 implementation
 
-uses DmdDatabase, rsDBUtils, uUtilPadrao, UCadContrato_Material, USel_Pessoa, USel_ContaOrc;
+uses
+  DmdDatabase, rsDBUtils, uUtilPadrao, UCadContrato_Material, USel_Pessoa,
+  USel_ContaOrc;
 
 {$R *.dfm}
 
-procedure TfrmCadContrato.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TfrmCadContrato.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   fDMCadOS.cdsProdutoCons.Close;
   Action := Cafree;
@@ -241,7 +230,7 @@ begin
     end;
   end;
 
-  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
     exit;
 
   prc_Excluir_Registro;
@@ -264,7 +253,7 @@ var
   vIDAux: Integer;
   ID: TTransactionDesc;
   vVlrTotal: Real;
-  vGerarDupl: String;
+  vGerarDupl: string;
 begin
   if (fDMCadOS.qParametrosUSA_ANO_CONTRATO.AsString = 'S') and (fDMCadOS.cdsOSANO_CONTRATO.AsInteger < 2000) then
   begin
@@ -272,25 +261,25 @@ begin
     exit;
   end;
   if (fDMCadOS.cdsOSNUM_CONTRATO.AsInteger <= 0) and (fDMCadOS.qParametrosGERAR_NUM_AUT_CONTRATO.AsString <> 'N') then
-    fDMCadOS.cdsOSNUM_CONTRATO.AsInteger := fDMCadOS.fnc_Busca_Num_Contrato(fDMCadOS.cdsOSANO_CONTRATO.AsInteger,'C');
+    fDMCadOS.cdsOSNUM_CONTRATO.AsInteger := fDMCadOS.fnc_Busca_Num_Contrato(fDMCadOS.cdsOSANO_CONTRATO.AsInteger, 'C');
   if fDMCadOS.cdsClienteCODIGO.AsInteger <> fDMCadOS.cdsOSID_CLIENTE.AsInteger then
-    fDMCadOS.cdsCliente.Locate('CODIGO',fDMCadOS.cdsOSID_CLIENTE.AsInteger,[loCaseInsensitive]);
+    fDMCadOS.cdsCliente.Locate('CODIGO', fDMCadOS.cdsOSID_CLIENTE.AsInteger, [loCaseInsensitive]);
   vVlrTotal := 0;
   fDMCadOS.cdsOS_Servico_Int.First;
   while not fDMCadOS.cdsOS_Servico_Int.Eof do
   begin
     if fDMCadOS.cdsOS_Servico_IntSOMAR_DIMINUIR.AsString = 'S' then
-      vVlrTotal := StrToFloat(FormatFloat('0.00',vVlrTotal + fDMCadOS.cdsOS_Servico_IntVLR_TOTAL.AsFloat))
+      vVlrTotal := StrToFloat(FormatFloat('0.00', vVlrTotal + fDMCadOS.cdsOS_Servico_IntVLR_TOTAL.AsFloat))
     else
-      vVlrTotal := StrToFloat(FormatFloat('0.00',vVlrTotal - fDMCadOS.cdsOS_Servico_IntVLR_TOTAL.AsFloat));
+      vVlrTotal := StrToFloat(FormatFloat('0.00', vVlrTotal - fDMCadOS.cdsOS_Servico_IntVLR_TOTAL.AsFloat));
     fDMCadOS.cdsOS_Servico_Int.Next;
   end;
-  fDMCadOS.cdsOSVLR_SERVICO.AsFloat := StrToFloat(FormatFloat('0.00',vVlrTotal));
-  fDMCadOS.cdsOSVLR_TOTAL.AsFloat   := StrToFloat(FormatFloat('0.00',vVlrTotal));
+  fDMCadOS.cdsOSVLR_SERVICO.AsFloat := StrToFloat(FormatFloat('0.00', vVlrTotal));
+  fDMCadOS.cdsOSVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00', vVlrTotal));
 
   if (fDMCadOS.cdsOSDIA_VENCIMENTO.AsInteger <= 0) and (fDMCadOS.cdsOSTIPO_REG.AsString <> 'S') and (fDMCadOS.qParametros_SerTIPO_COBRANCA_NFSE.AsString = 'C') then
   begin
-    if MessageDlg('Dia do vencimento não informado, Confirma?',mtConfirmation,[mbYes,mbNo],0) = mrNO then
+    if MessageDlg('Dia do vencimento não informado, Confirma?', mtConfirmation, [mbYes, mbNo], 0) = mrNO then
       exit;
   end;
 
@@ -298,7 +287,7 @@ begin
   vGerarDupl := 'N';
   if fDMCadOS.qParametros_SerGERAR_DUPLICATA_CONTRATO.AsString = 'S' then
   begin
-    if MessageDlg('Gerar duplicata?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+    if MessageDlg('Gerar duplicata?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     begin
       vGerarDupl := 'S';
       if fDMCadOS.fnc_Verifica_Dupl(fDMCadOS.cdsOSID.AsInteger) then
@@ -310,13 +299,13 @@ begin
   end;
 
   fDMCadOS.prc_Gravar(vGerarDupl);
-  if fDMCadOS.cdsOS.State in [dsEdit,dsInsert] then
+  if fDMCadOS.cdsOS.State in [dsEdit, dsInsert] then
   begin
     MessageDlg(fDMCadOS.vMsgOS, mtError, [mbOk], 0);
     exit;
   end;
 
-  TS_Consulta.TabEnabled    := True;
+  TS_Consulta.TabEnabled := True;
   prc_Habilitar_Campos;
   RzPageControl1.ActivePage := TS_Consulta;
 
@@ -336,7 +325,7 @@ begin
   else
   begin
     fDMCadOS.cdsFilial.Last;
-    vFilial      := fDMCadOS.cdsFilialID.AsInteger;
+    vFilial := fDMCadOS.cdsFilialID.AsInteger;
     vFilial_Nome := fDMCadOS.cdsFilialNOME.AsString;
   end;
   if vFilial <= 0 then
@@ -345,7 +334,7 @@ begin
     exit;
   end;
 
-  fDMCadOS.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
+  fDMCadOS.cdsFilial.Locate('ID', vFilial, [loCaseInsensitive]);
 
   fDMCadOS.prc_Abrir_Natureza;
   fDMCadOS.prc_Abrir_Servico;
@@ -359,9 +348,9 @@ begin
   prc_Habilitar_Campos;
 
   RzPageControl1.ActivePage := TS_Cadastro;
-  TS_Consulta.TabEnabled    := False;
+  TS_Consulta.TabEnabled := False;
 
-  fDMCadOS.cdsOSFILIAL.AsInteger  := vFilial;
+  fDMCadOS.cdsOSFILIAL.AsInteger := vFilial;
   fDMCadOS.cdsOSTIPO_REG.AsString := 'C';
 
   if fDMCadOS.qParametrosCONTRATO_CONSUMO.AsString = 'S' then
@@ -371,7 +360,7 @@ begin
   if fDMCadOS.cdsFilialID_SERVICO_PAD.AsInteger > 0 then
     fDMCadOS.cdsOSID_SERVICO.AsInteger := fDMCadOS.cdsFilialID_SERVICO_PAD.AsInteger;
   fDMCadOS.cdsOSPERC_INSS.AsFloat := fDMCadOS.cdsFilialPERC_INSS.AsFloat;
-  fDMCadOS.cdsOSPERC_IR.AsFloat   := fDMCadOS.cdsFilialPERC_IR.AsFloat;
+  fDMCadOS.cdsOSPERC_IR.AsFloat := fDMCadOS.cdsFilialPERC_IR.AsFloat;
   fDMCadOS.cdsOSID_ATIVIDADE_CID.AsInteger := fDMCadOS.cdsFilialID_ATIVIDADE_CID.AsInteger;
 
   RxDBLookupCombo3.SetFocus;
@@ -390,36 +379,33 @@ begin
   if fDMCadOS.qParametrosESCOLA.AsString = 'S' then
   begin
     gbxVendedor.Caption := ' Professor ';
-    Label82.Caption     := 'Professor:';
+    Label82.Caption := 'Professor:';
   end;
   TS_Relacao_Prod.TabVisible := (fDMCadOS.qParametros_GerUSA_PONTOS_LOCACAO.AsString <> 'S');
-  TS_Consumo.TabVisible      := (fDMCadOS.qParametros_GerUSA_PONTOS_LOCACAO.AsString <> 'S');
+  TS_Consumo.TabVisible := (fDMCadOS.qParametros_GerUSA_PONTOS_LOCACAO.AsString <> 'S');
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin
-    if (SMDBGrid1.Columns[i-1].FieldName = 'ANO_CONTRATO') and (fDMCadOS.qParametrosUSA_ANO_CONTRATO.AsString <> 'S') then
-      SMDBGrid1.Columns[i-1].Visible := False;
-    if (SMDBGrid1.Columns[i-1].FieldName = 'DTAJUSTE') and (fDMCadOS.qParametros_SerUSA_AJUSTE_PRECO.AsString <> 'S') then
-      SMDBGrid1.Columns[i-1].Visible := False;
+    if (SMDBGrid1.Columns[i - 1].FieldName = 'ANO_CONTRATO') and (fDMCadOS.qParametrosUSA_ANO_CONTRATO.AsString <> 'S') then
+      SMDBGrid1.Columns[i - 1].Visible := False;
+    if (SMDBGrid1.Columns[i - 1].FieldName = 'DTAJUSTE') and (fDMCadOS.qParametros_SerUSA_AJUSTE_PRECO.AsString <> 'S') then
+      SMDBGrid1.Columns[i - 1].Visible := False;
   end;
   for i := 1 to SMDBGrid2.ColCount - 2 do
   begin
-    if (SMDBGrid2.Columns[i].FieldName = 'ID_VENDEDOR') or
-       (SMDBGrid2.Columns[i].FieldName = 'PERC_COMISSAO') or
-       (SMDBGrid2.Columns[i].FieldName = 'NOME_VENDEDOR') then
+    if (SMDBGrid2.Columns[i].FieldName = 'ID_VENDEDOR') or (SMDBGrid2.Columns[i].FieldName = 'PERC_COMISSAO') or (SMDBGrid2.Columns[i].FieldName = 'NOME_VENDEDOR') then
     begin
-      SMDBGrid2.Columns[i].Visible := not(gbxVendedor.Visible);
-      if not(gbxVendedor.Visible) and (fDMCadOS.qParametrosESCOLA.AsString = 'S') then
+      SMDBGrid2.Columns[i].Visible := not (gbxVendedor.Visible);
+      if not (gbxVendedor.Visible) and (fDMCadOS.qParametrosESCOLA.AsString = 'S') then
       begin
         if (SMDBGrid2.Columns[i].FieldName = 'ID_VENDEDOR') then
           SMDBGrid2.Columns[i].Title.Caption := 'ID Professor'
-        else
-        if (SMDBGrid2.Columns[i].FieldName = 'NOME_VENDEDOR') then
+        else if (SMDBGrid2.Columns[i].FieldName = 'NOME_VENDEDOR') then
           SMDBGrid2.Columns[i].Title.Caption := 'Nome Professor';
       end;
     end;
   end;
   DBEdit1.ReadOnly := (fDMCadOS.qParametrosGERAR_NUM_AUT_CONTRATO.AsString <> 'N');
-  DBEdit1.TabStop  := not(DBEdit1.ReadOnly);
+  DBEdit1.TabStop := not (DBEdit1.ReadOnly);
   if (fDMCadOS.qParametrosGERAR_NUM_AUT_CONTRATO.AsString <> 'N') then
     DBEdit1.Color := clBtnFace
   else
@@ -434,28 +420,19 @@ begin
   fDMCadOS.cdsOS_Consulta.Close;
   fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.ctConsulta;
   if ID > 0 then
-    fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText +
-                                                           ' WHERE OS.ID = ' + IntToStr(ID)
+    fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText + ' WHERE OS.ID = ' + IntToStr(ID)
   else
   begin
-    fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText +
-                                           ' WHERE ((TIPO_REG = ''C'') OR (TIPO_REG = ''U''))';
+    fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText + ' WHERE ((TIPO_REG = ''C'') OR (TIPO_REG = ''U''))';
     if trim(RxDBLookupCombo1.Text) <> '' then
-      fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText +
-                                             ' AND OS.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
+      fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText + ' AND OS.FILIAL = ' + IntToStr(RxDBLookupCombo1.KeyValue);
     if CurrencyEdit1.AsInteger > 0 then
-      fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText +
-                                             ' AND OS.NUM_CONTRATO = ' + CurrencyEdit1.Text;
+      fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText + ' AND OS.NUM_CONTRATO = ' + CurrencyEdit1.Text;
     if Trim(Edit2.Text) <> '' then
-      fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText +
-                                             ' AND ((CLI.NOME LIKE ' + QuotedStr('%'+Edit2.Text+'%') + ')' +
-                                             ' OR (CLI.FANTASIA LIKE ' + QuotedStr('%'+Edit2.Text+'%') + '))';
+      fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText + ' AND ((CLI.NOME LIKE ' + QuotedStr('%' + Edit2.Text + '%') + ')' + ' OR (CLI.FANTASIA LIKE ' + QuotedStr('%' + Edit2.Text + '%') + '))';
     if ckAtivo.Checked then
     begin
-      fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText + 'and (OS.DTCONTRATO_INI <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',Date)) + ')'
-                                           + ' AND ((OS.DTCONTRATO_FIN >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',Date)) + ')'
-                                           + '  OR (OS.DTCONTRATO_FIN IS NULL))'
-                                           + ' AND ((OS.DTENCERRAMENTO IS NULL) or (OS.DTENCERRAMENTO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',Date)) + '))';
+      fDMCadOS.sdsOS_Consulta.CommandText := fDMCadOS.sdsOS_Consulta.CommandText + 'and (OS.DTCONTRATO_INI <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY', Date)) + ')' + ' AND ((OS.DTCONTRATO_FIN >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY', Date)) + ')' + '  OR (OS.DTCONTRATO_FIN IS NULL))' + ' AND ((OS.DTENCERRAMENTO IS NULL) or (OS.DTENCERRAMENTO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY', Date)) + '))';
     end;
   end;
   fDMCadOS.cdsOS_Consulta.Open;
@@ -468,28 +445,28 @@ end;
 
 procedure TfrmCadContrato.btnCancelarClick(Sender: TObject);
 begin
-  if (fDMCadOS.cdsOS.State in [dsBrowse]) or not(fDMCadOS.cdsOS.Active) then
+  if (fDMCadOS.cdsOS.State in [dsBrowse]) or not (fDMCadOS.cdsOS.Active) then
   begin
     RzPageControl1.ActivePage := TS_Consulta;
     exit;
   end;
 
-  if MessageDlg('Deseja cancelar alteração/inclusão do registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja cancelar alteração/inclusão do registro?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
     exit;
 
   fDMCadOS.cdsOS.CancelUpdates;
 
   prc_Habilitar_Campos;
 
-  TS_Consulta.TabEnabled    := True;
+  TS_Consulta.TabEnabled := True;
   RzPageControl1.ActivePage := TS_Consulta;
 end;
 
 procedure TfrmCadContrato.btnAlterarClick(Sender: TObject);
 var
-  vCodAux: String;
+  vCodAux: string;
 begin
-  if (fDMCadOS.cdsOS.IsEmpty) or not(fDMCadOS.cdsOS.Active) or (fDMCadOS.cdsOSID.AsInteger < 1) then
+  if (fDMCadOS.cdsOS.IsEmpty) or not (fDMCadOS.cdsOS.Active) or (fDMCadOS.cdsOSID.AsInteger < 1) then
     exit;
 
   fDMCadOS.qParametros.Close;
@@ -523,9 +500,9 @@ begin
   fDMCadOS.cdsOS_Servico_Hist.Close;
   fDMCadOS.cdsOS_Servico_Hist.Open;
 
-  vFilial      := fDMCadOS.cdsOSFILIAL.AsInteger;
+  vFilial := fDMCadOS.cdsOSFILIAL.AsInteger;
   vFilial_Nome := '';
-  if fDMCadOS.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]) then
+  if fDMCadOS.cdsFilial.Locate('ID', vFilial, [loCaseInsensitive]) then
     vFilial_Nome := fDMCadOS.cdsFilialNOME_INTERNO.AsString;
   lblNome_Filial.Caption := vFilial_Nome;
 end;
@@ -533,19 +510,18 @@ end;
 function TfrmCadContrato.fnc_Verifica_Registro: Boolean;
 begin
   Result := False;
-  if not(fDMCadOS.cdsOS_Consulta.Active) or (fDMCadOS.cdsOS_Consulta.IsEmpty) or
-        (fDMCadOS.cdsOS_ConsultaID.AsInteger < 1) then
+  if not (fDMCadOS.cdsOS_Consulta.Active) or (fDMCadOS.cdsOS_Consulta.IsEmpty) or (fDMCadOS.cdsOS_ConsultaID.AsInteger < 1) then
     exit;
   Result := True;
 end;
 
 procedure TfrmCadContrato.RzPageControl1Change(Sender: TObject);
 begin
-  if not(fDMCadOS.cdsOS.State in [dsEdit, dsInsert]) then
+  if not (fDMCadOS.cdsOS.State in [dsEdit, dsInsert]) then
   begin
     if RzPageControl1.ActivePage = TS_Cadastro then
     begin
-      if not(fDMCadOS.cdsOS_Consulta.Active) or (fDMCadOS.cdsOS_Consulta.IsEmpty) or (fDMCadOS.cdsOS_ConsultaID.AsInteger <= 0) then
+      if not (fDMCadOS.cdsOS_Consulta.Active) or (fDMCadOS.cdsOS_Consulta.IsEmpty) or (fDMCadOS.cdsOS_ConsultaID.AsInteger <= 0) then
         exit;
       prc_Posiciona_OS;
       fDMCadOS.prc_Abrir_Natureza;
@@ -562,30 +538,30 @@ end;
 procedure TfrmCadContrato.prc_Posicionar_Cliente;
 begin
   if fDMCadOS.cdsClienteCODIGO.AsInteger <> fDMCadOS.cdsOSID_CLIENTE.AsInteger then
-    fDMCadOS.cdsCliente.Locate('CODIGO',fDMCadOS.cdsOSID_CLIENTE.AsInteger,[loCaseInsensitive]);
+    fDMCadOS.cdsCliente.Locate('CODIGO', fDMCadOS.cdsOSID_CLIENTE.AsInteger, [loCaseInsensitive]);
   if (fDMCadOS.cdsFilialID.AsInteger <> fDMCadOS.cdsOSFILIAL.AsInteger) then
-    fDMCadOS.cdsFilial.Locate('ID',fDMCadOS.cdsOSFILIAL.AsInteger,[loCaseInsensitive]);
+    fDMCadOS.cdsFilial.Locate('ID', fDMCadOS.cdsOSFILIAL.AsInteger, [loCaseInsensitive]);
 end;
 
 procedure TfrmCadContrato.prc_Habilitar_Campos;
 begin
-  btnConfirmar.Enabled     := not(btnConfirmar.Enabled);
-  btnAlterar.Enabled       := not(btnAlterar.Enabled);
-  DBMemo1.ReadOnly         := not(DBMemo1.ReadOnly);
-  pnlCliente.Enabled       := not(pnlCliente.Enabled);
-  pnlCertificado.Enabled   := not(pnlCertificado.Enabled);
-  pnlCobranca.Enabled      := not(pnlCobranca.Enabled);
-  pnlVendedor.Enabled      := not(pnlVendedor.Enabled);
-  pnlRetencao.Enabled      := not(pnlRetencao.Enabled);
-  DBDateEdit5.ReadOnly     := not(DBDateEdit5.ReadOnly);
-  DBMemo3.ReadOnly         := not(DBMemo3.ReadOnly);
-  btnInserir_Itens.Enabled := not(btnInserir_Itens.Enabled);
-  btnAlterar_Itens.Enabled := not(btnAlterar_Itens.Enabled);
-  btnExcluir_Itens.Enabled := not(btnExcluir_Itens.Enabled);
+  btnConfirmar.Enabled := not (btnConfirmar.Enabled);
+  btnAlterar.Enabled := not (btnAlterar.Enabled);
+  DBMemo1.ReadOnly := not (DBMemo1.ReadOnly);
+  pnlCliente.Enabled := not (pnlCliente.Enabled);
+  pnlCertificado.Enabled := not (pnlCertificado.Enabled);
+  pnlCobranca.Enabled := not (pnlCobranca.Enabled);
+  pnlVendedor.Enabled := not (pnlVendedor.Enabled);
+  pnlRetencao.Enabled := not (pnlRetencao.Enabled);
+  DBDateEdit5.ReadOnly := not (DBDateEdit5.ReadOnly);
+  DBMemo3.ReadOnly := not (DBMemo3.ReadOnly);
+  btnInserir_Itens.Enabled := not (btnInserir_Itens.Enabled);
+  btnAlterar_Itens.Enabled := not (btnAlterar_Itens.Enabled);
+  btnExcluir_Itens.Enabled := not (btnExcluir_Itens.Enabled);
 
-  btnInserirMat.Enabled := not(btnInserirMat.Enabled);
-  btnInserirMat.Enabled := not(btnInserirMat.Enabled);
-  btnInserirMat.Enabled := not(btnInserirMat.Enabled);
+  btnInserirMat.Enabled := not (btnInserirMat.Enabled);
+  btnInserirMat.Enabled := not (btnInserirMat.Enabled);
+  btnInserirMat.Enabled := not (btnInserirMat.Enabled);
 end;
 
 function TfrmCadContrato.fnc_Cancelar: Boolean;
@@ -603,28 +579,24 @@ begin
   fDMCadOS.cdsCliente.Open;
 end;
 
-procedure TfrmCadContrato.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+procedure TfrmCadContrato.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose := fnc_Encerrar_Tela(fDMCadOS.cdsOS);
 end;
 
-procedure TfrmCadContrato.edtSerieKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmCadContrato.edtSerieKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if Key = Vk_Return then
     btnConsultarClick(Sender);
 end;
 
-procedure TfrmCadContrato.CurrencyEdit1KeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TfrmCadContrato.CurrencyEdit1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if Key = Vk_Return then
     btnConsultarClick(Sender);
 end;
 
-procedure TfrmCadContrato.Edit2KeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmCadContrato.Edit2KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if Key = Vk_Return then
     btnConsultarClick(Sender);
@@ -636,13 +608,13 @@ begin
     fDMCadOS.prc_Abrir_Servico;
   if fDMCadOS.cdsClienteID_SERVICO.AsInteger > 0 then
     fDMCadOS.cdsOSID_SERVICO.AsInteger := fDMCadOS.cdsClienteID_SERVICO.AsInteger;
-  if not(fDMCadOS.cdsClienteRETEM_ISS.IsNull) then
-    fDMCadOS.cdsOSRETEM_ISS.AsString      := fDMCadOS.cdsClienteRETEM_ISS.AsString;
-  if not(fDMCadOS.cdsClienteRETEM_CSLL.IsNull) then
-    fDMCadOS.cdsOSRETEM_CSLL.AsString      := fDMCadOS.cdsClienteRETEM_CSLL.AsString;
-  if not(fDMCadOS.cdsClienteRETEM_INSS.IsNull) then
-    fDMCadOS.cdsOSRETEM_INSS.AsString      := fDMCadOS.cdsClienteRETEM_INSS.AsString;
-  if not(fDMCadOS.cdsClienteRETEM_PISCOFINS.IsNull) then
+  if not (fDMCadOS.cdsClienteRETEM_ISS.IsNull) then
+    fDMCadOS.cdsOSRETEM_ISS.AsString := fDMCadOS.cdsClienteRETEM_ISS.AsString;
+  if not (fDMCadOS.cdsClienteRETEM_CSLL.IsNull) then
+    fDMCadOS.cdsOSRETEM_CSLL.AsString := fDMCadOS.cdsClienteRETEM_CSLL.AsString;
+  if not (fDMCadOS.cdsClienteRETEM_INSS.IsNull) then
+    fDMCadOS.cdsOSRETEM_INSS.AsString := fDMCadOS.cdsClienteRETEM_INSS.AsString;
+  if not (fDMCadOS.cdsClienteRETEM_PISCOFINS.IsNull) then
     fDMCadOS.cdsOSRETEM_PISCOFINS.AsString := fDMCadOS.cdsClienteRETEM_PISCOFINS.AsString;
   if fDMCadOS.cdsClienteID_CONTABOLETO.AsInteger > 0 then
     fDMCadOS.cdsOSID_CONTA.AsInteger := fDMCadOS.cdsClienteID_CONTABOLETO.AsInteger;
@@ -655,19 +627,17 @@ begin
   begin
     if fDMCadOS.cdsClienteID_VENDEDOR.AsInteger > 0 then
       fDMCadOS.cdsOSID_VENDEDOR.AsInteger := fDMCadOS.cdsClienteID_VENDEDOR.AsInteger;
-    if StrToFloat(FormatFloat('0.00',fDMCadOS.cdsClientePERC_COMISSAO.AsFloat)) > 0 then
-      fDMCadOS.cdsOSPERC_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsClientePERC_COMISSAO.AsFloat))
-    else
-    if (fDMCadOS.cdsOSID_VENDEDOR.AsInteger > 0) and (fDMCadOS.cdsVendedor.Locate('CODIGO',fDMCadOS.cdsOSID_VENDEDOR.AsInteger,[loCaseInsensitive])) then
+    if StrToFloat(FormatFloat('0.00', fDMCadOS.cdsClientePERC_COMISSAO.AsFloat)) > 0 then
+      fDMCadOS.cdsOSPERC_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00', fDMCadOS.cdsClientePERC_COMISSAO.AsFloat))
+    else if (fDMCadOS.cdsOSID_VENDEDOR.AsInteger > 0) and (fDMCadOS.cdsVendedor.Locate('CODIGO', fDMCadOS.cdsOSID_VENDEDOR.AsInteger, [loCaseInsensitive])) then
     begin
-      if StrToFloat(FormatFloat('0.00',fDMCadOS.cdsVendedorPERC_COMISSAO_VEND.AsFloat)) > 0 then
-        fDMCadOS.cdsOSPERC_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsVendedorPERC_COMISSAO_VEND.AsFloat));
+      if StrToFloat(FormatFloat('0.00', fDMCadOS.cdsVendedorPERC_COMISSAO_VEND.AsFloat)) > 0 then
+        fDMCadOS.cdsOSPERC_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00', fDMCadOS.cdsVendedorPERC_COMISSAO_VEND.AsFloat));
     end;
   end;
 end;
 
-procedure TfrmCadContrato.RxDBLookupCombo3KeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TfrmCadContrato.RxDBLookupCombo3KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if (Key = Vk_F2) then
   begin
@@ -683,14 +653,14 @@ end;
 procedure TfrmCadContrato.SMDBGrid1TitleClick(Column: TColumn);
 var
   i: Integer;
-  ColunaOrdenada: String;
+  ColunaOrdenada: string;
 begin
   ColunaOrdenada := Column.FieldName;
   fDMCadOS.cdsOS_Consulta.IndexFieldNames := Column.FieldName;
   Column.Title.Color := clBtnShadow;
   for i := 0 to SMDBGrid1.Columns.Count - 1 do
-    if not (SMDBGrid1.Columns.Items[I] = Column) then
-      SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
+    if not (SMDBGrid1.Columns.Items[i] = Column) then
+      SMDBGrid1.Columns.Items[i].Title.Color := clBtnFace;
 end;
 
 procedure TfrmCadContrato.Panel4Enter(Sender: TObject);
@@ -698,20 +668,17 @@ begin
   vID_Cliente_Ant := fDMCadOS.cdsOSID_CLIENTE.AsInteger;
 end;
 
-procedure TfrmCadContrato.SMDBGrid1GetCellParams(Sender: TObject;
-  Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
+procedure TfrmCadContrato.SMDBGrid1GetCellParams(Sender: TObject; Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
-  if not(fDMCadOS.cdsOS_Consulta.Active) or (fDMCadOS.cdsOS_Consulta.IsEmpty) then
+  if not (fDMCadOS.cdsOS_Consulta.Active) or (fDMCadOS.cdsOS_Consulta.IsEmpty) then
     exit;
-  if ((fDMCadOS.cdsOS_ConsultaDTENCERRAMENTO.AsDateTime > 10) and (fDMCadOS.cdsOS_ConsultaDTENCERRAMENTO.AsDateTime < Date)) or
-     ((fDMCadOS.cdsOS_ConsultaDTCONTRATO_FIN.AsDateTime > 10) and (fDMCadOS.cdsOS_ConsultaDTCONTRATO_FIN.AsDateTime < Date)) then
+  if ((fDMCadOS.cdsOS_ConsultaDTENCERRAMENTO.AsDateTime > 10) and (fDMCadOS.cdsOS_ConsultaDTENCERRAMENTO.AsDateTime < Date)) or ((fDMCadOS.cdsOS_ConsultaDTCONTRATO_FIN.AsDateTime > 10) and (fDMCadOS.cdsOS_ConsultaDTCONTRATO_FIN.AsDateTime < Date)) then
   begin
-    Background  := clRed;
+    Background := clRed;
     AFont.Color := clWhite;
   end
-  else
-  if fDMCadOS.cdsOS_ConsultaDTCONTRATO_INI.AsDateTime > Date then
-    Background  := clYellow;
+  else if fDMCadOS.cdsOS_ConsultaDTCONTRATO_INI.AsDateTime > Date then
+    Background := clYellow;
 end;
 
 procedure TfrmCadContrato.SMDBGrid1DblClick(Sender: TObject);
@@ -729,17 +696,16 @@ begin
       fDMCadOS.cdsOSCNAE.AsString := fDMCadOS.cdsServicoCNAE.AsString;
     if fDMCadOS.cdsServicoID_ATIVIDADE_CID.AsInteger > 0 then
       fDMCadOS.cdsOSID_ATIVIDADE_CID.AsInteger := fDMCadOS.cdsServicoID_ATIVIDADE_CID.AsInteger
-    else
-    if fDMCadOS.cdsFilialID_ATIVIDADE_CID.AsInteger > 0 then
+    else if fDMCadOS.cdsFilialID_ATIVIDADE_CID.AsInteger > 0 then
       fDMCadOS.cdsOSID_ATIVIDADE_CID.AsInteger := fDMCadOS.cdsFilialID_ATIVIDADE_CID.AsInteger;
-    if (fDMCadOS.cdsFilialSIMPLES.AsString = 'S') and (StrToFloat(FormatFloat('0.00000',fDMCadOS.cdsFilialPERC_ISS_SIMPLES.AsFloat)) > 0) then
-      fDMCadOS.cdsOSPERC_ISS.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsFilialPERC_ISS_SIMPLES.AsFloat))
+    if (fDMCadOS.cdsFilialSIMPLES.AsString = 'S') and (StrToFloat(FormatFloat('0.00000', fDMCadOS.cdsFilialPERC_ISS_SIMPLES.AsFloat)) > 0) then
+      fDMCadOS.cdsOSPERC_ISS.AsFloat := StrToFloat(FormatFloat('0.00', fDMCadOS.cdsFilialPERC_ISS_SIMPLES.AsFloat))
     else
     begin
-      if StrToFloat(FormatFloat('0.00',fDMCadOS.cdsServicoPERC_ISS.AsFloat)) > 0 then
-        fDMCadOS.cdsOSPERC_ISS.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadOS.cdsServicoPERC_ISS.AsFloat));
-      vAux := fDMCadOS.fnc_Buscar_Pessoa_Servico(fDMCadOS.cdsOSID_CLIENTE.AsInteger,fDMCadOS.cdsOSID_SERVICO.AsInteger);
-      if StrToFloat(FormatFloat('0.00',vAux)) > 0 then
+      if StrToFloat(FormatFloat('0.00', fDMCadOS.cdsServicoPERC_ISS.AsFloat)) > 0 then
+        fDMCadOS.cdsOSPERC_ISS.AsFloat := StrToFloat(FormatFloat('0.00', fDMCadOS.cdsServicoPERC_ISS.AsFloat));
+      vAux := fDMCadOS.fnc_Buscar_Pessoa_Servico(fDMCadOS.cdsOSID_CLIENTE.AsInteger, fDMCadOS.cdsOSID_SERVICO.AsInteger);
+      if StrToFloat(FormatFloat('0.00', vAux)) > 0 then
         fDMCadOS.cdsOSPERC_ISS.AsFloat := vAux;
     end;
   end;
@@ -747,7 +713,7 @@ end;
 
 procedure TfrmCadContrato.btnPesquisarClick(Sender: TObject);
 begin
-  pnlPesquisa.Visible := not(pnlPesquisa.Visible);
+  pnlPesquisa.Visible := not (pnlPesquisa.Visible);
   if pnlPesquisa.Visible then
     CurrencyEdit1.SetFocus
   else
@@ -760,8 +726,7 @@ begin
   Edit2.Clear;
 end;
 
-procedure TfrmCadContrato.DBMemo1KeyPress(Sender: TObject;
-  var Key: Char);
+procedure TfrmCadContrato.DBMemo1KeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
     Key := ' ';
@@ -797,10 +762,10 @@ end;
 
 procedure TfrmCadContrato.btnExcluir_ItensClick(Sender: TObject);
 begin
-  if not(fDMCadOS.cdsOS_Servico_Int.Active) and (fDMCadOS.cdsOS_Servico_Int.IsEmpty) or (fDMCadOS.cdsOS_Servico_IntITEM.AsInteger < 1) then
+  if not (fDMCadOS.cdsOS_Servico_Int.Active) and (fDMCadOS.cdsOS_Servico_Int.IsEmpty) or (fDMCadOS.cdsOS_Servico_IntITEM.AsInteger < 1) then
     exit;
 
-  if MessageDlg('Deseja excluir o item selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+  if MessageDlg('Deseja excluir o item selecionado?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
     exit;
 
   fDMCadOS.prc_Excluir_Servico_Int;
@@ -812,8 +777,7 @@ begin
   fDMCadOS.cdsVendedor.Open;
 end;
 
-procedure TfrmCadContrato.RxDBLookupCombo10KeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
+procedure TfrmCadContrato.RxDBLookupCombo10KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if (Key = Vk_F2) then
   begin
@@ -836,14 +800,14 @@ end;
 
 procedure TfrmCadContrato.btnImprimirClick(Sender: TObject);
 var
-  arquivo, vPasta: String;
+  arquivo, vPasta: string;
   WinWord, Docs, Doc: Variant;
-  vNumContrato: String;
-  vNumContrato_Arq: String;
+  vNumContrato: string;
+  vNumContrato_Arq: string;
 begin
  // Pega o nome do arquivo...
   vTipo_Config_Email := 3;
-  vPasta   := ExtractFilePath(Application.ExeName) + 'Contratos\';
+  vPasta := ExtractFilePath(Application.ExeName) + 'Contratos\';
 
   vNumContrato_Arq := fDMCadOS.cdsOS_ConsultaNUM_CONTRATO.AsString;
   if (fDMCadOS.cdsOS_ConsultaANO_CONTRATO.AsInteger > 0) and (fDMCadOS.cdsOS_ConsultaANO_CONTRATO.AsInteger < 9999) then
@@ -853,15 +817,15 @@ begin
 
   if not (fileExists(arquivo)) then
   begin
-    arquivo := ExtractFilePath(Application.ExeName) + 'Contrato.doc';
+    arquivo := DMCadOS.cdsFilialARQ_MODELO_CONTRATO.AsString;
     if not (fileExists(arquivo)) then
     begin
-      ShowMessage('Arquivo de modelo ' + arquivo + ' não localizado!');
+      ShowMessage('Arquivo de modelo ' + arquivo + ' não localizado no cadastro da filial!');
       Exit;
     end;
   end;
 
-  if not DirectoryExists(ExtractFilePath(Application.ExeName)+ 'Contratos') then
+  if not DirectoryExists(ExtractFilePath(Application.ExeName) + 'Contratos') then
   begin
     ShowMessage('Pasta ' + vPasta + ' deve ser criada!');
     Exit;
@@ -869,7 +833,7 @@ begin
 
   // Cria objeto principal de controle
   //aqui 18/02/2015
-  //WinWord := CreateOleObject('Word.Application');
+  WinWord := CreateOleObject('Word.Application');
 
   //Não Mostra o Word
   WinWord.Visible := False;
@@ -886,25 +850,22 @@ begin
     vNumContrato := fDMCadOS.cdsOS_ConsultaANO_CONTRATO.AsString + '/' + vNumContrato;
 
   //Nome nossa empresa
-  Doc.Content.Find.Execute(FindText := '<contrato_num>', ReplaceWith       := vNumContrato, Replace := 2);
-  Doc.Content.Find.Execute(FindText := '<contratante>',  ReplaceWith       := fDMCadOS.cdsOS_ConsultaNOME_CLIENTE.AsString, Replace := 2);
-  Doc.Content.Find.Execute(FindText := '<contratante_cnpj>', ReplaceWith   := fDMCadOS.cdsOS_ConsultaCNPJ_CPF.AsString, Replace := 2);
-  Doc.Content.Find.Execute(FindText := '<contratante_endereco>', ReplaceWith := fDMCadOS.cdsOS_ConsultaENDERECO.AsString + ', ' +
-                                                                                fDMCadOS.cdsOS_ConsultaNUM_END.AsString + ', ' +
-                                                                                fDMCadOS.cdsOS_ConsultaCOMPLEMENTO_END.AsString, Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<contrato_num>', ReplaceWith := vNumContrato, Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<contratante>', ReplaceWith := fDMCadOS.cdsOS_ConsultaNOME_CLIENTE.AsString, Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<contratante_cnpj>', ReplaceWith := fDMCadOS.cdsOS_ConsultaCNPJ_CPF.AsString, Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<contratante_endereco>', ReplaceWith := fDMCadOS.cdsOS_ConsultaENDERECO.AsString + ', ' + fDMCadOS.cdsOS_ConsultaNUM_END.AsString + ', ' + fDMCadOS.cdsOS_ConsultaCOMPLEMENTO_END.AsString, Replace := 2);
   Doc.Content.Find.Execute(FindText := '<contratante_bairro>', ReplaceWith := fDMCadOS.cdsOS_ConsultaBAIRRO.AsString, Replace := 2);
-  Doc.Content.Find.Execute(FindText := '<contratante_uf>', ReplaceWith     := fDMCadOS.cdsOS_ConsultaUF.AsString, Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<contratante_uf>', ReplaceWith := fDMCadOS.cdsOS_ConsultaUF.AsString, Replace := 2);
   //aqui ver com o juca
-  Doc.Content.Find.Execute(FindText := '<contratante_cep>', ReplaceWith    := fDMCadOS.cdsOS_ConsultaNUM_CONTRATO.AsString, Replace := 2);
-  Doc.Content.Find.Execute(FindText := '<preco>', ReplaceWith              := FormatFloat('#,##0.00',fDMCadOS.cdsOS_ConsultaVLR_TOTAL.AsFloat), Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<contratante_cep>', ReplaceWith := fDMCadOS.cdsOS_ConsultaNUM_CONTRATO.AsString, Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<preco>', ReplaceWith := FormatFloat('#,##0.00', fDMCadOS.cdsOS_ConsultaVLR_TOTAL.AsFloat), Replace := 2);
   //aqui 18/02/2015
   //ValorPorExtenso1.Valor := fDMCadOS.cdsOS_ConsultaVLR_TOTAL.AsFloat;
-  Doc.Content.Find.Execute(FindText := '<contrato_comarca>', ReplaceWith   := fDMCadOS.cdsOS_ConsultaCOMARCA.AsString, Replace := 2);
-  Doc.Content.Find.Execute(FindText := '<contrato_data>', ReplaceWith      := fDMCadOS.cdsOS_ConsultaDTCONTRATO_INI.AsString, Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<contrato_comarca>', ReplaceWith := fDMCadOS.cdsOS_ConsultaCOMARCA.AsString, Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<contrato_data>', ReplaceWith := fDMCadOS.cdsOS_ConsultaDTCONTRATO_INI.AsString, Replace := 2);
 
   //Salva doc
-  arquivo := vPasta + fDMCadOS.cdsOS_ConsultaNOME_CLIENTE.AsString + '_' +
-             vNumContrato_Arq + '.doc';
+  arquivo := vPasta + fDMCadOS.cdsOS_ConsultaNOME_CLIENTE.AsString + '_' + vNumContrato_Arq + '.doc';
   Doc.SaveAs(arquivo);
 
   // Fecha o Word
@@ -916,10 +877,9 @@ begin
   //  ShellExecute(Handle, nil, Pchar(arquivo), nil, nil, SW_SHOWNORMAL);
 end;
 
-
 procedure TfrmCadContrato.prc_Imprimir_Fast;
 var
-  vArq: String;
+  vArq: string;
 begin
 ///  prc_Posiciona_Imp;
 {  fDMCadOS.cdsOSImp.Close;
@@ -946,19 +906,19 @@ end;
 
 procedure TfrmCadContrato.prc_Opcao_Habilita;
 begin
-  Label8.Visible           := (fDMCadOS.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM');
+  Label8.Visible := (fDMCadOS.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM');
   RxDBLookupCombo4.Visible := (fDMCadOS.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM');
 
-  Label34.Visible          := (fDMCadOS.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM');
+  Label34.Visible := (fDMCadOS.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM');
   RxDBLookupCombo5.Visible := (fDMCadOS.cdsFilialNOME_PROVEDOR.AsString <> 'CAMPO BOM');
 end;
 
 procedure TfrmCadContrato.NxButton1Click(Sender: TObject);
 var
-  vArq: String;
+  vArq: string;
 begin
   fDMCadOS.cdsOS.Close;
-  fDMCadOS.cdsOS.Filter   := 'DTENCERRAMENTO IS NULL';
+  fDMCadOS.cdsOS.Filter := 'DTENCERRAMENTO IS NULL';
   fDMCadOS.cdsOS.Filtered := True;
   fDMCadOS.cdsOS.Open;
 
@@ -972,8 +932,9 @@ begin
   end;
   fDMCadOS.frxReport1.ShowReport;
   fDMCadOS.cdsOS.Close;
-  fDMCadOS.cdsOS.Filter   := '';
+  fDMCadOS.cdsOS.Filter := '';
   fDMCadOS.cdsOS.Filtered := False;
 end;
 
 end.
+

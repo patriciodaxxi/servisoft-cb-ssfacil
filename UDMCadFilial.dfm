@@ -416,6 +416,10 @@ object DMCadFilial: TDMCadFilial
       FixedChar = True
       Size = 1
     end
+    object sdsFilialARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 200
+    end
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
@@ -425,7 +429,6 @@ object DMCadFilial: TDMCadFilial
     Top = 32
   end
   object cdsFilial: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -861,6 +864,10 @@ object DMCadFilial: TDMCadFilial
       FieldName = 'SPED_SOMA_IPI_CUSTO'
       FixedChar = True
       Size = 1
+    end
+    object cdsFilialARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 200
     end
   end
   object dsFilial: TDataSource
@@ -1563,7 +1570,6 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilialRelatorios: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilialRelatorios
     IndexFieldNames = 'ID;ITEM'
@@ -1646,7 +1652,6 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Email: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Email
     IndexFieldNames = 'ID;ITEM'
@@ -1793,7 +1798,6 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Download: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Download
     IndexFieldNames = 'ID;ITEM'
@@ -2225,7 +2229,6 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFILIAL_CBarra: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFILIAL_CBarra
     IndexFieldNames = 'ID;ITEM'
@@ -2364,7 +2367,6 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_NFCe: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_NFCe
     IndexFieldNames = 'ID'
@@ -2516,7 +2518,6 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Contabil: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Contabil
     IndexFieldNames = 'ID'
@@ -2776,7 +2777,6 @@ object DMCadFilial: TDMCadFilial
     end
   end
   object cdsFilial_Custo: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsFilialsdsFilial_Custo
     IndexFieldNames = 'ID'
