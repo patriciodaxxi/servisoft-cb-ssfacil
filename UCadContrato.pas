@@ -817,7 +817,7 @@ begin
 
   if not (fileExists(arquivo)) then
   begin
-    arquivo := DMCadOS.cdsFilialARQ_MODELO_CONTRATO.AsString;
+    arquivo := fDMCadOS.cdsFilialARQ_MODELO_CONTRATO.AsString;
     if not (fileExists(arquivo)) then
     begin
       ShowMessage('Arquivo de modelo ' + arquivo + ' não localizado no cadastro da filial!');

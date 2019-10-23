@@ -2874,7 +2874,7 @@ end;
 procedure TfrmCadProduto.btnCopiarProdutoClick(Sender: TObject);
 var
   x, x2: Integer;
-  Form : TForm;
+  Form: TForm;
 begin
   if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) then
     exit;

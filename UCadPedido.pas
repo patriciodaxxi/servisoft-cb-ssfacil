@@ -517,7 +517,7 @@ type
     vID_ClienteAnt: Integer;
     vVlrFrete_Ant: Real;
     vInclusao_Edicao: String; //I=Incluir   E=Editar
-    ffrmMostraPDF : TfrmMostraPDF;
+    ffrmMostraPDF: TfrmMostraPDF;
 
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
@@ -1299,7 +1299,7 @@ end;
 
 procedure TfrmCadPedido.btnConfirmarClick(Sender: TObject);
 var
-  vIDVend : Integer;
+  vIDVend: Integer;
 begin
   if fDMCadPedido.qParametros_PedUSA_RETIRADA.AsString = 'S' then
   begin
@@ -3419,7 +3419,7 @@ var
   //dataSetProvider: TDataSetProvider;
   cdsTemp: TClientDataSet;
   cdsTemp_Tipo: TClientDataSet;
-  cdsTemp_Processo : TClientDataSet;            
+  cdsTemp_Processo: TClientDataSet;            
   i: Integer;
   vItemAux: Integer;
   vItemPed: Integer;
@@ -4738,7 +4738,7 @@ end;
 procedure TfrmCadPedido.SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
-  vCaminhoPDF : String;
+  vCaminhoPDF: String;
 begin
   //ctrl + P (Imprimir PDF)
   if (Shift = [ssCtrl]) and (Key = 80) then

@@ -1670,7 +1670,8 @@ begin
     vMsgErro := vMsgErro + #13 + '*** CST ICMS não informada!';
   if (fDMCadNotaFiscal.cdsProdutoTIPO_REG.AsString <> 'N') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTIPI.AsInteger <= 0) then
     vMsgErro := vMsgErro + #13 + '*** CST IPI não informada!';
-  if (fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString) = '') and (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and
+  if (fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString) = '') and
+     (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and
      (fDMCadNotaFiscal.vState_Item = 'E') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVOU_TAB_TAMANHO.AsString = 'N')  then
     vMsgErro := vMsgErro + #13 + '*** Tamanho não informado!';
   if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE_PED.AsInteger > 0) and (fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString = 'S') then
