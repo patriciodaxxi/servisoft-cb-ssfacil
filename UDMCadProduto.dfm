@@ -1441,9 +1441,7 @@ object dmCadProduto: TdmCadProduto
   object sdsFornecedor: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 
-      'SELECT CODIGO, NOME'#13#10'FROM PESSOA'#13#10'WHERE TP_FORNECEDOR = '#39'S'#39#13#10'   ' +
-      ' OR TP_CLIENTE = '#39'S'#39#13#10#13#10#13#10
+    CommandText = 'SELECT CODIGO, NOME'#13#10'FROM PESSOA'#13#10'WHERE TP_FORNECEDOR = '#39'S'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
