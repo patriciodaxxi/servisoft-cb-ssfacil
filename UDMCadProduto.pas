@@ -2620,9 +2620,9 @@ begin
   cdsProduto_ConsumoNOMEMATERIAL.AsString := qMaterialNOME.AsString;
   cdsProduto_ConsumoREFERENCIA.AsString   := qMaterialREFERENCIA.AsString;
   if qParametros_ProdOPCAO_PRECO_CONSUMO.AsString = 'C' then
-    cdsProduto_ConsumoPRECO_CUSTO.AsFloat   := qMaterialPRECO_CUSTO_TOTAL.AsFloat
+    cdsProduto_ConsumoPRECO_CUSTO.AsFloat := qMaterialPRECO_CUSTO_TOTAL.AsFloat
   else
-    cdsProduto_ConsumoPRECO_CUSTO.AsFloat   := qMaterialPRECO_CUSTO_MAT.AsFloat;
+    cdsProduto_ConsumoPRECO_CUSTO.AsFloat := qMaterialPRECO_CUSTO_MAT.AsFloat;
   cdsProduto_ConsumoclPreco_Venda.AsFloat := qMaterialPRECO_VENDA.AsFloat;
   cdsProduto_ConsumoclTIPO_REG.AsString   := qMaterialTIPO_REG.AsString;
   if qParametrosGRAVAR_CONSUMO_NOTA.AsString = 'S' then
@@ -2632,7 +2632,7 @@ begin
      (StrToFloat(FormatFloat('0.000000',cdsProduto_ConsumoQTD_CONSUMO.AsFloat)) > 0) then
     cdsProduto_ConsumoclVlr_Total.AsFloat := StrToFloat(FormatFloat('0.00',cdsProduto_ConsumoPRECO_CUSTO.AsFloat * cdsProduto_ConsumoQTD_CONSUMO.AsFloat));
 
-  cdsProduto_ConsumoNOME_SETOR.AsString     := '';
+  cdsProduto_ConsumoNOME_SETOR.AsString   := '';
 
   qPosicao.Close;
   qPosicao.ParamByName('ID').AsInteger := cdsProduto_ConsumoID_POSICAO.AsInteger;
