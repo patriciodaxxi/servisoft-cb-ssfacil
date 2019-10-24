@@ -138,6 +138,8 @@ type
     TS_Ajustes: TRzTabSheet;
     SMDBGrid5: TSMDBGrid;
     NxButton1: TNxButton;
+    Label25: TLabel;
+    FilenameEdit1: TFilenameEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -297,6 +299,9 @@ begin
       end;
     end;
   end;
+  
+  if FilenameEdit1.Text <> '' then
+    fDMCadOS.cdsOSARQ_MODELO_CONTRATO.AsString := FilenameEdit1.Text;
 
   fDMCadOS.prc_Gravar(vGerarDupl);
   if fDMCadOS.cdsOS.State in [dsEdit, dsInsert] then
@@ -526,6 +531,7 @@ begin
       prc_Posiciona_OS;
       fDMCadOS.prc_Abrir_Natureza;
       prc_Opcao_Habilita;
+      FilenameEdit1.Text := fDMCadOS.cdsOSARQ_MODELO_CONTRATO.AsString;
     end;
   end;
 end;
@@ -817,7 +823,10 @@ begin
 
   if not (fileExists(arquivo)) then
   begin
-    arquivo := fDMCadOS.cdsFilialARQ_MODELO_CONTRATO.AsString;
+    if fDMCadOS.cdsOSARQ_MODELO_CONTRATO.AsString <> '' then
+      arquivo := fDMCadOS.cdsosARQ_MODELO_CONTRATO.AsString
+    else
+      arquivo := fDMCadOS.cdsFilialARQ_MODELO_CONTRATO.AsString;
     if not (fileExists(arquivo)) then
     begin
       ShowMessage('Arquivo de modelo ' + arquivo + ' não localizado no cadastro da filial!');

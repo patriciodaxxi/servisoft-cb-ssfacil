@@ -220,6 +220,10 @@ object DMCadOS: TDMCadOS
       ProviderFlags = []
       Size = 60
     end
+    object sdsOSARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 200
+    end
   end
   object dspOS: TDataSetProvider
     DataSet = sdsOS
@@ -450,6 +454,10 @@ object DMCadOS: TDMCadOS
       FieldName = 'NOME'
       ProviderFlags = []
       Size = 60
+    end
+    object cdsOSARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 200
     end
   end
   object dsOS: TDataSource
@@ -1237,9 +1245,10 @@ object DMCadOS: TDMCadOS
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ID'
         ParamType = ptInput
+        Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 66

@@ -3050,7 +3050,7 @@ object frmCadContrato: TfrmCadContrato
         end
         object Label3: TLabel
           Left = 5
-          Top = 93
+          Top = 91
           Width = 74
           Height = 13
           Alignment = taRightJustify
@@ -3079,6 +3079,14 @@ object frmCadContrato: TfrmCadContrato
           Height = 13
           Alignment = taRightJustify
           Caption = 'Ano Contrato:'
+        end
+        object Label25: TLabel
+          Left = 400
+          Top = 91
+          Width = 103
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Arq. Modelo Contrato:'
         end
         object DBDateEdit1: TDBDateEdit
           Left = 504
@@ -3292,7 +3300,7 @@ object frmCadContrato: TfrmCadContrato
           DataSource = DMCadOS.dsOS
           ParentCtl3D = False
           ReadOnly = True
-          TabOrder = 8
+          TabOrder = 9
         end
         object DBEdit4: TDBEdit
           Left = 704
@@ -3303,6 +3311,17 @@ object frmCadContrato: TfrmCadContrato
           DataField = 'ANO_CONTRATO'
           DataSource = DMCadOS.dsOS
           MaxLength = 4
+          ParentCtl3D = False
+          TabOrder = 8
+        end
+        object FilenameEdit1: TFilenameEdit
+          Left = 504
+          Top = 84
+          Width = 369
+          Height = 21
+          Filter = 'Modelo Word|*.doc|All files (*.*)|*.*|Modelo Word|*.docx'
+          Ctl3D = False
+          NumGlyphs = 1
           ParentCtl3D = False
           TabOrder = 7
         end
