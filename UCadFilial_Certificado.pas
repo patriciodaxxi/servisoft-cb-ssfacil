@@ -59,6 +59,7 @@ type
     procedure btnInserirClick(Sender: TObject);
     procedure Edit4KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnPesquisarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadFilial_Certificado : TDMFilial_Certificado;
@@ -226,6 +227,14 @@ begin
   pnlPesquisa.Visible := not (pnlPesquisa.Visible);
   if pnlPesquisa.Visible then
     Edit4.SetFocus;
+end;
+
+procedure TfrmCadFilial_Certificado.SpeedButton1Click(Sender: TObject);
+begin
+  with fDMCadFilial_Certificado do
+  begin
+    cdsFilial_CertificadoNUMERO_SERIE.AsString := ACBrNFe.SSL.SelecionarCertificado;
+  end;
 end;
 
 end.

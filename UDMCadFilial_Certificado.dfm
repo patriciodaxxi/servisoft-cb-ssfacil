@@ -107,6 +107,7 @@ object DMFilial_Certificado: TDMFilial_Certificado
     end
     object cdsFilial_CertificadoNUMERO_SERIE: TStringField
       FieldName = 'NUMERO_SERIE'
+      OnChange = cdsFilial_CertificadoNUMERO_SERIEChange
       Size = 100
     end
     object cdsFilial_CertificadoUTILIZA_NFE: TIntegerField
@@ -190,5 +191,20 @@ object DMFilial_Certificado: TDMFilial_Certificado
     DataSet = cdsFilial
     Left = 392
     Top = 24
+  end
+  object ACBrNFe: TACBrNFe
+    Configuracoes.Geral.SSLLib = libCapicom
+    Configuracoes.Geral.SSLCryptLib = cryCapicom
+    Configuracoes.Geral.SSLHttpLib = httpWinINet
+    Configuracoes.Geral.SSLXmlSignLib = xsMsXmlCapicom
+    Configuracoes.Geral.FormatoAlerta = 'TAG:%TAGNIVEL% ID:%ID%/%TAG%(%DESCRICAO%) - %MSG%.'
+    Configuracoes.Geral.VersaoQRCode = veqr000
+    Configuracoes.Arquivos.OrdenacaoPath = <>
+    Configuracoes.WebServices.UF = 'SP'
+    Configuracoes.WebServices.AguardarConsultaRet = 0
+    Configuracoes.WebServices.QuebradeLinha = '|'
+    Configuracoes.RespTec.IdCSRT = 0
+    Left = 304
+    Top = 88
   end
 end

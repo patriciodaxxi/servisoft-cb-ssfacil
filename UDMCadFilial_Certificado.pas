@@ -3,7 +3,8 @@ unit UDMCadFilial_Certificado;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr;
+  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, ACBrBase,
+  ACBrDFe, ACBrNFe;
 
 type
   TDMFilial_Certificado = class(TDataModule)
@@ -51,7 +52,9 @@ type
     sdsFilialNOME: TStringField;
     cdsFilialID: TIntegerField;
     cdsFilialNOME: TStringField;
+    ACBrNFe: TACBrNFe;
     procedure DataModuleCreate(Sender: TObject);
+    procedure cdsFilial_CertificadoNUMERO_SERIEChange(Sender: TField);
   private
     { Private declarations }
   public
@@ -116,6 +119,12 @@ begin
   if ID <> 0 then
     sdsFilial_Certificado.CommandText := sdsFilial_Certificado.CommandText + ' WHERE ID = ' + IntToStr(ID);
   cdsFilial_Certificado.Open;
+end;
+
+procedure TDMFilial_Certificado.cdsFilial_CertificadoNUMERO_SERIEChange(
+  Sender: TField);
+begin
+  cdsFilial_CertificadoVALIDADE_FIM.AsDateTime := ACBrNFe.SSL.CertDataVenc;
 end;
 
 end.
