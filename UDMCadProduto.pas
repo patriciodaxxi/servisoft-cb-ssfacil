@@ -2354,9 +2354,11 @@ begin
       end;
     end;
   end;
+
   if ((cdsProdutoTIPO_REG.AsString = 'P') or (cdsProdutoTIPO_REG.AsString = 'S')) and (qParametros_LoteLOTE_TEXTIL.AsString = 'S') then
   begin
     sds  := TSQLDataSet.Create(nil);
+
     sds.SQLConnection := dmDatabase.scoDados;
     sds.NoMetadata    := True;
     sds.GetMetadata   := False;

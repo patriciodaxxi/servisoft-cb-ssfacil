@@ -1061,7 +1061,6 @@ type
     vNome_Cad_Ant, vReferencia_Cad_Ant: String;
     vAltera_Nome: Boolean;
     //*****************
-    vItem2: Integer;
 
     procedure prc_Consultar_Estoque_Lote(ID:Integer);
     procedure prc_Inserir_Registro;
@@ -1161,7 +1160,6 @@ procedure TfrmCadProduto.btnExcluirClick(Sender: TObject);
 var
   vExcluir: Boolean;
   vCont: Integer;
-  vContTotal: Integer;
 begin
   if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) or
         (fDMCadProduto.cdsProduto_ConsultaID.AsInteger <= 0) then
@@ -1228,8 +1226,8 @@ procedure TfrmCadProduto.prc_Excluir_Registro;
 var
   vCodAux: Integer;
 begin
+  vCodAux := fDMCadProduto.cdsProdutoID.AsInteger;
   try
-    vCodAux := fDMCadProduto.cdsProdutoID.AsInteger;
     fDMCadProduto.prc_Excluir;
   except
     on e: Exception do
@@ -1351,21 +1349,6 @@ begin
       fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger := vAux;
       fDMCadProduto.cdsProdutoREFERENCIA.AsString      := fDMCadProduto.cdsProdutoTIPO_REG.AsString +
                                                           FormatFloat('000000',fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger);
-    end;
-
-    if fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S' then
-    begin
-      vID_SemiAux := fnc_Busca_Semi;
-      if vID_SemiAux <> vID_Semi_Ant then
-        fDMCadProduto.cdsProdutoTESTE.AsString := TimeToStr(Now)
-      else
-      begin
-        fDMCadProduto.qProdSemi.Close;
-        fDMCadProduto.qProdSemi.ParamByName('ID').AsInteger := fDMCadProduto.cdsProdutoID.AsInteger;
-        fDMCadProduto.qProdSemi.Open;
-        if fDMCadProduto.qProdSemiCONTADOR.AsInteger <= 0 then
-          fDMCadProduto.cdsProdutoTESTE.AsString := TimeToStr(Now)
-      end;
     end;
 
     //16/10/2018
@@ -1561,9 +1544,16 @@ begin
         raise Exception.Create('Erro ao gravar a Produto: ' + #13 + e.Message);
       end;
   end;
-  FreeAndNil(sds);
-  if fDMCadProduto.cdsProdutoREFERENCIA_SEQ.AsInteger > 0 then
-    FreeAndNil(sds2);
+
+  if fDMCadProduto.qParametros_LoteLOTE_TEXTIL.AsString = 'S' then
+  begin
+    sds.Close;
+    sds.CommandType := ctStoredProc;
+    sds.CommandText := 'PRC_GRAVA_PRODUTO_SEMI';
+    sds.ParamByName('P_ID').AsInteger := fDMCadProduto.cdsProdutoID.AsInteger;
+    sds.ExecSQL;
+  end;
+
   if (trim(fDMCadProduto.qParametros_ProdUSA_CONSUMO_COMB.AsString) <> 'S') or (fDMCadProduto.qParametros_ProdUSA_CONSUMO_COMB.IsNull) then
   begin
     vMaterial := fnc_Duplicidade_Mat(vIDAux);
