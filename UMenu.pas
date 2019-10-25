@@ -350,7 +350,6 @@ type
     BaixaNotasdeBeneficiamentoEstoqueEmTerceiro1: TMenuItem;
     PedidoWeb1: TMenuItem;
     ConsultaProdutosST1: TMenuItem;
-    ConfiguraoCertificado1: TMenuItem;
     GerarPlanodeMateriais1: TMenuItem;
     N55: TMenuItem;
     Animal1: TMenuItem;
@@ -610,7 +609,6 @@ type
       Sender: TObject);
     procedure PedidoWeb1Click(Sender: TObject);
     procedure ConsultaProdutosST1Click(Sender: TObject);
-    procedure ConfiguraoCertificado1Click(Sender: TObject);
     procedure GerarPlanodeMateriais1Click(Sender: TObject);
     procedure Raa1Click(Sender: TObject);
     procedure EspcieAnimalTipo1Click(Sender: TObject);
@@ -677,7 +675,7 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   UConsEstoque_Res, UBaixaMaterialOP, uCadTipo_Material, UConsMatPrima, UConsMaterialOP, UConsMaterial_Nec_Rem, uBaixaPedidoProc,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina, UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual,
   UBaixaNFDevolvida, UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas, uProdutoAtualizaPreco, uCadMovProdST, UCadPedWeb,
-  UConsProdSTRet, UCadFilial_Certificado, UDMCadPlanoMat, UGerar_PlanoMat, UAjusteEstoqueOP_Res, uCadRaca, uCadTipo_Animal,
+  UConsProdSTRet, UDMCadPlanoMat, UGerar_PlanoMat, UAjusteEstoqueOP_Res, uCadRaca, uCadTipo_Animal,
   UConsEstoque2, UComissaoVend, UConsProdutoNCM, UProg_Terc;
 
 {$R *.dfm}
@@ -2160,11 +2158,6 @@ end;
 procedure TfMenu.ConsultaProdutosST1Click(Sender: TObject);
 begin
   OpenForm(TfrmConsProdSTRet,wsMaximized);
-end;
-
-procedure TfMenu.ConfiguraoCertificado1Click(Sender: TObject);
-begin
-  OpenForm(TfrmCadFilial_Certificado,wsMaximized);
 end;
 
 procedure TfMenu.GerarPlanodeMateriais1Click(Sender: TObject);

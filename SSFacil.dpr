@@ -785,8 +785,6 @@ uses
   UConsProdSTRet in 'UConsProdSTRet.pas' {frmConsProdSTRet},
   UConsMatPed in 'UConsMatPed.pas' {frmConsMatPed},
   UCadTipoCobranca_Itens in 'UCadTipoCobranca_Itens.pas' {frmCadTipoCobranca_Itens},
-  UCadFilial_Certificado in 'UCadFilial_Certificado.pas' {frmCadFilial_Certificado},
-  UDMCadFilial_Certificado in 'UDMCadFilial_Certificado.pas' {DMFilial_Certificado: TDataModule},
   udmNFSe in 'EnvioAcbr\udmNFSe.pas' {dmNFSe: TDataModule},
   uEnvio_NFSe_Acbr in 'EnvioAcbr\UEnvio_NFSe_Acbr.pas',
   UDMCadPlanoMat in 'UDMCadPlanoMat.pas' {DMCadPlanoMat: TDataModule},

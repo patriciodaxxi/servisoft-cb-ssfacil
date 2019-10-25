@@ -134,10 +134,6 @@ object fMenu: TfMenu
         Caption = 'Configura'#231#227'o Email'
         OnClick = ConfiguraoEmail1Click
       end
-      object ConfiguraoCertificado1: TMenuItem
-        Caption = 'Configura'#231#227'o Certificado'
-        OnClick = ConfiguraoCertificado1Click
-      end
       object N2: TMenuItem
         Caption = '-'
       end
