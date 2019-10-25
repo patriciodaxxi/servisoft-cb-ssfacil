@@ -3533,6 +3533,7 @@ type
     qParametros_PedID_PROCESSO_GRUPO: TIntegerField;
     cdsProcesso_GrupoID: TIntegerField;
     cdsProcesso_GrupoNOME: TStringField;
+    cdsProdutoMEDIDA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

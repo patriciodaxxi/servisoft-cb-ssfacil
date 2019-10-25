@@ -1702,8 +1702,8 @@ object DMCadPedido: TDMCadPedido
       #10', P.PERC_IPI_IMP, P.ID_GRUPO, P.USA_PRECO_COR, P.PERC_COMISSAO,' +
       'P.PICTOGRAMA,P.PERC_DESC_MAX,P.ID_CFOP_NFCE,SPED_TIPO_ITEM,ID_CS' +
       'TICMS_BRED'#13#10',P.PERC_MARGEMLUCRO,P.TAMANHO,P.QTD_EMBALAGEM,P.QTD_' +
-      'PECA_EMB, P.REF2, P.FATOR_CALCULO, P.ID_CSTICMS, P.CALCULAR_ST'#13#10 +
-      'FROM PRODUTO P'#13#10#13#10#13#10
+      'PECA_EMB, P.REF2, P.FATOR_CALCULO'#13#10',P.ID_CSTICMS, P.CALCULAR_ST,' +
+      ' P.MEDIDA'#13#10'FROM PRODUTO P'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1898,6 +1898,9 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'CALCULAR_ST'
       FixedChar = True
       Size = 1
+    end
+    object cdsProdutoMEDIDA: TStringField
+      FieldName = 'MEDIDA'
     end
   end
   object dsProduto: TDataSource

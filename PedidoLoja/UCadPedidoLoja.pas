@@ -2148,6 +2148,8 @@ begin
   if (fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger > 0) and not(fDMCadPedido.cdsCFOP.Locate('ID',fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger,[loCaseInsensitive])) then
     exit;
 
+  fDMCadPedido.cdsPedido_ItensMEDIDA.AsString := fDMCadPedido.cdsProdutoMEDIDA.AsString;
+
   if fDMCadPedido.cdsPedido_ItensID_VARIACAO.AsInteger > 0 then
   begin
     if fDMCadPedido.cdsCFOP_Variacao.Locate('ITEM',fDMCadPedido.cdsPedido_ItensID_VARIACAO.AsInteger,[loCaseInsensitive]) then

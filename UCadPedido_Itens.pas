@@ -1179,6 +1179,9 @@ begin
       fDMCadPedido.cdsTab_NCM.Locate('ID',fDMCadPedido.cdsPedido_ItensID_NCM.AsInteger,[loCaseInsensitive]);
     if (pnlCor.Visible) and (RxDBLookupCombo3.Text <> '') then
       fDMCadPedido.cdsPedido_ItensNOME_COR_COMBINACAO.AsString := RxDBLookupCombo3.Text;
+    if (fDMCadPedido.qParametros_PedPEDIDO_COMERCIO.AsString = 'S') and (trim(fDMCadPedido.cdsProdutoMEDIDA.AsString) <> '')  then
+      fDMCadPedido.cdsPedido_ItensMEDIDA.AsString := fDMCadPedido.cdsProdutoMEDIDA.AsString;
+
     //Sagga usava isso  10/08/2018
     {if (fDMCadPedido.qParametros_ProdGRAVAR_PRIMEIRO_MAT.AsString = 'S') then
     begin
