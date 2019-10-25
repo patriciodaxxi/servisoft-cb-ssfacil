@@ -24,7 +24,7 @@ object frmCadFilial: TfrmCadFilial
     Top = 0
     Width = 1086
     Height = 590
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadFilial: TfrmCadFilial
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1082
         Height = 536
-        ActivePage = TS_Parametros
+        ActivePage = TabSheet1
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 2
+        TabIndex = 5
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -3276,7 +3276,7 @@ object frmCadFilial: TfrmCadFilial
               Top = 12
               Width = 369
               Height = 21
-              Filter = 'Relat'#243'rios|*.fr3|All files (*.*)|*.*'
+              Filter = 'Modelo Word|*.doc|All files (*.*)|*.*|Modelo Word|*.docx'
               NumGlyphs = 1
               TabOrder = 0
             end
