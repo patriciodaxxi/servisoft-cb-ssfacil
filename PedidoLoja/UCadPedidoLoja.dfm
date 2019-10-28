@@ -922,6 +922,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
     end
     object TS_Cadastro: TRzTabSheet
       Caption = 'Tela de Cadastro'
+      OnEnter = TS_CadastroEnter
       object Panel1: TPanel
         Left = 0
         Top = 0

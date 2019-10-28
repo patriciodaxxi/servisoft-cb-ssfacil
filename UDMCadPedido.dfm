@@ -3950,6 +3950,7 @@ object DMCadPedido: TDMCadPedido
     object cdsPedido_ItenssdsPedido_Item_Processo: TDataSetField
       Tag = 1
       FieldName = 'sdsPedido_Item_Processo'
+      ProviderFlags = []
     end
   end
   object dsPedido_Itens: TDataSource
@@ -10701,13 +10702,13 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43682.601200532400000000
+    ReportOptions.LastChange = 43763.598955775470000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
     OnPreview = frxReport1Preview
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 1160
+    Left = 1159
     Top = 111
   end
   object frxDBDataset1: TfrxDBDataset
@@ -13988,7 +13989,7 @@ object DMCadPedido: TDMCadPedido
   end
   object dsOrcamento_Rol: TDataSource
     DataSet = cdsOrcamento_Rol
-    Left = 264
+    Left = 265
     Top = 329
   end
   object frxDBDataset8: TfrxDBDataset
@@ -18381,7 +18382,7 @@ object DMCadPedido: TDMCadPedido
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 110
+    Left = 111
     Top = 110
     object sdsPedido_Item_ProcessoID: TIntegerField
       FieldName = 'ID'

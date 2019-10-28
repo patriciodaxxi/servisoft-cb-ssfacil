@@ -1950,12 +1950,19 @@ var
   vAux: Real;
   vPerc: Real;
 begin
-  if (fDMCadPedido.cdsProduto.Locate('ID',fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,[loCaseInsensitive])) then
+  if fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S' then
+    fDMCadPedido.prc_Abrir_ProdutoLoja(fdmcadpedido.cdsPedidoImp_ItensID_PRODUTO.AsInteger,'','')
+  else
+    fDMCadPedido.cdsProduto.Locate('ID',fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
+  if fDMCadPedido.cdsProdutoID.AsInteger <> fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger then
   begin
-    if (fDMCadPedido.cdsPedido_ItensPRECO_CUSTO.AsFloat <> fDMCadPedido.cdsProdutoPRECO_CUSTO.AsFloat) and (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S') then
-     if MessageDlg('Custo desatualizado, deseja atualizar?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
-       fDMCadPedido.cdsPedido_ItensPRECO_CUSTO.AsFloat := fDMCadPedido.cdsProdutoPRECO_CUSTO.AsFloat;
+    MessageDlg('*** Produto não encontrado, verificar o cadastro! ',mtWarning, [mbOk], 0);
+    exit;
   end;
+
+  if (fDMCadPedido.cdsPedido_ItensPRECO_CUSTO.AsFloat <> fDMCadPedido.cdsProdutoPRECO_CUSTO.AsFloat) and (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S') then
+   if MessageDlg('Custo desatualizado, deseja atualizar?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+     fDMCadPedido.cdsPedido_ItensPRECO_CUSTO.AsFloat := fDMCadPedido.cdsProdutoPRECO_CUSTO.AsFloat;
 
   if StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensPRECO_CUSTO.AsFloat)) > 0 then
   begin

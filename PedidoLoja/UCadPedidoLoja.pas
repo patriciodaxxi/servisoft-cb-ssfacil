@@ -284,6 +284,7 @@ type
     procedure dbedtVlrDescKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ImprimirMatricial80Colunas1Click(Sender: TObject);
+    procedure TS_CadastroEnter(Sender: TObject);
   private
     { Private declarations }
     fDMCadPedido: TDMCadPedido;
@@ -807,6 +808,9 @@ begin
 
   TS_Consulta.TabEnabled    := True;
   RzPageControl1.ActivePage := TS_Consulta;
+
+  if not btnAlterar_Itens.Enabled then
+    prc_Habilita_Itens;
 end;
 
 procedure TfrmCadPedidoLoja.SMDBGrid1DblClick(Sender: TObject);
@@ -1039,7 +1043,9 @@ begin
     MessageDlg(vMSGAux, mtError, [mbOk], 0);
     Exit;
   end;
-  fDMCadPedido.cdsProduto.Locate('ID',fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
+
+  fDMCadPedido.prc_Abrir_ProdutoLoja(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,'','');
+  //fDMCadPedido.cdsProduto.Locate('ID',fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
   vItemAux := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
   btnAlterar_Itens.Tag := 1;
   if fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString = 'S' then
@@ -1742,11 +1748,15 @@ begin
     while not fDMSel_Produto.mCarrinho.Eof do
     begin
       fDMCadPedido.prc_Inserir_Itens;
-      
+
       fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger := fDMSel_Produto.mCarrinhoID_Produto.AsInteger;
       fDMCadPedido.cdsPedido_ItensREFERENCIA.AsString  := fDMSel_Produto.mCarrinhoReferencia.AsString;
       fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMSel_Produto.mCarrinhoNome_Produto.AsString;
-      fDMCadPedido.cdsProduto.Locate('ID',fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
+
+      if fDMCadPedido.cdsProduto.RecordCount > 1 then
+        fDMCadPedido.cdsProduto.Locate('ID',fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,[loCaseInsensitive])
+      else
+        fDMCadPedido.prc_Abrir_ProdutoLoja(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,'','');
       if fDMCadPedido.cdsProdutoID_CFOP_NFCE.AsInteger > 0 then
         fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger := fDMCadPedido.cdsProdutoID_CFOP_NFCE.AsInteger
       else
@@ -2017,6 +2027,11 @@ end;
 
 procedure TfrmCadPedidoLoja.pnlProdutoExit(Sender: TObject);
 begin
+  if not pnlProduto.Enabled then
+    exit;
+
+  //if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit,dsInsert]) then
+  //  exit;
   if (trim(Edit2.Text) <> '')  then
   begin
     if fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString = 'S' then
@@ -2037,6 +2052,8 @@ begin
     else
     if fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger <> StrToInt(trim(Edit2.Text)) then
     begin
+      if not(fDMCadPedido.cdsPedido_Itens.State in [dsEdit,dsInsert]) then
+        fDMCadPedido.cdsPedido_Itens.Edit;
       fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger := fDMCadPedido.cdsProdutoID.AsInteger;
       fDMCadPedido.cdsPedido_ItensREFERENCIA.AsString  := fDMCadPedido.cdsProdutoREFERENCIA.AsString;
       fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := fDMCadPedido.cdsProdutoNOME.AsString;
@@ -2685,6 +2702,7 @@ begin
     begin
       MessageDlg('*** Item esta em aberto, Favor Confirmar ou Cancelar a digitação do item', mtInformation, [mbOk], 0);
       Edit2.SetFocus;
+
       exit;
     end;
     //fDMCadPedido.cdsPedido_Itens.Cancel;
@@ -2718,6 +2736,12 @@ procedure TfrmCadPedidoLoja.btnLucratividadeClick(Sender: TObject);
 var
   ffrmCadPedido_Custo: TfrmCadPedido_Custo;
 begin
+  if fDMCadPedido.cdsPedido_Itens.State in [dsEdit,dsInsert] then
+  begin
+    MessageDlg('*** Favor Confirmar ou Cancelar a digitação do Item!',mtWarning, [mbOk], 0);
+    exit;
+  end;
+  
   prc_Verifica_Itens;
   ffrmCadPedido_Custo := TfrmCadPedido_Custo.Create(self);
   ffrmCadPedido_Custo.fDMCadPedido := fDMCadPedido;
@@ -3086,6 +3110,11 @@ begin
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
 
   uImprimir.prc_Rodape_Mat;
+end;
+
+procedure TfrmCadPedidoLoja.TS_CadastroEnter(Sender: TObject);
+begin
+  btnOutrasOpcoes.SetFocus;
 end;
 
 end.
