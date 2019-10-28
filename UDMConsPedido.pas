@@ -871,6 +871,8 @@ type
     cdsProduto_Sem_VendaID: TIntegerField;
     cdsProduto_Sem_VendaVLR_TOTAL: TFloatField;
     cdsCliente_Sem_VendaVLR_TOTAL: TFloatField;
+    qParametros_PedPEDIDO_LOJA: TStringField;
+    cdsPedido_ItemENCOMENDA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConsumoNewRecord(DataSet: TDataSet);
     procedure cdsPedido_MatCalcFields(DataSet: TDataSet);

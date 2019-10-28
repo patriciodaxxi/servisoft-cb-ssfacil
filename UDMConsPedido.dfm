@@ -38,13 +38,14 @@ object DMConsPedido: TDMConsPedido
       '/ ITE.QTD) * ITE.QTD_CANCELADO)'#13#10'         when (ITE.QTD <= 0) th' +
       'en 0'#13#10'       end as VLR_CANCELADO, PRO.TAM_CALC,'#13#10'case'#13#10'  when c' +
       'oalesce(cli.fantasia,'#39#39') = '#39#39' then cli.nome'#13#10'  else cli.fantasia' +
-      #13#10'  end FANTASIA'#13#10#13#10'from PEDIDO PED'#13#10'inner join PEDIDO_ITEM ITE ' +
-      'on PED.ID = ITE.ID'#13#10'inner join FILIAL FIL on PED.FILIAL = FIL.ID' +
-      #13#10'inner join PESSOA CLI on PED.ID_CLIENTE = CLI.CODIGO'#13#10'inner jo' +
-      'in PRODUTO PRO on ITE.ID_PRODUTO = PRO.ID'#13#10'left join PESSOA VEN ' +
-      'on PED.ID_VENDEDOR = VEN.CODIGO'#13#10'left join COMBINACAO COMB on IT' +
-      'E.ID_COR = COMB.ID'#13#10'left join GRUPO GR on PRO.ID_GRUPO = GR.ID'#13#10 +
-      'left join PEDIDO_APROV APROV on PED.ID = APROV.ID  '#13#10
+      #13#10'  end FANTASIA, ITE.encomenda'#13#10#13#10'from PEDIDO PED'#13#10'inner join P' +
+      'EDIDO_ITEM ITE on PED.ID = ITE.ID'#13#10'inner join FILIAL FIL on PED.' +
+      'FILIAL = FIL.ID'#13#10'inner join PESSOA CLI on PED.ID_CLIENTE = CLI.C' +
+      'ODIGO'#13#10'inner join PRODUTO PRO on ITE.ID_PRODUTO = PRO.ID'#13#10'left j' +
+      'oin PESSOA VEN on PED.ID_VENDEDOR = VEN.CODIGO'#13#10'left join COMBIN' +
+      'ACAO COMB on ITE.ID_COR = COMB.ID'#13#10'left join GRUPO GR on PRO.ID_' +
+      'GRUPO = GR.ID'#13#10'left join PEDIDO_APROV APROV on PED.ID = APROV.ID' +
+      '  '#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -230,6 +231,11 @@ object DMConsPedido: TDMConsPedido
     end
     object cdsPedido_ItemTAM_CALC: TFloatField
       FieldName = 'TAM_CALC'
+    end
+    object cdsPedido_ItemENCOMENDA: TStringField
+      FieldName = 'ENCOMENDA'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsPedido_Item: TDataSource
@@ -3190,6 +3196,11 @@ object DMConsPedido: TDMConsPedido
     end
     object qParametros_PedCONCATENA_PROD_COR_TAM: TStringField
       FieldName = 'CONCATENA_PROD_COR_TAM'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedPEDIDO_LOJA: TStringField
+      FieldName = 'PEDIDO_LOJA'
       FixedChar = True
       Size = 1
     end

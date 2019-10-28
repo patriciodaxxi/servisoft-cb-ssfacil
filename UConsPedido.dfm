@@ -148,12 +148,20 @@ object frmConsPedido: TfrmConsPedido
       Caption = 'Imprimir Cliente:'
     end
     object Label32: TLabel
-      Left = 705
+      Left = 519
       Top = 120
       Width = 33
       Height = 13
       Alignment = taRightJustify
       Caption = 'N'#186' OS:'
+    end
+    object Label34: TLabel
+      Left = 678
+      Top = 120
+      Width = 60
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Encomenda:'
     end
     object Edit1: TEdit
       Left = 739
@@ -181,7 +189,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object ckMostrarPreco: TCheckBox
       Left = 523
-      Top = 81
+      Top = 83
       Width = 97
       Height = 17
       Caption = 'Mostrar Pre'#231'o'
@@ -282,7 +290,7 @@ object frmConsPedido: TfrmConsPedido
     object RxDBLookupCombo5: TRxDBLookupCombo
       Left = 287
       Top = 112
-      Width = 359
+      Width = 228
       Height = 21
       DropDownCount = 8
       Ctl3D = True
@@ -371,9 +379,9 @@ object frmConsPedido: TfrmConsPedido
       OnClick = ckAprovadoClick
     end
     object Edit2: TEdit
-      Left = 739
+      Left = 553
       Top = 112
-      Width = 175
+      Width = 96
       Height = 21
       Ctl3D = True
       ParentCtl3D = False
@@ -395,6 +403,21 @@ object frmConsPedido: TfrmConsPedido
         'Todos')
       ParentCtl3D = False
       TabOrder = 18
+    end
+    object ComboBox4: TComboBox
+      Left = 739
+      Top = 112
+      Width = 175
+      Height = 21
+      Style = csDropDownList
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 19
+      Text = 'Todos'
+      Items.Strings = (
+        'Todos'
+        'Somente Encomenda'
+        'N'#227'o Mostrar Encomenda')
     end
   end
   object RzPageControl1: TRzPageControl
@@ -418,6 +441,7 @@ object frmConsPedido: TfrmConsPedido
     TabIndex = 0
     TabOrder = 1
     TextColors.Unselected = 5197647
+    OnChange = RzPageControl1Change
     OnChanging = RzPageControl1Changing
     FixedDimension = 19
     object TS_Item: TRzTabSheet
@@ -466,15 +490,24 @@ object frmConsPedido: TfrmConsPedido
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 37
+        ColCount = 38
         RowCount = 2
         Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'ENCOMENDA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Encomenda'
+            Visible = True
+          end
           item
             Alignment = taCenter
             Expanded = False
             FieldName = 'APROVADO_PED'
             Title.Alignment = taCenter
             Title.Caption = 'Aprovado'
+            Width = 64
             Visible = True
           end
           item

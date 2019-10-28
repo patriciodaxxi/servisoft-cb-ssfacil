@@ -115,6 +115,8 @@ type
     TS_ClienteDtEntrega: TRzTabSheet;
     SMDBGrid10: TSMDBGrid;
     RadioGroup1: TRadioGroup;
+    Label34: TLabel;
+    ComboBox4: TComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -165,6 +167,7 @@ type
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure SMDBGrid9GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure RzPageControl1Change(Sender: TObject);
   private
     { Private declarations }
     ffrmConsPedido_Nota: TfrmConsPedido_Nota;
@@ -283,6 +286,14 @@ begin
       vComando := vComando + ' AND ITE.DTEXPEDICAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit8.date));
     if trim(Edit2.Text) <> '' then
       vComando := vComando + ' AND ITE.NUMOS like ' + QuotedStr('%'+Edit2.Text+'%');
+    if fDMConsPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S' then
+    begin
+      case ComboBox4.ItemIndex of
+        1 : vComando := vComando + ' AND ITE.ENCOMENDA = ' + QuotedStr('S');
+        2 : vComando := vComando + ' AND COALESCE(ITE.ENCOMENDA,' + QuotedStr('N') + ') = ' + QuotedStr('N');
+      end;
+    end;
+
   end;
   fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.sdsPedido_Item.CommandText + vComando;
   fDMConsPedido.cdsPedido_Item.Open;
@@ -359,6 +370,8 @@ begin
       SMDBGrid1.Columns[i].Visible := (fDMConsPedido.qParametros_PedCONCATENA_PROD_COR_TAM.AsString <> 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'TAM_CALC') then
       SMDBGrid1.Columns[i].Visible := (fDMConsPedido.qParametros_ProdMOSTRAR_TAM_CALC.AsString = 'S');
+    if (SMDBGrid1.Columns[i].FieldName = 'ENCOMENDA') then
+      SMDBGrid1.Columns[i].Visible := (fDMConsPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
   end;
 
   for i := 1 to SMDBGrid6.ColCount - 2 do
@@ -391,7 +404,9 @@ begin
   Label32.Visible := fDMConsPedido.qParametros_PedUSA_OS_REMESSA.AsString = 'S';
   Edit2.Visible   := fDMConsPedido.qParametros_PedUSA_OS_REMESSA.AsString = 'S';
   if fDMConsPedido.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S' then
-   Label32.Caption := 'Nº OC/OP';
+    Label32.Caption := 'Nº OC/OP';
+  Label34.Visible   := (fDMConsPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  ComboBox4.Visible := (fDMConsPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
 end;
 
 procedure TfrmConsPedido.SMDBGrid1TitleClick(Column: TColumn);
@@ -1640,6 +1655,12 @@ begin
   fDMConsPedido.sdsPedido_RefComb_DtECliente.CommandText := vComando + vComando_GroupBy;
   fDMConsPedido.cdsPedido_RefComb_DtECliente.IndexFieldNames := 'DTENTREGA_ITEM;REFERENCIA;NOME_COR_COMBINACAO;NOME_CLIENTE';
   fDMConsPedido.cdsPedido_RefComb_DtECliente.Open;
+end;
+
+procedure TfrmConsPedido.RzPageControl1Change(Sender: TObject);
+begin
+  Label34.Visible   := ((RzPageControl1.ActivePage = TS_Item) and (fDMConsPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S'));
+  ComboBox4.Visible := ((RzPageControl1.ActivePage = TS_Item) and (fDMConsPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S'));
 end;
 
 end.
