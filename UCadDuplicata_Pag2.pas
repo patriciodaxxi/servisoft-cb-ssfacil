@@ -446,7 +446,7 @@ begin
     if (RxDBLookupCombo1.Text <> '') and (fDMCadDuplicata.cdsTipoCobranca.Locate('ID',RxDBLookupCombo1.KeyValue,[loCaseInsensitive])) then
       vFlag := (fDMCadDuplicata.cdsTipoCobrancaCHEQUE.AsString = 'S');
     if (vFlag) and (RxDBLookupCombo3.Text <> '') and (fDMCadDuplicata.cdsContas.Locate('ID',RxDBLookupCombo3.KeyValue,[loCaseInsensitive]))
-    and (fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'S') then
+      and (fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString = 'S') then
       vFlagProprio := (fDMCadDuplicata.cdsContasTIPO_CONTA.AsString = 'B');
     //if (vFlag) and (fDMCadDuplicata.cdsDuplicataTIPO_ES.AsString <> 'S') then
     //  vFlag := False;

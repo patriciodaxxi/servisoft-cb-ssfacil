@@ -1550,6 +1550,8 @@ type
     cdsCupomFiscalID_CANAL_VENDA: TIntegerField;
     sdsCupomParametrosUSA_CANAL_VENDA: TStringField;
     cdsCupomParametrosUSA_CANAL_VENDA: TStringField;
+    sdsCupomParametrosESTOQUE_CUPOM: TStringField;
+    cdsCupomParametrosESTOQUE_CUPOM: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);

@@ -2954,6 +2954,11 @@ object dmCupomFiscal: TdmCupomFiscal
       FixedChar = True
       Size = 1
     end
+    object sdsCupomParametrosESTOQUE_CUPOM: TStringField
+      FieldName = 'ESTOQUE_CUPOM'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspCupomParametros: TDataSetProvider
     DataSet = sdsCupomParametros
@@ -3228,6 +3233,11 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupomParametrosUSA_CANAL_VENDA: TStringField
       FieldName = 'USA_CANAL_VENDA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCupomParametrosESTOQUE_CUPOM: TStringField
+      FieldName = 'ESTOQUE_CUPOM'
       FixedChar = True
       Size = 1
     end

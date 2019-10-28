@@ -1717,32 +1717,38 @@ begin
         Continue;
       end;
       fDmCupomFiscal.cdsCupom_Itens.Edit;
-      fDmCupomFiscal.cdsCupom_ItensID_MOVESTOQUE.AsInteger := fDMEstoque.fnc_Gravar_Estoque(fDmCupomFiscal.cdsCupom_ItensID_MOVESTOQUE.AsInteger,
-                                                 fDmCupomFiscal.cdsCupomFiscalFILIAL.AsInteger,
-                                                 vLocalEstoque,
-                                                 fDmCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,
-                                                 fDmCupomFiscal.cdsCupomFiscalNUMCUPOM.AsInteger,
-                                                 fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.AsInteger,
-                                                 fDmCupomFiscal.cdsCupom_ItensID_CFOP.AsInteger,
-                                                 fDmCupomFiscal.cdsCupomFiscalID.AsInteger,0,
-                                                 'S','CFI',
-                                                 fDmCupomFiscal.cdsCupom_ItensUNIDADE.AsString,
-                                                 fDmCupomFiscal.cdsCupom_ItensUNIDADE.AsString,
-                                                 fDmCupomFiscal.cdsCupomFiscalSERIE.AsString,
-                                                 fDmCupomFiscal.cdsCupom_ItensTAMANHO.AsString,
-                                                 fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime,
-                                                 fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
-                                                 fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
-                                                 fDmCupomFiscal.cdsCupom_ItensPERC_ICMS.AsFloat,
-                                                 0,
-                                                 0,
-                                                 0,
-                                                 0,
-                                                 fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
-                                                 fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
-                                                 0,0,'',
-                                                 fDmCupomFiscal.cdsCupom_ItensID_COR_COMBINACO.AsInteger,'','N',0,0,0,0,0);
 
+      //28/10/2019
+      if (fDmCupomFiscal.cdsCupomParametrosESTOQUE_CUPOM.AsString = 'S') or (fDmCupomFiscal.cdsCupomParametrosESTOQUE_CUPOM.IsNull) or
+        (trim(fDmCupomFiscal.cdsCupomParametrosESTOQUE_CUPOM.AsString) = '') then
+      begin
+        fDmCupomFiscal.cdsCupom_ItensID_MOVESTOQUE.AsInteger := fDMEstoque.fnc_Gravar_Estoque(fDmCupomFiscal.cdsCupom_ItensID_MOVESTOQUE.AsInteger,
+                                                   fDmCupomFiscal.cdsCupomFiscalFILIAL.AsInteger,
+                                                   vLocalEstoque,
+                                                   fDmCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,
+                                                   fDmCupomFiscal.cdsCupomFiscalNUMCUPOM.AsInteger,
+                                                   fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.AsInteger,
+                                                   fDmCupomFiscal.cdsCupom_ItensID_CFOP.AsInteger,
+                                                   fDmCupomFiscal.cdsCupomFiscalID.AsInteger,0,
+                                                   'S','CFI',
+                                                   fDmCupomFiscal.cdsCupom_ItensUNIDADE.AsString,
+                                                   fDmCupomFiscal.cdsCupom_ItensUNIDADE.AsString,
+                                                   fDmCupomFiscal.cdsCupomFiscalSERIE.AsString,
+                                                   fDmCupomFiscal.cdsCupom_ItensTAMANHO.AsString,
+                                                   fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime,
+                                                   fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
+                                                   fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
+                                                   fDmCupomFiscal.cdsCupom_ItensPERC_ICMS.AsFloat,
+                                                   0,
+                                                   0,
+                                                   0,
+                                                   0,
+                                                   fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
+                                                   fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
+                                                   0,0,'',
+                                                   fDmCupomFiscal.cdsCupom_ItensID_COR_COMBINACO.AsInteger,'','N',0,0,0,0,0);
+      end;
+      //*********************
       fDmCupomFiscal.cdsCupom_ItensID_MOVIMENTO.AsInteger := fDMMovimento.fnc_Gravar_Movimento(0,
                                                    fDMCupomFiscal.cdsCupomFiscalFILIAL.AsInteger,
                                                    fDMCupomFiscal.cdsCupom_ItensITEM.AsInteger,
@@ -2193,8 +2199,9 @@ begin
   fDmCupomFiscal.cdsCupom_Itens.First;
   while not fDmCupomFiscal.cdsCupom_Itens.Eof do
   begin
-    vID_Mov  := 0;
-    vDescAux := StrToFloat(FormatFloat('0.0000',fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat));
+    vID_Mov     := 0;
+    vID_Estoque := 0;
+    vDescAux    := StrToFloat(FormatFloat('0.0000',fDmCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat));
 
     if fDmCupomFiscal.cdsCupom_ItensCANCELADO.AsString = 'S' then
     begin
@@ -2204,31 +2211,35 @@ begin
 
     fDmCupomFiscal.prc_Abrir_Produto('ID',fDmCupomFiscal.cdsCupom_ItensID_PRODUTO.AsString);
 
-    vID_Estoque := fDMEstoque.fnc_Gravar_Estoque(fDmCupomFiscal.cdsCupom_ItensID_MOVESTOQUE.AsInteger,
-                                                 fDmCupomFiscal.cdsCupomFiscalFILIAL.AsInteger,
-                                                 vLocalEstoque,
-                                                 fDmCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,
-                                                 fDmCupomFiscal.cdsCupomFiscalNUMCUPOM.AsInteger,
-                                                 fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.AsInteger,
-                                                 fDmCupomFiscal.cdsCupom_ItensID_CFOP.AsInteger,
-                                                 fDmCupomFiscal.cdsCupomFiscalID.AsInteger,0,
-                                                 'S','CFI',
-                                                 fDmCupomFiscal.cdsCupom_ItensUNIDADE.AsString,
-                                                 fDmCupomFiscal.cdsCupom_ItensUNIDADE.AsString,
-                                                 fDmCupomFiscal.cdsCupomFiscalSERIE.AsString,
-                                                 fDmCupomFiscal.cdsCupom_ItensTAMANHO.AsString,
-                                                 fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime,
-                                                 fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
-                                                 fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
-                                                 fDmCupomFiscal.cdsCupom_ItensPERC_ICMS.AsFloat,
-                                                 0,
-                                                 vDescAux,
-                                                 0,
-                                                 0,
-                                                 fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
-                                                 fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
-                                                 vDescAux,0,'',
-                                                 fDmCupomFiscal.cdsCupom_ItensID_COR_COMBINACO.AsInteger,'','N',0,0,0,0,0);
+    //28/10/2019
+    if trim(fDmCupomFiscal.cdsCupomParametrosESTOQUE_CUPOM.AsString) <> 'N' then
+    begin
+      vID_Estoque := fDMEstoque.fnc_Gravar_Estoque(fDmCupomFiscal.cdsCupom_ItensID_MOVESTOQUE.AsInteger,
+                                                   fDmCupomFiscal.cdsCupomFiscalFILIAL.AsInteger,
+                                                   vLocalEstoque,
+                                                   fDmCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,
+                                                   fDmCupomFiscal.cdsCupomFiscalNUMCUPOM.AsInteger,
+                                                   fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.AsInteger,
+                                                   fDmCupomFiscal.cdsCupom_ItensID_CFOP.AsInteger,
+                                                   fDmCupomFiscal.cdsCupomFiscalID.AsInteger,0,
+                                                   'S','CFI',
+                                                   fDmCupomFiscal.cdsCupom_ItensUNIDADE.AsString,
+                                                   fDmCupomFiscal.cdsCupom_ItensUNIDADE.AsString,
+                                                   fDmCupomFiscal.cdsCupomFiscalSERIE.AsString,
+                                                   fDmCupomFiscal.cdsCupom_ItensTAMANHO.AsString,
+                                                   fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime,
+                                                   fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
+                                                   fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
+                                                   fDmCupomFiscal.cdsCupom_ItensPERC_ICMS.AsFloat,
+                                                   0,
+                                                   vDescAux,
+                                                   0,
+                                                   0,
+                                                   fDmCupomFiscal.cdsCupom_ItensQTD.AsFloat,
+                                                   fDmCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
+                                                   vDescAux,0,'',
+                                                   fDmCupomFiscal.cdsCupom_ItensID_COR_COMBINACO.AsInteger,'','N',0,0,0,0,0);
+    end;
 
     if (not fDmCupomFiscal.cdsProduto.IsEmpty) and
        (fDmCupomFiscal.cdsProdutoTIPO_REG.AsString <> 'N') and (vFinanceiro) then

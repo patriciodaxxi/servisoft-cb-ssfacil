@@ -23,7 +23,7 @@ object fCupomParametros: TfCupomParametros
   object Panel3: TPanel
     Left = 0
     Top = 0
-    Width = 865
+    Width = 873
     Height = 35
     Align = alTop
     Color = 8404992
@@ -79,8 +79,8 @@ object fCupomParametros: TfCupomParametros
   object PageControl1: TPageControl
     Left = 0
     Top = 35
-    Width = 865
-    Height = 558
+    Width = 873
+    Height = 566
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
@@ -89,8 +89,8 @@ object fCupomParametros: TfCupomParametros
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 857
-        Height = 530
+        Width = 865
+        Height = 538
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -268,6 +268,18 @@ object fCupomParametros: TfCupomParametros
             LookupSource = dmCupomFiscal.dsLocalEstoque
             TabOrder = 7
             OnEnter = RxDBLookupCombo4Enter
+          end
+          object DBCheckBox1: TDBCheckBox
+            Left = 198
+            Top = 81
+            Width = 141
+            Height = 17
+            Caption = 'Estoque no Cupom'
+            DataField = 'ESTOQUE_CUPOM'
+            DataSource = dmCupomFiscal.dsCupomParametros
+            TabOrder = 8
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
           end
         end
         object GroupBox6: TGroupBox
@@ -1858,8 +1870,8 @@ object fCupomParametros: TfCupomParametros
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 857
-        Height = 530
+        Width = 865
+        Height = 538
         Align = alClient
         TabOrder = 0
         object Label15: TLabel

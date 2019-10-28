@@ -21,8 +21,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 602
-    Width = 806
+    Top = 610
+    Width = 814
     Height = 41
     Align = alBottom
     TabOrder = 1
@@ -86,8 +86,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 806
-    Height = 602
+    Width = 814
+    Height = 610
     ActivePage = TabSheet1
     ActivePageDefault = TabSheet1
     Align = alClient
@@ -99,14 +99,14 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 802
-        Height = 579
+        Width = 810
+        Height = 587
         Align = alClient
         TabOrder = 0
         object Panel3: TPanel
           Left = 1
-          Top = 390
-          Width = 800
+          Top = 398
+          Width = 808
           Height = 116
           Align = alBottom
           Color = 3683329
@@ -307,7 +307,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         object Panel4: TPanel
           Left = 1
           Top = 1
-          Width = 800
+          Width = 808
           Height = 124
           Align = alTop
           Color = 3683329
@@ -562,7 +562,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         object Panel6: TPanel
           Left = 1
           Top = 125
-          Width = 800
+          Width = 808
           Height = 96
           Align = alTop
           TabOrder = 1
@@ -673,8 +673,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         object Panel7: TPanel
           Left = 1
           Top = 221
-          Width = 800
-          Height = 169
+          Width = 808
+          Height = 177
           Align = alClient
           TabOrder = 2
           OnEnter = Panel7Enter
@@ -784,8 +784,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         end
         object pnlCanalVenda: TPanel
           Left = 1
-          Top = 543
-          Width = 800
+          Top = 551
+          Width = 808
           Height = 35
           Align = alBottom
           Color = 3683329
@@ -834,8 +834,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         end
         object pnlVendedor: TPanel
           Left = 1
-          Top = 506
-          Width = 800
+          Top = 514
+          Width = 808
           Height = 37
           Align = alBottom
           Color = 3683329
@@ -889,7 +889,7 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 802
+        Width = 810
         Height = 39
         Align = alTop
         TabOrder = 0
@@ -999,8 +999,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 39
-        Width = 802
-        Height = 468
+        Width = 810
+        Height = 476
         Align = alClient
         Color = 12633514
         DataSource = dmCupomFiscal.dsCupom_Parc
@@ -1077,8 +1077,8 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
       end
       object Panel8: TPanel
         Left = 0
-        Top = 507
-        Width = 802
+        Top = 515
+        Width = 810
         Height = 72
         Align = alBottom
         TabOrder = 2
