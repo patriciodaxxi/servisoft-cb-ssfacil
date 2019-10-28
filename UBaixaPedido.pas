@@ -284,6 +284,8 @@ procedure TfrmBaixaPedido.btnConfBaixaClick(Sender: TObject);
 var
   vContadorAux: Integer;
   vEstoque: String;
+  VOBSAux : String;
+  vGravar : Boolean;
 begin
   if DateEdit5.Date < 10 then
   begin
@@ -297,13 +299,29 @@ begin
     vEstoque := 'N';
 
   vContadorAux := 0;
+  VOBSAux      := '';
+
+  if fDMBaixaPedido.cdsPedido_Pend.State in [dsEdit] then
+    fDMBaixaPedido.cdsPedido_Pend.Post;
 
   fDMBaixaPedido.fDMEstoque := fDMEstoque;
   fDMBaixaPedido.mPedidoAux.EmptyDataSet;
   fDMBaixaPedido.cdsPedido_Pend.First;
   while not fDMBaixaPedido.cdsPedido_Pend.Eof do
   begin
-    if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (StrToFloat(FormatFloat('0.000',fDMBaixaPedido.cdsPedido_PendQTD_AFATURAR.AsFloat)) > 0)then
+    vGravar := False;
+    if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (StrToFloat(FormatFloat('0.000',fDMBaixaPedido.cdsPedido_PendQTD_AFATURAR.AsFloat)) > 0) then
+    begin
+      vGravar := True;
+      if (fDMBaixaPedido.qParametrosPERMITE_QTDMAIOR_PEDIDO.AsString <> 'S') and (fDMBaixaPedido.cdsPedido_PendTIPO_REG.AsString = 'P') and
+         (StrToFloat(FormatFloat('0.0000',fDMBaixaPedido.cdsPedido_PendQTD_AFATURAR.AsFloat)) > StrToFloat(FormatFloat('0.0000',fDMBaixaPedido.cdsPedido_PendclQtd_Restante.AsFloat))) then
+      begin
+        VOBSAux := VOBSAux + #13 + '***  Pedido: ' + fDMBaixaPedido.cdsPedido_PendNUM_PEDIDO.AsString + '     Item: ' + fDMBaixaPedido.cdsPedido_PendITEM.AsString
+                 + '    Qtd. Faturada maior que o Pedido!';
+        vGravar := False;
+      end;
+    end;
+    if vGravar then
     begin
       vContadorAux := vContadorAux + 1;
       //aqui 24/01/2014
@@ -320,7 +338,6 @@ begin
           fDMBaixaPedido.mPedidoAux.Post;
         end;
       end;
-
     end;
     fDMBaixaPedido.cdsPedido_Pend.Next;
   end;
@@ -339,8 +356,10 @@ begin
   end;
 
   btnConsultarClick(Sender);
-
-  ShowMessage('Total de itens baixados: ' + IntToStr(vContadorAux));
+  if trim(VOBSAux) <> '' then
+    ShowMessage('Total de itens baixados: ' + IntToStr(vContadorAux) + #13 + #13 + 'Possui Itens não baixados' + #13+#13 + VOBSAux)
+  else
+    ShowMessage('Total de itens baixados: ' + IntToStr(vContadorAux));
   DateEdit5.Clear;
   //ckEstoque.Checked := False;
   if fMenu.vTipo_Reg_Pedido <> 'C' then

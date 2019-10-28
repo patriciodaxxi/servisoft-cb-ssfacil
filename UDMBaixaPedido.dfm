@@ -449,7 +449,7 @@ object DMBaixaPedido: TDMBaixaPedido
       'SELECT *'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 456
+    Left = 458
     Top = 24
     object qParametrosID: TIntegerField
       FieldName = 'ID'
@@ -610,6 +610,11 @@ object DMBaixaPedido: TDMBaixaPedido
     end
     object qParametrosINFORMAR_COR_PROD: TStringField
       FieldName = 'INFORMAR_COR_PROD'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametrosPERMITE_QTDMAIOR_PEDIDO: TStringField
+      FieldName = 'PERMITE_QTDMAIOR_PEDIDO'
       FixedChar = True
       Size = 1
     end

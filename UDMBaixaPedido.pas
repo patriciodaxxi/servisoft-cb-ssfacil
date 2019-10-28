@@ -541,6 +541,7 @@ type
     qParametros_EstMARCAR_BAIXA_PEDIDO: TStringField;
     qParametros_Ser: TSQLQuery;
     qParametros_SerLIB_QTD_PEDIDO: TStringField;
+    qParametrosPERMITE_QTDMAIOR_PEDIDO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedido_ItemCalcFields(DataSet: TDataSet);
     procedure cdsBaixa_PedidoNewRecord(DataSet: TDataSet);
