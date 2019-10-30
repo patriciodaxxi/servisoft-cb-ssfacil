@@ -22,8 +22,8 @@ object frmCadContratoServ: TfrmCadContratoServ
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 925
-    Height = 569
+    Width = 917
+    Height = 561
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -41,8 +41,8 @@ object frmCadContratoServ: TfrmCadContratoServ
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 134
-        Width = 921
-        Height = 395
+        Width = 913
+        Height = 387
         Align = alClient
         BorderStyle = bsNone
         Ctl3D = False
@@ -144,7 +144,7 @@ object frmCadContratoServ: TfrmCadContratoServ
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 921
+        Width = 913
         Height = 104
         Align = alTop
         Color = clSilver
@@ -476,8 +476,8 @@ object frmCadContratoServ: TfrmCadContratoServ
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 529
-        Width = 921
+        Top = 521
+        Width = 913
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -493,7 +493,7 @@ object frmCadContratoServ: TfrmCadContratoServ
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 921
+        Width = 913
         Height = 30
         Align = alTop
         Color = clSilver
@@ -574,7 +574,7 @@ object frmCadContratoServ: TfrmCadContratoServ
           OnClick = btnInserirClick
         end
         object btnExcluir: TNxButton
-          Left = 154
+          Left = 460
           Top = 1
           Width = 153
           Height = 28
@@ -649,7 +649,7 @@ object frmCadContratoServ: TfrmCadContratoServ
           OnClick = btnExcluirClick
         end
         object btnPesquisar: TNxButton
-          Left = 307
+          Left = 154
           Top = 1
           Width = 153
           Height = 28
@@ -722,7 +722,7 @@ object frmCadContratoServ: TfrmCadContratoServ
           OnClick = btnPesquisarClick
         end
         object btnImprimir: TNxButton
-          Left = 460
+          Left = 307
           Top = 1
           Width = 153
           Height = 28
@@ -802,7 +802,7 @@ object frmCadContratoServ: TfrmCadContratoServ
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 921
+        Width = 913
         Height = 30
         Align = alTop
         Color = 8404992
@@ -1031,7 +1031,7 @@ object frmCadContratoServ: TfrmCadContratoServ
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 921
+        Width = 913
         Height = 201
         Align = alTop
         Enabled = False
@@ -1039,7 +1039,7 @@ object frmCadContratoServ: TfrmCadContratoServ
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 919
+          Width = 911
           Height = 39
           Align = alTop
           Color = clSilver
@@ -1072,7 +1072,7 @@ object frmCadContratoServ: TfrmCadContratoServ
         object pnlCliente: TPanel
           Left = 1
           Top = 40
-          Width = 919
+          Width = 911
           Height = 160
           Align = alClient
           BevelInner = bvLowered
@@ -1479,8 +1479,8 @@ object frmCadContratoServ: TfrmCadContratoServ
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 381
-        Width = 921
-        Height = 165
+        Width = 913
+        Height = 157
         ActivePage = TabSheet3
         Align = alClient
         TabIndex = 0
@@ -1491,8 +1491,8 @@ object frmCadContratoServ: TfrmCadContratoServ
           object RzGroupBox1: TRzGroupBox
             Left = 0
             Top = 0
-            Width = 917
-            Height = 142
+            Width = 909
+            Height = 134
             Align = alClient
             BorderColor = 16744448
             BorderInner = fsButtonUp
@@ -1513,8 +1513,8 @@ object frmCadContratoServ: TfrmCadContratoServ
             object DBMemo1: TDBMemo
               Left = 5
               Top = 18
-              Width = 907
-              Height = 119
+              Width = 899
+              Height = 111
               Align = alClient
               Ctl3D = False
               DataField = 'OBS'
@@ -1538,7 +1538,7 @@ object frmCadContratoServ: TfrmCadContratoServ
       object RzPageControl3: TRzPageControl
         Left = 0
         Top = 231
-        Width = 921
+        Width = 913
         Height = 150
         ActivePage = TabSheet1
         Align = alTop
@@ -1607,7 +1607,7 @@ object frmCadContratoServ: TfrmCadContratoServ
           object SMDBGrid_Dupl2: TSMDBGrid
             Left = 0
             Top = 31
-            Width = 917
+            Width = 909
             Height = 96
             Align = alBottom
             Ctl3D = False
