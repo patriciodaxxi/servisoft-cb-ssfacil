@@ -2668,8 +2668,8 @@ object frmCadContrato: TfrmCadContrato
           object RzGroupBox1: TRzGroupBox
             Left = 0
             Top = 167
-            Width = 923
-            Height = 286
+            Width = 915
+            Height = 278
             Align = alClient
             BorderColor = 16744448
             BorderInner = fsButtonUp
@@ -2690,8 +2690,8 @@ object frmCadContrato: TfrmCadContrato
             object DBMemo1: TDBMemo
               Left = 5
               Top = 18
-              Width = 913
-              Height = 263
+              Width = 905
+              Height = 255
               Align = alClient
               Ctl3D = False
               DataField = 'OBS'
@@ -2713,7 +2713,7 @@ object frmCadContrato: TfrmCadContrato
           object RzGroupBox2: TRzGroupBox
             Left = 0
             Top = 0
-            Width = 923
+            Width = 915
             Height = 167
             Align = alTop
             BorderColor = clLime
@@ -2735,7 +2735,7 @@ object frmCadContrato: TfrmCadContrato
             object DBMemo2: TDBMemo
               Left = 5
               Top = 18
-              Width = 913
+              Width = 905
               Height = 144
               Align = alClient
               Ctl3D = False
