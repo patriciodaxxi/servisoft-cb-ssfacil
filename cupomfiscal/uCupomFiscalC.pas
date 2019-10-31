@@ -736,7 +736,8 @@ begin
     fDmCupomFiscal.Excluir_Duplicata;
     fDmCupomFiscal.Excluir_ExtComissao;
     fDmCupomFiscal.prc_Excluir_Financeiro;
-    fDmCupomFiscal.prc_Excluir_Movimento;
+    //31/10/2019 vai excluir pela trigger do trg_cupomfiscal_itens_bef
+    //fDmCupomFiscal.prc_Excluir_Movimento;
     fDmCupomFiscal.prcExcluir;
     Exit;
   end
@@ -1011,7 +1012,8 @@ begin
     fDmCupomFiscal.Excluir_Duplicata;
     fDmCupomFiscal.Excluir_ExtComissao;
     fDmCupomFiscal.prc_Excluir_Financeiro;
-    fDmCupomFiscal.prc_Excluir_Movimento;
+    //31/10/2019  exclusão pelo trg_cupomfiscal_itens_bef
+    //fDmCupomFiscal.prc_Excluir_Movimento;
 
     fDmCupomFiscal.prcExcluir;
 
@@ -1134,7 +1136,8 @@ begin
     fDmCupomFiscal.Excluir_Duplicata;
     fDmCupomFiscal.Excluir_ExtComissao;
     fDmCupomFiscal.prc_Excluir_Financeiro;
-    fDmCupomFiscal.prc_Excluir_Movimento;
+    //31/10/2019 
+    //fDmCupomFiscal.prc_Excluir_Movimento;
   except
     on E: Exception do
       ShowMessage('Não foi possível cancelar!' + #13 + E.Message + '! Clique para continuar!');
