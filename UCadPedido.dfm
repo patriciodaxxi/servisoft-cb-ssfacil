@@ -3127,15 +3127,6 @@ object frmCadPedido: TfrmCadPedido
               TabOrder = 7
               OnClick = btnConsTempoClick
             end
-            object btnItemProcesso: TNxButton
-              Left = 486
-              Top = 2
-              Width = 97
-              Height = 27
-              Caption = 'Processos'
-              TabOrder = 8
-              OnClick = btnItemProcessoClick
-            end
           end
           object pnlMaterial: TPanel
             Left = 0
