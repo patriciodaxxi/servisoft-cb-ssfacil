@@ -3412,10 +3412,8 @@ end;
 procedure TfrmCadPedido.btnCopiar_ItemClick(Sender: TObject);
 var
   ffrmCadPedido_Itens_Copia: TfrmCadPedido_Itens_Copia;
-  //dataSetProvider: TDataSetProvider;
   cdsTemp: TClientDataSet;
   cdsTemp_Tipo: TClientDataSet;
-  cdsTemp_Processo: TClientDataSet;            
   i: Integer;
   vItemAux: Integer;
   vItemPed: Integer;
@@ -3456,11 +3454,9 @@ begin
 
   cdsTemp          := TClientDataSet.Create(nil);
   cdsTemp_Tipo     := TClientDataSet.Create(nil);
-  cdsTemp_Processo := TClientDataSet.Create(nil);
   try
     cdsTemp.CloneCursor(fDMCadPedido.cdsPedido_Itens,False,False);
     cdsTemp_Tipo.CloneCursor(fDMCadPedido.cdsPedido_Item_Tipo,False,False);
-    cdsTemp_Processo.CloneCursor(fDMCadPedido.cdsPedido_Item_Processo,False,False);
     cdsTemp.Filtered := False;
     if fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger > 0 then
       cdsTemp.Filter := 'ITEM_ORIGINAL = ''' + IntToStr(fDMCadPedido.cdsPedido_ItensITEM_ORIGINAL.AsInteger) + ''''
@@ -3490,24 +3486,6 @@ begin
       fDMCadPedido.cdsPedido_ItensNUMOS.AsString          := fDMCadPedido.vOSRemessa_Copia;
       fDMCadPedido.cdsPedido_ItensCARIMBO.AsString        := fDMCadPedido.vCarimbo_Copia;
       fDMCadPedido.cdsPedido_Itens.Post;
-
-      //14/10/2019
-      cdsTemp_Processo.First;
-      while not cdsTemp_Processo.Eof do
-      begin
-        fDMCadPedido.cdsPedido_Item_Processo.Insert;
-        for i := 0 to ( cdsTemp_Processo.FieldCount - 1) do
-          fDMCadPedido.cdsPedido_Item_Processo.FieldByName(cdsTemp_Processo.Fields[i].FieldName).AsVariant := cdsTemp_Processo.Fields[i].Value;
-        fDMCadPedido.cdsPedido_Item_ProcessoID.AsInteger   := fDMCadPedido.cdsPedido_ItensID.AsInteger;
-        fDMCadPedido.cdsPedido_Item_ProcessoITEM.AsInteger := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-        fDMCadPedido.cdsPedido_Item_ProcessoQTD.AsFloat    := fDMCadPedido.cdsPedido_ItensQTD.AsFloat;
-        fDMCadPedido.cdsPedido_Item_ProcessoDTBAIXA.Clear;
-        fDMCadPedido.cdsPedido_Item_ProcessoDTENTRADA.Clear;
-        fDMCadPedido.cdsPedido_Item_ProcessoHRENTRADA.Clear;
-        fDMCadPedido.cdsPedido_Item_ProcessoHRSAIDA.Clear;
-        fDMCadPedido.cdsPedido_Item_Processo.Post;
-        cdsTemp_Processo.Next;
-      end;
 
       //26/09/2016
       cdsTemp_Tipo.First;

@@ -19,8 +19,6 @@ procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
 procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido; ID_Cor, Item, Item_Original: Integer; Preco, Perc_IPI, Perc_ICMS: Real;
                                DtEntrega: TDateTime; Carimbo,Caixinha: String);
 
-procedure prc_Gravar_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID_Processo: Integer);
-
 function fnc_Existe_OC(fDMCadPedido: TDMCadPedido): Integer;
 function fnc_Verificar_Vendedor_Int(fDMCadPedido: TDMCadPedido ; ID : Integer) : Integer;
 
@@ -516,14 +514,6 @@ begin
        fDMCadPedido.prc_Gravar_Telefone(fDMCadPedido.cdsClienteCODIGO.AsInteger,fDMCadPedido.cdsPedidoDDD.AsInteger,fDMCadPedido.cdsPedidoFONE.AsString);
     end;
 
-    //14/10/2019
-    if fDMCadPedido.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S' then
-    begin
-      if fDMCadPedido.cdsPedido_Item_Processo.State in [dsEdit,dsInsert] then
-        fDMCadPedido.cdsPedido_Item_Processo.Post;
-    end;
-    //******************
-
     fDMCadPedido.cdsPedido.Post;
 
     //11/08/2016
@@ -640,9 +630,6 @@ begin
   fDMCadPedido.cdsPedido_Item_Tipo.First;
   while not fDMCadPedido.cdsPedido_Item_Tipo.Eof do
     fDMCadPedido.cdsPedido_Item_Tipo.Delete;
-  fDMCadPedido.cdsPedido_Item_Processo.First;
-  while not fDMCadPedido.cdsPedido_Item_Processo.Eof do
-    fDMCadPedido.cdsPedido_Item_Processo.Delete;
   fDMCadPedido.cdsPedido_Material.First;
   while not fDMCadPedido.cdsPedido_Material.Eof do
   begin
@@ -913,52 +900,6 @@ begin
     sds.ParamByName('CODIGO').AsInteger := ID;
     sds.Open;
     Result := sds.FieldByName('id_vendedor_int').AsInteger;
-  finally
-    FreeAndNil(sds);
-  end;
-end;
-
-procedure prc_Gravar_Pedido_Item_Processo(fDMCadPedido: TDMCadPedido ; ID_Processo: Integer);
-var
-  vItemAux : Integer;
-  sds: TSQLDataSet;
-begin
-  if ID_Processo <= 0 then
-    exit;
-
-  if fDMCadPedido.cdsPedido_Item_Processo.RecordCount > 0 then
-  begin
-    fDMCadPedido.cdsPedido_Item_Processo.First;
-    while not fDMCadPedido.cdsPedido_Item_Processo.Eof do
-      fDMCadPedido.cdsPedido_Item_Processo.Delete;
-  end;
-  
-  fDMCadPedido.cdsPedido_Item_Processo.Refresh;
-  vItemAux := 0;
-  sds := TSQLDataSet.Create(nil);
-  try
-    sds.SQLConnection := dmDatabase.scoDados;
-    sds.GetMetadata   := False;
-    sds.NoMetadata    := True;
-    sds.CommandText   := 'SELECT I.id, I.ITEM, I.id_processo, P.NOME '
-                       + 'FROM processo_grupo_itens I '
-                       + 'INNER JOIN PROCESSO P ON I.id_processo = P.ID '
-                       + 'WHERE I.ID = :ID ';
-    sds.ParamByName('ID').AsInteger := ID_Processo;
-    sds.Open;
-    while not sds.Eof do
-    begin
-      vItemAux := vItemAux + 1;
-      fDMCadPedido.cdsPedido_Item_Processo.Insert;
-      fDMCadPedido.cdsPedido_Item_ProcessoID.AsInteger            := fDMCadPedido.cdsPedido_ItensID.AsInteger;
-      fDMCadPedido.cdsPedido_Item_ProcessoITEM.AsInteger          := fDMCadPedido.cdsPedido_ItensITEM.AsInteger;
-      fDMCadPedido.cdsPedido_Item_ProcessoITEM_PROCESSO.AsInteger := vItemAux + 1;
-      fDMCadPedido.cdsPedido_Item_ProcessoID_PROCESSO.AsInteger   := sds.FieldByName('ID_PROCESSO').AsInteger;
-      fDMCadPedido.cdsPedido_Item_ProcessoQTD.AsFloat             := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD.AsFloat));
-      fDMCadPedido.cdsPedido_Item_ProcessoNOME_PROCESSO.AsString  := sds.FieldByName('NOME').AsString;
-      fDMCadPedido.cdsPedido_Item_Processo.Post;
-      sds.Next;
-    end;
   finally
     FreeAndNil(sds);
   end;

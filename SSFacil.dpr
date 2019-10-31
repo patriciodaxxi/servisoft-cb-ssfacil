@@ -826,7 +826,6 @@ uses
   UCadDocEstoque_Copia in 'UCadDocEstoque_Copia.pas' {frmCadDocEstoque_Copia},
   UDMProg_Terc in 'UDMProg_Terc.pas' {DMProg_Terc: TDataModule},
   UProg_Terc in 'UProg_Terc.pas' {frmProg_Terc},
-  UCadPedido_Item_Proc in 'UCadPedido_Item_Proc.pas' {frmCadPedido_Item_Proc},
   USel_ProdNaoLib in 'USel_ProdNaoLib.pas' {frmSel_ProdNaoLib};
 
 {$R *.res}
