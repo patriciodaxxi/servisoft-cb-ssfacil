@@ -2820,6 +2820,15 @@ begin
     vPerc_Cofins := 0;
   end;
 
+  if cdsFilialSIMPLES.AsString = 'S' then //Incluido  31/10/2019 quando é Simples
+  begin
+    if (cdsProdutoID_CFOP_NFCE.AsInteger > 0) and (cdsProdutoID_CSTICMS.AsInteger <= 0) and (qVariacaoID_CSTICMS.AsInteger > 0) then
+      vID_CSTICMS := qVariacaoID_CSTICMS.AsInteger
+    else
+    if (cdsTab_NCMID_CST_ICMS.AsInteger > 0) and (cdsProdutoID_CSTICMS.AsInteger <= 0) then
+      vID_CSTICMS     := cdsTab_NCMID_CST_ICMS.AsInteger;
+  end
+  else
   if cdsFilialSIMPLES.AsString <> 'S' then
   begin
     if (StrToFloat(FormatFloat('0.00',cdsTab_NCMPERC_ICMS.AsFloat)) > 0) then
