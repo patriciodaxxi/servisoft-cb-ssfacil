@@ -390,8 +390,27 @@ type
     cdsPedido_Item_ProcessoHRSAIDA: TTimeField;
     cdsConsPedido_Item_ProcDTCONFERENCIA: TDateField;
     cdsConsPedido_Item_ProcID_PEDIDO: TIntegerField;
-    qContadorProc: TSQLQuery;
-    qContadorProcCONTADOR: TIntegerField;
+    qFuncionario: TSQLQuery;
+    qFuncionarioCODIGO: TIntegerField;
+    qFuncionarioNOME: TStringField;
+    qFuncionarioNUM_CARTAO: TIntegerField;
+    qFuncionarioUSUARIO_LOG: TStringField;
+    qParametros_PedID_PROCESSO_FINAL: TIntegerField;
+    sdsFuncionario_Proc: TSQLDataSet;
+    dspFuncionario_Proc: TDataSetProvider;
+    cdsFuncionario_Proc: TClientDataSet;
+    dsFuncionario_Proc: TDataSource;
+    cdsFuncionario_ProcCODIGO: TIntegerField;
+    cdsFuncionario_ProcID_PROCESSO: TIntegerField;
+    cdsFuncionario_ProcNOME_PROCESSO: TStringField;
+    qPedido_Item: TSQLQuery;
+    qPedido_ItemID: TIntegerField;
+    qPedido_ItemITEM: TIntegerField;
+    qPedido_ItemQTD_RESTANTE: TFloatField;
+    qPedido_ItemQTD_FATURADO: TFloatField;
+    qPedido_ItemDTCONFERENCIA: TDateField;
+    qPedido_ItemQTD_CANCELADO: TFloatField;
+    qPedido_ItemQTD: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsConferencia_PedCalcFields(DataSet: TDataSet);
     procedure cdsPedido_ItemCalcFields(DataSet: TDataSet);
@@ -416,6 +435,8 @@ type
     procedure prc_Inserir_Ped;
 
     procedure prc_Imp_Etiqueta(ID, Item : Integer);
+
+    procedure prc_Abrir_qFuncionario(Num_Cartao : Integer ; Usuario : String);
 
   end;
 
@@ -603,6 +624,15 @@ procedure TDMConferencia.dspPedido_Item_ProcessoGetTableName(
   Sender: TObject; DataSet: TDataSet; var TableName: String);
 begin
   TableName := 'PEDIDO_ITEM_PROCESSO';
+end;
+
+procedure TDMConferencia.prc_Abrir_qFuncionario(Num_Cartao: Integer;
+  Usuario: String);
+begin
+  qFuncionario.Close;
+  qFuncionario.ParamByName('NUM_CARTAO').AsInteger := Num_Cartao;
+  qFuncionario.ParamByName('USUARIO_LOG').AsString := Usuario;
+  qFuncionario.Open;
 end;
 
 end.

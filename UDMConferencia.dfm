@@ -707,7 +707,7 @@ object DMConferencia: TDMConferencia
       'WHERE P.cod_barra = :COD_BARRA')
     SQLConnection = dmDatabase.scoDados
     Left = 848
-    Top = 16
+    Top = 15
     object qCBarraID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1430,7 +1430,7 @@ object DMConferencia: TDMConferencia
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'SELECT CONFERENCIA_SIMPLES'
+      'SELECT CONFERENCIA_SIMPLES, ID_PROCESSO_FINAL'
       'FROM PARAMETROS_PED')
     SQLConnection = dmDatabase.scoDados
     Left = 816
@@ -1439,6 +1439,9 @@ object DMConferencia: TDMConferencia
       FieldName = 'CONFERENCIA_SIMPLES'
       FixedChar = True
       Size = 1
+    end
+    object qParametros_PedID_PROCESSO_FINAL: TIntegerField
+      FieldName = 'ID_PROCESSO_FINAL'
     end
   end
   object sdsPedido_Item_Tipo: TSQLDataSet
@@ -1730,7 +1733,7 @@ object DMConferencia: TDMConferencia
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
     Left = 880
-    Top = 16
+    Top = 15
     object qCombinacaoID: TFMTBCDField
       FieldName = 'ID'
       Required = True
@@ -1905,7 +1908,7 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 384
+    Left = 385
     Top = 318
   end
   object dspConsPedido_Item_Proc: TDataSetProvider
@@ -1917,7 +1920,7 @@ object DMConferencia: TDMConferencia
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsPedido_Item_Proc'
-    Left = 465
+    Left = 466
     Top = 316
     object cdsConsPedido_Item_ProcCOD_BARRA: TStringField
       FieldName = 'COD_BARRA'
@@ -1986,7 +1989,7 @@ object DMConferencia: TDMConferencia
     GetMetadata = False
     CommandText = 
       'SELECT P.*'#13#10'FROM pedido_item_processo P'#13#10'where P.ID = :ID'#13#10'  AND' +
-      ' P.ITEM = :ITEM'#13#10'  AND P.ITEM_PROCESSO = :ITEM_PROCESSO'#13#10
+      ' P.ITEM = :ITEM'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -1998,15 +2001,10 @@ object DMConferencia: TDMConferencia
         DataType = ftInteger
         Name = 'ITEM'
         ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ITEM_PROCESSO'
-        ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 394
-    Top = 387
+    Top = 386
     object sdsPedido_Item_ProcessoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2053,8 +2051,8 @@ object DMConferencia: TDMConferencia
     IndexFieldNames = 'ID;ITEM;ITEM_PROCESSO'
     Params = <>
     ProviderName = 'dspPedido_Item_Processo'
-    Left = 469
-    Top = 383
+    Left = 468
+    Top = 384
     object cdsPedido_Item_ProcessoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2094,12 +2092,102 @@ object DMConferencia: TDMConferencia
     Left = 514
     Top = 387
   end
-  object qContadorProc: TSQLQuery
+  object qFuncionario: TSQLQuery
     MaxBlobSize = -1
     Params = <
       item
         DataType = ftInteger
-        Name = 'ID'
+        Name = 'NUM_CARTAO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'USUARIO_LOG'
+        ParamType = ptUnknown
+      end>
+    SQL.Strings = (
+      'SELECT F.CODIGO, F.nome, F.num_cartao, f.usuario_log'
+      'FROM FUNCIONARIO F'
+      'WHERE F.NUM_CARTAO = :NUM_CARTAO'
+      '  or (F.USUARIO_LOG = :USUARIO_LOG)'
+      ''
+      ''
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 633
+    Top = 462
+    object qFuncionarioCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object qFuncionarioNOME: TStringField
+      FieldName = 'NOME'
+      Size = 50
+    end
+    object qFuncionarioNUM_CARTAO: TIntegerField
+      FieldName = 'NUM_CARTAO'
+    end
+    object qFuncionarioUSUARIO_LOG: TStringField
+      FieldName = 'USUARIO_LOG'
+      Size = 15
+    end
+  end
+  object sdsFuncionario_Proc: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select f.codigo, f.id_processo, p.nome nome_processo'#13#10'from funci' +
+      'onario_proc f'#13#10'inner join processo p'#13#10'  on f.id_processo = p.id'#13 +
+      #10'WHERE F.CODIGO = :CODIGO'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'CODIGO'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 369
+    Top = 478
+  end
+  object dspFuncionario_Proc: TDataSetProvider
+    DataSet = sdsFuncionario_Proc
+    UpdateMode = upWhereKeyOnly
+    OnGetTableName = dspPedido_Item_ProcessoGetTableName
+    Left = 410
+    Top = 477
+  end
+  object cdsFuncionario_Proc: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'CODIGO;ID_PROCESSO'
+    Params = <>
+    ProviderName = 'dspFuncionario_Proc'
+    Left = 448
+    Top = 477
+    object cdsFuncionario_ProcCODIGO: TIntegerField
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object cdsFuncionario_ProcID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
+      Required = True
+    end
+    object cdsFuncionario_ProcNOME_PROCESSO: TStringField
+      FieldName = 'NOME_PROCESSO'
+      Size = 30
+    end
+  end
+  object dsFuncionario_Proc: TDataSource
+    DataSet = cdsFuncionario_Proc
+    Left = 489
+    Top = 477
+  end
+  object qPedido_Item: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'NUM_PEDIDO'
         ParamType = ptInput
       end
       item
@@ -2108,18 +2196,38 @@ object DMConferencia: TDMConferencia
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT COUNT(1) CONTADOR'
-      'FROM pedido_item_processo P'
-      'where P.ID = :ID'
-      '  AND P.ITEM = :ITEM'
-      '  AND P.dtentrada IS NULL'
-      '')
+      
+        'select I.ID, I.ITEM, I.QTD_RESTANTE, I.QTD_FATURADO, I.DTCONFERE' +
+        'NCIA, i.qtd_cancelado, i.qtd'
+      'from PEDIDO_ITEM I'
+      'inner join PEDIDO P on I.ID = P.ID'
+      'where P.NUM_PEDIDO = :NUM_PEDIDO'
+      '  and I.ITEM = :ITEM')
     SQLConnection = dmDatabase.scoDados
-    Left = 715
-    Top = 398
-    object qContadorProcCONTADOR: TIntegerField
-      FieldName = 'CONTADOR'
+    Left = 790
+    Top = 488
+    object qPedido_ItemID: TIntegerField
+      FieldName = 'ID'
       Required = True
+    end
+    object qPedido_ItemITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object qPedido_ItemQTD_RESTANTE: TFloatField
+      FieldName = 'QTD_RESTANTE'
+    end
+    object qPedido_ItemQTD_FATURADO: TFloatField
+      FieldName = 'QTD_FATURADO'
+    end
+    object qPedido_ItemDTCONFERENCIA: TDateField
+      FieldName = 'DTCONFERENCIA'
+    end
+    object qPedido_ItemQTD_CANCELADO: TFloatField
+      FieldName = 'QTD_CANCELADO'
+    end
+    object qPedido_ItemQTD: TFloatField
+      FieldName = 'QTD'
     end
   end
 end

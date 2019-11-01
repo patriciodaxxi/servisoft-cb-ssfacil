@@ -873,6 +873,26 @@ type
     cdsCliente_Sem_VendaVLR_TOTAL: TFloatField;
     qParametros_PedPEDIDO_LOJA: TStringField;
     cdsPedido_ItemENCOMENDA: TStringField;
+    sdsConsPedido_Item_Proc: TSQLDataSet;
+    dspConsPedido_Item_Proc: TDataSetProvider;
+    cdsConsPedido_Item_Proc: TClientDataSet;
+    dsConsPedido_Item_Proc: TDataSource;
+    cdsConsPedido_Item_ProcID: TIntegerField;
+    cdsConsPedido_Item_ProcDTEMISSAO: TDateField;
+    cdsConsPedido_Item_ProcNUM_PEDIDO: TIntegerField;
+    cdsConsPedido_Item_ProcID_CLIENTE: TIntegerField;
+    cdsConsPedido_Item_ProcITEM: TIntegerField;
+    cdsConsPedido_Item_ProcID_PRODUTO: TIntegerField;
+    cdsConsPedido_Item_ProcREFERENCIA: TStringField;
+    cdsConsPedido_Item_ProcNOMEPRODUTO: TStringField;
+    cdsConsPedido_Item_ProcQTD: TFloatField;
+    cdsConsPedido_Item_ProcQTD_FATURADO: TFloatField;
+    cdsConsPedido_Item_ProcQTD_RESTANTE: TFloatField;
+    cdsConsPedido_Item_ProcQTD_CANCELADO: TFloatField;
+    cdsConsPedido_Item_ProcNOME_PROCESSO: TStringField;
+    cdsConsPedido_Item_ProcPRODUCAO_CONCLUIDA: TStringField;
+    cdsConsPedido_Item_ProcNOME_CLIENTE: TStringField;
+    cdsConsPedido_Item_ProcNOME_CONSUMIDOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConsumoNewRecord(DataSet: TDataSet);
     procedure cdsPedido_MatCalcFields(DataSet: TDataSet);
@@ -908,6 +928,7 @@ type
     ctTipoMat : String;
     vDataIni, vDataFim : String;
     ctCliente_Sem_Venda : String;
+    ctConsPedido_Item_Proc : String;
 
     ctPedido_Nota, ctPedido_Vale, ctBaixa_Pedido, ctPedido_Fut: String;
     ctPedidoTipo : String;
@@ -947,6 +968,7 @@ begin
   ctLiberado        := sdsLiberado.CommandText;
   ctConsPedido_Proc := sdsConsPedido_Proc.CommandText;
   ctCliente_Sem_Venda := sdsCliente_Sem_Venda.CommandText;
+  ctConsPedido_Item_Proc := sdsConsPedido_Item_Proc.CommandText;
 
   cdsParametros_Etiq.Close;
   sdsParametros_Etiq.ParamByName('ID').AsInteger := 1;

@@ -1,10 +1,10 @@
 object frmConferencia_Ped: TfrmConferencia_Ped
-  Left = 195
-  Top = 150
+  Left = 171
+  Top = 85
   BorderIcons = [biSystemMenu, biMaximize]
   BorderStyle = bsSingle
   Caption = 'Confer'#234'ncia Simples do Pedido'
-  ClientHeight = 450
+  ClientHeight = 543
   ClientWidth = 1049
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
   TextHeight = 13
   object NxSplitter1: TNxSplitter
     Left = 0
-    Top = 126
+    Top = 167
     Width = 1049
     Height = 13
     Cursor = crVSplit
@@ -30,7 +30,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
   end
   object Panel3: TPanel
     Left = 0
-    Top = 411
+    Top = 504
     Width = 1049
     Height = 39
     Align = alBottom
@@ -227,9 +227,9 @@ object frmConferencia_Ped: TfrmConferencia_Ped
   end
   object gbxVendedor: TRzGroupBox
     Left = 0
-    Top = 139
+    Top = 180
     Width = 1049
-    Height = 272
+    Height = 324
     Align = alClient
     BorderColor = clNavy
     BorderInner = fsButtonUp
@@ -251,7 +251,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
       Left = 5
       Top = 54
       Width = 1039
-      Height = 146
+      Height = 198
       Align = alClient
       Color = clBtnFace
       Ctl3D = False
@@ -537,7 +537,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
     end
     object SMDBGrid6: TSMDBGrid
       Left = 5
-      Top = 200
+      Top = 252
       Width = 1039
       Height = 67
       Align = alBottom
@@ -688,7 +688,7 @@ object frmConferencia_Ped: TfrmConferencia_Ped
   end
   object gbxDuplicata: TRzGroupBox
     Left = 0
-    Top = 0
+    Top = 41
     Width = 1049
     Height = 126
     Align = alTop
@@ -848,6 +848,74 @@ object frmConferencia_Ped: TfrmConferencia_Ped
           Title.Color = 12582847
           Visible = True
         end>
+    end
+  end
+  object RzGroupBox1: TRzGroupBox
+    Left = 0
+    Top = 0
+    Width = 1049
+    Height = 41
+    Align = alTop
+    BorderColor = clBlack
+    BorderInner = fsButtonUp
+    BorderOuter = fsBump
+    BorderWidth = 1
+    Caption = ' Funcion'#225'rio '
+    Color = 16755370
+    Ctl3D = True
+    FlatColor = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentCtl3D = False
+    ParentFont = False
+    TabOrder = 3
+    VisualStyle = vsGradient
+    object Label4: TLabel
+      Left = 32
+      Top = 19
+      Width = 49
+      Height = 13
+      Caption = 'N'#186' Cart'#227'o:'
+    end
+    object CurrencyEdit2: TCurrencyEdit
+      Left = 82
+      Top = 14
+      Width = 80
+      Height = 20
+      AutoSize = False
+      Color = 16755370
+      Ctl3D = False
+      DecimalPlaces = 0
+      DisplayFormat = '0'
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 0
+      OnExit = CurrencyEdit2Exit
+      OnKeyDown = CurrencyEdit2KeyDown
+    end
+    object Edit2: TEdit
+      Left = 164
+      Top = 14
+      Width = 475
+      Height = 19
+      CharCase = ecUpperCase
+      Color = 16755370
+      Ctl3D = False
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object NxButton1: TNxButton
+      Left = 642
+      Top = 12
+      Width = 108
+      Caption = 'Trocar Funcion'#225'rio'
+      Down = True
+      TabOrder = 2
+      OnClick = NxButton1Click
     end
   end
 end

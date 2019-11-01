@@ -1,7 +1,7 @@
 object frmCadFuncionario_Res: TfrmCadFuncionario_Res
   Left = 243
   Top = 97
-  Width = 877
+  Width = 918
   Height = 594
   Caption = 'Cadastro de Funcion'#225'rios Resumido'
   Color = clBtnFace
@@ -21,7 +21,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 869
+    Width = 910
     Height = 544
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
@@ -49,7 +49,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object pnlPesquisa: TPanel
         Left = 0
         Top = 35
-        Width = 865
+        Width = 906
         Height = 38
         Align = alTop
         Color = clSilver
@@ -173,7 +173,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 73
-        Width = 865
+        Width = 906
         Height = 448
         Align = alClient
         Ctl3D = False
@@ -208,6 +208,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
+        ColCount = 7
         RowCount = 2
         Columns = <
           item
@@ -215,6 +216,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
             FieldName = 'CODIGO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'digo'
+            Width = 48
             Visible = True
           end
           item
@@ -229,7 +231,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
             FieldName = 'NUM_CARTAO'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Cart'#227'o'
-            Width = 95
+            Width = 80
             Visible = True
           end
           item
@@ -239,12 +241,28 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
             Title.Caption = 'Nome'
             Width = 398
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'USUARIO_LOG'
+            Title.Alignment = taCenter
+            Title.Caption = 'Usu'#225'rio'
+            Width = 137
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DTDEMISSAO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Dt. Rescis'#227'o'
+            Width = 87
+            Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 865
+        Width = 906
         Height = 35
         Align = alTop
         Color = clSilver
@@ -408,7 +426,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 865
+        Width = 906
         Height = 35
         Align = alTop
         Color = 8404992
@@ -634,8 +652,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
       object pnlDados: TPanel
         Left = 0
         Top = 35
-        Width = 865
-        Height = 114
+        Width = 906
+        Height = 139
         Align = alTop
         Enabled = False
         TabOrder = 1
@@ -664,20 +682,42 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           Caption = 'N'#186' Matr'#237'cula:'
         end
         object Label24: TLabel
-          Left = 428
-          Top = 41
+          Left = 54
+          Top = 64
           Width = 63
           Height = 13
           Alignment = taRightJustify
           Caption = 'N'#186' Crach'#225':'
         end
         object Label4: TLabel
-          Left = 451
-          Top = 62
+          Left = 77
+          Top = 85
           Width = 41
           Height = 13
           Alignment = taRightJustify
           Caption = 'Senha:'
+        end
+        object Label184: TLabel
+          Left = 72
+          Top = 107
+          Width = 48
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Usu'#225'rio:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label5: TLabel
+          Left = 647
+          Top = 102
+          Width = 78
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Dt. Rescis'#227'o:'
         end
         object DBEdit7: TDBEdit
           Left = 121
@@ -702,7 +742,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           DataField = 'CODIGO'
           DataSource = DMCadFuncionario.dsFuncionario
           ReadOnly = True
-          TabOrder = 1
+          TabOrder = 8
         end
         object DBCheckBox1: TDBCheckBox
           Left = 721
@@ -714,7 +754,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           DataField = 'INATIVO'
           DataSource = DMCadFuncionario.dsFuncionario
           ParentColor = False
-          TabOrder = 2
+          TabOrder = 9
           ValueChecked = 'S'
           ValueUnchecked = 'N'
         end
@@ -726,21 +766,21 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           CharCase = ecUpperCase
           DataField = 'NUM_MATRICULA'
           DataSource = DMCadFuncionario.dsFuncionario
-          TabOrder = 3
+          TabOrder = 1
         end
         object DBEdit22: TDBEdit
-          Left = 495
-          Top = 33
+          Left = 121
+          Top = 55
           Width = 124
           Height = 21
           CharCase = ecUpperCase
           DataField = 'NUM_CARTAO'
           DataSource = DMCadFuncionario.dsFuncionario
-          TabOrder = 4
+          TabOrder = 2
         end
         object DBCheckBox4: TDBCheckBox
-          Left = 120
-          Top = 58
+          Left = 392
+          Top = 73
           Width = 248
           Height = 17
           Caption = 'Baixar Etiquetas Pr'#233' Faturamento'
@@ -753,8 +793,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           ValueUnchecked = 'N'
         end
         object DBCheckBox2: TDBCheckBox
-          Left = 120
-          Top = 74
+          Left = 392
+          Top = 88
           Width = 145
           Height = 17
           Caption = 'Baixar Lote Completo'
@@ -767,8 +807,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           ValueUnchecked = 'N'
         end
         object DBCheckBox3: TDBCheckBox
-          Left = 120
-          Top = 91
+          Left = 392
+          Top = 105
           Width = 145
           Height = 17
           Caption = 'Baixar Processos'
@@ -781,25 +821,48 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           ValueUnchecked = 'N'
         end
         object DBEdit1: TDBEdit
-          Left = 496
-          Top = 54
+          Left = 121
+          Top = 77
           Width = 124
           Height = 21
           CharCase = ecUpperCase
           DataField = 'SENHA'
           DataSource = DMCadFuncionario.dsFuncionario
           PasswordChar = '*'
-          TabOrder = 8
+          TabOrder = 3
+        end
+        object RxDBLookupCombo41: TRxDBLookupCombo
+          Left = 121
+          Top = 99
+          Width = 195
+          Height = 21
+          DropDownCount = 8
+          DataField = 'USUARIO_LOG'
+          DataSource = DMCadFuncionario.dsFuncionario
+          LookupField = 'UCLOGIN'
+          LookupDisplay = 'UCLOGIN'
+          LookupSource = DMCadFuncionario.dsUsuario
+          TabOrder = 4
+        end
+        object DBDateEdit1: TDBDateEdit
+          Left = 728
+          Top = 96
+          Width = 111
+          Height = 21
+          DataField = 'DTDEMISSAO'
+          DataSource = DMCadFuncionario.dsFuncionario
+          NumGlyphs = 2
+          TabOrder = 10
         end
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 149
-        Width = 865
-        Height = 372
-        ActivePage = TS_Setor
+        Top = 174
+        Width = 906
+        Height = 347
+        ActivePage = TS_Processo
         Align = alClient
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 2
         FixedDimension = 19
         object TS_Processo: TRzTabSheet
@@ -807,16 +870,16 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           object pnlProcesso: TPanel
             Left = 0
             Top = 0
-            Width = 861
-            Height = 349
+            Width = 902
+            Height = 324
             Align = alClient
             Caption = 'pnlProcesso'
             TabOrder = 0
             DesignSize = (
-              861
-              349)
+              902
+              324)
             object Label37: TLabel
-              Left = 54
+              Left = 46
               Top = 34
               Width = 72
               Height = 13
@@ -825,8 +888,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
             object SMDBGrid3: TSMDBGrid
               Left = 1
               Top = 121
-              Width = 859
-              Height = 227
+              Width = 900
+              Height = 202
               Align = alBottom
               Anchors = [akLeft, akTop, akRight, akBottom]
               DataSource = DMCadFuncionario.dsFuncionario_Proc
@@ -900,7 +963,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
             object pnlBotao_Processo: TPanel
               Left = 0
               Top = 51
-              Width = 857
+              Width = 898
               Height = 46
               Alignment = taLeftJustify
               Anchors = [akLeft, akTop, akRight]
@@ -1177,7 +1240,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 861
+            Width = 902
             Height = 41
             Align = alTop
             Color = clSilver
@@ -1450,8 +1513,8 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 41
-            Width = 861
-            Height = 308
+            Width = 902
+            Height = 283
             Align = alClient
             Ctl3D = False
             DataSource = DMCadFuncionario.dsFuncionario_Setor
@@ -1524,7 +1587,7 @@ object frmCadFuncionario_Res: TfrmCadFuncionario_Res
   object StatusBar1: TStatusBar
     Left = 0
     Top = 544
-    Width = 869
+    Width = 910
     Height = 19
     Panels = <
       item

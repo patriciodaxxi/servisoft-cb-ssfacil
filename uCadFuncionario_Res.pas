@@ -63,6 +63,10 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     Label4: TLabel;
     DBEdit1: TDBEdit;
+    Label184: TLabel;
+    RxDBLookupCombo41: TRxDBLookupCombo;
+    Label5: TLabel;
+    DBDateEdit1: TDBDateEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -143,9 +147,11 @@ begin
   StatusBar1.Panels[0].Text := vUsuario;
   StatusBar1.Panels[1].Text := vFilial_Nome;
   StatusBar1.Panels[2].Text := 'Duplo Click para consultar';
-  TS_Processo.TabVisible    := (fDMCadFuncionario.qParametros_LoteLOTE_TEXTIL.AsString = 'S');
+  TS_Processo.TabVisible    := ((fDMCadFuncionario.qParametros_LoteLOTE_TEXTIL.AsString = 'S')
+                             or (fDMCadFuncionario.qParametros_PedUSA_PROCESSO.AsString = 'S')
+                             or (fDMCadFuncionario.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S'));
   TS_Setor.TabVisible       := (fDMCadFuncionario.qParametros_LoteLOTE_TEXTIL.AsString <> 'S');
-  if fDMCadFuncionario.qParametros_LoteLOTE_TEXTIL.AsString = 'S' then
+  if TS_Processo.TabVisible then
     RzPageControl2.ActivePage := TS_Processo
   else
     RzPageControl2.ActivePage := TS_Setor;

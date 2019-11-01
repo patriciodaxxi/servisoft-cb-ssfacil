@@ -361,6 +361,7 @@ type
     ConsultaProdutoCFOPNCMCSTICMS1: TMenuItem;
     LiberarPedidosparaofaturamento1: TMenuItem;
     PedidoSimples1: TMenuItem;
+    ConsultaPedidoItensProcessosProduo1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Pais1Click(Sender: TObject);
     procedure UF1Click(Sender: TObject);
@@ -616,6 +617,7 @@ type
     procedure ComissodoProdutoPorVendedorCadastro1Click(Sender: TObject);
     procedure ConsultaProdutoCFOPNCMCSTICMS1Click(Sender: TObject);
     procedure LiberarPedidosparaofaturamento1Click(Sender: TObject);
+    procedure ConsultaPedidoItensProcessosProduo1Click(Sender: TObject);
   private
     { Private declarations }
     vPedLoja: Boolean;
@@ -676,7 +678,8 @@ uses DmdDatabase, uCadFilial, UCadNFe_Inutilizacao, uFrmSobre, UCadPais, UCadUF,
   uConsPedidoProcMapa, UCadDocEntrada, UCadTipoMaquina, UConsComprasOrcamento, UConsReal_Projetado, UConsEstoque_Atual,
   UBaixaNFDevolvida, UConsEstoqueTerc, UAjuste_OperacaoNota, UConsNotas, uProdutoAtualizaPreco, uCadMovProdST, UCadPedWeb,
   UConsProdSTRet, UDMCadPlanoMat, UGerar_PlanoMat, UAjusteEstoqueOP_Res, uCadRaca, uCadTipo_Animal,
-  UConsEstoque2, UComissaoVend, UConsProdutoNCM, UProg_Terc;
+  UConsEstoque2, UComissaoVend, UConsProdutoNCM, UProg_Terc,
+  UConsPedido_Producao;
 
 {$R *.dfm}
 
@@ -2194,6 +2197,11 @@ end;
 procedure TfMenu.LiberarPedidosparaofaturamento1Click(Sender: TObject);
 begin
   OpenForm(TfrmProg_Terc,wsMaximized);
+end;
+
+procedure TfMenu.ConsultaPedidoItensProcessosProduo1Click(Sender: TObject);
+begin
+  OpenForm(TfrmConsPedido_Producao,wsMaximized);
 end;
 
 initialization

@@ -1,10 +1,10 @@
 object DMConsPedido: TDMConsPedido
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 198
-  Top = 11
+  Left = 182
+  Top = 2
   Height = 707
-  Width = 1035
+  Width = 1124
   object sdsPedido_Item: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -3777,8 +3777,8 @@ object DMConsPedido: TDMConsPedido
     Params = <>
     StoreDefs = True
     OnNewRecord = mUnidadeNewRecord
-    Left = 872
-    Top = 152
+    Left = 850
+    Top = 79
     Data = {
       630000009619E0BD010000001800000004000000000003000000630007556E69
       6461646501004900000001000557494454480200020006000351746408000400
@@ -3803,8 +3803,8 @@ object DMConsPedido: TDMConsPedido
   end
   object dsmUnidade: TDataSource
     DataSet = mUnidade
-    Left = 912
-    Top = 152
+    Left = 890
+    Top = 79
   end
   object frxmUnidade: TfrxDBDataset
     UserName = 'frxmUnidade'
@@ -4092,8 +4092,8 @@ object DMConsPedido: TDMConsPedido
   object ClientDataSet1: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 920
-    Top = 224
+    Left = 813
+    Top = 139
   end
   object mNotas_Ped: TClientDataSet
     Active = True
@@ -5343,5 +5343,106 @@ object DMConsPedido: TDMConsPedido
     BCDToCurrency = False
     Left = 920
     Top = 504
+  end
+  object sdsConsPedido_Item_Proc: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select P.ID, P.DTEMISSAO, P.NUM_PEDIDO, P.ID_CLIENTE, I.ITEM, I.' +
+      'ID_PRODUTO, I.REFERENCIA, I.NOMEPRODUTO, I.QTD,'#13#10'       I.QTD_FA' +
+      'TURADO, I.QTD_RESTANTE, I.QTD_CANCELADO, PROC.nome NOME_PROCESSO' +
+      ','#13#10'case'#13#10'  when pp.id_processo = (select id_processo_final from ' +
+      'parametros_ped where id = 1) then '#39'S'#39#13#10'  when coalesce(pp.id_pro' +
+      'cesso,0) > 0 then '#39'I'#39#13#10'  else '#39#39#13#10'  end Producao_Concluida, CLI.' +
+      'NOME NOME_CLIENTE, P.nome_consumidor'#13#10#13#10'from PEDIDO P'#13#10'inner joi' +
+      'n PEDIDO_ITEM I on P.ID = I.ID'#13#10'inner join PESSOA cli on p.id_cl' +
+      'iente = cli.codigo'#13#10#13#10'left join PEDIDO_ITEM_PROCESSO PP'#13#10'  on I.' +
+      'ID = PP.ID'#13#10' and I.ITEM = PP.ITEM and PP.ITEM_PROCESSO = (select' +
+      ' max(PP2.ITEM_PROCESSO)'#13#10'                                       ' +
+      '       from PEDIDO_ITEM_PROCESSO PP2'#13#10'                          ' +
+      '                    where PP2.ID = I.ID and'#13#10'                   ' +
+      '                             PP2.ITEM = I.ITEM)'#13#10'LEFT JOIN PROCE' +
+      'SSO PROC'#13#10'ON PP.id_processo = PROC.id'#13#10'WHERE P.TIPO_REG = '#39'P'#39#13#10' ' +
+      ' AND P.cancelado = '#39'N'#39#13#10'  AND I.cancelado = '#39'N'#39#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 893
+    Top = 175
+  end
+  object dspConsPedido_Item_Proc: TDataSetProvider
+    DataSet = sdsConsPedido_Item_Proc
+    UpdateMode = upWhereKeyOnly
+    Left = 933
+    Top = 175
+  end
+  object cdsConsPedido_Item_Proc: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspConsPedido_Item_Proc'
+    Left = 973
+    Top = 175
+    object cdsConsPedido_Item_ProcID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsConsPedido_Item_ProcDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsConsPedido_Item_ProcNUM_PEDIDO: TIntegerField
+      FieldName = 'NUM_PEDIDO'
+    end
+    object cdsConsPedido_Item_ProcID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object cdsConsPedido_Item_ProcITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsConsPedido_Item_ProcID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsConsPedido_Item_ProcREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsConsPedido_Item_ProcNOMEPRODUTO: TStringField
+      FieldName = 'NOMEPRODUTO'
+      Size = 100
+    end
+    object cdsConsPedido_Item_ProcQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsConsPedido_Item_ProcQTD_FATURADO: TFloatField
+      FieldName = 'QTD_FATURADO'
+    end
+    object cdsConsPedido_Item_ProcQTD_RESTANTE: TFloatField
+      FieldName = 'QTD_RESTANTE'
+    end
+    object cdsConsPedido_Item_ProcQTD_CANCELADO: TFloatField
+      FieldName = 'QTD_CANCELADO'
+    end
+    object cdsConsPedido_Item_ProcNOME_PROCESSO: TStringField
+      FieldName = 'NOME_PROCESSO'
+      Size = 30
+    end
+    object cdsConsPedido_Item_ProcPRODUCAO_CONCLUIDA: TStringField
+      FieldName = 'PRODUCAO_CONCLUIDA'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object cdsConsPedido_Item_ProcNOME_CLIENTE: TStringField
+      FieldName = 'NOME_CLIENTE'
+      Size = 60
+    end
+    object cdsConsPedido_Item_ProcNOME_CONSUMIDOR: TStringField
+      FieldName = 'NOME_CONSUMIDOR'
+      Size = 30
+    end
+  end
+  object dsConsPedido_Item_Proc: TDataSource
+    DataSet = cdsConsPedido_Item_Proc
+    Left = 1013
+    Top = 176
   end
 end

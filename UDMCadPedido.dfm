@@ -1049,12 +1049,14 @@ object DMCadPedido: TDMCadPedido
       'ALAO2'#13#10'        from LOTE_PED_CALC LPC'#13#10'        where LPC.ID_PEDI' +
       'DO = PED.ID) CONT_TALAO2,'#13#10'       (select coalesce(sum(PRECO_CUS' +
       'TO * QTD), 0)'#13#10'        from PEDIDO_ITEM'#13#10'        where ID = PED.' +
-      'ID) VALOR_CUSTO'#13#10#13#10'from PEDIDO PED'#13#10'left join PESSOA CLI on PED.' +
-      'ID_CLIENTE = CLI.CODIGO'#13#10'left join PESSOA TRA on PED.ID_TRANSPOR' +
-      'TADORA = TRA.CODIGO'#13#10'left join PEDIDO_APROV AP on PED.ID = AP.ID' +
-      #13#10'left join PESSOA VEND on PED.ID_VENDEDOR = VEND.CODIGO'#13#10'left j' +
-      'oin OPERACAO_NOTA OPN on PED.ID_OPERACAO_NOTA = OPN.ID  '#13#10'LEFT J' +
-      'OIN PESSOA VEND2 ON PED.ID_VENDEDOR_INT = VEND2.CODIGO'#13#10
+      'ID) VALOR_CUSTO,'#13#10'        (SELECT COUNT(1) CONTADOR_PROCESSO FRO' +
+      'M pedido_item_processo WHERE ID = PED.ID)'#13#10'        CONTADOR_PROC' +
+      'ESSO'#13#10#13#10#13#10'from PEDIDO PED'#13#10'left join PESSOA CLI on PED.ID_CLIENT' +
+      'E = CLI.CODIGO'#13#10'left join PESSOA TRA on PED.ID_TRANSPORTADORA = ' +
+      'TRA.CODIGO'#13#10'left join PEDIDO_APROV AP on PED.ID = AP.ID'#13#10'left jo' +
+      'in PESSOA VEND on PED.ID_VENDEDOR = VEND.CODIGO'#13#10'left join OPERA' +
+      'CAO_NOTA OPN on PED.ID_OPERACAO_NOTA = OPN.ID  '#13#10'LEFT JOIN PESSO' +
+      'A VEND2 ON PED.ID_VENDEDOR_INT = VEND2.CODIGO'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1071,7 +1073,7 @@ object DMCadPedido: TDMCadPedido
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspPedido_Consulta'
-    Left = 248
+    Left = 249
     Top = 18
     object cdsPedido_ConsultaID: TIntegerField
       FieldName = 'ID'
@@ -1282,6 +1284,9 @@ object DMCadPedido: TDMCadPedido
     object cdsPedido_ConsultaNOME_VENDEDOR_INT: TStringField
       FieldName = 'NOME_VENDEDOR_INT'
       Size = 60
+    end
+    object cdsPedido_ConsultaCONTADOR_PROCESSO: TIntegerField
+      FieldName = 'CONTADOR_PROCESSO'
     end
   end
   object dsPedido_Consulta: TDataSource
@@ -3945,11 +3950,6 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsPedido_ItensMEDIDA: TStringField
       FieldName = 'MEDIDA'
-      ProviderFlags = []
-    end
-    object cdsPedido_ItenssdsPedido_Item_Processo: TDataSetField
-      Tag = 1
-      FieldName = 'sdsPedido_Item_Processo'
       ProviderFlags = []
     end
   end
@@ -10586,7 +10586,7 @@ object DMCadPedido: TDMCadPedido
       '     AND TUF.TIPO_PRODUTO = :TIPO_PRODUTO')
     SQLConnection = dmDatabase.scoDados
     Left = 991
-    Top = 438
+    Top = 437
     object qNCM_UFID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -15143,9 +15143,6 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_PedPERC_DESCONTO_PADRAO: TFloatField
       FieldName = 'PERC_DESCONTO_PADRAO'
-    end
-    object qParametros_PedID_PROCESSO_GRUPO: TIntegerField
-      FieldName = 'ID_PROCESSO_GRUPO'
     end
   end
   object sdsMetas_Acum: TSQLDataSet

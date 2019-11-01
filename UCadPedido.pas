@@ -566,7 +566,7 @@ uses DmdDatabase, rsDBUtils, uUtilPadrao, uRelPedido, uRelPedido_SulTextil, uRel
   URelPedido_Tam, URelEtiqueta_Nav, URelPedido_Tam2, URelPedido_JW, URelEtiqueta, uUtilCliente, uCalculo_Pedido, UCadPedido_Copia,
   UConsPedido_Nota, UDMConsPedido, UInformar_DtExpedicao, UInformar_Processo_Ped, UConsPedido_Senha, USel_Produto, UCadPedido_Cupom,
   UDMPedidoImp, USel_OS_Proc, UCadPedido_ItensCli, UConsPedido_Real, UImpEtiq_Emb, UTalaoPedProc, uGrava_Pedido, UConsClienteOBS,
-  uImprimir, UConsMotivoNaoAprov;
+  uImprimir, UConsMotivoNaoAprov, UConsPedido_Producao;
 
 {$R *.dfm}
 
@@ -1091,9 +1091,10 @@ begin
   btnDadosCupom.Visible := (fDMCadPedido.qParametros_GeralEMPRESA_VAREJO.AsString = 'S');
   //***************
 
-  Shape12.Visible := ((fDMCadPedido.qParametros_LoteLOTE_TEXTIL.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_LOTE.AsString = 'S'));
-  Label75.Visible := ((fDMCadPedido.qParametros_LoteLOTE_TEXTIL.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_LOTE.AsString = 'S'));
-
+  Shape12.Visible := ((fDMCadPedido.qParametros_LoteLOTE_TEXTIL.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_LOTE.AsString = 'S')
+                   or (fDMCadPedido.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S'));
+  Label75.Visible := ((fDMCadPedido.qParametros_LoteLOTE_TEXTIL.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_LOTE.AsString = 'S')
+                   or (fDMCadPedido.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S'));
   Label77.Visible  := (fDMCadPedido.qParametros_PedUSA_EMAIL_NO_PED.AsString = 'S');
   DBEdit24.Visible := (fDMCadPedido.qParametros_PedUSA_EMAIL_NO_PED.AsString = 'S');
 
@@ -1875,6 +1876,12 @@ begin
   end
   else
   if (fDMCadPedido.cdsParametrosUSA_LOTE.AsString = 'S') and ((fDMCadPedido.cdsPedido_ConsultaCONT_TALAO.AsInteger > 0) or (fDMCadPedido.cdsPedido_ConsultaCONT_TALAO2.AsInteger > 0)) then
+  begin
+    Background  := $00FFAAAA;
+    AFont.Color := clBlack;
+  end
+  else
+  if (fDMCadPedido.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S') and (fDMCadPedido.cdsPedido_ConsultaCONTADOR_PROCESSO.AsInteger > 0) then
   begin
     Background  := $00FFAAAA;
     AFont.Color := clBlack;
@@ -3663,10 +3670,21 @@ begin
   else
   if (Key = Vk_F11) then
   begin
-    ffrmInformar_Processo_Ped := TfrmInformar_Processo_Ped.Create(self);
-    ffrmInformar_Processo_Ped.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedido_ConsultaID.AsInteger;
-    ffrmInformar_Processo_Ped.ShowModal;
-    FreeAndNil(ffrmInformar_Processo_Ped);
+    if fDMCadPedido.qParametros_PedUSA_PROCESSO_SIMPLES.AsString = 'S' then
+    begin
+      frmConsPedido_Producao := TfrmConsPedido_Producao.Create(self);
+      frmConsPedido_Producao.Position := poScreenCenter;
+      frmConsPedido_Producao.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedido_ConsultaNUM_PEDIDO.AsInteger;
+      frmConsPedido_Producao.ShowModal;
+      FreeAndNil(frmConsPedido_Producao);
+    end
+    else
+    begin
+      ffrmInformar_Processo_Ped := TfrmInformar_Processo_Ped.Create(self);
+      ffrmInformar_Processo_Ped.CurrencyEdit1.AsInteger := fDMCadPedido.cdsPedido_ConsultaID.AsInteger;
+      ffrmInformar_Processo_Ped.ShowModal;
+      FreeAndNil(ffrmInformar_Processo_Ped);
+    end;
   end
   else
   if (Key = Vk_F6) and not(fDMCadPedido.cdsPedido_Consulta.IsEmpty) then

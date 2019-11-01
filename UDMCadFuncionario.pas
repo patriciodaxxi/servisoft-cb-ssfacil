@@ -245,6 +245,11 @@ type
     cdsSetor_EsteiraNOME: TStringField;
     sdsFuncionarioSENHA: TStringField;
     cdsFuncionarioSENHA: TStringField;
+    cdsFuncionario_ConsultaDTDEMISSAO: TDateField;
+    cdsFuncionario_ConsultaUSUARIO_LOG: TStringField;
+    qParametros_Ped: TSQLQuery;
+    qParametros_PedUSA_PROCESSO: TStringField;
+    qParametros_PedUSA_PROCESSO_SIMPLES: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFuncionarioNewRecord(DataSet: TDataSet);
     procedure dspFuncionarioUpdateError(Sender: TObject;
@@ -365,6 +370,7 @@ begin
   qParametros.Close;
   qParametros.Open;
   qParametros_Lote.Open;
+  qParametros_Ped.Open;
   cdsUsuario.Open;
   //*** Logs Implantado na versão .599
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;

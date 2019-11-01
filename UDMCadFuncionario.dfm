@@ -832,12 +832,12 @@ object DMCadFuncionario: TDMCadFuncionario
     CommandText = 
       'SELECT F.codigo, F.num_matricula, F.nome, F.ddd, F.fone, F.filia' +
       'l, F.cpf,'#13#10'FIL.nome NOME_FILIAL, FIL.nome_interno, F.INATIVO, F.' +
-      'NUM_CARTAO'#13#10'FROM FUNCIONARIO F'#13#10'LEFT JOIN FILIAL FIL'#13#10'ON F.FILIA' +
-      'L = FIL.ID'#13#10#13#10
+      'NUM_CARTAO,'#13#10'F.DTDEMISSAO, F.USUARIO_LOG'#13#10'FROM FUNCIONARIO F'#13#10'LE' +
+      'FT JOIN FILIAL FIL'#13#10'ON F.FILIAL = FIL.ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 264
+    Left = 266
     Top = 96
   end
   object dspFuncionario_Consulta: TDataSetProvider
@@ -892,6 +892,13 @@ object DMCadFuncionario: TDMCadFuncionario
     end
     object cdsFuncionario_ConsultaNUM_CARTAO: TIntegerField
       FieldName = 'NUM_CARTAO'
+    end
+    object cdsFuncionario_ConsultaDTDEMISSAO: TDateField
+      FieldName = 'DTDEMISSAO'
+    end
+    object cdsFuncionario_ConsultaUSUARIO_LOG: TStringField
+      FieldName = 'USUARIO_LOG'
+      Size = 15
     end
   end
   object dsFuncionario_Consulta: TDataSource
@@ -1124,7 +1131,7 @@ object DMCadFuncionario: TDMCadFuncionario
       'select p.lote_textil, p.LOTE_CALCADO_NOVO'
       'from parametros_lote p')
     SQLConnection = dmDatabase.scoDados
-    Left = 696
+    Left = 697
     Top = 104
     object qParametros_LoteLOTE_TEXTIL: TStringField
       FieldName = 'LOTE_TEXTIL'
@@ -1170,5 +1177,25 @@ object DMCadFuncionario: TDMCadFuncionario
     DataSet = cdsSetor_Esteira
     Left = 368
     Top = 344
+  end
+  object qParametros_Ped: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_PROCESSO, USA_PROCESSO_SIMPLES'
+      'FROM PARAMETROS_PED')
+    SQLConnection = dmDatabase.scoDados
+    Left = 704
+    Top = 157
+    object qParametros_PedUSA_PROCESSO: TStringField
+      FieldName = 'USA_PROCESSO'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedUSA_PROCESSO_SIMPLES: TStringField
+      FieldName = 'USA_PROCESSO_SIMPLES'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

@@ -871,6 +871,10 @@ object fMenu: TfMenu
         Caption = 'Consulta Frete (CIF/FOB)'
         OnClick = ConsultaFrete1Click
       end
+      object ConsultaPedidoItensProcessosProduo1: TMenuItem
+        Caption = 'Consulta Pedido Itens Processos (Produ'#231#227'o)'
+        OnClick = ConsultaPedidoItensProcessosProduo1Click
+      end
       object N47: TMenuItem
         Caption = '-'
       end

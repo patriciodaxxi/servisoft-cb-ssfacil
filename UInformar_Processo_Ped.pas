@@ -5,31 +5,33 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, ToolEdit, NxCollection, CurrEdit, UDMAprovacao_Ped, SqlExpr,
-  RxLookup, Grids, DBGrids, SMDBGrid, ExtCtrls, DB;
+  RxLookup, Grids, DBGrids, SMDBGrid, ExtCtrls, DB, RzTabs;
 
 type
   TfrmInformar_Processo_Ped = class(TForm)
+    RzPageControl1: TRzPageControl;
+    TS_Conferido: TRzTabSheet;
     Label1: TLabel;
-    DateEdit1: TDateEdit;
     Label5: TLabel;
-    RxDBLookupCombo1: TRxDBLookupCombo;
-    Panel1: TPanel;
-    btnConfirmar: TNxButton;
-    btnCancelar: TNxButton;
-    Panel2: TPanel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    CurrencyEdit1: TCurrencyEdit;
-    SMDBGrid1: TSMDBGrid;
-    Label6: TLabel;
-    btnExcluir: TNxButton;
     Label7: TLabel;
     Label8: TLabel;
     Shape1: TShape;
     Label9: TLabel;
-    Edit1: TEdit;
     Label10: TLabel;
+    DateEdit1: TDateEdit;
+    RxDBLookupCombo1: TRxDBLookupCombo;
+    Panel1: TPanel;
+    btnConfirmar: TNxButton;
+    btnCancelar: TNxButton;
+    btnExcluir: TNxButton;
+    Panel2: TPanel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label6: TLabel;
+    CurrencyEdit1: TCurrencyEdit;
+    SMDBGrid1: TSMDBGrid;
+    Edit1: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
