@@ -160,11 +160,11 @@ object frmCadOrcamento_NaoAprovado: TfrmCadOrcamento_NaoAprovado
       Width = 387
       Height = 13
       DataField = 'NOME_CLIENTE'
-      DataSource = DMCadPedido.dsPedido
+      DataSource = DMCadPedido.dsOrcamento
     end
     object Label2: TLabel
       Left = 66
-      Top = 24
+      Top = 23
       Width = 139
       Height = 25
       Caption = 'Sem Cadastro'

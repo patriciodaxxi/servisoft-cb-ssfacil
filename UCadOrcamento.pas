@@ -1167,7 +1167,7 @@ begin
   fDMCadPedido.cdsOrcamento.Close;
   fDMCadPedido.sdsOrcamento.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ConsultaID.AsInteger;
   fDMCadPedido.cdsOrcamento.Open;
-  if not(fDMCadPedido.cdsOrcamento.IsEmpty) and (fDMCadPedido.cdsOrcamentoCANCELADO.AsString = 'N') and (fDMCadPedido.cdsOrcamentoAPROVADO_ORC.AsString <> 'A') then
+  if not(fDMCadPedido.cdsOrcamento.IsEmpty) and (fDMCadPedido.cdsOrcamentoCANCELADO.AsString = 'N') then
   begin
     fDMCadPedido.cdsOrcamento_Itens.Close;
     fDMCadPedido.sdsOrcamento_Itens.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ConsultaID.AsInteger;
