@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, UDMCadDocEstoque, StdCtrls,
-  Buttons, RxLookup, DBCtrls, DB, UCadProduto, UCadUnidade,  UDMEstoque, UCadCentroCusto, NxCollection, UDMInformar_Tam,
+  Buttons, RxLookup, DBCtrls, DB, UCadProduto, UDMEstoque, UCadCentroCusto, NxCollection, UDMInformar_Tam,
   UInformar_Tam, Mask;
 
 type
@@ -16,8 +16,6 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Label7: TLabel;
-    SpeedButton2: TSpeedButton;
-    SpeedButton6: TSpeedButton;
     RxDBLookupCombo3: TRxDBLookupCombo;
     DBEdit2: TDBEdit;
     DBEdit5: TDBEdit;
@@ -48,8 +46,6 @@ type
     procedure BitBtn4Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton6Click(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Panel1Exit(Sender: TObject);
@@ -63,7 +59,6 @@ type
   private
     { Private declarations }
     ffrmCadProduto: TfrmCadProduto;
-    ffrmCadUnidade: TfrmCadUnidade;
     ffrmCadCentroCusto: TfrmCadCentroCusto;
     ffrmInformar_Tam: TfrmInformar_Tam;
     fDMInformar_Tam: TDMInformar_Tam;
@@ -295,22 +290,6 @@ procedure TfrmCadRequisicao_Itens.SpeedButton4Click(Sender: TObject);
 begin
   fDMCadDocEstoque.cdsProduto.Close;
   fDMCadDocEstoque.cdsProduto.Open;
-end;
-
-procedure TfrmCadRequisicao_Itens.SpeedButton2Click(Sender: TObject);
-begin
-  ffrmCadUnidade := TfrmCadUnidade.Create(self);
-  ffrmCadUnidade.ShowModal;
-
-  FreeAndNil(ffrmCadUnidade);
-
-  SpeedButton6Click(Sender);
-end;
-
-procedure TfrmCadRequisicao_Itens.SpeedButton6Click(Sender: TObject);
-begin
-  fDMCadDocEstoque.cdsUnidade.Close;
-  fDMCadDocEstoque.cdsUnidade.Open;
 end;
 
 procedure TfrmCadRequisicao_Itens.FormKeyDown(Sender: TObject;
