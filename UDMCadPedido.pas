@@ -3727,9 +3727,7 @@ begin
     cdsFuncionario.Open;
     cdsObs_Aux.Open;
     cdsLocal_Estoque.Open;
-
-    if (cdsParametrosCONFECCAO.AsString = 'S') or (cdsParametrosEMPRESA_INJETADO.AsString = 'S') then
-      cdsAtelier.Open;
+    cdsAtelier.Open;
 
     //*** Logs Implantado na versão .353
     LogProviderList.OnAdditionalValues := DoLogAdditionalValues;

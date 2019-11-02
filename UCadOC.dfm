@@ -23,9 +23,9 @@ object frmCadOC: TfrmCadOC
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1022
-    Height = 682
-    ActivePage = TS_Consulta
+    Width = 1030
+    Height = 690
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadOC: TfrmCadOC
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -42,8 +42,8 @@ object frmCadOC: TfrmCadOC
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 140
-        Width = 1018
-        Height = 478
+        Width = 1026
+        Height = 486
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPedido.dsPedido_Consulta
@@ -179,7 +179,7 @@ object frmCadOC: TfrmCadOC
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1018
+        Width = 1026
         Height = 110
         Align = alTop
         Color = clSilver
@@ -479,8 +479,8 @@ object frmCadOC: TfrmCadOC
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 642
-        Width = 1018
+        Top = 650
+        Width = 1026
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -496,7 +496,7 @@ object frmCadOC: TfrmCadOC
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 1018
+        Width = 1026
         Height = 30
         Align = alTop
         Color = clSilver
@@ -882,8 +882,8 @@ object frmCadOC: TfrmCadOC
       end
       object Panel4: TPanel
         Left = 0
-        Top = 618
-        Width = 1018
+        Top = 626
+        Width = 1026
         Height = 24
         Align = alBottom
         Color = clSilver
@@ -995,7 +995,7 @@ object frmCadOC: TfrmCadOC
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1018
+        Width = 1026
         Height = 30
         Align = alTop
         Color = 8404992
@@ -1242,7 +1242,7 @@ object frmCadOC: TfrmCadOC
       object pnlCadastro: TPanel
         Left = 0
         Top = 30
-        Width = 1018
+        Width = 1026
         Height = 175
         Align = alTop
         Enabled = False
@@ -1250,13 +1250,13 @@ object frmCadOC: TfrmCadOC
         object pnlCliente: TPanel
           Left = 1
           Top = 32
-          Width = 1016
+          Width = 1024
           Height = 117
           Align = alClient
           TabOrder = 0
           OnExit = pnlClienteExit
           DesignSize = (
-            1016
+            1024
             117)
           object Label10: TLabel
             Left = 19
@@ -1796,7 +1796,7 @@ object frmCadOC: TfrmCadOC
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 1016
+          Width = 1024
           Height = 31
           Align = alTop
           Color = clSilver
@@ -1851,7 +1851,7 @@ object frmCadOC: TfrmCadOC
         object Panel2: TPanel
           Left = 1
           Top = 149
-          Width = 1016
+          Width = 1024
           Height = 25
           Align = alBottom
           TabOrder = 1
@@ -1882,8 +1882,8 @@ object frmCadOC: TfrmCadOC
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 205
-        Width = 1018
-        Height = 398
+        Width = 1026
+        Height = 406
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -1900,8 +1900,8 @@ object frmCadOC: TfrmCadOC
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 32
-            Width = 1014
-            Height = 242
+            Width = 1022
+            Height = 250
             Align = alClient
             DataSource = DMCadPedido.dsPedido_Itens
             Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -2055,7 +2055,7 @@ object frmCadOC: TfrmCadOC
           object pnlItem: TPanel
             Left = 0
             Top = 0
-            Width = 1014
+            Width = 1022
             Height = 32
             Align = alTop
             Color = clSilver
@@ -2322,8 +2322,8 @@ object frmCadOC: TfrmCadOC
           end
           object RzGroupBox2: TRzGroupBox
             Left = 0
-            Top = 274
-            Width = 1014
+            Top = 282
+            Width = 1022
             Height = 101
             Align = alBottom
             BorderColor = clActiveCaption
@@ -2346,7 +2346,7 @@ object frmCadOC: TfrmCadOC
             object SMDBGrid3: TSMDBGrid
               Left = 6
               Top = 17
-              Width = 1002
+              Width = 1010
               Height = 78
               TabStop = False
               Align = alClient
@@ -2421,8 +2421,8 @@ object frmCadOC: TfrmCadOC
           object pnlTransporte_Geral: TPanel
             Left = 0
             Top = 0
-            Width = 1014
-            Height = 375
+            Width = 1022
+            Height = 383
             Align = alClient
             TabOrder = 0
             object gbxTransportes: TRzGroupBox
@@ -2662,8 +2662,8 @@ object frmCadOC: TfrmCadOC
             end
             object RzGroupBox1: TRzGroupBox
               Left = 1
-              Top = 126
-              Width = 1012
+              Top = 134
+              Width = 1020
               Height = 248
               Align = alBottom
               BorderColor = clLime
@@ -2684,7 +2684,7 @@ object frmCadOC: TfrmCadOC
               object DBMemo1: TDBMemo
                 Left = 5
                 Top = 45
-                Width = 1002
+                Width = 1010
                 Height = 198
                 Align = alClient
                 DataField = 'OBS'
@@ -2702,7 +2702,7 @@ object frmCadOC: TfrmCadOC
               object Panel5: TPanel
                 Left = 5
                 Top = 18
-                Width = 1002
+                Width = 1010
                 Height = 27
                 Align = alTop
                 Color = clSilver
@@ -2895,8 +2895,8 @@ object frmCadOC: TfrmCadOC
           Caption = 'Valores'
           Enabled = False
           DesignSize = (
-            1014
-            375)
+            1022
+            383)
           object Label39: TLabel
             Left = 81
             Top = 108
@@ -2940,7 +2940,7 @@ object frmCadOC: TfrmCadOC
           object pnlValores: TPanel
             Left = 0
             Top = 0
-            Width = 1014
+            Width = 1022
             Height = 32
             Align = alTop
             Color = clSilver
@@ -3083,8 +3083,8 @@ object frmCadOC: TfrmCadOC
       end
       object Panel10: TPanel
         Left = 0
-        Top = 603
-        Width = 1018
+        Top = 611
+        Width = 1026
         Height = 32
         Align = alBottom
         Color = clSilver
@@ -3168,8 +3168,8 @@ object frmCadOC: TfrmCadOC
       end
       object Panel12: TPanel
         Left = 0
-        Top = 635
-        Width = 1018
+        Top = 643
+        Width = 1026
         Height = 24
         Align = alBottom
         Color = clSilver

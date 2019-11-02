@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, NxEdit, StdCtrls, ToolEdit,
   Mask, RxLookup, NxCollection, UDMConsFinanceiro, StrUtils, Grids, DBGrids, SMDBGrid, DB, RzTabs, ComCtrls, RzListVw, RzTreeVw,
-  RzLstBox, DBCtrls;
+  RzLstBox, DBCtrls, ComObj;
 
 type EnumDataRelatorio = (tpDataEmissao,tpDataVencimento,tpDataPagamento);
 
@@ -46,6 +46,7 @@ type
     SMDBGrid3: TSMDBGrid;
     Label11: TLabel;
     comboCentroCusto: TRxDBLookupCombo;
+    btnExcel: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -55,6 +56,7 @@ type
     procedure RzPageControl1Change(Sender: TObject);
     procedure SMDBGrid3DblClick(Sender: TObject);
     procedure SMDBGrid2DblClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
     fDMConsFinanceiro: TDMConsFinanceiro;
@@ -74,6 +76,8 @@ type
     procedure prc_Consultar_Resumo_CCusto;
     procedure prc_Carrega_Combo;
     procedure prc_duplicata_CCusto(ID_CCusto, ID_Conta_Orcamento : Integer);
+    procedure prc_CriaExcel(vDados: TDataSource ; Grid :TSMDBGrid);
+
   public
     { Public declarations }
 
@@ -826,6 +830,47 @@ end;
 procedure TfrmConsCtaOrcamento_Fin.SMDBGrid2DblClick(Sender: TObject);
 begin
   prc_duplicata_CCusto(fDMConsFinanceiro.mContas_Orc_CCustoID_CCusto.AsInteger,fDMConsFinanceiro.mContas_Orc_CCustoID.AsInteger);
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.btnExcelClick(Sender: TObject);
+begin
+  if RzPageControl1.ActivePage = TS_Resumido then
+    prc_CriaExcel(SMDBGrid1.DataSource,SMDBGrid1)
+  else
+  if RzPageControl1.ActivePage = ts_CentroCusto then
+    prc_CriaExcel(SMDBGrid2.DataSource,SMDBGrid2)
+  else
+    prc_CriaExcel(SMDBGrid3.DataSource,SMDBGrid3);
+end;
+
+procedure TfrmConsCtaOrcamento_Fin.prc_CriaExcel(vDados: TDataSource ; Grid :TSMDBGrid);
+var
+  planilha: variant;
+  vTexto: string;
+begin
+  Screen.Cursor := crHourGlass;
+  vDados.DataSet.First;
+  grid.DisableScroll;
+  try
+    planilha := CreateOleObject('Excel.Application');
+    planilha.WorkBooks.add(1);
+    planilha.caption := 'Exportando dados do tela para o Excel';
+    planilha.visible := true;
+    prc_Preencher_Excel2(planilha, vDados, Grid);
+
+    planilha.columns.Autofit;
+    vTexto := ExtractFilePath(Application.ExeName);
+
+    vTexto := vTexto + Name + '_CentroCusto_' + Monta_Numero(DateToStr(Date), 0) + '_' + Monta_Numero(TimeToStr(Now), 0);
+
+    planilha.ActiveWorkBook.SaveAs(vTexto);
+
+  finally
+    begin
+      Screen.Cursor := crDefault;
+      grid.EnableScroll;
+    end;
+  end;
 end;
 
 end.

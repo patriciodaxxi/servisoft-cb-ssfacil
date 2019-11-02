@@ -2331,6 +2331,7 @@ type
     qDeParaID_CFOP_PED: TIntegerField;
     qDeParaCOD_CFOP_PED: TStringField;
     qDeParaCOM_ST: TStringField;
+    qParametros_RecXMLUSA_CONTROLE_PRODUTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

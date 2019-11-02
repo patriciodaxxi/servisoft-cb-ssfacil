@@ -348,6 +348,23 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
       TabOrder = 7
       Visible = False
     end
+    object btnExcel: TNxButton
+      Left = 626
+      Top = 105
+      Width = 182
+      Height = 30
+      Caption = 'Excel'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Arial'
+      Font.Style = []
+      GlyphSpacing = 5
+      ParentFont = False
+      TabOrder = 10
+      Transparent = True
+      OnClick = btnExcelClick
+    end
   end
   object StaticText1: TStaticText
     Left = 0
@@ -369,10 +386,10 @@ object frmConsCtaOrcamento_Fin: TfrmConsCtaOrcamento_Fin
     Top = 137
     Width = 1161
     Height = 348
-    ActivePage = ts_CentroCusto
+    ActivePage = ts_Centro_Orcamento
     ActivePageDefault = TS_Resumido
     Align = alClient
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 2
     OnChange = RzPageControl1Change
     FixedDimension = 19

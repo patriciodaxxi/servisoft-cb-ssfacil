@@ -9153,6 +9153,11 @@ object DMRecebeXML: TDMRecebeXML
       FixedChar = True
       Size = 1
     end
+    object qParametros_RecXMLUSA_CONTROLE_PRODUTO: TStringField
+      FieldName = 'USA_CONTROLE_PRODUTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros_OC: TSQLQuery
     MaxBlobSize = -1

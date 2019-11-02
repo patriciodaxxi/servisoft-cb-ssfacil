@@ -3011,11 +3011,6 @@ begin
   if fnc_erro then
     exit;
 
-  if fDMRecebeXML.qParametros_ProdUSA_LOTE_PROD.AsString = 'S' then
-  begin
-
-  end;
-
   vIDAux := 0;
 
   ID.TransactionID  := 2;
@@ -3860,6 +3855,15 @@ begin
           vErro := vErro + #13 + 'Item ' + fDMRecebeXML.mItensNotaItem.AsString + ': Quantidade da nota maior que a da OC!';
         end;
       end;
+      //02/11/2019
+      if fDMRecebeXML.qParametros_RecXMLUSA_CONTROLE_PRODUTO.AsString = 'S' then
+      begin
+        if fDMRecebeXML.mItensNotaCodProdutoInterno.AsInteger <= 0 then
+          vErro := vErro + #13 + '*** Existe produto não associado com o sistema, não pode ser gravada a nota sem associar um produto!' + #13
+                 + 'Produto: ' + fDMRecebeXML.mItensNotaNomeProduto.AsString;
+      end;
+      //***************************
+
       if trim(vErro) <> '' then
         fDMRecebeXML.mItensNota.Last;
       fDMRecebeXML.mItensNota.Next;
