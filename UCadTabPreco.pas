@@ -319,7 +319,7 @@ begin
   if not(fDMCadTab_Preco.cdsTab_Preco_Itens.Active) and (fDMCadTab_Preco.cdsTab_Preco_Itens.IsEmpty) or (fDMCadTab_Preco.cdsTab_Preco_ItensITEM.AsInteger < 1) then
     exit;
 
-  if MessageDlg('Deseja excluir os Produtos Selecionados?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
+  if MessageDlg('Deseja excluir o Produto Selecionado? ' +#13 + #13 + fDMCadTab_Preco.cdsTab_Preco_ItensNOMEPRODUTO.AsString ,mtConfirmation,[mbYes,mbNo],0) <> mrYes then
     exit;
 
   fDMCadTab_Preco.prc_Excluir_Item;

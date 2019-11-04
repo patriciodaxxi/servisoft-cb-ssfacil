@@ -951,6 +951,8 @@ begin
     end;
     if SMDBGrid1.Columns[i].FieldName = 'NOME_VENDEDOR' then
       SMDBGrid1.Columns[i].Visible := (fDMCadPedido.cdsParametrosUSA_VENDEDOR.AsString = 'S');
+    if SMDBGrid1.Columns[i].FieldName = 'NOME_TRANSPORTADORA' then
+      SMDBGrid1.Columns[i].Visible := (trim(fDMCadPedido.qParametros_PedUSA_CONSULTA_SIMPLES.AsString) <> 'S');
     if SMDBGrid1.Columns[i].FieldName = 'NOME_VENDEDOR_INT' then
       SMDBGrid1.Columns[i].Visible := (fDMCadPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
     if SMDBGrid1.Columns[i].FieldName = 'NUM_DOC' then
@@ -1133,7 +1135,10 @@ end;
 procedure TfrmCadPedido.prc_Consultar(ID: Integer);
 begin
   fDMCadPedido.cdsPedido_Consulta.Close;
-  fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.ctConsulta + ' WHERE TIPO_REG = ' + QuotedStr('P');
+  if fDMCadPedido.qParametros_PedUSA_CONSULTA_SIMPLES.AsString = 'S' then
+    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.ctConsulta2 + ' WHERE TIPO_REG = ' + QuotedStr('P')
+  else
+    fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.ctConsulta + ' WHERE TIPO_REG = ' + QuotedStr('P');
   //17/01/2017
   if fDMCadPedido.qParametros_UsuarioMOSTRAR_PED_USUARIO.AsString = 'S' then
     fDMCadPedido.sdsPedido_Consulta.CommandText := fDMCadPedido.sdsPedido_Consulta.CommandText + ' AND PED.USUARIO = ' + QuotedStr(vUsuario);

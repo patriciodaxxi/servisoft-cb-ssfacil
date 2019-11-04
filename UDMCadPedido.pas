@@ -3504,6 +3504,8 @@ type
     qParametros_PedPERC_DESCONTO_PADRAO: TFloatField;
     cdsProdutoMEDIDA: TStringField;
     cdsPedido_ConsultaCONTADOR_PROCESSO: TIntegerField;
+    sdsPedido_Consulta2: TSQLDataSet;
+    qParametros_PedUSA_CONSULTA_SIMPLES: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3549,6 +3551,7 @@ type
     vMSGErro: String;
     vMsgErroParc: String;
     ctCommand, ctConsulta, ctProduto, ctDuplicata, ctHistSenha : String;
+    ctConsulta2 : String;
     ctServico: String;
     ctCliente, ctCFOP: String;
     ctqProximoPedido: String;
@@ -3674,6 +3677,7 @@ var
 begin
   ctCommand    := sdsPedido.CommandText;
   ctConsulta   := sdsPedido_Consulta.CommandText;
+  ctConsulta2  := sdsPedido_Consulta2.CommandText;
   ctProduto    := sdsProduto.CommandText;
   ctCliente    := sdsCliente.CommandText;
   ctCFOP       := sdsCFOP.CommandText;
