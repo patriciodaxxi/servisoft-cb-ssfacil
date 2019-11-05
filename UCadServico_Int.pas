@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadServico_Int,
-  DBGrids, ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, NxCollection;
+  DBGrids, ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, NxCollection, uCadArqModeloContrato;
 
 type
   TfrmCadServico_Int = class(TForm)
@@ -41,6 +41,13 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     Label7: TLabel;
     RxDBLookupCombo3: TRxDBLookupCombo;
+    Label25: TLabel;
+    FilenameEdit1: TFilenameEdit;
+    Panel3: TPanel;
+    SMDBGrid2: TSMDBGrid;
+    NxButton1: TNxButton;
+    NxButton2: TNxButton;
+    Label9: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -58,10 +65,12 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure btnPesquisarClick(Sender: TObject);
+    procedure NxButton1Click(Sender: TObject);
+    procedure NxButton2Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadServico_Int: TDMCadServico_Int;
-    vItemServico : Integer;
+    vItemServico: Integer;
 
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
@@ -137,7 +146,7 @@ end;
 
 procedure TfrmCadServico_Int.FormShow(Sender: TObject);
 var
-  i : Integer;
+  i: Integer;
 begin
   fDMCadServico_Int := TDMCadServico_Int.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMCadServico_Int);
@@ -245,8 +254,8 @@ end;
 
 procedure TfrmCadServico_Int.SMDBGrid1TitleClick(Column: TColumn);
 var
-  i : Integer;
-  ColunaOrdenada : String;
+  i: Integer;
+  ColunaOrdenada: String;
 begin
   ColunaOrdenada := Column.FieldName;
   fDMCadServico_Int.cdsServico_Int.IndexFieldNames := Column.FieldName;
@@ -263,6 +272,25 @@ begin
     edtNome.SetFocus
   else
     edtNome.Clear;
+end;
+
+procedure TfrmCadServico_Int.NxButton1Click(Sender: TObject);
+begin
+  frmCadArqModeloContrato := TfrmCadArqModeloContrato.Create(Self);
+  frmCadArqModeloContrato.fDMCadServico_Int := fDMCadServico_Int;
+
+  fDMCadServico_Int.cdsServico_Int_Mod_Contrato.Insert;
+  fDMCadServico_Int.cdsServico_Int_Mod_ContratoID.AsInteger := fdmCadServico_int.cdsServico_IntID.AsInteger;
+                                                       
+  frmCadArqModeloContrato.ShowModal;
+end;
+
+procedure TfrmCadServico_Int.NxButton2Click(Sender: TObject);
+begin
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+
+  fDMCadServico_Int.cdsServico_Int_Mod_Contrato.Delete;
 end;
 
 end.

@@ -3,7 +3,7 @@ unit UDMCadServico_Int;
 interface
 
 uses
-  SysUtils, Classes, FMTBcd, DB, DBClient, Provider, SqlExpr, LogTypes;
+  SysUtils, Classes, FMTBcd, SqlExpr, DB, DBClient, Provider, LogTypes;
 
 type
   TDMCadServico_Int = class(TDataModule)
@@ -70,6 +70,26 @@ type
     qFilial: TSQLQuery;
     qFilialID_SERVICO_SINT: TIntegerField;
     qFilialCODIGO: TStringField;
+    sdsServico_IntARQ_MODELO_CONTRATO: TStringField;
+    cdsServico_IntARQ_MODELO_CONTRATO: TStringField;
+    dsmServico_Int: TDataSource;
+    sdsServico_Int_Mod_Contrato: TSQLDataSet;
+    cdsServico_Int_Mod_Contrato: TClientDataSet;
+    dsServico_Int_Mod_Contrato: TDataSource;
+    cdsServico_IntsdsServico_Int_Mod_Contrato: TDataSetField;
+    sdsServico_Int_Mod_ContratoID: TIntegerField;
+    sdsServico_Int_Mod_ContratoFILIAL: TIntegerField;
+    sdsServico_Int_Mod_ContratoARQ_MODELO_CONTRATO: TStringField;
+    cdsServico_Int_Mod_ContratoID: TIntegerField;
+    cdsServico_Int_Mod_ContratoFILIAL: TIntegerField;
+    cdsServico_Int_Mod_ContratoARQ_MODELO_CONTRATO: TStringField;
+    sdsFilial: TSQLDataSet;
+    dspFilial: TDataSetProvider;
+    cdsFilial: TClientDataSet;
+    dsFilial: TDataSource;
+    cdsFilialID: TIntegerField;
+    cdsFilialNOME: TStringField;
+    cdsFilialNOME_INTERNO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspServico_IntUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -77,13 +97,13 @@ type
   private
     { Private declarations }
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
-    procedure prc_Abrir_Tab_IBPT(Tabela : String);
+    procedure prc_Abrir_Tab_IBPT(Tabela: String);
   public
     { Public declarations }
     vMsgErro: String;
     ctCommand: String;
-    ctTab_IBPT : String;
-    ctServico : String;
+    ctTab_IBPT: String;
+    ctServico: String;
     procedure prc_Localizar(ID: Integer);
     procedure prc_Inserir;
     procedure prc_Gravar;
@@ -125,8 +145,8 @@ end;
 
 procedure TDMCadServico_Int.prc_Gravar;
 var
-  vCodAux : String;
-  i : Integer;
+  vCodAux: String;
+  i: Integer;
 begin
   vMsgErro := '';
   if trim(cdsServico_IntNOME.AsString) = '' then
@@ -216,7 +236,7 @@ end;
 
 procedure TDMCadServico_Int.prc_Abrir_Servico;
 var
-  vCodServicoAux : String;
+  vCodServicoAux: String;
 begin
   vCodServicoAux := '';
   qFilial.Close;

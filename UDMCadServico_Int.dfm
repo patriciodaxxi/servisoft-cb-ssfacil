@@ -16,6 +16,7 @@ object DMCadServico_Int: TDMCadServico_Int
     Top = 32
     object sdsServico_IntID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsServico_IntNOME: TStringField
@@ -38,9 +39,14 @@ object DMCadServico_Int: TDMCadServico_Int
     object sdsServico_IntID_SERVICO_PADRAO: TIntegerField
       FieldName = 'ID_SERVICO_PADRAO'
     end
+    object sdsServico_IntARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 10
+    end
   end
   object dspServico_Int: TDataSetProvider
     DataSet = sdsServico_Int
+    UpdateMode = upWhereKeyOnly
     OnUpdateError = dspServico_IntUpdateError
     Left = 160
     Top = 32
@@ -54,6 +60,7 @@ object DMCadServico_Int: TDMCadServico_Int
     Top = 32
     object cdsServico_IntID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsServico_IntNOME: TStringField
@@ -76,6 +83,14 @@ object DMCadServico_Int: TDMCadServico_Int
     end
     object cdsServico_IntID_SERVICO_PADRAO: TIntegerField
       FieldName = 'ID_SERVICO_PADRAO'
+    end
+    object cdsServico_IntARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 10
+    end
+    object cdsServico_IntsdsServico_Int_Mod_Contrato: TDataSetField
+      FieldName = 'sdsServico_Int_Mod_Contrato'
+      ProviderFlags = []
     end
   end
   object dsServico_Int: TDataSource
@@ -122,13 +137,13 @@ object DMCadServico_Int: TDMCadServico_Int
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 80
-    Top = 104
+    Top = 184
   end
   object dspVendedor: TDataSetProvider
     DataSet = sdsVendedor
     OnUpdateError = dspServico_IntUpdateError
     Left = 152
-    Top = 104
+    Top = 184
   end
   object cdsVendedor: TClientDataSet
     Aggregates = <>
@@ -136,7 +151,7 @@ object DMCadServico_Int: TDMCadServico_Int
     Params = <>
     ProviderName = 'dspVendedor'
     Left = 216
-    Top = 104
+    Top = 184
     object cdsVendedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
@@ -149,7 +164,7 @@ object DMCadServico_Int: TDMCadServico_Int
   object dsVendedor: TDataSource
     DataSet = cdsVendedor
     Left = 288
-    Top = 104
+    Top = 184
   end
   object sdsTab_IBPT: TSQLDataSet
     NoMetadata = True
@@ -158,8 +173,8 @@ object DMCadServico_Int: TDMCadServico_Int
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 168
-    Top = 200
+    Left = 144
+    Top = 280
     object sdsTab_IBPTID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -189,16 +204,16 @@ object DMCadServico_Int: TDMCadServico_Int
   end
   object dspTab_IBPT: TDataSetProvider
     DataSet = sdsTab_IBPT
-    Left = 200
-    Top = 200
+    Left = 176
+    Top = 280
   end
   object cdsTab_IBPT: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_IBPT'
-    Left = 240
-    Top = 200
+    Left = 216
+    Top = 280
     object cdsTab_IBPTID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -228,8 +243,8 @@ object DMCadServico_Int: TDMCadServico_Int
   end
   object dsTab_IBPT: TDataSource
     DataSet = cdsTab_IBPT
-    Left = 280
-    Top = 200
+    Left = 256
+    Top = 280
   end
   object sdsServico: TSQLDataSet
     NoMetadata = True
@@ -241,21 +256,21 @@ object DMCadServico_Int: TDMCadServico_Int
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 168
-    Top = 294
+    Left = 144
+    Top = 334
   end
   object dspServico: TDataSetProvider
     DataSet = sdsServico
-    Left = 200
-    Top = 294
+    Left = 176
+    Top = 334
   end
   object cdsServico: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspServico'
-    Left = 240
-    Top = 294
+    Left = 216
+    Top = 334
     object cdsServicoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -295,8 +310,8 @@ object DMCadServico_Int: TDMCadServico_Int
   end
   object dsServico: TDataSource
     DataSet = cdsServico
-    Left = 280
-    Top = 294
+    Left = 256
+    Top = 334
   end
   object qFilial: TSQLQuery
     MaxBlobSize = -1
@@ -317,5 +332,106 @@ object DMCadServico_Int: TDMCadServico_Int
       Required = True
       Size = 5
     end
+  end
+  object dsmServico_Int: TDataSource
+    DataSet = sdsServico_Int
+    Left = 352
+    Top = 32
+  end
+  object sdsServico_Int_Mod_Contrato: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT * '#13#10'FROM SERVICO_INT_MOD_CONTRATO'#13#10'WHERE ID = :ID'
+    DataSource = dsmServico_Int
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Size = 4
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 88
+    Top = 80
+    object sdsServico_Int_Mod_ContratoID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsServico_Int_Mod_ContratoFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object sdsServico_Int_Mod_ContratoARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 200
+    end
+  end
+  object cdsServico_Int_Mod_Contrato: TClientDataSet
+    Aggregates = <>
+    DataSetField = cdsServico_IntsdsServico_Int_Mod_Contrato
+    Params = <>
+    Left = 224
+    Top = 80
+    object cdsServico_Int_Mod_ContratoID: TIntegerField
+      FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsServico_Int_Mod_ContratoFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsServico_Int_Mod_ContratoARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 200
+    end
+  end
+  object dsServico_Int_Mod_Contrato: TDataSource
+    DataSet = cdsServico_Int_Mod_Contrato
+    Left = 296
+    Top = 80
+  end
+  object sdsFilial: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, NOME, NOME_INTERNO FROM FILIAL'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 144
+    Top = 382
+  end
+  object dspFilial: TDataSetProvider
+    DataSet = sdsFilial
+    Left = 176
+    Top = 382
+  end
+  object cdsFilial: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspFilial'
+    Left = 216
+    Top = 382
+    object cdsFilialID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsFilialNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsFilialNOME_INTERNO: TStringField
+      FieldName = 'NOME_INTERNO'
+      Size = 30
+    end
+  end
+  object dsFilial: TDataSource
+    DataSet = cdsFilial
+    Left = 256
+    Top = 382
   end
 end
