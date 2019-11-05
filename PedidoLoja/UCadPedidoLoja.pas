@@ -284,7 +284,6 @@ type
     procedure dbedtVlrDescKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ImprimirMatricial80Colunas1Click(Sender: TObject);
-    procedure TS_CadastroEnter(Sender: TObject);
     procedure dbedtVlrProdKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
@@ -3120,11 +3119,6 @@ begin
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
 
   uImprimir.prc_Rodape_Mat;
-end;
-
-procedure TfrmCadPedidoLoja.TS_CadastroEnter(Sender: TObject);
-begin
-  btnOutrasOpcoes.SetFocus;
 end;
 
 procedure TfrmCadPedidoLoja.dbedtVlrProdKeyDown(Sender: TObject;
