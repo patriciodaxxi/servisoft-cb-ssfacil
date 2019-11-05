@@ -1357,9 +1357,6 @@ object DMCopiaPedido: TDMCopiaPedido
       FixedChar = True
       Size = 1
     end
-    object cdsPedido_ItenssdsPedido_Item_Processo: TDataSetField
-      FieldName = 'sdsPedido_Item_Processo'
-    end
   end
   object dsPedido_Itens: TDataSource
     DataSet = cdsPedido_Itens

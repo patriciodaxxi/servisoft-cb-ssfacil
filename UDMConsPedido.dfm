@@ -2139,6 +2139,10 @@ object DMConsPedido: TDMConsPedido
         Name = 'Marca'
         DataType = ftString
         Size = 30
+      end
+      item
+        Name = 'ID_Combinacao'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -2150,10 +2154,11 @@ object DMConsPedido: TDMConsPedido
     IndexFieldNames = 'ID_Pedido;Item_Pedido'
     Params = <>
     StoreDefs = True
+    OnNewRecord = mEtiq_IndividualNewRecord
     Left = 704
     Top = 280
     Data = {
-      640300009619E0BD01000000180000001C00000000000300000064030A49445F
+      7A0300009619E0BD01000000180000001D0000000000030000007A030A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
       01000557494454480200020014000C4E6F6D655F50726F6475746F0100490000
       000100055749445448020002003C000754616D616E686F010049000000010005
@@ -2179,8 +2184,8 @@ object DMConsPedido: TDMConsPedido
       3358080004000000010007535542545950450200490006004D6F6E6579000950
       617263656C613258080004000000010007535542545950450200490006004D6F
       6E657900094474456D697373616F0400060000000000054D6172636101004900
-      00000100055749445448020002001E0001000D44454641554C545F4F52444552
-      0200820000000000}
+      00000100055749445448020002001E000D49445F436F6D62696E6163616F0400
+      01000000000001000D44454641554C545F4F524445520200820000000000}
     object mEtiq_IndividualID_Produto: TIntegerField
       FieldName = 'ID_Produto'
     end
@@ -2280,6 +2285,9 @@ object DMConsPedido: TDMConsPedido
     object mEtiq_IndividualMarca: TStringField
       FieldName = 'Marca'
       Size = 30
+    end
+    object mEtiq_IndividualID_Combinacao: TIntegerField
+      FieldName = 'ID_Combinacao'
     end
   end
   object sdsPedido_Item2: TSQLDataSet
@@ -2590,7 +2598,7 @@ object DMConsPedido: TDMConsPedido
       'Marca=Marca')
     DataSource = dsmEtiq_Individual
     BCDToCurrency = False
-    Left = 704
+    Left = 702
     Top = 408
   end
   object frxBarCodeObject1: TfrxBarCodeObject
@@ -2937,10 +2945,28 @@ object DMConsPedido: TDMConsPedido
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT *'#13#10'FROM CBARRA'#13#10'WHERE ID_PRODUTO = :P1'#13#10'AND ID_COR = :C1'#13 +
-      #10'AND TAMANHO = :T1'
+      'SELECT ID_PRODUTO, ID_COR, TAMANHO, COD_BARRA'#13#10'FROM CBARRA'#13#10'WHER' +
+      'E ID_PRODUTO = :P1'#13#10'AND ID_COR = :C1'#13#10'AND TAMANHO = :T1'#13#10#13#10'UNION' +
+      ' ALL'#13#10#13#10'SELECT ID_PRODUTO, ID_COR, TAMANHO, COD_BARRA'#13#10'FROM cbar' +
+      'ra_int'#13#10'WHERE ID_PRODUTO = :P1'#13#10'AND ID_COR = :C1'#13#10'AND TAMANHO = ' +
+      ':T1'#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftInteger
+        Name = 'P1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'C1'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'T1'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'P1'
@@ -2970,7 +2996,7 @@ object DMConsPedido: TDMConsPedido
     Aggregates = <>
     Params = <>
     ProviderName = 'dspCBarra'
-    Left = 536
+    Left = 534
     Top = 481
     object cdsCBarraID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
@@ -3388,6 +3414,11 @@ object DMConsPedido: TDMConsPedido
     end
     object qParametros_ProdATUALIZA_PESO_ENG: TStringField
       FieldName = 'ATUALIZA_PESO_ENG'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_SEL_COMB_ETIQUETA: TStringField
+      FieldName = 'USA_SEL_COMB_ETIQUETA'
       FixedChar = True
       Size = 1
     end
@@ -5444,5 +5475,76 @@ object DMConsPedido: TDMConsPedido
     DataSet = cdsConsPedido_Item_Proc
     Left = 1013
     Top = 176
+  end
+  object sdsCor_Tam: TSQLDataSet
+    CommandText = 
+      'SELECT PC.ID ID_PRODUTO, coalesce(PC.id_cor_combinacao,0) id_cor' +
+      '_combinacao,'#13#10'coalesce(TAM.TAMANHO,'#39#39') TAMANHO, COMB.NOME NOME_C' +
+      'OMBINACAO, CB.cod_barra,'#13#10'G.tamanho_usa,G.tamanho_eur, CAST(0 AS' +
+      ' INTEGER) QTD_IMP'#13#10'FROM PRODUTO_COMB PC'#13#10'INNER JOIN PRODUTO P'#13#10'O' +
+      'N PC.ID = P.ID'#13#10'INNER JOIN COMBINACAO COMB'#13#10'ON PC.id_cor_combina' +
+      'cao = COMB.ID'#13#10'LEFT JOIN PRODUTO_TAM TAM'#13#10'ON PC.ID = TAM.id'#13#10'LEF' +
+      'T JOIN grade_itens G'#13#10'ON G.ID = P.id_grade'#13#10'AND G.tamanho = TAM.' +
+      'tamanho'#13#10'LEFT JOIN cbarra_int CB'#13#10'  ON CB.id_produto = PC.ID'#13#10' A' +
+      'ND CB.id_cor = PC.id_cor_combinacao'#13#10' AND TAM.tamanho = CB.taman' +
+      'ho'#13#10'WHERE PC.ID = :ID'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 950
+    Top = 272
+  end
+  object dspCor_Tam: TDataSetProvider
+    DataSet = sdsCor_Tam
+    Left = 984
+    Top = 272
+  end
+  object cdsCor_Tam: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspCor_Tam'
+    Left = 1016
+    Top = 272
+    object cdsCor_TamID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+      Required = True
+    end
+    object cdsCor_TamID_COR_COMBINACAO: TIntegerField
+      FieldName = 'ID_COR_COMBINACAO'
+    end
+    object cdsCor_TamTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+    object cdsCor_TamNOME_COMBINACAO: TStringField
+      FieldName = 'NOME_COMBINACAO'
+      Size = 60
+    end
+    object cdsCor_TamCOD_BARRA: TStringField
+      FieldName = 'COD_BARRA'
+      Size = 13
+    end
+    object cdsCor_TamQTD_IMP: TIntegerField
+      FieldName = 'QTD_IMP'
+      Required = True
+    end
+    object cdsCor_TamTAMANHO_USA: TStringField
+      FieldName = 'TAMANHO_USA'
+      Size = 10
+    end
+    object cdsCor_TamTAMANHO_EUR: TStringField
+      FieldName = 'TAMANHO_EUR'
+      Size = 10
+    end
+  end
+  object dsCor_Tam: TDataSource
+    DataSet = cdsCor_Tam
+    Left = 1048
+    Top = 272
   end
 end

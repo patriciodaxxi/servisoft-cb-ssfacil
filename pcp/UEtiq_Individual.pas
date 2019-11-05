@@ -104,6 +104,8 @@ type
     CurrencyEdit5: TCurrencyEdit;
     DBCheckBox3: TDBCheckBox;
     DBCheckBox296: TDBCheckBox;
+    Panel5: TPanel;
+    btnSel_CombTam: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -130,7 +132,7 @@ type
     procedure RzPageControl1Change(Sender: TObject);
     procedure RxDBComboBox161Change(Sender: TObject);
     procedure CurrencyEdit5Exit(Sender: TObject);
-    procedure RxDBLookupCombo4Change(Sender: TObject);
+    procedure btnSel_CombTamClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadCBarra_Int: TDMCadCBarra_Int;
@@ -153,7 +155,8 @@ var
 
 implementation
 
-uses DB, rsDBUtils, USel_Produto, uUtilPadrao, UEtiqueta, UMenu,DmdDatabase;
+uses DB, rsDBUtils, USel_Produto, uUtilPadrao, UEtiqueta, UMenu,DmdDatabase,
+  USel_CombTam;
 
 {$R *.dfm}
 
@@ -247,8 +250,12 @@ begin
       SMDBGrid2.Columns[i].Visible := (fDMConsPedido.qParametrosUSA_GRADE.AsString <> 'S')
     else
     if vTexto = 'ID_Produto' then
-      SMDBGrid2.Columns[i].Visible := (fDMConsPedido.qParametrosUSA_GRADE.AsString <> 'S');
+      SMDBGrid2.Columns[i].Visible := (fDMConsPedido.qParametrosUSA_GRADE.AsString <> 'S')
+    else
+    if vTexto = 'NomeCombinacao' then
+      SMDBGrid2.Columns[i].Visible := (fDMConsPedido.qParametros_ProdUSA_SEL_COMB_ETIQUETA.AsString = 'S');
   end;
+  btnSel_CombTam.Enabled := (fDMConsPedido.qParametros_ProdUSA_SEL_COMB_ETIQUETA.AsString = 'S');
 end;
 
 procedure TfrmEtiq_Individual.prc_Le_Pedido; //E= Etiqueta   B=Cód. Barras
@@ -353,7 +360,10 @@ end;
 procedure TfrmEtiq_Individual.RxDBLookupCombo4Exit(Sender: TObject);
 begin
   if trim(RxDBLookupCombo4.Text) <> '' then
+  begin
     RxDBLookupCombo6.KeyValue := RxDBLookupCombo4.KeyValue;
+    CurrencyEdit5.AsInteger   := RxDBLookupCombo4.KeyValue;
+  end;
 end;
 
 procedure TfrmEtiq_Individual.btnExcluirClick(Sender: TObject);
@@ -432,7 +442,7 @@ end;
 
 procedure TfrmEtiq_Individual.RxDBLookupCombo5Enter(Sender: TObject);
 begin
-  RxDBLookupCombo5.ReadOnly := (RxDBLookupCombo4.Text = ''); 
+  RxDBLookupCombo5.ReadOnly := (RxDBLookupCombo4.Text = '');
 end;
 
 procedure TfrmEtiq_Individual.NxButton1Click(Sender: TObject);
@@ -932,9 +942,26 @@ begin
   end;
 end;
 
-procedure TfrmEtiq_Individual.RxDBLookupCombo4Change(Sender: TObject);
+procedure TfrmEtiq_Individual.btnSel_CombTamClick(Sender: TObject);
 begin
-  CurrencyEdit5.Clear;
+  if (trim(RxDBLookupCombo4.Text) = '') and (trim(RxDBLookupCombo6.Text) = '') then
+  begin
+    MessageDlg('*** Referência e nome não informados!', mtError, [mbOk], 0);
+    exit;
+  end;
+  if not fDMConsPedido.cdsProduto.Locate('ID',RxDBLookupCombo4.KeyValue,([Locaseinsensitive])) then
+  begin
+    MessageDlg('*** Produto não encontrado!', mtError, [mbOk], 0);
+    exit;
+  end;
+
+  frmSel_CombTam := TfrmSel_CombTam.Create(Self);
+  try
+    frmSel_CombTam.fDMConsPedido := fDMConsPedido;
+    frmSel_CombTam.ShowModal;
+  finally
+    FreeAndNil(frmSel_CombTam);
+  end;
 end;
 
 end.
