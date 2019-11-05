@@ -1839,6 +1839,7 @@ begin
     fDmCupomFiscal.cdsCupomFiscalTIPO.AsString  := 'NFC';
     fDmCupomFiscal.cdsCupomFiscal.Post;
     fDmCupomFiscal.cdsCupomFiscal.ApplyUpdates(0);
+    prc_Controle_Gravar_Diversos(False,True);
     btnEnvioClick(Sender);
   end;
 end;
@@ -2138,7 +2139,7 @@ begin
       end;
       if ckMsg.Checked then
         ShowMessage('Parte 115 - Antes Gravar_Estoque');
-      Gravar_Estoque(Financeiro);
+      Gravar_Estoque(Estoque);
       if ckMsg.Checked then
         ShowMessage('Parte 116 - Depois Gravar_Estoque');
       dmDatabase.scoDados.Commit(ID);
