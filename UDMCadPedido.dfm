@@ -14776,7 +14776,7 @@ object DMCadPedido: TDMCadPedido
       'FROM PARAMETROS_USUARIO'
       'WHERE USUARIO = :USUARIO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1136
+    Left = 1137
     Top = 536
     object qParametros_UsuarioID: TIntegerField
       FieldName = 'ID'
@@ -15153,11 +15153,6 @@ object DMCadPedido: TDMCadPedido
     end
     object qParametros_PedUSA_CONSULTA_SIMPLES: TStringField
       FieldName = 'USA_CONSULTA_SIMPLES'
-      FixedChar = True
-      Size = 1
-    end
-    object qParametros_PedGERAR_DUP_PED_AUT: TStringField
-      FieldName = 'GERAR_DUP_PED_AUT'
       FixedChar = True
       Size = 1
     end

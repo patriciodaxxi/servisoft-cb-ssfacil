@@ -3506,7 +3506,6 @@ type
     cdsPedido_ConsultaCONTADOR_PROCESSO: TIntegerField;
     sdsPedido_Consulta2: TSQLDataSet;
     qParametros_PedUSA_CONSULTA_SIMPLES: TStringField;
-    qParametros_PedGERAR_DUP_PED_AUT: TStringField;
     cdsClienteID_TIPOCOBRANCA: TIntegerField;
     cdsClienteID_CONTABOLETO: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
