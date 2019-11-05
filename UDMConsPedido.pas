@@ -893,6 +893,20 @@ type
     cdsConsPedido_Item_ProcPRODUCAO_CONCLUIDA: TStringField;
     cdsConsPedido_Item_ProcNOME_CLIENTE: TStringField;
     cdsConsPedido_Item_ProcNOME_CONSUMIDOR: TStringField;
+    mEtiq_IndividualID_Combinacao: TIntegerField;
+    sdsCor_Tam: TSQLDataSet;
+    dspCor_Tam: TDataSetProvider;
+    cdsCor_Tam: TClientDataSet;
+    dsCor_Tam: TDataSource;
+    cdsCor_TamID_PRODUTO: TIntegerField;
+    cdsCor_TamID_COR_COMBINACAO: TIntegerField;
+    cdsCor_TamTAMANHO: TStringField;
+    cdsCor_TamNOME_COMBINACAO: TStringField;
+    cdsCor_TamCOD_BARRA: TStringField;
+    cdsCor_TamQTD_IMP: TIntegerField;
+    cdsCor_TamTAMANHO_USA: TStringField;
+    cdsCor_TamTAMANHO_EUR: TStringField;
+    qParametros_ProdUSA_SEL_COMB_ETIQUETA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConsumoNewRecord(DataSet: TDataSet);
     procedure cdsPedido_MatCalcFields(DataSet: TDataSet);
@@ -902,6 +916,7 @@ type
     procedure frxDBDataset2First(Sender: TObject);
     procedure frxDBDataset2Next(Sender: TObject);
     procedure frxReport1BeforePrint(Sender: TfrxReportComponent);
+    procedure mEtiq_IndividualNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -929,6 +944,7 @@ type
     vDataIni, vDataFim : String;
     ctCliente_Sem_Venda : String;
     ctConsPedido_Item_Proc : String;
+    ctCBarra : String;
 
     ctPedido_Nota, ctPedido_Vale, ctBaixa_Pedido, ctPedido_Fut: String;
     ctPedidoTipo : String;
@@ -1109,6 +1125,15 @@ begin
   end;
   sdsBaixa_Pedido.ParamByName('ID').AsInteger   := ID;
   cdsBaixa_Pedido.Open;
+end;
+
+procedure TDMConsPedido.mEtiq_IndividualNewRecord(DataSet: TDataSet);
+begin
+  mEtiq_IndividualItem_Pedido.AsInteger := 0;
+  mEtiq_IndividualID_Pedido.AsInteger   := 0;
+  mEtiq_IndividualNum_Pedido.AsInteger  := 0;
+  mEtiq_IndividualParcela2X.AsCurrency  := 0;
+  mEtiq_IndividualParcela3X.AsCurrency  := 0;
 end;
 
 end.

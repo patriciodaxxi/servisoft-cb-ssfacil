@@ -285,6 +285,8 @@ type
       Shift: TShiftState);
     procedure ImprimirMatricial80Colunas1Click(Sender: TObject);
     procedure TS_CadastroEnter(Sender: TObject);
+    procedure dbedtVlrProdKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMCadPedido: TDMCadPedido;
@@ -1133,6 +1135,10 @@ begin
   else
   if fDMCadPedido.cdsClienteID_CONDPGTO.AsInteger > 0 then
     fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger  := fDMCadPedido.cdsClienteID_CONDPGTO.AsInteger;
+  if fDMCadPedido.cdsClienteID_TIPOCOBRANCA.AsInteger > 0 then
+    fDMCadPedido.cdsPedidoID_TIPO_COBRANCA.AsInteger  := fDMCadPedido.cdsClienteID_TIPOCOBRANCA.AsInteger;
+  if fDMCadPedido.cdsClienteID_CONTABOLETO.AsInteger > 0 then
+    fDMCadPedido.cdsPedidoID_CONTA.AsInteger  := fDMCadPedido.cdsClienteID_CONTABOLETO.AsInteger;
 end;
 
 procedure TfrmCadPedidoLoja.prc_Posicionar_Cliente;
@@ -2478,6 +2484,10 @@ begin
     btnCancelar_ItensClick(Sender);
     Edit2.SetFocus;
     btnCalcular_ValoresClick(Sender);
+
+    //05/11/2019
+    uCalculo_Pedido.fnc_Gerar_Pedido_Parc(fDMCadPedido);
+    //********************
   end;
 end;
 
@@ -3115,6 +3125,13 @@ end;
 procedure TfrmCadPedidoLoja.TS_CadastroEnter(Sender: TObject);
 begin
   btnOutrasOpcoes.SetFocus;
+end;
+
+procedure TfrmCadPedidoLoja.dbedtVlrProdKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = vk_Return then
+    btnConfirmar_Itens.SetFocus;
 end;
 
 end.

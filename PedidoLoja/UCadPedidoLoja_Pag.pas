@@ -60,7 +60,7 @@ var
 
 implementation
 
-uses rsDBUtils, uCalculo_Pedido, uUtilPadrao;
+uses rsDBUtils, uCalculo_Pedido, uUtilPadrao, uGrava_Pedido;
 
 {$R *.dfm}
 

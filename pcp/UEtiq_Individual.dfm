@@ -1,7 +1,7 @@
 object frmEtiq_Individual: TfrmEtiq_Individual
-  Left = 256
+  Left = 184
   Top = 116
-  Width = 920
+  Width = 992
   Height = 478
   BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'frmEtiq_Individual'
@@ -21,12 +21,12 @@ object frmEtiq_Individual: TfrmEtiq_Individual
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 904
-    Height = 439
-    ActivePage = TS_Pedido
+    Width = 984
+    Height = 447
+    ActivePage = TS_Avulsa
     ActivePageDefault = TS_Pedido
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -35,8 +35,8 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 107
-        Width = 900
-        Height = 309
+        Width = 980
+        Height = 317
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Item2
@@ -148,7 +148,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 900
+        Width = 980
         Height = 107
         Align = alTop
         Color = clSilver
@@ -587,14 +587,14 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 900
-        Height = 122
+        Width = 980
+        Height = 143
         Align = alTop
         Color = clSilver
         TabOrder = 0
         object Label9: TLabel
           Left = 27
-          Top = 77
+          Top = 103
           Width = 48
           Height = 13
           Alignment = taRightJustify
@@ -602,7 +602,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         end
         object Label10: TLabel
           Left = 17
-          Top = 99
+          Top = 125
           Width = 58
           Height = 13
           Alignment = taRightJustify
@@ -610,7 +610,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         end
         object NxButton2: TNxButton
           Left = 678
-          Top = 84
+          Top = 110
           Width = 140
           Height = 30
           Caption = 'Etiqueta'
@@ -683,7 +683,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         end
         object RxDBLookupCombo5: TRxDBLookupCombo
           Left = 76
-          Top = 69
+          Top = 95
           Width = 180
           Height = 21
           DropDownCount = 8
@@ -695,7 +695,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         end
         object CurrencyEdit4: TCurrencyEdit
           Left = 76
-          Top = 91
+          Top = 117
           Width = 180
           Height = 21
           AutoSize = False
@@ -705,7 +705,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         end
         object btnGerar: TNxButton
           Left = 258
-          Top = 84
+          Top = 110
           Width = 140
           Height = 30
           Caption = 'Confirmar'
@@ -777,7 +777,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         end
         object btnExcluir: TNxButton
           Left = 397
-          Top = 84
+          Top = 110
           Width = 140
           Height = 30
           Caption = 'Excluir'
@@ -851,7 +851,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         end
         object NxButton1: TNxButton
           Left = 537
-          Top = 84
+          Top = 110
           Width = 140
           Height = 30
           Hint = 'Exclui todas as etiquetas'
@@ -929,7 +929,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         object Panel3: TPanel
           Left = 1
           Top = 1
-          Width = 898
+          Width = 978
           Height = 69
           Align = alTop
           BevelOuter = bvNone
@@ -1000,7 +1000,6 @@ object frmEtiq_Individual: TfrmEtiq_Individual
             LookupDisplay = 'REFERENCIA'
             LookupSource = DMConsPedido.dsProduto
             TabOrder = 2
-            OnChange = RxDBLookupCombo4Change
             OnExit = RxDBLookupCombo4Exit
             OnKeyDown = RxDBLookupCombo4KeyDown
           end
@@ -1051,8 +1050,8 @@ object frmEtiq_Individual: TfrmEtiq_Individual
           end
         end
         object CheckBox1: TCheckBox
-          Left = 293
-          Top = 69
+          Left = 291
+          Top = 96
           Width = 97
           Height = 17
           Caption = 'Imprimir Pre'#231'o'
@@ -1061,12 +1060,33 @@ object frmEtiq_Individual: TfrmEtiq_Individual
           TabOrder = 7
           Visible = False
         end
+        object Panel5: TPanel
+          Left = 1
+          Top = 70
+          Width = 978
+          Height = 26
+          Align = alTop
+          BevelOuter = bvNone
+          Color = clSilver
+          Ctl3D = True
+          ParentCtl3D = False
+          TabOrder = 8
+          object btnSel_CombTam: TNxButton
+            Left = 74
+            Top = 0
+            Width = 322
+            Caption = 'Seleciona Combina'#231#227'o/Cor/Tamanho'
+            Enabled = False
+            TabOrder = 0
+            OnClick = btnSel_CombTamClick
+          end
+        end
       end
       object SMDBGrid2: TSMDBGrid
         Left = 0
-        Top = 122
-        Width = 900
-        Height = 294
+        Top = 143
+        Width = 980
+        Height = 281
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsmEtiq_Individual
@@ -1097,7 +1117,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         WidthOfIndicator = 15
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 8
+        ColCount = 10
         RowCount = 2
         Columns = <
           item
@@ -1106,6 +1126,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
             Title.Alignment = taCenter
             Title.Caption = 'ID Produto'
             Title.Color = 16777096
+            Width = 48
             Visible = True
           end
           item
@@ -1123,7 +1144,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
             Title.Alignment = taCenter
             Title.Caption = 'Nome Produto'
             Title.Color = 16777096
-            Width = 352
+            Width = 306
             Visible = True
           end
           item
@@ -1159,6 +1180,24 @@ object frmEtiq_Individual: TfrmEtiq_Individual
             Title.Caption = 'Pre'#231'o Produto'
             Title.Color = 16777096
             Width = 87
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NomeCombinacao'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nome Combina'#231#227'o/Cor'
+            Title.Color = 16777096
+            Width = 294
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CodBarra'
+            Title.Alignment = taCenter
+            Title.Caption = 'C. Barra'
+            Title.Color = 16777096
+            Width = 133
             Visible = True
           end>
       end
@@ -1572,7 +1611,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 721
+    Left = 722
     Top = 252
     object Modelo11: TMenuItem
       Caption = 'Modelo 1'

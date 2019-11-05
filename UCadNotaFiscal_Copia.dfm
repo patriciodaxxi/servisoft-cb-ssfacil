@@ -107,7 +107,7 @@ object frmCadNotaFiscal_Copia: TfrmCadNotaFiscal_Copia
     TabOrder = 4
   end
   object btnCopiar: TBitBtn
-    Left = 214
+    Left = 215
     Top = 270
     Width = 88
     Height = 28

@@ -460,7 +460,6 @@ type
     cdsPedido_Item_TipoESPESSURA: TFloatField;
     sdsPedido_ItensAPROVADO_ITEM: TStringField;
     cdsPedido_ItensAPROVADO_ITEM: TStringField;
-    cdsPedido_ItenssdsPedido_Item_Processo: TDataSetField;
     procedure dspPedidoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
       UpdateKind: TUpdateKind; var Response: TResolverResponse);

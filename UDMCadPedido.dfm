@@ -9341,7 +9341,8 @@ object DMCadPedido: TDMCadPedido
       ' USUARIO_LOG,'#13#10'       PES.INSC_SUFRAMA, PES.DDDCELULAR, PES.CELU' +
       'LAR, PES.ID_GRUPO, PES.IMP_COR_CLIENTE,'#13#10'       PES.MOSTRAR_AVIS' +
       'O,PES.OBS_AVISO, IPI_PAGO_FILIAL,  PES.IMP_ETIQUETA_ROT,  PES.ID' +
-      '_VENDEDOR_INT'#13#10'from PESSOA PES'#13#10
+      '_VENDEDOR_INT,'#13#10'PES.id_tipocobranca, PES.id_contaboleto'#13#10'from PE' +
+      'SSOA PES'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -9495,6 +9496,12 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsClienteID_VENDEDOR_INT: TIntegerField
       FieldName = 'ID_VENDEDOR_INT'
+    end
+    object cdsClienteID_TIPOCOBRANCA: TIntegerField
+      FieldName = 'ID_TIPOCOBRANCA'
+    end
+    object cdsClienteID_CONTABOLETO: TIntegerField
+      FieldName = 'ID_CONTABOLETO'
     end
   end
   object dsCliente: TDataSource
@@ -14769,7 +14776,7 @@ object DMCadPedido: TDMCadPedido
       'FROM PARAMETROS_USUARIO'
       'WHERE USUARIO = :USUARIO')
     SQLConnection = dmDatabase.scoDados
-    Left = 1136
+    Left = 1137
     Top = 536
     object qParametros_UsuarioID: TIntegerField
       FieldName = 'ID'
