@@ -330,6 +330,14 @@ object frmCadContrato_Servico_Int: TfrmCadContrato_Servico_Int
       Alignment = taRightJustify
       Caption = 'Tipo de Cobran'#231'a:'
     end
+    object Label15: TLabel
+      Left = 47
+      Top = 211
+      Width = 96
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Modelo do Contrato:'
+    end
     object DBEdit1: TDBEdit
       Left = 101
       Top = 3
@@ -718,6 +726,18 @@ object frmCadContrato_Servico_Int: TfrmCadContrato_Servico_Int
         '1'
         '2'
         '3')
+    end
+    object Edit4: TEdit
+      Left = 146
+      Top = 208
+      Width = 493
+      Height = 19
+      TabStop = False
+      Color = clSilver
+      Ctl3D = False
+      ParentCtl3D = False
+      ReadOnly = True
+      TabOrder = 15
     end
   end
 end

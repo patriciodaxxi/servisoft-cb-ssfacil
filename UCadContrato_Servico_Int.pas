@@ -52,6 +52,8 @@ type
     RzDBComboBox6: TRzDBComboBox;
     Label14: TLabel;
     Edit2: TEdit;
+    Edit4: TEdit;
+    Label15: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
