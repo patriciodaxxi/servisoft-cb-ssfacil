@@ -3949,66 +3949,6 @@ object fMenu: TfMenu
         GroupName = 'Movimento Produto ST'
       end
       item
-        FormName = 'frmCadProduto'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnExcluir_Tam'
-        Caption = 'Excluir a Grade'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnCopiarProduto'
-        Caption = 'Copiar Produto'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'Label4'
-        Caption = 'N'#227'o mostrar Pre'#231'o Custo:'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'Label12'
-        Caption = 'N'#227'o mostrar Pre'#231'o Venda:'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'Label24'
-        Caption = 'N'#227'o mostrar % Margem:'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'RzCheckList1'
-        Caption = 'Imprimir Pre'#231'o Custo/Venda'
-        GroupName = 'Produtos'
-      end
-      item
-        FormName = 'frmCadProduto'
-        CompName = 'btnRecalcular_Mat'
-        Caption = 'Recalcular'
-        GroupName = 'Produtos'
-      end
-      item
         FormName = 'frmGerar_PlanoMat'
         CompName = 'btnGerar_Plano'
         Caption = 'Gerar Plano Material'
@@ -4379,6 +4319,72 @@ object fMenu: TfMenu
         CompName = 'aloPorProcesso1'
         Caption = 'Tal'#227'o Por Processo'
         GroupName = 'Pedidos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnExcluir_Tam'
+        Caption = 'Excluir a Grade'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnCopiarProduto'
+        Caption = 'Copiar Produto'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'Label4'
+        Caption = 'N'#227'o mostrar Pre'#231'o Custo:'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'Label12'
+        Caption = 'N'#227'o mostrar Pre'#231'o Venda:'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'Label24'
+        Caption = 'N'#227'o mostrar % Margem:'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'RzCheckList1'
+        Caption = 'Imprimir Pre'#231'o Custo/Venda'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'btnRecalcular_Mat'
+        Caption = 'Recalcular'
+        GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmCadProduto'
+        CompName = 'Label104'
+        Caption = 'N'#227'o mostrar Pre'#231'o Revenda'
+        GroupName = 'Produtos'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

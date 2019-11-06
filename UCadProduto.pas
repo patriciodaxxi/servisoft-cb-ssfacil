@@ -1614,12 +1614,21 @@ begin
   DBEdit5.Visible  := not(Label12.Enabled);
   DBEdit11.Visible := not(Label24.Enabled);
   DBEdit57.Visible := not(Label4.Enabled);
+  Label104.Visible := not(Label104.Enabled) and
+                     ((fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S')
+                      or (fDMCadProduto.qCupomFiscal_ParametrosUSA_PRECO_REVENDA.AsString = 'S'));
+
   btnGradeRef.Visible  := (RxDBComboBox7.ItemIndex = 1);
 
   label4.Enabled   := not(label4.Enabled);
   label12.Enabled  := not(label12.Enabled);
   label24.Enabled  := not(label24.Enabled);
   Label114.Enabled := (Label4.Enabled);
+  Label104.Enabled := not(Label104.Enabled);
+  DBEdit53.Visible := ((fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S')
+                      or (fDMCadProduto.qCupomFiscal_ParametrosUSA_PRECO_REVENDA.AsString = 'S')) and (Label104.Enabled);
+
+
   lblEspessura.Visible := SQLLocate('PARAMETROS','ID','EMPRESA_SUCATA','1') = 'S';
   dedtEspessura.Visible := SQLLocate('PARAMETROS','ID','EMPRESA_SUCATA','1') = 'S';
 
@@ -1725,10 +1734,6 @@ begin
 
   Label103.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
   DBEdit52.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
-  Label104.Visible := ((fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S')
-                      or (fDMCadProduto.qCupomFiscal_ParametrosUSA_PRECO_REVENDA.AsString = 'S'));
-  DBEdit53.Visible := ((fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S')
-                      or (fDMCadProduto.qCupomFiscal_ParametrosUSA_PRECO_REVENDA.AsString = 'S'));
   Label105.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
   DBEdit54.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
 
