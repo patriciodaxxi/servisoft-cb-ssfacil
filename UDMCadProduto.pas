@@ -1962,6 +1962,8 @@ type
     qParametros_ProdUSA_BITOLA: TStringField;
     cdsProduto_ConsultaMEDIDA: TStringField;
     qParametros_PedUSA_PROCESSO_SIMPLES: TStringField;
+    qCupomFiscal_Parametros: TSQLQuery;
+    qCupomFiscal_ParametrosUSA_PRECO_REVENDA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2448,6 +2450,7 @@ begin
   qParametros_Lote.Close;
   qParametros_Lote.Open;
   qParametros_Ser.Open;
+  qCupomFiscal_Parametros.Open;
   cdsFilial.Open;
   cdsCSTICMS.Open;
   qFilial_STRet.Close;

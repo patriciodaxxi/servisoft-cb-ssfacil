@@ -10525,4 +10525,20 @@ object dmCadProduto: TdmCadProduto
     Left = 679
     Top = 249
   end
+  object qCupomFiscal_Parametros: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'select P.usa_preco_revenda'
+      'from cupomfiscal_parametros P'
+      '')
+    SQLConnection = dmDatabase.scoDados
+    Left = 892
+    Top = 522
+    object qCupomFiscal_ParametrosUSA_PRECO_REVENDA: TStringField
+      FieldName = 'USA_PRECO_REVENDA'
+      FixedChar = True
+      Size = 1
+    end
+  end
 end

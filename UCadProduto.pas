@@ -1725,8 +1725,10 @@ begin
 
   Label103.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
   DBEdit52.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
-  Label104.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
-  DBEdit53.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
+  Label104.Visible := ((fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S')
+                      or (fDMCadProduto.qCupomFiscal_ParametrosUSA_PRECO_REVENDA.AsString = 'S'));
+  DBEdit53.Visible := ((fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S')
+                      or (fDMCadProduto.qCupomFiscal_ParametrosUSA_PRECO_REVENDA.AsString = 'S'));
   Label105.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
   DBEdit54.Visible := (fDMCadProduto.qParametrosPRODUTO_PRECO_POR_FINALIDADE.AsString = 'S');
 

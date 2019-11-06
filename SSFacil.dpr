@@ -828,7 +828,7 @@ uses
   UProg_Terc in 'UProg_Terc.pas' {frmProg_Terc},
   USel_ProdNaoLib in 'USel_ProdNaoLib.pas' {frmSel_ProdNaoLib},
   UConsPedido_Producao in 'UConsPedido_Producao.pas' {frmConsPedido_Producao},
-  uCadArqModeloContrato in 'uCadArqModeloContrato.pas' {frmCadArqModeloContrato};
+  uCadArqModeloContrato in 'uCadArqModeloContrato.pas' {frmCadArqModeloContrato},
   USel_CombTam in 'USel_CombTam.pas' {frmSel_CombTam};
 
 {$R *.res}
