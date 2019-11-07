@@ -233,6 +233,7 @@ object DMCadOS: TDMCadOS
     Top = 24
   end
   object cdsOS: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -1229,6 +1230,10 @@ object DMCadOS: TDMCadOS
     object cdsServico_IntPERC_COMISSAO: TFloatField
       FieldName = 'PERC_COMISSAO'
     end
+    object cdsServico_IntARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 10
+    end
   end
   object dsServico_Int: TDataSource
     DataSet = cdsServico_Int
@@ -1332,6 +1337,11 @@ object DMCadOS: TDMCadOS
     object sdsOS_Servico_IntID_PONTO: TIntegerField
       FieldName = 'ID_PONTO'
     end
+    object sdsOS_Servico_IntIMPRIMIR_CONTRATO_MODELO: TStringField
+      FieldName = 'IMPRIMIR_CONTRATO_MODELO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsOS_Servico_Int: TClientDataSet
     Aggregates = <>
@@ -1426,6 +1436,11 @@ object DMCadOS: TDMCadOS
     object cdsOS_Servico_IntID_PONTO: TIntegerField
       FieldName = 'ID_PONTO'
     end
+    object cdsOS_Servico_IntIMPRIMIR_CONTRATO_MODELO: TStringField
+      FieldName = 'IMPRIMIR_CONTRATO_MODELO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dsOS_Servico_Int: TDataSource
     DataSet = cdsOS_Servico_Int
@@ -1462,12 +1477,12 @@ object DMCadOS: TDMCadOS
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 328
-    Top = 220
+    Top = 284
   end
   object dspNatureza: TDataSetProvider
     DataSet = sdsNatureza
     Left = 360
-    Top = 220
+    Top = 284
   end
   object cdsNatureza: TClientDataSet
     Aggregates = <>
@@ -1475,7 +1490,7 @@ object DMCadOS: TDMCadOS
     Params = <>
     ProviderName = 'dspNatureza'
     Left = 392
-    Top = 220
+    Top = 284
     object cdsNaturezaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1496,7 +1511,7 @@ object DMCadOS: TDMCadOS
   object dsNatureza: TDataSource
     DataSet = cdsNatureza
     Left = 424
-    Top = 220
+    Top = 284
   end
   object sdsAtividade_Cid: TSQLDataSet
     NoMetadata = True
@@ -1506,19 +1521,19 @@ object DMCadOS: TDMCadOS
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 328
-    Top = 272
+    Top = 336
   end
   object dspAtividade_Cid: TDataSetProvider
     DataSet = sdsAtividade_Cid
     Left = 360
-    Top = 272
+    Top = 336
   end
   object cdsAtividade_Cid: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspAtividade_Cid'
     Left = 392
-    Top = 272
+    Top = 336
     object cdsAtividade_CidID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1535,7 +1550,7 @@ object DMCadOS: TDMCadOS
   object dsAtividade_Cid: TDataSource
     DataSet = cdsAtividade_Cid
     Left = 424
-    Top = 272
+    Top = 336
   end
   object qParametros: TSQLQuery
     MaxBlobSize = -1
@@ -1612,12 +1627,12 @@ object DMCadOS: TDMCadOS
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 328
-    Top = 324
+    Top = 388
   end
   object dspCidade: TDataSetProvider
     DataSet = sdsCidade
     Left = 360
-    Top = 324
+    Top = 388
   end
   object cdsCidade: TClientDataSet
     Aggregates = <>
@@ -1625,7 +1640,7 @@ object DMCadOS: TDMCadOS
     Params = <>
     ProviderName = 'dspCidade'
     Left = 392
-    Top = 324
+    Top = 388
     object cdsCidadeID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1654,7 +1669,7 @@ object DMCadOS: TDMCadOS
   object dsCidade: TDataSource
     DataSet = cdsCidade
     Left = 424
-    Top = 324
+    Top = 388
   end
   object sdsFilial: TSQLDataSet
     NoMetadata = True
@@ -2345,6 +2360,7 @@ object DMCadOS: TDMCadOS
     end
   end
   object cdsOS_Parc: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsOSsdsOS_Parc
     IndexFieldNames = 'ID;ITEM'
@@ -2434,12 +2450,12 @@ object DMCadOS: TDMCadOS
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 488
-    Top = 220
+    Top = 284
   end
   object dspContas: TDataSetProvider
     DataSet = sdsContas
     Left = 520
-    Top = 220
+    Top = 284
   end
   object cdsContas: TClientDataSet
     Aggregates = <>
@@ -2447,7 +2463,7 @@ object DMCadOS: TDMCadOS
     Params = <>
     ProviderName = 'dspContas'
     Left = 552
-    Top = 220
+    Top = 284
     object cdsContasID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2460,7 +2476,7 @@ object DMCadOS: TDMCadOS
   object dsContas: TDataSource
     DataSet = cdsContas
     Left = 584
-    Top = 220
+    Top = 284
   end
   object sdsTipoCobranca: TSQLDataSet
     NoMetadata = True
@@ -2470,12 +2486,12 @@ object DMCadOS: TDMCadOS
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 488
-    Top = 272
+    Top = 336
   end
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
     Left = 520
-    Top = 272
+    Top = 336
   end
   object cdsTipoCobranca: TClientDataSet
     Aggregates = <>
@@ -2483,7 +2499,7 @@ object DMCadOS: TDMCadOS
     Params = <>
     ProviderName = 'dspTipoCobranca'
     Left = 552
-    Top = 272
+    Top = 336
     object cdsTipoCobrancaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2534,7 +2550,7 @@ object DMCadOS: TDMCadOS
   object dsTipoCobranca: TDataSource
     DataSet = cdsTipoCobranca
     Left = 584
-    Top = 272
+    Top = 336
   end
   object sdsContaOrcamento: TSQLDataSet
     NoMetadata = True
@@ -2550,12 +2566,12 @@ object DMCadOS: TDMCadOS
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 328
-    Top = 424
+    Top = 488
   end
   object dspContaOrcamento: TDataSetProvider
     DataSet = sdsContaOrcamento
     Left = 360
-    Top = 424
+    Top = 488
   end
   object cdsContaOrcamento: TClientDataSet
     Aggregates = <>
@@ -2563,7 +2579,7 @@ object DMCadOS: TDMCadOS
     Params = <>
     ProviderName = 'dspContaOrcamento'
     Left = 392
-    Top = 424
+    Top = 488
     object cdsContaOrcamentoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2588,7 +2604,7 @@ object DMCadOS: TDMCadOS
   object dsContaOrcamento: TDataSource
     DataSet = cdsContaOrcamento
     Left = 424
-    Top = 424
+    Top = 488
   end
   object sdsEventos: TSQLDataSet
     NoMetadata = True
@@ -3212,6 +3228,7 @@ object DMCadOS: TDMCadOS
     end
   end
   object cdsOS_Material: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsOSsdsOS_Material
     Params = <>
@@ -3496,12 +3513,12 @@ object DMCadOS: TDMCadOS
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 328
-    Top = 472
+    Top = 536
   end
   object dspMov_Servico: TDataSetProvider
     DataSet = sdsMov_Servico
     Left = 360
-    Top = 472
+    Top = 536
   end
   object cdsMov_Servico: TClientDataSet
     Aggregates = <>
@@ -3509,7 +3526,7 @@ object DMCadOS: TDMCadOS
     Params = <>
     ProviderName = 'dspMov_Servico'
     Left = 392
-    Top = 472
+    Top = 536
     object cdsMov_ServicoID: TIntegerField
       Alignment = taCenter
       FieldName = 'ID'
@@ -3603,7 +3620,7 @@ object DMCadOS: TDMCadOS
   object dsMov_Servico: TDataSource
     DataSet = cdsMov_Servico
     Left = 424
-    Top = 472
+    Top = 536
   end
   object sdsOS_Servico_Int_Cons: TSQLDataSet
     NoMetadata = True
@@ -3620,19 +3637,19 @@ object DMCadOS: TDMCadOS
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 488
-    Top = 324
+    Top = 388
   end
   object dspOS_Servico_Int_Cons: TDataSetProvider
     DataSet = sdsOS_Servico_Int_Cons
     Left = 520
-    Top = 324
+    Top = 388
   end
   object cdsOS_Servico_Int_Cons: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspOS_Servico_Int_Cons'
     Left = 552
-    Top = 324
+    Top = 388
     object cdsOS_Servico_Int_ConsID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3658,7 +3675,7 @@ object DMCadOS: TDMCadOS
   object dsOS_Servico_Int_Cons: TDataSource
     DataSet = cdsOS_Servico_Int_Cons
     Left = 584
-    Top = 324
+    Top = 388
   end
   object mContrato_Consumo: TClientDataSet
     Active = True
@@ -3702,7 +3719,7 @@ object DMCadOS: TDMCadOS
     StoreDefs = True
     OnCalcFields = mContrato_ConsumoCalcFields
     Left = 488
-    Top = 372
+    Top = 436
     Data = {
       B70000009619E0BD010000001800000008000000000003000000B70002494404
       00010000000000044954454D04000100000000000E49445F5345525649434F5F
@@ -3745,7 +3762,7 @@ object DMCadOS: TDMCadOS
   object dsmContrato_Consumo: TDataSource
     DataSet = mContrato_Consumo
     Left = 520
-    Top = 372
+    Top = 436
   end
   object sdsOS_Servico_Int_Mes: TSQLDataSet
     NoMetadata = True
@@ -3767,7 +3784,7 @@ object DMCadOS: TDMCadOS
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 488
-    Top = 420
+    Top = 484
     object sdsOS_Servico_Int_MesID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3800,14 +3817,14 @@ object DMCadOS: TDMCadOS
   object dspOS_Servico_Int_Mes: TDataSetProvider
     DataSet = sdsOS_Servico_Int_Mes
     Left = 520
-    Top = 420
+    Top = 484
   end
   object cdsOS_Servico_Int_Mes: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspOS_Servico_Int_Mes'
     Left = 552
-    Top = 420
+    Top = 484
     object cdsOS_Servico_Int_MesID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -3840,7 +3857,7 @@ object DMCadOS: TDMCadOS
   object dsOS_Servico_Int_Mes: TDataSource
     DataSet = cdsOS_Servico_Int_Mes
     Left = 584
-    Top = 420
+    Top = 484
   end
   object qMesControle: TSQLQuery
     MaxBlobSize = -1
@@ -3862,7 +3879,7 @@ object DMCadOS: TDMCadOS
       '  AND ITEM = :ITEM')
     SQLConnection = dmDatabase.scoDados
     Left = 488
-    Top = 472
+    Top = 536
     object qMesControleCONTROLE: TIntegerField
       FieldName = 'CONTROLE'
     end
@@ -3878,7 +3895,7 @@ object DMCadOS: TDMCadOS
       '')
     SQLConnection = dmDatabase.scoDados
     Left = 576
-    Top = 472
+    Top = 536
     object qParametros_SerID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4235,19 +4252,19 @@ object DMCadOS: TDMCadOS
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 328
-    Top = 528
+    Top = 592
   end
   object dspPontos: TDataSetProvider
     DataSet = sdsPontos
     Left = 360
-    Top = 528
+    Top = 592
   end
   object cdsPontos: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPontos'
     Left = 392
-    Top = 528
+    Top = 592
     object cdsPontosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -4276,7 +4293,7 @@ object DMCadOS: TDMCadOS
   object dsPontos: TDataSource
     DataSet = cdsPontos
     Left = 424
-    Top = 528
+    Top = 592
   end
   object cdsDuplicata: TClientDataSet
     Aggregates = <>
@@ -4925,5 +4942,56 @@ object DMCadOS: TDMCadOS
     object qTotalServicoVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
     end
+  end
+  object sdsServicoIntModContrato: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT * FROM SERVICO_INT_MOD_CONTRATO WHERE ID = :ID AND FILIAL' +
+      ' = :FILIAL'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 328
+    Top = 216
+  end
+  object dspServicoIntModContrato: TDataSetProvider
+    DataSet = sdsServicoIntModContrato
+    Left = 360
+    Top = 216
+  end
+  object cdsServicoIntModContrato: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspServicoIntModContrato'
+    Left = 392
+    Top = 216
+    object cdsServicoIntModContratoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsServicoIntModContratoFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+      Required = True
+    end
+    object cdsServicoIntModContratoARQ_MODELO_CONTRATO: TStringField
+      FieldName = 'ARQ_MODELO_CONTRATO'
+      Size = 200
+    end
+  end
+  object dsServicoIntModContrato: TDataSource
+    DataSet = cdsServicoIntModContrato
+    Left = 424
+    Top = 216
   end
 end

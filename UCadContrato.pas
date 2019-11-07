@@ -824,7 +824,7 @@ begin
   if not (fileExists(arquivo)) then
   begin
     if fDMCadOS.cdsOSARQ_MODELO_CONTRATO.AsString <> '' then
-      arquivo := fDMCadOS.cdsosARQ_MODELO_CONTRATO.AsString
+      arquivo := fDMCadOS.cdsOSARQ_MODELO_CONTRATO.AsString
     else
       arquivo := fDMCadOS.cdsFilialARQ_MODELO_CONTRATO.AsString;
     if not (fileExists(arquivo)) then

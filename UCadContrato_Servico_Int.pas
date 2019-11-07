@@ -54,6 +54,7 @@ type
     Edit2: TEdit;
     Edit4: TEdit;
     Label15: TLabel;
+    DBCheckBox1: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -153,6 +154,17 @@ begin
     fDMCadOS.cdsOS_Servico_IntNOME_SERVICO_INT.AsString := RxDBLookupCombo1.Text;
     fDMCadOS.cdsOS_Servico_IntVLR_SERVICO.AsFloat       := StrToFloat(FormatFloat('0.00##',fDMCadOS.cdsServico_IntVLR_UNITARIO.AsFloat));
     prc_Verifica_Comissao;
+
+    fDMCadOS.cdsServicoIntModContrato.Close;
+    fDMCadOS.sdsServicoIntModContrato.ParamByName('ID').AsInteger     := fDMCadOS.cdsOS_Servico_IntID_SERVICO_INT.AsInteger;
+    fDMCadOS.sdsServicoIntModContrato.ParamByName('FILIAL').AsInteger := fDMCadOS.cdsOSFILIAL.AsInteger;
+    fDMCadOS.cdsServicoIntModContrato.Open;
+
+    if not fDMCadOS.cdsServicoIntModContrato.IsEmpty then
+      Edit4.Text := fDMCadOS.cdsServicoIntModContratoARQ_MODELO_CONTRATO.asString
+    else
+    if not fDMCadOS.cdsServico_IntARQ_MODELO_CONTRATO.IsNull then
+      Edit4.Text := fDMCadOS.cdsServico_IntARQ_MODELO_CONTRATO.asString;
   end;
 end;
 
