@@ -89,7 +89,7 @@ begin
     FreeAndNil(Config);
   end;
 
-  AtualizaFDB;
+  //AtualizaFDB;
 end;
 
 procedure TdmDatabase_NFeBD.prc_UpdateError(Tabela: String;
