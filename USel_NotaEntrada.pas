@@ -5,10 +5,9 @@ unit USel_NotaEntrada;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, RxLookup, StdCtrls, UDMCadNotaFiscal, Buttons, Grids,
-  DBGrids, SMDBGrid, DB, UCadNotaFiscal_Itens, RzPanel, Mask, ToolEdit,
-  CurrEdit, UCadNotaEntrada_Itens, Menus;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, RxLookup, StdCtrls, CurrEdit, 
+  UDMCadNotaFiscal, Buttons, Grids, DBGrids, SMDBGrid, DB, UCadNotaFiscal_Itens, RzPanel, Mask, ToolEdit, UCadNotaEntrada_Itens,
+  Menus;
 
 type
   TfrmSel_NotaEntrada = class(TForm)
@@ -17,7 +16,6 @@ type
     ComboBox1: TComboBox;
     Label3: TLabel;
     RxDBLookupCombo2: TRxDBLookupCombo;
-    BitBtn1: TBitBtn;
     Label4: TLabel;
     RxDBLookupCombo3: TRxDBLookupCombo;
     Panel2: TPanel;
@@ -40,6 +38,7 @@ type
     CurrencyEdit1: TCurrencyEdit;
     PopupMenu1: TPopupMenu;
     Copiarqtdependentepdevoluo1: TMenuItem;
+    BitBtn1: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -57,7 +56,7 @@ type
     procedure Copiarqtdependentepdevoluo1Click(Sender: TObject);
   private
     { Private declarations }
-    procedure prc_Consultar_NotaEntrada(ID_Nota : Integer = 0 ; Item_Nota : Integer =  0);
+    procedure prc_Consultar_NotaEntrada(ID_Nota: Integer = 0; Item_Nota: Integer =  0);
     procedure prc_Gravar_mNotaSelecionada;
     procedure prc_Gravar_NotaItens;
     procedure prc_Gravar_NotaNDevolvida;
@@ -67,7 +66,7 @@ type
     procedure prc_Gravar_NotaNDevolvida_Agr;
 
     procedure prc_Montar_MatConsumo(Limpar: Boolean = True);
-    procedure prc_Gravar_MatConsumo(ID_Produto: Integer ; Qtd: Real ; Tamanho : String);
+    procedure prc_Gravar_MatConsumo(ID_Produto: Integer; Qtd: Real; Tamanho: String);
     procedure prc_Gravar_mSelecionado;
 
     procedure Le_cdsNotaEntrada;
@@ -76,16 +75,15 @@ type
     procedure prc_Gravar_mAgrupado;
     procedure prc_Gravar_mSelecionado_Nota;
 
-    function fnc_Consumo : Boolean;
+    function fnc_Consumo: Boolean;
     
     procedure prc_Gravar_MaterialConsumo_2; //Quando o material de consumo é o primeiro item e foi clicado no botão de devolução de notas
 
   public
     { Public declarations }
-    fDMCadNotaFiscal       : TDMCadNotaFiscal;
+    fDMCadNotaFiscal: TDMCadNotaFiscal;
     ffrmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens;
-    ffrmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens;
-
+    ffrmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens; 
   end;
 
 var
@@ -106,7 +104,7 @@ end;
 
 procedure TfrmSel_NotaEntrada.FormShow(Sender: TObject);
 var
-  i : Integer;
+  i: Integer;
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadNotaFiscal);
 
@@ -151,14 +149,16 @@ end;
 
 procedure TfrmSel_NotaEntrada.BitBtn1Click(Sender: TObject);
 begin
+  SMDBGrid1.DisableScroll;
   prc_Consultar_NotaEntrada;
   prc_Le_cdsNotaEntrada2;
+  SMDBGrid1.EnableScroll;
 end;
 
-procedure TfrmSel_NotaEntrada.prc_Consultar_NotaEntrada(ID_Nota : Integer = 0 ; Item_Nota : Integer =  0);
+procedure TfrmSel_NotaEntrada.prc_Consultar_NotaEntrada(ID_Nota: Integer = 0; Item_Nota: Integer =  0);
 var
-  vPosse : String;
-  vBenef_Posse : String;
+  vPosse: String;
+  vBenef_Posse: String;
 begin
   if Tag = 50 then
   begin
@@ -231,7 +231,7 @@ procedure TfrmSel_NotaEntrada.BitBtn2Click(Sender: TObject);
 var
   vMsgErro: String;
   vContAux: Integer;
-  vID_CFOPAux : Integer;
+  vID_CFOPAux: Integer;
 begin
   if (fDMCadNotaFiscal.cdsNotaEntrada.IsEmpty) and (Tag <> 95) then
     exit;
@@ -356,7 +356,7 @@ procedure TfrmSel_NotaEntrada.prc_Gravar_NotaItens;
 var
   vItemAux: Integer;
   vVlrAux: Real;
-  vGravaOK : Boolean;
+  vGravaOK: Boolean;
 begin
   try
     fDMCadNotaFiscal.cdsNotaFiscal_Itens.Last;
@@ -604,10 +604,10 @@ begin
   //***********
 end;
 
-procedure TfrmSel_NotaEntrada.prc_Gravar_MatConsumo(ID_Produto: Integer ; Qtd: Real ; Tamanho : String);
+procedure TfrmSel_NotaEntrada.prc_Gravar_MatConsumo(ID_Produto: Integer; Qtd: Real; Tamanho: String);
 var
   vAux: Real;
-  vConsumo : Real;
+  vConsumo: Real;
 begin
   fDMCadNotaFiscal.qProduto_Consumo.Close;
   fDMCadNotaFiscal.qProduto_Consumo.ParamByName('ID').AsInteger := ID_Produto;
@@ -677,10 +677,10 @@ procedure TfrmSel_NotaEntrada.Le_cdsNotaEntrada;
 var
   vQtdOri: Real;
   vQtdAux: Real;
-  vID_CFOP_Aux : array[1..2] of Integer;
-  vQtd_Ori_Aux : array[1..2] of Real;
-  vIndice : Integer;
-  i : Integer;
+  vID_CFOP_Aux: array[1..2] of Integer;
+  vQtd_Ori_Aux: array[1..2] of Real;
+  vIndice: Integer;
+  i: Integer;
 begin
   vQtdOri  := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.mMaterialConsumoQtdConsumo.AsFloat - fDMCadNotaFiscal.mMaterialConsumoQtdJaInformada.AsFloat));
   for vIndice := 1 to 2 do
@@ -1048,7 +1048,7 @@ end;
 
 function TfrmSel_NotaEntrada.fnc_Consumo: Boolean;
 var
-  vMSG : String;
+  vMSG: String;
 begin
   vMSG   := '';
   Result := True;

@@ -4,7 +4,7 @@ object frmCadContrato_Servico_Int: TfrmCadContrato_Servico_Int
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Informe o servi'#231'o do contrato'
-  ClientHeight = 351
+  ClientHeight = 367
   ClientWidth = 719
   Color = clMoneyGreen
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object frmCadContrato_Servico_Int: TfrmCadContrato_Servico_Int
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 310
+    Top = 326
     Width = 719
     Height = 41
     Align = alBottom
@@ -177,13 +177,13 @@ object frmCadContrato_Servico_Int: TfrmCadContrato_Servico_Int
     Left = 0
     Top = 75
     Width = 719
-    Height = 235
+    Height = 251
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 1
     DesignSize = (
       719
-      235)
+      251)
     object Label1: TLabel
       Left = 24
       Top = 11
@@ -355,7 +355,7 @@ object frmCadContrato_Servico_Int: TfrmCadContrato_Servico_Int
       Top = 3
       Width = 493
       Height = 21
-      DropDownCount = 8
+      DropDownCount = 15
       Ctl3D = False
       DataField = 'ID_SERVICO_INT'
       DataSource = DMCadOS.dsOS_Servico_Int
@@ -738,6 +738,18 @@ object frmCadContrato_Servico_Int: TfrmCadContrato_Servico_Int
       ParentCtl3D = False
       ReadOnly = True
       TabOrder = 15
+    end
+    object DBCheckBox1: TDBCheckBox
+      Left = 146
+      Top = 232
+      Width = 225
+      Height = 17
+      Caption = 'Imprimir contrato pelo modelo'
+      DataField = 'IMPRIMIR_CONTRATO_MODELO'
+      DataSource = DMCadOS.dsOS_Servico_Int
+      TabOrder = 16
+      ValueChecked = 'S'
+      ValueUnchecked = 'N'
     end
   end
 end

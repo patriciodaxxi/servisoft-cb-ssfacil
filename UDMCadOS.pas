@@ -1019,6 +1019,16 @@ type
     cdsFilialARQ_MODELO_CONTRATO: TStringField;
     sdsOSARQ_MODELO_CONTRATO: TStringField;
     cdsOSARQ_MODELO_CONTRATO: TStringField;
+    cdsServico_IntARQ_MODELO_CONTRATO: TStringField;
+    sdsServicoIntModContrato: TSQLDataSet;
+    dspServicoIntModContrato: TDataSetProvider;
+    cdsServicoIntModContrato: TClientDataSet;
+    dsServicoIntModContrato: TDataSource;
+    cdsServicoIntModContratoID: TIntegerField;
+    cdsServicoIntModContratoFILIAL: TIntegerField;
+    cdsServicoIntModContratoARQ_MODELO_CONTRATO: TStringField;
+    sdsOS_Servico_IntIMPRIMIR_CONTRATO_MODELO: TStringField;
+    cdsOS_Servico_IntIMPRIMIR_CONTRATO_MODELO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspOSUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

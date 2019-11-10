@@ -24,7 +24,7 @@ object frmCadContrato: TfrmCadContrato
     Top = 0
     Width = 923
     Height = 664
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadContrato: TfrmCadContrato
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1612,7 +1612,6 @@ object frmCadContrato: TfrmCadContrato
                     FieldName = 'ID_PRODUTO'
                     Title.Alignment = taCenter
                     Title.Caption = 'C'#243'd. Produto'
-                    Width = 64
                     Visible = True
                   end>
               end
@@ -2182,7 +2181,7 @@ object frmCadContrato: TfrmCadContrato
                 object DBEdit3: TDBEdit
                   Left = 111
                   Top = 1
-                  Width = 118
+                  Width = 109
                   Height = 19
                   Ctl3D = False
                   DataField = 'DIA_VENCIMENTO'
@@ -3356,6 +3355,7 @@ object frmCadContrato: TfrmCadContrato
           Width = 33
           Height = 13
           DataField = 'FILIAL'
+          DataSource = DMCadOS.dsOS
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
