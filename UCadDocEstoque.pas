@@ -111,6 +111,8 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnCopiarDocClick(Sender: TObject);
+    procedure rxcbTipo_ESKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     vTipo_Reg: String;
@@ -570,6 +572,21 @@ end;
 
 procedure TfrmCadDocEstoque.rxcbTipo_ESExit(Sender: TObject);
 begin
+  if (fDMCadDocEstoque.qParametros_EstCONTROLA_DOC_SAIDA.AsString = 'S') and (rxcbTipo_ES.ItemIndex >= 0) then
+  begin
+    fDMCadDocEstoque.qParametros_Usuario.Close;
+    fDMCadDocEstoque.qParametros_Usuario.ParamByName('USUARIO').AsString := vUsuario;
+    fDMCadDocEstoque.qParametros_Usuario.Open;
+    if ((fDMCadDocEstoque.qParametros_UsuarioCONTROLE_DOC_EST.AsString = 'S') and (rxcbTipo_ES.ItemIndex <> 0)) or
+       ((fDMCadDocEstoque.qParametros_UsuarioCONTROLE_DOC_EST.AsString = 'E') and (rxcbTipo_ES.ItemIndex <> 1)) then
+    begin
+      MessageDlg('*** Usuário não tem permissão para fazer ' + rxcbTipo_ES.Text, mtError, [mbOk], 0);
+      fDMCadDocEstoque.cdsDocEstoqueTIPO_ES.AsString := '';
+      rxcbTipo_ES.SetFocus;
+      exit;
+    end;
+  end;
+
   prc_Abrir_Pessoa(fDMCadDocEstoque.cdsDocEstoqueTIPO_ES.AsString);
 end;
 
@@ -820,6 +837,13 @@ begin
     btnAlterarClick(Sender);
   end;
   fDMCadDocEstoque.Tag := 0;
+end;
+
+procedure TfrmCadDocEstoque.rxcbTipo_ESKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = 27) then
+    rxcbTipo_ES.ItemIndex := -1;
 end;
 
 end.

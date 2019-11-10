@@ -1767,8 +1767,8 @@ object DMCadDocEstoque: TDMCadDocEstoque
       'WHERE PL.ID = :ID'
       '  AND PL.NUM_LOTE_CONTROLE = :NUM_LOTE_CONTROLE')
     SQLConnection = dmDatabase.scoDados
-    Left = 800
-    Top = 432
+    Left = 790
+    Top = 461
     object qProduto_LoteNUM_LOTE_CONTROLE: TStringField
       FieldName = 'NUM_LOTE_CONTROLE'
     end
@@ -1802,8 +1802,8 @@ object DMCadDocEstoque: TDMCadDocEstoque
       'ON B.ID_COR = C.ID'
       'WHERE B.COD_BARRA = :COD_BARRA')
     SQLConnection = dmDatabase.scoDados
-    Left = 760
-    Top = 480
+    Left = 738
+    Top = 496
     object qCBarraID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -1976,8 +1976,8 @@ object DMCadDocEstoque: TDMCadDocEstoque
     SQL.Strings = (
       
         'SELECT P.USA_LOCALIZACAO_LOTE, CONTROLA_DOC_CLIFORN, P.REQ_ENTRE' +
-        'GUE_POR, P.REQ_NUM_LOTE, '
-      'P.REQ_NUM_PED'
+        'GUE_POR,'
+      'P.REQ_NUM_LOTE, P.REQ_NUM_PED, P.controla_doc_saida'
       'FROM PARAMETROS_EST P'
       '')
     SQLConnection = dmDatabase.scoDados
@@ -2005,6 +2005,11 @@ object DMCadDocEstoque: TDMCadDocEstoque
     end
     object qParametros_EstREQ_NUM_PED: TStringField
       FieldName = 'REQ_NUM_PED'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_EstCONTROLA_DOC_SAIDA: TStringField
+      FieldName = 'CONTROLA_DOC_SAIDA'
       FixedChar = True
       Size = 1
     end
@@ -2118,5 +2123,31 @@ object DMCadDocEstoque: TDMCadDocEstoque
     BCDToCurrency = False
     Left = 168
     Top = 336
+  end
+  object qParametros_Usuario: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftString
+        Name = 'USUARIO'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT U.controle_doc_est, U.usuario'
+      'FROM parametros_usuario U'
+      'WHERE U.USUARIO = :USUARIO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 892
+    Top = 452
+    object qParametros_UsuarioCONTROLE_DOC_EST: TStringField
+      FieldName = 'CONTROLE_DOC_EST'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_UsuarioUSUARIO: TStringField
+      FieldName = 'USUARIO'
+      Required = True
+      Size = 30
+    end
   end
 end

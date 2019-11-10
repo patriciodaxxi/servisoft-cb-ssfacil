@@ -25,7 +25,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
     Top = 0
     Width = 937
     Height = 638
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1610,7 +1610,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
           OnClick = SpeedButton2Click
         end
         object rxcbTipo_ES: TRxDBComboBox
-          Left = 105
+          Left = 106
           Top = 4
           Width = 118
           Height = 21
@@ -1627,6 +1627,7 @@ object frmCadDocEstoque: TfrmCadDocEstoque
             'S'
             'E')
           OnExit = rxcbTipo_ESExit
+          OnKeyDown = rxcbTipo_ESKeyDown
         end
         object DBDateEdit1: TDBDateEdit
           Left = 261

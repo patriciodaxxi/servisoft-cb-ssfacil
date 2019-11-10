@@ -421,6 +421,10 @@ type
     cdsDocEstoque_ItensESPESSURA: TFloatField;
     sdsDocEstoque_ItensTIPO_ES: TStringField;
     cdsDocEstoque_ItensTIPO_ES: TStringField;
+    qParametros_Usuario: TSQLQuery;
+    qParametros_UsuarioCONTROLE_DOC_EST: TStringField;
+    qParametros_UsuarioUSUARIO: TStringField;
+    qParametros_EstCONTROLA_DOC_SAIDA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspDocEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -543,6 +547,9 @@ begin
   qParametros_Prod.Open;
   qParametros_Geral.Open;
   qParametros_Est.Open;
+  qParametros_Usuario.Close;
+  qParametros_Usuario.ParamByName('USUARIO').AsString := vUsuario;
+  qParametros_Usuario.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do
