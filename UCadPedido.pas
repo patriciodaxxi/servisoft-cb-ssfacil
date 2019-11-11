@@ -3272,6 +3272,15 @@ var
   vAux: Integer;
   vOrdRef: String;
 begin
+  //11/11/2019
+  if fDMCadPedido.qParametros_PedIMP_DUPLICATA_PEND.AsString = 'S' then
+  begin
+    fDMCadPedido.cdsTitulosPend.Close;
+    fDMCadPedido.sdsTitulosPend.ParamByName('ID_PESSOA').AsInteger := fDMCadPedido.cdsPedidoImpID_CLIENTE.AsInteger;
+    fDMCadPedido.cdsTitulosPend.Open;
+  end;
+  //********************
+
   vIndice := fDMCadPedido.cdsPedidoImp_Itens.IndexFieldNames;
   fDMCadPedido.vMSGErro := '';
   vOrdRef := '';

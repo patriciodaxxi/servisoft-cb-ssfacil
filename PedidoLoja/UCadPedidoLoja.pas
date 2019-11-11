@@ -1617,6 +1617,7 @@ procedure TfrmCadPedidoLoja.Personalizado1Click(Sender: TObject);
 var
   ffrmOpcaoImp: TfrmOpcaoImp;
 begin
+
   fDMCadPedido.mImpPed.EmptyDataSet;
 
   ffrmOpcaoImp := TfrmOpcaoImp.Create(self);
@@ -1634,6 +1635,16 @@ begin
   fDMCadPedido.vTipo_Rel_Ped := '';
   fDMCadPedido.vImpPreco     := ckImpPreco.Checked;
   prc_Posiciona_Imp;
+
+  //11/11/2019
+  if fDMCadPedido.qParametros_PedIMP_DUPLICATA_PEND.AsString = 'S' then
+  begin
+    fDMCadPedido.cdsTitulosPend.Close;
+    fDMCadPedido.sdsTitulosPend.ParamByName('ID_PESSOA').AsInteger := fDMCadPedido.cdsPedidoImpID_CLIENTE.AsInteger;
+    fDMCadPedido.cdsTitulosPend.Open;
+  end;
+  //********************
+
   prc_Monta_Impressao(False);
 end;
 

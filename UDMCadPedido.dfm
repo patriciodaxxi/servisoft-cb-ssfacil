@@ -5741,7 +5741,7 @@ object DMCadPedido: TDMCadPedido
     DataSetField = cdsCFOPsdsCFOP_Variacao
     IndexFieldNames = 'NOME'
     Params = <>
-    Left = 680
+    Left = 679
     Top = 501
     object cdsCFOP_VariacaoID: TIntegerField
       FieldName = 'ID'
@@ -10709,7 +10709,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43763.598955775470000000
+    ReportOptions.LastChange = 43780.577702696800000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -15156,6 +15156,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedIMP_DUPLICATA_PEND: TStringField
+      FieldName = 'IMP_DUPLICATA_PEND'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 
@@ -18396,5 +18401,93 @@ object DMCadPedido: TDMCadPedido
     SQLConnection = dmDatabase.scoDados
     Left = 288
     Top = 17
+  end
+  object sdsTitulosPend: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT D.ID, D.numduplicata, D.parcela, D.dtemissao, D.dtvencime' +
+      'nto,'#13#10'D.vlr_restante, D.descricao, D.descricao2, D.id_pessoa'#13#10'FR' +
+      'OM DUPLICATA D'#13#10'WHERE D.vlr_restante > 0'#13#10'  AND D.ID_PESSOA = :I' +
+      'D_PESSOA'#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_PESSOA'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 657
+    Top = 592
+  end
+  object cdsTitulosPend: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NUMDUPLICATA'
+    Params = <>
+    ProviderName = 'dspTitulosPend'
+    OnNewRecord = cdsPedido_ItensNewRecord
+    Left = 715
+    Top = 590
+    object cdsTitulosPendID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsTitulosPendNUMDUPLICATA: TStringField
+      FieldName = 'NUMDUPLICATA'
+    end
+    object cdsTitulosPendPARCELA: TIntegerField
+      FieldName = 'PARCELA'
+    end
+    object cdsTitulosPendDTEMISSAO: TDateField
+      FieldName = 'DTEMISSAO'
+    end
+    object cdsTitulosPendDTVENCIMENTO: TDateField
+      FieldName = 'DTVENCIMENTO'
+    end
+    object cdsTitulosPendVLR_RESTANTE: TFloatField
+      FieldName = 'VLR_RESTANTE'
+    end
+    object cdsTitulosPendDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 70
+    end
+    object cdsTitulosPendDESCRICAO2: TStringField
+      FieldName = 'DESCRICAO2'
+      Size = 100
+    end
+    object cdsTitulosPendID_PESSOA: TIntegerField
+      FieldName = 'ID_PESSOA'
+    end
+  end
+  object dspTitulosPend: TDataSetProvider
+    DataSet = sdsTitulosPend
+    Left = 683
+    Top = 593
+  end
+  object dsTitulosPend: TDataSource
+    DataSet = cdsTitulosPend
+    Left = 734
+    Top = 591
+  end
+  object frxTitulosPend: TfrxDBDataset
+    UserName = 'frxTitulosPend'
+    OnFirst = frxDBDataset1First
+    OnNext = frxDBDataset1Next
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'NUMDUPLICATA=NUMDUPLICATA'
+      'PARCELA=PARCELA'
+      'DTEMISSAO=DTEMISSAO'
+      'DTVENCIMENTO=DTVENCIMENTO'
+      'VLR_RESTANTE=VLR_RESTANTE'
+      'DESCRICAO=DESCRICAO'
+      'DESCRICAO2=DESCRICAO2'
+      'ID_PESSOA=ID_PESSOA')
+    DataSource = dsTitulosPend
+    BCDToCurrency = False
+    Left = 1291
+    Top = 341
   end
 end
