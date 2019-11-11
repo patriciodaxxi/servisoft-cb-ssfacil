@@ -411,6 +411,8 @@ type
     qPedido_ItemDTCONFERENCIA: TDateField;
     qPedido_ItemQTD_CANCELADO: TFloatField;
     qPedido_ItemQTD: TFloatField;
+    sdsPedido_ItemID_PROCESSO: TIntegerField;
+    cdsPedido_ItemID_PROCESSO: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsConferencia_PedCalcFields(DataSet: TDataSet);
     procedure cdsPedido_ItemCalcFields(DataSet: TDataSet);

@@ -9,11 +9,12 @@ object DMConferencia: TDMConferencia
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT ITE.ID, ITE.ITEM, ITE.id_produto, ITE.referencia, ITE.nom' +
-      'eproduto, ITE.qtd, ITE.qtd_faturado, '#13#10'ITE.qtd_restante, ITE.qtd' +
-      '_liberada, QTD_CONFERIDO, DTCONFERENCIA, '#13#10'HRCONFERENCIA, USUARI' +
-      'O_CONF, ITE.ID_COR, UNIDADE, TAMANHO, VLR_UNITARIO'#13#10'FROM PEDIDO_' +
-      'ITEM ITE'#13#10'WHERE ITE.ID = :ID'#13#10'  AND ITE.cancelado = '#39'N'#39#13#10
+      'select ITE.ID, ITE.ITEM, ITE.ID_PRODUTO, ITE.REFERENCIA, ITE.NOM' +
+      'EPRODUTO, ITE.QTD, ITE.QTD_FATURADO, ITE.QTD_RESTANTE,'#13#10'       I' +
+      'TE.QTD_LIBERADA, QTD_CONFERIDO, DTCONFERENCIA, HRCONFERENCIA, US' +
+      'UARIO_CONF, ITE.ID_COR, UNIDADE, TAMANHO,'#13#10'       VLR_UNITARIO, ' +
+      'ID_PROCESSO'#13#10'from PEDIDO_ITEM ITE'#13#10'where ITE.ID = :ID and'#13#10'     ' +
+      ' ITE.CANCELADO = '#39'N'#39'   '
     MaxBlobSize = -1
     Params = <
       item
@@ -82,6 +83,9 @@ object DMConferencia: TDMConferencia
     end
     object sdsPedido_ItemVLR_UNITARIO: TFloatField
       FieldName = 'VLR_UNITARIO'
+    end
+    object sdsPedido_ItemID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
     end
   end
   object dspPedido_Item: TDataSetProvider
@@ -162,6 +166,9 @@ object DMConferencia: TDMConferencia
       ProviderFlags = []
       Size = 60
       Calculated = True
+    end
+    object cdsPedido_ItemID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
     end
   end
   object dsPedido_Item: TDataSource
@@ -367,6 +374,7 @@ object DMConferencia: TDMConferencia
   object sdsConferencia: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
+    Active = True
     CommandText = 'SELECT *'#13#10'FROM CONFERENCIA'#13#10'WHERE ID = :ID'
     MaxBlobSize = -1
     Params = <
@@ -2204,8 +2212,8 @@ object DMConferencia: TDMConferencia
       'where P.NUM_PEDIDO = :NUM_PEDIDO'
       '  and I.ITEM = :ITEM')
     SQLConnection = dmDatabase.scoDados
-    Left = 790
-    Top = 488
+    Left = 782
+    Top = 72
     object qPedido_ItemID: TIntegerField
       FieldName = 'ID'
       Required = True

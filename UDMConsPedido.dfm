@@ -5382,19 +5382,14 @@ object DMConsPedido: TDMConsPedido
       'select P.ID, P.DTEMISSAO, P.NUM_PEDIDO, P.ID_CLIENTE, I.ITEM, I.' +
       'ID_PRODUTO, I.REFERENCIA, I.NOMEPRODUTO, I.QTD,'#13#10'       I.QTD_FA' +
       'TURADO, I.QTD_RESTANTE, I.QTD_CANCELADO, PROC.nome NOME_PROCESSO' +
-      ','#13#10'case'#13#10'  when pp.id_processo = (select id_processo_final from ' +
-      'parametros_ped where id = 1) then '#39'S'#39#13#10'  when coalesce(pp.id_pro' +
-      'cesso,0) > 0 then '#39'I'#39#13#10'  else '#39#39#13#10'  end Producao_Concluida, CLI.' +
-      'NOME NOME_CLIENTE, P.nome_consumidor'#13#10#13#10'from PEDIDO P'#13#10'inner joi' +
-      'n PEDIDO_ITEM I on P.ID = I.ID'#13#10'inner join PESSOA cli on p.id_cl' +
-      'iente = cli.codigo'#13#10#13#10'left join PEDIDO_ITEM_PROCESSO PP'#13#10'  on I.' +
-      'ID = PP.ID'#13#10' and I.ITEM = PP.ITEM and PP.ITEM_PROCESSO = (select' +
-      ' max(PP2.ITEM_PROCESSO)'#13#10'                                       ' +
-      '       from PEDIDO_ITEM_PROCESSO PP2'#13#10'                          ' +
-      '                    where PP2.ID = I.ID and'#13#10'                   ' +
-      '                             PP2.ITEM = I.ITEM)'#13#10'LEFT JOIN PROCE' +
-      'SSO PROC'#13#10'ON PP.id_processo = PROC.id'#13#10'WHERE P.TIPO_REG = '#39'P'#39#13#10' ' +
-      ' AND P.cancelado = '#39'N'#39#13#10'  AND I.cancelado = '#39'N'#39#13#10
+      ','#13#10'case'#13#10'  when i.id_processo = (select id_processo_final from p' +
+      'arametros_ped where id = 1) then '#39'S'#39#13#10'  when coalesce(i.id_proce' +
+      'sso,0) > 0 then '#39'I'#39#13#10'  else '#39#39#13#10'  end Producao_Concluida, CLI.NO' +
+      'ME NOME_CLIENTE, P.nome_consumidor'#13#10#13#10'from PEDIDO P'#13#10'inner join ' +
+      'PEDIDO_ITEM I on P.ID = I.ID'#13#10'inner join PESSOA cli on p.id_clie' +
+      'nte = cli.codigo'#13#10#13#10'LEFT JOIN PROCESSO PROC'#13#10'ON i.id_processo = ' +
+      'PROC.id'#13#10'WHERE P.TIPO_REG = '#39'P'#39#13#10'  AND P.cancelado = '#39'N'#39#13#10'  AND ' +
+      'I.cancelado = '#39'N'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

@@ -416,6 +416,9 @@ begin
   fDMConferencia.qPedido_Item.Open;
 
   vMSG := '';
+  if fDMConferencia.qPedido_Item.IsEmpty then
+    vMSG := vMSG + #13 + 'Pedido/Item não encontrado!'
+  else
   if fDMConferencia.qPedido_ItemDTCONFERENCIA.AsDateTime > 10 then
     vMSG := vMSG + #13 + 'Item já Conferido!'
   else
@@ -484,16 +487,23 @@ begin
       fDMConferencia.cdsPedido_Item_Processo.ApplyUpdates(0);
     end;
 
+//    if ((Gravar_Processo) and (vID_Processo = fDMConferencia.qParametros_PedID_PROCESSO_FINAL.AsInteger)) or not(Gravar_Processo) then
+    if fDMConferencia.cdsPedido_ItemITEM.AsInteger <> fDMConferencia.qPedido_ItemITEM.AsInteger then
+      fDMConferencia.cdsPedido_Item.Locate('ITEM',fDMConferencia.qPedido_ItemITEM.AsInteger,[loCaseInsensitive]);
+    vItemAux := fDMConferencia.cdsPedido_ItemITEM.AsInteger;
+    fDMConferencia.cdsPedido_Item.Edit;
     if ((Gravar_Processo) and (vID_Processo = fDMConferencia.qParametros_PedID_PROCESSO_FINAL.AsInteger)) or not(Gravar_Processo) then
     begin
-       vItemAux := fDMConferencia.cdsPedido_ItemITEM.AsInteger;
-      fDMConferencia.cdsPedido_Item.Edit;
       fDMConferencia.cdsPedido_ItemDTCONFERENCIA.AsDateTime := Date;
       fDMConferencia.cdsPedido_ItemHRCONFERENCIA.AsDateTime := Now;
       fDMConferencia.cdsPedido_ItemUSUARIO_CONF.AsString    := vUsuario;
       fDMConferencia.cdsPedido_ItemQTD_CONFERIDO.AsFloat    := StrToFloat(FormatFloat('0.00000',fDMConferencia.cdsPedido_ItemQTD.AsFloat));
-      fDMConferencia.cdsPedido_Item.Post;
-      fDMConferencia.cdsPedido_Item.ApplyUpdates(0);
+    end;
+    fDMConferencia.cdsPedido_ItemID_PROCESSO.AsInteger    := vID_Processo;
+    fDMConferencia.cdsPedido_Item.Post;
+    fDMConferencia.cdsPedido_Item.ApplyUpdates(0);
+    if ((Gravar_Processo) and (vID_Processo = fDMConferencia.qParametros_PedID_PROCESSO_FINAL.AsInteger)) or not(Gravar_Processo) then
+    begin
       prc_Verifica_Pedido_Conf;
       if fDMConferencia.cdsPedidoCONFERIDO.AsString = 'S' then
         fDMAprovacao_Ped.prc_Gravar_Pedido_Processo(fDMConferencia.cdsPedidoEMAIL_COMPRAS.AsString,fDMConferencia.cdsPedidoID.AsInteger,0,'E','','',Date);
