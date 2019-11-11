@@ -140,6 +140,7 @@ type
     NxButton1: TNxButton;
     Label25: TLabel;
     FilenameEdit1: TFilenameEdit;
+    DBCheckBox3: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -823,6 +824,9 @@ begin
 
   if not (fileExists(arquivo)) then
   begin
+    if fDMCadOS.cdsOSIMPRIME_CONTRATO_POR_ITEM.AsString = 'S' then
+
+
     if fDMCadOS.cdsOSARQ_MODELO_CONTRATO.AsString <> '' then
       arquivo := fDMCadOS.cdsOSARQ_MODELO_CONTRATO.AsString
     else
@@ -864,6 +868,7 @@ begin
   Doc.Content.Find.Execute(FindText := '<contratante_cnpj>', ReplaceWith := fDMCadOS.cdsOS_ConsultaCNPJ_CPF.AsString, Replace := 2);
   Doc.Content.Find.Execute(FindText := '<contratante_endereco>', ReplaceWith := fDMCadOS.cdsOS_ConsultaENDERECO.AsString + ', ' + fDMCadOS.cdsOS_ConsultaNUM_END.AsString + ', ' + fDMCadOS.cdsOS_ConsultaCOMPLEMENTO_END.AsString, Replace := 2);
   Doc.Content.Find.Execute(FindText := '<contratante_bairro>', ReplaceWith := fDMCadOS.cdsOS_ConsultaBAIRRO.AsString, Replace := 2);
+  Doc.Content.Find.Execute(FindText := '<contratante_cidade>', ReplaceWith := fDMCadOS.cdsOS_ConsultaCIDADE_NOME.AsString, Replace := 2);
   Doc.Content.Find.Execute(FindText := '<contratante_uf>', ReplaceWith := fDMCadOS.cdsOS_ConsultaUF.AsString, Replace := 2);
   //aqui ver com o juca
   Doc.Content.Find.Execute(FindText := '<contratante_cep>', ReplaceWith := fDMCadOS.cdsOS_ConsultaNUM_CONTRATO.AsString, Replace := 2);

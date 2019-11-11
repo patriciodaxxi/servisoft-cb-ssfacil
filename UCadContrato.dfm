@@ -3117,7 +3117,7 @@ object frmCadContrato: TfrmCadContrato
           LookupDisplay = 'NOME'
           LookupSource = DMCadOS.dsNatureza
           ParentCtl3D = False
-          TabOrder = 2
+          TabOrder = 3
         end
         object DBEdit18: TDBEdit
           Left = 504
@@ -3128,7 +3128,7 @@ object frmCadContrato: TfrmCadContrato
           DataField = 'CNAE'
           DataSource = DMCadOS.dsOS
           ParentCtl3D = False
-          TabOrder = 4
+          TabOrder = 5
         end
         object Panel5: TPanel
           Left = 24
@@ -3257,7 +3257,7 @@ object frmCadContrato: TfrmCadContrato
           LookupDisplay = 'CODIGO;NOME'
           LookupSource = DMCadOS.dsAtividade_Cid
           ParentCtl3D = False
-          TabOrder = 3
+          TabOrder = 4
         end
         object DBDateEdit2: TDBDateEdit
           Left = 80
@@ -3270,7 +3270,7 @@ object frmCadContrato: TfrmCadContrato
           DialogTitle = 'Selecione a data'
           NumGlyphs = 2
           ParentCtl3D = False
-          TabOrder = 5
+          TabOrder = 6
           StartOfWeek = Sun
         end
         object DBDateEdit3: TDBDateEdit
@@ -3284,7 +3284,7 @@ object frmCadContrato: TfrmCadContrato
           DialogTitle = 'Selecione a data'
           NumGlyphs = 2
           ParentCtl3D = False
-          TabOrder = 6
+          TabOrder = 7
           StartOfWeek = Sun
         end
         object DBEdit1: TDBEdit
@@ -3299,7 +3299,7 @@ object frmCadContrato: TfrmCadContrato
           DataSource = DMCadOS.dsOS
           ParentCtl3D = False
           ReadOnly = True
-          TabOrder = 9
+          TabOrder = 10
         end
         object DBEdit4: TDBEdit
           Left = 704
@@ -3311,7 +3311,7 @@ object frmCadContrato: TfrmCadContrato
           DataSource = DMCadOS.dsOS
           MaxLength = 4
           ParentCtl3D = False
-          TabOrder = 8
+          TabOrder = 2
         end
         object FilenameEdit1: TFilenameEdit
           Left = 504
@@ -3322,7 +3322,25 @@ object frmCadContrato: TfrmCadContrato
           Ctl3D = False
           NumGlyphs = 1
           ParentCtl3D = False
-          TabOrder = 7
+          TabOrder = 9
+        end
+        object DBCheckBox3: TDBCheckBox
+          Left = 704
+          Top = 69
+          Width = 169
+          Height = 14
+          Caption = 'Imprime contrato por item'
+          DataField = 'IMPRIME_CONTRATO_POR_ITEM'
+          DataSource = DMCadOS.dsOS
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 8
+          ValueChecked = '1'
+          ValueUnchecked = '2'
         end
       end
       object pnlNota: TPanel
