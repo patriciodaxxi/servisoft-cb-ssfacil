@@ -160,7 +160,7 @@ begin
     fDMCadOS.sdsServicoIntModContrato.ParamByName('FILIAL').AsInteger := fDMCadOS.cdsOSFILIAL.AsInteger;
     fDMCadOS.cdsServicoIntModContrato.Open;
 
-    if not fDMCadOS.cdsServicoIntModContrato.IsEmpty then
+        if not fDMCadOS.cdsServicoIntModContrato.IsEmpty then
       Edit4.Text := fDMCadOS.cdsServicoIntModContratoARQ_MODELO_CONTRATO.asString
     else
     if not fDMCadOS.cdsServico_IntARQ_MODELO_CONTRATO.IsNull then

@@ -224,6 +224,11 @@ object DMCadOS: TDMCadOS
       FieldName = 'ARQ_MODELO_CONTRATO'
       Size = 200
     end
+    object sdsOSIMPRIME_CONTRATO_POR_ITEM: TStringField
+      FieldName = 'IMPRIME_CONTRATO_POR_ITEM'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspOS: TDataSetProvider
     DataSet = sdsOS
@@ -233,7 +238,6 @@ object DMCadOS: TDMCadOS
     Top = 24
   end
   object cdsOS: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -459,6 +463,11 @@ object DMCadOS: TDMCadOS
     object cdsOSARQ_MODELO_CONTRATO: TStringField
       FieldName = 'ARQ_MODELO_CONTRATO'
       Size = 200
+    end
+    object cdsOSIMPRIME_CONTRATO_POR_ITEM: TStringField
+      FieldName = 'IMPRIME_CONTRATO_POR_ITEM'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsOS: TDataSource
@@ -2360,7 +2369,6 @@ object DMCadOS: TDMCadOS
     end
   end
   object cdsOS_Parc: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsOSsdsOS_Parc
     IndexFieldNames = 'ID;ITEM'
@@ -3228,7 +3236,6 @@ object DMCadOS: TDMCadOS
     end
   end
   object cdsOS_Material: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsOSsdsOS_Material
     Params = <>
