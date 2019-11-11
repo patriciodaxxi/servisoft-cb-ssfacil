@@ -18,7 +18,7 @@ object frmConsPedido_Producao: TfrmConsPedido_Producao
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1064
+    Width = 1056
     Height = 100
     Align = alTop
     BevelOuter = bvNone
@@ -274,8 +274,8 @@ object frmConsPedido_Producao: TfrmConsPedido_Producao
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 100
-    Width = 1064
-    Height = 430
+    Width = 1056
+    Height = 422
     ActivePage = TS_Item
     ActivePageDefault = TS_Item
     Align = alClient
@@ -288,8 +288,8 @@ object frmConsPedido_Producao: TfrmConsPedido_Producao
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 0
-        Width = 1060
-        Height = 407
+        Width = 1052
+        Height = 399
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsConsPedido_Item_Proc

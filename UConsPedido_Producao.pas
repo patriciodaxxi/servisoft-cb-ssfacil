@@ -101,8 +101,8 @@ begin
   if trim(Edit2.Text) <> '' then
     vComando := vComando + ' AND i.NOMEPRODUTO LIKE ' + QuotedStr('%'+Edit2.Text+'%');
   case ComboBox2.ItemIndex of
-    1 : vComando := vComando + '  and coalesce(pp.id_processo,0) <> (select id_processo_final from parametros_ped where id = 1) ';
-    2 : vComando := vComando + '  and pp.id_processo = (select id_processo_final from parametros_ped where id = 1) ';
+    1 : vComando := vComando + '  and coalesce(i.id_processo,0) <> (select id_processo_final from parametros_ped where id = 1) ';
+    2 : vComando := vComando + '  and i.id_processo = (select id_processo_final from parametros_ped where id = 1) ';
   end;
   fDMConsPedido.sdsConsPedido_Item_Proc.CommandText := fDMConsPedido.ctConsPedido_Item_Proc + vComando;
   fDMConsPedido.cdsConsPedido_Item_Proc.Open;
