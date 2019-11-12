@@ -558,6 +558,9 @@ type
     qParametros_PedIMP_ORDEM_ITEM_PED: TStringField;
     qParametros_NFeIMPRIMIR_TOTAL_VALE: TStringField;
     cdsPedido_TipoESPESSURA: TFloatField;
+    sdsPedidoDTCONFERENCIA: TDateField;
+    cdsPedidoDTCONFERENCIA: TDateField;
+    qParametros_PedCONFERENCIA_SIMPLES: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspValeUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

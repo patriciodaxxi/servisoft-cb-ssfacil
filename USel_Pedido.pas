@@ -36,6 +36,8 @@ type
     Shape5: TShape;
     Label9: TLabel;
     pgbItens: TProgressBar;
+    Shape11: TShape;
+    Label68: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -405,6 +407,18 @@ begin
   begin
     Background  := clRed;
     AFont.Color := clWhite;
+  end
+  else
+  if (vTipo = 'NTS') and (fDMCadNotaFiscal.qParametros_PedCONFERENCIA_SIMPLES.AsString = 'S') and (fDMCadNotaFiscal.cdsPedidoDTCONFERENCIA.AsDateTime > 10) then
+  begin
+    Background  := $000080FF;
+    AFont.Color := clBlack;
+  end
+  else
+  if (vTipo = 'VAL') and (fDmCadVale.qParametros_PedCONFERENCIA_SIMPLES.AsString = 'S') and (fDmCadVale.cdsPedidoDTCONFERENCIA.AsDateTime > 10) then
+  begin
+    Background  := $000080FF;
+    AFont.Color := clBlack;
   end
   else
   begin

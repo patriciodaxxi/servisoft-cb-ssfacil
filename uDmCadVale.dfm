@@ -1220,10 +1220,10 @@ object DmCadVale: TDmCadVale
       'D_CONDPGTO, PE.IMP_OC_NOTA, PI.ID_VARIACAO, PI.QTD_LIBERADA, PI.' +
       'QTD_PRODUZIDA, PE.TIPO_REG, PI.TAMANHO, PI.ID_MOVESTOQUE, PI.QTD' +
       '_PECA, PI.QTD_LANCAR_ESTOQUE,'#13#10'PI.VLR_DESCONTORATEIO, PI.PERC_DE' +
-      'SCONTO'#13#10'FROM PEDIDO PE'#13#10'INNER JOIN PEDIDO_ITEM PI'#13#10'ON PE.ID = PI' +
-      '.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON PE.ID_CLIENTE = CLI.CODIGO'#13#10'INNER' +
-      ' JOIN PRODUTO PRO'#13#10'ON PI.ID_PRODUTO = PRO.ID'#13#10'WHERE PI.qtd_resta' +
-      'nte > 0'#13#10'      '#13#10
+      'SCONTO, PI.dtconferencia'#13#10'FROM PEDIDO PE'#13#10'INNER JOIN PEDIDO_ITEM' +
+      ' PI'#13#10'ON PE.ID = PI.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON PE.ID_CLIENTE =' +
+      ' CLI.CODIGO'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON PI.ID_PRODUTO = PRO.ID'#13#10 +
+      'WHERE PI.qtd_restante > 0'#13#10'      '#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1354,6 +1354,9 @@ object DmCadVale: TDmCadVale
     object sdsPedidoPERC_DESCONTO: TFloatField
       FieldName = 'PERC_DESCONTO'
     end
+    object sdsPedidoDTCONFERENCIA: TDateField
+      FieldName = 'DTCONFERENCIA'
+    end
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
@@ -1366,7 +1369,7 @@ object DmCadVale: TDmCadVale
     Params = <>
     ProviderName = 'dspPedido'
     OnCalcFields = cdsPedidoCalcFields
-    Left = 144
+    Left = 145
     Top = 499
     object cdsPedidoID: TIntegerField
       Alignment = taCenter
@@ -1536,6 +1539,9 @@ object DmCadVale: TDmCadVale
     end
     object cdsPedidoPERC_DESCONTO: TFloatField
       FieldName = 'PERC_DESCONTO'
+    end
+    object cdsPedidoDTCONFERENCIA: TDateField
+      FieldName = 'DTCONFERENCIA'
     end
   end
   object dsPedido: TDataSource
@@ -2365,6 +2371,11 @@ object DmCadVale: TDmCadVale
     end
     object qParametros_PedIMP_ORDEM_ITEM_PED: TStringField
       FieldName = 'IMP_ORDEM_ITEM_PED'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_PedCONFERENCIA_SIMPLES: TStringField
+      FieldName = 'CONFERENCIA_SIMPLES'
       FixedChar = True
       Size = 1
     end

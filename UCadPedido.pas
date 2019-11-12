@@ -1972,7 +1972,6 @@ begin
     AFont.Color := clBlack;
   end
   else
-  
   if (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD_RESTANTE.AsFloat)) <= 0) and (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensQTD_FATURADO.AsFloat)) > 0) then
   begin
     Background  := clGreen;

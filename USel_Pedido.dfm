@@ -149,6 +149,26 @@ object frmSel_Pedido: TfrmSel_Pedido
       Font.Style = []
       ParentFont = False
     end
+    object Shape11: TShape
+      Left = 656
+      Top = 34
+      Width = 28
+      Height = 15
+      Brush.Color = 33023
+    end
+    object Label68: TLabel
+      Left = 688
+      Top = 37
+      Width = 45
+      Height = 13
+      Caption = 'Conferido'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 86
       Top = 24
@@ -461,7 +481,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         FieldName = 'DTRECEBIMENTO'
         Title.Alignment = taCenter
         Title.Caption = 'Dt. Recebimento OS'
-        Width = 64
         Visible = True
       end
       item
@@ -470,7 +489,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         FieldName = 'DT_AGENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Dt. Previs'#227'o Final OS'
-        Width = 64
         Visible = True
       end
       item
@@ -516,7 +534,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         Expanded = False
         FieldName = 'CNPJ_CPF'
         ReadOnly = True
-        Width = 64
         Visible = True
       end
       item
@@ -540,7 +557,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Imp. N'#186' OC na Nota'
-        Width = 64
         Visible = True
       end
       item
@@ -564,7 +580,6 @@ object frmSel_Pedido: TfrmSel_Pedido
         ReadOnly = True
         Title.Alignment = taCenter
         Title.Caption = 'Item no Cliente'
-        Width = 64
         Visible = True
       end>
   end

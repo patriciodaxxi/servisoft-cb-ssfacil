@@ -3088,6 +3088,8 @@ type
     qParametros_PedPEDIDO_COMERCIO: TStringField;
     cdsClienteOBS_AVISO: TStringField;
     cdsClienteMOSTRAR_AVISO: TStringField;
+    qParametros_PedCONFERENCIA_SIMPLES: TStringField;
+    cdsPedidoDTCONFERENCIA: TDateField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
