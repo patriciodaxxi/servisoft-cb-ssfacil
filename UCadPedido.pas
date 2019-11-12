@@ -1342,8 +1342,7 @@ begin
   prc_Gravar_Registro;
   SMDBGrid2.DataSource := fDMCadPedido.dsPedido_Itens;
 
-  SMDBGrid2.EnableScroll;
-
+  SMDBGrid2.EnableScroll;                                         
 end;
 
 procedure TfrmCadPedido.FormDestroy(Sender: TObject);
@@ -1413,7 +1412,7 @@ begin
       exit;
     end;
   end;
-  //*******************  
+  //*******************
 
   if MessageDlg('Deseja excluir o item selecionado?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     Exit;
@@ -1436,7 +1435,9 @@ begin
   if fDMCadPedido.cdsPedido_Itens.RecordCount < 1 then
     fDMCadPedido.cdsPedidoVLR_DESCONTO.AsFloat  := 0;
 
-  btnCalcular_ValoresClick(Sender);
+  SMDBGrid2.DisableScroll;
+  btnCalcular_ValoresClick(Sender);     
+  SMDBGrid2.EnableScroll;
 end;
 
 procedure TfrmCadPedido.btnInserir_ItensClick(Sender: TObject);
@@ -1576,7 +1577,7 @@ begin
   fDMCadPedido.cdsPedido_Itens.Edit;
 
   SMDBGrid2.DisableScroll;
-  
+
   if fDMCadPedido.qParametros_PedUSA_ITEM_RED.AsString = 'S' then
   begin
     ffrmCadPedido_ItensRed := TfrmCadPedido_ItensRed.Create(self);
