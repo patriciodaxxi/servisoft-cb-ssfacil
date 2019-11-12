@@ -1636,13 +1636,13 @@ begin
   fDMCadPedido.vImpPreco     := ckImpPreco.Checked;
   prc_Posiciona_Imp;
 
-  //11/11/2019
-  if fDMCadPedido.qParametros_PedIMP_DUPLICATA_PEND.AsString = 'S' then
+  //11/11/2019  
+  {if fDMCadPedido.qParametros_PedIMP_DUPLICATA_PEND.AsString = 'S' then
   begin
     fDMCadPedido.cdsTitulosPend.Close;
     fDMCadPedido.sdsTitulosPend.ParamByName('ID_PESSOA').AsInteger := fDMCadPedido.cdsPedidoImpID_CLIENTE.AsInteger;
     fDMCadPedido.cdsTitulosPend.Open;
-  end;
+  end;}
   //********************
 
   prc_Monta_Impressao(False);
@@ -1653,6 +1653,8 @@ var
   vArq: String;
   vIndice: String;
   vAux: Integer;
+  vSaldo_Ant, vVlr_Recto, vSaldo_Final : Real;
+  sds: TSQLDataSet;
 begin
   vIndice := fDMCadPedido.cdsPedidoImp_Itens.IndexFieldNames;
   fDMCadPedido.vMSGErro := '';
@@ -1666,6 +1668,53 @@ begin
   if fDMCadPedido.cdsParametrosMOSTRAR_EMBALAGEM.AsString = 'S' then
     uCalculo_Pedido.prc_Gravar_mEmbalagem(fDMCadPedido,fDMCadPedido.cdsPedidoImpID.AsInteger);
   fDMCadPedido.cdsPedidoImp_Itens.IndexFieldNames := 'ID;ITEM';
+
+
+  //12/11/2019
+  if fDMCadPedido.qParametros_PedIMP_DUPLICATA_PEND.AsString = 'S' then
+  begin
+    vSaldo_Ant   := 0;
+    vVlr_Recto   := 0;
+    vSaldo_Final := 0;
+
+    sds := TSQLDataSet.Create(nil);
+    try
+      sds.SQLConnection := dmDatabase.scoDados;
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+      sds.CommandText   := 'SELECT sum(d.vlr_restante) vlr_restante, cast(0 as Float) VLR_PAGO '
+                         + 'FROM duplicata D '
+                         + 'WHERE D.vlr_restante > 0 '
+                         + '  and d.ID_PESSOA = :ID_PESSOA '
+                         + '  and coalesce(d.ID_PEDIDO,0) <> :ID_PEDIDO '
+                         + '  UNION ALL '
+                         + 'SELECT cast(0 as Float) VLR_RESTANTE,  sum(H.vlr_pagamento) VLR_PAGO '
+                         + 'FROM duplicata D '
+                         + 'INNER JOIN DUPLICATA_HIST H '
+                         + ' ON D.ID = H.ID '
+                         + 'WHERE H.dthistorico = :DATA '
+                         + '  and d.ID_PESSOA = :ID_PESSOA '
+                         + '  and coalesce(d.ID_PEDIDO,0) <> :ID_PEDIDO ';
+      sds.ParamByName('ID_PESSOA').AsInteger := fDMCadPedido.cdsPedidoImpID_CLIENTE.AsInteger;
+      sds.ParamByName('ID_PEDIDO').AsInteger := fDMCadPedido.cdsPedidoImpID.AsInteger;
+      sds.ParamByName('DATA').AsDate         := fDMCadPedido.cdsPedidoImpDTEMISSAO.AsDateTime;
+      sds.Open;
+      while not sds.Eof do
+      begin
+        vSaldo_Ant := vSaldo_Ant + sds.FieldByName('VLR_RESTANTE').AsFloat;
+        vVlr_Recto := vVlr_Recto + sds.FieldByName('VLR_PAGO').AsFloat;
+        sds.Next;
+      end;
+      vSaldo_Ant := StrToFloat(FormatFloat('0.00',vSaldo_Ant + vVlr_Recto + fDMCadPedido.cdsPedidoImpVLR_TOTAL.AsFloat));
+      vSaldo_Final := StrToFloat(FormatFloat('0.00',vSaldo_Ant - vVlr_Recto));
+      vSaldo_Final := StrToFloat(FormatFloat('0.00',vSaldo_Final * -1));
+
+    finally
+      FreeAndNil(sds);
+    end;
+
+  end;
+  //**************
 
   fDMCadPedido.mImpPed.First;
 
@@ -1696,6 +1745,12 @@ begin
     fDMCadPedido.frxReport1.Variables['ImpCab'] := QuotedStr('S')
   else
     fDMCadPedido.frxReport1.Variables['ImpCab'] := QuotedStr('N');
+  if fDMCadPedido.qParametros_PedIMP_DUPLICATA_PEND.AsString = 'S' then
+  begin
+    fDMCadPedido.frxReport1.Variables['SALDO_ANT']   := QuotedStr(FormatFloat('0.00',vSaldo_Ant));
+    fDMCadPedido.frxReport1.Variables['VLR_RECTO']   := QuotedStr(FormatFloat('0.00',vVlr_Recto));
+    fDMCadPedido.frxReport1.Variables['SALDO_FINAL'] := QuotedStr(FormatFloat('0.00',vSaldo_Final));
+  end;
   fDMCadPedido.frxReport1.ShowReport;
   fDMCadPedido.cdsPedidoImp_Itens.IndexFieldNames := vIndice;
   if trim(fDMCadPedido.vMSGErro) <> '' then
