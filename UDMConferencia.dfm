@@ -374,7 +374,6 @@ object DMConferencia: TDMConferencia
   object sdsConferencia: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    Active = True
     CommandText = 'SELECT *'#13#10'FROM CONFERENCIA'#13#10'WHERE ID = :ID'
     MaxBlobSize = -1
     Params = <
@@ -2122,8 +2121,8 @@ object DMConferencia: TDMConferencia
       ''
       '')
     SQLConnection = dmDatabase.scoDados
-    Left = 633
-    Top = 462
+    Left = 817
+    Top = 72
     object qFuncionarioCODIGO: TIntegerField
       FieldName = 'CODIGO'
       Required = True
