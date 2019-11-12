@@ -110,8 +110,10 @@ begin
   Memo1.Visible := False;
   if vTipo = 'VAL' then
   begin
-    Shape5.Visible := False;
-    Label9.Visible := False;
+    Shape5.Visible  := False;
+    Label9.Visible  := False;
+    Shape11.Visible := fDMCadNotaFiscal.qParametros_PedCONFERENCIA_SIMPLES.AsString = 'S';
+    Label68.Visible := fDMCadNotaFiscal.qParametros_PedCONFERENCIA_SIMPLES.AsString = 'S';
     oDBUtils.SetDataSourceProperties(Self,fDmCadVale);
     SMDBGrid1.DataSource := fDMCadVale.dsPedido;
     SMDBGrid6.DataSource := fDMCadVale.dsPedido_Tipo;
@@ -178,6 +180,8 @@ begin
     Label6.Visible := (fDMCadNotaFiscal.qParametros_EstGERAR_LOTE_AUT.AsString = 'S');
     Shape5.Visible := (fDMCadNotaFiscal.qParametros_NFeUSA_PREFAT.AsString = 'S');
     Label9.Visible := (fDMCadNotaFiscal.qParametros_NFeUSA_PREFAT.AsString = 'S');
+    Shape11.Visible := fDMCadNotaFiscal.qParametros_PedCONFERENCIA_SIMPLES.AsString = 'S';
+    Label68.Visible := fDMCadNotaFiscal.qParametros_PedCONFERENCIA_SIMPLES.AsString = 'S';
   end;
 
   if vTipo <> 'VAL' then
