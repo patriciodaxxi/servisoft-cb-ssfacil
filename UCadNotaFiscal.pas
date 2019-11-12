@@ -2257,6 +2257,8 @@ begin
   ffrmCadNotaFiscal_Itens.vBaseIcms_Cre := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS.AsFloat));
   ffrmCadNotaFiscal_Itens.vVlrIcms_Cre  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS.AsFloat));
 
+  SMDBGrid2.DisableScroll;  //movido para antes de abrir a tela de itens
+
   ffrmCadNotaFiscal_Itens.fDMCadNotaFiscal := fDMCadNotaFiscal;
   if fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_NTE.AsInteger > 0 then
     ffrmCadNotaFiscal_Itens.DBEdit2.ReadOnly := True
@@ -2271,7 +2273,6 @@ begin
 
   FreeAndNil(ffrmCadNotaFiscal_Itens);
 
-  SMDBGrid2.DisableScroll;
   btnCalcular_ValoresClick(Sender);
 
   //30/07/2013
