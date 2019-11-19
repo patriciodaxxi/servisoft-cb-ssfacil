@@ -3090,6 +3090,7 @@ type
     cdsClienteMOSTRAR_AVISO: TStringField;
     qParametros_PedCONFERENCIA_SIMPLES: TStringField;
     cdsPedidoDTCONFERENCIA: TDateField;
+    qParametros_NFeCALC_SIMPLES_CLI: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

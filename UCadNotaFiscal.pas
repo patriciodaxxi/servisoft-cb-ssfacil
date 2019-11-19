@@ -3373,6 +3373,9 @@ begin
   fDMCadNotaFiscal.vMSGNotaFiscal := '';
   fDMCadNotaFiscal.cdsNotaFiscalPERC_ICMSSIMPLES.AsFloat := 0;
   vCalcICMSSimples := True;
+  if fDMCadNotaFiscal.qParametros_NFeCALC_SIMPLES_CLI.AsString ='S' then
+    vCalcICMSSimples := True
+  else
   if (vCalcICMSSimples) and (fDMCadNotaFiscal.cdsClienteID_REGIME_TRIB.AsInteger > 0) and
      (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString = 'S') and (fDMCadNotaFiscal.cdsClientePESSOA.AsString = 'J') then
   begin

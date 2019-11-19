@@ -12892,6 +12892,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeCALC_SIMPLES_CLI: TStringField
+      FieldName = 'CALC_SIMPLES_CLI'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoqueLoteAux: TSQLDataSet
     NoMetadata = True
