@@ -491,11 +491,6 @@ var
   vQtd_Tam: Real;
   vGravaAux: Boolean;
 begin
-  //09/11/2015, alterado para gravar a obs da nota dia 26/01/2017
-  {if ((fDMCadNotaFiscal.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') and
-     ((StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_ADIANTAMENTO.AsFloat)) > 0) or
-      (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_ENTRADA.AsFloat)) > 0))) or
-      ((fDMCadNotaFiscal.cdsParametrosUSA_OBS_PEDIDO_NOTA.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsPedidoOBS_NOTA.AsString) <> '')) then}
   if ((fDMCadNotaFiscal.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') and
      ((StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_ADIANTAMENTO.AsFloat)) > 0) or
       (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_ENTRADA.AsFloat)) > 0))) then
@@ -633,7 +628,10 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM.AsInteger        := vItemAux;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger  := fDMCadNotaFiscal.cdsPedidoID_PRODUTO.AsInteger;
     if fDMCadNotaFiscal.cdsPedidoID_COR.AsInteger > 0 then
+    begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger := fDMCadNotaFiscal.cdsPedidoID_COR.AsInteger;
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_COR_COMBINACAO.AsString := fDMCadNotaFiscal.cdsPedidoNOME_COR.AsString;
+    end;
     if fDMCadNotaFiscal.cdsNotaFiscalTIPO_REG.AsString <> 'RNF' then
     begin
       if (Tag = 95) then
