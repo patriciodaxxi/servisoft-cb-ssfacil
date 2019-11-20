@@ -2543,7 +2543,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
         Top = 229
         Width = 942
         Height = 390
-        ActivePage = RzTabSheet1
+        ActivePage = TabSheet3
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -2551,7 +2551,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 2
         TabOrder = 2
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -5259,8 +5259,8 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
           object Panel5: TPanel
             Left = 0
             Top = 0
-            Width = 930
-            Height = 359
+            Width = 938
+            Height = 367
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -5422,7 +5422,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             object pnlValores: TPanel
               Left = 1
               Top = 1
-              Width = 928
+              Width = 936
               Height = 32
               Align = alTop
               Color = clSilver

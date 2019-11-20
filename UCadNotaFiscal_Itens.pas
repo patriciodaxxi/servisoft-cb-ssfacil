@@ -607,6 +607,9 @@ begin
 
   //21/05/2017  Supercrom
   if (vID_Produto_Ant <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger) and (fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString = 'S') then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsProdutoNOME.AsString
+  else
+  if (fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString) = '') then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsProdutoNOME.AsString;
   //***********
 
@@ -1410,8 +1413,7 @@ begin
           fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_BARRA.AsString := fDMCadNotaFiscal.qProduto_FornCOD_BARRA.AsString;
       end
       else
-      if ((fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString <> 'S') and (trim(fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString) <> 'S'))
-         or (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString) = '') then
+      if ((fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString <> 'S') and (trim(fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString) <> 'S')) then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsProdutoNOME.AsString;
       fDMCadNotaFiscal.qProduto_Forn.Close;
     end
@@ -1422,7 +1424,10 @@ begin
       and (fDMCadNotaFiscal.qParametros_NFeUSA_PROD_NTE.AsString = 'S') then
         vAux := ''
       else
-      if (fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString <> 'S') or (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString) = '') then
+      //19/11/2019
+      if (trim(fDMCadNotaFiscal.qParametros_NFeALTERAR_NOME_PROD.AsString) = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString) <> '') then
+      else
+      if ((fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString <> 'S') or (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString) = '')) then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsProdutoNOME.AsString;
     end;
     //08/07/2014  Quantidade por pacote
