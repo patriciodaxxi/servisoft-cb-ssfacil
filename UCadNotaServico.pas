@@ -723,6 +723,7 @@ begin
       //******************
 
       fDMCadNotaServico.cdsNotaServico.ApplyUpdates(0);
+
     except
       on e: Exception do
         raise Exception.Create('Erro ao gravar o movimento: ' + #13 + e.Message);

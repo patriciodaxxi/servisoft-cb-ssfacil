@@ -2329,7 +2329,7 @@ begin
   if StrToFloat(FormatFloat('0.00',cdsNotaServicoVLR_ENTRADA.AsFloat)) > 0 then
   begin
     vValorParc := StrToCurr(FormatCurr('0.00',cdsNotaServicoVLR_DUPLICATA.AsFloat - cdsNotaServicoVLR_ENTRADA.AsFloat));
-    prc_Gravar_NotaServico_Parc(0,vDataOri,cdsNotaServicoVLR_ENTRADA.AsFloat,cdsClienteMDIA1.AsInteger,cdsClienteMDIA2.AsInteger);
+    prc_Gravar_NotaServico_Parc(1,vDataOri,cdsNotaServicoVLR_ENTRADA.AsFloat,cdsClienteMDIA1.AsInteger,cdsClienteMDIA2.AsInteger);
   end
   else
     vValorParc := StrToFloat(FormatFloat('0.00',cdsNotaServicoVLR_DUPLICATA.AsFloat));
@@ -2347,9 +2347,12 @@ begin
   //if cdsNotaServicoVLR_ENTRADA.AsFloat > 0 then
   //  prc_Gravar_NotaServico_Parc(0,cdsNotaServicoDTINICIO_DUPLICATA.AsDateTime,cdsNotaServicoVLR_ENTRADA.AsFloat);
   //*********************************
+  if StrToFloat(FormatFloat('0.00',cdsNotaServicoVLR_ENTRADA.AsFloat)) > 0 then
+    i := 1
+  else
+    i := 0;
   if cdsCondPgtoTIPO_CONDICAO.AsString = 'F' then
   begin
-    i := 0;
     vQtdParc := cdsCondPgtoQTD_PARCELA.AsInteger;
     vDataAux := vDataOri;
     while vQtdParc > 0 do
@@ -2365,7 +2368,6 @@ begin
   end
   else
   begin
-    i := 0;
     cdsCondPgto_Dia.First;
     while not cdsCondPgto_Dia.Eof do
     begin
