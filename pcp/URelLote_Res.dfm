@@ -1793,7 +1793,7 @@ object fRelLote_Res: TfRelLote_Res
           ParentFont = False
         end
         object RLLabel15: TRLLabel
-          Left = 272
+          Left = 248
           Top = 5
           Width = 62
           Height = 16
@@ -1809,7 +1809,7 @@ object fRelLote_Res: TfRelLote_Res
           Transparent = False
         end
         object RLLabel5: TRLLabel
-          Left = 200
+          Left = 176
           Top = 24
           Width = 134
           Height = 16
@@ -1825,28 +1825,51 @@ object fRelLote_Res: TfRelLote_Res
           Transparent = False
         end
         object RLLabel3: TRLLabel
-          Left = 585
+          Left = 561
           Top = 5
           Width = 74
           Height = 16
           Caption = 'Dt. Entrega:'
         end
         object rlCarimbo: TRLLabel
-          Left = 337
+          Left = 313
           Top = 5
           Width = 59
           Height = 16
         end
         object rlOrdemProducao: TRLLabel
-          Left = 339
+          Left = 315
           Top = 24
           Width = 105
           Height = 16
         end
         object rlDataEntrega: TRLLabel
-          Left = 662
+          Left = 638
           Top = 5
           Width = 83
+          Height = 16
+        end
+        object RLLabel13: TRLLabel
+          Left = 590
+          Top = 24
+          Width = 45
+          Height = 16
+          Alignment = taRightJustify
+          Caption = 'N'#186' OC:'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+        end
+        object rlOC: TRLLabel
+          Left = 638
+          Top = 24
+          Width = 30
           Height = 16
         end
       end

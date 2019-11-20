@@ -191,6 +191,8 @@ type
     rlCarimbo: TRLLabel;
     rlOrdemProducao: TRLLabel;
     rlDataEntrega: TRLLabel;
+    RLLabel13: TRLLabel;
+    rlOC: TRLLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure RLBand1BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -238,9 +240,10 @@ procedure TfRelLote_Res.RLReport1BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 begin
   oDBUtils.SetDataSourceProperties(Self, fDMCadLote);
-  rlCarimbo.Caption := fDMCadLote.mLoteCarimbo.AsString;
+  rlCarimbo.Caption     := fDMCadLote.mLoteCarimbo.AsString;
   rlOrdemProducao.Caption := fDMCadLote.mLoteNum_Ordem.AsString;
   rlDataEntrega.Caption := fDMCadLote.mLoteDtEntrega.AsString;
+  rlOC.Caption          := fDMCadLote.mLotePedido_Cliente.AsString;
 end;
 
 procedure TfRelLote_Res.RLBand1BeforePrint(Sender: TObject;
