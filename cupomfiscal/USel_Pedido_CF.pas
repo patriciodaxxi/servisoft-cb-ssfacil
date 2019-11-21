@@ -388,7 +388,9 @@ end;
 
 procedure TfrmSel_Pedido_CF.btnPesquisarClick(Sender: TObject);
 begin
+  SMDBGrid1.DisableScroll;
   prc_Consultar_Pedido;
+  SMDBGrid1.EnableScroll;
 end;
 
 procedure TfrmSel_Pedido_CF.btnImportarClick(Sender: TObject);
