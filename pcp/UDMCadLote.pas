@@ -997,11 +997,12 @@ begin
     mLoteNome_Filial.AsString     := cdsConsulta_LoteNOME_FILIAL.AsString;
     mLoteDtEmissao.AsDateTime     := cdsConsulta_LoteDTEMISSAO.AsDateTime;
     mLoteID_Forma.AsInteger       := cdsConsulta_LoteID_FORMA.AsInteger;
+    mLotePedido_Cliente.AsString  := cdsConsulta_LotePEDIDO_CLIENTE.AsString;
     mLoteNome_Forma.AsString      := cdsConsulta_LoteNOME_FORMA.AsString;
     if trim(cdsConsulta_LoteUNIDADE_TALAO.AsString) <> '' then
-      mLoteUnidade.AsString        := cdsConsulta_LoteUNIDADE_TALAO.AsString
+      mLoteUnidade.AsString := cdsConsulta_LoteUNIDADE_TALAO.AsString
     else
-      mLoteUnidade.AsString        := cdsConsulta_LoteUNIDADE.AsString;
+      mLoteUnidade.AsString := cdsConsulta_LoteUNIDADE.AsString;
     mLoteTamanho.AsString        := cdsConsulta_LoteTAMANHO.AsString;
     mLoteCarimbo.AsString        := cdsConsulta_LoteCARIMBO.AsString;
     mLoteID_Grade.AsInteger      := cdsConsulta_LoteID_GRADE.AsInteger;

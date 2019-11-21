@@ -669,26 +669,26 @@ object DMCadLote: TDMCadLote
     GetMetadata = False
     CommandText = 
       'SELECT L.dtemissao, L.num_lote, L.filial, L.hremissao, L.DTENTRE' +
-      'GA,'#13#10'L.qtd_taloes, L.NUM_ORDEM, L.CARIMBO, L.TALAO_AUX_GERADO,'#13#10 +
-      'T.id, T.num_talao, T.id, T.id_produto, T.tamanho, T.qtd, T.qtd_p' +
-      'endente, T.qtd_produzido,'#13#10'T.dtbaixa, T.hrbaixa, T.impresso, T.i' +
-      'd_combinacao, T.dtentrada,'#13#10'T.hrentrada, T.item_pedido, T.id_ped' +
-      'ido, PRO.REFERENCIA, PRO.UNIDADE, FIL.NOME NOME_FILIAL, PRO.ID_G' +
-      'RADE,'#13#10'PCP.acabamento, PCP.cor_acabamento, PCP.id_tipo_matriz, T' +
-      'M.NOME NOME_TIPOMATRIZ,'#13#10'COMB.nome NOME_COMBINACAO, L.NOME NOME_' +
-      'LOTE, PR.NOME NOME_PROCESSO, L.TIPO_LOTE,'#13#10'L.num_pedido, PED.ped' +
-      'ido_cliente, CLI.nome NOME_CLIENTE, PRO.id_cor ID_COR_PROD, T.un' +
-      'idade UNIDADE_TALAO, t.id_processo,'#13#10'PRO.id_forma, FORMA.NOME NO' +
-      'ME_FORMA, L.OBS OBS_LOTE,'#13#10'CASE'#13#10'  WHEN L.nome_produto IS NULL T' +
-      'HEN PRO.NOME'#13#10'  ELSE L.nome_produto'#13#10'  END NOME_PRODUTO'#13#10'FROM LO' +
-      'TE L'#13#10'INNER JOIN TALAO T'#13#10'ON L.ID = T.ID'#13#10'INNER JOIN FILIAL FIL'#13 +
-      #10'ON L.FILIAL = FIL.ID'#13#10'LEFT JOIN PRODUTO PRO'#13#10'ON T.ID_PRODUTO = ' +
-      'PRO.ID'#13#10'LEFT JOIN PRODUTO_PCP PCP'#13#10'ON T.ID_PRODUTO = PCP.ID'#13#10'LEF' +
-      'T JOIN TIPO_MATRIZ TM'#13#10'ON PCP.ID_TIPO_MATRIZ = TM.ID'#13#10'LEFT JOIN ' +
-      'combinacao COMB'#13#10'ON L.id_combinacao = COMB.id'#13#10'LEFT JOIN PROCESS' +
-      'O PR'#13#10'ON T.id_processo = PR.ID'#13#10'LEFT JOIN pedido PED'#13#10'ON L.id_pe' +
-      'dido = PED.ID'#13#10'LEFT JOIN PESSOA CLI'#13#10'ON PED.id_cliente = CLI.cod' +
-      'igo'#13#10'LEFT JOIN PRODUTO FORMA'#13#10'ON PRO.id_forma = FORMA.ID'#13#10
+      'GA, L.qtd_taloes, L.NUM_ORDEM, L.CARIMBO, L.TALAO_AUX_GERADO,'#13#10'T' +
+      '.id, T.num_talao, T.id, T.id_produto, T.tamanho, T.qtd, T.qtd_pe' +
+      'ndente, T.qtd_produzido,'#13#10'T.dtbaixa, T.hrbaixa, T.impresso, T.id' +
+      '_combinacao, T.dtentrada,'#13#10'T.hrentrada, T.item_pedido, T.id_pedi' +
+      'do, PRO.REFERENCIA, PRO.UNIDADE, FIL.NOME NOME_FILIAL, PRO.ID_GR' +
+      'ADE,'#13#10'PCP.acabamento, PCP.cor_acabamento, PCP.id_tipo_matriz, TM' +
+      '.NOME NOME_TIPOMATRIZ,'#13#10'COMB.nome NOME_COMBINACAO, L.NOME NOME_L' +
+      'OTE, PR.NOME NOME_PROCESSO, L.TIPO_LOTE,'#13#10'L.num_pedido, PED.pedi' +
+      'do_cliente, CLI.nome NOME_CLIENTE, PRO.id_cor ID_COR_PROD, T.uni' +
+      'dade UNIDADE_TALAO, t.id_processo,'#13#10'PRO.id_forma, FORMA.NOME NOM' +
+      'E_FORMA, L.OBS OBS_LOTE,'#13#10'CASE'#13#10'  WHEN L.nome_produto IS NULL TH' +
+      'EN PRO.NOME'#13#10'  ELSE L.nome_produto'#13#10'  END NOME_PRODUTO'#13#10'FROM LOT' +
+      'E L'#13#10'INNER JOIN TALAO T ON L.ID = T.ID'#13#10'INNER JOIN FILIAL FIL ON' +
+      ' L.FILIAL = FIL.ID'#13#10'LEFT JOIN PRODUTO PRO ON T.ID_PRODUTO = PRO.' +
+      'ID'#13#10'LEFT JOIN PRODUTO_PCP PCP ON T.ID_PRODUTO = PCP.ID'#13#10'LEFT JOI' +
+      'N TIPO_MATRIZ TM ON PCP.ID_TIPO_MATRIZ = TM.ID'#13#10'LEFT JOIN combin' +
+      'acao COMB ON L.id_combinacao = COMB.id'#13#10'LEFT JOIN PROCESSO PR ON' +
+      ' T.id_processo = PR.ID'#13#10'LEFT JOIN pedido PED ON L.id_pedido = PE' +
+      'D.ID'#13#10'LEFT JOIN PESSOA CLI ON PED.id_cliente = CLI.codigo'#13#10'LEFT ' +
+      'JOIN PRODUTO FORMA ON PRO.id_forma = FORMA.ID'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
