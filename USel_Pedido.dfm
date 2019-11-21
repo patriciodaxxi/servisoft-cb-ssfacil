@@ -623,7 +623,7 @@ object frmSel_Pedido: TfrmSel_Pedido
       ParentFont = False
     end
     object btnImportar: TNxButton
-      Left = 4
+      Left = 5
       Top = 3
       Width = 214
       Height = 30
