@@ -1182,7 +1182,7 @@ begin
     vDataOri := fDMCadPedido.cdsPedidoDTINICIO_DUPLICATA.AsDateTime;
 
   if fDMCadPedido.cdsCondPgtoTIPO.AsString = 'V' then
-    vQtdParc := 1
+    vQtdParc := 0
   else
   if fDMCadPedido.cdsCondPgtoTIPO_CONDICAO.AsString = 'F' then
     vQtdParc := fDMCadPedido.cdsCondPgtoQTD_PARCELA.AsInteger
@@ -1216,7 +1216,7 @@ begin
   if (fDMCadPedido.cdsCondPgtoTIPO_CONDICAO.AsString = 'F') or (fDMCadPedido.cdsCondPgtoTIPO.AsString = 'V') then
   begin
     if (fDMCadPedido.cdsCondPgtoTIPO.AsString = 'V') then
-      vQtdParc := 1
+      vQtdParc := 0
     else
       vQtdParc := fDMCadPedido.cdsCondPgtoQTD_PARCELA.AsInteger;
     vDataAux := vDataOri;
