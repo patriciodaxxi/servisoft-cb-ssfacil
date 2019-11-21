@@ -5060,6 +5060,11 @@ object DMNFe: TDMNFe
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeIMP_CONDPGTO_DADOS: TStringField
+      FieldName = 'IMP_CONDPGTO_DADOS'
+      FixedChar = True
+      Size = 1
+    end
   end
   object Decoder64: TIdDecoderMIME
     FillChar = '='

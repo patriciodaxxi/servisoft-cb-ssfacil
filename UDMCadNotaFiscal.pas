@@ -3091,6 +3091,7 @@ type
     qParametros_PedCONFERENCIA_SIMPLES: TStringField;
     cdsPedidoDTCONFERENCIA: TDateField;
     qParametros_NFeCALC_SIMPLES_CLI: TStringField;
+    qParametros_NFeIMP_CONDPGTO_DADOS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

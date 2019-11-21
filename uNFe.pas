@@ -3879,12 +3879,25 @@ begin
   if (fDMNFe.qParametros_NFeIMP_USUARIO.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscalUSUARIO.AsString) <> '') then
     Grava_DadosAdicionaisNFe('(Usuario: ' + fDMCadNotaFiscal.cdsNotaFiscalUSUARIO.AsString + ')',0);
 
-  //26/10/218
+  //26/10/2018
   if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI_DEVOL.AsFloat)) > 0 then
   begin
     Grava_DadosAdicionaisNFe('(Vlr. IPI Devolvido: R$ ' + FormatFloat('###,###,##0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI_DEVOL.AsFloat)
                             + '  Base.IPI: ' + FormatFloat('###,###,##0.00',fDMCadNotaFiscal.cdsNotaFiscalBASE_IPI.AsFloat) +  ')',0);
   end;
+
+  //20/11/2019
+  if (fDMNFe.qParametros_NFeIMP_CONDPGTO_DADOS.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscalID_CONDPGTO.AsInteger > 0) then
+  begin
+    vTexto2 := '';
+    fDMCadNotaFiscal.cdsCondPgto.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscalID_CONDPGTO.AsInteger,[loCaseInsensitive]);
+    if fDMCadNotaFiscal.cdsCondPgtoTIPO.AsString = 'P' then
+      vTexto2 := '(A Prazo: ' + fDMCadNotaFiscal.cdsCondPgtoNOME.AsString + ')'
+    else
+      vTexto2 := '(A Vista)';
+    Grava_DadosAdicionaisNFe(vTexto2,0);
+  end;
+  //**********************
 end;
 
 procedure TfNFe.Monta_mItensNFe;
