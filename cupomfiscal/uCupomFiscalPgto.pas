@@ -1195,6 +1195,8 @@ begin
   frmSel_Pessoa.ShowModal;
   ceCodCliente.AsInteger := vCodPessoa_Pos;
   ceCodClienteExit(Sender);
+
+  RzPageControl1.ActivePageIndex := 0;
   DBEdit8.SetFocus;
 
   fDmCupomFiscal.cdsCupomFiscalCLIENTE_NOME.AsString := Trim(fDmCupomFiscal.cdsPessoaNOME.AsString);
