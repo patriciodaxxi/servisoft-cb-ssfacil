@@ -199,6 +199,11 @@ type
     DBEdit68: TDBEdit;
     Label84: TLabel;
     RxDBLookupCombo4: TRxDBLookupCombo;
+    RzGroupBox6: TRzGroupBox;
+    Label85: TLabel;
+    Label86: TLabel;
+    DBEdit69: TDBEdit;
+    DBEdit70: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -225,6 +230,7 @@ type
     vVlr_Nota: Real;
     vVlr_ICMS_FCP, vVlr_ICMS_UF_Dest, vVlr_ICMS_UF_Remet: Real;
     vBase_ICMS_FCP : Real;
+    vVlr_ICMSSimples, vBase_ICMSSimples : Real;
     vVlr_Duplicata_Ant: Real;
     vVlr_Outros_Ant : Real;
     vVlr_AFRMM : Real;
@@ -300,6 +306,11 @@ begin
   vVlr_FCP_Dest      := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat;
   vBase_FCP_Dest     := fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat;
 
+  //21/11/2019
+  vVlr_ICMSSimples   := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSIMPLES.AsFloat;
+  vBase_ICMSSimples  := fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSIMPLES.AsFloat;
+  //*******************
+
   //26/02/2019
   vBase_ST_Ret_Ant   := fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat;
   vVlr_ST_Ret_Ant    := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat;
@@ -368,6 +379,11 @@ begin
 
   fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_FCP_DEST.AsFloat  := (fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMS_FCP_DEST.AsFloat - vVlr_FCP_Dest) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat;
   fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat := (fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat - vBase_FCP_Dest) + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat;
+
+  //21/11/2019
+  fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSIMPLES.AsFloat  := (fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSIMPLES.AsFloat - vVlr_ICMSSimples) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSIMPLES.AsFloat;
+  fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSIMPLES.AsFloat := (fDMCadNotaFiscal.cdsNotaFiscalBASE_ICMSSIMPLES.AsFloat - vBase_ICMSSimples) + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSIMPLES.AsFloat;
+  //***************
 
   vOutrasDespesasAux := fDMCadNotaFiscal.cdsNotaFiscalVLR_TAXACISCOMEX.AsFloat
                       + fDMCadNotaFiscal.cdsNotaFiscalVLR_OUTROS.AsFloat + fDMCadNotaFiscal.cdsNotaFiscalVLR_ADUANEIRA.AsFloat;
