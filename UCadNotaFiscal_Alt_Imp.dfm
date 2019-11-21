@@ -1,6 +1,6 @@
 object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
-  Left = 207
-  Top = 11
+  Left = 123
+  Top = 1
   Width = 1035
   Height = 717
   Caption = 'Altera'#231#227'o do item (Importa'#231#227'o)'
@@ -506,7 +506,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object Label75: TLabel
           Left = 809
-          Top = 195
+          Top = 219
           Width = 85
           Height = 13
           Alignment = taRightJustify
@@ -514,7 +514,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object Label76: TLabel
           Left = 828
-          Top = 172
+          Top = 196
           Width = 66
           Height = 13
           Alignment = taRightJustify
@@ -1677,7 +1677,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object DBEdit60: TDBEdit
           Left = 897
-          Top = 187
+          Top = 211
           Width = 115
           Height = 21
           Color = clWhite
@@ -1687,7 +1687,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
         end
         object DBEdit61: TDBEdit
           Left = 897
-          Top = 164
+          Top = 188
           Width = 115
           Height = 21
           Color = clWhite
@@ -1860,6 +1860,69 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           LookupDisplay = 'NOME'
           LookupSource = DMCadNotaFiscal.dsObs_Lei
           TabOrder = 60
+        end
+        object RzGroupBox6: TRzGroupBox
+          Left = 825
+          Top = 115
+          Width = 169
+          Height = 62
+          BorderColor = clNavy
+          BorderInner = fsButtonUp
+          BorderOuter = fsBump
+          Caption = ' ICMS Simples '
+          Color = clMoneyGreen
+          Ctl3D = True
+          FlatColor = clNavy
+          FlatColorAdjustment = 2
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          TabOrder = 61
+          VisualStyle = vsGradient
+          object Label85: TLabel
+            Left = 37
+            Top = 25
+            Width = 27
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Base:'
+          end
+          object Label86: TLabel
+            Left = 37
+            Top = 43
+            Width = 27
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Valor:'
+          end
+          object DBEdit69: TDBEdit
+            Left = 65
+            Top = 17
+            Width = 74
+            Height = 19
+            Color = clWhite
+            Ctl3D = False
+            DataField = 'BASE_ICMSSIMPLES'
+            DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+            ParentCtl3D = False
+            TabOrder = 0
+          end
+          object DBEdit70: TDBEdit
+            Left = 65
+            Top = 35
+            Width = 74
+            Height = 19
+            Color = clWhite
+            Ctl3D = False
+            DataField = 'VLR_ICMSSIMPLES'
+            DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+            ParentCtl3D = False
+            TabOrder = 1
+          end
         end
       end
     end

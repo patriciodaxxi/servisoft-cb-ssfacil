@@ -587,7 +587,11 @@ begin
   vPerc_BRedICMS_NCM := 0;
 
   if not fDMCadNotaFiscal.cdsCFOP.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger,[loCaseInsensitive]) then
+  begin
+    //21/11/2019 a Mensagem foi colocada nesta data
+    MessageDlg('*** (prc_Move_Dados_Itens) ID CFOP  ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsString + ', não encontrado! ' + #13 + '    Favor Verificar!' , mtError, [mbOk], 0);
     exit;
+  end;
   if fDMCadNotaFiscal.vID_Variacao > 0 then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger := fDMCadNotaFiscal.vID_Variacao;
   if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger > 0 then
@@ -596,7 +600,11 @@ begin
 
   fDMCadNotaFiscal.vID_Variacao := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger;
   if not fDMCadNotaFiscal.cdsProduto.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]) then
+  begin
+    //21/11/2019 a Mensagem foi colocada nesta data
+    MessageDlg('*** (prc_Move_Dados_Itens) ID Produto  ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsString + ', não encontrado! ' + #13 + '    Favor Verificar!' , mtError, [mbOk], 0);
     exit;
+  end;
   DBEdit24.Visible := False;
   Label45.Visible  := False;
 
