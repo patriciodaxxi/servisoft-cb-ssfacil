@@ -191,7 +191,6 @@ type
     rlCarimbo: TRLLabel;
     rlOrdemProducao: TRLLabel;
     rlDataEntrega: TRLLabel;
-    RLLabel13: TRLLabel;
     rlOC: TRLLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
@@ -340,6 +339,8 @@ begin
     prc_Gravar_Material_Acumulado(vAux,fDMCadLote.cdsProduto_ConsumoQTD_CONSUMO.AsFloat);
     fDMCadLote.cdsProduto_Consumo.Next;
   end;
+
+  rlOC.Caption := fDMCadLote.fnc_Buscar_NumPedido(fDMCadLote.mLoteID_Lote.AsInteger);
 end;
 
 procedure TfRelLote_Res.RLBand3BeforePrint(Sender: TObject;

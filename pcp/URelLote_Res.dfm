@@ -818,7 +818,7 @@ object fRelLote_Res: TfRelLote_Res
           Left = 0
           Top = 0
           Width = 742
-          Height = 221
+          Height = 229
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -866,7 +866,7 @@ object fRelLote_Res: TfRelLote_Res
           object RLDBMemo1: TRLDBMemo
             Left = 207
             Top = 5
-            Width = 453
+            Width = 338
             Height = 15
             Behavior = [beSiteExpander]
             DataField = 'Nome_Produto'
@@ -904,13 +904,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldtam1: TRLDraw
             Left = 8
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho1: TRLLabel
             Left = 12
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -924,7 +924,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd1: TRLDraw
             Left = 8
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -935,7 +935,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd1: TRLLabel
             Left = 12
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -949,13 +949,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldtam2: TRLDraw
             Left = 68
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho2: TRLLabel
             Left = 72
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -969,7 +969,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd2: TRLDraw
             Left = 68
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -980,7 +980,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd2: TRLLabel
             Left = 72
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -994,13 +994,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldtam3: TRLDraw
             Left = 128
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho3: TRLLabel
             Left = 132
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1014,7 +1014,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd3: TRLDraw
             Left = 128
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1025,7 +1025,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd3: TRLLabel
             Left = 132
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1039,13 +1039,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldtam4: TRLDraw
             Left = 188
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho4: TRLLabel
             Left = 192
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1059,7 +1059,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd4: TRLDraw
             Left = 188
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1070,7 +1070,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd4: TRLLabel
             Left = 192
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1084,13 +1084,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldtam5: TRLDraw
             Left = 248
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho5: TRLLabel
             Left = 252
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1104,7 +1104,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd5: TRLDraw
             Left = 248
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1115,7 +1115,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd5: TRLLabel
             Left = 252
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1129,13 +1129,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldtam6: TRLDraw
             Left = 308
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho6: TRLLabel
             Left = 312
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1149,7 +1149,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd6: TRLDraw
             Left = 308
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1160,7 +1160,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd6: TRLLabel
             Left = 312
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1174,13 +1174,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldTam7: TRLDraw
             Left = 368
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho7: TRLLabel
             Left = 372
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1194,7 +1194,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd7: TRLDraw
             Left = 368
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1205,7 +1205,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd7: TRLLabel
             Left = 372
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1219,13 +1219,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldTam8: TRLDraw
             Left = 428
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho8: TRLLabel
             Left = 432
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1239,7 +1239,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd8: TRLDraw
             Left = 428
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1250,7 +1250,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd8: TRLLabel
             Left = 432
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1264,13 +1264,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldTam9: TRLDraw
             Left = 488
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho9: TRLLabel
             Left = 492
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1284,7 +1284,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd9: TRLDraw
             Left = 488
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1295,7 +1295,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd9: TRLLabel
             Left = 492
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1309,13 +1309,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldTam10: TRLDraw
             Left = 548
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho10: TRLLabel
             Left = 552
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1329,7 +1329,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd10: TRLDraw
             Left = 548
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1340,7 +1340,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd10: TRLLabel
             Left = 552
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1354,13 +1354,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldTam11: TRLDraw
             Left = 608
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho11: TRLLabel
             Left = 612
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1374,7 +1374,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd11: TRLDraw
             Left = 608
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1385,7 +1385,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd11: TRLLabel
             Left = 612
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1399,13 +1399,13 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldTam12: TRLDraw
             Left = 668
-            Top = 21
+            Top = 26
             Width = 61
             Height = 29
           end
           object Tamanho12: TRLLabel
             Left = 672
-            Top = 27
+            Top = 32
             Width = 54
             Height = 16
             Alignment = taCenter
@@ -1419,7 +1419,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object rldQtd12: TRLDraw
             Left = 668
-            Top = 49
+            Top = 54
             Width = 61
             Height = 36
             Font.Charset = DEFAULT_CHARSET
@@ -1430,7 +1430,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Qtd12: TRLLabel
             Left = 672
-            Top = 58
+            Top = 63
             Width = 54
             Height = 23
             Alignment = taCenter
@@ -1444,21 +1444,21 @@ object fRelLote_Res: TfRelLote_Res
           end
           object RLLabel11: TRLLabel
             Left = 246
-            Top = 86
+            Top = 91
             Width = 40
             Height = 14
             Caption = 'Material'
           end
           object RLLabel12: TRLLabel
             Left = 690
-            Top = 86
+            Top = 91
             Width = 48
             Height = 14
             Caption = 'Consumo'
           end
           object RLLabel16: TRLLabel
             Left = 69
-            Top = 85
+            Top = 90
             Width = 41
             Height = 14
             Caption = 'Posi'#231#227'o'
@@ -1466,7 +1466,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object RLDraw10: TRLDraw
             Left = 70
-            Top = 100
+            Top = 105
             Width = 668
             Height = 2
             DrawKind = dkLine
@@ -1474,7 +1474,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Pos1: TRLLabel
             Left = 71
-            Top = 101
+            Top = 106
             Width = 170
             Height = 14
             AutoSize = False
@@ -1482,7 +1482,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Mat1: TRLLabel
             Left = 245
-            Top = 101
+            Top = 106
             Width = 170
             Height = 14
             AutoSize = False
@@ -1490,14 +1490,14 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Cor1: TRLMemo
             Left = 418
-            Top = 101
+            Top = 106
             Width = 253
             Height = 14
             Behavior = [beSiteExpander]
           end
           object Consumo1: TRLLabel
             Left = 673
-            Top = 101
+            Top = 106
             Width = 65
             Height = 14
             Alignment = taRightJustify
@@ -1506,7 +1506,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Pos2: TRLLabel
             Left = 71
-            Top = 116
+            Top = 121
             Width = 170
             Height = 14
             AutoSize = False
@@ -1514,7 +1514,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Mat2: TRLLabel
             Left = 245
-            Top = 116
+            Top = 121
             Width = 170
             Height = 14
             AutoSize = False
@@ -1522,14 +1522,14 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Cor2: TRLMemo
             Left = 418
-            Top = 116
+            Top = 121
             Width = 253
             Height = 14
             Behavior = [beSiteExpander]
           end
           object Consumo2: TRLLabel
             Left = 673
-            Top = 116
+            Top = 121
             Width = 65
             Height = 14
             Alignment = taRightJustify
@@ -1538,7 +1538,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Pos3: TRLLabel
             Left = 71
-            Top = 131
+            Top = 136
             Width = 170
             Height = 14
             AutoSize = False
@@ -1546,7 +1546,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Mat3: TRLLabel
             Left = 245
-            Top = 131
+            Top = 136
             Width = 170
             Height = 14
             AutoSize = False
@@ -1554,14 +1554,14 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Cor3: TRLMemo
             Left = 418
-            Top = 131
+            Top = 136
             Width = 253
             Height = 14
             Behavior = [beSiteExpander]
           end
           object Consumo3: TRLLabel
             Left = 673
-            Top = 131
+            Top = 136
             Width = 65
             Height = 14
             Alignment = taRightJustify
@@ -1570,7 +1570,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Pos4: TRLLabel
             Left = 71
-            Top = 146
+            Top = 151
             Width = 170
             Height = 14
             AutoSize = False
@@ -1578,7 +1578,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Mat4: TRLLabel
             Left = 245
-            Top = 146
+            Top = 151
             Width = 170
             Height = 14
             AutoSize = False
@@ -1586,14 +1586,14 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Cor4: TRLMemo
             Left = 418
-            Top = 146
+            Top = 151
             Width = 253
             Height = 14
             Behavior = [beSiteExpander]
           end
           object Consumo4: TRLLabel
             Left = 673
-            Top = 146
+            Top = 151
             Width = 65
             Height = 14
             Alignment = taRightJustify
@@ -1602,7 +1602,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Pos5: TRLLabel
             Left = 71
-            Top = 161
+            Top = 166
             Width = 170
             Height = 14
             AutoSize = False
@@ -1610,7 +1610,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Mat5: TRLLabel
             Left = 245
-            Top = 161
+            Top = 166
             Width = 170
             Height = 14
             AutoSize = False
@@ -1618,14 +1618,14 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Cor5: TRLMemo
             Left = 418
-            Top = 161
+            Top = 166
             Width = 253
             Height = 14
             Behavior = [beSiteExpander]
           end
           object Consumo5: TRLLabel
             Left = 673
-            Top = 161
+            Top = 166
             Width = 65
             Height = 14
             Alignment = taRightJustify
@@ -1634,7 +1634,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Pos6: TRLLabel
             Left = 71
-            Top = 176
+            Top = 181
             Width = 170
             Height = 14
             AutoSize = False
@@ -1642,7 +1642,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Mat6: TRLLabel
             Left = 245
-            Top = 176
+            Top = 181
             Width = 170
             Height = 14
             AutoSize = False
@@ -1650,14 +1650,14 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Cor6: TRLMemo
             Left = 418
-            Top = 176
+            Top = 181
             Width = 253
             Height = 14
             Behavior = [beSiteExpander]
           end
           object Consumo6: TRLLabel
             Left = 673
-            Top = 176
+            Top = 181
             Width = 65
             Height = 14
             Alignment = taRightJustify
@@ -1666,7 +1666,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Pos7: TRLLabel
             Left = 71
-            Top = 191
+            Top = 196
             Width = 170
             Height = 14
             AutoSize = False
@@ -1674,7 +1674,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Mat7: TRLLabel
             Left = 245
-            Top = 191
+            Top = 196
             Width = 170
             Height = 14
             AutoSize = False
@@ -1682,14 +1682,14 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Cor7: TRLMemo
             Left = 418
-            Top = 191
+            Top = 196
             Width = 253
             Height = 14
             Behavior = [beSiteExpander]
           end
           object Consumo7: TRLLabel
             Left = 673
-            Top = 191
+            Top = 196
             Width = 65
             Height = 14
             Alignment = taRightJustify
@@ -1698,7 +1698,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Pos8: TRLLabel
             Left = 71
-            Top = 205
+            Top = 210
             Width = 170
             Height = 14
             AutoSize = False
@@ -1706,7 +1706,7 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Mat8: TRLLabel
             Left = 245
-            Top = 205
+            Top = 210
             Width = 170
             Height = 14
             AutoSize = False
@@ -1714,24 +1714,30 @@ object fRelLote_Res: TfRelLote_Res
           end
           object Cor8: TRLMemo
             Left = 418
-            Top = 205
+            Top = 210
             Width = 253
             Height = 14
             Behavior = [beSiteExpander]
           end
           object Consumo8: TRLLabel
             Left = 673
-            Top = 205
+            Top = 210
             Width = 65
             Height = 14
             Alignment = taRightJustify
             AutoSize = False
             Visible = False
           end
+          object rlOC: TRLLabel
+            Left = 547
+            Top = 5
+            Width = 145
+            Height = 16
+          end
         end
         object RLBand10: TRLBand
           Left = 0
-          Top = 221
+          Top = 229
           Width = 742
           Height = 24
           BandType = btFooter
@@ -1777,6 +1783,7 @@ object fRelLote_Res: TfRelLote_Res
         Width = 742
         Height = 57
         BandType = btHeader
+        BeforePrint = RLBand3BeforePrint
         object RLDBText1: TRLDBText
           Left = 0
           Top = 7
@@ -1825,7 +1832,7 @@ object fRelLote_Res: TfRelLote_Res
           Transparent = False
         end
         object RLLabel3: TRLLabel
-          Left = 561
+          Left = 580
           Top = 5
           Width = 74
           Height = 16
@@ -1844,32 +1851,9 @@ object fRelLote_Res: TfRelLote_Res
           Height = 16
         end
         object rlDataEntrega: TRLLabel
-          Left = 638
+          Left = 657
           Top = 5
           Width = 83
-          Height = 16
-        end
-        object RLLabel13: TRLLabel
-          Left = 590
-          Top = 24
-          Width = 45
-          Height = 16
-          Alignment = taRightJustify
-          Caption = 'N'#186' OC:'
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-        end
-        object rlOC: TRLLabel
-          Left = 638
-          Top = 24
-          Width = 30
           Height = 16
         end
       end
