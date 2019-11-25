@@ -23,8 +23,8 @@ object frmCadSetor: TfrmCadSetor
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 841
-    Height = 531
+    Width = 849
+    Height = 539
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -42,8 +42,8 @@ object frmCadSetor: TfrmCadSetor
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 837
-        Height = 424
+        Width = 845
+        Height = 432
         Align = alClient
         Ctl3D = False
         DataSource = DmCadSetor.dsConsulta
@@ -126,7 +126,6 @@ object frmCadSetor: TfrmCadSetor
             FieldName = 'ORDEM_ORC'
             Title.Alignment = taCenter
             Title.Caption = 'Ordem Consulta'
-            Width = 64
             Visible = True
           end
           item
@@ -142,7 +141,7 @@ object frmCadSetor: TfrmCadSetor
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 837
+        Width = 845
         Height = 32
         Align = alTop
         Color = clSilver
@@ -370,8 +369,8 @@ object frmCadSetor: TfrmCadSetor
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 491
-        Width = 837
+        Top = 499
+        Width = 845
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -387,7 +386,7 @@ object frmCadSetor: TfrmCadSetor
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 837
+        Width = 845
         Height = 35
         Align = alTop
         Color = clSilver
@@ -487,7 +486,7 @@ object frmCadSetor: TfrmCadSetor
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 837
+        Width = 845
         Height = 35
         Align = alTop
         Color = 8404992
@@ -713,8 +712,8 @@ object frmCadSetor: TfrmCadSetor
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 837
-        Height = 244
+        Width = 845
+        Height = 252
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -804,7 +803,7 @@ object frmCadSetor: TfrmCadSetor
         object RzGroupBox1: TRzGroupBox
           Left = 126
           Top = 176
-          Width = 451
+          Width = 375
           Height = 59
           BorderColor = clNavy
           BorderInner = fsButtonUp
@@ -823,8 +822,8 @@ object frmCadSetor: TfrmCadSetor
           TabOrder = 11
           VisualStyle = vsGradient
           object Label5: TLabel
-            Left = 307
-            Top = 40
+            Left = 257
+            Top = 37
             Width = 50
             Height = 13
             Caption = 'Qtd.Limite:'
@@ -855,8 +854,8 @@ object frmCadSetor: TfrmCadSetor
             OnClick = DBCheckBox3Click
           end
           object DBEdit4: TDBEdit
-            Left = 360
-            Top = 32
+            Left = 310
+            Top = 29
             Width = 57
             Height = 21
             DataField = 'QTD_LIMITE_POR_TALAO'
@@ -924,8 +923,8 @@ object frmCadSetor: TfrmCadSetor
           ValueUnchecked = 'N'
         end
         object DBCheckBox7: TDBCheckBox
-          Left = 512
-          Top = 96
+          Left = 552
+          Top = 95
           Width = 185
           Height = 17
           Caption = 'Encerra a Produ'#231#227'o'
@@ -936,8 +935,8 @@ object frmCadSetor: TfrmCadSetor
           ValueUnchecked = 'N'
         end
         object DBCheckBox8: TDBCheckBox
-          Left = 512
-          Top = 112
+          Left = 552
+          Top = 111
           Width = 249
           Height = 17
           Caption = 'Ler Somente um vez o C'#243'd.Barra (Entrada/Saida)'
@@ -997,11 +996,58 @@ object frmCadSetor: TfrmCadSetor
           ValueUnchecked = 'N'
           OnClick = DBCheckBox9Click
         end
+        object RzGroupBox2: TRzGroupBox
+          Left = 510
+          Top = 177
+          Width = 291
+          Height = 59
+          BorderColor = clNavy
+          BorderInner = fsButtonUp
+          BorderOuter = fsBump
+          Caption = ' Relat'#243'rio de Custo (Material) '
+          Ctl3D = True
+          FlatColor = clNavy
+          FlatColorAdjustment = 2
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentCtl3D = False
+          ParentFont = False
+          TabOrder = 15
+          VisualStyle = vsGradient
+          object DBCheckBox11: TDBCheckBox
+            Left = 16
+            Top = 34
+            Width = 223
+            Height = 17
+            Caption = 'Imprime o Material do Setor Anterior'
+            DataField = 'IMP_MAT_ANT'
+            DataSource = DmCadSetor.dsSetor
+            TabOrder = 0
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
+          end
+          object DBCheckBox12: TDBCheckBox
+            Left = 16
+            Top = 15
+            Width = 241
+            Height = 17
+            Caption = 'Imprime o Material para o Custo'
+            DataField = 'IMP_MAT_CUSTO'
+            DataSource = DmCadSetor.dsSetor
+            TabOrder = 1
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
+            OnClick = DBCheckBox3Click
+          end
+        end
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 279
-        Width = 837
+        Top = 287
+        Width = 845
         Height = 229
         ActivePage = TS_Processo
         ActivePageDefault = TS_Processo
@@ -1014,7 +1060,7 @@ object frmCadSetor: TfrmCadSetor
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 30
-            Width = 833
+            Width = 841
             Height = 176
             Align = alClient
             DataSource = DmCadSetor.dsSetor_Proc
@@ -1089,7 +1135,7 @@ object frmCadSetor: TfrmCadSetor
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 833
+            Width = 841
             Height = 30
             Align = alTop
             Color = clSilver
@@ -1148,7 +1194,7 @@ object frmCadSetor: TfrmCadSetor
     GroupName = 'Setor'
     UserControl = fMenu.UserControl1
     NotAllowed = naDisabled
-    Left = 625
-    Top = 180
+    Left = 735
+    Top = 120
   end
 end

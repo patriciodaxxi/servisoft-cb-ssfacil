@@ -89,6 +89,16 @@ object DmCadSetor: TDmCadSetor
       FixedChar = True
       Size = 1
     end
+    object sdsSetorIMP_MAT_ANT: TStringField
+      FieldName = 'IMP_MAT_ANT'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsSetorIMP_MAT_CUSTO: TStringField
+      FieldName = 'IMP_MAT_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspSetor: TDataSetProvider
     DataSet = sdsSetor
@@ -179,6 +189,16 @@ object DmCadSetor: TDmCadSetor
     end
     object cdsSetorESTEIRA_PADRAO: TStringField
       FieldName = 'ESTEIRA_PADRAO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsSetorIMP_MAT_ANT: TStringField
+      FieldName = 'IMP_MAT_ANT'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsSetorIMP_MAT_CUSTO: TStringField
+      FieldName = 'IMP_MAT_CUSTO'
       FixedChar = True
       Size = 1
     end

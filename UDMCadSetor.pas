@@ -202,6 +202,10 @@ type
     cdsSetorORDEM_ESTEIRA: TIntegerField;
     cdsSetorAPELIDO: TStringField;
     cdsSetorESTEIRA_PADRAO: TStringField;
+    sdsSetorIMP_MAT_ANT: TStringField;
+    cdsSetorIMP_MAT_ANT: TStringField;
+    sdsSetorIMP_MAT_CUSTO: TStringField;
+    cdsSetorIMP_MAT_CUSTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspSetorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
