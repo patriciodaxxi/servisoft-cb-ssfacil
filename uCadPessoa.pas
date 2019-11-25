@@ -1497,19 +1497,19 @@ begin
     0:
       fMenu.vTipoPessoa := 'C';
     1:
-      fMenu.vTipoPessoa := 'F';
-    2:
-      fMenu.vTipoPessoa := 'T';
-    3:
-      fMenu.vTipoPessoa := 'V';
-    4:
-      fMenu.vTipoPessoa := 'A';
-    5:
       fMenu.vTipoPessoa := 'X';
-    6:
-      fMenu.vTipoPessoa := 'P';
-    7:
+    2:
+      fMenu.vTipoPessoa := 'F';
+    3:
       fMenu.vTipoPessoa := 'N'; //Funcionário
+    4:
+      fMenu.vTipoPessoa := 'P';
+    5:
+      fMenu.vTipoPessoa := 'V';
+    6:
+      fMenu.vTipoPessoa := 'A'; //Terceirizado / Atelier
+    7:
+      fMenu.vTipoPessoa := 'T';
     8:
       fMenu.vTipoPessoa := '';
   end;
