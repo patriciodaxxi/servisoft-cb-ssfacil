@@ -404,6 +404,7 @@ begin
     ceFormaPgto.Text := fDmCupomFiscal.cdsCupomFiscalID_TIPOCOBRANCA.AsString;
     RxDBLookupCombo3Change(Sender);
   end;
+  RzPageControl1.ActivePageIndex := 0;
   ceFormaPgto.SetFocus;
 
   Label3.Visible           := (fDmCupomFiscal.cdsCupomParametrosMOSTRAR_CONDPGTO.AsString = 'S');
