@@ -110,6 +110,10 @@ begin
   Memo1.Visible := False;
   if vTipo = 'VAL' then
   begin
+    fDMCadNotaFiscal := TDMCadNotaFiscal.Create(nil);
+    oDBUtils.SetDataSourceProperties(Self,fDMCadNotaFiscal);
+    if not fDMCadNotaFiscal.qParametros_Ped.Active then
+      fDMCadNotaFiscal.qParametros_Ped.Open;
     Shape5.Visible  := False;
     Label9.Visible  := False;
     Shape11.Visible := fDMCadNotaFiscal.qParametros_PedCONFERENCIA_SIMPLES.AsString = 'S';
