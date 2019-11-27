@@ -335,6 +335,7 @@ type
     mTamanhoQtde_Indice: TIntegerField;
     mItensDRAWBACK: TStringField;
     mItensMEDIDA: TStringField;
+    mItensPRECO_COR: TFloatField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private

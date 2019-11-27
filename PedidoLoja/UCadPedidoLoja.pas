@@ -1682,7 +1682,7 @@ begin
       sds.SQLConnection := dmDatabase.scoDados;
       sds.NoMetadata    := True;
       sds.GetMetadata   := False;
-      sds.CommandText   := 'SELECT sum(d.vlr_restante) vlr_restante, cast(0 as Float) VLR_PAGO '
+      {sds.CommandText   := 'SELECT sum(d.vlr_restante) vlr_restante, cast(0 as Float) VLR_PAGO '
                          + 'FROM duplicata D '
                          + 'WHERE D.vlr_restante > 0 '
                          + '  and d.ID_PESSOA = :ID_PESSOA '
@@ -1694,9 +1694,21 @@ begin
                          + ' ON D.ID = H.ID '
                          + 'WHERE H.dthistorico = :DATA '
                          + '  and d.ID_PESSOA = :ID_PESSOA '
-                         + '  and coalesce(d.ID_PEDIDO,0) <> :ID_PEDIDO ';
+                         + '  and coalesce(d.ID_PEDIDO,0) <> :ID_PEDIDO ';}
+
+      sds.CommandText   := 'select sum(D.VLR_RESTANTE) VLR_RESTANTE, cast(0 as float) VLR_PAGO '
+                         + 'from DUPLICATA D '
+                         + 'where D.VLR_RESTANTE > 0 and '
+                         + '      D.ID_PESSOA = :ID_PESSOA and '
+                         + '      D.dtvencimento < :DATA '
+                         + 'union all '
+                         + 'select cast(0 as float) VLR_RESTANTE, sum(H.VLR_PAGAMENTO) VLR_PAGO '
+                         + 'from DUPLICATA D '
+                         + 'inner join DUPLICATA_HIST H on D.ID = H.ID '
+                         + 'where H.DTHISTORICO = :DATA and '
+                         + '      D.ID_PESSOA = :ID_PESSOA and '
+                         + '      H.tipo_historico = ' + QuotedStr('PAG');
       sds.ParamByName('ID_PESSOA').AsInteger := fDMCadPedido.cdsPedidoImpID_CLIENTE.AsInteger;
-      sds.ParamByName('ID_PEDIDO').AsInteger := fDMCadPedido.cdsPedidoImpID.AsInteger;
       sds.ParamByName('DATA').AsDate         := fDMCadPedido.cdsPedidoImpDTEMISSAO.AsDateTime;
       sds.Open;
       while not sds.Eof do
@@ -1705,7 +1717,7 @@ begin
         vVlr_Recto := vVlr_Recto + sds.FieldByName('VLR_PAGO').AsFloat;
         sds.Next;
       end;
-      vSaldo_Ant := StrToFloat(FormatFloat('0.00',vSaldo_Ant + vVlr_Recto + fDMCadPedido.cdsPedidoImpVLR_TOTAL.AsFloat));
+      vSaldo_Ant := StrToFloat(FormatFloat('0.00',vSaldo_Ant + vVlr_Recto));
       vSaldo_Final := StrToFloat(FormatFloat('0.00',vSaldo_Ant - vVlr_Recto));
       vSaldo_Final := StrToFloat(FormatFloat('0.00',vSaldo_Final * -1));
 
