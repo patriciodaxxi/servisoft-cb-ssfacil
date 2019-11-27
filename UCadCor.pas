@@ -32,6 +32,10 @@ type
     btnCancelar: TNxButton;
     UCControls1: TUCControls;
     btnAlterar_Nome: TNxButton;
+    Label2: TLabel;
+    DBEdit1: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -129,9 +133,21 @@ begin
 end;
 
 procedure TfrmCadCor.FormShow(Sender: TObject);
+var
+  i : Integer;
 begin
   fDMCadCor := TDMCadCor.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMCadCor);
+  Label2.Visible  := (fDMCadCor.qParametrosEMPRESA_AMBIENTES.AsString = 'S');
+  DBEdit1.Visible := (fDMCadCor.qParametrosEMPRESA_AMBIENTES.AsString = 'S');
+  Label3.Visible  := (fDMCadCor.qParametrosEMPRESA_AMBIENTES.AsString = 'S');
+  DBEdit3.Visible := (fDMCadCor.qParametrosEMPRESA_AMBIENTES.AsString = 'S');
+
+  for i := 0 to SMDBGrid1.ColCount - 2 do
+  begin
+    if (SMDBGrid1.Columns[i].FieldName = 'PRECO_MT') or (SMDBGrid1.Columns[i].FieldName = 'PRECO_M2') then
+      SMDBGrid1.Columns[i].Visible := (fDMCadCor.qParametrosEMPRESA_AMBIENTES.AsString = 'S');
+  end;
 end;
 
 procedure TfrmCadCor.prc_Consultar;

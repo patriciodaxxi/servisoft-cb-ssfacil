@@ -7,7 +7,7 @@ object DMCadPedido: TDMCadPedido
   object sdsPedido: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT *'#13#10'FROM PEDIDO'#13#10#13#10#13#10#13#10#13#10#13#10
+    CommandText = 'SELECT *'#13#10'FROM PEDIDO'#13#10#13#10#13#10#13#10#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -4868,20 +4868,23 @@ object DMCadPedido: TDMCadPedido
       'N PI.TIPO_OS = '#39'OP'#39' THEN PI.TIPO_OS'#13#10'  WHEN PI.TIPO_OS = '#39'RE'#39' TH' +
       'EN PI.TIPO_OS'#13#10'  ELSE '#39#39#13#10'  END DESC_TIPO_OS, PRO.QTD_POR_ROTULO' +
       ' QTD_POR_ROTULO_PROD,'#13#10'  PRO.QTD_EMBALAGEM QTD_EMBALAGEM_PROD, P' +
-      'RO.MEDIDA, UNI.mostrar_grosa'#13#10#13#10'FROM PEDIDO_ITEM PI'#13#10'LEFT JOIN P' +
-      'RODUTO PRO ON (PI.ID_PRODUTO = PRO.ID)'#13#10'LEFT JOIN MARCA ON (PRO.' +
-      'ID_MARCA = MARCA.ID)'#13#10'LEFT JOIN PEDIDO_ITEM_TIPO PT ON (PI.ID = ' +
-      'PT.ID AND PI.ITEM = PT.ITEM)'#13#10'LEFT JOIN TAB_NCM NCM ON (PRO.ID_N' +
-      'CM = NCM.ID)'#13#10'LEFT JOIN COMBINACAO COMB ON (PI.ID_COR = COMB.ID)' +
-      #13#10'LEFT JOIN PRODUTO_TAM PTAM ON (PI.id_produto = PTAM.id AND PI.' +
-      'tamanho = PTAM.tamanho)'#13#10'LEFT JOIN PESSOA ATE ON (PI.id_atelier ' +
-      '= ATE.CODIGO )'#13#10'LEFT JOIN PRODUTO_LOTE PLOTE ON (PI.ID_PRODUTO =' +
-      ' PLOTE.ID AND PI.NUM_LOTE_CONTROLE = PLOTE.NUM_LOTE_CONTROLE)'#13#10'L' +
-      'EFT JOIN TIPO_MATERIAL TMAT ON (PT.ID_TIPO_MATERIAL = TMAT.ID)'#13#10 +
-      'LEFT JOIN MATRIZ_PRECO MP ON MP.ID = PT.ID_ACABAMENTO'#13#10'LEFT JOIN' +
-      ' UNIDADE UNI ON PI.UNIDADE = UNI.unidade'#13#10'WHERE PI.ID = :ID'#13#10'AND' +
-      ' ((PI.TIPO_ACESSORIO = '#39'N'#39') OR (PI.TIPO_ACESSORIO IS NULL))'#13#10' AN' +
-      'D (PI.QTD > 0)'#13#10#13#10
+      'RO.MEDIDA, UNI.mostrar_grosa,'#13#10'  corp.nome nome_cor_perfil, CORV' +
+      '.nome NOME_COR_VIDRO,'#13#10'  PT.preco_cor_perfil, PT.preco_cor_vidro' +
+      #13#10#13#10'FROM PEDIDO_ITEM PI'#13#10'inner JOIN PRODUTO PRO ON (PI.ID_PRODUT' +
+      'O = PRO.ID)'#13#10'LEFT JOIN MARCA ON (PRO.ID_MARCA = MARCA.ID)'#13#10'LEFT ' +
+      'JOIN PEDIDO_ITEM_TIPO PT ON (PI.ID = PT.ID AND PI.ITEM = PT.ITEM' +
+      ')'#13#10'LEFT JOIN TAB_NCM NCM ON (PRO.ID_NCM = NCM.ID)'#13#10'LEFT JOIN COM' +
+      'BINACAO COMB ON (PI.ID_COR = COMB.ID)'#13#10'LEFT JOIN PRODUTO_TAM PTA' +
+      'M ON (PI.id_produto = PTAM.id AND PI.tamanho = PTAM.tamanho)'#13#10'LE' +
+      'FT JOIN PESSOA ATE ON (PI.id_atelier = ATE.CODIGO )'#13#10'LEFT JOIN P' +
+      'RODUTO_LOTE PLOTE ON (PI.ID_PRODUTO = PLOTE.ID AND PI.NUM_LOTE_C' +
+      'ONTROLE = PLOTE.NUM_LOTE_CONTROLE)'#13#10'LEFT JOIN TIPO_MATERIAL TMAT' +
+      ' ON (PT.ID_TIPO_MATERIAL = TMAT.ID)'#13#10'LEFT JOIN MATRIZ_PRECO MP O' +
+      'N MP.ID = PT.ID_ACABAMENTO'#13#10'LEFT JOIN UNIDADE UNI ON PI.UNIDADE ' +
+      '= UNI.unidade'#13#10'LEFT JOIN COMBINACAO CORP ON PT.id_cor_perfil = C' +
+      'ORP.ID'#13#10'LEFT JOIN COMBINACAO CORV ON PT.id_cor_vidro = CORV.ID'#13#10 +
+      #13#10'WHERE PI.ID = :ID'#13#10'AND ((PI.TIPO_ACESSORIO = '#39'N'#39') OR (PI.TIPO_' +
+      'ACESSORIO IS NULL))'#13#10' AND (PI.QTD > 0)'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -5490,6 +5493,20 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'MOSTRAR_GROSA'
       FixedChar = True
       Size = 1
+    end
+    object cdsPedidoImp_ItensNOME_COR_PERFIL: TStringField
+      FieldName = 'NOME_COR_PERFIL'
+      Size = 60
+    end
+    object cdsPedidoImp_ItensNOME_COR_VIDRO: TStringField
+      FieldName = 'NOME_COR_VIDRO'
+      Size = 60
+    end
+    object cdsPedidoImp_ItensPRECO_COR_PERFIL: TFloatField
+      FieldName = 'PRECO_COR_PERFIL'
+    end
+    object cdsPedidoImp_ItensPRECO_COR_VIDRO: TFloatField
+      FieldName = 'PRECO_COR_VIDRO'
     end
   end
   object dsPedidoImp_Itens: TDataSource
@@ -9949,7 +9966,7 @@ object DMCadPedido: TDMCadPedido
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 24
-    Top = 149
+    Top = 148
     object sdsPedido_Item_TipoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -10072,6 +10089,18 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'CAMINHO_ARQUIVO_PDF'
       Size = 150
     end
+    object sdsPedido_Item_TipoID_COR_PERFIL: TIntegerField
+      FieldName = 'ID_COR_PERFIL'
+    end
+    object sdsPedido_Item_TipoID_COR_VIDRO: TIntegerField
+      FieldName = 'ID_COR_VIDRO'
+    end
+    object sdsPedido_Item_TipoPRECO_COR_PERFIL: TFloatField
+      FieldName = 'PRECO_COR_PERFIL'
+    end
+    object sdsPedido_Item_TipoPRECO_COR_VIDRO: TFloatField
+      FieldName = 'PRECO_COR_VIDRO'
+    end
   end
   object cdsPedido_Item_Tipo: TClientDataSet
     Aggregates = <>
@@ -10080,7 +10109,7 @@ object DMCadPedido: TDMCadPedido
     BeforePost = cdsPedido_Item_TipoBeforePost
     OnCalcFields = cdsPedido_Item_TipoCalcFields
     OnNewRecord = cdsPedido_Item_TipoNewRecord
-    Left = 40
+    Left = 39
     Top = 149
     object cdsPedido_Item_TipoID: TIntegerField
       FieldName = 'ID'
@@ -10260,6 +10289,34 @@ object DMCadPedido: TDMCadPedido
     object cdsPedido_Item_TipoCAMINHO_ARQUIVO_PDF: TStringField
       FieldName = 'CAMINHO_ARQUIVO_PDF'
       Size = 150
+    end
+    object cdsPedido_Item_TipoclNome_Cor_Perfil: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clNome_Cor_Perfil'
+      ProviderFlags = []
+      Size = 40
+      Calculated = True
+    end
+    object cdsPedido_Item_TipoID_COR_PERFIL: TIntegerField
+      FieldName = 'ID_COR_PERFIL'
+    end
+    object cdsPedido_Item_TipoID_COR_VIDRO: TIntegerField
+      FieldName = 'ID_COR_VIDRO'
+    end
+    object cdsPedido_Item_TipoPRECO_COR_PERFIL: TFloatField
+      FieldName = 'PRECO_COR_PERFIL'
+      DisplayFormat = '0.000#'
+    end
+    object cdsPedido_Item_TipoPRECO_COR_VIDRO: TFloatField
+      FieldName = 'PRECO_COR_VIDRO'
+      DisplayFormat = '0.000#'
+    end
+    object cdsPedido_Item_TipoclNome_Cor_Vidro: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'clNome_Cor_Vidro'
+      ProviderFlags = []
+      Size = 40
+      Calculated = True
     end
   end
   object dsPedido_Item_Tipo: TDataSource
@@ -10708,8 +10765,8 @@ object DMCadPedido: TDMCadPedido
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42052.436473541700000000
-    ReportOptions.LastChange = 43780.577702696800000000
+    ReportOptions.CreateDate = 42032.577038136600000000
+    ReportOptions.LastChange = 43796.534359918980000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -11123,10 +11180,15 @@ object DMCadPedido: TDMCadPedido
       'QTD_EMBALAGEM_PROD=QTD_EMBALAGEM_PROD'
       'FABRICA=FABRICA'
       'MEDIDA=MEDIDA'
-      'CAMINHO_ARQUIVO_PDF=CAMINHO_ARQUIVO_PDF')
+      'CAMINHO_ARQUIVO_PDF=CAMINHO_ARQUIVO_PDF'
+      'MOSTRAR_GROSA=MOSTRAR_GROSA'
+      'NOME_COR_PERFIL=NOME_COR_PERFIL'
+      'NOME_COR_VIDRO=NOME_COR_VIDRO'
+      'PRECO_COR_PERFIL=PRECO_COR_PERFIL'
+      'PRECO_COR_VIDRO=PRECO_COR_VIDRO')
     DataSource = dsPedidoImp_Itens
     BCDToCurrency = False
-    Left = 1233
+    Left = 1234
     Top = 293
   end
   object frxRichObject1: TfrxRichObject
@@ -11969,14 +12031,14 @@ object DMCadPedido: TDMCadPedido
     GetMetadata = False
     CommandText = 
       'SELECT P.id, P.nome, P.preco_custo, P.preco_venda, P.id_grupo, G' +
-      '.tipo_prod, P.CALCULAR_2_LADOS'#13#10'FROM PRODUTO P'#13#10'INNER JOIN GRUPO' +
-      ' G'#13#10'ON P.id_grupo = G.ID'#13#10'WHERE G.TIPO_PROD = '#39'R'#39#13#10'   AND P.INAT' +
-      'IVO = '#39'N'#39#13#10
+      '.tipo_prod, P.CALCULAR_2_LADOS, P.usa_preco_cor'#13#10'FROM PRODUTO P'#13 +
+      #10'INNER JOIN GRUPO G'#13#10'ON P.id_grupo = G.ID'#13#10'WHERE G.TIPO_PROD = '#39 +
+      'R'#39#13#10'   AND P.INATIVO = '#39'N'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 657
-    Top = 422
+    Left = 656
+    Top = 421
   end
   object dspPerfil: TDataSetProvider
     DataSet = sdsPerfil
@@ -12014,6 +12076,11 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsPerfilCALCULAR_2_LADOS: TStringField
       FieldName = 'CALCULAR_2_LADOS'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsPerfilUSA_PRECO_COR: TStringField
+      FieldName = 'USA_PRECO_COR'
       FixedChar = True
       Size = 1
     end
@@ -12084,8 +12151,9 @@ object DMCadPedido: TDMCadPedido
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT *'#13#10'FROM PEDIDO_ITEM'#13#10'WHERE ID = :ID'#13#10'   AND TIPO_ACESSORI' +
-      'O = '#39'T'#39#13#10
+      'SELECT I.*, COMB.NOME NOME_COR'#13#10'FROM PEDIDO_ITEM I'#13#10'LEFT JOIN CO' +
+      'MBINACAO COMB ON (I.ID_COR = COMB.ID)'#13#10'WHERE I.ID = :ID'#13#10'   AND ' +
+      'I.TIPO_ACESSORIO = '#39'T'#39#13#10
     DataSource = dsPedido_Mestre
     MaxBlobSize = -1
     Params = <
@@ -12096,8 +12164,8 @@ object DMCadPedido: TDMCadPedido
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 24
-    Top = 366
+    Left = 25
+    Top = 365
     object sdsPedido_AceID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -12171,6 +12239,20 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'APROVADO_ORC'
       FixedChar = True
       Size = 1
+    end
+    object sdsPedido_AceID_COR: TFMTBCDField
+      FieldName = 'ID_COR'
+      Precision = 15
+      Size = 0
+    end
+    object sdsPedido_AceNOME_COR: TStringField
+      FieldName = 'NOME_COR'
+      ProviderFlags = []
+      Size = 60
+    end
+    object sdsPedido_AcePRECO_COR: TFloatField
+      FieldName = 'PRECO_COR'
+      DisplayFormat = '0.00'
     end
   end
   object cdsPedido_Ace: TClientDataSet
@@ -12255,6 +12337,20 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'APROVADO_ORC'
       FixedChar = True
       Size = 1
+    end
+    object cdsPedido_AceID_COR: TFMTBCDField
+      FieldName = 'ID_COR'
+      Precision = 15
+      Size = 0
+    end
+    object cdsPedido_AceNOME_COR: TStringField
+      FieldName = 'NOME_COR'
+      ProviderFlags = []
+      Size = 60
+    end
+    object cdsPedido_AcePRECO_COR: TFloatField
+      FieldName = 'PRECO_COR'
+      DisplayFormat = '0.000#'
     end
   end
   object dsPedido_Ace: TDataSource
@@ -12433,9 +12529,9 @@ object DMCadPedido: TDMCadPedido
     GetMetadata = False
     CommandText = 
       'SELECT P.id, P.nome, P.preco_custo, P.preco_venda, P.id_grupo, G' +
-      '.tipo_prod, P.REFERENCIA, P.UNIDADE, P.ID_NCM'#13#10'FROM PRODUTO P'#13#10'I' +
-      'NNER JOIN GRUPO G'#13#10'ON P.id_grupo = G.ID'#13#10'WHERE G.TIPO_PROD = :TI' +
-      'PO_PROD'#13#10'    AND P.INATIVO = '#39'N'#39#13#10#13#10
+      '.tipo_prod, P.REFERENCIA, P.UNIDADE, P.ID_NCM, p.usa_preco_cor'#13#10 +
+      'FROM PRODUTO P'#13#10'INNER JOIN GRUPO G'#13#10'ON P.id_grupo = G.ID'#13#10'WHERE ' +
+      'G.TIPO_PROD = :TIPO_PROD'#13#10'    AND P.INATIVO = '#39'N'#39#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -12449,8 +12545,8 @@ object DMCadPedido: TDMCadPedido
   end
   object dspAcessorios: TDataSetProvider
     DataSet = sdsAcessorios
-    Left = 873
-    Top = 65
+    Left = 872
+    Top = 64
   end
   object cdsAcessorios: TClientDataSet
     Aggregates = <>
@@ -12490,6 +12586,11 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsAcessoriosID_NCM: TIntegerField
       FieldName = 'ID_NCM'
+    end
+    object cdsAcessoriosUSA_PRECO_COR: TStringField
+      FieldName = 'USA_PRECO_COR'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsAcessorios: TDataSource
@@ -12699,9 +12800,10 @@ object DMCadPedido: TDMCadPedido
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT ACE.*, PRO.nome NOME_PRODUTO'#13#10'FROM PEDIDO_ITEM ACE'#13#10'LEFT ' +
-      'JOIN PRODUTO PRO'#13#10'ON ACE.ID_PRODUTO = PRO.ID'#13#10'WHERE ACE.ID = :ID' +
-      #13#10'   AND ACE.TIPO_ACESSORIO = '#39'T'#39
+      'SELECT ACE.*, PRO.nome NOME_PRODUTO, C.NOME NOME_COR'#13#10'FROM PEDID' +
+      'O_ITEM ACE'#13#10'LEFT JOIN PRODUTO PRO'#13#10'ON ACE.ID_PRODUTO = PRO.ID'#13#10'L' +
+      'EFT JOIN COMBINACAO C'#13#10'ON ACE.id_cor = C.ID'#13#10'WHERE ACE.ID = :ID'#13 +
+      #10'   AND ACE.TIPO_ACESSORIO = '#39'T'#39
     MaxBlobSize = -1
     Params = <
       item
@@ -12710,7 +12812,7 @@ object DMCadPedido: TDMCadPedido
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 216
+    Left = 215
     Top = 594
   end
   object cdsPedidoImp_Ace: TClientDataSet
@@ -12774,6 +12876,10 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'TIPO_ACESSORIO'
       FixedChar = True
       Size = 1
+    end
+    object cdsPedidoImp_AceNOME_COR: TStringField
+      FieldName = 'NOME_COR'
+      Size = 60
     end
   end
   object dsPedidoImp_Ace: TDataSource
@@ -12915,7 +13021,13 @@ object DMCadPedido: TDMCadPedido
       'NOME_PRODUTO=NOME_PRODUTO'
       'QTD=QTD'
       'QTD_FATURADO=QTD_FATURADO'
-      'QTD_RESTANTE=QTD_RESTANTE')
+      'QTD_RESTANTE=QTD_RESTANTE'
+      'CANCELADO=CANCELADO'
+      'UNIDADE=UNIDADE'
+      'REFERENCIA=REFERENCIA'
+      'NOMEPRODUTO=NOMEPRODUTO'
+      'TIPO_ACESSORIO=TIPO_ACESSORIO'
+      'NOME_COR=NOME_COR')
     DataSource = dsPedidoImp_Ace
     BCDToCurrency = False
     Left = 1151
@@ -13847,7 +13959,7 @@ object DMCadPedido: TDMCadPedido
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 216
+    Left = 215
     Top = 286
   end
   object dspOrcamento_Ace: TDataSetProvider
@@ -14279,7 +14391,7 @@ object DMCadPedido: TDMCadPedido
       'Total_Volume=Total_Volume')
     DataSource = dsmRotulos
     BCDToCurrency = False
-    Left = 1153
+    Left = 1152
     Top = 247
   end
   object frxDBDataset13: TfrxDBDataset
@@ -15490,7 +15602,7 @@ object DMCadPedido: TDMCadPedido
       'LEFT JOIN COMBINACAO COR'
       'ON AUX.ID_COR_MAT = COR.ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1040
+    Left = 1037
     Top = 537
     object qConsumoID: TIntegerField
       FieldName = 'ID'
@@ -16518,6 +16630,14 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'CONTROLAR_PROD_ST'
       FixedChar = True
       Size = 1
+    end
+    object qParametros_ProdEND_FOTO: TStringField
+      FieldName = 'END_FOTO'
+      Size = 200
+    end
+    object qParametros_ProdNOME_FOTO: TStringField
+      FieldName = 'NOME_FOTO'
+      Size = 50
     end
   end
   object qParametros_Geral: TSQLQuery
@@ -18489,5 +18609,75 @@ object DMCadPedido: TDMCadPedido
     BCDToCurrency = False
     Left = 1291
     Top = 341
+  end
+  object qCor: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select C.ID, C.NOME'
+      'from combinacao C'
+      'WHERE C.ID = :ID')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1277
+    Top = 440
+    object qCorID: TFMTBCDField
+      FieldName = 'ID'
+      Required = True
+      Precision = 15
+      Size = 0
+    end
+    object qCorNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+  end
+  object sdsCor: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT ID, NOME, PRECO_MT, PRECO_M2'#13#10'FROM COMBINACAO'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 457
+    Top = 598
+  end
+  object dspCor: TDataSetProvider
+    DataSet = sdsCor
+    Left = 473
+    Top = 598
+  end
+  object cdsCor: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'NOME'
+    Params = <>
+    ProviderName = 'dspCor'
+    Left = 489
+    Top = 598
+    object cdsCorID: TFMTBCDField
+      FieldName = 'ID'
+      Required = True
+      Precision = 15
+      Size = 0
+    end
+    object cdsCorNOME: TStringField
+      FieldName = 'NOME'
+      Size = 60
+    end
+    object cdsCorPRECO_MT: TFloatField
+      FieldName = 'PRECO_MT'
+    end
+    object cdsCorPRECO_M2: TFloatField
+      FieldName = 'PRECO_M2'
+    end
+  end
+  object dsCor: TDataSource
+    DataSet = cdsCor
+    Left = 506
+    Top = 598
   end
 end

@@ -40,25 +40,9 @@ object frmCadPedido_Ace: TfrmCadPedido_Ace
     object TS_Trilhos: TRzTabSheet
       Color = clMoneyGreen
       Caption = 'Trilhos / Divisores / Puxadores'
-      object Label28: TLabel
-        Left = 52
-        Top = 24
-        Width = 51
-        Height = 13
-        Alignment = taRightJustify
-        Caption = 'Descri'#231#227'o:'
-      end
-      object Label33: TLabel
-        Left = 520
-        Top = 24
-        Width = 23
-        Height = 13
-        Alignment = taRightJustify
-        Caption = 'Item:'
-      end
       object Label34: TLabel
-        Left = 39
-        Top = 52
+        Left = 38
+        Top = 100
         Width = 64
         Height = 13
         Alignment = taRightJustify
@@ -66,7 +50,7 @@ object frmCadPedido_Ace: TfrmCadPedido_Ace
       end
       object Label35: TLabel
         Left = 83
-        Top = 70
+        Top = 118
         Width = 20
         Height = 13
         Alignment = taRightJustify
@@ -74,7 +58,7 @@ object frmCadPedido_Ace: TfrmCadPedido_Ace
       end
       object Label36: TLabel
         Left = 46
-        Top = 97
+        Top = 145
         Width = 57
         Height = 13
         Alignment = taRightJustify
@@ -82,45 +66,23 @@ object frmCadPedido_Ace: TfrmCadPedido_Ace
       end
       object Label37: TLabel
         Left = 58
-        Top = 115
+        Top = 163
         Width = 45
         Height = 13
         Alignment = taRightJustify
         Caption = 'Vlr. Total:'
       end
-      object RxDBLookupCombo1: TRxDBLookupCombo
-        Left = 104
-        Top = 16
-        Width = 361
-        Height = 21
-        DropDownCount = 8
-        Ctl3D = False
-        DataField = 'ID_PRODUTO'
-        DataSource = DMCadPedido.dsPedido_Ace
-        LookupField = 'ID'
-        LookupDisplay = 'NOME'
-        LookupSource = DMCadPedido.dsAcessorios
-        ParentCtl3D = False
-        TabOrder = 0
-        OnExit = RxDBLookupCombo1Exit
-      end
-      object DBEdit29: TDBEdit
-        Left = 545
-        Top = 16
-        Width = 57
-        Height = 19
-        TabStop = False
-        Color = clSilver
-        Ctl3D = False
-        DataField = 'ITEM'
-        DataSource = DMCadPedido.dsPedido_Ace
-        ParentCtl3D = False
-        ReadOnly = True
-        TabOrder = 1
+      object Label7: TLabel
+        Left = 53
+        Top = 71
+        Width = 50
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Pre'#231'o Cor:'
       end
       object DBEdit30: TDBEdit
-        Left = 104
-        Top = 44
+        Left = 103
+        Top = 92
         Width = 81
         Height = 19
         Ctl3D = False
@@ -131,8 +93,8 @@ object frmCadPedido_Ace: TfrmCadPedido_Ace
         OnExit = DBEdit30Exit
       end
       object DBEdit31: TDBEdit
-        Left = 104
-        Top = 62
+        Left = 103
+        Top = 110
         Width = 81
         Height = 19
         Ctl3D = False
@@ -144,7 +106,7 @@ object frmCadPedido_Ace: TfrmCadPedido_Ace
       end
       object DBEdit32: TDBEdit
         Left = 104
-        Top = 89
+        Top = 137
         Width = 81
         Height = 19
         Ctl3D = False
@@ -156,7 +118,7 @@ object frmCadPedido_Ace: TfrmCadPedido_Ace
       end
       object DBEdit33: TDBEdit
         Left = 104
-        Top = 107
+        Top = 155
         Width = 81
         Height = 19
         Color = clSilver
@@ -166,6 +128,109 @@ object frmCadPedido_Ace: TfrmCadPedido_Ace
         ParentCtl3D = False
         ReadOnly = True
         TabOrder = 5
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 682
+        Height = 35
+        Align = alTop
+        BevelOuter = bvNone
+        Color = clMoneyGreen
+        TabOrder = 0
+        object Label28: TLabel
+          Left = 52
+          Top = 19
+          Width = 51
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Descri'#231#227'o:'
+        end
+        object Label33: TLabel
+          Left = 520
+          Top = 19
+          Width = 23
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Item:'
+        end
+        object RxDBLookupCombo1: TRxDBLookupCombo
+          Left = 104
+          Top = 11
+          Width = 361
+          Height = 21
+          DropDownCount = 8
+          Ctl3D = False
+          DataField = 'ID_PRODUTO'
+          DataSource = DMCadPedido.dsPedido_Ace
+          LookupField = 'ID'
+          LookupDisplay = 'NOME'
+          LookupSource = DMCadPedido.dsAcessorios
+          ParentCtl3D = False
+          TabOrder = 0
+          OnExit = RxDBLookupCombo1Exit
+        end
+        object DBEdit29: TDBEdit
+          Left = 545
+          Top = 13
+          Width = 57
+          Height = 19
+          TabStop = False
+          Color = clSilver
+          Ctl3D = False
+          DataField = 'ITEM'
+          DataSource = DMCadPedido.dsPedido_Ace
+          ParentCtl3D = False
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+      object pnlCor: TPanel
+        Left = 0
+        Top = 35
+        Width = 682
+        Height = 27
+        Align = alTop
+        BevelOuter = bvNone
+        Color = clMoneyGreen
+        TabOrder = 1
+        OnEnter = pnlCorEnter
+        OnExit = pnlCorExit
+        object Label31: TLabel
+          Left = 83
+          Top = 11
+          Width = 19
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Cor:'
+        end
+        object RxDBLookupCombo3: TRxDBLookupCombo
+          Left = 104
+          Top = 3
+          Width = 359
+          Height = 21
+          DropDownCount = 15
+          Ctl3D = False
+          DataField = 'ID_COR'
+          DataSource = DMCadPedido.dsPedido_Ace
+          LookupField = 'ID'
+          LookupDisplay = 'NOME'
+          LookupSource = DMCadPedido.dsCor
+          ParentCtl3D = False
+          TabOrder = 0
+        end
+      end
+      object DBEdit6: TDBEdit
+        Left = 104
+        Top = 64
+        Width = 81
+        Height = 19
+        Ctl3D = False
+        DataField = 'PRECO_COR'
+        DataSource = DMCadPedido.dsPedido_Ace
+        ParentCtl3D = False
+        TabOrder = 6
+        OnExit = DBEdit30Exit
       end
     end
     object TS_Roldanas: TRzTabSheet

@@ -379,7 +379,7 @@ type
     procedure prc_Gravar_Financeiro;
     procedure prc_Excluir_Financeiro;
 
-    function fnc_Mover_Comissao(Tipo_Reg, Serie, Obs: WideString; DtCadastro, DtBase: TDateTime ;
+    function fnc_Mover_Comissao(ID_Comissao :Integer; Tipo_Reg, Serie, Obs: WideString; DtCadastro, DtBase: TDateTime ;
                                 Filial, ID_Vendedor, ID_Nota, ID_Duplicata, Item_Duplicata_Hist, Num_Nota, ID_Cliente,
                                 Parcela, Num_RPS, ID_Nota_Servico, ID_Cupom: Integer ;
                                 Base_Comissao, Vlr_Comissao, Perc_Comissao: Real; ID_Recibo, ID_Descontada: Integer): Integer;
@@ -523,7 +523,7 @@ begin
   cdsExtComissao.Open;
 end;
 
-function TDMCadExtComissao.fnc_Mover_Comissao(Tipo_Reg, Serie,
+function TDMCadExtComissao.fnc_Mover_Comissao(ID_Comissao :Integer; Tipo_Reg, Serie,
   Obs: WideString; DtCadastro, DtBase: TDateTime; Filial, ID_Vendedor,
   ID_Nota, ID_Duplicata, Item_Duplicata_Hist, Num_Nota, ID_Cliente,
   Parcela, Num_RPS, ID_Nota_Servico, ID_Cupom: Integer; Base_Comissao, Vlr_Comissao,
@@ -532,31 +532,44 @@ begin
   Result := 0;
 
   try
-    prc_Inserir;
-
-    cdsExtComissaoTIPO_REG.AsString := Tipo_Reg;
-    if DtCadastro > 10 then
-      cdsExtComissaoDTCADASTRO.AsDateTime := DtCadastro;
-    if DtBase > 10 then
-      cdsExtComissaoDTBASE.AsDateTime := DtBase;
-    cdsExtComissaoID_VENDEDOR.AsInteger         := ID_Vendedor;
-    cdsExtComissaoID_NOTA.AsInteger             := ID_Nota;
-    cdsExtComissaoID_NOTA_SERVICO.AsInteger     := ID_Nota_Servico;
-    cdsExtComissaoID_DUPLICATA.AsInteger        := ID_Duplicata;
-    cdsExtComissaoITEM_DUPLICATA_HIST.AsInteger := Item_Duplicata_Hist;
+    //25/11/2019
+    if ID_Comissao > 0 then
+    begin
+      prc_Localizar(ID_Comissao);
+      if cdsExtComissaoID.AsInteger > 0 then
+      begin
+        Result := ID_Comissao;
+        cdsExtComissao.Edit;
+      end;
+    end;
+    //********************
+    if Result <= 0 then
+    begin
+      prc_Inserir;
+      cdsExtComissaoTIPO_REG.AsString := Tipo_Reg;
+      if DtCadastro > 10 then
+        cdsExtComissaoDTCADASTRO.AsDateTime := DtCadastro;
+      if DtBase > 10 then
+        cdsExtComissaoDTBASE.AsDateTime := DtBase;
+      cdsExtComissaoID_VENDEDOR.AsInteger         := ID_Vendedor;
+      cdsExtComissaoID_NOTA.AsInteger             := ID_Nota;
+      cdsExtComissaoID_NOTA_SERVICO.AsInteger     := ID_Nota_Servico;
+      cdsExtComissaoID_DUPLICATA.AsInteger        := ID_Duplicata;
+      cdsExtComissaoITEM_DUPLICATA_HIST.AsInteger := Item_Duplicata_Hist;
+      cdsExtComissaoSERIE.AsString                := Serie;
+      cdsExtComissaoNUM_NOTA.AsInteger            := Num_Nota;
+      cdsExtComissaoFILIAL.AsInteger              := Filial;
+      cdsExtComissaoOBS.Value                     := Obs;
+      cdsExtComissaoID_CLIENTE.AsInteger          := ID_Cliente;
+      cdsExtComissaoPARCELA.AsInteger             := Parcela;
+      cdsExtComissaoNUMRPS.AsInteger              := Num_RPS;
+      cdsExtComissaoID_CUPOM.AsInteger            := ID_Cupom;
+      if ID_Descontada > 0 then
+        cdsExtComissaoID_DESCONTADA.AsInteger := ID_Descontada;
+    end;
     cdsExtComissaoBASE_COMISSAO.AsFloat         := Base_Comissao;
     cdsExtComissaoPERC_COMISSAO.AsFloat         := Perc_Comissao;
     cdsExtComissaoVLR_COMISSAO.AsFloat          := StrToFloat(FormatFloat('0.00', Base_Comissao * Perc_Comissao / 100));
-    cdsExtComissaoSERIE.AsString                := Serie;
-    cdsExtComissaoNUM_NOTA.AsInteger            := Num_Nota;
-    cdsExtComissaoFILIAL.AsInteger              := Filial;
-    cdsExtComissaoOBS.Value                     := Obs;
-    cdsExtComissaoID_CLIENTE.AsInteger          := ID_Cliente;
-    cdsExtComissaoPARCELA.AsInteger             := Parcela;
-    cdsExtComissaoNUMRPS.AsInteger              := Num_RPS;
-    cdsExtComissaoID_CUPOM.AsInteger            := ID_Cupom;
-    if ID_Descontada > 0 then
-      cdsExtComissaoID_DESCONTADA.AsInteger := ID_Descontada;
 
     prc_Gravar;
 

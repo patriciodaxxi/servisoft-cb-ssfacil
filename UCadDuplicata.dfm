@@ -4466,8 +4466,12 @@ object frmCadDuplicata: TfrmCadDuplicata
       OnClick = GravarComissao1Click
     end
     object GravaComissao2: TMenuItem
-      Caption = 'Gerar comiss'#227'o conforme a consulta'
+      Caption = 'Gerar comiss'#227'o conforme a consulta (Sem registro de comiss'#227'o)'
       OnClick = GravaComissao2Click
+    end
+    object Gerarcomissoconformeconsultatodasatjgeradas1: TMenuItem
+      Caption = 'Gerar comiss'#227'o conforme consulta (todas, at'#233' j'#225' geradas)'
+      OnClick = Gerarcomissoconformeconsultatodasatjgeradas1Click
     end
   end
   object UCControls1: TUCControls

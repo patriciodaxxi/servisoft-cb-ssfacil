@@ -1628,7 +1628,7 @@ begin
   fDMCadExtComissao := TDMCadExtComissao.Create(Self);
 
   try
-    vAux := fDMCadExtComissao.fnc_Mover_Comissao('ENT','REC','',0,cdsReciboDTEMISSAO.AsDateTime,
+    vAux := fDMCadExtComissao.fnc_Mover_Comissao(0,'ENT','REC','',0,cdsReciboDTEMISSAO.AsDateTime,
                                                    cdsReciboFILIAL.AsInteger,cdsReciboID_VENDEDOR.AsInteger,
                                                    0,0,vItem_Hist,cdsReciboNUM_RECIBO.AsInteger,
                                                    cdsReciboID_CLIENTE.AsInteger,vParcela,0,

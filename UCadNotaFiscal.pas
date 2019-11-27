@@ -4693,52 +4693,60 @@ procedure TfrmCadNotaFiscal.BitBtn3Click(Sender: TObject);
 var
   vPerc_Base_Com: Real;
   vVlrBaseAux : Real;
+  Form : TForm;
 begin
   //vUsuario := 'Ajust.Base Com.';
-  fDMCadNotaFiscal.cdsNotaFiscal_Consulta.First;
-  while not fDMCadNotaFiscal.cdsNotaFiscal_Consulta.Eof do
-  begin
-    if (fDMCadNotaFiscal.cdsNotaFiscal_ConsultaCANCELADA.AsString = 'N') and (fDMCadNotaFiscal.cdsNotaFiscal_ConsultaNFEDENEGADA.AsString = 'N') and
-       (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ConsultaVLR_DUPLICATA.AsFloat)) > 0) then
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
+
+  try
+    fDMCadNotaFiscal.cdsNotaFiscal_Consulta.First;
+    while not fDMCadNotaFiscal.cdsNotaFiscal_Consulta.Eof do
     begin
-      prc_Posiciona_NotaFiscal;
-      if not fDMCadNotaFiscal.cdsNotaFiscal.IsEmpty then
+      if (fDMCadNotaFiscal.cdsNotaFiscal_ConsultaCANCELADA.AsString = 'N') and (fDMCadNotaFiscal.cdsNotaFiscal_ConsultaNFEDENEGADA.AsString = 'N') and
+         (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ConsultaVLR_DUPLICATA.AsFloat)) > 0) then
       begin
-        fDMCadNotaFiscal.cdsNotaFiscal.Edit;
-        fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat;
-        //08/05/2019
-        {if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
-          fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat
-                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST.AsFloat
-                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_FCP_ST.AsFloat
-                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat;
-        //06/05/2019
-        if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S' then
-          fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_PIS.AsFloat
-                                                                   - fDMCadNotaFiscal.cdsNotaFiscalVLR_COFINS.AsFloat;}
-        //*********
-
-        vVlrBaseAux := StrToFloat(FormatFloat('0.00',fnc_Calcula_Desc_Vendedor(fDMCadNotaFiscal)));
-        if StrToFloat(FormatFloat('0.00',vVlrBaseAux)) > 0 then
-          fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - vVlrBaseAux));
-        //****************
-
-        fDMCadNotaFiscal.cdsNotaFiscal.Post;
-        vPerc_Base_Com := StrToFloat(FormatFloat('0.00000',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat / fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat) * 100));
-        fDMCadNotaFiscal.cdsNotaFiscal_Parc.First;
-        while not fDMCadNotaFiscal.cdsNotaFiscal_Parc.Eof do
+        prc_Posiciona_NotaFiscal;
+        if not fDMCadNotaFiscal.cdsNotaFiscal.IsEmpty then
         begin
-          fDMCadNotaFiscal.cdsNotaFiscal_Parc.Edit;
-          fDMCadNotaFiscal.cdsNotaFiscal_ParcPERC_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00000',vPerc_Base_Com));
-          fDMCadNotaFiscal.cdsNotaFiscal_Parc.Post;
-          fDMCadNotaFiscal.cdsNotaFiscal_Parc.Next;
+          fDMCadNotaFiscal.cdsNotaFiscal.Edit;
+          fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat;
+          //08/05/2019
+          {if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR.AsString = 'S' then
+            fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat
+                                                                     - fDMCadNotaFiscal.cdsNotaFiscalVLR_ICMSSUBST.AsFloat
+                                                                     - fDMCadNotaFiscal.cdsNotaFiscalVLR_FCP_ST.AsFloat
+                                                                     - fDMCadNotaFiscal.cdsNotaFiscalVLR_IPI.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_FRETE.AsFloat;
+          //06/05/2019
+          if fDMCadNotaFiscal.qParametros_ComCOMISSAO_DESCONTAR_PIS.AsString = 'S' then
+            fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_PIS.AsFloat
+                                                                     - fDMCadNotaFiscal.cdsNotaFiscalVLR_COFINS.AsFloat;}
+          //*********
+
+          vVlrBaseAux := StrToFloat(FormatFloat('0.00',fnc_Calcula_Desc_Vendedor(fDMCadNotaFiscal)));
+          if StrToFloat(FormatFloat('0.00',vVlrBaseAux)) > 0 then
+            fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat - vVlrBaseAux));
+          //****************
+
+          fDMCadNotaFiscal.cdsNotaFiscal.Post;
+          vPerc_Base_Com := StrToFloat(FormatFloat('0.00000',(fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat / fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat) * 100));
+          fDMCadNotaFiscal.cdsNotaFiscal_Parc.First;
+          while not fDMCadNotaFiscal.cdsNotaFiscal_Parc.Eof do
+          begin
+            fDMCadNotaFiscal.cdsNotaFiscal_Parc.Edit;
+            fDMCadNotaFiscal.cdsNotaFiscal_ParcPERC_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00000',vPerc_Base_Com));
+            fDMCadNotaFiscal.cdsNotaFiscal_Parc.Post;
+            fDMCadNotaFiscal.cdsNotaFiscal_Parc.Next;
+          end;
+          prc_ReGravar_DuplicataAux(vPerc_Base_Com);
+          prc_Regravar_Comissao;
+          fDMCadNotaFiscal.cdsNotaFiscal.ApplyUpdates(0);
         end;
-        prc_ReGravar_DuplicataAux(vPerc_Base_Com);
-        prc_Regravar_Comissao;
-        fDMCadNotaFiscal.cdsNotaFiscal.ApplyUpdates(0);
       end;
+      fDMCadNotaFiscal.cdsNotaFiscal_Consulta.Next;
     end;
-    fDMCadNotaFiscal.cdsNotaFiscal_Consulta.Next;
+  finally
+    FreeAndNil(Form);
   end;
 end;
 

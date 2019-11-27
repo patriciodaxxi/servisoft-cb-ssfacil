@@ -1,11 +1,11 @@
 object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
-  Left = 54
-  Top = 124
+  Left = 322
+  Top = 117
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmCadPedido_TipoItem'
   ClientHeight = 512
-  ClientWidth = 684
+  ClientWidth = 747
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,9 +23,9 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 684
+    Width = 747
     Height = 478
-    ActivePage = TS_Chapas
+    ActivePage = TS_Porta
     ActivePageDefault = TS_Chapas
     Align = alClient
     BackgroundColor = 8404992
@@ -33,7 +33,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     UseColoredTabs = True
     ParentBackgroundColor = False
     ShowShadow = False
-    TabIndex = 0
+    TabIndex = 4
     TabOrder = 0
     TextColors.DisabledShadow = clActiveCaption
     TextColors.Selected = 8404992
@@ -635,7 +635,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label29: TLabel
         Left = 4
-        Top = 46
+        Top = 91
         Width = 99
         Height = 13
         Alignment = taRightJustify
@@ -643,7 +643,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label30: TLabel
         Left = 57
-        Top = 68
+        Top = 113
         Width = 46
         Height = 13
         Alignment = taRightJustify
@@ -651,7 +651,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label31: TLabel
         Left = 74
-        Top = 90
+        Top = 135
         Width = 29
         Height = 13
         Alignment = taRightJustify
@@ -659,7 +659,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label35: TLabel
         Left = 83
-        Top = 228
+        Top = 273
         Width = 20
         Height = 13
         Alignment = taRightJustify
@@ -667,7 +667,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label36: TLabel
         Left = 46
-        Top = 260
+        Top = 305
         Width = 57
         Height = 13
         Alignment = taRightJustify
@@ -675,7 +675,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label37: TLabel
         Left = 58
-        Top = 282
+        Top = 327
         Width = 45
         Height = 13
         Alignment = taRightJustify
@@ -683,14 +683,30 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label46: TLabel
         Left = 51
-        Top = 112
+        Top = 157
         Width = 52
         Height = 13
         Alignment = taRightJustify
         Caption = 'Qtd. Furos:'
       end
+      object Label57: TLabel
+        Left = 57
+        Top = 47
+        Width = 46
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Cor Vidro:'
+      end
+      object Label58: TLabel
+        Left = 40
+        Top = 69
+        Width = 64
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr. Cor Vidro:'
+      end
       object RxDBLookupCombo1: TRxDBLookupCombo
-        Left = 104
+        Left = 105
         Top = 16
         Width = 300
         Height = 21
@@ -704,8 +720,8 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         OnExit = RxDBLookupCombo1Exit
       end
       object RxDBLookupCombo2: TRxDBLookupCombo
-        Left = 104
-        Top = 38
+        Left = 105
+        Top = 82
         Width = 300
         Height = 21
         DropDownCount = 8
@@ -714,12 +730,12 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         LookupField = 'ID'
         LookupDisplay = 'NOME'
         LookupSource = DMCadPedido.dsRedondoMod
-        TabOrder = 1
+        TabOrder = 3
         OnExit = RxDBLookupCombo2Exit
       end
       object RxDBLookupCombo3: TRxDBLookupCombo
-        Left = 104
-        Top = 60
+        Left = 105
+        Top = 104
         Width = 300
         Height = 21
         DropDownCount = 8
@@ -728,12 +744,12 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         LookupField = 'ID'
         LookupDisplay = 'NOME'
         LookupSource = DMCadPedido.dsCMoeda
-        TabOrder = 2
+        TabOrder = 4
         OnExit = RxDBLookupCombo3Exit
       end
       object RxDBLookupCombo4: TRxDBLookupCombo
-        Left = 104
-        Top = 82
+        Left = 105
+        Top = 126
         Width = 300
         Height = 21
         DropDownCount = 8
@@ -742,56 +758,56 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         LookupField = 'ID'
         LookupDisplay = 'NOME'
         LookupSource = DMCadPedido.dsFuros
-        TabOrder = 3
+        TabOrder = 5
         OnExit = RxDBLookupCombo4Exit
       end
       object DBEdit31: TDBEdit
         Left = 104
-        Top = 220
+        Top = 265
         Width = 81
         Height = 21
         DataField = 'QTD'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 6
+        TabOrder = 8
         OnExit = DBEdit31Exit
       end
       object DBEdit32: TDBEdit
         Left = 104
-        Top = 252
+        Top = 297
         Width = 81
         Height = 21
         DataField = 'VLR_UNITARIO'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 7
+        TabOrder = 9
       end
       object DBEdit33: TDBEdit
         Left = 104
-        Top = 274
+        Top = 319
         Width = 81
         Height = 21
         DataField = 'VLR_TOTAL'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 8
+        TabOrder = 10
       end
       object DBEdit28: TDBEdit
-        Left = 104
-        Top = 104
+        Left = 105
+        Top = 149
         Width = 81
         Height = 21
         DataField = 'QTD_FUROS'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 4
+        TabOrder = 6
         OnExit = DBEdit29Exit
       end
       object RzGroupBox1: TRzGroupBox
-        Left = 26
-        Top = 130
+        Left = 27
+        Top = 175
         Width = 376
         Height = 82
         Caption = 'Medidas'
         Color = clMoneyGreen
         FlatColor = clRed
-        TabOrder = 5
+        TabOrder = 7
         object Label49: TLabel
           Left = 20
           Top = 55
@@ -831,7 +847,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
           Height = 21
           DataField = 'ALTURA_CORTE'
           DataSource = DMCadPedido.dsPedido_Item_Tipo
-          TabOrder = 0
+          TabOrder = 2
           OnExit = DBEdit29Exit
         end
         object DBEdit43: TDBEdit
@@ -841,7 +857,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
           Height = 21
           DataField = 'LARGURA_CORTE'
           DataSource = DMCadPedido.dsPedido_Item_Tipo
-          TabOrder = 1
+          TabOrder = 3
           OnExit = DBEdit30Exit
         end
         object DBEdit29: TDBEdit
@@ -851,7 +867,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
           Height = 21
           DataField = 'ALTURA'
           DataSource = DMCadPedido.dsPedido_Item_Tipo
-          TabOrder = 2
+          TabOrder = 0
           OnExit = DBEdit29Exit
         end
         object DBEdit30: TDBEdit
@@ -861,9 +877,34 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
           Height = 21
           DataField = 'LARGURA'
           DataSource = DMCadPedido.dsPedido_Item_Tipo
-          TabOrder = 3
+          TabOrder = 1
           OnExit = DBEdit30Exit
         end
+      end
+      object RxDBLookupCombo10: TRxDBLookupCombo
+        Left = 105
+        Top = 38
+        Width = 300
+        Height = 21
+        DropDownCount = 8
+        DataField = 'ID_COR_VIDRO'
+        DataSource = DMCadPedido.dsPedido_Item_Tipo
+        LookupField = 'ID'
+        LookupDisplay = 'NOME'
+        LookupSource = DMCadPedido.dsCor
+        TabOrder = 1
+        OnEnter = RxDBLookupCombo9Enter
+        OnExit = RxDBLookupCombo9Exit
+      end
+      object DBEdit48: TDBEdit
+        Left = 105
+        Top = 60
+        Width = 81
+        Height = 21
+        DataField = 'PRECO_COR_VIDRO'
+        DataSource = DMCadPedido.dsPedido_Item_Tipo
+        TabOrder = 2
+        OnExit = DBEdit47Exit
       end
     end
     object TS_Porta: TRzTabSheet
@@ -879,7 +920,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label39: TLabel
         Left = 76
-        Top = 46
+        Top = 92
         Width = 27
         Height = 13
         Alignment = taRightJustify
@@ -887,7 +928,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label40: TLabel
         Left = 61
-        Top = 68
+        Top = 159
         Width = 42
         Height = 13
         Alignment = taRightJustify
@@ -895,7 +936,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label43: TLabel
         Left = 83
-        Top = 194
+        Top = 302
         Width = 20
         Height = 13
         Alignment = taRightJustify
@@ -903,7 +944,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label44: TLabel
         Left = 46
-        Top = 224
+        Top = 332
         Width = 57
         Height = 13
         Alignment = taRightJustify
@@ -911,91 +952,81 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
       end
       object Label45: TLabel
         Left = 58
-        Top = 246
+        Top = 354
         Width = 45
         Height = 13
         Alignment = taRightJustify
         Caption = 'Vlr. Total:'
       end
-      object RxDBLookupCombo5: TRxDBLookupCombo
-        Left = 104
-        Top = 16
-        Width = 300
-        Height = 21
-        DropDownCount = 8
-        DataField = 'ID_PERFIL'
-        DataSource = DMCadPedido.dsPedido_Item_Tipo
-        LookupField = 'ID'
-        LookupDisplay = 'NOME'
-        LookupSource = DMCadPedido.dsPerfil
-        TabOrder = 0
-        OnExit = RxDBLookupCombo5Exit
+      object Label53: TLabel
+        Left = 58
+        Top = 46
+        Width = 45
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Cor Perfil:'
       end
-      object RxDBLookupCombo6: TRxDBLookupCombo
-        Left = 104
-        Top = 38
-        Width = 300
-        Height = 21
-        DropDownCount = 8
-        DataField = 'ID_VIDRO'
-        DataSource = DMCadPedido.dsPedido_Item_Tipo
-        LookupField = 'ID'
-        LookupDisplay = 'NOME'
-        LookupSource = DMCadPedido.dsVidro
-        TabOrder = 1
-        OnExit = RxDBLookupCombo6Exit
+      object Label54: TLabel
+        Left = 41
+        Top = 69
+        Width = 63
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr. Cor Perfil:'
       end
-      object RxDBLookupCombo7: TRxDBLookupCombo
-        Left = 104
-        Top = 60
-        Width = 300
-        Height = 21
-        DropDownCount = 8
-        DataField = 'ID_FURACAO'
-        DataSource = DMCadPedido.dsPedido_Item_Tipo
-        LookupField = 'ID'
-        LookupDisplay = 'NOME'
-        LookupSource = DMCadPedido.dsFuracao
-        TabOrder = 2
-        OnExit = RxDBLookupCombo7Exit
+      object Label55: TLabel
+        Left = 40
+        Top = 136
+        Width = 64
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Vlr. Cor Vidro:'
+      end
+      object Label56: TLabel
+        Left = 57
+        Top = 114
+        Width = 46
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Cor Vidro:'
       end
       object DBEdit36: TDBEdit
         Left = 104
-        Top = 186
+        Top = 294
         Width = 81
         Height = 21
         DataField = 'QTD'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 4
+        TabOrder = 8
         OnExit = DBEdit36Exit
       end
       object DBEdit37: TDBEdit
         Left = 104
-        Top = 216
+        Top = 324
         Width = 81
         Height = 21
         DataField = 'VLR_UNITARIO'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 5
+        TabOrder = 9
       end
       object DBEdit38: TDBEdit
         Left = 104
-        Top = 238
+        Top = 346
         Width = 81
         Height = 21
         DataField = 'VLR_TOTAL'
         DataSource = DMCadPedido.dsPedido_Item_Tipo
-        TabOrder = 6
+        TabOrder = 10
       end
       object RzGroupBox2: TRzGroupBox
         Left = 37
-        Top = 83
+        Top = 189
         Width = 335
         Height = 96
         Caption = 'Medidas'
         Color = clMoneyGreen
         FlatColor = clRed
-        TabOrder = 3
+        TabOrder = 7
         object Label51: TLabel
           Left = 7
           Top = 61
@@ -1035,7 +1066,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
           Height = 21
           DataField = 'ALTURA_CORTE'
           DataSource = DMCadPedido.dsPedido_Item_Tipo
-          TabOrder = 0
+          TabOrder = 2
           OnExit = DBEdit29Exit
         end
         object DBEdit45: TDBEdit
@@ -1045,7 +1076,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
           Height = 21
           DataField = 'LARGURA_CORTE'
           DataSource = DMCadPedido.dsPedido_Item_Tipo
-          TabOrder = 1
+          TabOrder = 3
           OnExit = DBEdit30Exit
         end
         object DBEdit34: TDBEdit
@@ -1055,7 +1086,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
           Height = 21
           DataField = 'ALTURA'
           DataSource = DMCadPedido.dsPedido_Item_Tipo
-          TabOrder = 2
+          TabOrder = 0
           OnExit = DBEdit34Exit
         end
         object DBEdit35: TDBEdit
@@ -1065,16 +1096,108 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
           Height = 21
           DataField = 'LARGURA'
           DataSource = DMCadPedido.dsPedido_Item_Tipo
-          TabOrder = 3
+          TabOrder = 1
           OnExit = DBEdit35Exit
         end
+      end
+      object RxDBLookupCombo5: TRxDBLookupCombo
+        Left = 104
+        Top = 16
+        Width = 300
+        Height = 21
+        DropDownCount = 8
+        DataField = 'ID_PERFIL'
+        DataSource = DMCadPedido.dsPedido_Item_Tipo
+        LookupField = 'ID'
+        LookupDisplay = 'NOME'
+        LookupSource = DMCadPedido.dsPerfil
+        TabOrder = 0
+        OnExit = RxDBLookupCombo5Exit
+      end
+      object RxDBLookupCombo6: TRxDBLookupCombo
+        Left = 104
+        Top = 83
+        Width = 300
+        Height = 21
+        DropDownCount = 8
+        DataField = 'ID_VIDRO'
+        DataSource = DMCadPedido.dsPedido_Item_Tipo
+        LookupField = 'ID'
+        LookupDisplay = 'NOME'
+        LookupSource = DMCadPedido.dsVidro
+        TabOrder = 3
+        OnExit = RxDBLookupCombo6Exit
+      end
+      object RxDBLookupCombo7: TRxDBLookupCombo
+        Left = 103
+        Top = 151
+        Width = 300
+        Height = 21
+        DropDownCount = 8
+        DataField = 'ID_FURACAO'
+        DataSource = DMCadPedido.dsPedido_Item_Tipo
+        LookupField = 'ID'
+        LookupDisplay = 'NOME'
+        LookupSource = DMCadPedido.dsFuracao
+        TabOrder = 6
+        OnExit = RxDBLookupCombo7Exit
+      end
+      object RxDBLookupCombo8: TRxDBLookupCombo
+        Left = 104
+        Top = 38
+        Width = 300
+        Height = 21
+        DropDownCount = 8
+        DataField = 'ID_COR_PERFIL'
+        DataSource = DMCadPedido.dsPedido_Item_Tipo
+        LookupField = 'ID'
+        LookupDisplay = 'NOME'
+        LookupSource = DMCadPedido.dsCor
+        TabOrder = 1
+        OnEnter = RxDBLookupCombo8Enter
+        OnExit = RxDBLookupCombo8Exit
+      end
+      object DBEdit46: TDBEdit
+        Left = 104
+        Top = 61
+        Width = 81
+        Height = 21
+        DataField = 'PRECO_COR_PERFIL'
+        DataSource = DMCadPedido.dsPedido_Item_Tipo
+        TabOrder = 2
+        OnExit = DBEdit46Exit
+      end
+      object DBEdit47: TDBEdit
+        Left = 104
+        Top = 128
+        Width = 81
+        Height = 21
+        DataField = 'PRECO_COR_VIDRO'
+        DataSource = DMCadPedido.dsPedido_Item_Tipo
+        TabOrder = 5
+        OnExit = DBEdit47Exit
+      end
+      object RxDBLookupCombo9: TRxDBLookupCombo
+        Left = 104
+        Top = 106
+        Width = 300
+        Height = 21
+        DropDownCount = 8
+        DataField = 'ID_COR_VIDRO'
+        DataSource = DMCadPedido.dsPedido_Item_Tipo
+        LookupField = 'ID'
+        LookupDisplay = 'NOME'
+        LookupSource = DMCadPedido.dsCor
+        TabOrder = 4
+        OnEnter = RxDBLookupCombo9Enter
+        OnExit = RxDBLookupCombo9Exit
       end
     end
   end
   object Panel3: TPanel
     Left = 0
     Top = 478
-    Width = 684
+    Width = 747
     Height = 34
     Align = alBottom
     Color = 8404992

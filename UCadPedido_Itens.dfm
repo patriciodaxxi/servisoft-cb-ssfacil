@@ -1859,7 +1859,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     object btnDigMaterial: TNxButton
       Left = 243
       Top = 2
-      Width = 147
+      Width = 143
       Height = 25
       Caption = 'Informar Material'
       Color = 16752448

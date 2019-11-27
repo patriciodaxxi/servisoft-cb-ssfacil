@@ -3523,6 +3523,42 @@ type
     cdsTitulosPendID_PESSOA: TIntegerField;
     qParametros_PedIMP_DUPLICATA_PEND: TStringField;
     frxTitulosPend: TfrxDBDataset;
+    sdsPedido_AceID_COR: TFMTBCDField;
+    cdsPedido_AceID_COR: TFMTBCDField;
+    sdsPedido_AceNOME_COR: TStringField;
+    cdsPedido_AceNOME_COR: TStringField;
+    cdsAcessoriosUSA_PRECO_COR: TStringField;
+    cdsPerfilUSA_PRECO_COR: TStringField;
+    qCor: TSQLQuery;
+    cdsPedido_Item_TipoclNome_Cor_Perfil: TStringField;
+    qCorID: TFMTBCDField;
+    qCorNOME: TStringField;
+    sdsPedido_Item_TipoID_COR_PERFIL: TIntegerField;
+    cdsPedido_Item_TipoID_COR_PERFIL: TIntegerField;
+    sdsPedido_Item_TipoID_COR_VIDRO: TIntegerField;
+    cdsPedido_Item_TipoID_COR_VIDRO: TIntegerField;
+    sdsCor: TSQLDataSet;
+    dspCor: TDataSetProvider;
+    cdsCor: TClientDataSet;
+    dsCor: TDataSource;
+    sdsPedido_Item_TipoPRECO_COR_PERFIL: TFloatField;
+    sdsPedido_Item_TipoPRECO_COR_VIDRO: TFloatField;
+    cdsPedido_Item_TipoPRECO_COR_PERFIL: TFloatField;
+    cdsPedido_Item_TipoPRECO_COR_VIDRO: TFloatField;
+    cdsCorID: TFMTBCDField;
+    cdsCorNOME: TStringField;
+    cdsCorPRECO_MT: TFloatField;
+    cdsCorPRECO_M2: TFloatField;
+    cdsPedido_Item_TipoclNome_Cor_Vidro: TStringField;
+    cdsPedidoImp_ItensNOME_COR_PERFIL: TStringField;
+    cdsPedidoImp_ItensNOME_COR_VIDRO: TStringField;
+    cdsPedidoImp_ItensPRECO_COR_PERFIL: TFloatField;
+    cdsPedidoImp_ItensPRECO_COR_VIDRO: TFloatField;
+    sdsPedido_AcePRECO_COR: TFloatField;
+    cdsPedido_AcePRECO_COR: TFloatField;
+    cdsPedidoImp_AceNOME_COR: TStringField;
+    qParametros_ProdEND_FOTO: TStringField;
+    qParametros_ProdNOME_FOTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3719,7 +3755,6 @@ begin
   qParametros_Est.Open;
   qParametros_Ser.Open;
 
-  //cdsCliente.Open;
   if cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S' then
     cdsContaOrcamento.Open;
 
@@ -3728,6 +3763,9 @@ begin
 
   if qParametros_PedUSA_TAB_PRECO.AsString = 'S' then
     cdsTab_Preco.Open;
+
+  if cdsParametrosEMPRESA_AMBIENTES.AsString = 'S' then
+    cdsCor.Open;
 
   if vRotulo then
     cdsCliente.Open
@@ -4337,6 +4375,21 @@ begin
       if cdsVidro.Locate('ID',cdsPedido_Item_TipoID_VIDRO.AsInteger,([Locaseinsensitive])) then
         cdsPedido_Item_TipoclNome_Vidro.AsString := cdsVidroNOME.AsString;
     end;
+    if cdsPedido_Item_TipoID_COR_PERFIL.AsInteger > 0 then
+    begin
+      qCor.Close;
+      qCor.ParamByName('ID').AsInteger := cdsPedido_Item_TipoID_COR_PERFIL.AsInteger;
+      qCor.Open;
+      cdsPedido_Item_TipoclNome_Cor_Perfil.AsString := qCorNOME.AsString;
+    end;
+    if cdsPedido_Item_TipoID_COR_VIDRO.AsInteger > 0 then
+    begin
+      qCor.Close;
+      qCor.ParamByName('ID').AsInteger := cdsPedido_Item_TipoID_COR_VIDRO.AsInteger;
+      qCor.Open;
+      cdsPedido_Item_TipoclNome_Cor_Vidro.AsString := qCorNOME.AsString;
+    end;
+
   end;
   if qParametros_GeralUSA_TIPO_MATERIAL.AsString = 'S' then
   begin

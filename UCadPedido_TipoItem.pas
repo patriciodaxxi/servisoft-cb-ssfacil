@@ -124,6 +124,18 @@ type
     Label34: TLabel;
     DBEdit29: TDBEdit;
     DBEdit30: TDBEdit;
+    Label53: TLabel;
+    RxDBLookupCombo8: TRxDBLookupCombo;
+    Label54: TLabel;
+    DBEdit46: TDBEdit;
+    Label55: TLabel;
+    DBEdit47: TDBEdit;
+    Label56: TLabel;
+    RxDBLookupCombo9: TRxDBLookupCombo;
+    Label57: TLabel;
+    RxDBLookupCombo10: TRxDBLookupCombo;
+    DBEdit48: TDBEdit;
+    Label58: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -176,6 +188,11 @@ type
       Shift: TShiftState);
     procedure DBEdit4KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure RxDBLookupCombo8Enter(Sender: TObject);
+    procedure RxDBLookupCombo9Enter(Sender: TObject);
+    procedure RxDBLookupCombo9Exit(Sender: TObject);
+    procedure DBEdit47Exit(Sender: TObject);
+    procedure DBEdit46Exit(Sender: TObject);
   private
     { Private declarations }
     vItemMat: Integer;
@@ -190,6 +207,7 @@ type
     vVlr_Calculado: Real;
     vID_Chapa_Ant : Integer;
     Calcular_Edit : Boolean;
+    vID_Cor_Perfil_Ant, vID_Cor_Vidro_Ant : Integer;
 
     procedure prc_Calcular_Peso_PC_Chapa;
     procedure prc_Calcular_Peso_PC_Redondo;
@@ -216,7 +234,7 @@ var
 implementation
 
 uses uUtilPadrao, rsDBUtils, UDMUtil, UConsHist_Chapa,
-  UDMCadMatriz_Preco;
+  UDMCadMatriz_Preco, uCalculo_Pedido;
 
 {$R *.dfm}
 
@@ -426,6 +444,8 @@ var
   vAux: Real;
   vCalcula_2_Lados: String;
   vVlr_Calculado_Aux: Real;
+  vAux_Cor : Real;
+  vAux_Cor2 : Real;
 begin
   vVlr_Calculado  := vVlr_Produto;
   vVlr_Acabamento := 0;
@@ -541,17 +561,39 @@ begin
         vAux := vAux + fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat;
       vAux := (vAux + (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat * 2)) / 1000;
 
+      //26/11/2019
+      vAux_Cor := 0;
+      if StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_PERFIL.AsFloat)) > 0 then
+        vAux_Cor := StrToFloat(FormatFloat('0.00',((fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat + (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat * 2)) / 1000)
+                   * fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_PERFIL.AsFloat));
+      //******************
+
       if StrToFloat(FormatFloat('0.0000',vVlr_Perfil)) > 0 then
         vVlr_Perfil    := vVlr_Perfil * vAux;
+
       if StrToFloat(FormatFloat('0.00',vVlr_Vidro)) > 0 then
         vAux := StrToFloat(FormatFloat('0.00',(fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat / 1000) * (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat / 1000)));
+
+      //26/11/2019
+      vAux_Cor2 := 0;
+      if StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_VIDRO.AsFloat)) > 0 then
+        vAux_Cor2 := StrToFloat(FormatFloat('0.00',((fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat / 1000) * (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat / 1000))
+              * fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_VIDRO.AsFloat));
+      //*****************
       vVlr_Vidro := StrToFloat(FormatFloat('0.00',vVlr_Vidro * vAux));
-      vVlr_Calculado := vVlr_Perfil + vVlr_Vidro + vVlr_Furacao;
+      vVlr_Calculado := vVlr_Perfil + vVlr_Vidro + vVlr_Furacao + vAux_Cor + vAux_Cor2;
     end
     else
     begin
       vAux := (fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat / 1000) * (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat / 1000);
-      vVlr_Calculado := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_Item_TipoVLR_UNITARIO.AsFloat * vAux));
+      //26/11/2019
+      vAux_Cor2 := 0;
+      if StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_VIDRO.AsFloat)) > 0 then
+        vAux_Cor2 := StrToFloat(FormatFloat('0.00',((fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat / 1000) * (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat / 1000))
+              * fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_VIDRO.AsFloat));
+      //*****************
+      vVlr_Calculado := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_Item_TipoVLR_UNITARIO.AsFloat * vAux)) + vAux_Cor2;
+      
       //vVlr_Calculado := vVlr_Calculado + (vVlr_Calculado_Aux * vAux
     end;
     //colocado no dia 11/02/2015
@@ -575,6 +617,7 @@ begin
   if (StrToFloat(FormatFloat('0.00',vVlr_Furos)) > 0) and (fDMCadPedido.cdsPedido_Item_TipoQTD_FUROS.AsInteger > 0) then
     vVlr_Furos := StrToFloat(FormatFloat('0.00',vVlr_Furos * fDMCadPedido.cdsPedido_Item_TipoQTD_FUROS.AsInteger));
   vVlr_Calculado := StrToFloat(FormatFloat('0.00',vVlr_Calculado + vVlr_Furos));
+
   fDMCadPedido.cdsPedido_Item_TipoVLR_UNITARIO.AsFloat := vVlr_Calculado;
   if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_Item_TipoQTD.AsFloat)) > 0 then
     vVlr_Calculado := StrToFloat(FormatFloat('0.00',vVlr_Calculado * fDMCadPedido.cdsPedido_Item_TipoQTD.AsFloat));
@@ -602,12 +645,25 @@ end;
 
 procedure TfrmCadPedido_TipoItem.RxDBLookupCombo8Exit(Sender: TObject);
 begin
+  if fDMCadPedido.cdsPedido_Item_TipoID_COR_PERFIL.AsInteger = vID_Cor_Perfil_Ant then
+    exit;
+
+  if trim(RxDBLookupCombo8.Text) <> '' then
+  begin
+    if (RxDBLookupCombo8.KeyValue <> fDMCadPedido.cdsCorID.AsInteger) then
+      fDMCadPedido.cdsCor.Locate('ID',RxDBLookupCombo8.KeyValue,[loCaseInsensitive]);
+    fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_PERFIL.AsFloat := fDMCadPedido.cdsCorPRECO_MT.AsFloat;
+  end
+  else
+    fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_PERFIL.AsFloat := 0;
   prc_Calcular_Vlr_Porta;
 end;
 
 procedure TfrmCadPedido_TipoItem.RxDBLookupCombo5Exit(Sender: TObject);
 begin
   prc_Calcular_Vlr_Porta;
+  if (trim(RxDBLookupCombo5.Text) = '') then
+    exit;
 end;
 
 procedure TfrmCadPedido_TipoItem.RxDBLookupCombo6Exit(Sender: TObject);
@@ -907,6 +963,42 @@ begin
       Perform(WM_nextdlgctl,0,0);
     end;
   end;
+end;
+
+procedure TfrmCadPedido_TipoItem.RxDBLookupCombo8Enter(Sender: TObject);
+begin
+  vID_Cor_Perfil_Ant := fDMCadPedido.cdsPedido_Item_TipoID_COR_PERFIL.AsInteger;
+end;
+
+procedure TfrmCadPedido_TipoItem.RxDBLookupCombo9Enter(Sender: TObject);
+begin
+  vID_Cor_Vidro_Ant := fDMCadPedido.cdsPedido_Item_TipoID_COR_VIDRO.AsInteger;
+end;
+
+procedure TfrmCadPedido_TipoItem.RxDBLookupCombo9Exit(Sender: TObject);
+begin
+  if fDMCadPedido.cdsPedido_Item_TipoID_COR_VIDRO.AsInteger = vID_Cor_Vidro_Ant then
+    exit;
+
+  if fDMCadPedido.cdsPedido_Item_TipoID_COR_VIDRO.AsInteger > 0 then
+  begin
+    if (fDMCadPedido.cdsPedido_Item_TipoID_COR_VIDRO.AsInteger <> fDMCadPedido.cdsCorID.AsInteger) then
+      fDMCadPedido.cdsCor.Locate('ID',fDMCadPedido.cdsPedido_Item_TipoID_COR_VIDRO.AsInteger,[loCaseInsensitive]);
+    fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_VIDRO.AsFloat := fDMCadPedido.cdsCorPRECO_M2.AsFloat;
+  end
+  else
+    fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_VIDRO.AsFloat := 0;
+  prc_Calcular_Vlr_Porta;
+end;
+
+procedure TfrmCadPedido_TipoItem.DBEdit47Exit(Sender: TObject);
+begin
+  prc_Calcular_Vlr_Porta;
+end;
+
+procedure TfrmCadPedido_TipoItem.DBEdit46Exit(Sender: TObject);
+begin
+  prc_Calcular_Vlr_Porta;
 end;
 
 end.

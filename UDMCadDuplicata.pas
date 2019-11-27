@@ -1212,7 +1212,7 @@ type
     procedure prc_Abrir_Pessoa(Tipo: String);
 
     function fnc_Erro_Registro(Automatica: Boolean = False): Boolean;
-    function fnc_Gravar_ExtComissao: Integer;
+    function fnc_Gravar_ExtComissao(Regravar : Boolean = False) : Integer;
 
     function fnc_Proxima_Duplicata: Integer;
 
@@ -1793,10 +1793,11 @@ begin
   dmDatabase.prc_UpdateError(DataSet.Name,UpdateKind,E);
 end;
 
-function TDMCadDuplicata.fnc_Gravar_ExtComissao: Integer;
+function TDMCadDuplicata.fnc_Gravar_ExtComissao(Regravar : Boolean = False) : Integer;
 var
   vBaseAux: real;
   vDtComissao: TDateTime;
+  vIDAux : Integer;
 begin
   Result := 0;
 
@@ -1831,7 +1832,13 @@ begin
       vDtComissao := cdsDuplicata_HistDTLANCAMENTO.AsDateTime;
 
     //Result := fDMCadExtComissao.fnc_Mover_Comissao('ENT',cdsDuplicataSERIE.AsString,'',0,cdsDuplicata_HistDTLANCAMENTO.AsDateTime,
-    Result := fDMCadExtComissao.fnc_Mover_Comissao('ENT',cdsDuplicataSERIE.AsString,'',0,vDtComissao,
+    //25/11/2019
+    vIDAux := 0;
+    if Regravar then
+      vIDAux := cdsDuplicata_HistID_COMISSAO.AsInteger;
+    //********************
+
+    Result := fDMCadExtComissao.fnc_Mover_Comissao(vIDAux,'ENT',cdsDuplicataSERIE.AsString,'',0,vDtComissao,
                                                    cdsDuplicataFILIAL.AsInteger,cdsDuplicataID_VENDEDOR.AsInteger,
                                                    0,cdsDuplicataID.AsInteger,cdsDuplicata_HistITEM.AsInteger,cdsDuplicataNUMNOTA.AsInteger,
                                                    cdsDuplicataID_PESSOA.AsInteger,cdsDuplicataPARCELA.AsInteger,cdsDuplicataID_NOTA_SERVICO.AsInteger,

@@ -38,6 +38,8 @@ uses
 
   procedure prc_Filtrar_Produto_Cliente(fDMCadPedido: TDMCadPedido ; Somente_Filial: Boolean = False);
 
+  procedure prc_Abrir_Combinacao(fDMCadPedido: TDMCadPedido);
+
   //procedure prc_Abrir_qNCM_UF(fDMCadPedido: TDMCadPedido; ID_NCM: Integer; UF, Importado_Nacional: String);
   //procedure prc_Abrir_qProduto_UF(fDMCadPedido: TDMCadPedido; ID_NCM: Integer; UF: String);
 
@@ -2170,6 +2172,13 @@ begin
       fDMCadPedido.sdsProduto.CommandText := fDMCadPedido.sdsProduto.CommandText + ' AND FILIAL = ' + fDMCadPedido.cdsPedidoFILIAL.AsString;
   end;
   fDMCadPedido.cdsProduto.Open;
+end;
+
+procedure prc_Abrir_Combinacao(fDMCadPedido: TDMCadPedido);
+begin
+  fDMCadPedido.cdsCombinacao.Close;
+  fDMCadPedido.sdsCombinacao.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
+  fDMCadPedido.cdsCombinacao.Open;
 end;
 
 end.

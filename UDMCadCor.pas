@@ -22,6 +22,12 @@ type
     qVerifica_Nome: TSQLQuery;
     qVerifica_NomeID: TIntegerField;
     qVerifica_NomeNOME: TStringField;
+    sdsCorPRECO_MT: TFloatField;
+    sdsCorPRECO_M2: TFloatField;
+    cdsCorPRECO_MT: TFloatField;
+    cdsCorPRECO_M2: TFloatField;
+    qParametros: TSQLQuery;
+    qParametrosEMPRESA_AMBIENTES: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspCorUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -130,6 +136,7 @@ var
   aIndices: array of string;
 begin
   ctCommand := sdsCor.CommandText;
+  qParametros.Open;
   //*** Logs Implantado na versão .353
   LogProviderList.OnAdditionalValues := DoLogAdditionalValues;
   for i := 0 to (Self.ComponentCount - 1) do

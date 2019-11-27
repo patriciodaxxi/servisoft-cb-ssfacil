@@ -4431,7 +4431,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspNotaFiscal_Consulta'
     OnCalcFields = cdsNotaFiscal_ConsultaCalcFields
-    Left = 265
+    Left = 263
     Top = 8
     object cdsNotaFiscal_ConsultaID: TIntegerField
       FieldName = 'ID'
@@ -7897,15 +7897,15 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       #10'       PF.DESC_SUFRAMA_ICMS, O.DTEMISSAO DTEMISSAO_OS, O.NUM_OS' +
       ' NUM_OS_SERVICO, O.DTRECEBIMENTO, O.DT_AGENDA,'#13#10'       PIT.COMPR' +
       'IMENTO, PIT.LARGURA, PIT.ESPESSURA, PI.DRAWBACK, PE.TIPO_DESCONT' +
-      'O, '#13#10'       PI.perc_desconto, PI.dtconferencia'#13#10'from PEDIDO PE'#13#10 +
-      'inner join PEDIDO_ITEM pi on (PE.ID = pi.ID)'#13#10'inner join PESSOA ' +
-      'CLI on (PE.ID_CLIENTE = CLI.CODIGO)'#13#10'inner join PRODUTO PRO on (' +
-      'pi.ID_PRODUTO = PRO.ID)'#13#10'left join COMBINACAO COMB on (pi.ID_COR' +
-      ' = COMB.ID)'#13#10'left join GRUPO GR on PRO.ID_GRUPO = GR.ID'#13#10'left jo' +
-      'in PESSOA_FISCAL PF on PE.ID_CLIENTE = PF.CODIGO'#13#10'left join ORDE' +
-      'MSERVICO O on pi.ID_OS_SERV = O.ID'#13#10'left join PEDIDO_ITEM_TIPO P' +
-      'IT ON PI.ID = PIT.ID AND PI.ITEM = PIT.ITEM'#13#10'where pi.QTD_RESTAN' +
-      'TE > 0'#13#10#13#10#13#10
+      'O, '#13#10'       PI.perc_desconto, PI.dtconferencia, PI.comprimento_v' +
+      'olume'#13#10'from PEDIDO PE'#13#10'inner join PEDIDO_ITEM pi on (PE.ID = pi.' +
+      'ID)'#13#10'inner join PESSOA CLI on (PE.ID_CLIENTE = CLI.CODIGO)'#13#10'inne' +
+      'r join PRODUTO PRO on (pi.ID_PRODUTO = PRO.ID)'#13#10'left join COMBIN' +
+      'ACAO COMB on (pi.ID_COR = COMB.ID)'#13#10'left join GRUPO GR on PRO.ID' +
+      '_GRUPO = GR.ID'#13#10'left join PESSOA_FISCAL PF on PE.ID_CLIENTE = PF' +
+      '.CODIGO'#13#10'left join ORDEMSERVICO O on pi.ID_OS_SERV = O.ID'#13#10'left ' +
+      'join PEDIDO_ITEM_TIPO PIT ON PI.ID = PIT.ID AND PI.ITEM = PIT.IT' +
+      'EM'#13#10'where pi.QTD_RESTANTE > 0'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -8269,6 +8269,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsPedidoDTCONFERENCIA: TDateField
       FieldName = 'DTCONFERENCIA'
+    end
+    object cdsPedidoCOMPRIMENTO_VOLUME: TFloatField
+      FieldName = 'COMPRIMENTO_VOLUME'
     end
   end
   object dsPedido: TDataSource
@@ -11195,8 +11198,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT I.*'#13#10'FROM PEDIDO_ITEM_TIPO I'#13#10'WHERE I.ID = :ID'#13#10'  AND I.I' +
-      'TEM = :ITEM'#13#10#13#10#13#10
+      'SELECT I.*, CP.NOME NOME_COR_PERFIL, CV.NOME NOME_COR_VIDRO'#13#10'FRO' +
+      'M PEDIDO_ITEM_TIPO I'#13#10'LEFT JOIN COMBINACAO CP'#13#10'ON I.id_cor_perfi' +
+      'l = CP.id'#13#10'LEFT JOIN COMBINACAO CV'#13#10'ON I.id_cor_vidro = CV.ID'#13#10'W' +
+      'HERE I.ID = :ID'#13#10'  AND I.ITEM = :ITEM'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -11309,6 +11314,14 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsPedido_TipoESPESSURA: TFloatField
       FieldName = 'ESPESSURA'
+    end
+    object cdsPedido_TipoNOME_COR_PERFIL: TStringField
+      FieldName = 'NOME_COR_PERFIL'
+      Size = 60
+    end
+    object cdsPedido_TipoNOME_COR_VIDRO: TStringField
+      FieldName = 'NOME_COR_VIDRO'
+      Size = 60
     end
   end
   object dsPedido_Tipo: TDataSource

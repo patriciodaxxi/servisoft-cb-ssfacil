@@ -263,6 +263,7 @@ type
     ValorPorExtenso1: TValorPorExtenso;
     ckImpNossoNumero: TCheckBox;
     ckImpCCusto: TCheckBox;
+    Gerarcomissoconformeconsultatodasatjgeradas1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -356,6 +357,8 @@ type
     procedure Pagamento1Click(Sender: TObject);
     procedure Recebimento1Click(Sender: TObject);
     procedure SpeedButton6Click(Sender: TObject);
+    procedure Gerarcomissoconformeconsultatodasatjgeradas1Click(
+      Sender: TObject);
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
@@ -3278,6 +3281,30 @@ procedure TfrmCadDuplicata.SpeedButton6Click(Sender: TObject);
 begin
   fDMCadDuplicata.cdsContabil_Ope.Close;
   fDMCadDuplicata.cdsContabil_Ope.Open;
+end;
+
+procedure TfrmCadDuplicata.Gerarcomissoconformeconsultatodasatjgeradas1Click(
+  Sender: TObject);
+begin
+  SMDBGrid1.DisableScroll;
+  fDMCadDuplicata.cdsDuplicata_Consulta.First;
+  while not fDMCadDuplicata.cdsDuplicata_Consulta.Eof do
+  begin
+    if fDMCadDuplicata.cdsDuplicata_ConsultaTIPO_ES.AsString = 'E' then
+    begin
+      prc_Posiciona_Duplicata(fDMCadDuplicata.cdsDuplicata_ConsultaID.AsInteger);
+      fDMCadDuplicata.cdsDuplicata_Hist.Last;
+      if fDMCadDuplicata.cdsDuplicata_HistTIPO_HISTORICO.AsString = 'PAG' then
+      begin
+        fDMCadDuplicata.cdsDuplicata_Hist.Edit;
+        fDMCadDuplicata.cdsDuplicata_HistID_COMISSAO.AsInteger := fDMCadDuplicata.fnc_Gravar_ExtComissao(fnc_Existe_Comissao);
+        fDMCadDuplicata.cdsDuplicata_Hist.Post;
+        fDMCadDuplicata.cdsDuplicata_Hist.ApplyUpdates(0);
+      end;
+    end;
+    fDMCadDuplicata.cdsDuplicata_Consulta.Next;
+  end;
+  SMDBGrid1.EnableScroll;
 end;
 
 end.

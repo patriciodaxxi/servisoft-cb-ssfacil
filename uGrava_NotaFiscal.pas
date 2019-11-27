@@ -280,7 +280,7 @@ begin
     else if (fDMCadNotaFiscal.cdsParametrosTIPO_COMISSAO_PROD.AsString = 'I') then
       vPercAux := StrToFloat(FormatFloat('0.0000', fDMCadNotaFiscal.vPerc_Comissao_Rateio));
 
-    vAux := fDMCadExtComissao.fnc_Mover_Comissao('ENT', fDMCadNotaFiscal.cdsNotaFiscalSERIE.AsString,
+    vAux := fDMCadExtComissao.fnc_Mover_Comissao(0,'ENT', fDMCadNotaFiscal.cdsNotaFiscalSERIE.AsString,
       '', 0, fDMCadNotaFiscal.cdsNotaFiscalDTEMISSAO.AsDateTime, fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger,
       fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger, vID_Nota, vID_Duplicata, vItem_Hist,
       fDMCadNotaFiscal.cdsNotaFiscalNUMNOTA.AsInteger, fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger, vParcela,

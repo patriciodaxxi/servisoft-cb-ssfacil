@@ -25,7 +25,7 @@ object frmCadCor: TfrmCadCor
     Top = 0
     Width = 755
     Height = 431
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadCor: TfrmCadCor
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -74,7 +74,6 @@ object frmCadCor: TfrmCadCor
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 3
         RowCount = 2
         Columns = <
           item
@@ -89,7 +88,23 @@ object frmCadCor: TfrmCadCor
             FieldName = 'NOME'
             Title.Alignment = taCenter
             Title.Caption = 'Nome'
-            Width = 466
+            Width = 326
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECO_MT'
+            Title.Alignment = taCenter
+            Title.Caption = 'Pre'#231'o MT'
+            Width = 86
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECO_M2'
+            Title.Alignment = taCenter
+            Title.Caption = 'Pre'#231'o M2'
+            Width = 94
             Visible = True
           end>
       end
@@ -680,7 +695,7 @@ object frmCadCor: TfrmCadCor
         Enabled = False
         TabOrder = 0
         object Label1: TLabel
-          Left = 32
+          Left = 70
           Top = 22
           Width = 31
           Height = 13
@@ -695,10 +710,26 @@ object frmCadCor: TfrmCadCor
           Alignment = taRightJustify
           Caption = 'ID:'
         end
+        object Label2: TLabel
+          Left = 19
+          Top = 41
+          Width = 82
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Pre'#231'o MT (Perfil):'
+        end
+        object Label3: TLabel
+          Left = 28
+          Top = 62
+          Width = 73
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Pre'#231'o 2 (Vidro):'
+        end
         object DBEdit2: TDBEdit
-          Left = 64
+          Left = 102
           Top = 14
-          Width = 441
+          Width = 405
           Height = 21
           CharCase = ecUpperCase
           DataField = 'NOME'
@@ -790,6 +821,26 @@ object frmCadCor: TfrmCadCor
           TabStop = False
           Transparent = True
           OnClick = btnAlterar_NomeClick
+        end
+        object DBEdit1: TDBEdit
+          Left = 102
+          Top = 35
+          Width = 155
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'PRECO_MT'
+          DataSource = DMCadCor.dsCor
+          TabOrder = 3
+        end
+        object DBEdit3: TDBEdit
+          Left = 102
+          Top = 56
+          Width = 155
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'PRECO_M2'
+          DataSource = DMCadCor.dsCor
+          TabOrder = 4
         end
       end
     end

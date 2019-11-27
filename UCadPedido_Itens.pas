@@ -267,7 +267,6 @@ type
     procedure prc_Chamar_FormTipoItem(Tipo: String);
     function fnc_Verifica_SubstTributaria: Boolean;
     procedure prc_Chama_Form_Produto;
-    procedure prc_Abrir_Combinacao;
     procedure prc_Atualizar_Itens;
     procedure prc_Estoque(ID_Produto: Integer);
     procedure prc_Sel_Unidade(Venda: Boolean = False);
@@ -438,7 +437,7 @@ begin
   pnlTipoOrcamento.Visible := (fDMCadPedido.cdsParametrosEMPRESA_SUCATA.AsString = 'S');
   pnlCor.Visible           := ((fDMCadPedido.cdsParametrosINFORMAR_COR_MATERIAL.AsString = 'S') or (fDMCadPedido.cdsParametrosINFORMAR_COR_PROD.AsString = 'C') or (fDMCadPedido.cdsParametrosINFORMAR_COR_PROD.AsString = 'B'));
   if fDMCadPedido.cdsPedido_ItensID_COR.AsInteger > 0 then
-    prc_Abrir_Combinacao;
+    uCalculo_Pedido.prc_Abrir_Combinacao(fDMCadPedido);
   if fDMCadPedido.cdsParametrosEMPRESA_AMBIENTES.AsString = 'S' then
     btnDigMaterial.Caption := 'Digitar Opções';
   vCarimbo_Ant     := fDMCadPedido.cdsPedido_ItensCARIMBO.AsString;
@@ -1386,7 +1385,7 @@ begin
   begin
     if fDMCadPedido.cdsPedido_ItensID_COR.AsInteger <= 0 then
     begin
-      prc_Abrir_Combinacao;
+      uCalculo_Pedido.prc_Abrir_Combinacao(fDMCadPedido);
       if not (fDMCadPedido.cdsCombinacao.IsEmpty) then
         vMsgErro := vMsgErro + #13 + '*** Esse produto possui cor/combinação e não foi informado!';
     end;
@@ -1463,7 +1462,7 @@ begin
 
   SpeedButton12Click(Sender);
   if (RxDBLookupCombo2.Text <> '') then
-    prc_Abrir_Combinacao;
+    uCalculo_Pedido.prc_Abrir_Combinacao(fDMCadPedido);
 end;
 
 procedure TfrmCadPedido_Itens.SpeedButton3Click(Sender: TObject);
@@ -1567,7 +1566,7 @@ begin
       RxDBLookupCombo6.KeyValue := StrToInt(FormatFloat('0',fDMCadPedido.vID_Variacao));
     RxDBLookupCombo1Exit(Sender);
   end;
-  prc_Abrir_Combinacao;
+  uCalculo_Pedido.prc_Abrir_Combinacao(fDMCadPedido);
   if (vID_Produto_Ant <> fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger) or (trim(fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString) = '') then
     fDMCadPedido.cdsPedido_ItensNOMEPRODUTO.AsString := RxDBLookupCombo2.Text;
   if fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger > 0 then
@@ -2255,13 +2254,6 @@ procedure TfrmCadPedido_Itens.DBEdit23KeyDown(Sender: TObject;
 begin
   if (Key = Vk_F2) then
     prc_Sel_Unidade(False);
-end;
-
-procedure TfrmCadPedido_Itens.prc_Abrir_Combinacao;
-begin
-  fDMCadPedido.cdsCombinacao.Close;
-  fDMCadPedido.sdsCombinacao.ParamByName('ID').AsInteger := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
-  fDMCadPedido.cdsCombinacao.Open;
 end;
 
 procedure TfrmCadPedido_Itens.Panel1Exit(Sender: TObject);

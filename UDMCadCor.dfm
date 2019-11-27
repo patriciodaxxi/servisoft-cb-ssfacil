@@ -26,6 +26,12 @@ object DMCadCor: TDMCadCor
       FieldName = 'PANTONE'
       Size = 15
     end
+    object sdsCorPRECO_MT: TFloatField
+      FieldName = 'PRECO_MT'
+    end
+    object sdsCorPRECO_M2: TFloatField
+      FieldName = 'PRECO_M2'
+    end
   end
   object dspCor: TDataSetProvider
     DataSet = sdsCor
@@ -51,6 +57,14 @@ object DMCadCor: TDMCadCor
     object cdsCorPANTONE: TStringField
       FieldName = 'PANTONE'
       Size = 15
+    end
+    object cdsCorPRECO_MT: TFloatField
+      FieldName = 'PRECO_MT'
+      DisplayFormat = '0.000#'
+    end
+    object cdsCorPRECO_M2: TFloatField
+      FieldName = 'PRECO_M2'
+      DisplayFormat = '0.000#'
     end
   end
   object dsCor: TDataSource
@@ -105,6 +119,21 @@ object DMCadCor: TDMCadCor
     object qVerifica_NomeNOME: TStringField
       FieldName = 'NOME'
       Size = 45
+    end
+  end
+  object qParametros: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT P.empresa_ambientes'
+      'FROM PARAMETROS P')
+    SQLConnection = dmDatabase.scoDados
+    Left = 288
+    Top = 115
+    object qParametrosEMPRESA_AMBIENTES: TStringField
+      FieldName = 'EMPRESA_AMBIENTES'
+      FixedChar = True
+      Size = 1
     end
   end
 end

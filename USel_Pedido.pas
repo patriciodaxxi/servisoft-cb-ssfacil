@@ -802,10 +802,19 @@ begin
     begin
       //aqui
       if fDMCadNotaFiscal.cdsPedido_TipoID_PERFIL.AsInteger > 0 then
-        vTexto := '(Perfil:' + fnc_busca_Produto_Tipo(fDMCadNotaFiscal.cdsPedido_TipoID_PERFIL.AsInteger) + ') ';
+      begin
+        vTexto := '(Perfil:' + fnc_busca_Produto_Tipo(fDMCadNotaFiscal.cdsPedido_TipoID_PERFIL.AsInteger);
+        if trim(fDMCadNotaFiscal.cdsPedido_TipoNOME_COR_PERFIL.AsString) <> '' then
+          vTexto := vTexto + ' ' + fDMCadNotaFiscal.cdsPedido_TipoNOME_COR_PERFIL.AsString;
+        vTexto := vTexto + ') ';
+      end;
+
       if fDMCadNotaFiscal.cdsPedido_TipoID_VIDRO.AsInteger > 0 then
       begin
-        vTexto := vTexto + '(Vidro:' +fnc_busca_Produto_Tipo(fDMCadNotaFiscal.cdsPedido_TipoID_VIDRO.AsInteger) + ') ';
+        vTexto := vTexto + '(Vidro:' +fnc_busca_Produto_Tipo(fDMCadNotaFiscal.cdsPedido_TipoID_VIDRO.AsInteger);
+        if trim(fDMCadNotaFiscal.cdsPedido_TipoNOME_COR_VIDRO.AsString) <> '' then
+          vTexto := vTexto + ' ' + fDMCadNotaFiscal.cdsPedido_TipoNOME_COR_VIDRO.AsString;
+        vTexto := vTexto + ') ';
       end;
       if fDMCadNotaFiscal.cdsPedido_TipoID_FURACAO.AsInteger > 0 then
       begin
@@ -818,7 +827,12 @@ begin
     if fDMCadNotaFiscal.cdsPedido_TipoTIPO_ORCAMENTO.AsString = 'V' then
     begin
       if fDMCadNotaFiscal.cdsPedido_TipoID_ACABAMENTO.AsInteger > 0 then
-        vTexto := vTexto + '(' + fnc_busca_Matriz_Preco(fDMCadNotaFiscal.cdsPedido_TipoID_ACABAMENTO.AsInteger) + ') ';
+      begin
+        vTexto := vTexto + '(' + fnc_busca_Matriz_Preco(fDMCadNotaFiscal.cdsPedido_TipoID_ACABAMENTO.AsInteger);
+        if trim(fDMCadNotaFiscal.cdsPedido_TipoNOME_COR_VIDRO.AsString) <> '' then
+          vTexto := vTexto + ' ' + fDMCadNotaFiscal.cdsPedido_TipoNOME_COR_VIDRO.AsString;
+        vTexto := vTexto + ') ';
+      end;
       if fDMCadNotaFiscal.cdsPedido_TipoID_REDONDO_MOD.AsInteger > 0 then
         vTexto := vTexto + '(' + fnc_busca_Matriz_Preco(fDMCadNotaFiscal.cdsPedido_TipoID_REDONDO_MOD.AsInteger) + ') ';
       if fDMCadNotaFiscal.cdsPedido_TipoID_CMOEDA.AsInteger > 0 then
@@ -834,9 +848,17 @@ begin
   end;
   if (fDMCadNotaFiscal.cdsParametrosEMPRESA_AMBIENTES.AsString = 'S') then
   begin
-    fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString + '('+fDMCadNotaFiscal.cdsPedidoNOME_CONSUMIDOR.AsString+')';
+    vTexto := '';
+    if (fDMCadNotaFiscal.cdsPedidoTIPO_ACESSORIO.AsString = 'T') and (StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoCOMPRIMENTO_VOLUME.AsFloat)) > 0) then
+      vTexto := '(Comp.: ' + FormatFloat('0.00##',fDMCadNotaFiscal.cdsPedidoCOMPRIMENTO_VOLUME.AsFloat)  + ')'
+    else
+    if (fDMCadNotaFiscal.cdsPedidoTIPO_ACESSORIO.AsString = 'R') and (StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoCOMPRIMENTO_VOLUME.AsFloat)) > 0) then
+      vTexto := '(Volume: ' + FormatFloat('0.00##',fDMCadNotaFiscal.cdsPedidoCOMPRIMENTO_VOLUME.AsFloat) + ')';
+    if vTexto <> '' then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString + vTexto;
   end;
-
+  if (fDMCadNotaFiscal.cdsParametrosEMPRESA_AMBIENTES.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsPedidoNOME_CONSUMIDOR.AsString) <> '') then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString + '('+fDMCadNotaFiscal.cdsPedidoNOME_CONSUMIDOR.AsString+')';
   if (fDMCadNotaFiscal.qParametros_PedUSA_OPERACAO_SERV.AsString = 'S') and (fDMCadNotaFiscal.cdsPedidoTIPO_OS.AsString = 'OC') and
     (trim(fDMCadNotaFiscal.cdsPedidoNUMOS.AsString) <> '') then
   begin

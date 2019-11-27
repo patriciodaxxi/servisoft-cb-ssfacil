@@ -14,10 +14,6 @@ type
     BitBtn1: TBitBtn;
     TS_Roldanas: TRzTabSheet;
     TS_Trilhos: TRzTabSheet;
-    Label28: TLabel;
-    RxDBLookupCombo1: TRxDBLookupCombo;
-    Label33: TLabel;
-    DBEdit29: TDBEdit;
     Label34: TLabel;
     DBEdit30: TDBEdit;
     Label35: TLabel;
@@ -38,6 +34,16 @@ type
     DBEdit3: TDBEdit;
     DBEdit4: TDBEdit;
     DBEdit5: TDBEdit;
+    Panel1: TPanel;
+    Label28: TLabel;
+    Label33: TLabel;
+    RxDBLookupCombo1: TRxDBLookupCombo;
+    DBEdit29: TDBEdit;
+    pnlCor: TPanel;
+    Label31: TLabel;
+    RxDBLookupCombo3: TRxDBLookupCombo;
+    Label7: TLabel;
+    DBEdit6: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -51,9 +57,12 @@ type
     procedure RxDBLookupCombo2Exit(Sender: TObject);
     procedure DBEdit3Exit(Sender: TObject);
     procedure DBEdit4Exit(Sender: TObject);
+    procedure pnlCorExit(Sender: TObject);
+    procedure pnlCorEnter(Sender: TObject);
   private
     { Private declarations }
     vItemMat: Integer;
+    vID_Cor_Ant : Integer;
 
     procedure prc_Calcular_Vlr_Trilhos;
     procedure prc_Calcular_Vlr_Roldanas;
@@ -70,7 +79,7 @@ var
 
 implementation
 
-uses uUtilPadrao, rsDBUtils, UDMUtil;
+uses uUtilPadrao, rsDBUtils, UDMUtil, uCalculo_Pedido;
 
 {$R *.dfm}
 
@@ -204,6 +213,7 @@ var
   vAux: Real;
   vCalcula_2_Lados: String;
   vVlr_Unitario: Real;
+  vVlr_Cor : Real;
 begin
   vVlr_Unitario := 0;
   fDMCadPedido.cdsPedido_AceVLR_TOTAL.AsFloat := 0;
@@ -218,7 +228,13 @@ begin
   if (StrToFloat(FormatFloat('0.0000',vVlr_Unitario)) > 0) and (fDMCadPedido.cdsPedido_AceCOMPRIMENTO_VOLUME.AsFloat > 0) then
   begin
     vAux := StrToFloat(FormatFloat('0.00000',fDMCadPedido.cdsPedido_AceCOMPRIMENTO_VOLUME.AsFloat / 1000));
-    vAux := StrToFloat(FormatFloat('0.0000',vAux * vVlr_Unitario));
+    //27/11/2019
+    vVlr_Cor := 0;
+    if StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_AcePRECO_COR.AsFloat)) > 0 then
+      vVlr_Cor := StrToFloat(FormatFloat('0.00',vAux * fDMCadPedido.cdsPedido_AcePRECO_COR.AsFloat));
+    //************
+
+    vAux := StrToFloat(FormatFloat('0.0000',(vAux * vVlr_Unitario) + vVlr_Cor));
     vVlr_Unitario := StrToFloat(FormatFloat('0.0000',vAux));
   end;
   fDMCadPedido.cdsPedido_AceVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00000',vVlr_Unitario));
@@ -272,6 +288,26 @@ end;
 procedure TfrmCadPedido_Ace.DBEdit4Exit(Sender: TObject);
 begin
   prc_Calcular_Vlr;
+end;
+
+procedure TfrmCadPedido_Ace.pnlCorExit(Sender: TObject);
+begin
+  if fDMCadPedido.cdsPedido_AceID_COR.AsInteger = vID_Cor_Ant then
+    exit;
+
+  if (fDMCadPedido.cdsPedido_AceID_COR.AsInteger > 0) then
+  begin
+    if fDMCadPedido.cdsCor.Locate('ID',fDMCadPedido.cdsPedido_AceID_COR.AsInteger,[loCaseInsensitive]) then
+      fDMCadPedido.cdsPedido_AcePRECO_COR.AsFloat := StrToFloat(FormatFloat('0.00000',fDMCadPedido.cdsCorPRECO_MT.AsFloat));
+  end
+  else
+    fDMCadPedido.cdsPedido_AcePRECO_COR.AsFloat := 0;
+  prc_Calcular_Vlr;
+end;
+
+procedure TfrmCadPedido_Ace.pnlCorEnter(Sender: TObject);
+begin
+  vID_Cor_Ant := fDMCadPedido.cdsPedido_AceID_COR.AsInteger;
 end;
 
 end.

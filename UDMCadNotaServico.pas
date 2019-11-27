@@ -3344,7 +3344,7 @@ begin
   //**************
 
   try
-    vAux := fDMCadExtComissao.fnc_Mover_Comissao('ENT',cdsNotaServicoSERIE.AsString,'',0,cdsNotaServicoDTEMISSAO_CAD.AsDateTime,
+    vAux := fDMCadExtComissao.fnc_Mover_Comissao(0,'ENT',cdsNotaServicoSERIE.AsString,'',0,cdsNotaServicoDTEMISSAO_CAD.AsDateTime,
                                                    cdsNotaServicoFILIAL.AsInteger,cdsNotaServicoID_VENDEDOR.AsInteger,
                                                    0,vID_Duplicata,vItem_Hist,cdsNotaServicoNUMNOTA.AsInteger,
                                                    cdsNotaServicoID_CLIENTE.AsInteger,vParcela,vID_NotaAux,

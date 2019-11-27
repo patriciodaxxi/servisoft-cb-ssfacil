@@ -799,7 +799,7 @@ object DMEtiqueta: TDMEtiqueta
     Aggregates = <>
     Params = <>
     ProviderName = 'dspNotaFiscal_Itens'
-    Left = 384
+    Left = 385
     Top = 136
     object cdsNotaFiscal_ItensID: TIntegerField
       FieldName = 'ID'

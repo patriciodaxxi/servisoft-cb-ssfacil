@@ -3092,6 +3092,9 @@ type
     cdsPedidoDTCONFERENCIA: TDateField;
     qParametros_NFeCALC_SIMPLES_CLI: TStringField;
     qParametros_NFeIMP_CONDPGTO_DADOS: TStringField;
+    cdsPedidoCOMPRIMENTO_VOLUME: TFloatField;
+    cdsPedido_TipoNOME_COR_PERFIL: TStringField;
+    cdsPedido_TipoNOME_COR_VIDRO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
