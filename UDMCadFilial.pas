@@ -664,6 +664,24 @@ type
     cdsFilial_MDFeEND_LOG: TStringField;
     sdsFilialARQ_MODELO_CONTRATO: TStringField;
     cdsFilialARQ_MODELO_CONTRATO: TStringField;
+    sdsFilial_SoftwareHouse: TSQLDataSet;
+    cdsFilial_SoftwareHouse: TClientDataSet;
+    dsFilial_SoftwareHouse: TDataSource;
+    sdsFilial_SoftwareHouseID: TIntegerField;
+    sdsFilial_SoftwareHouseTIPO: TIntegerField;
+    sdsFilial_SoftwareHouseTOKEN: TStringField;
+    sdsFilial_SoftwareHouseCNPJ: TStringField;
+    sdsFilial_SoftwareHouseAMBIENTE_ENVIO: TStringField;
+    sdsFilial_SoftwareHouseURL_PRODUCAO: TStringField;
+    sdsFilial_SoftwareHouseURL_HOMOLOGACAO: TStringField;
+    cdsFilialsdsFilial_SoftwareHouse: TDataSetField;
+    cdsFilial_SoftwareHouseID: TIntegerField;
+    cdsFilial_SoftwareHouseTIPO: TIntegerField;
+    cdsFilial_SoftwareHouseTOKEN: TStringField;
+    cdsFilial_SoftwareHouseCNPJ: TStringField;
+    cdsFilial_SoftwareHouseAMBIENTE_ENVIO: TStringField;
+    cdsFilial_SoftwareHouseURL_PRODUCAO: TStringField;
+    cdsFilial_SoftwareHouseURL_HOMOLOGACAO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsFilialNewRecord(DataSet: TDataSet);
     procedure cdsFilialBeforePost(DataSet: TDataSet);
@@ -757,6 +775,9 @@ begin
   cdsFilial_Certificados.First;
   if not cdsFilial_Certificados.IsEmpty then
     cdsFilial_Certificados.Delete;
+  cdsFilial_SoftwareHouse.First;
+  if not cdsFilial_SoftwareHouse.IsEmpty then
+    cdsFilial_SoftwareHouse.Delete;
   cdsFilial.Delete;
   cdsFilial.ApplyUpdates(0);
 end;
@@ -813,6 +834,8 @@ begin
   cdsFilial_Contabil.Open;
   cdsFilial_SMS.Close;
   cdsFilial_SMS.Open;
+  cdsFilial_SoftwareHouse.Close;
+  cdsFilial_SoftwareHouse.Open;
 end;
 
 procedure TDMCadFilial.DataModuleCreate(Sender: TObject);
