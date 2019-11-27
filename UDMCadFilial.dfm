@@ -2,8 +2,8 @@ object DMCadFilial: TDMCadFilial
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Left = 307
-  Top = 19
+  Left = 220
+  Top = 24
   Height = 709
   Width = 1045
   object sdsFilial: TSQLDataSet
@@ -868,6 +868,9 @@ object DMCadFilial: TDMCadFilial
     object cdsFilialARQ_MODELO_CONTRATO: TStringField
       FieldName = 'ARQ_MODELO_CONTRATO'
       Size = 200
+    end
+    object cdsFilialsdsFilial_SoftwareHouse: TDataSetField
+      FieldName = 'sdsFilial_SoftwareHouse'
     end
   end
   object dsFilial: TDataSource
@@ -2957,7 +2960,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 504
+    Top = 552
     object sdsFilial_CertificadosID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3023,7 +3026,7 @@ object DMCadFilial: TDMCadFilial
     Params = <>
     ProviderName = 'dspFilial_Certificados'
     Left = 136
-    Top = 504
+    Top = 552
     object cdsFilial_CertificadosID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3086,11 +3089,103 @@ object DMCadFilial: TDMCadFilial
   object dsFilial_Certificados: TDataSource
     DataSet = cdsFilial_Certificados
     Left = 168
-    Top = 504
+    Top = 552
   end
   object dspFilial_Certificados: TDataSetProvider
     DataSet = sdsFilial_Certificados
     Left = 104
+    Top = 552
+  end
+  object sdsFilial_SoftwareHouse: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT * FROM FILIAL_SOFTWAREHOUSE WHERE ID = :ID'
+    DataSource = dsmFilial
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Size = 4
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 72
+    Top = 504
+    object sdsFilial_SoftwareHouseID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object sdsFilial_SoftwareHouseTIPO: TIntegerField
+      FieldName = 'TIPO'
+      Required = True
+    end
+    object sdsFilial_SoftwareHouseTOKEN: TStringField
+      FieldName = 'TOKEN'
+      Required = True
+      Size = 50
+    end
+    object sdsFilial_SoftwareHouseCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Required = True
+      Size = 18
+    end
+    object sdsFilial_SoftwareHouseAMBIENTE_ENVIO: TStringField
+      FieldName = 'AMBIENTE_ENVIO'
+      FixedChar = True
+      Size = 1
+    end
+    object sdsFilial_SoftwareHouseURL_PRODUCAO: TStringField
+      FieldName = 'URL_PRODUCAO'
+      Size = 150
+    end
+    object sdsFilial_SoftwareHouseURL_HOMOLOGACAO: TStringField
+      FieldName = 'URL_HOMOLOGACAO'
+      Size = 150
+    end
+  end
+  object cdsFilial_SoftwareHouse: TClientDataSet
+    Aggregates = <>
+    DataSetField = cdsFilialsdsFilial_SoftwareHouse
+    IndexFieldNames = 'ID'
+    Params = <>
+    Left = 136
+    Top = 504
+    object cdsFilial_SoftwareHouseID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsFilial_SoftwareHouseTIPO: TIntegerField
+      FieldName = 'TIPO'
+      Required = True
+    end
+    object cdsFilial_SoftwareHouseTOKEN: TStringField
+      FieldName = 'TOKEN'
+      Required = True
+      Size = 50
+    end
+    object cdsFilial_SoftwareHouseCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Required = True
+      Size = 18
+    end
+    object cdsFilial_SoftwareHouseAMBIENTE_ENVIO: TStringField
+      FieldName = 'AMBIENTE_ENVIO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilial_SoftwareHouseURL_PRODUCAO: TStringField
+      FieldName = 'URL_PRODUCAO'
+      Size = 150
+    end
+    object cdsFilial_SoftwareHouseURL_HOMOLOGACAO: TStringField
+      FieldName = 'URL_HOMOLOGACAO'
+      Size = 150
+    end
+  end
+  object dsFilial_SoftwareHouse: TDataSource
+    DataSet = cdsFilial_SoftwareHouse
+    Left = 168
     Top = 504
   end
 end

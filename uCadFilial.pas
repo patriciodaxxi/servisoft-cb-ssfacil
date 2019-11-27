@@ -400,6 +400,20 @@ type
     Panel6: TPanel;
     Label146: TLabel;
     FilenameEdit1: TFilenameEdit;
+    ts_SoftwareHouse: TRzTabSheet;
+    pnlSoftwareHouse: TPanel;
+    ComboTipo: TRxDBComboBox;
+    Label147: TLabel;
+    dbedtToken: TDBEdit;
+    Label148: TLabel;
+    Label149: TLabel;
+    dbedtCNPJ: TDBEdit;
+    Label150: TLabel;
+    ComboAmbiente: TRxDBComboBox;
+    Label151: TLabel;
+    dbedtURLHomologacao: TDBEdit;
+    Label152: TLabel;
+    dbedtURLProducao: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -766,6 +780,7 @@ begin
   pnlMDFe.Enabled             := not(pnlMDFe.Enabled);
   pnlCusto.Enabled            := not(pnlCusto.Enabled);
   pnlSMS.Enabled              := not(pnlSMS.Enabled);
+  pnlSoftwareHouse.Enabled    := not(pnlSoftwareHouse.Enabled);
 end;
 
 procedure TfrmCadFilial.btnInserir_RelClick(Sender: TObject);
