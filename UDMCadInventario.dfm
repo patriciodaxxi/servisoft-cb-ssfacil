@@ -1,10 +1,10 @@
 object DMCadInventario: TDMCadInventario
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 311
-  Top = 84
-  Height = 573
-  Width = 777
+  Left = 234
+  Top = 29
+  Height = 591
+  Width = 960
   object sdsInventario: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -175,6 +175,9 @@ object DMCadInventario: TDMCadInventario
       Precision = 15
       Size = 0
     end
+    object sdsInventario_ItensNUM_LOTE_CONTROLE: TStringField
+      FieldName = 'NUM_LOTE_CONTROLE'
+    end
   end
   object cdsInventario_Itens: TClientDataSet
     Aggregates = <>
@@ -261,6 +264,9 @@ object DMCadInventario: TDMCadInventario
       Size = 100
       Calculated = True
     end
+    object cdsInventario_ItensNUM_LOTE_CONTROLE: TStringField
+      FieldName = 'NUM_LOTE_CONTROLE'
+    end
   end
   object dsInventario_Itens: TDataSource
     DataSet = cdsInventario_Itens
@@ -280,13 +286,13 @@ object DMCadInventario: TDMCadInventario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 512
-    Top = 160
+    Left = 552
+    Top = 128
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
-    Left = 544
-    Top = 160
+    Left = 584
+    Top = 128
   end
   object cdsProduto: TClientDataSet
     Aggregates = <>
@@ -294,8 +300,8 @@ object DMCadInventario: TDMCadInventario
     Params = <>
     ProviderName = 'dspProduto'
     OnCalcFields = cdsProdutoCalcFields
-    Left = 584
-    Top = 160
+    Left = 624
+    Top = 128
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -357,8 +363,8 @@ object DMCadInventario: TDMCadInventario
   end
   object dsProduto: TDataSource
     DataSet = cdsProduto
-    Left = 624
-    Top = 160
+    Left = 664
+    Top = 128
   end
   object sdsInventario_Consulta: TSQLDataSet
     NoMetadata = True
@@ -370,14 +376,14 @@ object DMCadInventario: TDMCadInventario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 440
-    Top = 40
+    Left = 480
+    Top = 8
   end
   object dspInventario_Consulta: TDataSetProvider
     DataSet = sdsInventario_Consulta
     OnUpdateError = dspInventarioUpdateError
-    Left = 512
-    Top = 40
+    Left = 552
+    Top = 8
   end
   object cdsInventario_Consulta: TClientDataSet
     Aggregates = <>
@@ -385,8 +391,8 @@ object DMCadInventario: TDMCadInventario
     Params = <>
     ProviderName = 'dspInventario_Consulta'
     OnNewRecord = cdsInventarioNewRecord
-    Left = 576
-    Top = 40
+    Left = 616
+    Top = 8
     object cdsInventario_ConsultaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -429,8 +435,8 @@ object DMCadInventario: TDMCadInventario
   end
   object dsInventario_Consulta: TDataSource
     DataSet = cdsInventario_Consulta
-    Left = 648
-    Top = 40
+    Left = 688
+    Top = 8
   end
   object sdsFilial: TSQLDataSet
     NoMetadata = True
@@ -439,21 +445,21 @@ object DMCadInventario: TDMCadInventario
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 464
-    Top = 104
+    Left = 504
+    Top = 72
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
-    Left = 496
-    Top = 104
+    Left = 536
+    Top = 72
   end
   object cdsFilial: TClientDataSet
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFilial'
-    Left = 536
-    Top = 104
+    Left = 576
+    Top = 72
     object cdsFilialID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -469,8 +475,8 @@ object DMCadInventario: TDMCadInventario
   end
   object dsFilial: TDataSource
     DataSet = cdsFilial
-    Left = 576
-    Top = 104
+    Left = 616
+    Top = 72
   end
   object qProximo: TSQLQuery
     MaxBlobSize = -1
@@ -585,10 +591,11 @@ object DMCadInventario: TDMCadInventario
     SQL.Strings = (
       
         'SELECT INFORMAR_COR_MATERIAL, INFORMAR_COR_PROD, INV_TRAZER_QTD_' +
-        'ZERADA, USA_LOCAL_ESTOQUE'
+        'ZERADA, '
+      'USA_LOCAL_ESTOQUE, USA_LOTE_CONTROLE'
       'FROM PARAMETROS')
     SQLConnection = dmDatabase.scoDados
-    Left = 383
+    Left = 384
     Top = 176
     object qParametrosINFORMAR_COR_MATERIAL: TStringField
       FieldName = 'INFORMAR_COR_MATERIAL'
@@ -607,6 +614,11 @@ object DMCadInventario: TDMCadInventario
     end
     object qParametrosUSA_LOCAL_ESTOQUE: TStringField
       FieldName = 'USA_LOCAL_ESTOQUE'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametrosUSA_LOTE_CONTROLE: TStringField
+      FieldName = 'USA_LOTE_CONTROLE'
       FixedChar = True
       Size = 1
     end
@@ -890,5 +902,78 @@ object DMCadInventario: TDMCadInventario
     StoredProcName = 'PRC_BUSCA_PRODUTO_INVETARIO'
     Left = 644
     Top = 336
+  end
+  object sdsEstoque_Lote: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT E.filial, E.id_produto, E.id_cor, E.num_lote_controle, E.' +
+      'qtd,'#13#10'P.NOME NOME_PRODUTO, P.REFERENCIA, p.preco_custo, p.preco_' +
+      'venda, p.UNIDADE,'#13#10'P.perc_ipi'#13#10'FROM estoque_lote e'#13#10'INNER JOIN P' +
+      'RODUTO P'#13#10'ON E.ID_PRODUTO = P.ID'#13#10
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 552
+    Top = 176
+  end
+  object dspEstoque_Lote: TDataSetProvider
+    DataSet = sdsEstoque_Lote
+    Left = 584
+    Top = 176
+  end
+  object cdsEstoque_Lote: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspEstoque_Lote'
+    OnCalcFields = cdsProdutoCalcFields
+    Left = 624
+    Top = 177
+    object cdsEstoque_LoteFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+      Required = True
+    end
+    object cdsEstoque_LoteID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+      Required = True
+    end
+    object cdsEstoque_LoteID_COR: TIntegerField
+      FieldName = 'ID_COR'
+      Required = True
+    end
+    object cdsEstoque_LoteNUM_LOTE_CONTROLE: TStringField
+      FieldName = 'NUM_LOTE_CONTROLE'
+      Required = True
+    end
+    object cdsEstoque_LoteQTD: TFMTBCDField
+      FieldName = 'QTD'
+      DisplayFormat = '0.0000'
+      Precision = 15
+    end
+    object cdsEstoque_LoteNOME_PRODUTO: TStringField
+      FieldName = 'NOME_PRODUTO'
+      Size = 100
+    end
+    object cdsEstoque_LoteREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsEstoque_LotePRECO_CUSTO: TFloatField
+      FieldName = 'PRECO_CUSTO'
+    end
+    object cdsEstoque_LotePRECO_VENDA: TFloatField
+      FieldName = 'PRECO_VENDA'
+    end
+    object cdsEstoque_LoteUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object cdsEstoque_LotePERC_IPI: TFloatField
+      FieldName = 'PERC_IPI'
+    end
+  end
+  object dsEstoque_Lote: TDataSource
+    DataSet = cdsEstoque_Lote
+    Left = 664
+    Top = 176
   end
 end

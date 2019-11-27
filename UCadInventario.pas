@@ -65,6 +65,7 @@ type
     Label9: TLabel;
     RxDBLookupCombo2: TRxDBLookupCombo;
     btnLiberaGrid: TBitBtn;
+    btnImp_EstoqueLote: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -92,6 +93,7 @@ type
       Shift: TShiftState);
     procedure btnLiberaGridClick(Sender: TObject);
     procedure DBDateEdit1Enter(Sender: TObject);
+    procedure btnImp_EstoqueLoteClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadInventario: TDMCadInventario;
@@ -123,7 +125,8 @@ var
 
 implementation
 
-uses DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, URelInventario;
+uses DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, URelInventario,
+  UCadInventario_EstLote;
 
 {$R *.dfm}
 
@@ -261,6 +264,8 @@ begin
   begin
     if (SMDBGrid2.Columns[i].FieldName = 'NOME_COR_COMBINACAO') then
       SMDBGrid2.Columns[i].Visible := ((fDMCadInventario.qParametrosINFORMAR_COR_MATERIAL.AsString = 'S') or (fDMCadInventario.qParametrosINFORMAR_COR_PROD.AsString = 'C'));
+    if (SMDBGrid2.Columns[i].FieldName = 'NUM_LOTE_CONTROLE') then
+      SMDBGrid1.Columns[i].Visible := (fDMCadInventario.qParametrosUSA_LOTE_CONTROLE.AsString = 'S');
   end;
 
   for i := 1 to SMDBGrid1.ColCount - 2 do
@@ -268,12 +273,12 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'COD_LOCAL') or (SMDBGrid1.Columns[i].FieldName = 'NOME_LOCAL') then
       SMDBGrid1.Columns[i].Visible := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
   end;
-
-  Label4.Visible           := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
-  rxdbLocalEstoque.Visible := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
-  SpeedButton4.Visible     := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
-  Label9.Visible           := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
-  RxDBLookupCombo2.Visible := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
+  Label4.Visible             := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
+  rxdbLocalEstoque.Visible   := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
+  SpeedButton4.Visible       := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
+  Label9.Visible             := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
+  RxDBLookupCombo2.Visible   := (fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString = 'S');
+  btnImp_EstoqueLote.Visible := (fDMCadInventario.qParametrosUSA_LOTE_CONTROLE.AsString = 'S');
 end;
 
 procedure TfrmCadInventario.prc_Consultar(ID: Integer);
@@ -570,7 +575,8 @@ begin
                                                    fDMCadInventario.cdsInventario_ItensPERC_IPI.AsFloat,
                                                    0,0,0,vQtd,
                                                    fDMCadInventario.cdsInventario_ItensVLR_UNITARIO.AsFloat,
-                                                   0,0,'',fDMCadInventario.cdsInventario_ItensID_COR.AsInteger,'',
+                                                   0,0,'',fDMCadInventario.cdsInventario_ItensID_COR.AsInteger,
+                                                   fDMCadInventario.cdsInventario_ItensNUM_LOTE_CONTROLE.AsString,
                                                    vGerar_Custo,
                                                    fDMCadInventario.cdsInventario_ItensVLR_UNITARIO.AsFloat,0,0,0,0,);
       fDMCadInventario.cdsInventario_Itens.Edit;
@@ -621,11 +627,12 @@ procedure TfrmCadInventario.prc_Habilita;
 var
   i: Integer;
 begin
-  TS_Consulta.TabEnabled := not(TS_Consulta.TabEnabled);
-  btnAlterar.Enabled     := not(btnAlterar.Enabled);
-  btnConfirmar.Enabled   := not(btnConfirmar.Enabled);
-  pnlCadastro.Enabled    := not(pnlCadastro.Enabled);
-  Panel4.Enabled         := not(Panel4.Enabled);
+  TS_Consulta.TabEnabled     := not(TS_Consulta.TabEnabled);
+  btnAlterar.Enabled         := not(btnAlterar.Enabled);
+  btnConfirmar.Enabled       := not(btnConfirmar.Enabled);
+  btnImp_EstoqueLote.Enabled := not(btnImp_EstoqueLote.Enabled);
+  pnlCadastro.Enabled        := not(pnlCadastro.Enabled);
+  Panel4.Enabled             := not(Panel4.Enabled);
   for i := 1 to SMDBGrid2.ColCount - 2 do
   begin
     if (SMDBGrid2.Columns[i].FieldName = 'QTD_INVENTARIO') or (SMDBGrid2.Columns[i].FieldName = 'VLR_UNITARIO')  then
@@ -678,6 +685,14 @@ end;
 procedure TfrmCadInventario.DBDateEdit1Enter(Sender: TObject);
 begin
   DBDateEdit1.ReadOnly := ((fDMCadInventario.qParametros_EstINVENTARIO_ESTMOV.AsString = 'S') and (fDMCadInventario.cdsInventario_Itens.RecordCount > 0));
+end;
+
+procedure TfrmCadInventario.btnImp_EstoqueLoteClick(Sender: TObject);
+begin
+  frmCadInventario_EstLote := TfrmCadInventario_EstLote.Create(self);
+  frmCadInventario_EstLote.fDMCadInventario := fDMCadInventario;
+  frmCadInventario_EstLote.ShowModal;
+  FreeAndNil(frmCadInventario_EstLote);
 end;
 
 end.

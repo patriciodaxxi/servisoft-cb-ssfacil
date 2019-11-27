@@ -168,6 +168,24 @@ type
     qProd2PRECO_CUSTO: TFloatField;
     qProd2TIPO_REG: TStringField;
     SPBuscarProdInventario: TSQLStoredProc;
+    sdsInventario_ItensNUM_LOTE_CONTROLE: TStringField;
+    cdsInventario_ItensNUM_LOTE_CONTROLE: TStringField;
+    sdsEstoque_Lote: TSQLDataSet;
+    dspEstoque_Lote: TDataSetProvider;
+    cdsEstoque_Lote: TClientDataSet;
+    dsEstoque_Lote: TDataSource;
+    cdsEstoque_LoteFILIAL: TIntegerField;
+    cdsEstoque_LoteID_PRODUTO: TIntegerField;
+    cdsEstoque_LoteID_COR: TIntegerField;
+    cdsEstoque_LoteNUM_LOTE_CONTROLE: TStringField;
+    cdsEstoque_LoteQTD: TFMTBCDField;
+    cdsEstoque_LoteNOME_PRODUTO: TStringField;
+    cdsEstoque_LoteREFERENCIA: TStringField;
+    qParametrosUSA_LOTE_CONTROLE: TStringField;
+    cdsEstoque_LotePRECO_CUSTO: TFloatField;
+    cdsEstoque_LotePRECO_VENDA: TFloatField;
+    cdsEstoque_LoteUNIDADE: TStringField;
+    cdsEstoque_LotePERC_IPI: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsInventarioNewRecord(DataSet: TDataSet);
     procedure dspInventarioUpdateError(Sender: TObject;
@@ -191,6 +209,7 @@ type
     ctCommand: String;
     ctConsulta : String;
     ctProduto : String;
+    ctEstoque_Lote : String;
     
     procedure prc_Localizar(ID: Integer);
     procedure prc_Inserir;
@@ -265,9 +284,10 @@ var
   vIndices: string;
   aIndices: array of string;
 begin
-  ctCommand  := sdsInventario.CommandText;
-  ctConsulta := sdsInventario_Consulta.CommandText;
-  ctProduto  := sdsProduto.CommandText;
+  ctCommand      := sdsInventario.CommandText;
+  ctConsulta     := sdsInventario_Consulta.CommandText;
+  ctProduto      := sdsProduto.CommandText;
+  ctEstoque_Lote := sdsEstoque_Lote.CommandText;
 
   cdsFilial.Open;
   cdsEstoque_Atual.Open;
