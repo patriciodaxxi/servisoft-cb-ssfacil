@@ -13461,6 +13461,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_ProdUSA_BITOLA: TStringField
+      FieldName = 'USA_BITOLA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros_Geral: TSQLQuery
     MaxBlobSize = -1

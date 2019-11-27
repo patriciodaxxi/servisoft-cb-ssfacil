@@ -3095,6 +3095,7 @@ type
     cdsPedidoCOMPRIMENTO_VOLUME: TFloatField;
     cdsPedido_TipoNOME_COR_PERFIL: TStringField;
     cdsPedido_TipoNOME_COR_VIDRO: TStringField;
+    qParametros_ProdUSA_BITOLA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
