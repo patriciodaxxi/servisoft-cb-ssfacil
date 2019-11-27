@@ -1,6 +1,6 @@
 object frmCadFilial: TfrmCadFilial
-  Left = 192
-  Top = 79
+  Left = 155
+  Top = 55
   Width = 1102
   Height = 629
   Caption = 'Cadastro de Filial (Empresa)'
@@ -706,10 +706,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1082
         Height = 536
-        ActivePage = TS_Dados
+        ActivePage = ts_SoftwareHouse
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 0
+        TabIndex = 16
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -5759,127 +5759,136 @@ object frmCadFilial: TfrmCadFilial
         end
         object ts_SoftwareHouse: TRzTabSheet
           Caption = 'Software House'
-          object Label147: TLabel
-            Left = 73
-            Top = 23
-            Width = 24
-            Height = 13
-            Caption = 'Tipo:'
-          end
-          object Label148: TLabel
-            Left = 63
-            Top = 46
-            Width = 34
-            Height = 13
-            Caption = 'Token:'
-          end
-          object Label149: TLabel
-            Left = 67
-            Top = 70
-            Width = 30
-            Height = 13
-            Caption = 'CNPJ:'
-          end
-          object Label150: TLabel
-            Left = 5
-            Top = 94
-            Width = 92
-            Height = 13
-            Caption = 'Ambiente de Envio:'
-          end
-          object Label151: TLabel
-            Left = 3
-            Top = 117
-            Width = 94
-            Height = 13
-            Caption = 'URL Homologa'#231#227'o:'
-          end
-          object Label152: TLabel
-            Left = 23
-            Top = 141
-            Width = 74
-            Height = 13
-            Caption = 'URL Produ'#231#227'o:'
-          end
-          object ComboTipo: TRxDBComboBox
-            Left = 99
-            Top = 15
-            Width = 145
-            Height = 21
-            Style = csDropDownList
-            DataField = 'TIPO'
-            DataSource = DMCadFilial.dsFilial_SoftwareHouse
-            EnableValues = True
-            ItemHeight = 13
-            Items.Strings = (
-              'Boleto'
-              'MDFe'
-              'Manifesto'
-              'NFSe'
-              'NFCe'
-              'NFe')
+          object pnlSoftwareHouse: TPanel
+            Left = 0
+            Top = 0
+            Width = 1078
+            Height = 513
+            Align = alClient
+            Enabled = False
             TabOrder = 0
-            Values.Strings = (
-              '1'
-              '2'
-              '3'
-              '4'
-              '5'
-              '6')
-          end
-          object dbedtToken: TDBEdit
-            Left = 99
-            Top = 38
-            Width = 297
-            Height = 21
-            DataField = 'TOKEN'
-            DataSource = DMCadFilial.dsFilial_SoftwareHouse
-            TabOrder = 1
-          end
-          object dbedtCNPJ: TDBEdit
-            Left = 99
-            Top = 62
-            Width = 297
-            Height = 21
-            DataField = 'CNPJ'
-            DataSource = DMCadFilial.dsFilial_SoftwareHouse
-            TabOrder = 2
-          end
-          object ComboAmbiente: TRxDBComboBox
-            Left = 99
-            Top = 86
-            Width = 145
-            Height = 21
-            Style = csDropDownList
-            DataField = 'AMBIENTE_ENVIO'
-            DataSource = DMCadFilial.dsFilial_SoftwareHouse
-            EnableValues = True
-            ItemHeight = 13
-            Items.Strings = (
-              'Homologa'#231#227'o'
-              'Produ'#231#227'o')
-            TabOrder = 3
-            Values.Strings = (
-              'H'
-              'P')
-          end
-          object dbedtURLHomologacao: TDBEdit
-            Left = 99
-            Top = 109
-            Width = 374
-            Height = 21
-            DataField = 'URL_HOMOLOGACAO'
-            DataSource = DMCadFilial.dsFilial_SoftwareHouse
-            TabOrder = 4
-          end
-          object dbedtURLProducao: TDBEdit
-            Left = 99
-            Top = 133
-            Width = 374
-            Height = 21
-            DataField = 'URL_PRODUCAO'
-            DataSource = DMCadFilial.dsFilial_SoftwareHouse
-            TabOrder = 5
+            object Label147: TLabel
+              Left = 73
+              Top = 23
+              Width = 24
+              Height = 13
+              Caption = 'Tipo:'
+            end
+            object Label148: TLabel
+              Left = 63
+              Top = 46
+              Width = 34
+              Height = 13
+              Caption = 'Token:'
+            end
+            object Label149: TLabel
+              Left = 67
+              Top = 70
+              Width = 30
+              Height = 13
+              Caption = 'CNPJ:'
+            end
+            object Label150: TLabel
+              Left = 5
+              Top = 94
+              Width = 92
+              Height = 13
+              Caption = 'Ambiente de Envio:'
+            end
+            object Label151: TLabel
+              Left = 3
+              Top = 117
+              Width = 94
+              Height = 13
+              Caption = 'URL Homologa'#231#227'o:'
+            end
+            object Label152: TLabel
+              Left = 23
+              Top = 141
+              Width = 74
+              Height = 13
+              Caption = 'URL Produ'#231#227'o:'
+            end
+            object ComboTipo: TRxDBComboBox
+              Left = 99
+              Top = 15
+              Width = 145
+              Height = 21
+              Style = csDropDownList
+              DataField = 'TIPO'
+              DataSource = DMCadFilial.dsFilial_SoftwareHouse
+              EnableValues = True
+              ItemHeight = 13
+              Items.Strings = (
+                'Boleto'
+                'MDFe'
+                'Manifesto'
+                'NFSe'
+                'NFCe'
+                'NFe')
+              TabOrder = 0
+              Values.Strings = (
+                '1'
+                '2'
+                '3'
+                '4'
+                '5'
+                '6')
+            end
+            object dbedtToken: TDBEdit
+              Left = 99
+              Top = 38
+              Width = 297
+              Height = 21
+              DataField = 'TOKEN'
+              DataSource = DMCadFilial.dsFilial_SoftwareHouse
+              TabOrder = 1
+            end
+            object dbedtCNPJ: TDBEdit
+              Left = 99
+              Top = 62
+              Width = 297
+              Height = 21
+              DataField = 'CNPJ'
+              DataSource = DMCadFilial.dsFilial_SoftwareHouse
+              TabOrder = 2
+            end
+            object ComboAmbiente: TRxDBComboBox
+              Left = 99
+              Top = 86
+              Width = 145
+              Height = 21
+              Style = csDropDownList
+              DataField = 'AMBIENTE_ENVIO'
+              DataSource = DMCadFilial.dsFilial_SoftwareHouse
+              EnableValues = True
+              ItemHeight = 13
+              Items.Strings = (
+                'Homologa'#231#227'o'
+                'Produ'#231#227'o')
+              TabOrder = 3
+              Values.Strings = (
+                'H'
+                'P')
+            end
+            object dbedtURLHomologacao: TDBEdit
+              Left = 99
+              Top = 109
+              Width = 374
+              Height = 21
+              DataField = 'URL_HOMOLOGACAO'
+              DataSource = DMCadFilial.dsFilial_SoftwareHouse
+              TabOrder = 4
+            end
+            object dbedtURLProducao: TDBEdit
+              Left = 99
+              Top = 133
+              Width = 374
+              Height = 21
+              DataField = 'URL_PRODUCAO'
+              DataSource = DMCadFilial.dsFilial_SoftwareHouse
+              TabOrder = 5
+            end
           end
         end
       end

@@ -401,6 +401,7 @@ type
     Label146: TLabel;
     FilenameEdit1: TFilenameEdit;
     ts_SoftwareHouse: TRzTabSheet;
+    pnlSoftwareHouse: TPanel;
     ComboTipo: TRxDBComboBox;
     Label147: TLabel;
     dbedtToken: TDBEdit;
@@ -779,6 +780,7 @@ begin
   pnlMDFe.Enabled             := not(pnlMDFe.Enabled);
   pnlCusto.Enabled            := not(pnlCusto.Enabled);
   pnlSMS.Enabled              := not(pnlSMS.Enabled);
+  pnlSoftwareHouse.Enabled    := not(pnlSoftwareHouse.Enabled);
 end;
 
 procedure TfrmCadFilial.btnInserir_RelClick(Sender: TObject);
