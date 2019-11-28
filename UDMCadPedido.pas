@@ -3562,6 +3562,8 @@ type
     sdsPedido_Item_TipoFOTO: TStringField;
     cdsPedido_Item_TipoFOTO: TStringField;
     cdsPedidoImp_TipoFOTO: TStringField;
+    qParametros_PedAPROVAR_PEDIDO_WEB: TStringField;
+    qParametros_GeralFILIAL_PADRAO_PEDWEB: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

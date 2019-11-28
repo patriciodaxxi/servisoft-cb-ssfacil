@@ -1,6 +1,6 @@
 object frmCadPedido: TfrmCadPedido
-  Left = 56
-  Top = 12
+  Left = 102
+  Top = 6
   Width = 1105
   Height = 710
   Caption = 'Pedido de Venda'
@@ -2411,7 +2411,7 @@ object frmCadPedido: TfrmCadPedido
         Top = 190
         Width = 1093
         Height = 397
-        ActivePage = TS_Trilhos
+        ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -2419,7 +2419,7 @@ object frmCadPedido: TfrmCadPedido
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 3
+        TabIndex = 0
         TabOrder = 1
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet

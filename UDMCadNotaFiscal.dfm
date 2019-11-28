@@ -5156,8 +5156,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       '_CLI'#13#10',P.NUM_MS,IMP_CONSUMO_NFE,DT_ALT_PRECOCUSTO,PRECO_CUSTO_TO' +
       'TAL,PERC_MARGEMLUCRO'#13#10',PERC_DESC_MAX,SPED_TIPO_ITEM,ID_CSTICMS_B' +
       'RED,USA_PRECO_COR,TAMANHO,COD_BARRA2,QTD_EMBALAGEM'#13#10',ID_MARCA,UN' +
-      'IDADE2,ID_CSTICMS,P.NOME_MODELO,P.perc_icms_nfce, P.CALCULAR_ST'#13 +
-      #10'FROM PRODUTO P'#13#10#13#10
+      'IDADE2,ID_CSTICMS,P.NOME_MODELO,P.perc_icms_nfce, P.CALCULAR_ST,' +
+      ' P.MEDIDA'#13#10'FROM PRODUTO P'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -5406,6 +5406,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'CALCULAR_ST'
       FixedChar = True
       Size = 1
+    end
+    object cdsProdutoMEDIDA: TStringField
+      FieldName = 'MEDIDA'
     end
   end
   object dsProduto: TDataSource
@@ -7898,14 +7901,14 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       ' NUM_OS_SERVICO, O.DTRECEBIMENTO, O.DT_AGENDA,'#13#10'       PIT.COMPR' +
       'IMENTO, PIT.LARGURA, PIT.ESPESSURA, PI.DRAWBACK, PE.TIPO_DESCONT' +
       'O, '#13#10'       PI.perc_desconto, PI.dtconferencia, PI.comprimento_v' +
-      'olume'#13#10'from PEDIDO PE'#13#10'inner join PEDIDO_ITEM pi on (PE.ID = pi.' +
-      'ID)'#13#10'inner join PESSOA CLI on (PE.ID_CLIENTE = CLI.CODIGO)'#13#10'inne' +
-      'r join PRODUTO PRO on (pi.ID_PRODUTO = PRO.ID)'#13#10'left join COMBIN' +
-      'ACAO COMB on (pi.ID_COR = COMB.ID)'#13#10'left join GRUPO GR on PRO.ID' +
-      '_GRUPO = GR.ID'#13#10'left join PESSOA_FISCAL PF on PE.ID_CLIENTE = PF' +
-      '.CODIGO'#13#10'left join ORDEMSERVICO O on pi.ID_OS_SERV = O.ID'#13#10'left ' +
-      'join PEDIDO_ITEM_TIPO PIT ON PI.ID = PIT.ID AND PI.ITEM = PIT.IT' +
-      'EM'#13#10'where pi.QTD_RESTANTE > 0'#13#10#13#10#13#10
+      'olume, pro.medida'#13#10'from PEDIDO PE'#13#10'inner join PEDIDO_ITEM pi on ' +
+      '(PE.ID = pi.ID)'#13#10'inner join PESSOA CLI on (PE.ID_CLIENTE = CLI.C' +
+      'ODIGO)'#13#10'inner join PRODUTO PRO on (pi.ID_PRODUTO = PRO.ID)'#13#10'left' +
+      ' join COMBINACAO COMB on (pi.ID_COR = COMB.ID)'#13#10'left join GRUPO ' +
+      'GR on PRO.ID_GRUPO = GR.ID'#13#10'left join PESSOA_FISCAL PF on PE.ID_' +
+      'CLIENTE = PF.CODIGO'#13#10'left join ORDEMSERVICO O on pi.ID_OS_SERV =' +
+      ' O.ID'#13#10'left join PEDIDO_ITEM_TIPO PIT ON PI.ID = PIT.ID AND PI.I' +
+      'TEM = PIT.ITEM'#13#10'where pi.QTD_RESTANTE > 0'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -8272,6 +8275,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsPedidoCOMPRIMENTO_VOLUME: TFloatField
       FieldName = 'COMPRIMENTO_VOLUME'
+    end
+    object cdsPedidoMEDIDA: TStringField
+      FieldName = 'MEDIDA'
     end
   end
   object dsPedido: TDataSource
