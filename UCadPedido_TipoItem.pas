@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, NxCollection, UDMCadPedido, Grids, Mask,
-  DBCtrls, RzTabs,  ToolEdit, DB, ExtCtrls, Buttons, RxLookup, RzPanel;
+  DBCtrls, RzTabs,  ToolEdit, DB, ExtCtrls, Buttons, RxLookup, RzPanel,
+  jpeg;
 
 type
   TfrmCadPedido_TipoItem = class(TForm)
@@ -136,6 +137,9 @@ type
     RxDBLookupCombo10: TRxDBLookupCombo;
     DBEdit48: TDBEdit;
     Label58: TLabel;
+    Label59: TLabel;
+    Image1: TImage;
+    FilenameEdit1: TFilenameEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -193,6 +197,8 @@ type
     procedure RxDBLookupCombo9Exit(Sender: TObject);
     procedure DBEdit47Exit(Sender: TObject);
     procedure DBEdit46Exit(Sender: TObject);
+    procedure RzPageControl1Change(Sender: TObject);
+    procedure FilenameEdit1Change(Sender: TObject);
   private
     { Private declarations }
     vItemMat: Integer;
@@ -220,6 +226,7 @@ type
     procedure prc_Calcular_Vlr_Porta;
     function fnc_Preco_Matriz(ID_Produto, ID_Matriz: Integer ; Tipo_Preco: String ; Valor: Real): Real;
     procedure prc_Calcular_Medida_Corte;
+    function fnc_MontaCaminhoFoto : String;
 
   public
     { Public declarations }
@@ -257,6 +264,8 @@ begin
   DBEdit41.Visible := (fDMCadPedido.cdsParametrosTIPO_REL_PEDIDO.AsString = 'S2');
   DBEdit6.ReadOnly := ((fDMCadPedido.cdsParametrosTIPO_REL_PEDIDO.AsString <> 'S2') or (fDMCadPedido.cdsParametrosTIPO_REL_PEDIDO.IsNull));
   Calcular_Edit := SQLLocate('PARAMETROS_PED','ID','CALCULA_EDIT','1') = 'S';
+  if fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString <> EmptyStr then
+    FilenameEdit1.FileName := fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString;
 end;
 
 procedure TfrmCadPedido_TipoItem.FormKeyDown(Sender: TObject; var Key: Word;
@@ -349,6 +358,7 @@ end;
 procedure TfrmCadPedido_TipoItem.BitBtn1Click(Sender: TObject);
 var
   vMsgAux: String;
+  NomeFoto : String;
 begin
   vMsgAux := '';
   if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_Item_TipoQTD.AsFloat)) <= 0 then
@@ -369,6 +379,11 @@ begin
     MessageDlg(vMsgAux, mtError, [mbOk], 0);
     exit;
   end;
+  if FilenameEdit1.FileName <> EmptyStr then
+  begin
+    fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString := FilenameEdit1.FileName;
+  end;
+
   if TS_Chapas.TabVisible then
     fDMCadPedido.cdsPedido_Item_TipoTIPO_ORCAMENTO.AsString := 'C'
   else
@@ -672,8 +687,13 @@ begin
 end;
 
 procedure TfrmCadPedido_TipoItem.RxDBLookupCombo7Exit(Sender: TObject);
+var
+  vNomeFoto : string;
 begin
   prc_Calcular_Vlr_Porta;
+  vNomeFoto := fnc_MontaCaminhoFoto;
+  if (vNomeFoto <> EmptyStr) then
+    FilenameEdit1.FileName := vNomeFoto;
 end;
 
 procedure TfrmCadPedido_TipoItem.DBEdit29Exit(Sender: TObject);
@@ -999,6 +1019,46 @@ end;
 procedure TfrmCadPedido_TipoItem.DBEdit46Exit(Sender: TObject);
 begin
   prc_Calcular_Vlr_Porta;
+end;
+
+procedure TfrmCadPedido_TipoItem.RzPageControl1Change(Sender: TObject);
+begin
+  if RzPageControl1.ActivePage = TS_Porta then
+  begin
+    try
+      if FilenameEdit1.FileName <> EmptyStr then
+        Image1.Picture.LoadFromFile(FilenameEdit1.FileName )
+    except
+      Image1.Picture := nil;
+    end;
+  end;
+end;
+
+procedure TfrmCadPedido_TipoItem.FilenameEdit1Change(Sender: TObject);
+begin
+  try
+    if FilenameEdit1.FileName <> EmptyStr then
+      Image1.Picture.LoadFromFile(FilenameEdit1.FileName )
+  except
+    Image1.Picture := nil;
+  end;
+
+end;
+
+
+function TfrmCadPedido_TipoItem.fnc_MontaCaminhoFoto: String;
+var
+  NomeFuracao : String;
+  CaminhoFoto : String;
+begin
+  Result := '';
+  NomeFuracao := SQLLocate('MATRIZ_PRECO','ID','NOME',fDMCadPedido.cdsPedido_Item_TipoID_FURACAO.AsString);
+  CaminhoFoto := Trim(fDMCadPedido.qParametros_ProdEND_FOTO.AsString) +
+                 Trim(fDMCadPedido.qParametros_ProdNOME_FOTO.AsString) + '_' +
+                 Trim(fDMCadPedido.cdsPedido_ItensREFERENCIA.AsString) + '_' +
+                 Trim(NomeFuracao) + '.JPG';
+  if FileExists(CaminhoFoto) then
+    Result := CaminhoFoto;
 end;
 
 end.

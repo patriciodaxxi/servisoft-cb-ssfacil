@@ -1,6 +1,6 @@
 object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
-  Left = 322
-  Top = 117
+  Left = 366
+  Top = 103
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmCadPedido_TipoItem'
@@ -37,6 +37,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     TabOrder = 0
     TextColors.DisabledShadow = clActiveCaption
     TextColors.Selected = 8404992
+    OnChange = RzPageControl1Change
     FixedDimension = 19
     object TS_Chapas: TRzTabSheet
       Color = clMoneyGreen
@@ -990,6 +991,20 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Alignment = taRightJustify
         Caption = 'Cor Vidro:'
       end
+      object Label59: TLabel
+        Left = 79
+        Top = 376
+        Width = 24
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Foto:'
+      end
+      object Image1: TImage
+        Left = 416
+        Top = 16
+        Width = 313
+        Height = 305
+      end
       object DBEdit36: TDBEdit
         Left = 104
         Top = 294
@@ -1191,6 +1206,15 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         TabOrder = 4
         OnEnter = RxDBLookupCombo9Enter
         OnExit = RxDBLookupCombo9Exit
+      end
+      object FilenameEdit1: TFilenameEdit
+        Left = 104
+        Top = 368
+        Width = 297
+        Height = 21
+        NumGlyphs = 1
+        TabOrder = 11
+        OnChange = FilenameEdit1Change
       end
     end
   end

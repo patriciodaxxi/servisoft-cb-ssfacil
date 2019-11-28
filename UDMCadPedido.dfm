@@ -10101,6 +10101,10 @@ object DMCadPedido: TDMCadPedido
     object sdsPedido_Item_TipoPRECO_COR_VIDRO: TFloatField
       FieldName = 'PRECO_COR_VIDRO'
     end
+    object sdsPedido_Item_TipoFOTO: TStringField
+      FieldName = 'FOTO'
+      Size = 200
+    end
   end
   object cdsPedido_Item_Tipo: TClientDataSet
     Aggregates = <>
@@ -10317,6 +10321,10 @@ object DMCadPedido: TDMCadPedido
       ProviderFlags = []
       Size = 40
       Calculated = True
+    end
+    object cdsPedido_Item_TipoFOTO: TStringField
+      FieldName = 'FOTO'
+      Size = 200
     end
   end
   object dsPedido_Item_Tipo: TDataSource
@@ -10766,7 +10774,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42032.577038136600000000
-    ReportOptions.LastChange = 43796.534359918980000000
+    ReportOptions.LastChange = 43796.905530902780000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -12784,6 +12792,10 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsPedidoImp_TipoQTD_FUROS: TIntegerField
       FieldName = 'QTD_FUROS'
+    end
+    object cdsPedidoImp_TipoFOTO: TStringField
+      FieldName = 'FOTO'
+      Size = 200
     end
   end
   object dsPedidoImp_Tipo: TDataSource

@@ -3559,6 +3559,9 @@ type
     cdsPedidoImp_AceNOME_COR: TStringField;
     qParametros_ProdEND_FOTO: TStringField;
     qParametros_ProdNOME_FOTO: TStringField;
+    sdsPedido_Item_TipoFOTO: TStringField;
+    cdsPedido_Item_TipoFOTO: TStringField;
+    cdsPedidoImp_TipoFOTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -4332,6 +4335,14 @@ begin
     if frxReport1.FindComponent('Picture1')<> nil then
     begin
       TfrxPictureView(frxReport1.FindComponent('Picture1')).Picture.LoadFromFile(cdsPedidoImpENDLOGO.AsString);
+    end;
+  end;
+
+  if FileExists(cdsPedidoImp_TipoFOTO.AsString) then
+  begin
+    if frxReport1.FindComponent('FotoItemTipo')<> nil then
+    begin
+      TfrxPictureView(frxReport1.FindComponent('FotoItemTipo')).Picture.LoadFromFile(cdsPedidoImp_TipoFOTO.AsString);
     end;
   end;
 end;
