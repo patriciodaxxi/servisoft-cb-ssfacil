@@ -1212,7 +1212,8 @@ begin
   else
     vValorParc := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_TOTAL.AsFloat));
   vValorOri  := StrToFloat(FormatFloat('0.00',vValorParc));
-  vValorParc := StrToFloat(FormatFloat('0.00',vValorParc / vQtdParc));
+  if vQtdParc > 0 then
+    vValorParc := StrToFloat(FormatFloat('0.00',vValorParc / vQtdParc));
 
   i := 0;
   if (fDMCadPedido.cdsCondPgtoTIPO_CONDICAO.AsString = 'F') or (fDMCadPedido.cdsCondPgtoTIPO.AsString = 'V') then
