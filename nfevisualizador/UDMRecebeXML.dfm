@@ -2443,7 +2443,7 @@ object DMRecebeXML: TDMRecebeXML
       item
         Name = 'CHANGEINDEX'
       end>
-    IndexFieldNames = 'Item'
+    IndexFieldNames = 'NumNota;Item'
     Params = <>
     StoreDefs = True
     BeforePost = mItensNotaBeforePost
