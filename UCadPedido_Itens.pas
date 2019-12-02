@@ -726,7 +726,7 @@ begin
 
   //30/09/2016  Para a Shelly que vai usar para alguns clientes o 20 e outros o 51
   vUsouICM := False;
-  if fDMCadPedido.cdsCFOPGERAR_ICMS.AsString = 'S' then
+  if (fDMCadPedido.cdsCFOPGERAR_ICMS.AsString = 'S') and (fDMCadPedido.cdsFilialSIMPLES.AsString <> 'S') then
   begin
     if fDMCadPedido.qPessoa_FiscalID_CST_ICMS.AsInteger > 0 then
     begin
@@ -765,7 +765,8 @@ begin
   vUsouRegraCli := False;
   //29/08/2019
   //if fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S' then
-  if (fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensDRAWBACK.AsString = 'S') then
+  if (fDMCadPedido.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensDRAWBACK.AsString = 'S')
+    and (fDMCadPedido.cdsFilialSIMPLES.AsString <> 'S') then
   begin
     fDMCadPedido.qPessoa_ProdICMS.Close;
     fDMCadPedido.qPessoa_ProdICMS.ParamByName('CODIGO').AsInteger     := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger;

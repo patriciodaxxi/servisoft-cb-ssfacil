@@ -761,7 +761,7 @@ begin
 
   //30/09/2016  Para a Shelly que vai usar para alguns clientes o 20 e outros o 51
   vUsouICM := False;
-  if fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S' then
+  if (fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S') and (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString <> 'S') then
   begin
     if fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger > 0 then
     begin
@@ -980,7 +980,8 @@ begin
   //13/08/2019
   //if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') then
   //29/08/2019
-  if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensDRAWBACK.AsString = 'S') then
+  if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensDRAWBACK.AsString = 'S')
+    and (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString <> 'S') then
   begin
     fDMCadNotaFiscal.qPessoa_ProdICMS.Close;
     fDMCadNotaFiscal.qPessoa_ProdICMS.ParamByName('CODIGO').AsInteger     := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
