@@ -761,7 +761,7 @@ begin
 
   //30/09/2016  Para a Shelly que vai usar para alguns clientes o 20 e outros o 51
   vUsouICM := False;
-  if fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S' then
+  if (fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S') and (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString <> 'S') then
   begin
     if fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger > 0 then
     begin
@@ -980,7 +980,8 @@ begin
   //13/08/2019
   //if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') then
   //29/08/2019
-  if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensDRAWBACK.AsString = 'S') then
+  if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscal_ItensDRAWBACK.AsString = 'S')
+    and (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString <> 'S') then
   begin
     fDMCadNotaFiscal.qPessoa_ProdICMS.Close;
     fDMCadNotaFiscal.qPessoa_ProdICMS.ParamByName('CODIGO').AsInteger     := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
@@ -1404,7 +1405,10 @@ begin
       fDMCadNotaFiscal.cdsNotaFiscalTIPO_DESCONTO.AsString := 'I';
 
     fDMCadNotaFiscal.cdsNotaFiscal_ItensCOD_BARRA.AsString := '';
-    //Produto Fornecedor
+    //28/11/2019
+    if (trim(fDMCadNotaFiscal.qParametros_ProdUSA_BITOLA.AsString) = 'S') and (trim(fDMCadNotaFiscal.cdsProdutoMEDIDA.AsString) <> '') then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsProdutoNOME.AsString + ' ' + fDMCadNotaFiscal.cdsProdutoMEDIDA.AsString
+    else
     if fDMCadNotaFiscal.qParametros_NFeUSA_NOMEPROD_FORN_NFE.AsString = 'S' then
     begin
       fDMCadNotaFiscal.qProduto_Forn.Close;
@@ -1442,7 +1446,8 @@ begin
     if fDMCadNotaFiscal.cdsProdutoUNIDADE.AsString = fDMCadNotaFiscal.cdsNotaFiscal_ItensUNIDADE.AsString then
       fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD_PACOTE.AsFloat := StrToFloat(FormatFloat('0',0));
     //************
-
+    if trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString) = '' then
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsProdutoNOME.AsString;
     if fDMCadNotaFiscal.cdsTab_NCMID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger then
       fDMCadNotaFiscal.cdsTab_NCM.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,[loCaseInsensitive]);
 

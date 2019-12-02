@@ -515,6 +515,22 @@ begin
        fDMCadPedido.prc_Gravar_Telefone(fDMCadPedido.cdsClienteCODIGO.AsInteger,fDMCadPedido.cdsPedidoDDD.AsInteger,fDMCadPedido.cdsPedidoFONE.AsString);
     end;
 
+    //28/11/2019
+    if fDMCadPedido.cdsParametrosUSA_APROVACAO_PED.AsString = 'S' then
+    begin
+      fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'P';
+      if (fDMCadPedido.qParametros_GeralFILIAL_PADRAO_PEDWEB.AsInteger > 0) and (fDMCadPedido.qParametros_PedAPROVAR_PEDIDO_WEB.AsString = 'W')
+        and (fDMCadPedido.cdsPedidoID_PEDWEB.AsInteger <= 0) then
+        fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'A'
+      else
+      if (fDMCadPedido.qParametros_GeralFILIAL_PADRAO_PEDWEB.AsInteger > 0) and (fDMCadPedido.qParametros_PedAPROVAR_PEDIDO_WEB.AsString = 'L')
+        and (fDMCadPedido.cdsPedidoID_PEDWEB.AsInteger > 0) then
+        fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'A';
+    end
+    else
+      fDMCadPedido.cdsPedidoAPROVADO_PED.AsString := 'A';
+    //********************
+
     fDMCadPedido.cdsPedido.Post;
 
     //11/08/2016

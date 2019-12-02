@@ -756,6 +756,11 @@ begin
     fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString     := fDMCadNotaFiscal.cdsPedidoNOME_PRODUTO_PED.AsString
   else
     fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString     := fDMCadNotaFiscal.cdsPedidoNOMEPRODUTO.AsString;
+  //28/11/2019
+  if (fDMCadNotaFiscal.qParametros_ProdUSA_BITOLA.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsPedidoMEDIDA.AsString) <> '') then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' ' + fDMCadNotaFiscal.cdsPedidoMEDIDA.AsString;
+  //*******************
+
   fDMCadNotaFiscal.cdsNotaFiscal_ItensREFERENCIA.AsString       := fDMCadNotaFiscal.cdsPedidoREFERENCIA.AsString;
   fDMCadNotaFiscal.cdsNotaFiscal_ItensID_MOVESTOQUE.AsInteger   := 0;
   if fDMCadNotaFiscal.cdsParametrosTIPO_COMISSAO_PROD.AsString <> 'I' then

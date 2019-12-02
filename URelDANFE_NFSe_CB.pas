@@ -513,7 +513,7 @@ begin
   RLLabel49.Caption := 'Recebi de ' + fDMCadNotaServico.cdsNotaServico_ImpNOME_FIL.AsString +
                        ' os serviços constantes nessa nota fiscal.';
 
-  for i := 1 to 5 do
+  for i := 1 to 6 do
     TRLLabel(FindComponent('rllbRetencao'+IntToStr(i))).Visible := False;
   i := 0;
   if StrToFloat(FormatFloat('0.00',fDMCadNotaServico.cdsNotaServico_ImpVLR_IR.AsFloat)) > 0 then

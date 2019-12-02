@@ -15285,6 +15285,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedAPROVAR_PEDIDO_WEB: TStringField
+      FieldName = 'APROVAR_PEDIDO_WEB'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 
@@ -16695,6 +16700,9 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'USA_VENDEDOR_INT'
       FixedChar = True
       Size = 1
+    end
+    object qParametros_GeralFILIAL_PADRAO_PEDWEB: TIntegerField
+      FieldName = 'FILIAL_PADRAO_PEDWEB'
     end
   end
   object mSenha: TClientDataSet
@@ -18472,7 +18480,7 @@ object DMCadPedido: TDMCadPedido
       'CEI=CEI')
     DataSource = dsTriCCusto
     BCDToCurrency = False
-    Left = 1153
+    Left = 1157
     Top = 156
   end
   object qPessoa_ProdICMS: TSQLQuery

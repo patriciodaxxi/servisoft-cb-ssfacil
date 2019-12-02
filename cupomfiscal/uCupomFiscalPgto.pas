@@ -132,7 +132,6 @@ type
     procedure DBEdit4Click(Sender: TObject);
     procedure CurrencyEdit1Click(Sender: TObject);
     procedure ceJurosExit(Sender: TObject);
-    procedure DBEdit5Change(Sender: TObject);
   private
     { Private declarations }
     vPercJuros, vVlrDesconto_Ant: Real;
@@ -772,7 +771,11 @@ begin
     begin
       ShowMessage('CPF/CNPJ inválido!');
       vCpfOk := False;
-    end;
+      fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.Clear;
+      fDmCupomFiscal.cdsCupomFiscalCLIENTE_NOME.Clear;
+      ceCodCliente.Clear;
+    end; 
+
   if (vAux <> '') and (vAux <> '000.000.000-00') and (vAux <> '00.000.000/0000-00') then
   begin
     fDmCupomFiscal.cdsCupomFiscalCPF.AsString := vAux;
@@ -1530,13 +1533,6 @@ begin
     fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency + vOutros;
     fDmCupomFiscal.cdsCupomFiscalVLR_RECEBIDO.AsCurrency := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency;
   end;      
-end;
-
-procedure TfCupomFiscalPgto.DBEdit5Change(Sender: TObject);
-begin
-  fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.Clear;
-  fDmCupomFiscal.cdsCupomFiscalCLIENTE_NOME.Clear;
-  ceCodCliente.Clear;  
 end;
 
 end.

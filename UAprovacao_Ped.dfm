@@ -293,7 +293,7 @@ object frmAprovacao_Ped: TfrmAprovacao_Ped
       OnKeyDown = CurrencyEdit1KeyDown
     end
     object btnPedidoApp: TNxButton
-      Left = 1057
+      Left = 1054
       Top = 31
       Width = 177
       Height = 30

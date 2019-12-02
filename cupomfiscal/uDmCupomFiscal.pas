@@ -2092,7 +2092,7 @@ begin
   fDMCadExtComissao := TDMCadExtComissao.Create(Self);
 
   try
-    vAux := fDMCadExtComissao.fnc_Mover_Comissao('ENT','CFI','',0,cdsCupomFiscalDTEMISSAO.AsDateTime,
+    vAux := fDMCadExtComissao.fnc_Mover_Comissao(0,'ENT','CFI','',0,cdsCupomFiscalDTEMISSAO.AsDateTime,
                                                    cdsCupomFiscalFILIAL.AsInteger,cdsCupomFiscalID_VENDEDOR.AsInteger,
                                                    vID_Nota,vID_Duplicata,vItem_Hist,cdsCupomFiscalNUMCUPOM.AsInteger,
                                                    cdsCupomFiscalID_CLIENTE.AsInteger,vParcela,0,0,vID_Cupom,
