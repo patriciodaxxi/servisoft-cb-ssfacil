@@ -25,7 +25,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
     Top = 0
     Width = 1097
     Height = 679
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -118,6 +118,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'PEDIDO_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Pedido Cliente (OC)'
+            Width = 64
             Visible = True
           end
           item
@@ -163,6 +164,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             Expanded = False
             FieldName = 'QTD'
             Title.Caption = 'Qtd. Produtos'
+            Width = 64
             Visible = True
           end
           item
@@ -171,6 +173,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'FATURADO'
             Title.Alignment = taCenter
             Title.Caption = 'Faturado'
+            Width = 64
             Visible = True
           end
           item
@@ -201,6 +204,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'DTAPROVADO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Aprovado'
+            Width = 64
             Visible = True
           end
           item
@@ -216,6 +220,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'USUARIO'
             Title.Alignment = taCenter
             Title.Caption = 'Usu'#225'rio'
+            Width = 64
             Visible = True
           end
           item
@@ -1797,7 +1802,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           Left = 909
           Top = 37
           Width = 150
-          Height = 22
+          Height = 19
           CharCase = ecUpperCase
           Color = 14876614
           Ctl3D = False
@@ -2231,7 +2236,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           object Label38: TLabel
             Left = 1
             Top = 226
-            Width = 492
+            Width = 121
             Height = 13
             Align = alBottom
             Caption = 'Motivo do Cancelamento:'
@@ -3056,6 +3061,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. Desconto'
               Title.Color = 9568255
+              Width = 64
               Visible = True
             end
             item
@@ -3090,6 +3096,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               FieldName = 'CODCFOP'
               Title.Alignment = taCenter
               Title.Color = 9568255
+              Width = 64
               Visible = True
             end>
         end
@@ -3138,7 +3145,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
     end
   end
   object PopupMenu2: TPopupMenu
-    Left = 935
+    Left = 934
     Top = 24
     object CancelarPedido1: TMenuItem
       Caption = 'Cancelar Pedido'
