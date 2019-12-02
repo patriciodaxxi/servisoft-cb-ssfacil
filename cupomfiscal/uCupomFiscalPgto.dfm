@@ -232,7 +232,6 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            OnChange = DBEdit5Change
             OnExit = DBEdit5Exit
             OnKeyDown = DBEdit5KeyDown
           end

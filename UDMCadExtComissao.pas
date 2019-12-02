@@ -523,7 +523,7 @@ begin
   cdsExtComissao.Open;
 end;
 
-function TDMCadExtComissao.fnc_Mover_Comissao(ID_Comissao :Integer; Tipo_Reg, Serie,
+function TDMCadExtComissao.fnc_Mover_Comissao(ID_Comissao: Integer; Tipo_Reg, Serie,
   Obs: WideString; DtCadastro, DtBase: TDateTime; Filial, ID_Vendedor,
   ID_Nota, ID_Duplicata, Item_Duplicata_Hist, Num_Nota, ID_Cliente,
   Parcela, Num_RPS, ID_Nota_Servico, ID_Cupom: Integer; Base_Comissao, Vlr_Comissao,

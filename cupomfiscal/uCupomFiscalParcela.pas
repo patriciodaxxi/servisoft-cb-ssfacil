@@ -28,6 +28,7 @@ type
     procedure btCancelarClick(Sender: TObject);
   private
     { Private declarations }
+    vDataIni: TDateTime;
   public
     { Public declarations }
     fDmCupomFiscal: TdmCupomFiscal;
@@ -51,6 +52,9 @@ begin
     DBEdit3.ReadOnly := (Tag = 1) or (fDmCupomFiscal.cdsCupom_ParcPARCELA.AsInteger > 1); //Somente pode atualizar a primeira parcela
     DBEdit3.TabStop := not DBEdit3.ReadOnly;
   end;
+
+  if fDmCupomFiscal.cdsCupom_ParcPARCELA.AsInteger = 1 then
+    vDataIni := dbDateEdit1.Date;
 end;
 
 procedure TfCupomFiscalParcela.RxDBLookupCombo1Enter(Sender: TObject);
