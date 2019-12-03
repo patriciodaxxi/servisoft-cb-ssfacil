@@ -5,9 +5,14 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids,
   DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr, UDMConsFaturamento, RxLookup, UCBase, Mask, ToolEdit, RzPanel,
-  RzTabs, CurrEdit, NxEdit, NxCollection, ComObj, Menus;
+  RzTabs, CurrEdit, NxEdit, NxCollection, ComObj, Menus, TeEngine, Series,
+  TeeProcs, Chart, DbChart, ComCtrls;
 
 type
+  tEnumGrafico = (tpPizza, tpColuna, tpLinha);
+  tEnumTipo = (tpQtde, tpValotTotal);
+
+  type
   TfrmConsFaturamento = class(TForm)
     Panel1: TPanel;
     Label2: TLabel;
@@ -56,7 +61,6 @@ type
     btnImprimir: TNxButton;
     TS_UF: TRzTabSheet;
     TS_Cupom: TRzTabSheet;
-    SMDBGrid8: TSMDBGrid;
     TS_Vendedor: TRzTabSheet;
     RzPageControl2: TRzPageControl;
     TS_Vendedor_Acum: TRzTabSheet;
@@ -111,6 +115,39 @@ type
     Label13: TLabel;
     chkVendedor_Int: TCheckBox;
     ckUsarTotal2: TCheckBox;
+    pg_CupomFiscal: TRzPageControl;
+    ts_CupomFiscalSintetico: TRzTabSheet;
+    ts_CupomFiscalAnalitico: TRzTabSheet;
+    SMDBGrid8: TSMDBGrid;
+    pnlGrid: TPanel;
+    pnlGrafico: TPanel;
+    DBChart1: TDBChart;
+    Series1: TPieSeries;
+    pnlTop: TPanel;
+    comboCupomFiscalAnalitico: TSMDBGrid;
+    chkGraficoVisible: TCheckBox;
+    Series2: TBarSeries;
+    ComboTipoGrafico: TComboBox;
+    lblTipoGrafico: TLabel;
+    Series3: TLineSeries;
+    chkCor: TCheckBox;
+    chkTamanho: TCheckBox;
+    UpDown1: TUpDown;
+    edtQtdeProduto: TEdit;
+    rdgTipo: TRadioGroup;
+    ts_Data: TRzTabSheet;
+    Panel7: TPanel;
+    Panel8: TPanel;
+    Label14: TLabel;
+    chkGraficoDia: TCheckBox;
+    ComboTipoGraficoDia: TComboBox;
+    SMDBGrid20: TSMDBGrid;
+    pnlGraficoDia: TPanel;
+    DBChart2: TDBChart;
+    PieSeries1: TPieSeries;
+    BarSeries1: TBarSeries;
+    LineSeries1: TLineSeries;
+    rdgOrdenarDia: TRadioGroup;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -142,6 +179,10 @@ type
     procedure SMDBGrid9TitleClick(Column: TColumn);
     procedure SMDBGrid11TitleClick(Column: TColumn);
     procedure SMDBGrid16TitleClick(Column: TColumn);
+    procedure chkGraficoVisibleClick(Sender: TObject);
+    procedure ComboTipoGraficoChange(Sender: TObject);
+    procedure chkGraficoDiaClick(Sender: TObject);
+    procedure ComboTipoGraficoDiaChange(Sender: TObject);
   private
     { Private declarations }
     fDMConsFaturamento: TDMConsFaturamento;
@@ -170,6 +211,8 @@ type
     procedure prc_Consultar_ReciboNF;
     procedure prc_Monta_Cab;
     procedure prc_Consultar_Cupom;
+    procedure prc_Consultar_Cupom_Analitico;
+    procedure prc_Consultar_Cupom_Analitico_Dia;
     procedure prc_Consultar_VendProd;
     procedure prc_Consultar_VendCli;
     procedure prc_Consultar_Vend_Cli_Prod;
@@ -193,14 +236,12 @@ type
     procedure prc_Imprimir_Vendedor;
     procedure prc_Imprimir_Produto_UF;
     procedure prc_Imprimir_Grupo_UF;
-
     procedure prc_Gravar_mGrupoAux;
     procedure prc_CriaExcel(vDados: TDataSource);
-
     procedure prc_Ajustar_Grids(Grid: TSMDBGrid);
-
     function fnc_Monta_SQL_Vlr : String;
-
+    procedure prc_Alterar_Tipo_Grafico;
+    procedure prc_Alterar_Tipo_Grafico_Dia;
   public
     { Public declarations }
   end;
@@ -273,7 +314,15 @@ begin
   end
   else
   if RzPageControl1.ActivePage = TS_CUPOM then
-    prc_Consultar_Cupom
+  begin
+    if pg_CupomFiscal.ActivePage = ts_CupomFiscalSintetico then
+      prc_Consultar_Cupom
+    else
+    if pg_CupomFiscal.ActivePage = ts_CupomFiscalAnalitico then
+      prc_Consultar_Cupom_Analitico
+    else
+      prc_Consultar_Cupom_Analitico_Dia;
+  end
   else
   if RzPageControl1.ActivePage = TS_ReciboNF then
     prc_Consultar_ReciboNF
@@ -419,6 +468,10 @@ begin
   prc_Ajustar_Grids(SMDBGrid15);
   prc_Ajustar_Grids(SMDBGrid16);
   prc_Ajustar_Grids(SMDBGrid17);
+  prc_Alterar_Tipo_Grafico;
+  prc_Alterar_Tipo_Grafico_Dia;
+  chkGraficoVisibleClick(Sender);
+  chkGraficoDiaClick(Sender);
 end;
 
 procedure TfrmConsFaturamento.SMDBGrid1TitleClick(Column: TColumn);
@@ -2076,6 +2129,110 @@ begin
   for i := 0 to SMDBGrid16.Columns.Count - 1 do
     if not (SMDBGrid16.Columns.Items[I] = Column) then
       SMDBGrid16.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmConsFaturamento.prc_Consultar_Cupom_Analitico;
+var
+  vSelect, vNome : String;
+begin
+  vNome := 'trim(P.NOME';
+  if chkTamanho.Checked then
+    vNome := vNome +  '|| ' + QuotedStr(' ') + '|| coalesce(P.TAMANHO,' + QuotedStr(' ') + ')';
+  if chkCor.Checked then
+    vNome := vNome +  '|| ' + QuotedStr(' ') + '|| coalesce(COMB.NOME,' + QuotedStr(' ') + ')';
+  vNome := vNome +  ') ';
+  vSelect := 'select first(' + edtQtdeProduto.Text +') SUM(NTI.QTD) QTD,SUM(NTI.VLR_TOTAL)VLR_TOTAL,P.REFERENCIA,' + vNome + ' NOME, NT.FILIAL '
+              + 'from CUPOMFISCAL NT '
+              + 'inner join CUPOMFISCAL_ITENS NTI on NTI.ID = NT.ID '
+              + 'inner join PRODUTO P on NTI.ID_PRODUTO = P.ID '
+              + 'inner join PESSOA CLI on (NT.ID_CLIENTE = CLI.CODIGO) '
+              + 'left join PESSOA VEN on (NT.ID_VENDEDOR = VEN.CODIGO) '
+              + 'left join COMBINACAO COMB on NTI.ID_COR_COMBINACO = COMB.ID '
+              + 'where NT.CANCELADO = ' + QuotedStr('N')
+              + vComando
+              + ' group by P.REFERENCIA, NT.FILIAL,' +  vNome;
+  case tEnumTipo(rdgTipo.ItemIndex) of
+    tpQtde : vSelect := vSelect + 'order by sum(nti.QTD) desc';
+    tpValotTotal : vSelect := vSelect + 'order by sum(nti.VLR_TOTAL) desc';
+  end;
+  fDMConsFaturamento.cdsCupomFiscalAnalitico.Close;
+  fDMConsFaturamento.cdsCupomFiscalAnalitico.CommandText := vSelect;
+  fDMConsFaturamento.cdsCupomFiscalAnalitico.Open;
+end;
+
+procedure TfrmConsFaturamento.chkGraficoVisibleClick(Sender: TObject);
+begin
+  if chkGraficoVisible.Checked then
+    pnlGrafico.Width := 345
+  else
+    pnlGrafico.Width := 0;
+end;
+
+procedure TfrmConsFaturamento.ComboTipoGraficoChange(Sender: TObject);
+begin
+  prc_Alterar_Tipo_Grafico;
+end;
+
+procedure TfrmConsFaturamento.prc_Alterar_Tipo_Grafico;
+var
+  i : Integer;
+begin
+  for i := 0 to DBChart1.SeriesCount - 1 do
+  begin
+    DBChart1.Series[i].Active := False;
+  end;
+  case tEnumGrafico(ComboTipoGrafico.ItemIndex) of
+    tpPizza : DBChart1.SeriesList[0].Active := True;
+    tpColuna : DBChart1.SeriesList[1].Active := True;
+    tpLinha : DBChart1.SeriesList[2].Active := True;
+  end;
+end;
+
+procedure TfrmConsFaturamento.prc_Consultar_Cupom_Analitico_Dia;
+var
+  vSelect, vNome : String;
+begin
+  vSelect := 'select sum(NTI.QTD) QTD, sum(NTI.VLR_TOTAL) VLR_TOTAL, NT.DTEMISSAO '
+           + 'from CUPOMFISCAL NT '
+           + 'inner join CUPOMFISCAL_ITENS NTI on NTI.ID = NT.ID '
+           + 'where NT.CANCELADO = ' + QuotedStr('N')
+           + vComando
+           + ' group by NT.DTEMISSAO ';
+  case tEnumTipo(rdgOrdenarDia.ItemIndex) of
+    tpQtde : vSelect := vSelect + 'order by sum(nti.QTD) desc';
+    tpValotTotal : vSelect := vSelect + 'order by sum(nti.VLR_TOTAL) desc';
+  end;
+  fDMConsFaturamento.cdsCupomFiscalAnaliticoDia.Close;
+  fDMConsFaturamento.cdsCupomFiscalAnaliticoDia.CommandText := vSelect;
+  fDMConsFaturamento.cdsCupomFiscalAnaliticoDia.Open;
+end;
+
+procedure TfrmConsFaturamento.chkGraficoDiaClick(Sender: TObject);
+begin
+  if chkGraficoDia.Checked then
+    pnlGraficoDia.Width := 345
+  else
+    pnlGraficoDia.Width := 0;
+end;
+
+procedure TfrmConsFaturamento.prc_Alterar_Tipo_Grafico_Dia;
+var
+  i : Integer;
+begin
+  for i := 0 to DBChart2.SeriesCount - 1 do
+  begin
+    DBChart2.Series[i].Active := False;
+  end;
+  case tEnumGrafico(ComboTipoGraficoDia.ItemIndex) of
+    tpPizza : DBChart2.SeriesList[0].Active := True;
+    tpColuna : DBChart2.SeriesList[1].Active := True;
+    tpLinha : DBChart2.SeriesList[2].Active := True;
+  end;
+end;
+
+procedure TfrmConsFaturamento.ComboTipoGraficoDiaChange(Sender: TObject);
+begin
+  prc_Alterar_Tipo_Grafico_Dia;
 end;
 
 end.
