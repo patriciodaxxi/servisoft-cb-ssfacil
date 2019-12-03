@@ -3,13 +3,12 @@ unit uImprimir;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, SqlExpr, DmdDatabase, USenha, Messages,
-  Controls, Graphics;
+  Classes, SysUtils, Dialogs, SqlExpr, DmdDatabase, USenha, Messages, Controls, Graphics;
 
-  procedure prc_Cabecalho_Mat(Endereco : String);
-  procedure prc_Detalhe_Mat(vDetalhe : String );
+  procedure prc_Cabecalho_Mat(Endereco: String);
+  procedure prc_Detalhe_Mat(vDetalhe: String);
   procedure prc_Rodape_Mat;
-  function fnc_Monta_Tamanho(Tamanho : Integer ; vDetalhe, Posicao, vCaracter : String ) : String; //Posicao = D  Direita    E=Esquerda
+  function fnc_Monta_Tamanho(Tamanho: Integer; vDetalhe, Posicao, vCaracter: String): String; //Posicao = D  Direita    E=Esquerda
 
 var
   vPagMatricial: Integer;
@@ -20,10 +19,10 @@ implementation
 
 uses DateUtils;
 
-procedure prc_Cabecalho_Mat(Endereco : String);
+procedure prc_Cabecalho_Mat(Endereco: String);
 var
-  Texto1 : String;
-  I : Integer;
+  Texto1: String;
+  I: Integer;
 begin
   vPagMatricial := vPagMatricial + 1;
   if vPagMatricial = 1 then
@@ -44,7 +43,7 @@ begin
   end;
 end;
 
-procedure prc_Detalhe_Mat(vDetalhe : String ); //Posicao = D  Direita    E=Esquerda
+procedure prc_Detalhe_Mat(vDetalhe: String); //Posicao = D  Direita    E=Esquerda
 begin
   Writeln(FArq,vDetalhe);
   vLinhaMatricial := vLinhaMatricial + 1;
@@ -53,7 +52,7 @@ end;
 procedure prc_Rodape_Mat;
 var
  i: Integer;
- Texto1, Texto2 : string;
+ Texto1, Texto2: string;
 begin
   while vLinhaMatricial < 66 do
   begin
@@ -63,9 +62,9 @@ begin
   CloseFile(FArq);
 end;
 
-function fnc_Monta_Tamanho(Tamanho : Integer ; vDetalhe, Posicao, vCaracter : String ) : String; //Posicao = D  Direita    E=Esquerda
+function fnc_Monta_Tamanho(Tamanho: Integer; vDetalhe, Posicao, vCaracter: String): String; //Posicao = D  Direita    E=Esquerda
 var
-  i : Integer;
+  i: Integer;
 begin
   Result := '';
   for i := 1 to Tamanho - Length(vDetalhe) do

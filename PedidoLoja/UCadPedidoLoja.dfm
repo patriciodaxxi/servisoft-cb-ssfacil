@@ -118,7 +118,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'PEDIDO_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Pedido Cliente (OC)'
-            Width = 64
             Visible = True
           end
           item
@@ -164,7 +163,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             Expanded = False
             FieldName = 'QTD'
             Title.Caption = 'Qtd. Produtos'
-            Width = 64
             Visible = True
           end
           item
@@ -173,7 +171,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'FATURADO'
             Title.Alignment = taCenter
             Title.Caption = 'Faturado'
-            Width = 64
             Visible = True
           end
           item
@@ -204,7 +201,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'DTAPROVADO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Aprovado'
-            Width = 64
             Visible = True
           end
           item
@@ -220,7 +216,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
             FieldName = 'USUARIO'
             Title.Alignment = taCenter
             Title.Caption = 'Usu'#225'rio'
-            Width = 64
             Visible = True
           end
           item
@@ -3041,7 +3036,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. Desconto'
               Title.Color = 9568255
-              Width = 64
               Visible = True
             end
             item
@@ -3076,7 +3070,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               FieldName = 'CODCFOP'
               Title.Alignment = taCenter
               Title.Color = 9568255
-              Width = 64
               Visible = True
             end>
         end
@@ -3125,7 +3118,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
     end
   end
   object PopupMenu2: TPopupMenu
-    Left = 933
+    Left = 931
     Top = 28
     object CancelarPedido1: TMenuItem
       Caption = 'Cancelar Pedido'
