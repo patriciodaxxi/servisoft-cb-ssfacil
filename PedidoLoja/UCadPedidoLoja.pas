@@ -877,7 +877,7 @@ end;
 
 procedure TfrmCadPedidoLoja.btnConfirmarClick(Sender: TObject);
 var
-  Form : TForm;
+  Form: TForm;
 begin
   if fDMCadPedido.cdsPedido_Itens.State in [dsEdit,dsInsert] then
   begin
@@ -1653,7 +1653,7 @@ var
   vArq: String;
   vIndice: String;
   vAux: Integer;
-  vSaldo_Ant, vVlr_Recto, vSaldo_Final : Real;
+  vSaldo_Ant, vVlr_Recto, vSaldo_Final: Real;
   sds: TSQLDataSet;
 begin
   vIndice := fDMCadPedido.cdsPedidoImp_Itens.IndexFieldNames;
@@ -1667,8 +1667,7 @@ begin
   fDMCadPedido.mCarimbo.EmptyDataSet;
   if fDMCadPedido.cdsParametrosMOSTRAR_EMBALAGEM.AsString = 'S' then
     uCalculo_Pedido.prc_Gravar_mEmbalagem(fDMCadPedido,fDMCadPedido.cdsPedidoImpID.AsInteger);
-  fDMCadPedido.cdsPedidoImp_Itens.IndexFieldNames := 'ID;ITEM';
-
+  fDMCadPedido.cdsPedidoImp_Itens.IndexFieldNames := 'ID;ITEM';  
 
   //12/11/2019
   if fDMCadPedido.qParametros_PedIMP_DUPLICATA_PEND.AsString = 'S' then
@@ -1684,14 +1683,13 @@ begin
       sds.GetMetadata   := False;
       sds.CommandText   := 'SELECT sum(d.vlr_restante) vlr_restante, cast(0 as Float) VLR_PAGO '
                          + 'FROM duplicata D '
-                         + 'WHERE D.vlr_restante > 0 '
-                         + '  and d.ID_PESSOA = :ID_PESSOA '
-                         + '  and coalesce(d.ID_PEDIDO,0) <> :ID_PEDIDO '
+                         + 'WHERE D.vlr_restante > 0'
+                         + '  and d.ID_PESSOA = :ID_PESSOA'
+                         + '  and coalesce(d.ID_PEDIDO,0) <> :ID_PEDIDO'
                          + '  UNION ALL '
                          + 'SELECT cast(0 as Float) VLR_RESTANTE,  sum(H.vlr_pagamento) VLR_PAGO '
                          + 'FROM duplicata D '
-                         + 'INNER JOIN DUPLICATA_HIST H '
-                         + ' ON D.ID = H.ID '
+                         + 'INNER JOIN DUPLICATA_HIST H ON (D.ID = H.ID) '
                          + 'WHERE H.dthistorico = :DATA '
                          + '  and d.ID_PESSOA = :ID_PESSOA '
                          + '  and coalesce(d.ID_PEDIDO,0) <> :ID_PEDIDO ';
@@ -1725,7 +1723,6 @@ begin
     finally
       FreeAndNil(sds);
     end;
-
   end;
   //**************
 
@@ -2164,8 +2161,7 @@ begin
       dbchkEncomenda.Checked := False;
       fDMCadPedido.cdsPedido_ItensENCOMENDA.AsString := 'N';
     end;
-  end;
-
+  end;          
 end;
 
 procedure TfrmCadPedidoLoja.prc_Habilita_Itens;
@@ -2788,7 +2784,7 @@ begin
     end
     else
     begin
-      MessageDlg('*** Item esta em aberto, Favor Confirmar ou Cancelar a digitação do item', mtInformation, [mbOk], 0);
+      MessageDlg('*** Item está em aberto. Favor Confirmar ou Cancelar a digitação do item', mtInformation, [mbOk], 0);
       Edit2.SetFocus;
 
       exit;
@@ -3159,6 +3155,7 @@ begin
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Cidade: ' + fDMCadPedido.cdsPedidoImpCIDADE_CLIENTE.AsString,'D',' ') + '  UF: ' + fDMCadPedido.cdsPedidoImpUF.AsString);
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'CNPJ/CPF: ' + fDMCadPedido.cdsPedidoImpCNPJ_CPF_CLIENTE.AsString,'D',' ') + 'Fone: ' + fDMCadPedido.cdsPedidoImpDDD_CLIENTE.AsString + ' ' + fDMCadPedido.cdsPedidoImpFONE_CLIENTE.AsString);
   uImprimir.prc_Detalhe_Mat(' ');
+  uImprimir.prc_Detalhe_Mat('Cond. Pgto.: ' + fDMCadPedido.cdsPedidoImpNOME_CONDPGTO.AsString);
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
   uImprimir.prc_Detalhe_Mat('   Qtde  Unid.   Cód. Produto                                           Bitola              Marca           It   Preco %Desc      Total');
 
