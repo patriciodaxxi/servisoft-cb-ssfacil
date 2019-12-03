@@ -182,8 +182,6 @@ type
     ckImpCancelados: TCheckBox;
     Label37: TLabel;
     DBEdit10: TDBEdit;
-    DBMemo1: TDBMemo;
-    Label38: TLabel;
     Shape7: TShape;
     Label39: TLabel;
     dbchkEncomenda: TDBCheckBox;
@@ -312,7 +310,7 @@ type
 
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
-    procedure prc_Gravar_Registro;
+    procedure prc_Gravar_Registro(Tipo : String = ''); //C=Cancelamento
     procedure prc_Consultar(ID: Integer);
 
     procedure prc_Informar_Filial;
@@ -349,7 +347,6 @@ type
     procedure prc_Estoque(ID_Produto: Integer);
     procedure prc_Limpa_Campo_Itens;
     procedure prc_Verifica_Itens;
-    procedure prc_scroll(DataSet: TDataSet);
   public
     { Public declarations }
     vQtd_Caixa: Integer;
@@ -428,7 +425,7 @@ begin
   uGrava_Pedido.prc_Excluir_Pedido(fDMCadPedido);
 end;
 
-procedure TfrmCadPedidoLoja.prc_Gravar_Registro;
+procedure TfrmCadPedidoLoja.prc_Gravar_Registro(Tipo : String = ''); //C=Cancelamento
 var
   vIDAux: Integer;
   vAux: Real;
@@ -461,6 +458,15 @@ begin
     vAprazo_Avista := '';
     if (fDMCadPedido.cdsCondPgto.Locate('ID',fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger,[loCaseInsensitive])) then
       vAprazo_Avista  := fDMCadPedido.cdsCondPgtoTIPO.AsString;
+    //02/12/2019
+    if (fDMCadPedido.cdsCondPgtoTIPO.AsString = 'V') and (fDMCadPedido.cdsParametrosQUITAR_AVISTA_AUT.AsString = 'S')
+      and ((fDMCadPedido.cdsPedidoID_CONTA.AsInteger <= 0) or (fDMCadPedido.cdsPedidoID_TIPO_COBRANCA.AsInteger <= 0)) then
+    begin
+      MessageDlg('*** Quando for a Vista, é obrigatório informar a conta e o tipo de cobrança !',mtError, [mbOk], 0);
+      exit;
+    end;
+    //****************
+
     if vAprazo_Avista <> 'V' then
     begin
       fDMCadPedido.cdsPedido_Parc.First;
@@ -502,15 +508,15 @@ begin
   end;
   vInclusao_Edicao := '';
 
-  TS_Consulta.TabEnabled     := True;
-  prc_Habilitar_CamposNota;
-
-  RzPageControl1.ActivePage := TS_Consulta;
-
+  if Tipo <> 'C' then
+  begin
+    TS_Consulta.TabEnabled     := True;
+    prc_Habilitar_CamposNota;
+    RzPageControl1.ActivePage := TS_Consulta;
+    prc_Consultar(vIDAux);
+    prc_Posiciona_Pedido;
+  end;
   fDMCadPedido.mSenha.EmptyDataSet;
-
-  prc_Consultar(vIDAux);
-  prc_Posiciona_Pedido;
 end;
 
 procedure TfrmCadPedidoLoja.prc_Inserir_Registro;
@@ -632,10 +638,12 @@ begin
       if (SMDBGrid2.Columns[i].FieldName = 'TAMANHO') then
         SMDBGrid2.Columns[i].Visible := False;
     end;
-    if (SMDBGrid2.Columns[i].FieldName = 'NUM_LOTE_CONTROLE') or (SMDBGrid2.Columns[i].FieldName = 'QTD_CAIXA') then
-      SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+    if (SMDBGrid2.Columns[i].FieldName = 'NUM_LOTE_CONTROLE') then
+      SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_ProdUSA_LOTE_PROD.AsString = 'S');
+    if (SMDBGrid2.Columns[i].FieldName = 'QTD_CAIXA') then
+      SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_ProdUSA_QTD_EMBALAGEM.AsString = 'S');
     if (SMDBGrid2.Columns[i].FieldName = 'MEDIDA') then
-      SMDBGrid2.Columns[i].Visible := (fDMCadPedido.qParametros_PedPEDIDO_COMERCIO.AsString = 'S');
+      SMDBGrid2.Columns[i].Visible := ((fDMCadPedido.qParametros_ProdUSA_MEDIDA.AsString = 'S') or (fDMCadPedido.qParametros_ProdUSA_BITOLA.AsString = 'S'));
     if (SMDBGrid2.Columns[i].FieldName = 'CARIMBO') then
       SMDBGrid2.Columns[i].Visible := (fDMCadPedido.cdsParametrosUSA_CARIMBO.AsString = 'S');
     if (SMDBGrid2.Columns[i].FieldName = 'NOME_COR_COMBINACAO') then
@@ -690,7 +698,6 @@ begin
     ckImpPreco.Checked := (fDMCadPedido.cdsParametrosIMP_PRECO_PED.AsString = 'S');
 
   fDMCadPedido.cdsPedido_Consulta.AfterScroll := prc_scroll2;
-  fDmCadPedido.cdsPedido_Itens.AfterScroll    := prc_scroll;
 
   btnLocalEstoque.Visible := ((fDMCadPedido.cdsParametrosTIPO_ESTOQUE.AsString = 'P') and (fDMCadPedido.cdsParametrosUSA_LOCAL_ESTOQUE.AsString = 'S'));
   vStatic_Processo := '';
@@ -717,9 +724,10 @@ begin
   //05/10/2019
   Label27.Visible  := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
   edtLote.Visible  := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
-  Label48.Visible  := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
-  dbedtQtdCaixa.Visible  := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
-  RzGroupBox2.Visible    := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  Label48.Visible  := (fDMCadPedido.qParametros_ProdUSA_QTD_EMBALAGEM.AsString = 'S');
+  dbedtQtdCaixa.Visible  := (fDMCadPedido.qParametros_ProdUSA_QTD_EMBALAGEM.AsString = 'S');
+  RzGroupBox2.Visible    := (fDMCadPedido.qParametros_ProdUSA_QTD_EMBALAGEM.AsString = 'S');
+
   dbchkEncomenda.Visible := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
   Label73.Visible        := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
   dbedtVlrProd.Visible   := (fDMCadPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
@@ -876,8 +884,6 @@ begin
 end;
 
 procedure TfrmCadPedidoLoja.btnConfirmarClick(Sender: TObject);
-var
-  Form : TForm;
 begin
   if fDMCadPedido.cdsPedido_Itens.State in [dsEdit,dsInsert] then
   begin
@@ -898,13 +904,8 @@ begin
   else
     fDMCadPedido.cdsPedidoVLR_ADIANTAMENTO.AsFloat := StrToFloat(FormatFloat('0.00',0));
 
-  Form := TForm.Create(Application);
-  uUtilPadrao.prc_Form_Aguarde(Form);
-
   prc_Gravar_Registro;
   SMDBGrid2.DataSource := fDMCadPedido.dsPedido_Itens;
-
-  FreeAndNil(Form);
 
   SMDBGrid2.EnableScroll;
 end;
@@ -1892,6 +1893,16 @@ begin
     MessageDlg('*** Lote/Talão já gerado para esse pedido!',mtError, [mbOk], 0);
     exit;
   end;
+  if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') and (fDMCadPedido.fnc_Existe_DupPaga(fDMCadPedido.cdsPedidoID.AsInteger) > 0) then
+  begin
+    MessageDlg('*** Pedido não pode ser alterado, pois já existe duplicatas pagas!', mtInformation, [mbOk], 0);
+    Exit;
+  end;
+  if fDMCadPedido.cdsPedidoCANCELADO.AsString = 'S' then
+  begin
+    MessageDlg('*** Pedido já cancelado!', mtInformation, [mbOk], 0);
+    Exit;
+  end;
 
   ffrmCadPedido_Cancelamento                 := TfrmCadPedido_Cancelamento.Create(self);
   ffrmCadPedido_Cancelamento.fDMCadPedido    := fDMCadPedido;
@@ -1901,6 +1912,8 @@ begin
 end;
 
 procedure TfrmCadPedidoLoja.CancelarItemdoPedido1Click(Sender: TObject);
+var
+  vVlr_Total : Real;
 begin
   if (fDMCadPedido.cdsPedido_ConsultaGEROU_PRODUCAO.AsString = 'S') or (fDMCadPedido.cdsPedido_ConsultaCONT_TALAO.AsInteger > 0) or
     (fDMCadPedido.cdsPedido_ConsultaCONT_TALAO2.AsInteger > 0) then
@@ -1908,12 +1921,32 @@ begin
     MessageDlg('*** Lote/Talão já gerado para esse pedido!',mtError, [mbOk], 0);
     exit;
   end;
+  if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') and (fDMCadPedido.fnc_Existe_DupPaga(fDMCadPedido.cdsPedidoID.AsInteger) > 0) then
+  begin
+    MessageDlg('*** Pedido não pode ser alterado, pois já existe duplicatas pagas!', mtInformation, [mbOk], 0);
+    Exit;
+  end;
+
+  vVlr_Total := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_TOTAL.AsFloat));
 
   ffrmCadPedido_Cancelamento                 := TfrmCadPedido_Cancelamento.Create(self);
   ffrmCadPedido_Cancelamento.fDMCadPedido    := fDMCadPedido;
   ffrmCadPedido_Cancelamento.vOpcao_Cancelar := 'I';
   ffrmCadPedido_Cancelamento.ShowModal;
   FreeAndNil(ffrmCadPedido_Cancelamento);
+
+  if (StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_TOTAL.AsFloat)) > 0) and
+     (StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_TOTAL.AsFloat)) <> StrToFloat(FormatFloat('0.0000',vVlr_Total))) then
+  begin
+    fDMCadPedido.cdsPedido.Edit;
+
+    if not uCalculo_Pedido.fnc_Gerar_Pedido_Parc(fDMCadPedido) then
+      MessageDlg(fDMCadPedido.vMsgErroParc, mtError, [mbOk], 0)
+    else
+      prc_Gravar_Registro('C');
+    if fDMCadPedido.cdsPedido.State in [dsEdit] then
+      fDMCadPedido.cdsPedido.Cancel;
+  end;
 end;
 
 function TfrmCadPedidoLoja.fnc_Lote: Boolean;
@@ -2835,7 +2868,6 @@ begin
   ffrmCadPedido_Custo.fDMCadPedido := fDMCadPedido;
   ffrmCadPedido_Custo.ShowModal;
   FreeAndNil(ffrmCadPedido_Custo);
-  //fDMCadPedido.cdsPedido_Itens.AfterScroll := prc_scroll;
 end;
 
 procedure TfrmCadPedidoLoja.prc_Chama_Form_Produto;
@@ -3075,17 +3107,6 @@ begin
     Exit;
   end;
   fDMPedidoImp.frxReport1.ShowReport;   
-end;
-
-procedure TfrmCadPedidoLoja.prc_scroll(DataSet: TDataSet);
-begin
-  Label38.Visible := False;
-  DBMemo1.Visible := False;
-  if fDMCadPedido.cdsPedido_ItensCANCELADO.AsString = 'S' then
-  begin
-    DBMemo1.Visible := True;
-    Label38.Visible := True;
-  end;
 end;
 
 procedure TfrmCadPedidoLoja.dbedtPercDescKeyDown(Sender: TObject;

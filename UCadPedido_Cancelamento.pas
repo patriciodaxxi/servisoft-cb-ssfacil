@@ -77,7 +77,9 @@ procedure TfrmCadPedido_Cancelamento.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   if vGE_Cancelamento then
+  begin
     prc_Atualizar_Item;
+  end;
   Action := Cafree;
 end;
 
@@ -109,7 +111,6 @@ begin
     exit;
 
   fDMEstoque        := TDMEstoque.Create(Self);
-
   ID.TransactionID  := 2;
   ID.IsolationLevel := xilREADCOMMITTED;
   dmDatabase.scoDados.StartTransaction(ID);
@@ -127,15 +128,15 @@ begin
       end;
     end;
 
-    fDMCadPedido.sdsPrc_Atualiza_Status_Ped.Close;
-    fDMCadPedido.sdsPrc_Atualiza_Status_Ped.ParamByName('P_ID').AsInteger := fDMCadPedido.cdsPedidoID.AsInteger;
-    fDMCadPedido.sdsPrc_Atualiza_Status_Ped.ExecSQL;
-    
     dmDatabase.scoDados.Commit(ID);
   except
     dmDatabase.scoDados.Rollback(ID);
     raise;
   end;
+
+  fDMCadPedido.sdsPrc_Atualiza_Status_Ped.Close;
+  fDMCadPedido.sdsPrc_Atualiza_Status_Ped.ParamByName('P_ID').AsInteger := fDMCadPedido.cdsPedidoID.AsInteger;
+  fDMCadPedido.sdsPrc_Atualiza_Status_Ped.ExecSQL;
 
   FreeAndNil(fDMEstoque);
 

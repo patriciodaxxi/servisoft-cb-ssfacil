@@ -25,7 +25,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
     Top = 0
     Width = 1097
     Height = 679
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1802,7 +1802,7 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           Left = 909
           Top = 37
           Width = 150
-          Height = 19
+          Height = 22
           CharCase = ecUpperCase
           Color = 14876614
           Ctl3D = False
@@ -2233,15 +2233,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
           Align = alLeft
           Color = 13041663
           TabOrder = 0
-          object Label38: TLabel
-            Left = 1
-            Top = 226
-            Width = 121
-            Height = 13
-            Align = alBottom
-            Caption = 'Motivo do Cancelamento:'
-            Visible = False
-          end
           object Panel6: TPanel
             Left = 1
             Top = 187
@@ -2902,17 +2893,6 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
               OnClick = btnLucratividadeClick
             end
           end
-          object DBMemo1: TDBMemo
-            Left = 1
-            Top = 239
-            Width = 492
-            Height = 78
-            Align = alBottom
-            DataField = 'APROVADO_ORC'
-            DataSource = DMCadPedido.dsPedido_Itens
-            TabOrder = 5
-            Visible = False
-          end
         end
         object SMDBGrid2: TSMDBGrid
           Left = 499
@@ -3145,8 +3125,8 @@ object frmCadPedidoLoja: TfrmCadPedidoLoja
     end
   end
   object PopupMenu2: TPopupMenu
-    Left = 934
-    Top = 24
+    Left = 933
+    Top = 28
     object CancelarPedido1: TMenuItem
       Caption = 'Cancelar Pedido'
       OnClick = CancelarPedido1Click
