@@ -422,13 +422,22 @@ begin
   end
   else
   if fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'ORC' then
-    btOrcamentoClick(Sender)
+  begin
+    if fDmCupomFiscal.cdsCupomFiscal.State in [dsEdit,dsInsert] then
+      btOrcamentoClick(Sender);
+  end
   else
   if fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'PED' then
-    btPedidoClick(Sender)
+  begin
+    if fDmCupomFiscal.cdsCupomFiscal.State in [dsEdit,dsInsert] then
+      btPedidoClick(Sender);
+  end
   else
   if fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'COM' then
-    btComandaClick(Sender)
+  begin
+    if fDmCupomFiscal.cdsCupomFiscal.State in [dsEdit,dsInsert] then
+      btComandaClick(Sender);
+  end;
   else
   if (fDmCupomFiscal.cdsCupomFiscal.State in [dsEdit,dsInsert]) or not(fDmCupomFiscal.vEncerrado) then
   begin
