@@ -3564,6 +3564,12 @@ type
     cdsPedidoImp_TipoFOTO: TStringField;
     qParametros_PedAPROVAR_PEDIDO_WEB: TStringField;
     qParametros_GeralFILIAL_PADRAO_PEDWEB: TIntegerField;
+    cdsParametrosQUITAR_AVISTA_AUT: TStringField;
+    qParametros_ProdUSA_MEDIDA: TStringField;
+    qParametros_ProdUSA_BITOLA: TStringField;
+    qParametros_ProdUSA_QTD_EMBALAGEM: TStringField;
+    qParametrosID_CONTA_PADRAO: TIntegerField;
+    qParametrosID_TIPO_COBRANCA_PADRAO: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -4480,6 +4486,13 @@ function TDMCadPedido.fnc_Existe_DupPaga(ID: Integer): Integer;
 var
   sds: TSQLDataSet;
 begin
+  if (cdsCondPgto. Locate('ID',cdsPedidoID_CONDPGTO.AsInteger,[loCaseInsensitive])) and
+     (cdsCondPgtoTIPO.AsString = 'V') and (cdsParametrosQUITAR_AVISTA_AUT.AsString = 'S')  then
+  begin
+    Result := 0;
+    exit;
+  end;
+
   sds := TSQLDataSet.Create(nil);
   try
     sds.SQLConnection := dmDatabase.scoDados;

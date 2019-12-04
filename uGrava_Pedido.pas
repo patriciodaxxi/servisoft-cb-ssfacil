@@ -3,7 +3,8 @@ unit uGrava_Pedido;
 interface
 
 uses
-  Classes, SysUtils, DB, Dialogs, Variants, SqlExpr, DmdDatabase, UDMCadPedido, dbXPress, UDMAprovacao_Ped, UDMEstoque;
+  Classes, SysUtils, DB, Dialogs, Variants, SqlExpr, DmdDatabase, UDMCadPedido, dbXPress, UDMAprovacao_Ped, UDMEstoque,
+  UDMGravarFinanceiro, Forms;
 
 procedure prc_Gravar(fDMCadPedido: TDMCadPedido; Tipo: String = '');
 procedure Gravar_Duplicata(fDMCadPedido: TDMCadPedido; Tipo, TransfICMS: String; Parcela: Integer; Valor: Real; Data: TDateTime; Prazo: String = '');
@@ -18,6 +19,8 @@ procedure prc_Gravar_cdsHist_Senha(fDMCadPedido: TDMCadPedido);
 procedure prc_Inserir_Ped(fDMCadPedido: TDMCadPedido);
 procedure prc_Alterar_Item_Tam(fDMCadPedido: TDMCadPedido; ID_Cor, Item, Item_Original: Integer; Preco, Perc_IPI, Perc_ICMS: Real;
                                DtEntrega: TDateTime; Carimbo,Caixinha: String);
+
+procedure prc_Gravar_Financeiro(fDMCadPedido: TDMCadPedido; Tipo: string);//ENT=Entrada   AVI= Avista
 
 function fnc_Existe_OC(fDMCadPedido: TDMCadPedido): Integer;
 function fnc_Verificar_Vendedor_Int(fDMCadPedido: TDMCadPedido ; ID : Integer) : Integer;
@@ -52,6 +55,14 @@ begin
   begin
     fDMCadPedido.cdsDuplicata_HistCOMPLEMENTO.AsString  := 'ENTRADA DO TÍTULO';
     fDMCadPedido.cdsDuplicata_HistVLR_PAGAMENTO.AsFloat := StrToFloat(FormatFloat('0.00',0));
+  end
+  else if Tipo = 'PAG' then
+  begin
+    fDMCadPedido.cdsDuplicata_HistTIPO_HISTORICO.AsString      := 'PAG';
+    fDMCadPedido.cdsDuplicata_HistCOMPLEMENTO.AsString         := 'PAGAMENTO DO TÍTULO';
+    fDMCadPedido.cdsDuplicata_HistVLR_PAGAMENTO.AsFloat        := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsDuplicataVLR_PARCELA.AsFloat));
+    fDMCadPedido.cdsDuplicata_HistVLR_LANCAMENTO.AsFloat       := 0;
+    fDMCadPedido.cdsDuplicata_HistID_FORMA_PAGAMENTO.AsInteger := fDMCadPedido.cdsDuplicataID_TIPOCOBRANCA.AsInteger;
   end;
   fDMCadPedido.cdsDuplicata_HistDTHISTORICO.AsDateTime  := Date;
   fDMCadPedido.cdsDuplicata_HistDTLANCAMENTO.AsDateTime := fDMCadPedido.cdsDuplicataDTEMISSAO.AsDateTime;
@@ -62,6 +73,21 @@ begin
   fDMCadPedido.cdsDuplicata_HistID_COMISSAO.AsInteger   := 0;
   fDMCadPedido.cdsDuplicata_HistTIPO_ES.AsString        := fDMCadPedido.cdsDuplicataTIPO_ES.AsString;
   fDMCadPedido.cdsDuplicata_Hist.Post;
+
+  if Tipo = 'PAG' then
+  begin
+    if fDMCadPedido.cdsCondPgtoTIPO.AsString = 'V' then
+    begin
+      //prc_Gravar_Comissao(fDMCadPedido,'AVI');
+      prc_Gravar_Financeiro(fDMCadPedido,'AVI');
+    end
+    else
+    begin
+      //prc_Gravar_Comissao(fDMCadPedido,'ENT');
+      prc_Gravar_Financeiro(fDMCadPedido,'ENT');
+    end
+  end;
+
 end;
 
 
@@ -99,12 +125,35 @@ begin
   fDMCadPedido.cdsDuplicataID_PESSOA.AsInteger     := fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger;
   if fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger > 0 then
     fDMCadPedido.cdsDuplicataID_VENDEDOR.AsInteger := fDMCadPedido.cdsPedidoID_VENDEDOR.AsInteger;
+
+  if ((Prazo = 'AVI') and (fDMCadPedido.cdsParametrosQUITAR_AVISTA_AUT.AsString = 'S')) then
+  begin
+    if fDMCadPedido.cdsPedidoID_CONTA.AsInteger > 0 then
+      fDMCadPedido.cdsDuplicataID_CONTA.AsInteger := fDMCadPedido.cdsPedidoID_CONTA.AsInteger;
+    if fDMCadPedido.cdsPedidoID_TIPO_COBRANCA.AsInteger > 0 then
+      fDMCadPedido.cdsDuplicataID_TIPOCOBRANCA.AsInteger := fDMCadPedido.cdsPedidoID_TIPO_COBRANCA.AsInteger;
+    if fDMCadPedido.cdsPedidoID_CONTA.AsInteger > 0 then
+      fDMCadPedido.cdsDuplicataID_CONTA_BOLETO.AsInteger := fDMCadPedido.cdsPedidoID_CONTA.AsInteger;
+    fDMCadPedido.cdsDuplicataDTULTPAGAMENTO.AsDateTime := Date;
+    fDMCadPedido.cdsDuplicataVLR_RESTANTE.AsFloat := StrToFloat(FormatFloat('0.00', 0));
+    fDMCadPedido.cdsDuplicataVLR_PAGO.AsFloat := StrToFloat(FormatFloat('0.00', Valor));
+  end
+  else
+  begin
     if fDMCadPedido.cdsPedido_ParcID_CONTA.AsInteger > 0 then
       fDMCadPedido.cdsDuplicataID_CONTA.AsInteger        := fDMCadPedido.cdsPedido_ParcID_CONTA.AsInteger;
     if fDMCadPedido.cdsPedido_ParcID_TIPOCOBRANCA.AsInteger > 0 then
       fDMCadPedido.cdsDuplicataID_TIPOCOBRANCA.AsInteger := fDMCadPedido.cdsPedido_ParcID_TIPOCOBRANCA.AsInteger;
     if fDMCadPedido.cdsPedido_ParcID_CONTA.AsInteger > 0 then
       fDMCadPedido.cdsDuplicataID_CONTA_BOLETO.AsInteger := fDMCadPedido.cdsPedido_ParcID_CONTA.AsInteger;
+    if (Prazo = 'ENT') then
+    begin
+      fDMCadPedido.cdsDuplicataDTULTPAGAMENTO.AsDateTime := Date;
+      fDMCadPedido.cdsDuplicataVLR_RESTANTE.AsFloat      := StrToFloat(FormatFloat('0.00', 0));
+      fDMCadPedido.cdsDuplicataVLR_PAGO.AsFloat          := StrToFloat(FormatFloat('0.00', Valor));
+    end;
+  end;
+
   fDMCadPedido.cdsDuplicataID_COMISSAO.AsInteger       := 0;
   fDMCadPedido.cdsDuplicataQTD_DIASATRASO.AsInteger    := 0;
   fDMCadPedido.cdsDuplicataDTRECEBIMENTO_TITULO.Clear;
@@ -141,6 +190,10 @@ begin
   fDMCadPedido.cdsDuplicata.Post;
 
   Gravar_Dupicata_Hist(fDMCadPedido,'ENT');
+  //02/12/2019 Foi incluido para quitar o a vista
+  if (Prazo = 'ENT') or ((Prazo = 'AVI') and (fDMCadPedido.cdsParametrosQUITAR_AVISTA_AUT.AsString = 'S')) then
+    Gravar_Dupicata_Hist(fDMCadPedido, 'PAG');
+  //********************
   fDMCadPedido.cdsDuplicata.ApplyUpdates(0);
 end;
 
@@ -183,6 +236,7 @@ var
   vGravou: Boolean;
   vID: Integer;
   Flag: Boolean;
+  Form : TForm;
 begin
   fDMCadPedido.vMSGErro := '';
   vGravou  := False;
@@ -317,6 +371,9 @@ begin
 
   vID := fDMCadPedido.cdsPedidoID.AsInteger;
 
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
+
   fDMEstoque := TDMEstoque.Create(fDMEstoque);
 
   sds := TSQLDataSet.Create(nil);
@@ -398,12 +455,22 @@ begin
 
     if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') then //10/11/2015 Usa_Adiantamento_pedido
     begin
-      fDMCadPedido.cdsPedido_Parc.First;
-      while not fDMCadPedido.cdsPedido_Parc.Eof do
+      //02/12/2019
+      if fDMCadPedido.cdsCondPgtoID.AsInteger <> fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger then
+        fDMCadPedido.cdsCondPgto.Locate('ID',fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger,([Locaseinsensitive]));
+      //*************************
+      //02/12/2019   IF para gravar o avista
+      if (fDMCadPedido.cdsPedido_Parc.IsEmpty) and (fDMCadPedido.cdsCondPgtoTIPO.AsString = 'V') then
+        Gravar_Duplicata(fDMCadPedido,'R','N',1,fDMCadPedido.cdsPedidoVLR_TOTAL.AsFloat,fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime,'AVI')
+      else
       begin
-        if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ParcVLR_VENCIMENTO.AsFloat)) > 0 then
-          Gravar_Duplicata(fDMCadPedido,'R','N',fDMCadPedido.cdsPedido_ParcITEM.AsInteger,fDMCadPedido.cdsPedido_ParcVLR_VENCIMENTO.AsFloat,fDMCadPedido.cdsPedido_ParcDTVENCIMENTO.AsDateTime,'');
-        fDMCadPedido.cdsPedido_Parc.Next;
+        fDMCadPedido.cdsPedido_Parc.First;
+        while not fDMCadPedido.cdsPedido_Parc.Eof do
+        begin
+          if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ParcVLR_VENCIMENTO.AsFloat)) > 0 then
+            Gravar_Duplicata(fDMCadPedido,'R','N',fDMCadPedido.cdsPedido_ParcITEM.AsInteger,fDMCadPedido.cdsPedido_ParcVLR_VENCIMENTO.AsFloat,fDMCadPedido.cdsPedido_ParcDTVENCIMENTO.AsDateTime,'');
+          fDMCadPedido.cdsPedido_Parc.Next;
+        end;
       end;
     end;
 
@@ -584,6 +651,8 @@ begin
   end;
   FreeAndNil(sds);
   FreeAndNil(fDMEstoque);
+
+  FreeAndNil(Form);
 
   if vGravou then
   begin
@@ -920,6 +989,41 @@ begin
   finally
     FreeAndNil(sds);
   end;
+end;
+
+procedure prc_Gravar_Financeiro(fDMCadPedido: TDMCadPedido; Tipo: string);//ENT=Entrada   AVI= Avista
+var
+  fDMGravarFinanceiro: TDMGravarFinanceiro;
+begin
+  fDMGravarFinanceiro := TDMGravarFinanceiro.Create(fDMGravarFinanceiro);
+
+  fDMCadPedido.cdsCliente.Locate('CODIGO', fDMCadPedido.cdsDuplicataID_PESSOA.AsInteger, ([Locaseinsensitive]));
+
+  fDMGravarFinanceiro.vTipo_ES := 'E';
+  if Tipo = 'ENT' then
+    fDMGravarFinanceiro.vHistorico_Compl := 'Recto.Entrada ref. Doc nº ' + fDMCadPedido.cdsDuplicataNUMDUPLICATA.AsString + ' de ' + fDMCadPedido.cdsClienteNOME.AsString
+  else if Tipo = 'AVI' then
+    fDMGravarFinanceiro.vHistorico_Compl := 'Recto.A Vista ref. Doc nº ' + fDMCadPedido.cdsDuplicataNUMDUPLICATA.AsString + ' de ' + fDMCadPedido.cdsClienteNOME.AsString;
+
+  fDMGravarFinanceiro.vID_Conta           := fDMCadPedido.cdsDuplicataID_CONTA.AsInteger;
+  fDMGravarFinanceiro.vID_ModDuplicata    := fDMCadPedido.cdsDuplicataID.AsInteger;
+  fDMGravarFinanceiro.vItem_MovDuplicata  := fDMCadPedido.cdsDuplicata_HistITEM.AsInteger;
+  fDMGravarFinanceiro.vID_Historico       := 0;
+  fDMGravarFinanceiro.vID_Pessoa          := fDMCadPedido.cdsDuplicataID_PESSOA.AsInteger;
+  fDMGravarFinanceiro.vID_Forma_Pagamento := fDMCadPedido.cdsDuplicataID_TIPOCOBRANCA.AsInteger;
+  fDMGravarFinanceiro.vID_ExtComissao     := 0;
+  fDMGravarFinanceiro.vDtMovimento        := fDMCadPedido.cdsDuplicata_HistDTLANCAMENTO.AsDateTime;
+  fDMGravarFinanceiro.vVlr_Movimento      := StrToFloat(FormatFloat('0.00', fDMCadPedido.cdsDuplicata_HistVLR_PAGAMENTO.AsFloat));
+  fDMGravarFinanceiro.vFilial_Fin         := fDMCadPedido.cdsDuplicataFILIAL.AsInteger;
+  if fDMCadPedido.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger > 0 then
+    fDMGravarFinanceiro.vID_Conta_Orcamento := fDMCadPedido.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger
+  else
+    fDMGravarFinanceiro.vID_Conta_Orcamento := 0;
+  fDMGravarFinanceiro.vFilial_Fin         := fDMCadPedido.cdsDuplicataFILIAL.AsInteger;
+
+  fDMGravarFinanceiro.prc_Gravar;
+
+  FreeAndNil(fDMGravarFinanceiro);
 end;
 
 end.

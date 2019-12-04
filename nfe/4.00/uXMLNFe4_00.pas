@@ -897,11 +897,11 @@ begin
     if trim(fDMCadNotaFiscal.cdsNotaFiscalQTDVOLUME.AsString) <> '' then
       VolXML.QVol  := TirarAcento(fDMCadNotaFiscal.cdsNotaFiscalQTDVOLUME.AsString);
     if (fDMCadNotaFiscal.cdsNotaFiscalESPECIE.AsString) <> '' then
-      VolXML.Esp   := TirarAcento(fDMCadNotaFiscal.cdsNotaFiscalESPECIE.AsString);
+      VolXML.Esp   := trim(TirarAcento(fDMCadNotaFiscal.cdsNotaFiscalESPECIE.AsString));
     if trim(fDMCadNotaFiscal.cdsNotaFiscalMARCA.AsString) <> '' then
-      VolXML.Marca := TirarAcento(fDMCadNotaFiscal.cdsNotaFiscalMARCA.AsString);
+      VolXML.Marca := trim(TirarAcento(fDMCadNotaFiscal.cdsNotaFiscalMARCA.AsString));
     if trim(fDMCadNotaFiscal.cdsNotaFiscalNUMEROVOLUME.AsString) <> '' then
-      VolXML.NVol  := fDMCadNotaFiscal.cdsNotaFiscalNUMEROVOLUME.AsString;
+      VolXML.NVol  := trim(fDMCadNotaFiscal.cdsNotaFiscalNUMEROVOLUME.AsString);
     if StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.cdsNotaFiscalPESOLIQUIDO.AsFloat)) > 0 then
       VolXML.PesoL := Replace(FormatFloat('0.000',fDMCadNotaFiscal.cdsNotaFiscalPESOLIQUIDO.AsFloat),',','.');
     if StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.cdsNotaFiscalPESOBRUTO.AsFloat)) > 0 then

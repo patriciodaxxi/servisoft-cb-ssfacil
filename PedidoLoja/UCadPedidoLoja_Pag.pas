@@ -137,6 +137,14 @@ begin
   Label62.Visible             := ((fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger > 0) and (fDMCadPedido.cdsParametrosUSA_CONTA_ORCAMENTO.AsString = 'S'));
   rxdbCondicaoPgto.ReadOnly   := (fDMCadPedido.cdsPedidoNOTIFICACAO.AsInteger = 1);
   DBCheckBox4.Visible         := ((StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_ENTRADA.AsFloat)) > 0) and (fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S'));
+
+  if vMostrarAux = 'V' then
+  begin
+    if (fDMCadPedido.cdsPedidoID_CONTA.AsInteger <= 0) and (fDMCadPedido.qParametrosID_CONTA_PADRAO.AsInteger > 0) then
+      fDMCadPedido.cdsPedidoID_CONTA.AsInteger := fDMCadPedido.qParametrosID_CONTA_PADRAO.AsInteger;
+    if (fDMCadPedido.cdsPedidoID_TIPO_COBRANCA.AsInteger <= 0) and (fDMCadPedido.qParametrosID_TIPO_COBRANCA_PADRAO.AsInteger > 0) then
+      fDMCadPedido.cdsPedidoID_TIPO_COBRANCA.AsInteger := fDMCadPedido.qParametrosID_TIPO_COBRANCA_PADRAO.AsInteger;
+  end;
 end;
 
 procedure TfrmCadPedidoLoja_Pag.rxdbContaChange(Sender: TObject);

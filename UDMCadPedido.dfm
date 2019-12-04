@@ -1974,7 +1974,7 @@ object DMCadPedido: TDMCadPedido
     Params = <>
     ProviderName = 'dspParametros'
     Left = 377
-    Top = 460
+    Top = 459
     object cdsParametrosID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -2382,6 +2382,11 @@ object DMCadPedido: TDMCadPedido
     end
     object cdsParametrosID_OPERACAO_VENDA: TIntegerField
       FieldName = 'ID_OPERACAO_VENDA'
+    end
+    object cdsParametrosQUITAR_AVISTA_AUT: TStringField
+      FieldName = 'QUITAR_AVISTA_AUT'
+      FixedChar = True
+      Size = 1
     end
   end
   object sdsTab_CSTICMS: TSQLDataSet
@@ -16656,6 +16661,21 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'NOME_FOTO'
       Size = 50
     end
+    object qParametros_ProdUSA_MEDIDA: TStringField
+      FieldName = 'USA_MEDIDA'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_BITOLA: TStringField
+      FieldName = 'USA_BITOLA'
+      FixedChar = True
+      Size = 1
+    end
+    object qParametros_ProdUSA_QTD_EMBALAGEM: TStringField
+      FieldName = 'USA_QTD_EMBALAGEM'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParametros_Geral: TSQLQuery
     MaxBlobSize = -1
@@ -17726,7 +17746,9 @@ object DMCadPedido: TDMCadPedido
     MaxBlobSize = -1
     Params = <>
     SQL.Strings = (
-      'select OPCAO_DTENTREGAPEDIDO'
+      
+        'select OPCAO_DTENTREGAPEDIDO, ID_CONTA_PADRAO, ID_TIPO_COBRANCA_' +
+        'PADRAO'
       'from PARAMETROS ')
     SQLConnection = dmDatabase.scoDados
     Left = 1093
@@ -17735,6 +17757,12 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'OPCAO_DTENTREGAPEDIDO'
       FixedChar = True
       Size = 1
+    end
+    object qParametrosID_CONTA_PADRAO: TIntegerField
+      FieldName = 'ID_CONTA_PADRAO'
+    end
+    object qParametrosID_TIPO_COBRANCA_PADRAO: TIntegerField
+      FieldName = 'ID_TIPO_COBRANCA_PADRAO'
     end
   end
   object frxDuplicata: TfrxDBDataset

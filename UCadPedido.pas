@@ -4159,6 +4159,12 @@ begin
       exit;
     end;
   end;
+  if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') and (fDMCadPedido.fnc_Existe_DupPaga(fDMCadPedido.cdsPedidoID.AsInteger) > 0) then
+  begin
+    MessageDlg('*** Pedido não pode ser alterado, pois já existe duplicatas pagas!', mtInformation, [mbOk], 0);
+    Exit;
+  end;
+
   ffrmCadPedido_Cancelamento                 := TfrmCadPedido_Cancelamento.Create(self);
   ffrmCadPedido_Cancelamento.fDMCadPedido    := fDMCadPedido;
   ffrmCadPedido_Cancelamento.vOpcao_Cancelar := 'P';
@@ -4176,6 +4182,11 @@ begin
       MessageDlg('*** Lote/Talão já gerado para esse pedido!',mtError, [mbOk], 0);
       exit;
     end;
+  end;
+  if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') and (fDMCadPedido.fnc_Existe_DupPaga(fDMCadPedido.cdsPedidoID.AsInteger) > 0) then
+  begin
+    MessageDlg('*** Pedido não pode ser alterado, pois já existe duplicatas pagas!', mtInformation, [mbOk], 0);
+    Exit;
   end;
 
   ffrmCadPedido_Cancelamento                 := TfrmCadPedido_Cancelamento.Create(self);

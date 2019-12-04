@@ -355,7 +355,7 @@ object frmCadPedidoLoja_Pag: TfrmCadPedidoLoja_Pag
       Margin = 0
     end
     object rxdbCondicaoPgto: TRxDBLookupCombo
-      Left = 113
+      Left = 114
       Top = 11
       Width = 288
       Height = 21
@@ -388,7 +388,7 @@ object frmCadPedidoLoja_Pag: TfrmCadPedidoLoja_Pag
     end
     object rxdbConta: TRxDBLookupCombo
       Left = 113
-      Top = 53
+      Top = 54
       Width = 288
       Height = 21
       DropDownCount = 15

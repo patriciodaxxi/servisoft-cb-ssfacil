@@ -75,6 +75,10 @@ var
 begin
   ColunaOrdenada := Column.FieldName;
   fDMConsPessoa.cdsProduto_Mov.IndexFieldNames := Column.FieldName;
+  if Column.FieldName <> 'NOME_PRODUTO_SERV' then
+    fDMConsPessoa.cdsProduto_Mov.IndexFieldNames := Column.FieldName + ';NOME_PRODUTO_SERV'
+  else
+    fDMConsPessoa.cdsProduto_Mov.IndexFieldNames := Column.FieldName + ';DTEMISSAO';
   Column.Title.Color := clBtnShadow;
   for i := 0 to SMDBGrid1.Columns.Count - 1 do
     if not (SMDBGrid1.Columns.Items[I] = Column) then

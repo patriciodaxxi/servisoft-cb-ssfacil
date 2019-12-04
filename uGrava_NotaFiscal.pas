@@ -436,8 +436,9 @@ begin
   else if Tipo = 'PAG' then
   begin
     fDMCadNotaFiscal.cdsDuplicata_HistTIPO_HISTORICO.AsString := 'PAG';
-    fDMCadNotaFiscal.cdsDuplicata_HistCOMPLEMENTO.AsString  := 'PAGAMENTO DO TÍTULO';
-    fDMCadNotaFiscal.cdsDuplicata_HistVLR_PAGAMENTO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsDuplicataVLR_PARCELA.AsFloat));
+    fDMCadNotaFiscal.cdsDuplicata_HistCOMPLEMENTO.AsString    := 'PAGAMENTO DO TÍTULO';
+    fDMCadNotaFiscal.cdsDuplicata_HistVLR_PAGAMENTO.AsFloat   := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsDuplicataVLR_PARCELA.AsFloat));
+    fDMCadNotaFiscal.cdsDuplicata_HistVLR_LANCAMENTO.AsFloat  := StrToFloat(FormatFloat('0.00',0));
     fDMCadNotaFiscal.cdsDuplicata_HistID_FORMA_PAGAMENTO.AsInteger := fDMCadNotaFiscal.cdsDuplicataID_TIPOCOBRANCA.AsInteger;
   end;
   fDMCadNotaFiscal.cdsDuplicata_HistDTHISTORICO.AsDateTime  := Date;
