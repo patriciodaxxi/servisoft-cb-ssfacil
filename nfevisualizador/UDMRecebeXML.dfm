@@ -1,7 +1,8 @@
 object DMRecebeXML: TDMRecebeXML
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Top = 142
+  Left = 1
+  Top = 30
   Height = 586
   Width = 1366
   object sdsCFOP: TSQLDataSet
@@ -7647,14 +7648,19 @@ object DMRecebeXML: TDMRecebeXML
   end
   object qFilial2: TSQLQuery
     MaxBlobSize = -1
-    Params = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
     SQL.Strings = (
       'SELECT *'
       'FROM FILIAL'
-      '')
+      'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 1016
-    Top = 24
+    Left = 1164
+    Top = 49
     object qFilial2ID: TIntegerField
       FieldName = 'ID'
       Required = True

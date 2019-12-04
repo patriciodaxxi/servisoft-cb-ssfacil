@@ -2451,7 +2451,6 @@ begin
   cdsTab_CSTIPI.Close;
   cdsTab_CSTIPI.Open;
   cdsCFOP.Open;
-  qFilial2.Open;
   qDePara.Close;
   qDePara.Open;
   cdsSitTrib_CF.Open;

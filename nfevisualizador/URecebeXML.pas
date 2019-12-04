@@ -423,6 +423,7 @@ type
     procedure NxButton2Click(Sender: TObject);
     procedure btnAjustarUnidadeClick(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
+    procedure RxDBLookupCombo6Exit(Sender: TObject);
   private
     { Private declarations }
     vCodCidade: Integer;
@@ -2096,16 +2097,12 @@ var
   vVlrAux: Real;
   //vUnidadeAux: String;
 begin
-  //if (fDMRecebeXML.qParametros_RecXMLCONTROLAR_GRAVA_PROD.AsString = 'S') and not(ckAssociar.Checked) then
-  //  exit;
-
   vAux := dmDatabase.ProximaSequencia('PRODUTO',0);
   vAux := vAux;
 
   fDMRecebeXML.cdsProduto.Insert;
   fDMRecebeXML.cdsProdutoID.AsInteger       := vAux;
   if fDMRecebeXML.qParametros_ProdUSA_PRODUTO_FILIAL.AsString = 'S' then
-    //fDMRecebeXML.cdsProdutoFILIAL.AsInteger := vFilial;
     fDMRecebeXML.cdsProdutoFILIAL.AsInteger := vFilial_Local;
   fDMRecebeXML.cdsProdutoNOME.AsString      := UpperCase(fDMRecebeXML.mItensNotaNomeProduto.AsString);
   //15/01/2018 para concatenar os dados adicionais no nome do produto  (Beira Rio)
@@ -2320,7 +2317,6 @@ begin
   vID_Nota := 0;
   vGravar := False;
 
-  //vExisteAux := fDMRecebeXML.fnc_Abrir_Nota(vFilial,fDMRecebeXML.cdsCabecalhonNF.AsInteger,vCodFornecedor,fDMRecebeXML.cdsCabecalhoserie.AsString);
   vExisteAux := fDMRecebeXML.fnc_Abrir_Nota(vFilial_Local,fDMRecebeXML.cdsCabecalhonNF.AsInteger,vCodFornecedor,fDMRecebeXML.cdsCabecalhoserie.AsString);
   if vExisteAux then
     exit;
@@ -2940,9 +2936,7 @@ begin
   fDMRecebeXML.qFilial.Close;
   fDMRecebeXML.qFilial.ParamByName('CNPJ_CPF').AsString := CNPJ_CPF;
   fDMRecebeXML.qFilial.Open;
-  //vFilial     := fDMRecebeXML.qFilialID.AsInteger;
   vFilial_Local := fDMRecebeXML.qFilialID.AsInteger;
-  //fDMRecebeXML.qFilial.Close;
 end;
 
 procedure TfrmRecebeXML.btnGravarNFeClick(Sender: TObject);
@@ -2976,21 +2970,16 @@ begin
     ShowMessage('Nota de homologação não pode ser gravada no sistema!');
     exit;
   end;
-  //if (vFilial < 1) and (trim(RxDBLookupCombo1.Text) = '') then
   if (vFilial_Local < 1) and (trim(RxDBLookupCombo1.Text) = '') then
   begin
     ShowMessage('Nota não pertence a empresa. Verifique se o campo <Cliente Triangular> está preenchido!');
     exit;
   end;
-  //if (vFilial <= 0) and (trim(RxDBLookupCombo6.Text) = '') then
   if (vFilial_Local <= 0) and (trim(RxDBLookupCombo6.Text) = '') then
   begin
     ShowMessage('Nota não pertence a empresa, Verifique se o campo <Filial> está preenchido!');
     exit;
   end;
-  //08/04/2015
-  //if vFilial <= 0 then
-   // vFilial := RxDBLookupCombo6.KeyValue;
   if (vFilial_Local <= 0) and (RxDBLookupCombo6.Visible) then
   begin
     if not RxDBLookupCombo6.Visible then
@@ -3000,8 +2989,6 @@ begin
     end;
     vFilial_Local := RxDBLookupCombo6.KeyValue;
   end;
-  //*******
-  //if fDMRecebeXML.cdsParcelas.IsEmpty then
   if fDMRecebeXML.mParc.IsEmpty then
   begin
     if MessageDlg('Nota sem Financeiro, deseja continuar?',mtConfirmation,[mbNo,mbYes],0)=mrNo then
@@ -3202,11 +3189,8 @@ begin
     if fDMRecebeXML.qParametros_RecXMLUSA_REF_SEQUENCIAL.AsString = 'S' then
       CurrencyEdit2.AsInteger := fnc_Proxima_Ref;
 
-    //10/07/2014
-    //fDMRecebeXML.AbrirNFe(OpenDialog1.FileName);
     oNFe       := TStringList.Create;
     oNFeStream := TMemoryStream.Create;
-//    vArquivoAux := OpenDialog1.FileName;
     oNFe.LoadFromFile(vArquivoAux);
     oNFe.SaveToStream(oNFeStream);
 
@@ -3363,18 +3347,19 @@ begin
        Stream.LoadFromFile(vOpenDialog)
      else
        Stream.LoadFromFile(OpenDialog1.FileName);
-     //AbrirUTF8(OpenDialog.FileName, Stream);
      Stream.Position := 0;
 
+     fDMRecebeXML.qFilial2.Close;
+     fDMRecebeXML.qFilial2.ParamByName('ID').AsInteger := vFilial_Local;
+     fDMRecebeXML.qFilial2.Open;
+
      texto  := Monta_Texto(fDMRecebeXML.qFilial2CNPJ_CPF.Text,14);
-     //texto  := '13685831000196';
 
      vLocalServidorNFe := fDMRecebeXML.qParametrosLOCALSERVIDORNFE.AsString;
      if trim(fDMRecebeXML.qFilial2LOCALSERVIDORNFE.AsString) <> '' then
        vLocalServidorNFe := fDMRecebeXML.qFilial2LOCALSERVIDORNFE.AsString;
 
      NFe_GerarDANFE( trim(vLocalServidorNFe),
-                     //texto,'marca que é de homologação ou cancelada','Nome do cliente no canhoto',
                      texto,'','',
                      Stream,
                      DANFE,True );
@@ -4882,6 +4867,12 @@ begin
 
     end;
   end;
+end;
+
+procedure TfrmRecebeXML.RxDBLookupCombo6Exit(Sender: TObject);
+begin
+  if RxDBLookupCombo6.Text <> '' then
+    vFilial_Local := RxDBLookupCombo6.KeyValue;
 end;
 
 end.

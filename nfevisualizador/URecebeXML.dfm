@@ -882,8 +882,8 @@ object frmRecebeXML: TfrmRecebeXML
       object Panel3: TPanel
         Left = 0
         Top = 0
-        Width = 1090
-        Height = 483
+        Width = 1098
+        Height = 491
         Align = alClient
         Color = clMoneyGreen
         TabOrder = 0
@@ -1138,7 +1138,7 @@ object frmRecebeXML: TfrmRecebeXML
           ParentFont = False
         end
         object Label61: TLabel
-          Left = 900
+          Left = 908
           Top = 389
           Width = 132
           Height = 13
@@ -1502,7 +1502,7 @@ object frmRecebeXML: TfrmRecebeXML
           TabOrder = 18
         end
         object BitBtn2: TBitBtn
-          Left = 924
+          Left = 932
           Top = 407
           Width = 123
           Height = 25
@@ -1514,7 +1514,7 @@ object frmRecebeXML: TfrmRecebeXML
           OnClick = BitBtn2Click
         end
         object BitBtn1: TBitBtn
-          Left = 924
+          Left = 932
           Top = 459
           Width = 123
           Height = 25
@@ -5439,6 +5439,7 @@ object frmRecebeXML: TfrmRecebeXML
       LookupSource = DMRecebeXML.dsFilial
       TabOrder = 10
       Visible = False
+      OnExit = RxDBLookupCombo6Exit
     end
     object cbFinalidade: TComboBox
       Left = 375

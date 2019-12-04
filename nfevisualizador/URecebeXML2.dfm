@@ -2709,7 +2709,7 @@ object frmRecebeXML2: TfrmRecebeXML2
         FFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFFFF}
     end
     object BitBtn3: TBitBtn
-      Left = 5
+      Left = 7
       Top = 96
       Width = 120
       Height = 28
