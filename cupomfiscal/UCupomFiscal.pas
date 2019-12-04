@@ -437,7 +437,7 @@ begin
   begin
     if fDmCupomFiscal.cdsCupomFiscal.State in [dsEdit,dsInsert] then
       btComandaClick(Sender);
-  end;
+  end
   else
   if (fDmCupomFiscal.cdsCupomFiscal.State in [dsEdit,dsInsert]) or not(fDmCupomFiscal.vEncerrado) then
   begin
