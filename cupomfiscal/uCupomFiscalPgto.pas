@@ -520,6 +520,9 @@ begin
     Exit;
   end;
 
+  fDmCupomFiscal.cdsTipoCobranca.IndexFieldNames := 'ID';
+  fDmCupomFiscal.cdsTipoCobranca.FindKey([ceFormaPgto.AsInteger]);
+
   if (fDmCupomFiscal.cdsTipoCobrancaEXIGE_CLIENTE.AsString = 'S') and
      ((fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.AsString = '') or (fDmCupomFiscal.cdsCupomFiscalID_CLIENTE.AsInteger = 99999)) then
   begin
