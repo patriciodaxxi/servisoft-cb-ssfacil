@@ -23,15 +23,15 @@ object fCupomFiscal: TfCupomFiscal
   object Panel1: TPanel
     Left = 388
     Top = 0
-    Width = 888
-    Height = 688
+    Width = 896
+    Height = 696
     Align = alClient
     TabOrder = 1
     object SMDBGrid1: TSMDBGrid
       Left = 1
       Top = 1
-      Width = 886
-      Height = 469
+      Width = 894
+      Height = 477
       Align = alClient
       Color = 12633514
       Ctl3D = False
@@ -177,8 +177,8 @@ object fCupomFiscal: TfCupomFiscal
     end
     object SMDBGrid2: TSMDBGrid
       Left = 1
-      Top = 524
-      Width = 886
+      Top = 532
+      Width = 894
       Height = 110
       Align = alBottom
       Color = 12633514
@@ -251,8 +251,8 @@ object fCupomFiscal: TfCupomFiscal
     end
     object Panel3: TPanel
       Left = 1
-      Top = 470
-      Width = 886
+      Top = 478
+      Width = 894
       Height = 54
       Align = alBottom
       Anchors = [akLeft, akBottom]
@@ -334,8 +334,8 @@ object fCupomFiscal: TfCupomFiscal
     end
     object Panel5: TPanel
       Left = 1
-      Top = 634
-      Width = 886
+      Top = 642
+      Width = 894
       Height = 53
       Align = alBottom
       Anchors = [akLeft, akBottom]
@@ -443,7 +443,7 @@ object fCupomFiscal: TfCupomFiscal
     Left = 0
     Top = 0
     Width = 388
-    Height = 688
+    Height = 696
     Align = alLeft
     BevelOuter = bvNone
     Constraints.MinWidth = 380
@@ -960,7 +960,7 @@ object fCupomFiscal: TfCupomFiscal
     end
     object Panel7: TPanel
       Left = 0
-      Top = 634
+      Top = 642
       Width = 388
       Height = 54
       Align = alBottom
@@ -1011,7 +1011,7 @@ object fCupomFiscal: TfCupomFiscal
       Left = 0
       Top = 401
       Width = 388
-      Height = 233
+      Height = 241
       Align = alClient
       Anchors = [akLeft, akTop, akBottom]
       Color = clBlack
@@ -1021,7 +1021,7 @@ object fCupomFiscal: TfCupomFiscal
       TabOrder = 3
       DesignSize = (
         388
-        233)
+        241)
       object Image1: TImage
         Left = 34
         Top = 5
