@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadDuplicata, DBGrids,
   ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, RXDBCtrl, RzChkLst, RzPanel,
-  UEscolhe_Filial, URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, 
+  URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, 
   NxCollection, StrUtils, DateUtils, UCadDuplicata_Gerar, UDMCadCheque, UCadDuplicata_Alt, UCadDuplicata_EscTipo, RzLstBox,
   UCadDuplicata_Total, UCadDuplicata_LeItau, SqlExpr, ComCtrls, ValorPor;
 
@@ -362,7 +362,6 @@ type
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadDuplicata_Pag: TfrmCadDuplicata_Pag;
     ffrmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2;
     ffrmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel;
@@ -553,23 +552,8 @@ begin
     end;
   end;
 
-  if fDMCadDuplicata.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadDuplicata.cdsFilial.Last;
-    vFilial := fDMCadDuplicata.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadDuplicata.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDMCadDuplicata.cdsFilial.Locate('ID', vFilial, [loCaseInsensitive]);
   fDMCadDuplicata.prc_Inserir;
@@ -1992,7 +1976,6 @@ end;
 procedure TfrmCadDuplicata.prc_Gerar_mTitulos;
 var
   ffrmCadDuplicata_Desc: TfrmCadDuplicata_Desc;
-  ffrmEscolhe_Filial: TfrmEscolhe_Filial;
   vVlrTotal: Real;
   vDtPrimeiro_Vecto, vDtFinal_Vecto: TDateTime;
   vQtdTit: Integer;

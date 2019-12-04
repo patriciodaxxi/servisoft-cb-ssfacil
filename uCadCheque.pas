@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, uDmCadCheque, StdCtrls, RxDBComb,
   Mask, DBCtrls, NxCollection, ExtCtrls, Grids, DBGrids, SMDBGrid, RzTabs, RxLookup, ToolEdit, RXDBCtrl, rsDBUtils, DB,
-  DateUtils, uEscolhe_Filial, RzPanel, Menus, UCadCheque_Comp, UDMGravarFinanceiro, dbXPress, UCBase;
+  DateUtils, RzPanel, Menus, UCadCheque_Comp, UDMGravarFinanceiro, dbXPress, UCBase;
 
 type
   TfrmCadCheque = class(TForm)
@@ -132,7 +132,6 @@ type
   private
     { Private declarations }
     fDmCadCheque: TDmCadCheque;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     procedure prc_Limpar_Edit_Consulta;
     procedure prc_Opcao;
     procedure prc_Posiciona_Cheque;
@@ -208,23 +207,8 @@ end;
 
 procedure TfrmCadCheque.btnInserirClick(Sender: TObject);
 begin
-  if fDmCadCheque.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDmCadCheque.cdsFilial.Last;
-    vFilial := fDMCadCheque.cdsFilialID.AsInteger;
-    vFilial_Nome := fDmCadCheque.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDmCadCheque.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 

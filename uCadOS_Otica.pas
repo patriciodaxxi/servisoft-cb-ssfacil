@@ -193,7 +193,7 @@ var
 
 implementation
 
-uses rsDBUtils, USel_Pessoa, USel_Produto, uUtilPadrao, UEscolhe_Filial;
+uses rsDBUtils, USel_Pessoa, USel_Produto, uUtilPadrao;
 
 {$R *.dfm}
 
@@ -313,23 +313,8 @@ procedure TfrmCadOS_Otica.prc_Inserir_Registro;
 begin
   fDMCadOrdemServico.qParametros.Close;
   fDMCadOrdemServico.qParametros.Open;
-  if fDMCadOrdemServico.cdsFilial.RecordCount > 1 then
-  begin
-    frmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    frmEscolhe_Filial.ShowModal;
-    FreeAndNil(frmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadOrdemServico.cdsFilial.Last;
-    vFilial      := fDMCadOrdemServico.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadOrdemServico.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
   fDMCadOrdemServico.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 
   fDMCadOrdemServico.prc_Inserir(True);

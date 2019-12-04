@@ -24,7 +24,7 @@ object frmCadLocalEstoque: TfrmCadLocalEstoque
     Top = 0
     Width = 863
     Height = 582
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadLocalEstoque: TfrmCadLocalEstoque
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -113,11 +113,13 @@ object frmCadLocalEstoque: TfrmCadLocalEstoque
           item
             Expanded = False
             FieldName = 'NUM_ENDERECO'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'UF'
+            Width = 64
             Visible = True
           end
           item
@@ -129,6 +131,7 @@ object frmCadLocalEstoque: TfrmCadLocalEstoque
           item
             Expanded = False
             FieldName = 'CEP'
+            Width = 64
             Visible = True
           end
           item

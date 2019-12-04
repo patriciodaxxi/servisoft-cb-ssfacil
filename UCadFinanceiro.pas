@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadFinanceiro, Menus,
   DBGrids, ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, RXDBCtrl, RzPanel,
-  UEscolhe_Filial, NxCollection, UConsSaldo_Conta, ValorPor;
+  NxCollection, UConsSaldo_Conta, ValorPor;
 
 type
   TfrmCadFinanceiro = class(TForm)
@@ -143,7 +143,6 @@ type
   private
     { Private declarations }
     fDMCadFinanceiro: TDMCadFinanceiro;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
 
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
@@ -226,23 +225,9 @@ end;
 
 procedure TfrmCadFinanceiro.prc_Inserir_Registro;
 begin
-  if fDMCadFinanceiro.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadFinanceiro.cdsFilial.Last;
-    vFilial      := fDMCadFinanceiro.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadFinanceiro.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
+    
   fDMCadFinanceiro.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
   fDMCadFinanceiro.prc_Inserir;
   lblNome_Filial.Caption := vFilial_Nome;

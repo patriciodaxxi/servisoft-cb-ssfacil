@@ -24,9 +24,9 @@ object frmCadOS_Otica: TfrmCadOS_Otica
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 658
-    Height = 682
-    ActivePage = TS_Cadastro
+    Width = 666
+    Height = 689
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadOS_Otica: TfrmCadOS_Otica
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -43,8 +43,8 @@ object frmCadOS_Otica: TfrmCadOS_Otica
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 139
-        Width = 654
-        Height = 503
+        Width = 662
+        Height = 510
         Align = alClient
         Ctl3D = True
         DataSource = DMCadOrdemServico.dsOrdemServico_Consulta
@@ -107,7 +107,6 @@ object frmCadOS_Otica: TfrmCadOS_Otica
             FieldName = 'DTEMISSAO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Emiss'#227'o'
-            Width = 64
             Visible = True
           end
           item
@@ -145,14 +144,13 @@ object frmCadOS_Otica: TfrmCadOS_Otica
             FieldName = 'VLR_RESTANTE'
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. Restante'
-            Width = 64
             Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 654
+        Width = 662
         Height = 32
         Align = alTop
         Color = clSilver
@@ -452,8 +450,8 @@ object frmCadOS_Otica: TfrmCadOS_Otica
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 642
-        Width = 654
+        Top = 649
+        Width = 662
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -469,7 +467,7 @@ object frmCadOS_Otica: TfrmCadOS_Otica
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 654
+        Width = 662
         Height = 107
         Align = alTop
         Color = clSilver
@@ -688,7 +686,7 @@ object frmCadOS_Otica: TfrmCadOS_Otica
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 654
+        Width = 662
         Height = 35
         Align = alTop
         Color = 8404992
@@ -914,8 +912,8 @@ object frmCadOS_Otica: TfrmCadOS_Otica
       object pnlCliente: TPanel
         Left = 0
         Top = 58
-        Width = 654
-        Height = 601
+        Width = 662
+        Height = 608
         Align = alClient
         Enabled = False
         TabOrder = 1
@@ -2028,7 +2026,7 @@ object frmCadOS_Otica: TfrmCadOS_Otica
       object pnlNota: TPanel
         Left = 0
         Top = 35
-        Width = 654
+        Width = 662
         Height = 23
         Align = alTop
         Color = clSilver

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadOrdemServico, DB,
   DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus, RXDBCtrl,
-  RzEdit, RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, StrUtils, UBaixaOrdemServico, ComCtrls,
+  RzEdit, RzDBEdit, RzButton, UCBase, RzPanel, dbXPress, NxCollection, StrUtils, UBaixaOrdemServico, ComCtrls,
   DateUtils, UCadOrdemServico_Itens, RzDTP, RzDBDTP, UHistServico_Prod, RzLstBox, RzChkLst;
 
 type
@@ -197,7 +197,6 @@ type
     vID_Cliente_Ant: Integer;
 
     fDMCadOrdemServico: TDMCadOrdemServico;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadOrdemServico_Itens: TfrmCadOrdemServico_Itens;
     ffrmHistServico_Prod: TfrmHistServico_Prod;
     ffrmBaixaOrdemServico: TfrmBaixaOrdemServico;
@@ -309,23 +308,8 @@ procedure TfrmCadOrdemServico.prc_Inserir_Registro;
 begin
   fDMCadOrdemServico.qParametros.Close;
   fDMCadOrdemServico.qParametros.Open;
-  if fDMCadOrdemServico.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadOrdemServico.cdsFilial.Last;
-    vFilial      := fDMCadOrdemServico.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadOrdemServico.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
   fDMCadOrdemServico.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
   fDMCadOrdemServico.prc_Inserir;
   lblNome_Filial.Caption := vFilial_Nome;

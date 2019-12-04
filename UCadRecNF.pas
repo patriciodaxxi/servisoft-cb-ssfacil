@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadNotaFiscal,
   RXDBCtrl, RzEdit, RzDBEdit, RzButton, UCadRecNF_Itens, UDMEstoque, TlHelp32, DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd,
-  SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, UCBase, UEscolhe_Filial, USel_Pedido,
+  SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, UCBase, USel_Pedido,
   RzPanel, Menus, dbXPress, DateUtils, UDMMovimento, NxEdit, NxCollection, Variants, UDMCadNotaFiscal_MP, frxExportPDF, frxExportMail;
 
 type
@@ -188,7 +188,6 @@ type
     fDMCadNotaFiscal_MP: TDMCadNotaFiscal_MP;
 
     ffrmCadRecNF_Itens: TfrmCadRecNF_Itens;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmSel_Pedido: TfrmSel_Pedido;
 
     fDMEstoque: TDMEstoque;
@@ -662,24 +661,8 @@ begin
   fDMCadNotaFiscal.cdsParametros.Open;
   if fDMCadNotaFiscal.cdsParametrosUSA_VALE.AsString = 'S' then
     fDMCadNotaFiscal.mValeAux.EmptyDataSet;
-  if fDMCadNotaFiscal.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadNotaFiscal.cdsFilial.Last;
-    vFilial      := fDMCadNotaFiscal.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadNotaFiscal.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
-
   fDMCadNotaFiscal.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 
   fDMCadNotaFiscal.prc_Inserir(vTipo_Reg);

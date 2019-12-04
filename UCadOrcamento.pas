@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, DB, SqlExpr,
-  DBGrids, ExtCtrls, StdCtrls, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, UCadOrcamento_Itens, UEscolhe_Filial,
+  DBGrids, ExtCtrls, StdCtrls, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, UCadOrcamento_Itens, 
   UCBase, Menus, NxEdit, NxCollection, UDMRel, UCadOrcamento_Aprov, Variants, Mask, RzTabs, RzPanel, UCadPedido_Desconto, ComObj,
   UCadPedido_Ace, uCadObs_Aux, UCadPedido_ItensRed, UCadOrcamento_NaoAprovado, classe.validaemail, frxExportPDF, frxExportMail,
   UMontaPed_TipoItem;
@@ -295,7 +295,6 @@ type
     fLista: TStringList;
     ffrmCadOrcamento_Itens: TfrmCadOrcamento_Itens;
     ffrmCadOrcamento_NaoAprovado: TfrmCadOrcamento_NaoAprovado;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadOrcamento_Aprov: TfrmCadOrcamento_Aprov;
     ffrmCadPedido_Desconto: TfrmCadPedido_Desconto;
     ffrmCadPedido_Ace: TfrmCadPedido_Ace;
@@ -420,23 +419,8 @@ end;
 
 procedure TfrmCadOrcamento.prc_Inserir_Registro;
 begin
-  if fDMCadPedido.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadPedido.cdsFilial.Last;
-    vFilial      := fDMCadPedido.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadPedido.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDMCadPedido.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 

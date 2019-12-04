@@ -6,7 +6,7 @@ uses
   DBVGrids, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadNotaFiscal,
   RXDBCtrl, RzEdit, RzDBEdit, RzButton, UCadNotaFiscal_Itens, UCadNotaFiscal_Desconto, UDMEstoque, UCadNotaFiscal_Ref, TlHelp32,
   DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, UNFe, UCBase,
-  UCadNotaFiscal_OutrasDesp, UEscolhe_Filial, UDMNFe, UCadNotaFiscal_Confirma, UCadNotaFiscal_CCe, USel_Pedido, USel_OS, RzPanel,
+  UCadNotaFiscal_OutrasDesp, UDMNFe, UCadNotaFiscal_Confirma, UCadNotaFiscal_CCe, USel_Pedido, USel_OS, RzPanel,
   UCadNotaFiscal_Canc, USel_NotaEntrada, UCadNotaFiscal_OutrosDados, Menus, dbXPress, DateUtils, UDMMovimento, NxEdit, USenha,
   UCadNotaFiscal_Obs, UConsNotaFiscal_NDevol, UCadNotaFiscal_Copia, UCadNotaFiscal_Alt_Imp, NxCollection, UCadNotaFiscal_Cons,
   UDMCadNotaFiscal_MP, UConsLimite_Credito, UImportar_TXT, UCadNotaFiscal_MObra, USel_Vale, Variants, UCadNotaFiscal_Imp_Aux,
@@ -579,7 +579,6 @@ type
     ffrmCadNotaFiscal_Desconto: TfrmCadNotaFiscal_Desconto;
     ffrmCadNotaFiscal_Ref: TfrmCadNotaFiscal_Ref;
     ffrmCadNotaFiscal_OutrasDesp: TfrmCadNotaFiscal_OutrasDesp;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffNFe: TfNFe;
     ffrmCadNotaFiscal_Confirma: TfrmCadNotaFiscal_Confirma;
     ffrmCadNotaFiscal_CCe: TfrmCadNotaFiscal_CCe;
@@ -1270,19 +1269,9 @@ begin
   fDMCadNotaFiscal.cdsFilial.Last;
   if (vPreFat) and (vFilial > 0) then
   else
-  if fDMCadNotaFiscal.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-    vFilial      := fDMCadNotaFiscal.cdsFilialID.AsInteger;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
+
   fDMCadNotaFiscal.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
   vFilial_Nome := fDMCadNotaFiscal.cdsFilialNOME.AsString;
 

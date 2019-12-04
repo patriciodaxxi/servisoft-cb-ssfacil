@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, DB, NxEdit,
   DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, Math,
-  UCadPedido_Desconto, UEscolhe_Filial, UCBase, RzPanel, UCadTabPreco, UCadPedido_Cancelamento, DateUtils, dbXPress, Menus, 
+  UCadPedido_Desconto, UCBase, RzPanel, UCadTabPreco, UCadPedido_Cancelamento, DateUtils, dbXPress, Menus, 
   NxCollection, Variants, USel_TabPreco, VarUtils, DBClient, Provider, UCadPedido_Itens, UDMPedidoImp, UDMSel_Produto;
 
 type
@@ -290,7 +290,6 @@ type
     fDMPedidoImp: TDMPedidoImp;
     fDMSel_Produto: TDMSel_Produto;
     ffrmCadPedido_Desconto: TfrmCadPedido_Desconto;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadTabPreco: TfrmCadTabPreco;
     ffrmCadPedido_Cancelamento: TfrmCadPedido_Cancelamento;
     ffrmSel_TabPreco: TfrmSel_TabPreco;
@@ -1592,24 +1591,8 @@ end;
 
 procedure TfrmCadPedidoLoja.prc_Informar_Filial;
 begin
-  if fDMCadPedido.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadPedido.cdsFilial.Last;
-    vFilial      := fDMCadPedido.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadPedido.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
-
   fDMCadPedido.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
   lblNome_Filial.Caption := vFilial_Nome;
 end;

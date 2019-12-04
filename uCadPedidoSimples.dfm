@@ -40,7 +40,7 @@ object frmCadPedidoSimples: TfrmCadPedidoSimples
         Color = clSilver
         TabOrder = 0
         object btnInserir: TNxButton
-          Left = 3
+          Left = 4
           Top = 3
           Width = 153
           Height = 30
@@ -526,7 +526,6 @@ object frmCadPedidoSimples: TfrmCadPedidoSimples
             Expanded = False
             FieldName = 'DTENTREGA'
             Title.Caption = 'Data Entrega'
-            Width = 64
             Visible = True
           end
           item
@@ -552,7 +551,6 @@ object frmCadPedidoSimples: TfrmCadPedidoSimples
             Expanded = False
             FieldName = 'QTD'
             Title.Caption = 'Qtd. Produtos'
-            Width = 64
             Visible = True
           end
           item

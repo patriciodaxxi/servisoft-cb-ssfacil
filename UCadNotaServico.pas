@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadNotaServico, udmNFSe,
   DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus,
-  RXDBCtrl, RzEdit, RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection, NxEdit,StrUtils, DateUtils,
+  RXDBCtrl, RzEdit, RzDBEdit, RzButton, UCBase, RzPanel, dbXPress, NxCollection, NxEdit,StrUtils, DateUtils,
   UCadNotaServico_Itens, UCadNotaServico_Canc, ComCtrls, ValorPor, RzDBDTP, RzDTP, UConsFat_Mensal, RzRadChk, UDMMovimento,
   UCadNotaServico_Obs, uXMLClientDataSet_NFSe_CampoBom, uXMLClientDataSet_NFSe_PortoAlegre, RzDBChk, USel_OS_Servico, Variants;
 
@@ -377,7 +377,6 @@ type
     fDMCadNotaServico: TDMCadNotaServico;
     fDMNFSe: TDMNFSe;
     fDMMovimento: TDMMovimento;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmConsFat_Mensal: TfrmConsFat_Mensal;
     ffrmCadNotaServico_Obs: TfrmCadNotaServico_Obs;
 
@@ -747,23 +746,9 @@ procedure TfrmCadNotaServico.prc_Inserir_Registro;
 begin
   fDMCadNotaServico.cdsParametros.Close;
   fDMCadNotaServico.cdsParametros.Open;
-  if fDMCadNotaServico.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadNotaServico.cdsFilial.Last;
-    vFilial      := fDMCadNotaServico.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadNotaServico.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDMCadNotaServico.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 

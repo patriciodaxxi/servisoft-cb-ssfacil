@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, Grids, DBGrids, SMDBGrid, RxLookup,
-  ToolEdit, Mask, CurrEdit, StdCtrls, NxCollection, ExtCtrls, RzTabs, uDmCadPedido, db, uEscolhe_Filial, DBCtrls, Buttons,
+  ToolEdit, Mask, CurrEdit, StdCtrls, NxCollection, ExtCtrls, RzTabs, uDmCadPedido, db, DBCtrls, Buttons,
   DateUtils, RXDBCtrl, rsDbUtils, uCadPedidoSimples_Itens, Menus, UCadCondPgto, RxDBComb;
 
 type
@@ -91,7 +91,6 @@ type
   private
     { Private declarations }
     fDmCadPedido: TDmCadPedido;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadPedidoSimples_Itens: TfrmCadPedidoSimples_Itens;
     ffrmCadCondPgto: TfrmCadCondPgto;
     vID_ClienteAnt: Integer;
@@ -184,24 +183,8 @@ end;
 
 procedure TfrmCadPedidoSimples.prc_Inserir_Registro;
 begin
-  if fDMCadPedido.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadPedido.cdsFilial.Last;
-    vFilial      := fDMCadPedido.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadPedido.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
-    Exit;
-  end;
-
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
+    exit;
   fDMCadPedido.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 
   //fDMCadPedido.prc_Inserir;
