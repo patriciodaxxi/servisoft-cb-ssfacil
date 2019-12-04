@@ -421,6 +421,15 @@ begin
     vExcluir_Cupom           := True;
   end
   else
+  if fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'ORC' then
+    btOrcamentoClick(Sender)
+  else
+  if fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'PED' then
+    btPedidoClick(Sender)
+  else
+  if fDmCupomFiscal.cdsCupomFiscalTIPO.AsString = 'COM' then
+    btComandaClick(Sender)
+  else
   if (fDmCupomFiscal.cdsCupomFiscal.State in [dsEdit,dsInsert]) or not(fDmCupomFiscal.vEncerrado) then
   begin
     ShowMessage('Não encerrado corretamente!');
