@@ -948,7 +948,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_CONTATO'
             Title.Alignment = taCenter
             Title.Caption = 'Contato'
-            Width = 64
             Visible = True
           end
           item
@@ -1003,7 +1002,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Cli'
-            Width = 64
             Visible = True
           end
           item
@@ -1012,7 +1010,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_FORNECEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Forn.'
-            Width = 64
             Visible = True
           end
           item
@@ -1030,7 +1027,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Repr.'
-            Width = 64
             Visible = True
           end
           item
@@ -1039,7 +1035,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'ORGAO_PUBLICO'
             Title.Alignment = taCenter
             Title.Caption = 'Org'#227'o P'#250'blico'
-            Width = 64
             Visible = True
           end
           item
@@ -1047,7 +1042,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTPEDIDO'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Pedido'
-            Width = 64
             Visible = True
           end
           item
@@ -1055,7 +1049,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Faturamento'
-            Width = 64
             Visible = True
           end
           item
@@ -1103,7 +1096,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_GRUPO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Grupo'
-            Width = 64
             Visible = True
           end
           item
@@ -1111,7 +1103,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_CONTA_ORCAMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Or'#231'amento'
-            Width = 64
             Visible = True
           end
           item
@@ -1119,7 +1110,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_CLI'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Cliente'
-            Width = 64
             Visible = True
           end
           item
@@ -1127,7 +1117,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_FORN'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Fornecedor'
-            Width = 64
             Visible = True
           end
           item
@@ -1135,7 +1124,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_TRANSP'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Transp.'
-            Width = 64
             Visible = True
           end
           item
@@ -1150,7 +1138,6 @@ object frmCadPessoa: TfrmCadPessoa
             Expanded = False
             FieldName = 'INSCR_EST'
             Title.Caption = 'Inscr. Estadual'
-            Width = 64
             Visible = True
           end
           item
@@ -1166,7 +1153,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_REGIME'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Regime'
-            Width = 64
             Visible = True
           end
           item
@@ -1420,7 +1406,7 @@ object frmCadPessoa: TfrmCadPessoa
         Top = 30
         Width = 1079
         Height = 627
-        ActivePage = TS_RegrasFiscais
+        ActivePage = TS_Pessoa_Financeiro
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1428,7 +1414,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 4
+        TabIndex = 3
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19
@@ -4425,7 +4411,6 @@ object frmCadPessoa: TfrmCadPessoa
                     Expanded = False
                     FieldName = 'OBS'
                     Title.Color = 12320699
-                    Width = 64
                     Visible = True
                   end>
               end
@@ -6013,6 +5998,14 @@ object frmCadPessoa: TfrmCadPessoa
             Alignment = taRightJustify
             Caption = 'Vendedor Interno:'
           end
+          object Label206: TLabel
+            Left = 429
+            Top = 35
+            Width = 102
+            Height = 13
+            Alignment = taRightJustify
+            Caption = '% Com.Vend.Interno :'
+          end
           object RxDBLookupCombo4: TRxDBLookupCombo
             Left = 130
             Top = 6
@@ -6047,7 +6040,7 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsTipoCobranca
-            TabOrder = 3
+            TabOrder = 4
           end
           object RxDBLookupCombo6: TRxDBLookupCombo
             Left = 130
@@ -6060,7 +6053,7 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsCondPgto
-            TabOrder = 4
+            TabOrder = 5
           end
           object RxDBLookupCombo7: TRxDBLookupCombo
             Left = 130
@@ -6073,7 +6066,7 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsContas
-            TabOrder = 5
+            TabOrder = 6
             OnChange = RxDBLookupCombo7Change
           end
           object RxDBLookupCombo15: TRxDBLookupCombo
@@ -6087,7 +6080,7 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsTab_Preco
-            TabOrder = 8
+            TabOrder = 9
           end
           object DBEdit23: TDBEdit
             Left = 130
@@ -6097,7 +6090,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecLowerCase
             DataField = 'EMAIL_PGTO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 13
+            TabOrder = 14
           end
           object gbxConta_Orcamento: TRzGroupBox
             Left = 28
@@ -6106,7 +6099,7 @@ object frmCadPessoa: TfrmCadPessoa
             Height = 144
             Caption = 'Conta de Or'#231'amento por Tipo de Pessoa'
             FlatColor = clBlack
-            TabOrder = 28
+            TabOrder = 29
             OnEnter = gbxConta_OrcamentoEnter
             OnExit = gbxConta_OrcamentoExit
             object Label64: TLabel
@@ -6267,7 +6260,7 @@ object frmCadPessoa: TfrmCadPessoa
             Height = 21
             DataField = 'CONTATO_COMPRAS'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 14
+            TabOrder = 15
           end
           object DBEdit43: TDBEdit
             Left = 130
@@ -6277,7 +6270,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecLowerCase
             DataField = 'EMAIL_COMPRAS'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 15
+            TabOrder = 16
           end
           object DBCheckBox13: TDBCheckBox
             Left = 720
@@ -6293,7 +6286,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 29
+            TabOrder = 30
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6311,7 +6304,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 30
+            TabOrder = 31
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6329,7 +6322,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 31
+            TabOrder = 32
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6344,7 +6337,7 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsEDI_Config
-            TabOrder = 10
+            TabOrder = 11
             OnChange = RxDBLookupCombo27Change
           end
           object DBCheckBox6: TDBCheckBox
@@ -6361,7 +6354,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 32
+            TabOrder = 33
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6373,7 +6366,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecLowerCase
             DataField = 'VLR_LIMITE_CREDITO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 11
+            TabOrder = 12
           end
           object DBEdit51: TDBEdit
             Left = 499
@@ -6383,7 +6376,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecUpperCase
             DataField = 'CARIMBO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 22
+            TabOrder = 23
           end
           object DBEdit48: TDBEdit
             Left = 692
@@ -6393,7 +6386,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecLowerCase
             DataField = 'VLR_LIMITE_COMPRA'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 12
+            TabOrder = 13
           end
           object RxDBLookupCombo35: TRxDBLookupCombo
             Left = 130
@@ -6406,7 +6399,7 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsGrupo_Pessoa
-            TabOrder = 9
+            TabOrder = 10
           end
           object DBDateEdit12: TDBDateEdit
             Left = 130
@@ -6417,7 +6410,7 @@ object frmCadPessoa: TfrmCadPessoa
             DataSource = DMCadPessoa.dsPessoa
             ReadOnly = True
             NumGlyphs = 2
-            TabOrder = 16
+            TabOrder = 17
           end
           object DBEdit21: TDBEdit
             Left = 491
@@ -6427,7 +6420,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecLowerCase
             DataField = 'VLR_ULT_FATURAMENTO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 17
+            TabOrder = 18
           end
           object DBEdit82: TDBEdit
             Left = 675
@@ -6437,7 +6430,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecLowerCase
             DataField = 'QTD_ULT_FATURAMENTO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 18
+            TabOrder = 19
           end
           object DBEdit83: TDBEdit
             Left = 130
@@ -6447,7 +6440,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecUpperCase
             DataField = 'COD_CONTABIL_CLIENTE'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 19
+            TabOrder = 20
           end
           object DBEdit84: TDBEdit
             Left = 130
@@ -6457,7 +6450,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecUpperCase
             DataField = 'COD_CONTABIL_FORNECEDOR'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 20
+            TabOrder = 21
           end
           object RxDBComboBox15: TRxDBComboBox
             Left = 130
@@ -6473,7 +6466,7 @@ object frmCadPessoa: TfrmCadPessoa
               'Liberado'
               'Restrito'
               'Bloqueado')
-            TabOrder = 21
+            TabOrder = 22
             Values.Strings = (
               'L'
               'R'
@@ -6490,7 +6483,7 @@ object frmCadPessoa: TfrmCadPessoa
             LookupField = 'ID'
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsCarteira
-            TabOrder = 6
+            TabOrder = 7
           end
           object DBCheckBox24: TDBCheckBox
             Left = 720
@@ -6506,7 +6499,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 33
+            TabOrder = 34
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6524,7 +6517,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 34
+            TabOrder = 35
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6542,7 +6535,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 35
+            TabOrder = 36
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6554,7 +6547,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecUpperCase
             DataField = 'ID_TAB_PRECO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 7
+            TabOrder = 8
             OnExit = DBEdit102Exit
           end
           object DBCheckBox28: TDBCheckBox
@@ -6571,7 +6564,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 24
+            TabOrder = 25
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6583,7 +6576,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecUpperCase
             DataField = 'OBS_AVISO'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 25
+            TabOrder = 26
           end
           object RzGroupBox2: TRzGroupBox
             Left = 450
@@ -6592,7 +6585,7 @@ object frmCadPessoa: TfrmCadPessoa
             Height = 73
             Caption = 'Imprimir na DANFE'
             FlatColor = clBlack
-            TabOrder = 36
+            TabOrder = 37
             object DBCheckBox27: TDBCheckBox
               Left = 24
               Top = 24
@@ -6647,7 +6640,7 @@ object frmCadPessoa: TfrmCadPessoa
             ParentCtl3D = False
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 26
+            TabOrder = 27
             Values.Strings = (
               '1'
               '2'
@@ -6677,7 +6670,7 @@ object frmCadPessoa: TfrmCadPessoa
               'Sexta-Feira'
               'S'#225'bado')
             ParentCtl3D = False
-            TabOrder = 27
+            TabOrder = 28
             Values.Strings = (
               '1'
               '2'
@@ -6701,7 +6694,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 37
+            TabOrder = 38
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6719,7 +6712,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 38
+            TabOrder = 39
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6731,7 +6724,7 @@ object frmCadPessoa: TfrmCadPessoa
             CharCase = ecUpperCase
             DataField = 'CAIXINHA'
             DataSource = DMCadPessoa.dsPessoa
-            TabOrder = 23
+            TabOrder = 24
           end
           object DBCheckBox31: TDBCheckBox
             Left = 696
@@ -6747,7 +6740,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 39
+            TabOrder = 40
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6764,7 +6757,7 @@ object frmCadPessoa: TfrmCadPessoa
             Items.Strings = (
               'N=Produto Interno'
               'C=Nome do Produto Cliente')
-            TabOrder = 40
+            TabOrder = 41
             Values.Strings = (
               'N'
               'C')
@@ -6783,7 +6776,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 41
+            TabOrder = 42
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6801,7 +6794,7 @@ object frmCadPessoa: TfrmCadPessoa
             Font.Name = 'MS Sans Serif'
             Font.Style = []
             ParentFont = False
-            TabOrder = 42
+            TabOrder = 43
             ValueChecked = 'S'
             ValueUnchecked = 'N'
           end
@@ -6817,6 +6810,16 @@ object frmCadPessoa: TfrmCadPessoa
             LookupDisplay = 'NOME'
             LookupSource = DMCadPessoa.dsVendedor
             TabOrder = 2
+          end
+          object DBEdit112: TDBEdit
+            Left = 535
+            Top = 27
+            Width = 108
+            Height = 21
+            CharCase = ecUpperCase
+            DataField = 'PERC_COMISSAO'
+            DataSource = DMCadPessoa.dsPessoa
+            TabOrder = 3
           end
         end
         object TS_RegrasFiscais: TRzTabSheet

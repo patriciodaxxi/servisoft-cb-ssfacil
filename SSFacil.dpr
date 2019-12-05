@@ -830,7 +830,8 @@ uses
   uCadArqModeloContrato in 'uCadArqModeloContrato.pas' {frmCadArqModeloContrato},
   USel_CombTam in 'USel_CombTam.pas' {frmSel_CombTam},
   UCadInventario_EstLote in 'UCadInventario_EstLote.pas' {frmCadInventario_EstLote},
-  UConsDuplicata_Pessoa in 'UConsDuplicata_Pessoa.pas' {frmConsDuplicata_Pessoa};
+  UConsDuplicata_Pessoa in 'UConsDuplicata_Pessoa.pas' {frmConsDuplicata_Pessoa},
+  UDMConsDuplicata in 'UDMConsDuplicata.pas' {DMConsDuplicata: TDataModule};
 
 {$R *.res}
 

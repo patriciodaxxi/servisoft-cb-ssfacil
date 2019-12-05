@@ -583,6 +583,8 @@ type
     DBEdit111: TDBEdit;
     edtCod_EnqIPI_DrawBack: TEdit;
     Personalizadonafilial1: TMenuItem;
+    Label206: TLabel;
+    DBEdit112: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);

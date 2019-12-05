@@ -617,6 +617,9 @@ object DMCadPessoa: TDMCadPessoa
     object sdsPessoaID_VENDEDOR_INT: TIntegerField
       FieldName = 'ID_VENDEDOR_INT'
     end
+    object sdsPessoaPERC_COMISSAO_INT: TFloatField
+      FieldName = 'PERC_COMISSAO_INT'
+    end
   end
   object dspPessoa: TDataSetProvider
     DataSet = sdsPessoa
@@ -1282,6 +1285,9 @@ object DMCadPessoa: TDMCadPessoa
     end
     object cdsPessoaID_VENDEDOR_INT: TIntegerField
       FieldName = 'ID_VENDEDOR_INT'
+    end
+    object cdsPessoaPERC_COMISSAO_INT: TFloatField
+      FieldName = 'PERC_COMISSAO_INT'
     end
   end
   object dsPessoa: TDataSource

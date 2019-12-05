@@ -25,7 +25,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
     Top = 0
     Width = 946
     Height = 670
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -35,7 +35,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
     ParentBackgroundColor = False
     ParentColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1992,7 +1992,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             Left = 168
             Top = 7
             Width = 94
-            Height = 19
+            Height = 20
             TabStop = False
             BevelOuter = bvNone
             Color = clSilver
@@ -2013,7 +2013,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             Left = 33
             Top = 7
             Width = 72
-            Height = 19
+            Height = 20
             TabStop = False
             BevelOuter = bvNone
             Color = clSilver
@@ -2555,7 +2555,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
         Top = 229
         Width = 942
         Height = 390
-        ActivePage = RzTabSheet1
+        ActivePage = TabSheet2
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -2563,7 +2563,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 2
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet

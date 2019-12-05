@@ -1892,8 +1892,6 @@ begin
     NxButton1.Visible := not (NxButton1.Visible)
   else if (Key = 45) and (btnInserir.Enabled) and (btnInserir.Visible) and not (fDMCadDuplicata.cdsDuplicata.State in [dsEdit, dsInsert]) then
     btnInserirClick(Sender);
-  if (Shift = [ssCtrl]) and (Key = 83) then //S
-    btnLerItau.Visible := not (btnLerItau.Visible);
 end;
 
 procedure TfrmCadDuplicata.prc_Consultar_Comissao;

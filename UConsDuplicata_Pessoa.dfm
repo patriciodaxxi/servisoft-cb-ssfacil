@@ -1,11 +1,11 @@
 object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
-  Left = 226
-  Top = 148
+  Left = 193
+  Top = 117
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'frmConsDuplicata_Pessoa'
+  Caption = 'Saldo'
   ClientHeight = 449
-  ClientWidth = 920
+  ClientWidth = 991
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,12 +14,13 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
   Font.Style = []
   OldCreateOrder = False
   OnClose = FormClose
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPesquisa: TPanel
     Left = 0
     Top = 0
-    Width = 920
+    Width = 991
     Height = 115
     Align = alTop
     Color = clSilver
@@ -27,7 +28,7 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
     Visible = False
     object Label6: TLabel
       Left = 221
-      Top = 31
+      Top = 30
       Width = 94
       Height = 13
       Caption = 'Cliente/Fornecedor:'
@@ -41,7 +42,7 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
     end
     object Label18: TLabel
       Left = 228
-      Top = 53
+      Top = 54
       Width = 86
       Height = 13
       Alignment = taRightJustify
@@ -49,14 +50,14 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
     end
     object Label26: TLabel
       Left = 416
-      Top = 53
+      Top = 55
       Width = 25
       Height = 13
       Caption = 'Final:'
     end
     object Label27: TLabel
       Left = 239
-      Top = 74
+      Top = 75
       Width = 75
       Height = 13
       Alignment = taRightJustify
@@ -64,14 +65,14 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
     end
     object Label28: TLabel
       Left = 416
-      Top = 74
+      Top = 76
       Width = 25
       Height = 13
       Caption = 'Final:'
     end
     object Label48: TLabel
       Left = 241
-      Top = 99
+      Top = 100
       Width = 73
       Height = 13
       Caption = 'Representante:'
@@ -85,48 +86,19 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
       Ctl3D = False
       LookupField = 'ID'
       LookupDisplay = 'NOME_INTERNO'
-      LookupSource = DMCadDuplicata.dsFilial
-      ParentCtl3D = False
-      TabOrder = 2
-    end
-    object RxDBLookupCombo2: TRxDBLookupCombo
-      Left = 317
-      Top = 23
-      Width = 283
-      Height = 21
-      DropDownCount = 15
-      Ctl3D = False
-      LookupField = 'CODIGO'
-      LookupDisplay = 'NOME'
-      LookupSource = DMCadDuplicata.dsPessoa
-      ParentCtl3D = False
-      TabOrder = 3
-    end
-    object RadioGroup1: TRadioGroup
-      Left = 123
-      Top = 1
-      Width = 91
-      Height = 113
-      Align = alLeft
-      Caption = 'Situa'#231#227'o'
-      Ctl3D = True
-      ItemIndex = 0
-      Items.Strings = (
-        'Em Aberto'
-        'Quitado'
-        'Todos')
+      LookupSource = DMConsDuplicata.dsFilial
       ParentCtl3D = False
       TabOrder = 1
     end
     object btnConsultar: TNxButton
-      Left = 604
+      Left = 548
       Top = 82
-      Width = 175
-      Height = 30
+      Width = 145
+      Height = 31
       Caption = 'Efetuar Pesquisa'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -16
+      Font.Height = -13
       Font.Name = 'Arial'
       Font.Style = []
       Glyph.Data = {
@@ -186,12 +158,25 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000}
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 7
       Transparent = True
+      OnClick = btnConsultarClick
     end
     object NxDatePicker1: TNxDatePicker
       Left = 317
-      Top = 45
+      Top = 46
+      Width = 89
+      Height = 21
+      TabOrder = 3
+      Text = '22/05/2013'
+      HideFocus = False
+      Date = 41416.000000000000000000
+      NoneCaption = 'Limpar'
+      TodayCaption = 'Hoje'
+    end
+    object NxDatePicker2: TNxDatePicker
+      Left = 444
+      Top = 47
       Width = 89
       Height = 21
       TabOrder = 4
@@ -201,9 +186,9 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
       NoneCaption = 'Limpar'
       TodayCaption = 'Hoje'
     end
-    object NxDatePicker2: TNxDatePicker
-      Left = 444
-      Top = 45
+    object NxDatePicker3: TNxDatePicker
+      Left = 317
+      Top = 67
       Width = 89
       Height = 21
       TabOrder = 5
@@ -213,24 +198,12 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
       NoneCaption = 'Limpar'
       TodayCaption = 'Hoje'
     end
-    object NxDatePicker3: TNxDatePicker
-      Left = 317
-      Top = 66
+    object NxDatePicker4: TNxDatePicker
+      Left = 444
+      Top = 68
       Width = 89
       Height = 21
       TabOrder = 6
-      Text = '22/05/2013'
-      HideFocus = False
-      Date = 41416.000000000000000000
-      NoneCaption = 'Limpar'
-      TodayCaption = 'Hoje'
-    end
-    object NxDatePicker4: TNxDatePicker
-      Left = 444
-      Top = 66
-      Width = 89
-      Height = 21
-      TabOrder = 7
       Text = '22/05/2013'
       HideFocus = False
       Date = 41416.000000000000000000
@@ -264,17 +237,123 @@ object frmConsDuplicata_Pessoa: TfrmConsDuplicata_Pessoa
       end
     end
     object RxDBLookupCombo10: TRxDBLookupCombo
-      Left = 316
-      Top = 90
+      Left = 317
+      Top = 91
       Width = 216
       Height = 22
       DropDownCount = 8
       Ctl3D = False
       LookupField = 'CODIGO'
       LookupDisplay = 'NOME'
-      LookupSource = DMCadDuplicata.dsVendedor
+      LookupSource = DMConsDuplicata.dsVendedor
+      ParentCtl3D = False
+      TabOrder = 8
+    end
+    object Edit1: TEdit
+      Left = 317
+      Top = 23
+      Width = 284
+      Height = 19
+      Ctl3D = False
+      ParentCtl3D = False
+      TabOrder = 2
+      Text = 'Edit1'
+    end
+    object RadioGroup1: TRadioGroup
+      Left = 123
+      Top = 1
+      Width = 91
+      Height = 113
+      Align = alLeft
+      Caption = 'Situa'#231#227'o'
+      Ctl3D = True
+      ItemIndex = 0
+      Items.Strings = (
+        'Em Aberto'
+        'Quitado'
+        'Todos')
       ParentCtl3D = False
       TabOrder = 9
     end
+  end
+  object SMDBGrid1: TSMDBGrid
+    Left = 0
+    Top = 115
+    Width = 991
+    Height = 334
+    Align = alClient
+    Ctl3D = False
+    DataSource = DMConsDuplicata.dsSaldo_Pessoa
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+    ParentCtl3D = False
+    ReadOnly = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Flat = True
+    BandsFont.Charset = DEFAULT_CHARSET
+    BandsFont.Color = clWindowText
+    BandsFont.Height = -11
+    BandsFont.Name = 'MS Sans Serif'
+    BandsFont.Style = []
+    Groupings = <>
+    GridStyle.Style = gsCustom
+    GridStyle.OddColor = clWindow
+    GridStyle.EvenColor = clWindow
+    TitleHeight.PixelCount = 24
+    FooterColor = clBtnFace
+    ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+    RegistryKey = 'Software\Scalabium'
+    RegistrySection = 'SMDBGrid'
+    WidthOfIndicator = 11
+    DefaultRowHeight = 17
+    ScrollBars = ssHorizontal
+    ColCount = 6
+    RowCount = 2
+    Columns = <
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'ID_PESSOA'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID Pessoa'
+        Width = 68
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME_PESSOA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Nome Cliente/Fornecedor'
+        Width = 428
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VLR_PARCELA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Vlr. T'#237'tulos'
+        Width = 119
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VLR_PAGO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Vlr. Pago'
+        Width = 105
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VLR_RESTANTE'
+        Title.Alignment = taCenter
+        Title.Caption = 'Vlr. Em Aberto'
+        Width = 144
+        Visible = True
+      end>
   end
 end

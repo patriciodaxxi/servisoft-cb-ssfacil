@@ -1314,6 +1314,8 @@ type
     qFilial_RelCAMINHO: TStringField;
     qFilial_RelPOSICAO: TSmallintField;
     cdsPessoa_ConsultaCELULAR: TStringField;
+    sdsPessoaPERC_COMISSAO_INT: TFloatField;
+    cdsPessoaPERC_COMISSAO_INT: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
