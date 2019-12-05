@@ -808,7 +808,7 @@ begin
 
   if not (fileExists(arquivo)) then
   begin
-    if fDMCadOS.cdsOSIMPRIME_CONTRATO_POR_ITEM.AsString = 'S' then
+//    if fDMCadOS.cdsOSIMPRIME_CONTRATO_POR_ITEM.AsString = 'S' then
 
 
     if fDMCadOS.cdsOSARQ_MODELO_CONTRATO.AsString <> '' then

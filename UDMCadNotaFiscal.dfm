@@ -5027,7 +5027,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 311
   end
   object cdsTipoCobranca: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -5108,7 +5107,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 358
   end
   object cdsContas: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>

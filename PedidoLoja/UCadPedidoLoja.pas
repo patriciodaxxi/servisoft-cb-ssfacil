@@ -3169,6 +3169,7 @@ begin
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Cidade: ' + fDMCadPedido.cdsPedidoImpCIDADE_CLIENTE.AsString,'D',' ') + '  UF: ' + fDMCadPedido.cdsPedidoImpUF.AsString);
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'CNPJ/CPF: ' + fDMCadPedido.cdsPedidoImpCNPJ_CPF_CLIENTE.AsString,'D',' ') + 'Fone: ' + fDMCadPedido.cdsPedidoImpDDD_CLIENTE.AsString + ' ' + fDMCadPedido.cdsPedidoImpFONE_CLIENTE.AsString);
   uImprimir.prc_Detalhe_Mat(' ');
+  uImprimir.prc_Detalhe_Mat('Prazo Pgto.: ' + fDMCadPedido.cdsPedidoImpNOME_CONDPGTO.AsString);
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
   uImprimir.prc_Detalhe_Mat('   Qtde  Unid.   Cód. Produto                                           Bitola              Marca           It   Preco %Desc      Total');
 

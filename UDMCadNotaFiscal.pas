@@ -3534,6 +3534,7 @@ begin
   cdsTipoCobranca.Open;
   cdsCondPgto.Open;
   cdsContas.Open;
+  sdsProduto.CommandText := ctProduto + ' WHERE INATIVO = ' + QuotedStr('N');
   cdsProduto.Open;
   cdsUnidade.Open;
   cdsParametros.Open;
@@ -4962,7 +4963,7 @@ end;
 
 procedure TDMCadNotaFiscal.prc_Filtrar_Produto_Cliente(Somente_Filial: Boolean = False);
 var
-  vComando : String;
+  vComando: String;
 begin
   cdsProduto.Close;
   if qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S' then
