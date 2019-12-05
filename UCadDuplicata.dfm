@@ -1263,16 +1263,6 @@ object frmCadDuplicata: TfrmCadDuplicata
             'Em Cart'#243'rio / Protesto'
             'Perdido')
         end
-        object btnLerItau: TBitBtn
-          Left = 960
-          Top = 16
-          Width = 89
-          Height = 25
-          Caption = 'Ler titulos Itau'
-          TabOrder = 19
-          Visible = False
-          OnClick = btnLerItauClick
-        end
         object RxDBLookupCombo10: TRxDBLookupCombo
           Left = 317
           Top = 128
@@ -1363,7 +1353,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Width = 76
           Height = 17
           Caption = 'Imp. OBS'
-          TabOrder = 20
+          TabOrder = 19
         end
         object ckImpNossoNumero: TCheckBox
           Left = 739
@@ -1371,7 +1361,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Width = 140
           Height = 17
           Caption = 'Imprimir Nosso N'#250'mero'
-          TabOrder = 21
+          TabOrder = 20
           Visible = False
         end
         object ckImpCCusto: TCheckBox
@@ -1380,7 +1370,7 @@ object frmCadDuplicata: TfrmCadDuplicata
           Width = 140
           Height = 17
           Caption = 'Imprimir C.Custo'
-          TabOrder = 22
+          TabOrder = 21
           Visible = False
         end
       end
@@ -4459,7 +4449,7 @@ object frmCadDuplicata: TfrmCadDuplicata
     end
   end
   object PopupMenu3: TPopupMenu
-    Left = 817
+    Left = 818
     Top = 208
     object GravarComissao1: TMenuItem
       Caption = 'Gravar % de comiss'#227'o que est'#225' no cadastro cliente nas duplicatas'

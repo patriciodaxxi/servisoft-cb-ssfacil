@@ -7,7 +7,7 @@ uses
   ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, RXDBCtrl, RzChkLst, RzPanel,
   URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, 
   NxCollection, StrUtils, DateUtils, UCadDuplicata_Gerar, UDMCadCheque, UCadDuplicata_Alt, UCadDuplicata_EscTipo, RzLstBox,
-  UCadDuplicata_Total, UCadDuplicata_LeItau, SqlExpr, ComCtrls, ValorPor;
+  UCadDuplicata_Total, SqlExpr, ComCtrls, ValorPor;
 
 type
   TEnumMostraNossoNumero = (tpTodos,tpSim, tpNao);
@@ -196,7 +196,6 @@ type
     GravaComissao2: TMenuItem;
     Label42: TLabel;
     DBEdit22: TDBEdit;
-    btnLerItau: TBitBtn;
     DBEdit23: TDBEdit;
     Label44: TLabel;
     Excel1: TMenuItem;
@@ -323,7 +322,6 @@ type
     procedure Panel6Enter(Sender: TObject);
     procedure GravarComissao1Click(Sender: TObject);
     procedure GravaComissao2Click(Sender: TObject);
-    procedure btnLerItauClick(Sender: TObject);
     procedure RxDBLookupCombo4Enter(Sender: TObject);
     procedure RxDBLookupCombo5Enter(Sender: TObject);
     procedure RxDBComboBox11Enter(Sender: TObject);
@@ -2276,16 +2274,6 @@ begin
   finally
     FreeAndNil(sds);
   end;
-end;
-
-procedure TfrmCadDuplicata.btnLerItauClick(Sender: TObject);
-var
-  ffrmCadDuplicata_LeItau: TfrmCadDuplicata_LeItau;
-begin
-  ffrmCadDuplicata_LeItau := TfrmCadDuplicata_LeItau.Create(self);
-  ffrmCadDuplicata_LeItau.fDMCadDuplicata := fDMCadDuplicata;
-  ffrmCadDuplicata_LeItau.ShowModal;
-  FreeAndNil(ffrmCadDuplicata_LeItau);
 end;
 
 procedure TfrmCadDuplicata.RxDBLookupCombo4Enter(Sender: TObject);

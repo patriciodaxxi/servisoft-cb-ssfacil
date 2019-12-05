@@ -540,6 +540,12 @@ begin
 
   //fDMCadPedido.prc_Inserir;
   UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
+  if not(fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) then
+  begin
+    prc_Excluir_Registro;
+    vInclusao_Edicao := '';
+    exit;
+  end;
 
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'P';
 
