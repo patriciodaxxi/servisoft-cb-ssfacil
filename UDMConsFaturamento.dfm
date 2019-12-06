@@ -2,9 +2,9 @@ object DMConsFaturamento: TDMConsFaturamento
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Left = 315
-  Top = 76
-  Height = 576
+  Left = 78
+  Top = 30
+  Height = 600
   Width = 1150
   object sdsNotaFiscal_Cli: TSQLDataSet
     NoMetadata = True
@@ -1310,8 +1310,8 @@ object DMConsFaturamento: TDMConsFaturamento
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42222.414492245400000000
-    ReportOptions.LastChange = 43397.689898368100000000
+    ReportOptions.CreateDate = 42992.427233402800000000
+    ReportOptions.LastChange = 43803.438331250000000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -1746,7 +1746,7 @@ object DMConsFaturamento: TDMConsFaturamento
       'clPerc_SobreFat=clPerc_SobreFat')
     DataSource = dsProduto_UF
     BCDToCurrency = False
-    Left = 832
+    Left = 820
     Top = 453
   end
   object mGrupoAux: TClientDataSet
@@ -1805,7 +1805,7 @@ object DMConsFaturamento: TDMConsFaturamento
       'Qtd=Qtd')
     DataSource = dsmGrupoAux
     BCDToCurrency = False
-    Left = 880
+    Left = 859
     Top = 453
   end
   object sdsGrupo_UF: TSQLDataSet
@@ -1922,7 +1922,7 @@ object DMConsFaturamento: TDMConsFaturamento
       'clPerc_SobreFat=clPerc_SobreFat')
     DataSource = dsGrupo_UF
     BCDToCurrency = False
-    Left = 928
+    Left = 897
     Top = 453
   end
   object qDevolucoes: TSQLQuery
@@ -2441,8 +2441,8 @@ object DMConsFaturamento: TDMConsFaturamento
       'clPerc_SobreFat=clPerc_SobreFat')
     DataSource = dsNotaFiscal_Cli_Cid_Det
     BCDToCurrency = False
-    Left = 968
-    Top = 408
+    Left = 930
+    Top = 406
   end
   object sdsProduto_Det_Geral: TSQLDataSet
     NoMetadata = True
@@ -2617,7 +2617,7 @@ object DMConsFaturamento: TDMConsFaturamento
       'CODCFOP=CODCFOP')
     DataSource = dsProduto_Det_Geral
     BCDToCurrency = False
-    Left = 976
+    Left = 933
     Top = 453
   end
   object qParametros_Geral: TSQLQuery
@@ -2717,7 +2717,9 @@ object DMConsFaturamento: TDMConsFaturamento
     Top = 482
   end
   object cdsCupomFiscalAnalitico: TClientDataSet
+    Active = True
     Aggregates = <>
+    IndexFieldNames = 'QTD'
     Params = <>
     ProviderName = 'dspCupomFiscalAnalitico'
     Left = 320
@@ -2791,6 +2793,7 @@ object DMConsFaturamento: TDMConsFaturamento
   end
   object cdsCupomFiscalAnaliticoDia: TClientDataSet
     Aggregates = <>
+    IndexFieldNames = 'QTD'
     Params = <>
     ProviderName = 'dspCupomFiscalAnaliticoDia'
     Left = 536
@@ -2814,5 +2817,19 @@ object DMConsFaturamento: TDMConsFaturamento
     DataSet = cdsCupomFiscalAnaliticoDia
     Left = 568
     Top = 354
+  end
+  object frxCupomFiscalAnalitico: TfrxDBDataset
+    UserName = 'frxCupomFiscalAnalitico'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'QTD=QTD'
+      'VLR_TOTAL=VLR_TOTAL'
+      'REFERENCIA=REFERENCIA'
+      'NOME=NOME'
+      'FILIAL=FILIAL')
+    DataSource = dsCupomFiscalAnalitico
+    BCDToCurrency = False
+    Left = 776
+    Top = 501
   end
 end

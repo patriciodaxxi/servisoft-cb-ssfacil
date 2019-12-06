@@ -1,6 +1,6 @@
 object frmConsFaturamento: TfrmConsFaturamento
-  Left = 2
-  Top = 69
+  Left = 41
+  Top = 83
   Width = 1357
   Height = 568
   Caption = 'Consulta Faturamento'
@@ -362,7 +362,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     Top = 110
     Width = 1341
     Height = 367
-    ActivePage = TS_Cupom
+    ActivePage = TS_Cliente
     ActivePageDefault = TS_Cliente
     Align = alClient
     BackgroundColor = clGray
@@ -375,7 +375,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 7
+    TabIndex = 0
     TabOrder = 2
     TextColors.Selected = clBlue
     FixedDimension = 19
@@ -1431,7 +1431,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 Expanded = False
                 FieldName = 'clPerc_SobreFat'
                 Title.Caption = '% Sobre Total'
-                Width = 64
                 Visible = True
               end
               item
@@ -1705,7 +1704,6 @@ object frmConsFaturamento: TfrmConsFaturamento
               item
                 Expanded = False
                 FieldName = 'DTENTRADASAIDA'
-                Width = 64
                 Visible = True
               end
               item
@@ -1843,7 +1841,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'UNIDADE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
-                Width = 64
                 Visible = True
               end
               item
@@ -1900,7 +1897,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'DTENTRADASAIDA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Dt. Entrada / Sa'#237'da'
-                Width = 64
                 Visible = True
               end
               item
@@ -2016,7 +2012,6 @@ object frmConsFaturamento: TfrmConsFaturamento
             Expanded = False
             FieldName = 'VLR_FATURAMENTO'
             Title.Caption = 'Vlr. Faturamento'
-            Width = 64
             Visible = True
           end
           item
@@ -2082,9 +2077,9 @@ object frmConsFaturamento: TfrmConsFaturamento
         Top = 0
         Width = 1337
         Height = 344
-        ActivePage = ts_Data
+        ActivePage = ts_CupomFiscalSintetico
         Align = alClient
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 0
         FixedDimension = 19
         object ts_CupomFiscalSintetico: TRzTabSheet
@@ -2252,7 +2247,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 TabOrder = 3
               end
               object UpDown1: TUpDown
-                Left = 251
+                Left = 249
                 Top = 5
                 Width = 16
                 Height = 21
@@ -2318,7 +2313,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               WidthOfIndicator = 11
               DefaultRowHeight = 17
               ScrollBars = ssHorizontal
-              ColCount = 2
+              ColCount = 6
               RowCount = 2
             end
           end
@@ -2478,7 +2473,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               object rdgOrdenarDia: TRadioGroup
                 Left = 232
                 Top = -1
-                Width = 233
+                Width = 273
                 Height = 32
                 Anchors = [akLeft, akTop, akBottom]
                 Caption = 'Ordernar por:'
@@ -2486,7 +2481,8 @@ object frmConsFaturamento: TfrmConsFaturamento
                 ItemIndex = 0
                 Items.Strings = (
                   'Qtde'
-                  'Valor Total')
+                  'Valor Total'
+                  'Data')
                 TabOrder = 2
               end
             end
@@ -2504,6 +2500,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               TitleFont.Height = -11
               TitleFont.Name = 'MS Sans Serif'
               TitleFont.Style = []
+              OnTitleClick = SMDBGrid20TitleClick
               Flat = False
               BandsFont.Charset = DEFAULT_CHARSET
               BandsFont.Color = clWindowText
@@ -2559,6 +2556,11 @@ object frmConsFaturamento: TfrmConsFaturamento
               Frame.Visible = False
               Legend.Alignment = laBottom
               Legend.ColorWidth = 20
+              Legend.Font.Charset = DEFAULT_CHARSET
+              Legend.Font.Color = clBlack
+              Legend.Font.Height = -9
+              Legend.Font.Name = 'Arial'
+              Legend.Font.Style = []
               Legend.LegendStyle = lsValues
               Legend.ShadowSize = 1
               Legend.TextStyle = ltsLeftPercent
@@ -2587,17 +2589,23 @@ object frmConsFaturamento: TfrmConsFaturamento
                 PieValues.ValueSource = 'QTD'
               end
               object BarSeries1: TBarSeries
+                ColorEachPoint = True
                 Marks.ArrowLength = 20
+                Marks.Font.Charset = DEFAULT_CHARSET
+                Marks.Font.Color = clBlack
+                Marks.Font.Height = -9
+                Marks.Font.Name = 'Arial'
+                Marks.Font.Style = []
                 Marks.Style = smsPercent
                 Marks.Visible = True
                 DataSource = DMConsFaturamento.cdsCupomFiscalAnaliticoDia
                 SeriesColor = clRed
                 XLabelsSource = 'DTEMISSAO'
-                XValues.DateTime = False
+                XValues.DateTime = True
                 XValues.Name = 'X'
                 XValues.Multiplier = 1.000000000000000000
                 XValues.Order = loAscending
-                XValues.ValueSource = 'QTD'
+                XValues.ValueSource = 'DTEMISSAO'
                 YValues.DateTime = False
                 YValues.Name = 'Bar'
                 YValues.Multiplier = 1.000000000000000000
@@ -2614,11 +2622,11 @@ object frmConsFaturamento: TfrmConsFaturamento
                 Pointer.InflateMargins = True
                 Pointer.Style = psRectangle
                 Pointer.Visible = False
-                XValues.DateTime = False
+                XValues.DateTime = True
                 XValues.Name = 'X'
                 XValues.Multiplier = 1.000000000000000000
                 XValues.Order = loAscending
-                XValues.ValueSource = 'QTD'
+                XValues.ValueSource = 'DTEMISSAO'
                 YValues.DateTime = False
                 YValues.Name = 'Y'
                 YValues.Multiplier = 1.000000000000000000
@@ -2973,7 +2981,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'clPerc_SobreFat'
                 Title.Alignment = taCenter
                 Title.Caption = '% Sobre Total'
-                Width = 64
                 Visible = True
               end>
           end
@@ -3048,7 +3055,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'REFERENCIA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Refer'#234'ncia'
-                Width = 64
                 Visible = True
               end
               item
@@ -3099,7 +3105,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'clPerc_SobreFat'
                 Title.Alignment = taCenter
                 Title.Caption = '% Sobre Total'
-                Width = 64
                 Visible = True
               end>
           end
@@ -3218,7 +3223,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 Expanded = False
                 FieldName = 'UF'
                 Title.Alignment = taCenter
-                Width = 64
                 Visible = True
               end
               item
@@ -3234,7 +3238,6 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'VLR_TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Faturamento'
-                Width = 64
                 Visible = True
               end
               item

@@ -469,6 +469,7 @@ type
     cdsCupomFiscalAnaliticoDiaQTD: TFloatField;
     cdsCupomFiscalAnaliticoDiaVLR_TOTAL: TFloatField;
     cdsCupomFiscalAnaliticoDiaDTEMISSAO: TDateField;
+    frxCupomFiscalAnalitico: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscal_CliCalcFields(DataSet: TDataSet);
     procedure dspNotaFiscal_CliUpdateError(Sender: TObject;
