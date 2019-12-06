@@ -10,7 +10,7 @@ uses
 
 type
   tEnumGrafico = (tpPizza, tpColuna, tpLinha);
-  tEnumTipo = (tpQtde, tpValotTotal);
+  tEnumTipo = (tpQtde, tpValotTotal, tpData);
 
   type
   TfrmConsFaturamento = class(TForm)
@@ -183,6 +183,7 @@ type
     procedure ComboTipoGraficoChange(Sender: TObject);
     procedure chkGraficoDiaClick(Sender: TObject);
     procedure ComboTipoGraficoDiaChange(Sender: TObject);
+    procedure SMDBGrid20TitleClick(Column: TColumn);
   private
     { Private declarations }
     fDMConsFaturamento: TDMConsFaturamento;
@@ -231,6 +232,7 @@ type
     procedure prc_Imprimir_ReciboNF;
     procedure prc_Imprimir_Nota_UF;
     procedure prc_Imprimir_Cupom;
+    procedure prc_Imprimir_CupomAnalitico;
     procedure prc_Imprimir_VendedorProd;
     procedure prc_Imprimir_VendedorCli;
     procedure prc_Imprimir_Vendedor;
@@ -1797,7 +1799,15 @@ begin
   end
   else
   if RzPageControl1.ActivePage = TS_Cupom then
-    prc_Imprimir_Cupom
+  begin
+    if pg_CupomFiscal.ActivePage = ts_CupomFiscalSintetico then
+      prc_Imprimir_Cupom
+    else
+    if pg_CupomFiscal.ActivePage = ts_CupomFiscalAnalitico then
+      prc_Imprimir_CupomAnalitico
+    else
+      prc_Imprimir_Cupom;
+  end
   else
   if RzPageControl1.ActivePage = TS_ReciboNF then
     prc_Imprimir_ReciboNF
@@ -2199,6 +2209,7 @@ begin
            + vComando
            + ' group by NT.DTEMISSAO ';
   case tEnumTipo(rdgOrdenarDia.ItemIndex) of
+    tpData : vSelect := vSelect + 'order by (NT.DTEMISSAO) asc';
     tpQtde : vSelect := vSelect + 'order by sum(nti.QTD) desc';
     tpValotTotal : vSelect := vSelect + 'order by sum(nti.VLR_TOTAL) desc';
   end;
@@ -2233,6 +2244,45 @@ end;
 procedure TfrmConsFaturamento.ComboTipoGraficoDiaChange(Sender: TObject);
 begin
   prc_Alterar_Tipo_Grafico_Dia;
+end;
+
+procedure TfrmConsFaturamento.SMDBGrid20TitleClick(Column: TColumn);
+var
+  i: Integer;
+  ColunaOrdenada: String;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMConsFaturamento.cdsCupomFiscalAnaliticoDia.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid1.Columns.Count - 1 do
+    if not (SMDBGrid1.Columns.Items[I].Title = Column.Title) then
+      SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+procedure TfrmConsFaturamento.prc_Imprimir_CupomAnalitico;
+var
+  vArq: String;
+begin
+  if not(fDMConsFaturamento.cdsCupomFiscalAnalitico.Active) then
+  begin
+    MessageDlg('*** Deve ser feita a consulta primeiro!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Cupom Fiscal Analitico.fr3';
+  if FileExists(vArq) then
+    fDMConsFaturamento.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatorio não localizado! ' + vArq);
+    Exit;
+  end;
+
+  fDMConsFaturamento.cdsCupomFiscalAnalitico.DisableControls;
+  try
+    fDMConsFaturamento.frxReport1.ShowReport;
+  finally
+    fDMConsFaturamento.cdsCupomFiscalAnalitico.EnableControls;
+  end;
 end;
 
 end.
