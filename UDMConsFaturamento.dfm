@@ -2,8 +2,8 @@ object DMConsFaturamento: TDMConsFaturamento
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Left = 78
-  Top = 30
+  Left = 117
+  Top = 63
   Height = 600
   Width = 1150
   object sdsNotaFiscal_Cli: TSQLDataSet
@@ -1310,8 +1310,8 @@ object DMConsFaturamento: TDMConsFaturamento
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43803.438331250000000000
+    ReportOptions.CreateDate = 42222.414492245400000000
+    ReportOptions.LastChange = 42866.037645347200000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
@@ -1734,7 +1734,6 @@ object DMConsFaturamento: TDMConsFaturamento
       'NOME_GRUPO=NOME_GRUPO'
       'COD_GRUPO=COD_GRUPO'
       'COD_GRUPO_PRI=COD_GRUPO_PRI'
-      'VLR_DUPLICATA=VLR_DUPLICATA'
       'TIPO_MOV=TIPO_MOV'
       'TIPO_REG=TIPO_REG'
       'TIPO_ES=TIPO_ES'
@@ -1743,7 +1742,8 @@ object DMConsFaturamento: TDMConsFaturamento
       'VLR_VENDAS=VLR_VENDAS'
       'VLR_ICMSSUBST=VLR_ICMSSUBST'
       'UF=UF'
-      'clPerc_SobreFat=clPerc_SobreFat')
+      'clPerc_SobreFat=clPerc_SobreFat'
+      'VLR_TOTAL=VLR_TOTAL')
     DataSource = dsProduto_UF
     BCDToCurrency = False
     Left = 820

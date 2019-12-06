@@ -362,7 +362,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     Top = 110
     Width = 1341
     Height = 367
-    ActivePage = TS_Cliente
+    ActivePage = TS_UF
     ActivePageDefault = TS_Cliente
     Align = alClient
     BackgroundColor = clGray
@@ -375,7 +375,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 4
     TabOrder = 2
     TextColors.Selected = clBlue
     FixedDimension = 19
@@ -1220,10 +1220,10 @@ object frmConsFaturamento: TfrmConsFaturamento
         Top = 0
         Width = 1337
         Height = 344
-        ActivePage = TS_UF_Acumulado
+        ActivePage = TS_UF_Produto
         ActivePageDefault = TS_UF_Acumulado
         Align = alClient
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 0
         FixedDimension = 19
         object TS_UF_Acumulado: TRzTabSheet
@@ -1431,6 +1431,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 Expanded = False
                 FieldName = 'clPerc_SobreFat'
                 Title.Caption = '% Sobre Total'
+                Width = 64
                 Visible = True
               end
               item
@@ -1704,6 +1705,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               item
                 Expanded = False
                 FieldName = 'DTENTRADASAIDA'
+                Width = 64
                 Visible = True
               end
               item
@@ -1841,6 +1843,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'UNIDADE'
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
+                Width = 64
                 Visible = True
               end
               item
@@ -1897,6 +1900,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'DTENTRADASAIDA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Dt. Entrada / Sa'#237'da'
+                Width = 64
                 Visible = True
               end
               item
@@ -2012,6 +2016,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Expanded = False
             FieldName = 'VLR_FATURAMENTO'
             Title.Caption = 'Vlr. Faturamento'
+            Width = 64
             Visible = True
           end
           item
@@ -2981,6 +2986,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'clPerc_SobreFat'
                 Title.Alignment = taCenter
                 Title.Caption = '% Sobre Total'
+                Width = 64
                 Visible = True
               end>
           end
@@ -3055,6 +3061,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'REFERENCIA'
                 Title.Alignment = taCenter
                 Title.Caption = 'Refer'#234'ncia'
+                Width = 64
                 Visible = True
               end
               item
@@ -3105,6 +3112,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'clPerc_SobreFat'
                 Title.Alignment = taCenter
                 Title.Caption = '% Sobre Total'
+                Width = 64
                 Visible = True
               end>
           end
@@ -3223,6 +3231,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 Expanded = False
                 FieldName = 'UF'
                 Title.Alignment = taCenter
+                Width = 64
                 Visible = True
               end
               item
@@ -3238,6 +3247,7 @@ object frmConsFaturamento: TfrmConsFaturamento
                 FieldName = 'VLR_TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Faturamento'
+                Width = 64
                 Visible = True
               end
               item
