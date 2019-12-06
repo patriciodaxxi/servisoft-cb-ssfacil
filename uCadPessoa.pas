@@ -585,6 +585,7 @@ type
     Personalizadonafilial1: TMenuItem;
     Label206: TLabel;
     DBEdit112: TDBEdit;
+    Etiqueta1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -701,6 +702,7 @@ type
     procedure edtCod_EnqIPI_DrawBackKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Personalizadonafilial1Click(Sender: TObject);
+    procedure Etiqueta1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -2695,6 +2697,27 @@ begin
       Exit;
     end;
     fDMCadPessoa.frxReport1.ShowReport;
+  end;
+end;
+
+procedure TfrmCadPessoa.Etiqueta1Click(Sender: TObject);
+var
+  vArq: string;
+begin
+
+  if fDMCadPessoa.cdsPessoa_Consulta.IsEmpty then
+  begin
+    MessageDlg('*** Deve ser feita a consulta primeiro!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Etiqueta_Cliente.fr3';
+  if FileExists(vArq) then
+    fDMCadPessoa.frxReport1.Report.LoadFromFile(vArq);
+  fDMCadPessoa.cdsPessoa_Consulta.DisableControls;
+  try
+    fDMCadPessoa.frxReport1.ShowReport;
+  finally
+    fDMCadPessoa.cdsPessoa_Consulta.EnableControls;
   end;
 end;
 

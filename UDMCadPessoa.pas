@@ -1316,6 +1316,7 @@ type
     cdsPessoa_ConsultaCELULAR: TStringField;
     sdsPessoaPERC_COMISSAO_INT: TFloatField;
     cdsPessoaPERC_COMISSAO_INT: TFloatField;
+    frxEtiqueta: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
