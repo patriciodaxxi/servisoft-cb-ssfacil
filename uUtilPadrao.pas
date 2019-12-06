@@ -120,6 +120,8 @@ uses
   procedure prc_Form_Aguarde(Form : TForm); overload;
   procedure prc_Form_Aguarde(Form : TForm; Mensagem : String); overload;
 
+  function fnc_Selecionar_Filial : Integer;
+
 var
   vCodProduto_Pos: Integer;
   vCodPessoa_Pos: Integer;
@@ -2310,5 +2312,43 @@ begin
   Form.Update;
 end;
 
+function fnc_Selecionar_Filial : Integer;
+var
+  sds: TSQLDataSet;
+  ffrmEscolhe_Filial: TfrmEscolhe_Filial;
+begin
+  Result       := 0;
+  vFilial      := 0;
+  vFilial_Nome := '';
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText := 'select ID, NOME_INTERNO,  (select count(1) from filial where inativo = ' + QuotedStr('N') + ') contador '
+                     + 'from filial where inativo = ' + QuotedStr('N');
+
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger = 1 then
+    begin
+      vFilial      := sds.FieldByName('ID').AsInteger;
+      vFilial_Nome := sds.FieldByName('NOME_INTERNO').AsString;
+    end
+    else
+    begin
+      ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(frmEscolhe_Filial);
+      ffrmEscolhe_Filial.ShowModal;
+      FreeAndNil(ffrmEscolhe_Filial);
+    end;
+
+  finally
+    FreeAndNil(sds);
+  end;
+  Result := vFilial;
+
+  if vFilial <= 0 then
+    MessageDlg('*** Filial não informada!' , mtError, [mbOk], 0);
+
+end;
 
 end.

@@ -21,8 +21,8 @@ object frmCadRecibo: TfrmCadRecibo
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 900
-    Height = 679
+    Width = 908
+    Height = 687
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -40,8 +40,8 @@ object frmCadRecibo: TfrmCadRecibo
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 117
-        Width = 896
-        Height = 522
+        Width = 904
+        Height = 530
         Align = alClient
         BorderStyle = bsNone
         Ctl3D = False
@@ -169,7 +169,7 @@ object frmCadRecibo: TfrmCadRecibo
       object pnlPesquisa: TPanel
         Left = 0
         Top = 31
-        Width = 896
+        Width = 904
         Height = 86
         Align = alTop
         Color = clSilver
@@ -349,8 +349,8 @@ object frmCadRecibo: TfrmCadRecibo
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 639
-        Width = 896
+        Top = 647
+        Width = 904
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -366,7 +366,7 @@ object frmCadRecibo: TfrmCadRecibo
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 896
+        Width = 904
         Height = 31
         Align = alTop
         Color = clSilver
@@ -675,7 +675,7 @@ object frmCadRecibo: TfrmCadRecibo
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 896
+        Width = 904
         Height = 31
         Align = alTop
         Color = 8404992
@@ -904,7 +904,7 @@ object frmCadRecibo: TfrmCadRecibo
       object pnlCadastro: TPanel
         Left = 0
         Top = 31
-        Width = 896
+        Width = 904
         Height = 235
         Align = alTop
         Enabled = False
@@ -912,13 +912,13 @@ object frmCadRecibo: TfrmCadRecibo
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 894
+          Width = 902
           Height = 32
           Align = alTop
           Color = clSilver
           TabOrder = 0
           DesignSize = (
-            894
+            902
             32)
           object Label16: TLabel
             Left = 272
@@ -966,7 +966,7 @@ object frmCadRecibo: TfrmCadRecibo
         object pnlCliente: TPanel
           Left = 1
           Top = 33
-          Width = 894
+          Width = 902
           Height = 201
           Align = alClient
           BevelInner = bvLowered
@@ -1498,8 +1498,8 @@ object frmCadRecibo: TfrmCadRecibo
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 266
-        Width = 896
-        Height = 390
+        Width = 904
+        Height = 398
         ActivePage = TabSheet1
         ActivePageDefault = TabSheet1
         Align = alClient
@@ -1511,7 +1511,7 @@ object frmCadRecibo: TfrmCadRecibo
           object RzGroupBox2: TRzGroupBox
             Left = 0
             Top = 0
-            Width = 892
+            Width = 900
             Height = 195
             Align = alTop
             BorderColor = clBlue
@@ -1533,7 +1533,7 @@ object frmCadRecibo: TfrmCadRecibo
             object SMDBGrid2: TSMDBGrid
               Left = 40
               Top = 52
-              Width = 820
+              Width = 828
               Height = 138
               Align = alClient
               Ctl3D = False
@@ -1661,7 +1661,7 @@ object frmCadRecibo: TfrmCadRecibo
                 end>
             end
             object btnRecalcular: TRzBitBtn
-              Left = 860
+              Left = 868
               Top = 52
               Width = 27
               Height = 138
@@ -1981,7 +1981,7 @@ object frmCadRecibo: TfrmCadRecibo
             object pnlServico_Extra: TPanel
               Left = 5
               Top = 18
-              Width = 882
+              Width = 890
               Height = 34
               Align = alTop
               Color = clSilver
@@ -2063,8 +2063,8 @@ object frmCadRecibo: TfrmCadRecibo
           object gbxDuplicata: TRzGroupBox
             Left = 0
             Top = 195
-            Width = 892
-            Height = 172
+            Width = 900
+            Height = 180
             Align = alClient
             BorderColor = clMaroon
             BorderInner = fsButtonUp
@@ -2232,10 +2232,10 @@ object frmCadRecibo: TfrmCadRecibo
               ParentFont = False
             end
             object SMDBGrid_Dupl2: TSMDBGrid
-              Left = 300
+              Left = 308
               Top = 18
               Width = 586
-              Height = 148
+              Height = 156
               Align = alRight
               Anchors = [akLeft, akTop, akRight, akBottom]
               Ctl3D = False

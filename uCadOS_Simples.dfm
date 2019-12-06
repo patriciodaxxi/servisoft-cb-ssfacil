@@ -24,9 +24,9 @@ object frmCadOS_Simples: TfrmCadOS_Simples
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 658
-    Height = 682
-    ActivePage = TS_Cadastro
+    Width = 666
+    Height = 689
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -43,8 +43,8 @@ object frmCadOS_Simples: TfrmCadOS_Simples
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 147
-        Width = 654
-        Height = 471
+        Width = 662
+        Height = 478
         Align = alClient
         Ctl3D = True
         DataSource = DMCadOrdemServico.dsOrdemServico_Consulta
@@ -144,7 +144,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 654
+        Width = 662
         Height = 32
         Align = alTop
         Color = clSilver
@@ -444,8 +444,8 @@ object frmCadOS_Simples: TfrmCadOS_Simples
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 642
-        Width = 654
+        Top = 649
+        Width = 662
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -461,7 +461,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 654
+        Width = 662
         Height = 115
         Align = alTop
         Color = clSilver
@@ -678,8 +678,8 @@ object frmCadOS_Simples: TfrmCadOS_Simples
       end
       object Panel5: TPanel
         Left = 0
-        Top = 618
-        Width = 654
+        Top = 625
+        Width = 662
         Height = 24
         Align = alBottom
         Color = clSilver
@@ -731,7 +731,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 654
+        Width = 662
         Height = 35
         Align = alTop
         Color = 8404992
@@ -957,8 +957,8 @@ object frmCadOS_Simples: TfrmCadOS_Simples
       object RzPageControl2: TRzPageControl
         Left = 0
         Top = 265
-        Width = 654
-        Height = 394
+        Width = 662
+        Height = 401
         ActivePage = TabSheet1
         ActivePageDefault = TabSheet1
         Align = alClient
@@ -970,7 +970,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 650
+            Width = 658
             Height = 33
             Align = alTop
             TabOrder = 0
@@ -1050,7 +1050,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 33
-            Width = 650
+            Width = 658
             Height = 169
             Align = alTop
             DataSource = DMCadOrdemServico.dsOrdemServico_Simples
@@ -1118,8 +1118,8 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           end
           object DBMemo1: TDBMemo
             Left = 0
-            Top = 293
-            Width = 650
+            Top = 300
+            Width = 658
             Height = 48
             Align = alBottom
             DataField = 'DESCRICAO'
@@ -1129,8 +1129,8 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           end
           object Panel7: TPanel
             Left = 0
-            Top = 341
-            Width = 650
+            Top = 348
+            Width = 658
             Height = 30
             Align = alBottom
             TabOrder = 3
@@ -1191,8 +1191,8 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           object SMDBGrid3: TSMDBGrid
             Left = 0
             Top = 202
-            Width = 650
-            Height = 91
+            Width = 658
+            Height = 98
             Align = alClient
             DataSource = DMCadOrdemServico.dsOS_Exec
             Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -1268,7 +1268,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           object Panel4: TPanel
             Left = 0
             Top = 166
-            Width = 650
+            Width = 658
             Height = 21
             Align = alTop
             Color = clSilver
@@ -1284,8 +1284,8 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           object DBMemo2: TDBMemo
             Left = 0
             Top = 187
-            Width = 650
-            Height = 184
+            Width = 658
+            Height = 191
             Align = alClient
             DataField = 'OBS'
             DataSource = DMCadOrdemServico.dsOrdemServico
@@ -1294,7 +1294,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           object pnlAgentes: TPanel
             Left = 0
             Top = 0
-            Width = 650
+            Width = 658
             Height = 73
             Align = alTop
             Enabled = False
@@ -1374,7 +1374,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           object Panel6: TPanel
             Left = 0
             Top = 73
-            Width = 650
+            Width = 658
             Height = 21
             Align = alTop
             Color = clSilver
@@ -1390,7 +1390,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
           object DBMemo3: TDBMemo
             Left = 0
             Top = 94
-            Width = 650
+            Width = 658
             Height = 72
             Align = alTop
             DataField = 'MATERIAL'
@@ -1402,7 +1402,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
       object pnlCliente: TPanel
         Left = 0
         Top = 58
-        Width = 654
+        Width = 662
         Height = 207
         Align = alTop
         Enabled = False
@@ -1820,7 +1820,7 @@ object frmCadOS_Simples: TfrmCadOS_Simples
       object pnlNota: TPanel
         Left = 0
         Top = 35
-        Width = 654
+        Width = 662
         Height = 23
         Align = alTop
         Color = clSilver

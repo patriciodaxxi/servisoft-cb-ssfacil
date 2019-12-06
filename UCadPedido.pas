@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, DB,
   DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl,
-  UCadPedido_Itens, UCadPedido_Desconto, UEscolhe_Filial, UCBase, RzPanel, UCadTabPreco, Math, UCadPedido_Cancelamento,
+  UCadPedido_Itens, UCadPedido_Desconto, UCBase, RzPanel, UCadTabPreco, Math, UCadPedido_Cancelamento,
   DateUtils, dbXPress, NxCollection, Menus, Variants, USel_TabPreco, ULeExcel, NxEdit, VarUtils, UEtiq_Individual, Provider,
   UCadPedido_Ace, UGerar_Rotulos, UGerar_Rotulos_Color, DBClient, UCadPedido_Itens_Copia, UConsOrdProd_Ped, UConsHist_Chapa,
   UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed,classe.validaemail, frxExportPDF, frxExportMail, UMontaPed_TipoItem,
@@ -499,7 +499,6 @@ type
     ffrmCadPedido_Itens: TfrmCadPedido_Itens;
     ffrmCadPedido_ItensRed: TfrmCadPedido_ItensRed;
     ffrmCadPedido_Desconto: TfrmCadPedido_Desconto;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadTabPreco: TfrmCadTabPreco;
     ffrmCadPedido_Cancelamento: TfrmCadPedido_Cancelamento;
     ffrmSel_TabPreco: TfrmSel_TabPreco;
@@ -2986,23 +2985,8 @@ end;
 
 procedure TfrmCadPedido.prc_Informar_Filial;
 begin
-  if fDMCadPedido.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadPedido.cdsFilial.Last;
-    vFilial      := fDMCadPedido.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadPedido.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDMCadPedido.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
   lblNome_Filial.Caption := vFilial_Nome;

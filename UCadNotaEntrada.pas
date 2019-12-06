@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadNotaFiscal,
   DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb,
   RXDBCtrl, RzEdit, RzDBEdit, UCadNotaEntrada_Itens, UCadNotaFiscal_Desconto, UCadNotaFiscal_OutrasDesp, DateUtils,
-  UEscolhe_Filial, UCBase, UDMEstoque, Menus, NxCollection, dbXPress, USel_Pedido, UDMMovimento, UNFe, UDMNFe, RzButton,
+  UCBase, UDMEstoque, Menus, NxCollection, dbXPress, USel_Pedido, UDMMovimento, UNFe, UDMNFe, RzButton,
   uDmConsPedido, uEtiq_Individual, UDMCadProduto_Lote, uSel_NotaEntrada;
 
 type
@@ -239,7 +239,6 @@ type
 
     ffrmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens;
     ffrmCadNotaFiscal_OutrasDesp: TfrmCadNotaFiscal_OutrasDesp;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadNotaFiscal_Desconto: TfrmCadNotaFiscal_Desconto;
     ffrmSel_Pedido: TfrmSel_Pedido;
     ffNFe: TfNFe;
@@ -480,24 +479,8 @@ begin
   vID_LocalAux := fnc_Verificar_Local(fDMCadNotaFiscal.cdsParametrosUSA_LOCAL_ESTOQUE.AsString);
   if vID_LocalAux <= 0 then
     exit;
-    
-  if fDMCadNotaFiscal.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadNotaFiscal.cdsFilial.Last;
-    vFilial      := fDMCadNotaFiscal.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadNotaFiscal.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDMCadNotaFiscal.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 

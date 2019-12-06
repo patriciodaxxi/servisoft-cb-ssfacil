@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadPedido, DB, NxEdit,
   DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl, Math,
-  UCadPedido_Desconto, UEscolhe_Filial, UCBase, RzPanel, UCadTabPreco, UCadPedido_Cancelamento, DateUtils, dbXPress, Menus, 
+  UCadPedido_Desconto, UCBase, RzPanel, UCadTabPreco, UCadPedido_Cancelamento, DateUtils, dbXPress, Menus, 
   NxCollection, Variants, USel_TabPreco, VarUtils, DBClient, Provider, UCadPedido_Itens, UDMPedidoImp, UDMSel_Produto;
 
 type
@@ -290,7 +290,6 @@ type
     fDMPedidoImp: TDMPedidoImp;
     fDMSel_Produto: TDMSel_Produto;
     ffrmCadPedido_Desconto: TfrmCadPedido_Desconto;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadTabPreco: TfrmCadTabPreco;
     ffrmCadPedido_Cancelamento: TfrmCadPedido_Cancelamento;
     ffrmSel_TabPreco: TfrmSel_TabPreco;
@@ -541,6 +540,12 @@ begin
 
   //fDMCadPedido.prc_Inserir;
   UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
+  if not(fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) then
+  begin
+    prc_Excluir_Registro;
+    vInclusao_Edicao := '';
+    exit;
+  end;
 
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'P';
 
@@ -1592,24 +1597,8 @@ end;
 
 procedure TfrmCadPedidoLoja.prc_Informar_Filial;
 begin
-  if fDMCadPedido.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadPedido.cdsFilial.Last;
-    vFilial      := fDMCadPedido.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadPedido.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
-
   fDMCadPedido.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
   lblNome_Filial.Caption := vFilial_Nome;
 end;
@@ -3180,6 +3169,7 @@ begin
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'  Cidade: ' + fDMCadPedido.cdsPedidoImpCIDADE_CLIENTE.AsString,'D',' ') + '  UF: ' + fDMCadPedido.cdsPedidoImpUF.AsString);
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(53,'CNPJ/CPF: ' + fDMCadPedido.cdsPedidoImpCNPJ_CPF_CLIENTE.AsString,'D',' ') + 'Fone: ' + fDMCadPedido.cdsPedidoImpDDD_CLIENTE.AsString + ' ' + fDMCadPedido.cdsPedidoImpFONE_CLIENTE.AsString);
   uImprimir.prc_Detalhe_Mat(' ');
+  uImprimir.prc_Detalhe_Mat('Prazo Pgto.: ' + fDMCadPedido.cdsPedidoImpNOME_CONDPGTO.AsString);
   uImprimir.prc_Detalhe_Mat(uImprimir.fnc_Monta_Tamanho(135,'-','E','-'));
   uImprimir.prc_Detalhe_Mat('   Qtde  Unid.   Cód. Produto                                           Bitola              Marca           It   Preco %Desc      Total');
 

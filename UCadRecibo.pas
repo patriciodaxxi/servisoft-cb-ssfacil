@@ -5,7 +5,7 @@ interface
 uses                                                                                                                                         
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadRecibo, DB, RzEdit,
   DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus, RXDBCtrl,
-  RzDBEdit, UEscolhe_Filial, UCBase, dbXPress, NxCollection, NxEdit, StrUtils, DateUtils, UCadRecibo_Itens, ComCtrls, UDMMovimento,
+  RzDBEdit, UCBase, dbXPress, NxCollection, NxEdit, StrUtils, DateUtils, UCadRecibo_Itens, ComCtrls, UDMMovimento,
   USel_Servico_Extra, RzButton, RzPanel;
 
 type
@@ -183,8 +183,6 @@ type
     ffrmCadRecibo_Itens: TfrmCadRecibo_Itens;
     fDMCadRecibo: TDMCadRecibo;
     fDMMovimento: TDMMovimento;
-//    fDmCadOrdemServico: TDmCadOrdemServico;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmSel_Servico_Extra: TfrmSel_Servico_Extra;
 
     procedure prc_Inserir_Registro;
@@ -373,40 +371,13 @@ begin
 
         fDMCadRecibo.cdsRecibo_Itens.Next;
       end;
-      {if vID_Mov <> fDMCadRecibo.cdsReciboID_MOVIMENTO.AsInteger then
-      begin
-        fDMCadRecibo.cdsRecibo.Edit;
-        fDMCadRecibo.cdsReciboID_MOVIMENTO.AsInteger := vID_Mov;
-        fDMCadRecibo.cdsRecibo.Post;
-      end;}
 
       fDMCadRecibo.cdsRecibo_Itens.First;
       while not fDMCadRecibo.cdsRecibo_Itens.Eof do
       begin
 
-        //Atualiza Status do pedido
-        //Cleomar
-        {if (fDMCadRecibo.cdsRecibo_ItensID_PEDIDO.AsInteger > 0) and not(fDMCadRecibo.mPedidoAux.FindKey([fDMCadRecibo.cdsRecibo_ItensID_PEDIDO.AsInteger])) then
-        begin
-          fDMCadRecibo.mPedidoAux.Insert;
-          fDMCadRecibo.mPedidoAuxID_Pedido.AsInteger := fDMCadRecibo.cdsRecibo_ItensID_PEDIDO.AsInteger;
-          fDMCadRecibo.mPedidoAux.Post;
-        end;}
-        //****************
-
         fDMCadRecibo.cdsRecibo_Itens.Next;
       end;
-
-      //Atualiza Status do pedido
-      //Cleomar
-      {fDMCadRecibo.mPedidoAux.First;
-      while not fDMCadRecibo.mPedidoAux.Eof do
-      begin
-        fDMCadRecibo.sdsPrc_Atualiza_Status_Ped.Close;
-        fDMCadRecibo.sdsPrc_Atualiza_Status_Ped.ParamByName('P_ID').AsInteger := fDMCadRecibo.mPedidoAuxID_Pedido.AsInteger;
-        fDMCadRecibo.sdsPrc_Atualiza_Status_Ped.ExecSQL;
-        fDMCadRecibo.mPedidoAux.Next;
-      end;}
 
       fDMCadRecibo.cdsRecibo.ApplyUpdates(0);
 
@@ -433,23 +404,8 @@ procedure TfrmCadRecibo.prc_Inserir_Registro;
 begin
   fDMCadRecibo.cdsParametros.Close;
   fDMCadRecibo.cdsParametros.Open;
-  if fDMCadRecibo.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadRecibo.cdsFilial.Last;
-    vFilial      := fDMCadRecibo.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadRecibo.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDMCadRecibo.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 
@@ -464,8 +420,6 @@ begin
   RzPageControl1.ActivePage := TS_Cadastro;
   TS_Consulta.TabEnabled    := False;
 
-  {if fDMCadRecibo.cdsFilialID_SERVICO_PAD.AsInteger > 0 then
-    fDMCadRecibo.cdsReciboID_SERVICO.AsInteger := fDMCadRecibo.cdsFilialID_SERVICO_PAD.AsInteger;}
   RxDBLookupCombo3.SetFocus;
 end;
 

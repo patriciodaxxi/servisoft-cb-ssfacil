@@ -23,8 +23,8 @@ object frmCadExtComissao: TfrmCadExtComissao
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 867
-    Height = 679
+    Width = 875
+    Height = 687
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -42,8 +42,8 @@ object frmCadExtComissao: TfrmCadExtComissao
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 180
-        Width = 863
-        Height = 459
+        Width = 871
+        Height = 467
         Align = alClient
         Ctl3D = True
         DataSource = DMCadExtComissao.dsConsulta
@@ -146,11 +146,13 @@ object frmCadExtComissao: TfrmCadExtComissao
           item
             Expanded = False
             FieldName = 'DTCADASTRO'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ID'
+            Width = 64
             Visible = True
           end
           item
@@ -170,7 +172,7 @@ object frmCadExtComissao: TfrmCadExtComissao
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 863
+        Width = 871
         Height = 32
         Align = alTop
         Color = clSilver
@@ -326,8 +328,8 @@ object frmCadExtComissao: TfrmCadExtComissao
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 639
-        Width = 863
+        Top = 647
+        Width = 871
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -343,7 +345,7 @@ object frmCadExtComissao: TfrmCadExtComissao
       object Panel3: TPanel
         Left = 0
         Top = 32
-        Width = 863
+        Width = 871
         Height = 148
         Align = alTop
         Color = clSilver
@@ -710,7 +712,7 @@ object frmCadExtComissao: TfrmCadExtComissao
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 863
+        Width = 871
         Height = 35
         Align = alTop
         Color = 8404992
@@ -936,8 +938,8 @@ object frmCadExtComissao: TfrmCadExtComissao
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 863
-        Height = 621
+        Width = 871
+        Height = 629
         Align = alClient
         Enabled = False
         TabOrder = 0

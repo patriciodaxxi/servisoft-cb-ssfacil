@@ -111,6 +111,7 @@ object frmCadOrdemServico: TfrmCadOrdemServico
             FieldName = 'DTEMISSAO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Emiss'#227'o'
+            Width = 64
             Visible = True
           end
           item
@@ -164,6 +165,7 @@ object frmCadOrdemServico: TfrmCadOrdemServico
             FieldName = 'ENTREGUE'
             Title.Alignment = taCenter
             Title.Caption = 'Entregue'
+            Width = 64
             Visible = True
           end
           item
@@ -2229,16 +2231,19 @@ object frmCadOrdemServico: TfrmCadOrdemServico
             FieldName = 'TIPO_GARANTIA'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Garantia'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'DTENTRADA'
+            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'HRENTRADA'
+            Width = 64
             Visible = True
           end
           item
@@ -2504,6 +2509,7 @@ object frmCadOrdemServico: TfrmCadOrdemServico
                 Title.Alignment = taCenter
                 Title.Caption = 'Qtd. Faturada'
                 Title.Color = 16763025
+                Width = 64
                 Visible = True
               end>
           end
@@ -2621,6 +2627,7 @@ object frmCadOrdemServico: TfrmCadOrdemServico
                 Title.Alignment = taCenter
                 Title.Caption = 'Hora Entrada'
                 Title.Color = 16763025
+                Width = 64
                 Visible = True
               end
               item

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadInventario,
   DBGrids, ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, NxCollection,
-  RXDBCtrl, UEscolhe_Filial, UCadInventario_Prod, SqlExpr, dbXPress, UDMEstoque, Variants;
+  RXDBCtrl, UCadInventario_Prod, SqlExpr, dbXPress, UDMEstoque, Variants;
 
 type
   TfrmCadInventario = class(TForm)
@@ -97,7 +97,6 @@ type
   private
     { Private declarations }
     fDMCadInventario: TDMCadInventario;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadInventario_Prod: TfrmCadInventario_Prod;
     fDMEstoque: TDMEstoque;
     vItemCFOP: Integer;
@@ -221,23 +220,8 @@ end;
 
 procedure TfrmCadInventario.prc_Inserir_Registro;
 begin
-  if fDMCadInventario.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadInventario.cdsFilial.Last;
-    vFilial      := fDMCadInventario.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadInventario.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
   fDMCadInventario.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 
   fDMCadInventario.prc_Inserir;

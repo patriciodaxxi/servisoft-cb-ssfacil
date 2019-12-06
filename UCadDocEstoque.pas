@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadDocEstoque, Math, 
   DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, RXDBCtrl,
-  RzEdit, RzDBEdit, RzButton, UCadDocEstoque_Itens, UDMEstoque, UEscolhe_Filial, UCBase, RzPanel, dbXPress, NxCollection,
+  RzEdit, RzDBEdit, RzButton, UCadDocEstoque_Itens, UDMEstoque, UCBase, RzPanel, dbXPress, NxCollection,
   DateUtils, DB, Menus, uEtiq_Individual, uDmConsPedido, UDMCadProduto_Lote;
 
 type
@@ -124,7 +124,6 @@ type
     fDMCadProduto_Lote: TDMCadProduto_Lote;
 
     ffrmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
 
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
@@ -268,23 +267,8 @@ end;
 
 procedure TfrmCadDocEstoque.prc_Inserir_Registro;
 begin
-  if fDMCadDocEstoque.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadDocEstoque.cdsFilial.Last;
-    vFilial      := fDMCadDocEstoque.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadDocEstoque.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDMCadDocEstoque.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
 

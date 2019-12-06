@@ -1592,6 +1592,10 @@ begin
      //AbrirUTF8(OpenDialog.FileName, Stream);
      Stream.Position := 0;
 
+     fDMRecebeXML.qFilial2.Close;
+     fDMRecebeXML.qFilial2.ParamByName('ID').AsInteger := vFilial_Local;
+     fDMRecebeXML.qFilial2.Open;
+
      texto  := Monta_Texto(fDMRecebeXML.qFilial2CNPJ_CPF.Text,14);
 
      vLocalServidorNFe := fDMRecebeXML.qParametrosLOCALSERVIDORNFE.AsString;

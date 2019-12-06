@@ -286,6 +286,9 @@ object DMCopiaPedido: TDMCopiaPedido
       FieldName = 'EMAIL_COMPRAS'
       Size = 100
     end
+    object sdsPedidoID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
+    end
   end
   object dspPedido: TDataSetProvider
     DataSet = sdsPedido
@@ -573,6 +576,9 @@ object DMCopiaPedido: TDMCopiaPedido
     object cdsPedidoEMAIL_COMPRAS: TStringField
       FieldName = 'EMAIL_COMPRAS'
       Size = 100
+    end
+    object cdsPedidoID_VENDEDOR_INT: TIntegerField
+      FieldName = 'ID_VENDEDOR_INT'
     end
   end
   object dsPedido: TDataSource

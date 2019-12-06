@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadOS, RzDTP, DBGrids,
   DB, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus, RXDBCtrl, RzEdit,
-  RzDBEdit, RzButton, UEscolhe_Filial, UCBase, RzPanel,  dbXPress, NxCollection, StrUtils, DateUtils, ComCtrls, NxEdit, RzDBDTP,
+  RzDBEdit, RzButton, UCBase, RzPanel,  dbXPress, NxCollection, StrUtils, DateUtils, ComCtrls, NxEdit, RzDBDTP,
   UCadContrato_Servico_Int, ComObj;
 
 type
@@ -179,7 +179,6 @@ type
     vTipoNotaAnt: string;
     vID_Cliente_Ant: Integer;
     fDMCadOS: TDMCadOS;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadContrato_Servico_Int: TfrmCadContrato_Servico_Int;
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
@@ -322,23 +321,8 @@ procedure TfrmCadContrato.prc_Inserir_Registro;
 begin
   fDMCadOS.qParametros.Close;
   fDMCadOS.qParametros.Open;
-  if fDMCadOS.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadOS.cdsFilial.Last;
-    vFilial := fDMCadOS.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadOS.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDMCadOS.cdsFilial.Locate('ID', vFilial, [loCaseInsensitive]);
 
@@ -824,7 +808,7 @@ begin
 
   if not (fileExists(arquivo)) then
   begin
-    if fDMCadOS.cdsOSIMPRIME_CONTRATO_POR_ITEM.AsString = 'S' then
+//    if fDMCadOS.cdsOSIMPRIME_CONTRATO_POR_ITEM.AsString = 'S' then
 
 
     if fDMCadOS.cdsOSARQ_MODELO_CONTRATO.AsString <> '' then

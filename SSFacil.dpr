@@ -563,7 +563,6 @@ uses
   UConsCtaOrcamento_Det in 'UConsCtaOrcamento_Det.pas' {frmConsCtaOrcamento_Det},
   UAjuste_Contrato in 'UAjuste_Contrato.pas' {frmAjuste_Contrato},
   USel_Pontos in '..\Locacao_Pontos\USel_Pontos.pas' {frmSel_Pontos},
-  UCadDuplicata_LeItau in 'UCadDuplicata_LeItau.pas' {frmCadDuplicata_LeItau},
   UEnviaEmailTitulos in 'UEnviaEmailTitulos.pas' {frmEnviaEmailTitulos},
   UDMCadGrupo_Pessoa in 'UDMCadGrupo_Pessoa.pas' {DMCadGrupo_Pessoa: TDataModule},
   UCadGrupo_Pessoa in 'UCadGrupo_Pessoa.pas' {frmCadGrupo_Pessoa},
@@ -830,7 +829,9 @@ uses
   UConsPedido_Producao in 'UConsPedido_Producao.pas' {frmConsPedido_Producao},
   uCadArqModeloContrato in 'uCadArqModeloContrato.pas' {frmCadArqModeloContrato},
   USel_CombTam in 'USel_CombTam.pas' {frmSel_CombTam},
-  UCadInventario_EstLote in 'UCadInventario_EstLote.pas' {frmCadInventario_EstLote};
+  UCadInventario_EstLote in 'UCadInventario_EstLote.pas' {frmCadInventario_EstLote},
+  UConsDuplicata_Pessoa in 'UConsDuplicata_Pessoa.pas' {frmConsDuplicata_Pessoa},
+  UDMConsDuplicata in 'UDMConsDuplicata.pas' {DMConsDuplicata: TDataModule};
 
 {$R *.res}
 

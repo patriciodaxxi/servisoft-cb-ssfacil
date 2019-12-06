@@ -20,8 +20,8 @@ object frmEscolhe_Filial: TfrmEscolhe_Filial
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 435
-    Height = 75
+    Width = 443
+    Height = 82
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 0

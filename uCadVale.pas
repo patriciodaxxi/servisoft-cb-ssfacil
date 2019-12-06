@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDmCadVale, DB, USenha,
   DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, UCadVale_Itens, USel_Pedido, DateUtils, UCBase,
-  UEscolhe_Filial, NxCollection, uDmEstoque, RXDBCtrl, RxLookup, RxDBComb, DBXpress, Menus;
+  NxCollection, uDmEstoque, RXDBCtrl, RxLookup, RxDBComb, DBXpress, Menus;
 
 type
   TfrmCadVale = class(TForm)
@@ -155,7 +155,6 @@ type
     fDmCadVale: TDmCadVale;
     fDmEstoque: TDmEstoque;
     ffrmCadVale_Itens: TfrmCadVale_Itens;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmSel_Pedido: TfrmSel_Pedido;
     ffrmSenha: TfrmSenha;
 
@@ -346,25 +345,8 @@ begin
   vID_LocalAux := fnc_Verificar_Local(fDmCadVale.qParametrosUSA_LOCAL_ESTOQUE.AsString);
   if vID_LocalAux <= 0 then
     exit;
-
-  if fDmCadVale.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDmCadVale.cdsFilial.Last;
-    vFilial      := fDmCadVale.cdsFilialID.AsInteger;
-    vFilial_Nome := fDmCadVale.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
-
   fDmCadVale.cdsFilial.Locate('ID',vFilial,[loCaseInsensitive]);
   fDmCadVale.prc_Inserir;
   lblNome_Filial.Caption := vFilial_Nome;
@@ -377,12 +359,6 @@ begin
   DBDateEdit1.SetFocus;
   vTipoNotaAnt := 'S';
   
-  //Calcular o próximo número //passado para a gravação final
-{  fDmCadVale.qProximoVale.Close;
-  fDmCadVale.qProximoVale.ParamByName('FILIAL').AsInteger :=  fDmCadVale.cdsValeFILIAL.AsInteger;
-  fDmCadVale.qProximoVale.Open;
-  vNumValeAux := fDmCadVale.qProximoValeNUM_VALE.AsInteger + 1;
-  fDmCadVale.cdsValeNUM_VALE.AsInteger := vNumValeAux;}
   prc_Abrir_Pessoa('S');
 
 end;

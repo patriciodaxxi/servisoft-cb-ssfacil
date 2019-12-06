@@ -5,9 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadDuplicata, DBGrids,
   ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, RXDBCtrl, RzChkLst, RzPanel,
-  UEscolhe_Filial, URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, 
+  URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, 
   NxCollection, StrUtils, DateUtils, UCadDuplicata_Gerar, UDMCadCheque, UCadDuplicata_Alt, UCadDuplicata_EscTipo, RzLstBox,
-  UCadDuplicata_Total, UCadDuplicata_LeItau, SqlExpr, ComCtrls, ValorPor;
+  UCadDuplicata_Total, SqlExpr, ComCtrls, ValorPor;
 
 type
   TEnumMostraNossoNumero = (tpTodos,tpSim, tpNao);
@@ -196,7 +196,6 @@ type
     GravaComissao2: TMenuItem;
     Label42: TLabel;
     DBEdit22: TDBEdit;
-    btnLerItau: TBitBtn;
     DBEdit23: TDBEdit;
     Label44: TLabel;
     Excel1: TMenuItem;
@@ -323,7 +322,6 @@ type
     procedure Panel6Enter(Sender: TObject);
     procedure GravarComissao1Click(Sender: TObject);
     procedure GravaComissao2Click(Sender: TObject);
-    procedure btnLerItauClick(Sender: TObject);
     procedure RxDBLookupCombo4Enter(Sender: TObject);
     procedure RxDBLookupCombo5Enter(Sender: TObject);
     procedure RxDBComboBox11Enter(Sender: TObject);
@@ -362,7 +360,6 @@ type
   private
     { Private declarations }
     fDMCadDuplicata: TDMCadDuplicata;
-    ffrmEscolhe_Filial: TfrmEscolhe_Filial;
     ffrmCadDuplicata_Pag: TfrmCadDuplicata_Pag;
     ffrmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2;
     ffrmCadDuplicata_Pag_Sel: TfrmCadDuplicata_Pag_Sel;
@@ -553,23 +550,8 @@ begin
     end;
   end;
 
-  if fDMCadDuplicata.cdsFilial.RecordCount > 1 then
-  begin
-    ffrmEscolhe_Filial := TfrmEscolhe_Filial.Create(self);
-    ffrmEscolhe_Filial.ShowModal;
-    FreeAndNil(ffrmEscolhe_Filial);
-  end
-  else
-  begin
-    fDMCadDuplicata.cdsFilial.Last;
-    vFilial := fDMCadDuplicata.cdsFilialID.AsInteger;
-    vFilial_Nome := fDMCadDuplicata.cdsFilialNOME.AsString;
-  end;
-  if vFilial <= 0 then
-  begin
-    ShowMessage('Filial não informada!');
+  if uUtilPadrao.fnc_Selecionar_Filial <= 0 then
     exit;
-  end;
 
   fDMCadDuplicata.cdsFilial.Locate('ID', vFilial, [loCaseInsensitive]);
   fDMCadDuplicata.prc_Inserir;
@@ -1910,8 +1892,6 @@ begin
     NxButton1.Visible := not (NxButton1.Visible)
   else if (Key = 45) and (btnInserir.Enabled) and (btnInserir.Visible) and not (fDMCadDuplicata.cdsDuplicata.State in [dsEdit, dsInsert]) then
     btnInserirClick(Sender);
-  if (Shift = [ssCtrl]) and (Key = 83) then //S
-    btnLerItau.Visible := not (btnLerItau.Visible);
 end;
 
 procedure TfrmCadDuplicata.prc_Consultar_Comissao;
@@ -1992,7 +1972,6 @@ end;
 procedure TfrmCadDuplicata.prc_Gerar_mTitulos;
 var
   ffrmCadDuplicata_Desc: TfrmCadDuplicata_Desc;
-  ffrmEscolhe_Filial: TfrmEscolhe_Filial;
   vVlrTotal: Real;
   vDtPrimeiro_Vecto, vDtFinal_Vecto: TDateTime;
   vQtdTit: Integer;
@@ -2293,16 +2272,6 @@ begin
   finally
     FreeAndNil(sds);
   end;
-end;
-
-procedure TfrmCadDuplicata.btnLerItauClick(Sender: TObject);
-var
-  ffrmCadDuplicata_LeItau: TfrmCadDuplicata_LeItau;
-begin
-  ffrmCadDuplicata_LeItau := TfrmCadDuplicata_LeItau.Create(self);
-  ffrmCadDuplicata_LeItau.fDMCadDuplicata := fDMCadDuplicata;
-  ffrmCadDuplicata_LeItau.ShowModal;
-  FreeAndNil(ffrmCadDuplicata_LeItau);
 end;
 
 procedure TfrmCadDuplicata.RxDBLookupCombo4Enter(Sender: TObject);
