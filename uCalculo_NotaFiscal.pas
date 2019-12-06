@@ -2408,13 +2408,15 @@ var
   vVlrParc_Prim: Real;
   vVlrParc_Ult: Real;
   vValorParc_Orig: Real;
+  vPerc_Base_Com_Prim : Real;
 begin
   Result := False;
   fDMCadNotaFiscal.cdsNotaFiscal_Parc.First;
   while not fDMCadNotaFiscal.cdsNotaFiscal_Parc.Eof do
     fDMCadNotaFiscal.cdsNotaFiscal_Parc.Delete;
 
-  vPerc_Base_Com := StrToFloat(FormatFloat('0.00',100));
+  vPerc_Base_Com      := StrToFloat(FormatFloat('0.00',100));
+  vPerc_Base_Com_Prim := StrToFloat(FormatFloat('0.00',100));
   //06/05/2019 foi incluído o OR
   if (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat)) > 0) and
      (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat)) <> StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat))) then
