@@ -39,7 +39,7 @@ type
 implementation
 
 uses
-  msxml, idHTTP, StrUtils, uLkJSON, IdSSLOpenSSL;
+  msxml, idHTTP, StrUtils, uLkJSON;
 
 { TApiIbpt }
 
@@ -72,7 +72,7 @@ begin
     body.add('ex=' + IntToStr(AEx));
     body.add('valor=' + FloatToStr(AValor));
 
-    response := doGet('produtos', body);
+    response := doGet('Produtos', body);
 
     json := TlkJSON.ParseText(response) as TlkJSONobject;
 
@@ -108,19 +108,15 @@ type
 function TApiIbpt.doGet(AMethod: string; const ASource: TStrings): string;
 var
   IdHTTP: _TIdHttp;
-  IdSSL: TIdSSLIOHandlerSocket;
   sParams, sUrl: string;
   Response: TStringStream;
 begin
   IdHTTP := _TIdHttp.Create(nil);
-  idSSL := TIdSSLIOHandlerSocket.Create(nil);
   Response := TStringStream.Create('');
   try
     sParams := IdHTTP.SetRequestParams(ASource);
-    //sUrl := 'http://iws.ibpt.org.br/api/deolhonoimposto/' + AMethod + '?' + sParams;
-    sUrl := 'https://apidoni.ibpt.org.br/api/v1/' + AMethod + '?' + sParams;
+    sUrl := 'http://iws.ibpt.org.br/api/deolhonoimposto/' + AMethod + '?' + sParams;
 
-    IdHTTP.IOHandler := IdSSL;
     IdHTTP.Request.ContentType  := 'application/xml';
     IdHTTP.Response.ContentType := 'application/xml';
     IdHTTP.Get(sUrl, Response);
@@ -128,7 +124,6 @@ begin
   finally
     FreeAndNil(Response);
     FreeAndNil(IdHTTP);
-    FreeAndNil(idSSL);
   end;
 end;
 
