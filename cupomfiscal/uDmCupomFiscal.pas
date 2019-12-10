@@ -1552,6 +1552,8 @@ type
     cdsCupomParametrosUSA_CANAL_VENDA: TStringField;
     sdsCupomParametrosESTOQUE_CUPOM: TStringField;
     cdsCupomParametrosESTOQUE_CUPOM: TStringField;
+    sdsCupom_ItensVLR_ICMS_SUBSTITUTO: TFloatField;
+    cdsCupom_ItensVLR_ICMS_SUBSTITUTO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mCupomBeforeDelete(DataSet: TDataSet);
     procedure cdsPedidoCalcFields(DataSet: TDataSet);

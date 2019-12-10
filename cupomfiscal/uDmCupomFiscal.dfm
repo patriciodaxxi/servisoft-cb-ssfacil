@@ -14,7 +14,7 @@ object dmCupomFiscal: TdmCupomFiscal
       'R'#13#10'FROM CUPOMFISCAL CF'#13#10'INNER JOIN PESSOA P ON (CF.ID_CLIENTE = ' +
       'P.CODIGO)'#13#10'LEFT JOIN CONDPGTO CP ON (CP.ID = CF.ID_CONDPGTO)'#13#10'LE' +
       'FT JOIN TIPOCOBRANCA TC ON (TC.ID = CF.ID_TIPOCOBRANCA)'#13#10'LEFT JO' +
-      'IN PESSOA V ON (CF.ID_VENDEDOR = V.CODIGO)'#13#10
+      'IN PESSOA V ON (CF.ID_VENDEDOR = V.CODIGO)'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -603,7 +603,7 @@ object dmCupomFiscal: TdmCupomFiscal
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 32
+    Left = 34
     Top = 104
     object sdsCupom_ItensID: TIntegerField
       FieldName = 'ID'
@@ -827,6 +827,9 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object sdsCupom_ItensVLR_JUROS: TFloatField
       FieldName = 'VLR_JUROS'
+    end
+    object sdsCupom_ItensVLR_ICMS_SUBSTITUTO: TFloatField
+      FieldName = 'VLR_ICMS_SUBSTITUTO'
     end
   end
   object cdsCupom_Itens: TClientDataSet
@@ -1066,6 +1069,9 @@ object dmCupomFiscal: TdmCupomFiscal
     end
     object cdsCupom_ItensVLR_JUROS: TFloatField
       FieldName = 'VLR_JUROS'
+    end
+    object cdsCupom_ItensVLR_ICMS_SUBSTITUTO: TFloatField
+      FieldName = 'VLR_ICMS_SUBSTITUTO'
     end
   end
   object dsCupom_Itens: TDataSource

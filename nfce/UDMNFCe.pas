@@ -648,6 +648,7 @@ type
     mItensNFePerc_Icms_Efet: TFloatField;
     mItensNFePERC_BASE_RED_EFET: TFloatField;
     cdsCupomFiscalVLR_OUTROS: TFloatField;
+    mItensNFeVlr_Icms_Substituto: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);

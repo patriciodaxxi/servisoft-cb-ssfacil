@@ -354,10 +354,11 @@ var
   vBaseSTRet : Real;
   vVlrSTRet : Real;
 begin
-  fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat := 0;
-  fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat  := 0;
-  fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat      := 0;
-  fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat      := 0;
+  fDMCupomFiscal.cdsCupom_ItensBASE_ICMSSUBST_RET.AsFloat  := 0;
+  fDMCupomFiscal.cdsCupom_ItensVLR_ICMSSUBST_RET.AsFloat   := 0;
+  fDMCupomFiscal.cdsCupom_ItensVLR_BASE_EFET.AsFloat       := 0;
+  fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_EFE.AsFloat        := 0;
+  fDMCupomFiscal.cdsCupom_ItensVLR_ICMS_SUBSTITUTO.AsFloat := 0;
   if (fDMCupomFiscal.cdsCFOPENVIAR_BASE_ST.AsString <> 'S') then
     exit;
   if (fDMCupomFiscal.cdsCFOPSUBSTITUICAO_TRIB.AsString = 'S') then
