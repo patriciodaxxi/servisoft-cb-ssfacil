@@ -25,6 +25,8 @@ type
     Memo1: TMemo;
     Label1: TLabel;
     RxDBLookupCombo1: TRxDBLookupCombo;
+    Label2: TLabel;
+    Edit1: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
@@ -131,6 +133,8 @@ begin
     fDMCadCFOP.cdsCFOP_VariacaoCOD_IPI.AsString  := RxDBLookupCombo5.Text;
     if RxDBLookupCombo7.Text <> '' then
       fDMCadCFOP.cdsCFOP_VariacaoCOD_ENQ.AsString  := RxDBLookupCombo7.Text;
+
+    fDMCadCFOP.cdsCFOP_VariacaoCOD_BENEF.AsString := Edit1.Text;
     fDMCadCFOP.cdsCFOP_Variacao.Post;
   end;
   Close;

@@ -877,6 +877,10 @@ object DMCadCFOP: TDMCadCFOP
       FixedChar = True
       Size = 8
     end
+    object sdsCFOP_VariacaoCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object cdsCFOP_Variacao: TClientDataSet
     Aggregates = <>
@@ -1069,6 +1073,10 @@ object DMCadCFOP: TDMCadCFOP
       ProviderFlags = []
       Size = 15
       Calculated = True
+    end
+    object cdsCFOP_VariacaoCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
   object dsCFOP_Variacao: TDataSource

@@ -1,7 +1,7 @@
 object frmCadCFOP_Ger: TfrmCadCFOP_Ger
-  Left = 141
-  Top = 251
-  Width = 760
+  Left = 244
+  Top = 191
+  Width = 794
   Height = 324
   Caption = 'frmCadCFOP_Ger'
   Color = clMoneyGreen
@@ -18,7 +18,7 @@ object frmCadCFOP_Ger: TfrmCadCFOP_Ger
   object RzGroupBox1: TRzGroupBox
     Left = 0
     Top = 0
-    Width = 744
+    Width = 786
     Height = 106
     Align = alTop
     BorderColor = clNavy
@@ -94,22 +94,36 @@ object frmCadCFOP_Ger: TfrmCadCFOP_Ger
       Font.Style = []
       ParentFont = False
     end
+    object Label2: TLabel
+      Left = 588
+      Top = 24
+      Width = 74
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'C.Benef. Fiscal:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
     object RxDBLookupCombo5: TRxDBLookupCombo
       Left = 166
       Top = 60
-      Width = 394
+      Width = 345
       Height = 21
       DropDownCount = 8
       DropDownWidth = 500
       LookupField = 'ID'
       LookupDisplay = 'COD_IPI;NOME'
       LookupSource = DMCadCFOP.dsTab_CSTIPI
-      TabOrder = 2
+      TabOrder = 3
     end
     object RxDBLookupCombo4: TRxDBLookupCombo
       Left = 166
       Top = 16
-      Width = 394
+      Width = 345
       Height = 21
       DropDownCount = 8
       DropDownWidth = 700
@@ -121,40 +135,49 @@ object frmCadCFOP_Ger: TfrmCadCFOP_Ger
     object RxDBLookupCombo7: TRxDBLookupCombo
       Left = 166
       Top = 82
-      Width = 394
+      Width = 345
       Height = 21
       DropDownCount = 8
       DropDownWidth = 700
       LookupField = 'ID'
       LookupDisplay = 'CODIGO;DESCRICAO'
       LookupSource = DMCadCFOP.dsEnqIPI
-      TabOrder = 3
+      TabOrder = 4
     end
     object CheckBox1: TCheckBox
-      Left = 576
+      Left = 520
       Top = 80
       Width = 97
       Height = 17
       Caption = 'Calcular ST'
-      TabOrder = 4
+      TabOrder = 5
     end
     object RxDBLookupCombo1: TRxDBLookupCombo
       Left = 166
       Top = 38
-      Width = 394
+      Width = 345
       Height = 21
       DropDownCount = 8
       DropDownWidth = 700
       LookupField = 'ID'
       LookupDisplay = 'COD_CST;PERCENTUAL;NOME'
       LookupSource = DMCadCFOP.dsTab_CSTICMS_Simples
+      TabOrder = 2
+    end
+    object Edit1: TEdit
+      Left = 663
+      Top = 15
+      Width = 112
+      Height = 21
+      CharCase = ecUpperCase
+      MaxLength = 8
       TabOrder = 1
     end
   end
   object Panel3: TPanel
     Left = 0
-    Top = 248
-    Width = 744
+    Top = 255
+    Width = 786
     Height = 38
     Align = alBottom
     Color = 8404992
@@ -307,8 +330,8 @@ object frmCadCFOP_Ger: TfrmCadCFOP_Ger
   object RzGroupBox4: TRzGroupBox
     Left = 0
     Top = 106
-    Width = 744
-    Height = 142
+    Width = 786
+    Height = 149
     Align = alClient
     BorderColor = clNavy
     BorderInner = fsButtonUp

@@ -862,7 +862,7 @@ begin
     sds.CommandText := 'select ID, ITEM, ID_CSTICMS, ID_CSTIPI, ID_PIS, ID_COFINS, ID_OPERACAO_NOTA, TIPO_EMPRESA, TIPO_CLIENTE, UF_CLIENTE, '
                      + 'FINALIDADE, CONTROLAR_ICMS, CONTROLAR_REDUCAO, CONTROLAR_IPI, CONTROLAR_SUBSTICMS, CONTROLAR_DIFERIMENTO, NOME, '
                      + 'PESSOA_CLIENTE, LEI, PERC_TRIBUTO, PERC_PIS, PERC_COFINS, TIPO_PIS, TIPO_COFINS, ID_OBS_LEI, ID_ENQIPI, '
-                     + 'TIPO_CONSUMIDOR, TIPO_CONTRIBUINTE, CALCULAR_ST '
+                     + 'TIPO_CONSUMIDOR, TIPO_CONTRIBUINTE, CALCULAR_ST, COD_BENEF '
                      + 'FROM tab_cfop_variacao '
                      + 'WHERE ID = :ID ';
     sds.ParamByName('ID').AsInteger := fDMCadCFOP.cdsCFOP_ConsultaID.AsInteger;

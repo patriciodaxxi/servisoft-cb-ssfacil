@@ -711,6 +711,7 @@ type
       Shift: TShiftState);
     procedure Personalizadonafilial1Click(Sender: TObject);
     procedure Etiqueta1Click(Sender: TObject);
+    procedure pnlCAEEnter(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -894,6 +895,7 @@ begin
   Edit2.Visible            := (fDMCadPessoa.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
 
   btnFiscalProduto.Visible := (fDMCadPessoa.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S');
+  TS_CAE.TabVisible        := (fDMCadPessoa.qParametros_GeralUSA_CAE_PESSOA.AsString = 'S');
 end;
 
 procedure TfrmCadPessoa.btnInserirClick(Sender: TObject);
@@ -1685,6 +1687,7 @@ end;
 procedure TfrmCadPessoa.Panel3Enter(Sender: TObject);
 begin
   if not (fDMCadPessoa.cdsPessoa_Fiscal.State in [dsEdit, dsInsert]) then
+  begin
     if not fDMCadPessoa.cdsPessoa_Fiscal.IsEmpty then
       fDMCadPessoa.cdsPessoa_Fiscal.Edit
     else
@@ -1692,6 +1695,7 @@ begin
       fDMCadPessoa.cdsPessoa_Fiscal.Insert;
       fDMCadPessoa.cdsPessoa_FiscalCODIGO.AsInteger := fDMCadPessoa.cdsPessoaCODIGO.AsInteger;
     end;
+  end;
 end;
 
 procedure TfrmCadPessoa.DBMemo1KeyPress(Sender: TObject; var Key: Char);
@@ -2730,6 +2734,11 @@ begin
   finally
     fDMCadPessoa.cdsPessoa_Consulta.EnableControls;
   end;
+end;
+
+procedure TfrmCadPessoa.pnlCAEEnter(Sender: TObject);
+begin
+  Panel3Enter(Sender);
 end;
 
 end.

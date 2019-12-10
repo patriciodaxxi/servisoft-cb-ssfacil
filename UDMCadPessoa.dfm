@@ -5468,6 +5468,11 @@ object DMCadPessoa: TDMCadPessoa
       FixedChar = True
       Size = 1
     end
+    object qParametros_GeralUSA_CAE_PESSOA: TStringField
+      FieldName = 'USA_CAE_PESSOA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsGrupo_Pessoa: TSQLDataSet
     NoMetadata = True

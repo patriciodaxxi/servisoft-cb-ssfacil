@@ -26,7 +26,7 @@ object frmCadCFOP: TfrmCadCFOP
     Top = 0
     Width = 937
     Height = 608
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -34,7 +34,7 @@ object frmCadCFOP: TfrmCadCFOP
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -150,7 +150,6 @@ object frmCadCFOP: TfrmCadCFOP
           item
             Expanded = False
             FieldName = 'NOME_INTERNO'
-            Width = 64
             Visible = True
           end>
       end
@@ -2039,7 +2038,7 @@ object frmCadCFOP: TfrmCadCFOP
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 11
+            ColCount = 12
             RowCount = 2
             Columns = <
               item
@@ -2128,6 +2127,14 @@ object frmCadCFOP: TfrmCadCFOP
                 FieldName = 'CALCULAR_ST'
                 Title.Alignment = taCenter
                 Title.Caption = 'Calcular ST'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'COD_BENEF'
+                Title.Alignment = taCenter
+                Title.Caption = 'C'#243'd. Benef. Fiscal'
+                Width = 78
                 Visible = True
               end>
           end
