@@ -204,6 +204,8 @@ type
     Label86: TLabel;
     DBEdit69: TDBEdit;
     DBEdit70: TDBEdit;
+    Label87: TLabel;
+    DBEdit71: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);

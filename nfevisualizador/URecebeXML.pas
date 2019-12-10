@@ -378,6 +378,8 @@ type
     Shape7: TShape;
     Label149: TLabel;
     CheckBox2: TCheckBox;
+    Label150: TLabel;
+    DBEdit93: TDBEdit;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -1153,7 +1155,10 @@ begin
            (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSOutr_vCOFINS') or
            (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSQtde_vCOFINS') or
            (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'vCOFINS') then
-          fDMRecebeXML.mItensNotaVlrCofins.AsFloat := fDMRecebeXML.cdsDetalhe.Fields[i].Value;
+          fDMRecebeXML.mItensNotaVlrCofins.AsFloat := fDMRecebeXML.cdsDetalhe.Fields[i].Value
+        else
+        if (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'vICMSSubstituto') then
+          fDMRecebeXML.mItensNotaVlr_Icms_Substituto.AsFloat := fDMRecebeXML.cdsDetalhe.Fields[i].Value;
       end;
     end;
   except
@@ -2494,7 +2499,9 @@ begin
     fDMRecebeXML.cdsNotaFiscal_ItensPERC_BASE_ICMS_RED.AsFloat     := fDMRecebeXML.mItensNotaPercRedIcms.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat     := fDMRecebeXML.mItensNotaBaseCSTRet.AsFloat;
     fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat      := fDMRecebeXML.mItensNotaVlrIcmsCSTRet.AsFloat;
-    fDMRecebeXML.cdsNotaFiscal_ItensPERC_MVA.AsFloat                := fDMRecebeXML.mItensNotaPercMVAST.AsFloat;
+    fDMRecebeXML.cdsNotaFiscal_ItensPERC_MVA.AsFloat               := fDMRecebeXML.mItensNotaPercMVAST.AsFloat;
+    //10/12/2019
+    fDMRecebeXML.cdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO.AsFloat    := fDMRecebeXML.mItensNotaVlr_Icms_Substituto.AsFloat;
     //****************
 
     //24/02/2019
@@ -4771,6 +4778,7 @@ begin
       Move_Campos(vTipoIcms+'vBCSTRet','BaseCSTRet','N');
       Move_Campos(vTipoIcms+'vICMSSTRet','VlrIcmsCSTRet','N');
       Move_Campos(vTipoIcms+'pST','PercIcmsST','N');
+      Move_Campos(vTipoIcms+'vICMSSubstituto','Vlr_Icms_Substituto','N');
       Move_Campos(vTipoIcms+'pRedBCEfet','Perc_Base_Red_Efet','N');
       Move_Campos(vTipoIcms+'vBCEfet','Vlr_Base_Efet','N');
       Move_Campos(vTipoIcms+'pICMSEfet','Perc_ICMS_Efet','N');
@@ -4797,7 +4805,6 @@ begin
         fDMRecebeXML.mItensNotaModIcmsST.AsString          := '';
         fDMRecebeXML.mItensNotaBaseCSTRet.AsFloat          := fDMRecebeXML.cdsDetalheICMSST_vBCSTRet.AsFloat;
         fDMRecebeXML.mItensNotaVlrIcmsCSTRet.AsFloat       := fDMRecebeXML.cdsDetalheICMSST_vICMSSTRet.AsFloat;
-
 
         //Move_Campos(vTipoIcms+'pMVAST','PercMVAST','N');
         //Move_Campos(vTipoIcms+'pRedBCST','PercRedBCST','N');
@@ -4828,6 +4835,7 @@ begin
       Move_Campos(vTipoIcms+'vBCSTRet','BaseCSTRet','N');
       Move_Campos(vTipoIcms+'vICMSSTRet','VlrIcmsCSTRet','N');
       Move_Campos(vTipoIcms+'pST','PercIcmsST','N');
+      Move_Campos(vTipoIcms+'vICMSSubstituto','Vlr_Icms_Substituto','N');
       Move_Campos(vTipoIcms+'pRedBCEfet','Perc_Base_Red_Efet','N');
       Move_Campos(vTipoIcms+'vBCEfet','Vlr_Base_Efet','N');
       Move_Campos(vTipoIcms+'pICMSEfet','Perc_ICMS_Efet','N');
@@ -4860,6 +4868,8 @@ begin
       Move_Campos(vTipoIcms+'vICMSSTRet','VlrIcmsCSTRet','N');
 
       Move_Campos(vTipoIcms+'pST','PercIcmsST','N');
+      Move_Campos(vTipoIcms+'vICMSSubstituto','Vlr_Icms_Substituto','N');
+
       Move_Campos(vTipoIcms+'pRedBCEfet','Perc_Base_Red_Efet','N');
       Move_Campos(vTipoIcms+'vBCEfet','Vlr_Base_Efet','N');
       Move_Campos(vTipoIcms+'pICMSEfet','Perc_ICMS_Efet','N');

@@ -375,10 +375,10 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
     Top = 145
     Width = 713
     Height = 402
-    ActivePage = TS_Itens
+    ActivePage = TS_Impostos
     ActivePageDefault = TS_Itens
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 3
     FixedDimension = 19
     object TS_Itens: TRzTabSheet
@@ -921,7 +921,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
         Left = 208
         Top = 13
         Width = 187
-        Height = 161
+        Height = 200
         Caption = ' ICMS ST '
         Color = clMoneyGreen
         FlatColor = clBlack
@@ -960,7 +960,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
         end
         object Label29: TLabel
           Left = 3
-          Top = 92
+          Top = 91
           Width = 90
           Height = 13
           Alignment = taRightJustify
@@ -968,7 +968,7 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
         end
         object Label30: TLabel
           Left = 15
-          Top = 119
+          Top = 143
           Width = 78
           Height = 13
           Alignment = taRightJustify
@@ -976,11 +976,19 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
         end
         object Label31: TLabel
           Left = 24
-          Top = 137
+          Top = 161
           Width = 69
           Height = 13
           Alignment = taRightJustify
           Caption = 'Vlr. ST Retida:'
+        end
+        object Label37: TLabel
+          Left = 8
+          Top = 116
+          Width = 85
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'V.Icms Substituto:'
         end
         object DBEdit16: TDBEdit
           Left = 96
@@ -1039,25 +1047,36 @@ object frmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens
         end
         object DBEdit21: TDBEdit
           Left = 96
-          Top = 113
+          Top = 137
           Width = 88
           Height = 19
           Ctl3D = False
           DataField = 'BASE_ICMSSUBST_RET'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           ParentCtl3D = False
-          TabOrder = 5
+          TabOrder = 6
         end
         object DBEdit22: TDBEdit
           Left = 96
-          Top = 131
+          Top = 155
           Width = 88
           Height = 19
           Ctl3D = False
           DataField = 'VLR_ICMSSUBST_RET'
           DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
           ParentCtl3D = False
-          TabOrder = 6
+          TabOrder = 7
+        end
+        object DBEdit30: TDBEdit
+          Left = 96
+          Top = 108
+          Width = 88
+          Height = 19
+          Ctl3D = False
+          DataField = 'VLR_ICMS_SUBSTITUTO'
+          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+          ParentCtl3D = False
+          TabOrder = 5
         end
       end
       object RzGroupBox3: TRzGroupBox

@@ -2227,7 +2227,7 @@ object frmRecebeXML: TfrmRecebeXML
           Left = 1
           Top = 1
           Width = 1096
-          Height = 269
+          Height = 259
           Align = alClient
           Ctl3D = False
           DataSource = DMRecebeXML.dsmItensNota
@@ -2727,9 +2727,9 @@ object frmRecebeXML: TfrmRecebeXML
         end
         object PageControl1: TPageControl
           Left = 1
-          Top = 270
+          Top = 260
           Width = 1096
-          Height = 153
+          Height = 163
           ActivePage = TabSheet8
           Align = alBottom
           Font.Charset = DEFAULT_CHARSET
@@ -2815,7 +2815,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label127: TLabel
               Left = 397
-              Top = 28
+              Top = 25
               Width = 64
               Height = 13
               Alignment = taRightJustify
@@ -2823,7 +2823,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label128: TLabel
               Left = 424
-              Top = 10
+              Top = 7
               Width = 37
               Height = 13
               Alignment = taRightJustify
@@ -2839,7 +2839,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label136: TLabel
               Left = 417
-              Top = 46
+              Top = 43
               Width = 44
               Height = 13
               Alignment = taRightJustify
@@ -2863,7 +2863,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label138: TLabel
               Left = 433
-              Top = 64
+              Top = 61
               Width = 28
               Height = 13
               Alignment = taRightJustify
@@ -2903,7 +2903,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label143: TLabel
               Left = 397
-              Top = 86
+              Top = 100
               Width = 64
               Height = 13
               Alignment = taRightJustify
@@ -2911,7 +2911,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label144: TLabel
               Left = 402
-              Top = 104
+              Top = 118
               Width = 58
               Height = 13
               Alignment = taRightJustify
@@ -2919,7 +2919,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label146: TLabel
               Left = 404
-              Top = 129
+              Top = 141
               Width = 56
               Height = 13
               Alignment = taRightJustify
@@ -2927,11 +2927,19 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object Label147: TLabel
               Left = 737
-              Top = 128
+              Top = 140
               Width = 57
               Height = 13
               Alignment = taRightJustify
               Caption = 'Posse Prod:'
+            end
+            object Label150: TLabel
+              Left = 376
+              Top = 79
+              Width = 85
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'V.Icms Substituto:'
             end
             object RxDBLookupCombo2: TRxDBLookupCombo
               Left = 80
@@ -3049,7 +3057,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object DBEdit78: TDBEdit
               Left = 464
-              Top = 22
+              Top = 19
               Width = 100
               Height = 19
               Ctl3D = False
@@ -3060,7 +3068,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object DBEdit79: TDBEdit
               Left = 464
-              Top = 4
+              Top = 1
               Width = 100
               Height = 19
               Ctl3D = False
@@ -3097,7 +3105,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object DBEdit84: TDBEdit
               Left = 464
-              Top = 40
+              Top = 37
               Width = 100
               Height = 19
               Ctl3D = False
@@ -3130,7 +3138,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object DBEdit86: TDBEdit
               Left = 464
-              Top = 58
+              Top = 55
               Width = 100
               Height = 19
               Ctl3D = False
@@ -3148,7 +3156,7 @@ object frmRecebeXML: TfrmRecebeXML
               DataField = 'Vlr_Base_Efet'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 18
+              TabOrder = 19
             end
             object DBEdit88: TDBEdit
               Left = 696
@@ -3160,7 +3168,7 @@ object frmRecebeXML: TfrmRecebeXML
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
               ReadOnly = True
-              TabOrder = 17
+              TabOrder = 18
             end
             object DBEdit89: TDBEdit
               Left = 696
@@ -3171,7 +3179,7 @@ object frmRecebeXML: TfrmRecebeXML
               DataField = 'Perc_ICMS_Efet'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 19
+              TabOrder = 20
             end
             object DBEdit90: TDBEdit
               Left = 696
@@ -3182,45 +3190,45 @@ object frmRecebeXML: TfrmRecebeXML
               DataField = 'Vlr_ICMS_Efet'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 20
+              TabOrder = 21
             end
             object DBEdit91: TDBEdit
               Left = 464
-              Top = 80
+              Top = 94
               Width = 100
               Height = 19
               Ctl3D = False
               DataField = 'BaseCSTRet'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 15
+              TabOrder = 16
             end
             object DBEdit92: TDBEdit
               Left = 464
-              Top = 98
+              Top = 112
               Width = 100
               Height = 19
               Ctl3D = False
               DataField = 'VlrIcmsCSTRet'
               DataSource = DMRecebeXML.dsmItensNota
               ParentCtl3D = False
-              TabOrder = 16
+              TabOrder = 17
             end
             object DBCheckBox11: TDBCheckBox
               Left = 612
-              Top = 90
+              Top = 104
               Width = 92
               Height = 17
               Caption = 'Gerar Estoque'
               DataField = 'Gerar_Estoque'
               DataSource = DMRecebeXML.dsmItensNota
-              TabOrder = 21
+              TabOrder = 22
               ValueChecked = 'S'
               ValueUnchecked = 'N'
             end
             object RxDBComboBox3: TRxDBComboBox
               Left = 463
-              Top = 121
+              Top = 133
               Width = 257
               Height = 21
               Style = csDropDownList
@@ -3243,7 +3251,7 @@ object frmRecebeXML: TfrmRecebeXML
                 '10 - Outros Insumos'
                 '99 - Outras')
               ParentCtl3D = False
-              TabOrder = 22
+              TabOrder = 23
               Values.Strings = (
                 '00'
                 '01'
@@ -3260,7 +3268,7 @@ object frmRecebeXML: TfrmRecebeXML
             end
             object RxDBComboBox4: TRxDBComboBox
               Left = 797
-              Top = 121
+              Top = 133
               Width = 91
               Height = 21
               Style = csDropDownList
@@ -3271,10 +3279,21 @@ object frmRecebeXML: TfrmRecebeXML
               Items.Strings = (
                 'Empresa'
                 'Terceiro')
-              TabOrder = 23
+              TabOrder = 24
               Values.Strings = (
                 'E'
                 'T')
+            end
+            object DBEdit93: TDBEdit
+              Left = 464
+              Top = 73
+              Width = 100
+              Height = 19
+              Ctl3D = False
+              DataField = 'Vlr_Icms_Substituto'
+              DataSource = DMRecebeXML.dsmItensNota
+              ParentCtl3D = False
+              TabOrder = 15
             end
           end
           object TabSheet9: TTabSheet
@@ -3288,7 +3307,7 @@ object frmRecebeXML: TfrmRecebeXML
             ParentFont = False
             DesignSize = (
               1048
-              145)
+              155)
             object Label106: TLabel
               Left = 57
               Top = 44

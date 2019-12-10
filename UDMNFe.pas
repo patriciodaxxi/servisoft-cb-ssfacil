@@ -1227,6 +1227,7 @@ type
     qDrawObs: TSQLQuery;
     qDrawObsCONTADOR: TIntegerField;
     qParametros_NFeIMP_CONDPGTO_DADOS: TStringField;
+    mItensNFeVlr_Icms_Substituto: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);

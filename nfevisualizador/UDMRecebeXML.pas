@@ -2332,6 +2332,12 @@ type
     qDeParaCOD_CFOP_PED: TStringField;
     qDeParaCOM_ST: TStringField;
     qParametros_RecXMLUSA_CONTROLE_PRODUTO: TStringField;
+    mItensNotaVlr_Icms_Substituto: TFloatField;
+    sdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO: TFloatField;
+    cdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO: TFloatField;
+    cdsDetalheICMS60_vICMSSubstituto: TStringField;
+    cdsDetalheICMSST_vICMSSubstituto: TFloatField;
+    cdsDetalheICMSSN500_vICMSSubstituto: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
