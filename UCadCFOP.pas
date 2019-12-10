@@ -197,7 +197,7 @@ type
     procedure prc_Inserir_Registro;
     procedure prc_Excluir_Registro;
     procedure prc_Gravar_Registro;
-    procedure prc_Consultar;
+    procedure prc_Consultar(ID : Integer = 0);
     procedure prc_Le_CFOP_Orig;
     procedure prc_Limpar_Edit_Consulta;
     procedure prc_Posiciona_CFOP;
@@ -314,20 +314,25 @@ begin
   uUtilPadrao.fnc_Busca_Nome_Filial;
 end;
 
-procedure TfrmCadCFOP.prc_Consultar;
+procedure TfrmCadCFOP.prc_Consultar(ID : Integer = 0);
 begin
   fDMCadCFOP.cdsCFOP_Consulta.IndexFieldNames := 'CODCFOP';
   fDMCadCFOP.cdsCFOP_Consulta.Close;
-  fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.ctConsulta + ' WHERE 0 = 0';
-  if Trim(edtNome.Text) <> '' then
-    fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND NOME LIKE ' + QuotedStr('%'+edtNome.Text+'%');
-  if Trim(edtCFOP.Text) <> '' then
-    fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND CODCFOP = ' + QuotedStr(edtCFOP.Text);
-  if not ckInativo.Checked then
-    fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND INATIVO = ' + QuotedStr('N');
-  case ComboBox1.ItemIndex of
-    0: fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND ENTRADASAIDA = ' + QuotedStr('E');
-    1: fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND ENTRADASAIDA = ' + QuotedStr('S');
+  if ID > 0 then
+    fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.ctConsulta + ' WHERE ID = ' + IntToStr(ID)
+  else
+  begin
+    fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.ctConsulta + ' WHERE 0 = 0';
+    if Trim(edtNome.Text) <> '' then
+      fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND NOME LIKE ' + QuotedStr('%'+edtNome.Text+'%');
+    if Trim(edtCFOP.Text) <> '' then
+      fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND CODCFOP = ' + QuotedStr(edtCFOP.Text);
+    if not ckInativo.Checked then
+      fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND INATIVO = ' + QuotedStr('N');
+    case ComboBox1.ItemIndex of
+      0: fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND ENTRADASAIDA = ' + QuotedStr('E');
+      1: fDMCadCFOP.sdsCFOP_Consulta.CommandText := fDMCadCFOP.sdsCFOP_Consulta.CommandText + ' AND ENTRADASAIDA = ' + QuotedStr('S');
+    end;
   end;
   fDMCadCFOP.cdsCFOP_Consulta.Open;
 end;
@@ -831,14 +836,14 @@ begin
     sds.ParamByName('ID').AsInteger := fDMCadCFOP.cdsCFOP_ConsultaID.AsInteger;
     sds.Open;
 
-    prc_Inserir_Registro;
-
+    fDMCadCFOP.prc_Inserir;
     try
       for i := 0 to ( sds.FieldCount - 1) do
       begin
         if (sds.Fields[i].FieldName <> 'ID') then
         begin
-          for i2 := 0 to ( sds.FieldCount - 1) do
+          //for i2 := 0 to ( sds.FieldCount - 1) do
+          for i2 := 0 to ( fDMCadCFOP.cdsCFOP.FieldCount - 1) do
           begin
             if fDMCadCFOP.cdsCFOP.Fields[i2].FieldName = sds.Fields[i].FieldName then
             begin
@@ -852,8 +857,49 @@ begin
     end;
     
     fDMCadCFOP.prc_Gravar;
+
+    SDS.Close;
+    sds.CommandText := 'select ID, ITEM, ID_CSTICMS, ID_CSTIPI, ID_PIS, ID_COFINS, ID_OPERACAO_NOTA, TIPO_EMPRESA, TIPO_CLIENTE, UF_CLIENTE, '
+                     + 'FINALIDADE, CONTROLAR_ICMS, CONTROLAR_REDUCAO, CONTROLAR_IPI, CONTROLAR_SUBSTICMS, CONTROLAR_DIFERIMENTO, NOME, '
+                     + 'PESSOA_CLIENTE, LEI, PERC_TRIBUTO, PERC_PIS, PERC_COFINS, TIPO_PIS, TIPO_COFINS, ID_OBS_LEI, ID_ENQIPI, '
+                     + 'TIPO_CONSUMIDOR, TIPO_CONTRIBUINTE, CALCULAR_ST '
+                     + 'FROM tab_cfop_variacao '
+                     + 'WHERE ID = :ID ';
+    sds.ParamByName('ID').AsInteger := fDMCadCFOP.cdsCFOP_ConsultaID.AsInteger;
+    sds.Open;
+    while not sds.Eof do
+    begin
+      fDMCadCFOP.prc_Inserir_Itens;
+      try
+        for i := 0 to ( sds.FieldCount - 1) do
+        begin
+          if (sds.Fields[i].FieldName = 'TIPO_CONSUMIDOR') and (sds.Fields[i].IsNull) then
+            fDMCadCFOP.cdsCFOP_VariacaoTIPO_CONSUMIDOR.AsInteger := 0
+          else
+          if (sds.Fields[i].FieldName <> 'ID') and (sds.Fields[i].FieldName <> 'ITEM') then
+          begin
+            for i2 := 0 to ( fDMCadCFOP.cdsCFOP_Variacao.FieldCount - 1) do
+            begin
+              if fDMCadCFOP.cdsCFOP_Variacao.Fields[i2].FieldName = sds.Fields[i].FieldName then
+              begin
+                fDMCadCFOP.cdsCFOP_Variacao.Fields[i2].AsVariant := sds.Fields[i].Value;
+                Break;
+              end;
+            end;
+          end;
+        end;
+      except
+      end;
+      fDMCadCFOP.cdsCFOP_Variacao.Post;
+      fDMCadCFOP.cdsCFOP_Variacao.ApplyUpdates(0);
+      
+      sds.Next;
+    end;
+
+    prc_Consultar(fDMCadCFOP.cdsCFOPID.AsInteger);
     
     RzPageControl1.ActivePage := TS_Cadastro;
+
     btnAlterarClick(Sender);
 
   finally

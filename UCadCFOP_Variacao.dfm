@@ -896,10 +896,10 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
       end
     end
     object RzGroupBox3: TRzGroupBox
-      Left = 642
-      Top = 119
-      Width = 50
-      Height = 33
+      Left = 630
+      Top = 114
+      Width = 66
+      Height = 61
       BorderColor = clMaroon
       BorderInner = fsButtonUp
       BorderOuter = fsBump
