@@ -513,7 +513,8 @@ begin
     vMsgErro := vMsgErro + #13 + '*** Tipo Empresa não informada!';
   if (cdsCFOPINATIVO.AsString = 'S') and (fnc_Existe_CFOP)  then
     vMsgErro := vMsgErro + #13 + '*** CFOP não pode ser inativada, pois já foi utilizada!';
-  if cdsCFOPINATIVO.AsString <> 'S' then
+  //09/12/2019  Vai permitir a mesma CFOP cadastrada mais de uma vez
+  {if cdsCFOPINATIVO.AsString <> 'S' then
   begin
     qVerifica_CFOP.Close;
     qVerifica_CFOP.ParamByName('CODCFOP').AsString := cdsCFOPCODCFOP.AsString;
@@ -521,7 +522,7 @@ begin
     if not(qVerifica_CFOP.IsEmpty) and (qVerifica_CFOPID.AsInteger <> cdsCFOPID.AsInteger) then
       vMsgErro := vMsgErro + #13 + '*** CFOP já cadastrada no ID = ' + qVerifica_CFOPID.AsString + ', A CFOP pode estar inativa, ' + #13
                 + 'caso seja isto, favor entrar no cadastro e ativar!';
-  end;
+  end;}
   if trim(vMsgErro) <> '' then
     exit;
 

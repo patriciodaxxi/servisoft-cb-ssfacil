@@ -21,9 +21,9 @@ object frmCadPessoa: TfrmCadPessoa
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1075
-    Height = 672
-    ActivePage = TS_Consulta
+    Width = 1083
+    Height = 680
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -35,7 +35,7 @@ object frmCadPessoa: TfrmCadPessoa
     Font.Style = []
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -50,7 +50,7 @@ object frmCadPessoa: TfrmCadPessoa
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1071
+        Width = 1079
         Height = 93
         Align = alTop
         Color = clSilver
@@ -472,7 +472,7 @@ object frmCadPessoa: TfrmCadPessoa
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1071
+        Width = 1079
         Height = 30
         Align = alTop
         Color = clSilver
@@ -783,8 +783,8 @@ object frmCadPessoa: TfrmCadPessoa
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 632
-        Width = 1071
+        Top = 640
+        Width = 1079
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -805,8 +805,8 @@ object frmCadPessoa: TfrmCadPessoa
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 123
-        Width = 1071
-        Height = 509
+        Width = 1079
+        Height = 517
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPessoa.dsPessoa_Consulta
@@ -948,7 +948,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_CONTATO'
             Title.Alignment = taCenter
             Title.Caption = 'Contato'
-            Width = 64
             Visible = True
           end
           item
@@ -1003,7 +1002,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Cli'
-            Width = 64
             Visible = True
           end
           item
@@ -1012,7 +1010,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_FORNECEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Forn.'
-            Width = 64
             Visible = True
           end
           item
@@ -1030,7 +1027,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Repr.'
-            Width = 64
             Visible = True
           end
           item
@@ -1039,7 +1035,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'ORGAO_PUBLICO'
             Title.Alignment = taCenter
             Title.Caption = 'Org'#227'o P'#250'blico'
-            Width = 64
             Visible = True
           end
           item
@@ -1047,7 +1042,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTPEDIDO'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Pedido'
-            Width = 64
             Visible = True
           end
           item
@@ -1055,7 +1049,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Faturamento'
-            Width = 64
             Visible = True
           end
           item
@@ -1103,7 +1096,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_GRUPO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Grupo'
-            Width = 64
             Visible = True
           end
           item
@@ -1111,7 +1103,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_CONTA_ORCAMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Or'#231'amento'
-            Width = 64
             Visible = True
           end
           item
@@ -1119,7 +1110,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_CLI'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Cliente'
-            Width = 64
             Visible = True
           end
           item
@@ -1127,7 +1117,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_FORN'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Fornecedor'
-            Width = 64
             Visible = True
           end
           item
@@ -1135,7 +1124,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_TRANSP'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Transp.'
-            Width = 64
             Visible = True
           end
           item
@@ -1150,7 +1138,6 @@ object frmCadPessoa: TfrmCadPessoa
             Expanded = False
             FieldName = 'INSCR_EST'
             Title.Caption = 'Inscr. Estadual'
-            Width = 64
             Visible = True
           end
           item
@@ -1166,7 +1153,6 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_REGIME'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Regime'
-            Width = 64
             Visible = True
           end
           item
@@ -1189,7 +1175,7 @@ object frmCadPessoa: TfrmCadPessoa
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1071
+        Width = 1079
         Height = 30
         Align = alTop
         Color = 8404992
@@ -1418,8 +1404,8 @@ object frmCadPessoa: TfrmCadPessoa
       object RZPageControlDados: TRzPageControl
         Left = 0
         Top = 30
-        Width = 1071
-        Height = 619
+        Width = 1079
+        Height = 627
         ActivePage = TS_Pessoa_Dados
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
@@ -1444,8 +1430,8 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel9: TPanel
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 415
             Align = alClient
             TabOrder = 0
             object Label1: TLabel
@@ -2456,354 +2442,419 @@ object frmCadPessoa: TfrmCadPessoa
               DataSource = DMCadPessoa.dsPessoa
               TabOrder = 32
             end
-            object RzPageControl3: TRzPageControl
-              Left = 1
-              Top = 406
-              Width = 1065
-              Height = 189
-              ActivePage = ts_Vendedor
-              Align = alBottom
-              TabIndex = 1
-              TabOrder = 43
-              FixedDimension = 19
-              object ts_Contatos: TRzTabSheet
-                Caption = 'Contatos'
-                object Panel8: TPanel
-                  Left = 0
-                  Top = 0
-                  Width = 1061
-                  Height = 166
-                  Align = alClient
+          end
+          object RzPageControl3: TRzPageControl
+            Left = 0
+            Top = 415
+            Width = 1075
+            Height = 189
+            ActivePage = TS_CAE
+            Align = alBottom
+            TabIndex = 2
+            TabOrder = 1
+            FixedDimension = 19
+            object ts_Contatos: TRzTabSheet
+              Caption = 'Contatos'
+              object pnlContato: TPanel
+                Left = 0
+                Top = 0
+                Width = 1071
+                Height = 166
+                Align = alClient
+                TabOrder = 0
+                object Panel13: TPanel
+                  Left = 1
+                  Top = 1
+                  Width = 1069
+                  Height = 38
+                  Align = alTop
+                  Caption = 'CONTATOS'
+                  Color = 16767411
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -19
+                  Font.Name = 'Arial'
+                  Font.Style = [fsBold]
+                  ParentFont = False
                   TabOrder = 0
-                  object Panel13: TPanel
-                    Left = 1
-                    Top = 1
-                    Width = 1059
-                    Height = 38
-                    Align = alTop
-                    Caption = 'CONTATOS'
-                    Color = 16767411
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clBlack
-                    Font.Height = -19
-                    Font.Name = 'Arial'
-                    Font.Style = [fsBold]
-                    ParentFont = False
-                    TabOrder = 0
-                  end
-                  object SMDBGrid2: TSMDBGrid
-                    Left = 1
-                    Top = 39
-                    Width = 1059
-                    Height = 126
-                    Align = alClient
-                    Ctl3D = False
-                    DataSource = DMCadPessoa.dsPessoa_Contato
-                    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-                    ParentCtl3D = False
-                    TabOrder = 1
-                    TitleFont.Charset = DEFAULT_CHARSET
-                    TitleFont.Color = clWindowText
-                    TitleFont.Height = -11
-                    TitleFont.Name = 'MS Sans Serif'
-                    TitleFont.Style = []
-                    Flat = True
-                    BandsFont.Charset = DEFAULT_CHARSET
-                    BandsFont.Color = clWindowText
-                    BandsFont.Height = -11
-                    BandsFont.Name = 'MS Sans Serif'
-                    BandsFont.Style = []
-                    Groupings = <>
-                    GridStyle.Style = gsCustom
-                    GridStyle.OddColor = clWindow
-                    GridStyle.EvenColor = clWindow
-                    TitleHeight.PixelCount = 24
-                    FooterColor = clBtnFace
-                    ExOptions = [eoBooleanAsCheckBox, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
-                    RegistryKey = 'Software\Scalabium'
-                    RegistrySection = 'SMDBGrid'
-                    WidthOfIndicator = 11
-                    DefaultRowHeight = 17
-                    ScrollBars = ssHorizontal
-                    ColCount = 6
-                    RowCount = 2
-                    Columns = <
-                      item
-                        Expanded = False
-                        FieldName = 'ENVIAR_NFE'
-                        Title.Alignment = taCenter
-                        Title.Caption = 'Enviar NFe (S/N)'
-                        Title.Color = 16767411
-                        Width = 77
-                        Visible = True
-                      end
-                      item
-                        Expanded = False
-                        FieldName = 'CONTATO'
-                        Title.Alignment = taCenter
-                        Title.Caption = 'Contato'
-                        Title.Color = 16767411
-                        Width = 289
-                        Visible = True
-                      end
-                      item
-                        Expanded = False
-                        FieldName = 'EMAIL'
-                        Title.Alignment = taCenter
-                        Title.Caption = 'Email'
-                        Title.Color = 16767411
-                        Width = 200
-                        Visible = True
-                      end
-                      item
-                        Expanded = False
-                        FieldName = 'FONE'
-                        Title.Alignment = taCenter
-                        Title.Caption = 'Fone'
-                        Title.Color = 16767411
-                        Width = 100
-                        Visible = True
-                      end
-                      item
-                        Expanded = False
-                        FieldName = 'SETOR'
-                        Title.Alignment = taCenter
-                        Title.Caption = 'Setor'
-                        Title.Color = 16767411
-                        Visible = True
-                      end>
-                  end
+                end
+                object SMDBGrid2: TSMDBGrid
+                  Left = 1
+                  Top = 39
+                  Width = 1069
+                  Height = 126
+                  Align = alClient
+                  Ctl3D = False
+                  DataSource = DMCadPessoa.dsPessoa_Contato
+                  Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                  ParentCtl3D = False
+                  ReadOnly = True
+                  TabOrder = 1
+                  TitleFont.Charset = DEFAULT_CHARSET
+                  TitleFont.Color = clWindowText
+                  TitleFont.Height = -11
+                  TitleFont.Name = 'MS Sans Serif'
+                  TitleFont.Style = []
+                  Flat = True
+                  BandsFont.Charset = DEFAULT_CHARSET
+                  BandsFont.Color = clWindowText
+                  BandsFont.Height = -11
+                  BandsFont.Name = 'MS Sans Serif'
+                  BandsFont.Style = []
+                  Groupings = <>
+                  GridStyle.Style = gsCustom
+                  GridStyle.OddColor = clWindow
+                  GridStyle.EvenColor = clWindow
+                  TitleHeight.PixelCount = 24
+                  FooterColor = clBtnFace
+                  ExOptions = [eoBooleanAsCheckBox, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+                  RegistryKey = 'Software\Scalabium'
+                  RegistrySection = 'SMDBGrid'
+                  WidthOfIndicator = 11
+                  DefaultRowHeight = 17
+                  ScrollBars = ssHorizontal
+                  ColCount = 6
+                  RowCount = 2
+                  Columns = <
+                    item
+                      Expanded = False
+                      FieldName = 'ENVIAR_NFE'
+                      Title.Alignment = taCenter
+                      Title.Caption = 'Enviar NFe (S/N)'
+                      Title.Color = 16767411
+                      Width = 77
+                      Visible = True
+                    end
+                    item
+                      Expanded = False
+                      FieldName = 'CONTATO'
+                      Title.Alignment = taCenter
+                      Title.Caption = 'Contato'
+                      Title.Color = 16767411
+                      Width = 289
+                      Visible = True
+                    end
+                    item
+                      Expanded = False
+                      FieldName = 'EMAIL'
+                      Title.Alignment = taCenter
+                      Title.Caption = 'Email'
+                      Title.Color = 16767411
+                      Width = 200
+                      Visible = True
+                    end
+                    item
+                      Expanded = False
+                      FieldName = 'FONE'
+                      Title.Alignment = taCenter
+                      Title.Caption = 'Fone'
+                      Title.Color = 16767411
+                      Width = 100
+                      Visible = True
+                    end
+                    item
+                      Expanded = False
+                      FieldName = 'SETOR'
+                      Title.Alignment = taCenter
+                      Title.Caption = 'Setor'
+                      Title.Color = 16767411
+                      Visible = True
+                    end>
                 end
               end
-              object ts_Vendedor: TRzTabSheet
-                Caption = 'Vendedor'
-                object pnlVendedor: TPanel
-                  Left = 0
-                  Top = 0
-                  Width = 1061
-                  Height = 166
-                  Align = alClient
+            end
+            object ts_Vendedor: TRzTabSheet
+              Caption = 'Vendedor'
+              object pnlVendedor: TPanel
+                Left = 0
+                Top = 0
+                Width = 1071
+                Height = 166
+                Align = alClient
+                Enabled = False
+                TabOrder = 0
+                object Label82: TLabel
+                  Left = 5
+                  Top = 22
+                  Width = 103
+                  Height = 13
+                  Alignment = taRightJustify
+                  Caption = 'Tipo Pagto Comiss'#227'o:'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object Label83: TLabel
+                  Left = 49
+                  Top = 43
+                  Width = 59
+                  Height = 13
+                  Alignment = taRightJustify
+                  Caption = '% Comiss'#227'o:'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object Label188: TLabel
+                  Left = 86
+                  Top = 64
+                  Width = 22
+                  Height = 13
+                  Caption = 'C'#243'd:'
+                end
+                object SpeedButton11: TSpeedButton
+                  Left = 176
+                  Top = 55
+                  Width = 23
+                  Height = 22
+                  Hint = 'Busca pr'#243'ximo c'#243'digo'
+                  Glyph.Data = {
+                    E6040000424DE604000000000000360000002800000014000000140000000100
+                    180000000000B0040000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFCFDF9FAFBF2
+                    F1F1EEEEEEEBEBEBE9EAECE4E8E9E2E4E7E3E4E6E4E6E7E6E9EAEBECF0F2F4F7
+                    F2F6F5F7F6F6FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFF1EBE9D0C5BADBDEE2C9CC
+                    CEC1C3C4B6B0AEB1A397AA876AA6764FA87044AC754BB39174C7BCB3D5D6DBE5
+                    E7E8EFEFEEFDFDFDFFFFFFFFFFFFFFFFFFEBE5DC9F6B46DBDBDEC9C8CAB9A796
+                    B68861C18451D29861CD9460CE945CCC9258C58346B26E36C09E83E3E1E3EFF1
+                    F2FBFBFBFFFFFFFFFFFFFFFFFFF5F0EEBC8A63C3A48CC3A58CC68F61CF9B68C8
+                    9565CA9361CD9364C18951BF864FC18853C6884FB8763BCEB3A1F7FCFFFEFEFE
+                    FFFFFFFFFFFFFFFFFFF7F3EFBD916CD5B493D6AD8BD8AA84CB9668CB9664BA85
+                    53BA8A61C6A281BF926DBB814EC08F67B47437BE8C5EEDE6DFFFFFFFFFFFFFFF
+                    FFFFFFFFFFF6F2EEB98F69E3C2A3DDB99AE0BF9CCA9C72BD9473E2CFC0E5D9D0
+                    F1EEECEFE7E3E1CAB1DCC3AACFB193A96B33E4D1BFFFFFFFFFFFFFFFFFFFFFFF
+                    FFF7F2EFBA9069DFBB9BDEBD9DC79F7BD8C4B1F1EDEAFFFFFFFFFFFFFFFFFFFF
+                    FFFFF7F3EEEAD6C4FEFEFEB58560D7BDA9FFFFFFFFFFFFFFFFFFFFFFFFF7F3EF
+                    BD946CDFBC9CD9B996D8B694C8AE97F6F6F6FFFFFFFEFFFFFFFEFFFFFFFFFBF9
+                    F7F4EBE5FFFFFFC1A287D9C5B5FFFFFFFFFFFFFFFFFFFFFFFFF5EEEAB07E53E0
+                    BD9FDCB793E2BE9FCE9E73D0B499FCFAF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                    FFFFFFE2D6CBEBE3DCFFFFFFFFFFFFFFFFFFFFFFFFF9F9F5BEA994C2A797BFA1
+                    92BB9E8CB99C89B39983F7F5F2FFFFFFAB7957BB967BB79676B89778B89777B9
+                    997EECE3DCFFFFFFFFFFFFFFFFFFFFFFFFF5F0E8CAB09BFFFFFFFFFFFFFFFFFF
+                    FFFFFFFFFFFFFFFFFFFFFFFFC9B7A7D3A679DBB088D9AA84DCAD87C7986EE9DB
+                    CDFFFFFFFFFFFFFFFFFFFFFFFFE6D8CEB67B50E8D0BCDFC7B7F3EFEBFFFFFFFE
+                    FFFEFEFFFEFFFFFFFFFFFFBA9F8CD6A57DCF9B6ECD9B6CBF9164E9DDD2FFFFFF
+                    FFFFFFFFFFFFFFFFFFEDE4DCA86B3BBF865CC29776EAE2DBFFFFFFFFFFFFFFFF
+                    FFFDFFFFDED0C4D4B8A3C79B71D1A478CD9E70BF9265E8DDD0FFFFFFFFFFFFFF
+                    FFFFFFFFFFF9F5F2BD8F6DBC8A639D5F2DB58968E0D2C8E7DCD3DAC8B8DECBBA
+                    C09A77D4A882D0A479D2A478D3A77CBF8E64E8DBCFFFFFFFFFFFFFFFFFFFFFFF
+                    FFF7F5F2CAAB93E5CCB7CCA788C29471CDAC8ED9BDA3CAA98AD7B094E8CEB2DB
+                    BEA1DDB995C99D76C0946FC39168EADACFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF
+                    E1D2C6C5A284F6E3D0F0DCC9E6CEB7E6CCB5E5CBB6E7CCB5E5CCB2E3C2A4C299
+                    78CFB9A6D2BEADB58257E7D5C6FFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFDFEFEDA
+                    C9BBBA9675D4B193EDD1B8EED3BCECCEB6D1AF8EBE916DC2A386EEE6E2F9F8F6
+                    FFFFFFBD9A80DBC9BAFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEFFFFFFFDFEFEF6F2
+                    EFD9C8BDBFA38CC3A388B99D83CFBEACFAF6F4F7F4F2FFFFFFFFFFFFFFFFFFF8
+                    F7F5F8F7F4FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                    FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEFFFFFFFFFFFFFFFF
+                    FFFEFEFFFFFFFFFFFFFF}
+                  Margin = 0
+                  OnClick = SpeedButton11Click
+                end
+                object Label184: TLabel
+                  Left = 69
+                  Top = 89
+                  Width = 39
+                  Height = 13
+                  Alignment = taRightJustify
+                  Caption = 'Usu'#225'rio:'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object lblSenha: TLabel
+                  Left = 74
+                  Top = 113
+                  Width = 34
+                  Height = 13
+                  Alignment = taRightJustify
+                  Caption = 'Senha:'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
+                end
+                object Label195: TLabel
+                  Left = 20
+                  Top = 137
+                  Width = 88
+                  Height = 13
+                  Alignment = taRightJustify
+                  Caption = 'Desconto M'#225'ximo:'
+                end
+                object RxDBComboBox4: TRxDBComboBox
+                  Left = 110
+                  Top = 14
+                  Width = 145
+                  Height = 21
+                  Style = csDropDownList
+                  DataField = 'TIPO_COMISSAO'
+                  DataSource = DMCadPessoa.dsPessoa
+                  EnableValues = True
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ItemHeight = 13
+                  Items.Strings = (
+                    'Liquida'#231#227'o do T'#237'tulo'
+                    'Na Emiss'#227'o da Nota'
+                    'Parte na Nota')
+                  ParentFont = False
                   TabOrder = 0
-                  object Label82: TLabel
-                    Left = 5
-                    Top = 22
-                    Width = 103
-                    Height = 13
-                    Alignment = taRightJustify
-                    Caption = 'Tipo Pagto Comiss'#227'o:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object Label83: TLabel
-                    Left = 49
-                    Top = 43
-                    Width = 59
-                    Height = 13
-                    Alignment = taRightJustify
-                    Caption = '% Comiss'#227'o:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object Label188: TLabel
-                    Left = 86
-                    Top = 64
-                    Width = 22
-                    Height = 13
-                    Caption = 'C'#243'd:'
-                  end
-                  object SpeedButton11: TSpeedButton
-                    Left = 176
-                    Top = 55
-                    Width = 23
-                    Height = 22
-                    Hint = 'Busca pr'#243'ximo c'#243'digo'
-                    Glyph.Data = {
-                      E6040000424DE604000000000000360000002800000014000000140000000100
-                      180000000000B0040000C40E0000C40E00000000000000000000FFFFFFFFFFFF
-                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBFCFDF9FAFBF2
-                      F1F1EEEEEEEBEBEBE9EAECE4E8E9E2E4E7E3E4E6E4E6E7E6E9EAEBECF0F2F4F7
-                      F2F6F5F7F6F6FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFF1EBE9D0C5BADBDEE2C9CC
-                      CEC1C3C4B6B0AEB1A397AA876AA6764FA87044AC754BB39174C7BCB3D5D6DBE5
-                      E7E8EFEFEEFDFDFDFFFFFFFFFFFFFFFFFFEBE5DC9F6B46DBDBDEC9C8CAB9A796
-                      B68861C18451D29861CD9460CE945CCC9258C58346B26E36C09E83E3E1E3EFF1
-                      F2FBFBFBFFFFFFFFFFFFFFFFFFF5F0EEBC8A63C3A48CC3A58CC68F61CF9B68C8
-                      9565CA9361CD9364C18951BF864FC18853C6884FB8763BCEB3A1F7FCFFFEFEFE
-                      FFFFFFFFFFFFFFFFFFF7F3EFBD916CD5B493D6AD8BD8AA84CB9668CB9664BA85
-                      53BA8A61C6A281BF926DBB814EC08F67B47437BE8C5EEDE6DFFFFFFFFFFFFFFF
-                      FFFFFFFFFFF6F2EEB98F69E3C2A3DDB99AE0BF9CCA9C72BD9473E2CFC0E5D9D0
-                      F1EEECEFE7E3E1CAB1DCC3AACFB193A96B33E4D1BFFFFFFFFFFFFFFFFFFFFFFF
-                      FFF7F2EFBA9069DFBB9BDEBD9DC79F7BD8C4B1F1EDEAFFFFFFFFFFFFFFFFFFFF
-                      FFFFF7F3EEEAD6C4FEFEFEB58560D7BDA9FFFFFFFFFFFFFFFFFFFFFFFFF7F3EF
-                      BD946CDFBC9CD9B996D8B694C8AE97F6F6F6FFFFFFFEFFFFFFFEFFFFFFFFFBF9
-                      F7F4EBE5FFFFFFC1A287D9C5B5FFFFFFFFFFFFFFFFFFFFFFFFF5EEEAB07E53E0
-                      BD9FDCB793E2BE9FCE9E73D0B499FCFAF9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                      FFFFFFE2D6CBEBE3DCFFFFFFFFFFFFFFFFFFFFFFFFF9F9F5BEA994C2A797BFA1
-                      92BB9E8CB99C89B39983F7F5F2FFFFFFAB7957BB967BB79676B89778B89777B9
-                      997EECE3DCFFFFFFFFFFFFFFFFFFFFFFFFF5F0E8CAB09BFFFFFFFFFFFFFFFFFF
-                      FFFFFFFFFFFFFFFFFFFFFFFFC9B7A7D3A679DBB088D9AA84DCAD87C7986EE9DB
-                      CDFFFFFFFFFFFFFFFFFFFFFFFFE6D8CEB67B50E8D0BCDFC7B7F3EFEBFFFFFFFE
-                      FFFEFEFFFEFFFFFFFFFFFFBA9F8CD6A57DCF9B6ECD9B6CBF9164E9DDD2FFFFFF
-                      FFFFFFFFFFFFFFFFFFEDE4DCA86B3BBF865CC29776EAE2DBFFFFFFFFFFFFFFFF
-                      FFFDFFFFDED0C4D4B8A3C79B71D1A478CD9E70BF9265E8DDD0FFFFFFFFFFFFFF
-                      FFFFFFFFFFF9F5F2BD8F6DBC8A639D5F2DB58968E0D2C8E7DCD3DAC8B8DECBBA
-                      C09A77D4A882D0A479D2A478D3A77CBF8E64E8DBCFFFFFFFFFFFFFFFFFFFFFFF
-                      FFF7F5F2CAAB93E5CCB7CCA788C29471CDAC8ED9BDA3CAA98AD7B094E8CEB2DB
-                      BEA1DDB995C99D76C0946FC39168EADACFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFF
-                      E1D2C6C5A284F6E3D0F0DCC9E6CEB7E6CCB5E5CBB6E7CCB5E5CCB2E3C2A4C299
-                      78CFB9A6D2BEADB58257E7D5C6FFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFDFEFEDA
-                      C9BBBA9675D4B193EDD1B8EED3BCECCEB6D1AF8EBE916DC2A386EEE6E2F9F8F6
-                      FFFFFFBD9A80DBC9BAFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEFFFFFFFDFEFEF6F2
-                      EFD9C8BDBFA38CC3A388B99D83CFBEACFAF6F4F7F4F2FFFFFFFFFFFFFFFFFFF8
-                      F7F5F8F7F4FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-                      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFEFFFFFFFFFFFFFFFF
-                      FFFEFEFFFFFFFFFFFFFF}
-                    Margin = 0
-                    OnClick = SpeedButton11Click
-                  end
-                  object Label184: TLabel
-                    Left = 69
-                    Top = 89
-                    Width = 39
-                    Height = 13
-                    Alignment = taRightJustify
-                    Caption = 'Usu'#225'rio:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object lblSenha: TLabel
-                    Left = 74
-                    Top = 113
-                    Width = 34
-                    Height = 13
-                    Alignment = taRightJustify
-                    Caption = 'Senha:'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object Label195: TLabel
-                    Left = 20
-                    Top = 137
-                    Width = 88
-                    Height = 13
-                    Alignment = taRightJustify
-                    Caption = 'Desconto M'#225'ximo:'
-                  end
-                  object RxDBComboBox4: TRxDBComboBox
-                    Left = 110
-                    Top = 14
-                    Width = 145
-                    Height = 21
-                    Style = csDropDownList
-                    DataField = 'TIPO_COMISSAO'
-                    DataSource = DMCadPessoa.dsPessoa
-                    EnableValues = True
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ItemHeight = 13
-                    Items.Strings = (
-                      'Liquida'#231#227'o do T'#237'tulo'
-                      'Na Emiss'#227'o da Nota'
-                      'Parte na Nota')
-                    ParentFont = False
-                    TabOrder = 0
-                    Values.Strings = (
-                      'D'
-                      'N'
-                      'P')
-                  end
-                  object DBEdit53: TDBEdit
-                    Left = 110
-                    Top = 35
-                    Width = 96
-                    Height = 21
-                    DataField = 'PERC_COMISSAO_VEND'
-                    DataSource = DMCadPessoa.dsPessoa
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                    TabOrder = 1
-                  end
-                  object CurrencyEdit1: TCurrencyEdit
-                    Left = 110
-                    Top = 56
-                    Width = 63
-                    Height = 21
-                    AutoSize = False
-                    DecimalPlaces = 0
-                    DisplayFormat = '0'
-                    TabOrder = 2
-                    OnExit = CurrencyEdit1Exit
-                  end
-                  object RxDBLookupCombo41: TRxDBLookupCombo
-                    Left = 110
-                    Top = 81
-                    Width = 115
-                    Height = 21
-                    DropDownCount = 8
-                    DataField = 'USUARIO_LOG'
-                    DataSource = DMCadPessoa.dsPessoa
-                    LookupField = 'UCLOGIN'
-                    LookupDisplay = 'UCLOGIN'
-                    LookupSource = DMCadPessoa.dsUsuario
-                    TabOrder = 3
-                  end
-                  object DBEdit109: TDBEdit
-                    Left = 110
-                    Top = 105
-                    Width = 86
-                    Height = 21
-                    DataField = 'SENHA_PEDIDO'
-                    DataSource = DMCadPessoa.dsPessoa
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'MS Sans Serif'
-                    Font.Style = []
-                    ParentFont = False
-                    PasswordChar = '*'
-                    TabOrder = 4
-                  end
-                  object DBEdit110: TDBEdit
-                    Left = 110
-                    Top = 129
-                    Width = 78
-                    Height = 21
-                    CharCase = ecLowerCase
-                    DataField = 'DESC_MAXIMO'
-                    DataSource = DMCadPessoa.dsPessoa
-                    TabOrder = 5
-                  end
-                  object btnConfDescontos: TNxButton
-                    Left = 268
-                    Top = 11
-                    Width = 135
-                    Caption = 'Configurar Descontos'
-                    TabOrder = 6
-                    OnClick = btnConfDescontosClick
-                  end
+                  Values.Strings = (
+                    'D'
+                    'N'
+                    'P')
+                end
+                object DBEdit53: TDBEdit
+                  Left = 110
+                  Top = 35
+                  Width = 96
+                  Height = 21
+                  DataField = 'PERC_COMISSAO_VEND'
+                  DataSource = DMCadPessoa.dsPessoa
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 1
+                end
+                object CurrencyEdit1: TCurrencyEdit
+                  Left = 110
+                  Top = 56
+                  Width = 63
+                  Height = 21
+                  AutoSize = False
+                  DecimalPlaces = 0
+                  DisplayFormat = '0'
+                  TabOrder = 2
+                  OnExit = CurrencyEdit1Exit
+                end
+                object RxDBLookupCombo41: TRxDBLookupCombo
+                  Left = 110
+                  Top = 81
+                  Width = 115
+                  Height = 21
+                  DropDownCount = 8
+                  DataField = 'USUARIO_LOG'
+                  DataSource = DMCadPessoa.dsPessoa
+                  LookupField = 'UCLOGIN'
+                  LookupDisplay = 'UCLOGIN'
+                  LookupSource = DMCadPessoa.dsUsuario
+                  TabOrder = 3
+                end
+                object DBEdit109: TDBEdit
+                  Left = 110
+                  Top = 105
+                  Width = 86
+                  Height = 21
+                  DataField = 'SENHA_PEDIDO'
+                  DataSource = DMCadPessoa.dsPessoa
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'MS Sans Serif'
+                  Font.Style = []
+                  ParentFont = False
+                  PasswordChar = '*'
+                  TabOrder = 4
+                end
+                object DBEdit110: TDBEdit
+                  Left = 110
+                  Top = 129
+                  Width = 78
+                  Height = 21
+                  CharCase = ecLowerCase
+                  DataField = 'DESC_MAXIMO'
+                  DataSource = DMCadPessoa.dsPessoa
+                  TabOrder = 5
+                end
+                object btnConfDescontos: TNxButton
+                  Left = 268
+                  Top = 11
+                  Width = 135
+                  Caption = 'Configurar Descontos'
+                  TabOrder = 6
+                  OnClick = btnConfDescontosClick
+                end
+              end
+            end
+            object TS_CAE: TRzTabSheet
+              Caption = 'CAE (C'#243'd. Atividade Econ'#244'mica)'
+              object pnlCAE: TPanel
+                Left = 0
+                Top = 0
+                Width = 1071
+                Height = 166
+                Align = alClient
+                Enabled = False
+                TabOrder = 0
+                object Label207: TLabel
+                  Left = 24
+                  Top = 24
+                  Width = 67
+                  Height = 13
+                  Alignment = taRightJustify
+                  Caption = 'CAE Principal:'
+                end
+                object Label208: TLabel
+                  Left = 67
+                  Top = 46
+                  Width = 24
+                  Height = 13
+                  Alignment = taRightJustify
+                  Caption = 'CAE:'
+                end
+                object Label209: TLabel
+                  Left = 67
+                  Top = 68
+                  Width = 24
+                  Height = 13
+                  Alignment = taRightJustify
+                  Caption = 'CAE:'
+                end
+                object DBEdit113: TDBEdit
+                  Left = 94
+                  Top = 16
+                  Width = 100
+                  Height = 21
+                  DataField = 'CAE_1'
+                  DataSource = DMCadPessoa.dsPessoa_Fiscal
+                  TabOrder = 0
+                end
+                object DBEdit114: TDBEdit
+                  Left = 94
+                  Top = 38
+                  Width = 100
+                  Height = 21
+                  DataField = 'CAE_2'
+                  DataSource = DMCadPessoa.dsPessoa_Fiscal
+                  TabOrder = 1
+                end
+                object DBEdit115: TDBEdit
+                  Left = 94
+                  Top = 60
+                  Width = 100
+                  Height = 21
+                  DataField = 'CAE_3'
+                  DataSource = DMCadPessoa.dsPessoa_Fiscal
+                  TabOrder = 2
                 end
               end
             end
@@ -2815,7 +2866,7 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlPessoaFisica: TPanel
             Left = 0
             Top = 0
-            Width = 1067
+            Width = 1075
             Height = 244
             Align = alTop
             Enabled = False
@@ -2823,7 +2874,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox4: TRzGroupBox
               Left = 1
               Top = 36
-              Width = 1065
+              Width = 1073
               Height = 139
               Align = alTop
               BorderWidth = 1
@@ -3240,7 +3291,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel10: TPanel
               Left = 1
               Top = 1
-              Width = 1065
+              Width = 1073
               Height = 26
               Align = alTop
               TabOrder = 1
@@ -3284,7 +3335,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel11: TPanel
               Left = 1
               Top = 238
-              Width = 1065
+              Width = 1073
               Height = 8
               Align = alTop
               BevelOuter = bvNone
@@ -3293,7 +3344,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel12: TPanel
               Left = 1
               Top = 27
-              Width = 1065
+              Width = 1073
               Height = 9
               Align = alTop
               BevelOuter = bvNone
@@ -3302,7 +3353,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox7: TRzGroupBox
               Left = 1
               Top = 175
-              Width = 1065
+              Width = 1073
               Height = 63
               Align = alTop
               Caption = ' Outras informa'#231#245'es '
@@ -3401,8 +3452,8 @@ object frmCadPessoa: TfrmCadPessoa
           object RzPageControl2: TRzPageControl
             Left = 0
             Top = 244
-            Width = 1067
-            Height = 352
+            Width = 1075
+            Height = 360
             ActivePage = TS_Dados_Profissionais
             ActivePageDefault = TS_Dados_Profissionais
             Align = alClient
@@ -3421,8 +3472,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Profissionais: TPanel
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -3773,8 +3824,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlConjuge: TPanel
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -4139,8 +4190,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Conta: TPanel
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -4268,8 +4319,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid3: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Dep
@@ -4344,8 +4395,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid4: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefP
@@ -4425,7 +4476,6 @@ object frmCadPessoa: TfrmCadPessoa
                     Expanded = False
                     FieldName = 'OBS'
                     Title.Color = 12320699
-                    Width = 64
                     Visible = True
                   end>
               end
@@ -4435,8 +4485,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid5: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefC
@@ -4505,8 +4555,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid6: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1065
-                Height = 331
+                Width = 1073
+                Height = 339
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Aut
@@ -4577,7 +4627,7 @@ object frmCadPessoa: TfrmCadPessoa
           object GroupBox2: TGroupBox
             Left = 0
             Top = 243
-            Width = 1067
+            Width = 1075
             Height = 140
             Align = alTop
             Caption = ' Dados Cobran'#231'a '
@@ -4916,7 +4966,7 @@ object frmCadPessoa: TfrmCadPessoa
           object GroupBox3: TGroupBox
             Left = 0
             Top = 75
-            Width = 1067
+            Width = 1075
             Height = 168
             Align = alTop
             Caption = ' Dados Entrega '
@@ -5334,7 +5384,7 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 1067
+            Width = 1075
             Height = 75
             Align = alTop
             TabOrder = 0
@@ -6842,8 +6892,8 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 604
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -6851,7 +6901,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel6: TPanel
               Left = 1
               Top = 361
-              Width = 1065
+              Width = 1073
               Height = 12
               Align = alTop
               Color = clGray
@@ -6860,7 +6910,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox1: TRzDBCheckBox
               Left = 1
               Top = 261
-              Width = 1065
+              Width = 1073
               Height = 16
               DataField = 'IPI_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -6880,7 +6930,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxIPI: TRzGroupBox
               Left = 1
               Top = 277
-              Width = 1065
+              Width = 1073
               Height = 84
               Align = alTop
               BorderColor = clBlue
@@ -6895,7 +6945,7 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 4
               Visible = False
               DesignSize = (
-                1065
+                1073
                 84)
               object Label71: TLabel
                 Left = 16
@@ -7010,7 +7060,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel7: TPanel
               Left = 1
               Top = 249
-              Width = 1065
+              Width = 1073
               Height = 12
               Align = alTop
               Color = clGray
@@ -7019,7 +7069,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxSuframa: TRzGroupBox
               Left = 1
               Top = 132
-              Width = 1065
+              Width = 1073
               Height = 117
               Align = alTop
               BorderColor = clBlue
@@ -7033,7 +7083,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 3
               DesignSize = (
-                1065
+                1073
                 117)
               object Label91: TLabel
                 Left = 3
@@ -7255,7 +7305,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox2: TRzDBCheckBox
               Left = 1
               Top = 373
-              Width = 1065
+              Width = 1073
               Height = 16
               DataField = 'PIS_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -7275,7 +7325,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel5: TPanel
               Left = 1
               Top = 389
-              Width = 1065
+              Width = 1073
               Height = 82
               Align = alTop
               BevelOuter = bvNone
@@ -7283,7 +7333,7 @@ object frmCadPessoa: TfrmCadPessoa
               object gbxPIS: TRzGroupBox
                 Left = 0
                 Top = 0
-                Width = 1065
+                Width = 1073
                 Height = 82
                 Align = alClient
                 BorderColor = clBlue
@@ -7297,7 +7347,7 @@ object frmCadPessoa: TfrmCadPessoa
                 ParentFont = False
                 TabOrder = 0
                 DesignSize = (
-                  1065
+                  1073
                   82)
                 object Label75: TLabel
                   Left = 16
@@ -7410,7 +7460,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxDadosAdic: TRzGroupBox
               Left = 1
               Top = 51
-              Width = 1065
+              Width = 1073
               Height = 50
               Align = alTop
               BorderColor = clBlue
@@ -7424,7 +7474,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 1
               DesignSize = (
-                1065
+                1073
                 50)
               object Label99: TLabel
                 Left = 16
@@ -7450,7 +7500,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox1: TRzGroupBox
               Left = 1
               Top = 101
-              Width = 1065
+              Width = 1073
               Height = 31
               Align = alTop
               BorderColor = clBlue
@@ -7504,7 +7554,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox5: TRzGroupBox
               Left = 1
               Top = 1
-              Width = 1065
+              Width = 1073
               Height = 50
               Align = alTop
               BorderColor = clBlue
@@ -7540,19 +7590,19 @@ object frmCadPessoa: TfrmCadPessoa
                 TabOrder = 0
               end
               object btnFiscalProduto: TNxButton
-                Left = 679
-                Top = 16
+                Left = 589
+                Top = 12
                 Width = 124
-                Height = 25
+                Height = 33
                 Caption = 'Informar Por Produto'
                 TabOrder = 1
                 OnClick = btnFiscalProdutoClick
               end
             end
             object DBRadioGroup1: TDBRadioGroup
-              Left = 352
+              Left = 353
               Top = 1
-              Width = 323
+              Width = 236
               Height = 51
               Caption = ' Tipo ICMS '
               Columns = 3
@@ -7571,7 +7621,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel14: TPanel
               Left = 1
               Top = 471
-              Width = 1065
+              Width = 1073
               Height = 12
               Align = alTop
               Color = clGray
@@ -7580,7 +7630,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox3: TRzDBCheckBox
               Left = 1
               Top = 483
-              Width = 1065
+              Width = 1073
               Height = 16
               DataField = 'DRAW_POSSUI'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -7602,7 +7652,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxDrawback: TRzGroupBox
               Left = 1
               Top = 499
-              Width = 1065
+              Width = 1073
               Height = 81
               Align = alTop
               BorderColor = clBlue
@@ -7617,7 +7667,7 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 13
               Visible = False
               DesignSize = (
-                1065
+                1073
                 81)
               object Label202: TLabel
                 Left = 6
@@ -7741,8 +7791,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid9: TSMDBGrid
             Left = 0
             Top = 28
-            Width = 1067
-            Height = 568
+            Width = 1075
+            Height = 576
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_Fil
@@ -7806,7 +7856,7 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlPessoa_Fil: TPanel
             Left = 0
             Top = 0
-            Width = 1067
+            Width = 1075
             Height = 28
             Align = alTop
             Color = clSilver
@@ -7886,8 +7936,8 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlServico: TPanel
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 604
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -8291,8 +8341,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid7: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 604
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_Ativ
@@ -8366,8 +8416,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid8: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 1067
-            Height = 596
+            Width = 1075
+            Height = 604
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_TipoMat
@@ -8445,8 +8495,8 @@ object frmCadPessoa: TfrmCadPessoa
   end
   object StaticText2: TStaticText
     Left = 0
-    Top = 672
-    Width = 1075
+    Top = 680
+    Width = 1083
     Height = 17
     Align = alBottom
     Caption = 'F2 Consultar'

@@ -1317,6 +1317,12 @@ type
     sdsPessoaPERC_COMISSAO_INT: TFloatField;
     cdsPessoaPERC_COMISSAO_INT: TFloatField;
     frxEtiqueta: TfrxDBDataset;
+    sdsPessoa_FiscalCAE_1: TStringField;
+    sdsPessoa_FiscalCAE_2: TStringField;
+    sdsPessoa_FiscalCAE_3: TStringField;
+    cdsPessoa_FiscalCAE_1: TStringField;
+    cdsPessoa_FiscalCAE_2: TStringField;
+    cdsPessoa_FiscalCAE_3: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

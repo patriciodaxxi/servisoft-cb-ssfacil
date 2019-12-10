@@ -145,6 +145,7 @@ type
     DBCheckBox24: TDBCheckBox;
     DBCheckBox25: TDBCheckBox;
     DBCheckBox26: TDBCheckBox;
+    btnCopiarCFOP: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -184,6 +185,7 @@ type
     procedure btnGerar_RegraClick(Sender: TObject);
     procedure btnGerar_VarClick(Sender: TObject);
     procedure DBCheckBox14Click(Sender: TObject);
+    procedure btnCopiarCFOPClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadCFOP: TDMCadCFOP;
@@ -797,6 +799,67 @@ procedure TfrmCadCFOP.DBCheckBox14Click(Sender: TObject);
 begin
   Label26.Visible       := DBCheckBox14.Checked;
   RxDBComboBox4.Visible := DBCheckBox14.Checked;
+end;
+
+procedure TfrmCadCFOP.btnCopiarCFOPClick(Sender: TObject);
+var
+  sds: TSQLDataSet;
+  i : Integer;
+  i2 : Integer;
+begin
+  if not(fDMCadCFOP.cdsCFOP_Consulta.Active) or (fDMCadCFOP.cdsCFOP_Consulta.IsEmpty) then
+    exit;
+
+  if MessageDlg('Deseja copiar a CFOP: ' + fDMCadCFOP.cdsCFOP_ConsultaCODCFOP.AsString + ' ?' ,mtConfirmation,[mbYes,mbNo],0) <> mrYes then
+    exit;
+
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT ID, CODCFOP, NOME, ENTRADASAIDA, GERAR_IPI, GERAR_ICMS, GERAR_DUPLICATA, SOMAR_VLRTOTALPRODUTO, NOME_INTERNO, '
+                       + 'ID_CSTICMS, ID_CSTIPI, COPIARNOTATRIANGULAR, ID_PIS, ID_COFINS, TIPO_PIS, TIPO_COFINS, GERAR_ICMS_SIMPLES, '
+                       + 'TIPO_EMPRESA, SUBSTITUICAO_TRIB, MVA, PERC_COFINS, PERC_PIS, LEI, BENEFICIAMENTO, MAOOBRA, OBS_CLASSIFICACAO, '
+                       + 'GERAR_TRIBUTO, PERC_TRIBUTO, TIPO_IND_VEN, INATIVO, DEVOLUCAO, GERAR_ESTOQUE_MP, ID_OBS_LEI, '
+                       + 'GERAR_DESONERACAO_ICMS, GERAR_ESTOQUE, BAIXAR_FUT, USA_NFCE, CALCULAR_ICMS_DIFERIDO, USA_REGRA_ORGAO_PUBLICO, '
+                       + 'NOME_ORIGINAL, FATURAMENTO, ID_COFINS_SIMP, ID_PIS_SIMP, TIPO_PIS_SIMP, TIPO_COFINS_SIMP, PERC_COFINS_SIMP, '
+                       + 'PERC_PIS_SIMP, ID_REGRA, NFEFINALIDADE, GERAR_CUSTO_MEDIO, USA_UNIDADE_TRIB, ALT_NCM_CUSTO, MARCAR_NCM_ST, '
+                       + 'ENVIAR_BASE_ST, BENEFICIAMENTO_POSSE, EXIGE_PESO, CONTROLAR_CONFIG, USA_NAO_CONTR_FISICA, DEPARA_COM_CST '
+                       + 'FROM TAB_CFOP '
+                       + 'WHERE ID = :ID ';
+    sds.ParamByName('ID').AsInteger := fDMCadCFOP.cdsCFOP_ConsultaID.AsInteger;
+    sds.Open;
+
+    prc_Inserir_Registro;
+
+    try
+      for i := 0 to ( sds.FieldCount - 1) do
+      begin
+        if (sds.Fields[i].FieldName <> 'ID') then
+        begin
+          for i2 := 0 to ( sds.FieldCount - 1) do
+          begin
+            if fDMCadCFOP.cdsCFOP.Fields[i2].FieldName = sds.Fields[i].FieldName then
+            begin
+              fDMCadCFOP.cdsCFOP.Fields[i2].AsVariant := sds.Fields[i].Value;
+              Break;
+            end;
+          end;
+        end;
+      end;
+    except
+    end;
+    
+    fDMCadCFOP.prc_Gravar;
+    
+    RzPageControl1.ActivePage := TS_Cadastro;
+    btnAlterarClick(Sender);
+
+  finally
+    FreeAndNil(sds);
+  end;
+
 end;
 
 end.

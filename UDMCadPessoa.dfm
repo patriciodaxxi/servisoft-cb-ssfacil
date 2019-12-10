@@ -2534,6 +2534,18 @@ object DMCadPessoa: TDMCadPessoa
       FixedChar = True
       Size = 1
     end
+    object cdsPessoa_FiscalCAE_1: TStringField
+      FieldName = 'CAE_1'
+      Size = 9
+    end
+    object cdsPessoa_FiscalCAE_2: TStringField
+      FieldName = 'CAE_2'
+      Size = 9
+    end
+    object cdsPessoa_FiscalCAE_3: TStringField
+      FieldName = 'CAE_3'
+      Size = 9
+    end
   end
   object dspPessoa_Fiscal: TDataSetProvider
     DataSet = sdsPessoa_Fiscal
@@ -2663,6 +2675,18 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'DRAW_POSSUI'
       FixedChar = True
       Size = 1
+    end
+    object sdsPessoa_FiscalCAE_1: TStringField
+      FieldName = 'CAE_1'
+      Size = 9
+    end
+    object sdsPessoa_FiscalCAE_2: TStringField
+      FieldName = 'CAE_2'
+      Size = 9
+    end
+    object sdsPessoa_FiscalCAE_3: TStringField
+      FieldName = 'CAE_3'
+      Size = 9
     end
   end
   object sdsTab_CSTIPI: TSQLDataSet
