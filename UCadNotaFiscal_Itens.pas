@@ -1191,7 +1191,8 @@ begin
   //4.00
   if (fDMCadNotaFiscal.cdsUFPOSSUI_FCP.AsString = 'S')
     and (((fDMCadNotaFiscal.cdsFilialSIMPLES.AsString = 'N') and (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS.AsFloat)) > 0))
-    or ((fDMCadNotaFiscal.cdsFilialSIMPLES.AsString = 'S') and (fDMCadNotaFiscal.cdsCFOPGERAR_ICMS_SIMPLES.AsString = 'S') )) then
+    or ((fDMCadNotaFiscal.cdsFilialSIMPLES.AsString = 'S') and (fDMCadNotaFiscal.cdsCFOPGERAR_ICMS_SIMPLES.AsString = 'S'))
+    or (fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString = '5405')) then
   begin
     fDMCadNotaFiscal.qNCM_CST.Close;
     //21/01/2019  Foi incluido para calcular o FCP da ST
@@ -1200,9 +1201,19 @@ begin
     if trim(fDMCadNotaFiscal.cdsTab_NCMCALCULA_FCP.AsString) = 'S' then //O IF para controlar por NCM foi colocado dia 26/10/2018
     begin
       if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qNCM_CSTPERC_FCP.AsFloat)) > 0 then
-        vAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qNCM_CSTPERC_FCP.AsFloat))
+      begin
+        if fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString = '5405' then
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP_5405.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qNCM_CSTPERC_FCP.AsFloat))
+        else
+          vAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qNCM_CSTPERC_FCP.AsFloat));
+      end
       else
-        vAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsUFPERC_CP.AsFloat));
+      begin
+        if fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString = '5405' then
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP_5405.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsUFPERC_CP.AsFloat))
+        else
+          vAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsUFPERC_CP.AsFloat));
+      end;
       if fDMCadNotaFiscal.cdsTab_NCMGERAR_ST.AsString = 'S' then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat := StrToFloat(FormatFloat('0.00',vAux))
       else
@@ -1210,8 +1221,9 @@ begin
     end
     else
     begin
-      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP.AsFloat := StrToFloat(FormatFloat('0.00',0));
-      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat   := StrToFloat(FormatFloat('0.00',0));
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP.AsFloat      := StrToFloat(FormatFloat('0.00',0));
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat        := StrToFloat(FormatFloat('0.00',0));
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP_5405.AsFloat := StrToFloat(FormatFloat('0.00',0));
     end;
   end;
   //******

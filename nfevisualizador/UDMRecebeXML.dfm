@@ -3,7 +3,7 @@ object DMRecebeXML: TDMRecebeXML
   OnCreate = DataModuleCreate
   Left = 1
   Top = 30
-  Height = 586
+  Height = 654
   Width = 1366
   object sdsCFOP: TSQLDataSet
     NoMetadata = True

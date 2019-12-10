@@ -3098,6 +3098,10 @@ type
     qParametros_ProdUSA_BITOLA: TStringField;
     cdsPedidoMEDIDA: TStringField;
     cdsProdutoMEDIDA: TStringField;
+    sdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO: TFloatField;
+    sdsNotaFiscal_ItensPERC_ICMS_FCP_5405: TFloatField;
+    cdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO: TFloatField;
+    cdsNotaFiscal_ItensPERC_ICMS_FCP_5405: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
@@ -4213,6 +4217,7 @@ begin
   cdsNotaFiscal_ItensVLR_ICMS_FCP.AsFloat            := 0;
   cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat       := 0;
   cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat      := 0;
+  cdsNotaFiscal_ItensPERC_ICMS_FCP_5405.AsFloat      := 0;
 end;
 
 procedure TDMCadNotaFiscal.prc_Gravar_NotaFiscal_Parc(Parcela, ID_TipoCobranca, ID_Conta: Integer; Data: TDateTime;

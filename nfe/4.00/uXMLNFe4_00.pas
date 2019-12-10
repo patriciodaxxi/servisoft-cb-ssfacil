@@ -363,9 +363,11 @@ begin
   DetXML.Imposto.ICMS.ICMS60.CST      := CodSitTrib;
 
   //26/02/2019
-  DetXML.Imposto.ICMS.ICMS60.VBCSTRet := Replace(FormatFloat('0.00',fDMNFe.mItensNFeBase_ST_Ret.AsFloat) ,',','.');
-  DetXML.Imposto.ICMS.ICMS60.PST := Replace(FormatFloat('0.00',fDMNFe.mItensNFePerc_ST_Ret.AsFloat) ,',','.');
-  DetXML.Imposto.ICMS.ICMS60.VICMSSTRet := Replace(FormatFloat('0.00',fDMNFe.mItensNFeVlr_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMS60.VBCSTRet        := Replace(FormatFloat('0.00',fDMNFe.mItensNFeBase_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMS60.PST             := Replace(FormatFloat('0.00',fDMNFe.mItensNFePerc_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMS60.VICMSSubstituto := Replace(FormatFloat('0.00',0) ,',','.');
+  DetXML.Imposto.ICMS.ICMS60.VICMSSTRet      := Replace(FormatFloat('0.00',fDMNFe.mItensNFeVlr_ST_Ret.AsFloat) ,',','.');
+  
   //4.00
   if (StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFePERC_FCP_ST.AsFloat)) > 0) then
   begin
@@ -551,8 +553,9 @@ begin
   //DetXML.Imposto.ICMS.ICMSSN500.VICMSSTRet := Replace(FormatFloat('0.00',fDMNFe.mItensNFeIcmsVlrSubst.AsFloat) ,',','.');
 
   //26/02/2019
-  DetXML.Imposto.ICMS.ICMSSN500.VBCSTRet := Replace(FormatFloat('0.00',fDMNFe.mItensNFeBase_ST_Ret.AsFloat) ,',','.');
-  DetXML.Imposto.ICMS.ICMSSN500.PST := Replace(FormatFloat('0.00',fDMNFe.mItensNFePerc_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMSSN500.VBCSTRet        := Replace(FormatFloat('0.00',fDMNFe.mItensNFeBase_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMSSN500.PST             := Replace(FormatFloat('0.00',fDMNFe.mItensNFePerc_ST_Ret.AsFloat) ,',','.');
+  DetXML.Imposto.ICMS.ICMSSN500.VICMSSubstituto := Replace(FormatFloat('0.00',0) ,',','.');
   DetXML.Imposto.ICMS.ICMSSN500.VICMSSTRet := Replace(FormatFloat('0.00',fDMNFe.mItensNFeVlr_ST_Ret.AsFloat) ,',','.');
   //***************
 

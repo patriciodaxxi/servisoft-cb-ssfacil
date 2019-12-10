@@ -1884,6 +1884,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object sdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO: TFloatField
+      FieldName = 'VLR_ICMS_SUBSTITUTO'
+    end
+    object sdsNotaFiscal_ItensPERC_ICMS_FCP_5405: TFloatField
+      FieldName = 'PERC_ICMS_FCP_5405'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -2528,6 +2534,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItenssdsNotaFiscal_Ped: TDataSetField
       FieldName = 'sdsNotaFiscal_Ped'
+    end
+    object cdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO: TFloatField
+      FieldName = 'VLR_ICMS_SUBSTITUTO'
+    end
+    object cdsNotaFiscal_ItensPERC_ICMS_FCP_5405: TFloatField
+      FieldName = 'PERC_ICMS_FCP_5405'
     end
   end
   object dsNotaFiscal_Itens: TDataSource
@@ -5027,6 +5039,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 311
   end
   object cdsTipoCobranca: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -5107,6 +5120,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 358
   end
   object cdsContas: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>

@@ -4721,7 +4721,7 @@ begin
     //26/02/2019
     fDMNFe.mItensNFeBase_ST_Ret.AsFloat := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeBase_ST_Ret.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat));
     fDMNFe.mItensNFeVlr_ST_Ret.AsFloat  := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlr_ST_Ret.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat));
-    fDMNFe.mItensNFePerc_ST_Ret.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO.AsFloat));
+    fDMNFe.mItensNFePerc_ST_Ret.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMSSUBST_INTERNO.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP_5405.AsFloat));
 
     fDMNFe.mItensNFePERC_BASE_RED_EFET.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_BASE_RED_EFET.AsFloat));
     fDMNFe.mItensNFeBase_ICMS_Efet.AsFloat := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeBase_ICMS_Efet.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat));
