@@ -2888,7 +2888,9 @@ begin
      (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat)) <= 0) then
     exit;
 
-  if fDMCadNotaFiscal.cdsTab_NCMGERAR_ST.AsString = 'S' then
+  //10/12/2019  
+  //if fDMCadNotaFiscal.cdsTab_NCMGERAR_ST.AsString = 'S' then
+  if (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat)) > 0) then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_FCP_ST.AsFloat := fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST.AsFloat
   else
   begin

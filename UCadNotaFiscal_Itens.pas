@@ -353,6 +353,8 @@ type
 
     function fnc_Gerar_IPI(ID : Integer) : Boolean;
 
+    function fnc_Possui_Calc_ST : Boolean;
+
   public
     { Public declarations }
     vNotaSelecionada: Boolean;
@@ -1214,7 +1216,8 @@ begin
         else
           vAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsUFPERC_CP.AsFloat));
       end;
-      if fDMCadNotaFiscal.cdsTab_NCMGERAR_ST.AsString = 'S' then
+      //10/12/2019
+      if (fDMCadNotaFiscal.cdsTab_NCMGERAR_ST.AsString = 'S') and (fnc_Possui_Calc_ST)  then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_FCP_ST.AsFloat := StrToFloat(FormatFloat('0.00',vAux))
       else
         fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_ICMS_FCP.AsFloat := StrToFloat(FormatFloat('0.00',vAux));
@@ -3443,6 +3446,32 @@ begin
     fDMCadNotaFiscal.cdsTab_CSTIPI.Locate('ID',ID,[loCaseInsensitive]);
   if fDMCadNotaFiscal.cdsTab_CSTIPIGERAR_IPI.AsString = 'S' then
     Result := True;
+end;
+
+function TfrmCadNotaFiscal_Itens.fnc_Possui_Calc_ST: Boolean;
+var
+  vImportado_Nacional : String;
+  vUF : String;
+begin
+  Result := False;
+  if (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString = 'S') and (fDMCadNotaFiscal.cdsTab_NCMUSAR_MVA_UF_DESTINO.AsString <> 'S') then
+    vUF := fDMCadNotaFiscal.cdsFilialUF.AsString
+  else
+    vUF := fDMCadNotaFiscal.cdsClienteUF.AsString;
+  if (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString = '1')  or (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString = '2')
+    or (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString = '3') or (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString = '8') then
+    vImportado_Nacional := 'I'
+  else
+    vImportado_Nacional := 'N';
+  prc_Abrir_qNCM_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,vUF,'A');
+  if not fDMCadNotaFiscal.qNCM_UF.IsEmpty then
+    Result := True
+  else
+  begin
+    prc_Abrir_qNCM_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,vUF,vImportado_Nacional);
+    if not fDMCadNotaFiscal.qNCM_UF.IsEmpty then
+      Result := True;
+  end;
 end;
 
 end.
