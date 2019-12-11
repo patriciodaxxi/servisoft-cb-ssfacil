@@ -310,10 +310,10 @@ type
     ffrmCadProduto_UF: TfrmCadProduto_UF;
     ffrmCadProduto_Uni: TfrmCadProduto_Uni;
     ffrmCadProduto_Cor: TfrmCadProduto_Cor;
-    ffrmConsEstoque_Mov : TfrmConsEstoque_Mov;
-    ffrmCadProduto_GradeNum : TfrmCadProduto_GradeNum;
-    ffrmCadProduto_GradeRefTam : TfrmCadProduto_GradeRefTam;
-    ffrmCadProduto_Consumo_Proc : TfrmCadProduto_Consumo_Proc;     
+    ffrmConsEstoque_Mov: TfrmConsEstoque_Mov;
+    ffrmCadProduto_GradeNum: TfrmCadProduto_GradeNum;
+    ffrmCadProduto_GradeRefTam: TfrmCadProduto_GradeRefTam;
+    ffrmCadProduto_Consumo_Proc: TfrmCadProduto_Consumo_Proc;     
 
     vReferencia_Ant: String;
     vTipo_Reg_Ant: String;
@@ -343,7 +343,7 @@ type
     procedure prc_Combinacao;
 
     procedure prc_Aplicar_Margem;
-    function fnc_Duplicidade_Mat(ID_Prod : Integer): String;
+    function fnc_Duplicidade_Mat(ID_Prod: Integer): String;
 
     function fnc_Filial: Boolean;
     procedure prc_Atualiza_Percentual;
@@ -475,8 +475,8 @@ var
   vGerar_Ref: Boolean;
   vAux: Integer;
   vID_SemiAux: Integer;
-  vMaterial : String;
-  Flag : Boolean;
+  vMaterial: String;
+  Flag: Boolean;
 begin
   vIDAux := fDMCadProduto.cdsProdutoID.AsInteger;
   if trim(fDMCadProduto.cdsProdutoREFERENCIA.AsString) = '' then
@@ -1636,7 +1636,7 @@ end;
 
 procedure TfrmCadMaterial.btnCorClick(Sender: TObject);
 var
-  vPreco : Real;
+  vPreco: Real;
 begin
   fDMCadProduto.prc_Abrir_Cor_Combinacao('C');
   ffrmCadProduto_Cor := TfrmCadProduto_Cor.Create(self);
@@ -1880,7 +1880,7 @@ end;
 procedure TfrmCadMaterial.btnGradeRefClick(Sender: TObject);
 var
   ffrmCadProduto_GradeNum: TfrmCadProduto_GradeNum;
-  ffrmCadProduto_GradeRefTam : TfrmCadProduto_GradeRefTam;
+  ffrmCadProduto_GradeRefTam: TfrmCadProduto_GradeRefTam;
 begin
   if (fDMCadProduto.cdsProdutoID.AsInteger < 1) or not(fDMCadProduto.cdsProduto.Active) then
     exit;
@@ -1932,7 +1932,7 @@ begin
   end;
 end;
 
-function TfrmCadMaterial.fnc_Duplicidade_Mat(ID_Prod : Integer): String;
+function TfrmCadMaterial.fnc_Duplicidade_Mat(ID_Prod: Integer): String;
 var
   sds: TSQLDataSet;
 begin
@@ -1967,7 +1967,7 @@ end;
 procedure TfrmCadMaterial.SMDBGrid3KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
-  ffrmCadProduto_Consumo_Proc : TfrmCadProduto_Consumo_Proc;
+  ffrmCadProduto_Consumo_Proc: TfrmCadProduto_Consumo_Proc;
 begin
   if (Key = Vk_F3) then
   begin

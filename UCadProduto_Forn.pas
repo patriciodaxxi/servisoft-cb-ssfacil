@@ -54,6 +54,7 @@ type
     procedure RxDBLookupCombo1Exit(Sender: TObject);
     procedure DBEdit10Enter(Sender: TObject);
     procedure DBEdit10Exit(Sender: TObject);
+    procedure RxDBLookupCombo2Enter(Sender: TObject);
   private
     { Private declarations }
     ffrmCadPessoa: TfrmCadPessoa;
@@ -62,8 +63,7 @@ type
     procedure prc_Gravar_Tamanho;
   public
     { Public declarations }
-    fDMCadProduto: TDMCadProduto;
-
+    fDMCadProduto: TDMCadProduto; 
   end;
 
 var
@@ -71,7 +71,7 @@ var
 
 implementation
 
-uses rsDBUtils, USel_Produto, uUtilPadrao;
+uses rsDBUtils, uUtilPadrao;
 
 {$R *.dfm}
 
@@ -266,6 +266,11 @@ begin
     fDMCadProduto.cdsProduto_FornCNPJ_FABRICANTE.Clear;
     DBEdit10.SetFocus;
   end;
+end;
+
+procedure TfrmCadProduto_Forn.RxDBLookupCombo2Enter(Sender: TObject);
+begin
+  fDMCadProduto.cdsFornecedor.IndexFieldNames := 'NOME';
 end;
 
 end.

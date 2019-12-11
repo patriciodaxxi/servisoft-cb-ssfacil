@@ -1977,6 +1977,8 @@ type
     cdsProdutoAplicacaoITEM: TIntegerField;
     cdsProdutoAplicacaoID_MARCA: TIntegerField;
     cdsProdutoAplicacaoAPLICACAO: TStringField;
+    sdsProdutoAplicacaoNOME_MARCA: TStringField;
+    cdsProdutoAplicacaoNOME_MARCA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
@@ -2051,6 +2053,7 @@ type
     procedure prc_Excluir;
 
     procedure prc_Inserir_ProdForn;
+    procedure prc_Inserir_ProdAplic;
     procedure prc_Inserir_ProdConsumo;
     procedure prc_Inserir_ProdUNI;
     procedure prc_Inserir_ProdUF;
@@ -3870,6 +3873,18 @@ begin
   cdsProduto_Corrugado.Close;
   sdsProduto_Corrugado.ParamByName('ID').AsInteger := ID;
   cdsProduto_Corrugado.Open;
+end;
+
+procedure TdmCadProduto.prc_Inserir_ProdAplic;
+var
+  vItemAux: Integer;
+begin
+  cdsProdutoAplicacao.Last;
+  vItemAux := cdsProdutoAplicacaoITEM.AsInteger;
+
+  cdsProdutoAplicacao.Insert;
+  cdsProdutoAplicacaoID.AsInteger   := cdsProdutoID.AsInteger;
+  cdsProdutoAplicacaoITEM.AsInteger := vItemAux + 1;
 end;
 
 end.

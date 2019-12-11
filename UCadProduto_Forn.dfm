@@ -244,6 +244,7 @@ object frmCadProduto_Forn: TfrmCadProduto_Forn
       Top = 46
       Width = 216
       Height = 19
+      CharCase = ecUpperCase
       Ctl3D = False
       DataField = 'COD_MATERIAL_FORN'
       DataSource = dmCadProduto.dsProduto_Forn
@@ -255,7 +256,7 @@ object frmCadProduto_Forn: TfrmCadProduto_Forn
       Top = 8
       Width = 329
       Height = 21
-      DropDownCount = 8
+      DropDownCount = 15
       Ctl3D = False
       DataField = 'ID_FORNECEDOR'
       DataSource = dmCadProduto.dsProduto_Forn
@@ -264,12 +265,14 @@ object frmCadProduto_Forn: TfrmCadProduto_Forn
       LookupSource = dmCadProduto.dsFornecedor
       ParentCtl3D = False
       TabOrder = 0
+      OnEnter = RxDBLookupCombo2Enter
     end
     object DBEdit1: TDBEdit
       Left = 174
       Top = 28
       Width = 327
       Height = 19
+      CharCase = ecUpperCase
       Ctl3D = False
       DataField = 'NOME_MATERIAL_FORN'
       DataSource = dmCadProduto.dsProduto_Forn
@@ -388,6 +391,7 @@ object frmCadProduto_Forn: TfrmCadProduto_Forn
       Top = 212
       Width = 459
       Height = 19
+      CharCase = ecUpperCase
       Ctl3D = False
       DataField = 'NOME_COR_FORN'
       DataSource = dmCadProduto.dsProduto_Forn

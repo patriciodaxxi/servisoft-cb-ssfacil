@@ -142,7 +142,7 @@ type
     ComboBox2: TComboBox;
     Label72: TLabel;
     Label73: TLabel;
-    RzPageControl3: TRzPageControl;
+    RZPageControl3: TRzPageControl;
     TS_Grade: TRzTabSheet;
     TS_Fiscal: TRzTabSheet;
     VDBGrid1: TVDBGrid;
@@ -804,6 +804,13 @@ type
     lblEstrutura: TLabel;
     dbckbCalcular_ST: TDBCheckBox;
     NxButton2: TNxButton;
+    ts_Aplicacao: TRzTabSheet;
+    Panel8: TPanel;
+    BitBtn7: TBitBtn;
+    BitBtn8: TBitBtn;
+    BitBtn9: TBitBtn;
+    SMDBGrid19: TSMDBGrid;
+    SMDBGrid20: TSMDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -979,7 +986,7 @@ type
     procedure DBEdit5Exit(Sender: TObject);
     procedure ProdutosSelecionados1Click(Sender: TObject);
     procedure NxButton1Click(Sender: TObject);
-    procedure RzPageControl3Change(Sender: TObject);
+    procedure RZPageControl3Change(Sender: TObject);
     procedure SMDBGrid1ChangeSelection(Sender: TObject);
     procedure btnAjustaRef2Click(Sender: TObject);
     procedure btnAjustarObsMatClick(Sender: TObject);
@@ -1020,6 +1027,8 @@ type
     procedure RxDBLookupCombo5Change(Sender: TObject);
     procedure RxDBLookupCombo3Exit(Sender: TObject);
     procedure NxButton2Click(Sender: TObject);
+    procedure BitBtn9Click(Sender: TObject);
+    procedure BitBtn7Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1123,7 +1132,8 @@ type
     procedure prcAtualizaPrecoMGV5;
 
     procedure prc_Verificar_Cor_Comb(ID: Integer);
-    procedure prc_Gravar_Consumo_Proc; 
+    procedure prc_Gravar_Consumo_Proc;
+    procedure prcScroll(DataSet: TDataSet);
   public
     { Public declarations }
     vID_Produto_Local: Integer;
@@ -1138,7 +1148,7 @@ uses rsDBUtils, uUtilPadrao, URelProduto, URelProduto_Grupo, USel_Grupo, USel_Pl
   USel_EnqIPI, USel_CodCest, VarUtils, UCadProduto_Serie, UCadProduto_Cad_Ant, UCadProcesso_Grupo, USel_ContaOrc, USel_Produto,
   uCopiar_Comb_Agrupado, UCadProduto_GradeNum, UCadProduto_Lote, USel_Produto_Lote, UCadProduto_Larg, UCadProduto_GradeRefTam,
   USel_Maquina, UAltProd, UCadProduto_Consumo_Proc, UCadLinha, UCadGrade, UCadPessoa, UMenu, UCadProduto_ST, uConsProduto_Compras,
-  UCadProduto_CA;
+  UCadProduto_CA, UCadProduto_Aplic;
 
 {$R *.dfm}
 
@@ -1645,7 +1655,15 @@ begin
   TS_Ficha_Tear.TabVisible        := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
   TS_Ficha_Trancadeira.TabVisible := (fDMCadProduto.qParametros_ProdMOSTRAR_FICHA_TEXTIL.AsString = 'S');
   TS_Corrugado.TabVisible         := (fDMCadProduto.qParametros_ProdUSA_CORRUGADO.AsString = 'S');
+  ts_Aplicacao.TabVisible         := fDMCadProduto.qParametros_ProdUSA_APLICACAO.AsString = 'S';
   TS_Balanca.TabVisible           := False;
+  if fDMCadProduto.qParametros_ProdUSA_APLICACAO.AsString = 'S' then
+  begin
+    fDMCadProduto.cdsProduto_Consulta.AfterScroll := prcScroll;
+  end;
+
+  SMDBGrid20.Visible := fDMCadProduto.qParametros_ProdUSA_APLICACAO.AsString = 'S';
+  SMDBGrid20.Align   := alBottom;
 
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin
@@ -5446,7 +5464,7 @@ begin
   end;
 end;
 
-procedure TfrmCadProduto.RzPageControl3Change(Sender: TObject);
+procedure TfrmCadProduto.RZPageControl3Change(Sender: TObject);
 begin
   if (RzPageControl3.ActivePage = TS_CBarra) then
     fDMCadProduto.prc_Abrir_CBarra(fDMCadProduto.cdsProdutoID.AsInteger)
@@ -6384,6 +6402,40 @@ begin
     FreeAndNil(sds);
   end;
 
+end;
+
+procedure TfrmCadProduto.BitBtn9Click(Sender: TObject);
+begin
+  if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+
+  fDMCadProduto.cdsProdutoAplicacao.Delete;
+end;
+
+procedure TfrmCadProduto.BitBtn7Click(Sender: TObject);
+begin
+  if (fDMCadProduto.cdsProdutoID.AsInteger < 1) or not(fDMCadProduto.cdsProduto.Active) then
+    exit;
+
+  fDMCadProduto.prc_Inserir_ProdAplic;
+
+  frmCadProduto_Aplic := TfrmCadProduto_Aplic.Create(self);
+  frmCadProduto_Aplic.fDMCadProduto := fDMCadProduto;
+  frmCadProduto_Aplic.ShowModal;
+
+  FreeAndNil(frmCadProduto_Aplic);  
+end;
+
+procedure TfrmCadProduto.prcScroll(DataSet: TDataSet);
+begin
+  if not(fDMCadProduto.cdsProduto_Consulta.Active) or (fDMCadProduto.cdsProduto_Consulta.IsEmpty) or
+        (fDMCadProduto.cdsProduto_ConsultaID.AsInteger <= 0) then
+  begin
+    exit;
+  end;
+
+  if not (fDMCadProduto.cdsProduto.State in [dsedit,dsinsert]) then
+    prc_Posiciona_Produto;
 end;
 
 end.

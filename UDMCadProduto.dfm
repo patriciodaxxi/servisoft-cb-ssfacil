@@ -499,6 +499,7 @@ object dmCadProduto: TdmCadProduto
     Top = 1
   end
   object cdsProduto: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -1335,6 +1336,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Forn: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Forn
     IndexFieldNames = 'ID;ITEM'
@@ -1555,6 +1557,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Consumo: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Consumo
     IndexFieldNames = 'ID;ID_SETOR;ID_POSICAO'
@@ -2608,6 +2611,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Tam: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Tam
     IndexFieldNames = 'ID;TAMANHO'
@@ -2844,6 +2848,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Consumo_Tam: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProduto_ConsumosdsProduto_Consumo_Tam
     IndexFieldNames = 'ID;ITEM;TAMANHO'
@@ -3883,6 +3888,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_UF: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_UF
     IndexFieldNames = 'ID;UF'
@@ -4105,6 +4111,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Uni: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Uni
     IndexFieldNames = 'ID;ITEM'
@@ -10205,6 +10212,7 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Consumo_Proc: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsProduto_ConsumosdsProduto_Consumo_Proc
     IndexFieldNames = 'ID;ITEM;ITEM_PROC'
@@ -10553,7 +10561,9 @@ object dmCadProduto: TdmCadProduto
   object sdsProdutoAplicacao: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT PA.*'#13#10'FROM PRODUTO_APLICACAO PA'#13#10'WHERE PA.ID = :ID'
+    CommandText = 
+      'SELECT PA.*, M.NOME NOME_MARCA'#13#10'FROM PRODUTO_APLICACAO PA'#13#10'INNER' +
+      ' JOIN MARCA M ON (PA.ID_MARCA = M.ID)'#13#10'WHERE PA.ID = :ID'
     DataSource = dsProduto_Mestre
     MaxBlobSize = -1
     Params = <
@@ -10568,10 +10578,12 @@ object dmCadProduto: TdmCadProduto
     Top = 2
     object sdsProdutoAplicacaoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsProdutoAplicacaoITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsProdutoAplicacaoID_MARCA: TIntegerField
@@ -10580,6 +10592,11 @@ object dmCadProduto: TdmCadProduto
     object sdsProdutoAplicacaoAPLICACAO: TStringField
       FieldName = 'APLICACAO'
       Size = 50
+    end
+    object sdsProdutoAplicacaoNOME_MARCA: TStringField
+      FieldName = 'NOME_MARCA'
+      ProviderFlags = []
+      Size = 40
     end
   end
   object cdsProdutoAplicacao: TClientDataSet
@@ -10590,10 +10607,12 @@ object dmCadProduto: TdmCadProduto
     Top = 2
     object cdsProdutoAplicacaoID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsProdutoAplicacaoITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsProdutoAplicacaoID_MARCA: TIntegerField
@@ -10602,6 +10621,11 @@ object dmCadProduto: TdmCadProduto
     object cdsProdutoAplicacaoAPLICACAO: TStringField
       FieldName = 'APLICACAO'
       Size = 50
+    end
+    object cdsProdutoAplicacaoNOME_MARCA: TStringField
+      FieldName = 'NOME_MARCA'
+      ProviderFlags = []
+      Size = 40
     end
   end
   object dsProdutoAplicacao: TDataSource
