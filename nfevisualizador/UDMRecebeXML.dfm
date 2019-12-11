@@ -170,7 +170,6 @@ object DMRecebeXML: TDMRecebeXML
     Top = 251
   end
   object cdsCabecalho: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'XMLTransformProvider1'
@@ -820,7 +819,6 @@ object DMRecebeXML: TDMRecebeXML
     Top = 328
   end
   object cdsNFeRef: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsCabecalhoNFref
     Params = <>
@@ -892,7 +890,6 @@ object DMRecebeXML: TDMRecebeXML
     end
   end
   object cdsNFeProtocolo: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsCabecalhoprotNFe
     Params = <>
@@ -956,7 +953,6 @@ object DMRecebeXML: TDMRecebeXML
     Top = 376
   end
   object cdsParcelas: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsCabecalhodup
     Params = <>
