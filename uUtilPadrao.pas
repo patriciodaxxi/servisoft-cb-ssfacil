@@ -204,6 +204,8 @@ var
   vDtHora_Res: String;
   vPrimeira_Hora: TTime;
   vPrimeira_Data: TDate;
+  vDocumentoClienteVenda : String; //Cupom - SSNFCe
+  vCpfOK : Boolean; //Cupom - SSNFCe  
 
 implementation
 
