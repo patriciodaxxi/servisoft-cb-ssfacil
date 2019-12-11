@@ -1,9 +1,9 @@
 object DMInformar_Tam: TDMInformar_Tam
   OldCreateOrder = False
-  Left = 298
+  Left = 299
   Top = 79
   Height = 390
-  Width = 722
+  Width = 721
   object mTamanho: TClientDataSet
     Active = True
     Aggregates = <>
@@ -1091,6 +1091,11 @@ object DMInformar_Tam: TDMInformar_Tam
       item
         Name = 'PERC_ICMS_FCP_5405'
         DataType = ftFloat
+      end
+      item
+        Name = 'COD_CBENEF'
+        DataType = ftString
+        Size = 8
       end>
     IndexDefs = <>
     Params = <>
@@ -1099,7 +1104,7 @@ object DMInformar_Tam: TDMInformar_Tam
     Left = 303
     Top = 40
     Data = {
-      E11500009619E0BD0100000018000000DD000000000003000000E1150A49445F
+      001600009619E0BD0100000018000000DE00000000000300000000160A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
       010005574944544802000200140007556E696461646501004900000001000557
       494454480200020006000351746408000400000000000749445F43464F500400
@@ -1274,7 +1279,8 @@ object DMInformar_Tam: TDMInformar_Tam
       4D4544494441010049000000010005574944544802000200140009505245434F
       5F434F52080004000000000013564C525F49434D535F5355425354495455544F
       080004000000000012504552435F49434D535F4643505F353430350800040000
-      0000000000}
+      0000000A434F445F4342454E4546010049000000010005574944544802000200
+      08000000}
     object mItensID_Produto: TIntegerField
       FieldName = 'ID_Produto'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2119,6 +2125,10 @@ object DMInformar_Tam: TDMInformar_Tam
     end
     object mItensPERC_ICMS_FCP_5405: TFloatField
       FieldName = 'PERC_ICMS_FCP_5405'
+    end
+    object mItensCOD_CBENEF: TStringField
+      FieldName = 'COD_CBENEF'
+      Size = 8
     end
   end
   object mPedido_Cli: TClientDataSet
