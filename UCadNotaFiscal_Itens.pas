@@ -2969,8 +2969,9 @@ begin
       fDMCadNotaFiscal.cdsCliente.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,[loCaseInsensitive]);
     if fDMCadNotaFiscal.cdsCFOPID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalID_CFOP.AsInteger then
       fDMCadNotaFiscal.cdsCFOP.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger,[loCaseInsensitive]);
-    if ((copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '5') or (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '6')) and
-      ((fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S') or (fDMCadNotaFiscal.cdsCFOPGERAR_ICMS_SIMPLES.AsString = 'S' )) then
+    if (((copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '5') or (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '6')) and
+      ((fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S') or (fDMCadNotaFiscal.cdsCFOPGERAR_ICMS_SIMPLES.AsString = 'S' )))
+      or (fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString = '5405') then
     begin
       fDMCadNotaFiscal.qNCM_CST.Close;
       fDMCadNotaFiscal.qNCM_CST.ParamByName('UF').AsString  := fDMCadNotaFiscal.cdsClienteUF.AsString;

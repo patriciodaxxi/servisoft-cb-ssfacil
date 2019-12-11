@@ -347,7 +347,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'ID Produto:'
       end
       object RxDBLookupCombo2: TRxDBLookupCombo
-        Left = 319
+        Left = 320
         Top = 25
         Width = 329
         Height = 21
