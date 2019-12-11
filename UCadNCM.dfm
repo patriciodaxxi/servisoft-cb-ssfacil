@@ -1358,10 +1358,10 @@ object frmCadNCM: TfrmCadNCM
         Top = 202
         Width = 946
         Height = 302
-        ActivePage = TS_Geral
+        ActivePage = TS_CST
         ActivePageDefault = TS_SubTrib
         Align = alClient
-        TabIndex = 3
+        TabIndex = 1
         TabOrder = 2
         TextColors.Selected = clBlue
         FixedDimension = 19
@@ -2074,7 +2074,7 @@ object frmCadNCM: TfrmCadNCM
               Caption = 'C'#243'd. CST ICMS'
             end
             object Label16: TLabel
-              Left = 392
+              Left = 504
               Top = 22
               Width = 200
               Height = 18
@@ -2088,7 +2088,7 @@ object frmCadNCM: TfrmCadNCM
               Visible = False
             end
             object Label26: TLabel
-              Left = 168
+              Left = 280
               Top = 12
               Width = 31
               Height = 13
@@ -2107,7 +2107,7 @@ object frmCadNCM: TfrmCadNCM
               TabOrder = 0
             end
             object btnInserir_CST: TNxButton
-              Left = 235
+              Left = 347
               Top = 19
               Width = 31
               Height = 30
@@ -2181,7 +2181,7 @@ object frmCadNCM: TfrmCadNCM
               OnClick = btnInserir_CSTClick
             end
             object btnAlterar_CST: TNxButton
-              Left = 264
+              Left = 376
               Top = 19
               Width = 31
               Height = 30
@@ -2247,7 +2247,7 @@ object frmCadNCM: TfrmCadNCM
               OnClick = btnAlterar_CSTClick
             end
             object btnExcluir_CST: TNxButton
-              Left = 293
+              Left = 405
               Top = 19
               Width = 31
               Height = 30
@@ -2335,7 +2335,7 @@ object frmCadNCM: TfrmCadNCM
               TabOrder = 1
             end
             object btnGerador_CST: TNxButton
-              Left = 339
+              Left = 451
               Top = 18
               Width = 31
               Height = 30
@@ -2410,7 +2410,7 @@ object frmCadNCM: TfrmCadNCM
               OnClick = btnGerador_CSTClick
             end
             object ProgressBar1: TProgressBar
-              Left = 600
+              Left = 712
               Top = 24
               Width = 209
               Height = 17
@@ -2418,7 +2418,7 @@ object frmCadNCM: TfrmCadNCM
               Visible = False
             end
             object CurrencyEdit5: TCurrencyEdit
-              Left = 152
+              Left = 264
               Top = 26
               Width = 81
               Height = 21

@@ -591,6 +591,10 @@ object DMCadNCM: TDMCadNCM
     object sdsNCM_CSTPERC_FCP: TFloatField
       FieldName = 'PERC_FCP'
     end
+    object sdsNCM_CSTCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object cdsNCM_CST: TClientDataSet
     Aggregates = <>
@@ -630,6 +634,10 @@ object DMCadNCM: TDMCadNCM
     end
     object cdsNCM_CSTPERC_FCP: TFloatField
       FieldName = 'PERC_FCP'
+    end
+    object cdsNCM_CSTCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
   object dsNCM_CST: TDataSource

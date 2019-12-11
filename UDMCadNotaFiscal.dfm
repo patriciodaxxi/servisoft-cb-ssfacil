@@ -6313,7 +6313,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspTab_NCM'
-    Left = 819
+    Left = 818
     Top = 136
     object cdsTab_NCMID: TIntegerField
       FieldName = 'ID'
@@ -8581,6 +8581,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
   end
   object cdsCFOP_Variacao: TClientDataSet
+    Active = True
     Aggregates = <>
     DataSetField = cdsCFOPsdsCFOP_Variacao
     IndexFieldNames = 'NOME'

@@ -1324,6 +1324,10 @@ type
     cdsPessoa_FiscalCAE_2: TStringField;
     cdsPessoa_FiscalCAE_3: TStringField;
     qParametros_GeralUSA_CAE_PESSOA: TStringField;
+    sdsPessoa_FiscalCOD_BENEF: TStringField;
+    cdsPessoa_FiscalCOD_BENEF: TStringField;
+    sdsPessoa_ProdICMSCOD_BENEF: TStringField;
+    cdsPessoa_ProdICMSCOD_BENEF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
