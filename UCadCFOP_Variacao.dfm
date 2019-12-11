@@ -180,8 +180,8 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
     Color = clMoneyGreen
     TabOrder = 0
     object Label8: TLabel
-      Left = 496
-      Top = 56
+      Left = 473
+      Top = 57
       Width = 233
       Height = 39
       Caption = 
@@ -217,9 +217,9 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
       ParentFont = False
     end
     object gbxImpostos: TRzGroupBox
-      Left = 16
+      Left = 18
       Top = 9
-      Width = 456
+      Width = 431
       Height = 147
       BorderColor = clNavy
       BorderInner = fsButtonUp
@@ -255,7 +255,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         Visible = False
       end
       object SpeedButton6: TSpeedButton
-        Left = 416
+        Left = 353
         Top = 120
         Width = 23
         Height = 22
@@ -378,7 +378,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
       object RxDBLookupCombo3: TRxDBLookupCombo
         Left = 158
         Top = 121
-        Width = 258
+        Width = 195
         Height = 21
         DropDownCount = 8
         DataField = 'ID_OPERACAO_NOTA'
@@ -392,7 +392,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
       object RxDBComboBox1: TRxDBComboBox
         Left = 158
         Top = 11
-        Width = 258
+        Width = 195
         Height = 21
         Style = csDropDownList
         DataField = 'TIPO_EMPRESA'
@@ -411,7 +411,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
       object RxDBComboBox2: TRxDBComboBox
         Left = 158
         Top = 33
-        Width = 258
+        Width = 195
         Height = 21
         Style = csDropDownList
         DataField = 'TIPO_CLIENTE'
@@ -429,7 +429,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
       object RxDBComboBox5: TRxDBComboBox
         Left = 158
         Top = 55
-        Width = 258
+        Width = 195
         Height = 21
         Style = csDropDownList
         DataField = 'PESSOA_CLIENTE'
@@ -448,7 +448,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
       object RxDBComboBox8: TRxDBComboBox
         Left = 158
         Top = 77
-        Width = 258
+        Width = 195
         Height = 21
         Style = csDropDownList
         DataField = 'TIPO_CONTRIBUINTE'
@@ -466,7 +466,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
       object RxDBComboBox9: TRxDBComboBox
         Left = 158
         Top = 99
-        Width = 258
+        Width = 195
         Height = 21
         Style = csDropDownList
         DataField = 'TIPO_CONSUMIDOR'
@@ -645,6 +645,20 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         Alignment = taRightJustify
         Caption = '% Tributo Lei 12.741/12:'
       end
+      object Label19: TLabel
+        Left = 267
+        Top = 24
+        Width = 74
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'C.Benef. Fiscal:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+      end
       object RxDBLookupCombo5: TRxDBLookupCombo
         Left = 62
         Top = 38
@@ -657,12 +671,12 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         LookupField = 'ID'
         LookupDisplay = 'COD_IPI;NOME'
         LookupSource = DMCadCFOP.dsTab_CSTIPI
-        TabOrder = 1
+        TabOrder = 2
       end
       object RxDBLookupCombo4: TRxDBLookupCombo
         Left = 62
         Top = 16
-        Width = 394
+        Width = 191
         Height = 21
         DropDownCount = 8
         DropDownWidth = 700
@@ -685,7 +699,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         LookupField = 'ID'
         LookupDisplay = 'CODIGO;DESCRICAO'
         LookupSource = DMCadCFOP.dsEnqIPI
-        TabOrder = 2
+        TabOrder = 3
         OnKeyDown = RxDBLookupCombo7KeyDown
       end
       object DBCheckBox6: TDBCheckBox
@@ -696,7 +710,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         Caption = 'Calcular Substitui'#231#227'o Tribut'#225'ria'
         DataField = 'CALCULAR_ST'
         DataSource = DMCadCFOP.dsCFOP_Variacao
-        TabOrder = 3
+        TabOrder = 4
         ValueChecked = 'S'
         ValueUnchecked = 'N'
         Visible = False
@@ -713,7 +727,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         LookupField = 'ID'
         LookupDisplay = 'CODIGO;NOME'
         LookupSource = DMCadCFOP.dsTab_Cofins
-        TabOrder = 4
+        TabOrder = 5
         Visible = False
       end
       object RxDBLookupCombo2: TRxDBLookupCombo
@@ -728,7 +742,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         LookupField = 'ID'
         LookupDisplay = 'CODIGO;NOME'
         LookupSource = DMCadCFOP.dsTab_Pis
-        TabOrder = 5
+        TabOrder = 6
         Visible = False
       end
       object RxDBComboBox6: TRxDBComboBox
@@ -745,7 +759,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         Items.Strings = (
           'PERCENTUAL'
           'VALOR')
-        TabOrder = 6
+        TabOrder = 7
         Values.Strings = (
           'P'
           'V')
@@ -765,7 +779,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         Items.Strings = (
           'PERCENTUAL'
           'VALOR')
-        TabOrder = 7
+        TabOrder = 8
         Values.Strings = (
           'P'
           'V')
@@ -779,7 +793,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         CharCase = ecUpperCase
         DataField = 'PERC_COFINS'
         DataSource = DMCadCFOP.dsCFOP_Variacao
-        TabOrder = 8
+        TabOrder = 9
         Visible = False
       end
       object DBEdit20: TDBEdit
@@ -790,7 +804,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         CharCase = ecUpperCase
         DataField = 'PERC_PIS'
         DataSource = DMCadCFOP.dsCFOP_Variacao
-        TabOrder = 9
+        TabOrder = 10
         Visible = False
       end
       object DBEdit2: TDBEdit
@@ -801,7 +815,19 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         CharCase = ecUpperCase
         DataField = 'PERC_TRIBUTO'
         DataSource = DMCadCFOP.dsCFOP_Variacao
-        TabOrder = 10
+        TabOrder = 11
+      end
+      object DBEdit1: TDBEdit
+        Left = 345
+        Top = 16
+        Width = 111
+        Height = 21
+        CharCase = ecUpperCase
+        DataField = 'COD_BENEF'
+        DataSource = DMCadCFOP.dsCFOP_Variacao
+        TabOrder = 1
+        OnExit = DBEdit1Exit
+        OnKeyDown = DBEdit1KeyDown
       end
     end
     object RzGroupBox4: TRzGroupBox
@@ -896,8 +922,8 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
       end
     end
     object RzGroupBox3: TRzGroupBox
-      Left = 630
-      Top = 114
+      Left = 666
+      Top = 158
       Width = 66
       Height = 61
       BorderColor = clMaroon

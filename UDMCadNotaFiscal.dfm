@@ -1890,6 +1890,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object sdsNotaFiscal_ItensPERC_ICMS_FCP_5405: TFloatField
       FieldName = 'PERC_ICMS_FCP_5405'
     end
+    object sdsNotaFiscal_ItensCOD_CBENEF: TStringField
+      FieldName = 'COD_CBENEF'
+      Size = 8
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -2540,6 +2544,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscal_ItensPERC_ICMS_FCP_5405: TFloatField
       FieldName = 'PERC_ICMS_FCP_5405'
+    end
+    object cdsNotaFiscal_ItensCOD_CBENEF: TStringField
+      FieldName = 'COD_CBENEF'
+      Size = 8
     end
   end
   object dsNotaFiscal_Itens: TDataSource
@@ -4183,6 +4191,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 290
   end
   object cdsCFOP: TClientDataSet
+    Active = True
     Aggregates = <>
     IndexFieldNames = 'CODCFOP;ID'
     Params = <>
@@ -6154,7 +6163,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Params = <>
     ProviderName = 'dspTab_CSTICMS'
     Left = 817
-    Top = 4
+    Top = 5
     object cdsTab_CSTICMSID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -7663,6 +7672,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object qCFOP_VariacaoID_CSTIPI: TIntegerField
       FieldName = 'ID_CSTIPI'
     end
+    object qCFOP_VariacaoCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object sdsNotaEntrada: TSQLDataSet
     NoMetadata = True
@@ -8562,6 +8575,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object sdsCFOP_VariacaoCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object cdsCFOP_Variacao: TClientDataSet
     Aggregates = <>
@@ -8676,6 +8693,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'CALCULAR_ST'
       FixedChar = True
       Size = 1
+    end
+    object cdsCFOP_VariacaoCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
   object dsCFOP_Variacao: TDataSource

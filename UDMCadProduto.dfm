@@ -489,6 +489,10 @@ object dmCadProduto: TdmCadProduto
     object sdsProdutoPRECO_CUSTO_ANT: TFloatField
       FieldName = 'PRECO_CUSTO_ANT'
     end
+    object sdsProdutoCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -1040,6 +1044,10 @@ object dmCadProduto: TdmCadProduto
     end
     object cdsProdutosdsProdutoAplicacao: TDataSetField
       FieldName = 'sdsProdutoAplicacao'
+    end
+    object cdsProdutoCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
   object dsProduto: TDataSource

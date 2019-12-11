@@ -122,6 +122,8 @@ uses
 
   function fnc_Selecionar_Filial : Integer;
 
+  function fnc_Existe_CBenef(Codigo : String) : Boolean;
+
 var
   vCodProduto_Pos: Integer;
   vCodPessoa_Pos: Integer;
@@ -205,7 +207,8 @@ var
   vPrimeira_Hora: TTime;
   vPrimeira_Data: TDate;
   vDocumentoClienteVenda : String; //Cupom - SSNFCe
-  vCpfOK : Boolean; //Cupom - SSNFCe  
+  vCpfOK : Boolean; //Cupom - SSNFCe
+  vCod_CBenef : String;  
 
 implementation
 
@@ -2352,5 +2355,31 @@ begin
     MessageDlg('*** Filial não informada!' , mtError, [mbOk], 0);
 
 end;
+
+function fnc_Existe_CBenef(Codigo : String) : Boolean;
+var
+  sds: TSQLDataSet;
+begin
+  Result := False;
+  if trim(Codigo) = '' then
+  begin
+    Result := True;
+    exit;
+  end;
+
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT COUNT(1) CONTADOR FROM CBENEF WHERE CODIGO = ' + QuotedStr(Codigo);
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := True;
+  finally
+    FreeAndNil(sds);
+  end;
+end;
+
 
 end.

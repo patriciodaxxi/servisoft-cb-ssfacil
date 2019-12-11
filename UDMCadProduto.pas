@@ -1979,6 +1979,8 @@ type
     cdsProdutoAplicacaoAPLICACAO: TStringField;
     sdsProdutoAplicacaoNOME_MARCA: TStringField;
     cdsProdutoAplicacaoNOME_MARCA: TStringField;
+    sdsProdutoCOD_BENEF: TStringField;
+    cdsProdutoCOD_BENEF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;

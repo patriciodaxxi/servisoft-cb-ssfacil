@@ -164,14 +164,16 @@ object frmCadCFOP_Ger: TfrmCadCFOP_Ger
       LookupSource = DMCadCFOP.dsTab_CSTICMS_Simples
       TabOrder = 2
     end
-    object Edit1: TEdit
-      Left = 663
+    object edtCBenef: TEdit
+      Left = 662
       Top = 15
       Width = 112
       Height = 21
       CharCase = ecUpperCase
       MaxLength = 8
       TabOrder = 1
+      OnExit = edtCBenefExit
+      OnKeyDown = edtCBenefKeyDown
     end
   end
   object Panel3: TPanel

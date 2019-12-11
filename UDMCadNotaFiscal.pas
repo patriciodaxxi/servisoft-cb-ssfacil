@@ -3102,6 +3102,11 @@ type
     sdsNotaFiscal_ItensPERC_ICMS_FCP_5405: TFloatField;
     cdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO: TFloatField;
     cdsNotaFiscal_ItensPERC_ICMS_FCP_5405: TFloatField;
+    sdsNotaFiscal_ItensCOD_CBENEF: TStringField;
+    cdsNotaFiscal_ItensCOD_CBENEF: TStringField;
+    qCFOP_VariacaoCOD_BENEF: TStringField;
+    sdsCFOP_VariacaoCOD_BENEF: TStringField;
+    cdsCFOP_VariacaoCOD_BENEF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

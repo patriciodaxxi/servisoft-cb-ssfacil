@@ -347,7 +347,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'ID Produto:'
       end
       object RxDBLookupCombo2: TRxDBLookupCombo
-        Left = 319
+        Left = 320
         Top = 25
         Width = 329
         Height = 21
@@ -1510,7 +1510,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = '%:'
       end
       object Label23: TLabel
-        Left = 544
+        Left = 562
         Top = 48
         Width = 27
         Height = 13
@@ -1518,7 +1518,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Caption = 'Valor:'
       end
       object Label24: TLabel
-        Left = 544
+        Left = 562
         Top = 71
         Width = 27
         Height = 13
@@ -1653,6 +1653,14 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Alignment = taRightJustify
         Caption = 'Vlr.IPI Devol:'
       end
+      object Label69: TLabel
+        Left = 548
+        Top = 94
+        Width = 41
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'C.Benef:'
+      end
       object RxDBLookupCombo7: TRxDBLookupCombo
         Left = 72
         Top = 15
@@ -1670,7 +1678,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
       end
       object RxDBLookupCombo8: TRxDBLookupCombo
         Left = 72
-        Top = 40
+        Top = 41
         Width = 225
         Height = 21
         DropDownCount = 8
@@ -1684,7 +1692,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
       end
       object RxDBLookupCombo9: TRxDBLookupCombo
         Left = 72
-        Top = 63
+        Top = 64
         Width = 225
         Height = 21
         DropDownCount = 8
@@ -1694,7 +1702,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         LookupField = 'ID'
         LookupDisplay = 'CODIGO;NOME'
         LookupSource = DMCadNotaFiscal.dsTab_Cofins
-        TabOrder = 2
+        TabOrder = 5
       end
       object RxDBComboBox1: TRxDBComboBox
         Left = 327
@@ -1709,7 +1717,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Items.Strings = (
           'Percentual'
           'Valor')
-        TabOrder = 3
+        TabOrder = 2
         Values.Strings = (
           'P'
           'V')
@@ -1727,7 +1735,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Items.Strings = (
           'Percentual'
           'Valor')
-        TabOrder = 4
+        TabOrder = 6
         Values.Strings = (
           'P'
           'V')
@@ -1739,7 +1747,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'PERC_PIS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 5
+        TabOrder = 3
       end
       object DBEdit8: TDBEdit
         Left = 466
@@ -1748,21 +1756,21 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'PERC_COFINS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 6
+        TabOrder = 7
       end
       object DBEdit9: TDBEdit
-        Left = 574
+        Left = 592
         Top = 40
-        Width = 90
+        Width = 99
         Height = 21
         DataField = 'VLR_PIS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 7
+        TabOrder = 4
       end
       object DBEdit10: TDBEdit
-        Left = 574
+        Left = 592
         Top = 63
-        Width = 90
+        Width = 99
         Height = 21
         DataField = 'VLR_COFINS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
@@ -1781,7 +1789,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Items.Strings = (
           'Sim'
           'N'#227'o')
-        TabOrder = 16
+        TabOrder = 17
         Values.Strings = (
           'S'
           'N')
@@ -1823,7 +1831,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'PERC_DESCONTO'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 14
+        TabOrder = 15
         OnExit = DBEdit11Exit
       end
       object DBEdit12: TDBEdit
@@ -1833,7 +1841,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'VLR_DESCONTO'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 15
+        TabOrder = 16
       end
       object DBEdit1: TDBEdit
         Left = 434
@@ -1842,7 +1850,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'BASE_ICMS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 20
+        TabOrder = 21
       end
       object DBEdit13: TDBEdit
         Left = 434
@@ -1851,7 +1859,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'VLR_ICMS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 21
+        TabOrder = 22
       end
       object DBEdit14: TDBEdit
         Left = 466
@@ -1870,7 +1878,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'VLR_IPI'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 22
+        TabOrder = 23
       end
       object DBEdit17: TDBEdit
         Left = 454
@@ -1879,7 +1887,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'PERC_TRIBUTO_FEDERAL'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 17
+        TabOrder = 18
       end
       object DBEdit27: TDBEdit
         Left = 580
@@ -1888,7 +1896,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'PERC_TRIBUTO_ESTADUAL'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 18
+        TabOrder = 19
       end
       object DBEdit28: TDBEdit
         Left = 454
@@ -1897,7 +1905,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'PERC_TRIBUTO_MUNICIPAL'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 19
+        TabOrder = 20
       end
       object DBEdit30: TDBEdit
         Left = 466
@@ -1907,7 +1915,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         TabStop = False
         DataField = 'PERC_DIFERIMENTO'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 11
+        TabOrder = 13
       end
       object RxDBLookupCombo15: TRxDBLookupCombo
         Left = 72
@@ -1921,7 +1929,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         LookupField = 'ID'
         LookupDisplay = 'CODIGO'
         LookupSource = DMCadNotaFiscal.dsEnqIPI
-        TabOrder = 13
+        TabOrder = 14
         OnKeyDown = RxDBLookupCombo15KeyDown
       end
       object RzGroupBox1: TRzGroupBox
@@ -1945,7 +1953,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Font.Style = []
         ParentCtl3D = False
         ParentFont = False
-        TabOrder = 23
+        TabOrder = 24
         VisualStyle = vsGradient
         object Label61: TLabel
           Left = 8
@@ -2009,7 +2017,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Font.Style = []
         ParentCtl3D = False
         ParentFont = False
-        TabOrder = 24
+        TabOrder = 25
         VisualStyle = vsGradient
         object Label46: TLabel
           Left = 6
@@ -2101,7 +2109,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Font.Style = []
         ParentCtl3D = False
         ParentFont = False
-        TabOrder = 25
+        TabOrder = 26
         VisualStyle = vsGradient
         object Label60: TLabel
           Left = 14
@@ -2131,7 +2139,19 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
         Height = 21
         DataField = 'VLR_IPI_DEVOL'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
-        TabOrder = 26
+        TabOrder = 27
+      end
+      object DBEdit43: TDBEdit
+        Left = 592
+        Top = 86
+        Width = 99
+        Height = 21
+        TabStop = False
+        DataField = 'COD_CBENEF'
+        DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+        TabOrder = 11
+        OnExit = DBEdit43Exit
+        OnKeyDown = DBEdit43KeyDown
       end
     end
     object TabSheet3: TRzTabSheet

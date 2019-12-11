@@ -204,6 +204,8 @@ type
     DBEdit38: TDBEdit;
     DBEdit39: TDBEdit;
     dbckDraw: TDBCheckBox;
+    Label69: TLabel;
+    DBEdit43: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
@@ -276,6 +278,9 @@ type
     procedure RxDBlkContaOrcKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure RxDBLookupCombo4Exit(Sender: TObject);
+    procedure DBEdit43Exit(Sender: TObject);
+    procedure DBEdit43KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     ffrmCadProduto: TfrmCadProduto;
@@ -383,7 +388,7 @@ var
 implementation
 
 uses rsDBUtils, USel_Produto, uUtilPadrao, UMenu, uCalculo_NotaFiscal, USel_TabPreco, USel_Unidade, UDMUtil, DmdDatabase,
-  USel_EnqIPI, USel_CentroCusto, USel_ContaOrc;
+  USel_EnqIPI, USel_CentroCusto, USel_ContaOrc, USel_CBenef;
 
 {$R *.dfm}
 
@@ -544,6 +549,10 @@ begin
   if (fDMCadNotaFiscal.qParametros_NFeUSA_REGRA_CLI_PROD.AsString = 'S') then
     dbckDraw.Visible := uUtilPadrao.fnc_existe_Drawback(fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger);
   //*************************
+
+  //11/12/2019
+  DBEdit43.Visible := (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString <> 'S');
+  Label69.Visible  := (fDMCadNotaFiscal.cdsFilialSIMPLES.AsString <> 'S');
 end;
 
 procedure TfrmCadNotaFiscal_Itens.prc_Buscar_Imposto(Auxiliar, Nome: String);
@@ -578,6 +587,7 @@ var
   vAux: Real;
   vUsouICM: Boolean;
   //vID_EnqIPI: Integer;
+  vCod_CBenef_Loc : String;
 begin
   vID_ICMS := 0;
   vID_IPI  := 0;
@@ -587,6 +597,7 @@ begin
   vPerc_IPI_Suf      := 0;
   vID_EnqIPI         := 0;
   vPerc_BRedICMS_NCM := 0;
+  vCod_CBenef        := '';
 
   if not fDMCadNotaFiscal.cdsCFOP.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger,[loCaseInsensitive]) then
   begin
@@ -597,8 +608,16 @@ begin
   if fDMCadNotaFiscal.vID_Variacao > 0 then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger := fDMCadNotaFiscal.vID_Variacao;
   if fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger > 0 then
+  begin
     if not fDMCadNotaFiscal.cdsCFOP_Variacao.Locate('ID;ITEM',VarArrayOf([fDMCadNotaFiscal.cdsCFOPID.AsInteger,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger]),[locaseinsensitive]) then
-      fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger := 0;
+      fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger := 0
+    else
+    begin
+      //11/12/2019
+      if trim(fDMCadNotaFiscal.cdsCFOP_VariacaoCOD_BENEF.AsString) <> '' then
+        vCod_CBenef_Loc := fDMCadNotaFiscal.cdsCFOP_VariacaoCOD_BENEF.AsString;
+    end
+  end;
 
   fDMCadNotaFiscal.vID_Variacao := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger;
   if not fDMCadNotaFiscal.cdsProduto.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]) then
@@ -1248,6 +1267,11 @@ begin
      (fDMCadNotaFiscal.qParametros_LoteOPCAO_ESTOQUE_SEMI.AsString = 'N') then
     fDMCadNotaFiscal.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
   //***************************
+
+  //11/12/2019
+  
+
+  //*******************
 end;
 
 procedure TfrmCadNotaFiscal_Itens.DBEdit2Exit(Sender: TObject);
@@ -2969,8 +2993,9 @@ begin
       fDMCadNotaFiscal.cdsCliente.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,[loCaseInsensitive]);
     if fDMCadNotaFiscal.cdsCFOPID.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalID_CFOP.AsInteger then
       fDMCadNotaFiscal.cdsCFOP.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsInteger,[loCaseInsensitive]);
-    if ((copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '5') or (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '6')) and
-      ((fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S') or (fDMCadNotaFiscal.cdsCFOPGERAR_ICMS_SIMPLES.AsString = 'S' )) then
+    if (((copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '5') or (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '6')) and
+      ((fDMCadNotaFiscal.cdsCFOPGERAR_ICMS.AsString = 'S') or (fDMCadNotaFiscal.cdsCFOPGERAR_ICMS_SIMPLES.AsString = 'S' )))
+      or (fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString = '5405') then
     begin
       fDMCadNotaFiscal.qNCM_CST.Close;
       fDMCadNotaFiscal.qNCM_CST.ParamByName('UF').AsString  := fDMCadNotaFiscal.cdsClienteUF.AsString;
@@ -3471,6 +3496,31 @@ begin
     prc_Abrir_qNCM_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,vUF,vImportado_Nacional);
     if not fDMCadNotaFiscal.qNCM_UF.IsEmpty then
       Result := True;
+  end;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.DBEdit43Exit(Sender: TObject);
+begin
+  if not fnc_Existe_CBenef(DBEdit43.Text) then
+  begin
+    MessageDlg('*** Código Benefício Fiscal não encontrado!', mtInformation, [mbOk], 0);
+    DBEdit43.SetFocus;
+  end;
+end;
+
+procedure TfrmCadNotaFiscal_Itens.DBEdit43KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    vCod_CBenef   := DBEdit43.Text;
+    frmSel_CBenef := TfrmSel_CBenef.Create(Self);
+    if (RxDBLookupCombo11.Text <> '') and (Length(RxDBLookupCombo11.Text) = 2) then
+      frmSel_CBenef.vCod_CST := RxDBLookupCombo11.Text;
+    frmSel_CBenef.ShowModal;
+    if trim(vCod_CBenef) <> '' then
+      DBEdit1.Text := vCod_CBenef;
+    FreeAndNil(frmSel_CBenef);
   end;
 end;
 

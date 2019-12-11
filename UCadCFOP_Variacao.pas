@@ -66,6 +66,8 @@ type
     DBEdit2: TDBEdit;
     Label18: TLabel;
     DBText1: TDBText;
+    Label19: TLabel;
+    DBEdit1: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -79,6 +81,9 @@ type
     procedure RxDBComboBox9Exit(Sender: TObject);
     procedure RxDBComboBox5Exit(Sender: TObject);
     procedure RxDBComboBox1Exit(Sender: TObject);
+    procedure DBEdit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DBEdit1Exit(Sender: TObject);
   private
     { Private declarations }
     vGravacao_Ok : Boolean;
@@ -98,7 +103,7 @@ var
 
 implementation
 
-uses rsDBUtils, uUtilPadrao, USel_EnqIPI;
+uses rsDBUtils, uUtilPadrao, USel_EnqIPI, USel_CBenef;
 
 {$R *.dfm}
 
@@ -363,6 +368,31 @@ end;
 procedure TfrmCadCFOP_Variacao.RxDBComboBox1Exit(Sender: TObject);
 begin
   fDMCadCFOP.prc_abrir_csticms(fDMCadCFOP.cdsCFOP_VariacaoTIPO_EMPRESA.AsString);
+end;
+
+procedure TfrmCadCFOP_Variacao.DBEdit1KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    vCod_CBenef   := DBEdit1.Text;
+    frmSel_CBenef := TfrmSel_CBenef.Create(Self);
+    if (RxDBLookupCombo4.Text <> '') and (Length(RxDBLookupCombo4.Text) = 2) then
+      frmSel_CBenef.vCod_CST := RxDBLookupCombo4.Text;
+    frmSel_CBenef.ShowModal;
+    if trim(vCod_CBenef) <> '' then
+      DBEdit1.Text := vCod_CBenef;
+    FreeAndNil(frmSel_CBenef);
+  end;
+end;
+
+procedure TfrmCadCFOP_Variacao.DBEdit1Exit(Sender: TObject);
+begin
+  if not fnc_Existe_CBenef(DBEdit1.Text) then
+  begin
+    MessageDlg('*** Código Benefício Fiscal não encontrado!', mtInformation, [mbOk], 0);
+    DBEdit1.SetFocus;
+  end;
 end;
 
 end.

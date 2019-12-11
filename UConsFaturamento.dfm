@@ -1,6 +1,6 @@
 object frmConsFaturamento: TfrmConsFaturamento
-  Left = 41
-  Top = 83
+  Left = 16
+  Top = 80
   Width = 1357
   Height = 568
   Caption = 'Consulta Faturamento'
@@ -362,7 +362,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     Top = 110
     Width = 1341
     Height = 367
-    ActivePage = TS_UF
+    ActivePage = TS_Nota
     ActivePageDefault = TS_Cliente
     Align = alClient
     BackgroundColor = clGray
@@ -375,7 +375,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 4
+    TabIndex = 6
     TabOrder = 2
     TextColors.Selected = clBlue
     FixedDimension = 19
@@ -1220,10 +1220,10 @@ object frmConsFaturamento: TfrmConsFaturamento
         Top = 0
         Width = 1337
         Height = 344
-        ActivePage = TS_UF_Produto
+        ActivePage = TS_UF_Acumulado
         ActivePageDefault = TS_UF_Acumulado
         Align = alClient
-        TabIndex = 1
+        TabIndex = 0
         TabOrder = 0
         FixedDimension = 19
         object TS_UF_Acumulado: TRzTabSheet
@@ -1960,7 +1960,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 16
+        ColCount = 17
         RowCount = 2
         Columns = <
           item
@@ -2071,6 +2071,12 @@ object frmConsFaturamento: TfrmConsFaturamento
             Expanded = False
             FieldName = 'ID_CLIENTE'
             Title.Caption = 'ID Cliente'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FANTASIA'
+            Title.Caption = 'Nome Fantasia'
             Visible = True
           end>
       end

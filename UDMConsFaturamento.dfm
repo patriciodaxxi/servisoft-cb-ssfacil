@@ -814,17 +814,17 @@ object DMConsFaturamento: TDMConsFaturamento
       'select NT.FILIAL, NT.DTEMISSAO, NT.NUMNOTA, NT.SERIE, NT.ID_CLIE' +
       'NTE, CLI.NOME NOME_CLIENTE, NT.BASE_ICMS, NT.VLR_ICMS,'#13#10'       N' +
       'T.VLR_DUPLICATA, NT.VLR_NOTA, NT.VLR_ITENS, NT.VLR_IPI, NT.DTSAI' +
-      'DAENTRADA, NT.VLR_ICMSSUBST,'#13#10'       VEN.NOME NOME_VENDEDOR,'#13#10'  ' +
-      '     (select sum(I.VLR_TOTAL)'#13#10'        from NOTAFISCAL_ITENS I'#13#10 +
-      '        inner join TAB_CFOP CFOP on I.ID_CFOP = CFOP.ID'#13#10'       ' +
-      ' where I.ID = NT.ID and'#13#10'              CFOP.FATURAMENTO = '#39'S'#39') V' +
-      'LR_FATURAMENTO'#13#10'from NOTAFISCAL NT'#13#10'inner join PESSOA CLI on (NT' +
-      '.ID_CLIENTE = CLI.CODIGO)'#13#10'left join PESSOA VEN on (NT.ID_VENDED' +
-      'OR = VEN.CODIGO)'#13#10'where NT.CANCELADA = '#39'N'#39' and'#13#10'      NT.NFEDENE' +
-      'GADA = '#39'N'#39' and'#13#10'      (select sum(I.VLR_TOTAL)'#13#10'       from NOTA' +
-      'FISCAL_ITENS I'#13#10'       inner join TAB_CFOP CFOP on I.ID_CFOP = C' +
-      'FOP.ID'#13#10'       where I.ID = NT.ID and'#13#10'             CFOP.FATURAM' +
-      'ENTO = '#39'S'#39') > 0'#13#10
+      'DAENTRADA, NT.VLR_ICMSSUBST,'#13#10'       VEN.NOME NOME_VENDEDOR, CLI' +
+      '.FANTASIA,'#13#10'       (select sum(I.VLR_TOTAL)'#13#10'        from NOTAFI' +
+      'SCAL_ITENS I'#13#10'        inner join TAB_CFOP CFOP on I.ID_CFOP = CF' +
+      'OP.ID'#13#10'        where I.ID = NT.ID and'#13#10'              CFOP.FATURA' +
+      'MENTO = '#39'S'#39') VLR_FATURAMENTO'#13#10'from NOTAFISCAL NT'#13#10'inner join PES' +
+      'SOA CLI on (NT.ID_CLIENTE = CLI.CODIGO)'#13#10'left join PESSOA VEN on' +
+      ' (NT.ID_VENDEDOR = VEN.CODIGO)'#13#10'where NT.CANCELADA = '#39'N'#39' and'#13#10'  ' +
+      '    NT.NFEDENEGADA = '#39'N'#39' and'#13#10'      (select sum(I.VLR_TOTAL)'#13#10'  ' +
+      '     from NOTAFISCAL_ITENS I'#13#10'       inner join TAB_CFOP CFOP on' +
+      ' I.ID_CFOP = CFOP.ID'#13#10'       where I.ID = NT.ID and'#13#10'           ' +
+      '  CFOP.FATURAMENTO = '#39'S'#39') > 0'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -901,6 +901,10 @@ object DMConsFaturamento: TDMConsFaturamento
     object cdsNotaFiscalVLR_FATURAMENTO: TFloatField
       FieldName = 'VLR_FATURAMENTO'
       DisplayFormat = '###,###,##0.00'
+    end
+    object cdsNotaFiscalFANTASIA: TStringField
+      FieldName = 'FANTASIA'
+      Size = 30
     end
   end
   object dsNotaFiscal: TDataSource

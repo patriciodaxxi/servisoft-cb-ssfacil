@@ -1358,10 +1358,10 @@ object frmCadNCM: TfrmCadNCM
         Top = 202
         Width = 946
         Height = 302
-        ActivePage = TS_SubTrib
+        ActivePage = TS_Geral
         ActivePageDefault = TS_SubTrib
         Align = alClient
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 2
         TextColors.Selected = clBlue
         FixedDimension = 19
@@ -2854,6 +2854,14 @@ object frmCadNCM: TfrmCadNCM
               Alignment = taRightJustify
               Caption = '% ICMS:'
             end
+            object Label46: TLabel
+              Left = 425
+              Top = 32
+              Width = 53
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Cod.Benef:'
+            end
             object RxDBLookupCombo12: TRxDBLookupCombo
               Left = 102
               Top = 28
@@ -2958,6 +2966,17 @@ object frmCadNCM: TfrmCadNCM
               DataField = 'PERC_ICMS'
               DataSource = DMCadNCM.dsNCM
               TabOrder = 1
+            end
+            object DBEdit10: TDBEdit
+              Left = 481
+              Top = 24
+              Width = 105
+              Height = 21
+              DataField = 'COD_BENEF'
+              DataSource = DMCadNCM.dsNCM
+              TabOrder = 9
+              OnExit = DBEdit10Exit
+              OnKeyDown = DBEdit10KeyDown
             end
           end
         end

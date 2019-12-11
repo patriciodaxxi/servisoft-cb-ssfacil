@@ -26,11 +26,14 @@ type
     Label1: TLabel;
     RxDBLookupCombo1: TRxDBLookupCombo;
     Label2: TLabel;
-    Edit1: TEdit;
+    edtCBenef: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure edtCBenefKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtCBenefExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,7 +47,7 @@ var
 
 implementation
 
-uses rsDBUtils;
+uses rsDBUtils, uUtilPadrao, USel_CBenef;
 
 {$R *.dfm}
 
@@ -134,7 +137,7 @@ begin
     if RxDBLookupCombo7.Text <> '' then
       fDMCadCFOP.cdsCFOP_VariacaoCOD_ENQ.AsString  := RxDBLookupCombo7.Text;
 
-    fDMCadCFOP.cdsCFOP_VariacaoCOD_BENEF.AsString := Edit1.Text;
+    fDMCadCFOP.cdsCFOP_VariacaoCOD_BENEF.AsString := edtCBenef.Text;
     fDMCadCFOP.cdsCFOP_Variacao.Post;
   end;
   Close;
@@ -143,6 +146,32 @@ end;
 procedure TfrmCadCFOP_Ger.btnCancelarClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrmCadCFOP_Ger.edtCBenefKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    vCod_CBenef := edtCBenef.Text;
+    frmSel_CBenef := TfrmSel_CBenef.Create(Self);
+    if (RxDBLookupCombo4.Text <> '') and (Length(RxDBLookupCombo4.Text) = 2) then
+      frmSel_CBenef.vCod_CST := RxDBLookupCombo4.Text;
+    frmSel_CBenef.ShowModal;
+    if trim(vCod_CBenef) <> '' then
+      edtCBenef.Text := vCod_CBenef;
+    FreeAndNil(frmSel_CBenef);
+  end;
+end;
+
+procedure TfrmCadCFOP_Ger.edtCBenefExit(Sender: TObject);
+begin
+  if not fnc_Existe_CBenef(edtCBenef.Text) then
+  begin
+    MessageDlg('*** Código Benefício Fiscal não encontrado!', mtInformation, [mbOk], 0);
+    edtCBenef.SetFocus;
+  end;
+
 end;
 
 end.

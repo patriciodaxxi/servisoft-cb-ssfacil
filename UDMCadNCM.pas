@@ -307,6 +307,8 @@ type
     qCFOPCODCFOP: TStringField;
     cdsNCM_LEIOBS_LEI: TStringField;
     cdsNCM_ConsultaUNIDADE_TRIB: TStringField;
+    sdsNCMCOD_BENEF: TStringField;
+    cdsNCMCOD_BENEF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNCMUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
