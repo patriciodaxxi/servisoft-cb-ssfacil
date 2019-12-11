@@ -64,13 +64,29 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       Width = 8
       Height = 13
       Caption = '%'
+      Transparent = True
     end
     object Label6: TLabel
-      Left = 435
+      Left = 491
       Top = 40
       Width = 17
       Height = 13
       Caption = 'Lei:'
+      Transparent = True
+    end
+    object Label7: TLabel
+      Left = 313
+      Top = 40
+      Width = 74
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'C.Benef. Fiscal:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
       Transparent = True
     end
     object CurrencyEdit1: TCurrencyEdit
@@ -103,7 +119,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       OnChange = RxDBLookupCombo1Change
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
-      Left = 455
+      Left = 511
       Top = 32
       Width = 274
       Height = 21
@@ -113,16 +129,29 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
       LookupDisplay = 'NOME'
       LookupSource = DMCadPessoa.dsOBS_Lei
       ParentCtl3D = False
-      TabOrder = 2
+      TabOrder = 3
       OnChange = RxDBLookupCombo1Change
     end
     object CheckBox1: TCheckBox
-      Left = 760
-      Top = 33
+      Left = 797
+      Top = 31
       Width = 97
       Height = 17
       Caption = 'DrawBack'
-      TabOrder = 3
+      TabOrder = 4
+    end
+    object edtCBenef: TEdit
+      Left = 388
+      Top = 34
+      Width = 96
+      Height = 19
+      CharCase = ecUpperCase
+      Ctl3D = False
+      MaxLength = 8
+      ParentCtl3D = False
+      TabOrder = 2
+      OnExit = edtCBenefExit
+      OnKeyDown = edtCBenefKeyDown
     end
   end
   object NxPanel2: TNxPanel
@@ -199,7 +228,7 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 8
+    ColCount = 9
     RowCount = 2
     Columns = <
       item
@@ -239,6 +268,15 @@ object frmCadPessoa_ProdICMS: TfrmCadPessoa_ProdICMS
         Title.Caption = 'CST ICMS'
         Title.Color = 16760962
         Width = 73
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'COD_BENEF'
+        Title.Alignment = taCenter
+        Title.Caption = 'C'#243'd. Benef. Fiscal'
+        Title.Color = 16760962
+        Width = 96
         Visible = True
       end
       item

@@ -1,6 +1,6 @@
 object frmCadPessoa: TfrmCadPessoa
-  Left = 138
-  Top = 22
+  Left = 163
+  Top = 7
   Width = 1091
   Height = 728
   Caption = 'Cadastro de Pessoas'
@@ -1420,7 +1420,7 @@ object frmCadPessoa: TfrmCadPessoa
         Top = 30
         Width = 1079
         Height = 627
-        ActivePage = TS_Pessoa_Dados
+        ActivePage = TS_RegrasFiscais
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1428,7 +1428,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 0
+        TabIndex = 4
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19
@@ -7592,6 +7592,14 @@ object frmCadPessoa: TfrmCadPessoa
                 Alignment = taRightJustify
                 Caption = 'CST:'
               end
+              object Label210: TLabel
+                Left = 301
+                Top = 30
+                Width = 53
+                Height = 13
+                Alignment = taRightJustify
+                Caption = 'Cod.Benef:'
+              end
               object RxDBLookupCombo38: TRxDBLookupCombo
                 Left = 37
                 Top = 22
@@ -7607,19 +7615,30 @@ object frmCadPessoa: TfrmCadPessoa
                 TabOrder = 0
               end
               object btnFiscalProduto: TNxButton
-                Left = 589
-                Top = 12
+                Left = 763
+                Top = 14
                 Width = 124
                 Height = 33
                 Caption = 'Informar Por Produto'
                 TabOrder = 1
                 OnClick = btnFiscalProdutoClick
               end
+              object DBEdit116: TDBEdit
+                Left = 357
+                Top = 22
+                Width = 91
+                Height = 21
+                DataField = 'COD_BENEF'
+                DataSource = DMCadPessoa.dsPessoa_Fiscal
+                TabOrder = 2
+                OnExit = DBEdit116Exit
+                OnKeyDown = DBEdit116KeyDown
+              end
             end
             object DBRadioGroup1: TDBRadioGroup
-              Left = 353
+              Left = 521
               Top = 1
-              Width = 236
+              Width = 235
               Height = 51
               Caption = ' Tipo ICMS '
               Columns = 3

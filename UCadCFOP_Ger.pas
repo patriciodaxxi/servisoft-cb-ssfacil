@@ -171,7 +171,6 @@ begin
     MessageDlg('*** Código Benefício Fiscal não encontrado!', mtInformation, [mbOk], 0);
     edtCBenef.SetFocus;
   end;
-
 end;
 
 end.

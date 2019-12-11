@@ -2546,6 +2546,10 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'CAE_3'
       Size = 9
     end
+    object cdsPessoa_FiscalCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object dspPessoa_Fiscal: TDataSetProvider
     DataSet = sdsPessoa_Fiscal
@@ -2687,6 +2691,10 @@ object DMCadPessoa: TDMCadPessoa
     object sdsPessoa_FiscalCAE_3: TStringField
       FieldName = 'CAE_3'
       Size = 9
+    end
+    object sdsPessoa_FiscalCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
   object sdsTab_CSTIPI: TSQLDataSet
@@ -7263,6 +7271,11 @@ object DMCadPessoa: TDMCadPessoa
         Attributes = [faFixed]
         DataType = ftString
         Size = 1
+      end
+      item
+        Name = 'COD_BENEF'
+        DataType = ftString
+        Size = 8
       end>
     IndexDefs = <>
     IndexFieldNames = 'CODIGO;ITEM'
@@ -7315,6 +7328,10 @@ object DMCadPessoa: TDMCadPessoa
       FixedChar = True
       Size = 1
     end
+    object cdsPessoa_ProdICMSCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object dspPessoa_ProdICMS: TDataSetProvider
     DataSet = sdsPessoa_ProdICMS
@@ -7359,6 +7376,10 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
+    end
+    object sdsPessoa_ProdICMSCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
   object qFilial_Rel: TSQLQuery

@@ -25,6 +25,8 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     DBMemo1: TDBMemo;
     CheckBox1: TCheckBox;
+    Label7: TLabel;
+    edtCBenef: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConfirmarClick(Sender: TObject);
@@ -33,6 +35,9 @@ type
     procedure CurrencyEdit1Change(Sender: TObject);
     procedure RxDBLookupCombo1Change(Sender: TObject);
     procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtCBenefExit(Sender: TObject);
+    procedure edtCBenefKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
     { Private declarations }
@@ -82,6 +87,7 @@ begin
   fDMCadPessoa.cdsPessoa_ProdICMSITEM.AsInteger       := vItem + 1;
   fDMCadPessoa.cdsPessoa_ProdICMSID_PRODUTO.AsInteger := CurrencyEdit1.AsInteger;
   fDMCadPessoa.cdsPessoa_ProdICMSID_CSTICMS.AsInteger := RxDBLookupCombo1.KeyValue;
+  fDMCadPessoa.cdsPessoa_ProdICMSCOD_BENEF.AsString   := edtCBenef.Text;
   if RxDBLookupCombo2.Text <> '' then
     fDMCadPessoa.cdsPessoa_ProdICMSID_LEI.AsInteger := RxDBLookupCombo2.KeyValue;
   if CheckBox1.Checked then
@@ -92,6 +98,7 @@ begin
 
   CurrencyEdit1.Clear;
   RxDBLookupCombo1.ClearValue;
+  edtCBenef.Clear;
   CurrencyEdit1.SetFocus;
 end;
 
@@ -146,6 +153,31 @@ begin
     frmSel_Produto.ShowModal;
     FreeAndNil(frmSel_Produto);
     CurrencyEdit1.AsInteger := vCodProduto_Pos;
+  end;
+end;
+
+procedure TfrmCadPessoa_ProdICMS.edtCBenefExit(Sender: TObject);
+begin
+  if not fnc_Existe_CBenef(edtCBenef.Text) then
+  begin
+    MessageDlg('*** Código Benefício Fiscal não encontrado!', mtInformation, [mbOk], 0);
+    edtCBenef.SetFocus;
+  end;
+end;
+
+procedure TfrmCadPessoa_ProdICMS.edtCBenefKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    vCod_CBenef := edtCBenef.Text;
+    frmSel_CBenef := TfrmSel_CBenef.Create(Self);
+    if (RxDBLookupCombo1.Text <> '') and (Length(RxDBLookupCombo1.Text) = 2) then
+      frmSel_CBenef.vCod_CST := RxDBLookupCombo1.Text;
+    frmSel_CBenef.ShowModal;
+    if trim(vCod_CBenef) <> '' then
+      edtCBenef.Text := vCod_CBenef;
+    FreeAndNil(frmSel_CBenef);
   end;
 end;
 
