@@ -155,6 +155,8 @@ type
     SMDBGrid5: TSMDBGrid;
     Label45: TLabel;
     Edit1: TEdit;
+    Label46: TLabel;
+    DBEdit10: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -201,6 +203,9 @@ type
     procedure GroupBox3Enter(Sender: TObject);
     procedure btnInserir_LeiClick(Sender: TObject);
     procedure btnExcluir_LeiClick(Sender: TObject);
+    procedure DBEdit10Exit(Sender: TObject);
+    procedure DBEdit10KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMCadNCM: TDMCadNCM;
@@ -229,7 +234,7 @@ var
 implementation
 
 uses rsDBUtils, UCadObs_Lei, USel_CodCest, uUtilPadrao, UDMCadTab_IBPT,
-  uUtilIBPT;
+  uUtilIBPT, USel_CBenef;
 
 {$R *.dfm}
 
@@ -1071,6 +1076,31 @@ begin
   if MessageDlg('Deseja excluir este registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     exit;
   fDMCadNCM.cdsNCM_LEI.Delete;
+end;
+
+procedure TfrmCadNCM.DBEdit10Exit(Sender: TObject);
+begin
+  if not fnc_Existe_CBenef(DBEdit10.Text) then
+  begin
+    MessageDlg('*** Código Benefício Fiscal não encontrado!', mtInformation, [mbOk], 0);
+    DBEdit10.SetFocus;
+  end;
+end;
+
+procedure TfrmCadNCM.DBEdit10KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    vCod_CBenef   := DBEdit10.Text;
+    frmSel_CBenef := TfrmSel_CBenef.Create(Self);
+    if (RxDBLookupCombo12.Text <> '') and (Length(RxDBLookupCombo12.Text) = 2) then
+      frmSel_CBenef.vCod_CST := RxDBLookupCombo12.Text;
+    frmSel_CBenef.ShowModal;
+    if trim(vCod_CBenef) <> '' then
+      DBEdit10.Text := vCod_CBenef;
+    FreeAndNil(frmSel_CBenef);
+  end;
 end;
 
 end.

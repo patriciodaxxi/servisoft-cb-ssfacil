@@ -6398,7 +6398,6 @@ begin
     MessageDlg('*** Código Benefício Fiscal não encontrado!', mtInformation, [mbOk], 0);
     DBEdit163.SetFocus;
   end;
-
 end;
 
 procedure TfrmCadProduto.DBEdit163KeyDown(Sender: TObject; var Key: Word;

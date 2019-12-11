@@ -219,6 +219,10 @@ object DMCadNCM: TDMCadNCM
       FieldName = 'IBPT_INATIVO'
       Size = 1
     end
+    object sdsNCMCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object sdsNCM_UF: TSQLDataSet
     NoMetadata = True
@@ -312,7 +316,6 @@ object DMCadNCM: TDMCadNCM
     Top = 80
   end
   object cdsNCM: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -427,9 +430,12 @@ object DMCadNCM: TDMCadNCM
     object cdsNCMsdsNCM_Lei: TDataSetField
       FieldName = 'sdsNCM_Lei'
     end
+    object cdsNCMCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object cdsNCM_UF: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsNCMsdsNCM_UF
     IndexFieldNames = 'ID;ITEM'
@@ -587,7 +593,6 @@ object DMCadNCM: TDMCadNCM
     end
   end
   object cdsNCM_CST: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsNCMsdsNCM_CST
     IndexFieldNames = 'ID;ITEM'
@@ -1176,7 +1181,6 @@ object DMCadNCM: TDMCadNCM
     end
   end
   object cdsNCM_Uni: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsNCMsdsNCM_Uni
     IndexFieldNames = 'ID;UNIDADE'
@@ -1544,7 +1548,6 @@ object DMCadNCM: TDMCadNCM
     end
   end
   object cdsNCM_LEI: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsNCMsdsNCM_Lei
     IndexFieldNames = 'ID;ITEM'
