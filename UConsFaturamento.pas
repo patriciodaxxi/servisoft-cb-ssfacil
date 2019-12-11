@@ -1074,7 +1074,7 @@ begin
   fDMConsFaturamento.cdsNotaFiscal.Close;
   fDMConsFaturamento.sdsNotaFiscal.CommandText := 'SELECT NT.filial, NT.DTEMISSAO, NT.NUMNOTA, NT.SERIE, NT.ID_CLIENTE, CLI.NOME NOME_CLIENTE, '
                                                 + 'NT.BASE_ICMS, NT.VLR_ICMS, (' + vDesc + ') VLR_DUPLICATA, NT.VLR_NOTA, NT.VLR_IPI, '
-                                                + 'NT.VLR_ITENS, NT.VLR_IPI, NT.DTSAIDAENTRADA, NT.VLR_ICMSSUBST, VEN.NOME NOME_VENDEDOR, '
+                                                + 'NT.VLR_ITENS, NT.VLR_IPI, NT.DTSAIDAENTRADA, NT.VLR_ICMSSUBST, VEN.NOME NOME_VENDEDOR, CLI.FANTASIA,'
                                                 + '(SELECT SUM(I.VLR_TOTAL) FROM NOTAFISCAL_ITENS I INNER JOIN TAB_CFOP CFOP ON I.ID_CFOP = CFOP.ID '
                                                 + 'WHERE I.ID = NT.ID AND CFOP.FATURAMENTO = '+QuotedStr('S') +') VLR_FATURAMENTO '
                                                 + 'FROM NOTAFISCAL NT '
