@@ -52,7 +52,7 @@ var
 
 implementation
 
-uses rsDBUtils, uUtilPadrao, USel_Produto;
+uses rsDBUtils, uUtilPadrao, USel_Produto, USel_CBenef;
 
 {$R *.dfm}
 

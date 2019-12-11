@@ -130,7 +130,6 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'GERAR_ST'
             Title.Alignment = taCenter
             Title.Caption = 'Gerar ST'
-            Width = 64
             Visible = True
           end
           item
@@ -146,7 +145,6 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'CALCULA_FCP'
             Title.Alignment = taCenter
             Title.Caption = 'C'#225'lcula FCP'
-            Width = 64
             Visible = True
           end
           item
@@ -161,7 +159,6 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'COD_IPI'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. IPI'
-            Width = 64
             Visible = True
           end
           item
@@ -177,7 +174,6 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'UNIDADE_TRIB'
             Title.Alignment = taCenter
             Title.Caption = 'Unid. Trib. Exp.'
-            Width = 64
             Visible = True
           end>
       end
@@ -2067,7 +2063,7 @@ object frmCadNCM: TfrmCadNCM
             end
             object Label15: TLabel
               Left = 64
-              Top = 11
+              Top = 13
               Width = 75
               Height = 13
               Alignment = taCenter
@@ -2088,12 +2084,26 @@ object frmCadNCM: TfrmCadNCM
               Visible = False
             end
             object Label26: TLabel
-              Left = 280
-              Top = 12
+              Left = 277
+              Top = 13
               Width = 31
               Height = 13
               Alignment = taCenter
               Caption = '% FCP'
+            end
+            object Label47: TLabel
+              Left = 175
+              Top = 13
+              Width = 74
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'C.Benef. Fiscal:'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = []
+              ParentFont = False
             end
             object RxDBLookupCombo3: TRxDBLookupCombo
               Left = 2
@@ -2176,7 +2186,7 @@ object frmCadNCM: TfrmCadNCM
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
-              TabOrder = 3
+              TabOrder = 4
               Transparent = True
               OnClick = btnInserir_CSTClick
             end
@@ -2243,7 +2253,7 @@ object frmCadNCM: TfrmCadNCM
                 FEFFFFFFFFFFFFFFFFFFFFFFF9FEFE000000}
               ParentShowHint = False
               ShowHint = True
-              TabOrder = 4
+              TabOrder = 5
               OnClick = btnAlterar_CSTClick
             end
             object btnExcluir_CST: TNxButton
@@ -2318,7 +2328,7 @@ object frmCadNCM: TfrmCadNCM
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
-              TabOrder = 5
+              TabOrder = 6
               Transparent = True
               OnClick = btnExcluir_CSTClick
             end
@@ -2405,7 +2415,7 @@ object frmCadNCM: TfrmCadNCM
               ParentFont = False
               ParentShowHint = False
               ShowHint = True
-              TabOrder = 6
+              TabOrder = 7
               Transparent = True
               OnClick = btnGerador_CSTClick
             end
@@ -2414,17 +2424,28 @@ object frmCadNCM: TfrmCadNCM
               Top = 24
               Width = 209
               Height = 17
-              TabOrder = 7
+              TabOrder = 8
               Visible = False
             end
             object CurrencyEdit5: TCurrencyEdit
-              Left = 264
+              Left = 261
               Top = 26
               Width = 81
               Height = 21
               AutoSize = False
               DisplayFormat = '0.00'
+              TabOrder = 3
+            end
+            object edtCBenef: TEdit
+              Left = 153
+              Top = 26
+              Width = 107
+              Height = 21
+              CharCase = ecUpperCase
+              MaxLength = 8
               TabOrder = 2
+              OnExit = edtCBenefExit
+              OnKeyDown = edtCBenefKeyDown
             end
           end
           object SMDBGrid3: TSMDBGrid

@@ -757,7 +757,7 @@ implementation
 
 uses
   UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa, USel_ContaOrc, USel_EnqIPI, USel_Atividade, UVendedor_Config,
-  UCadPessoa_ProdICMS;
+  UCadPessoa_ProdICMS, USel_CBenef;
 
 {$R *.dfm}
 
