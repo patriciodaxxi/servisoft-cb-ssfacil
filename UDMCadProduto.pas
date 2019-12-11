@@ -1977,6 +1977,10 @@ type
     cdsProdutoAplicacaoITEM: TIntegerField;
     cdsProdutoAplicacaoID_MARCA: TIntegerField;
     cdsProdutoAplicacaoAPLICACAO: TStringField;
+    sdsProdutoCOD_BENEF: TStringField;
+    sdsProdutoCOD_BENEF_BRED: TStringField;
+    cdsProdutoCOD_BENEF: TStringField;
+    cdsProdutoCOD_BENEF_BRED: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsProdutoNewRecord(DataSet: TDataSet);
     procedure dspProdutoUpdateError(Sender: TObject;
