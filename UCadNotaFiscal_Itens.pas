@@ -388,7 +388,7 @@ var
 implementation
 
 uses rsDBUtils, USel_Produto, uUtilPadrao, UMenu, uCalculo_NotaFiscal, USel_TabPreco, USel_Unidade, UDMUtil, DmdDatabase,
-  USel_EnqIPI, USel_CentroCusto, USel_ContaOrc;
+  USel_EnqIPI, USel_CentroCusto, USel_ContaOrc, USel_CBenef;
 
 {$R *.dfm}
 

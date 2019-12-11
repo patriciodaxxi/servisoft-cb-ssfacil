@@ -653,7 +653,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         Alignment = taRightJustify
         Caption = 'C.Benef. Fiscal:'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clMaroon
+        Font.Color = clBlack
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = []
