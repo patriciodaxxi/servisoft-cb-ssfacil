@@ -24,7 +24,7 @@ type
     constructor create(pConexaoControle:TControle);
     destructor destroy; override;
     function InserePedidoProjeto : Boolean;
-    function PesquisaPedidoProjeto(pNome : String) : TPedidoControle;
+    function PesquisaPedidoProjeto(pNome : String; ID_Cliente : String) : TPedidoControle;
 
     property NomeProjeto : String read FNOMEPROJETO write FNOMEPROJETO;
     property ID_Pessoa : Integer read FID_Pessoa write FID_Pessoa;
@@ -89,8 +89,7 @@ begin
   end;
 end;
 
-function TPedidoControle.PesquisaPedidoProjeto(
-  pNome: String): TPedidoControle;
+function TPedidoControle.PesquisaPedidoProjeto(pNome: String; ID_Cliente : String): TPedidoControle;
 begin
   FControle.sqlGeral.Close;
   FControle.sqlGeral.SQL.Clear;
@@ -106,6 +105,8 @@ begin
   FControle.sqlGeral.SQL.ADD('ID_PRODUTO ');
   FControle.sqlGeral.SQL.ADD('from PEDIDO_PROJETO ');
   FControle.sqlGeral.SQL.ADD('Where NOME_PROJETO = ' + QuotedStr(pNome));
+  FControle.sqlGeral.SQL.ADD(' and ID_Pessoa = ' + ID_Cliente);
+
   FControle.sqlGeral.Open;
 
   if not FControle.sqlGeral.IsEmpty then

@@ -264,7 +264,7 @@ begin
       mArquivoImportadoNomeArquivo.AsString := NomeArquivoSemExtensao(F.Name);
       mArquivoImportadoExtensaoArquivo.AsString := ExtractFileExt(F.Name);
 
-      vControlePedidoProjeto.PesquisaPedidoProjeto(mArquivoImportadoNomeArquivo.AsString);
+      vControlePedidoProjeto.PesquisaPedidoProjeto(mArquivoImportadoNomeArquivo.AsString, fDMCadPedido.cdsPedidoID_CLIENTE.AsString);
       if vControlePedidoProjeto.ESPESSURA > 0 then
       begin
         mArquivoImportadoComprimento.AsFloat := vControlePedidoProjeto.COMPRIMENTO;
