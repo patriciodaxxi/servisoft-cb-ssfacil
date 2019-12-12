@@ -2467,6 +2467,7 @@ object frmCadPessoa: TfrmCadPessoa
             Align = alBottom
             TabIndex = 2
             TabOrder = 1
+            OnChange = RzPageControl3Change
             FixedDimension = 19
             object ts_Contatos: TRzTabSheet
               Caption = 'Contatos'
@@ -2875,7 +2876,7 @@ object frmCadPessoa: TfrmCadPessoa
                   TabOrder = 2
                 end
                 object DBCheckBox33: TDBCheckBox
-                  Left = 240
+                  Left = 241
                   Top = 21
                   Width = 250
                   Height = 15
@@ -2885,7 +2886,7 @@ object frmCadPessoa: TfrmCadPessoa
                   TabOrder = 3
                   ValueChecked = 'S'
                   ValueUnchecked = 'N'
-                  OnClick = DBCheckBox33Click
+                  OnExit = DBCheckBox33Exit
                 end
               end
             end

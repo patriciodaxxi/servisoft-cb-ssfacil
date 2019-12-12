@@ -249,7 +249,7 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           Caption = 'Vlr.ICMS:'
         end
         object Label35: TLabel
-          Left = 471
+          Left = 480
           Top = 59
           Width = 31
           Height = 13
@@ -536,6 +536,14 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           Alignment = taRightJustify
           Caption = 'Lei (Dados Adicionais)'
         end
+        object Label88: TLabel
+          Left = 470
+          Top = 36
+          Width = 41
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'C.Benef:'
+        end
         object DBEdit3: TDBEdit
           Left = 129
           Top = 29
@@ -768,9 +776,9 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
           TabOrder = 3
         end
         object DBEdit16: TDBEdit
-          Left = 505
+          Left = 513
           Top = 51
-          Width = 115
+          Width = 110
           Height = 21
           Color = clWhite
           DataField = 'VLR_IPI'
@@ -1943,6 +1951,16 @@ object frmCadNotaFiscal_Alt_Imp: TfrmCadNotaFiscal_Alt_Imp
             ParentCtl3D = False
             TabOrder = 1
           end
+        end
+        object DBEdit72: TDBEdit
+          Left = 513
+          Top = 28
+          Width = 110
+          Height = 21
+          Color = clWhite
+          DataField = 'COD_CBENEF'
+          DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
+          TabOrder = 62
         end
       end
     end

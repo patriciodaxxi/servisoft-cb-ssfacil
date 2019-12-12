@@ -720,7 +720,8 @@ type
       Shift: TShiftState);
     procedure DBEdit113Exit(Sender: TObject);
     procedure DBEdit113Enter(Sender: TObject);
-    procedure DBCheckBox33Click(Sender: TObject);
+    procedure RzPageControl3Change(Sender: TObject);
+    procedure DBCheckBox33Exit(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -1251,6 +1252,8 @@ begin
     Label191.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
     DBEdit107.Visible := (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S');
 
+    DBCheckBox33.Visible := ((fDMCadPessoa.cdsPessoaUF.AsString = 'RS') and (fDMCadPessoa.qParametros_GeralUSA_CAE_PESSOA.AsString = 'S'));
+
     prc_opcao_vendedor;
   end;
 end;
@@ -1262,6 +1265,7 @@ begin
     fDMCadPessoa.cdsUF.Locate('UF', RxDBLookupCombo1.Value, [loCaseInsensitive]);
     if fDMCadPessoa.cdsUFIDPAIS.AsInteger > 0 then
       fDMCadPessoa.cdsPessoaID_PAIS.AsInteger := fDMCadPessoa.cdsUFIDPAIS.AsInteger;
+    DBCheckBox33.Visible := ((RxDBLookupCombo1.Text = 'RS') and (fDMCadPessoa.qParametros_GeralUSA_CAE_PESSOA.AsString = 'S'));
   end;
 end;
 
@@ -2780,8 +2784,11 @@ procedure TfrmCadPessoa.DBEdit113Exit(Sender: TObject);
 var
   vAux : String;
 begin
-  if vCAE_Ant = fDMCadPessoa.cdsPessoa_FiscalCAE_1.AsString then
+  if (vCAE_Ant = fDMCadPessoa.cdsPessoa_FiscalCAE_1.AsString) then
     exit;
+  if (fDMCadPessoa.cdsPessoaUF.AsString <> 'RS') then
+    exit;
+    
   vAux := Monta_Numero(DBEdit113.Text,0); 
 
   if uUtilCliente.fnc_Verifica_CAE(copy(vAux,1,5)) then
@@ -2810,7 +2817,13 @@ begin
   vCAE_Ant := fDMCadPessoa.cdsPessoa_FiscalCAE_1.AsString;
 end;
 
-procedure TfrmCadPessoa.DBCheckBox33Click(Sender: TObject);
+procedure TfrmCadPessoa.RzPageControl3Change(Sender: TObject);
+begin
+  if RzPageControl3.ActivePage = TS_CAE then
+    DBCheckBox33.Visible := ((fDMCadPessoa.cdsPessoaUF.AsString = 'RS') and (fDMCadPessoa.qParametros_GeralUSA_CAE_PESSOA.AsString = 'S'));
+end;
+
+procedure TfrmCadPessoa.DBCheckBox33Exit(Sender: TObject);
 begin
   if not(fDMCadPessoa.cdsPessoa.State in [dsEdit,dsInsert]) and
     not(fDMCadPessoa.cdsPessoa_Fiscal.State in [dsEdit,dsInsert]) then
@@ -2823,7 +2836,6 @@ begin
   end
   else
     DBEdit113Exit(Sender);
-
 end;
 
 end.

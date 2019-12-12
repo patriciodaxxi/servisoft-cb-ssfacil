@@ -767,7 +767,14 @@ begin
     if fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger > 0 then
     begin
       vID_ICMS := fDMCadNotaFiscal.cdsProdutoID_CSTICMS.AsInteger;
-      vCod_CBenef_Loc := fDMCadNotaFiscal.cdsProdutoCOD_BENEF.AsString;
+      if fDMCadNotaFiscal.cdsTab_CSTICMS.Locate('ID',vID_ICMS,[loCaseInsensitive]) then
+      begin
+        if fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00' then
+          vCod_CBenef_Loc := ''
+        else
+        if trim(fDMCadNotaFiscal.cdsProdutoCOD_BENEF.AsString) <> '' then
+          vCod_CBenef_Loc := fDMCadNotaFiscal.cdsProdutoCOD_BENEF.AsString;
+      end;
 
       //ver aqui 13/08/2019   São José
       //if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsProdutoPERC_ICMS_NFCE.AsFloat)) > 0 then
@@ -778,7 +785,14 @@ begin
       if fDMCadNotaFiscal.cdsTab_NCMID_CST_ICMS.AsInteger > 0 then
       begin
         vID_ICMS := fDMCadNotaFiscal.cdsTab_NCMID_CST_ICMS.AsInteger;
-        vCod_CBenef_Loc := fDMCadNotaFiscal.cdsTab_NCMCOD_BENEF.AsString;
+        if fDMCadNotaFiscal.cdsTab_CSTICMS.Locate('ID',vID_ICMS,[loCaseInsensitive]) then
+        begin
+          if fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00' then
+            vCod_CBenef_Loc := ''
+          else
+          if trim(fDMCadNotaFiscal.cdsTab_NCMCOD_BENEF.AsString) <> '' then
+            vCod_CBenef_Loc := fDMCadNotaFiscal.cdsTab_NCMCOD_BENEF.AsString;
+        end;
       end;
       if StrToFloat(FormatFloat('0.0000',vPerc_BRedICMS_NCM)) > 0 then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_TRIBICMS.AsFloat := StrToFloat(FormatFloat('0.0000',vPerc_BRedICMS_NCM));
@@ -791,19 +805,15 @@ begin
   begin
     if fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger > 0 then
     begin
-      if fDMCadNotaFiscal.cdsTab_CSTICMS.Locate('COD_CST',fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger,[loCaseInsensitive]) then
+      vID_ICMS := fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger;
+      if fDMCadNotaFiscal.cdsTab_CSTICMS.Locate('ID',vID_ICMS,[loCaseInsensitive]) then
       begin
-        if ((fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString <> '00') and (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '5'))
-          or (fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00') then
-        begin
-          vID_ICMS := fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger;
-          if fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00' then
-            vCod_CBenef_Loc := ''
-          else
-          if trim(fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString) <> '' then
-            vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString;
-          vUsouICM := True;
-        end;
+        if fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00' then
+          vCod_CBenef_Loc := ''
+        else
+        if trim(fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString) <> '' then
+          vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString;
+        vUsouICM := True;
       end;
     end;
   end;
@@ -812,7 +822,14 @@ begin
   if (StrToFloat(FormatFloat('0.00',vPerc_Icms_Suf)) > 0) and (fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS_SUFRAMA.AsInteger > 0) then
   begin
     vID_ICMS := fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS_SUFRAMA.AsInteger;
-    vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString;
+    if fDMCadNotaFiscal.cdsTab_CSTICMS.Locate('ID',vID_ICMS,[loCaseInsensitive]) then
+    begin
+      if fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00' then
+        vCod_CBenef_Loc := ''
+      else
+      if trim(fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString) <> '' then
+        vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString;
+    end;
     vID_ICMS_Original := vID_ICMS;
   end
   else
@@ -834,7 +851,14 @@ begin
      (fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsInteger = 0) and ((fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString = '6109') or (fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString = '6110')) then
   begin
     vID_ICMS := fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS_SUFRAMA_ST.AsInteger;
-    vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString;
+    if fDMCadNotaFiscal.cdsTab_CSTICMS.Locate('ID',vID_ICMS,[loCaseInsensitive]) then
+    begin
+      if fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00' then
+        vCod_CBenef_Loc := ''
+      else
+      if trim(fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString) <> '' then
+        vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString;
+    end;
     vID_ICMS_Original := vID_ICMS;
   end;
   //********************
@@ -1036,7 +1060,14 @@ begin
     if not fDMCadNotaFiscal.qPessoa_ProdICMS.IsEmpty then
     begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger := fDMCadNotaFiscal.qPessoa_ProdICMSID_CSTICMS.AsInteger;
-      vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_ProdICMSCOD_BENEF.AsString;
+      if fDMCadNotaFiscal.cdsTab_CSTICMS.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger,[loCaseInsensitive]) then
+      begin
+        if fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00' then
+          vCod_CBenef_Loc := ''
+        else
+        if trim(fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString) <> '' then
+          vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_ProdICMSCOD_BENEF.AsString;
+      end;
       vPerc_BRedICMS_NCM := 0;
       if fDMCadNotaFiscal.qPessoa_ProdICMSID_LEI.AsInteger > 0 then
         fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsInteger := fDMCadNotaFiscal.qPessoa_ProdICMSID_LEI.AsInteger;
