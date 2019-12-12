@@ -34,6 +34,8 @@ type
     procedure edtCBenefKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edtCBenefExit(Sender: TObject);
+    procedure RxDBLookupCombo7KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -47,7 +49,7 @@ var
 
 implementation
 
-uses rsDBUtils, uUtilPadrao, USel_CBenef;
+uses rsDBUtils, uUtilPadrao, USel_CBenef, USel_EnqIPI;
 
 {$R *.dfm}
 
@@ -117,9 +119,15 @@ begin
         fDMCadCFOP.cdsCFOP_VariacaoNOME.AsString := fDMCadCFOP.cdsCFOP_VariacaoNOME.AsString + '/Cons.Final';
     end;
     if fDMCadCFOP.cdsCFOP_VariacaoTIPO_EMPRESA.AsString = 'G' then
-      fDMCadCFOP.cdsCFOP_VariacaoID_CSTICMS.AsInteger := RxDBLookupCombo4.KeyValue
+    begin
+      fDMCadCFOP.cdsCFOP_VariacaoID_CSTICMS.AsInteger := RxDBLookupCombo4.KeyValue;
+      fDMCadCFOP.cdsCFOP_VariacaoCOD_BENEF.AsString   := edtCBenef.Text;
+    end
     else
+    begin
       fDMCadCFOP.cdsCFOP_VariacaoID_CSTICMS.AsInteger := RxDBLookupCombo1.KeyValue;
+      fDMCadCFOP.cdsCFOP_VariacaoCOD_BENEF.AsString   := '';
+    end;
     fDMCadCFOP.cdsCFOP_VariacaoID_CSTIPI.AsInteger  := RxDBLookupCombo5.KeyValue;
     if RxDBLookupCombo7.Text <> '' then
       fDMCadCFOP.cdsCFOP_VariacaoID_ENQIPI.AsInteger  := RxDBLookupCombo7.KeyValue;
@@ -137,7 +145,6 @@ begin
     if RxDBLookupCombo7.Text <> '' then
       fDMCadCFOP.cdsCFOP_VariacaoCOD_ENQ.AsString  := RxDBLookupCombo7.Text;
 
-    fDMCadCFOP.cdsCFOP_VariacaoCOD_BENEF.AsString := edtCBenef.Text;
     fDMCadCFOP.cdsCFOP_Variacao.Post;
   end;
   Close;
@@ -170,6 +177,23 @@ begin
   begin
     MessageDlg('*** Código Benefício Fiscal não encontrado!', mtInformation, [mbOk], 0);
     edtCBenef.SetFocus;
+  end;
+end;
+
+procedure TfrmCadCFOP_Ger.RxDBLookupCombo7KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    if RxDBLookupCombo7.Text <> '' then
+      viD_EnqIPI_Pos := RxDBLookupCombo7.KeyValue;
+    frmSel_EnqIPI := TfrmSel_EnqIPI.Create(Self);
+    frmSel_EnqIPI.ShowModal;
+    if viD_EnqIPI_Pos > 0 then
+      RxDBLookupCombo7.KeyValue := viD_EnqIPI_Pos
+    else
+      RxDBLookupCombo7.ClearValue;
+    FreeAndNil(frmSel_EnqIPI);
   end;
 end;
 

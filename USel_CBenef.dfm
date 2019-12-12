@@ -98,7 +98,7 @@ object frmSel_CBenef: TfrmSel_CBenef
     GridStyle.EvenColor = 14477784
     TitleHeight.PixelCount = 24
     FooterColor = clBtnFace
-    ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+    ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
     RegistryKey = 'Software\Scalabium'
     RegistrySection = 'SMDBGrid'
     WidthOfIndicator = 11
@@ -228,6 +228,15 @@ object frmSel_CBenef: TfrmSel_CBenef
         Visible = True
       end
       item
+        Expanded = False
+        FieldName = 'DESCRICAO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Descri'#231#227'o'
+        Title.Color = 16777128
+        Width = 606
+        Visible = True
+      end
+      item
         Alignment = taCenter
         Expanded = False
         FieldName = 'DTINICIO'
@@ -243,15 +252,6 @@ object frmSel_CBenef: TfrmSel_CBenef
         Title.Alignment = taCenter
         Title.Caption = 'Dt. Final'
         Title.Color = 16777128
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DESCRICAO'
-        Title.Alignment = taCenter
-        Title.Caption = 'Descri'#231#227'o'
-        Title.Color = 16777128
-        Width = 606
         Visible = True
       end
       item

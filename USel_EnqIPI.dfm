@@ -113,9 +113,9 @@ object frmSel_EnqIPI: TfrmSel_EnqIPI
     BandsFont.Name = 'MS Sans Serif'
     BandsFont.Style = []
     Groupings = <>
-    GridStyle.Style = gsCustom
-    GridStyle.OddColor = clWindow
-    GridStyle.EvenColor = clWindow
+    GridStyle.Style = gsAquaBlue
+    GridStyle.OddColor = 16774361
+    GridStyle.EvenColor = 16768959
     TitleHeight.PixelCount = 24
     FooterColor = clBtnFace
     ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
@@ -133,6 +133,7 @@ object frmSel_EnqIPI: TfrmSel_EnqIPI
         FieldName = 'CODIGO'
         Title.Alignment = taCenter
         Title.Caption = 'C'#243'd. Enq.'
+        Title.Color = 11206570
         Width = 62
         Visible = True
       end
@@ -142,6 +143,7 @@ object frmSel_EnqIPI: TfrmSel_EnqIPI
         FieldName = 'TIPO_DESC'
         Title.Alignment = taCenter
         Title.Caption = 'Tipo'
+        Title.Color = 11206570
         Width = 108
         Visible = True
       end
@@ -150,6 +152,7 @@ object frmSel_EnqIPI: TfrmSel_EnqIPI
         FieldName = 'DESCRICAO'
         Title.Alignment = taCenter
         Title.Caption = 'Descri'#231#227'o'
+        Title.Color = 11206570
         Width = 685
         Visible = True
       end>

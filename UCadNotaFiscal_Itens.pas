@@ -791,9 +791,20 @@ begin
   begin
     if fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger > 0 then
     begin
-      vID_ICMS := fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger;
-      vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString;
-      vUsouICM := True;
+      if fDMCadNotaFiscal.cdsTab_CSTICMS.Locate('COD_CST',fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger,[loCaseInsensitive]) then
+      begin
+        if ((fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString <> '00') and (copy(fDMCadNotaFiscal.cdsCFOPCODCFOP.AsString,1,1) = '5'))
+          or (fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00') then
+        begin
+          vID_ICMS := fDMCadNotaFiscal.qPessoa_FiscalID_CST_ICMS.AsInteger;
+          if fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString = '00' then
+            vCod_CBenef_Loc := ''
+          else
+          if trim(fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString) <> '' then
+            vCod_CBenef_Loc := fDMCadNotaFiscal.qPessoa_FiscalCOD_BENEF.AsString;
+          vUsouICM := True;
+        end;
+      end;
     end;
   end;
 

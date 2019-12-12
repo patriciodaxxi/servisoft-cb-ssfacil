@@ -720,6 +720,7 @@ type
       Shift: TShiftState);
     procedure DBEdit113Exit(Sender: TObject);
     procedure DBEdit113Enter(Sender: TObject);
+    procedure DBCheckBox33Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -2807,6 +2808,22 @@ end;
 procedure TfrmCadPessoa.DBEdit113Enter(Sender: TObject);
 begin
   vCAE_Ant := fDMCadPessoa.cdsPessoa_FiscalCAE_1.AsString;
+end;
+
+procedure TfrmCadPessoa.DBCheckBox33Click(Sender: TObject);
+begin
+  if not(fDMCadPessoa.cdsPessoa.State in [dsEdit,dsInsert]) and
+    not(fDMCadPessoa.cdsPessoa_Fiscal.State in [dsEdit,dsInsert]) then
+    exit;
+
+  if not DBCheckBox33.Checked then
+  begin
+    if fDMCadPessoa.cdsTab_CSTICMS.Locate('COD_CST', '00', ([Locaseinsensitive])) then
+      fDMCadPessoa.cdsPessoa_FiscalID_CST_ICMS.AsInteger := fDMCadPessoa.cdsTab_CSTICMSID.AsInteger;
+  end
+  else
+    DBEdit113Exit(Sender);
+
 end;
 
 end.

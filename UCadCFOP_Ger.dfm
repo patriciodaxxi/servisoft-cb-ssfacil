@@ -143,6 +143,7 @@ object frmCadCFOP_Ger: TfrmCadCFOP_Ger
       LookupDisplay = 'CODIGO;DESCRICAO'
       LookupSource = DMCadCFOP.dsEnqIPI
       TabOrder = 4
+      OnKeyDown = RxDBLookupCombo7KeyDown
     end
     object CheckBox1: TCheckBox
       Left = 520
