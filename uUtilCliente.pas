@@ -12,6 +12,7 @@ uses
   function fnc_Limite_Compra_Usado(ID_Fornecedor, ID_Pedido: Integer; Data: TDateTime): Real;
   function fnc_Limite_Compra_Cadastrado(ID_Fornecedor: Integer): Real;
   function fnc_Primeiro_Pedido(ID_Cliente: Integer): Integer;
+  function fnc_Verifica_CAE(Codigo : String) : Boolean;
 
 var
   vSenha_Cliente: String;
@@ -340,6 +341,28 @@ begin
   finally
     FreeAndNil(sds);
   end
+end;
+
+function fnc_Verifica_CAE(Codigo : String) : Boolean;
+var
+  sds: TSQLDataSet;
+begin
+  Result := False;
+  if trim(Codigo) = '' then
+    exit;
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata  := True;
+    sds.GetMetadata := False;
+    sds.CommandText := 'SELECT COUNT(1) CONTADOR FROM CAE_DIFERIMENTO '
+                     + 'WHERE CAE LIKE ' + QuotedStr(Codigo+'%');
+    sds.Open;
+    if sds.FieldByName('CONTADOR').AsInteger > 0 then
+      Result := True;
+  finally
+    FreeAndNil(sds);
+  end;
 end;
 
 end.

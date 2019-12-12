@@ -1328,6 +1328,9 @@ type
     cdsPessoa_FiscalCOD_BENEF: TStringField;
     sdsPessoa_ProdICMSCOD_BENEF: TStringField;
     cdsPessoa_ProdICMSCOD_BENEF: TStringField;
+    qParametros_NFeID_CST_DIFERIMENTO: TIntegerField;
+    sdsPessoa_FiscalOPCAO_DIFERIMENTO: TStringField;
+    cdsPessoa_FiscalOPCAO_DIFERIMENTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

@@ -596,6 +596,7 @@ type
     DBEdit115: TDBEdit;
     Label210: TLabel;
     DBEdit116: TDBEdit;
+    DBCheckBox33: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -717,6 +718,8 @@ type
     procedure DBEdit116Exit(Sender: TObject);
     procedure DBEdit116KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure DBEdit113Exit(Sender: TObject);
+    procedure DBEdit113Enter(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -729,6 +732,7 @@ type
     vCod_Alfa_Ant: string;
     vRG_Ant: string;
     vTP_Cliente_Ant: string;
+    vCAE_Ant : String;
     procedure prc_Inserir_Registro(Tipo: string);
     procedure prc_Excluir_Registro;
     procedure prc_Gravar_Registro;
@@ -757,7 +761,7 @@ implementation
 
 uses
   UMenu, DmdDatabase, rsDBUtils, uUtilPadrao, uNFeComandos, URelPessoa, USel_ContaOrc, USel_EnqIPI, USel_Atividade, UVendedor_Config,
-  UCadPessoa_ProdICMS, USel_CBenef;
+  UCadPessoa_ProdICMS, USel_CBenef, uUtilCliente;
 
 {$R *.dfm}
 
@@ -2769,6 +2773,40 @@ begin
       DBEdit116.Text := vCod_CBenef;
     FreeAndNil(frmSel_CBenef);
   end;
+end;
+
+procedure TfrmCadPessoa.DBEdit113Exit(Sender: TObject);
+var
+  vAux : String;
+begin
+  if vCAE_Ant = fDMCadPessoa.cdsPessoa_FiscalCAE_1.AsString then
+    exit;
+  vAux := Monta_Numero(DBEdit113.Text,0); 
+
+  if uUtilCliente.fnc_Verifica_CAE(copy(vAux,1,5)) then
+  begin
+    fDMCadPessoa.cdsPessoa_FiscalOPCAO_DIFERIMENTO.AsString := 'S';
+    if fDMCadPessoa.qParametros_NFeID_CST_DIFERIMENTO.AsInteger > 0 then
+      fDMCadPessoa.cdsPessoa_FiscalID_CST_ICMS.AsInteger := fDMCadPessoa.qParametros_NFeID_CST_DIFERIMENTO.AsInteger;
+  end
+  else
+  begin
+    if MessageDlg('CAE  NÃO  faz parte dos códigos para diferimento!' +#13 + #13
+                  + 'Lançar a CST 00 (ICMS Integral)?' , mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      if fDMCadPessoa.cdsTab_CSTICMS.Locate('COD_CST', '00', ([Locaseinsensitive])) then
+        fDMCadPessoa.cdsPessoa_FiscalID_CST_ICMS.AsInteger := fDMCadPessoa.cdsTab_CSTICMSID.AsInteger
+      else
+        fDMCadPessoa.cdsPessoa_FiscalID_CST_ICMS.Clear;
+    end
+    else
+      fDMCadPessoa.cdsPessoa_FiscalID_CST_ICMS.Clear;
+  end;
+end;
+
+procedure TfrmCadPessoa.DBEdit113Enter(Sender: TObject);
+begin
+  vCAE_Ant := fDMCadPessoa.cdsPessoa_FiscalCAE_1.AsString;
 end;
 
 end.

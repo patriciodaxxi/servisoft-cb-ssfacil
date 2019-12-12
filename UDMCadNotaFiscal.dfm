@@ -5178,7 +5178,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'TAL,PERC_MARGEMLUCRO'#13#10',PERC_DESC_MAX,SPED_TIPO_ITEM,ID_CSTICMS_B' +
       'RED,USA_PRECO_COR,TAMANHO,COD_BARRA2,QTD_EMBALAGEM'#13#10',ID_MARCA,UN' +
       'IDADE2,ID_CSTICMS,P.NOME_MODELO,P.perc_icms_nfce, P.CALCULAR_ST,' +
-      ' P.MEDIDA'#13#10'FROM PRODUTO P'#13#10#13#10
+      ' P.MEDIDA, P.COD_BENEF'#13#10'FROM PRODUTO P'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -5430,6 +5430,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsProdutoMEDIDA: TStringField
       FieldName = 'MEDIDA'
+    end
+    object cdsProdutoCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
   object dsProduto: TDataSource
@@ -6296,7 +6300,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'MVA_UF_DESTINO, COD_CEST, n.unidade_trib, N.ID_CFOP, N.ID_PIS, N' +
       '.ID_COFINS,'#13#10'N.ID_CST_ICMS, N.PERC_PIS, N.PERC_COFINS, N.PERC_BA' +
       'SE_ICMS, N.ID_OBS_LEI,'#13#10'N.ID_CSTIPI, N.PERC_IPI, N.TIPO_ESCALA, ' +
-      'N.CALCULA_FCP, N.PERC_ICMS'#13#10'FROM TAB_NCM N'#13#10#13#10
+      'N.CALCULA_FCP, N.PERC_ICMS, N.COD_BENEF'#13#10'FROM TAB_NCM N'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -6390,6 +6394,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsTab_NCMPERC_ICMS: TFloatField
       FieldName = 'PERC_ICMS'
+    end
+    object cdsTab_NCMCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
   object dsTab_NCM: TDataSource
@@ -9632,6 +9640,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qPessoa_FiscalCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object sdsPessoa_Contato: TSQLDataSet
     NoMetadata = True
@@ -11414,6 +11426,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object qProduto_UFID_CST_ICMS: TIntegerField
       FieldName = 'ID_CST_ICMS'
     end
+    object qProduto_UFCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
+    end
   end
   object mValeAux: TClientDataSet
     Active = True
@@ -11653,6 +11669,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object qNCM_CSTCOD_CST: TStringField
       FieldName = 'COD_CST'
       Size = 3
+    end
+    object qNCM_CSTCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
   object sdsNotaFiscal_Fut: TSQLDataSet
@@ -15299,7 +15319,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'select p.id_csticms, P.ID_LEI, DRAWBACK'
+      'select p.id_csticms, P.ID_LEI, DRAWBACK, COD_BENEF'
       'from pessoa_prodicms p'
       'WHERE P.CODIGO = :CODIGO'
       '  and p.ID_PRODUTO = :ID_PRODUTO')
@@ -15316,6 +15336,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'DRAWBACK'
       FixedChar = True
       Size = 1
+    end
+    object qPessoa_ProdICMSCOD_BENEF: TStringField
+      FieldName = 'COD_BENEF'
+      Size = 8
     end
   end
 end

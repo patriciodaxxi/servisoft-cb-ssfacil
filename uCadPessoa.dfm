@@ -948,6 +948,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_CONTATO'
             Title.Alignment = taCenter
             Title.Caption = 'Contato'
+            Width = 64
             Visible = True
           end
           item
@@ -1002,6 +1003,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Cli'
+            Width = 64
             Visible = True
           end
           item
@@ -1010,6 +1012,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_FORNECEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Forn.'
+            Width = 64
             Visible = True
           end
           item
@@ -1027,6 +1030,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'TP_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Repr.'
+            Width = 64
             Visible = True
           end
           item
@@ -1035,6 +1039,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'ORGAO_PUBLICO'
             Title.Alignment = taCenter
             Title.Caption = 'Org'#227'o P'#250'blico'
+            Width = 64
             Visible = True
           end
           item
@@ -1042,6 +1047,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTPEDIDO'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Pedido'
+            Width = 64
             Visible = True
           end
           item
@@ -1049,6 +1055,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'DTNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Faturamento'
+            Width = 64
             Visible = True
           end
           item
@@ -1096,6 +1103,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'NOME_GRUPO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Grupo'
+            Width = 64
             Visible = True
           end
           item
@@ -1103,6 +1111,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_CONTA_ORCAMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Or'#231'amento'
+            Width = 64
             Visible = True
           end
           item
@@ -1110,6 +1119,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_CLI'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Cliente'
+            Width = 64
             Visible = True
           end
           item
@@ -1117,6 +1127,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_FORN'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Fornecedor'
+            Width = 64
             Visible = True
           end
           item
@@ -1124,6 +1135,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_ORC_TRANSP'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Transp.'
+            Width = 64
             Visible = True
           end
           item
@@ -1138,6 +1150,7 @@ object frmCadPessoa: TfrmCadPessoa
             Expanded = False
             FieldName = 'INSCR_EST'
             Title.Caption = 'Inscr. Estadual'
+            Width = 64
             Visible = True
           end
           item
@@ -1153,6 +1166,7 @@ object frmCadPessoa: TfrmCadPessoa
             FieldName = 'COD_REGIME'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Regime'
+            Width = 64
             Visible = True
           end
           item
@@ -2448,10 +2462,10 @@ object frmCadPessoa: TfrmCadPessoa
             Top = 415
             Width = 1075
             Height = 189
-            ActivePage = ts_Contatos
+            ActivePage = TS_CAE
             ActivePageDefault = ts_Contatos
             Align = alBottom
-            TabIndex = 0
+            TabIndex = 2
             TabOrder = 1
             FixedDimension = 19
             object ts_Contatos: TRzTabSheet
@@ -2839,6 +2853,8 @@ object frmCadPessoa: TfrmCadPessoa
                   DataField = 'CAE_1'
                   DataSource = DMCadPessoa.dsPessoa_Fiscal
                   TabOrder = 0
+                  OnEnter = DBEdit113Enter
+                  OnExit = DBEdit113Exit
                 end
                 object DBEdit114: TDBEdit
                   Left = 94
@@ -2857,6 +2873,18 @@ object frmCadPessoa: TfrmCadPessoa
                   DataField = 'CAE_3'
                   DataSource = DMCadPessoa.dsPessoa_Fiscal
                   TabOrder = 2
+                end
+                object DBCheckBox33: TDBCheckBox
+                  Left = 240
+                  Top = 21
+                  Width = 250
+                  Height = 15
+                  Caption = 'Usa o CST ICMS Diferimento'
+                  DataField = 'OPCAO_DIFERIMENTO'
+                  DataSource = DMCadPessoa.dsPessoa_Fiscal
+                  TabOrder = 3
+                  ValueChecked = 'S'
+                  ValueUnchecked = 'N'
                 end
               end
             end
@@ -4478,6 +4506,7 @@ object frmCadPessoa: TfrmCadPessoa
                     Expanded = False
                     FieldName = 'OBS'
                     Title.Color = 12320699
+                    Width = 64
                     Visible = True
                   end>
               end

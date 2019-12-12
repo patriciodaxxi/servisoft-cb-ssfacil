@@ -2550,6 +2550,11 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'COD_BENEF'
       Size = 8
     end
+    object cdsPessoa_FiscalOPCAO_DIFERIMENTO: TStringField
+      FieldName = 'OPCAO_DIFERIMENTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspPessoa_Fiscal: TDataSetProvider
     DataSet = sdsPessoa_Fiscal
@@ -2695,6 +2700,11 @@ object DMCadPessoa: TDMCadPessoa
     object sdsPessoa_FiscalCOD_BENEF: TStringField
       FieldName = 'COD_BENEF'
       Size = 8
+    end
+    object sdsPessoa_FiscalOPCAO_DIFERIMENTO: TStringField
+      FieldName = 'OPCAO_DIFERIMENTO'
+      FixedChar = True
+      Size = 1
     end
   end
   object sdsTab_CSTIPI: TSQLDataSet
@@ -5633,7 +5643,7 @@ object DMCadPessoa: TDMCadPessoa
       
         'SELECT ID, USA_OPCAO_IMP_COD_CLI, IMP_NOMEPROD_CLIENTE, USA_CLIE' +
         'NTE_FAT_FIL,'
-      'USA_REGRA_CLI_PROD'
+      'USA_REGRA_CLI_PROD, ID_CST_DIFERIMENTO'
       'FROM PARAMETROS_NFE')
     SQLConnection = dmDatabase.scoDados
     Left = 1024
@@ -5661,6 +5671,9 @@ object DMCadPessoa: TDMCadPessoa
       FieldName = 'USA_REGRA_CLI_PROD'
       FixedChar = True
       Size = 1
+    end
+    object qParametros_NFeID_CST_DIFERIMENTO: TIntegerField
+      FieldName = 'ID_CST_DIFERIMENTO'
     end
   end
   object dsPessoa_RefC: TDataSource

@@ -503,7 +503,6 @@ object dmCadProduto: TdmCadProduto
     Top = 1
   end
   object cdsProduto: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'ID'
     Params = <>
@@ -1344,7 +1343,6 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Forn: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Forn
     IndexFieldNames = 'ID;ITEM'
@@ -1565,7 +1563,6 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Consumo: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Consumo
     IndexFieldNames = 'ID;ID_SETOR;ID_POSICAO'
@@ -2619,7 +2616,6 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Tam: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Tam
     IndexFieldNames = 'ID;TAMANHO'
@@ -2856,7 +2852,6 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Consumo_Tam: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProduto_ConsumosdsProduto_Consumo_Tam
     IndexFieldNames = 'ID;ITEM;TAMANHO'
@@ -3896,7 +3891,6 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_UF: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_UF
     IndexFieldNames = 'ID;UF'
@@ -4119,7 +4113,6 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Uni: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProdutosdsProduto_Uni
     IndexFieldNames = 'ID;ITEM'
@@ -10220,7 +10213,6 @@ object dmCadProduto: TdmCadProduto
     end
   end
   object cdsProduto_Consumo_Proc: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsProduto_ConsumosdsProduto_Consumo_Proc
     IndexFieldNames = 'ID;ITEM;ITEM_PROC'

@@ -3107,6 +3107,12 @@ type
     qCFOP_VariacaoCOD_BENEF: TStringField;
     sdsCFOP_VariacaoCOD_BENEF: TStringField;
     cdsCFOP_VariacaoCOD_BENEF: TStringField;
+    cdsTab_NCMCOD_BENEF: TStringField;
+    qPessoa_FiscalCOD_BENEF: TStringField;
+    qPessoa_ProdICMSCOD_BENEF: TStringField;
+    qNCM_CSTCOD_BENEF: TStringField;
+    cdsProdutoCOD_BENEF: TStringField;
+    qProduto_UFCOD_BENEF: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
