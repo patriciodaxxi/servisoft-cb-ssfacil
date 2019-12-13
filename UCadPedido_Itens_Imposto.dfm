@@ -70,11 +70,11 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
       Width = 249
       Height = 21
       DropDownCount = 8
-      DropDownWidth = 500
+      DropDownWidth = 700
       DataField = 'ID_CSTICMS'
       DataSource = DMCadPedido.dsPedido_Itens
       LookupField = 'ID'
-      LookupDisplay = 'COD_CST;PERCENTUAL'
+      LookupDisplay = 'COD_CST;PERCENTUAL;NOME'
       LookupSource = DMCadPedido.dsTab_CSTICMS
       TabOrder = 0
       OnEnter = RxDBLookupCombo4Enter

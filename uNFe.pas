@@ -4360,9 +4360,9 @@ begin
       if fDMCadNotaFiscal.cdsTab_CSTICMS.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsInteger]) then
       begin
         //Verifica % de redução da situação tributária
-        fDMNFe.mItensNFePercRedICMS.AsFloat  := 100 - StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsTab_CSTICMSPERCENTUAL.AsFloat));
-        fDMNFe.mItensNFeAliqSitTrib.AsFloat        := fDMCadNotaFiscal.cdsTab_CSTICMSPERCENTUAL.AsFloat;
-        fDMNFe.mItensNFeCodSitTrib.AsString        := fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString + fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString;
+        fDMNFe.mItensNFePercRedICMS.AsFloat  := StrToFloat(FormatFloat('0.0000',100 - StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsTab_CSTICMSPERCENTUAL.AsFloat))));
+        fDMNFe.mItensNFeAliqSitTrib.AsFloat  := fDMCadNotaFiscal.cdsTab_CSTICMSPERCENTUAL.AsFloat;
+        fDMNFe.mItensNFeCodSitTrib.AsString  := fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString + fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString;
       end;
       //fDMNFe.mItensNFeCodSitTrib.AsString        := fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString + fDMCadNotaFiscal.cdsTab_CSTICMSCOD_CST.AsString;
       fDMNFe.mItensNFeCod_Cest.AsString := '';
@@ -4393,7 +4393,6 @@ begin
         fDMNFe.mItensNFeItemPedido.AsInteger   := 0;
       end;
       fDMNFe.mItensNFeNumOS.AsString         := fDMCadNotaFiscal.cdsNotaFiscal_ItensNUMERO_OS.AsString;
-      fDMNFe.mItensNFePercRedICMS.AsFloat    := 0;
       if fDMCadNotaFiscal.cdsTab_CSTIPI.FindKey([fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTIPI.AsInteger]) then
         fDMNFe.mItensNFeCodCSTIPI.AsString       := fDMCadNotaFiscal.cdsTab_CSTIPICOD_IPI.AsString;
       //24/11/2015 Nova

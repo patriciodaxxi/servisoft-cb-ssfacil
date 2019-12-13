@@ -1407,6 +1407,7 @@ begin
   mItensNFeUnidade_Trib.AsString      := '';
   mItensNFeVlrIPI_Devol.AsFloat       := 0;
   mItensNFePerc_Devol.AsFloat         := 0;
+  mItensNFePercRedICMS.AsFloat        := 0;
 end;
 
 procedure TDMNFe.Posiciona_CidadeUF(CodCidade, IDPais: Integer);

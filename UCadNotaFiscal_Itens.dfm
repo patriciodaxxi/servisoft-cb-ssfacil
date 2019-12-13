@@ -494,7 +494,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     Top = 172
     Width = 792
     Height = 418
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     ActivePageDefault = TabSheet1
     Align = alClient
     BackgroundColor = clGray
@@ -504,7 +504,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     ParentBackgroundColor = False
     ParentColor = False
     TabColors.Shadow = clGray
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     TextColors.DisabledShadow = 8421440
     TextColors.Selected = clBlue
@@ -1796,15 +1796,15 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
       end
       object RxDBLookupCombo11: TRxDBLookupCombo
         Left = 72
-        Top = 86
+        Top = 85
         Width = 225
         Height = 21
         DropDownCount = 8
-        DropDownWidth = 500
+        DropDownWidth = 700
         DataField = 'ID_CSTICMS'
         DataSource = DMCadNotaFiscal.dsNotaFiscal_Itens
         LookupField = 'ID'
-        LookupDisplay = 'COD_CST;PERCENTUAL'
+        LookupDisplay = 'COD_CST;PERCENTUAL;NOME'
         LookupSource = DMCadNotaFiscal.dsTab_CSTICMS
         TabOrder = 9
         OnEnter = RxDBLookupCombo11Enter
