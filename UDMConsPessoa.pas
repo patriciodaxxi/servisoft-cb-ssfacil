@@ -175,6 +175,20 @@ type
     qParametros_Geral: TSQLQuery;
     qParametros_GeralMOSTRAR_DOC_HIST: TStringField;
     cdsProduto_MovTIPO_ES: TStringField;
+    sdsMarca: TSQLDataSet;
+    dspMarca: TDataSetProvider;
+    cdsMarca: TClientDataSet;
+    dsMarca: TDataSource;
+    cdsMarcaID: TIntegerField;
+    cdsMarcaNOME: TStringField;
+    sdsConsPessoaProduto: TSQLDataSet;
+    dspConsPessoaProduto: TDataSetProvider;
+    cdsConsPessoaProduto: TClientDataSet;
+    dsConsPessoaProduto: TDataSource;
+    cdsConsPessoaProdutoCODIGO: TIntegerField;
+    cdsConsPessoaProdutoNOME_PESSOA: TStringField;
+    cdsConsPessoaProdutoCODIGO_MARCA: TIntegerField;
+    cdsConsPessoaProdutoNOME_MARCA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicataCalcFields(DataSet: TDataSet);
   private
@@ -190,12 +204,14 @@ type
     ctProduto_Mov: String;
     ctServico_Mov: String;
     ctNotaServico: String;
+    ctConsPessoaProduto : String;
 
     procedure prc_Cons_NotaFiscal(ID_Pessoa: Integer);
     procedure prc_Cons_Duplicata(ID_Pessoa: Integer);
     procedure prc_Cons_Produto_Mov(ID_Pessoa: Integer ; Tipo_Pessoa: String ; DtInicial, DtFinal: TDateTime);
     procedure prc_Cons_Servico_Mov(ID_Pessoa: Integer ; Tipo_Pessoa: String ; DtInicial, DtFinal: TDateTime);
-    procedure prc_Cons_NotaServico(ID_Pessoa: Integer);                                         
+    procedure prc_Cons_NotaServico(ID_Pessoa: Integer);
+    procedure prc_Cons_Cliente_Produto(ID_Marca: Integer ; DtInicial, DtFinal: TDateTime);
   end;
 
 var
@@ -215,7 +231,8 @@ begin
   ctProduto_Mov := sdsProduto_Mov.CommandText;
   ctServico_Mov := sdsServico_Mov.CommandText;
   ctNotaServico := sdsNotaServico.CommandText;
-
+  ctConsPessoaProduto := sdsConsPessoaProduto.CommandText;
+  cdsMarca.Open;
   qParametros.Open;
   qParametros_Geral.Open;
 end;
@@ -353,6 +370,22 @@ begin
     sdsNotaServico.CommandText := sdsNotaServico.CommandText + ' AND NS.ID_CLIENTE = ' + IntToStr(ID_Pessoa);
   cdsNotaServico.Open;
   cdsNotaServico.IndexFieldNames := 'DTEMISSAO_CAD;NUMNOTA';
+end;
+
+procedure TDMConsPessoa.prc_Cons_Cliente_Produto(ID_Marca: Integer;
+  DtInicial, DtFinal: TDateTime);
+var
+  vComando : String;
+begin
+  cdsConsPessoaProduto.Close;
+  sdsConsPessoaProduto.CommandText := ctConsPessoaProduto;
+  if DtInicial > 10 then
+    vComando :=  vComando + ' AND M.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtInicial));
+  if DtFinal > 10 then
+    vComando :=  vComando + ' AND M.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtFinal));
+  sdsConsPessoaProduto.CommandText := ctConsPessoaProduto + vComando;
+  sdsConsPessoaProduto.ParamByName('ID_MARCA').AsInteger := ID_Marca;
+  cdsConsPessoaProduto.Open;
 end;
 
 end.

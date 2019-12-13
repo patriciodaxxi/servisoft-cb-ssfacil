@@ -873,4 +873,103 @@ object DMConsPessoa: TDMConsPessoa
       Size = 1
     end
   end
+  object sdsMarca: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 'SELECT * FROM MARCA'
+    MaxBlobSize = -1
+    Params = <>
+    SQLConnection = dmDatabase.scoDados
+    Left = 72
+    Top = 458
+  end
+  object dspMarca: TDataSetProvider
+    DataSet = sdsMarca
+    Left = 152
+    Top = 458
+  end
+  object cdsMarca: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspMarca'
+    Left = 216
+    Top = 458
+    object cdsMarcaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsMarcaNOME: TStringField
+      FieldName = 'NOME'
+      Size = 40
+    end
+  end
+  object dsMarca: TDataSource
+    DataSet = cdsMarca
+    Left = 288
+    Top = 458
+  end
+  object sdsConsPessoaProduto: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'select distinct(P.CODIGO), P.NOME NOME_PESSOA, MAR.ID CODIGO_MAR' +
+      'CA, MAR.NOME NOME_MARCA'#13#10'from MOVIMENTO M'#13#10'inner join PESSOA P o' +
+      'n M.ID_PESSOA = P.CODIGO'#13#10'inner join PRODUTO PRO on M.ID_PRODUTO' +
+      ' = PRO.ID'#13#10'inner join MARCA MAR on PRO.ID_MARCA = MAR.ID'#13#10'where ' +
+      'MAR.ID = :ID_MARCA or :ID_MARCA = 0 and'#13#10'      M.TIPO_REG = '#39'CFI' +
+      #39
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID_MARCA'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_MARCA'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 72
+    Top = 514
+  end
+  object dspConsPessoaProduto: TDataSetProvider
+    DataSet = sdsConsPessoaProduto
+    Left = 152
+    Top = 514
+  end
+  object cdsConsPessoaProduto: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspConsPessoaProduto'
+    Left = 216
+    Top = 514
+    object cdsConsPessoaProdutoCODIGO: TIntegerField
+      DisplayLabel = 'C'#243'digo Cliente'
+      FieldName = 'CODIGO'
+      Required = True
+    end
+    object cdsConsPessoaProdutoNOME_PESSOA: TStringField
+      DisplayLabel = 'Nome Cliente'
+      FieldName = 'NOME_PESSOA'
+      Size = 60
+    end
+    object cdsConsPessoaProdutoCODIGO_MARCA: TIntegerField
+      DisplayLabel = 'C'#243'd.Marca'
+      FieldName = 'CODIGO_MARCA'
+      Required = True
+    end
+    object cdsConsPessoaProdutoNOME_MARCA: TStringField
+      DisplayLabel = 'Nome Marca'
+      FieldName = 'NOME_MARCA'
+      Size = 40
+    end
+  end
+  object dsConsPessoaProduto: TDataSource
+    DataSet = cdsConsPessoaProduto
+    Left = 288
+    Top = 514
+  end
 end

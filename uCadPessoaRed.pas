@@ -7,7 +7,7 @@ uses
   RxDBComb, RxLookup, db, Mask, Grids, DateUtils, DBGrids, SMDBGrid, Buttons, ExtCtrls, UCBase, uDmCadPessoa, RzDBChk, 
   UNFe_ConsultaCadastro, RzPanel, ToolEdit, RXDBCtrl, UConsPessoa_Fat, UConsPessoa_Fin, UCadPessoa_Servico, RzLstBox,
   UCadPessoa_Servico_Int, NxCollection, RzRadChk, dbXPress, SqlExpr, ComCtrls, UConsCNPJ_ACBR, UConsCPF_ACBR, ACBrBase,
-  ACBrSocket, RzChkLst, ACBrConsultaCPF, UConsPessoa_Prod, Menus, ComObj,
+  ACBrSocket, RzChkLst, ACBrConsultaCPF, UConsPessoa_Prod, Menus, ComObj,UConsPessoa_Produto,
   CurrEdit;
 
 type
@@ -385,6 +385,8 @@ type
     procedure btnConsulta_PetClick(Sender: TObject);
     procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -393,6 +395,7 @@ type
     ffrmCadPessoa_Servico_Int: TfrmCadPessoa_Servico_Int;
     ffrmConsCNPJ_ACBR: TfrmConsCNPJ_ACBR;
     ffrmConsCPF_ACBR: TfrmConsCPF_ACBR;
+    ffrmConsPessoa_Produto : TfrmConsPessoa_Produto;
     vCod_Alfa_Ant: string;
     vRG_Ant: string;
     vTP_Cliente_Ant: string;
@@ -1785,6 +1788,19 @@ procedure TfrmCadPessoaRed.CurrencyEdit1KeyDown(Sender: TObject;
 begin
   if Key = Vk_Return then
     btnConsultarClick(Sender);
+end;
+
+procedure TfrmCadPessoaRed.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+ if (Key = Vk_F7) then
+  begin
+    ffrmConsPessoa_Produto := TfrmConsPessoa_Produto.Create(self);
+    ffrmConsPessoa_Produto.ShowModal;
+    if ffrmConsPessoa_Produto.vID_Pessoa_Cons > 0 then
+      prc_Consultar(ffrmConsPessoa_Produto.vID_Pessoa_Cons);
+    FreeAndNil(ffrmConsPessoa_Produto);
+  end;
 end;
 
 end.

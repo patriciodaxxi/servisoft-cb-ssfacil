@@ -833,7 +833,8 @@ uses
   UConsDuplicata_Pessoa in 'UConsDuplicata_Pessoa.pas' {frmConsDuplicata_Pessoa},
   UDMConsDuplicata in 'UDMConsDuplicata.pas' {DMConsDuplicata: TDataModule},
   USel_CBenef in 'USel_CBenef.pas' {frmSel_CBenef},
-  UConsChave in 'UConsChave.pas' {frmConsChave};
+  UConsChave in 'UConsChave.pas' {frmConsChave},
+  UConsPessoa_Produto in 'UConsPessoa_Produto.pas' {frmConsPessoa_Produto};
 
 {$R *.res}
 
