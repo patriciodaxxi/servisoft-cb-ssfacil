@@ -1764,7 +1764,7 @@ begin
                                                    fDMCupomFiscal.cdsCupomFiscalNUMCUPOM.AsInteger,0,
                                                    'CFI',
                                                    fDmCupomFiscal.cdsCupomFiscalSERIE.AsString,//Série
-                                                   'S','CFI',
+                                                   'S',fDmCupomFiscal.cdsCupomFiscalTIPO.AsString,
                                                    fDMCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
                                                    fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,
                                                    0,
@@ -2260,7 +2260,7 @@ begin
                                                    fDMCupomFiscal.cdsCupomFiscalNUMCUPOM.AsInteger,0,
                                                    'CFI',
                                                    fDmCupomFiscal.cdsCupomFiscalSERIE.AsString,//Série
-                                                   'S','CFI',
+                                                   'S',fDmCupomFiscal.cdsCupomFiscalTIPO.AsString,
                                                    fDMCupomFiscal.cdsCupom_ItensVLR_UNITARIO.AsFloat,
                                                    fDMCupomFiscal.cdsCupom_ItensVLR_TOTAL.AsFloat,
                                                    0,

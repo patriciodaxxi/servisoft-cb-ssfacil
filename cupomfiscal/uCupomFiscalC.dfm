@@ -21,8 +21,8 @@ object fCupomFiscalC: TfCupomFiscalC
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 167
-    Width = 1366
-    Height = 336
+    Width = 1358
+    Height = 328
     Align = alClient
     Ctl3D = False
     DataSource = dmCupomFiscal.dsCupom_Cons
@@ -239,7 +239,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object Panel11: TPanel
     Left = 0
     Top = 0
-    Width = 1366
+    Width = 1358
     Height = 30
     Align = alTop
     Color = 7300393
@@ -552,7 +552,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object pnlPesquisa: TPanel
     Left = 0
     Top = 30
-    Width = 1366
+    Width = 1358
     Height = 106
     Align = alTop
     Color = 3683329
@@ -887,8 +887,8 @@ object fCupomFiscalC: TfCupomFiscalC
   end
   object Panel1: TPanel
     Left = 0
-    Top = 503
-    Width = 1366
+    Top = 495
+    Width = 1358
     Height = 26
     Align = alBottom
     TabOrder = 3
@@ -1004,7 +1004,7 @@ object fCupomFiscalC: TfCupomFiscalC
   object pnlEnvio_Novo: TPanel
     Left = 0
     Top = 136
-    Width = 1366
+    Width = 1358
     Height = 31
     Align = alTop
     Color = 7300393
@@ -1259,8 +1259,8 @@ object fCupomFiscalC: TfCupomFiscalC
   end
   object pnlCliente: TPanel
     Left = 0
-    Top = 529
-    Width = 1366
+    Top = 521
+    Width = 1358
     Height = 56
     Align = alBottom
     Color = 7300393
@@ -1388,8 +1388,8 @@ object fCupomFiscalC: TfCupomFiscalC
   end
   object PanelTotais1: TPanel
     Left = 0
-    Top = 585
-    Width = 1366
+    Top = 577
+    Width = 1358
     Height = 120
     Align = alBottom
     Color = 3683329
@@ -1464,7 +1464,7 @@ object fCupomFiscalC: TfCupomFiscalC
       TabOrder = 1
     end
     object SMDBGrid2: TSMDBGrid
-      Left = 903
+      Left = 895
       Top = 1
       Width = 462
       Height = 118
