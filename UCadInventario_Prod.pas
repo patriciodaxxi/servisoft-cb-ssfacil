@@ -21,6 +21,7 @@ type
     procedure btnConfirmarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure NxButton3Click(Sender: TObject);
+    procedure SMDBGrid1TitleClick(Column: TColumn);
   private
     { Private declarations }
     procedure prc_Gravar_Itens;    
@@ -139,6 +140,19 @@ begin
       fDMCadInventario.cdsProduto.Filter   := 'QTD < 0';
     fDMCadInventario.cdsProduto.Filtered := True;
   end;
+end;
+
+procedure TfrmCadInventario_Prod.SMDBGrid1TitleClick(Column: TColumn);
+var
+  i: Integer;
+  ColunaOrdenada: String;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMCadInventario.cdsProduto.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid1.Columns.Count - 1 do
+    if not (SMDBGrid1.Columns.Items[I] = Column) then
+      SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.
