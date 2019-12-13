@@ -4808,7 +4808,7 @@ begin
           if fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'CAMPO BOM' then
           begin
             if fDMCadNotaServico.cdsClienteCODIGO.AsInteger <> fDMCadNotaServico.cdsNotaServicoID_CLIENTE.AsInteger then
-              fDMCadNotaServico.cdsCliente.Locate('CODIGO',fDMCadNotaServico.cdsNotaServicoID_SERVICO.AsInteger,[loCaseInsensitive]);
+              fDMCadNotaServico.cdsCliente.Locate('CODIGO',fDMCadNotaServico.cdsNotaServicoID_CLIENTE.AsInteger,[loCaseInsensitive]);
 
             if fDMCadNotaServico.cdsClientePESSOA.AsString = 'F' then
               vCNPJPref := FCds.FieldByName('TomS.CPF').AsString
