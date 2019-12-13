@@ -46,14 +46,19 @@ type
     Label17: TLabel;
     DBEdit12: TDBEdit;
     RxDBComboBox3: TRxDBComboBox;
+    Label16: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
     procedure RxDBComboBox2Click(Sender: TObject);
+    procedure DBEdit2KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     function  fnc_Erro: Boolean;
+
+    procedure prc_ConsChave;
 
   public
     { Public declarations }
@@ -65,7 +70,7 @@ var
 
 implementation
 
-uses rsDBUtils;
+uses rsDBUtils, UConsChave;
 
 {$R *.dfm}
 
@@ -174,6 +179,25 @@ begin
   pnlNotaFiscal.Visible := ((RxDBComboBox2.ItemIndex = 1) or (RxDBComboBox2.ItemIndex = 2));
   pnlCupom.Visible := (RxDBComboBox2.ItemIndex = 3);
   pnlCTe.Visible   := (RxDBComboBox2.ItemIndex = 4);
+end;
+
+procedure TfrmCadNotaFiscal_Ref.DBEdit2KeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) or (Key = Vk_Return) then
+    prc_ConsChave
+end;
+
+procedure TfrmCadNotaFiscal_Ref.prc_ConsChave;
+begin
+  fDMCadNotaFiscal.vNFeChave_Acesso := '';
+  frmConsChave := TfrmConsChave.Create(Self);
+  frmConsChave.fDMCadNotaFiscal := fDMCadNotaFiscal;
+  frmConsChave.ShowModal;
+  FreeAndNil(frmConsChave);
+  if trim(fDMCadNotaFiscal.vNFeChave_Acesso) <> '' then
+    fDMCadNotaFiscal.cdsNotaFiscal_RefNFECHAVEACESSO_REF.AsString := fDMCadNotaFiscal.vNFeChave_Acesso;
+  DBEdit2.SetFocus;
 end;
 
 end.

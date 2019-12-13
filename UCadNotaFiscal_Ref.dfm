@@ -1,6 +1,6 @@
 object frmCadNotaFiscal_Ref: TfrmCadNotaFiscal_Ref
-  Left = 262
-  Top = 169
+  Left = 346
+  Top = 161
   Width = 696
   Height = 445
   Caption = 'frmCadNotaFiscal_Ref'
@@ -19,7 +19,7 @@ object frmCadNotaFiscal_Ref: TfrmCadNotaFiscal_Ref
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 680
+    Width = 688
     Height = 34
     Align = alTop
     Color = clMoneyGreen
@@ -61,7 +61,7 @@ object frmCadNotaFiscal_Ref: TfrmCadNotaFiscal_Ref
   object pnlNFe: TPanel
     Left = 0
     Top = 34
-    Width = 680
+    Width = 688
     Height = 36
     Align = alTop
     Color = clMoneyGreen
@@ -75,6 +75,19 @@ object frmCadNotaFiscal_Ref: TfrmCadNotaFiscal_Ref
       Alignment = taRightJustify
       Caption = 'N'#186' Chave Acesso:'
     end
+    object Label16: TLabel
+      Left = 536
+      Top = 7
+      Width = 94
+      Height = 26
+      Caption = 'F2 ou ENTER para '#13#10'Consultar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+    end
     object DBEdit2: TDBEdit
       Left = 110
       Top = 8
@@ -83,12 +96,13 @@ object frmCadNotaFiscal_Ref: TfrmCadNotaFiscal_Ref
       DataField = 'NFECHAVEACESSO_REF'
       DataSource = DMCadNotaFiscal.dsNotaFiscal_Ref
       TabOrder = 0
+      OnKeyDown = DBEdit2KeyDown
     end
   end
   object pnlNotaFiscal: TPanel
     Left = 0
     Top = 70
-    Width = 680
+    Width = 688
     Height = 117
     Align = alTop
     Color = clMoneyGreen
@@ -244,8 +258,8 @@ object frmCadNotaFiscal_Ref: TfrmCadNotaFiscal_Ref
   object pnlCupom: TPanel
     Left = 0
     Top = 222
-    Width = 680
-    Height = 150
+    Width = 688
+    Height = 158
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 3
@@ -360,8 +374,8 @@ object frmCadNotaFiscal_Ref: TfrmCadNotaFiscal_Ref
   end
   object Panel5: TPanel
     Left = 0
-    Top = 372
-    Width = 680
+    Top = 380
+    Width = 688
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -400,7 +414,7 @@ object frmCadNotaFiscal_Ref: TfrmCadNotaFiscal_Ref
   object pnlCTe: TPanel
     Left = 0
     Top = 187
-    Width = 680
+    Width = 688
     Height = 35
     Align = alTop
     Color = clMoneyGreen
