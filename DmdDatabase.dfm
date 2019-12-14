@@ -1,8 +1,8 @@
 object dmDatabase: TdmDatabase
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 351
-  Top = 174
+  Left = 371
+  Top = 171
   Height = 480
   Width = 515
   object scoDados: TSQLConnection

@@ -34,6 +34,8 @@ type
   private
     { Private declarations }
     procedure prc_Monta_Estoque;
+    procedure prc_Gravar_mAuxEst;
+
   public
     { Public declarations }
     fDMCadLote: TDMCadLote;
@@ -46,7 +48,7 @@ var
 
 implementation
 
-uses rsDBUtils;
+uses rsDBUtils, DB;
 
 {$R *.dfm}
 
@@ -62,6 +64,22 @@ begin
   pnlSemi.Visible := (fDMCadLote.mAuxLoteTipo_Lote.AsString = 'S');
   if (fDMCadLote.mAuxLoteTipo_Lote.AsString = 'S') then
     prc_Monta_Estoque;
+end;
+
+procedure TfrmGerar_Lote_AuxEst.prc_Gravar_mAuxEst;
+begin
+  if fDMCadLote.mAuxEst.Locate('ID_Produto;ID_Cor;Num_Lote_Controle',VarArrayOf([fDMCadLote.mAuxLoteID_Produto.AsInteger,
+                                fDMCadLote.mAuxLoteID_Combinacao.AsInteger,fDMCadLote.mAuxLoteNum_Lote_Controle.AsString]),[locaseinsensitive]) then
+    fDMCadLote.mAuxEst.Edit
+  else
+  begin
+    fDMCadLote.mAuxEst.Insert;
+    fDMCadLote.mAuxEstID_Produto.AsInteger       := fDMCadLote.mAuxLoteID_Produto.AsInteger;
+    fDMCadLote.mAuxEstID_Cor.AsInteger           := fDMCadLote.mAuxLoteID_Combinacao.AsInteger;
+    fDMCadLote.mAuxEstNum_Lote_Controle.AsString := fDMCadLote.mAuxLoteNum_Lote_Controle.AsString;
+  end;
+  fDMCadLote.mAuxEstQtd.AsFloat := fDMCadLote.mAuxEstQtd.AsFloat + fDMCadLote.mAuxLoteQtd_Estoque_Usa.AsFloat;
+  fDMCadLote.mAuxEst.Post;
 end;
 
 procedure TfrmGerar_Lote_AuxEst.prc_Monta_Estoque;
@@ -119,8 +137,10 @@ begin
       fDMCadLote.mAuxLoteCarga.AsFloat        := StrToFloat(FormatFloat('0.00',fDMCadLote.mAuxLoteQtd.AsFloat / fDMCadLote.cdsProdutoMETROS_CARGA.AsFloat));
     end;
   end;
-
   fDMCadLote.mAuxLote.Post;
+
+  prc_Gravar_mAuxEst;
+
   Close;
 end;
 
