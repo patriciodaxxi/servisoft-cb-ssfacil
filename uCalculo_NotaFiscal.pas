@@ -60,10 +60,11 @@ uses
 
   procedure prc_Calcular_ST_Ret(fDMCadNotaFiscal: TDMCadNotaFiscal);
   procedure prc_Calcular_ICMS_Efet(fDMCadNotaFiscal: TDMCadNotaFiscal);
-  
+
   function fnc_Calcula_Desc_Vendedor(fDMCadNotaFiscal: TDMCadNotaFiscal): Real;
   function fnc_Unidade_Conv(fDMCadNotaFiscal: TDMCadNotaFiscal): Real;
   function fnc_Buscar_Regra_CFOP(fDMCadNotaFiscal: TDMCadNotaFiscal; ID_CFOP: Integer): Integer;
+
 var
   vVlrCusto: Real;
   vVlrCusto_Total: Real;

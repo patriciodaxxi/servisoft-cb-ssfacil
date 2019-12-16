@@ -59,6 +59,12 @@ object DmCadMovProdST: TDmCadMovProdST
     object sdsMovProdSTID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
     end
+    object sdsMovProdSTVLR_ICMS_SUBST: TFloatField
+      FieldName = 'VLR_ICMS_SUBST'
+    end
+    object sdsMovProdSTVLR_ICMS_SUBST_ORIG: TFloatField
+      FieldName = 'VLR_ICMS_SUBST_ORIG'
+    end
   end
   object dspMovProdST: TDataSetProvider
     DataSet = sdsMovProdST
@@ -112,6 +118,12 @@ object DmCadMovProdST: TDmCadMovProdST
     end
     object cdsMovProdSTID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
+    end
+    object cdsMovProdSTVLR_ICMS_SUBST: TFloatField
+      FieldName = 'VLR_ICMS_SUBST'
+    end
+    object cdsMovProdSTVLR_ICMS_SUBST_ORIG: TFloatField
+      FieldName = 'VLR_ICMS_SUBST_ORIG'
     end
   end
   object dsMovProdST: TDataSource

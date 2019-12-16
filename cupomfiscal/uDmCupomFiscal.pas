@@ -3298,6 +3298,8 @@ procedure TdmCupomFiscal.cdsCupomFiscalBeforePost(DataSet: TDataSet);
 begin
   if cdsCupomFiscalID_FECHAMENTO.AsInteger = 0 then
     cdsCupomFiscalID_FECHAMENTO.Clear;
+  if cdsCupomFiscalID_CLIENTE.AsInteger <= 0 then
+    cdsCupomFiscalID_CLIENTE.AsInteger := cdsParametrosID_CLIENTE_CONSUMIDOR.AsInteger;
 end;
 
 procedure TdmCupomFiscal.prc_Excluir_CupomFiscal_MP;

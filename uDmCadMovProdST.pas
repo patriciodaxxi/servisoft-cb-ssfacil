@@ -77,6 +77,10 @@ type
     frxMailExport1: TfrxMailExport;
     frxRichObject1: TfrxRichObject;
     frxConsProdST: TfrxDBDataset;
+    sdsMovProdSTVLR_ICMS_SUBST: TFloatField;
+    sdsMovProdSTVLR_ICMS_SUBST_ORIG: TFloatField;
+    cdsMovProdSTVLR_ICMS_SUBST: TFloatField;
+    cdsMovProdSTVLR_ICMS_SUBST_ORIG: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspMovProdSTUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

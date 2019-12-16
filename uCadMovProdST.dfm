@@ -22,8 +22,8 @@ object frmCadMovProdST: TfrmCadMovProdST
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 747
-    Height = 472
+    Width = 755
+    Height = 480
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -41,8 +41,8 @@ object frmCadMovProdST: TfrmCadMovProdST
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 106
-        Width = 743
-        Height = 326
+        Width = 751
+        Height = 334
         Align = alClient
         Ctl3D = False
         DataSource = DmCadMovProdST.dsConsulta
@@ -178,7 +178,7 @@ object frmCadMovProdST: TfrmCadMovProdST
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 743
+        Width = 751
         Height = 32
         Align = alTop
         Color = clSilver
@@ -334,8 +334,8 @@ object frmCadMovProdST: TfrmCadMovProdST
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 432
-        Width = 743
+        Top = 440
+        Width = 751
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -351,7 +351,7 @@ object frmCadMovProdST: TfrmCadMovProdST
       object Panel3: TPanel
         Left = 0
         Top = 32
-        Width = 743
+        Width = 751
         Height = 74
         Align = alTop
         Color = clSilver
@@ -518,7 +518,7 @@ object frmCadMovProdST: TfrmCadMovProdST
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 743
+        Width = 751
         Height = 35
         Align = alTop
         Color = 8404992
@@ -744,8 +744,8 @@ object frmCadMovProdST: TfrmCadMovProdST
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 743
-        Height = 414
+        Width = 751
+        Height = 422
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -822,10 +822,10 @@ object frmCadMovProdST: TfrmCadMovProdST
             'C')
         end
         object gbxVendedor: TRzGroupBox
-          Left = 46
-          Top = 115
+          Left = 45
+          Top = 116
           Width = 241
-          Height = 158
+          Height = 215
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -889,11 +889,20 @@ object frmCadMovProdST: TfrmCadMovProdST
           end
           object Label15: TLabel
             Left = 11
-            Top = 123
+            Top = 163
             Width = 74
             Height = 13
             Caption = 'Qtd. Conversor:'
             FocusControl = DBEdit7
+          end
+          object Label3: TLabel
+            Left = 46
+            Top = 136
+            Width = 39
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'V.ICMS:'
+            FocusControl = DBEdit11
           end
           object DBEdit6: TDBEdit
             Left = 88
@@ -952,7 +961,7 @@ object frmCadMovProdST: TfrmCadMovProdST
           end
           object DBEdit7: TDBEdit
             Left = 87
-            Top = 117
+            Top = 157
             Width = 134
             Height = 19
             Ctl3D = False
@@ -961,12 +970,23 @@ object frmCadMovProdST: TfrmCadMovProdST
             ParentCtl3D = False
             TabOrder = 1
           end
+          object DBEdit11: TDBEdit
+            Left = 88
+            Top = 130
+            Width = 82
+            Height = 19
+            Ctl3D = False
+            DataField = 'VLR_ICMS_NORMAL_ORIG'
+            DataSource = DmCadMovProdST.dsMovProdST
+            ParentCtl3D = False
+            TabOrder = 6
+          end
         end
         object RzGroupBox1: TRzGroupBox
           Left = 302
           Top = 192
           Width = 241
-          Height = 79
+          Height = 138
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -1062,8 +1082,8 @@ object frmCadMovProdST: TfrmCadMovProdST
   end
   object cStat: TStatusBar
     Left = 0
-    Top = 472
-    Width = 747
+    Top = 480
+    Width = 755
     Height = 19
     Panels = <
       item

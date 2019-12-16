@@ -64,6 +64,8 @@ type
     edtIdProduto: TEdit;
     edtNomeProduto: TEdit;
     cStat: TStatusBar;
+    Label3: TLabel;
+    DBEdit11: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -124,6 +126,12 @@ procedure TfrmCadMovProdST.prc_Gravar_Registro;
 var
   vIDAux : Integer;
 begin
+  if StrToFloat(FormatFloat('0.000',fDMCadMovProdST.cdsMovProdSTPERC_ST.AsFloat)) <= 0 then
+  begin
+    if MessageDlg('% ST não foi informada, deseja gravar assim mesmo?',mtConfirmation,[mbYes,mbNo],0) <> mrYes then
+      exit;
+  end;
+
   fDMCadMovProdST.cdsMovProdSTID_PRODUTO.AsInteger := StrToInt(edtIdProduto.Text);
   vIDAux := fDMCadMovProdST.cdsMovProdSTID.AsInteger;
   fDMCadMovProdST.prc_Gravar;
