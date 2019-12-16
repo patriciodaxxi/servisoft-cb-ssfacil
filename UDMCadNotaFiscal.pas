@@ -3113,6 +3113,8 @@ type
     qNCM_CSTCOD_BENEF: TStringField;
     cdsProdutoCOD_BENEF: TStringField;
     qProduto_UFCOD_BENEF: TStringField;
+    qParametros_NFeENVIAR_ICMS_SUBSTITUTO: TStringField;
+    qProdSTVLR_ICMS_SUBSTITUTO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

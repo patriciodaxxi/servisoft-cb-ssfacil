@@ -309,9 +309,9 @@ begin
   if (StrToFloat(FormatFloat('0.00000',fDMCadMovProdST.cdsMovProdSTQTD_PACOTE.AsFloat)) <> 0)
     and (StrToFloat(FormatFloat('0.00000',fDMCadMovProdST.cdsMovProdSTQTD_PACOTE.AsFloat)) <> 1) then
     vQtdAux := StrToCurr(FormatCurr('0.00000',fDMCadMovProdST.cdsMovProdSTQTD_ORIGINAL.AsFloat * fDMCadMovProdST.cdsMovProdSTQTD_PACOTE.AsFloat));
-  fDMCadMovProdST.cdsMovProdSTBASE_ST.AsFloat        := StrToCurr(FormatCurr('0.00000',fDMCadMovProdST.cdsMovProdSTBASE_ST_ORIGINAL.AsFloat / vQtdAux));
-  fDMCadMovProdST.cdsMovProdSTVLR_ST.AsFloat         := StrToCurr(FormatCurr('0.00000',fDMCadMovProdST.cdsMovProdSTVLR_ST_ORIGINAL.AsFloat / vQtdAux));
-  fDMCadMovProdST.cdsMovProdSTVLR_ICMS_SUBST.AsFloat := StrToCurr(FormatCurr('0.00000',fDMCadMovProdST.cdsMovProdSTVLR_ICMS_SUBST_ORIG.AsFloat / vQtdAux));
+  fDMCadMovProdST.cdsMovProdSTBASE_ST.AsFloat        := StrToCurr(FormatCurr('0.00',fDMCadMovProdST.cdsMovProdSTBASE_ST_ORIGINAL.AsFloat / vQtdAux));
+  fDMCadMovProdST.cdsMovProdSTVLR_ST.AsFloat         := StrToCurr(FormatCurr('0.00',fDMCadMovProdST.cdsMovProdSTVLR_ST_ORIGINAL.AsFloat / vQtdAux));
+  fDMCadMovProdST.cdsMovProdSTVLR_ICMS_SUBST.AsFloat := StrToCurr(FormatCurr('0.00',fDMCadMovProdST.cdsMovProdSTVLR_ICMS_SUBST_ORIG.AsFloat / vQtdAux));
 end;
 
 procedure TfrmCadMovProdST.edtIdProdutoEnter(Sender: TObject);

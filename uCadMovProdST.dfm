@@ -24,7 +24,7 @@ object frmCadMovProdST: TfrmCadMovProdST
     Top = 0
     Width = 755
     Height = 480
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadMovProdST: TfrmCadMovProdST
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1083,7 +1083,7 @@ object frmCadMovProdST: TfrmCadMovProdST
         object NxButton1: TNxButton
           Left = 460
           Top = 151
-          Width = 75
+          Width = 74
           Caption = 'Calcular'
           TabOrder = 6
           OnClick = NxButton1Click
