@@ -174,7 +174,7 @@ object DMConsPessoa: TDMConsPessoa
       '    AND NFEDENEGADA = '#39'N'#39
       '   AND VLR_DUPLICATA > 0')
     SQLConnection = dmDatabase.scoDados
-    Left = 528
+    Left = 520
     Top = 192
     object qFaturamentoVLR_DUPLICATA: TFloatField
       FieldName = 'VLR_DUPLICATA'
@@ -916,18 +916,17 @@ object DMConsPessoa: TDMConsPessoa
       'CA, MAR.NOME NOME_MARCA'#13#10'from MOVIMENTO M'#13#10'inner join PESSOA P o' +
       'n M.ID_PESSOA = P.CODIGO'#13#10'inner join PRODUTO PRO on M.ID_PRODUTO' +
       ' = PRO.ID'#13#10'inner join MARCA MAR on PRO.ID_MARCA = MAR.ID'#13#10'where ' +
-      'MAR.ID = :ID_MARCA or :ID_MARCA = 0 and'#13#10'      M.TIPO_REG = '#39'CFI' +
-      #39
+      '(MAR.ID = :ID_MARCA or :ID_MARCA = 0) and'#13#10'      M.TIPO_REG = '#39'C' +
+      'FI'#39
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID_MARCA'
         ParamType = ptInput
-        Value = 0
       end
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'ID_MARCA'
         ParamType = ptInput
       end>
@@ -971,5 +970,36 @@ object DMConsPessoa: TDMConsPessoa
     DataSet = cdsConsPessoaProduto
     Left = 288
     Top = 514
+  end
+  object qProduto: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT * FROM PRODUTO'
+      'WHERE ID = :ID')
+    SQLConnection = dmDatabase.scoDados
+    Left = 616
+    Top = 192
+    object qProdutoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qProdutoREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object qProdutoNOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object qProdutoINATIVO: TStringField
+      FieldName = 'INATIVO'
+      FixedChar = True
+      Size = 1
+    end
   end
 end

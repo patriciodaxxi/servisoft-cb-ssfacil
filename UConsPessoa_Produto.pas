@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, Grids, DBGrids, SMDBGrid, StdCtrls, Buttons, UDMConsPessoa,
-  NxEdit, Mask, ToolEdit, NxCollection, RzPanel, RxLookup;
+  NxEdit, Mask, ToolEdit, NxCollection, RzPanel, RxLookup, uUtilPadrao, USel_Produto;
 
 type
   TfrmConsPessoa_Produto = class(TForm)
@@ -18,15 +18,22 @@ type
     btnConsultar: TNxButton;
     comboMarca: TRxDBLookupCombo;
     lblMarca: TLabel;
+    edtCodProduto: TEdit;
+    edtNomeProduto: TEdit;
+    Label1: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
     procedure btnConsultarClick(Sender: TObject);
     procedure SMDBGrid2TitleClick(Column: TColumn);
     procedure SMDBGrid1DblClick(Sender: TObject);
+    procedure edtCodProdutoExit(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDMConsPessoa: TDMConsPessoa;
+    ffrmSel_Produto : TfrmSel_Produto;
 
   public
     { Public declarations }
@@ -74,12 +81,17 @@ end;
 procedure TfrmConsPessoa_Produto.btnConsultarClick(Sender: TObject);
 var
   vID_Marca : Integer;
+  vID_Produto : Integer;
 begin
   if comboMarca.Text <> EmptyStr then
     vID_Marca := comboMarca.KeyValue
   else
     vID_Marca := 0;
-  fDMConsPessoa.prc_Cons_Cliente_Produto(vID_Marca,DateEdit1.Date,DateEdit2.Date);
+  if edtCodProduto.Text <> EmptyStr then
+    vID_Produto := StrToInt(edtCodProduto.Text)
+  else
+    vID_Produto := 0;
+  fDMConsPessoa.prc_Cons_Cliente_Produto(vID_Marca, vID_Produto, DateEdit1.Date, DateEdit2.Date);
 end;
 
 procedure TfrmConsPessoa_Produto.SMDBGrid2TitleClick(Column: TColumn);
@@ -102,6 +114,49 @@ begin
     vID_Pessoa_Cons := fDMConsPessoa.cdsConsPessoaProdutoCODIGO.AsInteger;
     Close;
   end;
+end;
+
+procedure TfrmConsPessoa_Produto.edtCodProdutoExit(Sender: TObject);
+begin
+  if edtCodProduto.Text = EmptyStr then
+  begin
+    edtNomeProduto.Clear;
+    exit;
+  end;
+  if not(fnc_Verifica_Numero(edtCodProduto.Text)) then
+  begin
+    MessageDlg('Informe somente números no campo código produto',mtError,[mbOK],0);
+    edtCodProduto.Clear;
+    edtCodProduto.SetFocus;
+    Exit;
+  end;
+  fDMConsPessoa.prc_Consultar_Produto(StrToInt(edtCodProduto.Text));
+  if fDMConsPessoa.qProduto.IsEmpty then
+  begin
+    MessageDlg('Codigo produto inexistente',mtError,[mbOK],0);
+    edtCodProduto.SelectAll;
+    edtCodProduto.SetFocus;
+    Exit;
+  end;
+  edtNomeProduto.Text := fDMConsPessoa.qProdutoNOME.AsString;
+end;
+
+procedure TfrmConsPessoa_Produto.FormKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = Vk_F2) then
+  begin
+    ffrmSel_Produto := TfrmSel_Produto.Create(nil);
+    try
+      vCodProduto_Pos := 0;
+      ffrmSel_Produto.ShowModal;
+      if vCodProduto_Pos > 0 then
+        edtCodProduto.Text := IntToStr(vCodProduto_Pos);
+    finally
+      FreeAndNil(ffrmSel_Produto);
+    end;
+  end;
+
 end;
 
 end.

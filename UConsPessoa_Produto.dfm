@@ -1,6 +1,6 @@
 object frmConsPessoa_Produto: TfrmConsPessoa_Produto
-  Left = 255
-  Top = 113
+  Left = 282
+  Top = 111
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Consulta Produto/Cliente'
@@ -12,9 +12,11 @@ object frmConsPessoa_Produto: TfrmConsPessoa_Produto
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -76,6 +78,7 @@ object frmConsPessoa_Produto: TfrmConsPessoa_Produto
       item
         Expanded = False
         FieldName = 'NOME_MARCA'
+        Width = 64
         Visible = True
       end>
   end
@@ -129,6 +132,20 @@ object frmConsPessoa_Produto: TfrmConsPessoa_Produto
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label1: TLabel
+      Left = 23
+      Top = 64
+      Width = 49
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Produto:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object DateEdit1: TDateEdit
       Left = 74
       Top = 32
@@ -147,7 +164,7 @@ object frmConsPessoa_Produto: TfrmConsPessoa_Produto
     end
     object btnConsultar: TNxButton
       Left = 353
-      Top = 25
+      Top = 49
       Width = 177
       Height = 30
       Caption = 'Efetuar Pesquisa'
@@ -227,6 +244,23 @@ object frmConsPessoa_Produto: TfrmConsPessoa_Produto
       LookupDisplay = 'NOME'
       LookupSource = DMConsPessoa.dsMarca
       TabOrder = 3
+    end
+    object edtCodProduto: TEdit
+      Left = 74
+      Top = 56
+      Width = 45
+      Height = 21
+      TabOrder = 4
+      OnExit = edtCodProdutoExit
+    end
+    object edtNomeProduto: TEdit
+      Left = 122
+      Top = 56
+      Width = 227
+      Height = 21
+      Color = clSilver
+      ReadOnly = True
+      TabOrder = 5
     end
   end
 end
