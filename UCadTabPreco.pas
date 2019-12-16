@@ -430,6 +430,7 @@ var
   vPreco: Real;
   vContadorAux: Integer;
   vID_Produto: Integer;
+  i : Integer;
 begin
   if StrToFloat(FormatFloat('0.00',CurrencyEdit1.Value)) <= 0 then
   begin
@@ -458,15 +459,39 @@ begin
         vAux := StrToFloat(FormatFloat('0.000',vPreco * CurrencyEdit1.Value / 100));
         if ComboBox2.ItemIndex = 1 then
           vAux := StrToFloat(FormatFloat('0.00',vAux * -1));
-          
+
         fDMCadTab_Preco.cdsTab_Preco_Itens.Edit;
         case ComboBox1.ItemIndex of
           0: fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadTab_Preco.cdsTab_Preco_ItensPRECO_CUSTO.AsFloat + vAux));
           1: fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadTab_Preco.cdsTab_Preco_ItensVLR_VENDA.AsFloat + vAux));
         end;
-        fDMCadTab_Preco.cdsTab_Preco_Itens.Post;
-        vContadorAux := vContadorAux + 1; 
       end;
+
+      //16/12/2019
+      if ComboBox1.ItemIndex = 1 then
+      begin
+
+        for i := 1 to 2 do
+        begin
+          if fDMCadTab_Preco.cdsTab_Preco_Itens.FieldByName('VLR_VENDA'+IntToStr(i)).AsFloat > 0 then
+          begin
+            vPreco := fDMCadTab_Preco.cdsTab_Preco_Itens.FieldByName('VLR_VENDA'+IntToStr(i)).AsFloat;
+            vAux   := StrToFloat(FormatFloat('0.000',vPreco * CurrencyEdit1.Value / 100));
+            if ComboBox2.ItemIndex = 1 then
+              vAux := StrToFloat(FormatFloat('0.00',vAux * -1));
+            fDMCadTab_Preco.cdsTab_Preco_Itens.Edit;
+            fDMCadTab_Preco.cdsTab_Preco_Itens.FieldByName('VLR_VENDA'+IntToStr(i)).AsFloat :=
+                            StrToFloat(FormatFloat('0.00',fDMCadTab_Preco.cdsTab_Preco_Itens.FieldByName('VLR_VENDA'+IntToStr(i)).AsFloat + vAux));
+          end;
+        end;
+      end;
+      if fDMCadTab_Preco.cdsTab_Preco_Itens.State in [dsEdit] then
+      begin
+        fDMCadTab_Preco.cdsTab_Preco_Itens.Post;
+        vContadorAux := vContadorAux + 1;
+      end;
+      //*************************
+      
     end;
     fDMCadTab_Preco.cdsTab_Preco_Itens.Next;
   end;

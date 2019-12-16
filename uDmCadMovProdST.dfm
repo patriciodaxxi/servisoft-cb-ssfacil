@@ -197,6 +197,12 @@ object DmCadMovProdST: TDmCadMovProdST
       FieldName = 'NOME_PRODUTO'
       Size = 100
     end
+    object cdsConsultaVLR_ICMS_SUBST: TFloatField
+      FieldName = 'VLR_ICMS_SUBST'
+    end
+    object cdsConsultaVLR_ICMS_SUBST_ORIG: TFloatField
+      FieldName = 'VLR_ICMS_SUBST_ORIG'
+    end
   end
   object dsConsulta: TDataSource
     DataSet = cdsConsulta
