@@ -494,7 +494,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     Top = 172
     Width = 792
     Height = 418
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     ActivePageDefault = TabSheet1
     Align = alClient
     BackgroundColor = clGray
@@ -504,7 +504,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
     ParentBackgroundColor = False
     ParentColor = False
     TabColors.Shadow = clGray
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     TextColors.DisabledShadow = 8421440
     TextColors.Selected = clBlue
@@ -735,7 +735,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
           OnKeyPress = DBMemo1KeyPress
         end
         object gbxVendedor: TRzGroupBox
-          Left = 551
+          Left = 553
           Top = 3
           Width = 222
           Height = 349
@@ -1137,7 +1137,7 @@ object frmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens
             Visible = False
           end
           object DBEdit29: TDBEdit
-            Left = 84
+            Left = 85
             Top = 276
             Width = 115
             Height = 19

@@ -22,7 +22,7 @@ object frmGerar_Rotulos: TfrmGerar_Rotulos
   object pnlPesquisa: TPanel
     Left = 0
     Top = 0
-    Width = 1007
+    Width = 1015
     Height = 100
     Align = alTop
     Color = clSilver
@@ -318,8 +318,8 @@ object frmGerar_Rotulos: TfrmGerar_Rotulos
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 100
-    Width = 1007
-    Height = 512
+    Width = 1015
+    Height = 519
     Align = alClient
     Ctl3D = True
     DataSource = DMCadPedido.dsPedido_Consulta
@@ -376,6 +376,7 @@ object frmGerar_Rotulos: TfrmGerar_Rotulos
         FieldName = 'PEDIDO_CLIENTE'
         Title.Alignment = taCenter
         Title.Caption = 'Pedido Cliente (OC)'
+        Width = 64
         Visible = True
       end
       item
@@ -403,6 +404,7 @@ object frmGerar_Rotulos: TfrmGerar_Rotulos
         Expanded = False
         FieldName = 'QTD'
         Title.Caption = 'Qtd. Produtos'
+        Width = 64
         Visible = True
       end
       item
@@ -422,8 +424,8 @@ object frmGerar_Rotulos: TfrmGerar_Rotulos
   end
   object Panel4: TPanel
     Left = 0
-    Top = 612
-    Width = 1007
+    Top = 619
+    Width = 1015
     Height = 24
     Align = alBottom
     Color = clSilver
@@ -470,8 +472,8 @@ object frmGerar_Rotulos: TfrmGerar_Rotulos
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 816
-    Top = 216
+    Left = 817
+    Top = 214
     object rmica1: TMenuItem
       Caption = 'T'#233'rmica'
       OnClick = rmica1Click

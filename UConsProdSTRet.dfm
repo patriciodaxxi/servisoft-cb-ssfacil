@@ -159,7 +159,7 @@ object frmConsProdSTRet: TfrmConsProdSTRet
     WidthOfIndicator = 11
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
-    ColCount = 9
+    ColCount = 13
     RowCount = 2
     Columns = <
       item
@@ -167,7 +167,7 @@ object frmConsProdSTRet: TfrmConsProdSTRet
         Expanded = False
         FieldName = 'ID'
         Title.Alignment = taCenter
-        Width = 58
+        Width = 51
         Visible = True
       end
       item
@@ -225,6 +225,36 @@ object frmConsProdSTRet: TfrmConsProdSTRet
         Title.Alignment = taCenter
         Title.Caption = 'Base ST Ret.'
         Width = 78
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VLR_ST'
+        Title.Alignment = taCenter
+        Title.Caption = 'Vlr. ST'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VLR_ST_RET'
+        Title.Alignment = taCenter
+        Title.Caption = 'Vlr. ST Retido'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'PERC_ST'
+        Title.Alignment = taCenter
+        Title.Caption = '% ST'
+        Width = 44
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'VLR_ICMS_SUBSTITUTO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Vlr ICMS Substituto'
+        Width = 88
         Visible = True
       end>
   end

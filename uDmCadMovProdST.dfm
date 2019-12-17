@@ -265,12 +265,18 @@ object DmCadMovProdST: TDmCadMovProdST
       'irst 1 V.base_st FROM vmovprodst V WHERE V.id_produto = P.ID ord' +
       'er by v.dtemissao desc ),'#13#10'(select first 1 V.base_st_ret FROM vm' +
       'ovprodst V WHERE V.id_produto = P.ID order by v.dtemissao desc )' +
-      #13#10'FROM PRODUTO P'#13#10'INNER JOIN TAB_NCM NCM'#13#10'ON P.id_ncm = NCM.id'#13#10 +
-      'WHERE P.INATIVO = '#39'N'#39') AUX'#13#10#13#10
+      ','#13#10'(select first 1 V.vlr_icms_substituto FROM vmovprodst V WHERE' +
+      ' V.id_produto = P.ID order by v.dtemissao desc ),'#13#10'(select first' +
+      ' 1 V.vlr_st FROM vmovprodst V WHERE V.id_produto = P.ID order by' +
+      ' v.dtemissao desc ),'#13#10'(select first 1 V.vlr_st_ret FROM vmovprod' +
+      'st V WHERE V.id_produto = P.ID order by v.dtemissao desc ),'#13#10'(se' +
+      'lect first 1 V.perc_st FROM vmovprodst V WHERE V.id_produto = P.' +
+      'ID order by v.dtemissao desc )'#13#10'FROM PRODUTO P'#13#10'INNER JOIN TAB_N' +
+      'CM NCM'#13#10'ON P.id_ncm = NCM.id'#13#10'WHERE P.INATIVO = '#39'N'#39') AUX'#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 387
+    Left = 390
     Top = 271
   end
   object dspConsProdST: TDataSetProvider
@@ -282,7 +288,7 @@ object DmCadMovProdST: TDmCadMovProdST
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsProdST'
-    Left = 475
+    Left = 476
     Top = 271
     object cdsConsProdSTID: TIntegerField
       FieldName = 'ID'
@@ -309,9 +315,26 @@ object DmCadMovProdST: TDmCadMovProdST
     end
     object cdsConsProdSTBASE_ST: TFloatField
       FieldName = 'BASE_ST'
+      DisplayFormat = '0.00'
     end
     object cdsConsProdSTBASE_ST_RET: TFloatField
       FieldName = 'BASE_ST_RET'
+      DisplayFormat = '0.00'
+    end
+    object cdsConsProdSTVLR_ICMS_SUBSTITUTO: TFloatField
+      FieldName = 'VLR_ICMS_SUBSTITUTO'
+      DisplayFormat = '0.00'
+    end
+    object cdsConsProdSTVLR_ST: TFloatField
+      FieldName = 'VLR_ST'
+      DisplayFormat = '0.00'
+    end
+    object cdsConsProdSTVLR_ST_RET: TFloatField
+      FieldName = 'VLR_ST_RET'
+      DisplayFormat = '0.00'
+    end
+    object cdsConsProdSTPERC_ST: TFloatField
+      FieldName = 'PERC_ST'
     end
   end
   object dsConsProdST: TDataSource

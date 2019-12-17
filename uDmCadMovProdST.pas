@@ -83,6 +83,10 @@ type
     cdsMovProdSTVLR_ICMS_SUBST_ORIG: TFloatField;
     cdsConsultaVLR_ICMS_SUBST: TFloatField;
     cdsConsultaVLR_ICMS_SUBST_ORIG: TFloatField;
+    cdsConsProdSTVLR_ICMS_SUBSTITUTO: TFloatField;
+    cdsConsProdSTVLR_ST: TFloatField;
+    cdsConsProdSTVLR_ST_RET: TFloatField;
+    cdsConsProdSTPERC_ST: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspMovProdSTUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
