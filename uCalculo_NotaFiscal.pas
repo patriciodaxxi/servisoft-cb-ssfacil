@@ -4138,14 +4138,19 @@ procedure prc_Calcular_ST_Ret(fDMCadNotaFiscal: TDMCadNotaFiscal);
 var
   vBaseSTRet: Real;
   vVlrSTRet: Real;
+  vVlrICMSubstituto : Real;
 begin
   if fDMCadNotaFiscal.cdsNotaFiscalTIPO_REG.AsString = 'NTE' then
     exit;
 
-  fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat := 0;
-  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat  := 0;
-  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat      := 0;
-  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat      := 0;
+  if fDMCadNotaFiscal.cdsClienteCODIGO.AsInteger <> fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger then
+    fDMCadNotaFiscal.cdsCliente.Locate('CODIGO',fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,([Locaseinsensitive]));
+
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_ICMSSUBST_RET.AsFloat  := 0;
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSUBST_RET.AsFloat   := 0;
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_BASE_EFET.AsFloat       := 0;
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_EFET.AsFloat       := 0;
+  fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO.AsFloat := 0;
 
   if (fDMCadNotaFiscal.cdsCFOPENVIAR_BASE_ST.AsString <> 'S') then
     exit;
@@ -4176,6 +4181,14 @@ begin
     vBaseSTRet := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.qProdSTBASE_ST.AsFloat));
     vVlrSTRet  := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.qProdSTVLR_ST.AsFloat));
   end;
+
+  //16/12/2019  Vlr. ICMS Substituto
+  vVlrICMSubstituto := 0;
+  if ((fDMCadNotaFiscal.qParametros_NFeENVIAR_ICMS_SUBSTITUTO.AsString = '0') and (fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsString = '0'))
+    or ((fDMCadNotaFiscal.qParametros_NFeENVIAR_ICMS_SUBSTITUTO.AsString = '1') and (fDMCadNotaFiscal.cdsClienteTIPO_CONSUMIDOR.AsString = '1'))
+    or (fDMCadNotaFiscal.qParametros_NFeENVIAR_ICMS_SUBSTITUTO.AsString = 'A') then
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.qProdSTVLR_ICMS_SUBSTITUTO.AsFloat  * fDMCadNotaFiscal.cdsNotaFiscal_ItensQTD.AsFloat));
+  //*************************
 
   if StrToFloat(FormatFloat('0.0000', vBaseSTRet)) <= 0 then
     exit;

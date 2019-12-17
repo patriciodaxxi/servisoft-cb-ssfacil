@@ -2462,10 +2462,10 @@ object frmCadPessoa: TfrmCadPessoa
             Top = 415
             Width = 1075
             Height = 189
-            ActivePage = TS_CAE
+            ActivePage = ts_Contatos
             ActivePageDefault = ts_Contatos
             Align = alBottom
-            TabIndex = 2
+            TabIndex = 0
             TabOrder = 1
             OnChange = RzPageControl3Change
             FixedDimension = 19

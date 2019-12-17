@@ -1,6 +1,6 @@
 object frmCadPessoaRed: TfrmCadPessoaRed
-  Left = 190
-  Top = 31
+  Left = -1275
+  Top = 82
   Width = 1098
   Height = 678
   Caption = 'Cadastro de Pessoas Reduzido'
@@ -918,6 +918,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'TP_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Cli'
+            Width = 64
             Visible = True
           end
           item
@@ -926,6 +927,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'TP_FORNECEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Forn.'
+            Width = 64
             Visible = True
           end
           item
@@ -943,6 +945,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'TP_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Repr.'
+            Width = 64
             Visible = True
           end
           item
@@ -951,6 +954,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'ORGAO_PUBLICO'
             Title.Alignment = taCenter
             Title.Caption = 'Org'#227'o P'#250'blico'
+            Width = 64
             Visible = True
           end
           item
@@ -958,6 +962,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'DTPEDIDO'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Pedido'
+            Width = 64
             Visible = True
           end
           item
@@ -965,6 +970,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'DTNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Faturamento'
+            Width = 64
             Visible = True
           end
           item
@@ -1004,6 +1010,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'NOME_GRUPO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Grupo'
+            Width = 64
             Visible = True
           end
           item
@@ -1011,6 +1018,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'TIPO_CONTRIBUINTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Contribuinte'
+            Width = 64
             Visible = True
           end
           item
@@ -1018,6 +1026,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'COD_CONTA_ORCAMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Or'#231'amento'
+            Width = 64
             Visible = True
           end>
       end

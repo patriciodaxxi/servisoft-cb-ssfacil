@@ -74,7 +74,7 @@ object frmCadMovProdST: TfrmCadMovProdST
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 14
+        ColCount = 16
         RowCount = 2
         Columns = <
           item
@@ -138,6 +138,14 @@ object frmCadMovProdST: TfrmCadMovProdST
           end
           item
             Expanded = False
+            FieldName = 'VLR_ICMS_SUBST'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. ICMS Substituto'
+            Width = 70
+            Visible = True
+          end
+          item
+            Expanded = False
             FieldName = 'QTD_ORIGINAL'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Original'
@@ -172,6 +180,14 @@ object frmCadMovProdST: TfrmCadMovProdST
             Title.Alignment = taCenter
             Title.Caption = 'Vlr. ST Original'
             Width = 64
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VLR_ICMS_SUBST_ORIG'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vlr. ICMS Substituto Original'
+            Width = 78
             Visible = True
           end>
       end
@@ -825,7 +841,7 @@ object frmCadMovProdST: TfrmCadMovProdST
           Left = 45
           Top = 116
           Width = 241
-          Height = 215
+          Height = 170
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -843,8 +859,8 @@ object frmCadMovProdST: TfrmCadMovProdST
           TabOrder = 0
           VisualStyle = vsGradient
           object Label7: TLabel
-            Left = 35
-            Top = 76
+            Left = 43
+            Top = 94
             Width = 50
             Height = 13
             Alignment = taRightJustify
@@ -852,8 +868,8 @@ object frmCadMovProdST: TfrmCadMovProdST
             FocusControl = DBEdit6
           end
           object Label10: TLabel
-            Left = 17
-            Top = 94
+            Left = 25
+            Top = 112
             Width = 68
             Height = 13
             Alignment = taRightJustify
@@ -861,7 +877,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             FocusControl = DBEdit8
           end
           object Label11: TLabel
-            Left = 41
+            Left = 49
             Top = 24
             Width = 44
             Height = 13
@@ -870,7 +886,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             FocusControl = DBEdit1
           end
           object Label12: TLabel
-            Left = 50
+            Left = 58
             Top = 42
             Width = 35
             Height = 13
@@ -879,7 +895,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             FocusControl = DBEdit5
           end
           object Label13: TLabel
-            Left = 57
+            Left = 65
             Top = 58
             Width = 28
             Height = 13
@@ -888,25 +904,25 @@ object frmCadMovProdST: TfrmCadMovProdST
             FocusControl = DBEdit2
           end
           object Label15: TLabel
-            Left = 11
-            Top = 163
+            Left = 20
+            Top = 147
             Width = 74
             Height = 13
             Caption = 'Qtd. Conversor:'
             FocusControl = DBEdit7
           end
           object Label3: TLabel
-            Left = 46
-            Top = 136
-            Width = 39
+            Left = 4
+            Top = 76
+            Width = 89
             Height = 13
             Alignment = taRightJustify
-            Caption = 'V.ICMS:'
+            Caption = 'V.ICMS Substituto:'
             FocusControl = DBEdit11
           end
           object DBEdit6: TDBEdit
-            Left = 88
-            Top = 70
+            Left = 96
+            Top = 88
             Width = 134
             Height = 19
             Ctl3D = False
@@ -916,8 +932,8 @@ object frmCadMovProdST: TfrmCadMovProdST
             TabOrder = 4
           end
           object DBEdit8: TDBEdit
-            Left = 88
-            Top = 88
+            Left = 96
+            Top = 106
             Width = 82
             Height = 19
             Ctl3D = False
@@ -927,7 +943,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             TabOrder = 5
           end
           object DBEdit1: TDBEdit
-            Left = 88
+            Left = 96
             Top = 16
             Width = 134
             Height = 19
@@ -935,10 +951,10 @@ object frmCadMovProdST: TfrmCadMovProdST
             DataField = 'BASE_ST_ORIGINAL'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 2
+            TabOrder = 0
           end
           object DBEdit5: TDBEdit
-            Left = 88
+            Left = 96
             Top = 34
             Width = 134
             Height = 19
@@ -946,10 +962,10 @@ object frmCadMovProdST: TfrmCadMovProdST
             DataField = 'VLR_ST_ORIGINAL'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 3
+            TabOrder = 1
           end
           object DBEdit2: TDBEdit
-            Left = 87
+            Left = 96
             Top = 52
             Width = 134
             Height = 19
@@ -957,36 +973,36 @@ object frmCadMovProdST: TfrmCadMovProdST
             DataField = 'PERC_ST'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 0
+            TabOrder = 2
           end
           object DBEdit7: TDBEdit
-            Left = 87
-            Top = 157
+            Left = 95
+            Top = 141
             Width = 134
             Height = 19
             Ctl3D = False
             DataField = 'QTD_PACOTE'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 1
+            TabOrder = 6
           end
           object DBEdit11: TDBEdit
-            Left = 88
-            Top = 130
-            Width = 82
+            Left = 96
+            Top = 70
+            Width = 134
             Height = 19
             Ctl3D = False
-            DataField = 'VLR_ICMS_NORMAL_ORIG'
+            DataField = 'VLR_ICMS_SUBST_ORIG'
             DataSource = DmCadMovProdST.dsMovProdST
             ParentCtl3D = False
-            TabOrder = 6
+            TabOrder = 3
           end
         end
         object RzGroupBox1: TRzGroupBox
           Left = 302
-          Top = 192
-          Width = 241
-          Height = 138
+          Top = 194
+          Width = 236
+          Height = 92
           BorderColor = clNavy
           BorderInner = fsButtonUp
           BorderOuter = fsBump
@@ -1004,7 +1020,7 @@ object frmCadMovProdST: TfrmCadMovProdST
           TabOrder = 5
           VisualStyle = vsGradient
           object Label17: TLabel
-            Left = 39
+            Left = 49
             Top = 33
             Width = 44
             Height = 13
@@ -1013,7 +1029,7 @@ object frmCadMovProdST: TfrmCadMovProdST
             FocusControl = DBEdit3
           end
           object Label18: TLabel
-            Left = 48
+            Left = 58
             Top = 49
             Width = 35
             Height = 13
@@ -1021,10 +1037,19 @@ object frmCadMovProdST: TfrmCadMovProdST
             Caption = 'Vlr. ST:'
             FocusControl = DBEdit9
           end
+          object Label1: TLabel
+            Left = 4
+            Top = 67
+            Width = 89
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'V.ICMS Substituto:'
+            FocusControl = DBEdit10
+          end
           object DBEdit3: TDBEdit
-            Left = 87
+            Left = 97
             Top = 25
-            Width = 134
+            Width = 129
             Height = 19
             Ctl3D = False
             DataField = 'BASE_ST'
@@ -1033,9 +1058,9 @@ object frmCadMovProdST: TfrmCadMovProdST
             TabOrder = 0
           end
           object DBEdit9: TDBEdit
-            Left = 87
+            Left = 97
             Top = 43
-            Width = 134
+            Width = 129
             Height = 19
             Ctl3D = False
             DataField = 'VLR_ST'
@@ -1043,11 +1068,22 @@ object frmCadMovProdST: TfrmCadMovProdST
             ParentCtl3D = False
             TabOrder = 1
           end
+          object DBEdit10: TDBEdit
+            Left = 97
+            Top = 61
+            Width = 129
+            Height = 19
+            Ctl3D = False
+            DataField = 'VLR_ICMS_SUBST'
+            DataSource = DmCadMovProdST.dsMovProdST
+            ParentCtl3D = False
+            TabOrder = 2
+          end
         end
         object NxButton1: TNxButton
-          Left = 464
-          Top = 168
-          Width = 75
+          Left = 460
+          Top = 151
+          Width = 74
           Caption = 'Calcular'
           TabOrder = 6
           OnClick = NxButton1Click

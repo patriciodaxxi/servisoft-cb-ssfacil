@@ -77,7 +77,7 @@ object DmCadMovProdST: TDmCadMovProdST
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspMovProdST'
-    Left = 216
+    Left = 217
     Top = 24
     object cdsMovProdSTID: TIntegerField
       FieldName = 'ID'
@@ -89,9 +89,11 @@ object DmCadMovProdST: TDmCadMovProdST
     end
     object cdsMovProdSTBASE_ST: TFloatField
       FieldName = 'BASE_ST'
+      DisplayFormat = '0.00'
     end
     object cdsMovProdSTVLR_ST: TFloatField
       FieldName = 'VLR_ST'
+      DisplayFormat = '0.00'
     end
     object cdsMovProdSTPERC_ST: TFloatField
       FieldName = 'PERC_ST'
@@ -112,18 +114,22 @@ object DmCadMovProdST: TDmCadMovProdST
     end
     object cdsMovProdSTBASE_ST_ORIGINAL: TFloatField
       FieldName = 'BASE_ST_ORIGINAL'
+      DisplayFormat = '0.00'
     end
     object cdsMovProdSTVLR_ST_ORIGINAL: TFloatField
       FieldName = 'VLR_ST_ORIGINAL'
+      DisplayFormat = '0.00'
     end
     object cdsMovProdSTID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
     end
     object cdsMovProdSTVLR_ICMS_SUBST: TFloatField
       FieldName = 'VLR_ICMS_SUBST'
+      DisplayFormat = '0.00'
     end
     object cdsMovProdSTVLR_ICMS_SUBST_ORIG: TFloatField
       FieldName = 'VLR_ICMS_SUBST_ORIG'
+      DisplayFormat = '0.00'
     end
   end
   object dsMovProdST: TDataSource
@@ -153,7 +159,7 @@ object DmCadMovProdST: TDmCadMovProdST
     Params = <>
     ProviderName = 'dspConsulta'
     Left = 584
-    Top = 48
+    Top = 49
     object cdsConsultaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -196,6 +202,14 @@ object DmCadMovProdST: TDmCadMovProdST
     object cdsConsultaNOME_PRODUTO: TStringField
       FieldName = 'NOME_PRODUTO'
       Size = 100
+    end
+    object cdsConsultaVLR_ICMS_SUBST: TFloatField
+      FieldName = 'VLR_ICMS_SUBST'
+      DisplayFormat = '0.00'
+    end
+    object cdsConsultaVLR_ICMS_SUBST_ORIG: TFloatField
+      FieldName = 'VLR_ICMS_SUBST_ORIG'
+      DisplayFormat = '0.00'
     end
   end
   object dsConsulta: TDataSource

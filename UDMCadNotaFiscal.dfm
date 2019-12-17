@@ -12975,6 +12975,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeENVIAR_ICMS_SUBSTITUTO: TStringField
+      FieldName = 'ENVIAR_ICMS_SUBSTITUTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsEstoqueLoteAux: TSQLDataSet
     NoMetadata = True
@@ -15245,6 +15250,9 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object qProdSTPERC_ST: TFloatField
       FieldName = 'PERC_ST'
+    end
+    object qProdSTVLR_ICMS_SUBSTITUTO: TFloatField
+      FieldName = 'VLR_ICMS_SUBSTITUTO'
     end
   end
   object qFilial_Relatorios: TSQLQuery

@@ -189,6 +189,11 @@ type
     cdsConsPessoaProdutoNOME_PESSOA: TStringField;
     cdsConsPessoaProdutoCODIGO_MARCA: TIntegerField;
     cdsConsPessoaProdutoNOME_MARCA: TStringField;
+    qProduto: TSQLQuery;
+    qProdutoID: TIntegerField;
+    qProdutoREFERENCIA: TStringField;
+    qProdutoNOME: TStringField;
+    qProdutoINATIVO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicataCalcFields(DataSet: TDataSet);
   private
@@ -211,7 +216,8 @@ type
     procedure prc_Cons_Produto_Mov(ID_Pessoa: Integer ; Tipo_Pessoa: String ; DtInicial, DtFinal: TDateTime);
     procedure prc_Cons_Servico_Mov(ID_Pessoa: Integer ; Tipo_Pessoa: String ; DtInicial, DtFinal: TDateTime);
     procedure prc_Cons_NotaServico(ID_Pessoa: Integer);
-    procedure prc_Cons_Cliente_Produto(ID_Marca: Integer ; DtInicial, DtFinal: TDateTime);
+    procedure prc_Cons_Cliente_Produto(ID_Marca, ID_Produto: Integer ; DtInicial, DtFinal: TDateTime);
+    procedure prc_Consultar_Produto(ID : Integer);
   end;
 
 var
@@ -372,7 +378,7 @@ begin
   cdsNotaServico.IndexFieldNames := 'DTEMISSAO_CAD;NUMNOTA';
 end;
 
-procedure TDMConsPessoa.prc_Cons_Cliente_Produto(ID_Marca: Integer;
+procedure TDMConsPessoa.prc_Cons_Cliente_Produto(ID_Marca, ID_Produto: Integer;
   DtInicial, DtFinal: TDateTime);
 var
   vComando : String;
@@ -383,9 +389,18 @@ begin
     vComando :=  vComando + ' AND M.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtInicial));
   if DtFinal > 10 then
     vComando :=  vComando + ' AND M.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtFinal));
+  if ID_Produto > 0 then
+    vComando :=  vComando + ' AND M.ID_PRODUTO = ' + IntToStr(ID_Produto);
   sdsConsPessoaProduto.CommandText := ctConsPessoaProduto + vComando;
   sdsConsPessoaProduto.ParamByName('ID_MARCA').AsInteger := ID_Marca;
   cdsConsPessoaProduto.Open;
+end;
+
+procedure TDMConsPessoa.prc_Consultar_Produto(ID: Integer);
+begin
+  qProduto.Close;
+  qProduto.ParamByName('ID').AsInteger := ID;
+  qProduto.Open;
 end;
 
 end.
