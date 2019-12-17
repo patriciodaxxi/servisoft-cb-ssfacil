@@ -2685,7 +2685,8 @@ begin
          (fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString <> fDMCadPedido.cdsPedidoImp_ItensUNIDADE.AsString) and
          (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat)) > 0) then
       begin
-        fDMCadPedido.mEtiqueta_NavQtd2.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadPedido.mEtiqueta_NavQtd.AsFloat * fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat));
+        fDMCadPedido.mEtiqueta_NavQtd2.AsFloat := StrToFloat(FormatFloat('0.000',fDMCadPedido.mEtiqueta_NavQtd.AsFloat *
+                                                             fDMCadPedido.cdsPedidoImp_ItensCONV_UNIDADE.AsFloat));
         fDMCadPedido.mEtiqueta_NavUnidade_Prod.AsString := fDMCadPedido.cdsPedidoImp_ItensUNIDADE_PROD.AsString;
       end
       else

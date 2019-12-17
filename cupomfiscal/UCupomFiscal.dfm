@@ -23,15 +23,15 @@ object fCupomFiscal: TfCupomFiscal
   object Panel1: TPanel
     Left = 388
     Top = 0
-    Width = 896
-    Height = 696
+    Width = 888
+    Height = 688
     Align = alClient
     TabOrder = 1
     object SMDBGrid1: TSMDBGrid
       Left = 1
       Top = 1
-      Width = 894
-      Height = 477
+      Width = 886
+      Height = 469
       Align = alClient
       Color = 12633514
       Ctl3D = False
@@ -177,8 +177,8 @@ object fCupomFiscal: TfCupomFiscal
     end
     object SMDBGrid2: TSMDBGrid
       Left = 1
-      Top = 532
-      Width = 894
+      Top = 524
+      Width = 886
       Height = 110
       Align = alBottom
       Color = 12633514
@@ -251,8 +251,8 @@ object fCupomFiscal: TfCupomFiscal
     end
     object Panel3: TPanel
       Left = 1
-      Top = 478
-      Width = 894
+      Top = 470
+      Width = 886
       Height = 54
       Align = alBottom
       Anchors = [akLeft, akBottom]
@@ -334,8 +334,8 @@ object fCupomFiscal: TfCupomFiscal
     end
     object Panel5: TPanel
       Left = 1
-      Top = 642
-      Width = 894
+      Top = 634
+      Width = 886
       Height = 53
       Align = alBottom
       Anchors = [akLeft, akBottom]
@@ -443,7 +443,7 @@ object fCupomFiscal: TfCupomFiscal
     Left = 0
     Top = 0
     Width = 388
-    Height = 696
+    Height = 688
     Align = alLeft
     BevelOuter = bvNone
     Constraints.MinWidth = 380
@@ -881,10 +881,10 @@ object fCupomFiscal: TfCupomFiscal
     end
     object PnlParcial: TPanel
       Left = 0
-      Top = 365
+      Top = 598
       Width = 388
       Height = 36
-      Align = alTop
+      Align = alBottom
       Color = 5585152
       Constraints.MaxHeight = 70
       Constraints.MaxWidth = 400
@@ -960,7 +960,7 @@ object fCupomFiscal: TfCupomFiscal
     end
     object Panel7: TPanel
       Left = 0
-      Top = 642
+      Top = 634
       Width = 388
       Height = 54
       Align = alBottom
@@ -1009,9 +1009,9 @@ object fCupomFiscal: TfCupomFiscal
     end
     object Panel6: TPanel
       Left = 0
-      Top = 401
+      Top = 365
       Width = 388
-      Height = 241
+      Height = 233
       Align = alClient
       Anchors = [akLeft, akTop, akBottom]
       Color = clBlack
@@ -1021,7 +1021,7 @@ object fCupomFiscal: TfCupomFiscal
       TabOrder = 3
       DesignSize = (
         388
-        241)
+        233)
       object Image1: TImage
         Left = 34
         Top = 5

@@ -2248,7 +2248,7 @@ begin
     if (not fDmCupomFiscal.cdsProduto.IsEmpty) and
        (fDmCupomFiscal.cdsProdutoTIPO_REG.AsString <> 'N') and (vFinanceiro) then
     begin
-      vID_Mov := fDMMovimento.fnc_Gravar_Movimento(0,
+      vID_Mov := fDMMovimento.fnc_Gravar_Movimento(fdmCupomFiscal.cdsCupom_ItensID_MOVIMENTO.AsInteger,
                                                    fDMCupomFiscal.cdsCupomFiscalFILIAL.AsInteger,
                                                    fDMCupomFiscal.cdsCupom_ItensITEM.AsInteger,
                                                    fDMCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,
