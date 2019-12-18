@@ -834,7 +834,9 @@ uses
   UDMConsDuplicata in 'UDMConsDuplicata.pas' {DMConsDuplicata: TDataModule},
   USel_CBenef in 'USel_CBenef.pas' {frmSel_CBenef},
   UConsChave in 'UConsChave.pas' {frmConsChave},
-  UConsPessoa_Produto in 'UConsPessoa_Produto.pas' {frmConsPessoa_Produto};
+  UConsPessoa_Produto in 'UConsPessoa_Produto.pas' {frmConsPessoa_Produto},
+  UConsNCM_CFOP in 'UConsNCM_CFOP.pas' {frmConsNCM_CFOP},
+  UDMConsNCM_CFOP in 'UDMConsNCM_CFOP.pas' {DMConsNCM_CFOP: TDataModule};
 
 {$R *.res}
 
