@@ -1227,6 +1227,7 @@ begin
   TS_Consulta.TabEnabled    := True;
   RzPageControl1.ActivePage := TS_Consulta;
   fDMCadPedido.vID_CFOP     := 0;
+  fDMCadPedido.cdsPedido.Close;
 end;
 
 procedure TfrmCadPedido.SMDBGrid1DblClick(Sender: TObject);
