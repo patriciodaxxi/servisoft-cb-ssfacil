@@ -31,7 +31,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 70
-    Height = 635
+    Height = 627
     Align = alLeft
     AutoSize = True
     ButtonHeight = 68
@@ -914,6 +914,10 @@ object fMenu: TfMenu
       object GerarFCI1: TMenuItem
         Caption = 'FCI'
         OnClick = GerarFCI1Click
+      end
+      object ConsultaNCMCFOP1: TMenuItem
+        Caption = 'Consulta NCM/CFOP'
+        OnClick = ConsultaNCMCFOP1Click
       end
     end
     object Servios1: TMenuItem
