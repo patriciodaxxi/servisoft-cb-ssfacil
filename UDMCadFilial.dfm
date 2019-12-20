@@ -3114,10 +3114,12 @@ object DMCadFilial: TDMCadFilial
     Top = 504
     object sdsFilial_SoftwareHouseID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsFilial_SoftwareHouseTIPO: TIntegerField
       FieldName = 'TIPO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object sdsFilial_SoftwareHouseTOKEN: TStringField
