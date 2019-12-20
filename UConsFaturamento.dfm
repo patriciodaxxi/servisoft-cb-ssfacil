@@ -1,6 +1,6 @@
 object frmConsFaturamento: TfrmConsFaturamento
-  Left = 16
-  Top = 80
+  Left = 20
+  Top = 78
   Width = 1357
   Height = 568
   Caption = 'Consulta Faturamento'
@@ -361,8 +361,8 @@ object frmConsFaturamento: TfrmConsFaturamento
     Left = 0
     Top = 110
     Width = 1341
-    Height = 367
-    ActivePage = TS_Nota
+    Height = 340
+    ActivePage = TS_Cliente
     ActivePageDefault = TS_Cliente
     Align = alClient
     BackgroundColor = clGray
@@ -375,7 +375,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 6
+    TabIndex = 0
     TabOrder = 2
     TextColors.Selected = clBlue
     FixedDimension = 19
@@ -385,7 +385,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1337
-        Height = 344
+        Height = 317
         ActivePage = TS_Cliente_Acum
         ActivePageDefault = TS_Cliente_Acum
         Align = alClient
@@ -410,7 +410,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli
@@ -508,7 +508,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli_UF
@@ -620,7 +620,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli_Cid
@@ -740,7 +740,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Cli_Cid_Det
@@ -880,7 +880,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 25
         Width = 1337
-        Height = 319
+        Height = 292
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal_CliProd
@@ -1029,7 +1029,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1337
-        Height = 344
+        Height = 317
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal_Prod
@@ -1127,7 +1127,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1337
-        Height = 344
+        Height = 317
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal_DT
@@ -1219,7 +1219,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1337
-        Height = 344
+        Height = 317
         ActivePage = TS_UF_Acumulado
         ActivePageDefault = TS_UF_Acumulado
         Align = alClient
@@ -1232,7 +1232,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_UF
@@ -1323,7 +1323,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsProduto_UF
@@ -1448,7 +1448,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsGrupo_UF
@@ -1558,7 +1558,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1337
-        Height = 344
+        Height = 317
         ActivePage = TS_PRODUTO_DET_Fat
         ActivePageDefault = TS_PRODUTO_DET_Fat
         Align = alClient
@@ -1571,7 +1571,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsProduto_Det
@@ -1728,7 +1728,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsProduto_Det_Geral
@@ -1928,7 +1928,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1337
-        Height = 344
+        Height = 317
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsNotaFiscal
@@ -2077,6 +2077,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Expanded = False
             FieldName = 'FANTASIA'
             Title.Caption = 'Nome Fantasia'
+            Width = 64
             Visible = True
           end>
       end
@@ -2087,7 +2088,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1337
-        Height = 344
+        Height = 317
         ActivePage = ts_CupomFiscalSintetico
         Align = alClient
         TabIndex = 0
@@ -2099,7 +2100,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 321
+            Height = 294
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsCupomFiscal
@@ -2194,7 +2195,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 962
-            Height = 321
+            Height = 294
             Align = alClient
             TabOrder = 0
             object pnlTop: TPanel
@@ -2296,7 +2297,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               Left = 1
               Top = 35
               Width = 960
-              Height = 285
+              Height = 258
               Align = alClient
               DataSource = DMConsFaturamento.dsCupomFiscalAnalitico
               Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -2332,7 +2333,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 962
             Top = 0
             Width = 371
-            Height = 321
+            Height = 294
             Align = alRight
             TabOrder = 1
             object DBChart1: TDBChart
@@ -2436,7 +2437,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 962
-            Height = 321
+            Height = 294
             Align = alClient
             TabOrder = 0
             object Panel8: TPanel
@@ -2501,7 +2502,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               Left = 1
               Top = 35
               Width = 960
-              Height = 285
+              Height = 258
               Align = alClient
               DataSource = DMConsFaturamento.dsCupomFiscalAnaliticoDia
               Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -2538,7 +2539,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 962
             Top = 0
             Width = 371
-            Height = 321
+            Height = 294
             Align = alRight
             TabOrder = 1
             object DBChart2: TDBChart
@@ -2655,7 +2656,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 0
         Width = 1337
-        Height = 344
+        Height = 317
         Align = alClient
         Ctl3D = False
         DataSource = DMConsFaturamento.dsReciboNF
@@ -2746,7 +2747,7 @@ object frmConsFaturamento: TfrmConsFaturamento
         Left = 0
         Top = 25
         Width = 1337
-        Height = 319
+        Height = 292
         ActivePage = TS_Vendedor_Acum
         ActivePageDefault = TS_Vendedor_Acum
         Align = alClient
@@ -2771,7 +2772,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 296
+            Height = 269
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_Vend
@@ -2879,7 +2880,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 296
+            Height = 269
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_VendCli
@@ -3004,7 +3005,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 296
+            Height = 269
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsNotaFiscal_VendProd
@@ -3130,7 +3131,7 @@ object frmConsFaturamento: TfrmConsFaturamento
             Left = 0
             Top = 0
             Width = 1333
-            Height = 296
+            Height = 269
             Align = alClient
             Ctl3D = False
             DataSource = DMConsFaturamento.dsVendCliProd
@@ -3317,7 +3318,7 @@ object frmConsFaturamento: TfrmConsFaturamento
   end
   object Panel3: TPanel
     Left = 0
-    Top = 477
+    Top = 450
     Width = 1341
     Height = 27
     Align = alBottom
@@ -3664,6 +3665,112 @@ object frmConsFaturamento: TfrmConsFaturamento
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 4
+    end
+  end
+  object Panel9: TPanel
+    Left = 0
+    Top = 477
+    Width = 1341
+    Height = 27
+    Align = alBottom
+    Color = 16769217
+    TabOrder = 5
+    Visible = False
+    object Label17: TLabel
+      Left = 594
+      Top = 9
+      Width = 131
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Vlr. Total Faturamento:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label19: TLabel
+      Left = 317
+      Top = 9
+      Width = 80
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Total Vendas:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label20: TLabel
+      Left = 34
+      Top = 9
+      Width = 83
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Total Pedidos:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object CurrencyEdit1: TCurrencyEdit
+      Left = 726
+      Top = 1
+      Width = 154
+      Height = 21
+      AutoSize = False
+      Color = clMoneyGreen
+      Ctl3D = False
+      DisplayFormat = '###,###,##0.00'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 0
+    end
+    object CurrencyEdit2: TCurrencyEdit
+      Left = 398
+      Top = 1
+      Width = 154
+      Height = 21
+      AutoSize = False
+      Color = clMoneyGreen
+      Ctl3D = False
+      DisplayFormat = '###,###,##0.00'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 1
+    end
+    object ceVlrPedidos: TCurrencyEdit
+      Left = 118
+      Top = 1
+      Width = 154
+      Height = 21
+      AutoSize = False
+      Color = clMoneyGreen
+      Ctl3D = False
+      DisplayFormat = '###,###,##0.00'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentCtl3D = False
+      ParentFont = False
+      TabOrder = 2
     end
   end
   object PopupMenu1: TPopupMenu
