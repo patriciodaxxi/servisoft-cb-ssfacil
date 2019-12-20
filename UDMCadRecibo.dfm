@@ -2713,7 +2713,7 @@ object DMCadRecibo: TDMCadRecibo
     Aggregates = <>
     Params = <>
     ProviderName = 'dspRecibo_Consulta'
-    Left = 360
+    Left = 359
     Top = 17
     object cdsRecibo_ConsultaID: TIntegerField
       FieldName = 'ID'
@@ -3224,7 +3224,7 @@ object DMCadRecibo: TDMCadRecibo
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41864.668858622700000000
-    ReportOptions.LastChange = 42857.705344432870000000
+    ReportOptions.LastChange = 42556.335727731500000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     Left = 816
@@ -3237,6 +3237,7 @@ object DMCadRecibo: TDMCadRecibo
   end
   object cdsFilialRelatorios: TClientDataSet
     Aggregates = <>
+    CommandText = 'frmcadfilial'
     DataSetField = cdsFilialsdsFilialRelatorios
     Params = <>
     Left = 360

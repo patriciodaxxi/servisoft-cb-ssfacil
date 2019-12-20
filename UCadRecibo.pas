@@ -1146,6 +1146,8 @@ begin
     exit;
 
   fDMCadRecibo.cdsReciboImp.First;
+  fDMCadRecibo.cdsFilial.Close;
+  fDMCadRecibo.cdsFilial.Open;
   fDMCadRecibo.cdsFilial.Locate('ID',fDMCadRecibo.cdsReciboImpFILIAL.AsInteger,[loCaseInsensitive]);
 
   if fDMCadRecibo.cdsFilialRelatorios.Locate('TIPO',9,([loCaseInsensitive])) then //tipo 9 = Recibo
