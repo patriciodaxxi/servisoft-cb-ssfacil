@@ -23,6 +23,8 @@ type
     cdsBancoACBR_USAR_MONTAR_NOSSONUMERO: TStringField;
     sdsBancoINICIAL_NOME_ARQ_REMESSA: TStringField;
     cdsBancoINICIAL_NOME_ARQ_REMESSA: TStringField;
+    sdsBancoIMP_DIG_AGENCIA_DEP: TStringField;
+    cdsBancoIMP_DIG_AGENCIA_DEP: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspBancoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

@@ -1228,6 +1228,7 @@ type
     qDrawObsCONTADOR: TIntegerField;
     qParametros_NFeIMP_CONDPGTO_DADOS: TStringField;
     mItensNFeVlr_Icms_Substituto: TFloatField;
+    qContasIMP_DIG_AGENCIA_DEP: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);

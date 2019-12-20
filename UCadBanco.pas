@@ -40,6 +40,7 @@ type
     Label4: TLabel;
     Label5: TLabel;
     DBEdit2: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

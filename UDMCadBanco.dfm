@@ -40,6 +40,11 @@ object DMCadBanco: TDMCadBanco
       FieldName = 'INICIAL_NOME_ARQ_REMESSA'
       Size = 2
     end
+    object sdsBancoIMP_DIG_AGENCIA_DEP: TStringField
+      FieldName = 'IMP_DIG_AGENCIA_DEP'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspBanco: TDataSetProvider
     DataSet = sdsBanco
@@ -83,6 +88,11 @@ object DMCadBanco: TDMCadBanco
     object cdsBancoINICIAL_NOME_ARQ_REMESSA: TStringField
       FieldName = 'INICIAL_NOME_ARQ_REMESSA'
       Size = 2
+    end
+    object cdsBancoIMP_DIG_AGENCIA_DEP: TStringField
+      FieldName = 'IMP_DIG_AGENCIA_DEP'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsBanco: TDataSource

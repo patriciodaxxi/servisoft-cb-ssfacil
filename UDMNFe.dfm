@@ -1138,13 +1138,13 @@ object DMNFe: TDMNFe
         ParamType = ptInput
       end>
     SQL.Strings = (
-      'SELECT C.*, B.NOME NOME_BANCO'
-      'FROM CONTAS C'
-      'LEFT JOIN BANCO B'
-      'ON C.ID_BANCO = B.ID'
-      'WHERE C.ID = :ID')
+      'select C.*, B.NOME NOME_BANCO, B.IMP_DIG_AGENCIA_DEP'
+      'from CONTAS C'
+      'left join BANCO B on C.ID_BANCO = B.ID'
+      'where C.ID = :ID'
+      '  ')
     SQLConnection = dmDatabase.scoDados
-    Left = 432
+    Left = 430
     Top = 200
     object qContasID: TIntegerField
       FieldName = 'ID'
@@ -1289,6 +1289,11 @@ object DMNFe: TDMNFe
     object qContasNOME_BANCO: TStringField
       FieldName = 'NOME_BANCO'
       Size = 60
+    end
+    object qContasIMP_DIG_AGENCIA_DEP: TStringField
+      FieldName = 'IMP_DIG_AGENCIA_DEP'
+      FixedChar = True
+      Size = 1
     end
   end
   object qNotaEntrada_Itens: TSQLQuery

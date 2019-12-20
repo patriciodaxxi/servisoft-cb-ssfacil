@@ -23,8 +23,8 @@ object frmCadBanco: TfrmCadBanco
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 662
-    Height = 424
+    Width = 670
+    Height = 431
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -41,8 +41,8 @@ object frmCadBanco: TfrmCadBanco
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 68
-        Width = 658
-        Height = 316
+        Width = 666
+        Height = 323
         Align = alClient
         Ctl3D = False
         DataSource = DMCadBanco.dsBanco
@@ -74,7 +74,6 @@ object frmCadBanco: TfrmCadBanco
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 4
         RowCount = 2
         Columns = <
           item
@@ -95,12 +94,21 @@ object frmCadBanco: TfrmCadBanco
             Title.Alignment = taCenter
             Width = 44
             Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'IMP_DIG_AGENCIA_DEP'
+            Title.Alignment = taCenter
+            Title.Caption = 'Imp. dig. ag'#234'ncia dep'#243'sito'
+            Width = 59
+            Visible = True
           end>
       end
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 658
+        Width = 666
         Height = 33
         Align = alTop
         Color = clSilver
@@ -328,8 +336,8 @@ object frmCadBanco: TfrmCadBanco
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 384
-        Width = 658
+        Top = 391
+        Width = 666
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -345,7 +353,7 @@ object frmCadBanco: TfrmCadBanco
       object pnlPesquisa: TPanel
         Left = 0
         Top = 33
-        Width = 658
+        Width = 666
         Height = 35
         Align = alTop
         Color = clSilver
@@ -446,7 +454,7 @@ object frmCadBanco: TfrmCadBanco
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 658
+        Width = 666
         Height = 36
         Align = alTop
         Color = 8404992
@@ -672,8 +680,8 @@ object frmCadBanco: TfrmCadBanco
       object pnlCadastro: TPanel
         Left = 0
         Top = 36
-        Width = 658
-        Height = 365
+        Width = 666
+        Height = 372
         Align = alClient
         Enabled = False
         TabOrder = 0
@@ -819,6 +827,18 @@ object frmCadBanco: TfrmCadBanco
           DataSource = DMCadBanco.dsBanco
           TabOrder = 5
         end
+        object DBCheckBox1: TDBCheckBox
+          Left = 201
+          Top = 132
+          Width = 424
+          Height = 17
+          Caption = 'Imprimir o d'#237'gito da ag'#234'ncia quando for dep'#243'sito'
+          DataField = 'IMP_DIG_AGENCIA_DEP'
+          DataSource = DMCadBanco.dsBanco
+          TabOrder = 6
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
       end
     end
   end
@@ -826,7 +846,7 @@ object frmCadBanco: TfrmCadBanco
     GroupName = 'Banco'
     UserControl = fMenu.UserControl1
     NotAllowed = naDisabled
-    Left = 297
-    Top = 220
+    Left = 404
+    Top = 251
   end
 end

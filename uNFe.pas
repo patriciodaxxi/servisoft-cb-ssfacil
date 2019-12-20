@@ -3760,7 +3760,7 @@ begin
         else
           vTexto2 := fDMNFe.qContasNOME.AsString;
         vAgeAux := fDMNFe.qContasAGENCIA.AsString;
-        if trim(fDMNFe.qContasDIG_AGENCIA.AsString) <> '' then
+        if (trim(fDMNFe.qContasDIG_AGENCIA.AsString) <> '') and (fDMNFe.qContasIMP_DIG_AGENCIA_DEP.AsString = 'S') then
           vAgeAux := vAgeAux + '-' + fDMNFe.qContasDIG_AGENCIA.AsString;
         vContaAux := fDMNFe.qContasNUMCONTA.AsString;
         if trim(fDMNFe.qContasDIG_CONTA.AsString) <> '' then
