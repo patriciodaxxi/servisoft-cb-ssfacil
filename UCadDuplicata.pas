@@ -5,9 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadDuplicata, DBGrids,
   ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, RXDBCtrl, RzChkLst, RzPanel,
-  URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, 
-  NxCollection, StrUtils, DateUtils, UCadDuplicata_Gerar, UDMCadCheque, UCadDuplicata_Alt, UCadDuplicata_EscTipo, RzLstBox,
-  UCadDuplicata_Total, SqlExpr, ComCtrls, ValorPor;
+  URelDuplicata, UCadDuplicata_Pag, UCadDuplicata_Pag2, Variants, UCadDuplicata_Pag_Sel, NxEdit, Menus, ComObj, NxCollection,
+  StrUtils, DateUtils, UCadDuplicata_Gerar, UDMCadCheque, UCadDuplicata_Alt, UCadDuplicata_EscTipo, RzLstBox, SqlExpr, ComCtrls,
+  UCadDuplicata_Total, ValorPor;
 
 type
   TEnumMostraNossoNumero = (tpTodos,tpSim, tpNao);
@@ -263,6 +263,8 @@ type
     ckImpNossoNumero: TCheckBox;
     ckImpCCusto: TCheckBox;
     Gerarcomissoconformeconsultatodasatjgeradas1: TMenuItem;
+    Label66: TLabel;
+    DBEdit24: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure OnShow(Sender: TObject);
@@ -400,7 +402,7 @@ type
     procedure prc_Habilitar;
     procedure prc_Monta_Opcao_Cab;
 
-    procedure prc_Gravar_Dup_CCusto(ID : String);
+    procedure prc_Gravar_Dup_CCusto(ID: String);
     procedure prc_Imp_Recibo1;
   public
     { Public declarations }
@@ -543,9 +545,11 @@ procedure TfrmCadDuplicata.prc_Inserir_Registro;
 begin
   if fDMCadDuplicata.qParametros_FinCONTROLAR_DUP_USUARIO.AsString = 'S' then
   begin
-    if (fDMCadDuplicata.qParametros_UsuarioMOSTRAR_DUP_REC_PAG.AsString <> 'A') and (fDMCadDuplicata.qParametros_UsuarioMOSTRAR_DUP_REC_PAG.AsString <> 'R') and (fDMCadDuplicata.qParametros_UsuarioMOSTRAR_DUP_REC_PAG.AsString <> 'P') then
+    if (fDMCadDuplicata.qParametros_UsuarioMOSTRAR_DUP_REC_PAG.AsString <> 'A') and
+       (fDMCadDuplicata.qParametros_UsuarioMOSTRAR_DUP_REC_PAG.AsString <> 'R') and
+       (fDMCadDuplicata.qParametros_UsuarioMOSTRAR_DUP_REC_PAG.AsString <> 'P') then
     begin
-      MessageDlg('*** Usuário não autorizado a inserir', mtInformation, [mbOk], 0);
+      MessageDlg('*** Usuário não autorizado a inserir!', mtInformation, [mbOk], 0);
       exit;
     end;
   end;
@@ -563,6 +567,7 @@ begin
   fDMCadDuplicata.cdsDuplicataFILIAL.AsInteger := vFilial;
   fDMCadDuplicata.cdsDuplicataTIPO_MOV.AsString := 'D';
   fDMCadDuplicata.cdsDuplicataPERC_BASE_COMISSAO.AsFloat := 100;
+  fDMCadDuplicata.cdsDuplicataUSUARIO.AsString := vUsuario;
   RxDBComboBox1Change(RxDBComboBox1);
 
   RzPageControl1.ActivePage := TS_Cadastro;
@@ -797,9 +802,9 @@ begin
       end;
     end;
     case TEnumMostraNossoNumero(ComboNossoNumero.ItemIndex) of
-      tpTodos : ;
-      tpSim  : fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND (COALESCE(DUP.NOSSONUMERO,'''') <> '''''  + ')';
-      tpNao  : fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND (COALESCE(DUP.NOSSONUMERO,'''') = '''''  + ')';
+      tpTodos: ;
+      tpSim: fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND (COALESCE(DUP.NOSSONUMERO,'''') <> '''''  + ')';
+      tpNao: fDMCadDuplicata.sdsDuplicata_Consulta.CommandText := fDMCadDuplicata.sdsDuplicata_Consulta.CommandText + ' AND (COALESCE(DUP.NOSSONUMERO,'''') = '''''  + ')';
     else ;
     end;
 
@@ -1280,7 +1285,7 @@ procedure TfrmCadDuplicata.prc_Gravar_Selecionados;
 var
   vHist: string;
   vPagou: Boolean;
-  vQtdePagto : Integer;
+  vQtdePagto: Integer;
 begin
   vQtdePagto := 0;
   vPagou := False;
@@ -1381,12 +1386,10 @@ begin
         else
           vID_Conta_Orc_Loc := 0;
       end;
-
     end;
   end;
   stat1.Panels[2].Text := '';
-//  StaticText2.Visible := False;
-
+//  StaticText2.Visible := False;   
 end;
 
 procedure TfrmCadDuplicata.rxdbVendedorExit(Sender: TObject);
@@ -1593,13 +1596,13 @@ begin
     if (NxDatePicker3.Date > 10) and (NxDatePicker4.Date > 10) then
       fRelPagarReceber2.vOpcaoImp2 := '(Vecto: ' + NxDatePicker3.Text + ' a ' + NxDatePicker4.Text + ')'
     else if (NxDatePicker3.Date > 10) then
-      fRelPagarReceber2.vOpcaoImp2 := '(Apartir do Vecto.: ' + NxDatePicker3.Text + ')'
+      fRelPagarReceber2.vOpcaoImp2 := '(A partir do Vecto.: ' + NxDatePicker3.Text + ')'
     else if (NxDatePicker4.Date > 10) then
       fRelPagarReceber2.vOpcaoImp2 := '(Até o Vecto.: ' + NxDatePicker4.Text + ')';
     if (NxDatePicker1.Date > 10) and (NxDatePicker2.Date > 10) then
       fRelPagarReceber2.vOpcaoImp := fRelPagarReceber2.vOpcaoImp + '(Emissão: ' + NxDatePicker1.Text + ' a ' + NxDatePicker2.Text + ')'
     else if (NxDatePicker1.Date > 10) then
-      fRelPagarReceber2.vOpcaoImp := fRelPagarReceber2.vOpcaoImp + '(Apartir da Emissão: ' + NxDatePicker1.Text + ')'
+      fRelPagarReceber2.vOpcaoImp := fRelPagarReceber2.vOpcaoImp + '(A partir da Emissão: ' + NxDatePicker1.Text + ')'
     else if (NxDatePicker2.Date > 10) then
       fRelPagarReceber2.vOpcaoImp := fRelPagarReceber2.vOpcaoImp + '(Até a Emissão: ' + NxDatePicker2.Text + ')';
     if trim(RxDBLookupCombo1.Text) <> '' then
@@ -1628,7 +1631,7 @@ var
   vTexto: string;
   vNumCopias: Integer;
 begin
-  vTexto := InputBox('Nº de Copias', '', '2');
+  vTexto := InputBox('Nº de Cópias', '', '2');
   vTexto := Monta_Numero(vTexto, 0);
   if trim(vTexto) = '' then
     vTexto := '1';
@@ -1814,7 +1817,7 @@ begin
   begin
     if fDMCadDuplicata.cdsDuplicataID_CONTA_ORCAMENTO.AsInteger <= 0 then
     begin
-      if MessageDlg('Conta de Orçamento esta zerada, o sistema vai excluir o centro de custo, Confirma?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+      if MessageDlg('Conta de Orçamento está zerada. O sistema vai excluir centro de custo, Confirma?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
       begin
         RxDBLookupCombo9.KeyValue := vID_Conta_Orc_Ant;
         RxDBLookupCombo9.SetFocus;
@@ -2157,7 +2160,7 @@ end;
 
 procedure TfrmCadDuplicata.GravarComissao1Click(Sender: TObject);
 var
-  vPerc : Real;
+  vPerc: Real;
 begin
  // ShowMessage('Desabilitado, ver com o suporte!');
  // exit;
@@ -2306,8 +2309,8 @@ begin
     frmSel_Pessoa := TfrmSel_Pessoa.Create(Self);
     frmSel_Pessoa.vTipo_Pessoa := '';
     case RadioGroup2.ItemIndex of
-      0 : frmSel_Pessoa.vTipo_Pessoa := 'C';
-      1 : frmSel_Pessoa.vTipo_Pessoa := 'FT';
+      0: frmSel_Pessoa.vTipo_Pessoa := 'C';
+      1: frmSel_Pessoa.vTipo_Pessoa := 'FT';
     end;
     frmSel_Pessoa.ShowModal;
     if vCodPessoa_Pos > 0 then
@@ -2968,7 +2971,7 @@ end;
 
 procedure TfrmCadDuplicata.prc_Habilitar;
 var
-  i : Integer;
+  i: Integer;
 begin
   TS_Consulta.TabEnabled := not(TS_Consulta.TabEnabled);
   btnAlterar.Enabled     := not(btnAlterar.Enabled);
@@ -3009,7 +3012,7 @@ end;
 
 procedure TfrmCadDuplicata.Detalhada21Click(Sender: TObject);
 var
-  vArq : String;
+  vArq: String;
 begin
   if (fDMCadDuplicata.cdsDuplicata_Consulta.IsEmpty) then
   begin
@@ -3047,8 +3050,8 @@ end;
 
 procedure TfrmCadDuplicata.btnIndividualClick(Sender: TObject);
 var
-  vTexto : String;
-  vFlag : Boolean;
+  vTexto: String;
+  vFlag: Boolean;
 begin
   vSelCentroCusto := '';
   frmSel_CentroCusto := TfrmSel_CentroCusto.Create(Self);
@@ -3076,7 +3079,7 @@ end;
 
 procedure TfrmCadDuplicata.prc_Gravar_Dup_CCusto(ID: String);
 var
-  vItem : Integer;
+  vItem: Integer;
 begin
   if fDMCadDuplicata.cdsDuplicata_CCusto.Locate('ID_CENTROCUSTO', StrToInt(ID), [loCaseInsensitive]) then
     exit;
@@ -3104,9 +3107,9 @@ end;
 
 procedure TfrmCadDuplicata.btnRecalcular_CCustoClick(Sender: TObject);
 var
-  vAux : Real;
-  vParc : Real;
-  vCont : Integer;
+  vAux: Real;
+  vParc: Real;
+  vCont: Integer;
 begin
   vCont := 0;
   fDMCadDuplicata.cdsDuplicata_CCusto.First;

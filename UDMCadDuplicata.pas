@@ -1048,6 +1048,8 @@ type
     cdsDupCCustoPERCENTUAL: TFloatField;
     cdsDupCCustoVALOR: TFloatField;
     cdsDupCCustoNOME_CCUSTO: TStringField;
+    sdsDuplicataUSUARIO: TStringField;
+    cdsDuplicataUSUARIO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicata_ConsultaCalcFields(DataSet: TDataSet);
     procedure cdsDuplicataNewRecord(DataSet: TDataSet);
@@ -1134,8 +1136,7 @@ type
 
     procedure prc_Inserir_Cob;
     
-    procedure prc_Gerar_Dup_CCusto;
-
+    procedure prc_Gerar_Dup_CCusto;    
   end;
 
 var
@@ -1187,9 +1188,9 @@ end;
 
 procedure TDMCadDuplicata.prc_Gravar;
 var
-  vVlrAux : Real;
-  vPerc : Real;
-  vItem : Integer;
+  vVlrAux: Real;
+  vPerc: Real;
+  vItem: Integer;
 begin
   if (cdsDuplicataTIPO_ES.AsString = 'S') or (cdsDuplicataID_VENDEDOR.AsInteger <= 0) then
     cdsDuplicataID_VENDEDOR.Clear;
@@ -1603,8 +1604,8 @@ procedure TDMCadDuplicata.prc_Estorno_Pag(Usar_Transaction: Boolean = True);
 var
   ID: TTransactionDesc;
   vItemAux: Integer;
-  vOpcaoAux : String;
-  vFlag : Boolean;
+  vOpcaoAux: String;
+  vFlag: Boolean;
 begin
   vItemAux := cdsDuplicata_HistITEM.AsInteger;
   if Usar_Transaction then
@@ -1701,11 +1702,11 @@ begin
   dmDatabase.prc_UpdateError(DataSet.Name,UpdateKind,E);
 end;
 
-function TDMCadDuplicata.fnc_Gravar_ExtComissao(Regravar : Boolean = False) : Integer;
+function TDMCadDuplicata.fnc_Gravar_ExtComissao(Regravar: Boolean = False): Integer;
 var
   vBaseAux: real;
   vDtComissao: TDateTime;
-  vIDAux : Integer;
+  vIDAux: Integer;
 begin
   Result := 0;
 
@@ -1818,7 +1819,7 @@ end;
 procedure TDMCadDuplicata.prc_Gravar_Cheque;
 var
   vAux: Integer;
-  vInserir : Boolean;
+  vInserir: Boolean;
 begin
   mCheque.First;
   while not mCheque.Eof do
@@ -1935,7 +1936,7 @@ begin
 
 end;
 
-procedure TDMCadDuplicata.prc_Abrir_Cheque(ID : Integer);
+procedure TDMCadDuplicata.prc_Abrir_Cheque(ID: Integer);
 begin
   cdsCheque.Close;
   if ID > 0 then
@@ -2147,7 +2148,7 @@ end;
 
 procedure TDMCadDuplicata.frxReport1BeforePrint(Sender: TfrxReportComponent);
 var
-  vArq : String;
+  vArq: String;
 begin
   //DE é descontada, e não vai imprimir a linha abaixo, foi colocado o IF no dia 08/03/2018
   vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Extrato_Cliente_Fornecedor.fr3';
@@ -2185,7 +2186,7 @@ end;
 
 procedure TDMCadDuplicata.prc_Gravar_ChequeHist(Devolvido: String);
 var
-  vItemAux : Integer;
+  vItemAux: Integer;
 begin
   cdsCheque_Hist.Last;
   vItemAux := cdsCheque_HistITEM.AsInteger;
@@ -2200,7 +2201,7 @@ end;
 
 procedure TDMCadDuplicata.prc_Inserir_Cob;
 var
-  vItem : Integer;
+  vItem: Integer;
 begin
   cdsDuplicata_Cob.Last;
   vItem := cdsDuplicata_CobITEM.AsInteger;
@@ -2236,9 +2237,9 @@ end;
 procedure TDMCadDuplicata.prc_Gerar_Dup_CCusto;
 var
   sds: TSQLDataSet;
-  vItem : Integer;
-  vVlrAux : Real;
-  vVlrParcela : Real;
+  vItem: Integer;
+  vVlrAux: Real;
+  vVlrParcela: Real;
 begin
   vItem       := 0;
   vVlrAux     := 0;
