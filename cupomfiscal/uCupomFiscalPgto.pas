@@ -586,6 +586,9 @@ begin
   if fDmCupomFiscal.vID_Fechamento > 0 then
     fDmCupomFiscal.cdsCupomFiscalID_FECHAMENTO.AsInteger := fDmCupomFiscal.vID_Fechamento;
 
+  fDmCupomFiscal.cdsCupomFiscalDTEMISSAO.AsDateTime := Date;
+  fDmCupomFiscal.cdsCupomFiscalHREMISSAO.AsString   := FormatDateTime('HH:nn:ss',Now);
+
   //******************
   if fDmCupomFiscal.cdsCupom_Parc.IsEmpty then
     btnParcelasClick(Sender);
