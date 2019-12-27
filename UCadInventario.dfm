@@ -23,9 +23,9 @@ object frmCadInventario: TfrmCadInventario
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 894
-    Height = 601
-    ActivePage = TS_Cadastro
+    Width = 886
+    Height = 593
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -33,7 +33,7 @@ object frmCadInventario: TfrmCadInventario
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -42,8 +42,8 @@ object frmCadInventario: TfrmCadInventario
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 145
-        Width = 890
-        Height = 416
+        Width = 882
+        Height = 408
         Align = alClient
         Ctl3D = False
         DataSource = DMCadInventario.dsInventario_Consulta
@@ -70,7 +70,7 @@ object frmCadInventario: TfrmCadInventario
         GridStyle.EvenColor = clWindow
         TitleHeight.PixelCount = 24
         FooterColor = clBtnFace
-        ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+        ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
         RegistryKey = 'Software\Scalabium'
         RegistrySection = 'SMDBGrid'
         WidthOfIndicator = 11
@@ -141,7 +141,7 @@ object frmCadInventario: TfrmCadInventario
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 890
+        Width = 882
         Height = 32
         Align = alTop
         Color = clSilver
@@ -369,8 +369,8 @@ object frmCadInventario: TfrmCadInventario
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 561
-        Width = 890
+        Top = 553
+        Width = 882
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -386,7 +386,7 @@ object frmCadInventario: TfrmCadInventario
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 890
+        Width = 882
         Height = 113
         Align = alTop
         Color = clSilver
@@ -584,16 +584,17 @@ object frmCadInventario: TfrmCadInventario
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 890
-        Height = 35
+        Width = 882
+        Height = 31
         Align = alTop
         Color = 8404992
         TabOrder = 1
         object btnAlterar: TNxButton
-          Left = 4
-          Top = 3
+          Left = 1
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 29
+          Align = alLeft
           Caption = 'Alterar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -662,10 +663,11 @@ object frmCadInventario: TfrmCadInventario
           OnClick = btnAlterarClick
         end
         object btnConfirmar: TNxButton
-          Left = 157
-          Top = 3
+          Left = 154
+          Top = 1
           Width = 151
-          Height = 30
+          Height = 29
+          Align = alLeft
           Caption = 'Confirmar'
           Enabled = False
           Font.Charset = DEFAULT_CHARSET
@@ -735,10 +737,11 @@ object frmCadInventario: TfrmCadInventario
           OnClick = btnConfirmarClick
         end
         object btnCancelar: TNxButton
-          Left = 308
-          Top = 3
+          Left = 305
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 29
+          Align = alLeft
           Caption = 'Cancelar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -809,8 +812,8 @@ object frmCadInventario: TfrmCadInventario
       end
       object pnlCadastro: TPanel
         Left = 0
-        Top = 35
-        Width = 890
+        Top = 31
+        Width = 882
         Height = 118
         Align = alTop
         Enabled = False
@@ -1011,7 +1014,7 @@ object frmCadInventario: TfrmCadInventario
         object pnlNota: TPanel
           Left = 1
           Top = 1
-          Width = 888
+          Width = 880
           Height = 24
           Align = alTop
           Color = clSilver
@@ -1081,9 +1084,9 @@ object frmCadInventario: TfrmCadInventario
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 153
-        Width = 890
-        Height = 425
+        Top = 149
+        Width = 882
+        Height = 421
         ActivePage = TabSheet1
         ActivePageDefault = TabSheet1
         Align = alClient
@@ -1095,7 +1098,7 @@ object frmCadInventario: TfrmCadInventario
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 886
+            Width = 878
             Height = 33
             Align = alTop
             Color = clSilver
@@ -1326,12 +1329,38 @@ object frmCadInventario: TfrmCadInventario
               Transparent = True
               OnClick = btnImp_EstoqueLoteClick
             end
+            object Edit1: TEdit
+              Left = 556
+              Top = 6
+              Width = 169
+              Height = 21
+              CharCase = ecUpperCase
+              TabOrder = 3
+            end
+            object NxButton1: TNxButton
+              Left = 728
+              Top = 5
+              Width = 98
+              Height = 24
+              Caption = 'Localizar'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Arial'
+              Font.Style = []
+              GlyphSpacing = 0
+              ParentFont = False
+              PopupMenu = PopupMenu1
+              ShowArrow = True
+              TabOrder = 4
+              Transparent = True
+            end
           end
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 33
-            Width = 886
-            Height = 369
+            Width = 878
+            Height = 365
             Align = alClient
             Ctl3D = False
             DataSource = DMCadInventario.dsInventario_Itens
@@ -1521,5 +1550,17 @@ object frmCadInventario: TfrmCadInventario
     NotAllowed = naDisabled
     Left = 625
     Top = 76
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 794
+    Top = 229
+    object Nome1: TMenuItem
+      Caption = 'Nome'
+      OnClick = Nome1Click
+    end
+    object Referncia1: TMenuItem
+      Caption = 'Refer'#234'ncia'
+      OnClick = Referncia1Click
+    end
   end
 end
