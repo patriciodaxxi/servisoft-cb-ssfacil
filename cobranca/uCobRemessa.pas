@@ -177,14 +177,15 @@ begin
       Continue;
     end;
 
-    if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (fDmCob_Eletronica.cdsDuplicataID_NOTA_SERVICO.AsInteger > 0) and
+    //02/01/2020  ativar novamente em 06/01/2019
+    {if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (fDmCob_Eletronica.cdsDuplicataID_NOTA_SERVICO.AsInteger > 0) and
        ((fDmCob_Eletronica.cdsDuplicataCOD_AUTENCIDADE_RET.AsString = '') or (fDmCob_Eletronica.cdsDuplicataCOD_AUTENCIDADE_RET.IsNull)) then
     begin
       vMsgDt := vMsgDt + #13 + '*** Duplicata: ' + fDmCob_Eletronica.cdsDuplicataNUMDUPLICATA.AsString + fDmCob_Eletronica.vSeparadorParc +
                 fDmCob_Eletronica.cdsDuplicataPARCELA.AsString + ' com nota de serviço pendente de envio';
       fDmCob_Eletronica.cdsDuplicata.Next;
       Continue;
-    end;
+    end;}
 
     //aqui 16/05/2016
     if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (trim(fDmCob_Eletronica.cdsDuplicataENDERECO_PGTO.AsString) <> '') then
@@ -1083,7 +1084,9 @@ begin
         Continue;
       end;
     end;
-    if (fDmCob_Eletronica.cdsDuplicataID_NOTA_SERVICO.AsInteger > 0) then
+
+    //02/01/2020  ativar dia 06/01/2020
+    {if (fDmCob_Eletronica.cdsDuplicataID_NOTA_SERVICO.AsInteger > 0) then
     begin
       if (fDmCob_Eletronica.cdsDuplicataCOD_AUTENCIDADE_RET.AsString = '') or (fDmCob_Eletronica.cdsDuplicataCOD_AUTENCIDADE_RET.IsNull) then
       begin
@@ -1092,7 +1095,7 @@ begin
         fDmCob_Eletronica.cdsDuplicata.Next;
         Continue;
       end;
-    end;
+    end;}
 
     if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (trim(fDmCob_Eletronica.cdsDuplicataENDERECO_PGTO.AsString) <> '') then
     begin
@@ -1445,7 +1448,8 @@ begin
       end;
     end;
 
-    if (fDmCob_Eletronica.cdsDuplicataID_NOTA_SERVICO.AsInteger > 0) then
+    //02/01/2020 ativar dia 06/01/2020
+    {if (fDmCob_Eletronica.cdsDuplicataID_NOTA_SERVICO.AsInteger > 0) then
     begin
       if (fDmCob_Eletronica.cdsDuplicataCOD_AUTENCIDADE_RET.AsString = '') or (fDmCob_Eletronica.cdsDuplicataCOD_AUTENCIDADE_RET.IsNull) then
       begin
@@ -1454,7 +1458,7 @@ begin
         fDmCob_Eletronica.cdsDuplicata.Next;
         Continue;
       end;
-    end;
+    end;}
 
     fDmCob_Eletronica.prc_Verificar_Carteira;
     if (fDmCob_Eletronica.vGera_NossoNumero = 'S') and (trim(fDmCob_Eletronica.cdsDuplicataEMAIL_PGTO.AsString) = '') then
