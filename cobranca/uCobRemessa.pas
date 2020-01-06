@@ -1083,6 +1083,7 @@ begin
         Continue;
       end;
     end;
+
     if (fDmCob_Eletronica.cdsDuplicataID_NOTA_SERVICO.AsInteger > 0) then
     begin
       if (fDmCob_Eletronica.cdsDuplicataCOD_AUTENCIDADE_RET.AsString = '') or (fDmCob_Eletronica.cdsDuplicataCOD_AUTENCIDADE_RET.IsNull) then
