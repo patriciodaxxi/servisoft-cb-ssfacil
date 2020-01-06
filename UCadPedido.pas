@@ -1341,6 +1341,7 @@ begin
 
   prc_Gravar_Registro;
   SMDBGrid2.DataSource := fDMCadPedido.dsPedido_Itens;
+  fDMCadPedido.cdsPedido.Close;
 
   SMDBGrid2.EnableScroll;                                         
 end;
