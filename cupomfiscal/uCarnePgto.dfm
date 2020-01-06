@@ -11,10 +11,12 @@ object fCarnePgto: TfCarnePgto
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -170,6 +172,17 @@ object fCarnePgto: TfCarnePgto
       TabOrder = 2
       TabStop = False
       Transparent = True
+    end
+    object CheckBox1: TCheckBox
+      Left = 12
+      Top = 13
+      Width = 106
+      Height = 17
+      Caption = 'Pagamento Novo'
+      Checked = True
+      State = cbChecked
+      TabOrder = 3
+      Visible = False
     end
   end
   object SMDBGrid1: TSMDBGrid

@@ -48,6 +48,7 @@ type
     NxButton2: TNxButton;
     btRecalcular: TNxButton;
     btTodas: TNxButton;
+    CheckBox1: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -74,6 +75,8 @@ type
     procedure btTodasClick(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     fDmPagamento: TDmPagamento;
@@ -89,6 +92,7 @@ type
     procedure prcGravaPagamento;
     procedure prcVerificarSaldo;
     procedure prcInsereParcela(vValor: Currency);
+    procedure prcPgtoNovo;
   public
     { Public declarations }
   end;
@@ -319,8 +323,8 @@ begin
     else
       fDmCadDuplicata.prc_Gravar_Financeiro(vVlrPgto,'P',vID_FormaPgto);
 
-    fDmCadDuplicata.cdsDuplicataVLR_JUROSPAGOS.AsFloat := vVlrJuros;
-    fDmCadDuplicata.cdsDuplicataVLR_DESCONTO.AsFloat   := vVlrDesc;
+    fDmCadDuplicata.cdsDuplicataVLR_JUROSPAGOS.AsFloat := fDmCadDuplicata.cdsDuplicataVLR_JUROSPAGOS.AsFloat + vVlrJuros;
+    fDmCadDuplicata.cdsDuplicataVLR_DESCONTO.AsFloat   := fDmCadDuplicata.cdsDuplicataVLR_DESCONTO.AsFloat + vVlrDesc;
     fDmCadDuplicata.cdsDuplicataVLR_DESPESAS.AsFloat   := 0;
     fDmCadDuplicata.cdsDuplicataVLR_RESTANTE.AsString  := FormatFloat('0.00',fDmCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat - vVlrPgto - vVlrDesc);
     fDmCadDuplicata.cdsDuplicata.Post;
@@ -333,6 +337,13 @@ var
   vVlrPgto, vVlrDesc, vSaldo: Currency;
   vGeraSaldo: Boolean;
 begin
+  if  CheckBox1.Checked then
+  begin
+    prcPgtoNovo;
+
+    Exit;
+  end;
+
   vVlrPago := -1;
 
   if fDmPagamento.mPagamentos.IsEmpty then
@@ -850,6 +861,72 @@ begin
   fDmPagamento.cdsDuplicataDESCRICAO.AsString       := 'VALOR FALTANTE EM ' + FormatDateTime('DD/MM/YYYY',Date);
   fDmPagamento.cdsDuplicata.Post;
   fDmPagamento.cdsDuplicata.ApplyUpdates(0);
+end;
+
+procedure TfCarnePgto.prcPgtoNovo;
+var
+  vVlrPago: Currency;
+  vVlrSaldoPago: Currency;
+begin
+  if fDmPagamento.mPagamentos.RecordCount > 1 then
+  begin
+    ShowMessage('Seomente uma forma de pagamento é permitida!');
+    Exit;
+  end;
+
+  fDmPagamento.mSelecionadas.First;
+  fDmPagamento.mPagamentos.First;
+  vVlrSaldoPago := fDmPagamento.mPagamentosVLR_SALDO.AsCurrency;
+
+  while not fDmPagamento.mSelecionadas.Eof do
+  begin
+    fDMCadDuplicata.prc_Localizar(fDmPagamento.mSelecionadasID.AsInteger);
+    if fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency <= vVlrSaldoPago then
+    begin
+      if fDmPagamento.mSelecionadasVLR_JUROS.AsCurrency > 0 then
+      begin
+        vVlrPago := fDmPagamento.mSelecionadasVLR_JUROS.AsCurrency;
+        vVlrSaldoPago := vVlrSaldoPago - vVlrPago;
+        fDmPagamento.mSelecionadas.Edit;
+        fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency := fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency - vVlrPago;
+        fDmPagamento.mSelecionadasVLR_JUROS.AsCurrency := 0;
+
+        prcGravarSelecionados(1,fDmPagamento.mPagamentosID_TIPOCOBRANCA.AsInteger,0,vVlrPago,0);
+        fDmPagamento.mSelecionadas.Post;
+      end;
+
+      vVlrPago := fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency;
+      vVlrSaldoPago := vVlrSaldoPago - vVlrPago;
+      fDmPagamento.mSelecionadas.Edit;
+      fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency := fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency - vVlrPago;
+
+      prcGravarSelecionados(1,fDmPagamento.mPagamentosID_TIPOCOBRANCA.AsInteger,vVlrPago,0,fDmPagamento.mSelecionadasVLR_DESC.AsCurrency);
+      fDmPagamento.mSelecionadas.Post;
+    end
+    else
+    begin
+      vVlrPago := vVlrSaldoPago;
+      vVlrSaldoPago := vVlrSaldoPago - vVlrPago;
+      fDmPagamento.mSelecionadas.Edit;
+      fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency := fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency - vVlrPago;
+
+      prcGravarSelecionados(1,fDmPagamento.mPagamentosID_TIPOCOBRANCA.AsInteger,vVlrPago,0,fDmPagamento.mSelecionadasVLR_DESC.AsCurrency);
+      fDmPagamento.mSelecionadas.Post;
+    end;
+    fDmPagamento.mSelecionadas.Next;
+  end;
+
+  prcGravaPagamento;
+
+  if vImprimir = 'N' then
+    prcLimparCampos;
+end;
+
+procedure TfCarnePgto.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Shift = [ssCtrl]) and (Key = 87) then
+     CheckBox1.Visible := not CheckBox1.Visible;
 end;
 
 end.
