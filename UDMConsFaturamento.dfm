@@ -2836,4 +2836,20 @@ object DMConsFaturamento: TDMConsFaturamento
     Left = 776
     Top = 501
   end
+  object qParametros_Cupom: TSQLQuery
+    NoMetaData = False
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT USA_PEDIDO'
+      'FROM CUPOMFISCAL_PARAMETROS')
+    SQLConnection = dmDatabase.scoDados
+    Left = 974
+    Top = 40
+    object qParametros_CupomUSA_PEDIDO: TStringField
+      FieldName = 'USA_PEDIDO'
+      FixedChar = True
+      Size = 1
+    end
+  end
 end
