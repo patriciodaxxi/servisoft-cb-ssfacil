@@ -251,7 +251,7 @@ object frmSel_Produto: TfrmSel_Produto
     Left = 0
     Top = 96
     Width = 1033
-    Height = 193
+    Height = 133
     Align = alClient
     Ctl3D = False
     DataSource = dsProduto
@@ -758,6 +758,63 @@ object frmSel_Produto: TfrmSel_Produto
       OnKeyDown = Edit4KeyDown
     end
   end
+  object SMDBGrid3: TSMDBGrid
+    Left = 0
+    Top = 229
+    Width = 1033
+    Height = 60
+    Align = alBottom
+    Ctl3D = False
+    DataSource = dsProdutoAplicacao
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+    ParentCtl3D = False
+    TabOrder = 7
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Visible = False
+    OnDblClick = SMDBGrid3DblClick
+    Flat = True
+    BandsFont.Charset = DEFAULT_CHARSET
+    BandsFont.Color = clWindowText
+    BandsFont.Height = -11
+    BandsFont.Name = 'MS Sans Serif'
+    BandsFont.Style = []
+    Groupings = <>
+    GridStyle.Style = gsCustom
+    GridStyle.OddColor = clWindow
+    GridStyle.EvenColor = clWindow
+    TitleHeight.PixelCount = 24
+    FooterColor = clBtnFace
+    ExOptions = [eoDisableDelete, eoDisableInsert, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+    RegistryKey = 'Software\Scalabium'
+    RegistrySection = 'SMDBGrid'
+    WidthOfIndicator = 11
+    DefaultRowHeight = 17
+    ScrollBars = ssHorizontal
+    ColCount = 4
+    RowCount = 2
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME_MARCA'
+        Title.Caption = 'MARCA'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'APLICACAO'
+        Title.Caption = 'APLICA'#199#195'O'
+        Visible = True
+      end>
+  end
   object sdsProduto: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
@@ -859,6 +916,7 @@ object frmSel_Produto: TfrmSel_Produto
     IndexFieldNames = 'NOME;ID'
     Params = <>
     ProviderName = 'dspProduto'
+    AfterScroll = cdsProdutoAfterScroll
     Left = 290
     Top = 208
     object cdsProdutoID: TIntegerField
@@ -1244,7 +1302,7 @@ object frmSel_Produto: TfrmSel_Produto
     SQL.Strings = (
       
         'SELECT CONS_PROD_USA_PERC, USA_LOTE_PROD, USA_REF2,MOSTRA_PROD_T' +
-        'PRECO, POSICAO_CONS_MARCA'
+        'PRECO, POSICAO_CONS_MARCA, USA_APLICACAO'
       'FROM PARAMETROS_PROD')
     SQLConnection = dmDatabase.scoDados
     Left = 512
@@ -1274,6 +1332,11 @@ object frmSel_Produto: TfrmSel_Produto
       FixedChar = True
       Size = 1
     end
+    object qParametros_ProdUSA_APLICACAO: TStringField
+      FieldName = 'USA_APLICACAO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object qParamertros_Ped: TSQLQuery
     MaxBlobSize = -1
@@ -1289,5 +1352,58 @@ object frmSel_Produto: TfrmSel_Produto
       FixedChar = True
       Size = 1
     end
+  end
+  object sdsProdutoAplicacao: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT PA.*, M.NOME NOME_MARCA'#13#10'FROM PRODUTO_APLICACAO PA'#13#10'INNER' +
+      ' JOIN MARCA M ON (PA.ID_MARCA = M.ID)'#13#10'WHERE PA.ID = :P1'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'P1'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 224
+    Top = 312
+  end
+  object dspProdutoAplicacao: TDataSetProvider
+    DataSet = sdsProdutoAplicacao
+    Left = 256
+    Top = 312
+  end
+  object cdsProdutoAplicacao: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspProdutoAplicacao'
+    Left = 288
+    Top = 312
+    object cdsProdutoAplicacaoID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsProdutoAplicacaoITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsProdutoAplicacaoID_MARCA: TIntegerField
+      FieldName = 'ID_MARCA'
+    end
+    object cdsProdutoAplicacaoAPLICACAO: TStringField
+      FieldName = 'APLICACAO'
+      Size = 50
+    end
+    object cdsProdutoAplicacaoNOME_MARCA: TStringField
+      FieldName = 'NOME_MARCA'
+      Size = 40
+    end
+  end
+  object dsProdutoAplicacao: TDataSource
+    DataSet = cdsProdutoAplicacao
+    Left = 320
+    Top = 312
   end
 end

@@ -186,6 +186,8 @@ type
     cdsEstoque_LotePRECO_VENDA: TFloatField;
     cdsEstoque_LoteUNIDADE: TStringField;
     cdsEstoque_LotePERC_IPI: TFloatField;
+    qProd3: TSQLQuery;
+    qProd3ID: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsInventarioNewRecord(DataSet: TDataSet);
     procedure dspInventarioUpdateError(Sender: TObject;
@@ -207,9 +209,10 @@ type
     { Public declarations }
     vMsgErro: String;
     ctCommand: String;
-    ctConsulta : String;
-    ctProduto : String;
-    ctEstoque_Lote : String;
+    ctConsulta: String;
+    ctProduto: String;
+    ctEstoque_Lote: String;
+    ctProd3: string;
     
     procedure prc_Localizar(ID: Integer);
     procedure prc_Inserir;
@@ -217,7 +220,7 @@ type
     procedure prc_Excluir;
     procedure prc_Inserir_Itens;
 
-    function fnc_Possui_Erro : Boolean;
+    function fnc_Possui_Erro: Boolean;
 
   end;
 
@@ -288,6 +291,7 @@ begin
   ctConsulta     := sdsInventario_Consulta.CommandText;
   ctProduto      := sdsProduto.CommandText;
   ctEstoque_Lote := sdsEstoque_Lote.CommandText;
+  ctProd3        := qProd3.Sql.Text;
 
   cdsFilial.Open;
   cdsEstoque_Atual.Open;
@@ -364,8 +368,8 @@ end;
 
 procedure TDMCadInventario.cdsProdutoCalcFields(DataSet: TDataSet);
 var
-  vTam : String;
-  vCor : Integer;
+  vTam: String;
+  vCor: Integer;
 begin
   cdsProdutoclQtd.AsFloat       := StrToFloat(FormatFloat('0.0000',0));
   cdsProdutoclQtd_Geral.AsFloat := StrToFloat(FormatFloat('0.0000',0));

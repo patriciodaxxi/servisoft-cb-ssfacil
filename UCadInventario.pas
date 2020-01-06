@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadInventario,
   DBGrids, ExtCtrls, StdCtrls, DB, RzTabs, DBCtrls, ToolEdit, UCBase, RxLookup, Mask, CurrEdit, RxDBComb, NxCollection,
-  RXDBCtrl, UCadInventario_Prod, SqlExpr, dbXPress, UDMEstoque, Variants;
+  RXDBCtrl, UCadInventario_Prod, SqlExpr, dbXPress, UDMEstoque, Variants,
+  Menus;
 
 type
   TfrmCadInventario = class(TForm)
@@ -66,6 +67,11 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     btnLiberaGrid: TBitBtn;
     btnImp_EstoqueLote: TNxButton;
+    Edit1: TEdit;
+    NxButton1: TNxButton;
+    PopupMenu1: TPopupMenu;
+    Nome1: TMenuItem;
+    Referncia1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -94,6 +100,8 @@ type
     procedure btnLiberaGridClick(Sender: TObject);
     procedure DBDateEdit1Enter(Sender: TObject);
     procedure btnImp_EstoqueLoteClick(Sender: TObject);
+    procedure Nome1Click(Sender: TObject);
+    procedure Referncia1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadInventario: TDMCadInventario;
@@ -677,6 +685,28 @@ begin
   frmCadInventario_EstLote.fDMCadInventario := fDMCadInventario;
   frmCadInventario_EstLote.ShowModal;
   FreeAndNil(frmCadInventario_EstLote);
+end;
+
+procedure TfrmCadInventario.Nome1Click(Sender: TObject);
+begin
+  fDMCadInventario.qProd3.Close;
+  fDMCadInventario.qProd3.SQL.Text := fDMCadInventario.ctProd3 +
+                                      ' WHERE UPPER(NOME) LIKE UPPER(''%' +
+                                      Edit1.Text + '%'')';
+  fDMCadInventario.qProd3.Open;
+  fDMCadInventario.cdsInventario_Itens.IndexFieldNames := 'ID_PRODUTO';
+  fDMCadInventario.cdsInventario_Itens.FindKey([fDMCadInventario.qProd3ID.AsInteger]);
+end;
+
+procedure TfrmCadInventario.Referncia1Click(Sender: TObject);
+begin
+  fDMCadInventario.qProd3.Close;
+  fDMCadInventario.qProd3.SQL.Text := fDMCadInventario.ctProd3 +
+                                      ' WHERE UPPER(REFERENCIA) LIKE UPPER(''%' +
+                                      Edit1.Text + '%'')';
+  fDMCadInventario.qProd3.Open;
+  fDMCadInventario.cdsInventario_Itens.IndexFieldNames := 'ID_PRODUTO';
+  fDMCadInventario.cdsInventario_Itens.FindKey([fDMCadInventario.qProd3ID.AsInteger]);
 end;
 
 end.

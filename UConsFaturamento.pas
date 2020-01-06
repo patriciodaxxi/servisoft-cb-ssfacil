@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, Buttons, Grids,
   DBGrids, SMDBGrid, FMTBcd, DB, Provider, DBClient, SqlExpr, UDMConsFaturamento, RxLookup, UCBase, Mask, ToolEdit, RzPanel,
-  RzTabs, CurrEdit, NxEdit, NxCollection, ComObj, Menus, TeEngine, Series,
-  TeeProcs, Chart, DbChart, ComCtrls;
+  RzTabs, CurrEdit, NxEdit, NxCollection, ComObj, Menus, TeEngine, Series, TeeProcs, Chart, DbChart, ComCtrls;
 
 type
   tEnumGrafico = (tpPizza, tpColuna, tpLinha);
@@ -148,6 +147,13 @@ type
     BarSeries1: TBarSeries;
     LineSeries1: TLineSeries;
     rdgOrdenarDia: TRadioGroup;
+    Panel9: TPanel;
+    Label17: TLabel;
+    Label19: TLabel;
+    Label20: TLabel;
+    CurrencyEdit1: TCurrencyEdit;
+    CurrencyEdit2: TCurrencyEdit;
+    ceVlrPedidos: TCurrencyEdit;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -241,7 +247,7 @@ type
     procedure prc_Gravar_mGrupoAux;
     procedure prc_CriaExcel(vDados: TDataSource);
     procedure prc_Ajustar_Grids(Grid: TSMDBGrid);
-    function fnc_Monta_SQL_Vlr : String;
+    function fnc_Monta_SQL_Vlr: String;
     procedure prc_Alterar_Tipo_Grafico;
     procedure prc_Alterar_Tipo_Grafico_Dia;
   public
@@ -254,8 +260,7 @@ var
 implementation
 
 uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, URelFat_Cli, URelFat_CliProd, URelFat_Prod, URelFat_DT, StrUtils,
-  URelFat_Produto_Det, URelFat_Nota, URelFat_UF, URelFat_Cupom,
-  URelFat_ReciboNF, USel_Pessoa;
+  URelFat_Produto_Det, URelFat_Nota, URelFat_UF, URelFat_Cupom, URelFat_ReciboNF, USel_Pessoa;
 
 {$R *.dfm}
 
@@ -453,6 +458,13 @@ begin
   //**************
   chkVendedor_Int.Visible := (fDMConsFaturamento.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
 
+  fDMConsFaturamento.qParametros_Cupom.Open;   //para pedidos não entrarem no faturamento
+  if fDMConsFaturamento.qParametros_CupomUSA_PEDIDO.AsString = 'S' then
+  begin
+    Panel3.Visible := False;
+    Panel9.Visible := True;
+  end;
+
   prc_Ajustar_Grids(SMDBGrid1);
   prc_Ajustar_Grids(SMDBGrid2);
   prc_Ajustar_Grids(SMDBGrid3);
@@ -531,9 +543,9 @@ procedure TfrmConsFaturamento.prc_Consultar_Faturamento;
 var
   vComandoAux: String;
   vDescData: String;
-  vDesc : String;
-  vDesc2 : String;
-  vDescBruto : String;
+  vDesc: String;
+  vDesc2: String;
+  vDescBruto: String;
 begin
   if NxComboBox2.ItemIndex = 0 then
     vDescData := 'DTEMISSAO'
@@ -1928,7 +1940,7 @@ end;
 
 procedure TfrmConsFaturamento.prc_Ajustar_Grids(Grid: TSMDBGrid);
 var
-  i : Integer;
+  i: Integer;
 begin
   for i := 0 to Grid.ColCount - 2 do
   begin
@@ -1960,7 +1972,7 @@ end;
 
 procedure TfrmConsFaturamento.prc_Consultar_Nota_Cli_Cid_Det;
 var
-  vDesc : string;
+  vDesc: string;
 begin
   vDesc := fnc_Monta_SQL_Vlr;
   {if CheckBox2.Checked then
@@ -1991,7 +2003,7 @@ end;
 
 procedure TfrmConsFaturamento.prc_Imprimir_Nota_Cli_Cid_Det;
 var
-  vArq : String;
+  vArq: String;
 begin
   fDMConsFaturamento.cdsNotaFiscal_Cli_Cid_Det.IndexFieldNames := 'UF;CIDADE;Nome_Cliente;DTEMISSAO';
   fDMConsFaturamento.cdsNotaFiscal_Cli_Cid_Det.First;
@@ -2143,7 +2155,7 @@ end;
 
 procedure TfrmConsFaturamento.prc_Consultar_Cupom_Analitico;
 var
-  vSelect, vNome : String;
+  vSelect, vNome: String;
 begin
   vNome := 'trim(P.NOME';
   if chkTamanho.Checked then
@@ -2162,8 +2174,8 @@ begin
               + vComando
               + ' group by P.REFERENCIA, NT.FILIAL,' +  vNome;
   case tEnumTipo(rdgTipo.ItemIndex) of
-    tpQtde : vSelect := vSelect + 'order by sum(nti.QTD) desc';
-    tpValotTotal : vSelect := vSelect + 'order by sum(nti.VLR_TOTAL) desc';
+    tpQtde: vSelect := vSelect + 'order by sum(nti.QTD) desc';
+    tpValotTotal: vSelect := vSelect + 'order by sum(nti.VLR_TOTAL) desc';
   end;
   fDMConsFaturamento.cdsCupomFiscalAnalitico.Close;
   fDMConsFaturamento.cdsCupomFiscalAnalitico.CommandText := vSelect;
@@ -2185,22 +2197,22 @@ end;
 
 procedure TfrmConsFaturamento.prc_Alterar_Tipo_Grafico;
 var
-  i : Integer;
+  i: Integer;
 begin
   for i := 0 to DBChart1.SeriesCount - 1 do
   begin
     DBChart1.Series[i].Active := False;
   end;
   case tEnumGrafico(ComboTipoGrafico.ItemIndex) of
-    tpPizza : DBChart1.SeriesList[0].Active := True;
-    tpColuna : DBChart1.SeriesList[1].Active := True;
-    tpLinha : DBChart1.SeriesList[2].Active := True;
+    tpPizza: DBChart1.SeriesList[0].Active := True;
+    tpColuna: DBChart1.SeriesList[1].Active := True;
+    tpLinha: DBChart1.SeriesList[2].Active := True;
   end;
 end;
 
 procedure TfrmConsFaturamento.prc_Consultar_Cupom_Analitico_Dia;
 var
-  vSelect, vNome : String;
+  vSelect, vNome: String;
 begin
   vSelect := 'select sum(NTI.QTD) QTD, sum(NTI.VLR_TOTAL) VLR_TOTAL, NT.DTEMISSAO '
            + 'from CUPOMFISCAL NT '
@@ -2209,9 +2221,9 @@ begin
            + vComando
            + ' group by NT.DTEMISSAO ';
   case tEnumTipo(rdgOrdenarDia.ItemIndex) of
-    tpData : vSelect := vSelect + 'order by (NT.DTEMISSAO) asc';
-    tpQtde : vSelect := vSelect + 'order by sum(nti.QTD) desc';
-    tpValotTotal : vSelect := vSelect + 'order by sum(nti.VLR_TOTAL) desc';
+    tpData: vSelect := vSelect + 'order by (NT.DTEMISSAO) asc';
+    tpQtde: vSelect := vSelect + 'order by sum(nti.QTD) desc';
+    tpValotTotal: vSelect := vSelect + 'order by sum(nti.VLR_TOTAL) desc';
   end;
   fDMConsFaturamento.cdsCupomFiscalAnaliticoDia.Close;
   fDMConsFaturamento.cdsCupomFiscalAnaliticoDia.CommandText := vSelect;
@@ -2228,16 +2240,16 @@ end;
 
 procedure TfrmConsFaturamento.prc_Alterar_Tipo_Grafico_Dia;
 var
-  i : Integer;
+  i: Integer;
 begin
   for i := 0 to DBChart2.SeriesCount - 1 do
   begin
     DBChart2.Series[i].Active := False;
   end;
   case tEnumGrafico(ComboTipoGraficoDia.ItemIndex) of
-    tpPizza : DBChart2.SeriesList[0].Active := True;
-    tpColuna : DBChart2.SeriesList[1].Active := True;
-    tpLinha : DBChart2.SeriesList[2].Active := True;
+    tpPizza: DBChart2.SeriesList[0].Active := True;
+    tpColuna: DBChart2.SeriesList[1].Active := True;
+    tpLinha: DBChart2.SeriesList[2].Active := True;
   end;
 end;
 

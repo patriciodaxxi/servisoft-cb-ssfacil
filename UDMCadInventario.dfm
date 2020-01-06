@@ -635,7 +635,7 @@ object DMCadInventario: TDMCadInventario
   end
   object dspLocal_Estoque: TDataSetProvider
     DataSet = sdsLocal_Estoque
-    Left = 544
+    Left = 528
     Top = 256
   end
   object cdsLocal_Estoque: TClientDataSet
@@ -643,7 +643,7 @@ object DMCadInventario: TDMCadInventario
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspLocal_Estoque'
-    Left = 600
+    Left = 568
     Top = 256
     object cdsLocal_EstoqueID: TIntegerField
       FieldName = 'ID'
@@ -692,7 +692,7 @@ object DMCadInventario: TDMCadInventario
   end
   object dsLocal_Estoque: TDataSource
     DataSet = cdsLocal_Estoque
-    Left = 664
+    Left = 608
     Top = 256
   end
   object qProduto: TSQLQuery
@@ -844,8 +844,8 @@ object DMCadInventario: TDMCadInventario
       'FROM PRODUTO'
       'WHERE ID = :ID')
     SQLConnection = dmDatabase.scoDados
-    Left = 367
-    Top = 422
+    Left = 335
+    Top = 312
     object qProd2NOME: TStringField
       FieldName = 'NOME'
       Size = 100
@@ -949,6 +949,7 @@ object DMCadInventario: TDMCadInventario
       FieldName = 'QTD'
       DisplayFormat = '0.0000'
       Precision = 15
+      Size = 8
     end
     object cdsEstoque_LoteNOME_PRODUTO: TStringField
       FieldName = 'NOME_PRODUTO'
@@ -975,5 +976,18 @@ object DMCadInventario: TDMCadInventario
     DataSet = cdsEstoque_Lote
     Left = 664
     Top = 176
+  end
+  object qProd3: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT ID FROM PRODUTO')
+    SQLConnection = dmDatabase.scoDados
+    Left = 375
+    Top = 312
+    object qProd3ID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
   end
 end

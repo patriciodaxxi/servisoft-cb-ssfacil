@@ -134,6 +134,17 @@ type
     qParamertros_PedPEDIDO_COMERCIO: TStringField;
     Label8: TLabel;
     Edit5: TEdit;
+    SMDBGrid3: TSMDBGrid;
+    sdsProdutoAplicacao: TSQLDataSet;
+    dspProdutoAplicacao: TDataSetProvider;
+    cdsProdutoAplicacao: TClientDataSet;
+    dsProdutoAplicacao: TDataSource;
+    cdsProdutoAplicacaoID: TIntegerField;
+    cdsProdutoAplicacaoITEM: TIntegerField;
+    cdsProdutoAplicacaoID_MARCA: TIntegerField;
+    cdsProdutoAplicacaoAPLICACAO: TStringField;
+    cdsProdutoAplicacaoNOME_MARCA: TStringField;
+    qParametros_ProdUSA_APLICACAO: TStringField;
     procedure BitBtn1Click(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -161,6 +172,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure Edit5KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure cdsProdutoAfterScroll(DataSet: TDataSet);
+    procedure SMDBGrid3DblClick(Sender: TObject);
   private
     { Private declarations }
     procedure prc_Consultar;
@@ -508,6 +521,9 @@ begin
     prc_Consultar;
   Edit5.Visible  := qParamertros_PedPEDIDO_COMERCIO.AsString = 'S';
   Label8.Visible := qParamertros_PedPEDIDO_COMERCIO.AsString = 'S';
+                      
+  SMDBGrid3.Visible := qParametros_ProdUSA_APLICACAO.AsString = 'S';
+  SMDBGrid3.Height  := 120;
 end;
 
 procedure TfrmSel_Produto.SMDBGrid1TitleClick(Column: TColumn);
@@ -725,6 +741,32 @@ begin
     if not cdsProduto.IsEmpty then
       SMDBGrid1.SetFocus;
   end;
+end;
+
+procedure TfrmSel_Produto.cdsProdutoAfterScroll(DataSet: TDataSet);
+begin
+  if qParametros_ProdUSA_APLICACAO.AsString = 'S' then
+  begin
+    cdsProdutoAplicacao.Close;
+    sdsProdutoAplicacao.ParamByName('P1').AsInteger := cdsProdutoID.AsInteger;
+    cdsProdutoAplicacao.Open;
+  end;
+end;
+
+procedure TfrmSel_Produto.SMDBGrid3DblClick(Sender: TObject);
+begin
+  vCodProduto_Pos    := cdsProdutoID.AsInteger;
+  vReferencia_Pos    := cdsProdutoREFERENCIA.AsString;
+  vNome_Pos          := cdsProdutoNOME.AsString + ' / ' + cdsProdutoAplicacaoAPLICACAO.AsString;
+  vUnidade_Pos       := cdsProdutoUNIDADE.AsString;
+  vUsa_Cor_Pos       := cdsProdutoUSA_COR.AsString;
+  vUsa_Preco_Cor_Pos := cdsProdutoUSA_PRECO_COR.AsString;
+  vPreco_Venda_Rec_XML_Pos := StrToFloat(FormatFloat('0.0000',cdsProdutoPRECO_VENDA.AsFloat));
+  prc_Monta_mPreco;
+  if Tag = 1 then
+    prc_Gravar_mCarrinho
+  else
+    Close;
 end;
 
 end.
