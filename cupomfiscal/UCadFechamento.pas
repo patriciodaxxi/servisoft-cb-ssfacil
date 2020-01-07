@@ -1200,6 +1200,7 @@ begin
   fDMCadFechamento.cdsFechamentoVLR_SUBSALDO.AsCurrency := 0;
   fDMCadFechamento.cdsFechamentoVLR_ENTRADA.AsCurrency  := 0;
   fDMCadFechamento.cdsFechamentoVLR_SALDO.AsCurrency    := 0;
+  fDMCadFechamento.cdsFechamentoENTRADA_DE_DINHEIRO.AsCurrency := 0;
   fDMCadFechamento.cdsFechamento.Post;
 end;
 

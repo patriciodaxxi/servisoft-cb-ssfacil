@@ -98,6 +98,9 @@ object DMCadFechamento: TDMCadFechamento
       FieldName = 'OBS_CONFERENCIA'
       Size = 200
     end
+    object sdsFechamentoENTRADA_DE_DINHEIRO: TFloatField
+      FieldName = 'ENTRADA_DE_DINHEIRO'
+    end
   end
   object dspFechamento: TDataSetProvider
     DataSet = sdsFechamento
@@ -218,6 +221,9 @@ object DMCadFechamento: TDMCadFechamento
     object cdsFechamentoOBS_CONFERENCIA: TStringField
       FieldName = 'OBS_CONFERENCIA'
       Size = 200
+    end
+    object cdsFechamentoENTRADA_DE_DINHEIRO: TFloatField
+      FieldName = 'ENTRADA_DE_DINHEIRO'
     end
   end
   object dsFechamento: TDataSource

@@ -1596,7 +1596,6 @@ object frmCadFechamento: TfrmCadFechamento
             Title.Alignment = taCenter
             Title.Caption = 'Diferen'#231'a Conferido'
             Title.Color = 16761220
-            Width = 64
             Visible = True
           end>
       end

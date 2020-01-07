@@ -308,6 +308,8 @@ type
     cdsFechamento_ItensFATURAMENTO_BRUTO: TStringField;
     cdsFechamento_ItensFATURAMENTO_LIQUIDO: TStringField;
     cdsTipoCobrancaFECHAMENTO_AUTOMATICO: TStringField;
+    sdsFechamentoENTRADA_DE_DINHEIRO: TFloatField;
+    cdsFechamentoENTRADA_DE_DINHEIRO: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspFechamentoUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -654,7 +656,7 @@ var
 begin
   vTexto  := '';
   vTexto2 := 'R$ ' + FormatFloat('###,###,##0.00',Valor);
-  for i := 1 to 40 - (Length(Nome) + Length(vTexto2)) do
+  for i := 1 to 42 - (Length(Nome) + Length(vTexto2)) do
     vTexto := vTexto + vPreenchimento;
   Result := Nome + vTexto + vTexto2;
 end;
@@ -713,6 +715,10 @@ var
   vTipoDinheiro: Integer;
   vVlrSangria, vVlrSupri: Real;
 begin
+  cdsTipoCobranca.IndexFieldNames := 'DINHEIRO';
+  cdsTipoCobranca.FindKey(['S']);
+  vTipoDinheiro := cdsTipoCobrancaID.AsInteger;
+
   cdsFinanceiro.First;
   while not cdsFinanceiro.Eof do
   begin
@@ -753,6 +759,10 @@ begin
     cdsFechamento_ItensVLR_RECEBIMENTO.AsFloat    := StrToFloat(FormatFloat('0.00',cdsFinanceiroDupVLR_ENTRADA.AsFloat));
     cdsFechamento_ItensNOME_TIPOCOBRANCA.AsString := cdsFinanceiroDupNOME_FORMA_PAGAMENTO.AsString;
     cdsFechamento_Itens.Post;
+    if vTipoDinheiro = cdsFinanceiroDupID_FORMA_PAGAMENTO.AsInteger then
+    begin
+      cdsFechamentoENTRADA_DE_DINHEIRO.AsCurrency := cdsFechamentoENTRADA_DE_DINHEIRO.AsCurrency + cdsFechamento_ItensVLR_ENTRADA.AsFloat;
+    end;
     cdsFinanceiroDup.Next;
   end;
 
@@ -896,8 +906,7 @@ begin
   cdsFechamentoVLR_SANGRIA.AsFloat    := StrToFloat(FormatFloat('0.00',vVlrSangria));
   cdsFechamentoVLR_INFORMADO.AsFloat  := StrToFloat(FormatFloat('0.00',vVlrInformado));
   cdsFechamentoVLR_DIFERENCA.AsFloat  := StrToFloat(FormatFloat('0.00',vVlrDiferenca));
-
-
+                                                                                        
   if (cdsFechamentoTIPO_FECHAMENTO.AsString = 'S') or
      (cdsFechamentoTIPO_FECHAMENTO.AsString = 'E') then
   begin
@@ -1243,7 +1252,7 @@ begin
   vLinha := vLinha + cAvanco;
 
   vLinha := vLinha + cAvanco;
-  Printer.Canvas.TextOut(0,vLinha,'DETALHAMENTO do FATURAMENTO');
+  Printer.Canvas.TextOut(0,vLinha,'DETALHAMENTO de FATURAMENTO');
   vLinha := vLinha + cAvanco;
   Printer.Canvas.TextOut(0,vLinha,'------------------------------------------');
   vLinha := vLinha + cAvanco;
@@ -1255,6 +1264,11 @@ begin
     vLinha := vLinha + cAvanco;
     cdsCupomTipoCobranca.Next;
   end;
+
+  Printer.Canvas.TextOut(0,vLinha,'------------------------------------------');
+  vLinha := vLinha + cAvanco;
+  vTxt1 := fnc_Monta_Descricao(cdsFechamentoENTRADA_DE_DINHEIRO.AsCurrency,'ENTRADA EM DINHEIRO:','.');
+  Printer.Canvas.TextOut(0,vLinha,vTxt1);
   vLinha := vLinha + cAvanco;
 
   Printer.Canvas.TextOut(0,vLinha,'==========================================');
