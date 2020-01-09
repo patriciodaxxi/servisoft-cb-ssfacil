@@ -154,6 +154,9 @@ type
     CurrencyEdit1: TCurrencyEdit;
     CurrencyEdit2: TCurrencyEdit;
     ceVlrPedidos: TCurrencyEdit;
+    Panel10: TPanel;
+    Label68: TLabel;
+    ComboBox2: TComboBox;
     procedure btnConsultarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -410,6 +413,7 @@ begin
   fDMConsFaturamento.cdsFilial.First;
   if (fDMConsFaturamento.cdsFilial.RecordCount < 2) and (fDMConsFaturamento.cdsFilialID.AsInteger > 0) then
     RxDBLookupCombo1.KeyValue := fDMConsFaturamento.cdsFilialID.AsInteger;
+  Panel10.Visible := (fMenu.vTipo_Reg_Cons_Fat = 'NTE');
   if fMenu.vTipo_Reg_Cons_Fat = 'NTS' then
   begin
     NxComboBox2.Items.Clear;
