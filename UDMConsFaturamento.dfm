@@ -2,8 +2,8 @@ object DMConsFaturamento: TDMConsFaturamento
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Left = 117
-  Top = 63
+  Left = 381
+  Top = 41
   Height = 600
   Width = 1150
   object sdsNotaFiscal_Cli: TSQLDataSet
@@ -2721,7 +2721,6 @@ object DMConsFaturamento: TDMConsFaturamento
     Top = 482
   end
   object cdsCupomFiscalAnalitico: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'QTD'
     Params = <>
@@ -2762,25 +2761,25 @@ object DMConsFaturamento: TDMConsFaturamento
     GetMetadata = False
     CommandText = 
       'select sum(NTI.QTD) QTD, sum(NTI.VLR_TOTAL) VLR_TOTAL, NT.DTEMIS' +
-      'SAO'#13#10'from CUPOMFISCAL NT'#13#10'inner join CUPOMFISCAL_ITENS NTI on NT' +
-      'I.ID = NT.ID'#13#10'where NT.CANCELADO = '#39'N'#39' and'#13#10'      NT.FILIAL = :F' +
-      'ILIAL and'#13#10'      DTEMISSAO >= :DATAINICIAL and'#13#10'      DTEMISSAO ' +
-      '<= :DATAFINAL'#13#10'group by NT.DTEMISSAO'#13#10'order by sum(NTI.VLR_TOTAL' +
-      ') desc '
+      'SAO'#13#10'from CUPOMFISCAL NT'#13#10'inner join CUPOMFISCAL_ITENS NTI on (N' +
+      'TI.ID = NT.ID)'#13#10'where NT.CANCELADO = '#39'N'#39' and'#13#10'      NT.FILIAL = ' +
+      ':FILIAL and'#13#10'      DTEMISSAO >= :DATAINICIAL and'#13#10'      DTEMISSA' +
+      'O <= :DATAFINAL'#13#10'group by NT.DTEMISSAO'#13#10'order by sum(NTI.VLR_TOT' +
+      'AL) desc '
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftInteger
+        DataType = ftUnknown
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'DATAINICIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftDate
+        DataType = ftUnknown
         Name = 'DATAFINAL'
         ParamType = ptInput
       end>
