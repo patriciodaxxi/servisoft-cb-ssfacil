@@ -881,24 +881,24 @@ begin
   while not fDmPagamento.mSelecionadas.Eof do
   begin
     fDMCadDuplicata.prc_Localizar(fDmPagamento.mSelecionadasID.AsInteger);
-    if fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency <= vVlrSaldoPago then
+    if (fDmPagamento.mSelecionadasVLR_SALDO_PRINC.AsCurrency +
+       fDmPagamento.mSelecionadasVLR_SALDO_JUROS.AsCurrency) <= vVlrSaldoPago then
     begin
-      if fDmPagamento.mSelecionadasVLR_JUROS.AsCurrency > 0 then
+      if fDmPagamento.mSelecionadasVLR_SALDO_JUROS.AsCurrency > 0 then
       begin
-        vVlrPago := fDmPagamento.mSelecionadasVLR_JUROS.AsCurrency;
+        vVlrPago := fDmPagamento.mSelecionadasVLR_SALDO_JUROS.AsCurrency;
         vVlrSaldoPago := vVlrSaldoPago - vVlrPago;
         fDmPagamento.mSelecionadas.Edit;
-        fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency := fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency - vVlrPago;
-        fDmPagamento.mSelecionadasVLR_JUROS.AsCurrency := 0;
+        fDmPagamento.mSelecionadasVLR_SALDO_JUROS.AsCurrency := fDmPagamento.mSelecionadasVLR_SALDO_JUROS.AsCurrency - vVlrPago;
 
         prcGravarSelecionados(1,fDmPagamento.mPagamentosID_TIPOCOBRANCA.AsInteger,0,vVlrPago,0);
         fDmPagamento.mSelecionadas.Post;
       end;
 
-      vVlrPago := fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency;
+      vVlrPago := fDmPagamento.mSelecionadasVLR_SALDO_PRINC.AsCurrency;
       vVlrSaldoPago := vVlrSaldoPago - vVlrPago;
       fDmPagamento.mSelecionadas.Edit;
-      fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency := fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency - vVlrPago;
+      fDmPagamento.mSelecionadasVLR_SALDO_PRINC.AsCurrency := fDmPagamento.mSelecionadasVLR_SALDO_PRINC.AsCurrency - vVlrPago;
 
       prcGravarSelecionados(1,fDmPagamento.mPagamentosID_TIPOCOBRANCA.AsInteger,vVlrPago,0,fDmPagamento.mSelecionadasVLR_DESC.AsCurrency);
       fDmPagamento.mSelecionadas.Post;
@@ -908,7 +908,7 @@ begin
       vVlrPago := vVlrSaldoPago;
       vVlrSaldoPago := vVlrSaldoPago - vVlrPago;
       fDmPagamento.mSelecionadas.Edit;
-      fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency := fDmPagamento.mSelecionadasVLR_TOTAL.AsCurrency - vVlrPago;
+      fDmPagamento.mSelecionadasVLR_SALDO_PRINC.AsCurrency := fDmPagamento.mSelecionadasVLR_SALDO_PRINC.AsCurrency - vVlrPago;
 
       prcGravarSelecionados(1,fDmPagamento.mPagamentosID_TIPOCOBRANCA.AsInteger,vVlrPago,0,fDmPagamento.mSelecionadasVLR_DESC.AsCurrency);
       fDmPagamento.mSelecionadas.Post;
