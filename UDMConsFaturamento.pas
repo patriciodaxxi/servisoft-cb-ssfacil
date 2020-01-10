@@ -665,6 +665,7 @@ procedure TDMConsFaturamento.cdsNotaFiscal_Cli_Cid_DetCalcFields(
 var
   vAux : Real;
 begin
+
   if (vVlrFaturamento > 0) and (cdsNotaFiscal_Cli_Cid_DetVLR_TOTAL.AsFloat > 0) then
   begin
     vAux := StrToFloat(FormatFloat('0.000',(cdsNotaFiscal_Cli_Cid_DetVLR_TOTAL.AsFloat / vVlrFaturamento) * 100));

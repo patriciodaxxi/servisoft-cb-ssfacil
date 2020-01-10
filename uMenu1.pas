@@ -329,6 +329,7 @@ begin
 //  FreeAndNil(frmIBPT_Atualiza);
 //  prc_ShellExecute('BuscaIBPT.exe');
 //  ShellExecute(Handle,'open',pchar('C:\delphi7\ssfacil\exe\BuscaIBPT.exe'),nil,nil,sw_show);
+
   vCaminho := ExtractFilePath(Application.ExeName) + 'BuscaIBPT.exe';
   WinExecAndWait32(vCaminho,1);
   prc_Verifica_IBPT;

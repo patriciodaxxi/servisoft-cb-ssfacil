@@ -2,8 +2,8 @@ object DMConsFaturamento: TDMConsFaturamento
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Left = 381
-  Top = 41
+  Left = 155
+  Top = 31
   Height = 600
   Width = 1150
   object sdsNotaFiscal_Cli: TSQLDataSet
@@ -943,7 +943,7 @@ object DMConsFaturamento: TDMConsFaturamento
     Params = <>
     ProviderName = 'dspNotaFiscal_UF'
     OnCalcFields = cdsNotaFiscal_UFCalcFields
-    Left = 112
+    Left = 113
     Top = 368
     object cdsNotaFiscal_UFUF: TStringField
       FieldName = 'UF'
@@ -1436,7 +1436,7 @@ object DMConsFaturamento: TDMConsFaturamento
     Params = <>
     ProviderName = 'dspNotaFiscal_Cli_UF'
     OnCalcFields = cdsNotaFiscal_Cli_UFCalcFields
-    Left = 328
+    Left = 330
     Top = 23
     object cdsNotaFiscal_Cli_UFID_PESSOA: TIntegerField
       FieldName = 'ID_PESSOA'
@@ -2137,8 +2137,8 @@ object DMConsFaturamento: TDMConsFaturamento
     Params = <>
     ProviderName = 'dspNotaFiscal_Cli'
     OnCalcFields = cdsNotaFiscal_CliCalcFields
-    Left = 112
-    Top = 24
+    Left = 113
+    Top = 23
     object cdsNotaFiscal_CliID_PESSOA: TIntegerField
       FieldName = 'ID_PESSOA'
     end
@@ -2279,7 +2279,7 @@ object DMConsFaturamento: TDMConsFaturamento
     IndexFieldNames = 'NOME'
     Params = <>
     ProviderName = 'dspFornecedor'
-    Left = 320
+    Left = 321
     Top = 368
     object cdsFornecedorCODIGO: TIntegerField
       FieldName = 'CODIGO'
@@ -2632,7 +2632,7 @@ object DMConsFaturamento: TDMConsFaturamento
       'SELECT USA_VENDEDOR_INT'
       'FROM PARAMETROS_GERAL')
     SQLConnection = dmDatabase.scoDados
-    Left = 942
+    Left = 945
     Top = 40
     object qParametros_GeralUSA_VENDEDOR_INT: TStringField
       FieldName = 'USA_VENDEDOR_INT'
@@ -2726,7 +2726,7 @@ object DMConsFaturamento: TDMConsFaturamento
     Params = <>
     ProviderName = 'dspCupomFiscalAnalitico'
     Left = 320
-    Top = 482
+    Top = 484
     object cdsCupomFiscalAnaliticoQTD: TFloatField
       DisplayLabel = 'Qtde'
       FieldName = 'QTD'
