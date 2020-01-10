@@ -269,7 +269,7 @@ object dmPagamento: TdmPagamento
     IndexDefs = <
       item
         Name = 'Decrescente'
-        Fields = 'VLR_SALDO_PRINC'
+        Fields = 'VLR_TOTAL'
         Options = [ixDescending]
       end>
     IndexName = 'Decrescente'
