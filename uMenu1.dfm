@@ -22,8 +22,8 @@ object fMenu1: TfMenu1
   TextHeight = 13
   object lbDatabase: TLabel
     Left = 0
-    Top = 521
-    Width = 920
+    Top = 513
+    Width = 912
     Height = 14
     Align = alBottom
     Alignment = taRightJustify
@@ -41,8 +41,8 @@ object fMenu1: TfMenu1
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 920
-    Height = 417
+    Width = 912
+    Height = 409
     Align = alClient
     TabOrder = 0
     object Label2: TLabel
@@ -73,8 +73,8 @@ object fMenu1: TfMenu1
     end
     object Panel1: TPanel
       Left = 1
-      Top = 376
-      Width = 918
+      Top = 368
+      Width = 910
       Height = 40
       Align = alBottom
       Color = 12615680
@@ -83,7 +83,7 @@ object fMenu1: TfMenu1
       object Label8: TLabel
         Left = 1
         Top = 1
-        Width = 916
+        Width = 908
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -102,8 +102,8 @@ object fMenu1: TfMenu1
     end
     object PanelBkp: TPanel
       Left = 1
-      Top = 336
-      Width = 918
+      Top = 328
+      Width = 910
       Height = 40
       Align = alBottom
       Color = 8404992
@@ -112,7 +112,7 @@ object fMenu1: TfMenu1
       object LabelBkp: TJvBlinkingLabel
         Left = 1
         Top = 1
-        Width = 916
+        Width = 908
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -123,6 +123,7 @@ object fMenu1: TfMenu1
         Font.Name = 'Courier New'
         Font.Style = [fsBold]
         ParentFont = False
+        Visible = False
         OnClick = LabelBkpClick
         OnDblClick = LabelBkpClick
         HotTrackFont.Charset = DEFAULT_CHARSET
@@ -136,8 +137,8 @@ object fMenu1: TfMenu1
     end
     object Panel5: TPanel
       Left = 1
-      Top = 296
-      Width = 918
+      Top = 288
+      Width = 910
       Height = 40
       Align = alBottom
       Color = 33023
@@ -146,7 +147,7 @@ object fMenu1: TfMenu1
       object Label1: TLabel
         Left = 1
         Top = 1
-        Width = 916
+        Width = 908
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -165,8 +166,8 @@ object fMenu1: TfMenu1
     end
     object Panel6: TPanel
       Left = 1
-      Top = 256
-      Width = 918
+      Top = 248
+      Width = 910
       Height = 40
       Align = alBottom
       Color = 4079359
@@ -175,7 +176,7 @@ object fMenu1: TfMenu1
       object Label4: TLabel
         Left = 1
         Top = 1
-        Width = 916
+        Width = 908
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -194,8 +195,8 @@ object fMenu1: TfMenu1
     end
     object Panel8: TPanel
       Left = 1
-      Top = 216
-      Width = 918
+      Top = 208
+      Width = 910
       Height = 40
       Align = alBottom
       Color = 4079359
@@ -204,7 +205,7 @@ object fMenu1: TfMenu1
       object Label7: TLabel
         Left = 1
         Top = 1
-        Width = 916
+        Width = 908
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -228,13 +229,13 @@ object fMenu1: TfMenu1
   end
   object Panel7: TPanel
     Left = 0
-    Top = 535
-    Width = 920
+    Top = 527
+    Width = 912
     Height = 64
     Align = alBottom
     TabOrder = 1
     DesignSize = (
-      920
+      912
       64)
     object Image1: TImage
       Left = 775
@@ -378,8 +379,8 @@ object fMenu1: TfMenu1
   end
   object Panel4: TPanel
     Left = 0
-    Top = 417
-    Width = 920
+    Top = 409
+    Width = 912
     Height = 104
     Align = alBottom
     Color = 16777109
