@@ -189,12 +189,12 @@ begin
 
   //fDMCadPedido.prc_Inserir;
   UGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
-  
-  lblNome_Filial.Caption := vFilial_Nome;
-  fDMCadPedido.cdsPedidoTIPO_REG.AsString       := 'S';
 
   if fDMCadPedido.cdsPedido.State in [dsBrowse] then
     Exit;
+  
+  lblNome_Filial.Caption := vFilial_Nome;
+  fDMCadPedido.cdsPedidoTIPO_REG.AsString       := 'S';
 
   prc_Habilitar_CamposNota;
 
