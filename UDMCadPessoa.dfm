@@ -5491,6 +5491,11 @@ object DMCadPessoa: TDMCadPessoa
       FixedChar = True
       Size = 1
     end
+    object qParametros_GeralPERMITE_CNPJ_DUP: TStringField
+      FieldName = 'PERMITE_CNPJ_DUP'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsGrupo_Pessoa: TSQLDataSet
     NoMetadata = True

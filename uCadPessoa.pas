@@ -1364,7 +1364,8 @@ begin
       DBEdit6.SetFocus;
     end;
   end;
-
+  if (fDMCadPessoa.qParametros_GeralPERMITE_CNPJ_DUP.AsString = 'S') then
+    exit;
   if not (fDMCadPessoa.cdsPessoaCNPJ_CPF.IsNull) then
   begin
     if (fDMCadPessoa.qParametros_GeralPERMITE_CNPJ_DUPLICADO_TRANSP.AsString = 'S') and (fDMCadPessoa.cdsPessoaTP_TRANSPORTADORA.AsString = 'S') then
