@@ -98,6 +98,7 @@ type
     DBEdit1: TDBEdit;
     DBCheckBox3: TDBCheckBox;
     Label19: TLabel;
+    dbckDiferenca_ICMS: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure Panel2Enter(Sender: TObject);

@@ -2,7 +2,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   Left = 294
   Top = 53
   Width = 755
-  Height = 624
+  Height = 647
   Caption = 'Cadastro dos Itens dos Or'#231'amentos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 747
+    Width = 739
     Height = 159
     Align = alTop
     Color = clMoneyGreen
@@ -154,7 +154,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
     object pnlTipo2: TPanel
       Left = 1
       Top = 60
-      Width = 745
+      Width = 737
       Height = 45
       Align = alTop
       BevelOuter = bvNone
@@ -291,7 +291,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
     object pnlTipo1: TPanel
       Left = 1
       Top = 1
-      Width = 745
+      Width = 737
       Height = 38
       Align = alTop
       BevelOuter = bvNone
@@ -430,7 +430,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
     object Panel4: TPanel
       Left = 1
       Top = 39
-      Width = 745
+      Width = 737
       Height = 21
       Align = alTop
       BevelOuter = bvNone
@@ -459,8 +459,8 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 559
-    Width = 747
+    Top = 574
+    Width = 739
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -499,8 +499,8 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   object Panel2: TPanel
     Left = 0
     Top = 223
-    Width = 747
-    Height = 336
+    Width = 739
+    Height = 351
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 3
@@ -634,8 +634,8 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
     end
     object RzPageControl1: TRzPageControl
       Left = 1
-      Top = 171
-      Width = 745
+      Top = 186
+      Width = 737
       Height = 164
       ActivePage = TabSheet1
       ActivePageDefault = TabSheet1
@@ -755,10 +755,10 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
       end
     end
     object gbxVendedor: TRzGroupBox
-      Left = 559
+      Left = 551
       Top = 1
       Width = 187
-      Height = 170
+      Height = 185
       Align = alRight
       BorderColor = clNavy
       BorderInner = fsButtonUp
@@ -931,7 +931,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
       end
       object Label32: TLabel
         Left = 14
-        Top = 147
+        Top = 167
         Width = 59
         Height = 13
         Caption = '% Comiss'#227'o:'
@@ -1003,12 +1003,12 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
       end
       object DBEdit13: TDBEdit
         Left = 75
-        Top = 141
+        Top = 161
         Width = 82
         Height = 19
         DataField = 'PERC_COMISSAO'
         DataSource = DMCadPedido.dsPedido_Itens
-        TabOrder = 5
+        TabOrder = 7
       end
       object DBCheckBox3: TDBCheckBox
         Left = 26
@@ -1020,9 +1020,27 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
         DataField = 'CALCULARICMSSOBREIPI'
         DataSource = DMCadPedido.dsPedido_Itens
         ParentCtl3D = False
+        TabOrder = 5
+        ValueChecked = 'S'
+        ValueUnchecked = 'N'
+      end
+      object dbckDiferenca_ICMS: TDBCheckBox
+        Left = 26
+        Top = 141
+        Width = 151
+        Height = 17
+        TabStop = False
+        Caption = 'Calcular Diferencial ICMS'
+        Color = clMoneyGreen
+        Ctl3D = False
+        DataField = 'DIFERENCA_ICMS'
+        DataSource = DMCadPedido.dsPedido_Itens
+        ParentColor = False
+        ParentCtl3D = False
         TabOrder = 6
         ValueChecked = 'S'
         ValueUnchecked = 'N'
+        Visible = False
       end
     end
     object gbxDesconto: TRzGroupBox
@@ -1132,7 +1150,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   object pnlMaterial: TPanel
     Left = 0
     Top = 159
-    Width = 747
+    Width = 739
     Height = 32
     Align = alTop
     Color = clMoneyGreen
@@ -1162,7 +1180,7 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
   object pnlTipoOrcamento: TPanel
     Left = 0
     Top = 191
-    Width = 747
+    Width = 739
     Height = 32
     Align = alTop
     Color = clMoneyGreen
