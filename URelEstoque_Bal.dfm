@@ -310,9 +310,9 @@ object fRelEstoque_Bal: TfRelEstoque_Bal
           ParentFont = False
         end
         object RLDBResult1: TRLDBResult
-          Left = 685
+          Left = 686
           Top = 2
-          Width = 63
+          Width = 62
           Height = 10
           Alignment = taRightJustify
           DataField = 'clVlr_Total'

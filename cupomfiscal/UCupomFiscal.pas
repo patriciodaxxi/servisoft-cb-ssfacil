@@ -1806,9 +1806,15 @@ begin
                                                ' AND PARCELA = ' + fDmCupomFiscal.cdsCupom_ParcPARCELA.AsString;
     fDmCupomFiscal.cdsDuplicata.Active := True;
     if fDmCupomFiscal.cdsDuplicata.IsEmpty then
-      fDmCupomFiscal.Gravar_Duplicata('R','N',fDmCupomFiscal.cdsCupom_ParcPARCELA.AsInteger,
-                                      fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsFloat,
-                                      fDmCupomFiscal.cdsCupom_ParcDTVENCIMENTO.AsDateTime,'')
+    begin
+       if fDmCupomFiscal.cdsCupom_Parc.State in [dsBrowse] then
+         fDmCupomFiscal.cdsCupom_Parc.Edit;
+       fDmCupomFiscal.cdsCupom_ParcID_DUPLICATA.AsInteger := fDmCupomFiscal.Gravar_Duplicata('R','N',fDmCupomFiscal.cdsCupom_ParcPARCELA.AsInteger,
+                                                             fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsFloat,
+                                                             fDmCupomFiscal.cdsCupom_ParcDTVENCIMENTO.AsDateTime,'');
+       fDmCupomFiscal.cdsCupom_Parc.Post;
+       fDmCupomFiscal.cdsCupom_Parc.ApplyUpdates(0);
+    end
     else
     begin
       fDmCupomFiscal.cdsDuplicata.Edit;
