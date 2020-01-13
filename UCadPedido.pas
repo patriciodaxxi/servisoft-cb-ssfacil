@@ -771,8 +771,8 @@ begin
   uGrava_Pedido.prc_Inserir_Ped(fDMCadPedido);
   if not(fDMCadPedido.cdsPedido.State in [dsEdit,dsInsert]) then
   begin
-    prc_Excluir_Registro;
     vInclusao_Edicao := '';
+    //prc_Excluir_Registro;
     exit;
   end;
   //********************
@@ -782,9 +782,6 @@ begin
   //******************
 
   fDMCadPedido.cdsPedidoTIPO_REG.AsString := 'P';
-
-  if fDMCadPedido.cdsPedido.State in [dsBrowse] then
-    Exit;
 
   if (fDMCadPedido.cdsParametrosTIPO_ESTOQUE.AsString = 'P') or (vID_LocalAux > 0) then
     fDMCadPedido.cdsPedidoID_LOCAL_ESTOQUE.AsInteger := vID_LocalAux;
@@ -1201,6 +1198,8 @@ begin
 end;
 
 procedure TfrmCadPedido.btnCancelarClick(Sender: TObject);
+var
+  vIDAux : Integer;
 begin
   if (fDMCadPedido.cdsPedido.State in [dsBrowse]) or not(fDMCadPedido.cdsPedido.Active) then
   begin
@@ -1211,9 +1210,10 @@ begin
   if MessageDlg('Deseja cancelar alteração/inclusão do registro?',mtConfirmation,[mbYes,mbNo],0) = mrNo then
     Exit;
 
+  vIDAux := fDMCadPedido.cdsPedidoID.AsInteger;
   fDMCadPedido.cdsPedido.CancelUpdates;
   //17/01/2019
-  if vInclusao_Edicao = 'I' then
+  if (vInclusao_Edicao = 'I') and (vIDAux = fDMCadPedido.cdsPedidoID.AsInteger) and (fDMCadPedido.cdsPedidoID.AsInteger > 0) then
     prc_Excluir_Registro;
   //********************
   
@@ -1495,6 +1495,9 @@ end;
 
 procedure TfrmCadPedido.RzPageControl1Change(Sender: TObject);
 begin
+  if RzPageControl1.ActivePage = TS_Consulta then
+    fDMCadPedido.cdsPedido.Close
+  else
   if not(fDMCadPedido.cdsPedido.State in [dsEdit, dsInsert]) then
   begin
     if RzPageControl1.ActivePage = TS_Cadastro then
