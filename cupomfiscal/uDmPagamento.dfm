@@ -1,8 +1,8 @@
 object dmPagamento: TdmPagamento
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 406
-  Top = 109
+  Left = 590
+  Top = 120
   Height = 425
   Width = 667
   object sdsDuplicata: TSQLDataSet
@@ -268,11 +268,15 @@ object dmPagamento: TdmPagamento
       end>
     IndexDefs = <
       item
-        Name = 'Decrescente'
+        Name = 'VlrTotal'
         Fields = 'VLR_TOTAL'
         Options = [ixDescending]
+      end
+      item
+        Name = 'DtVencimento'
+        Fields = 'Dt_VCTO'
       end>
-    IndexName = 'Decrescente'
+    IndexName = 'DtVencimento'
     Params = <>
     StoreDefs = True
     Left = 48

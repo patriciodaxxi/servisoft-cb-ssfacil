@@ -678,6 +678,7 @@ end;
 
 procedure TfCarnePgto.btRecalcularClick(Sender: TObject);
 begin
+  fDmPagamento.mSelecionadas.IndexName := 'DtVencimento';
   fDmPagamento.mPagamentos.EmptyDataSet;
   CurrencyEdit2.Value := fDmPagamento.fncCalculaTotal;
   CurrencyEdit3.Value := 0;
@@ -873,10 +874,12 @@ begin
     ShowMessage('Seomente uma forma de pagamento é permitida!');
     Exit;
   end;
+  fDmPagamento.mSelecionadas.IndexName := 'VlrTotal';
 
   fDmPagamento.mSelecionadas.First;
   fDmPagamento.mPagamentos.First;
   vVlrSaldoPago := fDmPagamento.mPagamentosVLR_SALDO.AsCurrency;
+
 
   while not fDmPagamento.mSelecionadas.Eof do
   begin
