@@ -302,11 +302,14 @@ begin
   begin
     if (fDMCadNotaServico.cdsTipoCobrancaDEPOSITO.AsString = 'S') and (fDMCadNotaServico.cdsContas.Locate('ID',fDMCadNotaServico.cdsNotaServico_ImpID_CONTA.AsInteger,[loCaseInsensitive])) then
     begin
-      vTexto1 := '(Deposito: Age: ' + fDMCadNotaServico.cdsContasAGENCIA.AsString + fDMCadNotaServico.cdsContasDIG_AGENCIA.AsString
+      //14/01/2020
+      {vTexto1 := '(Deposito: Age: ' + fDMCadNotaServico.cdsContasAGENCIA.AsString + fDMCadNotaServico.cdsContasDIG_AGENCIA.AsString
                + ', Conta: ' + fDMCadNotaServico.cdsContasNUMCONTA.AsString + fDMCadNotaServico.cdsContasDIG_CONTA.AsString
                + ', ' + fDMCadNotaServico.cdsContasNOME.AsString
                + ')';
-      vDiscriminacao :=  vDiscriminacao + vTexto1;
+      vDiscriminacao :=  vDiscriminacao + vTexto1;}
+      vDiscriminacao :=  vDiscriminacao + fDMCadNotaServico.fnc_Monta_Obs_Deposito;
+
     end;
   end;
   if trim(vDiscriminacao) <> '' then

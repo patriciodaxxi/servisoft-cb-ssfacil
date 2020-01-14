@@ -362,7 +362,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     Top = 110
     Width = 1349
     Height = 348
-    ActivePage = TS_Cliente
+    ActivePage = TS_Vendedor
     ActivePageDefault = TS_Cliente
     Align = alClient
     BackgroundColor = clGray
@@ -375,7 +375,7 @@ object frmConsFaturamento: TfrmConsFaturamento
     ParentBackgroundColor = False
     ParentFont = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 9
     TabOrder = 2
     TextColors.Selected = clBlue
     FixedDimension = 19
@@ -2359,7 +2359,7 @@ object frmConsFaturamento: TfrmConsFaturamento
               WidthOfIndicator = 11
               DefaultRowHeight = 17
               ScrollBars = ssHorizontal
-              ColCount = 6
+              ColCount = 2
               RowCount = 2
             end
           end

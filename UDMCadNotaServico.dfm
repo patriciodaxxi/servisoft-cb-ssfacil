@@ -7399,4 +7399,171 @@ object DMCadNotaServico: TDMCadNotaServico
       Size = 1
     end
   end
+  object qContas: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'select C.*, B.NOME NOME_BANCO, B.IMP_DIG_AGENCIA_DEP'
+      'from CONTAS C'
+      'left join BANCO B on C.ID_BANCO = B.ID'
+      'where C.ID = :ID'
+      '  ')
+    SQLConnection = dmDatabase.scoDados
+    Left = 1213
+    Top = 521
+    object qContasID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qContasNOME: TStringField
+      FieldName = 'NOME'
+      Size = 30
+    end
+    object qContasAGENCIA: TStringField
+      FieldName = 'AGENCIA'
+      Size = 5
+    end
+    object qContasFILIAL: TIntegerField
+      FieldName = 'FILIAL'
+    end
+    object qContasNUMCONTA: TStringField
+      FieldName = 'NUMCONTA'
+      Size = 12
+    end
+    object qContasCNAB: TStringField
+      FieldName = 'CNAB'
+      Size = 15
+    end
+    object qContasDTENCERRAMENTO: TDateField
+      FieldName = 'DTENCERRAMENTO'
+    end
+    object qContasID_TIPOCOBRANCA: TIntegerField
+      FieldName = 'ID_TIPOCOBRANCA'
+    end
+    object qContasDESCRICAO_NOTA: TStringField
+      FieldName = 'DESCRICAO_NOTA'
+      Size = 30
+    end
+    object qContasTIPO_CONTA: TStringField
+      FieldName = 'TIPO_CONTA'
+      FixedChar = True
+      Size = 1
+    end
+    object qContasID_BANCO: TIntegerField
+      FieldName = 'ID_BANCO'
+    end
+    object qContasDIG_CONTA: TStringField
+      FieldName = 'DIG_CONTA'
+      Size = 1
+    end
+    object qContasCOD_CEDENTE: TStringField
+      FieldName = 'COD_CEDENTE'
+      Size = 16
+    end
+    object qContasACEITE: TStringField
+      FieldName = 'ACEITE'
+      Size = 1
+    end
+    object qContasID_OCORRENCIA: TIntegerField
+      FieldName = 'ID_OCORRENCIA'
+    end
+    object qContasDIAS_PROTESTO: TIntegerField
+      FieldName = 'DIAS_PROTESTO'
+    end
+    object qContasID_ESPECIE: TIntegerField
+      FieldName = 'ID_ESPECIE'
+    end
+    object qContasID_CARTEIRA: TIntegerField
+      FieldName = 'ID_CARTEIRA'
+    end
+    object qContasID_INSTRUCAO1: TIntegerField
+      FieldName = 'ID_INSTRUCAO1'
+    end
+    object qContasID_INSTRUCAO2: TIntegerField
+      FieldName = 'ID_INSTRUCAO2'
+    end
+    object qContasID_TIPO_COBRANCA: TIntegerField
+      FieldName = 'ID_TIPO_COBRANCA'
+    end
+    object qContasMOEDA: TStringField
+      FieldName = 'MOEDA'
+      Size = 1
+    end
+    object qContasVARIACAO_CARTEIRA: TStringField
+      FieldName = 'VARIACAO_CARTEIRA'
+      Size = 3
+    end
+    object qContasTIPO_DOCUMENTO: TStringField
+      FieldName = 'TIPO_DOCUMENTO'
+      Size = 5
+    end
+    object qContasCOD_TRANSMISSAO: TStringField
+      FieldName = 'COD_TRANSMISSAO'
+      Size = 15
+    end
+    object qContasMENSAGEM_FIXA: TStringField
+      FieldName = 'MENSAGEM_FIXA'
+      Size = 30
+    end
+    object qContasPERC_DESCONTO: TFloatField
+      FieldName = 'PERC_DESCONTO'
+    end
+    object qContasPERC_JUROS: TFloatField
+      FieldName = 'PERC_JUROS'
+    end
+    object qContasVLR_IOF: TFloatField
+      FieldName = 'VLR_IOF'
+    end
+    object qContasVLR_TAXA: TFloatField
+      FieldName = 'VLR_TAXA'
+    end
+    object qContasLOCAL_PAGAMENTO: TStringField
+      FieldName = 'LOCAL_PAGAMENTO'
+      Size = 60
+    end
+    object qContasEND_ARQUIVO_REM: TStringField
+      FieldName = 'END_ARQUIVO_REM'
+      Size = 200
+    end
+    object qContasNOME_ARQ_REM: TStringField
+      FieldName = 'NOME_ARQ_REM'
+      Size = 8
+    end
+    object qContasEXTENSAO_ARQ_REM: TStringField
+      FieldName = 'EXTENSAO_ARQ_REM'
+      Size = 3
+    end
+    object qContasDT_LIMITE_DESCONTO: TDateField
+      FieldName = 'DT_LIMITE_DESCONTO'
+    end
+    object qContasCOMISSAO_PERMANENCIA: TStringField
+      FieldName = 'COMISSAO_PERMANENCIA'
+      Size = 2
+    end
+    object qContasNUM_CONVENIO_LIDER: TStringField
+      FieldName = 'NUM_CONVENIO_LIDER'
+      Size = 6
+    end
+    object qContasDIG_AGENCIA: TStringField
+      FieldName = 'DIG_AGENCIA'
+      Size = 1
+    end
+    object qContasDIAS_DEVOLUCAO: TIntegerField
+      FieldName = 'DIAS_DEVOLUCAO'
+    end
+    object qContasNOME_BANCO: TStringField
+      FieldName = 'NOME_BANCO'
+      Size = 60
+    end
+    object qContasIMP_DIG_AGENCIA_DEP: TStringField
+      FieldName = 'IMP_DIG_AGENCIA_DEP'
+      FixedChar = True
+      Size = 1
+    end
+  end
 end

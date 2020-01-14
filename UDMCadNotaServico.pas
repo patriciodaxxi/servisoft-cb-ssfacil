@@ -1458,6 +1458,48 @@ type
     cdsNotaServico_ImpCOD_REGIME_TRIB_FIL: TIntegerField;
     cdsNotaServico_ImpDDD2_CLI: TIntegerField;
     cdsNotaServico_ImpFONE2_CLI: TStringField;
+    qContas: TSQLQuery;
+    qContasID: TIntegerField;
+    qContasNOME: TStringField;
+    qContasAGENCIA: TStringField;
+    qContasFILIAL: TIntegerField;
+    qContasNUMCONTA: TStringField;
+    qContasCNAB: TStringField;
+    qContasDTENCERRAMENTO: TDateField;
+    qContasID_TIPOCOBRANCA: TIntegerField;
+    qContasDESCRICAO_NOTA: TStringField;
+    qContasTIPO_CONTA: TStringField;
+    qContasID_BANCO: TIntegerField;
+    qContasDIG_CONTA: TStringField;
+    qContasCOD_CEDENTE: TStringField;
+    qContasACEITE: TStringField;
+    qContasID_OCORRENCIA: TIntegerField;
+    qContasDIAS_PROTESTO: TIntegerField;
+    qContasID_ESPECIE: TIntegerField;
+    qContasID_CARTEIRA: TIntegerField;
+    qContasID_INSTRUCAO1: TIntegerField;
+    qContasID_INSTRUCAO2: TIntegerField;
+    qContasID_TIPO_COBRANCA: TIntegerField;
+    qContasMOEDA: TStringField;
+    qContasVARIACAO_CARTEIRA: TStringField;
+    qContasTIPO_DOCUMENTO: TStringField;
+    qContasCOD_TRANSMISSAO: TStringField;
+    qContasMENSAGEM_FIXA: TStringField;
+    qContasPERC_DESCONTO: TFloatField;
+    qContasPERC_JUROS: TFloatField;
+    qContasVLR_IOF: TFloatField;
+    qContasVLR_TAXA: TFloatField;
+    qContasLOCAL_PAGAMENTO: TStringField;
+    qContasEND_ARQUIVO_REM: TStringField;
+    qContasNOME_ARQ_REM: TStringField;
+    qContasEXTENSAO_ARQ_REM: TStringField;
+    qContasDT_LIMITE_DESCONTO: TDateField;
+    qContasCOMISSAO_PERMANENCIA: TStringField;
+    qContasNUM_CONVENIO_LIDER: TStringField;
+    qContasDIG_AGENCIA: TStringField;
+    qContasDIAS_DEVOLUCAO: TIntegerField;
+    qContasNOME_BANCO: TStringField;
+    qContasIMP_DIG_AGENCIA_DEP: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaServicoNewRecord(DataSet: TDataSet);
     procedure cdsNotaServicoBeforePost(DataSet: TDataSet);
@@ -1555,6 +1597,8 @@ type
     procedure prc_Busca_IBPT(Codigo_NBS, Tipo: String); //Tipo = I Itens   G = Geral
     procedure prc_Abrir_Atividade(ID_Servico: Integer);
     procedure prc_Monta_Obs_Contrato;
+    function fnc_Monta_Obs_Deposito : String;
+
   end;
 
 var
@@ -3721,6 +3765,32 @@ begin
   finally
     FreeAndNil(sds);
   end;
+end;
+
+
+function TDMCadNotaServico.fnc_Monta_Obs_Deposito: String;
+var
+  vTexto: String;
+  vAgeAux, vContaAux: String;
+begin
+  qContas.Close;
+  qContas.ParamByName('ID').AsInteger := cdsNotaServicoID_CONTA.AsInteger;
+  qContas.Open;
+
+  if trim(qContasNOME_BANCO.AsString) <> '' then
+    vTexto := qContasNOME_BANCO.AsString
+  else
+  if trim(qContasDESCRICAO_NOTA.AsString) <> '' then
+    vTexto := qContasDESCRICAO_NOTA.AsString
+  else
+    vTexto := qContasNOME.AsString;
+  vAgeAux := qContasAGENCIA.AsString;
+  if (trim(qContasDIG_AGENCIA.AsString) <> '') and (qContasIMP_DIG_AGENCIA_DEP.AsString = 'S') then
+    vAgeAux := vAgeAux + '-' + qContasDIG_AGENCIA.AsString;
+  vContaAux := qContasNUMCONTA.AsString;
+  if trim(qContasDIG_CONTA.AsString) <> '' then
+    vContaAux := vContaAux + '-' + qContasDIG_CONTA.AsString;
+  Result := '(Deposito: ' + vTexto + '  Age: ' + vAgeAux + ', Conta: ' + vContaAux + ')';
 end;
 
 end.
