@@ -1818,10 +1818,31 @@ begin
       if (fDMCadNotaServico.cdsTipoCobrancaDEPOSITO.AsString = 'S') and
          (fDMCadNotaServico.cdsContas.Locate('ID',fDMCadNotaServico.cdsNotaServico_ImpID_CONTA.AsInteger,[loCaseInsensitive])) then
       begin
-        vTexto1 := '(Deposito: Ag.: ' + fDMCadNotaServico.cdsContasAGENCIA.AsString + '-' + fDMCadNotaServico.cdsContasDIG_AGENCIA.AsString +
+        {fDMCadNotaServico.qContas.Close;
+        fDMCadNotaServico.qContas.ParamByName('ID').AsInteger := fDMCadNotaServico.cdsNotaServicoID_CONTA.AsInteger;
+        fDMCadNotaServico.qContas.Open;
+
+        if trim(fDMCadNotaServico.qContasNOME_BANCO.AsString) <> '' then
+          vTexto := fDMCadNotaServico.qContasNOME_BANCO.AsString
+        else
+        if trim(fDMCadNotaServico.qContasDESCRICAO_NOTA.AsString) <> '' then
+          vTexto := fDMCadNotaServico.qContasDESCRICAO_NOTA.AsString
+        else
+          vTexto := fDMCadNotaServico.qContasNOME.AsString;
+        vAgeAux := fDMCadNotaServico.qContasAGENCIA.AsString;
+        if (trim(fDMCadNotaServico.qContasDIG_AGENCIA.AsString) <> '') and (fDMCadNotaServico.qContasIMP_DIG_AGENCIA_DEP.AsString = 'S') then
+          vAgeAux := vAgeAux + '-' + fDMCadNotaServico.qContasDIG_AGENCIA.AsString;
+        vContaAux := fDMCadNotaServico.qContasNUMCONTA.AsString;
+        if trim(fDMCadNotaServico.qContasDIG_CONTA.AsString) <> '' then
+          vContaAux := vContaAux + '-' + fDMCadNotaServico.qContasDIG_CONTA.AsString;
+        vTexto1 := '(Deposito: ' + vTexto + '  Age: ' + vAgeAux + ', Conta: ' + vContaAux
+                + ')';}
+
+        {vTexto1 := '(Deposito: Ag.: ' + fDMCadNotaServico.cdsContasAGENCIA.AsString + '-' + fDMCadNotaServico.cdsContasDIG_AGENCIA.AsString +
                    ', Conta: ' + fDMCadNotaServico.cdsContasNUMCONTA.AsString + '-' + fDMCadNotaServico.cdsContasDIG_CONTA.AsString +
-                   ', ' + fDMCadNotaServico.cdsContasNOME.AsString + ')';
-        vDiscriminacao := vDiscriminacao + vTexto1;
+                   ', ' + fDMCadNotaServico.cdsContasNOME.AsString + ')';}
+        //vDiscriminacao := vDiscriminacao + vTexto1;
+        vDiscriminacao := vDiscriminacao + fDMCadNotaServico.fnc_Monta_Obs_Deposito;
       end;
     end;
     //*******************

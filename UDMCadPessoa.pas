@@ -1331,6 +1331,7 @@ type
     qParametros_NFeID_CST_DIFERIMENTO: TIntegerField;
     sdsPessoa_FiscalOPCAO_DIFERIMENTO: TStringField;
     cdsPessoa_FiscalOPCAO_DIFERIMENTO: TStringField;
+    qParametros_GeralPERMITE_CNPJ_DUP: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;

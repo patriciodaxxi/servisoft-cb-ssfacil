@@ -8,7 +8,7 @@ uses
   UCadProduto_Forn, UCadProduto_Consumo, RzPanel, NxCollection, DBVGrids, DBGrids, UDMCopiarProduto, SqlExpr, DBAdvGrid, USenha,
   AdvDBLookupComboBox, UCadProduto_UF, UCadProduto_Uni, ComCtrls, RzChkLst, RzLstBox, UCadProduto_Matriz, UCadProduto_Comb,
   UCadProduto_Cor, UCadProduto_Emb, UCadProduto_Atelier, UGerar_CBarra, Menus, UCadProduto_Comissao, UCadProduto_Carimbo, Mask,
-  UCadProduto_Comissao_Vend, uEtiq_Individual, Variants, UConsEstoque_Mov, NxEdit, UCadProduto_Maq;
+  UCadProduto_Comissao_Vend, uEtiq_Individual, Variants, UConsEstoque_Mov, NxEdit, UCadProduto_Maq, ComObj;
 
 type
   TfrmCadProduto = class(TForm)
@@ -813,6 +813,7 @@ type
     SMDBGrid20: TSMDBGrid;
     Label257: TLabel;
     DBEdit163: TDBEdit;
+    Excel1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1034,6 +1035,7 @@ type
     procedure DBEdit163Exit(Sender: TObject);
     procedure DBEdit163KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure Excel1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1139,6 +1141,9 @@ type
     procedure prc_Verificar_Cor_Comb(ID: Integer);
     procedure prc_Gravar_Consumo_Proc;
     procedure prcScroll(DataSet: TDataSet);
+
+    procedure prc_CriaExcel(vDados: TDataSource);
+
   public
     { Public declarations }
     vID_Produto_Local: Integer;
@@ -6469,6 +6474,35 @@ begin
       DBEdit163.Text := vCod_CBenef;
     FreeAndNil(frmSel_CBenef);
   end;
+end;
+
+procedure TfrmCadProduto.Excel1Click(Sender: TObject);
+begin
+  prc_CriaExcel(SMDBGrid1.DataSource);
+end;
+
+procedure TfrmCadProduto.prc_CriaExcel(vDados: TDataSource);
+var
+  planilha: variant;
+  vTexto: string;
+begin
+  Screen.Cursor := crHourGlass;
+  vDados.DataSet.First;
+
+  planilha := CreateOleObject('Excel.Application');
+  planilha.WorkBooks.add(1);
+  planilha.caption := 'Exportando dados do tela para o Excel';
+  planilha.visible := true;
+
+  prc_Preencher_Excel2(planilha, vDados, SMDBGrid1);
+
+  planilha.columns.Autofit;
+  vTexto := ExtractFilePath(Application.ExeName);
+
+  vTexto := vTexto + Name + '_' + RzPageControl1.ActivePage.Caption;
+
+  Planilha.ActiveWorkBook.SaveAs(vTexto);
+  Screen.Cursor := crDefault;
 end;
 
 end.
