@@ -1040,7 +1040,6 @@ object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
         TabOrder = 6
         ValueChecked = 'S'
         ValueUnchecked = 'N'
-        Visible = False
       end
     end
     object gbxDesconto: TRzGroupBox
