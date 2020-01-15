@@ -1,6 +1,6 @@
 object fRelFinanceiro_Ger: TfRelFinanceiro_Ger
-  Left = 20
-  Top = 130
+  Left = 176
+  Top = 79
   Width = 848
   Height = 573
   Caption = 'fRelFinanceiro_Ger'

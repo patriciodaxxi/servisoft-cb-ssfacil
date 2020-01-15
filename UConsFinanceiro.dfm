@@ -18,7 +18,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 962
+    Width = 970
     Height = 63
     Align = alTop
     Color = clSilver
@@ -277,8 +277,8 @@ object frmConsFinanceiro: TfrmConsFinanceiro
   object RzPageControl2: TRzPageControl
     Left = 0
     Top = 63
-    Width = 962
-    Height = 617
+    Width = 970
+    Height = 624
     ActivePage = TS_Saldo
     ActivePageDefault = TS_Saldo
     Align = alClient
@@ -293,12 +293,12 @@ object frmConsFinanceiro: TfrmConsFinanceiro
     object TS_Saldo: TRzTabSheet
       Caption = 'Consulta'
       DesignSize = (
-        958
-        594)
+        966
+        601)
       object Panel2: TPanel
         Left = 0
-        Top = 554
-        Width = 958
+        Top = 561
+        Width = 966
         Height = 40
         Align = alBottom
         Color = 12713983
@@ -588,10 +588,10 @@ object frmConsFinanceiro: TfrmConsFinanceiro
         end
       end
       object Panel3: TPanel
-        Left = 532
+        Left = 540
         Top = 0
         Width = 426
-        Height = 554
+        Height = 561
         Align = alRight
         Anchors = [akLeft, akTop, akRight, akBottom]
         TabOrder = 3
@@ -682,7 +682,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
         end
         object RzGroupBox3: TRzGroupBox
           Left = 1
-          Top = 416
+          Top = 423
           Width = 424
           Height = 137
           Align = alBottom
@@ -771,8 +771,8 @@ object frmConsFinanceiro: TfrmConsFinanceiro
       object SMDBGrid5: TSMDBGrid
         Left = 0
         Top = 73
-        Width = 958
-        Height = 521
+        Width = 966
+        Height = 528
         Align = alClient
         Ctl3D = False
         DataSource = DMCadFinanceiro.dsFinAgrupado
@@ -850,7 +850,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 958
+        Width = 966
         Height = 73
         Align = alTop
         TabOrder = 1

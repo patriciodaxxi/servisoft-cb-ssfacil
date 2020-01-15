@@ -7021,7 +7021,7 @@ object frmCadPedido: TfrmCadPedido
   end
   object PopupMenu1: TPopupMenu
     Left = 1000
-    Top = 93
+    Top = 94
     object Pedido1: TMenuItem
       Caption = 'Pedido'
       object Normal1: TMenuItem

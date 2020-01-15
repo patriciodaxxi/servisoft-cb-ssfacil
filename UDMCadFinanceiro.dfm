@@ -506,7 +506,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
   end
   object dsFinanceiro: TDataSource
     DataSet = cdsFinanceiro
-    Left = 128
+    Left = 127
     Top = 24
   end
   object sdsSaldo: TSQLDataSet
@@ -935,8 +935,9 @@ object DMCadFinanceiro: TDMCadFinanceiro
       '.nome nome_formapagamento'#13#10'FROM FINANCEIRO FI'#13#10'INNER JOIN CONTAS' +
       ' C'#13#10'ON FI.id_conta = C.id'#13#10'LEFT JOIN TIPOCOBRANCA TC'#13#10'on fi.id_f' +
       'orma_pagamento = tc.id'#13#10'WHERE FI.DTMOVIMENTO >= :DTINICIAL'#13#10'AND ' +
-      'FI.DTMOVIMENTO <= :DTFINAL'#13#10'AND FI.FILIAL = :FILIAL'#13#10'GROUP BY FI' +
-      '.id_conta, FI.id_forma_pagamento, C.nome, tc.nome'
+      'FI.DTMOVIMENTO <= :DTFINAL'#13#10'AND (FI.FILIAL = :FILIAL or :FILIAL ' +
+      '= 0)'#13#10'GROUP BY FI.id_conta, FI.id_forma_pagamento, C.nome, tc.no' +
+      'me'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -953,10 +954,15 @@ object DMCadFinanceiro: TDMCadFinanceiro
         DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 224
-    Top = 216
+    Top = 215
   end
   object dspFechamento: TDataSetProvider
     DataSet = sdsFechamento
@@ -967,8 +973,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
     Aggregates = <>
     Params = <>
     ProviderName = 'dspFechamento'
-    Left = 288
-    Top = 216
+    Left = 289
+    Top = 217
     object cdsFechamentoID_CONTA: TIntegerField
       FieldName = 'ID_CONTA'
     end
@@ -1053,14 +1059,19 @@ object DMCadFinanceiro: TDMCadFinanceiro
     GetMetadata = False
     CommandText = 
       'SELECT M.TIPO_ES, M.TIPO_CONDICAO, SUM(M.VLR_DUPLICATA) VLR_DUPL' +
-      'ICATA, M.TIPO_REG, M.ID_NOTAFISCAL'#13#10'FROM MOVIMENTO M'#13#10'WHERE M.FI' +
-      'LIAL = :FILIAL'#13#10'  AND M.dtentradasaida >= :DTINICIAL'#13#10'  AND M.dt' +
-      'entradasaida <= :DTFINAL'#13#10'  AND M.denegada = '#39'N'#39#13#10'  AND M.cancel' +
-      'ado = '#39'N'#39#13#10'  AND M.vlr_duplicata > 0'#13#10'  AND M.tipo_condicao <> '#39 +
-      'N'#39#13#10'GROUP BY M.TIPO_ES, M.TIPO_CONDICAO, M.TIPO_REG, M.ID_NOTAFI' +
-      'SCAL'
+      'ICATA, M.TIPO_REG, M.ID_NOTAFISCAL'#13#10'FROM MOVIMENTO M'#13#10'WHERE (M.F' +
+      'ILIAL = :FILIAL or :FILIAL = 0)'#13#10'  AND M.dtentradasaida >= :DTIN' +
+      'ICIAL'#13#10'  AND M.dtentradasaida <= :DTFINAL'#13#10'  AND M.denegada = '#39'N' +
+      #39#13#10'  AND M.cancelado = '#39'N'#39#13#10'  AND M.vlr_duplicata > 0'#13#10'  AND M.t' +
+      'ipo_condicao <> '#39'N'#39#13#10'GROUP BY M.TIPO_ES, M.TIPO_CONDICAO, M.TIPO' +
+      '_REG, M.ID_NOTAFISCAL'
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'
@@ -1237,10 +1248,16 @@ object DMCadFinanceiro: TDMCadFinanceiro
     GetMetadata = False
     CommandText = 
       'SELECT SUM(V.VLR_TOTAL) VLR_TOTAL'#13#10'FROM VPEDIDO_ITEM V'#13#10'WHERE V.' +
-      'QTD > 0'#13#10'  AND V.TIPO_REG = '#39'P'#39#13#10'  AND FILIAL = :FILIAL'#13#10'  AND D' +
-      'TEMISSAO >= :DTINICIAL'#13#10'  AND DTEMISSAO <= :DTFINAL'#13#10
+      'QTD > 0'#13#10'  AND V.TIPO_REG = '#39'P'#39#13#10'  AND (FILIAL = :FILIAL or :FIL' +
+      'IAL = 0) '#13#10'  AND DTEMISSAO >= :DTINICIAL'#13#10'  AND DTEMISSAO <= :DT' +
+      'FINAL'#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'
@@ -1257,7 +1274,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 32
+    Left = 33
     Top = 72
   end
   object dspPedido_Emi: TDataSetProvider
@@ -1288,11 +1305,11 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'SELECT SUM(V.VLR_RESTANTE) VLR_RESTANTE,'#13#10'  (SELECT SUM(VR.VLR_R' +
       'ESTANTE)'#13#10'    FROM VPEDIDO_ITEM VR'#13#10'     WHERE VR.QTD > 0'#13#10'     ' +
       ' AND VR.TIPO_REG = '#39'P'#39#13#10'      AND VR.QTD_RESTANTE > 0'#13#10'      AND' +
-      ' VR.FILIAL = :FILIAL'#13#10'      AND VR.DTENTREGA_ITEM < :DTINICIAL) ' +
-      'VLR_RESTANTE_ATRAZADO'#13#10'FROM VPEDIDO_ITEM V'#13#10'WHERE V.QTD > 0'#13#10'  A' +
-      'ND V.TIPO_REG = '#39'P'#39#13#10'  AND V.QTD_RESTANTE > 0'#13#10'  AND FILIAL = :F' +
-      'ILIAL'#13#10'  AND DTEMISSAO >= :DTINICIAL'#13#10'  AND DTEMISSAO <= :DTFINA' +
-      'L'
+      ' (VR.FILIAL = :FILIAL or :FILIAL = 0)'#13#10'      AND VR.DTENTREGA_IT' +
+      'EM < :DTINICIAL) VLR_RESTANTE_ATRAZADO'#13#10'FROM VPEDIDO_ITEM V'#13#10'WHE' +
+      'RE V.QTD > 0'#13#10'  AND V.TIPO_REG = '#39'P'#39#13#10'  AND V.QTD_RESTANTE > 0'#13#10 +
+      '  AND (FILIAL = :FILIAL or :FILIAL = 0)'#13#10'  AND DTEMISSAO >= :DTI' +
+      'NICIAL'#13#10'  AND DTEMISSAO <= :DTFINAL'
     MaxBlobSize = -1
     Params = <
       item
@@ -1301,8 +1318,18 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end
       item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
         DataType = ftDate
         Name = 'DTINICIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
         ParamType = ptInput
       end
       item
@@ -1357,11 +1384,16 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'N COUNT(V.ID) '#13#10'          END AS QTD_NAO_APROVADO,'#13#10'          CA' +
       'SE'#13#10'        WHEN V.APROVADO_ORC = '#39'P'#39' THEN COUNT(V.ID) '#13#10'       ' +
       '   END AS QTD_PENDENTE'#13#10'FROM VPEDIDO_ITEM V'#13#10'WHERE V.TIPO_REG = ' +
-      #39'O'#39#13#10'       AND V.FILIAL = :FILIAL'#13#10'       AND V.DTEMISSAO >= :D' +
-      'TINICIAL'#13#10'       AND V.DTEMISSAO <= :DTFINAL'#13#10'group by APROVADO_' +
-      'ORC'
+      #39'O'#39#13#10'       AND (V.FILIAL = :FILIAL or :FILIAL = 0)'#13#10'       AND ' +
+      'V.DTEMISSAO >= :DTINICIAL'#13#10'       AND V.DTEMISSAO <= :DTFINAL'#13#10'g' +
+      'roup by APROVADO_ORC'#13#10#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'
@@ -1417,13 +1449,19 @@ object DMCadFinanceiro: TDMCadFinanceiro
     CommandText = 
       'SELECT sum(I.vlr_total) VLR_TOTAL,'#13#10'  (SELECT sum(I.vlr_total)'#13#10 +
       '    FROM VALE V'#13#10'    INNER JOIN VALE_ITENS I'#13#10'    ON V.id = I.id' +
-      #13#10'    WHERE I.FATURADO = '#39'N'#39#13#10'      AND V.FILIAL = :FILIAL'#13#10'    ' +
-      '  AND V.DTEMISSAO >= :DTINICIAL'#13#10'      AND V.DTEMISSAO <= :DTFIN' +
-      'AL ) VLR_PENDENTE'#13#10'FROM VALE V'#13#10'INNER JOIN VALE_ITENS I'#13#10'ON V.id' +
-      ' = I.id'#13#10'WHERE V.FILIAL = :FILIAL'#13#10'       AND V.DTEMISSAO >= :DT' +
-      'INICIAL'#13#10'       AND V.DTEMISSAO <= :DTFINAL'
+      #13#10'    WHERE I.FATURADO = '#39'N'#39#13#10'      AND (V.FILIAL = :FILIAL or :' +
+      'FILIAL = 0)'#13#10'      AND V.DTEMISSAO >= :DTINICIAL'#13#10'      AND V.DT' +
+      'EMISSAO <= :DTFINAL ) VLR_PENDENTE'#13#10'FROM VALE V'#13#10'INNER JOIN VALE' +
+      '_ITENS I'#13#10'ON V.id = I.id'#13#10'WHERE (V.FILIAL = :FILIAL or :FILIAL =' +
+      ' 0)'#13#10'       AND V.DTEMISSAO >= :DTINICIAL'#13#10'       AND V.DTEMISSA' +
+      'O <= :DTFINAL'
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'
@@ -1437,6 +1475,11 @@ object DMCadFinanceiro: TDMCadFinanceiro
       item
         DataType = ftDate
         Name = 'DTFINAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
         ParamType = ptInput
       end
       item
@@ -1455,7 +1498,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 32
+    Left = 33
     Top = 218
   end
   object dspVale: TDataSetProvider
@@ -1486,11 +1529,16 @@ object DMCadFinanceiro: TDMCadFinanceiro
     GetMetadata = False
     CommandText = 
       'SELECT SUM(D.VLR_RESTANTE) VLR_RESTANTE, D.TIPO_ES, D.tipo_mov'#13#10 +
-      'FROM DUPLICATA D'#13#10'WHERE D.FILIAL = :FILIAL'#13#10'  AND D.dtvencimento' +
-      ' >= :DTINICIAL'#13#10'  AND D.dtvencimento <= :DTFINAL'#13#10'  AND D.vlr_re' +
-      'stante > 0'#13#10'GROUP BY D.TIPO_ES, D.TIPO_MOV'#13#10
+      'FROM DUPLICATA D'#13#10'WHERE (D.FILIAL = :FILIAL or :FILIAL = 0)'#13#10'  A' +
+      'ND D.dtvencimento >= :DTINICIAL'#13#10'  AND D.dtvencimento <= :DTFINA' +
+      'L'#13#10'  AND D.vlr_restante > 0'#13#10'GROUP BY D.TIPO_ES, D.TIPO_MOV'#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'
@@ -1556,6 +1604,11 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end
       item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
         DataType = ftDate
         Name = 'DTINICIAL'
         ParamType = ptInput
@@ -1568,7 +1621,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
     SQL.Strings = (
       'SELECT COUNT(N.CANCELADA) CONTADOR'
       'FROM NOTAFISCAL N'
-      'WHERE N.FILIAL = :FILIAL'
+      'WHERE (N.FILIAL = :FILIAL or :FILIAL = 0)'
       '  AND N.DTEMISSAO >= :DTINICIAL'
       '  AND N.DTEMISSAO <= :DTFINAL'
       '  AND N.CANCELADA = '#39'S'#39
@@ -1590,6 +1643,11 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end
       item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
         DataType = ftDate
         Name = 'DTINICIAL'
         ParamType = ptInput
@@ -1604,14 +1662,15 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'FROM NOTAFISCAL_NFE NFE'
       'INNER JOIN NOTAFISCAL N'
       'ON NFE.ID = N.ID'
-      'WHERE N.FILIAL = :FILIAL'
+      'WHERE (N.FILIAL = :FILIAL or :FILIAL = 0)'
       '  AND NFE.DTCADASTRO >= :DTINICIAL'
       '  AND NFE.DTCADASTRO <= :DTFINAL'
       '  AND N.TIPO_REG = '#39'NTS'#39
-      '  and NFE.TIPO = '#39'CCE'#39)
+      '  and NFE.TIPO = '#39'CCE'#39
+      '')
     SQLConnection = dmDatabase.scoDados
     Left = 752
-    Top = 80
+    Top = 81
     object qNotaFiscal_CCECONTADOR: TIntegerField
       FieldName = 'CONTADOR'
       Required = True
@@ -1731,12 +1790,12 @@ object DMCadFinanceiro: TDMCadFinanceiro
       'SELECT FIN.DTMOVIMENTO, SUM(VLR_SAIDA) SAIDA, SUM(VLR_ENTRADA) E' +
       'NTRADA, COB.NOME, 2 AS FLAG'#13#10'FROM FINANCEIRO FIN'#13#10'LEFT JOIN TIPO' +
       'COBRANCA COB ON (FIN.ID_FORMA_PAGAMENTO = COB.ID)'#13#10'WHERE DTMOVIM' +
-      'ENTO BETWEEN :D1 AND :D2 AND FILIAL = :FIL'#13#10'GROUP BY FIN.DTMOVIM' +
-      'ENTO, COB.NOME'#13#10#13#10'UNION ALL'#13#10#13#10'SELECT DISTINCT FIN.DTMOVIMENTO, ' +
-      '0 AS VLR_SAIDA, 0 AS VLR_ENTRADA, '#39#39' AS NOME, 1 AS FLAG'#13#10'FROM FI' +
-      'NANCEIRO FIN'#13#10'LEFT JOIN TIPOCOBRANCA COB ON (FIN.ID_FORMA_PAGAME' +
-      'NTO = COB.ID)'#13#10'WHERE DTMOVIMENTO BETWEEN :D1 AND :D2 AND FILIAL ' +
-      '= :FIL'
+      'ENTO BETWEEN :D1 AND :D2 AND (FILIAL = :FIL or :FIL = 0)'#13#10'GROUP ' +
+      'BY FIN.DTMOVIMENTO, COB.NOME'#13#10#13#10'UNION ALL'#13#10#13#10'SELECT DISTINCT FIN' +
+      '.DTMOVIMENTO, 0 AS VLR_SAIDA, 0 AS VLR_ENTRADA, '#39#39' AS NOME, 1 AS' +
+      ' FLAG'#13#10'FROM FINANCEIRO FIN'#13#10'LEFT JOIN TIPOCOBRANCA COB ON (FIN.I' +
+      'D_FORMA_PAGAMENTO = COB.ID)'#13#10'WHERE DTMOVIMENTO BETWEEN :D1 AND :' +
+      'D2 AND (FILIAL = :FIL or :FIL = 0)'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -1755,6 +1814,11 @@ object DMCadFinanceiro: TDMCadFinanceiro
         ParamType = ptInput
       end
       item
+        DataType = ftInteger
+        Name = 'FIL'
+        ParamType = ptInput
+      end
+      item
         DataType = ftDate
         Name = 'D1'
         ParamType = ptInput
@@ -1762,6 +1826,11 @@ object DMCadFinanceiro: TDMCadFinanceiro
       item
         DataType = ftDate
         Name = 'D2'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FIL'
         ParamType = ptInput
       end
       item
@@ -1784,8 +1853,8 @@ object DMCadFinanceiro: TDMCadFinanceiro
     Params = <>
     ProviderName = 'dspFinAgrupado'
     OnCalcFields = cdsFinAgrupadoCalcFields
-    Left = 96
-    Top = 464
+    Left = 93
+    Top = 462
     object cdsFinAgrupadoDTMOVIMENTO: TDateField
       FieldName = 'DTMOVIMENTO'
     end
@@ -1941,10 +2010,16 @@ object DMCadFinanceiro: TDMCadFinanceiro
     GetMetadata = False
     CommandText = 
       'SELECT SUM(V.VLR_TOTAL) VLR_TOTAL'#13#10'FROM VPEDIDO_ITEM V'#13#10'WHERE V.' +
-      'QTD > 0'#13#10'  AND V.TIPO_REG = '#39'C'#39#13#10'  AND FILIAL = :FILIAL'#13#10'  AND D' +
-      'TEMISSAO >= :DTINICIAL'#13#10'  AND DTEMISSAO <= :DTFINAL'#13#10
+      'QTD > 0'#13#10'  AND V.TIPO_REG = '#39'C'#39#13#10'  AND (FILIAL = :FILIAL or :FIL' +
+      'IAL = 0)'#13#10'  AND DTEMISSAO >= :DTINICIAL'#13#10'  AND DTEMISSAO <= :DTF' +
+      'INAL'#13#10
     MaxBlobSize = -1
     Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'FILIAL'

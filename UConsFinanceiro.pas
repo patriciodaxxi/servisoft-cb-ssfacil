@@ -109,12 +109,6 @@ end;
 
 procedure TfrmConsFinanceiro.btnConsultarClick(Sender: TObject);
 begin
-  if trim(RxDBLookupCombo1.Text) = '' then
-  begin
-    MessageDlg('*** Filial não informada', mtError, [mbOk], 0);
-    RxDBLookupCombo1.SetFocus;
-    Exit;
-  end;
   if (DateEdit1.Date <= 10) or (DateEdit2.Date <= 10) then
   begin
     MessageDlg('*** Data Inicial ou Final não informada!', mtError, [mbOk], 0);
@@ -146,7 +140,10 @@ begin
   fDMCadFinanceiro.cdsFechamento.Close;
   fDMCadFinanceiro.sdsFechamento.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.sdsFechamento.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.sdsFechamento.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsFechamento.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsFechamento.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.cdsFechamento.Open;
 
   prc_Limpa_Memo;
@@ -224,7 +221,10 @@ begin
   fDMCadFinanceiro.cdsMovimento.Close;
   fDMCadFinanceiro.sdsMovimento.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.sdsMovimento.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.sdsMovimento.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsMovimento.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsMovimento.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.cdsMovimento.Open;
 
   fDMCadFinanceiro.cdsMovimento.First;
@@ -369,7 +369,10 @@ begin
   fDMCadFinanceiro.cdsPedido_Emi.Close;
   fDMCadFinanceiro.sdsPedido_Emi.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.sdsPedido_Emi.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.sdsPedido_Emi.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsPedido_Emi.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsPedido_Emi.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.cdsPedido_Emi.Open;
 
   fDMCadFinanceiro.cdsPedido_Emi.First;
@@ -385,7 +388,10 @@ begin
   fDMCadFinanceiro.cdsPedido_Pend.Close;
   fDMCadFinanceiro.sdsPedido_Pend.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.sdsPedido_Pend.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.sdsPedido_Pend.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsPedido_Pend.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsPedido_Pend.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.cdsPedido_Pend.Open;
 
   fDMCadFinanceiro.cdsPedido_Pend.First;
@@ -405,7 +411,10 @@ begin
   fDMCadFinanceiro.cdsOrcamento.Close;
   fDMCadFinanceiro.sdsOrcamento.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.sdsOrcamento.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.sdsOrcamento.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsOrcamento.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsOrcamento.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.cdsOrcamento.Open;
 
   vQtdTotal := 0;
@@ -435,7 +444,10 @@ begin
   fDMCadFinanceiro.cdsVale.Close;
   fDMCadFinanceiro.sdsVale.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.sdsVale.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.sdsVale.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsVale.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsVale.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.cdsVale.Open;
 
   fDMCadFinanceiro.cdsVale.First;
@@ -457,7 +469,10 @@ begin
   fDMCadFinanceiro.cdsDuplicata.Close;
   fDMCadFinanceiro.sdsDuplicata.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.sdsDuplicata.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.sdsDuplicata.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsDuplicata.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsDuplicata.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.cdsDuplicata.Open;
 
   fDMCadFinanceiro.mDupAuxiliar.EmptyDataSet;
@@ -498,7 +513,10 @@ begin
   fDMCadFinanceiro.qNotaFiscal_Canc.Close;
   fDMCadFinanceiro.qNotaFiscal_Canc.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.qNotaFiscal_Canc.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.qNotaFiscal_Canc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.qNotaFiscal_Canc.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.qNotaFiscal_Canc.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.qNotaFiscal_Canc.Open;
   if (fDMCadFinanceiro.qNotaFiscal_Canc.IsEmpty) or (fDMCadFinanceiro.qNotaFiscal_CancCONTADOR.AsInteger <= 0) then
     exit;
@@ -510,7 +528,10 @@ begin
   fDMCadFinanceiro.qNotaFiscal_CCE.Close;
   fDMCadFinanceiro.qNotaFiscal_CCE.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.qNotaFiscal_CCE.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.qNotaFiscal_CCE.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.qNotaFiscal_CCE.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.qNotaFiscal_CCE.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.qNotaFiscal_CCE.Open;
   if (fDMCadFinanceiro.qNotaFiscal_CCE.IsEmpty) or (fDMCadFinanceiro.qNotaFiscal_CCECONTADOR.AsInteger <= 0) then
     exit;
@@ -542,7 +563,10 @@ begin
   fDMCadFinanceiro.cdsFinAgrupado.Close;
   fDMCadFinanceiro.sdsFinAgrupado.ParamByName('D1').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.sdsFinAgrupado.ParamByName('D2').AsDate := DateEdit2.Date;
-  fDMCadFinanceiro.sdsFinAgrupado.ParamByName('FIL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsFinAgrupado.ParamByName('FIL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsFinAgrupado.ParamByName('FIL').AsInteger := 0;
   fDMCadFinanceiro.cdsFinAgrupado.IndexFieldNames := 'DTMOVIMENTO;FLAG;NOME';
   fDMCadFinanceiro.cdsFinAgrupado.Open;
 end;
@@ -587,7 +611,10 @@ begin
   fDMCadFinanceiro.cdsOC_Emi.Close;
   fDMCadFinanceiro.sdsOC_Emi.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
   fDMCadFinanceiro.sdsOC_Emi.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  fDMCadFinanceiro.sdsOC_Emi.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsOC_Emi.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsOC_Emi.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.cdsOC_Emi.Open;
 
   fDMCadFinanceiro.cdsOC_Emi.First;
