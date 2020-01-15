@@ -845,9 +845,9 @@ object frmConsFat: TfrmConsFat
       Top = 1
       Width = 1030
       Height = 512
-      ActivePage = ts_Cliente
+      ActivePage = ts_Geral
       Align = alClient
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 0
       FixedDimension = 19
       object ts_Geral: TRzTabSheet
@@ -1190,6 +1190,7 @@ object frmConsFat: TfrmConsFat
               Expanded = False
               FieldName = 'VLR_DUPLICATA'
               Title.Caption = 'Valor Duplicata'
+              Width = 64
               Visible = True
             end
             item
@@ -1449,6 +1450,7 @@ object frmConsFat: TfrmConsFat
               Expanded = False
               FieldName = 'VLR_DESCONTO'
               Title.Caption = 'Valor Desconto'
+              Width = 64
               Visible = True
             end
             item

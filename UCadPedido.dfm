@@ -7152,6 +7152,13 @@ object frmCadPedido: TfrmCadPedido
       Caption = 'Carn'#234' de Pagamento'
       OnClick = CarndePagamento1Click
     end
+    object N4: TMenuItem
+      Caption = '-'
+    end
+    object ImprimiraListaemExcel1: TMenuItem
+      Caption = 'Imprimir a Lista em Excel'
+      OnClick = ImprimiraListaemExcel1Click
+    end
   end
   object PopupMenu3: TPopupMenu
     Left = 866

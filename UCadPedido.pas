@@ -9,7 +9,7 @@ uses
   DateUtils, dbXPress, NxCollection, Menus, Variants, USel_TabPreco, ULeExcel, NxEdit, VarUtils, UEtiq_Individual, Provider,
   UCadPedido_Ace, UGerar_Rotulos, UGerar_Rotulos_Color, DBClient, UCadPedido_Itens_Copia, UConsOrdProd_Ped, UConsHist_Chapa,
   UDMSel_Produto, uCadObs_Aux, UCadPedido_ItensRed,classe.validaemail, frxExportPDF, frxExportMail, UMontaPed_TipoItem,
-  uMostraPDF;
+  uMostraPDF, ComObj;
 
 type
   TfrmCadPedido = class(TForm)
@@ -366,6 +366,8 @@ type
     Label87: TLabel;
     RxDBLookupCombo14: TRxDBLookupCombo;
     SpeedButton9: TSpeedButton;
+    N4: TMenuItem;
+    ImprimiraListaemExcel1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
@@ -491,6 +493,7 @@ type
     procedure SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure SpeedButton9Click(Sender: TObject);
+    procedure ImprimiraListaemExcel1Click(Sender: TObject);
   private
     { Private declarations }
     fLista: TStringList;
@@ -551,6 +554,9 @@ type
     function fnc_Lote: Boolean;
     function fnc_Existe_Baixa(ID, Item: Integer): Boolean;
     procedure prc_Excluir_Grade(vItemOrig: Integer);
+
+    procedure prc_CriaExcel(vDados: TDataSource);
+    
   public
     { Public declarations }
     vQtd_Caixa: Integer;
@@ -4784,6 +4790,35 @@ begin
     if fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger > 0 then
       fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
   end;
+end;
+
+procedure TfrmCadPedido.ImprimiraListaemExcel1Click(Sender: TObject);
+begin
+  prc_CriaExcel(SMDBGrid1.DataSource);
+end;
+
+procedure TfrmCadPedido.prc_CriaExcel(vDados: TDataSource);
+var
+  planilha: variant;
+  vTexto: string;
+begin
+  Screen.Cursor := crHourGlass;
+  vDados.DataSet.First;
+
+  planilha := CreateOleObject('Excel.Application');
+  planilha.WorkBooks.add(1);
+  planilha.caption := 'Exportando dados do tela para o Excel';
+  planilha.visible := true;
+
+  prc_Preencher_Excel2(planilha, vDados, SMDBGrid1);
+
+  planilha.columns.Autofit;
+  vTexto := ExtractFilePath(Application.ExeName);
+
+  vTexto := vTexto + Name + '_' + RzPageControl1.ActivePage.Caption;
+
+  Planilha.ActiveWorkBook.SaveAs(vTexto);
+  Screen.Cursor := crDefault;
 end;
 
 end.
