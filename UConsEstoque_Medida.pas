@@ -21,7 +21,7 @@ type
     DateEdit2: TDateEdit;
     btnConsultar: TNxButton;
     btnImprimir: TNxButton;
-    RadioGroup2: TRadioGroup;
+    rgTipo: TRadioGroup;
     Label5: TLabel;
     Edit1: TEdit;
     RzPageControl1: TRzPageControl;
@@ -175,11 +175,12 @@ begin
     vComando := vComando + ' AND EM.DTMOVIMENTO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.date));
   if trim(Edit1.Text) <> '' then
     vComando := vComando + ' AND EM.NUM_LOTE_CONTROLE = ' + QuotedStr(Edit1.Text);
-  case RadioGroup2.ItemIndex of
+  case rgTipo.ItemIndex of
     0: vComando := vComando + ' AND PROD.TIPO_REG = ' + QuotedStr('P');
     1: vComando := vComando + ' AND PROD.TIPO_REG = ' + QuotedStr('M');
     2: vComando := vComando + ' AND PROD.TIPO_REG = ' + QuotedStr('C');
     3: vComando := vComando + ' AND PROD.TIPO_REG = ' + QuotedStr('S');
+    4: vComando := vComando + ' AND PROD.TIPO_REG = ' + QuotedStr('I');
   end;
 end;
 

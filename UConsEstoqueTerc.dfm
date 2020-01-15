@@ -318,13 +318,13 @@ object frmConsEstoqueTerc: TfrmConsEstoqueTerc
         Top = 0
         Width = 916
         Height = 336
-        ActivePage = TS_DeTerceiro_Det
+        ActivePage = TS_DeTerceiro_Cli
         ActivePageDefault = TS_DeTerceiro_Det
         Align = alClient
         Color = 11776768
         ParentColor = False
         ShowShadow = False
-        TabIndex = 0
+        TabIndex = 1
         TabOrder = 0
         TabOrientation = toBottom
         FixedDimension = 19

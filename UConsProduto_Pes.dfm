@@ -129,6 +129,7 @@ object frmConsProduto_Pes: TfrmConsProduto_Pes
         Title.Alignment = taCenter
         Title.Caption = 'Unid.'
         Title.Color = 16768443
+        Width = 64
         Visible = True
       end
       item
@@ -145,6 +146,7 @@ object frmConsProduto_Pes: TfrmConsProduto_Pes
         Title.Alignment = taCenter
         Title.Caption = 'Vista/Prazo'
         Title.Color = 16768443
+        Width = 64
         Visible = True
       end
       item
@@ -153,6 +155,7 @@ object frmConsProduto_Pes: TfrmConsProduto_Pes
         Title.Alignment = taCenter
         Title.Caption = 'Cond. Pgto'
         Title.Color = 16768443
+        Width = 64
         Visible = True
       end
       item

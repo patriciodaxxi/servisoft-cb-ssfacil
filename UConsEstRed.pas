@@ -10,7 +10,7 @@ uses
 type
   TfrmConsEstRed = class(TForm)
     Panel1: TPanel;
-    RadioGroup2: TRadioGroup;
+    rgTipo: TRadioGroup;
     btnConsultar: TNxButton;
     Label1: TLabel;
     CurrencyEdit1: TCurrencyEdit;
@@ -120,11 +120,12 @@ begin
       vComando := vComando + ' and P.REFERENCIA LIKE ' + QuotedStr('%'+Edit2.Text+'%');
     if Trim(Edit1.Text) <> '' then
       vComando := vComando + ' and P.NOME LIKE ' + QuotedStr('%'+Edit1.Text+'%');
-    case RadioGroup2.ItemIndex of
+    case rgTipo.ItemIndex of
       0 : vComando := vComando + ' and P.TIPO_REG = ' + QuotedStr('P');
       1 : vComando := vComando + ' and P.TIPO_REG = ' + QuotedStr('M');
       2 : vComando := vComando + ' and P.TIPO_REG = ' + QuotedStr('C');
       3 : vComando := vComando + ' and P.TIPO_REG = ' + QuotedStr('S');
+      4 : vComando := vComando + ' and P.TIPO_REG = ' + QuotedStr('I');
     end;
   end;
   if Trim(Edit3.Text) <> '' then

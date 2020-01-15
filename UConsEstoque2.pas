@@ -16,7 +16,7 @@ type
     Label2: TLabel;
     RxDBLookupCombo1: TRxDBLookupCombo;
     RadioGroup1: TRadioGroup;
-    RadioGroup2: TRadioGroup;
+    rgTipo: TRadioGroup;
     CheckBox1: TCheckBox;
     btnConsultar: TNxButton;
     Label5: TLabel;
@@ -29,7 +29,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
-    procedure RadioGroup2Click(Sender: TObject);
+    procedure rgTipoClick(Sender: TObject);
     procedure edtRefKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
@@ -90,11 +90,12 @@ begin
   else
     fDMConsEstoque.sdsEstoque2.ParamByName('ID_LOCAL_ESTOQUE').AsInteger := 0;
 
-  case RadioGroup2.ItemIndex of
+  case rgTipo.ItemIndex of
     0: fDMConsEstoque.sdsEstoque2.ParamByName('TIPO_REG').AsString := 'P';
     1: fDMConsEstoque.sdsEstoque2.ParamByName('TIPO_REG').AsString := 'M';
     2: fDMConsEstoque.sdsEstoque2.ParamByName('TIPO_REG').AsString := 'C';
     3: fDMConsEstoque.sdsEstoque2.ParamByName('TIPO_REG').AsString := 'S';
+    4: fDMConsEstoque.sdsEstoque2.ParamByName('TIPO_REG').AsString := 'I';
   end;
   fDMConsEstoque.cdsEstoque2.Open;
 end;
@@ -134,7 +135,7 @@ begin
       SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
-procedure TfrmConsEstoque2.RadioGroup2Click(Sender: TObject);
+procedure TfrmConsEstoque2.rgTipoClick(Sender: TObject);
 var
   i: Integer;
   vColunaAux: String;
@@ -216,11 +217,12 @@ begin
     2: fDMConsEstoque.vDescOpcao_Rel := fDMConsEstoque.vDescOpcao_Rel + '(Estoque Mínimo)';
   end;
   fDMConsEstoque.vOpcao_ProdMat := '';
-  case RadioGroup2.ItemIndex of
+  case rgTipo.ItemIndex of
     0: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'PRODUTO';
     1: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'MATERIAL';
     2: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'MATERIAL DE CONSUMO';
     3: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'SEMI ACABADO';
+    4: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'IMOBILIZADO';
   end;
 end;
 
@@ -256,11 +258,12 @@ var
 begin
   if (Key = Vk_F6) and not(fDMConsEstoque.cdsEstoque2.IsEmpty) then
   begin
-    case RadioGroup2.ItemIndex of
+    case rgTipo.ItemIndex of
       0: vTipoReg := 'P';
       1: vTipoReg := 'M';
       2: vTipoReg := 'C';
       3: vTipoReg := 'S';
+      4: vTipoReg := 'I';
     end;
     vId := fDMConsEstoque.cdsEstoque2ID.AsInteger;
     vIndexName  := fDMConsEstoque.cdsEstoque2.IndexFieldNames;

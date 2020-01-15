@@ -20,7 +20,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
   TextHeight = 13
   object Panel2: TPanel
     Left = 0
-    Top = 100
+    Top = 106
     Width = 926
     Height = 31
     Align = alTop
@@ -44,7 +44,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
     Left = 0
     Top = 0
     Width = 926
-    Height = 100
+    Height = 106
     Align = alTop
     Color = clSilver
     TabOrder = 1
@@ -93,7 +93,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
       Left = 1
       Top = 1
       Width = 96
-      Height = 98
+      Height = 104
       Align = alLeft
       Caption = ' Op'#231#227'o '
       ItemIndex = 3
@@ -104,11 +104,11 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         'Ambos')
       TabOrder = 4
     end
-    object RadioGroup2: TRadioGroup
+    object rgTipo: TRadioGroup
       Left = 97
       Top = 1
       Width = 120
-      Height = 98
+      Height = 104
       Align = alLeft
       Caption = ' Tipo '
       ItemIndex = 0
@@ -116,7 +116,8 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         'Produto'
         'Material'
         'Material Consumo'
-        'Semi Acabado')
+        'Semi Acabado'
+        'Imobilizado')
       TabOrder = 5
     end
     object btnConsultar: TNxButton
@@ -277,9 +278,9 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
   end
   object RzPageControl1: TRzPageControl
     Left = 0
-    Top = 131
+    Top = 137
     Width = 926
-    Height = 386
+    Height = 380
     ActivePage = TS_Estoque
     ActivePageDefault = TS_Estoque
     Align = alClient
@@ -293,7 +294,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 0
         Top = 0
         Width = 922
-        Height = 363
+        Height = 357
         Align = alClient
         Ctl3D = False
         DataSource = DMConsEstoque.dsEstoque_Atual
@@ -458,7 +459,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 0
         Top = 32
         Width = 922
-        Height = 331
+        Height = 325
         ActivePage = TS_DeTerceiros_Prod
         Align = alClient
         TabIndex = 0
@@ -470,7 +471,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Left = 0
             Top = 0
             Width = 918
-            Height = 308
+            Height = 302
             Align = alClient
             Ctl3D = False
             DataSource = DMConsEstoque.dsEstoque_De_Terc
@@ -596,7 +597,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Left = 0
             Top = 0
             Width = 918
-            Height = 308
+            Height = 302
             Align = alClient
             Ctl3D = False
             DataSource = DMConsEstoque.dsEstoque_De_Terc_Pes
@@ -803,7 +804,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 0
         Top = 32
         Width = 922
-        Height = 331
+        Height = 325
         ActivePage = TS_EmTerceiros_Prod
         Align = alClient
         TabIndex = 0
@@ -815,7 +816,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Left = 0
             Top = 0
             Width = 918
-            Height = 308
+            Height = 302
             Align = alClient
             Ctl3D = False
             DataSource = DMConsEstoque.dsEstoque_Em_Terc
@@ -935,7 +936,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
             Left = 0
             Top = 0
             Width = 918
-            Height = 308
+            Height = 302
             Align = alClient
             Ctl3D = False
             DataSource = DMConsEstoque.dsEstoque_Em_Terc_Pes
@@ -1085,7 +1086,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 0
         Top = 0
         Width = 754
-        Height = 363
+        Height = 357
         Align = alClient
         Ctl3D = False
         DataSource = DMConsEstoque.dsmNCM
@@ -1159,7 +1160,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 792
         Top = 0
         Width = 130
-        Height = 363
+        Height = 357
         Align = alRight
         Ctl3D = False
         DataSource = DMConsEstoque.dsmUnidade
@@ -1204,7 +1205,7 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
         Left = 754
         Top = 0
         Width = 38
-        Height = 363
+        Height = 357
         Align = alRight
         Color = clSilver
         TabOrder = 2

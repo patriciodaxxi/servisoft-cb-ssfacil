@@ -22,7 +22,7 @@ object frmConsEstoque_Loja: TfrmConsEstoque_Loja
     Left = 0
     Top = 0
     Width = 926
-    Height = 108
+    Height = 111
     Align = alTop
     Color = clSilver
     TabOrder = 0
@@ -94,7 +94,7 @@ object frmConsEstoque_Loja: TfrmConsEstoque_Loja
       Left = 1
       Top = 1
       Width = 96
-      Height = 106
+      Height = 109
       Align = alLeft
       Caption = ' Op'#231#227'o '
       ItemIndex = 0
@@ -105,11 +105,11 @@ object frmConsEstoque_Loja: TfrmConsEstoque_Loja
         'Ambos')
       TabOrder = 10
     end
-    object RadioGroup2: TRadioGroup
+    object rgTipo: TRadioGroup
       Left = 97
       Top = 1
       Width = 120
-      Height = 106
+      Height = 109
       Align = alLeft
       Caption = ' Tipo '
       ItemIndex = 0
@@ -117,9 +117,10 @@ object frmConsEstoque_Loja: TfrmConsEstoque_Loja
         'Produto'
         'Material'
         'Material Consumo'
-        'Semi Acabado')
+        'Semi Acabado'
+        'Imobilizado')
       TabOrder = 11
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object ckPrecoCusto: TCheckBox
       Left = 665
@@ -128,7 +129,7 @@ object frmConsEstoque_Loja: TfrmConsEstoque_Loja
       Height = 17
       Caption = 'Mostrar Pre'#231'o Custo'
       TabOrder = 6
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
       Left = 296
@@ -162,7 +163,7 @@ object frmConsEstoque_Loja: TfrmConsEstoque_Loja
       Height = 17
       Caption = 'Mostrar Produto Inativo'
       TabOrder = 8
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object btnConsultar: TNxButton
       Left = 658
@@ -254,7 +255,7 @@ object frmConsEstoque_Loja: TfrmConsEstoque_Loja
       Height = 17
       Caption = 'Mostrar Pre'#231'o Venda'
       TabOrder = 7
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object rxdbLocalEstoque: TRxDBLookupCombo
       Left = 296
@@ -271,9 +272,9 @@ object frmConsEstoque_Loja: TfrmConsEstoque_Loja
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
-    Top = 143
+    Top = 146
     Width = 926
-    Height = 375
+    Height = 372
     Align = alClient
     Ctl3D = False
     DataSource = DMConsEstoque.dsEstoque
@@ -458,7 +459,7 @@ object frmConsEstoque_Loja: TfrmConsEstoque_Loja
   end
   object Panel2: TPanel
     Left = 0
-    Top = 108
+    Top = 111
     Width = 926
     Height = 35
     Align = alTop

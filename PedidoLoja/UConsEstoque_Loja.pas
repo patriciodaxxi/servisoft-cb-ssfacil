@@ -16,7 +16,7 @@ type
     Label2: TLabel;
     RxDBLookupCombo1: TRxDBLookupCombo;
     RadioGroup1: TRadioGroup;
-    RadioGroup2: TRadioGroup;
+    rgTipo: TRadioGroup;
     ckPrecoCusto: TCheckBox;
     Label3: TLabel;
     RxDBLookupCombo2: TRxDBLookupCombo;
@@ -37,7 +37,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
-    procedure RadioGroup2Click(Sender: TObject);
+    procedure rgTipoClick(Sender: TObject);
     procedure edtRefKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure RxDBLookupCombo2Enter(Sender: TObject);
@@ -112,11 +112,12 @@ begin
                                           + ' OR (AUX.ID_LOCAL_ESTOQUE is null))';
   if RxDBLookupCombo1.Text <> '' then
     fDMConsEstoque.sdsEstoque.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue;
-  case RadioGroup2.ItemIndex of
+  case rgTipo.ItemIndex of
     0: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'P';
     1: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'M';
     2: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'C';
     3: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'S';
+    4: fDMConsEstoque.sdsEstoque.ParamByName('TIPO_REG').AsString := 'I';
   end;
   fDMConsEstoque.cdsEstoque.Open;
 end;
@@ -133,7 +134,7 @@ var
 begin
   fDMConsEstoque := TDMConsEstoque.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMConsEstoque);
-  RadioGroup2Click(Sender);
+  rgTipoClick(Sender);
   fDMConsEstoque.cdsFilial.First;
   if (fDMConsEstoque.cdsFilial.RecordCount < 2) and (fDMConsEstoque.cdsFilialID.AsInteger > 0) then
     RxDBLookupCombo1.KeyValue := fDMConsEstoque.cdsFilialID.AsInteger;
@@ -161,7 +162,7 @@ begin
       SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
-procedure TfrmConsEstoque_Loja.RadioGroup2Click(Sender: TObject);
+procedure TfrmConsEstoque_Loja.rgTipoClick(Sender: TObject);
 var
   i: Integer;
   vColunaAux: String;
@@ -170,9 +171,9 @@ begin
   for i := 1 to SMDBGrid1.ColCount - 2 do
   begin
     if (SMDBGrid1.Columns[i].FieldName = 'QTD_RESERVA') then
-      SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametros_EstUSA_RESERVA.AsString = 'S') and (RadioGroup2.ItemIndex = 1));
+      SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametros_EstUSA_RESERVA.AsString = 'S') and (rgTipo.ItemIndex = 1));
     if (SMDBGrid1.Columns[i].FieldName = 'QTD_SALDO_OC') then
-      SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametros_EstUSA_RESERVA.AsString = 'S') and (RadioGroup2.ItemIndex = 1));
+      SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametros_EstUSA_RESERVA.AsString = 'S') and (rgTipo.ItemIndex = 1));
 
     if (SMDBGrid1.Columns[i].FieldName = 'PRECO_CUSTO') OR
        (SMDBGrid1.Columns[i].FieldName = 'clTotal_Custo') then
@@ -358,11 +359,12 @@ begin
     2: fDMConsEstoque.vDescOpcao_Rel := fDMConsEstoque.vDescOpcao_Rel + '(Estoque Mínimo)';
   end;
   fDMConsEstoque.vOpcao_ProdMat := '';
-  case RadioGroup2.ItemIndex of
+  case rgTipo.ItemIndex of
     0: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'PRODUTO';
     1: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'MATERIAL';
     2: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'MATERIAL DE CONSUMO';
     3: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'SEMI ACABADO';
+    4: fDMConsEstoque.vOpcao_ProdMat := fDMConsEstoque.vOpcao_ProdMat + 'IMOBILIZADO';
   end;
 end;
 
@@ -396,11 +398,12 @@ var
 begin
   if (Key = Vk_F6) and not(fDMConsEstoque.cdsEstoque.IsEmpty) then
   begin
-    case RadioGroup2.ItemIndex of
+    case rgTipo.ItemIndex of
       0: vTipoReg := 'P';
       1: vTipoReg := 'M';
       2: vTipoReg := 'C';
       3: vTipoReg := 'S';
+      4: vTipoReg := 'I';
     end;
     ffrmConsProduto_Pes := TfrmConsProduto_Pes.Create(self);
     ffrmConsProduto_Pes.Label2.Caption := fDMConsEstoque.cdsEstoqueNOMEPRODUTO.AsString;

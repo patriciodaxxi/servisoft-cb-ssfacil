@@ -22,7 +22,7 @@ object frmConsEstRed: TfrmConsEstRed
     Left = 0
     Top = 0
     Width = 1121
-    Height = 82
+    Height = 93
     Align = alTop
     BevelOuter = bvNone
     Color = clSilver
@@ -51,11 +51,11 @@ object frmConsEstRed: TfrmConsEstRed
       Alignment = taRightJustify
       Caption = 'Cor:'
     end
-    object RadioGroup2: TRadioGroup
+    object rgTipo: TRadioGroup
       Left = 0
       Top = 0
       Width = 120
-      Height = 82
+      Height = 93
       Align = alLeft
       Caption = ' Tipo '
       Color = clSilver
@@ -64,7 +64,8 @@ object frmConsEstRed: TfrmConsEstRed
         'Produto'
         'Material'
         'Material Consumo'
-        'Semi Acabado')
+        'Semi Acabado'
+        'Imobilizado')
       ParentColor = False
       TabOrder = 5
     end
@@ -125,9 +126,9 @@ object frmConsEstRed: TfrmConsEstRed
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
-    Top = 82
+    Top = 93
     Width = 918
-    Height = 443
+    Height = 432
     Align = alClient
     Ctl3D = False
     DataSource = dsConsEst
@@ -265,9 +266,9 @@ object frmConsEstRed: TfrmConsEstRed
   end
   object Panel2: TPanel
     Left = 918
-    Top = 82
+    Top = 93
     Width = 203
-    Height = 443
+    Height = 432
     Align = alRight
     Caption = 'Panel2'
     TabOrder = 2
@@ -275,7 +276,7 @@ object frmConsEstRed: TfrmConsEstRed
       Left = 1
       Top = 33
       Width = 201
-      Height = 409
+      Height = 398
       Align = alClient
       Ctl3D = True
       DataSource = dsConsLocal

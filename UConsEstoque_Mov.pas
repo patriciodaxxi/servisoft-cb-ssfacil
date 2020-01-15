@@ -34,7 +34,7 @@ type
     Panel2: TPanel;
     Label8: TLabel;
     ComboBox1: TComboBox;
-    RadioGroup2: TRadioGroup;
+    rgTipo: TRadioGroup;
     RadioGroup1: TRadioGroup;
     rxdbGrupo: TRxDBLookupCombo;
     Label30: TLabel;
@@ -82,7 +82,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
-    procedure RadioGroup2Click(Sender: TObject);
+    procedure rgTipoClick(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
     procedure SMDBGrid2TitleClick(Column: TColumn);
     procedure btnImprimirClick(Sender: TObject);
@@ -199,7 +199,7 @@ begin
 
   SMDBGrid1.ClearFilter;
 
-  RadioGroup2Click(Sender);
+  rgTipoClick(Sender);
   fDMConsEstoque.cdsFilial.First;
   if (fDMConsEstoque.cdsFilial.RecordCount < 2) and (fDMConsEstoque.cdsFilialID.AsInteger > 0) then
     RxDBLookupCombo1.KeyValue := fDMConsEstoque.cdsFilialID.AsInteger;
@@ -226,7 +226,7 @@ begin
 
   if vControleExterno then
   begin
-    RadioGroup2.ItemIndex := 4;
+    rgTipo.ItemIndex := 5;
     if vID_Cor_Loc > 0 then
       RadioGroup1.ItemIndex := 2
     else
@@ -248,19 +248,20 @@ begin
       SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
-procedure TfrmConsEstoque_Mov.RadioGroup2Click(Sender: TObject);
+procedure TfrmConsEstoque_Mov.rgTipoClick(Sender: TObject);
 begin
   fDMConsEstoque.cdsProduto.Filtered := False;
   fDMConsEstoque.cdsProduto.Filter   := '';
-  case RadioGroup2.ItemIndex of
+  case rgTipo.ItemIndex of
    0: fDMConsEstoque.cdsProduto.Filter := 'TIPO_REG = '''+'P'+'''';
    1: fDMConsEstoque.cdsProduto.Filter := 'TIPO_REG = '''+'M'+'''';
    2: fDMConsEstoque.cdsProduto.Filter := 'TIPO_REG = '''+'C'+'''';
    3: fDMConsEstoque.cdsProduto.Filter := 'TIPO_REG = '''+'S'+'''';
+   4: fDMConsEstoque.cdsProduto.Filter := 'TIPO_REG = '''+'I'+'''';
   end;
-  if RadioGroup2.ItemIndex < 4 then
+  if rgTipo.ItemIndex < 5 then
     fDMConsEstoque.cdsProduto.Filtered := True;
-  TS_Reserva.TabVisible := ((RadioGroup2.ItemIndex = 1) and (fDMConsEstoque.qParametros_EstUSA_RESERVA.AsString = 'S'));
+  TS_Reserva.TabVisible := ((rgTipo.ItemIndex = 1) and (fDMConsEstoque.qParametros_EstUSA_RESERVA.AsString = 'S'));
 end;
 
 procedure TfrmConsEstoque_Mov.prc_Le_cdsEstoque_Mov(Gerar_CC : Boolean);
@@ -446,11 +447,12 @@ begin
     if (DateEdit2.Date > 10) then
       vComando := vComando + ' AND EM.DATA <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit2.date));
   end;
-  case RadioGroup2.ItemIndex of
+  case rgTipo.ItemIndex of
     0: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('P');
     1: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('M');
     2: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('C');
     3: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('S');
+    4: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('I');
   end;
   case RadioGroup1.ItemIndex of
     0: vComando := vComando + ' AND EM.TIPO_ES = ' + QuotedStr('E');

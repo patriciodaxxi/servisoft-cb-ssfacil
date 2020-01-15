@@ -14,7 +14,7 @@ type
     SMDBGrid1: TSMDBGrid;
     Label2: TLabel;
     RxDBLookupCombo1: TRxDBLookupCombo;
-    RadioGroup2: TRadioGroup;
+    rgTipo: TRadioGroup;
     btnConsultar: TNxButton;
     Label5: TLabel;
     CurrencyEdit1: TCurrencyEdit;
@@ -71,11 +71,12 @@ begin
     vComando := vComando + ' AND E.ID_LOCAL_ESTOQUE = ' + IntToStr(rxdbLocalEstoque.KeyValue);
   if trim(Edit2.Text) <> '' then
     vComando := vComando + ' AND E.NUM_LOTE_CONTROLE = ' + QuotedStr(Edit2.Text);
-  case RadioGroup2.ItemIndex of
+  case rgTipo.ItemIndex of
     0: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('P');
     1: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('M');
     2: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('C');
     3: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('S');
+    4: vComando := vComando + ' AND PRO.TIPO_REG = ' + QuotedStr('I');
   end;
 
   if fDMConsEstoque.qParametros_EstUSA_QTD_INI.AsString = 'S' then

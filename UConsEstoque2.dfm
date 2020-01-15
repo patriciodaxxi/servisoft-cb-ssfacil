@@ -22,7 +22,7 @@ object frmConsEstoque2: TfrmConsEstoque2
     Left = 0
     Top = 0
     Width = 1056
-    Height = 106
+    Height = 112
     Align = alTop
     Color = clSilver
     TabOrder = 0
@@ -79,7 +79,7 @@ object frmConsEstoque2: TfrmConsEstoque2
       Left = 1
       Top = 1
       Width = 96
-      Height = 104
+      Height = 110
       Align = alLeft
       Caption = ' Op'#231#227'o '
       ItemIndex = 0
@@ -90,11 +90,11 @@ object frmConsEstoque2: TfrmConsEstoque2
         'Ambos')
       TabOrder = 6
     end
-    object RadioGroup2: TRadioGroup
+    object rgTipo: TRadioGroup
       Left = 97
       Top = 1
       Width = 120
-      Height = 104
+      Height = 110
       Align = alLeft
       Caption = ' Tipo '
       ItemIndex = 0
@@ -102,9 +102,10 @@ object frmConsEstoque2: TfrmConsEstoque2
         'Produto'
         'Material'
         'Material Consumo'
-        'Semi Acabado')
+        'Semi Acabado'
+        'Imobilizado')
       TabOrder = 7
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object CheckBox1: TCheckBox
       Left = 657
@@ -113,7 +114,7 @@ object frmConsEstoque2: TfrmConsEstoque2
       Height = 17
       Caption = 'Mostrar Produto Inativo'
       TabOrder = 4
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object btnConsultar: TNxButton
       Left = 296
@@ -285,9 +286,9 @@ object frmConsEstoque2: TfrmConsEstoque2
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
-    Top = 106
+    Top = 112
     Width = 1056
-    Height = 454
+    Height = 448
     Align = alClient
     Ctl3D = False
     DataSource = DMConsEstoque.dsEstoque2

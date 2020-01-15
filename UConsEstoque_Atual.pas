@@ -18,7 +18,7 @@ type
     edtRef: TEdit;
     RxDBLookupCombo1: TRxDBLookupCombo;
     RadioGroup1: TRadioGroup;
-    RadioGroup2: TRadioGroup;
+    rgTipo: TRadioGroup;
     btnConsultar: TNxButton;
     ceIDProduto: TCurrencyEdit;
     RzPageControl1: TRzPageControl;
@@ -145,11 +145,12 @@ begin
         vComando := vComando + ' AND PRO.REFERENCIA LIKE ' + QuotedStr('%'+edtRef.Text+'%')
       else
       begin
-        case RadioGroup2.ItemIndex of
+        case rgTipo.ItemIndex of
           0: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('P');
           1: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('M');
           2: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('C');
           3: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('S');
+          4: vComando := vComando + ' AND PRO.TIPO_REG = ' +  QuotedStr('I');
         end;
       end;
     end;
@@ -316,11 +317,12 @@ var
 begin
   if (Key = Vk_F6) and not(fDMConsEstoque.cdsEstoque_Atual.IsEmpty) then
   begin
-    case RadioGroup2.ItemIndex of
+    case rgTipo.ItemIndex of
       0: vTipoReg := 'P';
       1: vTipoReg := 'M';
       2: vTipoReg := 'C';
       3: vTipoReg := 'S';
+      4: vTipoReg := 'I';
     end;
     vId := fDMConsEstoque.cdsEstoque_AtualID_PRODUTO.AsInteger;
     vIndexName  := fDMConsEstoque.cdsEstoque_Atual.IndexFieldNames;
@@ -417,11 +419,12 @@ begin
     1: vOpcaoImp := vOpcaoImp + '(Negativo)';
     2: vOpcaoImp := vOpcaoImp + '(Mínimo)';
   end;
-  case RadioGroup2.ItemIndex of
+  case rgTipo.ItemIndex of
     0: vOpcaoImp := vOpcaoImp + '(Produto)';
     1: vOpcaoImp := vOpcaoImp + '(Material)';
     2: vOpcaoImp := vOpcaoImp + '(Material Consumo)';
     3: vOpcaoImp := vOpcaoImp + '(Semi Acabado)';
+    4: vOpcaoImp := vOpcaoImp + '(Imobilizado)';
   end;
   if trim(RxDBLookupCombo1.Text) <> '' then
     vOpcaoImp := vOpcaoImp + '(Filial: ' + RxDBLookupCombo1.Text + ')';

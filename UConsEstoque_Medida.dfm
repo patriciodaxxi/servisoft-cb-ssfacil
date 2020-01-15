@@ -268,7 +268,7 @@ object frmConsEstoque_Medida: TfrmConsEstoque_Medida
       Transparent = True
       OnClick = btnImprimirClick
     end
-    object RadioGroup2: TRadioGroup
+    object rgTipo: TRadioGroup
       Left = 1
       Top = 1
       Width = 40

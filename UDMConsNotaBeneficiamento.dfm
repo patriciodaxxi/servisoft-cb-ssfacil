@@ -254,8 +254,8 @@ object DMConsNotaBeneficiamento: TDMConsNotaBeneficiamento
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT ID, NOME, REFERENCIA'#13#10'FROM PRODUTO'#13#10'WHERE TIPO_REG = '#39'M'#39#13 +
-      #10'   AND INATIVO = '#39'N'#39#13#10#13#10
+      'SELECT ID, NOME, REFERENCIA'#13#10'FROM PRODUTO'#13#10'WHERE ((TIPO_REG = '#39'M' +
+      #39') OR  (TIPO_REG = '#39'I'#39'))'#13#10'   AND INATIVO = '#39'N'#39#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1508,8 +1508,8 @@ object DMConsNotaBeneficiamento: TDMConsNotaBeneficiamento
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 144
-    Top = 320
+    Left = 142
+    Top = 319
     object sdsBaixa_NFDevolvidaID: TIntegerField
       FieldName = 'ID'
       Required = True

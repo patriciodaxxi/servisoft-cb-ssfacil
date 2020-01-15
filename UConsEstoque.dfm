@@ -121,7 +121,7 @@ object frmConsEstoque: TfrmConsEstoque
         'Ambos')
       TabOrder = 13
     end
-    object RadioGroup2: TRadioGroup
+    object rgTipo: TRadioGroup
       Left = 97
       Top = 1
       Width = 120
@@ -133,9 +133,10 @@ object frmConsEstoque: TfrmConsEstoque
         'Produto'
         'Material'
         'Material Consumo'
-        'Semi Acabado')
+        'Semi Acabado'
+        'Imobilizado')
       TabOrder = 14
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object ckPrecoCusto: TCheckBox
       Left = 665
@@ -144,7 +145,7 @@ object frmConsEstoque: TfrmConsEstoque
       Height = 17
       Caption = 'Mostrar Pre'#231'o Custo'
       TabOrder = 8
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
       Left = 296
@@ -178,7 +179,7 @@ object frmConsEstoque: TfrmConsEstoque
       Height = 17
       Caption = 'Mostrar Produto Inativo'
       TabOrder = 10
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object btnConsultar: TNxButton
       Left = 659
@@ -270,7 +271,7 @@ object frmConsEstoque: TfrmConsEstoque
       Height = 17
       Caption = 'Mostrar Pre'#231'o Venda'
       TabOrder = 9
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
     object rxdbLocalEstoque: TRxDBLookupCombo
       Left = 296
@@ -312,7 +313,7 @@ object frmConsEstoque: TfrmConsEstoque
       Caption = 'Imprimir agrupado por estrutura'
       Enabled = False
       TabOrder = 11
-      OnClick = RadioGroup2Click
+      OnClick = rgTipoClick
     end
   end
   object SMDBGrid1: TSMDBGrid
@@ -516,7 +517,6 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'PRECO_VENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Venda'
-        Width = 64
         Visible = True
       end
       item
@@ -524,7 +524,6 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'LOCALIZACAO'
         Title.Alignment = taCenter
         Title.Caption = 'Localiza'#231#227'o'
-        Width = 64
         Visible = True
       end
       item

@@ -99,7 +99,7 @@ object frmConsEstoque_Lote: TfrmConsEstoque_Lote
       LookupSource = DMConsEstoque.dsFilial
       TabOrder = 0
     end
-    object RadioGroup2: TRadioGroup
+    object rgTipo: TRadioGroup
       Left = 1
       Top = 1
       Width = 128
@@ -111,7 +111,8 @@ object frmConsEstoque_Lote: TfrmConsEstoque_Lote
         'Produto'
         'Material'
         'Material Cons.'
-        'Semi Acabado')
+        'Semi Acabado'
+        'Imobilizado')
       TabOrder = 6
     end
     object btnConsultar: TNxButton
