@@ -48,7 +48,6 @@ type
   public
     { Public declarations }
     procedure prc_Verifica_Nota_Dupl(Tipo: String);
-    function WinExecAndWait32(FileName: string; Visibility: Integer): Longword;    
   end;
 
 var
@@ -331,7 +330,7 @@ begin
 //  ShellExecute(Handle,'open',pchar('C:\delphi7\ssfacil\exe\BuscaIBPT.exe'),nil,nil,sw_show);
 
   vCaminho := ExtractFilePath(Application.ExeName) + 'BuscaIBPT.exe';
-  WinExecAndWait32(vCaminho,1);
+  WinExecAndWait32(vCaminho,1,'');
   prc_Verifica_IBPT;
 end;
 
@@ -341,40 +340,4 @@ begin
   prc_ShellExecute('ssBackUp_Solo.exe');
 end;
 
-function TfMenu1.WinExecAndWait32(FileName: string;
-  Visibility: Integer): Longword;
-var { by Pat Ritchey }
-  zAppName: array[0..512] of Char;
-  zCurDir: array[0..255] of Char;
-  WorkDir: string;
-  StartupInfo: TStartupInfo;
-  ProcessInfo: TProcessInformation;
-begin
-  StrPCopy(zAppName, FileName);
-  GetDir(0, WorkDir);
-  StrPCopy(zCurDir, WorkDir);
-  FillChar(StartupInfo, SizeOf(StartupInfo), #0);
-  StartupInfo.cb          := SizeOf(StartupInfo);
-  StartupInfo.dwFlags     := STARTF_USESHOWWINDOW;
-  StartupInfo.wShowWindow := Visibility;
-  if not CreateProcess(nil,
-    zAppName, // pointer to command line string
-    nil, // pointer to process security attributes
-    nil, // pointer to thread security attributes
-    False, // handle inheritance flag
-    CREATE_NEW_CONSOLE or // creation flags
-    NORMAL_PRIORITY_CLASS,
-    nil, //pointer to new environment block
-    nil, // pointer to current directory name
-    StartupInfo, // pointer to STARTUPINFO
-    ProcessInfo) // pointer to PROCESS_INF
-    then Result := WAIT_FAILED
-  else
-  begin
-    WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
-    GetExitCodeProcess(ProcessInfo.hProcess, Result);
-    CloseHandle(ProcessInfo.hProcess);
-    CloseHandle(ProcessInfo.hThread);
-  end;
-end;
 end.

@@ -1,6 +1,6 @@
 object frmCadPessoaRed: TfrmCadPessoaRed
-  Left = 87
-  Top = 21
+  Left = 123
+  Top = 28
   Width = 1098
   Height = 678
   Caption = 'Cadastro de Pessoas Reduzido'
@@ -2269,6 +2269,13 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               TabOrder = 24
               ValueChecked = 'S'
               ValueUnchecked = 'N'
+            end
+            object Memo1: TMemo
+              Left = 736
+              Top = 248
+              Width = 313
+              Height = 73
+              TabOrder = 25
             end
           end
           object RzPageControl3: TRzPageControl

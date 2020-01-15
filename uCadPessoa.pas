@@ -752,6 +752,8 @@ type
     procedure prc_opcao_vendedor;
 
     procedure prc_Habilitar;
+    procedure prc_Preenche_Dados;
+
   public
     { Public declarations }
   end;
@@ -1878,11 +1880,15 @@ begin
   end
   else
   begin
+    Caminho := ExtractFilePath(Application.ExeName) + 'ConsultaCNPJ.exe'; //+ Edit1.Text;
+    WinExecAndWait32(Caminho,1,fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString);
+    prc_Preenche_Dados;
+   {Essa função foi substituida para rotina acima em 15/01/2020 - Russimar
     ffrmConsCNPJ_ACBR := TfrmConsCNPJ_ACBR.Create(self);
     ffrmConsCNPJ_ACBR.fDMCadPessoa := fDMCadPessoa;
     ffrmConsCNPJ_ACBR.EditCNPJ.Text := fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString;
     ffrmConsCNPJ_ACBR.ShowModal;
-    FreeAndNil(ffrmConsCNPJ_ACBR);
+    FreeAndNil(ffrmConsCNPJ_ACBR);}
   end;
 end;
 
@@ -2837,6 +2843,47 @@ begin
   end
   else
     DBEdit113Exit(Sender);
+end;
+
+procedure TfrmCadPessoa.prc_Preenche_Dados;
+var
+  Caminho : String;
+  Retorno : TStringList;
+begin
+  Caminho := ExtractFilePath(Application.ExeName) + 'ConsultaCNPJ.TXT';
+  if not FileExists(Caminho) then
+    exit;
+  try
+    //índices do StringList
+    //0 - CNPJ   //1 - Tipo   //2 - Razão Social   //3 - Porte  //4 - Abertura  //5 - Fantasia  //6 - Endereço  //7 - Número  //8 - Complemento   //9 - Bairro
+    //10 - Cidade  //11 - UF  //12 - CEP  //13 - Situação  //14 - CNAE1  //15 - Email  //16 - Telefone
+
+    Retorno := TStringList.Create;
+    Retorno.LoadFromFile(Caminho);
+    if Retorno.Strings[0] <> fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString then
+      exit;
+    fDMCadPessoa.cdsPessoaNOME.AsString := Retorno.Strings[2];
+    if copy(Retorno.Strings[5],1,2) <> '**' then
+      fDMCadPessoa.cdsPessoaFANTASIA.AsString := Retorno.Strings[5]
+    else
+      fDMCadPessoa.cdsPessoaFANTASIA.AsString := Retorno.Strings[2];
+    fDMCadPessoa.cdsPessoaENDERECO.AsString := Retorno.Strings[6];
+    fDMCadPessoa.cdsPessoaNUM_END.AsString  := Retorno.Strings[7];
+    fDMCadPessoa.cdsPessoaCOMPLEMENTO_END.AsString := Retorno.Strings[8];
+    fDMCadPessoa.cdsPessoaBAIRRO.AsString          := Retorno.Strings[9];
+    fDMCadPessoa.cdsPessoaCEP.AsString             := Retorno.Strings[12];
+    fDMCadPessoa.cdsPessoaUF.AsString              := Retorno.Strings[11];
+    fDMCadPessoa.prc_Abrir_Cidade(fDMCadPessoa.cdsPessoaUF.AsString);
+    if fDMCadPessoa.cdsCidade.Locate('NOME',Retorno.Strings[10],([Locaseinsensitive])) then
+    begin
+      fDMCadPessoa.cdsPessoaID_CIDADE.AsInteger := fDMCadPessoa.cdsCidadeID.AsInteger;
+      fDMCadPessoa.cdsPessoaCIDADE.AsString     := fDMCadPessoa.cdsCidadeNOME.AsString;
+    end;
+    fDMCadPessoa.cdsPessoaID_PAIS.AsInteger := 1;
+  finally
+    FreeAndNil(Retorno);
+  end;
+
 end;
 
 end.
