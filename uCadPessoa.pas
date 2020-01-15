@@ -1869,6 +1869,8 @@ begin
 end;
 
 procedure TfrmCadPessoa.btnCadConsultar_ReceitaClick(Sender: TObject);
+var
+  Caminho : String;
 begin
   if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F' then
   begin
@@ -2869,8 +2871,10 @@ begin
       fDMCadPessoa.cdsPessoaFANTASIA.AsString := Retorno.Strings[2];
     fDMCadPessoa.cdsPessoaENDERECO.AsString := Retorno.Strings[6];
     fDMCadPessoa.cdsPessoaNUM_END.AsString  := Retorno.Strings[7];
-    fDMCadPessoa.cdsPessoaCOMPLEMENTO_END.AsString := Retorno.Strings[8];
-    fDMCadPessoa.cdsPessoaBAIRRO.AsString          := Retorno.Strings[9];
+    if copy(Retorno.Strings[8],1,2) <> '**' then
+      fDMCadPessoa.cdsPessoaCOMPLEMENTO_END.AsString := Retorno.Strings[8];
+    if copy(Retorno.Strings[9],1,2) <> '**' then
+      fDMCadPessoa.cdsPessoaBAIRRO.AsString          := Retorno.Strings[9];
     fDMCadPessoa.cdsPessoaCEP.AsString             := Retorno.Strings[12];
     fDMCadPessoa.cdsPessoaUF.AsString              := Retorno.Strings[11];
     fDMCadPessoa.prc_Abrir_Cidade(fDMCadPessoa.cdsPessoaUF.AsString);
