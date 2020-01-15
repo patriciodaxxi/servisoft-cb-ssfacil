@@ -1,8 +1,8 @@
 object frmCadPessoaRed: TfrmCadPessoaRed
-  Left = -1374
-  Top = 47
-  Width = 1382
-  Height = 744
+  Left = 151
+  Top = 33
+  Width = 1098
+  Height = 678
   Caption = 'Cadastro de Pessoas Reduzido'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,8 +22,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1366
-    Height = 705
+    Width = 1082
+    Height = 639
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -51,7 +51,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object pnlPesquisa: TPanel
         Left = 0
         Top = 35
-        Width = 1362
+        Width = 1078
         Height = 93
         Align = alTop
         Color = clSilver
@@ -64,7 +64,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
         TabOrder = 0
         Visible = False
         DesignSize = (
-          1362
+          1078
           93)
         object Label6: TLabel
           Left = 15
@@ -154,7 +154,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
           ParentFont = False
         end
         object dbtxtTotalCliente: TDBText
-          Left = 1152
+          Left = 868
           Top = 10
           Width = 65
           Height = 15
@@ -163,7 +163,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
           DataSource = DMCadPessoa.dsPessoa_Consulta
         end
         object lblCount: TLabel
-          Left = 1146
+          Left = 862
           Top = 10
           Width = 3
           Height = 13
@@ -447,7 +447,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1078
         Height = 35
         Align = alTop
         Color = clSilver
@@ -753,8 +753,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 665
-        Width = 1362
+        Top = 599
+        Width = 1078
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -774,8 +774,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 128
-        Width = 1362
-        Height = 537
+        Width = 1078
+        Height = 471
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPessoa.dsPessoa_Consulta
@@ -1069,7 +1069,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1362
+        Width = 1078
         Height = 37
         Align = alTop
         Color = 8404992
@@ -1295,8 +1295,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object RZPageControlDados: TRzPageControl
         Left = 0
         Top = 37
-        Width = 1362
-        Height = 626
+        Width = 1078
+        Height = 560
         ActivePage = TS_Pessoa_Dados
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
@@ -1320,8 +1320,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
           object Panel9: TPanel
             Left = 0
             Top = 0
-            Width = 1358
-            Height = 394
+            Width = 1074
+            Height = 328
             Align = alClient
             TabOrder = 0
             object Label1: TLabel
@@ -2307,8 +2307,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
           end
           object RzPageControl3: TRzPageControl
             Left = 0
-            Top = 394
-            Width = 1358
+            Top = 328
+            Width = 1074
             Height = 209
             ActivePage = TS_Conjuge
             Align = alBottom
@@ -2321,7 +2321,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object SMDBGrid2: TSMDBGrid
                 Left = 0
                 Top = 2
-                Width = 1354
+                Width = 1070
                 Height = 184
                 Align = alBottom
                 Anchors = [akLeft, akTop, akRight, akBottom]
@@ -2407,7 +2407,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object SMDBGrid3: TSMDBGrid
                 Left = 0
                 Top = 29
-                Width = 1354
+                Width = 1070
                 Height = 157
                 Align = alClient
                 Ctl3D = False
@@ -2511,7 +2511,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object Panel4: TPanel
                 Left = 0
                 Top = 0
-                Width = 1354
+                Width = 1070
                 Height = 29
                 Align = alTop
                 Color = clSilver
@@ -2570,7 +2570,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object RzGroupBox4: TRzGroupBox
                 Left = 0
                 Top = 0
-                Width = 1354
+                Width = 1070
                 Height = 177
                 Align = alTop
                 BorderWidth = 1
@@ -2965,7 +2965,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object SMDBGrid6: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1354
+                Width = 1070
                 Height = 186
                 Align = alClient
                 Ctl3D = False
@@ -3035,7 +3035,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object RzPageControl4: TRzPageControl
                 Left = 0
                 Top = 0
-                Width = 1354
+                Width = 1070
                 Height = 186
                 ActivePage = TS_Conjuge_Geral
                 Align = alClient
@@ -3752,7 +3752,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object RzPageControl2: TRzPageControl
                 Left = 0
                 Top = 0
-                Width = 1354
+                Width = 1070
                 Height = 186
                 ActivePage = TS_Cobranca
                 Align = alClient
@@ -4982,8 +4982,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       end
       object StatusBar1: TStatusBar
         Left = 0
-        Top = 663
-        Width = 1362
+        Top = 597
+        Width = 1078
         Height = 19
         Panels = <
           item
