@@ -314,6 +314,7 @@ type
     DBCheckBox17: TDBCheckBox;
     DBCheckBox18: TDBCheckBox;
     DBCheckBox22: TDBCheckBox;
+    DBCheckBox1: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1691,9 +1692,7 @@ begin
   TS_Dados_Pessoais.TabVisible      := (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F');
   TS_Contatos.TabVisible            := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J') or (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'E'));
   TS_Cobranca.TabVisible            := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J') or (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'E'));
-  TS_Endereco.TabVisible            := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J') or (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'E')); 
-  Label20.Visible                   := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J') or (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'E'));
-  DBEdit18.Visible                  := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J') or (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'E'));
+  TS_Endereco.TabVisible            := ((fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J') or (fDMCadPessoa.cdsPessoaPESSOA.AsString = 'E'));
   if fDMCadPessoa.qParametros_GeralEMPRESA_PET.AsString = 'S' then
     RzPageControl3.ActivePage := TS_Animal
   else
