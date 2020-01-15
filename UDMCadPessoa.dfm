@@ -1,7 +1,8 @@
 object DMCadPessoa: TDMCadPessoa
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 154
+  Left = 152
+  Top = 7
   Height = 710
   Width = 1142
   object sdsPessoa: TSQLDataSet
@@ -3355,6 +3356,7 @@ object DMCadPessoa: TDMCadPessoa
   end
   object cdsPessoa_Consulta: TClientDataSet
     Aggregates = <>
+    AggregatesActive = True
     IndexFieldNames = 'CODIGO'
     Params = <>
     ProviderName = 'dspPessoa_Consulta'
@@ -4022,6 +4024,11 @@ object DMCadPessoa: TDMCadPessoa
     object cdsPessoa_ConsultaCELULAR: TStringField
       FieldName = 'CELULAR'
       Size = 10
+    end
+    object cdsPessoa_ConsultaTotalClientes: TAggregateField
+      FieldName = 'TotalClientes'
+      Active = True
+      Expression = 'COUNT(CODIGO)'
     end
   end
   object dsPessoa_Consulta: TDataSource

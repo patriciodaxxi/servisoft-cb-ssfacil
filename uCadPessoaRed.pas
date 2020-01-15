@@ -316,6 +316,8 @@ type
     DBCheckBox22: TDBCheckBox;
     DBCheckBox1: TDBCheckBox;
     Memo1: TMemo;
+    dbtxtTotalCliente: TDBText;
+    lblCount: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -509,6 +511,7 @@ begin
     prc_Consultar(CurrencyEdit1.AsInteger)
   else
     prc_Consultar;
+  lblCount.Caption := ComboBox1.Text + ': ';
 end;
 
 procedure TfrmCadPessoaRed.btnAlterarClick(Sender: TObject);

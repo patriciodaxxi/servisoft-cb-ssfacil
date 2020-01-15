@@ -1,8 +1,8 @@
 object frmCadPessoaRed: TfrmCadPessoaRed
-  Left = 123
-  Top = 28
-  Width = 1098
-  Height = 678
+  Left = -1374
+  Top = 47
+  Width = 1382
+  Height = 744
   Caption = 'Cadastro de Pessoas Reduzido'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,8 +22,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1090
-    Height = 647
+    Width = 1366
+    Height = 705
     ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -51,7 +51,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object pnlPesquisa: TPanel
         Left = 0
         Top = 35
-        Width = 1086
+        Width = 1362
         Height = 93
         Align = alTop
         Color = clSilver
@@ -63,6 +63,9 @@ object frmCadPessoaRed: TfrmCadPessoaRed
         ParentFont = False
         TabOrder = 0
         Visible = False
+        DesignSize = (
+          1362
+          93)
         object Label6: TLabel
           Left = 15
           Top = 12
@@ -143,6 +146,30 @@ object frmCadPessoaRed: TfrmCadPessoaRed
           Width = 36
           Height = 13
           Caption = 'C'#243'digo:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object dbtxtTotalCliente: TDBText
+          Left = 1152
+          Top = 10
+          Width = 65
+          Height = 15
+          Anchors = [akTop, akRight]
+          DataField = 'TotalClientes'
+          DataSource = DMCadPessoa.dsPessoa_Consulta
+        end
+        object lblCount: TLabel
+          Left = 1146
+          Top = 10
+          Width = 3
+          Height = 13
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          Caption = '.'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -420,7 +447,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1086
+        Width = 1362
         Height = 35
         Align = alTop
         Color = clSilver
@@ -726,8 +753,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 607
-        Width = 1086
+        Top = 665
+        Width = 1362
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -747,8 +774,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 128
-        Width = 1086
-        Height = 479
+        Width = 1362
+        Height = 537
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPessoa.dsPessoa_Consulta
@@ -918,6 +945,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'TP_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Cli'
+            Width = 64
             Visible = True
           end
           item
@@ -926,6 +954,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'TP_FORNECEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Forn.'
+            Width = 64
             Visible = True
           end
           item
@@ -943,6 +972,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'TP_VENDEDOR'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Repr.'
+            Width = 64
             Visible = True
           end
           item
@@ -951,6 +981,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'ORGAO_PUBLICO'
             Title.Alignment = taCenter
             Title.Caption = 'Org'#227'o P'#250'blico'
+            Width = 64
             Visible = True
           end
           item
@@ -958,6 +989,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'DTPEDIDO'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Pedido'
+            Width = 64
             Visible = True
           end
           item
@@ -965,6 +997,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'DTNOTA'
             Title.Alignment = taCenter
             Title.Caption = 'Data '#218'lt. Faturamento'
+            Width = 64
             Visible = True
           end
           item
@@ -1004,6 +1037,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'NOME_GRUPO'
             Title.Alignment = taCenter
             Title.Caption = 'Nome Grupo'
+            Width = 64
             Visible = True
           end
           item
@@ -1011,6 +1045,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'TIPO_CONTRIBUINTE'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Contribuinte'
+            Width = 64
             Visible = True
           end
           item
@@ -1018,6 +1053,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
             FieldName = 'COD_CONTA_ORCAMENTO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. Conta Or'#231'amento'
+            Width = 64
             Visible = True
           end>
       end
@@ -1033,7 +1069,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1086
+        Width = 1362
         Height = 37
         Align = alTop
         Color = 8404992
@@ -1259,8 +1295,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       object RZPageControlDados: TRzPageControl
         Left = 0
         Top = 37
-        Width = 1086
-        Height = 568
+        Width = 1362
+        Height = 626
         ActivePage = TS_Pessoa_Dados
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
@@ -1284,8 +1320,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
           object Panel9: TPanel
             Left = 0
             Top = 0
-            Width = 1082
-            Height = 336
+            Width = 1358
+            Height = 394
             Align = alClient
             TabOrder = 0
             object Label1: TLabel
@@ -2271,8 +2307,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
           end
           object RzPageControl3: TRzPageControl
             Left = 0
-            Top = 336
-            Width = 1082
+            Top = 394
+            Width = 1358
             Height = 209
             ActivePage = TS_Conjuge
             Align = alBottom
@@ -2285,7 +2321,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object SMDBGrid2: TSMDBGrid
                 Left = 0
                 Top = 2
-                Width = 1078
+                Width = 1354
                 Height = 184
                 Align = alBottom
                 Anchors = [akLeft, akTop, akRight, akBottom]
@@ -2371,7 +2407,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object SMDBGrid3: TSMDBGrid
                 Left = 0
                 Top = 29
-                Width = 1078
+                Width = 1354
                 Height = 157
                 Align = alClient
                 Ctl3D = False
@@ -2475,7 +2511,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object Panel4: TPanel
                 Left = 0
                 Top = 0
-                Width = 1078
+                Width = 1354
                 Height = 29
                 Align = alTop
                 Color = clSilver
@@ -2534,7 +2570,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object RzGroupBox4: TRzGroupBox
                 Left = 0
                 Top = 0
-                Width = 1078
+                Width = 1354
                 Height = 177
                 Align = alTop
                 BorderWidth = 1
@@ -2929,7 +2965,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object SMDBGrid6: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1078
+                Width = 1354
                 Height = 186
                 Align = alClient
                 Ctl3D = False
@@ -2999,7 +3035,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object RzPageControl4: TRzPageControl
                 Left = 0
                 Top = 0
-                Width = 1078
+                Width = 1354
                 Height = 186
                 ActivePage = TS_Conjuge_Geral
                 Align = alClient
@@ -3716,7 +3752,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
               object RzPageControl2: TRzPageControl
                 Left = 0
                 Top = 0
-                Width = 1078
+                Width = 1354
                 Height = 186
                 ActivePage = TS_Cobranca
                 Align = alClient
@@ -4946,8 +4982,8 @@ object frmCadPessoaRed: TfrmCadPessoaRed
       end
       object StatusBar1: TStatusBar
         Left = 0
-        Top = 605
-        Width = 1086
+        Top = 663
+        Width = 1362
         Height = 19
         Panels = <
           item
