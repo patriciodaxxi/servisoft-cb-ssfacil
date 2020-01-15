@@ -1332,6 +1332,7 @@ type
     sdsPessoa_FiscalOPCAO_DIFERIMENTO: TStringField;
     cdsPessoa_FiscalOPCAO_DIFERIMENTO: TStringField;
     qParametros_GeralPERMITE_CNPJ_DUP: TStringField;
+    cdsPessoa_ConsultaTotalClientes: TAggregateField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPessoaNewRecord(DataSet: TDataSet);
     procedure dspPessoaUpdateError(Sender: TObject;
