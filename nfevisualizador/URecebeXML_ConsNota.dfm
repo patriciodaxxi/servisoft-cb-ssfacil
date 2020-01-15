@@ -174,7 +174,6 @@ object frmRecebeXML_ConsNota: TfrmRecebeXML_ConsNota
         Title.Alignment = taCenter
         Title.Caption = 'CNPJ/CPF'
         Title.Color = 16769217
-        Width = 64
         Visible = True
       end
       item

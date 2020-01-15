@@ -146,6 +146,7 @@ type
     DBCheckBox25: TDBCheckBox;
     DBCheckBox26: TDBCheckBox;
     btnCopiarCFOP: TNxButton;
+    SpeedButton1: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -186,6 +187,7 @@ type
     procedure btnGerar_VarClick(Sender: TObject);
     procedure DBCheckBox14Click(Sender: TObject);
     procedure btnCopiarCFOPClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadCFOP: TDMCadCFOP;
@@ -906,6 +908,12 @@ begin
     FreeAndNil(sds);
   end;
 
+end;
+
+procedure TfrmCadCFOP.SpeedButton1Click(Sender: TObject);
+begin
+  MessageDlg('Empresa = É quando o Produto pertence a Empresa, e esta envio para o cliente beneficiar ' + #13 +
+             'Terceiro = É quando o Produto é do Cliente, e este envio a Empresa para beneficiar' , mtInformation, [mbOk], 0);
 end;
 
 end.
