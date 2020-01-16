@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, RzTabs, StdCtrls, DBCtrls, RzButton,
   RxDBComb, RxLookup, db, Mask, Grids, DateUtils, DBGrids, SMDBGrid, Buttons, ExtCtrls, UCBase, uDmCadPessoa, RzDBChk,
   UNFe_ConsultaCadastro, RzPanel, ToolEdit, RXDBCtrl, UConsPessoa_Fat, UConsPessoa_Fin, UCadPessoa_Servico, RzLstBox,
-  UCadPessoa_Servico_Int, NxCollection, RzRadChk, dbXPress, SqlExpr, ComCtrls, UConsCNPJ_ACBR, UConsCPF_ACBR, ACBrBase,
+  UCadPessoa_Servico_Int, NxCollection, RzRadChk, dbXPress, SqlExpr, ComCtrls, ACBrBase,
   ACBrSocket, RzChkLst, ACBrConsultaCPF, UConsPessoa_Prod, Menus, ComObj,UConsPessoa_Produto,shellapi,
   CurrEdit;
 
@@ -75,10 +75,8 @@ type
     DBEdit17: TDBEdit;
     DBEdit18: TDBEdit;
     dbeRG: TDBEdit;
-    btnCadConsultar: TBitBtn;
     DBEdit10: TDBEdit;
     DBEdit27: TDBEdit;
-    btnCadConsultar_Receita: TBitBtn;
     RxDBComboBox5: TRxDBComboBox;
     Label54: TLabel;
     Label155: TLabel;
@@ -344,7 +342,6 @@ type
     procedure RxDBComboBox1Exit(Sender: TObject);
     procedure SpeedButton7Click(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
-    procedure btnCadConsultarClick(Sender: TObject);
     procedure btnReceitaClick(Sender: TObject);
     procedure RxDBLookupCombo17Enter(Sender: TObject);
     procedure SMDBGrid1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -357,7 +354,6 @@ type
     procedure RxDBLookupCombo18Enter(Sender: TObject);
     procedure GroupBox3Enter(Sender: TObject);
     procedure GroupBox2Enter(Sender: TObject);
-    procedure btnCadConsultar_ReceitaClick(Sender: TObject);
     procedure N11Click(Sender: TObject);
     procedure DBMemo4KeyPress(Sender: TObject; var Key: Char);
     procedure DBMemo5KeyPress(Sender: TObject; var Key: Char);
@@ -397,8 +393,6 @@ type
     ffNFe_ConsultaCadastro: TfNFe_ConsultaCadastro;
     ffrmCadPessoa_Servico: TfrmCadPessoa_Servico;
     ffrmCadPessoa_Servico_Int: TfrmCadPessoa_Servico_Int;
-    ffrmConsCNPJ_ACBR: TfrmConsCNPJ_ACBR;
-    ffrmConsCPF_ACBR: TfrmConsCPF_ACBR;
     ffrmConsPessoa_Produto : TfrmConsPessoa_Produto;
     vCod_Alfa_Ant: string;
     vRG_Ant: string;
@@ -973,77 +967,6 @@ begin
       SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
-procedure TfrmCadPessoaRed.btnCadConsultarClick(Sender: TObject);
-var
-  texto: string;
-  cnpj_pes: string;
-  oStream: TMemoryStream;
-  oStrStream: TStringStream;
-  vPessoa: Integer;
-  vUFAux: string;
-  vLocalServidorNFe: string;
-begin
-  vPessoa := 0;
-  if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J' then
-    vPessoa := 1
-  else if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F' then
-    vPessoa := 2;
-  if vPessoa = 0 then
-  begin
-    MessageDlg('*** Pessoa (Jurídica/Física) não informada!', mtInformation, [mbOk], 0);
-    exit;
-  end;
-
-  vUFAux := fDMCadPessoa.cdsPessoaUF.AsString;
-  if trim(fDMCadPessoa.cdsPessoaUF.AsString) = '' then
-    vUFAux := 'RS';
-
-  fDMCadPessoa.qFilial.Close;
-  fDMCadPessoa.qFilial.Open;
-  fDMCadPessoa.cdsConsultaCadastro.Close;
-  if fDMCadPessoa.qFilialPESSOA.AsString = 'F' then
-    texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 11)
-  else
-    texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 14);
-  vLocalServidorNFe := fDMCadPessoa.qParametrosLOCALSERVIDORNFE.AsString;
-  if trim(fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString) <> '' then
-    vLocalServidorNFe := fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString;
-  cnpj_pes := Monta_Texto(fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString, 14);
-
-  if (trim(texto) = '') or (trim(cnpj_pes) = '') then
-  begin
-    MessageDlg('*** CNPJ não informado!', mtInformation, [mbOk], 0);
-    exit;
-  end;
-
-  oStream := TMemoryStream.Create;
-  try
-    ConsultarCadastro(Trim(vLocalServidorNFe), texto, vPessoa, vUFAux, cnpj_pes, oStream);
-
-    oStream.Position := 0;
-
-    oStrStream := TStringStream.Create('');
-    try
-      oStream.Position := 0;
-      oStrStream.CopyFrom(oStream, oStream.Size);
-      //oStream.SaveToFile('C:\a\Cadastro.xml');
-      fDMCadPessoa.xtrConsultaCadastro.TransformRead.SourceXml := oStrStream.DataString;
-      fDMCadPessoa.xtrConsultaCadastro.TransformRead.TransformationFile := ExtractFilePath(Application.ExeName) + 'xtr\ConsultaCadastro.xtr';
-    finally
-      FreeAndNil(oStrStream);
-    end;
-  finally
-    FreeAndNil(oStream);
-  end;
-  fDMCadPessoa.cdsConsultaCadastro.Open;
-  ffNFe_ConsultaCadastro := TfNFe_ConsultaCadastro.Create(self);
-  ffNFe_ConsultaCadastro.fDMCadPessoa := fDMCadPessoa;
-  ffNFe_ConsultaCadastro.ShowModal;
-  FreeAndNil(ffNFe_ConsultaCadastro);
-  if fDMCadPessoa.cdsPessoaID_CIDADE.AsInteger <= 0 then
-    MessageDlg('*** Município precisa ser informado manualmente, pois a Sefaz não esta retornando o Cód. do Município!', mtInformation, [mbOk], 0);
-end;
-
 procedure TfrmCadPessoaRed.prc_Configurarr_vTipoPessoa;
 begin
   case ComboBox1.ItemIndex of
@@ -1081,10 +1004,7 @@ begin
 
   if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F' then
   begin
-    ffrmConsCPF_ACBR := TfrmConsCPF_ACBR.Create(self);
-    ffrmConsCPF_ACBR.EditCNPJ.Text := fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString;
-    ffrmConsCPF_ACBR.ShowModal;
-    FreeAndNil(ffrmConsCPF_ACBR);
+    prc_ShellExecute('ConsultaCPF.exe')
   end
   else
   begin
@@ -1268,25 +1188,6 @@ begin
   fDMCadPessoa.prc_Localizar(fDMCadPessoa.cdsPessoa_ConsultaCODIGO.AsInteger);
   fDMCadPessoa.cdsPessoa_Contato.Close;
   fDMCadPessoa.cdsPessoa_Contato.Open;
-end;
-
-procedure TfrmCadPessoaRed.btnCadConsultar_ReceitaClick(Sender: TObject);
-begin
-  if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F' then
-  begin
-    ffrmConsCPF_ACBR := TfrmConsCPF_ACBR.Create(self);
-    ffrmConsCPF_ACBR.EditCNPJ.Text := fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString;
-    ffrmConsCPF_ACBR.ShowModal;
-    FreeAndNil(ffrmConsCPF_ACBR);
-  end
-  else
-  begin
-    ffrmConsCNPJ_ACBR := TfrmConsCNPJ_ACBR.Create(self);
-    ffrmConsCNPJ_ACBR.fDMCadPessoa := fDMCadPessoa;
-    ffrmConsCNPJ_ACBR.EditCNPJ.Text := fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString;
-    ffrmConsCNPJ_ACBR.ShowModal;
-    FreeAndNil(ffrmConsCNPJ_ACBR);
-  end;
 end;
 
 procedure TfrmCadPessoaRed.N11Click(Sender: TObject);

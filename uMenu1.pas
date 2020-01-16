@@ -55,7 +55,7 @@ var
 
 implementation
 
-uses DmdDatabase, UMenu, DmdDatabase_NFeBD, uUtilPadrao, UIBPT_Atualiza;
+uses DmdDatabase, UMenu, DmdDatabase_NFeBD, uUtilPadrao;
 
 {$R *.dfm}
 
@@ -323,12 +323,6 @@ procedure TfMenu1.Label7Click(Sender: TObject);
 var
   vCaminho : String;
 begin
-//  frmIBPT_Atualiza := TfrmIBPT_Atualiza.Create(Self);
-//  frmIBPT_Atualiza.ShowModal;
-//  FreeAndNil(frmIBPT_Atualiza);
-//  prc_ShellExecute('BuscaIBPT.exe');
-//  ShellExecute(Handle,'open',pchar('C:\delphi7\ssfacil\exe\BuscaIBPT.exe'),nil,nil,sw_show);
-
   vCaminho := ExtractFilePath(Application.ExeName) + 'BuscaIBPT.exe';
   WinExecAndWait32(vCaminho,1,'');
   prc_Verifica_IBPT;

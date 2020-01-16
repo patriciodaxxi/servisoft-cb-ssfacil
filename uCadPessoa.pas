@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, RzTabs, StdCtrls, DBCtrls, RzButton, db,
   RxDBComb, RxLookup, Mask, Grids, DateUtils, DBGrids, SMDBGrid, Buttons, ExtCtrls, UCBase, uDmCadPessoa, RzDBChk, RzRadChk,
   UNFe_ConsultaCadastro, RzPanel, ToolEdit, RXDBCtrl, UConsPessoa_Fat, UConsPessoa_Fin, UCadPessoa_Servico, RzLstBox, ComObj,
-  UCadPessoa_Servico_Int, NxCollection, dbXPress, SqlExpr, UConsCNPJ_ACBR, UConsCPF_ACBR, ACBrBase, ACBrSocket, Menus, ComCtrls,
+  UCadPessoa_Servico_Int, NxCollection, dbXPress, SqlExpr, ACBrBase, ACBrSocket, Menus, ComCtrls,
   RzChkLst, ACBrConsultaCPF, UConsPessoa_Prod, CurrEdit, uConsAgenda;
 
 type
@@ -728,8 +728,6 @@ type
     ffNFe_ConsultaCadastro: TfNFe_ConsultaCadastro;
     ffrmCadPessoa_Servico: TfrmCadPessoa_Servico;
     ffrmCadPessoa_Servico_Int: TfrmCadPessoa_Servico_Int;
-    ffrmConsCNPJ_ACBR: TfrmConsCNPJ_ACBR;
-    ffrmConsCPF_ACBR: TfrmConsCPF_ACBR;
     ffrmConsAgenda: TfrmConsAgenda;
     vCod_Alfa_Ant: string;
     vRG_Ant: string;
@@ -1873,24 +1871,12 @@ var
   Caminho : String;
 begin
   if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F' then
-  begin
-    //ffrmConsCPF_ACBR := TfrmConsCPF_ACBR.Create(self);
-    //ffrmConsCPF_ACBR.EditCNPJ.Text := fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString;
-    //ffrmConsCPF_ACBR.ShowModal;
-    //FreeAndNil(ffrmConsCPF_ACBR);
-    prc_ShellExecute('ConsultaCPF.exe');
-  end
+    prc_ShellExecute('ConsultaCPF.exe')
   else
   begin
     Caminho := ExtractFilePath(Application.ExeName) + 'ConsultaCNPJ.exe'; //+ Edit1.Text;
     WinExecAndWait32(Caminho,1,fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString);
     prc_Preenche_Dados;
-   {Essa função foi substituida para rotina acima em 15/01/2020 - Russimar
-    ffrmConsCNPJ_ACBR := TfrmConsCNPJ_ACBR.Create(self);
-    ffrmConsCNPJ_ACBR.fDMCadPessoa := fDMCadPessoa;
-    ffrmConsCNPJ_ACBR.EditCNPJ.Text := fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString;
-    ffrmConsCNPJ_ACBR.ShowModal;
-    FreeAndNil(ffrmConsCNPJ_ACBR);}
   end;
 end;
 
