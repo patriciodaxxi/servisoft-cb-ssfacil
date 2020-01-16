@@ -19,13 +19,13 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 688
-    Height = 193
+    Width = 680
+    Height = 185
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 0
     object Label11: TLabel
-      Left = 18
+      Left = 34
       Top = 47
       Width = 53
       Height = 13
@@ -33,7 +33,7 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
       Caption = 'CST ICMS:'
     end
     object Label12: TLabel
-      Left = 31
+      Left = 47
       Top = 71
       Width = 40
       Height = 13
@@ -41,7 +41,7 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
       Caption = 'CST IPI:'
     end
     object Label13: TLabel
-      Left = 11
+      Left = 27
       Top = 104
       Width = 60
       Height = 13
@@ -49,7 +49,7 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
       Caption = '% Desconto:'
     end
     object Label14: TLabel
-      Left = 7
+      Left = 23
       Top = 128
       Width = 64
       Height = 13
@@ -65,7 +65,7 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
       Caption = '% C'#225'lculo Base ICMS:'
     end
     object RxDBLookupCombo4: TRxDBLookupCombo
-      Left = 72
+      Left = 88
       Top = 39
       Width = 249
       Height = 21
@@ -81,11 +81,11 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
       OnExit = RxDBLookupCombo4Exit
     end
     object RxDBLookupCombo5: TRxDBLookupCombo
-      Left = 72
+      Left = 88
       Top = 63
       Width = 249
       Height = 21
-      DropDownCount = 8
+      DropDownCount = 15
       DropDownWidth = 500
       DataField = 'ID_CSTIPI'
       DataSource = DMCadPedido.dsPedido_Itens
@@ -95,7 +95,7 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
       TabOrder = 1
     end
     object DBEdit5: TDBEdit
-      Left = 72
+      Left = 88
       Top = 96
       Width = 94
       Height = 21
@@ -105,7 +105,7 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
       OnExit = DBEdit5Exit
     end
     object DBEdit6: TDBEdit
-      Left = 72
+      Left = 88
       Top = 120
       Width = 94
       Height = 21
@@ -128,8 +128,8 @@ object frmCadPedido_Itens_Imposto: TfrmCadPedido_Itens_Imposto
   end
   object Panel2: TPanel
     Left = 0
-    Top = 193
-    Width = 688
+    Top = 185
+    Width = 680
     Height = 34
     Align = alBottom
     Color = clMoneyGreen

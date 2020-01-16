@@ -395,8 +395,10 @@ begin
   fDMCadPedido.qPessoa_Fiscal.Open;
   if not fDMCadPedido.qPessoa_Fiscal.IsEmpty then
   begin
-    if (fDMCadPedido.qPessoa_FiscalIPI_SUSPENSO.AsString = 'S') and (fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime >= fDMCadPedido.qPessoa_FiscalIPI_DT_INICIO.AsDateTime) and
-       (fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime <= fDMCadPedido.qPessoa_FiscalIPI_DT_FINAL.AsDateTime) then
+    if (fDMCadPedido.qPessoa_FiscalIPI_SUSPENSO.AsString = 'S') and
+       (fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime >= fDMCadPedido.qPessoa_FiscalIPI_DT_INICIO.AsDateTime) and
+       ((fDMCadPedido.qPessoa_FiscalIPI_DT_FINAL.AsDateTime < 10) or  //16/01/2020
+       (fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime <= fDMCadPedido.qPessoa_FiscalIPI_DT_FINAL.AsDateTime)) then
     begin
       vID_IPI := fDMCadPedido.qPessoa_FiscalIPI_ID_CSTIPI.AsInteger;
       fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat := 0;

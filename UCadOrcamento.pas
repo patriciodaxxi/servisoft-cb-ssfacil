@@ -84,8 +84,6 @@ type
     Normal1: TMenuItem;
     amanho1: TMenuItem;
     amanhoSemMaterial1: TMenuItem;
-    ckMeiaFolha: TCheckBox;
-    ckImpFoto: TCheckBox;
     Label43: TLabel;
     DBEdit12: TDBEdit;
     Label17: TLabel;
@@ -150,7 +148,6 @@ type
     cbxTipo: TComboBox;
     Label21: TLabel;
     DBEdit10: TDBEdit;
-    ckImpPeso: TCheckBox;
     pnlVidro: TPanel;
     SMDBGrid7: TSMDBGrid;
     pnlPorta: TPanel;
@@ -220,6 +217,9 @@ type
     btnImportarXML: TNxButton;
     btnCopiarPedido: TNxButton;
     SpeedButton2: TSpeedButton;
+    ckImpFoto: TCheckBox;
+    ckImpPeso: TCheckBox;
+    ckMeiaFolha: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);

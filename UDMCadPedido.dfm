@@ -11370,12 +11370,9 @@ object DMCadPedido: TDMCadPedido
     SQL.Strings = (
       'SELECT PF.*, TI.cod_ipi, TP.codigo COD_PIS, TC.codigo COD_COFINS'
       'FROM PESSOA_FISCAL PF'
-      'LEFT JOIN TAB_CSTIPI TI'
-      'ON PF.ipi_id_cstipi = TI.id'
-      'LEFT JOIN tab_pis TP'
-      'ON PF.pis_id_pis = TP.id'
-      'LEFT JOIN tab_cofins TC'
-      'ON PF.pis_id_cofins = TC.id'
+      'LEFT JOIN TAB_CSTIPI TI ON (PF.ipi_id_cstipi = TI.id)'
+      'LEFT JOIN tab_pis TP ON (PF.pis_id_pis = TP.id)'
+      'LEFT JOIN tab_cofins TC ON (PF.pis_id_cofins = TC.id)'
       'WHERE PF.CODIGO = :CODIGO')
     SQLConnection = dmDatabase.scoDados
     Left = 1215

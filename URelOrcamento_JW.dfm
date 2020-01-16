@@ -51,7 +51,7 @@ object fRelOrcamento_JW: TfRelOrcamento_JW
         object RLDraw9: TRLDraw
           Left = 715
           Top = 107
-          Width = 354
+          Width = 356
           Height = 65
         end
         object RLDraw11: TRLDraw
@@ -899,7 +899,7 @@ object fRelOrcamento_JW: TfRelOrcamento_JW
         object RLDraw4: TRLDraw
           Left = 0
           Top = 171
-          Width = 1069
+          Width = 1071
           Height = 21
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1552,6 +1552,9 @@ object fRelOrcamento_JW: TfRelOrcamento_JW
     end
   end
   object RLPDFFilter1: TRLPDFFilter
+    DocumentInfo.Creator = 
+      'FortesReport Community Edition v4.0 \251 Copyright '#169' 1999-2015 F' +
+      'ortes Inform'#225'tica'
     DisplayName = 'Documento PDF'
     Left = 874
     Top = 130

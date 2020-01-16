@@ -3,9 +3,8 @@ unit uRelOrcamento_JW;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, RLReport, RLRichText, DB, DBTables, RLBarcode, jpeg, UDMCadPedido, UDMRel,
-  RLFilters, RLPDFFilter;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, RLReport, RLRichText, DB, DBTables, jpeg,
+  RLBarcode, UDMCadPedido, UDMRel, RLFilters, RLPDFFilter;
 
 type
   TfRelOrcamento_JW = class(TForm)

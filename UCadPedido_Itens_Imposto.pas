@@ -3,8 +3,8 @@ unit UCadPedido_Itens_Imposto;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMCadPedido, ExtCtrls,
-  StdCtrls, RxLookup, RxDBComb, Mask, DBCtrls, Buttons, DB;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMCadPedido, ExtCtrls, StdCtrls, Mask, 
+  RxLookup, RxDBComb, DBCtrls, Buttons, DB;
 
 type
   TfrmCadPedido_Itens_Imposto = class(TForm)
@@ -35,8 +35,7 @@ type
     vID_CSTICMAnt : Integer;    
   public
     { Public declarations }
-    fDMCadPedido : TDMCadPedido;
-
+    fDMCadPedido : TDMCadPedido;         
   end;
 
 var
@@ -105,7 +104,7 @@ end;
 
 procedure TfrmCadPedido_Itens_Imposto.DBEdit5Exit(Sender: TObject);
 var
-  vAux : Real;
+  vAux: Real;
 begin
   if (fDMCadPedido.qParametros_ProdUSA_DESC_MAXIMO.AsString = 'S') and
      (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_ItensPERC_DESCONTO.AsFloat)) > StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoPERC_DESC_MAX.AsFloat))) then
@@ -125,7 +124,7 @@ end;
 
 procedure TfrmCadPedido_Itens_Imposto.DBEdit6Exit(Sender: TObject);
 var
-  vAux : Real;
+  vAux: Real;
 begin
   {if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_ItensVLR_DESCONTO.AsFloat)) <> StrToFloat(FormatFloat('0.00',vVlrDesc_Ant)) then
   begin
