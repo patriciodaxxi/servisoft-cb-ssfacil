@@ -79,7 +79,7 @@ var
 
 implementation
 
-uses rsDBUtils;
+uses rsDBUtils, uUtilPadrao;
 
 {$R *.dfm}
 
@@ -108,6 +108,8 @@ begin
 end;
 
 procedure TfrmConsFinanceiro.btnConsultarClick(Sender: TObject);
+var
+  Form : TForm;
 begin
   if (DateEdit1.Date <= 10) or (DateEdit2.Date <= 10) then
   begin
@@ -115,22 +117,31 @@ begin
     DateEdit1.SetFocus;
     Exit;
   end;
+
+  //vUsuario := 'Ajust.Base Com.';
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
   SMDBGrid1.DisableScroll;
   SMDBGrid2.DisableScroll;
   SMDBGrid3.DisableScroll;
-  prc_Consultar;
-  prc_Consultar_Mov;
-  prc_Consultar_Ped_Emi;
-  prc_Consultar_Ped_Pend;
-  prc_Consultar_Orc;
-  prc_Consultar_Vale;
-  prc_Consultar_Duplicata;
-  prc_Consultar_qNotaFiscal_Canc;
-  prc_Consultar_qNotaFiscal_CCE;
-  prc_Consultar_OC_Emi;
-  SMDBGrid1.EnableScroll;
-  SMDBGrid2.EnableScroll;
-  SMDBGrid3.EnableScroll;
+
+  try
+    prc_Consultar;
+    prc_Consultar_Mov;
+    prc_Consultar_Ped_Emi;
+    prc_Consultar_Ped_Pend;
+    prc_Consultar_Orc;
+    prc_Consultar_Vale;
+    prc_Consultar_Duplicata;
+    prc_Consultar_qNotaFiscal_Canc;
+    prc_Consultar_qNotaFiscal_CCE;
+    prc_Consultar_OC_Emi;
+  finally
+    SMDBGrid1.EnableScroll;
+    SMDBGrid2.EnableScroll;
+    SMDBGrid3.EnableScroll;
+    FreeAndNil(Form);
+  end;
 end;
 
 procedure TfrmConsFinanceiro.prc_Consultar;
@@ -407,6 +418,7 @@ end;
 procedure TfrmConsFinanceiro.prc_Consultar_Orc;
 var
   vQtdTotal: Integer;
+  vVlrTotal: Real;
 begin
   fDMCadFinanceiro.cdsOrcamento.Close;
   fDMCadFinanceiro.sdsOrcamento.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
@@ -434,6 +446,36 @@ begin
   end;
   if vQtdTotal > 0 then
     prc_Gravar_mFaturamento('10020T','... Total Orçamentos Emitidos ... (Qtd)',vQtdTotal);
+
+  //Orçamento Valores
+  vVlrTotal := 0;
+  fDMCadFinanceiro.cdsOrc_Emi.Close;
+  fDMCadFinanceiro.sdsOrc_Emi.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
+  fDMCadFinanceiro.sdsOrc_Emi.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
+  if trim(RxDBLookupCombo1.Text) <> '' then
+    fDMCadFinanceiro.sdsOrc_Emi.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
+  else
+    fDMCadFinanceiro.sdsOrc_Emi.ParamByName('FILIAL').AsInteger := 0;
+  fDMCadFinanceiro.cdsOrc_Emi.Open;
+  fDMCadFinanceiro.cdsOrc_Emi.First;
+  while not fDMCadFinanceiro.cdsOrc_Emi.Eof do
+  begin
+    vVlrTotal := vVlrTotal + fDMCadFinanceiro.cdsOrc_EmiVLR_TOTAL.AsInteger;
+    if fDMCadFinanceiro.cdsOrc_EmiVLR_APROVADO.AsFloat > 0 then
+      prc_Gravar_mFaturamento('10025A','Orçamentos Aprovados  (Vlr)',fDMCadFinanceiro.cdsOrc_EmiVLR_APROVADO.AsFloat)
+    else
+    if fDMCadFinanceiro.cdsOrc_EmiVLR_NAO_APROVADO.AsFloat > 0 then
+      prc_Gravar_mFaturamento('10025B','Orçamentos Não Aprovados   (Vlr)',fDMCadFinanceiro.cdsOrc_EmiVLR_NAO_APROVADO.AsFloat)
+    else
+    if fDMCadFinanceiro.cdsOrc_EmiVLR_PENDENTE.AsFloat > 0 then
+      prc_Gravar_mFaturamento('10025C','Orçamentos Pendentes   (Vlr)',fDMCadFinanceiro.cdsOrcamentoQTD_PENDENTE.AsFloat);
+
+    fDMCadFinanceiro.cdsOrc_Emi.Next;
+  end;
+  if vQtdTotal > 0 then
+    prc_Gravar_mFaturamento('10025T','... Total Orçamentos Emitidos ... (Vlr)',vVlrTotal);
+    prc_Gravar_mFaturamento('10026T','',0);
+
 end;
 
 procedure TfrmConsFinanceiro.prc_Consultar_Vale;

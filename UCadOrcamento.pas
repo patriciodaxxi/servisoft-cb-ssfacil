@@ -287,6 +287,7 @@ type
     procedure SalvarOramento1Click(Sender: TObject);
     procedure btnCopiarPedidoClick(Sender: TObject);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure SMDBGrid1TitleClick(Column: TColumn);
   private
     { Private declarations }
     vVlrFreteAnt: Real;
@@ -1613,8 +1614,7 @@ end;
 
 procedure TfrmCadOrcamento.Excel1Click(Sender: TObject);
 begin
-  if not fDMCadPedido.cdsPedido_Consulta.IsEmpty then
-    prc_CriaExcel(SMDBGrid1.DataSource);
+  prc_CriaExcel(SMDBGrid1.DataSource);
 end;
 
 procedure TfrmCadOrcamento.prc_CriaExcel(vDados: TDataSource);
@@ -1625,17 +1625,17 @@ begin
   Screen.Cursor := crHourGlass;
   vDados.DataSet.First;
 
-  vTexto := ExtractFilePath(Application.ExeName) + 'Excel\';
-  vTexto := vTexto + 'Orc_' + FormatDateTime('yyyy-mm-dd',DateEdit1.Date) + '_' + FormatDateTime('yyyy-mm-dd',DateEdit2.Date);
-
   planilha := CreateOleObject('Excel.Application');
   planilha.WorkBooks.add(1);
   planilha.caption := 'Exportando dados do tela para o Excel';
   planilha.visible := true;
 
-  prc_Preencher_Excel(planilha, vDados);
+  prc_Preencher_Excel2(planilha, vDados, SMDBGrid1);
 
   planilha.columns.Autofit;
+  vTexto := ExtractFilePath(Application.ExeName);
+
+  vTexto := vTexto + Name + '_' + RzPageControl1.ActivePage.Caption;
 
   Planilha.ActiveWorkBook.SaveAs(vTexto);
   Screen.Cursor := crDefault;
@@ -1889,6 +1889,19 @@ begin
     if fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger > 0 then
       fDMCadPedido.cdsPedidoID_VENDEDOR_INT.AsInteger := fDMCadPedido.cdsClienteID_VENDEDOR_INT.AsInteger;
   end;
+end;
+
+procedure TfrmCadOrcamento.SMDBGrid1TitleClick(Column: TColumn);
+var
+  i: Integer;
+  ColunaOrdenada: String;
+begin
+  ColunaOrdenada := Column.FieldName;
+  fDMCadPedido.cdsPedido_Consulta.IndexFieldNames := Column.FieldName;
+  Column.Title.Color := clBtnShadow;
+  for i := 0 to SMDBGrid1.Columns.Count - 1 do
+    if not (SMDBGrid1.Columns.Items[I] = Column) then
+      SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
 end;
 
 end.

@@ -2521,4 +2521,72 @@ object DMCadFinanceiro: TDMCadFinanceiro
       Size = 1
     end
   end
+  object sdsOrc_Emi: TSQLDataSet
+    NoMetadata = True
+    GetMetadata = False
+    CommandText = 
+      'SELECT sum(p.vlr_total) as VLR_TOTAL,'#13#10'          CASE'#13#10'        W' +
+      'HEN P.APROVADO_ORC = '#39'A'#39' THEN SUM(P.vlr_total)'#13#10'          END AS' +
+      ' VLR_APROVADO,'#13#10'          CASE'#13#10'        WHEN P.APROVADO_ORC = '#39'N' +
+      #39' THEN SUM(P.vlr_total)'#13#10'          END AS VLR_NAO_APROVADO,'#13#10'   ' +
+      '       CASE'#13#10'        WHEN P.APROVADO_ORC = '#39'P'#39' THEN SUM(P.vlr_to' +
+      'tal)'#13#10'          END AS VLR_PENDENTE'#13#10'FROM pedido p'#13#10'WHERE P.TIPO' +
+      '_REG = '#39'O'#39#13#10'       AND (P.FILIAL = :FILIAL or :FILIAL = 0)'#13#10'    ' +
+      '   AND P.DTEMISSAO >= :DTINICIAL'#13#10'       AND P.DTEMISSAO <= :DTF' +
+      'INAL'#13#10'group by P.APROVADO_ORC'#13#10#13#10#13#10
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'FILIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DTINICIAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'DTFINAL'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 237
+    Top = 479
+  end
+  object dspOrc_Emi: TDataSetProvider
+    DataSet = sdsOrc_Emi
+    Left = 269
+    Top = 480
+  end
+  object cdsOrc_Emi: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspOrc_Emi'
+    Left = 301
+    Top = 480
+    object cdsOrc_EmiVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+    end
+    object cdsOrc_EmiVLR_APROVADO: TFloatField
+      FieldName = 'VLR_APROVADO'
+    end
+    object cdsOrc_EmiVLR_NAO_APROVADO: TFloatField
+      FieldName = 'VLR_NAO_APROVADO'
+    end
+    object cdsOrc_EmiVLR_PENDENTE: TFloatField
+      FieldName = 'VLR_PENDENTE'
+    end
+  end
+  object dsOrc_Emi: TDataSource
+    DataSet = cdsOrc_Emi
+    Left = 333
+    Top = 480
+  end
 end

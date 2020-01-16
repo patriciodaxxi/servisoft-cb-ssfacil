@@ -1,6 +1,6 @@
 object frmConsFinanceiro: TfrmConsFinanceiro
-  Left = 64
-  Top = 14
+  Left = 104
+  Top = 11
   Width = 978
   Height = 718
   Caption = 'Consulta Saldos (Entrada/Sa'#237'da)'
@@ -81,7 +81,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
       TabOrder = 2
     end
     object btnConsultar: TNxButton
-      Left = 607
+      Left = 606
       Top = 3
       Width = 157
       Height = 30
@@ -202,7 +202,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
       Visible = False
     end
     object btnImprimir: TNxButton
-      Left = 607
+      Left = 606
       Top = 30
       Width = 157
       Height = 30

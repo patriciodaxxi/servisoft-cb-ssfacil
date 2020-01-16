@@ -376,6 +376,14 @@ type
     sdsFinanceiroID_FECHAMENTO: TIntegerField;
     cdsFinanceiroID_FECHAMENTO: TIntegerField;
     cdsFinanceiro_ConsultaID_FECHAMENTO: TIntegerField;
+    sdsOrc_Emi: TSQLDataSet;
+    dspOrc_Emi: TDataSetProvider;
+    cdsOrc_Emi: TClientDataSet;
+    dsOrc_Emi: TDataSource;
+    cdsOrc_EmiVLR_TOTAL: TFloatField;
+    cdsOrc_EmiVLR_APROVADO: TFloatField;
+    cdsOrc_EmiVLR_NAO_APROVADO: TFloatField;
+    cdsOrc_EmiVLR_PENDENTE: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspFinanceiroUpdateError(Sender: TObject; DataSet: TCustomClientDataSet; E: EUpdateError; UpdateKind: TUpdateKind; var Response: TResolverResponse);
     procedure cdsFinanceiroBeforePost(DataSet: TDataSet);
