@@ -24,7 +24,7 @@ object frmCadNotaServico: TfrmCadNotaServico
     Top = 0
     Width = 993
     Height = 665
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadNotaServico: TfrmCadNotaServico
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -2289,7 +2289,7 @@ object frmCadNotaServico: TfrmCadNotaServico
           end
           object DBText5: TDBText
             Left = 137
-            Top = 10
+            Top = 11
             Width = 81
             Height = 13
             DataField = 'NUMNOTA'
