@@ -2450,6 +2450,14 @@ object DMRecebeXML: TDMRecebeXML
       item
         Name = 'Vlr_Icms_Substituto'
         DataType = ftFloat
+      end
+      item
+        Name = 'Base_Pis'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Base_Cofins'
+        DataType = ftFloat
       end>
     IndexDefs = <
       item
@@ -2466,7 +2474,7 @@ object DMRecebeXML: TDMRecebeXML
     Left = 919
     Top = 232
     Data = {
-      7E0C00009619E0BD01000000180000007E0000000000030000007E0C04497465
+      A30C00009619E0BD010000001800000080000000000003000000A30C04497465
       6D04000100000000000A436F6450726F6475746F010049000000010005574944
       5448020002003C0011436F6450726F6475746F496E7465726E6F040001000000
       000006436F64436F72040001000000000008436F644772616465040001000000
@@ -2565,8 +2573,9 @@ object DMRecebeXML: TDMRecebeXML
       0010436F706961725F43464F505F50726F640100490000000100055749445448
       0200020001000A49445F43464F504E434D04000100000000000C49445F43464F
       50417475616C040001000000000013566C725F49636D735F5375627374697475
-      746F080004000000000001000D44454641554C545F4F52444552020082000000
-      0000}
+      746F080004000000000008426173655F50697308000400000000000B42617365
+      5F436F66696E73080004000000000001000D44454641554C545F4F5244455202
+      00820000000000}
     object mItensNotaItem: TIntegerField
       FieldName = 'Item'
     end
@@ -3038,6 +3047,12 @@ object DMRecebeXML: TDMRecebeXML
     end
     object mItensNotaVlr_Icms_Substituto: TFloatField
       FieldName = 'Vlr_Icms_Substituto'
+    end
+    object mItensNotaBase_Pis: TFloatField
+      FieldName = 'Base_Pis'
+    end
+    object mItensNotaBase_Cofins: TFloatField
+      FieldName = 'Base_Cofins'
     end
   end
   object dsmItensNota: TDataSource
@@ -5173,6 +5188,12 @@ object DMRecebeXML: TDMRecebeXML
     object sdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField
       FieldName = 'VLR_ICMSSUBST_RET'
     end
+    object sdsNotaFiscalBASE_PIS: TFloatField
+      FieldName = 'BASE_PIS'
+    end
+    object sdsNotaFiscalBASE_COFINS: TFloatField
+      FieldName = 'BASE_COFINS'
+    end
   end
   object dspNotaFiscal: TDataSetProvider
     DataSet = sdsNotaFiscal
@@ -5645,6 +5666,12 @@ object DMRecebeXML: TDMRecebeXML
     object cdsNotaFiscalVLR_ICMSSUBST_RET: TFloatField
       FieldName = 'VLR_ICMSSUBST_RET'
     end
+    object cdsNotaFiscalBASE_PIS: TFloatField
+      FieldName = 'BASE_PIS'
+    end
+    object cdsNotaFiscalBASE_COFINS: TFloatField
+      FieldName = 'BASE_COFINS'
+    end
   end
   object dsNotaFiscal: TDataSource
     DataSet = cdsNotaFiscal
@@ -6035,6 +6062,12 @@ object DMRecebeXML: TDMRecebeXML
     object sdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO: TFloatField
       FieldName = 'VLR_ICMS_SUBSTITUTO'
     end
+    object sdsNotaFiscal_ItensBASE_PIS: TFloatField
+      FieldName = 'BASE_PIS'
+    end
+    object sdsNotaFiscal_ItensBASE_COFINS: TFloatField
+      FieldName = 'BASE_COFINS'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -6043,7 +6076,7 @@ object DMRecebeXML: TDMRecebeXML
     Params = <>
     BeforePost = cdsNotaFiscal_ItensBeforePost
     OnNewRecord = cdsNotaFiscal_ItensNewRecord
-    Left = 136
+    Left = 138
     Top = 383
     object cdsNotaFiscal_ItensID: TIntegerField
       FieldName = 'ID'
@@ -6410,6 +6443,12 @@ object DMRecebeXML: TDMRecebeXML
     end
     object cdsNotaFiscal_ItensVLR_ICMS_SUBSTITUTO: TFloatField
       FieldName = 'VLR_ICMS_SUBSTITUTO'
+    end
+    object cdsNotaFiscal_ItensBASE_PIS: TFloatField
+      FieldName = 'BASE_PIS'
+    end
+    object cdsNotaFiscal_ItensBASE_COFINS: TFloatField
+      FieldName = 'BASE_COFINS'
     end
   end
   object dsNotaFiscal_Itens: TDataSource

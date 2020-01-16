@@ -1113,11 +1113,23 @@ begin
            (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'vPIS') then
           fDMRecebeXML.mItensNotaVlrPis.AsFloat := fDMRecebeXML.cdsDetalhe.Fields[i].Value
         else
+        if (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'PISAliq_vBC') or
+           (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'PISOutr_vBC') or
+           (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'PISQtde_vBC') then
+           //(fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'vBC') then
+          fDMRecebeXML.mItensNotaBase_Pis.AsFloat := fDMRecebeXML.cdsDetalhe.Fields[i].Value
+        else
         if (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSAliq_pCOFINS') or
            (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSOutr_pCOFINS') or
            (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSQtde_vAliqProd') or
            (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'pCOFINS') then
           fDMRecebeXML.mItensNotaAliqCofins.AsFloat := fDMRecebeXML.cdsDetalhe.Fields[i].Value
+        else
+        if (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSAliq_vBC') or
+           (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSOutr_vBC') or
+           (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSQtde_vBC') then
+           //(fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'vCOFINS') then
+          fDMRecebeXML.mItensNotaBase_Cofins.AsFloat := fDMRecebeXML.cdsDetalhe.Fields[i].Value
         else
         if (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSAliq_vCOFINS') or
            (fDMRecebeXML.cdsDetalhe.Fields[i].FieldName = 'COFINSOutr_vCOFINS') or
@@ -2392,6 +2404,11 @@ begin
     fDMRecebeXML.cdsNotaFiscalBASE_ICMS.AsFloat       := 0;
     fDMRecebeXML.cdsNotaFiscalVLR_ICMS.AsFloat        := 0;
     fDMRecebeXML.cdsNotaFiscalVLR_IPI.AsFloat         := 0;
+    fDMRecebeXML.cdsNotaFiscalVLR_PIS.AsFloat         := 0;
+    fDMRecebeXML.cdsNotaFiscalVLR_COFINS.AsFloat      := 0;
+    fDMRecebeXML.cdsNotaFiscalBASE_COFINS.AsFloat     := 0;
+    fDMRecebeXML.cdsNotaFiscalBASE_PIS.AsFloat        := 0;
+
     fDMRecebeXML.cdsNotaFiscalID_CFOP.AsInteger       := fDMRecebeXML.mItensNotaCFOPInterno.AsInteger;
     fDMRecebeXML.cdsNotaFiscalVLR_OUTRASDESP.AsFloat  := fDMRecebeXML.cdsCabecalhovOutro.AsFloat;
     //18/07/2019
@@ -2606,6 +2623,11 @@ begin
     fDMRecebeXML.cdsNotaFiscal_ItensPERC_PIS.AsFloat          := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaAliqPIS.AsFloat));
     fDMRecebeXML.cdsNotaFiscal_ItensVLR_COFINS.AsFloat        := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaVlrCofins.AsFloat));
     fDMRecebeXML.cdsNotaFiscal_ItensVLR_PIS.AsFloat           := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaVlrPis.AsFloat));
+    //16/01/2020
+    fDMRecebeXML.cdsNotaFiscal_ItensBASE_COFINS.AsFloat       := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaBase_Cofins.AsFloat));
+    fDMRecebeXML.cdsNotaFiscal_ItensBASE_PIS.AsFloat          := StrToFloat(FormatFloat('0.00',fDMRecebeXML.mItensNotaBase_Pis.AsFloat));
+    //**********************
+
     fDMRecebeXML.cdsNotaFiscal_ItensPRECO_CUSTO_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00000',fDMRecebeXML.mItensNotaPreco_Custo_Total.AsFloat));
     //****************
 
@@ -2649,6 +2671,11 @@ begin
     fDMRecebeXML.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat := fDMRecebeXML.cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat;
     fDMRecebeXML.cdsNotaFiscalBASE_IPI.AsFloat           := fDMRecebeXML.cdsNotaFiscalBASE_IPI.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_IPI.AsFloat;
     fDMRecebeXML.cdsNotaFiscalBASE_IPI.AsFloat           := fDMRecebeXML.cdsNotaFiscalBASE_IPI.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_IPI.AsFloat;
+    //16/01/2020
+    fDMRecebeXML.cdsNotaFiscalVLR_PIS.AsFloat            := fDMRecebeXML.cdsNotaFiscalVLR_PIS.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_PIS.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalVLR_COFINS.AsFloat         := fDMRecebeXML.cdsNotaFiscalVLR_COFINS.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensVLR_COFINS.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalBASE_PIS.AsFloat           := fDMRecebeXML.cdsNotaFiscalBASE_PIS.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_PIS.AsFloat;
+    fDMRecebeXML.cdsNotaFiscalBASE_COFINS.AsFloat        := fDMRecebeXML.cdsNotaFiscalBASE_COFINS.AsFloat + fDMRecebeXML.cdsNotaFiscal_ItensBASE_COFINS.AsFloat;
     //******************
 
     fDMRecebeXML.cdsNotaFiscal.Post;

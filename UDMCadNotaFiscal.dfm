@@ -579,6 +579,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object sdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField
       FieldName = 'ID_NOTAORIGINAL_ENT'
     end
+    object sdsNotaFiscalBASE_PIS: TFloatField
+      FieldName = 'BASE_PIS'
+    end
+    object sdsNotaFiscalBASE_COFINS: TFloatField
+      FieldName = 'BASE_COFINS'
+    end
   end
   object dspNotaFiscal: TDataSetProvider
     DataSet = sdsNotaFiscal
@@ -1235,6 +1241,14 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsNotaFiscalID_NOTAORIGINAL_ENT: TIntegerField
       FieldName = 'ID_NOTAORIGINAL_ENT'
+    end
+    object cdsNotaFiscalBASE_PIS: TFloatField
+      FieldName = 'BASE_PIS'
+      DisplayFormat = '0.00'
+    end
+    object cdsNotaFiscalBASE_COFINS: TFloatField
+      FieldName = 'BASE_COFINS'
+      DisplayFormat = '0.00'
     end
   end
   object dsNotaFiscal: TDataSource
@@ -1894,6 +1908,12 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FieldName = 'COD_CBENEF'
       Size = 8
     end
+    object sdsNotaFiscal_ItensBASE_PIS: TFloatField
+      FieldName = 'BASE_PIS'
+    end
+    object sdsNotaFiscal_ItensBASE_COFINS: TFloatField
+      FieldName = 'BASE_COFINS'
+    end
   end
   object cdsNotaFiscal_Itens: TClientDataSet
     Aggregates = <>
@@ -2548,6 +2568,14 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object cdsNotaFiscal_ItensCOD_CBENEF: TStringField
       FieldName = 'COD_CBENEF'
       Size = 8
+    end
+    object cdsNotaFiscal_ItensBASE_PIS: TFloatField
+      FieldName = 'BASE_PIS'
+      DisplayFormat = '0.00'
+    end
+    object cdsNotaFiscal_ItensBASE_COFINS: TFloatField
+      FieldName = 'BASE_COFINS'
+      DisplayFormat = '0.00'
     end
   end
   object dsNotaFiscal_Itens: TDataSource
@@ -4687,7 +4715,7 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 601
+    Left = 600
     Top = 177
   end
   object dspFilial: TDataSetProvider
@@ -4919,6 +4947,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
     object cdsFilialCALCULAR_ICMS_EFET: TStringField
       FieldName = 'CALCULAR_ICMS_EFET'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsFilialDESC_ICMS_PIS_COFINS: TStringField
+      FieldName = 'DESC_ICMS_PIS_COFINS'
       FixedChar = True
       Size = 1
     end

@@ -707,10 +707,10 @@ object frmCadFilial: TfrmCadFilial
         Top = 31
         Width = 1090
         Height = 544
-        ActivePage = TS_NotaServico
+        ActivePage = TS_Tributos
         ActivePageDefault = TS_Dados
         Align = alClient
-        TabIndex = 3
+        TabIndex = 1
         TabOrder = 1
         OnChange = RzPageControl2Change
         FixedDimension = 19
@@ -1298,7 +1298,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object Label59: TLabel
             Left = 451
-            Top = 232
+            Top = 264
             Width = 122
             Height = 26
             Alignment = taRightJustify
@@ -1364,10 +1364,11 @@ object frmCadFilial: TfrmCadFilial
             Caption = 'Faixa aceita 920 a 969'
           end
           object Label140: TLabel
-            Left = 456
-            Top = 184
+            Left = 455
+            Top = 224
             Width = 106
             Height = 13
+            Alignment = taRightJustify
             Caption = 'Calcular ICMS Efetivo:'
           end
           object RxDBComboBox3: TRxDBComboBox
@@ -1650,7 +1651,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBEdit40: TDBEdit
             Left = 577
-            Top = 237
+            Top = 269
             Width = 65
             Height = 21
             CharCase = ecUpperCase
@@ -1675,9 +1676,9 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBCheckBox15: TDBCheckBox
             Left = 352
-            Top = 136
+            Top = 138
             Width = 97
-            Height = 25
+            Height = 17
             Caption = 'Calcular Difal'
             DataField = 'CALCULAR_DIFAL'
             DataSource = DMCadFilial.dsFilial
@@ -1688,7 +1689,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object DBCheckBox16: TDBCheckBox
             Left = 352
-            Top = 152
+            Top = 153
             Width = 153
             Height = 17
             Caption = 'Gerar valores do Difal'
@@ -1767,7 +1768,7 @@ object frmCadFilial: TfrmCadFilial
           end
           object RxDBComboBox26: TRxDBComboBox
             Left = 564
-            Top = 176
+            Top = 216
             Width = 145
             Height = 21
             Style = csDropDownList
@@ -1784,6 +1785,18 @@ object frmCadFilial: TfrmCadFilial
               'C'
               'S'
               'N')
+          end
+          object DBCheckBox26: TDBCheckBox
+            Left = 352
+            Top = 185
+            Width = 313
+            Height = 17
+            Caption = 'Descontar Vlr. ICMS da Base do PIS/COFINS'
+            DataField = 'DESC_ICMS_PIS_COFINS'
+            DataSource = DMCadFilial.dsFilial
+            TabOrder = 25
+            ValueChecked = 'S'
+            ValueUnchecked = 'N'
           end
         end
         object TS_Parametros: TRzTabSheet
@@ -5399,8 +5412,8 @@ object frmCadFilial: TfrmCadFilial
           object pnlCusto: TPanel
             Left = 0
             Top = 0
-            Width = 1078
-            Height = 513
+            Width = 1086
+            Height = 521
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -5410,7 +5423,7 @@ object frmCadFilial: TfrmCadFilial
             object gbxCustoVenda: TRzGroupBox
               Left = 25
               Top = 15
-              Width = 566
+              Width = 574
               Height = 226
               Anchors = [akLeft, akTop, akRight]
               BorderColor = clNavy
@@ -5586,7 +5599,7 @@ object frmCadFilial: TfrmCadFilial
             object RzGroupBox3: TRzGroupBox
               Left = 257
               Top = 15
-              Width = 566
+              Width = 574
               Height = 226
               Anchors = [akLeft, akTop, akRight]
               BorderColor = clNavy

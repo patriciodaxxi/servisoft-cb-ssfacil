@@ -1901,6 +1901,14 @@ object DMNFe: TDMNFe
       item
         Name = 'Vlr_Icms_Substituto'
         DataType = ftFloat
+      end
+      item
+        Name = 'Base_Pis'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Base_Cofins'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     IndexFieldNames = 'Filial;NumNota;ItemNota'
@@ -1911,7 +1919,7 @@ object DMNFe: TDMNFe
     Left = 225
     Top = 423
     Data = {
-      360A00009619E0BD01000000180000006B000000000003000000360A0646696C
+      5B0A00009619E0BD01000000180000006D0000000000030000005B0A0646696C
       69616C0400010000000000074E756D4E6F74610400010000000000084974656D
       4E6F746104000100000000000A436F6450726F6475746F010049000000010005
       57494454480200020014000A436F644E61744F70657201004900000001000557
@@ -1992,7 +2000,8 @@ object DMNFe: TDMNFe
       73655F49434D535F4566657408000400000000000D566C725F49434D535F4566
       657408000400000000000E506572635F49434D535F4566657408000400000000
       0012504552435F424153455F5245445F45464554080004000000000013566C72
-      5F49636D735F5375627374697475746F08000400000000000000}
+      5F49636D735F5375627374697475746F080004000000000008426173655F5069
+      7308000400000000000B426173655F436F66696E7308000400000000000000}
     object mItensNFeFilial: TIntegerField
       FieldName = 'Filial'
     end
@@ -2349,6 +2358,12 @@ object DMNFe: TDMNFe
     end
     object mItensNFeVlr_Icms_Substituto: TFloatField
       FieldName = 'Vlr_Icms_Substituto'
+    end
+    object mItensNFeBase_Pis: TFloatField
+      FieldName = 'Base_Pis'
+    end
+    object mItensNFeBase_Cofins: TFloatField
+      FieldName = 'Base_Cofins'
     end
   end
   object mAuxDadosNFe: TClientDataSet

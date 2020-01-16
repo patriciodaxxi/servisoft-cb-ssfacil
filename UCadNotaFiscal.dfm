@@ -2555,7 +2555,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
         Top = 229
         Width = 942
         Height = 390
-        ActivePage = TabSheet3
+        ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
         BackgroundColor = clSilver
@@ -2563,7 +2563,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 2
         FixedDimension = 19
         object RzTabSheet1: TRzTabSheet
@@ -5307,7 +5307,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label39: TLabel
               Left = 577
-              Top = 70
+              Top = 61
               Width = 31
               Height = 13
               Alignment = taRightJustify
@@ -5315,7 +5315,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label38: TLabel
               Left = 563
-              Top = 106
+              Top = 97
               Width = 45
               Height = 13
               Alignment = taRightJustify
@@ -5323,7 +5323,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label41: TLabel
               Left = 553
-              Top = 124
+              Top = 115
               Width = 55
               Height = 13
               Alignment = taRightJustify
@@ -5331,7 +5331,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label42: TLabel
               Left = 525
-              Top = 142
+              Top = 133
               Width = 83
               Height = 13
               Alignment = taRightJustify
@@ -5339,7 +5339,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label47: TLabel
               Left = 561
-              Top = 160
+              Top = 169
               Width = 47
               Height = 13
               Alignment = taRightJustify
@@ -5347,7 +5347,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label48: TLabel
               Left = 539
-              Top = 178
+              Top = 205
               Width = 69
               Height = 13
               Alignment = taRightJustify
@@ -5355,35 +5355,35 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label49: TLabel
               Left = 506
-              Top = 196
+              Top = 223
               Width = 102
               Height = 13
               Caption = 'Valor Taxa Siscomex:'
             end
             object Label50: TLabel
               Left = 494
-              Top = 232
+              Top = 259
               Width = 114
               Height = 13
               Caption = 'Vlr. Imposto Importa'#231#227'o:'
             end
             object Label51: TLabel
               Left = 539
-              Top = 250
+              Top = 277
               Width = 69
               Height = 13
               Caption = 'Vlr. Aduaneira:'
             end
             object Label52: TLabel
               Left = 536
-              Top = 268
+              Top = 295
               Width = 72
               Height = 13
               Caption = 'Outros Valores:'
             end
             object Label93: TLabel
               Left = 517
-              Top = 286
+              Top = 313
               Width = 91
               Height = 13
               Alignment = taRightJustify
@@ -5391,14 +5391,14 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label100: TLabel
               Left = 539
-              Top = 214
+              Top = 241
               Width = 69
               Height = 13
               Caption = 'Valor AFRMM:'
             end
             object Label101: TLabel
               Left = 498
-              Top = 304
+              Top = 331
               Width = 110
               Height = 13
               Alignment = taRightJustify
@@ -5430,7 +5430,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label110: TLabel
               Left = 543
-              Top = 88
+              Top = 79
               Width = 65
               Height = 13
               Alignment = taRightJustify
@@ -5438,11 +5438,27 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object Label111: TLabel
               Left = 565
-              Top = 52
+              Top = 43
               Width = 43
               Height = 13
               Alignment = taRightJustify
               Caption = 'Base IPI:'
+            end
+            object Label119: TLabel
+              Left = 561
+              Top = 151
+              Width = 47
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Base PIS:'
+            end
+            object Label120: TLabel
+              Left = 539
+              Top = 187
+              Width = 69
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Base COFINS:'
             end
             object pnlValores: TPanel
               Left = 1
@@ -5537,7 +5553,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit19: TDBEdit
               Left = 609
-              Top = 62
+              Top = 53
               Width = 100
               Height = 19
               TabStop = False
@@ -5706,7 +5722,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit14: TDBEdit
               Left = 609
-              Top = 98
+              Top = 89
               Width = 100
               Height = 19
               TabStop = False
@@ -5721,7 +5737,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit16: TDBEdit
               Left = 609
-              Top = 116
+              Top = 107
               Width = 100
               Height = 19
               TabStop = False
@@ -5736,7 +5752,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit17: TDBEdit
               Left = 609
-              Top = 134
+              Top = 125
               Width = 100
               Height = 19
               TabStop = False
@@ -5751,7 +5767,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit20: TDBEdit
               Left = 609
-              Top = 152
+              Top = 161
               Width = 100
               Height = 19
               TabStop = False
@@ -5765,7 +5781,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit21: TDBEdit
               Left = 609
-              Top = 170
+              Top = 197
               Width = 100
               Height = 19
               TabStop = False
@@ -5779,7 +5795,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit22: TDBEdit
               Left = 609
-              Top = 188
+              Top = 215
               Width = 100
               Height = 19
               TabStop = False
@@ -5793,7 +5809,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit23: TDBEdit
               Left = 609
-              Top = 224
+              Top = 251
               Width = 100
               Height = 19
               TabStop = False
@@ -5807,7 +5823,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit31: TDBEdit
               Left = 609
-              Top = 242
+              Top = 269
               Width = 100
               Height = 19
               TabStop = False
@@ -5821,7 +5837,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit32: TDBEdit
               Left = 609
-              Top = 260
+              Top = 287
               Width = 100
               Height = 19
               TabStop = False
@@ -6121,7 +6137,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object btnVlr_Outras_Despesas: TNxButton
               Left = 709
-              Top = 127
+              Top = 118
               Width = 36
               Height = 27
               Font.Charset = DEFAULT_CHARSET
@@ -6193,7 +6209,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit54: TDBEdit
               Left = 609
-              Top = 278
+              Top = 305
               Width = 100
               Height = 19
               TabStop = False
@@ -6311,7 +6327,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit60: TDBEdit
               Left = 609
-              Top = 206
+              Top = 233
               Width = 100
               Height = 19
               TabStop = False
@@ -6325,7 +6341,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit61: TDBEdit
               Left = 609
-              Top = 296
+              Top = 323
               Width = 100
               Height = 19
               TabStop = False
@@ -6512,7 +6528,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit71: TDBEdit
               Left = 609
-              Top = 80
+              Top = 71
               Width = 100
               Height = 19
               TabStop = False
@@ -6527,7 +6543,7 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             end
             object DBEdit72: TDBEdit
               Left = 609
-              Top = 44
+              Top = 35
               Width = 100
               Height = 19
               TabStop = False
@@ -6641,6 +6657,35 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 ParentCtl3D = False
                 TabOrder = 3
               end
+            end
+            object DBEdit79: TDBEdit
+              Left = 609
+              Top = 143
+              Width = 100
+              Height = 19
+              TabStop = False
+              CharCase = ecUpperCase
+              Color = clSilver
+              Ctl3D = False
+              DataField = 'BASE_PIS'
+              DataSource = DMCadNotaFiscal.dsNotaFiscal
+              ParentCtl3D = False
+              ReadOnly = True
+              TabOrder = 36
+            end
+            object DBEdit80: TDBEdit
+              Left = 609
+              Top = 179
+              Width = 100
+              Height = 19
+              TabStop = False
+              Color = clSilver
+              Ctl3D = False
+              DataField = 'BASE_COFINS'
+              DataSource = DMCadNotaFiscal.dsNotaFiscal
+              ParentCtl3D = False
+              ReadOnly = True
+              TabOrder = 37
             end
           end
           object btnSubstTributaria: TNxButton

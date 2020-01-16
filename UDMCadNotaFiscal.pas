@@ -3115,6 +3115,15 @@ type
     qProduto_UFCOD_BENEF: TStringField;
     qParametros_NFeENVIAR_ICMS_SUBSTITUTO: TStringField;
     qProdSTVLR_ICMS_SUBSTITUTO: TFloatField;
+    sdsNotaFiscalBASE_PIS: TFloatField;
+    sdsNotaFiscalBASE_COFINS: TFloatField;
+    cdsNotaFiscalBASE_PIS: TFloatField;
+    cdsNotaFiscalBASE_COFINS: TFloatField;
+    sdsNotaFiscal_ItensBASE_PIS: TFloatField;
+    sdsNotaFiscal_ItensBASE_COFINS: TFloatField;
+    cdsNotaFiscal_ItensBASE_PIS: TFloatField;
+    cdsNotaFiscal_ItensBASE_COFINS: TFloatField;
+    cdsFilialDESC_ICMS_PIS_COFINS: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);
@@ -3784,6 +3793,8 @@ begin
   cdsNotaFiscalBASE_ICMS_FCP_DEST.AsFloat       := 0;
   cdsNotaFiscalVLR_ICMS_FCP_DEST.AsFloat        := 0;
   cdsNotaFiscalSOMAR_FRETE_II.AsString          := 'N';
+  cdsNotaFiscalBASE_COFINS.AsFloat              := 0;
+  cdsNotaFiscalBASE_PIS.AsFloat                 := 0;
 end;
 
 function TDMCadNotaFiscal.fnc_Possui_Erro(NaoContDupl: Boolean = False): Boolean;
@@ -4232,6 +4243,8 @@ begin
   cdsNotaFiscal_ItensVLR_ICMS_FCP_DEST.AsFloat       := 0;
   cdsNotaFiscal_ItensBASE_ICMS_FCP_DEST.AsFloat      := 0;
   cdsNotaFiscal_ItensPERC_ICMS_FCP_5405.AsFloat      := 0;
+  cdsNotaFiscal_ItensBASE_COFINS.AsFloat             := 0;
+  cdsNotaFiscal_ItensBASE_PIS.AsFloat                := 0;
 end;
 
 procedure TDMCadNotaFiscal.prc_Gravar_NotaFiscal_Parc(Parcela, ID_TipoCobranca, ID_Conta: Integer; Data: TDateTime;

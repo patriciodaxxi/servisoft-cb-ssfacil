@@ -4671,6 +4671,11 @@ begin
     fDMNFe.mItensNFeVlrIcmsSimples.AsFloat     := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrIcmsSimples.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSSIMPLES.AsFloat));
     fDMNFe.mItensNFeVlrPis.AsFloat             := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrPis.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_PIS.AsFloat));
     fDMNFe.mItensNFeVlrCofins.AsFloat          := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrCofins.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_COFINS.AsFloat));
+    //16/01/2020
+    fDMNFe.mItensNFeBase_Pis.AsFloat           := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeBase_Pis.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_PIS.AsFloat));
+    fDMNFe.mItensNFeBase_Cofins.AsFloat        := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeBase_Cofins.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_COFINS.AsFloat));
+    //*******************
+
     fDMNFe.mItensNFeVlrFrete.AsFloat           := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrFrete.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_FRETE.AsFloat));
     fDMNFe.mItensNFeVlrSeguro.AsFloat          := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrSeguro.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_SEGURO.AsFloat));
     fDMNFe.mItensNFeVlrOutrasDespesas.AsFloat  := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrOutrasDespesas.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_OUTRASDESPESAS.AsFloat));

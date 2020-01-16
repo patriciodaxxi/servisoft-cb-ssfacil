@@ -716,7 +716,8 @@ begin
 
     if (fDMCadNotaFiscal.qPessoa_FiscalIPI_SUSPENSO.AsString = 'S') and
        (fDMCadNotaFiscal.cdsNotaFiscalDTEMISSAO.AsDateTime >= fDMCadNotaFiscal.qPessoa_FiscalIPI_DT_INICIO.AsDateTime) and
-       (fDMCadNotaFiscal.cdsNotaFiscalDTEMISSAO.AsDateTime <= fDMCadNotaFiscal.qPessoa_FiscalIPI_DT_FINAL.AsDateTime) then
+       ((fDMCadNotaFiscal.qPessoa_FiscalIPI_DT_FINAL.AsDateTime < 10) or
+       (fDMCadNotaFiscal.cdsNotaFiscalDTEMISSAO.AsDateTime <= fDMCadNotaFiscal.qPessoa_FiscalIPI_DT_FINAL.AsDateTime)) then
     begin
       vID_IPI := fDMCadNotaFiscal.qPessoa_FiscalIPI_ID_CSTIPI.AsInteger;
       fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_IPI.AsFloat := 0;

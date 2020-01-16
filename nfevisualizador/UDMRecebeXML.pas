@@ -2338,6 +2338,16 @@ type
     cdsDetalheICMS60_vICMSSubstituto: TStringField;
     cdsDetalheICMSST_vICMSSubstituto: TFloatField;
     cdsDetalheICMSSN500_vICMSSubstituto: TFloatField;
+    mItensNotaBase_Pis: TFloatField;
+    mItensNotaBase_Cofins: TFloatField;
+    sdsNotaFiscalBASE_PIS: TFloatField;
+    sdsNotaFiscalBASE_COFINS: TFloatField;
+    cdsNotaFiscalBASE_PIS: TFloatField;
+    cdsNotaFiscalBASE_COFINS: TFloatField;
+    sdsNotaFiscal_ItensBASE_PIS: TFloatField;
+    sdsNotaFiscal_ItensBASE_COFINS: TFloatField;
+    cdsNotaFiscal_ItensBASE_PIS: TFloatField;
+    cdsNotaFiscal_ItensBASE_COFINS: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspNotaFiscalUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

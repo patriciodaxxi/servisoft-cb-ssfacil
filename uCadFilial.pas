@@ -414,6 +414,7 @@ type
     dbedtURLHomologacao: TDBEdit;
     Label152: TLabel;
     dbedtURLProducao: TDBEdit;
+    DBCheckBox26: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

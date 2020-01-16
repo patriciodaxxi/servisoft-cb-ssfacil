@@ -1229,6 +1229,8 @@ type
     qParametros_NFeIMP_CONDPGTO_DADOS: TStringField;
     mItensNFeVlr_Icms_Substituto: TFloatField;
     qContasIMP_DIG_AGENCIA_DEP: TStringField;
+    mItensNFeBase_Pis: TFloatField;
+    mItensNFeBase_Cofins: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);
@@ -1409,6 +1411,8 @@ begin
   mItensNFeVlrIPI_Devol.AsFloat       := 0;
   mItensNFePerc_Devol.AsFloat         := 0;
   mItensNFePercRedICMS.AsFloat        := 0;
+  mItensNFeBase_Cofins.AsFloat        := 0;
+  mItensNFeBase_Pis.AsFloat           := 0;
 end;
 
 procedure TDMNFe.Posiciona_CidadeUF(CodCidade, IDPais: Integer);
