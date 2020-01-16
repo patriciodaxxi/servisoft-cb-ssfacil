@@ -622,10 +622,7 @@ begin
   if (fDMNFe.mItensNFeCodPis.AsString = '01') or (fDMNFe.mItensNFeCodPis.AsString = '02') then
   begin
     DetXML.Imposto.PIS.PISAliq.CST := fDMNFe.mItensNFeCodPis.AsString;
-    vVlrAux := 0;
-    if fDMNFe.mItensNFeVlrPis.AsFloat > 0 then
-      vVlrAux := fDMNFe.mItensNFeVlrTotal.AsFloat;
-    DetXML.Imposto.PIS.PISAliq.VBC  := Replace(FormatFloat('0.00',vVlrAux),',','.');
+    DetXML.Imposto.PIS.PISAliq.VBC  := Replace(FormatFloat('0.00',fDMNFe.mItensNFeBase_Pis.AsFloat),',','.');
     DetXML.Imposto.PIS.PISAliq.PPIS := Replace(FormatFloat('0.0000',fDMNFe.mItensNFeAliqPis.AsFloat),',','.');
     DetXML.Imposto.PIS.PISAliq.VPIS := Replace(FormatFloat('0.00',fDMNFe.mItensNFeVlrPis.AsFloat),',','.');
   end
@@ -655,7 +652,7 @@ begin
     vQtdAux := 0;
     if fDMNFe.mItensNFeVlrPis.AsFloat > 0 then
     begin
-      vVlrAux := fDMNFe.mItensNFeVlrTotal.AsFloat;
+      vVlrAux := fDMNFe.mItensNFeBase_Pis.AsFloat;
       vQtdAux := fDMNFe.mItensNFeQtd.AsFloat;
     end;
     if fDMNFe.mItensNFeTipoPis.AsString = 'V' then
@@ -681,10 +678,7 @@ begin
   begin
     //NfeXML.InfNFe.Det.Add.Imposto.COFINS.COFINSAliq.CST := fDMNFe.mItensNFeCodCofins.AsString;
     DetXML.Imposto.COFINS.COFINSAliq.CST := fDMNFe.mItensNFeCodCofins.AsString;
-    vVlrAux := 0;
-    if fDMNFe.mItensNFeVlrCofins.AsFloat > 0 then
-      vVlrAux := fDMNFe.mItensNFeVlrTotal.AsFloat;
-    DetXML.Imposto.COFINS.COFINSAliq.VBC     := Replace(FormatFloat('0.00',vVlrAux),',','.');
+    DetXML.Imposto.COFINS.COFINSAliq.VBC     := Replace(FormatFloat('0.00',fDMNFe.mItensNFeBase_Cofins.AsFloat),',','.');
     DetXML.Imposto.COFINS.COFINSAliq.PCOFINS := Replace(FormatFloat('0.0000',fDMNFe.mItensNFeAliqCofins.AsFloat),',','.');
     DetXML.Imposto.COFINS.COFINSAliq.VCOFINS := Replace(FormatFloat('0.00',fDMNFe.mItensNFeVlrCofins.AsFloat),',','.');
   end
@@ -715,7 +709,7 @@ begin
     vQtdAux := 0;
     if fDMNFe.mItensNFeVlrCofins.AsFloat > 0 then
     begin
-      vVlrAux := fDMNFe.mItensNFeVlrTotal.AsFloat;
+      vVlrAux := fDMNFe.mItensNFeBase_Cofins.AsFloat;
       vQtdAux := fDMNFe.mItensNFeQtd.AsFloat;
     end;
     if fDMNFe.mItensNFeTipoCofins.AsString = 'V' then

@@ -420,6 +420,11 @@ object DMCadFilial: TDMCadFilial
       FieldName = 'ARQ_MODELO_CONTRATO'
       Size = 200
     end
+    object sdsFilialDESC_ICMS_PIS_COFINS: TStringField
+      FieldName = 'DESC_ICMS_PIS_COFINS'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspFilial: TDataSetProvider
     DataSet = sdsFilial
@@ -871,6 +876,11 @@ object DMCadFilial: TDMCadFilial
     end
     object cdsFilialsdsFilial_SoftwareHouse: TDataSetField
       FieldName = 'sdsFilial_SoftwareHouse'
+    end
+    object cdsFilialDESC_ICMS_PIS_COFINS: TStringField
+      FieldName = 'DESC_ICMS_PIS_COFINS'
+      FixedChar = True
+      Size = 1
     end
   end
   object dsFilial: TDataSource

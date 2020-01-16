@@ -208,6 +208,10 @@ type
     DBEdit71: TDBEdit;
     Label88: TLabel;
     DBEdit72: TDBEdit;
+    Label89: TLabel;
+    Label90: TLabel;
+    DBEdit73: TDBEdit;
+    DBEdit74: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -229,6 +233,7 @@ type
     vAduaneira_Ant, vVlrSiscomex_Ant: Real;
     vBase_ICMS_ST_Ant, vVlr_ICMS_ST_Ant: Real;
     vBase_ST_Ret_Ant , vVlr_ST_Ret_Ant, vBase_Efet_Ant, vVlr_ICMS_Efet_Ant : Real;
+    vBase_Pis_Ant, vBase_Cofins_Ant : Real;
 
     vVlr_Tributos: Real;
     vVlr_Nota: Real;
@@ -287,6 +292,12 @@ begin
   vCofins_Ant       := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_COFINS.AsFloat;
   vSeguro_Ant       := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_SEGURO.AsFloat;
   vPis_Ant          := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_PIS.AsFloat;
+
+  //16/01/2020
+  vBase_Cofins_Ant  := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_COFINS.AsFloat));
+  vBase_Pis_Ant     := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_PIS.AsFloat));
+  //*******************
+
   vImportacao_Ant   := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_IMPORTACAO.AsFloat;
   vAduaneira_Ant    := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ADUANEIRA.AsFloat;
   vVlrSiscomex_Ant  := fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TAXACISCOMEX.AsFloat;
@@ -358,6 +369,9 @@ begin
   fDMCadNotaFiscal.cdsNotaFiscalVLR_COFINS.AsFloat       := (fDMCadNotaFiscal.cdsNotaFiscalVLR_COFINS.AsFloat - vCofins_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_COFINS.AsFloat;
   fDMCadNotaFiscal.cdsNotaFiscalVLR_SEGURO.AsFloat       := (fDMCadNotaFiscal.cdsNotaFiscalVLR_SEGURO.AsFloat - vSeguro_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_SEGURO.AsFloat;
   fDMCadNotaFiscal.cdsNotaFiscalVLR_PIS.AsFloat          := (fDMCadNotaFiscal.cdsNotaFiscalVLR_PIS.AsFloat - vPis_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_PIS.AsFloat;
+  fDMCadNotaFiscal.cdsNotaFiscalBASE_COFINS.AsFloat      := (fDMCadNotaFiscal.cdsNotaFiscalBASE_COFINS.AsFloat - vBase_Cofins_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_COFINS.AsFloat;
+  fDMCadNotaFiscal.cdsNotaFiscalBASE_PIS.AsFloat         := (fDMCadNotaFiscal.cdsNotaFiscalBASE_PIS.AsFloat - vBase_Pis_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_PIS.AsFloat;
+
   fDMCadNotaFiscal.cdsNotaFiscalVLR_IMPORTACAO.AsFloat   := (fDMCadNotaFiscal.cdsNotaFiscalVLR_IMPORTACAO.AsFloat - vImportacao_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_IMPORTACAO.AsFloat;
   fDMCadNotaFiscal.cdsNotaFiscalVLR_ADUANEIRA.AsFloat    := (fDMCadNotaFiscal.cdsNotaFiscalVLR_ADUANEIRA.AsFloat - vAduaneira_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ADUANEIRA.AsFloat;
   fDMCadNotaFiscal.cdsNotaFiscalVLR_TAXACISCOMEX.AsFloat := (fDMCadNotaFiscal.cdsNotaFiscalVLR_TAXACISCOMEX.AsFloat - vVlrSiscomex_Ant) + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_TAXACISCOMEX.AsFloat;

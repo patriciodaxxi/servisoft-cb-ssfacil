@@ -421,6 +421,10 @@ type
     AtualizarDetExportaoDrawBackItensOrigem1: TMenuItem;
     ExcluirDetExportaoDrawBack1: TMenuItem;
     ExcluirDetExportaoDrawBackItensdeOrigem1: TMenuItem;
+    Label119: TLabel;
+    DBEdit79: TDBEdit;
+    Label120: TLabel;
+    DBEdit80: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
