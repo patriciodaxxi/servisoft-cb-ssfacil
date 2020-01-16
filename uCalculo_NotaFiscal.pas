@@ -1684,6 +1684,7 @@ begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_PIS.AsFloat := StrToCurr(FormatCurr('0.00',(vBaseAux * fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat) / 100))
     else
       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_PIS.AsFloat := StrToFloat(FormatFloat('0.00',(vBaseAux * fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_PIS.AsFloat) / 100));
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_PIS.AsFloat    := StrToFloat(FormatFloat('0.00',vBaseAux));
   end;
   if fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat > 0 then
   begin
@@ -1691,9 +1692,8 @@ begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_COFINS.AsFloat := StrToCurr(FormatCurr('0.00',(vBaseAux * fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat) / 100))
     else
       fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_COFINS.AsFloat := StrToFloat(FormatFloat('0.00',(vBaseAux * fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_COFINS.AsFloat) / 100));
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_COFINS.AsFloat := StrToFloat(FormatFloat('0.00',vBaseAux));
   end;
-  fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_COFINS.AsFloat := StrToFloat(FormatFloat('0.00',vBaseAux));
-  fDMCadNotaFiscal.cdsNotaFiscal_ItensBASE_PIS.AsFloat    := StrToFloat(FormatFloat('0.00',vBaseAux));
 end;
 
 procedure prc_Calcular_PisCofins_Suframa(fDMCadNotaFiscal: TDMCadNotaFiscal; VlrTotal: Real);
