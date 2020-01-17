@@ -18,7 +18,7 @@ object frmTalaoPed: TfrmTalaoPed
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 912
+    Width = 920
     Height = 65
     Align = alTop
     Color = clSilver
@@ -121,8 +121,8 @@ object frmTalaoPed: TfrmTalaoPed
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 65
-    Width = 912
-    Height = 376
+    Width = 920
+    Height = 384
     Align = alClient
     Ctl3D = False
     DataSource = DMConsPedido.dsPedidoTipo
