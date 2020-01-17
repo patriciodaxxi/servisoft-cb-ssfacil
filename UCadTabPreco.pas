@@ -215,7 +215,7 @@ end;
 procedure TfrmCadTabPreco.FormShow(Sender: TObject);
 var
   vData: TDateTime;
-  i : Integer;
+  i: Integer;
 begin
   fDMCadTab_Preco := TDMCadTab_Preco.Create(Self);
 
@@ -430,7 +430,7 @@ var
   vPreco: Real;
   vContadorAux: Integer;
   vID_Produto: Integer;
-  i : Integer;
+  i: Integer;
 begin
   if StrToFloat(FormatFloat('0.00',CurrencyEdit1.Value)) <= 0 then
   begin
@@ -550,8 +550,8 @@ end;
 procedure TfrmCadTabPreco.SMDBGrid2KeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
-  ffrmCadTabPreco_Inf : TfrmCadTabPreco_Inf;
-  i : Integer;
+  ffrmCadTabPreco_Inf: TfrmCadTabPreco_Inf;
+  i: Integer;
 begin
   if (Key = Vk_F3) then
   begin

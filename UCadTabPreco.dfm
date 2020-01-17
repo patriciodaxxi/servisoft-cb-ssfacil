@@ -22,9 +22,9 @@ object frmCadTabPreco: TfrmCadTabPreco
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 942
-    Height = 572
-    ActivePage = TS_Cadastro
+    Width = 934
+    Height = 564
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,16 +32,16 @@ object frmCadTabPreco: TfrmCadTabPreco
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
       Caption = 'Tela de Consulta'
       object SMDBGrid1: TSMDBGrid
         Left = 0
-        Top = 106
-        Width = 938
-        Height = 426
+        Top = 104
+        Width = 930
+        Height = 420
         Align = alClient
         Ctl3D = False
         DataSource = DMCadTab_Preco.dsTab_Preco
@@ -102,8 +102,8 @@ object frmCadTabPreco: TfrmCadTabPreco
       end
       object pnlPesquisa: TPanel
         Left = 0
-        Top = 33
-        Width = 938
+        Top = 31
+        Width = 930
         Height = 73
         Align = alTop
         Color = clSilver
@@ -119,7 +119,7 @@ object frmCadTabPreco: TfrmCadTabPreco
         end
         object Label5: TLabel
           Left = 4
-          Top = 57
+          Top = 56
           Width = 89
           Height = 13
           Alignment = taRightJustify
@@ -127,7 +127,7 @@ object frmCadTabPreco: TfrmCadTabPreco
         end
         object Label6: TLabel
           Left = 215
-          Top = 57
+          Top = 56
           Width = 25
           Height = 13
           Caption = 'Final:'
@@ -142,7 +142,7 @@ object frmCadTabPreco: TfrmCadTabPreco
         end
         object DateEdit1: TDateEdit
           Left = 95
-          Top = 49
+          Top = 48
           Width = 100
           Height = 21
           NumGlyphs = 2
@@ -150,7 +150,7 @@ object frmCadTabPreco: TfrmCadTabPreco
         end
         object DateEdit2: TDateEdit
           Left = 243
-          Top = 49
+          Top = 48
           Width = 100
           Height = 21
           NumGlyphs = 2
@@ -167,7 +167,7 @@ object frmCadTabPreco: TfrmCadTabPreco
         end
         object btnConsultar: TNxButton
           Left = 375
-          Top = 40
+          Top = 39
           Width = 177
           Height = 30
           Caption = 'Efetuar Pesquisa'
@@ -249,8 +249,8 @@ object frmCadTabPreco: TfrmCadTabPreco
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 532
-        Width = 938
+        Top = 524
+        Width = 930
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -266,16 +266,17 @@ object frmCadTabPreco: TfrmCadTabPreco
       object Panel11: TPanel
         Left = 0
         Top = 0
-        Width = 938
-        Height = 33
+        Width = 930
+        Height = 31
         Align = alTop
         Color = clSilver
         TabOrder = 1
         object btnInserir: TNxButton
-          Left = 4
-          Top = 2
+          Left = 1
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 29
+          Align = alLeft
           Caption = 'Inserir'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -346,10 +347,11 @@ object frmCadTabPreco: TfrmCadTabPreco
           OnClick = btnInserirClick
         end
         object btnExcluir: TNxButton
-          Left = 158
-          Top = 2
+          Left = 154
+          Top = 1
           Width = 149
-          Height = 30
+          Height = 29
+          Align = alLeft
           Caption = 'Excluir'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -420,10 +422,11 @@ object frmCadTabPreco: TfrmCadTabPreco
           OnClick = btnExcluirClick
         end
         object btnPesquisar: TNxButton
-          Left = 311
-          Top = 2
+          Left = 303
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 29
+          Align = alLeft
           Caption = 'Pesquisar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -492,10 +495,12 @@ object frmCadTabPreco: TfrmCadTabPreco
           OnClick = btnPesquisarClick
         end
         object btnExportar: TNxButton
-          Left = 617
-          Top = 2
+          Left = 607
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 29
+          Hint = 'Gera arquivo em Excel'
+          Align = alLeft
           Caption = 'Exportar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -504,15 +509,18 @@ object frmCadTabPreco: TfrmCadTabPreco
           Font.Style = []
           GlyphSpacing = 5
           ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 4
           Transparent = True
           OnClick = btnExportarClick
         end
         object btnCopiarLista: TNxButton
-          Left = 465
+          Left = 456
           Top = 1
           Width = 151
-          Height = 31
+          Height = 29
+          Align = alLeft
           Caption = 'Copiar Lista'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -587,16 +595,17 @@ object frmCadTabPreco: TfrmCadTabPreco
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 938
-        Height = 34
+        Width = 930
+        Height = 31
         Align = alTop
         Color = 8404992
         TabOrder = 0
         object btnAlterar: TNxButton
-          Left = 4
-          Top = 3
+          Left = 1
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 29
+          Align = alLeft
           Caption = 'Alterar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -665,10 +674,11 @@ object frmCadTabPreco: TfrmCadTabPreco
           OnClick = btnAlterarClick
         end
         object btnConfirmar: TNxButton
-          Left = 157
-          Top = 3
+          Left = 154
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 29
+          Align = alLeft
           Caption = 'Confirmar'
           Enabled = False
           Font.Charset = DEFAULT_CHARSET
@@ -738,10 +748,11 @@ object frmCadTabPreco: TfrmCadTabPreco
           OnClick = btnConfirmarClick
         end
         object btnCancelar: TNxButton
-          Left = 310
-          Top = 3
+          Left = 307
+          Top = 1
           Width = 153
-          Height = 30
+          Height = 29
+          Align = alLeft
           Caption = 'Cancelar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -812,9 +823,9 @@ object frmCadTabPreco: TfrmCadTabPreco
       end
       object RzPageControl2: TRzPageControl
         Left = 0
-        Top = 113
-        Width = 938
-        Height = 436
+        Top = 110
+        Width = 930
+        Height = 431
         ActivePage = RzTabSheet1
         ActivePageDefault = RzTabSheet1
         Align = alClient
@@ -831,8 +842,8 @@ object frmCadTabPreco: TfrmCadTabPreco
           object SMDBGrid2: TSMDBGrid
             Left = 0
             Top = 49
-            Width = 934
-            Height = 347
+            Width = 926
+            Height = 342
             Align = alClient
             Ctl3D = False
             DataSource = DMCadTab_Preco.dsTab_Preco_Itens
@@ -971,7 +982,7 @@ object frmCadTabPreco: TfrmCadTabPreco
           object pnlItem: TPanel
             Left = 0
             Top = 0
-            Width = 934
+            Width = 926
             Height = 49
             Align = alTop
             Enabled = False
@@ -1284,8 +1295,8 @@ object frmCadTabPreco: TfrmCadTabPreco
           end
           object StaticText2: TStaticText
             Left = 0
-            Top = 396
-            Width = 934
+            Top = 391
+            Width = 926
             Height = 17
             Align = alBottom
             Caption = 'F3 para informar o mesmo pre'#231'o para os produtos selecionados'
@@ -1305,8 +1316,8 @@ object frmCadTabPreco: TfrmCadTabPreco
           object DBMemo1: TDBMemo
             Left = 0
             Top = 0
-            Width = 934
-            Height = 413
+            Width = 926
+            Height = 408
             Align = alClient
             DataField = 'OBS'
             DataSource = DMCadTab_Preco.dsTab_Preco
@@ -1320,7 +1331,7 @@ object frmCadTabPreco: TfrmCadTabPreco
           object pnlExcluirSel: TPanel
             Left = 0
             Top = 0
-            Width = 934
+            Width = 926
             Height = 49
             Align = alTop
             Color = 11206655
@@ -1475,8 +1486,8 @@ object frmCadTabPreco: TfrmCadTabPreco
           object SMDBGrid3: TSMDBGrid
             Left = 0
             Top = 49
-            Width = 934
-            Height = 364
+            Width = 926
+            Height = 359
             Align = alClient
             Ctl3D = False
             DataSource = DMCadTab_Preco.dsPrecoProd
@@ -1589,14 +1600,14 @@ object frmCadTabPreco: TfrmCadTabPreco
       end
       object pnlCliente: TPanel
         Left = 0
-        Top = 34
-        Width = 938
+        Top = 31
+        Width = 930
         Height = 79
         Align = alTop
         Enabled = False
         TabOrder = 2
         DesignSize = (
-          938
+          930
           79)
         object Label18: TLabel
           Left = 15
