@@ -84,6 +84,7 @@ type
     procedure DBEdit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure DBEdit1Exit(Sender: TObject);
+    procedure DBMemo1KeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     vGravacao_Ok : Boolean;
@@ -393,6 +394,13 @@ begin
     MessageDlg('*** Código Benefício Fiscal não encontrado!', mtInformation, [mbOk], 0);
     DBEdit1.SetFocus;
   end;
+end;
+
+procedure TfrmCadCFOP_Variacao.DBMemo1KeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if ((Key = #13) or (Key = #10)) and (fDMCadCFOP.cdsCFOP_Variacao.State in [dsEdit,dsInsert]) then
+    Key := ' ';
 end;
 
 end.

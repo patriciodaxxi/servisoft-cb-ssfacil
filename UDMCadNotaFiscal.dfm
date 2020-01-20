@@ -13177,6 +13177,11 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedCONTROLAR_VLR_ENTRADA: TStringField
+      FieldName = 'CONTROLAR_VLR_ENTRADA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsNotaFiscal_Tam: TSQLDataSet
     NoMetadata = True

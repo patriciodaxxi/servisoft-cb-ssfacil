@@ -898,6 +898,7 @@ object frmCadCFOP_Variacao: TfrmCadCFOP_Variacao
         DataSource = DMCadCFOP.dsCFOP_Variacao
         ScrollBars = ssVertical
         TabOrder = 1
+        OnKeyPress = DBMemo1KeyPress
       end
       object RxDBComboBox3: TRxDBComboBox
         Left = 454
