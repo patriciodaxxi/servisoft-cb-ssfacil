@@ -106,6 +106,8 @@ type
     DBCheckBox296: TDBCheckBox;
     Panel5: TPanel;
     btnSel_CombTam: TNxButton;
+    ComboBox1: TComboBox;
+    Label22: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConsultarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -256,6 +258,7 @@ begin
       SMDBGrid2.Columns[i].Visible := (fDMConsPedido.qParametros_ProdUSA_SEL_COMB_ETIQUETA.AsString = 'S');
   end;
   btnSel_CombTam.Enabled := (fDMConsPedido.qParametros_ProdUSA_SEL_COMB_ETIQUETA.AsString = 'S');
+  ComboBox1.ItemIndex := 0;
 end;
 
 procedure TfrmEtiq_Individual.prc_Le_Pedido; //E= Etiqueta   B=Cód. Barras
@@ -739,12 +742,12 @@ begin
   SMDBGrid2.DisableScroll;
   //05/09/2019 incluida a MAXMODAS
   if fDMConsPedido.cdsParametros_EtiqTIPO_CLIENTE.AsString = 'MAXMODAS' then
-    uEtiqueta.prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido)
+    uEtiqueta.prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido,ComboBox1.ItemIndex)
   else
   if fDMConsPedido.cdsParametros_EtiqTIPO_CLIENTE.AsString = 'BELLAVIST1' then
     uEtiqueta.prc_Etiq_Tag_BellaVista1(fDMConsPedido) //bella vista 1 = Sapiranga
   else
-    uEtiqueta.prc_Etiq_Tag_Argox_Ramys(fDMConsPedido);
+    uEtiqueta.prc_Etiq_Tag_Argox_Ramys(fDMConsPedido,ComboBox1.ItemIndex);
   SMDBGrid2.EnableScroll;
 end;
 

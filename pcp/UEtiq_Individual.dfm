@@ -21,8 +21,8 @@ object frmEtiq_Individual: TfrmEtiq_Individual
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 984
-    Height = 447
+    Width = 976
+    Height = 439
     ActivePage = TS_Avulsa
     ActivePageDefault = TS_Pedido
     Align = alClient
@@ -35,8 +35,8 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 107
-        Width = 980
-        Height = 317
+        Width = 972
+        Height = 309
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Item2
@@ -148,7 +148,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 980
+        Width = 972
         Height = 107
         Align = alTop
         Color = clSilver
@@ -571,7 +571,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         end
         object CheckBox2: TCheckBox
           Left = 464
-          Top = 28
+          Top = 26
           Width = 97
           Height = 17
           Caption = 'Imprimir Pre'#231'o'
@@ -587,7 +587,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 980
+        Width = 972
         Height = 143
         Align = alTop
         Color = clSilver
@@ -929,7 +929,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         object Panel3: TPanel
           Left = 1
           Top = 1
-          Width = 978
+          Width = 970
           Height = 69
           Align = alTop
           BevelOuter = bvNone
@@ -975,6 +975,14 @@ object frmEtiq_Individual: TfrmEtiq_Individual
             Height = 13
             Alignment = taRightJustify
             Caption = 'ID:'
+          end
+          object Label22: TLabel
+            Left = 447
+            Top = 54
+            Width = 110
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Info. do c'#243'd. de barras:'
           end
           object RxDBLookupCombo6: TRxDBLookupCombo
             Left = 292
@@ -1048,6 +1056,19 @@ object frmEtiq_Individual: TfrmEtiq_Individual
             TabOrder = 1
             OnExit = CurrencyEdit5Exit
           end
+          object ComboBox1: TComboBox
+            Left = 560
+            Top = 46
+            Width = 145
+            Height = 21
+            ItemHeight = 13
+            ItemIndex = 0
+            TabOrder = 6
+            Text = 'ID do produto'
+            Items.Strings = (
+              'ID do produto'
+              'C'#243'd. de barras do produto')
+          end
         end
         object CheckBox1: TCheckBox
           Left = 291
@@ -1063,7 +1084,7 @@ object frmEtiq_Individual: TfrmEtiq_Individual
         object Panel5: TPanel
           Left = 1
           Top = 70
-          Width = 978
+          Width = 970
           Height = 26
           Align = alTop
           BevelOuter = bvNone
@@ -1085,8 +1106,8 @@ object frmEtiq_Individual: TfrmEtiq_Individual
       object SMDBGrid2: TSMDBGrid
         Left = 0
         Top = 143
-        Width = 980
-        Height = 281
+        Width = 972
+        Height = 273
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsmEtiq_Individual

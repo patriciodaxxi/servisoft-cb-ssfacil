@@ -7,11 +7,11 @@ Uses
 
   procedure prc_Etiq_Adesiva_Argox_Ramys(fDMConsPedido: TDMConsPedido);
 
-  procedure prc_Etiq_Tag_Argox_Ramys(fDMConsPedido: TDMConsPedido);
+  procedure prc_Etiq_Tag_Argox_Ramys(fDMConsPedido: TDMConsPedido; vInfoBarra: Byte);
   procedure prc_Etiq_Adesiva_Picotec(fDMConsPedido: TDMConsPedido);
   procedure prc_Etiq_Adesiva_EllaStore(fDMConsPedido: TDMConsPedido; Qtd_Parcela: Integer);
   procedure prc_Etiq_Adesiva_Argox_RCStore(fDMConsPedido: TDMConsPedido);
-  procedure prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido: TDMConsPedido);
+  procedure prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido: TDMConsPedido; vInfoBarra: Byte);
   procedure prc_Etiq_Tag_BellaVista1(fDmConsPedido: TDmConsPedido);
 
 implementation
@@ -149,7 +149,7 @@ begin
   CloseFile(F);
 end;
 
-procedure prc_Etiq_Tag_Argox_Ramys(fDMConsPedido: TDMConsPedido);
+procedure prc_Etiq_Tag_Argox_Ramys(fDMConsPedido: TDMConsPedido; vInfoBarra: Byte);
 var
   F: TextFile;
   vTexto: String;
@@ -404,7 +404,10 @@ begin
       prc_Limpa_Var;
       i := 1;
     end;
-    vCod[i]       := fDMConsPedido.mEtiq_IndividualID_Produto.AsInteger;
+    case vInfoBarra of
+      0: vCod[i]  := fDMConsPedido.mEtiq_IndividualID_Produto.AsInteger;
+      1: vCod[i]  := fDMConsPedido.mEtiq_IndividualCodBarra.AsInteger;
+    end;
     vNome_Fil[i]  := fDMConsPedido.cdsFilialNOME_ETIQUETA.AsString;
     vNome_Prod[i] := fDMConsPedido.mEtiq_IndividualNome_Produto.AsString;
     vPreco[i]     := fDMConsPedido.mEtiq_IndividualPreco_Produto.AsFloat;
@@ -423,7 +426,7 @@ end;
 
 
 //******* Max Modas    05/09/2019
-procedure prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido: TDMConsPedido);
+procedure prc_Etiq_Tag_Argox_MaxModas(fDMConsPedido: TDMConsPedido; vInfoBarra: Byte);
 var
   F: TextFile;
   vTexto: String;
@@ -592,7 +595,10 @@ begin
       prc_Limpa_Var;
       i := 1;
     end;
-    vCod[i]       := fDMConsPedido.mEtiq_IndividualID_Produto.AsInteger;
+    case vInfoBarra of
+      0: vCod[i]  := fDMConsPedido.mEtiq_IndividualID_Produto.AsInteger;
+      1: vCod[i]  := fDMConsPedido.mEtiq_IndividualCodBarra.AsInteger;
+    end;
     vNome_Fil[i]  := fDMConsPedido.cdsFilialNOME_ETIQUETA.AsString;
     vNome_Prod[i] := fDMConsPedido.mEtiq_IndividualNome_Produto.AsString;
     vPreco[i]     := fDMConsPedido.mEtiq_IndividualPreco_Produto.AsFloat;
