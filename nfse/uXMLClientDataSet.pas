@@ -3,7 +3,7 @@ unit uXMLClientDataSet;
 interface
 
 uses
-  Windows, Classes, SysUtils, XMLDoc, XMLIntf, DBClient, DB, StrUtils;
+  Windows, Classes, SysUtils, XMLDoc, XMLIntf, DBClient, DB, StrUtils, Dialogs;
 
 type
   TXMLClientDataset = class
@@ -63,6 +63,7 @@ begin
   Result.CreateDataSet;
 
   ConverterXML(Result);
+
 end;
 
 procedure TXMLClientDataset.ConverterParaXML(

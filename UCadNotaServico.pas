@@ -2051,6 +2051,7 @@ begin
       begin
         if (fnc_Existe_Nota) then
         begin
+
 //        prc_Posiciona_NotaFiscal;
           if fDMCadNotaServico.cdsFilialID.AsInteger <> fDMCadNotaServico.cdsNotaServico_ConsultaFILIAL.AsInteger then
             fDMCadNotaServico.cdsFilial.Locate('ID',fDMCadNotaServico.cdsNotaServico_ConsultaFILIAL.AsInteger,[loCaseInsensitive]);
@@ -2101,6 +2102,7 @@ begin
             if trim(cNota) <> '' then
               cNota := cNota + #13;
             cNota := cNota + GerarNFSeTXT(0);
+
           end;
         end;
       end;
@@ -2113,6 +2115,7 @@ begin
     end;
     if (vFlag) and (fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'PORTO ALEGRE') then
     begin
+
       uXMLNFSe_PortoAlegre.prc_Finaliza(fDMCadNotaServico, cTXTStream);
     end;
     if CheckBox1.Checked then
@@ -2143,7 +2146,7 @@ begin
           raise Exception.Create('*** Nota já contém um protocolo, mas não está validada ' +#13 +
                                       'Aguarde e tente efetuar consulta mais tarde.' + #13 +
                                       'Para fazer o reenvio é necessário apagar o protocolo!');
-      end;  
+      end;
       if trim(cNota) = '' then
         MessageDlg('*** Nenhuma nota foi selecionada para o envio!', mtError, [mbOk], 0)
       else
@@ -2180,6 +2183,7 @@ begin
 
         if CheckBox1.Checked then
           cTXTStream.SaveToFile('C:\a\teste1.xml');
+
 
         try
           vProcesso := 0;
@@ -2592,6 +2596,7 @@ begin
       else
       if fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'PORTO ALEGRE' then
       begin
+
         vAnoAux := YearOf(fDMCadNotaServico.cdsNotaServico_ConsultaDTEMISSAO_CAD.AsDateTime);
         vMesAux := MonthOf(fDMCadNotaServico.cdsNotaServico_ConsultaDTEMISSAO_CAD.AsDateTime);
         vNomeArquivo := Monta_Diretorio('X',fDMCadNotaServico.cdsParametrosENDXMLNFSE.AsString,fDMCadNotaServico.cdsNotaServicoSERIE.AsString,vAnoAux,vMesAux);
@@ -2602,6 +2607,7 @@ begin
         cXMLStream.SaveToFile(vNomeArquivo);
         //ver Porto Alegre  retorno
         uXMLNFSe_PortoAlegre.prc_Carregar(vNomeArquivo);
+
       end
       else
       begin
@@ -4784,7 +4790,8 @@ begin
         vCod_Autencidade_Ret := 'OK';
         vDtEmissao           := FCds.FieldByName('ID.dEmi').AsDateTime;
         vDtEmissaoHora       := FCds.FieldByName('ID.dEmi').AsString + ' ' + FCds.FieldByName('ID.hEmi').AsString;
-        if trim(FCds.FieldByName('ID.hEmi').AsString) <> '' then
+
+        if (trim(FCds.FieldByName('ID.hEmi').AsString) <> '') then
           vHora := StrToTime(FormatDateTime('hh:mm',FCds.FieldByName('ID.hEmi').AsDateTime))
         else
           vHora := Now;

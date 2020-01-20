@@ -206,7 +206,7 @@ begin
   AClientDataSet.FieldDefs.Add('RegimeEspecialTributacao', ftInteger);
   AClientDataSet.FieldDefs.Add('OptanteSimplesNacional', ftInteger);
   AClientDataSet.FieldDefs.Add('IncentivadorCultural', ftInteger);
-  AClientDataSet.FieldDefs.Add('Competencia', ftDate);
+  AClientDataSet.FieldDefs.Add('Competencia', ftDateTime);
   AClientDataSet.FieldDefs.Add('NfseSubstituida', ftInteger);
   AClientDataSet.FieldDefs.Add('OutrasInformacoes', ftString, 255);
 
