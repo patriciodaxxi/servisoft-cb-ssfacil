@@ -1350,9 +1350,9 @@ begin
   ffrmSel_Pedido.vTipo        := 'NTS';
   ffrmSel_Pedido.vTipo_RegPed := 'C';
   if fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger > 0 then
-    ffrmSel_Pedido.vCodCliente := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger
+    fDMCadNotaFiscal.vCodCliente := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger
   else
-    ffrmSel_Pedido.vCodCliente := 0;
+    fDMCadNotaFiscal.vCodCliente := 0;
   ffrmSel_Pedido.fDMCadNotaFiscal         := fDMCadNotaFiscal;
   ffrmSel_Pedido.ffrmCadNotaEntrada_Itens := ffrmCadNotaEntrada_Itens;
   ffrmSel_Pedido.ShowModal;

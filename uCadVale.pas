@@ -584,9 +584,9 @@ begin
   ffrmSel_Pedido.vTipo        := 'VAL';
   ffrmSel_Pedido.vTipo_RegPed := 'P';
   if fDMCadVale.cdsValeID_CLIENTE.AsInteger > 0 then
-    ffrmSel_Pedido.vCodCliente := fDMCadVale.cdsValeID_CLIENTE.AsInteger
+    fDMCadVale.vCodCliente := fDMCadVale.cdsValeID_CLIENTE.AsInteger
   else
-    ffrmSel_Pedido.vCodCliente := 0;
+    fDMCadVale.vCodCliente := 0;
   ffrmSel_Pedido.fDMCadVale        := fDMCadVale;
   ffrmSel_Pedido.ffrmCadVale_Itens := ffrmCadVale_Itens;
   ffrmSel_Pedido.ShowModal;

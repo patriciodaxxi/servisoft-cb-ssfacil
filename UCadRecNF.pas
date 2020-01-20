@@ -1380,7 +1380,7 @@ begin
   ffrmSel_Pedido := TfrmSel_Pedido.Create(self);
   ffrmSel_Pedido.vTipo              := 'RNF';  //para distinguir do vale 'VAL' e da nota 'RNF'
   ffrmSel_Pedido.vTipo_RegPed       := 'P';
-  ffrmSel_Pedido.vCodCliente        := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
+  fDMCadNotaFiscal.vCodCliente      := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
   ffrmSel_Pedido.fDMCadNotaFiscal   := fDMCadNotaFiscal;
   ffrmSel_Pedido.ffrmCadRecNF_Itens := ffrmCadRecNF_Itens;
   ffrmSel_Pedido.ShowModal;

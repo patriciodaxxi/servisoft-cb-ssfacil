@@ -117,7 +117,7 @@ begin
   ffrmSel_Pedido.Tag          := 95;
   ffrmSel_Pedido.vTipo        := 'NTS';  //para distinguir do vale 'VAL'
   ffrmSel_Pedido.vTipo_RegPed := 'P';
-  ffrmSel_Pedido.vCodCliente  := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
+  fDMCadNotaFiscal.vCodCliente           := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
   ffrmSel_Pedido.fDMCadNotaFiscal        := fDMCadNotaFiscal;
   ffrmSel_Pedido.ffrmCadNotaFiscal_Itens := ffrmCadNotaFiscal_Itens;
   fDMCadNotaFiscal.mMObra_Ped.First;
@@ -139,7 +139,7 @@ begin
   ffrmSel_Pedido := TfrmSel_Pedido.Create(self);
   ffrmSel_Pedido.vTipo        := 'MO';
   ffrmSel_Pedido.vTipo_RegPed := 'P';
-  ffrmSel_Pedido.vCodCliente  := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
+  fDMCadNotaFiscal.vCodCliente  := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
   ffrmSel_Pedido.fDMCadNotaFiscal        := fDMCadNotaFiscal;
   ffrmSel_Pedido.ffrmCadNotaFiscal_Itens := ffrmCadNotaFiscal_Itens;
   ffrmSel_Pedido.ShowModal;

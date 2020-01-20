@@ -4219,7 +4219,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 290
   end
   object cdsCFOP: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'CODCFOP;ID'
     Params = <>
@@ -5081,7 +5080,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 311
   end
   object cdsTipoCobranca: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -5162,7 +5160,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     Top = 358
   end
   object cdsContas: TClientDataSet
-    Active = True
     Aggregates = <>
     IndexFieldNames = 'NOME'
     Params = <>
@@ -8622,7 +8619,6 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     end
   end
   object cdsCFOP_Variacao: TClientDataSet
-    Active = True
     Aggregates = <>
     DataSetField = cdsCFOPsdsCFOP_Variacao
     IndexFieldNames = 'NOME'

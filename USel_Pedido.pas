@@ -53,7 +53,7 @@ type
     { Private declarations }
     procedure prc_Consultar_Pedido(Tipo: String; ID: Integer = 0; Item_Pedido: Integer = 0);
     procedure prc_Gravar_Nota;
-    procedure prc_Gravar_NotaItens(Lote: Boolean; VlrDesconto : Real);
+    procedure prc_Gravar_NotaItens(Lote: Boolean; VlrDesconto: Real);
     procedure prc_Gravar_Vale;
     procedure prc_Gravar_ValeItens;
     procedure prc_MostraNota;
@@ -72,7 +72,7 @@ type
 
   public
     { Public declarations }
-    vCodCliente: Integer;
+//    vCodCliente: Integer;
     vTipo_RegPed: String;
     vTipo: String;
 
@@ -81,8 +81,7 @@ type
     ffrmCadNotaFiscal_Itens: TfrmCadNotaFiscal_Itens;
     ffrmCadRecNF_Itens: TfrmCadRecNF_Itens;
     ffrmCadVale_Itens: TfrmCadVale_Itens;
-    ffrmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens;
-
+    ffrmCadNotaEntrada_Itens: TfrmCadNotaEntrada_Itens;      
   end;
 
 var
@@ -90,8 +89,7 @@ var
 
 implementation
 
-uses rsDBUtils, uUtilPadrao, StrUtils, DmdDatabase, UInformar_Lote_Controle,
-  UConsEstoque_Lote, uCalculo_NotaFiscal, Math;
+uses rsDBUtils, uUtilPadrao, StrUtils, DmdDatabase, UInformar_Lote_Controle, UConsEstoque_Lote, uCalculo_NotaFiscal, Math;
 
 {$R *.dfm}
 
@@ -271,9 +269,9 @@ begin
           fDMCadNotaFiscal.sdsPedido.CommandText := fDMCadNotaFiscal.sdsPedido.CommandText + ' AND PI.QTD_LIBERADA > 0 ';
         //***********************
       end;
-      if vCodCliente > 0 then
+      if fDMCadNotaFiscal.vCodCliente > 0 then
         fDMCadNotaFiscal.sdsPedido.CommandText := fDMCadNotaFiscal.sdsPedido.CommandText +
-                                                  ' AND PE.ID_CLIENTE = ' + IntToStr(vCodCliente);
+                                                  ' AND PE.ID_CLIENTE = ' + IntToStr(fDMCadNotaFiscal.vCodCliente);
       if Tipo = 'MO' then
         fDMCadNotaFiscal.sdsPedido.CommandText := fDMCadNotaFiscal.sdsPedido.CommandText + ' AND PE.TIPO_VENDA = ' + QuotedStr('M');
 
@@ -353,9 +351,9 @@ begin
     fDMCadVale.sdsPedido.CommandText := fDMCadVale.sdsPedido.CommandText + ' AND PE.TIPO_REG = ' + QuotedStr('P');
     if fDmCadVale.qParametrosUSA_APROVACAO_PED.AsString = 'S' then
       fDMCadVale.sdsPedido.CommandText := fDMCadVale.sdsPedido.CommandText + ' AND PE.APROVADO_PED = ' + QuotedStr('A');
-    if vCodCliente > 0 then
+    if fDMCadNotaFiscal.vCodCliente > 0 then
       fDMCadVale.sdsPedido.CommandText := fDMCadVale.sdsPedido.CommandText +
-                                          ' AND PE.ID_CLIENTE = ' + IntToStr(vCodCliente);
+                                          ' AND PE.ID_CLIENTE = ' + IntToStr(fDMCadNotaFiscal.vCodCliente);
     if fDmCadVale.qParametros_PedCONTROLAR_FILIAL_NA_COPIA_NOTA.AsString = 'S' then
       fDMCadVale.sdsPedido.CommandText := fDMCadVale.sdsPedido.CommandText + ' AND PE.FILIAL = ' + fDmCadVale.cdsValeFILIAL.AsString;
 
@@ -386,7 +384,7 @@ procedure TfrmSel_Pedido.SMDBGrid1GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 var
   vQtd_Faturado: Real;
-  vFlag : Boolean;
+  vFlag: Boolean;
 begin
   if ((vTipo = 'NTS') or (vTipo = 'RNF')) then
   begin
@@ -484,7 +482,7 @@ begin
   end;
 end;
 
-procedure TfrmSel_Pedido.prc_Gravar_NotaItens(Lote: Boolean; VlrDesconto : Real);
+procedure TfrmSel_Pedido.prc_Gravar_NotaItens(Lote: Boolean; VlrDesconto: Real);
 var
   vItemAux: Integer;
   vNum_Controle_Tam: Integer;
@@ -1247,11 +1245,11 @@ var
   vMsgErro: String;
   vMsgAviso: WideString;
   vGravar: Boolean;
-  vCodAnt : integer;
-  vSel : Boolean;
-  vVlrDesc : Real;
-  vVlrAux : Real;
-  vCont : Integer;
+  vCodAnt: integer;
+  vSel: Boolean;
+  vVlrDesc: Real;
+  vVlrAux: Real;
+  vCont: Integer;
 begin
   if Tag = 95 then
   begin
@@ -1332,18 +1330,22 @@ begin
           end;
         end;
         vCodAnt := fDMCadNotaFiscal.cdsPedidoID_CLIENTE.AsInteger;
+        fDMCadNotaFiscal.vCodCliente := fDMCadNotaFiscal.cdsPedidoID_CLIENTE.AsInteger;
 
         if vGravar then
         begin
           //06/04/2016
           if vTipo_RegPed <> 'C' then
           begin
-            if (fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger > 0) and (fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger <> fDMCadNotaFiscal.cdsPedidoID_VENDEDOR.AsInteger) then
+            if (fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger > 0) and
+               (fDMCadNotaFiscal.cdsNotaFiscalID_VENDEDOR.AsInteger <> fDMCadNotaFiscal.cdsPedidoID_VENDEDOR.AsInteger) then
             begin
               if fDMCadNotaFiscal.cdsNotaFiscal_Itens.RecordCount <= 0 then
-                vMsgAviso := vMsgAviso + '*** Verificar o vendedor,  pedido diferente do cadastro do cliente... (Pedido: ' + fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString + ')' + #13
+                vMsgAviso := vMsgAviso + '*** Verificar o vendedor, pedido diferente do cadastro do cliente... (Pedido: ' +
+                             fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString + ')' + #13
               else
-                vMsgAviso := vMsgAviso + '*** Verificar o vendedor,  Pedido diferente da nota ou de outros pedidos que foram copiados para a nota.. (Pedido: ' + fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString + ')' + #13;
+                vMsgAviso := vMsgAviso + '*** Verificar o vendedor, pedido diferente da nota ou de outros pedidos que foram copiados para a nota.. (Pedido: ' +
+                             fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString + ')' + #13;
             end;
           end;
           //17/03/2016
@@ -1359,7 +1361,8 @@ begin
             vVlrAux := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsPedidoVLR_DESCONTO.AsFloat + fDMCadNotaFiscal.cdsPedidoVLR_DESCONTORATEIO.AsFloat));
             if StrToFloat(FormatFloat('0.00',vVlrAux)) > 0 then
             begin
-              if StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD_AFATURAR.AsFloat)) < StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD.AsFloat)) then
+              if StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD_AFATURAR.AsFloat)) <
+                 StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD.AsFloat)) then
               begin
                 vVlrAux := StrToFloat(FormatFloat('0.00',(StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD_AFATURAR.AsFloat)) / StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD.AsFloat)))
                          * vVlrAux));
@@ -1379,13 +1382,16 @@ begin
               prc_Gerar_mLoteControle;
           if (fDMCadNotaFiscal.qParametros_EstGERAR_LOTE_AUT.AsString = 'S') and (fDMCadNotaFiscal.cdsPedidoCOPIAR_SELECIONADO.AsString = 'N') and
              (fDMCadNotaFiscal.cdsPedidoLANCA_LOTE_CONTROLE.AsString = 'S')  and (vTipo_RegPed <> 'C') then
-            vMsgErro := vMsgErro + #13 + ' Ped: ' + fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString + ' Item: ' + fDMCadNotaFiscal.cdsPedidoITEM.AsString + ', Não foi copiado, falta estoque com lote!'
+            vMsgErro := vMsgErro + #13 + ' Ped: ' + fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString +
+                                         ' Item: ' + fDMCadNotaFiscal.cdsPedidoITEM.AsString + ', Não foi copiado, falta estoque com lote!'
           else
           if StrToFloat(FormatFloat('0.00000',fDMCadNotaFiscal.cdsPedidoVLR_UNITARIO.AsFloat)) <= 0 then
-            vMsgErro := vMsgErro + #13 + ' Ped: ' + fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString + ' Item: ' + fDMCadNotaFiscal.cdsPedidoITEM.AsString + ', não possui valor'
+            vMsgErro := vMsgErro + #13 + ' Ped: ' + fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString +
+                                         ' Item: ' + fDMCadNotaFiscal.cdsPedidoITEM.AsString + ', não possui valor'
           else
           if (vTipo_RegPed = 'P') and (fDMCadNotaFiscal.cdsPedidoID_CFOP.AsInteger <= 0) and (fDMCadNotaFiscal.cdsParametrosMOSTRAR_CFOP_PEDIDO.AsString = 'S') then
-            vMsgErro := vMsgErro + #13 + ' Ped: ' + fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString + ' Item: ' + fDMCadNotaFiscal.cdsPedidoITEM.AsString + ',  não possui CFOP'
+            vMsgErro := vMsgErro + #13 + ' Ped: ' + fDMCadNotaFiscal.cdsPedidoNUM_PEDIDO.AsString +
+                                         ' Item: ' + fDMCadNotaFiscal.cdsPedidoITEM.AsString + ',  não possui CFOP'
           else
           if (fDMCadNotaFiscal.cdsParametrosPERMITE_QTDMAIOR_PEDIDO.AsString <> 'S') and (vTipo_RegPed <> 'C') and
              (StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsPedidoQTD_AFATURAR.AsFloat)) >
@@ -1399,7 +1405,8 @@ begin
             if fDMCadNotaFiscal.mLoteControle.IsEmpty then
             begin  //if abaixo já existia
               //26/05/2016  verificar o agrupamento dos itens na tabela cdsNotaFiscal_Tam
-              if  (vTipo_RegPed = 'P') and (fDMCadNotaFiscal.qParametros_NFeGRAVAR_TAB_TAMANHO.AsString = 'S') and (fDMCadNotaFiscal.cdsPedidoID_GRADE.AsInteger > 0) then
+              if  (vTipo_RegPed = 'P') and (fDMCadNotaFiscal.qParametros_NFeGRAVAR_TAB_TAMANHO.AsString = 'S') and
+                  (fDMCadNotaFiscal.cdsPedidoID_GRADE.AsInteger > 0) then
               begin
                 prc_Gravar_NotaItens(False,0);
               end
@@ -1473,7 +1480,8 @@ begin
       //Trilhos/Roldanas
       prc_Montar_Acessorios;
     end;}
-    if not(fDMCadNotaFiscal.mPedidoAux.IsEmpty) and ((fDMCadNotaFiscal.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') or (fDMCadNotaFiscal.cdsParametrosUSA_OBS_PEDIDO_NOTA.AsString = 'S')) then
+    if not(fDMCadNotaFiscal.mPedidoAux.IsEmpty) and ((fDMCadNotaFiscal.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') or
+          (fDMCadNotaFiscal.cdsParametrosUSA_OBS_PEDIDO_NOTA.AsString = 'S')) then
     begin
       fDMCadNotaFiscal.mPedidoAux.First;
       while not fDMCadNotaFiscal.mPedidoAux.Eof do

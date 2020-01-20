@@ -576,6 +576,8 @@ type
     { Public declarations }
     vMSGErro: String;
     ctVale, ctConsulta, ctPessoa, ctPedido: String;
+    vCodCliente: Integer;
+    
     procedure prc_Localizar(ID: Integer);
     procedure prc_Inserir;
     procedure prc_Gravar;

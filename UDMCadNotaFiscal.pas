@@ -3178,8 +3178,9 @@ type
     vExcluir_Com_Est: Boolean;
     vPerc_Comissao_Rateio: Real;
     vCopia_Igual: Boolean;
-    vAlt_ExtExport : Boolean;
-    vNFeChave_Acesso : String;
+    vAlt_ExtExport: Boolean;
+    vNFeChave_Acesso: String;
+    vCodCliente: Integer;
 
     ctCommand, ctConsulta, ctNotaEntrada, ctPedido, ctProduto, ctVale, ctCliente, ctOS, ctNotaFiscal_ProdPrincipal: String;
     ctPedido_Tam: String;
@@ -3231,7 +3232,7 @@ type
 
     procedure prc_Le_Itens(fDMCadNotaFiscal: TDMCadNotaFiscal ; Tipo: String); //Z=Zerar  G=Gerar Duplicata
 
-    procedure prc_Gravar_NotaFiscal_Parc(Parcela, ID_TipoCobranca, ID_Conta: Integer; Data: TDateTime; Valor, Perc_Base_Com: Real; Dia1, Dia2 : Integer);
+    procedure prc_Gravar_NotaFiscal_Parc(Parcela, ID_TipoCobranca, ID_Conta: Integer; Data: TDateTime; Valor, Perc_Base_Com: Real; Dia1, Dia2: Integer);
     procedure prc_Abrir_CSTICMS(Tipo: String);
     procedure prc_Excluir_Auxiliar_Retorno;
     procedure prc_Atualiza_Vale_Itens(Tipo_Fat: String);
@@ -3254,8 +3255,7 @@ var
 
 implementation
 
-uses DmdDatabase, uUtilPadrao, uCalculo_NotaFiscal, DateUtils, LogProvider, DmdDatabase_NFeBD,
-  uErro, StdConvs;
+uses DmdDatabase, uUtilPadrao, uCalculo_NotaFiscal, DateUtils, LogProvider, DmdDatabase_NFeBD, uErro, StdConvs;
 
 {$R *.dfm}
 
@@ -4248,7 +4248,7 @@ begin
 end;
 
 procedure TDMCadNotaFiscal.prc_Gravar_NotaFiscal_Parc(Parcela, ID_TipoCobranca, ID_Conta: Integer; Data: TDateTime;
-          Valor, Perc_Base_Com: Real; Dia1, Dia2 : Integer);
+          Valor, Perc_Base_Com: Real; Dia1, Dia2: Integer);
 begin
   cdsNotaFiscal_Parc.Insert;
   cdsNotaFiscal_ParcID.AsInteger              := cdsNotaFiscalID.AsInteger;

@@ -2773,13 +2773,21 @@ begin
     ffrmSel_Pedido := TfrmSel_Pedido.Create(self);
     ffrmSel_Pedido.vTipo        := 'NTS';  //para distinguir do vale 'VAL'
     ffrmSel_Pedido.vTipo_RegPed := 'P';
-    ffrmSel_Pedido.vCodCliente  := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
+    fDMCadNotaFiscal.vCodCliente  := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
     ffrmSel_Pedido.fDMCadNotaFiscal        := fDMCadNotaFiscal;
     ffrmSel_Pedido.ffrmCadNotaFiscal_Itens := ffrmCadNotaFiscal_Itens;
     ffrmSel_Pedido.ShowModal;
     FreeAndNil(ffrmSel_Pedido);
   end;
   FreeAndNil(ffrmCadNotaFiscal_Itens);
+
+//Inacio 20/01/2020
+  if fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.IsNull then
+  begin
+    fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger := fDMCadNotaFiscal.vCodCliente;
+    prc_Posicionar_Cliente;
+  end;
+///////////////
 
   btnCalcular_ValoresClick(Sender);
   prc_Opcao_Prazo;
@@ -3049,6 +3057,8 @@ var
 begin
   if not(fDMCadNotaFiscal.cdsNotaFiscal.State in [dsEdit,dsInsert]) then
     exit;
+  if (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger = 0) then
+    Exit;
 
   if (fDMCadNotaFiscal.qParametros_NFeUSA_CLIENTE_FAT_FIL.AsString = 'S') and (fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger > 0) and
      not(fnc_Cliente_Fil_Fat(fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger,fDMCadNotaFiscal.cdsNotaFiscalFILIAL.AsInteger)) then
@@ -4464,7 +4474,7 @@ begin
   ffrmSel_Pedido.Tag          := 11;
   ffrmSel_Pedido.vTipo        := 'NTS';  //para distinguir do vale 'VAL'
   ffrmSel_Pedido.vTipo_RegPed := 'P';
-  ffrmSel_Pedido.vCodCliente  := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
+  fDMCadNotaFiscal.vCodCliente  := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
   ffrmSel_Pedido.fDMCadNotaFiscal        := fDMCadNotaFiscal;
   ffrmSel_Pedido.ffrmCadNotaFiscal_Itens := ffrmCadNotaFiscal_Itens;
   ffrmSel_Pedido.ShowModal;

@@ -177,7 +177,6 @@ type
   private
     { Private declarations }
     procedure prc_Consultar;
-    procedure prc_Monta_mPreco;
     procedure prc_Monta_Lote;
     procedure prc_Gravar_mCarrinho;
   public
@@ -189,6 +188,8 @@ type
     vVenda: Boolean;
     vID_TabPreco: Integer;
     vNome: String;
+
+    procedure prc_Monta_mPreco;
   end;
 
 var
