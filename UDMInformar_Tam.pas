@@ -339,6 +339,8 @@ type
     mItensVLR_ICMS_SUBSTITUTO: TFloatField;
     mItensPERC_ICMS_FCP_5405: TFloatField;
     mItensCOD_CBENEF: TStringField;
+    mItensBASE_PIS: TFloatField;
+    mItensBASE_COFINS: TFloatField;
     procedure mItensNewRecord(DataSet: TDataSet);
     procedure mTamanhoNewRecord(DataSet: TDataSet);
   private

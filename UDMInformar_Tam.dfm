@@ -1096,15 +1096,23 @@ object DMInformar_Tam: TDMInformar_Tam
         Name = 'COD_CBENEF'
         DataType = ftString
         Size = 8
+      end
+      item
+        Name = 'BASE_PIS'
+        DataType = ftFloat
+      end
+      item
+        Name = 'BASE_COFINS'
+        DataType = ftFloat
       end>
     IndexDefs = <>
     Params = <>
     StoreDefs = True
     OnNewRecord = mItensNewRecord
     Left = 303
-    Top = 40
+    Top = 41
     Data = {
-      001600009619E0BD0100000018000000DE00000000000300000000160A49445F
+      251600009619E0BD0100000018000000E000000000000300000025160A49445F
       50726F6475746F04000100000000000A5265666572656E636961010049000000
       010005574944544802000200140007556E696461646501004900000001000557
       494454480200020006000351746408000400000000000749445F43464F500400
@@ -1280,7 +1288,8 @@ object DMInformar_Tam: TDMInformar_Tam
       5F434F52080004000000000013564C525F49434D535F5355425354495455544F
       080004000000000012504552435F49434D535F4643505F353430350800040000
       0000000A434F445F4342454E4546010049000000010005574944544802000200
-      08000000}
+      080008424153455F50495308000400000000000B424153455F434F46494E5308
+      000400000000000000}
     object mItensID_Produto: TIntegerField
       FieldName = 'ID_Produto'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2129,6 +2138,12 @@ object DMInformar_Tam: TDMInformar_Tam
     object mItensCOD_CBENEF: TStringField
       FieldName = 'COD_CBENEF'
       Size = 8
+    end
+    object mItensBASE_PIS: TFloatField
+      FieldName = 'BASE_PIS'
+    end
+    object mItensBASE_COFINS: TFloatField
+      FieldName = 'BASE_COFINS'
     end
   end
   object mPedido_Cli: TClientDataSet

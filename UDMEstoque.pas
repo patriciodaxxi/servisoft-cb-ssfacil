@@ -323,6 +323,8 @@ begin
     cdsEstoque_MovVLR_UNITARIOORIG.AsFloat := Vlr_Unitario_Orig;
     cdsEstoque_MovUNIDADE_ORIG.AsString    := Unidade_Orig;
     cdsEstoque_MovQTD_ORIG.AsFloat         := StrToFloat(FormatFloat('0.00000',Qtd_Orig));
+    if ID_COR <= 0 then
+      ID_COR := 0;
     cdsEstoque_MovID_COR.AsInteger         := ID_COR;
     cdsEstoque_MovPRECO_CUSTO_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00000',Preco_Custo_Total));
     if ID_CentroCusto > 0 then

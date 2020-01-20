@@ -461,8 +461,6 @@ uses DmdDatabase, Math, uUtilPadrao, LogProvider;
 procedure TDMCadDocEstoque.prc_Inserir;
 var
   vAux: Integer;
-  sds: TSQLDataSet;
-  vNumAux: Integer;
 begin
   if not cdsDocEstoque.Active then
     prc_Localizar(-1);
