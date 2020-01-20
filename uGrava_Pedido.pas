@@ -241,6 +241,8 @@ begin
   fDMCadPedido.vMSGErro := '';
   vGravou  := False;
   vVerificaCampos := 0;
+  if fDMCadPedido.cdsCondPgtoID.AsInteger <> fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger then
+    fDMCadPedido.cdsCondPgto.Locate('ID',fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger,([Locaseinsensitive]));
   if (trim(fDMCadPedido.cdsPedidoPEDIDO_CLIENTE.AsString) = '') and (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P')
     and (fDMCadPedido.qParametros_PedEXIGE_PEDIDO_CLI.AsString = 'S') then
     fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Pedido cliente não informado!';
@@ -265,11 +267,17 @@ begin
   if (fDMCadPedido.qParametros_GeralEMPRESA_VAREJO.AsString = 'S') and (fDMCadPedido.cdsPedidoTIPO_ATENDIMENTO.AsInteger = 4)
     and (fDMCadPedido.cdsPedidoID_TRANSPORTADORA.AsInteger <= 0) then
     fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Quando for entrega a domicílio é obrigado informar a transportadora!';
-
+  //Condição incluída 20/01/2020  
+  if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_CONTA.AsInteger <= 0) and
+     (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') and (fDMCadPedido.cdsCondPgtoTIPO_CONDICAO.AsString = 'V')   then
+    fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Conta não informada para a condição a vista!';
+  if ((fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') or (fDMCadPedido.cdsPedidoGERA_ENTRADA_NO_PEDIDO.AsString = 'S'))  and
+     ((StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_ADIANTAMENTO.AsFloat)) > 0) or
+       (StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_ENTRADA.AsFloat)) > 0)) and (fDMCadPedido.cdsPedidoID_CONTA.AsInteger <= 0)  then
+    fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Conta não informada para lançar a Entrada/Adiantamento!';
+  //**********************
   if (fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger < 1) and (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') then
     fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Cliente não informado!';
-
-
   if  fDMCadPedido.cdsParametrosID_CLIENTE_CONSUMIDOR.AsInteger <> fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger then
   begin
     if (fDMCadPedido.qParametros_PedUSA_EMAIL_NO_PED.AsString = 'S') and (fDMCadPedido.qParametros_PedENVIA_SMS.AsString = 'S') then
@@ -453,7 +461,7 @@ begin
     if fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString <> 'S' then
       fDMCadPedido.cdsPedidoVLR_ADIANTAMENTO.AsFloat := StrToFloat(FormatFloat('0.00',0));
 
-    if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') or (fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') then //10/11/2015 Usa_Adiantamento_pedido
+    if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') then
     begin
       //02/12/2019
       if fDMCadPedido.cdsCondPgtoID.AsInteger <> fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger then
@@ -473,6 +481,12 @@ begin
         end;
       end;
     end;
+    if (fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_ADIANTAMENTO.AsFloat)) > 0) then
+      Gravar_Duplicata(fDMCadPedido,'R','N',1,StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_ADIANTAMENTO.AsFloat)),fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime,'');
+
+    if (fDMCadPedido.qParametros_PedCONTROLAR_VLR_ENTRADA.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_ENTRADA.AsFloat)) > 0) and
+      (fDMCadPedido.cdsPedidoGERA_ENTRADA_NO_PEDIDO.AsString = 'S') then
+      Gravar_Duplicata(fDMCadPedido,'R','N',1,StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_ENTRADA.AsFloat)),fDMCadPedido.cdsPedidoDTEMISSAO.AsDateTime,'');
 
     //08/03/2015  quando for pedido e for para descontar do estoque
     //19/09/2016 Quando empresa for Sucata

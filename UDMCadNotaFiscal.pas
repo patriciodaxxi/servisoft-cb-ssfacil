@@ -3124,6 +3124,7 @@ type
     cdsNotaFiscal_ItensBASE_PIS: TFloatField;
     cdsNotaFiscal_ItensBASE_COFINS: TFloatField;
     cdsFilialDESC_ICMS_PIS_COFINS: TStringField;
+    qParametros_PedCONTROLAR_VLR_ENTRADA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsNotaFiscalNewRecord(DataSet: TDataSet);
     procedure cdsNotaFiscalBeforePost(DataSet: TDataSet);

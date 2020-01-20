@@ -971,6 +971,7 @@ begin
     end;
     if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat)) > 0 then
       fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_ADIANTAMENTO.AsFloat;
+
   end;
   fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat));
   //08/05/2019
@@ -3566,6 +3567,40 @@ begin
 
   fDMCadNotaFiscal.cdsNotaFiscalVLR_ADIANTAMENTO.AsFloat := StrToFloat(FormatFloat('0.00',0));
   fDMCadNotaFiscal.cdsNotaFiscalVLR_ENTRADA.AsFloat      := StrToFloat(FormatFloat('0.00',0));
+
+  if (fDMCadNotaFiscal.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') and (StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat)) > 0) then
+  begin
+    sds := TSQLDataSet.Create(nil);
+    try
+      sds.SQLConnection := dmDatabase.scoDados;
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+
+      fDMCadNotaFiscal.mPedidoAux.First;
+      while not fDMCadNotaFiscal.mPedidoAux.Eof do
+      begin
+        sds.Close;
+        //11/05/2016
+        sds.CommandText := ' SELECT VLR_ADIANTAMENTO, VLR_ENTRADA, GERA_ENTRADA_NO_PEDIDO '
+                         + ' FROM PEDIDO '
+                         + ' WHERE ID = :ID ';
+        sds.ParamByName('ID').AsInteger := fDMCadNotaFiscal.mPedidoAuxID_Pedido.AsInteger;
+        sds.Open;
+        if sds.FieldByName('GERA_ENTRADA_NO_PEDIDO').AsString = 'S' then
+          fDMCadNotaFiscal.cdsNotaFiscalVLR_ADIANTAMENTO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ADIANTAMENTO.AsFloat + sds.FieldByName('VLR_ADIANTAMENTO').AsFloat))
+        else
+          fDMCadNotaFiscal.cdsNotaFiscalVLR_ENTRADA.AsFloat      := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_ENTRADA.AsFloat + sds.FieldByName('VLR_ENTRADA').AsFloat));
+        fDMCadNotaFiscal.mPedidoAux.Next;
+      end;
+    finally
+      FreeAndNil(sds);
+    end;
+    if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat)) > 0 then
+      fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat := fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat - fDMCadNotaFiscal.cdsNotaFiscalVLR_ADIANTAMENTO.AsFloat;
+
+  end;
+
+
   fDMCadNotaFiscal.cdsNotaFiscalVLR_BASE_COMISSAO.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsNotaFiscalVLR_DUPLICATA.AsFloat));
 end;
 
