@@ -3965,7 +3965,7 @@ begin
     inc(vItemNFe);
     if not fDMNFe.mAuxDadosNFe.Locate('Tipo;Codigo',VarArrayOf(['SIT',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsString]),[locaseinsensitive]) then
       Grava_mAuxDadosNFe('SIT',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CSTICMS.AsString);
-    if not fDMNFe.mAuxDadosNFe.Locate('Tipo;Codigo',VarArrayOf(['NAT',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsString]),[locaseinsensitive]) then
+    if not fDMNFe.mAuxDadosNFe.Locate('Tipo;Codigo;ID_Variacao',VarArrayOf(['NAT',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsString,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger]),[locaseinsensitive]) then
       Grava_mAuxDadosNFe('NAT',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_CFOP.AsString,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_VARIACAO.AsInteger);
     if (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsInteger > 0) and
        (not(fDMNFe.mAuxDadosNFe.Locate('Tipo;Codigo',VarArrayOf(['NCM',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_OBS_LEI_NCM.AsInteger]),[locaseinsensitive]))) then
