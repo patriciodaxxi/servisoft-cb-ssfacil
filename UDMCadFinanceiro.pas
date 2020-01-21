@@ -244,10 +244,6 @@ type
     dspOrcamento: TDataSetProvider;
     cdsOrcamento: TClientDataSet;
     dsOrcamento: TDataSource;
-    cdsOrcamentoQTD_ORCAMENTO: TIntegerField;
-    cdsOrcamentoQTD_APROVADO: TIntegerField;
-    cdsOrcamentoQTD_NAO_APROVADO: TIntegerField;
-    cdsOrcamentoQTD_PENDENTE: TIntegerField;
     sdsVale: TSQLDataSet;
     dspVale: TDataSetProvider;
     cdsVale: TClientDataSet;
@@ -384,6 +380,21 @@ type
     cdsOrc_EmiVLR_APROVADO: TFloatField;
     cdsOrc_EmiVLR_NAO_APROVADO: TFloatField;
     cdsOrc_EmiVLR_PENDENTE: TFloatField;
+    mPedOrc: TClientDataSet;
+    mPedOrcCodigo: TStringField;
+    mPedOrcNome: TStringField;
+    mPedOrcVlrMovimento: TFloatField;
+    dsmPedOrc: TDataSource;
+    mPedOrcQtd: TIntegerField;
+    mFaturamentoQtd: TIntegerField;
+    cdsPedido_EmiQTD: TIntegerField;
+    cdsPedido_EmiID_VENDEDOR: TIntegerField;
+    cdsPedido_EmiNOME_VENDEDOR: TStringField;
+    cdsOrcamentoQTD_ORCAMENTO: TIntegerField;
+    cdsOrcamentoVLR_TOTAL: TFloatField;
+    cdsOrcamentoAPROVADO_ORC: TStringField;
+    cdsOrcamentoID_VENDEDOR: TIntegerField;
+    cdsOrcamentoNOME_VENDEDOR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspFinanceiroUpdateError(Sender: TObject; DataSet: TCustomClientDataSet; E: EUpdateError; UpdateKind: TUpdateKind; var Response: TResolverResponse);
     procedure cdsFinanceiroBeforePost(DataSet: TDataSet);
@@ -392,6 +403,7 @@ type
     procedure frxReport1BeforePrint(Sender: TfrxReportComponent);
     procedure frxMovimentoDataFirst(Sender: TObject);
     procedure frxMovimentoDataNext(Sender: TObject);
+    procedure mFaturamentoNewRecord(DataSet: TDataSet);
   private
     vSaldo: Real;
     { Private declarations }
@@ -584,6 +596,12 @@ procedure TDMCadFinanceiro.frxMovimentoDataNext(Sender: TObject);
 begin
   vSaldo := vSaldo + cdsMovimentoDataENTRADA.AsFloat - cdsMovimentoDataSAIDA.AsFloat;
   frxReport1.Variables['SaldoFin'] := vSaldo;
+end;
+
+procedure TDMCadFinanceiro.mFaturamentoNewRecord(DataSet: TDataSet);
+begin
+  mFaturamentoVlrMovimento.AsFloat := 0;
+  mFaturamentoQtd.AsInteger        := 0;
 end;
 
 end.

@@ -49,7 +49,6 @@ type
     RLBand6: TRLBand;
     RLPanel3: TRLPanel;
     RLLabel13: TRLLabel;
-    RLLabel14: TRLLabel;
     RLLabel15: TRLLabel;
     RLBand7: TRLBand;
     RLDraw3: TRLDraw;
@@ -73,6 +72,8 @@ type
     RLLabel24: TRLLabel;
     RLLabel25: TRLLabel;
     RLLabel26: TRLLabel;
+    RLDBText13: TRLDBText;
+    RLLabel27: TRLLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure RLReport1BeforePrint(Sender: TObject; var PrintIt: Boolean);
     procedure FormCreate(Sender: TObject);
@@ -134,14 +135,25 @@ procedure TfRelFinanceiro_Ger.RLBand7BeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 begin
   //if (fDMCadFinanceiro.qParametrosCONTROLAR_FAT_SEPARADO.AsString = 'S') and (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '10001A3') then
-  if (fDMCadFinanceiro.qParametrosCONTROLAR_FAT_SEPARADO.AsString = 'S') and ((fDMCadFinanceiro.mFaturamentoCodigo.AsString = '10001B3') or (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '10001A3')) then
-    RLDBText9.Font.Style := [fsBold]
-  else
-  if copy(fDMCadFinanceiro.mFaturamentoCodigo.AsString,Length(fDMCadFinanceiro.mFaturamentoCodigo.AsString),1) = 'T' then
+  if ((fDMCadFinanceiro.qParametrosCONTROLAR_FAT_SEPARADO.AsString = 'S') and ((fDMCadFinanceiro.mFaturamentoCodigo.AsString = '10001B3') or (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '10001A3') or
+     (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '08010A') or (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '09010A')))
+    or (copy(fDMCadFinanceiro.mFaturamentoCodigo.AsString,Length(fDMCadFinanceiro.mFaturamentoCodigo.AsString),1) = 'T') then
     RLDBText9.Font.Style := [fsBold]
   else
     RLDBText9.Font.Style := [];
+  if (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '08010A') or (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '09010A') then
+  begin
+    RLDBText9.Font.Size := 10;
+    RLDBText9.Font.Name := 'Verdana';
+  end
+  else
+  begin
+    RLDBText9.Font.Size := 8;
+    RLDBText9.Font.Name := 'Arial';
+  end;
   RLDBText10.Font.Style := RLDBText9.Font.Style;
+  RLDBText10.Visible := (trim(fDMCadFinanceiro.mFaturamentoNome.AsString) <> '');
+  RLDBText13.Font.Style := RLDBText9.Font.Style;
 end;
 
 procedure TfRelFinanceiro_Ger.RLBand10BeforePrint(Sender: TObject;

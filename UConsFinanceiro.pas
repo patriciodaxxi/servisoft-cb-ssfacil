@@ -69,7 +69,7 @@ type
     procedure prc_Consultar_qNotaFiscal_Canc;
     procedure prc_Consultar_qNotaFiscal_CCE;
     procedure prc_Consultar_OC_Emi;
-    procedure prc_Gravar_mFaturamento(Codigo, Nome: String ; Valor: Real);
+    procedure prc_Gravar_mFaturamento(Codigo, Nome: String ; Valor: Real ; Qtd: Integer = 0);
   public
     { Public declarations }
   end;
@@ -142,6 +142,7 @@ begin
     SMDBGrid3.EnableScroll;
     FreeAndNil(Form);
   end;
+  fDMCadFinanceiro.mFaturamento.First;
 end;
 
 procedure TfrmConsFinanceiro.prc_Consultar;
@@ -349,8 +350,7 @@ begin
   end;
 end;
 
-procedure TfrmConsFinanceiro.prc_Gravar_mFaturamento(Codigo, Nome: String;
-  Valor: Real);
+procedure TfrmConsFinanceiro.prc_Gravar_mFaturamento(Codigo, Nome: String ; Valor: Real ; Qtd: Integer = 0);
 begin
   if fDMCadFinanceiro.mFaturamento.Locate('Codigo',Codigo,[loCaseInsensitive]) then
     fDMCadFinanceiro.mFaturamento.Edit
@@ -361,6 +361,7 @@ begin
     fDMCadFinanceiro.mFaturamentoNome.AsString   := Nome;
   end;
   fDMCadFinanceiro.mFaturamentoVlrMovimento.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadFinanceiro.mFaturamentoVlrMovimento.AsFloat + Valor));
+  fDMCadFinanceiro.mFaturamentoQtd.AsInteger        := fDMCadFinanceiro.mFaturamentoQtd.AsInteger + Qtd; 
   fDMCadFinanceiro.mFaturamento.Post;
 end;
 
@@ -371,11 +372,21 @@ begin
     Background := $00DBDBDB;
   if trim(fDMCadFinanceiro.mFaturamentoNome.AsString) = '' then
     AFont.Color := $00DBDBDB;
-  if (fDMCadFinanceiro.qParametrosCONTROLAR_FAT_SEPARADO.AsString = 'S') and ((fDMCadFinanceiro.mFaturamentoCodigo.AsString = '10001B3') or (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '10001A3')) then
+  if (fDMCadFinanceiro.qParametrosCONTROLAR_FAT_SEPARADO.AsString = 'S') and
+     ((fDMCadFinanceiro.mFaturamentoCodigo.AsString = '10001B3') or (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '10001A3') or
+      (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '08010A') or (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '09010A')) then
     AFont.Style := [fsBold];
+  if (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '08010A') or (fDMCadFinanceiro.mFaturamentoCodigo.AsString = '09010A') then
+  begin
+    AFont.Size := 10;
+    AFont.Name :=  'Verdana';
+  end;
 end;
 
 procedure TfrmConsFinanceiro.prc_Consultar_Ped_Emi;
+var
+  vGravou : Boolean;
+  vNomeAux : String;
 begin
   fDMCadFinanceiro.cdsPedido_Emi.Close;
   fDMCadFinanceiro.sdsPedido_Emi.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
@@ -386,12 +397,23 @@ begin
     fDMCadFinanceiro.sdsPedido_Emi.ParamByName('FILIAL').AsInteger := 0;
   fDMCadFinanceiro.cdsPedido_Emi.Open;
 
+  vGravou := False;
   fDMCadFinanceiro.cdsPedido_Emi.First;
   while not fDMCadFinanceiro.cdsPedido_Emi.Eof do
   begin
-    prc_Gravar_mFaturamento('10010A','Pedidos emitidos no período',fDMCadFinanceiro.cdsPedido_EmiVLR_TOTAL.AsFloat);
+    //21/01/2020
+    //prc_Gravar_mFaturamento('10010A','Pedidos emitidos no período',fDMCadFinanceiro.cdsPedido_EmiVLR_TOTAL.AsFloat);
+    vNomeAux := LowerCase(fDMCadFinanceiro.cdsPedido_EmiNOME_VENDEDOR.AsString);
+    if fDMCadFinanceiro.cdsPedido_EmiID_VENDEDOR.AsInteger <= 0 then
+      vNomeAux := 'sem vendedor';
+    prc_Gravar_mFaturamento('08010A'+FormatFloat('00000',fDMCadFinanceiro.cdsPedido_EmiID_VENDEDOR.AsInteger),vNomeAux,
+                                                  fDMCadFinanceiro.cdsPedido_EmiVLR_TOTAL.AsFloat,fDMCadFinanceiro.cdsPedido_EmiQTD.AsInteger);
+    prc_Gravar_mFaturamento('08010A','Pedidos emitidos no período',fDMCadFinanceiro.cdsPedido_EmiVLR_TOTAL.AsFloat,fDMCadFinanceiro.cdsPedido_EmiQTD.AsInteger);
+    vGravou := True;
     fDMCadFinanceiro.cdsPedido_Emi.Next;
   end;
+  if vGravou then
+    prc_Gravar_mFaturamento('08010T','',0);
 end;
 
 procedure TfrmConsFinanceiro.prc_Consultar_Ped_Pend;
@@ -419,6 +441,7 @@ procedure TfrmConsFinanceiro.prc_Consultar_Orc;
 var
   vQtdTotal: Integer;
   vVlrTotal: Real;
+  vNomeAux : String;
 begin
   fDMCadFinanceiro.cdsOrcamento.Close;
   fDMCadFinanceiro.sdsOrcamento.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
@@ -430,52 +453,33 @@ begin
   fDMCadFinanceiro.cdsOrcamento.Open;
 
   vQtdTotal := 0;
+  vVlrTotal := 0;
   fDMCadFinanceiro.cdsOrcamento.First;
   while not fDMCadFinanceiro.cdsOrcamento.Eof do
   begin
     vQtdTotal := vQtdTotal + fDMCadFinanceiro.cdsOrcamentoQTD_ORCAMENTO.AsInteger;
-    if fDMCadFinanceiro.cdsOrcamentoQTD_APROVADO.AsInteger > 0 then
-      prc_Gravar_mFaturamento('10020A','Orçamentos Aprovados  (Qtd)',fDMCadFinanceiro.cdsOrcamentoQTD_APROVADO.AsInteger)
+    vVlrTotal := StrToFloat(FormatFloat('0.00',vVlrTotal + fDMCadFinanceiro.cdsOrcamentoVLR_TOTAL.AsFloat));
+    if fDMCadFinanceiro.cdsOrcamentoAPROVADO_ORC.AsString = 'A' then
+      prc_Gravar_mFaturamento('10020A','Orçamentos Aprovados',fDMCadFinanceiro.cdsOrcamentoVLR_TOTAL.AsFloat,0)
     else
-    if fDMCadFinanceiro.cdsOrcamentoQTD_NAO_APROVADO.AsInteger > 0 then
-      prc_Gravar_mFaturamento('10020B','Orçamentos Não Aprovados   (Qtd)',fDMCadFinanceiro.cdsOrcamentoQTD_NAO_APROVADO.AsInteger)
+    if fDMCadFinanceiro.cdsOrcamentoAPROVADO_ORC.AsString = 'N' then
+      prc_Gravar_mFaturamento('10020B','Orçamentos Não Aprovados',fDMCadFinanceiro.cdsOrcamentoVLR_TOTAL.AsFloat,0)
     else
-    if fDMCadFinanceiro.cdsOrcamentoQTD_PENDENTE.AsInteger > 0 then
-      prc_Gravar_mFaturamento('10020C','Orçamentos Pendentes   (Qtd)',fDMCadFinanceiro.cdsOrcamentoQTD_PENDENTE.AsInteger);
+    if fDMCadFinanceiro.cdsOrcamentoAPROVADO_ORC.AsString = 'P' then
+      prc_Gravar_mFaturamento('10020C','Orçamentos Pendentes',fDMCadFinanceiro.cdsOrcamentoVLR_TOTAL.AsFloat,0);
+    vNomeAux := LowerCase(fDMCadFinanceiro.cdsOrcamentoNOME_VENDEDOR.AsString);
+    if fDMCadFinanceiro.cdsOrcamentoID_VENDEDOR.AsInteger <= 0 then
+      vNomeAux := '';
+    prc_Gravar_mFaturamento('09010A'+FormatFloat('00000',fDMCadFinanceiro.cdsOrcamentoID_VENDEDOR.AsInteger),vNomeAux,fDMCadFinanceiro.cdsOrcamentoVLR_TOTAL.AsFloat,fDMCadFinanceiro.cdsOrcamentoQTD_ORCAMENTO.AsInteger);
     fDMCadFinanceiro.cdsOrcamento.Next;
   end;
   if vQtdTotal > 0 then
-    prc_Gravar_mFaturamento('10020T','... Total Orçamentos Emitidos ... (Qtd)',vQtdTotal);
-
-  //Orçamento Valores
-  vVlrTotal := 0;
-  fDMCadFinanceiro.cdsOrc_Emi.Close;
-  fDMCadFinanceiro.sdsOrc_Emi.ParamByName('DTINICIAL').AsDate := DateEdit1.Date;
-  fDMCadFinanceiro.sdsOrc_Emi.ParamByName('DTFINAL').AsDate   := DateEdit2.Date;
-  if trim(RxDBLookupCombo1.Text) <> '' then
-    fDMCadFinanceiro.sdsOrc_Emi.ParamByName('FILIAL').AsInteger := RxDBLookupCombo1.KeyValue
-  else
-    fDMCadFinanceiro.sdsOrc_Emi.ParamByName('FILIAL').AsInteger := 0;
-  fDMCadFinanceiro.cdsOrc_Emi.Open;
-  fDMCadFinanceiro.cdsOrc_Emi.First;
-  while not fDMCadFinanceiro.cdsOrc_Emi.Eof do
   begin
-    vVlrTotal := vVlrTotal + fDMCadFinanceiro.cdsOrc_EmiVLR_TOTAL.AsInteger;
-    if fDMCadFinanceiro.cdsOrc_EmiVLR_APROVADO.AsFloat > 0 then
-      prc_Gravar_mFaturamento('10025A','Orçamentos Aprovados  (Vlr)',fDMCadFinanceiro.cdsOrc_EmiVLR_APROVADO.AsFloat)
-    else
-    if fDMCadFinanceiro.cdsOrc_EmiVLR_NAO_APROVADO.AsFloat > 0 then
-      prc_Gravar_mFaturamento('10025B','Orçamentos Não Aprovados   (Vlr)',fDMCadFinanceiro.cdsOrc_EmiVLR_NAO_APROVADO.AsFloat)
-    else
-    if fDMCadFinanceiro.cdsOrc_EmiVLR_PENDENTE.AsFloat > 0 then
-      prc_Gravar_mFaturamento('10025C','Orçamentos Pendentes   (Vlr)',fDMCadFinanceiro.cdsOrcamentoQTD_PENDENTE.AsFloat);
-
-    fDMCadFinanceiro.cdsOrc_Emi.Next;
+    //prc_Gravar_mFaturamento('10020T','... Total Orçamentos Emitidos ...',vVlrTotal,vQtdTotal);
+    prc_Gravar_mFaturamento('09010A','Orçamentos Emitidos',vVlrTotal,vQtdTotal);
+    prc_Gravar_mFaturamento('10020T','',0,0);
+    prc_Gravar_mFaturamento('09010T','',0,0);
   end;
-  if vQtdTotal > 0 then
-    prc_Gravar_mFaturamento('10025T','... Total Orçamentos Emitidos ... (Vlr)',vVlrTotal);
-    prc_Gravar_mFaturamento('10026T','',0);
-
 end;
 
 procedure TfrmConsFinanceiro.prc_Consultar_Vale;

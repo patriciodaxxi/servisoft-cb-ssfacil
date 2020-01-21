@@ -423,19 +423,19 @@ object fRelFinanceiro_Ger: TfRelFinanceiro_Ger
               Transparent = False
             end
           end
-          object RLLabel14: TRLLabel
-            Left = 6
-            Top = 26
-            Width = 52
-            Height = 14
-            Caption = 'Descri'#231#227'o'
-          end
           object RLLabel15: TRLLabel
-            Left = 408
+            Left = 520
             Top = 26
             Width = 29
             Height = 14
             Caption = 'Valor'
+          end
+          object RLLabel27: TRLLabel
+            Left = 433
+            Top = 25
+            Width = 20
+            Height = 14
+            Caption = 'Qtd'
           end
         end
         object RLBand7: TRLBand
@@ -463,12 +463,21 @@ object fRelFinanceiro_Ger: TfRelFinanceiro_Ger
             DataSource = DMCadFinanceiro.dsmFaturamento
           end
           object RLDBText10: TRLDBText
-            Left = 369
+            Left = 482
             Top = 2
             Width = 68
             Height = 14
             Alignment = taRightJustify
             DataField = 'VlrMovimento'
+            DataSource = DMCadFinanceiro.dsmFaturamento
+          end
+          object RLDBText13: TRLDBText
+            Left = 434
+            Top = 2
+            Width = 20
+            Height = 14
+            Alignment = taRightJustify
+            DataField = 'Qtd'
             DataSource = DMCadFinanceiro.dsmFaturamento
           end
         end

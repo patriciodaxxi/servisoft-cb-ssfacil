@@ -1008,7 +1008,7 @@ object DMCadFinanceiro: TDMCadFinanceiro
       item
         Name = 'Codigo'
         DataType = ftString
-        Size = 10
+        Size = 15
       end
       item
         Name = 'Nome'
@@ -1018,6 +1018,10 @@ object DMCadFinanceiro: TDMCadFinanceiro
       item
         Name = 'VlrMovimento'
         DataType = ftFloat
+      end
+      item
+        Name = 'Qtd'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -1029,16 +1033,19 @@ object DMCadFinanceiro: TDMCadFinanceiro
     IndexFieldNames = 'Codigo'
     Params = <>
     StoreDefs = True
+    OnNewRecord = mFaturamentoNewRecord
     Left = 456
-    Top = 120
+    Top = 121
     Data = {
-      630000009619E0BD010000001800000003000000000003000000630006436F64
-      69676F0100490000000100055749445448020002000A00044E6F6D6501004900
+      850000009619E0BD010000001800000004000000000003000000850006436F64
+      69676F0100490000000100055749445448020002000F00044E6F6D6501004900
       000001000557494454480200020028000C566C724D6F76696D656E746F080004
-      00000000000000}
+      000000000003517464040001000000000001000D44454641554C545F4F524445
+      520200820000000000}
     object mFaturamentoCodigo: TStringField
+      DisplayWidth = 15
       FieldName = 'Codigo'
-      Size = 10
+      Size = 15
     end
     object mFaturamentoNome: TStringField
       FieldName = 'Nome'
@@ -1047,6 +1054,10 @@ object DMCadFinanceiro: TDMCadFinanceiro
     object mFaturamentoVlrMovimento: TFloatField
       FieldName = 'VlrMovimento'
       DisplayFormat = '###,###,##0.00'
+    end
+    object mFaturamentoQtd: TIntegerField
+      FieldName = 'Qtd'
+      DisplayFormat = '#'
     end
   end
   object dsmFaturamento: TDataSource
@@ -1247,10 +1258,12 @@ object DMCadFinanceiro: TDMCadFinanceiro
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT SUM(V.VLR_TOTAL) VLR_TOTAL'#13#10'FROM VPEDIDO_ITEM V'#13#10'WHERE V.' +
-      'QTD > 0'#13#10'  AND V.TIPO_REG = '#39'P'#39#13#10'  AND (FILIAL = :FILIAL or :FIL' +
-      'IAL = 0) '#13#10'  AND DTEMISSAO >= :DTINICIAL'#13#10'  AND DTEMISSAO <= :DT' +
-      'FINAL'#13#10
+      'select sum(p.vlr_total) VLR_TOTAL, count(1) Qtd, p.id_vendedor, ' +
+      'VEND.NOME NOME_VENDEDOR'#13#10'FROM PEDIDO P'#13#10'LEFT JOIN PESSOA VEND'#13#10'O' +
+      'N P.ID_VENDEDOR = VEND.CODIGO'#13#10'  WHERE P.TIPO_REG = '#39'P'#39#13#10'  AND (' +
+      'P.FILIAL = :FILIAL or :FILIAL = 0)'#13#10'  AND P.DTEMISSAO >= :DTINIC' +
+      'IAL'#13#10'  AND P.DTEMISSAO <= :DTFINAL'#13#10'GROUP BY P.ID_VENDEDOR, VEND' +
+      '.NOME'#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -1286,11 +1299,22 @@ object DMCadFinanceiro: TDMCadFinanceiro
     Aggregates = <>
     Params = <>
     ProviderName = 'dspPedido_Emi'
-    Left = 96
+    Left = 97
     Top = 72
     object cdsPedido_EmiVLR_TOTAL: TFloatField
       FieldName = 'VLR_TOTAL'
       DisplayFormat = '###,###,##0.00'
+    end
+    object cdsPedido_EmiQTD: TIntegerField
+      FieldName = 'QTD'
+      Required = True
+    end
+    object cdsPedido_EmiID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object cdsPedido_EmiNOME_VENDEDOR: TStringField
+      FieldName = 'NOME_VENDEDOR'
+      Size = 60
     end
   end
   object dsPedido_Emi: TDataSource
@@ -1378,15 +1402,12 @@ object DMCadFinanceiro: TDMCadFinanceiro
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT COUNT(V.ID) AS QTD_ORCAMENTO,'#13#10'          CASE'#13#10'        WH' +
-      'EN V.APROVADO_ORC = '#39'A'#39' THEN COUNT(V.ID) '#13#10'          END AS QTD_' +
-      'APROVADO,'#13#10'          CASE'#13#10'        WHEN V.APROVADO_ORC = '#39'N'#39' THE' +
-      'N COUNT(V.ID) '#13#10'          END AS QTD_NAO_APROVADO,'#13#10'          CA' +
-      'SE'#13#10'        WHEN V.APROVADO_ORC = '#39'P'#39' THEN COUNT(V.ID) '#13#10'       ' +
-      '   END AS QTD_PENDENTE'#13#10'FROM VPEDIDO_ITEM V'#13#10'WHERE V.TIPO_REG = ' +
-      #39'O'#39#13#10'       AND (V.FILIAL = :FILIAL or :FILIAL = 0)'#13#10'       AND ' +
-      'V.DTEMISSAO >= :DTINICIAL'#13#10'       AND V.DTEMISSAO <= :DTFINAL'#13#10'g' +
-      'roup by APROVADO_ORC'#13#10#13#10
+      'select count(1) as QTD_ORCAMENTO, sum(P.VLR_TOTAL) VLR_TOTAL, P.' +
+      'APROVADO_ORC, P.ID_VENDEDOR, vend.NOME NOME_VENDEDOR'#13#10'from PEDID' +
+      'O P'#13#10'left join pessoa vend'#13#10'on p.id_vendedor = vend.codigo'#13#10'wher' +
+      'e P.TIPO_REG = '#39'O'#39' and'#13#10'      (P.FILIAL = :FILIAL or :FILIAL = 0' +
+      ') and'#13#10'      P.DTEMISSAO >= :DTINICIAL and'#13#10'      P.DTEMISSAO <=' +
+      ' :DTFINAL'#13#10'group by APROVADO_ORC, P.ID_VENDEDOR, VEND.NOME'
     MaxBlobSize = -1
     Params = <
       item
@@ -1422,20 +1443,26 @@ object DMCadFinanceiro: TDMCadFinanceiro
     Aggregates = <>
     Params = <>
     ProviderName = 'dspOrcamento'
-    Left = 96
-    Top = 170
+    Left = 94
+    Top = 169
     object cdsOrcamentoQTD_ORCAMENTO: TIntegerField
       FieldName = 'QTD_ORCAMENTO'
       Required = True
     end
-    object cdsOrcamentoQTD_APROVADO: TIntegerField
-      FieldName = 'QTD_APROVADO'
+    object cdsOrcamentoVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
     end
-    object cdsOrcamentoQTD_NAO_APROVADO: TIntegerField
-      FieldName = 'QTD_NAO_APROVADO'
+    object cdsOrcamentoAPROVADO_ORC: TStringField
+      FieldName = 'APROVADO_ORC'
+      FixedChar = True
+      Size = 1
     end
-    object cdsOrcamentoQTD_PENDENTE: TIntegerField
-      FieldName = 'QTD_PENDENTE'
+    object cdsOrcamentoID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object cdsOrcamentoNOME_VENDEDOR: TStringField
+      FieldName = 'NOME_VENDEDOR'
+      Size = 60
     end
   end
   object dsOrcamento: TDataSource
@@ -2588,5 +2615,57 @@ object DMCadFinanceiro: TDMCadFinanceiro
     DataSet = cdsOrc_Emi
     Left = 333
     Top = 480
+  end
+  object mPedOrc: TClientDataSet
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'Codigo'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'Nome'
+        DataType = ftString
+        Size = 40
+      end
+      item
+        Name = 'VlrMovimento'
+        DataType = ftFloat
+      end
+      item
+        Name = 'Qtd'
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 669
+    Top = 235
+    Data = {
+      6F0000009619E0BD0100000018000000040000000000030000006F0006436F64
+      69676F0100490000000100055749445448020002000A00044E6F6D6501004900
+      000001000557494454480200020028000C566C724D6F76696D656E746F080004
+      00000000000351746404000100000000000000}
+    object mPedOrcCodigo: TStringField
+      FieldName = 'Codigo'
+      Size = 10
+    end
+    object mPedOrcNome: TStringField
+      FieldName = 'Nome'
+      Size = 40
+    end
+    object mPedOrcVlrMovimento: TFloatField
+      FieldName = 'VlrMovimento'
+    end
+    object mPedOrcQtd: TIntegerField
+      FieldName = 'Qtd'
+    end
+  end
+  object dsmPedOrc: TDataSource
+    DataSet = mPedOrc
+    Left = 710
+    Top = 232
   end
 end
