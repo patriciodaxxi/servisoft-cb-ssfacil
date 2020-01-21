@@ -1,7 +1,7 @@
 object frmConsFinanceiro: TfrmConsFinanceiro
   Left = 104
   Top = 11
-  Width = 978
+  Width = 1106
   Height = 718
   Caption = 'Consulta Saldos (Entrada/Sa'#237'da)'
   Color = clBtnFace
@@ -18,7 +18,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 970
+    Width = 1098
     Height = 63
     Align = alTop
     Color = clSilver
@@ -277,7 +277,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
   object RzPageControl2: TRzPageControl
     Left = 0
     Top = 63
-    Width = 970
+    Width = 1098
     Height = 624
     ActivePage = TS_Saldo
     ActivePageDefault = TS_Saldo
@@ -293,12 +293,12 @@ object frmConsFinanceiro: TfrmConsFinanceiro
     object TS_Saldo: TRzTabSheet
       Caption = 'Consulta'
       DesignSize = (
-        966
+        1094
         601)
       object Panel2: TPanel
         Left = 0
         Top = 561
-        Width = 966
+        Width = 1094
         Height = 40
         Align = alBottom
         Color = 12713983
@@ -590,7 +590,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
       object Panel3: TPanel
         Left = 540
         Top = 0
-        Width = 426
+        Width = 554
         Height = 561
         Align = alRight
         Anchors = [akLeft, akTop, akRight, akBottom]
@@ -598,7 +598,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
         object RzGroupBox2: TRzGroupBox
           Left = 1
           Top = 1
-          Width = 424
+          Width = 552
           Height = 412
           Align = alTop
           Anchors = [akLeft, akTop, akRight, akBottom]
@@ -621,7 +621,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
           object SMDBGrid3: TSMDBGrid
             Left = 5
             Top = 18
-            Width = 414
+            Width = 542
             Height = 389
             Align = alClient
             Ctl3D = False
@@ -660,7 +660,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
             WidthOfIndicator = 11
             DefaultRowHeight = 16
             ScrollBars = ssHorizontal
-            ColCount = 3
+            ColCount = 4
             RowCount = 2
             Columns = <
               item
@@ -668,6 +668,12 @@ object frmConsFinanceiro: TfrmConsFinanceiro
                 FieldName = 'Nome'
                 Title.Caption = '.'
                 Width = 225
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'Qtd'
+                Title.Alignment = taCenter
                 Visible = True
               end
               item
@@ -683,7 +689,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
         object RzGroupBox3: TRzGroupBox
           Left = 1
           Top = 423
-          Width = 424
+          Width = 552
           Height = 137
           Align = alBottom
           BorderColor = clNavy
@@ -705,7 +711,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
           object SMDBGrid4: TSMDBGrid
             Left = 5
             Top = 18
-            Width = 414
+            Width = 542
             Height = 114
             Align = alClient
             Ctl3D = False
@@ -771,7 +777,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
       object SMDBGrid5: TSMDBGrid
         Left = 0
         Top = 73
-        Width = 966
+        Width = 1094
         Height = 528
         Align = alClient
         Ctl3D = False
@@ -850,7 +856,7 @@ object frmConsFinanceiro: TfrmConsFinanceiro
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 966
+        Width = 1094
         Height = 73
         Align = alTop
         TabOrder = 1
