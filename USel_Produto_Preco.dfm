@@ -38,7 +38,7 @@ object frmSel_Produto_Preco: TfrmSel_Produto_Preco
     Align = alBottom
     Ctl3D = False
     DataSource = dsmPreco
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
     ParentCtl3D = False
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -143,6 +143,7 @@ object frmSel_Produto_Preco: TfrmSel_Produto_Preco
     object mPrecoPreco: TFloatField
       DisplayWidth = 18
       FieldName = 'Preco'
+      currency = True
     end
   end
   object dsmPreco: TDataSource

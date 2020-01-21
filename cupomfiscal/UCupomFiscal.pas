@@ -636,8 +636,6 @@ begin
     vCampoPesquisa := 'ID';
 
   if ((Length(Edit1.Text) > 7) and (vCampoPesquisa = 'ID')) or (Length(Edit1.Text) = 13) then  
-//  if (Length(Edit1.Text) > 7) and (vCampoPesquisa = 'ID') then  //juca 01/10/2018
-//  if Length(Edit1.Text) > 7 then //juca 18/05/2018
   begin
     if copy(Edit1.Text,1,1) = '2' then
     begin
@@ -652,6 +650,13 @@ begin
         //11/01/2017   Cleomar
         if StrToFloat(FormatFloat('0.00000',vPreco_Pos)) > 0 then
           CurrencyEdit2.Value := vPreco_Pos
+        else
+        if fDmCupomFiscal.cdsCupomParametrosUSA_TABELA_PRECO.AsString = 'S' then
+        begin
+          frmSel_Produto := TfrmSel_Produto.Create(Self);
+          frmSel_Produto.prc_Monta_mPreco;
+          FreeAndNil(frmSel_Produto);
+        end
         else
         begin
           if (fDmCupomFiscal.cdsProdutoPRECO_VENDA.IsNull) or (fDmCupomFiscal.cdsProdutoPRECO_VENDA.AsFloat = 0) then
@@ -683,23 +688,6 @@ begin
     end
     else
     begin
-
-{  22/12/2017  Juca
-      if copy(Edit1.Text,1,1) = '0' then
-      begin
-        fDmCupomFiscal.prc_Abrir_Produto(vCampoPesquisa,IntToStr(StrToInt(Edit1.Text)));
-        if fDmCupomFiscal.cdsProduto.IsEmpty then
-        begin
-          ShowMessage('Código do produto lido: ' + Copy(Edit1.Text,2,vTamCod));
-          Result := False;
-        end
-        else
-        begin
-          vID_Produto := fDmCupomFiscal.cdsProdutoID.AsInteger;
-          Result := True;
-          Exit;
-        end;
-      end;}
 
     end;
 
@@ -741,7 +729,22 @@ begin
     if StrToFloat(FormatFloat('0.0000',vPreco_Pos)) > 0 then
       CurrencyEdit2.Value := vPreco_Pos
     else
-      CurrencyEdit2.Value := fDmCupomFiscal.cdsProdutoPRECO_VENDA.AsFloat;
+    begin
+      if fDmCupomFiscal.cdsCupomParametrosUSA_TABELA_PRECO.AsString = 'S' then
+      begin
+        frmSel_Produto := TfrmSel_Produto.Create(Self);
+        frmSel_Produto.qParametros.Open;
+        frmSel_Produto.qParametros_Geral.Open;
+        frmSel_Produto.qParametros_Prod.Open;
+        frmSel_Produto.cdsProduto.Open;
+        frmSel_produto.cdsProduto.IndexFieldNames := 'ID';
+        frmSel_Produto.cdsProduto.FindKey([fDmCupomFiscal.cdsProdutoID.AsInteger]);
+        frmSel_Produto.prc_Monta_mPreco;
+        FreeAndNil(frmSel_Produto);
+      end
+      else
+        CurrencyEdit2.Value := fDmCupomFiscal.cdsProdutoPRECO_VENDA.AsFloat;
+    end;
     //***************
     CurrencyEdit3.Value := StrToFloat(FormatFloat('0.00',CurrencyEdit2.Value * CurrencyEdit1.Value));
     vID_Produto         := fDmCupomFiscal.cdsProdutoID.AsInteger;
@@ -758,65 +761,6 @@ procedure TfCupomFiscal.RxDBLookupCombo2Enter(Sender: TObject);
 begin
   fDmCupomFiscal.cdsSitTribCF.IndexFieldNames := 'CODIGO';
 end;
-
-//procedure TfCupomFiscal.prc_Busca_IBPT;
-//var
-//  vComandoAux: String;
-//begin
-  {if fDmCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger <> fDmCupomFiscal.cdsProdutoID.AsInteger then
-    fDmCupomFiscal.cdsProduto.Locate('ID',fDmCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
-
-  fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_FEDERAL.AsFloat   := StrToFloat(FormatFloat('0.00',0));
-  fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_ESTADUAL.AsFloat  := StrToFloat(FormatFloat('0.00',0));
-  fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_MUNICIPAL.AsFloat := StrToFloat(FormatFloat('0.00',0));
-  fDmCupomFiscal.cdsCupom_ItensFONTE_TRIBUTO.Clear;
-  fDmCupomFiscal.cdsCupom_ItensVERSAO_TRIBUTO.Clear;
-
-  vComandoAux := '';
-  fDmCupomFiscal.qIBPT.Close;
-  fDmCupomFiscal.qIBPT.SQL.Text := fDmCupomFiscal.ctqIBPT;
-  if (fDmCupomFiscal.cdsParametrosTIPO_LEI_TRANSPARENCIA.AsString = 'P') then
-    vComandoAux := 'WHERE I.CODIGO = ' + QuotedStr('COMERCIO')
-  else
-    vComandoAux := 'WHERE  N.ID = ' + IntToStr(fDmCupomFiscal.cdsCupom_ItensID_NCM.AsInteger)
-                 + ' AND I.EX = ' + QuotedStr(fDmCupomFiscal.cdsProdutoNCM_EX.AsString);
-  if trim(vComandoAux) = '' then
-    exit;
-  fDmCupomFiscal.qIBPT.SQL.Text := fDmCupomFiscal.qIBPT.SQL.Text + ' ' + vComandoAux;
-  fDmCupomFiscal.qIBPT.Open;
-  if not fDmCupomFiscal.qIBPT.IsEmpty then
-  begin
-    if (fDmCupomFiscal.cdsCupom_ItensORIGEM_PROD.AsString = '0') or (fDmCupomFiscal.cdsCupom_ItensORIGEM_PROD.AsString = '3')
-      or (fDmCupomFiscal.cdsCupom_ItensORIGEM_PROD.AsString = '4') or (fDmCupomFiscal.cdsCupom_ItensORIGEM_PROD.AsString = '5') then
-      fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_FEDERAL.AsFloat := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.qIBPTPERC_NACIONAL.AsFloat))
-    else
-      fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_FEDERAL.AsFloat := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.qIBPTPERC_IMPORTACAO.AsFloat));
-    fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_ESTADUAL.AsFloat  := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.qIBPTPERC_ESTADUAL.AsFloat));
-    fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO_MUNICIPAL.AsFloat := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.qIBPTPERC_MUNICIPAL.AsFloat));
-    fDmCupomFiscal.cdsCupom_ItensFONTE_TRIBUTO.AsString         := fDmCupomFiscal.qIBPTFONTE.AsString;
-    fDmCupomFiscal.cdsCupom_ItensVERSAO_TRIBUTO.AsString        := fDmCupomFiscal.qIBPTVERSAO.AsString;
-  end;
-
-  if fDmCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger <> fDmCupomFiscal.cdsProdutoID.AsInteger then
-    fDmCupomFiscal.cdsProduto.Locate('ID',fDmCupomFiscal.cdsCupom_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]);
-  fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO.AsFloat := StrToFloat(FormatFloat('0.00',0));}
-
-{
-  fDmCupomFiscal.qIBPT.Close;
-  fDmCupomFiscal.qIBPT.ParamByName('ID').AsInteger := fDmCupomFiscal.cdsCupom_ItensID_NCM.AsInteger;
-  fDmCupomFiscal.qIBPT.ParamByName('EX').AsString  := fDmCupomFiscal.cdsProdutoNCM_EX.AsString;
-  fDmCupomFiscal.qIBPT.Open;
-  
-  if not fDmCupomFiscal.qIBPT.IsEmpty then
-  begin
-    if (fDmCupomFiscal.cdsCupom_ItensORIGEM_PROD.AsString = '0') or (fDmCupomFiscal.cdsCupom_ItensORIGEM_PROD.AsString = '3') or
-       (fDmCupomFiscal.cdsCupom_ItensORIGEM_PROD.AsString = '4') or (fDmCupomFiscal.cdsCupom_ItensORIGEM_PROD.AsString = '5') then
-      fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO.AsFloat := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.qIBPTPERC_NACIONAL.AsFloat))
-    else
-      fDmCupomFiscal.cdsCupom_ItensPERC_TRIBUTO.AsFloat := StrToFloat(FormatFloat('0.00',fDmCupomFiscal.qIBPTPERC_IMPORTACAO.AsFloat));
-  end;
-}
-//end;
 
 procedure TfCupomFiscal.prc_Calcular_Tributos_Transparencia;
 var
@@ -1836,6 +1780,8 @@ end;
 
 procedure TfCupomFiscal.CurrencyEdit1Enter(Sender: TObject);
 begin
+  vPreco_Pos := 0;
+
   if (fDmCupomFiscal.cdsCupomParametrosQTD_AUTO.AsString = 'S') and (Edit1.Text <> '') and
      ((fDmCupomFiscal.cdsCupomParametrosUSA_BALANCA.AsString = 'N') or (fDmCupomFiscal.cdsProdutoUNIDADE.AsString <> 'KG')) then
   begin

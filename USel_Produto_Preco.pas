@@ -3,8 +3,8 @@ unit USel_Produto_Preco;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, DB, DBClient, Grids, DBGrids, SMDBGrid;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, DB, DBClient, Grids, DBGrids,
+  SMDBGrid;
 
 type
   TfrmSel_Produto_Preco = class(TForm)
