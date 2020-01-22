@@ -3570,6 +3570,7 @@ type
     qParametros_ProdUSA_QTD_EMBALAGEM: TStringField;
     qParametrosID_CONTA_PADRAO: TIntegerField;
     qParametrosID_TIPO_COBRANCA_PADRAO: TIntegerField;
+    cdsPedidoImp_TipoNOME_PRODUTO_IMPRIMIR: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

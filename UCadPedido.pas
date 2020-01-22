@@ -1479,7 +1479,7 @@ begin
   //****************
 
   fDMCadPedido.prc_Inserir_Itens;
-  
+
   if fDMCadPedido.qParametros_PedUSA_ITEM_RED.AsString = 'S' then
   begin
     ffrmCadPedido_ItensRed := TfrmCadPedido_ItensRed.Create(self);

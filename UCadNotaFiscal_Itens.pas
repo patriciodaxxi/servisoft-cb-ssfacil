@@ -416,6 +416,10 @@ begin
     vID_Produto_Ant := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
     if copy(fDMCadNotaFiscal.cdsNotaFiscal_ItensCODCFOP.AsString,1,1) <> '3' then
       TabSheet3.TabVisible := False;
+    Label42.Visible  := (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString <> '0');
+    DBEdit21.Visible := (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString <> '0');
+    Label43.Visible  := (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString <> '0');
+    DBEdit22.Visible := (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString <> '0');
   end;
 
   if fDMCadNotaFiscal.cdsNotaFiscalID_CFOP.AsInteger > 0 then

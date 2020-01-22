@@ -4,8 +4,7 @@ interface
 
 uses                       
   SysUtils, Classes, Dialogs, MidasLib, RLFilters, DB, SqlExpr, Forms, IniFiles, IdCoder, IdCoder3to4, IdCoderMIME, FMTBcd, IdBaseComponent,
-  DBClient, Provider, RLRichFilter, RLXLSFilter, RLPDFFilter, RLPreviewForm,
-  DBXpress;
+  DBClient, Provider, RLRichFilter, RLXLSFilter, RLPDFFilter, RLPreviewForm, DBXpress;
                                   
 type
   TdmDatabase = class(TDataModule)
@@ -74,7 +73,7 @@ type
     procedure prc_Gravar_Log_Pessoa;
 
   public
-    function ProximaSequencia(NomeTabela: string; Filial: Integer; SerieCupom : String = '0'): Integer;
+    function ProximaSequencia(NomeTabela: string; Filial: Integer; SerieCupom: String = '0'): Integer;
     function Registro_Max(NomeTabela: string; Campo: String): Integer;
     procedure AtualizaFDB;
     function verificaLiberacao: Boolean;
@@ -101,7 +100,7 @@ begin
   Result := ExtractFilePath(Application.ExeName) + cArquivoConfiguracao;
 end;
 
-function TdmDatabase.ProximaSequencia(NomeTabela: string; Filial: Integer; SerieCupom : String = '0'): Integer;
+function TdmDatabase.ProximaSequencia(NomeTabela: string; Filial: Integer; SerieCupom: String = '0'): Integer;
 var
   sds: TSQLDataSet;
   iSeq: Integer;
@@ -435,7 +434,7 @@ var
   dtUltimo_Acesso: TDateTime;
   vTexto: String;
   vFoneAux: String;
-  vDia, vMes, vAno : Word;
+  vDia, vMes, vAno: Word;
 begin
   scoDados.Connected     := False;
   scoLiberacao.Connected := False;
@@ -722,7 +721,7 @@ end;
 
 procedure TdmDatabase.prc_Gravar_Log_Pessoa;
 var
-  vDocumento : string;
+  vDocumento: string;
 begin
   cdsLogPessoa.Close;
   cdsLogPessoa.Open;

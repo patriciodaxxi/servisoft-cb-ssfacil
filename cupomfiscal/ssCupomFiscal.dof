@@ -90,8 +90,8 @@ MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
 [Directories]
-OutputDir=i:\Delphi7\SSFacil\EXE
-UnitOutputDir=i:\Delphi7\SSFacil\DCU
+OutputDir=c:\Delphi7\SSFacil\EXE
+UnitOutputDir=c:\Delphi7\SSFacil\DCU
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=
@@ -115,7 +115,7 @@ AutoIncBuild=0
 MajorVer=1
 MinorVer=4
 Release=0
-Build=99
+Build=100
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=
 FileDescription=
-FileVersion=1.4.0.99
+FileVersion=1.4.0.100
 InternalName=
 LegalCopyright=
 LegalTrademarks=
@@ -135,22 +135,22 @@ ProductName=
 ProductVersion=1.0.0.0
 Comments=
 [Excluded Packages]
-c:\program files (x86)\borland\delphi7\Bin\DBWEBXPRT.BPL=Borland Web Wizard Package
-D:\Componentes7\FortesReport_bin_d7vcl_3.72B\RLibWinD7vcl.bpl=FortesReport VCL Library
 c:\program files (x86)\borland\delphi7\Projects\Bpl\UCDBXD7.bpl=User Control Package dbExpress Support
 D:\Componentes7\pacotecjvd7sf\PacoteCJV.bpl=Pacote de Componentes CJV
-C:\Program Files (x86)\FastReports\FastReport 5\LibD7\dclfrxcs7.bpl=FastReport 5.0 Client/Server Components
 c:\program files (x86)\borland\delphi7\Projects\Bpl\RLBoletoD7.bpl=RLBoleto (by Produsys Sistemas e Internet
+C:\Program Files (x86)\FastReports\FastReport 5\LibD7\dclfrxcs7.bpl=FastReport 5.0 Client/Server Components
+C:\Program Files (x86)\FastReports\FastReport 5\LibD7\dclfrxbde7.bpl=FastReport 5.0 BDE Components
 C:\Program Files (x86)\FastReports\FastReport 5\LibD7\dclfsbde7.bpl=FastScript 1.9 BDE Components
+c:\program files (x86)\borland\delphi7\Bin\DBWEBXPRT.BPL=Borland Web Wizard Package
 [HistoryLists\hlUnitAliases]
 Count=1
 Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
 [HistoryLists\hlUnitOutputDirectory]
 Count=3
-Item0=i:\Delphi7\SSFacil\DCU
-Item1=C:\Delphi7\SSFacil\DCU
+Item0=c:\Delphi7\SSFacil\DCU
+Item1=i:\Delphi7\SSFacil\DCU
 Item2=C:\Delphi7\SSFacil\EXE
 [HistoryLists\hlOutputDirectorry]
 Count=2
-Item0=i:\Delphi7\SSFacil\EXE
-Item1=C:\Delphi7\SSFacil\EXE
+Item0=c:\Delphi7\SSFacil\EXE
+Item1=i:\Delphi7\SSFacil\EXE

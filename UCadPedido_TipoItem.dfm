@@ -25,7 +25,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     Top = 0
     Width = 747
     Height = 478
-    ActivePage = TS_Vidro
+    ActivePage = TS_Porta
     ActivePageDefault = TS_Chapas
     Align = alClient
     BackgroundColor = 8404992
@@ -33,7 +33,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     UseColoredTabs = True
     ParentBackgroundColor = False
     ShowShadow = False
-    TabIndex = 3
+    TabIndex = 4
     TabOrder = 0
     TextColors.DisabledShadow = clActiveCaption
     TextColors.Selected = 8404992

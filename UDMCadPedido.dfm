@@ -1971,7 +1971,7 @@ object DMCadPedido: TDMCadPedido
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspParametros'
-    Left = 377
+    Left = 378
     Top = 459
     object cdsParametrosID: TIntegerField
       FieldName = 'ID'
@@ -4896,7 +4896,7 @@ object DMCadPedido: TDMCadPedido
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 216
+    Left = 215
     Top = 418
   end
   object cdsPedidoImp_Itens: TClientDataSet
@@ -5519,7 +5519,7 @@ object DMCadPedido: TDMCadPedido
   end
   object dspPedidoImp_Itens: TDataSetProvider
     DataSet = sdsPedidoImp_Itens
-    Left = 233
+    Left = 232
     Top = 418
   end
   object sdsOperacao_Nota: TSQLDataSet
@@ -10777,7 +10777,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41928.578144409700000000
-    ReportOptions.LastChange = 43816.552277013890000000
+    ReportOptions.LastChange = 43852.713821388890000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -12649,17 +12649,24 @@ object DMCadPedido: TDMCadPedido
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT PT.*, ACB.NOME NOME_ACABAMENTO, RED.NOME NOME_REDONDO_MOD' +
-      ', CMO.NOME NOME_CMOEDA, FRS.NOME NOME_FUROS, '#13#10'FRC.NOME NOME_FUR' +
-      'ACAO, PERFIL.NOME NOME_PERFIL, VIDRO.NOME NOME_VIDRO '#13#10'FROM pedi' +
-      'do_item_tipo PT'#13#10'LEFT JOIN MATRIZ_PRECO ACB ON (PT.id_acabamento' +
-      ' = ACB.id)'#13#10'LEFT JOIN MATRIZ_PRECO RED ON (PT.id_redondo_mod = R' +
-      'ED.id)'#13#10'LEFT JOIN MATRIZ_PRECO CMO ON (PT.id_cmoeda = CMO.id)'#13#10'L' +
-      'EFT JOIN MATRIZ_PRECO FRS ON (PT.id_furos = FRS.id)'#13#10'LEFT JOIN M' +
-      'ATRIZ_PRECO FRC ON (PT.id_furacao = FRC.id)'#13#10'LEFT JOIN PRODUTO P' +
-      'ERFIL ON (PT.id_perfil = PERFIL.ID)'#13#10'LEFT JOIN PRODUTO VIDRO ON ' +
-      '(PT.id_vidro = VIDRO.ID)'#13#10'WHERE PT.ID = :ID'#13#10'  AND PT.ITEM = :IT' +
-      'EM'#13#10
+      'select PT.*, ACB.NOME NOME_ACABAMENTO, RED.NOME NOME_REDONDO_MOD' +
+      ', CMO.NOME NOME_CMOEDA, FRS.NOME NOME_FUROS,'#13#10'       FRC.NOME NO' +
+      'ME_FURACAO, PERFIL.NOME NOME_PERFIL, VIDRO.NOME NOME_VIDRO,'#13#10'   ' +
+      '    case'#13#10'         when PT.TIPO_ORCAMENTO = '#39'P'#39' then coalesce(PE' +
+      'RFIL.NOME,'#39#39') || '#39' '#39' || coalesce(CORP.NOME,'#39#39') || '#39' '#39' || '#39'   '#39' |' +
+      '| coalesce(VIDRO.NOME, '#39#39') || '#39' '#39' || coalesce(CORV.NOME, '#39#39')'#13#10'  ' +
+      '       when PT.TIPO_ORCAMENTO = '#39'V'#39' then coalesce(ACB.NOME,'#39#39') |' +
+      '| '#39' '#39' || coalesce(CORV.NOME,'#39#39')'#13#10'         else '#39#39#13#10'       end NO' +
+      'ME_PRODUTO_IMPRIMIR'#13#10#13#10'from PEDIDO_ITEM_TIPO PT'#13#10'left join MATRI' +
+      'Z_PRECO ACB on (PT.ID_ACABAMENTO = ACB.ID)'#13#10'left join MATRIZ_PRE' +
+      'CO RED on (PT.ID_REDONDO_MOD = RED.ID)'#13#10'left join MATRIZ_PRECO C' +
+      'MO on (PT.ID_CMOEDA = CMO.ID)'#13#10'left join MATRIZ_PRECO FRS on (PT' +
+      '.ID_FUROS = FRS.ID)'#13#10'left join MATRIZ_PRECO FRC on (PT.ID_FURACA' +
+      'O = FRC.ID)'#13#10'left join PRODUTO PERFIL on (PT.ID_PERFIL = PERFIL.' +
+      'ID)'#13#10'left join PRODUTO VIDRO on (PT.ID_VIDRO = VIDRO.ID)'#13#10'left j' +
+      'oin COMBINACAO CORP on PT.ID_COR_PERFIL = CORP.ID'#13#10'left join COM' +
+      'BINACAO CORV on PT.ID_COR_VIDRO = CORV.ID'#13#10#13#10'where PT.ID = :ID a' +
+      'nd'#13#10'      PT.ITEM = :ITEM'#13#10'  '
     MaxBlobSize = -1
     Params = <
       item
@@ -12797,16 +12804,20 @@ object DMCadPedido: TDMCadPedido
       FieldName = 'FOTO'
       Size = 200
     end
+    object cdsPedidoImp_TipoNOME_PRODUTO_IMPRIMIR: TStringField
+      FieldName = 'NOME_PRODUTO_IMPRIMIR'
+      Size = 174
+    end
   end
   object dsPedidoImp_Tipo: TDataSource
     DataSet = cdsPedidoImp_Tipo
-    Left = 264
-    Top = 551
+    Left = 271
+    Top = 552
   end
   object dspPedidoImp_Tipo: TDataSetProvider
     DataSet = sdsPedidoImp_Tipo
     Left = 232
-    Top = 551
+    Top = 552
   end
   object sdsPedidoImp_Ace: TSQLDataSet
     NoMetadata = True
@@ -13014,7 +13025,9 @@ object DMCadPedido: TDMCadPedido
       'NOME_FURACAO=NOME_FURACAO'
       'NOME_PERFIL=NOME_PERFIL'
       'NOME_VIDRO=NOME_VIDRO'
-      'QTD_FUROS=QTD_FUROS')
+      'QTD_FUROS=QTD_FUROS'
+      'FOTO=FOTO'
+      'NOME_PRODUTO_IMPRIMIR=NOME_PRODUTO_IMPRIMIR')
     DataSource = dsPedidoImp_Tipo
     BCDToCurrency = False
     Left = 1176
