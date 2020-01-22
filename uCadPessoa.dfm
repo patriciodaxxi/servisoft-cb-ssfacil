@@ -21,8 +21,8 @@ object frmCadPessoa: TfrmCadPessoa
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 1083
-    Height = 680
+    Width = 1075
+    Height = 672
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -50,7 +50,7 @@ object frmCadPessoa: TfrmCadPessoa
       object pnlPesquisa: TPanel
         Left = 0
         Top = 30
-        Width = 1079
+        Width = 1071
         Height = 93
         Align = alTop
         Color = clSilver
@@ -472,7 +472,7 @@ object frmCadPessoa: TfrmCadPessoa
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1079
+        Width = 1071
         Height = 30
         Align = alTop
         Color = clSilver
@@ -783,8 +783,8 @@ object frmCadPessoa: TfrmCadPessoa
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 640
-        Width = 1079
+        Top = 632
+        Width = 1071
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -805,8 +805,8 @@ object frmCadPessoa: TfrmCadPessoa
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 123
-        Width = 1079
-        Height = 517
+        Width = 1071
+        Height = 509
         Align = alClient
         Ctl3D = False
         DataSource = DMCadPessoa.dsPessoa_Consulta
@@ -1189,7 +1189,7 @@ object frmCadPessoa: TfrmCadPessoa
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1079
+        Width = 1071
         Height = 30
         Align = alTop
         Color = 8404992
@@ -1418,9 +1418,9 @@ object frmCadPessoa: TfrmCadPessoa
       object RZPageControlDados: TRzPageControl
         Left = 0
         Top = 30
-        Width = 1079
-        Height = 627
-        ActivePage = TS_RegrasFiscais
+        Width = 1071
+        Height = 619
+        ActivePage = TS_Pessoa_Dados
         ActivePageDefault = TS_Pessoa_Dados
         Align = alClient
         BackgroundColor = clSilver
@@ -1428,7 +1428,7 @@ object frmCadPessoa: TfrmCadPessoa
         FlatColor = clGray
         ParentBackgroundColor = False
         TabColors.Shadow = clSilver
-        TabIndex = 4
+        TabIndex = 0
         TabOrder = 1
         OnChange = RZPageControlDadosChange
         FixedDimension = 19
@@ -1444,8 +1444,8 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel9: TPanel
             Left = 0
             Top = 0
-            Width = 1075
-            Height = 415
+            Width = 1067
+            Height = 407
             Align = alClient
             TabOrder = 0
             object Label1: TLabel
@@ -1761,6 +1761,138 @@ object frmCadPessoa: TfrmCadPessoa
               Height = 13
               Alignment = taRightJustify
               Caption = 'UF Placa:'
+            end
+            object btnSefaz: TSpeedButton
+              Left = 504
+              Top = 30
+              Width = 36
+              Height = 36
+              Cursor = crHandPoint
+              Hint = 'Busca dados no Sefaz'
+              Glyph.Data = {
+                F6060000424DF606000000000000360000002800000018000000180000000100
+                180000000000C0060000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+                F6AA6AEF6600EF6800EF6900EF6900EF6900EF6900EF6900EF6900EF6900EF69
+                00EF6900EF6900EF6900EF6900EF6900EE5E00FAD3B3FFFFFFEE6000F8C295FF
+                FFFFFFFFFFF6B680F28327FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF06B
+                00F7B47DF8C295FFFFFFFFFFFFF2852BFBDBC0FFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFDEDE0F9C79EF9C8A0F9C89FFEFDFBFFFFFF
+                FFFFFFF7B177EE5F00ED5700FFFFFFFFFFFFFFFFFFF3862EFBD8BCFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAD8BBF49B51F7B178FF
+                FFFFFDEBDDFACFACFDF2E9F38B34ED5600F8BC8AFFFFFFFFFFFFFFFFFFF3872E
+                FBD8BCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFEFBF9F07107F39546F7B781F4984BF28020F7BB88FFFFFFFFFFFFFF
+                FFFFFFFFFFF3872EFBD8BCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFEFEFDEF6400FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEF6B
+                00FEFCFAFFFFFFFFFFFFFFFFFFF3872EFBD8BCFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFF8BE8DFFFFFFF39140FCE8D8FFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFDF0E4F38931FFFFFFFFFFFFFFFFFFF3872EFBD8BCFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6A766FFFFFFF17711FFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0750FFFFFFFFFFFFFFFFFFFF3872E
+                FBD8BCFFFFFFFFFFFFFFFFFFF8C296F8C498F8C499F8C499F8C599F9C69DFFFF
+                FFF17713FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF17813FFFFFFFF
+                FFFFFFFFFFF3872EFBD8BCFFFFFFFFFFFFFFFFFFF6AA6BF6AE73F6AF73F6AF73
+                F6AF73F5A664FFFFFFF18021FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFF17916FFFFFFFFFFFFFFFFFFF3872EFBD8BCFFFFFFFFFFFFFFFFFFF9CCA7FA
+                CEAAFACFABFACFABFACFABF9CCA7FBDEC6FCE5D1F17D1DFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFF28225FBDDC4FFFFFFFFFFFFFFFFFFF3872EFBD8BCFFFFFFFFFF
+                FFFFFFFFF6A867F6AC6FF6AD70F6AD70F6AD70F6AC6EF6AD70FFFFFFF9C69CF0
+                7005FAD4B3FDF0E5FAD4B5F0730BF8BF90FFFFFFFFFFFFFFFFFFFFFFFFF3872E
+                FBD8BCFFFFFFFFFFFFFFFFFFFACFABFAD0AEFAD1AEFAD1AEFAD1AEFAD1AEFAD0
+                ADF9C499FDEEE1FFFFFFF6AD71F49445F6AD70FEFCFAFDEEE1F8C193FFFFFFFF
+                FFFFFFFFFFF3872EFBD8BCFFFFFFFFFFFFFFFFFFF5A25CF6A968F6A969F6AA6B
+                F6A868F5A663F5A663F5A562F5A15AFBDBC1FFFFFFFFFFFFFFFFFFFFFFFFF5A3
+                5DF7B57DFFFFFFFFFFFFFFFFFFF3872EFBD8BCFFFFFFFFFFFFFFFFFFFFFFFFFE
+                F5EEFDE9D9FCE2CDFEFCFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFF5A968F7B781FFFFFFFFFFFFFFFFFFF3872EFBD8BCFFFFFFFFFF
+                FFFFFFFFEC5000EC4F00FDF0E4F8BE8DEC4F00F07711FFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFF5A968F7B781FFFFFFFFFFFFFFFFFFF3872E
+                FBD8BCFFFFFFFFFFFFFFFFFFF49343ED5200FAD0AEF49E56ED5100F8C295FFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5A968F7B781FFFFFFFF
+                FFFFFFFFFFF3872EFBD8BCFFFFFFFFFFFFFFFFFFFFFFFFF8C193F18225F17814
+                FBDCC2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5A9
+                68F7B781FFFFFFFFFFFFFFFFFFF3872EFBD8BCFFFFFFFFFFFFFFFFFFFFFFFFF7
+                BE8DEE5F00EE5E00FCE9D9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFF5A968F7B781FFFFFFFFFFFFFFFFFFF3872EFBD8BCFFFFFFFFFF
+                FFFFFFFFFFFFFFF28124EF6700EE6100F6AD71FFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFF5A968F7B781FFFFFFFFFFFFFFFFFFF3862E
+                FBD8BCFFFFFFFFFFFFFFFFFFFFFFFFFAD1AEED5300EE5D00FDF2E9FFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5A968F7B680FFFFFFFF
+                FFFFFFFFFFF2852BFBDBC1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6AB
+                6BF7B57DFFFFFFFFFFFFFFFFFFF6B279F28931FFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFEE6200FCE3CEFFFFFFFFFFFFFFFFFFFFFFFFF5A35EEE6100EF63
+                00EF6400EF6400EF6400EF6400EF6400EF6400EF6400EF6400EF6400EF6400EF
+                6400EF6400EF6400EF6300EF6400F9C59BFFFFFFFFFFFFFFFFFF}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = btnSefazClick
+            end
+            object btnReceita: TSpeedButton
+              Left = 545
+              Top = 30
+              Width = 36
+              Height = 36
+              Cursor = crHandPoint
+              Hint = 'Busca dados na Receita Federal'
+              Glyph.Data = {
+                66060000424D6606000000000000360000002800000018000000160000000100
+                18000000000030060000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFFFFFEFF
+                FDF9EAE1FEFDFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE
+                FEFFFEFCFBFAF5D8C8EFC09AF5DAC9FCFFFEFDFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFEFFFFFCFFFFFAF3EBEEBF98FACE98EFC296F3DECFFEFEFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFEFFFFFEFFFFFFFFFFFFFFFFFEF8EBD1FBD6A5F9D7A2F4
+                D2B1FEFCFDFEFFFFFDFFFEFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBF1E6E0E4D8EDF6F1FBF4
+                EDFED7AFFCDBA8F5CFA7F4DED0FDFFFEFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFDFEB3C7A77BA07A
+                77B39492B491A09D73CCAF80FFD5A9FBD8AAF2B88EF4C0A4F5D3C2FAEDE4FBFF
+                FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD4
+                E3C9739D5E73AEADAFCDD0E6C4A7DBB881AEAC6DACA26CEFCC9AFFD9A2F3C99A
+                F3BB8DF1BF9EFAF4EFFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFACCA9878A88493C0C5E7E6E8FFDCBCFFD09CF4CE98B6B3759B
+                9B5EEAC79BFFDBA9FCDAA3F6D1A4F5DDCAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8C6927CAC93A3C4CAECD3C4F2CFAFE2D2
+                B9D6C8B6C0B4A1898F5D8F8F55EFC997FFD8A0FBD5A4F5D5B7FDFAFAFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB6D1A57DAB8EA1C3C4
+                E1B085F8E9DAFEFFFFFAFCFCF8F9FBCECCC768784F978C5AF8CE9CFCD9A4F5D6
+                AEFAF3EEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFFFFFFFFFFFDFBF7FFFFFFD6
+                E1C3798F5AA5A185EFD0A2FBFDF5E8E8E5CCB496F9E0BEFFFDF5CECCBB818E4C
+                BDA678FAD9A6F8D5A4F8EAE1FDFFFFFEFFFEFFFFFFFFFFFFFFFFFFFBECE7F3CB
+                B5F2BB96F6CFB9EFCFAA899245BBA072FBD9A8FCF8EAE7E7E6B5A38BD1BA99CD
+                BFA9D3C3B0AAA8817A8745DDBC8BFED59DF1C4A4FAF0ECFEFFFFFFFFFFFFFFFF
+                FDF8F6F4C5A5F3BB8BF8CE9CF2BF8DF8C898BDC074979260F4CA9DF8E9CEFEFF
+                FFF3F4F2F4F6F0F7F6F1FBFAF8CCCAC9748345A79A61FCD2A0F7D09EF2CFB7FD
+                FCFCFFFFFFFFFFFFFFFAF8FEE0B4FFDEA7FFDAA5FFDCA6FFDFA8F8DFA293A256
+                C6AF81FBDFB5FDFDF7D8D8D4BAA485F6DAB2FAF3E3ECEDEE979869839449DFBE
+                96FEE2B0F5D6B1F9F4F3FFFFFFFFFFFFECEEEFD0C1A5D2B183F7CD98EBC390D1
+                AF81D5B386A7A16485874FEBC695FDE7C4F5F9F8B8B1A6BFA98BF2ECE2F5F7F6
+                B7AA8B889F4ABAA57AFBDCAFF8DFBDFCF9F8FFFFFFEDEDEDD7D8D8DEDCDBC4BF
+                B6A29077CCBEA9D0CCC7D4D1CBCAC7C0747C4DA2965EF6CFA1FAE9C9FEFEF9F2
+                F3F2FBFFFFEAE4DDE2BE98A2B25AA19362E9CDAEF7F0E3FEFFFFFFFFFFEFEEEE
+                EBECECCACCCEF7FAFDC6C0B6C8C1B5F4F7F8C7BFB3EBDBC5CEBB8FA2A567AF9E
+                6CFDD29EFADCB5F7EEDEF5E6CAEDD5B0FDE5CAAEC17F84A47DA9C6C5E9EBEAFF
+                FFFFFFFFFFF8F8F8DBDCDDA4A3A5F5EDEAD1B697DDC7ACF2F2F2A08D74F5CE9C
+                FFDAA9F3D79DA3A360B09E69F4C799F3D3BEFAECD8FDF4E3FFFFFF99C3867EAE
+                9596C5CBEBE7E7FFFFFFFFFFFFF5F5F5F8F8F9A6A5A6C0BDBAC6BEB2AEA69CFA
+                FCFDA69A8AE8C08FFCE0BEFBE4C7F0DBADA8B27BA79A67BFC3A9C3DFE1F1F5FB
+                E8EDE179A36374B0A8A1C2C6F9F5F5FFFFFFFFFFFFFAFAFAF5F4F5EDECEDDDDE
+                DEDCDFE2CCCDCFF4F5F5BDB9B2D9BD99FAEEDBFCFFFFFEFAF7FFFFFACCD3B59E
+                BC9886C0A88BB69A759F6E6EA28695C5CADFE5E7FFFFFFFFFFFFFFFFFFFFFFFF
+                FBFBFBF5F5F5F1F1F1EBEBEBFEFEFEF4F4F4EEEFF0F6F5F1FCFBF9FEFFFFFFFF
+                FFFFFFFFFFFFFFFCFEFCE8EFE4D6E0D0D0DDD5E2EDEFFAFBFCFFFFFFFFFFFFFF
+                FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFF
+                FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFCFFFFFFFFFFFFFFFF}
+              ParentShowHint = False
+              ShowHint = True
+              OnClick = btnReceitaClick
             end
             object DBEdit7: TDBEdit
               Left = 96
@@ -2244,8 +2376,8 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 26
             end
             object btnCadConsultar: TBitBtn
-              Left = 578
-              Top = 1
+              Left = 898
+              Top = 49
               Width = 47
               Height = 25
               Caption = 'Sefaz'
@@ -2257,6 +2389,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 37
               TabStop = False
+              Visible = False
               OnClick = btnCadConsultarClick
             end
             object DBEdit10: TDBEdit
@@ -2280,8 +2413,8 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 5
             end
             object btnCadConsultar_Receita: TBitBtn
-              Left = 578
-              Top = 25
+              Left = 898
+              Top = 73
               Width = 47
               Height = 25
               Caption = 'Receita'
@@ -2293,6 +2426,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 38
               TabStop = False
+              Visible = False
               OnClick = btnCadConsultar_ReceitaClick
             end
             object RxDBComboBox5: TRxDBComboBox
@@ -2459,8 +2593,8 @@ object frmCadPessoa: TfrmCadPessoa
           end
           object RzPageControl3: TRzPageControl
             Left = 0
-            Top = 415
-            Width = 1075
+            Top = 407
+            Width = 1067
             Height = 189
             ActivePage = ts_Contatos
             ActivePageDefault = ts_Contatos
@@ -2474,14 +2608,14 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlContato: TPanel
                 Left = 0
                 Top = 0
-                Width = 1071
+                Width = 1063
                 Height = 166
                 Align = alClient
                 TabOrder = 0
                 object Panel13: TPanel
                   Left = 1
                   Top = 1
-                  Width = 1069
+                  Width = 1061
                   Height = 38
                   Align = alTop
                   Caption = 'CONTATOS'
@@ -2497,7 +2631,7 @@ object frmCadPessoa: TfrmCadPessoa
                 object SMDBGrid2: TSMDBGrid
                   Left = 1
                   Top = 39
-                  Width = 1069
+                  Width = 1061
                   Height = 126
                   Align = alClient
                   Ctl3D = False
@@ -2584,7 +2718,7 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlVendedor: TPanel
                 Left = 0
                 Top = 0
-                Width = 1071
+                Width = 1063
                 Height = 166
                 Align = alClient
                 Enabled = False
@@ -2898,7 +3032,7 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlPessoaFisica: TPanel
             Left = 0
             Top = 0
-            Width = 1075
+            Width = 1067
             Height = 244
             Align = alTop
             Enabled = False
@@ -2906,7 +3040,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox4: TRzGroupBox
               Left = 1
               Top = 36
-              Width = 1073
+              Width = 1065
               Height = 139
               Align = alTop
               BorderWidth = 1
@@ -3323,7 +3457,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel10: TPanel
               Left = 1
               Top = 1
-              Width = 1073
+              Width = 1065
               Height = 26
               Align = alTop
               TabOrder = 1
@@ -3367,7 +3501,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel11: TPanel
               Left = 1
               Top = 238
-              Width = 1073
+              Width = 1065
               Height = 8
               Align = alTop
               BevelOuter = bvNone
@@ -3376,7 +3510,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel12: TPanel
               Left = 1
               Top = 27
-              Width = 1073
+              Width = 1065
               Height = 9
               Align = alTop
               BevelOuter = bvNone
@@ -3385,7 +3519,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox7: TRzGroupBox
               Left = 1
               Top = 175
-              Width = 1073
+              Width = 1065
               Height = 63
               Align = alTop
               Caption = ' Outras informa'#231#245'es '
@@ -3484,8 +3618,8 @@ object frmCadPessoa: TfrmCadPessoa
           object RzPageControl2: TRzPageControl
             Left = 0
             Top = 244
-            Width = 1075
-            Height = 360
+            Width = 1067
+            Height = 352
             ActivePage = TS_Dados_Profissionais
             ActivePageDefault = TS_Dados_Profissionais
             Align = alClient
@@ -3504,8 +3638,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Profissionais: TPanel
                 Left = 0
                 Top = 0
-                Width = 1073
-                Height = 339
+                Width = 1065
+                Height = 331
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -3856,8 +3990,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlConjuge: TPanel
                 Left = 0
                 Top = 0
-                Width = 1073
-                Height = 339
+                Width = 1065
+                Height = 331
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -4222,8 +4356,8 @@ object frmCadPessoa: TfrmCadPessoa
               object pnlDados_Conta: TPanel
                 Left = 0
                 Top = 0
-                Width = 1073
-                Height = 339
+                Width = 1065
+                Height = 331
                 Align = alClient
                 BevelOuter = bvNone
                 Enabled = False
@@ -4351,8 +4485,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid3: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1073
-                Height = 339
+                Width = 1065
+                Height = 331
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Dep
@@ -4427,8 +4561,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid4: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1073
-                Height = 339
+                Width = 1065
+                Height = 331
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefP
@@ -4518,8 +4652,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid5: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1073
-                Height = 339
+                Width = 1065
+                Height = 331
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_RefC
@@ -4588,8 +4722,8 @@ object frmCadPessoa: TfrmCadPessoa
               object SMDBGrid6: TSMDBGrid
                 Left = 0
                 Top = 0
-                Width = 1073
-                Height = 339
+                Width = 1065
+                Height = 331
                 Align = alClient
                 Ctl3D = False
                 DataSource = DMCadPessoa.dsPessoa_Aut
@@ -4660,7 +4794,7 @@ object frmCadPessoa: TfrmCadPessoa
           object GroupBox2: TGroupBox
             Left = 0
             Top = 243
-            Width = 1075
+            Width = 1067
             Height = 140
             Align = alTop
             Caption = ' Dados Cobran'#231'a '
@@ -4999,7 +5133,7 @@ object frmCadPessoa: TfrmCadPessoa
           object GroupBox3: TGroupBox
             Left = 0
             Top = 75
-            Width = 1075
+            Width = 1067
             Height = 168
             Align = alTop
             Caption = ' Dados Entrega '
@@ -5417,7 +5551,7 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel4: TPanel
             Left = 0
             Top = 0
-            Width = 1075
+            Width = 1067
             Height = 75
             Align = alTop
             TabOrder = 0
@@ -6925,8 +7059,8 @@ object frmCadPessoa: TfrmCadPessoa
           object Panel3: TPanel
             Left = 0
             Top = 0
-            Width = 1075
-            Height = 604
+            Width = 1067
+            Height = 596
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -6934,7 +7068,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel6: TPanel
               Left = 1
               Top = 361
-              Width = 1073
+              Width = 1065
               Height = 12
               Align = alTop
               Color = clGray
@@ -6943,7 +7077,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox1: TRzDBCheckBox
               Left = 1
               Top = 261
-              Width = 1073
+              Width = 1065
               Height = 16
               DataField = 'IPI_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -6963,7 +7097,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxIPI: TRzGroupBox
               Left = 1
               Top = 277
-              Width = 1073
+              Width = 1065
               Height = 84
               Align = alTop
               BorderColor = clBlue
@@ -6978,7 +7112,7 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 4
               Visible = False
               DesignSize = (
-                1073
+                1065
                 84)
               object Label71: TLabel
                 Left = 16
@@ -7093,7 +7227,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel7: TPanel
               Left = 1
               Top = 249
-              Width = 1073
+              Width = 1065
               Height = 12
               Align = alTop
               Color = clGray
@@ -7102,7 +7236,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxSuframa: TRzGroupBox
               Left = 1
               Top = 132
-              Width = 1073
+              Width = 1065
               Height = 117
               Align = alTop
               BorderColor = clBlue
@@ -7116,7 +7250,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 3
               DesignSize = (
-                1073
+                1065
                 117)
               object Label91: TLabel
                 Left = 3
@@ -7338,7 +7472,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox2: TRzDBCheckBox
               Left = 1
               Top = 373
-              Width = 1073
+              Width = 1065
               Height = 16
               DataField = 'PIS_SUSPENSO'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -7358,7 +7492,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel5: TPanel
               Left = 1
               Top = 389
-              Width = 1073
+              Width = 1065
               Height = 82
               Align = alTop
               BevelOuter = bvNone
@@ -7366,7 +7500,7 @@ object frmCadPessoa: TfrmCadPessoa
               object gbxPIS: TRzGroupBox
                 Left = 0
                 Top = 0
-                Width = 1073
+                Width = 1065
                 Height = 82
                 Align = alClient
                 BorderColor = clBlue
@@ -7380,7 +7514,7 @@ object frmCadPessoa: TfrmCadPessoa
                 ParentFont = False
                 TabOrder = 0
                 DesignSize = (
-                  1073
+                  1065
                   82)
                 object Label75: TLabel
                   Left = 16
@@ -7493,7 +7627,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxDadosAdic: TRzGroupBox
               Left = 1
               Top = 51
-              Width = 1073
+              Width = 1065
               Height = 50
               Align = alTop
               BorderColor = clBlue
@@ -7507,7 +7641,7 @@ object frmCadPessoa: TfrmCadPessoa
               ParentFont = False
               TabOrder = 1
               DesignSize = (
-                1073
+                1065
                 50)
               object Label99: TLabel
                 Left = 16
@@ -7533,7 +7667,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox1: TRzGroupBox
               Left = 1
               Top = 101
-              Width = 1073
+              Width = 1065
               Height = 31
               Align = alTop
               BorderColor = clBlue
@@ -7587,7 +7721,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzGroupBox5: TRzGroupBox
               Left = 1
               Top = 1
-              Width = 1073
+              Width = 1065
               Height = 50
               Align = alTop
               BorderColor = clBlue
@@ -7673,7 +7807,7 @@ object frmCadPessoa: TfrmCadPessoa
             object Panel14: TPanel
               Left = 1
               Top = 471
-              Width = 1073
+              Width = 1065
               Height = 12
               Align = alTop
               Color = clGray
@@ -7682,7 +7816,7 @@ object frmCadPessoa: TfrmCadPessoa
             object RzDBCheckBox3: TRzDBCheckBox
               Left = 1
               Top = 483
-              Width = 1073
+              Width = 1065
               Height = 16
               DataField = 'DRAW_POSSUI'
               DataSource = DMCadPessoa.dsPessoa_Fiscal
@@ -7704,7 +7838,7 @@ object frmCadPessoa: TfrmCadPessoa
             object gbxDrawback: TRzGroupBox
               Left = 1
               Top = 499
-              Width = 1073
+              Width = 1065
               Height = 81
               Align = alTop
               BorderColor = clBlue
@@ -7719,7 +7853,7 @@ object frmCadPessoa: TfrmCadPessoa
               TabOrder = 13
               Visible = False
               DesignSize = (
-                1073
+                1065
                 81)
               object Label202: TLabel
                 Left = 6
@@ -7843,8 +7977,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid9: TSMDBGrid
             Left = 0
             Top = 28
-            Width = 1075
-            Height = 576
+            Width = 1067
+            Height = 568
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_Fil
@@ -7908,7 +8042,7 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlPessoa_Fil: TPanel
             Left = 0
             Top = 0
-            Width = 1075
+            Width = 1067
             Height = 28
             Align = alTop
             Color = clSilver
@@ -7988,8 +8122,8 @@ object frmCadPessoa: TfrmCadPessoa
           object pnlServico: TPanel
             Left = 0
             Top = 0
-            Width = 1075
-            Height = 604
+            Width = 1067
+            Height = 596
             Align = alClient
             Enabled = False
             TabOrder = 0
@@ -8393,8 +8527,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid7: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 1075
-            Height = 604
+            Width = 1067
+            Height = 596
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_Ativ
@@ -8468,8 +8602,8 @@ object frmCadPessoa: TfrmCadPessoa
           object SMDBGrid8: TSMDBGrid
             Left = 0
             Top = 0
-            Width = 1075
-            Height = 604
+            Width = 1067
+            Height = 596
             Align = alClient
             Ctl3D = False
             DataSource = DMCadPessoa.dsPessoa_TipoMat
@@ -8547,8 +8681,8 @@ object frmCadPessoa: TfrmCadPessoa
   end
   object StaticText2: TStaticText
     Left = 0
-    Top = 680
-    Width = 1083
+    Top = 672
+    Width = 1075
     Height = 17
     Align = alBottom
     Caption = 'F2 Consultar'

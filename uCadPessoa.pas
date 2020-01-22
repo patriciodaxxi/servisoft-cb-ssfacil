@@ -597,6 +597,8 @@ type
     Label210: TLabel;
     DBEdit116: TDBEdit;
     DBCheckBox33: TDBCheckBox;
+    btnSefaz: TSpeedButton;
+    btnReceita: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -722,6 +724,8 @@ type
     procedure DBEdit113Enter(Sender: TObject);
     procedure RzPageControl3Change(Sender: TObject);
     procedure DBCheckBox33Exit(Sender: TObject);
+    procedure btnSefazClick(Sender: TObject);
+    procedure btnReceitaClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadPessoa: TDMCadPessoa;
@@ -748,10 +752,11 @@ type
     procedure prc_Abrir_Atividade(ID: Integer);
     procedure prc_CriaExcel(vDados: TDataSource);
     procedure prc_opcao_vendedor;
-
     procedure prc_Habilitar;
     procedure prc_Preenche_Dados;
-
+    procedure prc_Consulta_Sefaz;
+    procedure prc_Consulta_Receita;
+    
   public
     { Public declarations }
   end;
@@ -1442,77 +1447,8 @@ begin
 end;
 
 procedure TfrmCadPessoa.btnCadConsultarClick(Sender: TObject);
-var
-  texto: string;
-  cnpj_pes: string;
-  oStream: TMemoryStream;
-  oStrStream: TStringStream;
-  vPessoa: Integer;
-  vUFAux: string;
-  vLocalServidorNFe: string;
 begin
-  vPessoa := 0;
-  if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J' then
-    vPessoa := 1
-  else if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F' then
-    vPessoa := 2;
-  if vPessoa = 0 then
-  begin
-    MessageDlg('*** Pessoa (Jurídica/Física) não informada!', mtInformation, [mbOk], 0);
-    exit;
-  end;
-
-  vUFAux := fDMCadPessoa.cdsPessoaUF.AsString;
-  if trim(fDMCadPessoa.cdsPessoaUF.AsString) = '' then
-    vUFAux := 'RS';
-
-  fDMCadPessoa.qFilial.Close;
-  fDMCadPessoa.qFilial.Open;
-
-  fDMCadPessoa.cdsConsultaCadastro.Close;
-  //20/04/2019
-  texto := fnc_CNPJCFP_FilialNFeConfig;
-  //if fDMCadPessoa.qFilialPESSOA.AsString = 'F' then
-  //  texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 11)
-  //else
-  //  texto := Monta_Texto(fDMCadPessoa.qFilialCNPJ_CPF.AsString, 14);
-  vLocalServidorNFe := fDMCadPessoa.qParametrosLOCALSERVIDORNFE.AsString;
-  if trim(fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString) <> '' then
-    vLocalServidorNFe := fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString;
-  cnpj_pes := Monta_Texto(fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString, 14);
-
-  if (trim(texto) = '') or (trim(cnpj_pes) = '') then
-  begin
-    MessageDlg('*** CNPJ não informado!', mtInformation, [mbOk], 0);
-    exit;
-  end;
-
-  oStream := TMemoryStream.Create;
-  try
-    ConsultarCadastro(Trim(vLocalServidorNFe), texto, vPessoa, vUFAux, cnpj_pes, oStream);
-
-    oStream.Position := 0;
-
-    oStrStream := TStringStream.Create('');
-    try
-      oStream.Position := 0;
-      oStrStream.CopyFrom(oStream, oStream.Size);
-      //oStream.SaveToFile('C:\a\Cadastro.xml');
-      fDMCadPessoa.xtrConsultaCadastro.TransformRead.SourceXml := oStrStream.DataString;
-      fDMCadPessoa.xtrConsultaCadastro.TransformRead.TransformationFile := ExtractFilePath(Application.ExeName) + 'xtr\ConsultaCadastro.xtr';
-    finally
-      FreeAndNil(oStrStream);
-    end;
-  finally
-    FreeAndNil(oStream);
-  end;
-  fDMCadPessoa.cdsConsultaCadastro.Open;
-  ffNFe_ConsultaCadastro := TfNFe_ConsultaCadastro.Create(self);
-  ffNFe_ConsultaCadastro.fDMCadPessoa := fDMCadPessoa;
-  ffNFe_ConsultaCadastro.ShowModal;
-  FreeAndNil(ffNFe_ConsultaCadastro);
-  if fDMCadPessoa.cdsPessoaID_CIDADE.AsInteger <= 0 then
-    MessageDlg('*** Município precisa ser informado manualmente, pois a Sefaz não esta retornando o Cód. do Município!', mtInformation, [mbOk], 0);
+  prc_Consulta_Sefaz;
 end;
 
 procedure TfrmCadPessoa.chkRepresentanteClick(Sender: TObject);
@@ -1867,17 +1803,8 @@ begin
 end;
 
 procedure TfrmCadPessoa.btnCadConsultar_ReceitaClick(Sender: TObject);
-var
-  Caminho : String;
 begin
-  if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F' then
-    prc_ShellExecute('ConsultaCPF.exe')
-  else
-  begin
-    Caminho := ExtractFilePath(Application.ExeName) + 'ConsultaCNPJ.exe'; //+ Edit1.Text;
-    WinExecAndWait32(Caminho,1,fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString);
-    prc_Preenche_Dados;
-  end;
+  prc_Consulta_Receita;
 end;
 
 procedure TfrmCadPessoa.Customizado1Click(Sender: TObject);
@@ -2874,6 +2801,100 @@ begin
     FreeAndNil(Retorno);
   end;
 
+end;
+
+procedure TfrmCadPessoa.prc_Consulta_Sefaz;
+var
+  texto: string;
+  cnpj_pes: string;
+  oStream: TMemoryStream;
+  oStrStream: TStringStream;
+  vPessoa: Integer;
+  vUFAux: string;
+  vLocalServidorNFe: string;
+begin
+  vPessoa := 0;
+  if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'J' then
+    vPessoa := 1
+  else if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F' then
+    vPessoa := 2;
+  if vPessoa = 0 then
+  begin
+    MessageDlg('*** Pessoa (Jurídica/Física) não informada!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+
+  vUFAux := fDMCadPessoa.cdsPessoaUF.AsString;
+  if trim(fDMCadPessoa.cdsPessoaUF.AsString) = '' then
+    vUFAux := 'RS';
+
+  fDMCadPessoa.qFilial.Close;
+  fDMCadPessoa.qFilial.Open;
+
+  fDMCadPessoa.cdsConsultaCadastro.Close;
+  //20/04/2019
+  texto := fnc_CNPJCFP_FilialNFeConfig;
+  vLocalServidorNFe := fDMCadPessoa.qParametrosLOCALSERVIDORNFE.AsString;
+  if trim(fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString) <> '' then
+    vLocalServidorNFe := fDMCadPessoa.qFilialLOCALSERVIDORNFE.AsString;
+  cnpj_pes := Monta_Texto(fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString, 14);
+
+  if (trim(texto) = '') or (trim(cnpj_pes) = '') then
+  begin
+    MessageDlg('*** CNPJ não informado!', mtInformation, [mbOk], 0);
+    exit;
+  end;
+
+  oStream := TMemoryStream.Create;
+  try
+    ConsultarCadastro(Trim(vLocalServidorNFe), texto, vPessoa, vUFAux, cnpj_pes, oStream);
+
+    oStream.Position := 0;
+
+    oStrStream := TStringStream.Create('');
+    try
+      oStream.Position := 0;
+      oStrStream.CopyFrom(oStream, oStream.Size);
+      //oStream.SaveToFile('C:\a\Cadastro.xml');
+      fDMCadPessoa.xtrConsultaCadastro.TransformRead.SourceXml := oStrStream.DataString;
+      fDMCadPessoa.xtrConsultaCadastro.TransformRead.TransformationFile := ExtractFilePath(Application.ExeName) + 'xtr\ConsultaCadastro.xtr';
+    finally
+      FreeAndNil(oStrStream);
+    end;
+  finally
+    FreeAndNil(oStream);
+  end;
+  fDMCadPessoa.cdsConsultaCadastro.Open;
+  ffNFe_ConsultaCadastro := TfNFe_ConsultaCadastro.Create(self);
+  ffNFe_ConsultaCadastro.fDMCadPessoa := fDMCadPessoa;
+  ffNFe_ConsultaCadastro.ShowModal;
+  FreeAndNil(ffNFe_ConsultaCadastro);
+  if fDMCadPessoa.cdsPessoaID_CIDADE.AsInteger <= 0 then
+    MessageDlg('*** Município precisa ser informado manualmente, pois a Sefaz não esta retornando o Cód. do Município!', mtInformation, [mbOk], 0);
+end;
+
+procedure TfrmCadPessoa.btnSefazClick(Sender: TObject);
+begin
+  prc_Consulta_Sefaz;
+end;
+
+procedure TfrmCadPessoa.prc_Consulta_Receita;
+var
+  Caminho : String;
+begin
+  if fDMCadPessoa.cdsPessoaPESSOA.AsString = 'F' then
+    prc_ShellExecute('ConsultaCPF.exe')
+  else
+  begin
+    Caminho := ExtractFilePath(Application.ExeName) + 'ConsultaCNPJ.exe'; //+ Edit1.Text;
+    WinExecAndWait32(Caminho,1,fDMCadPessoa.cdsPessoaCNPJ_CPF.AsString);
+    prc_Preenche_Dados;
+  end;
+end;
+
+procedure TfrmCadPessoa.btnReceitaClick(Sender: TObject);
+begin
+  prc_Consulta_Receita;
 end;
 
 end.
