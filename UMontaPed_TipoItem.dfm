@@ -1,6 +1,6 @@
 object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
-  Left = 198
-  Top = 3
+  Left = -1249
+  Top = 72
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'frmMontaPed_TipoItem'
@@ -453,7 +453,6 @@ object frmMontaPed_TipoItem: TfrmMontaPed_TipoItem
         item
           Expanded = False
           FieldName = 'Peso'
-          ReadOnly = True
           Title.Alignment = taCenter
           Width = 57
           Visible = True
