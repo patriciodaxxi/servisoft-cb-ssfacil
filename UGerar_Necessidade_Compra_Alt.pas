@@ -85,23 +85,23 @@ type
     procedure btnCancelar_ConsumoClick(Sender: TObject);
   private
     valorTransicao: Real;
-    vID_Material_Loc : Integer;
-    vID_Cor_Loc      : Integer;
-    vTamanho_Loc     : String;
-    vCarimbo_Loc     : String;
-    vCarimboAux_Loc  : String;
+    vID_Material_Loc: Integer;
+    vID_Cor_Loc     : Integer;
+    vTamanho_Loc    : String;
+    vCarimbo_Loc    : String;
+    vCarimboAux_Loc : String;
 
     procedure prc_Habilita_Material;
-    procedure prc_Abrir_Combinacao(ID_Material : Integer);
-    procedure prc_Abrir_Produto_Tam(ID_Material : Integer);
+    procedure prc_Abrir_Combinacao(ID_Material: Integer);
+    procedure prc_Abrir_Produto_Tam(ID_Material: Integer);
     procedure prc_Habilitar_Cons;
 
-    function fnc_Verifica_Mat(ID_Material : Integer) : Boolean;
+    function fnc_Verifica_Mat(ID_Material: Integer): Boolean;
 
     { Private declarations }
   public
     fDMCadNecessidade_Compras: TDMCadNecessidade_Compras;
-    vNum_Ordem_Loc   : Integer;
+    vNum_Ordem_Loc  : Integer;
 
     { Public declarations }
   end;
@@ -246,7 +246,7 @@ end;
 
 procedure TfrmGerar_Necessidade_Compra_Alt.prc_Habilita_Material;
 var
-  Cor : TColor;
+  Cor: TColor;
 begin
   if pnlMaterial.Enabled then
     Cor := clWhite
@@ -365,12 +365,12 @@ end;
 procedure TfrmGerar_Necessidade_Compra_Alt.btnConfirmar_MatClick(
   Sender: TObject);
 var
-  vTamAux : String;
-  vIDCorAux : Integer;
-  vCarimboAux : String;
-  vJuntar : Boolean;
-  vItem_Juntar : Integer;
-  vItemAux : Integer;
+  vTamAux: String;
+  vIDCorAux: Integer;
+  vCarimboAux: String;
+  vJuntar: Boolean;
+  vItem_Juntar: Integer;
+  vItemAux: Integer;
 begin
   vJuntar      := False;
   vItem_Juntar := 0;
@@ -528,7 +528,7 @@ end;
 
 procedure TfrmGerar_Necessidade_Compra_Alt.prc_Habilitar_Cons;
 var
-  Cor : TColor;
+  Cor: TColor;
 begin
   DBEdit9.ReadOnly := not(DBEdit9.ReadOnly);
   if DBEdit9.ReadOnly then

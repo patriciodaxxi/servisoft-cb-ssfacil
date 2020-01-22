@@ -3,11 +3,9 @@ unit UGerar_Necessidade_Compras;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, UDMCadPedido, Grids, DBGrids, SMDBGrid, StdCtrls, dbXPress, SqlExpr,
-  RzTabs, CurrEdit, Mask, ToolEdit, RxLookup, Menus, UCBase, ExtCtrls,
-  NxCollection, NxEdit, DBVGrids, RzPanel, UGerar_Necessidade_Compras_Forn,
-  ComCtrls, UDMCadNecessidade_Compras, UDMEstoque_Res, DB;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMCadPedido, Grids, DBGrids, SMDBGrid,
+  StdCtrls, dbXPress, SqlExpr, RzTabs, CurrEdit, Mask, ToolEdit, RxLookup, Menus, UCBase, ExtCtrls, NxCollection, NxEdit,
+  RzPanel, UGerar_Necessidade_Compras_Forn, ComCtrls, UDMCadNecessidade_Compras, UDMEstoque_Res, DB;
 
 type
   TfrmGerar_Necessidade_Compras = class(TForm)
@@ -122,10 +120,8 @@ var
 implementation
 
 uses
-  rsDBUtils, DmdDatabase, uUtilPadrao, UMenu, uCalculo_Pedido,
-  UGerar_Necessidade_Compras_MProd, USel_OrdemProd,
-  UGerar_Necessidade_Compra_Alt, UGerar_Necessidade_Compras_OC,
-  uGrava_Pedido;
+  rsDBUtils, DmdDatabase, uUtilPadrao, UMenu, uCalculo_Pedido, UGerar_Necessidade_Compras_MProd, USel_OrdemProd,
+  UGerar_Necessidade_Compra_Alt, UGerar_Necessidade_Compras_OC, uGrava_Pedido;
   //UGerar_Necessidade_Compra_Alt;
 
 
@@ -144,7 +140,7 @@ end;
 
 procedure TfrmGerar_Necessidade_Compras.FormShow(Sender: TObject);
 var
-  i : Integer;
+  i: Integer;
 begin
   fDMCadNecessidade_Compras := TDMCadNecessidade_Compras.Create(Self);
   fDMEstoque_Res := TDMEstoque_Res.Create(Self);
@@ -314,6 +310,7 @@ begin
 
   vMSGAux := '';
   vQtdSel := 0;
+  SmDBGrid1.DisableScroll;
   fDMCadNecessidade_Compras.mMaterial.First;
   while not fDMCadNecessidade_Compras.mMaterial.Eof do
   begin
@@ -336,6 +333,7 @@ begin
     end;
     fDMCadNecessidade_Compras.mMaterial.Next;
   end;
+  SmDBGrid1.EnableScroll;
   if trim(vMSGAux) <> '' then
   begin
     MessageDlg(vMSGAux + #13 + #13 + '*** OC/Reserva não vai ser gerada!', mtError, [mbOk], 0);
@@ -391,6 +389,7 @@ begin
     sds.ExecSQL();
 
     vID_Fornecedor_Mapa := 0;
+    SMDBGrid1.DisableScroll;
     fDMCadNecessidade_Compras.mMaterial.First;
     while not fDMCadNecessidade_Compras.mMaterial.Eof do
     begin
@@ -443,6 +442,7 @@ begin
       end;
       fDMCadNecessidade_Compras.mMaterial.Next;
     end;
+    SMDBGrid1.EnableScroll;
     if fDMCadPedido.cdsPedido.State in [dsEdit, dsInsert] then
       uGrava_Pedido.prc_Gravar(fDMCadPedido);
 
@@ -532,10 +532,10 @@ end;
 procedure TfrmGerar_Necessidade_Compras.prc_Gravar_OC_Itens;
 var
   vQtdAux: Real;
-  vID_ProdutoAux : Integer;
-  vID_CorAux : Integer;
-  vTamanhoAux : String;
-  vItemOriginal : Integer;
+  vID_ProdutoAux: Integer;
+  vID_CorAux: Integer;
+  vTamanhoAux: String;
+  vItemOriginal: Integer;
 begin
   fDMCadPedido.cdsPedido_Itens.Last;
   vID_ProdutoAux := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
@@ -628,7 +628,7 @@ end;
 procedure TfrmGerar_Necessidade_Compras.prc_Gravar_NumOC_Mapa;
 var
   sds: TSQLDataSet;
-  vID_SetorAux : Integer;
+  vID_SetorAux: Integer;
 begin
   if fDMCadNecessidade_Compras.qParametros_LoteGERAR_SETOR_MAT.AsString = 'S' then
     vID_SetorAux := fDMCadNecessidade_Compras.mMaterialID_Setor.AsInteger
@@ -701,7 +701,7 @@ var
   vOpcaoImp: string;
   vObsPedido: string;
   vIndice_mMaterial: string;
-  vComando : String;
+  vComando: String;
 begin
   if fDMCadNecessidade_Compras.mMaterial.IsEmpty then
     exit;
@@ -814,8 +814,8 @@ end;
 
 procedure TfrmGerar_Necessidade_Compras.prc_Le_Lote_Mat;
 var
-  vTexto : String;
-  vComando : String;
+  vTexto: String;
+  vComando: String;
 begin
   SMDBGrid1.DisableScroll;
   fDMCadNecessidade_Compras.cdsLote_Mat.Close;
