@@ -269,7 +269,8 @@ begin
     fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Quando for entrega a domicílio é obrigado informar a transportadora!';
   //Condição incluída 20/01/2020  
   if (fDMCadPedido.cdsParametrosCONTROLAR_DUP_PEDIDO.AsString = 'S') and (fDMCadPedido.cdsPedidoID_CONTA.AsInteger <= 0) and
-     (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') and (fDMCadPedido.cdsCondPgtoTIPO_CONDICAO.AsString = 'V')   then
+     (fDMCadPedido.cdsPedidoTIPO_REG.AsString = 'P') and (fDMCadPedido.cdsCondPgtoTIPO_CONDICAO.AsString = 'V') and
+     (fDMCadPedido.cdsPedidoID_CONDPGTO.AsInteger > 0)   then
     fDMCadPedido.vMSGErro := fDMCadPedido.vMSGErro + #13 + '*** Conta não informada para a condição a vista!';
   if ((fDMCadPedido.cdsParametrosUSA_ADIANTAMENTO_PEDIDO.AsString = 'S') or (fDMCadPedido.cdsPedidoGERA_ENTRADA_NO_PEDIDO.AsString = 'S'))  and
      ((StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoVLR_ADIANTAMENTO.AsFloat)) > 0) or
