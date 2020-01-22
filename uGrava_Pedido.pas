@@ -863,24 +863,35 @@ var
 begin
   sds := TSQLDataSet.Create(nil);
 
+  ID.TransactionID  := 1;
+  ID.IsolationLevel := xilREADCOMMITTED;
+  dmDatabase.scoDados.StartTransaction(ID);
+
   try
-    sds.SQLConnection := dmDatabase.scoDados;
-    sds.NoMetadata    := True;
-    sds.GetMetadata   := False;
-    sds.CommandText   := 'UPDATE TABELALOC SET FLAG = 1 WHERE TABELA = ' + QuotedStr('PEDIDO');
-    Flag := False;
-    while not Flag do
-    begin
-      try
-        sds.Close;
-        sds.ExecSQL;
-        Flag := True;
-      except
-        on E: Exception do
-        begin
-          Flag := False;
+    try
+      sds.SQLConnection := dmDatabase.scoDados;
+      sds.NoMetadata    := True;
+      sds.GetMetadata   := False;
+      sds.CommandText   := 'UPDATE TABELALOC SET FLAG = 1 WHERE TABELA = ' + QuotedStr('PEDIDO');
+
+      Flag := False;
+      while not Flag do
+      begin
+        try
+          sds.Close;
+          sds.ExecSQL;
+          Flag := True;
+        except
+          on E: Exception do
+          begin
+            Flag := False;
+          end;
         end;
+        dmDatabase.scoDados.Commit(ID);
       end;
+    except
+      dmDatabase.scoDados.Rollback(ID);
+      raise;
     end;
   finally
     FreeAndNil(sds);

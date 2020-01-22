@@ -23,7 +23,7 @@ type
   public
     { Public declarations }
     fDMCadNecessidade_Compras: TDMCadNecessidade_Compras;
-    vNum_Ordem_Loc, vItem_Loc : Integer;
+    vNum_Ordem_Loc, vItem_Loc: Integer;
     
   end;
 

@@ -23,7 +23,7 @@ uses
   function fnc_Proximo_Num_Pedido(Tipo_Reg, Usa_Filial: String; vNum_Proximo: Integer): Integer;
   procedure prc_Gerar_Consumo(fDMCadPedido: TDMCadPedido);
   function fnc_Busca_Embalagem(ID_Produto: Integer): Integer;
-  function fnc_Num_Pedido_Vend(ID_Vendedor : Integer) : String;
+  function fnc_Num_Pedido_Vend(ID_Vendedor: Integer): String;
   procedure prc_Calcular_Diferencial_ICMS(fDMCadPedido: TDMCadPedido);
 
   procedure prc_Calcular_Frete_Novo(fDMCadPedido: TDMCadPedido);
@@ -2049,7 +2049,7 @@ begin
   fDMCadPedido.cdsPedido_ItensPERC_MARGEM2.AsFloat := fDMCadPedido.cdsProdutoPERC_MARGEMLUCRO.AsFloat;
 end;
 
-function fnc_Num_Pedido_Vend(ID_Vendedor : Integer) : String;
+function fnc_Num_Pedido_Vend(ID_Vendedor: Integer): String;
 var
   sds: TSQLDataSet;
 begin
@@ -2118,7 +2118,7 @@ procedure prc_Filtrar_Produto_Cliente(fDMCadPedido: TDMCadPedido ; Somente_Filia
 var
   i: Integer;
   vTexto1: WideString;
-  vComando : String;
+  vComando: String;
 begin
   if fDMCadPedido.qParametros_ProdMOSTRA_PROD_TPRECO.AsString = 'S' then
   begin
