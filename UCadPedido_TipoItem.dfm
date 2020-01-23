@@ -25,7 +25,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     Top = 0
     Width = 747
     Height = 478
-    ActivePage = TS_Porta
+    ActivePage = TS_Vidro
     ActivePageDefault = TS_Chapas
     Align = alClient
     BackgroundColor = 8404992
@@ -33,7 +33,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
     UseColoredTabs = True
     ParentBackgroundColor = False
     ShowShadow = False
-    TabIndex = 4
+    TabIndex = 3
     TabOrder = 0
     TextColors.DisabledShadow = clActiveCaption
     TextColors.Selected = 8404992
@@ -706,6 +706,21 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Alignment = taRightJustify
         Caption = 'Vlr. Cor Vidro:'
       end
+      object Label60: TLabel
+        Left = 79
+        Top = 376
+        Width = 24
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Foto:'
+      end
+      object Image2: TImage
+        Left = 415
+        Top = 16
+        Width = 313
+        Height = 305
+        Stretch = True
+      end
       object RxDBLookupCombo1: TRxDBLookupCombo
         Left = 105
         Top = 16
@@ -907,6 +922,15 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         TabOrder = 2
         OnExit = DBEdit47Exit
       end
+      object FilenameEdit2: TFilenameEdit
+        Left = 104
+        Top = 368
+        Width = 297
+        Height = 21
+        NumGlyphs = 1
+        TabOrder = 11
+        OnChange = FilenameEdit1Change
+      end
     end
     object TS_Porta: TRzTabSheet
       Color = clMoneyGreen
@@ -1000,10 +1024,11 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         Caption = 'Foto:'
       end
       object Image1: TImage
-        Left = 416
+        Left = 415
         Top = 16
         Width = 313
         Height = 305
+        Stretch = True
       end
       object DBEdit36: TDBEdit
         Left = 104

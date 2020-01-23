@@ -140,6 +140,9 @@ type
     Label59: TLabel;
     Image1: TImage;
     FilenameEdit1: TFilenameEdit;
+    Label60: TLabel;
+    FilenameEdit2: TFilenameEdit;
+    Image2: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
@@ -265,7 +268,13 @@ begin
   DBEdit6.ReadOnly := ((fDMCadPedido.cdsParametrosTIPO_REL_PEDIDO.AsString <> 'S2') or (fDMCadPedido.cdsParametrosTIPO_REL_PEDIDO.IsNull));
   Calcular_Edit := SQLLocate('PARAMETROS_PED','ID','CALCULA_EDIT','1') = 'S';
   if fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString <> EmptyStr then
-    FilenameEdit1.FileName := fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString;
+  begin
+    if TS_Porta.TabVisible then
+      FilenameEdit1.FileName := fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString
+    else
+    if TS_Vidro.TabVisible then
+      FilenameEdit2.FileName := fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString;
+  end;
 end;
 
 procedure TfrmCadPedido_TipoItem.FormKeyDown(Sender: TObject; var Key: Word;
@@ -379,11 +388,11 @@ begin
     MessageDlg(vMsgAux, mtError, [mbOk], 0);
     exit;
   end;
-  if FilenameEdit1.FileName <> EmptyStr then
-  begin
-    fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString := FilenameEdit1.FileName;
-  end;
-
+  if (TS_Porta.TabVisible) and (trim(FilenameEdit1.FileName) <> EmptyStr) then
+    fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString := FilenameEdit1.FileName 
+  else
+  if (TS_Vidro.TabVisible) and (trim(FilenameEdit2.FileName) <> EmptyStr) then
+    fDMCadPedido.cdsPedido_Item_TipoFOTO.AsString := FilenameEdit2.FileName; 
   if TS_Chapas.TabVisible then
     fDMCadPedido.cdsPedido_Item_TipoTIPO_ORCAMENTO.AsString := 'C'
   else
@@ -692,8 +701,10 @@ var
 begin
   prc_Calcular_Vlr_Porta;
   vNomeFoto := fnc_MontaCaminhoFoto;
-  if (vNomeFoto <> EmptyStr) then
+  if (TS_Porta.TabVisible) and (vNomeFoto <> EmptyStr) then
     FilenameEdit1.FileName := vNomeFoto;
+  if (TS_Vidro.TabVisible) and (vNomeFoto <> EmptyStr) then
+    FilenameEdit2.FileName := vNomeFoto;
 end;
 
 procedure TfrmCadPedido_TipoItem.DBEdit29Exit(Sender: TObject);
@@ -1031,20 +1042,32 @@ begin
     except
       Image1.Picture := nil;
     end;
-  end;
+  end
+  else
+  if RzPageControl1.ActivePage = TS_Vidro then
+  begin
+    try
+      if FilenameEdit2.FileName <> EmptyStr then
+        Image2.Picture.LoadFromFile(FilenameEdit2.FileName )
+    except
+      Image2.Picture := nil;
+    end;
+  end
 end;
 
 procedure TfrmCadPedido_TipoItem.FilenameEdit1Change(Sender: TObject);
 begin
   try
-    if FilenameEdit1.FileName <> EmptyStr then
-      Image1.Picture.LoadFromFile(FilenameEdit1.FileName )
+    if (TS_Porta.TabVisible) and (FilenameEdit1.FileName <> EmptyStr) then
+      Image1.Picture.LoadFromFile(FilenameEdit1.FileName)
+    else
+    if (TS_Vidro.TabVisible) and (FilenameEdit2.FileName <> EmptyStr) then
+      Image2.Picture.LoadFromFile(FilenameEdit2.FileName)
   except
     Image1.Picture := nil;
+    Image2.Picture := nil;
   end;
-
 end;
-
 
 function TfrmCadPedido_TipoItem.fnc_MontaCaminhoFoto: String;
 var
