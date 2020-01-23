@@ -2043,7 +2043,7 @@ begin
   else
     vImportado_Nacional := 'N';
   fDMCadNotaFiscal.cdsTab_NCM.Locate('ID',fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,([Locaseinsensitive]));
-  
+
   //Incluido 13/08/2019  para controlar os produtos que não calculam ST dentro de um NCM que calcula
   if (fDMCadNotaFiscal.qParametros_ProdCONTROLAR_PROD_ST.AsString = 'S') and (fDMCadNotaFiscal.cdsProdutoCALCULAR_ST.AsString = 'N') then
     exit;
@@ -2080,6 +2080,13 @@ begin
   //10/11/2015
   //prc_Abrir_qProduto_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NCM.AsInteger,vUF);
   prc_Abrir_qProduto_UF(fDMCadNotaFiscal,fDMCadNotaFiscal.cdsNotaFiscal_ItensID_Produto.AsInteger,vUF);
+
+  //23/01/2020
+  if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat)) > 0 then
+    vPerc_Reducao_Base := fDMCadNotaFiscal.cdsTab_NCMPERC_BASE_ICMS.AsFloat;
+  if StrToFloat(FormatFloat('0.00',fDMCadNotaFiscal.cdsTab_NCMPERC_ICMS.AsFloat)) > 0 then
+    vPerc_Proprio := fDMCadNotaFiscal.cdsTab_NCMPERC_ICMS.AsFloat;
+  //*******************
 
   if not(fDMCadNotaFiscal.qProduto_UF.IsEmpty) then
   begin

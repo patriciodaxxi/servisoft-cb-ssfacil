@@ -130,6 +130,7 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'GERAR_ST'
             Title.Alignment = taCenter
             Title.Caption = 'Gerar ST'
+            Width = 64
             Visible = True
           end
           item
@@ -145,6 +146,7 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'CALCULA_FCP'
             Title.Alignment = taCenter
             Title.Caption = 'C'#225'lcula FCP'
+            Width = 64
             Visible = True
           end
           item
@@ -159,6 +161,7 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'COD_IPI'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'd. IPI'
+            Width = 64
             Visible = True
           end
           item
@@ -174,6 +177,7 @@ object frmCadNCM: TfrmCadNCM
             FieldName = 'UNIDADE_TRIB'
             Title.Alignment = taCenter
             Title.Caption = 'Unid. Trib. Exp.'
+            Width = 64
             Visible = True
           end>
       end
@@ -1354,10 +1358,10 @@ object frmCadNCM: TfrmCadNCM
         Top = 202
         Width = 946
         Height = 302
-        ActivePage = TS_CST
+        ActivePage = TS_Geral
         ActivePageDefault = TS_SubTrib
         Align = alClient
-        TabIndex = 1
+        TabIndex = 3
         TabOrder = 2
         TextColors.Selected = clBlue
         FixedDimension = 19

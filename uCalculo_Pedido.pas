@@ -1352,6 +1352,7 @@ begin
   vPercRedST := 0;
   vPerc_Reducao_Base := StrToFloat(FormatFloat('0.00',0));
   prc_Abrir_qProduto_UF(fDMCadPedido,fDMCadPedido.cdsPedido_ItensID_Produto.AsInteger,vUF);
+
   if not(fDMCadPedido.qProduto_UF.IsEmpty) then
   begin
     if (StrToFloat(FormatFloat('0.00',fDMCadPedido.qProduto_UFPERC_REDUCAO_ST.AsFloat)) > 0) then
