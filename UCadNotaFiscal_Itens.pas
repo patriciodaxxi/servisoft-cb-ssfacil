@@ -2777,20 +2777,21 @@ begin
   DBEdit22.Visible := (fDMCadNotaFiscal.cdsNotaFiscal_ItensORIGEM_PROD.AsString <> '0');
   if DBEdit21.Visible then
   begin
-    if TRIM(fDMCadNotaFiscal.cdsProdutoNUM_FCI.AsString) <> '' then
-      fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString := fDMCadNotaFiscal.cdsProdutoNUM_FCI.AsString
-    else
+    if (vID_Produto_Ant <> fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger) or (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString) = '') then
     begin
-      fDMCadNotaFiscal.qProduto_Forn.Close;
-      fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID').AsInteger            := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
-      fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID_FORNECEDOR').AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
-      fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID_COR').AsInteger        := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger;
-      fDMCadNotaFiscal.qProduto_Forn.Open;
-      if not fDMCadNotaFiscal.qProduto_Forn.IsEmpty then
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString := fDMCadNotaFiscal.qProduto_FornNUM_FCI.AsString
+      if TRIM(fDMCadNotaFiscal.cdsProdutoNUM_FCI.AsString) <> '' then
+        fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString := fDMCadNotaFiscal.cdsProdutoNUM_FCI.AsString
       else
-        fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString := '';
-      fDMCadNotaFiscal.qProduto_Forn.Close;
+      begin
+        fDMCadNotaFiscal.qProduto_Forn.Close;
+        fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID').AsInteger            := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PRODUTO.AsInteger;
+        fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID_FORNECEDOR').AsInteger := fDMCadNotaFiscal.cdsNotaFiscalID_CLIENTE.AsInteger;
+        fDMCadNotaFiscal.qProduto_Forn.ParamByName('ID_COR').AsInteger        := fDMCadNotaFiscal.cdsNotaFiscal_ItensID_COR.AsInteger;
+        fDMCadNotaFiscal.qProduto_Forn.Open;
+        if not (fDMCadNotaFiscal.qProduto_Forn.IsEmpty) and (trim(fDMCadNotaFiscal.qProduto_FornNUM_FCI.AsString) <> '') then
+          fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString := fDMCadNotaFiscal.qProduto_FornNUM_FCI.AsString;
+        fDMCadNotaFiscal.qProduto_Forn.Close;
+      end;
     end;
   end
   else

@@ -4609,8 +4609,13 @@ begin
       //*********
 
       if (fDMCadNotaFiscal.cdsParametrosUSA_FCI.AsString = 'S') and (trim(fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString) <> '') then
-        vTextoFCI := '(Resolução do Senado Federal nº 13/2012, % usado ' + FormatFloat('0.00#',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_USADO_FCI.AsFloat) + '%'
-                   + ' Numero da FCI ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString + ')';
+      begin
+        if StrToFloat(FormatFloat('0.000',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_USADO_FCI.AsFloat)) > 0 then
+          vTextoFCI := '(Resolução do Senado Federal nº 13/2012, % usado ' + FormatFloat('0.00#',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_USADO_FCI.AsFloat) + '%'
+                     + ' Numero da FCI ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString + ')'
+        else
+          vTextoFCI := '(Resolução do Senado Federal nº 13/2012, Numero da FCI ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString + ')';
+      end;
     end;
 
 
@@ -4700,7 +4705,9 @@ begin
     end;
 
     fDMNFe.mItensNFeNFCI.AsString              := fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_FCI.AsString;
-    if (trim(vTextoFCI) <> '') and (fDMNFe.qParametrosUSA_DANFE_FLEXDOCS.AsString <> 'S') then
+    //23/01/2020
+    //if (trim(vTextoFCI) <> '') and (fDMNFe.qParametrosUSA_DANFE_FLEXDOCS.AsString <> 'S') then
+    if (trim(vTextoFCI) <> '') then
       fDMNFe.mItensNFeInfAdicionais.Value := fDMNFe.mItensNFeInfAdicionais.Value + vTextoFCI;
     fDMNFe.mItensNFeVlrIcmsOperacao.AsFloat    := StrToFloat(FormatFloat('0.00',fDMNFe.mItensNFeVlrIcmsOperacao.AsFloat + fDMCadNotaFiscal.cdsNotaFiscal_ItensVLR_ICMSOPERACAO.AsFloat));
     fDMNFe.mItensNFePercTribIcms.AsFloat       := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaFiscal_ItensPERC_TRIBICMS.AsFloat));
