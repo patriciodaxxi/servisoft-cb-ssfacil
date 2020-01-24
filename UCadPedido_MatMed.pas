@@ -3,9 +3,8 @@ Unit UCadPedido_MatMed;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, UDMCadPedido, StdCtrls, Mask, DBCtrls, RxLookup, NxCollection,
-  ExtCtrls, DB, Buttons, RzPanel, ToolEdit, CurrEdit;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMCadPedido, StdCtrls, Mask, DBCtrls,
+  RxLookup, NxCollection, ExtCtrls, DB, Buttons, ToolEdit, CurrEdit;
 
 type
   TfrmCadPedido_MatMed = class(TForm)
@@ -44,11 +43,10 @@ type
     procedure RxDBLookupCombo5Enter(Sender: TObject);
   private
     { Private declarations }
-    vID_TipoMatAnt : Integer;
+    vID_TipoMatAnt: Integer;
   public
     { Public declarations }
-    fDMCadPedido: TDMCadPedido;
-
+    fDMCadPedido: TDMCadPedido;          
   end;
 
 var
@@ -99,7 +97,7 @@ end;
 
 procedure TfrmCadPedido_MatMed.btnCalcularClick(Sender: TObject);
 var
-  vAux : Real;
+  vAux: Real;
 begin
   vAux := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_Item_TipoCOMPRIMENTO.AsFloat * fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat
         * fDMCadPedido.cdsPedido_Item_TipoESPESSURA.AsFloat * fDMCadPedido.cdsPedido_Item_TipoDENSIDADE.AsFloat));
@@ -113,8 +111,7 @@ begin
     fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat      := StrToFloat(FormatFloat('0.00',vAux / 1000));
     fDMCadPedido.cdsPedido_Item_TipoVLR_TOTAL.AsFloat := StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat * fDMCadPedido.cdsPedido_Item_TipoVLR_UNITARIO.AsFloat));
   end;
-end;
-
+end;                            
 
 procedure TfrmCadPedido_MatMed.SpeedButton1Click(Sender: TObject);
 var

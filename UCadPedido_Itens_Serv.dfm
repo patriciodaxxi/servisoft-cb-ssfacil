@@ -124,8 +124,8 @@ object frmCadPedido_Itens_Serv: TfrmCadPedido_Itens_Serv
   end
   object Panel3: TPanel
     Left = 0
-    Top = 148
-    Width = 687
+    Top = 140
+    Width = 679
     Height = 34
     Align = alBottom
     Color = 8404992

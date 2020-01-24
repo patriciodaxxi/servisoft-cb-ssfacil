@@ -3,9 +3,8 @@ unit UCadPedido_Itens_Serv;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, UDMCadPedido, StdCtrls, Mask, DBCtrls, RxLookup, Buttons,
-  ExtCtrls, DB, RxDBComb;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMCadPedido, StdCtrls, Mask, DBCtrls,
+  RxLookup, Buttons, ExtCtrls, DB, RxDBComb;
 
 type
   TfrmCadPedido_Itens_Serv = class(TForm)
@@ -35,11 +34,10 @@ type
     procedure DBEdit2Enter(Sender: TObject);
   private
     { Private declarations }
-    vID_Servico_Ant : Integer;    
+    vID_Servico_Ant: Integer;    
   public
     { Public declarations }
-    fDMCadPedido: TDMCadPedido;
-    
+    fDMCadPedido: TDMCadPedido;         
   end;
 
 var

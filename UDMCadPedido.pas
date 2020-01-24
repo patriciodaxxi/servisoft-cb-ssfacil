@@ -3571,6 +3571,14 @@ type
     qParametrosID_CONTA_PADRAO: TIntegerField;
     qParametrosID_TIPO_COBRANCA_PADRAO: TIntegerField;
     cdsPedidoImp_TipoNOME_PRODUTO_IMPRIMIR: TStringField;
+    sdsPedidoItemTipoFoto: TSQLDataSet;
+    dspPedidoItemTipoFoto: TDataSetProvider;
+    cdsPedidoItemTipo_Foto: TClientDataSet;
+    dsPedidoItemTipoFoto: TDataSource;
+    cdsPedidoItemTipo_FotoID: TIntegerField;
+    cdsPedidoItemTipo_FotoITEM: TIntegerField;
+    cdsPedidoItemTipo_FotoFOTO: TStringField;
+    frxDBDataset11: TfrxDBDataset;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);
@@ -3604,6 +3612,7 @@ type
     procedure cdsPedidoImp_ItensCalcFields(DataSet: TDataSet);
     procedure frxDBDataset3First(Sender: TObject);
     procedure frxDBDataset3Next(Sender: TObject);
+    procedure cdsPedidoImpAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     vItem_Desc: Integer;
@@ -3615,12 +3624,12 @@ type
     { Public declarations }
     vMSGErro: String;
     vMsgErroParc: String;
-    ctCommand, ctConsulta, ctProduto, ctDuplicata, ctHistSenha : String;
-    ctConsulta2 : String;
+    ctCommand, ctConsulta, ctProduto, ctDuplicata, ctHistSenha: String;
+    ctConsulta2: String;
     ctServico: String;
     ctCliente, ctCFOP: String;
     ctqProximoPedido: String;
-    ctqProduto_Cli : String;
+    ctqProduto_Cli: String;
     vAliqIcms: Real;
     vSiglaUF: String;
     vID_CFOP, vID_Variacao: Integer;
@@ -3663,7 +3672,7 @@ type
     procedure prc_Inserir_Itens;
 
     procedure prc_Abrir_cdsCliente(Tipo: String = 'C'); overload;
-    procedure prc_Abrir_cdsCliente(ID : Integer); overload;
+    procedure prc_Abrir_cdsCliente(ID: Integer); overload;
     procedure prc_Abrir_cdsCFOP(Tipo_Reg: String);
     procedure prc_Abrir_qProduto(ID:Integer);
     procedure Abrir_Duplicatas(ID: Integer);
@@ -4880,6 +4889,13 @@ procedure TDMCadPedido.frxDBDataset3Next(Sender: TObject);
 begin
   if (frxReport1.FindComponent('Foto_PDF')<> nil) and (cdsParametrosEMPRESA_SUCATA.AsString = 'S') then
     TfrxPictureView(frxReport1.FindComponent('Foto_PDF')).Picture.LoadFromFile(cdsPedidoImp_ItensCAMINHO_ARQUIVO_PDF.AsString);
+end;
+
+procedure TDMCadPedido.cdsPedidoImpAfterScroll(DataSet: TDataSet);
+begin
+  cdsPedidoItemTipo_Foto.Close;
+  sdsPedidoItemTipoFoto.ParamByName('I1').AsInteger := cdsPedidoImpID.AsInteger;
+  cdsPedidoItemTipo_Foto.Open;
 end;
 
 end.
