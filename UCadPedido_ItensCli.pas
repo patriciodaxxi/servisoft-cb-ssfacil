@@ -25,8 +25,7 @@ type
   public
     { Public declarations }
     fDMCadPedido: TDMCadPedido;
-    vChamada : String; //I= Item    P= Pedido
-    
+    vChamada: String; //I= Item    P= Pedido     
   end;
 
 var
