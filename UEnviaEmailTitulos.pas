@@ -120,7 +120,7 @@ begin
     exit;
   end;
 
-  Label1.Caption := 'Aguarde,  enviando emails (títulos atrasados)...';
+  Label1.Caption := 'Aguarde, enviando emails (títulos atrasados)...';
   Label1.Visible := True;
   Refresh;
   Label1.Refresh;
