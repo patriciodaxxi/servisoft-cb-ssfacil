@@ -161,6 +161,11 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
       FixedChar = True
       Size = 1
     end
+    object sdsTipoCobrancaFORMA_PGTO: TStringField
+      FieldName = 'FORMA_PGTO'
+      FixedChar = True
+      Size = 1
+    end
   end
   object dspTipoCobranca: TDataSetProvider
     DataSet = sdsTipoCobranca
@@ -176,7 +181,7 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     ProviderName = 'dspTipoCobranca'
     OnNewRecord = cdsTipoCobrancaNewRecord
     Left = 120
-    Top = 32
+    Top = 35
     object cdsTipoCobrancaID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -333,6 +338,11 @@ object DMCadTipoCobranca: TDMCadTipoCobranca
     end
     object cdsTipoCobrancaJUROS_TIPO: TStringField
       FieldName = 'JUROS_TIPO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsTipoCobrancaFORMA_PGTO: TStringField
+      FieldName = 'FORMA_PGTO'
       FixedChar = True
       Size = 1
     end

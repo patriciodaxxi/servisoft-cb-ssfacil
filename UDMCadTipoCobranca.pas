@@ -95,6 +95,8 @@ type
     cdsTipoCobranca_ItensNome_CondPagto: TStringField;
     sdsTipoCobrancaJUROS_TIPO: TStringField;
     cdsTipoCobrancaJUROS_TIPO: TStringField;
+    sdsTipoCobrancaFORMA_PGTO: TStringField;
+    cdsTipoCobrancaFORMA_PGTO: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspTipoCobrancaUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
