@@ -1,6 +1,6 @@
 object frmCadTipoCobranca: TfrmCadTipoCobranca
-  Left = 254
-  Top = 63
+  Left = 194
+  Top = 59
   Width = 914
   Height = 653
   Caption = 'Cadastro de Tipo de Cobran'#231'a'
@@ -22,7 +22,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
     Top = 0
     Width = 906
     Height = 622
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -30,7 +30,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     FixedDimension = 19
     object TS_Consulta: TRzTabSheet
@@ -810,7 +810,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label2: TLabel
           Left = 462
-          Top = 130
+          Top = 131
           Width = 47
           Height = 13
           Alignment = taRightJustify
@@ -819,7 +819,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object Label3: TLabel
           Left = 100
-          Top = 129
+          Top = 130
           Width = 180
           Height = 13
           Alignment = taRightJustify
@@ -923,7 +923,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object DBEdit1: TDBEdit
           Left = 512
-          Top = 122
+          Top = 123
           Width = 65
           Height = 21
           CharCase = ecUpperCase
@@ -1208,7 +1208,7 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
         end
         object RxDBComboBox2: TRxDBComboBox
           Left = 288
-          Top = 122
+          Top = 123
           Width = 162
           Height = 21
           Style = csDropDownList
@@ -1631,6 +1631,25 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
             '1'
             '2'
             '3')
+        end
+        object DBRadioGroup1: TDBRadioGroup
+          Left = 455
+          Top = 87
+          Width = 246
+          Height = 33
+          Caption = 'Forma Pagto'
+          Columns = 3
+          DataField = 'FORMA_PGTO'
+          DataSource = DMCadTipoCobranca.dsTipoCobranca
+          Items.Strings = (
+            'Ambos'
+            'Prazo'
+            'Vista')
+          TabOrder = 32
+          Values.Strings = (
+            'A'
+            'P'
+            'V')
         end
       end
     end
