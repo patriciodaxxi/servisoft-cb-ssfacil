@@ -21,7 +21,7 @@ object fCupomCliente: TfCupomCliente
   TextHeight = 13
   object Label1: TLabel
     Left = 70
-    Top = 16
+    Top = 44
     Width = 65
     Height = 18
     Alignment = taRightJustify
@@ -35,7 +35,7 @@ object fCupomCliente: TfCupomCliente
   end
   object Label2: TLabel
     Left = 98
-    Top = 44
+    Top = 72
     Width = 37
     Height = 18
     Alignment = taRightJustify
@@ -90,7 +90,7 @@ object fCupomCliente: TfCupomCliente
     ParentFont = False
   end
   object Label5: TLabel
-    Left = 11
+    Left = 75
     Top = 353
     Width = 129
     Height = 18
@@ -105,7 +105,7 @@ object fCupomCliente: TfCupomCliente
   end
   object Label6: TLabel
     Left = 89
-    Top = 72
+    Top = 16
     Width = 46
     Height = 18
     Alignment = taRightJustify
@@ -117,9 +117,64 @@ object fCupomCliente: TfCupomCliente
     Font.Style = []
     ParentFont = False
   end
+  object DBMemo3: TDBMemo
+    Left = 0
+    Top = 276
+    Width = 554
+    Height = 113
+    Align = alBottom
+    DataField = 'CLIENTE_ENDERECO'
+    DataSource = dsClientes
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Vwe'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 10
+    Visible = False
+  end
+  object SMDBGrid1: TSMDBGrid
+    Left = 0
+    Top = 36
+    Width = 554
+    Height = 240
+    Align = alBottom
+    DataSource = dsClientes
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+    TabOrder = 9
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Visible = False
+    OnDblClick = SMDBGrid1DblClick
+    OnKeyDown = SMDBGrid1KeyDown
+    Flat = False
+    BandsFont.Charset = DEFAULT_CHARSET
+    BandsFont.Color = clWindowText
+    BandsFont.Height = -11
+    BandsFont.Name = 'MS Sans Serif'
+    BandsFont.Style = []
+    Groupings = <>
+    GridStyle.Style = gsCustom
+    GridStyle.OddColor = clWindow
+    GridStyle.EvenColor = clWindow
+    TitleHeight.PixelCount = 24
+    FooterColor = clBtnFace
+    ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap]
+    RegistryKey = 'Software\Scalabium'
+    RegistrySection = 'SMDBGrid'
+    WidthOfIndicator = 11
+    DefaultRowHeight = 17
+    ScrollBars = ssHorizontal
+    ColCount = 2
+    RowCount = 2
+  end
   object DBEdit1: TDBEdit
     Left = 142
-    Top = 8
+    Top = 36
     Width = 343
     Height = 26
     CharCase = ecUpperCase
@@ -131,12 +186,12 @@ object fCupomCliente: TfCupomCliente
     Font.Name = 'Verdana'
     Font.Style = []
     ParentFont = False
-    TabOrder = 0
+    TabOrder = 1
     OnKeyDown = DBEdit1KeyDown
   end
   object DBEdit2: TDBEdit
     Left = 142
-    Top = 36
+    Top = 64
     Width = 177
     Height = 26
     CharCase = ecUpperCase
@@ -148,7 +203,7 @@ object fCupomCliente: TfCupomCliente
     Font.Name = 'Verdana'
     Font.Style = []
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 3
   end
   object DBMemo1: TDBMemo
     Left = 142
@@ -252,9 +307,9 @@ object fCupomCliente: TfCupomCliente
     OnExit = RxDBComboBox2Exit
   end
   object RxDBLookupCombo1: TRxDBLookupCombo
-    Left = 142
+    Left = 208
     Top = 349
-    Width = 369
+    Width = 303
     Height = 21
     DropDownCount = 8
     DataField = 'ID_TRANSPORTADORA'
@@ -266,7 +321,7 @@ object fCupomCliente: TfCupomCliente
   end
   object BitBtn1: TBitBtn
     Left = 486
-    Top = 8
+    Top = 36
     Width = 25
     Height = 25
     Hint = 'Procura cadastro'
@@ -277,12 +332,12 @@ object fCupomCliente: TfCupomCliente
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 2
     OnClick = BitBtn1Click
   end
   object DBEdit3: TDBEdit
     Left = 142
-    Top = 64
+    Top = 8
     Width = 177
     Height = 26
     CharCase = ecUpperCase
@@ -294,6 +349,50 @@ object fCupomCliente: TfCupomCliente
     Font.Name = 'Verdana'
     Font.Style = []
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 0
+    OnKeyDown = DBEdit3KeyDown
+  end
+  object sdsClientes: TSQLDataSet
+    CommandText = 
+      'SELECT DISTINCT CLIENTE_NOME, CLIENTE_FONE, CLIENTE_ENDERECO'#13#10'FR' +
+      'OM CUPOMFISCAL'#13#10'WHERE CLIENTE_FONE = :F1'
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'F1'
+        ParamType = ptInput
+      end>
+    SQLConnection = dmDatabase.scoDados
+    Left = 336
+    Top = 8
+  end
+  object dspClientes: TDataSetProvider
+    DataSet = sdsClientes
+    Left = 368
+    Top = 8
+  end
+  object cdsClientes: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspClientes'
+    Left = 400
+    Top = 8
+    object cdsClientesCLIENTE_NOME: TStringField
+      FieldName = 'CLIENTE_NOME'
+      Size = 30
+    end
+    object cdsClientesCLIENTE_FONE: TStringField
+      FieldName = 'CLIENTE_FONE'
+    end
+    object cdsClientesCLIENTE_ENDERECO: TStringField
+      FieldName = 'CLIENTE_ENDERECO'
+      Size = 120
+    end
+  end
+  object dsClientes: TDataSource
+    DataSet = cdsClientes
+    Left = 432
+    Top = 8
   end
 end

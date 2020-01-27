@@ -1510,6 +1510,7 @@ begin
   if fDmCupomFiscal.cdsCupom_Itens.IsEmpty then
   begin
     ShowMessage('Para gravação do orçamento é preciso ter produtos incluídos!');
+    Edit1.SetFocus;
     Exit;
   end;
 
@@ -1519,6 +1520,7 @@ begin
   fCupomCliente := TfCupomCliente.Create(Self);
   fCupomCliente.fDmCupomFiscal := fDmCupomFiscal;
   fCupomCliente.ShowModal;
+  Edit1.SetFocus;
 
   if fDmCupomFiscal.vClienteConfirmado then
   begin
@@ -1534,6 +1536,7 @@ begin
   if fDmCupomFiscal.cdsCupom_Itens.IsEmpty then
   begin
     ShowMessage('Para gravação do pedido é preciso ter produtos incluídos!');
+    Edit1.SetFocus;
     Exit;
   end;
 
@@ -1543,6 +1546,7 @@ begin
   fCupomCliente := TfCupomCliente.Create(Self);
   fCupomCliente.fDmCupomFiscal := fDmCupomFiscal;
   fCupomCliente.ShowModal;
+  Edit1.SetFocus;
 
   if (fDmCupomFiscal.vClienteConfirmado) then
   begin
