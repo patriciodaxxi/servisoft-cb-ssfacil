@@ -134,7 +134,8 @@ begin
   rlEndFilial.Caption  := fDMCadDocEstoque.cdsDocEstoque_ImpENDERECO_FILIAL.AsString + ',' + fDMCadDocEstoque.cdsDocEstoque_ImpNUM_END_FILIAL.AsString;
   rlEndereco.Caption   := fDMCadDocEstoque.cdsDocEstoque_ImpENDERECO_CLI.AsString + ', ' + fDMCadDocEstoque.cdsDocEstoque_ImpNUM_END_CLI.AsString;
   try
-    RLImage1.Picture.LoadFromFile(fDMCadDocEstoque.cdsFilialENDLOGO.AsString)
+    if not fDMCadDocEstoque.cdsFilialENDLOGO.IsNull then
+      RLImage1.Picture.LoadFromFile(fDMCadDocEstoque.cdsFilialENDLOGO.AsString)
   except
      RLImage1.Picture := nil;
   end;
