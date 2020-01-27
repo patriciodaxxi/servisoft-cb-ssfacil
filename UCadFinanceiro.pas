@@ -728,7 +728,7 @@ begin
   fDMCadFinanceiro.mReciboFinanceiro_Forma.AsString      := fDMCadFinanceiro.cdsFinanceiro_ConsultaNOME_FORMAPGTO.AsString;
   fDMCadFinanceiro.mReciboFinanceiro_Data.AsString       := fDMCadFinanceiro.cdsFinanceiro_ConsultaDTMOVIMENTO.AsString;
   fDMCadFinanceiro.mReciboFinanceiro_Descr.AsString      := fDMCadFinanceiro.cdsFinanceiro_ConsultaHISTORICO_COMPL.AsString;
-  fDMCadFinanceiro.mReciboFinanceiro_Valor.AsFloat       := StrToFloat(FormatFloat('#,###,##0.00',fDMCadFinanceiro.cdsFinanceiro_ConsultaVLR_MOVIMENTO.AsFloat));
+  fDMCadFinanceiro.mReciboFinanceiro_Valor.AsFloat      := fDMCadFinanceiro.cdsFinanceiro_ConsultaVLR_MOVIMENTO.AsFloat;
   ValorPorExtenso1.Valor := fDMCadFinanceiro.cdsFinanceiro_ConsultaVLR_MOVIMENTO.AsFloat;
   fDMCadFinanceiro.mReciboFinanceiro_VlrExtenso.AsString := ValorPorExtenso1.Texto;
   fDMCadFinanceiro.mRecibo.Post;               
