@@ -6036,7 +6036,7 @@ object DMCadPedido: TDMCadPedido
       '  AND P.ID_CLIENTE = :ID_CLIENTE')
     SQLConnection = dmDatabase.scoDados
     Left = 955
-    Top = 422
+    Top = 423
     object qVerifica_OCPEDIDO_CLIENTE: TStringField
       FieldName = 'PEDIDO_CLIENTE'
     end
@@ -15304,6 +15304,11 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedCONTROLA_ITEM_REPET: TStringField
+      FieldName = 'CONTROLA_ITEM_REPET'
+      FixedChar = True
+      Size = 1
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 
@@ -18794,5 +18799,675 @@ object DMCadPedido: TDMCadPedido
     BCDToCurrency = False
     Left = 1141
     Top = 284
+  end
+  object cdsCloneItem: TClientDataSet
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 1274
+    Top = 515
+    Data = {
+      490F00009619E0BD020000001800000099000000000003000000490F02494404
+      00010004000000044954454D04000100040000000A49445F50524F4455544F04
+      000100000000000649445F434F520A0012000000010005574944544802000200
+      0F000754414D414E484F0100490000000100055749445448020002000A000351
+      544408000400000000000C5154445F464154555241444F08000400000000000C
+      5154445F52455354414E544508000400000000000D5154445F43414E43454C41
+      444F08000400000000000C564C525F444553434F4E544F080004000000000009
+      43414E43454C41444F0100490020000100055749445448020002000100094454
+      454E5452454741040006000000000008464154555241444F0100490020000100
+      0557494454480200020001000A4454464154555241444F040006000000000013
+      434F445F50524F4455544F5F434C49454E544501004900000001000557494454
+      48020002000F00045449504F0100490000000100055749445448020002000100
+      07554E49444144450100490000000100055749445448020002000600054E554D
+      4F530100490000000100055749445448020002001E000D504552435F44455343
+      4F4E544F080004000000000009564C525F465245544508000400000000000942
+      4153455F49434D53080004000000000008564C525F49434D5308000400000000
+      000F424153455F49434D535452414E534608000400000000000B504552435F54
+      52414E534608000400000000000A564C525F5452414E53460800040000000000
+      07564C525F495049080004000000000010424153455F49434D5353494D504C45
+      5308000400000000000F564C525F49434D5353494D504C455308000400000000
+      0010504552435F49434D5353494D504C455308000400000000000E424153455F
+      49434D53535542535408000400000000000D564C525F49434D53535542535408
+      0004000000000012564C525F444553434F4E544F52415445494F080004000000
+      00000749445F43464F5004000100000000000949445F43535449504904000100
+      000000000A49445F43535449434D53040001000000000009504552435F49434D
+      53080004000000000008504552435F49504908000400000000000A5245464552
+      454E43494101004900000001000557494454480200020014000B4E4F4D455052
+      4F4455544F0100490000000100055749445448020002006400104F42535F434F
+      4D504C454D454E544152010049000000010005574944544802000200FA001443
+      414C43554C415249434D53534F42524549504901004900200001000557494454
+      480200020001000C564C525F554E49544152494F08000400000000000E49445F
+      434F4E4649475F43464F50040001000000000009564C525F544F54414C080004
+      00000000000C5154445F414641545552415208000400000000000B49445F5641
+      52494143414F0400010000000000034F425304004B0000000200075355425459
+      504502004900050054657874000557494454480200020001000D504552435F54
+      52494249434D5308000400000000000A49445F4154454C494552040001000000
+      000014564C525F554E49544152494F5F4154454C494552080004000000000011
+      564C525F544F54414C5F4154454C49455208000400000000001044545F454E56
+      494F5F4154454C49455204000600000000001244545F5245544F524E4F5F4154
+      454C494552040006000000000011564C525F504147544F5F4154454C49455208
+      000400000000001044545F504147544F5F4154454C4945520400060000000000
+      0C4150524F5641444F5F4F524301004900200001000557494454480200020001
+      00104D4F5449564F5F4E414F5F4150524F5604004B0000000200075355425459
+      504502004900050054657874000557494454480200020001000E44544150524F
+      5641444F5F4E414F04000600000000000C49445F4F5243414D454E544F040001
+      00000000000E4954454D5F4F5243414D454E544F04000100000000000C515444
+      5F4C4942455241444108000400000000000D5154445F50524F44555A49444108
+      00040000000000084E554D5F4C4F54450400010000000000094E554D5F54414C
+      414F0100490000000100055749445448020002000F000A47455241525F4C4F54
+      45010049002000010005574944544802000200010007434152494D424F010049
+      00000001000557494454480200020019000A445450524F445543414F04000600
+      000000000649445F4E434D04000100000000000E5449504F5F4F5243414D454E
+      544F010049002000010005574944544802000200010008454E445F464F544F01
+      0049000000010005574944544802000200C8000C4954454D5F434C49454E5445
+      0400010000000000085154445F50454341040001000000000011475241564143
+      414F5F434F4D5F4552524F010049000000010005574944544802000200030007
+      5154445F46555408000400000000000F4954454D5F434F4D42494E4143414F04
+      00010000000000085449504F5F52454701004900200001000557494454480200
+      020001000D49445F4D4F564553544F51554504000100000000000D4745524152
+      5F4553544F51554501004900200001000557494454480200020001000D495445
+      4D5F4F524947494E414C040001000000000010504552435F4449464552494D45
+      4E544F080004000000000010564C525F49434D53444946455249444F08000400
+      000000000E5449504F5F41434553534F52494F01004900200001000557494454
+      4802000200010012434F4D5052494D454E544F5F564F4C554D45080004000000
+      0000125154445F4C414E4341525F4553544F51554508000400000000000D5045
+      52435F434F4D495353414F0800040000000000114E554D5F4C4F54455F434F4E
+      54524F4C4501004900000001000557494454480200020014000B445445585045
+      444943414F040006000000000008445446415455524104000600000000000D50
+      4552435F49434D535F464350080004000000000011504552435F49434D535F55
+      465F44455354080004000000000012504552435F49434D535F50415254494C48
+      4108000400000000000C564C525F49434D535F46435008000400000000001056
+      4C525F49434D535F55465F44455354080004000000000011564C525F49434D53
+      5F55465F52454D455408000400000000000F504552435F49434D535F494E5445
+      52080004000000000012434F504941525F53454C4543494F4E41444F01004900
+      200001000557494454480200020001000D564C525F4455504C49434154410800
+      0400000000000F47455241525F4455504C494341544101004900200001000557
+      494454480200020001000B53454C4543494F4E41444F01004900200001000557
+      494454480200020001000D5154445F434F4E46455249444F0800040000000000
+      0D4454434F4E464552454E43494104000600000000000D4852434F4E46455245
+      4E43494104000700000000000C5553554152494F5F434F4E4601004900000001
+      00055749445448020002000F000D564C525F49434D5346524554450800040000
+      0000000C5154445F534F4252415F4F4308000400000000000C5449504F5F5345
+      525649434F01004900200001000557494454480200020001000E49445F534552
+      5649434F5F494E540400010000000000104E4F4D455F5345525649434F5F494E
+      5401004900000001000557494454480200020096000B505245434F5F43555354
+      4F08000400000000000B504552435F4D415247454D08000400000000000C5045
+      52435F4D415247454D3208000400000000000A49445F4F535F53455256040001
+      00000000000B4E554D5F4F535F5345525604000100000000000A49445F534552
+      5649434F04000100000000000C4E554D5F4E4F54415F454E5404000100000000
+      000E53455249455F4E4F54415F454E5401004900000001000557494454480200
+      0200030008454E43455241444F01004900200001000557494454480200020001
+      000C554E49444144455F50524F44010049000000010005574944544802000200
+      06000C434F4E565F554E494441444508000400000000000E54414C414F5F494D
+      50524553534F01004900200001000557494454480200020001000C4F42535F45
+      544951554554410100490000000100055749445448020002001E00095154445F
+      434149584104000100000000000F434F445F434F525F434C49454E5445010049
+      0000000100055749445448020002000A00104E4F4D455F434F525F434C49454E
+      544501004900000001000557494454480200020064000F54414D414E484F5F43
+      4C49454E54450100490000000100055749445448020002000A000F4745524F55
+      5F4C4F54455F50524F4401004900200001000557494454480200020001000446
+      4F544F010049000000010005574944544802000200FA000C564C525F4D415445
+      5249414C08000400000000000554454D504F0800040000000000074454424149
+      584104000600000000000A54454D504F5F5245414C080004000000000011564C
+      525F554E49544152494F5F5245414C0800040000000000124641544F525F4341
+      4C43554C4F5F5245414C08000400000000000F4745524F555F5045445F54414C
+      414F01004900200001000557494454480200020001000E5154445F504F525F52
+      4F54554C4F0400010000000000075449504F5F4F530100490000000100055749
+      4454480200020002000E4449464552454E43415F49434D530100490020000100
+      0557494454480200020001000843414958494E48410100490000000100055749
+      445448020002001E0008424153455F495049080004000000000014415455414C
+      495A415F505245434F5F435553544F0100490020000100055749445448020002
+      00010007464142524943410100490000000100055749445448020002000A0009
+      454E434F4D454E444101004900200001000557494454480200020001000D4150
+      524F5641444F5F4954454D010049002000010005574944544802000200010008
+      445241574241434B01004900200001000557494454480200020001000B49445F
+      50524F434553534F040001000000000009505245434F5F434F52080004000000
+      000007434F4443464F5001004900000001000557494454480200020005000743
+      4F445F435354010049000000010005574944544802000200030007434F445F49
+      50490100490000000100055749445448020002000200034E434D010049000000
+      0100055749445448020002000A00134E4F4D455F434F525F434F4D42494E4143
+      414F0100490000000100055749445448020002003C0011564C525F444553434F
+      4E544F5F43414C430800040000000000064D4544494441010049000000010005
+      57494454480200020014000000}
+    object cdsCloneItemID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object cdsCloneItemITEM: TIntegerField
+      FieldName = 'ITEM'
+      Required = True
+    end
+    object cdsCloneItemID_PRODUTO: TIntegerField
+      FieldName = 'ID_PRODUTO'
+    end
+    object cdsCloneItemID_COR: TFMTBCDField
+      FieldName = 'ID_COR'
+      Precision = 15
+      Size = 0
+    end
+    object cdsCloneItemTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
+    end
+    object cdsCloneItemQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object cdsCloneItemQTD_FATURADO: TFloatField
+      FieldName = 'QTD_FATURADO'
+    end
+    object cdsCloneItemQTD_RESTANTE: TFloatField
+      FieldName = 'QTD_RESTANTE'
+    end
+    object cdsCloneItemQTD_CANCELADO: TFloatField
+      FieldName = 'QTD_CANCELADO'
+    end
+    object cdsCloneItemVLR_DESCONTO: TFloatField
+      FieldName = 'VLR_DESCONTO'
+    end
+    object cdsCloneItemCANCELADO: TStringField
+      FieldName = 'CANCELADO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemDTENTREGA: TDateField
+      FieldName = 'DTENTREGA'
+    end
+    object cdsCloneItemFATURADO: TStringField
+      FieldName = 'FATURADO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemDTFATURADO: TDateField
+      FieldName = 'DTFATURADO'
+    end
+    object cdsCloneItemCOD_PRODUTO_CLIENTE: TStringField
+      FieldName = 'COD_PRODUTO_CLIENTE'
+      Size = 15
+    end
+    object cdsCloneItemTIPO: TStringField
+      FieldName = 'TIPO'
+      Size = 1
+    end
+    object cdsCloneItemUNIDADE: TStringField
+      FieldName = 'UNIDADE'
+      Size = 6
+    end
+    object cdsCloneItemNUMOS: TStringField
+      FieldName = 'NUMOS'
+      Size = 30
+    end
+    object cdsCloneItemPERC_DESCONTO: TFloatField
+      FieldName = 'PERC_DESCONTO'
+    end
+    object cdsCloneItemVLR_FRETE: TFloatField
+      FieldName = 'VLR_FRETE'
+    end
+    object cdsCloneItemBASE_ICMS: TFloatField
+      FieldName = 'BASE_ICMS'
+    end
+    object cdsCloneItemVLR_ICMS: TFloatField
+      FieldName = 'VLR_ICMS'
+    end
+    object cdsCloneItemBASE_ICMSTRANSF: TFloatField
+      FieldName = 'BASE_ICMSTRANSF'
+    end
+    object cdsCloneItemPERC_TRANSF: TFloatField
+      FieldName = 'PERC_TRANSF'
+    end
+    object cdsCloneItemVLR_TRANSF: TFloatField
+      FieldName = 'VLR_TRANSF'
+    end
+    object cdsCloneItemVLR_IPI: TFloatField
+      FieldName = 'VLR_IPI'
+    end
+    object cdsCloneItemBASE_ICMSSIMPLES: TFloatField
+      FieldName = 'BASE_ICMSSIMPLES'
+    end
+    object cdsCloneItemVLR_ICMSSIMPLES: TFloatField
+      FieldName = 'VLR_ICMSSIMPLES'
+    end
+    object cdsCloneItemPERC_ICMSSIMPLES: TFloatField
+      FieldName = 'PERC_ICMSSIMPLES'
+    end
+    object cdsCloneItemBASE_ICMSSUBST: TFloatField
+      FieldName = 'BASE_ICMSSUBST'
+    end
+    object cdsCloneItemVLR_ICMSSUBST: TFloatField
+      FieldName = 'VLR_ICMSSUBST'
+    end
+    object cdsCloneItemVLR_DESCONTORATEIO: TFloatField
+      FieldName = 'VLR_DESCONTORATEIO'
+    end
+    object cdsCloneItemID_CFOP: TIntegerField
+      FieldName = 'ID_CFOP'
+    end
+    object cdsCloneItemID_CSTIPI: TIntegerField
+      FieldName = 'ID_CSTIPI'
+    end
+    object cdsCloneItemID_CSTICMS: TIntegerField
+      FieldName = 'ID_CSTICMS'
+    end
+    object cdsCloneItemPERC_ICMS: TFloatField
+      FieldName = 'PERC_ICMS'
+    end
+    object cdsCloneItemPERC_IPI: TFloatField
+      FieldName = 'PERC_IPI'
+    end
+    object cdsCloneItemREFERENCIA: TStringField
+      FieldName = 'REFERENCIA'
+    end
+    object cdsCloneItemNOMEPRODUTO: TStringField
+      FieldName = 'NOMEPRODUTO'
+      Size = 100
+    end
+    object cdsCloneItemOBS_COMPLEMENTAR: TStringField
+      FieldName = 'OBS_COMPLEMENTAR'
+      Size = 250
+    end
+    object cdsCloneItemCALCULARICMSSOBREIPI: TStringField
+      FieldName = 'CALCULARICMSSOBREIPI'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemVLR_UNITARIO: TFloatField
+      FieldName = 'VLR_UNITARIO'
+    end
+    object cdsCloneItemID_CONFIG_CFOP: TIntegerField
+      FieldName = 'ID_CONFIG_CFOP'
+    end
+    object cdsCloneItemVLR_TOTAL: TFloatField
+      FieldName = 'VLR_TOTAL'
+    end
+    object cdsCloneItemQTD_AFATURAR: TFloatField
+      FieldName = 'QTD_AFATURAR'
+    end
+    object cdsCloneItemID_VARIACAO: TIntegerField
+      FieldName = 'ID_VARIACAO'
+    end
+    object cdsCloneItemOBS: TMemoField
+      FieldName = 'OBS'
+      BlobType = ftMemo
+      Size = 1
+    end
+    object cdsCloneItemPERC_TRIBICMS: TFloatField
+      FieldName = 'PERC_TRIBICMS'
+    end
+    object cdsCloneItemID_ATELIER: TIntegerField
+      FieldName = 'ID_ATELIER'
+    end
+    object cdsCloneItemVLR_UNITARIO_ATELIER: TFloatField
+      FieldName = 'VLR_UNITARIO_ATELIER'
+    end
+    object cdsCloneItemVLR_TOTAL_ATELIER: TFloatField
+      FieldName = 'VLR_TOTAL_ATELIER'
+    end
+    object cdsCloneItemDT_ENVIO_ATELIER: TDateField
+      FieldName = 'DT_ENVIO_ATELIER'
+    end
+    object cdsCloneItemDT_RETORNO_ATELIER: TDateField
+      FieldName = 'DT_RETORNO_ATELIER'
+    end
+    object cdsCloneItemVLR_PAGTO_ATELIER: TFloatField
+      FieldName = 'VLR_PAGTO_ATELIER'
+    end
+    object cdsCloneItemDT_PAGTO_ATELIER: TDateField
+      FieldName = 'DT_PAGTO_ATELIER'
+    end
+    object cdsCloneItemAPROVADO_ORC: TStringField
+      FieldName = 'APROVADO_ORC'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemMOTIVO_NAO_APROV: TMemoField
+      FieldName = 'MOTIVO_NAO_APROV'
+      BlobType = ftMemo
+      Size = 1
+    end
+    object cdsCloneItemDTAPROVADO_NAO: TDateField
+      FieldName = 'DTAPROVADO_NAO'
+    end
+    object cdsCloneItemID_ORCAMENTO: TIntegerField
+      FieldName = 'ID_ORCAMENTO'
+    end
+    object cdsCloneItemITEM_ORCAMENTO: TIntegerField
+      FieldName = 'ITEM_ORCAMENTO'
+    end
+    object cdsCloneItemQTD_LIBERADA: TFloatField
+      FieldName = 'QTD_LIBERADA'
+    end
+    object cdsCloneItemQTD_PRODUZIDA: TFloatField
+      FieldName = 'QTD_PRODUZIDA'
+    end
+    object cdsCloneItemNUM_LOTE: TIntegerField
+      FieldName = 'NUM_LOTE'
+    end
+    object cdsCloneItemNUM_TALAO: TStringField
+      FieldName = 'NUM_TALAO'
+      Size = 15
+    end
+    object cdsCloneItemGERAR_LOTE: TStringField
+      FieldName = 'GERAR_LOTE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemCARIMBO: TStringField
+      FieldName = 'CARIMBO'
+      Size = 25
+    end
+    object cdsCloneItemDTPRODUCAO: TDateField
+      FieldName = 'DTPRODUCAO'
+    end
+    object cdsCloneItemID_NCM: TIntegerField
+      FieldName = 'ID_NCM'
+    end
+    object cdsCloneItemTIPO_ORCAMENTO: TStringField
+      FieldName = 'TIPO_ORCAMENTO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemEND_FOTO: TStringField
+      FieldName = 'END_FOTO'
+      Size = 200
+    end
+    object cdsCloneItemITEM_CLIENTE: TIntegerField
+      FieldName = 'ITEM_CLIENTE'
+    end
+    object cdsCloneItemQTD_PECA: TIntegerField
+      FieldName = 'QTD_PECA'
+    end
+    object cdsCloneItemGRAVACAO_COM_ERRO: TStringField
+      FieldName = 'GRAVACAO_COM_ERRO'
+      Size = 3
+    end
+    object cdsCloneItemQTD_FUT: TFloatField
+      FieldName = 'QTD_FUT'
+    end
+    object cdsCloneItemITEM_COMBINACAO: TIntegerField
+      FieldName = 'ITEM_COMBINACAO'
+    end
+    object cdsCloneItemTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemID_MOVESTOQUE: TIntegerField
+      FieldName = 'ID_MOVESTOQUE'
+    end
+    object cdsCloneItemGERAR_ESTOQUE: TStringField
+      FieldName = 'GERAR_ESTOQUE'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemITEM_ORIGINAL: TIntegerField
+      FieldName = 'ITEM_ORIGINAL'
+    end
+    object cdsCloneItemPERC_DIFERIMENTO: TFloatField
+      FieldName = 'PERC_DIFERIMENTO'
+    end
+    object cdsCloneItemVLR_ICMSDIFERIDO: TFloatField
+      FieldName = 'VLR_ICMSDIFERIDO'
+    end
+    object cdsCloneItemTIPO_ACESSORIO: TStringField
+      FieldName = 'TIPO_ACESSORIO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemCOMPRIMENTO_VOLUME: TFloatField
+      FieldName = 'COMPRIMENTO_VOLUME'
+    end
+    object cdsCloneItemQTD_LANCAR_ESTOQUE: TFloatField
+      FieldName = 'QTD_LANCAR_ESTOQUE'
+    end
+    object cdsCloneItemPERC_COMISSAO: TFloatField
+      FieldName = 'PERC_COMISSAO'
+    end
+    object cdsCloneItemNUM_LOTE_CONTROLE: TStringField
+      FieldName = 'NUM_LOTE_CONTROLE'
+    end
+    object cdsCloneItemDTEXPEDICAO: TDateField
+      FieldName = 'DTEXPEDICAO'
+    end
+    object cdsCloneItemDTFATURA: TDateField
+      FieldName = 'DTFATURA'
+    end
+    object cdsCloneItemPERC_ICMS_FCP: TFloatField
+      FieldName = 'PERC_ICMS_FCP'
+    end
+    object cdsCloneItemPERC_ICMS_UF_DEST: TFloatField
+      FieldName = 'PERC_ICMS_UF_DEST'
+    end
+    object cdsCloneItemPERC_ICMS_PARTILHA: TFloatField
+      FieldName = 'PERC_ICMS_PARTILHA'
+    end
+    object cdsCloneItemVLR_ICMS_FCP: TFloatField
+      FieldName = 'VLR_ICMS_FCP'
+    end
+    object cdsCloneItemVLR_ICMS_UF_DEST: TFloatField
+      FieldName = 'VLR_ICMS_UF_DEST'
+    end
+    object cdsCloneItemVLR_ICMS_UF_REMET: TFloatField
+      FieldName = 'VLR_ICMS_UF_REMET'
+    end
+    object cdsCloneItemPERC_ICMS_INTER: TFloatField
+      FieldName = 'PERC_ICMS_INTER'
+    end
+    object cdsCloneItemCOPIAR_SELECIONADO: TStringField
+      FieldName = 'COPIAR_SELECIONADO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemVLR_DUPLICATA: TFloatField
+      FieldName = 'VLR_DUPLICATA'
+    end
+    object cdsCloneItemGERAR_DUPLICATA: TStringField
+      FieldName = 'GERAR_DUPLICATA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemSELECIONADO: TStringField
+      FieldName = 'SELECIONADO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemQTD_CONFERIDO: TFloatField
+      FieldName = 'QTD_CONFERIDO'
+    end
+    object cdsCloneItemDTCONFERENCIA: TDateField
+      FieldName = 'DTCONFERENCIA'
+    end
+    object cdsCloneItemHRCONFERENCIA: TTimeField
+      FieldName = 'HRCONFERENCIA'
+    end
+    object cdsCloneItemUSUARIO_CONF: TStringField
+      FieldName = 'USUARIO_CONF'
+      Size = 15
+    end
+    object cdsCloneItemVLR_ICMSFRETE: TFloatField
+      FieldName = 'VLR_ICMSFRETE'
+    end
+    object cdsCloneItemQTD_SOBRA_OC: TFloatField
+      FieldName = 'QTD_SOBRA_OC'
+    end
+    object cdsCloneItemTIPO_SERVICO: TStringField
+      FieldName = 'TIPO_SERVICO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemID_SERVICO_INT: TIntegerField
+      FieldName = 'ID_SERVICO_INT'
+    end
+    object cdsCloneItemNOME_SERVICO_INT: TStringField
+      FieldName = 'NOME_SERVICO_INT'
+      Size = 150
+    end
+    object cdsCloneItemPRECO_CUSTO: TFloatField
+      FieldName = 'PRECO_CUSTO'
+    end
+    object cdsCloneItemPERC_MARGEM: TFloatField
+      FieldName = 'PERC_MARGEM'
+    end
+    object cdsCloneItemPERC_MARGEM2: TFloatField
+      FieldName = 'PERC_MARGEM2'
+    end
+    object cdsCloneItemID_OS_SERV: TIntegerField
+      FieldName = 'ID_OS_SERV'
+    end
+    object cdsCloneItemNUM_OS_SERV: TIntegerField
+      FieldName = 'NUM_OS_SERV'
+    end
+    object cdsCloneItemID_SERVICO: TIntegerField
+      FieldName = 'ID_SERVICO'
+    end
+    object cdsCloneItemNUM_NOTA_ENT: TIntegerField
+      FieldName = 'NUM_NOTA_ENT'
+    end
+    object cdsCloneItemSERIE_NOTA_ENT: TStringField
+      FieldName = 'SERIE_NOTA_ENT'
+      Size = 3
+    end
+    object cdsCloneItemENCERADO: TStringField
+      FieldName = 'ENCERADO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemUNIDADE_PROD: TStringField
+      FieldName = 'UNIDADE_PROD'
+      Size = 6
+    end
+    object cdsCloneItemCONV_UNIDADE: TFloatField
+      FieldName = 'CONV_UNIDADE'
+    end
+    object cdsCloneItemTALAO_IMPRESSO: TStringField
+      FieldName = 'TALAO_IMPRESSO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemOBS_ETIQUETA: TStringField
+      FieldName = 'OBS_ETIQUETA'
+      Size = 30
+    end
+    object cdsCloneItemQTD_CAIXA: TIntegerField
+      FieldName = 'QTD_CAIXA'
+    end
+    object cdsCloneItemCOD_COR_CLIENTE: TStringField
+      FieldName = 'COD_COR_CLIENTE'
+      Size = 10
+    end
+    object cdsCloneItemNOME_COR_CLIENTE: TStringField
+      FieldName = 'NOME_COR_CLIENTE'
+      Size = 100
+    end
+    object cdsCloneItemTAMANHO_CLIENTE: TStringField
+      FieldName = 'TAMANHO_CLIENTE'
+      Size = 10
+    end
+    object cdsCloneItemGEROU_LOTE_PROD: TStringField
+      FieldName = 'GEROU_LOTE_PROD'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemFOTO: TStringField
+      FieldName = 'FOTO'
+      Size = 250
+    end
+    object cdsCloneItemVLR_MATERIAL: TFloatField
+      FieldName = 'VLR_MATERIAL'
+    end
+    object cdsCloneItemTEMPO: TFloatField
+      FieldName = 'TEMPO'
+    end
+    object cdsCloneItemDTBAIXA: TDateField
+      FieldName = 'DTBAIXA'
+    end
+    object cdsCloneItemTEMPO_REAL: TFloatField
+      FieldName = 'TEMPO_REAL'
+    end
+    object cdsCloneItemVLR_UNITARIO_REAL: TFloatField
+      FieldName = 'VLR_UNITARIO_REAL'
+    end
+    object cdsCloneItemFATOR_CALCULO_REAL: TFloatField
+      FieldName = 'FATOR_CALCULO_REAL'
+    end
+    object cdsCloneItemGEROU_PED_TALAO: TStringField
+      FieldName = 'GEROU_PED_TALAO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemQTD_POR_ROTULO: TIntegerField
+      FieldName = 'QTD_POR_ROTULO'
+    end
+    object cdsCloneItemTIPO_OS: TStringField
+      FieldName = 'TIPO_OS'
+      Size = 2
+    end
+    object cdsCloneItemDIFERENCA_ICMS: TStringField
+      FieldName = 'DIFERENCA_ICMS'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemCAIXINHA: TStringField
+      FieldName = 'CAIXINHA'
+      Size = 30
+    end
+    object cdsCloneItemBASE_IPI: TFloatField
+      FieldName = 'BASE_IPI'
+    end
+    object cdsCloneItemATUALIZA_PRECO_CUSTO: TStringField
+      FieldName = 'ATUALIZA_PRECO_CUSTO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemFABRICA: TStringField
+      FieldName = 'FABRICA'
+      Size = 10
+    end
+    object cdsCloneItemENCOMENDA: TStringField
+      FieldName = 'ENCOMENDA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemAPROVADO_ITEM: TStringField
+      FieldName = 'APROVADO_ITEM'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemDRAWBACK: TStringField
+      FieldName = 'DRAWBACK'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsCloneItemID_PROCESSO: TIntegerField
+      FieldName = 'ID_PROCESSO'
+    end
+    object cdsCloneItemPRECO_COR: TFloatField
+      FieldName = 'PRECO_COR'
+    end
+    object cdsCloneItemCODCFOP: TStringField
+      FieldName = 'CODCFOP'
+      Size = 5
+    end
+    object cdsCloneItemCOD_CST: TStringField
+      FieldName = 'COD_CST'
+      Size = 3
+    end
+    object cdsCloneItemCOD_IPI: TStringField
+      FieldName = 'COD_IPI'
+      Size = 2
+    end
+    object cdsCloneItemNCM: TStringField
+      FieldName = 'NCM'
+      Size = 10
+    end
+    object cdsCloneItemNOME_COR_COMBINACAO: TStringField
+      FieldName = 'NOME_COR_COMBINACAO'
+      Size = 60
+    end
+    object cdsCloneItemVLR_DESCONTO_CALC: TFloatField
+      FieldName = 'VLR_DESCONTO_CALC'
+    end
+    object cdsCloneItemMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+    end
   end
 end

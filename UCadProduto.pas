@@ -814,6 +814,7 @@ type
     Label257: TLabel;
     DBEdit163: TDBEdit;
     Excel1: TMenuItem;
+    abeladePreo1: TMenuItem;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -1036,6 +1037,7 @@ type
     procedure DBEdit163KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Excel1Click(Sender: TObject);
+    procedure abeladePreo1Click(Sender: TObject);
   private
     { Private declarations }
     fDMCadProduto: TDMCadProduto;
@@ -1626,6 +1628,7 @@ var
 begin
   fDMCadProduto := TDMCadProduto.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMCadProduto);
+
   fDMCadProduto.qParametros_Ped.Open;
   //prc_le_Grid(SMDBGrid1, Name, fDMCadProduto.qParametros_GeralENDGRIDS.AsString);
 
@@ -1963,6 +1966,8 @@ begin
   TS_Corrugado.TabVisible := (fDMCadProduto.qParametros_ProdUSA_CORRUGADO.AsString = 'S');
 
   dbckbCalcular_ST.Visible := (fDMCadProduto.qParametros_ProdCONTROLAR_PROD_ST.AsString = 'S');
+
+  prc_le_Grid(SMDBGrid1, Name, fDMCadProduto.qParametros_GeralENDGRIDS.AsString);
 end;
 
 procedure TfrmCadProduto.prc_Consultar;
@@ -6503,6 +6508,25 @@ begin
 
   Planilha.ActiveWorkBook.SaveAs(vTexto);
   Screen.Cursor := crDefault;
+end;
+
+procedure TfrmCadProduto.abeladePreo1Click(Sender: TObject);
+var
+  vArq: String;
+  vId: Integer;
+begin
+  if fDMCadProduto.cdsProduto_Consulta.IsEmpty then
+    Exit;
+
+  vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Produto_TabPreco.fr3';
+  if FileExists(vArq) then
+    fDMCadProduto.frxReport1.Report.LoadFromFile(vArq)
+  else
+  begin
+    ShowMessage('Relatório não localizado! ' + vArq);
+    Exit;
+  end;
+  fDMCadProduto.frxReport1.ShowReport;
 end;
 
 end.

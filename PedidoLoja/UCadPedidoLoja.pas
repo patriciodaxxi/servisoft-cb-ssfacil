@@ -2035,12 +2035,31 @@ begin
 end;
 
 procedure TfrmCadPedidoLoja.Edit2Exit(Sender: TObject);
+var
+  vExiste : String;
 begin
   if trim(Edit2.Text) = '' then
   begin
     Edit3.Clear;
     exit;
   end;
+
+  //28/01/2020
+  if fDMCadPedido.qParametros_PedCONTROLA_ITEM_REPET.AsString = 'S' then
+  begin
+    vExiste := 'N';
+    if (fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString = 'S') and (fDMCadPedido.cdsPedido_Itens.Locate('REFERENCIA',Edit2.Text,[loCaseInsensitive])) then
+      vExiste := 'S'
+    else
+    if (fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString <> 'S') and (fDMCadPedido.cdsPedido_Itens.Locate('ID_PRODUTO',StrToInt(Edit2.Text),[loCaseInsensitive])) then
+      vExiste := 'S';
+    if (vExiste = 'S') and (MessageDlg('Produto já lançado no Item ' + fDMCadPedido.cdsPedido_ItensITEM.AsString + ', deseja continuar? ' ,mtConfirmation,[mbYes,mbNo],0) = mrNo) then
+    begin
+      Edit2.SetFocus;
+      Exit;
+    end;
+  end;
+  //****************
 
   Edit3.Clear;
   if trim(fDMCadPedido.qParametros_PedUSA_REF_DIG_PEDLOJA.AsString) = 'S' then
@@ -2050,6 +2069,7 @@ begin
     Edit2.Text := Trim(Edit2.Text);
     fDMCadPedido.prc_Abrir_ProdutoLoja(StrToInt(Edit2.Text),'','');
   end;
+  
   if fDMCadPedido.cdsProduto.IsEmpty then
   begin
     MessageDlg('*** Produto não encontrado!',mtError, [mbOk], 0);

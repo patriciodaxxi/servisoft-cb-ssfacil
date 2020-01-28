@@ -2260,6 +2260,14 @@ end;
 
 procedure TfrmCadPedido_Itens.Panel1Exit(Sender: TObject);
 begin
+  //28/01/2020
+  if (fDMCadPedido.qParametros_PedCONTROLA_ITEM_REPET.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger > 0) then
+  begin
+    fDMCadPedido.cdsCloneItem.CloneCursor(fDMCadPedido.cdsPedido_Itens, False, False)
+
+
+  end;
+  
   //Ambientes
   if fDMCadPedido.cdsParametrosEMPRESA_AMBIENTES.AsString = 'S' then
   begin
