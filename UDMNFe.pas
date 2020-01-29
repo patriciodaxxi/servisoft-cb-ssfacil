@@ -1231,6 +1231,7 @@ type
     qContasIMP_DIG_AGENCIA_DEP: TStringField;
     mItensNFeBase_Pis: TFloatField;
     mItensNFeBase_Cofins: TFloatField;
+    qParametros_NFeCONTROLAR_ENVIO_EMAIL: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mItensNFeBeforePost(DataSet: TDataSet);
     procedure mDadosAdicionaisNFeBeforePost(DataSet: TDataSet);

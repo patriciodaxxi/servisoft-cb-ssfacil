@@ -24,8 +24,8 @@ object frmCadConfig_Email: TfrmCadConfig_Email
   object RzPageControl1: TRzPageControl
     Left = 0
     Top = 0
-    Width = 885
-    Height = 502
+    Width = 893
+    Height = 510
     ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
@@ -42,8 +42,8 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object SMDBGrid1: TSMDBGrid
         Left = 0
         Top = 67
-        Width = 881
-        Height = 395
+        Width = 889
+        Height = 403
         Align = alClient
         Ctl3D = False
         DataSource = DMCadConfig_Email.dsConfig_Email
@@ -154,7 +154,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 881
+        Width = 889
         Height = 32
         Align = alTop
         Color = clSilver
@@ -382,8 +382,8 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       end
       object StaticText1: TStaticText
         Left = 0
-        Top = 462
-        Width = 881
+        Top = 470
+        Width = 889
         Height = 17
         Align = alBottom
         BorderStyle = sbsSunken
@@ -399,7 +399,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object pnlPesquisa: TPanel
         Left = 0
         Top = 32
-        Width = 881
+        Width = 889
         Height = 35
         Align = alTop
         Color = clSilver
@@ -500,7 +500,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 881
+        Width = 889
         Height = 35
         Align = alTop
         Color = 8404992
@@ -726,15 +726,15 @@ object frmCadConfig_Email: TfrmCadConfig_Email
       object pnlCadastro: TPanel
         Left = 0
         Top = 35
-        Width = 881
-        Height = 444
+        Width = 889
+        Height = 452
         Align = alClient
         Enabled = False
         TabOrder = 0
         object GroupBox1: TGroupBox
           Left = 1
           Top = 56
-          Width = 879
+          Width = 887
           Height = 73
           Align = alTop
           Caption = ' Identifica'#231#227'o do Remetente do e-mail:'
@@ -815,7 +815,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
         object GroupBox3: TGroupBox
           Left = 1
           Top = 129
-          Width = 879
+          Width = 887
           Height = 73
           Align = alTop
           Caption = ' SMTP'
@@ -991,7 +991,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
         object GroupBox7: TGroupBox
           Left = 1
           Top = 202
-          Width = 879
+          Width = 887
           Height = 36
           Align = alTop
           Caption = 'Op'#231#245'es da Mensagem '
@@ -1024,7 +1024,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
         object GroupBox2: TGroupBox
           Left = 1
           Top = 1
-          Width = 879
+          Width = 887
           Height = 55
           Align = alTop
           Caption = 'Identifica'#231#227'o da Configura'#231#227'o'
@@ -1108,7 +1108,7 @@ object frmCadConfig_Email: TfrmCadConfig_Email
         object gpbTesteEmail: TGroupBox
           Left = 1
           Top = 238
-          Width = 879
+          Width = 887
           Height = 73
           Align = alTop
           Caption = 'Teste Email'

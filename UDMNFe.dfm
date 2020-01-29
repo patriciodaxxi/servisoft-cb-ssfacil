@@ -5093,6 +5093,11 @@ object DMNFe: TDMNFe
       FixedChar = True
       Size = 1
     end
+    object qParametros_NFeCONTROLAR_ENVIO_EMAIL: TStringField
+      FieldName = 'CONTROLAR_ENVIO_EMAIL'
+      FixedChar = True
+      Size = 1
+    end
   end
   object Decoder64: TIdDecoderMIME
     FillChar = '='
