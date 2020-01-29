@@ -68,6 +68,7 @@ object frmConsPessoa_Produto: TfrmConsPessoa_Produto
       item
         Expanded = False
         FieldName = 'NOME_PESSOA'
+        Width = 381
         Visible = True
       end
       item
@@ -78,7 +79,7 @@ object frmConsPessoa_Produto: TfrmConsPessoa_Produto
       item
         Expanded = False
         FieldName = 'NOME_MARCA'
-        Width = 64
+        Width = 217
         Visible = True
       end>
   end
@@ -163,7 +164,7 @@ object frmConsPessoa_Produto: TfrmConsPessoa_Produto
       TabOrder = 1
     end
     object btnConsultar: TNxButton
-      Left = 353
+      Left = 354
       Top = 49
       Width = 177
       Height = 30

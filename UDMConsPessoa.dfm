@@ -916,8 +916,7 @@ object DMConsPessoa: TDMConsPessoa
       'CA, MAR.NOME NOME_MARCA'#13#10'from MOVIMENTO M'#13#10'inner join PESSOA P o' +
       'n M.ID_PESSOA = P.CODIGO'#13#10'inner join PRODUTO PRO on M.ID_PRODUTO' +
       ' = PRO.ID'#13#10'inner join MARCA MAR on PRO.ID_MARCA = MAR.ID'#13#10'where ' +
-      '(MAR.ID = :ID_MARCA or :ID_MARCA = 0) and'#13#10'      M.TIPO_REG = '#39'C' +
-      'FI'#39
+      '(MAR.ID = :ID_MARCA or :ID_MARCA = 0) and'#13#10'   m.tipo_es = '#39'S'#39#13#10
     MaxBlobSize = -1
     Params = <
       item

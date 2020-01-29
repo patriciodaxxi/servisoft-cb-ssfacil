@@ -24,7 +24,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
     Top = 0
     Width = 1090
     Height = 647
-    ActivePage = TS_Cadastro
+    ActivePage = TS_Consulta
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 15759360
@@ -36,7 +36,7 @@ object frmCadPessoaRed: TfrmCadPessoaRed
     Font.Style = []
     ParentBackgroundColor = False
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
