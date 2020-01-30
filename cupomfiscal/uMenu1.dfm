@@ -1,6 +1,6 @@
 object fMenu1: TfMenu1
-  Left = 93
-  Top = 20
+  Left = 216
+  Top = 4
   Width = 928
   Height = 630
   BorderIcons = []
@@ -12,18 +12,20 @@ object fMenu1: TfMenu1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsMDIChild
+  KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
   Visible = True
   OnActivate = FormActivate
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object lbDatabase: TLabel
     Left = 0
-    Top = 513
-    Width = 912
+    Top = 521
+    Width = 920
     Height = 14
     Align = alBottom
     Alignment = taRightJustify
@@ -41,8 +43,8 @@ object fMenu1: TfMenu1
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 912
-    Height = 513
+    Width = 920
+    Height = 521
     Align = alClient
     TabOrder = 0
     object Label2: TLabel
@@ -101,8 +103,8 @@ object fMenu1: TfMenu1
     end
     object PanelBkp: TPanel
       Left = 1
-      Top = 472
-      Width = 910
+      Top = 480
+      Width = 918
       Height = 40
       Align = alBottom
       Color = 8404992
@@ -111,7 +113,7 @@ object fMenu1: TfMenu1
       object LabelBkp: TJvBlinkingLabel
         Left = 1
         Top = 1
-        Width = 908
+        Width = 916
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -135,8 +137,8 @@ object fMenu1: TfMenu1
     end
     object Panel5: TPanel
       Left = 1
-      Top = 432
-      Width = 910
+      Top = 440
+      Width = 918
       Height = 40
       Align = alBottom
       Color = 33023
@@ -145,7 +147,7 @@ object fMenu1: TfMenu1
       object Label1: TLabel
         Left = 1
         Top = 1
-        Width = 908
+        Width = 916
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -164,8 +166,8 @@ object fMenu1: TfMenu1
     end
     object Panel6: TPanel
       Left = 1
-      Top = 392
-      Width = 910
+      Top = 400
+      Width = 918
       Height = 40
       Align = alBottom
       Color = 4079359
@@ -174,7 +176,7 @@ object fMenu1: TfMenu1
       object Label4: TLabel
         Left = 1
         Top = 1
-        Width = 908
+        Width = 916
         Height = 38
         Align = alClient
         Alignment = taCenter
@@ -193,15 +195,15 @@ object fMenu1: TfMenu1
     end
     object Panel1: TPanel
       Left = 1
-      Top = 209
-      Width = 910
+      Top = 217
+      Width = 918
       Height = 183
       Align = alBottom
       TabOrder = 3
       object Panel4: TPanel
         Left = 1
         Top = 1
-        Width = 908
+        Width = 916
         Height = 22
         Align = alTop
         Caption = 'Aniversariantes do Per'#237'odo'
@@ -214,7 +216,7 @@ object fMenu1: TfMenu1
         ParentFont = False
         TabOrder = 0
         DesignSize = (
-          908
+          916
           22)
         object DateEdit1: TDateEdit
           Left = 616
@@ -252,7 +254,7 @@ object fMenu1: TfMenu1
       object SMDBGrid1: TSMDBGrid
         Left = 1
         Top = 23
-        Width = 908
+        Width = 916
         Height = 159
         Align = alClient
         DataSource = dsAniversariante
@@ -317,13 +319,13 @@ object fMenu1: TfMenu1
   end
   object Panel7: TPanel
     Left = 0
-    Top = 527
-    Width = 912
+    Top = 535
+    Width = 920
     Height = 64
     Align = alBottom
     TabOrder = 1
     DesignSize = (
-      912
+      920
       64)
     object Image1: TImage
       Left = 775

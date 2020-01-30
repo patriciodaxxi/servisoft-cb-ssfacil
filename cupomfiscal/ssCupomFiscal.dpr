@@ -93,7 +93,9 @@ uses
   UConsProdutoNCM in '..\UConsProdutoNCM.pas' {frmConsProdutoNCM},
   UDMConsProduto in '..\UDMConsProduto.pas' {DMConsProduto: TDataModule},
   UAltCFOPProd in '..\UAltCFOPProd.pas' {frmAltCFOPProd},
-  uDmMySql in 'uDmMySql.pas' {DmMySql: TDataModule};
+  uDmMySql in 'uDmMySql.pas' {DmMySql: TDataModule},
+  UCadFechamento_Contagem2 in 'UCadFechamento_Contagem2.pas' {frmCadFechamento_Contagem2},
+  UCadFechamento2 in 'UCadFechamento2.pas' {frmCadFechamento2};
 
 {$R *.res}
 

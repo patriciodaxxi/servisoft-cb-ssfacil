@@ -45,6 +45,8 @@ type
     procedure DateEdit2KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure LabelBkpClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     procedure prc_Verifica_Certificado;
@@ -63,7 +65,8 @@ var
 
 implementation
 
-uses DmdDatabase, UMenu, DmdDatabase_NFeBD, uUtilPadrao;
+uses DmdDatabase, UMenu, DmdDatabase_NFeBD, uUtilPadrao,
+  UCadFechamento_Contagem2, UCadFechamento2;
 
 {$R *.dfm}
 
@@ -301,6 +304,28 @@ procedure TfMenu1.LabelBkpClick(Sender: TObject);
 begin
  prc_Verifica_Backup;
   prc_ShellExecute('ssBackUp_Solo.exe');
+end;
+
+procedure TfMenu1.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (Key = Vk_F7) then
+  begin
+    vConfirma_Fechamento := False;
+    frmCadFechamento_Contagem2 := TfrmCadFechamento_Contagem2.Create(self);
+    frmCadFechamento_Contagem2.vTipo_Valor      := 'I';
+    frmCadFechamento_Contagem2.ShowModal;
+    FreeAndNil(frmCadFechamento_Contagem2);
+
+    if vConfirma_Fechamento then
+    begin
+      frmCadFechamento2 := TfrmCadFechamento2.Create(self);
+      frmCadFechamento2.vID_Fechamento_Loc := vID_Fechamento_Pos;
+      frmCadFechamento2.ShowModal;
+      FreeAndNil(frmCadFechamento2);
+    end;
+
+  end;
 end;
 
 end.

@@ -1348,8 +1348,8 @@ object DMConsPedido: TDMConsPedido
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 40
-    Top = 448
+    Left = 39
+    Top = 447
   end
   object dspPedido_Fat: TDataSetProvider
     DataSet = sdsPedido_Fat
@@ -5264,7 +5264,7 @@ object DMConsPedido: TDMConsPedido
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 264
+    Left = 265
     Top = 560
   end
   object dspTipomat: TDataSetProvider

@@ -25,7 +25,7 @@ object fMenu: TfMenu
     Left = 0
     Top = 0
     Width = 89
-    Height = 558
+    Height = 566
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -385,7 +385,7 @@ object fMenu: TfMenu
   object ImageList1: TImageList
     Height = 32
     Width = 32
-    Left = 168
+    Left = 169
     Top = 8
     Bitmap = {
       494C01010B000E00040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
@@ -2750,7 +2750,7 @@ object fMenu: TfMenu
   end
   object UCDBXConn1: TUCDBXConn
     Connection = dmDatabase.scoDados
-    Left = 200
+    Left = 202
     Top = 8
   end
   object UCSettings1: TUCSettings
