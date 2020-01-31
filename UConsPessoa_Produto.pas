@@ -62,7 +62,7 @@ begin
   fDMConsPessoa := TDMConsPessoa.Create(Self);
   oDBUtils.SetDataSourceProperties(Self, fDMConsPessoa);
   DateEdit1.Date := Date;
-  DateEdit1.Date :=  EncodeDate(YearOf(Date),MonthOf(IncMonth(Date, -3)),01);
+//  DateEdit1.Date :=  EncodeDate(YearOf(Date),MonthOf(IncMonth(Date, -3)),01);
 end;
 
 procedure TfrmConsPessoa_Produto.SMDBGrid1TitleClick(Column: TColumn);

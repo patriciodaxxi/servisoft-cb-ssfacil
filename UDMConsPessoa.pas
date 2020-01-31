@@ -386,11 +386,11 @@ begin
   cdsConsPessoaProduto.Close;
   sdsConsPessoaProduto.CommandText := ctConsPessoaProduto;
   if DtInicial > 10 then
-    vComando :=  vComando + ' AND M.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtInicial));
+    vComando :=  vComando + ' AND EM.DTMOVIMENTO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtInicial));
   if DtFinal > 10 then
-    vComando :=  vComando + ' AND M.DTEMISSAO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtFinal));
+    vComando :=  vComando + ' AND EM.DTMOVIMENTO <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DtFinal));
   if ID_Produto > 0 then
-    vComando :=  vComando + ' AND M.ID_PRODUTO = ' + IntToStr(ID_Produto);
+    vComando :=  vComando + ' AND EM.ID_PRODUTO = ' + IntToStr(ID_Produto);
   sdsConsPessoaProduto.CommandText := ctConsPessoaProduto + vComando;
   sdsConsPessoaProduto.ParamByName('ID_MARCA').AsInteger := ID_Marca;
   cdsConsPessoaProduto.Open;

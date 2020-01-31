@@ -913,10 +913,12 @@ object DMConsPessoa: TDMConsPessoa
     GetMetadata = False
     CommandText = 
       'select distinct(P.CODIGO), P.NOME NOME_PESSOA, MAR.ID CODIGO_MAR' +
-      'CA, MAR.NOME NOME_MARCA'#13#10'from MOVIMENTO M'#13#10'inner join PESSOA P o' +
-      'n M.ID_PESSOA = P.CODIGO'#13#10'inner join PRODUTO PRO on M.ID_PRODUTO' +
-      ' = PRO.ID'#13#10'inner join MARCA MAR on PRO.ID_MARCA = MAR.ID'#13#10'where ' +
-      '(MAR.ID = :ID_MARCA or :ID_MARCA = 0) and'#13#10'   m.tipo_es = '#39'S'#39#13#10
+      'CA, MAR.NOME NOME_MARCA'#13#10'from ESTOQUE_MOV EM'#13#10'inner join PESSOA ' +
+      'P on EM.ID_PESSOA = P.CODIGO'#13#10'inner join PRODUTO PRO on EM.ID_PR' +
+      'ODUTO = PRO.ID'#13#10'inner join MARCA MAR on PRO.ID_MARCA = MAR.ID'#13#10'w' +
+      'here (MAR.ID = :ID_MARCA or :ID_MARCA = 0) and'#13#10'      (EM.TIPO_E' +
+      'S = '#39'S'#39') and'#13#10'      ((EM.TIPO_MOV = '#39'CFI'#39') or (EM.TIPO_MOV = '#39'DO' +
+      'C'#39'))'
     MaxBlobSize = -1
     Params = <
       item
