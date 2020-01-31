@@ -94,6 +94,7 @@ type
     procedure HabilitaMenu;
     function PosicionaCaixa(vData: TDateTime): Boolean;
     procedure prc_Fechar_Caixa(vTipo: String);
+
   public
     { Public declarations }
     procedure GetBuildInfo(exeName: String; var V1, V2, V3, V4: word);
@@ -106,7 +107,8 @@ var
 implementation
 
 uses DmdDatabase, uCupomFiscalC, uCupomParametros, LogProvider, uCadFechamento, AcbrEcf, uCupomTerminal, uUtilPadrao,
-     uRelCartao, UCadFechamento_Sangria, UCadFechamento_Contagem, DateUtils, uPrevVendas, uCarnePgto, uCupomDevolucao,
+     uRelCartao, UCadFechamento_Sangria, UCadFechamento_Contagem, DateUtils, uPrevVendas,
+     uCarnePgto, uCupomDevolucao,
   DmdDatabase_NFeBD, uCarnePgtoC;
 //  uImpFiscal_Bematech;
 //  UECF_DLLG32, DmdDatabase;

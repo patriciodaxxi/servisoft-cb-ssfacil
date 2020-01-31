@@ -5498,6 +5498,11 @@ var
   vTexto: String;
   vTexto2: String;
 begin
+  //29/01/2020
+  if (fDMNFe.qParametros_NFeCONTROLAR_ENVIO_EMAIL.AsString = 'S') and (MessageDlg('Enviar o Email ao Cliente?', mtConfirmation, [mbYes, mbNo], 0) <> mrYes) then
+    exit;
+  //**********************
+
   if Tipo <> 'C' then
   begin
     if (ckAnexarDanfe.Checked) then

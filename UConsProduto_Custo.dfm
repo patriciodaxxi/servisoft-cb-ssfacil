@@ -1,11 +1,9 @@
 object frmConsProduto_Custo: TfrmConsProduto_Custo
-  Left = 251
+  Left = 262
   Top = 136
-  BorderIcons = [biSystemMenu]
-  BorderStyle = bsSingle
+  Width = 920
+  Height = 472
   Caption = 'frmConsProduto_Custo'
-  ClientHeight = 441
-  ClientWidth = 912
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -70,6 +68,20 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
       Transparent = True
       OnClick = btnAjusteCustoClick
     end
+    object NxButton1: TNxButton
+      Left = 244
+      Top = 14
+      Width = 188
+      Caption = 'Atualiza Pre'#231'o Custo Produto'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnClick = NxButton1Click
+    end
   end
   object SMDBGrid1: TSMDBGrid
     Left = 0
@@ -79,7 +91,7 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
     Align = alClient
     Ctl3D = False
     DataSource = DMConsProduto.dsProduto_Custo
-    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
     ParentCtl3D = False
     ReadOnly = True
     TabOrder = 1
@@ -88,6 +100,7 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
+    OnTitleClick = SMDBGrid1TitleClick
     Flat = True
     BandsFont.Charset = DEFAULT_CHARSET
     BandsFont.Color = clWindowText
@@ -100,16 +113,23 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
     GridStyle.EvenColor = clWindow
     TitleHeight.PixelCount = 24
     FooterColor = clBtnFace
-    ExOptions = [eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
+    ExOptions = [eoCheckBoxSelect, eoENTERlikeTAB, eoKeepSelection, eoStandardPopup, eoBLOBEditor, eoTitleWordWrap, eoShowFilterBar]
     OnGetCellParams = SMDBGrid1GetCellParams
     RegistryKey = 'Software\Scalabium'
     RegistrySection = 'SMDBGrid'
-    WidthOfIndicator = 11
+    WidthOfIndicator = 27
     DefaultRowHeight = 17
     ScrollBars = ssHorizontal
     ColCount = 9
     RowCount = 2
     Columns = <
+      item
+        Expanded = False
+        FieldName = 'DESC_TIPO_REG'
+        Title.Alignment = taCenter
+        Title.Caption = 'Tipo'
+        Visible = True
+      end
       item
         Alignment = taCenter
         Expanded = False
@@ -131,14 +151,6 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
         Title.Alignment = taCenter
         Title.Caption = 'Nome'
         Width = 253
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'PRECO_CUSTO'
-        Title.Alignment = taCenter
-        Title.Caption = 'Pre'#231'o Custo'
-        Width = 80
         Visible = True
       end
       item

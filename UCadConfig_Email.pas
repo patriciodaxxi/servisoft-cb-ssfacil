@@ -349,10 +349,16 @@ begin
                                  , fDMCadConfig_Email.cdsConfig_EmailSMTP_SENHA.AsString );
   lista_Anexo := TStringList.Create;
   try
-    EnviarEmail2(vLocalServidorNFe,vCNPJ_Filial,fDMCadConfig_Email.cdsConfig_EmailREMETENTE_EMAIL.AsString,
-                 fDMCadConfig_Email.cdsConfig_EmailREMETENTE_NOME.AsString,fDMCadConfig_Email.cdsConfig_EmailSMTP_CLIENTE.AsString,
-                 fDMCadConfig_Email.cdsConfig_EmailSMTP_PORTA.AsString,fDMCadConfig_Email.cdsConfig_EmailSMTP_REQUER_SSL.AsString,
-                 fDMCadConfig_Email.cdsConfig_EmailSMTP_USUARIO.AsString,vSenhaEmail,fDMCadConfig_Email.cdsConfig_EmailSOLICITAR_CONFIRMACAO.AsString,
+    EnviarEmail2(vLocalServidorNFe,
+                 vCNPJ_Filial,
+                 fDMCadConfig_Email.cdsConfig_EmailREMETENTE_EMAIL.AsString,
+                 fDMCadConfig_Email.cdsConfig_EmailREMETENTE_NOME.AsString,
+                 fDMCadConfig_Email.cdsConfig_EmailSMTP_CLIENTE.AsString,
+                 fDMCadConfig_Email.cdsConfig_EmailSMTP_PORTA.AsString,
+                 fDMCadConfig_Email.cdsConfig_EmailSMTP_REQUER_SSL.AsString,
+                 fDMCadConfig_Email.cdsConfig_EmailSMTP_USUARIO.AsString,
+                 vSenhaEmail,
+                 fDMCadConfig_Email.cdsConfig_EmailSOLICITAR_CONFIRMACAO.AsString,
                  vEmailPrincipal,vEmailAux,
                  'Email Teste: ' + fDMCadConfig_Email.cdsConfig_EmailREMETENTE_NOME.AsString,
                  vDadosCorpoEmail,lista_Anexo);

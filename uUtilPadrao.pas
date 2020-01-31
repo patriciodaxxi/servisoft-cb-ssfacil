@@ -209,7 +209,8 @@ var
   vPrimeira_Data: TDate;
   vDocumentoClienteVenda : String; //Cupom - SSNFCe
   vCpfOK : Boolean; //Cupom - SSNFCe
-  vCod_CBenef : String;  
+  vCod_CBenef : String;
+  vConfirma_Fechamento: Boolean;
 
 implementation
 

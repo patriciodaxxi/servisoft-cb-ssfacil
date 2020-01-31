@@ -46,7 +46,7 @@ object DMConsProduto: TDMConsProduto
     Params = <>
     ProviderName = 'dspConsulta_Prod'
     Left = 168
-    Top = 32
+    Top = 33
     object cdsConsulta_ProdID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
     end
@@ -183,16 +183,18 @@ object DMConsProduto: TDMConsProduto
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT P.id, p.referencia, p.preco_custo, p.preco_custo_total, p' +
-      '.preco_venda, p.nome,'#13#10' (SELECT sum(coalesce(MAT.preco_custo_tot' +
-      'al,0) * coalesce(pc.qtd_consumo,0)) Preco_Custo_Calc'#13#10'    FROM P' +
-      'RODUTO_CONSUMO PC'#13#10'    INNER JOIN PRODUTO MAT'#13#10'    ON PC.ID_MATE' +
-      'RIAL = MAT.ID'#13#10'    where PC.ID = P.ID) PRECO_CUSTO_CALC,'#13#10#13#10' (SE' +
-      'LECT count(1)  CONTADOR'#13#10'    FROM PRODUTO_CONSUMO PC'#13#10'    INNER ' +
-      'JOIN PRODUTO MAT'#13#10'    ON PC.ID_MATERIAL = MAT.ID'#13#10'    where PC.I' +
-      'D = P.ID'#13#10'      AND ((MAT.preco_custo_total IS NULL) or (MAT.pre' +
-      'co_custo_total <= 0))'#13#10'       ) CONTADOR'#13#10#13#10'FROM PRODUTO P'#13#10'WHER' +
-      'E P.TIPO_REG = '#39'P'#39#13#10#13#10
+      'select P.ID, P.REFERENCIA, P.PRECO_CUSTO, P.PRECO_CUSTO_TOTAL, P' +
+      '.PRECO_VENDA, P.NOME,'#13#10'       (select sum(coalesce(MAT.PRECO_CUS' +
+      'TO_TOTAL, 0) * coalesce(PC.QTD_CONSUMO, 0)) PRECO_CUSTO_CALC'#13#10'  ' +
+      '      from PRODUTO_CONSUMO PC'#13#10'        inner join PRODUTO MAT on' +
+      ' PC.ID_MATERIAL = MAT.ID'#13#10'        where PC.ID = P.ID) PRECO_CUST' +
+      'O_CALC,'#13#10'       (select count(1) CONTADOR'#13#10'        from PRODUTO_' +
+      'CONSUMO PC'#13#10'        inner join PRODUTO MAT on PC.ID_MATERIAL = M' +
+      'AT.ID'#13#10'        where PC.ID = P.ID and'#13#10'              ((MAT.PRECO' +
+      '_CUSTO_TOTAL is null) or (MAT.PRECO_CUSTO_TOTAL <= 0))) CONTADOR' +
+      ','#13#10'case'#13#10'  when p.tipo_reg = '#39'P'#39' then '#39'Produto'#39#13#10'  when p.tipo_r' +
+      'eg = '#39'S'#39' then '#39'Semi Acabado'#39#13#10'  end DESC_TIPO_REG'#13#10'from PRODUTO ' +
+      'P'#13#10'where (P.TIPO_REG = '#39'P'#39' or P.TIPO_REG = '#39'S'#39')'#13#10#13#10#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -208,7 +210,7 @@ object DMConsProduto: TDMConsProduto
     Aggregates = <>
     Params = <>
     ProviderName = 'dspProduto_Custo'
-    Left = 168
+    Left = 167
     Top = 88
     object cdsProduto_CustoID: TIntegerField
       FieldName = 'ID'
@@ -235,9 +237,15 @@ object DMConsProduto: TDMConsProduto
     end
     object cdsProduto_CustoPRECO_CUSTO_CALC: TFloatField
       FieldName = 'PRECO_CUSTO_CALC'
+      DisplayFormat = '###,###,##0.00##'
     end
     object cdsProduto_CustoCONTADOR: TIntegerField
       FieldName = 'CONTADOR'
+    end
+    object cdsProduto_CustoDESC_TIPO_REG: TStringField
+      FieldName = 'DESC_TIPO_REG'
+      FixedChar = True
+      Size = 12
     end
   end
   object dsProduto_Custo: TDataSource
@@ -271,7 +279,7 @@ object DMConsProduto: TDMConsProduto
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 263
-    Top = 276
+    Top = 277
   end
   object dspProdNCM: TDataSetProvider
     DataSet = sdsProdNCM
@@ -368,9 +376,9 @@ object DMConsProduto: TDMConsProduto
     NoMetadata = True
     GetMetadata = False
     CommandText = 
-      'SELECT P.ID, P.NOME, P.id_cfop_nfce, P.id_csticms, P.id_csticms_' +
-      'bred,'#13#10'P.perc_icms_nfce, P.perc_reducaoicms'#13#10'FROM PRODUTO P'#13#10'WHE' +
-      'RE P.ID = :ID'
+      'select P.ID, P.NOME, P.ID_CFOP_NFCE, P.ID_CSTICMS, P.ID_CSTICMS_' +
+      'BRED, P.PRECO_CUSTO,'#13#10'       P.PRECO_CUSTO_TOTAL, P.PERC_ICMS_NF' +
+      'CE, P.PERC_REDUCAOICMS'#13#10'from PRODUTO P'#13#10'where P.ID = :ID   '
     MaxBlobSize = -1
     Params = <
       item
@@ -380,7 +388,7 @@ object DMConsProduto: TDMConsProduto
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 50
-    Top = 184
+    Top = 185
     object sdsProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -404,6 +412,12 @@ object DMConsProduto: TDMConsProduto
     object sdsProdutoPERC_REDUCAOICMS: TFloatField
       FieldName = 'PERC_REDUCAOICMS'
     end
+    object sdsProdutoPRECO_CUSTO: TFloatField
+      FieldName = 'PRECO_CUSTO'
+    end
+    object sdsProdutoPRECO_CUSTO_TOTAL: TFloatField
+      FieldName = 'PRECO_CUSTO_TOTAL'
+    end
   end
   object dspProduto: TDataSetProvider
     DataSet = sdsProduto
@@ -415,8 +429,8 @@ object DMConsProduto: TDMConsProduto
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspProduto'
-    Left = 162
-    Top = 184
+    Left = 159
+    Top = 185
     object cdsProdutoID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -439,6 +453,12 @@ object DMConsProduto: TDMConsProduto
     end
     object cdsProdutoPERC_REDUCAOICMS: TFloatField
       FieldName = 'PERC_REDUCAOICMS'
+    end
+    object cdsProdutoPRECO_CUSTO: TFloatField
+      FieldName = 'PRECO_CUSTO'
+    end
+    object cdsProdutoPRECO_CUSTO_TOTAL: TFloatField
+      FieldName = 'PRECO_CUSTO_TOTAL'
     end
   end
   object dsProduto: TDataSource

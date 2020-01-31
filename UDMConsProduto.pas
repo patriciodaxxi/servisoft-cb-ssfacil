@@ -113,6 +113,11 @@ type
     cdsCSTICMSPERCENTUAL: TFloatField;
     cdsCSTICMSTIPO_ICMS: TStringField;
     dsCSTICMS: TDataSource;
+    cdsProduto_CustoDESC_TIPO_REG: TStringField;
+    sdsProdutoPRECO_CUSTO: TFloatField;
+    sdsProdutoPRECO_CUSTO_TOTAL: TFloatField;
+    cdsProdutoPRECO_CUSTO: TFloatField;
+    cdsProdutoPRECO_CUSTO_TOTAL: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
