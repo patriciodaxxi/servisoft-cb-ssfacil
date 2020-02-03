@@ -996,7 +996,7 @@ begin
 
   if fDMCadPedido.cdsFilialSIMPLES.AsString = 'N' then
     exit;
-  if fDMCadPedido.cdsCFOPGERAR_ICMS_SIMPLES.AsString = 'N' then
+  if (fDMCadPedido.cdsCFOPGERAR_ICMS_SIMPLES.AsString = 'N') and (fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger > 0) then
     exit;
 
   if StrToFloat(FormatFloat('0.00',fDMCadPedido.cdsPedidoPERC_ICMSSIMPLES.AsFloat)) <= 0 then
@@ -1595,7 +1595,7 @@ begin
     if (fDMCadPedido.cdsClienteTIPO_CONSUMIDOR.AsInteger <> 1) then
       exit;
   end;
-  if fdmcadPedido.cdsCFOPGERAR_ICMS.AsString <> 'S' then
+  if (fdmcadPedido.cdsCFOPGERAR_ICMS.AsString <> 'S') and (fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger > 0) then
     exit;
   if fdmcadPedido.cdsClienteTIPO_CONTRIBUINTE.AsInteger <> 9 then
     exit;
