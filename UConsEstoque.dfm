@@ -517,6 +517,7 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'PRECO_VENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Venda'
+        Width = 64
         Visible = True
       end
       item
@@ -524,6 +525,7 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'LOCALIZACAO'
         Title.Alignment = taCenter
         Title.Caption = 'Localiza'#231#227'o'
+        Width = 64
         Visible = True
       end
       item

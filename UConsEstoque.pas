@@ -73,7 +73,7 @@ type
     fDMConsEstoque: TDMConsEstoque;
     ColunaOrdenada: String;
     ffrmConsProduto_Pes: TfrmConsProduto_Pes;
-    ffrmConsEstoque_Mov : TfrmConsEstoque_Mov;
+    ffrmConsEstoque_Mov: TfrmConsEstoque_Mov;
 
     procedure prc_Grava_Marca;
     procedure prc_Consultar;
@@ -88,15 +88,14 @@ var
 
 implementation
 
-uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, URelInventario, USel_Grupo, USel_Produto,
-  uConsProduto_Compras;
+uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, URelInventario, USel_Grupo, USel_Produto, uConsProduto_Compras;
 
 {$R *.dfm}
 
 procedure TfrmConsEstoque.prc_Consultar;
 var
   vQtdAux: Integer;
-  Form : TForm;
+  Form: TForm;
 begin
   Form := TForm.Create(Application);
   uUtilPadrao.prc_Form_Aguarde(Form);
@@ -203,7 +202,7 @@ var
   i: Integer;
 begin
   ColunaOrdenada := Column.FieldName;
-  fDMConsEstoque.cdsEstoque.IndexFieldNames := Column.FieldName;
+  fDMConsEstoque.cdsEstoque.IndexFieldNames := Column.FieldName + ';TAMPRODUTO';
   //Column.Title.Color := clBtnShadow;
   //for i := 0 to SMDBGrid1.Columns.Count - 1 do
   //  if not (SMDBGrid1.Columns.Items[I] = Column) then
@@ -236,8 +235,8 @@ begin
     if (SMDBGrid1.Columns[i].FieldName = 'TAMPRODUTO') then
       SMDBGrid1.Columns[i].Visible := (fDMConsEstoque.qParametrosUSA_GRADE.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'NOME_COR') then
-      SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametrosINFORMAR_COR_MATERIAL.AsString = 'S') or (fDMConsEstoque.qParametrosINFORMAR_COR_PROD.AsString = 'C'));
-
+      SMDBGrid1.Columns[i].Visible := ((fDMConsEstoque.qParametrosINFORMAR_COR_MATERIAL.AsString = 'S') or
+      (fDMConsEstoque.qParametrosINFORMAR_COR_PROD.AsString = 'C'));              
   end;
 end;
 
@@ -491,13 +490,12 @@ begin
     end;
   finally
     SMDBGrid1.EnableScroll;
-  end;
-
+  end;        
 end;
 
 procedure TfrmConsEstoque.Marca1Click(Sender: TObject);
 var
-  vArq : String;
+  vArq: String;
 begin
   fDMConsEstoque.mProduto_Marca.EmptyDataSet;
   SMDBGrid1.DisableScroll;
@@ -521,7 +519,7 @@ procedure TfrmConsEstoque.prc_Grava_Marca;
 begin
   while not fDMConsEstoque.cdsEstoque.Eof do
   begin
-    if  fDMConsEstoque.mProduto_Marca.Locate('ID;ID_Marca',VarArrayOf([fDMConsEstoque.cdsEstoqueID.AsInteger,fDMConsEstoque.cdsEstoqueID_MARCA.AsInteger]),[locaseinsensitive]) then
+    if fDMConsEstoque.mProduto_Marca.Locate('ID;ID_Marca',VarArrayOf([fDMConsEstoque.cdsEstoqueID.AsInteger,fDMConsEstoque.cdsEstoqueID_MARCA.AsInteger]),[locaseinsensitive]) then
       fDMConsEstoque.mProduto_Marca.Edit
     else
     begin
@@ -546,7 +544,7 @@ end;
 
 procedure TfrmConsEstoque.Produtos1Click(Sender: TObject);
 var
-  vArq : String;
+  vArq: String;
 begin
   fDMConsEstoque.mProduto_Marca.EmptyDataSet;
   prc_Grava_Marca;
@@ -561,8 +559,7 @@ begin
     ShowMessage('Relatório não localizado: ' + vArq);
     Exit;
   end;
-  fDMConsEstoque.frxReport1.ShowReport;
-
+  fDMConsEstoque.frxReport1.ShowReport;          
 end;
 
 end.

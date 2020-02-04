@@ -3,7 +3,6 @@ object fRelEstoque: TfRelEstoque
   Top = 42
   Width = 1224
   Height = 657
-  HorzScrollBar.Position = 780
   Caption = 'fRelEstoque'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +17,7 @@ object fRelEstoque: TfRelEstoque
   PixelsPerInch = 96
   TextHeight = 13
   object RLReport1: TRLReport
-    Left = -732
+    Left = 48
     Top = 24
     Width = 794
     Height = 1123
@@ -185,21 +184,21 @@ object fRelEstoque: TfRelEstoque
         Caption = 'Nas Empresas'
       end
       object RLLabel6: TRLLabel
-        Left = 1
+        Left = 41
         Top = 53
         Width = 56
         Height = 14
         Caption = 'Refer'#234'ncia'
       end
       object RLLabel7: TRLLabel
-        Left = 118
+        Left = 159
         Top = 53
         Width = 70
         Height = 14
         Caption = 'Nome Produto'
       end
       object RLLabel8: TRLLabel
-        Left = 605
+        Left = 629
         Top = 53
         Width = 30
         Height = 14
@@ -214,11 +213,18 @@ object fRelEstoque: TfRelEstoque
         DrawKind = dkLine
       end
       object RLLabel28: TRLLabel
-        Left = 491
+        Left = 517
         Top = 52
         Width = 47
         Height = 14
         Caption = 'Tamanho'
+      end
+      object RLLabel29: TRLLabel
+        Left = 2
+        Top = 53
+        Width = 12
+        Height = 14
+        Caption = 'ID'
       end
     end
     object RLSubDetail1: TRLSubDetail
@@ -234,7 +240,7 @@ object fRelEstoque: TfRelEstoque
         Height = 13
         BeforePrint = RLBand2BeforePrint
         object RLDBText1: TRLDBText
-          Left = 1
+          Left = 41
           Top = 0
           Width = 115
           Height = 11
@@ -249,7 +255,7 @@ object fRelEstoque: TfRelEstoque
           ParentFont = False
         end
         object RLDBText3: TRLDBText
-          Left = 551
+          Left = 575
           Top = 0
           Width = 85
           Height = 11
@@ -290,9 +296,9 @@ object fRelEstoque: TfRelEstoque
           Pen.Style = psDot
         end
         object RLDBText11: TRLDBText
-          Left = 479
+          Left = 514
           Top = 0
-          Width = 68
+          Width = 57
           Height = 11
           Alignment = taCenter
           AutoSize = False
@@ -306,7 +312,7 @@ object fRelEstoque: TfRelEstoque
           ParentFont = False
         end
         object RLMemo1: TRLMemo
-          Left = 120
+          Left = 159
           Top = 0
           Width = 353
           Height = 11
@@ -318,11 +324,26 @@ object fRelEstoque: TfRelEstoque
           Font.Style = []
           ParentFont = False
         end
+        object RLDBText12: TRLDBText
+          Left = 0
+          Top = 0
+          Width = 37
+          Height = 11
+          AutoSize = False
+          DataField = 'ID'
+          DataSource = DMConsEstoque.dsEstoque
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -8
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+        end
       end
     end
   end
   object RLReport2: TRLReport
-    Left = 68
+    Left = 848
     Top = 19
     Width = 1123
     Height = 794
