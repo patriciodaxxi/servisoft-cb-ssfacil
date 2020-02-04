@@ -899,7 +899,7 @@ object DMCadNotaServico: TDMCadNotaServico
       'ETENCAO, PERC_REDUCAO_INSS, ID_SERVICO, ID_SERVICO_INT, VLR_SERV' +
       'ICO, CLIENTE_CONTA_ID, EMAIL_NFE, EMAIL_NFE2, EMAIL_PGTO, COBRAR' +
       '_TAXA_BANCO, VLR_LIMITE_CREDITO, MDIA1, MDIA2'#13#10'FROM PESSOA'#13#10'WHER' +
-      'E INATIVO = '#39'N'#39#13#10'AND TP_CLIENTE = '#39'S'#39
+      'E INATIVO = '#39'N'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

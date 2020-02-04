@@ -5,9 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons, Grids, SMDBGrid, UDMCadNotaServico,
   DB, DBGrids, ExtCtrls, StdCtrls, FMTBcd, SqlExpr, RzTabs, Mask, DBCtrls, ToolEdit, CurrEdit, RxLookup, RxDBComb, Menus,
-  RXDBCtrl, RzEdit, RzDBEdit, RzButton, UCBase, RzPanel, dbXPress, NxCollection, NxEdit,StrUtils, DateUtils,
-  ComCtrls, ValorPor, RzDBDTP, RzDTP, UConsFat_Mensal, RzRadChk, UDMMovimento, UCadNotaServico_Obs, RzDBChk, USel_OS_Servico,
-  Variants;
+  RXDBCtrl, RzEdit, RzDBEdit, RzButton, UCBase, RzPanel, dbXPress, NxCollection, NxEdit,StrUtils, DateUtils, Variants,
+  ComCtrls, ValorPor, RzDBDTP, RzDTP, UConsFat_Mensal, RzRadChk, UDMMovimento, UCadNotaServico_Obs, RzDBChk, USel_OS_Servico;
 
 type
   TfrmCadDocEntrada = class(TForm)
@@ -158,7 +157,7 @@ type
     procedure DBEdit10Exit(Sender: TObject);
   private
     { Private declarations }
-    vFilial_Sel : Integer;
+    vFilial_Sel: Integer;
 
     fDMCadNotaServico: TDMCadNotaServico;
     fDMMovimento: TDMMovimento;
@@ -188,8 +187,7 @@ var
 
 implementation
 
-uses DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, USel_Pessoa, uNFeComandos, Math,
-  USel_ContaOrc, uUtilCobranca;
+uses DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, USel_Pessoa, uNFeComandos, Math, USel_ContaOrc, uUtilCobranca;
 
 {$R *.dfm}
 
@@ -208,7 +206,8 @@ begin
   if fDMCadNotaServico.cdsNotaServico.IsEmpty then
     exit;
 
-  if ((fDMCadNotaServico.cdsNotaServicoHOMOLOGACAO.AsString <> 'S') and (trim(fDMCadNotaServico.cdsNotaServicoSERIE.AsString) <> '8')) and (fDMCadNotaServico.cdsParametrosIMPRESSAO_MATRICIAL.AsString <> 'S') then
+  if ((fDMCadNotaServico.cdsNotaServicoHOMOLOGACAO.AsString <> 'S') and (trim(fDMCadNotaServico.cdsNotaServicoSERIE.AsString) <> '8')) and
+     (fDMCadNotaServico.cdsParametrosIMPRESSAO_MATRICIAL.AsString <> 'S') then
   begin
     if fDMCadNotaServico.cdsNotaServicoNUMLOTE.AsInteger > 0 then
     begin
@@ -259,7 +258,7 @@ var
   vID_Mov: Integer;
   ID: TTransactionDesc;
   sds: TSQLDataSet;
-  vTipo_Doc : String;
+  vTipo_Doc: String;
 begin
   vIDAux := fDMCadNotaServico.cdsNotaServicoID.AsInteger;
   if fDMCadNotaServico.cdsNotaServico.State in [dsEdit,dsInsert] then
