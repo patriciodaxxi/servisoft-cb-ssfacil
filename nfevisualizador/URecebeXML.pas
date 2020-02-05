@@ -1541,7 +1541,15 @@ begin
           fDMRecebeXML.mItensNotaID_Grupo.Clear;
         if fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger > 0 then
           fDMRecebeXML.mItensNotaID_ContaOrcamento.AsInteger := fDMRecebeXML.cdsProdutoID_CONTA_ORCAMENTO.AsInteger;
-        fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
+        //05/02/2020
+        if (fDMRecebeXML.cdsCFOPCODCFOP.AsString <> fDMRecebeXML.mItensNotaCFOP.AsString) then
+          fDMRecebeXML.cdsCFOP.Locate('CODCFOP',fDMRecebeXML.mItensNotaCFOP.AsString, ([LocaseInsensitive]));
+        if (trim(fDMRecebeXML.mItensNotaCFOP.AsString) <> '') then
+          fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString
+        else
+          fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := fDMRecebeXML.cdsProdutoESTOQUE.AsString;
+        if trim(fDMRecebeXML.mItensNotaGerar_Estoque.AsString) <> 'S' then
+          fDMRecebeXML.mItensNotaGerar_Estoque.AsString  := 'N';
         fDMRecebeXML.mItensNotaPosse_Material.AsString := fDMRecebeXML.cdsProdutoPOSSE_MATERIAL.AsString;
         fDMRecebeXML.mItensNotaSped_Tipo.AsString      := fDMRecebeXML.cdsProdutoSPED_TIPO_ITEM.AsString;
 
@@ -2567,7 +2575,7 @@ begin
     if vImportar_NotaSaida then
       fDMRecebeXML.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N'
     else
-      fDMRecebeXML.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fDMRecebeXML.cdsCFOPGERAR_ESTOQUE.AsString;
+      fDMRecebeXML.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := fDMRecebeXML.mItensNotaGerar_Estoque.AsString;
     if fDMRecebeXML.mItensNotaGerar_Estoque.AsString <> 'S' then
       fDMRecebeXML.cdsNotaFiscal_ItensGERAR_ESTOQUE.AsString := 'N';
     fDMRecebeXML.cdsNotaFiscal_ItensTAMANHO.AsString      := fDMRecebeXML.mItensNotaTamanho.AsString;

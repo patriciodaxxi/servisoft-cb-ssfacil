@@ -5,25 +5,27 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, UDMConsProduto, ExtCtrls, NxCollection, Grids, DBGrids, SMDBGrid,
-  StdCtrls, DB;
+  StdCtrls, DB, UCBase;
 
 type
   TfrmConsProduto_Custo = class(TForm)
     Panel1: TPanel;
-    btnAjusteCusto: TNxButton;
+    btnConsulta: TNxButton;
     SMDBGrid1: TSMDBGrid;
     Shape1: TShape;
     Shape2: TShape;
     Label1: TLabel;
     Label2: TLabel;
-    NxButton1: TNxButton;
+    btnAtualiza: TNxButton;
+    UCControls1: TUCControls;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
-    procedure btnAjusteCustoClick(Sender: TObject);
+    procedure btnConsultaClick(Sender: TObject);
     procedure SMDBGrid1GetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
-    procedure NxButton1Click(Sender: TObject);
+    procedure btnAtualizaClick(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
+    procedure SMDBGrid1DblClick(Sender: TObject);
   private
     { Private declarations }
     fDMConsProduto: TDMConsProduto;
@@ -39,7 +41,7 @@ var
 
 implementation
 
-uses rsDBUtils;
+uses rsDBUtils, UMenu, UAtualizaPreco_Mat;
 
 {$R *.dfm}
 
@@ -55,7 +57,7 @@ begin
   oDBUtils.SetDataSourceProperties(Self, fDMConsProduto);
 end;
 
-procedure TfrmConsProduto_Custo.btnAjusteCustoClick(Sender: TObject);
+procedure TfrmConsProduto_Custo.btnConsultaClick(Sender: TObject);
 begin
   prc_Consultar;
 end;
@@ -71,7 +73,7 @@ end;
 procedure TfrmConsProduto_Custo.SMDBGrid1GetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
-  if StrToFloat(FormatFloat('0.000000',fDMConsProduto.cdsProduto_CustoPRECO_CUSTO_TOTAL.AsFloat)) <> StrToFloat(FormatFloat('0.000000',fDMConsProduto.cdsProduto_CustoPRECO_CUSTO_CALC.AsFloat)) then
+  if StrToFloat(FormatFloat('0.0000',fDMConsProduto.cdsProduto_CustoPRECO_CUSTO_TOTAL.AsFloat)) <> StrToFloat(FormatFloat('0.0000',fDMConsProduto.cdsProduto_CustoPRECO_CUSTO_CALC.AsFloat)) then
   begin
     Background  := clYellow;
     AFont.Color := clBlack;
@@ -84,7 +86,7 @@ begin
   end;
 end;
 
-procedure TfrmConsProduto_Custo.NxButton1Click(Sender: TObject);
+procedure TfrmConsProduto_Custo.btnAtualizaClick(Sender: TObject);
 var
   vContador : Integer;
 begin
@@ -115,14 +117,23 @@ begin
       fDMConsProduto.cdsProduto_Custo.Next;
     end;
   finally
-    SMDBGrid1.DisableScroll;
+    SMDBGrid1.EnableScroll;
     MessageDlg('*** Foi atualizado  ' + IntToStr(vContador) + '  Produto(s)!' , mtConfirmation, [mbOk], 0);
   end;
+  btnConsultaClick(Sender);
 end;
 
 procedure TfrmConsProduto_Custo.SMDBGrid1TitleClick(Column: TColumn);
 begin
   fDMConsProduto.cdsProduto_Custo.IndexFieldNames := Column.FieldName;
+end;
+
+procedure TfrmConsProduto_Custo.SMDBGrid1DblClick(Sender: TObject);
+begin
+  frmAtualizaPreco_Mat := TfrmAtualizaPreco_Mat.Create(Self);
+  frmAtualizaPreco_Mat.vID_Produto_Local := fDMConsProduto.cdsProduto_CustoID.AsInteger;
+  frmAtualizaPreco_Mat.ShowModal;
+  FreeAndNil(frmAtualizaPreco_Mat);
 end;
 
 end.

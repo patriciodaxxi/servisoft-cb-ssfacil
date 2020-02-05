@@ -51,7 +51,7 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
       Height = 13
       Caption = 'Material no Consumo com pre'#231'o zerado'
     end
-    object btnAjusteCusto: TNxButton
+    object btnConsulta: TNxButton
       Left = 7
       Top = 7
       Width = 144
@@ -66,11 +66,11 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
       ParentFont = False
       TabOrder = 0
       Transparent = True
-      OnClick = btnAjusteCustoClick
+      OnClick = btnConsultaClick
     end
-    object NxButton1: TNxButton
+    object btnAtualiza: TNxButton
       Left = 244
-      Top = 14
+      Top = 15
       Width = 188
       Caption = 'Atualiza Pre'#231'o Custo Produto'
       Font.Charset = DEFAULT_CHARSET
@@ -80,7 +80,7 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
-      OnClick = NxButton1Click
+      OnClick = btnAtualizaClick
     end
   end
   object SMDBGrid1: TSMDBGrid
@@ -100,6 +100,7 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
+    OnDblClick = SMDBGrid1DblClick
     OnTitleClick = SMDBGrid1TitleClick
     Flat = True
     BandsFont.Charset = DEFAULT_CHARSET
@@ -143,6 +144,7 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
         FieldName = 'REFERENCIA'
         Title.Alignment = taCenter
         Title.Caption = 'Refer'#234'ncia'
+        Width = 64
         Visible = True
       end
       item
@@ -186,5 +188,12 @@ object frmConsProduto_Custo: TfrmConsProduto_Custo
         Width = 78
         Visible = True
       end>
+  end
+  object UCControls1: TUCControls
+    GroupName = 'Custo do Produto (Mat'#233'ria Prima)'
+    UserControl = fMenu.UserControl1
+    NotAllowed = naInvisible
+    Left = 468
+    Top = 125
   end
 end

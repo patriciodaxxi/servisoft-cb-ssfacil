@@ -4389,6 +4389,12 @@ object fMenu: TfMenu
         CompName = 'Label104'
         Caption = 'N'#227'o mostrar Pre'#231'o Revenda'
         GroupName = 'Produtos'
+      end
+      item
+        FormName = 'frmConsProduto_Custo'
+        CompName = 'btnAtualiza'
+        Caption = 'Atualiza Pre'#231'o Custo Produto'
+        GroupName = 'Custo do Produto (Mat'#233'ria Prima)'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True

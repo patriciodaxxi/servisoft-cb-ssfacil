@@ -833,7 +833,8 @@ uses
   UConsChave in 'UConsChave.pas' {frmConsChave},
   UConsPessoa_Produto in 'UConsPessoa_Produto.pas' {frmConsPessoa_Produto},
   UConsNCM_CFOP in 'UConsNCM_CFOP.pas' {frmConsNCM_CFOP},
-  UDMConsNCM_CFOP in 'UDMConsNCM_CFOP.pas' {DMConsNCM_CFOP: TDataModule};
+  UDMConsNCM_CFOP in 'UDMConsNCM_CFOP.pas' {DMConsNCM_CFOP: TDataModule},
+  UAtualizaPreco_Mat in 'UAtualizaPreco_Mat.pas' {frmAtualizaPreco_Mat};
 
 {$R *.res}
 
