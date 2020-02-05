@@ -1,6 +1,6 @@
 object frmCadOrcamento_Itens: TfrmCadOrcamento_Itens
-  Left = 294
-  Top = 53
+  Left = 52
+  Top = 42
   Width = 755
   Height = 647
   Caption = 'Cadastro dos Itens dos Or'#231'amentos'

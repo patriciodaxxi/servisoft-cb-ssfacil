@@ -1,6 +1,6 @@
 object frmCadPedido_Itens: TfrmCadPedido_Itens
-  Left = 354
-  Top = 12
+  Left = 556
+  Top = 28
   Width = 781
   Height = 696
   BorderIcons = [biSystemMenu]
@@ -22,7 +22,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object Panel1: TPanel
     Left = 0
     Top = 23
-    Width = 773
+    Width = 765
     Height = 110
     Align = alTop
     Color = clMoneyGreen
@@ -163,7 +163,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     object pnlTipo1: TPanel
       Left = 1
       Top = 1
-      Width = 771
+      Width = 763
       Height = 42
       Align = alTop
       BevelOuter = bvNone
@@ -344,7 +344,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     object pnlNomeProduto: TPanel
       Left = 1
       Top = 43
-      Width = 771
+      Width = 763
       Height = 20
       Align = alTop
       BevelOuter = bvNone
@@ -404,8 +404,8 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   end
   object Panel3: TPanel
     Left = 0
-    Top = 631
-    Width = 773
+    Top = 623
+    Width = 765
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -444,8 +444,8 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object Panel2: TPanel
     Left = 0
     Top = 219
-    Width = 773
-    Height = 412
+    Width = 765
+    Height = 404
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 5
@@ -602,8 +602,8 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
     end
     object RzPageControl1: TRzPageControl
       Left = 1
-      Top = 265
-      Width = 771
+      Top = 257
+      Width = 763
       Height = 146
       ActivePage = TabSheet1
       ActivePageDefault = TabSheet1
@@ -1149,10 +1149,10 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
       OnClick = btnGradeClick
     end
     object gbxVendedor: TRzGroupBox
-      Left = 568
+      Left = 560
       Top = 1
       Width = 204
-      Height = 264
+      Height = 256
       Align = alRight
       BorderColor = clNavy
       BorderInner = fsButtonUp
@@ -1795,7 +1795,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object pnlCod_Barras: TPanel
     Left = 0
     Top = 0
-    Width = 773
+    Width = 765
     Height = 23
     Align = alTop
     Color = clMoneyGreen
@@ -1851,7 +1851,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object pnlMaterial: TPanel
     Left = 0
     Top = 133
-    Width = 773
+    Width = 765
     Height = 29
     Align = alTop
     Color = clMoneyGreen
@@ -1902,7 +1902,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object pnlTipoOrcamento: TPanel
     Left = 0
     Top = 162
-    Width = 773
+    Width = 765
     Height = 30
     Align = alTop
     Color = clMoneyGreen
@@ -1974,7 +1974,7 @@ object frmCadPedido_Itens: TfrmCadPedido_Itens
   object pnlCor: TPanel
     Left = 0
     Top = 192
-    Width = 773
+    Width = 765
     Height = 27
     Align = alTop
     Color = clMoneyGreen

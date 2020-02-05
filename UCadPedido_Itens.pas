@@ -584,7 +584,7 @@ var
   vAux: Real;
   vUsouICM: Boolean;
   vIDAux: Integer;
-  vUsouRegraCli : Boolean;
+  vUsouRegraCli: Boolean;
 begin
   vID_ICMS := 0;
   vID_IPI  := 0;
@@ -954,14 +954,14 @@ begin
     begin
       fDMCadPedido.cdsPedido_ItensQTD.AsFloat          := fDMCadPedido.cdsPedido_Item_TipoQTD.AsFloat;
       fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00000',fDMCadPedido.cdsPedido_Item_TipoVLR_UNITARIO.AsFloat));
-      fDMCadPedido.cdsPedido_ItensQTD_PECA.AsInteger         := fDMCadPedido.cdsPedido_Item_TipoQTD.AsInteger;
+      fDMCadPedido.cdsPedido_ItensQTD_PECA.AsInteger   := fDMCadPedido.cdsPedido_Item_TipoQTD.AsInteger;
       fDMCadPedido.cdsPedido_ItensQTD_LANCAR_ESTOQUE.AsFloat := StrToFloat(FormatFloat('0.0000',(fDMCadPedido.cdsPedido_Item_TipoPESO.AsFloat)));
     end
     else
     begin
       fDMCadPedido.cdsPedido_ItensQTD.AsFloat          := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsPedido_Item_TipoVLR_TOTAL.AsFloat / fDMCadPedido.cdsPedido_Item_TipoVLR_KG.AsFloat));
       fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.00000',fDMCadPedido.cdsPedido_Item_TipoVLR_KG.AsFloat));
-      fDMCadPedido.cdsPedido_ItensQTD_PECA.AsInteger         := fDMCadPedido.cdsPedido_Item_TipoQTD.AsInteger;
+      fDMCadPedido.cdsPedido_ItensQTD_PECA.AsInteger   := fDMCadPedido.cdsPedido_Item_TipoQTD.AsInteger;
       fDMCadPedido.cdsPedido_ItensQTD_LANCAR_ESTOQUE.AsFloat := StrToFloat(FormatFloat('0.0000',(0)));
     end;
   end;
@@ -1740,7 +1740,7 @@ var
   vOriginal,
   vQtdTalao,
   vItemOriginal: Integer;
-  vFLag, vZerado, vPrimeiro : Boolean;
+  vFLag, vZerado, vPrimeiro: Boolean;
   vQtdTotal: Integer;
   vQtdUsar: Integer;
 begin
@@ -2295,9 +2295,7 @@ begin
   //28/01/2020
   if (fDMCadPedido.qParametros_PedCONTROLA_ITEM_REPET.AsString = 'S') and (fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger > 0) then
   begin
-    fDMCadPedido.cdsCloneItem.CloneCursor(fDMCadPedido.cdsPedido_Itens, False, False)
-
-
+    fDMCadPedido.cdsCloneItem.CloneCursor(fDMCadPedido.cdsPedido_Itens, False, False); 
   end;
   
   //Ambientes
