@@ -430,6 +430,7 @@ object DMCadFilial: TDMCadFilial
     DataSet = sdsFilial
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspFilialUpdateError
+    OnGetTableName = dspFilialGetTableName
     Left = 104
     Top = 32
   end
@@ -1646,7 +1647,7 @@ object DMCadFilial: TDMCadFilial
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 72
-    Top = 125
+    Top = 126
     object sdsFilial_EmailID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -2969,7 +2970,7 @@ object DMCadFilial: TDMCadFilial
         Size = 4
       end>
     SQLConnection = dmDatabase.scoDados
-    Left = 72
+    Left = 71
     Top = 552
     object sdsFilial_CertificadosID: TIntegerField
       FieldName = 'ID'
@@ -3165,10 +3166,12 @@ object DMCadFilial: TDMCadFilial
     Top = 504
     object cdsFilial_SoftwareHouseID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsFilial_SoftwareHouseTIPO: TIntegerField
       FieldName = 'TIPO'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsFilial_SoftwareHouseTOKEN: TStringField
