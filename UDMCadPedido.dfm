@@ -435,7 +435,7 @@ object DMCadPedido: TDMCadPedido
     BeforePost = cdsPedidoBeforePost
     OnNewRecord = cdsPedidoNewRecord
     Left = 55
-    Top = 2
+    Top = 3
     object cdsPedidoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -3319,7 +3319,7 @@ object DMCadPedido: TDMCadPedido
     OnCalcFields = cdsPedido_ItensCalcFields
     OnNewRecord = cdsPedido_ItensNewRecord
     Left = 40
-    Top = 52
+    Top = 53
     object cdsPedido_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
