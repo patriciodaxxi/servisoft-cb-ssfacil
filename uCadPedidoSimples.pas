@@ -201,6 +201,9 @@ begin
   fDMCadPedido.cdsPedidoID_REGIMETRIB.AsInteger := fDMCadPedido.cdsFilialID_REGIME_TRIB.AsInteger;
   fDMCadPedido.cdsPedidoSIMPLES_FILIAL.AsString := fDMCadPedido.cdsFilialSIMPLES.AsString;
 
+  if fDmCadPedido.qParametros_PedID_CFOP_PEDIDO.AsInteger > 0 then
+    fDmCadPedido.cdsPedidoID_CFOP.AsInteger := fDmCadPedido.qParametros_PedID_CFOP_PEDIDO.AsInteger;
+
   RzPageControl1.ActivePage := TS_Cadastro;
 end;
 
@@ -436,6 +439,9 @@ begin
   end;
 
   fDMCadPedido.prc_Inserir_Itens;
+
+  if fDmCadPedido.qParametros_PedID_CFOP_PEDIDO.AsInteger > 0 then
+    fDmCadPedido.cdsPedido_ItensID_CFOP.AsInteger := fDmCadPedido.qParametros_PedID_CFOP_PEDIDO.AsInteger;
 
   ffrmCadPedidoSimples_Itens := TfrmCadPedidoSimples_Itens.Create(self);
   ffrmCadPedidoSimples_Itens.fDMCadPedido := fDMCadPedido;

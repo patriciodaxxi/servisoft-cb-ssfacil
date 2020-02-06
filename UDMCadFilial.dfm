@@ -430,7 +430,6 @@ object DMCadFilial: TDMCadFilial
     DataSet = sdsFilial
     UpdateMode = upWhereKeyOnly
     OnUpdateError = dspFilialUpdateError
-    OnGetTableName = dspFilialGetTableName
     Left = 104
     Top = 32
   end

@@ -699,8 +699,6 @@ type
     procedure cdsFILIAL_CBarraFilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
     procedure cdsFilialRelatoriosCalcFields(DataSet: TDataSet);
-    procedure dspFilialGetTableName(Sender: TObject; DataSet: TDataSet;
-      var TableName: String);
   private
     { Private declarations }
     procedure DoLogAdditionalValues(ATableName: string; var AValues: TArrayLogData; var UserName: string);
@@ -1018,7 +1016,6 @@ end;
 
 procedure TDMCadFilial.cdsFILIAL_CBarraBeforePost(DataSet: TDataSet);
 var
-  vAux : Integer;
   i, i2 : Integer;
 begin
   if cdsFILIAL_CBarraULT_SEQUENCIA.AsInteger <= 0 then
@@ -1060,12 +1057,6 @@ begin
     12 : cdsFilialRelatoriosclDescricao_Tipo.AsString := 'CONSULTA PEDIDO';
     13 : cdsFilialRelatoriosclDescricao_Tipo.AsString := 'RECIBO NF';
   end;
-end;
-
-procedure TDMCadFilial.dspFilialGetTableName(Sender: TObject;
-  DataSet: TDataSet; var TableName: String);
-begin
-  TableName := 'FILIAL';
 end;
 
 end.

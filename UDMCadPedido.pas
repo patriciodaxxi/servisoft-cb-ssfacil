@@ -3734,6 +3734,7 @@ type
     cdsCloneItemNOME_COR_COMBINACAO: TStringField;
     cdsCloneItemVLR_DESCONTO_CALC: TFloatField;
     cdsCloneItemMEDIDA: TStringField;
+    qParametros_PedID_CFOP_PEDIDO: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsPedidoNewRecord(DataSet: TDataSet);
     procedure cdsPedidoBeforePost(DataSet: TDataSet);

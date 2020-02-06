@@ -146,7 +146,7 @@ end;
 
 procedure TfrmCadPedidoSimples_Itens.Panel2Enter(Sender: TObject);
 begin
-  if (fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger < 1) or (fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger < 1) then
+  if (fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger < 1) then
     exit;
 
   if (fDMCadPedido.cdsPedido_Itens.State in [dsInsert]) or (fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger <> vCodProdutoAnt) then
@@ -183,46 +183,40 @@ var
 begin
   vID_ICMS := 0;
   vID_IPI  := 0;
-  if not fDMCadPedido.cdsCFOP.Locate('ID',fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger,[loCaseInsensitive]) then
+  if (fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger > 0) and  not(fDMCadPedido.cdsCFOP.Locate('ID',fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger,[loCaseInsensitive])) then
     exit;
   if not fDMCadPedido.cdsProduto.Locate('ID',fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,[loCaseInsensitive]) then
     exit;
-  {if fDMCadPedido.cdsConfig_CFOP.Locate('ID',fDMCadPedido.cdsPedido_ItensID_CONFIG_CFOP.AsInteger,[loCaseInsensitive]) then
-  begin
-    if (fDMCadPedido.cdsConfig_CFOPITEM_VARIACAO.AsInteger > 0) and (fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger = fDMCadPedido.cdsConfig_CFOPID_CFOP.AsInteger) then
-    begin
-      fDMCadPedido.qCFOP_Variacao.Close;
-      fDMCadPedido.qCFOP_Variacao.ParamByName('ID').AsInteger   := fDMCadPedido.cdsConfig_CFOPID_CFOP.AsInteger;
-      fDMCadPedido.qCFOP_Variacao.ParamByName('ITEM').AsInteger := fDMCadPedido.cdsConfig_CFOPITEM_VARIACAO.AsInteger;
-      fDMCadPedido.qCFOP_Variacao.Open;
-      if fDMCadPedido.qCFOP_VariacaoID_CSTIPI.AsInteger > 0 then
-        vID_IPI := fDMCadPedido.qCFOP_VariacaoID_CSTIPI.AsInteger;
-      if fDMCadPedido.qCFOP_VariacaoID_CSTICMS.AsInteger > 0 then
-        vID_ICMS := fDMCadPedido.qCFOP_VariacaoID_CSTICMS.AsInteger;
-    end;
-  end;}
   fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,[loCaseInsensitive]);
   fDMCadPedido.cdsUF.Locate('UF',fDMCadPedido.cdsClienteUF.AsString,[loCaseInsensitive]);
 
   //prc_Buscar_Imposto('','PIS');
   //prc_Buscar_Imposto('','COFINS');
-  if vID_ICMS > 0 then
-    fDMCadPedido.cdsPedido_ItensID_CSTICMS.AsInteger := vID_ICMS
-  else
-    prc_Buscar_Imposto('CST','ICMS');
-  if vID_IPI > 0 then
-    fDMCadPedido.cdsPedido_ItensID_CSTIPI.AsInteger := vID_IPI
-  else
-    prc_Buscar_Imposto('CST','IPI');
-
-  if fDMCadPedido.cdsFilialSIMPLES.AsString = 'S' then
-    fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat := 0
-  else
-  if fDMCadPedido.cdsCFOPGERAR_ICMS.AsString = 'S' then
-    fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat := fDMCadPedido.cdsUFPERC_ICMS.AsFloat;
-
-  if fDMCadPedido.cdsCFOPGERAR_IPI.AsString = 'S' then
-    fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat := fDMCadPedido.cdsProdutoPERC_IPI.AsFloat;
+  if fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger > 0 then
+  begin
+    if vID_ICMS > 0 then
+      fDMCadPedido.cdsPedido_ItensID_CSTICMS.AsInteger := vID_ICMS
+    else
+      prc_Buscar_Imposto('CST','ICMS');
+    if vID_IPI > 0 then
+      fDMCadPedido.cdsPedido_ItensID_CSTIPI.AsInteger := vID_IPI
+    else
+      prc_Buscar_Imposto('CST','IPI');
+    if fDMCadPedido.cdsFilialSIMPLES.AsString = 'S' then
+      fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat := 0
+    else
+    if fDMCadPedido.cdsCFOPGERAR_ICMS.AsString = 'S' then
+      fDMCadPedido.cdsPedido_ItensPERC_ICMS.AsFloat := fDMCadPedido.cdsUFPERC_ICMS.AsFloat;
+    if fDMCadPedido.cdsCFOPGERAR_IPI.AsString = 'S' then
+      fDMCadPedido.cdsPedido_ItensPERC_IPI.AsFloat := fDMCadPedido.cdsProdutoPERC_IPI.AsFloat;
+    fDMCadPedido.cdsPedido_ItensCODCFOP.AsString := fDMCadPedido.cdsCFOPCODCFOP.AsString;
+    fDMCadPedido.cdsPedido_ItensCOD_CST.AsString := fDMCadPedido.cdsTab_CSTICMSCOD_CST.AsString;
+    fDMCadPedido.cdsPedido_ItensCOD_IPI.AsString := fDMCadPedido.cdsTab_CSTIPICOD_IPI.AsString;
+    if (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0) and (fDMCadPedido.cdsFilialSIMPLES.AsString <> 'S') and (fDMCadPedido.cdsTab_CSTICMSCOD_CST.AsString <> '00') then
+      fDMCadPedido.cdsPedido_ItensPERC_TRIBICMS.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoPERC_REDUCAOICMS.AsFloat))
+    else
+      fDMCadPedido.cdsPedido_ItensPERC_TRIBICMS.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsTab_CSTICMSPERCENTUAL.AsFloat));
+  end;
 
   vPrecoAux := 0;
   if fDMCadPedido.cdsClienteID_TAB_PRECO.AsInteger > 0 then
@@ -232,15 +226,7 @@ begin
     fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := StrToFloat(FormatFloat('0.000000',vPrecoAux))
   else
     fDMCadPedido.cdsPedido_ItensVLR_UNITARIO.AsFloat := fDMCadPedido.cdsProdutoPRECO_VENDA.AsFloat;
-
   fDMCadPedido.cdsPedido_ItensUNIDADE.AsString := fDMCadPedido.cdsProdutoUNIDADE.AsString;
-  fDMCadPedido.cdsPedido_ItensCODCFOP.AsString := fDMCadPedido.cdsCFOPCODCFOP.AsString;
-  fDMCadPedido.cdsPedido_ItensCOD_CST.AsString := fDMCadPedido.cdsTab_CSTICMSCOD_CST.AsString;
-  fDMCadPedido.cdsPedido_ItensCOD_IPI.AsString := fDMCadPedido.cdsTab_CSTIPICOD_IPI.AsString;
-  if (StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoPERC_REDUCAOICMS.AsFloat)) > 0) and (fDMCadPedido.cdsFilialSIMPLES.AsString <> 'S') and (fDMCadPedido.cdsTab_CSTICMSCOD_CST.AsString <> '00') then
-    fDMCadPedido.cdsPedido_ItensPERC_TRIBICMS.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsProdutoPERC_REDUCAOICMS.AsFloat))
-  else
-    fDMCadPedido.cdsPedido_ItensPERC_TRIBICMS.AsFloat := StrToFloat(FormatFloat('0.0000',fDMCadPedido.cdsTab_CSTICMSPERCENTUAL.AsFloat));
 end;
 
 procedure TfrmCadPedidoSimples_Itens.DBEdit2Exit(Sender: TObject);
@@ -432,18 +418,8 @@ begin
 end;
 
 procedure TfrmCadPedidoSimples_Itens.Panel4Exit(Sender: TObject);
-var
-  vFinalidadeAux: String;
 begin
-  vFinalidadeAux := fDMCadPedido.cdsPedidoFINALIDADE.AsString;
-  if trim(vFinalidadeAux) = '' then
-    vFinalidadeAux := 'O';
   fDMCadPedido.cdsCliente.Locate('CODIGO',fDMCadPedido.cdsPedidoID_CLIENTE.AsInteger,[loCaseInsensitive]);
-  if (fDMCadPedido.cdsPedidoID_OPERACAO_NOTA.AsInteger > 0) then
-  begin
-    uCalculo_Pedido.prc_Posicionar_Regra_Empresa(fDMCadPedido,fDMCadPedido.cdsPedidoID_OPERACAO_NOTA.AsInteger,vFinalidadeAux);
-    fDMCadPedido.cdsPedido_ItensID_CFOP.AsInteger := fDMCadPedido.vID_CFOP;
-  end;
 end;
 
 procedure TfrmCadPedidoSimples_Itens.Edit1KeyDown(Sender: TObject; var Key: Word;

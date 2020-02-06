@@ -15309,6 +15309,9 @@ object DMCadPedido: TDMCadPedido
       FixedChar = True
       Size = 1
     end
+    object qParametros_PedID_CFOP_PEDIDO: TIntegerField
+      FieldName = 'ID_CFOP_PEDIDO'
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 
