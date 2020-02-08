@@ -704,4 +704,13 @@ object frmCadDocEstoque_Itens: TfrmCadDocEstoque_Itens
       OnExit = DBEdit5Exit
     end
   end
+  object ckPermiteGrade: TCheckBox
+    Left = 555
+    Top = 237
+    Width = 144
+    Height = 17
+    Caption = 'Permitir sem Grade'
+    TabOrder = 16
+    Visible = False
+  end
 end

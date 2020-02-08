@@ -62,6 +62,7 @@ type
     DBEdit37: TDBEdit;
     DBEdit38: TDBEdit;
     DBEdit39: TDBEdit;
+    ckPermiteGrade: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
@@ -309,7 +310,7 @@ begin
     fDMCadDocEstoque.cdsDocEstoque_ItensTIPO_ES.AsString := fDMCadDocEstoque.cdsDocEstoqueTIPO_ES.AsString;
 
     //Tamanho aqui
-    if fDMCadDocEstoque.cdsProdutoUSA_GRADE.AsString = 'S' then
+    if (fDMCadDocEstoque.cdsProdutoUSA_GRADE.AsString = 'S') and (not(ckPermiteGrade.Visible) or not(ckPermiteGrade.Checked)) then
     begin
       if vState <> 'E' then
       begin
@@ -322,7 +323,8 @@ begin
     //*****
     fDMCadDocEstoque.cdsDocEstoque_Itens.Post;
     //Tamanho aqui
-    if (fDMCadDocEstoque.cdsProdutoUSA_GRADE.AsString = 'S') and (fDMCadDocEstoque.qParametrosUSA_GRADE.AsString = 'S') then
+    if (fDMCadDocEstoque.cdsProdutoUSA_GRADE.AsString = 'S') and (fDMCadDocEstoque.qParametrosUSA_GRADE.AsString = 'S') and
+       (not(ckPermiteGrade.Visible) or not(ckPermiteGrade.Checked)) then
       prc_Gravar_Tam;
     vGravacao_Ok := True;
   except
@@ -373,10 +375,12 @@ begin
   if (StrToFloat(FormatFloat('0.0000',fDMCadDocEstoque.cdsDocEstoque_ItensVLR_UNITARIO.AsFloat)) <= 0) and (fDMCadDocEstoque.cdsDocEstoqueTIPO_ES.AsString = 'E') then
     vMsgErro := vMsgErro + #13 + '*** Valor não informado!';
   //Aqui tamanho
-  if (fDMCadDocEstoque.qParametrosUSA_GRADE.AsString = 'S') and (trim(fDMCadDocEstoque.cdsDocEstoque_ItensTAMANHO.AsString) = '') and (fDMCadDocEstoque.cdsProdutoUSA_GRADE.AsString = 'S') and
-     //(fDMCadDocEstoque.cdsDocEstoque_Itens.State in [dsEdit]) then
-     (vState = 'E') then
-    vMsgErro := vMsgErro + #13 + '*** Tamanho não informado!';
+  if not(ckPermiteGrade.Visible) or ((ckPermiteGrade.Visible) and not(ckPermiteGrade.Checked)) then
+  begin
+    if (fDMCadDocEstoque.qParametrosUSA_GRADE.AsString = 'S') and (trim(fDMCadDocEstoque.cdsDocEstoque_ItensTAMANHO.AsString) = '') and (fDMCadDocEstoque.cdsProdutoUSA_GRADE.AsString = 'S') and
+       (vState = 'E') then
+      vMsgErro := vMsgErro + #13 + '*** Tamanho não informado!';
+  end;
 
   if (fDMCadDocEstoque.qParametros_ProdUSA_LOTE_PROD.AsString = 'S') and (trim(fDMCadDocEstoque.cdsDocEstoque_ItensNUM_LOTE_CONTROLE.AsString) = '') then
   begin
@@ -467,7 +471,11 @@ begin
     BitBtn1Click(Sender)
   else
   if (Shift = [ssCtrl]) and (Key = 87) then
-    ckPermiteCor.Visible := not(ckPermiteCor.Visible);
+  begin
+    ckPermiteCor.Visible   := not(ckPermiteCor.Visible);
+    ckPermiteGrade.Visible := not(ckPermiteGrade.Visible);
+    DBEdit2.ReadOnly := False;
+  end;
 end;
 
 procedure TfrmCadDocEstoque_Itens.Panel1Exit(Sender: TObject);
