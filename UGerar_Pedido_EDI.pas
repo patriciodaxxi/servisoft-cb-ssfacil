@@ -150,7 +150,7 @@ begin
   fDMGerar_EDI.mAuxiliarDtEntrega.AsString         := copy(Registro,fDMGerar_EDI.qEDI_ConfigDTENTREGA_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigDTENTREGA_TAM.AsInteger);
   fDMGerar_EDI.mAuxiliarDtEntrega.AsString         := copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,7,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,5,2) + '/' + copy(fDMGerar_EDI.mAuxiliarDtEntrega.AsString,1,4);
   fDMGerar_EDI.mAuxiliarLocalEntrega.AsString      := copy(Registro,fDMGerar_EDI.qEDI_ConfigCOD_LOCAL_ENTREGA_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigCOD_LOCAL_ENTREGA_TAM.AsInteger);
-  fDMGerar_EDI.mAuxiliarFabrica.AsString           := copy(Registro,fDMGerar_EDI.qEDI_ConfigFABRICA_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigFABRICA_INI.AsInteger);
+  fDMGerar_EDI.mAuxiliarFabrica.AsString           := copy(Registro,fDMGerar_EDI.qEDI_ConfigFABRICA_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigFABRICA_TAM.AsInteger);
   fDMGerar_EDI.mAuxiliarCodProdCli.AsString        := copy(Registro,fDMGerar_EDI.qEDI_ConfigCOD_PRODUTO_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigCOD_PRODUTO_TAM.AsInteger);
   fDMGerar_EDI.mAuxiliarCodProdCli.AsString        := TrimLeft(fDMGerar_EDI.mAuxiliarCodProdCli.AsString);
   fDMGerar_EDI.mAuxiliarQuantidade.AsString       := copy(Registro,fDMGerar_EDI.qEDI_ConfigQTD_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigQTD_TAM.AsInteger-fDMGerar_EDI.qEDI_ConfigQTD_DEC.AsInteger);
@@ -160,7 +160,7 @@ begin
   fDMGerar_EDI.mAuxiliarUnidade.AsString           := copy(Registro,fDMGerar_EDI.qEDI_ConfigUNIDADE_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigUNIDADE_TAM.AsInteger);
 
 
-  fDMGerar_EDI.mAuxiliarPercTransferencia.AsString := copy(Registro,fDMGerar_EDI.qEDI_ConfigPERC_TRANSF_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigPERC_TRANSF_INI.AsInteger);
+  fDMGerar_EDI.mAuxiliarPercTransferencia.AsString := copy(Registro,fDMGerar_EDI.qEDI_ConfigPERC_TRANSF_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigPERC_TRANSF_TAM.AsInteger);
   fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := copy(Registro,fDMGerar_EDI.qEDI_ConfigVLR_UNITARIO_INI.AsInteger,fDMGerar_EDI.qEDI_ConfigVLR_UNITARIO_TAM.AsInteger-fDMGerar_EDI.qEDI_ConfigVLR_UNITARIO_DEC.AsInteger);
   vAux := (fDMGerar_EDI.qEDI_ConfigVLR_UNITARIO_TAM.AsInteger - fDMGerar_EDI.qEDI_ConfigVLR_UNITARIO_DEC.AsInteger) + fDMGerar_EDI.qEDI_ConfigVLR_UNITARIO_INI.AsInteger;
   fDMGerar_EDI.mAuxiliarVlrUnitario.AsString       := fDMGerar_EDI.mAuxiliarVlrUnitario.AsString + ',' + copy(Registro,vAux,fDMGerar_EDI.qEDI_ConfigVLR_UNITARIO_DEC.AsInteger);
