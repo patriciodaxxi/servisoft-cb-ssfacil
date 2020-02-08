@@ -1094,6 +1094,7 @@ begin
     2: Edit1.SetFocus;
     3: Edit3.SetFocus;
   end;
+  vPedidoSelecionado := False;
 end;
 
 procedure TfCupomFiscal.btCancelarClick(Sender: TObject);

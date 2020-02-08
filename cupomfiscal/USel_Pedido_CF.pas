@@ -64,6 +64,7 @@ uses rsDBUtils, uUtilPadrao, StrUtils, DmdDatabase;
 procedure TfrmSel_Pedido_CF.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+  ffCupomFiscal2.vPedidoSelecionado := False;
   Action := Cafree;
 end;
 
@@ -240,6 +241,11 @@ begin
   end;
   //**************************
 
+  //08/02/2020
+  vPreco_Pos := 0;
+  if StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsPedidoVLR_UNITARIO.AsFloat)) > 0 then
+    vPreco_Pos := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsPedidoVLR_UNITARIO.AsFloat));
+  ffCupomFiscal2.vPedidoSelecionado := True;
   ffCupomFiscal2.CurrencyEdit1.Value := StrToFloat(FormatFloat('0.0000',fDMCupomFiscal.cdsPedidoQTD_AFATURAR.AsFloat));
   ffCupomFiscal2.Edit1Enter(ffCupomFiscal2);
   ffCupomFiscal2.Edit1.Text          := fDMCupomFiscal.cdsPedidoID_PRODUTO.AsString;
@@ -329,7 +335,8 @@ begin
   ffCupomFiscal2.vNumero_OS    := fDMCupomFiscal.cdsPedidoNUMOS.AsString;
   ffCupomFiscal2.vNum_Pedido   := fDMCupomFiscal.cdsPedidoNUM_PEDIDO.AsInteger;
 
-  ffCupomFiscal2.vPedidoSelecionado := True;
+  //08/02/2020
+  //ffCupomFiscal2.vPedidoSelecionado := True;
   ffCupomFiscal2.btConfirmarItClick(ffCupomFiscal2);
   if fDMCupomFiscal.cdsCupom_Itens.State in [dsEdit,dsInsert] then
     fDMCupomFiscal.cdsCupom_Itens.Post;

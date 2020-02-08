@@ -20,7 +20,7 @@ object frmSel_Pedido_CF: TfrmSel_Pedido_CF
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1100
+    Width = 1108
     Height = 40
     Align = alTop
     Color = clMoneyGreen
@@ -181,8 +181,8 @@ object frmSel_Pedido_CF: TfrmSel_Pedido_CF
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 40
-    Width = 1100
-    Height = 370
+    Width = 1108
+    Height = 378
     Align = alClient
     Ctl3D = False
     DataSource = dmCupomFiscal.dsPedido
@@ -442,8 +442,8 @@ object frmSel_Pedido_CF: TfrmSel_Pedido_CF
   end
   object Panel2: TPanel
     Left = 0
-    Top = 472
-    Width = 1100
+    Top = 480
+    Width = 1108
     Height = 37
     Align = alBottom
     Color = 8404992
@@ -525,8 +525,8 @@ object frmSel_Pedido_CF: TfrmSel_Pedido_CF
   end
   object SMDBGrid6: TSMDBGrid
     Left = 0
-    Top = 410
-    Width = 1100
+    Top = 418
+    Width = 1108
     Height = 62
     Align = alBottom
     Ctl3D = False
