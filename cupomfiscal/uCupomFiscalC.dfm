@@ -837,7 +837,7 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object btnRecalcular: TBitBtn
       Left = 616
-      Top = 35
+      Top = 63
       Width = 75
       Height = 27
       Caption = 'Recalcular'
@@ -847,9 +847,9 @@ object fCupomFiscalC: TfCupomFiscalC
     end
     object btnAjustarICMS: TBitBtn
       Left = 696
-      Top = 35
+      Top = 63
       Width = 105
-      Height = 30
+      Height = 27
       Caption = 'Ajustar ICMS / PIS'
       TabOrder = 11
       Visible = False

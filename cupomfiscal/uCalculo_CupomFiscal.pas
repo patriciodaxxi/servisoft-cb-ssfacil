@@ -103,7 +103,7 @@ begin
     vVlrTotalItem := StrToCurr(FormatCurr('0.00',Qtd * fDMCupomFiscal.cdsCupom_ItensVLR_UNIT_ORIGINAL.AsCurrency));
 
   fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsString := FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency +
-                                                                    vVlrTotalItem - fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat);
+                                                                    vVlrTotalItem); // - fDMCupomFiscal.cdsCupom_ItensVLR_DESCONTO.AsFloat); 10/02/2020
   //26/02/2019
   prc_Calcular_ST_Ret(fDMCupomFiscal);
   prc_Calcular_ICMS_Efet(fDMCupomFiscal);

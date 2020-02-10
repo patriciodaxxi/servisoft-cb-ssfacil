@@ -257,6 +257,8 @@ begin
   btComanda.Visible   := fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S';
   btOrcamento.Visible := fDmCupomFiscal.cdsCupomParametrosUSA_ORCAMENTO.AsString = 'S';
   btPedido.Visible    := fDmCupomFiscal.cdsCupomParametrosUSA_PEDIDO.AsString = 'S';
+  SMDBGrid1.Columns.Items[6].Visible := False;
+  SMDBGrid1.Columns.Items[7].Visible := False;
 
   case fDmCupomFiscal.cdsCupomParametrosORDEM_CAMPOS.AsInteger of
     1: begin //Qtd primeiro
@@ -544,15 +546,17 @@ end;
 procedure TfCupomFiscal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
+  if (Shift = [ssCtrl]) and (Key = 87) then
+  begin
+    SMDBGrid1.Columns.Items[6].Visible := not(SMDBGrid1.Columns.Items[6].Visible);
+    SMDBGrid1.Columns.Items[7].Visible := not(SMDBGrid1.Columns.Items[7].Visible);
+  end;
+
   if not (Panel4.Enabled) then
     Exit;
 
   if (Key = Vk_F10) and not(fDmCupomFiscal.cdsCupom_Itens.IsEmpty) then
     btFinalizarClick(Sender);
-
-  if (Shift = [ssCtrl]) and (Key = 87) then
-  begin
-  end;
 
   if (Key = Vk_F12) and not(fDmCupomFiscal.cdsCupom_Itens.IsEmpty) then
   begin

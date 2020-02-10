@@ -2246,7 +2246,8 @@ begin
     end;
 
     if (not fDmCupomFiscal.cdsProduto.IsEmpty) and
-       (fDmCupomFiscal.cdsProdutoTIPO_REG.AsString <> 'N') and (vFinanceiro) then
+       (fDmCupomFiscal.cdsProdutoTIPO_REG.AsString <> 'N') and (vFinanceiro) and
+       (fDmCupomFiscal.cdsTipoCobrancaFATURAMENTO_LIQUIDO.AsString = 'S') then
     begin
       vID_Mov := fDMMovimento.fnc_Gravar_Movimento(fdmCupomFiscal.cdsCupom_ItensID_MOVIMENTO.AsInteger,
                                                    fDMCupomFiscal.cdsCupomFiscalFILIAL.AsInteger,
@@ -2305,7 +2306,8 @@ begin
     begin
       fDmCupomFiscal.cdsCupom_Itens.Edit;
       fDmCupomFiscal.cdsCupom_ItensID_MOVESTOQUE.AsInteger := vID_Estoque;
-      fDmCupomFiscal.cdsCupom_ItensID_MOVIMENTO.AsInteger  := vID_Mov;
+      if vId_Mov > 0 then //somente vai ter id_mov quando item entrar no faturamento 10/02/2020
+        fDmCupomFiscal.cdsCupom_ItensID_MOVIMENTO.AsInteger := vID_Mov;
       fDmCupomFiscal.cdsCupom_Itens.Post;
     end;
 
