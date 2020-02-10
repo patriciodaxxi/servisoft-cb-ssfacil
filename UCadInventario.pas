@@ -531,6 +531,7 @@ var
 begin
   fDMEstoque := TDMEstoque.Create(Self);
 
+  SMDBGrid2.DisableScroll;
   fDMCadInventario.cdsInventario_Itens.First;
   while not fDMCadInventario.cdsInventario_Itens.Eof do
   begin
@@ -580,6 +581,7 @@ begin
     fDMCadInventario.cdsInventario_Itens.Next;
   end;
   FreeAndNil(fDMEstoque);
+  SMDBGrid2.EnableScroll;
 end;
 
 procedure TfrmCadInventario.btnExcluir_ProdClick(Sender: TObject);

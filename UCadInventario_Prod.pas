@@ -24,7 +24,11 @@ type
     procedure SMDBGrid1TitleClick(Column: TColumn);
   private
     { Private declarations }
-    procedure prc_Gravar_Itens;    
+    vVazio : Boolean;
+    vItem_Inventario : Integer;
+
+    procedure prc_Gravar_Itens;
+
   public
     { Public declarations }
     fDMCadInventario: TDMCadInventario;
@@ -49,6 +53,11 @@ end;
 procedure TfrmCadInventario_Prod.btnConfirmarClick(Sender: TObject);
 begin
   SMDBGrid1.DisableScroll;
+  vVazio := False;
+  fDMCadInventario.cdsInventario_Itens.Last;
+  vItem_Inventario := fDMCadInventario.cdsInventario_ItensITEM.AsInteger;
+  if fDMCadInventario.cdsInventario_Itens.RecordCount <= 0 then
+    vVazio := True;
   ProgressBar1.Visible  := True;
   ProgressBar1.Max      := fDMCadInventario.cdsProduto.RecordCount;
   ProgressBar1.Position := 0;
@@ -67,30 +76,35 @@ end;
 
 procedure TfrmCadInventario_Prod.prc_Gravar_Itens;
 var
-  vItem: Integer;
+  //vItem: Integer;
   vTam: String;
 begin
   if (trim(fDMCadInventario.cdsProdutoTAMANHO.AsString) = '') or (fDMCadInventario.cdsProdutoTAMANHO.IsNull) then
     vTam := ''
   else
     vTam := fDMCadInventario.cdsProdutoTAMANHO.AsString;
-  if fDMCadInventario.cdsProdutoID_COR_COMBINACAO.AsInteger > 0 then
+  if not vVazio then
   begin
-    if fDMCadInventario.cdsInventario_Itens.Locate('ID_PRODUTO;TAMANHO;ID_COR',VarArrayOf([fDMCadInventario.cdsProdutoID.AsInteger,vTam,fDMCadInventario.cdsProdutoID_COR_COMBINACAO.AsInteger]),[locaseinsensitive]) then
-      exit;
-  end
-  else
-  begin
-    if fDMCadInventario.cdsInventario_Itens.Locate('ID_PRODUTO;TAMANHO',VarArrayOf([fDMCadInventario.cdsProdutoID.AsInteger,vTam]),[locaseinsensitive]) then
-      exit;
+    if fDMCadInventario.cdsProdutoID_COR_COMBINACAO.AsInteger > 0 then
+    begin
+      if fDMCadInventario.cdsInventario_Itens.Locate('ID_PRODUTO;TAMANHO;ID_COR',VarArrayOf([fDMCadInventario.cdsProdutoID.AsInteger,vTam,fDMCadInventario.cdsProdutoID_COR_COMBINACAO.AsInteger]),[locaseinsensitive]) then
+        exit;
+    end
+    else
+    begin
+      if fDMCadInventario.cdsInventario_Itens.Locate('ID_PRODUTO;TAMANHO',VarArrayOf([fDMCadInventario.cdsProdutoID.AsInteger,vTam]),[locaseinsensitive]) then
+        exit;
+    end;
   end;
-  
-  fDMCadInventario.cdsInventario_Itens.Last;
-  vItem := fDMCadInventario.cdsInventario_ItensITEM.AsInteger + 1;
 
+  //fDMCadInventario.cdsInventario_Itens.Last;
+  //vItem := fDMCadInventario.cdsInventario_ItensITEM.AsInteger + 1;
+
+  vItem_Inventario := vItem_Inventario + 1;
   fDMCadInventario.cdsInventario_Itens.Insert;
   fDMCadInventario.cdsInventario_ItensID.AsInteger            := fDMCadInventario.cdsInventarioID.AsInteger;
-  fDMCadInventario.cdsInventario_ItensITEM.AsInteger          := vItem;
+  //fDMCadInventario.cdsInventario_ItensITEM.AsInteger          := vItem;
+  fDMCadInventario.cdsInventario_ItensITEM.AsInteger          := vItem_Inventario;
   fDMCadInventario.cdsInventario_ItensID_PRODUTO.AsInteger    := fDMCadInventario.cdsProdutoID.AsInteger;
   fDMCadInventario.cdsInventario_ItensTAMANHO.AsString        := fDMCadInventario.cdsProdutoTAMANHO.AsString;
   fDMCadInventario.cdsInventario_ItensQTD_ESTOQUE.AsFloat     := StrToFloat(FormatFloat('0.000000',fDMCadInventario.cdsProdutoclQtd.AsFloat));
