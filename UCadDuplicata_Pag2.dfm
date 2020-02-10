@@ -1,6 +1,6 @@
 object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
-  Left = 275
-  Top = 145
+  Left = 321
+  Top = 122
   Width = 704
   Height = 510
   Caption = 'Pagamento Duplicata'
@@ -20,8 +20,8 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
   TextHeight = 13
   object Panel3: TPanel
     Left = 0
-    Top = 445
-    Width = 696
+    Top = 437
+    Width = 688
     Height = 34
     Align = alBottom
     Color = 8404992
@@ -60,8 +60,8 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
   object Panel2: TPanel
     Left = 0
     Top = 96
-    Width = 696
-    Height = 349
+    Width = 688
+    Height = 341
     Align = alClient
     Color = clMoneyGreen
     TabOrder = 0
@@ -380,7 +380,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
     object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 694
+      Width = 686
       Height = 46
       Align = alTop
       BevelOuter = bvNone
@@ -737,7 +737,7 @@ object frmCadDuplicata_Pag2: TfrmCadDuplicata_Pag2
   object Panel4: TPanel
     Left = 0
     Top = 0
-    Width = 696
+    Width = 688
     Height = 96
     Align = alTop
     Color = clSilver
