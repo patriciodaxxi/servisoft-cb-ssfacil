@@ -3234,27 +3234,29 @@ begin
                    cdsCupom_ItensNOME_PRODUTO.AsString,
                    cdsCupom_ItensQTD.AsString,
                    FormatFloat('0.00',cdsCupom_ItensVLR_UNITARIO.AsCurrency),
-                   FormatFloat('0.00',cdsCupom_ItensVLR_TOTAL.AsCurrency),'')
+                   FormatFloat('0.00',cdsCupom_ItensVLR_UNITARIO.AsCurrency * cdsCupom_ItensQTD.AsCurrency),'')
     else
       ImpNaoFiscalW('VendeItem',vCodRef,
                      cdsCupom_ItensNOME_PRODUTO.AsString,
                      cdsCupom_ItensQTD.AsString,
                      FormatFloat('0.00',cdsCupom_ItensVLR_UNITARIO.AsCurrency),
-                     FormatFloat('0.00',cdsCupom_ItensVLR_TOTAL.AsCurrency),'');
+                     FormatFloat('0.00',cdsCupom_ItensVLR_TOTAL.AsCurrency * cdsCupom_ItensQTD.AsCurrency),'');
     cdsCupom_Itens.Next;
   end;
   if vModelo = 'modCanvas' then
     ImpNaoFiscalC('Pagamento','',cdsCupomFiscalID_TIPOCOBRANCA.AsString,
                  FormatFloat('R$ 0.00',cdsCupomFiscalVLR_RECEBIDO.AsCurrency),
                  FormatFloat('R$ 0.00',cdsCupomFiscalVLR_TROCO.AsCurrency),
-                 FormatFloat('R$ 0.00',cdsCupomFiscalVLR_TOTAL.AsCurrency),
-                 FormatFloat('R$ 0.00',cdsCupomFiscalVLR_DESCONTO.AsCurrency))
+                 FormatFloat('R$ 0.00',cdsCupomFiscalVLR_PRODUTOS.AsCurrency),
+                 FormatFloat('R$ 0.00',cdsCupomFiscalVLR_PRODUTOS.AsCurrency -
+                                       cdsCupomFiscalVLR_TOTAL.AsCurrency))
   else
     ImpNaoFiscalW('Pagamento','',cdsCupomFiscalID_TIPOCOBRANCA.AsString,
                   FormatFloat('R$ 0.00',cdsCupomFiscalVLR_RECEBIDO.AsCurrency),
                   FormatFloat('R$ 0.00',cdsCupomFiscalVLR_TROCO.AsCurrency),
-                  FormatFloat('R$ 0.00',cdsCupomFiscalVLR_TOTAL.AsCurrency),
-                  FormatFloat('R$ 0.00',cdsCupomFiscalVLR_DESCONTO.AsCurrency));
+                  FormatFloat('R$ 0.00',cdsCupomFiscalVLR_PRODUTOS.AsCurrency),
+                  FormatFloat('R$ 0.00',cdsCupomFiscalVLR_PRODUTOS.AsCurrency -
+                                        cdsCupomFiscalVLR_TOTAL.AsCurrency));
 
   if vModelo = 'modCanvas' then
   begin

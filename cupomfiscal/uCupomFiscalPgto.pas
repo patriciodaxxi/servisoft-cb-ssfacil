@@ -866,8 +866,8 @@ begin
   fDMCupomFiscal.cdsCupomFiscalVLR_TRIBUTO_MUNICIPAL.AsFloat := 0;
 //////////////////////////////////////////////
 
-  vVlrParcelado := fDmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency - fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency -
-                   fDmCupomFiscal.vVlrEntrada + fDmCupomFiscal.cdsCupomFiscalVLR_OUTROS.AsCurrency;
+  vVlrParcelado := fDmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency - fDmCupomFiscal.vVlrEntrada +
+                   fDmCupomFiscal.cdsCupomFiscalVLR_OUTROS.AsCurrency;
 
   prc_ControleParcelas(vVlrParcelado,0,vQtdParcelas);
 
@@ -1249,9 +1249,9 @@ procedure TfCupomFiscalPgto.CurrencyEdit1Exit(Sender: TObject);
 begin
   if CurrencyEdit1.Value > 0 then
   begin
-    fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency := fdmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency *
+    fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency := fdmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency *
                                                             CurrencyEdit1.Value / 100;
-    fdmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := fdmCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsCurrency -
+    fdmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency    := fdmCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsCurrency -
                                                             fdmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency;
   end;
 end;

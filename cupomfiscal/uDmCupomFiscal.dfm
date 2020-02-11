@@ -6043,6 +6043,7 @@ object dmCupomFiscal: TdmCupomFiscal
     Top = 328
   end
   object frxReport1: TfrxReport
+    Tag = 1
     Version = '5.6.8'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -6052,9 +6053,10 @@ object dmCupomFiscal: TdmCupomFiscal
     PrintOptions.PrintMode = pmSplit
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42671.419546678200000000
-    ReportOptions.LastChange = 42811.391278831020000000
+    ReportOptions.LastChange = 43410.434318680600000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
+    OnReportPrint = 'frxReportOnReportPrint'
     Left = 608
     Top = 520
   end
