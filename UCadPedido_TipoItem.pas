@@ -141,6 +141,8 @@ type
     Label60: TLabel;
     FilenameEdit2: TFilenameEdit;
     Image2: TImage;
+    Label61: TLabel;
+    RxDBLookupCombo11: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
