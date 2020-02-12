@@ -595,25 +595,25 @@ begin
   vLinha := vLinha + cAvanco;
 
   Printer.Canvas.Font.Style := []; //Declarar Graphics
-  Printer.Canvas.TextOut(0,vLinha,'----------------------------------------');
+  Printer.Canvas.TextOut(0,vLinha,'------------------------------------------');
   vLinha := vLinha + cAvanco;
   Printer.Canvas.TextOut(0,vLinha,'  Usuario: ' + vUsuario);
   vLinha := vLinha + cAvanco;
   Printer.Canvas.TextOut(0,vLinha,'Data/Hora: ' + FormatDateTime('DD/MM/YYYY',Date));
   vLinha := vLinha + cAvanco;
-  Printer.Canvas.TextOut(0,vLinha,'========================================');
+  Printer.Canvas.TextOut(0,vLinha,'==========================================');
   vLinha := vLinha + cAvanco;
 
-  vTxt1 :=  'COD   PRODUTO               QTD      TOT';
+  vTxt1 :=  'COD   PRODUTO               QTD        TOT';
   Printer.Canvas.TextOut(0,vLinha,vTxt1);
   vLinha := vLinha + cAvanco;
-  Printer.Canvas.TextOut(0,vLinha,'----------------------------------------');
+  Printer.Canvas.TextOut(0,vLinha,'------------------------------------------');
   vLinha := vLinha + cAvanco;
 
   cdsVendaCFiscal.First;
   while not cdsVendaCFiscal.Eof do
   begin
-    vTxt1 := Copy(cdsVendaCFiscalREFERENCIA.AsString,1,5);
+    vTxt1 := Copy(cdsVendaCFiscalID_PRODUTO.AsString,1,5);
     for i := 1 to 6 - Length(vTxt1) do
       vTxt1 := vTxt1 + ' ';
 
@@ -627,7 +627,7 @@ begin
 
     vTxt1 := vTxt1 + vTxt2;
     vTxt2 := FormatFloat('0.00',cdsVendaCFiscalVLR_DUPLICATA.AsCurrency);
-    for i := 1 to 8 - Length(vTxt2) do
+    for i := 1 to 10 - Length(vTxt2) do
       vTxt2 := ' ' + vTxt2;
 
     Printer.Canvas.TextOut(0,vLinha,vTxt1+vTxt2);
@@ -636,7 +636,7 @@ begin
     vTotal := vTotal + cdsVendaCFiscalVLR_DUPLICATA.AsCurrency;
     cdsVendaCFiscal.Next;
   end;
-  Printer.Canvas.TextOut(0,vLinha,'========================================');
+  Printer.Canvas.TextOut(0,vLinha,'==========================================');
   vLinha := vLinha + cAvanco;
   vTxt1 :=  '                         TOTAL: ';
   vTxt2 := FormatFloat('0.00',vTotal);
