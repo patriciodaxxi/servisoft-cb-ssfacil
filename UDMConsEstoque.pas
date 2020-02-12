@@ -705,6 +705,7 @@ type
     cdsEstoque_AtualQTD_SALDO_OC: TFloatField;
     cdsEstoque_AtualQTD_SUB_SALDO: TFloatField;
     cdsEstoque_AtualQTD_SALDO_FINAL: TFloatField;
+    cdsBalancoDESC_TIPO_REG: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspEstoqueUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;

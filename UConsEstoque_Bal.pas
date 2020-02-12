@@ -40,6 +40,7 @@ type
     btnTipoSped: TNxButton;
     RadioGroup2: TRadioGroup;
     btnImpGrade: TNxButton;
+    ckImpressora: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -264,8 +265,8 @@ begin
   if ComboBox1.ItemIndex = 0 then
   begin
     case RadioGroup1.ItemIndex of
-      0: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_REG;REFERENCIA;NOME_COMBINACAO;TAMANHO';
-      1: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'TIPO_REG;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
+      0: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'DESC_TIPO_REG;REFERENCIA;NOME_COMBINACAO;TAMANHO';
+      1: fDMConsEstoque.cdsBalanco.IndexFieldNames := 'DESC_TIPO_REG;NOME_PRODUTO;NOME_COMBINACAO;TAMANHO';
     end;
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco2.fr3';
   end
@@ -278,7 +279,7 @@ begin
     vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\Balanco.fr3';
   end;
 
-  if FileExists(vArq) then
+  if (ckImpressora.Checked) and (FileExists(vArq)) then
   begin
     fDMConsEstoque.frxReport1.Report.LoadFromFile(vArq);
     fDMConsEstoque.cdsBalanco.First;
@@ -487,7 +488,10 @@ procedure TfrmConsEstoque_Bal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if (Shift = [ssCtrl]) and (Key = 87) then
-    CheckBox1.Visible := not(CheckBox1.Visible);
+  begin
+    CheckBox1.Visible    := not(CheckBox1.Visible);
+    ckImpressora.Visible := not(ckImpressora.Visible);
+  end;
 end;
 
 procedure TfrmConsEstoque_Bal.ComboBox1Change(Sender: TObject);

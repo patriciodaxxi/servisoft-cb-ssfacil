@@ -650,6 +650,7 @@ object frmGerar_NFSe: TfrmGerar_NFSe
             FieldName = 'DTCONTRATO_FIN'
             Title.Alignment = taCenter
             Title.Caption = 'Data Contrato Final'
+            Width = 64
             Visible = True
           end
           item
@@ -658,6 +659,7 @@ object frmGerar_NFSe: TfrmGerar_NFSe
             FieldName = 'TIPO_REG'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Reg.'
+            Width = 64
             Visible = True
           end>
       end
@@ -765,6 +767,7 @@ object frmGerar_NFSe: TfrmGerar_NFSe
           item
             Expanded = False
             FieldName = 'ID_SERVICO_INT'
+            Width = 64
             Visible = True
           end>
       end
