@@ -557,6 +557,12 @@ begin
   //4.00
   NfeXML.InfNFe.Total.ICMSTot.VFCPST    := Replace(FormatFloat('0.00',0),',','.');
   NfeXML.InfNFe.Total.ICMSTot.VFCPSTRet := Replace(FormatFloat('0.00',0),',','.');
+
+
+//**************** Inácio 13/02/2020  
+  vAux := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsFloat));
+
+{
   //*********
   //09/01/2017
   if fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsCurrency > 0 then
@@ -564,6 +570,7 @@ begin
   else
     vAux := StrToFloat(FormatFloat('0.00',fDMCupomFiscal.cdsCupomFiscalVLR_PRODUTOS.AsFloat + vVlr_Desconto_NFCe));
   //****************
+}
   NfeXML.InfNFe.Total.ICMSTot.VProd      := Replace(FormatFloat('0.00',vAux),',','.');
   NfeXML.InfNFe.Total.ICMSTot.VFrete     := Replace(FormatFloat('0.00',0),',','.');
   NfeXML.InfNFe.Total.ICMSTot.VSeg       := Replace(FormatFloat('0.00',0),',','.');

@@ -312,7 +312,6 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           Align = alTop
           Color = 3683329
           TabOrder = 0
-          OnExit = Panel4Exit
           object Label2: TLabel
             Left = 61
             Top = 17
@@ -677,7 +676,6 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
           Height = 169
           Align = alClient
           TabOrder = 2
-          OnEnter = Panel7Enter
           object Label15: TLabel
             Left = 223
             Top = 16
@@ -1082,7 +1080,6 @@ object fCupomFiscalPgto: TfCupomFiscalPgto
         Height = 72
         Align = alBottom
         TabOrder = 2
-        OnEnter = Panel7Enter
         object Label18: TLabel
           Left = 153
           Top = 16

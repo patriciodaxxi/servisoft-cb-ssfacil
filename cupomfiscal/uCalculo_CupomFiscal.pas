@@ -306,8 +306,6 @@ begin
   end;
 
   fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.00',vVlrDesconto_Ori));
-//  fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat    := fDMCupomFiscal.cdsCupomFiscalVLR_TOTAL.AsFloat -
-//                                                       fDMCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat;
 end;
 
 procedure prc_Move_Itens_Ajuste(fDMCupomFiscal: TDMCupomFiscal);

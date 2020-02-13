@@ -126,8 +126,6 @@ type
     procedure DBEdit5KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure CurrencyEdit1Enter(Sender: TObject);
-    procedure Panel7Enter(Sender: TObject);
-    procedure Panel4Exit(Sender: TObject);
     procedure ComboVendedorChange(Sender: TObject);
     procedure DBEdit4Click(Sender: TObject);
     procedure CurrencyEdit1Click(Sender: TObject);
@@ -1425,19 +1423,6 @@ begin
   end;
   Gerar_Parcelas(vVlrParcelado,vVlrTxJuros,vQtdParc);
   fDmCupomFiscal.vPgtoEditado := False;
-end;
-
-procedure TfCupomFiscalPgto.Panel7Enter(Sender: TObject);
-begin
-//  if fDmCupomFiscal.cdsParametrosUSA_NFCE.AsString = 'S' then
-//    if StrToFloat(FormatFloat('0.00',fDmCupomFiscal.cdsCupomFiscalVLR_DESCONTO.AsFloat)) <>
-//       StrToFloat(FormatFloat('0.00',vVlrDesconto_Ant)) then
-//      prc_Calcular_Geral(fDmCupomFiscal);
-end;
-
-procedure TfCupomFiscalPgto.Panel4Exit(Sender: TObject);
-begin
-//  SpeedButton2.Visible := fDmCupomFiscal.cdsTipoCobrancaCREDITO_LOJA.AsString = 'S';
 end;
 
 procedure TfCupomFiscalPgto.ComboVendedorChange(Sender: TObject);
