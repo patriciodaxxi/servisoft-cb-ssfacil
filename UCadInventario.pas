@@ -72,6 +72,7 @@ type
     PopupMenu1: TPopupMenu;
     Nome1: TMenuItem;
     Referncia1: TMenuItem;
+    btnCopiar: TNxButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -102,6 +103,7 @@ type
     procedure btnImp_EstoqueLoteClick(Sender: TObject);
     procedure Nome1Click(Sender: TObject);
     procedure Referncia1Click(Sender: TObject);
+    procedure btnCopiarClick(Sender: TObject);
   private
     { Private declarations }
     fDMCadInventario: TDMCadInventario;
@@ -116,7 +118,6 @@ type
     procedure prc_Limpar_Edit_Consulta;
 
     procedure prc_Posiciona_Registro;
-    procedure prc_Abrir_Produto(Tipo_Reg: String);
     procedure prc_Le_CFOP_Orig;
     procedure prc_Abrir_Estoque_Atual;
     procedure prc_Abrir_EstMov;
@@ -133,7 +134,7 @@ var
 implementation
 
 uses DmdDatabase, rsDBUtils, UMenu, uUtilPadrao, URelInventario,
-  UCadInventario_EstLote;
+  UCadInventario_EstLote, ConvUtils;
 
 {$R *.dfm}
 
@@ -177,7 +178,7 @@ var
 begin
   if fDMCadInventario.cdsInventario_Itens.State in [dsEdit,dsInsert] then
     fDMCadInventario.cdsInventario_Itens.Post;
-    
+
   if fDMCadInventario.qParametrosUSA_LOCAL_ESTOQUE.AsString <> 'S' then
     fDMCadInventario.cdsInventarioID_LOCAL_ESTOQUE.AsInteger := 1;
   if fDMCadInventario.fnc_Possui_Erro then
@@ -462,56 +463,12 @@ begin
     prc_Abrir_EstMov
   else
     prc_Abrir_Estoque_Atual;
-  prc_Abrir_Produto(fDMCadInventario.cdsInventarioTIPO_REG.AsString);
+  //fDMCadInventario.prc_Abrir_Produto(fDMCadInventario.cdsInventarioTIPO_REG.AsString);
 
   ffrmCadInventario_Prod := TfrmCadInventario_Prod.Create(self);
   ffrmCadInventario_Prod.fDMCadInventario := fDMCadInventario;
   ffrmCadInventario_Prod.ShowModal;
   FreeAndNil(ffrmCadInventario_Prod);
-end;
-
-procedure TfrmCadInventario.prc_Abrir_Produto(Tipo_Reg: String);
-begin
-  fDMCadInventario.cdsProduto.Close;
-  fDMCadInventario.cdsProduto.IndexFieldNames := 'NOME;NOME_COR;TAMANHO';
-  if fDMCadInventario.qParametros_EstINVENTARIO_ESTMOV.AsString = 'S' then
-  begin
-    fDMCadInventario.sdsProduto.CommandText := 'SELECT AUX.*, (SELECT SUM(EM.QTD2) QTD  FROM ESTOQUE_MOV EM '
-                                             + ' where EM.filial = :FILIAL '
-                                             + '  AND EM.id_local_estoque = :ID_LOCAL_ESTOQUE '
-                                             + '  AND EM.dtmovimento <= :DATA '
-                                             + '  AND EM.ID_PRODUTO = AUX.ID '
-                                             + '  AND EM.ID_COR = AUX.ID_COR_COMBINACAO '
-                                             + '  AND EM.TAMANHO = AUX.TAMANHO) QTD'
-                                             + '  FROM ('
-                                             + '  SELECT PRO.ID, PRO.REFERENCIA, PRO.nome, PRO.INATIVO, PRO.perc_ipi,'
-                                             + '  PRO.preco_custo, PRO.preco_venda, PRO.unidade, GR.NOME NOME_GRUPO,'
-                                             + '  PC.NOME NOME_COR,'
-                                             + '  CASE'
-                                             + ' WHEN PT.TAMANHO IS NULL THEN ' + QuotedStr('')
-                                             + ' ELSE PT.TAMANHO '
-                                             + '   END TAMANHO, '
-                                             + ' CASE'
-                                             + '   WHEN PC.ID_COR_COMBINACAO IS NULL THEN 0'
-                                             + '   ELSE PC.id_cor_combinacao'
-                                             + '   END ID_COR_COMBINACAO'
-                                             + ' FROM PRODUTO PRO'
-                                             + ' LEFT JOIN PRODUTO_TAM PT'
-                                             + ' ON PRO.ID = PT.ID'
-                                             + ' LEFT JOIN PRODUTO_COMB PC'
-                                             + ' ON PRO.ID = PC.ID'
-                                             + ' LEFT JOIN GRUPO GR'
-                                             + ' ON PRO.ID_GRUPO = GR.ID'
-                                             + ' WHERE PRO.INATIVO = ' + QuotedStr('N')
-                                             + ' AND PRO.ESTOQUE = ' + QuotedStr('S')
-                                             + ' AND PRO.TIPO_REG = ' + QuotedStr(Tipo_Reg) + ') AUX';
-    fDMCadInventario.sdsProduto.ParamByName('FILIAL').AsInteger           := fDMCadInventario.cdsInventarioFILIAL.AsInteger;
-    fDMCadInventario.sdsProduto.ParamByName('ID_LOCAL_ESTOQUE').AsInteger := fDMCadInventario.cdsInventarioID_LOCAL_ESTOQUE.AsInteger;
-    fDMCadInventario.sdsProduto.ParamByName('DATA').AsDate                := fDMCadInventario.cdsInventarioDATA.AsDateTime;
-  end
-  else
-    fDMCadInventario.sdsProduto.CommandText := fDMCadInventario.ctProduto + ' AND PRO.TIPO_REG = ' + QuotedStr(Tipo_Reg);
-  fDMCadInventario.cdsProduto.Open;
 end;
 
 procedure TfrmCadInventario.prc_Abrir_Estoque_Atual;
@@ -709,6 +666,88 @@ begin
   fDMCadInventario.qProd3.Open;
   fDMCadInventario.cdsInventario_Itens.IndexFieldNames := 'ID_PRODUTO';
   fDMCadInventario.cdsInventario_Itens.FindKey([fDMCadInventario.qProd3ID.AsInteger]);
+end;
+
+procedure TfrmCadInventario.btnCopiarClick(Sender: TObject);
+var
+  sds: TSQLDataSet;
+  sds2: TSQLDataSet;
+  i : Integer;
+  vData : TDateTime;
+  vIDAux : Integer;
+  Form: TForm;
+begin
+  if not(fDMCadInventario.cdsInventario_Consulta.Active) or (fDMCadInventario.cdsInventario_Consulta.IsEmpty) then
+    exit;
+
+  if MessageDlg('Deseja Copiar o Inventário Nº ' + fDMCadInventario.cdsInventario_ConsultaNUM_INVENTARIO.AsString + '?' ,mtConfirmation,[mbYes,mbNo],0) = mrNo then
+    exit;
+
+  vData := Date;
+  try
+    vData := StrToDate(InputBox('Data Estoque','Informe a Data do Estoque', DateToStr(vData)));
+  except
+    on E: exception do
+    begin
+      raise Exception.Create('Data Inválida ' + #13 + E.Message);
+    end;
+  end;
+
+  sds  := TSQLDataSet.Create(nil);
+  sds2 := TSQLDataSet.Create(nil);
+  Form := TForm.Create(Application);
+  uUtilPadrao.prc_Form_Aguarde(Form);
+
+  try
+
+    vIDAux := fDMCadInventario.cdsInventarioID.AsInteger;
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'SELECT FILIAL, TIPO_REG, ID_LOCAL_ESTOQUE '
+                       + 'FROM INVENTARIO WHERE ID = ' + IntToStr(fDMCadInventario.cdsInventario_ConsultaID.AsInteger);
+    sds.Open;
+
+    sds2.SQLConnection := dmDatabase.scoDados;
+    sds2.NoMetadata    := True;
+    sds2.GetMetadata   := False;
+    sds2.CommandText   := 'SELECT ITEM, ID_PRODUTO, TAMANHO, QTD_ESTOQUE, QTD_INVENTARIO, VLR_UNITARIO, PERC_IPI, '
+                        + 'PERC_ICMS, ID_COR, NUM_LOTE_CONTROLE FROM INVENTARIO_ITENS '
+                        + 'WHERE ID = ' + IntToStr(fDMCadInventario.cdsInventario_ConsultaID.AsInteger);
+    sds2.Open;
+
+    fDMCadInventario.prc_Inserir;
+    vIDAux := fDMCadInventario.cdsInventarioID.AsInteger; 
+    for i := 0 to (sds.FieldCount - 1) do
+      fDMCadInventario.cdsInventario.FieldByName(sds.Fields[i].FieldName).AsVariant := sds.Fields[i].Value;
+    fDMCadInventario.cdsInventarioDATA.AsDateTime := vData;
+
+    while not sds2.Eof do
+    begin
+      fDMCadInventario.cdsInventario_Itens.Insert;
+      fDMCadInventario.cdsInventario_ItensID.AsInteger := fDMCadInventario.cdsInventarioID.AsInteger;
+      for i := 0 to (sds2.FieldCount - 1) do
+        fDMCadInventario.cdsInventario_Itens.FieldByName(sds2.Fields[i].FieldName).AsVariant := sds2.Fields[i].Value;
+
+      fDMCadInventario.cdsInventario_ItensQTD_ESTOQUE.AsFloat := uUtilPadrao.fnc_Busca_Estoque_Data(fDMCadInventario.cdsInventarioFILIAL.AsInteger,
+                                                              fDMCadInventario.cdsInventarioID_LOCAL_ESTOQUE.AsInteger,
+                                                              fDMCadInventario.cdsInventario_ItensID_PRODUTO.AsInteger,
+                                                              fDMCadInventario.cdsInventario_ItensID_COR.AsInteger,
+                                                              fDMCadInventario.cdsInventario_ItensTAMANHO.AsString,
+                                                              fDMCadInventario.cdsInventarioDATA.AsDateTime);
+      fDMCadInventario.cdsInventario_Itens.Post;
+      sds2.Next;
+    end;
+  finally
+    FreeAndNil(sds);
+    FreeAndNil(sds2);
+    FreeAndNil(Form);
+  end;
+
+  fDMCadInventario.cdsInventario.ApplyUpdates(0);
+
+  prc_Consultar(vIDAux);
+
 end;
 
 end.

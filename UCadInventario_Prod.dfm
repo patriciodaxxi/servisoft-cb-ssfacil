@@ -30,9 +30,9 @@ object frmCadInventario_Prod: TfrmCadInventario_Prod
       Caption = 'Produto'
       object SMDBGrid1: TSMDBGrid
         Left = 0
-        Top = 78
+        Top = 85
         Width = 999
-        Height = 456
+        Height = 412
         Align = alClient
         Ctl3D = False
         DataSource = DMCadInventario.dsProduto
@@ -146,24 +146,24 @@ object frmCadInventario_Prod: TfrmCadInventario_Prod
       end
       object Panel1: TPanel
         Left = 0
-        Top = 0
+        Top = 497
         Width = 999
         Height = 37
-        Align = alTop
+        Align = alBottom
         Color = 8404992
         TabOrder = 1
         object btnConfirmar: TNxButton
-          Left = 1
+          Left = 2
           Top = 2
-          Width = 168
+          Width = 291
           Height = 30
           Hint = 'Importar os produtos selecionados'
-          Caption = 'Confirmar Importa'#231#227'o'
+          Caption = 'Copiar os Selecionados'
           Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
+          Font.Color = clBlue
           Font.Height = -13
-          Font.Name = 'Arial'
-          Font.Style = []
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
           Glyph.Data = {
             AE060000424DAE06000000000000360000002800000017000000170000000100
             1800000000007806000000000000000000000000000000000000FFFFFFFFFFFF
@@ -226,7 +226,7 @@ object frmCadInventario_Prod: TfrmCadInventario_Prod
           OnClick = btnConfirmarClick
         end
         object ProgressBar1: TProgressBar
-          Left = 232
+          Left = 412
           Top = 8
           Width = 545
           Height = 17
@@ -236,18 +236,46 @@ object frmCadInventario_Prod: TfrmCadInventario_Prod
       end
       object Panel2: TPanel
         Left = 0
-        Top = 37
+        Top = 0
         Width = 999
-        Height = 41
+        Height = 85
         Align = alTop
         Color = clSilver
         TabOrder = 2
+        object Label1: TLabel
+          Left = 32
+          Top = 68
+          Width = 31
+          Height = 13
+          Caption = 'Nome:'
+        end
+        object Label2: TLabel
+          Left = 9
+          Top = 44
+          Width = 54
+          Height = 13
+          Caption = 'ID Produto:'
+        end
+        object Label3: TLabel
+          Left = 229
+          Top = 44
+          Width = 55
+          Height = 13
+          Caption = 'Refer'#234'ncia:'
+        end
         object NxButton3: TNxButton
-          Left = 264
-          Top = 8
-          Width = 75
-          Caption = 'Filtrar'
-          TabOrder = 0
+          Left = 413
+          Top = 56
+          Width = 149
+          Height = 27
+          Caption = 'Efetuar Pesquisa'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlue
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 4
           OnClick = NxButton3Click
         end
         object RadioGroup1: TRadioGroup
@@ -262,7 +290,33 @@ object frmCadInventario_Prod: TfrmCadInventario_Prod
             'Ambos'
             'Com Saldo'
             'Negativo')
+          TabOrder = 0
+        end
+        object Edit1: TEdit
+          Left = 64
+          Top = 60
+          Width = 347
+          Height = 21
+          CharCase = ecUpperCase
+          TabOrder = 3
+        end
+        object CurrencyEdit1: TCurrencyEdit
+          Left = 64
+          Top = 37
+          Width = 76
+          Height = 21
+          AutoSize = False
+          DecimalPlaces = 0
+          DisplayFormat = '0'
           TabOrder = 1
+        end
+        object Edit2: TEdit
+          Left = 291
+          Top = 37
+          Width = 121
+          Height = 21
+          CharCase = ecUpperCase
+          TabOrder = 2
         end
       end
     end

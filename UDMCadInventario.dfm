@@ -188,7 +188,7 @@ object DMCadInventario: TDMCadInventario
     OnNewRecord = cdsInventario_ItensNewRecord
     OnReconcileError = cdsInventario_ItensReconcileError
     Left = 192
-    Top = 168
+    Top = 169
     object cdsInventario_ItensID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]

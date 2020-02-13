@@ -2211,36 +2211,6 @@ object fMenu: TfMenu
         GroupName = 'Previs'#227'o'
       end
       item
-        FormName = 'frmCadInventario'
-        CompName = 'btnInserir'
-        Caption = 'Inserir'
-        GroupName = 'Invent'#225'rio'
-      end
-      item
-        FormName = 'frmCadInventario'
-        CompName = 'btnExcluir'
-        Caption = 'Excluir'
-        GroupName = 'Invent'#225'rio'
-      end
-      item
-        FormName = 'frmCadInventario'
-        CompName = 'btnAlterar'
-        Caption = 'Alterar'
-        GroupName = 'Invent'#225'rio'
-      end
-      item
-        FormName = 'frmCadInventario'
-        CompName = 'btnImp_Produto'
-        Caption = 'Importar Produtos'
-        GroupName = 'Invent'#225'rio'
-      end
-      item
-        FormName = 'frmCadInventario'
-        CompName = 'btnExcluir_Prod'
-        Caption = 'Excluir Selecionados'
-        GroupName = 'Invent'#225'rio'
-      end
-      item
         FormName = 'frmCadMaquina'
         CompName = 'btnInserir'
         Caption = 'Inserir'
@@ -4395,6 +4365,42 @@ object fMenu: TfMenu
         CompName = 'btnAtualiza'
         Caption = 'Atualiza Pre'#231'o Custo Produto'
         GroupName = 'Custo do Produto (Mat'#233'ria Prima)'
+      end
+      item
+        FormName = 'frmCadInventario'
+        CompName = 'btnInserir'
+        Caption = 'Inserir'
+        GroupName = 'Invent'#225'rio'
+      end
+      item
+        FormName = 'frmCadInventario'
+        CompName = 'btnExcluir'
+        Caption = 'Excluir'
+        GroupName = 'Invent'#225'rio'
+      end
+      item
+        FormName = 'frmCadInventario'
+        CompName = 'btnAlterar'
+        Caption = 'Alterar'
+        GroupName = 'Invent'#225'rio'
+      end
+      item
+        FormName = 'frmCadInventario'
+        CompName = 'btnImp_Produto'
+        Caption = 'Importar Produtos'
+        GroupName = 'Invent'#225'rio'
+      end
+      item
+        FormName = 'frmCadInventario'
+        CompName = 'btnExcluir_Prod'
+        Caption = 'Excluir Selecionados'
+        GroupName = 'Invent'#225'rio'
+      end
+      item
+        FormName = 'frmCadInventario'
+        CompName = 'btnCopiar'
+        Caption = 'Copiar'
+        GroupName = 'Invent'#225'rio'
       end>
     LoginMode = lmActive
     UsersProfile.Active = True
