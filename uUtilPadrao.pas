@@ -125,6 +125,8 @@ uses
   function fnc_Existe_CBenef(Codigo : String) : Boolean;
   function WinExecAndWait32(FileName: string; Visibility: Integer; Parametro : String): Longword;
 
+  function fnc_Busca_Estoque_Data(Filial, ID_Local, ID_Produto, ID_Cor : Integer ; Tamanho : String ; Data : TDateTime) : Real;
+
 var
   vCodProduto_Pos: Integer;
   vCodPessoa_Pos: Integer;
@@ -2420,6 +2422,39 @@ begin
     CloseHandle(ProcessInfo.hProcess);
     CloseHandle(ProcessInfo.hThread);
   end;
+end;
+
+function fnc_Busca_Estoque_Data(Filial, ID_Local, ID_Produto, ID_Cor : Integer ; Tamanho : String ; Data : TDateTime) : Real;
+var
+  sds: TSQLDataSet;
+begin
+  Result := 0;
+  if trim(Tamanho) = '' then
+    Tamanho := '';
+  sds := TSQLDataSet.Create(nil);
+  try
+    sds.SQLConnection := dmDatabase.scoDados;
+    sds.NoMetadata    := True;
+    sds.GetMetadata   := False;
+    sds.CommandText   := 'select sum(e.qtd2) QTD from estoque_mov e '
+                       + 'WHERE E.filial = :FILIAL '
+                       + '  AND E.id_local_estoque = :ID_LOCAL_ESTOQUE '
+                       + '  AND E.dtmovimento <= :DATA '
+                       + '  AND E.id_produto = :ID_PRODUTO '
+                       + '  AND E.id_cor = :ID_COR '
+                       + '  AND E.tamanho = :TAMANHO ';
+    sds.ParamByName('FILIAL').AsInteger           := FILIAL;
+    sds.ParamByName('ID_LOCAL_ESTOQUE').AsInteger := ID_Local;
+    sds.ParamByName('DATA').AsDate                := Data;
+    sds.ParamByName('ID_PRODUTO').AsInteger       := ID_Produto;
+    sds.ParamByName('ID_COR').AsInteger           := ID_Cor;
+    sds.ParamByName('TAMANHO').AsString           := Tamanho;
+    sds.Open;
+    Result := StrToFloat(FormatFloat('0.0000',sds.FieldByName('QTD').AsFloat));
+  finally
+    FreeAndNil(sds);
+  end;
+
 end;
 
 end.

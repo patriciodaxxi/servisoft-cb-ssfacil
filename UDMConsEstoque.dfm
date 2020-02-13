@@ -758,61 +758,66 @@ object DMConsEstoque: TDMConsEstoque
       'aterial de Uso e Consumo'#39#13#10'  WHEN PRO.sped_tipo_item = '#39'08'#39' THEN' +
       ' '#39'08 - Ativo Imobilizado'#39#13#10'  WHEN PRO.sped_tipo_item = '#39'10'#39' THEN' +
       ' '#39'10 - Outros Insumos'#39#13#10'  WHEN PRO.sped_tipo_item = '#39'99'#39' THEN '#39'9' +
-      '9 - Outras'#39#13#10'  ELSE '#39#39#13#10'  END TIPO_SPED, '#13#10#13#10'    (select SUM(ENT' +
-      '.QTD * ENT.VLR_UNITARIO) VLR_ENTRADA'#13#10'      FROM estoque_mov ENT' +
-      #13#10'      WHERE ENT.tipo_es = '#39'E'#39#13#10'        AND ENT.gerar_custo = '#39 +
-      'S'#39#13#10'        AND ENT.ID_PRODUTO = EM.ID_PRODUTO'#13#10'        AND ENT.' +
-      'tamanho = EM.TAMANHO'#13#10'        AND ENT.FILIAL = :FILIAL'#13#10'        ' +
-      'AND ENT.DTMOVIMENTO <= :DTMOVIMENTO) VLR_ENTRADA,'#13#10'    (select S' +
-      'UM(ENT.QTD) QTD_ENTRADA'#13#10'      FROM estoque_mov ENT'#13#10'      WHERE' +
+      '9 - Outras'#39#13#10'  ELSE '#39#39#13#10'  END TIPO_SPED,  '#13#10'CASE'#13#10'  WHEN PRO.tip' +
+      'o_reg = '#39'C'#39' THEN '#39'C - Material Consumo '#39#13#10'  WHEN PRO.tipo_reg = ' +
+      #39'M'#39' THEN '#39'M - Materia Prima '#39#13#10'  WHEN PRO.tipo_reg = '#39'P'#39' THEN '#39'P' +
+      ' - Produto Acabado '#39#13#10'  WHEN PRO.tipo_reg = '#39'S'#39' THEN '#39'S - Semi A' +
+      'cabado '#39#13#10'  WHEN PRO.tipo_reg = '#39'I'#39' THEN '#39'I - Imobilizado '#39#13#10'  E' +
+      'LSE '#39#39#13#10'  END DESC_TIPO_REG,'#13#10#13#10'    (select SUM(ENT.QTD * ENT.VL' +
+      'R_UNITARIO) VLR_ENTRADA'#13#10'      FROM estoque_mov ENT'#13#10'      WHERE' +
       ' ENT.tipo_es = '#39'E'#39#13#10'        AND ENT.gerar_custo = '#39'S'#39#13#10'        A' +
       'ND ENT.ID_PRODUTO = EM.ID_PRODUTO'#13#10'        AND ENT.tamanho = EM.' +
       'TAMANHO'#13#10'        AND ENT.FILIAL = :FILIAL'#13#10'        AND ENT.DTMOV' +
-      'IMENTO <= :DTMOVIMENTO) QTD_ENTRADA,'#13#10'       (select first (1) E' +
-      'NT.PERC_ICMS'#13#10'        from ESTOQUE_MOV ENT'#13#10'        where ENT.TI' +
-      'PO_ES = '#39'E'#39' and'#13#10'              ENT.GERAR_CUSTO = '#39'S'#39' and'#13#10'      ' +
-      '        ENT.ID_PRODUTO = EM.ID_PRODUTO and'#13#10'              ENT.TA' +
-      'MANHO = EM.TAMANHO and'#13#10'              ENT.FILIAL = :FILIAL and'#13#10 +
-      '              ENT.DTMOVIMENTO <= :DTMOVIMENTO and'#13#10'             ' +
-      ' ENT.TIPO_ES = '#39'E'#39' and'#13#10'              ENT.PERC_ICMS > 0'#13#10'       ' +
-      ' order by ENT.ID desc) PERC_ICMS, PRO.PERC_IPI'#13#10'FROM ESTOQUE_MOV' +
-      ' EM'#13#10'INNER JOIN PRODUTO PRO ON EM.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN' +
-      ' COMBINACAO COMB ON EM.ID_COR = COMB.ID'
+      'IMENTO <= :DTMOVIMENTO) VLR_ENTRADA,'#13#10'    (select SUM(ENT.QTD) Q' +
+      'TD_ENTRADA'#13#10'      FROM estoque_mov ENT'#13#10'      WHERE ENT.tipo_es ' +
+      '= '#39'E'#39#13#10'        AND ENT.gerar_custo = '#39'S'#39#13#10'        AND ENT.ID_PRO' +
+      'DUTO = EM.ID_PRODUTO'#13#10'        AND ENT.tamanho = EM.TAMANHO'#13#10'    ' +
+      '    AND ENT.FILIAL = :FILIAL'#13#10'        AND ENT.DTMOVIMENTO <= :DT' +
+      'MOVIMENTO) QTD_ENTRADA,'#13#10'       (select first (1) ENT.PERC_ICMS'#13 +
+      #10'        from ESTOQUE_MOV ENT'#13#10'        where ENT.TIPO_ES = '#39'E'#39' a' +
+      'nd'#13#10'              ENT.GERAR_CUSTO = '#39'S'#39' and'#13#10'              ENT.I' +
+      'D_PRODUTO = EM.ID_PRODUTO and'#13#10'              ENT.TAMANHO = EM.TA' +
+      'MANHO and'#13#10'              ENT.FILIAL = :FILIAL and'#13#10'             ' +
+      ' ENT.DTMOVIMENTO <= :DTMOVIMENTO and'#13#10'              ENT.TIPO_ES ' +
+      '= '#39'E'#39' and'#13#10'              ENT.PERC_ICMS > 0'#13#10'        order by ENT' +
+      '.ID desc) PERC_ICMS, PRO.PERC_IPI'#13#10'FROM ESTOQUE_MOV EM'#13#10'INNER JO' +
+      'IN PRODUTO PRO ON EM.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN COMBINACAO C' +
+      'OMB ON EM.ID_COR = COMB.ID'#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftDate
         Name = 'DTMOVIMENTO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftDate
         Name = 'DTMOVIMENTO'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'FILIAL'
         ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftDate
         Name = 'DTMOVIMENTO'
         ParamType = ptInput
       end>
     SQLConnection = dmDatabase.scoDados
     Left = 296
-    Top = 208
+    Top = 209
   end
   object dspBalanco: TDataSetProvider
     DataSet = sdsBalanco
@@ -825,7 +830,7 @@ object DMConsEstoque: TDMConsEstoque
     Params = <>
     ProviderName = 'dspBalanco'
     OnCalcFields = cdsBalancoCalcFields
-    Left = 360
+    Left = 364
     Top = 208
     object cdsBalancoID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
@@ -902,6 +907,12 @@ object DMConsEstoque: TDMConsEstoque
     object cdsBalancoREF_NOME_COR: TStringField
       FieldName = 'REF_NOME_COR'
       Size = 200
+    end
+    object cdsBalancoDESC_TIPO_REG: TStringField
+      FieldName = 'DESC_TIPO_REG'
+      Required = True
+      FixedChar = True
+      Size = 21
     end
   end
   object dsBalanco: TDataSource
@@ -1080,13 +1091,13 @@ object DMConsEstoque: TDMConsEstoque
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 42032.577038136600000000
-    ReportOptions.LastChange = 43715.769750092590000000
+    ReportOptions.CreateDate = 43284.725669537000000000
+    ReportOptions.LastChange = 43873.653898877320000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
-    Left = 848
-    Top = 358
+    Left = 847
+    Top = 362
   end
   object frxPDFExport1: TfrxPDFExport
     UseFileCache = True
@@ -3711,11 +3722,12 @@ object DMConsEstoque: TDMConsEstoque
       'PERC_ICMS=PERC_ICMS'
       'PERC_IPI=PERC_IPI'
       'TIPO_REG=TIPO_REG'
-      'REF_NOME_COR=REF_NOME_COR')
+      'REF_NOME_COR=REF_NOME_COR'
+      'DESC_TIPO_REG=DESC_TIPO_REG')
     DataSource = dsBalanco
     BCDToCurrency = False
     Left = 1032
-    Top = 504
+    Top = 503
   end
   object sdsEstoque_De_Terc_Pes: TSQLDataSet
     NoMetadata = True

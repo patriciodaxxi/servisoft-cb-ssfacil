@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, Dialogs, UDMCadInventario, Grids, DBGrids,
-  SMDBGrid, ExtCtrls, NxCollection, ComCtrls, StdCtrls;
+  SMDBGrid, ExtCtrls, NxCollection, ComCtrls, StdCtrls, Mask, ToolEdit,
+  CurrEdit;
 
 type
   TfrmCadInventario_Prod = class(TForm)
@@ -17,6 +18,12 @@ type
     Panel2: TPanel;
     NxButton3: TNxButton;
     RadioGroup1: TRadioGroup;
+    Label1: TLabel;
+    Edit1: TEdit;
+    Label2: TLabel;
+    CurrencyEdit1: TCurrencyEdit;
+    Label3: TLabel;
+    Edit2: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnConfirmarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -71,7 +78,6 @@ begin
     fDMCadInventario.cdsProduto.Next;
   end;
   SMDBGrid1.EnableScroll;
-  Close;
 end;
 
 procedure TfrmCadInventario_Prod.prc_Gravar_Itens;
@@ -144,6 +150,7 @@ end;
 
 procedure TfrmCadInventario_Prod.NxButton3Click(Sender: TObject);
 begin
+  fDMCadInventario.prc_Abrir_Produto(fDMCadInventario.cdsInventarioTIPO_REG.AsString,Edit2.Text,Edit1.Text,CurrencyEdit1.AsInteger);
   fDMCadInventario.cdsProduto.Filtered := False;
   if RadioGroup1.ItemIndex > 0 then
   begin

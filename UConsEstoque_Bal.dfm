@@ -345,6 +345,17 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
       Transparent = True
       OnClick = btnImpGradeClick
     end
+    object ckImpressora: TCheckBox
+      Left = 429
+      Top = 93
+      Width = 97
+      Height = 17
+      Caption = 'Fast Report'
+      Checked = True
+      State = cbChecked
+      TabOrder = 10
+      Visible = False
+    end
   end
   object StaticText1: TStaticText
     Left = 0
@@ -415,7 +426,7 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 15
+        ColCount = 16
         RowCount = 2
         Columns = <
           item
@@ -524,6 +535,13 @@ object frmConsEstoque_Bal: TfrmConsEstoque_Bal
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Cadastro'
             Width = 64
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DESC_TIPO_REG'
+            Title.Alignment = taCenter
+            Title.Caption = 'Reg. no Sistema'
             Visible = True
           end>
       end

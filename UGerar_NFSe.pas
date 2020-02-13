@@ -175,9 +175,9 @@ begin
     vMesAux := ComboBox3.ItemIndex + 1;
     if ComboBox3.ItemIndex >= 12 then
       vMesAux := 12;
-    vDiaAux  := DaysInAMonth(ceAno.AsInteger,12);
-    vDataIni := EncodeDate(ceAno.AsInteger,12,01);
-    vDataFin := EncodeDate(ceAno.AsInteger,12,vDiaAux);
+    vDiaAux  := DaysInAMonth(ceAno.AsInteger,vMesAux);
+    vDataIni := EncodeDate(ceAno.AsInteger,vMesAux,01);
+    vDataFin := EncodeDate(ceAno.AsInteger,vMesAux,vDiaAux);
 
     fDMCadOS.cdsContrato.Close;
     vComando := ' WHERE (OS.DTCONTRATO_INI <= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',vDataIni)) + ') AND '

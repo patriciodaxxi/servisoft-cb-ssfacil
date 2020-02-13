@@ -222,6 +222,8 @@ type
 
     function fnc_Possui_Erro: Boolean;
 
+    procedure prc_Abrir_Produto(Tipo_Reg, Referencia, Nome: String ; ID_Produto : Integer);
+
   end;
 
 var
@@ -457,6 +459,67 @@ begin
     if not qCombinacao.IsEmpty then
       cdsInventario_ItensNOME_COR_COMBINACAO.AsString := qCombinacaoNOME.AsString;
   end;
+end;
+
+procedure TDMCadInventario.prc_Abrir_Produto(Tipo_Reg, Referencia, Nome: String ; ID_Produto : Integer);
+var
+  vTab : String;
+begin
+  cdsProduto.Close;
+  cdsProduto.IndexFieldNames := 'NOME;NOME_COR;TAMANHO';
+  vTab := 'PRO.';
+  if qParametros_EstINVENTARIO_ESTMOV.AsString = 'S' then
+  begin
+    sdsProduto.CommandText := 'SELECT AUX.*, (SELECT SUM(EM.QTD2) QTD  FROM ESTOQUE_MOV EM '
+                                             + ' where EM.filial = :FILIAL '
+                                             + '  AND EM.id_local_estoque = :ID_LOCAL_ESTOQUE '
+                                             + '  AND EM.dtmovimento <= :DATA '
+                                             + '  AND EM.ID_PRODUTO = AUX.ID '
+                                             + '  AND EM.ID_COR = AUX.ID_COR_COMBINACAO '
+                                             + '  AND EM.TAMANHO = AUX.TAMANHO) QTD'
+                                             + '  FROM ('
+                                             + '  SELECT PRO.ID, PRO.REFERENCIA, PRO.nome, PRO.INATIVO, PRO.perc_ipi,'
+                                             + '  PRO.preco_custo, PRO.preco_venda, PRO.unidade, GR.NOME NOME_GRUPO,'
+                                             + '  PC.NOME NOME_COR,'
+                                             + '  CASE'
+                                             + ' WHEN PT.TAMANHO IS NULL THEN ' + QuotedStr('')
+                                             + ' ELSE PT.TAMANHO '
+                                             + '   END TAMANHO, '
+                                             + ' CASE'
+                                             + '   WHEN PC.ID_COR_COMBINACAO IS NULL THEN 0'
+                                             + '   ELSE PC.id_cor_combinacao'
+                                             + '   END ID_COR_COMBINACAO'
+                                             + ' FROM PRODUTO PRO'
+                                             + ' LEFT JOIN PRODUTO_TAM PT'
+                                             + ' ON PRO.ID = PT.ID'
+                                             + ' LEFT JOIN PRODUTO_COMB PC'
+                                             + ' ON PRO.ID = PC.ID'
+                                             + ' LEFT JOIN GRUPO GR'
+                                             + ' ON PRO.ID_GRUPO = GR.ID'
+                                             + ' WHERE PRO.INATIVO = ' + QuotedStr('N')
+                                             + ' AND PRO.ESTOQUE = ' + QuotedStr('S')
+                                             + ' AND PRO.TIPO_REG = ' + QuotedStr(Tipo_Reg) + ') AUX WHERE 0 = 0' ;
+    //sdsProduto.ParamByName('FILIAL').AsInteger           := cdsInventarioFILIAL.AsInteger;
+    //sdsProduto.ParamByName('ID_LOCAL_ESTOQUE').AsInteger := cdsInventarioID_LOCAL_ESTOQUE.AsInteger;
+    //sdsProduto.ParamByName('DATA').AsDate                := cdsInventarioDATA.AsDateTime;
+    vTab := 'AUX.'
+  end
+  else
+    sdsProduto.CommandText := ctProduto + ' AND PRO.TIPO_REG = ' + QuotedStr(Tipo_Reg);
+
+  if ID_Produto > 0 then
+    sdsProduto.CommandText := sdsProduto.CommandText +  ' AND ' + vTab + 'ID = ' + IntToStr(ID_Produto);
+  if trim(Referencia) <> '' then
+    sdsProduto.CommandText := sdsProduto.CommandText + ' AND ' + vTab + 'REFERENCIA LIKE ' + QuotedStr('%'+Referencia+'%');
+  if trim(Nome) <> '' then
+    sdsProduto.CommandText := sdsProduto.CommandText + ' AND ' + vTab + 'NOME LIKE ' + QuotedStr('%'+Nome+'%');
+  if qParametros_EstINVENTARIO_ESTMOV.AsString = 'S' then
+  begin
+    sdsProduto.ParamByName('FILIAL').AsInteger           := cdsInventarioFILIAL.AsInteger;
+    sdsProduto.ParamByName('ID_LOCAL_ESTOQUE').AsInteger := cdsInventarioID_LOCAL_ESTOQUE.AsInteger;
+    sdsProduto.ParamByName('DATA').AsDate                := cdsInventarioDATA.AsDateTime;
+  end;
+  cdsProduto.Open;
 end;
 
 end.
