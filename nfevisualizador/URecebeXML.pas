@@ -1012,8 +1012,8 @@ begin
   fDMRecebeXML.mItensNotaQtdPacoteInterno.AsInteger := 0;
 
   fDMRecebeXML.mItensNotaConversorUnidade.AsFloat   := 0;
-  fDMRecebeXML.mItensNotaUnidade.AsString           := UpperCase(fDMRecebeXML.cdsDetalheuCom.AsString);
-  fDMRecebeXML.mItensNotaUnidadeInterno.AsString    := UpperCase(fDMRecebeXML.cdsDetalheuCom.AsString);
+  fDMRecebeXML.mItensNotaUnidade.AsString           := TirarAcento(UpperCase(fDMRecebeXML.cdsDetalheuCom.AsString));
+  fDMRecebeXML.mItensNotaUnidadeInterno.AsString    := TirarAcento(UpperCase(fDMRecebeXML.cdsDetalheuCom.AsString));
   fDMRecebeXML.mItensNotaVlr_Venda.AsFloat          := 0;
   fDMRecebeXML.mItensNotaVlr_Custo_Prod.AsFloat     := 0;
   fDMRecebeXML.mItensNotaConverter_Unid_Medida.AsBoolean := False;
@@ -2549,7 +2549,7 @@ begin
     fDMRecebeXML.cdsNotaFiscal_ItensID_COR.AsInteger      := fDMRecebeXML.mItensNotaID_Cor.AsInteger;
     if fDMRecebeXML.mItensNotaID_Cor.AsInteger <= 0 then
       fDMRecebeXML.cdsNotaFiscal_ItensID_COR.Clear;
-    fDMRecebeXML.cdsNotaFiscal_ItensUNIDADE.AsString        := UpperCase(fDMRecebeXML.mItensNotaUnidade.AsString);
+    fDMRecebeXML.cdsNotaFiscal_ItensUNIDADE.AsString        := TirarAcento(UpperCase(fDMRecebeXML.mItensNotaUnidade.AsString));
     fDMRecebeXML.cdsNotaFiscal_ItensNUMERO_OC.AsString      := Trim(fDMRecebeXML.mItensNotaNumPedido.AsString);
     fDMRecebeXML.cdsNotaFiscal_ItensITEM_PEDIDO.AsInteger   := fnc_NumValido(Trim(fDMRecebeXML.mItensNotaItemPedido.AsString));
     fDMRecebeXML.cdsNotaFiscal_ItensID_PEDIDO.AsInteger     := fDMRecebeXML.mItensNotaID_Pedido.AsInteger;
