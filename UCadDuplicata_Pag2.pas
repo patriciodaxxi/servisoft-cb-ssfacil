@@ -496,11 +496,11 @@ end;
 procedure TfrmCadDuplicata_Pag2.ceDescontoExit(Sender: TObject);
 begin
   if ceDesconto.Value > 0 then
-    cePagamento.Value := StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat - ceDesconto.Value))
-  else
-  begin
-    cePagamento.Value := StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat));
-  end;
+    cePagamento.Value := StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat - ceDesconto.Value));
+//  else
+//  begin
+//    cePagamento.Value := StrToFloat(FormatFloat('0.00',fDMCadDuplicata.cdsDuplicataVLR_RESTANTE.AsFloat));
+//  end;
   prc_Calcular_Total;
 end;
 
