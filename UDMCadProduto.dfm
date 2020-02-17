@@ -1571,7 +1571,7 @@ object dmCadProduto: TdmCadProduto
     OnCalcFields = cdsProduto_ConsumoCalcFields
     OnNewRecord = cdsProduto_ConsumoNewRecord
     Left = 114
-    Top = 113
+    Top = 114
     object cdsProduto_ConsumoID: TIntegerField
       FieldName = 'ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
