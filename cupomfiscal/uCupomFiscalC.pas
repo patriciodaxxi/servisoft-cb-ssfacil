@@ -62,7 +62,6 @@ type
     DBMemo2: TDBMemo;
     btComissao: TBitBtn;
     btnNaoFiscal: TNxButton;
-    btnCarne: TNxButton;
     btnMultiPgto: TNxButton;
     btnComanda: TNxButton;
     PopupMenu1: TPopupMenu;
@@ -91,6 +90,9 @@ type
     ceQtd: TCurrencyEdit;
     SMDBGrid2: TSMDBGrid;
     ceTotal: TCurrencyEdit;
+    N2: TMenuItem;
+    Carn2: TMenuItem;
+    Promissria2: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
@@ -103,7 +105,6 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure SMDBGrid1DblClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
-    procedure btnCarneClick(Sender: TObject);
     procedure CurrencyEdit1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnComandaClick(Sender: TObject);
@@ -124,6 +125,8 @@ type
     procedure cbNEnviadosClick(Sender: TObject);
     procedure btnRecalcularClick(Sender: TObject);
     procedure btnAjustarICMSClick(Sender: TObject);
+    procedure Carn2Click(Sender: TObject);
+    procedure Promissria2Click(Sender: TObject);
   private
     { Private declarations }
     fDmCupomFiscal: TDmCupomFiscal;
@@ -263,8 +266,9 @@ begin
     Label5.Visible := False;
     Shape1.Visible := False;
   end;
-  btnCarne.Visible   := fDmCupomFiscal.cdsCupomParametrosUSA_CARNE.AsString = 'S';
-  btnComanda.Visible := fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S';
+  Carn2.Visible       := fDmCupomFiscal.cdsCupomParametrosUSA_CARNE.AsString = 'S';
+  Promissria2.Visible := Carn2.Visible;
+  btnComanda.Visible  := fDmCupomFiscal.cdsCupomParametrosUSA_CARTAO_COMANDA.AsString = 'S';
 
   fDmCupomFiscal.qFilial.Close;
   fDmCupomFiscal.qFilial.Open;
@@ -1294,30 +1298,6 @@ end;
 procedure TfCupomFiscalC.BitBtn1Click(Sender: TObject);
 begin
   fDmCupomFiscal.ImpNaoFiscalC('','','','','','','');
-end;
-
-procedure TfCupomFiscalC.btnCarneClick(Sender: TObject);
-var
-  vArq: String;
-begin
-  if fDmCupomFiscal.cdsCupom_Cons.IsEmpty then
-    Exit
-  else
-  begin
-    if fDmCupomFiscal.cdsCupomParametrosCARNE_RELATORIO.AsString <> '' then
-      vArq := fDmCupomFiscal.cdsCupomParametrosCARNE_RELATORIO.AsString
-    else
-      vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\CarnePgto1.fr3';
-    if FileExists(vArq) then
-      fDmCupomFiscal.frxReport1.Report.LoadFromFile(vArq)
-    else
-    begin
-      ShowMessage('Relatório não localizado! ' + vArq);
-      Exit;
-    end;
-    fDmCupomFiscal.prcLocalizar(fDmCupomFiscal.cdsCupom_ConsID.AsInteger);
-    fDmCupomFiscal.frxReport1.ShowReport;
-  end;
 end;
 
 procedure TfCupomFiscalC.CurrencyEdit1KeyDown(Sender: TObject;
@@ -2354,6 +2334,51 @@ begin
                                                                                         fDmCupomFiscal.cdsCupom_ParcVLR_VENCIMENTO.AsFloat,
                                                                                         fDmCupomFiscal.cdsCupom_ParcDTVENCIMENTO.AsDateTime,'');
   fDmCupomFiscal.cdsCupom_Parc.Post;
+end;
+
+procedure TfCupomFiscalC.Carn2Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  if fDmCupomFiscal.cdsCupom_Cons.IsEmpty then
+    Exit
+  else
+  begin
+    if fDmCupomFiscal.cdsCupomParametrosCARNE_RELATORIO.AsString <> '' then
+      vArq := fDmCupomFiscal.cdsCupomParametrosCARNE_RELATORIO.AsString
+    else
+      vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\CarnePgto1.fr3';
+    if FileExists(vArq) then
+      fDmCupomFiscal.frxReport1.Report.LoadFromFile(vArq)
+    else
+    begin
+      ShowMessage('Relatório não localizado! ' + vArq);
+      Exit;
+    end;
+    fDmCupomFiscal.prcLocalizar(fDmCupomFiscal.cdsCupom_ConsID.AsInteger);
+    fDmCupomFiscal.frxReport1.ShowReport;
+  end;
+end;
+
+procedure TfCupomFiscalC.Promissria2Click(Sender: TObject);
+var
+  vArq: String;
+begin
+  if fDmCupomFiscal.cdsCupom_Cons.IsEmpty then
+    Exit
+  else
+  begin
+    vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\CarnePromissoria.fr3';
+    if FileExists(vArq) then
+      fDmCupomFiscal.frxReport1.Report.LoadFromFile(vArq)
+    else
+    begin
+      ShowMessage('Relatório não localizado! ' + vArq);
+      Exit;
+    end;
+    fDmCupomFiscal.prcLocalizar(fDmCupomFiscal.cdsCupom_ConsID.AsInteger);
+    fDmCupomFiscal.frxReport1.ShowReport;
+  end;
 end;
 
 end.
