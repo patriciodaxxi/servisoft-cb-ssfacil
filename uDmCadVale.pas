@@ -561,6 +561,11 @@ type
     sdsPedidoDTCONFERENCIA: TDateField;
     cdsPedidoDTCONFERENCIA: TDateField;
     qParametros_PedCONFERENCIA_SIMPLES: TStringField;
+    sdsPedidoVLR_ICMSSUBST: TFloatField;
+    cdsPedidoVLR_ICMSSUBST: TFloatField;
+    sdsValeVLR_ICMSSUBST: TFloatField;
+    cdsValeVLR_ICMSSUBST: TFloatField;
+    cdsValeImpVLR_ICMSSUBST: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
     procedure dspValeUpdateError(Sender: TObject;
       DataSet: TCustomClientDataSet; E: EUpdateError;
@@ -882,19 +887,21 @@ end;
 procedure TDmCadVale.prc_Calcular_Total;
 var
   vVlrTotal: Real;
-  vVlrProduto, vVlrServico: Real;
+  vVlrProduto, vVlrServico, vVlrICMS_ST: Real;
   vVlrDesconto: Real;
 begin
   vVlrTotal    := 0;
   vVlrProduto  := 0;
   vVlrServico  := 0;
   vVlrDesconto := 0;
+  vVlrICMS_ST  := 0;
   cdsValeItens.First;
   while not cdsValeItens.Eof do
   begin
     vVlrTotal    := vVlrTotal + cdsValeItensVLR_TOTAL.AsFloat;
     vVlrProduto  := vVlrProduto + cdsValeItensVLR_TOTAL.AsFloat + cdsValeItensVLR_DESCONTO.AsFloat;
     vVlrDesconto := vVlrDesconto + cdsValeItensVLR_DESCONTO.AsFloat;
+    vVlrICMS_ST  := vVlrICMS_ST + cdsValeItensVLR_ICMSSUBST.AsFloat;
     cdsValeItens.Next;
   end;
 
@@ -906,8 +913,9 @@ begin
     cdsValeServico.Next;
   end;
 
-  cdsValeVLR_TOTAL.AsFloat    := StrToFloat(FormatFloat('0.00',vVlrTotal));
+  cdsValeVLR_TOTAL.AsFloat    := StrToFloat(FormatFloat('0.00',vVlrTotal + vVlrICMS_ST));
   cdsValeVLR_PRODUTO.AsFloat  := StrToFloat(FormatFloat('0.00',vVlrProduto));
+  cdsValeVLR_ICMSSUBST.AsFloat := StrToFloat(FormatFloat('0.00',vVlrICMS_ST));
   cdsValeVLR_SERVICO.AsFloat  := StrToFloat(FormatFloat('0.00',vVlrServico));
   cdsValeVLR_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.00',vVlrDesconto));
 end;

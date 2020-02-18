@@ -505,9 +505,9 @@ object fRelVale: TfRelVale
           Height = 18
           BeforePrint = RLBand2BeforePrint
           object RLDBText22: TRLDBText
-            Left = 425
+            Left = 417
             Top = 2
-            Width = 65
+            Width = 51
             Height = 13
             Alignment = taRightJustify
             AutoSize = False
@@ -529,7 +529,7 @@ object fRelVale: TfRelVale
             DrawKind = dkLine
           end
           object RLDBText49: TRLDBText
-            Left = 392
+            Left = 384
             Top = 2
             Width = 32
             Height = 13
@@ -547,7 +547,7 @@ object fRelVale: TfRelVale
           object RLDBText51: TRLDBText
             Left = 34
             Top = 3
-            Width = 50
+            Width = 43
             Height = 12
             Alignment = taCenter
             AutoSize = False
@@ -561,9 +561,9 @@ object fRelVale: TfRelVale
             ParentFont = False
           end
           object RLDBText16: TRLDBText
-            Left = 558
+            Left = 576
             Top = 2
-            Width = 60
+            Width = 48
             Height = 13
             Alignment = taRightJustify
             AutoSize = False
@@ -610,9 +610,9 @@ object fRelVale: TfRelVale
             ParentFont = False
           end
           object RLDBText17: TRLDBText
-            Left = 491
+            Left = 469
             Top = 2
-            Width = 66
+            Width = 58
             Height = 13
             Alignment = taRightJustify
             AutoSize = False
@@ -626,7 +626,7 @@ object fRelVale: TfRelVale
             ParentFont = False
           end
           object RLDBText18: TRLDBText
-            Left = 338
+            Left = 329
             Top = 2
             Width = 54
             Height = 13
@@ -642,7 +642,7 @@ object fRelVale: TfRelVale
             ParentFont = False
           end
           object RLDBMemo1: TRLDBMemo
-            Left = 86
+            Left = 78
             Top = 3
             Width = 251
             Height = 12
@@ -657,13 +657,29 @@ object fRelVale: TfRelVale
             ParentFont = False
           end
           object RLDBText34: TRLDBText
-            Left = 619
+            Left = 624
             Top = 2
-            Width = 50
+            Width = 45
             Height = 13
             Alignment = taRightJustify
             AutoSize = False
             DataField = 'VLR_DESCONTO'
+            DataSource = DmCadVale.dsValeImp_Itens
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = []
+            ParentFont = False
+          end
+          object RLDBText42: TRLDBText
+            Left = 529
+            Top = 2
+            Width = 46
+            Height = 13
+            Alignment = taRightJustify
+            AutoSize = False
+            DataField = 'VLR_ICMSSUBST'
             DataSource = DmCadVale.dsValeImp_Itens
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
@@ -1048,7 +1064,7 @@ object fRelVale: TfRelVale
         end
         object RLLabel33: TRLLabel
           Left = 6
-          Top = 22
+          Top = 20
           Width = 22
           Height = 11
           Caption = 'Item'
@@ -1061,7 +1077,7 @@ object fRelVale: TfRelVale
         end
         object RLLabel34: TRLLabel
           Left = 686
-          Top = 22
+          Top = 20
           Width = 54
           Height = 11
           Alignment = taCenter
@@ -1075,8 +1091,8 @@ object fRelVale: TfRelVale
           ParentFont = False
         end
         object RLLabel35: TRLLabel
-          Left = 501
-          Top = 22
+          Left = 473
+          Top = 20
           Width = 54
           Height = 11
           Alignment = taCenter
@@ -1089,9 +1105,9 @@ object fRelVale: TfRelVale
           ParentFont = False
         end
         object RLLabel37: TRLLabel
-          Left = 460
-          Top = 22
-          Width = 28
+          Left = 444
+          Top = 20
+          Width = 24
           Height = 11
           Alignment = taCenter
           Caption = 'Qtde.'
@@ -1103,8 +1119,8 @@ object fRelVale: TfRelVale
           ParentFont = False
         end
         object RLLabel28: TRLLabel
-          Left = 397
-          Top = 23
+          Left = 388
+          Top = 20
           Width = 22
           Height = 11
           Alignment = taCenter
@@ -1118,7 +1134,7 @@ object fRelVale: TfRelVale
         end
         object RLLabel42: TRLLabel
           Left = 36
-          Top = 23
+          Top = 20
           Width = 41
           Height = 11
           Caption = 'ID Prod.'
@@ -1130,8 +1146,8 @@ object fRelVale: TfRelVale
           ParentFont = False
         end
         object RLLabel22: TRLLabel
-          Left = 585
-          Top = 21
+          Left = 591
+          Top = 20
           Width = 32
           Height = 11
           Alignment = taCenter
@@ -1144,8 +1160,8 @@ object fRelVale: TfRelVale
           ParentFont = False
         end
         object RLLabel5: TRLLabel
-          Left = 345
-          Top = 23
+          Left = 334
+          Top = 20
           Width = 46
           Height = 11
           Alignment = taCenter
@@ -1158,8 +1174,8 @@ object fRelVale: TfRelVale
           ParentFont = False
         end
         object RLLabel8: TRLLabel
-          Left = 91
-          Top = 22
+          Left = 78
+          Top = 20
           Width = 40
           Height = 11
           Caption = 'Produto'
@@ -1172,11 +1188,25 @@ object fRelVale: TfRelVale
         end
         object RLLabel27: TRLLabel
           Left = 637
-          Top = 21
+          Top = 20
           Width = 28
           Height = 11
           Alignment = taCenter
           Caption = 'Desc.'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object RLLabel36: TRLLabel
+          Left = 549
+          Top = 20
+          Width = 14
+          Height = 11
+          Alignment = taCenter
+          Caption = 'ST'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -9
@@ -1317,11 +1347,11 @@ object fRelVale: TfRelVale
           ParentFont = False
           BeforePrint = RLBand4BeforePrint
           object RLLabel45: TRLLabel
-            Left = 627
-            Top = 2
-            Width = 108
+            Left = 579
+            Top = 42
+            Width = 34
             Height = 11
-            Caption = 'VALOR TOTAL DO VALE'
+            Caption = 'TOTAL:'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -9
@@ -1331,7 +1361,7 @@ object fRelVale: TfRelVale
           end
           object RLDBText8: TRLDBText
             Left = 616
-            Top = 28
+            Top = 39
             Width = 121
             Height = 16
             Alignment = taRightJustify
@@ -1405,8 +1435,9 @@ object fRelVale: TfRelVale
           object RLDBText32: TRLDBText
             Left = 375
             Top = 13
-            Width = 82
+            Width = 72
             Height = 14
+            Alignment = taRightJustify
             DataField = 'VLR_PRODUTO'
             DataSource = DmCadVale.dsValeImp
             Font.Charset = DEFAULT_CHARSET
@@ -1417,7 +1448,7 @@ object fRelVale: TfRelVale
             ParentFont = False
           end
           object RLLabel25: TRLLabel
-            Left = 491
+            Left = 523
             Top = 2
             Width = 73
             Height = 11
@@ -1430,10 +1461,11 @@ object fRelVale: TfRelVale
             ParentFont = False
           end
           object RLDBText33: TRLDBText
-            Left = 491
+            Left = 523
             Top = 13
-            Width = 89
+            Width = 73
             Height = 14
+            Alignment = taRightJustify
             DataField = 'VLR_DESCONTO'
             DataSource = DmCadVale.dsValeImp
             Font.Charset = DEFAULT_CHARSET
@@ -1445,7 +1477,7 @@ object fRelVale: TfRelVale
           end
           object RLLabel29: TRLLabel
             Left = 375
-            Top = 34
+            Top = 39
             Width = 55
             Height = 16
             Caption = 'N'#186' Vale:'
@@ -1461,7 +1493,7 @@ object fRelVale: TfRelVale
           end
           object RLDBText38: TRLDBText
             Left = 429
-            Top = 34
+            Top = 39
             Width = 78
             Height = 16
             Alignment = taRightJustify
@@ -1477,6 +1509,34 @@ object fRelVale: TfRelVale
             ParentColor = False
             ParentFont = False
             Transparent = False
+          end
+          object RLLabel38: TRLLabel
+            Left = 669
+            Top = 2
+            Width = 41
+            Height = 11
+            Caption = 'Valor ST'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object RLDBText43: TRLDBText
+            Left = 651
+            Top = 13
+            Width = 74
+            Height = 14
+            Alignment = taRightJustify
+            DataField = 'VLR_ICMSSUBST'
+            DataSource = DmCadVale.dsValeImp
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
           end
         end
         object RLBand7: TRLBand

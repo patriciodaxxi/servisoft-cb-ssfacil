@@ -1085,12 +1085,13 @@ begin
   else
     ffrmCadVale_Itens.prc_Move_Dados_Itens;
 
-  fDMCadVale.cdsValeItensUNIDADE.AsString      := fDMCadVale.cdsPedidoUNIDADE.AsString;
-  fDMCadVale.cdsValeItensQTD.AsFloat           := StrToFloat(FormatFloat('0.000000',fDMCadVale.cdsPedidoQTD_AFATURAR.AsFloat));
-  fDMCadVale.cdsValeItensPERC_IPI.AsFloat      := fDMCadVale.cdsPedidoPERC_IPI.AsFloat;
-  fDMCadVale.cdsValeItensVLR_UNITARIO.AsFloat  := fDMCadVale.cdsPedidoVLR_UNITARIO.AsFloat;
-  fDmCadVale.cdsValeItensPERC_DESCONTO.AsFloat := StrToFloat(FormatFloat('0.00###',fDmCadVale.cdsPedidoPERC_DESCONTO.AsFloat));
-  fDmCadVale.cdsValeItensVLR_DESCONTO.AsFloat  := StrToFloat(FormatFloat('0.00',fDmCadVale.cdsPedidoVLR_DESCONTO.AsFloat + fDmCadVale.cdsPedidoVLR_DESCONTORATEIO.AsFloat));
+  fDMCadVale.cdsValeItensUNIDADE.AsString       := fDMCadVale.cdsPedidoUNIDADE.AsString;
+  fDMCadVale.cdsValeItensQTD.AsFloat            := StrToFloat(FormatFloat('0.000000',fDMCadVale.cdsPedidoQTD_AFATURAR.AsFloat));
+  fDMCadVale.cdsValeItensPERC_IPI.AsFloat       := fDMCadVale.cdsPedidoPERC_IPI.AsFloat;
+  fDMCadVale.cdsValeItensVLR_UNITARIO.AsFloat   := fDMCadVale.cdsPedidoVLR_UNITARIO.AsFloat;
+  fDmCadVale.cdsValeItensPERC_DESCONTO.AsFloat  := StrToFloat(FormatFloat('0.00###',fDmCadVale.cdsPedidoPERC_DESCONTO.AsFloat));
+  fDmCadVale.cdsValeItensVLR_DESCONTO.AsFloat   := StrToFloat(FormatFloat('0.00',fDmCadVale.cdsPedidoVLR_DESCONTO.AsFloat + fDmCadVale.cdsPedidoVLR_DESCONTORATEIO.AsFloat));
+  fDmCadVale.cdsValeItensVLR_ICMSSUBST.AsString := FormatFloat('0.00',fDmCadVale.cdsPedidoVLR_ICMSSUBST.AsFloat);
 
   if fDMCadVale.qParametrosARREDONDAR_5.AsString = 'B' then
     fDMCadVale.cdsValeItensVLR_TOTAL.AsFloat := StrToCurr(FormatCurr('0.00',(fDMCadVale.cdsValeItensQTD.AsFloat * fDMCadVale.cdsValeItensVLR_UNITARIO.AsFloat) - fDmCadVale.cdsValeItensVLR_DESCONTO.AsFloat))

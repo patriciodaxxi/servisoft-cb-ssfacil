@@ -63,6 +63,9 @@ object DmCadVale: TDmCadVale
     object sdsValeDTUSUARIO: TDateField
       FieldName = 'DTUSUARIO'
     end
+    object sdsValeVLR_ICMSSUBST: TFloatField
+      FieldName = 'VLR_ICMSSUBST'
+    end
   end
   object dspVale: TDataSetProvider
     DataSet = sdsVale
@@ -137,6 +140,9 @@ object DmCadVale: TDmCadVale
     end
     object cdsValeDTUSUARIO: TDateField
       FieldName = 'DTUSUARIO'
+    end
+    object cdsValeVLR_ICMSSUBST: TFloatField
+      FieldName = 'VLR_ICMSSUBST'
     end
   end
   object dsVale: TDataSource
@@ -1212,18 +1218,18 @@ object DmCadVale: TDmCadVale
   object sdsPedido: TSQLDataSet
     CommandText = 
       'SELECT PE.ID, PE.PEDIDO_CLIENTE, PE.id_cliente, PE.DTEMISSAO, PI' +
-      '.id_produto, PI.id_cfop, PE.NUM_PEDIDO,'#13#10'PI.vlr_unitario, PI.qtd' +
-      ', PI.qtd_faturado, PI.qtd_restante, PI.qtd_afaturar,'#13#10'CLI.nome N' +
+      '.id_produto, PI.id_cfop, PE.NUM_PEDIDO, PI.vlr_unitario, PI.qtd,' +
+      ' PI.qtd_faturado, '#13#10'PI.qtd_restante, PI.qtd_afaturar, CLI.nome N' +
       'OMECLIENTE, PRO.referencia, PRO.NOME NOMEPRODUTO, CLI.cnpj_cpf, ' +
-      ' PI.dtentrega, PI.item, PI.VLR_DESCONTO, PRO.ID_NCM, PI.UNIDADE,' +
-      ' PI.PERC_IPI, PI.OBS_COMPLEMENTAR, PI.NUMOS, PE.TIPO_FRETE, PE.I' +
-      'D_CONDPGTO, PE.IMP_OC_NOTA, PI.ID_VARIACAO, PI.QTD_LIBERADA, PI.' +
-      'QTD_PRODUZIDA, PE.TIPO_REG, PI.TAMANHO, PI.ID_MOVESTOQUE, PI.QTD' +
-      '_PECA, PI.QTD_LANCAR_ESTOQUE,'#13#10'PI.VLR_DESCONTORATEIO, PI.PERC_DE' +
-      'SCONTO, PI.dtconferencia'#13#10'FROM PEDIDO PE'#13#10'INNER JOIN PEDIDO_ITEM' +
-      ' PI'#13#10'ON PE.ID = PI.ID'#13#10'INNER JOIN PESSOA CLI'#13#10'ON PE.ID_CLIENTE =' +
-      ' CLI.CODIGO'#13#10'INNER JOIN PRODUTO PRO'#13#10'ON PI.ID_PRODUTO = PRO.ID'#13#10 +
-      'WHERE PI.qtd_restante > 0'#13#10'      '#13#10
+      ' PI.dtentrega, PI.item, '#13#10'PI.VLR_DESCONTO, PRO.ID_NCM, PI.UNIDAD' +
+      'E, PI.PERC_IPI, PI.OBS_COMPLEMENTAR, PI.NUMOS, PE.TIPO_FRETE, PE' +
+      '.ID_CONDPGTO, '#13#10'PE.IMP_OC_NOTA, PI.ID_VARIACAO, PI.QTD_LIBERADA,' +
+      ' PI.QTD_PRODUZIDA, PE.TIPO_REG, PI.TAMANHO, PI.ID_MOVESTOQUE,'#13#10'P' +
+      'I.QTD_PECA, PI.QTD_LANCAR_ESTOQUE, PI.VLR_ICMSSUBST, PI.VLR_DESC' +
+      'ONTORATEIO, PI.PERC_DESCONTO, PI.dtconferencia'#13#10'FROM PEDIDO PE'#13#10 +
+      'INNER JOIN PEDIDO_ITEM PI ON PE.ID = PI.ID'#13#10'INNER JOIN PESSOA CL' +
+      'I ON PE.ID_CLIENTE = CLI.CODIGO'#13#10'INNER JOIN PRODUTO PRO ON PI.ID' +
+      '_PRODUTO = PRO.ID'#13#10'WHERE PI.qtd_restante > 0'#13#10'      '#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -1356,6 +1362,9 @@ object DmCadVale: TDmCadVale
     end
     object sdsPedidoDTCONFERENCIA: TDateField
       FieldName = 'DTCONFERENCIA'
+    end
+    object sdsPedidoVLR_ICMSSUBST: TFloatField
+      FieldName = 'VLR_ICMSSUBST'
     end
   end
   object dspPedido: TDataSetProvider
@@ -1543,6 +1552,9 @@ object DmCadVale: TDmCadVale
     object cdsPedidoDTCONFERENCIA: TDateField
       FieldName = 'DTCONFERENCIA'
     end
+    object cdsPedidoVLR_ICMSSUBST: TFloatField
+      FieldName = 'VLR_ICMSSUBST'
+    end
   end
   object dsPedido: TDataSource
     DataSet = cdsPedido
@@ -1565,9 +1577,9 @@ object DmCadVale: TDmCadVale
       'CLIENTE, P.cidade CIDADE_CLIENTE, P.UF UF_CLIENTE,'#13#10'P.complement' +
       'o_end COMPLEMENTO_END_CLIENTE, P.cep CEP_CLIENTE, P.inscr_est IN' +
       'SCR_EST_CLIENTE,'#13#10'P.dddfone1 DDD_CLIENTE, P.telefone1 FONE_CLIEN' +
-      'TE, V.VLR_DESCONTO'#13#10'FROM VALE V'#13#10'INNER JOIN PESSOA P '#13#10'ON (V.ID_' +
-      'CLIENTE = P.CODIGO)'#13#10'INNER JOIN FILIAL F'#13#10'ON V.filial = F.id'#13#10'WH' +
-      'ERE V.ID = :ID'
+      'TE, V.VLR_DESCONTO, V.VLR_ICMSSUBST'#13#10'FROM VALE V'#13#10'INNER JOIN PES' +
+      'SOA P ON (V.ID_CLIENTE = P.CODIGO)'#13#10'INNER JOIN FILIAL F ON V.fil' +
+      'ial = F.id'#13#10'WHERE V.ID = :ID'
     MaxBlobSize = -1
     Params = <
       item
@@ -1731,6 +1743,9 @@ object DmCadVale: TDmCadVale
     object cdsValeImpVLR_DESCONTO: TFloatField
       FieldName = 'VLR_DESCONTO'
       DisplayFormat = '###,###,##0.00'
+    end
+    object cdsValeImpVLR_ICMSSUBST: TFloatField
+      FieldName = 'VLR_ICMSSUBST'
     end
   end
   object dsValeImp: TDataSource

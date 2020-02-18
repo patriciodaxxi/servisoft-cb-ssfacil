@@ -24,7 +24,7 @@ object frmCadVale: TfrmCadVale
     Top = 0
     Width = 781
     Height = 564
-    ActivePage = TS_Consulta
+    ActivePage = TS_Cadastro
     ActivePageDefault = TS_Consulta
     Align = alClient
     BackgroundColor = 16752448
@@ -32,7 +32,7 @@ object frmCadVale: TfrmCadVale
     FlatColor = clGray
     ParentBackgroundColor = False
     TabColors.Shadow = clSilver
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = RzPageControl1Change
     FixedDimension = 19
@@ -1180,7 +1180,7 @@ object frmCadVale: TfrmCadVale
             WidthOfIndicator = 11
             DefaultRowHeight = 17
             ScrollBars = ssHorizontal
-            ColCount = 16
+            ColCount = 17
             RowCount = 2
             Columns = <
               item
@@ -1238,6 +1238,12 @@ object frmCadVale: TfrmCadVale
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Unit'#225'rio'
                 Width = 73
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VLR_ICMSSUBST'
+                Title.Caption = 'ICMS ST'
                 Visible = True
               end
               item
@@ -3098,6 +3104,14 @@ object frmCadVale: TfrmCadVale
           Alignment = taRightJustify
           Caption = 'Vlr. dos Servi'#231'os:'
         end
+        object Label19: TLabel
+          Left = 257
+          Top = 27
+          Width = 50
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Vlr. de ST:'
+        end
         object DBEdit6: TDBEdit
           Left = 105
           Top = 3
@@ -3167,6 +3181,22 @@ object frmCadVale: TfrmCadVale
           ParentCtl3D = False
           ReadOnly = True
           TabOrder = 3
+        end
+        object DBEdit5: TDBEdit
+          Left = 310
+          Top = 21
+          Width = 111
+          Height = 19
+          TabStop = False
+          CharCase = ecUpperCase
+          Color = clBtnFace
+          Ctl3D = False
+          DataField = 'VLR_ICMSSUBST'
+          DataSource = DmCadVale.dsVale
+          MaxLength = 18
+          ParentCtl3D = False
+          ReadOnly = True
+          TabOrder = 4
         end
       end
     end
