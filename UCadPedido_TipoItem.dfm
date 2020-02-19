@@ -1261,7 +1261,7 @@ object frmCadPedido_TipoItem: TfrmCadPedido_TipoItem
         LookupDisplay = 'NOME'
         LookupSource = DMCadPedido.dsAcabamento
         TabOrder = 6
-        OnExit = RxDBLookupCombo1Exit
+        OnExit = RxDBLookupCombo11Exit
       end
     end
   end
