@@ -819,7 +819,7 @@ begin
       if fDmCupomFiscal.cdsCupomParametrosCARNE_RELATORIO.AsString <> '' then
         vArq := fDmCupomFiscal.cdsCupomParametrosCARNE_RELATORIO.AsString
       else
-        vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\CarnePgto1.fr3';
+        vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\CarnePgto.fr3';
 
       if FileExists(vArq) then
       begin
@@ -831,8 +831,20 @@ begin
       end
       else
         ShowMessage('Relatório não localizado! ' + vArq);
-    end;
+      if MessageDlg('Deseja imprimir Nota Promissória?',mtConfirmation,[mbYes,mbNo],0) = mrYes then
+      begin
+        vArq := ExtractFilePath(Application.ExeName) + 'Relatorios\CarnePromissoria.fr3';
 
+        if FileExists(vArq) then
+        begin
+          fDmCupomFiscal.frxReport1.Report.LoadFromFile(vArq);
+          if fDmCupomFiscal.cdsCupomParametrosUSA_PREVIEW_CARNE.AsString = 'S' then
+            fDmCupomFiscal.frxReport1.ShowReport
+          else
+            fDmCupomFiscal.frxReport1.Print;
+        end;
+      end;
+    end;
   if ckMsg.Checked then
     ShowMessage('Parte 6 - Posiciona  Monta_sqlCupom_Cons ');
 
