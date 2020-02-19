@@ -1202,26 +1202,8 @@ object fCupomFiscalC: TfCupomFiscalC
       TabOrder = 3
       Transparent = True
     end
-    object btnCarne: TNxButton
-      Left = 577
-      Top = 1
-      Width = 119
-      Height = 29
-      Align = alLeft
-      Caption = 'Carn'#234
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Arial'
-      Font.Style = []
-      GlyphSpacing = 5
-      ParentFont = False
-      TabOrder = 4
-      Transparent = True
-      OnClick = btnCarneClick
-    end
     object btnMultiPgto: TNxButton
-      Left = 815
+      Left = 696
       Top = 1
       Width = 119
       Height = 29
@@ -1234,12 +1216,12 @@ object fCupomFiscalC: TfCupomFiscalC
       Font.Style = []
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
       Transparent = True
       OnClick = btnMultiPgtoClick
     end
     object btnComanda: TNxButton
-      Left = 696
+      Left = 577
       Top = 1
       Width = 119
       Height = 29
@@ -1252,7 +1234,7 @@ object fCupomFiscalC: TfCupomFiscalC
       Font.Style = []
       GlyphSpacing = 5
       ParentFont = False
-      TabOrder = 6
+      TabOrder = 5
       Transparent = True
       OnClick = btnComandaClick
     end
@@ -1572,6 +1554,17 @@ object fCupomFiscalC: TfCupomFiscalC
     object Fiscal1: TMenuItem
       Caption = 'Fiscal'
       OnClick = Fiscal1Click
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object Carn2: TMenuItem
+      Caption = 'Carn'#234
+      OnClick = Carn2Click
+    end
+    object Promissria2: TMenuItem
+      Caption = 'Promiss'#243'ria'
+      OnClick = Promissria2Click
     end
   end
   object UCControls1: TUCControls
