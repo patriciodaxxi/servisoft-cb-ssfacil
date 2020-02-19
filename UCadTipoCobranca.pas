@@ -82,6 +82,7 @@ type
     Label13: TLabel;
     RxDBComboBox4: TRxDBComboBox;
     DBRadioGroup1: TDBRadioGroup;
+    DBCheckBox23: TDBCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnExcluirClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

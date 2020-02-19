@@ -1651,6 +1651,18 @@ object frmCadTipoCobranca: TfrmCadTipoCobranca
             'P'
             'V')
         end
+        object DBCheckBox23: TDBCheckBox
+          Left = 384
+          Top = 278
+          Width = 201
+          Height = 17
+          Caption = 'Troca (Serve para a NFCe)'
+          DataField = 'TROCA'
+          DataSource = DMCadTipoCobranca.dsTipoCobranca
+          TabOrder = 33
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
       end
     end
   end
