@@ -6053,7 +6053,7 @@ object dmCupomFiscal: TdmCupomFiscal
     PrintOptions.PrintMode = pmSplit
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42671.419546678200000000
-    ReportOptions.LastChange = 43410.434318680600000000
+    ReportOptions.LastChange = 43880.436186828700000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnReportPrint = 'frxReportOnReportPrint'
