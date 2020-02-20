@@ -5,7 +5,7 @@ object frmConsPessoa_Fat: TfrmConsPessoa_Fat
   BorderStyle = bsSingle
   Caption = 'Consulta Faturamento'
   ClientHeight = 567
-  ClientWidth = 856
+  ClientWidth = 919
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,7 +21,7 @@ object frmConsPessoa_Fat: TfrmConsPessoa_Fat
   object SMDBGrid1: TSMDBGrid
     Left = 0
     Top = 28
-    Width = 856
+    Width = 919
     Height = 302
     Align = alClient
     Ctl3D = False
@@ -55,7 +55,7 @@ object frmConsPessoa_Fat: TfrmConsPessoa_Fat
     WidthOfIndicator = 11
     DefaultRowHeight = 16
     ScrollBars = ssHorizontal
-    ColCount = 7
+    ColCount = 9
     RowCount = 2
     Columns = <
       item
@@ -69,7 +69,7 @@ object frmConsPessoa_Fat: TfrmConsPessoa_Fat
         Expanded = False
         FieldName = 'SERIE'
         Title.Alignment = taCenter
-        Width = 40
+        Width = 27
         Visible = True
       end
       item
@@ -97,14 +97,29 @@ object frmConsPessoa_Fat: TfrmConsPessoa_Fat
         Expanded = False
         FieldName = 'FILIAL'
         Title.Alignment = taCenter
-        Width = 85
+        Width = 35
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME_CONDPGTO'
+        Title.Alignment = taCenter
+        Title.Caption = 'Cond. Pagamento'
+        Width = 221
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'NOME_TRANSPORTADORA'
+        Title.Alignment = taCenter
+        Title.Caption = 'Transportadora'
         Visible = True
       end>
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 856
+    Width = 919
     Height = 28
     Align = alTop
     Color = 16744576
@@ -140,7 +155,7 @@ object frmConsPessoa_Fat: TfrmConsPessoa_Fat
   object Panel2: TPanel
     Left = 0
     Top = 538
-    Width = 856
+    Width = 919
     Height = 29
     Align = alBottom
     Color = 16744576
@@ -253,7 +268,7 @@ object frmConsPessoa_Fat: TfrmConsPessoa_Fat
   object gbxServico: TRzGroupBox
     Left = 0
     Top = 330
-    Width = 856
+    Width = 919
     Height = 191
     Align = alBottom
     BorderColor = clNavy
@@ -275,7 +290,7 @@ object frmConsPessoa_Fat: TfrmConsPessoa_Fat
     object SMDBGrid2: TSMDBGrid
       Left = 5
       Top = 18
-      Width = 846
+      Width = 909
       Height = 168
       Align = alClient
       Ctl3D = False
@@ -515,7 +530,7 @@ object frmConsPessoa_Fat: TfrmConsPessoa_Fat
   object StaticText1: TStaticText
     Left = 0
     Top = 521
-    Width = 856
+    Width = 919
     Height = 17
     Align = alBottom
     BorderStyle = sbsSunken

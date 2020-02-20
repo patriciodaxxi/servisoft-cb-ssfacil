@@ -185,10 +185,13 @@ object DMConsPessoa: TDMConsPessoa
     GetMetadata = False
     CommandText = 
       'SELECT NT.id_cliente, NT.serie, NT.numnota, NT.vlr_duplicata, NT' +
-      '.vlr_nota, NT.dtemissao, NT.tipo_nota, NT.tipo_reg, NT.filial, N' +
-      'T.ID'#13#10'FROM NOTAFISCAL NT'#13#10'WHERE NT.CANCELADA = '#39'N'#39' AND NT.nfeden' +
-      'egada = '#39'N'#39#13#10'   AND NT.TIPO_NOTA = '#39'S'#39' AND NT.VLR_DUPLICATA > 0'#13 +
-      #10'  AND NT.TIPO_REG = '#39'NTS'#39#13#10#13#10'  '
+      '.vlr_nota, NT.dtemissao,'#13#10'NT.tipo_nota, NT.tipo_reg, NT.filial, ' +
+      'NT.ID, NT.id_condpgto, NT.id_transportadora,'#13#10'COND.nome NOME_CON' +
+      'DPGTO, TRANSP.NOME NOME_TRANSPORTADORA'#13#10'FROM NOTAFISCAL NT'#13#10'LEFT' +
+      ' JOIN condpgto COND'#13#10'ON NT.id_condpgto = COND.id'#13#10'LEFT JOIN PESS' +
+      'OA TRANSP'#13#10'ON NT.id_transportadora = TRANSP.codigo'#13#10'WHERE NT.CAN' +
+      'CELADA = '#39'N'#39' AND NT.nfedenegada = '#39'N'#39#13#10'   AND NT.TIPO_NOTA = '#39'S'#39 +
+      ' AND NT.VLR_DUPLICATA > 0'#13#10'  AND NT.TIPO_REG = '#39'NTS'#39#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -244,6 +247,29 @@ object DMConsPessoa: TDMConsPessoa
     object cdsNotaFiscalID: TIntegerField
       FieldName = 'ID'
       Required = True
+    end
+    object cdsNotaFiscalTIPO_NOTA: TStringField
+      FieldName = 'TIPO_NOTA'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsNotaFiscalTIPO_REG: TStringField
+      FieldName = 'TIPO_REG'
+      Size = 3
+    end
+    object cdsNotaFiscalID_CONDPGTO: TIntegerField
+      FieldName = 'ID_CONDPGTO'
+    end
+    object cdsNotaFiscalID_TRANSPORTADORA: TIntegerField
+      FieldName = 'ID_TRANSPORTADORA'
+    end
+    object cdsNotaFiscalNOME_CONDPGTO: TStringField
+      FieldName = 'NOME_CONDPGTO'
+      Size = 40
+    end
+    object cdsNotaFiscalNOME_TRANSPORTADORA: TStringField
+      FieldName = 'NOME_TRANSPORTADORA'
+      Size = 60
     end
   end
   object dsNotaFiscal: TDataSource
