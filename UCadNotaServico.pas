@@ -4819,7 +4819,8 @@ begin
           if fDMCadNotaServico.cdsFilialNOME_PROVEDOR.AsString = 'CAMPO BOM' then
           begin
             fDMCadNotaServico.sdsNotaServico.CommandText := fDMCadNotaServico.ctCommand + ' WHERE NUMNOTA = ' +
-                                                            IntToStr(vNum_NFSe_Ret) + ' AND FILIAL = ' + IntToStr(vFilial_Sel)
+                                                            IntToStr(vNum_NFSe_Ret) + ' AND FILIAL = ' + IntToStr(vFilial_Sel) +
+                                                            ' AND TIPO_ES = ''S'''
           end
           else
           begin
@@ -4827,7 +4828,8 @@ begin
               vSerie_Ret := trim(fDMCadNotaServico.cdsFilialSERIE_NFSE.AsString);
             fDMCadNotaServico.sdsNotaServico.CommandText := fDMCadNotaServico.ctCommand + ' WHERE NUMRPS = ' +
                                                             IntToStr(vNum_RPS_Ret) + ' AND FILIAL = ' + IntToStr(vFilial_Sel) +
-                                                            ' AND SERIE = ' + QuotedStr(vSerie_Ret);
+                                                            ' AND SERIE = ' + QuotedStr(vSerie_Ret) +
+                                                            ' AND TIPO_ES = ''S''';
 
           end;
           fDMCadNotaServico.cdsNotaServico.Open;
@@ -4980,7 +4982,7 @@ begin
                          StrToDateTime(dtInicial),
                          StrToDateTime(dtFinal),
                          sSerie,
-                         cPNGStream );
+                         cPNGStream);
 
     cPNGStream.Position := 0;
     vAnoAux := YearOf(fDMCadNotaServico.cdsNotaServico_ImpDTEMISSAO_CAD.AsDateTime);

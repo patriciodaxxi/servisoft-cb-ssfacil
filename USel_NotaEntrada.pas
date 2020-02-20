@@ -275,6 +275,7 @@ begin
   fDMCadNotaFiscal.vQtd_MatPrima_Calc := 0;
   fDMCadNotaFiscal.vQtd_MatPrima_Sel  := 0;
   fDMCadNotaFiscal.cdsNotaEntrada.First;
+  SMDBGrid1.DisableScroll;
   while not fDMCadNotaFiscal.cdsNotaEntrada.Eof do
   begin
     if (SMDBGrid1.SelectedRows.CurrentRowSelected) and (StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.cdsNotaEntradaQTD_ADEVOLVER.AsFloat)) > 0) then
@@ -329,6 +330,7 @@ begin
     end;
     fDMCadNotaFiscal.cdsNotaEntrada.Next;
   end;
+  SMDBGrid1.EnableScroll;
   fDMCadNotaFiscal.vQtd_MatPrima_Calc := StrToFloat(FormatFloat('0.0000',fDMCadNotaFiscal.mMaterialConsumoQtdConsumo.AsFloat));
   if ckAgrupar.Checked then
   begin
