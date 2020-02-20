@@ -194,6 +194,12 @@ type
     qProdutoREFERENCIA: TStringField;
     qProdutoNOME: TStringField;
     qProdutoINATIVO: TStringField;
+    cdsNotaFiscalTIPO_NOTA: TStringField;
+    cdsNotaFiscalTIPO_REG: TStringField;
+    cdsNotaFiscalID_CONDPGTO: TIntegerField;
+    cdsNotaFiscalID_TRANSPORTADORA: TIntegerField;
+    cdsNotaFiscalNOME_CONDPGTO: TStringField;
+    cdsNotaFiscalNOME_TRANSPORTADORA: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure cdsDuplicataCalcFields(DataSet: TDataSet);
   private

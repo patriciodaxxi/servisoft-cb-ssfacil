@@ -170,7 +170,9 @@ procedure TDMCadEDI_Config.prc_Gravar;
 begin
   vMsgEDI_Config := '';
   if trim(cdsEdi_ConfigLAYOUT.AsString) = '' then
-    vMsgEDI_Config := 'Layout não informado!';
+    vMsgEDI_Config := '*** Layout não informado!';
+  if (cdsEdi_ConfigITEM_INI.AsInteger <= 0) or (cdsEdi_ConfigITEM_TAM.AsInteger <= 0) then
+    vMsgEDI_Config := '*** Item do Cliente não esta preenchido!';
   if vMsgEDI_Config <> '' then
     exit;
     

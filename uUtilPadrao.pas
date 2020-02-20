@@ -213,6 +213,11 @@ var
   vCpfOK : Boolean; //Cupom - SSNFCe
   vCod_CBenef : String;
   vConfirma_Fechamento: Boolean;
+  vMargemSuperior : Double;
+  vMargemInferior : Double;
+  vMargemEsquerda : Double;
+  vMargemDireita : Double;
+  vLarguraBobina : Integer;
 
 implementation
 

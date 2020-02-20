@@ -1599,7 +1599,7 @@ begin
 
     if (fDMCadNotaFiscal.cdsNotaFiscal_ItensGRAVOU_TAB_TAMANHO.AsString = 'S') then
     begin
-      if not vPedidoSelecionado then
+      if not(vPedidoSelecionado) and not(vNotaSelecionada) then
       begin
         fDMInformar_Tam.mTamanho.First;
         while not fDMInformar_Tam.mTamanho.Eof do
@@ -1646,7 +1646,11 @@ begin
       else
       if (fDMCadNotaFiscal.cdsProdutoUSA_GRADE.AsString = 'S') and (fDMCadNotaFiscal.cdsParametrosUSA_GRADE.AsString = 'S')  then
       begin
-        if (fDMCadNotaFiscal.vState_Item = 'E') or (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger > 0) or (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO_FUT.AsInteger > 0)   then
+        //if vNotaSelecionada then
+        //  fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' TAM. ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString
+        //else
+        if (fDMCadNotaFiscal.vState_Item = 'E') or (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO.AsInteger > 0) or (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_PEDIDO_FUT.AsInteger > 0) or
+           (fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NTE.AsInteger > 0) then
           fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString := fDMCadNotaFiscal.cdsNotaFiscal_ItensNOME_PRODUTO.AsString + ' TAM. ' + fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString
         else
         begin

@@ -202,6 +202,7 @@ type
     procedure DBEdit46Exit(Sender: TObject);
     procedure RzPageControl1Change(Sender: TObject);
     procedure FilenameEdit1Change(Sender: TObject);
+    procedure RxDBLookupCombo11Exit(Sender: TObject);
   private
     { Private declarations }
     vItemMat: Integer;
@@ -474,16 +475,28 @@ var
   vVlr_Calculado_Aux: Real;
   vAux_Cor: Real;
   vAux_Cor2: Real;
+  vID_Acabamento : Integer;
+  vIDProd : Integer;
+  vVlr_Acab_Aux : Real;
 begin
   vVlr_Calculado  := vVlr_Produto;
   vVlr_Acabamento := 0;
-  if trim(RxDBLookupCombo1.Text) <> '' then
+  vVlr_Acab_Aux   := 0;
+  //if trim(RxDBLookupCombo1.Text) <> '' then
+  if fDMCadPedido.cdsPedido_Item_TipoID_ACABAMENTO.AsInteger > 0 then
   begin
-    if (RxDBLookupCombo1.KeyValue <> fDMCadPedido.cdsAcabamentoID.AsInteger) then
+    //if (RxDBLookupCombo1.KeyValue <> fDMCadPedido.cdsAcabamentoID.AsInteger) then
+    if (fDMCadPedido.cdsPedido_Item_TipoID_ACABAMENTO.AsInteger <> fDMCadPedido.cdsAcabamentoID.AsInteger) then
       fDMCadPedido.cdsAcabamento.Locate('ID',fDMCadPedido.cdsPedido_Item_TipoID_ACABAMENTO.AsInteger,[loCaseInsensitive]);
-    vVlr_Acabamento := fnc_Preco_Matriz(fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger,
+    vIDProd := fDMCadPedido.cdsPedido_ItensID_PRODUTO.AsInteger;
+    if TS_Porta.TabVisible then
+      vIDProd := fDMCadPedido.cdsPedido_Item_TipoID_VIDRO.AsInteger;
+    vVlr_Acabamento := fnc_Preco_Matriz(vIDProd,
                                         fDMCadPedido.cdsAcabamentoID.AsInteger,fDMCadPedido.cdsAcabamentoTIPO_PRECO.AsString,
                                         fDMCadPedido.cdsAcabamentoVLR_UNITARIO.AsFloat);
+    //19/02/2020
+    vVlr_Acab_Aux := vVlr_Acabamento;
+    //*****************
     if fDMCadPedido.cdsAcabamentoTIPO_VP.AsString <> 'P' then
     begin
       vVlr_Calculado  := vVlr_Calculado + vVlr_Acabamento;
@@ -613,8 +626,18 @@ begin
         vAux_Cor2 := StrToFloat(FormatFloat('0.00',((fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat / 1000) * (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat / 1000))
               * fDMCadPedido.cdsPedido_Item_TipoPRECO_COR_VIDRO.AsFloat));
       //*****************
+
+      //19/02/2020
+      if StrToFloat(FormatFloat('0.0000',vVlr_Acabamento)) > 0 then
+        vVlr_Acab_Aux := StrToFloat(FormatFloat('0.00',((fDMCadPedido.cdsPedido_Item_TipoALTURA.AsFloat / 1000) * (fDMCadPedido.cdsPedido_Item_TipoLARGURA.AsFloat / 1000))
+              * vVlr_Acab_Aux));
+      //*****************
+
       vVlr_Vidro := StrToFloat(FormatFloat('0.00',vVlr_Vidro * vAux));
-      vVlr_Calculado := vVlr_Perfil + vVlr_Vidro + vVlr_Furacao + vAux_Cor + vAux_Cor2;
+      //19/02/2020
+      //vVlr_Calculado := vVlr_Perfil + vVlr_Vidro + vVlr_Furacao + vAux_Cor + vAux_Cor2;
+      vVlr_Calculado := vVlr_Perfil + vVlr_Vidro + vVlr_Furacao + vAux_Cor + vAux_Cor2 + vVlr_Acab_Aux;
+      //*******************
     end
     else
     begin
@@ -1091,6 +1114,11 @@ begin
                  Trim(NomeFuracao) + '.JPG';
   if FileExists(CaminhoFoto) then
     Result := CaminhoFoto;
+end;
+
+procedure TfrmCadPedido_TipoItem.RxDBLookupCombo11Exit(Sender: TObject);
+begin
+  prc_Calcular_Vlr_Porta;
 end;
 
 end.

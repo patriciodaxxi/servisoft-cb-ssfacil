@@ -134,7 +134,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'CODCFOP'
             Title.Alignment = taCenter
             Title.Caption = 'CFOP'
-            Width = 64
             Visible = True
           end
           item
@@ -174,7 +173,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'VLR_DUPLICATA'
             Title.Alignment = taCenter
             Title.Caption = 'Valor Duplicatas'
-            Width = 64
             Visible = True
           end
           item
@@ -183,7 +181,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'CANCELADA'
             Title.Alignment = taCenter
             Title.Caption = 'Cancelada'
-            Width = 64
             Visible = True
           end
           item
@@ -191,7 +188,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'NFECHAVEACESSO'
             Title.Alignment = taCenter
             Title.Caption = 'Chave Acesso NFe'
-            Width = 64
             Visible = True
           end
           item
@@ -200,7 +196,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'TIPO_PRAZO'
             Title.Alignment = taCenter
             Title.Caption = 'Tipo Prazo'
-            Width = 64
             Visible = True
           end
           item
@@ -219,14 +214,12 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             Expanded = False
             FieldName = 'ID_CONDPGTO'
             Title.Caption = 'ID CONDPGTO'
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ID_VENDEDOR'
             Title.Caption = 'ID VENDEDOR'
-            Width = 64
             Visible = True
           end
           item
@@ -246,7 +239,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
           item
             Expanded = False
             FieldName = 'DESCRICAO_MANIFESTO'
-            Width = 64
             Visible = True
           end
           item
@@ -270,7 +262,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'NUMNOTA_DEVOL'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Nota Feita a Devol.'
-            Width = 64
             Visible = True
           end
           item
@@ -278,7 +269,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'SERIE_DEVOL'
             Title.Alignment = taCenter
             Title.Caption = 'S'#233'rie Devol.'
-            Width = 64
             Visible = True
           end
           item
@@ -287,7 +277,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
             FieldName = 'DTEMISSAO_DEVOL'
             Title.Alignment = taCenter
             Title.Caption = 'Dt. Emiss'#227'o Devol.'
-            Width = 64
             Visible = True
           end>
       end
@@ -1316,7 +1305,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
               Font.Height = -11
               Font.Name = 'MS Sans Serif'
               Font.Style = []
-              Width = 64
               Visible = True
             end
             item
@@ -2682,7 +2670,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
               item
                 Expanded = False
                 FieldName = 'UNIDADE'
-                Width = 64
                 Visible = True
               end
               item
@@ -2801,7 +2788,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 FieldName = 'NUM_TALAO'
                 Title.Alignment = taCenter
                 Title.Caption = 'N'#186' Lote/Tal'#227'o (Cliente)'
-                Width = 64
                 Visible = True
               end
               item
@@ -2863,7 +2849,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 FieldName = 'GRAVACAO_COM_ERRO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Com Notifica'#231#227'o'
-                Width = 64
                 Visible = True
               end
               item
@@ -2871,7 +2856,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 FieldName = 'PRECO_CUSTO_TOTAL'
                 Title.Alignment = taCenter
                 Title.Caption = 'Pre'#231'o Custo Total'
-                Width = 64
                 Visible = True
               end
               item
@@ -2880,7 +2864,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 FieldName = 'CENTRO_CUSTO_ID'
                 Title.Alignment = taCenter
                 Title.Caption = 'ID Centro Custo'
-                Width = 64
                 Visible = True
               end
               item
@@ -2889,7 +2872,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 FieldName = 'CONTA_ORCAMENTO_ID'
                 Title.Alignment = taCenter
                 Title.Caption = 'ID Conta Or'#231'.'
-                Width = 64
                 Visible = True
               end
               item
@@ -2897,7 +2879,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 FieldName = 'DRAWBACK'
                 Title.Alignment = taCenter
                 Title.Caption = 'Drawback'
-                Width = 64
                 Visible = True
               end>
           end
@@ -3391,7 +3372,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = 'Pre'#231'o Custo Total'
                 Title.Color = 16758897
-                Width = 64
                 Visible = True
               end
               item
@@ -3400,7 +3380,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Ajuste Custo Total'
                 Title.Color = 16758897
-                Width = 64
                 Visible = True
               end
               item
@@ -3594,7 +3573,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = '% Tributo Municipal'
                 Title.Color = 16758639
-                Width = 64
                 Visible = True
               end
               item
@@ -3648,7 +3626,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Duplicata'
                 Title.Color = 16758639
-                Width = 64
                 Visible = True
               end
               item
@@ -3666,7 +3643,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = 'Vlr. Taxa Siscomex'
                 Title.Color = 16758639
-                Width = 64
                 Visible = True
               end
               item
@@ -3757,7 +3733,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 Title.Alignment = taCenter
                 Title.Caption = 'Base ICMS Efet.'
                 Title.Color = 16758639
-                Width = 64
                 Visible = True
               end
               item
@@ -7106,13 +7081,11 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
                 item
                   Expanded = False
                   FieldName = 'NFERECIBO'
-                  Width = 64
                   Visible = True
                 end
                 item
                   Expanded = False
                   FieldName = 'DATAHORAAUT'
-                  Width = 64
                   Visible = True
                 end
                 item
@@ -7282,7 +7255,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
               item
                 Expanded = False
                 FieldName = 'CNPJ_REF'
-                Width = 64
                 Visible = True
               end
               item
@@ -7294,7 +7266,6 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
               item
                 Expanded = False
                 FieldName = 'NFECHAVEACESSO_REF'
-                Width = 64
                 Visible = True
               end
               item
@@ -7316,13 +7287,11 @@ object frmCadNotaFiscal: TfrmCadNotaFiscal
               item
                 Expanded = False
                 FieldName = 'CUPOM_MODELO'
-                Width = 64
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'INSCESTADUAL_REF'
-                Width = 64
                 Visible = True
               end>
           end

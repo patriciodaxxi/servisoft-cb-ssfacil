@@ -456,6 +456,7 @@ begin
       fDMCadNotaFiscal.cdsNotaFiscal_ItensOBS_COMPLEMENTAR.AsString := fDMCadNotaFiscal.cdsNotaEntradaOBS_COMPLEMENTAR.AsString;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensID_NTE.AsInteger          := fDMCadNotaFiscal.cdsNotaEntradaID.AsInteger;
     fDMCadNotaFiscal.cdsNotaFiscal_ItensITEM_NTE.AsInteger        := fDMCadNotaFiscal.cdsNotaEntradaITEM.AsInteger;
+    fDMCadNotaFiscal.cdsNotaFiscal_ItensTAMANHO.AsString          := fDMCadNotaFiscal.cdsNotaEntradaTAMANHO.AsString;
     if trim(fDMCadNotaFiscal.cdsNotaEntradaNUM_LOTE_CONTROLE.AsString) <> '' then
       fDMCadNotaFiscal.cdsNotaFiscal_ItensNUM_LOTE_CONTROLE.AsString := fDMCadNotaFiscal.cdsNotaEntradaNUM_LOTE_CONTROLE.AsString;
     //27/11/2018

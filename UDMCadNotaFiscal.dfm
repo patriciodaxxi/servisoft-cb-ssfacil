@@ -7727,15 +7727,15 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
       'QTD_ADEVOLVER, NI.ID_NCM, NT.FILIAL, NI.ITEM,'#13#10'NT.NFECHAVEACESSO' +
       ', CLI.CNPJ_CPF, NI.QTD_NOTAATUAL, NI.OBS_COMPLEMENTAR, NT.ID_CLI' +
       'ENTETRIANG,'#13#10'TRI.NOME NOME_CLIENTETRIANG, NI.ID_CFOP, NI.NUM_LOT' +
-      'E_CONTROLE, NI.PERC_TRIBICMS,'#13#10'NI.ID_COR, COMB.NOME NOME_COR'#13#10'FR' +
-      'OM NOTAFISCAL NT'#13#10'INNER JOIN NOTAFISCAL_ITENS NI'#13#10'ON NT.ID = NI.' +
-      'ID'#13#10'INNER JOIN TAB_CFOP CFOP'#13#10'ON NI.ID_CFOP = CFOP.ID'#13#10'INNER JOI' +
-      'N PESSOA CLI'#13#10'ON NT.ID_CLIENTE = CLI.CODIGO'#13#10'inner join produto ' +
-      'pro'#13#10'ON NI.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN PESSOA TRI'#13#10'ON NT.ID_C' +
-      'LIENTETRIANG = TRI.CODIGO'#13#10'LEFT JOIN COMBINACAO COMB'#13#10'ON NI.ID_C' +
-      'OR = COMB.ID'#13#10'LEFT JOIN OPERACAO_NOTA O2'#13#10'ON NI.ID_OPERACAO_NOTA' +
-      ' = O2.ID'#13#10'WHERE NT.TIPO_REG = :TIPO_REG'#13#10'  AND NI.QTDRESTANTE > ' +
-      '0'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10#13#10
+      'E_CONTROLE, NI.PERC_TRIBICMS,'#13#10'NI.ID_COR, COMB.NOME NOME_COR, NI' +
+      '.TAMANHO'#13#10'FROM NOTAFISCAL NT'#13#10'INNER JOIN NOTAFISCAL_ITENS NI'#13#10'ON' +
+      ' NT.ID = NI.ID'#13#10'INNER JOIN TAB_CFOP CFOP'#13#10'ON NI.ID_CFOP = CFOP.I' +
+      'D'#13#10'INNER JOIN PESSOA CLI'#13#10'ON NT.ID_CLIENTE = CLI.CODIGO'#13#10'inner j' +
+      'oin produto pro'#13#10'ON NI.ID_PRODUTO = PRO.ID'#13#10'LEFT JOIN PESSOA TRI' +
+      #13#10'ON NT.ID_CLIENTETRIANG = TRI.CODIGO'#13#10'LEFT JOIN COMBINACAO COMB' +
+      #13#10'ON NI.ID_COR = COMB.ID'#13#10'LEFT JOIN OPERACAO_NOTA O2'#13#10'ON NI.ID_O' +
+      'PERACAO_NOTA = O2.ID'#13#10'WHERE NT.TIPO_REG = :TIPO_REG'#13#10'  AND NI.QT' +
+      'DRESTANTE > 0'#13#10'  AND PRO.INATIVO = '#39'N'#39#13#10#13#10
     MaxBlobSize = -1
     Params = <
       item
@@ -7757,8 +7757,8 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     IndexFieldNames = 'ID'
     Params = <>
     ProviderName = 'dspNotaEntrada'
-    Left = 466
-    Top = 143
+    Left = 462
+    Top = 149
     object cdsNotaEntradaSERIE: TStringField
       FieldName = 'SERIE'
       Size = 3
@@ -7886,6 +7886,10 @@ object DMCadNotaFiscal: TDMCadNotaFiscal
     object cdsNotaEntradaNOME_COR: TStringField
       FieldName = 'NOME_COR'
       Size = 60
+    end
+    object cdsNotaEntradaTAMANHO: TStringField
+      FieldName = 'TAMANHO'
+      Size = 10
     end
   end
   object dsNotaEntrada: TDataSource

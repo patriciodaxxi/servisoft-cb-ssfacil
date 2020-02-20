@@ -115,7 +115,7 @@ AutoIncBuild=0
 MajorVer=1
 MinorVer=0
 Release=1
-Build=1313
+Build=1316
 Debug=0
 PreRelease=0
 Special=0
@@ -126,7 +126,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Servisoft Informática Ltda.
 FileDescription=Software de Gestão
-FileVersion=1.0.1.1313
+FileVersion=1.0.1.1316
 InternalName=
 LegalCopyright=
 LegalTrademarks=

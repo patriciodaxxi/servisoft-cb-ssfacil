@@ -3578,7 +3578,7 @@ type
     cdsPedidoItemTipo_FotoID: TIntegerField;
     cdsPedidoItemTipo_FotoITEM: TIntegerField;
     cdsPedidoItemTipo_FotoFOTO: TStringField;
-    frxDBDataset11: TfrxDBDataset;
+    frxPedidoItemTipoFoto: TfrxDBDataset;
     qParametros_PedCONTROLA_ITEM_REPET: TStringField;
     cdsCloneItem: TClientDataSet;
     cdsCloneItemID: TIntegerField;

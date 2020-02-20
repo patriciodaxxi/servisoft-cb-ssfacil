@@ -4119,7 +4119,7 @@ object DMCadPedido: TDMCadPedido
     AfterScroll = cdsPedidoImpAfterScroll
     OnCalcFields = pedidoImpCalcFields
     Left = 208
-    Top = 358
+    Top = 359
     object cdsPedidoImpID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -5799,8 +5799,8 @@ object DMCadPedido: TDMCadPedido
   end
   object dsCFOP_Mestre: TDataSource
     DataSet = sdsCFOP
-    Left = 680
-    Top = 3
+    Left = 664
+    Top = 21
   end
   object qRegra_Variacao: TSQLQuery
     MaxBlobSize = -1
@@ -8464,7 +8464,7 @@ object DMCadPedido: TDMCadPedido
     ProviderName = 'dspPedidoImp_Etiqueta'
     OnNewRecord = cdsPedido_ItensNewRecord
     Left = 616
-    Top = 544
+    Top = 545
     object cdsPedidoImp_EtiquetaID: TIntegerField
       FieldName = 'ID'
       Required = True
@@ -10778,7 +10778,7 @@ object DMCadPedido: TDMCadPedido
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42032.577038136600000000
-    ReportOptions.LastChange = 43854.644497025460000000
+    ReportOptions.LastChange = 43854.672464722200000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -12110,13 +12110,13 @@ object DMCadPedido: TDMCadPedido
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
-    Left = 984
-    Top = 5
+    Left = 733
+    Top = 6
   end
   object dspVidro: TDataSetProvider
     DataSet = sdsVidro
-    Left = 745
-    Top = 7
+    Left = 748
+    Top = 8
   end
   object cdsVidro: TClientDataSet
     Aggregates = <>
@@ -18673,7 +18673,7 @@ object DMCadPedido: TDMCadPedido
     DataSource = dsTitulosPend
     BCDToCurrency = False
     Left = 1179
-    Top = 325
+    Top = 326
   end
   object qCor: TSQLQuery
     MaxBlobSize = -1
@@ -18748,7 +18748,9 @@ object DMCadPedido: TDMCadPedido
   object sdsPedidoItemTipoFoto: TSQLDataSet
     NoMetadata = True
     GetMetadata = False
-    CommandText = 'SELECT ID, ITEM, FOTO'#13#10'FROM PEDIDO_ITEM_TIPO'#13#10'WHERE ID = :I1'
+    CommandText = 
+      'SELECT ID, ITEM, FOTO'#13#10'FROM PEDIDO_ITEM_TIPO'#13#10'WHERE ID = :I1'#13#10'  ' +
+      'AND coalesce(FOTO,'#39#39') <> '#39#39
     MaxBlobSize = -1
     Params = <
       item
@@ -18789,7 +18791,7 @@ object DMCadPedido: TDMCadPedido
     Left = 360
     Top = 592
   end
-  object frxDBDataset11: TfrxDBDataset
+  object frxPedidoItemTipoFoto: TfrxDBDataset
     UserName = 'frxPedidoItemTipoFoto'
     OnFirst = frxDBDataset1First
     OnNext = frxDBDataset1Next
