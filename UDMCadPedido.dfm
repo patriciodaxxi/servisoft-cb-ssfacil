@@ -15312,6 +15312,10 @@ object DMCadPedido: TDMCadPedido
     object qParametros_PedID_CFOP_PEDIDO: TIntegerField
       FieldName = 'ID_CFOP_PEDIDO'
     end
+    object qParametros_PedSENHA_EXCLUIR_ORC: TStringField
+      FieldName = 'SENHA_EXCLUIR_ORC'
+      Size = 10
+    end
   end
   object sdsMetas_Acum: TSQLDataSet
     CommandText = 

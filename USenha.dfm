@@ -43,7 +43,7 @@ object frmSenha: TfrmSenha
   end
   object btnConfirmar: TBitBtn
     Left = 76
-    Top = 96
+    Top = 95
     Width = 75
     Height = 25
     Caption = 'Confirmar'

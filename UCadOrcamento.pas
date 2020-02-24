@@ -320,6 +320,7 @@ type
     procedure prc_Limpar_Edit_Consulta;
 
     function fnc_Posicionar_Orcamento: Boolean;
+    function fnc_Senha : Boolean;
 
     procedure prc_Posiciona_Imp;
     procedure prc_Opcao_Consumidor;
@@ -340,7 +341,7 @@ implementation
 
 uses DateUtils, DmdDatabase, rsDBUtils, uUtilPadrao, uRelOrcamento, USel_Pessoa, URelPedido_Tam, URelPedido_Tam2, uUtilCliente,
   uRelOrcamento_JW, UCadOrcamento_Servicos, uCalculo_Pedido, UCadPedido_Custo, UCadPedido_Copia, UConsHist_Chapa,
-  uGrava_Pedido, UConsClienteOBS;
+  uGrava_Pedido, UConsClienteOBS, USenha;
 
 {$R *.dfm}
 
@@ -357,6 +358,9 @@ var
 begin
   if not fnc_Verifica_Registro then
     Exit;
+
+  if not fnc_Senha then
+    exit;
 
   prc_Posiciona_Pedido;
   
@@ -621,6 +625,9 @@ end;
 procedure TfrmCadOrcamento.btnAlterarClick(Sender: TObject);
 begin
   if (fDMCadPedido.cdsPedido.IsEmpty) or not(fDMCadPedido.cdsPedido.Active) or (fDMCadPedido.cdsPedidoID.AsInteger < 1) then
+    exit;
+
+  if not fnc_Senha then
     exit;
 
   //06/09/2019
@@ -1902,6 +1909,31 @@ begin
   for i := 0 to SMDBGrid1.Columns.Count - 1 do
     if not (SMDBGrid1.Columns.Items[I] = Column) then
       SMDBGrid1.Columns.Items[I].Title.Color := clBtnFace;
+end;
+
+function TfrmCadOrcamento.fnc_Senha: Boolean;
+var
+  ffrmSenha: TfrmSenha;
+  vSenha_Pertence: String;
+begin
+  fDMCadPedido.qParametros_Ped.Close;
+  fDMCadPedido.qParametros_Ped.Open;
+  Result := True;
+  if trim(fDMCadPedido.qParametros_PedSENHA_EXCLUIR_ORC.AsString) = '' then
+    exit;
+
+  Result    := False;
+  vSenha    := '';
+  ffrmSenha := TfrmSenha.Create(self);
+  ffrmSenha.Panel1.Visible := False;
+  ffrmSenha.ShowModal;
+  FreeAndNil(ffrmSenha);
+  if vSenha <> fDMCadPedido.qParametros_PedSENHA_EXCLUIR_ORC.AsString then
+  begin
+    MessageDlg('*** Senha incorreta!', mtError, [mbOk], 0);
+    exit;
+  end;
+  Result := True;
 end;
 
 end.
