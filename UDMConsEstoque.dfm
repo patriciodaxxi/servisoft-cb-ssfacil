@@ -302,8 +302,7 @@ object DMConsEstoque: TDMConsEstoque
       'in LOCAL_ESTOQUE LEST on (EM.ID_LOCAL_ESTOQUE = LEST.ID)  '#13#10'left' +
       ' join CENTROCUSTO CC on EM.ID_CENTROCUSTO = CC.ID  '#13#10'left join D' +
       'OCESTOQUE_ITENS DI on DI.ID_MOVESTOQUE = EM.ID  '#13#10'left join CENT' +
-      'ROCUSTO CC1 on CC1.ID = CC.SUPERIOR  '#13#10'where PRO.INATIVO = '#39'N'#39' a' +
-      'nd'#13#10'        PRO.ESTOQUE = '#39'S'#39
+      'ROCUSTO CC1 on CC1.ID = CC.SUPERIOR  '#13#10'where PRO.ESTOQUE = '#39'S'#39
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados

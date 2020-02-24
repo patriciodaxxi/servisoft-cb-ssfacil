@@ -907,6 +907,12 @@ type
     cdsCor_TamTAMANHO_USA: TStringField;
     cdsCor_TamTAMANHO_EUR: TStringField;
     qParametros_ProdUSA_SEL_COMB_ETIQUETA: TStringField;
+    qParametros_Geral: TSQLQuery;
+    qParametros_GeralUSA_VENDEDOR_INT: TStringField;
+    cdsPedido_ItemID_VENDEDOR_INT: TIntegerField;
+    cdsPedido_ItemNOME_VENDEDOR_INT: TStringField;
+    cdsPedidoID_VENDEDOR_INT: TIntegerField;
+    cdsPedidoNOME_VENDEDOR_INT: TStringField;
     procedure DataModuleCreate(Sender: TObject);
     procedure mConsumoNewRecord(DataSet: TDataSet);
     procedure cdsPedido_MatCalcFields(DataSet: TDataSet);
@@ -1012,6 +1018,7 @@ begin
   qParametros_Lote.Open;
   qParametros_Etiq.Open;
   qParametros_Ser.Open;
+  qParametros_Geral.Open;
 end;
 
 procedure TDMConsPedido.mConsumoNewRecord(DataSet: TDataSet);

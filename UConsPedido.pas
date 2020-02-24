@@ -117,6 +117,8 @@ type
     RadioGroup1: TRadioGroup;
     Label34: TLabel;
     ComboBox4: TComboBox;
+    Label35: TLabel;
+    RxDBLookupCombo6: TRxDBLookupCombo;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -226,10 +228,17 @@ begin
   fDMConsPedido.cdsPedido_Item.Close;
   fDMConsPedido.cdsPedido_Item.IndexFieldNames := '';
 
+  fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.ctPedido_Item;
+  if fDMConsPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString <> 'S' then
+  begin
+    fDMConsPedido.sdsPedido_Item.CommandText := AnsiReplaceText(fDMConsPedido.sdsPedido_Item.CommandText, 'LEFT JOIN PESSOA VINT ON PED.ID_VENDEDOR_INT = VINT.CODIGO', '');
+    fDMConsPedido.sdsPedido_Item.CommandText := AnsiReplaceText(fDMConsPedido.sdsPedido_Item.CommandText, 'VINT.NOME NOME_VENDEDOR_INT', 'cast(' +QuotedStr('') + ' as Varchar(60)) NOME_VENDEDOR_INT');
+  end;
+
   case RadioGroup1.ItemIndex of
-    0: fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.ctPedido_Item + ' WHERE PED.TIPO_REG = ' + QuotedStr('P');
-    1: fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.ctPedido_Item + ' WHERE PED.TIPO_REG = ' + QuotedStr('O');
-    2: fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.ctPedido_Item + ' WHERE 1 = 1';
+    0: fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.sdsPedido_Item.CommandText + ' WHERE PED.TIPO_REG = ' + QuotedStr('P');
+    1: fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.sdsPedido_Item.CommandText + ' WHERE PED.TIPO_REG = ' + QuotedStr('O');
+    2: fDMConsPedido.sdsPedido_Item.CommandText := fDMConsPedido.sdsPedido_Item.CommandText + ' WHERE 1 = 1';
   end;
 
   if (fDMConsPedido.qParametrosUSA_APROVACAO_PED.AsString = 'S') and not(ckAprovado.Checked) then
@@ -253,6 +262,8 @@ begin
       vComando := vComando + ' AND ITE.ID_PRODUTO = ' + IntToStr(RxDBLookupCombo3.KeyValue);
     if RxDBLookupCombo5.Text <> '' then
       vComando := vComando + ' AND PED.ID_VENDEDOR = ' + IntToStr(RxDBLookupCombo5.KeyValue);
+    if RxDBLookupCombo6.Text <> '' then
+      vComando := vComando + ' AND PED.ID_VENDEDOR_INT = ' + IntToStr(RxDBLookupCombo6.KeyValue);
     if DateEdit1.Date > 10 then
       vComando := vComando + ' AND PED.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date));
     if DateEdit2.Date > 10 then
@@ -360,6 +371,8 @@ begin
       SMDBGrid4.Columns[i].Visible := (fDMConsPedido.qParametros_PedFATURAR_PED_INTEGRAL.AsString <> 'S');
     if (SMDBGrid4.Columns[i].FieldName = 'VLR_CANCELADO') then
       SMDBGrid4.Columns[i].Visible := (fDMConsPedido.qParametros_PedFATURAR_PED_INTEGRAL.AsString <> 'S');
+    if (SMDBGrid4.Columns[i].FieldName = 'NOME_VENDEDOR_INT') then
+      SMDBGrid4.Columns[i].Visible := (fDMConsPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
   end;
 
   for i := 1 to SMDBGrid1.ColCount - 2 do
@@ -372,6 +385,8 @@ begin
       SMDBGrid1.Columns[i].Visible := (fDMConsPedido.qParametros_ProdMOSTRAR_TAM_CALC.AsString = 'S');
     if (SMDBGrid1.Columns[i].FieldName = 'ENCOMENDA') then
       SMDBGrid1.Columns[i].Visible := (fDMConsPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+    if (SMDBGrid1.Columns[i].FieldName = 'NOME_VENDEDOR_INT') then
+      SMDBGrid1.Columns[i].Visible := (fDMConsPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
   end;
 
   for i := 1 to SMDBGrid6.ColCount - 2 do
@@ -407,6 +422,8 @@ begin
     Label32.Caption := 'Nº OC/OP';
   Label34.Visible   := (fDMConsPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
   ComboBox4.Visible := (fDMConsPedido.qParametros_PedPEDIDO_LOJA.AsString = 'S');
+  Label35.Visible          := (fDMConsPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
+  RxDBLookupCombo6.Visible := (fDMConsPedido.qParametros_GeralUSA_VENDEDOR_INT.AsString = 'S');
 end;
 
 procedure TfrmConsPedido.SMDBGrid1TitleClick(Column: TColumn);
@@ -608,6 +625,8 @@ begin
       vComando := vComando + ' AND V.ID_PRODUTO = ' + IntToStr(RxDBLookupCombo3.KeyValue);
     if RxDBLookupCombo5.Text <> '' then
       vComando := vComando + ' AND V.ID_VENDEDOR = ' + IntToStr(RxDBLookupCombo5.KeyValue);
+    if RxDBLookupCombo6.Text <> '' then
+      vComando := vComando + ' AND V.ID_VENDEDOR_INT = ' + IntToStr(RxDBLookupCombo6.KeyValue);
     if DateEdit1.Date > 10 then
       vComando := vComando + ' AND V.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date));
     if DateEdit2.Date > 10 then
@@ -760,10 +779,6 @@ begin
 end;
 
 procedure TfrmConsPedido.prc_Consultar_Ref;
-var
-  vComandoAux, vComandoAux2: String;
-  vOpcaoDtEntrega: String;
-  i: Integer;
 begin
   fDMConsPedido.cdsPedido_Ref.Close;
   prc_GroupBy(fDMConsPedido.ctPedido_Ref);
@@ -775,9 +790,6 @@ begin
 end;
 
 procedure TfrmConsPedido.prc_Consultar_Ref_Acum;
-var
-  vComandoAux, vComandoAux2: String;
-  vOpcaoDtEntrega: String;
 begin
   fDMConsPedido.cdsPedido_Ref_Acum.Close;
   prc_GroupBy(fDMConsPedido.ctPedido_Ref_Acum);
@@ -816,6 +828,8 @@ begin
       vComando := vComando + ' AND V.ID_PRODUTO = ' + IntToStr(RxDBLookupCombo3.KeyValue);
     if RxDBLookupCombo5.Text <> '' then
       vComando := vComando + ' AND V.ID_VENDEDOR = ' + IntToStr(RxDBLookupCombo5.KeyValue);
+    if RxDBLookupCombo6.Text <> '' then
+      vComando := vComando + ' AND V.ID_VENDEDOR_INT = ' + IntToStr(RxDBLookupCombo6.KeyValue);
     if DateEdit1.Date > 10 then
       vComando := vComando + ' AND V.DTEMISSAO >= ' + QuotedStr(FormatDateTime('MM/DD/YYYY',DateEdit1.date));
     if DateEdit2.Date > 10 then
@@ -985,6 +999,8 @@ begin
     2: vOpcaoAux := vOpcaoAux + '(Cancelado)';
     4: vOpcaoAux := vOpcaoAux + '(Enviado Não Cobr.)';
   end;
+  if RxDBLookupCombo6.Text <> '' then
+    vOpcaoAux := vOpcaoAux + '(Vend.Interno: ' + RxDBLookupCombo6.Text + ')';
   fDMConsPedido.frxReport1.Variables['DataInicial'] := QuotedStr(DateToStr(DateEdit1.Date));
   if RzPageControl1.ActivePage = TS_Item then
   begin
@@ -1174,9 +1190,6 @@ begin
 end;
 
 procedure TfrmConsPedido.prc_Consultar_Cli;
-var
-  vComandoAux, vComandoAux2: String;
-  vOpcaoDtEntrega: String;
 begin
   fDMConsPedido.cdsPedido_Cli.Close;
   prc_GroupBy(fDMConsPedido.ctPedido_Cli);
@@ -1193,9 +1206,6 @@ begin
 end;
 
 procedure TfrmConsPedido.prc_Consultar_Comb;
-var
-  vComandoAux, vComandoAux2: String;
-  vOpcaoDtEntrega: String;
 begin
   fDMConsPedido.cdsPedido_Comb.Close;
   prc_GroupBy(fDMConsPedido.ctPedido_Comb);
@@ -1438,10 +1448,6 @@ begin
 end;
 
 procedure TfrmConsPedido.prc_Consultar_Ref2;
-var
-  vComandoAux, vComandoAux2: String;
-  vOpcaoDtEntrega: String;
-  i: Integer;
 begin
   fDMConsPedido.cdsPedido_Ref2.Close;
   prc_GroupBy(fDMConsPedido.ctPedido_Ref2);
@@ -1577,9 +1583,6 @@ begin
 end;
 
 procedure TfrmConsPedido.prc_Consultar_RefComb;
-var
-  vComandoAux, vComandoAux2: String;
-  vOpcaoDtEntrega: String;
 begin
   fDMConsPedido.cdsPedido_RefComb.Close;
   prc_GroupBy(fDMConsPedido.ctPedido_RefComb);
@@ -1611,9 +1614,6 @@ begin
 end;
 
 procedure TfrmConsPedido.prc_Consultar_RefComb_DtEntrega;
-var
-  vComandoAux, vComandoAux2: String;
-  vOpcaoDtEntrega: String;
 begin
   fDMConsPedido.cdsPedido_RefComb_DtEntrega.Close;
   prc_GroupBy(fDMConsPedido.ctPedido_RefComb_DTEntrega);
@@ -1645,9 +1645,6 @@ begin
 end;
 
 procedure TfrmConsPedido.prc_Consultar_RefComb_DtECliente;
-var
-  vComandoAux, vComandoAux2: String;
-  vOpcaoDtEntrega: String;
 begin
   fDMConsPedido.cdsPedido_RefComb_DtEntrega.Close;
   prc_GroupBy(fDMConsPedido.ctPedido_RefComb_DTECliente);

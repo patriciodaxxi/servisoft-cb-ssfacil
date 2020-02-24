@@ -79,6 +79,7 @@ type
     ProgressBar1: TProgressBar;
     NxButton2: TNxButton;
     ckEstrutura: TCheckBox;
+    ckInativo: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -423,6 +424,8 @@ end;
 procedure TfrmConsEstoque_Mov.prc_Condicao(Saldo_Ant: Boolean = False);
 begin
   vComando := '';
+   
+
   if ceIDProduto.AsInteger > 0 then
     vComando := vComando + ' AND EM.ID_PRODUTO = ' + IntToStr(ceIDProduto.AsInteger)
   else

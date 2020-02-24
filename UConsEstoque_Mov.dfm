@@ -410,8 +410,8 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
       OnKeyDown = ceIDPessoaKeyDown
     end
     object ckSemCor: TCheckBox
-      Left = 618
-      Top = 108
+      Left = 617
+      Top = 101
       Width = 79
       Height = 17
       Caption = 'Sem Cor'
@@ -419,12 +419,20 @@ object frmConsEstoque_Mov: TfrmConsEstoque_Mov
     end
     object ckEstrutura: TCheckBox
       Left = 617
-      Top = 90
+      Top = 86
       Width = 120
       Height = 17
       Caption = 'Estrutura Completa'
       TabOrder = 16
       Visible = False
+    end
+    object ckInativo: TCheckBox
+      Left = 617
+      Top = 116
+      Width = 114
+      Height = 17
+      Caption = 'Mostrar os Inativos'
+      TabOrder = 17
     end
   end
   object RzPageControl1: TRzPageControl

@@ -23,7 +23,7 @@ object frmConsPedido: TfrmConsPedido
     Left = 0
     Top = 0
     Width = 1017
-    Height = 135
+    Height = 150
     Align = alTop
     BevelOuter = bvNone
     Color = clSilver
@@ -46,7 +46,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label3: TLabel
       Left = 251
-      Top = 32
+      Top = 31
       Width = 35
       Height = 13
       Alignment = taRightJustify
@@ -54,7 +54,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label4: TLabel
       Left = 189
-      Top = 54
+      Top = 52
       Width = 97
       Height = 13
       Alignment = taRightJustify
@@ -62,7 +62,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label5: TLabel
       Left = 216
-      Top = 76
+      Top = 73
       Width = 70
       Height = 13
       Alignment = taRightJustify
@@ -70,7 +70,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label6: TLabel
       Left = 389
-      Top = 76
+      Top = 73
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -78,7 +78,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label7: TLabel
       Left = 218
-      Top = 98
+      Top = 94
       Width = 68
       Height = 13
       Alignment = taRightJustify
@@ -86,7 +86,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label8: TLabel
       Left = 389
-      Top = 98
+      Top = 94
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -94,7 +94,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label9: TLabel
       Left = 237
-      Top = 120
+      Top = 115
       Width = 49
       Height = 13
       Alignment = taRightJustify
@@ -102,7 +102,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label11: TLabel
       Left = 700
-      Top = 76
+      Top = 73
       Width = 38
       Height = 13
       Alignment = taRightJustify
@@ -110,7 +110,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label12: TLabel
       Left = 666
-      Top = 32
+      Top = 31
       Width = 72
       Height = 13
       Alignment = taRightJustify
@@ -118,7 +118,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label16: TLabel
       Left = 651
-      Top = 54
+      Top = 52
       Width = 87
       Height = 13
       Alignment = taRightJustify
@@ -126,7 +126,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label17: TLabel
       Left = 831
-      Top = 24
+      Top = 23
       Width = 133
       Height = 39
       Caption = 
@@ -141,7 +141,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label18: TLabel
       Left = 665
-      Top = 98
+      Top = 94
       Width = 73
       Height = 13
       Alignment = taRightJustify
@@ -149,7 +149,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label32: TLabel
       Left = 519
-      Top = 120
+      Top = 115
       Width = 33
       Height = 13
       Alignment = taRightJustify
@@ -157,11 +157,19 @@ object frmConsPedido: TfrmConsPedido
     end
     object Label34: TLabel
       Left = 678
-      Top = 120
+      Top = 115
       Width = 60
       Height = 13
       Alignment = taRightJustify
       Caption = 'Encomenda:'
+    end
+    object Label35: TLabel
+      Left = 201
+      Top = 135
+      Width = 85
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Vendedor Interno:'
     end
     object Edit1: TEdit
       Left = 739
@@ -189,7 +197,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object ckMostrarPreco: TCheckBox
       Left = 523
-      Top = 83
+      Top = 79
       Width = 97
       Height = 17
       Caption = 'Mostrar Pre'#231'o'
@@ -200,7 +208,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object RxDBLookupCombo2: TRxDBLookupCombo
       Left = 287
-      Top = 24
+      Top = 23
       Width = 359
       Height = 21
       DropDownCount = 8
@@ -215,7 +223,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object RxDBLookupCombo3: TRxDBLookupCombo
       Left = 407
-      Top = 46
+      Top = 44
       Width = 239
       Height = 21
       DropDownCount = 8
@@ -229,7 +237,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object RxDBLookupCombo4: TRxDBLookupCombo
       Left = 287
-      Top = 46
+      Top = 44
       Width = 121
       Height = 21
       DropDownCount = 8
@@ -245,7 +253,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object DateEdit1: TDateEdit
       Left = 287
-      Top = 68
+      Top = 65
       Width = 100
       Height = 21
       Ctl3D = True
@@ -256,7 +264,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object DateEdit2: TDateEdit
       Left = 415
-      Top = 68
+      Top = 65
       Width = 100
       Height = 21
       Ctl3D = True
@@ -267,7 +275,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object DateEdit3: TDateEdit
       Left = 287
-      Top = 90
+      Top = 86
       Width = 100
       Height = 21
       Ctl3D = True
@@ -278,7 +286,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object DateEdit4: TDateEdit
       Left = 415
-      Top = 90
+      Top = 86
       Width = 100
       Height = 21
       Ctl3D = True
@@ -289,7 +297,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object RxDBLookupCombo5: TRxDBLookupCombo
       Left = 287
-      Top = 112
+      Top = 107
       Width = 228
       Height = 21
       DropDownCount = 8
@@ -305,7 +313,7 @@ object frmConsPedido: TfrmConsPedido
       Left = 83
       Top = 0
       Width = 103
-      Height = 135
+      Height = 150
       Align = alLeft
       Caption = ' Op'#231#227'o '
       Ctl3D = True
@@ -322,7 +330,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object ComboBox2: TComboBox
       Left = 739
-      Top = 68
+      Top = 65
       Width = 175
       Height = 21
       Style = csDropDownList
@@ -337,7 +345,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object CurrencyEdit1: TCurrencyEdit
       Left = 739
-      Top = 24
+      Top = 23
       Width = 86
       Height = 21
       AutoSize = False
@@ -347,7 +355,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object CurrencyEdit2: TCurrencyEdit
       Left = 739
-      Top = 46
+      Top = 44
       Width = 86
       Height = 21
       AutoSize = False
@@ -357,7 +365,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object cbImpCliente: TComboBox
       Left = 739
-      Top = 90
+      Top = 86
       Width = 175
       Height = 21
       Style = csDropDownList
@@ -371,7 +379,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object ckAprovado: TCheckBox
       Left = 523
-      Top = 67
+      Top = 64
       Width = 156
       Height = 17
       Caption = 'Mostrar Pend.de Aprova'#231#227'o'
@@ -380,7 +388,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object Edit2: TEdit
       Left = 553
-      Top = 112
+      Top = 107
       Width = 96
       Height = 21
       Ctl3D = True
@@ -392,7 +400,7 @@ object frmConsPedido: TfrmConsPedido
       Left = 0
       Top = 0
       Width = 83
-      Height = 135
+      Height = 150
       Align = alLeft
       Caption = 'Tipo'
       Ctl3D = True
@@ -406,7 +414,7 @@ object frmConsPedido: TfrmConsPedido
     end
     object ComboBox4: TComboBox
       Left = 739
-      Top = 112
+      Top = 107
       Width = 175
       Height = 21
       Style = csDropDownList
@@ -419,13 +427,27 @@ object frmConsPedido: TfrmConsPedido
         'Somente Encomenda'
         'N'#227'o Mostrar Encomenda')
     end
+    object RxDBLookupCombo6: TRxDBLookupCombo
+      Left = 287
+      Top = 128
+      Width = 228
+      Height = 21
+      DropDownCount = 8
+      Ctl3D = True
+      LookupField = 'CODIGO'
+      LookupDisplay = 'NOME'
+      LookupSource = DMConsPedido.dsVendedor
+      ParentCtl3D = False
+      TabOrder = 20
+      OnEnter = RxDBLookupCombo5Enter
+    end
   end
   object RzPageControl1: TRzPageControl
     Left = 0
-    Top = 188
+    Top = 203
     Width = 1017
-    Height = 393
-    ActivePage = TS_Item
+    Height = 378
+    ActivePage = TS_Combinacao
     ActivePageDefault = TS_Item
     Align = alClient
     Color = 16755027
@@ -438,7 +460,7 @@ object frmConsPedido: TfrmConsPedido
     ParentColor = False
     ParentFont = False
     TabColors.Unselected = clGray
-    TabIndex = 0
+    TabIndex = 5
     TabOrder = 1
     TextColors.Unselected = 5197647
     OnChange = RzPageControl1Change
@@ -457,7 +479,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 37
         Width = 1013
-        Height = 333
+        Height = 318
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Item
@@ -490,7 +512,7 @@ object frmConsPedido: TfrmConsPedido
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 38
+        ColCount = 39
         RowCount = 2
         Columns = <
           item
@@ -507,7 +529,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'APROVADO_PED'
             Title.Alignment = taCenter
             Title.Caption = 'Aprovado'
-            Width = 64
             Visible = True
           end
           item
@@ -525,7 +546,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'PEDIDO_CLIENTE'
             Title.Alignment = taCenter
             Title.Caption = 'Pedido Cliente (OC)'
-            Width = 64
             Visible = True
           end
           item
@@ -541,7 +561,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'NUM_DOC'
             Title.Alignment = taCenter
             Title.Caption = 'N'#186' Documento'
-            Width = 64
             Visible = True
           end
           item
@@ -574,7 +593,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'DTEMISSAO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Emiss'#227'o'
-            Width = 64
             Visible = True
           end
           item
@@ -583,7 +601,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'DTAPROVADO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Aprovado'
-            Width = 64
             Visible = True
           end
           item
@@ -610,7 +627,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'DTEXPEDICAO'
             Title.Alignment = taCenter
             Title.Caption = 'Data Expedi'#231#227'o'
-            Width = 64
             Visible = True
           end
           item
@@ -618,7 +634,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'REFERENCIA'
             Title.Alignment = taCenter
             Title.Caption = 'Refer'#234'ncia'
-            Width = 64
             Visible = True
           end
           item
@@ -680,7 +695,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'QTD_FATURADO'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd Faturada'
-            Width = 64
             Visible = True
           end
           item
@@ -688,7 +702,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'QTD_RESTANTE'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Pendente'
-            Width = 64
             Visible = True
           end
           item
@@ -704,7 +717,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'QTD_CANCELADO'
             Title.Alignment = taCenter
             Title.Caption = 'Qtd. Cancelada'
-            Width = 64
             Visible = True
           end
           item
@@ -728,6 +740,14 @@ object frmConsPedido: TfrmConsPedido
             Title.Alignment = taCenter
             Title.Caption = 'Nome Vendedor'
             Width = 200
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME_VENDEDOR_INT'
+            Title.Alignment = taCenter
+            Title.Caption = 'Vendedor Interno'
+            Width = 184
             Visible = True
           end
           item
@@ -781,7 +801,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'CLIENTE_ESTOQUE'
             Title.Alignment = taCenter
             Title.Caption = 'Ped. Estoque'
-            Width = 64
             Visible = True
           end
           item
@@ -789,7 +808,6 @@ object frmConsPedido: TfrmConsPedido
             FieldName = 'MONT_COMBINACAO'
             Title.Alignment = taCenter
             Title.Caption = 'Combina'#231#227'o'
-            Width = 64
             Visible = True
           end>
       end
@@ -901,7 +919,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 25
         Width = 1013
-        Height = 345
+        Height = 330
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido
@@ -941,7 +959,7 @@ object frmConsPedido: TfrmConsPedido
         WidthOfIndicator = 11
         DefaultRowHeight = 17
         ScrollBars = ssHorizontal
-        ColCount = 25
+        ColCount = 26
         RowCount = 2
         Columns = <
           item
@@ -965,7 +983,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1001,7 +1018,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1026,7 +1042,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1075,7 +1090,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1088,7 +1102,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1188,7 +1201,19 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 111
+            Width = 120
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME_VENDEDOR_INT'
+            Title.Alignment = taCenter
+            Title.Font.Charset = DEFAULT_CHARSET
+            Title.Font.Color = clWindowText
+            Title.Font.Height = -11
+            Title.Font.Name = 'MS Sans Serif'
+            Title.Font.Style = []
+            Width = 187
             Visible = True
           end
           item
@@ -1213,7 +1238,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1302,7 +1326,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 370
+        Height = 355
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Ref
@@ -1395,7 +1419,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1409,7 +1432,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1437,7 +1459,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1451,7 +1472,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1464,7 +1484,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1516,7 +1535,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1529,7 +1547,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1554,7 +1571,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1567,7 +1583,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1580,7 +1595,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1693,7 +1707,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end>
       end
@@ -1705,7 +1718,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 370
+        Height = 355
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Ref_Acum
@@ -1791,7 +1804,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1863,7 +1875,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -1965,7 +1976,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 370
+        Height = 355
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Cli
@@ -2225,7 +2236,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 370
+        Height = 355
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Comb
@@ -2329,7 +2340,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -2401,7 +2411,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -2503,7 +2512,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 28
         Width = 1013
-        Height = 342
+        Height = 327
         Align = alClient
         Ctl3D = False
         DataSource = DMConsPedido.dsPedido_Ref2
@@ -2610,7 +2619,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -2647,7 +2655,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -2665,7 +2672,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -2678,7 +2684,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -2713,7 +2718,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -2731,7 +2735,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -2749,7 +2752,6 @@ object frmConsPedido: TfrmConsPedido
             Title.Font.Height = -11
             Title.Font.Name = 'MS Sans Serif'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -2890,7 +2892,7 @@ object frmConsPedido: TfrmConsPedido
         Left = 0
         Top = 0
         Width = 1013
-        Height = 370
+        Height = 355
         ActivePage = TS_RefComb_Acum
         ActivePageDefault = TS_RefComb_Acum
         Align = alClient
@@ -2917,7 +2919,7 @@ object frmConsPedido: TfrmConsPedido
             Left = 0
             Top = 0
             Width = 1009
-            Height = 347
+            Height = 332
             Align = alClient
             Ctl3D = False
             DataSource = DMConsPedido.dsPedido_RefComb
@@ -3056,7 +3058,6 @@ object frmConsPedido: TfrmConsPedido
                 Title.Font.Height = -11
                 Title.Font.Name = 'MS Sans Serif'
                 Title.Font.Style = []
-                Width = 64
                 Visible = True
               end
               item
@@ -3092,7 +3093,6 @@ object frmConsPedido: TfrmConsPedido
                 Title.Font.Height = -11
                 Title.Font.Name = 'MS Sans Serif'
                 Title.Font.Style = []
-                Width = 64
                 Visible = True
               end
               item
@@ -3176,7 +3176,7 @@ object frmConsPedido: TfrmConsPedido
             Left = 0
             Top = 0
             Width = 1009
-            Height = 347
+            Height = 332
             Align = alClient
             Ctl3D = False
             DataSource = DMConsPedido.dsPedido_RefComb_DtEntrega
@@ -3332,7 +3332,6 @@ object frmConsPedido: TfrmConsPedido
                 Title.Font.Height = -11
                 Title.Font.Name = 'MS Sans Serif'
                 Title.Font.Style = []
-                Width = 64
                 Visible = True
               end
               item
@@ -3368,7 +3367,6 @@ object frmConsPedido: TfrmConsPedido
                 Title.Font.Height = -11
                 Title.Font.Name = 'MS Sans Serif'
                 Title.Font.Style = []
-                Width = 64
                 Visible = True
               end
               item
@@ -3452,7 +3450,7 @@ object frmConsPedido: TfrmConsPedido
             Left = 0
             Top = 0
             Width = 1009
-            Height = 347
+            Height = 332
             Align = alClient
             Ctl3D = False
             DataSource = DMConsPedido.dsPedido_RefComb_DtECliente
@@ -3626,7 +3624,6 @@ object frmConsPedido: TfrmConsPedido
                 Title.Font.Height = -11
                 Title.Font.Name = 'MS Sans Serif'
                 Title.Font.Style = []
-                Width = 64
                 Visible = True
               end
               item
@@ -3662,7 +3659,6 @@ object frmConsPedido: TfrmConsPedido
                 Title.Font.Height = -11
                 Title.Font.Name = 'MS Sans Serif'
                 Title.Font.Style = []
-                Width = 64
                 Visible = True
               end
               item
@@ -3744,7 +3740,7 @@ object frmConsPedido: TfrmConsPedido
   end
   object Panel2: TPanel
     Left = 0
-    Top = 158
+    Top = 173
     Width = 1017
     Height = 30
     Align = alTop
@@ -4192,7 +4188,7 @@ object frmConsPedido: TfrmConsPedido
   end
   object Panel5: TPanel
     Left = 0
-    Top = 135
+    Top = 150
     Width = 1017
     Height = 23
     Align = alTop
