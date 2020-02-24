@@ -172,7 +172,7 @@ object frmConsEstoque: TfrmConsEstoque
       OnEnter = rxdbGrupoEnter
       OnKeyDown = rxdbGrupoKeyDown
     end
-    object CheckBox1: TCheckBox
+    object ckInativo: TCheckBox
       Left = 665
       Top = 35
       Width = 150
@@ -517,7 +517,6 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'PRECO_VENDA'
         Title.Alignment = taCenter
         Title.Caption = 'Pre'#231'o Venda'
-        Width = 64
         Visible = True
       end
       item
@@ -525,7 +524,6 @@ object frmConsEstoque: TfrmConsEstoque
         FieldName = 'LOCALIZACAO'
         Title.Alignment = taCenter
         Title.Caption = 'Localiza'#231#227'o'
-        Width = 64
         Visible = True
       end
       item

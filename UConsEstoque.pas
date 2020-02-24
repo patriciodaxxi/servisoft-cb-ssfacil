@@ -22,7 +22,7 @@ type
     RxDBLookupCombo2: TRxDBLookupCombo;
     Label4: TLabel;
     rxdbGrupo: TRxDBLookupCombo;
-    CheckBox1: TCheckBox;
+    ckInativo: TCheckBox;
     btnConsultar: TNxButton;
     Panel2: TPanel;
     btnImprimir_Est: TNxButton;
@@ -88,7 +88,7 @@ var
 
 implementation
 
-uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, URelInventario, USel_Grupo, USel_Produto, uConsProduto_Compras;
+uses DmdDatabase, uUtilPadrao, rsDBUtils, UMenu, URelEstoque, URelInventario, USel_Grupo, USel_Produto, uConsProduto_Compras, StrUtils;
 
 {$R *.dfm}
 
@@ -103,10 +103,9 @@ begin
   try
     vQtdAux := 0;
     fDMConsEstoque.cdsEstoque.Close;
-    if CheckBox1.Checked then
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.ctEstoque + ' WHERE (0 = 0) '
-    else
-      fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.ctEstoque + ' WHERE (INATIVO = ' + QuotedStr('N') + ')';
+    fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.ctEstoque + ' WHERE (0 = 0) ';
+    if ckInativo.Checked then
+      fDMConsEstoque.sdsEstoque.CommandText := AnsiReplaceText(fDMConsEstoque.sdsEstoque.CommandText, 'AND PRO.INATIVO = ' +QuotedStr('N'), '');
     if ceIDProduto.AsInteger > 0 then
       fDMConsEstoque.sdsEstoque.CommandText := fDMConsEstoque.sdsEstoque.CommandText + ' AND AUX.ID = ' + ceIDProduto.Text
     else

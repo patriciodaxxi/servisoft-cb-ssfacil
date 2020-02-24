@@ -48,6 +48,7 @@ type
     SMDBGrid3: TSMDBGrid;
     SMDBGrid7: TSMDBGrid;
     CheckBox1: TCheckBox;
+    ckInativo: TCheckBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure SMDBGrid1TitleClick(Column: TColumn);
@@ -134,9 +135,9 @@ begin
               + ' ON AUX.ID_COR = COMB.ID '
               + ' LEFT JOIN TAB_NCM NCM '
               + ' ON PRO.ID_NCM = NCM.ID '
-              + ' WHERE PRO.ESTOQUE = ' + QuotedStr('S')
-              + '    AND PRO.INATIVO = ' + QuotedStr('N');
-
+              + ' WHERE PRO.ESTOQUE = ' + QuotedStr('S');
+    if not ckInativo.Checked then
+      vComando := vComando + ' AND PRO.INATIVO = ' + QuotedStr('N');
     if ceIDProduto.AsInteger > 0 then
       vComando := vComando + ' AND PRO.ID = ' + ceIDProduto.Text
     else
@@ -329,6 +330,7 @@ begin
     vIndexValue := fDMConsEstoque.cdsEstoque_Atual.FieldByName(vIndexName).AsString;
     ceIDProduto.AsInteger := vId;
     ffrmConsEstoque_Mov   := TfrmConsEstoque_Mov.Create(self);
+    ffrmConsEstoque_Mov.ckInativo.Checked := ckInativo.Checked;
     vControleExterno      := True;
     if Trim(RxDBLookupCombo1.Text) <> '' then
       ffrmConsEstoque_Mov.RxDBLookupCombo1.KeyValue := RxDBLookupCombo1.KeyValue;
@@ -497,6 +499,7 @@ begin
   edtRef.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
   Label5.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
   ceIDProduto.Visible := ((RzPageControl1.ActivePage <> TS_DeTerceiros) and (RzPageControl1.ActivePage <> TS_EmTerceiros));
+  ckInativo.Visible   := (RzPageControl1.ActivePage = TS_Estoque);
 end;
 
 procedure TfrmConsEstoque_Atual.SMDBGrid7TitleClick(Column: TColumn);

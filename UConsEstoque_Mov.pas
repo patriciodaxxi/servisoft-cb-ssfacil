@@ -424,8 +424,8 @@ end;
 procedure TfrmConsEstoque_Mov.prc_Condicao(Saldo_Ant: Boolean = False);
 begin
   vComando := '';
-   
-
+  if not ckInativo.Checked then
+    vComando := vComando + ' AND PRO.INATIVO = ' + QuotedStr('N');
   if ceIDProduto.AsInteger > 0 then
     vComando := vComando + ' AND EM.ID_PRODUTO = ' + IntToStr(ceIDProduto.AsInteger)
   else

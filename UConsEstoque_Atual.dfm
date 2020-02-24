@@ -275,6 +275,14 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
       Transparent = True
       OnClick = btnImprimirClick
     end
+    object ckInativo: TCheckBox
+      Left = 667
+      Top = 24
+      Width = 150
+      Height = 17
+      Caption = 'Mostrar Produto Inativo'
+      TabOrder = 7
+    end
   end
   object RzPageControl1: TRzPageControl
     Left = 0
@@ -569,7 +577,6 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
                 Title.Color = 16777124
-                Width = 64
                 Visible = True
               end
               item
@@ -586,7 +593,6 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo SPED'
                 Title.Color = 16777124
-                Width = 64
                 Visible = True
               end>
           end
@@ -671,7 +677,6 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Refer'#234'ncia'
                 Title.Color = 7864319
-                Width = 64
                 Visible = True
               end
               item
@@ -717,7 +722,6 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Unid.'
                 Title.Color = 7864319
-                Width = 64
                 Visible = True
               end
               item
@@ -734,7 +738,6 @@ object frmConsEstoque_Atual: TfrmConsEstoque_Atual
                 Title.Alignment = taCenter
                 Title.Caption = 'Tipo Produto SPED'
                 Title.Color = 7864319
-                Width = 64
                 Visible = True
               end>
           end
