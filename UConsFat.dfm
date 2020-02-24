@@ -20,7 +20,7 @@ object frmConsFat: TfrmConsFat
     Left = 0
     Top = 0
     Width = 1252
-    Height = 76
+    Height = 83
     Align = alTop
     UseDockManager = False
     ParentBackground = False
@@ -99,7 +99,7 @@ object frmConsFat: TfrmConsFat
       Left = 0
       Top = 0
       Width = 222
-      Height = 76
+      Height = 83
       Items.Strings = (
         '//...Descontar...'
         'Valor IPI'
@@ -110,8 +110,10 @@ object frmConsFat: TfrmConsFat
         'Valor Frete'
         'Difal (Dif. de Al'#237'q)'
         'Valor IR'
-        'Valor CSLL')
+        'Valor CSLL'
+        'Valor ISSQN')
       Items.ItemEnabled = (
+        True
         True
         True
         True
@@ -123,6 +125,7 @@ object frmConsFat: TfrmConsFat
         True
         True)
       Items.ItemState = (
+        0
         0
         0
         0
@@ -257,9 +260,9 @@ object frmConsFat: TfrmConsFat
   end
   object Panel1: TPanel
     Left = 1032
-    Top = 76
+    Top = 83
     Width = 220
-    Height = 514
+    Height = 507
     Align = alRight
     TabOrder = 1
     object Label23: TLabel
@@ -444,7 +447,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label35: TLabel
       Left = 80
-      Top = 231
+      Top = 279
       Width = 35
       Height = 13
       Alignment = taRightJustify
@@ -459,7 +462,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label36: TLabel
       Left = 175
-      Top = 231
+      Top = 279
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -474,7 +477,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label37: TLabel
       Left = 55
-      Top = 247
+      Top = 295
       Width = 60
       Height = 13
       Alignment = taRightJustify
@@ -489,7 +492,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label38: TLabel
       Left = 175
-      Top = 247
+      Top = 295
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -504,7 +507,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label39: TLabel
       Left = 47
-      Top = 335
+      Top = 383
       Width = 68
       Height = 13
       Alignment = taRightJustify
@@ -519,7 +522,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label40: TLabel
       Left = 175
-      Top = 335
+      Top = 383
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -534,7 +537,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label41: TLabel
       Left = 71
-      Top = 319
+      Top = 367
       Width = 44
       Height = 13
       Alignment = taRightJustify
@@ -549,7 +552,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label42: TLabel
       Left = 175
-      Top = 319
+      Top = 367
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -654,7 +657,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label11: TLabel
       Left = 87
-      Top = 271
+      Top = 319
       Width = 28
       Height = 13
       Alignment = taRightJustify
@@ -669,7 +672,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label12: TLabel
       Left = 71
-      Top = 287
+      Top = 335
       Width = 44
       Height = 13
       Alignment = taRightJustify
@@ -684,7 +687,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label13: TLabel
       Left = 175
-      Top = 287
+      Top = 335
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -699,7 +702,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label14: TLabel
       Left = 175
-      Top = 271
+      Top = 319
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -714,7 +717,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label15: TLabel
       Left = 7
-      Top = 367
+      Top = 415
       Width = 108
       Height = 13
       Alignment = taRightJustify
@@ -729,7 +732,7 @@ object frmConsFat: TfrmConsFat
     end
     object Label16: TLabel
       Left = 175
-      Top = 367
+      Top = 415
       Width = 25
       Height = 13
       Alignment = taRightJustify
@@ -832,22 +835,82 @@ object frmConsFat: TfrmConsFat
       ParentFont = False
       Transparent = True
     end
+    object Label43: TLabel
+      Left = 48
+      Top = 231
+      Width = 65
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Vlr. ISSQN:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
+    object lblVlr_ISSQN: TLabel
+      Left = 173
+      Top = 231
+      Width = 25
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '0,00'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
+    object Label45: TLabel
+      Left = 8
+      Top = 247
+      Width = 105
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Vlr. ISSQN Retido:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
+    object lblVlr_ISSQN_Retido: TLabel
+      Left = 173
+      Top = 247
+      Width = 25
+      Height = 13
+      Alignment = taRightJustify
+      Caption = '0,00'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+    end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 76
+    Top = 83
     Width = 1032
-    Height = 514
+    Height = 507
     Align = alClient
     TabOrder = 2
     object RzPageControl1: TRzPageControl
       Left = 1
       Top = 1
       Width = 1030
-      Height = 512
-      ActivePage = ts_Geral
+      Height = 505
+      ActivePage = ts_Data
       Align = alClient
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       FixedDimension = 19
       object ts_Geral: TRzTabSheet
@@ -856,7 +919,7 @@ object frmConsFat: TfrmConsFat
           Left = 0
           Top = 0
           Width = 1026
-          Height = 489
+          Height = 482
           Align = alClient
           Ctl3D = False
           DataSource = DMConsFat.dsFatAcum
@@ -888,7 +951,7 @@ object frmConsFat: TfrmConsFat
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 31
+          ColCount = 33
           RowCount = 2
           Columns = <
             item
@@ -1070,6 +1133,20 @@ object frmConsFat: TfrmConsFat
             end
             item
               Expanded = False
+              FieldName = 'VLR_ISSQN'
+              Title.Alignment = taCenter
+              Title.Caption = 'Vlr. ISSQN'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VLR_ISSQN_RETIDO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Vlr. ISSQN Retido'
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'NOME_CLIFORN'
               Title.Alignment = taCenter
               Title.Caption = 'Nome Pessoa'
@@ -1132,7 +1209,7 @@ object frmConsFat: TfrmConsFat
           Left = 0
           Top = 0
           Width = 1026
-          Height = 489
+          Height = 482
           Align = alClient
           Ctl3D = False
           DataSource = DMConsFat.dsConsCliente
@@ -1162,7 +1239,7 @@ object frmConsFat: TfrmConsFat
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 25
+          ColCount = 27
           RowCount = 2
           Columns = <
             item
@@ -1287,6 +1364,21 @@ object frmConsFat: TfrmConsFat
             end
             item
               Expanded = False
+              FieldName = 'VLR_ISSQN'
+              Title.Alignment = taCenter
+              Title.Caption = 'Vlr. ISSQN'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VLR_ISSQN_RETIDO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Vlr. ISSQN Retido'
+              Width = 69
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'VLR_ICMS_FCP_DEST'
               Title.Alignment = taCenter
               Title.Caption = 'Vlr. ICMS FCP Dest'
@@ -1341,7 +1433,7 @@ object frmConsFat: TfrmConsFat
           Left = 0
           Top = 0
           Width = 1026
-          Height = 489
+          Height = 482
           Align = alClient
           Ctl3D = False
           DataSource = DMConsFat.dsConsData
@@ -1371,7 +1463,7 @@ object frmConsFat: TfrmConsFat
           WidthOfIndicator = 11
           DefaultRowHeight = 17
           ScrollBars = ssHorizontal
-          ColCount = 24
+          ColCount = 26
           RowCount = 2
           Columns = <
             item
@@ -1483,6 +1575,21 @@ object frmConsFat: TfrmConsFat
               Expanded = False
               FieldName = 'VLR_CSLL_VENDA'
               Title.Caption = 'Valor CSSL'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VLR_ISSQN'
+              Title.Alignment = taCenter
+              Title.Caption = 'Vlr. ISSQN'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VLR_ISSQN_RETIDO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Vlr. ISSQN Retido'
+              Width = 67
               Visible = True
             end
             item

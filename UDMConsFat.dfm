@@ -163,6 +163,14 @@ object DMConsFat: TDMConsFat
       FieldName = 'VLR_FCP_ST'
       DisplayFormat = '0.00'
     end
+    object cdsFatAcumVLR_ISSQN: TFloatField
+      FieldName = 'VLR_ISSQN'
+      DisplayFormat = '0.00'
+    end
+    object cdsFatAcumVLR_ISSQN_RETIDO: TFloatField
+      FieldName = 'VLR_ISSQN_RETIDO'
+      DisplayFormat = '0.00'
+    end
   end
   object dsFatAcum: TDataSource
     DataSet = cdsFatAcum
@@ -231,7 +239,7 @@ object DMConsFat: TDMConsFat
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42992.427233402800000000
-    ReportOptions.LastChange = 43336.737570104200000000
+    ReportOptions.LastChange = 43885.623335983790000000
     ScriptLanguage = 'PascalScript'
     StoreInDFM = False
     OnBeforePrint = frxReport1BeforePrint
@@ -277,7 +285,9 @@ object DMConsFat: TDMConsFat
       'BASE_ICMS_FCP_DEST=BASE_ICMS_FCP_DEST'
       'VLR_ICMS_FCP_DEST=VLR_ICMS_FCP_DEST'
       'VLR_ICMS_FCP=VLR_ICMS_FCP'
-      'VLR_FCP_ST=VLR_FCP_ST')
+      'VLR_FCP_ST=VLR_FCP_ST'
+      'VLR_ISSQN=VLR_ISSQN'
+      'VLR_ISSQN_RETIDO=VLR_ISSQN_RETIDO')
     DataSet = cdsFatAcum
     BCDToCurrency = False
     Left = 90
@@ -641,13 +651,14 @@ object DMConsFat: TDMConsFat
       's_fcp,'#13#10'       sum(coalesce(v.base_icms_fcp_dest,0)) base_icms_f' +
       'cp_dest,'#13#10'       sum(coalesce(v.vlr_icms_fcp_dest,0)) vlr_icms_f' +
       'cp_dest,'#13#10'       sum(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp,'#13#10 +
-      '       sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st'#13#10'FROM VFAT_ACUM ' +
-      'V'#13#10#13#10#13#10#13#10#13#10#13#10
+      '       sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st,'#13#10'       sum(coa' +
+      'lesce(v.vlr_issqn,0)) vlr_issqn,'#13#10'       sum(coalesce(v.vlr_issq' +
+      'n_retido,0)) vlr_issqn_retido'#13#10'FROM VFAT_ACUM V'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
     Left = 300
-    Top = 291
+    Top = 292
   end
   object dspConsCliente: TDataSetProvider
     DataSet = sdsConsCliente
@@ -760,6 +771,14 @@ object DMConsFat: TDMConsFat
       FixedChar = True
       Size = 1
     end
+    object cdsConsClienteVLR_ISSQN: TFloatField
+      FieldName = 'VLR_ISSQN'
+      DisplayFormat = '##0.00'
+    end
+    object cdsConsClienteVLR_ISSQN_RETIDO: TFloatField
+      FieldName = 'VLR_ISSQN_RETIDO'
+      DisplayFormat = '##0.00'
+    end
   end
   object dsConsCliente: TDataSource
     DataSet = cdsConsCliente
@@ -794,7 +813,9 @@ object DMConsFat: TDMConsFat
       'VLR_ICMS_FCP_DEST=VLR_ICMS_FCP_DEST'
       'VLR_ICMS_FCP=VLR_ICMS_FCP'
       'VLR_FCP_ST=VLR_FCP_ST'
-      'DEVOLUCAO=DEVOLUCAO')
+      'DEVOLUCAO=DEVOLUCAO'
+      'VLR_ISSQN=VLR_ISSQN'
+      'VLR_ISSQN_RETIDO=VLR_ISSQN_RETIDO')
     DataSource = dsConsCliente
     BCDToCurrency = False
     Left = 89
@@ -818,7 +839,9 @@ object DMConsFat: TDMConsFat
       'coalesce(v.base_icms_fcp_dest,0)) base_icms_fcp_dest,'#13#10'       su' +
       'm(coalesce(v.vlr_icms_fcp_dest,0)) vlr_icms_fcp_dest,'#13#10'       su' +
       'm(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp,'#13#10'       sum(coalesce' +
-      '(v.vlr_fcp_st,0)) vlr_fcp_st'#13#10'FROM VFAT_ACUM V'#13#10
+      '(v.vlr_fcp_st,0)) vlr_fcp_st,'#13#10'       sum(coalesce(v.vlr_issqn,0' +
+      ')) vlr_issqn,'#13#10'       sum(coalesce(v.vlr_issqn_retido,0)) vlr_is' +
+      'sqn_retido'#13#10'FROM VFAT_ACUM V'#13#10
     MaxBlobSize = -1
     Params = <>
     SQLConnection = dmDatabase.scoDados
@@ -933,6 +956,14 @@ object DMConsFat: TDMConsFat
       FixedChar = True
       Size = 1
     end
+    object cdsConsDataVLR_ISSQN: TFloatField
+      FieldName = 'VLR_ISSQN'
+      DisplayFormat = '##0.00'
+    end
+    object cdsConsDataVLR_ISSQN_RETIDO: TFloatField
+      FieldName = 'VLR_ISSQN_RETIDO'
+      DisplayFormat = '##0.00'
+    end
   end
   object dsConsData: TDataSource
     DataSet = cdsConsData
@@ -966,7 +997,9 @@ object DMConsFat: TDMConsFat
       'VLR_ICMS_FCP_DEST=VLR_ICMS_FCP_DEST'
       'VLR_ICMS_FCP=VLR_ICMS_FCP'
       'VLR_FCP_ST=VLR_FCP_ST'
-      'DEVOLUCAO=DEVOLUCAO')
+      'DEVOLUCAO=DEVOLUCAO'
+      'VLR_ISSQN=VLR_ISSQN'
+      'VLR_ISSQN_RETIDO=VLR_ISSQN_RETIDO')
     DataSource = dsConsData
     BCDToCurrency = False
     Left = 173

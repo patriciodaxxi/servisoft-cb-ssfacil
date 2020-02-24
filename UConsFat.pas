@@ -69,6 +69,10 @@ type
     Label20: TLabel;
     Label21: TLabel;
     Label22: TLabel;
+    Label43: TLabel;
+    lblVlr_ISSQN: TLabel;
+    Label45: TLabel;
+    lblVlr_ISSQN_Retido: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnConsultarClick(Sender: TObject);
@@ -132,7 +136,7 @@ var
   vComando: string;
   vComandoAux: string;
   i: Integer;
-  vTexto: array[1..8] of string;
+  vTexto: array[1..9] of string;
   vTexto2: string;
   vVlr_Total, vVlr_Total_Bru, vVlr_Total_Liq, vVlr_IPI, vVlr_ST, vVlr_ICMS, vVlr_PIS, vVlr_COFINS, vVlr_Desconto: Real;
   vVlr_Frete: Real;
@@ -142,6 +146,7 @@ var
   vAux: Real;
   vVlr_Custo: Real;
   vVlr_ICMS_FCP, vVlr_FCP_ST, vVlr_ICMS_FCP_Dest : Real;
+  vVlr_ISSQN, vVlr_ISSQN_Retido : Real;
 
 begin
   vVlr_Total := 0;
@@ -162,6 +167,8 @@ begin
   vVlr_ICMS_FCP := 0;
   vVlr_FCP_ST := 0;
   vVlr_ICMS_FCP_Dest := 0;
+  vVlr_ISSQN         := 0;
+  vVlr_ISSQN_Retido  := 0;
 
   if RzPageControl1.ActivePage = ts_Geral then
   begin
@@ -193,11 +200,13 @@ begin
       vTexto[7] := ' - coalesce(V.VLR_IR_VENDA,0)';
     if RzCheckList1.ItemChecked[9] then
       vTexto[8] := ' - coalesce(V.VLR_CSLL_VENDA,0)';
+    if RzCheckList1.ItemChecked[10] then
+      vTexto[9] := ' - coalesce(V.VLR_ISSQN,0)';
 
   //if RzCheckList1.ItemChecked[6] then
   //  vTexto[6] := ' - V.VLR_FRETE';
     vTexto2 := '';
-    for i := 1 to 8 do
+    for i := 1 to 9 do
       vTexto2 := vTexto2 + vTexto[i];
     if trim(vTexto2) <> '' then
       vComando := vComando + ', (' + vTexto2 + ') VLR_TOTAL_LIQ ';
@@ -236,6 +245,8 @@ begin
         vVlr_IR           := vVlr_IR + fDMConsFat.cdsFatAcumVLR_IR_VENDA.AsFloat;
         vVlr_Custo        := vVlr_Custo + fDMConsFat.cdsFatAcumVLR_CUSTO.AsFloat;
         vVlr_Frete        := vVlr_Frete + fDMConsFat.cdsFatAcumVLR_FRETE.AsFloat;
+        vVlr_ISSQN        := vVlr_ISSQN + fDMConsFat.cdsFatAcumVLR_ISSQN.AsFloat;
+        vVlr_ISSQN_Retido := vVlr_ISSQN_Retido + fDMConsFat.cdsFatAcumVLR_ISSQN_RETIDO.AsFloat;
 
         vVlr_ICMS_FCP := vVlr_ICMS_FCP + fDMConsFat.cdsFatAcumVLR_ICMS_FCP.AsFloat;
         vVlr_FCP_ST   := vVlr_FCP_ST + fDMConsFat.cdsFatAcumVLR_FCP_ST.AsFloat;
@@ -252,13 +263,15 @@ begin
     vComando := vComando + ' SUM(VLR_TOTAL) VLR_TOTAL, SUM(VLR_ICMSSUBST) VLR_ICMSSUBST, SUM(VLR_IPI) VLR_IPI,';
     vComando := vComando + ' SUM(VLR_FRETE) VLR_FRETE, SUM(VLR_ICMS_UF_REMET) VLR_ICMS_UF_REMET, SUM(VLR_ICMS_UF_DEST) VLR_ICMS_UF_DEST,';
     vComando := vComando + ' SUM(VLR_DESCONTO) VLR_DESCONTO, SUM(VLR_COFINS) VLR_COFINS, SUM(VLR_PIS) VLR_PIS,';
-    vComando := vComando + ' SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA, SUM(coalesce(VLR_CSLL_VENDA,0)) VLR_CSLL_VENDA,';
+    vComando := vComando + ' SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA, SUM(coalesce(VLR_CSLL_VENDA,0)) VLR_CSLL_VENDA, ';
+    vComando := vComando + ' SUM(VLR_ISSQN) VLR_ISSQN, ';
     if chkAcrescimo.ItemChecked[1] then
       vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE) + SUM(V.VLR_DESCONTO)) VLR_TOTAL_BRU'
     else
       vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE)) VLR_TOTAL_BRU';
+
     vComandoAux := ' FROM VFAT_ACUM V ';
-    for i := 1 to 8 do
+    for i := 1 to 9 do
       vTexto[i] := '';
     if not RzCheckList1.ItemChecked[1] then
       vTexto[1] := 'SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI)'
@@ -280,15 +293,18 @@ begin
       vTexto[7] := ' - SUM(coalesce(V.VLR_IR_VENDA,0))';
     if RzCheckList1.ItemChecked[9] then
       vTexto[8] := ' - SUM(coalesce(V.VLR_CSLL_VENDA,0))';
+    if RzCheckList1.ItemChecked[10] then
+      vTexto[9] := ' - SUM(coalesce(V.VLR_ISSQN,0))';
 
     vTexto2 := '';
-    for i := 1 to 8 do
+    for i := 1 to 9 do
       vTexto2 := vTexto2 + vTexto[i];
     if trim(vTexto2) <> '' then
       vComando := vComando + ', (' + vTexto2 + ') VLR_TOTAL_LIQ ';
     vComando := vComando + ', sum(coalesce(v.base_fcp_st,0)) BASE_FCP_ST, sum(coalesce(v.base_icms_fcp,0)) base_icms_fcp, '
               + 'sum(coalesce(v.base_icms_fcp_dest,0)) base_icms_fcp_dest, sum(coalesce(v.vlr_icms_fcp_dest,0)) vlr_icms_fcp_dest, '
-              + 'sum(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp, sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st ';
+              + 'sum(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp, sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st, '
+              + 'sum(coalesce(v.vlr_issqn_retido,0)) vlr_issqn_retido ';
     vComando := vComando + vComandoAux;
     fDMConsFat.cdsConsCliente.Close;
     fDMConsFat.sdsConsCliente.CommandText := vComando + ' WHERE 0 = 0 ';
@@ -328,6 +344,8 @@ begin
           vVlr_ICMS_FCP      := vVlr_ICMS_FCP + fDMConsFat.cdsConsClienteVLR_ICMS_FCP.AsFloat;
           vVlr_FCP_ST        := vVlr_FCP_ST + fDMConsFat.cdsConsClienteVLR_FCP_ST.AsFloat;
           vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsConsClienteVLR_ICMS_FCP_DEST.AsFloat;
+          vVlr_ISSQN         := vVlr_ISSQN + fDMConsFat.cdsConsClienteVLR_ISSQN.AsFloat;
+          vVlr_ISSQN_Retido  := vVlr_ISSQN_Retido + fDMConsFat.cdsConsClienteVLR_ISSQN_RETIDO.AsFloat;
         end;
       end;
       fDMConsFat.cdsConsCliente.Next;
@@ -341,13 +359,14 @@ begin
     vComando := vComando + ' SUM(VLR_TOTAL) VLR_TOTAL, SUM(VLR_ICMSSUBST) VLR_ICMSSUBST, SUM(VLR_IPI) VLR_IPI,';
     vComando := vComando + ' SUM(VLR_FRETE) VLR_FRETE, SUM(VLR_ICMS_UF_REMET) VLR_ICMS_UF_REMET, SUM(VLR_ICMS_UF_DEST) VLR_ICMS_UF_DEST,';
     vComando := vComando + ' SUM(VLR_DESCONTO) VLR_DESCONTO, SUM(VLR_COFINS) VLR_COFINS, SUM(VLR_PIS) VLR_PIS,';
-    vComando := vComando + ' SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA, SUM(VLR_CSLL_VENDA) VLR_CSLL_VENDA,';
+    vComando := vComando + ' SUM(VLR_CUSTO) VLR_CUSTO, SUM(VLR_IR_VENDA) VLR_IR_VENDA, SUM(VLR_CSLL_VENDA) VLR_CSLL_VENDA, ';
+    vComando := vComando + ' SUM(VLR_ISSQN) VLR_ISSQN, SUM(VLR_ISSQN_RETIDO) VLR_ISSQN_RETIDO, ';
     if chkAcrescimo.ItemChecked[1] then
       vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE) + SUM(V.VLR_DESCONTO)) VLR_TOTAL_BRU'
     else
       vcomando := vcomando + '(SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI) + SUM(V.VLR_FRETE)) VLR_TOTAL_BRU';
     vComandoAux := ' FROM VFAT_ACUM V ';
-    for i := 1 to 8 do
+    for i := 1 to 9 do
       vTexto[i] := '';
     if not RzCheckList1.ItemChecked[1] then
       vTexto[1] := 'SUM(V.VLR_TOTAL) + SUM(V.VLR_IPI)'
@@ -369,17 +388,20 @@ begin
       vTexto[7] := ' - SUM(V.VLR_IR_VENDA)';
     if RzCheckList1.ItemChecked[9] then
       vTexto[8] := ' - SUM(V.VLR_CSLL_VENDA)';
+    if RzCheckList1.ItemChecked[10] then
+      vTexto[9] := ' - SUM(V.VLR_ISSQN)';
 
   //if RzCheckList1.ItemChecked[6] then
   //  vTexto[6] := ' - V.VLR_FRETE';
     vTexto2 := '';
-    for i := 1 to 8 do
+    for i := 1 to 9 do
       vTexto2 := vTexto2 + vTexto[i];
     if trim(vTexto2) <> '' then
       vComando := vComando + ', (' + vTexto2 + ') VLR_TOTAL_LIQ ';
     vComando := vComando + ', sum(coalesce(v.base_fcp_st,0)) BASE_FCP_ST, sum(coalesce(v.base_icms_fcp,0)) base_icms_fcp, '
               + 'sum(coalesce(v.base_icms_fcp_dest,0)) base_icms_fcp_dest, sum(coalesce(v.vlr_icms_fcp_dest,0)) vlr_icms_fcp_dest, '
-              + 'sum(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp, sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st ';
+              + 'sum(coalesce(v.vlr_icms_fcp,0)) vlr_icms_fcp, sum(coalesce(v.vlr_fcp_st,0)) vlr_fcp_st, '
+              + 'sum(coalesce(v.vlr_issqn,0)) vlr_issqn, sum(coalesce(v.vlr_issqn_retido,0)) vlr_issqn_retido ';
     vComando := vComando + vComandoAux;
     fDMConsFat.cdsConsData.Close;
     fDMConsFat.sdsConsData.CommandText := vComando + ' WHERE 0 = 0 ';
@@ -420,6 +442,9 @@ begin
           vVlr_ICMS_FCP := vVlr_ICMS_FCP + fDMConsFat.cdsConsDataVLR_ICMS_FCP.AsFloat;
           vVlr_FCP_ST   := vVlr_FCP_ST + fDMConsFat.cdsConsDataVLR_FCP_ST.AsFloat;
           vVlr_ICMS_FCP_Dest := vVlr_ICMS_FCP_Dest + fDMConsFat.cdsConsDataVLR_ICMS_FCP_DEST.AsFloat;
+
+          vVlr_ISSQN        := vVlr_ISSQN + fDMConsFat.cdsConsDataVLR_ISSQN.AsFloat;
+          vVlr_ISSQN_Retido := vVlr_ISSQN_Retido + fDMConsFat.cdsConsDataVLR_ISSQN_RETIDO.AsFloat;
         end;
 
       end;
@@ -452,6 +477,9 @@ begin
   Label20.Caption := FormatFloat('###,###,##0.00', vVlr_ICMS_FCP);
   Label21.Caption := FormatFloat('###,###,##0.00', vVlr_FCP_ST);
   Label22.Caption := FormatFloat('###,###,##0.00', vVlr_ICMS_FCP_Dest);
+
+  lblVlr_ISSQN.Caption        := FormatFloat('###,###,##0.00', vVlr_ISSQN);
+  lblVlr_ISSQN_Retido.Caption := FormatFloat('###,###,##0.00', vVlr_ISSQN_Retido);
 
   vAux := StrToFloat(FormatFloat('0.00', vVlr_Total_Liq - vVlr_Devolucao));
   Label8.Caption := FormatFloat('###,###,##0.00', vAux);
